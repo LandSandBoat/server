@@ -4,7 +4,7 @@
 -- !pos -557.9 0.001 637.846 102
 -- Teleports Players to Abyssea - La Theine
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/abyssea")

@@ -6,9 +6,9 @@
 --
 --
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 -----------------------------------
 local mobskill_object = {}
 
@@ -23,11 +23,11 @@ end
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     local typeEffect = xi.effect.DISEASE
-    MobStatusEffectMove(mob, target, typeEffect, 1, 0, 300)
+    xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 1, 0, 300)
 
-    local dmgmod = MobBreathMove(mob, target, 0.333, 0.625, xi.magic.ele.FIRE, 500)
+    local dmgmod = xi.mobskills.mobBreathMove(mob, target, 0.333, 0.625, xi.magic.ele.FIRE, 500)
 
-    local dmg = MobFinalAdjustments(dmgmod, mob, skill, target, xi.attackType.BREATH, xi.damageType.FIRE, MOBPARAM_IGNORE_SHADOWS)
+    local dmg = xi.mobskills.mobFinalAdjustments(dmgmod, mob, skill, target, xi.attackType.BREATH, xi.damageType.FIRE, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
 
     target:takeDamage(dmg, mob, xi.attackType.BREATH, xi.damageType.FIRE)
     return dmg

@@ -2,8 +2,8 @@
 -- Lunar Cry
 -- Fenrir gives accuracy and evasion down status effects to target.
 -----------------------------------
-require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
+require("scripts/globals/mobskills")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------

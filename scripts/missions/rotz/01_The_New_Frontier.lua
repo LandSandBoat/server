@@ -7,7 +7,7 @@
 -- !setrank <name> 6
 -- Norg : !zone 252
 -----------------------------------
-require("scripts/globals/keyitems")
+require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
@@ -25,7 +25,8 @@ mission.sections =
 {
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId and player:getRank(player:getNation()) >= 6
+            return currentMission == mission.missionId and
+                player:getRank(player:getNation()) >= 6
         end,
 
         [xi.zone.NORG] =

@@ -90,7 +90,7 @@ zones[xi.zone.BEAUCEDINE_GLACIER] =
     npc =
     {
         CASKET_BASE     = 17232180,
-        MIRROR_POND_J8  = 17232203,
+        MIRROR_POND_J8  = 17232205,
         OVERSEER_BASE   = 17232214, -- Parledaire_RK in npc_list
     },
 }

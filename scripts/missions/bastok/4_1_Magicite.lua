@@ -18,7 +18,7 @@ require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/titles')
-require('scripts/globals/settings')
+require('scripts/settings/main')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------
@@ -48,7 +48,7 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if getMissionRankPoints(player, xi.mission.id.bastok.MAGICITE) then
-                        return mission:progressEvent(3)
+                        return mission:progressEvent(0)
                     else
                         return mission:progressEvent(4)
                     end
@@ -57,7 +57,7 @@ mission.sections =
 
             onEventFinish =
             {
-                [3] = function(player, csid, option, npc)
+                [0] = function(player, csid, option, npc)
                     mission:begin(player)
                 end,
             },
@@ -89,7 +89,7 @@ mission.sections =
                         return mission:progressEvent(128)
                     elseif mission:getVar(player, 'Stage') == 3 then
                         if player:hasKeyItem(xi.ki.AIRSHIP_PASS) then
-                            return mission:progressEvent(60, 1)
+                            return mission:progressEvent(60, 1, 1)
                         else
                             return mission:progressEvent(60)
                         end
@@ -124,7 +124,7 @@ mission.sections =
                     player:delKeyItem(xi.ki.MAGICITE_ORASTONE)
 
                     if player:hasKeyItem(xi.ki.AIRSHIP_PASS) then
-                        npcUtil.giveCurrency(player, "gil", 20000)
+                        npcUtil.giveCurrency(player, 'gil', 20000)
                     else
                         npcUtil.giveKeyItem(player, xi.ki.AIRSHIP_PASS)
                     end
@@ -135,7 +135,7 @@ mission.sections =
 
                 [128] = function(player, csid, option, npc)
                     player:setMissionStatus(mission.areaId, 2)
-                    npcUtil.giveKeyItem(player, xi.ki.LETTERS_TO_ALDO)
+                    npcUtil.giveKeyItem(player, xi.ki.LETTER_TO_ALDO)
                 end,
 
                 [129] = function(player, csid, option, npc)
@@ -153,8 +153,14 @@ mission.sections =
                     local missionStatus = player:getMissionStatus(mission.areaId)
 
                     if missionStatus == 2 then
-                        return mission:progressEvent(152)
+                        if player:hasKeyItem(xi.ki.SILVER_BELL) then
+                            return mission:progressEvent(152, 1)
+                        else
+                            return mission:progressEvent(152)
+                        end
                     elseif missionStatus == 3 then
+                        return mission:progressEvent(161)
+                    else
                         return mission:progressEvent(183)
                     end
                 end,
@@ -163,7 +169,10 @@ mission.sections =
             ['Muckvix'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.SILVER_BELL) and not player:hasKeyItem(xi.ki.YAGUDO_TORCH) then
+                    if
+                        player:hasKeyItem(xi.ki.SILVER_BELL) and
+                        not player:hasKeyItem(xi.ki.YAGUDO_TORCH)
+                    then
                         if mission:getVar(player, 'Option') == 1 then
                             return mission:progressEvent(184)
                         else
@@ -182,7 +191,7 @@ mission.sections =
             onEventFinish =
             {
                 [152] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.LETTERS_TO_ALDO)
+                    player:delKeyItem(xi.ki.LETTER_TO_ALDO)
                     npcUtil.giveKeyItem(player, xi.ki.SILVER_BELL)
                     player:setMissionStatus(mission.areaId, 3)
                 end,

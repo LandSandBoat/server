@@ -3,7 +3,7 @@
 -- Item: bottle_of_dawn_mulsum
 -- Item Effect: Instantly restores 20%-35% of pet HP
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/msg")
 -----------------------------------
 local item_object = {}

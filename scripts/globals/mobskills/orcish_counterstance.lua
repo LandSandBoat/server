@@ -3,7 +3,7 @@
 -- Used only by Orcs in Wings of the Goddess Areas.
 -- Certain NMs may have a higher power version of the xi.effect.
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/globals/status")
 require("scripts/globals/zone")
 -----------------------------------
@@ -26,7 +26,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
         -- power = 50? He's not implemented yet anyway :P
     -- end
 
-    skill:setMsg(MobBuffMove(mob, typeEffect, 10, 0, 60))
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, typeEffect, 10, 0, 60))
 
     return typeEffect
 end

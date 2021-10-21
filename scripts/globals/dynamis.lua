@@ -103,6 +103,7 @@ local entryInfo =
         enterPos = {569.312, -0.098, -270.158, 90, 135},
         reqs = function(player) return player:hasKeyItem(xi.ki.HYDRA_CORPS_INSIGNIA) end,
     },
+    -- TODO: Make absolutely sure that winning Xarcabard does NOT allow early access to dreamlands BEFORE CoP 3-5
     [xi.zone.VALKURM_DUNES] =
     {
         csBit = 7,
@@ -113,8 +114,10 @@ local entryInfo =
         beatKI = xi.ki.DYNAMIS_VALKURM_SLIVER,
         enterPos = {100, -8, 131, 47, 39},
         reqs = function(player)
-            return player:hasKeyItem(xi.ki.HYDRA_CORPS_BATTLE_STANDARD) and
-                  (player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) or xi.settings.FREE_COP_DYNAMIS == 1)
+            return (
+                player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) or
+                xi.settings.FREE_COP_DYNAMIS == 1
+            )
         end,
     },
     [xi.zone.BUBURIMU_PENINSULA] =
@@ -127,8 +130,10 @@ local entryInfo =
         beatKI = xi.ki.DYNAMIS_BUBURIMU_SLIVER,
         enterPos = {155, -1, -169, 170, 40},
         reqs = function(player)
-            return player:hasKeyItem(xi.ki.HYDRA_CORPS_BATTLE_STANDARD) and
-                  (player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) or xi.settings.FREE_COP_DYNAMIS == 1)
+            return (
+                player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) or
+                xi.settings.FREE_COP_DYNAMIS == 1
+            )
         end,
     },
     [xi.zone.QUFIM_ISLAND] =
@@ -141,8 +146,10 @@ local entryInfo =
         beatKI = xi.ki.DYNAMIS_QUFIM_SLIVER,
         enterPos = {-19, -17, 104, 253, 41},
         reqs = function(player)
-            return player:hasKeyItem(xi.ki.HYDRA_CORPS_BATTLE_STANDARD) and
-                  (player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) or xi.settings.FREE_COP_DYNAMIS == 1)
+            return (
+                player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) or
+                xi.settings.FREE_COP_DYNAMIS == 1
+            )
         end,
     },
     [xi.zone.TAVNAZIAN_SAFEHOLD] =
@@ -304,27 +311,29 @@ dynamis.entryNpcOnTrigger = function(player, npc)
     local zoneId = player:getZoneID()
     local info = entryInfo[zoneId]
     local ID = zones[zoneId]
-    local mask = player:getCharVar("Dynamis_Status")
+    local dynaMask = player:getCharVar("Dynamis_Status")
+    local unlockingDyna = utils.mask.getBit(dynaMask, 0)
     local tavnaziaFirst = false
 
     -- Tavnazia is unique;  plays the first time cs directly on trigger without message or transporting
-    if info.csBit == 10 and info.reqs(player) and not utils.mask.getBit(mask, info.csBit) then
+    if info.csBit == 10 and info.reqs(player) and not utils.mask.getBit(dynaMask, info.csBit) then
         player:startEvent(info.csFirst)
-        player:setCharVar("Dynamis_Status", utils.mask.setBit(mask, info.csBit, true))
+        player:setCharVar("Dynamis_Status", utils.mask.setBit(dynaMask, info.csBit, true))
+        -- set to skip menu after getting this CS
         tavnaziaFirst = not tavnaziaFirst
     -- player has access but is on a job below required level
     elseif player:hasKeyItem(xi.ki.PRISMATIC_HOURGLASS) and player:getMainLvl() < xi.settings.DYNA_LEVEL_MIN then
         player:messageSpecial(ID.text.PLAYERS_HAVE_NOT_REACHED_LEVEL)
     -- default message always prints except in cases above and not for shrouded sand or winning cs
-    elseif mask ~= 1 and player:getCharVar(info.beatVar) ~= 1 then
+    elseif not unlockingDyna and player:getCharVar(info.beatVar) ~= 1 then
         player:messageSpecial(ID.text.DYNA_NPC_DEFAULT_MESSAGE)
     end
 
-    -- all cutscenes and menus are blocked behind base requirements; 'or mask == 1' needs to be set to access shroud cs after zoning into xarcabard
-    if not tavnaziaFirst and player:getMainLvl() >= xi.settings.DYNA_LEVEL_MIN and (player:hasKeyItem(xi.ki.PRISMATIC_HOURGLASS) or mask == 1) then
+    -- all cutscenes and menus are blocked behind base requirements; 'unlockingDyna' needs to be checked to access shroud cs after zoning into xarcabard
+    if not tavnaziaFirst and player:getMainLvl() >= xi.settings.DYNA_LEVEL_MIN and (player:hasKeyItem(xi.ki.PRISMATIC_HOURGLASS) or unlockingDyna) then
 
         -- shrouded sand cutscene
-        if mask == 1 and info.csVial and not player:hasKeyItem(xi.ki.VIAL_OF_SHROUDED_SAND) then
+        if unlockingDyna and info.csVial and not player:hasKeyItem(xi.ki.VIAL_OF_SHROUDED_SAND) then
             player:startEvent(info.csVial)
 
         -- victory cutscene
@@ -350,12 +359,12 @@ end
 
 dynamis.entryNpcOnEventFinish = function(player, csid, option)
     local info = entryInfo[player:getZoneID()]
-    local mask = player:getCharVar("Dynamis_Status")
+    local dynaMask = player:getCharVar("Dynamis_Status")
 
     -- shrouded sand cutscene
     if info.csVial and csid == info.csVial then
         npcUtil.giveKeyItem(player, xi.ki.VIAL_OF_SHROUDED_SAND)
-        player:setCharVar("Dynamis_Status", utils.mask.setBit(mask, 0, false))
+        player:setCharVar("Dynamis_Status", utils.mask.setBit(dynaMask, 0, false))
 
     -- victory cutscene
     elseif csid == info.csBeat then
@@ -365,12 +374,12 @@ dynamis.entryNpcOnEventFinish = function(player, csid, option)
     elseif csid == info.csMenu and (option == 0 or option == 1) or csid == info.csFirst then
         player:setCharVar("Dynamis_subjob", option)
         player:setCharVar("Dynamis_Entry", 1)
-        player:setCharVar("Dynamis_Status", utils.mask.setBit(mask, info.csBit, true))
+        player:setCharVar("Dynamis_Status", utils.mask.setBit(dynaMask, info.csBit, true))
 
         handleEntryTime(player)
 
         -- first visit cutscene plays after choosing to enter, except Tavnazia as seen above
-        if not utils.mask.getBit(mask, info.csBit) then
+        if not utils.mask.getBit(dynaMask, info.csBit) then
             player:startEvent(info.csFirst) -- this will loop back to this same block to trigger setPos
         end
 
@@ -701,7 +710,7 @@ end
 
 function getDynamisMapList(player)
     local bitmask = 0
-    if (player:hasKeyItem(xi.ki.MAP_OF_DYNAMIS_SANDORIA) == true) then
+    if (player:hasKeyItem(xi.ki.MAP_OF_DYNAMIS_SAN_DORIA) == true) then
         bitmask = bitmask + 2
     end
     if (player:hasKeyItem(xi.ki.MAP_OF_DYNAMIS_BASTOK) == true) then

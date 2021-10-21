@@ -13,9 +13,9 @@
 local mobskill_object = {}
 
 require("scripts/globals/status")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/weaponskills")
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 -----------------------------------
 mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0

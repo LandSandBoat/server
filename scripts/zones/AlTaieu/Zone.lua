@@ -3,7 +3,7 @@
 -- Zone: AlTaieu (33)
 --
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 local ID = require("scripts/zones/AlTaieu/IDs")
 require("scripts/globals/titles")
 require("scripts/globals/keyitems")

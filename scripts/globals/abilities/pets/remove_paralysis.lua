@@ -1,7 +1,7 @@
 -----------------------------------
 -- Remove Paralysis
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 
 -----------------------------------

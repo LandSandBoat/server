@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
-require("scripts/globals/common")
 require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/zone")
@@ -137,26 +136,10 @@ function getRoeRecords(triggers)
 
         [1049] = { -- Always Stand on 117 (gives Cipher: Koru-Moru)
             check = function(self, player, params)
-                local count = 0
-                for _, slot in pairs( {
-                    xi.slot.MAIN,
-                    xi.slot.SUB,
-                    xi.slot.RANGED,
-                    xi.slot.HEAD,
-                    xi.slot.BODY,
-                    xi.slot.HANDS,
-                    xi.slot.LEGS,
-                    xi.slot.FEET,
-                } ) do
-                    local item = player:getEquippedItem(slot)
-                    if item and item:getILvl() and item:getILvl() == self.reqs.hasEquip.ilevel then
-                        count = count + 1
-                    end
-                end
-                return count >= self.reqs.hasEquip.count and true or false
+                return player:getAverageItemLevel() >= self.reqs.hasItemLevel and true or false
             end,
             trigger = triggers.talkToRoeNpc,
-            reqs = { hasEquip = { ilevel = 117, count = 3 } },
+            reqs = { hasItemLevel = 117 },
             reward =  {
                 sparks = 200,
                 xp = 300,
@@ -321,7 +304,7 @@ function getRoeRecords(triggers)
 
         [ 509] = { -- Obtain a Chocobo License
             trigger = triggers.questComplete,
-            reqs = { questComplete = {xi.quest.log_id.JEUNO, xi.quest.id.jeuno.CHOCOBO_S_WOUNDS} },
+            reqs = { questComplete = {xi.quest.log_id.JEUNO, xi.quest.id.jeuno.CHOCOBOS_WOUNDS} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 600 },
         },
@@ -1424,7 +1407,7 @@ function getRoeRecords(triggers)
 
         [1346] = { -- Bastok Rank 6-2
             trigger = triggers.missionComplete,
-            reqs = { missionComplete = {xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_PIRATE_S_COVE} },
+            reqs = { missionComplete = {xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_PIRATES_COVE} },
             flags = set{"retro"},
             reward = { item = { {4101,10} }, sparks = 300, xp = 500 },
         },

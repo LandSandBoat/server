@@ -2,8 +2,8 @@
 -- Ultrasonics
 -- Reduces evasion of targets in area of effect.
 -----------------------------------
-require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
+require("scripts/globals/mobskills")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
 local mobskill_object = {}
@@ -15,7 +15,7 @@ end
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.EVASION_DOWN
 
-    skill:setMsg(MobStatusEffectMove(mob, target, typeEffect, 25, 0, 180))
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 25, 0, 180))
 
 
         return typeEffect

@@ -706,6 +706,7 @@ void login_helpscreen(int32 flag)
 void log_init(int argc, char** argv)
 {
     std::string logFile;
+    bool appendDate {};
 
 #ifdef WIN32
     logFile = "log\\login-server.log";
@@ -718,8 +719,12 @@ void log_init(int argc, char** argv)
         {
             logFile = argv[i + 1];
         }
+        else if (strcmp(argv[i], "--append-date") == 0)
+        {
+            appendDate = true;
+        }
     }
-    logging::InitializeLog("login", logFile);
+    logging::InitializeLog("login", logFile, appendDate);
 }
 
 ///////////////////////////////////////////////////////

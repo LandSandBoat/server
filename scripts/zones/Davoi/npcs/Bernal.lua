@@ -3,7 +3,7 @@
 --  NPC: Bernal
 -- !pos 177 -3 -127 149
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Davoi/IDs")
 -----------------------------------

@@ -7,8 +7,8 @@
 --  Range: Self
 --  Notes: When used by the Nightmare Dhalmel in Dynamis - Buburimu, it grants an Evasion Boost instead.
 -----------------------------------
-require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
+require("scripts/globals/mobskills")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
 local mobskill_object = {}
@@ -23,7 +23,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     local typeEffect = xi.effect.AGI_BOOST
 
-    skill:setMsg(MobBuffMove(target, typeEffect, power, 3, duration))
+    skill:setMsg(xi.mobskills.mobBuffMove(target, typeEffect, power, 3, duration))
 
     return typeEffect
 end

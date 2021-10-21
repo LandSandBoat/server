@@ -5,9 +5,9 @@
 --  Type: Magical (dark)
 --
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 -----------------------------------
 local mobskill_object = {}
 
@@ -17,9 +17,9 @@ end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
-    local dmgmod = MobBreathMove(mob, target, 0.5, 1, xi.magic.ele.DARK, 700)
+    local dmgmod = xi.mobskills.mobBreathMove(mob, target, 0.5, 1, xi.magic.ele.DARK, 700)
 
-    local dmg = MobFinalAdjustments(dmgmod, mob, skill, target, xi.attackType.BREATH, xi.damageType.DARK, MOBPARAM_IGNORE_SHADOWS)
+    local dmg = xi.mobskills.mobFinalAdjustments(dmgmod, mob, skill, target, xi.attackType.BREATH, xi.damageType.DARK, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
 
     target:takeDamage(dmg, mob, xi.attackType.BREATH, xi.damageType.DARK)
     return dmg

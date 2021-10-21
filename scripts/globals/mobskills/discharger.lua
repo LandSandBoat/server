@@ -7,8 +7,8 @@
 -- Range: Self
 -- Notes: Used only by Omega
 -----------------------------------
-require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
+require("scripts/globals/mobskills")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
 local mobskill_object = {}
@@ -26,8 +26,8 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffectOne = xi.effect.MAGIC_SHIELD
     local typeEffectTwo = xi.effect.SHOCK_SPIKES
 
-    skill:setMsg(MobBuffMove(mob, typeEffectOne, 1, 0, 60))
-    MobBuffMove(mob, typeEffectTwo, 25, 0, 60)
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, typeEffectOne, 1, 0, 60))
+    xi.mobskills.mobBuffMove(mob, typeEffectTwo, 25, 0, 60)
     return typeEffectOne
 end
 

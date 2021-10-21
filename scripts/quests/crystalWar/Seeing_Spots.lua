@@ -20,21 +20,25 @@ quest.reward =
     title = xi.title.LADY_KILLER,
 }
 
-quest.sections = {
+quest.sections =
+{
     -- After speaking with Wyatt, collect four Ladybug Wings.
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE
         end,
 
-        [xi.zone.SOUTHERN_SAN_DORIA_S] = {
-            ['Wyatt'] = {
+        [xi.zone.SOUTHERN_SAN_DORIA_S] =
+        {
+            ['Wyatt'] =
+            {
                 onTrigger = function(player, npc)
                     return quest:progressEvent(2)
                 end,
             },
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [2] = function(player, csid, option, npc)
                     quest:begin(player)
                 end,
@@ -48,28 +52,28 @@ quest.sections = {
             return status == QUEST_ACCEPTED or status == QUEST_COMPLETED
         end,
 
-        [xi.zone.SOUTHERN_SAN_DORIA_S] = {
-            ['Wyatt'] = {
+        [xi.zone.SOUTHERN_SAN_DORIA_S] =
+        {
+            ['Wyatt'] =
+            {
                 -- Reminder
                 onTrigger = function(player, npc)
                     return quest:progressEvent(3)
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if
-                        npcUtil.tradeHasExactly(trade, {
-                            { xi.items.LADYBUG_WING, 4 }
-                        })
-                    then
+                    if npcUtil.tradeHasExactly(trade, {{ xi.items.LADYBUG_WING, 4 }}) then
                         return quest:progressEvent(4)
                     end
                 end,
             },
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [4] = function(player, csid, option, npc)
-                    player:confirmTrade()
-                    quest:complete(player)
+                    if quest:complete(player) then
+                        player:confirmTrade()
+                    end
                 end,
             },
         },

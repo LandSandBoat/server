@@ -17,4 +17,4 @@ For topics with less direction than issues, a discussion is probably a better fi
 Please search the [discussions tab](https://github.com/LandSandBoat/server/discussions) and see if your topic has already been discussed, or create a new one.
 
 ## LICENSE
-LandSandBoat is licensed under [GNU GPL v3](https://github.com/LandSandBoat/server/blob/topaz/LICENSE)
+LandSandBoat is licensed under [GNU GPL v3](https://github.com/LandSandBoat/server/blob/base/LICENSE)

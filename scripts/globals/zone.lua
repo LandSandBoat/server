@@ -4,8 +4,7 @@
 -- related to area specific things
 --
 -----------------------------------
-require('scripts/globals/settings')
-require('scripts/globals/common')
+require('scripts/settings/main')
 -----------------------------------
 
 xi = xi or {}

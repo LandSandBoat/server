@@ -1,160 +1,218 @@
 -----------------------------------
 -- Area: Aht Urhgan Whitegate
 --  NPC: Ghatsad
--- Standard Info NPC
--- Involved in quest: No String Attached
+-- Involved in quest: No Strings Attached
 -- !pos 34.325 -7.804 57.511 50
 -----------------------------------
-require("scripts/globals/common")
 require("scripts/globals/items")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
 local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
 -----------------------------------
 local entity = {}
 
-local function satisfy_attachment(player, new_attachmentStatus, new_attachmentReady)
-    player:tradeComplete()
-    player:startEvent(625)
-    player:setCharVar("PUP_AttachmentStatus", new_attachmentStatus)
-    player:setCharVar("PUP_AttachmentReady", new_attachmentReady)
-end
+-- Since every outcome includes a head, track number unlocked based on this.
+-- This is used to calculate the cost of additional items, and provide certain
+-- event parameters (numUnlockedHeads).
+local automatonHeads =
+{
+    xi.items.VALOREDGE_HEAD,
+    xi.items.SHARPSHOT_HEAD,
+    xi.items.STORMWAKER_HEAD,
+    xi.items.SOULSOOTHER_HEAD,
+    xi.items.SPIRITREAVER_HEAD,
+}
 
-local function play_event624(player, attachments, new_attachmentStatus)
-    player:tradeComplete()
-    if attachments == 0 then
-        player:startEvent(624, 0, 0, 0, 0, 0, xi.items.IMPERIAL_SILVER_PIECE, 3)
-    elseif attachments == 1 then
-        player:startEvent(624, 0, 0, 0, 0, 0, xi.items.IMPERIAL_MYTHRIL_PIECE, 3)
-    elseif attachments == 2 then
-        player:startEvent(624, 0, 0, 0, 0, 0, xi.items.IMPERIAL_GOLD_PIECE, 1)
+local unlockCost =
+{
+    [0] = { xi.items.IMPERIAL_SILVER_PIECE,  3 },
+    [1] = { xi.items.IMPERIAL_MYTHRIL_PIECE, 3 },
+    [2] = { xi.items.IMPERIAL_GOLD_PIECE,    1 },
+    [3] = { xi.items.IMPERIAL_MYTHRIL_PIECE, 2 },
+    [4] = { xi.items.IMPERIAL_MYTHRIL_PIECE, 4 },
+}
+
+-- This table is keyed by the initial attachmentStatus for each Head/Frame
+-- combination that can be purchased (Valoredge, Sharpshot, Stormwaker)
+local headAndFrameItems =
+{
+    [2] =
+    {
+        xi.items.BRASS_SHEET,
+        xi.items.WAMOURA_COCOON,
+        xi.items.CHUNK_OF_IMPERIAL_CERMET,
+        xi.items.PATAS
+    },
+
+    [3] =
+    {
+        xi.items.ROSEWOOD_LUMBER,
+        xi.items.SQUARE_OF_KARAKUL_CLOTH,
+        xi.items.SQUARE_OF_KARAKUL_LEATHER,
+        xi.items.HEAVY_CROSSBOW
+    },
+
+    [4] =
+    {
+        xi.items.GOLD_THREAD,
+        xi.items.SQUARE_OF_VELVET_CLOTH,
+        xi.items.SQUARE_OF_WAMOURA_CLOTH,
+        xi.items.BRASS_RING
+    },
+}
+
+-- Depending on item traded, a random range is provided for number of
+-- Vana'diel days to wait until completed.
+local turbanItems =
+{
+    [xi.items.WHITE_PUPPET_TURBAN] =
+    {
+        [xi.items.SCROLL_OF_CURE_V ] = { 2, 4 },
+        [xi.items.SCROLL_OF_REGEN  ] = { 3, 4 },
+        [xi.items.SCROLL_OF_CURE_II] = { 5, 5 },
+    },
+
+    [xi.items.BLACK_PUPPET_TURBAN] =
+    {
+        [xi.items.SCROLL_OF_STONE_IV  ] = { 2, 4 },
+        [xi.items.SCROLL_OF_ABSORB_INT] = { 3, 4 },
+        [xi.items.SCROLL_OF_FIRE      ] = { 5, 5 },
+    },
+}
+
+local function getWaitRange(turbanType, trade)
+    for k, v in pairs(turbanItems[turbanType]) do
+        if trade:getItemQty(k) == 1 then
+            return v
+        end
     end
-    player:setCharVar("PUP_AttachmentStatus", new_attachmentStatus)
+
+    return nil
 end
 
-local function play_event902(player, new_attachmentStatus, new_attachmentWait)
+local function getNumUnlockedHeads(player)
+    local headCount = 0
+
+    for _, v in ipairs(automatonHeads) do
+        if player:hasAttachment(v) then
+            headCount = headCount + 1
+        end
+    end
+
+    return headCount
+end
+
+local function getHeadMask(player)
+    local headMask = 0
+
+    for k, v in ipairs(automatonHeads) do
+        if player:hasAttachment(v) then
+            headMask = headMask + bit.lshift(1, k)
+        end
+    end
+
+    return headMask
+end
+
+local function hasRequiredMats(trade, headFrameKey)
+    for _, v in ipairs(headAndFrameItems[headFrameKey]) do
+        if not trade:getItemQty(v) == 1 then
+            return false
+        end
+    end
+
+    return true
+end
+
+local function satisfy_attachment(player, newAttachmentStatus)
     player:tradeComplete()
-    player:setCharVar("PUP_AttachmentStatus", new_attachmentStatus)
-    player:setCharVar("PUP_AttachmentReady", getVanaMidnight())
-    player:setCharVar("PUP_AttachmentWait", new_attachmentWait)
-    player:startEvent(902)
+    player:setCharVar("PUP_AttachmentStatus", newAttachmentStatus)
+    player:setCharVar("PUP_AttachmentReady", VanadielUniqueDay() + 1)
+    player:startEvent(625)
 end
 
-local function hasValidPayment(trade, attachments)
-    return attachments == 0 and trade:getItemQty(xi.items.IMPERIAL_SILVER_PIECE) == 3
-        or attachments == 1 and trade:getItemQty(xi.items.IMPERIAL_MYTHRIL_PIECE) == 3
-        or attachments == 2 and trade:getItemQty(xi.items.IMPERIAL_GOLD_PIECE) == 1
-        or attachments == 3 and trade:getItemQty(xi.items.IMPERIAL_MYTHRIL_PIECE) == 2
-        or attachments == 4 and trade:getItemQty(xi.items.IMPERIAL_MYTHRIL_PIECE) == 4
+local function play_event902(player, newAttachmentStatus, waitDays)
+    -- Add safety if an invalid item was traded
+    if waitDays == nil then
+        return
+    end
+
+    player:tradeComplete()
+    player:setCharVar("PUP_AttachmentStatus", newAttachmentStatus)
+    player:setCharVar("PUP_AttachmentReady", VanadielUniqueDay() + waitDays)
+    player:setCharVar("PUP_nextCoffeeTrade", VanadielUniqueDay() + 1)
+    player:startEvent(902)
 end
 
 entity.onTrade = function(player, npc, trade)
     local attachmentStatus = player:getCharVar("PUP_AttachmentStatus")
-    local attachments = player:getCharVar("PUP_Attachments")
-    local unlockedAttachments = player:getCharVar("PUP_AttachmentUnlock")
-    local attachmentTime = player:getCharVar("PUP_AttachmentReady")
-    local attachmentReady = (attachmentTime ~= 0 and attachmentTime < os.time())
-    local attachmentWait = player:getCharVar("PUP_AttachmentWait")
-    local payment_received = hasValidPayment(trade, attachments)
+    local numUnlockedHeads = getNumUnlockedHeads(player)
+    local attachmentReadyDay = player:getCharVar("PUP_AttachmentReady")
+    local attachmentReady = attachmentReadyDay ~= 0 and attachmentReadyDay <= VanadielUniqueDay()
+    local tradeHasPayment = trade:getItemQty(unlockCost[numUnlockedHeads][1]) == unlockCost[numUnlockedHeads][2]
 
-    local valoredge_items_traded = trade:getItemQty(xi.items.BRASS_SHEET) == 1
-        and trade:getItemQty(xi.items.WAMOURA_COCOON) == 1
-        and trade:getItemQty(xi.items.CHUNK_OF_IMPERIAL_CERMET) == 1
-        and trade:getItemQty(xi.items.PATAS) == 1
+    -- Initial Trade: Has Materials + Payment, or just Materials
+    if attachmentStatus >= 2 and attachmentStatus <= 4 then
+        if hasRequiredMats(trade, attachmentStatus) then
+            local slotCount = trade:getSlotCount()
 
-    local sharpshot_items_traded = trade:getItemQty(xi.items.ROSEWOOD_LUMBER) == 1
-        and trade:getItemQty(xi.items.SQUARE_OF_KARAKUL_CLOTH) == 1
-        and trade:getItemQty(xi.items.SQUARE_OF_KARAKUL_LEATHER) == 1
-        and trade:getItemQty(xi.items.HEAVY_CROSSBOW) == 1
+            if slotCount == 4 then
+                player:tradeComplete()
+                player:setCharVar("PUP_AttachmentStatus", attachmentStatus + 3)
+                player:startEvent(624, 0, 0, 0, 0, 0, unlockCost[numUnlockedHeads][1], unlockCost[numUnlockedHeads][2])
+            elseif slotCount == 5 and tradeHasPayment then
+                satisfy_attachment(player, attachmentStatus + 6)
+            end
+        end
 
-    local stormwaker_items_traded = trade:getItemQty(xi.items.GOLD_THREAD) == 1
-        and trade:getItemQty(xi.items.VELVET_CLOTH) == 1
-        and trade:getItemQty(xi.items.SQUARE_OF_WAMOURA_CLOTH) == 1
-        and trade:getItemQty(xi.items.BRASS_RING) == 1
+    -- Traded Materials previously, and is now trading Payment
+    elseif
+        attachmentStatus >= 5 and
+        attachmentStatus <= 7 and
+        tradeHasPayment and
+        trade:getSlotCount() == 1
+    then
+        satisfy_attachment(player, attachmentStatus + 3)
 
-    if attachmentStatus == 2 then
-        if trade:getSlotCount() == 4 then
-            --Valoredge X-900
-            if valoredge_items_traded then
-                play_event624(player, attachments, 5)
-            end
-        elseif trade:getSlotCount() == 5 then
-            if valoredge_items_traded and payment_received then
-                satisfy_attachment(player, 8, getVanaMidnight())
-            end
-        end
-    elseif attachmentStatus == 3 then
-        if trade:getSlotCount() == 4 then
-            -- Sharpshot Z-500
-            if sharpshot_items_traded then
-                play_event624(player, attachments, 6)
-            end
-        elseif trade:getSlotCount() == 5 then
-            if sharpshot_items_traded and payment_received then
-                satisfy_attachment(player, 9, getVanaMidnight())
-            end
-        end
-    elseif attachmentStatus == 4 then
-        if trade:getSlotCount() == 4 then
-            -- Stormwaker Y-700
-            if stormwaker_items_traded then
-                play_event624(player, attachments, 7)
-            end
-        elseif trade:getSlotCount() == 5 then
-            if stormwaker_items_traded and payment_received then
-                satisfy_attachment(player, 10, getVanaMidnight())
-            end
-        end
-    elseif attachmentStatus == 5 then
-        if payment_received and trade:getSlotCount()==1 then
-            satisfy_attachment(player, 8, getVanaMidnight())
-        end
-    elseif attachmentStatus == 6 then
-        if payment_received and trade:getSlotCount()==1 then
-            satisfy_attachment(player, 9, getVanaMidnight())
-        end
-    elseif attachmentStatus == 7 then
-        if payment_received and trade:getSlotCount()==1 then
-            satisfy_attachment(player, 10, getVanaMidnight())
-        end
-    elseif attachments == 3 and attachmentStatus == 11 or attachments == 4 and attachmentStatus == 14 then
+    -- Soulsoother or Spiritreaver Trade, requires all items up front
+    elseif
+        (numUnlockedHeads == 3 and attachmentStatus == 11) or
+        (numUnlockedHeads == 4 and attachmentStatus == 14)
+    then
         if trade:getSlotCount() == 3 then
-            if payment_received then
-                if trade:getItemQty(xi.items.WHITE_PUPPET_TURBAN) == 1 and (unlockedAttachments < 16 or unlockedAttachments >=32) then
-                    if trade:getItemQty(xi.items.SCROLL_OF_CURE_V) == 1 then
-                        play_event902(player, 12, math.random(1, 3))
-                    elseif trade:getItemQty(xi.items.SCROLL_OF_REGEN) == 1 then
-                        play_event902(player, 12, math.random(2, 3))
-                    elseif trade:getItemQty(xi.items.SCROLL_OF_CURE_II) == 1 then
-                        play_event902(player, 12, 4)
-                    end
-                elseif trade:getItemQty(xi.items.BLACK_PUPPET_TURBAN) == 1 and unlockedAttachments < 32 then
-                    if trade:getItemQty(xi.items.SCROLL_OF_STONE_IV) == 1 then
-                        play_event902(player, 13, math.random(1, 3))
-                    elseif trade:getItemQty(xi.items.SCROLL_OF_ABSORB_INT) == 1 then
-                        play_event902(player, 13, math.random(2, 3))
-                    elseif trade:getItemQty(xi.items.SCROLL_OF_FIRE) == 1 then
-                        play_event902(player, 13, math.random(1, 3))
-                    end
+            if tradeHasPayment then
+                if trade:getItemQty(xi.items.WHITE_PUPPET_TURBAN) == 1 and not player:hasAttachment(xi.items.SOULSOOTHER_HEAD) then
+                    local range = getWaitRange(xi.items.WHITE_PUPPET_TURBAN, trade)
+
+                    play_event902(player, 12, math.random(range[1], range[2]))
+                elseif trade:getItemQty(xi.items.BLACK_PUPPET_TURBAN) == 1 and not player:hasAttachment(xi.items.SPIRITREAVER_HEAD) then
+                    local range = getWaitRange(xi.items.BLACK_PUPPET_TURBAN, trade)
+
+                    play_event902(player, 12, math.random(range[1], range[2]))
                 end
             end
         end
-    elseif (attachmentStatus == 12 or attachmentStatus == 13) and attachmentWait > 0 and attachmentReady == true then
-        if trade:getSlotCount() == 1 and trade:getItemQty(xi.items.CUP_OF_IMPERIAL_COFFEE) == 1 then
-            player:tradeComplete()
-            player:setCharVar("PUP_AttachmentReady", getVanaMidnight())
-            player:setCharVar("PUP_AttachmentWait", attachmentWait - 1)
+
+    -- Imperial Coffee Trade to reduce time remaining
+    elseif
+        (attachmentStatus == 12 or attachmentStatus == 13) and
+        not attachmentReady and
+        player:getCharVar("PUP_nextCoffeeTrade") <= VanadielUniqueDay()
+    then
+        if npcUtil.tradeHasExactly(trade, xi.items.CUP_OF_IMPERIAL_COFFEE) then
+            player:confirmTrade()
+            player:setCharVar("PUP_AttachmentReady", player:getCharVar("PUP_AttachmentReady") - 1)
+            player:setCharVar("PUP_nextCoffeeTrade", VanadielUniqueDay() + 1)
             player:startEvent(904)
         end
     end
 end
 
 entity.onTrigger = function(player, npc)
-
     --cs 620 - new frame - param 6: itemid payment param 7: number of payment param 8: bitpack choices (bit 0 no thanks, bit 1 VE, bit 2 SS, bit 3 SW)
     --cs 621 - new frame (if canceled previous)
     --cs 622 - bring me mats
@@ -171,20 +229,13 @@ entity.onTrigger = function(player, npc)
     --cs 904 - give coffee
     --cs 905 - head complete
 
-    local NoStringsAttached = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.NO_STRINGS_ATTACHED)
-    local NoStringsAttachedProgress = player:getCharVar("NoStringsAttachedProgress")
-    local Automaton = player:hasKeyItem(xi.ki.ANTIQUE_AUTOMATON)
     local automatonName = player:getAutomatonName()
-    local CreationStarted_Day = player:getCharVar("CreationStarted_Day")
-    local currentDay = VanadielDayOfTheYear()
-    local CreationReady = ((CreationStarted_Day < currentDay) or (player:getCharVar("CreationStarted_Year") < VanadielYear()))
-    local attachments = player:getCharVar("PUP_Attachments")
+    local numUnlockedHeads = getNumUnlockedHeads(player)
     local attachmentStatus = player:getCharVar("PUP_AttachmentStatus")
-    local unlockedAttachments = player:getCharVar("PUP_AttachmentUnlock")
-    local attachmentTime = player:getCharVar("PUP_AttachmentReady")
-    local attachmentReady = (attachmentTime ~= 0 and attachmentTime < os.time())
-    local attachmentWait = player:getCharVar("PUP_AttachmentWait")
-    local playerLvl = player:getMainLvl()
+    local unlockedAttachments = getHeadMask(player)
+    local attachmentReadyDay = player:getCharVar("PUP_AttachmentReady")
+    local attachmentReady = attachmentReadyDay ~= 0 and attachmentReadyDay <= VanadielUniqueDay()
+    local attachmentDaysRemaining = attachmentReadyDay - VanadielUniqueDay()
 
     --[[
         attachment status:
@@ -205,85 +256,82 @@ entity.onTrigger = function(player, npc)
         14 - asked about soulsoother/spiritreaver (after obtaining the first)
     ]]
 
-    if NoStringsAttached == QUEST_ACCEPTED then
-        if NoStringsAttachedProgress == 2 then
-            player:startEvent(262) -- he want you to go to Arrapago
-        elseif NoStringsAttachedProgress == 3 then
-            player:startEvent(263) -- reminder to go to Arrapago
-        elseif NoStringsAttachedProgress == 4 and Automaton == true then
-            player:startEvent(264) -- you give the antique automaton to him and need to wait a gameday
-        elseif NoStringsAttachedProgress == 5 and CreationReady == true then
-            player:startEvent(265) -- you go back for your automaton
-        end
-    elseif NoStringsAttached == QUEST_COMPLETED and player:getMainJob() == xi.job.PUP then
-        if attachments == 0 and attachmentStatus == 0 and playerLvl >= 10 then
-            player:startEventString(620, automatonName, automatonName, automatonName, automatonName, attachments, 0, 0, 0, 0, 2185, 3, unlockedAttachments)
-        elseif attachments == 0 and attachmentStatus == 1 then
-            player:startEvent(621, 0, 0, 0, 0, 0, 2185, 3, unlockedAttachments)
-        elseif attachments == 1 and attachmentStatus == 0 and playerLvl >= 20 then
-            player:startEventString(620, automatonName, automatonName, automatonName, automatonName, attachments, 0, 0, 0, 0, 2186, 3, unlockedAttachments)
-        elseif attachments == 1 and attachmentStatus == 1 then
-            player:startEvent(621, 0, 0, 0, 0, 0, 2186, 3, unlockedAttachments)
-        elseif attachments == 2 and attachmentStatus == 0 and playerLvl >= 30 then
-            player:startEventString(620, automatonName, automatonName, automatonName, automatonName, attachments, 0, 0, 0, 0, 2187, 1, unlockedAttachments)
-        elseif attachments == 3 and attachmentStatus == 0 and playerLvl >= 40 then
-            player:startEventString(900, automatonName, automatonName, automatonName, automatonName, 0, 0, 0, 0, 0, 2186, 2)
-        elseif attachments == 4 and attachmentStatus == 0 and playerLvl >= 50 then
-            if unlockedAttachments == 30 then
-                player:startEventString(901, automatonName, automatonName, automatonName, automatonName, 1, 0, 0, 0, 0, 2186, 4)
-            elseif unlockedAttachments == 46 then
-                player:startEventString(901, automatonName, automatonName, automatonName, automatonName, 0, 0, 0, 0, 0, 2186, 4)
+    if
+        player:hasCompletedQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.NO_STRINGS_ATTACHED) and
+        player:getMainJob() == xi.job.PUP
+    then
+        local requiredLevel = (numUnlockedHeads + 1) * 10
+
+        -- Has not Accepted or Declined a new Head (or Head/Frame combination)
+        if attachmentStatus == 0 and player:getMainLvl() >= requiredLevel then
+            if numUnlockedHeads < 3 then
+                player:startEventString(620, automatonName, automatonName, automatonName, automatonName, numUnlockedHeads, 0, 0, 0, 0, unlockCost[numUnlockedHeads][1], unlockCost[numUnlockedHeads][2], unlockedAttachments)
+            elseif numUnlockedHeads == 3 then
+                player:startEventString(900, automatonName, automatonName, automatonName, automatonName, 0, 0, 0, 0, 0, unlockCost[numUnlockedHeads][1], unlockCost[numUnlockedHeads][2])
+            elseif numUnlockedHeads == 4 then
+                if unlockedAttachments == 30 then
+                    player:startEventString(901, automatonName, automatonName, automatonName, automatonName, 1, 0, 0, 0, 0, unlockCost[numUnlockedHeads][1], unlockCost[numUnlockedHeads][2])
+                elseif unlockedAttachments == 46 then
+                    player:startEventString(901, automatonName, automatonName, automatonName, automatonName, 0, 0, 0, 0, 0, unlockCost[numUnlockedHeads][1], unlockCost[numUnlockedHeads][2])
+                end
             end
-        elseif attachments == 2 and attachmentStatus == 1 then
-            player:startEvent(621, 0, 0, 0, 0, 0, 2187, 1, unlockedAttachments)
-        elseif attachmentStatus >= 8 and attachmentStatus <= 10 and attachmentReady == false then
-            player:startEvent(626)
-        elseif attachmentStatus == 8 and attachmentReady == true then
-            player:startEventString(627, automatonName, automatonName, automatonName, automatonName, 0, 1)
-        elseif attachmentStatus == 9 and attachmentReady == true then
-            player:startEventString(627, automatonName, automatonName, automatonName, automatonName, 0, 2)
-        elseif attachmentStatus == 10 and attachmentReady == true then
-            player:startEventString(627, automatonName, automatonName, automatonName, automatonName, 0, 3)
+
+        -- Declined a new Head or Head/Frame combination
+        elseif attachmentStatus == 1 then
+            player:startEvent(621, 0, 0, 0, 0, 0, unlockCost[numUnlockedHeads][1], unlockCost[numUnlockedHeads][2], unlockedAttachments)
+
+        -- Paid in Full (Mats & Currency) for Head/Frame Combination
+        elseif attachmentStatus >= 8 and attachmentStatus <= 10 then
+            if not attachmentReady then
+                player:startEvent(626)
+            else
+                local param6 = attachmentStatus - 7
+
+                player:startEventString(627, automatonName, automatonName, automatonName, automatonName, 0, param6)
+            end
+
+        -- Accepted a Head/Frame Combination, but has not provided any payment
         elseif attachmentStatus >= 2 and attachmentStatus <= 4 then
-            if attachments == 0 then
-                player:startEvent(622, 0, 1, 0, 0, 0, 2185, 3)
-            elseif attachments == 1 then
-                player:startEvent(622, 0, 1, 0, 0, 0, 2186, 3)
-            elseif attachments == 2 then
-                player:startEvent(622, 0, 1, 0, 0, 0, 2187, 1)
-            end
+            player:startEvent(622, 0, 1, 0, 0, 0, unlockCost[numUnlockedHeads][1], unlockCost[numUnlockedHeads][2])
+
+        -- Paid Mats for Head/Frame Combination, but needs to provide Currency
         elseif attachmentStatus >= 5 and attachmentStatus <= 7 then
-            if attachments == 0 then
-                player:startEvent(624, 0, 0, 0, 0, 0, 2185, 3)
-            elseif attachments == 1 then
-                player:startEvent(624, 0, 0, 0, 0, 0, 2186, 3)
-            elseif attachments == 2 then
-                player:startEvent(624, 0, 0, 0, 0, 0, 2187, 1)
+            player:startEvent(624, 0, 0, 0, 0, 0, unlockCost[numUnlockedHeads][1], unlockCost[numUnlockedHeads][2])
+
+        -- Asked about Soulsoother/Spiritreaver Head
+        elseif attachmentStatus == 11 and numUnlockedHeads == 3 then
+            player:startEventString(900, automatonName, automatonName, automatonName, automatonName, 0, 0, 1, 0, 0, unlockCost[numUnlockedHeads][1], unlockCost[numUnlockedHeads][2])
+
+        -- Paid for Soulsoother/Spiritreaver Head
+        elseif attachmentStatus == 12 or attachmentStatus == 13 then
+            if not attachmentReady then
+                player:startEvent(903, attachmentDaysRemaining, 1)
+            else
+                if attachmentDaysRemaining > 0 then
+                    player:startEvent(903, attachmentDaysRemaining, 0)
+                else
+                    player:startEvent(905, attachmentStatus - 12)
+                end
             end
-        elseif attachmentStatus == 11 and attachments == 3 then
-            player:startEventString(900, automatonName, automatonName, automatonName, automatonName, 0, 0, 1, 0, 0, 2186, 2)
-        elseif (attachmentStatus == 12 or attachmentStatus == 13) then
-            if attachmentReady == false then
-                player:startEvent(903, attachmentWait, 1)
-            elseif attachmentReady == true and attachmentWait > 0 then
-                player:startEvent(903, attachmentWait, 0)
-            elseif attachmentReady == true and attachmentWait == 0 then
-                player:startEvent(905, attachmentStatus-12)
-            end
+
+        -- Ask about other head, after obtaining one already (Spiritreaver or Soulsoother)
         elseif attachmentStatus == 14 then
             if unlockedAttachments == 30 then
-                player:startEventString(901, automatonName, automatonName, automatonName, automatonName, 1, 0, 1, 0, 0, 2186, 4)
+                player:startEventString(901, automatonName, automatonName, automatonName, automatonName, 1, 0, 1, 0, 0, unlockCost[numUnlockedHeads][1], unlockCost[numUnlockedHeads][2])
             elseif unlockedAttachments == 46 then
-                player:startEventString(901, automatonName, automatonName, automatonName, automatonName, 0, 0, 1, 0, 0, 2186, 4)
+                player:startEventString(901, automatonName, automatonName, automatonName, automatonName, 0, 0, 1, 0, 0, unlockCost[numUnlockedHeads][1], unlockCost[numUnlockedHeads][2])
             end
+
+            -- Default PUP actions after first Unlock
+            elseif numUnlockedHeads > 0 then
+                local rand = math.random(1, 2)
+                if rand == 1 then
+                    player:startEvent(628)
+                else
+                    player:startEventString(629, automatonName, automatonName, automatonName, automatonName)
+                end
         end
-    elseif attachments > 0 then
-        local rand = math.random(1, 2)
-        if rand == 1 then
-            player:startEvent(628)
-        else
-            player:startEventString(629, automatonName, automatonName, automatonName, automatonName)
-        end
+    -- Default Action
     else
         player:startEvent(256)
     end
@@ -293,72 +341,45 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
-    if csid == 262 then
-        player:setCharVar("NoStringsAttachedProgress", 3)
-    elseif csid == 264 then
-        player:setCharVar("CreationStarted_Day", VanadielDayOfTheYear())
-        player:setCharVar("CreationStarted_Year", VanadielYear())
-        player:setCharVar("NoStringsAttachedProgress", 5)
-        player:delKeyItem(xi.ki.ANTIQUE_AUTOMATON)
-    elseif csid == 265 then
-        player:setCharVar("NoStringsAttachedProgress", 6)
-        player:setCharVar("CreationStarted_Day", 0)
-        player:setCharVar("CreationStarted_Year", 0)
-    elseif csid == 620 or csid == 621 then
-        player:setCharVar("PUP_AttachmentStatus", option+1)
+    if csid == 620 or csid == 621 then
+        player:setCharVar("PUP_AttachmentStatus", option + 1)
     elseif csid == 627 then
-        local attachments = player:getCharVar("PUP_Attachments")
         local attachmentStatus = player:getCharVar("PUP_AttachmentStatus")
-        local unlockedAttachments = player:getCharVar("PUP_AttachmentUnlock")
+
         if attachmentStatus == 8 then
-            player:unlockAttachment(8225)
-            player:unlockAttachment(8194)
-            player:setCharVar("PUP_AttachmentStatus", 0)
-            player:setCharVar("PUP_Attachments", attachments+1)
-            player:setCharVar("PUP_AttachmentUnlock", unlockedAttachments+2)
-            player:setCharVar("PUP_AttachmentReady", 0)
+            player:unlockAttachment(xi.items.VALOREDGE_FRAME)
+            player:unlockAttachment(xi.items.VALOREDGE_HEAD)
             player:messageSpecial(ID.text.AUTOMATON_VALOREDGE_UNLOCK)
         elseif attachmentStatus == 9 then
-            player:unlockAttachment(8226)
-            player:unlockAttachment(8195)
-            player:setCharVar("PUP_AttachmentStatus", 0)
-            player:setCharVar("PUP_Attachments", attachments+1)
-            player:setCharVar("PUP_AttachmentUnlock", unlockedAttachments+4)
-            player:setCharVar("PUP_AttachmentReady", 0)
+            player:unlockAttachment(xi.items.SHARPSHOT_FRAME)
+            player:unlockAttachment(xi.items.SHARPSHOT_HEAD)
             player:messageSpecial(ID.text.AUTOMATON_SHARPSHOT_UNLOCK)
         elseif attachmentStatus == 10 then
-            player:unlockAttachment(8227)
-            player:unlockAttachment(8196)
-            player:setCharVar("PUP_AttachmentStatus", 0)
-            player:setCharVar("PUP_Attachments", attachments+1)
-            player:setCharVar("PUP_AttachmentUnlock", unlockedAttachments+8)
-            player:setCharVar("PUP_AttachmentReady", 0)
+            player:unlockAttachment(xi.items.STORMWAKER_FRAME)
+            player:unlockAttachment(xi.items.STORMWAKER_HEAD)
             player:messageSpecial(ID.text.AUTOMATON_STORMWAKER_UNLOCK)
         end
+
+        player:setCharVar("PUP_AttachmentStatus", 0)
+        player:setCharVar("PUP_AttachmentReady", 0)
     elseif csid == 900 then
         player:setCharVar("PUP_AttachmentStatus", 11)
     elseif csid == 901 then
         player:setCharVar("PUP_AttachmentStatus", 14)
     elseif csid == 905 then
-        local attachments = player:getCharVar("PUP_Attachments")
         local attachmentStatus = player:getCharVar("PUP_AttachmentStatus")
-        local unlockedAttachments = player:getCharVar("PUP_AttachmentUnlock")
+
         if attachmentStatus == 12 then
-            player:unlockAttachment(8197)
-            player:setCharVar("PUP_AttachmentStatus", 0)
-            player:setCharVar("PUP_Attachments", attachments+1)
-            player:setCharVar("PUP_AttachmentReady", 0)
-            player:setCharVar("PUP_AttachmentUnlock", unlockedAttachments+16)
+            player:unlockAttachment(xi.items.SOULSOOTHER_HEAD)
             player:messageSpecial(ID.text.AUTOMATON_SOULSOOTHER_UNLOCK)
         elseif attachmentStatus == 13 then
-            player:unlockAttachment(8198)
-            player:setCharVar("PUP_AttachmentStatus", 0)
-            player:setCharVar("PUP_Attachments", attachments+1)
-            player:setCharVar("PUP_AttachmentReady", 0)
-            player:setCharVar("PUP_AttachmentUnlock", unlockedAttachments+32)
+            player:unlockAttachment(xi.items.SPIRITREAVER_HEAD)
             player:messageSpecial(ID.text.AUTOMATON_SPIRITREAVER_UNLOCK)
         end
+
+        player:setCharVar("PUP_AttachmentStatus", 0)
+        player:setCharVar("PUP_AttachmentReady", 0)
+        player:setCharVar("PUP_nextCoffeeTrade", 0)
     end
 end
 

@@ -5,8 +5,8 @@
 -----------------------------------
 local ID = require("scripts/zones/Throne_Room/IDs")
 mixins = {require("scripts/mixins/job_special")}
-require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
+require("scripts/globals/mobskills")
+require("scripts/settings/main")
 require("scripts/globals/titles")
 require("scripts/globals/status")
 -----------------------------------

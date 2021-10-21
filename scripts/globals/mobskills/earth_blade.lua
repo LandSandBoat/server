@@ -4,8 +4,8 @@
 -- Type: Enhancing
 -- Used only by Kam'lanaut. Enstone aspect adds 70+ to his melee attacks.
 -----------------------------------
-require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
+require("scripts/globals/mobskills")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
 local mobskill_object = {}
@@ -16,7 +16,7 @@ end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.ENSTONE
-    skill:setMsg(MobBuffMove(mob, typeEffect, 65, 0, 60))
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, typeEffect, 65, 0, 60))
     return typeEffect
 end
 

@@ -1,7 +1,7 @@
 -----------------------------------
 -- Sleepga
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
@@ -18,7 +18,7 @@ ability_object.onPetAbility = function(target, pet, skill)
     local duration = 90
     local dINT = pet:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
     local bonus = getSummoningSkillOverCap(pet)
-    local resm = applyPlayerResistance(pet, -1, target, dINT, bonus, xi.magic.element.ICE)
+    local resm = xi.mobskills.applyPlayerResistance(pet, -1, target, dINT, bonus, xi.magic.element.ICE)
     if (resm < 0.5) then
         skill:setMsg(xi.msg.basic.JA_MISS_2) -- resist message
         return xi.effect.SLEEP_I

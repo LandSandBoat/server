@@ -4,7 +4,7 @@
 -- Starts & Finishes Quest: Mom, The Adventurer?
 -- Starts Quest: The Signpost Marks the Spot
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/keyitems")
 require("scripts/globals/titles")
 require("scripts/globals/quests")

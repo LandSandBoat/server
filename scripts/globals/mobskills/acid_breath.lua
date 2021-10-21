@@ -7,9 +7,9 @@
 --  Range: Unknown cone
 --  Notes:
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 -----------------------------------
 local mobskill_object = {}
 
@@ -23,11 +23,11 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local tick = 3
     local duration = power * tick
 
-    MobStatusEffectMove(mob, target, typeEffect, power, tick, duration)
+    xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, power, tick, duration)
 
-    local dmgmod = MobBreathMove(mob, target, 0.1, 1, xi.magic.ele.WATER, 200)
+    local dmgmod = xi.mobskills.mobBreathMove(mob, target, 0.1, 1, xi.magic.ele.WATER, 200)
 
-    local dmg = MobFinalAdjustments(dmgmod, mob, skill, target, xi.attackType.BREATH, xi.damageType.WATER, MOBPARAM_IGNORE_SHADOWS)
+    local dmg = xi.mobskills.mobFinalAdjustments(dmgmod, mob, skill, target, xi.attackType.BREATH, xi.damageType.WATER, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
     target:takeDamage(dmg, mob, xi.attackType.BREATH, xi.damageType.WATER)
     return dmg
 end

@@ -17,7 +17,7 @@ effect_object.onEffectGain = function(target, effect)
         target:addMod(xi.mod.LIGHT_ABSORB, 100)
         target:addMod(xi.mod.DARK_ABSORB, 100)
     elseif effect:getPower() < 2 then
-        target:addMod(xi.mod.UDMGMAGIC, -101)
+        target:addMod(xi.mod.UDMGMAGIC, -10000)
         if target:isPC() and target:hasTrait(77) then -- Iron Will
             target:addMod(xi.mod.SPELLINTERRUPT, target:getMerit(xi.merit.IRON_WILL))
         end
@@ -40,7 +40,7 @@ effect_object.onEffectLose = function(target, effect)
         target:delMod(xi.mod.LIGHT_ABSORB, 100)
         target:delMod(xi.mod.DARK_ABSORB, 100)
     elseif effect:getPower() < 2 then
-        target:delMod(xi.mod.UDMGMAGIC, -101)
+        target:delMod(xi.mod.UDMGMAGIC, -10000)
         if target:isPC() and target:hasTrait(77) then -- Iron Will
             target:delMod(xi.mod.SPELLINTERRUPT, target:getMerit(xi.merit.IRON_WILL))
         end

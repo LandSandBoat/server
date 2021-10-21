@@ -7,8 +7,8 @@
 -- Range: Single target
 -- Notes:
 -----------------------------------
-require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
+require("scripts/globals/mobskills")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
@@ -27,7 +27,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
         return typeEffect
     end
 
-    local msg = MobStatusEffectMove(mob, target, typeEffect, power, 3, 60)
+    local msg = xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, power, 3, 60)
     if (msg == xi.msg.basic.SKILL_ENFEEB_IS) then
         mob:charm(target)
     end

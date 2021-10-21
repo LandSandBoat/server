@@ -1,7 +1,7 @@
 require("scripts/globals/spell_data")
 require("scripts/globals/jobpoints")
 require("scripts/globals/magicburst")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/utils")
 require("scripts/globals/msg")
@@ -310,9 +310,8 @@ end
 function doBoostGain(caster, target, spell, effect)
     local duration = calculateDuration(300, spell:getSkillType(), spell:getSpellGroup(), caster, target)
 
-    --calculate potency
-    local magicskill = target:getSkillLevel(spell:getSkillType())
-
+    -- calculate potency
+    local magicskill = caster:getSkillLevel(spell:getSkillType())
     local potency = math.floor((magicskill - 300) / 10) + 5
 
     if potency > 25 then
@@ -321,9 +320,9 @@ function doBoostGain(caster, target, spell, effect)
         potency = 5
     end
 
-    --printf("BOOST-GAIN: POTENCY = %d", potency)
+    -- printf("BOOST-GAIN: POTENCY = %d", potency)
 
-    --Only one Boost Effect can be active at once, so if the player has any we have to cancel & overwrite
+    -- Only one Boost Effect can be active at once, so if the player has any we have to cancel & overwrite
     local effectOverwrite =
     {
         xi.effect.STR_BOOST,
@@ -336,11 +335,11 @@ function doBoostGain(caster, target, spell, effect)
     }
 
     for i, effectValue in ipairs(effectOverwrite) do
-            --printf("BOOST-GAIN: CHECKING FOR EFFECT %d...", effect)
-            if caster:hasStatusEffect(effectValue) then
-                --printf("BOOST-GAIN: HAS EFFECT %d, DELETING...", effect)
-                caster:delStatusEffect(effectValue)
-            end
+        -- printf("BOOST-GAIN: CHECKING FOR EFFECT %d...", effect)
+        if target:hasStatusEffect(effectValue) then
+            -- printf("BOOST-GAIN: HAS EFFECT %d, DELETING...", effect)
+            target:delStatusEffect(effectValue)
+        end
     end
 
     if target:addStatusEffect(effect, potency, 0, duration) then

@@ -4,7 +4,7 @@
 -- Starts and Finishes Quest: The Antique Collector
 -- !pos -165 11 94 246
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/titles")
 require("scripts/globals/keyitems")
 require("scripts/globals/shop")

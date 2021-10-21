@@ -4,8 +4,8 @@
 -- Description: Inflicts Doom upon an enemy.
 -- Type: Magical (Dark)
 -----------------------------------
-require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
+require("scripts/globals/mobskills")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
 local mobskill_object = {}
@@ -17,7 +17,7 @@ end
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.DOOM
 
-    skill:setMsg(MobGazeMove(mob, target, typeEffect, 10, 3, 30))
+    skill:setMsg(xi.mobskills.mobGazeMove(mob, target, typeEffect, 10, 3, 30))
 
     return typeEffect
 end

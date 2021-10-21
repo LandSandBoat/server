@@ -1,6 +1,7 @@
 -----------------------------------
 -- Attachment: Eraser
 -----------------------------------
+require("scripts/globals/automaton")
 require("scripts/globals/status")
 -----------------------------------
 local attachment_object = {}
@@ -21,7 +22,11 @@ local removable = {
 attachment_object.onEquip = function(pet)
     pet:addListener("AUTOMATON_ATTACHMENT_CHECK", "ATTACHMENT_ERASER", function(automaton, target)
         local master = automaton:getMaster()
-        if not automaton:hasRecast(xi.recast.ABILITY, 2021) and master and master:countEffect(xi.effect.LIGHT_MANEUVER) > 0 then
+        if
+            not automaton:hasRecast(xi.recast.ABILITY, xi.automaton.abilities.ERASER) and
+            master and
+            master:countEffect(xi.effect.LIGHT_MANEUVER) > 0
+        then
             local erasetarget = false
 
             local function checkEffects(entity)
@@ -37,10 +42,11 @@ attachment_object.onEquip = function(pet)
                 erasetarget = master
             end
 
-            if not erasetarget then return 0 end
-            automaton:useMobAbility(2021, erasetarget)
-        else
-            return 0
+            if not erasetarget then
+                return
+            end
+
+            automaton:useMobAbility(xi.automaton.abilities.ERASER, erasetarget)
         end
     end)
 end

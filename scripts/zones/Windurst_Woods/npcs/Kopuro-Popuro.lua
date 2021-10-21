@@ -7,7 +7,7 @@
 -- Involved in quests: Lost Chick
 -----------------------------------
 require("scripts/globals/npc_util")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------

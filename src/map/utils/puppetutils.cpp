@@ -701,7 +701,9 @@ namespace puppetutils
                         }
                         else
                         {
-                            luautils::OnManeuverLose(PAutomaton, PAttachment, PChar->StatusEffectContainer->GetEffectsCount(maneuver));
+                            // Note: This is called before the new maneuver count is known.  Send GetStatusEffectsCount - 1 to reflect
+                            // the new value.
+                            luautils::OnManeuverLose(PAutomaton, PAttachment, PChar->StatusEffectContainer->GetEffectsCount(maneuver) - 1);
                         }
                     }
                 }

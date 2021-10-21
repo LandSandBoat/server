@@ -7,7 +7,7 @@
 --    Involved in Missions: Windurst 5-1/7-2/8-2
 -----------------------------------
 require("scripts/globals/quests")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 local ID = require("scripts/zones/FeiYin/IDs")
 require("scripts/globals/keyitems")
 -----------------------------------
@@ -25,7 +25,7 @@ entity.onTrigger = function(player, npc)
     -- Curses, Foiled A_Golem!?
     elseif (player:hasKeyItem(xi.ki.SHANTOTTOS_NEW_SPELL)) then
         player:startEvent(14) -- deliver spell
-    elseif (player:hasKeyItem(xi.ki.SHANTOTTOS_EXSPELL)) then
+    elseif (player:hasKeyItem(xi.ki.SHANTOTTOS_EX_SPELL)) then
         player:startEvent(13) -- spell erased, try again!
 
     -- standard dialog

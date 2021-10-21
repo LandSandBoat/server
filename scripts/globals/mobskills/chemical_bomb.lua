@@ -3,8 +3,8 @@
 --
 -- Description: slow + elegy
 -----------------------------------
-require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
+require("scripts/globals/mobskills")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
 local mobskill_object = {}
@@ -31,8 +31,8 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffectOne = xi.effect.ELEGY
     local typeEffectTwo = xi.effect.SLOW
 
-    skill:setMsg(MobStatusEffectMove(mob, target, typeEffectOne, 5000, 0, 120))
-    skill:setMsg(MobStatusEffectMove(mob, target, typeEffectTwo, 5000, 0, 120))
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffectOne, 5000, 0, 120))
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffectTwo, 5000, 0, 120))
 
     -- This likely doesn't behave like retail.
     return typeEffectTwo

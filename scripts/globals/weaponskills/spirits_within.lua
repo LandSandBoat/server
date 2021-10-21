@@ -12,7 +12,7 @@
 -- 12.5%       50%      100%
 -----------------------------------
 require("scripts/globals/status")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/weaponskills")
 require("scripts/globals/utils")
 -----------------------------------

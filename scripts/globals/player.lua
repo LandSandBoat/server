@@ -1,10 +1,11 @@
 require("scripts/globals/gear_sets")
 require("scripts/globals/keyitems")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/teleports")
 require("scripts/globals/titles")
 require("scripts/globals/zone")
+require("scripts/globals/events/login_campaign")
 -----------------------------------
 require("scripts/quests/full_speed_ahead")
 -----------------------------------
@@ -88,10 +89,10 @@ local function CharCreate(player)
         for i = xi.ki.MAP_OF_THE_SAN_DORIA_AREA, xi.ki.MAP_OF_DIO_ABDHALJS_GHELSBA do
             player:addKeyItem(i)
         end
-        for i = xi.ki.MAP_OF_AL_ZAHBI, xi.ki.MAP_OF_OUTER_RAKAZNAR do
+        for i = xi.ki.MAP_OF_AL_ZAHBI, xi.ki.MAP_OF_RAKAZNAR do
             player:addKeyItem(i)
         end
-        for i = xi.ki.MAP_OF_RALA_WATERWAYS_U, xi.ki.MAP_OF_OUTER_RAKAZNAR_U do
+        for i = xi.ki.MAP_OF_RALA_WATERWAYS_U, xi.ki.MAP_OF_RAKAZNAR_U do
             player:addKeyItem(i)
         end
         for i = xi.ki.MAP_OF_ESCHA_ZITAH, xi.ki.MAP_OF_REISENJIMA do
@@ -192,6 +193,12 @@ xi.player.onGameIn = function(player, firstLogin, zoning)
 
     -- remember time player zoned in (e.g., to support zone-in delays)
     player:setLocalVar("ZoneInTime", os.time())
+
+    -- Slight delay to ensure player is fully logged in
+    player:timer(2500, function(playerArg)
+        -- Login Campaign rewards points once daily
+        xi.events.loginCampaign.onGameIn(playerArg)
+    end)
 end
 
 xi.player.onPlayerLevelUp = function(player)

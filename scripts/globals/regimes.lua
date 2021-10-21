@@ -10,7 +10,7 @@
 -----------------------------------
 require("scripts/globals/teleports")
 require("scripts/globals/keyitems")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/utils")
 require("scripts/globals/zone")
@@ -1158,100 +1158,148 @@ xi.regime.bookOnEventFinish = function(player, option, regimeType)
         local act = opt.act
         player:delCurrency("valor_point", cost)
 
-        if act == "CANCEL_REGIME" then
-            xi.regime.clearRegimeVars(player)
-            player:showText(player, msgOffset + 2) -- Training regime canceled.
+        switch (act) : caseof
+        {
+            ['CANCEL_REGIME'] = function()
+                xi.regime.clearRegimeVars(player)
+                player:showText(player, msgOffset + 2) -- Training regime canceled.
+            end,
 
-        elseif act == "REPATRIATION" then
-            player:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.HOME_NATION, 0, 1)
+            ['REPATRIATION'] = function()
+                player:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.HOME_NATION, 0, 1)
+            end,
 
-        elseif act == "CIRCUMSPECTION" then
-            player:delStatusEffectSilent(xi.effect.SNEAK)
-            player:addStatusEffect(xi.effect.SNEAK, 0, 10, 900 * xi.settings.SNEAK_INVIS_DURATION_MULTIPLIER)
-            player:delStatusEffectSilent(xi.effect.INVISIBLE)
-            player:addStatusEffect(xi.effect.INVISIBLE, 0, 10, 900 * xi.settings.SNEAK_INVIS_DURATION_MULTIPLIER)
+            ['CIRCUMSPECTION'] = function()
+                player:delStatusEffectSilent(xi.effect.SNEAK)
+                player:addStatusEffect(xi.effect.SNEAK, 0, 10, 900 * xi.settings.SNEAK_INVIS_DURATION_MULTIPLIER)
+                player:delStatusEffectSilent(xi.effect.INVISIBLE)
+                player:addStatusEffect(xi.effect.INVISIBLE, 0, 10, 900 * xi.settings.SNEAK_INVIS_DURATION_MULTIPLIER)
+            end,
 
-        elseif act == "HOMING_INSTINCT" then
-            player:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.WARP, 0, 1)
+            ['HOMING_INSTINCT'] = function()
+                player:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.WARP, 0, 1)
+            end,
 
-        elseif act == "RERAISE" then
-            player:delStatusEffectSilent(xi.effect.RERAISE)
-            player:addStatusEffect(xi.effect.RERAISE, 1, 0, 7200)
+            ['RERAISE'] = function()
+                player:delStatusEffectSilent(xi.effect.RERAISE)
+                player:addStatusEffect(xi.effect.RERAISE, 1, 0, 7200)
+            end,
 
-        elseif act == "RERAISE_II" then
-            player:delStatusEffectSilent(xi.effect.RERAISE)
-            player:addStatusEffect(xi.effect.RERAISE, 2, 0, 7200)
+            ['RERAISE_II'] = function()
+                player:delStatusEffectSilent(xi.effect.RERAISE)
+                player:addStatusEffect(xi.effect.RERAISE, 2, 0, 7200)
+            end,
 
-        elseif act == "RERAISE_III" then
-            player:delStatusEffectSilent(xi.effect.RERAISE)
-            player:addStatusEffect(xi.effect.RERAISE, 3, 0, 7200)
+            ['RERAISE_III'] = function()
+                player:delStatusEffectSilent(xi.effect.RERAISE)
+                player:addStatusEffect(xi.effect.RERAISE, 3, 0, 7200)
+            end,
 
-        elseif act == "REGEN" then
-            player:delStatusEffectSilent(xi.effect.REGEN)
-            player:addStatusEffect(xi.effect.REGEN, 1, 3, 3600)
+            ['REGEN'] = function()
+                player:delStatusEffectSilent(xi.effect.REGEN)
+                player:addStatusEffect(xi.effect.REGEN, 1, 3, 3600)
+            end,
 
-        elseif act == "REFRESH" then
-            player:delStatusEffectSilent(xi.effect.REFRESH)
-            player:delStatusEffect(xi.effect.SUBLIMATION_COMPLETE)
-            player:delStatusEffect(xi.effect.SUBLIMATION_ACTIVATED)
-            player:addStatusEffect(xi.effect.REFRESH, 1, 3, 3600, 0, 3)
+            ['REFRESH'] = function()
+                player:delStatusEffectSilent(xi.effect.REFRESH)
+                player:delStatusEffect(xi.effect.SUBLIMATION_COMPLETE)
+                player:delStatusEffect(xi.effect.SUBLIMATION_ACTIVATED)
+                player:addStatusEffect(xi.effect.REFRESH, 1, 3, 3600, 0, 3)
+            end,
 
-        elseif act == "PROTECT" then
-            local mLvl = player:getMainLvl()
-            local power = 0
+            ['PROTECT'] = function()
+                local mLvl = player:getMainLvl()
+                local power = 0
+                local tier = 0
 
-            if mLvl < 27 then
-                power = 15
-            elseif mLvl < 47 then
-                power = 40
-            elseif mLvl < 63 then
-                power = 75
-            else
-                power = 120
-            end
+                if mLvl < 27 then
+                    power = 20
+                    tier = 1
+                elseif mLvl < 47 then
+                    power = 50
+                    tier = 2
+                elseif mLvl < 63 then
+                    power = 90
+                    tier = 3
+                elseif mLvl < 76 then
+                    power = 140
+                    tier = 4
+                else
+                    power = 220
+                    tier = 5
+                end
 
-            player:delStatusEffectSilent(xi.effect.PROTECT)
-            player:addStatusEffect(xi.effect.PROTECT, power, 0, 1800)
+                local bonus = 0
+                if player:getMod(xi.mod.ENHANCES_PROT_SHELL_RCVD) > 0 then
+                    bonus = 2 -- 2x Tier from MOD
+                end
 
-        elseif act == "SHELL" then
-            local mLvl = player:getMainLvl()
-            local power = 0
+                power = power + (bonus * tier)
+                player:delStatusEffectSilent(xi.effect.PROTECT)
+                player:addStatusEffect(xi.effect.PROTECT, power, 0, 1800, 0, 0, tier)
+            end,
 
-            if mLvl < 37 then
-                power = 9
-            elseif mLvl < 57 then
-                power = 14
-            elseif mLvl < 68 then
-                power = 19
-            else
-                power = 22
-            end
-            player:delStatusEffectSilent(xi.effect.SHELL)
-            player:addStatusEffect(xi.effect.SHELL, power, 0, 1800)
+            ['SHELL'] = function()
+                local mLvl = player:getMainLvl()
+                local power = 0
+                local tier = 0
 
-        elseif act == "HASTE" then
-            player:delStatusEffectSilent(xi.effect.HASTE)
-            player:addStatusEffect(xi.effect.HASTE, 1000, 0, 600)
+                if mLvl < 37 then
+                    power = 1055 -- Shell I   (27/256)
+                    tier = 1
+                elseif mLvl < 57 then
+                    power = 1641 -- Shell II  (42/256)
+                    tier = 2
+                elseif mLvl < 68 then
+                    power = 2188 -- Shell III (56/256)
+                    tier = 3
+                elseif mLvl < 76 then
+                    power = 2617 -- Shell IV  (67/256)
+                    tier = 4
+                else
+                    power = 2930 -- Shell V   (75/256)
+                    tier = 5
+                end
 
-        elseif act == "DRIED_MEAT" then
-            player:addStatusEffectEx(xi.effect.FIELD_SUPPORT_FOOD, 251, 1, 0, 1800)
+                local bonus = 0
+                if player:getMod(xi.mod.ENHANCES_PROT_SHELL_RCVD) > 0 then
+                    bonus = 39   -- (1/256 bonus buff per tier of spell)
+                end
 
-        elseif act == "SALTED_FISH" then
-            player:addStatusEffectEx(xi.effect.FIELD_SUPPORT_FOOD, 251, 2, 0, 1800)
+                power = power + (bonus * tier)
+                player:delStatusEffectSilent(xi.effect.SHELL)
+                player:addStatusEffect(xi.effect.SHELL, power, 0, 1800, 0, 0, tier)
+            end,
 
-        elseif act == "HARD_COOKIE" then
-            player:addStatusEffectEx(xi.effect.FIELD_SUPPORT_FOOD, 251, 3, 0, 1800)
+            ['HASTE'] = function()
+                player:delStatusEffectSilent(xi.effect.HASTE)
+                player:addStatusEffect(xi.effect.HASTE, 1000, 0, 600)
+            end,
 
-        elseif act == "INSTANT_NOODLES" then
-            player:addStatusEffectEx(xi.effect.FIELD_SUPPORT_FOOD, 251, 4, 0, 1800)
+            ['DRIED_MEAT'] = function()
+                player:addStatusEffectEx(xi.effect.FIELD_SUPPORT_FOOD, 251, 1, 0, 1800)
+            end,
 
-        elseif act == "DRIED_AGARICUS" then
-            player:addStatusEffectEx(xi.effect.FIELD_SUPPORT_FOOD, 251, 5, 0, 1800)
+            ['SALTED_FISH'] = function()
+                player:addStatusEffectEx(xi.effect.FIELD_SUPPORT_FOOD, 251, 2, 0, 1800)
+            end,
 
-        elseif act == "INSTANT_RICE" then
-            player:addStatusEffectEx(xi.effect.FIELD_SUPPORT_FOOD, 251, 6, 0, 1800)
+            ['HARD_COOKIE'] = function()
+                player:addStatusEffectEx(xi.effect.FIELD_SUPPORT_FOOD, 251, 3, 0, 1800)
+            end,
 
-        end
+            ['INSTANT_NOODLES'] = function()
+                player:addStatusEffectEx(xi.effect.FIELD_SUPPORT_FOOD, 251, 4, 0, 1800)
+            end,
+
+            ['DRIED_AGARICUS'] = function()
+                player:addStatusEffectEx(xi.effect.FIELD_SUPPORT_FOOD, 251, 5, 0, 1800)
+            end,
+
+            ['INSTANT_RICE'] = function()
+                player:addStatusEffectEx(xi.effect.FIELD_SUPPORT_FOOD, 251, 6, 0, 1800)
+            end,
+        }
 
     -- select a training regime
     elseif opt.page then
@@ -1296,12 +1344,12 @@ xi.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
         return
     end
 
-    -- people in alliance get no fields credit unless FOV_REWARD_ALLIANCE is 1 in scripts/globals/settings.lua
+    -- people in alliance get no fields credit unless FOV_REWARD_ALLIANCE is 1 in scripts/settings/main.lua
     if xi.settings.FOV_REWARD_ALLIANCE ~= 1 and regimeType == xi.regime.type.FIELDS and player:checkSoloPartyAlliance() == 2 then
         return
     end
 
-    -- people in alliance get no grounds credit unless GOV_REWARD_ALLIANCE is 1 in scripts/globals/settings.lua
+    -- people in alliance get no grounds credit unless GOV_REWARD_ALLIANCE is 1 in scripts/settings/main.lua
     if xi.settings.GOV_REWARD_ALLIANCE ~= 1 and regimeType == xi.regime.type.GROUNDS and player:checkSoloPartyAlliance() == 2 then
         return
     end

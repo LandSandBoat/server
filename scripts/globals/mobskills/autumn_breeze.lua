@@ -3,8 +3,8 @@
 --
 -- Description: Recovers HP.
 -----------------------------------
-require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
+require("scripts/globals/mobskills")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
@@ -29,7 +29,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     skill:setMsg(xi.msg.basic.SELF_HEAL)
 
-    return MobHealMove(mob, heal)
+    return xi.mobskills.mobHealMove(mob, heal)
 end
 
 return mobskill_object

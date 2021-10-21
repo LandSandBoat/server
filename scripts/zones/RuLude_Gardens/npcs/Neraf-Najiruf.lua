@@ -4,7 +4,7 @@
 -- Involved in Quests: Save my Sister
 -- !pos -36 2 60 243
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/RuLude_Gardens/IDs")
 -----------------------------------

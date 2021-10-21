@@ -187,7 +187,7 @@ enum class Mod
     ANTIHQ_ALCHEMY   = 150, // Alchemy Success Rate %
     ANTIHQ_COOK      = 151, // Cooking Success Rate %
 
-    // Damage / Crit Damage / Delay
+    // Damage - 10000 base, 375 = 3.75%
     DMG         = 160, // Damage Taken %
     DMGPHYS     = 161, // Physical Damage Taken %
     DMGPHYS_II  = 190, // Physical Damage Taken II % (Burtgang)
@@ -196,11 +196,13 @@ enum class Mod
     DMGMAGIC_II = 831, // Magic Damage Taken II % (Aegis)
     DMGRANGE    = 164, // Range Damage Taken %
 
+    // Uncapped damage - 10000 base, 375 = 3.75%
     UDMGPHYS   = 387, // Uncapped Damage Multipliers
-    UDMGBREATH = 388, // Used in sentinal, invincible, physical shield etc
+    UDMGBREATH = 388, // Used in sentinel, invincible, physical shield etc
     UDMGMAGIC  = 389, //
     UDMGRANGE  = 390, //
 
+    // Crit Damage / Delay
     CRITHITRATE              = 165, // Raises chance to crit
     CRIT_DMG_INCREASE        = 421, // Raises the damage of critical hit by percent %
     RANGED_CRIT_DMG_INCREASE = 964, // Increases ranged critical damage by a percent
@@ -515,12 +517,14 @@ enum class Mod
     PREVENT_OVERLOAD            = 855, // Overloading erases a water maneuver (except on water overloads) instead, if there is one
     SUPPRESS_OVERLOAD           = 125, // Kenkonken "Suppresses Overload" mod. Unclear how this works exactly. Requires testing on retail.
     AUTO_STEAM_JACKET           = 938, // Causes the Automaton to mitigate damage from successive attacks of the same type
-    AUTO_STEAM_JACKED_REDUCTION = 939, // Amount of damage reduced with Steam Jacket
+    AUTO_STEAM_JACKET_REDUCTION = 939, // Amount of damage reduced with Steam Jacket
     AUTO_SCHURZEN               = 940, // Prevents fatal damage leaving the automaton at 1HP and consumes an Earth manuever
     AUTO_EQUALIZER              = 941, // Reduces damage received according to damage taken
     AUTO_PERFORMANCE_BOOST      = 942, // Increases the performance of other attachments by a percentage
     AUTO_ANALYZER               = 943, // Causes the Automaton to mitigate damage from a special attack a number of times
     AUTO_ELEM_CAPACITY          = 987, // Increases the automaton's elemental capacity for attachments
+    AUTO_RANGED_DELAY           = 1001, // Decreases the amount of time between ranged attacks
+    AUTO_RANGED_DAMAGEP         = 1002, // Increase automaton ranged weapon damage by a %
 
     // Dancer
     FINISHING_MOVES          = 333, // Tracks # of finishing moves
@@ -685,18 +689,14 @@ enum class Mod
     PHYS_ABSORB      = 512, // Occasionally absorbs physical damage taken, in percents
     ABSORB_DMG_TO_MP = 516, // Unlike PLD gear mod, works on all damage types (Ethereal Earring)
 
-    ADDITIONAL_EFFECT  = 431, //
-    ITEM_SPIKES_TYPE   = 499, // Type spikes an item has
-    ITEM_SPIKES_DMG    = 500, // Damage of an items spikes
-    ITEM_SPIKES_CHANCE = 501, // Chance of an items spike proc
-    // ITEM_ADDEFFECT_TYPE       = 431, // 1 = Status Effect/DMG/HP Drain, 2 = MP Drain, 3 = TP Drain, 4 = Dispel, 5 = Self-Buff, 6 = Instant Death
-    // ITEM_SUBEFFECT            = 499, // Animation ID of Spikes and Additional Effects
-    // ITEM_ADDEFFECT_DMG        = 500, // Damage of an items Additional Effect or Spikes
-    // ITEM_ADDEFFECT_CHANCE     = 501, // Chance of an items Additional Effect or Spikes
-    // ITEM_ADDEFFECT_ELEMENT    = 950, // Element of the Additional Effect or Spikes, for resist purposes
-    // ITEM_ADDEFFECT_STATUS     = 951, // Status Effect ID to try to apply via Additional Effect or Spikes
-    // ITEM_ADDEFFECT_POWER      = 952, // Base Power for effect in MOD_ITEM_ADDEFFECT_STATUS
-    // ITEM_ADDEFFECT_DURATION   = 953, // Base Duration for effect in MOD_ITEM_ADDEFFECT_STATUS
+    ITEM_ADDEFFECT_TYPE       = 431, // see procType table in scripts\globals\assitional_effects.lua
+    ITEM_SUBEFFECT            = 499, // Animation ID of Spikes and Additional Effects
+    ITEM_ADDEFFECT_DMG        = 500, // Damage of an items Additional Effect or Spikes
+    ITEM_ADDEFFECT_CHANCE     = 501, // Chance of an items Additional Effect or Spikes
+    ITEM_ADDEFFECT_ELEMENT    = 950, // Element of the Additional Effect or Spikes, for resist purposes
+    ITEM_ADDEFFECT_STATUS     = 951, // Status Effect ID to try to apply via Additional Effect or Spikes
+    ITEM_ADDEFFECT_POWER      = 952, // Base Power for effect in MOD_ITEM_ADDEFFECT_STATUS
+    ITEM_ADDEFFECT_DURATION   = 953, // Base Duration for effect in MOD_ITEM_ADDEFFECT_STATUS
 
     GOV_CLEARS = 496, // 4% bonus per Grounds of Valor Page clear
 
@@ -720,6 +720,7 @@ enum class Mod
     ENHANCES_CURSNA_RCVD = 67,  // Potency of "Cursna" effects received
     ENHANCES_CURSNA      = 310, // Used by gear with the "Enhances Cursna" or "Cursna+" attribute
     ENHANCES_HOLYWATER   = 495, // Used by gear with the "Enhances Holy Water" or "Holy Water+" attribute
+    ENHANCES_PROT_SHELL_RCVD  = 977, // Enhances Protect and Shell Effects Received (Binary MOD)
 
     RETALIATION = 414, // Increases damage of Retaliation hits
 
@@ -838,7 +839,7 @@ enum class Mod
 
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.
-    // SPARE = 1001,
+    // SPARE = 1003,
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

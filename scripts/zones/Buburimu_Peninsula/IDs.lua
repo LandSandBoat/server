@@ -26,6 +26,7 @@ zones[xi.zone.BUBURIMU_PENINSULA] =
         FISHING_MESSAGE_OFFSET         = 7253,  -- You can't fish here.
         DIG_THROW_AWAY                 = 7266,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
         FIND_NOTHING                   = 7268,  -- You dig and you dig, but find nothing.
+        AMK_DIGGING_OFFSET             = 7334,  -- You spot some familiar footprints. You are convinced that your moogle friend has been digging in the immediate vicinity.
         SONG_RUNES_DEFAULT             = 7373,  -- An old momument. A melancholy song of two separated lovers is written upon it.
         SONG_RUNES_REQUIRE             = 7387,  -- If only you had <item>, you could jot down the lyrics.
         SONG_RUNES_WRITING             = 7388,  -- You write down the lyrics on the <item>.

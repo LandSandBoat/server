@@ -2,8 +2,8 @@
 -- Horrid Roar (Tiamat, Jormungand, Vrtra, Ouryu)
 -- Dispels all buffs including food. Lowers Enmity.
 -----------------------------------
-require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
+require("scripts/globals/mobskills")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------

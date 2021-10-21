@@ -14,25 +14,29 @@ require('scripts/globals/npc_util')
 
 local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.CONFESSIONS_OF_A_BELLMAKER)
 
-quest.reward = {
+quest.reward =
+{
     item = xi.items.MINSTRELS_DAGGER,
 }
 
-quest.sections = {
-
+quest.sections =
+{
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE
         end,
 
-        [xi.zone.RIVERNE_SITE_A01] = {
-            ['Stone_Monument'] = {
+        [xi.zone.RIVERNE_SITE_A01] =
+        {
+            ['Stone_Monument'] =
+            {
                 onTrigger = function(player, npc)
                     return quest:progressCutscene(101)
                 end,
             },
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [101] = function(player, csid, option, npc)
                     quest:begin(player)
                     npcUtil.giveKeyItem(player, xi.keyItem.ORNAMENTED_SCROLL)
@@ -40,13 +44,16 @@ quest.sections = {
             },
         },
     },
+
     {
         check = function(player, status, vars)
             return status == QUEST_ACCEPTED
         end,
 
-        [xi.zone.RIVERNE_SITE_A01] = {
-            ['Stone_Monument'] = {
+        [xi.zone.RIVERNE_SITE_A01] =
+        {
+            ['Stone_Monument'] =
+            {
                 onTrigger = function(player, npc)
                     if quest:getVar(player, 'Prog') == 2 then
                         return quest:progressCutscene(102)
@@ -58,7 +65,8 @@ quest.sections = {
                 end,
             },
 
-            ['Arcane_Phantasm'] = {
+            ['Arcane_Phantasm'] =
+            {
                 onMobDeath = function(mob, player, isKiller)
                     if quest:getVar(player, 'Prog') == 3 then
                         quest:setVar(player, 'Prog', 4)
@@ -66,18 +74,22 @@ quest.sections = {
                 end,
             },
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [102] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 3)
                 end,
                 [103] = function(player, csid, option, npc)
-                    quest:complete(player)
-                    player:delKeyItem(xi.keyItem.ORNAMENTED_SCROLL)
+                    if quest:complete(player) then
+                        player:delKeyItem(xi.keyItem.ORNAMENTED_SCROLL)
+                    end
                 end,
             },
         },
-        [xi.zone.BASTOK_MARKETS] = {
-            ['Reinberta'] = {
+        [xi.zone.BASTOK_MARKETS] =
+        {
+            ['Reinberta'] =
+            {
                 onTrigger = function(player, npc)
                     if quest:getVar(player, 'Prog') == 0 then
                         return quest:progressEvent(402)
@@ -85,14 +97,17 @@ quest.sections = {
                 end,
             },
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [402] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 1)
                 end,
             },
         },
-        [xi.zone.NORTHERN_SAN_DORIA] = {
-            ['Mevreauche'] = {
+        [xi.zone.NORTHERN_SAN_DORIA] =
+        {
+            ['Mevreauche'] =
+            {
                 onTrigger = function(player, npc)
                     if quest:getVar(player, 'Prog') == 1 then
                         return quest:progressEvent(74)
@@ -100,7 +115,8 @@ quest.sections = {
                 end,
             },
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [74] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 2)
                 end,

@@ -2,8 +2,8 @@
 -- Shadow Spread
 -- Description: A dark shroud renders any nearby targets blinded, asleep, and cursed.
 -----------------------------------
-require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
+require("scripts/globals/mobskills")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
@@ -18,21 +18,21 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local currentMsg = xi.msg.basic.NONE
     local msg = xi.msg.basic.NONE
 
-    msg = MobStatusEffectMove(mob, target, xi.effect.CURSE_I, 25, 0, 300)
+    msg = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.CURSE_I, 25, 0, 300)
 
     if (msg == xi.msg.basic.SKILL_ENFEEB_IS) then
         typeEffect = xi.effect.CURSE_I
         currentMsg = msg
     end
 
-    msg = MobStatusEffectMove(mob, target, xi.effect.BLINDNESS, 20, 0, 180)
+    msg = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BLINDNESS, 20, 0, 180)
 
     if (msg == xi.msg.basic.SKILL_ENFEEB_IS) then
         typeEffect = xi.effect.BLINDNESS
         currentMsg = msg
     end
 
-    msg = MobStatusEffectMove(mob, target, xi.effect.SLEEP_I, 1, 0, 30)
+    msg = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SLEEP_I, 1, 0, 30)
 
     if (msg == xi.msg.basic.SKILL_ENFEEB_IS) then
         typeEffect = xi.effect.SLEEP_I

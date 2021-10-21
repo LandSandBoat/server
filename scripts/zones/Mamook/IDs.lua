@@ -20,6 +20,7 @@ zones[xi.zone.MAMOOK] =
         LOGIN_NUMBER             = 7002, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         FISHING_MESSAGE_OFFSET   = 7050, -- You can't fish here.
         LOGGING_IS_POSSIBLE_HERE = 7535, -- Logging is possible here if you have <item>.
+        IMPENDING_BATTLE         = 8046, -- You feel the rush of impending battle!
         SICKLY_SWEET             = 8645, -- A sickly sweet fragrance pervades the air...
         DRAWS_NEAR               = 8667, -- Something draws near!
         COMMON_SENSE_SURVIVAL    = 9538, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.

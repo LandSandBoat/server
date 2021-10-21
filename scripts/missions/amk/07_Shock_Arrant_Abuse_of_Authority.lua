@@ -4,12 +4,12 @@
 -- !addmission 10 6
 -- Inconspicuous Door : !pos -15 1.300 68 244
 -- Note: KI aquisition is handled in chocobo_digging.lua
--- MOLDY_WORMEATEN_CHEST : !addkeyitem 1144
+-- MOLDY_WORM_EATEN_CHEST : !addkeyitem 1144
 -----------------------------------
-require("scripts/globals/missions")
-require("scripts/globals/interaction/mission")
-require("scripts/globals/zone")
-require("scripts/missions/amk/helpers")
+require('scripts/globals/missions')
+require('scripts/globals/interaction/mission')
+require('scripts/globals/zone')
+require('scripts/missions/amk/helpers')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.AMK, xi.mission.id.amk.SHOCK_ARRANT_ABUSE_OF_AUTHORITY)
@@ -29,7 +29,7 @@ mission.sections =
 
         [xi.zone.UPPER_JEUNO] =
         {
-            ["Inconspicuous_Door"] =
+            ['Inconspicuous_Door'] =
             {
                 -- Reminder
                 onTrigger = function(player, npc)
@@ -50,12 +50,13 @@ mission.sections =
     -- Digging minigame, handled in
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId and missionStatus == 1 and not player:hasKeyItem(xi.ki.MOLDY_WORMEATEN_CHEST)
+            return currentMission == mission.missionId and missionStatus == 1 and
+                not player:hasKeyItem(xi.ki.MOLDY_WORM_EATEN_CHEST)
         end,
 
         [xi.zone.UPPER_JEUNO] =
         {
-            ["Inconspicuous_Door"] =
+            ['Inconspicuous_Door'] =
             {
                 -- Reminder
                 onTrigger = function(player, npc)
@@ -69,12 +70,13 @@ mission.sections =
     -- Got the KI
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId and player:hasKeyItem(xi.ki.MOLDY_WORMEATEN_CHEST)
+            return currentMission == mission.missionId and
+                player:hasKeyItem(xi.ki.MOLDY_WORM_EATEN_CHEST)
         end,
 
         [xi.zone.UPPER_JEUNO] =
         {
-            ["Inconspicuous_Door"] =
+            ['Inconspicuous_Door'] =
             {
                 onTrigger = function(player, npc)
                     return mission:progressEvent(10183)
@@ -85,7 +87,7 @@ mission.sections =
             {
                 [10183] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        player:delKeyItem(xi.ki.MOLDY_WORMEATEN_CHEST)
+                        player:delKeyItem(xi.ki.MOLDY_WORM_EATEN_CHEST)
                     end
                 end,
             },

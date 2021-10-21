@@ -26,13 +26,13 @@
 require('scripts/globals/items')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
-require('scripts/globals/settings')
+require('scripts/settings/main')
 require('scripts/globals/keyitems')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------
-local innerHorutotoRuinsID = require("scripts/zones/Inner_Horutoto_Ruins/IDs")
-local eastSarutabarutaID = require("scripts/zones/East_Sarutabaruta/IDs")
+local innerHorutotoRuinsID = require('scripts/zones/Inner_Horutoto_Ruins/IDs')
+local eastSarutabarutaID   = require('scripts/zones/East_Sarutabaruta/IDs')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_HORUTOTO_RUINS_EXPERIMENT)
@@ -77,7 +77,7 @@ local examineGizmo = function(player, gizmoIndex, successCS, failCS)
 end
 
 local gizmoSuccess = function(player, csid, option, npc)
-    npcUtil.giveKeyItem(player, xi.ki.CRACKED_MANA_ORBS)
+    npcUtil.giveKeyItem(player, xi.ki.CRACKED_MANA_ORB)
     player:setMissionStatus(mission.areaId, 4)
     mission:setVar(player, 'GizmoExamined', 0)
     mission:setVar(player, 'RandomGizmo', 0)
@@ -328,8 +328,9 @@ mission.sections =
             onEventFinish =
             {
                 [94] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.CRACKED_MANA_ORBS)
-                    mission:complete(player)
+                    if mission:complete(player) then
+                        player:delKeyItem(xi.ki.CRACKED_MANA_ORB)
+                    end
                 end,
             },
         },

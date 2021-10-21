@@ -2,7 +2,7 @@
 -- Chimera Ripper
 -----------------------------------
 require("scripts/globals/status")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/automatonweaponskills")
 -----------------------------------
 local ability_object = {}

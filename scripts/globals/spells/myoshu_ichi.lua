@@ -2,7 +2,7 @@
 -- Spell: Myoshu: Ichi
 --     Grants Subtle Blow +10 for Caster
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------

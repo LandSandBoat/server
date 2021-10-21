@@ -6,9 +6,9 @@
 --  Utsusemi/Blink absorb: No
 --  Range: Single Target
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/globals/magic")
 -----------------------------------
 local mobskill_object = {}
@@ -18,14 +18,14 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    MobStatusEffectMove(mob, target, xi.effect.SLOW, 1250, 0, 120)
+    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SLOW, 1250, 0, 120)
 
-    MobStatusEffectMove(mob, target, xi.effect.SLOW, 128, 0, 120)
+    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SLOW, 128, 0, 120)
     local currentHP = target:getHP()
     -- remove all by 5%
     local stab = currentHP * .95
 
-    local dmg = MobFinalAdjustments(stab, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.PIERCING, MOBPARAM_IGNORE_SHADOWS)
+    local dmg = xi.mobskills.mobFinalAdjustments(stab, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.PIERCING, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
 
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.PIERCING)
 

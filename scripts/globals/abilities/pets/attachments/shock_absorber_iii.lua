@@ -1,17 +1,22 @@
 -----------------------------------
 -- Attachment: Shock Absorber III
 -----------------------------------
+require("scripts/globals/automaton")
 require("scripts/globals/status")
 -----------------------------------
 local attachment_object = {}
 
 attachment_object.onEquip = function(pet)
-    pet:setLocalVar("stoneskin", VanadielTime() + 180)
     pet:setLocalVar("shockabsorber", pet:getLocalVar("shockabsorber") + 4)
     pet:addListener("AUTOMATON_ATTACHMENT_CHECK", "ATTACHMENT_SHOCK_ABSORBER_III", function(automaton, target)
         local master = automaton:getMaster()
-        if not automaton:hasRecast(xi.recast.ABILITY, 1946) and master and master:countEffect(xi.effect.EARTH_MANEUVER) > 0 and automaton:getLocalVar("stoneskin") < VanadielTime() then
-            automaton:useMobAbility(1946, automaton)
+
+        if
+            not automaton:hasRecast(xi.recast.ABILITY, xi.automaton.abilities.SHOCK_ABSORBER) and
+            master and
+            master:countEffect(xi.effect.EARTH_MANEUVER) > 0
+        then
+            automaton:useMobAbility(xi.automaton.abilities.SHOCK_ABSORBER, automaton)
         end
     end)
 end

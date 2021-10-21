@@ -7,8 +7,7 @@ require("scripts/globals/teleports")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
-require("scripts/globals/settings")
-require("scripts/globals/common")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/zone")
 -----------------------------------
@@ -1076,6 +1075,46 @@ xi.conquest.overseerOnEventUpdate = function(player, csid, option, guardNation)
     end
 end
 
+-- Additional checks to ensure that the player can actually purchase the item requested from the overseer.
+-- Returns price of the item if valid, -1 if invalid.
+local function canPurchaseItem(player, stock, pRank, guardNation, mOffset)
+    -- Validate stock
+    if stock == nil then
+        return -1
+    end
+
+    -- validate localVar (cheat protection)
+    local boughtItem = player:getLocalVar("boughtItemCP")
+    player:setLocalVar("boughtItemCP", 0)
+    if stock.item ~= boughtItem then
+        player:messageSpecial(mOffset + 61, stock.item) -- "Your rank is too low to purchase the <item>."
+        return -1
+    end
+
+    -- validate rank
+    if stock.rank and pRank < stock.rank then
+        player:messageSpecial(mOffset + 61, stock.item) -- "Your rank is too low to purchase the <item>."
+        return -1
+    end
+
+    -- validate price
+    local price = stock.cp
+    if stock.rank ~= nil and player:getNation() ~= guardNation and guardNation ~= xi.nation.OTHER then
+        if price <= 8000 then
+            price = price * 2
+        else
+            price = price + 8000
+        end
+    end
+
+    if player:getCP() < price then
+        player:messageSpecial(mOffset + 62, 0, 0, stock.item) -- "You do not have enough conquest points to purchase the <item>."
+        return -1
+    end
+
+    return price
+end
+
 xi.conquest.overseerOnEventFinish = function(player, csid, option, guardNation, guardType, guardRegion)
     local pNation  = player:getNation()
     local pRank    = player:getRank(pNation)
@@ -1136,37 +1175,10 @@ xi.conquest.overseerOnEventFinish = function(player, csid, option, guardNation, 
 
     -- PURCHASE CP ITEM
     elseif option >= 32768 and option <= 32944 then
-        -- validate stock
         local stock = getStock(player, guardNation, option)
-        if stock == nil then
-            return
-        end
+        local price = canPurchaseItem(player, stock, pRank, guardNation, mOffset)
 
-        -- validate localVar (cheat protection)
-        local boughtItem = player:getLocalVar("boughtItemCP")
-        player:setLocalVar("boughtItemCP", 0)
-        if stock.item ~= boughtItem then
-            player:messageSpecial(mOffset + 61, stock.item) -- "Your rank is too low to purchase the <item>."
-            return
-        end
-
-        -- validate rank
-        if stock.rank and pRank < stock.rank then
-            player:messageSpecial(mOffset + 61, stock.item) -- "Your rank is too low to purchase the <item>."
-            return
-        end
-
-        -- validate price
-        local price = stock.cp
-        if stock.rank ~= nil and player:getNation() ~= guardNation and guardNation ~= xi.nation.OTHER then
-            if price <= 8000 then
-                price = price * 2
-            else
-                price = price + 8000
-            end
-        end
-        if player:getCP() < price then
-            player:messageSpecial(mOffset + 62, 0, 0, stock.item) -- "You do not have enough conquest points to purchase the <item>."
+        if price < 0 then
             return
         end
 

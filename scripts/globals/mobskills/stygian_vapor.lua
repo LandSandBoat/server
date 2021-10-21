@@ -3,8 +3,8 @@
 --
 -- Description: AoE Powerful plague
 -----------------------------------
-require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
+require("scripts/globals/mobskills")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
 local mobskill_object = {}
@@ -16,7 +16,7 @@ end
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.PLAGUE
 
-    skill:setMsg(MobStatusEffectMove(mob, target, typeEffect, 5, 0, 60))
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 5, 0, 60))
 
 
     return typeEffect

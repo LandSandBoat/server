@@ -7,7 +7,7 @@
 -- Grilau         : !pos -241.987 6.999 57.887 231
 -- Endracion      : !pos -110 1 -34 230
 -- Zantaviat      : !pos 215 0.1 -10 149
--- "!"            : !pos 211 2 -104 149
+-- '!'            : !pos 211 2 -104 149
 -- Papal Chambers : !pos 131 -11 122 231
 -----------------------------------
 require('scripts/globals/keyitems')

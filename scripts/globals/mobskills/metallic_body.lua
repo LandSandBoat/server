@@ -4,8 +4,8 @@
 -- Gives the effect of "Stoneskin."
 -- Type: Magical
 -----------------------------------
-require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
+require("scripts/globals/mobskills")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
 local mobskill_object = {}
@@ -21,7 +21,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
         power = ???  Betting NMs aren't 25 but I don't have data..
     end
     ]]
-    skill:setMsg(MobBuffMove(mob, xi.effect.STONESKIN, power, 0, 300))
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.STONESKIN, power, 0, 300))
     return xi.effect.STONESKIN
 end
 

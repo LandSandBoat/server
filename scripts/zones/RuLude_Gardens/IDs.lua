@@ -25,6 +25,7 @@ zones[xi.zone.RULUDE_GARDENS] =
         LOGIN_CAMPAIGN_UNDERWAY          = 6569,  -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER                     = 6570,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         YOUR_MAXIMUM_LEVEL               = 6585,  -- Your maximum level has been raised to [50/55/60/65/70/75/80/85/90/95/99]!
+        YOU_LEARNED_TRUST                = 6592, -- You learned Trust: <name>!
         MOG_LOCKER_OFFSET                = 6701,  -- Your Mog Locker lease is valid until <timestamp>, kupo.
         REGIME_CANCELED                  = 6860,  -- Current training regime canceled.
         HUNT_ACCEPTED                    = 6878,  -- Hunt accepted!
@@ -62,6 +63,7 @@ zones[xi.zone.RULUDE_GARDENS] =
         RETURN_MAGIAN_ITEM               = 14520, -- The Magian Moogle returns your <item>.
         DELIVERY_CRATE_TEXT              = 14533, -- A sturdy, sizable wooden crate lies before you. To complete an item acquisition trial, trade your retrieved items together with the corresponding inscribed piece of equipment.
         ITEM_NOT_ARMOR_MAGIAN            = 14625, -- Uh, sorry, I'm only in charge of armor. Nande, for that item, you'll have to talk to the other dude.
+        LEARNED_SECRET_TECHNIQUE         = 15078, -- You learned the secret technique of the bushin!
         COMMON_SENSE_SURVIVAL            = 15704, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
         TEAR_IN_FABRIC_OF_SPACE          = 15887, -- There appears to be a tear in the fabric of space...
     },

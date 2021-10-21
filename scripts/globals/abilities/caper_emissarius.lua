@@ -6,7 +6,7 @@
 -- Duration: 00:00:30
 -- target:transferEnmity(player, 99, 20.6)
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------

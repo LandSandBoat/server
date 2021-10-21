@@ -2,8 +2,8 @@
 -- Scream
 -- 15' Reduces MND of players in area of effect.
 -----------------------------------
-require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
+require("scripts/globals/mobskills")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
 local mobskill_object = {}
@@ -14,7 +14,7 @@ end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.MND_DOWN
-    skill:setMsg(MobStatusEffectMove(mob, target, typeEffect, 10, 3, 120))
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 10, 3, 120))
 
     return typeEffect
 end

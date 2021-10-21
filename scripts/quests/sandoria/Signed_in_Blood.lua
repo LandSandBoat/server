@@ -14,12 +14,14 @@ require('scripts/globals/items')
 
 local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SIGNED_IN_BLOOD)
 
-quest.reward = {
+quest.reward =
+{
     item = xi.items.CUNNING_EARRING,
     gil  = 3500,
 }
 
-quest.sections = {
+quest.sections =
+{
     -- Talk to Sobane, she is willing to give you a quest, but she needs to be able to trust that you'll keep your mouth shut.
     -- She wants you to retrieve a Cathedral Tapestry.
     {
@@ -27,14 +29,17 @@ quest.sections = {
             return status == QUEST_AVAILABLE and player:getFameLevel(SANDORIA) >= 3
         end,
 
-        [xi.zone.SOUTHERN_SAN_DORIA] = {
-            ['Sobane'] = {
+        [xi.zone.SOUTHERN_SAN_DORIA] =
+        {
+            ['Sobane'] =
+            {
                 onTrigger = function(player, npc)
                     return quest:progressEvent(732, 0, xi.items.CATHEDRAL_TAPESTRY)
                 end,
             },
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [732] = function(player, csid, option, npc)
                     if option == 1 then
                         quest:begin(player)
@@ -50,8 +55,10 @@ quest.sections = {
             return status == QUEST_ACCEPTED and vars.Prog == 0
         end,
 
-        [xi.zone.SOUTHERN_SAN_DORIA] = {
-            ['Sobane'] = {
+        [xi.zone.SOUTHERN_SAN_DORIA] =
+        {
+            ['Sobane'] =
+            {
                 onTrigger = function(player, npc)
                     return quest:event(733, 0, xi.items.CATHEDRAL_TAPESTRY)
                 end,
@@ -63,7 +70,8 @@ quest.sections = {
                 end,
             },
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [734] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 1)
                     player:confirmTrade()
@@ -79,22 +87,27 @@ quest.sections = {
             return status == QUEST_ACCEPTED and vars.Prog == 1
         end,
 
-        [xi.zone.SOUTHERN_SAN_DORIA] = {
-            ['Sobane'] = {
+        [xi.zone.SOUTHERN_SAN_DORIA] =
+        {
+            ['Sobane'] =
+            {
                 onTrigger = function(player, npc)
                     return quest:event(735)
                 end,
             },
         },
 
-        [xi.zone.SELBINA] = {
-            ['Abelard'] = {
+        [xi.zone.SELBINA] =
+        {
+            ['Abelard'] =
+            {
                 onTrigger = function(player, npc)
                     return quest:progressEvent(1104)
                 end,
             },
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [1104] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 2)
                 end,
@@ -112,16 +125,20 @@ quest.sections = {
             return status == QUEST_ACCEPTED and vars.Prog == 2
         end,
 
-        [xi.zone.SOUTHERN_SAN_DORIA] = {
-            ['Sobane'] = {
+        [xi.zone.SOUTHERN_SAN_DORIA] =
+        {
+            ['Sobane'] =
+            {
                 onTrigger = function(player, npc)
                     return quest:event(735)
                 end,
             },
         },
 
-        [xi.zone.SELBINA] = {
-            ['Abelard'] = {
+        [xi.zone.SELBINA] =
+        {
+            ['Abelard'] =
+            {
                 onTrigger = function(player, npc)
                     if player:hasKeyItem(xi.ki.TORN_OUT_PAGES) then
                         return quest:progressEvent(1106)
@@ -131,7 +148,8 @@ quest.sections = {
                 end,
             },
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [1106] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 3)
                 end,
@@ -145,22 +163,27 @@ quest.sections = {
             return status == QUEST_ACCEPTED and vars.Prog == 3
         end,
 
-        [xi.zone.SELBINA] = {
-            ['Abelard'] = {
+        [xi.zone.SELBINA] =
+        {
+            ['Abelard'] =
+            {
                 onTrigger = function(player, npc)
                     return quest:event(48)
                 end,
             },
         },
 
-        [xi.zone.SOUTHERN_SAN_DORIA] = {
-            ['Sobane'] = {
+        [xi.zone.SOUTHERN_SAN_DORIA] =
+        {
+            ['Sobane'] =
+            {
                 onTrigger = function(player, npc)
                     return quest:progressEvent(736)
                 end,
             },
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [736] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:delKeyItem(xi.ki.TORN_OUT_PAGES)
@@ -178,8 +201,10 @@ quest.sections = {
             return status == QUEST_COMPLETED and player:needToZone()
         end,
 
-        [xi.zone.SOUTHERN_SAN_DORIA] = {
-            ['Sobane'] = {
+        [xi.zone.SOUTHERN_SAN_DORIA] =
+        {
+            ['Sobane'] =
+            {
                 onTrigger = function(player, npc)
                     return quest:progressEvent(737)
                 end,

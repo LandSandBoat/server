@@ -7,8 +7,8 @@
 -- Range: Self
 -- Notes: Hpemde will generally not attempt to use this ability if no erasable effects exist on them.
 -----------------------------------
-require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
+require("scripts/globals/mobskills")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
 local mobskill_object = {}
@@ -29,7 +29,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     mob:eraseAllStatusEffect()
     local typeEffect = xi.effect.REGEN
 
-    skill:setMsg(MobBuffMove(mob, typeEffect, 10, 3, 180))
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, typeEffect, 10, 3, 180))
     return typeEffect
 end
 

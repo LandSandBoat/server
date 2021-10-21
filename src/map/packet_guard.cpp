@@ -98,4 +98,33 @@ namespace PacketGuard
         return timeNowSeconds - lastPacketRecievedTime < ratelimitList[SmallPD_Type];
     }
 
+    void PrintPacketList(CCharEntity* PChar)
+    {
+        // Count packets in queue
+        std::map<std::string, uint32> packetCounterMap;
+        for (auto& entry : PChar->getPacketList())
+        {
+            auto packetStr = fmt::format("0x{:4X}", entry->id());
+            packetCounterMap[packetStr]++;
+        }
+
+        // Sort
+        using pair_t = std::pair<std::string, uint32>;
+        std::vector<pair_t> sortedVec;
+        for (auto& entry : packetCounterMap)
+        {
+            sortedVec.emplace_back(entry);
+        }
+        std::sort(sortedVec.begin(), sortedVec.end(), [](pair_t& a, pair_t& b) { return a.second < b.second; });
+
+        // Print
+        std::string output;
+        output += "\n=======================================\n";
+        for (auto& entry : packetCounterMap)
+        {
+            output += fmt::format("{} : {}\n", entry.first, entry.second);
+        }
+        output += "=======================================\n";
+        ShowInfo(output);
+    }
 } // namespace PacketGuard

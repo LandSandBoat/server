@@ -7,15 +7,16 @@
 -----------------------------------
 require('scripts/globals/items')
 require('scripts/globals/quests')
-require("scripts/globals/titles")
+require('scripts/globals/titles')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/quest')
-local mhauraID = require("scripts/zones/Mhaura/IDs")
 -----------------------------------
+local mhauraID = require('scripts/zones/Mhaura/IDs')
+-----------------------------------
+
 local quest          = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.WAY_OF_THE_COOK)
 local daysPassed     = 0
 local totalHoursLeft = 0
------------------------------------
 
 quest.reward =
 {
@@ -69,14 +70,14 @@ quest.sections =
             ['Rycharde'] =
             {
                 onTrigger = function(player, npc)
-                        daysPassed     = VanadielDayOfTheYear() - quest:getVar(player, "DayStarted")
-                        totalHoursLeft = 72 - (VanadielHour() + daysPassed * 24) + quest:getVar(player, "HourStarted")
+                    daysPassed     = VanadielDayOfTheYear() - quest:getVar(player, "DayStarted")
+                    totalHoursLeft = 72 - (VanadielHour() + daysPassed * 24) + quest:getVar(player, "HourStarted")
 
-                        if totalHoursLeft > 0 then
-                            return quest:event(78, totalHoursLeft) -- You have x hours left.
-                        else
-                            return quest:event(79) -- Not done yet.
-                        end
+                    if totalHoursLeft > 0 then
+                        return quest:event(78, totalHoursLeft) -- You have x hours left.
+                    else
+                        return quest:event(79) -- Not done yet.
+                    end
                 end,
 
                 onTrade = function(player, npc, trade)

@@ -76,9 +76,10 @@ CCharStatsPacket::CCharStatsPacket(CCharEntity* PChar)
 
     // 0x51 = 0x01 on fresh player, 0x03 with 99
     ref<uint8>(0x52) = PChar->getMod(Mod::SUPERIOR_LEVEL);
-    // 0x54 = maximum item level
-    // 0x55 = itemlevel over 99
-    // 0x56 = main weapon item level
+    ref<uint8>(0x54) = charutils::getMaxItemLevel(PChar);        // Maximum Item Level
+    ref<uint8>(0x55) = charutils::getItemLevelDifference(PChar); // itemlevel over 99
+    ref<uint8>(0x56) = charutils::getMainhandItemLevel(PChar);   // Item level of Main Hand weapon
+    ref<uint8>(0x57) = charutils::getRangedItemLevel(PChar);     // Item level of Ranged (Ranged priority, ammo if only)
 
     ref<uint32>(0x58) = (charutils::GetPoints(PChar, "unity_accolades") << 10) | (0x00 << 5 | PChar->profile.unity_leader);
     ref<uint16>(0x5C) = charutils::GetPoints(PChar, "current_accolades") / 1000; // Partial Personal Eval

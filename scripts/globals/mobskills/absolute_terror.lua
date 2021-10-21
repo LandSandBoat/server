@@ -2,8 +2,8 @@
 -- Absolute Terror
 -- Causes Terror, which causes the victim to be stunned for the duration of the effect, this can not be removed.
 -----------------------------------
-require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
+require("scripts/globals/mobskills")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
 local mobskill_object = {}
@@ -34,7 +34,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
         duration = 10
     end
 
-    skill:setMsg(MobStatusEffectMove(mob, target, typeEffect, power, 0, duration))
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, power, 0, duration))
     return typeEffect
 
 end

@@ -7,7 +7,7 @@ local ID = require("scripts/zones/Promyvion-Mea/IDs")
 require("scripts/globals/promyvion")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
 local zone_object = {}

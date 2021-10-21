@@ -2,8 +2,8 @@
 -- Sand Shield
 -- Enhances defense.
 -----------------------------------
-require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
+require("scripts/globals/mobskills")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
 local mobskill_object = {}
@@ -14,7 +14,7 @@ end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.DEFENSE_BOOST
-    skill:setMsg(MobBuffMove(mob, typeEffect, 50, 0, 60))
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, typeEffect, 50, 0, 60))
     return typeEffect
 end
 

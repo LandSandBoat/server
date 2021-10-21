@@ -7,8 +7,8 @@
 -- Range: Melee
 -- Notes: Target has to be facing user
 -----------------------------------
-require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
+require("scripts/globals/mobskills")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
 local mobskill_object = {}
@@ -21,7 +21,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.TERROR
     local duration = 5
 
-    skill:setMsg(MobGazeMove(mob, target, typeEffect, 1, 0, duration))
+    skill:setMsg(xi.mobskills.mobGazeMove(mob, target, typeEffect, 1, 0, duration))
 
     return typeEffect
 end

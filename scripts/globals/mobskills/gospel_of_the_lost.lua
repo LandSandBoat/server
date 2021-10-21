@@ -10,8 +10,8 @@
 -- "Bask in my glory..."
 -- "Mine existence...stretches into infinity..."
 -----------------------------------
-require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
+require("scripts/globals/mobskills")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
@@ -31,7 +31,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     -- Didn't see any msg for the erase in youtube vids.
     skill:setMsg(xi.msg.basic.SELF_HEAL)
     -- Assuming its a 4-6% heal based on its max HP and numbers quoted on wiki.
-    return MobHealMove(mob, mob:getMaxHP() * (math.random(4, 6) * 0.01))
+    return xi.mobskills.mobHealMove(mob, mob:getMaxHP() * (math.random(4, 6) * 0.01))
 end
 
 return mobskill_object

@@ -61,10 +61,10 @@
 #include "lua_zone.h"
 
 /************************************************************************
- *                                                                       *
- *                                                                       *
- *                                                                       *
- ************************************************************************/
+*                                                                       *
+*                                                                       *
+*                                                                       *
+************************************************************************/
 
 class CAbility;
 class CSpell;
@@ -80,6 +80,7 @@ class CStatusEffect;
 class CTradeContainer;
 class CItemPuppet;
 class CItemWeapon;
+class CItemEquipment;
 class CItemFurnishing;
 class CInstance;
 class CWeaponSkill;
@@ -287,8 +288,10 @@ namespace luautils
     int32  UpdateServerMessage();                                  // update server message, first modify in conf and update
     auto   GetServerVersion() -> sol::table;
 
-    int32 OnAdditionalEffect(CBattleEntity* PAttacker, CBattleEntity* PDefender, CItemWeapon* PItem, actionTarget_t* Action, int32 damage); // for items with additional effects
-    int32 OnSpikesDamage(CBattleEntity* PDefender, CBattleEntity* PAttacker, actionTarget_t* Action, uint32 damage);                         // for mobs with spikes
+    int32 OnAdditionalEffect(CBattleEntity* PAttacker, CBattleEntity* PDefender, actionTarget_t* Action, int32 damage);                                      // for mobs with additional effects
+    int32 OnSpikesDamage(CBattleEntity* PDefender, CBattleEntity* PAttacker, actionTarget_t* Action, int32 damage);                                          // for mobs with spikes
+    int32 additionalEffectAttack(CBattleEntity* PAttacker, CBattleEntity* PDefender, CItemWeapon* PItem, actionTarget_t* Action, int32 baseAttackDamage);    // for items with additional effects
+    int32 additionalEffectSpikes(CBattleEntity* PDefender, CBattleEntity* PAttacker, CItemEquipment* PItem, actionTarget_t* Action, int32 baseAttackDamage); // for armor with spikes
 
     auto NearLocation(sol::table const& table, float radius, float theta) -> sol::table;
 

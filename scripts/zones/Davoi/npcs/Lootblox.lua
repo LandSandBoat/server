@@ -6,7 +6,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Davoi/IDs")
 require("scripts/globals/keyitems")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/dynamis")
 
 local TIMELESS_HOURGLASS = 4236
@@ -21,7 +21,7 @@ local shop = {
     28, 1458, -- Mammoth Tusk
 }
 local maps = {
-    [xi.ki.MAP_OF_DYNAMIS_SANDORIA]   = 10000,
+    [xi.ki.MAP_OF_DYNAMIS_SAN_DORIA]   = 10000,
     [xi.ki.MAP_OF_DYNAMIS_BASTOK]     = 10000,
     [xi.ki.MAP_OF_DYNAMIS_WINDURST]   = 10000,
     [xi.ki.MAP_OF_DYNAMIS_JEUNO]      = 10000,

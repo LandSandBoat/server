@@ -7,8 +7,8 @@
 -- Range: Unknown
 -- Notes: Used only by certain Notorious Monsters. Strong xi.effect.
 -----------------------------------
-require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
+require("scripts/globals/mobskills")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
@@ -23,8 +23,8 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local mDefDown = false
     local typeEffect = nil
 
-    defDown = MobStatusEffectMove(mob, target, xi.effect.DEFENSE_DOWN, 50, 0, 120)
-    mDefDown = MobStatusEffectMove(mob, target, xi.effect.MAGIC_DEF_DOWN, 50, 0, 120)
+    defDown = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.DEFENSE_DOWN, 50, 0, 120)
+    mDefDown = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.MAGIC_DEF_DOWN, 50, 0, 120)
 
     skill:setMsg(xi.msg.basic.SKILL_ENFEEB_IS)
 

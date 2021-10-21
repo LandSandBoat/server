@@ -8,18 +8,18 @@
 -- qm2 (Konschtat) : !pos -709 2 102 108
 -- qm2 (Zi'Tah)    : !pos 639 -1 -151 121
 -----------------------------------
-require("scripts/globals/items")
-require("scripts/globals/keyitems")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/settings")
-require("scripts/globals/titles")
-require("scripts/globals/zone")
+require('scripts/globals/items')
+require('scripts/globals/keyitems')
+require('scripts/globals/npc_util')
+require('scripts/globals/quests')
+require('scripts/settings/main')
+require('scripts/globals/titles')
+require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local konschtatID = require("scripts/zones/Konschtat_Highlands/IDs")
-local norgID      = require("scripts/zones/Norg/IDs")
-local zitahID     = require("scripts/zones/The_Sanctuary_of_ZiTah/IDs")
+local konschtatID = require('scripts/zones/Konschtat_Highlands/IDs')
+local norgID      = require('scripts/zones/Norg/IDs')
+local zitahID     = require('scripts/zones/The_Sanctuary_of_ZiTah/IDs')
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.FORGE_YOUR_DESTINY)

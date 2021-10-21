@@ -3,8 +3,8 @@
 --  Description:  Applies AoE drown 15hp/sec
 --  Notes: Ignores shadows, 10' AoE radius
 -----------------------------------
-require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
+require("scripts/globals/mobskills")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
 local mobskill_object = {}
@@ -16,7 +16,7 @@ end
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.DROWN
 
-    skill:setMsg(MobStatusEffectMove(mob, target, typeEffect, 15, 0, 120))
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 15, 0, 120))
     return typeEffect
 end
 

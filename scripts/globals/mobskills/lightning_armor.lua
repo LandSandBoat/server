@@ -1,8 +1,8 @@
 -----------------------------------
 --
 -----------------------------------
-require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
+require("scripts/globals/mobskills")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
 local mobskill_object = {}
@@ -16,7 +16,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local duration = 180
     local typeEffect = xi.effect.SHOCK_SPIKES
 
-    skill:setMsg(MobBuffMove(mob, typeEffect, power, 0, duration))
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, typeEffect, power, 0, duration))
 
     return typeEffect
 end

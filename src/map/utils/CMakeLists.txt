@@ -25,6 +25,8 @@ set(SOURCES
     jailutils.h
     mobutils.cpp
     mobutils.h
+    moduleutils.cpp
+    moduleutils.h
     petutils.cpp
     petutils.h
     puppetutils.cpp

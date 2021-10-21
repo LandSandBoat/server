@@ -822,7 +822,7 @@ namespace charutils
         PChar->health.hp = zoneutils::IsResidentialArea(PChar) ? PChar->GetMaxHP() : HP;
         PChar->health.mp = zoneutils::IsResidentialArea(PChar) ? PChar->GetMaxMP() : MP;
         PChar->UpdateHealth();
-        PChar->m_event.EventID = luautils::OnZoneIn(PChar);
+        PChar->currentEvent->eventId = luautils::OnZoneIn(PChar);
         luautils::OnGameIn(PChar, zoning == 1);
     }
 
@@ -1770,6 +1770,7 @@ namespace charutils
         }
 
         if ((PChar->m_EquipBlock & (1 << equipSlotID)) || !(PItem->getJobs() & (1 << (PChar->GetMJob() - 1))) ||
+            (PItem->getSuperiorLevel() > PChar->getMod(Mod::SUPERIOR_LEVEL)) ||
             (PItem->getReqLvl() > (map_config.disable_gear_scaling ? PChar->GetMLevel() : PChar->jobs.job[PChar->GetMJob()])))
         {
             return false;
@@ -2035,6 +2036,7 @@ namespace charutils
         {
             if (PItem->getJobs() & (1 << (i - 1)) && PItem->getReqLvl() <= PChar->jobs.job[i])
             {
+                // TODO: Check for Su level for the player's job, and apply to the condition.
                 return true;
             }
         }
@@ -3288,7 +3290,7 @@ namespace charutils
      ************************************************************************/
     EMobDifficulty CheckMob(uint8 charlvl, uint8 moblvl)
     {
-        uint32 baseExp = GetRealExp(charlvl, moblvl);
+        uint32 baseExp = GetBaseExp(charlvl, moblvl);
 
         if (baseExp >= 400)
         {
@@ -3314,7 +3316,7 @@ namespace charutils
         {
             return EMobDifficulty::EasyPrey;
         }
-        if (baseExp >= 14)
+        if (baseExp >= 1 && moblvl > 55)
         {
             return EMobDifficulty::IncrediblyEasyPrey;
         }
@@ -3324,15 +3326,15 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Узнаем реальное количество опыта, который персонаж получит с цели    *
+     *  Unmodified EXP that the character will receive from the target       *
      *                                                                       *
      ************************************************************************/
 
-    uint32 GetRealExp(uint8 charlvl, uint8 moblvl)
+    uint32 GetBaseExp(uint8 charlvl, uint8 moblvl)
     {
         const int32 levelDif = moblvl - charlvl + 44;
 
-        if ((charlvl > 0) && (charlvl < 100))
+        if (charlvl > 0 && charlvl < 100)
         {
             return g_ExpTable[std::clamp(levelDif, 0, ExpTableRowCount - 1)][(charlvl - 1) / 5];
         }
@@ -3348,7 +3350,7 @@ namespace charutils
 
     uint32 GetExpNEXTLevel(uint8 charlvl)
     {
-        if ((charlvl > 0) && (charlvl < 100))
+        if (charlvl > 0 && charlvl < 100)
         {
             return g_ExpPerLevel[charlvl];
         }
@@ -3509,7 +3511,7 @@ namespace charutils
             const uint8 memberlevel = PMember->GetMLevel();
 
             EMobDifficulty mobCheck = CheckMob(maxlevel, moblevel);
-            float          exp      = (float)GetRealExp(maxlevel, moblevel);
+            float          exp      = (float)GetBaseExp(maxlevel, moblevel);
 
             if (mobCheck > EMobDifficulty::TooWeak)
             {
@@ -3937,7 +3939,7 @@ namespace charutils
             {
                 // Base Capacity Point formula derived from the table located at:
                 // https://ffxiclopedia.fandom.com/wiki/Job_Points#Capacity_Points
-                capacityPoints = 0.0089 * (levelDiff ^ 3) + 0.0533 * (levelDiff ^ 2) + 3.7439 * levelDiff + 89.7;
+                capacityPoints = 0.0089 * std::pow(levelDiff, 3) + 0.0533 * std::pow(levelDiff, 2) + 3.7439 * levelDiff + 89.7;
 
                 if (PMember->capacityChain.chainTime > gettick() || PMember->capacityChain.chainTime == 0)
                 {
@@ -5134,7 +5136,21 @@ namespace charutils
 
     uint16 AvatarPerpetuationReduction(CCharEntity* PChar)
     {
-        uint16 reduction = PChar->getMod(Mod::PERPETUATION_REDUCTION);
+        // REMEMBER:
+        // Elements start at 0 and the 0th element is ELEMENT_NONE
+        // Weather starts at 0 and the 0th weather is WEATHER_NONE
+        // Days start at 0 and the 0th day is Firesday
+        // Affinity starts at 0 and the 0th affinity is FIRE_AFFINITY
+        // petElement and petElementIdx exist to bridge these gaps here!
+
+        auto*   PPet             = static_cast<CPetEntity*>(PChar->PPet);
+        ELEMENT petElement       = static_cast<ELEMENT>(PPet->m_Element);
+        uint8   petElementIdx    = static_cast<uint8>(petElement) - 1;
+        ELEMENT dayElement       = battleutils::GetDayElement();
+        WEATHER weather          = battleutils::GetWeather(PChar, false);
+        int16   perpReduction    = PChar->getMod(Mod::PERPETUATION_REDUCTION);
+        int16   dayReduction     = PChar->getMod(Mod::DAY_REDUCTION); // As seen on Summoner's Doublet (Depending On Day: Avatar perpetuation cost -3) etc.
+        int16   weatherReduction = PChar->getMod(Mod::WEATHER_REDUCTION); // As seen on Summoner's Horn (Weather: Avatar perpetuation cost -3) etc.
 
         static const Mod strong[8] = { Mod::FIRE_AFFINITY_PERP, Mod::ICE_AFFINITY_PERP, Mod::WIND_AFFINITY_PERP, Mod::EARTH_AFFINITY_PERP,
                                        Mod::THUNDER_AFFINITY_PERP, Mod::WATER_AFFINITY_PERP, Mod::LIGHT_AFFINITY_PERP, Mod::DARK_AFFINITY_PERP };
@@ -5142,25 +5158,22 @@ namespace charutils
         static const WEATHER weatherStrong[8] = { WEATHER_HOT_SPELL, WEATHER_SNOW, WEATHER_WIND, WEATHER_DUST_STORM,
                                                   WEATHER_THUNDER, WEATHER_RAIN, WEATHER_AURORAS, WEATHER_GLOOM };
 
-        uint8 element = ((CPetEntity*)(PChar->PPet))->m_Element - 1;
+        // If you wear a fire staff, you have +2 perp affinity reduction for fire, but -2 for ice as mods.
+        perpReduction += PChar->getMod(strong[petElementIdx]);
 
-        XI_DEBUG_BREAK_IF(element > 7);
-
-        reduction = reduction + PChar->getMod(strong[element]);
-
-        if (battleutils::GetDayElement() == element)
+        // Compare day element and pet element (both ELEMENT, both 0-based)
+        if (dayElement == petElement)
         {
-            reduction = reduction + PChar->getMod(Mod::DAY_REDUCTION);
+            perpReduction += dayReduction;
         }
 
-        WEATHER weather = battleutils::GetWeather(PChar, false);
-
-        if (weather == weatherStrong[element] || weather == weatherStrong[element] + 1)
+        // TODO: #793 Whats the deal with the +1 to weather result here?
+        if (weather == weatherStrong[petElementIdx] || weather == weatherStrong[petElementIdx] + 1)
         {
-            reduction = reduction + PChar->getMod(Mod::WEATHER_REDUCTION);
+            perpReduction += weatherReduction;
         }
 
-        return reduction;
+        return static_cast<uint16>(perpReduction);
     }
 
     /************************************************************************
@@ -5921,5 +5934,85 @@ namespace charutils
         {
             ShowError("Error writing char history for: '%s'", PChar->name.c_str());
         }
+    }
+
+    uint8 getMaxItemLevel(CCharEntity* PChar)
+    {
+        uint8 maxItemLevel = 0;
+
+        for (uint8 slotID = 0; slotID < 16; ++slotID)
+        {
+            CItemEquipment* PItem = PChar->getEquip((SLOTTYPE)slotID);
+
+            if (PItem && PItem->getILvl() > maxItemLevel)
+            {
+                maxItemLevel = PItem->getILvl();
+            }
+        }
+
+        return maxItemLevel;
+    }
+
+    uint8 getItemLevelDifference(CCharEntity* PChar)
+    {
+        float itemLevelDiff = 0;
+        uint8 highestItem   = 0;
+
+        // Find the highest iLevel in weapons, this is 50% of the iLvl diff value
+        for (uint8 slotID = 0; slotID < 4; ++slotID)
+        {
+            CItemEquipment* PItem = PChar->getEquip((SLOTTYPE)slotID);
+
+            if (PItem && PItem->getILvl() > highestItem)
+            {
+                highestItem = PItem->getILvl();
+            }
+        }
+
+        if (highestItem > 99)
+        {
+            itemLevelDiff += (highestItem - 99) / 2;
+        }
+
+        for (uint8 slotID = 4; slotID < 9; ++slotID)
+        {
+            CItemEquipment* PItem = PChar->getEquip((SLOTTYPE)slotID);
+
+            if (PItem && PItem->getILvl() > 99)
+            {
+                itemLevelDiff += (PItem->getILvl() - 99) / 10;
+            }
+        }
+
+        return floor(itemLevelDiff);
+    }
+
+    uint8 getMainhandItemLevel(CCharEntity* PChar)
+    {
+        CItemEquipment* PItem = PChar->getEquip((SLOTTYPE)SLOTTYPE::SLOT_MAIN);
+
+        if (PItem)
+        {
+            return PItem->getILvl();
+        }
+
+        return 0;
+    }
+
+    // Return Ranged Weapon Item Level; If ranged slot exists use that, else use Ammo
+    uint8 getRangedItemLevel(CCharEntity* PChar)
+    {
+        CItemEquipment* PItem = nullptr;
+
+        if (PItem = PChar->getEquip((SLOTTYPE)SLOTTYPE::SLOT_RANGED))
+        {
+            return PItem->getILvl();
+        }
+        else if (PItem = PChar->getEquip((SLOTTYPE)SLOTTYPE::SLOT_AMMO))
+        {
+            return PItem->getILvl();
+        }
+
+        return 0;
     }
 }; // namespace charutils

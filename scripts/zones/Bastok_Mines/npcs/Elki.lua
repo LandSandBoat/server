@@ -5,7 +5,7 @@
 -----------------------------------
 require("scripts/globals/quests")
 require("scripts/globals/keyitems")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/titles")
 local ID = require("scripts/zones/Bastok_Mines/IDs")
 -----------------------------------
@@ -43,8 +43,8 @@ entity.onEventFinish = function(player, csid, option)
 
     if (csid == 41 and option == 0) then
         player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.HEARTS_OF_MYTHRIL)
-        player:addKeyItem(xi.ki.BOUQUETS_FOR_THE_PIONEERS)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.BOUQUETS_FOR_THE_PIONEERS)
+        player:addKeyItem(xi.ki.BOUQUET_FOR_THE_PIONEERS)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.BOUQUET_FOR_THE_PIONEERS)
     elseif (csid == 42) then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 12840)

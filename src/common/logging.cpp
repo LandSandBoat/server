@@ -35,7 +35,7 @@ uint32 filterMask = 0;
 
 namespace logging
 {
-    void InitializeLog(std::string serverName, std::string logFile)
+    void InitializeLog(std::string serverName, std::string logFile, bool appendDate)
     {
         TracyZoneScoped;
 
@@ -44,11 +44,18 @@ namespace logging
 
         // Sink to console
         auto stdout_sink = std::make_shared<spdlog::sinks::stdout_color_sink_mt>();
+        std::vector<spdlog::sink_ptr> sinks{ stdout_sink };
 
-        // Sink to files, creating new files at midnight
-        auto daily_sink = std::make_shared<spdlog::sinks::daily_file_sink_mt>(logFile, 0, 00, false, 0);
-
-        std::vector<spdlog::sink_ptr> sinks{ stdout_sink, daily_sink };
+        // Daily Sink, creating new files at midnight
+        if (appendDate)
+        {
+            sinks.push_back(std::make_shared<spdlog::sinks::daily_file_sink_mt>(logFile, 0, 00, false, 0));
+        }
+        // Basic sink, sink to file with name specified in main routine
+        else
+        {
+            sinks.push_back(std::make_shared<spdlog::sinks::basic_file_sink_mt>(logFile));
+        }
 
         // https://github.com/gabime/spdlog/wiki/3.-Custom-formatting
         // [date time:ms][server name][log level][logger name] message (func_name:func_line)

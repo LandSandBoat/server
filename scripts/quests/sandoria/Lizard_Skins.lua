@@ -4,12 +4,12 @@
 -- Log ID: 0, Quest ID: 15
 -- Hanaa Punaa : !pos -179.726 -8.8 27.574 230
 -----------------------------------
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/status")
-require("scripts/globals/titles")
-require("scripts/globals/zone")
-require("scripts/globals/interaction/quest")
+require('scripts/globals/npc_util')
+require('scripts/globals/quests')
+require('scripts/globals/status')
+require('scripts/globals/titles')
+require('scripts/globals/zone')
+require('scripts/globals/interaction/quest')
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.LIZARD_SKINS)
@@ -32,7 +32,8 @@ quest.sections =
                 player:hasCompletedQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_SEAMSTRESS)
         end,
 
-        [xi.zone.SOUTHERN_SAN_DORIA] = {
+        [xi.zone.SOUTHERN_SAN_DORIA] =
+        {
             ['Hanaa_Punaa'] =
             {
                 onTrigger = function(player, npc)
@@ -70,7 +71,8 @@ quest.sections =
             return status == QUEST_ACCEPTED
         end,
 
-        [xi.zone.SOUTHERN_SAN_DORIA] = {
+        [xi.zone.SOUTHERN_SAN_DORIA] =
+        {
             ['Hanaa_Punaa'] = quest:progressEvent(560),
         },
     },
@@ -82,7 +84,8 @@ quest.sections =
             return status ~= QUEST_AVAILABLE
         end,
 
-        [xi.zone.SOUTHERN_SAN_DORIA] = {
+        [xi.zone.SOUTHERN_SAN_DORIA] =
+        {
             ['Hanaa_Punaa'] =
             {
                 onTrade = function(player, npc, trade)
@@ -114,7 +117,8 @@ quest.sections =
             return status == QUEST_COMPLETED and player:getFameLevel(SANDORIA) < 3
         end,
 
-        [xi.zone.SOUTHERN_SAN_DORIA] = {
+        [xi.zone.SOUTHERN_SAN_DORIA] =
+        {
             ['Hanaa_Punaa'] = quest:event(591):replaceDefault()
         },
     },

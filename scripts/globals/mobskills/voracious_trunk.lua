@@ -2,8 +2,8 @@
 -- Voracious Trunk
 -- Steal one effect
 -----------------------------------
-require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
+require("scripts/globals/mobskills")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
 local mobskill_object = {}
@@ -14,7 +14,7 @@ end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
-    skill:setMsg(MobDrainStatusEffectMove(mob, target))
+    skill:setMsg(xi.mobskills.mobDrainStatusEffectMove(mob, target))
 
     return 1
 end

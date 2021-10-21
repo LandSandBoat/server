@@ -2,8 +2,8 @@
 -- Intimidate
 -- Inflicts slow on targets in a fan-shaped area of effect.
 -----------------------------------
-require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
+require("scripts/globals/mobskills")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
 local mobskill_object = {}
@@ -15,7 +15,7 @@ end
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.SLOW
 
-    skill:setMsg(MobGazeMove(mob, target, typeEffect, 1250, 0, 120))
+    skill:setMsg(xi.mobskills.mobGazeMove(mob, target, typeEffect, 1250, 0, 120))
     return typeEffect
 end
 

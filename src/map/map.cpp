@@ -59,6 +59,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "utils/instanceutils.h"
 #include "utils/itemutils.h"
 #include "utils/mobutils.h"
+#include "utils/moduleutils.h"
 #include "utils/petutils.h"
 #include "utils/trustutils.h"
 #include "utils/zoneutils.h"
@@ -80,8 +81,8 @@ void operator delete(void* ptr) noexcept
 
 const char* MAP_CONF_FILENAME = nullptr;
 
-int8* g_PBuff   = nullptr; // глобальный буфер обмена пакетами
-int8* PTempBuff = nullptr; // временный  буфер обмена пакетами
+int8* g_PBuff   = nullptr; // Global packet clipboard
+int8* PTempBuff = nullptr; // Temporary packet clipboard
 
 thread_local Sql_t* SqlHandle = nullptr;
 
@@ -178,6 +179,14 @@ int32 do_init(int32 argc, char** argv)
         }
     }
 
+    FILE* SETTINGS_MAIN = fopen((const char*)"./scripts/settings/main.lua", "r");
+    if (SETTINGS_MAIN == nullptr)
+    {
+        ShowError("FAIL. See /scripts/settings/README.md immediately.");
+        do_abort();
+    }
+    fclose(SETTINGS_MAIN);
+
     MAP_CONF_FILENAME = "./conf/map.conf";
 
     srand((uint32)time(nullptr));
@@ -200,7 +209,7 @@ int32 do_init(int32 argc, char** argv)
     }
     Sql_Keepalive(SqlHandle);
 
-    // отчищаем таблицу сессий при старте сервера (временное решение, т.к. в кластере это не будет работать)
+    // We clear the session table at server start (temporary solution)
     Sql_Query(SqlHandle, "DELETE FROM accounts_sessions WHERE IF(%u = 0 AND %u = 0, true, server_addr = %u AND server_port = %u);", map_ip.s_addr, map_port,
               map_ip.s_addr, map_port);
 
@@ -215,8 +224,8 @@ int32 do_init(int32 argc, char** argv)
     ShowStatus("do_init: loading plants");
     gardenutils::Initialize();
 
-    // нужно будет написать один метод для инициализации всех данных в battleutils
-    // и один метод для освобождения этих данных
+    // One method to initialize all data in battleutils
+    // and one method to free this data
 
     ShowStatus("do_init: loading spells");
     spell::LoadSpellList();
@@ -262,6 +271,8 @@ int32 do_init(int32 argc, char** argv)
 
     g_PBuff   = new int8[map_config.buffer_size + 20];
     PTempBuff = new int8[map_config.buffer_size + 20];
+
+    moduleutils::LoadModules();
 
     PacketGuard::Init();
 
@@ -400,8 +411,8 @@ int32 do_sockets(fd_set* rfd, duration next)
 
             if (recv_parse(g_PBuff, &size, &from, map_session_data) != -1)
             {
-                // если предыдущий пакет был потерян, то мы не собираем новый,
-                // а отправляем предыдущий пакет повторно
+                // If the previous package was lost, then we do not collect a new one,
+                // and send the previous packet again
                 if (!parse(g_PBuff, &size, &from, map_session_data))
                 {
                     send_parse(g_PBuff, &size, &from, map_session_data);
@@ -585,8 +596,8 @@ int32 recv_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
 int32 parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t* map_session_data)
 {
     TracyZoneScoped;
-    // начало обработки входящего пакета
 
+    // Start processing the incoming packet
     int8* PacketData_Begin = &buff[FFXI_HEADER_SIZE];
     int8* PacketData_End   = &buff[*buffsize];
 
@@ -688,24 +699,29 @@ int32 parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*
 int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t* map_session_data)
 {
     TracyZoneScoped;
-    // Модификация заголовка исходящего пакета
-    // Суть преобразований:
-    //  - отправить клиенту номер последнего полученного от него пакета
-    //  - присвоить исходящему пакету номер последнего отправленного клиенту пакета +1
-    //  - записать текущее время отправки пакета
+    // Modify the header of the outgoing packet
+    // The essence of the transformations:
+    // - send the client the number of the last packet received from him
+    // - assign the outgoing packet the number of the last packet sent to the client +1
+    // - write down the current time of sending the packet
 
     ref<uint16>(buff, 0) = map_session_data->server_packet_id;
     ref<uint16>(buff, 2) = map_session_data->client_packet_id;
 
-    // сохранение текущего времени (32 BIT!)
+    // save the current time (32 BIT!)
     ref<uint32>(buff, 8) = (uint32)time(nullptr);
 
-    // собираем большой пакет, состоящий из нескольких маленьких
+    // build a large package, consisting of several small packets
     CCharEntity*  PChar = map_session_data->PChar;
     CBasicPacket* PSmallPacket;
+
     uint32        PacketSize  = UINT32_MAX;
     auto          PacketCount = PChar->getPacketCount();
     uint8         packets     = 0;
+
+#ifdef LOG_OUTGOING_PACKETS
+    PacketGuard::PrintPacketList(PChar);
+#endif
 
     do
     {
@@ -729,13 +745,14 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
 
             PacketCount /= 2;
 
-            //Сжимаем данные без учета заголовка
-            //Возвращаемый размер в 8 раз больше реальных данных
+            // Compress the data without regard to the header
+            // The returned size is 8 times the real data
             PacketSize = zlib_compress(buff + FFXI_HEADER_SIZE, (uint32)(*buffsize - FFXI_HEADER_SIZE), PTempBuff, map_config.buffer_size);
 
             // handle compression error
             if (PacketSize == static_cast<uint32>(-1))
             {
+                ShowError("zlib compression error");
                 continue;
             }
 
@@ -761,7 +778,7 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
     } while (PacketSize == static_cast<uint32>(-1));
     PChar->erasePackets(packets);
 
-    //Запись размера данных без учета заголовка
+    // Record data size excluding header
     uint8 hash[16];
     md5((uint8*)PTempBuff, hash, PacketSize);
     memcpy(PTempBuff + PacketSize, hash, 16);
@@ -769,10 +786,10 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
 
     if (PacketSize > map_config.buffer_size + 20)
     {
-        ShowFatalError("%Memory manager: PTempBuff is overflowed (%u)", PacketSize);
+        ShowFatalError("Memory manager: PTempBuff is overflowed (%u)", PacketSize);
     }
 
-    // making total packet
+    // Making total packet
     memcpy(buff + FFXI_HEADER_SIZE, PTempBuff, PacketSize);
 
     uint32 CypherSize = (PacketSize / 4) & -2;
@@ -784,12 +801,12 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
         blowfish_encipher((uint32*)(buff) + j + 7, (uint32*)(buff) + j + 8, pbfkey->P, pbfkey->S[0]);
     }
 
-    // контролируем размер отправляемого пакета. в случае,
-    // если его размер превышает 1400 байт (размер данных + 42 байта IP заголовок),
-    // то клиент игнорирует пакет и возвращает сообщение о его потере
+    // Control the size of the sent packet.
+    // if its size exceeds 1400 bytes (data size + 42 bytes IP header),
+    // then the client ignores the packet and returns a message about its loss
 
-    // в случае возникновения подобной ситуации выводим предупреждующее сообщение и
-    // уменьшаем размер BuffMaxSize с шагом в 4 байта до ее устранения (вручную)
+    // in case of a similar situation, display a warning message and
+    // decrease the size of BuffMaxSize in 4 byte increments until it is removed (manually)
 
     *buffsize = PacketSize + FFXI_HEADER_SIZE;
 
@@ -798,8 +815,8 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
 
 /************************************************************************
  *                                                                       *
- *  Таймер для завершения сессии (без таймера мы этого сделать не можем, *
- *  т.к. сессия продолжает использоваться в do_sockets)                  *
+ *  A timer to end the session (we cannot do this without a timer,       *
+ *  since session continues to be used in do_sockets)                    *
  *                                                                       *
  ************************************************************************/
 
@@ -869,7 +886,7 @@ int32 map_cleanup(time_point tick, CTaskMgr::CTask* PTask)
                 {
                     if (map_session_data->shuttingDown == 0)
                     {
-                        //[Alliance] fix to stop server crashing:
+                        // [Alliance] fix to stop server crashing:
                         // if a party within an alliance only has 1 char (that char will be party leader)
                         // if char then disconnects we need to tell the server about the alliance change
                         if (PChar->PParty != nullptr && PChar->PParty->m_PAlliance != nullptr && PChar->PParty->GetLeader() == PChar)
@@ -1012,18 +1029,21 @@ int32 map_config_default()
     map_config.capacity_rate               = 1.0f;
     map_config.level_sync_enable           = false;
     map_config.disable_gear_scaling        = false;
+    map_config.ws_points_base              = 1;
+    map_config.ws_points_skillchain        = 1;
     map_config.all_jobs_widescan           = true;
     map_config.speed_mod                   = 0;
     map_config.mount_speed_mod             = 0;
     map_config.mob_speed_mod               = 0;
     map_config.skillup_chance_multiplier   = 1.0f;
     map_config.craft_chance_multiplier     = 1.0f;
-    map_config.skillup_amount_multiplier   = 1;
-    map_config.craft_amount_multiplier     = 1;
+    map_config.skillup_amount_multiplier   = 1.0f;
+    map_config.craft_amount_multiplier     = 1.0f;
     map_config.garden_day_matters          = false;
     map_config.garden_moonphase_matters    = false;
     map_config.garden_pot_matters          = false;
     map_config.garden_mh_aura_matters      = false;
+    map_config.craft_modern_system         = 1;
     map_config.craft_common_cap            = 700;
     map_config.craft_specialization_points = 400;
     map_config.mob_tp_multiplier           = 1.0f;
@@ -1331,6 +1351,14 @@ int32 map_config_read(const int8* cfgName)
         {
             map_config.disable_gear_scaling = atoi(w2);
         }
+        else if (strcmp(w1, "ws_points_base") == 0)
+        {
+            map_config.ws_points_base = atoi(w2);
+        }
+        else if (strcmp(w1, "ws_points_skillchain") == 0)
+        {
+            map_config.ws_points_skillchain = atoi(w2);
+        }
         else if (strcmp(w1, "all_jobs_widescan") == 0)
         {
             map_config.all_jobs_widescan = atoi(w2);
@@ -1362,6 +1390,10 @@ int32 map_config_read(const int8* cfgName)
         else if (strcmp(w1, "craft_amount_multiplier") == 0)
         {
             map_config.craft_amount_multiplier = (float)atof(w2);
+        }
+        else if (strcmp(w1, "craft_modern_system") == 0)
+        {
+            map_config.craft_modern_system = atof(w2);
         }
         else if (strcmp(w1, "craft_common_cap") == 0)
         {
@@ -1554,6 +1586,7 @@ void log_init(int argc, char** argv)
 #endif
 #endif
     bool defaultname = true;
+    bool appendDate {};
     for (int i = 1; i < argc; i++)
     {
         if (strcmp(argv[i], "--ip") == 0 && defaultname)
@@ -1569,6 +1602,11 @@ void log_init(int argc, char** argv)
             defaultname = false;
             logFile     = argv[i + 1];
         }
+
+        if (strcmp(argv[i], "--append-date") == 0)
+        {
+            appendDate = true;
     }
-    logging::InitializeLog("map", logFile);
+}
+    logging::InitializeLog("map", logFile, appendDate);
 }

@@ -8,10 +8,10 @@
 -- PIECE_OF_RUGGED_TREE_BARK : !addkeyitem 1137
 -- SAVORY_LAMB_ROAST         : !addkeyitem 1138
 -----------------------------------
-require("scripts/globals/keyitems")
-require("scripts/globals/missions")
-require("scripts/globals/interaction/mission")
-require("scripts/globals/zone")
+require('scripts/globals/keyitems')
+require('scripts/globals/missions')
+require('scripts/globals/interaction/mission')
+require('scripts/globals/zone')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.AMK, xi.mission.id.amk.WELCOME_TO_MY_DECREPIT_DOMICILE)
@@ -31,7 +31,7 @@ mission.sections =
 
         [xi.zone.UPPER_JEUNO] =
         {
-            ["Inconspicuous_Door"] =
+            ['Inconspicuous_Door'] =
             {
                 onTrigger = function(player, npc)
                     if player:hasKeyItem(xi.ki.STURDY_METAL_STRIP) then
@@ -60,7 +60,7 @@ mission.sections =
 
         [xi.zone.UPPER_JEUNO] =
         {
-            ["Inconspicuous_Door"] =
+            ['Inconspicuous_Door'] =
             {
                 onTrigger = function(player, npc)
                     if player:hasKeyItem(xi.ki.PIECE_OF_RUGGED_TREE_BARK) then
@@ -89,7 +89,7 @@ mission.sections =
 
         [xi.zone.UPPER_JEUNO] =
         {
-            ["Inconspicuous_Door"] =
+            ['Inconspicuous_Door'] =
             {
                 onTrigger = function(player, npc)
                     if player:hasKeyItem(xi.ki.SAVORY_LAMB_ROAST) then
@@ -103,8 +103,9 @@ mission.sections =
             onEventFinish =
             {
                 [10181] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.SAVORY_LAMB_ROAST)
-                    mission:complete(player)
+                    if mission:complete(player) then
+                        player:delKeyItem(xi.ki.SAVORY_LAMB_ROAST)
+                    end
                 end,
             },
         },

@@ -82,7 +82,7 @@ entity.onMobSpawn = function(mob)
     local strafe_trait = master:getMod(xi.mod.WYVERN_BREATH_MACC)
     local strafe_effect_merit = master:getMerit(xi.merit.STRAFE_EFFECT)
 
-    mob:addMod(xi.mod.DMG, -40)
+    mob:addMod(xi.mod.DMG, -4000)
     mob:addMod(xi.mod.MACC, strafe_trait + strafe_effect_merit)
 
     if master:getMod(xi.mod.WYVERN_SUBJOB_TRAITS) > 0 then
