@@ -1,7 +1,5 @@
 -----------------------------------
---
 -- Zone: Full_Moon_Fountain (170)
---
 -----------------------------------
 local ID = require("scripts/zones/Full_Moon_Fountain/IDs")
 require("scripts/globals/conquest")
@@ -16,14 +14,15 @@ end
 
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
+
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(-260.136, 2.09, -325.702, 188)
     end
-    if player:getCurrentMission(WINDURST) == xi.mission.id.windurst.FULL_MOON_FOUNTAIN and player:getMissionStatus(player:getNation()) == 3 then
-        cs = 50
-    elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.DOLL_OF_THE_DEAD and player:getMissionStatus(player:getNation()) == 7 then
+
+    if player:getCurrentMission(WINDURST) == xi.mission.id.windurst.DOLL_OF_THE_DEAD and player:getMissionStatus(player:getNation()) == 7 then
         cs = 61
     end
+
     return cs
 end
 
@@ -44,10 +43,7 @@ zone_object.onEventUpdate = function(player, csid, option)
 end
 
 zone_object.onEventFinish = function(player, csid, option)
-
-    if csid == 50 then
-        finishMissionTimeline(player, 3, csid, option)
-    elseif csid == 61 then
+    if csid == 61 then
         player:addTitle(xi.title.GUIDING_STAR)
         finishMissionTimeline(player, 3, csid, option)
     end

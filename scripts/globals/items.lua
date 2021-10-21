@@ -433,6 +433,7 @@ xi.items =
     CHAIN_CHOKER                    = 13083,
     TIGER_STOLE                     = 13119,
     BEAST_COLLAR                    = 13121,
+    ASHURA_NECKLACE                 = 13134,
     PROMISE_BADGE                   = 13135,
     STAR_NECKLACE                   = 13136,
     WILLPOWER_TORQUE                = 13174,

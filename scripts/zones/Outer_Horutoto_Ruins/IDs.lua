@@ -11,6 +11,7 @@ zones[xi.zone.OUTER_HORUTOTO_RUINS] =
     text =
     {
         ORB_ALREADY_PLACED       = 0,     -- A dark Mana Orb is already placed here.
+        GUARDIAN_BLOCKING_WAY    = 14,    -- A GUARDIAN IS BLOCKING YOUR WAY!
         CONQUEST_BASE            = 15,    -- Tallying conquest results...
         DEVICE_NOT_WORKING       = 188,   -- The device is not working.
         SYS_OVERLOAD             = 197,   -- Warning! Sys...verload! Enterin...fety mode. ID eras...d.
