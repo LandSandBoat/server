@@ -2,7 +2,7 @@
 Sol refactoring, with lua object caching.
 
 ### What was/is the problem?
-Multiple problems, explained in detail [here](https://github.com/topaz-next/topaz/wiki/Sol-Refactor).
+Multiple problems, explained in detail [here](https://github.com/LandSandBoat/server/wiki/Sol-Refactor).
 
 In short:
 - Our use of Lua relied on constantly reading files from this disk, which was very slow.
@@ -17,7 +17,7 @@ Only Sol was considered.
 
 - After the refactor, Lua panics resulting in crashes were eliminated entirely (unless you abuse LuaJIT very badly).
 - Misusing bindings is caught before any native code is executed, eliminating crashes in bindings.
-- As mentioned in the [refactor notes](https://github.com/topaz-next/topaz/wiki/Sol-Refactor), performance is through the roof.
+- As mentioned in the [refactor notes](https://github.com/LandSandBoat/server/wiki/Sol-Refactor), performance is through the roof.
 - Writing complex bindings is safe and easy.
 
 ### Misc Notes
