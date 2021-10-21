@@ -50,7 +50,7 @@ quest.sections =
                                 daysPassed     = VanadielDayOfTheYear() - quest:getVar(player, "DayStarted")
                                 totalHoursLeft = 24 - (VanadielHour() + daysPassed * 24) + quest:getVar(player, "HourStarted")
                                 if totalHoursLeft > 0 then
-                                    return quest:progressEvent(430 0, xi.ki.OLD_RING) -- Quest starting event.
+                                    return quest:progressEvent(430, 0, xi.ki.OLD_RING) -- Quest starting event.
                                 else
                                     return quest:progressEvent(432, 0, xi.ki.OLD_RING) -- Instant Quest Complete.
                                 end

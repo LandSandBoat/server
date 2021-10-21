@@ -58,7 +58,7 @@ quest.sections =
                     if npcUtil.giveItem(player, xi.items.BOUNCER_CLUB) then
                         quest:setVar(player, 'Reward', 1)
                         player:needToZone(true)
-                    end            
+                    end
                 end,
                 [496] = function(player, csid, option, npc)
                     quest:begin(player)

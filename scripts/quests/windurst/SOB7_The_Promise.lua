@@ -60,7 +60,7 @@ quest.sections =
                         return quest:event()
                     end
                 end,
-            }
+            },
             ['Papo-Hopo'] =
             {
                 onTrigger = function(player, npc)
@@ -68,7 +68,7 @@ quest.sections =
                         return quest:event()
                     end
                 end,
-            }
+            },
             ['Pichichi'] =
             {
                 onTrigger = function(player, npc)
@@ -76,7 +76,7 @@ quest.sections =
                         return quest:event()
                     end
                 end,
-            }
+            },
             ['Pyo_Nzon'] =
             {
                 onTrigger = function(player, npc)
@@ -84,7 +84,7 @@ quest.sections =
                         return quest:event()
                     end
                 end,
-            }
+            },
             ['Yafa_Yaa'] =
             {
                 onTrigger = function(player, npc)
@@ -92,7 +92,7 @@ quest.sections =
                         return quest:event()
                     end
                 end,
-            }
+            },
 
             onEventFinish =
             {
@@ -153,7 +153,7 @@ quest.sections =
                         return quest:event(528)
                     end
                 end,
-            }
+            },
             ['Papo-Hopo'] =
             {
                 onTrigger = function(player, npc)
@@ -166,7 +166,7 @@ quest.sections =
                         return quest:event(525)
                     end
                 end,
-            }
+            },
             ['Pichichi'] =
             {
                 onTrigger = function(player, npc)
@@ -177,7 +177,7 @@ quest.sections =
                         return quest:event(530)
                     end
                 end,
-            }
+            },
             ['Pyo_Nzon'] =
             {
                 onTrigger = function(player, npc)
@@ -190,7 +190,7 @@ quest.sections =
                         return quest:event()
                     end
                 end,
-            }
+            },
             ['Shanruru'] =
             {
                 onTrigger = function(player, npc)
@@ -201,7 +201,7 @@ quest.sections =
                         return quest:event(529)
                     end
                 end,
-            }
+            },
             ['Yafa_Yaa'] =
             {
                 onTrigger = function(player, npc)
@@ -214,7 +214,7 @@ quest.sections =
                         return quest:event(526)
                     end
                 end,
-            }
+            },
 
             onEventFinish =
             {
@@ -292,7 +292,7 @@ quest.sections =
                         return quest:event(590)
                     end
                 end,
-            }
+            },
             ['Kohlo-Lakolo'] =
             {
                 onTrigger = function(player, npc)
@@ -321,7 +321,7 @@ quest.sections =
                         return quest:event(587)
                     end
                 end,
-            }
+            },
             ['Pichichi'] =
             {
                 onTrigger = function(player, npc)
@@ -331,7 +331,7 @@ quest.sections =
                         return quest:event(586)
                     end
                 end,
-            }
+            },
             ['Pyo_Nzon'] =
             {
                 onTrigger = function(player, npc)
@@ -341,7 +341,7 @@ quest.sections =
                         return quest:event(589)
                     end
                 end,
-            }
+            },
             ['Shanruru'] =
             {
                 onTrigger = function(player, npc)
@@ -351,7 +351,7 @@ quest.sections =
                         return quest:event(591)
                     end
                 end,
-            }
+            },
             ['Yafa_Yaa'] =
             {
                 onTrigger = function(player, npc)
@@ -361,7 +361,7 @@ quest.sections =
                         return quest:event(588)
                     end
                 end,
-            }
+            },
 
             onEventFinish =
             {
