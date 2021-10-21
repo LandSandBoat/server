@@ -744,6 +744,7 @@ xi.mobskills.mobGazeMove = function(mob, target, typeEffect, power, tick, durati
     if
         target:isFacing(mob) and
         mob:isInfront(target) and
+        not target:hasStatusEffect(xi.effect.FLASH) and
         not target:hasStatusEffect(xi.effect.BLINDNESS)
     then
         return xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, power, tick, duration)
