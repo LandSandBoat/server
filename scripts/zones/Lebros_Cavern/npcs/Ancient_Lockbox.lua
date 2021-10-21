@@ -8,7 +8,9 @@ require("scripts/globals/assault")
 require("scripts/globals/items")
 -----------------------------------
 
-onTrigger = function(player, npc)
+local entity = {}
+
+entity.onTrigger = function(player, npc)
     local qItem =
     {
         [xi.assaultUtil.mission.EXCAVATION_DUTY] =
@@ -95,8 +97,10 @@ onTrigger = function(player, npc)
     xi.appraisalUtil.assaultChestTrigger(player, npc, qItem[area], regItem[area])
 end
 
-onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity
