@@ -304,7 +304,7 @@ quest.sections =
                         end
                     else
                         local random = math.random(0, 1)
-                        if random = 0
+                        if random == 0
                             return quest:event(544)
                         else
                             return quest:event(585)
