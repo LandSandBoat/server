@@ -2809,9 +2809,9 @@ INSERT INTO `mob_groups` VALUES (36,2582,55,'Martial_Maestro_Megomak',0,128,0,80
 -- Periqia (Zone 56)
 -- ------------------------------------------------------------
 
-INSERT INTO `mob_groups` VALUES (1,254,56,'Arrapago_Crab',0,128,0,0,0,77,78,0);
-INSERT INTO `mob_groups` VALUES (2,942,56,'Debaucher',0,128,0,0,0,77,78,0);
-INSERT INTO `mob_groups` VALUES (3,3119,56,'Periqia_Pugil',0,128,0,0,0,77,78,0);
+INSERT INTO `mob_groups` VALUES (1,254,56,'Arrapago_Crab',0,128,0,0,0,72,74,0);
+INSERT INTO `mob_groups` VALUES (2,942,56,'Debaucher',0,128,0,0,0,77,79,0);
+INSERT INTO `mob_groups` VALUES (3,3119,56,'Periqia_Pugil',0,128,0,0,0,75,77,0);
 INSERT INTO `mob_groups` VALUES (4,3236,56,'Putrid_Immortal_Guard',0,128,0,0,0,77,78,0);
 INSERT INTO `mob_groups` VALUES (5,360,56,'Batteilant_Bhoot',0,128,0,0,9999,77,78,0);
 INSERT INTO `mob_groups` VALUES (6,905,56,'Darkling_Draugar',0,128,0,0,9999,77,78,0);
@@ -2840,6 +2840,7 @@ INSERT INTO `mob_groups` VALUES (28,977,56,'Demonic_Rod',0,128,0,0,0,76,78,0);
 INSERT INTO `mob_groups` VALUES (29,2425,56,'Living_Staves',0,128,0,0,0,76,78,0);
 INSERT INTO `mob_groups` VALUES (30,863,56,'Cursed_Axe',0,128,0,0,0,76,78,0);
 INSERT INTO `mob_groups` VALUES (31,2481,56,'Magic_Shields',0,128,0,0,0,76,78,0);
+INSERT INTO `mob_groups` VALUES (32,7038,56,'Excaliace',0,128,0,0,0,75,75,1);
 
 INSERT INTO `mob_groups` VALUES (1956,2591,56,'Maymun_09',0,128,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (1957,2592,56,'Maymun_21',0,128,0,0,0,1,1,0);

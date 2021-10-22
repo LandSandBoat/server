@@ -43,22 +43,22 @@ entity.onEventFinish = function(player, csid, option)
             local item = bit.rshift(option, 14)
             local items =
             {
-                [1]  = {itemid = xi.items.INSOMNIA_EARRING, price = 3000},
-                [2]  = {itemid = xi.items.HALE_RING, price = 5000},
-                [3]  = {itemid = xi.items.CHIVALROUS_CHAIN, price = 8000},
-                [4]  = {itemid = xi.items.PRECISE_BELT, price = 10000},
+                [1]  = {itemid = xi.items.INSOMNIA_EARRING,  price = 3000},
+                [2]  = {itemid = xi.items.HALE_RING,         price = 5000},
+                [3]  = {itemid = xi.items.CHIVALROUS_CHAIN,  price = 8000},
+                [4]  = {itemid = xi.items.PRECISE_BELT,      price = 10000},
                 [5]  = {itemid = xi.items.INTENSIFYING_CAPE, price = 10000},
-                [6]  = {itemid = xi.itens.IMPERIAL_POLE, price = 15000},
-                [7]  = {itemid = xi.items.DOOMBRINGER, price = 15000},
-                [8]  = {itemid = xi.items.SAYOSAMONJI, price = 15000},
-                [9]  = {itemid = xi.items.AMIR_KORAZIN, price = 20000},
+                [6]  = {itemid = xi.itens.IMPERIAL_POLE,     price = 15000},
+                [7]  = {itemid = xi.items.DOOMBRINGER,       price = 15000},
+                [8]  = {itemid = xi.items.SAYOSAMONJI,       price = 15000},
+                [9]  = {itemid = xi.items.AMIR_KORAZIN,      price = 20000},
                 [10] = {itemid = xi.items.PAHLUWAN_DASTANAS, price = 20000},
-                [11] = {itemid = xi.items.YIGIT_CRACKOWS, price = 20000},
+                [11] = {itemid = xi.items.YIGIT_CRACKOWS,    price = 20000},
             }
 
             local choice = items[item]
             if choice and npcUtil.giveItem(player, choice.itemid) then
-                player:delCurrency(xi.assaultUtil.assaultArea.LEBROS_CAVERN, choice.price)
+                player:delAssaultPoint(xi.assaultUtil.assaultArea.LEBROS_CAVERN, choice.price)
             end
         end
     end
