@@ -6,6 +6,7 @@ require("scripts/globals/assault")
 require("scripts/globals/instance")
 require("scripts/globals/items")
 require("scripts/globals/zone")
+require("scripts/zones/Periqia/mobs/Excaliace")
 -----------------------------------
 local instance_object = {}
 

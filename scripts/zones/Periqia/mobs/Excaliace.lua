@@ -6,7 +6,7 @@ local ID = require("scripts/zones/Periqia/IDs")
 require("scripts/globals/pathfind")
 require("scripts/globals/utils")
 -----------------------------------
-
+local entity = {}
 local path =
 {
     [0] =
@@ -252,7 +252,7 @@ local path =
     },
 }
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:addMobMod(xi.mobMod.NO_ROAM, 1)
     mob:setLocalVar("topRoomsOption", math.random(2,3))
     mob:setLocalVar("middleRoomsOption", math.random(4,5))
@@ -266,7 +266,7 @@ function onMobSpawn(mob)
     mob:setLocalVar("pathPoint", 1)
 end
 
-function onTrack(mob)
+entity.onTrack = function(mob)
     local instance = mob:getInstance()
     local chars = instance:getChars()
     local mobs = instance:getMobs()
@@ -298,7 +298,7 @@ function onTrack(mob)
     local rangeClose = false
     local rangeStop = false
     local rangeFollow = false
-    
+
     if pathProgressMask > 0 and missionActive == 1 then
 -- Check for nearby mobs
         for _, enemys in pairs(mobs) do
@@ -348,7 +348,7 @@ function onTrack(mob)
             if mob:checkDistance(players) < 10 and players:isFacing(mob) then -- check if at least 1 player is tailing the NPC
                 rangeFollow = true
             end
-            
+
             if stopTimer + 5 <= os.time() then
                 mob:setLocalVar("stopTimer", os.time())
                 if rangeStop then
@@ -558,3 +558,5 @@ function onTrack(mob)
         end
     end
 end
+
+return entity
