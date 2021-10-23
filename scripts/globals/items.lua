@@ -161,6 +161,7 @@ xi.items =
     RANCOR_FLAME                    = 1139,
     FLAME_OF_CRIMSON_RANCOR         = 1140,
     FLAME_OF_BLUE_RANCOR            = 1141,
+    CURSED_KEY                      = 1143,
     SHOALWEED                       = 1148,
     STAR_SPINEL                     = 1149,
     LUMP_OF_ORIENTAL_STEEL          = 1151,
