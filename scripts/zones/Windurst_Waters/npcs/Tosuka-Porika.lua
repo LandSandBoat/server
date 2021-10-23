@@ -19,7 +19,6 @@ end
 
 entity.onTrigger = function(player, npc)
     local currentMission = player:getCurrentMission(WINDURST)
-    local missionStatus = player:getMissionStatus(player:getNation())
 
     -- The Jester Who'd Be King (Windurst 8-2)
     if
@@ -32,16 +31,6 @@ entity.onTrigger = function(player, npc)
     -- The Road Forks (CoP 3-3)
     elseif player:getCurrentMission(COP) == xi.mission.id.cop.THE_ROAD_FORKS and player:getCharVar("MEMORIES_OF_A_MAIDEN_Status") == 10 then
         player:startEvent(875)
-
-    -- The Sixth Ministry (Windurst 7-1)
-    elseif currentMission == xi.mission.id.windurst.THE_SIXTH_MINISTRY then
-        if missionStatus == 0 then
-            player:startEvent(715, 0, xi.ki.OPTISTERY_RING)
-        elseif missionStatus == 1 then
-            player:startEvent(716, 0, xi.ki.OPTISTERY_RING)
-        elseif missionStatus == 2 then
-            player:startEvent(724)
-        end
 
     -- Hat in Hand
     elseif player:hasKeyItem(xi.ki.NEW_MODEL_HAT) and not utils.mask.getBit(player:getCharVar("QuestHatInHand_var"), 5) then
@@ -77,12 +66,6 @@ entity.onEventFinish = function(player, csid, option)
         if player:hasKeyItem(xi.ki.RHINOSTERY_RING) and player:hasKeyItem(xi.ki.AURASTERY_RING) then
             player:setMissionStatus(player:getNation(), 2)
         end
-
-    -- The Sixth Ministry (Windurst 7-1)
-    elseif csid == 715 and npcUtil.giveKeyItem(player, xi.ki.OPTISTERY_RING) then
-        player:setMissionStatus(player:getNation(), 1)
-    elseif csid == 724 then
-        finishMissionTimeline(player, 3, csid, option)
 
     -- Hat in Hand
     elseif csid == 55 then  -- Show Off Hat
