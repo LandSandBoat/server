@@ -38,10 +38,8 @@ entity.onTrigger = function(player, npc)
     local needToZone = player:needToZone()
     local pFame = player:getFameLevel(WINDURST)
 
-    if (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.TO_EACH_HIS_OWN_RIGHT and player:getMissionStatus(player:getNation()) == 2) then
-        player:startEvent(147)
 -- Begin Making Amends Section
-    elseif (MakingAmends == QUEST_AVAILABLE and pFame >= 2) then
+    if (MakingAmends == QUEST_AVAILABLE and pFame >= 2) then
             player:startEvent(274, 0, 937) -- MAKING AMENDS + ANIMAL GLUE: Quest Start
     elseif (MakingAmends == QUEST_ACCEPTED) then
             player:startEvent(275, 0, 937) -- MAKING AMENDS + ANIMAL GLUE: Quest Objective Reminder
@@ -64,9 +62,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 147) then
-        player:setMissionStatus(player:getNation(), 3)
-    elseif (csid == 274 and option == 1) then
+    if (csid == 274 and option == 1) then
             player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_AMENDS)
     elseif (csid == 277) then
             player:addGil(xi.settings.GIL_RATE*1500)

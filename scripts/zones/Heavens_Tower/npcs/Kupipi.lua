@@ -47,7 +47,6 @@ end
 
 entity.onTrigger = function(player, npc)
     local pNation = player:getNation()
-    local currentMission = player:getCurrentMission(pNation)
     local missionStatus = player:getMissionStatus(player:getNation())
 
     local TrustSandoria = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TRUST_SANDORIA)
@@ -70,11 +69,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(438)
         player:setLocalVar("KupipiTrustChatFlag", 1)
     elseif player:getNation() == xi.nation.WINDURST then
-        if currentMission == xi.mission.id.windurst.TO_EACH_HIS_OWN_RIGHT and missionStatus == 0 then
-            player:startEvent(103, 0, 0, xi.ki.STARWAY_STAIRWAY_BAUBLE)
-        elseif currentMission == xi.mission.id.windurst.TO_EACH_HIS_OWN_RIGHT and missionStatus == 1 then
-            player:startEvent(104)
-        elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_JESTER_WHO_D_BE_KING and missionStatus == 3 then
+        if player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_JESTER_WHO_D_BE_KING and missionStatus == 3 then
             player:startEvent(326)
         elseif player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.WRITTEN_IN_THE_STARS) and player:getCharVar("OwesPortalCharm") == 1 then
             player:startEvent(293) -- Kupipi repays your favor
@@ -94,11 +89,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 103 then
-        player:setMissionStatus(player:getNation(), 1)
-        player:addKeyItem(xi.ki.STARWAY_STAIRWAY_BAUBLE)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.STARWAY_STAIRWAY_BAUBLE)
-    elseif csid == 291 then -- All condition met, grant Portal Charm
+    if csid == 291 then -- All condition met, grant Portal Charm
         player:tradeComplete()
         player:addKeyItem(xi.ki.PORTAL_CHARM)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.PORTAL_CHARM)
