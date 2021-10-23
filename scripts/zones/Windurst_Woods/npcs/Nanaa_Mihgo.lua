@@ -84,11 +84,6 @@ entity.onTrigger = function(player, npc)
     then
         player:startEvent(732)
 
-    -- CRYING OVER ONIONS (Optional dialogue)
-    -- Should be available at all times, variable gets increased to remove it from her logic to not block anything
-    elseif player:getCharVar("CryingOverOnions") == 1 then
-        player:startEvent(598)
-
     -- TRUST
     elseif
         player:hasKeyItem(xi.ki.WINDURST_TRUST_PERMIT) and
@@ -179,12 +174,8 @@ entity.onEventFinish = function(player, csid, option)
     if csid == 732 then
         player:setCharVar("WildcatWindurst", utils.mask.setBit(player:getCharVar("WildcatWindurst"), 4, true))
 
-    -- CRYING OVER ONIONS
-    elseif csid == 598 then
-        player:setCharVar("CryingOverOnions", 2)
-
     -- THE TENSHODO SHOWDOWN
-    elseif (csid == 496) then
+    elseif csid == 496 then
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_TENSHODO_SHOWDOWN)
         player:setCharVar("theTenshodoShowdownCS", 1)
         npcUtil.giveKeyItem(player, xi.ki.LETTER_FROM_THE_TENSHODO)

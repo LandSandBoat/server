@@ -23,22 +23,8 @@ entity.onTrigger = function(player, npc)
     local carbuncleDebacle = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CARBUNCLE_DEBACLE)
     local iCanHearARainbow = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.I_CAN_HEAR_A_RAINBOW)
 
-    -- KNOW ONE'S ONIONS
-    if player:getCharVar("KnowOnesOnions") == 1 then
-        player:startEvent(288, 0, 4387)
-
-    -- ONION RINGS
-    elseif player:getCharVar("OnionRings") == 1 then
-        player:startEvent(289)
-
-    -- WILD CARD
-    elseif player:getCharVar("WildCard") == 1 then
-        player:startEvent(386)
-    elseif player:hasKeyItem(xi.ki.JOKER_CARD) then
-        player:startEvent(387, 0, xi.ki.JOKER_CARD)
-
     -- I CAN HEAR A RAINBOW
-    elseif iCanHearARainbow == QUEST_AVAILABLE and player:getMainLvl() >= 30 and player:hasItem(1125) then
+    if iCanHearARainbow == QUEST_AVAILABLE and player:getMainLvl() >= 30 and player:hasItem(1125) then
         player:startEvent(384, 1125, 1125, 1125, 1125, 1125, 1125, 1125, 1125)
     elseif iCanHearARainbow == QUEST_ACCEPTED then
         player:startEvent(385, 1125, 1125, 1125, 1125, 1125, 1125, 1125, 1125)
@@ -85,28 +71,8 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    -- KNOW ONE'S ONIONS
-    if csid == 288 then
-        player:setCharVar("KnowOnesOnions", 2)
-
-    -- ONION RINGS
-    elseif csid == 289 and npcUtil.completeQuest(player, WINDURST, xi.quest.id.windurst.ONION_RINGS, {
-        item = 17029,
-        title = xi.title.STAR_ONION_BRIGADIER,
-        fame = 10,
-        var = {"OnionRingsTime", "OnionRings"}
-    }) then
-        player:delKeyItem(xi.ki.OLD_RING)
-
-    -- WILD CARD
-    elseif csid == 386 then
-        player:setCharVar("WildCard", 2)
-    elseif csid == 387 then
-        player:delKeyItem(xi.ki.JOKER_CARD)
-        npcUtil.giveCurrency(player, 'gil', 8000)
-
     -- I CAN HEAR A RAINBOW
-    elseif csid == 384 then
+    if csid == 384 then
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.I_CAN_HEAR_A_RAINBOW)
 
     -- THE PUPPET MASTER
