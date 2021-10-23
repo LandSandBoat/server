@@ -481,6 +481,7 @@ xi.items =
     BENEDIGHT_HOSE                  = 16364,
     LYNX_BAGHNAKHS                  = 16409,
     PATAS                           = 16419,
+    RUSTY_DAGGER                    = 16447,
     MINSTRELS_DAGGER                = 16487,
     ASPIR_KNIFE                     = 16509,
     BRONZE_SWORD                    = 16535,
