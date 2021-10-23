@@ -87,18 +87,22 @@ entity.onTrigger = function(player, npc)
     elseif (waterWayToGo == QUEST_AVAILABLE and overnightDelivery == QUEST_COMPLETED and pfame >= 3) then
         player:startEvent(352, 0, 4351)
 
-    elseif (FoodForThought == QUEST_AVAILABLE and OhbiruFood == 0) then
-        player:startEvent(308) -- Hungry; mentions the experiment. First step in quest for this NPC.
-        player:setCharVar("Ohbiru_Food_var", 1)
-    elseif (FoodForThought == QUEST_AVAILABLE and OhbiruFood == 1) then
-        player:startEvent(309) -- Hungry. The NPC complains of being hungry before the quest is active.
-    elseif (FoodForThought == QUEST_ACCEPTED and OhbiruFood < 2) then
-        player:startEvent(316, 0, 4493, 624, 4408) -- Gives Order
-        player:setCharVar("Ohbiru_Food_var", 2)
-    elseif (FoodForThought == QUEST_ACCEPTED and OhbiruFood == 2) then
-        player:startEvent(317, 0, 4493, 624, 4408) -- Repeats Order
-    elseif (FoodForThought == QUEST_ACCEPTED and OhbiruFood == 3) then
-        player:startEvent(324) -- Reminds player to check on friends if he has been given his food.
+    elseif FoodForThought == QUEST_AVAILABLE then
+        if OhbiruFood == 0 then
+            player:startEvent(308) -- Hungry; mentions the experiment. First step in quest for this NPC.
+            player:setCharVar("Ohbiru_Food_var", 1)
+        elseif OhbiruFood == 1 then
+            player:startEvent(309) -- Hungry. The NPC complains of being hungry before the quest is active.
+        end
+    elseif FoodForThought == QUEST_ACCEPTED then
+        if OhbiruFood < 2 then
+            player:startEvent(316, 0, 4493, 624, 4408) -- Gives Order
+            player:setCharVar("Ohbiru_Food_var", 2)
+        elseif OhbiruFood == 2 then
+            player:startEvent(317, 0, 4493, 624, 4408) -- Repeats Order
+        elseif OhbiruFood == 3 then
+            player:startEvent(324) -- Reminds player to check on friends if he has been given his food.
+        end
     elseif (FoodForThought == QUEST_COMPLETED and needToZone == true) then
         player:startEvent(344) -- Post Food for Thought Dialogue
     elseif (overnightDelivery == QUEST_COMPLETED and pfame < 6) then
