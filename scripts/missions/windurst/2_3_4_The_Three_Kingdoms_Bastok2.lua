@@ -15,7 +15,7 @@ require('scripts/globals/titles')
 require('scripts/globals/zone')
 -----------------------------------
 
-local mission = Mission:new(xi.mission.log_id.WINDURST, xi.mission.id.sandoria.THE_THREE_KINGDOMS_BASTOK2)
+local mission = Mission:new(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK2)
 
 mission.reward = {}
 
