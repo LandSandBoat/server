@@ -888,7 +888,7 @@ function finishMissionTimeline(player, guard, csid, option)
 
     if (nation == xi.nation.WINDURST) then
         local guardlist = {114, 111, 78, 93}
-        if (csid == guardlist[guard] and option ~= 1073741824 and option ~= 31 and option > 5) then -- last part of conditional is for converted missions, increment for each converted
+        if (csid == guardlist[guard] and option ~= 1073741824 and option ~= 31 and option > 9) then -- last part of conditional is for converted missions, increment for each converted
             timeline = {option, {guardlist[guard], option}, {guardlist[guard], option}, {guardlist[guard], option}, {guardlist[guard], option}, {{1}, {2}}}
         else
             timeline =

@@ -231,6 +231,18 @@ mission.sections =
             },
         },
     },
+
+    {
+        check = function(player, currentMission, missionStatus, vars)
+            return player:hasCompletedMission(mission.areaId, mission.missionId) and
+                player:getNation() == xi.nation.WINDURST
+        end,
+
+        [xi.zone.NORTHERN_SAN_DORIA] =
+        {
+            ['Kasaroro'] = mission:event(604):replaceDefault(),
+        },
+    },
 }
 
 return mission

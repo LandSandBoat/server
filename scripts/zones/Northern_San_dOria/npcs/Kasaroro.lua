@@ -5,53 +5,18 @@
 -- Involved in Mission: 2-3 Windurst
 -- !pos -72 -3 34 231
 -----------------------------------
-local ID = require("scripts/zones/Northern_San_dOria/IDs")
-require("scripts/globals/keyitems")
-require("scripts/globals/missions")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local pNation = player:getNation()
-    if pNation == xi.nation.WINDURST then
-        local currentMission = player:getCurrentMission(pNation)
-        local missionStatus = player:getMissionStatus(player:getNation())
-
-        if currentMission == xi.mission.id.windurst.THE_THREE_KINGDOMS_SANDORIA then
-            if (missionStatus == 3) then
-                player:showText(npc, ID.text.KASARORO_DIALOG)
-            elseif (missionStatus == 4) then
-                player:startEvent(549)
-            elseif (missionStatus == 5) then
-                player:startEvent(550) -- done with Sandy first path, now go to bastok
-            end
-        elseif (player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_THREE_KINGDOMS)) then
-            player:startEvent(604)
-        else
-            player:startEvent(548)
-        end
-    else
-        player:startEvent(548)
-    end
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 550) then
-        player:addMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_THREE_KINGDOMS)
-        player:setMissionStatus(player:getNation(), 6)
-    elseif (csid == 551) then
-        player:addMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_THREE_KINGDOMS)
-        player:delKeyItem(xi.ki.KINDRED_CREST)
-        player:addKeyItem(xi.ki.KINDRED_REPORT)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.KINDRED_REPORT)
-        player:setMissionStatus(player:getNation(), 11)
-    end
 end
 
 return entity
