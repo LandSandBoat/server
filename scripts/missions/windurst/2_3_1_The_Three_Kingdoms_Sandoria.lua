@@ -18,7 +18,7 @@ local chateauID          = require('scripts/zones/Chateau_dOraguille/IDs')
 local northernSandoriaID = require('scripts/zones/Northern_San_dOria/IDs')
 -----------------------------------
 
-local mission = Mission:new(xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_EMISSARY_SANDORIA)
+local mission = Mission:new(xi.mission.log_id.WINDURST, xi.mission.id.bastok.THE_THREE_KINGDOMS_SANDORIA)
 
 mission.reward = {}
 

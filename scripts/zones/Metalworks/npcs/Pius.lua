@@ -17,14 +17,9 @@ entity.onTrigger = function(player, npc)
     local missionStatus = player:getMissionStatus(player:getNation())
 
     if
-        Mission == xi.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK and missionStatus == 3 or
-        Mission == xi.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK2 and missionStatus == 8
+        Mission == xi.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK and missionStatus == 3
     then
         player:startEvent(355, 1)
-    elseif
-        Mission == xi.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK2 and missionStatus < 11
-    then
-        player:startEvent(356)
     end
 end
 
@@ -35,11 +30,7 @@ entity.onEventFinish = function(player, csid, option)
     local pNation = player:getNation()
 
     if csid == 355 and pNation == xi.nation.WINDURST then -- Only execute for Windurst
-        if player:getMissionStatus(pNation) == 3 then
-            player:setMissionStatus(pNation, 4)
-        else
-            player:setMissionStatus(pNation, 9)
-        end
+        player:setMissionStatus(pNation, 4)
     end
 end
 

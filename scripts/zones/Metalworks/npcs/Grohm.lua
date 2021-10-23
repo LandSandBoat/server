@@ -24,12 +24,6 @@ entity.onTrigger = function(player, npc)
         else
             player:startEvent(422)
         end
-    elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK2 then
-        if player:getMissionStatus(player:getNation()) == 9 then
-            player:startEvent(426, 1)
-        else
-            player:startEvent(427, 1)
-        end
     end
 end
 
@@ -49,8 +43,6 @@ entity.onEventFinish = function(player, csid, option)
             player:setMissionStatus(pNation, 5)
             player:setCharVar("notReceivePickaxe", 0)
         end
-    elseif pNation == xi.nation.WINDURST and csid == 426 then
-        player:setMissionStatus(pNation, 10)
     end
 end
 

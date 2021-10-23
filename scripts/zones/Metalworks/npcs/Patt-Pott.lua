@@ -17,30 +17,14 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local currentMission = player:getCurrentMission(WINDURST)
-    local missionStatus = player:getMissionStatus(player:getNation())
-
-    if currentMission == xi.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK2 then
-        if missionStatus == 11 then
-            player:startEvent(257)
-        else
-            player:startEvent(258)
-        end
-    else
-        player:startEvent(250)
-    end
+    player:startEvent(250)
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 257 then
-        player:addMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_THREE_KINGDOMS)
-        player:delKeyItem(xi.ki.KINDRED_CREST)
-        player:addKeyItem(xi.ki.KINDRED_REPORT)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.KINDRED_REPORT)
-    elseif csid == 255 then
+    if csid == 255 then
         player:tradeComplete()
         player:setMissionStatus(player:getNation(), 7)
         player:addMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_THREE_KINGDOMS)
