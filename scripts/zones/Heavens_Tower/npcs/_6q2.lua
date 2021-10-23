@@ -17,9 +17,7 @@ entity.onTrigger = function(player, npc)
     local currentMission = player:getCurrentMission(WINDURST)
     local missionStatus = player:getMissionStatus(player:getNation())
 
-    if currentMission == xi.mission.id.windurst.A_NEW_JOURNEY and missionStatus == 0 then
-        player:startEvent(153)
-    elseif currentMission == xi.mission.id.windurst.DOLL_OF_THE_DEAD and missionStatus == 2 then
+    if currentMission == xi.mission.id.windurst.DOLL_OF_THE_DEAD and missionStatus == 2 then
         player:startEvent(362)
     elseif currentMission == xi.mission.id.windurst.MOON_READING and missionStatus == 0 then
         player:startEvent(384)
@@ -38,8 +36,6 @@ entity.onTrigger = function(player, npc)
         else
             player:startEvent(407)
         end
-    else
-        player:startEvent(154)
     end
 end
 
@@ -47,12 +43,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 153 then
-        player:setMissionStatus(player:getNation(), 1)
-        player:delKeyItem(xi.ki.STAR_CRESTED_SUMMONS_1)
-        player:addKeyItem(xi.ki.LETTER_TO_THE_AMBASSADOR)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LETTER_TO_THE_AMBASSADOR)
-    elseif csid == 362 then
+    if csid == 362 then
         player:setMissionStatus(player:getNation(), 3)
     elseif csid == 384 then
         player:setMissionStatus(player:getNation(), 1)

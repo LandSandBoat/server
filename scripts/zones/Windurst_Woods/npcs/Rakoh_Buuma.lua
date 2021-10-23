@@ -41,10 +41,7 @@ entity.onEventFinish = function(player, csid, option)
     if csid ~= 121 or csid ~= 132 or csid ~= 149 then
         finishMissionTimeline(player, 1, csid, option)
     end
-    if csid == 114 and (option == 12 or option == 15) then
-        player:addKeyItem(xi.ki.STAR_CRESTED_SUMMONS_1)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.STAR_CRESTED_SUMMONS_1)
-    elseif csid == 632 then
+    if csid == 632 then
         player:setCharVar("WWoodsRTenText", 1)
     end
 end

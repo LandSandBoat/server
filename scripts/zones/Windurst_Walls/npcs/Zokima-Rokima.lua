@@ -38,9 +38,6 @@ end
 entity.onEventFinish = function(player, csid, option)
     if csid ~= 96 or csid ~= 106 or csid ~= 111 then
         finishMissionTimeline(player, 4, csid, option)
-    elseif (csid == 93 and (option == 12 or option == 15)) then
-        player:addKeyItem(xi.ki.STAR_CRESTED_SUMMONS_1)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.STAR_CRESTED_SUMMONS_1)
     end
 end
 
