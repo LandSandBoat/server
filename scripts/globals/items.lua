@@ -342,6 +342,7 @@ xi.items =
     DHALMEL_MEAT                    = 4359,
     BASTORE_SARDINE                 = 4360,
     LIZARD_EGG                      = 4362,
+    ROLANBERRY                      = 4365,
     CLUMP_OF_BATAGREENS             = 4367,
     POT_OF_HONEY                    = 4370,
     SLICE_OF_GRILLED_HARE           = 4371,
