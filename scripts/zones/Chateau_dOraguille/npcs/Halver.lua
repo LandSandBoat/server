@@ -49,11 +49,9 @@ entity.onTrigger = function(player, npc)
         player:showText(npc, ID.text.HALVER_OFFSET + 1092)
     elseif pNation == xi.nation.WINDURST then
         -- Windurst 2-3
-        if currentMission == xi.mission.id.windurst.THE_THREE_KINGDOMS_SANDORIA or currentMission == xi.mission.id.windurst.THE_THREE_KINGDOMS_SANDORIA2 then
+        if currentMission == xi.mission.id.windurst.THE_THREE_KINGDOMS_SANDORIA then
             if missionStatus == 3 then
                 player:startEvent(502)
-            elseif missionStatus == 8 then
-                player:startEvent(504)
             else
                 player:showText(npc, ID.text.HALVER_OFFSET + 279)
             end
@@ -69,8 +67,6 @@ entity.onEventFinish = function(player, csid, option)
         player:setMissionStatus(player:getNation(), 4)
     elseif (csid == 558) then
         player:setCharVar("WildcatSandy", utils.mask.setBit(player:getCharVar("WildcatSandy"), 16, true))
-    elseif (csid == 504) then
-        player:setMissionStatus(player:getNation(), 9)
     elseif (csid == 564 and option == 1) then
         player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.CONFESSIONS_OF_ROYALTY)
         player:addMission(xi.mission.log_id.TOAU, xi.mission.id.toau.EASTERLY_WINDS)

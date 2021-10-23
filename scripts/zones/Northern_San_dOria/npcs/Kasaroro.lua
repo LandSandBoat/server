@@ -20,19 +20,13 @@ entity.onTrigger = function(player, npc)
         local currentMission = player:getCurrentMission(pNation)
         local missionStatus = player:getMissionStatus(player:getNation())
 
-        if (currentMission == xi.mission.id.windurst.THE_THREE_KINGDOMS_SANDORIA) then
+        if currentMission == xi.mission.id.windurst.THE_THREE_KINGDOMS_SANDORIA then
             if (missionStatus == 3) then
                 player:showText(npc, ID.text.KASARORO_DIALOG)
             elseif (missionStatus == 4) then
                 player:startEvent(549)
             elseif (missionStatus == 5) then
                 player:startEvent(550) -- done with Sandy first path, now go to bastok
-            end
-        elseif (currentMission == xi.mission.id.windurst.THE_THREE_KINGDOMS_SANDORIA2) then
-            if (missionStatus == 8) then
-                player:showText(npc, ID.text.KASARORO_DIALOG)
-            elseif (missionStatus == 10) then
-                player:startEvent(551)
             end
         elseif (player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_THREE_KINGDOMS)) then
             player:startEvent(604)
