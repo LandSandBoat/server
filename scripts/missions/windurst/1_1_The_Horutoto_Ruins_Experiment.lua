@@ -23,10 +23,10 @@
 -- _5ct (Magical Gizmo) #5 - !pos 353 -3 60 192
 -- _5cu (Magical Gizmo) #6 - !pos 295 -3 100 192
 -----------------------------------
+require('scripts/settings/main')
 require('scripts/globals/items')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
-require('scripts/settings/main')
 require('scripts/globals/keyitems')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
