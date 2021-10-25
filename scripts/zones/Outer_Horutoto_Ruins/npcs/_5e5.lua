@@ -15,15 +15,15 @@ end
 
 entity.onTrigger = function(player, npc)
     if
-        player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_JESTER_WHO_D_BE_KING and
+        player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_JESTER_WHOD_BE_KING and
         player:getMissionStatus(player:getNation()) == 4 and
-        not GetMobByID(ID.mob.JESTER_WHO_D_BE_KING_OFFSET + 0):isSpawned() and
-        not GetMobByID(ID.mob.JESTER_WHO_D_BE_KING_OFFSET + 1):isSpawned()
+        not GetMobByID(ID.mob.JESTER_WHOD_BE_KING_OFFSET + 0):isSpawned() and
+        not GetMobByID(ID.mob.JESTER_WHOD_BE_KING_OFFSET + 1):isSpawned()
     then
-        SpawnMob(ID.mob.JESTER_WHO_D_BE_KING_OFFSET + 0)
-        SpawnMob(ID.mob.JESTER_WHO_D_BE_KING_OFFSET + 1)
+        SpawnMob(ID.mob.JESTER_WHOD_BE_KING_OFFSET + 0)
+        SpawnMob(ID.mob.JESTER_WHOD_BE_KING_OFFSET + 1)
 
-    elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_JESTER_WHO_D_BE_KING and player:getMissionStatus(player:getNation()) == 5) then
+    elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_JESTER_WHOD_BE_KING and player:getMissionStatus(player:getNation()) == 5) then
         player:startEvent(71)
     end
 end

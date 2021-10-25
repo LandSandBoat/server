@@ -22,7 +22,7 @@ entity.onTrigger = function(player, npc)
 
     -- The Jester Who'd Be King (Windurst 8-2)
     if
-        currentMission == xi.mission.id.windurst.THE_JESTER_WHO_D_BE_KING and
+        currentMission == xi.mission.id.windurst.THE_JESTER_WHOD_BE_KING and
         player:getMissionStatus(player:getNation()) == 1 and not
         player:hasKeyItem(xi.ki.OPTISTERY_RING)
     then

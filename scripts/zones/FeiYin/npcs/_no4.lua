@@ -19,7 +19,7 @@ end
 entity.onTrigger = function(player, npc)
 
     -- Windurst 8-2
-    if (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_JESTER_WHO_D_BE_KING and player:getMissionStatus(player:getNation()) == 1) then
+    if (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_JESTER_WHOD_BE_KING and player:getMissionStatus(player:getNation()) == 1) then
         player:startEvent(22)
 
     -- Curses, Foiled A_Golem!?

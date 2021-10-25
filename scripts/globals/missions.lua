@@ -163,7 +163,7 @@ xi.mission.id =
         THE_SIXTH_MINISTRY            = 18, -- ±
         AWAKENING_OF_THE_GODS         = 19, -- ±
         VAIN                          = 20,
-        THE_JESTER_WHO_D_BE_KING      = 21,
+        THE_JESTER_WHOD_BE_KING      = 21,
         DOLL_OF_THE_DEAD              = 22,
         MOON_READING                  = 23,
         NONE                          = 65535,
@@ -888,12 +888,11 @@ function finishMissionTimeline(player, guard, csid, option)
 
     if (nation == xi.nation.WINDURST) then
         local guardlist = {114, 111, 78, 93}
-        if (csid == guardlist[guard] and option ~= 1073741824 and option ~= 31 and option > 19) then -- last part of conditional is for converted missions, increment for each converted
+        if (csid == guardlist[guard] and option ~= 1073741824 and option ~= 31 and option > 21) then -- last part of conditional is for converted missions, increment for each converted
             timeline = {option, {guardlist[guard], option}, {guardlist[guard], option}, {guardlist[guard], option}, {guardlist[guard], option}, {{1}, {2}}}
         else
             timeline =
             { -- ID    Guard 1      Guard 2      Guard 3     Guard 4        Function List
-                20,      {0, 0},      {0, 0},   {758, 0},     {0, 0},       {{14, 0}, {5, 750}, {0, 0}, {0}, {0, 0}, {12}},             -- MISSION 8-1 (Finish (Morno-Toeno))
                 21,      {0, 0},      {0, 0},   {609, 0},     {0, 0},       {{14, 0}, {11, 9}, {8, 80000}, {6}, {0, 0}, {12}},          -- MISSION 8-2 (Finish (Apururu))
                 22,      {0, 0},      {0, 0},    {61, 0},     {0, 0},       {{14, 0}, {5, 800}, {13, 293}, {0}, {0, 0}, {12}},          -- MISSION 9-1 (Finish (Zone: Full Moon Fountain))
                 23,      {0, 0},      {0, 0},   {407, 0},     {0, 0},       {{13, 294}, {11, 10}, {8, 100000}, {6}, {0, 0}, {12}}       -- MISSION 9-2 (Finish (Vestal Chamber))

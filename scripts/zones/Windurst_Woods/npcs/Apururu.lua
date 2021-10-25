@@ -64,7 +64,7 @@ entity.onTrigger = function(player, npc)
     local Rank6 = player:getRank(player:getNation()) >= 6 and 1 or 0
 
         -- WINDURST 8-2: THE JESTER WHO'D BE KING
-    if player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_JESTER_WHO_D_BE_KING then
+    if player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_JESTER_WHOD_BE_KING then
         if missionStatus == 0 then
             player:startEvent(588)
         elseif missionStatus == 2 then

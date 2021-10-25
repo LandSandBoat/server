@@ -55,7 +55,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(438)
         player:setLocalVar("KupipiTrustChatFlag", 1)
     elseif player:getNation() == xi.nation.WINDURST then
-        if player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_JESTER_WHO_D_BE_KING and missionStatus == 3 then
+        if player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_JESTER_WHOD_BE_KING and missionStatus == 3 then
             player:startEvent(326)
         elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.MOON_READING and missionStatus >= 3 then
             player:startEvent(400) -- Kupipi in disbelief over player becoming Rank 10

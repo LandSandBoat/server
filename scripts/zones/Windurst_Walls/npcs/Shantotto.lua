@@ -86,10 +86,10 @@ entity.onTrigger = function(player, npc)
     local golemdelivery = player:getCharVar("foiledagolemdeliverycomplete")
     local WildcatWindurst = player:getCharVar("WildcatWindurst")
 
-    if (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_JESTER_WHO_D_BE_KING and
+    if (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_JESTER_WHOD_BE_KING and
         player:getMissionStatus(player:getNation()) == 7) then
         player:startEvent(397, 0, 0, 0, 282)
-    elseif (player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_JESTER_WHO_D_BE_KING) and
+    elseif (player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_JESTER_WHOD_BE_KING) and
         player:getCharVar("ShantottoCS") == 1) then
         player:startEvent(399, 0, 0, 282)
     elseif (player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatWindurst, 6)) then

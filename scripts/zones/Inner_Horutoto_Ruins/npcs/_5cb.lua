@@ -13,7 +13,7 @@ end
 
 entity.onTrigger = function(player, npc)
     if
-        player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_JESTER_WHO_D_BE_KING and
+        player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_JESTER_WHOD_BE_KING and
         player:getMissionStatus(player:getNation()) == 9
     then
         player:startEvent(75)
