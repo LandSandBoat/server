@@ -1,7 +1,5 @@
 -----------------------------------
---
 -- Zone: Meriphataud_Mountains (119)
---
 -----------------------------------
 local ID = require("scripts/zones/Meriphataud_Mountains/IDs")
 require("scripts/quests/i_can_hear_a_rainbow")
@@ -37,8 +35,6 @@ zone_object.onZoneIn = function(player, prevZone)
 
     if quests.rainbow.onZoneIn(player) then
         cs = 31
-    elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.VAIN and player:getMissionStatus(player:getNation()) == 1 then
-        cs = 34 -- no update for castle oztroja (north)
     end
 
     -- AMK06/AMK07
@@ -59,12 +55,6 @@ end
 zone_object.onEventUpdate = function(player, csid, option)
     if csid == 31 then
         quests.rainbow.onEventUpdate(player)
-    elseif csid == 34 then
-        if player:getPreviousZone() == xi.zone.SAUROMUGUE_CHAMPAIGN then
-            player:updateEvent(0, 0, 0, 0, 0, 2)
-        elseif player:getPreviousZone() == xi.zone.TAHRONGI_CANYON then
-            player:updateEvent(0, 0, 0, 0, 0, 1)
-        end
     end
 end
 

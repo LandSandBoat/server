@@ -29,9 +29,7 @@ entity.onTrigger = function(player, npc)
     local currentMission = player:getCurrentMission(WINDURST)
     local missionStatus = player:getMissionStatus(player:getNation())
 
-    if (currentMission == xi.mission.id.windurst.VAIN and missionStatus >= 1) then
-        player:startEvent(2)
-    elseif (currentMission == xi.mission.id.windurst.MOON_READING and missionStatus >= 1) then
+    if (currentMission == xi.mission.id.windurst.MOON_READING and missionStatus >= 1) then
         player:startEvent(4)
     else
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
@@ -54,8 +52,6 @@ entity.onEventFinish = function(player, csid, option)
         player:tradeComplete()
         player:addKeyItem(xi.ki.MOONLIGHT_ORE)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MOONLIGHT_ORE)
-    elseif (csid == 2 and player:getCurrentMission(WINDURST) == xi.mission.id.windurst.VAIN) then
-        player:setMissionStatus(player:getNation(), 2)
     elseif (csid == 4 and player:getCurrentMission(WINDURST) == xi.mission.id.windurst.MOON_READING) then
         player:addKeyItem(xi.ki.ANCIENT_VERSE_OF_ROMAEVE)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.ANCIENT_VERSE_OF_ROMAEVE)

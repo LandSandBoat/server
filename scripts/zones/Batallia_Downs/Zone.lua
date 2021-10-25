@@ -55,8 +55,6 @@ zone_object.onZoneIn = function(player, prevZone)
 
     if quests.rainbow.onZoneIn(player) then
         cs = 901
-    elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.VAIN and player:getMissionStatus(player:getNation()) == 1) then
-        cs = 903
     end
 
     return cs
@@ -79,13 +77,7 @@ zone_object.onEventUpdate = function(player, csid, option)
 end
 
 zone_object.onEventFinish = function(player, csid, option)
-    if csid == 903 then
-        if player:getZPos() >  -331 then
-            player:updateEvent(0, 0, 0, 0, 0, 3)
-        else
-            player:updateEvent(0, 0, 0, 0, 0, 2)
-        end
-    elseif csid == 24 then
+    if csid == 24 then
         xi.fsa.completeGame(player)
     elseif csid == 26 and option == 0 then
         player:setCharVar("[QUEST]FullSpeedAhead", 1)
