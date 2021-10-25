@@ -3,8 +3,6 @@
 --  NPC: Excaliace
 -----------------------------------
 local ID = require("scripts/zones/Periqia/IDs")
-require("scripts/globals/pathfind")
--- require("scripts/globals/utils")
 -----------------------------------
 local entity = {}
 
