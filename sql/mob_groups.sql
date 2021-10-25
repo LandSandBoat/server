@@ -2809,38 +2809,38 @@ INSERT INTO `mob_groups` VALUES (36,2582,55,'Martial_Maestro_Megomak',0,128,0,80
 -- Periqia (Zone 56)
 -- ------------------------------------------------------------
 
-INSERT INTO `mob_groups` VALUES (1,254,56,'Arrapago_Crab',0,128,0,0,0,72,74,0);
-INSERT INTO `mob_groups` VALUES (2,942,56,'Debaucher',0,128,0,0,0,77,79,0);
-INSERT INTO `mob_groups` VALUES (3,3119,56,'Periqia_Pugil',0,128,0,0,0,75,77,0);
-INSERT INTO `mob_groups` VALUES (4,3236,56,'Putrid_Immortal_Guard',0,128,0,0,0,77,78,0);
-INSERT INTO `mob_groups` VALUES (5,360,56,'Batteilant_Bhoot',0,128,0,0,9999,77,78,0);
-INSERT INTO `mob_groups` VALUES (6,905,56,'Darkling_Draugar',0,128,0,0,9999,77,78,0);
-INSERT INTO `mob_groups` VALUES (7,1097,56,'Draconic_Draugar',0,128,0,0,0,77,78,0);
-INSERT INTO `mob_groups` VALUES (8,1112,56,'Draugars_Wyvern',0,128,0,0,0,77,78,0);
-INSERT INTO `mob_groups` VALUES (9,865,56,'Cursed_Chigoe',0,128,0,0,0,77,78,0);
-INSERT INTO `mob_groups` VALUES (10,1274,56,'Experimental_Undead_thf',0,128,0,0,0,77,78,0);
-INSERT INTO `mob_groups` VALUES (11,5468,56,'Experimental_Undead_brd',0,128,0,0,0,77,78,0);
-INSERT INTO `mob_groups` VALUES (12,5469,56,'Experimental_Undead_blm',0,128,0,0,9999,77,78,0);
-INSERT INTO `mob_groups` VALUES (13,431,56,'Black_Baron',0,128,0,0,0,0,75,78);
-INSERT INTO `mob_groups` VALUES (14,715,56,'Chigoe_Breeder',0,128,0,9000,9999,78,79,0);
-INSERT INTO `mob_groups` VALUES (15,285,56,'Augmented_Chigoe',0,128,0,500,0,50,50,0);
-INSERT INTO `mob_groups` VALUES (16,3259,56,'Qiqirn_Miner',0,128,0,0,0,68,68,0);
-INSERT INTO `mob_groups` VALUES (17,3294,56,'Qutrub_drk',0,128,0,0,0,75,75,0); -- TODO: capture level from retail
-INSERT INTO `mob_groups` VALUES (18,2627,56,'Merrow_Shadowdancer',0,128,0,0,0,75,75,0); -- TODO: capture level from retail
-INSERT INTO `mob_groups` VALUES (19,2624,56,'Merrow_No16',0,128,0,0,0,75,75,0); -- TODO: capture level from retail
-INSERT INTO `mob_groups` VALUES (20,2192,56,'Karazahm',0,128,0,0,0,75,75,0); -- TODO: capture level from retail
-INSERT INTO `mob_groups` VALUES (21,2341,56,'Lamia_No14',0,128,0,0,0,75,75,0); -- TODO: capture level from retail
-INSERT INTO `mob_groups` VALUES (22,4090,56,'Umarid',0,128,0,0,0,75,75,0); -- TODO: capture level from retail
-INSERT INTO `mob_groups` VALUES (23,2343,56,'Lamia_No17',0,128,0,0,0,75,75,0); -- TODO: capture level from retail
-INSERT INTO `mob_groups` VALUES (24,2175,56,'K23H1-LAMIA',0,128,0,0,0,71,73,0);
-INSERT INTO `mob_groups` VALUES (25,4337,56,'Wight_war',0,128,0,0,0,66,66,0);
-INSERT INTO `mob_groups` VALUES (26,2257,56,'King_Goldemar',0,128,0,25000,9999,80,82,0);
-INSERT INTO `mob_groups` VALUES (27,467,56,'Bloody_Daggers',0,128,0,0,0,76,78,0);
-INSERT INTO `mob_groups` VALUES (28,977,56,'Demonic_Rod',0,128,0,0,0,76,78,0);
-INSERT INTO `mob_groups` VALUES (29,2425,56,'Living_Staves',0,128,0,0,0,76,78,0);
-INSERT INTO `mob_groups` VALUES (30,863,56,'Cursed_Axe',0,128,0,0,0,76,78,0);
-INSERT INTO `mob_groups` VALUES (31,2481,56,'Magic_Shields',0,128,0,0,0,76,78,0);
-INSERT INTO `mob_groups` VALUES (32,7038,56,'Excaliace',0,128,0,0,0,75,75,1);
+INSERT INTO `mob_groups` VALUES (1,7038,56,'Excaliace',0,128,0,0,0,75,75,1);
+INSERT INTO `mob_groups` VALUES (2,254,56,'Arrapago_Crab',0,128,0,0,0,72,74,0);
+INSERT INTO `mob_groups` VALUES (3,942,56,'Debaucher',0,128,0,0,0,77,79,0);
+INSERT INTO `mob_groups` VALUES (4,3119,56,'Periqia_Pugil',0,128,0,0,0,75,77,0);
+INSERT INTO `mob_groups` VALUES (5,3236,56,'Putrid_Immortal_Guard',0,128,0,0,0,77,78,0);
+INSERT INTO `mob_groups` VALUES (6,360,56,'Batteilant_Bhoot',0,128,0,0,9999,77,78,0);
+INSERT INTO `mob_groups` VALUES (7,905,56,'Darkling_Draugar',0,128,0,0,9999,77,78,0);
+INSERT INTO `mob_groups` VALUES (8,1097,56,'Draconic_Draugar',0,128,0,0,0,77,78,0);
+INSERT INTO `mob_groups` VALUES (9,1112,56,'Draugars_Wyvern',0,128,0,0,0,77,78,0);
+INSERT INTO `mob_groups` VALUES (10,865,56,'Cursed_Chigoe',0,128,0,0,0,77,78,0);
+INSERT INTO `mob_groups` VALUES (11,1274,56,'Experimental_Undead_thf',0,128,0,0,0,77,78,0);
+INSERT INTO `mob_groups` VALUES (12,5468,56,'Experimental_Undead_brd',0,128,0,0,0,77,78,0);
+INSERT INTO `mob_groups` VALUES (13,5469,56,'Experimental_Undead_blm',0,128,0,0,9999,77,78,0);
+INSERT INTO `mob_groups` VALUES (14,431,56,'Black_Baron',0,128,0,0,0,0,75,78);
+INSERT INTO `mob_groups` VALUES (15,715,56,'Chigoe_Breeder',0,128,0,9000,9999,78,79,0);
+INSERT INTO `mob_groups` VALUES (16,285,56,'Augmented_Chigoe',0,128,0,500,0,50,50,0);
+INSERT INTO `mob_groups` VALUES (17,3259,56,'Qiqirn_Miner',0,128,0,0,0,68,68,0);
+INSERT INTO `mob_groups` VALUES (18,3294,56,'Qutrub_drk',0,128,0,0,0,75,75,0); -- TODO: capture level from retail
+INSERT INTO `mob_groups` VALUES (19,2627,56,'Merrow_Shadowdancer',0,128,0,0,0,75,75,0); -- TODO: capture level from retail
+INSERT INTO `mob_groups` VALUES (20,2624,56,'Merrow_No16',0,128,0,0,0,75,75,0); -- TODO: capture level from retail
+INSERT INTO `mob_groups` VALUES (21,2192,56,'Karazahm',0,128,0,0,0,75,75,0); -- TODO: capture level from retail
+INSERT INTO `mob_groups` VALUES (22,2341,56,'Lamia_No14',0,128,0,0,0,75,75,0); -- TODO: capture level from retail
+INSERT INTO `mob_groups` VALUES (23,4090,56,'Umarid',0,128,0,0,0,75,75,0); -- TODO: capture level from retail
+INSERT INTO `mob_groups` VALUES (24,2343,56,'Lamia_No17',0,128,0,0,0,75,75,0); -- TODO: capture level from retail
+INSERT INTO `mob_groups` VALUES (25,2175,56,'K23H1-LAMIA',0,128,0,0,0,71,73,0);
+INSERT INTO `mob_groups` VALUES (26,4337,56,'Wight_war',0,128,0,0,0,66,66,0);
+INSERT INTO `mob_groups` VALUES (27,2257,56,'King_Goldemar',0,128,0,25000,9999,80,82,0);
+INSERT INTO `mob_groups` VALUES (28,467,56,'Bloody_Daggers',0,128,0,0,0,76,78,0);
+INSERT INTO `mob_groups` VALUES (29,977,56,'Demonic_Rod',0,128,0,0,0,76,78,0);
+INSERT INTO `mob_groups` VALUES (30,2425,56,'Living_Staves',0,128,0,0,0,76,78,0);
+INSERT INTO `mob_groups` VALUES (31,863,56,'Cursed_Axe',0,128,0,0,0,76,78,0);
+INSERT INTO `mob_groups` VALUES (32,2481,56,'Magic_Shields',0,128,0,0,0,76,78,0);
 
 INSERT INTO `mob_groups` VALUES (1956,2591,56,'Maymun_09',0,128,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (1957,2592,56,'Maymun_21',0,128,0,0,0,1,1,0);

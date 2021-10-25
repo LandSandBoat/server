@@ -19,7 +19,7 @@ xi.assaultUtil.assaultArea =
     MAMOOL_JA_TRAINING_GROUNDS = 1,
     LEBROS_CAVERN              = 2,
     PERIQIA                    = 3,
-    ILRUSI                     = 4,
+    ILRUSI_ATOLL               = 4,
     NYZUL_ISLE                 = 4,
 }
 

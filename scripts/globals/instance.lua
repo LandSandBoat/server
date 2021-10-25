@@ -71,7 +71,7 @@ xi.instance.lookup =
     [xi.zone.PERIQIA] =
     {
         { 5600, { 143, 79, -6, 0, 99, 3, 0 }, { 143, 4 }, { 147, 3 } }, -- Shades of Vengeance (TOAU31)
-        { 5601, { 143, 21, -4, 0, 70, 0, 1 }, { 143, 4 }, { 147, 0 } }, -- Assault: Seagull Grounded
+        { 5601, { 143, 31, -4, 0, 70, 0, 1 }, { 143, 4 }, { 147, 0 } }, -- Assault: Seagull Grounded
         -- Assault: Requiem
         -- Assault: Saving Private Ryaaf
         -- Assault: Shooting Down the Baron

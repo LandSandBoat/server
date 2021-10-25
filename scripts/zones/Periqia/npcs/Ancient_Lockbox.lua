@@ -39,6 +39,7 @@ entity.onTrigger = function(player, npc)
                 {itemid = xi.items.HI_RERAISER, droprate = 700},
                 {itemid = 0, droprate = 300},
             },
+            {
                 {itemid = xi.items.HI_POTION_TANK, droprate = 100},
                 {itemid = xi.items.HI_ETHER_TANK,  droprate = 100},
                 {itemid = 0, droprate = 800},
