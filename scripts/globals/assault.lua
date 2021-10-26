@@ -20,24 +20,21 @@ xi.assaultUtil.assaultArea =
     LEBROS_CAVERN              = 2,
     PERIQIA                    = 3,
     ILRUSI_ATOLL               = 4,
-    NYZUL_ISLE                 = 4,
+    NYZUL_ISLE                 = 5,
 }
 
 xi.assaultUtil.getAssaultArea = function(player)
-    local assaultArea = 0
-    math.floor((player:getCurrentAssault() - 1) / 10)
-
-    return assaultArea
+    return math.floor((player:getCurrentAssault() - 1) / 10)
 end
 
-xi.assaultUtil.hasOrders = function(player)
-    local orders =
-    {
-        xi.ki.LEUJAOAM_ASSAULT_ORDERS, xi.ki.MAMOOL_JA_ASSAULT_ORDERS, xi.ki.LEBROS_ASSAULT_ORDERS,
-        xi.ki.PERIQIA_ASSAULT_ORDERS, xi.ki.ILRUSI_ASSAULT_ORDERS, xi.ki.NYZUL_ISLE_ASSAULT_ORDERS
-    }
+xi.assaultUtil.assaultOrders =
+{
+    xi.ki.LEUJAOAM_ASSAULT_ORDERS, xi.ki.MAMOOL_JA_ASSAULT_ORDERS, xi.ki.LEBROS_ASSAULT_ORDERS,
+    xi.ki.PERIQIA_ASSAULT_ORDERS,  xi.ki.ILRUSI_ASSAULT_ORDERS, xi.ki.NYZUL_ISLE_ASSAULT_ORDERS,
+}
 
-    for _, assaultOrders in pairs(orders) do
+xi.assaultUtil.hasOrders = function(player)
+    for _, assaultOrders in pairs(xi.assaultUtil.assaultOrders) do
         if player:hasKeyItem(assaultOrders) then
             return true
         end

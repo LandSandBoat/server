@@ -12,12 +12,6 @@ require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 
-local assaultOrders =
-    {
-        xi.ki.LEUJAOAM_ASSAULT_ORDERS, xi.ki.MAMOOL_JA_ASSAULT_ORDERS, xi.ki.LEBROS_ASSAULT_ORDERS,
-        xi.ki.PERIQIA_ASSAULT_ORDERS,  xi.ki.ILRUSI_ASSAULT_ORDERS, xi.ki.NYZUL_ISLE_ASSAULT_ORDERS,
-    }
-
 entity.onTrade = function(player, npc, trade)
 end
 
@@ -44,7 +38,7 @@ entity.onTrigger = function(player, npc)
         player:setCharVar("assaultEntered", 0)
         player:setCharVar("Assault_Armband", 0)
 
-        for _, orders in pairs(assaultOrders) do
+        for _, orders in pairs(xi.assaultUtil.assaultOrders) do
             if player:hasKeyItem(orders) then
                 player:delKeyItem(orders)
             end
@@ -55,7 +49,7 @@ entity.onTrigger = function(player, npc)
         player:getVar("AhtUrganStatus") >= 1)
     then
         local currentTime = os.time()
-        local refreshTime = player:getCharVar("lastTagTime")
+        local refreshTime = player:getCharVar("nextTagTime")
         local diffday =  math.floor((currentTime - refreshTime)/86400)
         local tagStock = player:getCurrency("id_tags")
         local allTagsTimeCS = (refreshTime - 1009897200) + (diffday * 86400)
@@ -68,7 +62,7 @@ entity.onTrigger = function(player, npc)
         end
 
         player:setCurrency("id_tags", tagStock)
-        player:setCharVar("lastTagTime", refreshTime)
+        player:setCharVar("nextTagTime", refreshTime)
 
         if player:hasKeyItem(xi.ki.IMPERIAL_ARMY_ID_TAG) then
             haveimperialIDtag = 1
@@ -85,7 +79,7 @@ entity.onTrigger = function(player, npc)
         player:setCharVar("assaultEntered", 0)
         player:setCharVar("Assault_Armband", 0)
         player:delAssault(currentAssault)
-        for _, orders in pairs(assaultOrders) do
+        for _, orders in pairs(xi.assaultUtil.assaultOrders) do
             if player:hasKeyItem(orders) then
                 player:delKeyItem(orders)
             end
@@ -109,13 +103,13 @@ entity.onEventFinish = function(player, csid, option)
         npcUtil.giveKeyItem(player, xi.ki.IMPERIAL_ARMY_ID_TAG)
 
         if tagStock >= 3 then
-            player:setCharVar("lastTagTime", os.time() + 86400)
+            player:setCharVar("nextTagTime", os.time() + 86400)
         end
         player:setCurrency("id_tags", tagStock - 1)
     elseif csid == 268 and option == 2 and xi.assaultUtil.hasOrders(player) and not player:hasKeyItem(xi.ki.IMPERIAL_ARMY_ID_TAG) then
         local currentAssault = player:getCurrentAssault()
 
-        for _, orders in pairs(assaultOrders) do
+        for _, orders in pairs(xi.assaultUtil.assaultOrders) do
             if player:hasKeyItem(orders.KI) then
                 player:delKeyItem(orders.KI)
             end

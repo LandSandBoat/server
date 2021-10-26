@@ -106,7 +106,7 @@ xi.appraisalUtil.Origin =
 
 }
 
-xi.appraisalUtil.UnappraisedItems =
+xi.appraisalUtil.unappraisedItems =
 {
     xi.items.UNAPPRAISED_SWORD,
     xi.items.UNAPPRAISED_DAGGER,
@@ -1376,7 +1376,7 @@ xi.appraisalUtil.appraisalItems =
 
 xi.appraisalUtil.appraiseItem = function(player, npc, trade, gil, appraisalCsid)
     if player:getGil() >= gil then
-        for _, tradedItem in pairs(xi.appraisalUtil.UnappraisedItems) do
+        for _, tradedItem in pairs(xi.appraisalUtil.unappraisedItems) do
             if npcUtil.tradeHasExactly(trade, tradedItem) then
                 local tradeID = trade:getItemId()
                 local info = xi.appraisalUtil.appraisalItems[tradeID]
