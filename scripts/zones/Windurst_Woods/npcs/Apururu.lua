@@ -63,24 +63,8 @@ entity.onTrigger = function(player, npc)
     local canCardiansCry = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CAN_CARDIANS_CRY)
     local Rank6 = player:getRank(player:getNation()) >= 6 and 1 or 0
 
-        -- WINDURST 8-2: THE JESTER WHO'D BE KING
-    if player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_JESTER_WHOD_BE_KING then
-        if missionStatus == 0 then
-            player:startEvent(588)
-        elseif missionStatus == 2 then
-            player:startEvent(601)
-        elseif missionStatus == 6 then
-            player:startEvent(590)
-        elseif missionStatus == 7 then
-            player:startEvent(589)
-        elseif missionStatus == 8 then
-            player:startEvent(592)
-        elseif missionStatus == 10 then
-            player:startEvent(609)
-        end
-
         -- WINDURST 9-1: DOLL OF THE DEAD
-    elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.DOLL_OF_THE_DEAD then
+    if player:getCurrentMission(WINDURST) == xi.mission.id.windurst.DOLL_OF_THE_DEAD then
         if missionStatus == 0 then
             player:startEvent(619)
         elseif missionStatus == 3 then
@@ -117,23 +101,8 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
-        -- WINDURST 8-2: THE JESTER WHO'D BE KING
-    if csid == 588 then
-        player:setMissionStatus(player:getNation(), 1)
-        npcUtil.giveKeyItem(player, xi.ki.MANUSTERY_RING)
-    elseif csid == 601 then
-        player:setMissionStatus(player:getNation(), 3)
-    elseif csid == 590 then
-        player:setMissionStatus(player:getNation(), 7)
-    elseif csid == 592 then
-        player:setMissionStatus(player:getNation(), 9)
-    elseif csid == 609 then
-        player:setCharVar("ShantottoCS", 1)
-        finishMissionTimeline(player, 3, csid, option)
-
         -- WINDURST 9-1: DOLL OF THE DEAD
-    elseif csid == 619 then
+    if csid == 619 then
         player:setMissionStatus(player:getNation(), 1)
     elseif csid == 620 then
         player:setMissionStatus(player:getNation(), 4)

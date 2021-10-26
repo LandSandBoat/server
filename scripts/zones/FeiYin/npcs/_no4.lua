@@ -17,15 +17,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-
-    -- Windurst 8-2
-    if (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_JESTER_WHOD_BE_KING and player:getMissionStatus(player:getNation()) == 1) then
-        player:startEvent(22)
-
     -- Curses, Foiled A_Golem!?
-    elseif (player:hasKeyItem(xi.ki.SHANTOTTOS_NEW_SPELL)) then
+    if player:hasKeyItem(xi.ki.SHANTOTTOS_NEW_SPELL) then
         player:startEvent(14) -- deliver spell
-    elseif (player:hasKeyItem(xi.ki.SHANTOTTOS_EX_SPELL)) then
+    elseif player:hasKeyItem(xi.ki.SHANTOTTOS_EX_SPELL) then
         player:startEvent(13) -- spell erased, try again!
 
     -- standard dialog
@@ -40,15 +35,9 @@ end
 entity.onEventFinish = function(player, csid, option)
 
     -- Curses, Foiled A_Golem!?
-    if (csid == 14) then
+    if csid == 14 then
         player:setCharVar("foiledagolemdeliverycomplete", 1)
         player:delKeyItem(xi.ki.SHANTOTTOS_NEW_SPELL) -- remove key item
-    elseif (csid == 22) then
-        player:addKeyItem(xi.ki.RHINOSTERY_RING)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.RHINOSTERY_RING)
-        if (player:hasKeyItem(xi.ki.AURASTERY_RING) and player:hasKeyItem(xi.ki.OPTISTERY_RING)) then
-            player:setMissionStatus(player:getNation(), 2)
-        end
     end
 end
 

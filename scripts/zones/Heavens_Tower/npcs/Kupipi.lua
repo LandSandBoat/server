@@ -55,9 +55,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(438)
         player:setLocalVar("KupipiTrustChatFlag", 1)
     elseif player:getNation() == xi.nation.WINDURST then
-        if player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_JESTER_WHOD_BE_KING and missionStatus == 3 then
-            player:startEvent(326)
-        elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.MOON_READING and missionStatus >= 3 then
+        if player:getCurrentMission(WINDURST) == xi.mission.id.windurst.MOON_READING and missionStatus >= 3 then
             player:startEvent(400) -- Kupipi in disbelief over player becoming Rank 10
         elseif player:getRank(player:getNation()) == 10 then
             player:startEvent(408) -- After achieving Windurst Rank 10, Kupipi has more to say
@@ -73,9 +71,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 326 then
-        player:setMissionStatus(player:getNation(), 4)
-    elseif csid == 400 then
+    if csid == 400 then
         player:setCharVar("KupipiDisbelief", 0)
     elseif csid == 408 then
         player:setCharVar("KupipiRankTenText", 1)

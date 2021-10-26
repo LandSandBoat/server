@@ -18,18 +18,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local currentMission = player:getCurrentMission(WINDURST)
-
-    -- The Jester Who'd Be King (Windurst 8-2)
-    if
-        currentMission == xi.mission.id.windurst.THE_JESTER_WHOD_BE_KING and
-        player:getMissionStatus(player:getNation()) == 1 and not
-        player:hasKeyItem(xi.ki.OPTISTERY_RING)
-    then
-        player:startEvent(801, 0, xi.ki.OPTISTERY_RING)
-
     -- The Road Forks (CoP 3-3)
-    elseif player:getCurrentMission(COP) == xi.mission.id.cop.THE_ROAD_FORKS and player:getCharVar("MEMORIES_OF_A_MAIDEN_Status") == 10 then
+    if player:getCurrentMission(COP) == xi.mission.id.cop.THE_ROAD_FORKS and player:getCharVar("MEMORIES_OF_A_MAIDEN_Status") == 10 then
         player:startEvent(875)
 
     -- Hat in Hand
@@ -60,12 +50,6 @@ entity.onEventFinish = function(player, csid, option)
     -- The Road Forks (CoP 3-3)
     if csid == 875 then
         player:setCharVar("MEMORIES_OF_A_MAIDEN_Status", 11)
-
-    -- The Jester Who'd Be King (Windurst 8-2)
-    elseif csid == 801 and npcUtil.giveKeyItem(player, xi.ki.OPTISTERY_RING) then
-        if player:hasKeyItem(xi.ki.RHINOSTERY_RING) and player:hasKeyItem(xi.ki.AURASTERY_RING) then
-            player:setMissionStatus(player:getNation(), 2)
-        end
 
     -- Hat in Hand
     elseif csid == 55 then  -- Show Off Hat
