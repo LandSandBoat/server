@@ -18,7 +18,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMonsterMagicPrepare = function(mob, target)
+entity.OnMobMagicPrepare = function(mob, spellId)
     local spellList =
     {
         [1] = 382,

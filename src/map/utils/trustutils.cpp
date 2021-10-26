@@ -320,7 +320,6 @@ namespace trustutils
         PTrust->HPscale          = trustData->HPscale;
         PTrust->MPscale          = trustData->MPscale;
         PTrust->speed            = trustData->speed;
-        PTrust->m_HasSpellScript = trustData->hasSpellScript;
         PTrust->m_TrustID        = trustData->trustID;
         PTrust->status           = STATUS_TYPE::NORMAL;
         PTrust->m_ModelSize      = trustData->size;

@@ -11,7 +11,7 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.DRAW_IN, 1)
 end
 
-entity.onMonsterMagicPrepare = function(mob, target)
+entity.OnMobMagicPrepare = function(mob, spellId)
     local rnd = math.random()
 
     if rnd < 0.4 then
