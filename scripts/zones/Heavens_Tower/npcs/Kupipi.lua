@@ -34,7 +34,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local missionStatus = player:getMissionStatus(player:getNation())
     local TrustSandoria = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TRUST_SANDORIA)
     local TrustBastok   = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRUST_BASTOK)
     local TrustWindurst = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TRUST_WINDURST)
@@ -55,9 +54,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(438)
         player:setLocalVar("KupipiTrustChatFlag", 1)
     elseif player:getNation() == xi.nation.WINDURST then
-        if player:getCurrentMission(WINDURST) == xi.mission.id.windurst.MOON_READING and missionStatus >= 3 then
-            player:startEvent(400) -- Kupipi in disbelief over player becoming Rank 10
-        elseif player:getRank(player:getNation()) == 10 then
+        if player:getRank(player:getNation()) == 10 then
             player:startEvent(408) -- After achieving Windurst Rank 10, Kupipi has more to say
         else
             player:startEvent(251)
@@ -71,13 +68,8 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 400 then
-        player:setCharVar("KupipiDisbelief", 0)
-    elseif csid == 408 then
-        player:setCharVar("KupipiRankTenText", 1)
-
     --TRUST
-    elseif csid == 435 then
+    if csid == 435 then
         player:addSpell(898, true, true)
         player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, 898)
         player:setCharVar("WindurstFirstTrust", 1)

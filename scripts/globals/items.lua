@@ -11,6 +11,7 @@ xi.items =
     TEA_SET                         = 133,
     SAN_DORIAN_FLAG                 = 181,
     BASTOKAN_FLAG                   = 182,
+    WINDURSTIAN_FLAG                = 183,
     COPY_OF_ANCIENT_BLOOD           = 206,
     HUME_M_MANNEQUIN                = 256,
     HUME_F_MANNEQUIN                = 257,

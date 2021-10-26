@@ -28,8 +28,6 @@ entity.onTrigger = function(player, npc)
         player:startEvent(55)
 
     -- Standard dialogues
-    elseif player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.MOON_READING) then
-        player:startEvent(380) -- "Thanks to some adventurer somewhere, I was able to awaken from an inescapable nightmare."
     elseif player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_SIXTH_MINISTRY) then
         player:startEvent(379) -- "Hey, you're the adventurer from the other day!"
     elseif player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.LOST_FOR_WORDS) then

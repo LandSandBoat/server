@@ -18,12 +18,10 @@ entity.onTrigger = function(player, npc)
     else
         local currentMission = player:getCurrentMission(WINDURST)
 
-        if (currentMission ~= xi.mission.id.windurst.NONE) then
+        if currentMission ~= xi.mission.id.windurst.NONE then
             player:startEvent(76)
-        elseif (player:hasKeyItem(xi.ki.MESSAGE_TO_JEUNO_WINDURST)) then
+        elseif player:hasKeyItem(xi.ki.MESSAGE_TO_JEUNO_WINDURST) then
             player:startEvent(163)
-        elseif (player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.MOON_READING) == true) then
-            player:startEvent(567)
         else
             -- NPC dialog changes when starting 3-2 according to whether it's the first time or being repeated
             local param3 = player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.WRITTEN_IN_THE_STARS) and 1 or 0
