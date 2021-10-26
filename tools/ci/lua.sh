@@ -94,7 +94,6 @@ global_objects=(
 
     GetMissionLogInfo
     GetQuestLogInfo
-    finishMissionTimeline
     ORIGINAL_MISSION_OFFSET
     getMissionRankPoints
     getMissionMask

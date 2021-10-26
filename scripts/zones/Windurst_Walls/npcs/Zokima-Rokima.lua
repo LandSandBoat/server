@@ -20,7 +20,7 @@ entity.onTrigger = function(player, npc)
 
         if currentMission ~= xi.mission.id.windurst.NONE then
             player:startEvent(91) -- Have mission already activated
-        elseif (player:hasKeyItem(xi.ki.MESSAGE_TO_JEUNO_WINDURST)) then
+        elseif player:hasKeyItem(xi.ki.MESSAGE_TO_JEUNO_WINDURST) then
             player:startEvent(150)
         else
             -- NPC dialog changes when starting 3-2 according to whether it's the first time or being repeated
@@ -36,9 +36,6 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid ~= 96 or csid ~= 106 or csid ~= 111 then
-        finishMissionTimeline(player, 4, csid, option)
-    end
 end
 
 return entity

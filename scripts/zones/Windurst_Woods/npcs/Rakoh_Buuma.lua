@@ -36,12 +36,6 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid ~= 121 or csid ~= 132 or csid ~= 149 then
-        finishMissionTimeline(player, 1, csid, option)
-    end
-    if csid == 632 then
-        player:setCharVar("WWoodsRTenText", 1)
-    end
 end
 
 return entity
