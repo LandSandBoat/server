@@ -54,6 +54,7 @@ zones[xi.zone.BEADEAUX] =
     },
     npc =
     {
+        QM1             = 17379800,
         TREASURE_CHEST  = 17379842,
         TREASURE_COFFER = 17379843,
     },
