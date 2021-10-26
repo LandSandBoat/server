@@ -56,25 +56,13 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local missionStatus = player:getMissionStatus(player:getNation())
     local kindCardian = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_KIND_CARDIAN)
     local kindCardianCS = player:getCharVar("theKindCardianVar")
     local allNewC3000 = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_ALL_NEW_C_3000)
     local canCardiansCry = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CAN_CARDIANS_CRY)
-    local Rank6 = player:getRank(player:getNation()) >= 6 and 1 or 0
-
-        -- WINDURST 9-1: DOLL OF THE DEAD
-    if player:getCurrentMission(WINDURST) == xi.mission.id.windurst.DOLL_OF_THE_DEAD then
-        if missionStatus == 0 then
-            player:startEvent(619)
-        elseif missionStatus == 3 then
-            player:startEvent(620)
-        elseif missionStatus == 6 then
-            player:startEvent(621)
-        end
 
         -- THE KIND CARDIAN
-    elseif kindCardian == QUEST_ACCEPTED then
+    if kindCardian == QUEST_ACCEPTED then
         if kindCardianCS == 0 then
             player:startEvent(392)
         elseif kindCardianCS == 1 then
@@ -93,6 +81,8 @@ entity.onTrigger = function(player, npc)
 
         -- TRUST
     elseif player:hasKeyItem(xi.ki.WINDURST_TRUST_PERMIT) and not player:hasSpell(904) then
+        local Rank6 = player:getRank(player:getNation()) >= 6 and 1 or 0
+
         player:startEvent(866, 0, 0, 0, TrustMemory(player), 0, 0, 0, Rank6)
     end
 end
@@ -101,18 +91,8 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-        -- WINDURST 9-1: DOLL OF THE DEAD
-    if csid == 619 then
-        player:setMissionStatus(player:getNation(), 1)
-    elseif csid == 620 then
-        player:setMissionStatus(player:getNation(), 4)
-    elseif csid == 621 then
-        player:setMissionStatus(player:getNation(), 7)
-        player:messageSpecial(ID.text.KEYITEM_LOST, xi.ki.LETTER_FROM_ZONPA_ZIPPA)
-        player:delKeyItem(xi.ki.LETTER_FROM_ZONPA_ZIPPA)
-
         -- THE KIND CARDIAN
-    elseif csid == 392 and option == 1 then
+    if csid == 392 and option == 1 then
         player:setCharVar("theKindCardianVar", 1)
     elseif csid == 397 then
         player:delKeyItem(xi.ki.TWO_OF_SWORDS)

@@ -17,9 +17,7 @@ entity.onTrigger = function(player, npc)
     local currentMission = player:getCurrentMission(WINDURST)
     local missionStatus = player:getMissionStatus(player:getNation())
 
-    if currentMission == xi.mission.id.windurst.DOLL_OF_THE_DEAD and missionStatus == 2 then
-        player:startEvent(362)
-    elseif currentMission == xi.mission.id.windurst.MOON_READING and missionStatus == 0 then
+    if currentMission == xi.mission.id.windurst.MOON_READING and missionStatus == 0 then
         player:startEvent(384)
     elseif
         currentMission == xi.mission.id.windurst.MOON_READING and
@@ -43,9 +41,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 362 then
-        player:setMissionStatus(player:getNation(), 3)
-    elseif csid == 384 then
+    if csid == 384 then
         player:setMissionStatus(player:getNation(), 1)
     elseif csid == 385 then
         player:setMissionStatus(player:getNation(), 2)

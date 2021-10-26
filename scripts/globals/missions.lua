@@ -888,12 +888,11 @@ function finishMissionTimeline(player, guard, csid, option)
 
     if (nation == xi.nation.WINDURST) then
         local guardlist = {114, 111, 78, 93}
-        if (csid == guardlist[guard] and option ~= 1073741824 and option ~= 31 and option > 21) then -- last part of conditional is for converted missions, increment for each converted
+        if (csid == guardlist[guard] and option ~= 1073741824 and option ~= 31 and option > 22) then -- last part of conditional is for converted missions, increment for each converted
             timeline = {option, {guardlist[guard], option}, {guardlist[guard], option}, {guardlist[guard], option}, {guardlist[guard], option}, {{1}, {2}}}
         else
             timeline =
             { -- ID    Guard 1      Guard 2      Guard 3     Guard 4        Function List
-                22,      {0, 0},      {0, 0},    {61, 0},     {0, 0},       {{14, 0}, {5, 800}, {13, 293}, {0}, {0, 0}, {12}},          -- MISSION 9-1 (Finish (Zone: Full Moon Fountain))
                 23,      {0, 0},      {0, 0},   {407, 0},     {0, 0},       {{13, 294}, {11, 10}, {8, 100000}, {6}, {0, 0}, {12}}       -- MISSION 9-2 (Finish (Vestal Chamber))
             }
         end

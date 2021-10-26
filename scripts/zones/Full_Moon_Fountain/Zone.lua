@@ -19,10 +19,6 @@ zone_object.onZoneIn = function(player, prevZone)
         player:setPos(-260.136, 2.09, -325.702, 188)
     end
 
-    if player:getCurrentMission(WINDURST) == xi.mission.id.windurst.DOLL_OF_THE_DEAD and player:getMissionStatus(player:getNation()) == 7 then
-        cs = 61
-    end
-
     return cs
 end
 
@@ -43,10 +39,6 @@ zone_object.onEventUpdate = function(player, csid, option)
 end
 
 zone_object.onEventFinish = function(player, csid, option)
-    if csid == 61 then
-        player:addTitle(xi.title.GUIDING_STAR)
-        finishMissionTimeline(player, 3, csid, option)
-    end
 end
 
 return zone_object
