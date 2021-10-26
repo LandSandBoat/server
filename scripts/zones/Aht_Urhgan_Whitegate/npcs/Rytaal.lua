@@ -49,15 +49,21 @@ entity.onTrigger = function(player, npc)
         player:getVar("AhtUrganStatus") >= 1)
     then
         local currentTime = os.time()
-        local refreshTime = player:getCharVar("nextTagTime")
-        local diffday =  math.floor((currentTime - refreshTime)/86400)
+        local refreshTime = player:getVar("nextTagTime")
+        local idTagPeriod = 86400
+
+        if player:hasKeyItem(xi.ki.RHAPSODY_IN_AZURE) then
+            idTagPeriod = 600
+        end
+
+        local diffPeriod =  math.floor((currentTime - refreshTime) / idTagPeriod)
         local tagStock = player:getCurrency("id_tags")
-        local allTagsTimeCS = (refreshTime - 1009897200) + (diffday * 86400)
+        local allTagsTimeCS = (refreshTime - 1009897200) + (diffPeriod * idTagPeriod)
         local haveimperialIDtag = 0
         local tagsAvail = 0
 
         while currentTime >= refreshTime and tagStock < 3 do
-            refreshTime = refreshTime + 86400
+            refreshTime = refreshTime + idTagPeriod
             tagStock = tagStock + 1
         end
 
@@ -102,9 +108,16 @@ entity.onEventFinish = function(player, csid, option)
         end
         npcUtil.giveKeyItem(player, xi.ki.IMPERIAL_ARMY_ID_TAG)
 
-        if tagStock >= 3 then
-            player:setCharVar("nextTagTime", os.time() + 86400)
+        local idTagPeriod = 86400
+
+        if player:hasKeyItem(xi.ki.RHAPSODY_IN_AZURE) then
+            idTagPeriod = 600
         end
+
+        if tagStock >= 3 then
+            player:setVar("nextTagTime", os.time() + idTagPeriod)
+        end
+
         player:setCurrency("id_tags", tagStock - 1)
     elseif csid == 268 and option == 2 and xi.assaultUtil.hasOrders(player) and not player:hasKeyItem(xi.ki.IMPERIAL_ARMY_ID_TAG) then
         local currentAssault = player:getCurrentAssault()
