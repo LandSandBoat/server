@@ -25,6 +25,7 @@ mission.reward =
 local handleAcceptMission = function(player, csid, option, npc)
     if option == 11 then
         mission:begin(player)
+        player:messageSpecial(zones[player:getZoneID()].text.YOU_ACCEPT_THE_MISSION)
     end
 end
 

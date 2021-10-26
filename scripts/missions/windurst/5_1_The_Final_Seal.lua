@@ -30,6 +30,7 @@ local handleAcceptMission = function(player, csid, option, npc)
     if option == 0 then
         mission:begin(player)
         player:setMissionStatus(mission.areaId, 10)
+        player:messageSpecial(zones[player:getZoneID()].text.YOU_ACCEPT_THE_MISSION)
         npcUtil.giveKeyItem(player, xi.ki.NEW_FEIYIN_SEAL)
     end
 

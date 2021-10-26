@@ -30,6 +30,7 @@ mission.reward =
 local handleAcceptMission = function(player, csid, option, npc)
     if option == 12 then
         mission:begin(player)
+        player:messageSpecial(zones[player:getZoneID()].text.YOU_ACCEPT_THE_MISSION)
         npcUtil.giveKeyItem(player, xi.ki.STAR_CRESTED_SUMMONS_1)
     end
 end
