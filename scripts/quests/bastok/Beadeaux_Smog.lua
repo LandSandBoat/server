@@ -3,7 +3,7 @@
 -----------------------------------
 -- Log ID: 1, Quest ID: 33
 -- High Bear    : !pos 25.231 -14.999 4.552 237
--- qm2 (for KI) : !pos -79 1 -99 147
+-- qm1 (for KI) : !pos -58.873 1.026 -116.665 147
 -----------------------------------
 require('scripts/globals/quests')
 require('scripts/globals/titles')
@@ -16,7 +16,6 @@ local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BEADEAUX_SMOG
 quest.reward =
 {
     fame = 30,
-    item = xi.items.CHAKRAM,
     title = xi.title.BEADEAUX_SURVEYOR,
 }
 
@@ -30,16 +29,6 @@ quest.sections =
 
         [xi.zone.METALWORKS] =
         {
-            --local BeaSmog = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BEADEAUX_SMOG)
-            --local keyitem = player:hasKeyItem(xi.ki.CORRUPTED_DIRT)
-            --if (BeaSmog == QUEST_AVAILABLE and player:getFameLevel(BASTOK) >= 4) then
-            --    player:startEvent(731)
-            --elseif (BeaSmog == QUEST_ACCEPTED and keyitem == false or BeaSmog == QUEST_COMPLETED) then
-            --    player:startEvent(730)
-            --elseif (BeaSmog == QUEST_ACCEPTED and keyitem == true) then
-            --    player:startEvent(732)
-            --end
-
             ['High_Bear'] = quest:progressEvent(731),
 
             onEventFinish =
@@ -54,27 +43,26 @@ quest.sections =
     -- Section: Quest accepted
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == QUEST_ACCEPTED and not player:hasKeyItem(xi.keyItem.CORRUPTED_DIRT)
         end,
 
-        -- -- TODO: The ??? should only spawn during rainy weather, temporary fix in place to prevent players from getting the keyitem unless the proper weather is present.
-        -- if (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BEADEAUX_SMOG) == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.CORRUPTED_DIRT) == false and player:getWeather() == xi.weather.RAIN) then
-        --     player:addKeyItem(xi.ki.CORRUPTED_DIRT)
-        --     player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.CORRUPTED_DIRT)
-        -- end
+        -- While the quest is accepted, High Bear uses his default text
 
         [xi.zone.BEADEAUX] =
         {
-            ['qm2'] = quest:progressEvent(257), -- TODO, the look information for this qm is wrong, recap me
-
-            -- Get KI
+            ['qm1'] =
+            {
+                onTrigger = function(player, npc)
+                    return quest:keyItem(xi.ki.CORRUPTED_DIRT)
+                end,
+            },
         },
     },
 
     -- Section: Hand in quest
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED -- TODO: and has KI
+            return status == QUEST_ACCEPTED and player:hasKeyItem(xi.keyItem.CORRUPTED_DIRT)
         end,
 
         [xi.zone.METALWORKS] =
@@ -84,12 +72,9 @@ quest.sections =
             onEventFinish =
             {
                 [732] = function(player, csid, option, npc)
-                    --player:addFame(BASTOK, 30)
-                    --player:delKeyItem(xi.ki.CORRUPTED_DIRT)
-                    --player:addItem(17284, 1) -- Chakram
-                    --player:messageSpecial(ID.text.ITEM_OBTAINED, 17284)
-                    --player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BEADEAUX_SMOG)
-                    --player:setTitle(xi.title.BEADEAUX_SURVEYOR)
+                    if npcUtil.giveItem(player, xi.items.CHAKRAM) then
+                        quest:complete(player)
+                    end
                 end,
             },
         },
