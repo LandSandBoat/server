@@ -14,7 +14,10 @@ require("scripts/globals/mobskills")
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)
-    return 0
+    if mob:getAnimationSub() == 0 and mob:getMainJob() == xi.job.DRG then
+        return 0
+    end
+    return 1
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)

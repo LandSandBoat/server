@@ -1546,9 +1546,9 @@ INSERT INTO `mob_skills` VALUES (1731,1149,'forceful_blow',0,7.0,2000,1000,4,0,0
 INSERT INTO `mob_skills` VALUES (1732,1150,'somersault_kick',0,7.0,2000,1000,4,0,0,4,0,0,0);
 INSERT INTO `mob_skills` VALUES (1733,1151,'firespit',0,25.0,2000,1000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1734,1152,'warm-up',0,7.0,2000,1000,1,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (1735,1153,'javelin_throw',0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (1736,1480,'axe_throw',0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (1737,1481,'vorpal_blade',0,7.0,2000,1500,4,0,0,0,4,8,0);
+INSERT INTO `mob_skills` VALUES (1735,1153,'javelin_throw',0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1736,1154,'axe_throw',0,7.0,2000,1500,4,0,0,0,0,0,0);
+-- INSERT INTO `mob_skills` VALUES (1737,1155,'vorpal_blade',0,7.0,2000,1500,4,0,0,0,4,8,0);
 INSERT INTO `mob_skills` VALUES (1738,1156,'pw_groundburst',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1739,1483,'.',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1740,1484,'.',0,7.0,2000,1500,4,0,0,0,0,0,0);
@@ -1650,8 +1650,8 @@ INSERT INTO `mob_skills` VALUES (1835,1311,'serpentine_tail',0,7.0,2000,1500,4,0
 INSERT INTO `mob_skills` VALUES (1836,1312,'nerve_gas',1,10.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1837,1275,'feeble_bleat',1,18.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1838,1221,'mine_blast',1,10.0,2000,1500,4,24,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (1839,1147,'rushing_slash',0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (1840,1584,'rushing_stab',0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1839,1147,'rushing_slash',0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1840,1148,'rushing_stab',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1841,1585,'sandblast',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1842,1586,'sandpit',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1843,1587,'venom_spray',0,7.0,2000,1500,4,0,0,0,0,0,0);
@@ -1736,7 +1736,7 @@ INSERT INTO `mob_skills` VALUES (1921,1265,'forceful_blow',0,7.0,2000,1000,4,0,0
 INSERT INTO `mob_skills` VALUES (1922,1266,'somersault_kick',0,7.0,2000,1000,4,0,0,4,0,0,0);
 INSERT INTO `mob_skills` VALUES (1923,1267,'firespit',0,30.0,2000,1000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1924,1268,'warm-up',0,7.0,2000,1500,1,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (1925,1669,'stave_toss',0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1925,1269,'stave_toss',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1926,1270,'groundburst',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1927,1671,'.',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1928,1672,'.',0,7.0,2000,1500,4,0,0,0,0,0,0);
