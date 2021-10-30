@@ -589,6 +589,7 @@ xi.items =
     SWORD_OF_TRIALS                 = 16952,
     BOUNCER_CLUB                    = 17029,
     HEAVY_CROSSBOW                  = 17220,
+    CHAKRAM                         = 17284,
     ICE_ARROW                       = 17323,
     WILLOW_FISHING_ROD              = 17391,
     CLUB_OF_TRIALS                  = 17456,
