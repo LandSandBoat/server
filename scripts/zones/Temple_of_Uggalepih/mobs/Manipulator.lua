@@ -7,7 +7,7 @@ require("scripts/globals/hunts")
 -----------------------------------
 local entity = {}
 
-local path =
+local pathNodes =
 {
     -17.930, -8.500, -93.215,
     -18.553, -7.713, -91.224,
@@ -64,18 +64,18 @@ local path =
     -17.573, -8.500, -95.179
 }
 
-entity.onMobSpawn = function(mob)
-    entity.onMobRoam(mob) -- what?
+entity.onPath = function(mob)
+    xi.path.patrol(mob, pathNodes)
 end
 
-entity.onPath = function(mob)
-    xi.path.patrol(mob, path)
+entity.onMobSpawn = function(mob)
+    entity.onPath(mob)
 end
 
 entity.onMobRoam = function(mob)
     -- move to start position if not moving
     if not mob:isFollowingPath() then
-        mob:pathThrough(xi.path.first(path))
+        mob:pathThrough(xi.path.first(pathNodes))
     end
 end
 
