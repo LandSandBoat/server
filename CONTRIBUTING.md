@@ -14,13 +14,13 @@
 
 # General Guidelines
 
-* By contributing to Topaz, either through issues or pull requests, you are expected to abide by the rules laid out here in this Contributing Guide.
+* By contributing to LandSandBoat, either through issues or pull requests, you are expected to abide by the rules laid out here in this Contributing Guide.
 * We do not support out-of-date clients or client modification.
 * We do not support piracy of any kind. We encourage you to maintain an active retail subscription and support the game.
 
 # License
 
-* We operate under [GNU General Public License v3.0](https://github.com/DerpyProjectGroup/topaz/blob/topaz/LICENSE). We do not accept contributions that use other more restrictive licenses (such as AGPL3).
+* We operate under [GNU General Public License v3.0](https://github.com/LandSandBoat/server/blob/base/LICENSE). We do not accept contributions that use other more restrictive licenses (such as AGPL3).
 
 # Workflow Guide
 
@@ -32,12 +32,12 @@
 # Issue Report Contributions:
 
 * If an issue involves incorrect NPCs or text, please include your client and server versions (type `/ver` and `!ver` in game)
-* Unimplemented feature requests must be _retail behavior_, and adequetly cover everything about that feature which is missing.
+* Unimplemented feature requests must be _retail behavior_, and adequately cover everything about that feature which is missing.
 * Fill out the templated checkboxes that are preloaded in the issue body. These allow us to diagnose your issue as efficiently as possible, and confirm that you've searched for duplicate issues or recent fixes. 
 
 # Pull Request Contributions:
 
-All contributions must be done through pull requests to the Topaz repository. We don't take fixes from Discord to apply ourselves. If you need help with making a pull request, there is a GitHub guide on how to do so. If you still need help after consulting the guide, you can ask for help in Discord and we will be happy to help you.
+All contributions must be done through pull requests to the LandSandBoat repository. We don't take fixes from Discord to apply ourselves. If you need help with making a pull request, there is a GitHub guide on how to do so. If you still need help after consulting the guide, you can ask for help in Discord and we will be happy to help you.
 
 We prefer submitting early and often, over monolithic and once. If you're implementing a complex feature, please try to submit PRs as you get each smaller functional aspect working (use your best judgment on what counts as a useful PR). This way we can help make sure you're on the right track before you sink a lot of time into implementations we might want done in a different way.
 

@@ -11,7 +11,7 @@ item_object.onItemCheck = function(target)
     if (zone == 238 or zone == 239 or zone == 240 or zone == 241 or zone == 242 or -- Windurst
         zone == 234 or zone == 235 or zone == 236 or zone == 237 or -- Bastok
         zone == 230 or zone == 231 or zone == 232 or zone == 233 or -- San d'Oria
-        zone == 243 or zone == 244 or zone == 245 or zone == 246 or -- Jeuno
+        ((zone == 243 or zone == 244 or zone == 245 or zone == 246) and target:hasKeyItem(xi.ki.AIRSHIP_PASS_FOR_KAZHAM)) or -- Jeuno
         zone == 248 or -- Selbina
         zone == 249 or -- Mhaura
         zone == 250 or -- Kazham

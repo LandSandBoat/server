@@ -5622,7 +5622,7 @@ INSERT INTO `item_basic` VALUES (5941,0,'bar_of_campfire_chocolate','campfire_ch
 INSERT INTO `item_basic` VALUES (5942,0,'piece_of_cascade_candy','cascade_candy',12,1548,57,0,0);
 INSERT INTO `item_basic` VALUES (5943,0,'strip_of_smoked_mackerel','smoked_mackerel',12,1548,53,0,0);
 INSERT INTO `item_basic` VALUES (5944,0,'bottle_of_frontier_soda','frontier_soda',1,1548,58,0,0);
-INSERT INTO `item_basic` VALUES (5945,0,'pinch_of_prize_powder','prize_powder',99,1548,33,0,0);
+INSERT INTO `item_basic` VALUES (5945,0,'pinch_of_prize_powder','prize_powder',99,1548,33,0,100);
 INSERT INTO `item_basic` VALUES (5946,0,'frayed_sack_of_deviousness','frayed_sack_(d)',99,13916,0,1,0);
 INSERT INTO `item_basic` VALUES (5947,0,'frayed_sack_of_liminality','frayed_sack_(l)',99,13916,0,1,0);
 INSERT INTO `item_basic` VALUES (5948,0,'black_prawn','black_prawn',12,1548,51,1,0);
