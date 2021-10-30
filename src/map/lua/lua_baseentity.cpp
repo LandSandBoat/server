@@ -3210,6 +3210,12 @@ bool CLuaBaseEntity::addItem(sol::variadic_args va)
                     PItem->setSignature(EncodeStringSignature((int8*)signature.c_str(), encoded));
                 }
 
+                sol::object appraisalObj = table["appraisal"];
+                if (appraisalObj.get_type() == sol::type::number)
+                {
+                    PItem->setAppraisalID(appraisalObj.as<uint8>());
+                }
+
                 if (PItem->isType(ITEM_EQUIPMENT))
                 {
                     uint16 trial = table.get_or("trial", 0);
@@ -11397,6 +11403,42 @@ uint8 CLuaBaseEntity::getPetElement()
 }
 
 /************************************************************************
+ *  Function: setPet()
+ *  Purpose : Sets Pet outside of DB interaction
+ *  Example : mob:setPet(mobObject)
+ ************************************************************************/
+
+void CLuaBaseEntity::setPet(sol::object const& petObj)
+{
+    if (m_PBaseEntity->objtype == TYPE_NPC)
+    {
+        return;
+    }
+
+    CBattleEntity* PTarget = static_cast<CBattleEntity*>(m_PBaseEntity);
+    CLuaBaseEntity* PLuaBaseEntity = petObj.is<CLuaBaseEntity*>() ? petObj.as<CLuaBaseEntity*>() : nullptr; 
+
+    if (PLuaBaseEntity == nullptr)
+    {
+        if (PTarget->PPet)
+        {
+            PTarget->PPet->PMaster = nullptr;
+            PTarget->PPet          = nullptr;
+        }
+        return;
+    }
+
+    CBattleEntity* pet = dynamic_cast<CBattleEntity*>(PLuaBaseEntity->GetBaseEntity());
+    if (pet)
+    {
+        PTarget->PPet = pet;
+        pet->PMaster  = PTarget;
+    }
+
+    return;
+}
+
+/************************************************************************
  *  Function: getMaster()
  *  Purpose : Returns the Entity object for a pet's master
  *  Example : local master = pet:petMaster()
@@ -13655,6 +13697,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getPet", CLuaBaseEntity::getPet);
     SOL_REGISTER("getPetID", CLuaBaseEntity::getPetID);
     SOL_REGISTER("getPetElement", CLuaBaseEntity::getPetElement);
+    SOL_REGISTER("setPet", CLuaBaseEntity::setPet);
     SOL_REGISTER("getMaster", CLuaBaseEntity::getMaster);
 
     SOL_REGISTER("getPetName", CLuaBaseEntity::getPetName);

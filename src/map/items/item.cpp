@@ -103,6 +103,22 @@ uint16 CItem::getFlag() const
 }
 
 /************************************************************************
+*                                                                       *
+*  Appraisal Origin IDs                                                 *
+*                                                                       *
+************************************************************************/
+
+uint8 CItem::getAppraisalID() const
+{
+    return m_extra[0x16];
+}
+
+void CItem::setAppraisalID(uint8 appraisailID)
+{
+    m_extra[0x16] = appraisailID;
+}
+
+/************************************************************************
  *                                                                       *
  *                                                                       *
  *                                                                       *

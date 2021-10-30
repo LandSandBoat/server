@@ -63,6 +63,15 @@ end
 zone_object.onRegionLeave = function(player, region)
 end
 
+zone_object.onZoneWeatherChange = function(weather)
+    local qm1 = GetNPCByID(ID.npc.QM1) -- Quest: Beaudeaux Smog
+    if weather == xi.weather.RAIN or weather == xi.weather.SQUALL then
+        qm1:setStatus(xi.status.NORMAL)
+    else
+        qm1:setStatus(xi.status.DISAPPEAR)
+    end
+end
+
 zone_object.onEventUpdate = function(player, csid, option)
 end
 

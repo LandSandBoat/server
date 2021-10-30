@@ -15,4 +15,5 @@ return {
     ['Patt-Pott']  = { event = 250 },
     ['Pius']       = { event = 350 },
     ['Romualdo']   = { event = 705 },
+    ['High_Bear']  = { event = 730 },
 }
