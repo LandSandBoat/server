@@ -671,6 +671,7 @@ public:
     uint32 getPetID();                                // If the entity has a pet, returns the PetID to identify pet type.
     auto   getMaster() -> std::optional<CLuaBaseEntity>;
     uint8  getPetElement();
+    void   setPet(sol::object const& petObj);
 
     auto getPetName() -> const char*;
     void setPetName(uint8 pType, uint16 value, sol::object const& arg2);

@@ -3,16 +3,22 @@
 --  Mob: Qiqirn Ceramist
 -----------------------------------
 local ID = require("scripts/zones/Lebros_Cavern/IDs")
+require("scripts/globals/assault")
+require("scripts/globals/items")
 -----------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)
+    xi.assaultUtil.adjustMobLevel(mob)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    if math.random(0, 100) >= 50 and isKiller == true then
-        player:addTempItem(5331)
-        player:messageSpecial(ID.text.TEMP_ITEM, 5331)
+    if mob:getLocalVar("dead") == 0 then
+        mob:setLocalVar("dead", 1)
+        if math.random(0, 100) >= 50 then
+            player:addTempItem(xi.items.QIQIRN_MINE)
+            player:messageSpecial(ID.text.TEMP_ITEM, xi.items.QIQIRN_MINE)
+        end
     end
 end
 

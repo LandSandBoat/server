@@ -229,17 +229,3 @@ xi.besieged.getMercenaryRank = function(player)
 
     return rank
 end
-
-local assaultLevels =
-{
-    50, 50, 60, 60, 60, 70, 70, 70, 70, 70,
-    60, 60, 70, 60, 70, 50, 70, 70, 70, 70,
-    50, 60, 70, 70, 70, 60, 70, 70, 70, 70,
-    70, 70, 70, 60, 70, 50, 60, 70, 70, 70,
-    60, 70, 70, 50, 60, 70, 60, 70, 70, 70,
-    75, 99
-}
-
-function getRecommendedAssaultLevel(assaultid)
-    return assaultLevels[assaultid]
-end

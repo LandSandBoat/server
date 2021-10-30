@@ -280,6 +280,16 @@ auto CLuaItem::getSignature() -> std::string
     return std::string(reinterpret_cast<const char*>(signature));
 }
 
+uint8 CLuaItem::getAppraisalID()
+{
+    return m_PLuaItem->m_extra[0x16];
+}
+
+void CLuaItem::setAppraisalID(uint8 id)
+{
+    m_PLuaItem->m_extra[0x16] = id;
+}
+
 bool CLuaItem::isInstalled()
 {
     if (!m_PLuaItem->isType(ITEM_FURNISHING))
@@ -340,6 +350,8 @@ void CLuaItem::Register()
     SOL_REGISTER("isHandToHand", CLuaItem::isHandToHand);
     SOL_REGISTER("isShield", CLuaItem::isShield);
     SOL_REGISTER("getSignature", CLuaItem::getSignature);
+    SOL_REGISTER("getAppraisalID", CLuaItem::getAppraisalID);
+    SOL_REGISTER("setAppraisalID", CLuaItem::setAppraisalID);
     SOL_REGISTER("isInstalled", CLuaItem::isInstalled);
     SOL_REGISTER("setSoulPlateData", CLuaItem::setSoulPlateData);
     SOL_REGISTER("getSoulPlateData", CLuaItem::getSoulPlateData);

@@ -21,24 +21,16 @@ zones[xi.zone.PERIQIA] =
         CARRIED_OVER_POINTS        = 7000, -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY    = 7001, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER               = 7002, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
-        ASSAULT_31_START           = 7478, -- Commencing <assault>! Objective: Escort the prisoner
-        ASSAULT_32_START           = 7479, -- Commencing <assault>! Objective: Destroy the undead
-        ASSAULT_33_START           = 7480, -- Commencing <assault>! Objective: Find the survivors
-        ASSAULT_34_START           = 7481, -- Commencing <assault>! Objective: Eliminate the Black Baron
-        ASSAULT_35_START           = 7482, -- Commencing <assault>! Objective: Activate the bridge
-        ASSAULT_36_START           = 7483, -- Commencing <assault>! Objective: Exterminate the chigoes
-        ASSAULT_37_START           = 7484, -- Commencing <assault>! Objective: Clear the mine fields
-        ASSAULT_38_START           = 7485, -- Commencing <assault>! Objective: Locate the generals
-        ASSAULT_39_START           = 7486, -- Commencing <assault>! Objective: Retrieve the Mark-IIs
-        ASSAULT_40_START           = 7487, -- Commencing <assault>! Objective: Assassinate King Goldemar
+        PLAYER_OBTAINS_ITEM        = 7312, -- <player> obtains a <item>!
+        ASSAULT_START_OFFSET       = 7447, -- Max MP Down removed for <player>
         TIME_TO_COMPLETE           = 7508, -- You have <number> [minute/minutes] (Earth time) to complete this mission.
         MISSION_FAILED             = 7509, -- The mission has failed. Leaving area.
-        RUNE_UNLOCKED_POS          = 7510, -- ission objective completed. Unlocking Rune of Release ([A/B/C/D/E/F/G/H/I/J/K/L/M/N/O/P/Q/R/S/T/U/V/W/X/Y/Z]-#).
-        RUNE_UNLOCKED              = 7511, -- ission objective completed. Unlocking Rune of Release.
+        RUNE_UNLOCKED_POS          = 7510, -- Mission objective completed. Unlocking Rune of Release ([A/B/C/D/E/F/G/H/I/J/K/L/M/N/O/P/Q/R/S/T/U/V/W/X/Y/Z]-#).
+        RUNE_UNLOCKED              = 7511, -- Mission objective completed. Unlocking Rune of Release.
         ASSAULT_POINTS_OBTAINED    = 7512, -- You gain <number> [Assault point/Assault points]!
-        TIME_REMAINING_MINUTES     = 7513, -- ime remaining: <number> [minute/minutes] (Earth time).
-        TIME_REMAINING_SECONDS     = 7514, -- ime remaining: <number> [second/seconds] (Earth time).
-        PARTY_FALLEN               = 7516, -- ll party members have fallen in battle. Mission failure in <number> [minute/minutes].
+        TIME_REMAINING_MINUTES     = 7513, -- Time remaining: <number> [minute/minutes] (Earth time).
+        TIME_REMAINING_SECONDS     = 7514, -- Time remaining: <number> [second/seconds] (Earth time).
+        PARTY_FALLEN               = 7516, -- All party members have fallen in battle. Mission failure in <number> [minute/minutes].
         EXCALIACE_START            = 7525, -- Such a lot of trouble for one little corsair... Shall we be on our way?
         EXCALIACE_END1             = 7526, -- Yeah, I got it. Stay here and keep quiet.
         EXCALIACE_END2             = 7527, -- Hey... It was a short trip, but nothing is ever dull around you, huh?
@@ -61,48 +53,21 @@ zones[xi.zone.PERIQIA] =
 
     mob =
     {
-        -- Seagull Grounded
-        [31] =
+        [xi.assaultUtil.mission.SEAGULL_GROUNDED] =
         {
-            CRAB1      = 17006594,
-            CRAB2      = 17006595,
-            CRAB3      = 17006596,
-            CRAB4      = 17006597,
-            CRAB5      = 17006598,
-            CRAB6      = 17006599,
-            CRAB7      = 17006600,
-            CRAB8      = 17006601,
-            CRAB9      = 17006602,
-            DEBAUCHER1 = 17006603,
-            PUGIL1     = 17006604,
-            PUGIL2     = 17006605,
-            PUGIL3     = 17006606,
-            PUGIL4     = 17006607,
-            PUGIL5     = 17006608,
-            DEBAUCHER2 = 17006610,
-            DEBAUCHER3 = 17006611,
+            MOBS_START =
+            {
+                EXCALIAC = 17006593, 17006594, 17006595, 17006596, 17006597, 17006598, 17006599, 17006600, 17006601,
+                17006602, 17006603, 17006604, 17006605, 17006606, 17006607, 17006608, 17006610, 17006611,
+            },
         },
-        -- Requiem
-        [32] =
+        [xi.assaultUtil.mission.REQUIEM] =
         {
-            PUTRID_IMMORTAL_GUARD1 = 17006612,
-            PUTRID_IMMORTAL_GUARD2 = 17006613,
-            BATTEILANT_BHOOT1      = 17006614,
-            BATTEILANT_BHOOT2      = 17006615,
-            DARKLING_DRAUGAR1      = 17006616,
-            DRACONIC_DRAUGAR1      = 17006617,
-            DARKLING_DRAUGAR2      = 17006619,
-            DARKLING_DRAUGAR3      = 17006620,
-            DRACONIC_DRAUGAR2      = 17006621,
-            DRACONIC_DRAUGAR3      = 17006623,
-            BATTEILANT_BHOOT3      = 17006625,
-            BATTEILANT_BHOOT4      = 17006626,
-            DARKLING_DRAUGAR4      = 17006627,
-            DRACONIC_DRAUGAR4      = 17006628,
-            DARKLING_DRAUGAR5      = 17006630,
-            DRACONIC_DRAUGAR5      = 17006631,
-            DARKLING_DRAUGAR6      = 17006633,
-            DARKLING_DRAUGAR7      = 17006634,
+            MOBS_START =
+            {
+                17006612, 17006613, 17006614, 17006615, 17006616, 17006617, 17006619, 17006620, 17006621,
+                17006623, 17006625, 17006626, 17006627, 17006628, 17006630, 17006631, 17006633, 17006634,
+            },
         },
         -- Shades of Vengeance
         [79] =
@@ -122,69 +87,13 @@ zones[xi.zone.PERIQIA] =
 
     npc =
     {
-        EXCALIACE       = 17006593,
         ANCIENT_LOCKBOX = 17006809,
         RUNE_OF_RELEASE = 17006810,
-        _1K1            = 17006840,
-        _1K2            = 17006841,
-        _1K3            = 17006842,
-        _1K4            = 17006843,
-        _1K5            = 17006844,
         _1K6            = 17006845,
-        _1K7            = 17006846,
-        _1K8            = 17006847,
-        _1K9            = 17006848,
-        _1KA            = 17006849,
-        _1KB            = 17006850,
-        _1KC            = 17006851,
-        _1KD            = 17006852,
-        _1KE            = 17006853,
-        _1KF            = 17006854,
-        _1KG            = 17006855,
-        _1KH            = 17006856,
-        _1KI            = 17006857,
-        _1KJ            = 17006858,
-        _1KK            = 17006859,
-        _1KL            = 17006860,
-        _1KM            = 17006861,
-        _1KN            = 17006862,
-        _1KO            = 17006863,
-        _1KP            = 17006864,
-        _1KQ            = 17006865,
-        _1KR            = 17006866,
-        _1KS            = 17006867,
-        _1KT            = 17006868,
-        _1KU            = 17006869,
-        _1KV            = 17006870,
-        _1KW            = 17006871,
         _1KX            = 17006872,
-        _1KY            = 17006873,
         _1KZ            = 17006874,
-        _JK0            = 17006875,
         _JK1            = 17006876,
-        _JK2            = 17006877,
         _JK3            = 17006878,
-        _JK4            = 17006879,
-        _JK5            = 17006880,
-        _JK6            = 17006881,
-        _JK7            = 17006882,
-        _JK8            = 17006883,
-        _JK9            = 17006884,
-        _JKA            = 17006885,
-        _JKB            = 17006886,
-        _JKC            = 17006887,
-        _JKD            = 17006888,
-        _JKE            = 17006889,
-        _JKF            = 17006890,
-        _JKG            = 17006891,
-        _JKH            = 17006892,
-        _JKI            = 17006893,
-        _JKJ            = 17006894,
-        _JKK            = 17006895,
-        _JKL            = 17006896,
-        _JKM            = 17006897,
-        _JKN            = 17006898,
-        _JKO            = 17006899,
     }
 }
 

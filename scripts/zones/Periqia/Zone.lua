@@ -4,6 +4,7 @@
 --
 -----------------------------------
 local ID = require("scripts/zones/Periqia/IDs")
+require("scripts/globals/zone")
 -----------------------------------
 local zone_object = {}
 
@@ -24,8 +25,6 @@ zone_object.onInstanceZoneIn = function(player, instance)
         player:setPos(entrypos.x, entrypos.y, entrypos.z, entrypos.rot)
     end
 
-    player:addTempItem(5346)
-
     return cs
 end
 
@@ -37,7 +36,11 @@ end
 
 zone_object.onEventFinish = function(player, csid, option)
     if csid == 102 then
-        player:setPos(0, 0, 0, 0, 79)
+        local instance = player:getInstance()
+        local chars = instance:getChars()
+        for _, entity in pairs(chars) do
+            entity:setPos(0, 0, 0, 0, xi.zone.CAEDARVA_MIRE)
+        end
     end
 end
 
