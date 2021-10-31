@@ -43,6 +43,11 @@ entity.onTrigger = function(player, npc)
                 player:delKeyItem(orders)
             end
         end
+        for maps = xi.ki.MAP_OF_LEUJAOAM_SANCTUM, xi.ki.MAP_OF_NYZUL_ISLE do
+            if player:hasKeyItem(maps) then
+                player:delKeyItem(maps)
+            end
+        end
     elseif
         player:getCurrentMission(TOAU) > xi.mission.id.toau.PRESIDENT_SALAHEEM or
         (player:getCurrentMission(TOAU) == xi.mission.id.toau.PRESIDENT_SALAHEEM and

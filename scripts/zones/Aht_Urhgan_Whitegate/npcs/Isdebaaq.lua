@@ -38,6 +38,7 @@ entity.onEventFinish = function(player, csid, option)
             -- taken assault mission
             player:addAssault(bit.rshift(option, 4))
             player:delKeyItem(xi.ki.IMPERIAL_ARMY_ID_TAG)
+            player:addKeyItem(xi.ki.MAP_OF_THE_TRAINING_GROUNDS)
         elseif selectiontype == 2 then
             -- purchased an item
             local item = bit.rshift(option, 14)
