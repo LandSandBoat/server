@@ -56,7 +56,7 @@ local offeringsTurnedIn = function(player, csid, option, npc)
         player:setMissionStatus(mission.areaId, 3)
         mission:setVar(player, "OfferingsTurnedIn", 0)
     else
-        mission:setVar(player, "OfferingsTurnedIn", offeringsVar)  
+        mission:setVar(player, "OfferingsTurnedIn", offeringsVar)
     end
 end
 

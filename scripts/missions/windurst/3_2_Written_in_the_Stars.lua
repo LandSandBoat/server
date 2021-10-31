@@ -3,7 +3,12 @@
 -- Windurst M3-2
 -----------------------------------
 -- !addmission 2 11
-
+-- Rakoh Buuma      : !pos 106 -5 -23 241
+-- Mokyokyo         : !pos -55 -8 227 238
+-- Janshura-Rashura : !pos -227 -8 184 240
+-- Zokima-Rokima    : !pos 0 -16 124 239
+-- Zubaba           : !pos 15 -27 18 242
+-- Gate of Light    : !pos -331 0 139 192
 -----------------------------------
 require('scripts/globals/interaction/mission')
 require('scripts/globals/items')

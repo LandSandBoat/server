@@ -57,7 +57,7 @@ mission.sections =
             ['Mokyokyo'] =
             {
                 onTrigger = function(player, npc)
-                    return mission:progressEvent(109)
+                    return mission:progressEvent(232)
                 end,
             },
         },
@@ -67,7 +67,7 @@ mission.sections =
             ['Janshura-Rashura'] =
             {
                 onTrigger = function(player, npc)
-                    return mission:progressEvent(76)
+                    return mission:progressEvent(163)
                 end,
             },
         },
@@ -77,7 +77,7 @@ mission.sections =
             ['Rakoh_Buuma'] =
             {
                 onTrigger = function(player, npc)
-                    return mission:progressEvent(112)
+                    return mission:progressEvent(197)
                 end,
             },
         },
@@ -87,7 +87,7 @@ mission.sections =
             ['Zokima-Rokima'] =
             {
                 onTrigger = function(player, npc)
-                    return mission:progressEvent(91)
+                    return mission:progressEvent(150)
                 end,
             },
         },

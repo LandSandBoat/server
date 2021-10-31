@@ -3,7 +3,14 @@
 -- Windurst M3-1
 -----------------------------------
 -- !addmission 2 10
-
+-- Rakoh Buuma      : !pos 106 -5 -23 241
+-- Mokyokyo         : !pos -55 -8 227 238
+-- Janshura-Rashura : !pos -227 -8 184 240
+-- Zokima-Rokima    : !pos 0 -16 124 239
+-- Kupipi           : !pos 2 0.1 30 242
+-- Rhy Epocan       : !pos 2 -48 14 242
+-- Hakkuru-Rinkuru  : !pos -111 -4 101 240
+-- Trap Door        : !pos 22.310 -1.087 -14.320 151
 -----------------------------------
 require('scripts/globals/interaction/mission')
 require('scripts/globals/items')

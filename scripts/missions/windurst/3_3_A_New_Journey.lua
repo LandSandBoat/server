@@ -3,10 +3,14 @@
 -- Windurst M3-3
 -----------------------------------
 -- !addmission 2 12
--- _6q2          : !pos 0.1 -49 37 242
--- Pakh Jatalfih : !pos 34 8 -35 243
--- _6r8          : !pos 31 9 -22 243
--- _540          : !pos 636 16 59 184
+-- Rakoh Buuma      : !pos 106 -5 -23 241
+-- Mokyokyo         : !pos -55 -8 227 238
+-- Janshura-Rashura : !pos -227 -8 184 240
+-- Zokima-Rokima    : !pos 0 -16 124 239
+-- Vestal Chambers  : !pos 0.1 -49 37 242
+-- Pakh Jatalfih    : !pos 34 8 -35 243
+-- Embassy Door     : !pos 31 9 -22 243
+-- Cermet Door      : !pos 636 16 59 184
 -----------------------------------
 require('scripts/globals/interaction/mission')
 require('scripts/globals/items')
