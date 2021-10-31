@@ -3,10 +3,14 @@
 -- Windurst M2-3
 -----------------------------------
 -- !addmission 2 5
--- Kupipi        : !pos 2 0.1 30 242
--- Heruze-Moruze : !pos -56 -3 36 231
--- Kasaroro      : !pos -72 -3 34 231
--- Patt-Pott     : !pos 23 -17 42 237
+-- Rakoh Buuma      : !pos 106 -5 -23 241
+-- Mokyokyo         : !pos -55 -8 227 238
+-- Janshura-Rashura : !pos -227 -8 184 240
+-- Zokima-Rokima    : !pos 0 -16 124 239
+-- Kupipi           : !pos 2 0.1 30 242
+-- Heruze-Moruze    : !pos -56 -3 36 231
+-- Kasaroro         : !pos -72 -3 34 231
+-- Patt-Pott        : !pos 23 -17 42 237
 -----------------------------------
 require('scripts/settings/main')
 require('scripts/globals/interaction/mission')

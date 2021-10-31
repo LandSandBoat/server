@@ -3,7 +3,9 @@
 -- Windurst M2-3
 -----------------------------------
 -- !addmission 2 6
--- Halver  : !pos 2 0.1 0.1 233
+-- Halver          : !pos 2 0.1 0.1 233
+-- Warchief Vatgit : !pos -74.960 -34.692 256.968 140
+-- Kasaroro        : !pos -72 -3 34 231
 -----------------------------------
 require('scripts/globals/items')
 require('scripts/globals/keyitems')
@@ -72,11 +74,11 @@ mission.sections =
                     local missionStatus = player:getMissionStatus(mission.areaId)
 
                     if missionStatus == 3 then
-                        player:showText(npc, northernSandoriaID.text.KASARORO_DIALOG)
+                        return mission:messageText(northernSandoriaID.text.KASARORO_DIALOG)
                     elseif missionStatus == 4 then
-                        player:startEvent(549)
+                        return mission:progressEvent(549)
                     elseif missionStatus == 5 then
-                        player:startEvent(550)
+                        return mission:progressEvent(550)
                     end
                 end,
             },

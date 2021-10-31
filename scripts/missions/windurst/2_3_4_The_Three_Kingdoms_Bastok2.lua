@@ -1,11 +1,11 @@
 -----------------------------------
--- The Three Kingdoms Bastok (Part 2)
+-- The Three Kingdoms Bastok
 -- Windurst M2-3 (Part 2)
 -----------------------------------
--- !addmission 2 8
--- Grohm           : !pos -18 -11 -27 237
--- Pius            : !pos 99 -21 -12 237
--- Savae E Paleade : !pos 23.724 -17.39 -43.360 237
+-- !addmission 2 9
+-- Grohm     : !pos -18 -11 -27 237
+-- Pius      : !pos 99 -21 -12 237
+-- Patt-Pott : !pos 23 -17 42 237
 -----------------------------------
 require('scripts/globals/keyitems')
 require('scripts/globals/missions')
@@ -58,9 +58,9 @@ mission.sections =
                     local missionStatus = player:getMissionStatus(mission.areaId)
 
                     if missionStatus == 11 then
-                        mission:progressEvent(257)
+                        return mission:progressEvent(257)
                     else
-                        mission:progressEvent(258)
+                        return mission:progressEvent(258)
                     end
                 end,
             },
@@ -72,6 +72,7 @@ mission.sections =
                         player:addMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_THREE_KINGDOMS)
                         player:delKeyItem(xi.ki.KINDRED_CREST)
                         npcUtil.giveKeyItem(player, xi.ki.KINDRED_REPORT)
+                        player:setMissionStatus(mission.areaId, 11)
                     end
                 end,
 

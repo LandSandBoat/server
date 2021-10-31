@@ -3,17 +3,15 @@
 -- Windurst M2-1
 -----------------------------------
 -- !addmission 2 3
---     Gate Guards
--- Rakoh Buuma      - !pos 106 -5 -23 241
--- Mokyokyo         - !pos -55 -8 227 238
--- Janshura-Rashura - !pos -227 -8 184 240
--- Zokima-Rokima    - !pos 0 -16 124 239
---
--- Tosuka-Porika     - !pos -26 -6 103 238
--- Nanaa Mihgo       - !pos 62 -4 240 241
--- Fossil Rocks      - !pos 17 18 184 198
--- Mahogany Door     - !pos -11 0 20 192
--- House of the Hero - !pos -26 -13 260 239
+-- Rakoh Buuma       : !pos 106 -5 -23 241
+-- Mokyokyo          : !pos -55 -8 227 238
+-- Janshura-Rashura  : !pos -227 -8 184 240
+-- Zokima-Rokima     : !pos 0 -16 124 239
+-- Tosuka-Porika     : !pos -26 -6 103 238
+-- Nanaa Mihgo       : !pos 62 -4 240 241
+-- Fossil Rocks      : !pos 17 18 184 198
+-- Mahogany Door     : !pos -11 0 20 192
+-- House of the Hero : !pos -26 -13 260 239
 -----------------------------------
 require('scripts/settings/main')
 require('scripts/globals/items')
@@ -54,6 +52,9 @@ local examineRock = function(player, npc)
             return mission:messageSpecial(mazeID.text.NO_NEED_INVESTIGATE)
         end
     else
+        -- TODO: This multiline message should be converted to messageName, however the equivalent in
+        -- interaction is used for a different purpose.  Find a new method to implement in the interaction
+        -- container to handle.
         return mission:messageSpecial(mazeID.text.JUST_A_ROCK)
     end
 end

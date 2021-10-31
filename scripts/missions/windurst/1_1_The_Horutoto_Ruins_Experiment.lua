@@ -3,25 +3,19 @@
 -- Windurst M1-1
 -----------------------------------
 -- !addmission 2 0
---     Gate Guards
--- Rakoh Buuma      - !pos 106 -5 -23 241
--- Mokyokyo         - !pos -55 -8 227 238
--- Janshura-Rashura - !pos -227 -8 184 240
--- Zokima-Rokima    - !pos 0 -16 124 239
---
--- Hakkuru-Rinkuru - !pos -111 -4 101 240
---
--- Sama Gohjima - !pos 377 -13 98 116
---
--- _5c5 (Gate: Magical Gizmo) - !pos 419 0 -27 192
---
---     Gizmos
--- _5cp (Magical Gizmo) #1 - !pos 464 -3 100 192
--- _5cq (Magical Gizmo) #2 - !pos 406 -3 59 192
--- _5cr (Magical Gizmo) #3 - !pos 464 -3 20 192
--- _5cs (Magical Gizmo) #4 - !pos 295 -3 19 192
--- _5ct (Magical Gizmo) #5 - !pos 353 -3 60 192
--- _5cu (Magical Gizmo) #6 - !pos 295 -3 100 192
+-- Rakoh Buuma      : !pos 106 -5 -23 241
+-- Mokyokyo         : !pos -55 -8 227 238
+-- Janshura-Rashura : !pos -227 -8 184 240
+-- Zokima-Rokima    : !pos 0 -16 124 239
+-- Hakkuru-Rinkuru  : !pos -111 -4 101 240
+-- Sama Gohjima     : !pos 377 -13 98 116
+-- _5c5 (Gate)      : !pos 419 0 -27 192
+-- _5cp (Gizmo #1)  : !pos 464 -3 100 192
+-- _5cq (Gizmo #2)  : !pos 406 -3 59 192
+-- _5cr (Gizmo #3)  : !pos 464 -3 20 192
+-- _5cs (Gizmo #4)  : !pos 295 -3 19 192
+-- _5ct (Gizmo #5)  : !pos 353 -3 60 192
+-- _5cu (Gizmo #6)  : !pos 295 -3 100 192
 -----------------------------------
 require('scripts/settings/main')
 require('scripts/globals/items')
@@ -39,12 +33,12 @@ local mission = Mission:new(xi.mission.log_id.WINDURST, xi.mission.id.windurst.T
 
 -- A unique title is awarded from accepting the mission at each gate guard
 -- This is handled by zone ID and used in handleAcceptMission below
-local whichTitle =
+local zoneTitle =
 {
-    [238] = {titleGiven = xi.title.FRESH_NORTH_WINDS_RECRUIT}, -- Windurst Waters
-    [239] = {titleGiven = xi.title.HEAVENS_TOWER_GATEHOUSE_RECRUIT}, -- Windurst Walls
-    [240] = {titleGiven = xi.title.NEW_BEST_OF_THE_WEST_RECRUIT}, -- Port Windurst
-    [241] = {titleGiven = xi.title.NEW_BUUMAS_BOOMERS_RECRUIT} -- Windurst Woods
+    [238] = xi.title.FRESH_NORTH_WINDS_RECRUIT,       -- Windurst Waters
+    [239] = xi.title.HEAVENS_TOWER_GATEHOUSE_RECRUIT, -- Windurst Walls
+    [240] = xi.title.NEW_BEST_OF_THE_WEST_RECRUIT,    -- Port Windurst
+    [241] = xi.title.NEW_BUUMAS_BOOMERS_RECRUIT,      -- Windurst Woods
 }
 
 mission.reward =
@@ -53,13 +47,13 @@ mission.reward =
 }
 
 local handleAcceptMission = function(player, csid, option, npc)
-    local zone = player:getZoneID()
-    local which = whichTitle[zone]
+    local zoneId = player:getZoneID()
+
     if option == 1 then
         mission:begin(player)
-        player:addTitle(which.titleGiven)
+        player:addTitle(zoneTitle[zoneId])
         player:setMissionStatus(mission.areaId, 1)
-        player:messageSpecial(zones[player:getZoneID()].text.YOU_ACCEPT_THE_MISSION)
+        player:messageSpecial(zones[zoneId].text.YOU_ACCEPT_THE_MISSION)
     end
 end
 

@@ -2,10 +2,9 @@
 -- The Three Kingdoms San d'Oria
 -- Windurst M2-3 (Part 2)
 -----------------------------------
--- !addmission 1 8
--- Baraka  : !pos 36 -2 -2 231
--- Helaku  : !pos 49 -2 -12 231
--- Halver  : !pos 2 0.1 0.1 233
+-- !addmission 2 8
+-- Kasaroro : !pos -72 -3 34 231
+-- Halver   : !pos 2 0.1 0.1 233
 -----------------------------------
 require('scripts/globals/items')
 require('scripts/globals/keyitems')

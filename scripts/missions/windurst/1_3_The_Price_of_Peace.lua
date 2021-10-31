@@ -3,17 +3,14 @@
 -- Windurst M1-3
 -----------------------------------
 -- !addmission 2 2
---     Gate Guards
--- Rakoh Buuma      - !pos 106 -5 -23 241
--- Mokyokyo         - !pos -55 -8 227 238
--- Janshura-Rashura - !pos -227 -8 184 240
--- Zokima-Rokima    - !pos 0 -16 124 239
---
--- Leepe-Hoppe    - !pos 13 -9 -197 238
--- Ohbiru-Dohbiru - !pos 23 -5 -193 238
---
--- Laa Mozi   - !pos -22 0 148 145
--- Ghoo Pakya - !pos -139 0 147 145
+-- Rakoh Buuma      : !pos 106 -5 -23 241
+-- Mokyokyo         : !pos -55 -8 227 238
+-- Janshura-Rashura : !pos -227 -8 184 240
+-- Zokima-Rokima    : !pos 0 -16 124 239
+-- Leepe-Hoppe      : !pos 13 -9 -197 238
+-- Ohbiru-Dohbiru   : !pos 23 -5 -193 238
+-- Laa Mozi         : !pos -22 0 148 145
+-- Ghoo Pakya       : !pos -139 0 147 145
 -----------------------------------
 require('scripts/settings/main')
 require('scripts/globals/items')
@@ -44,22 +41,22 @@ end
 
 local offeringsTurnedIn = function(player, csid, option, npc)
     local offeringsVar = mission:getVar(player, "OfferingsTurnedIn")
-    local food = xi.ki.FOOD_OFFERING
-    local drink = xi.ki.DRINK_OFFERING
 
-    if csid == 45 and player:hasKeyItem(food) then
-        player:delKeyItem(food)
-        player:messageSpecial(giddeusID.text.OFFERED_UP_KEY_ITEM, food)
-        mission:setVar(player, "OfferingsTurnedIn", offeringsVar + 1)
-    elseif csid == 49 and player:hasKeyItem(drink) then
-        player:delKeyItem(drink)
-        player:messageSpecial(giddeusID.text.OFFERED_UP_KEY_ITEM, drink)
-        mission:setVar(player, "OfferingsTurnedIn", offeringsVar + 1)
+    if csid == 45 and player:hasKeyItem(xi.ki.FOOD_OFFERING) then
+        player:delKeyItem(xi.ki.FOOD_OFFERING)
+        player:messageSpecial(giddeusID.text.OFFERED_UP_KEY_ITEM, xi.ki.FOOD_OFFERING)
+        offeringsVar = offeringsVar + 1
+    elseif csid == 49 and player:hasKeyItem(xi.ki.DRINK_OFFERING) then
+        player:delKeyItem(xi.ki.DRINK_OFFERING)
+        player:messageSpecial(giddeusID.text.OFFERED_UP_KEY_ITEM, xi.ki.DRINK_OFFERING)
+        offeringsVar = offeringsVar + 1
     end
 
     if offeringsVar == 2 then
         player:setMissionStatus(mission.areaId, 3)
         mission:setVar(player, "OfferingsTurnedIn", 0)
+    else
+        mission:setVar(player, "OfferingsTurnedIn", offeringsVar)  
     end
 end
 

@@ -2,10 +2,10 @@
 -- The Three Kingdoms (Bastok)
 -- Windurst M2-3 (Part 1)
 -----------------------------------
--- !addmission 2 6
+-- !addmission 2 7
 -- Grohm           : !pos -18 -11 -27 237
 -- Pius            : !pos 99 -21 -12 237
--- Savae E Paleade : !pos 23.724 -17.39 -43.360 237
+-- Patt-Pott       : !pos 23 -17 42 237
 -----------------------------------
 require('scripts/globals/keyitems')
 require('scripts/globals/missions')
