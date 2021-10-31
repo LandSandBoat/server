@@ -38,6 +38,7 @@ entity.onEventFinish = function(player, csid, option)
             -- taken assault mission
             player:addAssault(bit.rshift(option, 4))
             player:delKeyItem(xi.ki.IMPERIAL_ARMY_ID_TAG)
+            player:addKeyItem(xi.ki.MAP_OF_LEBROS_CAVERN)
         elseif selectiontype == 2 then
             -- purchased an item
             local item = bit.rshift(option, 14)
@@ -48,7 +49,7 @@ entity.onEventFinish = function(player, csid, option)
                 [3]  = {itemid = xi.items.CHIVALROUS_CHAIN,  price = 8000},
                 [4]  = {itemid = xi.items.PRECISE_BELT,      price = 10000},
                 [5]  = {itemid = xi.items.INTENSIFYING_CAPE, price = 10000},
-                [6]  = {itemid = xi.itens.IMPERIAL_POLE,     price = 15000},
+                [6]  = {itemid = xi.items.IMPERIAL_POLE,     price = 15000},
                 [7]  = {itemid = xi.items.DOOMBRINGER,       price = 15000},
                 [8]  = {itemid = xi.items.SAYOSAMONJI,       price = 15000},
                 [9]  = {itemid = xi.items.AMIR_KORAZIN,      price = 20000},
