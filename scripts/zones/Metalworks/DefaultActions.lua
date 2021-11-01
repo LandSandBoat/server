@@ -14,4 +14,5 @@ return {
     ['Naji']       = { event = 700 },
     ['Pius']       = { event = 350 },
     ['Romualdo']   = { event = 705 },
+    ['High_Bear']  = { event = 730 },
 }

@@ -82,6 +82,7 @@ public:
     uint16 getID() const;
     uint16 getSubID() const;
     uint16 getFlag() const;
+    uint8  getAppraisalID() const;
     uint8  getAHCat() const;
     uint32 getReserve() const;
     uint32 getQuantity() const;
@@ -100,6 +101,7 @@ public:
     void setSubID(uint16);
     void setSubType(uint8);
     void setFlag(uint16);
+    void setAppraisalID(uint8 appraisailID);
     void setAHCat(uint8);
     void setReserve(uint32);
     void setQuantity(uint32);

@@ -556,6 +556,7 @@ INSERT INTO `item_usable` VALUES (4615,'scroll_of_curaga',1,1,11,5,0,0,0,0);
 INSERT INTO `item_usable` VALUES (4616,'scroll_of_curaga_ii',1,1,11,5,0,0,0,0);
 INSERT INTO `item_usable` VALUES (4617,'scroll_of_curaga_iii',1,1,11,5,0,0,0,0);
 INSERT INTO `item_usable` VALUES (4618,'scroll_of_curaga_iv',1,1,11,5,0,0,0,0);
+INSERT INTO `item_usable` VALUES (4619,'scroll_of_curaga_v',1,1,11,5,0,0,0,0);
 INSERT INTO `item_usable` VALUES (4620,'scroll_of_raise',1,1,11,5,0,0,0,0);
 INSERT INTO `item_usable` VALUES (4621,'scroll_of_raise_ii',1,1,11,5,0,0,0,0);
 INSERT INTO `item_usable` VALUES (4622,'scroll_of_poisona',1,1,11,5,0,0,0,0);

@@ -70,8 +70,8 @@ xi.instance.lookup =
 
     [xi.zone.PERIQIA] =
     {
-        { 5600, { 143, 79, -6, 0, 99, 3, 0 }, { 143, 4 },  { 147, 3 } }, -- Shades of Vengeance (TOAU31)
-        -- Assault: Seagull Grounded
+        { 5600, { 143, 79, -6, 0, 99, 3, 0 }, { 143, 4 }, { 147, 3 } }, -- Shades of Vengeance (TOAU31)
+        { 5601, { 143, 31, -4, 0, 70, 0, 1 }, { 143, 4 }, { 147, 0 } }, -- Assault: Seagull Grounded
         -- Assault: Requiem
         -- Assault: Saving Private Ryaaf
         -- Assault: Shooting Down the Baron
@@ -95,7 +95,7 @@ xi.instance.lookup =
 
     [xi.zone.LEBROS_CAVERN] =
     {
-        -- Assault: Excavation Duty
+        { 6300, { 203, 21, -4, 0, 50, 0, 1 }, { 203, 4 }, { 208, 0 } }, -- Assault: Excavation Duty
         -- Assault: Lebros Supplies
         -- Assault: Troll Fugitives
         -- Assault: Evade and Escape
@@ -109,7 +109,7 @@ xi.instance.lookup =
 
     [xi.zone.MAMOOL_JA_TRAINING_GROUNDS] =
     {
-        -- Assault: Imperial Agent Rescue
+        {6600, { 505, 11, -4, 0, 60, 0, 1 }, { 505, 4}, { 511, 0 } }, -- Assault: Imperial Agent Rescue
         -- Assault: Preemptive Strike
         -- Assault: Sagelord Elimination
         -- Assault: Breaking Morale
@@ -123,7 +123,7 @@ xi.instance.lookup =
 
     [xi.zone.LEUJAOAM_SANCTUM] =
     {
-        -- Assault: Leujaoam Cleansing
+        {6900, { 140, 1, -4, 0, 50, 0, 1 }, { 140, 4}, { 147, 0 } }, -- Assault: Leujaoam Cleansing
         -- Assault: Orichalcum Survey
         -- Assault: Escort Professor Chanoix
         -- Assault: Shanarha Grass Conservation

@@ -4,6 +4,7 @@
 --
 -----------------------------------
 require("scripts/zones/Lebros_Cavern/IDs")
+require("scripts/globals/zone")
 -----------------------------------
 local zone_object = {}
 
@@ -14,7 +15,7 @@ zone_object.onInstanceZoneIn = function(player, instance)
     local cs = -1
 
     if player:getInstance() == nil then
-        player:setPos(0, 0, 0, 0, 61)
+        player:setPos(0, 0, 0, 0, xi.zone.MOUNT_ZHAYOLM)
         return cs
     end
 
@@ -23,8 +24,6 @@ zone_object.onInstanceZoneIn = function(player, instance)
         local entrypos = instance:getEntryPos()
         player:setPos(entrypos.x, entrypos.y, entrypos.z, entrypos.rot)
     end
-
-    player:addTempItem(5345)
 
     return cs
 end
@@ -37,7 +36,11 @@ end
 
 zone_object.onEventFinish = function(player, csid, option)
     if csid == 102 then
-        player:setPos(0, 0, 0, 0, 61)
+        local instance = player:getInstance()
+        local chars = instance:getChars()
+        for _, entity in pairs(chars) do
+            entity:setPos(0, 0, 0, 0, xi.zone.MOUNT_ZHAYOLM)
+        end
     end
 end
 
