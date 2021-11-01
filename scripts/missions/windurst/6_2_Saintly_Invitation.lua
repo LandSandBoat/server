@@ -3,6 +3,10 @@
 -- Windurst M6-2
 -----------------------------------
 -- !addmission 2 17
+-- Rakoh Buuma       : !pos 106 -5 -23 241
+-- Mokyokyo          : !pos -55 -8 227 238
+-- Janshura-Rashura  : !pos -227 -8 184 240
+-- Zokima-Rokima     : !pos 0 -16 124 239
 -- Vestal Chamber    : !pos 0.1 -49 37 242
 -- Kaa Toru the Just : !pos -100.188 -62.125 145.422 151
 -----------------------------------
@@ -113,7 +117,7 @@ mission.sections =
             {
                 [32001] = function(player, csid, option, npc)
                     if
-                        player:getMissionStatus(mission.areaId) == 0 and
+                        player:getMissionStatus(mission.areaId) == 1 and
                         player:getLocalVar('battlefieldWin') == 99
                     then
                         player:addTitle(xi.title.VICTOR_OF_THE_BALGA_CONTEST)

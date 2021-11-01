@@ -21,9 +21,9 @@ end
 battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
     if leavecode == xi.battlefield.leaveCode.WON then
         local _, clearTime, partySize = battlefield:getRecord()
-        local arg8 = player:hasCompletedMission(player:getNation(), xi.mission.id.nation.SAINTLY_INVITATION) and 1 or 0
+        local arg8 = player:hasCompletedMission(player:getNation(), xi.mission.id.windurst.SAINTLY_INVITATION) and 1 or 0
 
-        if player:getCurrentMission(xi.mission.log_id.WINDURST) == xi.mission.id.sandoria.SAINTLY_INVITATION then
+        if player:getCurrentMission(xi.mission.log_id.WINDURST) == xi.mission.id.windurst.SAINTLY_INVITATION then
             player:setLocalVar("battlefieldWin", battlefield:getID())
         end
 

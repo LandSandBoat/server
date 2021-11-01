@@ -3,9 +3,16 @@
 -- Windurst M7-2
 -----------------------------------
 -- !addmission 2 19
--- Leepe-Hoppe
+-- Rakoh Buuma      : !pos 106 -5 -23 241
+-- Mokyokyo         : !pos -55 -8 227 238
+-- Janshura-Rashura : !pos -227 -8 184 240
+-- Zokima-Rokima    : !pos 0 -16 124 239
+-- Leepe-Hoppe      : !pos 13 -9 -197 238
 -- Kerutoto         : !pos 13 -5 -157 238
 -- Jakoh Wahcondalo : !pos 101 -16 -115 250
+-- Romaa Mihgo      : !pos 29 -13.023 -176.5 250
+-- Vanono           : !pos -23.140 -5 -23.101 250
+-- Granite Door     : !pos 340 0.1 329 159
 -----------------------------------
 require('scripts/settings/main')
 require('scripts/globals/interaction/mission')
@@ -194,6 +201,7 @@ mission.sections =
             onEventFinish =
             {
                 [23] = function(player, csid, option, npc)
+                    player:confirmTrade()
                     player:setPos(340, 0, 333)
                     player:delKeyItem(xi.ki.BLANK_BOOK_OF_THE_GODS)
                     player:setMissionStatus(mission.areaId, 5)

@@ -3,6 +3,10 @@
 -- Windurst M6-1
 -----------------------------------
 -- !addmission 2 16
+-- Rakoh Buuma         : !pos 106 -5 -23 241
+-- Mokyokyo            : !pos -55 -8 227 238
+-- Janshura-Rashura    : !pos -227 -8 184 240
+-- Zokima-Rokima       : !pos 0 -16 124 239
 -- Hakkuru-Rinkuru     : !pos -111 -4 101 240
 -- Gate: Magical Gizmo : !pos -291 0 -659 194
 -----------------------------------
@@ -145,7 +149,7 @@ mission.sections =
 
                     if not areJacksSpawned() then
                         if missionStatus == 1 then
-                            for mobId = ID.mob.FULL_MOON_FOUNTAIN_OFFSET, ID.mob.FULL_MOON_FOUNTAIN_OFFSET + 3 do
+                            for mobId = outerHorutotoID.mob.FULL_MOON_FOUNTAIN_OFFSET, outerHorutotoID.mob.FULL_MOON_FOUNTAIN_OFFSET + 3 do
                                 SpawnMob(mobId)
                             end
 

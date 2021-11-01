@@ -3,9 +3,13 @@
 -- Windurst M5-2
 -----------------------------------
 -- !addmission 2 15
--- Vestal Chamber  : !pos 0.1 -49 37 242
--- Zubaba          : !pos 15 -27 18 242
--- Thone Room Door : !pos -111 -6 0 165
+-- Rakoh Buuma      : !pos 106 -5 -23 241
+-- Mokyokyo         : !pos -55 -8 227 238
+-- Janshura-Rashura : !pos -227 -8 184 240
+-- Zokima-Rokima    : !pos 0 -16 124 239
+-- Vestal Chamber   : !pos 0.1 -49 37 242
+-- Zubaba           : !pos 15 -27 18 242
+-- Thone Room Door  : !pos -111 -6 0 165
 -----------------------------------
 require('scripts/globals/interaction/mission')
 require('scripts/globals/keyitems')

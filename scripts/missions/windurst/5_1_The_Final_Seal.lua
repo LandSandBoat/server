@@ -48,10 +48,6 @@ mission.sections =
                 not player:hasCompletedMission(mission.areaId, mission.missionId)
         end,
 
-        -- TODO: Gate guard interaction should be completely blocked for this mission, with
-        -- accurate dialogue being displayed.  This will require retail caps to accomplish.
-        -- Currently backfilled with generic "You must complete your mission first" message.
-        -- While most likely incorrect, this is no change from the previous implementation.
         [xi.zone.WINDURST_WATERS] =
         {
             ['Mokyokyo'] =

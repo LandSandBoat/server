@@ -3,8 +3,12 @@
 -- Windurst M7-1
 -----------------------------------
 -- !addmission 2 18
--- Tosuka-Porika : !pos -26 -6 103 238
--- _4pc          : !pos 132 12 -19 169
+-- Rakoh Buuma      : !pos 106 -5 -23 241
+-- Mokyokyo         : !pos -55 -8 227 238
+-- Janshura-Rashura : !pos -227 -8 184 240
+-- Zokima-Rokima    : !pos 0 -16 124 239
+-- Tosuka-Porika    : !pos -26 -6 103 238
+-- _4pc             : !pos 132 12 -19 169
 -----------------------------------
 require('scripts/settings/main')
 require('scripts/globals/interaction/mission')
