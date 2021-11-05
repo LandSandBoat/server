@@ -1076,6 +1076,27 @@ void SmallPacket0x01C(map_session_data_t* const PSession, CCharEntity* const PCh
 
 /************************************************************************
  *                                                                       *
+ *  /volunteer packet                                                    *
+ *                                                                       *
+ ************************************************************************/
+
+void SmallPacket0x01E(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
+{
+    TracyZoneScoped;
+
+    // It sends out a packet of type 0x1E, where the body is a 4 - byte aligned string
+    //
+    // "/volunteer Volunteer what" without anything targeted results in:
+    // 1E0A6405566F6C756E7465657220776861740000 -> Volunteer what\0\0
+    //
+    // "/volunteer I choose you" with a Savanna Rarab targeted results in:
+    // 1E127505492063686F6F736520796F7520543120536176616E6E61205261726162000000 -> I choose you T1 Savanna Rarab\0\0\0
+
+    PrintPacket(std::move(data));
+}
+
+/************************************************************************
+ *                                                                       *
  *  Item Movement (Disposal)                                             *
  *                                                                       *
  ************************************************************************/
@@ -7211,6 +7232,7 @@ void PacketParserInitialize()
     PacketSize[0x01A] = 0x0E; PacketParser[0x01A] = &SmallPacket0x01A;
     PacketSize[0x01B] = 0x00; PacketParser[0x01B] = &SmallPacket0x01B;
     PacketSize[0x01C] = 0x00; PacketParser[0x01C] = &SmallPacket0x01C;
+    PacketSize[0x01E] = 0x00; PacketParser[0x01E] = &SmallPacket0x01E;
     PacketSize[0x028] = 0x06; PacketParser[0x028] = &SmallPacket0x028;
     PacketSize[0x029] = 0x06; PacketParser[0x029] = &SmallPacket0x029;
     PacketSize[0x032] = 0x06; PacketParser[0x032] = &SmallPacket0x032;
