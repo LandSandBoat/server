@@ -1091,8 +1091,24 @@ void SmallPacket0x01E(map_session_data_t* const PSession, CCharEntity* const PCh
     //
     // "/volunteer I choose you" with a Savanna Rarab targeted results in:
     // 1E127505492063686F6F736520796F7520543120536176616E6E61205261726162000000 -> I choose you T1 Savanna Rarab\0\0\0
+    //
+    // "/volunteer hello" with no target -> 1e 06 17 00 68 65 6c 6c 6f 00 00 00
+    // "/volunteer test" with no target -> 1e 06 92 00 74 65 73 74 00 00 00 00
+    //
+    // id - length - seq - 00 - content -- null terminators/padding
 
-    PrintPacket(std::move(data));
+    const uint8 HEADER_LENGTH = 4;
+
+    std::vector<char> chars;
+    std::for_each(data[HEADER_LENGTH], data[HEADER_LENGTH] + (data.length() - HEADER_LENGTH), [&](char ch)
+    {
+        if ((ch >= 0 && ch < 128) && ch != '\0') // isascii && nonnull
+        {
+            chars.emplace_back(ch);
+        }
+    });
+    auto str = std::string(chars.begin(), chars.end());
+    luautils::OnPlayerVolunteer(PChar, str);
 }
 
 /************************************************************************
