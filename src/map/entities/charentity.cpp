@@ -1115,7 +1115,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
                         StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_BLOODPACT);
                     }
 
-                    // Blood Boon (does not affect Astra Flow BPs)
+                    // Blood Boon (does not affect Astral Flow BPs)
                     if ((PAbility->getAddType() & ADDTYPE_ASTRAL_FLOW) == 0)
                     {
                         int16 bloodBoonRate = getMod(Mod::BLOOD_BOON);
