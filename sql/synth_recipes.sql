@@ -3598,23 +3598,23 @@ INSERT INTO `synth_recipes` VALUES (59930,1,0,0,0,0,0,0,28,0,0,4100,4242,12455,0
 INSERT INTO `synth_recipes` VALUES (59931,1,0,0,0,0,0,0,92,0,0,4100,4242,14305,0,0,0,0,0,0,0,1629,1629,1629,1629,1,1,1,1,'Dragon Subligar (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (59932,1,0,0,0,0,0,0,255,0,0,4100,4242,14852,0,0,0,0,0,0,0,1163,1622,790,1618,1,1,1,1,'Igqira Manillas (desynth)');
 INSERT INTO `synth_recipes` VALUES (59933,1,0,0,0,0,0,0,72,0,0,4100,4242,12878,0,0,0,0,0,0,0,819,506,887,887,2,1,1,1,'Coral Subligar (desynth)');
-INSERT INTO `synth_recipes` VALUES (59934,1,0,0,0,0,0,0,44,0,0,4100,4242,13713,0,0,0,0,0,0,0,864,864,864,864,1,1,1,1,'Carapace Mittens (desynth)');  -- 2021.11.01
-INSERT INTO `synth_recipes` VALUES (59935,1,0,0,0,0,0,0,39,0,0,4100,4242,17026,0,0,0,0,0,0,0,817,880,880,893,3,5,6,1,'Bone Cudgel (desynth)');  -- 2021.11.01 XI and allakhzam have different recipes.  Went with https://ffxiclopedia.fandom.com/wiki/Bone_Cudgel
+INSERT INTO `synth_recipes` VALUES (59934,1,0,0,0,0,0,0,44,0,0,4100,4242,13713,0,0,0,0,0,0,0,864,864,864,864,1,1,1,1,'Carapace Mittens (desynth)');  -- 2021.11.06 - FFXIclopedia
+INSERT INTO `synth_recipes` VALUES (59935,1,0,0,0,0,0,0,39,0,0,4100,4242,17026,0,0,0,0,0,0,0,817,880,880,893,3,5,6,1,'Bone Cudgel (desynth)');  -- 2021.11.01 FFXIclopedia and allakhzam have different recipes.  Went with https://ffxiclopedia.fandom.com/wiki/Bone_Cudgel
 INSERT INTO `synth_recipes` VALUES (59936,1,0,0,0,0,0,0,77,0,0,4100,4242,13850,0,0,0,0,0,0,0,887,792,793,793,1,1,1,1,'Merman\'s Hairpin (desynth)');  -- 2021.11.01 https://ffxiclopedia.fandom.com/wiki/Merman's_Hairpin
-INSERT INTO `synth_recipes` VALUES (59937,1,0,0,0,0,0,0,36,0,0,4100,4242,12583,0,0,0,0,0,0,0,852,889,852,852,1,1,2,3,'Beetle Harness (desynth)');  -- 2021.11.01 nothing matches. XI makes no sense b/c of materials needed to make.  Used https://ffxi.allakhazam.com/db/item.html?fitem=536#Desynthesis
+INSERT INTO `synth_recipes` VALUES (59937,1,0,0,0,0,0,0,36,0,0,4100,4242,12583,0,0,0,0,0,0,0,852,889,852,852,1,1,2,3,'Beetle Harness (desynth)');  -- 2021.11.01 nothing matches. FFXIclopedia makes no sense b/c of materials needed to make.  Used https://ffxi.allakhazam.com/db/item.html?fitem=536#Desynthesis
 INSERT INTO `synth_recipes` VALUES (59938,1,0,0,0,0,0,0,97,0,0,4100,4242,13846,0,0,0,0,0,0,0,850,1230,1473,1473,1,6,1,1,'Scorpion Helm (desynth)');  -- 2021.11.01
-INSERT INTO `synth_recipes` VALUES (59939,1,0,0,0,0,0,0,92,0,0,4100,4242,14008,0,0,0,0,0,0,0,817,1193,850,850,3,1,1,3,'Cpc. Gauntlets (desynth)');  -- 2021.11.01 allakhazam states synth rate is 3,1,1,3 XI shows 3,3,1,3. Nothing shown on others. Chose 3,1,1,3 b/c there are not 3 Crab Shells in the synths to make.
+INSERT INTO `synth_recipes` VALUES (59939,1,0,0,0,0,0,0,92,0,0,4100,4242,14008,0,0,0,0,0,0,0,817,1193,850,850,3,1,1,3,'Cpc. Gauntlets (desynth)');  -- 2021.11.01 allakhazam states synth rate is 3,1,1,3 FFXIclopedia shows 3,3,1,3. Nothing shown on others. Chose 3,1,1,3 b/c there are not 3 Crab Shells in the synths to make.
 INSERT INTO `synth_recipes` VALUES (59940,1,0,0,0,0,0,0,85,0,0,4100,4242,17849,0,0,0,0,0,0,0,2157,2157,2171,2171,1,1,1,1,'Hellish Bugle (desynth)');  -- 2021.11.01
 INSERT INTO `synth_recipes` VALUES (59941,1,0,0,0,0,0,0,80,0,0,4100,4242,15211,0,0,0,0,0,0,0,887,887,792,793,1,1,1,1,'Reraise Hairpin (desynth)');
 INSERT INTO `synth_recipes` VALUES (59942,1,0,0,0,0,0,0,79,0,0,4100,4242,13108,0,0,0,0,0,0,0,850,850,887,887,1,1,1,1,'Coral Gorget (desynth)');  -- 2021.11.01
 INSERT INTO `synth_recipes` VALUES (59943,1,0,0,0,0,0,0,70,0,0,4100,4242,13464,0,0,0,0,0,0,0,864,864,902,902,1,1,1,1,'Demon\'s Ring (desynth)');
-INSERT INTO `synth_recipes` VALUES (59944,1,0,0,0,0,0,0,87,0,0,4100,4242,12436,0,0,0,0,0,0,0,850,850,866,866,1,1,1,2,'Dragon Mask (desynth)');  -- 2021.11.01 XI and allakhazam
+INSERT INTO `synth_recipes` VALUES (59944,1,0,0,0,0,0,0,87,0,0,4100,4242,12436,0,0,0,0,0,0,0,850,850,866,866,1,1,1,2,'Dragon Mask (desynth)');  -- 2021.11.01 FFXIclopedia and allakhazam
 INSERT INTO `synth_recipes` VALUES (59945,1,0,0,0,0,0,0,60,0,0,4100,4242,13458,0,0,0,0,0,0,0,896,896,896,896,1,1,1,1,'Scorpion Ring (desynth)');
 INSERT INTO `synth_recipes` VALUES (59946,1,0,0,0,0,0,0,52,0,0,4100,4242,17257,0,0,0,0,0,0,0,893,893,893,893,1,1,1,1,'Bandit\'s Gun (desynth)');
 INSERT INTO `synth_recipes` VALUES (59947,1,0,0,0,0,0,0,100,0,0,4100,4242,12437,0,0,0,0,0,0,0,850,1587,1586,1586,1,1,1,1,'Gavial Mask (desynth)');  -- 2021.11.01
 INSERT INTO `synth_recipes` VALUES (59948,1,0,0,0,0,0,0,255,0,0,4100,4242,14426,0,0,0,0,0,0,0,816,816,816,816,1,1,1,1,'Shade Harness (desynth)');  -- 2021.11.01 https://ffxi.allakhazam.com/dyn/guilds/dBonecraft.html
 INSERT INTO `synth_recipes` VALUES (59949,1,0,0,0,0,0,0,57,0,0,4100,4242,16794,0,0,0,0,0,0,0,817,882,893,893,3,1,1,1,'Bone Scythe (desynth)');
-INSERT INTO `synth_recipes` VALUES (59950,1,0,0,0,0,0,0,37,0,0,4100,4242,13459,0,0,0,0,0,0,0,864,895,895,895,1,1,1,1,'Horn Ring (desynth)');  -- 2021.11.01
+INSERT INTO `synth_recipes` VALUES (59950,1,0,0,0,0,0,0,37,0,0,4100,4242,13459,0,0,0,0,0,0,0,864,895,895,895,1,1,1,1,'Horn Ring (desynth)');  -- based on synth lvl 10/31/21
 -- INSERT INTO `synth_recipes` VALUES (59951,1,0,0,255,0,0,0,255,0,0,4100,4242,16409,0,0,0,0,0,0,0,649,880,880,855,1,2,3,1,'Lynx Baghnakhs (desynth)'); -- 2021.11.01 no level data
 INSERT INTO `synth_recipes` VALUES (59952,1,0,0,0,0,0,0,96,0,0,4100,4242,14186,0,0,0,0,0,0,0,866,866,1629,1629,1,1,1,1,'Dragon Leggings (desynth)');
 INSERT INTO `synth_recipes` VALUES (60001,0,0,0,0,0,0,0,0,1,0,4099,4241,3885,3886,3887,0,0,0,0,0,426,426,426,426,1,1,1,1,'Orchestrion');
@@ -3839,15 +3839,15 @@ INSERT INTO `synth_recipes` VALUES (62506,0,0,0,0,0,0,0,0,52,0,4102,4244,663,415
 INSERT INTO `synth_recipes` VALUES (62507,0,0,0,0,24,0,0,0,52,0,4096,4238,744,947,0,0,0,0,0,0,17341,17341,17341,17341,33,99,99,99,'Silver Bullet');
 INSERT INTO `synth_recipes` VALUES (62508,0,0,0,0,0,0,0,0,52,0,4096,4238,637,1775,16564,0,0,0,0,0,17706,17706,17706,17706,1,1,1,1,'Vulcan Blade');  -- 2021.11.01
 INSERT INTO `synth_recipes` VALUES (62509,0,0,0,14,0,0,0,0,53,0,4098,4240,649,4154,4154,0,0,0,0,0,1244,1244,1244,1244,6,8,10,12,'Holy Bolt Heads');
-INSERT INTO `synth_recipes` VALUES (62510,0,0,3,24,0,0,0,0,53,0,4099,4241,651,715,928,928,928,934,947,947,17313,17313,17313,17313,4,6,9,12,'Grenade');  -- 2021.11.01 XI-WW 1, BG & JP WW 3. JP-AL 50
-INSERT INTO `synth_recipes` VALUES (62511,0,0,3,24,0,0,0,0,53,0,4099,4241,651,715,928,928,928,947,947,1108,17313,17313,17313,17313,4,6,9,12,'Grenade');  -- 2021.11.01 XI-WW 1, BG & JP WW 3.
+INSERT INTO `synth_recipes` VALUES (62510,0,0,3,24,0,0,0,0,53,0,4099,4241,651,715,928,928,928,934,947,947,17313,17313,17313,17313,4,6,9,12,'Grenade');  -- 2021.11.01 FFXIclopedia-WW 1, BG & JP WW 3. JP-AL 50
+INSERT INTO `synth_recipes` VALUES (62511,0,0,3,24,0,0,0,0,53,0,4099,4241,651,715,928,928,928,947,947,1108,17313,17313,17313,17313,4,6,9,12,'Grenade');  -- 2021.11.01 FFXIclopedia-WW 1, BG & JP WW 3.
 INSERT INTO `synth_recipes` VALUES (62512,0,0,0,0,0,0,0,0,53,0,4096,4238,932,932,932,932,933,0,0,0,17384,17384,17384,17384,1,1,1,1,'Carbon Fishing Rod');
 INSERT INTO `synth_recipes` VALUES (62513,0,0,0,0,0,0,0,0,54,0,4101,4243,5307,16430,0,0,0,0,0,0,18357,18357,18357,18357,1,1,1,1,'Melt Claws');
 INSERT INTO `synth_recipes` VALUES (62514,0,0,0,0,0,0,0,0,54,0,4102,4244,4154,16537,0,0,0,0,0,0,16581,16816,16816,16816,1,1,1,1,'Holy Sword');
 INSERT INTO `synth_recipes` VALUES (62515,0,0,0,0,0,0,0,0,54,0,4102,4244,947,1134,1241,1241,4164,0,0,0,4215,4215,4215,4215,33,66,99,99,'Popstar');
 INSERT INTO `synth_recipes` VALUES (62516,0,0,0,0,0,0,1,0,54,0,4099,4241,850,1656,4128,4128,4128,4128,0,0,13682,13682,13682,13682,1,1,1,1,'Ether Tank');
-INSERT INTO `synth_recipes` VALUES (62517,0,0,3,24,0,0,0,0,54,0,4099,4241,651,715,947,947,1108,1630,0,0,17313,17313,17313,17313,4,6,9,12,'Grenade');  -- 2021.11.01 XI-WW 1, BG & JP WW 3.
--- INSERT INTO `synth_recipes` VALUES (62518,0,2037,0,0,255,0,0,0,54,0,4096,4238,914,932,1647,1887,2310,0,0,0,8651,8651,8651,8651,12,12,12,12,'Arcanic Cell');  -- 2021.11.01 XI-AL 59, BG got info from JP, GS ???
+INSERT INTO `synth_recipes` VALUES (62517,0,0,3,24,0,0,0,0,54,0,4099,4241,651,715,947,947,1108,1630,0,0,17313,17313,17313,17313,4,6,9,12,'Grenade');  -- 2021.11.01 FFXIclopedia-WW 1, BG & JP WW 3.
+-- INSERT INTO `synth_recipes` VALUES (62518,0,2037,0,0,255,0,0,0,54,0,4096,4238,914,932,1647,1887,2310,0,0,0,8651,8651,8651,8651,12,12,12,12,'Arcanic Cell');  -- 2021.11.01 FFXIclopedia-AL 59, BG got info from JP, GS ???
 INSERT INTO `synth_recipes` VALUES (62519,0,2037,0,0,0,0,0,0,55,0,4096,4238,939,1641,1887,2309,2310,0,0,0,2240,2240,2240,2240,12,12,12,12,'Inhibitor');
 INSERT INTO `synth_recipes` VALUES (62520,0,0,0,0,0,0,0,0,55,0,4102,4244,4154,17036,0,0,0,0,0,0,17041,17411,17411,17411,1,1,1,1,'Holy Mace');
 INSERT INTO `synth_recipes` VALUES (62521,0,0,0,0,0,0,0,0,55,0,4101,4243,937,4171,16919,0,0,0,0,0,16908,17768,17768,17768,1,1,1,1,'Yoto');
@@ -3939,7 +3939,7 @@ INSERT INTO `synth_recipes` VALUES (63041,0,0,0,0,0,0,0,0,67,0,4101,4243,937,417
 INSERT INTO `synth_recipes` VALUES (63042,0,0,0,14,0,0,0,0,67,0,4098,4240,649,937,4161,0,0,0,0,0,1247,1247,1247,1247,6,8,10,12,'Sleep Bolt Heads');
 INSERT INTO `synth_recipes` VALUES (63043,0,0,0,0,0,0,0,0,67,0,4101,4243,931,12566,0,0,0,0,0,0,14346,14347,14347,14347,1,1,1,1,'Bastokan Scale Mail');
 INSERT INTO `synth_recipes` VALUES (63044,0,2037,0,0,0,0,0,0,67,0,4096,4238,939,1642,2310,2460,2460,0,0,0,8494,8494,8494,8494,12,12,12,12,'Amplifier II');
--- INSERT INTO `synth_recipes` VALUES (63045,0,2037,0,0,255,0,0,0,67,0,4096,4238,754,1886,2362,5138,13683,0,0,0,8588,8588,8588,8588,12,12,12,12,'Stabilizer IV');  -- XI and BG have level at 67, JP has 66.  Unknown GS sub.
+-- INSERT INTO `synth_recipes` VALUES (63045,0,2037,0,0,255,0,0,0,67,0,4096,4238,754,1886,2362,5138,13683,0,0,0,8588,8588,8588,8588,12,12,12,12,'Stabilizer IV');  -- FFXIclopedia and BG have level at 67, JP has 66.  Unknown GS sub.
 INSERT INTO `synth_recipes` VALUES (63046,0,0,0,0,0,0,0,0,68,0,4101,4243,914,944,0,0,0,0,0,0,4158,4158,4158,4158,1,1,1,1,'Venom Potion');
 -- INSERT INTO `synth_recipes` VALUES (63047,0,2037,0,0,0,0,0,255,68,0,4096,4238,953,953,2113,2171,2460,2460,13683,0,8492,8492,8492,8492,12,12,12,12,'Loudspeaker IV');  -- Unknown BC sub.
 INSERT INTO `synth_recipes` VALUES (63048,0,2035,0,0,0,0,0,0,68,0,4101,4243,914,914,914,944,944,944,2131,0,4158,4158,4158,4158,3,3,3,3,'Venom Potion');
@@ -4186,10 +4186,10 @@ INSERT INTO `synth_recipes` VALUES (69913,1,0,0,0,0,0,0,0,80,0,4100,4242,16909,0
 INSERT INTO `synth_recipes` VALUES (69914,1,0,0,0,0,0,0,0,71,0,4100,4242,17080,0,0,0,0,0,0,0,4154,716,1226,653,1,1,10,2,'Holy Maul (desynth)');
 INSERT INTO `synth_recipes` VALUES (69915,1,0,0,0,0,0,0,0,85,0,4100,4242,17381,0,0,0,0,0,0,0,931,931,932,932,1,2,1,1,'Comp. Fishing Rod (desynth)');
 INSERT INTO `synth_recipes` VALUES (69916,1,0,0,0,0,0,0,0,53,0,4100,4242,17384,0,0,0,0,0,0,0,933,932,932,932,1,2,3,4,'Carbon Fish. Rod (desynth)');
-INSERT INTO `synth_recipes` VALUES (69917,1,0,0,0,0,0,0,0,91,0,4100,4242,16910,0,0,0,0,0,0,0,4159,707,1234,657,1,1,6,1,'Mamushito (desynth)');  -- XI is the only site I saw that has this recipe listed.
+INSERT INTO `synth_recipes` VALUES (69917,1,0,0,0,0,0,0,0,91,0,4100,4242,16910,0,0,0,0,0,0,0,4159,707,1234,657,1,1,6,1,'Mamushito (desynth)');  -- FFXIclopedia is the only site I saw that has this recipe listed.
 INSERT INTO `synth_recipes` VALUES (69918,1,0,0,0,0,0,0,0,51,0,4100,4242,16430,0,0,0,0,0,0,0,937,649,649,649,1,1,1,1,'Acid Claws (desynth)');
 INSERT INTO `synth_recipes` VALUES (69919,1,0,0,0,0,0,0,0,20,0,4100,4242,1624,0,0,0,0,0,0,0,933,933,933,933,4,6,8,10,'Bugbear Mask (desynth)');
-INSERT INTO `synth_recipes` VALUES (69920,1,0,0,0,0,0,0,0,86,0,4100,4242,16858,0,0,0,0,0,0,0,5306,1226,1226,1226,1,10,10,10,'Sacred Lance (desynth)');  -- XI is the only site I saw that has this recipe listed.
+INSERT INTO `synth_recipes` VALUES (69920,1,0,0,0,0,0,0,0,86,0,4100,4242,16858,0,0,0,0,0,0,0,5306,1226,1226,1226,1,10,10,10,'Sacred Lance (desynth)');  -- FFXIclopedia is the only site I saw that has this recipe listed.
 INSERT INTO `synth_recipes` VALUES (69921,1,0,0,0,0,0,0,0,83,0,4100,4242,16860,0,0,0,0,0,0,0,4154,715,1226,1226,1,2,10,10,'Holy Lance (desynth)');
 INSERT INTO `synth_recipes` VALUES (69922,1,0,0,0,0,0,0,0,55,0,4100,4242,17041,0,0,0,0,0,0,0,4154,716,1226,653,1,1,10,2,'Holy Mace (desynth)');
 INSERT INTO `synth_recipes` VALUES (69923,1,0,0,0,0,0,0,0,78,0,4100,4242,12434,0,0,0,0,0,0,0,850,850,850,850,1,1,1,1,'Genbu\'s Kabuto (desynth)');  -- possible HQ1=ram leather x1 HQ2=cermet chip x1.  Only JP site showed level.
@@ -4435,7 +4435,7 @@ INSERT INTO `synth_recipes` VALUES (72545,0,0,0,0,0,0,0,0,0,59,4096,4238,612,936
 INSERT INTO `synth_recipes` VALUES (72546,0,0,0,0,0,0,0,0,0,59,4099,4241,610,4362,4377,4509,0,0,0,0,17021,17021,17021,17021,4,6,8,10,'Pet Food Zeta');
 INSERT INTO `synth_recipes` VALUES (72547,0,0,0,0,0,0,0,0,40,59,4097,4239,1524,1524,1524,1524,1524,1524,1524,1524,1443,1443,1443,1443,1,2,3,4,'Dried Mugwort');
 INSERT INTO `synth_recipes` VALUES (72548,0,0,0,0,0,0,0,0,0,59,4096,4238,612,620,936,4509,0,0,0,0,4466,4281,4281,4281,33,33,33,99,'Spicy Cracker');
-INSERT INTO `synth_recipes` VALUES (72549,0,0,0,0,0,0,0,0,0,59,4096,4238,2561,5194,5195,5660,5680,5684,0,0,5697,5698,5698,5698,1,1,1,1,'Pepperoni Pizza');  -- XI has @ 60.  Others have at 59.
+INSERT INTO `synth_recipes` VALUES (72549,0,0,0,0,0,0,0,0,0,59,4096,4238,2561,5194,5195,5660,5680,5684,0,0,5697,5698,5698,5698,1,1,1,1,'Pepperoni Pizza');  -- FFXIclopedia has @ 60.  Others have at 59.
 INSERT INTO `synth_recipes` VALUES (72550,0,0,0,0,0,0,0,0,0,59,4096,4238,610,614,4390,4570,4578,5684,5703,0,5771,5771,5772,5772,2,4,2,4,'Ham & Ch. Crepe');
 INSERT INTO `synth_recipes` VALUES (72551,0,0,0,0,0,0,0,0,0,59,4096,4238,2561,5194,5195,5660,5680,5684,8740,0,6215,6215,6216,6216,6,8,6,8,'Pepperoni Slice');
 INSERT INTO `synth_recipes` VALUES (72552,0,0,0,0,0,0,0,0,0,60,4096,4238,610,615,617,627,4509,4570,0,0,4394,4576,4576,4576,33,33,33,99,'Ginger Cookie');
@@ -4558,7 +4558,7 @@ INSERT INTO `synth_recipes` VALUES (73549,0,0,0,0,0,0,0,0,0,80,4101,4243,1111,44
 INSERT INTO `synth_recipes` VALUES (73550,0,0,0,0,0,0,0,0,0,80,4096,4238,620,2111,4368,4387,4570,6394,0,0,6406,6407,6407,6407,1,1,1,1,'Pork Cutlet Rice Bowl');
 INSERT INTO `synth_recipes` VALUES (73551,0,0,0,0,0,0,0,0,0,80,4096,4238,610,615,627,4392,4392,4570,0,0,4393,4332,4332,4332,1,1,1,1,'Orange Kuchen');
 INSERT INTO `synth_recipes` VALUES (73552,0,0,0,0,0,0,0,0,0,80,4096,4238,615,623,936,4432,4484,4484,4509,0,4554,4554,4554,4554,1,1,1,1,'Shallops Tropicale');
-INSERT INTO `synth_recipes` VALUES (73553,0,2042,0,0,0,0,0,0,0,80,4096,4238,615,627,4362,4445,5562,5649,0,0,5645,5645,5645,5645,3,6,9,12,'Witch Nougat');  -- BG has Selbina Milk (4378) listed where JP and XI have Selbina Butter.
+INSERT INTO `synth_recipes` VALUES (73553,0,2042,0,0,0,0,0,0,0,80,4096,4238,615,627,4362,4445,5562,5649,0,0,5645,5645,5645,5645,3,6,9,12,'Witch Nougat');  -- BG has Selbina Milk (4378) listed where JP and FFXIclopedia have Selbina Butter.
 INSERT INTO `synth_recipes` VALUES (73554,0,0,0,0,0,0,0,0,0,80,4096,4238,9520,0,0,0,0,0,0,0,4554,4554,4554,4554,1,1,1,1,'Shallops Tropicale');
 INSERT INTO `synth_recipes` VALUES (73555,0,0,0,0,0,0,0,0,0,81,4101,4243,4366,4382,4387,4389,4491,4509,4545,4579,4541,4541,4541,4541,1,1,1,1,'Goblin Drink');
 INSERT INTO `synth_recipes` VALUES (74001,0,0,0,0,0,0,0,0,0,80,4096,4238,612,626,633,936,4387,4388,4390,5571,5588,5589,5589,5589,1,1,1,1,'Karni Yarik');
