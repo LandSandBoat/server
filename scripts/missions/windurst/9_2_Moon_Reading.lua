@@ -3,9 +3,13 @@
 -- Windurst M9-2
 -----------------------------------
 -- !addmission 2 23
--- _6q2         : !pos 0.1 -49 37 242
--- qm16         : !pos -239.442 -1.000 -18.870 159
--- QuHau Spring :
+-- Rakoh Buuma      : !pos 106 -5 -23 241
+-- Mokyokyo         : !pos -55 -8 227 238
+-- Janshura-Rashura : !pos -227 -8 184 240
+-- Zokima-Rokima    : !pos 0 -16 124 239
+-- _6q2             : !pos 0.1 -49 37 242
+-- qm16             : !pos -239.442 -1.000 -18.870 159
+-- Qu'Hau Spring    : !pos 0 -29 64 122
 -----------------------------------
 require('scripts/settings/main')
 require('scripts/globals/interaction/mission')
@@ -135,7 +139,7 @@ mission.sections =
                     then
                         return mission:progressEvent(385)
                     elseif missionStatus == 3 then
-                        return mission:progressEvent(386)
+                        return mission:progressEvent(386, 0, 0, xi.ki.ORASTERY_RING)
                     elseif missionStatus == 4 then
                         -- This does not use the npcUtil function, as in both cases we need to return
                         -- an appropriate mission function.

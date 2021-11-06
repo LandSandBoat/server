@@ -3,6 +3,12 @@
 -- Windurst M9-1
 -----------------------------------
 -- !addmission 2 22
+-- Rakoh Buuma       : !pos 106 -5 -23 241
+-- Mokyokyo          : !pos -55 -8 227 238
+-- Janshura-Rashura  : !pos -227 -8 184 240
+-- Zokima-Rokima     : !pos 0 -16 124 239
+-- Apururu           : !pos -11 -2 13 241
+-- Yoran-Oran        : !pos -109.987 -14 203.338 239
 -- Mandragora Warden : !pos 81.981 7.593 139.556 153
 -----------------------------------
 require('scripts/settings/main')

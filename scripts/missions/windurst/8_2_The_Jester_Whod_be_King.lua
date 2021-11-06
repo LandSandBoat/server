@@ -3,8 +3,18 @@
 -- Windurst M8-2
 -----------------------------------
 -- !addmission 2 21
--- _5e5 : !pos -424.255 -1.909 619.995
--- _5cb : !pos -228 0 99 192
+-- Rakoh Buuma      : !pos 106 -5 -23 241
+-- Mokyokyo         : !pos -55 -8 227 238
+-- Janshura-Rashura : !pos -227 -8 184 240
+-- Zokima-Rokima    : !pos 0 -16 124 239
+-- Apururu          : !pos -11 -2 13 241
+-- Cermet Door(Ruk) : !pos -183 0 190 204
+-- Sedal-Godjal     : !pos 185 -3 -116 149
+-- Tosuka-Porika    : !pos -26 -6 103 238
+-- Kupipi           : !pos 2 0.1 30 242
+-- Shantotto        : !pos 122 -2 112 239
+-- _5e5 (Cr. Wall)  : !pos -424.255 -1.909 619.995 194
+-- _5cb (Gate. Drk) : !pos -228 0 99 192
 -----------------------------------
 require('scripts/settings/main')
 require('scripts/globals/interaction/mission')
@@ -96,6 +106,7 @@ mission.sections =
             {
                 [122] = function(player, csid, option, npc)
                     npcUtil.giveKeyItem(player, xi.ki.AURASTERY_RING)
+
                     if
                         player:hasKeyItem(xi.ki.RHINOSTERY_RING) and
                         player:hasKeyItem(xi.ki.OPTISTERY_RING)
@@ -108,20 +119,13 @@ mission.sections =
 
         [xi.zone.FEIYIN] =
         {
-            -- TODO: Which one of these is the real event trigger??
             ['_no4'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getMissionStatus(mission.areaId) == 1 then
-                        return mission:progressEvent(22, 0, xi.ki.RHINOSTERY_RING)
-                    end
-                end,
-            },
-
-            ['Rukususu'] =
-            {
-                onTrigger = function(player, npc)
-                    if player:getMissionStatus(mission.areaId) == 1 then
+                    if
+                        player:getMissionStatus(mission.areaId) == 1 and
+                        not player:hasKeyItem(xi.ki.RHINOSTERY_RING)
+                    then
                         return mission:progressEvent(22, 0, xi.ki.RHINOSTERY_RING)
                     end
                 end,
@@ -131,6 +135,7 @@ mission.sections =
             {
                 [22] = function(player, csid, option, npc)
                     npcUtil.giveKeyItem(player, xi.ki.RHINOSTERY_RING)
+
                     if
                         player:hasKeyItem(xi.ki.AURASTERY_RING) and
                         player:hasKeyItem(xi.ki.OPTISTERY_RING)
@@ -147,7 +152,7 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if player:getMissionStatus(mission.areaId) == 3 then
-                        return mission:progressEvent(326)
+                        return mission:progressEvent(326, 0, xi.ki.ORASTERY_RING)
                     end
                 end,
             },
@@ -290,7 +295,7 @@ mission.sections =
                     if missionStatus == 0 then
                         return mission:progressEvent(588)
                     elseif missionStatus == 2 then
-                        return mission:progressEvent(601)
+                        return mission:progressEvent(601, 0, xi.ki.ORASTERY_RING)
                     elseif missionStatus == 6 then
                         return mission:progressEvent(590)
                     elseif missionStatus == 7 then

@@ -3,8 +3,13 @@
 -- Windurst M8-1
 -----------------------------------
 -- !addmission 2 20
--- Moreno-Toeno :
--- Sedal-Godjal :
+-- Rakoh Buuma      : !pos 106 -5 -23 241
+-- Mokyokyo         : !pos -55 -8 227 238
+-- Janshura-Rashura : !pos -227 -8 184 240
+-- Zokima-Rokima    : !pos 0 -16 124 239
+-- Moreno-Toeno     : !pos 169 -1.25 159 238
+-- Qu'Hau Spring    : !pos 0 -29 64 122
+-- Sedal-Godjal     : !pos 185 -3 -116 149
 -----------------------------------
 require('scripts/settings/main')
 require('scripts/globals/interaction/mission')
@@ -573,12 +578,11 @@ mission.sections =
 
         [xi.zone.WEST_SARUTABARUTA] =
         {
-            -- Previous implementation had initial parameters.  Test this!
-            afterZoneIn =
+            onZoneIn =
             {
-                function(player)
+                function(player, prevZone)
                     if player:getMissionStatus(mission.areaId) == 1 then
-                        return mission:progressEvent(50, 0, 0, 0, 0, 0, 2)
+                        return 50
                     end
                 end,
             },
