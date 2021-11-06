@@ -327,9 +327,9 @@ public:
 
     uint8  getRank(uint8 nation);            // Get Rank for current active nation
     void   setRank(uint8 rank);              // Set Rank
-    uint32 getRankPoints();                  // Get Current Rank points
-    void   addRankPoints(uint32 rankpoints); // Add rank points to existing rank point total
-    void   setRankPoints(uint32 rankpoints); // Set Current Rank points
+    uint16 getRankPoints();                  // Get Current Rank points
+    void   addRankPoints(uint16 rankpoints); // Add rank points to existing rank point total
+    void   setRankPoints(uint16 rankpoints); // Set Current Rank points
 
     void  addQuest(uint8 questLogID, uint16 questID);          // Add Quest to Entity Quest Log
     void  delQuest(uint8 questLogID, uint16 questID);          // Remove quest from quest log (should be used for debugging only)
