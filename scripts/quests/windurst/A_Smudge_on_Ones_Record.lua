@@ -15,7 +15,7 @@ local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_SMUDGE_
 
 quest.reward =
 {
-    exp = 2000,
+    xp = 2000,
     fame = 120,
     gil = 5000,
     keyItem = xi.ki.MAP_OF_FEIYIN,
