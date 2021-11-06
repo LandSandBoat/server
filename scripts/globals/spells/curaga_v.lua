@@ -36,7 +36,7 @@ spell_object.onSpellCast = function(caster, target, spell)
         final = diff
     end
     target:addHP(final)
-    
+
     target:wakeUp()
     caster:updateEnmityFromCure(target, final)
 
