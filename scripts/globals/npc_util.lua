@@ -482,7 +482,11 @@ function npcUtil.completeQuest(player, area, quest, params)
         player:messageSpecial(ID.text.BAYLD_OBTAINED, params["bayld"] * xi.settings.BAYLD_RATE)
     end
 
-    if params["xp"] ~= nil and type(params["xp"]) == "number" then
+    -- TODO: Find a more elegant way to handle this, but allow for xp vs exp keys.  This should
+    -- be one or the other, not both.
+    if params["exp"] ~= nil and type(params["exp"]) == "number" then
+        player:addExp(params["exp"] * xi.settings.EXP_RATE)
+    elseif params["xp"] ~= nil and type(params["xp"]) == "number" then
         player:addExp(params["xp"] * xi.settings.EXP_RATE)
     end
 
@@ -567,7 +571,11 @@ function npcUtil.completeMission(player, logId, missionId, params)
         player:messageSpecial(ID.text.BAYLD_OBTAINED, params["bayld"] * xi.settings.BAYLD_RATE)
     end
 
-    if params["xp"] ~= nil and type(params["xp"]) == "number" then
+    -- TODO: Find a more elegant way to handle this, but allow for xp vs exp keys.  This should
+    -- be one or the other, not both.
+    if params["exp"] ~= nil and type(params["exp"]) == "number" then
+        player:addExp(params["exp"] * xi.settings.EXP_RATE)
+    elseif params["xp"] ~= nil and type(params["xp"]) == "number" then
         player:addExp(params["xp"] * xi.settings.EXP_RATE)
     end
 
