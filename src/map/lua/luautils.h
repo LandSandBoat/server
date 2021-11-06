@@ -313,6 +313,7 @@ namespace luautils
     uint16 SelectDailyItem(CLuaBaseEntity* PLuaBaseEntity, uint8 dial);
 
     void OnPlayerEmote(CCharEntity* PChar, Emote EmoteID);
+    void OnPlayerVolunteer(CCharEntity* PChar, std::string text);
 }; // namespace luautils
 
 #endif //- _LUAUTILS_H -
