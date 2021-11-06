@@ -35,9 +35,9 @@ spell_object.onSpellCast = function(caster, target, spell)
     if (final > diff) then
         final = diff
     end
-    target:restoreHP(final)
+    target:addHP(final)
+    
     target:wakeUp()
-
     caster:updateEnmityFromCure(target, final)
 
     spell:setMsg(xi.msg.basic.AOE_HP_RECOVERY)
