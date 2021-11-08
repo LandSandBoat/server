@@ -213,6 +213,7 @@ quest.sections =
                 end,
 
                 [10069] = function(player, csid, option, npc)
+                    player:confirmTrade()
                     quest:setMustZone(player)
                     quest:setVar(player, 'Prog', 3)
                     quest:setVar(player, 'Timer', VanadielUniqueDay() + 1)
@@ -220,7 +221,6 @@ quest.sections =
 
                 [10070] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:confirmTrade()
                         npcUtil.giveKeyItem(player, xi.ki.BOARDING_PERMIT)
                     end
                 end,
