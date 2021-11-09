@@ -23,9 +23,9 @@ local items =
     [6]  = {itemid = xi.items.IMPERIAL_POLE,     price = 15000},
     [7]  = {itemid = xi.items.DOOMBRINGER,       price = 15000},
     [8]  = {itemid = xi.items.SAYOSAMONJI,       price = 15000},
-    [9]  = {itemid = xi.items.AMIR_KORAZIN,      price = 20000},
-    [10] = {itemid = xi.items.PAHLUWAN_DASTANAS, price = 20000},
-    [11] = {itemid = xi.items.YIGIT_CRACKOWS,    price = 20000},
+    [9]  = {itemid = xi.items.PAHLUWAN_DASTANAS, price = 20000},
+    [10] = {itemid = xi.items.YIGIT_CRACKOWS,    price = 20000},
+    [11] = {itemid = xi.items.AMIR_KORAZIN,      price = 20000},
 }
 
 entity.onTrade = function(player, npc, trade)
