@@ -4,7 +4,7 @@
 require("modules/module_utils")
 require("scripts/missions/soa/helpers")
 -----------------------------------
-local m = Module:new("so_remove_imprimatur_gate")
+local m = Module:new("soa_remove_imprimatur_gate")
 m:setEnabled(false)
 
 m:addOverride("xi.soa.helpers.imprimaturGate", function(player, gateAmount)

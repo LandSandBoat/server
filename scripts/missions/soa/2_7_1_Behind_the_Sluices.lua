@@ -45,7 +45,7 @@ mission.sections =
         },
     },
 
-    -- Got the KI
+    -- Got the KI -> Cutscene at Gate
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId and
@@ -71,6 +71,7 @@ mission.sections =
         },
     },
 
+    -- Enter Gate
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId and
@@ -98,65 +99,13 @@ mission.sections =
         },
     },
 
-    -- Pre-instance CS
-    {
-        check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId and
-                   player:hasKeyItem(xi.ki.WATERWAY_FACILITY_CRANK) and
-                   missionStatus == 2
-        end,
-
-        [xi.zone.RALA_WATERWAYS] =
-        {
-            ['Antiquated_Sluice_Gate'] =
-            {
-                onTrigger = function(player, npc)
-                    -- TODO: Instance battle
-                    return mission:progressEvent(353)
-                end,
-            },
-
-            onEventFinish =
-            {
-                [353] = function(player, csid, option, npc)
-                    player:setMissionStatus(mission.areaId, 3)
-                end,
-            },
-        },
-    },
-
-    -- Return from instance
-    {
-        check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId and
-                   player:hasKeyItem(xi.ki.WATERWAY_FACILITY_CRANK) and
-                   missionStatus == 3
-        end,
-
-        [xi.zone.RALA_WATERWAYS] =
-        {
-            ['Antiquated_Sluice_Gate'] =
-            {
-                onTrigger = function(player, npc)
-                    -- TODO: Instance battle
-                    return mission:progressEvent(5511)
-                end,
-            },
-
-            onEventFinish =
-            {
-                [361] = function(player, csid, option, npc)
-                    -- TODO
-                end,
-            },
-        },
-    },
+    -- Instance fight handled in Rala_Waterways_U\instances\behind_the_sluices.lua
+    -- TODO: Remove crank just before instance teleport
 
     -- Returning from instanced battle (missionStatus == 3)
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId and
-                   player:hasKeyItem(xi.ki.WATERWAY_FACILITY_CRANK) and
                    missionStatus == 3
         end,
 
@@ -165,7 +114,7 @@ mission.sections =
             onZoneIn =
             {
                 function(player, prevZone)
-                    return mission:progressEvent(353)
+                    return 353
                 end,
             },
 

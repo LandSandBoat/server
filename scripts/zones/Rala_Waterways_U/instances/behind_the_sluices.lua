@@ -10,7 +10,8 @@ local ID = require('scripts/zones/Rala_Waterways_U/IDs')
 local instance_object = {}
 
 instance_object.registryRequirements = function(player)
-    return player:hasKeyItem(xi.ki.WATERWAY_FACILITY_CRANK) -- TODO: Check missions status
+    return player:hasKeyItem(xi.ki.WATERWAY_FACILITY_CRANK) and
+           player:getMissionStatus(xi.mission.log_id.SOA) == 2
 end
 
 instance_object.entryRequirements = function(player)
@@ -18,6 +19,7 @@ instance_object.entryRequirements = function(player)
 end
 
 instance_object.onInstanceCreated = function(instance)
+    -- TODO: SpawnMob: mob <17838151> not found (luautils::SpawnMob:1358)
     for i = 0, 5 do
         SpawnMob(ID.mob.ARCIELA_BTS + i, instance)
     end
@@ -58,6 +60,7 @@ instance_object.onInstanceCreatedCallback = function(player, instance)
 end
 
 instance_object.afterInstanceRegister = function(player)
+    player:messageSpecial(ID.text.KEYITEM_LOST, xi.ki.WATERWAY_FACILITY_CRANK)
     player:delKeyItem(xi.ki.WATERWAY_FACILITY_CRANK)
 end
 
@@ -145,6 +148,12 @@ instance_object.onInstanceComplete = function(instance)
     local chars = instance:getChars()
     for i, v in pairs(chars) do
         v:startEvent(1000)
+
+        local onThisMission = v:getCurrentMission(SOA) == xi.mission.id.soa.BEHIND_THE_SLUICES
+        local onThisFight = v:getMissionStatus(xi.mission.log_id.SOA) == 2
+        if onThisMission and onThisFight then
+            v:setMissionStatus(xi.mission.log_id.SOA, 3)
+        end
     end
 end
 
