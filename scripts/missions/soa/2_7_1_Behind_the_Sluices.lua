@@ -100,7 +100,6 @@ mission.sections =
     },
 
     -- Instance fight handled in Rala_Waterways_U\instances\behind_the_sluices.lua
-    -- TODO: Remove crank just before instance teleport
 
     -- Returning from instanced battle (missionStatus == 3)
     {

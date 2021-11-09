@@ -32,7 +32,6 @@ mission.sections =
         {
             onRegionEnter =
             {
-                -- TODO: [warning] Server need NPC <17830061>
                 -- TODO: One day wait
                 [2] = function(player, region)
                     return mission:progressEvent(1503)

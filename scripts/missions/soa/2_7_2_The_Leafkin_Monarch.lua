@@ -33,7 +33,6 @@ mission.sections =
             onRegionEnter =
             {
                 [1] = function(player, region)
-                    -- TODO: Server need NPC <17830061> (zoneutils::GetTrigger:128)
                     return mission:progressEvent(1507)
                 end,
             },
