@@ -29,6 +29,7 @@ zones[xi.zone.SOUTHERN_SAN_DORIA_S] =
         WYATT_DIALOG            = 11088, -- Ahhh, sorry, sorry. The name's Wyatt, an' I be an armor merchant from Jeuno. Ended up 'ere in San d'Oria some way or another, though.
         HOMEPOINT_SET           = 11118, -- Home point set!
         ITEM_DELIVERY_DIALOG    = 11219, -- If'n ye have goods tae deliver, then Nembet be yer man!
+        ACHTELLE_FROM_ADOULIN   = 11269, -- I go by the name Achtelle. I hail from Adoulin Isle. Word has reached there that the dragoons and their wyverns have long since disappeared from these eastern lands. Tell me, is it true?
         NOTHING_OUT_OF_ORDINARY = 11749, -- You find nothing out of the ordinary.
         TOO_BUSY                = 11753, -- I am far too busy to speak with you now. Perhaps I'll have a little time later.
         RINGING_OF_STEEL        = 11803, -- Hah hah hah! The ringing of steel upon steel! The dripping stench of the battlefield! What could be better than war? The nobles can have their balls, I'll do my dance on the front lines!
