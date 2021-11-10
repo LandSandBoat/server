@@ -43,7 +43,7 @@ CREATE TABLE `magian` (
   `previousTrial` smallint(5) unsigned DEFAULT 0,
   PRIMARY KEY (`trialId`),
   UNIQUE KEY `trialId` (`trialId`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
