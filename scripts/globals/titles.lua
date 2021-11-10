@@ -1086,6 +1086,7 @@ xi.title =
     BOND_RENEWER                              = 1135,
     TREASURE_OF_OLDUUM                        = 1136,
     BELOVED_BY_THE_SEA_GOD                    = 1137,
+    DESTINY_MASTER                            = 1138,
 }
 
 -----------------------------------
