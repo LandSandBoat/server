@@ -25,7 +25,7 @@ CREATE TABLE `mob_resistances` (
   `light_res` smallint(6) NOT NULL DEFAULT 0,
   `dark_res` smallint(6) NOT NULL DEFAULT 0,
   PRIMARY KEY (`resist_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=128;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=128;
 
 /*!40101 SET character_set_client = @saved_cs_client */;
 INSERT INTO `mob_resistances` VALUES (1,'Acrolith',1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0);
