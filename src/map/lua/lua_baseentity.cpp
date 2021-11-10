@@ -4104,7 +4104,11 @@ void CLuaBaseEntity::clearGearSetMods()
 
 std::optional<CLuaItem> CLuaBaseEntity::getStorageItem(uint8 container, uint8 slotID, uint8 equipID)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowWarning("%s is trying to access their inventory, but is not TYPE_PC, so doesn't have one!", (const char*)m_PBaseEntity->GetName());
+        return std::nullopt;
+    }
 
     CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
 
