@@ -7509,6 +7509,7 @@ INSERT INTO `item_basic` VALUES (10075,0,'♪red_raptor','♪red_raptor',1,61504
 INSERT INTO `item_basic` VALUES (10076,0,'♪golden_bomb','♪golden_bomb',1,61504,0,1,0);
 INSERT INTO `item_basic` VALUES (10077,0,'♪buffalo','♪buffalo',1,61504,0,1,0);
 INSERT INTO `item_basic` VALUES (10078,0,'♪wivre','♪wivre',1,61504,0,1,0);
+INSERT INTO `item_basic` VALUES (10079,0,'♪iron_giant','♪iron_giant',1,61504,0,1,0);
 INSERT INTO `item_basic` VALUES (10112,906,'cipher_of_zeids_alter_ego','cipher_zeid',1,61504,0,0,0);
 INSERT INTO `item_basic` VALUES (10113,907,'cipher_of_lions_alter_ego','cipher_lion',1,61504,0,0,0);
 INSERT INTO `item_basic` VALUES (10114,908,'cipher_of_tenzens_alter_ego','cipher_tenzen',1,61504,0,0,0);
