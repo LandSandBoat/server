@@ -128,8 +128,8 @@ entity.onEventFinish = function(player, csid, option)
         local currentAssault = player:getCurrentAssault()
 
         for _, orders in pairs(xi.assaultUtil.assaultOrders) do
-            if player:hasKeyItem(orders.KI) then
-                player:delKeyItem(orders.KI)
+            if player:hasKeyItem(orders) then
+                player:delKeyItem(orders)
             end
         end
         npcUtil.giveKeyItem(player, xi.ki.IMPERIAL_ARMY_ID_TAG)
