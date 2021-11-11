@@ -33,7 +33,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 CPartyMemberUpdatePacket::CPartyMemberUpdatePacket(CCharEntity* PChar, uint8 MemberNumber, uint16 memberflags, uint16 ZoneID)
 {
     this->type = 0xDD;
-    this->size = 0x20;
+    this->size = 0x21;
 
     XI_DEBUG_BREAK_IF(PChar == nullptr);
 
@@ -64,13 +64,13 @@ CPartyMemberUpdatePacket::CPartyMemberUpdatePacket(CCharEntity* PChar, uint8 Mem
         }
     }
 
-    memcpy(data + (0x26), PChar->GetName(), PChar->name.size());
+    memcpy(data + (0x28), PChar->GetName(), PChar->name.size());
 }
 
 CPartyMemberUpdatePacket::CPartyMemberUpdatePacket(CTrustEntity* PTrust, uint8 MemberNumber)
 {
     this->type = 0xDD;
-    this->size = 0x20;
+    this->size = 0x21;
 
     XI_DEBUG_BREAK_IF(PTrust == nullptr);
 
@@ -90,18 +90,18 @@ CPartyMemberUpdatePacket::CPartyMemberUpdatePacket(CTrustEntity* PTrust, uint8 M
     ref<uint8>(0x24) = PTrust->GetSJob();
     ref<uint8>(0x25) = PTrust->GetSLevel();
 
-    memcpy(data + (0x26), PTrust->packetName.c_str(), PTrust->packetName.size());
+    memcpy(data + (0x28), PTrust->packetName.c_str(), PTrust->packetName.size());
 }
 
 CPartyMemberUpdatePacket::CPartyMemberUpdatePacket(uint32 id, const int8* name, uint16 memberFlags, uint8 MemberNumber, uint16 ZoneID)
 {
     this->type = 0xDD;
-    this->size = 0x20;
+    this->size = 0x21;
 
     ref<uint32>(0x04) = id;
 
     ref<uint16>(0x14) = memberFlags;
     ref<uint16>(0x20) = ZoneID;
 
-    memcpy(data + (0x26), name, strlen((const char*)name));
+    memcpy(data + (0x28), name, strlen((const char*)name));
 }
