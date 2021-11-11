@@ -3514,10 +3514,10 @@ INSERT INTO `synth_recipes` VALUES (55003,0,0,0,0,0,0,0,102,50,0,4098,4240,1311,
 -- INSERT INTO `synth_recipes` VALUES (55005,0,0,0,0,0,0,255,102,0,0,4099,4241,823,855,862,1841,1841,0,0,0,14448,14449,14449,14449,1,1,1,1,'Unicorn Harness');
 -- INSERT INTO `synth_recipes` VALUES (55006,0,0,0,0,0,0,255,103,0,0,4099,4241,821,850,1586,1586,1587,1587,12568,0,12565,13747,13747,13747,1,1,1,1,'Gavial Mail');
 INSERT INTO `synth_recipes` VALUES (55007,0,0,0,0,0,0,0,103,0,0,4099,4241,823,850,867,885,3445,3552,0,0,10346,10347,10347,10347,1,1,1,1,'Dux Cuisses');
--- INSERT INTO `synth_recipes` VALUES (55008,0,0,0,0,0,0,255,104,0,0,4099,4241,821,879,1586,1586,2172,2172,12568,0,14537,14538,14538,14538,1,1,1,1,'Hydra Mail');
+INSERT INTO `synth_recipes` VALUES (55008,0,0,0,0,0,0,0,104,0,0,4099,4241,821,879,1586,1586,2172,2172,12568,0,14537,14538,14538,14538,1,1,1,1,'Hydra Mail');  -- 2021.11.09 BGWiki shows Bonecraft 104 with 1-27 Leathercraft.  FFXIclopedia and JPWiki shows no sub.
 INSERT INTO `synth_recipes` VALUES (55009,0,0,0,0,0,0,0,104,0,0,4098,4240,2654,0,0,0,0,0,0,0,2735,2735,2735,2735,1,2,3,4,'Dark Ixion Ferrule');
 INSERT INTO `synth_recipes` VALUES (55010,0,0,0,0,0,0,0,104,0,0,4098,4240,867,885,3445,3552,0,0,0,0,10434,10435,10435,10435,1,1,1,1,'Dux Visor');
--- INSERT INTO `synth_recipes` VALUES (55011,0,0,0,0,0,0,255,104,0,0,4099,4241,819,869,8977,8981,0,0,0,0,26726,26727,26727,26727,1,1,1,1,'Revealer\'s Crown');
+-- INSERT INTO `synth_recipes` VALUES (55011,0,0,0,0,0,0,255,104,0,0,4099,4241,819,869,8977,8981,0,0,0,0,26726,26727,26727,26727,1,1,1,1,'Revealer\'s Crown');  -- 2021.11.09 FFXIclopedia shows Clothcraft.  Assuming this is incorrect and should be Bonecraft.  JPWiki and BGWiki agree Bonecraft 104.  BGWiki has unknown Leatherworking.  FFXIclopedia and JPWiki show level 60 plus Leatherworking.
 INSERT INTO `synth_recipes` VALUES (55012,0,0,0,0,0,0,0,105,0,0,4098,4240,763,792,865,1274,1312,2147,2426,5466,333,333,333,333,1,1,1,1,'Winged Balance');
 INSERT INTO `synth_recipes` VALUES (55013,0,0,0,0,0,0,0,105,0,0,4098,4240,760,8719,0,0,0,0,0,0,8720,8720,8720,8720,6,8,10,12,'Maliyakaleya Orb');
 INSERT INTO `synth_recipes` VALUES (55014,0,0,0,0,0,0,0,105,0,0,4099,4241,823,867,885,3552,12696,0,0,0,10316,10317,10317,10317,1,1,1,1,'Dux Finger Gauntlets');
@@ -3525,7 +3525,7 @@ INSERT INTO `synth_recipes` VALUES (55015,0,0,0,0,0,0,0,105,0,0,4099,4241,651,73
 INSERT INTO `synth_recipes` VALUES (55016,0,0,0,0,0,0,0,105,0,0,4098,4240,760,9255,0,0,0,0,0,0,9256,9256,9256,9256,6,8,10,12,'Cyan Orb');
 INSERT INTO `synth_recipes` VALUES (55017,0,0,0,0,30,0,56,106,0,0,4099,4241,837,2152,2877,3546,3546,0,0,0,10355,10360,10360,10360,1,1,1,1,'Hexed Gamashes');
 INSERT INTO `synth_recipes` VALUES (55018,0,0,0,0,30,0,56,106,0,0,4099,4241,828,2152,2877,3546,3548,0,0,0,10305,10310,10310,10310,1,1,1,1,'Hexed Wristbands');
--- INSERT INTO `synth_recipes` VALUES (55019,0,0,0,0,0,0,0,106,255,0,4098,4240,4015,8719,8719,0,0,0,0,0,28544,28545,28545,28545,1,1,1,1,'Yacuruna Ring');
+-- INSERT INTO `synth_recipes` VALUES (55019,0,0,0,0,0,0,0,106,255,0,4098,4240,4015,8719,8719,0,0,0,0,0,28544,28545,28545,28545,1,1,1,1,'Yacuruna Ring');  -- 2021.11.09 FFXIclopedia, BGWiki, and JPWiki all agree Bonecraft 106.  FFXIclopedia and BGWiki show unknown Alchemy sub.  JPWiki doesn't show a subcraft.
 INSERT INTO `synth_recipes` VALUES (55020,0,0,0,0,0,0,0,106,0,0,4098,4240,3927,8708,8719,8748,0,0,0,0,21815,21816,21816,21816,1,1,1,1,'Maliya Sickle');
 INSERT INTO `synth_recipes` VALUES (55021,0,0,0,0,0,0,0,107,0,0,4099,4241,823,867,885,885,885,3445,3552,12568,10272,10273,10273,10273,1,1,1,1,'Dux Scale Mail');
 INSERT INTO `synth_recipes` VALUES (55022,0,0,0,0,0,0,0,108,0,0,4098,4240,877,1762,3869,0,0,0,0,0,18827,18828,18828,18828,1,1,1,1,'Oxossi Facon');
@@ -3540,63 +3540,63 @@ INSERT INTO `synth_recipes` VALUES (55501,0,0,0,0,0,0,0,111,0,0,4099,4241,1311,1
 INSERT INTO `synth_recipes` VALUES (55502,0,0,0,0,0,0,0,111,0,0,4098,4240,760,3977,3977,0,0,0,0,0,28526,28527,28527,28527,1,1,1,1,'Tati Earring');
 INSERT INTO `synth_recipes` VALUES (55503,0,0,0,0,0,0,0,111,70,0,4099,4241,9005,9027,9130,10355,0,0,0,0,27483,27484,27484,27484,1,1,1,1,'Vexed Gamashes');
 INSERT INTO `synth_recipes` VALUES (55504,0,0,0,0,0,0,70,111,0,0,4099,4241,1402,8719,9047,9130,0,0,0,0,27384,27385,27385,27385,1,1,1,1,'Bewitched Leggings');
--- INSERT INTO `synth_recipes` VALUES (55505,0,0,255,0,0,0,0,112,0,0,4098,4240,4019,4021,8704,8752,8752,0,0,0,20537,20538,20538,20538,1,1,1,1,'Bhakazi Sainti');
+-- INSERT INTO `synth_recipes` VALUES (55505,0,0,255,0,0,0,0,112,0,0,4098,4240,4019,4021,8704,8752,8752,0,0,0,20537,20538,20538,20538,1,1,1,1,'Bhakazi Sainti');  -- 2021.11.09 FFXIclopedia and BGWiki show Bonecraft 112.  All show unknown Woodworking and Goldsmithing.
 INSERT INTO `synth_recipes` VALUES (55506,0,0,0,0,0,0,70,112,0,0,4099,4241,8988,9005,9130,10305,0,0,0,0,27127,27128,27128,27128,1,1,1,1,'Vexed Wristbands');
 INSERT INTO `synth_recipes` VALUES (55507,0,0,0,0,0,0,70,112,0,0,4099,4241,1398,8719,9047,9130,0,0,0,0,27032,27033,27033,27033,1,1,1,1,'Bewitched Gloves');
--- INSERT INTO `synth_recipes` VALUES (55508,0,0,255,0,0,0,0,113,0,0,4098,4240,4012,4019,8704,0,0,0,0,0,20814,20815,20815,20815,1,1,1,1,'Budliqa');
+-- INSERT INTO `synth_recipes` VALUES (55508,0,0,255,0,0,0,0,113,0,0,4098,4240,4012,4019,8704,0,0,0,0,0,20814,20815,20815,20815,1,1,1,1,'Budliqa');  -- 2021.11.09 FFXIclopedia and BGWiki show 113.  All show unknown Woodworking.
 INSERT INTO `synth_recipes` VALUES (55509,0,0,0,0,0,0,70,113,0,0,4099,4241,1400,8719,9047,9130,0,0,0,0,27208,27209,27209,27209,1,1,1,1,'Bewitched Subligar');
 INSERT INTO `synth_recipes` VALUES (55510,0,0,0,0,0,0,0,113,0,0,4098,4240,4012,4019,0,0,0,0,0,0,20621,20622,20622,20622,1,1,1,1,'Nanti Knife');
 INSERT INTO `synth_recipes` VALUES (55511,0,0,0,0,0,0,0,113,0,0,4099,4241,908,1767,3977,0,0,0,0,0,28664,28665,28665,28665,1,1,1,1,'Killedar Shield');
--- INSERT INTO `synth_recipes` VALUES (55512,0,0,0,255,0,0,0,113,0,0,4096,4238,658,766,3979,0,0,0,0,0,21289,21290,21290,21290,1,1,1,1,'Donderbuss');
--- INSERT INTO `synth_recipes` VALUES (55513,0,0,0,0,255,0,0,113,0,0,4098,4240,766,851,3927,3979,0,0,0,0,20919,20920,20920,20920,1,1,1,1,'Lacryma Sickle');
+-- INSERT INTO `synth_recipes` VALUES (55512,0,0,0,255,0,0,0,113,0,0,4096,4238,658,766,3979,0,0,0,0,0,21289,21290,21290,21290,1,1,1,1,'Donderbuss');  -- 2021.11.09 FFXIclopedia and BGWiki show 113.  All show unknown Blacksmithing
+-- INSERT INTO `synth_recipes` VALUES (55513,0,0,0,0,255,0,0,113,0,0,4098,4240,766,851,3927,3979,0,0,0,0,20919,20920,20920,20920,1,1,1,1,'Lacryma Sickle');  -- 2021.11.09 FFXIclopedia and JPWiki show Bonecraft 111-114 and BGWiki shows Bonecraft 113.  All show unknown Goldsmithing and Woodworking.  
 INSERT INTO `synth_recipes` VALUES (55514,0,0,0,70,0,0,0,114,0,0,4099,4241,1394,8719,8990,9130,0,0,0,0,26680,26681,26681,26681,1,1,1,1,'Bewitched Cap');
 INSERT INTO `synth_recipes` VALUES (55515,0,0,0,0,0,0,70,115,0,0,4099,4241,8988,9005,9130,10242,0,0,0,0,25696,25697,25697,25697,1,1,1,1,'Vexed Jacket');
 INSERT INTO `synth_recipes` VALUES (55516,0,0,0,0,0,0,70,115,0,0,4099,4241,1396,8719,9047,9130,0,0,0,0,26856,26857,26857,26857,1,1,1,1,'Bewitched Harness');
--- INSERT INTO `synth_recipes` VALUES (55517,0,0,0,0,255,0,0,116,0,0,4098,4240,4081,4082,9255,0,0,0,0,0,26189,26190,26190,26190,1,1,1,1,'Moonbeam Ring');
--- INSERT INTO `synth_recipes` VALUES (55518,0,2028,0,0,0,0,0,116,255,0,4099,4241,1714,4014,9002,9002,9061,9256,9256,9256,26537,26538,26538,26538,1,1,1,1,'Mousai Manteel');
--- INSERT INTO `synth_recipes` VALUES (55519,0,2028,0,0,0,0,0,116,255,0,4099,4241,1713,1713,4014,9002,9061,9256,9256,0,25988,25989,25989,25989,1,1,1,1,'Mousai Gages');
--- INSERT INTO `synth_recipes` VALUES (55520,0,2028,0,0,0,0,0,116,255,0,4099,4241,1713,4014,9002,9061,9256,9256,0,0,25968,25969,25969,25969,1,1,1,1,'Mousai Crackows');
--- INSERT INTO `synth_recipes` VALUES (55521,0,2028,0,0,0,0,0,116,255,0,4099,4241,1714,4014,9002,9061,9256,9256,0,0,25561,25562,25562,25562,1,1,1,1,'Mousai Turban');
--- INSERT INTO `synth_recipes` VALUES (55522,0,2028,0,0,0,0,0,116,255,0,4099,4241,1714,4014,9002,9061,9256,9256,9256,0,25901,25902,25902,25902,1,1,1,1,'Mousai Seraweels');
--- INSERT INTO `synth_recipes` VALUES (55523,0,0,0,0,255,0,0,117,0,0,4099,4241,4080,4081,26031,0,0,0,0,0,26032,26033,26033,26033,1,1,1,1,'Moonbow Whistle');
+-- INSERT INTO `synth_recipes` VALUES (55517,0,0,0,0,255,0,0,116,0,0,4098,4240,4081,4082,9255,0,0,0,0,0,26189,26190,26190,26190,1,1,1,1,'Moonbeam Ring');  -- 2021.11.09 Consenus is Bonecraft 115-120 with unknown Goldsmithing
+-- INSERT INTO `synth_recipes` VALUES (55518,0,2028,0,0,0,0,0,116,255,0,4099,4241,1714,4014,9002,9002,9061,9256,9256,9256,26537,26538,26538,26538,1,1,1,1,'Mousai Manteel');  -- 2021.11.09 Same as Mousai Seraweels.
+-- INSERT INTO `synth_recipes` VALUES (55519,0,2028,0,0,0,0,0,116,255,0,4099,4241,1713,1713,4014,9002,9061,9256,9256,0,25988,25989,25989,25989,1,1,1,1,'Mousai Gages');  -- 2021.11.09 Same as Mousai Seraweels.
+-- INSERT INTO `synth_recipes` VALUES (55520,0,2028,0,0,0,0,0,116,255,0,4099,4241,1713,4014,9002,9061,9256,9256,0,0,25968,25969,25969,25969,1,1,1,1,'Mousai Crackows');  -- 2021.11.09 Same as Mousai Seraweels.
+-- INSERT INTO `synth_recipes` VALUES (55521,0,2028,0,0,0,0,0,116,255,0,4099,4241,1714,4014,9002,9061,9256,9256,0,0,25561,25562,25562,25562,1,1,1,1,'Mousai Turban');  -- 2021.11.09 Same as Mousai Seraweels.
+-- INSERT INTO `synth_recipes` VALUES (55522,0,2028,0,0,0,0,0,116,255,0,4099,4241,1714,4014,9002,9061,9256,9256,9256,0,25901,25902,25902,25902,1,1,1,1,'Mousai Seraweels');  -- 2021.11.09 - FFXIclopedia and JPWiki show Bonecraft 115-119.  BGWiki shows as 116.  All show unknown Alchemy.
+INSERT INTO `synth_recipes` VALUES (55523,0,0,70,0,70,0,0,117,0,0,4099,4241,4080,4081,26031,0,0,0,0,0,26032,26033,26033,26033,1,1,1,1,'Moonbow Whistle');  -- 2021.11.09 FFXIclopedia and BGWiki agree at 117 with unknown Goldsmithing and Woodworking. JPWiki is guessing Bonecraft 118 with 70 Goldsmithing and Woodworking.  
 INSERT INTO `synth_recipes` VALUES (55524,0,0,0,0,0,0,0,117,0,0,4099,4241,9003,9005,9006,9061,0,0,0,0,22278,22279,22279,22279,1,1,1,1,'Staunch Tathlum');
--- INSERT INTO `synth_recipes` VALUES (55525,0,2028,0,0,0,0,0,255,0,0,4096,4238,4076,9255,9255,9256,9256,9256,12742,0,25996,25997,25997,25997,1,1,1,1,'Raetic Bangles');
--- INSERT INTO `synth_recipes` VALUES (55526,0,2029,0,255,0,0,0,255,0,0,4102,4244,9004,9062,9253,9834,9844,9845,9845,9854,21715,21716,21717,21717,1,1,1,1,'Monster Axe');
--- INSERT INTO `synth_recipes` VALUES (55527,0,2028,0,0,0,0,0,255,0,0,4096,4238,4075,9255,9255,9256,9256,9256,21817,0,21818,21819,21819,21819,1,1,1,1,'Raetic Scythe');
--- INSERT INTO `synth_recipes` VALUES (55528,0,0,0,0,0,0,0,255,255,0,4098,4240,929,930,9255,9255,9255,9893,0,0,22297,22298,22298,22298,1,1,1,1,'Aurgelmir Orb');
--- INSERT INTO `synth_recipes` VALUES (55529,0,2029,0,0,255,0,0,255,0,0,4102,4244,9062,9064,9245,9837,9844,9845,9845,9853,21823,21824,21825,21825,1,1,1,1,'Abyss Scythe');
+-- INSERT INTO `synth_recipes` VALUES (55525,0,2028,0,0,0,0,0,255,0,0,4096,4238,4076,9255,9255,9256,9256,9256,12742,0,25996,25997,25997,25997,1,1,1,1,'Raetic Bangles');  -- 2021.11.09 FFXIclopedia and JPWiki show Bonecraft 115-119.
+-- INSERT INTO `synth_recipes` VALUES (55526,0,2029,0,255,0,0,0,255,0,0,4102,4244,9004,9062,9253,9834,9844,9845,9845,9854,21715,21716,21717,21717,1,1,1,1,'Monster Axe');  -- 2021.11.09 FFXIclopedia and JPWiki show Bonecraft 111-113.
+-- INSERT INTO `synth_recipes` VALUES (55527,0,2028,0,0,0,0,0,255,0,0,4096,4238,4075,9255,9255,9256,9256,9256,21817,0,21818,21819,21819,21819,1,1,1,1,'Raetic Scythe');  -- 2021.11.09 FFXIclopedia and JPWiki show Bonecraft 115-119.
+-- INSERT INTO `synth_recipes` VALUES (55528,0,0,0,0,0,0,0,255,255,0,4098,4240,929,930,9255,9255,9255,9893,0,0,22297,22298,22298,22298,1,1,1,1,'Aurgelmir Orb');  -- 2021.11.09 FFXIclopedia, BGWiki, and JPWiki show Bonecraft 115-119 with unknown Alchemy
+-- INSERT INTO `synth_recipes` VALUES (55529,0,2029,0,0,255,0,0,255,0,0,4102,4244,9062,9064,9245,9837,9844,9845,9845,9853,21823,21824,21825,21825,1,1,1,1,'Abyss Scythe');  -- 2021.11.09 FFXIclopedia and JPWiki show Bonecraft 111-113.  All show unknown Goldsmithing and Woodworking
 INSERT INTO `synth_recipes` VALUES (59901,1,0,0,0,0,0,0,23,0,0,4100,4242,16649,0,0,0,0,0,0,0,715,715,893,893,1,1,1,1,'Bone Pick (desynth)');
--- INSERT INTO `synth_recipes` VALUES (59902,1,0,0,0,0,0,0,255,0,0,4100,4242,17361,0,0,0,0,0,0,0,894,902,902,902,1,1,1,1,'Crumhorn (desynth)');
--- INSERT INTO `synth_recipes` VALUES (59903,1,0,0,0,0,0,0,255,0,0,4100,4242,13323,0,0,0,0,0,0,0,894,744,744,744,1,2,2,2,'Beetle Earring (desynth)');
--- INSERT INTO `synth_recipes` VALUES (59904,1,0,0,0,0,0,0,255,0,0,4100,4242,17362,0,0,0,0,0,0,0,894,883,883,883,1,1,1,1,'Shofar (desynth)');
+INSERT INTO `synth_recipes` VALUES (59902,1,0,0,0,0,0,0,66,0,0,4100,4242,17361,0,0,0,0,0,0,0,894,894,902,902,1,1,1,1,'Crumhorn (desynth)');  -- 2021.11.09 Level based on synth.  FFXIAH, FFXIclopedia, and Allakhazam agree on mats.
+INSERT INTO `synth_recipes` VALUES (59903,1,0,0,0,0,0,0,27,0,0,4100,4242,13323,0,0,0,0,0,0,0,894,744,744,744,1,1,2,2,'Beetle Earring (desynth)');  -- 2021.11.09 Level based on synth.  Allakhazam and FFXIAH agree on the mats but not the quantity.  Went with the Allakhazam amounts.
+INSERT INTO `synth_recipes` VALUES (59904,1,0,0,0,0,0,0,86,0,0,4100,4242,17362,0,0,0,0,0,0,0,894,883,883,883,1,1,1,1,'Shofar (desynth)');  -- 2021.11.09 Level based on synth.  FFXIAH, FFXIclopedia, and Allakhazam agree on mats.
 INSERT INTO `synth_recipes` VALUES (59905,1,0,0,0,0,0,0,25,0,0,4100,4242,13457,0,0,0,0,0,0,0,894,894,894,894,1,1,1,1,'Beetle Ring (desynth)'); -- based synth lvl 10/31/21
 INSERT INTO `synth_recipes` VALUES (59906,1,0,0,0,0,0,0,18,0,0,4100,4242,12454,0,0,0,0,0,0,0,880,880,850,850,1,1,1,1,'Bone Mask (desynth)');
 INSERT INTO `synth_recipes` VALUES (59907,1,0,0,0,0,0,0,4,0,0,4100,4242,12505,0,0,0,0,0,0,0,880,880,880,880,1,1,1,1,'Bone Hairpin (desynth)');
--- INSERT INTO `synth_recipes` VALUES (59908,1,0,0,0,0,0,0,255,0,0,4100,4242,17612,0,0,0,0,0,0,0,894,716,716,716,1,1,1,1,'Beetle Knife (desynth)');
--- INSERT INTO `synth_recipes` VALUES (59909,1,0,0,0,0,0,0,255,0,0,4100,4242,12506,0,0,0,0,0,0,0,885,885,885,885,1,1,1,1,'Shell Hairpin (desynth)');
--- INSERT INTO `synth_recipes` VALUES (59910,1,0,0,0,0,0,0,255,0,0,4100,4242,12711,0,0,0,0,0,0,0,889,852,852,852,1,2,2,2,'Beetle Mittens (desynth)');
--- INSERT INTO `synth_recipes` VALUES (59911,1,0,0,0,0,0,0,255,0,0,4100,4242,13744,0,0,0,0,0,0,0,889,889,889,889,1,1,1,1,'Justaucorps (desynth)');
+INSERT INTO `synth_recipes` VALUES (59908,1,0,0,0,0,0,0,59,0,0,4100,4242,17612,0,0,0,0,0,0,0,894,894,716,716,1,1,1,1,'Beetle Knife (desynth)');  -- 2021.11.09 Level based on synth.  FFXIAH, FFXIclopedia, and Allakhazam agree on mats.
+INSERT INTO `synth_recipes` VALUES (59909,1,0,0,0,0,0,0,53,0,0,4100,4242,12506,0,0,0,0,0,0,0,885,885,885,885,1,1,1,1,'Shell Hairpin (desynth)');  -- 2021.11.09 Level based on synth. FFXIAH, FFXIclopedia, and Allakhazam agree on incredients.
+INSERT INTO `synth_recipes` VALUES (59910,1,0,0,0,0,0,0,30,0,0,4100,4242,12711,0,0,0,0,0,0,0,889,852,852,852,1,2,2,2,'Beetle Mittens (desynth)');  -- 2021.11.09 Level based on synth. Only FFXIclopedia had recipe.
+INSERT INTO `synth_recipes` VALUES (59911,1,0,0,0,0,0,0,56,0,0,4100,4242,13744,0,0,0,0,0,0,0,889,889,889,889,1,1,1,1,'Justaucorps (desynth)');  -- 2021.11.09 None agree on level.  Based on synth level.  FFXIAH, FFXIclopedia, and Allakhazam agree on ingredients.
 INSERT INTO `synth_recipes` VALUES (59912,1,0,0,0,0,0,0,17,0,0,4100,4242,13441,0,0,0,0,0,0,0,880,882,882,882,1,1,1,1,'Bone Ring (desynth)'); -- based on synth lvl 10/31/21
--- INSERT INTO `synth_recipes` VALUES (59913,1,0,0,0,0,0,0,255,0,0,4100,4242,12507,0,0,0,0,0,0,0,895,895,895,895,1,1,1,1,'Horn Hairpin (desynth)');
--- INSERT INTO `synth_recipes` VALUES (59914,1,0,0,0,0,0,0,255,0,0,4100,4242,16405,0,0,0,0,0,0,0,856,649,880,880,1,1,3,3,'Cat Baghnakhs (desynth)');
--- INSERT INTO `synth_recipes` VALUES (59915,1,0,0,0,0,0,0,255,0,0,4100,4242,12709,0,0,0,0,0,0,0,887,506,506,506,1,1,1,1,'Coral Mittens (desynth)');
--- INSERT INTO `synth_recipes` VALUES (59916,1,0,0,0,0,0,0,255,0,0,4100,4242,17610,0,0,0,0,0,0,0,893,711,711,711,1,1,1,1,'Bone Knife (desynth)');
+INSERT INTO `synth_recipes` VALUES (59913,1,0,0,0,0,0,0,29,0,0,4100,4242,12507,0,0,0,0,0,0,0,895,895,895,895,1,1,1,1,'Horn Hairpin (desynth)');  -- 2021.11.09 Level based on synth.  FFXIAH, Allakhazam and FFXIclopedia agree on ingredients.
+INSERT INTO `synth_recipes` VALUES (59914,1,0,0,0,0,0,0,9,0,0,4100,4242,16405,0,0,0,0,0,0,0,856,649,880,880,1,1,3,3,'Cat Baghnakhs (desynth)');  -- 2021.11.09 Level based on synth.  FFXIclopedia and Allakhazam show bronze ingot where FFXIAH shows brass ingot.  Recipe already had bronze and bronze is in the recipe.
+INSERT INTO `synth_recipes` VALUES (59915,1,0,0,0,0,0,0,74,0,0,4100,4242,12709,0,0,0,0,0,0,0,887,887,887,506,1,1,1,1,'Coral Mittens (desynth)');  -- 2021.11.09 FFXIAH, Allakhazam and FFXIclopedia agree on ingredients.  Level based on synth.
+INSERT INTO `synth_recipes` VALUES (59916,1,0,0,0,0,0,0,41,0,0,4100,4242,17610,0,0,0,0,0,0,0,893,893,893,711,1,1,1,1,'Bone Knife (desynth)');  -- 2021.11.09 FFXIAH, Allakhazam and FFXIclopedia aree on ingredients.  Level based on synth.
 INSERT INTO `synth_recipes` VALUES (59917,1,0,0,0,0,0,0,47,0,0,4100,4242,17352,0,0,0,0,0,0,0,894,895,895,895,1,1,1,1,'Horn (desynth)');
--- INSERT INTO `synth_recipes` VALUES (59918,1,0,0,0,0,0,0,255,0,0,4100,4242,16420,0,0,0,0,0,0,0,881,893,932,932,1,1,1,1,'Bone Patas (desynth)');
--- INSERT INTO `synth_recipes` VALUES (59919,1,0,0,0,0,0,0,255,0,0,4100,4242,13199,0,0,0,0,0,0,0,817,924,893,893,1,1,1,1,'Blood Stone (desynth)');
--- INSERT INTO `synth_recipes` VALUES (59920,1,0,0,0,0,0,0,255,0,0,4100,4242,17344,0,0,0,0,0,0,0,650,880,880,880,1,1,1,1,'Cornette (desynth)');
+INSERT INTO `synth_recipes` VALUES (59918,1,0,0,0,0,0,0,68,0,0,4100,4242,16420,0,0,0,0,0,0,0,881,893,893,932,1,1,1,1,'Bone Patas (desynth)');  -- 2021.11.08 FFXIAH, Allakhazam and FFXIclopedia agree on ingredients.  Level based on synth.
+INSERT INTO `synth_recipes` VALUES (59919,1,0,0,0,0,0,0,57,0,0,4100,4242,13199,0,0,0,0,0,0,0,817,924,893,893,1,1,1,1,'Blood Stone (desynth)');  -- 2021.11.08 FFXIAH and FFXIclopedia agee on ingredients.  Level based on synth level.
+INSERT INTO `synth_recipes` VALUES (59920,1,0,0,0,0,0,0,14,0,0,4100,4242,17344,0,0,0,0,0,0,0,650,650,880,880,1,1,1,1,'Cornette (desynth)');  -- 2021.11.08 FFXIAH and FFXIclopedia agree on ingredients.  Level based on synth level.
 INSERT INTO `synth_recipes` VALUES (59921,1,0,0,0,0,0,0,91,0,0,4100,4242,15159,0,0,0,0,0,0,0,506,1163,887,887,1,1,1,2,'Igqira Tiara (desynth)');
--- INSERT INTO `synth_recipes` VALUES (59922,1,0,0,0,0,0,0,255,0,0,4100,4242,13110,0,0,0,0,0,0,0,818,893,893,893,1,1,1,1,'Beast Whistle (desynth)');
--- INSERT INTO `synth_recipes` VALUES (59923,1,0,0,0,0,0,0,255,0,0,4100,4242,12451,0,0,0,0,0,0,0,896,851,851,851,1,1,1,1,'Scorpion Mask (desynth)');
+-- INSERT INTO `synth_recipes` VALUES (59922,1,0,0,0,0,0,0,255,0,0,4100,4242,13110,0,0,0,0,0,0,0,818,893,893,893,1,1,1,1,'Beast Whistle (desynth)');  -- 2021.11.08 FFXIAH and FFXIclopedia agree, but level is unknown
+INSERT INTO `synth_recipes` VALUES (59923,1,0,0,0,0,0,0,64,0,0,4100,4242,12451,0,0,0,0,0,0,0,896,896,851,851,1,1,1,1,'Scorpion Mask (desynth)');  -- 2021.11.08 based on FFXIAH, FFXIclopedia
 INSERT INTO `synth_recipes` VALUES (59924,1,0,0,0,0,0,0,83,0,0,4100,4242,13312,0,0,0,0,0,0,0,744,744,887,887,1,1,1,1,'Coral Earring (desynth)');
--- INSERT INTO `synth_recipes` VALUES (59925,1,0,0,0,0,0,0,255,0,0,4100,4242,12717,0,0,0,0,0,0,0,816,850,1473,1473,3,2,1,1,'Scp. Gnt. +1 (desynth)');
+INSERT INTO `synth_recipes` VALUES (59925,1,0,0,0,0,0,0,96,0,0,4100,4242,12751,0,0,0,0,0,0,0,816,850,1473,1473,3,2,1,1,'Scorpion Gauntlets (desynth)');  -- 2021.11.08 FFXIclopedia, FFXIAH, Allakhazam only had NQ recipe, but makes sense to be the same.  Need to verify if this should be a desynth of the HQ or NQ.  Changed to NQ item to desynth.
 INSERT INTO `synth_recipes` VALUES (59926,1,0,0,0,0,0,0,45,0,0,4100,4242,13711,0,0,0,0,0,0,0,881,881,848,848,1,1,1,1,'Carapace Mask (desynth)');
--- INSERT INTO `synth_recipes` VALUES (59927,1,0,0,0,0,0,0,255,0,0,4100,4242,13922,0,0,0,0,0,0,0,850,886,902,902,1,1,1,1,'Demon Helm (desynth)');
+INSERT INTO `synth_recipes` VALUES (59927,1,0,0,0,0,0,0,91,0,0,4100,4242,13922,0,0,0,0,0,0,0,850,886,902,902,1,1,1,1,'Demon Helm (desynth)');  -- FFXIclopedia, FFXIAH, Allakhazam all agree
 INSERT INTO `synth_recipes` VALUES (59928,1,0,0,0,0,0,0,7,0,0,4100,4242,13442,0,0,0,0,0,0,0,864,888,888,888,1,1,1,1,'Shell Ring (desynth)');
--- INSERT INTO `synth_recipes` VALUES (59929,1,0,0,0,0,0,0,255,0,0,4100,4242,13461,0,0,0,0,0,0,0,881,1226,653,653,1,4,1,1,'Carapace Ring (desynth)');
+INSERT INTO `synth_recipes` VALUES (59929,1,0,0,0,0,0,0,42,0,0,4100,4242,13461,0,0,0,0,0,0,0,881,1226,653,653,1,4,1,1,'Carapace Ring (desynth)');  -- 2021.11.08 Allakhazam and FFXIAH
 INSERT INTO `synth_recipes` VALUES (59930,1,0,0,0,0,0,0,28,0,0,4100,4242,12455,0,0,0,0,0,0,0,852,852,894,894,1,1,1,1,'Beetle Mask (desynth)');
 INSERT INTO `synth_recipes` VALUES (59931,1,0,0,0,0,0,0,92,0,0,4100,4242,14305,0,0,0,0,0,0,0,1629,1629,1629,1629,1,1,1,1,'Dragon Subligar (desynth)');
--- INSERT INTO `synth_recipes` VALUES (59932,1,0,0,0,0,0,0,255,0,0,4100,4242,14852,0,0,0,0,0,0,0,1163,1622,790,1618,1,1,1,1,'Igqira Manillas (desynth)');
+INSERT INTO `synth_recipes` VALUES (59932,1,0,0,0,0,0,0,93,0,0,4100,4242,14852,0,0,0,0,0,0,0,1163,1622,790,1618,1,1,1,1,'Igqira Manillas (desynth)');  -- 2021.11.08 FFXIclopedia and Allakhazam
 INSERT INTO `synth_recipes` VALUES (59933,1,0,0,0,0,0,0,72,0,0,4100,4242,12878,0,0,0,0,0,0,0,819,506,887,887,2,1,1,1,'Coral Subligar (desynth)');
 INSERT INTO `synth_recipes` VALUES (59934,1,0,0,0,0,0,0,44,0,0,4100,4242,13713,0,0,0,0,0,0,0,864,864,864,864,1,1,1,1,'Carapace Mittens (desynth)');  -- 2021.11.06 - FFXIclopedia
 INSERT INTO `synth_recipes` VALUES (59935,1,0,0,0,0,0,0,39,0,0,4100,4242,17026,0,0,0,0,0,0,0,817,880,880,893,3,5,6,1,'Bone Cudgel (desynth)');  -- 2021.11.01 FFXIclopedia and allakhzam have different recipes.  Went with https://ffxiclopedia.fandom.com/wiki/Bone_Cudgel
