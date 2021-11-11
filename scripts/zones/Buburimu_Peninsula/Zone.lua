@@ -1,7 +1,5 @@
 -----------------------------------
---
 -- Zone: Buburimu_Peninsula (118)
---
 -----------------------------------
 local ID = require("scripts/zones/Buburimu_Peninsula/IDs")
 require("scripts/quests/i_can_hear_a_rainbow")
@@ -38,8 +36,6 @@ zone_object.onZoneIn = function(player, prevZone)
 
     if quests.rainbow.onZoneIn(player) then
         cs = 3
-    elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.VAIN and player:getMissionStatus(player:getNation()) ==1 then
-        cs = 5 -- zone 4 buburimu no update (north)
     end
 
     -- AMK06/AMK07
@@ -78,12 +74,6 @@ end
 zone_object.onEventUpdate = function( player, csid, option)
     if csid == 3 then
         quests.rainbow.onEventUpdate(player)
-    elseif csid == 5 then
-        if player:getPreviousZone() == xi.zone.LABYRINTH_OF_ONZOZO or player:getPreviousZone() == xi.zone.MHAURA then
-            player:updateEvent(0, 0, 0, 0, 0, 7)
-        elseif player:getPreviousZone() == xi.zone.MAZE_OF_SHAKHRAMI then
-            player:updateEvent(0, 0, 0, 0, 0, 6)
-        end
     end
 end
 

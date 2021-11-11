@@ -1,7 +1,5 @@
 -----------------------------------
---
 -- Zone: Sauromugue_Champaign (120)
---
 -----------------------------------
 local ID = require("scripts/zones/Sauromugue_Champaign/IDs")
 require("scripts/quests/i_can_hear_a_rainbow")
@@ -32,8 +30,6 @@ zone_object.onZoneIn = function( player, prevZone)
 
     if quests.rainbow.onZoneIn(player) then
         cs = 3
-    elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.VAIN and player:getMissionStatus(player:getNation()) == 1 then
-        cs = 5
     end
 
     return cs
@@ -56,14 +52,6 @@ end
 zone_object.onEventUpdate = function(player, csid, option)
     if csid == 3 then
         quests.rainbow.onEventUpdate(player)
-    elseif csid == 5 then
-        if player:getPreviousZone() == xi.zone.GARLAIGE_CITADEL then
-            player:updateEvent(0, 0, 0, 0, 0, 2)
-        elseif player:getPreviousZone() == xi.zone.MERIPHATAUD_MOUNTAINS then
-            player:updateEvent(0, 0, 0, 0, 0, 4)
-        elseif player:getPreviousZone() == xi.zone.ROLANBERRY_FIELDS or player:getPreviousZone() == xi.zone.PORT_JEUNO then
-            player:updateEvent(0, 0, 0, 0, 0, 3)
-        end
     end
 end
 

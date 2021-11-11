@@ -44,23 +44,6 @@ battlefield_object.onEventUpdate = function(player, csid, option)
 end
 
 battlefield_object.onEventFinish = function(player, csid, option)
-    local pNation = player:getNation()
-
-    -- This code to be deprecated after converting Windurst M5-2 to Interaction Framework
-    if pNation == xi.nation.WINDURST then
-        if csid == 32001 and player:getCurrentMission(pNation) == xi.mission.id.nation.SHADOW_LORD and player:getMissionStatus(pNation) == 3 then
-            if player:getCurrentMission(ZILART) ~= xi.mission.id.zilart.THE_NEW_FRONTIER and not player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_NEW_FRONTIER) then
-                -- Don't add missions we already completed. Players who change nation will hit this.
-                player:addMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_NEW_FRONTIER)
-            end
-            player:startEvent(7)
-        elseif csid == 7 then
-            player:addKeyItem(xi.ki.SHADOW_FRAGMENT)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SHADOW_FRAGMENT)
-            player:setMissionStatus(player:getNation(), 4)
-            player:setPos(378, -12, -20, 125, 161)
-        end
-    end
 end
 
 return battlefield_object

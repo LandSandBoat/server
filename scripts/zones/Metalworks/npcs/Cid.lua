@@ -216,8 +216,6 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 760 then
         player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.DARK_PUPPET)
         player:setCharVar("darkPuppetCS", 1)
-    elseif csid == 764 then
-        finishMissionTimeline(player, 1, csid, option)
     elseif (csid == 507) then
         player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.CID_S_SECRET)
     elseif (csid == 509) then
