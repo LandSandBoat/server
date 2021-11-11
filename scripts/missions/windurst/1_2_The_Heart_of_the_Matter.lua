@@ -85,7 +85,7 @@ end
 
 local placeOrb = function(player, csid, option, npc)
     local gizmoNum = npc:getID() - outerHorutotoRuinsID.npc.GATE_MAGICAL_GIZMO -- gizmoNum will be 1 through 6
-    local numberPlaced = mission:getVar(player,"OrbsPlaced")
+    local numberPlaced = mission:getVar(player, "OrbsPlaced")
     local ki = darkOrbKI[(numberPlaced + 1)]
 
     mission:setVarBit(player, 'GizmoUsed', gizmoNum)
@@ -159,7 +159,7 @@ mission.sections =
         {
             onEventFinish =
             {
-                [114] =  handleAcceptMission,
+                [114] = handleAcceptMission,
             },
         },
     },
@@ -260,7 +260,7 @@ mission.sections =
     -- Handle both the placing and later collecting of mana orbs here
     {
         check = function(player, currentMission, missionStatus)
-            return currentMission == mission.missionId and missionStatus == 3 or missionStatus == 4
+            return currentMission == mission.missionId and (missionStatus == 3 or missionStatus == 4)
         end,
 
         [xi.zone.EAST_SARUTABARUTA] =
@@ -419,7 +419,7 @@ mission.sections =
 
         [xi.zone.EAST_SARUTABARUTA] =
         {
-            ['Pore-Ohre'] = mission:messageText(eastSarutabarutaID.text.PORE_OHRE_STOLEN_ORBS),
+            ['Pore-Ohre']   = mission:messageText(eastSarutabarutaID.text.PORE_OHRE_STOLEN_ORBS),
             ['Quh_Berhuja'] = mission:messageText(eastSarutabarutaID.text.QUH_BERHUJA_STOLEN_ORBS),
         },
 

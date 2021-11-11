@@ -100,7 +100,7 @@ mission.sections =
         {
             onEventFinish =
             {
-                [114] =  handleAcceptMission,
+                [114] = handleAcceptMission,
             },
         },
     },
@@ -202,7 +202,7 @@ mission.sections =
         [xi.zone.WINDURST_WOODS] =
         {
             ['Bopa_Greso']  = mission:progressEvent(167),
-            ['Cha_Lebagta'] =  mission:progressEvent(168),
+            ['Cha_Lebagta'] = mission:progressEvent(168),
             ['Nanaa_Mihgo'] = mission:progressEvent(166),
         },
     },
@@ -256,7 +256,7 @@ mission.sections =
         [xi.zone.WINDURST_WOODS] =
         {
             ['Bopa_Greso']  = mission:progressEvent(171),
-            ['Cha_Lebagta'] =  mission:progressEvent(172),
+            ['Cha_Lebagta'] = mission:progressEvent(172),
             ['Nanaa_Mihgo'] = mission:progressEvent(170),
         },
 
@@ -283,7 +283,7 @@ mission.sections =
         [xi.zone.WINDURST_WOODS] =
         {
             ['Bopa_Greso']  = mission:progressEvent(174),
-            ['Cha_Lebagta'] =  mission:progressEvent(175),
+            ['Cha_Lebagta'] = mission:progressEvent(175),
             ['Nanaa_Mihgo'] = mission:progressEvent(173),
         },
 

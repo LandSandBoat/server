@@ -151,7 +151,7 @@ mission.sections =
         {
             onEventFinish =
             {
-                [114] =  handleAcceptMission,
+                [114] = handleAcceptMission,
             },
         },
     },

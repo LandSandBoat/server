@@ -101,7 +101,7 @@ mission.sections =
         {
             onEventFinish =
             {
-                [114] =  handleAcceptMission,
+                [114] = handleAcceptMission,
             },
         },
     },
@@ -236,7 +236,7 @@ mission.sections =
 
         [xi.zone.PORT_WINDURST] =
         {
-            ['Janshura-Rashura'] =  mission:progressEvent(114),
+            ['Janshura-Rashura'] = mission:progressEvent(114),
 
             onEventFinish =
             {

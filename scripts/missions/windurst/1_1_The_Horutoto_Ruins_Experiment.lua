@@ -93,7 +93,7 @@ mission.sections =
 
         [xi.zone.PORT_WINDURST] =
         {
-            ['Janshura-Rashura'] =  mission:progressEvent(83),
+            ['Janshura-Rashura'] = mission:progressEvent(83),
 
             onEventFinish =
             {
@@ -127,7 +127,7 @@ mission.sections =
 
             onEventFinish =
             {
-                [121] =  handleAcceptMission,
+                [121] = handleAcceptMission,
             },
         },
     },
@@ -316,7 +316,7 @@ mission.sections =
 
         [xi.zone.PORT_WINDURST] =
         {
-            ['Hakkuru-Rinkuru'] = mission:progressEvent(94, 0, xi.ki.CRACKED_MANA_ORBS),
+            ['Hakkuru-Rinkuru'] = mission:progressEvent(94, 0, xi.ki.CRACKED_MANA_ORB),
             ['Kuroido-Moido']   = mission:event(98),
 
             onEventFinish =
