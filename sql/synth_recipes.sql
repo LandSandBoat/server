@@ -3507,7 +3507,7 @@ INSERT INTO `synth_recipes` VALUES (54566,0,0,0,60,0,0,0,100,0,0,4099,4241,654,7
 INSERT INTO `synth_recipes` VALUES (54567,0,0,0,0,0,0,0,100,0,0,4098,4240,2371,2371,0,0,0,0,0,0,11058,11059,11059,11059,1,1,1,1,'Hajduk Ring');
 -- INSERT INTO `synth_recipes` VALUES (54568,0,0,0,0,0,0,255,100,0,0,4099,4241,836,860,8708,8708,8982,8983,0,0,27398,27399,27399,27399,1,1,1,1,'Sombra Leggings');  -- 2021.11.10 All show Bonecraft 100 with unknown Leathercraft and Clothcraft.
 INSERT INTO `synth_recipes` VALUES (54569,0,0,0,0,0,0,58,101,0,0,4099,4241,1629,1629,1771,1816,0,0,0,0,14389,14390,14390,14390,1,1,1,1,'Dragon Harness');  -- 2021.11.10 There are some minor discrepancies between the sites.  about 1/2 show 100 vs 101 and 58 vs 60.
-INSERT INTO `synth_recipes` VALUES (55001,0,0,0,0,0,0,0,100,0,0,4098,4240,879,1586,2172,0,0,0,0,0,16073,16074,16074,16074,1,1,1,1,'Hydra Mask');  -- 2021.11.10 1/2 show level 100, the other show 101
+INSERT INTO `synth_recipes` VALUES (55001,0,0,0,0,0,0,0,100,0,0,4098,4240,879,1586,2172,0,0,0,0,0,16073,16074,16074,16074,1,1,1,1,'Hydra Mask');  -- 2021.11.10 FFXIclopedia, FFXIAH, and Allakhazam show 100, BGWiki and JPWiki show 101.
 INSERT INTO `synth_recipes` VALUES (55002,0,0,49,37,0,0,0,101,0,0,4098,4240,651,651,730,2168,2168,0,0,0,18748,18749,18749,18749,1,1,1,1,'Hades Sainti');
 INSERT INTO `synth_recipes` VALUES (55003,0,0,0,0,0,0,0,102,50,0,4098,4240,1311,1715,4154,4154,5306,0,0,0,10794,10795,10795,10795,1,1,1,1,'Blenmot\'s Ring');
 -- INSERT INTO `synth_recipes` VALUES (55004,0,0,0,0,0,0,255,102,0,0,4099,4241,830,836,8708,8982,8982,8983,8983,0,26883,26884,26884,26884,1,1,1,1,'Sombra Harness');  -- 2021.11.10 All agree on Bonecraft 102 with unknown Leathercraft and Clothcraft.
