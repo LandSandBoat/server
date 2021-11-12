@@ -4131,7 +4131,11 @@ void CLuaBaseEntity::clearGearSetMods()
 
 std::optional<CLuaItem> CLuaBaseEntity::getStorageItem(uint8 container, uint8 slotID, uint8 equipID)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowWarning("%s is trying to access their inventory, but is not TYPE_PC, so doesn't have one!", (const char*)m_PBaseEntity->GetName());
+        return std::nullopt;
+    }
 
     CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
 
@@ -5720,7 +5724,7 @@ void CLuaBaseEntity::setRank(uint8 rank)
  *  Example : player:getRankPoints()
  ************************************************************************/
 
-uint32 CLuaBaseEntity::getRankPoints()
+uint16 CLuaBaseEntity::getRankPoints()
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
@@ -5734,13 +5738,13 @@ uint32 CLuaBaseEntity::getRankPoints()
  *  Notes   : Like, when you trade crystals
  ************************************************************************/
 
-void CLuaBaseEntity::addRankPoints(uint32 rankpoints)
+void CLuaBaseEntity::addRankPoints(uint16 rankPoints)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    PChar->profile.rankpoints += rankpoints;
+    PChar->profile.rankpoints = std::min<uint16>(PChar->profile.rankpoints + rankPoints, 4000);
 
     charutils::SaveMissionsList(PChar);
 }
@@ -5752,13 +5756,15 @@ void CLuaBaseEntity::addRankPoints(uint32 rankpoints)
  *  Notes   : player:setRankPoints(0) is called after switching nations
  ************************************************************************/
 
-void CLuaBaseEntity::setRankPoints(uint32 rankpoints)
+void CLuaBaseEntity::setRankPoints(uint16 rankPoints)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    PChar->profile.rankpoints = rankpoints;
+    // NOTE: Any value over 4000 currently causes visual defects in the client; therefore, is
+    // hard-coded here and in the above function to limit values.
+    PChar->profile.rankpoints = std::min<uint16>(rankPoints, 4000);
     charutils::SaveMissionsList(PChar);
 }
 

@@ -46,16 +46,8 @@ entity.onTrigger = function(player, npc)
     local ohbiruFood = player:getCharVar("Ohbiru_Food_var")
     local needZone = player:needToZone()
 
-    -- Awakening of the Gods
-    if player:getCurrentMission(WINDURST) == xi.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getMissionStatus(player:getNation()) == 0 then
-        player:startEvent(737)
-    elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getMissionStatus(player:getNation()) == 1 then
-        player:startEvent(736)
-    elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getMissionStatus(player:getNation()) == 2 then
-        player:startEvent(738)
-
     -- THREE PATHS (ULMIA)
-    elseif player:getCurrentMission(COP) == xi.mission.id.cop.THREE_PATHS and player:getCharVar("COP_Ulmia_s_Path") == 3 then
+    if player:getCurrentMission(COP) == xi.mission.id.cop.THREE_PATHS and player:getCharVar("COP_Ulmia_s_Path") == 3 then
         player:startEvent(876)
 
     -- WAKING DREAMS
@@ -143,7 +135,7 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("COP_Ulmia_s_Path", 4)
 
     -- FOOD FOR THOUGHT
-    elseif (csid == 313 and option == 0) or (csid == 314 and option == 0) then
+    elseif (csid == 313 or csid == 314) and option == 0 then
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.FOOD_FOR_THOUGHT)
         player:setCharVar("Kerutoto_Food_var", 1)
     elseif csid == 313 and option == 1 then
@@ -212,9 +204,6 @@ entity.onEventFinish = function(player, csid, option)
             player:delKeyItem(xi.ki.WHISPER_OF_DREAMS)
             player:setCharVar("Darkness_Named_date", getMidnight())
         end
-    -- AWAKENING OF THE GODS
-    elseif csid == 736 then
-        player:setMissionStatus(player:getNation(), 2)
     end
 end
 

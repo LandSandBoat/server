@@ -7,6 +7,7 @@ return {
     ['Gachemage']   = { text = ID.text.GACHEMAGE_DIALOG },
     ['Laillera']    = { text = ID.text.LAILLERA_DIALOG },
     ['Palcomondau'] = { text = ID.text.PALCOMONDAU_DIALOG },
+    ['Phairet']     = { event = 117 },
     ['qm1']         = { messageSpecial = ID.text.DISMAYED_CUSTOMER},
     ['qm2']         = { messageSpecial = ID.text.DISMAYED_CUSTOMER},
     ['qm3']         = { messageSpecial = ID.text.DISMAYED_CUSTOMER},

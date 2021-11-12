@@ -43,6 +43,11 @@ entity.onTrigger = function(player, npc)
                 player:delKeyItem(orders)
             end
         end
+        for maps = xi.ki.MAP_OF_LEUJAOAM_SANCTUM, xi.ki.MAP_OF_NYZUL_ISLE do
+            if player:hasKeyItem(maps) then
+                player:delKeyItem(maps)
+            end
+        end
     elseif
         player:getCurrentMission(TOAU) > xi.mission.id.toau.PRESIDENT_SALAHEEM or
         (player:getCurrentMission(TOAU) == xi.mission.id.toau.PRESIDENT_SALAHEEM and
@@ -123,8 +128,8 @@ entity.onEventFinish = function(player, csid, option)
         local currentAssault = player:getCurrentAssault()
 
         for _, orders in pairs(xi.assaultUtil.assaultOrders) do
-            if player:hasKeyItem(orders.KI) then
-                player:delKeyItem(orders.KI)
+            if player:hasKeyItem(orders) then
+                player:delKeyItem(orders)
             end
         end
         npcUtil.giveKeyItem(player, xi.ki.IMPERIAL_ARMY_ID_TAG)

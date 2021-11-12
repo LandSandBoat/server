@@ -35,9 +35,6 @@ zone_object.onZoneIn = function(player, prevZone)
         cs = 206
     elseif quests.rainbow.onZoneIn(player) then
         cs = 114
-    elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.VAIN and player:getMissionStatus(player:getNation()) ==
-        1 then
-        cs = 116
     end
 
     return cs
@@ -53,8 +50,6 @@ end
 zone_object.onEventUpdate = function(player, csid, option)
     if csid == 114 then
         quests.rainbow.onEventUpdate(player)
-    elseif csid == 116 then
-        player:updateEvent(0, 0, 0, 0, 0, 4)
     elseif csid == 206 then
         player:updateEvent(0, xi.ki.MYSTERIOUS_AMULET)
     end

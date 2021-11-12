@@ -21,7 +21,7 @@ CREATE TABLE `zone_weather` (
   `weather` varbinary(4320) DEFAULT NULL,
   PRIMARY KEY (`zone`),
   UNIQUE KEY `zone` (`zone`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

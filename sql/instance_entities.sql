@@ -20,7 +20,7 @@ CREATE TABLE `instance_entities` (
   `instanceid` smallint(3) unsigned NOT NULL DEFAULT '0',
   `id` int(10) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`instanceid`, `id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -432,6 +432,7 @@ INSERT INTO `instance_entities` VALUES (6900,17059855);
 INSERT INTO `instance_entities` VALUES (6900,17060014);
 INSERT INTO `instance_entities` VALUES (6900,17060015);
 INSERT INTO `instance_entities` VALUES (6900,17060138);
+INSERT INTO `instance_entities` VALUES (6900,17060142);
 INSERT INTO `instance_entities` VALUES (6900,17060146);
 INSERT INTO `instance_entities` VALUES (6900,17060147);
 

@@ -3,7 +3,6 @@
 --   NM: Jack of Coins
 -----------------------------------
 mixins = {require("scripts/mixins/job_special")}
-require("scripts/globals/missions")
 -----------------------------------
 local entity = {}
 
@@ -18,9 +17,6 @@ entity.onMobRoam = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    if player:getCurrentMission(WINDURST) == xi.mission.id.windurst.FULL_MOON_FOUNTAIN and player:getMissionStatus(player:getNation()) == 1 then
-        player:setMissionStatus(player:getNation(), 2)
-    end
 end
 
 return entity

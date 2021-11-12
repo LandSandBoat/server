@@ -1,5 +1,18 @@
 require("scripts/globals/mixins")
 
+-- If you subtract 790 from the modelId, you're left with a key into to this table :)
+local abilityIds =
+{
+    919, -- [modelId: 791] Carbuncle
+    839, -- [modelId: 792] Fenrir
+    913, -- [modelId: 793] Ifrit
+    914, -- [modelId: 794] Titan
+    915, -- [modelId: 795] Leviathan
+    916, -- [modelId: 796] Garuda
+    917, -- [modelId: 797] Shiva
+    918, -- [modelId: 798] Ramuh
+}
+
 g_mixins = g_mixins or {}
 g_mixins.families = g_mixins.families or {}
 
@@ -11,26 +24,21 @@ g_mixins.families.avatar = function(avatarMob)
         mob:setUnkillable(true)
         mob:SetAutoAttackEnabled(false)
         mob:SetMagicCastingEnabled(false)
+
+        -- If something goes wrong, the avatar will clean itself up in 5s
+        mob:timer(5000, function(mobArg)
+            if mobArg:isAlive() then
+                mobArg:setUnkillable(false)
+                mobArg:setHP(0)
+            end
+        end)
     end)
 
     avatarMob:addListener("ENGAGE", "AVATAR_ENGAGE", function(mob, target)
-        local abilityID = nil
-        local modelID = mob:getModelId()
-
-        switch (modelID) : caseof
-        {
-             [791] = function (x) abilityID = 919 end, -- Carbuncle
-             [792] = function (x) abilityID = 839 end, -- Fenrir
-             [793] = function (x) abilityID = 913 end, -- Ifrit
-             [794] = function (x) abilityID = 914 end, -- Titan
-             [795] = function (x) abilityID = 915 end, -- Leviathan
-             [796] = function (x) abilityID = 916 end, -- Garuda
-             [797] = function (x) abilityID = 917 end, -- Shiva
-             [798] = function (x) abilityID = 918 end, -- Ramuh
-        }
-
-        if (abilityID ~= nil) then
-            mob:useMobAbility(abilityID)
+        local modelId = mob:getModelId()
+        local abilityId = abilityIds[modelId - 790]
+        if abilityId ~= nil then
+            mob:useMobAbility(abilityId)
         end
     end)
 
