@@ -24,13 +24,16 @@ quest.sections = {}
 
 quest.sections[1] = {}
 quest.sections[1].check = function(player, status, vars)
+    local bedPlacedTime = quest:getVar(player, 'bedPlacedTime')
+
     return status == QUEST_AVAILABLE and
         player:hasCompletedQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_MOOGLE_PICNIC) and
         xi.moghouse.isInMogHouseInHomeNation(player) and
         player:getFameLevel(player:getNation()) >= 7 and
         not quest:getMustZone(player) and
         quest:getLocalVar(player, 'questSeen') == 0 and
-        quest:getVar(player, 'bedPlacedTime') < (os.time() + 60)
+        bedPlacedTime ~= 0 and
+        os.time() > bedPlacedTime + 60
 end
 
 local questAvailable =
@@ -103,6 +106,7 @@ local questAccepted =
         [30016] = function(player, csid, option, npc)
             if quest:complete(player) then
                 player:changeContainerSize(xi.inv.MOGSAFE, 10)
+                player:changeContainerSize(xi.inv.MOGSAFE2, 10)
             end
         end,
     },
