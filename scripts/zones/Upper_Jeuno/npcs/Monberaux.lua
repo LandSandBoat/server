@@ -51,20 +51,20 @@ entity.onTrigger = function(player, npc)
     -- COP mission 1-2
     if
         player:getCurrentMission(COP) == xi.mission.id.cop.BELOW_THE_ARKS and
-        player:getCharVar("PromathiaStatus") == 0)
+        player:getCharVar("PromathiaStatus") == 0
     then
         player:startEvent(9)
 
     -- COP mission 3-5
     elseif
         player:getCurrentMission(COP) == xi.mission.id.cop.DARKNESS_NAMED and
-        player:getCharVar("PromathiaStatus") == 0)
+        player:getCharVar("PromathiaStatus") == 0
     then
         player:startEvent(82)
 
     elseif
         player:getCurrentMission(COP) == xi.mission.id.cop.DARKNESS_NAMED and
-        player:getCharVar("PromathiaStatus") == 3)
+        player:getCharVar("PromathiaStatus") == 3
     then
         player:startEvent(75)
 

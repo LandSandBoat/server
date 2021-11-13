@@ -59,7 +59,7 @@ entity.onEventFinish = function(player, csid, option)
         player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_CLOCK_MOST_DELICATE)
         player:setCharVar("aClockMostdelicateVar", 0)
 
-    if csid == 119 then
+    elseif csid == 119 then
         if option == 0 then
             player:setCharVar("aClockMostdelicateVar", 2)
         elseif option == 1 then
