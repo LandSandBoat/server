@@ -45,7 +45,8 @@ Port Jeuno (West to East)
 ]]--
 
 entity.onTrade = function(player, npc, trade)
-    if trade:getGil() == 300 and
+    if
+        trade:getGil() == 300 and
         trade:getItemCount() == 1 and
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.LURE_OF_THE_WILDCAT) == QUEST_COMPLETED and
         player:getCurrentMission(TOAU) > xi.mission.id.toau.IMMORTAL_SENTRIES
