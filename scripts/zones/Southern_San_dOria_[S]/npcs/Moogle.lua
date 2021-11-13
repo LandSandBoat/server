@@ -7,21 +7,23 @@ require("scripts/globals/moghouse")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    moogleTrade(player, npc, trade)
+    xi.moghouse.moogleTrade(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if not moogleTrigger(player, npc) then
+    if not player:isInMogHouse() then
         player:startEvent(61)
+    else
+        xi.moghouse.moogleTrigger(player, npc)
     end
 end
 
 entity.onEventUpdate = function(player, csid, option)
-    moogleEventUpdate(player, csid, option)
+    xi.moghouse.moogleEventUpdate(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    moogleEventFinish(player, csid, option)
+    xi.moghouse.moogleEventFinish(player, csid, option)
 end
 
 return entity
