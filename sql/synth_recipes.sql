@@ -989,7 +989,7 @@ INSERT INTO `synth_recipes` VALUES (13503,0,0,0,71,38,0,0,0,56,0,4096,4238,652,6
 INSERT INTO `synth_recipes` VALUES (13504,0,0,0,72,0,0,38,0,0,0,4099,4241,664,855,855,0,0,0,0,0,12452,13863,13863,13863,1,1,1,1,'Darksteel Cap');
 INSERT INTO `synth_recipes` VALUES (13505,0,0,0,72,15,0,0,0,0,0,4096,4238,652,654,797,0,0,0,0,0,16759,16760,16760,16760,1,1,1,1,'Darksteel Kris'); -- multi src agree
 INSERT INTO `synth_recipes` VALUES (13506,0,0,41,72,49,0,0,0,0,0,4096,4238,653,653,719,745,745,795,798,2152,17660,17663,17663,17663,1,1,1,1,'Kilij'); -- 2 agree, others ??subs
- -- INSERT INTO `synth_recipes` VALUES (13507,0,0,0,73,0,0,0,0,34,0,4096,4238,665,665,932,2001,2290,0,0,0,8554,8554,8554,8554,12,12,12,12,'Armor Plate III'); -- JPWiki BUT ??AL--FFXIAH cites 34AL on 1st tier, same mats/qty for II/III/IV versions
+-- INSERT INTO `synth_recipes` VALUES (13507,0,0,0,73,0,0,0,0,34,0,4096,4238,665,665,932,2001,2290,0,0,0,8554,8554,8554,8554,12,12,12,12,'Armor Plate III'); -- JPWiki BUT ??AL--FFXIAH cites 34AL on 1st tier, same mats/qty for II/III/IV versions
 INSERT INTO `synth_recipes` VALUES (13508,0,0,0,73,0,0,41,0,0,0,4099,4241,664,855,0,0,0,0,0,0,12708,13994,13994,13994,1,1,1,1,'Darksteel Mittens');
 INSERT INTO `synth_recipes` VALUES (13509,0,0,8,73,0,0,0,0,0,0,4096,4238,654,707,0,0,0,0,0,0,16652,16682,16682,16682,1,1,1,1,'Darksteel Pick');
 INSERT INTO `synth_recipes` VALUES (13510,0,0,0,73,0,0,0,0,0,0,4096,4238,652,16902,0,0,0,0,0,0,17778,17779,17779,17779,1,1,1,1,'Muketsu'); -- multi src agree, no ref why BG add 41LE Jun2016
@@ -1015,7 +1015,7 @@ INSERT INTO `synth_recipes` VALUES (13529,0,0,19,78,0,0,0,0,0,0,4096,4238,654,65
 INSERT INTO `synth_recipes` VALUES (13530,1,0,0,78,0,0,0,0,0,0,4098,4240,1118,0,0,0,0,0,0,0,660,664,664,664,2,1,1,1,'Antican Pauldron (desynth)');
 INSERT INTO `synth_recipes` VALUES (13531,0,0,0,78,0,0,45,0,0,0,4099,4241,664,664,664,855,855,0,0,0,12580,13765,13765,13765,1,1,1,1,'Darksteel Harness'); -- FFXIAH post tested LE to be 45, not 43?
 INSERT INTO `synth_recipes` VALUES (13532,0,1993,0,78,0,0,0,0,0,0,4096,4238,2230,2233,18207,0,0,0,0,0,18493,18493,18493,18493,1,1,1,1,'Regiment Kheten');
- -- INSERT INTO `synth_recipes` VALUES (13533,0,0,0,78,0,0,0,0,34,0,4096,4238,665,932,2001,2290,4022,0,0,0,8556,8556,8556,8556,12,12,12,12,'Armor Plate IV'); -- JPWiki BUT ??AL--FFXIAH cites 34AL on 1st tier, same mats/qty for II/III/IV versions
+-- INSERT INTO `synth_recipes` VALUES (13533,0,0,0,78,0,0,0,0,34,0,4096,4238,665,932,2001,2290,4022,0,0,0,8556,8556,8556,8556,12,12,12,12,'Armor Plate IV'); -- JPWiki BUT ??AL--FFXIAH cites 34AL on 1st tier, same mats/qty for II/III/IV versions
 INSERT INTO `synth_recipes` VALUES (13534,0,0,41,79,29,0,0,0,0,0,4096,4238,650,652,654,711,0,0,0,0,17250,17261,17261,17261,1,1,1,1,'Matchlock Gun'); -- 2 src agree, old era talks imply >27GS, >40WW
 INSERT INTO `synth_recipes` VALUES (13535,0,0,0,79,0,0,0,0,0,0,4098,4240,651,657,0,0,0,0,0,0,1416,1416,1416,1416,6,8,10,12,'Karimata Arrowheads');
 INSERT INTO `synth_recipes` VALUES (13536,0,0,42,79,49,0,0,0,0,0,4096,4238,653,654,654,654,719,793,1629,0,18382,18383,18383,18383,1,1,1,1,'Darksteel Falx'); -- JPWiki used, others looking to verify 3 diff subs
