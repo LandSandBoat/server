@@ -84,12 +84,6 @@ function moogleTrade(player, npc, trade)
             end
         end
 
-        local moogleInTheWild = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.MOOGLES_IN_THE_WILD)
-
-        if moogleInTheWild == QUEST_ACCEPTED and npcUtil.tradeHas(trade, {13593, 12474}) then
-            player:startEvent(30015)
-        end
-
         return true
     end
     return false
@@ -106,20 +100,8 @@ function moogleTrigger(player, npc)
             end
         end
 
-        local homeNationFameLevel = player:getFameLevel(player:getNation())
-        local theMooglePicnic = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_MOOGLE_PICNIC)
-        local moogleInTheWild = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.MOOGLES_IN_THE_WILD)
-
         if player:getCharVar("MoghouseExplication") == 1 then
             player:startEvent(30000)
-
-        elseif player:getLocalVar("QuestSeen") == 0 and moogleInTheWild == QUEST_AVAILABLE and homeNationFameLevel >= 7 and
-                theMooglePicnic == QUEST_COMPLETED and player:getCharVar("[MS3]BedPlaced") == 1 then
-            player:startEvent(30013, 0, 0, 0, 6, 0, 13593, 12474)
-        elseif player:getLocalVar("QuestSeen") == 0 and moogleInTheWild == QUEST_ACCEPTED and player:getCharVar("MogSafeProgress") == 1 then
-            player:startEvent(30014, 0, 0, 0, 0, 0, 13593, 12474)
-        elseif player:getLocalVar("QuestSeen") == 0 and moogleInTheWild == QUEST_ACCEPTED and player:getCharVar("MogSafeProgress") == 2 then
-            player:startEvent(30016)
 
         else
             player:sendMenu(1)
@@ -140,24 +122,6 @@ function moogleEventFinish(player, csid, option)
     if player:isInMogHouse() then
         if csid == 30000 then
             player:setCharVar("MoghouseExplication", 0)
-
-        elseif csid == 30013 and option == 1 then
-            player:addQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.MOOGLES_IN_THE_WILD)
-            player:setLocalVar("QuestSeen", 1)
-            player:setCharVar("[MS3]BedPlaced", 0)
-            player:setCharVar("MogSafeProgress", 1)
-        elseif csid == 30013 and option == 2 then
-            player:setLocalVar("QuestSeen", 1)
-        elseif csid == 30014 then
-            player:setLocalVar("QuestSeen", 1)
-        elseif csid == 30015 then
-            player:tradeComplete()
-            player:setCharVar("MogSafeProgress", 2)
-        elseif csid == 30016 then
-            player:completeQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.MOOGLES_IN_THE_WILD)
-            player:changeContainerSize(xi.inv.MOGSAFE, 10)
-            player:addTitle(xi.title.MOGS_LOVING_MASTER)
-            player:setCharVar("MogSafeProgress", 0)
         end
 
         return true
