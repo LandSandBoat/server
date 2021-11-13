@@ -84,12 +84,10 @@ function moogleTrade(player, npc, trade)
             end
         end
 
-        local giveMoogleABreak = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.GIVE_A_MOOGLE_A_BREAK)
         local theMooglePicnic = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_MOOGLE_PICNIC)
         local moogleInTheWild = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.MOOGLES_IN_THE_WILD)
-        if giveMoogleABreak == QUEST_ACCEPTED and npcUtil.tradeHas(trade, {17161, 13457}) then
-            player:startEvent(30007)
-        elseif theMooglePicnic == QUEST_ACCEPTED and npcUtil.tradeHas(trade, {17402, 615}) then
+
+        if theMooglePicnic == QUEST_ACCEPTED and npcUtil.tradeHas(trade, {17402, 615}) then
             player:startEvent(30011)
         elseif moogleInTheWild == QUEST_ACCEPTED and npcUtil.tradeHas(trade, {13593, 12474}) then
             player:startEvent(30015)
@@ -118,14 +116,6 @@ function moogleTrigger(player, npc)
 
         if player:getCharVar("MoghouseExplication") == 1 then
             player:startEvent(30000)
-
-        elseif player:getLocalVar("QuestSeen") == 0 and giveMoogleABreak == QUEST_AVAILABLE and homeNationFameLevel >= 3 and
-               player:getCharVar("[MS1]BedPlaced") == 1 then
-            player:startEvent(30005, 0, 0, 0, 5, 0, 17161, 13457)
-        elseif player:getLocalVar("QuestSeen") == 0 and giveMoogleABreak == QUEST_ACCEPTED and player:getCharVar("MogSafeProgress") == 1 then
-            player:startEvent(30006, 0, 0, 0, 0, 0, 17161, 13457)
-        elseif player:getLocalVar("QuestSeen") == 0 and giveMoogleABreak == QUEST_ACCEPTED and player:getCharVar("MogSafeProgress") == 2 then
-            player:startEvent(30008)
 
         elseif player:getLocalVar("QuestSeen") == 0 and theMooglePicnic == QUEST_AVAILABLE and homeNationFameLevel >= 5 and
                 giveMoogleABreak == QUEST_COMPLETED and player:getCharVar("[MS2]BedPlaced") == 1 then
@@ -162,24 +152,6 @@ function moogleEventFinish(player, csid, option)
     if player:isInMogHouse() then
         if csid == 30000 then
             player:setCharVar("MoghouseExplication", 0)
-
-        elseif csid == 30005 and option == 1 then
-            player:addQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.GIVE_A_MOOGLE_A_BREAK)
-            player:setLocalVar("QuestSeen", 1)
-            player:setCharVar("[MS1]BedPlaced", 0)
-            player:setCharVar("MogSafeProgress", 1)
-        elseif csid == 30005 and option == 2 then
-            player:setLocalVar("QuestSeen", 1)
-        elseif csid == 30006 then
-            player:setLocalVar("QuestSeen", 1)
-        elseif csid == 30007 then
-            player:tradeComplete()
-            player:setCharVar("MogSafeProgress", 2)
-        elseif csid == 30008 then
-            player:completeQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.GIVE_A_MOOGLE_A_BREAK)
-            player:changeContainerSize(xi.inv.MOGSAFE, 10)
-            player:addTitle(xi.title.MOGS_KIND_MASTER)
-            player:setCharVar("MogSafeProgress", 0)
 
         elseif csid == 30009 and option == 1 then
             player:addQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_MOOGLE_PICNIC)
