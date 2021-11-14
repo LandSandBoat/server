@@ -15,7 +15,7 @@ local ID = require("scripts/zones/Upper_Jeuno/IDs")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if (trade:hasItemQty(555, 1) and trade:getItemCount() == 1) then
+    if trade:hasItemQty(555, 1) and trade:getItemCount() == 1 then
         local a = player:getCharVar("saveTheClockTowerNPCz2") -- NPC Zone2
         if
             a == 0 or
@@ -47,16 +47,34 @@ entity.onTrigger = function(player, npc)
     local CrestOfDavoi = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.CREST_OF_DAVOI)
     local SaveMySister = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SAVE_MY_SISTER)
 
-    if (CrestOfDavoi == QUEST_COMPLETED and SaveMySister == QUEST_AVAILABLE and player:getCharVar("saveMySisterVar") == 1) then
+    if
+        CrestOfDavoi == QUEST_COMPLETED and
+        SaveMySister == QUEST_AVAILABLE and
+        player:getCharVar("saveMySisterVar") == 1
+    then
         player:startEvent(172) -- During Quest "Save my Sister" (before speak with Mailloquetat)
-    elseif (CrestOfDavoi == QUEST_COMPLETED and player:getCharVar("saveMySisterVar") == 2) then
+
+    elseif
+        CrestOfDavoi == QUEST_COMPLETED and
+        player:getCharVar("saveMySisterVar") == 2
+    then
         player:startEvent(105) -- During Quest "Save my Sister" (after speak with Mailloquetat)
-    elseif (SaveMySister == QUEST_ACCEPTED and player:getCharVar("saveMySisterFireLantern") < 4) then
+
+    elseif
+        SaveMySister == QUEST_ACCEPTED and
+        player:getCharVar("saveMySisterFireLantern") < 4
+    then
         player:startEvent(27) -- During Quest "Save my Sister" (after speak with Neraf-Najiruf)
-    elseif (SaveMySister == QUEST_ACCEPTED and player:getCharVar("saveMySisterFireLantern") == 4) then
+
+    elseif
+        SaveMySister == QUEST_ACCEPTED and
+        player:getCharVar("saveMySisterFireLantern") == 4
+    then
         player:startEvent(107) -- Ending Quest "Save my Sister"
-    elseif (SaveMySister == QUEST_COMPLETED) then
+
+    elseif SaveMySister == QUEST_COMPLETED then
         player:startEvent(176) -- New standard dialog after "Save my Sister"
+
     else
         player:startEvent(122) -- Standard dialog
     end
@@ -66,13 +84,13 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 177) then --1
+    if csid == 177 then
         player:addCharVar("saveTheClockTowerVar", 1)
         player:addCharVar("saveTheClockTowerNPCz2", 32)
-    elseif (csid == 105) then
+    elseif csid == 105 then
         player:setCharVar("saveMySisterVar", 3)
-    elseif (csid == 107) then
-        if (player:getFreeSlotsCount() == 0) then
+    elseif csid == 107 then
+        if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 17041)
         else
             player:addTitle(xi.title.EXORCIST_IN_TRAINING)
