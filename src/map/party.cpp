@@ -840,7 +840,7 @@ void CParty::ReloadPartyMembers(CCharEntity* PChar)
             alliance = memberinfo.flags & (PARTY_SECOND | PARTY_THIRD);
             j        = 0;
         }
-        CCharEntity* PPartyMember = zoneutils::GetChar(memberinfo.zone);
+        CCharEntity* PPartyMember = zoneutils::GetChar(memberinfo.id);
         if (PPartyMember)
         {
             PChar->pushPacket(new CPartyMemberUpdatePacket(PPartyMember, j, memberinfo.flags, PChar->getZone()));
