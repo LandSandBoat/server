@@ -2,8 +2,8 @@
 -- Area: Ru'Lude Gardens
 --  NPC: Splintery Chest
 -----------------------------------
-require("scripts/settings/main")
 local ID = require("scripts/zones/RuLude_Gardens/IDs")
+require("scripts/settings/main")
 -----------------------------------
 local entity = {}
 

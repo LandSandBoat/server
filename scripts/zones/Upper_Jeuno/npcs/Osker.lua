@@ -3,9 +3,9 @@
 --  NPC: Osker
 -- Involved in Quest: Chocobo's Wounds
 -----------------------------------
+local ID = require("scripts/zones/Upper_Jeuno/IDs")
 require("scripts/globals/quests")
 require("scripts/globals/keyitems")
-local ID = require("scripts/zones/Upper_Jeuno/IDs")
 -----------------------------------
 local entity = {}
 

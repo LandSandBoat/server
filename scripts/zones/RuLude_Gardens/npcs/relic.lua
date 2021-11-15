@@ -1,11 +1,11 @@
 -----------------------------------
 -- Area: Ru'Lude Gardens
---  NPC: <this space intentionally left blank> -- Aha... Why?
+--  NPC: <this space intentionally left blank>
 -- !pos 0 8 -40 243
 -----------------------------------
+local ID = require("scripts/zones/RuLude_Gardens/IDs")
 require("scripts/globals/items")
 require("scripts/globals/npc_util")
-local ID = require("scripts/zones/RuLude_Gardens/IDs")
 -----------------------------------
 local entity = {}
 

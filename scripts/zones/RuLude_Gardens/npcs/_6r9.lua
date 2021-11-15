@@ -4,10 +4,10 @@
 -- Involved in Mission: Magicite
 -- !pos 0 -5 66 243
 -----------------------------------
+local ID = require("scripts/zones/RuLude_Gardens/IDs")
 require("scripts/globals/keyitems")
 require("scripts/settings/main")
 require("scripts/globals/missions")
-local ID = require("scripts/zones/RuLude_Gardens/IDs")
 -----------------------------------
 local entity = {}
 

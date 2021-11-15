@@ -4,10 +4,10 @@
 -- Type: Magian Trials NPC (Job Emotes)
 -- !pos -4.558 2.451 111.305 64
 -----------------------------------
+local ID = require("scripts/zones/RuLude_Gardens/IDs")
 require("scripts/settings/main")
 require("scripts/globals/keyitems")
 require("scripts/globals/magiantrials")
-local ID = require("scripts/zones/RuLude_Gardens/IDs")
 -----------------------------------
 local entity = {}
 

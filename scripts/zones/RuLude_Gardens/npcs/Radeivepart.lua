@@ -5,10 +5,10 @@
 -- Involved in Quests: Save the Clock Tower
 -- !pos 5 9 -39 243
 -----------------------------------
+local ID = require("scripts/zones/RuLude_Gardens/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/titles")
 require("scripts/globals/quests")
-local ID = require("scripts/zones/RuLude_Gardens/IDs")
 -----------------------------------
 local entity = {}
 

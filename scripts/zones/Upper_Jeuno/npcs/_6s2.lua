@@ -4,10 +4,10 @@
 -- Starts and Finishes Quest: A Clock Most Delicate, Save the Clock Tower, The Clockmaster
 -- !pos -80 0 104 244
 -----------------------------------
+local ID = require("scripts/zones/Upper_Jeuno/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
-local ID = require("scripts/zones/Upper_Jeuno/IDs")
 -----------------------------------
 local entity = {}
 
