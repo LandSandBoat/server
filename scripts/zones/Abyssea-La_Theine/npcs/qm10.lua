@@ -9,7 +9,8 @@ require("scripts/globals/abyssea")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    xi.abyssea.qmOnTrade(player, npc, trade, 17318443, { 2900 })
+    local ID = zones[player:getZoneID()]
+    xi.abyssea.qmOnTrade(player, npc, trade, ID.mob.POROGGO_DOM_JUAN, { 2900 })
 end
 
 entity.onTrigger = function(player, npc)

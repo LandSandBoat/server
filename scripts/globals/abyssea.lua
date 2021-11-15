@@ -541,54 +541,47 @@ xi.abyssea.getAbyssiteTotal = function(player, enumVal)
     return kiCount
 end
 
-xi.abyssea.canGiveNMKI = function(player, mob, dropChance)
-	local playerId = mob:getLocalVar("[ClaimedBy]")
+xi.abyssea.canGiveNMKI = function(mob, dropChance)
 	local redProcValue = mob:getLocalVar("[AbysseaRedProc]")
 
-	if redProcValue == 1 then
-		dropChance = 0
-	end
-
-    if playerId == player:getID() then
-		math.randomseed(os.time())
-		if math.random(1, 100) >= dropChance then
-			return true
-		end
+    math.randomseed(os.time())
+    if math.random(1, 100) >= dropChance or redProcValue == 1 then
+        return true
     end
 
 	return false
 end
 
 xi.abyssea.giveNMDrops = function(mob, player, ID)
+    printf("player: %s ", player:getName())
 	-- local redWeakness = mob:getLocalVar("[AbysseaRedProc]")
 	-- local blueWeaknessValue = mob:getLocalVar("[AbysseaBlueProc]")
 	-- local yellowWeaknessValue = mob:getLocalVar("[AbysseaYellowProc]")
 	local atmaDrops = xi.abyssea.mob[mob:getID()]['Atma']
 	local normalDrops = xi.abyssea.mob[mob:getID()]['Normal']
+    local playerClaimed = GetPlayerByID(mob:getLocalVar("[ClaimedBy]"))
 
 	for k, v in pairs(normalDrops) do
-		if xi.abyssea.canGiveNMKI(player, mob, 70) then
-			player:addKeyItem(v)
-			player:messageSpecial(ID.text.KEYITEM_OBTAINED, v)
+		if xi.abyssea.canGiveNMKI(mob, 20) then
+			playerClaimed:addKeyItem(v)
+			playerClaimed:messageSpecial(ID.text.KEYITEM_OBTAINED, v)
 		end
 	end
 
 	for k, v in pairs(atmaDrops) do
-		if xi.abyssea.canGiveNMKI(player, mob, 100) then
-			local party = player:getParty()
+        local ally = playerClaimed:getAlliance()
 
-			for _, member in ipairs(party) do
-				if not member:hasKeyItem(v) then
-					member:addKeyItem(v)
-					member:messageSpecial(ID.text.KEYITEM_OBTAINED, v)
-				end
-			end
+        for _, member in ipairs(ally) do
+            if not member:hasKeyItem(v) and xi.abyssea.canGiveNMKI(mob, 10) then
+                member:addKeyItem(v)
+                member:messageSpecial(ID.text.KEYITEM_OBTAINED, v)
+            end
+        end
 
-			if not player:hasKeyItem(v) then
-				player:addKeyItem(v)
-				player:messageSpecial(ID.text.KEYITEM_OBTAINED, v)
-			end
-		end
+        if not playerClaimed:hasKeyItem(v) then
+            playerClaimed:addKeyItem(v)
+            playerClaimed:messageSpecial(ID.text.KEYITEM_OBTAINED, v)
+        end
 	end
 
     -- TODO: Handle increased droprate with Yellow and Blue procs
@@ -622,7 +615,9 @@ xi.abyssea.getNewYellowWeakness = function(mob)
 end
 
 xi.abyssea.getNewRedWeakness = function(mob)
-    return redWeakness[math.random(#redWeakness)]
+    local rand = math.random(#redWeakness)
+    printf("FLEME %i ", redWeakness[rand])
+    return redWeakness[rand]
 end
 
 xi.abyssea.getNewBlueWeakness = function(mob)
@@ -707,6 +702,16 @@ xi.abyssea.qmOnTrade = function(player, npc, trade, mobId, reqTrade)
     return true
 end
 
+local checkMobID = function(zoneId, mobId)
+    for i, v in pairs(zones[zoneId].mob) do
+        if v == mobId then
+            return true
+        end
+    end
+    return false
+end
+
+
 xi.abyssea.qmOnTrigger = function(player, npc, mobId, kis, tradeReqs)
     -- validate QM pop data
     local zoneId = player:getZoneID()
@@ -751,9 +756,15 @@ xi.abyssea.qmOnTrigger = function(player, npc, mobId, kis, tradeReqs)
         end
     end
 
+    local pop = checkMobID(zoneId, mobId)
+    player:setLocalVar("[AbysseaPopNmID]", mobId)
     -- start event
-    if validKis then
-        player:setLocalVar("abysseaQM", npc:getID())
+    if validKis and pop then
+        for k, v in pairs(kis) do
+            if player:hasKeyItem(v) then
+                player:delKeyItem(v)
+            end
+        end
         player:startEvent(events[2], kis[1], kis[2], kis[3], kis[4], kis[5], kis[6], kis[7], kis[8]) -- player has all key items
         return true
     else
@@ -769,23 +780,10 @@ end
 xi.abyssea.qmOnEventFinish = function(player, csid, option)
     local zoneId = player:getZoneID()
     local events = popEvents[zoneId]
-    local pop = zones[zoneId].npc.QM_POPS[player:getLocalVar("abysseaQM")] -- TODO: Once I (Wren) finish entity-QC on all Abyssea zones, I must adjust the format of QM_POPS table
-    player:setLocalVar("abysseaQM", 0)
-    if not pop then
-        return false
-    end
 
     if csid == events[2] and option == 1 then
-        -- delete kis
-        local kis = pop[3]
-        for k, v in pairs(kis) do
-            if player:hasKeyItem(v) then
-                player:delKeyItem(v)
-            end
-        end
-
         -- pop nm
-        local nm = pop[4]
+        local nm = player:getLocalVar("[AbysseaPopNmID]")
         local dx = player:getXPos() + math.random(-1, 1)
         local dy = player:getYPos()
         local dz = player:getZPos() + math.random(-1, 1)

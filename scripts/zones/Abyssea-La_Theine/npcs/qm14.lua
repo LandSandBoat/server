@@ -13,7 +13,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    xi.abyssea.qmOnTrigger(player, npc, 17318447, { xi.ki.PELLUCID_FLY_EYE, xi.ki.SHIMMERING_PIXIE_PINION })
+    local ID = zones[player:getZoneID()]
+    xi.abyssea.qmOnTrigger(player, npc, ID.mob.CARABOSSE_1, { xi.ki.PELLUCID_FLY_EYE, xi.ki.SHIMMERING_PIXIE_PINION })
 end
 
 entity.onEventUpdate = function(player, csid, option)
