@@ -329,9 +329,24 @@ INSERT INTO `item_mods_pet` VALUES (23768,30,50,0);     -- Nyame Mail: Pet: Magi
 INSERT INTO `item_mods_pet` VALUES (23775,25,50,0);     -- Nyame Gauntlets: Pet: Accuracy+50
 INSERT INTO `item_mods_pet` VALUES (23775,26,50,0);     -- Nyame Gauntlets: Pet: Ranged Accuracy+50
 INSERT INTO `item_mods_pet` VALUES (23775,30,50,0);     -- Nyame Gauntlets: Pet: Magic Accuracy+50
+INSERT INTO `item_mods_pet` VALUES (23781,25,50,0);     -- Bunzi's Pants: Pet: Acc.+50
+INSERT INTO `item_mods_pet` VALUES (23781,26,50,0);     -- Bunzi's Pants: Pet: Ranged Acc.+50
+INSERT INTO `item_mods_pet` VALUES (23781,30,50,0);     -- Bunzi's Pants: Pet: Magic Acc.+50
 INSERT INTO `item_mods_pet` VALUES (23782,25,50,0);     -- Nyame Flanchard: Pet: Accuracy+50
 INSERT INTO `item_mods_pet` VALUES (23782,26,50,0);     -- Nyame Flanchard: Pet: Ranged Accuracy+50
 INSERT INTO `item_mods_pet` VALUES (23782,30,50,0);     -- Nyame Flanchard: Pet: Magic Accuracy+50
+INSERT INTO `item_mods_pet` VALUES (23784,25,50,0);     -- Gleti's Boots: Pet: Accuracy+50
+INSERT INTO `item_mods_pet` VALUES (23784,26,50,0);     -- Gleti's Boots: Pet: Ranged Accuracy+50
+INSERT INTO `item_mods_pet` VALUES (23784,30,50,0);     -- Gleti's Boots: Pet: Magic Accuracy+50
+-- INSERT INTO `item_mods_pet` VALUES (23784,,1,);      -- Gleti's Boots: Summoned Pet: Lv.+1
+INSERT INTO `item_mods_pet` VALUES (23786,25,50,0);     -- Mpaca's Boots: Pet: Accuracy+50
+INSERT INTO `item_mods_pet` VALUES (23786,26,50,0);     -- Mpaca's Boots: Pet: Ranged Accuracy+50
+INSERT INTO `item_mods_pet` VALUES (23786,30,50,0);     -- Mpaca's Boots: Pet: Magic Accuracy+50
+-- INSERT INTO `item_mods_pet` VALUES (23786,,1,3);     -- Mpaca's Boots: Pet: Automaton: Lv.+1
+INSERT INTO `item_mods_pet` VALUES (23788,25,50,0);     -- Bunzi's Sabots: Pet: Accuracy+50
+INSERT INTO `item_mods_pet` VALUES (23788,26,50,0);     -- Bunzi's Sabots: Pet: Ranged Accuracy+50
+INSERT INTO `item_mods_pet` VALUES (23788,30,50,0);     -- Bunzi's Sabots: Pet: Magic Accuracy+50
+-- INSERT INTO `item_mods_pet` VALUES (23788,,1,1);     -- Bunzi's Sabots: Avatar: Lv.+1
 INSERT INTO `item_mods_pet` VALUES (23789,25,50,0);     -- Nyame Sollerets: Pet: Accuracy+50
 INSERT INTO `item_mods_pet` VALUES (23789,26,50,0);     -- Nyame Sollerets: Pet: Ranged Accuracy+50
 INSERT INTO `item_mods_pet` VALUES (23789,30,50,0);     -- Nyame Sollerets: Pet: Magic Accuracy+50
