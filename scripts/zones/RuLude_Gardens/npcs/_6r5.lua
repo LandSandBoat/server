@@ -11,8 +11,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
+    local pNation = player:getNation()
+
     if
-        player:getNation() == xi.nation.SANDORIA and
+        pNation == xi.nation.SANDORIA and
         player:getRank(pNation) >= 4
     then
         player:messageSpecial(ID.text.RESTRICTED)
