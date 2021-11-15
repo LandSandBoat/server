@@ -56,10 +56,6 @@ xi.additionalEffect.levelCorrection = function(dLV, aLV, chance)
 end
 
 xi.additionalEffect.statusAttack = function(addStatus, defender)
-    if not addStatus then
-        return 0
-    end
-
     local effectList =
     {
         [xi.effect.DEFENSE_DOWN] = {tick = 0, strip = xi.effect.DEFENSE_BOOST},
@@ -69,8 +65,14 @@ xi.additionalEffect.statusAttack = function(addStatus, defender)
         [xi.effect.CHOKE]        = {tick = 3, strip = nil},
     }
     local effect = effectList[addStatus]
-    defender:delStatusEffect(effect.strip)
-    return effect.tick
+    if effect then
+        if effect.strip then
+            defender:delStatusEffect(effect.strip)
+        end
+        return effect.tick
+    end
+
+    return 0
 end
 
 xi.additionalEffect.calcDamage = function(attacker, element, defender, damage)
