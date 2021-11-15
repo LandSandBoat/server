@@ -5,12 +5,6 @@
 -- Involved in Quests: Beat Around the Bushin
 -- !pos 8 3 118 243
 -----------------------------------
-local ID = require("scripts/zones/RuLude_Gardens/IDs")
-require("scripts/settings/main")
-require("scripts/globals/quests")
-require("scripts/globals/status")
-require("scripts/globals/utils")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

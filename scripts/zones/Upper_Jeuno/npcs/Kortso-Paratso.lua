@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Upper Jeuno
 --  NPC: Kortso-Paratso
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

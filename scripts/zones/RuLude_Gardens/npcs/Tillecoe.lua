@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Ru'Lude Gardens
 --  NPC: Tillecoe
--- Type: Standard NPC
 -- !pos 38.528 -0.997 -6.363 243
 -----------------------------------
 local entity = {}

@@ -11,10 +11,8 @@
 -----------------------------------
 local ID = require("scripts/zones/Upper_Jeuno/IDs")
 require("scripts/globals/keyitems")
-require("scripts/settings/main")
 require("scripts/globals/quests")
 require("scripts/globals/status")
-require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 
@@ -104,7 +102,7 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("comebackQueenCS", 1)
         player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COMEBACK_QUEEN)
         player:addKeyItem(xi.ki.WYATTS_PROPOSAL)
-        player:messageSpecial( ID.text.KEYITEM_OBTAINED, xi.ki.WYATTS_PROPOSAL)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.WYATTS_PROPOSAL)
 
     elseif csid == 10147 then
         player:setCharVar("comebackQueenCS", 3)

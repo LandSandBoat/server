@@ -7,9 +7,7 @@
 -----------------------------------
 require("scripts/settings/main")
 require("scripts/globals/titles")
-require("scripts/globals/keyitems")
 require("scripts/globals/quests")
-require("scripts/globals/missions")
 local ID = require("scripts/zones/Upper_Jeuno/IDs")
 -----------------------------------
 local entity = {}

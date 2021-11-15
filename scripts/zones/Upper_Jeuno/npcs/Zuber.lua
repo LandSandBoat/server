@@ -4,9 +4,6 @@
 -- Involved in Quests: Save the Clock Tower
 -- !pos -106 0 90 244
 -----------------------------------
-require("scripts/settings/main")
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

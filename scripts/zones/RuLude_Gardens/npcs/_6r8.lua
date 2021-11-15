@@ -5,7 +5,6 @@
 -- !pos 31 9 -22 243
 -----------------------------------
 local ID = require("scripts/zones/RuLude_Gardens/IDs")
-require("scripts/globals/zone")
 -----------------------------------
 local entity = {}
 

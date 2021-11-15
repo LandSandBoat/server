@@ -7,7 +7,6 @@
 require("scripts/settings/main")
 require("scripts/globals/keyitems")
 require("scripts/globals/titles")
-require("scripts/globals/shop")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Upper_Jeuno/IDs")
 -----------------------------------

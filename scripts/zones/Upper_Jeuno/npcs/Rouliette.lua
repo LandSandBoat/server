@@ -4,10 +4,8 @@
 -- Starts and Finishes Quest: Candle-making
 -- !pos -24 -2 11 244
 -----------------------------------
-require("scripts/settings/main")
 require("scripts/globals/titles")
 require("scripts/globals/keyitems")
-require("scripts/globals/shop")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Upper_Jeuno/IDs")
 -----------------------------------

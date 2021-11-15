@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Upper Jeuno
 --  NPC: Taylen
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 
