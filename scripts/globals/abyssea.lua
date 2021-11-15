@@ -553,7 +553,6 @@ xi.abyssea.canGiveNMKI = function(mob, dropChance)
 end
 
 xi.abyssea.giveNMDrops = function(mob, player, ID)
-    printf("player: %s ", player:getName())
 	-- local redWeakness = mob:getLocalVar("[AbysseaRedProc]")
 	-- local blueWeaknessValue = mob:getLocalVar("[AbysseaBlueProc]")
 	-- local yellowWeaknessValue = mob:getLocalVar("[AbysseaYellowProc]")
@@ -615,9 +614,7 @@ xi.abyssea.getNewYellowWeakness = function(mob)
 end
 
 xi.abyssea.getNewRedWeakness = function(mob)
-    local rand = math.random(#redWeakness)
-    printf("FLEME %i ", redWeakness[rand])
-    return redWeakness[rand]
+    return redWeakness[math.random(#redWeakness)]
 end
 
 xi.abyssea.getNewBlueWeakness = function(mob)
