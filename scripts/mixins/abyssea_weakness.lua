@@ -45,7 +45,7 @@ g_mixins.abyssea_weakness = function(mob)
 		end)
 
 		mob:addListener("DEATH", "ABYSSEA_DEATH_NM_KI_DROPCHECK", function(mobArg, player)
-			xi.abyssea.giveNMDrops(mobArg, player, zones[player:getZoneID()))
+			xi.abyssea.giveNMDrops(mobArg, player, zones[player:getZoneID()])
 		end)
 	end
 end
