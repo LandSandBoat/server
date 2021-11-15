@@ -1,5 +1,5 @@
 -----------------------------------
--- Abyssea Atma Global
+-- Abyssea Atma Fabricant
 -----------------------------------
 require("scripts/globals/abyssea")
 
@@ -21,12 +21,12 @@ end
 
 xi.atmaFabricant.onEventUpdate = function (player, csid, option)
     printf("onEventUpdate")
-    printf("csid: %d", csid)
-    printf("option: %d", option)
+    printf("csid: %i", csid)
+    printf("option: %i", option)
 end
 
 xi.atmaFabricant.onEventFinish = function (player, csid, option)
     printf("onEventFinish")
-    printf("csid: %d", csid)
-    printf("option: %d", option)
+    printf("csid: %i", csid)
+    printf("option: %i", option)
 end
