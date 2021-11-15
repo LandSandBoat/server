@@ -17,24 +17,9 @@ entity.onTrade = function(player, npc, trade)
     local turmoil = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TORAIMARAI_TURMOIL)
     local count = trade:getItemCount()
 
-
     if (player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WATER_WAY_TO_GO) == QUEST_ACCEPTED) then
         if (trade:hasItemQty(4351, 1) and count == 1) then
             player:startEvent(355, 900)
-        end
-    elseif (player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.FOOD_FOR_THOUGHT) == QUEST_ACCEPTED) then
-        local OhbiruFood = player:getCharVar("Ohbiru_Food_var")
-
-        if (trade:hasItemQty(4493, 1) == true and trade:hasItemQty(4408, 1) == true and trade:hasItemQty(624, 1) == true and count == 3) then
-            if (OhbiruFood < 2) then -- Traded all 3 items & Didn't ask for order
-                if (math.random(1, 2) == 1) then
-                    player:startEvent(325, 440)
-                else
-                    player:startEvent(326)
-                end
-            elseif (OhbiruFood == 2) then -- Traded all 3 items after receiving order
-                player:startEvent(322, 440)
-            end
         end
     elseif (turmoil == QUEST_ACCEPTED) then
         if (count == 3 and trade:getGil() == 0 and trade:hasItemQty(906, 3) == true) then --Check that all 3 items have been traded
@@ -56,9 +41,7 @@ entity.onTrigger = function(player, npc)
     -- If the player has started the mission or not
     local pfame = player:getFameLevel(WINDURST)
     local turmoil = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TORAIMARAI_TURMOIL)
-    local FoodForThought = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.FOOD_FOR_THOUGHT)
     local needToZone = player:needToZone()
-    local OhbiruFood = player:getCharVar("Ohbiru_Food_var") -- Variable to track progress of Ohbiru-Dohbiru in Food for Thought
     local waterWayToGo = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WATER_WAY_TO_GO)
     local overnightDelivery = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.OVERNIGHT_DELIVERY)
     local SayFlowers = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.SAY_IT_WITH_FLOWERS)
@@ -87,24 +70,6 @@ entity.onTrigger = function(player, npc)
     elseif (waterWayToGo == QUEST_AVAILABLE and overnightDelivery == QUEST_COMPLETED and pfame >= 3) then
         player:startEvent(352, 0, 4351)
 
-    elseif FoodForThought == QUEST_AVAILABLE then
-        if OhbiruFood == 0 then
-            player:startEvent(308) -- Hungry; mentions the experiment. First step in quest for this NPC.
-            player:setCharVar("Ohbiru_Food_var", 1)
-        elseif OhbiruFood == 1 then
-            player:startEvent(309) -- Hungry. The NPC complains of being hungry before the quest is active.
-        end
-    elseif FoodForThought == QUEST_ACCEPTED then
-        if OhbiruFood < 2 then
-            player:startEvent(316, 0, 4493, 624, 4408) -- Gives Order
-            player:setCharVar("Ohbiru_Food_var", 2)
-        elseif OhbiruFood == 2 then
-            player:startEvent(317, 0, 4493, 624, 4408) -- Repeats Order
-        elseif OhbiruFood == 3 then
-            player:startEvent(324) -- Reminds player to check on friends if he has been given his food.
-        end
-    elseif (FoodForThought == QUEST_COMPLETED and needToZone == true) then
-        player:startEvent(344) -- Post Food for Thought Dialogue
     elseif (overnightDelivery == QUEST_COMPLETED and pfame < 6) then
         player:startEvent(351) -- Post Overnight Delivery Dialogue
     --
@@ -136,21 +101,8 @@ entity.onEventFinish = function(player, csid, option)
 
     -- Check Missions first (priority?)
     local turmoil = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TORAIMARAI_TURMOIL)
-    if (csid == 322 or csid == 325 or csid == 326) then
-        player:tradeComplete()
-        player:addGil(xi.settings.GIL_RATE*440)
-        if (player:getCharVar("Kerutoto_Food_var") == 2 and player:getCharVar("Kenapa_Food_var") == 4) then -- If this is the last NPC to be fed
-            player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.FOOD_FOR_THOUGHT)
-            player:addFame(WINDURST, 100)
-            player:addTitle(xi.title.FAST_FOOD_DELIVERER)
-            player:needToZone(true)
-            player:setCharVar("Kerutoto_Food_var", 0)          -- ------------------------------------------
-            player:setCharVar("Kenapa_Food_var", 0)            -- Erase all the variables used in this quest
-            player:setCharVar("Ohbiru_Food_var", 0)            -- ------------------------------------------
-        else -- If this is NOT the last NPC given food, flag this NPC as completed.
-            player:setCharVar("Ohbiru_Food_var", 3)
-        end
-    elseif (csid == 785 and option == 1) then -- Adds Toraimarai turmoil
+
+    if (csid == 785 and option == 1) then -- Adds Toraimarai turmoil
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TORAIMARAI_TURMOIL)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.RHINOSTERY_CERTIFICATE)
         player:addKeyItem(xi.ki.RHINOSTERY_CERTIFICATE) -- Rhinostery Certificate

@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Windurst Waters
---  NPC: Kenapa Keppa
+--  NPC: Kenapa-Keppa
 -- Involved in Quest: Food For Thought, Hat in Hand
 -- !pos 27 -6 -199 238
 -----------------------------------
@@ -15,24 +15,6 @@ require("scripts/globals/utils")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local foodForThought = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.FOOD_FOR_THOUGHT)
-    local kenapaFood = player:getCharVar("Kenapa_Food_var") -- Variable to track progress of Kenapa-Keppa in Food for Thought
-
-    if foodForThought == QUEST_ACCEPTED then
-        if npcUtil.tradeHas(trade, 4409) then -- hard-boiled_egg
-            if kenapaFood < 3 then -- Traded item without receiving order
-                if math.random(1, 2) == 1 then
-                    player:startEvent(331)
-                else
-                    player:startEvent(330, 120)
-                end
-            elseif kenapaFood == 3 then -- Traded item after receiving order
-                player:startEvent(327, 120)
-            end
-        else
-            player:startEvent(329) -- trade not accepted
-        end
-    end
 end
 
 entity.onTrigger = function(player, npc)
@@ -40,7 +22,6 @@ entity.onTrigger = function(player, npc)
     local foodForThought = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.FOOD_FOR_THOUGHT)
     local sayItWithFlowers = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.SAY_IT_WITH_FLOWERS)
     local flowerProgress = player:getCharVar("FLOWER_PROGRESS") -- progress of Say It with Flowers
-    local kenapaFood = player:getCharVar("Kenapa_Food_var") -- progress of Kenapa-Keppa in Food for Thought
     local kenapaOvernight = player:getCharVar("Kenapa_Overnight_var") -- progress for Overnight Delivery
     local kenapaOvernightDay = player:getCharVar("Kenapa_Overnight_Day_var") -- day the quest is started
     local kenapaOvernightHour = player:getCharVar("Kenapa_Overnight_Hour_var") -- hour the quest is started
@@ -53,32 +34,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(56)
     elseif (sayItWithFlowers == QUEST_ACCEPTED or sayItWithFlowers == QUEST_COMPLETED) and flowerProgress == 2 then
         player:startEvent(519)
-    elseif foodForThought == QUEST_AVAILABLE then
-        player:startEvent(310) -- Hungry script
-    elseif foodForThought == QUEST_ACCEPTED then
-        if kenapaFood == 0 then
-            player:startEvent(318) -- Stammer 1/3
-        elseif kenapaFood == 1 then
-            player:startEvent(319) -- Stammer 2/3
-        elseif kenapaFood == 2 then
-            player:startEvent(320, 0, 4409) -- Gives Order
-        elseif kenapaFood == 3 then
-            local rand = math.random(1, 3)
 
-            if rand == 1 then
-                player:startEvent(320, 0, 4409) -- Repeats Order
-            elseif rand == 2 then
-                player:startEvent(321) -- "Or Whatever"
-            else
-                player:startEvent(328) -- "..<Grin>.."
-            end
-        elseif kenapaFood == 4 then -- Give standard conversation options if this NPC has been fed but others haven't
-            if math.random(1, 2) == 1 then
-                player:startEvent(302) -- Standard converstation
-            else
-                player:startEvent(303) -- Standard converstation
-            end
-        end
     elseif
         foodForThought == QUEST_COMPLETED and
         overnightDelivery == QUEST_AVAILABLE and
@@ -151,26 +107,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 327 or csid == 330 or csid == 331 then
-        player:confirmTrade()
-        player:addGil(xi.settings.GIL_RATE * 120)
-        if player:getCharVar("Kerutoto_Food_var") == 2 and player:getCharVar("Ohbiru_Food_var") == 3 then -- last NPC to be fed
-            npcUtil.completeQuest(player, WINDURST, xi.quest.id.windurst.FOOD_FOR_THOUGHT, {
-                title = xi.title.FAST_FOOD_DELIVERER,
-                fame = 100,
-                var = {"Kerutoto_Food_var", "Kenapa_Food_var", "Ohbiru_Food_var"},
-            })
-            player:needToZone(true)
-        else -- not the last NPC given food. flag this NPC as completed.
-            player:setCharVar("Kenapa_Food_var", 4)
-        end
-    elseif csid == 318 then
-        player:setCharVar("Kenapa_Food_var", 1)
-    elseif csid == 319 then
-        player:setCharVar("Kenapa_Food_var", 2)
-    elseif csid == 320 then
-        player:setCharVar("Kenapa_Food_var", 3)
-    elseif csid == 56 then
+    if csid == 56 then
         player:setCharVar("QuestHatInHand_var", utils.mask.setBit(player:getCharVar("QuestHatInHand_var"), 2, true))
         player:addCharVar("QuestHatInHand_count", 1)
     elseif csid == 336 then
