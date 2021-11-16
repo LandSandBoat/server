@@ -17,7 +17,7 @@ entity.onTrigger = function(player, npc)
     local borghertzCS = player:getCharVar("BorghertzCS")
 
     if player:hasKeyItem(xi.ki.OLD_GAUNTLETS) then
-        if not player:hasKeyItem(xi.ki.SHADOW_FLAMES)
+        if not player:hasKeyItem(xi.ki.SHADOW_FLAMES) then
             if borghertzCS == 1 then
                 player:startEvent(20) -- Request Shadow Flames KI
             elseif borghertzCS == 2 then

@@ -15,7 +15,7 @@ entity.onTrigger = function(player, npc)
 
     if
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and
-        not utils.mask.getBit(WildcatJeuno, 18))
+        not utils.mask.getBit(WildcatJeuno, 18)
     then
         player:startEvent(315)
     else
