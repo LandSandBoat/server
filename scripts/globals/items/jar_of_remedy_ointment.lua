@@ -2,7 +2,7 @@
 -- ID: 5356
 -- Item: Remedy Ointment
 -- Item Effect: This potion remedies status ailments.
--- Works on paralysis, silence, blindness, poison, and plague.
+-- Works on paralysis, silence, blindness, poison, and disease.
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
@@ -13,7 +13,7 @@ item_object.onItemCheck = function(target)
 end
 
 item_object.onItemUse = function(target)
-    if (target:hasStatusEffect(xi.effect.SILENCE) or target:hasStatusEffect(xi.effect.BLINDNESS) or target:hasStatusEffect(xi.effect.POISON) or target:hasStatusEffect(xi.effect.PARALYSIS) or target:hasStatusEffect(xi.effect.PLAGUE)) then
+    if (target:hasStatusEffect(xi.effect.SILENCE) or target:hasStatusEffect(xi.effect.BLINDNESS) or target:hasStatusEffect(xi.effect.POISON) or target:hasStatusEffect(xi.effect.PARALYSIS) or target:hasStatusEffect(xi.effect.DISEASE)) then
         local effectRemoved = 0
         while effectRemoved == 0 do
             local num = math.random(1, 5)
@@ -33,9 +33,9 @@ item_object.onItemUse = function(target)
                 effectRemoved = effectRemoved + 1
                 target:delStatusEffect(xi.effect.PARALYSIS)
 
-            elseif (num == 5 and target:hasStatusEffect(xi.effect.PLAGUE)) then
+            elseif (num == 5 and target:hasStatusEffect(xi.effect.DISEASE)) then
                 effectRemoved = effectRemoved + 1
-                target:delStatusEffect(xi.effect.PLAGUE)
+                target:delStatusEffect(xi.effect.DISEASE)
             end
         end
     end
