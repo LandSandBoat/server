@@ -3165,19 +3165,19 @@ INSERT INTO `synth_recipes` VALUES (49916,1,0,0,0,0,0,7,0,0,0,4100,4242,13594,0,
 -- INSERT INTO `synth_recipes` VALUES (49917,1,0,0,0,0,0,255,0,0,0,4100,4242,12697,0,0,0,0,0,0,0,817,850,852,852,3,1,1,1,'Lizard Gloves (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (49918,1,0,0,0,0,0,255,0,0,0,4100,4242,12952,0,0,0,0,0,0,0,649,850,850,850,1,3,3,3,'Leather Highboots (desynth)');
 INSERT INTO `synth_recipes` VALUES (49919,1,0,0,0,0,0,94,0,0,0,4100,4242,14372,0,0,0,0,0,0,0,851,855,1117,823,1,1,1,1,'Cardinal Vest (desynth)');
--- INSERT INTO `synth_recipes` VALUES (49920,1,0,0,0,0,0,255,0,0,0,4100,4242,13754,0,0,0,0,0,0,0,851,855,855,855,1,1,1,1,'Black Cotehardie (desynth)');
--- INSERT INTO `synth_recipes` VALUES (49921,1,0,0,0,0,0,255,0,0,0,4100,4242,12696,0,0,0,0,0,0,0,817,850,850,850,3,3,3,3,'Leather Gloves (desynth)');
--- INSERT INTO `synth_recipes` VALUES (49922,1,0,0,0,0,0,255,0,0,0,4100,4242,13200,0,0,0,0,0,0,0,817,851,851,851,1,2,2,2,'Waistbelt (desynth)');
+INSERT INTO `synth_recipes` VALUES (49920,1,0,0,0,0,0,70,0,0,0,4100,4242,13754,0,0,0,0,0,0,0,851,855,855,855,1,1,1,1,'Black Cotehardie (desynth)');  -- 2021.11.15 Based on synth.  Sites that show are in agreement.
+INSERT INTO `synth_recipes` VALUES (49921,1,0,0,0,0,0,8,0,0,0,4100,4242,12696,0,0,0,0,0,0,0,817,817,850,850,2,3,2,3,'Leather Gloves (desynth)');  -- 2021.11.15 Based on synth.  Sites that show are in agreement.
+INSERT INTO `synth_recipes` VALUES (49922,1,0,0,0,0,0,43,0,0,0,4100,4242,13200,0,0,0,0,0,0,0,817,851,851,851,1,1,2,2,'Waistbelt (desynth)');  -- 2021.11.15 Based on synth.  Sites that show are in agreement.
 INSERT INTO `synth_recipes` VALUES (49923,1,0,0,0,0,0,30,0,0,0,4100,4242,12826,0,0,0,0,0,0,0,817,817,817,817,6,6,6,6,'Studded Trousers (desynth)');
--- INSERT INTO `synth_recipes` VALUES (49924,1,0,0,0,0,0,255,0,0,0,4100,4242,13593,0,0,0,0,0,0,0,817,853,853,853,1,2,2,2,'Raptor Mantle (desynth)');
--- INSERT INTO `synth_recipes` VALUES (49925,1,0,0,0,0,0,255,0,0,0,4100,4242,13570,0,0,0,0,0,0,0,820,859,859,859,1,1,1,1,'Ram Mantle (desynth)');
--- INSERT INTO `synth_recipes` VALUES (49926,1,0,0,0,0,0,255,0,0,0,4100,4242,12699,0,0,0,0,0,0,0,850,850,850,850,2,2,2,2,'Cuir Gloves (desynth)');
--- INSERT INTO `synth_recipes` VALUES (49927,1,0,0,0,0,0,255,0,0,0,4100,4242,13942,0,0,0,0,0,0,0,820,851,1591,1122,1,1,1,1,'Panther Mask (desynth)');
--- INSERT INTO `synth_recipes` VALUES (49928,1,0,0,0,0,0,255,0,0,0,4100,4242,12992,0,0,0,0,0,0,0,850,850,850,850,2,2,2,2,'Solea (desynth)');
--- INSERT INTO `synth_recipes` VALUES (49929,1,0,0,0,0,0,255,0,0,0,4100,4242,12568,0,0,0,0,0,0,0,850,852,852,852,3,1,1,1,'Leather Vest (desynth)');
--- INSERT INTO `synth_recipes` VALUES (49930,1,0,0,0,0,0,255,0,0,0,4100,4242,14846,0,0,0,0,0,0,0,816,855,1680,1680,1,1,1,1,'Sha\'ir Gages (desynth)');
--- INSERT INTO `synth_recipes` VALUES (49931,1,0,0,0,0,0,255,0,0,0,4100,4242,14323,0,0,0,0,0,0,0,850,819,819,819,1,5,5,5,'Noct Brais (desynth)');
--- INSERT INTO `synth_recipes` VALUES (49932,1,0,0,0,0,0,255,0,0,0,4100,4242,13192,0,0,0,0,0,0,0,850,651,651,651,1,2,2,2,'Leather Belt (desynth)');
+INSERT INTO `synth_recipes` VALUES (49924,1,0,0,0,0,0,53,0,0,0,4100,4242,13593,0,0,0,0,0,0,0,817,853,853,853,1,1,2,2,'Raptor Mantle (desynth)');  -- 2021.11.15 Based on synth.  Sites that show are in agreement.
+INSERT INTO `synth_recipes` VALUES (49925,1,0,0,0,0,0,49,0,0,0,4100,4242,13570,0,0,0,0,0,0,0,820,820,859,859,1,1,1,1,'Ram Mantle (desynth)');  -- 2021.11.15 Based on synth.  FFXIclopedia and FFXIAH are in agreement though Allakhazam does not show Ram Skin as a result.
+INSERT INTO `synth_recipes` VALUES (49926,1,0,0,0,0,0,40,0,0,0,4100,4242,12699,0,0,0,0,0,0,0,850,850,850,850,2,2,2,2,'Cuir Gloves (desynth)');  -- 2021.11.15 Based on synth.  Sites that show are in agreement.
+INSERT INTO `synth_recipes` VALUES (49927,1,0,0,0,0,0,102,0,0,0,4100,4242,13942,0,0,0,0,0,0,0,820,851,1591,1122,1,1,1,1,'Panther Mask (desynth)');  -- 2021.11.15 Based on synth.  Sites that show are in agreement.
+INSERT INTO `synth_recipes` VALUES (49928,1,0,0,0,0,0,11,0,0,0,4100,4242,12992,0,0,0,0,0,0,0,850,850,850,850,1,1,2,2,'Solea (desynth)');  -- 2021.11.15 Based on synth.  Sites that show are in agreement.
+INSERT INTO `synth_recipes` VALUES (49929,1,0,0,0,0,0,10,0,0,0,4100,4242,12568,0,0,0,0,0,0,0,850,850,850,852,1,2,3,1,'Leather Vest (desynth)');  -- 2021.11.15 Based on synth.  FFXIclopedia shows level 9 though synth level is 10.
+INSERT INTO `synth_recipes` VALUES (49930,1,0,0,0,0,0,96,0,0,0,4100,4242,14846,0,0,0,0,0,0,0,816,855,1680,1680,1,1,1,1,'Sha\'ir Gages (desynth)');  -- 2021.11.15 Based on synth.  Sites that show are in agreement.
+INSERT INTO `synth_recipes` VALUES (49931,1,0,0,0,0,0,28,0,0,0,4100,4242,14323,0,0,0,0,0,0,0,850,819,819,819,1,3,5,5,'Noct Brais (desynth)');  -- 2021.11.15 Based on synth.  FFXIclopedia shows mats 1,3,5,7.  Chaged HQ3 to 5 based on Allakhazam and FFXIAH.
+INSERT INTO `synth_recipes` VALUES (49932,1,0,0,0,0,0,13,0,0,0,4100,4242,13192,0,0,0,0,0,0,0,850,850,651,651,1,1,1,2,'Leather Belt (desynth)');  -- 2021.11.15 Based on synth.  Sites that show are in agreement.
 INSERT INTO `synth_recipes` VALUES (49933,1,0,0,0,0,0,93,0,0,0,4100,4242,13939,0,0,0,0,0,0,0,850,851,851,851,1,1,1,1,'Austere Hat (desynth)'); -- BG data incomplete but does not contradict
 INSERT INTO `synth_recipes` VALUES (49934,1,0,0,0,0,0,88,0,0,0,4100,4242,12703,0,0,0,0,0,0,0,850,850,851,506,1,2,1,1,'Coeurl Gloves (desynth)');  -- 2021.11.15 Based on synth.  Sites that show are in agreement.
 INSERT INTO `synth_recipes` VALUES (49935,1,0,0,0,0,0,5,0,0,0,4100,4242,12440,0,0,0,0,0,0,0,850,850,850,850,1,1,1,1,'Leather Bandana (desynth)');  -- 2021.11.15 Based on synth.  Sites that show are in agreement.
