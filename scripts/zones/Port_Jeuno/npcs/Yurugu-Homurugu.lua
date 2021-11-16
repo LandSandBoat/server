@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Port Jeuno
 --  NPC: Yurugu Homurugu
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

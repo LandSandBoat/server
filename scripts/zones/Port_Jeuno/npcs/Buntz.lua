@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Port Jeuno
 --  NPC: Buntz
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

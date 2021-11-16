@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Port Jeuno
 --  NPC: Rilve-Hitolve
--- Working 100%
 -----------------------------------
 local entity = {}
 
