@@ -3179,22 +3179,22 @@ INSERT INTO `synth_recipes` VALUES (49923,1,0,0,0,0,0,30,0,0,0,4100,4242,12826,0
 -- INSERT INTO `synth_recipes` VALUES (49931,1,0,0,0,0,0,255,0,0,0,4100,4242,14323,0,0,0,0,0,0,0,850,819,819,819,1,5,5,5,'Noct Brais (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (49932,1,0,0,0,0,0,255,0,0,0,4100,4242,13192,0,0,0,0,0,0,0,850,651,651,651,1,2,2,2,'Leather Belt (desynth)');
 INSERT INTO `synth_recipes` VALUES (49933,1,0,0,0,0,0,93,0,0,0,4100,4242,13939,0,0,0,0,0,0,0,850,851,851,851,1,1,1,1,'Austere Hat (desynth)'); -- BG data incomplete but does not contradict
--- INSERT INTO `synth_recipes` VALUES (49934,1,0,0,0,0,0,255,0,0,0,4100,4242,12703,0,0,0,0,0,0,0,850,851,506,506,2,1,1,1,'Coeurl Gloves (desynth)');
--- INSERT INTO `synth_recipes` VALUES (49935,1,0,0,0,0,0,255,0,0,0,4100,4242,12440,0,0,0,0,0,0,0,850,850,850,850,1,1,1,1,'Leather Bandana (desynth)');
--- INSERT INTO `synth_recipes` VALUES (49936,1,0,0,0,0,0,255,0,0,0,4100,4242,13704,0,0,0,0,0,0,0,850,506,1117,1117,1,1,1,1,'Ogre Mask (desynth)');
--- INSERT INTO `synth_recipes` VALUES (49937,1,0,0,0,0,0,255,0,0,0,4100,4242,13592,0,0,0,0,0,0,0,817,852,869,869,1,1,1,1,'Lizard Mantle (desynth)');
+INSERT INTO `synth_recipes` VALUES (49934,1,0,0,0,0,0,88,0,0,0,4100,4242,12703,0,0,0,0,0,0,0,850,850,851,506,1,2,1,1,'Coeurl Gloves (desynth)');  -- 2021.11.15 Based on synth.  Sites that show are in agreement.
+INSERT INTO `synth_recipes` VALUES (49935,1,0,0,0,0,0,5,0,0,0,4100,4242,12440,0,0,0,0,0,0,0,850,850,850,850,1,1,1,1,'Leather Bandana (desynth)');  -- 2021.11.15 Based on synth.  Sites that show are in agreement.
+INSERT INTO `synth_recipes` VALUES (49936,1,0,0,0,0,0,88,0,0,0,4100,4242,13704,0,0,0,0,0,0,0,850,506,1117,1117,1,1,1,1,'Ogre Mask (desynth)');  -- 2021.11.15 Based on synth.  Sites that show are in agreement.
+INSERT INTO `synth_recipes` VALUES (49937,1,0,0,0,0,0,14,0,0,0,4100,4242,13592,0,0,0,0,0,0,0,817,852,869,869,1,1,1,1,'Lizard Mantle (desynth)');  -- 2021.11.15 Based on synth.  Sites that show are in agreement.
 INSERT INTO `synth_recipes` VALUES (49938,1,0,0,0,0,0,41,0,0,0,4100,4242,13203,0,0,0,0,0,0,0,850,924,924,924,1,1,1,1,'Barbarian\'s Belt (desynth)'); -- BG data incomplete but does not contradict
--- INSERT INTO `synth_recipes` VALUES (49939,1,0,0,0,0,0,255,0,0,0,4100,4242,13705,0,0,0,0,0,0,0,850,506,1117,849,1,2,1,1,'Ogre Jerkin (desynth)');
+INSERT INTO `synth_recipes` VALUES (49939,1,0,0,0,0,0,90,0,0,0,4100,4242,13705,0,0,0,0,0,0,0,850,506,1117,849,1,2,1,1,'Ogre Jerkin (desynth)');  -- 2021.11.15 Based on synth.  Sites that show are in agreement.
 INSERT INTO `synth_recipes` VALUES (49940,1,0,0,0,0,0,62,0,0,0,4100,4242,13546,0,0,0,0,0,0,0,855,855,855,855,1,1,1,1,'Hard Leather Ring (desynth)');
--- INSERT INTO `synth_recipes` VALUES (49941,1,0,0,0,0,0,255,0,0,0,4100,4242,13591,0,0,0,0,0,0,0,820,820,820,820,1,1,1,1,'Behemoth Mantle (desynth)');
--- INSERT INTO `synth_recipes` VALUES (49942,1,0,0,0,0,0,255,0,0,0,4098,4240,1196,0,0,0,0,0,0,0,879,879,879,879,1,1,1,1,'Qiqirn Cape (desynth)');
--- INSERT INTO `synth_recipes` VALUES (49943,1,0,0,0,0,0,255,0,0,0,4100,4242,12441,0,0,0,0,0,0,0,850,852,852,852,2,2,2,2,'Lizard Helm (desynth)');
+INSERT INTO `synth_recipes` VALUES (49941,1,0,0,0,0,0,70,0,0,0,4100,4242,13591,0,0,0,0,0,0,0,820,820,820,820,1,1,1,1,'Behemoth Mantle (desynth)');  -- 2021.11.15 Based on synth.  Sites that show are in agreement.
+-- INSERT INTO `synth_recipes` VALUES (49942,1,0,0,0,0,0,255,0,0,0,4098,4240,1196,0,0,0,0,0,0,0,879,879,879,879,1,1,1,1,'Qiqirn Cape (desynth)');  -- 2021.11.15 Sites agree about materials though disagree about level.  FFXIclopedia 12 JPWiki ??
+INSERT INTO `synth_recipes` VALUES (49943,1,0,0,0,0,0,15,0,0,0,4100,4242,12441,0,0,0,0,0,0,0,850,852,852,852,1,1,2,2,'Lizard Helm (desynth)');  -- 2021.11.15 Level based on synth.  Items taken from FFXIclopedia though there is disagreement.  This makes the most sense based on synth.
 INSERT INTO `synth_recipes` VALUES (49944,1,0,0,0,0,0,57,0,0,0,4100,4242,13703,0,0,0,0,0,0,0,850,852,851,851,1,3,1,1,'Brigandine (desynth)');
 INSERT INTO `synth_recipes` VALUES (49945,1,0,0,0,0,0,91,0,0,0,4100,4242,14182,0,0,0,0,0,0,0,816,851,849,821,1,2,1,1,'Errant Pigaches (desynth)');
--- INSERT INTO `synth_recipes` VALUES (49946,1,0,0,0,0,0,255,0,0,0,4100,4242,12442,0,0,0,0,0,0,0,850,651,651,651,1,1,1,1,'Studded Bandana (desynth)');
--- INSERT INTO `synth_recipes` VALUES (49947,1,0,0,0,0,0,255,0,0,0,4100,4242,12993,0,0,0,0,0,0,0,850,848,848,848,1,1,1,1,'Sandals (desynth)');
+INSERT INTO `synth_recipes` VALUES (49946,1,0,0,0,0,0,24,0,0,0,4100,4242,12442,0,0,0,0,0,0,0,850,850,651,651,1,1,1,1,'Studded Bandana (desynth)');  -- 2021.11.15 Based on synth.  Sites that show are in agreement.
+INSERT INTO `synth_recipes` VALUES (49947,1,0,0,0,0,0,29,0,0,0,4100,4242,12993,0,0,0,0,0,0,0,850,850,848,848,1,1,1,1,'Sandals (desynth)');  -- 2021.11.15 Based on synth.  Sites that show are in agreement.
 INSERT INTO `synth_recipes` VALUES (49948,1,0,0,0,0,0,85,0,0,0,4100,4242,13595,0,0,0,0,0,0,0,820,863,863,863,1,1,1,1,'Coeurl Mantle (desynth)');
--- INSERT INTO `synth_recipes` VALUES (49949,1,0,0,0,0,0,255,0,0,0,4098,4240,1638,0,0,0,0,0,0,0,850,850,850,850,1,1,1,1,'Moblin Mask (desynth)');
+INSERT INTO `synth_recipes` VALUES (49949,1,0,0,0,0,0,34,0,0,0,4098,4240,1638,0,0,0,0,0,0,0,850,850,850,850,1,1,1,1,'Moblin Mask (desynth)');  -- 2021.11.15 JPWiki and FFXIclopedia show level 34
 INSERT INTO `synth_recipes` VALUES (50001,0,0,0,0,0,0,0,1,0,0,4098,4240,888,888,888,0,0,0,0,0,1883,1883,1883,1883,1,2,3,4,'Shell Powder');
 INSERT INTO `synth_recipes` VALUES (50002,0,2025,0,0,0,0,0,1,0,0,4098,4240,880,1642,1644,1648,0,0,0,0,2141,2141,2141,2141,1,1,1,1,'Wailing Bone Chip');
 INSERT INTO `synth_recipes` VALUES (50003,0,0,0,0,0,0,0,3,0,0,4098,4240,888,888,0,0,0,0,0,0,13313,13314,13314,13314,1,1,1,1,'Shell Earring');
