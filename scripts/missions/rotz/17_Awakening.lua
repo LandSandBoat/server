@@ -46,9 +46,9 @@ mission.sections =
 
         [xi.zone.LOWER_JEUNO] =
         {
-            onRegionEnter =
+            ['_6tc'] =
             {
-                [1] = function(player, csid, option, npc)
+                onTrigger = function(player, csid, option, npc)
                     if not utils.mask.getBit(player:getMissionStatus(mission.areaId), 1) then
                         return mission:event(20)
                     end
