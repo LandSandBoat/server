@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Lower Jeuno
 --  NPC: Yamilla
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

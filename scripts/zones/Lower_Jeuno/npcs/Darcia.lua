@@ -28,10 +28,16 @@ entity.onTrigger = function(player, npc)
 
     if xi.settings.ENABLE_SOA == 0 then
         player:startEvent(10124)
-    elseif theGeomagnetron and player:getCharVar("SOA") == 1 then
+
+    elseif
+        theGeomagnetron and
+        player:getCharVar("SOA") == 1
+    then
         player:startEvent(10118)
+
     elseif theGeomagnetron then
         player:startEvent(10117, 1, turnOffAskingForWork)
+
     else
         player:startEvent(10123)
     end
@@ -51,6 +57,7 @@ entity.onEventFinish = function(player, csid, option)
 
         player:completeMission(xi.mission.log_id.SOA, xi.mission.id.soa.RUMORS_FROM_THE_WEST)
         player:addMission(xi.mission.log_id.SOA, xi.mission.id.soa.THE_GEOMAGNETRON)
+
     elseif
         (csid == 10117 and option == 2) or -- paid
         csid == 10118  -- quest complete
@@ -60,7 +67,9 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("SOA_1_CS2", 0)
         player:setCharVar("SOA_1_CS3", 0)
 
-        if option == 2 then player:delGil(1000000) end
+        if option == 2 then
+            player:delGil(1000000)
+        end
 
         player:delKeyItem(xi.ki.GEOMAGNETRON)
         npcUtil.giveKeyItem(player, xi.ki.GEOMAGNETRON)

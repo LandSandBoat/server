@@ -3,8 +3,6 @@
 --  NPC: Shashan-Mishan
 -- Type: Weather Reporter
 -----------------------------------
-require("scripts/settings/main")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

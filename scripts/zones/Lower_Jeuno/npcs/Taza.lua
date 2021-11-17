@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Lower Jeuno
 --  NPC: Taza
--- Standard Merchant NPC
 -----------------------------------
 local ID = require("scripts/zones/Lower_Jeuno/IDs")
 -----------------------------------
