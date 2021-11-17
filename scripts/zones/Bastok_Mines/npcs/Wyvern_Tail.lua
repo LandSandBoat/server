@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Bastok Mines
 --  NPC: Wyvern Tail
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

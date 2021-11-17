@@ -1,10 +1,7 @@
 -----------------------------------
 -- Area: Bastok Mines
 --  NPC: Ranpi-Pappi
--- Type: Standard NPC
 -- !pos -4.535 -1.044 49.881 234
------------------------------------
--- Auto-Script: Requires Verification (Verified by Brando)
 -----------------------------------
 local entity = {}
 
