@@ -5,13 +5,13 @@
 -- ZM 17 cutscene
 -- !pos 35 0 -15 245
 -----------------------------------
+local ID = require("scripts/zones/Lower_Jeuno/IDs")
 require("scripts/settings/main")
 require("scripts/globals/titles")
 require("scripts/globals/keyitems")
 require("scripts/globals/shop")
 require("scripts/globals/quests")
 require("scripts/globals/missions")
-local ID = require("scripts/zones/Lower_Jeuno/IDs")
 -----------------------------------
 local entity = {}
 

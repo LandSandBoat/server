@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Lower Jeuno
 --  NPC: Tovrutaux
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

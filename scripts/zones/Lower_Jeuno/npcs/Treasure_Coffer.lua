@@ -544,10 +544,19 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 10099 then
-        if option == 16777216 and player:getCharVar("receivedNexusCape") == 0 and npcUtil.giveItem(player, xi.items.NEXUS_CAPE) then
+        if
+            option == 16777216 and
+            player:getCharVar("receivedNexusCape") == 0 and
+            npcUtil.giveItem(player, xi.items.NEXUS_CAPE)
+        then
             player:setCharVar("receivedNexusCape", 1)
-        elseif option == 33554432 or (option == 16777216 and player:getCharVar("receivedNexusCape") == 0) then
+
+        elseif
+            option == 33554432 or
+            (option == 16777216 and player:getCharVar("receivedNexusCape") == 0
+        then
             player:addUsedItem(xi.items.NEXUS_CAPE)
+
         elseif option >= 1 and option <= 20 then
             local ki = optionToKI[option]
             if ki ~= nil then

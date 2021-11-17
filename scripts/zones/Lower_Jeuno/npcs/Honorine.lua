@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Lower Jeuno
 --  NPC: Honorine
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

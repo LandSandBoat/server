@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Lower Jeuno
 --  NPC: Jawantal
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

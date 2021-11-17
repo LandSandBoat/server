@@ -11,11 +11,11 @@ local entity = {}
 
 local e =
 {
-    TALK_EVENT_ID       =   10104,
-    STORE_EVENT_ID      =   10105,
-    RETRIEVE_EVENT_ID   =   10106,
-    ALREADY_STORED_ID   =   10107,
-    MAGIAN_TRIAL_ID     =   10108
+    TALK_EVENT_ID     = 10104,
+    STORE_EVENT_ID    = 10105,
+    RETRIEVE_EVENT_ID = 10106,
+    ALREADY_STORED_ID = 10107,
+    MAGIAN_TRIAL_ID   = 10108
 }
 
 entity.onTrade = function(player, npc, trade)
