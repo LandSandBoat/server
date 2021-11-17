@@ -487,6 +487,7 @@ xi.items =
     LEATHER_VEST                    = 12568,
     BRONZE_HARNESS                  = 12576,
     KENPOGI                         = 12584,
+    POWER_GI                        = 12590,
     ROBE                            = 12600,
     TUNIC                           = 12608,
     LEATHER_GLOVES                  = 12696,

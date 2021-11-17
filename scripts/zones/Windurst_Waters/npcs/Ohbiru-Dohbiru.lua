@@ -60,7 +60,6 @@ entity.onTrigger = function(player, npc)
         end
     elseif (waterWayToGo == QUEST_COMPLETED and needToZone) then
         player:startEvent(356, 0, 4351)
-
     elseif (waterWayToGo == QUEST_ACCEPTED) then
         if (player:hasItem(504) == false and player:hasItem(4351) == false) then
             player:startEvent(354)
@@ -70,8 +69,6 @@ entity.onTrigger = function(player, npc)
     elseif (waterWayToGo == QUEST_AVAILABLE and overnightDelivery == QUEST_COMPLETED and pfame >= 3) then
         player:startEvent(352, 0, 4351)
 
-    elseif (overnightDelivery == QUEST_COMPLETED and pfame < 6) then
-        player:startEvent(351) -- Post Overnight Delivery Dialogue
     --
     -- Begin Toraimarai Turmoil Section
     --
