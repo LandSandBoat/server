@@ -62,5 +62,5 @@ function onTrigger(player,light,amount,target)
 
     xi.abyssea.addPlayerLights(targ, setLight, amount)
     local newAmount = targ:getCharVar(light.."Light")
-    player:PrintToPlayer(string.format("%s was given %i %s light, for a total of %i.",targ:getName(),amount,light,newAmount))
+    player:PrintToPlayer(string.format("%s was given %i %s light, for a total of %i.", targ:getName(), amount, light, newAmount))
 end

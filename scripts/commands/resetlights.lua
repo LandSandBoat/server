@@ -28,6 +28,6 @@ function onTrigger(player,target)
         end
     end
 
-    xi.abyssea.ResetPlayerLights(targ)
+    xi.abyssea.resetPlayerLights(targ)
     player:PrintToPlayer(string.format("%s's lights have been reset!. ",targ:getName()))
 end
