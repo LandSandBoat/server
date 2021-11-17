@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Bastok Mines
 --  NPC: Mydon
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

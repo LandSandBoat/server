@@ -3,8 +3,8 @@
 --  NPC: Mille
 -- Norvallen Regional Merchant
 -----------------------------------
-require("scripts/globals/events/harvest_festivals")
 local ID = require("scripts/zones/Bastok_Mines/IDs")
+require("scripts/globals/events/harvest_festivals")
 require("scripts/globals/conquest")
 require("scripts/globals/shop")
 -----------------------------------

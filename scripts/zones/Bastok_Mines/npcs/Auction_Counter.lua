@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Bastok Mines
 --  NPC: Auction Counter
--- Working 100%
 -----------------------------------
 local entity = {}
 
