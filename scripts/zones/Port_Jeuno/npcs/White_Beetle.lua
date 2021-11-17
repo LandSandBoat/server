@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Port Jeuno
 --  NPC: Beetle
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

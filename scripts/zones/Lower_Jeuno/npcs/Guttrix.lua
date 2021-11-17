@@ -41,14 +41,15 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local pFame = player:getFameLevel(JEUNO)
-    local pLevel = player:getMainLvl()
     local questStatus = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_GOBLIN_TAILOR)
-    local rseGear = hasRSE(player)
-    local rseRace = VanadielRSERace()
+    local rseGear     = hasRSE(player)
+    local rseRace     = VanadielRSERace()
     local rseLocation = VanadielRSELocation()
 
-    if pLevel >= 10 and pFame >= 3 then
+    if
+        player:getMainLvl() >= 10 and
+        player:getFameLevel(JEUNO) >= 3
+    then
         if rseGear < 15 then
             if questStatus == QUEST_AVAILABLE then
                 player:startEvent(10016, rseLocation, rseRace)

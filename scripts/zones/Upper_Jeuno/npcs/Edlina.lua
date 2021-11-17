@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Upper Jeuno
 --  NPC: Edlina
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

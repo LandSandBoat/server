@@ -5,7 +5,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Upper_Jeuno/IDs")
 require("scripts/globals/missions")
-require("scripts/settings/main")
 -----------------------------------
 local entity = {}
 

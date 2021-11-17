@@ -1,5 +1,6 @@
 local ID = require("scripts/zones/Port_Jeuno/IDs")
 
 return {
-    ['Sanosuke'] = { event = 303 },
+    ['Guide_Stone'] = { messageSpecial = ID.text.GUIDE_STONE },
+    ['Sanosuke']    = { event = 303 },
 }

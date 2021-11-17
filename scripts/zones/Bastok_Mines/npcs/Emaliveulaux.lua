@@ -3,8 +3,8 @@
 --  NPC: Emaliveulaux
 -- Tavnazian Archipelago Regional Merchant
 -----------------------------------
-require("scripts/globals/events/harvest_festivals")
 local ID = require("scripts/zones/Bastok_Mines/IDs")
+require("scripts/globals/events/harvest_festivals")
 require("scripts/globals/conquest")
 require("scripts/globals/missions")
 require("scripts/globals/shop")
@@ -22,11 +22,11 @@ entity.onTrigger = function(player, npc)
         else
             local stock =
             {
-                1523,  290,    -- Apple Mint
-                5164, 1945,    -- Ground Wasabi
-                17005,  99,    -- Lufaise Fly
-                5195,  233,    -- Misareaux Parsley
-                1695,  920,    -- Habanero Peppers
+                1523,  290, -- Apple Mint
+                5164, 1945, -- Ground Wasabi
+                17005,  99, -- Lufaise Fly
+                5195,  233, -- Misareaux Parsley
+                1695,  920, -- Habanero Peppers
             }
 
             player:showText(npc, ID.text.EMALIVEULAUX_OPEN_DIALOG)

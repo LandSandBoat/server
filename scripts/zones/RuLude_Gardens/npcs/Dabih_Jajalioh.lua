@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Ru'Lude Gardens
 --  NPC: Dabih Jajalioh
--- Standard Merchant NPC
+
 -- TODO: Add support for occasional stock.
 -----------------------------------
 local ID = require("scripts/zones/RuLude_Gardens/IDs")

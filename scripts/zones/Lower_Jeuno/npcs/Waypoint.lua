@@ -4,9 +4,9 @@
 --  SoA: Waypoint
 -- !pos 20 -34.922 0.000
 -----------------------------------
+local ID = require("scripts/zones/Lower_Jeuno/IDs")
 require("scripts/globals/missions")
 require("scripts/globals/zone")
-local ID = require("scripts/zones/Lower_Jeuno/IDs")
 -----------------------------------
 local entity = {}
 
@@ -14,12 +14,9 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local onwardToAdoulin = player:getCurrentMission(SOA) == xi.mission.id.soa.ONWARD_TO_ADOULIN
-    local adoulinAccess = player:getCurrentMission(SOA) > xi.mission.id.soa.ONWARD_TO_ADOULIN
-
-    if onwardToAdoulin then
+    if player:getCurrentMission(SOA) == xi.mission.id.soa.ONWARD_TO_ADOULIN then
         player:startEvent(10120)
-    elseif adoulinAccess then
+    elseif player:getCurrentMission(SOA) > xi.mission.id.soa.ONWARD_TO_ADOULIN then
         player:startEvent(10121)
     else
         player:messageSpecial(ID.text.WAYPOINT_EXAMINE)

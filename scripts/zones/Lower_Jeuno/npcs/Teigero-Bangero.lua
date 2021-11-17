@@ -10,7 +10,10 @@ require("scripts/globals/quests")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if (trade:hasItemQty(555, 1) == true and trade:getItemCount() == 1) then
+    if
+        trade:hasItemQty(555, 1) == true and
+        trade:getItemCount() == 1
+    then
         local a = player:getCharVar("saveTheClockTowerNPCz2") -- NPC Zone2
         if
             a == 0 or
@@ -41,24 +44,24 @@ end
 entity.onTrigger = function(player, npc)
     local TheKindCardian = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_KIND_CARDIAN)
 
-    if (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_WONDER_MAGIC_SET) == QUEST_AVAILABLE) then
+    if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_WONDER_MAGIC_SET) == QUEST_AVAILABLE then
         player:startEvent(34) -- Base Standard CS & dialog
-    elseif (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COOK_S_PRIDE) ~= QUEST_COMPLETED) then
+    elseif player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COOK_S_PRIDE) ~= QUEST_COMPLETED then
         local rand = math.random(1, 2)
-        if (rand == 1) then
+        if rand == 1 then
             player:startEvent(75) -- During Panta and Naruru Quests
         else
             player:startEvent(32) -- Same...
         end
-    elseif (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_LOST_CARDIAN) == QUEST_AVAILABLE) then
-        if (player:getCharVar("theLostCardianVar") == 0) then
+    elseif player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_LOST_CARDIAN) == QUEST_AVAILABLE then
+        if player:getCharVar("theLostCardianVar") == 0 then
             player:startEvent(29) -- First dialog for "The lost cardien" quest
         else
             player:startEvent(66)
         end
-    elseif (TheKindCardian == QUEST_ACCEPTED) then
+    elseif TheKindCardian == QUEST_ACCEPTED then
         player:startEvent(66) -- During quest "The kind cardien"
-    elseif (TheKindCardian == QUEST_COMPLETED) then
+    elseif TheKindCardian == QUEST_COMPLETED then
         player:startEvent(67) -- New standard dialog after "The kind cardien"
     else
         player:startEvent(34) -- Base Standard CS & dialog
@@ -69,10 +72,10 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 74) then
+    if csid == 74 then
         player:addCharVar("saveTheClockTowerVar", 1)
         player:addCharVar("saveTheClockTowerNPCz2", 128)
-    elseif (csid == 29) then
+    elseif csid == 29 then
         player:setCharVar("theLostCardianVar", 1)
     end
 end

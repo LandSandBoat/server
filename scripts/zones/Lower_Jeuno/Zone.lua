@@ -14,7 +14,7 @@ require("scripts/globals/status")
 local zone_object = {}
 
 zone_object.onInitialize = function(zone)
-    zone:registerRegion(1, 23, 0, -43, 44, 7, -39) -- Inside Tenshodo HQ
+    zone:registerRegion(1, 23, 0, -43, 44, 7, -39) -- Inside Tenshodo HQ. TODO: Find out if this is used other than in ZM 17 (not anymore). Remove if not.
     xi.chocobo.initZone(zone)
 end
 
@@ -24,19 +24,29 @@ zone_object.onZoneIn = function(player, prevZone)
     local month = tonumber(os.date("%m"))
     local day = tonumber(os.date("%d"))
     -- Retail start/end dates vary, I am going with Dec 5th through Jan 5th.
-    if (month == 12 and day >= 5) or (month == 1 and day <= 5) then
+    if
+        (month == 12 and day >= 5) or
+        (month == 1 and day <= 5)
+    then
         player:ChangeMusic(0, 239)
         player:ChangeMusic(1, 239)
         -- No need for an 'else' to change it back outside these dates as a re-zone will handle that.
     end
 
-    if player:getCurrentMission(COP) == xi.mission.id.cop.TENDING_AGED_WOUNDS and player:getCharVar("PromathiaStatus") == 0 then
+    if
+        player:getCurrentMission(COP) == xi.mission.id.cop.TENDING_AGED_WOUNDS and
+        player:getCharVar("PromathiaStatus") == 0
+    then
         player:setCharVar("PromathiaStatus", 1)
         cs = 70
     end
 
     -- MOG HOUSE EXIT
-    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+    if
+        player:getXPos() == 0 and
+        player:getYPos() == 0 and
+        player:getZPos() == 0
+    then
         player:setPos(41.2, -5, 84, 85)
     end
 

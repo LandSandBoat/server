@@ -4,9 +4,6 @@
 -- A Moogle Kupo d'Etat Mission NPC
 -- !pos -15 1.300 68 244
 -----------------------------------
-require("scripts/globals/missions")
-require("scripts/globals/keyitems")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

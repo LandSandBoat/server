@@ -3,7 +3,6 @@
 --  NPC: Purequane
 -- !pos -76 8 54 246
 -----------------------------------
-require("scripts/settings/main")
 require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
@@ -12,7 +11,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:hasKeyItem(xi.ki.AIRSHIP_PASS) and player:getGil() >= 200 then
+    if
+        player:hasKeyItem(xi.ki.AIRSHIP_PASS) and
+        player:getGil() >= 200
+    then
         player:startEvent(38)
     else
         player:startEvent(46)

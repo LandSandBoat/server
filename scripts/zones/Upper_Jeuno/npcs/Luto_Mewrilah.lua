@@ -3,7 +3,6 @@
 --  NPC: Luto Mewrilah
 -- !pos -53 0 45 244
 -----------------------------------
-require("scripts/settings/main")
 require("scripts/globals/quests")
 require("scripts/globals/utils")
 -----------------------------------

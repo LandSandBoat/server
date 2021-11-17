@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Port Jeuno
 --  NPC: Khumo Daramasteh
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

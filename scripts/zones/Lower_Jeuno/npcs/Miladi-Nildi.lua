@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Lower Jeuno
 --  NPC: Miladi-Nildi
--- Type: Standard NPC
 -- !pos 39.898 -5.999 77.190 245
 -----------------------------------
 local entity = {}

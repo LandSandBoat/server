@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Port Jeuno
 --  NPC: Marnie
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

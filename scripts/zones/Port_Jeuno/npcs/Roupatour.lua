@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Port Jeuno
 --  NPC: Roupatour
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

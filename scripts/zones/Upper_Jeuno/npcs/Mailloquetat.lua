@@ -4,10 +4,6 @@
 -- Involved in Quests: Save my Sister
 -- !pos -31 -1 8 244
 -----------------------------------
-require("scripts/settings/main")
-require("scripts/globals/shop")
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
