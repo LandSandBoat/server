@@ -13,7 +13,6 @@ local ID = require("scripts/zones/Port_Jeuno/IDs")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-
     local count = trade:getItemCount()
     local sLux = trade:hasItemQty(2740, 1)
     local sLuna = trade:hasItemQty(2741, 1)
@@ -22,16 +21,38 @@ entity.onTrade = function(player, npc, trade)
     local CrimsonKey = player:hasKeyItem(xi.ki.CRIMSON_KEY)
     local LastCrimson = player:getCharVar("LastCrimsonKey") -- When last Crimson key was obtained
 
-    if xi.settings.ENABLE_ACP == 0 and xi.settings.ENABLE_AMK == 0 and xi.settings.ENABLE_ASA == 0 then
+    if
+        xi.settings.ENABLE_ACP == 0 and
+        xi.settings.ENABLE_AMK == 0 and
+        xi.settings.ENABLE_ASA == 0
+    then
         player:showText(npc, ID.text.GET_LOST)
-    else    -- Crimson Key: Trade Seedspall's Lux, Luna, Astrum
-        if (xi.settings.ENABLE_ACP == 1 and sLux and sLuna and sAstrum and count == 3 and ACPm >= xi.mission.id.acp.GATHERER_OF_LIGHT_I and CrimsonKey == false and os.time() > LastCrimson) then -- and timer stuff here) then
+
+    -- Crimson Key: Trade Seedspall's Lux, Luna, Astrum
+    else
+        if
+            xi.settings.ENABLE_ACP == 1 and
+            sLux and
+            sLuna and
+            sAstrum and
+            count == 3 and
+            ACPm >= xi.mission.id.acp.GATHERER_OF_LIGHT_I and
+            CrimsonKey == false and
+            os.time() > LastCrimson
+        then -- and timer stuff here) then
             player:tradeComplete()
             player:addKeyItem(xi.ki.CRIMSON_KEY)
             player:setCharVar("LastCrimsonKey", getMidnight())
             player:messageSpecial(ID.text.DRYEYES_2)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.CRIMSON_KEY)
-        elseif (sLux and sLuna and sAstrum and count == 3 and (os.time() <= LastCrimson or CrimsonKey == true)) then
+
+        elseif
+            sLux and
+            sLuna and
+            sAstrum and
+            count == 3 and
+            (os.time() <= LastCrimson or CrimsonKey == true)
+        then
             player:messageSpecial(ID.text.DRYEYES_3, xi.ki.CRIMSON_KEY)
         -- White Coral Key:
         -- elseif (xi.settings.ENABLE_AMK == 1 and
@@ -41,7 +62,11 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if (xi.settings.ENABLE_ACP == 0 and xi.settings.ENABLE_AMK == 0 and xi.settings.ENABLE_ASA == 0) then
+    if
+        xi.settings.ENABLE_ACP == 0 and
+        xi.settings.ENABLE_AMK == 0 and
+        xi.settings.ENABLE_ASA == 0
+    then
         player:showText(npc, ID.text.GET_LOST)
     else
         player:startEvent(323)
@@ -59,11 +84,18 @@ entity.onEventFinish = function(player, csid, option)
     local ViridianKey = player:hasKeyItem(xi.ki.VIRIDIAN_KEY)
     local LastViridian = player:getCharVar("LastViridianKey") -- When last Viridian key was obtained
 
-    if (csid == 323) then
-        if (option == 1) then
+    if csid == 323 then
+        if option == 1 then
             player:showText(player, ID.text.DRYEYES_1)
-        elseif (option == 100) then
-            if (salad and juice and grub and ACPm >= xi.mission.id.acp.GATHERER_OF_LIGHT_I and ViridianKey == false and os.time() > LastViridian) then
+        elseif option == 100 then
+            if
+                salad and
+                juice and
+                grub and
+                ACPm >= xi.mission.id.acp.GATHERER_OF_LIGHT_I and
+                ViridianKey == false and
+                os.time() > LastViridian
+            then
                 player:addKeyItem(xi.ki.VIRIDIAN_KEY)
                 player:delKeyItem(xi.ki.BOWL_OF_BLAND_GOBLIN_SALAD)
                 player:delKeyItem(xi.ki.JUG_OF_GREASY_GOBLIN_JUICE)
@@ -71,16 +103,19 @@ entity.onEventFinish = function(player, csid, option)
                 player:setCharVar("LastViridianKey", getMidnight())
                 player:showText(player, ID.text.DRYEYES_2)
                 player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.VIRIDIAN_KEY)
-            elseif (os.time() <= LastViridian or ViridianKey == true) then
+
+            elseif
+                os.time() <= LastViridian or
+                ViridianKey == true
+            then
                 player:messageSpecial(ID.text.DRYEYES_3, xi.ki.VIRIDIAN_KEY)
+
             else
                 -- player:showText(player, ? )
                 -- Doesn't seem to be a message for trying when you don't have the key items?
             end
         -- Blue coral Key
         -- elseif (option == 101) then
-            -- if
-            -- end
         end
     end
 end
