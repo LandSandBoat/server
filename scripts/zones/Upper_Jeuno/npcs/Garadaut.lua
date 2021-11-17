@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Upper Jeuno
 --  NPC: Garadaut
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

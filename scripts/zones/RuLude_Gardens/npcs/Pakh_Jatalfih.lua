@@ -5,7 +5,6 @@
 -- !pos 34 8 -35 243
 -----------------------------------
 require("scripts/globals/keyitems")
-require("scripts/globals/missions")
 -----------------------------------
 local entity = {}
 

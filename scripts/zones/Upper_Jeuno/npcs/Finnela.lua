@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Upper Jeuno
 --  NPC: Finnela
--- Type: Standard NPC
 -- !pos -51.880 -1 106.486 244
 -----------------------------------
 local entity = {}

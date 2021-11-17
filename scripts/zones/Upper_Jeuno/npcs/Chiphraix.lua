@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Upper Jeuno
 --  NPC: Chiphraix
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

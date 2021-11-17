@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Upper Jeuno
 --  NPC: Balkehr
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

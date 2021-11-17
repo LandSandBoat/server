@@ -1,7 +1,6 @@
 -----------------------------------
--- Area: Ru'Lud Gardens
+-- Area: Ru'Lude Gardens
 --  NPC: Macchi Gazlitah
--- Standard Mechant NPC
 -- TODO: Add support for occasional stock.
 -----------------------------------
 local ID = require("scripts/zones/RuLude_Gardens/IDs")

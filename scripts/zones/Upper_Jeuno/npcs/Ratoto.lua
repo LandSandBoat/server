@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Upper Jeuno
 --  NPC: Ratoto
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

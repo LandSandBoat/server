@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Upper Jeuno
 --  NPC: Polly
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

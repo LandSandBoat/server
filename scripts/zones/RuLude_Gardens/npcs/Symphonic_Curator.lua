@@ -1,5 +1,5 @@
 -----------------------------------
--- Area: Windurst Woods: Moghouse
+-- Area: Ru'Lude Gardens: Moghouse
 --  NPC: Symphonic Curator
 -----------------------------------
 require("scripts/globals/symphonic_curator")
