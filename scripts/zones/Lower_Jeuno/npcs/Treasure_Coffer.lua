@@ -553,7 +553,7 @@ entity.onEventFinish = function(player, csid, option)
 
         elseif
             option == 33554432 or
-            (option == 16777216 and player:getCharVar("receivedNexusCape") == 0
+            (option == 16777216 and player:getCharVar("receivedNexusCape") == 0)
         then
             player:addUsedItem(xi.items.NEXUS_CAPE)
 

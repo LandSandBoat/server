@@ -86,7 +86,7 @@ entity.onTrigger = function(player, npc)
     elseif
         player:getFameLevel(JEUNO) >= 1 and
         playerOnQuestId == 0 and
-        (hour >= 18 or hour < 1))
+        (hour >= 18 or hour < 1)
     then
         player:startEvent(116, doneCommService)
 

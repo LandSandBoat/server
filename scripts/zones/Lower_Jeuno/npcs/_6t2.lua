@@ -19,6 +19,7 @@ entity.onTrigger = function(player, npc)
     local ANewDawn      = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_NEW_DAWN)
     local ANewDawnEvent = player:getCharVar("ANewDawn_Event")
     local SaveMySon     = player:getCharVar("SaveMySon_Event")
+    local mLvl          = player:getMainLvl()
 
     -- A New Dawn (BST AF3)
     if
@@ -27,7 +28,7 @@ entity.onTrigger = function(player, npc)
     then
         if
             player:getMainJob() == xi.job.BST and
-            player:getMainLvl() >= 50
+            mLvl >= 50
         then
             if ANewDawnEvent == 0 then
                 player:startEvent(5)
