@@ -37,7 +37,7 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
 
     if (xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then
         params.ftp200 = 3 params.ftp300 = 4
-        params.agi_wsc = 0.7 + (player:getMerit(xi.merit.LAST_STAND) * 0.3)
+        params.agi_wsc = 0.7 + (player:getMerit(xi.merit.LAST_STAND) * 0.03)
     end
 
     local damage, criticalHit, tpHits, extraHits = doRangedWeaponskill(player, target, wsID, params, tp, action, primary)
