@@ -528,6 +528,7 @@ xi.items =
     TRAINEE_GLOVES                  = 15008,
     ANCILE                          = 15069,
     AEGIS                           = 15070,
+    MAATS_CAP                       = 15194,
     YAGUDO_HEADGEAR                 = 15202,
     TSOO_HAJAS_HEADGEAR             = 15216,
     STORM_CAPE                      = 15489,
