@@ -27,7 +27,7 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     params.formless = true
 
     if (xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then
-        params.mnd_wsc = 0.7 + (player:getMerit(xi.merit.REQUIESCAT) * 0.3)
+        params.mnd_wsc = 0.7 + (player:getMerit(xi.merit.REQUIESCAT) * 0.03)
     end
 
     local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
