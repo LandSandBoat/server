@@ -33,7 +33,7 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
 
     if (xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then
         params.ftp100 = 0.71875 params.ftp200 = 1.5 params.ftp300 = 2.25
-        params.str_wsc = 0.7 + (player:getMerit(xi.merit.RESOLUTION) * 0.3)
+        params.str_wsc = 0.7 + (player:getMerit(xi.merit.RESOLUTION) * 0.03)
     end
 
     local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
