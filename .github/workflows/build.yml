@@ -103,7 +103,6 @@ jobs:
       - name: Install Dependencies (Brew)
         run: |
           brew update
-          brew upgrade
           brew install git pkg-config autoconf make cmake gcc openssl mariadb zeromq zmq
       - name: Install Dependencies (LuaJIT)
         run: |
