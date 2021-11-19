@@ -11,9 +11,9 @@ item_object.onItemCheck = function(target)
     return 0
 end
 
-item_object.onItemUse = function(target)
-    -- player:castSpell(xi.magic.spell.AERO, target)
-    player:PrintToPlayer("Wind Knife +1 : enchantment implementation untested.")
+item_object.onItemUse = function(user, target)
+    -- user:castSpell(xi.magic.spell.AERO, target)
+    user:PrintToPlayer("Wind Knife +1 : enchantment implementation untested.")
 end
 
 return item_object
