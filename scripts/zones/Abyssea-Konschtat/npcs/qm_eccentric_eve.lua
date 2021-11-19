@@ -1,6 +1,6 @@
 -----------------------------------
 -- Zone: Abyssea-Konschtat
---  NPC: qm_eccentic_eve (???)
+--  NPC: qm_eccentric_eve (???)
 -- Spawns Eccentric Eve
 -- !pos 230.413 32.278 280.677 15
 -----------------------------------
