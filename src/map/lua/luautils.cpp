@@ -414,7 +414,7 @@ namespace luautils
         {
             case sol::type::none:
                 [[fallthrough]];
-            case sol::type::nil:
+            case sol::type::lua_nil:
             {
                 return "nil";
             }
@@ -3715,7 +3715,7 @@ namespace luautils
         if (!cachedInstanceScript.valid())
         {
             ShowError("luautils::GetCachedInstanceScript: Could not retrieve cache entry for %d", instanceId);
-            return sol::nil;
+            return sol::lua_nil;
         }
 
         return cachedInstanceScript;
