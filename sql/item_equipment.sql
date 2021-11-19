@@ -9722,9 +9722,9 @@ INSERT INTO `item_equipment` VALUES (20562,'carnwenhan',99,119,512,563,0,1,3,0,0
 INSERT INTO `item_equipment` VALUES (20563,'twashtar',99,119,262688,465,0,1,3,0,0);
 INSERT INTO `item_equipment` VALUES (20564,'twashtar',99,119,262688,571,0,1,3,0,0);
 INSERT INTO `item_equipment` VALUES (20568,'wind_knife_+1',1,0,4194303,785,0,1,3,0,0);
-INSERT INTO `item_equipment` VALUES (20569,'esikuva',1,0,4194303,164,0,0,3,0,0);        -- TODO: capture model from retail (using Onion Dagger model)
-INSERT INTO `item_equipment` VALUES (20570,'norgish_dagger',1,0,4194303,164,0,0,3,0,0); -- TODO: capture model from retail (using Onion Dagger model)
-INSERT INTO `item_equipment` VALUES (20571,'infiltrator',1,0,4194303,164,0,0,3,0,0);    -- TODO: capture model from retail (using Onion Dagger model)
+INSERT INTO `item_equipment` VALUES (20569,'esikuva',1,0,4194303,804,0,0,3,0,0);
+INSERT INTO `item_equipment` VALUES (20570,'norgish_dagger',1,0,4194303,803,0,0,3,0,0); 
+INSERT INTO `item_equipment` VALUES (20571,'infiltrator',1,0,4194303,805,0,0,3,0,0);
 INSERT INTO `item_equipment` VALUES (20573,'aern_dagger',1,0,4194303,826,0,0,3,0,0);
 INSERT INTO `item_equipment` VALUES (20574,'aern_dagger_ii',1,0,4194303,826,0,0,3,0,0);
 INSERT INTO `item_equipment` VALUES (20576,'qutrub_knife',1,0,4194303,831,0,0,3,0,0);
