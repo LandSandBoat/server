@@ -160,9 +160,5 @@ if(TRACY_ENABLE)
     target_link_libraries(topaz_game PUBLIC tracy_client)
 endif(TRACY_ENABLE)
 
-if(APPLE)
-    target_link_options(topaz_game PUBLIC -pagezero_size 10000 -image_base 100000000)
-endif()
-
 set_target_output_directory(topaz_game)
 set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT topaz_game)
