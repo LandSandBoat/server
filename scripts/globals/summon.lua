@@ -292,6 +292,13 @@ function AvatarPhysicalMove(avatar, target, skill, numberofhits, accmod, dmgmod,
     return returninfo
 end
 
+local attackTypeShields =
+{
+    [xi.attackType.PHYSICAL] = xi.effect.PHYSICAL_SHIELD,
+    [xi.attackType.RANGED  ] = xi.effect.ARROW_SHIELD,
+    [xi.attackType.MAGICAL ] = xi.effect.MAGIC_SHIELD,
+}
+
 function AvatarFinalAdjustments(dmg, mob, skill, target, skilltype, skillparam, shadowbehav)
 
     -- physical attack missed, skip rest
@@ -374,17 +381,10 @@ function AvatarFinalAdjustments(dmg, mob, skill, target, skilltype, skillparam, 
     end
 
     -- TODO: Handle anything else (e.g. if you have Magic Shield and its a Magic skill, then do 0 damage.
-    if skilltype == xi.attackType.PHYSICAL and target:hasStatusEffect(xi.effect.PHYSICAL_SHIELD) then
-        return 0
-    end
-
-    if skilltype == xi.attackType.RANGED and target:hasStatusEffect(xi.effect.ARROW_SHIELD) then
-        return 0
-    end
-
-    -- handle elemental resistence
-    if skilltype == xi.attackType.MAGICAL and target:hasStatusEffect(xi.effect.MAGIC_SHIELD) then
-        return 0
+    for attackType, shieldEffect in pairs(attackTypeShields) do
+        if skilltype == attackType and target:hasStatusEffect(shieldEffect) then
+            return 0
+        end
     end
 
     -- handling phalanx
