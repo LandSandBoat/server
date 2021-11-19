@@ -1,7 +1,8 @@
 -----------------------------------
--- Area: Abyssea - Grauberg
+-- Area: Abyssea - Tahrongi
 --  NPC: Cruor Prospector
 -- Type: Cruor NPC
+-- !pos 132.000 -75.856 -822.000 15
 -----------------------------------
 require("scripts/globals/abyssea")
 require("scripts/globals/keyitems")
@@ -20,20 +21,24 @@ local itemType =
 local prospectorItems =
 {
     [itemType.ITEM] =
-    {-- Sel      Item                            Cost,  Qty
-        [ 1] = { xi.items.UNKAI_KOTE,         5000 },
-        [ 2] = { xi.items.IGA_TEKKO,          5000 },
-        [ 3] = { xi.items.LANCERS_VAMBRACES,  5000 },
-        [ 4] = { xi.items.CALLERS_BRACERS,    5000 },
-        [ 5] = { xi.items.MAVI_BAZUBANDS,     5000 },
-        [ 6] = { xi.items.NAVARCHS_GANTS,     5000 },
-        [ 7] = { xi.items.CIRQUE_GUANTI,      5000 },
-        [ 8] = { xi.items.CHARIS_BANGLES,     5000 },
-        [ 9] = { xi.items.SAVANTS_BRACERS,    5000 },
-        [10] = { xi.items.UTILIS_SHIELD,      5000 },
-        [11] = { xi.items.PYF_HARP,           5000 },
-        [12] = { xi.items.FORBIDDEN_KEY,       500 },
-        [13] = { xi.items.SHADOW_THRONE,   2000000 },
+    {-- Sel      Item                         Cost,  Qty
+        [ 1] = { xi.items.PERLE_SALADE,       4000 },
+        [ 2] = { xi.items.PERLE_HAUBERK,      5000 },
+        [ 3] = { xi.items.PERLE_MOUFLES,      3000 },
+        [ 4] = { xi.items.PERLE_BRAYETTES,    3000 },
+        [ 5] = { xi.items.PERLE_SOLLERETS,    3000 },
+        [ 6] = { xi.items.AURORE_BERET,       4000 },
+        [ 7] = { xi.items.AURORE_DOUBLET,     5000 },
+        [ 8] = { xi.items.AURORE_GLOVES,      3000 },
+        [ 9] = { xi.items.AURORE_BRAIS,       3000 },
+        [10] = { xi.items.AURORE_GAITERS,     3000 },
+        [11] = { xi.items.TEAL_CHAPEAU,       4000 },
+        [12] = { xi.items.TEAL_SAIO,          5000 },
+        [13] = { xi.items.TEAL_CUFFS,         3000 },
+        [14] = { xi.items.TEAL_SLOPS,         3000 },
+        [15] = { xi.items.TEAL_PIGACHES,      3000 },
+        [16] = { xi.items.FORBIDDEN_KEY,       500 },
+        [17] = { xi.items.SHADOW_THRONE,   2000000 },
     },
 
     [itemType.TEMP] =
@@ -58,12 +63,12 @@ local prospectorItems =
     },
 
     [itemType.KEYITEM] =
-    {-- Sel     Item                                 Cost
-        [1] = { xi.ki.MAP_OF_ABYSSEA_GRAUBERG,       4500 },
-        [2] = { xi.ki.IVORY_ABYSSITE_OF_MERIT,       6000 },
-        [3] = { xi.ki.IVORY_ABYSSITE_OF_FURTHERANCE, 7500 },
-        [4] = { xi.ki.IVORY_ABYSSITE_OF_CELERITY,    9000 },
-        [5] = { xi.ki.CLEAR_DEMILUNE_ABYSSITE,        300 },
+    {-- Sel     Item                                Cost
+        [1] = { xi.ki.MAP_OF_ABYSSEA_TAHRONGI,      3500 },
+        [2] = { xi.ki.IVORY_ABYSSITE_OF_SOJOURN,    6000 },
+        [3] = { xi.ki.IVORY_ABYSSITE_OF_CONFLUENCE, 4800 },
+        [4] = { xi.ki.IVORY_ABYSSITE_OF_EXPERTISE,  4800 },
+        [5] = { xi.ki.CLEAR_DEMILUNE_ABYSSITE,       300 },
     },
 
     [itemType.ENHANCEMENT] =

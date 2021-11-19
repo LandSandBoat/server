@@ -1,5 +1,5 @@
 -----------------------------------
--- Area: Abyssea - Grauberg
+-- Area: Abyssea - Uleguerand
 --  NPC: Cruor Prospector
 -- Type: Cruor NPC
 -----------------------------------
@@ -20,24 +20,20 @@ local itemType =
 local prospectorItems =
 {
     [itemType.ITEM] =
-    {-- Sel      Item                            Cost,  Qty
-        [ 1] = { xi.items.UNKAI_KOTE,         5000 },
-        [ 2] = { xi.items.IGA_TEKKO,          5000 },
-        [ 3] = { xi.items.LANCERS_VAMBRACES,  5000 },
-        [ 4] = { xi.items.CALLERS_BRACERS,    5000 },
-        [ 5] = { xi.items.MAVI_BAZUBANDS,     5000 },
-        [ 6] = { xi.items.NAVARCHS_GANTS,     5000 },
-        [ 7] = { xi.items.CIRQUE_GUANTI,      5000 },
-        [ 8] = { xi.items.CHARIS_BANGLES,     5000 },
-        [ 9] = { xi.items.SAVANTS_BRACERS,    5000 },
-        [10] = { xi.items.UTILIS_SHIELD,      5000 },
-        [11] = { xi.items.PYF_HARP,           5000 },
-        [12] = { xi.items.FORBIDDEN_KEY,       500 },
-        [13] = { xi.items.SHADOW_THRONE,   2000000 },
+    {-- Sel      Item                         Cost
+        [ 1] = { xi.items.CREED_GAUNTLETS,    5000 },
+        [ 2] = { xi.items.BALE_GAUNTLETS,     5000 },
+        [ 3] = { xi.items.FERINE_MANOPLAS,    5000 },
+        [ 4] = { xi.items.AOIDOS_MANCHETTES,  5000 },
+        [ 5] = { xi.items.SYLVAN_GLOVELETTES, 5000 },
+        [ 6] = { xi.items.UTILIS_SHIELD,      5000 },
+        [ 7] = { xi.items.PYF_HARP,           5000 },
+        [ 8] = { xi.items.FORBIDDEN_KEY,       500 },
+        [ 9] = { xi.items.SHADOW_THRONE,   2000000 },
     },
 
     [itemType.TEMP] =
-    {-- Sel      Item                         Cost, Qty
+    {-- Sel      Item                         Cost
         [ 1] = { xi.items.LUCID_POTION_I,       80 },
         [ 2] = { xi.items.LUCID_ETHER_I,        80 },
         [ 3] = { xi.items.CATHOLICON,           80 },
@@ -59,7 +55,7 @@ local prospectorItems =
 
     [itemType.KEYITEM] =
     {-- Sel     Item                                 Cost
-        [1] = { xi.ki.MAP_OF_ABYSSEA_GRAUBERG,       4500 },
+        [1] = { xi.ki.MAP_OF_ABYSSEA_ULEGUERAND,     4500 },
         [2] = { xi.ki.IVORY_ABYSSITE_OF_MERIT,       6000 },
         [3] = { xi.ki.IVORY_ABYSSITE_OF_FURTHERANCE, 7500 },
         [4] = { xi.ki.IVORY_ABYSSITE_OF_CELERITY,    9000 },
