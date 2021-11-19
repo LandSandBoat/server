@@ -108,7 +108,7 @@ jobs:
         run: |
           git clone https://github.com/LuaJIT/LuaJIT.git
           cd LuaJIT
-          MACOSX_DEPLOYMENT_TARGET=`sw_vers -productVersion`
+          export MACOSX_DEPLOYMENT_TARGET=`sw_vers -productVersion`
           sudo make install
           sudo ln -sf luajit-2.1.0-beta3 /usr/local/bin/luajit
       - name: Configure CMake
