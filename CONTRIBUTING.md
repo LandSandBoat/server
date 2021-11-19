@@ -665,6 +665,21 @@ INSERT INTO `weapon_skills` VALUES (1,'combo',0x02020000000200000000000002000000
 
 The format of the comment isn't massively important, but it is preferred not to use ';' as a seperator in the middle of your comment. This is a little confusing, as it's the statement-terminator in SQL.
 
+#### Placeholder Data in table rows
+In general, it is preferred to comment out the entire row rather than only leaving a comment about still needing to capture it. Examples include item and NPC models. Use your best judgment and if you aren't sure you can always ask.
+* If it "works" there is an unfortunate chance nobody will come back to finish it later, including the original author. Life happens, people come and go, take breaks etc.
+* If its "wrong" we're likely to still get issue reports on it **because** of that partial implementation, more so than if it were completely missing.
+* Experience has shown people don't often read those comments before complaining that "we" got it wrong.
+* By having the partial data but commenting it out, it remains obviously incomplete and the next editor can more easily see what needs to happen.
+
+**Example**
+
+```sql
+-- Missing model, looks like a fish. Just kidding this doesn't exist and is only a made up example
+-- INSERT INTO `item_equipment` VALUES (65534,'holy_moly_mace',43,0,1048645,???,0,0,3,0,0);
+```
+***And absolutely never substitute item modifiers!***
+
 ## SQL Migrations for Schema changes
 
 * Going forward schema changes should be accompanied by a migration script.
