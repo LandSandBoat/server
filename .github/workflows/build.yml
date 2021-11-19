@@ -105,12 +105,10 @@ jobs:
         run: |
           brew install mariadb zeromq zmq
       - name: Install Dependencies (LuaJIT)
-        env:
-          MACOSX_DEPLOYMENT_TARGET: 11.6
         run: |
           git clone https://github.com/LuaJIT/LuaJIT.git
           cd LuaJIT
-          sudo make install
+          sudo make install MACOSX_DEPLOYMENT_TARGET=11.6
           sudo ln -sf luajit-2.1.0-beta3 /usr/local/bin/luajit
       - name: Configure CMake
         run: |
