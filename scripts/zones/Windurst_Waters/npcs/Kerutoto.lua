@@ -16,24 +16,10 @@ require("scripts/globals/titles")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local blueRibbonBlues = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.BLUE_RIBBON_BLUES)
-
-    -- BLUE RIBBON BLUES
-    if blueRibbonBlues == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 12521) then -- blue_ribbon
-        player:startEvent(362)
-    elseif blueRibbonBlues == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 13569) then -- purple_ribbon
-        if player:getCharVar("BlueRibbonBluesProg") == 4 then
-            player:startEvent(365) -- Lost, ribbon but it came back
-        else
-            player:startEvent(358, 3600)
-        end
-    end
 end
 
 entity.onTrigger = function(player, npc)
-    local blueRibbonBlues = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.BLUE_RIBBON_BLUES)
     local wakingDreams = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WAKING_DREAMS)
-    local needZone = player:needToZone()
 
     -- THREE PATHS (ULMIA)
     if player:getCurrentMission(COP) == xi.mission.id.cop.THREE_PATHS and player:getCharVar("COP_Ulmia_s_Path") == 3 then
@@ -60,34 +46,6 @@ entity.onTrigger = function(player, npc)
         )
     then
         player:startEvent(918)
-
-    -- BLUE RIBBON BLUES
-    elseif blueRibbonBlues == QUEST_COMPLETED and needZone then
-        player:startEvent(363)
-    elseif blueRibbonBlues == QUEST_ACCEPTED then
-        local blueRibbonProg = player:getCharVar("BlueRibbonBluesProg")
-
-        if player:hasItem(12521) then
-            player:startEvent(362)
-        elseif blueRibbonProg == 2 and not needZone then
-            player:startEvent(360) -- go to the grave
-        elseif blueRibbonProg == 2 then
-            player:startEvent(359) -- Thanks for the ribbon
-        elseif blueRibbonProg == 3 then
-            if player:hasItem(13569) then
-                player:startEvent(361, 0, 13569) -- reminder, go to the grave
-            else
-                player:startEvent(366, 0, 13569) -- lost the ribbon
-            end
-        elseif blueRibbonProg == 4 then
-            player:startEvent(366, 0, 13569)
-        end
-    elseif
-        player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WATER_WAY_TO_GO) == QUEST_COMPLETED and
-        blueRibbonBlues == QUEST_AVAILABLE and
-        player:getFameLevel(WINDURST) >= 5
-    then
-        player:startEvent(357)
     end
 end
 
@@ -98,26 +56,6 @@ entity.onEventFinish = function(player, csid, option)
     -- THREE PATHS
     if csid == 876 then
         player:setCharVar("COP_Ulmia_s_Path", 4)
-
-    -- BLUE RIBBON BLUES
-    elseif csid == 357 then
-        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.BLUE_RIBBON_BLUES)
-    elseif csid == 358 or csid == 365 then
-        player:confirmTrade()
-        player:setCharVar("BlueRibbonBluesProg", 2)
-        player:needToZone(true)
-        if csid == 358 then
-            player:addGil(xi.settings.GIL_RATE * 3600)
-        end
-    elseif csid == 360 and npcUtil.giveItem(player, 13569) then
-        player:setCharVar("BlueRibbonBluesProg", 3)
-    elseif csid == 362 then
-        npcUtil.completeQuest(player, WINDURST, xi.quest.id.windurst.BLUE_RIBBON_BLUES, {
-            title = xi.title.GHOSTIE_BUSTER,
-            fame = 140,
-            var = "BlueRibbonBluesProg",
-        })
-        player:needToZone(true)
 
     -- WAKING DREAMS
     elseif csid == 918 then
