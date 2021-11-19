@@ -42,7 +42,7 @@ function utils.permgen(max_val, min_val)
 end
 
 function utils.clamp(input, min_val, max_val)
-    if input < min_val then
+    if min_val ~= nil and input < min_val then
         input = min_val
     elseif max_val ~= nil and input > max_val then
         input = max_val
