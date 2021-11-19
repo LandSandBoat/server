@@ -95,6 +95,7 @@ jobs:
           cmake --build .
 
   MacOS_BigSur_11:
+    # https://github.com/actions/virtual-environments/blob/main/images/macos/macos-11-Readme.md
     runs-on: macos-11
     steps:
       - uses: actions/checkout@v1
@@ -102,13 +103,13 @@ jobs:
           fetch-depth: 1
       - name: Install Dependencies (Brew)
         run: |
-          brew update
-          brew install git pkg-config autoconf make cmake gcc openssl mariadb zeromq zmq
+          brew install pkg-config autoconf mariadb zeromq zmq
       - name: Install Dependencies (LuaJIT)
         run: |
           git clone https://github.com/LuaJIT/LuaJIT.git
           cd LuaJIT
-          MACOSX_DEPLOYMENT_TARGET=`sw_vers -productVersion` sudo make install
+          MACOSX_DEPLOYMENT_TARGET=`sw_vers -productVersion`
+          sudo make install
           sudo ln -sf luajit-2.1.0-beta3 /usr/local/bin/luajit
       - name: Configure CMake
         run: |
