@@ -1,5 +1,5 @@
 -----------------------------------
--- Area: Abyssea - Grauberg
+-- Area: Abyssea - Attohwa
 --  NPC: Cruor Prospector
 -- Type: Cruor NPC
 -----------------------------------
@@ -21,19 +21,14 @@ local prospectorItems =
 {
     [itemType.ITEM] =
     {-- Sel      Item                            Cost,  Qty
-        [ 1] = { xi.items.UNKAI_KOTE,         5000 },
-        [ 2] = { xi.items.IGA_TEKKO,          5000 },
-        [ 3] = { xi.items.LANCERS_VAMBRACES,  5000 },
-        [ 4] = { xi.items.CALLERS_BRACERS,    5000 },
-        [ 5] = { xi.items.MAVI_BAZUBANDS,     5000 },
-        [ 6] = { xi.items.NAVARCHS_GANTS,     5000 },
-        [ 7] = { xi.items.CIRQUE_GUANTI,      5000 },
-        [ 8] = { xi.items.CHARIS_BANGLES,     5000 },
-        [ 9] = { xi.items.SAVANTS_BRACERS,    5000 },
-        [10] = { xi.items.UTILIS_SHIELD,      5000 },
-        [11] = { xi.items.PYF_HARP,           5000 },
-        [12] = { xi.items.FORBIDDEN_KEY,       500 },
-        [13] = { xi.items.SHADOW_THRONE,   2000000 },
+        [ 1] = { xi.items.RAVAGERS_MASK,      5000 },
+        [ 2] = { xi.items.TANTRA_CROWN,       5000 },
+        [ 3] = { xi.items.ORISON_CAP,         5000 },
+        [ 4] = { xi.items.GOETIA_PETASOS,     5000 },
+        [ 5] = { xi.items.ESTOQUEURS_CHAPPEL, 5000 },
+        [ 6] = { xi.items.RAIDERS_BONNET,     5000 },
+        [ 7] = { xi.items.FORBIDDEN_KEY,       500 },
+        [ 8] = { xi.items.SHADOW_THRONE,   2000000 },
     },
 
     [itemType.TEMP] =
@@ -59,10 +54,10 @@ local prospectorItems =
 
     [itemType.KEYITEM] =
     {-- Sel     Item                                 Cost
-        [1] = { xi.ki.MAP_OF_ABYSSEA_GRAUBERG,       4500 },
-        [2] = { xi.ki.IVORY_ABYSSITE_OF_MERIT,       6000 },
-        [3] = { xi.ki.IVORY_ABYSSITE_OF_FURTHERANCE, 7500 },
-        [4] = { xi.ki.IVORY_ABYSSITE_OF_CELERITY,    9000 },
+        [1] = { xi.ki.MAP_OF_ABYSSEA_ATTOHWA,        4500 },
+        [2] = { xi.ki.IVORY_ABYSSITE_OF_AVARICE,     8000 },
+        [3] = { xi.ki.IVORY_ABYSSITE_OF_KISMET,      5000 },
+        [4] = { xi.ki.LUNAR_ABYSSITE1,             100000 },
         [5] = { xi.ki.CLEAR_DEMILUNE_ABYSSITE,        300 },
     },
 
