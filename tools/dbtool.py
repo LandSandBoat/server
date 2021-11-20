@@ -34,7 +34,7 @@ if not subprocess.call(['git', '-C', "../", 'status'], stderr=subprocess.STDOUT,
 # External Deps (requirements.txt)
 try:
     import mysql.connector
-    from mysql.connector import Error, errorcode
+    from mysql.connector import errorcode
     from git import Repo
     import yaml
     import colorama

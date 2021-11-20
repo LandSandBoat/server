@@ -32,7 +32,6 @@ def migrate(cur, db):
         maxID = ids[1]
 
         for charid in range(minID, maxID + 1):
-            y = 0
             for x in range(1,5):
                 left = 0
                 right = 0

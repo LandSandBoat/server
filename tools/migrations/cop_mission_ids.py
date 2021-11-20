@@ -1,4 +1,3 @@
-import array
 import mysql.connector
 
 mission_map = {

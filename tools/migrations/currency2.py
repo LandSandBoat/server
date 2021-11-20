@@ -1,4 +1,3 @@
-import array
 import mysql.connector
 
 def migration_name():
