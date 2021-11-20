@@ -45,9 +45,7 @@ g_mixins.abyssea_weakness = function(mob)
 		end)
 
 		mob:addListener("DEATH", "ABYSSEA_DEATH_NM_KI_DROPCHECK", function(mobArg, player)
-			local zoneName = string.gsub(mobArg:getZoneName(), " ", "_")
-			local ID = require(string.format("scripts/zones/%s/IDs", zoneName))
-			xi.abyssea.giveNMDrops(mobArg, player, ID)
+			xi.abyssea.giveNMDrops(mobArg, player, zones[player:getZoneID()])
 		end)
 	end
 end

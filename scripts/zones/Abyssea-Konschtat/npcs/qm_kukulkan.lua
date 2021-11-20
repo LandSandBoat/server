@@ -1,6 +1,6 @@
 -----------------------------------
 -- Zone: Abyssea-Konschtat
---  NPC: ???
+--  NPC: qm_kukulkan (???)
 -- Spawns Kukulkan
 -- !pos -40.000 71.992 560.000 15
 -- !pos -40.000 68.692 575.000 15
@@ -15,7 +15,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    xi.abyssea.qmOnTrigger(player, npc)
+    local ID = zones[player:getZoneID()]
+    xi.abyssea.qmOnTrigger(player, npc, ID.mob.KUKULKAN_1, { xi.ki.TATTERED_HIPPOGRYPH_WING, xi.ki.CRACKED_WIVRE_HORN, xi.ki.MUCID_AHRIMAN_EYEBALL })
 end
 
 entity.onEventUpdate = function(player, csid, option)
