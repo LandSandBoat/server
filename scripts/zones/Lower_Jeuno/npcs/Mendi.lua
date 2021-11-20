@@ -4,8 +4,6 @@
 -- Reputation NPC
 -- !pos -55 5 -68 245
 -----------------------------------
-require("scripts/globals/shop")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

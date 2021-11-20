@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Lower Jeuno
 --  NPC: Auction Counter
--- Working 100%
 -----------------------------------
 local entity = {}
 

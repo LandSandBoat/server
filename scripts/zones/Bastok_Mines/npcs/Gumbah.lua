@@ -4,10 +4,10 @@
 -- Finishes Quest: Blade of Darkness, Inheritance
 -- !pos 52 0 -36 234
 -----------------------------------
+local ID = require("scripts/zones/Bastok_Mines/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/settings/main")
-local ID = require("scripts/zones/Bastok_Mines/IDs")
 -----------------------------------
 local entity = {}
 
@@ -17,10 +17,17 @@ end
 entity.onTrigger = function(player, npc)
     local bladeDarkness = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BLADE_OF_DARKNESS)
 
-    if player:getMainLvl() >= xi.settings.ADVANCED_JOB_LEVEL and bladeDarkness == QUEST_AVAILABLE then
-        --DARK KNIGHT QUEST
+    --DARK KNIGHT QUEST
+    if
+        player:getMainLvl() >= xi.settings.ADVANCED_JOB_LEVEL and
+        bladeDarkness == QUEST_AVAILABLE
+    then
         player:startEvent(99)
-    elseif bladeDarkness == QUEST_COMPLETED and player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BLADE_OF_DEATH) == QUEST_AVAILABLE then
+
+    elseif
+        bladeDarkness == QUEST_COMPLETED and
+        player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BLADE_OF_DEATH) == QUEST_AVAILABLE
+    then
         player:startEvent(130)
     end
 end

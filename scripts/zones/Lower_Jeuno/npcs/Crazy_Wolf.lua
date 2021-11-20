@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Lower Jeuno
 --  NPC: Crazy Wolf
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

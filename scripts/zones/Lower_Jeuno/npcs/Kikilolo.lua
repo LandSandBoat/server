@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Lower Jeuno
 --  NPC: Kikilolo
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

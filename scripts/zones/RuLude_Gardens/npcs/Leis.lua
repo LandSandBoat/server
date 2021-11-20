@@ -1,9 +1,6 @@
 -----------------------------------
--- Area: Ru'Lud Gardens
+-- Area: Ru'Lude Gardens
 --  NPC: Leis
--- Standard Info NPC
------------------------------------
-require("scripts/settings/main")
 -----------------------------------
 local entity = {}
 

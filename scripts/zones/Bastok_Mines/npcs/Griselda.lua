@@ -6,8 +6,8 @@
 -----------------------------------
 local ID = require("scripts/zones/Bastok_Mines/IDs")
 require("scripts/globals/quests")
-require("scripts/globals/utils")
 require("scripts/globals/shop")
+require("scripts/globals/utils")
 -----------------------------------
 local entity = {}
 
@@ -17,18 +17,21 @@ end
 entity.onTrigger = function(player, npc)
     local WildcatBastok = player:getCharVar("WildcatBastok")
 
-    if player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatBastok, 15) then
+    if
+        player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and
+        not utils.mask.getBit(WildcatBastok, 15)
+    then
         player:startEvent(507)
     else
         local stock =
         {
-            4442, 360, 1,    -- Pineapple Juice
-            4391,  21, 2,    -- Bretzel
-            4490, 432, 2,    -- Pickled Herring
-            4424, 990, 2,    -- Melon Juice
-            4499,  90, 3,    -- Iron Bread
-            4376, 108, 3,    -- Meat Jerky
-            4509,  10, 3,    -- Distilled Water
+            4442, 360, 1, -- Pineapple Juice
+            4391,  21, 2, -- Bretzel
+            4490, 432, 2, -- Pickled Herring
+            4424, 990, 2, -- Melon Juice
+            4499,  90, 3, -- Iron Bread
+            4376, 108, 3, -- Meat Jerky
+            4509,  10, 3, -- Distilled Water
         }
 
         player:showText(npc, ID.text.GRISELDA_SHOP_DIALOG)

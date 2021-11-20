@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Lower Jeuno
 --  NPC: Jazmin
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

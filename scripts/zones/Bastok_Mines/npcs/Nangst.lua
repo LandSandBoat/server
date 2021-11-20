@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Bastok Mines
 --  NPC: Nangst
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

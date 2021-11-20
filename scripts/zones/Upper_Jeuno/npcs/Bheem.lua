@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Upper Jeuno
 --  NPC: Bheem
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

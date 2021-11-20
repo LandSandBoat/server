@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Port Jeuno
 --  NPC: Red Ghost
--- Standard Info NPC
 -----------------------------------
 require("scripts/globals/pathfind")
 require("scripts/globals/quests")
@@ -40,7 +39,10 @@ end
 entity.onTrigger = function(player, npc)
     local WildcatJeuno = player:getCharVar("WildcatJeuno")
 
-    if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatJeuno, 15) then
+    if
+        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and
+        not utils.mask.getBit(WildcatJeuno, 15)
+    then
         player:startEvent(314)
     else
         player:startEvent(34)

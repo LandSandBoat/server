@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Lower Jeuno
 --  NPC: Chatnachoq
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

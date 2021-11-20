@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Upper Jeuno
 --  NPC: Renik
--- Standard Info NPC
 -----------------------------------
 require("scripts/globals/quests")
 require("scripts/globals/utils")
