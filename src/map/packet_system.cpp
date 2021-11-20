@@ -3996,7 +3996,7 @@ void SmallPacket0x071(map_session_data_t* const PSession, CCharEntity* const PCh
             if (PChar->PParty && PChar->PParty->GetLeader() == PChar && PChar->PParty->m_PAlliance)
             {
                 CCharEntity* PVictim = nullptr;
-                for (uint8 i = 0; i < PChar->PParty->m_PAlliance->partyList.size(); ++i)
+                for (std::size_t i = 0; i < PChar->PParty->m_PAlliance->partyList.size(); ++i)
                 {
                     PVictim = (CCharEntity*)(PChar->PParty->m_PAlliance->partyList[i]->GetMemberByName(data[0x0C]));
                     if (PVictim && PVictim->PParty && PVictim->PParty->m_PAlliance) // victim is in this party
@@ -6602,7 +6602,7 @@ void SmallPacket0x102(map_session_data_t* const PSession, CCharEntity* const PCh
                         return;
                     }
 
-                    blueutils::SetBlueSpell(PChar, spell, spellIndex, (spellToAdd > 0));
+                    blueutils::SetBlueSpell(PChar, spell, spellIndex, true);
                     charutils::BuildingCharTraitsTable(PChar);
                     PChar->pushPacket(new CCharAbilitiesPacket(PChar));
                     PChar->pushPacket(new CCharJobExtraPacket(PChar, true));
@@ -6679,7 +6679,7 @@ void SmallPacket0x104(map_session_data_t* const PSession, CCharEntity* const PCh
 
     if (PTarget != nullptr && PTarget->id == PChar->BazaarID.id)
     {
-        for (uint16 i = 0; i < PTarget->BazaarCustomers.size(); ++i)
+        for (std::size_t i = 0; i < PTarget->BazaarCustomers.size(); ++i)
         {
             if (PTarget->BazaarCustomers[i].id == PChar->id)
             {
@@ -6831,7 +6831,7 @@ void SmallPacket0x106(map_session_data_t* const PSession, CCharEntity* const PCh
                 break;
             }
         }
-        for (uint16 i = 0; i < PTarget->BazaarCustomers.size(); ++i)
+        for (std::size_t i = 0; i < PTarget->BazaarCustomers.size(); ++i)
         {
             CCharEntity* PCustomer = (CCharEntity*)PTarget->GetEntity(PTarget->BazaarCustomers[i].targid, TYPE_PC);
 
@@ -6925,7 +6925,7 @@ void SmallPacket0x10A(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x10B(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
-    for (uint16 i = 0; i < PChar->BazaarCustomers.size(); ++i)
+    for (std::size_t i = 0; i < PChar->BazaarCustomers.size(); ++i)
     {
         CCharEntity* PCustomer = (CCharEntity*)PChar->GetEntity(PChar->BazaarCustomers[i].targid, TYPE_PC);
 

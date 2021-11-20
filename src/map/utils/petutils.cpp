@@ -1027,7 +1027,7 @@ namespace petutils
     int16 PerpetuationCost(uint32 id, uint8 level)
     {
         int16 cost = 0;
-        if (id >= 0 && id <= 7)
+        if (id <= 7)
         {
             if (level < 19)
             {

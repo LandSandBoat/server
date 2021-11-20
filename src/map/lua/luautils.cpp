@@ -1255,16 +1255,19 @@ namespace luautils
                 {
                     return true;
                 }
+                break;
             case 1: // Waning (decending)
-                if (phase <= 10 && phase >= 0)
+                if (phase <= 10)
                 {
                     return true;
                 }
+                break;
             case 2: // Waxing (increasing)
-                if (phase >= 0 && phase <= 5)
+                if (phase <= 5)
                 {
                     return true;
                 }
+                break;
         }
 
         return false;

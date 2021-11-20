@@ -77,7 +77,7 @@ uint8 CTradeContainer::getConfirmedStatus(uint8 slotID)
 uint32 CTradeContainer::getItemQuantity(uint16 itemID)
 {
     uint32 quantity = 0;
-    for (uint8 slotID = 0; slotID < m_PItem.size(); ++slotID)
+    for (std::size_t slotID = 0; slotID < m_PItem.size(); ++slotID)
     {
         if (m_itemID[slotID] == itemID)
         {
@@ -90,7 +90,7 @@ uint32 CTradeContainer::getItemQuantity(uint16 itemID)
 uint32 CTradeContainer::getTotalQuantity()
 {
     uint32 quantity = 0;
-    for (uint8 slotID = 0; slotID < m_PItem.size(); ++slotID)
+    for (std::size_t slotID = 0; slotID < m_PItem.size(); ++slotID)
     {
         quantity += (m_itemID[slotID] == 0xFFFF ? 1 : m_quantity[slotID]);
     }
@@ -100,7 +100,7 @@ uint32 CTradeContainer::getTotalQuantity()
 uint8 CTradeContainer::getSlotCount()
 {
     uint8 count = 0;
-    for (uint8 slotID = 0; slotID < m_PItem.size(); ++slotID)
+    for (std::size_t slotID = 0; slotID < m_PItem.size(); ++slotID)
     {
         if (m_itemID[slotID] != 0)
         {
@@ -264,7 +264,7 @@ void CTradeContainer::unreserveUnconfirmed()
         if (PItem)
         {
             uint8 confirmedStatus = getConfirmedStatus(slotID);
-            if (confirmedStatus && confirmedStatus > 0)
+            if (confirmedStatus > 0)
             {
                 PItem->setReserve(confirmedStatus);
             }

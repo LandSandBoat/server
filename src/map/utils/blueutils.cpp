@@ -451,7 +451,7 @@ namespace blueutils
                     {
                         bool add = true;
 
-                        for (uint8 j = 0; j < PChar->TraitList.size(); ++j)
+                        for (std::size_t j = 0; j < PChar->TraitList.size(); ++j)
                         {
                             CTrait* PExistingTrait = PChar->TraitList.at(j);
 
