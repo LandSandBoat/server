@@ -1325,6 +1325,13 @@ INSERT INTO `instance_entities` VALUES (9300,17158395); -- csnpc
 INSERT INTO `instance_entities` VALUES (9300,17158396); -- csnpc
 INSERT INTO `instance_entities` VALUES (9300,17158397); -- csnpc
 
+-- Behind the Sluices (25900)
+INSERT INTO `instance_entities` VALUES (25900, 17838146); -- Arciela
+INSERT INTO `instance_entities` VALUES (25900, 17838147); -- The Keeper
+INSERT INTO `instance_entities` VALUES (25900, 17838148); -- Mistdagger
+INSERT INTO `instance_entities` VALUES (25900, 17838149); -- The Briars (elv)
+INSERT INTO `instance_entities` VALUES (25900, 17838150); -- The Briars (gal)
+
 -- Ambuscade
 -- mobs
 INSERT INTO `instance_entities` VALUES (30000,17952867);

@@ -20,6 +20,7 @@ zones[xi.zone.RALA_WATERWAYS_U] =
     },
     mob =
     {
+        ARCIELA_BTS = 17838146, -- Arciela (Behind the Sluices)
     },
     npc =
     {

@@ -35,13 +35,6 @@ zone_object.onZoneIn = function(player, prevZone)
         (player:getCurrentMission(player:getNation()) == xi.mission.id.nation.SHADOW_LORD and player:getMissionStatus(player:getNation()) >= 4))
     then
         cs = 30036
-    -- SOA 1-1 Optional CS
-    elseif
-        xi.settings.ENABLE_SOA == 1 and
-        player:getCurrentMission(SOA) == xi.mission.id.soa.RUMORS_FROM_THE_WEST and
-        player:getCharVar("SOA_1_CS3") == 0
-    then
-        cs = 839
     end
 
     -- MOG HOUSE EXIT
@@ -66,8 +59,6 @@ end
 zone_object.onEventFinish = function(player, csid, option)
     if csid == 367 then
         player:messageSpecial(ID.text.ITEM_OBTAINED, 536)
-    elseif csid == 839 then
-        player:setCharVar("SOA_1_CS3", 1)
     elseif csid == 30035 then
         player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.RHAPSODIES_OF_VANADIEL)
         player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.RESONACE)

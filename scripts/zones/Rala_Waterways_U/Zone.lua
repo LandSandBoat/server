@@ -1,9 +1,7 @@
 -----------------------------------
---
 -- Zone: Rala Waterways U
---
 -----------------------------------
-local ID = require("scripts/zones/Rala_Waterways_U/IDs")
+local ID = require('scripts/zones/Rala_Waterways_U/IDs')
 -----------------------------------
 local zone_object = {}
 
@@ -34,10 +32,13 @@ zone_object.onEventUpdate = function(player, csid, option)
 end
 
 zone_object.onEventFinish = function(player, csid, option)
+    if csid == 1000 and option == 0 then
+        player:setPos(-530.6, -5.7, 59.9, 128, xi.zone.RALA_WATERWAYS)
+    end
 end
 
 zone_object.onInstanceLoadFailed = function()
-    return 72
+    return 258 -- Rala Waterways
 end
 
 return zone_object

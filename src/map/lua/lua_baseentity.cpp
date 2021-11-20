@@ -12523,7 +12523,7 @@ void CLuaBaseEntity::setRoamFlags(uint16 newRoamFlags)
 
 /************************************************************************
  *  Function: getTarget()
- *  Purpose : Return available targets as a Lua table to the Mob
+ *  Purpose : Return Battle Target entity
  *  Example : mob:getTarget(); pet:getTarget(); if not v:getTarget() then
  *  Notes   :
  ************************************************************************/
