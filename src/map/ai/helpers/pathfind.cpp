@@ -368,7 +368,7 @@ bool CPathFind::FindRandomPath(const position_t& start, float maxRadius, uint8 m
     position_t startPosition = start;
 
     // find end points for turns
-    for (int8 i = 0; i < m_turnLength; i++)
+    for (int i = 0; i < m_turnLength; i++)
     {
         // look for new point centered around the last point
         auto status = m_PTarget->loc.zone->m_navMesh->findRandomPosition(startPosition, maxRadius);

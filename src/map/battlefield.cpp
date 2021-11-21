@@ -247,7 +247,7 @@ void CBattlefield::ApplyLevelRestrictions(CCharEntity* PChar) const
     // Adjust player's level to the appropriate cap and remove buffs
     auto cap = GetLevelCap();
 
-    if (cap && cap > 0)
+    if (cap > 0)
     {
         cap += map_config.Battle_cap_tweak; // We wait till here to do this because we don't want to modify uncapped battles.
 

@@ -4042,7 +4042,7 @@ namespace battleutils
             {
                 for (auto& a : taUser->PParty->m_PAlliance->partyList)
                 {
-                    for (uint8 i = 0; i < a->members.size(); ++i)
+                    for (std::size_t i = 0; i < a->members.size(); ++i)
                     {
                         CBattleEntity* member = a->members.at(i);
                         if (checkPosition(member))
@@ -4313,7 +4313,7 @@ namespace battleutils
         {
             shotCount += 6;
         }
-        else if (lvl >= 99)
+        else
         {
             shotCount += 7;
         }
@@ -4382,7 +4382,7 @@ namespace battleutils
         bool   hitTarget      = false;
 
         // Loop number of hits
-        for (uint8 i = 0; i < (numattacksLeftHand + numattacksRightHand); ++i)
+        for (uint16 i = 0; i < (numattacksLeftHand + numattacksRightHand); ++i)
         {
             if (i != 0)
             {
@@ -5805,7 +5805,7 @@ namespace battleutils
             {
                 bool add = true;
 
-                for (uint8 j = 0; j < PEntity->TraitList.size(); ++j)
+                for (std::size_t j = 0; j < PEntity->TraitList.size(); ++j)
                 {
                     CTrait* PExistingTrait = PEntity->TraitList.at(j);
 
