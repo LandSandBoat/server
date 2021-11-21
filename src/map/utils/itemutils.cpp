@@ -77,32 +77,32 @@ namespace itemutils
             return new CItemFurnishing(ItemID);
         }
 
-        if ((ItemID >= 0x1000) && (ItemID <= 0x1FFF))
+        if (ItemID <= 0x1FFF)
         {
             return new CItemUsable(ItemID);
         }
 
-        if ((ItemID >= 0x2000) && (ItemID <= 0x27FF))
+        if (ItemID <= 0x27FF)
         {
             return new CItemPuppet(ItemID);
         }
 
-        if ((ItemID >= 0x2800) && (ItemID <= 0x3FFF))
+        if (ItemID <= 0x3FFF)
         {
             return new CItemEquipment(ItemID);
         }
 
-        if ((ItemID >= 0x4000) && (ItemID <= 0x5FFF))
+        if (ItemID <= 0x5FFF)
         {
             return new CItemWeapon(ItemID);
         }
 
-        if ((ItemID >= 0x6000) && (ItemID <= 0x6FFF))
+        if (ItemID <= 0x6FFF)
         {
             return new CItemEquipment(ItemID);
         }
 
-        if ((ItemID >= 0x7000) && (ItemID <= 0x7FFF))
+        if (ItemID <= 0x7FFF)
         {
             return new CItemGeneral(ItemID);
         }
@@ -122,6 +122,7 @@ namespace itemutils
         {
             return new CItemCurrency(ItemID);
         }
+
         if (ItemID < MAX_ITEMID && g_pItemList[ItemID] != nullptr)
         {
             if ((ItemID >= 0x0200) && (ItemID <= 0x0206))
@@ -139,35 +140,32 @@ namespace itemutils
                 return new CItemFurnishing(*((CItemFurnishing*)g_pItemList[ItemID]));
             }
 
-            if ((ItemID >= 0x1000) && (ItemID <= 0x1FFF))
+            if (ItemID <= 0x1FFF)
             {
                 return new CItemUsable(*((CItemUsable*)g_pItemList[ItemID]));
             }
 
-            if ((ItemID >= 0x2000) && (ItemID <= 0x27FF))
+            if (ItemID <= 0x27FF)
             {
                 return new CItemPuppet(*((CItemPuppet*)g_pItemList[ItemID]));
             }
 
-            if (((ItemID >= 0x2800) && (ItemID <= 0x3FFF)))
+            if (ItemID <= 0x3FFF)
             {
                 return new CItemEquipment(*((CItemEquipment*)g_pItemList[ItemID]));
             }
 
-            if ((ItemID >= 0x4000) && (ItemID <= 0x5FFF))
+            if (ItemID <= 0x5FFF)
             {
                 return new CItemWeapon(*((CItemWeapon*)g_pItemList[ItemID]));
             }
 
-            if ((ItemID >= 0x6000) && (ItemID <= 0x6FFF))
+            if (ItemID <= 0x6FFF)
             {
                 return new CItemEquipment(*((CItemEquipment*)g_pItemList[ItemID]));
             }
 
-            if ((ItemID >= 0x7000) && (ItemID <= 0x7FFF))
-            {
-                return new CItemGeneral(*((CItemGeneral*)g_pItemList[ItemID]));
-            }
+            return new CItemGeneral(*((CItemGeneral*)g_pItemList[ItemID]));
         }
 
         return nullptr;
