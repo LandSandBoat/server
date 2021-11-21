@@ -445,6 +445,8 @@ jobs:
           args: install mysql  --no-progress --params "/installLocation:. /dataLocation:."
       - name: Check MySQL connection
         run: |
+          refreshenv
+          mysqld
           mysql -uroot -e "SHOW DATABASES"
       - name: Import SQL files
         run: |
