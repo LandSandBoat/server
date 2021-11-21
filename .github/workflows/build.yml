@@ -442,7 +442,7 @@ jobs:
       - name: Install MySQL Server
         uses: crazy-max/ghaction-chocolatey@v1
         with:
-          args: -h
+          args: install mysql
       - name: Check MySQL connection
         run: |
           mysql -uroot -proot -e "SHOW DATABASES"
