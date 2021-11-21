@@ -65,7 +65,6 @@ entity.onTrigger = function(player, npc)
     local wildcatWindurst = player:getCharVar("WildcatWindurst")
     local mihgosAmigo = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MIHGO_S_AMIGO)
     local tenshodoShowdown = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_TENSHODO_SHOWDOWN)
-    local tenshodoShowdownCS = player:getCharVar("theTenshodoShowdownCS")
     local rockRacketeer = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ROCK_RACKETEER)
     local rockRacketeerCS = player:getCharVar("rockracketeer_sold")
     local thickAsThieves = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.AS_THICK_AS_THIEVES)
@@ -95,16 +94,6 @@ entity.onTrigger = function(player, npc)
         player:setLocalVar("TrustDialogue", 1)
 
         player:startEvent(865, 0, 0, 0, TrustMemory(player), 0, 0, 0, trustFlag)
-
-    -- THE TENSHODO SHOWDOWN (THF AF Weapon)
-    elseif job == xi.job.THF and lvl >= xi.settings.AF1_QUEST_LEVEL and tenshodoShowdown == QUEST_AVAILABLE then
-        player:startEvent(496) -- start quest
-    elseif tenshodoShowdownCS == 1 then
-        player:startEvent(497) -- before cs at tensho HQ
-    elseif tenshodoShowdownCS >= 2 then
-        player:startEvent(498) -- after cs at tensho HQ
-    elseif job == xi.job.THF and lvl < xi.settings.AF2_QUEST_LEVEL and tenshodoShowdown == QUEST_COMPLETED then
-        player:startEvent(503) -- standard dialog after
 
     -- THICK AS THIEVES (THF AF Head)
     elseif
@@ -173,12 +162,6 @@ entity.onEventFinish = function(player, csid, option)
     -- LURE OF THE WILDCAT (WINDURST)
     if csid == 732 then
         player:setCharVar("WildcatWindurst", utils.mask.setBit(player:getCharVar("WildcatWindurst"), 4, true))
-
-    -- THE TENSHODO SHOWDOWN
-    elseif csid == 496 then
-        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_TENSHODO_SHOWDOWN)
-        player:setCharVar("theTenshodoShowdownCS", 1)
-        npcUtil.giveKeyItem(player, xi.ki.LETTER_FROM_THE_TENSHODO)
 
     -- THICK AS THIEVES
     elseif (csid == 504 and option == 1) then -- start quest "as thick as thieves"
