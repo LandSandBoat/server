@@ -431,15 +431,6 @@ jobs:
     runs-on: windows-2019
     env:
       MSBUILD_PATH: C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\
-    services:
-      mysql:
-        image: mariadb
-        env:
-          MYSQL_DATABASE: xidb
-          MYSQL_ROOT_PASSWORD: root
-        ports:
-          - 3306:3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=10s --health-retries=10
     steps:
       - uses: actions/checkout@v1
         with:
