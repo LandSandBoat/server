@@ -441,7 +441,7 @@ jobs:
           path: .
       - name: Start MySQL service
         run: |
-          mysqld --datadir=.
+          mysqld --install --datadir=.
           mysql -uroot -proot -e "SHOW DATABASES"
       - name: Import SQL files
         run: |
