@@ -442,7 +442,7 @@ jobs:
       - name: Install MySQL Server
         uses: crazy-max/ghaction-chocolatey@v1
         with:
-          args: install mysql
+          args: install mysql --params "/dataLocation:${{ env.GITHUB_WORKSPACE }}"
       - name: Check MySQL connection
         run: |
           mysql -uroot -proot -e "SHOW DATABASES"
