@@ -93,6 +93,14 @@ jobs:
         shell: cmd
         run: |
           cmake --build .
+      - name: Archive Executables
+        uses: actions/upload-artifact@v2
+        with:
+          name: windows_executables
+          path: |
+            topaz_connect_64.exe
+            topaz_game_64.exe
+            topaz_search_64.exe
 
   MacOS_BigSur_11:
     # https://github.com/actions/virtual-environments/blob/main/images/macos/macos-11-Readme.md
@@ -212,7 +220,7 @@ jobs:
             exit -1
         fi
 
-  Full_Startup_Checks_2004:
+  Linux_Full_Startup_Checks_2004:
     runs-on: ubuntu-20.04
     needs: Linux_2004_Clang11_64bit
     services:
@@ -335,7 +343,7 @@ jobs:
             exit -1
         fi
 
-  MultiInstance_Startup_Checks_2004:
+  Linux_MultiInstance_Startup_Checks_2004:
     runs-on: ubuntu-20.04
     needs: Linux_2004_Clang11_64bit
     services:
@@ -417,3 +425,42 @@ jobs:
         if grep -qi "Error" map-server-1*.log; then
           exit -1
         fi
+
+  Windows_Full_Startup_Checks:
+    needs: Windows_2019_64bit
+    runs-on: windows-2019
+    env:
+      MSBUILD_PATH: C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\
+    services:
+      mysql:
+        image: mariadb
+        env:
+          MYSQL_DATABASE: xidb
+          MYSQL_ROOT_PASSWORD: root
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=10s --health-retries=10
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+      - uses: actions/download-artifact@v2
+        with:
+          name: windows_executables
+          path: .
+      - name: Verify MySQL connection from container
+        run: |
+          mysql -h 127.0.0.1 -uroot -proot -e "SHOW DATABASES"
+      - name: Import SQL files
+        run: |
+          for f in sql/*.sql; do
+            echo -e "Importing $f into the database..."
+            mysql xidb -h 127.0.0.1 -uroot -proot < $f
+          done
+          mysql xidb -h 127.0.0.1 -uroot -proot -e "SHOW tables"
+      - name: Copy confs
+        run: |
+          cp conf/default/* conf/
+      - name: Copy settings
+        run: |
+          cp scripts/settings/default/* scripts/settings/
