@@ -141,7 +141,6 @@ target_compile_definitions(
 
 target_link_libraries(topaz_game
     PUBLIC
-    filewatch
     sol2_single
     common
     ai
