@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Port Jeuno
 --  NPC: Naurmaire
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

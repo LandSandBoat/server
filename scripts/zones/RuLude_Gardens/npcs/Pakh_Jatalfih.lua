@@ -1,11 +1,10 @@
 -----------------------------------
--- Area: Ru'Lud Gardens
+-- Area: Ru'Lude Gardens
 --  NPC: Pakh Jatalfih
 -- Involved in Mission: Windurst 3-3, 4-1
 -- !pos 34 8 -35 243
 -----------------------------------
 require("scripts/globals/keyitems")
-require("scripts/globals/missions")
 -----------------------------------
 local entity = {}
 
@@ -16,16 +15,7 @@ entity.onTrigger = function(player, npc)
     local pNation = player:getNation()
 
     if pNation == xi.nation.WINDURST then
-        local currentMission = player:getCurrentMission(pNation)
-        local missionStatus = player:getMissionStatus(player:getNation())
-
-        if currentMission == xi.mission.id.windurst.A_NEW_JOURNEY and missionStatus == 1 then
-            player:startEvent(43)
-        elseif currentMission == xi.mission.id.windurst.A_NEW_JOURNEY and missionStatus == 2 then
-            player:startEvent(68)
-        elseif currentMission == xi.mission.id.windurst.A_NEW_JOURNEY and missionStatus == 3 then
-            player:startEvent(141)
-        elseif player:hasKeyItem(xi.ki.MESSAGE_TO_JEUNO_WINDURST) then
+        if player:hasKeyItem(xi.ki.MESSAGE_TO_JEUNO_WINDURST) then
             player:startEvent(57)
         else
             player:startEvent(103)
@@ -41,12 +31,6 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 43 then
-        player:setMissionStatus(player:getNation(), 2)
-        player:delKeyItem(xi.ki.LETTER_TO_THE_AMBASSADOR)
-    elseif csid == 141 then
-        player:setMissionStatus(player:getNation(), 4)
-    end
 end
 
 return entity

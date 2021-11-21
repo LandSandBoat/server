@@ -713,7 +713,7 @@ function AbilityFinalAdjustments(dmg,mob,skill,target,skilltype,skillparam,shado
     skill:setMsg(xi.msg.basic.USES_JA_TAKE_DAMAGE)
 
     --Handle shadows depending on shadow behaviour / skilltype
-    if (shadowbehav ~= MOBPARAM_WIPE_SHADOWS and shadowbehav ~= MOBPARAM_IGNORE_SHADOWS) then --remove 'shadowbehav' shadows.
+    if (shadowbehav ~= xi.mobskills.shadowBehavior.WIPE_SHADOWS and shadowbehav ~= xi.mobskills.shadowBehavior.IGNORE_SHADOWS) then --remove 'shadowbehav' shadows.
 
         dmg = utils.takeShadows(target, dmg, shadowbehav)
 
@@ -723,7 +723,7 @@ function AbilityFinalAdjustments(dmg,mob,skill,target,skilltype,skillparam,shado
             return shadowbehav
         end
 
-    elseif (shadowbehav == MOBPARAM_WIPE_SHADOWS) then --take em all!
+    elseif (shadowbehav == xi.mobskills.shadowBehavior.WIPE_SHADOWS) then --take em all!
         target:delStatusEffect(xi.effect.COPY_IMAGE)
         target:delStatusEffect(xi.effect.BLINK)
         target:delStatusEffect(xi.effect.THIRD_EYE)

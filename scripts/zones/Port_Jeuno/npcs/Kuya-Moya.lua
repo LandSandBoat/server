@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Port Jeuno
 --  NPC: Kuya-Moya
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

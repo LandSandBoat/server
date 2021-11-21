@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS `mob_skill_lists` (
   `skill_list_id` smallint(5) unsigned NOT NULL,
   `mob_skill_id` smallint(3) unsigned NOT NULL,
   PRIMARY KEY (`skill_list_id`,`mob_skill_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `mob_skill_lists`
@@ -761,13 +761,18 @@ INSERT INTO `mob_skill_lists` VALUES ('MamoolJa',176,1731);
 INSERT INTO `mob_skill_lists` VALUES ('MamoolJa',176,1732);
 INSERT INTO `mob_skill_lists` VALUES ('MamoolJa',176,1733);
 INSERT INTO `mob_skill_lists` VALUES ('MamoolJa',176,1734);
--- INSERT INTO `mob_skill_lists` VALUES ('MamoolJa',176,1735);
--- INSERT INTO `mob_skill_lists` VALUES ('MamoolJa',176,1736);
+INSERT INTO `mob_skill_lists` VALUES ('MamoolJa',176,1735);
+INSERT INTO `mob_skill_lists` VALUES ('MamoolJa',176,1736);
 -- INSERT INTO `mob_skill_lists` VALUES ('MamoolJa',176,1737);
 -- INSERT INTO `mob_skill_lists` VALUES ('MamoolJa',176,1738);
--- INSERT INTO `mob_skill_lists` VALUES ('MamoolJa',176,1839);
--- INSERT INTO `mob_skill_lists` VALUES ('MamoolJa',176,1840);
--- 177: MamoolJa Knight?
+INSERT INTO `mob_skill_lists` VALUES ('MamoolJa',176,1839);
+INSERT INTO `mob_skill_lists` VALUES ('MamoolJa',176,1840);
+INSERT INTO `mob_skill_lists` VALUES ('MamoolJaMage',177,1920);
+INSERT INTO `mob_skill_lists` VALUES ('MamoolJaMage',177,1921);
+INSERT INTO `mob_skill_lists` VALUES ('MamoolJaMage',177,1922);
+INSERT INTO `mob_skill_lists` VALUES ('MamoolJaMage',177,1923);
+INSERT INTO `mob_skill_lists` VALUES ('MamoolJaMage',177,1924);
+INSERT INTO `mob_skill_lists` VALUES ('MamoolJaMage',177,1925);
 INSERT INTO `mob_skill_lists` VALUES ('Mandragora',178,300);
 INSERT INTO `mob_skill_lists` VALUES ('Mandragora',178,301);
 INSERT INTO `mob_skill_lists` VALUES ('Mandragora',178,302);
@@ -3738,7 +3743,18 @@ INSERT INTO `mob_skill_lists` VALUES ('Galarhigg',1156,627); -- vulture_4
 INSERT INTO `mob_skill_lists` VALUES ('Evil_Oscar',1157,317); -- Vampiric Lash
 INSERT INTO `mob_skill_lists` VALUES ('Evil_Oscar',1157,320); -- Sweet Breath
 
--- Next available ID: 1158
+INSERT INTO `mob_skill_lists` VALUES ('The_Keeper',1158,19); -- Gust Slash
+INSERT INTO `mob_skill_lists` VALUES ('The_Keeper',1158,30); -- Aeolian Edge
+INSERT INTO `mob_skill_lists` VALUES ('Mistdagger',1159,131); -- Blade: To
+INSERT INTO `mob_skill_lists` VALUES ('Mistdagger',1159,134); -- Blade: Jin
+INSERT INTO `mob_skill_lists` VALUES ('Mistdagger',1159,136); -- Blade: Ku
+INSERT INTO `mob_skill_lists` VALUES ('The_Briars_elv',1160,34); -- Red Lotus Blade
+INSERT INTO `mob_skill_lists` VALUES ('The_Briars_elv',1160,40); -- Vorpal Blade
+INSERT INTO `mob_skill_lists` VALUES ('The_Briars_elv',1160,42); -- Savage Blade
+INSERT INTO `mob_skill_lists` VALUES ('The_Briars_gal',1161,86); -- Raging Rush
+INSERT INTO `mob_skill_lists` VALUES ('The_Briars_gal',1161,91); -- Fell Cleave
+
+-- Next available ID: 1162
 
 -- ------------------------------------------------------------
 -- Start of Ambuscade section

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Lower Jeuno
 --  NPC: Joseph
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

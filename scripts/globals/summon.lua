@@ -281,7 +281,7 @@ function AvatarPhysicalMove(avatar, target, skill, numberofhits, accmod, dmgmod,
         end
 
         -- apply ftp bonus
-        if tpeffect == TP_DMG_BONUS then
+        if tpeffect == xi.mobskills.magicalTpBonus.DMG_BONUS then
             finaldmg = finaldmg * avatarFTP(skill:getTP(), mtp100, mtp200, mtp300)
         end
     end
@@ -291,6 +291,13 @@ function AvatarPhysicalMove(avatar, target, skill, numberofhits, accmod, dmgmod,
 
     return returninfo
 end
+
+local attackTypeShields =
+{
+    [xi.attackType.PHYSICAL] = xi.effect.PHYSICAL_SHIELD,
+    [xi.attackType.RANGED  ] = xi.effect.ARROW_SHIELD,
+    [xi.attackType.MAGICAL ] = xi.effect.MAGIC_SHIELD,
+}
 
 function AvatarFinalAdjustments(dmg, mob, skill, target, skilltype, skillparam, shadowbehav)
 
@@ -304,7 +311,7 @@ function AvatarFinalAdjustments(dmg, mob, skill, target, skilltype, skillparam, 
     skill:setMsg(xi.msg.basic.DAMAGE)
 
     -- Handle shadows depending on shadow behaviour / skilltype
-    if shadowbehav < 5 and shadowbehav ~= MOBPARAM_IGNORE_SHADOWS then -- remove 'shadowbehav' shadows.
+    if shadowbehav < 5 and shadowbehav ~= xi.mobskills.shadowBehavior.IGNORE_SHADOWS then -- remove 'shadowbehav' shadows.
         local targShadows = target:getMod(xi.mod.UTSUSEMI)
         local shadowType = xi.mod.UTSUSEMI
         if targShadows == 0 then -- try blink, as utsusemi always overwrites blink this is okay
@@ -341,7 +348,7 @@ function AvatarFinalAdjustments(dmg, mob, skill, target, skilltype, skillparam, 
                 target:delStatusEffect(xi.effect.BLINK)
             end
         end
-    elseif shadowbehav == MOBPARAM_WIPE_SHADOWS then -- take em all!
+    elseif shadowbehav == xi.mobskills.shadowBehavior.WIPE_SHADOWS then -- take em all!
         target:setMod(xi.mod.UTSUSEMI, 0)
         target:setMod(xi.mod.BLINK, 0)
         target:delStatusEffect(xi.effect.COPY_IMAGE)
@@ -351,9 +358,9 @@ function AvatarFinalAdjustments(dmg, mob, skill, target, skilltype, skillparam, 
     -- handle Third Eye using shadowbehav as a guide
     local teye = target:getStatusEffect(xi.effect.THIRD_EYE)
     if teye ~= nil and skilltype == xi.attackType.PHYSICAL then -- T.Eye only procs when active with PHYSICAL stuff
-        if shadowbehav == MOBPARAM_WIPE_SHADOWS then -- e.g. aoe moves
+        if shadowbehav == xi.mobskills.shadowBehavior.WIPE_SHADOWS then -- e.g. aoe moves
             target:delStatusEffect(xi.effect.THIRD_EYE)
-        elseif shadowbehav ~= MOBPARAM_IGNORE_SHADOWS then -- it can be absorbed by shadows
+        elseif shadowbehav ~= xi.mobskills.shadowBehavior.IGNORE_SHADOWS then -- it can be absorbed by shadows
             -- third eye doesnt care how many shadows, so attempt to anticipate, but reduce
             -- chance of anticipate based on previous successful anticipates.
             local prevAnt = teye:getPower()
@@ -374,17 +381,10 @@ function AvatarFinalAdjustments(dmg, mob, skill, target, skilltype, skillparam, 
     end
 
     -- TODO: Handle anything else (e.g. if you have Magic Shield and its a Magic skill, then do 0 damage.
-    if skilltype == xi.attackType.PHYSICAL and target:hasStatusEffect(xi.effect.PHYSICAL_SHIELD) then
-        return 0
-    end
-
-    if skilltype == xi.attackType.RANGED and target:hasStatusEffect(xi.effect.ARROW_SHIELD) then
-        return 0
-    end
-
-    -- handle elemental resistence
-    if skilltype == xi.attackType.MAGICAL and target:hasStatusEffect(xi.effect.MAGIC_SHIELD) then
-        return 0
+    for attackType, shieldEffect in pairs(attackTypeShields) do
+        if skilltype == attackType and target:hasStatusEffect(shieldEffect) then
+            return 0
+        end
     end
 
     -- handling phalanx

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Port Jeuno
 --  NPC: Cumetouflaix
--- Standard NPC
 -----------------------------------
 local ID = require("scripts/zones/Port_Jeuno/IDs")
 -----------------------------------
@@ -11,7 +10,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-
     player:messageSpecial(ID.text.CUMETOUFLAIX_DIALOG)
 end
 

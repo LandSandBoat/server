@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Upper Jeuno
 --  NPC: Finbarr
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

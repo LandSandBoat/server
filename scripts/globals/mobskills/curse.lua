@@ -7,7 +7,7 @@
 -- Range: 15' radial
 -- Notes: Curse has a very long duration.
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
@@ -20,7 +20,7 @@ end
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.CURSE_I
 
-    skill:setMsg(MobStatusEffectMove(mob, target, typeEffect, 25, 0, 480))
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 25, 0, 480))
 
     return typeEffect
 end

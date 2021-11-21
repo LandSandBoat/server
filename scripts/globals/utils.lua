@@ -42,7 +42,7 @@ function utils.permgen(max_val, min_val)
 end
 
 function utils.clamp(input, min_val, max_val)
-    if input < min_val then
+    if min_val ~= nil and input < min_val then
         input = min_val
     elseif max_val ~= nil and input > max_val then
         input = max_val
@@ -286,7 +286,7 @@ function utils.getMobSkillLvl(rank, level)
     return 0
 end
 
--- System Strength Bonus table.  This is used by MobBreathMove, but determines weakness of
+-- System Strength Bonus table.  This is used by xi.mobskills.mobBreathMove, but determines weakness of
 -- a definding system, vs the attacking system.  This table is indexed by the attacker.
 -- This table can scale beyond two values, but at this time, no data has been recorded.
 -- Values: 1 == Bonus, -1 == Weakness, 0 == Default (No Weakness or Bonus)

@@ -176,6 +176,7 @@ quest.sections =
             {
                 [87] = function(player, csid, option, npc)
                     quest:complete(player)
+                    -- TODO: remove blightberry
                 end,
             },
         },

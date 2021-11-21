@@ -31,7 +31,7 @@ CREATE TABLE `instance_list` (
   `battlesolo` smallint(3) NOT NULL DEFAULT '-1',
   `battlemulti` smallint(3) NOT NULL DEFAULT '-1',
   PRIMARY KEY (`instanceid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -52,7 +52,7 @@ INSERT INTO `instance_list` VALUES (0,'TEST',0,0,0,0.000,0.000,0.000,0,-1,-1,-1,
 
 -- ILRUSI_ATOLL (zoneID: 55, starting id: 5500)
 INSERT INTO `instance_list` VALUES (5500,'golden_salvage',55,54,30,386.000,-12.000,17.000,46,-1,-1,-1,-1);
--- INSERT INTO `instance_list` VALUES (5501,'lamia_no_13',55,54,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
+INSERT INTO `instance_list` VALUES (5501,'lamia_no_13',55,54,30,155.000,-7.000,-175.000,47,-1,-1,-1,-1);
 INSERT INTO `instance_list` VALUES (5502,'extermination',55,54,30,298.099,-3.943,135.234,149,-1,-1,-1,-1);
 -- INSERT INTO `instance_list` VALUES (5503,'demolition_duty',55,54,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
 -- INSERT INTO `instance_list` VALUES (5504,'searat_salvation',55,54,15,0.000,0.000,0.000,0,-1,-1,-1,-1);
@@ -64,8 +64,8 @@ INSERT INTO `instance_list` VALUES (5502,'extermination',55,54,30,298.099,-3.943
 
 -- PERIQIA (zoneID: 56, starting id: 5600)
 INSERT INTO `instance_list` VALUES (5600,'shades_of_vengeance',56,79,30,127,-15,-303,0,-1,-1,-1,-1);
--- INSERT INTO `instance_list` VALUES (5601,'seagull_grounded',56,79,30,-350,-15.245,380,0,-1,-1,-1,-1);
-INSERT INTO `instance_list` VALUES (5602,'requiem',56,79,30,-458.409,-10.000,-320.966,90,-1,-1,-1,-1);
+INSERT INTO `instance_list` VALUES (5601,'seagull_grounded',56,79,30,-350.000,-15.245,380.000,0,-1,-1,-1,-1);
+INSERT INTO `instance_list` VALUES (5602,'requiem',56,79,30,-470.000,-9.964,-325.000,190,-1,-1,-1,-1);
 -- INSERT INTO `instance_list` VALUES (5603,'saving_private_ryaaf',56,79,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
 -- INSERT INTO `instance_list` VALUES (5604,'shooting_down_the_baron',56,79,15,0.000,0.000,0.000,0,-1,-1,-1,-1);
 -- INSERT INTO `instance_list` VALUES (5605,'building_bridges',56,79,15,0.000,0.000,0.000,0,-1,-1,-1,-1);
@@ -84,7 +84,7 @@ INSERT INTO `instance_list` VALUES (6001,'against_all_odds',60,54,30,-9.000,-22.
 
 -- LEBROS_CAVERN (zoneID: 63, starting id: 6300)
 INSERT INTO `instance_list` VALUES (6300,'excavation_duty',63,61,30,124.999,-39.309,19.999,0,-1,-1,-1,-1);
--- INSERT INTO `instance_list` VALUES (6301,'lebros_supplies',63,61,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
+INSERT INTO `instance_list` VALUES (6301,'lebros_supplies',63,61,30,-333.000,-9.921,-259.999,270,-1,-1,-1,-1);
 INSERT INTO `instance_list` VALUES (6302,'troll_fugitives',63,61,30,-459.912,-9.860,342.319,0,-1,-1,-1,-1);
 -- INSERT INTO `instance_list` VALUES (6303,'evade_and_escape',63,61,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
 -- INSERT INTO `instance_list` VALUES (6304,'siegemaster_assassination',63,61,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
@@ -95,7 +95,7 @@ INSERT INTO `instance_list` VALUES (6302,'troll_fugitives',63,61,30,-459.912,-9.
 -- INSERT INTO `instance_list` VALUES (6309,'better_than_one',63,61,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
 
 -- MAMOOL_JA_TRAINING_GROUNDS (zoneID: 66, starting id: 6600)
--- INSERT INTO `instance_list` VALUES (6600,'imperial_agent_rescue',66,52,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
+INSERT INTO `instance_list` VALUES (6600,'imperial_agent_rescue',66,52,30,-20.000,2.276,-405.000,63,-1,-1,-1,-1);
 INSERT INTO `instance_list` VALUES (6601,'preemptive_strike',66,52,30,-60.35,-5.0,27.67,46,-1,-1,-1,-1);
 -- INSERT INTO `instance_list` VALUES (6602,'sagelord_elimination',66,52,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
 -- INSERT INTO `instance_list` VALUES (6603,'breaking_morale',66,52,15,0.000,0.000,0.000,0,-1,-1,-1,-1);
@@ -108,7 +108,7 @@ INSERT INTO `instance_list` VALUES (6601,'preemptive_strike',66,52,30,-60.35,-5.
 
 -- LEUJAOAM_SANCTUM (zoneID: 69, starting id: 6900)
 INSERT INTO `instance_list` VALUES (6900,'leujaoam_cleansing',69,79,30,280.000,-7.500,35.000,195,-1,-1,-1,-1);
--- INSERT INTO `instance_list` VALUES (6901,'orichalcum_survey',69,79,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
+INSERT INTO `instance_list` VALUES (6901,'orichalcum_survey',69,79,30,-432.000,-27.627,169.000,131,-1,-1,-1,-1);
 -- INSERT INTO `instance_list` VALUES (6902,'escort_professor_chanoix',69,79,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
 -- INSERT INTO `instance_list` VALUES (6903,'shanarha_grass_conservation',69,79,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
 -- INSERT INTO `instance_list` VALUES (6904,'counting_sheep',69,79,15,0.000,0.000,0.000,0,-1,-1,-1,-1);
@@ -127,11 +127,11 @@ INSERT INTO `instance_list` VALUES (7400,'arrapago_remnants',74,72,100,340.000,0
 -- INSERT INTO `instance_list` VALUES (7401,'arrapago_remnants_ii',74,72,100,340.000,0.000,-246.000,63,-1,-1,-1,-1);
 
 -- BHAFLAU_REMNANTS (zoneID: 75, starting id: 7500)
--- INSERT INTO `instance_list` VALUES (7500,'bhaflau_remnants',75,72,100,0.000,0.000,0.000,0,-1,-1,-1,-1);
+INSERT INTO `instance_list` VALUES (7500,'bhaflau_remnants',75,72,100,340.000,19.000,-552.000,191,-1,-1,-1,-1);
 -- INSERT INTO `instance_list` VALUES (7501,'bhaflau_remnants_ii',75,72,100,0.000,0.000,0.000,0,-1,-1,-1,-1);
 
 -- SILVER_SEA_REMNANTS (zoneID: 76, starting id: 7600)
--- INSERT INTO `instance_list` VALUES (7600,'silver_sea_remnants',76,72,100,340.000,12.000,-165.500,63,-1,-1,-1,-1);
+INSERT INTO `instance_list` VALUES (7600,'silver_sea_remnants',76,72,100,340.000,12.000,-165.500,63,-1,-1,-1,-1);
 -- INSERT INTO `instance_list` VALUES (7601,'silver_sea_remnants_ii',76,72,100,340.000,12.000,-165.500,63,-1,-1,-1,-1);
 
 -- NYZUL_ISLE (zoneID: 77, starting id: 7700)
@@ -139,7 +139,7 @@ INSERT INTO `instance_list` VALUES (7700,'path_of_darkness',77,72,30,500,0,-572,
 INSERT INTO `instance_list` VALUES (7701,'nashmeiras_plea',77,72,45,-444,-4,420,127,143,143,143,143);
 -- INSERT INTO `instance_list` VALUES (7702,'waking_the_colossus',77,72,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
 -- INSERT INTO `instance_list` VALUES (7703,'forging_a_new_myth',77,72,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
--- INSERT INTO `instance_list` VALUES (7704,'nyzul_isle_investigation',77,72,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
+INSERT INTO `instance_list` VALUES (7704,'nyzul_isle_investigation',77,72,30,-20.000,-4.000,-20.000,196,-1,-1,-1,-1);
 -- INSERT INTO `instance_list` VALUES (7705,'nyzul_isle_uncharted_survey',77,72,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
 
 -- EVERBLOOM_HOLLOW (zoneID: 86, starting id: 8600)

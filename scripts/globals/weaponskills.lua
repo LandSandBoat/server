@@ -395,6 +395,17 @@ local function modifyMeleeHitDamage(attacker, target, attackTbl, wsParams, rawDa
     return adjustedDamage
 end
 
+local modParameters =
+{
+    [xi.mod.WS_STR_BONUS] = 'str_wsc',
+    [xi.mod.WS_DEX_BONUS] = 'dex_wsc',
+    [xi.mod.WS_VIT_BONUS] = 'vit_wsc',
+    [xi.mod.WS_AGI_BONUS] = 'agi_wsc',
+    [xi.mod.WS_INT_BONUS] = 'int_wsc',
+    [xi.mod.WS_MND_BONUS] = 'mnd_wsc',
+    [xi.mod.WS_CHR_BONUS] = 'chr_wsc',
+}
+
 -- Calculates the raw damage for a weaponskill, used by both doPhysicalWeaponskill and doRangedWeaponskill.
 -- Behavior of damage calculations can vary based on the passed in calcParams, which are determined by the calling function
 -- depending on the type of weaponskill being done, and any special cases for that weaponskill
@@ -425,32 +436,10 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
     -- https://www.bg-wiki.com/bg/Utu_Grip
     -- https://www.bluegartr.com/threads/108199-Random-Facts-Thread-Other?p=6826618&viewfull=1#post6826618
 
-    if attacker:getMod(xi.mod.WS_STR_BONUS) > 0 then
-        wsParams.str_wsc = wsParams.str_wsc + (attacker:getMod(xi.mod.WS_STR_BONUS) / 100)
-    end
-
-    if attacker:getMod(xi.mod.WS_DEX_BONUS) > 0 then
-        wsParams.dex_wsc = wsParams.dex_wsc + (attacker:getMod(xi.mod.WS_DEX_BONUS) / 100)
-    end
-
-    if attacker:getMod(xi.mod.WS_VIT_BONUS) > 0 then
-        wsParams.vit_wsc = wsParams.vit_wsc + (attacker:getMod(xi.mod.WS_VIT_BONUS) / 100)
-    end
-
-    if attacker:getMod(xi.mod.WS_AGI_BONUS) > 0 then
-        wsParams.agi_wsc = wsParams.agi_wsc + (attacker:getMod(xi.mod.WS_AGI_BONUS) / 100)
-    end
-
-    if attacker:getMod(xi.mod.WS_INT_BONUS) > 0 then
-        wsParams.int_wsc = wsParams.int_wsc + (attacker:getMod(xi.mod.WS_INT_BONUS) / 100)
-    end
-
-    if attacker:getMod(xi.mod.WS_MND_BONUS) > 0 then
-        wsParams.mnd_wsc = wsParams.mnd_wsc + (attacker:getMod(xi.mod.WS_MND_BONUS) / 100)
-    end
-
-    if attacker:getMod(xi.mod.WS_CHR_BONUS) > 0 then
-        wsParams.chr_wsc = wsParams.chr_wsc + (attacker:getMod(xi.mod.WS_CHR_BONUS) / 100)
+    for modId, parameterName in pairs(modParameters) do
+        if attacker:getMod(modId) > 0 then
+            wsParams[parameterName] = wsParams[parameterName] + (attacker:getMod(modId) / 100)
+        end
     end
 
     local wsMods = calcParams.fSTR +
@@ -470,19 +459,13 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
         local nativecrit = 0
         critrate = fTP(tp, wsParams.crit100, wsParams.crit200, wsParams.crit300)
 
-        if calcParams.flourishEffect then
-            if calcParams.flourishEffect:getPower() > 1 then
-                critrate = critrate + (10 + calcParams.flourishEffect:getSubPower()/2)/100
-            end
+        if calcParams.flourishEffect and calcParams.flourishEffect:getPower() > 1 then
+            critrate = critrate + (10 + calcParams.flourishEffect:getSubPower()/2)/100
         end
 
         -- Add on native crit hit rate (guesstimated, it actually follows an exponential curve)
         nativecrit = (attacker:getStat(xi.mod.DEX) - target:getStat(xi.mod.AGI)) * 0.005 -- assumes +0.5% crit rate per 1 dDEX
-        if nativecrit > 0.2 then -- caps only apply to base rate, not merits and mods
-            nativecrit = 0.2
-        elseif nativecrit < 0.05 then
-            nativecrit = 0.05
-        end
+        nativecrit = utils.clamp(nativecrit, 0.05, 0.2) -- caps only apply to base rate, not merits and mods
 
         local fencerBonusVal = calcParams.fencerBonus or 0
         nativecrit = nativecrit + attacker:getMod(xi.mod.CRITHITRATE) / 100 + attacker:getMerit(xi.merit.CRIT_HIT_RATE) / 100
@@ -589,7 +572,7 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
     -- Factor in "all hits" bonus damage mods
     local bonusdmg = attacker:getMod(xi.mod.ALL_WSDMG_ALL_HITS) -- For any WS
 
-    if attacker:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE + wsID) > 0 then -- For specific WS
+    if attacker:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE + wsID) > 0 and not attacker:isPet() then -- For specific WS
         bonusdmg = bonusdmg + attacker:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE + wsID)
     end
 
@@ -772,32 +755,10 @@ function doMagicWeaponskill(attacker, target, wsID, wsParams, tp, action, primar
         -- https://www.bg-wiki.com/bg/Utu_Grip
         -- https://www.bluegartr.com/threads/108199-Random-Facts-Thread-Other?p=6826618&viewfull=1#post6826618
 
-        if attacker:getMod(xi.mod.WS_STR_BONUS) > 0 then
-            wsParams.str_wsc = wsParams.str_wsc + (attacker:getMod(xi.mod.WS_STR_BONUS) / 100)
-        end
-
-        if attacker:getMod(xi.mod.WS_DEX_BONUS) > 0 then
-            wsParams.dex_wsc = wsParams.dex_wsc + (attacker:getMod(xi.mod.WS_DEX_BONUS) / 100)
-        end
-
-        if attacker:getMod(xi.mod.WS_VIT_BONUS) > 0 then
-            wsParams.vit_wsc = wsParams.vit_wsc + (attacker:getMod(xi.mod.WS_VIT_BONUS) / 100)
-        end
-
-        if attacker:getMod(xi.mod.WS_AGI_BONUS) > 0 then
-            wsParams.agi_wsc = wsParams.agi_wsc + (attacker:getMod(xi.mod.WS_AGI_BONUS) / 100)
-        end
-
-        if attacker:getMod(xi.mod.WS_INT_BONUS) > 0 then
-            wsParams.int_wsc = wsParams.int_wsc + (attacker:getMod(xi.mod.WS_INT_BONUS) / 100)
-        end
-
-        if attacker:getMod(xi.mod.WS_MND_BONUS) > 0 then
-            wsParams.mnd_wsc = wsParams.mnd_wsc + (attacker:getMod(xi.mod.WS_MND_BONUS) / 100)
-        end
-
-        if attacker:getMod(xi.mod.WS_CHR_BONUS) > 0 then
-            wsParams.chr_wsc = wsParams.chr_wsc + (attacker:getMod(xi.mod.WS_CHR_BONUS) / 100)
+        for modId, parameterName in pairs(modParameters) do
+            if attacker:getMod(modId) > 0 then
+                wsParams[parameterName] = wsParams[parameterName] + (attacker:getMod(modId) / 100)
+            end
         end
 
         dmg = attacker:getMainLvl() + 2 + (attacker:getStat(xi.mod.STR) * wsParams.str_wsc + attacker:getStat(xi.mod.DEX) * wsParams.dex_wsc +
@@ -812,7 +773,7 @@ function doMagicWeaponskill(attacker, target, wsID, wsParams, tp, action, primar
 
         -- Factor in "all hits" bonus damage mods
         local bonusdmg = attacker:getMod(xi.mod.ALL_WSDMG_ALL_HITS) -- For any WS
-        if attacker:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE + wsID) > 0 then -- For specific WS
+        if attacker:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE + wsID) > 0 and not attacker:isPet() then -- For specific WS
             bonusdmg = bonusdmg + attacker:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE + wsID)
         end
 

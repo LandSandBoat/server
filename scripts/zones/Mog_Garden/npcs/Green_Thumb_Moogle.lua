@@ -11,7 +11,7 @@ local entity = {}
 local BRONZE_PIECE_ITEMID = 2184
 
 entity.onTrade = function(player, npc, trade)
-    moogleTrade(player, npc, trade)
+    xi.moghouse.moogleTrade(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
@@ -24,7 +24,7 @@ end
 entity.onEventFinish = function(player, csid, option)
     if (csid == 1016 and option == 0xFFF00FF) then -- Show the Mog House menu..
         -- Print the expire time for mog locker if exists..
-        local lockerLease = getMogLockerExpiryTimestamp(player)
+        local lockerLease = xi.moghouse.getMogLockerExpiryTimestamp(player)
         if (lockerLease ~= nil) then
             if (lockerLease == -1) then -- Lease expired..
                 player:messageSpecial(ID.text.MOGLOCKER_MESSAGE_OFFSET + 2, BRONZE_PIECE_ITEMID)

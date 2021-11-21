@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Upper Jeuno
 --  NPC: Shama Pikholo
--- Working 100%
 -----------------------------------
 local entity = {}
 

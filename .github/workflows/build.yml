@@ -94,6 +94,29 @@ jobs:
         run: |
           cmake --build .
 
+  MacOS_BigSur_11:
+    # https://github.com/actions/virtual-environments/blob/main/images/macos/macos-11-Readme.md
+    runs-on: macos-11
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+      - name: Install Dependencies (Brew)
+        run: |
+          brew install mariadb zeromq zmq
+      - name: Install Dependencies (LuaJIT)
+        run: |
+          git clone https://github.com/LuaJIT/LuaJIT.git
+          cd LuaJIT
+          sudo make install MACOSX_DEPLOYMENT_TARGET=$(sw_vers -productVersion) -j $(sysctl -n hw.physicalcpu)
+          sudo ln -sf luajit-2.1.0-beta3 /usr/local/bin/luajit
+      - name: Configure CMake
+        run: |
+          cmake .
+      - name: Build
+        run: |
+          make -j $(sysctl -n hw.physicalcpu)
+
   Style_Checks:
     runs-on: ubuntu-20.04
     steps:
@@ -288,7 +311,7 @@ jobs:
           python3 << EOF
           import time
           from headlessxi import HXIClient
-          hxi_client = HXIClient('admin', 'admin', 'localhost', 1, '30210904_1')
+          hxi_client = HXIClient('admin', 'admin', 'localhost', 1, '30211005_0')
           hxi_client.login()
           print('Sleeping 30s')
           time.sleep(30)

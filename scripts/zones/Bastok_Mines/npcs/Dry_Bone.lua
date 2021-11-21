@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Bastok Mines
 --  NPC: Dry Bone
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

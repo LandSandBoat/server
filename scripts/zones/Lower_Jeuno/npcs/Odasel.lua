@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Lower Jeuno
 --  NPC: Odasel
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

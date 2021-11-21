@@ -16,7 +16,7 @@
 -- Erratic Flutter does overwrite Hojo: Ni, Hojo: Ichi, and Slow.
 -- Player Blue magic version is wind element instead of fire.
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
@@ -28,10 +28,10 @@ end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local dmgmod = 1
-    local info = MobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 1.5, xi.magic.ele.FIRE, dmgmod, TP_NO_EFFECT)
-    local dmg = MobFinalAdjustments(info.dmg , mob, skill, target, xi.attackType.MAGICAL, xi.damageType.FIRE, MOBPARAM_IGNORE_SHADOWS)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 1.5, xi.magic.ele.FIRE, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
+    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg , mob, skill, target, xi.attackType.MAGICAL, xi.damageType.FIRE, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
 
-    MobBuffMove(mob, xi.effect.HASTE, 2998, 0, 300) -- There is no message for the self buff aspect, only dmg.
+    xi.mobskills.mobBuffMove(mob, xi.effect.HASTE, 2998, 0, 300) -- There is no message for the self buff aspect, only dmg.
 
     target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.FIRE)
     return dmg

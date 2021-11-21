@@ -58,7 +58,7 @@ struct profile_t
     uint16     title;      // звание
     uint16     fame[15];   // известность
     uint8      rank[3];    // рагн в трех государствах
-    uint32     rankpoints; // очки ранга в трех государствах
+    uint16     rankpoints; // очки ранга в трех государствах
     location_t home_point; // точка возрождения персонажа
     uint8      campaign_allegiance;
     uint8      unity_leader;

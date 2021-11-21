@@ -504,8 +504,8 @@ namespace battleutils
                                            WEATHER_THUNDER, WEATHER_RAIN, WEATHER_AURORAS, WEATHER_GLOOM };
         WEATHER strongWeatherDouble[8] = { WEATHER_HEAT_WAVE, WEATHER_BLIZZARDS, WEATHER_GALES, WEATHER_SAND_STORM,
                                            WEATHER_THUNDERSTORMS, WEATHER_SQUALL, WEATHER_STELLAR_GLARE, WEATHER_DARKNESS };
-        WEATHER weakWeatherSingle[8]   = { WEATHER_HOT_SPELL, WEATHER_SNOW, WEATHER_WIND, WEATHER_DUST_STORM,
-                                         WEATHER_THUNDER, WEATHER_RAIN, WEATHER_GLOOM, WEATHER_AURORAS };
+        WEATHER weakWeatherSingle[8]   = { WEATHER_RAIN, WEATHER_HOT_SPELL, WEATHER_SNOW, WEATHER_WIND,
+                                         WEATHER_DUST_STORM, WEATHER_THUNDER, WEATHER_GLOOM, WEATHER_AURORAS };
         WEATHER weakWeatherDouble[8]   = { WEATHER_SQUALL, WEATHER_HEAT_WAVE, WEATHER_BLIZZARDS, WEATHER_GALES,
                                          WEATHER_SAND_STORM, WEATHER_THUNDERSTORMS, WEATHER_DARKNESS, WEATHER_STELLAR_GLARE };
         uint32  obi[8]                 = { 15435, 15436, 15437, 15438, 15439, 15440, 15441, 15442 };
@@ -4042,7 +4042,7 @@ namespace battleutils
             {
                 for (auto& a : taUser->PParty->m_PAlliance->partyList)
                 {
-                    for (uint8 i = 0; i < a->members.size(); ++i)
+                    for (std::size_t i = 0; i < a->members.size(); ++i)
                     {
                         CBattleEntity* member = a->members.at(i);
                         if (checkPosition(member))
@@ -4313,7 +4313,7 @@ namespace battleutils
         {
             shotCount += 6;
         }
-        else if (lvl >= 99)
+        else
         {
             shotCount += 7;
         }
@@ -4382,7 +4382,7 @@ namespace battleutils
         bool   hitTarget      = false;
 
         // Loop number of hits
-        for (uint8 i = 0; i < (numattacksLeftHand + numattacksRightHand); ++i)
+        for (uint16 i = 0; i < (numattacksLeftHand + numattacksRightHand); ++i)
         {
             if (i != 0)
             {
@@ -5805,7 +5805,7 @@ namespace battleutils
             {
                 bool add = true;
 
-                for (uint8 j = 0; j < PEntity->TraitList.size(); ++j)
+                for (std::size_t j = 0; j < PEntity->TraitList.size(); ++j)
                 {
                     CTrait* PExistingTrait = PEntity->TraitList.at(j);
 

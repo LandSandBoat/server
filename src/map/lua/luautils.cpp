@@ -87,11 +87,11 @@
 #include "../vana_time.h"
 #include "../weapon_skill.h"
 
-// TODO: Implement FileWatch backend for OSX
 #ifndef __APPLE__
-// TODO: Fix path
-#include "../../ext/filewatch/filewatch/FileWatch.hpp"
+#include "filewatch/FileWatch.hpp"
 std::unique_ptr<filewatch::FileWatch<std::string>> watch = nullptr;
+#else
+// TODO: Implement FileWatch backend for OSX
 #endif // __APPLE__
 
 namespace luautils
@@ -414,7 +414,7 @@ namespace luautils
         {
             case sol::type::none:
                 [[fallthrough]];
-            case sol::type::nil:
+            case sol::type::lua_nil:
             {
                 return "nil";
             }
@@ -1255,16 +1255,19 @@ namespace luautils
                 {
                     return true;
                 }
+                break;
             case 1: // Waning (decending)
-                if (phase <= 10 && phase >= 0)
+                if (phase <= 10)
                 {
                     return true;
                 }
+                break;
             case 2: // Waxing (increasing)
-                if (phase >= 0 && phase <= 5)
+                if (phase <= 5)
                 {
                     return true;
                 }
+                break;
         }
 
         return false;
@@ -3352,6 +3355,38 @@ namespace luautils
         return std::make_tuple(dmg, tpHitsLanded, extraHitsLanded);
     }
 
+    uint16 OnMobWeaponSkillPrepare(CBattleEntity* PMob, CBattleEntity* PTarget)
+    {
+        TracyZoneScoped;
+
+        if (PMob == nullptr || PTarget == nullptr)
+        {
+            return 0;
+        }
+
+        sol::function onMobWeaponSkillPrepare = getEntityCachedFunction(PMob, "onMobWeaponSkillPrepare");
+        if (!onMobWeaponSkillPrepare.valid())
+        {
+            return 0;
+        }
+
+        auto result = onMobWeaponSkillPrepare(CLuaBaseEntity(PMob), CLuaBaseEntity(PTarget));
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("luautils::onMobWeaponSkillPrepare: %s", err.what());
+            return 0;
+        }
+
+        uint16 retVal = result.get_type(0) == sol::type::number ? result.get<uint16>(0) : 0;
+        if (retVal > 0)
+        {
+            return static_cast<uint16>(retVal);
+        }
+
+        return 0;
+    }
+
     int32 OnMobWeaponSkill(CBaseEntity* PTarget, CBaseEntity* PMob, CMobSkill* PMobSkill, action_t* action)
     {
         TracyZoneScoped;
@@ -3415,6 +3450,37 @@ namespace luautils
         }
 
         return result.get_type(0) == sol::type::number ? result.get<int32>(0) : -5;
+    }
+
+    CBattleEntity* OnMobSkillTarget(CBattleEntity* PTarget, CBaseEntity* PMob, CMobSkill* PMobSkill)
+    {
+        TracyZoneScoped;
+
+        auto zone = (const char*)PMob->loc.zone->GetName();
+        auto name = (const char*)PMob->GetName();
+
+        auto onMobSkillTarget = lua["xi"]["zones"][zone]["mobs"][name]["onMobSkillTarget"];
+        if (!onMobSkillTarget.valid())
+        {
+            return PTarget;
+        }
+
+        auto result = onMobSkillTarget(CLuaBaseEntity(static_cast<CBaseEntity*>(PTarget)), CLuaBaseEntity(PMob), CLuaMobSkill(PMobSkill));
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("luautils::onMobSkillTarget: %s", err.what());
+            return PTarget;
+        }
+
+        if (result.get_type(0) == sol::type::userdata || result.get_type(0) == sol::type::lua_nil)
+        {
+            CLuaBaseEntity* PEntity = result.get<CLuaBaseEntity*>(0);
+
+            return (PEntity && PEntity->GetBaseEntity()) ? static_cast<CBattleEntity*>(PEntity->GetBaseEntity()) : PTarget;
+        }
+
+        return PTarget;
     }
 
     int32 OnAutomatonAbilityCheck(CBaseEntity* PTarget, CAutomatonEntity* PAutomaton, CMobSkill* PMobSkill)
@@ -3652,7 +3718,7 @@ namespace luautils
         if (!cachedInstanceScript.valid())
         {
             ShowError("luautils::GetCachedInstanceScript: Could not retrieve cache entry for %d", instanceId);
-            return sol::nil;
+            return sol::lua_nil;
         }
 
         return cachedInstanceScript;
@@ -4556,6 +4622,26 @@ namespace luautils
         {
             sol::error err = result;
             ShowError("luautils::onPlayerEmote: %s", err.what());
+            return;
+        }
+    }
+
+    void OnPlayerVolunteer(CCharEntity* PChar, std::string text)
+    {
+        TracyZoneScoped;
+
+        auto onPlayerVolunteer = lua["xi"]["player"]["onPlayerVolunteer"];
+        if (!onPlayerVolunteer.valid())
+        {
+            ShowWarning("luautils::onPlayerVolunteer");
+            return;
+        }
+
+        auto result = onPlayerVolunteer(CLuaBaseEntity(PChar), text);
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("luautils::onPlayerVolunteer: %s", err.what());
             return;
         }
     }

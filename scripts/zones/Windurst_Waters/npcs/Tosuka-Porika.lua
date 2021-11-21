@@ -18,40 +18,9 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local currentMission = player:getCurrentMission(WINDURST)
-    local missionStatus = player:getMissionStatus(player:getNation())
-
-    -- The Jester Who'd Be King (Windurst 8-2)
-    if
-        currentMission == xi.mission.id.windurst.THE_JESTER_WHO_D_BE_KING and
-        player:getMissionStatus(player:getNation()) == 1 and not
-        player:hasKeyItem(xi.ki.OPTISTERY_RING)
-    then
-        player:startEvent(801, 0, xi.ki.OPTISTERY_RING)
-
     -- The Road Forks (CoP 3-3)
-    elseif player:getCurrentMission(COP) == xi.mission.id.cop.THE_ROAD_FORKS and player:getCharVar("MEMORIES_OF_A_MAIDEN_Status") == 10 then
+    if player:getCurrentMission(COP) == xi.mission.id.cop.THE_ROAD_FORKS and player:getCharVar("MEMORIES_OF_A_MAIDEN_Status") == 10 then
         player:startEvent(875)
-
-    -- The Sixth Ministry (Windurst 7-1)
-    elseif currentMission == xi.mission.id.windurst.THE_SIXTH_MINISTRY then
-        if missionStatus == 0 then
-            player:startEvent(715, 0, xi.ki.OPTISTERY_RING)
-        elseif missionStatus == 1 then
-            player:startEvent(716, 0, xi.ki.OPTISTERY_RING)
-        elseif missionStatus == 2 then
-            player:startEvent(724)
-        end
-
-    -- Lost for Words (Windurst 2-1)
-    elseif currentMission == xi.mission.id.windurst.LOST_FOR_WORDS then
-        if missionStatus == 0 then
-            player:startEvent(160) -- Beginning CS for Mission 2-1
-        elseif missionStatus > 0 and missionStatus < 6 then
-            player:startEvent(161) -- Additional dialogue for 2-1
-        elseif (missionStatus == 6) then
-            player:startEvent(168) -- Finish Mission 2-1
-        end
 
     -- Hat in Hand
     elseif player:hasKeyItem(xi.ki.NEW_MODEL_HAT) and not utils.mask.getBit(player:getCharVar("QuestHatInHand_var"), 5) then
@@ -59,8 +28,6 @@ entity.onTrigger = function(player, npc)
         player:startEvent(55)
 
     -- Standard dialogues
-    elseif player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.MOON_READING) then
-        player:startEvent(380) -- "Thanks to some adventurer somewhere, I was able to awaken from an inescapable nightmare."
     elseif player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_SIXTH_MINISTRY) then
         player:startEvent(379) -- "Hey, you're the adventurer from the other day!"
     elseif player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.LOST_FOR_WORDS) then
@@ -81,24 +48,6 @@ entity.onEventFinish = function(player, csid, option)
     -- The Road Forks (CoP 3-3)
     if csid == 875 then
         player:setCharVar("MEMORIES_OF_A_MAIDEN_Status", 11)
-
-    -- The Jester Who'd Be King (Windurst 8-2)
-    elseif csid == 801 and npcUtil.giveKeyItem(player, xi.ki.OPTISTERY_RING) then
-        if player:hasKeyItem(xi.ki.RHINOSTERY_RING) and player:hasKeyItem(xi.ki.AURASTERY_RING) then
-            player:setMissionStatus(player:getNation(), 2)
-        end
-
-    -- The Sixth Ministry (Windurst 7-1)
-    elseif csid == 715 and npcUtil.giveKeyItem(player, xi.ki.OPTISTERY_RING) then
-        player:setMissionStatus(player:getNation(), 1)
-    elseif csid == 724 then
-        finishMissionTimeline(player, 3, csid, option)
-
-    -- Lost for Words (Windurst 2-1)
-    elseif csid == 160 then
-        player:setMissionStatus(player:getNation(), 1)
-    elseif csid == 168 then
-        finishMissionTimeline(player, 1, csid, option)
 
     -- Hat in Hand
     elseif csid == 55 then  -- Show Off Hat

@@ -1,4 +1,4 @@
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+﻿/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
@@ -27,7 +27,7 @@ CREATE TABLE `item_basic` (
   `NoSale` tinyint(1) unsigned NOT NULL DEFAULT 0,
   `BaseSell` int(10) unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (`itemid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=34 PACK_KEYS=1 CHECKSUM=1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=34 PACK_KEYS=1 CHECKSUM=1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -4048,7 +4048,7 @@ INSERT INTO `item_basic` VALUES (4291,0,'sandfish','sandfish',12,1548,51,0,26);
 INSERT INTO `item_basic` VALUES (4292,0,'loaf_of_pain_de_neige','pain_de_neige',12,1548,56,0,56);
 INSERT INTO `item_basic` VALUES (4293,0,'serving_of_monastic_saute','monastic_saute',1,1580,54,0,533);  -- https://www.bg-wiki.com/bg/Monastic_Saute
 INSERT INTO `item_basic` VALUES (4294,0,'serving_of_medicinal_quus','medicinal_quus',1,1580,53,0,70);
-INSERT INTO `item_basic` VALUES (4295,0,'plate_of_royal_sautee','royal_sautee',1,1580,52,0,70);         -- https://www.bg-wiki.com/bg/Royal_Saute
+INSERT INTO `item_basic` VALUES (4295,0,'plate_of_royal_saute','royal_saute',1,1580,52,0,70);         -- https://www.bg-wiki.com/bg/Royal_Saute
 INSERT INTO `item_basic` VALUES (4296,0,'serving_of_green_curry','green_curry',1,1580,55,0,270);
 INSERT INTO `item_basic` VALUES (4297,0,'serving_of_black_curry','black_curry',1,1580,55,0,748);
 INSERT INTO `item_basic` VALUES (4298,0,'serving_of_red_curry','red_curry',1,1580,55,0,831);
@@ -5622,7 +5622,7 @@ INSERT INTO `item_basic` VALUES (5941,0,'bar_of_campfire_chocolate','campfire_ch
 INSERT INTO `item_basic` VALUES (5942,0,'piece_of_cascade_candy','cascade_candy',12,1548,57,0,0);
 INSERT INTO `item_basic` VALUES (5943,0,'strip_of_smoked_mackerel','smoked_mackerel',12,1548,53,0,0);
 INSERT INTO `item_basic` VALUES (5944,0,'bottle_of_frontier_soda','frontier_soda',1,1548,58,0,0);
-INSERT INTO `item_basic` VALUES (5945,0,'pinch_of_prize_powder','prize_powder',99,1548,33,0,0);
+INSERT INTO `item_basic` VALUES (5945,0,'pinch_of_prize_powder','prize_powder',99,1548,33,0,100);
 INSERT INTO `item_basic` VALUES (5946,0,'frayed_sack_of_deviousness','frayed_sack_(d)',99,13916,0,1,0);
 INSERT INTO `item_basic` VALUES (5947,0,'frayed_sack_of_liminality','frayed_sack_(l)',99,13916,0,1,0);
 INSERT INTO `item_basic` VALUES (5948,0,'black_prawn','black_prawn',12,1548,51,1,0);
@@ -19227,7 +19227,7 @@ INSERT INTO `item_basic` VALUES (25572,0,'ayanmo_zucchetto_+2','aya._zucchetto_+
 INSERT INTO `item_basic` VALUES (25573,0,'taliah_turban_+2','taliah_turban_+2',1,63552,0,0,0);
 INSERT INTO `item_basic` VALUES (25574,0,'sulevias_mask_+2','sulevias_mask_+2',1,63552,0,0,0);
 INSERT INTO `item_basic` VALUES (25575,0,'meghanada_visor_+2','meghanada_visor_+2',1,63552,0,0,0);
-INSERT INTO `item_basic` VALUES (25576,0,'hizamaru_somen_+2','hiza._somen　+2',1,63552,0,0,0);
+INSERT INTO `item_basic` VALUES (25576,0,'hizamaru_somen_+2','hiza._somen_+2',1,63552,0,0,0);
 INSERT INTO `item_basic` VALUES (25577,0,'inyanga_tiara_+2','inyanga_tiara_+2',1,63552,0,0,0);
 INSERT INTO `item_basic` VALUES (25578,0,'jhakri_coronal_+2','jhakri_coronal_+2',1,63552,0,0,0);
 INSERT INTO `item_basic` VALUES (25579,0,'flamma_zucchetto','flamma_zucchetto',1,63552,0,1,0);

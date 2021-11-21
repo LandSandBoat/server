@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Lower Jeuno
 --  NPC: Omer
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

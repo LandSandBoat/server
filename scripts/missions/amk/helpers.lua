@@ -44,7 +44,23 @@ xi.amk.helpers.helmTrade = function(player, helmType, broke)
     end
 end
 
--- AMK06 and AMK07 - Select/lookup the digging zone
+local digZoneIds =
+{
+    xi.zone.VALKURM_DUNES,
+    xi.zone.JUGNER_FOREST,
+    xi.zone.KONSCHTAT_HIGHLANDS,
+    xi.zone.PASHHOW_MARSHLANDS,
+    xi.zone.TAHRONGI_CANYON,
+    xi.zone.BUBURIMU_PENINSULA,
+    xi.zone.MERIPHATAUD_MOUNTAINS,
+    xi.zone.THE_SANCTUARY_OF_ZITAH,
+    xi.zone.YUHTUNGA_JUNGLE,
+    xi.zone.YHOATOR_JUNGLE,
+    xi.zone.WESTERN_ALTEPA_DESERT,
+    xi.zone.EASTERN_ALTEPA_DESERT,
+}
+
+-- AMK07 - Select/lookup the digging zone
 xi.amk.helpers.getDiggingZone = function(player)
     local diggingZone = player:getCharVar('AMK6_DIGGING_ZONE')
     if diggingZone == 0 then
@@ -142,14 +158,18 @@ xi.amk.helpers.tryRandomlyPlaceDiggingLocation = function(player)
 end
 
 xi.amk.helpers.chocoboDig = function(player, zoneID, text)
-    if player:hasKeyItem(xi.ki.MOLDY_WORM_EATEN_CHEST) then
+    local diggingZoneOffset = xi.amk.helpers.getDiggingZone(player)
+
+    if
+        player:hasKeyItem(xi.ki.MOLDY_WORM_EATEN_CHEST) or
+        player:getZoneID() ~= digZoneIds[diggingZoneOffset]
+    then
         return false
     end
 
     local playerPos = player:getPos()
 
     -- Get target position from the digSites table using AMK_DIG_SITE_INDEX
-    local diggingZoneOffset = xi.amk.helpers.getDiggingZone(player)
     local diggingSiteTable  = xi.amk.helpers.digSites[diggingZoneOffset]
     local digSiteIndex      = player:getLocalVar('AMK_DIG_SITE_INDEX')
 

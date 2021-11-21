@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Upper Jeuno
 --  NPC: Palarillont
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

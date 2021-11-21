@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Port Jeuno
 --  NPC: Falax
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

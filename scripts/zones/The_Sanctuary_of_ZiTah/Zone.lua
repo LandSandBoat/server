@@ -1,7 +1,5 @@
 -----------------------------------
---
 -- Zone: The_Sanctuary_of_ZiTah (121)
---
 -----------------------------------
 local ID = require("scripts/zones/The_Sanctuary_of_ZiTah/IDs")
 require("scripts/quests/i_can_hear_a_rainbow")
@@ -36,8 +34,6 @@ zone_object.onZoneIn = function(player, prevZone)
 
     if quests.rainbow.onZoneIn(player) then
         cs = 2
-    elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.VAIN and player:getMissionStatus(player:getNation()) == 1 then
-        cs = 4
     end
 
     -- AMK06/AMK07
@@ -54,12 +50,6 @@ end
 zone_object.onEventUpdate = function(player, csid, option)
     if csid == 2 then
         quests.rainbow.onEventUpdate(player)
-    elseif csid == 4 then
-        if player:getPreviousZone() == xi.zone.THE_BOYAHDA_TREE then
-            player:updateEvent(0, 0, 0, 0, 0, 7)
-        elseif player:getPreviousZone() == xi.zone.MERIPHATAUD_MOUNTAINS then
-            player:updateEvent(0, 0, 0, 0, 0, 1)
-        end
     end
 end
 

@@ -6,7 +6,7 @@
 -- Range: Single gaze
 -- Notes: Nightmare Cockatrice extends this to a fan-shaped AOE.
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
@@ -20,7 +20,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.PARALYSIS
 
 
-    skill:setMsg(MobGazeMove(mob, target, typeEffect, 25, 0, 180))
+    skill:setMsg(xi.mobskills.mobGazeMove(mob, target, typeEffect, 25, 0, 180))
 
     return typeEffect
 end

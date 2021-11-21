@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Upper Jeuno
 --  NPC: Wise Wolf
--- Working 100%
 -----------------------------------
 local entity = {}
 

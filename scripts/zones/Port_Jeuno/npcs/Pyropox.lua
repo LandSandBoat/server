@@ -31,7 +31,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if  player:getCharVar("spokePyropox") == 1 then
+    if player:getCharVar("spokePyropox") == 1 then
         player:startEvent(349)
     else
         player:showText(npc, ID.text.PYROPOX_SHOP_DIALOG)

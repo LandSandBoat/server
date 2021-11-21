@@ -1,6 +1,3 @@
-import array
-import mysql.connector
-
 def migration_name():
     return "Adding timestamp column for chars"
 

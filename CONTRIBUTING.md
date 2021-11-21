@@ -14,13 +14,13 @@
 
 # General Guidelines
 
-* By contributing to Topaz, either through issues or pull requests, you are expected to abide by the rules laid out here in this Contributing Guide.
+* By contributing to LandSandBoat, either through issues or pull requests, you are expected to abide by the rules laid out here in this Contributing Guide.
 * We do not support out-of-date clients or client modification.
 * We do not support piracy of any kind. We encourage you to maintain an active retail subscription and support the game.
 
 # License
 
-* We operate under [GNU General Public License v3.0](https://github.com/DerpyProjectGroup/topaz/blob/topaz/LICENSE). We do not accept contributions that use other more restrictive licenses (such as AGPL3).
+* We operate under [GNU General Public License v3.0](https://github.com/LandSandBoat/server/blob/base/LICENSE). We do not accept contributions that use other more restrictive licenses (such as AGPL3).
 
 # Workflow Guide
 
@@ -32,12 +32,12 @@
 # Issue Report Contributions:
 
 * If an issue involves incorrect NPCs or text, please include your client and server versions (type `/ver` and `!ver` in game)
-* Unimplemented feature requests must be _retail behavior_, and adequetly cover everything about that feature which is missing.
+* Unimplemented feature requests must be _retail behavior_, and adequately cover everything about that feature which is missing.
 * Fill out the templated checkboxes that are preloaded in the issue body. These allow us to diagnose your issue as efficiently as possible, and confirm that you've searched for duplicate issues or recent fixes. 
 
 # Pull Request Contributions:
 
-All contributions must be done through pull requests to the Topaz repository. We don't take fixes from Discord to apply ourselves. If you need help with making a pull request, there is a GitHub guide on how to do so. If you still need help after consulting the guide, you can ask for help in Discord and we will be happy to help you.
+All contributions must be done through pull requests to the LandSandBoat repository. We don't take fixes from Discord to apply ourselves. If you need help with making a pull request, there is a GitHub guide on how to do so. If you still need help after consulting the guide, you can ask for help in Discord and we will be happy to help you.
 
 We prefer submitting early and often, over monolithic and once. If you're implementing a complex feature, please try to submit PRs as you get each smaller functional aspect working (use your best judgment on what counts as a useful PR). This way we can help make sure you're on the right track before you sink a lot of time into implementations we might want done in a different way.
 
@@ -664,6 +664,21 @@ INSERT INTO `weapon_skills` VALUES (1,'combo',0x02020000000200000000000002000000
 ```
 
 The format of the comment isn't massively important, but it is preferred not to use ';' as a seperator in the middle of your comment. This is a little confusing, as it's the statement-terminator in SQL.
+
+#### Placeholder Data in table rows
+In general, it is preferred to comment out the entire row rather than only leaving a comment about still needing to capture it. Examples include item and NPC models. Use your best judgment and if you aren't sure you can always ask.
+* If it "works" there is an unfortunate chance nobody will come back to finish it later, including the original author. Life happens, people come and go, take breaks etc.
+* If its "wrong" we're likely to still get issue reports on it **because** of that partial implementation, more so than if it were completely missing.
+* Experience has shown people don't often read those comments before complaining that "we" got it wrong.
+* By having the partial data but commenting it out, it remains obviously incomplete and the next editor can more easily see what needs to happen.
+
+**Example**
+
+```sql
+-- Missing model, looks like a fish. Just kidding this doesn't exist and is only a made up example
+-- INSERT INTO `item_equipment` VALUES (65534,'holy_moly_mace',43,0,1048645,???,0,0,3,0,0);
+```
+***And absolutely never substitute item modifiers!***
 
 ## SQL Migrations for Schema changes
 

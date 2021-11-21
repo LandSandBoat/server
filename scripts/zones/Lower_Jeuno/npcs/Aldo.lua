@@ -4,11 +4,7 @@
 -- Involved in Mission: Magicite, Return to Delkfutt's Tower (Zilart)
 -- !pos 20 3 -58 245
 -----------------------------------
-require("scripts/globals/keyitems")
-require("scripts/globals/missions")
 require("scripts/globals/quests")
-require("scripts/globals/zone")
-local ID = require("scripts/zones/Lower_Jeuno/IDs")
 -----------------------------------
 local entity = {}
 

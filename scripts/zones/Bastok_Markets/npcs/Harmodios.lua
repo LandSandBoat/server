@@ -48,7 +48,6 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("WildcatBastok", utils.mask.setBit(player:getCharVar("WildcatBastok"), 10, true))
     elseif csid == 490 then
         player:startEvent(491)
-    elseif csid == 491 then
         player:setCharVar("comebackQueenCS", 2)
     end
 end

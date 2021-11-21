@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Port Jeuno
 --  NPC: Sapladrepoin
--- Working 100%
 -----------------------------------
 local entity = {}
 

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Port Jeuno
 --  NPC: Rachocho
--- Type: Standard NPC
 -- !pos 3.789 7 -59.411 246
 -----------------------------------
 local entity = {}

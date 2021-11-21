@@ -4,6 +4,7 @@
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
+require("scripts/globals/utils")
 -----------------------------------
 local spell_object = {}
 
@@ -44,6 +45,9 @@ spell_object.onSpellCast = function(caster, target, spell)
         if caster:hasStatusEffect(xi.effect.TROUBADOUR) then
             duration = duration * 2
         end
+
+        -- Ensure the reduction is capped at 50%
+        power = utils.clamp(power, 0, 5000)
 
         -- Try to overwrite weaker elegy
         if target:addStatusEffect(xi.effect.ELEGY, power, 0, duration) then

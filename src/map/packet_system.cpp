@@ -1076,6 +1076,43 @@ void SmallPacket0x01C(map_session_data_t* const PSession, CCharEntity* const PCh
 
 /************************************************************************
  *                                                                       *
+ *  /volunteer packet                                                    *
+ *                                                                       *
+ ************************************************************************/
+
+void SmallPacket0x01E(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
+{
+    TracyZoneScoped;
+
+    // It sends out a packet of type 0x1E, where the body is a 4 - byte aligned string
+    //
+    // "/volunteer Volunteer what" without anything targeted results in:
+    // 1E0A6405566F6C756E7465657220776861740000 -> Volunteer what\0\0
+    //
+    // "/volunteer I choose you" with a Savanna Rarab targeted results in:
+    // 1E127505492063686F6F736520796F7520543120536176616E6E61205261726162000000 -> I choose you T1 Savanna Rarab\0\0\0
+    //
+    // "/volunteer hello" with no target -> 1e 06 17 00 68 65 6c 6c 6f 00 00 00
+    // "/volunteer test" with no target -> 1e 06 92 00 74 65 73 74 00 00 00 00
+    //
+    // id - length - seq - 00 - content -- null terminators/padding
+
+    const uint8 HEADER_LENGTH = 4;
+
+    std::vector<char> chars;
+    std::for_each(data[HEADER_LENGTH], data[HEADER_LENGTH] + (data.length() - HEADER_LENGTH), [&](char ch)
+    {
+        if ((ch >= 0 && ch < 128) && ch != '\0') // isascii && nonnull
+        {
+            chars.emplace_back(ch);
+        }
+    });
+    auto str = std::string(chars.begin(), chars.end());
+    luautils::OnPlayerVolunteer(PChar, str);
+}
+
+/************************************************************************
+ *                                                                       *
  *  Item Movement (Disposal)                                             *
  *                                                                       *
  ************************************************************************/
@@ -3959,7 +3996,7 @@ void SmallPacket0x071(map_session_data_t* const PSession, CCharEntity* const PCh
             if (PChar->PParty && PChar->PParty->GetLeader() == PChar && PChar->PParty->m_PAlliance)
             {
                 CCharEntity* PVictim = nullptr;
-                for (uint8 i = 0; i < PChar->PParty->m_PAlliance->partyList.size(); ++i)
+                for (std::size_t i = 0; i < PChar->PParty->m_PAlliance->partyList.size(); ++i)
                 {
                     PVictim = (CCharEntity*)(PChar->PParty->m_PAlliance->partyList[i]->GetMemberByName(data[0x0C]));
                     if (PVictim && PVictim->PParty && PVictim->PParty->m_PAlliance) // victim is in this party
@@ -6565,7 +6602,7 @@ void SmallPacket0x102(map_session_data_t* const PSession, CCharEntity* const PCh
                         return;
                     }
 
-                    blueutils::SetBlueSpell(PChar, spell, spellIndex, (spellToAdd > 0));
+                    blueutils::SetBlueSpell(PChar, spell, spellIndex, true);
                     charutils::BuildingCharTraitsTable(PChar);
                     PChar->pushPacket(new CCharAbilitiesPacket(PChar));
                     PChar->pushPacket(new CCharJobExtraPacket(PChar, true));
@@ -6642,7 +6679,7 @@ void SmallPacket0x104(map_session_data_t* const PSession, CCharEntity* const PCh
 
     if (PTarget != nullptr && PTarget->id == PChar->BazaarID.id)
     {
-        for (uint16 i = 0; i < PTarget->BazaarCustomers.size(); ++i)
+        for (std::size_t i = 0; i < PTarget->BazaarCustomers.size(); ++i)
         {
             if (PTarget->BazaarCustomers[i].id == PChar->id)
             {
@@ -6794,7 +6831,7 @@ void SmallPacket0x106(map_session_data_t* const PSession, CCharEntity* const PCh
                 break;
             }
         }
-        for (uint16 i = 0; i < PTarget->BazaarCustomers.size(); ++i)
+        for (std::size_t i = 0; i < PTarget->BazaarCustomers.size(); ++i)
         {
             CCharEntity* PCustomer = (CCharEntity*)PTarget->GetEntity(PTarget->BazaarCustomers[i].targid, TYPE_PC);
 
@@ -6888,7 +6925,7 @@ void SmallPacket0x10A(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x10B(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
-    for (uint16 i = 0; i < PChar->BazaarCustomers.size(); ++i)
+    for (std::size_t i = 0; i < PChar->BazaarCustomers.size(); ++i)
     {
         CCharEntity* PCustomer = (CCharEntity*)PChar->GetEntity(PChar->BazaarCustomers[i].targid, TYPE_PC);
 
@@ -7211,6 +7248,7 @@ void PacketParserInitialize()
     PacketSize[0x01A] = 0x0E; PacketParser[0x01A] = &SmallPacket0x01A;
     PacketSize[0x01B] = 0x00; PacketParser[0x01B] = &SmallPacket0x01B;
     PacketSize[0x01C] = 0x00; PacketParser[0x01C] = &SmallPacket0x01C;
+    PacketSize[0x01E] = 0x00; PacketParser[0x01E] = &SmallPacket0x01E;
     PacketSize[0x028] = 0x06; PacketParser[0x028] = &SmallPacket0x028;
     PacketSize[0x029] = 0x06; PacketParser[0x029] = &SmallPacket0x029;
     PacketSize[0x032] = 0x06; PacketParser[0x032] = &SmallPacket0x032;

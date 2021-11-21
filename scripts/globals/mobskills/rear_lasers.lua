@@ -4,7 +4,7 @@
 -----------------------------------
 require("scripts/settings/main")
 require("scripts/globals/status")
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 -----------------------------------
 local mobskill_object = {}
 
@@ -24,7 +24,7 @@ end
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.PETRIFICATION
 
-    skill:setMsg(MobStatusEffectMove(mob, target, typeEffect, 1, 0, 30))
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 1, 0, 30))
 
     return typeEffect
 end

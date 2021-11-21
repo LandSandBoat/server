@@ -4,6 +4,7 @@
 -- Type: Magian Trials NPC (Weapon/Empyrean Armor)
 -- !pos -11 2.453 118 64
 -----------------------------------
+require("scripts/settings/main")
 require("scripts/globals/magiantrials")
 require("scripts/globals/status")
 -----------------------------------

@@ -29,7 +29,7 @@ CREATE TABLE `item_equipment` (
   `rslot` smallint(5) unsigned NOT NULL DEFAULT 0,
   `su_level` tinyint(3) unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (`itemId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=37 PACK_KEYS=1 CHECKSUM=1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=37 PACK_KEYS=1 CHECKSUM=1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

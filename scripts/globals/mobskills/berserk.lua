@@ -2,7 +2,7 @@
 -- Berserk
 -- Berserk Ability.
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
@@ -14,7 +14,7 @@ end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.BERSERK
-    skill:setMsg(MobBuffMove(mob, typeEffect, 1, 0, 180))
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, typeEffect, 1, 0, 180))
     return typeEffect
 end
 

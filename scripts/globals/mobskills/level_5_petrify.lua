@@ -7,7 +7,7 @@
 -- Range: 15' radial
 -- Notes:
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")
@@ -25,7 +25,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
         local power = math.random(2, 30)
 
-        skill:setMsg(MobStatusEffectMove(mob, target, typeEffect, 1, 0, power))
+        skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 1, 0, power))
 
     else
         skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT) -- no effect

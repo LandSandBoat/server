@@ -9,7 +9,7 @@
 -----------------------------------
 require("scripts/settings/main")
 require("scripts/globals/status")
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 -----------------------------------
 local mobskill_object = {}
 
@@ -22,17 +22,17 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 1
     local accmod = 1
     local dmgmod = 2.3
-    local info = MobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, TP_NO_EFFECT)
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
     local shadows = info.hitslanded
 
-    if mob:isMobType(MOBTYPE_NOTORIOUS) then
-        shadows = MOBPARAM_IGNORE_SHADOWS
+    if mob:isMobType(xi.mobskills.mobType.NOTORIOUS) then
+        shadows = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
         typeEffect = xi.effect.POISON
         mob:resetEnmity(target)
     end
 
-    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.PIERCING, shadows)
-    MobPhysicalStatusEffectMove(mob, target, skill, typeEffect, 20, 0, 120)
+    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.PIERCING, shadows)
+    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, typeEffect, 20, 0, 120)
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.PIERCING)
 
     return dmg

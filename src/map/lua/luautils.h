@@ -258,10 +258,12 @@ namespace luautils
     void OnBattlefieldRegister(CCharEntity* PChar, CBattlefield* PBattlefield); // triggers when successfully registered a bcnm
     void OnBattlefieldDestroy(CBattlefield* PBattlefield);                      // triggers when BCNM is destroyed
 
-    int32 OnMobWeaponSkill(CBaseEntity* PChar, CBaseEntity* PMob, CMobSkill* PMobSkill, action_t* action); // triggers when mob weapon skill is used
-    int32 OnMobSkillCheck(CBaseEntity* PChar, CBaseEntity* PMob, CMobSkill* PMobSkill);                    // triggers before mob weapon skill is used, returns 0 if the move is valid
-    int32 OnAutomatonAbilityCheck(CBaseEntity* PChar, CAutomatonEntity* PAutomaton, CMobSkill* PMobSkill);
-    int32 OnAutomatonAbility(CBaseEntity* PTarget, CBaseEntity* PMob, CMobSkill* PMobSkill, CBaseEntity* PMobMaster, action_t* action);
+    uint16 OnMobWeaponSkillPrepare(CBattleEntity* PMob, CBattleEntity* PTarget);
+    int32  OnMobWeaponSkill(CBaseEntity* PChar, CBaseEntity* PMob, CMobSkill* PMobSkill, action_t* action); // triggers when mob weapon skill is used
+    int32  OnMobSkillCheck(CBaseEntity* PChar, CBaseEntity* PMob, CMobSkill* PMobSkill);                    // triggers before mob weapon skill is used, returns 0 if the move is valid
+    auto   OnMobSkillTarget(CBattleEntity* PTarget, CBaseEntity* PMob, CMobSkill* PMobSkill) -> CBattleEntity*;
+    int32  OnAutomatonAbilityCheck(CBaseEntity* PChar, CAutomatonEntity* PAutomaton, CMobSkill* PMobSkill);
+    int32  OnAutomatonAbility(CBaseEntity* PTarget, CBaseEntity* PMob, CMobSkill* PMobSkill, CBaseEntity* PMobMaster, action_t* action);
 
     int32 OnAbilityCheck(CBaseEntity* PChar, CBaseEntity* PTarget, CAbility* PAbility, CBaseEntity** PMsgTarget);                                                                               // triggers when a player attempts to use a job ability or roll
     int32 OnPetAbility(CBaseEntity* PPet, CBaseEntity* PMob, CMobSkill* PMobSkill, CBaseEntity* PPetMaster, action_t* action);                                                                  // triggers when pet uses an ability
@@ -311,6 +313,7 @@ namespace luautils
     uint16 SelectDailyItem(CLuaBaseEntity* PLuaBaseEntity, uint8 dial);
 
     void OnPlayerEmote(CCharEntity* PChar, Emote EmoteID);
+    void OnPlayerVolunteer(CCharEntity* PChar, std::string text);
 }; // namespace luautils
 
 #endif //- _LUAUTILS_H -

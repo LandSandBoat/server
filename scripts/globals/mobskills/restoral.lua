@@ -2,7 +2,7 @@
 -- Restoral
 -- Description: Restores HP.
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
@@ -24,7 +24,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     end
     skill:setMsg(xi.msg.basic.SELF_HEAL)
 
-    return MobHealMove(mob, heal)
+    return xi.mobskills.mobHealMove(mob, heal)
 end
 
 return mobskill_object

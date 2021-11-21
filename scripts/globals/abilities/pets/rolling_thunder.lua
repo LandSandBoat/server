@@ -1,7 +1,7 @@
 -----------------------------------
 --
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/utils")
@@ -25,7 +25,7 @@ ability_object.onPetAbility = function(target, pet, skill, summoner)
 
     local typeEffect = xi.effect.ENTHUNDER
 
-    skill:setMsg(MobBuffMove(target, typeEffect, potency, 0, duration))
+    skill:setMsg(xi.mobskills.mobBuffMove(target, typeEffect, potency, 0, duration))
 
     return typeEffect
 end
