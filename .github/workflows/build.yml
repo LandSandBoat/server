@@ -441,14 +441,14 @@ jobs:
           path: .
       - name: Verify MySQL connection from container
         run: |
-          mysql -h 127.0.0.1 -uroot -proot -e "SHOW DATABASES"
+          mysql -h localhost -uroot -proot -e "SHOW DATABASES"
       - name: Import SQL files
         run: |
           for f in sql/*.sql; do
             echo -e "Importing $f into the database..."
-            mysql xidb -h 127.0.0.1 -uroot -proot < $f
+            mysql xidb -h localhost -uroot -proot < $f
           done
-          mysql xidb -h 127.0.0.1 -uroot -proot -e "SHOW tables"
+          mysql xidb -h localhost -uroot -proot -e "SHOW tables"
       - name: Copy confs
         run: |
           cp conf/default/* conf/
