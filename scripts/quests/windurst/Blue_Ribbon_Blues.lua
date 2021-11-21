@@ -23,7 +23,6 @@ local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.BLUE_RIBB
 quest.reward =
 {
     fame  = 140,
-    item  = xi.items.BLUE_RIBBON,
     title = xi.title.GHOSTIE_BUSTER,
 }
 
@@ -62,7 +61,7 @@ quest.sections =
 
                 [358] = function(player, csid, option, npc)
                     player:confirmTrade()
-                    npcUtil.giveCurrency(player, "gil", 3600)
+                    player:addGil(3600)
                     quest:begin(player)
                     quest:setVar(player, 'Prog', 0)
                     quest:setVar(player, 'Timer', os.time() + 60)

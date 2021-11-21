@@ -145,7 +145,7 @@ quest.sections =
                         local currentDay = VanadielUniqueDay()
 
                         if
-                            dueDate < currentDay or
+                            dueDate > currentDay or
                             (dueDate == currentDay and VanadielHour() < 6)
                         then
                             return quest:progressEvent(348)
