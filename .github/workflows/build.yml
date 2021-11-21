@@ -427,7 +427,7 @@ jobs:
         fi
 
   Windows_Full_Startup_Checks:
-    needs: Windows_2019_64bit
+    #needs: Windows_2019_64bit
     runs-on: windows-2019
     env:
       MSBUILD_PATH: C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\
@@ -435,13 +435,16 @@ jobs:
       - uses: actions/checkout@v1
         with:
           fetch-depth: 1
-      - uses: actions/download-artifact@v2
+      #- uses: actions/download-artifact@v2
+      #  with:
+      #    name: windows_executables
+      #    path: .
+      - name: Install MySQL Server
+        uses: crazy-max/ghaction-chocolatey@v1
         with:
-          name: windows_executables
-          path: .
-      - name: Start MySQL service
+          args: -h
+      - name: Check MySQL connection
         run: |
-          mysqld --install --datadir=.
           mysql -uroot -proot -e "SHOW DATABASES"
       - name: Import SQL files
         run: |
