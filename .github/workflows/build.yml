@@ -439,10 +439,10 @@ jobs:
         with:
           name: windows_executables
           path: .
-      - name: Verify MySQL connection from container
+      - name: Start MySQL service
         run: |
           mysqld --datadir=.
-          mysql -h localhost -uroot -proot -e "SHOW DATABASES"
+          mysql -uroot -proot -e "SHOW DATABASES"
       - name: Import SQL files
         run: |
           for f in sql/*.sql; do
