@@ -68,11 +68,8 @@ entity.onTrigger = function(player, npc)
     local tuningOut = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TUNING_OUT)
     local turmoil = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TORAIMARAI_TURMOIL)
 
-    if (player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.FOOD_FOR_THOUGHT) == QUEST_ACCEPTED) then
-        player:startEvent(311)
-
     -- Tuning In
-    elseif tuningIn == QUEST_AVAILABLE
+    if tuningIn == QUEST_AVAILABLE
         and player:getFameLevel(WINDURST) >= 4
         and (player:getCurrentMission(COP) >= xi.mission.id.cop.DISTANT_BELIEFS or player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_LAST_VERSE))
     then
