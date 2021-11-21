@@ -441,6 +441,7 @@ jobs:
           path: .
       - name: Verify MySQL connection from container
         run: |
+          mysqlds
           mysql -h localhost -uroot -proot -e "SHOW DATABASES"
       - name: Import SQL files
         run: |
