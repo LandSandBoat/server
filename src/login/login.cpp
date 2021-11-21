@@ -546,7 +546,7 @@ void maint_config_read(const char* key, const char* value)
     {
         maint_config.maint_mode = std::atoi(value);
 
-        if (maint_config.maint_mode > 2)
+        if (maint_config.maint_mode > 1)
         {
             ShowError("maint_mode not within bounds (0..1) was %i, defaulting to 0\r", maint_config.maint_mode);
             maint_config.maint_mode = 0;
