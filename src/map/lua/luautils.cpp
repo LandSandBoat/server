@@ -87,11 +87,11 @@
 #include "../vana_time.h"
 #include "../weapon_skill.h"
 
-// TODO: Implement FileWatch backend for OSX
 #ifndef __APPLE__
-// TODO: Fix path
-#include "../../ext/filewatch/filewatch/FileWatch.hpp"
+#include "filewatch/FileWatch.hpp"
 std::unique_ptr<filewatch::FileWatch<std::string>> watch = nullptr;
+#else
+// TODO: Implement FileWatch backend for OSX
 #endif // __APPLE__
 
 namespace luautils
