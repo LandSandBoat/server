@@ -311,7 +311,7 @@ xi.magic_utils.spell_damage.calculateResist = function(caster, target, spell, sk
     end
 
     -- Add acc for skillchains
-    if skillchainCount > 0 then -- This makes no sense. 
+    if skillchainCount > 0 then -- This makes no sense.
         magicAcc = magicAcc + 25
     end
 
