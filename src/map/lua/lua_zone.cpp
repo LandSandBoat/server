@@ -24,6 +24,7 @@
 #include "../region.h"
 
 #include "../entities/charentity.h"
+#include "../entities/npcentity.h"
 #include "../zone.h"
 #include "lua_baseentity.h"
 #include "lua_zone.h"
@@ -84,7 +85,7 @@ sol::table CLuaZone::getPlayers()
 sol::table CLuaZone::getNPCs()
 {
     auto table = luautils::lua.create_table();
-    m_pLuaZone->ForEachNpc([&table](CNpcEntity* PNpc) { table.add(CLuaBaseEntity((CBaseEntity*)PNpc)); });
+    m_pLuaZone->ForEachNpc([&table](CNpcEntity* PNpc) { table.add(CLuaBaseEntity(PNpc)); });
     return table;
 }
 
