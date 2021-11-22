@@ -32,6 +32,7 @@ target_link_libraries(common
     PUBLIC
     spdlog_header_only
     sol2_single
+    efsw
     project_options
     #PRIVATE
     #project_warnings

@@ -19,6 +19,7 @@
 ===========================================================================
 */
 
+#include "../../common/filewatcher.h"
 #include "../../common/logging.h"
 #include "../../common/utils.h"
 #include "../../common/version.h"
@@ -87,8 +88,6 @@
 #include "../vana_time.h"
 #include "../weapon_skill.h"
 
-#include "efsw/efsw.hpp"
-
 namespace luautils
 {
     sol::state lua;
@@ -97,6 +96,7 @@ namespace luautils
     bool                                  contentRestrictionEnabled;
     std::unordered_map<std::string, bool> contentEnabledMap;
 
+    std::unique_ptr<Filewatcher>  filewatcher;
     std::mutex                    reloadListBottleneck;
     std::map<std::string, uint64> toReloadList;
     std::vector<std::string>      filteredList;
@@ -305,50 +305,51 @@ namespace luautils
 
     void EnableFilewatcher()
     {
-        //// Prepare script file watcher
-        //auto watchReaction = [](const std::filesystem::path& path, const filewatch::Event change_type) {
-        //    // If a Lua file is modified
-        //    if (path.extension() == ".lua" && change_type == filewatch::Event::modified)
-        //    {
-        //        TracyZoneScoped;
-        //        TracyZoneString(path.generic_string());
-        //
-        //        auto real_path          = "./scripts/" + path.generic_string();
-        //        auto modified           = std::filesystem::last_write_time(real_path).time_since_epoch().count();
-        //        auto modified_timestamp = static_cast<uint64>(modified);
-        //        SafeApplyFunc_ReloadList([&](std::map<std::string, uint64>& list) {
-        //            if (list.find(real_path) == list.end())
-        //            {
-        //                // No entry, make one
-        //                list[real_path] = modified_timestamp;
-        //            }
-        //            else
-        //            {
-        //                auto last_modified = list.at(real_path);
-        //                if (last_modified < modified_timestamp)
-        //                {
-        //                    list[real_path] = modified_timestamp;
-        //                    filteredList.emplace_back(real_path);
-        //                }
-        //            }
-        //        });
-        //    }
-        //};
-        //watch = std::make_unique<filewatch::FileWatch<std::string>>("./scripts/", watchReaction);
+        // clang-format off
+        filewatcher = std::make_unique<Filewatcher>("./scripts/",
+            [](const std::filesystem::path& path)
+            {
+                if (path.extension() == ".lua")
+                {
+                    TracyZoneScoped;
+                    TracyZoneString(path.generic_string());
+
+                    auto real_path          = "./scripts/" + path.generic_string();
+                    auto modified           = std::filesystem::last_write_time(real_path).time_since_epoch().count();
+                    auto modified_timestamp = static_cast<uint64>(modified);
+                    SafeApplyFunc_ReloadList([&](std::map<std::string, uint64>& list) {
+                        if (list.find(real_path) == list.end())
+                        {
+                            // No entry, make one
+                            list[real_path] = modified_timestamp;
+                        }
+                        else
+                        {
+                            auto last_modified = list.at(real_path);
+                            if (last_modified < modified_timestamp)
+                            {
+                                list[real_path] = modified_timestamp;
+                                filteredList.emplace_back(real_path);
+                            }
+                        }
+                    });
+                }
+            });
+        // clang-format on
     }
 
     void ReloadFilewatchList()
     {
-        //SafeApplyFunc_ReloadList([&](std::map<std::string, uint64>& list) {
-        //    TracyZoneScoped;
-        //    for (auto& path_string : filteredList)
-        //    {
-        //        CacheLuaObjectFromFile(path_string, true);
-        //    }
-        //
-        //    // Erase list
-        //    filteredList.clear();
-        //});
+        SafeApplyFunc_ReloadList([&](std::map<std::string, uint64>& list) {
+            TracyZoneScoped;
+            for (auto& path_string : filteredList)
+            {
+                CacheLuaObjectFromFile(path_string, true);
+            }
+
+            // Erase list
+            filteredList.clear();
+        });
     }
 
     std::vector<std::string> GetQuestAndMissionFilenamesList()
