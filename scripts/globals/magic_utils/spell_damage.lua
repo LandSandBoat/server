@@ -43,8 +43,7 @@ local blmMerit               = { xi.merit.FIRE_MAGIC_POTENCY,  xi.merit.ICE_MAGI
 local rdmMerit               = { xi.merit.FIRE_MAGIC_ACCURACY, xi.merit.ICE_MAGIC_ACCURACY, xi.merit.WIND_MAGIC_ACCURACY,  xi.merit.EARTH_MAGIC_ACCURACY, xi.merit.LIGHTNING_MAGIC_ACCURACY, xi.merit.WATER_MAGIC_ACCURACY   }
 
 -- Table variables.
-local spellTable   = xi.magic_utils.parameters.damageParams
-local elementTable = xi.magic_utils.parameters.elementParams
+local table = xi.magic_utils.parameters.damageParams
 local stat  = 1
 local vNPC  = 2
 local mNPC  = 3
@@ -233,6 +232,7 @@ xi.magic_utils.spell_damage.calculateResist = function(caster, target, spell, sk
     local magicAcc      = caster:getMod(xi.mod.MACC) + caster:getILvlMacc()
     local magicEva      = 0
     local magicHitRate  = 0
+    local resMod        = 0 -- Some spells may possibly be non elemental.
 
     -- Magic Bursts of the correct element do not get resisted. SDT isn't involved here.
     local _, skillchainCount = FormMagicBurst(spellElement, target)
@@ -244,183 +244,189 @@ xi.magic_utils.spell_damage.calculateResist = function(caster, target, spell, sk
     -- Step 4: We calculate resist tiers based off magic hit rate.
 
     -- Get Caster Magic accuracy, Target Magic Evasion and with both, Magic Hit Rate
-    if not target:hasStatusEffect(xi.effect.MAGIC_SHIELD, 0) then -- If target has magic shield up, magicHitRate = 0
-        -----------------------------------
-        -- STEP 1: Get Caster Magic Accuracy.
-        -----------------------------------
-        -- Get the base magicAcc (just skill + skill mod (79 + skillID = ModID))
-        if skillType ~= 0 then
-            magicAcc = magicAcc + caster:getSkillLevel(skillType)
+
+    -----------------------------------
+    -- STEP 0: Exceptions. Lets lower that complexity
+    -----------------------------------
+    -- Magic Shield exception and magic burst exceptions.
+    if target:hasStatusEffect(xi.effect.MAGIC_SHIELD, 0) then
+        resist = 0
+        return resist
+    elseif skillchainCount > 0 then
+        return resist
+    end
+
+    -----------------------------------
+    -- STEP 1: Get Caster Magic Accuracy.
+    -----------------------------------
+    -- Get the base magicAcc (just skill + skill mod (79 + skillID = ModID))
+    if skillType ~= 0 then
+        magicAcc = magicAcc + caster:getSkillLevel(skillType)
+    else
+        -- for mob skills / additional effects which don't have a skill
+        magicAcc = magicAcc + utils.getSkillLvl(1, caster:getMainLvl())
+    end
+
+    if spellElement ~= xi.magic.ele.NONE then
+        -- Mod set in database. Base 0 means not resistant nor weak.
+        resMod = target:getMod(xi.magic.resistMod[spellElement])
+
+        -- Add acc for elemental affinity accuracy and element specific accuracy
+        local affinityBonus = caster:getMod(strongAffinityAcc[spellElement]) * 10
+        local elementBonus  = caster:getMod(spellAcc[spellElement])
+        magicAcc = magicAcc + affinityBonus + elementBonus
+    end
+
+    -- Get dStat Magic Accuracy. NOTE: Ninjutsu does not get this bonus/penalty.
+    if not skillType == xi.skill.NINJUTSU then
+        if statDiff > 10 then
+            magicAcc = magicAcc + 10 + (statDiff - 10) / 2
         else
-            -- for mob skills / additional effects which don't have a skill
-            magicAcc = magicAcc + utils.getSkillLvl(1, caster:getMainLvl())
+            magicAcc = magicAcc + statDiff
         end
+    end
 
-        local resMod = 0 -- Some spells may possibly be non elemental, but have status effects.
-        if spellElement ~= xi.magic.ele.NONE then
-            -- Mod set in database. Base 0 means not resistant nor weak.
-            resMod = target:getMod(xi.magic.resistMod[spellElement])
+    -----------------------------------
+    -- magicAcc from status effects.
+    -----------------------------------
+    -- Altruism
+    if caster:hasStatusEffect(xi.effect.ALTRUISM) and spellGroup == xi.magic.spellGroup.WHITE then
+        magicAcc = magicAcc + caster:getStatusEffect(xi.effect.ALTRUISM):getPower()
+    end
+    -- Focalization
+    if caster:hasStatusEffect(xi.effect.FOCALIZATION) and spellGroup == xi.magic.spellGroup.BLACK then
+        magicAcc = magicAcc + caster:getStatusEffect(xi.effect.FOCALIZATION):getPower()
+    end
+    --Add acc for klimaform
+    if
+        spellElement > 0 and
+        caster:hasStatusEffect(xi.effect.KLIMAFORM) and
+        (casterWeather == xi.magic.singleWeatherStrong[spellElement] or casterWeather == xi.magic.doubleWeatherStrong[spellElement])
+    then
+        magicAcc = magicAcc + 15
+    end
+    -- Dark Seal
+    if casterJob == xi.job.DRK and skillType == xi.skill.DARK_MAGIC and caster:hasStatusEffect(xi.effect.DARK_SEAL) then
+        magicAcc = magicAcc + 256 -- Need citation. 256 seems OP
+    end
 
-            -- Add acc for elemental affinity accuracy and element specific accuracy
-            local affinityBonus = caster:getMod(strongAffinityAcc[spellElement]) * 10
-            local elementBonus  = caster:getMod(spellAcc[spellElement])
-            magicAcc = magicAcc + affinityBonus + elementBonus
-        end
+    -- Add acc for skillchains
+    if skillchainCount > 0 then -- This makes no sense. 
+        magicAcc = magicAcc + 25
+    end
 
-        -- Get dStat Magic Accuracy. NOTE: Ninjutsu does not get this bonus/penalty.
-        if not skillType == xi.skill.NINJUTSU then
-            if statDiff > 10 then
-                magicAcc = magicAcc + 10 + (statDiff - 10) / 2
-            else
-                magicAcc = magicAcc + statDiff
-            end
+    -----------------------------------
+    -- magicAcc from Job Points.
+    -----------------------------------
+    -- WHM Job Points
+    if casterJob == xi.job.WHM then
+        magicAcc = magicAcc + caster:getJobPointLevel(xi.jp.WHM_MAGIC_ACC_BONUS)
+    -- BLM Job Points
+    elseif casterJob == xi.job.BLM then
+        magicAcc = magicAcc + caster:getJobPointLevel(xi.jp.BLM_MAGIC_ACC_BONUS)
+    -- RDM Job Points
+    elseif casterJob == xi.job.RDM then
+        -- RDM Job Point: During saboteur, Enfeebling MACC +2
+        if skillType == xi.skill.ENFEEBLING_MAGIC and caster:hasStatusEffect(xi.effect.SABOTEUR) then
+            magicAcc = magicAcc + (caster:getJobPointLevel(xi.jp.SABOTEUR_EFFECT)) * 2
         end
-
-        -----------------------------------
-        -- magicAcc from status effects.
-        -----------------------------------
-        -- Altruism
-        if caster:hasStatusEffect(xi.effect.ALTRUISM) and spellGroup == xi.magic.spellGroup.WHITE then
-            magicAcc = magicAcc + caster:getStatusEffect(xi.effect.ALTRUISM):getPower()
+        -- RDM Job Point: Magic Accuracy Bonus, All MACC + 1
+        magicAcc = magicAcc + caster:getJobPointLevel(xi.jp.RDM_MAGIC_ACC_BONUS)
+    -- NIN Job Points
+    elseif casterJob == xi.job.NIN then
+        -- NIN Job Point: Ninjutsu Accuracy Bonus
+        if skillType == xi.skill.NINJUTSU then
+            magicAcc = magicAcc + caster:getJobPointLevel(xi.jp.NINJITSU_ACC_BONUS)
         end
-        -- Focalization
-        if caster:hasStatusEffect(xi.effect.FOCALIZATION) and spellGroup == xi.magic.spellGroup.BLACK then
-            magicAcc = magicAcc + caster:getStatusEffect(xi.effect.FOCALIZATION):getPower()
-        end
-        --Add acc for klimaform
-        if spellElement > 0 and
-           caster:hasStatusEffect(xi.effect.KLIMAFORM) and
-           (casterWeather == xi.magic.singleWeatherStrong[spellElement] or casterWeather == xi.magic.doubleWeatherStrong[spellElement])
+    -- SCH Job Points
+    elseif casterJob == xi.job.SCH then
+        if (spellGroup == xi.magic.spellGroup.WHITE and caster:hasStatusEffect(xi.effect.PARSIMONY)) or
+            (spellGroup == xi.magic.spellGroup.BLACK and caster:hasStatusEffect(xi.effect.PENURY))
         then
-            magicAcc = magicAcc + 15
+            magicAcc = magicAcc + caster:getJobPointLevel(xi.jp.STRATEGEM_EFFECT_I)
         end
-        -- Dark Seal
-        if casterJob == xi.job.DRK and skillType == xi.skill.DARK_MAGIC and caster:hasStatusEffect(xi.effect.DARK_SEAL) then
-            magicAcc = magicAcc + 256 -- Need citation. 256 seems OP
+    end
+
+    -----------------------------------
+    -- magicAcc from Merits.
+    -----------------------------------
+    -- BLM Merits
+    if casterJob == xi.job.BLM and skillType == xi.skill.ELEMENTAL_MAGIC then
+        magicAcc = magicAcc + caster:getMerit(xi.merit.ELEMENTAL_MAGIC_ACCURACY)
+    -- RDM Merits
+    elseif casterJob == xi.job.RDM then
+        -- Category 1
+        if spellElement >= xi.magic.element.FIRE and spellElement <= xi.magic.element.WATER then
+            magicAcc = magicAcc + caster:getMerit(rdmMerit[spellElement])
         end
+        -- Category 2
+        magicAcc = magicAcc + caster:getMerit(xi.merit.MAGIC_ACCURACY)
+    -- NIN Merits
+    elseif casterJob == xi.job.NIN and skillType == xi.skill.NINJUTSU then
+        magicAcc = magicAcc + caster:getMerit(xi.merit.NIN_MAGIC_ACCURACY)
+    -- BLU Merits
+    elseif casterJob == xi.job.BLU and skillType == xi.skill.BLUE_MAGIC then
+        magicAcc = magicAcc + caster:getMerit(xi.merit.MAGICAL_ACCURACY)
+    end
 
-        -- Add acc for skillchains
-        if skillchainCount > 0 then
-            magicAcc = magicAcc + 25
-        end
+    -----------------------------------
+    -- magicAcc from Food.
+    -----------------------------------
+    local maccFood = magicAcc * (caster:getMod(xi.mod.FOOD_MACCP) / 100)
+    magicAcc = magicAcc + utils.clamp(maccFood, 0, caster:getMod(xi.mod.FOOD_MACC_CAP))
 
-        -----------------------------------
-        -- magicAcc from Job Points.
-        -----------------------------------
-        -- WHM Job Points
-        if casterJob == xi.job.WHM then
-            magicAcc = magicAcc + caster:getJobPointLevel(xi.jp.WHM_MAGIC_ACC_BONUS)
-        -- BLM Job Points
-        elseif casterJob == xi.job.BLM then
-            magicAcc = magicAcc + caster:getJobPointLevel(xi.jp.BLM_MAGIC_ACC_BONUS)
-        -- RDM Job Points
-        elseif casterJob == xi.job.RDM then
-            -- RDM Job Point: During saboteur, Enfeebling MACC +2
-            if skillType == xi.skill.ENFEEBLING_MAGIC and caster:hasStatusEffect(xi.effect.SABOTEUR) then
-                magicAcc = magicAcc + (caster:getJobPointLevel(xi.jp.SABOTEUR_EFFECT)) * 2
-            end
-            -- RDM Job Point: Magic Accuracy Bonus, All MACC + 1
-            magicAcc = magicAcc + caster:getJobPointLevel(xi.jp.RDM_MAGIC_ACC_BONUS)
-        -- NIN Job Points
-        elseif casterJob == xi.job.NIN then
-            -- NIN Job Point: Ninjutsu Accuracy Bonus
-            if skillType == xi.skill.NINJUTSU then
-                magicAcc = magicAcc + caster:getJobPointLevel(xi.jp.NINJITSU_ACC_BONUS)
-            end
-        -- SCH Job Points
-        elseif casterJob == xi.job.SCH then
-            if (spellGroup == xi.magic.spellGroup.WHITE and caster:hasStatusEffect(xi.effect.PARSIMONY)) or
-                (spellGroup == xi.magic.spellGroup.BLACK and caster:hasStatusEffect(xi.effect.PENURY))
-            then
-                magicAcc = magicAcc + caster:getJobPointLevel(xi.jp.STRATEGEM_EFFECT_I)
-            end
-        end
+    -----------------------------------
+    -- Apply level correction.
+    -----------------------------------
+    local levelDiff =  utils.clamp(caster:getMainLvl() - target:getMainLvl(), -5, 5)
+    magicAcc = magicAcc + levelDiff * 3
 
-        -----------------------------------
-        -- magicAcc from Merits.
-        -----------------------------------
-        -- BLM Merits
-        if casterJob == xi.job.BLM and skillType == xi.skill.ELEMENTAL_MAGIC then
-            magicAcc = magicAcc + caster:getMerit(xi.merit.ELEMENTAL_MAGIC_ACCURACY)
-        -- RDM Merits
-        elseif casterJob == xi.job.RDM then
-            -- Category 1
-            if spellElement >= xi.magic.element.FIRE and spellElement <= xi.magic.element.WATER then
-                magicAcc = magicAcc + caster:getMerit(rdmMerit[spellElement])
-            end
-            -- Category 2
-            magicAcc = magicAcc + caster:getMerit(xi.merit.MAGIC_ACCURACY)
-        -- NIN Merits
-        elseif casterJob == xi.job.NIN and skillType == xi.skill.NINJUTSU then
-            magicAcc = magicAcc + caster:getMerit(xi.merit.NIN_MAGIC_ACCURACY)
-        -- BLU Merits
-        elseif casterJob == xi.job.BLU and skillType == xi.skill.BLUE_MAGIC then
-            magicAcc = magicAcc + caster:getMerit(xi.merit.MAGICAL_ACCURACY)
-        end
+    -----------------------------------
+    -- STEP 2: Get target magic evasion
+    -- Base magic evasion (base magic evasion plus resistances(players), plus elemental defense(mobs)
+    -----------------------------------
+    magicEva = target:getMod(xi.mod.MEVA) + resMod
 
-        -----------------------------------
-        -- magicAcc from Food.
-        -----------------------------------
-        local maccFood = magicAcc * (caster:getMod(xi.mod.FOOD_MACCP) / 100)
-        magicAcc = magicAcc + utils.clamp(maccFood, 0, caster:getMod(xi.mod.FOOD_MACC_CAP))
+    -----------------------------------
+    -- STEP 3: Get Magic Hit Rate
+    -- https://www.bg-wiki.com/ffxi/Magic_Hit_Rate
+    -----------------------------------
+    local magicAccDiff = magicAcc - magicEva
 
-        -----------------------------------
-        -- Apply level correction.
-        -----------------------------------
-        local levelDiff =  utils.clamp(caster:getMainLvl() - target:getMainLvl(), -5, 5)
-        magicAcc = magicAcc + levelDiff * 3
-
-        -----------------------------------
-        -- STEP 2: Get target magic evasion
-        -- Base magic evasion (base magic evasion plus resistances(players), plus elemental defense(mobs)
-        -----------------------------------
-        magicEva = target:getMod(xi.mod.MEVA) + resMod
-
-        -----------------------------------
-        -- STEP 3: Get Magic Hit Rate
-        -- https://www.bg-wiki.com/ffxi/Magic_Hit_Rate
-        -----------------------------------
-        local magicAccDiff = magicAcc - magicEva
-
-        if magicAccDiff < 0 then
-            magicHitRate = utils.clamp(50 + math.floor(magicAccDiff / 2), 5, 95)
-        else
-            magicHitRate = utils.clamp(50 + magicAccDiff, 5, 95)
-        end
+    if magicAccDiff < 0 then
+        magicHitRate = utils.clamp(50 + math.floor(magicAccDiff / 2), 5, 95)
+    else
+        magicHitRate = utils.clamp(50 + magicAccDiff, 5, 95)
     end
 
     -----------------------------------
     -- STEP 4: Get Resist Tier
     -----------------------------------
-    if skillchainCount == 0 then -- Magic bursts do not get resisted.
-        local resistTier = 0
-        local randomVar  = 0
+    local resistTier = 0
+    local randomVar  = 0
 
-        for i = 3, 1, -1 do
-            randomVar = math.random(1, 100)
-            if randomVar > magicHitRate then
-                resistTier = resistTier + 1
-            end
-
-            -- Apply elemental resistance boons.
-            if resMod > 0 and resistTier < 3 then
-                resistTier = resistTier + 1
-            elseif resMod < 0 and resistTier > 0 then
-                resistTier = resistTier - 1
-            end
+    for i = 3, 1, -1 do
+        randomVar = math.random(1, 100)
+        if randomVar > magicHitRate then
+            resistTier = resistTier + 1
         end
 
-        if resistTier == 0 then     -- Unresisted
-            resist = 1.0
-        elseif resistTier == 1 then -- (1/2)
-            resist = 0.5
-        elseif resistTier == 2 then -- (1/4)
-            resist = 0.25
-        elseif resistTier == 3 then -- (1/8)
-            resist = 0.125
+        -- Apply elemental resistance boons.
+        if resMod > 0 and resistTier < 3 then
+            resistTier = resistTier + 1
+        elseif resMod < 0 and resistTier > 0 then
+            resistTier = resistTier - 1
         end
-    else
-        resist = 1.0
+    end
+
+    if resistTier == 0 then     -- Unresisted
+        resist = 1
+    elseif resistTier == 1 then -- (1/2)
+        resist = 0.5
+    elseif resistTier == 2 then -- (1/4)
+        resist = 0.25
+    elseif resistTier == 3 then -- (1/8)
+        resist = 0.125
     end
 
     return resist
