@@ -1,5 +1,4 @@
 add_subdirectory(detour)
-add_subdirectory(filewatch)
 # add_subdirectory(lua) # Handled globally 
 # add_subdirectory(mysql) # Handled globally
 add_subdirectory(recast)
