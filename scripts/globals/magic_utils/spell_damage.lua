@@ -16,24 +16,24 @@ xi.magic_utils = xi.magic_utils or {}
 xi.magic_utils.spell_damage = xi.magic_utils.spell_damage or {}
 -----------------------------------
 -- File structure:
--- 2 Tables.
--- 12 INDEPENDENT functions. Close them for better readability.
--- 1 FINAL function. Uses all 12 previous functions in succession and order.
+-- 17 INDEPENDENT functions. Close them for better readability.
+-- 1 FINAL function. Uses all 17 previous functions in succession and order.
 
 -----------------------------------
 -- Tables
 -----------------------------------
--- Structure:       function = { Fire,                         Ice,                         Air,                           Earth,                         Thunder,                           Water,                          Light,                      Dark                      },
+-- Structure:       function = { Fire,                         Ice,                         Air,                           Earth,                         Thunder,                           Water,                          Light,                      Dark                      }
 xi.magic.dayStrong           = { xi.day.FIRESDAY,              xi.day.ICEDAY,               xi.day.WINDSDAY,               xi.day.EARTHSDAY,              xi.day.LIGHTNINGDAY,               xi.day.WATERSDAY,               xi.day.LIGHTSDAY,           xi.day.DARKSDAY           }
+xi.magic.dayWeak             = { xi.day.WATERSDAY,             xi.day.FIRESDAY,             xi.day.ICEDAY,                 xi.day.WINDSDAY,               xi.day.EARTHSDAY,                  xi.day.LIGHTNINGDAY,            xi.day.DARKSDAY,            xi.day.LIGHTSDAY          }
 xi.magic.singleWeatherStrong = { xi.weather.HOT_SPELL,         xi.weather.SNOW,             xi.weather.WIND,               xi.weather.DUST_STORM,         xi.weather.THUNDER,                xi.weather.RAIN,                xi.weather.AURORAS,         xi.weather.GLOOM          }
 xi.magic.doubleWeatherStrong = { xi.weather.HEAT_WAVE,         xi.weather.BLIZZARDS,        xi.weather.GALES,              xi.weather.SAND_STORM,         xi.weather.THUNDERSTORMS,          xi.weather.SQUALL,              xi.weather.STELLAR_GLARE,   xi.weather.DARKNESS       }
-xi.magic.resistMod           = { xi.mod.FIRERES,               xi.mod.ICERES,               xi.mod.WINDRES,                xi.mod.EARTHRES,               xi.mod.THUNDERRES,                 xi.mod.WATERRES,                xi.mod.LIGHTRES,            xi.mod.DARKRES            }
-xi.magic.defenseMod          = { xi.mod.FIREDEF,               xi.mod.ICEDEF,               xi.mod.WINDDEF,                xi.mod.EARTHDEF,               xi.mod.THUNDERDEF,                 xi.mod.WATERDEF,                xi.mod.LIGHTDEF,            xi.mod.DARKDEF            }
-xi.magic.absorbMod           = { xi.mod.FIRE_ABSORB,           xi.mod.ICE_ABSORB,           xi.mod.WIND_ABSORB,            xi.mod.EARTH_ABSORB,           xi.mod.LTNG_ABSORB,                xi.mod.WATER_ABSORB,            xi.mod.LIGHT_ABSORB,        xi.mod.DARK_ABSORB        }
-xi.magic.barSpell            = { xi.effect.BARFIRE,            xi.effect.BARBLIZZARD,       xi.effect.BARAERO,             xi.effect.BARSTONE,            xi.effect.BARTHUNDER,              xi.effect.BARWATER              }
-xi.magic.dayWeak             = { xi.day.WATERSDAY,             xi.day.FIRESDAY,             xi.day.ICEDAY,                 xi.day.WINDSDAY,               xi.day.EARTHSDAY,                  xi.day.LIGHTNINGDAY,            xi.day.DARKSDAY,            xi.day.LIGHTSDAY          }
 xi.magic.singleWeatherWeak   = { xi.weather.RAIN,              xi.weather.HOT_SPELL,        xi.weather.SNOW,               xi.weather.WIND,               xi.weather.DUST_STORM,             xi.weather.THUNDER,             xi.weather.GLOOM,           xi.weather.AURORAS        }
 xi.magic.doubleWeatherWeak   = { xi.weather.SQUALL,            xi.weather.HEAT_WAVE,        xi.weather.BLIZZARDS,          xi.weather.GALES,              xi.weather.SAND_STORM,             xi.weather.THUNDERSTORMS,       xi.weather.DARKNESS,        xi.weather.STELLAR_GLARE  }
+xi.magic.resistMod           = { xi.mod.FIRE_RES,              xi.mod.ICE_RES,              xi.mod.WIND_RES,               xi.mod.EARTH_RES,              xi.mod.THUNDER_RES,                xi.mod.WATER_RES,               xi.mod.LIGHT_RES,           xi.mod.DARK_RES           }
+xi.magic.specificDmgTakenMod = { xi.mod.FIRE_SDT,              xi.mod.ICE_SDT,              xi.mod.WIND_SDT,               xi.mod.EARTH_SDT,              xi.mod.THUNDER_SDT,                xi.mod.WATER_SDT,               xi.mod.LIGHT_SDT,           xi.mod.DARK_SDT           }
+xi.magic.absorbMod           = { xi.mod.FIRE_ABSORB,           xi.mod.ICE_ABSORB,           xi.mod.WIND_ABSORB,            xi.mod.EARTH_ABSORB,           xi.mod.LTNG_ABSORB,                xi.mod.WATER_ABSORB,            xi.mod.LIGHT_ABSORB,        xi.mod.DARK_ABSORB        }
+xi.magic.barSpell            = { xi.effect.BARFIRE,            xi.effect.BARBLIZZARD,       xi.effect.BARAERO,             xi.effect.BARSTONE,            xi.effect.BARTHUNDER,              xi.effect.BARWATER              }
+
 local elementalObi           = { xi.mod.FORCE_FIRE_DWBONUS,    xi.mod.FORCE_ICE_DWBONUS,    xi.mod.FORCE_WIND_DWBONUS,     xi.mod.FORCE_EARTH_DWBONUS,    xi.mod.FORCE_LIGHTNING_DWBONUS,    xi.mod.FORCE_WATER_DWBONUS,     xi.mod.FORCE_LIGHT_DWBONUS, xi.mod.FORCE_DARK_DWBONUS }
 local spellAcc               = { xi.mod.FIREACC,               xi.mod.ICEACC,               xi.mod.WINDACC,                xi.mod.EARTHACC,               xi.mod.THUNDERACC,                 xi.mod.WATERACC,                xi.mod.LIGHTACC,            xi.mod.DARKACC            }
 local strongAffinityDmg      = { xi.mod.FIRE_AFFINITY_DMG,     xi.mod.ICE_AFFINITY_DMG,     xi.mod.WIND_AFFINITY_DMG,      xi.mod.EARTH_AFFINITY_DMG,     xi.mod.THUNDER_AFFINITY_DMG,       xi.mod.WATER_AFFINITY_DMG,      xi.mod.LIGHT_AFFINITY_DMG,  xi.mod.DARK_AFFINITY_DMG  }
@@ -43,7 +43,8 @@ local blmMerit               = { xi.merit.FIRE_MAGIC_POTENCY,  xi.merit.ICE_MAGI
 local rdmMerit               = { xi.merit.FIRE_MAGIC_ACCURACY, xi.merit.ICE_MAGIC_ACCURACY, xi.merit.WIND_MAGIC_ACCURACY,  xi.merit.EARTH_MAGIC_ACCURACY, xi.merit.LIGHTNING_MAGIC_ACCURACY, xi.merit.WATER_MAGIC_ACCURACY   }
 
 -- Table variables.
-local table = xi.magic_utils.parameters.damageParams
+local spellTable   = xi.magic_utils.parameters.damageParams
+local elementTable = xi.magic_utils.parameters.elementParams
 local stat  = 1
 local vNPC  = 2
 local mNPC  = 3
@@ -193,7 +194,8 @@ xi.magic_utils.spell_damage.calculateEleStaffBonus = function(caster, spell, spe
     return eleStaffBonus
 end
 
-xi.magic_utils.spell_damage.calculateMagianAffinity = function(caster, spell) -- TODO: IMPLEMENT MAGIAN TRIALS AFFINITY SYSTEM, which could be as simple as introducing a new modifier. Out of the scope of this rewrite, for now
+xi.magic_utils.spell_damage.calculateMagianAffinity = function(caster, spell)
+    -- TODO: IMPLEMENT MAGIAN TRIALS AFFINITY SYSTEM, which could be as simple as introducing a new modifier. Out of the scope of this rewrite, for now
     local magianAffinity = 1
 
     -- TODO: Code Magian Trials affinity.
@@ -204,12 +206,13 @@ end
 
 -- Careful description required to prevent further problems where people misunderstand what is happening.
 -- Multiple things can affect dmg. in our core SDT is a % reduction in its own step.
-xi.magic_utils.spell_damage.calculateSDT = function(caster, target, spell) -- TODO: implement correct dmg TIER system
-    local SDT = 1 -- The variable we want to calculate
+xi.magic_utils.spell_damage.calculateSDT = function(caster, target, spell, spellElement)
+    local SDT = target:getMod(xi.magic.specificDmgTakenMod[spellElement]) -- The variable we want to calculate
 
     -- SDT (Species/Specific Damage Taken) is a stat/mod present in mobs and players that applies a % to specific damage types.
     -- Think of it as an extension (or the actual base) of elemental resistances in past FF games.
 
+    -- A word on SDT as understood in some wikis, even if they are refering to resistance and not actual SDT
     -- SDT under 50% applies a flat 1/2 *, which was for a long time confused with an additional resist tier, which, in reality, its an independent multiplier.
     -- This is understandable, because in a way, it is effectively a whole tier, but recent testing with skillchains/magic bursts after resist was removed from them, proved this.
     -- SDT affects magic burst damage, but never in a "negative" way.
@@ -232,7 +235,7 @@ xi.magic_utils.spell_damage.calculateResist = function(caster, target, spell, sk
     local magicHitRate  = 0
 
     -- Magic Bursts of the correct element do not get resisted. SDT isn't involved here.
-    local skillchainTier, skillchainCount = FormMagicBurst(spellElement, target)
+    local _, skillchainCount = FormMagicBurst(spellElement, target)
 
     -- Function flow:
     -- Step 1: We calculate caster magic Accuracy. Substeps categorized. Magic accuracy has no effect on potency.
@@ -255,6 +258,7 @@ xi.magic_utils.spell_damage.calculateResist = function(caster, target, spell, sk
 
         local resMod = 0 -- Some spells may possibly be non elemental, but have status effects.
         if spellElement ~= xi.magic.ele.NONE then
+            -- Mod set in database. Base 0 means not resistant nor weak.
             resMod = target:getMod(xi.magic.resistMod[spellElement])
 
             -- Add acc for elemental affinity accuracy and element specific accuracy
@@ -397,6 +401,13 @@ xi.magic_utils.spell_damage.calculateResist = function(caster, target, spell, sk
             if randomVar > magicHitRate then
                 resistTier = resistTier + 1
             end
+
+            -- Apply elemental resistance boons.
+            if resMod > 0 and resistTier < 3 then
+                resistTier = resistTier + 1
+            elseif resMod < 0 and resistTier > 0 then
+                resistTier = resistTier - 1
+            end
         end
 
         if resistTier == 0 then     -- Unresisted
@@ -416,8 +427,8 @@ xi.magic_utils.spell_damage.calculateResist = function(caster, target, spell, sk
 end
 
 xi.magic_utils.spell_damage.calculateIfMagicBurst = function(caster, target, spell, spellElement)
-    local magicBurst                      = 1 -- The variable we want to calculate
-    local skillchainTier, skillchainCount = FormMagicBurst(spellElement, target) -- External function. Not present in magic.lua.
+    local magicBurst         = 1 -- The variable we want to calculate
+    local _, skillchainCount = FormMagicBurst(spellElement, target) -- External function. Not present in magic.lua.
 
     if skillchainCount > 0 then
         magicBurst = 1.25 + (0.1 * skillchainCount) -- Here we add SDT DAMAGE bonus for magic bursts aswell, once SDT is implemented. https://www.bg-wiki.com/ffxi/Resist#SDT_and_Magic_Bursting
@@ -427,10 +438,10 @@ xi.magic_utils.spell_damage.calculateIfMagicBurst = function(caster, target, spe
 end
 
 xi.magic_utils.spell_damage.calculateIfMagicBurstBonus = function(caster, target, spell, spellId, spellElement)
-    local magicBurstBonus                 = 1.0 -- The variable we want to calculate
-    local modBurst                        = 1.0
-    local ancientMagicBurstBonus          = 0
-    local skillchainTier, skillchainCount = FormMagicBurst(spellElement, target) -- External function. Not present in magic.lua.
+    local magicBurstBonus        = 1.0 -- The variable we want to calculate
+    local modBurst               = 1.0
+    local ancientMagicBurstBonus = 0
+    local _, skillchainCount     = FormMagicBurst(spellElement, target) -- External function. Not present in magic.lua.
 
     -- TODO: merge spellFamily and spell ID tables into one table in spell_data.lua, then maybe ad a family for all AM and use spellFamily here instead of spellID
     if spellId >= xi.magic.spell.FLARE and spellId <= xi.magic.spell.FLOOD_II then
@@ -712,7 +723,7 @@ xi.magic_utils.spell_damage.useDamageSpell = function(caster, target, spell)
     local MTDR                 = xi.magic_utils.spell_damage.calculateMTDR(caster, target, spell)
     local eleStaffBonus        = xi.magic_utils.spell_damage.calculateEleStaffBonus(caster, spell, spellElement)
     local magianAffinity       = xi.magic_utils.spell_damage.calculateMagianAffinity(caster, spell)
-    local SDT                  = xi.magic_utils.spell_damage.calculateSDT(caster, target, spell)
+    local SDT                  = xi.magic_utils.spell_damage.calculateSDT(caster, target, spell, spellElement)
     local resist               = xi.magic_utils.spell_damage.calculateResist(caster, target,  spell, skillType, spellElement, statDiff)
     local magicBurst           = xi.magic_utils.spell_damage.calculateIfMagicBurst(caster, target,  spell, spellElement)
     local magicBurstBonus      = xi.magic_utils.spell_damage.calculateIfMagicBurstBonus(caster, target, spell, spellId, spellElement)
