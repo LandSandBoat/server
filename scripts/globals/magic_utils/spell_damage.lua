@@ -43,7 +43,7 @@ local blmMerit               = { xi.merit.FIRE_MAGIC_POTENCY,  xi.merit.ICE_MAGI
 local rdmMerit               = { xi.merit.FIRE_MAGIC_ACCURACY, xi.merit.ICE_MAGIC_ACCURACY, xi.merit.WIND_MAGIC_ACCURACY,  xi.merit.EARTH_MAGIC_ACCURACY, xi.merit.LIGHTNING_MAGIC_ACCURACY, xi.merit.WATER_MAGIC_ACCURACY   }
 
 -- Table variables.
-local table = xi.magic_utils.parameters.damageParams
+local spellTable = xi.magic_utils.parameters.damageParams
 local stat  = 1
 local vNPC  = 2
 local mNPC  = 3
@@ -66,9 +66,9 @@ xi.magic_utils.spell_damage.calculateBaseDamage = function(caster, target, spell
     -- STEP 1: baseSpellDamage (V)
     -----------------------------------
     if caster:isPC() then
-        baseSpellDamage = table[spellId][vPC] -- vPC
+        baseSpellDamage = spellTable[spellId][vPC] -- vPC
     else
-        baseSpellDamage = table[spellId][vNPC] -- vNPC
+        baseSpellDamage = spellTable[spellId][vNPC] -- vNPC
     end
 
     -----------------------------------
@@ -78,13 +78,13 @@ xi.magic_utils.spell_damage.calculateBaseDamage = function(caster, target, spell
     if skillType == xi.skill.ELEMENTAL_MAGIC then
         if caster:isPC() then
             -- (M) In wiki.
-            local spellMultiplier0   = table[spellId][M0]
-            local spellMultiplier50  = table[spellId][M0 + 1]
-            local spellMultiplier100 = table[spellId][M0 + 2]
-            local spellMultiplier200 = table[spellId][M0 + 3]
-            local spellMultiplier300 = table[spellId][M0 + 4]
-            local spellMultiplier400 = table[spellId][M0 + 5]
-            local spellMultiplier500 = table[spellId][M0 + 6]
+            local spellMultiplier0   = spellTable[spellId][M0]
+            local spellMultiplier50  = spellTable[spellId][M0 + 1]
+            local spellMultiplier100 = spellTable[spellId][M0 + 2]
+            local spellMultiplier200 = spellTable[spellId][M0 + 3]
+            local spellMultiplier300 = spellTable[spellId][M0 + 4]
+            local spellMultiplier400 = spellTable[spellId][M0 + 5]
+            local spellMultiplier500 = spellTable[spellId][M0 + 6]
 
             -- Ugly, but better than 7 more values in spells table.
             if statDiff < 50 then
@@ -111,8 +111,8 @@ xi.magic_utils.spell_damage.calculateBaseDamage = function(caster, target, spell
     elseif skillType == xi.skill.DIVINE_MAGIC or
         (skillType == xi.skill.ELEMENTAL_MAGIC and not caster:isPC())
     then
-        local spellMultiplier = table[spellId][mNPC] -- M
-        local inflexionPoint  = table[spellId][I] -- I
+        local spellMultiplier = spellTable[spellId][mNPC] -- M
+        local inflexionPoint  = spellTable[spellId][I] -- I
         if statDiff <= 0 then
             statDiffBonus = statDiff
         elseif statDiff > 0 and statDiff <= inflexionPoint then
@@ -123,7 +123,7 @@ xi.magic_utils.spell_damage.calculateBaseDamage = function(caster, target, spell
 
     -- Ninjutsu.
     elseif skillType == xi.skill.NINJUTSU then
-        statDiffBonus = math.floor(statDiff * table[spellId][mNPC])
+        statDiffBonus = math.floor(statDiff * spellTable[spellId][mNPC])
     end
 
     -----------------------------------
@@ -206,7 +206,10 @@ end
 -- Careful description required to prevent further problems where people misunderstand what is happening.
 -- Multiple things can affect dmg. in our core SDT is a % reduction in its own step.
 xi.magic_utils.spell_damage.calculateSDT = function(caster, target, spell, spellElement)
-    local SDT = target:getMod(xi.magic.specificDmgTakenMod[spellElement]) -- The variable we want to calculate
+    local SDT    = 1 -- The variable we want to calculate
+    local SDTMod = target:getMod(xi.magic.specificDmgTakenMod[spellElement]) -- Elemental SDT mods are Base 100.
+
+    SDT = (SDTMod / -100) + 1 -- Convert Modifier value.
 
     -- SDT (Species/Specific Damage Taken) is a stat/mod present in mobs and players that applies a % to specific damage types.
     -- Think of it as an extension (or the actual base) of elemental resistances in past FF games.
@@ -545,17 +548,6 @@ xi.magic_utils.spell_damage.calculateMagicBonusDiff = function(caster, target, s
     local mabCrit        = caster:getMod(xi.mod.MAGIC_CRITHITRATE)
     local mDefBarBonus   = 0
 
-    -- Drain/Aspir (II) Exception
-    -- if spellId >= 245 and spellId <= 248 then
-    --     magicBonusDiff = 1 + caster:getMod(xi.mod.ENH_DRAIN_ASPIR) / 100
-
-    --     if spellId == 247 or spellId == 248 then
-    --         magicBonusDiff = magicBonusDiff + caster:getMerit(xi.merit.ASPIR_ABSORPTION_AMOUNT) / 100
-    --     end
-
-    --     return magicBonusDiff
-    -- end
-
     -- Ninja spell bonuses
     if skillType == xi.skill.NINJUTSU then
         -- Ninja Category 2 merits.
@@ -612,21 +604,17 @@ end
 
 -- Calculate: Target Magic Damage Adjustment (TMDA)
 -- Referred to on item as "Magic Damage Taken -%", "Damage Taken -%" (Ex. Defending Ring) and "Magic Damage Taken II -%" (Aegis)
-xi.magic_utils.spell_damage.calculateTMDA = function(caster, target, spell, spellElement)
+xi.magic_utils.spell_damage.calculateTMDA = function(caster, target, spell)
     local TMDA = 1 -- The variable we want to calculate
 
-    local globalDamageTaken     = target:getmod(xi.mod.DMG) / 10000         -- Mod is base 10000
-    local magicDamageTaken      = target:getmod(xi.mod.DMGMAGIC) / 10000    -- Mod is base 10000
-    local magicDamageTakenAegis = target:getmod(xi.mod.DMGMAGIC_II) / 10000 -- Mod is base 10000
-    local targetMDB             = target:getmod(xi.mod.MDEF) / 100          -- Mod is base 100
-    local elementalDamageTaken  = 0
-    if spellElement > 0 then
-        elementalDamageTaken    = target:getMod(xi.magic.defenseMod[spellElement]) / 100 -- Mod is base 100
-    end
+    local globalDamageTaken     = target:getMod(xi.mod.DMG) / 10000         -- Mod is base 10000
+    local magicDamageTaken      = target:getMod(xi.mod.DMGMAGIC) / 10000    -- Mod is base 10000
+    local magicDamageTakenAegis = target:getMod(xi.mod.DMGMAGIC_II) / 10000 -- Mod is base 10000
+    local targetMDB             = target:getMod(xi.mod.MDEF) / 100          -- Mod is base 100
 
     local combinedDamageTaken   = utils.clamp(magicDamageTaken + globalDamageTaken, -0.5, 0.5) -- The combination of regular "Damage Taken" and "Magic Damage Taken" caps at 50%
 
-    TMDA = (1 - combinedDamageTaken - magicDamageTakenAegis - elementalDamageTaken) / (1 + targetMDB)
+    TMDA = (1 - combinedDamageTaken - magicDamageTakenAegis) / (1 + targetMDB)
 
     return TMDA
 end
@@ -722,7 +710,7 @@ xi.magic_utils.spell_damage.useDamageSpell = function(caster, target, spell)
     local spellId      = spell:getID()
     local skillType    = spell:getSkillType()
     local spellElement = spell:getElement()
-    local statDiff     = caster:getStat(table[spellId][stat]) - target:getStat(table[spellId][stat])
+    local statDiff     = caster:getStat(spellTable[spellId][stat]) - target:getStat(spellTable[spellId][stat])
 
     -- Variables/steps to calculate finalDamage.
     local spellDamage          = xi.magic_utils.spell_damage.calculateBaseDamage(caster, target, spell, spellId, skillType, statDiff)
@@ -735,13 +723,34 @@ xi.magic_utils.spell_damage.useDamageSpell = function(caster, target, spell)
     local magicBurstBonus      = xi.magic_utils.spell_damage.calculateIfMagicBurstBonus(caster, target, spell, spellId, spellElement)
     local dayAndWeather        = xi.magic_utils.spell_damage.calculateDayAndWeather(caster, target, spell, spellId, spellElement)
     local magicBonusDiff       = xi.magic_utils.spell_damage.calculateMagicBonusDiff(caster, target, spell, spellId, skillType, spellElement)
-    local TMDA                 = xi.magic_utils.spell_damage.calculateTMDA(caster, target, spell, spellElement)
+    local TMDA                 = xi.magic_utils.spell_damage.calculateTMDA(caster, target, spell)
     local ebullienceMultiplier = xi.magic_utils.spell_damage.calculateEbullienceMultiplier(caster, target, spell)
     local skillTypeMultiplier  = xi.magic_utils.spell_damage.calculateSkillTypeMultiplier(caster, target, spell, skillType)
     local ninSkillBonus        = xi.magic_utils.spell_damage.calculateNinSkillBonus(caster, target, spell, spellId, skillType)
     local ninFutaeBonus        = xi.magic_utils.spell_damage.calculateNinFutaeBonus(caster, target, spell, skillType)
     local undeadDivinePenalty  = xi.magic_utils.spell_damage.calculateUndeadDivinePenalty(caster, target, spell, skillType)
     local nukeAbsorbOrNullify  = xi.magic_utils.spell_damage.calculateNukeAbsorbOrNullify(caster, target, spell, spellElement)
+
+    -- Debug
+    -- printf("=====================")
+    -- printf("spellDamage = %s", spellDamage)
+    -- printf("MTDR = %s", MTDR)
+    -- printf("eleStaffBonus = %s", eleStaffBonus)
+    -- printf("magianAffinity = %s", magianAffinity)
+    -- printf("SDT = %s", SDT)
+    -- printf("resist = %s", resist)
+    -- printf("magicBurst = %s", magicBurst)
+    -- printf("magicBurstBonus = %s", magicBurstBonus)
+    -- printf("dayAndWeather = %s", dayAndWeather)
+    -- printf("magicBonusDiff = %s", magicBonusDiff)
+    -- printf("TMDA = %s", TMDA)
+    -- printf("ebullienceMultiplier = %s", ebullienceMultiplier)
+    -- printf("skillTypeMultiplier = %s", skillTypeMultiplier)
+    -- printf("ninSkillBonus = %s", ninSkillBonus)
+    -- printf("ninFutaeBonus = %s", ninFutaeBonus)
+    -- printf("undeadDivinePenalty = %s", undeadDivinePenalty)
+    -- printf("nukeAbsorbOrNullify = %s", nukeAbsorbOrNullify)
+    -- printf("=====================")
 
     -- Calculate finalDamage. It MUST be floored after EACH multiplication.
     finalDamage = math.floor(spellDamage * MTDR)
