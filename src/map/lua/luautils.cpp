@@ -87,12 +87,7 @@
 #include "../vana_time.h"
 #include "../weapon_skill.h"
 
-#ifndef __APPLE__
-#include "filewatch/FileWatch.hpp"
-std::unique_ptr<filewatch::FileWatch<std::string>> watch = nullptr;
-#else
-// TODO: Implement FileWatch backend for OSX
-#endif // __APPLE__
+#include "efsw/efsw.hpp"
 
 namespace luautils
 {
@@ -308,66 +303,53 @@ namespace luautils
         return 0;
     }
 
-// TODO: Implement FileWatch backend for OSX
-#ifndef __APPLE__
     void EnableFilewatcher()
     {
-        // Prepare script file watcher
-        auto watchReaction = [](const std::filesystem::path& path, const filewatch::Event change_type) {
-            // If a Lua file is modified
-            if (path.extension() == ".lua" && change_type == filewatch::Event::modified)
-            {
-                TracyZoneScoped;
-                TracyZoneString(path.generic_string());
-
-                auto real_path          = "./scripts/" + path.generic_string();
-                auto modified           = std::filesystem::last_write_time(real_path).time_since_epoch().count();
-                auto modified_timestamp = static_cast<uint64>(modified);
-                SafeApplyFunc_ReloadList([&](std::map<std::string, uint64>& list) {
-                    if (list.find(real_path) == list.end())
-                    {
-                        // No entry, make one
-                        list[real_path] = modified_timestamp;
-                    }
-                    else
-                    {
-                        auto last_modified = list.at(real_path);
-                        if (last_modified < modified_timestamp)
-                        {
-                            list[real_path] = modified_timestamp;
-                            filteredList.emplace_back(real_path);
-                        }
-                    }
-                });
-            }
-        };
-        watch = std::make_unique<filewatch::FileWatch<std::string>>("./scripts/", watchReaction);
+        //// Prepare script file watcher
+        //auto watchReaction = [](const std::filesystem::path& path, const filewatch::Event change_type) {
+        //    // If a Lua file is modified
+        //    if (path.extension() == ".lua" && change_type == filewatch::Event::modified)
+        //    {
+        //        TracyZoneScoped;
+        //        TracyZoneString(path.generic_string());
+        //
+        //        auto real_path          = "./scripts/" + path.generic_string();
+        //        auto modified           = std::filesystem::last_write_time(real_path).time_since_epoch().count();
+        //        auto modified_timestamp = static_cast<uint64>(modified);
+        //        SafeApplyFunc_ReloadList([&](std::map<std::string, uint64>& list) {
+        //            if (list.find(real_path) == list.end())
+        //            {
+        //                // No entry, make one
+        //                list[real_path] = modified_timestamp;
+        //            }
+        //            else
+        //            {
+        //                auto last_modified = list.at(real_path);
+        //                if (last_modified < modified_timestamp)
+        //                {
+        //                    list[real_path] = modified_timestamp;
+        //                    filteredList.emplace_back(real_path);
+        //                }
+        //            }
+        //        });
+        //    }
+        //};
+        //watch = std::make_unique<filewatch::FileWatch<std::string>>("./scripts/", watchReaction);
     }
 
     void ReloadFilewatchList()
     {
-        SafeApplyFunc_ReloadList([&](std::map<std::string, uint64>& list) {
-            TracyZoneScoped;
-            for (auto& path_string : filteredList)
-            {
-                CacheLuaObjectFromFile(path_string, true);
-            }
-
-            // Erase list
-            filteredList.clear();
-        });
+        //SafeApplyFunc_ReloadList([&](std::map<std::string, uint64>& list) {
+        //    TracyZoneScoped;
+        //    for (auto& path_string : filteredList)
+        //    {
+        //        CacheLuaObjectFromFile(path_string, true);
+        //    }
+        //
+        //    // Erase list
+        //    filteredList.clear();
+        //});
     }
-#else
-    void EnableFilewatcher()
-    {
-        // Intentionally blank
-    }
-
-    void ReloadFilewatchList()
-    {
-        // Intentionally blank
-    }
-#endif // __APPLE__
 
     std::vector<std::string> GetQuestAndMissionFilenamesList()
     {
