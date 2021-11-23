@@ -31,6 +31,7 @@ zones[xi.zone.WINDURST_WATERS] =
         NO_MORE_GP_ELIGIBLE        = 7188,  -- You are not eligible to receive guild points at this time.
         GP_OBTAINED                = 7193,  -- Obtained: <number> guild points.
         NOT_HAVE_ENOUGH_GP         = 7194,  -- You do not have enough guild points.
+        RENOUNCE_CRAFTSMAN         = 7210,  -- You have successfully renounced your status as a <Multiple Choice (Parameter 5)>[craftsman/artisan/adept] of the <Multiple Choice (Parameter 1)>[Carpenters'/Blacksmiths'/Goldsmiths'/Weavers'/Tanners'/Boneworkers'/Alchemists'/Culinarians'] Guild.
         KOPOPO_SHOP_DIALOG         = 7849,  -- Cooking is as much an art as music and painting are. Can your taste buds appreciate the full value of our works of art?
         CHOMOJINJAHL_SHOP_DIALOG   = 7854,  -- The qualities needed to be a good cook are strong arms, a sense of taste, and devotion.
         ENSASA_SHOP_DIALOG         = 8921,  -- Welcome to my little catalyst shop, where you'll find a range of general and unusual goods!

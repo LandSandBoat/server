@@ -13,7 +13,7 @@ require("scripts/globals/status")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local signed = trade:getItem():getSignature() == player:getName() and 1 or 0
+    local signed  = trade:getItem():getSignature() == player:getName() and 1 or 0
     local newRank = xi.crafting.tradeTestItem(player, npc, trade, xi.skill.LEATHERCRAFT)
 
     if
@@ -37,15 +37,23 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local craftSkill = player:getSkillLevel(xi.skill.LEATHERCRAFT)
-    local testItem = xi.crafting.getTestItem(player, npc, xi.skill.LEATHERCRAFT)
-    local guildMember = xi.crafting.isGuildMember(player, 7)
-    local rankCap = xi.crafting.getCraftSkillCap(player, xi.skill.LEATHERCRAFT)
+    local craftSkill        = player:getSkillLevel(xi.skill.LEATHERCRAFT)
+    local testItem          = xi.crafting.getTestItem(player, npc, xi.skill.LEATHERCRAFT)
+    local guildMember       = xi.crafting.isGuildMember(player, 7)
+    local rankCap           = xi.crafting.getCraftSkillCap(player, xi.skill.LEATHERCRAFT)
     local expertQuestStatus = 0
-    local Rank = player:getSkillRank(xi.skill.LEATHERCRAFT)
-    local realSkill = (craftSkill - Rank) / 32
-    local canRankUp = rankCap - realSkill -- used to make sure rank up isn't overridden by ASA mission
-    if (guildMember == 1) then guildMember = 150995375; end
+    local Rank              = player:getSkillRank(xi.skill.LEATHERCRAFT)
+    local realSkill         = (craftSkill - Rank) / 32
+    local canRankUp         = rankCap - realSkill -- used to make sure rank up isn't overridden by ASA mission
+
+    if guildMember == 1 then
+        guildMember = 150995375
+    end
+
+    if xi.crafting.unionRepresentativeTriggerDenounceCheck(player, 648, realSkill, rankCap, 184549887) then
+        return
+    end
+
     if player:getCharVar("LeathercraftExpertQuest") == 1 then
         if player:hasKeyItem(xi.keyItem.WAY_OF_THE_TANNER) then
             expertQuestStatus = 550
@@ -54,13 +62,16 @@ entity.onTrigger = function(player, npc)
         end
     end
 
-    if (player:getCurrentMission(ASA) == xi.mission.id.asa.THAT_WHICH_CURDLES_BLOOD and guildMember == 150995375 and
-        canRankUp >= 3) then
+    if
+        player:getCurrentMission(ASA) == xi.mission.id.asa.THAT_WHICH_CURDLES_BLOOD and
+        guildMember == 150995375 and
+        canRankUp >= 3
+    then
         local item = 0
         local asaStatus = player:getCharVar("ASA_Status")
 
         -- TODO: Other Enfeebling Kits
-        if (asaStatus == 0) then
+        if asaStatus == 0 then
             item = 2779
         else
             printf("Error: Unknown ASA Status Encountered <%u>", asaStatus)
@@ -85,18 +96,25 @@ end
 
 -- 648  649  760  761  762  763  764  765  770  771  772  773  774  775  944  914
 entity.onEventUpdate = function(player, csid, option)
+    if
+        csid == 648 and
+        option >= xi.skill.WOODWORKING and
+        option <= xi.skill.COOKING
+    then
+        xi.crafting.unionRepresentativeEventUpdateDenounce(player, option)
+    end
 end
 
 entity.onEventFinish = function(player, csid, option)
     local guildMember = xi.crafting.isGuildMember(player, 7)
 
-    if (csid == 648 and option == 2) then
+    if csid == 648 and option == 2 then
         if guildMember == 1 then
             player:setCharVar("LeathercraftExpertQuest",1)
         end
-    elseif (csid == 648 and option == 1) then
+    elseif csid == 648 and option == 1 then
         local crystal = 4103 -- dark crystal
-        if (player:getFreeSlotsCount() == 0) then
+        if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, crystal)
         else
             player:addItem(crystal)

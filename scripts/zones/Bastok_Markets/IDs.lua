@@ -34,6 +34,7 @@ zones[xi.zone.BASTOK_MARKETS] =
         NO_MORE_GP_ELIGIBLE          = 7113,  -- You are not eligible to receive guild points at this time.
         GP_OBTAINED                  = 7118,  -- Obtained: <number> guild points.
         NOT_HAVE_ENOUGH_GP           = 7119,  -- You do not have enough guild points.
+        RENOUNCE_CRAFTSMAN           = 7135,  -- You have successfully renounced your status as a <Multiple Choice (Parameter 5)>[craftsman/artisan/adept] of the <Multiple Choice (Parameter 1)>[Carpenters'/Blacksmiths'/Goldsmiths'/Weavers'/Tanners'/Boneworkers'/Alchemists'/Culinarians'] Guild.
         FISHING_MESSAGE_OFFSET       = 7215,  -- You can't fish here.
         SOMNPAEMN_CLOSED_DIALOG      = 7581,  -- Sorry, I don't have anything to sell you. I'm trying to start a business selling goods from Sarutabaruta, but it's not easy getting stuff out of areas that aren't under Bastokan control.
         YAFAFA_CLOSED_DIALOG         = 7582,  -- Sorry, I don't have anything to sell you. I'm trying to start a business selling goods from Kolshushu, but it's not easy getting stuff out of areas that aren't under Bastokan control.
