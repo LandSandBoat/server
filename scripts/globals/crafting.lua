@@ -237,7 +237,7 @@ xi.crafting.unionRepresentativeTriggerDenounceCheck = function(player, eventId, 
     if player:getLocalVar("denounceDialog") == 0 then
         local count   = 0
         local bitmask = 0
-    
+
         for craftID = xi.skill.WOODWORKING, xi.skill.COOKING do
             local rank = player:getSkillRank(craftID)
             if rank < 6 then

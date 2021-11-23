@@ -100,8 +100,8 @@ end
 entity.onEventUpdate = function(player, csid, option)
     if
         csid == 120 and
-        option >= tpz.skill.WOODWORKING and
-        option <= tpz.skill.COOKING
+        option >= xi.skill.WOODWORKING and
+        option <= xi.skill.COOKING
     then
         xi.crafting.unionRepresentativeEventUpdateDenounce(player, option)
     end
