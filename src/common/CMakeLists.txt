@@ -2,6 +2,8 @@ set(SOURCES
     blowfish.cpp
     blowfish.h
     cbasetypes.h
+    filewatcher.cpp
+    filewatcher.h
     kernel.cpp
     kernel.h
     logging.cpp

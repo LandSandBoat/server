@@ -306,7 +306,7 @@ namespace luautils
     void EnableFilewatcher()
     {
         // clang-format off
-        filewatcher = std::make_unique<Filewatcher>("./scripts/",
+        filewatcher = std::make_unique<Filewatcher>("scripts",
             [](const std::filesystem::path& path)
             {
                 if (path.extension() == ".lua")
@@ -314,7 +314,7 @@ namespace luautils
                     TracyZoneScoped;
                     TracyZoneString(path.generic_string());
 
-                    auto real_path          = "./scripts/" + path.generic_string();
+                    auto real_path          = path.generic_string();
                     auto modified           = std::filesystem::last_write_time(real_path).time_since_epoch().count();
                     auto modified_timestamp = static_cast<uint64>(modified);
                     SafeApplyFunc_ReloadList([&](std::map<std::string, uint64>& list) {
