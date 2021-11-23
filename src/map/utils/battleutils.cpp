@@ -771,7 +771,7 @@ namespace battleutils
                 for (auto&& slot : { SLOT_SUB, SLOT_BODY, SLOT_LEGS, SLOT_HEAD, SLOT_HANDS, SLOT_FEET })
                 {
                     CItemEquipment* PItem = PCharDef->getEquip(slot);
-                    if (PItem)
+                    if (PItem && !PItem->isType(ITEM_WEAPON))
                     {
                         uint8 chance;
 
