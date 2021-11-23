@@ -5424,25 +5424,40 @@ void SmallPacket0x0D3(map_session_data_t* const PSession, CCharEntity* const PCh
 
 /************************************************************************
  *                                                                       *
- *  Set Preferred Language                                               *
+ *  Set Chat Filters / Preferred Language                                *
  *                                                                       *
  ************************************************************************/
 
 void SmallPacket0x0DB(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
-    uint8 newLanguage = data.ref<uint8>(0x24);
 
-    if (newLanguage == PChar->search.language)
+    uint8 mode = data.ref<uint8>(0x06);
+    if (mode == 0) // Chat Filters
     {
-        return;
+        uint8 data0 = data.ref<uint32>(0x08); // Name+Config Mask
+        uint8 data1 = data.ref<uint32>(0x0C); // Chat Filter Mask 0
+        uint8 data2 = data.ref<uint32>(0x10); // Chat Filter Mask 1
     }
-
-    auto ret = sql->Query("UPDATE chars SET languages = %u WHERE charid = %u;", newLanguage, PChar->id);
-
-    if (ret == SQL_SUCCESS)
+    else if (mode == 1) // Preferred Language
     {
-        PChar->search.language = newLanguage;
+        // 0x01 - Japanese
+        // 0x02 - English
+        // 0x04 - German
+        // 0x08 - French
+        // 0x10 - Other
+        uint8 newLanguage = data.ref<uint8>(0x24);
+
+        auto ret = sql->Query("UPDATE chars SET languages = %u WHERE charid = %u;", newLanguage, PChar->id);
+
+        if (ret == SQL_SUCCESS)
+        {
+            PChar->search.language = newLanguage;
+        }
+    }
+    else
+    {
+        // Possibly junk
     }
 
     return;
