@@ -1523,7 +1523,7 @@ INSERT INTO `bcnm_battlefield` VALUES (1294,6,16933152,0);-- 'Yagudo Eradicator'
 INSERT INTO `bcnm_battlefield` VALUES (1296,5,16933124,3);-- 'Proto-Omega'
 INSERT INTO `bcnm_battlefield` VALUES (1296,5,16933125,0);-- 'Gunpod'
 -- ------------------------------------
--- ------Temenos - Northern Tower
+-- Temenos - Northern Tower
 -- ------------------------------------
 INSERT INTO `bcnm_battlefield` VALUES (1299,1,16928772,1);-- Goblin Slaughterman
 INSERT INTO `bcnm_battlefield` VALUES (1299,1,16928773,1);-- Goblin Slaughterman
@@ -1574,7 +1574,7 @@ INSERT INTO `bcnm_battlefield` VALUES (1299,1,16928833,3);-- Goblin Theurgist
 INSERT INTO `bcnm_battlefield` VALUES (1299,1,16928834,3);-- Goblin Fencer
 INSERT INTO `bcnm_battlefield` VALUES (1299,1,16928835,3);-- Goblin Theurgist
 -- ------------------------
--- --Temenos - Eastern Tower
+-- Temenos - Eastern Tower
 -- ------------------------
 INSERT INTO `bcnm_battlefield` VALUES (1300,2,16928840,1);-- Fire Elemental
 INSERT INTO `bcnm_battlefield` VALUES (1300,2,16928841,1);-- Fire Elemental
