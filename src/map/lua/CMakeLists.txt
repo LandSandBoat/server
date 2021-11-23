@@ -31,7 +31,6 @@ add_library(lua_bindings STATIC ${SOURCES})
 target_link_libraries(lua_bindings
     PUBLIC
     common
-    filewatch
     project_options
     #project_warnings
 )
