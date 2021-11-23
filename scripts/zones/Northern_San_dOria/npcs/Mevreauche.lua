@@ -48,7 +48,7 @@ entity.onTrigger = function(player, npc)
         guildMember = 150995375
     end
 
-    if xi.crafting.unionRepresentativeTriggerDenounceCheck(player, 626, realSkill, rankCap, 184549887) then
+    if xi.crafting.unionRepresentativeTriggerRenounceCheck(player, 626, realSkill, rankCap, 184549887) then
         return
     end
 
@@ -82,7 +82,7 @@ entity.onEventUpdate = function(player, csid, option)
         option >= xi.skill.WOODWORKING and
         option <= xi.skill.COOKING
     then
-        xi.crafting.unionRepresentativeTriggerDenounceCheck(player, option)
+        xi.crafting.unionRepresentativeTriggerRenounceCheck(player, option)
     end
 end
 

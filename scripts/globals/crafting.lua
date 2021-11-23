@@ -224,23 +224,22 @@ xi.crafting.unionRepresentativeTrigger = function(player, guildID, csid, currenc
     player:startEvent(csid, player:getCurrency(currency), player:getCharVar('[GUILD]currentGuild') - 1, gpItem, remainingPoints, cap, 0, kibits)
 end
 
-xi.crafting.unionRepresentativeEventUpdateDenounce = function(player, craftID)
+xi.crafting.unionRepresentativeEventUpdateRenounce = function(player, craftID)
     local ID   = zones[player:getZoneID()]
-    local rank = player:getSkillRank(craftID)
 
-    player:setSkillRank(craftID, rank - 1)
-    player:setSkillLevel(craftID, rank * 100)
+    player:setSkillRank(craftID, 6)
+    player:setSkillLevel(craftID, 700)
     player:messageSpecial(ID.text.RENOUNCE_CRAFTSMAN, 0, craftID - 49)
 end
 
-xi.crafting.unionRepresentativeTriggerDenounceCheck = function(player, eventId, realSkill, rankCap, param3)
-    if player:getLocalVar("denounceDialog") == 0 then
+xi.crafting.unionRepresentativeTriggerRenounceCheck = function(player, eventId, realSkill, rankCap, param3)
+    if player:getLocalVar("renounceDialog") == 0 then
         local count   = 0
         local bitmask = 0
 
         for craftID = xi.skill.WOODWORKING, xi.skill.COOKING do
             local rank = player:getSkillRank(craftID)
-            if rank < 6 then
+            if rank < 7 then
                 bitmask = bit.bor(bitmask, bit.lshift(1, craftID - 48))
             else
                 count = count + 1
@@ -248,7 +247,7 @@ xi.crafting.unionRepresentativeTriggerDenounceCheck = function(player, eventId, 
         end
 
         if count > 1 then
-            player:setLocalVar("denounceDialog", 1)
+            player:setLocalVar("renounceDialog", 1)
             player:startEvent(eventId, VanadielTime(), realSkill, rankCap, param3, 0, 0, count, bitmask)
             return true
         end
