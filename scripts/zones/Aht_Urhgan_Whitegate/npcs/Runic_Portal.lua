@@ -8,6 +8,7 @@ local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
 require("scripts/globals/besieged")
 require("scripts/globals/keyitems")
 require("scripts/globals/teleports")
+require("scripts/globals/assault")
 -----------------------------------
 local entity = {}
 
@@ -15,17 +16,38 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local hasAssault, keyitem = xi.besieged.hasAssaultOrders(player)
+    local runicPortals  = player:getTeleport(xi.teleport.type.RUNIC_PORTAL)
+    local validTeleport = 0
+    local assaultOrders =
+    {
+        [0] = {KI = xi.ki.LEUJAOAM_ASSAULT_ORDERS,   tele = 0x02, valid = 2,  event = 120},
+        [1] = {KI = xi.ki.MAMOOL_JA_ASSAULT_ORDERS,  tele = 0x08, valid = 8,  event = 121},
+        [2] = {KI = xi.ki.LEBROS_ASSAULT_ORDERS,     tele = 0x10, valid = 16, event = 122},
+        [3] = {KI = xi.ki.PERIQIA_ASSAULT_ORDERS,    tele = 0x04, valid = 4,  event = 123},
+        [4] = {KI = xi.ki.ILRUSI_ASSAULT_ORDERS,     tele = 0x20, valid = 32, event = 124},
+        [5] = {KI = xi.ki.NYZUL_ISLE_ASSAULT_ORDERS, tele = 0x40, valid = 64, event = 125},
+    }
 
-    if hasAssault > 0 then
-        player:messageSpecial(ID.text.RUNIC_PORTAL + 9, keyitem)
-        player:startEvent(hasAssault)
+    if xi.assaultUtil.hasOrders(player) then
+        for k, v in pairs(assaultOrders) do
+            if player:hasKeyItem(v.KI) then
+                validTeleport = bit.band(runicPortals, v.tele)
+                player:messageSpecial(ID.text.CONFIRMING, v.KI)
+
+                if validTeleport == v.valid then
+                    player:startEvent(v.event)
+                else
+                    player:messageSpecial(ID.text.RUNIC_DENIED_ASSAULT_OFFSET + k)
+                end
+
+                break
+            end
+        end
     else
-        local hasPermit    = player:hasKeyItem(xi.ki.RUNIC_PORTAL_USE_PERMIT)
-        local runicPortals = player:getTeleport(xi.teleport.type.RUNIC_PORTAL)
-        local mercRank     = xi.besieged.getMercenaryRank(player)
-        local points       = player:getCurrency("imperial_standing")
-        local hasAstral    = xi.besieged.getAstralCandescence()
+        local hasPermit = player:hasKeyItem(xi.ki.RUNIC_PORTAL_USE_PERMIT)
+        local mercRank  = xi.besieged.getMercenaryRank(player)
+        local points    = player:getCurrency("imperial_standing")
+        local hasAstral = xi.besieged.getAstralCandescence()
 
         player:startEvent(101, hasPermit and xi.ki.RUNIC_PORTAL_USE_PERMIT or 0, runicPortals, mercRank, points, 0, hasAstral, hasPermit and 1 or 0)
     end
@@ -35,61 +57,43 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 101 then
-        -- Runic Portal Use Permit.
-        if option == 101 then
-            xi.teleport.to(player, xi.teleport.id.AZOUPH_SP)
-            player:delKeyItem(xi.ki.RUNIC_PORTAL_USE_PERMIT)
-        elseif option == 102 then
-            xi.teleport.to(player, xi.teleport.id.DVUCCA_SP)
-            player:delKeyItem(xi.ki.RUNIC_PORTAL_USE_PERMIT)
-        elseif option == 103 then
-            xi.teleport.to(player, xi.teleport.id.MAMOOL_SP)
-            player:delKeyItem(xi.ki.RUNIC_PORTAL_USE_PERMIT)
-        elseif option == 104 then
-            xi.teleport.to(player, xi.teleport.id.HALVUNG_SP)
-            player:delKeyItem(xi.ki.RUNIC_PORTAL_USE_PERMIT)
-        elseif option == 105 then
-            xi.teleport.to(player, xi.teleport.id.ILRUSI_SP)
-            player:delKeyItem(xi.ki.RUNIC_PORTAL_USE_PERMIT)
-        elseif option == 106 then
-            xi.teleport.to(player, xi.teleport.id.NYZUL_SP)
-            player:delKeyItem(xi.ki.RUNIC_PORTAL_USE_PERMIT)
+    local portalPick =
+    {
+        [101]  = xi.teleport.id.AZOUPH_SP,
+        [102]  = xi.teleport.id.DVUCCA_SP,
+        [103]  = xi.teleport.id.MAMOOL_SP,
+        [104]  = xi.teleport.id.HALVUNG_SP,
+        [105]  = xi.teleport.id.ILRUSI_SP,
+        [106]  = xi.teleport.id.NYZUL_SP,
+        [120]  = xi.teleport.id.AZOUPH_SP,
+        [121]  = xi.teleport.id.MAMOOL_SP,
+        [122]  = xi.teleport.id.HALVUNG_SP,
+        [123]  = xi.teleport.id.DVUCCA_SP,
+        [124]  = xi.teleport.id.ILRUSI_SP,
+        [125]  = xi.teleport.id.NYZUL_SP,
+        [1001] = xi.teleport.id.AZOUPH_SP,
+        [1002] = xi.teleport.id.DVUCCA_SP,
+        [1003] = xi.teleport.id.MAMOOL_SP,
+        [1004] = xi.teleport.id.HALVUNG_SP,
+        [1005] = xi.teleport.id.ILRUSI_SP,
+        [1006] = xi.teleport.id.NYZUL_SP,
+    }
 
-        -- Imperial Standing
-        elseif option == 1001 then
-            xi.teleport.to(player, xi.teleport.id.AZOUPH_SP)
-            player:delCurrency("imperial_standing", 200)
-        elseif option == 1002 then
-            xi.teleport.to(player, xi.teleport.id.DVUCCA_SP)
-            player:delCurrency("imperial_standing", 200)
-        elseif option == 1003 then
-            xi.teleport.to(player, xi.teleport.id.MAMOOL_SP)
-            player:delCurrency("imperial_standing", 200)
-        elseif option == 1004 then
-            xi.teleport.to(player, xi.teleport.id.HALVUNG_SP)
-            player:delCurrency("imperial_standing", 200)
-        elseif option == 1005 then
-            xi.teleport.to(player, xi.teleport.id.ILRUSI_SP)
-            player:delCurrency("imperial_standing", 200)
-        elseif option == 1006 then
-            xi.teleport.to(player, xi.teleport.id.NYZUL_SP)
-            player:delCurrency("imperial_standing", 200)
+    if csid == 101 and option > 100 and option < 1007 then
+        if option >= 101 and option <= 106 then
+            player:delKeyItem(xi.ki.RUNIC_PORTAL_USE_PERMIT)
+            xi.teleport.to(player, portalPick[option])
+        elseif option >= 1001 and option <= 1006 then
+            if player:getCurrency("imperial_standing") >= 200 then
+                player:delCurrency("imperial_standing",200)
+                xi.teleport.to(player, portalPick[option])
+            else
+                player:messageSpecial(ID.text.SUFFICIENT_IMPERIAL_STANDING)
+            end
         end
 
-    -- Assault Orders csid
-    elseif csid == 120 and option == 1 then
-        xi.teleport.to(player, xi.teleport.id.AZOUPH_SP)
-    elseif csid == 121 and option == 1 then
-        xi.teleport.to(player, xi.teleport.id.MAMOOL_SP)
-    elseif csid == 122 and option == 1 then
-        xi.teleport.to(player, xi.teleport.id.HALVUNG_SP)
-    elseif csid == 123 and option == 1 then
-        xi.teleport.to(player, xi.teleport.id.DVUCCA_SP)
-    elseif csid == 124 and option == 1 then
-        xi.teleport.to(player, xi.teleport.id.ILRUSI_SP)
-    elseif csid == 125 and option == 1 then
-        xi.teleport.to(player, xi.teleport.id.NYZUL_SP)
+    elseif csid >= 120 and csid <= 125 and option == 1 then
+        xi.teleport.to(player, portalPick[csid])
     end
 end
 
