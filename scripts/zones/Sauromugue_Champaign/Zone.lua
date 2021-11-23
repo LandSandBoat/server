@@ -17,7 +17,7 @@ end
 zone_object.onInitialize = function(zone)
     UpdateNMSpawnPoint(ID.mob.ROC)
     GetMobByID(ID.mob.ROC):setRespawnTime(math.random(900, 10800))
-    GetNPCByID(ID.npc.QM2 + math.random(0, 5)):setLocalVar("[QM]Select", 1) -- Determine which QM is active today for THF AF2
+    GetNPCByID(ID.npc.QM2 + math.random(0, 5)):setLocalVar('Quest[2][70]Option', 1) -- Determine which QM is active today for THF AF2
     xi.voidwalker.zoneOnInit(zone)
 end
 
@@ -46,7 +46,8 @@ zone_object.onGameDay = function(zone)
     for i = ID.npc.QM2, ID.npc.QM2+5 do
         GetNPCByID(i):resetLocalVars()
     end
-    GetNPCByID(ID.npc.QM2 + math.random(0, 5)):setLocalVar("[QM]Select", 1) -- Determine which QM is active today for THF AF2
+
+    GetNPCByID(ID.npc.QM2 + math.random(0, 5)):setLocalVar('Quest[2][70]Option', 1) -- Determine which QM is active today for THF AF2
 end
 
 zone_object.onEventUpdate = function(player, csid, option)

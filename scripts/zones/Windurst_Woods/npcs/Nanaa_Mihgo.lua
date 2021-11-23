@@ -64,7 +64,6 @@ end
 entity.onTrigger = function(player, npc)
     local wildcatWindurst = player:getCharVar("WildcatWindurst")
     local mihgosAmigo = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MIHGO_S_AMIGO)
-    local tenshodoShowdown = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_TENSHODO_SHOWDOWN)
     local rockRacketeer = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ROCK_RACKETEER)
     local rockRacketeerCS = player:getCharVar("rockracketeer_sold")
     local thickAsThieves = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.AS_THICK_AS_THIEVES)
@@ -94,20 +93,6 @@ entity.onTrigger = function(player, npc)
         player:setLocalVar("TrustDialogue", 1)
 
         player:startEvent(865, 0, 0, 0, TrustMemory(player), 0, 0, 0, trustFlag)
-
-    -- THICK AS THIEVES (THF AF Head)
-    elseif
-        job == xi.job.THF and lvl >= xi.settings.AF2_QUEST_LEVEL and
-        thickAsThieves == QUEST_AVAILABLE and tenshodoShowdown == QUEST_COMPLETED
-    then
-        player:startEvent(504) -- start quest
-    elseif thickAsThieves == QUEST_ACCEPTED then
-        if player:hasKeyItem(xi.ki.FIRST_SIGNED_FORGED_ENVELOPE) and
-            player:hasKeyItem(xi.ki.SECOND_SIGNED_FORGED_ENVELOPE) then
-            player:startEvent(508) -- complete quest
-        else
-            player:startEvent(505, 0, xi.ki.GANG_WHEREABOUTS_NOTE) -- before completing grappling and gambling sidequests
-        end
 
     -- HITTING THE MARQUISATE (THF AF Feet)
     elseif job == xi.job.THF and lvl >= xi.settings.AF3_QUEST_LEVEL and
@@ -162,20 +147,6 @@ entity.onEventFinish = function(player, csid, option)
     -- LURE OF THE WILDCAT (WINDURST)
     if csid == 732 then
         player:setCharVar("WildcatWindurst", utils.mask.setBit(player:getCharVar("WildcatWindurst"), 4, true))
-
-    -- THICK AS THIEVES
-    elseif (csid == 504 and option == 1) then -- start quest "as thick as thieves"
-        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.AS_THICK_AS_THIEVES)
-        player:setCharVar("thickAsThievesGamblingCS", 1)
-        npcUtil.giveKeyItem(player,
-            {xi.ki.GANG_WHEREABOUTS_NOTE, xi.ki.FIRST_FORGED_ENVELOPE, xi.ki.SECOND_FORGED_ENVELOPE})
-    elseif (csid == 508 and npcUtil.completeQuest(player, WINDURST, xi.quest.id.windurst.AS_THICK_AS_THIEVES, {
-        item = 12514,
-        var = "thickAsThievesGamblingCS"
-    })) then
-        player:delKeyItem(xi.ki.GANG_WHEREABOUTS_NOTE)
-        player:delKeyItem(xi.ki.FIRST_SIGNED_FORGED_ENVELOPE)
-        player:delKeyItem(xi.ki.SECOND_SIGNED_FORGED_ENVELOPE)
 
     -- HITTING THE MARQUISATE
     elseif csid == 512 then
