@@ -2180,7 +2180,7 @@ namespace charutils
 
     void EquipItem(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 containerID)
     {
-        CItemEquipment* PItem = (CItemEquipment*)PChar->getStorage(containerID)->GetItem(slotID);
+        CItemEquipment* PItem = dynamic_cast<CItemEquipment*>(PChar->getStorage(containerID)->GetItem(slotID));
 
         if (PItem && PItem == PChar->getEquip((SLOTTYPE)equipSlotID))
         {
@@ -2261,17 +2261,6 @@ namespace charutils
                 // If the weapon ISN'T a wind based instrument or a string based instrument
                 PChar->health.tp = 0;
             }
-
-            /*// fixes logging in with no h2h
-            if(PChar->m_Weapons[SLOT_MAIN]->getDmgType() == DAMAGE_NONE && PChar->GetMJob() == JOB_MNK)
-            {
-                PChar->m_Weapons[SLOT_MAIN] = itemutils::GetUnarmedH2HItem();
-            }
-            else if(PChar->m_Weapons[SLOT_MAIN] == itemutils::GetUnarmedH2HItem() && PChar->GetMJob() != JOB_MNK)
-            {
-                // return back to normal if changed jobs
-                PChar->m_Weapons[SLOT_MAIN] = itemutils::GetUnarmedItem();
-            }*/
 
             if (!PChar->getEquip(SLOT_MAIN) || !PChar->getEquip(SLOT_MAIN)->isType(ITEM_EQUIPMENT) ||
                 PChar->m_Weapons[SLOT_MAIN] == itemutils::GetUnarmedH2HItem())

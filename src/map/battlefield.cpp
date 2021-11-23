@@ -498,7 +498,8 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
     }
     else
     {
-        auto check = [PEntity, &found](auto entity) {
+        auto check = [PEntity, &found](auto entity)
+        {
             if (PEntity == entity)
             {
                 found = true;
@@ -511,7 +512,14 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
         {
             PEntity->status = STATUS_TYPE::DISAPPEAR;
             PEntity->loc.zone->PushPacket(PEntity, CHAR_INRANGE, new CEntityUpdatePacket(PEntity, ENTITY_DESPAWN, UPDATE_ALL_MOB));
-            m_NpcList.erase(std::remove_if(m_NpcList.begin(), m_NpcList.end(), check), m_NpcList.end());
+
+            if (auto* PNpcEntity = dynamic_cast<CNpcEntity*>(PEntity))
+            {
+                if (std::find(m_NpcList.begin(), m_NpcList.end(), PNpcEntity) != m_NpcList.end())
+                {
+                    m_NpcList.erase(std::remove_if(m_NpcList.begin(), m_NpcList.end(), check), m_NpcList.end());
+                }
+            }
         }
         else if (PEntity->objtype == TYPE_MOB || PEntity->objtype == TYPE_PET)
         {
