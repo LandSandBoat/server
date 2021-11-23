@@ -5438,6 +5438,12 @@ void SmallPacket0x0DB(map_session_data_t* const PSession, CCharEntity* const PCh
         uint8 data0 = data.ref<uint32>(0x08); // Name+Config Mask
         uint8 data1 = data.ref<uint32>(0x0C); // Chat Filter Mask 0
         uint8 data2 = data.ref<uint32>(0x10); // Chat Filter Mask 1
+
+        PChar->chatFilterFlags = (data1 << 32) & data2;
+
+        std::ignore = data0;
+        std::ignore = data1;
+        std::ignore = data2;
     }
     else if (mode == 1) // Preferred Language
     {
