@@ -13,7 +13,19 @@ else
     file_list+=(${target})
 fi
 
-#for f in "${file_list[@]}"
-#do
-    # TODO: Use a mysql executable to validate the sql scripts
-#done
+FAIL=0
+printf "Checking for bogus comments:"
+for f in "${file_list[@]}"
+do
+    BOGUS_COMMENTS=`grep -En '(--\w)' $f`
+    if [[ -n $BOGUS_COMMENTS ]]; then
+        printf "\n$f:\n"
+        printf "%s\n" "${BOGUS_COMMENTS[@]}"
+
+        FAIL=1
+    fi
+done
+
+if [ ${FAIL} == 1 ]; then
+    exit 1
+fi
