@@ -66,13 +66,6 @@ entity.onTrigger = function(player, npc)
     local mihgosAmigo = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MIHGO_S_AMIGO)
     local rockRacketeer = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ROCK_RACKETEER)
     local rockRacketeerCS = player:getCharVar("rockracketeer_sold")
-    local thickAsThieves = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.AS_THICK_AS_THIEVES)
-    local hittingTheMarquisate = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.HITTING_THE_MARQUISATE)
-    local hittingTheMarquisateYatnielCS = player:getCharVar("hittingTheMarquisateYatnielCS")
-    local hittingTheMarquisateHagainCS = player:getCharVar("hittingTheMarquisateHagainCS")
-    local hittingTheMarquisateNanaaCS = player:getCharVar("hittingTheMarquisateNanaaCS")
-    local job = player:getMainJob()
-    local lvl = player:getMainLvl()
 
     -- LURE OF THE WILDCAT (WINDURST 2-1)
     -- Simply checks this NPC as talked to for the PC, should be highest priority
@@ -93,16 +86,6 @@ entity.onTrigger = function(player, npc)
         player:setLocalVar("TrustDialogue", 1)
 
         player:startEvent(865, 0, 0, 0, TrustMemory(player), 0, 0, 0, trustFlag)
-
-    -- HITTING THE MARQUISATE (THF AF Feet)
-    elseif job == xi.job.THF and lvl >= xi.settings.AF3_QUEST_LEVEL and
-        thickAsThieves == QUEST_COMPLETED and hittingTheMarquisate == QUEST_AVAILABLE
-    then
-        player:startEvent(512) -- start quest
-    elseif hittingTheMarquisateYatnielCS == 3 and hittingTheMarquisateHagainCS == 9 then
-        player:startEvent(516) -- finish first part
-    elseif hittingTheMarquisateNanaaCS == 1 then
-        player:startEvent(517) -- second part
 
     -- ROCK RACKETEER (Mihgo's Amigo follow-up)
     elseif mihgosAmigo == QUEST_COMPLETED and rockRacketeer == QUEST_AVAILABLE and
@@ -147,17 +130,6 @@ entity.onEventFinish = function(player, csid, option)
     -- LURE OF THE WILDCAT (WINDURST)
     if csid == 732 then
         player:setCharVar("WildcatWindurst", utils.mask.setBit(player:getCharVar("WildcatWindurst"), 4, true))
-
-    -- HITTING THE MARQUISATE
-    elseif csid == 512 then
-        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.HITTING_THE_MARQUISATE)
-        player:setCharVar("hittingTheMarquisateYatnielCS", 1)
-        player:setCharVar("hittingTheMarquisateHagainCS", 1)
-        npcUtil.giveKeyItem(player, xi.ki.CAT_BURGLARS_NOTE)
-    elseif csid == 516 then
-        player:setCharVar("hittingTheMarquisateNanaaCS", 1)
-        player:setCharVar("hittingTheMarquisateYatnielCS", 0)
-        player:setCharVar("hittingTheMarquisateHagainCS", 0)
 
     -- ROCK RACKETEER
     elseif csid == 93 then

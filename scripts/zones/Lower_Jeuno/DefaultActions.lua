@@ -8,4 +8,5 @@ return {
     ['Muckvix']       = { event = 15 },
     ['Omer']          = { event = 206 },
     ['Sattal-Mansal'] = { event = 96 },
+    ['Yatniel']       = { event = 10028 },
 }

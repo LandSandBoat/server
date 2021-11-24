@@ -385,6 +385,7 @@ quest.sections =
                         player:delKeyItem(xi.ki.GANG_WHEREABOUTS_NOTE)
                         player:delKeyItem(xi.ki.FIRST_SIGNED_FORGED_ENVELOPE)
                         player:delKeyItem(xi.ki.SECOND_SIGNED_FORGED_ENVELOPE)
+                        player:setLocalVar('Quest[2][71]mustZone', 1)
                     end
                 end,
             },
