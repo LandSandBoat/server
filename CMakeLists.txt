@@ -17,7 +17,6 @@ include(Platform)
 include(StandardProjectSettings)
 include(CompilerWarnings)
 include(Sanitizers)
-include(ClangFormat)
 include(Tracy)
 include(Valgrind)
 
@@ -47,9 +46,6 @@ link_libraries(${CMAKE_THREAD_LIBS_INIT})
 
 # Find MySQL
 find_package(MySQL REQUIRED)
-
-# Find ZMQ
-find_package(ZeroMQ REQUIRED)
 
 # Find LuaJIT
 find_package(LuaJIT REQUIRED)
