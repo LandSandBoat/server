@@ -19,6 +19,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 ===========================================================================
 */
 
+#include <memory>
 #include <mutex>
 #include <queue>
 
@@ -44,10 +45,10 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 namespace message
 {
-    zmq::context_t             zContext;
-    zmq::socket_t*             zSocket = nullptr;
-    std::mutex                 send_mutex;
-    std::queue<chat_message_t> message_queue;
+    zmq::context_t                 zContext;
+    std::unique_ptr<zmq::socket_t> zSocket;
+    std::mutex                     send_mutex;
+    std::queue<chat_message_t>     message_queue;
 
     void send_queue()
     {
@@ -58,9 +59,9 @@ namespace message
             message_queue.pop();
             try
             {
-                zSocket->send(*msg.type, ZMQ_SNDMORE);
-                zSocket->send(*msg.data, ZMQ_SNDMORE);
-                zSocket->send(*msg.packet);
+                zSocket->send(*msg.type, zmq::send_flags::sndmore);
+                zSocket->send(*msg.data, zmq::send_flags::sndmore);
+                zSocket->send(*msg.packet, zmq::send_flags::none);
             }
             catch (std::exception& e)
             {
@@ -558,7 +559,8 @@ namespace message
                 {
                     return;
                 }
-                if (!zSocket->recv(&type))
+
+                if (!zSocket->recv(type, zmq::recv_flags::none))
                 {
                     if (!message_queue.empty())
                     {
@@ -567,16 +569,12 @@ namespace message
                     continue;
                 }
 
-                int    more;
-                size_t size = sizeof(more);
-                zSocket->getsockopt(ZMQ_RCVMORE, &more, &size);
-                if (more)
+                if (zSocket->get(zmq::sockopt::rcvmore))
                 {
-                    zSocket->recv(&extra);
-                    zSocket->getsockopt(ZMQ_RCVMORE, &more, &size);
-                    if (more)
+                    std::ignore = zSocket->recv(extra, zmq::recv_flags::none);
+                    if (zSocket->get(zmq::sockopt::rcvmore))
                     {
-                        zSocket->recv(&packet);
+                        std::ignore = zSocket->recv(packet);
                     }
                 }
             }
@@ -606,7 +604,7 @@ namespace message
         Sql_Keepalive(SqlHandle);
 
         zContext = zmq::context_t(1);
-        zSocket  = new zmq::socket_t(zContext, ZMQ_DEALER);
+        zSocket  = std::make_unique<zmq::socket_t>(zContext, zmq::socket_type::dealer);
 
         uint64 ipp  = map_ip.s_addr;
         uint64 port = map_port;
@@ -623,10 +621,10 @@ namespace message
         }
         ipp |= (port << 32);
 
-        zSocket->setsockopt(ZMQ_IDENTITY, &ipp, sizeof ipp);
+        zSocket->set(zmq::sockopt::routing_id, std::to_string(ipp));
 
-        uint32 to = 500;
-        zSocket->setsockopt(ZMQ_RCVTIMEO, &to, sizeof to);
+        int32 to = 500;
+        zSocket->set(zmq::sockopt::rcvtimeo, to);
 
         string_t server = "tcp://";
         server.append(chatIp);
@@ -650,7 +648,6 @@ namespace message
         if (zSocket)
         {
             zSocket->close();
-            delete zSocket;
             zSocket = nullptr;
         }
         zContext.close();

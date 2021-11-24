@@ -19,6 +19,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 ===========================================================================
 */
 
+#include <memory>
 #include <mutex>
 #include <queue>
 
@@ -26,11 +27,11 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "login.h"
 #include "message_server.h"
 
-zmq::context_t             zContext;
-zmq::socket_t*             zSocket       = nullptr;
-Sql_t*                     ChatSqlHandle = nullptr;
-std::queue<chat_message_t> msg_queue;
-std::mutex                 queue_mutex;
+zmq::context_t                 zContext;
+std::unique_ptr<zmq::socket_t> zSocket;
+Sql_t*                         ChatSqlHandle;
+std::queue<chat_message_t>     msg_queue;
+std::mutex                     queue_mutex;
 
 void queue_message(uint64 ipp, MSGSERVTYPE type, zmq::message_t* extra, zmq::message_t* packet)
 {
@@ -55,19 +56,19 @@ void message_server_send(uint64 ipp, MSGSERVTYPE type, zmq::message_t* extra, zm
     {
         zmq::message_t to(sizeof(uint64));
         memcpy(to.data(), &ipp, sizeof(uint64));
-        zSocket->send(to, ZMQ_SNDMORE);
+        zSocket->send(to, zmq::send_flags::sndmore);
 
         zmq::message_t newType(sizeof(MSGSERVTYPE));
         ref<uint8>((uint8*)newType.data(), 0) = type;
-        zSocket->send(newType, ZMQ_SNDMORE);
+        zSocket->send(newType, zmq::send_flags::sndmore);
 
         zmq::message_t newExtra(extra->size());
         memcpy(newExtra.data(), extra->data(), extra->size());
-        zSocket->send(newExtra, ZMQ_SNDMORE);
+        zSocket->send(newExtra, zmq::send_flags::sndmore);
 
         zmq::message_t newPacket(packet->size());
         memcpy(newPacket.data(), packet->data(), packet->size());
-        zSocket->send(newPacket);
+        zSocket->send(newPacket, zmq::send_flags::none);
     }
     catch (zmq::error_t& e)
     {
@@ -219,7 +220,7 @@ void message_server_listen()
 
         try
         {
-            if (!zSocket->recv(&from))
+            if (!zSocket->recv(from))
             {
                 if (!msg_queue.empty())
                 {
@@ -235,23 +236,15 @@ void message_server_listen()
                 continue;
             }
 
-            int    more;
-            size_t size = sizeof(more);
-            zSocket->getsockopt(ZMQ_RCVMORE, &more, &size);
-
-            if (more)
+            if (zSocket->get(zmq::sockopt::rcvmore))
             {
-                zSocket->recv(&type);
-                zSocket->getsockopt(ZMQ_RCVMORE, &more, &size);
-
-                if (more)
+                std::ignore = zSocket->recv(type);
+                if (zSocket->get(zmq::sockopt::rcvmore))
                 {
-                    zSocket->recv(&extra);
-                    zSocket->getsockopt(ZMQ_RCVMORE, &more, &size);
-
-                    if (more)
+                    std::ignore = zSocket->recv(extra);
+                    if (zSocket->get(zmq::sockopt::rcvmore))
                     {
-                        zSocket->recv(&packet);
+                        std::ignore = zSocket->recv(packet);
                     }
                 }
             }
@@ -285,10 +278,10 @@ void message_server_init()
     Sql_Keepalive(ChatSqlHandle);
 
     zContext = zmq::context_t(1);
-    zSocket  = new zmq::socket_t(zContext, ZMQ_ROUTER);
+    zSocket  = std::make_unique<zmq::socket_t>(zContext, zmq::socket_type::router);
 
-    uint32 to = 500;
-    zSocket->setsockopt(ZMQ_RCVTIMEO, &to, sizeof to);
+    int32 to = 500;
+    zSocket->set(zmq::sockopt::sndtimeo, to);
 
     string_t server = "tcp://";
     server.append(login_config.msg_server_ip);
@@ -317,7 +310,6 @@ void message_server_close()
     if (zSocket)
     {
         zSocket->close();
-        delete zSocket;
         zSocket = nullptr;
     }
     zContext.close();

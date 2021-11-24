@@ -25,8 +25,7 @@ set(SOURCES
     utils.h
     version.h
     zlib.cpp
-    zlib.h
-    zmq.hpp)
+    zlib.h)
 
 add_library(common STATIC ${SOURCES})
 
@@ -35,6 +34,8 @@ target_link_libraries(common
     spdlog_header_only
     sol2_single
     efsw
+    libzmq-static
+    cppzmq-static
     project_options
     #PRIVATE
     #project_warnings
