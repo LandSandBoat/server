@@ -28,6 +28,7 @@ zones[xi.zone.NORTH_GUSTABERG] =
         FISHING_MESSAGE_OFFSET        = 7234,  -- You can't fish here.
         DIG_THROW_AWAY                = 7247,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
         FIND_NOTHING                  = 7249,  -- You dig and you dig, but find nothing.
+        SENSE_EVIL_PRESENCE           = 7337,  -- You sense an evil presence...
         SPARKLING_LIGHT               = 7378,  -- The ground is sparkling with a strange light.
         SHINING_OBJECT_SLIPS_AWAY     = 7442,  -- The shining object slips through your fingers and is washed further down the stream.
         REACH_WATER_FROM_HERE         = 7449,  -- You can reach the water from here.
