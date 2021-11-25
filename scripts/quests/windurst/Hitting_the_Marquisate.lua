@@ -34,6 +34,40 @@ quest.reward =
     title = xi.title.PARAGON_OF_THIEF_EXCELLENCE,
 }
 
+-- Data for reused functions for the initial six Garlaige QMs.  Ordered by quest
+-- flow.
+-- Table Format: Required Progress Value, Trigger Event, messageSpecial offset
+local garlaigeQmInfo =
+{
+    ['qm6']  = { 1, 50, 1 },
+    ['qm5']  = { 2, 51, 2 },
+    ['qm12'] = { 3, 52, 0 },
+    ['qm13'] = { 4, 53, 0 },
+    ['qm10'] = { 5, 54, 3 },
+    ['qm9']  = { 6, 55, 0 },
+}
+
+local garlaigeQmOnTrigger = function(player, npc)
+    local qmData = garlaigeQmInfo[npc:getName()]
+
+    if
+        player:hasKeyItem(xi.ki.BOMB_INCENSE) and
+        quest:getVar(player, 'hagainProg') == qmData[1]
+    then
+        player:messageSpecial(garlaigeID.text.PRESENCE_FROM_CEILING)
+        return quest:progressEvent(qmData[2], xi.ki.BOMB_INCENSE)
+    end
+end
+
+local garlaigeQmOnEventFinish = function(player, csid, option, npc)
+    local qmData = garlaigeQmInfo[npc:getName()]
+
+    if option == 1 then
+        player:messageSpecial(garlaigeID.text.THE_PRESENCE_MOVES + qmData[3]) -- Presence moved west.
+        quest:addVar(player, 'hagainProg', 1)
+    end
+end
+
 quest.sections =
 {
     {
@@ -68,80 +102,32 @@ quest.sections =
         {
             ['qm5'] =
             {
-                onTrigger = function(player, npc)
-                    if
-                        player:hasKeyItem(xi.ki.BOMB_INCENSE) and
-                        quest:getVar(player, 'hagainProg') == 2
-                    then
-                        player:messageSpecial(garlaigeID.text.PRESENCE_FROM_CEILING)
-                        return quest:progressEvent(51, xi.ki.BOMB_INCENSE)
-                    end
-                end,
+                onTrigger = garlaigeQmOnTrigger,
             },
 
             ['qm6'] =
             {
-                onTrigger = function(player, npc)
-                    if
-                        player:hasKeyItem(xi.ki.BOMB_INCENSE) and
-                        quest:getVar(player, 'hagainProg') == 1
-                    then
-                        player:messageSpecial(garlaigeID.text.PRESENCE_FROM_CEILING)
-                        return quest:progressEvent(50, xi.ki.BOMB_INCENSE)
-                    end
-                end,
+                onTrigger = garlaigeQmOnTrigger,
             },
 
             ['qm9'] =
             {
-                onTrigger = function(player, npc)
-                    if
-                        player:hasKeyItem(xi.ki.BOMB_INCENSE) and
-                        quest:getVar(player, 'hagainProg') == 6
-                    then
-                        player:messageSpecial(garlaigeID.text.PRESENCE_FROM_CEILING)
-                        return quest:progressEvent(55, xi.ki.BOMB_INCENSE)
-                    end
-                end,
+                onTrigger = garlaigeQmOnTrigger,
             },
 
             ['qm10'] =
             {
-                onTrigger = function(player, npc)
-                    if
-                        player:hasKeyItem(xi.ki.BOMB_INCENSE) and
-                        quest:getVar(player, 'hagainProg') == 5
-                    then
-                        player:messageSpecial(garlaigeID.text.PRESENCE_FROM_CEILING)
-                        return quest:progressEvent(54, xi.ki.BOMB_INCENSE)
-                    end
-                end,
+                onTrigger = garlaigeQmOnTrigger,
             },
 
             ['qm12'] =
             {
-                onTrigger = function(player, npc)
-                    if
-                        player:hasKeyItem(xi.ki.BOMB_INCENSE) and
-                        quest:getVar(player, 'hagainProg') == 3
-                    then
-                        player:messageSpecial(garlaigeID.text.PRESENCE_FROM_CEILING)
-                        return quest:progressEvent(52, xi.ki.BOMB_INCENSE)
-                    end
-                end,
+                onTrigger = garlaigeQmOnTrigger,
             },
 
             ['qm13'] =
             {
-                onTrigger = function(player, npc)
-                    if
-                        player:hasKeyItem(xi.ki.BOMB_INCENSE) and
-                        quest:getVar(player, 'hagainProg') == 4
-                    then
-                        player:messageSpecial(garlaigeID.text.PRESENCE_FROM_CEILING)
-                        return quest:progressEvent(53, xi.ki.BOMB_INCENSE)
-                    end
-                end,
+                onTrigger = garlaigeQmOnTrigger,
             },
 
             ['qm15'] =
@@ -167,47 +153,12 @@ quest.sections =
 
             onEventFinish =
             {
-                [50] = function(player, csid, option, npc)
-                    if option == 1 then
-                        player:messageSpecial(garlaigeID.text.THE_PRESENCE_MOVES + 1) -- Presence moved west.
-                        quest:setVar(player, 'hagainProg', 2)
-                    end
-                end,
-
-                [51] = function(player, csid, option, npc)
-                    if option == 1 then
-                        player:messageSpecial(garlaigeID.text.THE_PRESENCE_MOVES + 2) -- Presence moved south.
-                        quest:setVar(player, 'hagainProg', 3)
-                    end
-                end,
-
-                [52] = function(player, csid, option, npc)
-                    if option == 1 then
-                        player:messageSpecial(garlaigeID.text.THE_PRESENCE_MOVES) -- Presence moved east.
-                        quest:setVar(player, 'hagainProg', 4)
-                    end
-                end,
-
-                [53] = function(player, csid, option, npc)
-                    if option == 1 then
-                        player:messageSpecial(garlaigeID.text.THE_PRESENCE_MOVES) -- Presence moved east.
-                        quest:setVar(player, 'hagainProg', 5)
-                    end
-                end,
-
-                [54] = function(player, csid, option, npc)
-                    if option == 1 then
-                        player:messageSpecial(garlaigeID.text.THE_PRESENCE_MOVES + 3) -- Presence moved north.
-                        quest:setVar(player, 'hagainProg', 6)
-                    end
-                end,
-
-                [55] = function(player, csid, option, npc)
-                    if option == 1 then
-                        player:messageSpecial(garlaigeID.text.THE_PRESENCE_MOVES) -- Presence moved east.
-                        quest:setVar(player, 'hagainProg', 7)
-                    end
-                end,
+                [50] = garlaigeQmOnEventFinish,
+                [51] = garlaigeQmOnEventFinish,
+                [52] = garlaigeQmOnEventFinish,
+                [53] = garlaigeQmOnEventFinish,
+                [54] = garlaigeQmOnEventFinish,
+                [55] = garlaigeQmOnEventFinish,
 
                 [56] = function(player, csid, option, npc)
                     if option == 1 then
