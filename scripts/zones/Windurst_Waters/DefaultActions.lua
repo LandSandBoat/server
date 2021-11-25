@@ -1,6 +1,7 @@
 local ID = require("scripts/zones/Windurst_Waters/IDs")
 
 return {
+    ['Kerutoto']        = { event = 306 },
     ['Leepe-Hoppe']     = { event = 345 },
     ['Mimomo']          = { event = 436 },
     ['Ohbiru-Dohbiru']  = { event = 344 },

@@ -3746,7 +3746,18 @@ INSERT INTO `mob_skill_lists` VALUES ('Galarhigg',1156,627); -- vulture_4
 INSERT INTO `mob_skill_lists` VALUES ('Evil_Oscar',1157,317); -- Vampiric Lash
 INSERT INTO `mob_skill_lists` VALUES ('Evil_Oscar',1157,320); -- Sweet Breath
 
--- Next available ID: 1158
+INSERT INTO `mob_skill_lists` VALUES ('The_Keeper',1158,19); -- Gust Slash
+INSERT INTO `mob_skill_lists` VALUES ('The_Keeper',1158,30); -- Aeolian Edge
+INSERT INTO `mob_skill_lists` VALUES ('Mistdagger',1159,131); -- Blade: To
+INSERT INTO `mob_skill_lists` VALUES ('Mistdagger',1159,134); -- Blade: Jin
+INSERT INTO `mob_skill_lists` VALUES ('Mistdagger',1159,136); -- Blade: Ku
+INSERT INTO `mob_skill_lists` VALUES ('The_Briars_elv',1160,34); -- Red Lotus Blade
+INSERT INTO `mob_skill_lists` VALUES ('The_Briars_elv',1160,40); -- Vorpal Blade
+INSERT INTO `mob_skill_lists` VALUES ('The_Briars_elv',1160,42); -- Savage Blade
+INSERT INTO `mob_skill_lists` VALUES ('The_Briars_gal',1161,86); -- Raging Rush
+INSERT INTO `mob_skill_lists` VALUES ('The_Briars_gal',1161,91); -- Fell Cleave
+
+-- Next available ID: 1162
 
 -- ------------------------------------------------------------
 -- Start of Ambuscade section

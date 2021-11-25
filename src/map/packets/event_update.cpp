@@ -32,7 +32,7 @@ CEventUpdatePacket::CEventUpdatePacket(std::vector<std::pair<uint8, uint32>> par
     for (auto paramPair : params)
     {
         // Only params 0 through 7 are valid
-        if (paramPair.first >= 0 && paramPair.first <= 7)
+        if (paramPair.first <= 7)
         {
             ref<uint32>(0x0004 + paramPair.first * 4) = paramPair.second;
         }

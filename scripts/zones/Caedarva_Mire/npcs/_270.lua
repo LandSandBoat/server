@@ -12,18 +12,20 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:hasKeyItem(xi.ki.LEUJAOAM_ASSAULT_ORDERS) then
-        player:messageSpecial(ID.text.CANNOT_LEAVE, xi.ki.LEUJAOAM_ASSAULT_ORDERS)
-    elseif player:getZPos() <= -438 and player:getZPos() >= -440 then
-        player:messageSpecial(ID.text.STAGING_POINT_AZOUPH)
-        player:messageSpecial(ID.text.IMPERIAL_CONTROL)
-        player:startEvent(121)
-    elseif player:getZPos() >= -436.6 and player:getZPos() <= -434 then
-        player:messageSpecial(ID.text.STAGING_POINT_AZOUPH)
-        player:messageSpecial(ID.text.IMPERIAL_CONTROL)
-        player:startEvent(120)
+    if player:checkDistance(npc) < 3 then
+        if player:getZPos() > -438 then
+            player:messageSpecial(ID.text.STAGING_GATE_AZOUPH)
+            player:messageSpecial(ID.text.STAGING_GATE_INTERACT)
+            player:startEvent(120)
+        elseif not player:hasKeyItem(xi.ki.LEUJAOAM_ASSAULT_ORDERS) then
+            player:messageSpecial(ID.text.STAGING_GATE_AZOUPH)
+            player:messageSpecial(ID.text.STAGING_GATE_INTERACT)
+            player:startEvent(121)
+        else
+            player:messageSpecial(ID.text.CANNOT_LEAVE, xi.ki.LEUJAOAM_ASSAULT_ORDERS)
+        end
     else
-        player:messageSpecial(ID.text.MOVE_CLOSER)
+        player:messageSpecial(ID.text.STAGING_GATE_CLOSER)
     end
 end
 
@@ -31,9 +33,6 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
---[[    if csid == 120 and option == 0 then
-        Todo add function that when entering staging point that a player looses all agro on mobs
-    end]]
 end
 
 return entity

@@ -503,7 +503,7 @@ void EncodeStringLinkshell(int8* signature, int8* target)
     uint8 leftover = 0;
     auto  length   = std::min<size_t>(20u, strlen((const char*)signature));
 
-    for (uint8 currChar = 0; currChar < length; ++currChar)
+    for (std::size_t currChar = 0; currChar < length; ++currChar)
     {
         uint8 tempChar = 0;
         if ((signature[currChar] >= '0') && (signature[currChar] <= '9'))
@@ -536,7 +536,7 @@ void DecodeStringLinkshell(int8* signature, int8* target)
     memset(decodedSignature, 0, sizeof decodedSignature);
     auto length = std::min<size_t>(20u, (strlen((const char*)signature) * 8) / 6);
 
-    for (uint8 currChar = 0; currChar < length; ++currChar)
+    for (std::size_t currChar = 0; currChar < length; ++currChar)
     {
         uint8 tempChar = '\0';
         tempChar       = (uint8)unpackBitsLE((uint8*)signature, currChar * 6, 6);
@@ -580,7 +580,7 @@ int8* EncodeStringSignature(int8* signature, int8* target)
     // uint8 leftover = 0;
     auto length = std::min<size_t>(15u, strlen((const char*)signature));
 
-    for (uint8 currChar = 0; currChar < length; ++currChar)
+    for (std::size_t currChar = 0; currChar < length; ++currChar)
     {
         uint8 tempChar = 0;
         if ((signature[currChar] >= '0') && (signature[currChar] <= '9'))

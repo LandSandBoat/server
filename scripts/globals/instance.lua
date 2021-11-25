@@ -237,7 +237,7 @@ xi.instance.lookup =
         -- {  0, 0 }, -- Endeavoring to Awaken
         -- {  1, 0 }, -- Endeavoring to Awaken
         -- -- Blank
-        { 25900, { 5511, 258, 8, 2963, 1 }, { 5511, 8 }, { nil } }, -- Behind the Sluices -- TODO
+        { 25900, { 5511, 258, 8 }, { 5511, 8 }, { 258, 8 } }, -- Behind the Sluices
         -- {  4, 0 }, -- Stonewalled
         -- {  5, 0 }, -- The Gates
         -- {  6, 0 }, -- Saved by the Bell
@@ -321,6 +321,13 @@ end
 xi.instance.onTrigger = function(player, npc, instanceZoneID)
     local zoneLookup = xi.instance.lookup[instanceZoneID]
 
+    -- Clear up after possible failed loads
+    player:setLocalVar("INSTANCE_REQUESTED", 0)
+    local existingInstance = player:getInstance()
+    if existingInstance then
+        existingInstance:fail()
+    end
+
     -- Find the first instance you're valid for
     -- TODO: Handle being valid for multiple instances from the same entrance
     local chosenEntry
@@ -380,7 +387,7 @@ xi.instance.onEventUpdate = function(player, csid, option)
         player:setLocalVar("INSTANCE_REQUESTED", 1)
     end
 
-    return true
+    return player:getInstance() ~= nil
 end
 
 -- "Default" behaviour. It's up to each instance whether or not they want to use this logic

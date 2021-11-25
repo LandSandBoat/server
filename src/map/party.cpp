@@ -420,7 +420,7 @@ void CParty::PopMember(CBattleEntity* PEntity)
             {
                 m_PAlliance->setMainParty(nullptr);
             }
-            for (uint8 i = 0; i < m_PAlliance->partyList.size(); ++i)
+            for (std::size_t i = 0; i < m_PAlliance->partyList.size(); ++i)
             {
                 if (this == m_PAlliance->partyList.at(i))
                 {
@@ -874,9 +874,9 @@ void CParty::ReloadTreasurePool(CCharEntity* PChar)
     {
         if (PChar->PParty->m_PAlliance != nullptr)
         {
-            for (uint8 a = 0; a < PChar->PParty->m_PAlliance->partyList.size(); ++a)
+            for (std::size_t a = 0; a < PChar->PParty->m_PAlliance->partyList.size(); ++a)
             {
-                for (uint8 i = 0; i < PChar->PParty->m_PAlliance->partyList.at(a)->members.size(); ++i)
+                for (std::size_t i = 0; i < PChar->PParty->m_PAlliance->partyList.at(a)->members.size(); ++i)
                 {
                     CCharEntity* PPartyMember = (CCharEntity*)PChar->PParty->m_PAlliance->partyList.at(a)->members.at(i);
 

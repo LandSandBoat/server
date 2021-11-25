@@ -1,0 +1,7 @@
+local ID = require("scripts/zones/Dangruf_Wadi/IDs")
+
+return {
+    ['qm3'] = { messageSpecial = ID.text.CRYSTALLINE_DUST },
+    ['qm4'] = { messageSpecial = ID.text.PLANT_EXTRACT },
+    ['qm5'] = { messageSpecial = ID.text.BROKEN_EGGS },
+}

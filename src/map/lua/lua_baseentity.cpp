@@ -1576,7 +1576,7 @@ bool CLuaBaseEntity::pathThrough(sol::table const& pointsTable, sol::object cons
     std::vector<position_t> points;
 
     // Grab points from array and store in points array
-    for (uint8 i = 1; i < pointsTable.size(); i += 3)
+    for (std::size_t i = 1; i < pointsTable.size(); i += 3)
     {
         points.push_back({ (float)pointsTable[i], (float)pointsTable[i + 1], (float)pointsTable[i + 2], 0, 0 });
     }
@@ -4113,7 +4113,7 @@ void CLuaBaseEntity::clearGearSetMods()
 {
     if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
     {
-        for (uint8 i = 0; i < PChar->m_GearSetMods.size(); ++i)
+        for (std::size_t i = 0; i < PChar->m_GearSetMods.size(); ++i)
         {
             GearSetMod_t gearSetMod = PChar->m_GearSetMods.at(i);
             PChar->delModifier(gearSetMod.modId, gearSetMod.modValue);
@@ -12584,7 +12584,7 @@ void CLuaBaseEntity::setRoamFlags(uint16 newRoamFlags)
 
 /************************************************************************
  *  Function: getTarget()
- *  Purpose : Return available targets as a Lua table to the Mob
+ *  Purpose : Return Battle Target entity
  *  Example : mob:getTarget(); pet:getTarget(); if not v:getTarget() then
  *  Notes   :
  ************************************************************************/

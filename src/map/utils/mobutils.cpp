@@ -428,7 +428,7 @@ namespace mobutils
             sCHR /= 2;
             sVIT /= 2;
         }
-        else if (mLvl < 45 && mLvl > 30)
+        else if (mLvl > 30)
         {
             sSTR /= 3;
             sDEX /= 3;
