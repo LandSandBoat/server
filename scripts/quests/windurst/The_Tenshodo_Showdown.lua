@@ -57,7 +57,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if player:hasKeyItem(xi.ki.LETTER_FROM_THE_TENSHODO) then
-                        return quest:progressEvent(10021, 0, xi.ki.LETTER_FROM_THE_TENSHODO)
+                        return quest:progressEvent(10021, 0, xi.ki.LETTER_FROM_THE_TENSHODO, xi.ki.TENSHODO_ENVELOPE)
                     elseif player:hasKeyItem(xi.ki.SIGNED_ENVELOPE) then
                         return quest:progressEvent(10022)
                     end

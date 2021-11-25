@@ -105,7 +105,7 @@ local wonMinigameEvent = function(player, csid, option, npc)
             quest:setVar(player, 'failedGame', 0)
         end
 
-        player:messageSpecial(ID.text.YOU_BEAT_GOBLIN)
+        player:messageSpecial(dangrufID.text.YOU_BEAT_GOBLIN)
         quest:setVar(player, 'Prog', quest:getVar(player, 'Prog') + 1)
     elseif option == 2 then
         if csid == 136 or csid == 142 then
@@ -128,7 +128,7 @@ quest.sections =
 
         [xi.zone.WINDURST_WOODS] =
         {
-            ['Nanaa_Mihgo'] = quest:progressEvent(504),
+            ['Nanaa_Mihgo'] = quest:progressEvent(504, 0, xi.ki.SIGNED_ENVELOPE, xi.ki.TENSHODO_ENVELOPE),
 
             onEventFinish =
             {
@@ -156,11 +156,8 @@ quest.sections =
                         local questProgress = quest:getVar(player, 'Prog')
                         local eventOffset   = quest:getVar(player, 'failedGame') == 0 and 136 or 142
 
-                        -- TODO: We're in dangerous territory using -1 here, verify!
-                        print(questProgress)
-
                         if questProgress == 1 then
-                            handleDangrufMinigame(player, eventOffset, eventOffset + 3, xi.items.CHUNK_OF_ROCK_SALT)
+                            return handleDangrufMinigame(player, eventOffset, eventOffset + 3, xi.items.CHUNK_OF_ROCK_SALT)
                         elseif questProgress > 1 then
                             player:messageSpecial(dangrufID.text.BEAT_SALTVIX)
                         end
@@ -175,7 +172,7 @@ quest.sections =
                         local questProgress = quest:getVar(player, 'Prog')
 
                         if questProgress == 2 then
-                            handleDangrufMinigame(player, 137, 140, xi.items.CLUMP_OF_GAUSEBIT_WILDGRASS)
+                            return handleDangrufMinigame(player, 137, 140, xi.items.CLUMP_OF_GAUSEBIT_WILDGRASS)
                         elseif questProgress < 2 then
                             return quest:messageSpecial(dangrufID.text.DONT_WASTE_TIME)
                         elseif questProgress > 2 then
@@ -192,7 +189,7 @@ quest.sections =
                         local questProgress = quest:getVar(player, 'Prog')
 
                         if questProgress == 3 then
-                            handleDangrufMinigame(player, 138, 141, xi.items.LIZARD_EGG)
+                            return handleDangrufMinigame(player, 138, 141, xi.items.LIZARD_EGG)
                         elseif questProgress < 3 then
                             return quest:messageSpecial(dangrufID.text.JUST_WONT_DO)
                         elseif questProgress > 3 then
@@ -283,6 +280,7 @@ quest.sections =
 
                     if questProgress == 4 then
                         npcUtil.popFromQM(player, npc, northGustabergID.mob.GAMBILOX_WANDERLING, { hide = 0 })
+                        return quest:messageSpecial(northGustabergID.text.SENSE_EVIL_PRESENCE)
                     elseif questProgress == 5 then
                         player:startEvent(200, xi.items.REGAL_DIE)
                     end
@@ -309,7 +307,7 @@ quest.sections =
                         npcUtil.tradeHasExactly(trade, xi.items.GRAPNEL)
                     then
                         if isNaked(player) then
-                            return quest:progressEvent(2)
+                            return quest:progressEvent(2, 0, xi.items.GRAPNEL)
                         else
                             player:messageSpecial(sauromugueID.text.THF_AF_WALL_OFFSET + 2, 0, xi.items.GRAPNEL)
                         end

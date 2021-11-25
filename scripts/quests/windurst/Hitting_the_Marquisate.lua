@@ -4,7 +4,7 @@
 -- !addquest 2 71
 -- Nanaa Mihgo     : !pos 62 -4 240 241
 -- Yatniel         : !pos -66.817 -7 -126.594 245
--- Hagain          : !pos 19.847 -0.105 -1.945 249
+-- Hagain          : !pos 12.62 -16 81.4 249
 -- qm6 (???)       : !pos -220.039 -5.500 194.192 200
 -- qm5 (???)       : !pos -259.927 -5.500 194.410 200
 -- qm12 (???)      : !pos -245.603 -5.500 139.855 200
@@ -180,7 +180,7 @@ quest.sections =
                         npcUtil.tradeHasExactly(trade, xi.items.PICKAXE) and
                         quest:getVar(player, 'nanaaProg') == 1
                     then
-                        return quest:progressEvent(119, 0, 0, 0, xi.items.PICKAXE)
+                        return quest:progressEvent(119, 0, xi.items.ROGUES_POULAINES, 0, xi.items.PICKAXE)
                     end
                 end,
             },
