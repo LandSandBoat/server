@@ -5,4 +5,5 @@ return {
     ['Guide_Stone'] = { messageSpecial = ID.text.GUIDE_STONE },
     ['Ilumida']     = { event = 189 },
     ['Paya-Sabya']  = { event = 79 },
+    ['Rouliette']   = { event = 30 },
 }

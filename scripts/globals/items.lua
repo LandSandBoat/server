@@ -30,6 +30,7 @@ xi.items =
     PINCH_OF_VALKURM_SUNSAND        = 503,
     RHINOSTERY_CANTEEN              = 504,
     SHEEPSKIN                       = 505,
+    LANOLIN_CUBE                    = 531,
     MAGICMART_FLYER                 = 532,
     CLUMP_OF_GAUSEBIT_WILDGRASS     = 534,
     DAMSELFLY_WORM                  = 537,
