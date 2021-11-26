@@ -590,6 +590,7 @@ xi.items =
     LEATHER_GORGET                  = 13081,
     CHAIN_CHOKER                    = 13083,
     JUSTICE_BADGE                   = 13093,
+    FLOWER_NECKLACE                 = 13094,
     TIGER_STOLE                     = 13119,
     BEAST_COLLAR                    = 13121,
     SPECTACLES                      = 13128,

@@ -16,27 +16,13 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local aCandlelightVigil = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_CANDLELIGHT_VIGIL)
     local SearchingForWords = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SEARCHING_FOR_THE_RIGHT_WORDS)
 
     --this variable implicitly stores: JFame >= 7 and ACandlelightVigil == QUEST_COMPLETED and RubbishDay == QUEST_COMPLETED and
     --NeverToReturn == QUEST_COMPLETED and SearchingForTheRightWords == QUEST_AVAILABLE and prereq CS complete
     local SearchingForWords_prereq = player:getCharVar("QuestSearchRightWords_prereq")
 
-
-    if player:getFameLevel(JEUNO) >= 4 and aCandlelightVigil == QUEST_AVAILABLE then
-        player:startEvent(192) --Start quest : Ilumida asks you to obtain a candle ...
-    elseif aCandlelightVigil == QUEST_ACCEPTED then
-        if player:hasKeyItem(xi.ki.HOLY_CANDLE) == true then
-            player:startEvent(194) --Finish quest : CS NOT FOUND.
-        else
-            player:startEvent(191) --quest accepted dialog
-        end
-
-    elseif player:getCharVar("QuestACandlelightVigil_denied") == 1 then
-        player:startEvent(193) --quest denied dialog, asks again for A Candlelight Vigil
-
-    elseif SearchingForWords_prereq == 1 then --has player completed prerequisite cutscene with Kurou-Morou?
+    if SearchingForWords_prereq == 1 then --has player completed prerequisite cutscene with Kurou-Morou?
         player:startEvent(197) --SearchingForTheRightWords intro CS
 
     elseif player:getCharVar("QuestSearchRightWords_denied") == 1 then
@@ -52,11 +38,8 @@ entity.onTrigger = function(player, npc)
     elseif player:getCharVar("SearchingForRightWords_postcs") == -1 then
         player:startEvent(196)
 
-    elseif SearchingForWords == QUEST_COMPLETED then
+    elseif SearchingForWords == QUEST_COMPLETED then -- replaceDefault()
         player:startEvent(200)
-
-    else
-        player:startEvent(189) --Standard dialog
     end
 end
 
@@ -64,30 +47,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if
-        (csid == 192 and option == 1) or
-        (csid == 193 and option == 1)
-    then --just start quest
-        player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_CANDLELIGHT_VIGIL)
-        player:setCharVar("QuestACandlelightVigil_denied", 0)
-
-    elseif csid == 192 and option == 0 then --quest denied, special eventIDs available
-        player:setCharVar("QuestACandlelightVigil_denied", 1)
-
-    elseif csid == 194 then --finish quest
-        if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 13094)
-        else
-            player:addTitle(xi.title.ACTIVIST_FOR_KINDNESS)
-            player:delKeyItem(xi.ki.HOLY_CANDLE)
-            player:addItem(13094)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 13094)
-            player:needToZone(true)
-            player:addFame(JEUNO, 30)
-            player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_CANDLELIGHT_VIGIL)
-        end
-
-    elseif csid == 197 and option == 0 then --quest denied, special eventIDs available
+    if csid == 197 and option == 0 then --quest denied, special eventIDs available
         player:setCharVar("QuestSearchRightWords_prereq", 0) --remove charVar from memory
         player:setCharVar("QuestSearchRightWords_denied", 1)
 
