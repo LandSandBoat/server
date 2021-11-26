@@ -2180,7 +2180,7 @@ namespace charutils
 
     void EquipItem(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 containerID)
     {
-        CItemEquipment* PItem = (CItemEquipment*)PChar->getStorage(containerID)->GetItem(slotID);
+        CItemEquipment* PItem = dynamic_cast<CItemEquipment*>(PChar->getStorage(containerID)->GetItem(slotID));
 
         if (PItem && PItem == PChar->getEquip((SLOTTYPE)equipSlotID))
         {
@@ -2261,17 +2261,6 @@ namespace charutils
                 // If the weapon ISN'T a wind based instrument or a string based instrument
                 PChar->health.tp = 0;
             }
-
-            /*// fixes logging in with no h2h
-            if(PChar->m_Weapons[SLOT_MAIN]->getDmgType() == DAMAGE_NONE && PChar->GetMJob() == JOB_MNK)
-            {
-                PChar->m_Weapons[SLOT_MAIN] = itemutils::GetUnarmedH2HItem();
-            }
-            else if(PChar->m_Weapons[SLOT_MAIN] == itemutils::GetUnarmedH2HItem() && PChar->GetMJob() != JOB_MNK)
-            {
-                // return back to normal if changed jobs
-                PChar->m_Weapons[SLOT_MAIN] = itemutils::GetUnarmedItem();
-            }*/
 
             if (!PChar->getEquip(SLOT_MAIN) || !PChar->getEquip(SLOT_MAIN)->isType(ITEM_EQUIPMENT) ||
                 PChar->m_Weapons[SLOT_MAIN] == itemutils::GetUnarmedH2HItem())
@@ -2682,22 +2671,23 @@ namespace charutils
                 {
                     artsBaseline = (uint16)(5 + 2.7 * (mLevel - 1));
                 }
-                else if ((mLevel > 50) && (mLevel < 61))
+                else if (mLevel < 61)
                 {
                     artsBaseline = (uint16)(137 + 4.7 * (mLevel - 50));
                 }
-                else if ((mLevel > 60) && (mLevel < 71))
+                else if (mLevel < 71)
                 {
                     artsBaseline = (uint16)(184 + 3.7 * (mLevel - 60));
                 }
-                else if ((mLevel > 70) && (mLevel < 75))
+                else if (mLevel < 75)
                 {
                     artsBaseline = (uint16)(221 + 5.0 * (mLevel - 70));
                 }
-                else if (mLevel >= 75)
+                else // >= 75
                 {
                     artsBaseline = skillCapD + 36;
                 }
+
                 if (currentSkill < skillCapE)
                 {
                     // If the player's skill is below the E cap
@@ -2790,7 +2780,7 @@ namespace charutils
 
     void BuildingCharTraitsTable(CCharEntity* PChar)
     {
-        for (uint8 i = 0; i < PChar->TraitList.size(); ++i)
+        for (std::size_t i = 0; i < PChar->TraitList.size(); ++i)
         {
             CTrait* PTrait = PChar->TraitList.at(i);
             PChar->delModifier(PTrait->getMod(), PTrait->getValue());
@@ -4225,7 +4215,7 @@ namespace charutils
                 }
                 PChar->expChain.chainNumber++;
             }
-            else if (exp > 0)
+            else
             {
                 if (onLimitMode)
                 {

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Upper Jeuno
 --  NPC: Nevela
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

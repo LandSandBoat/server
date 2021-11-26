@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Lower Jeuno
 --  NPC: Liki Steligho
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

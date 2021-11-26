@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Ru'Lud Gardens
 --  NPC: Kayle
--- Standard Info NPC
------------------------------------
-require("scripts/settings/main")
 -----------------------------------
 local entity = {}
 

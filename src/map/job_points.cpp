@@ -38,7 +38,7 @@ void CJobPoints::LoadJobPoints()
                              "FROM char_job_points WHERE charid = %u ORDER BY jobid ASC",
                   m_PChar->id) != SQL_ERROR)
     {
-        for (uint8 i = 0; i < Sql_NumRows(SqlHandle); i++)
+        for (uint64 i = 0; i < Sql_NumRows(SqlHandle); i++)
         {
             if (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
             {

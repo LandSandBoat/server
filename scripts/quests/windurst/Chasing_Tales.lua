@@ -45,7 +45,7 @@ quest.sections =
                     -- https://ffxiclopedia.fandom.com/wiki/Chasing_Tales
                     if
                         player:getNation() ~= xi.nation.WINDURST or
-                        not player:getCurrentMission(xi.mission.log_id.WINDURST) == xi.mission.id.windurst.THE_JESTER_WHO_D_BE_KING
+                        not player:getCurrentMission(xi.mission.log_id.WINDURST) == xi.mission.id.windurst.THE_JESTER_WHOD_BE_KING
                     then
                         return quest:progressEvent(403)
                     end

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Upper Jeuno
 --  NPC: Shachaba
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

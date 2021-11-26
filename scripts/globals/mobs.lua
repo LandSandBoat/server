@@ -30,16 +30,6 @@ function onMobDeathEx(mob, player, isKiller, isWeaponSkillKill)
         end
     end
 
-    -- Things that happen to any player in the party/alliance
-    if player:getCurrentMission(WINDURST) == xi.mission.id.windurst.A_TESTING_TIME then
-        if
-            (player:getZoneID() == xi.zone.BUBURIMU_PENINSULA and player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.A_TESTING_TIME)) or
-            (player:getZoneID() == xi.zone.TAHRONGI_CANYON and not player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.A_TESTING_TIME))
-        then
-            player:addCharVar("testingTime_crea_count", 1)
-        end
-    end
-
     xi.magian.checkMagianTrial(player, {['mob'] = mob, ['triggerWs'] = false})
 end
 
@@ -447,13 +437,7 @@ xi.mob.onAddEffect = function(mob, target, damage, effect, params)
                         duration = duration - dLevel
                     end
 
-                    if ae.minDuration and duration < ae.minDuration then
-                        duration = ae.minDuration
-                    elseif ae.maxDuration and duration > ae.maxDuration then
-                        duration = ae.maxDuration
-                    end
-
-                    duration = duration * resist
+                    duration = utils.clamp(duration, ae.minDuration, ae.maxDuration) * resist
 
                     target:addStatusEffect(ae.eff, power, tick, duration)
 
@@ -487,7 +471,9 @@ xi.mob.onAddEffect = function(mob, target, damage, effect, params)
                 power = addBonusesAbility(mob, ae.ele, target, power, ae.bonusAbilityParams)
                 power = power * applyResistanceAddEffect(mob, target, ae.ele, 0)
                 power = adjustForTarget(target, power, ae.ele)
-                power = finalMagicNonSpellAdjustments(mob, target, ae.ele, power)
+                if ae.sub ~= xi.subEffect.TP_DRAIN and ae.sub ~= xi.subEffect.MP_DRAIN then
+                    power = finalMagicNonSpellAdjustments(mob, target, ae.ele, power)
+                end
 
                 -- target:PrintToPlayer(string.format("Adjusted Power: %f", power)) -- DEBUG
 

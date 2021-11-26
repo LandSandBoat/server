@@ -1,7 +1,5 @@
 -----------------------------------
---
 -- Zone: Valkurm_Dunes (103)
---
 -----------------------------------
 local ID = require("scripts/zones/Valkurm_Dunes/IDs")
 require("scripts/quests/i_can_hear_a_rainbow")
@@ -29,9 +27,7 @@ zone_object.onZoneIn = function(player, prevZone)
     end
 
     if quests.rainbow.onZoneIn(player) then
-        cs = 3;
-    elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.VAIN and player:getMissionStatus(player:getNation()) == 1 then
-        cs = 5
+        cs = 3
     end
 
     -- AMK06/AMK07
@@ -52,14 +48,6 @@ end
 zone_object.onEventUpdate = function(player, csid, option)
     if csid == 3 then
         quests.rainbow.onEventUpdate(player)
-    elseif csid == 5 then
-        if player:getZPos() > 45 then
-            if player:getZPos() > -301 then
-                player:updateEvent(0, 0, 0, 0, 0, 1)
-            else
-                player:updateEvent(0, 0, 0, 0, 0, 3)
-            end
-        end
     end
 end
 

@@ -1,7 +1,5 @@
 -----------------------------------
---
 -- Zone: West_Sarutabaruta (115)
---
 -----------------------------------
 local ID = require("scripts/zones/West_Sarutabaruta/IDs")
 require("scripts/quests/i_can_hear_a_rainbow")
@@ -37,11 +35,6 @@ zone_object.onZoneIn = function( player, prevZone)
         cs = 62
     elseif player:getCurrentMission(ASA) == xi.mission.id.asa.BURGEONING_DREAD and prevZone == xi.zone.PORT_WINDURST then
         cs = 63
-    elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.VAIN and player:getMissionStatus(player:getNation()) == 1 then
-        cs = 50
-    -- removed only "cs =" works onzonein and can't take parameters atm
-    -- elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.VAIN and player:getMissionStatus(player:getNation()) == 1 then
-        -- player:startEvent(50, 0, 0, 0, 0, 0, 2) -- talking doll go east
     end
 
     return cs
@@ -59,12 +52,6 @@ zone_object.onEventUpdate = function( player, csid, option)
         quests.rainbow.onEventUpdate(player)
     elseif csid == 62 or csid == 63 then
         player:setCharVar("ASA_Status", option)
-    elseif csid == 50 then
-        if player:getZPos() > 470 then
-            player:updateEvent(0, 0, 0, 0, 0, 2)
-        else
-            player:updateEvent(0, 0, 0, 0, 0, 1)
-        end
     end
 end
 

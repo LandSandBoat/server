@@ -4,11 +4,12 @@
 -----------------------------------
 -- NOTE: xi.mission.id.soa.RUMORS_FROM_THE_WEST is set on character creation
 -- !addmission 12 0
--- Darcia : !pos 25 -38.617 -1.000 245
+-- Darcia : !pos -36 -1 -15 245
 -----------------------------------
 require('scripts/globals/missions')
 require('scripts/settings/main')
 require('scripts/globals/interaction/mission')
+require('scripts/globals/utils')
 require('scripts/globals/zone')
 -----------------------------------
 
@@ -16,7 +17,7 @@ local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.RUMORS_FROM
 
 mission.reward =
 {
-    nextMission = { xi.mission.log_id.ASA, xi.mission.id.asa.THE_GEOMAGNETRON },
+    nextMission = { xi.mission.log_id.SOA, xi.mission.id.soa.THE_GEOMAGNETRON },
 }
 
 mission.sections =
@@ -40,21 +41,101 @@ mission.sections =
 
                     return mission:progressEvent(10117, 0, turnOffDungeonInfo + turnOffAskingForWork)
                 end,
+            },
 
-                onEventUpdate = function(player, csid, option)
-                    if csid == 10117 then
-                        local hasEnoughGil = player:getGil() >= 1000000 and 1 or 0
-                        player:updateEvent(hasEnoughGil)
-                    end
-                end
+            onEventUpdate =
+            {
+                [10117] = function(player, csid, option, npc)
+                    local hasEnoughGil = player:getGil() >= 1000000 and 1 or 0
+                    player:updateEvent(hasEnoughGil)
+                end,
             },
 
             onEventFinish =
             {
                 [10117] = function(player, csid, option, npc)
-                    if mission:complete(player) then
-
+                    if option == 1 then
+                        if mission:complete(player) then
+                            npcUtil.giveKeyItem(player, xi.ki.GEOMAGNETRON)
+                        end
+                    elseif option == 2 then
+                        -- Paid to skip ahead, handle this manually
+                        mission:complete(player)
+                        player:delGil(1000000)
+                        npcUtil.giveKeyItem(player, xi.ki.ADOULINIAN_CHARTER_PERMIT)
+                        player:completeMission(xi.mission.log_id.SOA, xi.mission.id.soa.THE_GEOMAGNETRON)
+                        player:addMission(xi.mission.log_id.SOA, xi.mission.id.soa.ONWARD_TO_ADOULIN)
                     end
+                end,
+            },
+        },
+
+        -- Optional CS's
+        [xi.zone.NORTHERN_SAN_DORIA] =
+        {
+            onZoneIn =
+            {
+                function(player, prevZone)
+                    local missionStatus = player:getMissionStatus(mission.areaId)
+                    local seenCS = utils.mask.getBit(missionStatus, 0)
+                    if not seenCS and not player:isInMogHouse() then
+                        return 878
+                    end
+                end,
+            },
+
+            onEventFinish =
+            {
+                [878] = function(player, csid, option, npc)
+                    local missionStatus = player:getMissionStatus(mission.areaId)
+                    missionStatus = utils.mask.setBit(missionStatus, 0, true)
+                    player:setMissionStatus(mission.areaId, missionStatus)
+                end,
+            },
+        },
+
+        [xi.zone.BASTOK_MARKETS] =
+        {
+            onZoneIn =
+            {
+                function(player, prevZone)
+                    local missionStatus = player:getMissionStatus(mission.areaId)
+                    local seenCS = utils.mask.getBit(missionStatus, 1)
+                    if not seenCS and not player:isInMogHouse() then
+                        return 22
+                    end
+                end,
+            },
+
+            onEventFinish =
+            {
+                [22] = function(player, csid, option, npc)
+                    local missionStatus = player:getMissionStatus(mission.areaId)
+                    missionStatus = utils.mask.setBit(missionStatus, 1, true)
+                    player:setMissionStatus(mission.areaId, missionStatus)
+                end,
+            },
+        },
+
+        [xi.zone.WINDURST_WOODS] =
+        {
+            onZoneIn =
+            {
+                function(player, prevZone)
+                    local missionStatus = player:getMissionStatus(mission.areaId)
+                    local seenCS = utils.mask.getBit(missionStatus, 2)
+                    if not seenCS and not player:isInMogHouse() then
+                        return 839
+                    end
+                end,
+            },
+
+            onEventFinish =
+            {
+                [839] = function(player, csid, option, npc)
+                    local missionStatus = player:getMissionStatus(mission.areaId)
+                    missionStatus = utils.mask.setBit(missionStatus, 2, true)
+                    player:setMissionStatus(mission.areaId, missionStatus)
                 end,
             },
         },

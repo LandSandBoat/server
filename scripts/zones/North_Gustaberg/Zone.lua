@@ -1,7 +1,5 @@
 -----------------------------------
---
 -- Zone: North_Gustaberg (106)
---
 -----------------------------------
 local ID = require("scripts/zones/North_Gustaberg/IDs")
 require("scripts/quests/i_can_hear_a_rainbow")
@@ -29,8 +27,6 @@ zone_object.onZoneIn = function(player, prevZone)
 
     if quests.rainbow.onZoneIn(player) then
         cs = 244
-    elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.VAIN and player:getMissionStatus(player:getNation()) == 1 then
-        cs = 246
     end
 
     return cs
@@ -46,12 +42,6 @@ end
 zone_object.onEventUpdate = function(player, csid, option)
     if csid == 244 then
         quests.rainbow.onEventUpdate(player)
-    elseif csid == 246 then
-        if player:getZPos() > 461 then
-            player:updateEvent(0, 0, 0, 0, 0, 6)
-        elseif player:getXPos() > -240 then
-            player:updateEvent(0, 0, 0, 0, 0, 7)
-        end
     end
 end
 

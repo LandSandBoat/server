@@ -260,6 +260,70 @@ function npcUtil.giveItem(player, items, params)
 end
 
 --[[ *******************************************************************************
+    Give temp item(s) to player.
+    If player has inventory space, give items, display message, and return true.
+    If not, do not give items, display a message to indicate this, and return false.
+
+    Examples of valid items parameter:
+        640                 -- copper ore x1
+        { 640, 641 }        -- copper ore x1, tin ore x1
+        { {640, 2} }         -- copper ore x2
+        { {640, 2}, 641 }    -- copper ore x2, tin ore x1
+
+    params (table) can contain the following parameters:
+
+    silent (boolean, default false)
+        if set, displays no messages
+    fromTrade (boolean, default false)
+        if set, when player has no room for items, display
+        "Try trading again after sorting your inventory"
+        instead of
+        "Come back again after sorting your inventory"
+******************************************************************************* --]]
+function npcUtil.giveTempItem(player, items, params)
+    params = params or {}
+    local ID = zones[player:getZoneID()]
+
+    -- create table of items, with key/val of itemId/itemQty
+    local givenItems = {}
+    if type(items) == "number" then
+        table.insert(givenItems, {items, 1})
+    elseif type(items) == "table" then
+        for _, v in pairs(items) do
+            if type(v) == "number" then
+                table.insert(givenItems, {v, 1})
+            elseif type(v) == "table" and #v == 2 and type(v[1]) == "number" and type(v[2]) == "number" then
+                table.insert(givenItems, {v[1], v[2]})
+            else
+                print(string.format("ERROR: invalid items parameter given to npcUtil.giveTempItem in zone %s.", player:getZoneName()))
+                return false
+            end
+        end
+    end
+
+    -- give items to player
+    local messagedItems = {}
+    for _, v in pairs(givenItems) do
+        if player:addTempItem(v[1], v[2]) then
+            if not params.silent and not messagedItems[v[1]] then
+                if v[2] > 1 then
+                    player:messageSpecial(ID.text.ITEM_OBTAINED + 9, v[1], v[2])
+                else
+                    player:messageSpecial(ID.text.ITEM_OBTAINED, v[1])
+                end
+            end
+            messagedItems[v[1]] = true
+        elseif #givenItems == 1 then
+            if not params.silent then
+                player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, givenItems[1][1])
+            end
+            return false
+        end
+    end
+    return true
+end
+
+--[[ *******************************************************************************
     Give currency to a player.
     Message is displayed showing currency obtained.
 

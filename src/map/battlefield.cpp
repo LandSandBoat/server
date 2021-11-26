@@ -247,7 +247,7 @@ void CBattlefield::ApplyLevelRestrictions(CCharEntity* PChar) const
     // Adjust player's level to the appropriate cap and remove buffs
     auto cap = GetLevelCap();
 
-    if (cap && cap > 0)
+    if (cap > 0)
     {
         cap += map_config.Battle_cap_tweak; // We wait till here to do this because we don't want to modify uncapped battles.
 
@@ -498,7 +498,8 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
     }
     else
     {
-        auto check = [PEntity, &found](auto entity) {
+        auto check = [PEntity, &found](auto entity)
+        {
             if (PEntity == entity)
             {
                 found = true;
@@ -511,7 +512,14 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
         {
             PEntity->status = STATUS_TYPE::DISAPPEAR;
             PEntity->loc.zone->PushPacket(PEntity, CHAR_INRANGE, new CEntityUpdatePacket(PEntity, ENTITY_DESPAWN, UPDATE_ALL_MOB));
-            m_NpcList.erase(std::remove_if(m_NpcList.begin(), m_NpcList.end(), check), m_NpcList.end());
+
+            if (auto* PNpcEntity = dynamic_cast<CNpcEntity*>(PEntity))
+            {
+                if (std::find(m_NpcList.begin(), m_NpcList.end(), PNpcEntity) != m_NpcList.end())
+                {
+                    m_NpcList.erase(std::remove_if(m_NpcList.begin(), m_NpcList.end(), check), m_NpcList.end());
+                }
+            }
         }
         else if (PEntity->objtype == TYPE_MOB || PEntity->objtype == TYPE_PET)
         {
@@ -519,15 +527,22 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
             // allies targid >= 0x700
             if (PEntity->targid >= 0x700)
             {
-                if (static_cast<CPetEntity*>(PEntity)->isAlive() && PEntity->PAI->IsSpawned())
+                if (auto* PPetEntity = dynamic_cast<CPetEntity*>(PEntity))
                 {
-                    static_cast<CPetEntity*>(PEntity)->Die();
+                    if (PPetEntity->isAlive() && PPetEntity->PAI->IsSpawned())
+                    {
+                        PPetEntity->Die();
+                    }
                 }
 
-                if (!m_AllyList.empty())
+                if (auto* PMobEntity = dynamic_cast<CMobEntity*>(PEntity))
                 {
-                    m_AllyList.erase(std::remove_if(m_AllyList.begin(), m_AllyList.end(), check), m_AllyList.end());
+                    if (std::find(m_AllyList.begin(), m_AllyList.end(), PMobEntity) != m_AllyList.end())
+                    {
+                        m_AllyList.erase(std::remove_if(m_AllyList.begin(), m_AllyList.end(), check), m_AllyList.end());
+                    }
                 }
+                
                 PEntity->status = STATUS_TYPE::DISAPPEAR;
                 return found;
             }

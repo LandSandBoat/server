@@ -42,8 +42,6 @@ zone_object.onZoneIn = function(player, prevZone)
         cs = 9
     elseif UnbridledPassionCS == 3 then
         cs = 4
-    elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.VAIN and player:getMissionStatus(player:getNation()) == 1 then
-        cs = 11
     end
 
     return cs
@@ -59,12 +57,6 @@ end
 zone_object.onEventUpdate = function(player, csid, option)
     if csid == 9 then
         quests.rainbow.onEventUpdate(player)
-    elseif csid == 11 then
-        if player:getPreviousZone() == xi.zone.BEAUCEDINE_GLACIER then
-            player:updateEvent(0, 0, 0, 0, 0, 2)
-        else
-            player:updateEvent(0, 0, 0, 0, 0, 3)
-        end
     end
 end
 

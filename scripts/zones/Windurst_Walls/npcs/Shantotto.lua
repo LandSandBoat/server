@@ -86,13 +86,7 @@ entity.onTrigger = function(player, npc)
     local golemdelivery = player:getCharVar("foiledagolemdeliverycomplete")
     local WildcatWindurst = player:getCharVar("WildcatWindurst")
 
-    if (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_JESTER_WHO_D_BE_KING and
-        player:getMissionStatus(player:getNation()) == 7) then
-        player:startEvent(397, 0, 0, 0, 282)
-    elseif (player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_JESTER_WHO_D_BE_KING) and
-        player:getCharVar("ShantottoCS") == 1) then
-        player:startEvent(399, 0, 0, 282)
-    elseif (player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatWindurst, 6)) then
+    if (player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatWindurst, 6)) then
         player:startEvent(498)
     elseif (player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CLASS_REUNION) == QUEST_ACCEPTED and
         player:getCharVar("ClassReunionProgress") == 3) then
@@ -109,9 +103,6 @@ entity.onTrigger = function(player, npc)
         local cYear = VanadielYear()
         local dFinished = player:getCharVar("CursesFoiledAgainDay")
         local yFinished = player:getCharVar("CursesFoiledAgainYear")
-
-        -- player:PrintToPlayer("Vana Day and year:  "..cDay..", "..cYear)
-        -- player:PrintToPlayer("Database Day and year:  "..dFinished..", "..yFinished)
 
         if (cDay == dFinished and cYear == yFinished) then
             player:startEvent(174)
@@ -224,12 +215,6 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("ClassReunionProgress", 4)
     elseif (csid == 498) then
         player:setCharVar("WildcatWindurst", utils.mask.setBit(player:getCharVar("WildcatWindurst"), 6, true))
-    elseif (csid == 397) then
-        player:addKeyItem(xi.ki.GLOVE_OF_PERPETUAL_TWILIGHT)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.GLOVE_OF_PERPETUAL_TWILIGHT)
-        player:setMissionStatus(player:getNation(), 8)
-    elseif (csid == 399) then
-        player:setCharVar("ShantottoCS", 0)
 
         -- TRUST
     elseif csid == 529 and option == 2 then

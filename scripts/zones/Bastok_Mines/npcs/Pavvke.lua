@@ -3,40 +3,41 @@
 --  NPC: Pavvke
 -- Starts Quests: Fallen Comrades (100%)
 -----------------------------------
+local ID = require("scripts/zones/Bastok_Mines/IDs")
 require("scripts/globals/quests")
 require("scripts/settings/main")
-local ID = require("scripts/zones/Bastok_Mines/IDs")
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local count = trade:getItemCount()
-    local SilverTag = trade:hasItemQty(13116, 1)
     local Fallen = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.FALLEN_COMRADES)
 
-    if Fallen == 1 and SilverTag == true and count == 1 then
-        player:tradeComplete()
-        player:startEvent(91)
-    elseif Fallen == 2 and SilverTag == true and count == 1 then
-        player:tradeComplete()
-        player:startEvent(92)
+    if
+        trade:hasItemQty(13116, 1) == true and
+        trade:getItemCount() == 1
+    then
+        if Fallen == 1 then
+            player:tradeComplete()
+            player:startEvent(91)
+        elseif Fallen == 2 then
+            player:tradeComplete()
+            player:startEvent(92)
+        end
     end
 end
 
 entity.onTrigger = function(player, npc)
-    local Fallen = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.FALLEN_COMRADES)
-    local theEleventhsHour = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_ELEVENTH_S_HOUR)
-    local pLevel = player:getMainLvl(player)
-    local pFame = player:getFameLevel(BASTOK)
-
-    if Fallen == 0 and pLevel >= 12 and pFame >= 2 then
+    if
+        player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.FALLEN_COMRADES) == 0 and
+        player:getMainLvl(player) >= 12 and
+        player:getFameLevel(BASTOK) >= 2
+    then
         player:startEvent(90)
+
+    elseif player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_ELEVENTH_S_HOUR) == QUEST_ACCEPTED then
+        player:startEvent(48)
     else
-        if theEleventhsHour == QUEST_ACCEPTED then
-            player:startEvent(48)
-        else
-            player:startEvent(75)
-        end
+        player:startEvent(75)
     end
 end
 

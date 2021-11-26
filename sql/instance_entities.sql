@@ -20,7 +20,7 @@ CREATE TABLE `instance_entities` (
   `instanceid` smallint(3) unsigned NOT NULL DEFAULT '0',
   `id` int(10) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`instanceid`, `id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1324,6 +1324,13 @@ INSERT INTO `instance_entities` VALUES (9300,17158394); -- csnpc
 INSERT INTO `instance_entities` VALUES (9300,17158395); -- csnpc
 INSERT INTO `instance_entities` VALUES (9300,17158396); -- csnpc
 INSERT INTO `instance_entities` VALUES (9300,17158397); -- csnpc
+
+-- Behind the Sluices (25900)
+INSERT INTO `instance_entities` VALUES (25900, 17838146); -- Arciela
+INSERT INTO `instance_entities` VALUES (25900, 17838147); -- The Keeper
+INSERT INTO `instance_entities` VALUES (25900, 17838148); -- Mistdagger
+INSERT INTO `instance_entities` VALUES (25900, 17838149); -- The Briars (elv)
+INSERT INTO `instance_entities` VALUES (25900, 17838150); -- The Briars (gal)
 
 -- Ambuscade
 -- mobs

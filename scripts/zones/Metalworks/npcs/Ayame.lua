@@ -44,9 +44,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 712) then
-        finishMissionTimeline(player, 1, csid, option)
-    elseif (csid == 748) then
+    if (csid == 748) then
         player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRUE_STRENGTH)
     elseif (csid == 749) then
         if (player:getFreeSlotsCount() == 0) then

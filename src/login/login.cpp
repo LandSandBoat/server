@@ -193,7 +193,7 @@ int32 do_init(int32 argc, char** argv)
                                     mode = 0;
                                 }
 
-                                if (mode < 0 || mode > 2)
+                                if (mode > 2)
                                 {
                                     ShowStatus("Maintenance mode %i not supported\r", maint_config.maint_mode);
                                 }
@@ -486,7 +486,7 @@ void version_info_read(const char* key, const char* value)
     {
         version_info.ver_lock = std::atoi(value);
 
-        if (version_info.ver_lock > 2 || version_info.ver_lock < 0)
+        if (version_info.ver_lock > 2)
         {
             ShowError("ver_lock not within bounds (0..2) was %i, defaulting to 1\r", version_info.ver_lock);
             version_info.ver_lock = 1;
@@ -546,7 +546,7 @@ void maint_config_read(const char* key, const char* value)
     {
         maint_config.maint_mode = std::atoi(value);
 
-        if (maint_config.maint_mode > 2 || maint_config.maint_mode < 0)
+        if (maint_config.maint_mode > 1)
         {
             ShowError("maint_mode not within bounds (0..1) was %i, defaulting to 0\r", maint_config.maint_mode);
             maint_config.maint_mode = 0;

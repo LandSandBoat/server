@@ -37,6 +37,7 @@ local handleAcceptMission = function(player, csid, option, npc)
         mission:begin(player)
         player:setMissionStatus(mission.areaId, 9)
         player:delKeyItem(xi.ki.MESSAGE_TO_JEUNO_BASTOK)
+        player:messageSpecial(zones[player:getZoneID()].text.YOU_ACCEPT_THE_MISSION)
     end
 end
 

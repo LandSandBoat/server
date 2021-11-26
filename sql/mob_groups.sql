@@ -30,7 +30,7 @@ CREATE TABLE `mob_groups` (
   `maxLevel` tinyint(2) unsigned NOT NULL DEFAULT 0,
   `allegiance` tinyint(2) unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (`zoneid`,`groupid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=22;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=22;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -13910,11 +13910,11 @@ INSERT INTO `mob_groups` VALUES (22,0,259,'Sludgeslither_Slime',0,128,0,0,0,0,0,
 INSERT INTO `mob_groups` VALUES (23,0,259,'Karst_Crab',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (24,5507,259,'Zurko-Bazurko',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (25,0,259,'Sverdhried_qm',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (26,5496,259,'Arciela',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (27,5513,259,'The_Keeper',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (28,5514,259,'Mistdagger',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (29,5515,259,'The_Briars_elv',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (30,5516,259,'The_Briars_gal',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (26,5496,259,'Arciela',0,128,0,0,0,108,108,1);
+INSERT INTO `mob_groups` VALUES (27,5513,259,'The_Keeper',0,128,0,24000,0,110,110,0);
+INSERT INTO `mob_groups` VALUES (28,5514,259,'Mistdagger',0,128,0,9000,0,108,108,0);
+INSERT INTO `mob_groups` VALUES (29,5515,259,'The_Briars_elv',0,128,0,17000,0,108,108,0);
+INSERT INTO `mob_groups` VALUES (30,5516,259,'The_Briars_gal',0,128,0,22000,0,108,108,0);
 INSERT INTO `mob_groups` VALUES (31,0,259,'Stormy_Autochthon',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (32,0,259,'Windrender',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (33,0,259,'Reaving_Craklaw',0,128,0,0,0,0,0,0);

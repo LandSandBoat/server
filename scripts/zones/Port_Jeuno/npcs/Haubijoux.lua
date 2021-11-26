@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Port Jeuno
 --  NPC: Haubijoux
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

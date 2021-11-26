@@ -45,7 +45,7 @@ CEventStringPacket::CEventStringPacket(CCharEntity* PChar, EventInfo* eventInfo)
     for (auto paramPair : eventInfo->params)
     {
         // Only params 0 through 7 are valid
-        if (paramPair.first >= 0 && paramPair.first <= 7)
+        if (paramPair.first <= 7)
         {
             ref<uint32>(0x50 + paramPair.first * 4) = paramPair.second;
         }

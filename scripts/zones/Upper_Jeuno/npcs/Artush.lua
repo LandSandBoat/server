@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Upper Jeuno
 --  NPC: Artush
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 
