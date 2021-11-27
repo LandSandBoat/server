@@ -617,7 +617,9 @@ void CZoneEntities::SpawnPCs(CCharEntity* PChar)
 
         if (PChar != PCurrentChar)
         {
-            if (distance(PChar->loc.p, PCurrentChar->loc.p) < 50 && PChar->m_moghouseID == PCurrentChar->m_moghouseID)
+            if (distance(PChar->loc.p, PCurrentChar->loc.p) < 50 &&
+                PChar->m_moghouseID == PCurrentChar->m_moghouseID &&
+                PChar->loc.zone->GetID() != ZONE_MOG_GARDEN)
             {
                 if (PC == PChar->SpawnPCList.end())
                 {
