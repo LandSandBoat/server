@@ -134,11 +134,6 @@ zone_object.onRegionEnter = function(player, region)
         [22] = function (x)
             player:startEvent(210)
         end,
-        [23] = function (x)
-            if player:getCurrentMission(TOAU) == xi.mission.id.toau.UNDERSEA_SCOUTING then
-                player:startEvent(1, xi.besieged.getMercenaryRank(player))
-            end
-        end,
         [24] = function (x)
             if player:getCharVar("TransformationsProgress") == 2 then
                 player:startEvent(2)
@@ -171,12 +166,7 @@ zone_object.onEventUpdate = function(player, csid, option)
 end
 
 zone_object.onEventFinish = function(player, csid, option)
-    if csid == 1 then
-        player:addKeyItem(xi.ki.ASTRAL_COMPASS)
-        player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.UNDERSEA_SCOUTING)
-        player:addMission(xi.mission.log_id.TOAU, xi.mission.id.toau.ASTRAL_WAVES)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.ASTRAL_COMPASS)
-    elseif csid == 2 then
+    if csid == 2 then
         player:setCharVar("TransformationsProgress", 3)
     elseif csid == 3 then
         player:setCharVar("TransformationsProgress", 4)

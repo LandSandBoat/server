@@ -24,9 +24,7 @@ end
 entity.onTrigger = function(player, npc)
     local needToZone = player:needToZone()
 
-    if (player:getCurrentMission(TOAU) == xi.mission.id.toau.UNDERSEA_SCOUTING) then
-        player:startEvent(3051, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-    elseif (player:getCurrentMission(TOAU) == xi.mission.id.toau.ASTRAL_WAVES) then
+    if (player:getCurrentMission(TOAU) == xi.mission.id.toau.ASTRAL_WAVES) then
         player:startEvent(3052, 0, 0, 0, 0, 0, 0, 0, 0, 0)
     elseif (player:getCurrentMission(TOAU) == xi.mission.id.toau.IMPERIAL_SCHEMES and player:getCharVar("TOAUM11_STARTDAY") ~= VanadielDayOfTheYear() and needToZone == false) then
         player:startEvent(3070, 0, 0, 0, 0, 0, 0, 0, 0, 0)
