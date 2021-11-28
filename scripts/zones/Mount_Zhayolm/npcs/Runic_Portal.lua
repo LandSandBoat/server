@@ -15,9 +15,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getCurrentMission(TOAU) == xi.mission.id.toau.IMMORTAL_SENTRIES and player:getCharVar("AhtUrganStatus") == 1 then
-        player:startEvent(111)
-    elseif player:getCurrentMission(TOAU) > xi.mission.id.toau.IMMORTAL_SENTRIES then
+    if player:getCurrentMission(TOAU) > xi.mission.id.toau.IMMORTAL_SENTRIES then
         if xi.besieged.hasRunicPortal(player, xi.teleport.runic_portal.HALVUNG) then
             player:startEvent(109)
         else

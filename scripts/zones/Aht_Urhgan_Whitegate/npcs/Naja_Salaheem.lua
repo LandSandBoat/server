@@ -34,8 +34,6 @@ entity.onTrigger = function(player, npc)
         player:startEvent(5022, 0, 0, 0, 0, 0, 0, 0, 0, 0) -- Superior Private rank complete
     elseif (player:getCharVar("AssaultPromotion") >= 25 and player:hasKeyItem(xi.ki.SP_WILDCAT_BADGE) == false and player:getCharVar("PromotionSP") == 0) then
         player:startEvent(5020, 0, 0, 0, 0, 0, 0, 0, 0, 0) -- Superior Private rank is available
-    elseif (player:getCurrentMission(TOAU) == xi.mission.id.toau.IMMORTAL_SENTRIES and player:getCharVar("AhtUrganStatus") == 1) then
-        player:startEvent(3002, 0, 0, 0, 0, 0, 0, 0, 0, 0)
     elseif (player:getCurrentMission(TOAU) == xi.mission.id.toau.PRESIDENT_SALAHEEM and player:getCharVar("AhtUrganStatus") == 1) then
         player:startEvent(73, 0, 0, 0, 0, 0, 0, 0, 0, 0)
     elseif (player:getCurrentMission(TOAU) == xi.mission.id.toau.PRESIDENT_SALAHEEM and player:getCharVar("AhtUrganStatus") == 2 and needToZone == false) then
@@ -112,14 +110,6 @@ end
 entity.onEventFinish = function(player, csid, option)
     if (csid == 73) then
         player:setCharVar("AhtUrganStatus", 2)
-    elseif (csid == 3002) then
-        player:setCharVar("AhtUrganStatus", 0)
-        player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.IMMORTAL_SENTRIES)
-        player:addMission(xi.mission.log_id.TOAU, xi.mission.id.toau.PRESIDENT_SALAHEEM)
-        player:addCurrency("imperial_standing", 150)
-        player:addTitle(xi.title.PRIVATE_SECOND_CLASS)
-        player:addKeyItem(xi.ki.PSC_WILDCAT_BADGE)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.PSC_WILDCAT_BADGE)
     elseif (csid == 3020) then
         player:setCharVar("AhtUrganStatus", 0)
         player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.PRESIDENT_SALAHEEM)
