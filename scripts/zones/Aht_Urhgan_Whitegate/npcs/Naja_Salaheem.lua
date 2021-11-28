@@ -19,22 +19,12 @@ require("scripts/globals/npc_util")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if (npcUtil.tradeHas(trade, 2163) and player:getCharVar("PromotionPFC") == 1) then -- Rank to PFC
-        player:startEvent(5002, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-    end
 end
 
 entity.onTrigger = function(player, npc)
     local needToZone = player:needToZone()
 
-    if (player:getCharVar("AssaultPromotion") >= 25 and player:hasKeyItem(xi.ki.PFC_WILDCAT_BADGE) == false and player:getCharVar("PromotionPFC") == 0) then
-        player:startEvent(5000, 0, 0, 0, 0, 0, 0, 0, 0, 0) -- PFC rank is available
-    elseif (player:getCharVar("PromotionSP") == 1 and player:hasKeyItem(xi.ki.DARK_RIDER_HOOFPRINT) == true) then
-        player:startEvent(5022, 0, 0, 0, 0, 0, 0, 0, 0, 0) -- Superior Private rank complete
-    elseif (player:getCharVar("AssaultPromotion") >= 25 and player:hasKeyItem(xi.ki.SP_WILDCAT_BADGE) == false and player:getCharVar("PromotionSP") == 0) then
-        player:startEvent(5020, 0, 0, 0, 0, 0, 0, 0, 0, 0) -- Superior Private rank is available
-
-    elseif (player:getCurrentMission(TOAU) == xi.mission.id.toau.UNDERSEA_SCOUTING) then
+    if (player:getCurrentMission(TOAU) == xi.mission.id.toau.UNDERSEA_SCOUTING) then
         player:startEvent(3051, 0, 0, 0, 0, 0, 0, 0, 0, 0)
     elseif (player:getCurrentMission(TOAU) == xi.mission.id.toau.ASTRAL_WAVES) then
         player:startEvent(3052, 0, 0, 0, 0, 0, 0, 0, 0, 0)
@@ -153,21 +143,6 @@ entity.onEventFinish = function(player, csid, option)
         player:addKeyItem(xi.ki.MYTHRIL_MIRROR)
     elseif (csid == 3076 and option == 0) then
         player:setCharVar("AhtUrganStatus", 1)
-    elseif csid == 5000 then
-        player:setCharVar("PromotionPFC", 1)
-    elseif csid == 5002 then
-        player:confirmTrade()
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.PFC_WILDCAT_BADGE)
-        player:addKeyItem(xi.ki.PFC_WILDCAT_BADGE)
-        player:setCharVar("PromotionPFC", 0)
-        player:setCharVar("AssaultPromotion", 0)
-    elseif csid == 5020 then
-        player:setCharVar("PromotionSP", 1)
-    elseif csid == 5022 then
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SP_WILDCAT_BADGE)
-        player:addKeyItem(xi.ki.SP_WILDCAT_BADGE)
-        player:setCharVar("PromotionSP", 0)
-        player:setCharVar("AssaultPromotion", 0)
     end
 end
 
