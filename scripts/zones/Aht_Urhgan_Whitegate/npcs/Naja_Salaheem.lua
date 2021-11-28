@@ -24,9 +24,7 @@ end
 entity.onTrigger = function(player, npc)
     local needToZone = player:needToZone()
 
-    if (player:getCurrentMission(TOAU) == xi.mission.id.toau.ROYAL_PUPPETEER) then
-        player:startEvent(3071, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-    elseif (player:getCurrentMission(TOAU) == xi.mission.id.toau.THE_DOLPHIN_CREST) then
+    if (player:getCurrentMission(TOAU) == xi.mission.id.toau.THE_DOLPHIN_CREST) then
         player:startEvent(3072, 0, 0, 0, 0, 0, 0, 0, 0, 0)
     elseif (player:getCurrentMission(TOAU) == xi.mission.id.toau.THE_BLACK_COFFIN) then
         player:startEvent(3073, 0, 0, 0, 0, 0, 0, 0, 0, 0)

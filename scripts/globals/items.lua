@@ -311,6 +311,7 @@ xi.items =
     SQUARE_OF_KARAKUL_CLOTH         = 2288,
     SQUARE_OF_WAMOURA_CLOTH         = 2289,
     CHUNK_OF_IMPERIAL_CERMET        = 2290,
+    VIAL_OF_JODYS_ACID              = 2307,
     CHOCOBO_EGG                     = 2317,
     BLUE_MAGES_TESTIMONY            = 2331,
     CORSAIRS_TESTIMONY              = 2332,
