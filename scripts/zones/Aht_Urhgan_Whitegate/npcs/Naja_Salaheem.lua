@@ -24,9 +24,7 @@ end
 entity.onTrigger = function(player, npc)
     local needToZone = player:needToZone()
 
-    if (player:getCurrentMission(TOAU) == xi.mission.id.toau.IMPERIAL_SCHEMES and player:getCharVar("TOAUM11_STARTDAY") ~= VanadielDayOfTheYear() and needToZone == false) then
-        player:startEvent(3070, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-    elseif (player:getCurrentMission(TOAU) == xi.mission.id.toau.ROYAL_PUPPETEER) then
+    if (player:getCurrentMission(TOAU) == xi.mission.id.toau.ROYAL_PUPPETEER) then
         player:startEvent(3071, 0, 0, 0, 0, 0, 0, 0, 0, 0)
     elseif (player:getCurrentMission(TOAU) == xi.mission.id.toau.THE_DOLPHIN_CREST) then
         player:startEvent(3072, 0, 0, 0, 0, 0, 0, 0, 0, 0)
@@ -86,11 +84,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 3070) then
-        player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.IMPERIAL_SCHEMES)
-        player:setCharVar("TOAUM11_STARTDAY", 0)
-        player:addMission(xi.mission.log_id.TOAU, xi.mission.id.toau.ROYAL_PUPPETEER)
-    elseif (csid == 3072) then
+    if (csid == 3072) then
         player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.THE_DOLPHIN_CREST)
         player:addMission(xi.mission.log_id.TOAU, xi.mission.id.toau.THE_BLACK_COFFIN)
     elseif (csid == 3074) then
