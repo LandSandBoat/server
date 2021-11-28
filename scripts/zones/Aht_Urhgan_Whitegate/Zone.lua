@@ -1,7 +1,5 @@
 -----------------------------------
---
 -- Zone: Aht_Urhgan_Whitegate (50)
---
 -----------------------------------
 local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
 require("scripts/settings/main")
@@ -73,12 +71,7 @@ zone_object.onRegionEnter = function(player, region)
             end
         end,
         [3] = function (x) -- TOAU Missions
-            if (toauMission == xi.mission.id.toau.A_MERCENARY_LIFE and not needToZone) then
-                local prevZone = player:getPreviousZone()
-                if (prevZone ~= xi.zone.AHT_URHGAN_WHITEGATE) then
-                    player:startEvent(3050, 3, 3, 3, 3, 3, 3, 3, 3, 0)
-                end
-            elseif (toauMission == xi.mission.id.toau.FINDERS_KEEPERS) then
+            if (toauMission == xi.mission.id.toau.FINDERS_KEEPERS) then
                 player:startEvent(3093)
             elseif (toauMission == xi.mission.id.toau.SOCIAL_GRACES) then
                 player:startEvent(3095)
@@ -124,21 +117,6 @@ zone_object.onTransportEvent = function(player, transport)
 end
 
 zone_object.onEventUpdate = function(player, csid, option)
-    if (csid == 3050 and option == 1) then
-        if (player:getLocalVar("A_MERCENARY_LIFE") == 0) then
-            player:setLocalVar("A_MERCENARY_LIFE", 1)
-            player:updateEvent(1, 0, 0, 0, 0, 0, 0, 0)
-        else
-            player:updateEvent(3, 0, 0, 0, 0, 0, 0, 0)
-        end
-    elseif (csid == 3050 and option == 2) then
-        if (player:getLocalVar("A_MERCENARY_LIFE") == 0) then
-            player:setLocalVar("A_MERCENARY_LIFE", 1)
-            player:updateEvent(2, 0, 0, 0, 0, 0, 0, 0)
-        else
-            player:updateEvent(3, 0, 0, 0, 0, 0, 0, 0)
-        end
-    end
 end
 
 zone_object.onEventFinish = function(player, csid, option)
@@ -156,9 +134,6 @@ zone_object.onEventFinish = function(player, csid, option)
     elseif (csid == 526) then
         player:setCharVar("gotitallCS", 6)
         player:setPos(60, 0, -71, 38)
-    elseif (csid == 3050) then
-        player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.A_MERCENARY_LIFE)
-        player:addMission(xi.mission.log_id.TOAU, xi.mission.id.toau.UNDERSEA_SCOUTING)
     elseif (csid == 3092) then
         player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.SWEETS_FOR_THE_SOUL)
         player:addMission(xi.mission.log_id.TOAU, xi.mission.id.toau.TEAHOUSE_TUMULT)
