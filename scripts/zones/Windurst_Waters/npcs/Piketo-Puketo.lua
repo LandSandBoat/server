@@ -12,7 +12,7 @@ require("scripts/globals/status")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local signed = trade:getItem():getSignature() == player:getName() and 1 or 0
+    local signed  = trade:getItem():getSignature() == player:getName() and 1 or 0
     local newRank = xi.crafting.tradeTestItem(player, npc, trade, xi.skill.COOKING)
 
     if
@@ -36,14 +36,22 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local craftSkill = player:getSkillLevel(xi.skill.COOKING)
-    local testItem = xi.crafting.getTestItem(player, npc, xi.skill.COOKING)
-    local guildMember = xi.crafting.isGuildMember(player, 4)
-    local rankCap = xi.crafting.getCraftSkillCap(player, xi.skill.COOKING)
+    local craftSkill        = player:getSkillLevel(xi.skill.COOKING)
+    local testItem          = xi.crafting.getTestItem(player, npc, xi.skill.COOKING)
+    local guildMember       = xi.crafting.isGuildMember(player, 4)
+    local rankCap           = xi.crafting.getCraftSkillCap(player, xi.skill.COOKING)
     local expertQuestStatus = 0
-    local Rank = player:getSkillRank(xi.skill.COOKING)
-    local realSkill = (craftSkill - Rank) / 32
-    if (guildMember == 1) then guildMember = 150995375; end
+    local Rank              = player:getSkillRank(xi.skill.COOKING)
+    local realSkill         = (craftSkill - Rank) / 32
+
+    if guildMember == 1 then
+        guildMember = 150995375
+    end
+
+    if xi.crafting.unionRepresentativeTriggerRenounceCheck(player, 10013, realSkill, rankCap, 184549887) then
+        return
+    end
+
     if player:getCharVar("CookingExpertQuest") == 1 then
         if player:hasKeyItem(xi.keyItem.WAY_OF_THE_CULINARIAN) then
             expertQuestStatus = 550
@@ -69,18 +77,25 @@ end
 
 -- 978  983  980  981  10013  10014
 entity.onEventUpdate = function(player, csid, option)
+    if
+        csid == 10013 and
+        option >= xi.skill.WOODWORKING and
+        option <= xi.skill.COOKING
+    then
+        xi.crafting.unionRepresentativeEventUpdateRenounce(player, option)
+    end
 end
 
 entity.onEventFinish = function(player, csid, option)
     local guildMember = xi.crafting.isGuildMember(player, 4)
 
-    if (csid == 10013 and option == 2) then
+    if csid == 10013 and option == 2 then
         if guildMember == 1 then
             player:setCharVar("CookingExpertQuest",1)
         end
-    elseif (csid == 10013 and option == 1) then
+    elseif csid == 10013 and option == 1 then
         local crystal = 4096 -- fire crystal
-        if (player:getFreeSlotsCount() == 0) then
+        if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, crystal)
         else
             player:addItem(crystal)

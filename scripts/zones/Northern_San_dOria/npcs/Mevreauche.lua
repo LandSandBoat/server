@@ -12,7 +12,7 @@ require("scripts/globals/status")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local signed = trade:getItem():getSignature() == player:getName() and 1 or 0
+    local signed  = trade:getItem():getSignature() == player:getName() and 1 or 0
     local newRank = xi.crafting.tradeTestItem(player, npc, trade, xi.skill.SMITHING)
 
     if
@@ -36,14 +36,21 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local craftSkill = player:getSkillLevel(xi.skill.SMITHING)
-    local testItem = xi.crafting.getTestItem(player, npc, xi.skill.SMITHING)
-    local guildMember = xi.crafting.isGuildMember(player, 8)
-    local rankCap = xi.crafting.getCraftSkillCap(player, xi.skill.SMITHING)
+    local craftSkill        = player:getSkillLevel(xi.skill.SMITHING)
+    local testItem          = xi.crafting.getTestItem(player, npc, xi.skill.SMITHING)
+    local guildMember       = xi.crafting.isGuildMember(player, 8)
+    local rankCap           = xi.crafting.getCraftSkillCap(player, xi.skill.SMITHING)
     local expertQuestStatus = 0
-    local Rank = player:getSkillRank(xi.skill.SMITHING)
-    local realSkill = (craftSkill - Rank) / 32
-    if (guildMember == 1) then guildMember = 150995375; end
+    local Rank              = player:getSkillRank(xi.skill.SMITHING)
+    local realSkill         = (craftSkill - Rank) / 32
+
+    if guildMember == 1 then
+        guildMember = 150995375
+    end
+
+    if xi.crafting.unionRepresentativeTriggerRenounceCheck(player, 626, realSkill, rankCap, 184549887) then
+        return
+    end
 
     if player:getCharVar("SmithingExpertQuest") == 1 then
         if player:hasKeyItem(xi.keyItem.WAY_OF_THE_BLACKSMITH) then
@@ -70,17 +77,24 @@ end
 
 -- 626  627  16  0  73  74
 entity.onEventUpdate = function(player, csid, option)
+    if
+        csid == 626 and
+        option >= xi.skill.WOODWORKING and
+        option <= xi.skill.COOKING
+    then
+        xi.crafting.unionRepresentativeTriggerRenounceCheck(player, option)
+    end
 end
 
 entity.onEventFinish = function(player, csid, option)
     local guildMember = xi.crafting.isGuildMember(player, 8)
 
-    if (csid == 626 and option == 2) then
+    if csid == 626 and option == 2 then
         if guildMember == 1 then
             player:setCharVar("SmithingExpertQuest",1)
         end
-    elseif (csid == 626 and option == 1) then
-        if (player:getFreeSlotsCount() == 0) then
+    elseif csid == 626 and option == 1 then
+        if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 4096)
         else
             player:addItem(4096)
