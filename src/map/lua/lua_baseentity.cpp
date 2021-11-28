@@ -10051,7 +10051,7 @@ bool CLuaBaseEntity::delStatusEffectSilent(uint16 StatusID)
     }
 
     auto effect_StatusID = static_cast<EFFECT>(StatusID);
-    return PBattleEntity->StatusEffectContainer->DelStatusEffect(effect_StatusID);
+    return PBattleEntity->StatusEffectContainer->DelStatusEffectSilent(effect_StatusID);
 }
 
 /************************************************************************
