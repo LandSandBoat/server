@@ -96,9 +96,7 @@ zone_object.onRegionEnter = function(player, region)
             end
         end,
         [5] = function (x) -- AH mission
-            if (toauMission == xi.mission.id.toau.WESTERLY_WINDS and player:getCharVar("AhtUrganStatus") == 0) then
-                player:startEvent(3027, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-            elseif (toauMission == xi.mission.id.toau.SWEETS_FOR_THE_SOUL) then
+            if (toauMission == xi.mission.id.toau.SWEETS_FOR_THE_SOUL) then
                 player:startEvent(3092)
             elseif (toauMission == xi.mission.id.toau.STIRRINGS_OF_WAR and player:getCharVar("AhtUrganStatus") == 1) then
                 player:startEvent(3136, 0, 0, 0, 0, 0, 0, 0, 0, 0)
@@ -158,17 +156,6 @@ zone_object.onEventFinish = function(player, csid, option)
     elseif (csid == 526) then
         player:setCharVar("gotitallCS", 6)
         player:setPos(60, 0, -71, 38)
-    elseif (csid == 3027) then
-        if (player:getFreeSlotsCount() == 0) then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 2185)
-        else
-            player:setCharVar("AhtUrganStatus", 1)
-            player:addKeyItem(xi.ki.RAILLEFALS_NOTE)
-            player:setTitle(xi.title.AGENT_OF_THE_ALLIED_FORCES)
-            player:addItem(2185, 1)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.RAILLEFALS_NOTE)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 2185)
-        end
     elseif (csid == 3050) then
         player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.A_MERCENARY_LIFE)
         player:addMission(xi.mission.log_id.TOAU, xi.mission.id.toau.UNDERSEA_SCOUTING)

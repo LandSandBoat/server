@@ -25,7 +25,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-
     local needToZone = player:needToZone()
 
     if (player:getCharVar("AssaultPromotion") >= 25 and player:hasKeyItem(xi.ki.PFC_WILDCAT_BADGE) == false and player:getCharVar("PromotionPFC") == 0) then
@@ -34,8 +33,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(5022, 0, 0, 0, 0, 0, 0, 0, 0, 0) -- Superior Private rank complete
     elseif (player:getCharVar("AssaultPromotion") >= 25 and player:hasKeyItem(xi.ki.SP_WILDCAT_BADGE) == false and player:getCharVar("PromotionSP") == 0) then
         player:startEvent(5020, 0, 0, 0, 0, 0, 0, 0, 0, 0) -- Superior Private rank is available
-    elseif (player:getCurrentMission(TOAU) == xi.mission.id.toau.WESTERLY_WINDS and player:getCharVar("AhtUrganStatus") == 1) then
-        player:startEvent(3028, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+
     elseif (player:getCurrentMission(TOAU) == xi.mission.id.toau.UNDERSEA_SCOUTING) then
         player:startEvent(3051, 0, 0, 0, 0, 0, 0, 0, 0, 0)
     elseif (player:getCurrentMission(TOAU) == xi.mission.id.toau.ASTRAL_WAVES) then
@@ -102,18 +100,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 3028) then
-        if (player:getFreeSlotsCount() == 0) then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 2185)
-        else
-            player:addItem(2185, 2)
-            player:setCharVar("AhtUrganStatus", 0)
-            player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.WESTERLY_WINDS)
-            player:addMission(xi.mission.log_id.TOAU, xi.mission.id.toau.A_MERCENARY_LIFE)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 2185)
-            player:needToZone(true)
-        end
-    elseif (csid == 3052) then
+    if (csid == 3052) then
         player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.ASTRAL_WAVES)
         player:needToZone(true)
         player:setCharVar("TOAUM11_STARTDAY", VanadielDayOfTheYear())
