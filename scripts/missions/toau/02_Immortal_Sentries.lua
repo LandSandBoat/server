@@ -3,11 +3,12 @@
 -- Aht Uhrgan Mission 2
 -----------------------------------
 -- !addmission 4 1
--- Daswil  : !pos -208.720 -12.889 -779.713 52
--- Meyaada : !pos 22.446 -7.920 573.390 54
--- Nahshib : !pos -274.334 -9.287 -64.255 79
--- Nareema : !pos 518.387 -24.707 -467.297 79
--- Waudeen : !pos 673.882 -23.995 367.604 61
+-- Daswil        : !pos -208.720 -12.889 -779.713 52
+-- Meyaada       : !pos 22.446 -7.920 573.390 54
+-- Nahshib       : !pos -274.334 -9.287 -64.255 79
+-- Nareema       : !pos 518.387 -24.707 -467.297 79
+-- Waudeen       : !pos 673.882 -23.995 367.604 61
+-- Naja Salaheem : !pos 22.700 -8.804 -45.591 50
 -----------------------------------
 require('scripts/settings/main')
 require('scripts/globals/items')
@@ -57,6 +58,7 @@ mission.sections =
                     if mission:complete(player) then
                         -- TODO: npcUtil.completeMission should support granting IS
                         player:addCurrency('imperial_standing', 150)
+                        player:setLocalVar('Mission[4][2]mustZone', 1)
                     end
                 end,
             },
