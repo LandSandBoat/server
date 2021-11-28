@@ -1,9 +1,7 @@
 -----------------------------------
 -- Spell: Water
--- Deals water damage to an enemy.
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/magic")
+require("scripts/globals/magic_utils/spell_damage")
 -----------------------------------
 local spell_object = {}
 
@@ -12,22 +10,7 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    local spellParams = {}
-    spellParams.hasMultipleTargetReduction = false
-    spellParams.resistBonus = 1.0
-    spellParams.V = 16
-    spellParams.V0 = 25
-    spellParams.V50 = 115
-    spellParams.V100 = 165
-    spellParams.V200 = 165
-    spellParams.M = 1
-    spellParams.M0 = 1.8
-    spellParams.M50 = 1
-    spellParams.M100 = 0
-    spellParams.M200 = 0
-    spellParams.I = 25
-
-    return doElementalNuke(caster, spell, target, spellParams)
+    return xi.magic_utils.spell_damage.useDamageSpell(caster, target, spell)
 end
 
 return spell_object

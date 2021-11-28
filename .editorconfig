@@ -3,6 +3,8 @@ root = true
 
 # Visual Studio comes bundled with native support for EditorConfig
 # For other code editors:  https://editorconfig.org/#download
+[*.sql]
+charset = utf-8
 
 [*.lua]
 indent_style = space

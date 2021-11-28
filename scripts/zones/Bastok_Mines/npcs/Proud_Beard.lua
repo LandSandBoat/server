@@ -3,8 +3,8 @@
 --  NPC: Proud Beard
 -- Standard Merchant NPC
 -----------------------------------
-require("scripts/globals/events/harvest_festivals")
 local ID = require("scripts/zones/Bastok_Mines/IDs")
+require("scripts/globals/events/harvest_festivals")
 require("scripts/globals/shop")
 -----------------------------------
 local entity = {}

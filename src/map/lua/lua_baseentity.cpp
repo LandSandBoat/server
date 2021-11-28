@@ -1576,7 +1576,7 @@ bool CLuaBaseEntity::pathThrough(sol::table const& pointsTable, sol::object cons
     std::vector<position_t> points;
 
     // Grab points from array and store in points array
-    for (uint8 i = 1; i < pointsTable.size(); i += 3)
+    for (std::size_t i = 1; i < pointsTable.size(); i += 3)
     {
         points.push_back({ (float)pointsTable[i], (float)pointsTable[i + 1], (float)pointsTable[i + 2], 0, 0 });
     }
@@ -4086,7 +4086,7 @@ void CLuaBaseEntity::clearGearSetMods()
 {
     if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
     {
-        for (uint8 i = 0; i < PChar->m_GearSetMods.size(); ++i)
+        for (std::size_t i = 0; i < PChar->m_GearSetMods.size(); ++i)
         {
             GearSetMod_t gearSetMod = PChar->m_GearSetMods.at(i);
             PChar->delModifier(gearSetMod.modId, gearSetMod.modValue);
@@ -4104,7 +4104,11 @@ void CLuaBaseEntity::clearGearSetMods()
 
 std::optional<CLuaItem> CLuaBaseEntity::getStorageItem(uint8 container, uint8 slotID, uint8 equipID)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowWarning("%s is trying to access their inventory, but is not TYPE_PC, so doesn't have one!", (const char*)m_PBaseEntity->GetName());
+        return std::nullopt;
+    }
 
     CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
 
@@ -10047,7 +10051,7 @@ bool CLuaBaseEntity::delStatusEffectSilent(uint16 StatusID)
     }
 
     auto effect_StatusID = static_cast<EFFECT>(StatusID);
-    return PBattleEntity->StatusEffectContainer->DelStatusEffect(effect_StatusID);
+    return PBattleEntity->StatusEffectContainer->DelStatusEffectSilent(effect_StatusID);
 }
 
 /************************************************************************
@@ -12519,7 +12523,7 @@ void CLuaBaseEntity::setRoamFlags(uint16 newRoamFlags)
 
 /************************************************************************
  *  Function: getTarget()
- *  Purpose : Return available targets as a Lua table to the Mob
+ *  Purpose : Return Battle Target entity
  *  Example : mob:getTarget(); pet:getTarget(); if not v:getTarget() then
  *  Notes   :
  ************************************************************************/

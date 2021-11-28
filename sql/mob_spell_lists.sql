@@ -4100,7 +4100,29 @@ INSERT INTO `mob_spell_lists` VALUES ('Sapphirine_Quadav_LITD',455,53,1,255); --
 INSERT INTO `mob_spell_lists` VALUES ('Sapphirine_Quadav_LITD',455,55,1,255); -- Aquaveil
 INSERT INTO `mob_spell_lists` VALUES ('Sapphirine_Quadav_LITD',455,57,1,255); -- Haste
 
--- Next Available: 456
+INSERT INTO `mob_spell_lists` VALUES ('The_Keeper',456,146,1,255); -- Fire III
+INSERT INTO `mob_spell_lists` VALUES ('The_Keeper',456,151,1,255); -- Blizzard III
+INSERT INTO `mob_spell_lists` VALUES ('The_Keeper',456,156,1,255); -- Aero III
+INSERT INTO `mob_spell_lists` VALUES ('The_Keeper',456,161,1,255); -- Stone III
+INSERT INTO `mob_spell_lists` VALUES ('The_Keeper',456,171,1,255); -- Water III
+INSERT INTO `mob_spell_lists` VALUES ('The_Keeper',456,175,1,255); -- Firaga II
+INSERT INTO `mob_spell_lists` VALUES ('The_Keeper',456,180,1,255); -- Blizzaga II
+INSERT INTO `mob_spell_lists` VALUES ('The_Keeper',456,185,1,255); -- Aeroga II
+INSERT INTO `mob_spell_lists` VALUES ('The_Keeper',456,190,1,255); -- Stonega II
+INSERT INTO `mob_spell_lists` VALUES ('The_Keeper',456,200,1,255); -- Waterga II
+
+INSERT INTO `mob_spell_lists` VALUES ('Mistdagger',457,339,1,255); -- "Utsusemi: Ni
+INSERT INTO `mob_spell_lists` VALUES ('Mistdagger',457,508,1,255); -- "Yurin: Ichi
+INSERT INTO `mob_spell_lists` VALUES ('Mistdagger',457,509,1,255); -- "Kakka: Ichi
+
+INSERT INTO `mob_spell_lists` VALUES ('The_Briars_elv',458,34,1,255); -- Diaga II
+INSERT INTO `mob_spell_lists` VALUES ('The_Briars_elv',458,47,1,255); -- Protect V
+INSERT INTO `mob_spell_lists` VALUES ('The_Briars_elv',458,52,1,255); -- Shell V
+INSERT INTO `mob_spell_lists` VALUES ('The_Briars_elv',458,57,1,255); -- Haste
+INSERT INTO `mob_spell_lists` VALUES ('The_Briars_elv',458,79,1,255); -- Slow II
+INSERT INTO `mob_spell_lists` VALUES ('The_Briars_elv',458,80,1,255); -- Paralyze II
+
+-- Next Available: 459
 
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;

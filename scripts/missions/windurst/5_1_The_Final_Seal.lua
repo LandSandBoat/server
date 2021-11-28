@@ -30,6 +30,7 @@ local handleAcceptMission = function(player, csid, option, npc)
     if option == 0 then
         mission:begin(player)
         player:setMissionStatus(mission.areaId, 10)
+        player:messageSpecial(zones[player:getZoneID()].text.YOU_ACCEPT_THE_MISSION)
         npcUtil.giveKeyItem(player, xi.ki.NEW_FEIYIN_SEAL)
     end
 
@@ -47,16 +48,12 @@ mission.sections =
                 not player:hasCompletedMission(mission.areaId, mission.missionId)
         end,
 
-        -- TODO: Gate guard interaction should be completely blocked for this mission, with
-        -- accurate dialogue being displayed.  This will require retail caps to accomplish.
-        -- Currently backfilled with generic "You must complete your mission first" message.
-        -- While most likely incorrect, this is no change from the previous implementation.
         [xi.zone.WINDURST_WATERS] =
         {
             ['Mokyokyo'] =
             {
                 onTrigger = function(player, npc)
-                    return mission:progressEvent(109)
+                    return mission:progressEvent(232)
                 end,
             },
         },
@@ -66,7 +63,7 @@ mission.sections =
             ['Janshura-Rashura'] =
             {
                 onTrigger = function(player, npc)
-                    return mission:progressEvent(76)
+                    return mission:progressEvent(163)
                 end,
             },
         },
@@ -76,7 +73,7 @@ mission.sections =
             ['Rakoh_Buuma'] =
             {
                 onTrigger = function(player, npc)
-                    return mission:progressEvent(112)
+                    return mission:progressEvent(197)
                 end,
             },
         },
@@ -86,7 +83,7 @@ mission.sections =
             ['Zokima-Rokima'] =
             {
                 onTrigger = function(player, npc)
-                    return mission:progressEvent(91)
+                    return mission:progressEvent(150)
                 end,
             },
         },

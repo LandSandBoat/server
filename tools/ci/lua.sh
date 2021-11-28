@@ -94,8 +94,6 @@ global_objects=(
 
     GetMissionLogInfo
     GetQuestLogInfo
-    finishMissionTimeline
-    getMissionOffset
     ORIGINAL_MISSION_OFFSET
     getMissionRankPoints
     getMissionMask
@@ -159,11 +157,6 @@ global_objects=(
 
     onBattlefieldHandlerInitialise
 
-    moogleTrade
-    moogleTrigger
-    moogleEventUpdate
-    moogleEventFinish
-
     porterMoogleTrade
     porterEventUpdate
     porterEventFinish
@@ -216,12 +209,6 @@ global_objects=(
     HALLOWEEN_2010
 
     salvageUtil
-
-    addMogLockerExpiryTime
-    getMogLockerExpiryTimestamp
-    unlockMogLocker
-    getMogLockerAccessType
-    setMogLockerAccessType
 
     addBonuses
     addBonusesAbility
@@ -328,14 +315,6 @@ global_objects=(
     NYZUL_ISLE_ASSAULT_POINT
 
     doRoyalPalaceArmorCheck
-
-    MOGLOCKER_START_TS
-    MOGLOCKER_ALZAHBI_VALID_DAYS
-    MOGLOCKER_ALLAREAS_VALID_DAYS
-    MOGLOCKER_ACCESS_TYPE_ALZAHBI
-    MOGLOCKER_ACCESS_TYPE_ALLAREAS
-    MOGLOCKER_PLAYERVAR_ACCESS_TYPE
-    MOGLOCKER_PLAYERVAR_EXPIRY_TIMESTAMP
 )
 
 ignores=(

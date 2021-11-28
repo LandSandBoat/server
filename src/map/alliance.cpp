@@ -219,7 +219,7 @@ void CAlliance::addParty(CParty* party)
         }
     }
 
-    for (uint8 i = 0; i < party->members.size(); ++i)
+    for (std::size_t i = 0; i < party->members.size(); ++i)
     {
         CCharEntity* PChar = static_cast<CCharEntity*>(party->members.at(i));
         party->ReloadTreasurePool(PChar);
@@ -267,7 +267,7 @@ void CAlliance::pushParty(CParty* PParty, uint8 number)
     partyList.push_back(PParty);
     PParty->SetPartyNumber(number);
 
-    for (uint8 i = 0; i < PParty->members.size(); ++i)
+    for (std::size_t i = 0; i < PParty->members.size(); ++i)
     {
         PParty->ReloadTreasurePool((CCharEntity*)PParty->members.at(i));
         charutils::SaveCharStats((CCharEntity*)PParty->members.at(i));

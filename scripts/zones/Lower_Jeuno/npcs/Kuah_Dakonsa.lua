@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Lower Jeuno
 --  NPC: Kuah Dakonsa
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Upper Jeuno
 --  NPC: Bozz
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

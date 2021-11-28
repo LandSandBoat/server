@@ -25,6 +25,7 @@ zones[xi.zone.WINDURST_WALLS] =
         LOGIN_NUMBER                   = 6589,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         YOU_LEARNED_TRUST              = 6611,  -- You learned Trust: <name>!
         HOMEPOINT_SET                  = 6642,  -- Home point set!
+        YOU_ACCEPT_THE_MISSION         = 6735,  -- You have accepted the mission.
         MOG_LOCKER_OFFSET              = 6816,  -- Your Mog Locker lease is valid until <timestamp>, kupo.
         ITEM_DELIVERY_DIALOG           = 6969,  -- We can deliver goods to your residence or to the residences of your friends.
         FISHING_MESSAGE_OFFSET         = 7065,  -- You can't fish here.

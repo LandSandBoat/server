@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Port Jeuno
 --  NPC: Daju
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

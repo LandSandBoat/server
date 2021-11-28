@@ -34,7 +34,7 @@ if not subprocess.call(['git', '-C', "../", 'status'], stderr=subprocess.STDOUT,
 # External Deps (requirements.txt)
 try:
     import mysql.connector
-    from mysql.connector import Error, errorcode
+    from mysql.connector import errorcode
     from git import Repo
     import yaml
     import colorama
@@ -61,7 +61,7 @@ from migrations import eminence_blob
 from migrations import char_timestamp
 from migrations import currency_columns
 from migrations import add_instance_zone_column
-from migrations import convert_all_tables_to_innodb
+from migrations import convert_tables_to_innodb
 from migrations import char_points_weekly_unity
 from migrations import char_profile_unity_leader
 from migrations import convert_mission_status
@@ -89,7 +89,7 @@ migrations = [
     char_timestamp,
     currency_columns,
     add_instance_zone_column,
-    convert_all_tables_to_innodb,
+    convert_tables_to_innodb,
     char_points_weekly_unity,
     char_profile_unity_leader,
     convert_mission_status,

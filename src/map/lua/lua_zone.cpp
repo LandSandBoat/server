@@ -24,6 +24,7 @@
 #include "../region.h"
 
 #include "../entities/charentity.h"
+#include "../entities/npcentity.h"
 #include "../zone.h"
 #include "lua_baseentity.h"
 #include "lua_zone.h"
@@ -81,6 +82,13 @@ sol::table CLuaZone::getPlayers()
     return table;
 }
 
+sol::table CLuaZone::getNPCs()
+{
+    auto table = luautils::lua.create_table();
+    m_pLuaZone->ForEachNpc([&table](CNpcEntity* PNpc) { table.add(CLuaBaseEntity(PNpc)); });
+    return table;
+}
+
 ZONEID CLuaZone::getID()
 {
     return m_pLuaZone->GetID();
@@ -133,6 +141,7 @@ void CLuaZone::Register()
     SOL_REGISTER("registerRegion", CLuaZone::registerRegion);
     SOL_REGISTER("levelRestriction", CLuaZone::levelRestriction);
     SOL_REGISTER("getPlayers", CLuaZone::getPlayers);
+    SOL_REGISTER("getNPCs", CLuaZone::getNPCs);
     SOL_REGISTER("getID", CLuaZone::getID);
     SOL_REGISTER("getName", CLuaZone::getName);
     SOL_REGISTER("getRegionID", CLuaZone::getRegionID);

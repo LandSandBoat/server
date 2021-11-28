@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Port Jeuno
 --  NPC: ???
--- Finish Quest: Borghertz's Hands (AF Hands, Many job)
+-- Finish Quest: Borghertz's Hands (AF Hands, Many jobs)
 -- !pos -51 8 -4 246
 -----------------------------------
 require("scripts/globals/keyitems")
@@ -14,16 +14,18 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local hasGauntlets = player:hasKeyItem(xi.ki.OLD_GAUNTLETS)
-    local hasShadowFlames = player:hasKeyItem(xi.ki.SHADOW_FLAMES)
     local borghertzCS = player:getCharVar("BorghertzCS")
 
-    if hasGauntlets and not hasShadowFlames and borghertzCS == 1 then
-        player:startEvent(20)
-    elseif hasGauntlets and not hasShadowFlames and borghertzCS == 2 then
-        player:startEvent(49)
-    elseif hasGauntlets and hasShadowFlames then
-        player:startEvent(48)
+    if player:hasKeyItem(xi.ki.OLD_GAUNTLETS) then
+        if not player:hasKeyItem(xi.ki.SHADOW_FLAMES) then
+            if borghertzCS == 1 then
+                player:startEvent(20) -- Request Shadow Flames KI
+            elseif borghertzCS == 2 then
+                player:startEvent(49) -- Reminder text
+            end
+        else
+            player:startEvent(48) -- Get AF
+        end
     end
 end
 

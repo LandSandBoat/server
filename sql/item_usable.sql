@@ -1895,8 +1895,20 @@ INSERT INTO `item_usable` VALUES (6410,'shadow_throne',1,1,0,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6411,'chocobo_chair',1,1,0,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6412,'leaf_bench',1,1,0,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6413,'astral_cube',1,1,0,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6414,'porxie_quiver',1,1,55,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6415,'seki_shuriken_pouch',1,1,55,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6417,'divine_quiver',1,1,55,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6418,'beryllium_quiver',1,1,55,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6419,'raetic_quiver',1,1,55,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6420,'voluspa_quiver',1,1,55,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6427,'divine_bolt_quiver',1,1,55,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6428,'beryllium_bolt_quiver',1,1,55,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6429,'voluspa_bolt_quiver',1,1,55,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6437,'divine_bullet_pouch',1,1,55,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6438,'voluspa_bullet_pouch',1,1,55,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6447,'sasuke_shuriken_pouch',1,1,55,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6448,'sasuke_shuriken_pouch_+1',1,1,55,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6449,'date_shuriken_pouch',1,1,55,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6458,'bowl_of_soy_ramen',1,1,28,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6459,'bowl_of_soy_ramen_+1',1,1,28,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6460,'bowl_of_miso_ramen',1,1,28,0,0,0,0,0);
@@ -2256,7 +2268,7 @@ INSERT INTO `item_usable` VALUES (18403,'high_mana_wand',1,3,33,0,50,30,1800,0);
 INSERT INTO `item_usable` VALUES (18410,'melt_katana',1,1,0,0,15,30,600,0);
 INSERT INTO `item_usable` VALUES (18415,'tojaku',20,1,0,0,50,30,600,0);
 INSERT INTO `item_usable` VALUES (18427,'hanafubuki',1,3,0,0,100,30,600,0);
-INSERT INTO `item_usable` VALUES (18433,'kagiroi',20,1,0,0,50,30,600,0);
+INSERT INTO `item_usable` VALUES (18433,'kagiroi',4,1,0,0,50,30,600,0);
 INSERT INTO `item_usable` VALUES (18444,'tsurugitachi',1,3,0,0,100,30,600,0);
 INSERT INTO `item_usable` VALUES (18481,'lucent_axe',1,3,0,0,50,30,1800,0);
 INSERT INTO `item_usable` VALUES (18488,'assailants_axe',1,3,0,0,50,30,1800,0);
@@ -2290,6 +2302,7 @@ INSERT INTO `item_usable` VALUES (19181,'moogles_largesse',1,12,0,0,9,10,259200,
 INSERT INTO `item_usable` VALUES (19204,'fiendtrapper',20,0,0,0,12,10,30,0);
 INSERT INTO `item_usable` VALUES (19246,'moggiebag',1,3,0,0,8,10,259200,0);
 -- INSERT INTO `item_usable` VALUES (20533,'worm_feelers_+1',1,1,55,0,1,30,86400,0); -- item's lua still needs made
+-- INSERT INTO `item_usable` VALUES (20568,'wind_knife_+1',4,1,0,0,1,30,600,0); -- untested
 INSERT INTO `item_usable` VALUES (21266,'gastraphetes',1,1,55,0,1,10,3600,0);
 INSERT INTO `item_usable` VALUES (21267,'annihilator',1,1,55,0,1,10,3600,0);
 INSERT INTO `item_usable` VALUES (21268,'death_penalty',1,1,55,0,1,10,3600,0);
@@ -2307,6 +2320,7 @@ INSERT INTO `item_usable` VALUES (22140,'annihilator',1,1,55,0,1,10,3600,0);
 INSERT INTO `item_usable` VALUES (22141,'death_penalty',1,1,55,0,1,10,3600,0);
 INSERT INTO `item_usable` VALUES (22142,'armageddon',1,1,55,0,1,10,3600,0);
 INSERT INTO `item_usable` VALUES (22143,'fomalhaut',1,1,55,0,1,10,3600,0);
+-- INSERT INTO `item_usable` VALUES (22288,'mandragora_pouch',1,2,55,0,1,10,216000,0);  -- Enchantment: Tiny Allowance (Enchantment gives a random small amount of gil (<2,000))
 INSERT INTO `item_usable` VALUES (25585,'black_chocobo_cap',1,8,79,0,1,30,72000,0);
 INSERT INTO `item_usable` VALUES (26271,'hi-elixir_tank',1,2,55,0,3,30,60,0);
 INSERT INTO `item_usable` VALUES (26272,'super_reraiser_tank',1,2,55,0,5,30,60,0);

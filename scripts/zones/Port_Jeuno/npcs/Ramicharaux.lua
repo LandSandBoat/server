@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Port Jeuno
 --  NPC: Ramicharoux
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

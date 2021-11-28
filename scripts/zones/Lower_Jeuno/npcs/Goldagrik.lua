@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Lower Jeuno
 --  NPC: Goldagrik
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

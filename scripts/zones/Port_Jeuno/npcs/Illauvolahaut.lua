@@ -2,8 +2,9 @@
 -- Area: Port Jeuno
 --  NPC: Illauvolahaut
 -- !pos -12 8 54 246
+
+-- event 41:  without addons (ZM) ?
 -----------------------------------
-require("scripts/settings/main")
 require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
@@ -12,19 +13,17 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local KazhPass = player:hasKeyItem(xi.ki.AIRSHIP_PASS_FOR_KAZHAM)
-    local Gil = player:getGil()
+    local KazhamPass = player:hasKeyItem(xi.ki.AIRSHIP_PASS_FOR_KAZHAM)
 
-    if not KazhPass then
+    if not KazhamPass then
         player:startEvent(35) -- without pass
-    elseif KazhPass and Gil < 200 then
+    elseif KazhamPass and player:getGil() < 200 then
         player:startEvent(45) -- Pass without money
-    elseif KazhPass then
+    elseif KazhamPass then
         player:startEvent(37) -- Pass with money
     end
 end
 
--- 41  without addons (ZM) ?
 entity.onEventUpdate = function(player, csid, option)
 end
 

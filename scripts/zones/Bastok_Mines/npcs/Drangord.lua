@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Bastok Mines
 --  NPC: Drangord
--- Standard Info NPC
 -----------------------------------
 require("scripts/globals/quests")
 -----------------------------------

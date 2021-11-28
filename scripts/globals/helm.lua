@@ -310,6 +310,17 @@ local helmInfo =
                     { 276.849,  16.356, -406.434},
                 },
             },
+            [xi.zone.YAHSE_HUNTING_GROUNDS] =
+            {
+                drops =
+                {
+                    -- TODO
+                },
+                points =
+                {
+                    -- TODO
+                },
+            },
         },
     },
 

@@ -12,6 +12,7 @@ return {
     ['Karst']      = { event = 601 },
     ['Lucius']     = { event = 320 },
     ['Naji']       = { event = 700 },
+    ['Patt-Pott']  = { event = 250 },
     ['Pius']       = { event = 350 },
     ['Romualdo']   = { event = 705 },
     ['High_Bear']  = { event = 730 },

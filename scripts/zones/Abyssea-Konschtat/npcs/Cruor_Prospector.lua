@@ -4,13 +4,95 @@
 -- Type: Cruor NPC
 -- !pos 132.000 -75.856 -822.000 15
 -----------------------------------
-local ID = require("scripts/zones/Abyssea-Konschtat/IDs")
-require("scripts/globals/keyitems")
-require("scripts/settings/main")
 require("scripts/globals/abyssea")
+require("scripts/globals/keyitems")
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}
+
+local itemType =
+{
+    ITEM        = 1,
+    TEMP        = 2,
+    KEYITEM     = 3,
+    ENHANCEMENT = 4,
+}
+
+local prospectorItems =
+{
+    [itemType.ITEM] =
+    {-- Sel      Item                         Cost,  Qty
+        [ 1] = { xi.items.PERLE_SALADE,       4000 },
+        [ 2] = { xi.items.PERLE_HAUBERK,      5000 },
+        [ 3] = { xi.items.PERLE_MOUFLES,      3000 },
+        [ 4] = { xi.items.PERLE_BRAYETTES,    3000 },
+        [ 5] = { xi.items.PERLE_SOLLERETS,    3000 },
+        [ 6] = { xi.items.AURORE_BERET,       4000 },
+        [ 7] = { xi.items.AURORE_DOUBLET,     5000 },
+        [ 8] = { xi.items.AURORE_GLOVES,      3000 },
+        [ 9] = { xi.items.AURORE_BRAIS,       3000 },
+        [10] = { xi.items.AURORE_GAITERS,     3000 },
+        [11] = { xi.items.TEAL_CHAPEAU,       4000 },
+        [12] = { xi.items.TEAL_SAIO,          5000 },
+        [13] = { xi.items.TEAL_CUFFS,         3000 },
+        [14] = { xi.items.TEAL_SLOPS,         3000 },
+        [15] = { xi.items.TEAL_PIGACHES,      3000 },
+        [16] = { xi.items.FORBIDDEN_KEY,       500 },
+        [17] = { xi.items.SHADOW_THRONE,   2000000 },
+    },
+
+    [itemType.TEMP] =
+    {-- Sel      Item                         Cost, Qty
+        [ 1] = { xi.items.LUCID_POTION_I,       80 },
+        [ 2] = { xi.items.LUCID_ETHER_I,        80 },
+        [ 3] = { xi.items.CATHOLICON,           80 },
+        [ 4] = { xi.items.DUSTY_ELIXIR,        120 },
+        [ 5] = { xi.items.CLEAR_SALVE_I,       120 },
+        [ 6] = { xi.items.STALWARTS_TONIC,     150 },
+        [ 7] = { xi.items.ASCETICS_TONIC,      150 },
+        [ 8] = { xi.items.CHAMPIONS_TONIC,     150 },
+        [ 9] = { xi.items.LUCID_POTION_II,     200 },
+        [10] = { xi.items.LUCID_ETHER_II,      200 },
+        [11] = { xi.items.LUCID_ELIXIR_I,      300 },
+        [12] = { xi.items.HEALING_POWDER,      300 },
+        [13] = { xi.items.MANA_POWDER,         300 },
+        [14] = { xi.items.HEALING_SALVE_I,     300 },
+        [15] = { xi.items.VICARS_DRINK,        300 },
+        [16] = { xi.items.CLEAR_SALVE_II,      300 },
+        [17] = { xi.items.PRIMEVAL_BREW,   2000000 },
+    },
+
+    [itemType.KEYITEM] =
+    {-- Sel     Item                                Cost
+        [1] = { xi.ki.MAP_OF_ABYSSEA_KONSCHTAT,     3500 },
+        [2] = { xi.ki.IVORY_ABYSSITE_OF_SOJOURN,    6000 },
+        [3] = { xi.ki.IVORY_ABYSSITE_OF_CONFLUENCE, 4800 },
+        [4] = { xi.ki.IVORY_ABYSSITE_OF_EXPERTISE,  4800 },
+        [5] = { xi.ki.CLEAR_DEMILUNE_ABYSSITE,       300 },
+    },
+
+    [itemType.ENHANCEMENT] =
+    {-- Sel          Effect (Abyssea)       Actual Effect          Amt, KeyItem for Bonus,           Bonus Mult      Cost
+        [ 6] = { { { xi.effect.ABYSSEA_HP,  xi.effect.MAX_HP_BOOST, 20, xi.abyssea.abyssiteType.MERIT,       10 }, },  50 },
+        [ 7] = { { { xi.effect.ABYSSEA_MP,  xi.effect.MAX_MP_BOOST, 10, xi.abyssea.abyssiteType.MERIT,        5 }, }, 120 },
+        [ 8] = { { { xi.effect.ABYSSEA_STR, xi.effect.STR_BOOST,    10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
+                   { xi.effect.ABYSSEA_DEX, xi.effect.DEX_BOOST,    10, xi.abyssea.abyssiteType.FURTHERANCE, 10 }, }, 120 },
+        [ 9] = { { { xi.effect.ABYSSEA_VIT, xi.effect.VIT_BOOST,    10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
+                   { xi.effect.ABYSSEA_AGI, xi.effect.AGI_BOOST,    10, xi.abyssea.abyssiteType.FURTHERANCE, 10 }, }, 100 },
+        [10] = { { { xi.effect.ABYSSEA_INT, xi.effect.INT_BOOST,    10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
+                   { xi.effect.ABYSSEA_CHR, xi.effect.CHR_BOOST,    10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
+                   { xi.effect.ABYSSEA_MND, xi.effect.MND_BOOST,    10, xi.abyssea.abyssiteType.FURTHERANCE, 10 }, }, 100 },
+        [11] = { { { xi.effect.ABYSSEA_HP,  xi.effect.MAX_HP_BOOST, 20, xi.abyssea.abyssiteType.MERIT,       10 },
+                   { xi.effect.ABYSSEA_MP,  xi.effect.MAX_MP_BOOST, 10, xi.abyssea.abyssiteType.MERIT,        5 },
+                   { xi.effect.ABYSSEA_STR, xi.effect.STR_BOOST,    10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
+                   { xi.effect.ABYSSEA_DEX, xi.effect.DEX_BOOST,    10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
+                   { xi.effect.ABYSSEA_VIT, xi.effect.VIT_BOOST,    10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
+                   { xi.effect.ABYSSEA_AGI, xi.effect.AGI_BOOST,    10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
+                   { xi.effect.ABYSSEA_INT, xi.effect.INT_BOOST,    10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
+                   { xi.effect.ABYSSEA_CHR, xi.effect.CHR_BOOST,    10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
+                   { xi.effect.ABYSSEA_MND, xi.effect.MND_BOOST,    10, xi.abyssea.abyssiteType.FURTHERANCE, 10 }, }, 470 },
+    },
+}
 
 entity.onTrade = function(player, npc, trade)
 end
@@ -18,6 +100,7 @@ end
 entity.onTrigger = function(player, npc)
     local cruor = player:getCurrency("cruor")
     local demilune = xi.abyssea.getDemiluneAbyssite(player)
+
     player:startEvent(2002, cruor, demilune)
 end
 
@@ -25,206 +108,55 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    local Price = 0
-    local ItemID = 0
-    local Quantity = 1
+    local itemCategory = bit.band(option, 0x07)
+    local itemSelected = bit.band(bit.rshift(option, 16), 0x1F)
+    local cruorTotal = player:getCurrency("cruor")
 
-    -- Items Page 1
-    if option == 65537 then -- Perle Salade
-        Price = 4000
-        ItemID = 11503
-    elseif option == 131073 then -- Perle Hauberk
-        Price = 5000
-        ItemID = 13759
-    elseif option == 196609 then -- Perle Moufles
-        Price = 3000
-        ItemID = 12745
-    elseif option == 262145 then -- Perle Brayettes
-        Price = 3000
-        ItemID = 14210
-    elseif option == 327681 then -- Perle Solerets
-        Price = 3000
-        ItemID = 11413
-    elseif option == 393217 then -- Aurore Beret
-        Price = 4000
-        ItemID = 11504
-    elseif option == 458753 then -- Aurore Doublet
-        Price = 5000
-        ItemID = 13760
-    elseif option == 524289 then -- Aurore Gloves
-        Price = 3000
-        ItemID = 12746
-    elseif option == 589825 then -- Aurore Brais
-        Price = 3000
-        ItemID = 14257
-    elseif option == 655361 then -- Aurore Gaiters
-        Price = 3000
-        ItemID = 11414
+    if itemCategory == itemType.ITEM then
+        local itemData = prospectorItems[itemCategory][itemSelected]
+        local itemQty = itemData[1] ~= xi.items.FORBIDDEN_KEY and 1 or bit.rshift(option, 24)
+        local itemCost = itemData[2] * itemQty
 
-    -- Items Page 2
-    elseif option == 720897 then -- Teal Chapeau
-        Price = 4000
-        ItemID = 11505
-    elseif option == 786433 then -- Teal Saio
-        Price = 5000
-        ItemID = 13778
-    elseif option == 851969 then -- Teal Cuffs
-        Price = 3000
-        ItemID = 12747
-    elseif option == 917505 then -- Teal Slops
-        Price = 3000
-        ItemID = 14258
-    elseif option == 983041 then -- Teal Pigaches
-        Price = 3000
-        ItemID = 11415
-    elseif option == 17825793 then -- 1x Forbidden Key
-        Price = 500
-        ItemID = 2490
-    elseif option == 84934657 then -- 5x Forbidden Key
-        Price = 2500
-        ItemID = 2490
-        Quantity = 5
-    elseif option == 168820737 then -- 10x Forbidden Key
-        Price = 5000
-        ItemID = 2490
-        Quantity = 10
-    elseif option == 504365057 then -- 30x Forbidden Key
-        Price = 15000
-        ItemID = 2490
-        Quantity = 30
-    elseif option == 839909377 then -- 50x Forbidden Key
-        Price = 25000
-        ItemID = 2490
-        Quantity = 50
+        if
+            itemCost <= cruorTotal and
+            npcUtil.giveItem(player, {{ itemData[1], itemQty }})
+        then
+            player:delCurrency("cruor", itemCost)
+        end
+    elseif itemCategory == itemType.TEMP then
+        local itemData = prospectorItems[itemCategory][itemSelected]
+        local itemCost = itemData[2]
 
-    -- Temp items
-    elseif option == 65538 then -- Lucid Potion I
-        if player:addTempItem(5824, 1) then
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 5824)
-            player:delCurrency("cruor", 80)
+        if
+            itemCost <= cruorTotal and
+            npcUtil.giveTempItem(player, {{ itemData[1], 1 }})
+        then
+            player:delCurrency("cruor", itemCost)
         end
-    elseif option == 131074 then -- Lucid Ether I
-        if player:addTempItem(5827, 1) then
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 5827)
-            player:delCurrency("cruor", 80)
-        end
-    elseif option == 196610 then -- Catholicon
-        if player:addTempItem(4206, 1) then
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 4206)
-            player:delCurrency("cruor", 80)
-        end
-    elseif option == 262146 then -- Dusty Elixer
-        if player:addTempItem(5433, 1) then
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 5433)
-            player:delCurrency("cruor", 120)
-        end
-    elseif option == 327682 then -- Clear Salve I
-        if player:addTempItem(5837, 1) then
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 5837)
-            player:delCurrency("cruor", 120)
-        end
-    elseif option == 393218 then -- Stalworts Tonic
-        if player:addTempItem(5839, 1) then
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 5839)
-            player:delCurrency("cruor", 150)
-        end
-    elseif option == 458754 then -- Ascetics Tonic
-        if player:addTempItem(5841, 1) then
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 5841)
-            player:delCurrency("cruor", 150)
-        end
-    elseif option == 524290 then -- Champion's Tonic
-        if player:addTempItem(5843, 1) then
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 5843)
-            player:delCurrency("cruor", 150)
-        end
-    elseif option == 589826 then -- Lucid Potion II
-        if player:addTempItem(5825, 1) then
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 5825)
-            player:delCurrency("cruor", 200)
-        end
-    elseif option == 655362 then -- Lucid Potion II
-        if player:addTempItem(5828, 1) then
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 5828)
-            player:delCurrency("cruor", 200)
-        end
+    elseif itemCategory == itemType.KEYITEM then
+        local itemData = prospectorItems[itemCategory][itemSelected]
 
-    -- Keyitems
-    elseif option == 65539 then -- Map of Abyssea - Konschtat
-        if not player:hasKeyItem(xi.ki.MAP_OF_ABYSSEA_KONSCHTAT) then
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MAP_OF_ABYSSEA_KONSCHTAT)
-            player:addKeyItem(xi.ki.MAP_OF_ABYSSEA_KONSCHTAT)
-            player:delCurrency("cruor", 3500)
+        if
+            itemData[2] <= cruorTotal and
+            npcUtil.giveKeyItem(player, itemData[1])
+        then
+            player:delCurrency("cruor", itemData[2])
         end
-    elseif option == 131075 then -- Ivory Abyssite of Sojourn
-        if not player:hasKeyItem(xi.ki.IVORY_ABYSSITE_OF_SOJOURN) then
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.IVORY_ABYSSITE_OF_SOJOURN)
-            player:addKeyItem(xi.ki.IVORY_ABYSSITE_OF_SOJOURN)
-            player:delCurrency("cruor", 6000)
-        end
-    elseif option == 196611 then -- Ivory Abyssite of Confluence
-        if not player:hasKeyItem(xi.ki.IVORY_ABYSSITE_OF_CONFLUENCE) then
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.IVORY_ABYSSITE_OF_CONFLUENCE)
-            player:addKeyItem(xi.ki.IVORY_ABYSSITE_OF_CONFLUENCE)
-            player:delCurrency("cruor", 4800)
-        end
-    elseif option == 262147 then -- Ivory Abyssite of Expertise
-        if not player:hasKeyItem(xi.ki.IVORY_ABYSSITE_OF_EXPERTISE) then
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.IVORY_ABYSSITE_OF_EXPERTISE)
-            player:addKeyItem(xi.ki.IVORY_ABYSSITE_OF_EXPERTISE)
-            player:delCurrency("cruor", 4800)
-        end
-    elseif option == 458755 then -- Clear Demilune Abyssite
-        if not player:hasKeyItem(xi.ki.CLEAR_DEMILUNE_ABYSSITE) then
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.CLEAR_DEMILUNE_ABYSSITE)
-            player:addKeyItem(xi.ki.CLEAR_DEMILUNE_ABYSSITE)
-            player:delCurrency("cruor", 300)
-        end
+    elseif itemCategory == itemType.ENHANCEMENT then
+        local enhanceData = prospectorItems[itemCategory][itemSelected]
 
-    -- Enhancement Effects (only removed by zoning, infinite duration)
-    elseif option == 393220 then -- HP Boost
-        player:addStatusEffectEx(xi.effect.ABYSSEA_HP, xi.effect.MAX_HP_BOOST, 20+(xi.abyssea.getAbyssiteTotal(player, "MERIT") *10), 0, 0)
-        player:addHP(20+(xi.abyssea.getAbyssiteTotal(player, "MERIT") *10) *10)
-        player:delCurrency("cruor", 50)
-    elseif option == 458756 then -- MP Boost
-        player:addStatusEffectEx(xi.effect.ABYSSEA_MP, xi.effect.MAX_MP_BOOST, 10+(xi.abyssea.getAbyssiteTotal(player, "MERIT") *5), 0, 0)
-        player:addMP(10+(xi.abyssea.getAbyssiteTotal(player, "MERIT") *5) *10)
-        player:delCurrency("cruor", 120)
-    elseif option == 524292 then -- STR-DEX Boost
-        player:addStatusEffectEx(xi.effect.ABYSSEA_STR, xi.effect.STR_BOOST, 10+(xi.abyssea.getAbyssiteTotal(player, "FURTHERANCE") *10), 0, 0)
-        player:addStatusEffectEx(xi.effect.ABYSSEA_DEX, xi.effect.DEX_BOOST, 10+(xi.abyssea.getAbyssiteTotal(player, "FURTHERANCE") *10), 0, 0)
-        player:delCurrency("cruor", 120)
-    elseif option == 589828 then -- VIT-AGI Boost
-        player:addStatusEffectEx(xi.effect.ABYSSEA_VIT, xi.effect.VIT_BOOST, 10+(xi.abyssea.getAbyssiteTotal(player, "FURTHERANCE") *10), 0, 0)
-        player:addStatusEffectEx(xi.effect.ABYSSEA_AGI, xi.effect.AGI_BOOST, 10+(xi.abyssea.getAbyssiteTotal(player, "FURTHERANCE") *10), 0, 0)
-        player:delCurrency("cruor", 100)
-    elseif option == 655364 then -- INT-MND-CHR Boost
-        player:addStatusEffectEx(xi.effect.ABYSSEA_INT, xi.effect.INT_BOOST, 10+(xi.abyssea.getAbyssiteTotal(player, "FURTHERANCE") *10), 0, 0)
-        player:addStatusEffectEx(xi.effect.ABYSSEA_MND, xi.effect.MND_BOOST, 10+(xi.abyssea.getAbyssiteTotal(player, "FURTHERANCE") *10), 0, 0)
-        player:addStatusEffectEx(xi.effect.ABYSSEA_CHR, xi.effect.CHR_BOOST, 10+(xi.abyssea.getAbyssiteTotal(player, "FURTHERANCE") *10), 0, 0)
-        player:delCurrency("cruor", 100)
-    elseif option == 720900 then -- All Enhancements
-        player:addStatusEffectEx(xi.effect.ABYSSEA_HP, xi.effect.MAX_HP_BOOST, 20+(xi.abyssea.getAbyssiteTotal(player, "MERIT") *10), 0, 0)
-        player:addHP(20+(xi.abyssea.getAbyssiteTotal(player, "MERIT") *10) *10)
-        player:addStatusEffectEx(xi.effect.ABYSSEA_MP, xi.effect.MAX_MP_BOOST, 10+(xi.abyssea.getAbyssiteTotal(player, "MERIT") *5), 0, 0)
-        player:addMP(10+(xi.abyssea.getAbyssiteTotal(player, "MERIT") *5) *10)
-        player:addStatusEffectEx(xi.effect.ABYSSEA_STR, xi.effect.STR_BOOST, 10+(xi.abyssea.getAbyssiteTotal(player, "FURTHERANCE") *10), 0, 0)
-        player:addStatusEffectEx(xi.effect.ABYSSEA_DEX, xi.effect.DEX_BOOST, 10+(xi.abyssea.getAbyssiteTotal(player, "FURTHERANCE") *10), 0, 0)
-        player:addStatusEffectEx(xi.effect.ABYSSEA_VIT, xi.effect.VIT_BOOST, 10+(xi.abyssea.getAbyssiteTotal(player, "FURTHERANCE") *10), 0, 0)
-        player:addStatusEffectEx(xi.effect.ABYSSEA_AGI, xi.effect.AGI_BOOST, 10+(xi.abyssea.getAbyssiteTotal(player, "FURTHERANCE") *10), 0, 0)
-        player:addStatusEffectEx(xi.effect.ABYSSEA_INT, xi.effect.INT_BOOST, 10+(xi.abyssea.getAbyssiteTotal(player, "FURTHERANCE") *10), 0, 0)
-        player:addStatusEffectEx(xi.effect.ABYSSEA_MND, xi.effect.MND_BOOST, 10+(xi.abyssea.getAbyssiteTotal(player, "FURTHERANCE") *10), 0, 0)
-        player:addStatusEffectEx(xi.effect.ABYSSEA_CHR, xi.effect.CHR_BOOST, 10+(xi.abyssea.getAbyssiteTotal(player, "FURTHERANCE") *10), 0, 0)
-        player:delCurrency("cruor", 470)
-    end
+        if enhanceData <= cruorTotal then
+            for _, v in ipairs(enhanceData[1]) do
+                player:addStatusEffectEx(v[1], v[2], v[3] + xi.abyssea.getAbyssiteTotal(player, v[4]) * v[5])
 
-    if ItemID ~= 0 then
-        if player:getFreeSlotsCount() >= 1 then
-            player:messageSpecial(ID.text.ITEM_OBTAINED, ItemID)
-            player:addItem(ItemID, Quantity)
-            player:delCurrency("cruor", Price)
-        else
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, ItemID)
+                if v[1] == xi.effect.ABYSSEA_HP then
+                    player:addHP(v[3] + xi.abyssea.getAbyssiteTotal(player, v[4]) * v[5])
+                elseif v[1] == xi.effect.ABYSSEA_MP then
+                    player:addMP(v[3] + xi.abyssea.getAbyssiteTotal(player, v[4]) * v[5])
+                end
+            end
+
+            player:delCurrency("cruor", enhanceData[2])
         end
     end
 end

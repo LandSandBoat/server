@@ -3,8 +3,6 @@
 --  Mob: Gambilox Wanderling
 -- Quest NM - "As Thick as Thieves"
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)
@@ -12,9 +10,6 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    if player:getCharVar("thickAsThievesGamblingCS") == 5 then
-        player:setCharVar("thickAsThievesGamblingCS", 6)
-    end
 end
 
 return entity

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Upper Jeuno
 --  NPC: Mojuro-Nojuro
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

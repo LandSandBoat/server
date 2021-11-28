@@ -15,7 +15,6 @@ require("scripts/globals/quests")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-
     if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_AMENDS) == QUEST_ACCEPTED then
         if trade:hasItemQty(937, 1) and trade:getItemCount() == 1 then
             player:startEvent(277, 1500)
@@ -30,26 +29,17 @@ entity.onTrade = function(player, npc, trade)
             player:startEvent(260, 0, 17091, 17061, 17053) --Remind player which items are needed ifquest is accepted and items are not traded
         end
     end
-
 end
 
 entity.onTrigger = function(player, npc)
-
     local MakingAmends = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_AMENDS)
     local MakingAmens = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_AMENS) --Second quest in series
     local WonderWands = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDER_WANDS) --Third and final quest in series
     local needToZone = player:needToZone()
     local pFame = player:getFameLevel(WINDURST)
 
-        -- ~[ Windurst Mission 6-1 Full Moon Fountain ]~
-    if (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.FULL_MOON_FOUNTAIN and player:getMissionStatus(player:getNation()) == 0) then
-        player:startEvent(456, 0, 248)
-    elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.FULL_MOON_FOUNTAIN and player:getMissionStatus(player:getNation()) == 3) then
-        player:startEvent(457)
-    elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.TO_EACH_HIS_OWN_RIGHT and player:getMissionStatus(player:getNation()) == 2) then
-        player:startEvent(147)
 -- Begin Making Amends Section
-    elseif (MakingAmends == QUEST_AVAILABLE and pFame >= 2) then
+    if (MakingAmends == QUEST_AVAILABLE and pFame >= 2) then
             player:startEvent(274, 0, 937) -- MAKING AMENDS + ANIMAL GLUE: Quest Start
     elseif (MakingAmends == QUEST_ACCEPTED) then
             player:startEvent(275, 0, 937) -- MAKING AMENDS + ANIMAL GLUE: Quest Objective Reminder
@@ -72,10 +62,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
-    if (csid == 147) then
-        player:setMissionStatus(player:getNation(), 3)
-    elseif (csid == 274 and option == 1) then
+    if (csid == 274 and option == 1) then
             player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_AMENDS)
     elseif (csid == 277) then
             player:addGil(xi.settings.GIL_RATE*1500)
@@ -141,13 +128,7 @@ entity.onEventFinish = function(player, csid, option)
             player:addTitle(xi.title.DOCTOR_SHANTOTTOS_GUINEA_PIG)
             player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDER_WANDS)
         end
-        -- ~[ Windurst Mission 6-1 Full Moon Fountain ]~
-    elseif (csid == 456) then
-            player:setMissionStatus(player:getNation(), 1)
-            player:addKeyItem(xi.ki.SOUTHWESTERN_STAR_CHARM)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SOUTHWESTERN_STAR_CHARM)
     end
-
 end
 
 return entity

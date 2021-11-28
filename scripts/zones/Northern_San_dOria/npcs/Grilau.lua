@@ -36,7 +36,6 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    finishMissionTimeline(player, 1, csid, option)
 end
 
 return entity

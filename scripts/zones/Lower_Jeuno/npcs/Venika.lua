@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Lower Jeuno
 --  NPC: Venika
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

@@ -163,7 +163,7 @@ xi.mission.id =
         THE_SIXTH_MINISTRY            = 18, -- ±
         AWAKENING_OF_THE_GODS         = 19, -- ±
         VAIN                          = 20,
-        THE_JESTER_WHO_D_BE_KING      = 21,
+        THE_JESTER_WHOD_BE_KING       = 21,
         DOLL_OF_THE_DEAD              = 22,
         MOON_READING                  = 23,
         NONE                          = 65535,
@@ -460,25 +460,25 @@ xi.mission.id =
         MEETING_OF_THE_MINDS            = 8,   -- ±
         ARCIELA_APPEARS_AGAIN           = 9,   -- ±
         -- THE_ANCIENT_PACT             =  -- Category
-        BUILDING_PROSPECTS              = 11,
-        THE_LIGHT_SHINING_IN_YOUR_EYES  = 12,
-        THE_HEIRLOOM                    = 13,
-        AN_AIMLESS_JOURNEY              = 14,
-        ORTHARSYNE                      = 15,
-        IN_THE_PRESENCE_OF_ROYALTY      = 16,
-        THE_TWIN_WORLD_TREES            = 17,
-        HONOR_AND_AUDACITY              = 18,
-        THE_WATERGARDEN_COLISEUM        = 19,
-        FRICTION_AND_FISSURES           = 20,
-        THE_CELENNIA_MEMORIAL_LIBRARY   = 21,
-        FOR_WHOM_DO_WE_TOIL             = 23,
-        AIMING_FOR_YGNAS                = 26,
-        CALAMITY_IN_THE_KITCHEN         = 27,
-        ARCIELAS_PROMISE                = 29,
-        PREDATOR_AND_PREY               = 30,
-        BEHIND_THE_SLUICES              = 31,
-        THE_LEAFKIN_MONARCH             = 34,
-        YGGDRASIL                       = 35,
+        BUDDING_PROSPECTS               = 11,  -- ±
+        THE_LIGHT_SHINING_IN_YOUR_EYES  = 12,  -- ±
+        THE_HEIRLOOM                    = 13,  -- ±
+        AN_AIMLESS_JOURNEY              = 14,  -- ±
+        ORTHARSYNE                      = 15,  -- ±
+        IN_THE_PRESENCE_OF_ROYALTY      = 16,  -- ±
+        THE_TWIN_WORLD_TREES            = 17,  -- ±
+        HONOR_AND_AUDACITY              = 18,  -- ±
+        THE_WATERGARDEN_COLISEUM        = 19,  -- ±
+        FRICTION_AND_FISSURES           = 20,  -- ±
+        THE_CELENNIA_MEMORIAL_LIBRARY   = 21,  -- ±
+        FOR_WHOM_DO_WE_TOIL             = 23,  -- ±
+        AIMING_FOR_YGNAS                = 26,  -- ±
+        CALAMITY_IN_THE_KITCHEN         = 27,  -- ±
+        ARCIELAS_PROMISE                = 29,  -- ±
+        PREDATOR_AND_PREY               = 30,  -- ±
+        BEHIND_THE_SLUICES              = 31,  -- ±
+        THE_LEAFKIN_MONARCH             = 34,  -- ±
+        YGGDRASIL                       = 35,  -- ±
         -- SHADOWS_UPON_ADOULIN         =  -- Category
         RETURN_OF_THE_EXORCIST          = 37,
         THE_MERCILESS_ONE               = 38,
@@ -724,7 +724,7 @@ local missionType =
     -- Required Rank             :   1  1  1  2  2  2  2  2  2  2  3  3  3  4  5  5  6  6  7  7  8  8  9  9
     [xi.mission.log_id.SANDORIA] = { 1, 1, 1, 0, 1, 0, 2, 2, 2, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
     [xi.mission.log_id.BASTOK]   = { 2, 0, 1, 0, 1, 0, 2, 2, 2, 2, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-    [xi.mission.log_id.WINDURST] = { 2, 2, 2, 0, 1, 0, 2, 2, 2, 2, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+    [xi.mission.log_id.WINDURST] = { 2, 0, 0, 0, 1, 0, 2, 2, 2, 2, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
 }
 
 local function getRequiredRank(missionId)
@@ -806,110 +806,4 @@ function getMissionMask(player)
     end
 
     return missionMask, repeatMission
-end
-
-function getMissionOffset(player, guard, pMission, missionStatus)
-    local offset = 0
-    local cs = 0
-    local params = {0, 0, 0, 0, 0, 0, 0, 0}
-    local nation = player:getNation()
-    local GuardCS = 0
-
-    if (nation == xi.nation.WINDURST) then
-            if (guard == 1) then GuardCS = {127, 136, 150, 154, 160, 473, 177}
-        elseif (guard == 2) then GuardCS = {123, 131, 310, 148, 156, 177, 215}
-        elseif (guard == 3) then GuardCS = {89, 105, 110, 114, 120, 133, 138}
-        elseif (guard == 4) then GuardCS = {99, 107, 112, 116, 122, 127, 134}
-        end
-
-        switch (pMission) : caseof {
-            [1] = function (x) cs = GuardCS[2] end,
-            [2] = function (x) if (missionStatus <= 2) then cs = GuardCS[3] else cs = GuardCS[4] end end,
-            [3] = function (x) cs = GuardCS[5] end,
-            [4] = function (x) cs = GuardCS[6] end,
-            [5] = function (x) cs = GuardCS[7] end,
-        }
-        return cs, params, offset
-    end
-end
-
-function finishMissionTimeline(player, guard, csid, option)
-    local nation = player:getNation()
-    local timeline = {}
-    -- To prevent the cs conflict, use the 1st and 2nd for guard and 3/4 for npc
-    -- missionid, {Guard1CS, option}, {Guard2CS, option}, {NPC1 CS, option}, {NPC2 CS, option}, {{function, value}, ...},
-    --  1: player:addMission(nation, mission)
-    --  2: player:messageSpecial(YOU_ACCEPT_THE_MISSION)
-    --  3: player:setCharVar(variablename, value)
-    --  4: player:tradeComplete()
-    --  5: player:addRankPoints(number)
-    --  6: player:setRankPoints(0)
-    --  7: player:addPoint(player:getNation(), number) player:messageSpecial(YOUVE_EARNED_CONQUEST_POINTS)
-    --  8: player:addGil(GIL_RATE*number) player:messageSpecial(GIL_OBTAINED, GIL_RATE*number)
-    --  9: player:delKeyItem(number)
-    -- 10: player:addKeyItem(number) player:messageSpecial(KEYITEM_OBTAINED, number)
-    -- 11: player:setRank(number)
-    -- 12: player:completeMission(nation, mission)
-    -- 13: player:addTitle(number)
-    -- 14: player:setMissionStatus(nation, value)
-
-    if (nation == xi.nation.WINDURST) then
-        local guardlist = {114, 111, 78, 93}
-        if (csid == guardlist[guard] and option ~= 1073741824 and option ~= 31 and option > 0) then -- last part of conditional is for converted missions, increment for each converted
-            timeline = {option, {guardlist[guard], option}, {guardlist[guard], option}, {guardlist[guard], option}, {guardlist[guard], option}, {{1}, {2}}}
-        else
-            timeline =
-            { -- ID    Guard 1      Guard 2      Guard 3     Guard 4        Function List
-                 1,    {132, 1},    {130, 1},   {104, 1},   {106, 1},       {{1}, {2}},                                                 -- MISSION 1-2 [START]
-                 1,    {143, 0},      {0, 0},     {0, 0},     {0, 0},       {{14, 0}, {5, 200}, {12}},                                  -- MISSION 1-2 (Finish (Apururu)) [WITHOUT ORB]
-                 1,    {145, 0},      {0, 0},     {0, 0},     {0, 0},       {{14, 0}, {5, 250}, {12}},                                  -- MISSION 1-2 (Finish (Apururu)) [WITH ORB]
-                 2,    {149, 2},    {135, 2},   {109, 2},   {111, 2},       {{1}, {2}},                                                 -- MISSION 1-3 [START]
-                 2,    {154, 0},    {148, 0},   {114, 0},   {116, 0},       {{11, 2}, {14, 0}, {5, 300}, {8, 1000}, {12}},              -- MISSION 1-3
-                 3,    {168, 0},      {0, 0},     {0, 0},     {0, 0},       {{14, 0}, {5, 350}, {12}},                                  -- MISSION 2-1 (Finish (Tosuka-Porika))
-                 4,    {201, 0},      {0, 0},     {0, 0},     {0, 0},       {{14, 0}, {9, 38}, {5, 400}, {12}},                         -- MISSION 2-2 (Finish (Moreno-Toeno)) (+35 mob killed)
-                 4,    {206, 0},      {0, 0},     {0, 0},     {0, 0},       {{14, 0}, {9, 38}, {5, 400}, {12}},                         -- MISSION 2-2 (Finish (Moreno-Toeno)) (+35 mob killed) [Repeat]
-                 4,    {200, 0},      {0, 0},     {0, 0},     {0, 0},       {{14, 0}, {9, 38}, {5, 250}, {12}},                         -- MISSION 2-2 (Finish (Moreno-Toeno)) (30-34 mob killed)
-                 4,    {209, 0},      {0, 0},     {0, 0},     {0, 0},       {{14, 0}, {9, 38}, {5, 250}, {12}},                         -- MISSION 2-2 (Finish (Moreno-Toeno)) (30-34 mob killed) [Repeat]
-                 5,    {101, 0},      {0, 0},     {0, 0},     {0, 0},       {{10, 35}, {6}, {13, 207}, {8, 3000}, {11, 3}, {9, 29}, {14, 0}, {12}}, -- MISSION 2-3 (Finish (Kupipi))
-                10,      {0, 0},    {114, 0},     {0, 0},     {0, 0},       {{5, 450}, {14, 0}, {12}},                                  -- MISSION 3-1 (Finish (Rhy Epocan))
-                11,    {135, 0},      {0, 0},     {0, 0},     {0, 0},       {{5, 500}, {14, 0}, {12}},                                  -- MISSION 3-2 (Finish (Zubaba))
-                11,    {151, 0},      {0, 0},     {0, 0},     {0, 0},       {{5, 400}, {14, 0}, {12}},                                  -- MISSION 3-2 (Finish (Zubaba)) [Repeat]
-                12,     {40, 0},      {0, 0},     {0, 0},     {0, 0},       {{11, 4}, {9, 30}, {14, 0}, {6}, {8, 5000}, {12}},          -- MISSION 3-3 (Finish (Ambassador's door))
-                15,    {216, 0},      {0, 0},     {0, 0},     {0, 0},       {{11, 6}, {14, 0}, {9, 74}, {8, 20000}, {6}, {12}},         -- MISSION 5-2 (Finish (Star Sibyl))
-                16,      {0, 0},      {0, 0},    {50, 0},     {0, 0},       {{14, 0}, {5, 650}, {0, 0}, {0, 0}, {0, 0}, {12}},          -- MISSION 6-1 (Finish (Zone: Full Moon Fountain))
-                17,      {0, 0},      {0, 0},   {312, 0},     {0, 0},       {{14, 0}, {11, 7}, {8, 40000}, {6}, {0, 0}, {12}},          -- MISSION 6-2 (Finish (Star Sibyl))
-                18,      {0, 0},      {0, 0},   {724, 0},     {0, 0},       {{14, 0}, {5, 700}, {9, 250}, {10, 251}, {0, 0}, {0, 0}, {12}}, -- MISSION 7-1 (Finish (Tosuka-Porika))
-                19,      {0, 0},      {0, 0},   {742, 0},     {0, 0},       {{14, 0}, {11, 8}, {8, 60000}, {6}, {0, 0}, {12}},          -- MISSION 7-2 (Finish (Leepe-Hoppe))
-                20,      {0, 0},      {0, 0},   {758, 0},     {0, 0},       {{14, 0}, {5, 750}, {0, 0}, {0}, {0, 0}, {12}},             -- MISSION 8-1 (Finish (Morno-Toeno))
-                21,      {0, 0},      {0, 0},   {609, 0},     {0, 0},       {{14, 0}, {11, 9}, {8, 80000}, {6}, {0, 0}, {12}},          -- MISSION 8-2 (Finish (Apururu))
-                22,      {0, 0},      {0, 0},    {61, 0},     {0, 0},       {{14, 0}, {5, 800}, {13, 293}, {0}, {0, 0}, {12}},          -- MISSION 9-1 (Finish (Zone: Full Moon Fountain))
-                23,      {0, 0},      {0, 0},   {407, 0},     {0, 0},       {{13, 294}, {11, 10}, {8, 100000}, {6}, {0, 0}, {12}}       -- MISSION 9-2 (Finish (Vestal Chamber))
-            }
-        end
-    end
-
-    for cs = 1, #timeline, 6 do
-        if (csid == timeline[cs + guard][1] and option == timeline[cs + guard][2]) then
-            for nb = 1, #timeline[cs + 5], 1 do
-                local messList = timeline[cs + 5][nb]
-
-                switch (messList[1]) : caseof {
-                    [1] = function (x) if (messList[2] ~= nil) then player:addMission(nation, messList[2]) else player:addMission(nation, timeline[cs]) end end,
-                    [2] = function (x) player:messageSpecial(zones[player:getZoneID()].text.YOU_ACCEPT_THE_MISSION) end,
-                    [3] = function (x) player:setCharVar(messList[2], messList[3]) end,
-                    [4] = function (x) player:tradeComplete() end,
-                    [5] = function (x) if ((player:getRankPoints() + messList[2]) > 4000) then player:setRankPoints(4000) else player:addRankPoints(messList[2]) end end,
-                    [6] = function (x) player:setRankPoints(0) end,
-                    [7] = function (x) player:addCP(messList[2]) player:messageSpecial(zones[player:getZoneID()].text.YOUVE_EARNED_CONQUEST_POINTS) end,
-                    [8] = function (x) player:addGil(xi.settings.GIL_RATE * messList[2]) player:messageSpecial(zones[player:getZoneID()].text.GIL_OBTAINED, xi.settings.GIL_RATE*messList[2]) end,
-                    [9] = function (x) player:delKeyItem(messList[2]) end,
-                    [10] = function (x) player:addKeyItem(messList[2]) player:messageSpecial(zones[player:getZoneID()].text.KEYITEM_OBTAINED, messList[2]) end,
-                    [11] = function (x) player:setRank(messList[2]) end,
-                    [12] = function (x) player:completeMission(nation, timeline[cs]) end,
-                    [13] = function (x) player:addTitle(messList[2]) end,
-                    [14] = function (x) player:setMissionStatus(nation, messList[2]) end,
-                }
-            end
-        end
-    end
 end

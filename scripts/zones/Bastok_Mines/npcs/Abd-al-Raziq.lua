@@ -13,7 +13,7 @@ require("scripts/globals/status")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local signed = trade:getItem():getSignature() == player:getName() and 1 or 0
+    local signed  = trade:getItem():getSignature() == player:getName() and 1 or 0
     local newRank = xi.crafting.tradeTestItem(player, npc, trade, xi.skill.ALCHEMY)
 
     if
@@ -29,6 +29,7 @@ entity.onTrade = function(player, npc, trade)
         else
             player:startEvent(121, 0, 0, 0, 0, newRank, 0)
         end
+
     elseif newRank ~= 0 and newRank <=9 then
         player:setSkillRank(xi.skill.ALCHEMY, newRank)
         player:startEvent(121, 0, 0, 0, 0, newRank)
@@ -37,15 +38,23 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local craftSkill = player:getSkillLevel(xi.skill.ALCHEMY)
-    local testItem = xi.crafting.getTestItem(player, npc, xi.skill.ALCHEMY)
-    local guildMember = xi.crafting.isGuildMember(player, 1)
-    local rankCap = xi.crafting.getCraftSkillCap(player, xi.skill.ALCHEMY)
+    local craftSkill        = player:getSkillLevel(xi.skill.ALCHEMY)
+    local testItem          = xi.crafting.getTestItem(player, npc, xi.skill.ALCHEMY)
+    local guildMember       = xi.crafting.isGuildMember(player, 1)
+    local rankCap           = xi.crafting.getCraftSkillCap(player, xi.skill.ALCHEMY)
     local expertQuestStatus = 0
-    local Rank = player:getSkillRank(xi.skill.ALCHEMY)
-    local realSkill = (craftSkill - Rank) / 32
-    local canRankUp = rankCap - realSkill -- used to make sure rank up isn't overridden by ASA mission
-    if (guildMember == 1) then guildMember = 150995375; end
+    local Rank              = player:getSkillRank(xi.skill.ALCHEMY)
+    local realSkill         = (craftSkill - Rank) / 32
+    local canRankUp         = rankCap - realSkill -- used to make sure rank up isn't overridden by ASA mission
+
+    if guildMember == 1 then
+        guildMember = 150995375
+    end
+
+    if xi.crafting.unionRepresentativeTriggerRenounceCheck(player, 120, realSkill, rankCap, 184549887) then
+        return
+    end
+
     if player:getCharVar("AlchemyExpertQuest") == 1 then
         if player:hasKeyItem(xi.keyItem.WAY_OF_THE_ALCHEMIST) then
             expertQuestStatus = 550
@@ -54,12 +63,16 @@ entity.onTrigger = function(player, npc)
         end
     end
 
-    if (player:getCurrentMission(ASA) == xi.mission.id.asa.THAT_WHICH_CURDLES_BLOOD and guildMember == 150995375 and canRankUp >= 3) then
-        local item = 0
+    if
+        player:getCurrentMission(ASA) == xi.mission.id.asa.THAT_WHICH_CURDLES_BLOOD and
+        guildMember == 150995375 and
+        canRankUp >= 3
+    then
+        local item      = 0
         local asaStatus = player:getCharVar("ASA_Status")
 
         -- TODO: Other Enfeebling Kits
-        if (asaStatus == 0) then
+        if asaStatus == 0 then
             item = 2779
         else
             printf("Error: Unknown ASA Status Encountered <%u>", asaStatus)
@@ -67,6 +80,7 @@ entity.onTrigger = function(player, npc)
 
         -- The Parameters are Item IDs for the Recipe
         player:startEvent(590, item, 2774, 929, 4103, 2777, 4103)
+
     elseif expertQuestStatus == 550 then
         --[[
         Feeding the proper parameter currently hangs the client in cutscene. This may
@@ -77,25 +91,33 @@ entity.onTrigger = function(player, npc)
         player:showText(npc, 7237)
         player:showText(npc, 7239)
         player:startEvent(120, testItem, realSkill, 44, guildMember, 0, 0, 0, 0)
+
     else
         player:startEvent(120, testItem, realSkill, rankCap, guildMember, expertQuestStatus, 0, 0, 0)
     end
 end
 
 entity.onEventUpdate = function(player, csid, option)
+    if
+        csid == 120 and
+        option >= xi.skill.WOODWORKING and
+        option <= xi.skill.COOKING
+    then
+        xi.crafting.unionRepresentativeEventUpdateRenounce(player, option)
+    end
 end
 
 entity.onEventFinish = function(player, csid, option)
     local guildMember = xi.crafting.isGuildMember(player, 1)
 
-    if (csid == 120 and option == 2) then
+    if csid == 120 and option == 2 then
         if guildMember == 1 then
             player:setCharVar("AlchemyExpertQuest",1)
         end
-    elseif (csid == 120 and option == 1) then
+    elseif csid == 120 and option == 1 then
         local crystal = 4101 -- water crystal
 
-        if (player:getFreeSlotsCount() == 0) then
+        if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, crystal)
         else
             player:addItem(crystal)
