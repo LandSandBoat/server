@@ -31,9 +31,6 @@ entity.onTrigger = function(player, npc)
         player:startEvent(549)
         player:setCharVar("BlackMailQuest", 1)
         player:delKeyItem(xi.ki.SUSPICIOUS_ENVELOPE)
-
-    elseif player:getCurrentMission(TOAU) == xi.mission.id.toau.EASTERLY_WINDS and player:getCharVar("AhtUrganStatus") == 0 then
-        player:startEvent(565)
     elseif pNation == xi.nation.SANDORIA then
         -- Rank 10 default dialogue
         if player:getRank(player:getNation()) == 10 then

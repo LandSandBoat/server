@@ -103,11 +103,6 @@ zone_object.onRegionEnter = function(player, region)
             player:getCharVar("PromathiaStatus") == 2
         then
             player:startEvent(10051)
-        elseif
-            player:getCurrentMission(TOAU) == xi.mission.id.toau.EASTERLY_WINDS and
-            player:getCharVar("AhtUrganStatus") == 1
-        then
-            player:startEvent(10094)
         elseif player:getCurrentMission(TOAU) == xi.mission.id.toau.ALLIED_RUMBLINGS then
             player:startEvent(10097)
         elseif player:getCurrentMission(COP) == xi.mission.id.cop.DAWN then
@@ -184,22 +179,6 @@ zone_object.onEventFinish = function(player, csid, option)
         player:setCharVar("COP_louverance_story", 0)
         player:setCharVar("COP_tenzen_story", 0)
         player:setCharVar("COP_jabbos_story", 0)
-    elseif csid == 10094 then
-        if option == 1 then
-            if player:getFreeSlotsCount() == 0 then
-                player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 2184)
-            else
-                player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.EASTERLY_WINDS)
-                player:addMission(xi.mission.log_id.TOAU, xi.mission.id.toau.WESTERLY_WINDS)
-                player:setCharVar("AhtUrganStatus", 0)
-                player:addItem(2184, 10)
-                player:messageSpecial(ID.text.ITEM_OBTAINED, 2184)
-            end
-        else
-            player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.EASTERLY_WINDS)
-            player:addMission(xi.mission.log_id.TOAU, xi.mission.id.toau.WESTERLY_WINDS)
-            player:setCharVar("AhtUrganStatus", 0)
-        end
     elseif csid == 10097 then
         player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.ALLIED_RUMBLINGS)
         player:needToZone(true)
