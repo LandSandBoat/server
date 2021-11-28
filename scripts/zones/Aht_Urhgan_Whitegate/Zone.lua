@@ -91,16 +91,12 @@ zone_object.onRegionEnter = function(player, region)
             end
         end,
         [4] = function (x) -- AH mission
-            if (toauMission == xi.mission.id.toau.KNIGHT_OF_GOLD and player:getCharVar("AhtUrganStatus") == 2) then
-                player:startEvent(3024, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-            elseif (toauMission == xi.mission.id.toau.BASTION_OF_KNOWLEDGE) then
+            if (toauMission == xi.mission.id.toau.BASTION_OF_KNOWLEDGE) then
                 player:startEvent(3112)
             end
         end,
         [5] = function (x) -- AH mission
-            if (toauMission == xi.mission.id.toau.KNIGHT_OF_GOLD and player:getCharVar("AhtUrganStatus") == 3) then
-                player:startEvent(3026, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-            elseif (toauMission == xi.mission.id.toau.WESTERLY_WINDS and player:getCharVar("AhtUrganStatus") == 0) then
+            if (toauMission == xi.mission.id.toau.WESTERLY_WINDS and player:getCharVar("AhtUrganStatus") == 0) then
                 player:startEvent(3027, 0, 0, 0, 0, 0, 0, 0, 0, 0)
             elseif (toauMission == xi.mission.id.toau.SWEETS_FOR_THE_SOUL) then
                 player:startEvent(3092)
@@ -162,14 +158,6 @@ zone_object.onEventFinish = function(player, csid, option)
     elseif (csid == 526) then
         player:setCharVar("gotitallCS", 6)
         player:setPos(60, 0, -71, 38)
-    elseif (csid == 3024) then
-        player:setCharVar("AhtUrganStatus", 3)
-    elseif (csid == 3026) then
-        player:setCharVar("AhtUrganStatus", 0)
-        player:addKeyItem(xi.ki.RAILLEFALS_LETTER)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.RAILLEFALS_LETTER)
-        player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.KNIGHT_OF_GOLD)
-        player:addMission(xi.mission.log_id.TOAU, xi.mission.id.toau.CONFESSIONS_OF_ROYALTY)
     elseif (csid == 3027) then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 2185)

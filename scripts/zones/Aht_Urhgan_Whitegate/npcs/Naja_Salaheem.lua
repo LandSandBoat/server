@@ -34,8 +34,6 @@ entity.onTrigger = function(player, npc)
         player:startEvent(5022, 0, 0, 0, 0, 0, 0, 0, 0, 0) -- Superior Private rank complete
     elseif (player:getCharVar("AssaultPromotion") >= 25 and player:hasKeyItem(xi.ki.SP_WILDCAT_BADGE) == false and player:getCharVar("PromotionSP") == 0) then
         player:startEvent(5020, 0, 0, 0, 0, 0, 0, 0, 0, 0) -- Superior Private rank is available
-    elseif (player:getCurrentMission(TOAU) == xi.mission.id.toau.KNIGHT_OF_GOLD and player:getCharVar("AhtUrganStatus") == 0) then
-        player:startEvent(3021, 0, 0, 0, 0, 0, 0, 0, 0, 0)
     elseif (player:getCurrentMission(TOAU) == xi.mission.id.toau.WESTERLY_WINDS and player:getCharVar("AhtUrganStatus") == 1) then
         player:startEvent(3028, 0, 0, 0, 0, 0, 0, 0, 0, 0)
     elseif (player:getCurrentMission(TOAU) == xi.mission.id.toau.UNDERSEA_SCOUTING) then
