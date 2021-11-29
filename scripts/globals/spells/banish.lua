@@ -1,9 +1,7 @@
 -----------------------------------
 -- Spell: Banish
--- Deals light damage to an enemy.
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/magic")
+require("scripts/globals/magic_utils/spell_damage")
 -----------------------------------
 local spell_object = {}
 
@@ -12,14 +10,7 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    --doDivineBanishNuke(V, M, caster, spell, target, hasMultipleTargetReduction, resistBonus)
-    local params = {}
-    params.dmg = 14
-    params.multiplier = 1
-    params.hasMultipleTargetReduction = false
-    params.resistBonus = 1.0
-    local dmg = doDivineBanishNuke(caster, target, spell, params)
-    return dmg
+    return xi.magic_utils.spell_damage.useDamageSpell(caster, target, spell)
 end
 
 return spell_object

@@ -31,6 +31,7 @@ zones[xi.zone.NORTHERN_SAN_DORIA] =
         NO_MORE_GP_ELIGIBLE      = 6991,  -- You are not eligible to receive guild points at this time.
         GP_OBTAINED              = 6996,  -- Obtained: <number> guild points.
         NOT_HAVE_ENOUGH_GP       = 6997,  -- You do not have enough guild points.
+        RENOUNCE_CRAFTSMAN       = 7013,  -- You have successfully renounced your status as a <Multiple Choice (Parameter 5)>[craftsman/artisan/adept] of the <Multiple Choice (Parameter 1)>[Carpenters'/Blacksmiths'/Goldsmiths'/Weavers'/Tanners'/Boneworkers'/Alchemists'/Culinarians'] Guild.
         CONQUEST_BASE            = 7267,  -- Tallying conquest results...
         FISHING_MESSAGE_OFFSET   = 7426,  -- You can't fish here.
         REGIME_CANCELED          = 7977,  -- Current training regime canceled.

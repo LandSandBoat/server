@@ -1,9 +1,7 @@
 -----------------------------------
 -- Spell: Aeroga III
--- Deals wind damage to enemies within area of effect.
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/magic")
+require("scripts/globals/magic_utils/spell_damage")
 -----------------------------------
 local spell_object = {}
 
@@ -12,22 +10,7 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    local spellParams = {}
-    spellParams.hasMultipleTargetReduction = true
-    spellParams.resistBonus = 1.0
-    spellParams.V = 527
-    spellParams.V0 = 580
-    spellParams.V50 = 800
-    spellParams.V100 = 990
-    spellParams.V200 = 1280
-    spellParams.M = 1.5
-    spellParams.M0 = 4.4
-    spellParams.M50 = 3.8
-    spellParams.M100 = 2.9
-    spellParams.M200 = 2
-    spellParams.I = 642
-
-    return doElementalNuke(caster, spell, target, spellParams)
+    return xi.magic_utils.spell_damage.useDamageSpell(caster, target, spell)
 end
 
 return spell_object

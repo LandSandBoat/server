@@ -51,6 +51,10 @@ entity.onTrigger = function(player, npc)
         guildMember = 150995375
     end
 
+    if xi.crafting.unionRepresentativeTriggerRenounceCheck(player, 120, realSkill, rankCap, 184549887) then
+        return
+    end
+
     if player:getCharVar("AlchemyExpertQuest") == 1 then
         if player:hasKeyItem(xi.keyItem.WAY_OF_THE_ALCHEMIST) then
             expertQuestStatus = 550
@@ -94,6 +98,13 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option)
+    if
+        csid == 120 and
+        option >= xi.skill.WOODWORKING and
+        option <= xi.skill.COOKING
+    then
+        xi.crafting.unionRepresentativeEventUpdateRenounce(player, option)
+    end
 end
 
 entity.onEventFinish = function(player, csid, option)
