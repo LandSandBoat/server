@@ -9,8 +9,9 @@ require("scripts/globals/status")
 require("scripts/globals/titles")
 require("scripts/globals/besieged")
 require("scripts/globals/npc_util")
-require("scripts/zones/Aht_Urhgan_Whitegate/Shared")
 local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
+-----------------------------------
+local whitegateShared = require("scripts/zones/Aht_Urhgan_Whitegate/Shared")
 -----------------------------------
 local entity = {}
 
@@ -20,15 +21,15 @@ end
 entity.onTrigger = function(player,npc)
     local noWeapons = player:getEquipID(xi.slot.MAIN) == 0 and player:getEquipID(xi.slot.SUB) == 0
     if player:getCurrentMission(TOAU) == xi.mission.id.toau.GUESTS_OF_THE_EMPIRE and player:getCharVar("AhtUrganStatus") == 1 and
-        doRoyalPalaceArmorCheck(player) and noWeapons then
+        whitegateShared.doRoyalPalaceArmorCheck(player) and noWeapons then
         player:startEvent(3078, 0, 1, 0, 0, 0, 0, 0, 1, 0)
     elseif player:getCurrentMission(TOAU) == xi.mission.id.toau.SEAL_OF_THE_SERPENT and noWeapons then
         player:startEvent(3111)
     elseif player:getCurrentMission(TOAU) == xi.mission.id.toau.IMPERIAL_CORONATION and
-        doRoyalPalaceArmorCheck(player) and noWeapons then
+        whitegateShared.doRoyalPalaceArmorCheck(player) and noWeapons then
         player:startEvent(3140, xi.besieged.getMercenaryRank(player), player:getTitle(), 0, 0, 0, 0, 0, 0, 0)
     elseif player:getCurrentMission(TOAU) >= xi.mission.id.toau.IMPERIAL_CORONATION and
-        doRoyalPalaceArmorCheck(player) and noWeapons then
+        whitegateShared.doRoyalPalaceArmorCheck(player) and noWeapons then
         local ring = player:getCharVar("TOAU_RINGTIME")
         local standard = player:hasItem(129)
 

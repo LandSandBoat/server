@@ -9,12 +9,13 @@
 -- Naja Salaheem interactions require the 9th argument in events set to 0.
 -- This is because Aht Uhrgan Whitegate uses 2 different dats.
 -----------------------------------
-require("scripts/zones/Aht_Urhgan_Whitegate/Shared")
 local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
 require("scripts/globals/missions")
 require("scripts/globals/keyitems")
 require("scripts/globals/titles")
 require("scripts/globals/npc_util")
+-----------------------------------
+local whitegateShared = require("scripts/zones/Aht_Urhgan_Whitegate/Shared")
 -----------------------------------
 local entity = {}
 
@@ -24,14 +25,8 @@ end
 entity.onTrigger = function(player, npc)
     local needToZone = player:needToZone()
 
-    if (player:getCurrentMission(TOAU) == xi.mission.id.toau.GHOSTS_OF_THE_PAST) then
-        if (doRoyalPalaceArmorCheck(player) == true) then
-            player:startEvent(3074, 1, 0, 0, 0, 0, 0, 0, 1, 0)
-        else
-            player:startEvent(3074, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-        end
-    elseif (player:getCurrentMission(TOAU) == xi.mission.id.toau.GUESTS_OF_THE_EMPIRE) then
-        if (doRoyalPalaceArmorCheck(player) == true) then
+    if (player:getCurrentMission(TOAU) == xi.mission.id.toau.GUESTS_OF_THE_EMPIRE) then
+        if (whitegateShared.doRoyalPalaceArmorCheck(player) == true) then
             if (player:getCharVar("AhtUrganStatus") == 0) then
                 player:startEvent(3076, 1, 0, 0, 0, 0, 0, 0, 1, 0)
             else
