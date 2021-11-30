@@ -24,9 +24,7 @@ end
 entity.onTrigger = function(player, npc)
     local needToZone = player:needToZone()
 
-    if (player:getCurrentMission(TOAU) == xi.mission.id.toau.THE_DOLPHIN_CREST) then
-        player:startEvent(3072, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-    elseif (player:getCurrentMission(TOAU) == xi.mission.id.toau.THE_BLACK_COFFIN) then
+    if (player:getCurrentMission(TOAU) == xi.mission.id.toau.THE_BLACK_COFFIN) then
         player:startEvent(3073, 0, 0, 0, 0, 0, 0, 0, 0, 0)
     elseif (player:getCurrentMission(TOAU) == xi.mission.id.toau.GHOSTS_OF_THE_PAST) then
         if (doRoyalPalaceArmorCheck(player) == true) then
@@ -82,10 +80,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 3072) then
-        player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.THE_DOLPHIN_CREST)
-        player:addMission(xi.mission.log_id.TOAU, xi.mission.id.toau.THE_BLACK_COFFIN)
-    elseif (csid == 3074) then
+    if (csid == 3074) then
         player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.GHOSTS_OF_THE_PAST)
         player:addMission(xi.mission.log_id.TOAU, xi.mission.id.toau.GUESTS_OF_THE_EMPIRE)
 
