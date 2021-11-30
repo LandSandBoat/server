@@ -319,19 +319,34 @@ jobs:
           EOF
           
           killall screen
-    - name: Check for errors
+    - name: Check for errors and warnings
       if: ${{ success() || failure() }}
       run: |
         cat login-server*.log
         cat map-server*.log
         cat search-server*.log
-        if grep -qi "Error" login-server*.log; then
+
+        if grep -qi "error" login-server*.log; then
             exit -1
         fi
-        if grep -qi "Error" map-server*.log; then
+
+        if grep -qi "error" map-server*.log; then
             exit -1
         fi
-        if grep -qi "Error" search-server*.log; then
+
+        if grep -qi "error" search-server*.log; then
+            exit -1
+        fi
+
+        if grep -qi "warning" login-server*.log; then
+            exit -1
+        fi
+
+        if grep -qi "warning" map-server*.log; then
+            exit -1
+        fi
+
+        if grep -qi "warning" search-server*.log; then
             exit -1
         fi
 
@@ -394,7 +409,7 @@ jobs:
         screen -d -m -S topaz_game ./topaz_game --log map-server-1.log --port 54231
         sleep 2m
         killall screen
-    - name: Check for errors
+    - name: Check for errors and warnings
       if: ${{ success() || failure() }}
       run: |
         cat login-server*.log
@@ -402,18 +417,34 @@ jobs:
         cat map-server-0*.log
         cat map-server-1*.log
 
-        if grep -qi "Error" login-server*.log; then
+        if grep -qi "error" login-server*.log; then
             exit -1
         fi
 
-        if grep -qi "Error" search-server*.log; then
+        if grep -qi "error" search-server*.log; then
             exit -1
         fi
 
-        if grep -qi "Error" map-server-0*.log; then
+        if grep -qi "error" map-server-0*.log; then
             exit -1
         fi
 
-        if grep -qi "Error" map-server-1*.log; then
+        if grep -qi "error" map-server-1*.log; then
+          exit -1
+        fi
+
+        if grep -qi "warning" login-server*.log; then
+            exit -1
+        fi
+
+        if grep -qi "warning" search-server*.log; then
+            exit -1
+        fi
+
+        if grep -qi "warning" map-server-0*.log; then
+            exit -1
+        fi
+
+        if grep -qi "warning" map-server-1*.log; then
           exit -1
         fi
