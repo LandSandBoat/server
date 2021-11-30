@@ -24,9 +24,7 @@ end
 entity.onTrigger = function(player, npc)
     local needToZone = player:needToZone()
 
-    if (player:getCurrentMission(TOAU) == xi.mission.id.toau.THE_BLACK_COFFIN) then
-        player:startEvent(3073, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-    elseif (player:getCurrentMission(TOAU) == xi.mission.id.toau.GHOSTS_OF_THE_PAST) then
+    if (player:getCurrentMission(TOAU) == xi.mission.id.toau.GHOSTS_OF_THE_PAST) then
         if (doRoyalPalaceArmorCheck(player) == true) then
             player:startEvent(3074, 1, 0, 0, 0, 0, 0, 0, 1, 0)
         else
