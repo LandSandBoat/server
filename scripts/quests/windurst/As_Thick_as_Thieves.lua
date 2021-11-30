@@ -282,7 +282,7 @@ quest.sections =
                         npcUtil.popFromQM(player, npc, northGustabergID.mob.GAMBILOX_WANDERLING, { hide = 0 })
                         return quest:messageSpecial(northGustabergID.text.SENSE_EVIL_PRESENCE)
                     elseif questProgress == 5 then
-                        player:startEvent(200, xi.items.REGAL_DIE)
+                        return quest:progressEvent(200, xi.items.REGAL_DIE)
                     end
                 end,
             },
@@ -369,9 +369,9 @@ quest.sections =
                         player:hasKeyItem(xi.ki.FIRST_SIGNED_FORGED_ENVELOPE) and
                         player:hasKeyItem(xi.ki.SECOND_SIGNED_FORGED_ENVELOPE)
                     then
-                        player:startEvent(508)
+                        return quest:progressEvent(508)
                     else
-                        player:startEvent(505, 0, xi.ki.GANG_WHEREABOUTS_NOTE)
+                        return quest:progressEvent(505, 0, xi.ki.GANG_WHEREABOUTS_NOTE)
                     end
                 end,
             },

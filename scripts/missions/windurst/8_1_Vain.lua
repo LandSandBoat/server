@@ -195,11 +195,11 @@ mission.sections =
 
                     if missionStatus >= 2 then
                         if player:hasKeyItem(xi.ki.STAR_SEEKER) then
-                            player:startEvent(118, 0, xi.items.CURSE_WAND, xi.ki.STAR_SEEKER)
+                            return mission:progressEvent(118, 0, xi.items.CURSE_WAND, xi.ki.STAR_SEEKER)
                         elseif player:hasKeyItem(xi.ki.MAGIC_DRAINED_STAR_SEEKER) and missionStatus == 4 then
-                            player:startEvent(121)
+                            return mission:progressEvent(121)
                         else
-                            player:startEvent(119, 0, xi.items.CURSE_WAND)
+                            return mission:progressEvent(119, 0, xi.items.CURSE_WAND)
                         end
                     end
                 end,

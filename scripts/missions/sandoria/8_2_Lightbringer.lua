@@ -184,7 +184,7 @@ mission.sections =
                         (not nioHum:isSpawned() or nioHum:isDead())
                     then
                         if mission:getVar(player, 'Prog') > 0 then
-                            player:startEvent(65)
+                            return mission:progressEvent(65)
                         else
                             SpawnMob(uggalepihID.mob.NIO_A)
                             SpawnMob(uggalepihID.mob.NIO_HUM)
