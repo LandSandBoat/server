@@ -63,19 +63,11 @@ zones[xi.zone.RULUDE_GARDENS] =
         RETURN_MAGIAN_ITEM               = 14533, -- The Magian Moogle returns your <item>.
         DELIVERY_CRATE_TEXT              = 14546, -- A sturdy, sizable wooden crate lies before you. To complete an item acquisition trial, trade your retrieved items together with the corresponding inscribed piece of equipment.
         ITEM_NOT_ARMOR_MAGIAN            = 14638, -- Uh, sorry, I'm only in charge of armor. Nande, for that item, you'll have to talk to the other dude.
+        OBTAINED_NUM_KEYITEMS            = 14865, -- Obtained key item: <number> <keyitem>!
+        NOT_ACQUAINTED                   = 14867, -- I'm sorry, but I don't believe we're acquainted. Please leave me be.
         LEARNED_SECRET_TECHNIQUE         = 15091, -- You learned the secret technique of the bushin!
         COMMON_SENSE_SURVIVAL            = 15717, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
         TEAR_IN_FABRIC_OF_SPACE          = 15900, -- There appears to be a tear in the fabric of space...
-        YOU_HAND_THE_THREE_SLIVERS       = 13745, -- You hand the three crystal slivers to Esha'ntarl.
-        ITEM_NOT_WEAPON_MAGIAN           = 14500, -- As I advised you previously, my sole specialty is weapons. I have not the moogle magic at my disposal to augment items of this variety, kupo...
-        RETURN_MAGIAN_ITEM               = 14520, -- The Magian Moogle returns your <item>.
-        DELIVERY_CRATE_TEXT              = 14533, -- A sturdy, sizable wooden crate lies before you. To complete an item acquisition trial, trade your retrieved items together with the corresponding inscribed piece of equipment.
-        ITEM_NOT_ARMOR_MAGIAN            = 14625, -- Uh, sorry, I'm only in charge of armor. Nande, for that item, you'll have to talk to the other dude.
-        OBTAINED_NUM_KEYITEMS            = 14852, -- Obtained key item: <number> <keyitem>!
-        NOT_ACQUAINTED                   = 14854, -- I'm sorry, but I don't believe we're acquainted. Please leave me be.
-        LEARNED_SECRET_TECHNIQUE         = 15078, -- You learned the secret technique of the bushin!
-        COMMON_SENSE_SURVIVAL            = 15704, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
-        TEAR_IN_FABRIC_OF_SPACE          = 15887, -- There appears to be a tear in the fabric of space...
     },
     mob =
     {
