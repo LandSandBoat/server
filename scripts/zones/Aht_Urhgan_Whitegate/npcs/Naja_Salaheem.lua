@@ -15,8 +15,6 @@ require("scripts/globals/keyitems")
 require("scripts/globals/titles")
 require("scripts/globals/npc_util")
 -----------------------------------
-local whitegateShared = require("scripts/zones/Aht_Urhgan_Whitegate/Shared")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
@@ -25,9 +23,7 @@ end
 entity.onTrigger = function(player, npc)
     local needToZone = player:needToZone()
 
-    if (player:getCurrentMission(TOAU) == xi.mission.id.toau.PASSING_GLORY and player:getCharVar("TOAUM18_STARTDAY") ~= VanadielDayOfTheYear() and needToZone == false) then
-        player:startEvent(3090, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-    elseif (player:getCurrentMission(TOAU) == xi.mission.id.toau.IN_THE_BLOOD) then
+    if (player:getCurrentMission(TOAU) == xi.mission.id.toau.IN_THE_BLOOD) then
         player:startEvent(3113, 0, 0, 0, 0, 0, 0, 0, 0, 0)
     elseif (player:getCurrentMission(TOAU) == xi.mission.id.toau.SENTINELS_HONOR) then
         if(player:getCharVar("TOAUM18_STARTDAY") ~= VanadielDayOfTheYear() and needToZone == false) then
@@ -59,11 +55,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 3090) then
-        player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.PASSING_GLORY)
-        player:setCharVar("TOAUM18_STARTDAY", 0)
-        player:addMission(xi.mission.log_id.TOAU, xi.mission.id.toau.SWEETS_FOR_THE_SOUL)
-    elseif (csid == 3113) then
+    if (csid == 3113) then
         player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.IN_THE_BLOOD)
         player:setCharVar("TOAUM33_STARTDAY", VanadielDayOfTheYear())
         player:needToZone(true)
