@@ -25,21 +25,7 @@ end
 entity.onTrigger = function(player, npc)
     local needToZone = player:needToZone()
 
-    if (player:getCurrentMission(TOAU) == xi.mission.id.toau.GUESTS_OF_THE_EMPIRE) then
-        if (whitegateShared.doRoyalPalaceArmorCheck(player) == true) then
-            if (player:getCharVar("AhtUrganStatus") == 0) then
-                player:startEvent(3076, 1, 0, 0, 0, 0, 0, 0, 1, 0)
-            else
-                player:startEvent(3077, 1, 0, 0, 0, 0, 0, 0, 1, 0)
-            end
-        else
-            if (player:getCharVar("AhtUrganStatus") == 0) then
-                player:startEvent(3076, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-            else
-                player:startEvent(3077, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-            end
-        end
-    elseif (player:getCurrentMission(TOAU) == xi.mission.id.toau.PASSING_GLORY and player:getCharVar("TOAUM18_STARTDAY") ~= VanadielDayOfTheYear() and needToZone == false) then
+    if (player:getCurrentMission(TOAU) == xi.mission.id.toau.PASSING_GLORY and player:getCharVar("TOAUM18_STARTDAY") ~= VanadielDayOfTheYear() and needToZone == false) then
         player:startEvent(3090, 0, 0, 0, 0, 0, 0, 0, 0, 0)
     elseif (player:getCurrentMission(TOAU) == xi.mission.id.toau.IN_THE_BLOOD) then
         player:startEvent(3113, 0, 0, 0, 0, 0, 0, 0, 0, 0)
@@ -73,14 +59,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 3074) then
-        player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.GHOSTS_OF_THE_PAST)
-        player:addMission(xi.mission.log_id.TOAU, xi.mission.id.toau.GUESTS_OF_THE_EMPIRE)
-
-        if(option == 2) then
-            player:setCharVar("AhtUrganStatus", 1)
-        end
-    elseif (csid == 3090) then
+    if (csid == 3090) then
         player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.PASSING_GLORY)
         player:setCharVar("TOAUM18_STARTDAY", 0)
         player:addMission(xi.mission.log_id.TOAU, xi.mission.id.toau.SWEETS_FOR_THE_SOUL)
@@ -112,8 +91,6 @@ entity.onEventFinish = function(player, csid, option)
     elseif (csid == 3149) then
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MYTHRIL_MIRROR)
         player:addKeyItem(xi.ki.MYTHRIL_MIRROR)
-    elseif (csid == 3076 and option == 0) then
-        player:setCharVar("AhtUrganStatus", 1)
     end
 end
 
