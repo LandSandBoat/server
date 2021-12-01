@@ -74,11 +74,11 @@ mission.sections =
                     local missionStatus = player:getMissionStatus(mission.areaId)
 
                     if missionStatus == 0 then
-                        player:startEvent(7)
+                        return mission:progressEvent(7)
                     elseif missionStatus == 1 then
-                        player:startEvent(9)
+                        return mission:progressEvent(9)
                     elseif player:hasKeyItem(xi.ki.ANCIENT_SAN_DORIAN_TABLET) then
-                        player:startEvent(8)
+                        return mission:progressEvent(8)
                     end
                 end,
             },

@@ -34,6 +34,7 @@ zones[xi.zone.BASTOK_MINES] =
         NO_MORE_GP_ELIGIBLE            = 7091,  -- You are not eligible to receive guild points at this time.
         GP_OBTAINED                    = 7096,  -- Obtained: <number> guild points.
         NOT_HAVE_ENOUGH_GP             = 7097,  -- You do not have enough guild points.
+        RENOUNCE_CRAFTSMAN             = 7113,  -- You have successfully renounced your status as a <Multiple Choice (Parameter 5)>[craftsman/artisan/adept] of the <Multiple Choice (Parameter 1)>[Carpenters'/Blacksmiths'/Goldsmiths'/Weavers'/Tanners'/Boneworkers'/Alchemists'/Culinarians'] Guild.
         REGIME_CANCELED                = 7278,  -- Current training regime canceled.
         HUNT_ACCEPTED                  = 7296,  -- Hunt accepted!
         USE_SCYLDS                     = 7297,  -- You use <number> [scyld/scylds]. Scyld balance: <number>.

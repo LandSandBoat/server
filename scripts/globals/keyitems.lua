@@ -3002,6 +3002,7 @@ xi.keyItem =
     BUFFALO_COMPANION                        = 3100,
     WIVRE_COMPANION                          = 3101,
     RED_RAPTOR_COMPANION                     = 3102,
+    IRON_GIANT_COMPANION                     = 3103,
 
     SHEET_OF_SHADOW_LORD_TUNES               = 3136,
     MYSTICAL_CANTEEN                         = 3137,
@@ -3129,10 +3130,12 @@ xi.keyItem =
     LOCK_OF_GOLDEN_HAIR                      = 3259,
     MNEJINGS_RECEIVER                        = 3260,
     WYRM_GOD_PHANTOM_GEM                     = 3261,
+    MASTER_BREAKER                           = 3262,
     GIFT_FOR_MEGOMAK                         = 3263,
     PURE_WHITE_AMPOULE                       = 3264,
     AEROPEARL                                = 3265,
     MAN_MADE_SOLUTION                        = 3266,
     REPAIRED_BREATHING_PEARL                 = 3267,
+    SHEET_OF_ANCIENT_TUNES                   = 3268,
 }
 xi.ki = xi.keyItem

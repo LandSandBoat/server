@@ -164,9 +164,9 @@ mission.sections =
                     local missionStatus = player:getMissionStatus(mission.areaId)
 
                     if missionStatus == 3 then
-                        player:startEvent(264)
+                        return mission:progressEvent(264)
                     elseif missionStatus > 3 then
-                        player:startEvent(268)
+                        return mission:progressEvent(268)
                     end
                 end,
             },

@@ -111,7 +111,7 @@ mission.sections =
                             not GetMobByID(behemothsDominionID.mob.ANCIENT_WEAPON):isSpawned() and
                             not GetMobByID(behemothsDominionID.mob.LEGENDARY_WEAPON):isSpawned()
                         then
-                            player:startEvent(200, xi.ki.LIGHTNING_FRAGMENT)
+                            return mission:progressEvent(200, xi.ki.LIGHTNING_FRAGMENT)
                         else
                             player:messageSpecial(behemothsDominionID.text.SOMETHING_BETTER)
                         end
@@ -148,7 +148,7 @@ mission.sections =
                         player:messageSpecial(capeTerigganID.text.ALREADY_OBTAINED_FRAG, xi.ki.WIND_FRAGMENT)
                     elseif os.time() >= npc:getLocalVar('cooldown') then
                         if not GetMobByID(capeTerigganID.mob.AXESARION_THE_WANDERER):isSpawned() then
-                            player:startEvent(200, xi.ki.WIND_FRAGMENT)
+                            return mission:progressEvent(200, xi.ki.WIND_FRAGMENT)
                         else
                             player:messageSpecial(capeTerigganID.text.SOMETHING_BETTER)
                         end
@@ -181,7 +181,7 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if not player:hasKeyItem(xi.ki.ICE_FRAGMENT) then
-                        player:startEvent(200, xi.ki.ICE_FRAGMENT)
+                        return mission:progressEvent(200, xi.ki.ICE_FRAGMENT)
                     elseif hasAllFragments(player) then
                         player:messageSpecial(cloisterOfFrostID.text.ALREADY_HAVE_ALL_FRAGS)
                     elseif player:hasKeyItem(xi.ki.ICE_FRAGMENT) then
@@ -213,7 +213,7 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if not player:hasKeyItem(xi.ki.WATER_FRAGMENT) then
-                        player:startEvent(200, xi.ki.WATER_FRAGMENT)
+                        return mission:progressEvent(200, xi.ki.WATER_FRAGMENT)
                     elseif hasAllFragments(player) then
                         player:messageSpecial(laTheinePlateauID.text.ALREADY_HAVE_ALL_FRAGS)
                     elseif player:hasKeyItem(xi.ki.WATER_FRAGMENT) then
@@ -259,7 +259,7 @@ mission.sections =
                         player:messageSpecial(sanctuaryOfZitahID.text.ALREADY_OBTAINED_FRAG, xi.ki.LIGHT_FRAGMENT)
                     elseif os.time() >= npc:getLocalVar('cooldown') then
                         if not GetMobByID(sanctuaryOfZitahID.mob.DOOMED_PILGRIMS):isSpawned() then
-                            player:startEvent(200, xi.ki.LIGHT_FRAGMENT)
+                            return mission:progressEvent(200, xi.ki.LIGHT_FRAGMENT)
                         else
                             player:messageSpecial(sanctuaryOfZitahID.text.SOMETHING_BETTER)
                         end
@@ -292,7 +292,7 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if not player:hasKeyItem(xi.ki.EARTH_FRAGMENT) then
-                        player:startEvent(200, xi.ki.EARTH_FRAGMENT)
+                        return mission:progressEvent(200, xi.ki.EARTH_FRAGMENT)
                     elseif hasAllFragments(player) then
                         player:messageSpecial(westernAltepaID.text.ALREADY_HAVE_ALL_FRAGS)
                     elseif player:hasKeyItem(xi.ki.EARTH_FRAGMENT) then
@@ -330,7 +330,7 @@ mission.sections =
                             not GetMobByID(yuhtungaJungleID.mob.TIPHA):isSpawned() and
                             not GetMobByID(yuhtungaJungleID.mob.CARTHI):isSpawned()
                         then
-                            player:startEvent(200, xi.ki.FIRE_FRAGMENT)
+                            return mission:progressEvent(200, xi.ki.FIRE_FRAGMENT)
                         else
                             player:messageSpecial(yuhtungaJungleID.text.SOMETHING_BETTER)
                         end
