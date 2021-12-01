@@ -89,9 +89,7 @@ zone_object.onRegionEnter = function(player, region)
             end
         end,
         [5] = function (x) -- AH mission
-            if (toauMission == xi.mission.id.toau.SWEETS_FOR_THE_SOUL) then
-                player:startEvent(3092)
-            elseif (toauMission == xi.mission.id.toau.STIRRINGS_OF_WAR and player:getCharVar("AhtUrganStatus") == 1) then
+            if (toauMission == xi.mission.id.toau.STIRRINGS_OF_WAR and player:getCharVar("AhtUrganStatus") == 1) then
                 player:startEvent(3136, 0, 0, 0, 0, 0, 0, 0, 0, 0)
             elseif
                 player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.NAVIGATING_THE_UNFRIENDLY_SEAS) == QUEST_COMPLETED and
@@ -134,9 +132,6 @@ zone_object.onEventFinish = function(player, csid, option)
     elseif (csid == 526) then
         player:setCharVar("gotitallCS", 6)
         player:setPos(60, 0, -71, 38)
-    elseif (csid == 3092) then
-        player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.SWEETS_FOR_THE_SOUL)
-        player:addMission(xi.mission.log_id.TOAU, xi.mission.id.toau.TEAHOUSE_TUMULT)
     elseif (csid == 3093) then
         player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.FINDERS_KEEPERS)
         player:setTitle(xi.title.KARABABAS_BODYGUARD)
