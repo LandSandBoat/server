@@ -171,7 +171,7 @@ mission.sections =
                         return mission:messageText(laTheinePlateauID.text.RESCUE_DRILL + 4)
                     elseif missionStatus == 8 then
                         if mission:getVar(player, 'Option') == 3 then
-                            player:startEvent(113)
+                            return mission:progressEvent(113)
                         else
                             return mission:messageText(laTheinePlateauID.text.RESCUE_DRILL + 21)
                         end

@@ -146,17 +146,17 @@ quest.sections =
                         -- Traded item without receiving order
                         if kenapaProg < 3 then
                             if math.random(1, 2) == 1 then
-                                player:startEvent(331)
+                                return quest:progressEvent(331)
                             else
-                                player:startEvent(330, 120)
+                                return quest:progressEvent(330, 120)
                             end
 
                         -- Traded item after receiving order
                         elseif kenapaProg == 3 then
-                            player:startEvent(327, 120)
+                            return quest:progressEvent(327, 120)
                         end
                     else
-                        player:startEvent(329)
+                        return quest:progressEvent(329)
                     end
                 end,
 
@@ -221,14 +221,14 @@ quest.sections =
                         -- Traded all 3 items & Didn't ask for order
                         if ohbiruProgress < 2 then
                             if math.random(1, 2) == 1 then
-                                player:startEvent(325, 440)
+                                return quest:progressEvent(325, 440)
                             else
-                                player:startEvent(326)
+                                return quest:progressEvent(326)
                             end
 
                         -- Traded all 3 items after receiving order
                         elseif ohbiruProgress == 2 then
-                            player:startEvent(322, 440)
+                            return quest:progressEvent(322, 440)
                         end
                     end
                 end,

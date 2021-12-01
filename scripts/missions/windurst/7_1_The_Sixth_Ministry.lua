@@ -129,8 +129,7 @@ mission.sections =
                     for i = toraimaraiID.mob.HINGE_OILS_OFFSET, toraimaraiID.mob.HINGE_OILS_OFFSET + 3 do
                         if not GetMobByID(i):isDead() then
                              -- At least one Hinge Oil is alive
-                            player:startEvent(70, 0, 0, 0, 1)
-                            return
+                            return mission:progressEvent(70, 0, 0, 0, 1)
                         end
                     end
 
