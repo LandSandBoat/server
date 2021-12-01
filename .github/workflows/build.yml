@@ -311,7 +311,7 @@ jobs:
           python3 << EOF
           import time
           from headlessxi import HXIClient
-          hxi_client = HXIClient('admin', 'admin', 'localhost', 1, '30211005_0')
+          hxi_client = HXIClient('admin', 'admin', 'localhost', 1, '30211103_2')
           hxi_client.login()
           print('Sleeping 30s')
           time.sleep(30)
