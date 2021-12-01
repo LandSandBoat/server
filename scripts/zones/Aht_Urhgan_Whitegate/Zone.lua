@@ -71,9 +71,7 @@ zone_object.onRegionEnter = function(player, region)
             end
         end,
         [3] = function (x) -- TOAU Missions
-            if (toauMission == xi.mission.id.toau.FINDERS_KEEPERS) then
-                player:startEvent(3093)
-            elseif (toauMission == xi.mission.id.toau.SOCIAL_GRACES) then
+            if (toauMission == xi.mission.id.toau.SOCIAL_GRACES) then
                 player:startEvent(3095)
             elseif (toauMission == xi.mission.id.toau.FOILED_AMBITION and player:getCharVar("TOAUM23_STARTDAY") ~= vDay and not needToZone) then
                 player:startEvent(3097, 0, 0, 0, 0, 0, 0, 0, 0, 0)
@@ -132,10 +130,6 @@ zone_object.onEventFinish = function(player, csid, option)
     elseif (csid == 526) then
         player:setCharVar("gotitallCS", 6)
         player:setPos(60, 0, -71, 38)
-    elseif (csid == 3093) then
-        player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.FINDERS_KEEPERS)
-        player:setTitle(xi.title.KARABABAS_BODYGUARD)
-        player:addMission(xi.mission.log_id.TOAU, xi.mission.id.toau.SHIELD_OF_DIPLOMACY)
     elseif (csid == 3095) then
         player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.SOCIAL_GRACES)
         player:needToZone(true)
