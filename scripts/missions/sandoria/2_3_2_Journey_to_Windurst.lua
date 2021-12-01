@@ -94,9 +94,9 @@ mission.sections =
                         local missionStatus = player:getMissionStatus(mission.areaId)
 
                         if missionStatus == 5 then
-                            player:startEvent(455) -- Must deliver shield to Yagudo
+                            return mission:progressEvent(455) -- Must deliver shield to Yagudo
                         elseif missionStatus == 6 then
-                            player:startEvent(457) -- Has delivered shield
+                            return mission:progressEvent(457) -- Has delivered shield
                         end
                     end
                 end,

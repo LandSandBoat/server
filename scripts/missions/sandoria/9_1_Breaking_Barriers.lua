@@ -161,7 +161,7 @@ mission.sections =
                         (not fledglingMob:isSpawned() or fledglingMob:isDead())
                     then
                         if mission:getVar(player, 'Prog') > 0 then
-                            player:startEvent(904)
+                            return mission:progressEvent(904)
                         else
                             SpawnMob(batalliaID.mob.SUPARNA)
                             SpawnMob(batalliaID.mob.SUPARNA_FLEDGLING)

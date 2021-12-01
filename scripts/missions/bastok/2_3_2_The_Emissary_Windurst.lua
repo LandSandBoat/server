@@ -40,11 +40,11 @@ mission.sections =
 
                 onTrigger = function(player, npc)
                     if player:hasKeyItem(xi.ki.DULL_SWORD) then
-                        player:startEvent(40)
+                        return mission:progressEvent(40)
                     elseif player:getMissionStatus(player:getNation()) == 5 then
-                        player:startEvent(43)
+                        return mission:progressEvent(43)
                     else
-                        player:startEvent(44)
+                        return mission:progressEvent(44)
                     end
                 end,
             },
