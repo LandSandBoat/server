@@ -76,7 +76,7 @@ xi.magic_utils.spell_song.calculateEnhancingPower = function(caster, target, spe
     end
 
     -- Apply Cap to power. (Applied before Merits, Job-Points and Status-Effects)
-    if power > potencyCap and then
+    if power > potencyCap then
         power = potencyCap
     end
 
