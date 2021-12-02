@@ -10,7 +10,7 @@ require("scripts/globals/status")
 local effect_object = {}
 
 effect_object.onEffectGain = function(target, effect)
-    power = effect:getPower()
+    local power = effect:getPower()
     target:addMod(xi.mod.HASTE_MAGIC, power)
 
     -- Apply Honor March additional modifiers
@@ -26,7 +26,7 @@ effect_object.onEffectTick = function(target, effect)
 end
 
 effect_object.onEffectLose = function(target, effect)
-    power = effect:getPower()
+    local power = effect:getPower()
     target:delMod(xi.mod.HASTE_MAGIC, power)
 
     -- Remove Honor March additional modifiers

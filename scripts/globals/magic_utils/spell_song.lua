@@ -36,7 +36,7 @@ xi.magic_utils.spell_song.calculateEnhancingPower = function(caster, target, spe
 
     -- Get Potency bonuses from Singing Skill and Instrument Skill. TODO: Investigate JP-Wiki. Most of this makes no sense.
     -- NOTE: Tier 1 Etudes.
-    if songEffect = xi.effect.ETUDE and tier = 1 then
+    if songEffect == xi.effect.ETUDE and tier == 1 then
         if singingLvl >= 182 and singingLvl < 236 then
             power = power + 1
         elseif singingLvl >= 236 and singingLvl < 289 then
@@ -51,7 +51,7 @@ xi.magic_utils.spell_song.calculateEnhancingPower = function(caster, target, spe
             power = power + 6
         end
     -- NOTE: Tier 2 Etudes.
-    elseif songEffect = xi.effect.ETUDE and tier = 2 then
+    elseif songEffect == xi.effect.ETUDE and tier == 2 then
         if singingLvl >= 417 and singingLvl < 446 then
             power = power + 1
         elseif singingLvl >= 446 and singingLvl < 475 then
@@ -107,7 +107,7 @@ end
 
 -- Enhancing Song Duration function. (2/2)
 xi.magic_utils.spell_song.calculateEnhancingDuration = function(caster, target, spell, instrumentBoost, soulVoicePower)
-    local duration   = 120 -- The variable we want to calculate.
+    local duration = 120 -- The variable we want to calculate.
 
     -- Additional duration from "Song Bonus" (from instruments) and "Duration Bonus" Modifier
     duration = math.floor(duration * ((instrumentBoost * 0.1) + (caster:getMod(xi.mod.SONG_DURATION_BONUS) / 100) + 1))
@@ -192,7 +192,6 @@ end
 
 -- Main function for Enfeebling Songs.
 xi.magic_utils.spell_song.useEnfeeblingSong = function(caster, target, spell)
-
-    local power    = xi.magic_utils.spell_song.calculateEnfeeblingPower()
-    local duration = xi.magic_utils.spell_song.calculateEnfeeblingDuration()
+    -- local power    = xi.magic_utils.spell_song.calculateEnfeeblingPower()
+    -- local duration = xi.magic_utils.spell_song.calculateEnfeeblingDuration()
 end
