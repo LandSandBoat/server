@@ -73,11 +73,6 @@ zone_object.onRegionEnter = function(player, region)
                 player:startEvent(3131, 1, 1, 1, 1, 1, 1, 1, 1)
             end
         end,
-        [4] = function (x) -- AH mission
-            if (toauMission == xi.mission.id.toau.BASTION_OF_KNOWLEDGE) then
-                player:startEvent(3112)
-            end
-        end,
         [5] = function (x) -- AH mission
             if (toauMission == xi.mission.id.toau.STIRRINGS_OF_WAR and player:getCharVar("AhtUrganStatus") == 1) then
                 player:startEvent(3136, 0, 0, 0, 0, 0, 0, 0, 0, 0)
@@ -122,10 +117,6 @@ zone_object.onEventFinish = function(player, csid, option)
     elseif (csid == 526) then
         player:setCharVar("gotitallCS", 6)
         player:setPos(60, 0, -71, 38)
-    elseif (csid == 3112) then
-        player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.BASTION_OF_KNOWLEDGE)
-        player:setTitle(xi.title.APHMAUS_MERCENARY)
-        player:addMission(xi.mission.log_id.TOAU, xi.mission.id.toau.PUPPET_IN_PERIL)
     elseif (csid == 3131) then
         player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.PATH_OF_BLOOD)
         player:needToZone(true)

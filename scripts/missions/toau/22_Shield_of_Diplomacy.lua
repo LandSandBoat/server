@@ -60,7 +60,9 @@ mission.sections =
                 end,
 
                 [32001] = function(player, csid, option, npc)
-                    mission:complete(player)
+                    if player:getLocalVar('battlefieldWin') == 1124 then
+                        mission:complete(player)
+                    end
                 end,
             },
         },
