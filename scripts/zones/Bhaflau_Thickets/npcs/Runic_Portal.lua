@@ -1,12 +1,13 @@
 -----------------------------------
 -- Area: Bhaflau Thickets
 --  NPC: Runic Portal
--- Mamook Ja Teleporter Back to Aht Urgan Whitegate
+-- Mamool Ja Teleporter Back to Aht Urhgan Whitegate
 -- !pos -211 -11 -818 52
 -----------------------------------
 local ID = require("scripts/zones/Bhaflau_Thickets/IDs")
 -----------------------------------
 require("scripts/globals/besieged")
+require('scripts/globals/keyitems')
 require("scripts/globals/missions")
 require("scripts/globals/teleports")
 -----------------------------------
@@ -16,7 +17,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getCurrentMission(TOAU) > xi.mission.id.toau.IMMORTAL_SENTRIES then
+    if
+        (player:getCurrentMission(TOAU) == xi.mission.id.toau.IMMORTAL_SENTRIES and not player:hasKeyItem(xi.ki.SUPPLIES_PACKAGE)) or
+        player:getCurrentMission(TOAU) > xi.mission.id.toau.IMMORTAL_SENTRIES
+    then
         if xi.besieged.hasRunicPortal(player, xi.teleport.runic_portal.MAMOOL) then
             player:startEvent(109)
         else

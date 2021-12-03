@@ -1,12 +1,13 @@
 -----------------------------------
 -- Area: Arrapago Reef
 --  NPC: Runic Portal
--- Arrapago Reef Teleporter Back to Aht Urgan Whitegate
+-- Arrapago Reef Teleporter Back to Aht Urhgan Whitegate
 -- !pos 15 -7 627 54
 -----------------------------------
 local ID = require("scripts/zones/Arrapago_Reef/IDs")
 -----------------------------------
 require("scripts/globals/besieged")
+require('scripts/globals/keyitems')
 require("scripts/globals/missions")
 require("scripts/globals/teleports")
 -----------------------------------
@@ -16,7 +17,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getCurrentMission(TOAU) > xi.mission.id.toau.IMMORTAL_SENTRIES then
+    if
+        (player:getCurrentMission(TOAU) == xi.mission.id.toau.IMMORTAL_SENTRIES and not player:hasKeyItem(xi.ki.SUPPLIES_PACKAGE)) or
+        player:getCurrentMission(TOAU) > xi.mission.id.toau.IMMORTAL_SENTRIES
+    then
         if xi.besieged.hasRunicPortal(player, xi.teleport.runic_portal.ILRUSI) then
             player:startEvent(109)
         else
