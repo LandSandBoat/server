@@ -55,8 +55,6 @@ end
 
 zone_object.onRegionEnter = function(player, region)
     local toauMission = player:getCurrentMission(TOAU)
-    local needToZone = player:needToZone()
-    local vDay = VanadielDayOfTheYear()
 
     switch (region:GetRegionID()): caseof
     {
@@ -71,9 +69,7 @@ zone_object.onRegionEnter = function(player, region)
             end
         end,
         [3] = function (x) -- TOAU Missions
-            if (toauMission == xi.mission.id.toau.PLAYING_THE_PART and player:getCharVar("TOAUM24_STARTDAY") ~= vDay and not needToZone) then
-                player:startEvent(3110)
-            elseif (toauMission == xi.mission.id.toau.PATH_OF_BLOOD) then
+            if (toauMission == xi.mission.id.toau.PATH_OF_BLOOD) then
                 player:startEvent(3131, 1, 1, 1, 1, 1, 1, 1, 1)
             end
         end,
@@ -126,10 +122,6 @@ zone_object.onEventFinish = function(player, csid, option)
     elseif (csid == 526) then
         player:setCharVar("gotitallCS", 6)
         player:setPos(60, 0, -71, 38)
-    elseif (csid == 3110) then
-        player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.PLAYING_THE_PART)
-        player:setCharVar("TOAUM24_STARTDAY", 0)
-        player:addMission(xi.mission.log_id.TOAU, xi.mission.id.toau.SEAL_OF_THE_SERPENT)
     elseif (csid == 3112) then
         player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.BASTION_OF_KNOWLEDGE)
         player:setTitle(xi.title.APHMAUS_MERCENARY)
