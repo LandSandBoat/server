@@ -21,9 +21,7 @@ end
 entity.onTrigger = function(player,npc)
     local noWeapons = player:getEquipID(xi.slot.MAIN) == 0 and player:getEquipID(xi.slot.SUB) == 0
 
-    if player:getCurrentMission(TOAU) == xi.mission.id.toau.SEAL_OF_THE_SERPENT and noWeapons then
-        player:startEvent(3111)
-    elseif player:getCurrentMission(TOAU) == xi.mission.id.toau.IMPERIAL_CORONATION and
+    if player:getCurrentMission(TOAU) == xi.mission.id.toau.IMPERIAL_CORONATION and
         whitegateShared.doRoyalPalaceArmorCheck(player) and noWeapons then
         player:startEvent(3140, xi.besieged.getMercenaryRank(player), player:getTitle(), 0, 0, 0, 0, 0, 0, 0)
     elseif player:getCurrentMission(TOAU) >= xi.mission.id.toau.IMPERIAL_CORONATION and
@@ -75,10 +73,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 3111 then
-        player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.SEAL_OF_THE_SERPENT)
-        player:addMission(xi.mission.log_id.TOAU, xi.mission.id.toau.MISPLACED_NOBILITY)
-    elseif csid == 3140 and player:getCharVar("TOAU_RINGRECV") == 1 then
+    if csid == 3140 and player:getCharVar("TOAU_RINGRECV") == 1 then
         player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.IMPERIAL_CORONATION)
         player:addMission(xi.mission.log_id.TOAU, xi.mission.id.toau.THE_EMPRESS_CROWNED)
         player:setCharVar("TOAU_RINGRECV", 0)
