@@ -30,6 +30,7 @@ zones[xi.zone.PERIQIA] =
         ASSAULT_POINTS_OBTAINED    = 7512, -- You gain <number> [Assault point/Assault points]!
         TIME_REMAINING_MINUTES     = 7513, -- Time remaining: <number> [minute/minutes] (Earth time).
         TIME_REMAINING_SECONDS     = 7514, -- Time remaining: <number> [second/seconds] (Earth time).
+        KI_FADES                   = 7515, -- The <keyitem> fades into nothingness...
         PARTY_FALLEN               = 7516, -- All party members have fallen in battle. Mission failure in <number> [minute/minutes].
         EXCALIACE_START            = 7525, -- Such a lot of trouble for one little corsair... Shall we be on our way?
         EXCALIACE_END1             = 7526, -- Yeah, I got it. Stay here and keep quiet.

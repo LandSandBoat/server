@@ -20,12 +20,8 @@ entity.onTrigger = function(player, npc)
     local toauMission = player:getCurrentMission(TOAU)
     local beginnings = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.BEGINNINGS)
 
-    -- SHADES OF VENGEANCE
-    if (toauMission == xi.mission.id.toau.SHADES_OF_VENGEANCE and player:hasKeyItem(xi.ki.PERIQIA_ASSAULT_AREA_ENTRY_PERMIT) == false and vanaDay() > player:getCharVar("TOAUM31_PERMITDAY")) then
-        player:startEvent(22)
-
     -- BEGINNINGS
-    elseif (beginnings == QUEST_ACCEPTED) then
+    if (beginnings == QUEST_ACCEPTED) then
         if (not player:hasKeyItem(xi.ki.BRAND_OF_THE_GALESERPENT)) then
             player:startEvent(10) -- brands you
         else
@@ -52,14 +48,8 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    -- SHADES OF VENGEANCE
-    if (csid == 22) then
-        player:setCharVar("TOAUM31_PERMITDAY", vanaDay())
-        player:addKeyItem(xi.ki.PERIQIA_ASSAULT_AREA_ENTRY_PERMIT)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.PERIQIA_ASSAULT_AREA_ENTRY_PERMIT)
-
     -- BEGINNINGS
-    elseif (csid == 10) then
+    if (csid == 10) then
         player:addKeyItem(xi.ki.BRAND_OF_THE_GALESERPENT)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.BRAND_OF_THE_GALESERPENT)
 
