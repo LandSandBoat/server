@@ -539,6 +539,13 @@ namespace luautils
                 return cached_func;
             }
         }
+        else if (PSpell->getSpellGroup() == SPELLGROUP_NINJUTSU)
+        {
+            if (auto cached_func = lua["xi"]["globals"]["spells"]["ninjutsu"][name][funcName]; cached_func.valid())
+            {
+                return cached_func;
+            }
+        }
         else if (PSpell->getSpellGroup() == SPELLGROUP_TRUST)
         {
             if (auto cached_func = lua["xi"]["globals"]["spells"]["trust"][name][funcName]; cached_func.valid())
