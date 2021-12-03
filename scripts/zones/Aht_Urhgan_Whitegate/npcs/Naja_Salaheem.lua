@@ -21,15 +21,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local needToZone = player:needToZone()
-
-    if (player:getCurrentMission(TOAU) == xi.mission.id.toau.SENTINELS_HONOR) then
-        if(player:getCharVar("TOAUM18_STARTDAY") ~= VanadielDayOfTheYear() and needToZone == false) then
-            player:startEvent(3130, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-        else
-            player:startEvent(3120, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-        end
-    elseif (player:getCurrentMission(TOAU) == xi.mission.id.toau.FANGS_OF_THE_LION) then
+    if (player:getCurrentMission(TOAU) == xi.mission.id.toau.FANGS_OF_THE_LION) then
         player:startEvent(3138, 0, 0, 0, 0, 0, 0, 0, 0, 0)
     elseif (player:getCurrentMission(TOAU) == xi.mission.id.toau.NASHMEIRAS_PLEA and player:hasKeyItem(xi.ki.MYTHRIL_MIRROR) == false) then
         player:startEvent(3149, 0, 0, 0, 0, 0, 0, 0, 0, 0)
@@ -53,11 +45,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 3130) then
-        player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.SENTINELS_HONOR)
-        player:setCharVar("TOAUM33_STARTDAY", 0)
-        player:addMission(xi.mission.log_id.TOAU, xi.mission.id.toau.TESTING_THE_WATERS)
-    elseif (csid == 3138) then
+    if (csid == 3138) then
         player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.FANGS_OF_THE_LION)
         player:addKeyItem(xi.ki.MYTHRIL_MIRROR)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MYTHRIL_MIRROR)
