@@ -17,10 +17,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if
-        (player:getCurrentMission(TOAU) == xi.mission.id.toau.IMMORTAL_SENTRIES and not player:hasKeyItem(xi.ki.SUPPLIES_PACKAGE)) or
-        player:getCurrentMission(TOAU) > xi.mission.id.toau.IMMORTAL_SENTRIES
-    then
+    if player:getCurrentMission(TOAU) >= xi.mission.id.toau.IMMORTAL_SENTRIES and not player:hasKeyItem(xi.ki.SUPPLIES_PACKAGE) then
         if xi.besieged.hasRunicPortal(player, xi.teleport.runic_portal.AZOUPH) then
             player:startEvent(131)
         else

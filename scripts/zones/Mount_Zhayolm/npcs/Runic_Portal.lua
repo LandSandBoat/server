@@ -5,6 +5,7 @@
 -- !pos 688.994 -23.960 351.496 61
 -----------------------------------
 local ID = require("scripts/zones/Mount_Zhayolm/IDs")
+-----------------------------------
 require("scripts/globals/besieged")
 require('scripts/globals/keyitems')
 require("scripts/globals/missions")
@@ -16,10 +17,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if
-        (player:getCurrentMission(TOAU) == xi.mission.id.toau.IMMORTAL_SENTRIES and not player:hasKeyItem(xi.ki.SUPPLIES_PACKAGE)) or
-        player:getCurrentMission(TOAU) > xi.mission.id.toau.IMMORTAL_SENTRIES
-    then
+    if player:getCurrentMission(TOAU) >= xi.mission.id.toau.IMMORTAL_SENTRIES and not player:hasKeyItem(xi.ki.SUPPLIES_PACKAGE) then
         if xi.besieged.hasRunicPortal(player, xi.teleport.runic_portal.HALVUNG) then
             player:startEvent(109)
         else
