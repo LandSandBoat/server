@@ -18,8 +18,6 @@ require('scripts/globals/keyitems')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------
-local caedarvaID = require("scripts/zones/Caedarva_Mire/IDs")
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.TOAU, xi.mission.id.toau.IMMORTAL_SENTRIES)
 
@@ -32,8 +30,6 @@ mission.reward =
 
 mission.sections =
 {
-    -- NOTE: Runic Portal onEventFinish is currently handled by the respective NPC scripts.  The onTrigger
-    -- logic for this mission could potentially be returned to them.
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId
@@ -77,15 +73,6 @@ mission.sections =
                 end,
             },
 
-            ['Runic_Portal'] =
-            {
-                onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.SUPPLIES_PACKAGE) then
-                        return mission:progressEvent(111)
-                    end
-                end,
-            },
-
             onEventFinish =
             {
                 [5] = function(player, csid, option, npc)
@@ -105,15 +92,6 @@ mission.sections =
                         return mission:progressEvent(5)
                     else
                         return mission:progressEvent(6)
-                    end
-                end,
-            },
-
-            ['Runic_Portal'] =
-            {
-                onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.SUPPLIES_PACKAGE) then
-                        return mission:progressEvent(111)
                     end
                 end,
             },
@@ -152,17 +130,6 @@ mission.sections =
                 end,
             },
 
-            ['Runic_Portal'] =
-            {
-                onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.SUPPLIES_PACKAGE) then
-                        local eventId = npc:getID() == caedarvaID.npc.RUNIC_PORTAL_AZOUPH and 124 or 125
-
-                        return mission:progressEvent(eventId)
-                    end
-                end,
-            },
-
             onEventFinish =
             {
                 [5] = function(player, csid, option, npc)
@@ -182,15 +149,6 @@ mission.sections =
                         return mission:progressEvent(4)
                     else
                         return mission:progressEvent(5)
-                    end
-                end,
-            },
-
-            ['Runic_Portal'] =
-            {
-                onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.SUPPLIES_PACKAGE) then
-                        return mission:progressEvent(111)
                     end
                 end,
             },
