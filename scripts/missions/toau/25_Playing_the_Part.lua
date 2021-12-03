@@ -3,6 +3,7 @@
 -- Aht Uhrgan Mission 25
 -----------------------------------
 -- !addmission 4 24
+-- Naja Salaheem : !pos 22.700 -8.804 -45.591 50
 -----------------------------------
 require('scripts/globals/items')
 require('scripts/globals/missions')
