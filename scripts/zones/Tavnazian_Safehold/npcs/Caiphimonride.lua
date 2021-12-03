@@ -15,16 +15,20 @@ end
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        16450, 1867,    -- Dagger
-        16566, 8478,    -- Longsword
-        17335,    8,    -- Rusty Bolt
+        16450, 2030, -- Dagger
+        16566, 9216, -- Longsword
+        17335,    4, -- Rusty Bolt
     }
 
     if player:getCurrentMission(COP) >= xi.mission.id.cop.SHELTERING_DOUBT then
-        table.insert(stock, 18375)    -- Falx
-        table.insert(stock, 93240)
-        table.insert(stock, 18214)    -- Voulge
-        table.insert(stock, 51905)
+        stock =
+        {
+            16450,  2030,  -- Dagger
+            16566,  9216,  -- Longsword
+            17335,     4,  -- Rusty Bolt
+            18375, 37296,  -- Falx
+            18214, 20762,  -- Voulge
+        }
     end
 
     player:showText(npc, ID.text.CAIPHIMONRIDE_SHOP_DIALOG)
