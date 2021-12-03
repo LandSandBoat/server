@@ -539,6 +539,13 @@ namespace luautils
                 return cached_func;
             }
         }
+        else if (PSpell->getSpellGroup() == SPELLGROUP_SONG)
+        {
+            if (auto cached_func = lua["xi"]["globals"]["spells"]["songs"][name][funcName]; cached_func.valid())
+            {
+                return cached_func;
+            }
+        }
         else if (PSpell->getSpellGroup() == SPELLGROUP_TRUST)
         {
             if (auto cached_func = lua["xi"]["globals"]["spells"]["trust"][name][funcName]; cached_func.valid())

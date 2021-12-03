@@ -168,7 +168,7 @@ xi.magic_utils.spell_song.useEnhancingSong = function(caster, target, spell)
     local duration = xi.magic_utils.spell_song.calculateEnhancingDuration(caster, target, spell, instrumentBoost, soulVoicePower)
 
     -- EXCEPTION: Tier 2 Ettudes Fourth Parameter.
-    if spellEffect == xi.effect.ETUDE and tier == 2 then
+    if songEffect == xi.effect.ETUDE and tier == 2 then
         paramFour = 10
     end
 
