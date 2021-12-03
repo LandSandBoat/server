@@ -2,7 +2,7 @@
 -- Area: Caedarva Mire
 --  NPC: Runic Portal
 -- Caedarva Mire (Dvucca) Teleporter Back to Aht Urhgan Whitegate
--- !pos -264 -6 -28 79 
+-- !pos -264 -6 -28 79
 -----------------------------------
 local ID = require("scripts/zones/Caedarva_Mire/IDs")
 -----------------------------------
