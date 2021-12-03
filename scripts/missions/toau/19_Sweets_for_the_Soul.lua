@@ -17,6 +17,7 @@ local mission = Mission:new(xi.mission.log_id.TOAU, xi.mission.id.toau.SWEETS_FO
 
 mission.reward =
 {
+    title       = xi.title.KARABABAS_TOUR_GUIDE,
     nextMission = { xi.mission.log_id.TOAU, xi.mission.id.toau.TEAHOUSE_TUMULT },
 }
 
