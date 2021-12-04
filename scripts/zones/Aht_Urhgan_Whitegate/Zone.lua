@@ -37,15 +37,6 @@ zone_object.onZoneIn = function(player, prevZone)
         end
     end
 
-    if
-        player:getCurrentMission(TOAU) == xi.mission.id.toau.STIRRINGS_OF_WAR and
-        player:getCharVar("AhtUrganStatus") == 0 and
-        player:getCharVar("TOAUM38_STARTDAY") ~= VanadielDayOfTheYear() and
-        not player:needToZone()
-    then
-        cs = 3220
-    end
-
     return cs
 end
 
@@ -63,16 +54,13 @@ zone_object.onRegionEnter = function(player, region)
                 player:startEvent(526)
             end
         end,
+
         [2] = function (x) -- CS for Vanishing Act Quest
             if (player:getCharVar("vanishingactCS") == 3) then
                 player:startEvent(44)
             end
         end,
-        [3] = function (x) -- TOAU Missions
-            if (toauMission == xi.mission.id.toau.PATH_OF_BLOOD) then
-                player:startEvent(3131, 1, 1, 1, 1, 1, 1, 1, 1)
-            end
-        end,
+
         [5] = function (x) -- AH mission
             if (toauMission == xi.mission.id.toau.STIRRINGS_OF_WAR and player:getCharVar("AhtUrganStatus") == 1) then
                 player:startEvent(3136, 0, 0, 0, 0, 0, 0, 0, 0, 0)
@@ -117,14 +105,6 @@ zone_object.onEventFinish = function(player, csid, option)
     elseif (csid == 526) then
         player:setCharVar("gotitallCS", 6)
         player:setPos(60, 0, -71, 38)
-    elseif (csid == 3131) then
-        player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.PATH_OF_BLOOD)
-        player:needToZone(true)
-        player:setCharVar("TOAUM38_STARTDAY", VanadielDayOfTheYear())
-        player:addMission(xi.mission.log_id.TOAU, xi.mission.id.toau.STIRRINGS_OF_WAR)
-    elseif (csid == 3220) then
-        player:setCharVar("TOAUM38_STARTDAY", 0)
-        player:setCharVar("AhtUrganStatus", 1)
     elseif (csid == 3136) then
         player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.STIRRINGS_OF_WAR)
         player:setCharVar("AhtUrganStatus", 0)
