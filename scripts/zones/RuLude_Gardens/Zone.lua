@@ -1,7 +1,5 @@
 -----------------------------------
---
 -- Zone: RuLude_Gardens (243)
---
 -----------------------------------
 local ID = require("scripts/zones/RuLude_Gardens/IDs")
 require("scripts/globals/conquest")
