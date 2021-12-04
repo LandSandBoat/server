@@ -1217,3 +1217,36 @@ xi.quest.id =
         BOOST_KAMIHR_DRIFTS             = 95,
     }
 }
+
+local function getVarPrefix(areaId, questId)
+    return string.format("Quest[%d][%d]", areaId, questId)
+end
+
+-- Interaction Framework Helper Functions
+xi.quest.addVar = function(player, areaId, questId, name, value)
+    return player:addCharVar(getVarPrefix(areaId, questId) .. name, value)
+end
+
+xi.quest.getVar = function(player, areaId, questId, name)
+    return player:getVar(getVarPrefix(areaId, questId) .. name)
+end
+
+xi.quest.setVar = function(player, areaId, questId, name, value)
+    return player:setVar(getVarPrefix(areaId, questId) .. name, value)
+end
+
+xi.quest.getLocalVar = function(player, areaId, questId, name)
+    return player:getLocalVar(getVarPrefix(areaId, questId) .. name)
+end
+
+xi.quest.setLocalVar = function(player, areaId, questId, name, value)
+    return player:setLocalVar(getVarPrefix(areaId, questId) .. name, value)
+end
+
+xi.quest.getMustZone = function(player, areaId, questId, name)
+    return player:getLocalVar(getVarPrefix(areaId, questId) .. "mustZone") == 1 and true or false
+end
+
+xi.quest.setMustZone = function(player, areaId, questId, name, value)
+    player:setLocalVar(getVarPrefix(areaId, questId) .. "mustZone", 1)
+end

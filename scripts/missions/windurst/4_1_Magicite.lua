@@ -47,7 +47,7 @@ mission.sections =
             ['Pakh_Jatalfih'] =
             {
                 onTrigger = function(player, npc)
-                    if getMissionRankPoints(player, xi.mission.id.windurst.MAGICITE) then
+                    if xi.mission.getMissionRankPoints(player, xi.mission.id.windurst.MAGICITE) then
                         return mission:progressEvent(50)
                     else
                         return mission:progressEvent(54)

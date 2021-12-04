@@ -47,7 +47,7 @@ mission.sections =
             ['Goggehn'] =
             {
                 onTrigger = function(player, npc)
-                    if getMissionRankPoints(player, xi.mission.id.bastok.MAGICITE) then
+                    if xi.mission.getMissionRankPoints(player, xi.mission.id.bastok.MAGICITE) then
                         return mission:progressEvent(0)
                     else
                         return mission:progressEvent(4)
