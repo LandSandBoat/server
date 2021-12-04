@@ -483,9 +483,33 @@ namespace spell
                 PSpellList[static_cast<uint16>(PSpell->getID())] = PSpell;
 
                 auto filename = fmt::format("./scripts/globals/spells/{}.lua", PSpell->getName());
-                if (PSpell->getSpellGroup() == SPELLGROUP_BLUE)
+                if (PSpell->getSpellGroup() == SPELLGROUP_WHITE)
                 {
-                    filename = fmt::format("./scripts/globals/spells/bluemagic/{}.lua", PSpell->getName());
+                    filename = fmt::format("./scripts/globals/spells/white/{}.lua", PSpell->getName());
+                }
+                else if (PSpell->getSpellGroup() == SPELLGROUP_BLACK)
+                {
+                    filename = fmt::format("./scripts/globals/spells/black/{}.lua", PSpell->getName());
+                }
+                else if (PSpell->getSpellGroup() == SPELLGROUP_SONG)
+                {
+                    filename = fmt::format("./scripts/globals/spells/songs/{}.lua", PSpell->getName());
+                }
+                else if (PSpell->getSpellGroup() == SPELLGROUP_NINJUTSU)
+                {
+                    filename = fmt::format("./scripts/globals/spells/ninjutsu/{}.lua", PSpell->getName());
+                }
+                else if (PSpell->getSpellGroup() == SPELLGROUP_SUMMONING)
+                {
+                    filename = fmt::format("./scripts/globals/spells/summoning/{}.lua", PSpell->getName());
+                }
+                else if (PSpell->getSpellGroup() == SPELLGROUP_BLUE)
+                {
+                    filename = fmt::format("./scripts/globals/spells/blue/{}.lua", PSpell->getName());
+                }
+                else if (PSpell->getSpellGroup() == SPELLGROUP_GEOMANCY)
+                {
+                    filename = fmt::format("./scripts/globals/spells/geomancy/{}.lua", PSpell->getName());
                 }
                 else if (PSpell->getSpellGroup() == SPELLGROUP_TRUST)
                 {

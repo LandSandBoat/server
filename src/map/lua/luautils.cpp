@@ -534,14 +534,14 @@ namespace luautils
 
         if (PSpell->getSpellGroup() == SPELLGROUP_WHITE)
         {
-            if (auto cached_func = lua["xi"]["globals"]["spells"]["whitemagic"][name][funcName]; cached_func.valid())
+            if (auto cached_func = lua["xi"]["globals"]["spells"]["white"][name][funcName]; cached_func.valid())
             {
                 return cached_func;
             }
         }
         else if (PSpell->getSpellGroup() == SPELLGROUP_BLACK)
         {
-            if (auto cached_func = lua["xi"]["globals"]["spells"]["blackmagic"][name][funcName]; cached_func.valid())
+            if (auto cached_func = lua["xi"]["globals"]["spells"]["black"][name][funcName]; cached_func.valid())
             {
                 return cached_func;
             }
@@ -569,7 +569,7 @@ namespace luautils
         }
         else if (PSpell->getSpellGroup() == SPELLGROUP_BLUE)
         {
-            if (auto cached_func = lua["xi"]["globals"]["spells"]["bluemagic"][name][funcName]; cached_func.valid())
+            if (auto cached_func = lua["xi"]["globals"]["spells"]["blue"][name][funcName]; cached_func.valid())
             {
                 return cached_func;
             }
