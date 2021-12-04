@@ -1,10 +1,10 @@
 -----------------------------------
--- Area: Mount Zhayolm
+-- Area: Caedarva Mire
 --  NPC: Runic Portal
--- Mount Zhayolm Teleporter Back to Aht Urhgan Whitegate
--- !pos 688.994 -23.960 351.496 61
+-- Caedarva Mire (Dvucca) Teleporter Back to Aht Urhgan Whitegate
+-- !pos -264 -6 -28 79
 -----------------------------------
-local ID = require("scripts/zones/Mount_Zhayolm/IDs")
+local ID = require("scripts/zones/Caedarva_Mire/IDs")
 -----------------------------------
 require("scripts/globals/besieged")
 require('scripts/globals/keyitems')
@@ -18,10 +18,10 @@ end
 
 entity.onTrigger = function(player, npc)
     if player:getCurrentMission(TOAU) >= xi.mission.id.toau.IMMORTAL_SENTRIES and not player:hasKeyItem(xi.ki.SUPPLIES_PACKAGE) then
-        if xi.besieged.hasRunicPortal(player, xi.teleport.runic_portal.HALVUNG) then
-            player:startEvent(109)
+        if xi.besieged.hasRunicPortal(player, xi.teleport.runic_portal.DVUCCA) then
+            player:startEvent(134)
         else
-            player:startEvent(111)
+            player:startEvent(125)
         end
     else
         player:messageSpecial(ID.text.RESPONSE)
@@ -33,8 +33,8 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if option == 1 then
-        if csid == 111 then
-            xi.besieged.addRunicPortal(player, xi.teleport.runic_portal.HALVUNG)
+        if csid == 125 then
+            xi.besieged.addRunicPortal(player, xi.teleport.runic_portal.DVUCCA)
         end
         xi.teleport.toChamberOfPassage(player)
     end
