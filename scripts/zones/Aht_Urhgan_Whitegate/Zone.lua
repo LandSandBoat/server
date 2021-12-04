@@ -45,8 +45,6 @@ zone_object.afterZoneIn = function(player)
 end
 
 zone_object.onRegionEnter = function(player, region)
-    local toauMission = player:getCurrentMission(TOAU)
-
     switch (region:GetRegionID()): caseof
     {
         [1] = function (x)  -- Cutscene for Got It All quest.
@@ -62,9 +60,7 @@ zone_object.onRegionEnter = function(player, region)
         end,
 
         [5] = function (x) -- AH mission
-            if (toauMission == xi.mission.id.toau.STIRRINGS_OF_WAR and player:getCharVar("AhtUrganStatus") == 1) then
-                player:startEvent(3136, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-            elseif
+            if
                 player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.NAVIGATING_THE_UNFRIENDLY_SEAS) == QUEST_COMPLETED and
                 player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.AGAINST_ALL_ODDS) == QUEST_AVAILABLE and
                 player:getMainJob() == xi.job.COR and
@@ -105,12 +101,6 @@ zone_object.onEventFinish = function(player, csid, option)
     elseif (csid == 526) then
         player:setCharVar("gotitallCS", 6)
         player:setPos(60, 0, -71, 38)
-    elseif (csid == 3136) then
-        player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.STIRRINGS_OF_WAR)
-        player:setCharVar("AhtUrganStatus", 0)
-        player:addKeyItem(xi.ki.ALLIED_COUNCIL_SUMMONS)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.ALLIED_COUNCIL_SUMMONS)
-        player:addMission(xi.mission.log_id.TOAU, xi.mission.id.toau.ALLIED_RUMBLINGS)
     elseif (csid == 797) then
         player:setCharVar("AgainstAllOdds", 1) -- Set For Corsair BCNM
         player:addQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.AGAINST_ALL_ODDS) -- Start of af 3 not completed yet
