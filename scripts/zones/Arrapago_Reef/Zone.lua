@@ -39,9 +39,7 @@ zone_object.afterZoneIn = function(player)
 end
 
 zone_object.onRegionEnter = function(player, region)
-    if player:getCurrentMission(TOAU) == xi.mission.id.toau.TESTING_THE_WATERS and player:hasKeyItem(xi.ki.EPHRAMADIAN_GOLD_COIN) then
-        player:startEvent(15)
-    elseif player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.AGAINST_ALL_ODDS) == QUEST_ACCEPTED and player:getCharVar("AgainstAllOdds") == 1 then
+    if player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.AGAINST_ALL_ODDS) == QUEST_ACCEPTED and player:getCharVar("AgainstAllOdds") == 1 then
         player:startEvent(237)
     end
 end
@@ -50,10 +48,7 @@ zone_object.onEventUpdate = function(player, csid, option)
 end
 
 zone_object.onEventFinish = function(player, csid, option)
-    if csid == 15 then
-        player:setCharVar("AhtUrganStatus", 1)
-        player:setPos(0, 0, 0, 0, 57)
-    elseif csid == 108 then -- enter instance: illrusi atoll
+    if csid == 108 then -- enter instance: illrusi atoll
         player:setPos(0, 0, 0, 0, 55)
     elseif csid == 222 then -- Enter instance: Black coffin
         player:setPos(0, 0, 0, 0, 60)
