@@ -103,8 +103,6 @@ zone_object.onRegionEnter = function(player, region)
             player:getCharVar("PromathiaStatus") == 2
         then
             player:startEvent(10051)
-        elseif player:getCurrentMission(TOAU) == xi.mission.id.toau.ALLIED_RUMBLINGS then
-            player:startEvent(10097)
         elseif player:getCurrentMission(COP) == xi.mission.id.cop.DAWN then
             if
                 player:getCharVar("COP_3-taru_story") == 2 and
@@ -179,11 +177,6 @@ zone_object.onEventFinish = function(player, csid, option)
         player:setCharVar("COP_louverance_story", 0)
         player:setCharVar("COP_tenzen_story", 0)
         player:setCharVar("COP_jabbos_story", 0)
-    elseif csid == 10097 then
-        player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.ALLIED_RUMBLINGS)
-        player:needToZone(true)
-        player:setCharVar("TOAUM40_STARTDAY", VanadielDayOfTheYear())
-        player:addMission(xi.mission.log_id.TOAU, xi.mission.id.toau.UNRAVELING_REASON)
     elseif csid == 142 then
         player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE)
     elseif csid == 143 then
