@@ -532,9 +532,23 @@ namespace luautils
 
         auto name = (const char*)PSpell->getName();
 
-        if (PSpell->getSpellGroup() == SPELLGROUP_BLUE)
+        if (PSpell->getSpellGroup() == SPELLGROUP_WHITE)
         {
-            if (auto cached_func = lua["xi"]["globals"]["spells"]["bluemagic"][name][funcName]; cached_func.valid())
+            if (auto cached_func = lua["xi"]["globals"]["spells"]["whitemagic"][name][funcName]; cached_func.valid())
+            {
+                return cached_func;
+            }
+        }
+        else if (PSpell->getSpellGroup() == SPELLGROUP_BLACK)
+        {
+            if (auto cached_func = lua["xi"]["globals"]["spells"]["blackmagic"][name][funcName]; cached_func.valid())
+            {
+                return cached_func;
+            }
+        }
+        else if (PSpell->getSpellGroup() == SPELLGROUP_SONG)
+        {
+            if (auto cached_func = lua["xi"]["globals"]["spells"]["songs"][name][funcName]; cached_func.valid())
             {
                 return cached_func;
             }
@@ -542,6 +556,27 @@ namespace luautils
         else if (PSpell->getSpellGroup() == SPELLGROUP_NINJUTSU)
         {
             if (auto cached_func = lua["xi"]["globals"]["spells"]["ninjutsu"][name][funcName]; cached_func.valid())
+            {
+                return cached_func;
+            }
+        }
+        else if (PSpell->getSpellGroup() == SPELLGROUP_SUMMONING)
+        {
+            if (auto cached_func = lua["xi"]["globals"]["spells"]["summoning"][name][funcName]; cached_func.valid())
+            {
+                return cached_func;
+            }
+        }
+        else if (PSpell->getSpellGroup() == SPELLGROUP_BLUE)
+        {
+            if (auto cached_func = lua["xi"]["globals"]["spells"]["bluemagic"][name][funcName]; cached_func.valid())
+            {
+                return cached_func;
+            }
+        }
+        else if (PSpell->getSpellGroup() == SPELLGROUP_GEOMANCY)
+        {
+            if (auto cached_func = lua["xi"]["globals"]["spells"]["geomancy"][name][funcName]; cached_func.valid())
             {
                 return cached_func;
             }
