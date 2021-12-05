@@ -2593,7 +2593,7 @@ INSERT INTO `synth_recipes` VALUES (34567,0,0,0,0,0,100,60,0,0,0,4099,4241,761,8
 -- INSERT INTO `synth_recipes` VALUES (34568,0,0,0,0,255,100,0,0,0,0,4099,4241,821,1764,1997,1998,2170,2275,2330,2340,14539,14540,14540,14540,1,1,1,1,'Kyudogi');
 INSERT INTO `synth_recipes` VALUES (34569,0,2011,0,0,0,100,0,0,0,0,4098,4240,2145,9147,9147,9147,9147,9147,9147,0,9172,9172,9172,9172,18,24,30,36,'Porxie Fletchings');
 INSERT INTO `synth_recipes` VALUES (34570,0,0,0,0,0,100,0,0,0,0,4099,4241,2199,3551,3551,0,0,0,0,0,11000,11001,11001,11001,1,1,1,1,'Swith Cape');
-INSERT INTO `synth_recipes` VALUES (34571,0,0,0,0,0,102,0,0,0,0,4099,4241,822,823,823,828,828,830,1769,1769,14436,14438,14438,14438,1,1,1,1,'Blessed Briault');
+INSERT INTO `synth_recipes` VALUES (34571,0,0,0,0,0,102,0,0,0,0,4099,4241,822,823,823,828,828,830,1769,1769,14436,14438,14438,14438,1,1,1,1,'Blessed Bliaut');
 INSERT INTO `synth_recipes` VALUES (35001,0,0,0,0,0,100,0,0,0,0,4099,4241,821,1132,13629,0,0,0,0,0,13656,13657,13657,13657,1,1,1,1,'Errant Cape');
 -- INSERT INTO `synth_recipes` VALUES (35002,0,0,0,0,0,101,255,0,0,0,4099,4241,826,826,8751,8751,8751,8976,8988,0,26885,26886,26886,26886,1,1,1,1,'Revealer\'s Tunic');
 INSERT INTO `synth_recipes` VALUES (35003,0,0,0,0,0,102,0,0,0,0,4099,4241,820,2010,2010,2340,2476,2751,0,0,10348,10349,10349,10349,1,1,1,1,'Chelona Trousers');
@@ -2683,31 +2683,31 @@ INSERT INTO `synth_recipes` VALUES (39930,1,0,0,0,0,9,0,0,0,0,4100,4242,12848,0,
 -- INSERT INTO `synth_recipes` VALUES (39933,1,0,0,0,0,255,0,0,0,0,4100,4242,14854,0,0,0,0,0,0,0,819,850,850,850,5,1,1,1,'Noct Gloves (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (39934,1,0,0,0,0,255,0,0,0,0,4100,4242,14360,0,0,0,0,0,0,0,816,816,816,816,3,3,3,3,'R.K. Cloak +1 (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (39935,1,0,0,0,0,255,0,0,0,0,4100,4242,13568,0,0,0,0,0,0,0,816,820,820,820,1,2,2,2,'Scarlet Ribbon (desynth)');
--- INSERT INTO `synth_recipes` VALUES (39936,1,0,0,0,0,255,0,0,0,0,4100,4242,14436,0,0,0,0,0,0,0,816,823,821,1769,1,1,3,1,'Blessed Briault (desynth)');
+INSERT INTO `synth_recipes` VALUES (39936,1,0,0,0,0,102,0,0,0,0,4100,4242,14436,0,0,0,0,0,0,0,816,823,821,1769,1,1,3,1,'Blessed Bliaut (desynth)');  -- 2021.12.04 Level based on synth. FFXIclopedia has Silver Thread where FFXIAH has Silk Thread
 INSERT INTO `synth_recipes` VALUES (39937,1,0,0,0,0,17,0,0,0,0,4100,4242,12977,0,0,0,0,0,0,0,850,818,818,818,1,7,9,9,'Cotton Gaiters (desynth)');
--- INSERT INTO `synth_recipes` VALUES (39938,1,0,0,0,0,255,0,0,0,0,4100,4242,13590,0,0,0,0,0,0,0,816,816,816,816,3,3,3,3,'Green Ribbon (desynth)');
--- INSERT INTO `synth_recipes` VALUES (39939,1,0,0,0,0,255,0,0,0,0,4100,4242,12503,0,0,0,0,0,0,0,816,932,932,932,3,1,1,1,'Silk Headband (desynth)');
--- INSERT INTO `synth_recipes` VALUES (39940,1,0,0,0,0,255,0,0,0,0,4100,4242,12847,0,0,0,0,0,0,0,816,855,1228,1228,1,1,4,4,'Yasha Hakama (desynth)');
--- INSERT INTO `synth_recipes` VALUES (39941,1,0,0,0,0,255,0,0,0,0,4100,4242,14078,0,0,0,0,0,0,0,816,823,821,821,3,1,3,3,'Errant Cuffs (desynth)');
--- INSERT INTO `synth_recipes` VALUES (39942,1,0,0,0,0,255,0,0,0,0,4100,4242,1639,0,0,0,0,0,0,0,818,816,823,823,6,1,1,1,'Corse Robe (desynth)');
+INSERT INTO `synth_recipes` VALUES (39938,1,0,0,0,0,62,0,0,0,0,4100,4242,13590,0,0,0,0,0,0,0,816,816,816,816,1,1,2,3,'Green Ribbon (desynth)');  -- 2021.12.04 All sites that show agree.
+INSERT INTO `synth_recipes` VALUES (39939,1,0,0,0,0,69,0,0,0,0,4100,4242,12503,0,0,0,0,0,0,0,816,816,816,932,1,2,3,1,'Silk Headband (desynth)');  -- 2021.12.04 All sites that show agree.
+INSERT INTO `synth_recipes` VALUES (39940,1,0,0,0,0,96,0,0,0,0,4100,4242,12847,0,0,0,0,0,0,0,816,816,855,1228,1,1,1,4,'Yasha Hakama (desynth)');  -- 202.12.04 All sites that show agree.
+INSERT INTO `synth_recipes` VALUES (39941,1,0,0,0,0,98,0,0,0,0,4100,4242,14078,0,0,0,0,0,0,0,816,823,821,821,3,1,3,3,'Errant Cuffs (desynth)');  -- 2021.12.04 Level based on synth.  All sites that show agree.  However, FFXIclopedia shows HQ3 to provide Turqoise while no others do.
+INSERT INTO `synth_recipes` VALUES (39942,1,0,0,0,0,49,0,0,0,0,4100,4242,1639,0,0,0,0,0,0,0,818,818,816,823,4,6,1,1,'Corse Robe (desynth)');  -- 2021.12.04 All sites that show agree.
 INSERT INTO `synth_recipes` VALUES (39943,1,0,0,0,0,92,0,0,0,0,4100,4242,14178,0,0,0,0,0,0,0,816,855,855,855,1,2,2,2,'Rasetsu Sune-Ate (desynth)'); -- BG yield data incomplete, but does not contradict
 INSERT INTO `synth_recipes` VALUES (39944,1,0,0,0,0,87,0,0,0,0,4100,4242,12605,0,0,0,0,0,0,0,816,821,821,821,1,1,1,1,'Noble\'s Tunic (desynth)'); -- BG Yield data incomplete, but does not contradict
--- INSERT INTO `synth_recipes` VALUES (39945,1,0,0,0,0,255,0,0,0,0,4100,4242,12468,0,0,0,0,0,0,0,816,842,842,842,3,1,1,1,'Green Beret (desynth)');
--- INSERT INTO `synth_recipes` VALUES (39946,1,0,0,0,0,255,0,0,0,0,4100,4242,13113,0,0,0,0,0,0,0,929,816,816,816,1,9,9,9,'Black Neckerchief (desynth)');
--- INSERT INTO `synth_recipes` VALUES (39947,1,0,0,0,0,255,0,0,0,0,4100,4242,12588,0,0,0,0,0,0,0,816,651,651,651,5,1,1,1,'Shinobi Gi (desynth)');
--- INSERT INTO `synth_recipes` VALUES (39948,1,0,0,0,0,255,0,0,0,0,4100,4242,13910,0,0,0,0,0,0,0,816,1228,1228,1228,4,12,12,12,'Roshi Jinpachi (desynth)');
--- INSERT INTO `synth_recipes` VALUES (39949,1,0,0,0,0,255,0,0,0,0,4100,4242,12867,0,0,0,0,0,0,0,820,820,820,820,3,3,3,3,'White Slacks (desynth)');
--- INSERT INTO `synth_recipes` VALUES (39950,1,0,0,0,0,255,0,0,0,0,4100,4242,13795,0,0,0,0,0,0,0,816,652,821,821,3,2,4,4,'Arhat\'s Gi (desynth)');
+INSERT INTO `synth_recipes` VALUES (39945,1,0,0,0,0,76,0,0,0,0,4100,4242,12468,0,0,0,0,0,0,0,816,816,816,842,1,2,3,1,'Green Beret (desynth)');  -- 2021.12.04 Level based on synth. FFXIclopedia shows HQ3 yields 3 where Allakhazam and FFXIAH shows 1.
+-- INSERT INTO `synth_recipes` VALUES (39946,1,0,0,0,0,255,0,0,0,0,4100,4242,13113,0,0,0,0,0,0,0,929,816,816,816,1,9,9,9,'Black Neckerchief (desynth)');  -- 2021.12.04 Materials seem to be correct.  No level info available.
+INSERT INTO `synth_recipes` VALUES (39947,1,0,0,0,0,80,0,0,0,0,4100,4242,12588,0,0,0,0,0,0,0,816,816,651,651,3,5,1,1,'Shinobi Gi (desynth)');  -- 2021.12.02 Level based on synth.  Sites that show agree on Materials.
+INSERT INTO `synth_recipes` VALUES (39948,1,0,0,0,0,94,0,0,0,0,4100,4242,13910,0,0,0,0,0,0,0,816,1228,1228,1228,4,10,12,12,'Roshi Jinpachi (desynth)');  -- 2021.12.02 Level based on synth.  Allakhazam and FFXIAH do not have Rainbow Thread at all when FFXIclopedia shows it as HQ3.
+INSERT INTO `synth_recipes` VALUES (39949,1,0,0,0,0,61,0,0,0,0,4100,4242,12867,0,0,0,0,0,0,0,820,820,820,820,3,3,3,3,'White Slacks (desynth)');  -- 2021.12.02 Sites that show agree.
+INSERT INTO `synth_recipes` VALUES (39950,1,0,0,0,0,89,0,0,0,0,4100,4242,13795,0,0,0,0,0,0,0,816,652,821,821,3,2,3,4,'Arhat\'s Gi (desynth)');  -- 2021.12.02 Based on synth.  Sites that show agree on Materials.
 INSERT INTO `synth_recipes` VALUES (39951,0,0,0,0,0,42,0,0,0,0,4099,4241,2296,2296,2296,0,0,0,0,0,2274,2274,2274,2274,1,1,1,1,'Mohbwa Cloth'); -- multi source agree as synth recipe, only 1 39CL
--- INSERT INTO `synth_recipes` VALUES (39952,1,0,0,0,0,255,0,0,0,0,4100,4242,2227,0,0,0,0,0,0,0,2304,2304,2304,2304,4,4,4,4,'Mamool Ja Collar (desynth)');
--- INSERT INTO `synth_recipes` VALUES (39953,1,0,0,0,0,255,0,0,0,0,4100,4242,1631,0,0,0,0,0,0,0,818,818,818,818,8,8,8,8,'Moblin Armor (desynth)');
--- INSERT INTO `synth_recipes` VALUES (39954,1,0,0,0,0,255,0,0,0,0,4100,4242,12476,0,0,0,0,0,0,0,822,816,816,816,1,6,6,6,'Silk Hat (desynth)');
--- INSERT INTO `synth_recipes` VALUES (39955,1,0,0,0,0,255,0,0,0,0,4100,4242,13577,0,0,0,0,0,0,0,816,822,820,820,2,1,4,4,'Black Cape (desynth)');
--- INSERT INTO `synth_recipes` VALUES (39956,1,0,0,0,0,87,0,0,0,0,4100,4242,14023,0,0,0,0,0,0,0,816,819,1228,1228,6,1,12,12,'Arhat\'s Tekko (desynth)'); -- BGWiki yield is VERY different
--- INSERT INTO `synth_recipes` VALUES (39957,1,0,0,0,0,255,0,0,0,0,4100,4242,15390,0,0,0,0,0,0,0,1713,831,831,831,3,1,1,1,'Femina Subligar (desynth)');
--- INSERT INTO `synth_recipes` VALUES (39958,1,0,0,0,0,255,0,0,0,0,4100,4242,15389,0,0,0,0,0,0,0,1713,831,831,831,3,1,1,1,'Vir Subligar (desynth)');
--- INSERT INTO `synth_recipes` VALUES (39959,1,0,0,0,0,255,0,0,0,0,4100,4242,12859,0,0,0,0,0,0,0,820,650,822,816,7,1,1,2,'Velvet Slops (desynth)');
--- INSERT INTO `synth_recipes` VALUES (39960,1,0,0,0,0,255,0,0,0,0,4100,4242,14325,0,0,0,0,0,0,0,820,820,820,820,1,1,1,1,'Seer\'s Slacks (desynth)');
+INSERT INTO `synth_recipes` VALUES (39952,1,0,0,0,0,87,0,0,0,0,4100,4242,2227,0,0,0,0,0,0,0,2304,2304,2304,2304,1,2,3,4,'Mamool Ja Collar (desynth)');  -- 2021.12.02 FFXIclopedia shows 85 and JPWiki shows 87.  Agree on Materials.
+INSERT INTO `synth_recipes` VALUES (39953,1,0,0,0,0,9,0,0,0,0,4100,4242,1631,0,0,0,0,0,0,0,818,818,818,818,2,4,6,8,'Moblin Armor (desynth)');  -- 2021.12.02 FFXIclopedia and JPWiki agree.
+INSERT INTO `synth_recipes` VALUES (39954,1,0,0,0,0,65,0,0,0,0,4100,4242,12476,0,0,0,0,0,0,0,822,816,816,816,1,6,6,6,'Silk Hat (desynth)');  -- 2021.12.02 Level based on synth.  FFXIclopedia has Wool Thread and Gold Nugget has HQ2 and 3.  Allakhazam and FFXIAH are only other sites that show and neither have these.
+INSERT INTO `synth_recipes` VALUES (39955,1,0,0,0,0,54,0,0,0,0,4100,4242,13577,0,0,0,0,0,0,0,816,822,820,820,2,1,3,4,'Black Cape (desynth)');  -- 2021.12.02 Based on synth.  Sites that show agree on materials.
+INSERT INTO `synth_recipes` VALUES (39956,1,0,0,0,0,87,0,0,0,0,4100,4242,14023,0,0,0,0,0,0,0,816,819,1228,1228,6,1,10,12,'Arhat\'s Tekko (desynth)');  -- 2021.12.02 Based on synth.  FFXIclopedia shows 6 linen thread when Allakhazam and FFXIAH show 1.
+-- INSERT INTO `synth_recipes` VALUES (39957,1,0,0,0,0,255,0,0,0,0,4100,4242,15390,0,0,0,0,0,0,0,1713,831,831,831,3,1,1,1,'Femina Subligar (desynth)');  -- 2021.12.02 no data
+-- INSERT INTO `synth_recipes` VALUES (39958,1,0,0,0,0,255,0,0,0,0,4100,4242,15389,0,0,0,0,0,0,0,1713,831,831,831,3,1,1,1,'Vir Subligar (desynth)');  -- 2021.12.02 no data
+INSERT INTO `synth_recipes` VALUES (39959,1,0,0,0,0,57,0,0,0,0,4100,4242,12859,0,0,0,0,0,0,0,820,650,822,816,7,1,1,2,'Velvet Slops (desynth)');  -- 2021.11.21 Based on synth.  Sites that show agree on materials.
+INSERT INTO `synth_recipes` VALUES (39960,1,0,0,0,0,25,0,0,0,0,4100,4242,14325,0,0,0,0,0,0,0,818,819,820,850,4,3,1,1,'Seer\'s Slacks (desynth)');  -- 2021.11.21 Based on synth.  Materials from FFXIclopedia
 INSERT INTO `synth_recipes` VALUES (39961,0,0,0,31,0,22,74,0,0,0,4099,4241,662,793,793,819,820,1163,1163,1865,15200,15200,15200,15200,1,1,1,1,'Orc Helm');  -- 2021.11.17 FFXIclopedia, BGWiki, JPWiki
 INSERT INTO `synth_recipes` VALUES (40001,0,0,0,0,0,0,1,0,0,0,4103,4245,917,2776,0,0,0,0,0,0,2773,2773,2773,2773,1,1,1,1,'Fine Parchment');
 INSERT INTO `synth_recipes` VALUES (40002,0,2018,0,0,0,0,2,0,0,0,4103,4245,505,505,505,635,635,635,2129,4509,850,850,850,850,3,3,3,3,'Sheep Leather');
