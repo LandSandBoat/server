@@ -12,6 +12,7 @@ end
 zone_object.onInstanceZoneIn = function(player, instance)
     if player:getInstance() == nil then
         player:setPos(0, 0, 0, 0, 72)
+        return
     end
 
     local pos = player:getPos()

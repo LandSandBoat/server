@@ -21,10 +21,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if (player:getCurrentMission(TOAU) == xi.mission.id.toau.FANGS_OF_THE_LION) then
-        player:startEvent(3138, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-    elseif (player:getCurrentMission(TOAU) == xi.mission.id.toau.NASHMEIRAS_PLEA and player:hasKeyItem(xi.ki.MYTHRIL_MIRROR) == false) then
-        player:startEvent(3149, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    if (player:getCurrentMission(TOAU) == xi.mission.id.toau.NASHMEIRAS_PLEA and player:hasKeyItem(xi.ki.MYTHRIL_MIRROR) == false) then
+        player:startEvent(3149, 0, 0, 0, 0, 0, 0, 0, 0, 0) -- NOTE: This event ID is used when having the mirror as well
     elseif (player:getCurrentMission(TOAU) == xi.mission.id.toau.RAGNAROK) then
         player:startEvent(3139, 0, 0, 0, 0, 0, 0, 0, 0, 0)
     elseif (player:getCurrentMission(TOAU) == xi.mission.id.toau.IMPERIAL_CORONATION) then
@@ -45,13 +43,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 3138) then
-        player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.FANGS_OF_THE_LION)
-        player:addKeyItem(xi.ki.MYTHRIL_MIRROR)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MYTHRIL_MIRROR)
-        player:setTitle(xi.title.NASHMEIRAS_LOYALIST)
-        player:addMission(xi.mission.log_id.TOAU, xi.mission.id.toau.NASHMEIRAS_PLEA)
-    elseif (csid == 3139) then
+    if (csid == 3139) then
         player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.RAGNAROK)
         player:addMission(xi.mission.log_id.TOAU, xi.mission.id.toau.IMPERIAL_CORONATION)
     elseif (csid == 3144) then
