@@ -1,7 +1,5 @@
 -----------------------------------
---
 -- Zone: Nyzul_Isle
---
 -----------------------------------
 local ID = require("scripts/zones/Nyzul_Isle/IDs")
 require("scripts/globals/missions")
@@ -12,11 +10,8 @@ zone_object.onInitialize = function(zone)
 end
 
 zone_object.onInstanceZoneIn = function(player, instance)
-    local cs = -1
-
     if player:getInstance() == nil then
         player:setPos(0, 0, 0, 0, 72)
-        return cs
     end
 
     local pos = player:getPos()
@@ -24,12 +19,17 @@ zone_object.onInstanceZoneIn = function(player, instance)
         local entrypos = instance:getEntryPos()
         player:setPos(entrypos.x, entrypos.y, entrypos.z, entrypos.rot)
     end
+end
 
+-- NOTE: This is called after onInstanceZoneIn for the fade in cutscene.  onInstanceZoneIn
+-- does not consider event returns.
+zone_object.onZoneIn = function(player, prevZone)
+    local cs = -1
+
+    -- This should most likely be tied to instance and not mission, not migrating this to mission script
     if player:getCurrentMission(TOAU) == xi.mission.id.toau.PATH_OF_DARKNESS then
         cs = 51
     end
-
-    player:addTempItem(5348)
 
     return cs
 end

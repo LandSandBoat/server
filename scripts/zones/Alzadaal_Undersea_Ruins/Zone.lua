@@ -1,7 +1,5 @@
 -----------------------------------
---
 -- Zone: Alzadaal_Undersea_Ruins (72)
---
 -----------------------------------
 local ID = require("scripts/zones/Alzadaal_Undersea_Ruins/IDs")
 require("scripts/globals/missions")
@@ -50,9 +48,7 @@ zone_object.onZoneIn = function(player, prevZone)
         end
     end
 
-    if player:getCurrentMission(TOAU) == xi.mission.id.toau.PATH_OF_DARKNESS and player:getCharVar("AhtUrganStatus") == 2 then
-        cs = 7
-    elseif player:getCurrentMission(TOAU) == xi.mission.id.toau.NASHMEIRAS_PLEA and player:getCharVar("AhtUrganStatus") == 2 then
+    if player:getCurrentMission(TOAU) == xi.mission.id.toau.NASHMEIRAS_PLEA and player:getCharVar("AhtUrganStatus") == 2 then
         cs = 10
     end
 
@@ -170,11 +166,6 @@ zone_object.onEventFinish = function(player, csid, option)
         player:setCharVar("TransformationsProgress", 3)
     elseif csid == 3 then
         player:setCharVar("TransformationsProgress", 4)
-    elseif csid == 7 then
-        player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.PATH_OF_DARKNESS)
-        player:setTitle(xi.title.NAJAS_COMRADE_IN_ARMS)
-        player:setCharVar("AhtUrganStatus", 0)
-        player:addMission(xi.mission.log_id.TOAU, xi.mission.id.toau.FANGS_OF_THE_LION)
     elseif csid == 10 then
         player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.NASHMEIRAS_PLEA)
         player:setTitle(xi.title.PREVENTER_OF_RAGNAROK)

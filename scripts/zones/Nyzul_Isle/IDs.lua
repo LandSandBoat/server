@@ -25,6 +25,7 @@ zones[xi.zone.NYZUL_ISLE] =
         MISSION_FAILED             = 7305, -- The mission has failed. Leaving area.
         TIME_REMAINING_MINUTES     = 7309, -- ime remaining: <number> [minute/minutes] (Earth time).
         TIME_REMAINING_SECONDS     = 7310, -- ime remaining: <number> [second/seconds] (Earth time).
+        FADES_INTO_NOTHINGNESS     = 7311, -- The <keyitem> fades into nothingness...
         PARTY_FALLEN               = 7312, -- ll party members have fallen in battle. Mission failure in <number> [minute/minutes].
         FORMATION_GELINCIK         = 7504, -- Formation Gelincik! Eliminate the intruders!
         SURRENDER                  = 7505, -- You would be wise to surrender. A fate worse than death awaits those who anger an Immortal...

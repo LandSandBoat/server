@@ -30,8 +30,8 @@ mission.sections =
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =
         {
-            ['Naja_Salaheem'] = mission:event(3148, { text_table = 0 }),
-            ['Rodin-Comidin'] = mission:event(3137, { text_table = 0 }),
+            ['Naja_Salaheem'] = mission:event(3148, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+            ['Rodin-Comidin'] = mission:event(3137, 0, 0, 0, 0, 0, 0, 0, 0, 0),
 
             onEventFinish =
             {

@@ -23,7 +23,7 @@ instance_object.afterInstanceRegister = function(player)
     local instance = player:getInstance()
 
     if player:hasKeyItem(xi.ki.PERIQIA_ASSAULT_AREA_ENTRY_PERMIT) then
-        player:messageSpecial(ID.text.KI_FADES, xi.ki.PERIQIA_ASSAULT_AREA_ENTRY_PERMIT)
+        player:messageSpecial(ID.text.FADES_INTO_NOTHINGNESS, xi.ki.PERIQIA_ASSAULT_AREA_ENTRY_PERMIT)
         player:delKeyItem(xi.ki.PERIQIA_ASSAULT_AREA_ENTRY_PERMIT)
     end
 
