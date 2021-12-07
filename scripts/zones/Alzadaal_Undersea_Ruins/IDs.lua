@@ -25,6 +25,7 @@ zones[xi.zone.ALZADAAL_UNDERSEA_RUINS] =
         CANNOT_LEAVE            = 7224, -- You cannot leave this area while in the possession of <keyitem>.
         RESPONSE                = 7233, -- There is no response...
         DEVICE_MALFUNCTIONING   = 7249, -- The device appears to be malfunctioning...
+        COMMENCING_TRANSPORT    = 7442, -- Commencing transport to [/Leujaoam Sanctum/the Mamool Ja Training Grounds/Lebros Cavern/Periqia/Ilrusi Atoll/Nyzul Isle/The Ashu Talif/Zhayolm Remnants/Arrapago Remnants/Bhaflau Remnants/Silver Sea Remnants]!
         CANNOT_ENTER            = 7445, -- You cannot enter at this time. Please wait a while before trying again.
         AREA_FULL               = 7446, -- This area is fully occupied. You were unable to enter.
         MEMBER_NO_REQS          = 7450, -- Not all of your party members meet the requirements for this objective. Unable to enter area.

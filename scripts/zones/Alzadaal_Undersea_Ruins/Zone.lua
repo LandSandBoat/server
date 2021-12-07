@@ -48,10 +48,6 @@ zone_object.onZoneIn = function(player, prevZone)
         end
     end
 
-    if player:getCurrentMission(TOAU) == xi.mission.id.toau.NASHMEIRAS_PLEA and player:getCharVar("AhtUrganStatus") == 2 then
-        cs = 10
-    end
-
     return cs
 end
 
@@ -166,11 +162,6 @@ zone_object.onEventFinish = function(player, csid, option)
         player:setCharVar("TransformationsProgress", 3)
     elseif csid == 3 then
         player:setCharVar("TransformationsProgress", 4)
-    elseif csid == 10 then
-        player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.NASHMEIRAS_PLEA)
-        player:setTitle(xi.title.PREVENTER_OF_RAGNAROK)
-        player:setCharVar("AhtUrganStatus", 0)
-        player:addMission(xi.mission.log_id.TOAU, xi.mission.id.toau.RAGNAROK)
     elseif csid == 116 and player:getLocalVar("SalvageArrapago") == 1 then -- enter Salvage Silver Sea zone
         player:setPos(0, 0, 0, 0, 74)
     elseif csid == 116 and player:getLocalVar("SalvageSilverSea") == 1 then -- enter Salvage Arrapago zone

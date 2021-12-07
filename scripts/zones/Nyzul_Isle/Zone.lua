@@ -27,10 +27,8 @@ end
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    -- This should most likely be tied to instance and not mission, not migrating this to mission script
-    if player:getCurrentMission(TOAU) == xi.mission.id.toau.PATH_OF_DARKNESS then
-        cs = 51
-    end
+    -- This event is common to all zone in, and is fade from black
+    cs = 51
 
     return cs
 end

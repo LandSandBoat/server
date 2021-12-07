@@ -4,11 +4,6 @@
 -- Type: Standard NPC
 -- !pos 22.700 -8.804 -45.591 50
 -----------------------------------
--- NOTE
-
--- Naja Salaheem interactions require the 9th argument in events set to 0.
--- This is because Aht Uhrgan Whitegate uses 2 different dats.
------------------------------------
 local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
 require("scripts/globals/missions")
 require("scripts/globals/keyitems")
@@ -21,9 +16,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if (player:getCurrentMission(TOAU) == xi.mission.id.toau.NASHMEIRAS_PLEA and player:hasKeyItem(xi.ki.MYTHRIL_MIRROR) == false) then
-        player:startEvent(3149, 0, 0, 0, 0, 0, 0, 0, 0, 0) -- NOTE: This event ID is used when having the mirror as well
-    elseif (player:getCurrentMission(TOAU) == xi.mission.id.toau.RAGNAROK) then
+    if (player:getCurrentMission(TOAU) == xi.mission.id.toau.RAGNAROK) then
         player:startEvent(3139, 0, 0, 0, 0, 0, 0, 0, 0, 0)
     elseif (player:getCurrentMission(TOAU) == xi.mission.id.toau.IMPERIAL_CORONATION) then
         player:startEvent(3150, 0, 0, 0, 0, 0, 0, 0, 0, 0)
@@ -33,10 +26,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(3154, 0, 0, 0, 0, 0, 0, 0, 0, 0)
     else
         player:startEvent(3003, 1, 0, 0, 0, 0, 0, 0, 1, 0) -- go back to work
-
-        -- player:messageSpecial(0)--  need to find correct normal chat CS..
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)
@@ -51,9 +41,6 @@ entity.onEventFinish = function(player, csid, option)
         player:addItem(16070)
         player:messageSpecial(ID.text.ITEM_OBTAINED, 16070)
         player:addMission(xi.mission.log_id.TOAU, xi.mission.id.toau.ETERNAL_MERCENARY)
-    elseif (csid == 3149) then
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MYTHRIL_MIRROR)
-        player:addKeyItem(xi.ki.MYTHRIL_MIRROR)
     end
 end
 
