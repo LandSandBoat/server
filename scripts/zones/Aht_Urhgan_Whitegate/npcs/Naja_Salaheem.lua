@@ -16,9 +16,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if (player:getCurrentMission(TOAU) == xi.mission.id.toau.RAGNAROK) then
-        player:startEvent(3139, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-    elseif (player:getCurrentMission(TOAU) == xi.mission.id.toau.IMPERIAL_CORONATION) then
+    if (player:getCurrentMission(TOAU) == xi.mission.id.toau.IMPERIAL_CORONATION) then
         player:startEvent(3150, 0, 0, 0, 0, 0, 0, 0, 0, 0)
     elseif (player:getCurrentMission(TOAU) == xi.mission.id.toau.THE_EMPRESS_CROWNED) then
         player:startEvent(3144, 0, 0, 0, 0, 0, 0, 0, 0, 0)
@@ -33,10 +31,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 3139) then
-        player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.RAGNAROK)
-        player:addMission(xi.mission.log_id.TOAU, xi.mission.id.toau.IMPERIAL_CORONATION)
-    elseif (csid == 3144) then
+    if (csid == 3144) then
         player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.THE_EMPRESS_CROWNED)
         player:addItem(16070)
         player:messageSpecial(ID.text.ITEM_OBTAINED, 16070)
