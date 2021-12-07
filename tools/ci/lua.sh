@@ -94,9 +94,6 @@ global_objects=(
 
     GetMissionLogInfo
     GetQuestLogInfo
-    ORIGINAL_MISSION_OFFSET
-    getMissionRankPoints
-    getMissionMask
 
     SANDORIA
     BASTOK

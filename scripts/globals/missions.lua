@@ -683,7 +683,7 @@ local function rankPointMath(rank)
     return 0.372*rank^2 - 1.62*rank + 6.2
 end
 
-function getMissionRankPoints(player, missionID)
+xi.mission.getMissionRankPoints = function(player, missionID)
     local crystals = 0
 
     if     missionID ==  3 then crystals = 9
@@ -747,7 +747,7 @@ local function getRequiredRank(missionId)
     return requiredRank
 end
 
-function getMissionMask(player)
+xi.mission.getMissionMask = function(player)
     local nation = player:getNation()
     local rank = player:getRank(nation)
 
@@ -766,7 +766,7 @@ function getMissionMask(player)
                 rank > getRequiredRank(missionId) or
                 (
                     rank == getRequiredRank(missionId) and
-                    getMissionRankPoints(player, missionId)
+                    xi.mission.getMissionRankPoints(player, missionId)
                 )
             )
             and
@@ -806,4 +806,37 @@ function getMissionMask(player)
     end
 
     return missionMask, repeatMission
+end
+
+-- Interaction Framework Helper Functions
+local function getVarPrefix(areaId, questId)
+    return string.format("Mission[%d][%d]", areaId, questId)
+end
+
+xi.mission.addVar = function(player, areaId, questId, name, value)
+    return player:addCharVar(getVarPrefix(areaId, questId) .. name, value)
+end
+
+xi.mission.getVar = function(player, areaId, questId, name)
+    return player:getVar(getVarPrefix(areaId, questId) .. name)
+end
+
+xi.mission.setVar = function(player, areaId, questId, name, value)
+    return player:setVar(getVarPrefix(areaId, questId) .. name, value)
+end
+
+xi.mission.getLocalVar = function(player, areaId, questId, name)
+    return player:getLocalVar(getVarPrefix(areaId, questId) .. name)
+end
+
+xi.mission.setLocalVar = function(player, areaId, questId, name, value)
+    return player:setLocalVar(getVarPrefix(areaId, questId) .. name, value)
+end
+
+xi.mission.getMustZone = function(player, areaId, questId, name)
+    return player:getLocalVar(getVarPrefix(areaId, questId) .. "mustZone") == 1 and true or false
+end
+
+xi.mission.setMustZone = function(player, areaId, questId, name, value)
+    player:setLocalVar(getVarPrefix(areaId, questId) .. "mustZone", 1)
 end
