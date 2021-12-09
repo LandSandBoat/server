@@ -1845,6 +1845,9 @@ namespace luautils
     {
         TracyZoneScoped;
 
+        EventPrep* previousPrep = PChar->eventPreparation;
+        PChar->eventPreparation = PChar->currentEvent;
+
         auto onEventUpdate = LoadEventScript(PChar, "onEventUpdate");
         if (!onEventUpdate.valid())
         {
@@ -1866,6 +1869,8 @@ namespace luautils
             return -1;
         }
 
+        PChar->eventPreparation = previousPrep;
+
         return func_result.get_type() == sol::type::number ? func_result.get<int32>() : 1;
     }
 
@@ -1877,6 +1882,9 @@ namespace luautils
     int32 OnEventUpdate(CCharEntity* PChar, uint16 eventID, uint32 result)
     {
         TracyZoneScoped;
+
+        EventPrep* previousPrep = PChar->eventPreparation;
+        PChar->eventPreparation = PChar->currentEvent;
 
         auto onEventUpdateFramework = lua["xi"]["globals"]["interaction"]["interaction_global"]["onEventUpdate"];
         auto onEventUpdate = LoadEventScript(PChar, "onEventUpdate");
@@ -1895,12 +1903,17 @@ namespace luautils
             return -1;
         }
 
+        PChar->eventPreparation = previousPrep;
+
         return func_result.get_type() == sol::type::number ? func_result.get<int32>() : 1;
     }
 
     int32 OnEventUpdate(CCharEntity* PChar, std::string const& updateString)
     {
         TracyZoneScoped;
+
+        EventPrep* previousPrep = PChar->eventPreparation;
+        PChar->eventPreparation = PChar->currentEvent;
 
         auto onEventUpdateFramework = lua["xi"]["globals"]["interaction"]["interaction_global"]["onEventUpdate"];
         auto onEventUpdate = LoadEventScript(PChar, "onEventUpdate");
@@ -1919,6 +1932,8 @@ namespace luautils
             return -1;
         }
 
+        PChar->eventPreparation = previousPrep;
+
         return 0;
     }
 
@@ -1931,6 +1946,9 @@ namespace luautils
     int32 OnEventFinish(CCharEntity* PChar, uint16 eventID, uint32 result)
     {
         TracyZoneScoped;
+
+        EventPrep* previousPrep = PChar->eventPreparation;
+        PChar->eventPreparation = PChar->currentEvent;
 
         auto onEventFinishFramework = lua["xi"]["globals"]["interaction"]["interaction_global"]["onEventFinish"];
         auto onEventFinish = LoadEventScript(PChar, "onEventFinish");
@@ -1953,6 +1971,8 @@ namespace luautils
             ShowError("luautils::onEventFinish %s", err.what());
             return -1;
         }
+
+        PChar->eventPreparation = previousPrep;
 
         if (PChar->currentEvent->scriptFile.find("/bcnms/") > 0 && PChar->health.hp <= 0)
         { // for some reason the event doesnt enforce death afterwards
