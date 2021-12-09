@@ -42,7 +42,7 @@ mission.sections =
                 player:getNation() == mission.areaId and
                 player:getRank(player:getNation()) == 7 and
                 player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.PRESTIGE_OF_THE_PAPSQUE) and
-                getMissionRankPoints(player, mission.missionId)
+                xi.mission.getMissionRankPoints(player, mission.missionId)
         end,
 
         [xi.zone.NORTHERN_SAN_DORIA] =
