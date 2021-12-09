@@ -104,7 +104,7 @@ instance_object.onInstanceTimeUpdate = function(instance, elapsed)
 
                 -- Set new target
                 [1] = function()
-                    local _, newTarget = utils.randomEntry(chars)
+                    local newTarget = utils.randomEntry(chars)
                     if newTarget then
                         mob:addEnmity(newTarget, 0, 1800) -- Same VE as Provoke
                         mob:updateTarget()

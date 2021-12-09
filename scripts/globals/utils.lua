@@ -8,6 +8,11 @@ utils = {}
 utils.MAX_UINT32 = 4294967295
 utils.MAX_INT32  = 2147483647
 
+-- Used to keep the linter quiet
+function utils.unused(...)
+    return
+end
+
 -- Shuffles a table and returns a copy of it, not the original.
 function utils.shuffle(tab)
     local copy = {}
@@ -419,7 +424,7 @@ end
 
 -- Selects a random entry from a table, returns the index and the entry
 -- https://gist.github.com/jdev6/1e7ff30671edf88d03d4
-function utils.randomEntry(t)
+function utils.randomEntryIdx(t)
     local keys = {}
     local values = {}
     for key, value in pairs(t) do
@@ -428,6 +433,11 @@ function utils.randomEntry(t)
     end
     local index = keys[math.random(1, #keys)]
     return index, t[index]
+end
+
+function utils.randomEntry(t)
+    local _, item = utils.randomEntryIdx(t)
+    return item
 end
 
 -- Helper functions for Interaction Framework Quests
@@ -443,11 +453,6 @@ end
 function utils.setQuestVar(player, logId, questId, varName, value)
     local charVarName = Quest.getVarPrefix(logId, questId) .. varName
     player:setCharVar(charVarName, value)
-end
-
--- Used to keep the linter quiet
-function utils.unused(...)
-    return
 end
 
 -- utils.splitStr("a.b.c", ".") => {"a", "b", "c"}
