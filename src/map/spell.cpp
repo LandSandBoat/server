@@ -483,38 +483,58 @@ namespace spell
                 PSpellList[static_cast<uint16>(PSpell->getID())] = PSpell;
 
                 auto filename = fmt::format("./scripts/globals/spells/{}.lua", PSpell->getName());
-                if (PSpell->getSpellGroup() == SPELLGROUP_WHITE)
+
+                std::string switchKey = "";
+                switch (PSpell->getSpellGroup())
                 {
-                    filename = fmt::format("./scripts/globals/spells/white/{}.lua", PSpell->getName());
+                    case SPELLGROUP_WHITE:
+                    {
+                        switchKey = "white";
+                    }
+                    break;
+                    case SPELLGROUP_BLACK:
+                    {
+                        switchKey = "black";
+                    }
+                    break;
+                    case SPELLGROUP_SONG:
+                    {
+                        switchKey = "songs";
+                    }
+                    break;
+                    case SPELLGROUP_NINJUTSU:
+                    {
+                        switchKey = "ninjutsu";
+                    }
+                    break;
+                    case SPELLGROUP_SUMMONING:
+                    {
+                        switchKey = "summoning";
+                    }
+                    break;
+                    case SPELLGROUP_BLUE:
+                    {
+                        switchKey = "blue";
+                    }
+                    break;
+                    case SPELLGROUP_GEOMANCY:
+                    {
+                        switchKey = "geomancy";
+                    }
+                    break;
+                    case SPELLGROUP_TRUST:
+                    {
+                        switchKey = "trust";
+                    }
+                    break;
+                    default:
+                    {
+                        ShowError("spell::LoadSpellList: Spell %s doesnt have a SpellGroup", PSpell->getName());
+                    }
+                    break;
                 }
-                else if (PSpell->getSpellGroup() == SPELLGROUP_BLACK)
-                {
-                    filename = fmt::format("./scripts/globals/spells/black/{}.lua", PSpell->getName());
-                }
-                else if (PSpell->getSpellGroup() == SPELLGROUP_SONG)
-                {
-                    filename = fmt::format("./scripts/globals/spells/songs/{}.lua", PSpell->getName());
-                }
-                else if (PSpell->getSpellGroup() == SPELLGROUP_NINJUTSU)
-                {
-                    filename = fmt::format("./scripts/globals/spells/ninjutsu/{}.lua", PSpell->getName());
-                }
-                else if (PSpell->getSpellGroup() == SPELLGROUP_SUMMONING)
-                {
-                    filename = fmt::format("./scripts/globals/spells/summoning/{}.lua", PSpell->getName());
-                }
-                else if (PSpell->getSpellGroup() == SPELLGROUP_BLUE)
-                {
-                    filename = fmt::format("./scripts/globals/spells/blue/{}.lua", PSpell->getName());
-                }
-                else if (PSpell->getSpellGroup() == SPELLGROUP_GEOMANCY)
-                {
-                    filename = fmt::format("./scripts/globals/spells/geomancy/{}.lua", PSpell->getName());
-                }
-                else if (PSpell->getSpellGroup() == SPELLGROUP_TRUST)
-                {
-                    filename = fmt::format("./scripts/globals/spells/trust/{}.lua", PSpell->getName());
-                }
+                filename = fmt::format("./scripts/globals/spells/{}/{}.lua", switchKey, PSpell->getName());
+
                 luautils::CacheLuaObjectFromFile(filename);
             }
         }
