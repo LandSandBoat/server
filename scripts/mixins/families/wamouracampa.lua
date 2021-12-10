@@ -72,7 +72,7 @@ g_mixins.families.wamouracampa = function(wamouracampaMob)
         -- If they are already curled, they will reset conditions and remain curled.
         -- They will keep streched so long as none of the above conditions are met. Linked Wamouracampas will obviously stay streched.
         if
-            mob:getAnimationSub() == 5 and 
+            mob:getAnimationSub() == 5 and
             os.time() - mob:getLocalVar("formTimeEngaged") > 0 and -- IF safety timer is over
             os.time() - mob:getLocalVar("formTimeRoam") > 0 and    -- Additional check in case its already curled.
             mob:getLocalVar("hitPoints") < mob:getHP()
