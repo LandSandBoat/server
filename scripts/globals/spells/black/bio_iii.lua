@@ -42,7 +42,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     local final = finalMagicAdjustments(caster, target, spell, dmg)
 
     -- Calculate duration
-    local duration = calculateDuration(180, spell:getSkillType(), spell:getSpellGroup(), caster, target)
+    local merits = caster:getMerit(xi.merit.BIO_III)
 
     -- Check for Dia
     local dia = target:getStatusEffect(xi.effect.DIA)
@@ -68,7 +68,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     end
 
     -- Do it!
-    target:addStatusEffect(xi.effect.BIO, dotdmg, 3, duration, 0, 20, 3)
+    target:addStatusEffect(xi.effect.BIO, dotdmg, 3, merits, 0, 20, 3)
     spell:setMsg(xi.msg.basic.MAGIC_DMG)
 
     -- Try to kill same tier Dia (default behavior)
