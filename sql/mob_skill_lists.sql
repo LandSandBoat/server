@@ -1130,9 +1130,10 @@ INSERT INTO `mob_skill_lists` VALUES ('Wamoura',253,1955);
 INSERT INTO `mob_skill_lists` VALUES ('Wamouracampa',254,1815);
 INSERT INTO `mob_skill_lists` VALUES ('Wamouracampa',254,1816);
 INSERT INTO `mob_skill_lists` VALUES ('Wamouracampa',254,1817);
-INSERT INTO `mob_skill_lists` VALUES ('Wamouracampa',254,1818);
-INSERT INTO `mob_skill_lists` VALUES ('Wamouracampa',254,1819);
--- INSERT INTO `mob_skill_lists` VALUES ('Wamouracampa',254,1820);
+INSERT INTO `mob_skill_lists` VALUES ('Wamouracampa',254,1819); -- Heat Barrier
+INSERT INTO `mob_skill_lists` VALUES ('Wamouracampa',254,1820);
+INSERT INTO `mob_skill_lists` VALUES ('Wamouracampa',1162,1818); -- Cannonball
+INSERT INTO `mob_skill_lists` VALUES ('Wamouracampa',1162,1819); -- Heat Barrier
 INSERT INTO `mob_skill_lists` VALUES ('Wanderer',255,388);
 INSERT INTO `mob_skill_lists` VALUES ('Wanderer',255,389);
 INSERT INTO `mob_skill_lists` VALUES ('Wanderer',255,390);
@@ -3754,7 +3755,7 @@ INSERT INTO `mob_skill_lists` VALUES ('The_Briars_elv',1160,42); -- Savage Blade
 INSERT INTO `mob_skill_lists` VALUES ('The_Briars_gal',1161,86); -- Raging Rush
 INSERT INTO `mob_skill_lists` VALUES ('The_Briars_gal',1161,91); -- Fell Cleave
 
--- Next available ID: 1162
+-- Next available ID: 1163
 
 -- ------------------------------------------------------------
 -- Start of Ambuscade section
