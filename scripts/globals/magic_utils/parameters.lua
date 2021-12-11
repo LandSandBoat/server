@@ -159,7 +159,7 @@ xi.magic_utils.parameters.damageParams =
 
 }
 
-xi.magic_utils.parameters.enhancingSong
+xi.magic_utils.parameters.enhancingSong =
 {
 --                                          1  2                    3                       4                       5                         6                     7    8    9   10  11  12
 -- Structure:                 [spellId] = {Tier, Main Effect,       subEffect,              Main Modifier,          Merit Effect,             Job-Point Effect,     power Scap Pcap Mult Div SVP},

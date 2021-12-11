@@ -33,27 +33,27 @@ xi.magic_utils.spell_song_enhancing.calculateEnhancingPower = function(caster, t
     -- Get Potency bonuses from Singing Skill and Instrument Skill. TODO: Investigate JP-Wiki. Most of this makes no sense.
     -- NOTE: Tier 1 Etudes.
     if songEffect == xi.effect.ETUDE and tier == 1 then
-        if singingLvl >= 182 and singingLvl < 236 then
-            power = power + 1
-        elseif singingLvl >= 236 and singingLvl < 289 then
-            power = power + 2
-        elseif singingLvl >= 289 and singingLvl < 343 then
-            power = power + 3
-        elseif singingLvl >= 343 and singingLvl < 397 then
-            power = power + 4
-        elseif singingLvl >= 397 and singingLvl < 450 then
-            power = power + 5
-        elseif singingLvl >= 450 then
+        if singingLvl >= 450 then
             power = power + 6
+        elseif singingLvl >= 397 then
+            power = power + 5
+        elseif singingLvl >= 343 then
+            power = power + 4
+        elseif singingLvl >= 289 then
+            power = power + 3
+        elseif singingLvl >= 236 then
+            power = power + 2
+        elseif singingLvl >= 182 then
+            power = power + 1
         end
     -- NOTE: Tier 2 Etudes.
     elseif songEffect == xi.effect.ETUDE and tier == 2 then
-        if singingLvl >= 417 and singingLvl < 446 then
-            power = power + 1
-        elseif singingLvl >= 446 and singingLvl < 475 then
-            power = power + 2
-        elseif singingLvl >= 475 then
+        if singingLvl >= 475 then
             power = power + 3
+        elseif singingLvl >= 446 then
+            power = power + 2
+        elseif singingLvl >= 417 then
+            power = power + 1
         end
     -- Other songs.
     else
