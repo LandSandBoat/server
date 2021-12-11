@@ -1,6 +1,6 @@
 -----------------------------------
--- Spell: Bewitching Etude
--- Static CHR Boost, BRD 62
+-- Spell: Honor March
+-- Gives party members Haste, Acc, Ranged Acc, Att, Ranged Att
 -----------------------------------
 require("scripts/globals/magic_utils/spell_song_enhancing")
 -----------------------------------
