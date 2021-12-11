@@ -10,7 +10,8 @@ local item_object = {}
 item_object.onItemCheck = function(target)
     local result = 0
 
-    if (target:hasStatusEffect(xi.effect.FOOD)) then
+    -- TODO: Can this ONLY be used on Mammet types?
+    if target:hasStatusEffect(xi.effect.FOOD) then
         result = xi.msg.basic.IS_FULL
     end
 

@@ -532,33 +532,59 @@ namespace luautils
 
         auto name = (const char*)PSpell->getName();
 
-        if (PSpell->getSpellGroup() == SPELLGROUP_BLUE)
+        std::string switchKey = "";
+        switch (PSpell->getSpellGroup())
         {
-            if (auto cached_func = lua["xi"]["globals"]["spells"]["bluemagic"][name][funcName]; cached_func.valid())
+            case SPELLGROUP_WHITE:
             {
-                return cached_func;
+                switchKey = "white";
             }
+            break;
+            case SPELLGROUP_BLACK:
+            {
+                switchKey = "black";
+            }
+            break;
+            case SPELLGROUP_SONG:
+            {
+                switchKey = "songs";
+            }
+            break;
+            case SPELLGROUP_NINJUTSU:
+            {
+                switchKey = "ninjutsu";
+            }
+            break;
+            case SPELLGROUP_SUMMONING:
+            {
+                switchKey = "summoning";
+            }
+            break;
+            case SPELLGROUP_BLUE:
+            {
+                switchKey = "blue";
+            }
+            break;
+            case SPELLGROUP_GEOMANCY:
+            {
+                switchKey = "geomancy";
+            }
+            break;
+            case SPELLGROUP_TRUST:
+            {
+                switchKey = "trust";
+            }
+            break;
+            default:
+            {
+                ShowError("luautils::getSpellCachedFunction: Spell %s not inside a folder or doesnt have a SpellGroup", name);
+            }
+            break;
         }
-        else if (PSpell->getSpellGroup() == SPELLGROUP_SONG)
+
+        if (auto cached_func = lua["xi"]["globals"]["spells"][switchKey][name][funcName]; cached_func.valid())
         {
-            if (auto cached_func = lua["xi"]["globals"]["spells"]["songs"][name][funcName]; cached_func.valid())
-            {
-                return cached_func;
-            }
-        }
-        else if (PSpell->getSpellGroup() == SPELLGROUP_TRUST)
-        {
-            if (auto cached_func = lua["xi"]["globals"]["spells"]["trust"][name][funcName]; cached_func.valid())
-            {
-                return cached_func;
-            }
-        }
-        else
-        {
-            if (auto cached_func = lua["xi"]["globals"]["spells"][name][funcName]; cached_func.valid())
-            {
-                return cached_func;
-            }
+            return cached_func;
         }
 
         // Didn't find it
@@ -1852,6 +1878,9 @@ namespace luautils
     {
         TracyZoneScoped;
 
+        EventPrep* previousPrep = PChar->eventPreparation;
+        PChar->eventPreparation = PChar->currentEvent;
+
         auto onEventUpdate = LoadEventScript(PChar, "onEventUpdate");
         if (!onEventUpdate.valid())
         {
@@ -1873,6 +1902,8 @@ namespace luautils
             return -1;
         }
 
+        PChar->eventPreparation = previousPrep;
+
         return func_result.get_type() == sol::type::number ? func_result.get<int32>() : 1;
     }
 
@@ -1884,6 +1915,9 @@ namespace luautils
     int32 OnEventUpdate(CCharEntity* PChar, uint16 eventID, uint32 result)
     {
         TracyZoneScoped;
+
+        EventPrep* previousPrep = PChar->eventPreparation;
+        PChar->eventPreparation = PChar->currentEvent;
 
         auto onEventUpdateFramework = lua["xi"]["globals"]["interaction"]["interaction_global"]["onEventUpdate"];
         auto onEventUpdate = LoadEventScript(PChar, "onEventUpdate");
@@ -1902,12 +1936,17 @@ namespace luautils
             return -1;
         }
 
+        PChar->eventPreparation = previousPrep;
+
         return func_result.get_type() == sol::type::number ? func_result.get<int32>() : 1;
     }
 
     int32 OnEventUpdate(CCharEntity* PChar, std::string const& updateString)
     {
         TracyZoneScoped;
+
+        EventPrep* previousPrep = PChar->eventPreparation;
+        PChar->eventPreparation = PChar->currentEvent;
 
         auto onEventUpdateFramework = lua["xi"]["globals"]["interaction"]["interaction_global"]["onEventUpdate"];
         auto onEventUpdate = LoadEventScript(PChar, "onEventUpdate");
@@ -1926,6 +1965,8 @@ namespace luautils
             return -1;
         }
 
+        PChar->eventPreparation = previousPrep;
+
         return 0;
     }
 
@@ -1938,6 +1979,9 @@ namespace luautils
     int32 OnEventFinish(CCharEntity* PChar, uint16 eventID, uint32 result)
     {
         TracyZoneScoped;
+
+        EventPrep* previousPrep = PChar->eventPreparation;
+        PChar->eventPreparation = PChar->currentEvent;
 
         auto onEventFinishFramework = lua["xi"]["globals"]["interaction"]["interaction_global"]["onEventFinish"];
         auto onEventFinish = LoadEventScript(PChar, "onEventFinish");
@@ -1960,6 +2004,8 @@ namespace luautils
             ShowError("luautils::onEventFinish %s", err.what());
             return -1;
         }
+
+        PChar->eventPreparation = previousPrep;
 
         if (PChar->currentEvent->scriptFile.find("/bcnms/") > 0 && PChar->health.hp <= 0)
         { // for some reason the event doesnt enforce death afterwards

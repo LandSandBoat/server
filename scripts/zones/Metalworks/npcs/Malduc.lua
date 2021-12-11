@@ -23,7 +23,7 @@ entity.onTrigger = function(player, npc)
         if currentMission ~= xi.mission.id.bastok.NONE then
             player:startEvent(1002) -- Have mission already activated
         else
-            local flagMission, repeatMission = getMissionMask(player)
+            local flagMission, repeatMission = xi.mission.getMissionMask(player)
             player:startEvent(1001, flagMission, 0, 0, 0, 0, repeatMission) -- Mission List
         end
     end
