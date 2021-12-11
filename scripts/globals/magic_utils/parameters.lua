@@ -237,7 +237,7 @@ xi.magic_utils.parameters.enhancingSong =
     [xi.magic.spell.HERB_PASTORAL     ] = { 1, xi.effect.PASTORAL,  0,                      0,                      0,                        0,                   20, 200,  80,   8, 10, true  },
     [xi.magic.spell.WARDING_ROUND     ] = { 1, xi.effect.ROUND,     0,                      0,                      0,                        0,                   20, 200,  80,   8, 10, true  },
     -- Misc.
-    [xi.magic.spell.GODEDSSS_HYMNUS   ] = { 1, xi.effect.HYMNUS,    0,                      0,                      0,                        0,                    1,   0,   1,   0,  0, false },
+    [xi.magic.spell.GODDESSS_HYMNUS   ] = { 1, xi.effect.HYMNUS,    0,                      0,                      0,                        0,                    1,   0,   1,   0,  0, false },
     [xi.magic.spell.SENTINELS_SCHERZO ] = { 1, xi.effect.SCHERZO,   0,                      0,                      0,                        0,                    1, 350,  45,   1, 10, false },
     [xi.magic.spell.RAPTOR_MAZURKA    ] = { 1, xi.effect.MAZURKA,   0,                      0,                      0,                        0,                   12,   0,  12,   0,  0, false },
     [xi.magic.spell.CHOCOBO_MAZURKA   ] = { 1, xi.effect.MAZURKA,   0,                      0,                      0,                        0,                   24,   0,  24,   0,  0, false },
