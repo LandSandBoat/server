@@ -1127,13 +1127,13 @@ INSERT INTO `mob_skill_lists` VALUES ('Wamoura',253,1953);
 INSERT INTO `mob_skill_lists` VALUES ('Wamoura',253,1954);
 INSERT INTO `mob_skill_lists` VALUES ('Wamoura',253,1955);
 -- INSERT INTO `mob_skill_lists` VALUES ('Wamoura',253,1956);
-INSERT INTO `mob_skill_lists` VALUES ('Wamouracampa',254,1815);
-INSERT INTO `mob_skill_lists` VALUES ('Wamouracampa',254,1816);
-INSERT INTO `mob_skill_lists` VALUES ('Wamouracampa',254,1817);
-INSERT INTO `mob_skill_lists` VALUES ('Wamouracampa',254,1819); -- Heat Barrier
-INSERT INTO `mob_skill_lists` VALUES ('Wamouracampa',254,1820);
-INSERT INTO `mob_skill_lists` VALUES ('Wamouracampa',1162,1818); -- Cannonball
-INSERT INTO `mob_skill_lists` VALUES ('Wamouracampa',1162,1819); -- Heat Barrier
+INSERT INTO `mob_skill_lists` VALUES ('Wamouracampa_strech',254,1815);
+INSERT INTO `mob_skill_lists` VALUES ('Wamouracampa_strech',254,1816);
+INSERT INTO `mob_skill_lists` VALUES ('Wamouracampa_strech',254,1817);
+INSERT INTO `mob_skill_lists` VALUES ('Wamouracampa_strech',254,1819); -- Heat Barrier
+INSERT INTO `mob_skill_lists` VALUES ('Wamouracampa_strech',254,1820);
+INSERT INTO `mob_skill_lists` VALUES ('Wamouracampa_curl',1162,1818); -- Cannonball
+INSERT INTO `mob_skill_lists` VALUES ('Wamouracampa_curl',1162,1819); -- Heat Barrier
 INSERT INTO `mob_skill_lists` VALUES ('Wanderer',255,388);
 INSERT INTO `mob_skill_lists` VALUES ('Wanderer',255,389);
 INSERT INTO `mob_skill_lists` VALUES ('Wanderer',255,390);
