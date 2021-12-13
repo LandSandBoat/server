@@ -38,7 +38,7 @@ ability_object.onUseAbility = function(player, target, ability)
 
     local power = 33 --chance to remove Doom. Basing off of Holy Water?
 
-    if (target:hasStatusEffect(xi.effect.DOOM) and power > math.random(1, 100)) then
+    if target:hasStatusEffect(xi.effect.DOOM) and power > math.random(1, 100) then
         target:delStatusEffect(xi.effect.DOOM)
     end
     player:updateEnmityFromCure(target, heal)
