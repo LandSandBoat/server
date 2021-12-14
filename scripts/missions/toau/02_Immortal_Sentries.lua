@@ -18,9 +18,23 @@ require('scripts/globals/keyitems')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------
+local whitegateID = require('scripts/zones/Aht_Urhgan_Whitegate/IDs')
+local arrapagoID  = require('scripts/zones/Arrapago_Reef/IDs')
+local bhaflauID   = require('scripts/zones/Bhaflau_Thickets/IDs')
+local caedarvaID  = require('scripts/zones/Caedarva_Mire/IDs')
+local zhayolmID   = require('scripts/zones/Mount_Zhayolm/IDs')
+-----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.TOAU, xi.mission.id.toau.IMMORTAL_SENTRIES)
 
+local function handlePackage(player, textIdOne, textIdTwo)
+    player:delKeyItem(xi.ki.SUPPLIES_PACKAGE)
+    player:messageSpecial(textIdone, xi.ki.SUPPLIES_PACKAGE)
+    player:addCurrency('imperial_standing', 150)
+    player:messageSpecial(textIdTwo)
+end
+
+-- TODO: npcUtil.completeMission should support granting IS
 mission.reward =
 {
     keyItem     = xi.ki.PSC_WILDCAT_BADGE,
@@ -44,6 +58,8 @@ mission.sections =
                         -- Naja Salaheem interactions require the 9th argument in events set to 0.
                         -- This is because Aht Uhrgan Whitegate uses 2 different dats.
                         return mission:progressEvent(3002, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+                    else
+                        return mission:event(3001, 0, 0, 0, 0, 0, 0, 0, 0, 0) -- Default Dialog.
                     end
                 end,
             },
@@ -51,11 +67,9 @@ mission.sections =
             onEventFinish =
             {
                 [3002] = function(player, csid, option, npc)
-                    if mission:complete(player) then
-                        -- TODO: npcUtil.completeMission should support granting IS
-                        player:addCurrency('imperial_standing', 150)
-                        player:setLocalVar('Mission[4][2]mustZone', 1)
-                    end
+                    mission:messageSpecial(whitegateID.text.MEMBER_OF_SALAHEEMS_SENTINELS)
+                    mission:complete(player)
+                    mission:messageSpecial(whitegateID.text.ACCESS_TO_A_MOG_LOCKER)
                 end,
             },
         },
@@ -77,7 +91,7 @@ mission.sections =
             {
                 [5] = function(player, csid, option, npc)
                     if option == 1 then
-                        player:delKeyItem(xi.ki.SUPPLIES_PACKAGE)
+                        handlePackage(player, arrapagoID.text.HAND_OVER_TO_IMMORTAL, arrapagoID.text.YOUR_IMPERIAL_STANDING)
                     end
                 end,
             },
@@ -100,7 +114,7 @@ mission.sections =
             {
                 [5] = function(player, csid, option, npc)
                     if option == 1 then
-                        player:delKeyItem(xi.ki.SUPPLIES_PACKAGE)
+                        handlePackage(player, bhaflauID.text.HAND_OVER_TO_IMMORTAL, bhaflauID.text.YOUR_IMPERIAL_STANDING)
                     end
                 end,
             },
@@ -134,7 +148,7 @@ mission.sections =
             {
                 [5] = function(player, csid, option, npc)
                     if option == 1 then
-                        player:delKeyItem(xi.ki.SUPPLIES_PACKAGE)
+                        handlePackage(player, caedarvaID.text.HAND_OVER_TO_IMMORTAL, caedarvaID.text.YOUR_IMPERIAL_STANDING)
                     end
                 end,
             },
@@ -157,7 +171,7 @@ mission.sections =
             {
                 [4] = function(player, csid, option, npc)
                     if option == 1 then
-                        player:delKeyItem(xi.ki.SUPPLIES_PACKAGE)
+                        handlePackage(player, zhayolmID.text.HAND_OVER_TO_IMMORTAL, zhayolmID.text.YOUR_IMPERIAL_STANDING)
                     end
                 end,
             },
