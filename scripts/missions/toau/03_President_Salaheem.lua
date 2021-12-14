@@ -64,10 +64,13 @@ mission.sections =
 
                 [269] = function(player, csid, option, npc)
                     player:setMissionStatus(mission.areaId, 1)
+                    -- Temporal fix until rytaal npc script gets an audit.
+                    player:setVar("ToAU3Progress", 1)
                 end,
 
                 [3020] = function(player, csid, option, npc)
                     mission:complete(player)
+                    player:setVar("ToAU3Progress", 0)
                 end,
             },
         },

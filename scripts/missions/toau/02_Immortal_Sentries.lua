@@ -27,11 +27,9 @@ local zhayolmID   = require('scripts/zones/Mount_Zhayolm/IDs')
 
 local mission = Mission:new(xi.mission.log_id.TOAU, xi.mission.id.toau.IMMORTAL_SENTRIES)
 
-local function handlePackage(player, textIdOne, textIdTwo)
+local function handlePackage(player)
     player:delKeyItem(xi.ki.SUPPLIES_PACKAGE)
-    player:messageSpecial(textIdone, xi.ki.SUPPLIES_PACKAGE)
     player:addCurrency('imperial_standing', 150)
-    player:messageSpecial(textIdTwo)
 end
 
 -- TODO: npcUtil.completeMission should support granting IS
@@ -67,9 +65,9 @@ mission.sections =
             onEventFinish =
             {
                 [3002] = function(player, csid, option, npc)
-                    mission:messageSpecial(whitegateID.text.MEMBER_OF_SALAHEEMS_SENTINELS)
+                    player:messageSpecial(whitegateID.text.MEMBER_OF_SALAHEEMS_SENTINELS)
                     mission:complete(player)
-                    mission:messageSpecial(whitegateID.text.ACCESS_TO_A_MOG_LOCKER)
+                    player:messageSpecial(whitegateID.text.ACCESS_TO_A_MOG_LOCKER)
                 end,
             },
         },
@@ -91,7 +89,9 @@ mission.sections =
             {
                 [5] = function(player, csid, option, npc)
                     if option == 1 then
-                        handlePackage(player, arrapagoID.text.HAND_OVER_TO_IMMORTAL, arrapagoID.text.YOUR_IMPERIAL_STANDING)
+                        handlePackage(player)
+                        player:messageSpecial(arrapagoID.text.HAND_OVER_TO_IMMORTAL, xi.ki.SUPPLIES_PACKAGE)
+                        player:messageSpecial(arrapagoID.text.YOUR_IMPERIAL_STANDING)
                     end
                 end,
             },
@@ -114,7 +114,10 @@ mission.sections =
             {
                 [5] = function(player, csid, option, npc)
                     if option == 1 then
-                        handlePackage(player, bhaflauID.text.HAND_OVER_TO_IMMORTAL, bhaflauID.text.YOUR_IMPERIAL_STANDING)
+                        handlePackage(player)
+                        player:messageSpecial(bhaflauID.text.HAND_OVER_TO_IMMORTAL, xi.ki.SUPPLIES_PACKAGE)
+                        player:messageSpecial(bhaflauID.text.YOUR_IMPERIAL_STANDING)
+
                     end
                 end,
             },
@@ -148,7 +151,9 @@ mission.sections =
             {
                 [5] = function(player, csid, option, npc)
                     if option == 1 then
-                        handlePackage(player, caedarvaID.text.HAND_OVER_TO_IMMORTAL, caedarvaID.text.YOUR_IMPERIAL_STANDING)
+                        handlePackage(player)
+                        player:messageSpecial(caedarvaID.text.HAND_OVER_TO_IMMORTAL, xi.ki.SUPPLIES_PACKAGE)
+                        player:messageSpecial(caedarvaID.text.YOUR_IMPERIAL_STANDING)
                     end
                 end,
             },
@@ -171,8 +176,10 @@ mission.sections =
             {
                 [4] = function(player, csid, option, npc)
                     if option == 1 then
-                        handlePackage(player, zhayolmID.text.HAND_OVER_TO_IMMORTAL, zhayolmID.text.YOUR_IMPERIAL_STANDING)
-                    end
+                        handlePackage(player)
+                        player:messageSpecial(zhayolmID.text.HAND_OVER_TO_IMMORTAL, xi.ki.SUPPLIES_PACKAGE)
+                        player:messageSpecial(zhayolmID.text.YOUR_IMPERIAL_STANDING)
+                   end
                 end,
             },
         },
