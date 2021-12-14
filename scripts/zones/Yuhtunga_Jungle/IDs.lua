@@ -40,15 +40,15 @@ zones[xi.zone.YUHTUNGA_JUNGLE] =
         ZILART_MONUMENT             = 7684,  -- It is an ancient Zilart monument.
         LOGGING_IS_POSSIBLE_HERE    = 7701,  -- Logging is possible here if you have <item>.
         HARVESTING_IS_POSSIBLE_HERE = 7708,  -- Harvesting is possible here if you have <item>.
-        SOMETHING_IS_BURIED_HERE    = 7769,  -- It looks like something is buried here. If you had <item> you could dig it up.
-        SWARM_APPEARED              = 7842,  -- A swarm has appeared!
-        PLAYER_OBTAINS_ITEM         = 7882,  -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM       = 7883,  -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM    = 7884,  -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP        = 7885,  -- You already possess that temporary item.
-        NO_COMBINATION              = 7890,  -- You were unable to enter a combination.
-        REGIME_REGISTERED           = 10068, -- New training regime registered!
-        COMMON_SENSE_SURVIVAL       = 12062, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        SOMETHING_IS_BURIED_HERE    = 7762,  -- It looks like something is buried here. If you had <item> you could dig it up.
+        SWARM_APPEARED              = 7835,  -- A swarm has appeared!
+        PLAYER_OBTAINS_ITEM         = 7875,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM       = 7876,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM    = 7877,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP        = 7878,  -- You already possess that temporary item.
+        NO_COMBINATION              = 7883,  -- You were unable to enter a combination.
+        REGIME_REGISTERED           = 10061, -- New training regime registered!
+        COMMON_SENSE_SURVIVAL       = 12055, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {
