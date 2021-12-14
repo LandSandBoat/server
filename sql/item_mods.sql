@@ -3045,7 +3045,8 @@ INSERT INTO `item_mods` VALUES (11008,1,9);       -- Medala Cape: DEF 9
 INSERT INTO `item_mods` VALUES (11008,27,-2);     -- Enmity -2
 INSERT INTO `item_mods` VALUES (11008,374,2);     -- Cure potency +2%
 INSERT INTO `item_mods` VALUES (11008,519,5);     -- Cure spellcasting time -5%
-INSERT INTO `item_mods` VALUES (11009,1,1);
+INSERT INTO `item_mods` VALUES (11009,1,1);       -- Shaper's Shawl DEF +1
+INSERT INTO `item_mods` VALUES (11009,852,25);    -- Shaper's Shawl Skill up 25% https://www.bg-wiki.com/ffxi/Shaper%27s_Shawl
 INSERT INTO `item_mods` VALUES (11010,1,10);      -- feline_mantle DEF:+10
 INSERT INTO `item_mods` VALUES (11010,2,30);      -- HP+30
 INSERT INTO `item_mods` VALUES (11010,9,3);       -- DEX+3
