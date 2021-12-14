@@ -78,7 +78,7 @@ local function handleAncientPapyrus(player)
             player:delKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED1)
             player:delKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED2)
             player:delKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED3)
-            player:messageSpecial(eldiemeID.text.PUT_TOGUETHER_TO_COMPLETE, ANCIENT_PAPYRUS_SHRED1)
+            player:messageSpecial(eldiemeID.text.PUT_TOGUETHER_TO_COMPLETE, xi.ki.ANCIENT_PAPYRUS_SHRED1)
             npcUtil.giveItem(player, xi.items.PIECE_OF_ANCIENT_PAPYRUS)
         else
             player:messageSpecial(eldiemeID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.PIECE_OF_ANCIENT_PAPYRUS)
