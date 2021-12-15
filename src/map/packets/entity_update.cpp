@@ -113,6 +113,14 @@ CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type
                 ref<uint8>(0x29)  = static_cast<uint8>(PEntity->allegiance);
                 ref<uint8>(0x2B)  = PEntity->namevis;
             }
+
+            // TODO: Unify name logic
+            if (updatemask & UPDATE_NAME)
+            {
+                // depending on size of name, this can be 0x20, 0x22, or 0x24
+                this->size = 0x24;
+                memcpy(data + (0x34), PEntity->GetName(), std::min<size_t>(PEntity->name.size(), PacketNameLength));
+            }
         }
         break;
         case TYPE_MOB:

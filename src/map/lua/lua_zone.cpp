@@ -133,6 +133,45 @@ void CLuaZone::reloadNavmesh()
     m_pLuaZone->m_navMesh->reload();
 }
 
+CLuaBaseEntity CLuaZone::insertCustomNPC(sol::table table)
+{
+    uint16 ZoneID = m_pLuaZone->GetID();
+    CNpcEntity* PNpc = new CNpcEntity;
+    PNpc->allegiance = ALLEGIANCE_TYPE::MOB;
+
+    // TODO: Sanity check and track targids in a zone from zone_entities
+    PNpc->targid = table.get<float>("targid");
+    PNpc->id = 0x1000000 + (ZoneID << 12) + PNpc->targid;
+
+    auto name = table.get<const char*>("name");
+    PNpc->name.insert(0, name);
+
+    PNpc->loc.p.rotation = table.get_or<uint8>("rotation", 0);
+    PNpc->loc.p.x        = table.get<float>("x");
+    PNpc->loc.p.y        = table.get<float>("y");
+    PNpc->loc.p.z        = table.get<float>("z");
+    PNpc->loc.p.moving   = 0;
+
+    PNpc->speed        = 50;
+    PNpc->speedsub     = 50;
+
+    PNpc->animation    = 0;
+    PNpc->animationsub = 0;
+
+    PNpc->namevis      = table.get_or<uint8>("namevis", 0);
+    PNpc->status       = STATUS_TYPE::NORMAL;
+    PNpc->m_flags      = table.get_or<uint32>("m_flags", 0);
+
+    PNpc->name_prefix = table.get_or<uint8>("name_prefix", 32);
+    PNpc->widescan    = 0;
+
+    PNpc->SetModelId(table.get_or<uint16>("modelId", 0));
+
+    m_pLuaZone->InsertNPC(PNpc);
+
+    return CLuaBaseEntity(PNpc);
+}
+
 //======================================================//
 
 void CLuaZone::Register()
@@ -150,6 +189,7 @@ void CLuaZone::Register()
     SOL_REGISTER("battlefieldsFull", CLuaZone::battlefieldsFull);
     SOL_REGISTER("getWeather", CLuaZone::getWeather);
     SOL_REGISTER("reloadNavmesh", CLuaZone::reloadNavmesh);
+    SOL_REGISTER("insertCustomNPC", CLuaZone::insertCustomNPC);
 }
 
 std::ostream& operator<<(std::ostream& os, const CLuaZone& zone)

@@ -733,7 +733,8 @@ CBaseEntity* CZoneEntities::GetEntity(uint16 targid, uint8 filter)
             }
         }
     }
-    else if (targid < 0x780)
+    // TODO: Combine Trusts and Pets into the same id space
+    else if (targid < 0x780) // 1920
     {
         if (filter & TYPE_PET)
         {
@@ -744,7 +745,7 @@ CBaseEntity* CZoneEntities::GetEntity(uint16 targid, uint8 filter)
             }
         }
     }
-    else if (targid < 0x800)
+    else if (targid < 0x800) // 2048
     {
         if (filter & TYPE_TRUST)
         {
@@ -755,6 +756,30 @@ CBaseEntity* CZoneEntities::GetEntity(uint16 targid, uint8 filter)
             }
         }
     }
+    else if (targid < 0x1000) // 2048 - 4096 are dynamic entities
+    {
+        if (filter & TYPE_NPC)
+        {
+            EntityList_t::const_iterator it = m_npcList.find(targid);
+            if (it != m_npcList.end())
+            {
+                return it->second;
+            }
+        }
+        else if (filter & TYPE_MOB)
+        {
+            EntityList_t::const_iterator it = m_mobList.find(targid);
+            if (it != m_mobList.end())
+            {
+                return it->second;
+            }
+        }
+    }
+    else
+    {
+        ShowError("Trying to get entity outside of valid id bounds (%u)", targid);
+    }
+
     return nullptr;
 }
 

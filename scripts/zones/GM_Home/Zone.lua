@@ -16,7 +16,41 @@ local ID = require("scripts/zones/GM_Home/IDs")
 -----------------------------------
 local zone_object = {}
 
+-- Name Vis:
+-- 1 : I Icon
+-- 8 : Hide name
+-- 128 : Ghost effect
+
+-- Flags:
+-- 32 : Call for Help
+-- 256 : Hide HP
+-- 2046 : Untargettable
+-- 65536 : Green/Yellow thing
+-- 262,144 : GM Flag
+
+-- Name Prefix:
+-- 8   : Targettable by spells, client menu (Blue name)
+-- 128 : NPC invisible
+
+zone_object.idCounter = 0
+
+zone_object.addDynamicEntity = function(zone, name, model)
+    zone:insertCustomNPC({
+        targid = 0x0800 + zone_object.idCounter,
+        name = name,
+        modelId = model,
+        x = 0.01,
+        y = 0.01,
+        z = 0.01 + (zone_object.idCounter * 5),
+        name_prefix = 8,
+    })
+    zone_object.idCounter = zone_object.idCounter + 1
+end
+
 zone_object.onInitialize = function(zone)
+    zone_object.addDynamicEntity(zone, "Promathia", 1073)
+    zone_object.addDynamicEntity(zone, "Fafnir", 783)
+    zone_object.addDynamicEntity(zone, "Shadow Lord", 789)
 end
 
 zone_object.onZoneIn = function( player, prevZone)

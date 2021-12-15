@@ -244,7 +244,7 @@ public:
     uint16          targid;       // local identifier unique to the zone
     ENTITYTYPE      objtype;      // тип сущности
     STATUS_TYPE     status;       // статус сущности (разные сущности - разные статусы)
-    uint16          m_TargID;     // targid объекта, на который смотрит сущность
+    uint16          m_TargID;     // the targid of the object the entity is looking at
     string_t        name;         // имя сущности
     look_t          look;         // внешний вид всех сущностей
     look_t          mainlook;     // only used if mob use changeSkin() or player /lockstyle
