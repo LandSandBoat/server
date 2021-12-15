@@ -3045,7 +3045,8 @@ INSERT INTO `item_mods` VALUES (11008,1,9);       -- Medala Cape: DEF 9
 INSERT INTO `item_mods` VALUES (11008,27,-2);     -- Enmity -2
 INSERT INTO `item_mods` VALUES (11008,374,2);     -- Cure potency +2%
 INSERT INTO `item_mods` VALUES (11008,519,5);     -- Cure spellcasting time -5%
-INSERT INTO `item_mods` VALUES (11009,1,1);
+INSERT INTO `item_mods` VALUES (11009,1,1);       -- Shaper's Shawl DEF +1
+INSERT INTO `item_mods` VALUES (11009,852,25);    -- Shaper's Shawl Skill up 25% https://www.bg-wiki.com/ffxi/Shaper%27s_Shawl
 INSERT INTO `item_mods` VALUES (11010,1,10);      -- feline_mantle DEF:+10
 INSERT INTO `item_mods` VALUES (11010,2,30);      -- HP+30
 INSERT INTO `item_mods` VALUES (11010,9,3);       -- DEX+3
@@ -52386,14 +52387,7 @@ INSERT INTO `item_mods` VALUES (28583,29,3);      -- Magic Def. Bonus +3
 INSERT INTO `item_mods` VALUES (28584,2,55);      -- Vexer Ring +1: HP +55
 INSERT INTO `item_mods` VALUES (28584,27,4);      -- Enmity +4
 INSERT INTO `item_mods` VALUES (28584,29,4);      -- Magic Def. Bonus +4
-INSERT INTO `item_mods` VALUES (28587,144,1);
-INSERT INTO `item_mods` VALUES (28587,145,1);
-INSERT INTO `item_mods` VALUES (28587,146,1);
-INSERT INTO `item_mods` VALUES (28587,147,1);
-INSERT INTO `item_mods` VALUES (28587,148,1);
-INSERT INTO `item_mods` VALUES (28587,149,1);
-INSERT INTO `item_mods` VALUES (28587,150,1);
-INSERT INTO `item_mods` VALUES (28587,151,1);
+INSERT INTO `item_mods` VALUES (28587,851,1);     -- Artificier's Ring Synthesis Skill +1
 INSERT INTO `item_mods` VALUES (28588,1,17);      -- Karagoz Mantle +1: DEF 17
 INSERT INTO `item_mods` VALUES (28588,25,9);      -- Accuracy +9
 INSERT INTO `item_mods` VALUES (28589,1,16);      -- Felicitas Cape +1: DEF 16
