@@ -65,7 +65,7 @@ xi.magic_utils.spell_damage.calculateBaseDamage = function(caster, target, spell
     -----------------------------------
     -- STEP 1: baseSpellDamage (V)
     -----------------------------------
-    if caster:isPC() then
+    if caster:isPC() and xi.settings.USE_OLD_MAGIC_DAMAGE == false then
         baseSpellDamage = spellTable[spellId][vPC] -- vPC
     else
         baseSpellDamage = spellTable[spellId][vNPC] -- vNPC
@@ -149,8 +149,8 @@ xi.magic_utils.spell_damage.calculateBaseDamage = function(caster, target, spell
         end
     end
 
-    -- TODO: Add baseSpellDamageBonus from equipment and other possible sources.
-    -- TODO: Find out if that modifier exists and which one is it.
+    -- Bonus to spell base damage from gear.
+    baseSpellDamageBonus = baseSpellDamageBonus + caster:getMod(xi.mod.MAGIC_DAMAGE)
 
     -----------------------------------
     -- STEP 4: Spell Damage
@@ -207,10 +207,14 @@ end
 -- Multiple things can affect dmg. in our core SDT is a % reduction in its own step.
 xi.magic_utils.spell_damage.calculateSDT = function(caster, target, spell, spellElement)
     local SDT    = 1 -- The variable we want to calculate
-    local SDTMod = target:getMod(xi.magic.specificDmgTakenMod[spellElement])
+    local SDTMod = 0
 
-    -- TODO: Ths conversion right here needs to be updated once work on SDT modifiers is finished.
-    SDT = (SDTMod / -100) + 1
+    if spellElement > 0 then
+        SDTMod = target:getMod(xi.magic.specificDmgTakenMod[spellElement])
+
+        -- TODO: Ths conversion right here needs to be updated once work on SDT modifiers is finished.
+        SDT = (SDTMod / -100) + 1
+    end
 
     -- SDT (Species/Specific Damage Taken) is a stat/mod present in mobs and players that applies a % to specific damage types.
     -- Think of it as an extension (or the actual base) of elemental resistances in past FF games.
