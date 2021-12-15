@@ -6,6 +6,7 @@
 -- Naja Salaheem : !pos 22.700 -8.804 -45.591 50
 -----------------------------------
 require('scripts/settings/main')
+require("scripts/globals/besieged")
 require('scripts/globals/items')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
@@ -25,8 +26,7 @@ mission.sections =
 {
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId and
-                not mission:getMustZone(player)
+            return currentMission == mission.missionId
         end,
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =
@@ -36,10 +36,21 @@ mission.sections =
                 onTrigger = function(player, npc)
                     local missionStatus = player:getMissionStatus(mission.areaId)
 
-                    if missionStatus == 0 then
+                    if missionStatus == 1 then
                         return mission:progressEvent(73, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-                    elseif missionStatus == 1 then
+                    elseif missionStatus == 2 and not mission:getMustZone(player) then
                         return mission:progressEvent(3020, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+                    else
+                        return mission:event(3003, xi.besieged.getMercenaryRank(player), 0, 0, 0, 0, 0, 0, 0, 0) -- Default Dialog.
+                    end
+                end,
+            },
+
+            ['Rytaal'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:getMissionStatus(mission.areaId) == 0 then
+                        return mission:progressEvent(269, 0, 0, 0, 0, 0, 0, 0, 0, 0)
                     end
                 end,
             },
@@ -47,11 +58,19 @@ mission.sections =
             onEventFinish =
             {
                 [73] = function(player, csid, option, npc)
+                    player:setMissionStatus(mission.areaId, 2)
+                    mission:setMustZone(player)
+                end,
+
+                [269] = function(player, csid, option, npc)
                     player:setMissionStatus(mission.areaId, 1)
+                    -- Temporal fix until rytaal npc script gets an audit.
+                    player:setVar("ToAU3Progress", 1)
                 end,
 
                 [3020] = function(player, csid, option, npc)
                     mission:complete(player)
+                    player:setVar("ToAU3Progress", 0)
                 end,
             },
         },
