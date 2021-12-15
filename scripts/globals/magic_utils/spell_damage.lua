@@ -209,7 +209,7 @@ xi.magic_utils.spell_damage.calculateSDT = function(caster, target, spell, spell
     local SDT    = 1 -- The variable we want to calculate
     local SDTMod = 0
 
-    if not spellElement == 0 then
+    if spellElement > 0 then
         SDTMod = target:getMod(xi.magic.specificDmgTakenMod[spellElement])
 
         -- TODO: Ths conversion right here needs to be updated once work on SDT modifiers is finished.
