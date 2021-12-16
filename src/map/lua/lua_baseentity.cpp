@@ -4611,7 +4611,12 @@ uint8 CLuaBaseEntity::getAllegiance()
 void CLuaBaseEntity::setAllegiance(uint8 allegiance)
 {
     m_PBaseEntity->allegiance = static_cast<ALLEGIANCE_TYPE>(allegiance);
-    m_PBaseEntity->updatemask |= UPDATE_HP;
+}
+
+void CLuaBaseEntity::setUpdatePacketData(uint32 index, uint32 data)
+{
+    m_PBaseEntity->updatePacketData = { index, data };
+    m_PBaseEntity->loc.zone->PushPacket(m_PBaseEntity, CHAR_INZONE, new CEntityUpdatePacket(m_PBaseEntity, ENTITY_SPAWN, UPDATE_ALL_MOB));
 }
 
 /************************************************************************
@@ -13336,6 +13341,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("setNation", CLuaBaseEntity::setNation);
     SOL_REGISTER("getAllegiance", CLuaBaseEntity::getAllegiance);
     SOL_REGISTER("setAllegiance", CLuaBaseEntity::setAllegiance);
+    SOL_REGISTER("setUpdatePacketData", CLuaBaseEntity::setUpdatePacketData);
     SOL_REGISTER("getCampaignAllegiance", CLuaBaseEntity::getCampaignAllegiance);
     SOL_REGISTER("setCampaignAllegiance", CLuaBaseEntity::setCampaignAllegiance);
 

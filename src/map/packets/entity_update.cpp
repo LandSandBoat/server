@@ -107,9 +107,11 @@ CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type
 
             if (updatemask & UPDATE_HP)
             {
-                ref<uint8>(0x1E) = 0x64;
+                // HPP
+                ref<uint8>(0x1E) = 0x64; // 100
                 ref<uint8>(0x1F) = PEntity->animation;
                 ref<uint8>(0x2A) |= PEntity->animationsub;
+
                 ref<uint32>(0x21) = ((CNpcEntity*)PEntity)->m_flags;
                 ref<uint8>(0x27)  = ((CNpcEntity*)PEntity)->name_prefix; // gender and something else
 
@@ -120,6 +122,153 @@ CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type
 
                 ref<uint8>(0x29)  = static_cast<uint8>(PEntity->allegiance);
                 ref<uint8>(0x2B)  = PEntity->namevis;
+
+                // CLuaBaseEntity(TYPE_NPC | 17639424 | Horro)
+                // GetNPCByID(17639424):setUpdatePacketData(0x20, 0x00)
+
+                // 0x20:
+                // 0:
+                // 1: Can attack, light yellow name
+                // 2: Disappears from view, and radar
+                // 4:
+                // 8:
+                // 16:
+                // 32:
+                // 64:
+                // 128:
+                // 256:
+
+                // 0x21:
+                // 0:
+                // 1:
+                // 2:
+                // 4:
+                // 8:
+                // 16:
+                // 32: Orange name, call for help?
+                // 64:
+                // 128:
+                // 256:
+
+                // 0x22:
+                // 0:
+                // 1: Hide HP bar
+                // 2:
+                // 4:
+                // 8:
+                // 16:
+                // 32:
+                // 64:
+                // 128:
+                // 256:
+
+                // 0x23:
+                // 0:
+                // 1: New adventurer icon (green/yellow)
+                // 2:
+                // 4: Triangle GM Icon
+                // 8:
+                // 11: POL Icon
+                // 15: Circular GM Icon
+                // 16:
+                // 32:
+                // 64:
+                // 128: Bazaar Icon
+                // 256:
+
+                // 0x24:
+                // 0:
+                // 1:
+                // 2:
+                // 4:
+                // 8:
+                // 11:
+                // 15:
+                // 16:
+                // 32:
+                // 64:
+                // 128:
+                // 256:
+
+                // 0x25:
+                // 0:
+                // 1:
+                // 2:
+                // 4:
+                // 8:
+                // 16:
+                // 32:
+                // 64:
+                // 128:
+                // 256:
+
+                // 0x26:
+                // 0:
+                // 1:
+                // 2:
+                // 4:
+                // 8:
+                // 16:
+                // 32:
+                // 64:
+                // 128:
+                // 256:
+
+                // 0x27:
+                // 0:
+                // 1:
+                // 2:
+                // 4:
+                // 8:
+                // 16:
+                // 32:
+                // 64:
+                // 128: Disappear, untargetable, not on radar
+                // 256:
+
+                // 0x28:
+                // 0:
+                // 1: Simple menu (magic, abilities, trust, items)
+                // 2:
+                // 4:
+                // 8:
+                // 16:
+                // 32:
+                // 64: Triggerable
+                // 128:
+                // 256:
+
+                // (For NPC Entity)
+                // 0x29:
+                // 0: Green Name
+                // 1: White Name
+                // 2: Sandoria Flag, Green Name
+                // 3: Bastok Flag, Green Name
+                // 4: Windurst Flag, Green Name
+                // 5: Wyverns Flag, Green Name
+                // 6: Griffon Flag, Green Name
+                // 7: Green Name
+                // 8: Sword and Shield, Green Name
+                // 16:
+                // 32: Red Background, 2 Butting Heads, Green Name
+                // 32: Blue Background, 2 Butting Heads, Green Name
+                // 64:
+                // 128:
+                // 256:
+
+                // 0x2A: Seemingly nothing
+
+                // Sword and Shield name logo
+                // ref<uint8>(0x29) |= 0x08;
+
+                // Red background, two butting heads
+                // ref<uint8>(0x29) |= 0x20;
+
+                // Blue background, two butting heads
+                // ref<uint8>(0x29) |= 0x21;
+
+                // Set to Ghost
+                // ref<uint8>(0x2B) |= 0x80;
             }
 
             // TODO: Unify name logic
@@ -218,5 +367,11 @@ CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type
             memcpy(data + (0x34), PEntity->GetName(), (PEntity->name.size() > 12 ? 12 : PEntity->name.size()));
         }
         break;
+    }
+
+    if (PEntity->updatePacketData.size())
+    {
+        ref<uint8>(PEntity->updatePacketData[0]) = (uint8)PEntity->updatePacketData[1];
+        PEntity->updatePacketData.clear();
     }
 }

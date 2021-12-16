@@ -27,6 +27,7 @@
 #include "../packets/message_basic.h"
 #include <map>
 #include <memory>
+#include <vector>
 
 enum ENTITYTYPE
 {
@@ -260,6 +261,8 @@ public:
     std::unique_ptr<CAIContainer> PAI;          // AI container
     CBattlefield*                 PBattlefield; // pointer to battlefield (if in one)
     CInstance*                    PInstance;
+
+    std::vector<uint32> updatePacketData;
 
 protected:
     std::map<std::string, uint32> m_localVars;

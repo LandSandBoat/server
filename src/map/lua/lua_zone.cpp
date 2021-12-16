@@ -151,6 +151,7 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
 
     uint16 ZoneID = m_pLuaZone->GetID();
     PEntity->targid = m_pLuaZone->GetZoneEntities()->GetNewDynamicTargID();
+
     PEntity->id = 0x1000000 + (ZoneID << 12) + PEntity->targid;
 
     auto name = table.get_or<const char*>("name", "DynamicEntity");
