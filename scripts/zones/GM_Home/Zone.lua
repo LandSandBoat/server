@@ -48,9 +48,7 @@ zone_object.addDynamicEntity = function(zone, name, model)
 end
 
 zone_object.onInitialize = function(zone)
-    zone_object.addDynamicEntity(zone, "Promathia", 1073)
     zone_object.addDynamicEntity(zone, "Fafnir", 783)
-    zone_object.addDynamicEntity(zone, "Shadow Lord", 789)
 end
 
 zone_object.onZoneIn = function( player, prevZone)
