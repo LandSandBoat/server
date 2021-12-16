@@ -110,6 +110,7 @@ CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type
                 ref<uint8>(0x2A) |= PEntity->animationsub;
                 ref<uint32>(0x21) = ((CNpcEntity*)PEntity)->m_flags;
                 ref<uint8>(0x27)  = ((CNpcEntity*)PEntity)->name_prefix; // gender and something else
+                ref<uint8>(0x28) |= 0x40;
                 ref<uint8>(0x29)  = static_cast<uint8>(PEntity->allegiance);
                 ref<uint8>(0x2B)  = PEntity->namevis;
             }
