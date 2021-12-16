@@ -32,35 +32,19 @@ local zone_object = {}
 -- 8   : Targettable by spells, client menu (Blue name)
 -- 128 : NPC invisible
 
-zone_object.idCounter = 0
-
-zone_object.addDynamicEntity = function(zone, name, model)
-    zone:insertCustomNPC({
-        targid = 0x0800 + zone_object.idCounter,
-        name = name,
-        modelId = model,
-        x = 0.01,
-        y = 0.01,
-        z = 0.01 + (zone_object.idCounter * 5),
-        name_prefix = 8,
-    })
-    zone_object.idCounter = zone_object.idCounter + 1
-end
-
 zone_object.onInitialize = function(zone)
-    zone_object.addDynamicEntity(zone, "Fafnir", 783)
 end
 
-zone_object.onZoneIn = function( player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
 
     return cs
 end
 
-zone_object.onEventUpdate = function( player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-zone_object.onEventFinish = function( player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
 end
 
 return zone_object

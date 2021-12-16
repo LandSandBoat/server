@@ -26,6 +26,7 @@
 #include "../entities/charentity.h"
 #include "../entities/npcentity.h"
 #include "../zone.h"
+#include "../zone_entities.h"
 #include "lua_baseentity.h"
 #include "lua_zone.h"
 
@@ -133,43 +134,63 @@ void CLuaZone::reloadNavmesh()
     m_pLuaZone->m_navMesh->reload();
 }
 
-CLuaBaseEntity CLuaZone::insertCustomNPC(sol::table table)
+std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
 {
+    CBaseEntity* PEntity = nullptr;
+    if (table.get_or<uint8>("objtype", TYPE_NPC) == TYPE_NPC)
+    {
+        PEntity = new CNpcEntity();
+    }
+    else
+    {
+        PEntity = new CMobEntity();
+    }
+
+    // NOTE: Mob allegiance is the default for NPCs
+    PEntity->allegiance = static_cast<ALLEGIANCE_TYPE>(table.get_or<uint8>("allegiance", ALLEGIANCE_TYPE::MOB));
+
     uint16 ZoneID = m_pLuaZone->GetID();
-    CNpcEntity* PNpc = new CNpcEntity;
-    PNpc->allegiance = ALLEGIANCE_TYPE::MOB;
+    PEntity->targid = m_pLuaZone->GetZoneEntities()->GetNewDynamicTargID();
+    PEntity->id = 0x1000000 + (ZoneID << 12) + PEntity->targid;
 
-    // TODO: Sanity check and track targids in a zone from zone_entities
-    PNpc->targid = table.get<float>("targid");
-    PNpc->id = 0x1000000 + (ZoneID << 12) + PNpc->targid;
+    auto name = table.get_or<const char*>("name", "DynamicEntity");
+    PEntity->name.insert(0, name);
 
-    auto name = table.get<const char*>("name");
-    PNpc->name.insert(0, name);
+    PEntity->SetModelId(table.get_or<uint16>("modelId", 0));
 
-    PNpc->loc.p.rotation = table.get_or<uint8>("rotation", 0);
-    PNpc->loc.p.x        = table.get<float>("x");
-    PNpc->loc.p.y        = table.get<float>("y");
-    PNpc->loc.p.z        = table.get<float>("z");
-    PNpc->loc.p.moving   = 0;
+    PEntity->loc.p.rotation = table.get_or<uint8>("rotation", 0);
+    PEntity->loc.p.x        = table.get_or<float>("x", 0.01);
+    PEntity->loc.p.y        = table.get_or<float>("y", 0.01);
+    PEntity->loc.p.z        = table.get_or<float>("z", 0.01);
+    PEntity->loc.p.moving   = 0;
 
-    PNpc->speed        = 50;
-    PNpc->speedsub     = 50;
+    PEntity->speed        = 50;
+    PEntity->speedsub     = 50;
 
-    PNpc->animation    = 0;
-    PNpc->animationsub = 0;
+    PEntity->animation    = 0;
+    PEntity->animationsub = 0;
 
-    PNpc->namevis      = table.get_or<uint8>("namevis", 0);
-    PNpc->status       = STATUS_TYPE::NORMAL;
-    PNpc->m_flags      = table.get_or<uint32>("m_flags", 0);
+    if (auto* PNpc = dynamic_cast<CNpcEntity*>(PEntity))
+    {
+        PNpc->namevis       = table.get_or<uint8>("namevis", 0);
+        PNpc->status        = STATUS_TYPE::NORMAL;
+        PNpc->m_flags       = table.get_or<uint32>("m_flags", 0);
+        PNpc->name_prefix   = table.get_or<uint8>("name_prefix", 32);
+        PNpc->widescan      = 0;
+        PNpc->m_triggerable = table.get_or("triggerable", false);
 
-    PNpc->name_prefix = table.get_or<uint8>("name_prefix", 32);
-    PNpc->widescan    = 0;
+        m_pLuaZone->InsertNPC(PNpc);
+    }
+    else if (auto* PMob = dynamic_cast<CMobEntity*>(PEntity))
+    {
+        PMob->namevis      = table.get_or<uint8>("namevis", 0);
+        PMob->status       = STATUS_TYPE::NORMAL;
+        PMob->m_flags      = table.get_or<uint32>("m_flags", 0);
 
-    PNpc->SetModelId(table.get_or<uint16>("modelId", 0));
+        m_pLuaZone->InsertMOB(PMob);
+    }
 
-    m_pLuaZone->InsertNPC(PNpc);
-
-    return CLuaBaseEntity(PNpc);
+    return CLuaBaseEntity(PEntity);
 }
 
 //======================================================//
@@ -189,7 +210,7 @@ void CLuaZone::Register()
     SOL_REGISTER("battlefieldsFull", CLuaZone::battlefieldsFull);
     SOL_REGISTER("getWeather", CLuaZone::getWeather);
     SOL_REGISTER("reloadNavmesh", CLuaZone::reloadNavmesh);
-    SOL_REGISTER("insertCustomNPC", CLuaZone::insertCustomNPC);
+    SOL_REGISTER("insertDynamicEntity", CLuaZone::insertDynamicEntity);
 }
 
 std::ostream& operator<<(std::ostream& os, const CLuaZone& zone)

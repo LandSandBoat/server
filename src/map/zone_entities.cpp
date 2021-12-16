@@ -432,7 +432,7 @@ void CZoneEntities::DecreaseZoneCounter(CCharEntity* PChar)
     ShowDebug("CZone:: %s DecreaseZoneCounter <%u> %s", m_zone->GetName(), m_charList.size(), PChar->GetName());
 }
 
-uint16 CZoneEntities::GetNewTargID()
+uint16 CZoneEntities::GetNewCharTargID()
 {
     uint16 targid = 0x400;
     for (EntityList_t::const_iterator it = m_charList.begin(); it != m_charList.end(); ++it)
@@ -444,6 +444,13 @@ uint16 CZoneEntities::GetNewTargID()
         targid++;
     }
     return targid;
+}
+
+uint16 CZoneEntities::GetNewDynamicTargID()
+{
+    // TODO: Don't use static
+    static uint16 targid = 0x800; // 2048
+    return targid++;
 }
 
 bool CZoneEntities::CharListEmpty() const

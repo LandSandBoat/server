@@ -103,6 +103,8 @@ CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type
     {
         case TYPE_NPC:
         {
+            auto* PNpc = static_cast<CNpcEntity*>(PEntity);
+
             if (updatemask & UPDATE_HP)
             {
                 ref<uint8>(0x1E) = 0x64;
@@ -110,7 +112,12 @@ CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type
                 ref<uint8>(0x2A) |= PEntity->animationsub;
                 ref<uint32>(0x21) = ((CNpcEntity*)PEntity)->m_flags;
                 ref<uint8>(0x27)  = ((CNpcEntity*)PEntity)->name_prefix; // gender and something else
-                ref<uint8>(0x28) |= 0x40;
+
+                if (PNpc->IsTriggerable())
+                {
+                    ref<uint8>(0x28) |= 0x40;
+                }
+
                 ref<uint8>(0x29)  = static_cast<uint8>(PEntity->allegiance);
                 ref<uint8>(0x2B)  = PEntity->namevis;
             }
@@ -128,7 +135,7 @@ CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type
         case TYPE_PET:
         case TYPE_TRUST:
         {
-            CMobEntity* PMob = (CMobEntity*)PEntity;
+            CMobEntity* PMob = static_cast<CMobEntity*>(PEntity);
             {
                 if (updatemask & UPDATE_HP)
                 {

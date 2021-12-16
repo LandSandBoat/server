@@ -53,8 +53,7 @@ public:
     WEATHER     getWeather();
     void        reloadNavmesh();
 
-    // TODO: Rename NPC to Entity
-    CLuaBaseEntity insertCustomNPC(sol::table table);
+    auto insertDynamicEntity(sol::table table) -> std::optional<CLuaBaseEntity>;
 
     static void Register();
 };

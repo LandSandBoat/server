@@ -584,6 +584,8 @@ public:
     virtual void TOTDChange(TIMETYPE TOTD); // обработка реакции мира на смену времени суток
     virtual void PushPacket(CBaseEntity*, GLOBAL_MESSAGE_TYPE, CBasicPacket*); // отправляем глобальный пакет в пределах зоны
 
+    CZoneEntities* GetZoneEntities();
+
     time_point      m_RegionCheckTime; // время последней проверки регионов
     weatherVector_t m_WeatherVector;   // вероятность появления каждого типа погоды
 

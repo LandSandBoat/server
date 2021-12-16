@@ -637,7 +637,7 @@ void CZone::IncreaseZoneCounter(CCharEntity* PChar)
     XI_DEBUG_BREAK_IF(PChar->loc.zone != nullptr);
     XI_DEBUG_BREAK_IF(PChar->PTreasurePool != nullptr);
 
-    PChar->targid = m_zoneEntities->GetNewTargID();
+    PChar->targid = m_zoneEntities->GetNewCharTargID();
 
     if (PChar->targid >= 0x700)
     {
@@ -1063,6 +1063,12 @@ void CZone::CharZoneOut(CCharEntity* PChar)
     }
 
     charutils::WriteHistory(PChar);
+}
+
+CZoneEntities* CZone::GetZoneEntities()
+{
+    TracyZoneScoped;
+    return m_zoneEntities;
 }
 
 void CZone::CheckRegions(CCharEntity* PChar)
