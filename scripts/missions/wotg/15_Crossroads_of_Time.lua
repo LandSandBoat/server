@@ -1,12 +1,10 @@
 -----------------------------------
--- In the Name of the Father
--- Wings of the Goddess Mission 8
+-- Crossroads of Time
+-- Wings of the Goddess Mission 15
 -----------------------------------
--- !addmission 5 7
--- FIRE_IN_THE_HOLE   : !completequest 7 36
--- IN_A_HAZE_OF_GLORY : !completequest 7 38
--- A_FEAST_FOR_GNATS  : !completequest 7 40
--- Lion Springs Door  : !pos 96 0 106 80
+-- !addmission 5 14
+-- EAST_RONFAURE_S      : !zone 81
+-- SOUTHERN_SAN_DORIA_S : !zone 80
 -----------------------------------
 require('scripts/globals/keyitems')
 require('scripts/globals/maws')
@@ -19,11 +17,11 @@ require('scripts/globals/zone')
 require('scripts/missions/wotg/helpers')
 -----------------------------------
 
-local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.IN_THE_NAME_OF_THE_FATHER)
+local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.CROSSROADS_OF_TIME)
 
 mission.reward =
 {
-    nextMission = { xi.mission.log_id.WOTG, xi.mission.id.wotg.DANCERS_IN_DISTRESS },
+    nextMission = { xi.mission.log_id.WOTG, xi.mission.id.wotg.SANDSWEPT_MEMORIES },
 }
 
 mission.sections =
@@ -31,22 +29,23 @@ mission.sections =
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId and
-                xi.wotg.helpers.meetsMission8Reqs(player)
+                xi.wotg.helpers.meetsMission15Reqs(player)
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA_S] =
         {
-            ['Lion_Springs'] =
+            onZoneIn =
             {
-                onTrigger = function(player, npc)
-                    -- TODO: What are these args from caps?
-                    return mission:progressEvent(85, 2, 13, 0, 1, 3, 4, 8, 3)
+                function(player, prevZone)
+                    if prevZone == xi.zone.EAST_RONFAURE_S then
+                        return 145
+                    end
                 end,
             },
 
             onEventFinish =
             {
-                [85] = function(player, csid, option, npc)
+                [145] = function(player, csid, option, npc)
                     mission:complete(player)
                 end,
             },

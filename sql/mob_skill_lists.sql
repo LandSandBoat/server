@@ -1093,10 +1093,10 @@ INSERT INTO `mob_skill_lists` VALUES ('Tonberry_no_rancor',244,786);
 INSERT INTO `mob_skill_lists` VALUES ('Tonberry_no_rancor',244,787);
 INSERT INTO `mob_skill_lists` VALUES ('Tonberry_no_rancor',244,788);
 INSERT INTO `mob_skill_lists` VALUES ('Tonberry_no_rancor',244,920);
-INSERT INTO `mob_skill_lists` VALUES ('Treant',245,328);
-INSERT INTO `mob_skill_lists` VALUES ('Treant',245,329);
-INSERT INTO `mob_skill_lists` VALUES ('Treant',245,331);
-INSERT INTO `mob_skill_lists` VALUES ('Treant',245,332);
+INSERT INTO `mob_skill_lists` VALUES ('Treant',245,328); -- drill_branch
+INSERT INTO `mob_skill_lists` VALUES ('Treant',245,329); -- pinecone_bomb
+INSERT INTO `mob_skill_lists` VALUES ('Treant',245,331); -- leafstorm
+INSERT INTO `mob_skill_lists` VALUES ('Treant',245,332); -- entangle
 -- INSERT INTO `mob_skill_lists` VALUES ('Troll',246,1741);
 -- INSERT INTO `mob_skill_lists` VALUES ('Troll',246,1742);
 INSERT INTO `mob_skill_lists` VALUES ('Troll',246,1743);
