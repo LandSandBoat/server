@@ -29,6 +29,7 @@
 #include "../zone_entities.h"
 #include "lua_baseentity.h"
 #include "lua_zone.h"
+#include "../utils/mobutils.h"
 
 CLuaZone::CLuaZone(CZone* PZone)
 : m_pLuaZone(PZone)
@@ -159,6 +160,7 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
 
     PEntity->SetModelId(table.get_or<uint16>("modelId", 0));
 
+    PEntity->loc.zone       = m_pLuaZone;
     PEntity->loc.p.rotation = table.get_or<uint8>("rotation", 0);
     PEntity->loc.p.x        = table.get_or<float>("x", 0.01);
     PEntity->loc.p.y        = table.get_or<float>("y", 0.01);
@@ -170,6 +172,8 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
 
     PEntity->animation    = 0;
     PEntity->animationsub = 0;
+
+    PEntity->updatemask |= UPDATE_ALL_MOB;
 
     if (auto* PNpc = dynamic_cast<CNpcEntity*>(PEntity))
     {
@@ -184,9 +188,28 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
     }
     else if (auto* PMob = dynamic_cast<CMobEntity*>(PEntity))
     {
-        PMob->namevis      = table.get_or<uint8>("namevis", 0);
-        PMob->status       = STATUS_TYPE::NORMAL;
-        PMob->m_flags      = table.get_or<uint32>("m_flags", 0);
+        PMob->m_Detects     = DETECT_SIGHT;
+        PMob->namevis       = table.get_or<uint8>("namevis", 0);
+        PMob->status        = STATUS_TYPE::NORMAL;
+        PMob->m_flags       = table.get_or<uint32>("m_flags", 0);
+        PMob->m_name_prefix = table.get_or<uint8>("name_prefix", 32);
+
+        PMob->m_minLevel = 80;
+        PMob->m_maxLevel = 80;
+
+        PMob->SetMJob(1);
+        PMob->SetSJob(1);
+
+        PMob->HPscale = 1.0f;
+        PMob->MPscale = 1.0f;
+
+        PMob->health.maxhp = 100;
+        PMob->health.hp    = 100;
+
+        if (table.get_or("spawn", false))
+        {
+            PMob->Spawn();
+        }
 
         m_pLuaZone->InsertMOB(PMob);
     }

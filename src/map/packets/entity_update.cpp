@@ -291,6 +291,7 @@ CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type
                     ref<uint8>(0x1E) = PMob->GetHPP();
                     ref<uint8>(0x1F) = PEntity->animation;
                     ref<uint8>(0x2A) |= PEntity->animationsub;
+
                     ref<uint32>(0x21) = PMob->m_flags;
                     ref<uint8>(0x25)  = PMob->health.hp > 0 ? 0x08 : 0;
                     ref<uint8>(0x27)  = PMob->m_name_prefix;

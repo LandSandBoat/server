@@ -13,9 +13,11 @@ m:setEnabled(true)
 
 -- Workaround
 if m.enabled then
-    -- Insert NPC into zone
     local zone = GetZone(210)
-    local mob = zone:insertDynamicEntity({
+
+    -- Insert NPC into zone
+    local npc = zone:insertDynamicEntity({
+        objtype = xi.objType.NPC,
         name = "Horro",
         modelId = 2430,
         x = 5.000,
@@ -26,7 +28,7 @@ if m.enabled then
     })
 
     -- Use the mob object however you like
-    utils.unused(mob)
+    utils.unused(npc)
 
     -- Build a cache entry for the new NPC
     -- TODO: The npcs table is nil here, why?
@@ -37,8 +39,8 @@ if m.enabled then
     xi.zones.GM_Home.npcs.Horro.onTrade = function(player, npc, trade)
     end
 
-    xi.zones.GM_Home.npcs.Horro.onTrigger = function(player, npc)
-        player:PrintToPlayer("Welcome to GM Home!", 0, npc:getName())
+    xi.zones.GM_Home.npcs.Horro.onTrigger = function(player, npcArg)
+        player:PrintToPlayer("Welcome to GM Home!", 0, npcArg:getName())
     end
 
     xi.zones.GM_Home.npcs.Horro.onEventUpdate = function(player, csid, option)
