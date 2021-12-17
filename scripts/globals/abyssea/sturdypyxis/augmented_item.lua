@@ -195,15 +195,15 @@ local function GiveAugItem(player, npc, slot)
     local item2aug2    = GetAug(npc, 2, 2)
     local item2aug2val = GetAugVal(npc, 2, 2)
 
-    if (slot == 1) then
-        if (npc:getLocalVar("ITEM1ID") == 0) then
+    if slot == 1 then
+        if npc:getLocalVar("ITEM1ID") == 0 then
             player:messageSpecial(zones[zoneId].text.ITEM_DISAPPEARED)
             return 0
         else
-            if (player:getFreeSlotsCount() == 0) then -- NOTE: check a var or somthing for the item
+            if player:getFreeSlotsCount() == 0 then -- NOTE: check a var or somthing for the item
                 player:messageSpecial(zones[zoneId].text.ITEM_CANNOT_BE_OBTAINED, item1)
                 return 0
-            elseif (player:getFreeSlotsCount() > 0) then
+            elseif player:getFreeSlotsCount() > 0 then
                     if (GetAugItemID(npc,1) ~= 0) then
                     player:addItem(item1, 1, item1aug1, item1aug1val, item1aug2, item1aug2val)
                     xi.pyxis.messageChest(player, zones[zoneId].text.OBTAINS_ITEM, item1, 0, 0, 0)
@@ -211,16 +211,16 @@ local function GiveAugItem(player, npc, slot)
                 end
             end
         end
-    elseif (slot == 2) then
-        if (npc:getLocalVar("ITEM2ID") == 0) then
+    elseif slot == 2 then
+        if npc:getLocalVar("ITEM2ID") == 0 then
             player:messageSpecial(zones[zoneId].text.ITEM_DISAPPEARED)
             return 0
         else
-            if (player:getFreeSlotsCount() == 0) then -- NOTE: check a var or somthing for the item
+            if player:getFreeSlotsCount() == 0 then -- NOTE: check a var or somthing for the item
                 player:messageSpecial(zones[zoneId].text.ITEM_CANNOT_BE_OBTAINED, item2)
                 return 0
-            elseif (player:getFreeSlotsCount() > 0) then
-                    if (GetAugItemID(npc,2) ~= 0) then
+            elseif player:getFreeSlotsCount() > 0 then
+                    if GetAugItemID(npc,2) ~= 0 then
                     player:addItem(item2,1,item2aug1,item2aug1val,item2aug2,item2aug2val)
                     xi.pyxis.messageChest(player, zones[zoneId].text.OBTAINS_ITEM, item2, 0, 0, 0)
                     npc:setLocalVar("ITEM2ID", 0)
