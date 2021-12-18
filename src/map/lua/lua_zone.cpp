@@ -151,6 +151,10 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
     PEntity->allegiance = static_cast<ALLEGIANCE_TYPE>(table.get_or<uint8>("allegiance", ALLEGIANCE_TYPE::MOB));
 
     uint16 ZoneID = m_pLuaZone->GetID();
+
+    // TODO: Wrap this entity in a unique_ptr that will free this dynamic targ ID
+    //       on despawn/destruction
+    // TODO: The tracking of these IDs is pretty bad also, fix that in zone_entities
     PEntity->targid = m_pLuaZone->GetZoneEntities()->GetNewDynamicTargID();
 
     PEntity->id = 0x1000000 + (ZoneID << 12) + PEntity->targid;
