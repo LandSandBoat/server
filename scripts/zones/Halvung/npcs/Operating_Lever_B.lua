@@ -1,7 +1,7 @@
 -----------------------------------
---  Area: Halvung
+-- Area: Halvung
 --  NPC: Operating Lever B
---  TODO: more than 5/6 people still need verification as no sites show this requirment?
+-- TODO: more than 5/6 people still need verification as no sites show this requirment?
 -----------------------------------
 local ID = require("scripts/zones/Halvung/IDs")
 -----------------------------------
@@ -11,13 +11,11 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:hasKeyItem(xi.ki.BRACELET_OF_VERVE) == false then
-        player:startEvent(100)
-        return 1
-    else
+    if player:hasKeyItem(xi.ki.BRACELET_OF_VERVE) then
         GetNPCByID(npc:getID() - 3):openDoor(30)
         player:messageSpecial(ID.text.LIFT_LEVER)
-        return 1
+    else
+        player:startEvent(100)
     end
 end
 
