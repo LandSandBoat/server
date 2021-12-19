@@ -14058,7 +14058,7 @@ INSERT INTO `mob_droplist` VALUES (2616,0,0,1000,2728,150);
 INSERT INTO `mob_droplist` VALUES (2617,0,0,1000,573,70);
 INSERT INTO `mob_droplist` VALUES (2617,4,0,1000,953,0);
 INSERT INTO `mob_droplist` VALUES (2617,0,0,1000,953,320);
-INSERT INTO `mob_droplist` VALUES (2617,0,0,1000,5688,180); -- (Wandering Sapling) head_of_grauberg_lettuce
+INSERT INTO `mob_droplist` VALUES (2617,0,0,1000,5688,150); -- (Wandering Sapling) head_of_grauberg_lettuce
 INSERT INTO `mob_droplist` VALUES (2618,0,0,1000,572,40);
 INSERT INTO `mob_droplist` VALUES (2618,0,0,1000,575,20);
 INSERT INTO `mob_droplist` VALUES (2618,0,0,1000,953,90);
