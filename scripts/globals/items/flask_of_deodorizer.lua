@@ -13,8 +13,8 @@ item_object.onItemCheck = function(target)
 end
 
 item_object.onItemUse = function(target)
-    if (not target:hasStatusEffect(xi.effect.DEODORIZE)) then
-        target:addStatusEffect(xi.effect.DEODORIZE, 1, 10, 180)
+    if  not target:hasStatusEffect(xi.effect.DEODORIZE) then
+        target:addStatusEffect(xi.effect.DEODORIZE, 1, 10, 600)
     else
         target:messageBasic(xi.msg.basic.NO_EFFECT)
     end
