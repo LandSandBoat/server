@@ -15,7 +15,7 @@ end
 item_object.onItemUse = function(target)
     local duration = (600)
     if (not target:hasStatusEffect(xi.effect.SNEAK)) then
-        target:addStatusEffect(xi.effect.SNEAK, 1, 10, math.max(duration * xi.settings.SNEAK_INVIS_DURATION_MULTIPLIER))
+        target:addStatusEffect(xi.effect.SNEAK, 1, 10, math.floor(duration * xi.settings.SNEAK_INVIS_DURATION_MULTIPLIER))
     end
 end
 
