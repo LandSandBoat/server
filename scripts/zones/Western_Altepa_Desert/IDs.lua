@@ -36,15 +36,15 @@ zones[xi.zone.WESTERN_ALTEPA_DESERT] =
         FEEL_SOMETHING_PRICKLY     = 7371,  -- You feel something prickly...
         MANY_STONES_LITTER_AREA    = 7372,  -- Many stones litter the area.
         EVIL_LOOMING_ABOVE_YOU     = 7373,  -- You sense something evil looming above you.
-        SENSE_OMINOUS_PRESENCE     = 7412,  -- You sense an ominous presence...
-        SOMETHING_IS_BURIED_HERE   = 7430,  -- It looks like something is buried here. If you had <item> you could dig it up.
-        PLAYER_OBTAINS_ITEM        = 7643,  -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM      = 7644,  -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM   = 7645,  -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP       = 7646,  -- You already possess that temporary item.
-        NO_COMBINATION             = 7651,  -- You were unable to enter a combination.
-        REGIME_REGISTERED          = 9829,  -- New training regime registered!
-        COMMON_SENSE_SURVIVAL      = 11818, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        SENSE_OMINOUS_PRESENCE     = 7405,  -- You sense an ominous presence...
+        SOMETHING_IS_BURIED_HERE   = 7423,  -- It looks like something is buried here. If you had <item> you could dig it up.
+        PLAYER_OBTAINS_ITEM        = 7636,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM      = 7637,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM   = 7638,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP       = 7639,  -- You already possess that temporary item.
+        NO_COMBINATION             = 7644,  -- You were unable to enter a combination.
+        REGIME_REGISTERED          = 9822,  -- New training regime registered!
+        COMMON_SENSE_SURVIVAL      = 11811, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {

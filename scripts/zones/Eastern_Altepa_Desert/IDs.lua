@@ -29,13 +29,13 @@ zones[xi.zone.EASTERN_ALTEPA_DESERT] =
         FIND_NOTHING             = 7569,  -- You dig and you dig, but find nothing.
         AMK_DIGGING_OFFSET       = 7635,  -- You spot some familiar footprints. You are convinced that your moogle friend has been digging in the immediate vicinity.
         ALREADY_OBTAINED_TELE    = 7663,  -- You already possess the gate crystal for this telepoint.
-        PLAYER_OBTAINS_ITEM      = 7781,  -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM    = 7782,  -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM = 7783,  -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP     = 7784,  -- You already possess that temporary item.
-        NO_COMBINATION           = 7789,  -- You were unable to enter a combination.
-        REGIME_REGISTERED        = 9967,  -- New training regime registered!
-        COMMON_SENSE_SURVIVAL    = 11103, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        PLAYER_OBTAINS_ITEM      = 7774,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM    = 7775,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM = 7776,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP     = 7777,  -- You already possess that temporary item.
+        NO_COMBINATION           = 7782,  -- You were unable to enter a combination.
+        REGIME_REGISTERED        = 9960,  -- New training regime registered!
+        COMMON_SENSE_SURVIVAL    = 11096, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {

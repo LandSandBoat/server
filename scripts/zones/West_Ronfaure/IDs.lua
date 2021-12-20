@@ -40,14 +40,14 @@ zones[xi.zone.WEST_RONFAURE] =
         PICKPOCKET_ZOVRIACE      = 7388,  -- A pickpocket, out here? Can't say I've seen anyone like that. I'll keep my eyes peeled.
         DISMAYED_CUSTOMER        = 7412,  -- You find some worthless scraps of paper.
         CONQUEST                 = 7534,  -- You've earned conquest points!
-        SOMETHING_IS_AMISS       = 7904,  -- Something is amiss.
-        PLAYER_OBTAINS_ITEM      = 8070,  -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM    = 8071,  -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM = 8072,  -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP     = 8073,  -- You already possess that temporary item.
-        NO_COMBINATION           = 8078,  -- You were unable to enter a combination.
-        REGIME_REGISTERED        = 10443, -- New training regime registered!
-        COMMON_SENSE_SURVIVAL    = 12444, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        SOMETHING_IS_AMISS       = 7897,  -- Something is amiss.
+        PLAYER_OBTAINS_ITEM      = 8063,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM    = 8064,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM = 8065,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP     = 8066,  -- You already possess that temporary item.
+        NO_COMBINATION           = 8071,  -- You were unable to enter a combination.
+        REGIME_REGISTERED        = 10436, -- New training regime registered!
+        COMMON_SENSE_SURVIVAL    = 12437, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {
