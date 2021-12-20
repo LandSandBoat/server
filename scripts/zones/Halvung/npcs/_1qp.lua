@@ -10,15 +10,26 @@ require("scripts/globals/status")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if npcUtil.tradeHasExactly(trade, {2221, 2222, 2223}) then
+    if
+        npcUtil.tradeHasExactly(trade,
+        {
+            xi.items.HALVUNG_SHAKUDO_KEY,
+            xi.items.HALVUNG_BRONZE_KEY,
+            xi.items.HALVUNG_BRASS_KEY
+        })
+    then
         player:confirmTrade()
         npc:openDoor()
-        player:messageSpecial(ID.text.KEY_BREAKS, 2221,2222,2223)
+        player:messageSpecial(ID.text.KEY_BREAKS,
+            xi.items.HALVUNG_SHAKUDO_KEY,
+            xi.items.HALVUNG_BRONZE_KEY,
+            xi.items.HALVUNG_BRASS_KEY
+        )
     end
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getZPos() <= 79 and npc:getAnimation() == xi.anim.CLOSE_DOOR then -- from inside the door
+    if player:getZPos() <= 79.75 and npc:getAnimation() == xi.anim.CLOSE_DOOR then -- from inside the door
         npc:openDoor()
     else
         player:messageSpecial(ID.text.WIDE_TRENCH)
