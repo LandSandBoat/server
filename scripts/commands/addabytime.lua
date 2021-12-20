@@ -41,10 +41,11 @@ function onTrigger(player, minutes, target)
     end
 
     -- add time
-    local zoneId = targ:getZoneID()
-    local ID = zones[zoneId]
-    local old_duration = effect:getDuration()
-	player:PrintToPlayer(old_duration)
-    effect:setDuration((old_duration + (minutes * 60)) * 1000)
-    --targ:messageSpecial(ID.text.ABYSSEA_TIME_EXTEND, minutes)
+    local ID = zones[targ:getZoneID()]
+    local oldDuration = tonumber(effect:getDuration())
+    local newDuration = (oldDuration + (tonumber(minutes) * 60)) * 1000
+
+    effect:setDuration(newDuration)
+    effect:resetStartTime()
+    effect:setIcon(xi.effect.VISITANT)
 end

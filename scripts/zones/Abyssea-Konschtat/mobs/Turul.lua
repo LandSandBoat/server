@@ -4,6 +4,7 @@
 -----------------------------------
 mixins = {require("scripts/mixins/families/amphiptere")}
 require("scripts/globals/status")
+require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 
@@ -29,6 +30,7 @@ entity.onSpellPrecast = function(mob, spell)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
+    player:addTitle(xi.title.TURUL_GROUNDER)
 end
 
 return entity

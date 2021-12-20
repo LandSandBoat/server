@@ -13,16 +13,16 @@ g_mixins.abyssea_weakness = function(mob)
 			mobArg:setLocalVar("[CanProc]", 1)
 			mobArg:setLocalVar("[RedWeakness]", xi.abyssea.getNewRedWeakness(mobArg))
 			mobArg:setLocalVar("[AbysseaRedProc]", 0)
+			mobArg:setLocalVar("[YellowWeakness]", xi.abyssea.getNewYellowWeakness(mobArg))
+			mobArg:setLocalVar("[AbysseaYellowProc]", 0)
+			mobArg:setLocalVar("[BlueWeakness]", xi.abyssea.getNewBlueWeakness(mobArg))
+			mobArg:setLocalVar("[AbysseaBlueProc]", 0)
 		end)
 
 		mob:addListener("ATTACKED", "ATTACKED_ABYSSEA_CHECK_CLAIM", function(mobArg, player, action)
 			local claimed = mobArg:getLocalVar("[ClaimedBy]")
 			if claimed == 0 then
 				mobArg:setLocalVar("[ClaimedBy]", player:getID())
-				mobArg:setLocalVar("[YellowWeakness]", xi.abyssea.getNewYellowWeakness(mobArg))
-				mobArg:setLocalVar("[AbysseaYellowProc]", 0)
-				mobArg:setLocalVar("[BlueWeakness]", xi.abyssea.getNewBlueWeakness(mobArg))
-				mobArg:setLocalVar("[AbysseaBlueProc]", 0)
 			end
 		end)
 
