@@ -54,7 +54,7 @@ zones[xi.zone.EAST_SARUTABARUTA] =
     },
     npc =
     {
-        CASKET_BASE = 17253005,
+        CASKET_BASE = 17253006,
     },
 }
 

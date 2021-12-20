@@ -71,9 +71,9 @@ zones[xi.zone.THE_SANCTUARY_OF_ZITAH] =
     },
     npc =
     {
-        CASKET_BASE      = 17273337,
-        OVERSEER_BASE    = 17273364, -- Credaurion_RK in npc_list
-        CERMET_HEADSTONE = 17273389,
+        CASKET_BASE      = 17273338,
+        OVERSEER_BASE    = 17273365, -- Credaurion_RK in npc_list
+        CERMET_HEADSTONE = 17273390,
     },
 }
 
