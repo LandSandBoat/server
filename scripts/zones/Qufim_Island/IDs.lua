@@ -26,19 +26,19 @@ zones[xi.zone.QUFIM_ISLAND] =
         THESE_WITHERED_FLOWERS         = 7332,  -- These withered flowers seem unable to bloom.
         NOW_THAT_NIGHT_HAS_FALLEN      = 7333,  -- Now that night has fallen, the flowers bloom with a strange glow.
         CONQUEST                       = 7381,  -- You've earned conquest points!
-        AN_EMPTY_LIGHT_SWIRLS          = 7758,  -- An empty light swirls about the cave, eating away at the surroundings...
-        GIGANTIC_FOOTPRINT             = 7842,  -- There is a gigantic footprint here.
-        YOU_CANNOT_ENTER_DYNAMIS       = 7868,  -- You cannot enter Dynamis - [Dummy/San d'Oria/Bastok/Windurst/Jeuno/Beaucedine/Xarcabard/Valkurm/Buburimu/Qufim/Tavnazia] for <number> [day/days] (Vana'diel time).
-        PLAYERS_HAVE_NOT_REACHED_LEVEL = 7870,  -- Players who have not reached level <number> are prohibited from entering Dynamis.
-        DYNA_NPC_DEFAULT_MESSAGE       = 7992,  -- There is a strange symbol drawn here. A haunting chill sweeps through you as you gaze upon it...
-        PLAYER_OBTAINS_ITEM            = 8066,  -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM          = 8067,  -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM       = 8068,  -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP           = 8069,  -- You already possess that temporary item.
-        NO_COMBINATION                 = 8074,  -- You were unable to enter a combination.
-        REGIME_REGISTERED              = 10350, -- New training regime registered!
-        COMMON_SENSE_SURVIVAL          = 12675, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
-        HOMEPOINT_SET                  = 12717, -- Home point set!
+        AN_EMPTY_LIGHT_SWIRLS          = 7751,  -- An empty light swirls about the cave, eating away at the surroundings...
+        GIGANTIC_FOOTPRINT             = 7835,  -- There is a gigantic footprint here.
+        YOU_CANNOT_ENTER_DYNAMIS       = 7861,  -- You cannot enter Dynamis - [Dummy/San d'Oria/Bastok/Windurst/Jeuno/Beaucedine/Xarcabard/Valkurm/Buburimu/Qufim/Tavnazia] for <number> [day/days] (Vana'diel time).
+        PLAYERS_HAVE_NOT_REACHED_LEVEL = 7863,  -- Players who have not reached level <number> are prohibited from entering Dynamis.
+        DYNA_NPC_DEFAULT_MESSAGE       = 7985,  -- There is a strange symbol drawn here. A haunting chill sweeps through you as you gaze upon it...
+        PLAYER_OBTAINS_ITEM            = 8059,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM          = 8060,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM       = 8061,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP           = 8062,  -- You already possess that temporary item.
+        NO_COMBINATION                 = 8067,  -- You were unable to enter a combination.
+        REGIME_REGISTERED              = 10343, -- New training regime registered!
+        COMMON_SENSE_SURVIVAL          = 12668, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        HOMEPOINT_SET                  = 12710, -- Home point set!
     },
     mob =
     {
@@ -60,8 +60,8 @@ zones[xi.zone.QUFIM_ISLAND] =
     },
     npc =
     {
-        CASKET_BASE   = 17293677,
-        OVERSEER_BASE = 17293715, -- Pitoire_RK in npc_list
+        CASKET_BASE   = 17293678,
+        OVERSEER_BASE = 17293716, -- Pitoire_RK in npc_list
     },
 }
 

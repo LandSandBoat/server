@@ -28,24 +28,24 @@ zones[xi.zone.MERIPHATAUD_MOUNTAINS] =
         AMK_DIGGING_OFFSET       = 7315,  -- You spot some familiar footprints. You are convinced that your moogle friend has been digging in the immediate vicinity.
         NOTHING_FOUND            = 7492,  -- You find nothing.
         CONQUEST                 = 7904,  -- You've earned conquest points!
-        ITEMS_ITEMS_LA_LA        = 8296,  -- You can hear a strange voice... Items, items, la la la la la
-        GOBLIN_SLIPPED_AWAY      = 8302,  -- The Goblin slipped away when you were not looking...
-        PLAYER_OBTAINS_ITEM      = 8359,  -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM    = 8360,  -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM = 8361,  -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP     = 8362,  -- You already possess that temporary item.
-        NO_COMBINATION           = 8367,  -- You were unable to enter a combination.
-        VOIDWALKER_DESPAWN       = 8398,  -- The monster fades before your eyes, a look of disappointment on its face.
-        REGIME_REGISTERED        = 10607, -- New training regime registered!
-        VOIDWALKER_NO_MOB        = 11726, -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
-        VOIDWALKER_MOB_TOO_FAR   = 11727, -- The <keyitem> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
-        VOIDWALKER_MOB_HINT      = 11728, -- The <keyitem> resonates [feebly/softly/solidly/strongly/very strongly/furiously], sending a radiant beam of light lancing towards a spot roughly <number> [yalm/yalms] [east/southeast/south/southwest/west/northwest/north/northeast] of here.
-        VOIDWALKER_SPAWN_MOB     = 11729, -- A monster materializes out of nowhere!
-        VOIDWALKER_UPGRADE_KI_1  = 11731, -- The <keyitem> takes on a slightly deeper hue and becomes <keyitem>!
-        VOIDWALKER_UPGRADE_KI_2  = 11732, -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
-        VOIDWALKER_BREAK_KI      = 11733, -- The <keyitem> shatters into tiny fragments.
-        VOIDWALKER_OBTAIN_KI     = 11734, -- Obtained key item: <keyitem>!
-        COMMON_SENSE_SURVIVAL    = 12636, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        ITEMS_ITEMS_LA_LA        = 8289,  -- You can hear a strange voice... Items, items, la la la la la
+        GOBLIN_SLIPPED_AWAY      = 8295,  -- The Goblin slipped away when you were not looking...
+        PLAYER_OBTAINS_ITEM      = 8352,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM    = 8353,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM = 8354,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP     = 8355,  -- You already possess that temporary item.
+        NO_COMBINATION           = 8360,  -- You were unable to enter a combination.
+        VOIDWALKER_DESPAWN       = 8391,  -- The monster fades before your eyes, a look of disappointment on its face.
+        REGIME_REGISTERED        = 10600, -- New training regime registered!
+        VOIDWALKER_NO_MOB        = 11719, -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
+        VOIDWALKER_MOB_TOO_FAR   = 11720, -- The <keyitem> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
+        VOIDWALKER_MOB_HINT      = 11721, -- The <keyitem> resonates [feebly/softly/solidly/strongly/very strongly/furiously], sending a radiant beam of light lancing towards a spot roughly <number> [yalm/yalms] [east/southeast/south/southwest/west/northwest/north/northeast] of here.
+        VOIDWALKER_SPAWN_MOB     = 11722, -- A monster materializes out of nowhere!
+        VOIDWALKER_UPGRADE_KI_1  = 11724, -- The <keyitem> takes on a slightly deeper hue and becomes <keyitem>!
+        VOIDWALKER_UPGRADE_KI_2  = 11725, -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
+        VOIDWALKER_BREAK_KI      = 11726, -- The <keyitem> shatters into tiny fragments.
+        VOIDWALKER_OBTAIN_KI     = 11727, -- Obtained key item: <keyitem>!
+        COMMON_SENSE_SURVIVAL    = 12629, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {
@@ -91,8 +91,8 @@ zones[xi.zone.MERIPHATAUD_MOUNTAINS] =
     },
     npc =
     {
-        CASKET_BASE   = 17265218,
-        OVERSEER_BASE = 17265270, -- Chegourt_RK in npc_list
+        CASKET_BASE   = 17265219,
+        OVERSEER_BASE = 17265271, -- Chegourt_RK in npc_list
     },
 }
 
