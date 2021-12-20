@@ -3344,8 +3344,43 @@ void SmallPacket0x05D(map_session_data_t* const PSession, CCharEntity* const PCh
 
     const auto extra = data.ref<uint16>(0x0C);
 
+    // Attempting to use bell emote without a bell.
+    if (EmoteID == Emote::BELL)
+    {
+        auto IsBell = [](uint16 itemId)
+        {
+            // Dream Bell, Dream Bell +1, Lady Bell, Lady Bell +1
+            return (itemId == 18863 || itemId == 18864 || itemId == 18868 || itemId == 18869);
+        };
+
+        // This is the actual observed behavior. Even with a different weapon type equipped,
+        // having a bell in the lockstyle is sufficient. On the other hand, if any other
+        // weapon is lockstyle'd over an equipped bell, the emote will be rejected.
+        // For what it's worth, geomancer bells don't count as a bell for this emote.
+
+        // Look for a bell in the style.
+        auto mainWeapon = PChar->styleItems[SLOT_MAIN];
+        if (mainWeapon == 0)
+        {
+            // Nothing equipped in the style, look at what's actually equipped.
+            mainWeapon = PChar->getEquip(SLOT_MAIN) != nullptr
+                ? PChar->getEquip(SLOT_MAIN)->getID() : 0;
+        }
+
+        if (!IsBell(mainWeapon))
+        {
+            // Bell not found.
+            return;
+        }
+
+        if (extra < 0x06 || extra > 0x1e)
+        {
+            // Invalid note.
+            return;
+        }
+    }
     // Attempting to use locked job emote.
-    if (EmoteID == Emote::JOB && extra && !(PChar->jobs.unlocked & (1 << (extra - 0x1E))))
+    else if (EmoteID == Emote::JOB && extra && !(PChar->jobs.unlocked & (1 << (extra - 0x1E))))
     {
         return;
     }
