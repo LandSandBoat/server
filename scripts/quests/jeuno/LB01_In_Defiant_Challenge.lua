@@ -24,21 +24,29 @@ require('scripts/globals/quests')
 require('scripts/globals/titles')
 require('scripts/globals/interaction/quest')
 -----------------------------------
+local crawlersID = require('scripts/zones/Crawlers_Nest/IDs')
+local eldiemeID  = require('scripts/zones/The_Eldieme_Necropolis/IDs')
+local garlaigeID = require('scripts/zones/Garlaige_Citadel/IDs')
+-----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.IN_DEFIANT_CHALLENGE)
 
--- When all 3 pieces are obtained, a text is shown where it states they are merged into the correct item.
--- TODO: Find said text ID in Crawlers Nest, The Eldieme Necropolis and Garlaige Citadel and apply it here when needed.
+-- NOTE: This is handled in such an unconventional manner just so the text appears in the same order as in retail.
 local function handleExorayMold(player)
     if
         player:hasKeyItem(xi.ki.EXORAY_MOLD_CRUMB1) and
         player:hasKeyItem(xi.ki.EXORAY_MOLD_CRUMB2) and
-        player:hasKeyItem(xi.ki.EXORAY_MOLD_CRUMB3) and
-        npcUtil.giveItem(player, xi.items.CLUMP_OF_EXORAY_MOLD)
+        player:hasKeyItem(xi.ki.EXORAY_MOLD_CRUMB3)
     then
-        player:delKeyItem(xi.ki.EXORAY_MOLD_CRUMB1)
-        player:delKeyItem(xi.ki.EXORAY_MOLD_CRUMB2)
-        player:delKeyItem(xi.ki.EXORAY_MOLD_CRUMB3)
+        if player:getFreeSlotsCount() > 0 then
+            player:delKeyItem(xi.ki.EXORAY_MOLD_CRUMB1)
+            player:delKeyItem(xi.ki.EXORAY_MOLD_CRUMB2)
+            player:delKeyItem(xi.ki.EXORAY_MOLD_CRUMB3)
+            player:messageSpecial(crawlersID.text.COMBINE_INTO_A_CLUMP, xi.ki.EXORAY_MOLD_CRUMB1)
+            npcUtil.giveItem(player, xi.items.CLUMP_OF_EXORAY_MOLD)
+        else
+            player:messageSpecial(crawlersID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.CLUMP_OF_EXORAY_MOLD)
+        end
     end
 end
 
@@ -46,12 +54,17 @@ local function handleBombCoal(player)
     if
         player:hasKeyItem(xi.ki.BOMB_COAL_FRAGMENT1) and
         player:hasKeyItem(xi.ki.BOMB_COAL_FRAGMENT2) and
-        player:hasKeyItem(xi.ki.BOMB_COAL_FRAGMENT3) and
-        npcUtil.giveItem(player, xi.items.CHUNK_OF_BOMB_COAL)
+        player:hasKeyItem(xi.ki.BOMB_COAL_FRAGMENT3)
     then
-        player:delKeyItem(xi.ki.BOMB_COAL_FRAGMENT1)
-        player:delKeyItem(xi.ki.BOMB_COAL_FRAGMENT2)
-        player:delKeyItem(xi.ki.BOMB_COAL_FRAGMENT3)
+        if player:getFreeSlotsCount() > 0 then
+            player:delKeyItem(xi.ki.BOMB_COAL_FRAGMENT1)
+            player:delKeyItem(xi.ki.BOMB_COAL_FRAGMENT2)
+            player:delKeyItem(xi.ki.BOMB_COAL_FRAGMENT3)
+            player:messageSpecial(garlaigeID.text.COMBINE_INTO_A_CHUNK, xi.ki.BOMB_COAL_FRAGMENT1)
+            npcUtil.giveItem(player, xi.items.CHUNK_OF_BOMB_COAL)
+        else
+            player:messageSpecial(garlaigeID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.CHUNK_OF_BOMB_COAL)
+        end
     end
 end
 
@@ -59,12 +72,17 @@ local function handleAncientPapyrus(player)
     if
         player:hasKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED1) and
         player:hasKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED2) and
-        player:hasKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED3) and
-        npcUtil.giveItem(player, xi.items.PIECE_OF_ANCIENT_PAPYRUS)
+        player:hasKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED3)
     then
-        player:delKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED1)
-        player:delKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED2)
-        player:delKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED3)
+        if player:getFreeSlotsCount() > 0 then
+            player:delKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED1)
+            player:delKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED2)
+            player:delKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED3)
+            player:messageSpecial(eldiemeID.text.PUT_TOGUETHER_TO_COMPLETE, xi.ki.ANCIENT_PAPYRUS_SHRED1)
+            npcUtil.giveItem(player, xi.items.PIECE_OF_ANCIENT_PAPYRUS)
+        else
+            player:messageSpecial(eldiemeID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.PIECE_OF_ANCIENT_PAPYRUS)
+        end
     end
 end
 

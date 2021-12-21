@@ -29,22 +29,22 @@ zones[xi.zone.SAUROMUGUE_CHAMPAIGN] =
         FIND_NOTHING             = 7257,  -- You dig and you dig, but find nothing.
         THF_AF_MOB               = 7419,  -- Something has come down from the tower!
         THF_AF_WALL_OFFSET       = 7438,  -- It is impossible to climb this wall with your bare hands.
-        PLAYER_OBTAINS_ITEM      = 7519,  -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM    = 7520,  -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM = 7521,  -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP     = 7522,  -- You already possess that temporary item.
-        NO_COMBINATION           = 7527,  -- You were unable to enter a combination.
-        VOIDWALKER_DESPAWN       = 7558,  -- The monster fades before your eyes, a look of disappointment on its face.
-        REGIME_REGISTERED        = 9828,  -- New training regime registered!
-        VOIDWALKER_NO_MOB        = 11001, -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
-        VOIDWALKER_MOB_TOO_FAR   = 11002, -- The <keyitem> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
-        VOIDWALKER_MOB_HINT      = 11003, -- The <keyitem> resonates [feebly/softly/solidly/strongly/very strongly/furiously], sending a radiant beam of light lancing towards a spot roughly <number> [yalm/yalms] [east/southeast/south/southwest/west/northwest/north/northeast] of here.
-        VOIDWALKER_SPAWN_MOB     = 11004, -- A monster materializes out of nowhere!
-        VOIDWALKER_UPGRADE_KI_1  = 11006, -- The <keyitem> takes on a slightly deeper hue and becomes <keyitem>!
-        VOIDWALKER_UPGRADE_KI_2  = 11007, -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
-        VOIDWALKER_BREAK_KI      = 11008, -- The <keyitem> shatters into tiny fragments.
-        VOIDWALKER_OBTAIN_KI     = 11009, -- Obtained key item: <keyitem>!
-        COMMON_SENSE_SURVIVAL    = 12516, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        PLAYER_OBTAINS_ITEM      = 7512,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM    = 7513,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM = 7514,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP     = 7515,  -- You already possess that temporary item.
+        NO_COMBINATION           = 7520,  -- You were unable to enter a combination.
+        VOIDWALKER_DESPAWN       = 7551,  -- The monster fades before your eyes, a look of disappointment on its face.
+        REGIME_REGISTERED        = 9821,  -- New training regime registered!
+        VOIDWALKER_NO_MOB        = 10994, -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
+        VOIDWALKER_MOB_TOO_FAR   = 10995, -- The <keyitem> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
+        VOIDWALKER_MOB_HINT      = 10996, -- The <keyitem> resonates [feebly/softly/solidly/strongly/very strongly/furiously], sending a radiant beam of light lancing towards a spot roughly <number> [yalm/yalms] [east/southeast/south/southwest/west/northwest/north/northeast] of here.
+        VOIDWALKER_SPAWN_MOB     = 10997, -- A monster materializes out of nowhere!
+        VOIDWALKER_UPGRADE_KI_1  = 10999, -- The <keyitem> takes on a slightly deeper hue and becomes <keyitem>!
+        VOIDWALKER_UPGRADE_KI_2  = 11000, -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
+        VOIDWALKER_BREAK_KI      = 11001, -- The <keyitem> shatters into tiny fragments.
+        VOIDWALKER_OBTAIN_KI     = 11002, -- Obtained key item: <keyitem>!
+        COMMON_SENSE_SURVIVAL    = 12509, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {
@@ -91,8 +91,8 @@ zones[xi.zone.SAUROMUGUE_CHAMPAIGN] =
     },
     npc =
     {
-        CASKET_BASE = 17269189,
-        QM2         = 17269227,
+        CASKET_BASE = 17269190,
+        QM2         = 17269228,
     },
 }
 

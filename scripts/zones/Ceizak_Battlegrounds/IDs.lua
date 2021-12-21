@@ -28,6 +28,32 @@ zones[xi.zone.CEIZAK_BATTLEGROUNDS] =
     npc =
     {
     },
+    reive =
+    {
+        -- Bounding Chapuli (I-8)
+        [1] =
+        {
+            mob =
+            {
+                17846627,
+                17846628,
+                17846629,
+                17846630,
+            },
+            -- Knotted Vines
+            obstacles =
+            {
+                17846624,
+                17846625,
+                17846626,
+            },
+            collision =
+            {
+                17846760,
+                17846761,
+            },
+        },
+    },
 }
 
 return zones[xi.zone.CEIZAK_BATTLEGROUNDS]

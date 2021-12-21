@@ -2875,6 +2875,7 @@ xi.emote =
     DANCE2     = 66,
     DANCE3     = 67,
     DANCE4     = 68,
+    BELL       = 73,
     JOB        = 74,
 }
 
