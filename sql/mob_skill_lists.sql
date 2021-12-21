@@ -1034,8 +1034,8 @@ INSERT INTO `mob_skill_lists` VALUES ('Soulflayer',233,1966); -- Mind Purge
 INSERT INTO `mob_skill_lists` VALUES ('Soulflayer',233,1967); -- Tribulation
 INSERT INTO `mob_skill_lists` VALUES ('Soulflayer',233,1968); -- Immortal Anathema
 INSERT INTO `mob_skill_lists` VALUES ('Soulflayer_NM',234,1963); -- Mind Blast
--- INSERT INTO `mob_skill_lists` VALUES ('Soulflayer_NM',234,1964); -- Immortal Mind
--- INSERT INTO `mob_skill_lists` VALUES ('Soulflayer_NM',234,1965); -- Immortal Shield
+INSERT INTO `mob_skill_lists` VALUES ('Soulflayer_NM',234,1964); -- Immortal Mind
+INSERT INTO `mob_skill_lists` VALUES ('Soulflayer_NM',234,1965); -- Immortal Shield
 INSERT INTO `mob_skill_lists` VALUES ('Soulflayer_NM',234,1966); -- Mind Purge
 INSERT INTO `mob_skill_lists` VALUES ('Soulflayer_NM',234,1967); -- Tribulation
 INSERT INTO `mob_skill_lists` VALUES ('Soulflayer_NM',234,1968); -- Immortal Anathema

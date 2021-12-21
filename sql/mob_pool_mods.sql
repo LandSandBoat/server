@@ -136,6 +136,8 @@ INSERT INTO `mob_pool_mods` VALUES (2790,168,50,0);
 INSERT INTO `mob_pool_mods` VALUES (2790,240,7,0);
 INSERT INTO `mob_pool_mods` VALUES (2790,244,7,0);
 INSERT INTO `mob_pool_mods` VALUES (2793,4,4,1);
+INSERT INTO `mob_pool_mods` VALUES (2834,574,100,0); -- Nepionic Soulflayer fast cast 10%
+INSERT INTO `mob_pool_mods` VALUES (2834,368,250,0); -- Nepionic Soulflayer regain 25%
 INSERT INTO `mob_pool_mods` VALUES (2840,368,70,0);
 INSERT INTO `mob_pool_mods` VALUES (2840,370,50,0);
 INSERT INTO `mob_pool_mods` VALUES (2922,370,100,0);

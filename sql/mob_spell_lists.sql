@@ -4122,7 +4122,24 @@ INSERT INTO `mob_spell_lists` VALUES ('The_Briars_elv',458,57,1,255); -- Haste
 INSERT INTO `mob_spell_lists` VALUES ('The_Briars_elv',458,79,1,255); -- Slow II
 INSERT INTO `mob_spell_lists` VALUES ('The_Briars_elv',458,80,1,255); -- Paralyze II
 
--- Next Available: 459
+INSERT INTO `mob_spell_lists` VALUES ('Nepionic_Soulflayer',459,151,1,60); -- blizzard_III
+INSERT INTO `mob_spell_lists` VALUES ('Nepionic_Soulflayer',459,166,1,60); -- thunder_III
+INSERT INTO `mob_spell_lists` VALUES ('Nepionic_Soulflayer',459,180,1,60); -- blizzaga_II
+INSERT INTO `mob_spell_lists` VALUES ('Nepionic_Soulflayer',459,191,1,60); -- stonega_III
+INSERT INTO `mob_spell_lists` VALUES ('Nepionic_Soulflayer',459,195,1,60); -- thundaga_II
+INSERT INTO `mob_spell_lists` VALUES ('Nepionic_Soulflayer',459,201,1,60); -- waterga_III
+INSERT INTO `mob_spell_lists` VALUES ('Nepionic_Soulflayer',459,212,1,60); -- burst
+INSERT INTO `mob_spell_lists` VALUES ('Nepionic_Soulflayer',459,214,1,60); -- flood
+INSERT INTO `mob_spell_lists` VALUES ('Nepionic_Soulflayer',459,231,1,60); -- bio_II
+INSERT INTO `mob_spell_lists` VALUES ('Nepionic_Soulflayer',459,238,1,60); -- rasp
+INSERT INTO `mob_spell_lists` VALUES ('Nepionic_Soulflayer',459,250,1,60); -- ice_spikes
+INSERT INTO `mob_spell_lists` VALUES ('Nepionic_Soulflayer',459,252,1,60); -- stun
+INSERT INTO `mob_spell_lists` VALUES ('Nepionic_Soulflayer',459,253,1,60); -- sleep
+INSERT INTO `mob_spell_lists` VALUES ('Nepionic_Soulflayer',459,259,1,60); -- sleep_II
+INSERT INTO `mob_spell_lists` VALUES ('Nepionic_Soulflayer',459,273,1,60); -- sleepga
+INSERT INTO `mob_spell_lists` VALUES ('Nepionic_Soulflayer',459,274,1,60); -- sleepga_II
+
+-- Next Available: 460
 
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;
