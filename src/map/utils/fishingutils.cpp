@@ -96,6 +96,7 @@ namespace fishingutils
         if (FishingPools[zoneId].catchPools.count(areaId) && FishingPools[zoneId].catchPools[areaId].stock.count(fishId))
         {
             uint16 qty = FishingPools[zoneId].catchPools[areaId].stock[fishId].quantity;
+
             if (qty > 0)
             {
                 FishingPools[zoneId].catchPools[areaId].stock[fishId].quantity = (qty - 1);
@@ -159,7 +160,7 @@ namespace fishingutils
         uint32 hour      = 23 - CVanaTime::getInstance()->getSysHour();
         uint32 mins      = 59 - CVanaTime::getInstance()->getSysMinute();
         uint32 secs      = 59 - CVanaTime::getInstance()->getSysSecond();
-        return timestamp + secs + (mins * 60) + (hour * 60 * 60) + (day * 24 * 60 * 60) + 1;
+        return timestamp + secs + (mins * 60) + (hour * 3600) + (day * 86400) + 1;
     }
 
     uint8 GetMoonPhase()
@@ -407,6 +408,7 @@ namespace fishingutils
             {
                 regen -= (rod->rodID == LU_SHANG || rod->rodID == LU_SHANG_1) ? 1 : 2;
             }
+
             regen -= (catchType == FISHINGCATCHTYPE_MOB) ? 3 : 0;
         }
 
@@ -447,6 +449,7 @@ namespace fishingutils
                 regen += (1 + (uint8)std::floor((catchSkill - regenMod - (fishingSkill + regenDiff)) * multMod));
             }
         }
+
         if (catchType == FISHINGCATCHTYPE_CHEST)
         {
             if (fishingSkill > catchSkill)
@@ -687,13 +690,6 @@ namespace fishingutils
 
     uint8 CalculateDelay(CCharEntity* PChar, uint8 baseDelay, uint8 sizeType, rod_t* rod, uint8 count)
     {
-        uint8 botcheckMod = 0;
-
-        if (PChar->GetLocalVar("FishBotCheck") > 0)
-        {
-            botcheckMod = 2;
-        }
-
         float multiplier = 1.0f + (0.1f * (count - 1.0f));
         uint8 delay      = (uint8)std::floor(baseDelay * multiplier);
 
@@ -711,18 +707,11 @@ namespace fishingutils
             delay += 2;
         }
 
-        delay += botcheckMod;
         return std::min<uint8>(15, delay);
     }
 
     uint8 CalculateMovement(CCharEntity* PChar, uint8 baseMove, uint8 sizeType, rod_t* rod, uint8 count)
     {
-        uint8 botcheckMod = 0;
-
-        if (PChar->GetLocalVar("FishBotCheck") > 0)
-        {
-            botcheckMod = 1;
-        }
         float multiplier = 1.0f + (0.1f * (count - 1.0f));
         uint8 movement   = (uint8)std::floor(baseMove * multiplier);
 
@@ -740,7 +729,6 @@ namespace fishingutils
             movement += 2;
         }
 
-        movement += botcheckMod;
         return std::min<uint8>(15, movement);
     }
 
@@ -782,6 +770,7 @@ namespace fishingutils
                 }
             }
         }
+
         if (catchType < FISHINGCATCHTYPE_ITEM && fishingSkill + 7 < maxSkill)
         {
             uint8 diff     = maxSkill - (fishingSkill + 7);
@@ -903,6 +892,7 @@ namespace fishingutils
                              uint8 maxSkill, bool legendary, uint16 minLength, uint16 maxLength, uint8 ranking, rod_t* rod)
     {
         uint8 sense = FISHINGSENSETYPE_GOOD;
+
         if (catchType == FISHINGCATCHTYPE_BIGFISH)
         {
             big_fish_stats_t bigfishStats = CalculateBigFishStats(minLength, maxLength);
@@ -914,6 +904,7 @@ namespace fishingutils
         lsbret_t lose   = CalculateLoseChance(catchType, fishingSkill, maxSkill, sizeType, legendary, ranking, rod);
         lsbret_t lsnap  = CalculateSnapChance(catchType, fishingSkill, maxSkill, sizeType, legendary, ranking, rod);
         lsbret_t rbreak = CalculateBreakChance(catchType, fishingSkill, maxSkill, sizeType, legendary, ranking, rod);
+
         if (lose.chance > 0 && lsnap.chance == 0 && rbreak.chance == 0)
         {
             if (lose.failReason == FISHINGFAILTYPE_LOST_TOOSMALL)
@@ -1002,6 +993,7 @@ namespace fishingutils
                 stats.epic = true;
             }
         }
+
         return stats;
     }
 
@@ -1311,9 +1303,11 @@ namespace fishingutils
         int16        zoneId = PChar->getZone();
         position_t   p      = PChar->loc.p;
         areavector_t loc    = { p.x, p.y, p.z };
+
         for (auto area : FishingAreaList[zoneId])
         {
             fishingarea_t* fishingArea = FishingAreaList[zoneId][area.first];
+
             switch (fishingArea->areatype)
             {
                 case 0: // Whole Zone
@@ -1514,6 +1508,7 @@ namespace fishingutils
             {
                 PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CCaughtFishPacket(PChar, FishID, MessageOffset + FISHMESSAGEOFFSET_CATCH, Count));
             }
+
             return 1;
         }
         else
@@ -1580,6 +1575,7 @@ namespace fishingutils
             PChar->animation = ANIMATION_FISHING_STOP;
             PChar->updatemask |= UPDATE_HP;
             PChar->pushPacket(new CMessageTextPacket(PChar, MessageOffset + FISHMESSAGEOFFSET_LOST));
+
             return 0;
         }
 
@@ -1624,6 +1620,8 @@ namespace fishingutils
 
     int32 CatchChest(CCharEntity* PChar, uint32 NpcID, uint8 distance, int8 angle)
     {
+        /* Disabled catching Chests until further notice.
+
         uint16 MessageOffset = GetMessageOffset(PChar->getZone());
         // @todo: get chest npc (i.e. jade etui)
         CNpcEntity* Chest = dynamic_cast<CNpcEntity*>(zoneutils::GetEntity(NpcID, TYPE_NPC));
@@ -1649,11 +1647,14 @@ namespace fishingutils
         m.z                = p.z + distance * (float)sin(Radians);
         m.rotation         = p.rotation; // getangle(m, p);
 
-        Chest->loc.p  = m;
+        Chest->loc.p  = m; // This line is returning an error in CI, and I don't know how to fix it. Probably has to do with that "todo" above.
         Chest->status = STATUS_TYPE::NORMAL;
         Chest->SetLocalVar("owner", PChar->id);
         Chest->updatemask |= UPDATE_COMBAT;
         return 1;
+        */
+
+        return 0; // Remove when chatching chests is enabled.
     }
 
     /************************************************************************
@@ -1869,12 +1870,14 @@ namespace fishingutils
             {
                 PChar->RealSkills.skill[SKILL_FISHING] += skillAmount;
                 PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, SKILL_FISHING, skillAmount, 38));
+
                 if ((charSkill / 10) < (charSkill + skillAmount) / 10)
                 {
                     PChar->WorkingSkills.skill[SKILL_FISHING] += 0x20;
                     PChar->pushPacket(new CCharSkillsPacket(PChar));
                     PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, SKILL_FISHING, (charSkill + skillAmount) / 10, 53));
                 }
+
                 charutils::SaveCharSkills(PChar, SKILL_FISHING);
             }
         }
@@ -1949,6 +1952,7 @@ namespace fishingutils
                 PChar->pushPacket(new CMessageTextPacket(PChar, MessageOffset + FISHMESSAGEOFFSET_CANNOTFISH_MOMENT));
                 PChar->pushPacket(new CMessageSystemPacket(0, 0, 142));
                 PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::FISHING));
+
                 return;
             }
 
@@ -1960,6 +1964,7 @@ namespace fishingutils
             {
                 PChar->pushPacket(new CMessageTextPacket(PChar, MessageOffset + FISHMESSAGEOFFSET_NOROD));
                 PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::FISHING));
+
                 return;
             }
 
@@ -1968,6 +1973,7 @@ namespace fishingutils
             {
                 PChar->pushPacket(new CMessageTextPacket(PChar, MessageOffset + FISHMESSAGEOFFSET_NOBAIT));
                 PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::FISHING));
+
                 return;
             }
 
@@ -1990,6 +1996,7 @@ namespace fishingutils
         {
             PChar->pushPacket(new CMessageSystemPacket(0, 0, 142));
             PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::FISHING));
+
             return;
         }
     }
@@ -2030,20 +2037,17 @@ namespace fishingutils
 
     uint8 UnhookMob(CCharEntity* PChar, bool lost)
     {
-        if (PChar->hookedFish != nullptr)
+        if (PChar->hookedFish != nullptr && PChar->hookedFish->catchtype == FISHINGCATCHTYPE_MOB)
         {
-            if (PChar->hookedFish->catchtype == FISHINGCATCHTYPE_MOB)
+            CMobEntity* PMob = dynamic_cast<CMobEntity*>(zoneutils::GetEntity(PChar->hookedFish->catchid, TYPE_MOB));
+
+            if (PMob != nullptr)
             {
-                CMobEntity* PMob = dynamic_cast<CMobEntity*>(zoneutils::GetEntity(PChar->hookedFish->catchid, TYPE_MOB));
+                PMob->SetLocalVar("hooked", 0);
 
-                if (PMob != nullptr)
+                if (lost && PChar->hookedFish->nm && PChar->hookedFish->nmFlags & FISHINGNM_RESET_RESPAWN_ON_FAIL)
                 {
-                    PMob->SetLocalVar("hooked", 0);
-
-                    if (lost && PChar->hookedFish->nm && PChar->hookedFish->nmFlags & FISHINGNM_RESET_RESPAWN_ON_FAIL)
-                    {
-                        PMob->SetLocalVar("lastTOD", (uint32)time(nullptr));
-                    }
+                    PMob->SetLocalVar("lastTOD", (uint32)time(nullptr));
                 }
             }
         }
@@ -2256,24 +2260,27 @@ namespace fishingutils
         }
 
         // Modify weights based on various factors
+
+        /* @todo: UPDATE MOGHANCEMENT SYSTEM
+
         if (PChar->hasMoghancement(MOGHANCEMENT_FISHING_ITEM))
         {
-            //@todo: UPDATE MOGHANCEMENT SYSTEM
-            //uint8 moghancementStrength = PChar->getMoghancementAuraStrength(
-            //    PChar->getMoghancementElementStrength());
-            //switch (moghancementStrength)
-            //{
-            //    case 0: // overwhelming
-            //        ItemPoolWeight += (uint16)std::floor(ItemPoolWeight * 0.9f);
-            //        break;
-            //    case 1: // powerful
-            //        ItemPoolWeight += (uint16)std::floor(ItemPoolWeight * 0.7f);
-            //        break;
-            //    case 2: // normal
-            //        ItemPoolWeight += (uint16)std::floor(ItemPoolWeight * 0.5f);
-            //        break;
-            //}
+            uint8 moghancementStrength = PChar->getMoghancementAuraStrength(
+                PChar->getMoghancementElementStrength());
+            switch (moghancementStrength)
+            {
+                case 0: // overwhelming
+                    ItemPoolWeight += (uint16)std::floor(ItemPoolWeight * 0.9f);
+                    break;
+                case 1: // powerful
+                    ItemPoolWeight += (uint16)std::floor(ItemPoolWeight * 0.7f);
+                    break;
+                case 2: // normal
+                    ItemPoolWeight += (uint16)std::floor(ItemPoolWeight * 0.5f);
+                    break;
+            }
         }
+        */
 
         fishing_gear_t gear = GetFishingGear(PChar);
 
@@ -2450,19 +2457,6 @@ namespace fishingutils
             {
                 response->special += 50;
                 response->heal = (uint16)std::floor(response->heal * 0.7f);
-            }
-
-            if (PChar->GetLocalVar("FishBotCheck") > 0)
-            {
-                uint32       gmcharid = PChar->GetLocalVar("FishBotCheck");
-                CCharEntity* GMChar   = zoneutils::GetChar(gmcharid);
-
-                if (GMChar != nullptr)
-                {
-                    char buff[255];
-                    snprintf(buff, sizeof(buff), "%s hooked a %s", PChar->name.c_str(), FishSelection->fishName.c_str());
-                    GMChar->pushPacket(new CChatMessagePacket(GMChar, CHAT_MESSAGE_TYPE::MESSAGE_SYSTEM_1, buff));
-                }
             }
         }
         else if (ItemSelection != nullptr && selector < ItemPoolWeight + FishPoolWeight)
@@ -2829,10 +2823,10 @@ namespace fishingutils
     }
 
     /************************************************************************
-*																		*
-*						     INITIALIZATION                             *
-*																		*
-************************************************************************/
+    *																		*
+    *						     INITIALIZATION                             *
+    *																		*
+    ************************************************************************/
     void LoadFishingMessages()
     {
         zoneutils::ForEachZone([](CZone* PZone) {
