@@ -823,7 +823,8 @@ INSERT INTO `mob_droplist` VALUES (146,0,0,1000,1453,10);
 INSERT INTO `mob_droplist` VALUES (146,0,0,1000,1456,10);
 INSERT INTO `mob_droplist` VALUES (146,0,0,1000,3474,1000);
 INSERT INTO `mob_droplist` VALUES (146,0,0,1000,3497,15);
-INSERT INTO `mob_droplist` VALUES (147,2,0,1000,864,0);
+INSERT INTO `mob_droplist` VALUES (147,2,0,1000,868,333); -- (Demonic Pugil) Pugil Scales
+INSERT INTO `mob_droplist` VALUES (147,2,0,1000,4484,333); -- (Demonic Pugil) Shall Shell
 INSERT INTO `mob_droplist` VALUES (148,0,0,1000,2193,100);
 INSERT INTO `mob_droplist` VALUES (148,0,0,1000,17742,20);
 INSERT INTO `mob_droplist` VALUES (148,0,0,1000,17743,20);
@@ -1867,10 +1868,8 @@ INSERT INTO `mob_droplist` VALUES (305,0,0,1000,17926,100);
 INSERT INTO `mob_droplist` VALUES (306,0,0,1000,15529,100);
 INSERT INTO `mob_droplist` VALUES (306,0,0,1000,18066,100);
 INSERT INTO `mob_droplist` VALUES (307,2,0,1000,656,0);
-INSERT INTO `mob_droplist` VALUES (308,4,0,1000,922,0);
-INSERT INTO `mob_droplist` VALUES (308,0,0,1000,922,160);
-INSERT INTO `mob_droplist` VALUES (308,4,0,1000,930,0);
-INSERT INTO `mob_droplist` VALUES (308,0,0,1000,2919,90);
+INSERT INTO `mob_droplist` VALUES (308,4,0,1000,930,0); -- (Blood Ball) Beastmen's Blood
+INSERT INTO `mob_droplist` VALUES (308,0,0,1000,1125,24); -- (Blood Ball) Carbuncle's Ruby
 INSERT INTO `mob_droplist` VALUES (309,0,0,1000,856,150);
 INSERT INTO `mob_droplist` VALUES (309,2,0,1000,4358,0);
 INSERT INTO `mob_droplist` VALUES (309,0,0,1000,4358,120);
@@ -1990,15 +1989,15 @@ INSERT INTO `mob_droplist` VALUES (341,0,0,1000,13692,1000);
 INSERT INTO `mob_droplist` VALUES (341,0,0,1000,14763,270);
 INSERT INTO `mob_droplist` VALUES (341,0,0,1000,14874,380);
 INSERT INTO `mob_droplist` VALUES (342,0,0,1000,1125,20);
-INSERT INTO `mob_droplist` VALUES (343,0,0,1000,924,100);
-INSERT INTO `mob_droplist` VALUES (343,0,0,1000,1125,20);
+INSERT INTO `mob_droplist` VALUES (343,0,0,1000,1265,15); -- (Korrigan) Four-leaf Korrigan Bud
+INSERT INTO `mob_droplist` VALUES (343,0,0,1000,4368,71); -- (Korrigan) Two-leaf Mandragora Bud
+INSERT INTO `mob_droplist` VALUES (343,0,0,1000,17868,69); -- (Korrigan) Humus
 INSERT INTO `mob_droplist` VALUES (344,0,0,1000,924,100);
 INSERT INTO `mob_droplist` VALUES (344,0,0,1000,930,10);
 INSERT INTO `mob_droplist` VALUES (344,0,0,1000,1057,20);
 INSERT INTO `mob_droplist` VALUES (344,0,0,1000,1125,20);
-INSERT INTO `mob_droplist` VALUES (345,0,0,1000,4468,110);
-INSERT INTO `mob_droplist` VALUES (345,0,0,1000,5322,100);
-INSERT INTO `mob_droplist` VALUES (345,0,0,1000,17296,100);
+INSERT INTO `mob_droplist` VALUES (345,0,0,1000,574,60); -- (Boyahda Sapling) Fruit Seeds
+INSERT INTO `mob_droplist` VALUES (345,0,0,1000,953,190); -- (Boyahda Sapling) Treant Bulb
 INSERT INTO `mob_droplist` VALUES (346,2,0,1000,4373,0);
 INSERT INTO `mob_droplist` VALUES (346,0,0,1000,5680,50);
 INSERT INTO `mob_droplist` VALUES (347,0,0,1000,2626,1000);
@@ -12244,8 +12243,8 @@ INSERT INTO `mob_droplist` VALUES (2353,0,0,1000,18729,200);
 INSERT INTO `mob_droplist` VALUES (2354,2,0,1000,864,0);
 INSERT INTO `mob_droplist` VALUES (2354,0,0,1000,868,130);
 INSERT INTO `mob_droplist` VALUES (2354,0,0,1000,1888,200);
-INSERT INTO `mob_droplist` VALUES (2355,2,0,1000,864,0);
-INSERT INTO `mob_droplist` VALUES (2355,0,0,1000,1052,50);
+INSERT INTO `mob_droplist` VALUES (2355,2,0,1000,868,0); -- (Stygian Pugil) Pugil Scales
+INSERT INTO `mob_droplist` VALUES (2355,0,0,1000,1052,20); -- (Stygian Pugil) Shall Shell
 INSERT INTO `mob_droplist` VALUES (2356,2,0,1000,864,0);
 INSERT INTO `mob_droplist` VALUES (2356,0,0,1000,1051,50);
 INSERT INTO `mob_droplist` VALUES (2357,0,0,1000,3251,100);
@@ -17111,6 +17110,12 @@ INSERT INTO `mob_droplist` VALUES (3205,0,0,1000,3542,50); -- (Flume Toad) fossi
 INSERT INTO `mob_droplist` VALUES (3205,0,0,1000,4109,1); -- (Flume Toad) water_cluster
 INSERT INTO `mob_droplist` VALUES (3206,0,0,1000,2151,150); -- (Marid) marid_hide
 INSERT INTO `mob_droplist` VALUES (3206,0,0,1000,2166,5); -- (Marid) lock_of_marid_hair
+INSERT INTO `mob_droplist` VALUES (3207,0,0,1000,919,233); -- (Old Goobbue) Boyahda Moss
+INSERT INTO `mob_droplist` VALUES (3207,0,0,1000,959,0); -- (Old Goobbue) Dahlia
+INSERT INTO `mob_droplist` VALUES (3207,0,0,1000,953,0); -- (Old Goobbue) Treant Bulb
+INSERT INTO `mob_droplist` VALUES (3207,0,0,1000,1052,41); -- (Old Goobbue) Boyahda Coffer key
+INSERT INTO `mob_droplist` VALUES (3207,0,0,1000,1181,65); -- (Old Goobbue) Goobbue Humus
+INSERT INTO `mob_droplist` VALUES (3207,0,0,1000,1237,158); -- (Old Goobbue) Tree Cuttings
 
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;

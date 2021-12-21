@@ -10545,7 +10545,7 @@ INSERT INTO `mob_groups` VALUES (7,1201,153,'Ellyllon',0,32,2890,0,0,65,66,0);
 INSERT INTO `mob_groups` VALUES (8,2762,153,'Mourioche',960,0,1746,0,0,62,68,0);
 INSERT INTO `mob_groups` VALUES (9,2754,153,'Moss_Eater',960,0,1742,0,0,62,66,0);
 INSERT INTO `mob_groups` VALUES (10,2272,153,'Knight_Crawler',960,0,1456,0,0,62,67,0);
-INSERT INTO `mob_groups` VALUES (11,2962,153,'Old_Goobbue',960,0,0,0,0,65,68,0);
+INSERT INTO `mob_groups` VALUES (11,2962,153,'Old_Goobbue',960,0,3207,0,0,65,68,0);
 INSERT INTO `mob_groups` VALUES (12,3375,153,'Robber_Crab',960,0,2109,0,0,62,66,0);
 INSERT INTO `mob_groups` VALUES (13,4309,153,'Water_Elemental',960,4,2629,0,0,69,72,0);
 INSERT INTO `mob_groups` VALUES (14,206,153,'Aquarius',0,32,149,0,0,69,71,0);
