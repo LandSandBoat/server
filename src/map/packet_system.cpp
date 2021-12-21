@@ -2790,10 +2790,6 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
             {
                 PChar->UContainer->Clean();
             }
-            else
-            {
-                ShowExploit("Delivery Box packet handler received action %u while UContainer is in a state other than UCONTAINER_DELIVERYBOX (%s)", action, PChar->GetName());
-            }
         }
         break;
     }
