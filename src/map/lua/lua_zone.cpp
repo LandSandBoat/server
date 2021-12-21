@@ -30,6 +30,7 @@
 #include "lua_baseentity.h"
 #include "lua_zone.h"
 #include "../utils/mobutils.h"
+#include "../mob_modifier.h"
 
 CLuaZone::CLuaZone(CZone* PZone)
 : m_pLuaZone(PZone)
@@ -192,12 +193,9 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
     }
     else if (auto* PMob = dynamic_cast<CMobEntity*>(PEntity))
     {
-        PMob->m_RespawnTime = 0;
+        PMob->m_RespawnTime = 1000;
         PMob->m_SpawnType   = SPAWNTYPE_SCRIPTED;
         PMob->m_DropID      = 0;
-
-        PMob->HPmodifier = 10;
-        PMob->MPmodifier = 10;
 
         PMob->m_minLevel = 80;
         PMob->m_maxLevel = 80;
@@ -213,7 +211,7 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
 
         PMob->m_Behaviour = BEHAVIOUR_NONE;
         PMob->m_Link      = 0;
-        PMob->m_Type      = MOBTYPE_EVENT;
+        PMob->m_Type      = MOBTYPE_NORMAL;
         PMob->m_Immunity  = 0;
         PMob->m_EcoSystem = ECOSYSTEM::DRAGON;
         PMob->m_ModelSize = 0;
@@ -247,7 +245,7 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
 
         //PMob->m_SpellListContainer = mobSpellList::GetMobSpellList(Sql_GetIntData(SqlHandle, 66));
 
-        PMob->m_Pool = 1280;
+        //PMob->m_Pool = 1280;
 
         PMob->allegiance = ALLEGIANCE_TYPE::MOB;
         //PMob->namevis    = 0;
@@ -264,10 +262,26 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
         PMob->m_flags       = table.get_or<uint32>("m_flags", 0);
         PMob->m_name_prefix = table.get_or<uint8>("name_prefix", 32);
 
-
+        mobutils::CalculateStats(PMob);
         mobutils::InitializeMob(PMob, m_pLuaZone);
 
+        PMob->health.modhp = 1000;
+        PMob->health.maxhp = 1000;
+        PMob->health.hp = 1000;
+
+        // never despawn
+        PMob->SetDespawnTime(0s);
+        PMob->setMobMod(MOBMOD_ALLI_HATE, 200);
+        PMob->setMobMod(MOBMOD_NO_DESPAWN, 1);
+        PMob->setMobMod(MOBMOD_IDLE_DESPAWN, 0);
+
+
         m_pLuaZone->InsertMOB(PMob);
+
+        PMob->m_SpawnPoint = PMob->loc.p;
+        PMob->Spawn();
+
+        // Set spawn point after since ::Spawn() wipes it
     }
 
     return CLuaBaseEntity(PEntity);

@@ -773,7 +773,7 @@ CBaseEntity* CZoneEntities::GetEntity(uint16 targid, uint8 filter)
                 return it->second;
             }
         }
-        else if (filter & TYPE_MOB)
+        if (filter & TYPE_MOB)
         {
             EntityList_t::const_iterator it = m_mobList.find(targid);
             if (it != m_mobList.end())
@@ -986,7 +986,7 @@ void CZoneEntities::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message
 
                                 if (entity)
                                 {
-                                    if (entity->targid < 0x400)
+                                    if (entity->targid < 0x400 || entity->targid >= 0x800) // TODO: Don't hard code me!
                                     {
                                         if (entity->objtype == TYPE_MOB)
                                         {

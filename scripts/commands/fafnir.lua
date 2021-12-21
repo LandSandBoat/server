@@ -14,26 +14,6 @@ function onTrigger(player)
     local zoneName = zone:getName()
     local name = "Fafnir"
 
-    local mob = zone:insertDynamicEntity({
-        objtype = xi.objType.MOB,
-        allegiance = xi.allegiance.MOB,
-        spawn = true,
-        name = name,
-        modelId = 783,
-        x = player:getXPos(),
-        y = player:getYPos(),
-        z = player:getZPos(),
-        rotation = player:getRotPos(),
-    })
-
-    mob:setMobLevel(100)
-    mob:setUpdatePacketData(0x20, 0x00)
-    mob:setAllegiance(0)
-    print(mob)
-
-    -- TODO: Why do we have to move them?
-    mob:setPos(player:getXPos(), player:getYPos(), player:getZPos(), player:getRotPos())
-
     local mobTable = {}
     mobTable.onMobSpawn = function(mobArg)
         print("Fafnir: I am spawning")
@@ -49,6 +29,29 @@ function onTrigger(player)
     xi.zones[zoneName] = xi.zones[zoneName] or {}
     xi.zones[zoneName].mobs = xi.zones[zoneName].mobs or {}
     xi.zones[zoneName].mobs[name] = mobTable
+
+    -- Spawn mob
+    local mob = zone:insertDynamicEntity({
+        objtype = xi.objType.MOB,
+        allegiance = xi.allegiance.MOB,
+        name = "Fafnir",
+        modelId = 783,
+        x = player:getXPos(),
+        y = player:getYPos(),
+        z = player:getZPos(),
+        rotation = player:getRotPos(),
+    })
+
+    -- TODO: These don't work
+    -- Why is the spawn point elsewhere?
+    mob:setPos(player:getXPos(), player:getYPos(), player:getZPos(), player:getRotPos())
+    mob:setSpawn(player:getXPos(), player:getYPos(), player:getZPos(), player:getRotPos())
+
+    -- TODO: This is needed because he will try to despawn and go home
+    -- With this he tries to walk home
+    mob:setUnkillable(true)
+
+    --mob:updateClaim(player)
 
     print(string.format("GM Spawning %s in %s", mob, zoneName))
 end
