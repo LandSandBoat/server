@@ -7415,7 +7415,7 @@ INSERT INTO `mob_groups` VALUES (67,3032,104,'Orcish_Serjeant_G',0,128,0,0,0,30,
 INSERT INTO `mob_groups` VALUES (68,3004,104,'Orcish_Cursemaker_G',0,128,0,0,0,30,35,0);
 INSERT INTO `mob_groups` VALUES (69,3002,104,'Orcish_Colonel',0,128,0,0,0,35,35,0);
 
-INSERT INTO `mob_groups` VALUES (70,682,104,'Cernunnos',0,128,0,0,0,75,80,0);
+INSERT INTO `mob_groups` VALUES (70,682,104,'Cernunnos',0,128,0,13000,0,80,80,0); -- TODO: Cap the correct level
 INSERT INTO `mob_groups` VALUES (71,3745,104,'Sprite',0,128,0,0,0,61,63,0);
 INSERT INTO `mob_groups` VALUES (72,2297,104,'Kumbaba',0,128,0,0,0,1,1,0);
 
