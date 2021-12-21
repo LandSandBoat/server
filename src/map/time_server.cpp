@@ -140,6 +140,7 @@ int32 time_server(time_point tick, CTaskMgr::CTask* PTask)
                 });
             });
         }
+        fishingutils::RestockFishingAreas();
     }
 
     CTriggerHandler::getInstance()->triggerTimer();

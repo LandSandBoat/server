@@ -3716,20 +3716,7 @@ void SmallPacket0x064(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x066(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
-    // PrintPacket(data);
-
-    // uint32 charid = data.ref<uint32>(0x04);
-    uint16 stamina = data.ref<uint16>(0x08);
-    // uint16 ukn1 = data.ref<uint16>(0x0A); // Seems to always be zero with basic fishing, skill not high enough to test legendary fish.
-    // uint16 targetid = data.ref<uint16>(0x0C);
-    uint8 action = data.ref<uint8>(0x0E);
-    // uint8 ukn2 = data.ref<uint8>(0x0F);
-    uint32 special = data.ref<uint32>(0x10);
-
-    if (static_cast<FISH_ACTION>(action) != FISH_ACTION::FINISH || PChar->animation == ANIMATION_FISHING_FISH)
-    {
-        fishingutils::FishingAction(PChar, static_cast<FISH_ACTION>(action), stamina, special);
-    }
+    fishingutils::HandleFishingAction(PChar, data);
 }
 
 /************************************************************************
@@ -7126,20 +7113,7 @@ void SmallPacket0x10F(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x110(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
-    // PrintPacket(data);
-    if (PChar->animation != ANIMATION_FISHING_START)
-    {
-        return;
-    }
-
-    // uint32 charid = data.ref<uint32>(0x04);
-    uint16 stamina = data.ref<uint16>(0x08);
-    // uint16 ukn1 = data.ref<uint16>(0x0A); // Seems to always be zero with basic fishing, skill not high enough to test legendary fish.
-    // uint16 targetid = data.ref<uint16>(0x0C);
-    uint8 action = data.ref<uint8>(0x0E);
-    // uint8 ukn2 = data.ref<uint8>(0x0F);
-    uint32 special = data.ref<uint32>(0x10);
-    fishingutils::FishingAction(PChar, static_cast<FISH_ACTION>(action), stamina, special);
+    fishingutils::HandleFishingAction(PChar, data);
 }
 
 /************************************************************************

@@ -4424,6 +4424,14 @@ namespace charutils
         Sql_Query(SqlHandle, Query, questslist, PChar->id);
     }
 
+    uint8 getQuestStatus(CCharEntity* PChar, uint8 log, uint8 quest)
+    {
+        uint8 current  = PChar->m_questLog[log].current[quest / 8] & (1 << (quest % 8));
+        uint8 complete = PChar->m_questLog[log].complete[quest / 8] & (1 << (quest % 8));
+
+        return (complete != 0 ? 2 : (current != 0 ? 1 : 0));
+    }
+
     /************************************************************************
      *                                                                       *
      *  Сохраняем список квестов                                             *

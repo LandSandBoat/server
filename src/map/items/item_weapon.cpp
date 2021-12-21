@@ -272,6 +272,13 @@ uint16 CItemWeapon::getCurrentUnlockPoints()
  *                                                                       *
  ************************************************************************/
 
+void CItemWeapon::setRodNumber(uint16 number)
+{
+    ref<uint16>(m_extra, 0x00) = 0x1002;
+    ref<uint8>(m_extra, 0x04)  = 0x63;
+    ref<uint16>(m_extra, 0x06) = number;
+}
+
 void CItemWeapon::setDamage(uint16 damage)
 {
     m_damage = damage;

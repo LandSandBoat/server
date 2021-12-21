@@ -158,6 +158,7 @@ namespace charutils
     void SaveMissionsList(CCharEntity* PChar);          // Save the missions list
     void SaveEminenceData(CCharEntity* PChar);          // Save Eminence Record (RoE) data
     void SaveQuestsList(CCharEntity* PChar);            // сохраняем список ксевтов
+    uint8 getQuestStatus(CCharEntity* PChar, uint8 log, uint8 quest); // Get Quest status. Used in FishingUtils.cpp, allows to fish quest specific mobs, like PLD AF NM.
     void SaveFame(CCharEntity* PChar);                  // Save area fame / reputation
     void SaveZonesVisited(CCharEntity* PChar);          // сохраняем посещенные зоны
     void SaveKeyItems(CCharEntity* PChar);              // сохраняем ключевые предметы
