@@ -532,26 +532,59 @@ namespace luautils
 
         auto name = (const char*)PSpell->getName();
 
-        if (PSpell->getSpellGroup() == SPELLGROUP_BLUE)
+        std::string switchKey = "";
+        switch (PSpell->getSpellGroup())
         {
-            if (auto cached_func = lua["xi"]["globals"]["spells"]["bluemagic"][name][funcName]; cached_func.valid())
+            case SPELLGROUP_WHITE:
             {
-                return cached_func;
+                switchKey = "white";
             }
+            break;
+            case SPELLGROUP_BLACK:
+            {
+                switchKey = "black";
+            }
+            break;
+            case SPELLGROUP_SONG:
+            {
+                switchKey = "songs";
+            }
+            break;
+            case SPELLGROUP_NINJUTSU:
+            {
+                switchKey = "ninjutsu";
+            }
+            break;
+            case SPELLGROUP_SUMMONING:
+            {
+                switchKey = "summoning";
+            }
+            break;
+            case SPELLGROUP_BLUE:
+            {
+                switchKey = "blue";
+            }
+            break;
+            case SPELLGROUP_GEOMANCY:
+            {
+                switchKey = "geomancy";
+            }
+            break;
+            case SPELLGROUP_TRUST:
+            {
+                switchKey = "trust";
+            }
+            break;
+            default:
+            {
+                ShowError("luautils::getSpellCachedFunction: Spell %s not inside a folder or doesnt have a SpellGroup", name);
+            }
+            break;
         }
-        else if (PSpell->getSpellGroup() == SPELLGROUP_TRUST)
+
+        if (auto cached_func = lua["xi"]["globals"]["spells"][switchKey][name][funcName]; cached_func.valid())
         {
-            if (auto cached_func = lua["xi"]["globals"]["spells"]["trust"][name][funcName]; cached_func.valid())
-            {
-                return cached_func;
-            }
-        }
-        else
-        {
-            if (auto cached_func = lua["xi"]["globals"]["spells"][name][funcName]; cached_func.valid())
-            {
-                return cached_func;
-            }
+            return cached_func;
         }
 
         // Didn't find it

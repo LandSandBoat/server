@@ -25,24 +25,24 @@ zones[xi.zone.ROLANBERRY_FIELDS] =
         DIG_THROW_AWAY           = 7247,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
         FIND_NOTHING             = 7249,  -- You dig and you dig, but find nothing.
         SIGN                     = 7404,  -- North: Grand Duchy of Jeuno, Sauromugue Champaign South: Pashhow Marshlands
-        PLAYER_OBTAINS_ITEM      = 7603,  -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM    = 7604,  -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM = 7605,  -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP     = 7606,  -- You already possess that temporary item.
-        NO_COMBINATION           = 7611,  -- You were unable to enter a combination.
-        VOIDWALKER_DESPAWN       = 7642,  -- The monster fades before your eyes, a look of disappointment on its face.
-        REGIME_REGISTERED        = 9789,  -- New training regime registered!
-        VOIDWALKER_NO_MOB        = 10962, -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
-        VOIDWALKER_MOB_TOO_FAR   = 10963, -- The <keyitem> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
-        VOIDWALKER_MOB_HINT      = 10964, -- The <keyitem> resonates [feebly/softly/solidly/strongly/very strongly/furiously], sending a radiant beam of light lancing towards a spot roughly <number> [yalm/yalms] [east/southeast/south/southwest/west/northwest/north/northeast] of here.
-        VOIDWALKER_SPAWN_MOB     = 10965, -- A monster materializes out of nowhere!
-        VOIDWALKER_UPGRADE_KI_1  = 10967, -- The <keyitem> takes on a slightly deeper hue and becomes <keyitem>!
-        VOIDWALKER_UPGRADE_KI_2  = 10968, -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
-        VOIDWALKER_BREAK_KI      = 10969, -- The <keyitem> shatters into tiny fragments.
-        VOIDWALKER_OBTAIN_KI     = 10970, -- Obtained key item: <keyitem>!
-        AWAIT_YOUR_CHALLENGE     = 12187, -- We await your challenge, traveler.
-        LACK_LEGION_POINTS       = 12224, -- It would seem that you lack the necessary amount of Legion points.
-        COMMON_SENSE_SURVIVAL    = 12281, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        PLAYER_OBTAINS_ITEM      = 7596,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM    = 7597,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM = 7598,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP     = 7599,  -- You already possess that temporary item.
+        NO_COMBINATION           = 7604,  -- You were unable to enter a combination.
+        VOIDWALKER_DESPAWN       = 7635,  -- The monster fades before your eyes, a look of disappointment on its face.
+        REGIME_REGISTERED        = 9782,  -- New training regime registered!
+        VOIDWALKER_NO_MOB        = 10955, -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
+        VOIDWALKER_MOB_TOO_FAR   = 10956, -- The <keyitem> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
+        VOIDWALKER_MOB_HINT      = 10957, -- The <keyitem> resonates [feebly/softly/solidly/strongly/very strongly/furiously], sending a radiant beam of light lancing towards a spot roughly <number> [yalm/yalms] [east/southeast/south/southwest/west/northwest/north/northeast] of here.
+        VOIDWALKER_SPAWN_MOB     = 10958, -- A monster materializes out of nowhere!
+        VOIDWALKER_UPGRADE_KI_1  = 10960, -- The <keyitem> takes on a slightly deeper hue and becomes <keyitem>!
+        VOIDWALKER_UPGRADE_KI_2  = 10961, -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
+        VOIDWALKER_BREAK_KI      = 10962, -- The <keyitem> shatters into tiny fragments.
+        VOIDWALKER_OBTAIN_KI     = 10963, -- Obtained key item: <keyitem>!
+        AWAIT_YOUR_CHALLENGE     = 12180, -- We await your challenge, traveler.
+        LACK_LEGION_POINTS       = 12217, -- It would seem that you lack the necessary amount of Legion points.
+        COMMON_SENSE_SURVIVAL    = 12274, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {
@@ -90,7 +90,7 @@ zones[xi.zone.ROLANBERRY_FIELDS] =
     },
     npc =
     {
-        CASKET_BASE = 17228318,
+        CASKET_BASE = 17228319,
     },
 }
 

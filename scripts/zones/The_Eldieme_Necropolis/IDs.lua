@@ -40,6 +40,7 @@ zones[xi.zone.THE_ELDIEME_NECROPOLIS] =
         SEEMS_TO_BE_THE_END              = 7561,  -- That seems to be the end of it.
         GIRL_BACK_TO_JEUNO               = 7573,  -- I'll take the little girl back to Jeuno. Take care.
         NOT_TIME_TO_SEARCH               = 7585,  -- Now doesn't seem to be the time to search here.
+        PUT_TOGUETHER_TO_COMPLETE        = 7587,  -- You put the % you have discovered together to form a complete piece.
         PLAYER_OBTAINS_ITEM              = 7592,  -- <name> obtains <item>!
         UNABLE_TO_OBTAIN_ITEM            = 7593,  -- You were unable to obtain the item.
         PLAYER_OBTAINS_TEMP_ITEM         = 7594,  -- <name> obtains the temporary item: <item>!

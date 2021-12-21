@@ -12,6 +12,8 @@
         "npcUtil",
         "item_utils",
 
+        "super",
+
         "mixins",
         "g_mixins",
         "applyMixins",
@@ -430,6 +432,7 @@
         "SelectDailyItem",
         "GetQuestAndMissionFilenamesList",
         "GetCachedInstanceScript",
+        "ForceCrash",
     ],
     "Lua.diagnostics.disable": [
         "lowercase-global"

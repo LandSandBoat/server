@@ -3,6 +3,8 @@
 -- Door: Heavy Iron Gate
 -- !pos 5 -9 579 54
 -----------------------------------
+local ID = require("scripts/zones/Arrapago_Reef/IDs")
+-----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

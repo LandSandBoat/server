@@ -38,6 +38,7 @@ zones[xi.zone.GARLAIGE_CITADEL] =
         CHEST_UNLOCKED           = 7330,  -- You unlock the chest!
         ITEMS_ITEMS_LA_LA        = 7457,  -- You can hear a strange voice... Items, items, la la la la la
         GOBLIN_SLIPPED_AWAY      = 7463,  -- The Goblin slipped away when you were not looking...
+        COMBINE_INTO_A_CHUNK     = 7518,  -- You combine the % you have collected into a single chunk.
         PLAYER_OBTAINS_ITEM      = 7523,  -- <name> obtains <item>!
         UNABLE_TO_OBTAIN_ITEM    = 7524,  -- You were unable to obtain the item.
         PLAYER_OBTAINS_TEMP_ITEM = 7525,  -- <name> obtains the temporary item: <item>!
