@@ -422,13 +422,6 @@ namespace zoneutils
                     PMob->speed    = (uint8)Sql_GetIntData(SqlHandle, 26);
                     PMob->speedsub = (uint8)Sql_GetIntData(SqlHandle, 26);
 
-                    /*if(PMob->speed != 0)
-                {
-                PMob->speed += map_config.speed_mod;
-                // whats this for?
-                PMob->speedsub += map_config.speed_mod;
-                }*/
-
                     PMob->strRank = (uint8)Sql_GetIntData(SqlHandle, 27);
                     PMob->dexRank = (uint8)Sql_GetIntData(SqlHandle, 28);
                     PMob->vitRank = (uint8)Sql_GetIntData(SqlHandle, 29);

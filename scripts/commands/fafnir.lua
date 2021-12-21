@@ -26,6 +26,11 @@ function onTrigger(player)
         rotation = player:getRotPos(),
     })
 
+    mob:setMobLevel(100)
+    mob:setUpdatePacketData(0x20, 0x00)
+    mob:setAllegiance(0)
+    print(mob)
+
     -- TODO: Why do we have to move them?
     mob:setPos(player:getXPos(), player:getYPos(), player:getZPos(), player:getRotPos())
 

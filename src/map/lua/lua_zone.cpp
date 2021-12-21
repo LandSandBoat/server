@@ -192,11 +192,12 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
     }
     else if (auto* PMob = dynamic_cast<CMobEntity*>(PEntity))
     {
-        PMob->m_Detects     = DETECT_SIGHT;
-        PMob->namevis       = table.get_or<uint8>("namevis", 0);
-        PMob->status        = STATUS_TYPE::NORMAL;
-        PMob->m_flags       = table.get_or<uint32>("m_flags", 0);
-        PMob->m_name_prefix = table.get_or<uint8>("name_prefix", 32);
+        PMob->m_RespawnTime = 0;
+        PMob->m_SpawnType   = SPAWNTYPE_SCRIPTED;
+        PMob->m_DropID      = 0;
+
+        PMob->HPmodifier = 10;
+        PMob->MPmodifier = 10;
 
         PMob->m_minLevel = 80;
         PMob->m_maxLevel = 80;
@@ -204,16 +205,67 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
         PMob->SetMJob(1);
         PMob->SetSJob(1);
 
-        PMob->HPscale = 1.0f;
-        PMob->MPscale = 1.0f;
+        //((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setMaxHit(1);
+        //((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setSkillType(Sql_GetIntData(SqlHandle, 17));
+        //PMob->m_dmgMult = Sql_GetUIntData(SqlHandle, 18);
+        //((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setDelay((Sql_GetIntData(SqlHandle, 19) * 1000) / 60);
+        //((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setBaseDelay((Sql_GetIntData(SqlHandle, 19) * 1000) / 60);
 
-        PMob->health.maxhp = 100;
-        PMob->health.hp    = 100;
+        PMob->m_Behaviour = BEHAVIOUR_NONE;
+        PMob->m_Link      = 0;
+        PMob->m_Type      = MOBTYPE_EVENT;
+        PMob->m_Immunity  = 0;
+        PMob->m_EcoSystem = ECOSYSTEM::DRAGON;
+        PMob->m_ModelSize = 0;
 
-        if (table.get_or("spawn", false))
-        {
-            PMob->Spawn();
-        }
+        PMob->speed    = 50;
+        PMob->speedsub = 50;
+
+        PMob->strRank = 1;
+        PMob->dexRank = 1;
+        PMob->vitRank = 1;
+        PMob->agiRank = 1;
+        PMob->intRank = 1;
+        PMob->mndRank = 1;
+        PMob->chrRank = 1;
+        PMob->evaRank = 1;
+        PMob->defRank = 1;
+        PMob->attRank = 1;
+        PMob->accRank = 1;
+
+        PMob->m_Element     = 1;
+        PMob->m_Family      = 1;
+        PMob->m_name_prefix = 0;
+        //PMob->m_flags       = 0;
+
+        // Setup HP / MP Stat Percentage Boost
+        PMob->HPscale = 100;
+        PMob->MPscale = 100;
+
+        // Check if we should be looking up scripts for this mob
+        //PMob->m_HasSpellScript = (uint8)Sql_GetIntData(SqlHandle, 65);
+
+        //PMob->m_SpellListContainer = mobSpellList::GetMobSpellList(Sql_GetIntData(SqlHandle, 66));
+
+        PMob->m_Pool = 1280;
+
+        PMob->allegiance = ALLEGIANCE_TYPE::MOB;
+        //PMob->namevis    = 0;
+        PMob->m_Aggro    = 1;
+
+        PMob->m_roamFlags    = 0;
+        PMob->m_MobSkillList = 0;
+
+        PMob->m_TrueDetection = 1;
+        PMob->m_Detects       = 1;
+
+        PMob->namevis       = table.get_or<uint8>("namevis", 0);
+        PMob->status        = STATUS_TYPE::NORMAL;
+        PMob->m_flags       = table.get_or<uint32>("m_flags", 0);
+        PMob->m_name_prefix = table.get_or<uint8>("name_prefix", 32);
+
+
+        mobutils::InitializeMob(PMob, m_pLuaZone);
 
         m_pLuaZone->InsertMOB(PMob);
     }
