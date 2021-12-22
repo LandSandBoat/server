@@ -14064,6 +14064,7 @@ INSERT INTO `mob_droplist` VALUES (2616,0,0,1000,2728,150);
 INSERT INTO `mob_droplist` VALUES (2617,0,0,1000,573,70);
 INSERT INTO `mob_droplist` VALUES (2617,4,0,1000,953,0);
 INSERT INTO `mob_droplist` VALUES (2617,0,0,1000,953,320);
+INSERT INTO `mob_droplist` VALUES (2617,0,0,1000,5688,150); -- (Wandering Sapling) head_of_grauberg_lettuce
 INSERT INTO `mob_droplist` VALUES (2618,0,0,1000,572,40);
 INSERT INTO `mob_droplist` VALUES (2618,0,0,1000,575,20);
 INSERT INTO `mob_droplist` VALUES (2618,0,0,1000,953,90);
@@ -17115,6 +17116,7 @@ INSERT INTO `mob_droplist` VALUES (3204,0,0,1000,3542,100); -- (Blackwater Pugil
 INSERT INTO `mob_droplist` VALUES (3205,0,0,1000,3542,50); -- (Flume Toad) fossilized_bone
 INSERT INTO `mob_droplist` VALUES (3205,0,0,1000,4109,1); -- (Flume Toad) water_cluster
 INSERT INTO `mob_droplist` VALUES (3206,0,0,1000,2151,150); -- (Marid) marid_hide
+INSERT INTO `mob_droplist` VALUES (3206,0,0,1000,2166,5); -- (Marid) lock_of_marid_hair
 
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;

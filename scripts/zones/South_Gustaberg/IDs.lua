@@ -31,14 +31,14 @@ zones[xi.zone.SOUTH_GUSTABERG] =
         FIRE_TAKE                = 7410, -- You take <item> out of the fire.
         FIRE_LONGER              = 7411, -- It may take a little while more to cook the <item>.
         MEAT_ALREADY_PUT         = 7412, -- The <item> is already in the fire.
-        ITEMS_ITEMS_LA_LA        = 7527, -- You can hear a strange voice... Items, items, la la la la la
-        GOBLIN_SLIPPED_AWAY      = 7533, -- The Goblin slipped away when you were not looking...
-        PLAYER_OBTAINS_ITEM      = 7547, -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM    = 7548, -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM = 7549, -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP     = 7550, -- You already possess that temporary item.
-        NO_COMBINATION           = 7555, -- You were unable to enter a combination.
-        REGIME_REGISTERED        = 9915, -- New training regime registered!
+        ITEMS_ITEMS_LA_LA        = 7520, -- You can hear a strange voice... Items, items, la la la la la
+        GOBLIN_SLIPPED_AWAY      = 7526, -- The Goblin slipped away when you were not looking...
+        PLAYER_OBTAINS_ITEM      = 7540, -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM    = 7541, -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM = 7542, -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP     = 7543, -- You already possess that temporary item.
+        NO_COMBINATION           = 7548, -- You were unable to enter a combination.
+        REGIME_REGISTERED        = 9908, -- New training regime registered!
     },
     mob =
     {
@@ -63,7 +63,7 @@ zones[xi.zone.SOUTH_GUSTABERG] =
     },
     npc =
     {
-        CASKET_BASE = 17216139,
+        CASKET_BASE = 17216140,
     },
 }
 

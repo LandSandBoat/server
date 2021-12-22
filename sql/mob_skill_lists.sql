@@ -1093,10 +1093,10 @@ INSERT INTO `mob_skill_lists` VALUES ('Tonberry_no_rancor',244,786);
 INSERT INTO `mob_skill_lists` VALUES ('Tonberry_no_rancor',244,787);
 INSERT INTO `mob_skill_lists` VALUES ('Tonberry_no_rancor',244,788);
 INSERT INTO `mob_skill_lists` VALUES ('Tonberry_no_rancor',244,920);
-INSERT INTO `mob_skill_lists` VALUES ('Treant',245,328);
-INSERT INTO `mob_skill_lists` VALUES ('Treant',245,329);
-INSERT INTO `mob_skill_lists` VALUES ('Treant',245,331);
-INSERT INTO `mob_skill_lists` VALUES ('Treant',245,332);
+INSERT INTO `mob_skill_lists` VALUES ('Treant',245,328); -- drill_branch
+INSERT INTO `mob_skill_lists` VALUES ('Treant',245,329); -- pinecone_bomb
+INSERT INTO `mob_skill_lists` VALUES ('Treant',245,331); -- leafstorm
+INSERT INTO `mob_skill_lists` VALUES ('Treant',245,332); -- entangle
 -- INSERT INTO `mob_skill_lists` VALUES ('Troll',246,1741);
 -- INSERT INTO `mob_skill_lists` VALUES ('Troll',246,1742);
 INSERT INTO `mob_skill_lists` VALUES ('Troll',246,1743);
@@ -1127,12 +1127,13 @@ INSERT INTO `mob_skill_lists` VALUES ('Wamoura',253,1953);
 INSERT INTO `mob_skill_lists` VALUES ('Wamoura',253,1954);
 INSERT INTO `mob_skill_lists` VALUES ('Wamoura',253,1955);
 -- INSERT INTO `mob_skill_lists` VALUES ('Wamoura',253,1956);
-INSERT INTO `mob_skill_lists` VALUES ('Wamouracampa',254,1815);
-INSERT INTO `mob_skill_lists` VALUES ('Wamouracampa',254,1816);
-INSERT INTO `mob_skill_lists` VALUES ('Wamouracampa',254,1817);
-INSERT INTO `mob_skill_lists` VALUES ('Wamouracampa',254,1818);
-INSERT INTO `mob_skill_lists` VALUES ('Wamouracampa',254,1819);
--- INSERT INTO `mob_skill_lists` VALUES ('Wamouracampa',254,1820);
+INSERT INTO `mob_skill_lists` VALUES ('Wamouracampa_strech',254,1815);
+INSERT INTO `mob_skill_lists` VALUES ('Wamouracampa_strech',254,1816);
+INSERT INTO `mob_skill_lists` VALUES ('Wamouracampa_strech',254,1817);
+INSERT INTO `mob_skill_lists` VALUES ('Wamouracampa_strech',254,1819); -- Heat Barrier
+INSERT INTO `mob_skill_lists` VALUES ('Wamouracampa_strech',254,1820);
+INSERT INTO `mob_skill_lists` VALUES ('Wamouracampa_curl',1162,1818); -- Cannonball
+INSERT INTO `mob_skill_lists` VALUES ('Wamouracampa_curl',1162,1819); -- Heat Barrier
 INSERT INTO `mob_skill_lists` VALUES ('Wanderer',255,388);
 INSERT INTO `mob_skill_lists` VALUES ('Wanderer',255,389);
 INSERT INTO `mob_skill_lists` VALUES ('Wanderer',255,390);
@@ -3754,7 +3755,7 @@ INSERT INTO `mob_skill_lists` VALUES ('The_Briars_elv',1160,42); -- Savage Blade
 INSERT INTO `mob_skill_lists` VALUES ('The_Briars_gal',1161,86); -- Raging Rush
 INSERT INTO `mob_skill_lists` VALUES ('The_Briars_gal',1161,91); -- Fell Cleave
 
--- Next available ID: 1162
+-- Next available ID: 1163
 
 -- ------------------------------------------------------------
 -- Start of Ambuscade section

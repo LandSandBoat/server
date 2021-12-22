@@ -351,6 +351,7 @@ xi.items =
     BALRAHNS_EYEPATCH               = 2571,
     SQUARE_OF_OIL_SOAKED_CLOTH      = 2704,
     SQUARE_OF_FOULARD               = 2705,
+    CERNUNNOS_BULB                  = 2728,
     OXBLOOD_ORB                     = 2743,
     ANGEL_SKIN_ORB                  = 2744,
     ORCISH_PLATE_ARMOR              = 2757,

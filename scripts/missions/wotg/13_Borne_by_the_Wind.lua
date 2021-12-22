@@ -1,0 +1,54 @@
+-----------------------------------
+-- Borne by the Wind
+-- Wings of the Goddess Mission 13
+-----------------------------------
+-- !addmission 5 12
+-- Bulwark_Gate : !pos -447.174 -1.831 342.417 98
+-----------------------------------
+require('scripts/globals/items')
+require('scripts/globals/keyitems')
+require('scripts/globals/missions')
+require('scripts/globals/interaction/mission')
+require('scripts/globals/zone')
+-----------------------------------
+
+local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.BORNE_BY_THE_WIND)
+
+mission.reward =
+{
+    keyItem     = xi.ki.UNDERPASS_HATCH_KEY,
+    nextMission = { xi.mission.log_id.WOTG, xi.mission.id.wotg.A_NATION_ON_THE_BRINK },
+}
+
+mission.sections =
+{
+    -- Go to Sauromugue Champaign (S) and check the Bulwark Gate at (F-6). You will receive Underpass Hatch Key after a long cutscene.
+    -- Windower Alert:
+    --
+    -- Disable fastCS during this cutscene it will freeze at this time.
+    {
+        check = function(player, currentMission, missionStatus, vars)
+            return currentMission == mission.missionId and missionStatus == 0
+        end,
+
+        [xi.zone.SAUROMUGUE_CHAMPAIGN_S] =
+        {
+            ['Bulwark_Gate'] =
+            {
+                onTrigger = function(player, npc)
+                    -- TODO: What are these args from caps?
+                    return mission:progressEvent(5, 98, 0, 2963, 0, 0, 0, 1, 0)
+                end,
+            },
+
+            onEventFinish =
+            {
+                [5] = function(player, csid, option, npc)
+                    mission:complete(player)
+                end,
+            },
+        },
+    },
+}
+
+return mission

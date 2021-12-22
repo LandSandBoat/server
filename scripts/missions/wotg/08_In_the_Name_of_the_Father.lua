@@ -31,7 +31,7 @@ mission.sections =
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId and
-                xi.wotg.helpers.meetsMission3Reqs(player)
+                xi.wotg.helpers.meetsMission8Reqs(player)
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA_S] =

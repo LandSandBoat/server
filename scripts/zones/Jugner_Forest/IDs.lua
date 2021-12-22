@@ -29,21 +29,23 @@ zones[xi.zone.JUGNER_FOREST] =
         LOGGING_IS_POSSIBLE_HERE = 7901,  -- Logging is possible here if you have <item>.
         VOIDWALKER_OBTAIN_KI     = 7908,  -- Obtained key item: <keyitem>!
         CONQUEST                 = 8052,  -- You've earned conquest points!
-        PLAYER_OBTAINS_ITEM      = 8661,  -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM    = 8662,  -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM = 8663,  -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP     = 8664,  -- You already possess that temporary item.
-        NO_COMBINATION           = 8669,  -- You were unable to enter a combination.
-        VOIDWALKER_DESPAWN       = 8700,  -- The monster fades before your eyes, a look of disappointment on its face.
-        REGIME_REGISTERED        = 10874, -- New training regime registered!
-        VOIDWALKER_NO_MOB        = 12092, -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
-        VOIDWALKER_MOB_TOO_FAR   = 12093, -- The <keyitem> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
-        VOIDWALKER_MOB_HINT      = 12094, -- The <keyitem> resonates [feebly/softly/solidly/strongly/very strongly/furiously], sending a radiant beam of light lancing towards a spot roughly <number> [yalm/yalms] [east/southeast/south/southwest/west/northwest/north/northeast] of here.
-        VOIDWALKER_SPAWN_MOB     = 12095, -- A monster materializes out of nowhere!
-        VOIDWALKER_UPGRADE_KI_1  = 12097, -- The <keyitem> takes on a slightly deeper hue and becomes <keyitem>!
-        VOIDWALKER_UPGRADE_KI_2  = 12098, -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
-        VOIDWALKER_BREAK_KI      = 12099, -- The <keyitem> shatters into tiny fragments.
-        COMMON_SENSE_SURVIVAL    = 13103, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        PLAYER_OBTAINS_ITEM      = 8654,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM    = 8655,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM = 8656,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP     = 8657,  -- You already possess that temporary item.
+        NO_COMBINATION           = 8662,  -- You were unable to enter a combination.
+        VOIDWALKER_DESPAWN       = 8693,  -- The monster fades before your eyes, a look of disappointment on its face.
+        REGIME_REGISTERED        = 10867, -- New training regime registered!
+        DRAWN_UNWANTED_ATTENTION = 11921, -- Your presence has drawn unwanted attention!
+        DELIVER_TO_AMAURE        = 11925, -- You must deliver the <item> to Amaura in Southern San d'Oria.
+        VOIDWALKER_NO_MOB        = 12085, -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
+        VOIDWALKER_MOB_TOO_FAR   = 12086, -- The <keyitem> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
+        VOIDWALKER_MOB_HINT      = 12087, -- The <keyitem> resonates [feebly/softly/solidly/strongly/very strongly/furiously], sending a radiant beam of light lancing towards a spot roughly <number> [yalm/yalms] [east/southeast/south/southwest/west/northwest/north/northeast] of here.
+        VOIDWALKER_SPAWN_MOB     = 12088, -- A monster materializes out of nowhere!
+        VOIDWALKER_UPGRADE_KI_1  = 12090, -- The <keyitem> takes on a slightly deeper hue and becomes <keyitem>!
+        VOIDWALKER_UPGRADE_KI_2  = 12091, -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
+        VOIDWALKER_BREAK_KI      = 12092, -- The <keyitem> shatters into tiny fragments.
+        COMMON_SENSE_SURVIVAL    = 13096, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {
@@ -84,20 +86,21 @@ zones[xi.zone.JUGNER_FOREST] =
             [xi.keyItem.BLACK_ABYSSITE] = {
                 17203684  -- Yilbegan
             }
-        }
+        },
+        CERNUNNOS = 17203677,
     },
     npc =
     {
-        CASKET_BASE   = 17203785,
-        OVERSEER_BASE = 17203847, -- Chaplion_RK in npc_list
+        CASKET_BASE   = 17203786,
+        OVERSEER_BASE = 17203848, -- Chaplion_RK in npc_list
         LOGGING =
         {
-            17203863,
             17203864,
             17203865,
             17203866,
             17203867,
             17203868,
+            17203869,
         },
     },
 }
