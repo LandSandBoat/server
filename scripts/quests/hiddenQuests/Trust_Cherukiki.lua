@@ -1,6 +1,8 @@
 -----------------------------------
 -- Trust: Cherukiki
 -----------------------------------
+-- Taillegeas : !pos 31.000 1.995 57.971 243
+-----------------------------------
 require('scripts/globals/items')
 require('scripts/globals/magic')
 require('scripts/globals/trust')
@@ -12,6 +14,14 @@ local ruludeID = require('scripts/zones/RuLude_Gardens/IDs')
 -----------------------------------
 
 local quest = HiddenQuest:new('TrustCherukiki')
+
+local trustMemory = function(player)
+    local memories = 0
+
+    -- TODO: Does she have these?
+
+    return memories
+end
 
 quest.sections =
 {
@@ -35,7 +45,12 @@ quest.sections =
 
         [xi.zone.RULUDE_GARDENS] =
         {
-            ['Taillegeas'] = quest:progressEvent(10235),
+            ['Taillegeas'] =
+            {
+                onTrigger = function(player, npc, trade)
+                    return quest:progressEvent(10235, 0, 0, 0, trustMemory(player))
+                end,
+            },
 
             onEventFinish =
             {

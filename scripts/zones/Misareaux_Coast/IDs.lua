@@ -19,6 +19,7 @@ zones[xi.zone.MISAREAUX_COAST] =
         CARRIED_OVER_POINTS      = 7000, -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY  = 7001, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER             = 7002, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
+        YOU_LEARNED_TRUST        = 7024, -- You learned Trust: <name>!
         FISHING_MESSAGE_OFFSET   = 7075, -- You can't fish here.
         CONQUEST_BASE            = 7175, -- Tallying conquest results...
         DOOR_CLOSED              = 7351, -- The door is locked tight.
