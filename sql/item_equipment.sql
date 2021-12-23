@@ -11888,6 +11888,7 @@ INSERT INTO `item_equipment` VALUES (25842,'herculean_trousers',99,119,2593826,5
 INSERT INTO `item_equipment` VALUES (25843,'merlinic_shalwar',99,119,1589272,415,0,0,128,0,0);
 INSERT INTO `item_equipment` VALUES (25844,'chironic_hose',99,119,524820,416,0,0,128,0,0);
 INSERT INTO `item_equipment` VALUES (25849,'dashing_subligar',99,119,2472947,423,0,0,128,0,0);
+INSERT INTO `item_equipment` VALUES (25850,'pretty_pink_subligar',1,0,4194303,453,0,0,128,0,0);
 INSERT INTO `item_equipment` VALUES (25852,'darraigners_brais',99,119,66592,350,0,0,128,0,0);
 INSERT INTO `item_equipment` VALUES (25853,'querkening_brais',99,119,1589788,223,0,0,128,0,0);
 INSERT INTO `item_equipment` VALUES (25854,'arjuna_breeches',99,119,6593,328,0,0,128,0,0);
@@ -11944,7 +11945,7 @@ INSERT INTO `item_equipment` VALUES (25905,'baayami_slops',99,119,16384,115,0,0,
 INSERT INTO `item_equipment` VALUES (25906,'baayami_slops_+1',99,119,16384,115,0,0,128,0,3);
 INSERT INTO `item_equipment` VALUES (25907,'turms_subligar',99,119,2359328,148,0,0,128,0,3);
 INSERT INTO `item_equipment` VALUES (25908,'turms_subligar_+1',99,119,2359328,148,0,0,128,0,3);
-INSERT INTO `item_equipment` VALUES (25910,'cait_sith_subligar',1,0,4194303,0,0,0,128,0,0);
+INSERT INTO `item_equipment` VALUES (25910,'cait_sith_subligar',1,0,4194303,463,0,0,128,0,0);
 INSERT INTO `item_equipment` VALUES (25920,'ahosi_leggings',99,119,2593826,110,0,0,256,0,0);
 INSERT INTO `item_equipment` VALUES (25921,'skaoi_boots',99,119,3850780,168,0,0,256,0,0);
 INSERT INTO `item_equipment` VALUES (25922,'navon_crackows',99,119,1589788,186,0,0,256,0,0);
