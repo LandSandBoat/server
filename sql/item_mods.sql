@@ -34923,6 +34923,7 @@ INSERT INTO `item_mods` VALUES (25842,384,600);   -- Haste+6%
 INSERT INTO `item_mods` VALUES (25842,73,4);      -- Store TP+4
 INSERT INTO `item_mods` VALUES (25842,27,-4);     -- Enmity-4
 INSERT INTO `item_mods` VALUES (25842,161,-200);    -- Physical Damage Taken-2%
+INSERT INTO `item_mods` VALUES (25850,1,1);       -- Pretty Pink Subligar DEF +1
 INSERT INTO `item_mods` VALUES (25853,1,105);     -- Querkening Brais: DEF 105
 INSERT INTO `item_mods` VALUES (25853,2,43);      -- HP +43
 INSERT INTO `item_mods` VALUES (25853,5,29);      -- MP +29
@@ -35211,6 +35212,7 @@ INSERT INTO `item_mods` VALUES (25878,68,24);     -- Evasion+24
 INSERT INTO `item_mods` VALUES (25878,311,55);    -- Magic Damage+55
 INSERT INTO `item_mods` VALUES (25878,384,400);    -- Haste +40
 INSERT INTO `item_mods` VALUES (25878,487,5);     -- Magic Burst Damage+5
+INSERT INTO `item_mods` VALUES (25910,1,1);       -- Caith Sith Subligar DEF +1
 INSERT INTO `item_mods` VALUES (25927,1,68);      -- meg._jambeaux DEF:68
 INSERT INTO `item_mods` VALUES (25927,2,20);      -- HP+20
 INSERT INTO `item_mods` VALUES (25927,8,15);      -- STR+15
