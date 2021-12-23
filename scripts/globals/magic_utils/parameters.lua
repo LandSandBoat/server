@@ -158,3 +158,92 @@ xi.magic_utils.parameters.damageParams =
     [xi.magic.spell.HOLY_II     ] = { xi.mod.MND, 250,     2,  250, 300 },
 
 }
+
+xi.magic_utils.parameters.enhancingSong =
+{
+--                                          1  2                    3                       4                       5                         6                     7    8    9   10  11  12
+-- Structure:                 [spellId] = {Tier, Main Effect,       subEffect,              Main Modifier,          Merit Effect,             Job-Point Effect,     power Scap Pcap Mult Div SVP},
+    -- Ballad
+    [xi.magic.spell.MAGES_BALLAD      ] = { 1, xi.effect.BALLAD,    0,                      xi.mod.BALLAD_EFFECT,   0,                        0,                    1,   0,   1,   1,  0, true  },
+    [xi.magic.spell.MAGES_BALLAD_II   ] = { 2, xi.effect.BALLAD,    0,                      xi.mod.BALLAD_EFFECT,   0,                        0,                    2,   0,   2,   1,  0, true  },
+    [xi.magic.spell.MAGES_BALLAD_III  ] = { 3, xi.effect.BALLAD,    0,                      xi.mod.BALLAD_EFFECT,   0,                        0,                    3,   0,   3,   1,  0, true  },
+    -- Carol - NOTE: CAROL II Gives a fixed elemental evasion. However, it also gives a Elemental Nullification effect, that follows regular song rules concerning power.
+    [xi.magic.spell.FIRE_CAROL        ] = { 1, xi.effect.CAROL,     xi.magic.ele.FIRE,      xi.mod.ETUDE_EFFECT,    0,                        0,                   20, 200,  80,   8, 10, true  },
+    -- [xi.magic.spell.FIRE_CAROL_II     ] = { 2, xi.effect.CAROL_II,  xi.magic.ele.FIRE,      xi.mod.ETUDE_EFFECT,    0,                        0,                   10, 400,  15, 1.5, 10, true  },
+    [xi.magic.spell.ICE_CAROL         ] = { 1, xi.effect.CAROL,     xi.magic.ele.ICE,       xi.mod.ETUDE_EFFECT,    0,                        0,                   20, 200,  80,   8, 10, true  },
+    -- [xi.magic.spell.ICE_CAROL_II      ] = { 2, xi.effect.CAROL_II,  xi.magic.ele.ICE,       xi.mod.ETUDE_EFFECT,    0,                        0,                   10, 400,  15, 1.5, 10, true  },
+    [xi.magic.spell.WIND_CAROL        ] = { 1, xi.effect.CAROL,     xi.magic.ele.WIND,      xi.mod.ETUDE_EFFECT,    0,                        0,                   20, 200,  80,   8, 10, true  },
+    -- [xi.magic.spell.WIND_CAROL_II     ] = { 2, xi.effect.CAROL_II,  xi.magic.ele.WIND,      xi.mod.ETUDE_EFFECT,    0,                        0,                   10, 400,  15, 1.5, 10, true  },
+    [xi.magic.spell.EARTH_CAROL       ] = { 1, xi.effect.CAROL,     xi.magic.ele.EARTH,     xi.mod.ETUDE_EFFECT,    0,                        0,                   20, 200,  80,   8, 10, true  },
+    -- [xi.magic.spell.EARTH_CAROL_II    ] = { 2, xi.effect.CAROL_II,  xi.magic.ele.EARTH,     xi.mod.ETUDE_EFFECT,    0,                        0,                   10, 400,  15, 1.5, 10, true  },
+    [xi.magic.spell.LIGHTNING_CAROL   ] = { 1, xi.effect.CAROL,     xi.magic.ele.LIGHTNING, xi.mod.ETUDE_EFFECT,    0,                        0,                   20, 200,  80,   8, 10, true  },
+    -- [xi.magic.spell.LIGHTNING_CAROL_II] = { 2, xi.effect.CAROL_II,  xi.magic.ele.LIGHTNING, xi.mod.ETUDE_EFFECT,    0,                        0,                   10, 400,  15, 1.5, 10, true  },
+    [xi.magic.spell.WATER_CAROL       ] = { 1, xi.effect.CAROL,     xi.magic.ele.WATER,     xi.mod.ETUDE_EFFECT,    0,                        0,                   20, 200,  80,   8, 10, true  },
+    -- [xi.magic.spell.WATER_CAROL_II    ] = { 2, xi.effect.CAROL_II,  xi.magic.ele.WATER,     xi.mod.ETUDE_EFFECT,    0,                        0,                   10, 400,  15, 1.5, 10, true  },
+    [xi.magic.spell.LIGHT_CAROL       ] = { 1, xi.effect.CAROL,     xi.magic.ele.LIGHT,     xi.mod.ETUDE_EFFECT,    0,                        0,                   20, 200,  80,   8, 10, true  },
+    -- [xi.magic.spell.LIGHT_CAROL_II    ] = { 2, xi.effect.CAROL_II,  xi.magic.ele.LIGHT,     xi.mod.ETUDE_EFFECT,    0,                        0,                   10, 400,  15, 1.5, 10, true  },
+    [xi.magic.spell.DARK_CAROL        ] = { 1, xi.effect.CAROL,     xi.magic.ele.DARK,      xi.mod.ETUDE_EFFECT,    0,                        0,                   20, 200,  80,   8, 10, true  },
+    -- [xi.magic.spell.DARK_CAROL_II     ] = { 2, xi.effect.CAROL_II,  xi.magic.ele.DARK,      xi.mod.ETUDE_EFFECT,    0,                        0,                   10, 400,  15, 1.5, 10, true  },
+    -- Etude
+    [xi.magic.spell.SINEWY_ETUDE      ] = { 1, xi.effect.ETUDE,     xi.mod.STR,             xi.mod.ETUDE_EFFECT,    0,                        0,                    3,   0,   9,   1,  0, true  },
+    [xi.magic.spell.HERCULEAN_ETUDE   ] = { 2, xi.effect.ETUDE,     xi.mod.STR,             xi.mod.ETUDE_EFFECT,    0,                        0,                   12,   0,  15,   1,  0, true  },
+    [xi.magic.spell.DEXTROUS_ETUDE    ] = { 1, xi.effect.ETUDE,     xi.mod.DEX,             xi.mod.ETUDE_EFFECT,    0,                        0,                    3,   0,   9,   1,  0, true  },
+    [xi.magic.spell.UNCANNY_ETUDE     ] = { 2, xi.effect.ETUDE,     xi.mod.DEX,             xi.mod.ETUDE_EFFECT,    0,                        0,                   12,   0,  15,   1,  0, true  },
+    [xi.magic.spell.VIVACIOUS_ETUDE   ] = { 1, xi.effect.ETUDE,     xi.mod.VIT,             xi.mod.ETUDE_EFFECT,    0,                        0,                    3,   0,   9,   1,  0, true  },
+    [xi.magic.spell.VITAL_ETUDE       ] = { 2, xi.effect.ETUDE,     xi.mod.VIT,             xi.mod.ETUDE_EFFECT,    0,                        0,                   12,   0,  15,   1,  0, true  },
+    [xi.magic.spell.QUICK_ETUDE       ] = { 1, xi.effect.ETUDE,     xi.mod.AGI,             xi.mod.ETUDE_EFFECT,    0,                        0,                    3,   0,   9,   1,  0, true  },
+    [xi.magic.spell.SWIFT_ETUDE       ] = { 2, xi.effect.ETUDE,     xi.mod.AGI,             xi.mod.ETUDE_EFFECT,    0,                        0,                   12,   0,  15,   1,  0, true  },
+    [xi.magic.spell.LEARNED_ETUDE     ] = { 1, xi.effect.ETUDE,     xi.mod.INT,             xi.mod.ETUDE_EFFECT,    0,                        0,                    3,   0,   9,   1,  0, true  },
+    [xi.magic.spell.SAGE_ETUDE        ] = { 2, xi.effect.ETUDE,     xi.mod.INT,             xi.mod.ETUDE_EFFECT,    0,                        0,                   12,   0,  15,   1,  0, true  },
+    [xi.magic.spell.SPIRITED_ETUDE    ] = { 1, xi.effect.ETUDE,     xi.mod.MND,             xi.mod.ETUDE_EFFECT,    0,                        0,                    3,   0,   9,   1,  0, true  },
+    [xi.magic.spell.LOGICAL_ETUDE     ] = { 2, xi.effect.ETUDE,     xi.mod.MND,             xi.mod.ETUDE_EFFECT,    0,                        0,                   12,   0,  15,   1,  0, true  },
+    [xi.magic.spell.ENCHANTING_ETUDE  ] = { 1, xi.effect.ETUDE,     xi.mod.CHR,             xi.mod.ETUDE_EFFECT,    0,                        0,                    3,   0,   9,   1,  0, true  },
+    [xi.magic.spell.BEWITCHING_ETUDE  ] = { 2, xi.effect.ETUDE,     xi.mod.CHR,             xi.mod.ETUDE_EFFECT,    0,                        0,                   12,   0,  15,   1,  0, true  },
+    -- Madrigal
+    [xi.magic.spell.SWORD_MADRIGAL    ] = { 1, xi.effect.MADRIGAL,  0,                      xi.mod.MADRIGAL_EFFECT, xi.merit.MADRIGAL_EFFECT, 0,                    5,  85,  45, 4.5, 18, true  },
+    [xi.magic.spell.BLADE_MADRIGAL    ] = { 2, xi.effect.MADRIGAL,  0,                      xi.mod.MADRIGAL_EFFECT, xi.merit.MADRIGAL_EFFECT, 0,                    9, 130,  60,   6, 18, true  },
+    -- March
+    [xi.magic.spell.ADVANCING_MARCH   ] = { 1, xi.effect.MARCH,     0,                      xi.mod.MARCH_EFFECT,    0,                        0,                   35, 200, 108,  11,  7, true  },
+    [xi.magic.spell.VICTORY_MARCH     ] = { 2, xi.effect.MARCH,     0,                      xi.mod.MARCH_EFFECT,    0,                        0,                   43, 300, 163,  16,  7, true  },
+    [xi.magic.spell.HONOR_MARCH       ] = { 3, xi.effect.MARCH,     0,                      xi.mod.MARCH_EFFECT,    0,                        0,                   24, 400, 126,  12,  7, true  }, -- Not an error. It is weaker.
+    -- Minne: Skill Caps unknown?
+    [xi.magic.spell.KNIGHTS_MINNE     ] = { 1, xi.effect.PAEON,     0,                      xi.mod.PAEON_EFFECT,    xi.merit.MINNE_EFFECT,    xi.jp.MINNE_EFFECT,   8,   0,  30,   3, 10, true  },
+    [xi.magic.spell.KNIGHTS_MINNE_II  ] = { 2, xi.effect.PAEON,     0,                      xi.mod.PAEON_EFFECT,    xi.merit.MINNE_EFFECT,    xi.jp.MINNE_EFFECT,  12,   0,  69,   7, 10, true  },
+    [xi.magic.spell.KNIGHTS_MINNE_III ] = { 3, xi.effect.PAEON,     0,                      xi.mod.PAEON_EFFECT,    xi.merit.MINNE_EFFECT,    xi.jp.MINNE_EFFECT,  18,   0, 108,  11, 10, true  },
+    [xi.magic.spell.KNIGHTS_MINNE_IV  ] = { 4, xi.effect.PAEON,     0,                      xi.mod.PAEON_EFFECT,    xi.merit.MINNE_EFFECT,    xi.jp.MINNE_EFFECT,  30,   0, 164,  16, 10, true  },
+    [xi.magic.spell.KNIGHTS_MINNE_V   ] = { 5, xi.effect.PAEON,     0,                      xi.mod.PAEON_EFFECT,    xi.merit.MINNE_EFFECT,    xi.jp.MINNE_EFFECT,  50,   0, 204,  20, 10, true  },
+    -- Minuet
+    [xi.magic.spell.VALOR_MINUET      ] = { 1, xi.effect.MINUET,    0,                      xi.mod.MINUET_EFFECT,   xi.merit.MINUET_EFFECT,   xi.jp.MINUET_EFFECT,  5,  50,  32,   3,  8, true  },
+    [xi.magic.spell.VALOR_MINUET_II   ] = { 2, xi.effect.MINUET,    0,                      xi.mod.MINUET_EFFECT,   xi.merit.MINUET_EFFECT,   xi.jp.MINUET_EFFECT, 10, 100,  64,   6,  6, true  },
+    [xi.magic.spell.VALOR_MINUET_III  ] = { 3, xi.effect.MINUET,    0,                      xi.mod.MINUET_EFFECT,   xi.merit.MINUET_EFFECT,   xi.jp.MINUET_EFFECT, 24, 200,  96,   9,  6, true  },
+    [xi.magic.spell.VALOR_MINUET_IV   ] = { 4, xi.effect.MINUET,    0,                      xi.mod.MINUET_EFFECT,   xi.merit.MINUET_EFFECT,   xi.jp.MINUET_EFFECT, 31, 300, 112,  11,  6, true  },
+    [xi.magic.spell.VALOR_MINUET_V    ] = { 5, xi.effect.MINUET,    0,                      xi.mod.MINUET_EFFECT,   xi.merit.MINUET_EFFECT,   xi.jp.MINUET_EFFECT, 32, 500, 124,  12,  6, true  },
+    -- Paeon
+    [xi.magic.spell.ARMYS_PAEON       ] = { 1, xi.effect.PAEON,     0,                      xi.mod.PAEON_EFFECT,    0,                        0,                    1, 100,   2,   1,  0, true  },
+    [xi.magic.spell.ARMYS_PAEON_II    ] = { 2, xi.effect.PAEON,     0,                      xi.mod.PAEON_EFFECT,    0,                        0,                    2, 150,   3,   1,  0, true  },
+    [xi.magic.spell.ARMYS_PAEON_III   ] = { 3, xi.effect.PAEON,     0,                      xi.mod.PAEON_EFFECT,    0,                        0,                    3, 200,   4,   1,  0, true  },
+    [xi.magic.spell.ARMYS_PAEON_IV    ] = { 4, xi.effect.PAEON,     0,                      xi.mod.PAEON_EFFECT,    0,                        0,                    4, 250,   5,   1,  0, true  },
+    [xi.magic.spell.ARMYS_PAEON_V     ] = { 5, xi.effect.PAEON,     0,                      xi.mod.PAEON_EFFECT,    0,                        0,                    5, 350,   7,   1,  0, true  },
+    [xi.magic.spell.ARMYS_PAEON_VI    ] = { 6, xi.effect.PAEON,     0,                      xi.mod.PAEON_EFFECT,    0,                        0,                    6, 450,   8,   1,  0, true  },
+    -- Prelude
+    [xi.magic.spell.HUNTERS_PRELUDE   ] = { 1, xi.effect.PRELUDE,   0,                      xi.mod.PRELUDE_EFFECT,  0,                        0,                   10,  85,  45, 4.5, 18, true  },
+    [xi.magic.spell.ARCHERS_PRELUDE   ] = { 2, xi.effect.PRELUDE,   0,                      xi.mod.PRELUDE_EFFECT,  0,                        0,                   20, 130,  60,   6, 18, true  },
+    -- Status effect resistance: Aubade, Capriccio, Gavotte, Operetta, Pastoral,
+    [xi.magic.spell.FOWL_AUBADE       ] = { 1, xi.effect.AUBADE,    0,                      0,                      0,                        0,                   20, 200,  80,   8, 10, true  },
+    [xi.magic.spell.GOLD_CAPRICCIO    ] = { 1, xi.effect.CAPRICCIO, 0,                      0,                      0,                        0,                   20, 200,  80,   8, 10, true  },
+    [xi.magic.spell.GOBLIN_GAVOTTE    ] = { 1, xi.effect.GAVOTTE,   0,                      0,                      0,                        0,                   20, 200,  80,   8, 10, true  },
+    [xi.magic.spell.SCOPS_OPERETTA    ] = { 1, xi.effect.OPERETTA,  0,                      0,                      0,                        0,                   20, 200,  80,   8, 10, true  },
+    [xi.magic.spell.PUPPETS_OPERETTA  ] = { 2, xi.effect.OPERETTA,  0,                      0,                      0,                        0,                   40, 200, 120,   8, 10, true  },
+    [xi.magic.spell.HERB_PASTORAL     ] = { 1, xi.effect.PASTORAL,  0,                      0,                      0,                        0,                   20, 200,  80,   8, 10, true  },
+    [xi.magic.spell.WARDING_ROUND     ] = { 1, xi.effect.ROUND,     0,                      0,                      0,                        0,                   20, 200,  80,   8, 10, true  },
+    -- Misc.
+    [xi.magic.spell.GODDESSS_HYMNUS   ] = { 1, xi.effect.HYMNUS,    0,                      0,                      0,                        0,                    1,   0,   1,   0,  0, false },
+    [xi.magic.spell.SENTINELS_SCHERZO ] = { 1, xi.effect.SCHERZO,   0,                      0,                      0,                        0,                    1, 350,  45,   1, 10, false },
+    [xi.magic.spell.RAPTOR_MAZURKA    ] = { 1, xi.effect.MAZURKA,   0,                      0,                      0,                        0,                   12,   0,  12,   0,  0, false },
+    [xi.magic.spell.CHOCOBO_MAZURKA   ] = { 1, xi.effect.MAZURKA,   0,                      0,                      0,                        0,                   24,   0,  24,   0,  0, false },
+
+    -- Emnity Songs
+    -- [xi.magic.spell.FOE_SIRVENTE      ] = { 1, xi.effect.------,    0,                      0,                      0,                        0,                   35,   0,  35,   1,  0, true  },
+    -- [xi.magic.spell.FOWL_AUBADE       ] = { 1, xi.effect.------,    0,                      0,                      0,                        0,                   32,   0,  32,   0,  0, true  },
+
+}

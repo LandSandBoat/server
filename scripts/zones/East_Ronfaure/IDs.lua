@@ -36,15 +36,15 @@ zones[xi.zone.EAST_RONFAURE] =
         ALREADY_POSSESS_TEMP     = 7504,  -- You already possess that temporary item.
         NO_COMBINATION           = 7509,  -- You were unable to enter a combination.
         VOIDWALKER_DESPAWN       = 7540,  -- The monster fades before your eyes, a look of disappointment on its face.
-        REGIME_REGISTERED        = 9887,  -- New training regime registered!
-        VOIDWALKER_NO_MOB        = 11060, -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
-        VOIDWALKER_MOB_TOO_FAR   = 11061, -- The <keyitem> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
-        VOIDWALKER_MOB_HINT      = 11062, -- The <keyitem> resonates [feebly/softly/solidly/strongly/very strongly/furiously], sending a radiant beam of light lancing towards a spot roughly <number> [yalm/yalms] [east/southeast/south/southwest/west/northwest/north/northeast] of here.
-        VOIDWALKER_SPAWN_MOB     = 11063, -- A monster materializes out of nowhere!
-        VOIDWALKER_UPGRADE_KI_1  = 11065, -- The <keyitem> takes on a slightly deeper hue and becomes <keyitem>!
-        VOIDWALKER_UPGRADE_KI_2  = 11066, -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
-        VOIDWALKER_BREAK_KI      = 11067, -- The <keyitem> shatters into tiny fragments.
-        VOIDWALKER_OBTAIN_KI     = 11068, -- Obtained key item: <keyitem>!
+        REGIME_REGISTERED        = 9880,  -- New training regime registered!
+        VOIDWALKER_NO_MOB        = 11053, -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
+        VOIDWALKER_MOB_TOO_FAR   = 11054, -- The <keyitem> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
+        VOIDWALKER_MOB_HINT      = 11055, -- The <keyitem> resonates [feebly/softly/solidly/strongly/very strongly/furiously], sending a radiant beam of light lancing towards a spot roughly <number> [yalm/yalms] [east/southeast/south/southwest/west/northwest/north/northeast] of here.
+        VOIDWALKER_SPAWN_MOB     = 11056, -- A monster materializes out of nowhere!
+        VOIDWALKER_UPGRADE_KI_1  = 11058, -- The <keyitem> takes on a slightly deeper hue and becomes <keyitem>!
+        VOIDWALKER_UPGRADE_KI_2  = 11059, -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
+        VOIDWALKER_BREAK_KI      = 11060, -- The <keyitem> shatters into tiny fragments.
+        VOIDWALKER_OBTAIN_KI     = 11061, -- Obtained key item: <keyitem>!
     },
     mob =
     {
@@ -90,15 +90,15 @@ zones[xi.zone.EAST_RONFAURE] =
     },
     npc =
     {
-        CASKET_BASE = 17191481,
+        CASKET_BASE = 17191482,
         LOGGING =
         {
-            17191529,
             17191530,
             17191531,
             17191532,
             17191533,
             17191534,
+            17191535,
         },
     },
 }

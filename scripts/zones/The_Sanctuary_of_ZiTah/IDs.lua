@@ -43,14 +43,14 @@ zones[xi.zone.THE_SANCTUARY_OF_ZITAH] =
         NO_LONGER_SENSE_EVIL       = 7772,  -- You no longer sense the evil presence, but there is still a feeling of unrest throughout the forest.
         NEWLY_SPROUTED_GLOWING     = 7773,  -- The newly sprouted <item> is glowing softly. You no longer feel as if you are being watched.
         NOT_THE_TIME_FOR_THAT      = 7774,  -- This is not the time for that!
-        SENSE_OMINOUS_PRESENCE     = 7865,  -- You sense an ominous presence...
-        PLAYER_OBTAINS_ITEM        = 8099,  -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM      = 8100,  -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM   = 8101,  -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP       = 8102,  -- You already possess that temporary item.
-        NO_COMBINATION             = 8107,  -- You were unable to enter a combination.
-        REGIME_REGISTERED          = 10285, -- New training regime registered!
-        COMMON_SENSE_SURVIVAL      = 12274, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        SENSE_OMINOUS_PRESENCE     = 7858,  -- You sense an ominous presence...
+        PLAYER_OBTAINS_ITEM        = 8092,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM      = 8093,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM   = 8094,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP       = 8095,  -- You already possess that temporary item.
+        NO_COMBINATION             = 8100,  -- You were unable to enter a combination.
+        REGIME_REGISTERED          = 10278, -- New training regime registered!
+        COMMON_SENSE_SURVIVAL      = 12267, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {
@@ -71,9 +71,9 @@ zones[xi.zone.THE_SANCTUARY_OF_ZITAH] =
     },
     npc =
     {
-        CASKET_BASE      = 17273337,
-        OVERSEER_BASE    = 17273364, -- Credaurion_RK in npc_list
-        CERMET_HEADSTONE = 17273389,
+        CASKET_BASE      = 17273338,
+        OVERSEER_BASE    = 17273365, -- Credaurion_RK in npc_list
+        CERMET_HEADSTONE = 17273390,
     },
 }
 
