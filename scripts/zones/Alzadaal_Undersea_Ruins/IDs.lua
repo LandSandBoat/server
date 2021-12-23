@@ -52,9 +52,9 @@ zones[xi.zone.ALZADAAL_UNDERSEA_RUINS] =
     },
     npc =
     {
-        RUNIC_PORTAL_NORTH      = 17072236,
-        RUNIC_PORTAL_SOUTH      = 17072237,
-        NEPIONIC_QM             = 17072378,
+        RUNIC_PORTAL_NORTH      = 17072337,
+        RUNIC_PORTAL_SOUTH      = 17072338,
+        NEPIONIC_QM             = 17072372,
     },
 }
 
