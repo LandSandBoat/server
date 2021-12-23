@@ -84,7 +84,7 @@ mission.sections =
 
         [xi.zone.RULUDE_GARDENS] =
         {
-            ['_6r2'] =
+            ['_6r8'] =
             {
                 onTrigger = function(player, npc)
                     if player:getMissionStatus(mission.areaId) == 0 then
