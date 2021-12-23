@@ -214,3 +214,5 @@ ext/tracy/
 *.callgrind.log
 callgrind.out.*
 memcheck.out.*
+
+*.dmp

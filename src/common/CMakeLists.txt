@@ -2,6 +2,10 @@ set(SOURCES
     blowfish.cpp
     blowfish.h
     cbasetypes.h
+    debug.h
+    $<$<PLATFORM_ID:Windows>:debug_windows.cpp>
+    $<$<PLATFORM_ID:Darwin>:debug_osx.cpp>
+    $<$<PLATFORM_ID:Linux>:debug_linux.cpp>
     filewatcher.cpp
     filewatcher.h
     kernel.cpp
