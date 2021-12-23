@@ -12,7 +12,7 @@ end
 
 entity.onTrigger = function(player, npc)
     if player:hasKeyItem(xi.ki.BRACELET_OF_VERVE) then
-        GetNPCByID(npc:getID() - 2):openDoor(30)
+        GetNPCByID(ID.npc.LEVER_AB_DOOR):openDoor(30)
         player:messageSpecial(ID.text.LIFT_LEVER)
     else
         player:startEvent(100)
