@@ -689,7 +689,7 @@ enum class Mod
     PHYS_ABSORB      = 512, // Occasionally absorbs physical damage taken, in percents
     ABSORB_DMG_TO_MP = 516, // Unlike PLD gear mod, works on all damage types (Ethereal Earring)
 
-    ITEM_ADDEFFECT_TYPE       = 431, // see procType table in scripts\globals\assitional_effects.lua
+    ITEM_ADDEFFECT_TYPE       = 431, // see procType table in scripts\globals\additional_effects.lua
     ITEM_SUBEFFECT            = 499, // Animation ID of Spikes and Additional Effects
     ITEM_ADDEFFECT_DMG        = 500, // Damage of an items Additional Effect or Spikes
     ITEM_ADDEFFECT_CHANCE     = 501, // Chance of an items Additional Effect or Spikes
