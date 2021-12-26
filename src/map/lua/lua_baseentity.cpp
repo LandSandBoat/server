@@ -4070,7 +4070,9 @@ void CLuaBaseEntity::addGearSetMod(uint8 modNameId, Mod modId, uint16 modValue, 
     if (gearSetMod.modPet > 0)
     {
         PChar->addPetModifier(gearSetMod.modId, PetModType::All, gearSetMod.modValue);
-    } else {
+    }
+    else
+    {
         PChar->addModifier(gearSetMod.modId, gearSetMod.modValue);
     }
 }
@@ -4092,7 +4094,9 @@ void CLuaBaseEntity::clearGearSetMods()
             if (gearSetMod.modPet > 0)
             {
                 PChar->delPetModifier(gearSetMod.modId, PetModType::All, gearSetMod.modValue);
-            } else {
+            }
+            else
+            {
                 PChar->delModifier(gearSetMod.modId, gearSetMod.modValue);
             }
         }
