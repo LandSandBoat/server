@@ -1662,7 +1662,7 @@ INSERT INTO `item_basic` VALUES (1769,0,'square_of_galateia','galateia',12,4,40,
 INSERT INTO `item_basic` VALUES (1770,0,'oversized_fang','oversized_fang',12,4,42,0,519);
 INSERT INTO `item_basic` VALUES (1771,0,'dragon_bone','dragon_bone',12,4,42,0,1020);
 INSERT INTO `item_basic` VALUES (1772,0,'chunk_of_super_cermet','super_cermet',12,4,44,0,519);
-INSERT INTO `item_basic` VALUES (1773,0,'handful_of_darksteel_scales','dark_scales',12,4,38,0,970);
+INSERT INTO `item_basic` VALUES (1773,0,'handful_of_darksteel_scales','dark_scales',12,4,38,0,2862);
 INSERT INTO `item_basic` VALUES (1774,0,'pile_of_red_gravel','red_gravel',12,4,46,0,632);
 INSERT INTO `item_basic` VALUES (1775,0,'jar_of_brimsand','brimsand',12,4,44,0,674);
 INSERT INTO `item_basic` VALUES (1776,0,'serving_of_spaghetti','spaghetti',12,4,59,0,200);
