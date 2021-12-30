@@ -47,6 +47,7 @@ target_link_libraries(common
     spdlog_header_only
     sol2_single
     efsw
+    argparse
     concurrentqueue
     project_options
     #PRIVATE

@@ -23,6 +23,7 @@
 #define _KERNEL_H_
 
 #include "cbasetypes.h"
+#include <argparse/argparse.hpp>
 
 extern int    arg_c;
 extern char** arg_v;
@@ -30,6 +31,8 @@ extern char** arg_v;
 extern int   runflag;
 extern char* SERVER_NAME;
 extern char  SERVER_TYPE;
+
+extern argparse::ArgumentParser argParser;
 
 extern int   parse_console(char* buf);
 extern void  log_init(int, char**);
