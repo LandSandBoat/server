@@ -364,7 +364,6 @@ bool CAttack::CheckAnticipated()
     else if (!hasSeigan)
     {
         m_victim->StatusEffectContainer->DelStatusEffect(EFFECT_THIRD_EYE);
-        return false;
     }
     else
     { // do have seigan, decay anticipations correctly (guesstimated)
@@ -386,7 +385,6 @@ bool CAttack::CheckAnticipated()
             return true;
         }
         m_victim->StatusEffectContainer->DelStatusEffect(EFFECT_THIRD_EYE);
-        return false;
     }
 
     return false;

@@ -18,9 +18,6 @@ function(set_project_warnings project_name)
       /wd4457 # declaration of 'var' hides function parameter
       /wd4458 # declaration of 'var' hides class member
       /wd4459 # declaration of 'var' hides global declaration
-      /wd4701 # potentially uninitialized local variable used
-      /wd4702 # unreachable code
-      /wd4703 # potentially uninitialized local pointer variable used
 
       # /w1 Promote to level 1
       /w14254 # 'operator': conversion from 'type1:field_bits' to 'type2:field_bits', possible loss of data

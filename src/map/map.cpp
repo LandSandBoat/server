@@ -588,7 +588,6 @@ int32 recv_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
         }
         map_session_data->client_packet_id = 0;
         map_session_data->server_packet_id = 0;
-        return 0;
     }
     else
     {
@@ -610,10 +609,9 @@ int32 recv_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
         // don't need memcpy header
         memcpy(buff + FFXI_HEADER_SIZE, PacketDataBuff.get(), PacketDataSize);
         *buffsize = FFXI_HEADER_SIZE + PacketDataSize;
-
-        return 0;
     }
-    return -1;
+
+    return 0;
 }
 
 /************************************************************************
