@@ -143,24 +143,24 @@ foreach(dir ${module_dirs})
     endif()
 endforeach()
 
-add_executable(topaz_game
+add_executable(xi_game
     ${SOURCES}
     ${resource})
 
 target_include_directories(topaz_game PUBLIC ${module_include_dirs})
 
 if(WIN32)
-    set_target_properties(topaz_game PROPERTIES OUTPUT_NAME topaz_game${spacer}${platform_suffix})
+    set_target_properties(xi_game PROPERTIES OUTPUT_NAME xi_game)
 endif()
 
 target_compile_definitions(
-    topaz_game
+    xi_game
     PUBLIC
     -DdsUDPSERV
     -DDEBUGLOGMAP
 )
 
-target_link_libraries(topaz_game
+target_link_libraries(xi_game
     PUBLIC
     sol2_single
     common
@@ -177,8 +177,8 @@ target_link_libraries(topaz_game
 )
 
 if(TRACY_ENABLE)
-    target_link_libraries(topaz_game PUBLIC tracy_client)
+    target_link_libraries(xi_game PUBLIC tracy_client)
 endif(TRACY_ENABLE)
 
-set_target_output_directory(topaz_game)
-set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT topaz_game)
+set_target_output_directory(xi_game)
+set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT xi_game)

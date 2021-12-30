@@ -6,13 +6,13 @@ done
 sleep 5
 
 # Start servers
-echo "starting topaz_connect"
-nohup ./topaz_connect &
+echo "starting xi_connect"
+nohup ./xi_connect &
 sleep 5
 
-echo "starting topaz_search"
-nohup ./topaz_search &
+echo "starting xi_search"
+nohup ./xi_search &
 
 sleep 5
-echo "starting topaz_game"
-./topaz_game
+echo "starting xi_game"
+./xi_game

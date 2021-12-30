@@ -130,12 +130,9 @@ UpgradeLog*.XML
 *.app
 
 # Generated executables
-/topaz_connect
-/topaz_game
-/topaz_search
-/topaz_connect_64
-/topaz_game_64
-/topaz_search_64
+/xi_connect
+/xi_game
+/xi_search
 
 # Generated files, mostly autotools-related
 .deps
@@ -168,7 +165,6 @@ log/leaks.txt
 .metadata/**
 .project
 .vs
-/win32/.vs/topaz/v15
 
 # VS Code
 .vscode
