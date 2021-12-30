@@ -51,6 +51,6 @@ target_link_libraries(common
     concurrentqueue
     project_options
     #PRIVATE
-    #project_warnings
+    project_warnings
 )
 

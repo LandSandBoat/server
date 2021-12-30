@@ -22,5 +22,5 @@ target_link_libraries(entities
     PUBLIC
     common
     project_options
-    #project_warnings
+    project_warnings
 )

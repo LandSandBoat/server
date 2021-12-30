@@ -30,5 +30,5 @@ target_link_libraries(items
     PUBLIC
     common
     project_options
-    #project_warnings
+    project_warnings
 )

@@ -32,5 +32,5 @@ target_link_libraries(lua_bindings
     PUBLIC
     common
     project_options
-    #project_warnings
+    project_warnings
 )

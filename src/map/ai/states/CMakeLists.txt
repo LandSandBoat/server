@@ -34,5 +34,5 @@ target_link_libraries(ai_states
     PUBLIC
     common
     project_options
-    #project_warnings
+    project_warnings
 )

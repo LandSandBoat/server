@@ -21,5 +21,5 @@ target_link_libraries(ai
     ai_helpers
     ai_states
     project_options
-    #project_warnings
+    project_warnings
 )

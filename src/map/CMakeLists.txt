@@ -171,8 +171,8 @@ target_link_libraries(xi_game
     lua_bindings
     packets
     utils
-    project_options
     PRIVATE
+    project_options
     project_warnings
 )
 

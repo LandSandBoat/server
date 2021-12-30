@@ -249,5 +249,5 @@ target_link_libraries(packets
     PUBLIC
     common
     project_options
-    #project_warnings
+    project_warnings
 )

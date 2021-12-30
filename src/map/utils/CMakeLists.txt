@@ -54,5 +54,5 @@ target_link_libraries(utils
     lua_bindings
     packets
     project_options
-    #project_warnings
+    project_warnings
 )

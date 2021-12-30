@@ -16,6 +16,6 @@ target_link_libraries(ai_helpers
     PUBLIC
     common
     project_options
-    #project_warnings
+    project_warnings
 )
 
