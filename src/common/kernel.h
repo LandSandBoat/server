@@ -32,8 +32,6 @@ extern int   runflag;
 extern char* SERVER_NAME;
 extern char  SERVER_TYPE;
 
-extern argparse::ArgumentParser argParser;
-
 extern int   parse_console(char* buf);
 extern void  log_init(int, char**);
 extern int32 do_init(int32, char**);

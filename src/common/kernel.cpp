@@ -46,9 +46,7 @@
 #endif
 #endif
 
-int    runflag = 1;
-int    arg_c   = 0;
-char** arg_v   = nullptr;
+int runflag = 1;
 
 char* SERVER_NAME = nullptr;
 char  SERVER_TYPE = XI_SERVER_NONE;
@@ -238,17 +236,20 @@ int main(int argc, char** argv)
 {
     debug::init();
 
-    { // initialize program arguments
-        char* p1 = SERVER_NAME = argv[0];
-        char* p2               = p1;
-        while ((p1 = strchr(p2, '/')) != nullptr || (p1 = strchr(p2, '\\')) != nullptr)
-        {
-            SERVER_NAME = ++p1;
-            p2          = p1;
-        }
-        arg_c = argc;
-        arg_v = argv;
+    argparse::ArgumentParser argParser(argv[0]);
+
+    try
+    {
+        argParser.parse_args(argc, argv);
     }
+    catch (const std::runtime_error& err)
+    {
+        std::cerr << err.what() << std::endl;
+        std::cerr << argParser;
+        std::exit(1);
+    }
+
+    SERVER_NAME = argv[0];
 
     log_init(argc, argv);
     set_server_type();
