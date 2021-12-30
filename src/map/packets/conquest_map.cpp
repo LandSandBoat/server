@@ -110,7 +110,7 @@ CConquestPacket::CConquestPacket(CCharEntity* PChar)
     ref<uint8>(0x04) = conquest::GetBalance(sandoria_regions, bastok_regions, windurst_regions, sandoria_prev, bastok_prev, windurst_prev);
     ref<uint8>(0x05) = conquest::GetAlliance(sandoria_regions, bastok_regions, windurst_regions, sandoria_prev, bastok_prev, windurst_prev);
 
-    ref<uint8>(0x8C)  = conquest::GetNexTally();
+    ref<uint8>(0x8C)  = conquest::GetNextTally();
     ref<uint32>(0x90) = charutils::GetPoints(PChar, charutils::GetConquestPointsName(PChar).c_str());
     ref<uint8>(0x9C)  = 0x01;
 

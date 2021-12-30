@@ -619,23 +619,17 @@ namespace conquest
 
     /************************************************************************
      *                                                                       *
-     *  Оставшееся количество дней до подсчета conquest                      *
+     *  The remaining number of days before counting Conquest                *
      *                                                                       *
      ************************************************************************/
 
-    uint8 GetNexTally()
+    uint8 GetNextTally()
     {
         auto  weekday    = CVanaTime::getInstance()->getSysWeekDay();
         uint8 dayspassed = (weekday == 0 ? 6 : weekday - 1) * 25;
         dayspassed += ((CVanaTime::getInstance()->getSysHour() * 60 + CVanaTime::getInstance()->getSysMinute()) * 25) / 1440;
         return (uint8)(175 - dayspassed);
     }
-
-    /************************************************************************
-     *                                                                       *
-     *  Узнаем страну, владеющую данной зоной                                *
-     *                                                                       *
-     ************************************************************************/
 
     uint8 GetRegionOwner(REGION_TYPE RegionID)
     {
@@ -652,16 +646,16 @@ namespace conquest
 
     /************************************************************************
      *                                                                       *
-     *  Добавляем персонажу conquest points, основываясь на полученном опыте *
+     * Add Conquest Points to the character, based on the experience gained. *
      *                                                                       *
      ************************************************************************/
 
-    // TODO: необходимо учитывать добавленные очки для еженедельного подсчета conquest
+    // TODO: need to take into account the added glasses for the weekly counting of Conquest
 
     uint32 AddConquestPoints(CCharEntity* PChar, uint32 exp)
     {
-        // ВНИМЕНИЕ: не нужно отправлять персонажу CConquestPacket,
-        // т.к. клиент сам запрашивает этот пакет через фиксированный промежуток времени
+        // Attention: you do not need to send CConquestPacket,
+        // The client itself requests this package at a fixed period of time.
 
         REGION_TYPE region = PChar->loc.zone->GetRegionID();
 
@@ -677,7 +671,7 @@ namespace conquest
             charutils::AddPoints(PChar, charutils::GetConquestPointsName(PChar).c_str(), points);
             GainInfluencePoints(PChar, points / 2);
         }
-        return 0; // added conquest points (пока не вижу в этом определенного смысла)
+        return 0; // added conquest points (I do not see some sense in this)
     }
 
     // GetConquestInfluence(region,nation)

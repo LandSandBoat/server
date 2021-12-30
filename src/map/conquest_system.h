@@ -70,7 +70,7 @@ namespace conquest
     uint8 GetAlliance(uint8 sandoria, uint8 bastok, uint8 windurst,  // Determine if losing nations are allied
                       uint8 sandoria_prev, uint8 bastok_prev, uint8 windurst_prev);
     bool  IsAlliance();                         // Determine if losing nations are allied
-    uint8 GetNexTally();                        // Next tally (weekly or every hour ?)
+    uint8 GetNextTally();                        // Next tally (weekly or every hour ?)
     uint8 GetRegionOwner(REGION_TYPE RegionID); // Get owner of the region
 
     uint32 AddConquestPoints(CCharEntity* PChar, uint32 exp); // Add conquest points

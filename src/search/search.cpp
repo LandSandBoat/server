@@ -969,8 +969,6 @@ search_req _HandleSearchRequest(CTCPRequestPacket& PTCPRequest)
     }
 
     return sr;
-    // не обрабатываем последние биты, что мешает в одну кучу
-    // For example: "/blacklist delete Name" and "/sea all Name"
 }
 
 /************************************************************************
