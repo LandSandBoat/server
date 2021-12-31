@@ -68,7 +68,7 @@ CMeritPointsCategoriesPacket::CMeritPointsCategoriesPacket(CCharEntity* PChar)
 
         PChar->pushPacket(new CBasicPacket(*this));
     }
-    MeritPointsCategoriesPacket(PChar, (uint8)(5 * MAX_MERITS_IN_PACKET));
+    MeritPointsCategoriesPacket(PChar, static_cast<uint32>(5 * MAX_MERITS_IN_PACKET));
 }
 
 /************************************************************************
@@ -92,7 +92,7 @@ CMeritPointsCategoriesPacket::CMeritPointsCategoriesPacket(CCharEntity* PChar, M
  *                                                                       *
  ************************************************************************/
 
-void CMeritPointsCategoriesPacket::MeritPointsCategoriesPacket(CCharEntity* PChar, uint8 offset)
+void CMeritPointsCategoriesPacket::MeritPointsCategoriesPacket(CCharEntity* PChar, uint32 offset)
 {
     for (uint8 i = 0; i < MAX_MERITS_IN_PACKET; ++i)
     {

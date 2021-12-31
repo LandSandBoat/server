@@ -412,7 +412,6 @@ namespace trustutils
         int32 scaleOver60Column = 3;
         int32 scaleOver75Column = 4;
         int32 scaleOver60       = 2;
-        int32 scaleOver75       = 3;
 
         uint8 grade;
 

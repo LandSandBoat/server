@@ -138,7 +138,7 @@ std::tuple<std::string, uint32, uint32> CLuaBattlefield::getRecord()
 
     auto   name = record.name;
     uint32 time = std::chrono::duration_cast<std::chrono::seconds>(record.time).count();
-    uint32 size = record.partySize;
+    uint32 size = static_cast<uint32>(record.partySize);
 
     return std::make_tuple(name, time, size);
 }

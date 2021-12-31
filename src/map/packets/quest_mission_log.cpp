@@ -85,7 +85,7 @@ CQuestMissionLogPacket::CQuestMissionLogPacket(CCharEntity* PChar, uint8 logID, 
                     break;
                 case LOG_CAMPAIGN_TWO:
                     // Second Campaign packet, summoned through logType
-                    generateCampaignMissionPacket(PChar, (uint8)256);
+                    generateCampaignMissionPacket(PChar, 256);
                     packetType = CAMPAIGN_MISSION_TWO;
                     break;
                 default:
@@ -199,7 +199,7 @@ void CQuestMissionLogPacket::generateCompleteExpMissionPacket(CCharEntity* PChar
     }
 }
 
-void CQuestMissionLogPacket::generateCampaignMissionPacket(CCharEntity* PChar, uint8 startQMID)
+void CQuestMissionLogPacket::generateCampaignMissionPacket(CCharEntity* PChar, uint16 startQMID)
 {
     for (uint16 questMissionID = startQMID; questMissionID < (startQMID + 256); questMissionID++)
     {

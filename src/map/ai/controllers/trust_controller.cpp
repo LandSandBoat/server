@@ -492,7 +492,7 @@ uint8 CTrustController::GetPartyPosition()
     {
         if (trustList.at(i)->id == POwner->id)
         {
-            return i;
+            return static_cast<uint8>(i);
         }
     }
     return 0;

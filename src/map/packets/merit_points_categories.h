@@ -38,7 +38,7 @@ public:
 
 private:
     // offset should be a uint16!!! Why assert fail?!
-    void MeritPointsCategoriesPacket(CCharEntity* PChar, uint8 offset);
+    void MeritPointsCategoriesPacket(CCharEntity* PChar, uint32 offset);
 };
 
 #endif

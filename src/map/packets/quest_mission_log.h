@@ -98,7 +98,7 @@ private:
     void generateCompleteMissionPacket(CCharEntity* PChar);
     void generateCurrentExpMissionPacket(CCharEntity* PChar);
     void generateCompleteExpMissionPacket(CCharEntity* PChar);
-    void generateCampaignMissionPacket(CCharEntity* PChar, uint8 startQMID);
+    void generateCampaignMissionPacket(CCharEntity* PChar, uint16 startQMID);
     void generateAssaultMissionPacket(CCharEntity* PChar);
 };
 

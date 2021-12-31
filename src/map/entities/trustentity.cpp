@@ -236,7 +236,6 @@ void CTrustEntity::OnRangedAttack(CRangeState& state, action_t& action)
     uint8 shadowsTaken = 0;
     uint8 hitCount     = 1; // 1 hit by default
     uint8 realHits     = 0; // to store the real number of hit for tp multipler
-    auto  ammoConsumed = 0;
     bool  hitOccured   = false; // track if player hit mob at all
     bool  isSange      = false;
     bool  isBarrage    = StatusEffectContainer->HasStatusEffect(EFFECT_BARRAGE, 0);

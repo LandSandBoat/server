@@ -1155,13 +1155,13 @@ bool CAutomatonController::TryEnhance()
         return Cast(PAutomaton->targid, SpellID::Dread_Spikes);
     }
 
-    EnmityList_t* enmityList;
-    auto*         PMob = dynamic_cast<CMobEntity*>(PTarget);
-    if (PMob)
+    auto* PMob = dynamic_cast<CMobEntity*>(PTarget);
+    if (PMob == nullptr)
     {
-        enmityList = PMob->PEnmityContainer->GetEnmityList();
+        return false;
     }
 
+    EnmityList_t* enmityList = PMob->PEnmityContainer->GetEnmityList();
     uint16 highestEnmity = 0;
 
     CBattleEntity* PRegenTarget     = nullptr;

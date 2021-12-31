@@ -4149,8 +4149,6 @@ namespace charutils
 
         capacityPoints = (uint32)(capacityPoints * map_config.exp_rate);
 
-        uint16 currentCapacity = PChar->PJobPoints->GetCapacityPoints();
-
         if (capacityPoints > 0)
         {
             // Capacity Chains start at lv100 mobs
@@ -6248,8 +6246,7 @@ namespace charutils
 
     uint8 getMainhandItemLevel(CCharEntity* PChar)
     {
-        CItemEquipment* PItem = PChar->getEquip((SLOTTYPE)SLOTTYPE::SLOT_MAIN);
-
+        CItemEquipment* PItem = PChar->getEquip(SLOTTYPE::SLOT_MAIN);
         if (PItem)
         {
             return PItem->getILvl();
@@ -6261,13 +6258,14 @@ namespace charutils
     // Return Ranged Weapon Item Level; If ranged slot exists use that, else use Ammo
     uint8 getRangedItemLevel(CCharEntity* PChar)
     {
-        CItemEquipment* PItem = nullptr;
-
-        if (PItem = PChar->getEquip((SLOTTYPE)SLOTTYPE::SLOT_RANGED))
+        CItemEquipment* PItem = PChar->getEquip(SLOTTYPE::SLOT_RANGED);
+        if (PItem)
         {
             return PItem->getILvl();
         }
-        else if (PItem = PChar->getEquip((SLOTTYPE)SLOTTYPE::SLOT_AMMO))
+
+        PItem = PChar->getEquip(SLOTTYPE::SLOT_AMMO);
+        if (PItem)
         {
             return PItem->getILvl();
         }

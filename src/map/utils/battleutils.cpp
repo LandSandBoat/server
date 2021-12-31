@@ -623,14 +623,16 @@ namespace battleutils
             // mobs random multiplier
             dBonus += xirand::GetRandomNumber(100) / 1000.0f;
         }
-        if (WeekDay == strongDay[element - 1] && (obiBonus || xirand::GetRandomNumber(100) < 33))
+
+        if (WeekDay == (uint32)strongDay[element - 1] && (obiBonus || xirand::GetRandomNumber(100) < 33))
         {
             dBonus += 0.1f;
         }
-        else if (WeekDay == weakDay[element - 1] && (obiBonus || xirand::GetRandomNumber(100) < 33))
+        else if (WeekDay == (uint32)weakDay[element - 1] && (obiBonus || xirand::GetRandomNumber(100) < 33))
         {
             dBonus -= 0.1f;
         }
+
         if (weather == strongWeatherSingle[element - 1] && (obiBonus || xirand::GetRandomNumber(100) < 33))
         {
             dBonus += 0.1f;
@@ -657,6 +659,7 @@ namespace battleutils
             damage = std::max(damage - PDefender->getMod(Mod::PHALANX), 0);
             damage = HandleStoneskin(PDefender, damage);
         }
+
         damage = std::clamp(damage, -99999, 99999);
 
         return damage;

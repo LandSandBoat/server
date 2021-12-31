@@ -784,8 +784,6 @@ bool CCharEntity::OnAttack(CAttackState& state, action_t& action)
     controller->setLastAttackTime(server_clock::now());
     auto ret = CBattleEntity::OnAttack(state, action);
 
-    auto* PTarget = static_cast<CBattleEntity*>(state.GetTarget());
-
     return ret;
 }
 
