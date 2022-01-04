@@ -809,7 +809,14 @@ void CLuaBaseEntity::injectActionPacket(uint16 action, uint16 anim, uint16 spec,
             target.animation = castAnim;
         }
         target.param     = message;
-        target.messageID = 327; // starts casting
+        if (m_PBaseEntity->objtype == TYPE_MOB)
+        {
+            target.messageID = 3; // starts casting
+        }
+        else
+        {
+            target.messageID = 327; // starts casting on <target>
+        }
         return;
     }
 
