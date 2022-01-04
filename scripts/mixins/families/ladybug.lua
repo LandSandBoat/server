@@ -10,21 +10,27 @@ g_mixins = g_mixins or {}
 g_mixins.families = g_mixins.families or {}
 
 local function night(mob)
-    mob:setMobMod(xi.mobMod.NO_AGGRO, 1)
-    mob:setMobMod(xi.mobMod.ROAM_COOL, 10)
-    mob:delMod(xi.mod.TRIPLE_ATTACK, 20)
-    mob:delMod(xi.mod.EVA, 15)
-    mob:delMod(xi.mod.ACC, 15)
-    mob:setMobMod(xi.mobMod.SKILL_LIST, mob:getLocalVar("[ladybug]nightSkillList"))
+    if mob:getLocalVar("Phase") == 0 then
+        mob:setMobMod(xi.mobMod.NO_AGGRO, 1)
+        mob:setMobMod(xi.mobMod.ROAM_COOL, 10)
+        mob:delMod(xi.mod.TRIPLE_ATTACK, 20)
+        mob:delMod(xi.mod.EVA, 15)
+        mob:delMod(xi.mod.ACC, 15)
+        mob:setMobMod(xi.mobMod.SKILL_LIST, mob:getLocalVar("[ladybug]nightSkillList"))
+        mob:setLocalVar("Phase", 1)
+    end
 end
 
 local function day(mob)
-    mob:setMobMod(xi.mobMod.NO_AGGRO, 0)
-    mob:delMobMod(xi.mobMod.ROAM_COOL, 10)
-    mob:setMod(xi.mod.TRIPLE_ATTACK, 20)
-    mob:setMod(xi.mod.EVA, 15)
-    mob:setMod(xi.mod.ACC, 15)
-    mob:setMobMod(xi.mobMod.SKILL_LIST, mob:getLocalVar("[ladybug]daySkillList"))
+    if mob:getLocalVar("Phase") == 1 then
+        mob:setMobMod(xi.mobMod.NO_AGGRO, 0)
+        mob:setMobMod(xi.mobMod.ROAM_COOL, 0)
+        mob:addMod(xi.mod.TRIPLE_ATTACK, 20)
+        mob:addMod(xi.mod.EVA, 15)
+        mob:addMod(xi.mod.ACC, 15)
+        mob:setMobMod(xi.mobMod.SKILL_LIST, mob:getLocalVar("[ladybug]daySkillList"))
+        mob:setLocalVar("Phase", 0)
+    end
 end
 
 xi.mix.ladybug.config = function(mob, params)
