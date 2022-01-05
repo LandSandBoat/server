@@ -23,6 +23,17 @@ mission.sections =
 {
     {
         check = function(player, currentMission, missionStatus, vars)
+            return currentMission == mission.missionId
+        end,
+
+        [xi.zone.AHT_URHGAN_WHITEGATE] =
+        {
+            ['Naja_Salaheem'] = mission:event(3029, 0, 1, 1, 0, 0, 0, 0, 0, 0)
+        },
+    },
+
+    {
+        check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId and
                 not mission:getMustZone(player)
         end,

@@ -25,14 +25,21 @@ mission.sections =
 {
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId and
-                not mission:getMustZone(player) and
-                VanadielUniqueDay() >= mission:getVar(player, 'Timer')
+            return currentMission == mission.missionId
         end,
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =
         {
-            ['Naja_Salaheem'] = mission:progressEvent(3070, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+            ['Naja_Salaheem'] = mission:event(3053, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+
+            onRegionEnter =
+            {
+                [6] = function(player, region)
+                    if not mission:getMustZone(player) and VanadielUniqueDay() >= mission:getVar(player, 'Timer') then
+                        return mission:progressEvent(3070, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+                    end
+                end,
+            },
 
             onEventFinish =
             {

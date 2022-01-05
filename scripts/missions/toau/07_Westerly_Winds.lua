@@ -51,8 +51,10 @@ mission.sections =
             onEventFinish =
             {
                 [3027] = function(player, csid, option, npc)
-                    if npcUtil.giveItem(player, xi.items.IMPERIAL_SILVER_PIECE) then
+                    -- Don't change order. In retail, Keyitem is gotten before item.
+                    if player:getFreeSlotsCount() >= 1 then
                         npcUtil.giveKeyItem(player, xi.ki.RAILLEFALS_NOTE)
+                        npcUtil.giveItem(player, xi.items.IMPERIAL_SILVER_PIECE)
                         player:setTitle(xi.title.AGENT_OF_THE_ALLIED_FORCES)
                         player:setMissionStatus(mission.areaId, 1)
                     end
@@ -60,6 +62,7 @@ mission.sections =
 
                 [3028] = function(player, csid, option, npc)
                     if mission:complete(player) then
+                        player:delKeyItem(xi.ki.RAILLEFALS_NOTE)
                         player:setLocalVar('Mission[4][7]mustZone', 1)
                     end
                 end,

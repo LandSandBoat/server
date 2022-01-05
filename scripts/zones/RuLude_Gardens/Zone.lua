@@ -13,7 +13,7 @@ require("scripts/globals/items")
 local zone_object = {}
 
 zone_object.onInitialize = function(zone)
-    zone:registerRegion(1, -4, -2, 40, 4, 3, 50)
+    zone:registerRegion(1, -16, 2, 32, 16, 4, 86) -- Palace entrance. Ends at back exit. Needs retail confirmaton for the back entrance.
 end
 
 zone_object.onZoneIn = function(player, prevZone)

@@ -32,7 +32,7 @@ mission.sections =
             ['Halver'] =
             {
                 onTrigger = function(player, npc)
-                    return mission:progressEvent(565)
+                    return mission:event(565)
                 end,
             },
         },
