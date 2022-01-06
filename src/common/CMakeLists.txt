@@ -27,6 +27,7 @@ set(SOURCES
     xirand.h
     utils.cpp
     utils.h
+    version.cpp # auto-generated
     version.h
     zlib.cpp
     zlib.h
