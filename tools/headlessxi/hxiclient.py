@@ -46,7 +46,7 @@ class HXIClient:
         if in_data[0] == 0x01:
             print('Login successful')
             self.account_id = util.unpack_uint16(in_data, 1)
-            print('Account ID: ' + str(self.account_id))
+            #print('Account ID: ' + str(self.account_id))
 
             # Connect
             self.lobby_data_connect()
