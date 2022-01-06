@@ -35,8 +35,8 @@ jobs:
       with:
         name: linux_executables
         path: |
-          xi_connect
-          xi_game
+          xi_login
+          xi_zone
           xi_search
   
   Linux_GCC10_64bit:
@@ -283,19 +283,19 @@ jobs:
         retry_on: timeout
         shell: bash
         command: |
-          chmod +x xi_connect
-          chmod +x xi_game
+          chmod +x xi_login
+          chmod +x xi_zone
           chmod +x xi_search
           ls -l
 
           printf "\nStart server processes\n"
-          screen -d -m -S xi_connect ./xi_connect --log login-server.log
+          screen -d -m -S xi_login ./xi_login --log login-server.log
           screen -d -m -S xi_search ./xi_search --log search-server.log
-          screen -d -m -S xi_game ./xi_game --log map-server.log
-          
+          screen -d -m -S xi_zone ./xi_zone --log zone-server.log
+
           printf "\nWaiting 90s for servers to fully start up\n"
           sleep 90s
-          
+
           printf "\nPopulating database\n"
           mysql xidb -h 127.0.0.1 -uroot -proot << EOF
           -- Clean out anything already there (just in case)
@@ -339,20 +339,20 @@ jobs:
           time.sleep(30)
           hxi_client.logout()
           EOF
-          
+
           killall screen
     - name: Check for errors and warnings
       if: ${{ success() || failure() }}
       run: |
         cat login-server*.log
-        cat map-server*.log
+        cat zone-server*.log
         cat search-server*.log
 
         if grep -qi "error" login-server*.log; then
             exit -1
         fi
 
-        if grep -qi "error" map-server*.log; then
+        if grep -qi "error" zone-server*.log; then
             exit -1
         fi
 
@@ -364,7 +364,7 @@ jobs:
             exit -1
         fi
 
-        if grep -qi "warning" map-server*.log; then
+        if grep -qi "warning" zone-server*.log; then
             exit -1
         fi
 
@@ -419,16 +419,16 @@ jobs:
       env:
         MYSQL_HOST: mysql
       run: |
-        chmod +x xi_connect
-        chmod +x xi_game
+        chmod +x xi_login
+        chmod +x xi_zone
         chmod +x xi_search
         ls -l
 
         printf "\nStart server processes\n"
-        screen -d -m -S xi_connect ./xi_connect --log login-server.log
+        screen -d -m -S xi_login ./xi_login --log login-server.log
         screen -d -m -S xi_search ./xi_search --log search-server.log
-        screen -d -m -S xi_game ./xi_game --log map-server-0.log --port 54230
-        screen -d -m -S xi_game ./xi_game --log map-server-1.log --port 54231
+        screen -d -m -S xi_zone ./xi_zone --log zone-server-0.log --port 54230
+        screen -d -m -S xi_zone ./xi_zone --log zone-server-1.log --port 54231
         sleep 2m
         killall screen
     - name: Check for errors and warnings
@@ -436,8 +436,8 @@ jobs:
       run: |
         cat login-server*.log
         cat search-server*.log
-        cat map-server-0*.log
-        cat map-server-1*.log
+        cat zone-server-0*.log
+        cat zone-server-1*.log
 
         if grep -qi "error" login-server*.log; then
             exit -1
@@ -447,11 +447,11 @@ jobs:
             exit -1
         fi
 
-        if grep -qi "error" map-server-0*.log; then
+        if grep -qi "error" zone-server-0*.log; then
             exit -1
         fi
 
-        if grep -qi "error" map-server-1*.log; then
+        if grep -qi "error" zone-server-1*.log; then
           exit -1
         fi
 
@@ -463,11 +463,11 @@ jobs:
             exit -1
         fi
 
-        if grep -qi "warning" map-server-0*.log; then
+        if grep -qi "warning" zone-server-0*.log; then
             exit -1
         fi
 
-        if grep -qi "warning" map-server-1*.log; then
+        if grep -qi "warning" zone-server-1*.log; then
           exit -1
         fi
 

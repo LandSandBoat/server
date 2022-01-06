@@ -85,7 +85,7 @@ int32 do_init(int32 argc, char** argv)
             LOGIN_CONF_FILENAME = argv[i + 1];
         }
         else if (strcmp(argv[i], "--run_once") == 0)
-        { // close the map-server as soon as its done.. for testing [Celest]
+        { // close the zone-server as soon as its done.. for testing [Celest]
             runflag = 0;
         }
     }

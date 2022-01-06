@@ -204,10 +204,10 @@ int32 recv_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
 int32 parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*);      // main function parsing the packets
 int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*); // main function is building big packet
 
-void map_helpscreen(int32 flag);    // Map-Server Version Screen [venom]
-void map_versionscreen(int32 flag); // Map-Server Version Screen [venom]
+void map_helpscreen(int32 flag);    // zone-server Version Screen [venom]
+void map_versionscreen(int32 flag); // zone-server Version Screen [venom]
 
-int32 map_config_read(const int8* cfgName); // Map-Server Config [venom]
+int32 map_config_read(const int8* cfgName); // zone-server Config [venom]
 int32 map_config_default();
 int32 map_config_from_env();
 

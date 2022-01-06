@@ -6,13 +6,13 @@ done
 sleep 5
 
 # Start servers
-echo "starting xi_connect"
-nohup ./xi_connect &
+echo "starting xi_login"
+nohup ./xi_login &
 sleep 5
 
 echo "starting xi_search"
 nohup ./xi_search &
 
 sleep 5
-echo "starting xi_game"
-./xi_game
+echo "starting xi_zone"
+./xi_zone

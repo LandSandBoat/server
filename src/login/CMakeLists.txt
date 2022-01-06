@@ -18,20 +18,20 @@ else()
     set(resource "${CMAKE_SOURCE_DIR}/res/connectserver.rc")
 endif()
 
-add_executable(xi_connect ${SOURCES} ${resource})
+add_executable(xi_login ${SOURCES} ${resource})
 
 if(WIN32)
-    set_target_properties(xi_connect PROPERTIES OUTPUT_NAME xi_connect)
+    set_target_properties(xi_login PROPERTIES OUTPUT_NAME xi_login)
 endif()
 
 target_compile_definitions(
-    xi_connect
+    xi_login
     PUBLIC
     -DdsTCPSERV
     -DDEBUGLOGLOGIN
 )
 
-target_link_libraries(xi_connect
+target_link_libraries(xi_login
     PUBLIC
     common
     project_options
@@ -39,4 +39,4 @@ target_link_libraries(xi_connect
     project_warnings
 )
 
-set_target_output_directory(xi_connect)
+set_target_output_directory(xi_login)

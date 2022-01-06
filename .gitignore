@@ -71,7 +71,7 @@ cmake-*
 *.ncrunch*
 .*crunch*.local.xml
 
-# Installshield output folder 
+# Installshield output folder
 [Ee]xpress
 
 # DocProject is a documentation generator add-in
@@ -130,8 +130,8 @@ UpgradeLog*.XML
 *.app
 
 # Generated executables
-/xi_connect
-/xi_game
+/xi_login
+/xi_zone
 /xi_search
 
 # Generated files, mostly autotools-related
