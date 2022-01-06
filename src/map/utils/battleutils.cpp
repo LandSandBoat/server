@@ -747,7 +747,7 @@ namespace battleutils
         else if (Action->spikesEffect > 0)
         {
             // check if spikes are handled in mobs script
-            if (PDefender->objtype == TYPE_MOB && ((CMobEntity*)PDefender)->getMobMod(MOBMOD_AUTO_SPIKES) > 0)
+            if (auto* PDefenderMob = dynamic_cast<CMobEntity*>(PDefender); PDefenderMob->getMobMod(MOBMOD_AUTO_SPIKES) > 0)
             {
                 luautils::OnSpikesDamage(PDefender, PAttacker, Action, Action->spikesParam);
             }
@@ -862,10 +862,11 @@ namespace battleutils
                         Action->spikesParam = battleutils::GetScaledItemModifier(PDefender, PItem, Mod::ITEM_ADDEFFECT_DMG);
                         chance              = battleutils::GetScaledItemModifier(PDefender, PItem, Mod::ITEM_ADDEFFECT_CHANCE);
 
-                        if (((CMobEntity*)PDefender)->m_HiPCLvl < PAttacker->GetMLevel())
+                        if (auto* PDefenderMob = dynamic_cast<CMobEntity*>(PDefender); PDefenderMob->m_HiPCLvl < PAttacker->GetMLevel())
                         {
-                            ((CMobEntity*)PDefender)->m_HiPCLvl = PAttacker->GetMLevel();
+                            PDefenderMob->m_HiPCLvl = PAttacker->GetMLevel();
                         }
+
                         if (Action->spikesEffect && HandleSpikesEquip(PAttacker, PDefender, Action, (uint8)Action->spikesParam, Action->spikesEffect, chance))
                         {
                             return true;
