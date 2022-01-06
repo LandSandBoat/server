@@ -649,7 +649,7 @@ void CLuaBaseEntity::injectPacket(std::string const& filename)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    uint8 size = 0;
+    std::size_t size = 0U;
     FILE* File = fopen(filename.c_str(), "rb");
 
     if (File)
