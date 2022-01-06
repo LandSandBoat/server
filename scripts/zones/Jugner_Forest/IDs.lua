@@ -36,6 +36,8 @@ zones[xi.zone.JUGNER_FOREST] =
         NO_COMBINATION           = 8662,  -- You were unable to enter a combination.
         VOIDWALKER_DESPAWN       = 8693,  -- The monster fades before your eyes, a look of disappointment on its face.
         REGIME_REGISTERED        = 10867, -- New training regime registered!
+        DRAWN_UNWANTED_ATTENTION = 11921, -- Your presence has drawn unwanted attention!
+        DELIVER_TO_AMAURE        = 11925, -- You must deliver the <item> to Amaura in Southern San d'Oria.
         VOIDWALKER_NO_MOB        = 12085, -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
         VOIDWALKER_MOB_TOO_FAR   = 12086, -- The <keyitem> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
         VOIDWALKER_MOB_HINT      = 12087, -- The <keyitem> resonates [feebly/softly/solidly/strongly/very strongly/furiously], sending a radiant beam of light lancing towards a spot roughly <number> [yalm/yalms] [east/southeast/south/southwest/west/northwest/north/northeast] of here.
@@ -84,7 +86,8 @@ zones[xi.zone.JUGNER_FOREST] =
             [xi.keyItem.BLACK_ABYSSITE] = {
                 17203684  -- Yilbegan
             }
-        }
+        },
+        CERNUNNOS = 17203677,
     },
     npc =
     {

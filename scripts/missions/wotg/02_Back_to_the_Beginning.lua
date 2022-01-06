@@ -30,21 +30,11 @@ mission.reward =
     nextMission = { xi.mission.log_id.WOTG, xi.mission.id.wotg.CAIT_SITH },
 }
 
-local meetsMission2Reqs = function(player)
-    local Q  = xi.quest.id.crystalWar
-    local Q1 = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, Q.CLAWS_OF_THE_GRIFFON) == QUEST_COMPLETED
-    local Q2 = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, Q.THE_TIGRESS_STRIKES)  == QUEST_COMPLETED
-    local Q3 = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, Q.FIRES_OF_DISCONTENT)  == QUEST_COMPLETED
-
-    return Q1 or Q2 or Q3
-end
-
 mission.sections =
 {
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId and
-                meetsMission2Reqs(player)
+            return currentMission == mission.missionId
         end,
 
         [xi.zone.BATALLIA_DOWNS] =

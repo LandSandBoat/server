@@ -217,8 +217,7 @@ namespace luautils
         set_function("GetCachedInstanceScript", &luautils::GetCachedInstanceScript);
 
         // This binding specifically exists to forcefully crash the server.
-        // cppcheck-suppress nullPointer
-        set_function("ForceCrash", [](){ *((unsigned int*)0) = 0xDEAD; });
+        set_function("ForceCrash", [](){ crash(); });
 
         // Register Sol Bindings
         CLuaAbility::Register();

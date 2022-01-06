@@ -315,7 +315,7 @@ void CLuaBaseEntity::PrintToArea(std::string const& message, sol::object const& 
 
     // see scripts\globals\msg.lua or src\map\packets\chat_message.h for values
     CHAT_MESSAGE_TYPE messageLook  = (arg1 == sol::lua_nil) ? MESSAGE_SYSTEM_1 : arg1.as<CHAT_MESSAGE_TYPE>();
-    uint8             messageRange = (arg2 == sol::lua_nil) ? 0 : arg2.as<CHAT_MESSAGE_TYPE>();
+    uint8             messageRange = (arg2 == sol::lua_nil) ? 0 : arg2.as<uint8>();
     std::string       name         = (arg3 == sol::lua_nil) ? std::string() : arg3.as<std::string>();
 
     if (messageRange == 0) // All zones world wide
@@ -3733,11 +3733,11 @@ auto CLuaBaseEntity::addSoulPlate(std::string const& name, uint16 mobFamily, uin
     {
         // Deduct Blank Plate
         battleutils::RemoveAmmo(PChar);
-        
+
         PChar->pushPacket(new CInventoryFinishPacket());
 
         // Used Soul Plate
-        CItem* PItem = itemutils::GetItem(2477); 
+        CItem* PItem = itemutils::GetItem(2477);
         PItem->setQuantity(1);
         PItem->setSoulPlateData(name, mobFamily, zeni, skillIndex, fp);
         auto SlotID = charutils::AddItem(PChar, LOC_INVENTORY, PItem, true);
@@ -11422,7 +11422,7 @@ void CLuaBaseEntity::setPet(sol::object const& petObj)
     }
 
     CBattleEntity* PTarget = static_cast<CBattleEntity*>(m_PBaseEntity);
-    CLuaBaseEntity* PLuaBaseEntity = petObj.is<CLuaBaseEntity*>() ? petObj.as<CLuaBaseEntity*>() : nullptr; 
+    CLuaBaseEntity* PLuaBaseEntity = petObj.is<CLuaBaseEntity*>() ? petObj.as<CLuaBaseEntity*>() : nullptr;
 
     if (PLuaBaseEntity == nullptr)
     {
