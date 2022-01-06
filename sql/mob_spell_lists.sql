@@ -4122,7 +4122,17 @@ INSERT INTO `mob_spell_lists` VALUES ('The_Briars_elv',458,57,1,255); -- Haste
 INSERT INTO `mob_spell_lists` VALUES ('The_Briars_elv',458,79,1,255); -- Slow II
 INSERT INTO `mob_spell_lists` VALUES ('The_Briars_elv',458,80,1,255); -- Paralyze II
 
--- Next Available: 459
+INSERT INTO `mob_spell_lists` VALUES ('Cernunnos',459,3,1,255); -- Cure III
+INSERT INTO `mob_spell_lists` VALUES ('Cernunnos',459,4,1,255); -- Cure IV
+INSERT INTO `mob_spell_lists` VALUES ('Cernunnos',459,5,1,255); -- Cure V
+INSERT INTO `mob_spell_lists` VALUES ('Cernunnos',459,46,1,255); -- Protect IV
+INSERT INTO `mob_spell_lists` VALUES ('Cernunnos',459,51,1,255); -- Shell IV
+INSERT INTO `mob_spell_lists` VALUES ('Cernunnos',459,54,1,255); -- Stoneskin
+INSERT INTO `mob_spell_lists` VALUES ('Cernunnos',459,162,1,255); -- Stone IV
+INSERT INTO `mob_spell_lists` VALUES ('Cernunnos',459,191,1,255); -- Stonega III
+INSERT INTO `mob_spell_lists` VALUES ('Cernunnos',459,255,1,255); -- Break
+
+-- Next Available: 460
 
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;

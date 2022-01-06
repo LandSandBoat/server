@@ -547,7 +547,8 @@ int32 recv_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
                 memcpy(map_session_data->blowfish.key, strSessionKey, 20);
             }
 
-            // probably it is better to put the character creation into the charutils :: LoadChar () method and put the inventory loading there too
+            // TODO: probably it is better to put the character creation into the charutils::LoadChar()
+            // method and put the inventory loading there too
             CCharEntity* PChar = new CCharEntity();
             PChar->id          = CharID;
 

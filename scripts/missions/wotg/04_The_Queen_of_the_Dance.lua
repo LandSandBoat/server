@@ -15,6 +15,7 @@ require('scripts/settings/main')
 require('scripts/globals/titles')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
+require('scripts/missions/wotg/helpers')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.THE_QUEEN_OF_THE_DANCE)
@@ -30,6 +31,7 @@ mission.sections =
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId and missionStatus == 0
+            and xi.wotg.helpers.meetsMission4Reqs(player)
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA_S] =

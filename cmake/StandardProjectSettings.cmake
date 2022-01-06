@@ -80,7 +80,7 @@ if(MSVC)
         )
     endif()
 
-    link_libraries(WS2_32 dbghelp)
+    link_libraries(WS2_32 dbghelp Shlwapi)
 endif()
 
 if(UNIX)
