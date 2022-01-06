@@ -41,8 +41,9 @@ mission.sections =
             onEventFinish =
             {
                 [564] = function(player, csid, option, npc)
-                    if mission:complete(player) then
+                    if option == 1 then
                         player:delKeyItem(xi.ki.RAILLEFALS_LETTER)
+                        mission:complete(player)
                     end
                 end,
             },

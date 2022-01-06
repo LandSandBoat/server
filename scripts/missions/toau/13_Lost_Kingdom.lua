@@ -49,6 +49,10 @@ mission.sections =
                         not GetMobByID(caedarvaID.mob.JAZARAAT):isSpawned()
                     then
                         SpawnMob(caedarvaID.mob.JAZARAAT):updateEnmity(player)
+
+                        -- This is a hack that supresses default interaction.
+                        return mission:message(-1):importantOnce()
+
                         -- TODO: There is no messageSpecial returned here, so we will need
                         -- an option to suppress default action being hit.
                     elseif missionStatus == 2 then
@@ -70,6 +74,7 @@ mission.sections =
             {
                 [8] = function(player, csid, option, npc)
                     player:setMissionStatus(mission.areaId, 1)
+                    player:delKeyItem(xi.ki.VIAL_OF_SPECTRAL_SCENT)
                 end,
 
                 [9] = function(player, csid, option, npc)
@@ -80,7 +85,7 @@ mission.sections =
 
         [xi.zone.NASHMAU] =
         {
-            ['Pyopyoroon'] = mission:progressEvent(280),
+            ['Pyopyoroon'] = mission:progressEvent(275),
         },
     },
 
@@ -91,7 +96,16 @@ mission.sections =
 
         [xi.zone.CAEDARVA_MIRE] =
         {
-            ['Jazaraats_Headstone'] = mission:keyItem(xi.ki.EPHRAMADIAN_GOLD_COIN),
+            ['Jazaraats_Headstone'] =
+            {
+                onTrigger = function(player, npc)
+                    if not player:hasKeyItem(xi.ki.EPHRAMADIAN_GOLD_COIN) then
+                        return mission:keyItem(xi.ki.EPHRAMADIAN_GOLD_COIN)
+                    else
+                        return mission:messageSpecial(caedarvaID.text.JAZARAATS_HEADSTONE)
+                    end
+                end,
+            },
         },
     },
 }
