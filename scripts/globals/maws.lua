@@ -94,9 +94,9 @@ xi.maws.onTrigger = function(player, npc)
 
     if event then
         if event_params then
-            player:startEvent(event, unpack(event_params))
+            player:startCutscene(event, unpack(event_params))
         else
-            player:startEvent(event)
+            player:startOptionalCutscene(event)
         end
     else
         player:messageSpecial(ID.text.NOTHING_HAPPENS)

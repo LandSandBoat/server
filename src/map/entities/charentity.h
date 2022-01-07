@@ -453,6 +453,8 @@ public:
     virtual void           OnRaise() override;
     virtual void           OnItemFinish(CItemState&, action_t&);
 
+    bool m_Locked; // Is the player locked in a cutscene
+
     CCharEntity();  // constructor
     ~CCharEntity(); // destructor
 
@@ -475,7 +477,6 @@ private:
     std::unique_ptr<CItemContainer> m_Wardrobe3;
     std::unique_ptr<CItemContainer> m_Wardrobe4;
 
-    bool m_Locked; // Is the player locked in a cutscene
     bool m_isStyleLocked;
     bool m_isBlockingAid;
     bool m_reloadParty;
