@@ -207,11 +207,11 @@ xi.magic_utils.parameters.enhancingSong =
     [xi.magic.spell.VICTORY_MARCH     ] = { 2, xi.effect.MARCH,     0,                      xi.mod.MARCH_EFFECT,    0,                        0,                   43, 300, 163,  16,  7, true  },
     [xi.magic.spell.HONOR_MARCH       ] = { 3, xi.effect.MARCH,     0,                      xi.mod.MARCH_EFFECT,    0,                        0,                   24, 400, 126,  12,  7, true  }, -- Not an error. It is weaker.
     -- Minne: Skill Caps unknown?
-    [xi.magic.spell.KNIGHTS_MINNE     ] = { 1, xi.effect.PAEON,     0,                      xi.mod.PAEON_EFFECT,    xi.merit.MINNE_EFFECT,    xi.jp.MINNE_EFFECT,   8,   0,  30,   3, 10, true  },
-    [xi.magic.spell.KNIGHTS_MINNE_II  ] = { 2, xi.effect.PAEON,     0,                      xi.mod.PAEON_EFFECT,    xi.merit.MINNE_EFFECT,    xi.jp.MINNE_EFFECT,  12,   0,  69,   7, 10, true  },
-    [xi.magic.spell.KNIGHTS_MINNE_III ] = { 3, xi.effect.PAEON,     0,                      xi.mod.PAEON_EFFECT,    xi.merit.MINNE_EFFECT,    xi.jp.MINNE_EFFECT,  18,   0, 108,  11, 10, true  },
-    [xi.magic.spell.KNIGHTS_MINNE_IV  ] = { 4, xi.effect.PAEON,     0,                      xi.mod.PAEON_EFFECT,    xi.merit.MINNE_EFFECT,    xi.jp.MINNE_EFFECT,  30,   0, 164,  16, 10, true  },
-    [xi.magic.spell.KNIGHTS_MINNE_V   ] = { 5, xi.effect.PAEON,     0,                      xi.mod.PAEON_EFFECT,    xi.merit.MINNE_EFFECT,    xi.jp.MINNE_EFFECT,  50,   0, 204,  20, 10, true  },
+    [xi.magic.spell.KNIGHTS_MINNE     ] = { 1, xi.effect.MINNE,     0,                      xi.mod.MINNE_EFFECT,    xi.merit.MINNE_EFFECT,    xi.jp.MINNE_EFFECT,   8,   0,  30,   3, 10, true  },
+    [xi.magic.spell.KNIGHTS_MINNE_II  ] = { 2, xi.effect.MINNE,     0,                      xi.mod.MINNE_EFFECT,    xi.merit.MINNE_EFFECT,    xi.jp.MINNE_EFFECT,  12,   0,  69,   7, 10, true  },
+    [xi.magic.spell.KNIGHTS_MINNE_III ] = { 3, xi.effect.MINNE,     0,                      xi.mod.MINNE_EFFECT,    xi.merit.MINNE_EFFECT,    xi.jp.MINNE_EFFECT,  18,   0, 108,  11, 10, true  },
+    [xi.magic.spell.KNIGHTS_MINNE_IV  ] = { 4, xi.effect.MINNE,     0,                      xi.mod.MINNE_EFFECT,    xi.merit.MINNE_EFFECT,    xi.jp.MINNE_EFFECT,  30,   0, 164,  16, 10, true  },
+    [xi.magic.spell.KNIGHTS_MINNE_V   ] = { 5, xi.effect.MINNE,     0,                      xi.mod.MINNE_EFFECT,    xi.merit.MINNE_EFFECT,    xi.jp.MINNE_EFFECT,  50,   0, 204,  20, 10, true  },
     -- Minuet
     [xi.magic.spell.VALOR_MINUET      ] = { 1, xi.effect.MINUET,    0,                      xi.mod.MINUET_EFFECT,   xi.merit.MINUET_EFFECT,   xi.jp.MINUET_EFFECT,  5,  50,  32,   3,  8, true  },
     [xi.magic.spell.VALOR_MINUET_II   ] = { 2, xi.effect.MINUET,    0,                      xi.mod.MINUET_EFFECT,   xi.merit.MINUET_EFFECT,   xi.jp.MINUET_EFFECT, 10, 100,  64,   6,  6, true  },
