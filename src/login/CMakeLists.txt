@@ -15,7 +15,7 @@ set(SOURCES
 if(UNIX)
     set(resource "")
 else()
-    set(resource "${CMAKE_SOURCE_DIR}/res/connectserver.rc")
+    set(resource "${CMAKE_SOURCE_DIR}/res/loginserver.rc")
 endif()
 
 add_executable(xi_login ${SOURCES} ${resource})

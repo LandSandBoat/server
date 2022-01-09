@@ -126,7 +126,7 @@ add_subdirectory(utils)
 if(UNIX)
     set(resource "")
 else()
-    set(resource "${CMAKE_SOURCE_DIR}/res/gameserver.rc")
+    set(resource "${CMAKE_SOURCE_DIR}/res/zoneserver.rc")
 endif()
 
 # Search for module directories

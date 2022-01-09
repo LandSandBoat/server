@@ -1,6 +1,6 @@
 // Microsoft Visual C++ generated resource script.
 //
-#include "connectserver.h"
+#include "zoneserver.h"
 
 #define APSTUDIO_READONLY_SYMBOLS
 /////////////////////////////////////////////////////////////////////////////
@@ -26,7 +26,7 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 
 1 TEXTINCLUDE 
 BEGIN
-    "xi-connect-resource.h\0"
+    "xi-zone-resource.h\0"
 END
 
 2 TEXTINCLUDE 
@@ -51,7 +51,7 @@ END
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDI_ICON1               ICON                    "..\\icons\\connectserver.ico"
+IDI_ICON1               ICON                    "..\\icons\\gameserver.ico"
 #endif    // English (United States) resources
 /////////////////////////////////////////////////////////////////////////////
 
