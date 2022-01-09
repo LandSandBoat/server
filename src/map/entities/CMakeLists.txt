@@ -21,6 +21,7 @@ add_library(entities STATIC ${SOURCES})
 target_link_libraries(entities
     PUBLIC
     common
+    PRIVATE
     project_options
     project_warnings
 )

@@ -49,8 +49,8 @@ target_link_libraries(common
     efsw
     argparse
     concurrentqueue
+    PRIVATE
     project_options
-    #PRIVATE
     project_warnings
 )
 

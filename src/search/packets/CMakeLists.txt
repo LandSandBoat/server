@@ -15,7 +15,9 @@ set(SOURCES
 add_library(search_packets STATIC ${SOURCES})
 
 target_link_libraries(search_packets
+    PUBLIC
     common
+    PRIVATE
     project_options
     project_warnings
 )

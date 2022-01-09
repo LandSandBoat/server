@@ -248,6 +248,7 @@ add_library(packets STATIC ${SOURCES})
 target_link_libraries(packets
     PUBLIC
     common
+    PRIVATE
     project_options
     project_warnings
 )

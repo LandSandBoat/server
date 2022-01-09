@@ -23,6 +23,7 @@ endif(TRACY_ENABLE)
 target_link_libraries(ai_controllers
     PUBLIC
     common
+    PRIVATE
     project_options
     project_warnings
 )

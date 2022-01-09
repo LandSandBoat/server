@@ -53,6 +53,7 @@ target_link_libraries(utils
     items
     lua_bindings
     packets
+    PRIVATE
     project_options
     project_warnings
 )

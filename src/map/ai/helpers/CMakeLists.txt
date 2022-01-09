@@ -15,6 +15,7 @@ add_library(ai_helpers STATIC ${SOURCES})
 target_link_libraries(ai_helpers
     PUBLIC
     common
+    PRIVATE
     project_options
     project_warnings
 )

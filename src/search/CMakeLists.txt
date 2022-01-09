@@ -35,8 +35,8 @@ target_link_libraries(xi_search
     PUBLIC
     common
     search_packets
-    project_options
     PRIVATE
+    project_options
     project_warnings
 )
 

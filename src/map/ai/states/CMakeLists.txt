@@ -33,6 +33,7 @@ add_library(ai_states STATIC ${SOURCES})
 target_link_libraries(ai_states
     PUBLIC
     common
+    PRIVATE
     project_options
     project_warnings
 )

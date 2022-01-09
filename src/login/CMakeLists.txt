@@ -34,8 +34,8 @@ target_compile_definitions(
 target_link_libraries(xi_login
     PUBLIC
     common
-    project_options
     PRIVATE
+    project_options
     project_warnings
 )
 

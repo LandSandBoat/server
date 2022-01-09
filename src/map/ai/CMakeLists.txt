@@ -20,6 +20,7 @@ target_link_libraries(ai
     ai_controllers
     ai_helpers
     ai_states
+    PRIVATE
     project_options
     project_warnings
 )

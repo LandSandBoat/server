@@ -29,6 +29,7 @@ add_library(items STATIC ${SOURCES})
 target_link_libraries(items
     PUBLIC
     common
+    PRIVATE
     project_options
     project_warnings
 )
