@@ -244,6 +244,7 @@ class HXIClient:
                 self.parse_incoming_packet(data)
 
     def parse_incoming_packet(self, data):
+        pass
         #print(f'recv: {data.hex()}')
         #server_packet_id = util.unpack_uint16(data, 0)
         #client_packet_id = util.unpack_uint16(data, 2)
