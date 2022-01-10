@@ -8,9 +8,10 @@ local entity = {}
 
 entity.onMobDeath = function(mob, player, isKiller, noKiller)
     if isKiller or noKiller then
-        local mobID = mob:getID()
+        local mobID       = mob:getID()
         local battlefield = mob:getBattlefield()
-        local itemF3 = battlefield:getLocalVar("itemF3")
+        local itemF3      = battlefield:getLocalVar("itemF3")
+
         if itemF3 == mobID then
             local mobX = mob:getXPos()
             local mobY = mob:getYPos()
