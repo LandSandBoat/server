@@ -2,9 +2,9 @@
 -- Area: Apollyon SW
 --  Mob: Fir Bholg
 -----------------------------------
+local ID = require("scripts/zones/Apollyon/IDs")
 require("scripts/globals/limbus")
 mixins = {require("scripts/mixins/job_special")}
-local ID = require("scripts/zones/Apollyon/IDs")
 -----------------------------------
 local entity = {}
 
@@ -35,10 +35,10 @@ local firBholgOffsets =
 
 entity.onMobDeath = function(mob, player, isKiller, noKiller)
     if isKiller or noKiller then
-        local mobID = mob:getID()
+        local mobID       = mob:getID()
         local battlefield = mob:getBattlefield()
-        local race = battlefield:getLocalVar("raceF1")
-        local mobOffset = firBholgOffsets[getRaceType(race)]
+        local race        = battlefield:getLocalVar("raceF1")
+        local mobOffset   = firBholgOffsets[getRaceType(race)]
 
         if
             mobID == ID.mob.APOLLYON_SW_MOB[1] + mobOffset[1] or

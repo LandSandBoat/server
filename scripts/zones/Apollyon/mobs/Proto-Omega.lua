@@ -2,16 +2,16 @@
 -- Area: Apollyon (Central)
 --  Mob: Proto-Omega
 -----------------------------------
+local ID = require("scripts/zones/Apollyon/IDs")
 require("scripts/globals/titles")
 require("scripts/globals/mobs")
-local ID = require("scripts/zones/Apollyon/IDs")
 -----------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
     mob:setMod(xi.mod.COUNTER, 10) -- "Possesses a Counter trait"
-    mob:setMod(xi.mod.REGEN, 25) -- "Posseses an Auto-Regen (low to moderate)"
+    mob:setMod(xi.mod.REGEN, 25)   -- "Posseses an Auto-Regen (low to moderate)"
 end
 
 entity.onMobSpawn = function(mob)
@@ -24,8 +24,8 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobFight = function(mob, target)
-    local mobID = mob:getID()
-    local formTime = mob:getLocalVar("formWait")
+    local mobID       = mob:getID()
+    local formTime    = mob:getLocalVar("formWait")
     local lifePercent = mob:getHPP()
     local currentForm = mob:getLocalVar("form")
 
@@ -44,13 +44,15 @@ entity.onMobFight = function(mob, target)
             if mob:getAnimationSub() == 1 then
                 mob:setAnimationSub(2)
                 mob:setBehaviour(bit.band(mob:getBehaviour(), bit.bnot(xi.behavior.NO_TURN)))
-                if not GetMobByID(mobID + 1):isSpawned() and math.random(0,1) == 1 then
+
+                if not GetMobByID(mobID + 1):isSpawned() and math.random(0, 1) == 1 then
                     mob:useMobAbility(1532)
                 end
             else
                 mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.NO_TURN))
                 mob:setAnimationSub(1)
             end
+
             mob:setLocalVar("formWait", os.time() + 60)
         end
 
@@ -61,7 +63,7 @@ entity.onMobFight = function(mob, target)
             mob:setMod(xi.mod.UDMGRANGE, -5000)
             mob:setMod(xi.mod.UDMGMAGIC, -5000)
             mob:setMod(xi.mod.MOVE, 100)
-            mob:addStatusEffect(xi.effect.REGAIN,7,3,0) -- The final form has Regain,
+            mob:addStatusEffect(xi.effect.REGAIN, 7, 3, 0) -- The final form has Regain,
             mob:getStatusEffect(xi.effect.REGAIN):setFlag(xi.effectFlag.DEATH)
             currentForm = 2
             mob:setLocalVar("form", currentForm)
@@ -77,6 +79,7 @@ entity.onMobDeath = function(mob, player, isKiller, noKiller)
     if player then
         player:addTitle(xi.title.APOLLYON_RAVAGER)
     end
+
     if isKiller or noKiller then
         GetNPCByID(ID.npc.APOLLYON_CENTRAL_CRATE):setStatus(xi.status.NORMAL)
     end

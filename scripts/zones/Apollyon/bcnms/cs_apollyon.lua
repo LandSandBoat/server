@@ -2,23 +2,24 @@
 -- Area: Appolyon
 -- Name:
 -----------------------------------
+local ID = require("scripts/zones/Apollyon/IDs")
 require("scripts/globals/limbus")
 require("scripts/globals/battlefield")
 require("scripts/globals/keyitems")
-local ID = require("scripts/zones/Apollyon/IDs")
 -----------------------------------
 local battlefield_object = {}
 
 battlefield_object.onBattlefieldInitialise = function(battlefield)
     battlefield:setLocalVar("loot", 1)
-    SetServerVariable("[CS_Apollyon]Time", battlefield:getTimeLimit()/60)
+    SetServerVariable("[CS_Apollyon]Time", battlefield:getTimeLimit() / 60)
     xi.limbus.setupArmouryCrates(battlefield:getID())
 end
 
 battlefield_object.onBattlefieldTick = function(battlefield, tick)
     if battlefield:getRemainingTime() % 60 == 0 then
-        SetServerVariable("[CS_Apollyon]Time", battlefield:getRemainingTime()/60)
+        SetServerVariable("[CS_Apollyon]Time", battlefield:getRemainingTime() / 60)
     end
+
     xi.battlefield.onBattlefieldTick(battlefield, tick)
 end
 
@@ -28,6 +29,7 @@ end
 battlefield_object.onBattlefieldEnter = function(player, battlefield)
     player:delKeyItem(xi.ki.COSMO_CLEANSE)
     player:setCharVar("Cosmo_Cleanse_TIME", os.time())
+
     if player:getCharVar("ApollyonEntrance") == 0 then
         player:delKeyItem(xi.ki.BLACK_CARD)
     else
@@ -40,7 +42,8 @@ battlefield_object.onBattlefieldDestroy = function(battlefield)
 end
 
 battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
-    player:messageSpecial(ID.text.HUM+1)
+    player:messageSpecial(ID.text.HUM + 1)
+
     if leavecode == xi.battlefield.leaveCode.WON then
         local _, clearTime, partySize = battlefield:getRecord()
         player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar("[cs]bit"), 0)
@@ -48,4 +51,5 @@ battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
         player:startEvent(32002)
     end
 end
+
 return battlefield_object

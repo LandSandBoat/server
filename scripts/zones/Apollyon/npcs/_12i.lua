@@ -3,13 +3,16 @@
 --  NPC: Radiant_Aureole
 -- !pos
 -----------------------------------
-require("scripts/globals/bcnm")
 local ID = require("scripts/zones/Apollyon/IDs")
+require("scripts/globals/bcnm")
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if player:hasKeyItem(xi.ki.COSMO_CLEANSE) and player:hasKeyItem(xi.ki.BLACK_CARD) then
+    if
+        player:hasKeyItem(xi.ki.COSMO_CLEANSE) and
+        player:hasKeyItem(xi.ki.BLACK_CARD)
+    then
         player:setCharVar("ApollyonEntrance", 1)
         TradeBCNM(player, npc, trade)
     else
@@ -18,7 +21,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:hasKeyItem(xi.ki.COSMO_CLEANSE) and player:hasKeyItem(xi.ki.BLACK_CARD) then
+    if
+        player:hasKeyItem(xi.ki.COSMO_CLEANSE) and
+        player:hasKeyItem(xi.ki.BLACK_CARD)
+    then
         player:setCharVar("ApollyonEntrance", 1)
         EventTriggerBCNM(player, npc)
     else
@@ -29,8 +35,13 @@ end
 entity.onEventUpdate = function(player, csid, option, extras)
     if EventUpdateBCNM(player, csid, option, extras) then
         local alliance = player:getAlliance()
+
         for _, member in pairs(alliance) do
-            if member:getZoneID() == player:getZoneID() and not member:hasStatusEffect(xi.effect.BATTLEFIELD) and not member:getBattlefield() then
+            if
+                member:getZoneID() == player:getZoneID() and
+                not member:hasStatusEffect(xi.effect.BATTLEFIELD) and
+                not member:getBattlefield()
+            then
                 member:messageSpecial(ID.text.HUM)
             end
         end
@@ -42,4 +53,5 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("ApollyonEntrance", 0)
     end
 end
+
 return entity

@@ -25,11 +25,11 @@ end
 
 battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
     -- print("leave code "..leavecode)
-
     if leavecode == xi.battlefield.leaveCode.WON then
         -- local name, clearTime, partySize = battlefield:getRecord()
         -- player:setPos(0, 0, 0, 0, 0x00)
     end
+
     if leavecode == xi.battlefield.leaveCode.LOST then
         -- SetServerVariable("[]UniqueID", 0)
     end
