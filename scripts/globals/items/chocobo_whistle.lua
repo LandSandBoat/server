@@ -25,7 +25,7 @@ item_object.onItemUse = function(target)
     -- Base duration 30 min, in seconds.
     local duration = 1800 + (target:getMod(xi.mod.CHOCOBO_RIDING_TIME) * 60)
 
-    target:addStatusEffectEx(xi.effect.MOUNTED, xi.effect.MOUNTED, 0, 0, duration, true)
+    target:addStatusEffectEx(xi.effect.MOUNTED, xi.effect.MOUNTED, 1, 0, duration, true)
 end
 
 return item_object
