@@ -669,6 +669,7 @@ xi.items =
     FORTIFIED_CHAIN                 = 15524,
     GRANDIOSE_CHAIN                 = 15525,
     TEMPERED_CHAIN                  = 15521,
+    CHOCOBO_WHISTLE                 = 15533,
     AMIR_DIRS                       = 15604,
     YIGIT_SERAWEELS                 = 15606,
     PAHLUWAN_SERAWEELS              = 15609,
