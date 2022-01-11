@@ -1,6 +1,13 @@
 -----------------------------------
--- func: chocobo <varType> <varName>
--- desc: checks player or server variable and returns result value.
+-- func: chocobo <colour> <head> <tail> <feet>
+-- desc: Register and use a chocobo with a specific look
+--
+-- examples:
+-- Plain chocobo: !chocobo
+-- Plain chocobo with enlarged tail: !chocobo yellow tail
+-- Green chocobo with enlarged beak: !chocobo green head
+-- Black chocobo with all look changes: !chocobo black head feet tail
+-- etc.
 -----------------------------------
 require("scripts/globals/status")
 
@@ -34,13 +41,18 @@ function onTrigger(player, arg, arg2, arg3, arg4)
     if chocobo.look[arg2] then
         look = look + chocobo.look[arg2]
     end
+
     if chocobo.look[arg3] then
         look = look + chocobo.look[arg3]
     end
+
     if chocobo.look[arg4] then
         look = look + chocobo.look[arg4]
     end
 
+
     player:registerChocobo(look)
-    player:addStatusEffectEx(xi.effect.MOUNTED, xi.effect.MOUNTED, 1, 0, 1800, true)
+
+    player:delStatusEffectSilent(xi.effect.MOUNTED)
+    player:addStatusEffectEx(xi.effect.MOUNTED, xi.effect.MOUNTED, xi.mount.CHOCOBO, 0, 1800, 0, 64, true)
 end
