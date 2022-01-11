@@ -126,9 +126,8 @@ jobs:
     - name: Install Dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y software-properties-common clang-format cppcheck luajit-5.1-dev luarocks mariadb-server-10.3 mariadb-client-10.3 libmariadb-dev-compat
+        sudo apt-get install -y software-properties-common clang-format cppcheck luajit-5.1-dev luarocks mariadb-server mariadb-client libmariadb-dev-compat
         luarocks install luacheck --local
-        luarocks install lanes --local
     - id: changed-files
       name: Get Changed Files
       uses: jitterbit/get-changed-files@v1
