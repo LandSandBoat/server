@@ -673,6 +673,7 @@ public:
 
     auto getPetName() -> const char*;
     void setPetName(uint8 pType, uint16 value, sol::object const& arg2);
+    void registerChocobo(uint32 value);
 
     float getCharmChance(CLuaBaseEntity const* target, sol::object const& mods); // Gets the chance the entity has to charm its target.
     void  charmPet(CLuaBaseEntity const* target);                                // Charms Pet (Beastmaster ability only)

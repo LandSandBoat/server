@@ -6,11 +6,9 @@ require("scripts/globals/status")
 local effect_object = {}
 
 effect_object.onEffectGain = function(target, effect)
-    --[[
-        Retail sends a music change packet (packet ID 0x5F) in both cases.
-    ]]
+    -- Retail sends a music change packet (packet ID 0x5F) in both cases.
 
-    if effect:getPower() == 0 then
+    if effect:getPower() < 2 then
         target:ChangeMusic(4, 212)
         target:setAnimation(xi.anim.CHOCOBO)
     else
