@@ -15,17 +15,17 @@ local entity = {}
 
 local items =
 {
-    [1]  = {itemid = xi.items.ANTIVENOM_EARRING,  price = 3000},
-    [2]  = {itemid = xi.items.EBULLIENT_RING,     price = 5000},
-    [3]  = {itemid = xi.items.ENLIGHTENED_CHAIN,  price = 8000},
-    [4]  = {itemid = xi.items.SPECTRAL_BELT,      price = 10000},
-    [5]  = {itemid = xi.items.BULLSEYE_CAPE,      price = 10000},
-    [6]  = {itemid = xi.items.STORM_TULWAR,       price = 15000},
-    [7]  = {itemid = xi.items.IMPERIAL_NEZA,      price = 15000},
-    [8]  = {itemid = xi.items.STORM_TABAR,        price = 15000},
-    [9]  = {itemid = xi.items.YIGIT_GAGES,        price = 20000},
-    [10] = {itemid = xi.items.AMIR_BOOTS,         price = 20000},
-    [11] = {itemid = xi.items.PAHLUWAN_SERAWEELS, price = 20000},
+                [1]  = {itemid = xi.items.ANTIVENOM_EARRING,  price = 1500},
+                [2]  = {itemid = xi.items.EBULLIENT_RING,     price = 2500},
+                [3]  = {itemid = xi.items.ENLIGHTENED_CHAIN,  price = 4000},
+                [4]  = {itemid = xi.items.SPECTRAL_BELT,      price = 5000},
+                [5]  = {itemid = xi.items.BULLSEYE_CAPE,      price = 5000},
+                [6]  = {itemid = xi.items.STORM_TULWAR,       price = 7500},
+                [7]  = {itemid = xi.items.IMPERIAL_NEZA,      price = 7500},
+                [8]  = {itemid = xi.items.STORM_TABAR,        price = 7500},
+                [9]  = {itemid = xi.items.YIGIT_GAGES,        price = 10000},
+                [10] = {itemid = xi.items.AMIR_BOOTS,         price = 10000},
+                [11] = {itemid = xi.items.PAHLUWAN_SERAWEELS, price = 10000},
 }
 
 entity.onTrade = function(player, npc, trade)

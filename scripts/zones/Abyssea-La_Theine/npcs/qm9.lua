@@ -8,18 +8,18 @@ require("scripts/globals/abyssea")
 -----------------------------------
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-    xi.abyssea.qmOnTrade(player, npc, trade)
-end
 
 entity.onTrigger = function(player, npc)
-    xi.abyssea.qmOnTrigger(player, npc)
+	player:PrintToPlayer("You feel that something will happen if you trade me a Winter Puk Egg", 0xD);
+	
 end
 
-entity.onEventUpdate = function(player, csid, option)
-end
+entity.onTrade = function(player, npc, trade)
 
-entity.onEventFinish = function(player, csid, option)
-end
+    if(trade:hasItemQty(2899,1)) then -- Winter Puk Egg
+        player:tradeComplete();
+        SpawnMob(17318442):updateEnmity(player);
+    end
 
+end;
 return entity

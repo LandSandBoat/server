@@ -5,23 +5,19 @@
 -- !pos -179 7 259 132
 -----------------------------------
 require("scripts/globals/abyssea")
+require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-    xi.abyssea.qmOnTrade(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
-    xi.abyssea.qmOnTrigger(player, npc)
-end
+  if player:hasKeyItem(xi.ki.DENTED_GIGAS_SHIELD) and  player:hasKeyItem(xi.ki.WARPED_GIGAS_ARMBAND) and  player:hasKeyItem(xi.ki.SEVERED_GIGAS_COLLAR) then
+     player:delKeyItem(xi.ki.DENTED_GIGAS_SHIELD)
+	 player:delKeyItem(xi.ki.WARPED_GIGAS_ARMBAND)
+	 player:delKeyItem(xi.ki.SEVERED_GIGAS_COLLAR)
+     SpawnMob(17318446):updateClaim(player);
+	
+	 
+  end
 
-entity.onEventUpdate = function(player, csid, option)
-    xi.abyssea.qmOnEventUpdate(player, csid, option)
-end
-
-entity.onEventFinish = function(player, csid, option)
-    xi.abyssea.qmOnEventFinish(player, csid, option)
-end
-
+end;
 return entity

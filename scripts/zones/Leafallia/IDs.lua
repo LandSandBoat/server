@@ -26,6 +26,9 @@ zones[xi.zone.LEAFALLIA] =
     },
     npc =
     {
+		MORIMAR	=	17928225,
+		SOUPOX	=	17928251,
+		HEROIC_FOOTPRINTS	=	17928224,
     },
 }
 

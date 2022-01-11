@@ -15,6 +15,13 @@ end
 
 entity.onTrigger = function(player, npc)
 
+    -- Check to see if we should reward new trusts
+	if (player:hasKeyItem(xi.ki.TEAR_OF_ALTANA) and player:getCharVar("hasPrisheTrust") ~= 1)then
+	    player:setCharVar("hasPrisheTrust", 1)
+	    player:addSpell(913)
+		player:PrintToPlayer("Congratulations! You have unlocked Trust: \"Prishe\"!", 0xD)
+	end
+
     if (player:getCurrentMission(COP) == xi.mission.id.cop.AN_ETERNAL_MELODY and player:getCharVar("PromathiaStatus") == 0) then
         player:startEvent(104)
     elseif (player:getCurrentMission(COP) == xi.mission.id.cop.THE_SECRETS_OF_WORSHIP and player:getCharVar("PromathiaStatus") == 0) then

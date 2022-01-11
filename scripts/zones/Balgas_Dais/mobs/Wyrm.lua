@@ -12,7 +12,7 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setMobMod(xi.mobMod.DRAW_IN, 1) -- has a bug during flight, like Tiamat
+    mob:setMobMod(xi.mobMod.DRAW_IN, 0) -- has a bug during flight, like Tiamat
     mob:setTP(3000) -- opens fight with a skill
 end
 
@@ -36,38 +36,52 @@ end
 
 entity.onMobFight = function(mob, target)
 
-    -- Return to ground at 33% HP
-    if
-        mob:getAnimationSub() == 1 and -- is flying
-        mob:getHPP() <= 33 and
-        notBusy(mob)
-    then
-        mob:useMobAbility(954)
-        -- Touchdown will set the following for us in the skill script:
-        -- lifted wings model stance: mob:setAnimationSub(2)
-        -- reset default attack:      mob:SetMobSkillAttack(0)
-        -- reset melee attacks:       mob:delStatusEffect(xi.effect.ALL_MISS)
-        mob:addStatusEffect(xi.effect.EVASION_BOOST, 75, 0, 0)
-        mob:addStatusEffect(xi.effect.DEFENSE_BOOST, 75, 0, 0)
-        mob:addStatusEffect(xi.effect.MAGIC_DEF_BOOST, 75, 0, 0)
-        mob:setMobMod(xi.mobMod.SKILL_LIST, 262) -- restore standard ground skill set
-        mob:setBehaviour(1024) -- reset behavior to not face target
+    -- Gains a large attack boost when health is under 25% which cannot be Dispelled.
+    if (mob:getHP() < ((mob:getMaxHP() / 10) * 2.5)) then
+        if (mob:hasStatusEffect(xi.effect.ATTACK_BOOST) == false) then
+            mob:addStatusEffect(xi.effect.ATTACK_BOOST, 75, 0, 0)
+            mob:getStatusEffect(xi.effect.ATTACK_BOOST):setFlag(xi.effectFlag.DEATH)
+        end
+    end
 
-    -- Go airborne at 66% HP, gets only called once
-    -- TODO: Should move physically to center/origin before taking off; maybe with pathTo()?
-    elseif
-        mob:getHPP() > 33 and
-        mob:getHPP() <= 66 and
-        mob:getAnimationSub() == 0 and -- is on ground
-        notBusy(mob)
-    then
-        mob:setAnimationSub(1) -- flying model stance
-        mob:addStatusEffectEx(xi.effect.ALL_MISS, 0, 1, 0, 0) -- melee attacks miss now
-        mob:SetMobSkillAttack(1146) -- change default attack to ranged fire magic damage
-        mob:setMobMod(xi.mobMod.SKILL_LIST, 1147) -- change skill set to flying moves
-        mob:setBehaviour(0) -- face target while flying
+    if (mob:hasStatusEffect(xi.effect.MIGHTY_STRIKES) == false and mob:actionQueueEmpty() == true) then
+        local changeTime = mob:getLocalVar("changeTime")
+        local twohourTime = mob:getLocalVar("twohourTime")
+        local changeHP = mob:getLocalVar("changeHP")
+
+        if (twohourTime == 0) then
+            twohourTime = math.random(8, 14)
+            mob:setLocalVar("twohourTime", twohourTime)
+        end
+
+        if (mob:getAnimationSub() == 2 and mob:getBattleTime()/15 > twohourTime) then
+            mob:useMobAbility(688)
+            mob:setLocalVar("twohourTime", math.random((mob:getBattleTime()/15)+4, (mob:getBattleTime()/15)+8))
+        elseif (mob:getAnimationSub() == 0 and mob:getBattleTime() - changeTime > 60) then
+            mob:setAnimationSub(1)
+            mob:addStatusEffectEx(xi.effect.ALL_MISS, 0, 1, 0, 0)
+            mob:SetMobSkillAttack(730)
+            --and record the time and HP this phase was started
+            mob:setLocalVar("changeTime", mob:getBattleTime())
+            mob:setLocalVar("changeHP", mob:getHP()/1000)
+        -- subanimation 1 is flight, so check if she should land
+        elseif (mob:getAnimationSub() == 1 and (mob:getHP()/1000 <= changeHP - 10 or
+                mob:getBattleTime() - changeTime > 120)) then
+            mob:useMobAbility(1282)
+            mob:setLocalVar("changeTime", mob:getBattleTime())
+            mob:setLocalVar("changeHP", mob:getHP()/1000)
+        -- subanimation 2 is grounded mode, so check if she should take off
+        elseif (mob:getAnimationSub() == 2 and (mob:getHP()/1000 <= changeHP - 10 or
+                mob:getBattleTime() - changeTime > 120)) then
+            mob:setAnimationSub(1)
+            mob:addStatusEffectEx(xi.effect.ALL_MISS, 0, 1, 0, 0)
+            mob:SetMobSkillAttack(730)
+            mob:setLocalVar("changeTime", mob:getBattleTime())
+            mob:setLocalVar("changeHP", mob:getHP()/1000)
+        end
     end
 end
+
 
 entity.onMobDeath = function(mob, player, isKiller)
 end

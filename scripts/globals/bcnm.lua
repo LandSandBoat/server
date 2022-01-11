@@ -136,26 +136,26 @@ local battlefields = {
 
     [xi.zone.TEMENOS] =
     {
-     -- { 0, 1299,    0},   -- Northern Tower
-     -- { 1, 1300,    0},   -- Eastern Tower
-     -- { 2, 1298,    0},   -- Western Tower
-     -- { 3, 1306,   -1},   -- Central 4th Floor (multiple items needed: 1907, 1908, 1986)
-     -- { 4, 1305, 1904},   -- Central 3rd Floor
-     -- { 5, 1304, 1905},   -- Central 2nd Floor
-     -- { 6, 1303, 1906},   -- Central 1st Floor
-     -- { 7, 1301, 2127},   -- Central Basement
+     { 0, 1299,    0},   -- Northern Tower
+     { 1, 1300,    0},   -- Eastern Tower
+     { 2, 1298,    0},   -- Western Tower
+     { 3, 1306,   -1},   -- Central 4th Floor (multiple items needed: 1907, 1908, 1986)
+     { 4, 1305, 1904},   -- Central 3rd Floor
+     { 5, 1304, 1905},   -- Central 2nd Floor
+     { 6, 1303, 1906},   -- Central 1st Floor
+     { 7, 1301, 2127},   -- Central Basement
      -- { 8, 1302,    0},   -- Central Basement II
      -- { 9, 1307,    0},   -- Central 4th Floor II
     },
 
     [xi.zone.APOLLYON] =
     {
-     -- { 0, 1291,    0},   -- SW Apollyon
-     -- { 1, 1290,    0},   -- NW Apollyon
-     -- { 2, 1293,    0},   -- SE Apollyon
-     -- { 3, 1292,    0},   -- NE Apollyon
-     -- { 4, 1296,   -2},   -- Central Apollyon (multiple items needed: 1909 1910 1987 1988)
-     -- { 5, 1294, 2127},   -- CS Apollyon
+     { 0, 1291,    0},   -- SW Apollyon
+     { 1, 1290,    0},   -- NW Apollyon
+     { 2, 1293,    0},   -- SE Apollyon
+     { 3, 1292,    0},   -- NE Apollyon
+     { 4, 1296,   -2},   -- Central Apollyon (multiple items needed: 1909 1910 1987 1988)
+     { 5, 1294, 2127},   -- CS Apollyon
      -- { 6, 1295,    0},   -- CS Apollyon II
      -- { 7, 1297,    0},   -- Central Apollyon II
     },
@@ -318,7 +318,7 @@ local battlefields = {
         { 8,  104, 1552},   -- Creeping Doom (BS30)
         { 9,  105, 1551},   -- Charming Trio (BS20)
         {10,  106, 1552},   -- Harem Scarem (BS30)
-     -- {11,  107, 1553},   -- Early Bird Catches the Wyrm (KS99)
+        {11,  107, 1553},   -- Early Bird Catches the Wyrm (KS99)
         {12,  108, 1131},   -- Royal Succession (BS40)
         {13,  109, 1177},   -- Rapid Raptors (BS50)
         {14,  110, 1130},   -- Wild Wild Whiskers (BS60) -- TODO: should use petrifactive breath more often than other mobskill. Message before spellcasting.
@@ -664,7 +664,7 @@ local function checkReqs(player, npc, bfid, registrant)
         [ 963] = function() return ( player:hasKeyItem(xi.ki.MONARCH_BEARD)                                                                                                ) end, -- ENM: Bad Seed
         [ 964] = function() return ( player:hasKeyItem(xi.ki.MONARCH_BEARD)                                                                                                ) end, -- ENM: Bugard in the Clouds
         [ 965] = function() return ( player:hasKeyItem(xi.ki.MONARCH_BEARD)                                                                                                ) end, -- ENM: Beloved of Atlantes
-        [ 992] = function() return ( cop == mi.cop.ONE_TO_BE_FEARED and copStat == 3                                                                                        ) end, -- PM6-4: One to be Feared
+        [ 992] = function() return ( cop == mi.cop.ONE_TO_BE_FEARED and copStat == 2                                                                                        ) end, -- PM6-4: One to be Feared
         [ 993] = function() return ( cop == mi.cop.THE_WARRIOR_S_PATH                                                                                                       ) end, -- PM7-5: The Warrior's Path
         [1024] = function() return ( cop == mi.cop.WHEN_ANGELS_FALL and copStat == 4                                                                                        ) end, -- PM8-3: When Angels Fall
         [1056] = function() return ( cop == mi.cop.DAWN and copStat == 2                                                                                                    ) end, -- PM8-4: Dawn
@@ -982,7 +982,7 @@ function EventTriggerBCNM(player, npc)
         local mask = findBattlefields(player, npc, 0)
 
         -- GMs get access to all BCNMs
-        if player:getGMLevel() > 0 and player:checkNameFlags(0x04000000) then
+        if player:getGMLevel() > 0 then
             mask = 268435455
         end
 
@@ -1136,3 +1136,5 @@ function EventFinishBCNM(player, csid, option)
     end
     return false
 end
+
+

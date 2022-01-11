@@ -15,6 +15,13 @@ entity.onTrigger = function(player, npc)
     local cop = player:getCurrentMission(COP)
     local copStat = player:getCharVar("PromathiaStatus")
 
+    -- Check to see if we should reward new trusts
+	if (player:hasKeyItem(xi.ki.TEAR_OF_ALTANA) and player:getCharVar("hasUlmiaTrust") ~= 1)then
+	    player:setCharVar("hasUlmiaTrust", 1)
+	    player:addSpell(914)
+		player:PrintToPlayer("Congratulations! You have unlocked Trust: \"Ulmia\"!", 0xD)
+	end
+
     -- AN ETERNAL MEMORY (PM2-4)
     if (cop == xi.mission.id.cop.AN_ETERNAL_MELODY and copStat == 1) then
         player:startEvent(5)

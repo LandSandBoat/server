@@ -12,6 +12,7 @@ require("scripts/globals/utils")
 -----------------------------------
 local entity = {}
 
+
 -----------------------------------
 -- artifact armor upgrade data
 -- [combinationId] = {trade = {afBase, temenosItem, apollyonItem, craftedItem}, abc = ABCsRequired, reward = afPlusOne},
@@ -254,7 +255,7 @@ local abcShop =
 local COSMO_READY = 2147483649 -- BITMASK for the purchase
 
 local function getCOSMO_CLEANSETime(player)
-    local cosmoWaitTime = player:hasKeyItem(xi.ki.RHAPSODY_IN_MAUVE) and 3600 or 72000
+    local cosmoWaitTime = player:hasKeyItem(xi.ki.RHAPSODY_IN_MAUVE) and 3600 or 36
     local lastCosmoTime = player:getCharVar("Cosmo_Cleanse_TIME")
 
     if lastCosmoTime ~= 0 then
@@ -314,6 +315,7 @@ entity.onTrade = function(player, npc, trade)
 
         -- found a match
         if tradedCombo > 0 then
+
             player:confirmTrade()
             player:setCharVar("AFupgrade", tradedCombo)
             player:setCharVar("AFupgradeDay", getVanaMidnight()) -- Current time + Remaining minutes in the hour in seconds (Day Change)
@@ -326,10 +328,7 @@ entity.onTrigger = function(player, npc)
     local wildcatJeuno = player:getCharVar("WildcatJeuno")
 
     -- LURE OF THE WILDCAT
-    if
-        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and
-        not utils.mask.getBit(wildcatJeuno, 19)
-    then
+    if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(wildcatJeuno, 19) then
         player:startEvent(313)
 
     -- DEFAULT DIALOG (menu)

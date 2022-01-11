@@ -80,7 +80,7 @@ xi.shop =
         player:createShop(#stock / 3, log)
 
         for i = 1, #stock, 3 do
-            if player:hasKeyItem(stock[i+2]) then
+            if stock[i+2] == 0 or player:hasKeyItem(stock[i+2]) then
                 player:addShopItem(stock[i], stock[i+1])
             end
         end
@@ -217,7 +217,7 @@ xi.shop =
                 8854,    4150,      xi.craftRank.AMATEUR,      -- Clothcraft Kit 40
                 8855,    5300,      xi.craftRank.AMATEUR,      -- Clothcraft Kit 45
                 8856,    7600,      xi.craftRank.AMATEUR,      -- Clothcraft Kit 50
-                9251, 1126125,      xi.craftRank.AMATEUR       -- Khoma Thread
+               -- 9251, 1126125,      xi.craftRank.AMATEUR       -- Khoma Thread
         },
         [xi.skill.GOLDSMITHING] =
         {
@@ -263,7 +263,7 @@ xi.shop =
                 8840,    4150,      xi.craftRank.AMATEUR,      -- Goldsmithing Kit 40
                 8841,    5300,      xi.craftRank.AMATEUR,      -- Goldsmithing Kit 45
                 8842,    7600,      xi.craftRank.AMATEUR,      -- Goldsmithing Kit 50
-                9249, 1126125,      xi.craftRank.AMATEUR       -- Ruthenium Ore
+               -- 9249, 1126125,      xi.craftRank.AMATEUR       -- Ruthenium Ore
         },
         [xi.skill.WOODWORKING] =
         {
@@ -293,7 +293,7 @@ xi.shop =
                 8812,    4150,      xi.craftRank.AMATEUR,      -- Smithing Kit 40
                 8813,    5300,      xi.craftRank.AMATEUR,      -- Smithing Kit 45
                 8814,    7600,      xi.craftRank.AMATEUR,      -- Smithing Kit 50
-                9245, 1126125,      xi.craftRank.AMATEUR       -- Cypress Log
+               -- 9245, 1126125,      xi.craftRank.AMATEUR       -- Cypress Log
         },
         [xi.skill.ALCHEMY] =
         {
@@ -325,7 +325,7 @@ xi.shop =
                 8896,    4150,      xi.craftRank.AMATEUR,      -- Alchemy Kit 40
                 8897,    5300,      xi.craftRank.AMATEUR,      -- Alchemy Kit 45
                 8898,    7600,      xi.craftRank.AMATEUR,      -- Alchemy Kit 50
-                9257, 1126125,      xi.craftRank.AMATEUR       -- Azure Leaf
+               -- 9257, 1126125,      xi.craftRank.AMATEUR       -- Azure Leaf
         },
         [xi.skill.BONECRAFT] =
         {
@@ -354,7 +354,7 @@ xi.shop =
                 8882,    4150,      xi.craftRank.AMATEUR,      -- Bonecraft Kit 40
                 8883,    5300,      xi.craftRank.AMATEUR,      -- Bonecraft Kit 45
                 8884,    7600,      xi.craftRank.AMATEUR,      -- Bonecraft Kit 50
-                9255, 1126125,      xi.craftRank.AMATEUR       -- Cyan Coral
+               -- 9255, 1126125,      xi.craftRank.AMATEUR       -- Cyan Coral
         },
         [xi.skill.LEATHERCRAFT] =
         {
@@ -382,7 +382,7 @@ xi.shop =
                 8868,    4150,      xi.craftRank.AMATEUR,      -- Leathercraft Kit 40
                 8869,    5300,      xi.craftRank.AMATEUR,      -- Leathercraft Kit 45
                 8870,    7600,      xi.craftRank.AMATEUR,      -- Leathercraft Kit 50
-                9253, 1126125,      xi.craftRank.AMATEUR       -- Synthetic Faulpie Leather
+               -- 9253, 1126125,      xi.craftRank.AMATEUR       -- Synthetic Faulpie Leather
         },
         [xi.skill.SMITHING] =
         {
@@ -414,7 +414,7 @@ xi.shop =
                 8826,    4150,      xi.craftRank.AMATEUR,      -- Smithing Kit 40
                 8827,    5300,      xi.craftRank.AMATEUR,      -- Smithing Kit 45
                 8828,    7600,      xi.craftRank.AMATEUR,      -- Smithing Kit 50
-                9247, 1126125,      xi.craftRank.AMATEUR       -- Niobium Ore
+               -- 9247, 1126125,      xi.craftRank.AMATEUR       -- Niobium Ore
         }
     },
 
@@ -437,142 +437,196 @@ xi.shop =
                 4165,     500,      xi.ki.RHAPSODY_IN_WHITE,   -- Silent Oil
                 4166,     250,      xi.ki.RHAPSODY_IN_WHITE,   -- Deodorizer
                 4172,    1000,      xi.ki.RHAPSODY_IN_AZURE,   -- Reraiser
+                4112,     300,		0					   ,   -- Potion
+                4116,     600,		0					   ,   -- Hi-Potion
+                4120,    1200,		0					   ,   -- X-Potion
+                4128,     650,		0					   ,   -- Ether
+                4132,    1300,		0					   ,   -- Hi-Ether
+                4136,    3000,		0					   ,   -- Super Ether
+                4145,   15000,		0					   ,   -- Elixir
+                4148,     300,		0					   ,   -- Antidote
+                4150,    1000,		0					   ,   -- Eye Drops
+                4151,     700,		0					   ,   -- Echo Drops
+                4156,     500,		0					   ,   -- Mulsum
+                4164,     500,		0					   ,   -- Prism Powder
+                4165,     500,		0					   ,   -- Silent Oil
+                4166,     250,		0					   ,   -- Deodorizer
+                4172,    1000,		0					   ,   -- Reraiser
+				4157,    3000,      0                      ,   -- Poison Potion
+				5418,    4000,      0                      ,   -- Tincture
+				4155,    5000,      0                      ,   -- Remedy
         },
         [curio.ammunition] =
         {
-                4219,     400,      xi.ki.RHAPSODY_IN_WHITE,   -- Stone Quiver
-                4220,     680,      xi.ki.RHAPSODY_IN_WHITE,   -- Bone Quiver
-                4225,    1200,      xi.ki.RHAPSODY_IN_WHITE,   -- Iron Quiver
-                4221,    1350,      xi.ki.RHAPSODY_IN_WHITE,   -- Beetle Quiver
-                4226,    2040,      xi.ki.RHAPSODY_IN_WHITE,   -- Silver Quiver
-                4222,    2340,      xi.ki.RHAPSODY_IN_WHITE,   -- Horn Quiver
-                5333,    3150,      xi.ki.RHAPSODY_IN_UMBER,   -- Sleep Quiver
-                4223,    3500,      xi.ki.RHAPSODY_IN_UMBER,   -- Scorpion Quiver
-                4224,    7000,      xi.ki.RHAPSODY_IN_AZURE,   -- Demon Quiver
-                5332,    8800,      xi.ki.RHAPSODY_IN_AZURE,   -- Kabura Quiver
-                5819,    9900,    xi.ki.RHAPSODY_IN_CRIMSON,   -- Antlion Quiver
-                4227,     400,      xi.ki.RHAPSODY_IN_WHITE,   -- Bronze Bolt Quiver
-                5334,     800,      xi.ki.RHAPSODY_IN_WHITE,   -- Blind Bolt Quiver
-                5335,    1250,      xi.ki.RHAPSODY_IN_WHITE,   -- Acid Bolt Quiver
-                5337,    1500,      xi.ki.RHAPSODY_IN_WHITE,   -- Sleep Bolt Quiver
-                5339,    2100,      xi.ki.RHAPSODY_IN_WHITE,   -- Bloody Bolt Quiver
-                5338,    2100,      xi.ki.RHAPSODY_IN_WHITE,   -- Venom Bolt Quiver
-                5336,    2400,      xi.ki.RHAPSODY_IN_WHITE,   -- Holy Bolt Quiver
-                4228,    3500,      xi.ki.RHAPSODY_IN_UMBER,   -- Mythril Bolt Quiver
-                4229,    5580,      xi.ki.RHAPSODY_IN_AZURE,   -- Darksteel Bolt Quiver
-                5820,    9460,    xi.ki.RHAPSODY_IN_CRIMSON,   -- Darkling Bolt Quiver
-                5821,    9790,    xi.ki.RHAPSODY_IN_CRIMSON,   -- Fusion Bolt Quiver
-                5359,     400,      xi.ki.RHAPSODY_IN_WHITE,   -- Bronze Bullet Pouch
-                5363,    1920,      xi.ki.RHAPSODY_IN_WHITE,   -- Bullet Pouch
-                5341,    2400,      xi.ki.RHAPSODY_IN_WHITE,   -- Spartan Bullet Pouch
-                5353,    4800,      xi.ki.RHAPSODY_IN_UMBER,   -- Iron Bullet Pouch
-                5340,    4800,      xi.ki.RHAPSODY_IN_UMBER,   -- Silver Bullet Pouch
-                5342,    7100,      xi.ki.RHAPSODY_IN_AZURE,   -- Corsair Bullet Pouch
-                5416,    7600,      xi.ki.RHAPSODY_IN_AZURE,   -- Steel Bullet Pouch
-                5822,    9680,    xi.ki.RHAPSODY_IN_CRIMSON,   -- Dweomer Bullet Pouch
-                5823,    9900,    xi.ki.RHAPSODY_IN_CRIMSON,   -- Oberon Bullet Pouch
-                6299,    1400,      xi.ki.RHAPSODY_IN_WHITE,   -- Shuriken Pouch
-                6297,    2280,      xi.ki.RHAPSODY_IN_WHITE,   -- Juji Shuriken Pouch
-                6298,    4640,      xi.ki.RHAPSODY_IN_UMBER,   -- Manji Shuriken Pouch
-                6302,    7000,      xi.ki.RHAPSODY_IN_AZURE,   -- Fuma Shuriken Pouch
-                6303,    9900,    xi.ki.RHAPSODY_IN_CRIMSON,   -- Iga Shuriken Pouch
+                1021,    1000,    0                         ,   -- Hatchet
+				605,     1000,    0                         ,   -- Pickaxe
+				1020,    1000,    0                         ,   -- Sickle
+				4219,     400,    0							,   -- Stone Quiver
+                4220,     680,    0							,   -- Bone Quiver
+                4225,    1200,    0							,   -- Iron Quiver
+                4221,    1350,    0							,   -- Beetle Quiver
+                4226,    2040,    0							,   -- Silver Quiver
+                4222,    2340,    0							,   -- Horn Quiver
+                5333,    3150,    0							,   -- Sleep Quiver
+                4223,    3500,    0							,   -- Scorpion Quiver
+                4224,    7000,    0							,   -- Demon Quiver
+                5332,    8800,    0							,   -- Kabura Quiver
+                5819,    9900,    0							,   -- Antlion Quiver
+                4227,     400,    0							,   -- Bronze Bolt Quiver
+                5334,     800,    0							,   -- Blind Bolt Quiver
+                5335,    1250,    0							,   -- Acid Bolt Quiver
+                5337,    1500,    0							,   -- Sleep Bolt Quiver
+                5339,    2100,    0							,   -- Bloody Bolt Quiver
+                5338,    2100,    0							,   -- Venom Bolt Quiver
+                5336,    2400,    0							,   -- Holy Bolt Quiver
+                4228,    3500,    0							,   -- Mythril Bolt Quiver
+                4229,    5580,    0							,   -- Darksteel Bolt Quiver
+                5820,    9460,    0							,   -- Darkling Bolt Quiver
+                5821,    9790,    0							,   -- Fusion Bolt Quiver
+                5359,     400,    0							,   -- Bronze Bullet Pouch
+                5363,    1920,    0							,   -- Bullet Pouch
+                5341,    2400,    0							,   -- Spartan Bullet Pouch
+                5353,    4800,    0							,   -- Iron Bullet Pouch
+                5340,    4800,    0							,   -- Silver Bullet Pouch
+                5342,    7100,    0							,   -- Corsair Bullet Pouch
+                5416,    7600,    0							,   -- Steel Bullet Pouch
+                5822,    9680,    0							,   -- Dweomer Bullet Pouch
+				5823,    9900,    0							,   -- Oberon Bullet Pouch
+                6299,    1400,    0							,   -- Shuriken Pouch
+                6297,    2280,    0							,   -- Juji Shuriken Pouch
+                6298,    4640,    0							,   -- Manji Shuriken Pouch
+                6302,    7000,    0							,   -- Fuma Shuriken Pouch
+                6303,    9900,    0							,   -- Iga Shuriken Pouch
         },
         [curio.ninjutsuTools] =
         {
-                5308,    3000,      xi.ki.RHAPSODY_IN_WHITE,   -- Toolbag (Uchi)
-                5309,    3000,      xi.ki.RHAPSODY_IN_WHITE,   -- Toolbag (Tsurara)
-                5310,    3000,      xi.ki.RHAPSODY_IN_WHITE,   -- Toolbag (Kawahori-Ogi)
-                5311,    3000,      xi.ki.RHAPSODY_IN_WHITE,   -- Toolbag (Makibishi)
-                5312,    3000,      xi.ki.RHAPSODY_IN_WHITE,   -- Toolbag (Hiraishin)
-                5313,    3000,      xi.ki.RHAPSODY_IN_WHITE,   -- Toolbag (Mizu-Deppo)
-                5314,    5000,      xi.ki.RHAPSODY_IN_WHITE,   -- Toolbag (Shihei)
-                5315,    5000,      xi.ki.RHAPSODY_IN_WHITE,   -- Toolbag (Jusatsu)
-                5316,    5000,      xi.ki.RHAPSODY_IN_WHITE,   -- Toolbag (Kaginawa)
-                5317,    5000,      xi.ki.RHAPSODY_IN_WHITE,   -- Toolbag (Sairui-Ran)
-                5318,    5000,      xi.ki.RHAPSODY_IN_WHITE,   -- Toolbag (Kodoku)
-                5319,    3000,      xi.ki.RHAPSODY_IN_WHITE,   -- Toolbag (Shinobi-Tabi)
-                5417,    3000,      xi.ki.RHAPSODY_IN_WHITE,   -- Toolbag (Sanjaku-Tenugui)
-                5734,    5000,    xi.ki.RHAPSODY_IN_CRIMSON,   -- Toolbag (Soshi)
+                5308,    3000,    0							,   -- Toolbag (Uchi)
+                5309,    3000,    0							,   -- Toolbag (Tsurara)
+                5310,    3000,    0							,   -- Toolbag (Kawahori-Ogi)
+                5311,    3000,    0							,   -- Toolbag (Makibishi)
+                5312,    3000,    0							,   -- Toolbag (Hiraishin)
+                5313,    3000,    0							,   -- Toolbag (Mizu-Deppo)
+                5314,    5000,    0							,   -- Toolbag (Shihei)
+                5315,    5000,    0							,   -- Toolbag (Jusatsu)
+                5316,    5000,    0							,   -- Toolbag (Kaginawa)
+                5317,    5000,    0							,   -- Toolbag (Sairui-Ran)
+                5318,    5000,    0							,   -- Toolbag (Kodoku)
+                5319,    3000,    0							,   -- Toolbag (Shinobi-Tabi)
+                5417,    3000,    0							,   -- Toolbag (Sanjaku-Tenugui)
+                5734,    5000,    0							,   -- Toolbag (Soshi)
+				5867,   30000,    0                         ,   -- Toolbag (Inoshishinofuda) (Master Tool)
+				5869,   30000,    0                         ,   -- Toolbag (Chonofuda)       (Master Tool)
+				5868,   30000,    0                         ,   -- Toolbag (Shikanofuda)     (Master Tool)
+				5402,   10000,    0                         ,   -- Fire Card Case
+				5405,   10000,    0                         ,   -- Earth Card Case
+				5407,   10000,    0                         ,   -- Water Card Case
+				5404,   10000,    0                         ,   -- Wind Card Case
+				5403,   10000,    0                         ,   -- Ice Card Case
+				5406,   10000,    0                         ,   -- Thunder Card Case
+				5408,   10000,    0                         ,   -- Light Card Case
+				5409,   10000,    0                         ,   -- Dark Card Case
+				5870,   25000,    0                         ,   -- Trump Card Case           (Master Tool)
         },
         [curio.foodStuffs] =
         {
-                4378,      60,      xi.ki.RHAPSODY_IN_WHITE,   -- Selbina Milk
-                4299,     100,      xi.ki.RHAPSODY_IN_WHITE,   -- Orange au Lait
-                5703,     100,      xi.ki.RHAPSODY_IN_WHITE,   -- Uleguerand Milk
-                4300,     300,    xi.ki.RHAPSODY_IN_CRIMSON,   -- Apple au Lait
-                4301,     600,    xi.ki.RHAPSODY_IN_CRIMSON,   -- Pear au Lait
-                4422,     200,      xi.ki.RHAPSODY_IN_WHITE,   -- Orange Juice
-                4424,    1100,    xi.ki.RHAPSODY_IN_CRIMSON,   -- Melon Juice
-                4558,    2000,    xi.ki.RHAPSODY_IN_CRIMSON,   -- Yagudo Drink
-                4405,     160,      xi.ki.RHAPSODY_IN_WHITE,   -- Rice Ball
-                4376,     120,      xi.ki.RHAPSODY_IN_WHITE,   -- Meat Jerky
-                4371,     184,      xi.ki.RHAPSODY_IN_WHITE,   -- Grilled Hare
-                4381,     720,      xi.ki.RHAPSODY_IN_UMBER,   -- Meat Mithkabob
-                -- 4456,     550,      xi.ki.RHAPSODY_IN_WHITE,   -- Boiled Crab / Temporarily(?) removed by SE June 2021
-                4398,    1080,      xi.ki.RHAPSODY_IN_UMBER,   -- Fish Mithkabob
-                5166,    1500,      xi.ki.RHAPSODY_IN_WHITE,   -- Coeurl Sub
-                4538,     900,      xi.ki.RHAPSODY_IN_WHITE,   -- Roast Pipira
-                6217,     500,      xi.ki.RHAPSODY_IN_AZURE,   -- Anchovy Slice
-                6215,     400,      xi.ki.RHAPSODY_IN_UMBER,   -- Pepperoni Slice
-                5752,    3500,    xi.ki.RHAPSODY_IN_CRIMSON,   -- Pot-auf-feu
-                4488,    1000,      xi.ki.RHAPSODY_IN_WHITE,   -- Jack-o'-Lantern
-                5176,    5000,    xi.ki.RHAPSODY_IN_CRIMSON,   -- Bream Sushi
-                5178,    4000,    xi.ki.RHAPSODY_IN_CRIMSON,   -- Dorado Sushi
-                5721,    1500,    xi.ki.RHAPSODY_IN_CRIMSON,   -- Crab Sushi
-                5775,     500,      xi.ki.RHAPSODY_IN_WHITE,   -- Chocolate Crepe
-                5766,    1000,    xi.ki.RHAPSODY_IN_CRIMSON,   -- Butter Crepe
-                4413,     320,      xi.ki.RHAPSODY_IN_WHITE,   -- Apple Pie
-                4421,     800,      xi.ki.RHAPSODY_IN_WHITE,   -- Melon Pie
-                4446,    1200,    xi.ki.RHAPSODY_IN_CRIMSON,   -- Pumpkin Pie
-                4410,     344,      xi.ki.RHAPSODY_IN_WHITE,   -- Roast Mushroom
-                4510,      24,      xi.ki.RHAPSODY_IN_WHITE,   -- Acorn Cookie
-                4394,      12,      xi.ki.RHAPSODY_IN_AZURE,   -- Ginger Cookie
-                5782,    1000,      xi.ki.RHAPSODY_IN_WHITE,   -- Sugar Rusk
-                5783,    2000,    xi.ki.RHAPSODY_IN_CRIMSON,   -- Chocolate Rusk
-                5779,    1000,      xi.ki.RHAPSODY_IN_WHITE,   -- Cherry Macaron
-                5780,    2000,    xi.ki.RHAPSODY_IN_CRIMSON,   -- Coffee Macaron
-                5885,    1000,      xi.ki.RHAPSODY_IN_WHITE,   -- Saltena
-                5886,    2000,      xi.ki.RHAPSODY_IN_AZURE,   -- Elshena
-                5887,    2500,    xi.ki.RHAPSODY_IN_CRIMSON,   -- Montagna
-                5889,    1000,      xi.ki.RHAPSODY_IN_WHITE,   -- Stuffed Pitaru
-                5890,    2000,      xi.ki.RHAPSODY_IN_AZURE,   -- Poultry Pitaru
-                5891,    2500,    xi.ki.RHAPSODY_IN_CRIMSON,   -- Seafood Pitaru
-                6258,    3000,    xi.ki.RHAPSODY_IN_CRIMSON,   -- Shiromochi
-                6262,    3000,    xi.ki.RHAPSODY_IN_CRIMSON,   -- Kusamochi
-                6260,    3000,    xi.ki.RHAPSODY_IN_CRIMSON,   -- Akamochi
-                5547,   15000,    xi.ki.RHAPSODY_IN_CRIMSON,   -- Beef Stewpot
-                5727,   15000,    xi.ki.RHAPSODY_IN_CRIMSON,   -- Zaru Soba
-                4466,     450,    xi.ki.RHAPSODY_IN_CRIMSON,   -- Spicy Cracker
+                10293, 	 5000,	  0						   ,   -- Chocobo Shirt
+				11811, 	 5000,    0						   ,   -- Destrier Beret
+				4378,      60,    0						   ,   -- Selbina Milk
+                4299,     100,    0						   ,   -- Orange au Lait
+                5703,     100,    0						   ,   -- Uleguerand Milk
+                4300,     300,    0						   ,   -- Apple au Lait
+                4301,     600,    0						   ,   -- Pear au Lait
+                4422,     200,    0						   ,   -- Orange Juice
+                4424,    1100,    0						   ,   -- Melon Juice
+                4558,    2000,    0						   ,   -- Yagudo Drink
+                4405,     160,    0						   ,   -- Rice Ball
+                4376,     120,    0						   ,   -- Meat Jerky
+                4371,     184,    0						   ,   -- Grilled Hare
+                4381,     720,    0						   ,   -- Meat Mithkabob
+                4456,     550,    0						   ,   -- Boiled Crab
+                4398,    1080,    0						   ,   -- Fish Mithkabob
+                5166,    1500,    0						   ,   -- Coeurl Sub
+                4538,     900,    0						   ,   -- Roast Pipira
+                6217,     500,    0						   ,   -- Anchovy Slice
+                6215,     400,    0						   ,   -- Pepperoni Slice
+                5752,    3500,    0						   ,   -- Pot-auf-feu
+                4488,    1000,    0						   ,   -- Jack-o'-Lantern
+                5176,    5000,    0						   ,   -- Bream Sushi
+                5178,    4000,    0						   ,   -- Dorado Sushi
+                5721,    1500,    0						   ,   -- Crab Sushi
+                5775,     500,    0						   ,   -- Chocolate Crepe
+                5766,    1000,    0						   ,   -- Butter Crepe
+                4413,     320,    0						   ,   -- Apple Pie
+				4421,     800,    0						   ,   -- Melon Pie
+                4446,    1200,    0						   ,   -- Pumpkin Pie
+                4410,     344,    0						   ,   -- Roast Mushroom
+                4510,      24,    0						   ,   -- Acorn Cookie
+                4394,      12,    0						   ,   -- Ginger Cookie
+                5782,    1000,    0						   ,   -- Sugar Rusk
+                5783,    2000,    0						   ,   -- Chocolate Rusk
+                5779,    1000,    0						   ,   -- Cherry Macaron
+                5780,    2000,    0						   ,   -- Coffee Macaron
+                5885,    1000,    0						   ,   -- Saltena
+                5886,    2000,    0						   ,   -- Elshena
+                5887,    2500,    0						   ,   -- Montagna
+                5889,    1000,    0						   ,   -- Stuffed Pitaru
+                5890,    2000,    0						   ,   -- Poultry Pitaru
+                5891,    2500,    0						   ,   -- Seafood Pitaru
+                6258,    3000,    0						   ,   -- Shiromochi
+                6262,    3000,    0						   ,   -- Kusamochi
+                6260,    3000,    0						   ,   -- Akamochi
+                5547,   15000,    0						   ,   -- Beef Stewpot
+                5727,   15000,    0						   ,   -- Zaru Soba
+                4466,     450,    0						   ,   -- Spicy Cracker
+				4104,	20000, 	  0						   ,   -- Fire Cluster
+				4105,	20000, 	  0						   ,   -- Ice Cluster
+				4106,	20000, 	  0						   ,   -- Wind Cluster
+				4107,	20000, 	  0						   ,   -- Earth Cluster
+				4108,	20000, 	  0						   ,   -- Lightning Cluster
+				4109,	20000, 	  0						   ,   -- Water Cluster
+				4110,	20000, 	  0						   ,   -- Light Cluster
+				4111,	20000, 	  0						   ,   -- Dark Cluster
+
         },
         [curio.scrolls] =
         {
-                4181,     500,      xi.ki.RHAPSODY_IN_WHITE,   -- Instant Warp
-                4182,     500,      xi.ki.RHAPSODY_IN_WHITE,   -- Instant Reraise
-                5428,     500,      xi.ki.RHAPSODY_IN_AZURE,   -- Instant Retrace
-                5988,     500,      xi.ki.RHAPSODY_IN_WHITE,   -- Instant Protect
-                5989,     500,      xi.ki.RHAPSODY_IN_WHITE,   -- Instant Shell
-                5990,     500,      xi.ki.RHAPSODY_IN_UMBER,   -- Instant Stoneskin
+                4181,     500,      0					   ,   -- Instant Warp
+                4182,     500,      0					   ,   -- Instant Reraise
+                5428,     500,      0					   ,   -- Instant Retrace
+                5988,     500,      0					   ,   -- Instant Protect
+                5989,     500,      0					   ,   -- Instant Shell
+                5990,     500,      0					   ,   -- Instant Stoneskin
+                10140,    350000,   0                      ,   -- Koru Moru
+				10160,	  250000,   0			   		   ,   -- Zeid II
+				10157,	  200000,	0					   ,   -- Semih Lafihna
+				10152,	  500000,	0					   ,   -- Qultada
+				10130,	  750000,	0					   ,   -- Elivira
+				10162,	  500000,	0					   ,   -- Kupofried
+				10118,    500000,   0                      ,   -- Naja Salaheem
+				10120,    500000,   0                      ,   -- Lehko Habhoka
+				10136,    500000,   0                      ,   -- Uka Totlihn
+				
         },
         [curio.keys] =
         {
-                1024,    2500,      xi.ki.RHAPSODY_IN_WHITE,   -- Ghelsba Chest Key
-                1025,    2500,      xi.ki.RHAPSODY_IN_WHITE,   -- Palborough Chest Key
-                1026,    2500,      xi.ki.RHAPSODY_IN_WHITE,   -- Giddeus Chest Key
-                1027,    2500,      xi.ki.RHAPSODY_IN_WHITE,   -- Ranperre Chest Key
-                1028,    2500,      xi.ki.RHAPSODY_IN_WHITE,   -- Dangruf Chest Key
-                1029,    2500,      xi.ki.RHAPSODY_IN_WHITE,   -- Horutoto Chest Key
-                1030,    2500,      xi.ki.RHAPSODY_IN_WHITE,   -- Ordelle Chest Key
-                1031,    2500,      xi.ki.RHAPSODY_IN_WHITE,   -- Gusgen Chest Key
-                1032,    2500,      xi.ki.RHAPSODY_IN_WHITE,   -- Shakhrami Chest Key
-                1033,    2500,      xi.ki.RHAPSODY_IN_WHITE,   -- Davoi Chest Key
-                1034,    2500,      xi.ki.RHAPSODY_IN_WHITE,   -- Beadeaux Chest Key
-                1035,    2500,      xi.ki.RHAPSODY_IN_WHITE,   -- Oztroja Chest Key
-                1036,    2500,      xi.ki.RHAPSODY_IN_WHITE,   -- Delkfutt Chest Key
-                1037,    2500,      xi.ki.RHAPSODY_IN_WHITE,   -- Fei'Yin Chest Key
-                1038,    2500,      xi.ki.RHAPSODY_IN_WHITE,   -- Zvahl Chest Key
-                1039,    2500,      xi.ki.RHAPSODY_IN_WHITE,   -- Eldieme Chest Key
-                1040,    2500,      xi.ki.RHAPSODY_IN_WHITE,   -- Nest Chest Key
-                1041,    2500,      xi.ki.RHAPSODY_IN_WHITE,   -- Garlaige Chest Key
+                1024,    2500,      0					   ,   -- Ghelsba Chest Key
+                1025,    2500,      0					   ,   -- Palborough Chest Key
+                1026,    2500,      0					   ,   -- Giddeus Chest Key
+                1027,    2500,      0					   ,   -- Ranperre Chest Key
+                1028,    2500,      0					   ,   -- Dangruf Chest Key
+                1029,    2500,      0					   ,   -- Horutoto Chest Key
+                1030,    2500,      0					   ,   -- Ordelle Chest Key
+                1031,    2500,      0					   ,   -- Gusgen Chest Key
+                1032,    2500,      0					   ,   -- Shakhrami Chest Key
+                1033,    2500,      0					   ,   -- Davoi Chest Key
+                1034,    2500,      0					   ,   -- Beadeaux Chest Key
+                1035,    2500,      0					   ,   -- Oztroja Chest Key
+                1036,    2500,      0					   ,   -- Delkfutt Chest Key
+                1037,    2500,      0					   ,   -- Fei'Yin Chest Key
+                1038,    2500,      0					   ,   -- Zvahl Chest Key
+                1039,    2500,      0					   ,   -- Eldieme Chest Key
+                1040,    2500,      0					   ,   -- Nest Chest Key
+                1041,    2500,      0					   ,   -- Garlaige Chest Key
                 1043,    5000,      xi.ki.RHAPSODY_IN_UMBER,   -- Beadeaux Coffer Key
                 1042,    5000,      xi.ki.RHAPSODY_IN_UMBER,   -- Davoi Coffer Key
                 1044,    5000,      xi.ki.RHAPSODY_IN_UMBER,   -- Oztroja Coffer Key

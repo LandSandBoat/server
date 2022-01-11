@@ -8,18 +8,19 @@ require("scripts/globals/abyssea")
 -----------------------------------
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-    xi.abyssea.qmOnTrade(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
-    xi.abyssea.qmOnTrigger(player, npc)
+	player:PrintToPlayer("You feel that something will happen if you trade me a Black Tiger Fang", 0xD);
+	
 end
 
-entity.onEventUpdate = function(player, csid, option)
-end
 
-entity.onEventFinish = function(player, csid, option)
-end
+entity.onTrade = function(player, npc, trade)
 
+    if(trade:hasItemQty(2893,1)) then -- Black Tiger Fang
+        player:tradeComplete();
+        SpawnMob(17318436):updateClaim(player);
+    end
+
+end;
 return entity
+
