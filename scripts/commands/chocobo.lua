@@ -50,7 +50,6 @@ function onTrigger(player, arg, arg2, arg3, arg4)
         look = look + chocobo.look[arg4]
     end
 
-
     player:registerChocobo(look)
 
     player:delStatusEffectSilent(xi.effect.MOUNTED)
