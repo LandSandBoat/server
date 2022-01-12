@@ -1,9 +1,8 @@
 -----------------------------------
--- Area: Apollyon SE
+-- Area: Apollyon SE, Floor 2
 --  Mob: Tieholtsodi
 -----------------------------------
-local ID = require("scripts/zones/Apollyon/IDs")
-require("scripts/globals/limbus")
+require("scripts/zones/Apollyon/helpers/apollyon_se")
 require("scripts/globals/pathfind")
 mixins = {require("scripts/mixins/job_special")}
 -----------------------------------
@@ -39,9 +38,7 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, isKiller, noKiller)
-    if isKiller or noKiller then
-        xi.limbus.handleDoors(mob:getBattlefield(), true, ID.npc.APOLLYON_SE_PORTAL[2])
-    end
+    xi.apollyon_se.handleMobDeathKey(mob, player, isKiller, noKiller, 2)
 end
 
 return entity

@@ -293,7 +293,7 @@ bool CBattlefield::InsertEntity(CBaseEntity* PEntity, bool enter, BATTLEFIELDMOB
                 m_EnteredPlayers.emplace(PEntity->id);
                 PChar->ClearTrusts();
                 luautils::OnBattlefieldEnter(PChar, this);
-                charutils::SendTimerPacket(PChar, m_TimeLimit);
+                charutils::SendTimerPacket(PChar, GetRemainingTime());
             }
             else if (!IsRegistered(PChar))
             {

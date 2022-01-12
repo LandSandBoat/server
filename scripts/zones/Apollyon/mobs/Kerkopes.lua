@@ -1,23 +1,13 @@
 -----------------------------------
--- Area: Apollyon NE
+-- Area: Apollyon NE, Floor 4
 --  Mob: Kerkopes
 -----------------------------------
-local ID = require("scripts/zones/Apollyon/IDs")
+require("scripts/zones/Apollyon/helpers/apollyon_ne")
 -----------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, isKiller, noKiller)
-    if isKiller or noKiller then
-        local mobID = mob:getID()
-
-        if mobID == ID.mob.APOLLYON_NE_MOB[4] + 3 then
-            local mobX = mob:getXPos()
-            local mobY = mob:getYPos()
-            local mobZ = mob:getZPos()
-            GetNPCByID(ID.npc.APOLLYON_NE_CRATE[4][1]):setPos(mobX, mobY, mobZ)
-            GetNPCByID(ID.npc.APOLLYON_NE_CRATE[4][1]):setStatus(xi.status.NORMAL)
-        end
-    end
+    xi.apollyon_ne.handleMobDeathFloorFour(mob, player, isKiller, noKiller)
 end
 
 return entity
