@@ -707,6 +707,13 @@ INSERT INTO `traits` VALUES (127,'smite',14,40,1,898,25,'SOA',0);
 INSERT INTO `traits` VALUES (127,'smite',14,80,2,898,38,'SOA',0);
 INSERT INTO `traits` VALUES (127,'smite',18,60,1,898,25,'SOA',0);
 
+INSERT INTO `traits` VALUES (134,'ws damage boost',14,45,1,840,7,'ROV',0);
+INSERT INTO `traits` VALUES (134,'ws damage boost',14,55,2,840,10,'ROV',0);
+INSERT INTO `traits` VALUES (134,'ws damage boost',14,65,3,840,13,'ROV',0);
+INSERT INTO `traits` VALUES (134,'ws damage boost',14,75,4,840,16,'ROV',0);
+INSERT INTO `traits` VALUES (134,'ws damage boost',14,85,5,840,19,'ROV',0);
+INSERT INTO `traits` VALUES (134,'ws damage boost',14,95,6,840,21,'ROV',0);
+
 /*!40000 ALTER TABLE `traits` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

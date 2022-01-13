@@ -254,7 +254,7 @@ void CBattlefield::ApplyLevelRestrictions(CCharEntity* PChar) const
         // Check if it's a mission and if config setting applies.
         if (map_config.lv_cap_mission_bcnm == 0 && m_isMission == 1)
         {
-            cap = PChar->GetMLevel(); // Cap to current level to strip buffs - this is the retail diff between uncapped and capped to max lv.
+            cap = luautils::GetSettingsVariable("MAX_LEVEL"); // Cap to server max level to strip buffs - this is the retail diff between uncapped and capped to max lv.
         }
 
         PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DEATH, true);
@@ -542,7 +542,7 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
                         m_AllyList.erase(std::remove_if(m_AllyList.begin(), m_AllyList.end(), check), m_AllyList.end());
                     }
                 }
-                
+
                 PEntity->status = STATUS_TYPE::DISAPPEAR;
                 return found;
             }

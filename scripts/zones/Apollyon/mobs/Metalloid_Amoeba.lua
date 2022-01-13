@@ -14,12 +14,13 @@ end
 
 entity.onMobDeath = function(mob, player, isKiller, noKiller)
     if isKiller or noKiller then
-        local mobX = mob:getXPos()
-        local mobY = mob:getYPos()
-        local mobZ = mob:getZPos()
+        local mobX        = mob:getXPos()
+        local mobY        = mob:getYPos()
+        local mobZ        = mob:getZPos()
         local battlefield = mob:getBattlefield()
-        battlefield:setLocalVar("killCountF1", battlefield:getLocalVar("killCountF1")+1)
+        battlefield:setLocalVar("killCountF1", battlefield:getLocalVar("killCountF1") + 1)
         local killCount = battlefield:getLocalVar("killCountF1")
+
         if killCount == 2 then
             GetNPCByID(ID.npc.APOLLYON_SE_CRATE[1]):setPos(mobX, mobY, mobZ)
             GetNPCByID(ID.npc.APOLLYON_SE_CRATE[1]):setStatus(xi.status.NORMAL)

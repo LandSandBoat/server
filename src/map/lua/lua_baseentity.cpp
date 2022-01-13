@@ -11538,6 +11538,19 @@ void CLuaBaseEntity::setPetName(uint8 pType, uint16 value, sol::object const& ar
     }
 }
 
+void CLuaBaseEntity::registerChocobo(uint32 value)
+{
+    if (m_PBaseEntity == nullptr || m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowWarning("Invalid Entity");
+        return;
+    }
+
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+    PChar->m_FieldChocobo = value;
+    Sql_Query(SqlHandle, "UPDATE char_pet SET field_chocobo = %u WHERE charid = %u;", value, PChar->id);
+}
+
 /************************************************************************
  *  Function: getCharmChance()
  *  Purpose : Returns decimal value of the chances of charming an Entity
@@ -13708,6 +13721,7 @@ void CLuaBaseEntity::Register()
 
     SOL_REGISTER("getPetName", CLuaBaseEntity::getPetName);
     SOL_REGISTER("setPetName", CLuaBaseEntity::setPetName);
+    SOL_REGISTER("registerChocobo", CLuaBaseEntity::registerChocobo);
 
     SOL_REGISTER("getCharmChance", CLuaBaseEntity::getCharmChance);
     SOL_REGISTER("charmPet", CLuaBaseEntity::charmPet);

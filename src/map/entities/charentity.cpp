@@ -141,6 +141,7 @@ CCharEntity::CCharEntity()
     memset(&m_PetCommands, 0, sizeof(m_PetCommands));
     memset(&m_WeaponSkills, 0, sizeof(m_WeaponSkills));
     memset(&m_SetBlueSpells, 0, sizeof(m_SetBlueSpells));
+    memset(&m_FieldChocobo, 0, sizeof(m_FieldChocobo));
     memset(&m_unlockedAttachments, 0, sizeof(m_unlockedAttachments));
 
     memset(&m_questLog, 0, sizeof(m_questLog));

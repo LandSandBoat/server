@@ -84,4 +84,6 @@ bool essentiallyEqual(float a, float b);
 bool definitelyGreaterThan(float a, float b);
 bool definitelyLessThan(float a, float b);
 
+void crash();
+
 #endif
