@@ -49,7 +49,7 @@ local function validateAndTradeItem(player, trade)
     local validtrade = false
     if (player:getCharVar("KupoShield") ~= 1) then
         if (player:hasKeyItem(xi.keyItem.WAY_OF_THE_ALCHEMIST) and
-            (trade:hasItemQtyQty(1386,1) or trade:hasItemQty(10792,1))) then
+            (trade:hasItemQty(1386,1) or trade:hasItemQty(10792,1))) then
             validtrade = true
         elseif (player:hasKeyItem(xi.keyItem.WAY_OF_THE_BLACKSMITH) and
             (trade:hasItemQty(1356, 1) or trade:hasItemQty(19788, 1))) then
