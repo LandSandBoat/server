@@ -12,3 +12,10 @@ CPMAddPackage(
     GITHUB_REPOSITORY LandSandBoat/efsw
     GIT_TAG b477e1c8f00bf483b1be256321d5e32784d6df96
 )
+
+# CPM Modules
+CPMAddPackage(
+    NAME sqlpp11
+    GITHUB_REPOSITORY rbock/sqlpp11
+    GIT_TAG b8aed2af550c137dc44c1eb84dd38018426caa76
+)
