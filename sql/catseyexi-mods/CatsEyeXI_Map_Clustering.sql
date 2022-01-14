@@ -240,3 +240,4 @@ UPDATE `zone_settings` SET `zoneport` = "54234" WHERE `name` = "Yahse_Hunting_Gr
 UPDATE `zone_settings` SET `zoneport` = "54234" WHERE `name` = "Yorcia_Weald";
 UPDATE `zone_settings` SET `zoneport` = "54234" WHERE `name` = "Yorcia_Weald_U";
 UPDATE `zone_settings` SET `zoneport` = "54234" WHERE `name` = "Silver_Knife";
+UPDATE `zone_settings` SET `zoneport` = "54234" WHERE `zoneport` = "0" OR `name` = "49" OR `name` = "GM_Home";
