@@ -64,7 +64,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "utils/trustutils.h"
 #include "utils/zoneutils.h"
 
-#include <sqlpp11/mysql/mysql.h>
+#include <sqlpp11/mysql/connection.h>
 #include <sqlpp11/sqlpp11.h>
 
 #ifdef TRACY_ENABLE

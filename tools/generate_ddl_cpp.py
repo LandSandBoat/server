@@ -11,7 +11,6 @@ def main():
     # Generate DDL
     output = subprocess.run([MYSQL_DUMP_EXE, "-uroot", "-proot", "--no-data", "xidb"], stdout=subprocess.PIPE).stdout.decode('utf-8')
 
-    # TODO: Do this b
     with open("xidb.sql", "w") as f:
         f.write(output)
 
