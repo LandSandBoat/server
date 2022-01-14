@@ -1,3 +1,4 @@
+UPDATE `zone_settings` SET `zoneip` = "71.164.90.4" WHERE `zoneip` = "127.0.0.1";
 UPDATE `zone_settings` SET `zoneport` = "54231" WHERE `name` = "Alzadaal_Undersea_Ruins";
 UPDATE `zone_settings` SET `zoneport` = "54231" WHERE `name` = "Arrapago_Remnants";
 UPDATE `zone_settings` SET `zoneport` = "54231" WHERE `name` = "Aydeewa_Subterrane";
