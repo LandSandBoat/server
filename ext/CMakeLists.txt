@@ -18,4 +18,6 @@ CPMAddPackage(
     NAME sqlpp11
     GITHUB_REPOSITORY rbock/sqlpp11
     GIT_TAG b8aed2af550c137dc44c1eb84dd38018426caa76
+    OPTIONS
+        "BUILD_MYSQL_CONNECTOR ON"
 )

@@ -64,6 +64,9 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "utils/trustutils.h"
 #include "utils/zoneutils.h"
 
+#include <sqlpp11/mysql/mysql.h>
+#include <sqlpp11/sqlpp11.h>
+
 #ifdef TRACY_ENABLE
 void* operator new(std::size_t count)
 {
@@ -164,6 +167,9 @@ int32 do_init(int32 argc, char** argv)
     TracyZoneScoped;
     ShowStatus("do_init: begin server initialization...");
     map_ip.s_addr = 0;
+
+    auto config = std::make_shared<sqlpp::mysql::connection_config>();
+    sqlpp::mysql::connection db(config);
 
     for (int i = 1; i < argc; i++)
     {
