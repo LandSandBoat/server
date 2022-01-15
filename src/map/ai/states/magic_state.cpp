@@ -98,11 +98,33 @@ bool CMagicState::Update(time_point tick)
 
         action_t action;
 
-        if (!PTarget || m_errorMsg ||
-            (HasMoved() && (m_PEntity->objtype != TYPE_PET || static_cast<CPetEntity*>(m_PEntity)->getPetType() != PET_TYPE::AUTOMATON)) ||
-            !CanCastSpell(PTarget))
+        if (!PTarget || m_errorMsg || !CanCastSpell(PTarget) ||
+            (HasMoved() && (m_PEntity->objtype != TYPE_PET || static_cast<CPetEntity*>(m_PEntity)->getPetType() != PET_TYPE::AUTOMATON)))
         {
             m_interrupted = true;
+        }
+        else if (PTarget->objtype == TYPE_PC)
+        {
+            CCharEntity* PChar = dynamic_cast<CCharEntity*>(PTarget);
+            if (PChar->m_Locked)
+            {
+                m_interrupted = true;
+            }
+        }
+        else if (PTarget->objtype == TYPE_PET)
+        {
+            CPetEntity*  PPet  = dynamic_cast<CPetEntity*>(PTarget);
+            CCharEntity* PChar = dynamic_cast<CCharEntity*>(PPet->PMaster);
+
+            if (PChar == nullptr)
+            {
+                return false;
+            }
+
+            if (PChar->m_Locked)
+            {
+                m_interrupted = true;
+            }
         }
         else if (battleutils::IsParalyzed(m_PEntity))
         {

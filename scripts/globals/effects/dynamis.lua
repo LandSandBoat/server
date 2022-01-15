@@ -58,7 +58,7 @@ effect_object.onEffectLose = function(target, effect)
         if effect:getTimeRemaining() == 0 then
             target:messageSpecial(zones[target:getZoneID()].text.DYNAMIS_TIME_EXPIRED)
             target:disengage()
-            target:startEvent(100)
+            target:startCutscene(100)
         end
     end
 end
