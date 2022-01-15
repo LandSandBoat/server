@@ -12382,11 +12382,11 @@ void CLuaBaseEntity::SetMobAbilityEnabled(bool state)
  *  Notes   : Used in Ouryu, Jormungand, Tiamat, etc
  ************************************************************************/
 
-void CLuaBaseEntity::SetMobSkillAttack(int16 value)
+void CLuaBaseEntity::SetMobSkillAttack(int16 listId)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB);
 
-    static_cast<CMobEntity*>(m_PBaseEntity)->setMobMod(MOBMOD_ATTACK_SKILL_LIST, value);
+    static_cast<CMobEntity*>(m_PBaseEntity)->setMobMod(MOBMOD_ATTACK_SKILL_LIST, listId);
 }
 
 /************************************************************************
