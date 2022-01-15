@@ -9,18 +9,16 @@ CLANG_FORMAT_EXE="clang-format"
 
 def main():
     # Generate DDL
-    output = subprocess.run([MYSQL_DUMP_EXE, "-uroot", "-proot", "--no-data", "xidb"], stdout=subprocess.PIPE).stdout.decode('utf-8')
+    output = subprocess.run([MYSQL_DUMP_EXE, "-uroot", "-proot", "--no-data", "xidb"], stdout=subprocess.PIPE).stdout.decode('utf-8').split("\n")
 
     with open("xidb.sql", "w") as f:
-        f.write(output)
+        f.writelines(output)
 
     # Use DDL with ddl2cpp to generate cpp
-    subprocess.run(["python", DDL2CPP_SCRIPT, "-split-tables", "xidb.sql", "../src/database", "xidb"])
-
-    os.remove("xidb.sql")
+    subprocess.run(["python", DDL2CPP_SCRIPT, "-split-tables", "-no-timestamp-warning", "-fail-on-parse", "xidb.sql", "../src/database", "xidb"])
 
     # TODO: Format output
-    subprocess.run([CLANG_FORMAT_EXE, "-i", "*.h"])
+    #subprocess.run([CLANG_FORMAT_EXE, "-i", "*.h"])
 
     # TODO: Fix these
     # Warning: timestamp is mapped to sqlpp::time_point like datetime
