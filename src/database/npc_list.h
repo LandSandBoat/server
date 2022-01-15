@@ -40,7 +40,7 @@ namespace xidb
             const T& operator()() const { return name; }
           };
       };
-      using _traits = sqlpp::make_traits<sqlpp::text, sqlpp::tag::can_be_null>;
+      using _traits = sqlpp::make_traits<sqlpp::char_, sqlpp::tag::can_be_null>;
     };
     struct polutils_name
     {
@@ -56,7 +56,7 @@ namespace xidb
             const T& operator()() const { return polutils_name; }
           };
       };
-      using _traits = sqlpp::make_traits<sqlpp::text, sqlpp::tag::can_be_null>;
+      using _traits = sqlpp::make_traits<sqlpp::char_, sqlpp::tag::can_be_null>;
     };
     struct pos_rot
     {
@@ -296,7 +296,7 @@ namespace xidb
             const T& operator()() const { return content_tag; }
           };
       };
-      using _traits = sqlpp::make_traits<sqlpp::text, sqlpp::tag::can_be_null>;
+      using _traits = sqlpp::make_traits<sqlpp::varchar, sqlpp::tag::can_be_null>;
     };
     struct widescan
     {

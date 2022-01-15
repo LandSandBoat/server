@@ -40,7 +40,7 @@ namespace xidb
             const T& operator()() const { return name; }
           };
       };
-      using _traits = sqlpp::make_traits<sqlpp::text, sqlpp::tag::can_be_null>;
+      using _traits = sqlpp::make_traits<sqlpp::varchar, sqlpp::tag::can_be_null>;
     };
     struct packet_name
     {
@@ -56,7 +56,7 @@ namespace xidb
             const T& operator()() const { return packet_name; }
           };
       };
-      using _traits = sqlpp::make_traits<sqlpp::text, sqlpp::tag::can_be_null>;
+      using _traits = sqlpp::make_traits<sqlpp::varchar, sqlpp::tag::can_be_null>;
     };
     struct familyid
     {

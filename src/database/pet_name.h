@@ -40,7 +40,7 @@ namespace xidb
             const T& operator()() const { return name; }
           };
       };
-      using _traits = sqlpp::make_traits<sqlpp::text, sqlpp::tag::can_be_null>;
+      using _traits = sqlpp::make_traits<sqlpp::char_, sqlpp::tag::can_be_null>;
     };
   } // namespace pet_name_
 

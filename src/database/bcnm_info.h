@@ -56,7 +56,7 @@ namespace xidb
             const T& operator()() const { return name; }
           };
       };
-      using _traits = sqlpp::make_traits<sqlpp::text, sqlpp::tag::can_be_null>;
+      using _traits = sqlpp::make_traits<sqlpp::varchar, sqlpp::tag::can_be_null>;
     };
     struct fastestName
     {
@@ -72,7 +72,7 @@ namespace xidb
             const T& operator()() const { return fastestName; }
           };
       };
-      using _traits = sqlpp::make_traits<sqlpp::text, sqlpp::tag::can_be_null>;
+      using _traits = sqlpp::make_traits<sqlpp::varchar, sqlpp::tag::can_be_null>;
     };
     struct fastestPartySize
     {

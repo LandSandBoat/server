@@ -40,7 +40,7 @@ namespace xidb
             const T& operator()() const { return name; }
           };
       };
-      using _traits = sqlpp::make_traits<sqlpp::text>;
+      using _traits = sqlpp::make_traits<sqlpp::varchar>;
     };
     struct color
     {
@@ -72,7 +72,7 @@ namespace xidb
             const T& operator()() const { return poster; }
           };
       };
-      using _traits = sqlpp::make_traits<sqlpp::text>;
+      using _traits = sqlpp::make_traits<sqlpp::varchar>;
     };
     struct message
     {

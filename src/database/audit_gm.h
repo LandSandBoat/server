@@ -40,7 +40,7 @@ namespace xidb
             const T& operator()() const { return gm_name; }
           };
       };
-      using _traits = sqlpp::make_traits<sqlpp::text, sqlpp::tag::can_be_null>;
+      using _traits = sqlpp::make_traits<sqlpp::varchar, sqlpp::tag::can_be_null>;
     };
     struct command
     {
@@ -56,7 +56,7 @@ namespace xidb
             const T& operator()() const { return command; }
           };
       };
-      using _traits = sqlpp::make_traits<sqlpp::text, sqlpp::tag::can_be_null>;
+      using _traits = sqlpp::make_traits<sqlpp::varchar, sqlpp::tag::can_be_null>;
     };
     struct full_string
     {
@@ -72,7 +72,7 @@ namespace xidb
             const T& operator()() const { return full_string; }
           };
       };
-      using _traits = sqlpp::make_traits<sqlpp::text, sqlpp::tag::can_be_null>;
+      using _traits = sqlpp::make_traits<sqlpp::varchar, sqlpp::tag::can_be_null>;
     };
   } // namespace audit_gm_
 

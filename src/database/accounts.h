@@ -40,7 +40,7 @@ namespace xidb
             const T& operator()() const { return login; }
           };
       };
-      using _traits = sqlpp::make_traits<sqlpp::text>;
+      using _traits = sqlpp::make_traits<sqlpp::varchar>;
     };
     struct password
     {
@@ -56,7 +56,7 @@ namespace xidb
             const T& operator()() const { return password; }
           };
       };
-      using _traits = sqlpp::make_traits<sqlpp::text>;
+      using _traits = sqlpp::make_traits<sqlpp::varchar>;
     };
     struct current_email
     {
@@ -72,7 +72,7 @@ namespace xidb
             const T& operator()() const { return current_email; }
           };
       };
-      using _traits = sqlpp::make_traits<sqlpp::text>;
+      using _traits = sqlpp::make_traits<sqlpp::varchar>;
     };
     struct registration_email
     {
@@ -88,7 +88,7 @@ namespace xidb
             const T& operator()() const { return registration_email; }
           };
       };
-      using _traits = sqlpp::make_traits<sqlpp::text>;
+      using _traits = sqlpp::make_traits<sqlpp::varchar>;
     };
     struct timecreate
     {

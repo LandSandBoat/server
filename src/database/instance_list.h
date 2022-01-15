@@ -40,7 +40,7 @@ namespace xidb
             const T& operator()() const { return instance_name; }
           };
       };
-      using _traits = sqlpp::make_traits<sqlpp::text>;
+      using _traits = sqlpp::make_traits<sqlpp::varchar>;
     };
     struct instance_zone
     {

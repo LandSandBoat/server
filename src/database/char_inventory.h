@@ -120,7 +120,7 @@ namespace xidb
             const T& operator()() const { return signature; }
           };
       };
-      using _traits = sqlpp::make_traits<sqlpp::text>;
+      using _traits = sqlpp::make_traits<sqlpp::varchar>;
     };
     struct extra
     {
