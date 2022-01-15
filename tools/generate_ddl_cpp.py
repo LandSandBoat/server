@@ -15,7 +15,9 @@ def main():
         f.writelines(output)
 
     # Use DDL with ddl2cpp to generate cpp
-    subprocess.run(["python", DDL2CPP_SCRIPT, "-split-tables", "-no-timestamp-warning", "-fail-on-parse", "xidb.sql", "../src/database", "xidb"])
+    subprocess.run(["python", DDL2CPP_SCRIPT, "-split-tables", "-no-timestamp-warning", "-fail-on-parse", "-identity-naming", "xidb.sql", "../src/database", "xidb"])
+
+    os.remove("xidb.sql")
 
     # TODO: Format output
     #subprocess.run([CLANG_FORMAT_EXE, "-i", "*.h"])
