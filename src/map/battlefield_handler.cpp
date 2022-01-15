@@ -149,14 +149,14 @@ uint8 CBattlefieldHandler::LoadBattlefield(CCharEntity* PChar, uint16 battlefiel
                 return BATTLEFIELD_RETURN_CODE_WAIT;
             }
 
-            PBattlefield->InsertEntity(PChar, true);
-
             if (lootid != 0)
             {
                 PBattlefield->SetLocalVar("loot", lootid);
             }
 
             luautils::OnBattlefieldInitialise(PBattlefield);
+            PBattlefield->InsertEntity(PChar, true);
+
             return BATTLEFIELD_RETURN_CODE_CUTSCENE;
         }
     }
