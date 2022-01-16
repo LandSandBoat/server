@@ -54,7 +54,7 @@ spell_object.onSpellCast = function(caster, target, spell)
         overHeal = (leftOver/(caster:getBaseHP() + caster:getMod(xi.mod.HP)))*100
     end
 
-    if (leftOver > 0) then
+    if leftOver > 0 then
         caster:addStatusEffect(xi.effect.MAX_HP_BOOST, overHeal, 0, 60)
     end
 

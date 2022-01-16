@@ -90,7 +90,7 @@ CMagicState::CMagicState(CBattleEntity* PEntity, uint16 targid, SpellID spellid,
     else
     {
         actionTarget.messageID = 327; // starts casting on <target>
-    }                                                                                             // starts casting
+    }
     m_PEntity->PAI->EventHandler.triggerListener("MAGIC_START", CLuaBaseEntity(m_PEntity), CLuaSpell(m_PSpell.get()), &action); // TODO: weaponskill lua object
 
     m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));

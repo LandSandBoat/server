@@ -12,7 +12,7 @@ local item_object = {}
 
 item_object.onItemCheck = function(target)
     local result = 0
-    if target:getMod(xi.mod.ALBATROSS_RING_EFFECT) then
+    if target:getMod(xi.mod.ALBATROSS_RING_EFFECT) == 1 then
         result = xi.msg.basic.ITEM_UNABLE_TO_USE_2
     end
     return result

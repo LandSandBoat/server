@@ -1146,7 +1146,7 @@ void CMobEntity::DropItems(CCharEntity* PChar)
         PChar->PTreasurePool->AddItem(ItemID, this);
         // This used to cap the number of drops a mob can produce at 10, but
         // that's not the correct behavior.
-        return false; //dropCount >= TREASUREPOOL_SIZE;
+        return false; // dropCount >= TREASUREPOOL_SIZE;
     };
 
     auto UpdateDroprateOrAddToList = [&](std::vector<DropItem_t>& list, uint8 dropType, uint16 itemID, uint16 dropRate)

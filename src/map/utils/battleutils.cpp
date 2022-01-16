@@ -4299,7 +4299,8 @@ namespace battleutils
         auto isValidTrickAttackHelper = [&](CBattleEntity* PEntity) -> bool
         {
             // Dead PEntity should not be TA-able
-            if (PEntity->isDead()) {
+            if (PEntity->isDead())
+            {
                 return false;
             }
             if (taUser->id != PEntity->id && distance(PEntity->loc.p, PMob->loc.p) <= distance(taUser->loc.p, PMob->loc.p))
@@ -6262,11 +6263,6 @@ namespace battleutils
                 if (add)
                 {
                     PEntity->addTrait(PTrait);
-                    if (PEntity->objtype == TYPE_MOB)
-                    {
-                        // Append this trait's modifier to the mob's saved mod state so it is included on respawn.
-                        PEntity->m_modStatSave[PTrait->getMod()] += PTrait->getValue();
-                    }
                 }
             }
         }

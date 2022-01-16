@@ -142,6 +142,7 @@ int32 time_server(time_point tick, CTaskMgr::CTask* PTask)
         TracyZoneScoped;
         zoneutils::TOTDChange(VanadielTOTD);
 
+        // clang-format off
         zoneutils::ForEachZone([](CZone* PZone)
         {
             PZone->ForEachChar([](CCharEntity* PChar)
@@ -150,6 +151,7 @@ int32 time_server(time_point tick, CTaskMgr::CTask* PTask)
                 PChar->PLatentEffectContainer->CheckLatentsJobLevel();
             });
         });
+        // clang-format on
 
         fishingutils::RestockFishingAreas();
     }

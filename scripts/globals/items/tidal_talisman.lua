@@ -5,36 +5,6 @@
 -----------------------------------
 local item_object = {}
 
-local tidalGetDestZone = function(target)
-    local destZone = 0
-    local zone = target:getZoneID()
-
-    if zone == 241 or zone == 242 or zone == 240 or zone == 239 or zone == 238 then -- Item is used in Windurst
-        destZone = 243 -- Player/s will end up at Ru'Lude Gardens
-    elseif zone == 237 or zone == 236 or zone == 235 or zone == 234 then -- Item is used in Bastok
-        destZone = 243 -- Player/s will end up at Ru'Lude Gardens
-    elseif zone == 233 or zone == 232 or zone == 231 or zone == 230 then -- Item is used in San d'Oria
-        destZone = 243 -- Player/s will end up at Ru'Lude Gardens
-    elseif zone == 243 or zone == 245 or zone == 244 or zone == 246 then -- Item is used in Jeuno
-        if target:hasKeyItem(xi.ki.AIRSHIP_PASS_FOR_KAZHAM) then
-            destZone = 250 -- player/s end up in Kazham
-        end
-    elseif zone == 250 then -- Item is used in Kazham
-        destZone = 243 -- Player/s will end up at Ru'Lude Gardens
-    elseif zone == 248 then -- Item is used in Selbina
-        destZone = 249 -- player/s end up at Mhaura
-    elseif zone == 249 then -- Item is used in Mhaura
-        destZone = 248 -- player/s end up in Selbina
-    elseif zone == 50 then -- Item is used in Aht Urhgan Whitegate
-        destZone = 53 -- player/s end up in Nashmau
-    elseif zone == 53 then -- Item is used in Nashmu
-        destZone = 50 -- player/s ends up at Aht Urahgan Whitegate
-    end
-
-    return destZone
-
-end
-
 item_object.onItemCheck = function(target)
     local result = 56
     local zone = target:getZoneID()
