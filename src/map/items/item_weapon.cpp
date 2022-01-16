@@ -508,3 +508,7 @@ double CItemWeapon::getDPS() const
 // Blunt = MOD_HANDTOHAND, MOD_CLUB, MOD_STAFF
 // Slashing = MOD_AXE, MOD_GREATAXE, MOD_GREATSWORD, MOD_SWORD, MOD_SCYTHE, MOD_KATANA, MOD_GREATKATANA
 // Piercing = MOD_DAGGER, MOD_POLEARM, MOD_ARCHERY, MOD_MARKSMANSHIP
+//
+// Hand-to-Hand type is Blunt, that's why MNKs are effective against Undead (Corse and Skeleton).
+// I don't know what you mean by Impact and Range? MOD_THROWING wouldn't fit in any case because there's different weapon types
+// For example, Boomerangs are Blunt, Chakrams are Slashing and Shurikens are Piercing.
