@@ -4703,6 +4703,7 @@ INSERT INTO `synth_recipes` VALUES (75507,0,2043,0,0,0,0,0,0,0,116,4096,4238,211
 INSERT INTO `synth_recipes` VALUES (75508,1,0,0,98,0,0,0,0,0,0,4100,4242,12420,0,0,0,0,0,0,0,914,1225,654,655,1,6,1,1,'Adaman Barbuta (desynth)'); -- use synth lvl, wiki results
 INSERT INTO `synth_recipes` VALUES (75509,1,0,0,103,0,0,0,0,0,0,4100,4242,12548,0,0,0,0,0,0,0,855,1225,654,655,1,6,2,2,'Adaman Cuirass (desynth)'); -- use synth lvl, wiki results
 INSERT INTO `synth_recipes` VALUES (75510,1,0,0,100,0,0,0,0,0,0,4100,4242,12932,0,0,0,0,0,0,0,855,1225,654,655,1,6,2,1,'Adaman Sabatons (desynth)'); -- use synth lvl, wiki results
+INSERT INTO `synth_recipes` VALUES (75511,0,0,0,0,0,0,0,0,0,101,4096,4238,615,4356,5568,5569,5688,0,0,0,6601,6601,6602,6602,6,8,6,8,'Omelette Sandwich'); -- BG Wiki and JP Wiki
 
 -- -----------
 -- RECIPES END

@@ -734,7 +734,7 @@ public:
     void SetAutoAttackEnabled(bool state);   // halts/resumes auto attack of entity
     void SetMagicCastingEnabled(bool state); // halt/resumes casting magic
     void SetMobAbilityEnabled(bool state);   // halt/resumes mob skills
-    void SetMobSkillAttack(int16 value);     // enable/disable using mobskills as regular attacks
+    void SetMobSkillAttack(int16 listId);     // enable/disable using mobskills as regular attacks
 
     int16 getMobMod(uint16 mobModID);
     void  setMobMod(uint16 mobModID, int16 value);

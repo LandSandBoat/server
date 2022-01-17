@@ -2267,12 +2267,12 @@ void CCharEntity::setLocked(bool locked)
     m_Locked = locked;
     if (locked)
     {
+        // Player and pet enmity are handled in mobcontroler.cpp, CheckLock() fucntion.
+        // Mob casting interruption handled in magic_state.cpp, CMagicState::Update boolean.
         PAI->Disengage();
-        // TODO: clear enmity
         if (PPet)
         {
             PPet->PAI->Disengage();
-            // TODO: clear enmity for pet and make pet retreat to master
         }
         battleutils::RelinquishClaim(this);
     }

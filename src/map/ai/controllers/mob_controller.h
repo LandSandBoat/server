@@ -57,6 +57,7 @@ protected:
     bool         CanDetectTarget(CBattleEntity* PTarget, bool forceSight = false);
     bool         CanPursueTarget(CBattleEntity* PTarget);
     bool         CheckHide(CBattleEntity* PTarget);
+    bool         CheckLock(CBattleEntity* PTarget);
     bool         CheckDetection(CBattleEntity* PTarget);
     bool         CanSeePoint(position_t pos);
     virtual bool CanCastSpells();
