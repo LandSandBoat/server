@@ -120,8 +120,9 @@ CCharUpdatePacket::CCharUpdatePacket(CCharEntity* PChar)
         ref<uint8>(0x58) += 0x80;
     }
 
-    if (PChar->animation == ANIMATION_MOUNT)
+    if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_MOUNTED))
     {
+        ref<uint8>(0x29) |= static_cast<uint8>(PChar->StatusEffectContainer->GetStatusEffect(EFFECT_MOUNTED)->GetSubPower());
         ref<uint16>(0x5B) = PChar->StatusEffectContainer->GetStatusEffect(EFFECT_MOUNTED)->GetPower();
     }
 }

@@ -20,15 +20,16 @@ end
 entity.onEventUpdate = function(player, csid, option)
     player:updateEvent(
         0,
-        GetServerVariable("[SW_Apollyon]Time"), -- SW Apollyon
-        GetServerVariable("[NW_Apollyon]Time"), -- NW Apollyon
-        GetServerVariable("[SE_Apollyon]Time"), -- SE Apollyon
-        GetServerVariable("[NE_Apollyon]Time"), -- NE Apollyon
+        GetServerVariable("[SW_Apollyon]Time"),      -- SW Apollyon
+        GetServerVariable("[NW_Apollyon]Time"),      -- NW Apollyon
+        GetServerVariable("[SE_Apollyon]Time"),      -- SE Apollyon
+        GetServerVariable("[NE_Apollyon]Time"),      -- NE Apollyon
         GetServerVariable("[Central_Apollyon]Time"), -- Central Apollyon
-        GetServerVariable("[CS_Apollyon]Time")  -- CS Apollyon
+        GetServerVariable("[CS_Apollyon]Time")       -- CS Apollyon
     )
 end
 
 entity.onEventFinish = function(player, csid, option)
 end
+
 return entity

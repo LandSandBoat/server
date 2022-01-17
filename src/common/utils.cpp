@@ -729,3 +729,9 @@ bool definitelyLessThan(float a, float b)
     constexpr float epsilon = std::numeric_limits<float>::epsilon();
     return (b - a) > ((fabs(a) < fabs(b) ? fabs(b) : fabs(a)) * epsilon);
 }
+
+void crash()
+{
+    // cppcheck-suppress nullPointer
+    *((unsigned int*)0) = 0xDEAD;
+}

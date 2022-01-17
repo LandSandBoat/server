@@ -2,15 +2,15 @@
 -- Area: Apollyon SW
 --  Mob: Air Elemental
 -----------------------------------
-require("scripts/globals/limbus")
 local ID = require("scripts/zones/Apollyon/IDs")
+require("scripts/globals/limbus")
 -----------------------------------
 local entity = {}
 
 entity.onMobEngaged = function(mob, target)
     GetMobByID(ID.mob.APOLLYON_SW_MOB[4]):updateEnmity(target)
-    GetMobByID(ID.mob.APOLLYON_SW_MOB[4]+8):updateEnmity(target)
-    GetMobByID(ID.mob.APOLLYON_SW_MOB[4]+16):updateEnmity(target)
+    GetMobByID(ID.mob.APOLLYON_SW_MOB[4] + 8):updateEnmity(target)
+    GetMobByID(ID.mob.APOLLYON_SW_MOB[4] + 16):updateEnmity(target)
 end
 
 entity.onMobDeath = function(mob, player, isKiller, noKiller)

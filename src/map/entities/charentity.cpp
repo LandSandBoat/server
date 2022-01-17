@@ -141,6 +141,7 @@ CCharEntity::CCharEntity()
     memset(&m_PetCommands, 0, sizeof(m_PetCommands));
     memset(&m_WeaponSkills, 0, sizeof(m_WeaponSkills));
     memset(&m_SetBlueSpells, 0, sizeof(m_SetBlueSpells));
+    memset(&m_FieldChocobo, 0, sizeof(m_FieldChocobo));
     memset(&m_unlockedAttachments, 0, sizeof(m_unlockedAttachments));
 
     memset(&m_questLog, 0, sizeof(m_questLog));
@@ -2272,12 +2273,12 @@ void CCharEntity::setLocked(bool locked)
     m_Locked = locked;
     if (locked)
     {
+        // Player and pet enmity are handled in mobcontroler.cpp, CheckLock() fucntion.
+        // Mob casting interruption handled in magic_state.cpp, CMagicState::Update boolean.
         PAI->Disengage();
-        // TODO: clear enmity
         if (PPet)
         {
             PPet->PAI->Disengage();
-            // TODO: clear enmity for pet and make pet retreat to master
         }
         battleutils::RelinquishClaim(this);
     }

@@ -2,15 +2,15 @@
 -- Area: Apollyon SW
 --  Mob: Light Elemental
 -----------------------------------
-require("scripts/globals/limbus")
 local ID = require("scripts/zones/Apollyon/IDs")
+require("scripts/globals/limbus")
 -----------------------------------
 local entity = {}
 
 entity.onMobEngaged = function(mob, target)
-    GetMobByID(ID.mob.APOLLYON_SW_MOB[4]+5):updateEnmity(target)
-    GetMobByID(ID.mob.APOLLYON_SW_MOB[4]+13):updateEnmity(target)
-    GetMobByID(ID.mob.APOLLYON_SW_MOB[4]+21):updateEnmity(target)
+    GetMobByID(ID.mob.APOLLYON_SW_MOB[4] + 5):updateEnmity(target)
+    GetMobByID(ID.mob.APOLLYON_SW_MOB[4] + 13):updateEnmity(target)
+    GetMobByID(ID.mob.APOLLYON_SW_MOB[4] + 21):updateEnmity(target)
 end
 
 entity.onMobDeath = function(mob, player, isKiller, noKiller)

@@ -1031,7 +1031,15 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
                     return;
                 }
 
-                PChar->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_MOUNTED, EFFECT_MOUNTED, (MountID ? ++MountID : 0), 0, 1800), true);
+                PChar->StatusEffectContainer->AddStatusEffect(new CStatusEffect(
+                    EFFECT_MOUNTED,
+                    EFFECT_MOUNTED,
+                    MountID ? ++MountID : 0,
+                    0,
+                    1800,
+                    0,
+                    FLAG_CHOCOBO), true);
+
                 PChar->PRecastContainer->Add(RECAST_ABILITY, 256, 60);
                 PChar->pushPacket(new CCharRecastPacket(PChar));
             }
@@ -2789,10 +2797,6 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
             if (PChar->UContainer->GetType() == UCONTAINER_DELIVERYBOX)
             {
                 PChar->UContainer->Clean();
-            }
-            else
-            {
-                ShowExploit("Delivery Box packet handler received action %u while UContainer is in a state other than UCONTAINER_DELIVERYBOX (%s)", action, PChar->GetName());
             }
         }
         break;
