@@ -26,12 +26,16 @@ zones[xi.zone.EAST_SARUTABARUTA] =
         TABY_CANATAHEY_DIALOG    = 7392, -- This is the entrrrance to Windurst. Please maintain orderrrly conduct while you'rrre in town.
         HEIH_PORHIAAP_DIALOG     = 7393, -- These grrrasslands make up East Sarutabaruta. Lately the number of monsters has drrramatically increased, causing us all sorts of trrrouble.
         SAMA_GOHJIMA_POSTDIALOG  = 7396, -- Were you able to find the laborrratory? There are many such hidden passages in the Horutoto Ruins.
-        PLAYER_OBTAINS_ITEM      = 7573, -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM    = 7574, -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM = 7575, -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP     = 7576, -- You already possess that temporary item.
-        NO_COMBINATION           = 7581, -- You were unable to enter a combination.
-        REGIME_REGISTERED        = 9941, -- New training regime registered!
+        QUH_BERHUJA_DIALOG       = 7397, -- Hold on therrre! This ain't no place forrr adventurrrers to just wanderrr in and out of! Withdrrraw immediately!
+        QUH_BERHUJA_STOLEN_ORBS  = 7399, -- Yowl! That was a close call, with those ferrral Carrrdians barrrging in therrre! Of course, I rrran away..for help, I mean..
+        PORE_OHRE_DIALOG         = 7401, -- There are reports of evil Cardians attacking people to steal the Mana Orbs created at this tower. Yikey-wikey, is this job scary!?
+        PORE_OHRE_STOLEN_ORBS    = 7443, -- If you're hearing back to town, then please go tell Minister Apururu at the Manustery about those feral Cardians stealing our Mana Orbs! Thanks, and be careful on your way homey-womey!
+        PLAYER_OBTAINS_ITEM      = 7566, -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM    = 7567, -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM = 7568, -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP     = 7569, -- You already possess that temporary item.
+        NO_COMBINATION           = 7574, -- You were unable to enter a combination.
+        REGIME_REGISTERED        = 9934, -- New training regime registered!
     },
     mob =
     {
@@ -50,7 +54,7 @@ zones[xi.zone.EAST_SARUTABARUTA] =
     },
     npc =
     {
-        CASKET_BASE = 17253005,
+        CASKET_BASE = 17253006,
     },
 }
 

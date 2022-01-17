@@ -24,7 +24,7 @@ entity.onTrigger = function(player, npc)
 
     -----------------------------------
     -- Carbuncle Debacle
-    if (CarbuncleDebacle == QUEST_ACCEPTED and CarbuncleDebacleProgress == 5 and player:hasKeyItem(xi.ki.DAZEBREAKER_CHARM) == true) then
+    if (CarbuncleDebacle == QUEST_ACCEPTED and CarbuncleDebacleProgress == 5 and player:hasKeyItem(xi.ki.DAZE_BREAKER_CHARM) == true) then
         player:startEvent(86) -- get the wind pendulum, lets go to Cloister of Gales
     elseif (CarbuncleDebacle == QUEST_ACCEPTED and CarbuncleDebacleProgress == 6) then
         if (player:hasItem(1174) == false) then

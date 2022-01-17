@@ -18,11 +18,11 @@ require('scripts/settings/main')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------
-local bastokMarketsID = require("scripts/zones/Bastok_Markets/IDs")
-local bastokMinesID   = require("scripts/zones/Bastok_Mines/IDs")
-local metalworksID    = require("scripts/zones/Metalworks/IDs")
-local portBastokID    = require("scripts/zones/Port_Bastok/IDs")
-local quicksandID     = require("scripts/zones/Quicksand_Caves/IDs")
+local bastokMarketsID = require('scripts/zones/Bastok_Markets/IDs')
+local bastokMinesID   = require('scripts/zones/Bastok_Mines/IDs')
+local metalworksID    = require('scripts/zones/Metalworks/IDs')
+local portBastokID    = require('scripts/zones/Port_Bastok/IDs')
+local quicksandID     = require('scripts/zones/Quicksand_Caves/IDs')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_CHAINS_THAT_BIND_US)

@@ -5,7 +5,7 @@
 -- NOTE: xi.mission.id.toau.LAND_OF_SACRED_SERPENTS is set on character creation
 -- !addmission 4 0
 -----------------------------------
-require("scripts/globals/keyitems")
+require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/settings/main')
 require('scripts/globals/interaction/mission')
@@ -26,8 +26,8 @@ mission.sections =
         -- NOTE: I don't know HOW would someone get to Whitegate without the Boarding Permit Key Item, but it's probably for the best to add the additional check.
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId and
-                   xi.settings.ENABLE_TOAU == 1 and
-                   player:hasKeyItem(xi.ki.BOARDING_PERMIT)
+                xi.settings.ENABLE_TOAU == 1 and
+                player:hasKeyItem(xi.ki.BOARDING_PERMIT)
         end,
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =

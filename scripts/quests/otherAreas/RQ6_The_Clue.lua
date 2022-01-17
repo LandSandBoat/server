@@ -7,7 +7,7 @@
 -----------------------------------
 require('scripts/globals/items')
 require('scripts/globals/quests')
-require("scripts/globals/titles")
+require('scripts/globals/titles')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/quest')
 -----------------------------------
@@ -106,8 +106,8 @@ quest.sections =
                     if npcUtil.tradeHasExactly(trade, {{xi.items.CRAWLER_EGG, 4}}) then
                         return quest:progressEvent(92) -- Quest completed.
                     else
-                        local count       = trade:getItemCount()
-                        local crawlerEgg  = trade:hasItemQty(xi.items.CRAWLER_EGG, trade:getItemCount())
+                        local count      = trade:getItemCount()
+                        local crawlerEgg = trade:hasItemQty(xi.items.CRAWLER_EGG, trade:getItemCount())
                         if crawlerEgg == true and count < 4 then
                             return quest:event(93)
                         end
@@ -127,10 +127,11 @@ quest.sections =
         },
     },
 
-    -- Section: Quest completed. Change default message for Take.
+    -- Section: Quest completed. Change default messages for Take and Valgeir.
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED and player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_BASICS) == QUEST_AVAILABLE
+            return status == QUEST_COMPLETED and
+                player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_BASICS) == QUEST_AVAILABLE
         end,
 
         [xi.zone.MHAURA] =

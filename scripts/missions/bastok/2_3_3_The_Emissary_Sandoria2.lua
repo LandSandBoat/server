@@ -16,7 +16,7 @@ require('scripts/globals/titles')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------
-local chateauID = require("scripts/zones/Chateau_dOraguille/IDs")
+local chateauID = require('scripts/zones/Chateau_dOraguille/IDs')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_EMISSARY_SANDORIA2)
@@ -38,7 +38,7 @@ mission.sections =
                     local missionStatus = player:getMissionStatus(mission.areaId)
 
                     if missionStatus == 8 then
-                        mission:progressEvent(503)
+                        return mission:progressEvent(503)
                     elseif missionStatus <= 10 then
                         return mission:messageText(chateauID.text.HALVER_OFFSET + 279)
                     end
@@ -60,7 +60,7 @@ mission.sections =
                 [32001] = function(player, csid, option, npc)
                     if
                         player:getMissionStatus(mission.areaId) == 9 and
-                        player:getLocalVar("battlefieldWin") == 999
+                        player:getLocalVar('battlefieldWin') == 999
                     then
                         npcUtil.giveKeyItem(player, xi.ki.KINDRED_CREST)
                         player:delKeyItem(xi.ki.DARK_KEY)

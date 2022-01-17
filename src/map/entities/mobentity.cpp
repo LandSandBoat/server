@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -564,7 +564,7 @@ void CMobEntity::Spawn()
     // add people to my posse
     if (getMobMod(MOBMOD_ASSIST))
     {
-        for (int8 i = 1; i < getMobMod(MOBMOD_ASSIST) + 1; i++)
+        for (int32 i = 1; i < getMobMod(MOBMOD_ASSIST) + 1; i++)
         {
             CMobEntity* PMob = (CMobEntity*)GetEntity(targid + i, TYPE_MOB);
 

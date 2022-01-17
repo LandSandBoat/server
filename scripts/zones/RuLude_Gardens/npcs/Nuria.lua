@@ -1,10 +1,7 @@
 -----------------------------------
--- Area: Ru'Lud Gardens
+-- Area: Ru'Lude Gardens
 --  NPC: Nuria
 -- Map Marker
--- Working 100%
------------------------------------
-require("scripts/settings/main")
 -----------------------------------
 local entity = {}
 

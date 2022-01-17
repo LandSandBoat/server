@@ -25,6 +25,7 @@ zones[xi.zone.WESTERN_ALTEPA_DESERT] =
         FISHING_MESSAGE_OFFSET     = 7212,  -- You can't fish here.
         DIG_THROW_AWAY             = 7225,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
         FIND_NOTHING               = 7227,  -- You dig and you dig, but find nothing.
+        AMK_DIGGING_OFFSET         = 7293,  -- You spot some familiar footprints. You are convinced that your moogle friend has been digging in the immediate vicinity.
         THE_DOOR_IS_LOCKED         = 7332,  -- The door is locked.
         DOES_NOT_RESPOND           = 7333,  -- It does not respond.
         CANNOT_REMOVE_FRAG         = 7349,  -- It is an oddly shaped stone monument. A shining stone is embedded in it, but cannot be removed...
@@ -35,15 +36,15 @@ zones[xi.zone.WESTERN_ALTEPA_DESERT] =
         FEEL_SOMETHING_PRICKLY     = 7371,  -- You feel something prickly...
         MANY_STONES_LITTER_AREA    = 7372,  -- Many stones litter the area.
         EVIL_LOOMING_ABOVE_YOU     = 7373,  -- You sense something evil looming above you.
-        SENSE_OMINOUS_PRESENCE     = 7412,  -- You sense an ominous presence...
-        SOMETHING_IS_BURIED_HERE   = 7430,  -- It looks like something is buried here. If you had <item> you could dig it up.
-        PLAYER_OBTAINS_ITEM        = 7643,  -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM      = 7644,  -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM   = 7645,  -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP       = 7646,  -- You already possess that temporary item.
-        NO_COMBINATION             = 7651,  -- You were unable to enter a combination.
-        REGIME_REGISTERED          = 9829,  -- New training regime registered!
-        COMMON_SENSE_SURVIVAL      = 11818, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        SENSE_OMINOUS_PRESENCE     = 7405,  -- You sense an ominous presence...
+        SOMETHING_IS_BURIED_HERE   = 7423,  -- It looks like something is buried here. If you had <item> you could dig it up.
+        PLAYER_OBTAINS_ITEM        = 7636,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM      = 7637,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM   = 7638,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP       = 7639,  -- You already possess that temporary item.
+        NO_COMBINATION             = 7644,  -- You were unable to enter a combination.
+        REGIME_REGISTERED          = 9822,  -- New training regime registered!
+        COMMON_SENSE_SURVIVAL      = 11811, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {
@@ -76,19 +77,19 @@ zones[xi.zone.WESTERN_ALTEPA_DESERT] =
     },
     npc =
     {
-        CASKET_BASE       = 17289720,
-        ALTEPA_GATE       = 17289744,
-        PEDDLESTOX        = 17289769,
+        CASKET_BASE       = 17289721,
+        ALTEPA_GATE       = 17289745,
+        PEDDLESTOX        = 17289770,
         BEASTMEN_TREASURE =
         {
-            17289772, -- qm3
-            17289773, -- qm4
-            17289774, -- qm5
-            17289775, -- qm6
-            17289776, -- qm7
-            17289777, -- qm8
-            17289778, -- qm9
-            17289779, -- qm10
+            17289773, -- qm3
+            17289774, -- qm4
+            17289775, -- qm5
+            17289776, -- qm6
+            17289777, -- qm7
+            17289778, -- qm8
+            17289779, -- qm9
+            17289780, -- qm10
         },
     },
 }

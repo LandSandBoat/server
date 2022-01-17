@@ -1,7 +1,5 @@
 -----------------------------------
---
 -- Zone: Windurst_Walls (239)
---
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Walls/IDs")
 require("scripts/globals/conquest")
@@ -28,8 +26,6 @@ zone_object.onZoneIn = function(player, prevZone)
         (player:getCurrentMission(player:getNation()) == xi.mission.id.nation.SHADOW_LORD and player:getMissionStatus(player:getNation()) >= 4))
     then
         cs = 30036
-    elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.MOON_READING and player:getMissionStatus(player:getNation()) == 4 then
-        cs = 443
     end
 
     -- MOG HOUSE EXIT
@@ -63,15 +59,6 @@ end
 zone_object.onEventFinish = function(player, csid, option)
     if csid == 86 then
         player:setPos(0, 0, -22.40, 192, 242)
-    elseif csid == 443 then
-        player:completeMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.MOON_READING)
-        player:setMissionStatus(player:getNation(), 0)
-        player:setRank(10)
-        player:addGil(xi.settings.GIL_RATE*100000)
-        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE*100000)
-        player:addItem(183)
-        player:messageSpecial(ID.text.ITEM_OBTAINED, 183)
-        player:addTitle(xi.title.VESTAL_CHAMBERLAIN)
     elseif csid == 30035 then
         player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.RHAPSODIES_OF_VANADIEL)
         player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.RESONACE)

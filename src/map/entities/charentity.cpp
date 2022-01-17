@@ -141,6 +141,7 @@ CCharEntity::CCharEntity()
     memset(&m_PetCommands, 0, sizeof(m_PetCommands));
     memset(&m_WeaponSkills, 0, sizeof(m_WeaponSkills));
     memset(&m_SetBlueSpells, 0, sizeof(m_SetBlueSpells));
+    memset(&m_FieldChocobo, 0, sizeof(m_FieldChocobo));
     memset(&m_unlockedAttachments, 0, sizeof(m_unlockedAttachments));
 
     memset(&m_questLog, 0, sizeof(m_questLog));
@@ -916,24 +917,14 @@ void CCharEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& acti
                 }
                 if (actionTarget.reaction == REACTION::HIT)
                 {
-                    if (battleutils::GetScaledItemModifier(this, m_Weapons[damslot], Mod::ADDITIONAL_EFFECT))
-                    {
-                        actionTarget_t dummy;
-                        luautils::OnAdditionalEffect(this, PTarget, static_cast<CItemWeapon*>(m_Weapons[damslot]), &dummy, damage);
-                    }
-                    else if (damslot == SLOT_RANGED && m_Weapons[SLOT_AMMO] &&
-                             battleutils::GetScaledItemModifier(this, m_Weapons[damslot], Mod::ADDITIONAL_EFFECT))
-                    {
-                        actionTarget_t dummy;
-                        luautils::OnAdditionalEffect(this, PTarget, static_cast<CItemWeapon*>(getEquip(SLOT_AMMO)), &dummy, damage);
-                    }
-                    int wspoints = 1;
+                    int wspoints = map_config.ws_points_base;
                     if (PWeaponSkill->getPrimarySkillchain() != 0)
                     {
                         // NOTE: GetSkillChainEffect is INSIDE this if statement because it
                         //  ALTERS the state of the resonance, which misses and non-elemental skills should NOT do.
                         SUBEFFECT effect = battleutils::GetSkillChainEffect(PBattleTarget, PWeaponSkill->getPrimarySkillchain(),
                                                                             PWeaponSkill->getSecondarySkillchain(), PWeaponSkill->getTertiarySkillchain());
+                        // See SUBEFFECT enum in battleentity.h
                         if (effect != SUBEFFECT_NONE)
                         {
                             actionTarget.addEffectParam = battleutils::TakeSkillchainDamage(this, PBattleTarget, damage, taChar);
@@ -947,18 +938,18 @@ void CCharEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& acti
                                 actionTarget.addEffectMessage = 287 + effect;
                             }
                             actionTarget.additionalEffect = effect;
-
-                            if (effect >= 7)
+                             // Despite appearances, ws_points_skillchain is not a multiplier it is just an amount "per element"
+                            if (effect >= 7 && effect < 15)
                             {
-                                wspoints += 1;
+                                wspoints += (1 * map_config.ws_points_skillchain); // 1 element
                             }
                             else if (effect >= 3)
                             {
-                                wspoints += 2;
+                                wspoints += (2 * map_config.ws_points_skillchain); // 2 elements
                             }
                             else
                             {
-                                wspoints += 4;
+                                wspoints += (4 * map_config.ws_points_skillchain); // 4 elements
                             }
                         }
                     }
@@ -1005,10 +996,10 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
             // Blood pact MP costs are stored under animation ID
             float mpCost = PAbility->getAnimationID();
             if (StatusEffectContainer->HasStatusEffect(EFFECT_APOGEE))
-            { 
+            {
                 mpCost *= 1.5f;
             }
-            
+
             if (this->health.mp < mpCost)
             {
                 pushPacket(new CMessageBasicPacket(this, PTarget, 0, 0, MSGBASIC_UNABLE_TO_USE_JA));
@@ -1125,7 +1116,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
                         StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_BLOODPACT);
                     }
 
-                    // Blood Boon (does not affect Astra Flow BPs)
+                    // Blood Boon (does not affect Astral Flow BPs)
                     if ((PAbility->getAddType() & ADDTYPE_ASTRAL_FLOW) == 0)
                     {
                         int16 bloodBoonRate = getMod(Mod::BLOOD_BOON);
@@ -1446,11 +1437,11 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
         // or else sleep effect won't work
         // battleutils::HandleRangedAdditionalEffect(this,PTarget,&Action);
         // TODO: move all hard coded additional effect ammo to scripts
-        if ((PAmmo != nullptr && battleutils::GetScaledItemModifier(this, PAmmo, Mod::ADDITIONAL_EFFECT) > 0) ||
-            (PItem != nullptr && battleutils::GetScaledItemModifier(this, PItem, Mod::ADDITIONAL_EFFECT) > 0))
+        if ((PAmmo != nullptr && battleutils::GetScaledItemModifier(this, PAmmo, Mod::ITEM_ADDEFFECT_TYPE) > 0) ||
+            (PItem != nullptr && battleutils::GetScaledItemModifier(this, PItem, Mod::ITEM_ADDEFFECT_TYPE) > 0))
         {
         }
-        luautils::OnAdditionalEffect(this, PTarget, (PAmmo != nullptr ? PAmmo : PItem), &actionTarget, totalDamage);
+        luautils::additionalEffectAttack(this, PTarget, (PAmmo != nullptr ? PAmmo : PItem), &actionTarget, totalDamage);
     }
     else if (shadowsTaken > 0)
     {
@@ -2276,12 +2267,12 @@ void CCharEntity::setLocked(bool locked)
     m_Locked = locked;
     if (locked)
     {
+        // Player and pet enmity are handled in mobcontroler.cpp, CheckLock() fucntion.
+        // Mob casting interruption handled in magic_state.cpp, CMagicState::Update boolean.
         PAI->Disengage();
-        // TODO: clear enmity
         if (PPet)
         {
             PPet->PAI->Disengage();
-            // TODO: clear enmity for pet and make pet retreat to master
         }
         battleutils::RelinquishClaim(this);
     }

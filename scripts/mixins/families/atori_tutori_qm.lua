@@ -22,7 +22,7 @@ g_mixins.atori_tutori_qm = function(atoriMob)
         if mob:getHPP() < mob:getLocalVar("specialThreshold") then
             local ID = zones[mob:getZoneID()]
             mob:messageText(mob, ID.text.YOU_PACKED_MORE_OF_A_PUNCH)
-            MobBuffMove(mob, xi.effect.HUNDRED_FISTS, 1, 0, 30)
+            xi.mobskills.mobBuffMove(mob, xi.effect.HUNDRED_FISTS, 1, 0, 30)
             mob:setLocalVar("specialThreshold", 0)
         end
     end)

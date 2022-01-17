@@ -38,4 +38,4 @@ extern void  set_server_type(void);
 extern void  do_abort(void);
 extern void  do_final(int);
 
-#endif
+#endif // _KERNEL_H_

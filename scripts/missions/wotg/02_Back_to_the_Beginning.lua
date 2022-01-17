@@ -14,12 +14,12 @@
 -- Rolanberry Fields [S]    : !pos -198 8 360 91
 -- Sauromugue Champaign [S] : !pos 369 8 -227 98
 -----------------------------------
-require("scripts/globals/keyitems")
-require("scripts/globals/maws")
-require("scripts/globals/missions")
-require("scripts/settings/main")
-require("scripts/globals/interaction/mission")
-require("scripts/globals/zone")
+require('scripts/globals/keyitems')
+require('scripts/globals/maws')
+require('scripts/globals/missions')
+require('scripts/settings/main')
+require('scripts/globals/interaction/mission')
+require('scripts/globals/zone')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.BACK_TO_THE_BEGINNING)
@@ -30,26 +30,16 @@ mission.reward =
     nextMission = { xi.mission.log_id.WOTG, xi.mission.id.wotg.CAIT_SITH },
 }
 
-local meetsMission2Reqs = function(player)
-    local Q  = xi.quest.id.crystalWar
-    local Q1 = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, Q.CLAWS_OF_THE_GRIFFON) == QUEST_COMPLETED
-    local Q2 = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, Q.THE_TIGRESS_STRIKES)  == QUEST_COMPLETED
-    local Q3 = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, Q.FIRES_OF_DISCONTENT)  == QUEST_COMPLETED
-
-    return Q1 or Q2 or Q3
-end
-
 mission.sections =
 {
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId and
-                   meetsMission2Reqs(player)
+            return currentMission == mission.missionId
         end,
 
         [xi.zone.BATALLIA_DOWNS] =
         {
-            ["Cavernous_Maw"] = mission:progressEvent(501),
+            ['Cavernous_Maw'] = mission:progressEvent(501),
 
             onEventFinish =
             {
@@ -63,7 +53,7 @@ mission.sections =
 
         [xi.zone.ROLANBERRY_FIELDS] =
         {
-            ["Cavernous_Maw"] = mission:progressEvent(501),
+            ['Cavernous_Maw'] = mission:progressEvent(501),
 
             onEventFinish =
             {
@@ -77,7 +67,7 @@ mission.sections =
 
         [xi.zone.SAUROMUGUE_CHAMPAIGN] =
         {
-            ["Cavernous_Maw"] = mission:progressEvent(501),
+            ['Cavernous_Maw'] = mission:progressEvent(501),
 
             onEventFinish =
             {
@@ -91,7 +81,7 @@ mission.sections =
 
         [xi.zone.BATALLIA_DOWNS_S] =
         {
-            ["Cavernous_Maw"] = mission:progressEvent(701),
+            ['Cavernous_Maw'] = mission:progressEvent(701),
 
             onEventFinish =
             {
@@ -105,7 +95,7 @@ mission.sections =
 
         [xi.zone.ROLANBERRY_FIELDS_S] =
         {
-            ["Cavernous_Maw"] = mission:progressEvent(701),
+            ['Cavernous_Maw'] = mission:progressEvent(701),
 
             onEventFinish =
             {
@@ -119,7 +109,7 @@ mission.sections =
 
         [xi.zone.SAUROMUGUE_CHAMPAIGN_S] =
         {
-            ["Cavernous_Maw"] = mission:progressEvent(701),
+            ['Cavernous_Maw'] = mission:progressEvent(701),
 
             onEventFinish =
             {

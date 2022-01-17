@@ -13,16 +13,7 @@ require("scripts/globals/quests")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if
-        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and
-        player:getCharVar("ridingOnTheClouds_3") == 3 and
-        npcUtil.tradeHas(trade, 1127)
-    then
-        player:setCharVar("ridingOnTheClouds_3", 0)
-        npcUtil.giveKeyItem(player, xi.ki.SOMBER_STONE)
-        player:confirmTrade()
-
-    elseif player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.ONLY_THE_BEST) ~= QUEST_AVAILABLE then
+    if player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.ONLY_THE_BEST) ~= QUEST_AVAILABLE then
         if npcUtil.tradeHas(trade, {{4366, 5}}) then -- La Theine Cabbage x5
             player:startEvent(62, 0, 4366)
         elseif npcUtil.tradeHas(trade, {{629, 3}}) then -- Millioncorn x3

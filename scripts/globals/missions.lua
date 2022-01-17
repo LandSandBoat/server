@@ -163,7 +163,7 @@ xi.mission.id =
         THE_SIXTH_MINISTRY            = 18, -- ±
         AWAKENING_OF_THE_GODS         = 19, -- ±
         VAIN                          = 20,
-        THE_JESTER_WHO_D_BE_KING      = 21,
+        THE_JESTER_WHOD_BE_KING       = 21,
         DOLL_OF_THE_DEAD              = 22,
         MOON_READING                  = 23,
         NONE                          = 65535,
@@ -326,23 +326,23 @@ xi.mission.id =
     -----------------------------------
     [xi.mission.area[xi.mission.log_id.WOTG]] =
     {
-        CAVERNOUS_MAWS             = 0, -- ±
-        BACK_TO_THE_BEGINNING      = 1, -- ±
-        CAIT_SITH                  = 2, -- ±
-        THE_QUEEN_OF_THE_DANCE     = 3, -- ±
-        WHILE_THE_CAT_IS_AWAY      = 4, -- ±
-        A_TIMESWEPT_BUTTERFLY      = 5, -- ±
-        PURPLE_THE_NEW_BLACK       = 6, -- ±
-        IN_THE_NAME_OF_THE_FATHER  = 7,
-        DANCERS_IN_DISTRESS        = 8,
-        DAUGHTER_OF_A_KNIGHT       = 9,
-        A_SPOONFUL_OF_SUGAR        = 10,
-        AFFAIRS_OF_STATE           = 11,
-        BORNE_BY_THE_WIND          = 12,
+        CAVERNOUS_MAWS             = 0,  -- ±
+        BACK_TO_THE_BEGINNING      = 1,  -- ±
+        CAIT_SITH                  = 2,  -- ±
+        THE_QUEEN_OF_THE_DANCE     = 3,  -- ±
+        WHILE_THE_CAT_IS_AWAY      = 4,  -- ±
+        A_TIMESWEPT_BUTTERFLY      = 5,  -- ±
+        PURPLE_THE_NEW_BLACK       = 6,  -- ±
+        IN_THE_NAME_OF_THE_FATHER  = 7,  -- ±
+        DANCERS_IN_DISTRESS        = 8,  -- ±
+        DAUGHTER_OF_A_KNIGHT       = 9,  -- ±
+        A_SPOONFUL_OF_SUGAR        = 10, -- ±
+        AFFAIRS_OF_STATE           = 11, -- ±
+        BORNE_BY_THE_WIND          = 12, -- ±
         A_NATION_ON_THE_BRINK      = 13,
-        CROSSROADS_OF_TIME         = 14,
-        SANDSWEPT_MEMORIES         = 15,
-        NORTHLAND_EXPOSURE         = 16,
+        CROSSROADS_OF_TIME         = 14, -- ±
+        SANDSWEPT_MEMORIES         = 15, -- ±
+        NORTHLAND_EXPOSURE         = 16, -- ±
         TRAITOR_IN_THE_MIDST       = 17,
         BETRAYAL_AT_BEAUCEDINE     = 18,
         ON_THIN_ICE                = 19,
@@ -460,25 +460,25 @@ xi.mission.id =
         MEETING_OF_THE_MINDS            = 8,   -- ±
         ARCIELA_APPEARS_AGAIN           = 9,   -- ±
         -- THE_ANCIENT_PACT             =  -- Category
-        BUILDING_PROSPECTS              = 11,
-        THE_LIGHT_SHINING_IN_YOUR_EYES  = 12,
-        THE_HEIRLOOM                    = 13,
-        AN_AIMLESS_JOURNEY              = 14,
-        ORTHARSYNE                      = 15,
-        IN_THE_PRESENCE_OF_ROYALTY      = 16,
-        THE_TWIN_WORLD_TREES            = 17,
-        HONOR_AND_AUDACITY              = 18,
-        THE_WATERGARDEN_COLISEUM        = 19,
-        FRICTION_AND_FISSURES           = 20,
-        THE_CELENNIA_MEMORIAL_LIBRARY   = 21,
-        FOR_WHOM_DO_WE_TOIL             = 23,
-        AIMING_FOR_YGNAS                = 26,
-        CALAMITY_IN_THE_KITCHEN         = 27,
-        ARCIELAS_PROMISE                = 29,
-        PREDATOR_AND_PREY               = 30,
-        BEHIND_THE_SLUICES              = 31,
-        THE_LEAFKIN_MONARCH             = 34,
-        YGGDRASIL                       = 35,
+        BUDDING_PROSPECTS               = 11,  -- ±
+        THE_LIGHT_SHINING_IN_YOUR_EYES  = 12,  -- ±
+        THE_HEIRLOOM                    = 13,  -- ±
+        AN_AIMLESS_JOURNEY              = 14,  -- ±
+        ORTHARSYNE                      = 15,  -- ±
+        IN_THE_PRESENCE_OF_ROYALTY      = 16,  -- ±
+        THE_TWIN_WORLD_TREES            = 17,  -- ±
+        HONOR_AND_AUDACITY              = 18,  -- ±
+        THE_WATERGARDEN_COLISEUM        = 19,  -- ±
+        FRICTION_AND_FISSURES           = 20,  -- ±
+        THE_CELENNIA_MEMORIAL_LIBRARY   = 21,  -- ±
+        FOR_WHOM_DO_WE_TOIL             = 23,  -- ±
+        AIMING_FOR_YGNAS                = 26,  -- ±
+        CALAMITY_IN_THE_KITCHEN         = 27,  -- ±
+        ARCIELAS_PROMISE                = 29,  -- ±
+        PREDATOR_AND_PREY               = 30,  -- ±
+        BEHIND_THE_SLUICES              = 31,  -- ±
+        THE_LEAFKIN_MONARCH             = 34,  -- ±
+        YGGDRASIL                       = 35,  -- ±
         -- SHADOWS_UPON_ADOULIN         =  -- Category
         RETURN_OF_THE_EXORCIST          = 37,
         THE_MERCILESS_ONE               = 38,
@@ -666,72 +666,14 @@ xi.mission.id =
         THE_ORBS_RADIANCE               = 224,
         A_RHAPSODY_FOR_THE_AGES         = 226,
     },
-    [xi.mission.area[xi.mission.log_id.ASSAULT]] = {},
     [xi.mission.area[xi.mission.log_id.CAMPAIGN]] = {},
 }
 
--- Assault and Campaign IDs deliberately left out of mission table
+-- Campaign IDs deliberately left out of mission table
 -- due to their nature not being the same as other missions,
 -- and to allow the content the freedom to develop systems
 -- that are more specifically catered to it.
 
------------------------------------
---  Assault (7)
------------------------------------
---[[
-LEUJAOAM_CLEANSING                = 1 -- ±
-ORICHALCUM_SURVEY                 = 2
-ESCORT_PROFESSOR_CHANOIX          = 3
-SHANARHA_GRASS_CONSERVATION       = 4
-COUNTING_SHEEP                    = 5
-SUPPLIES_RECOVERY                 = 6
-AZURE_EXPERIMENTS                 = 7
-IMPERIAL_CODE                     = 8
-RED_VERSUS_BLUE                   = 9
-BLOODY_RONDO                      = 10
-IMPERIAL_AGENT_RESCUE             = 11
-PREEMPTIVE_STRIKE                 = 12 -- ±
-SAGELORD_ELIMINATION              = 13
-BREAKING_MORALE                   = 14
-THE_DOUBLE_AGENT                  = 15
-IMPERIAL_TREASURE_RETRIEVAL       = 16
-BLITZKRIEG                        = 17
-MARIDS_IN_THE_MIST                = 18
-AZURE_AILMENTS                    = 19
-THE_SUSANOO_SHUFFLE               = 20
-EXCAVATION_DUTY                   = 21 --+
-LEBROS_SUPPLIES                   = 22
-TROLL_FUGITIVES                   = 23 --+
-EVADE_AND_ESCAPE                  = 24
-SIEGEMASTER_ASSASSINATION         = 25
-APKALLU_BREEDING                  = 26
-WAMOURA_FARM_RAID                 = 27
-EGG_CONSERVATION                  = 28
-OPERATION__BLACK_PEARL            = 29
-BETTER_THAN_ONE                   = 30
-SEAGULL_GROUNDED                  = 31
-REQUIEM                           = 32 -- ±
-SAVING_PRIVATE_RYAAF              = 33
-SHOOTING_DOWN_THE_BARON           = 34
-BUILDING_BRIDGES                  = 35
-STOP_THE_BLOODSHED                = 36
-DEFUSE_THE_THREAT                 = 37
-OPERATION__SNAKE_EYES             = 38
-WAKE_THE_PUPPET                   = 39
-THE_PRICE_IS_RIGHT                = 40
-GOLDEN_SALVAGE                    = 41 -- ±
-LAMIA_NO_13                       = 42
-EXTERMINATION                     = 43 -- ±
-DEMOLITION_DUTY                   = 44
-SEARAT_SALVATION                  = 45
-APKALLU_SEIZURE                   = 46
-LOST_AND_FOUND                    = 47
-DESERTER                          = 48
-DESPERATELY_SEEKING_CEPHALOPODS   = 49
-BELLEROPHON_S_BLISS               = 50
-NYZUL_ISLE_INVESTIGATION          = 51
-NYZUL_ISLE_UNCHARTED_AREA_SURVEY  = 52
-]]--
 -----------------------------------
 --  Campaign (8)
 -----------------------------------
@@ -741,7 +683,7 @@ local function rankPointMath(rank)
     return 0.372*rank^2 - 1.62*rank + 6.2
 end
 
-function getMissionRankPoints(player, missionID)
+xi.mission.getMissionRankPoints = function(player, missionID)
     local crystals = 0
 
     if     missionID ==  3 then crystals = 9
@@ -782,7 +724,7 @@ local missionType =
     -- Required Rank             :   1  1  1  2  2  2  2  2  2  2  3  3  3  4  5  5  6  6  7  7  8  8  9  9
     [xi.mission.log_id.SANDORIA] = { 1, 1, 1, 0, 1, 0, 2, 2, 2, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
     [xi.mission.log_id.BASTOK]   = { 2, 0, 1, 0, 1, 0, 2, 2, 2, 2, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-    [xi.mission.log_id.WINDURST] = { 2, 2, 2, 0, 1, 0, 2, 2, 2, 2, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+    [xi.mission.log_id.WINDURST] = { 2, 0, 0, 0, 1, 0, 2, 2, 2, 2, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
 }
 
 local function getRequiredRank(missionId)
@@ -805,7 +747,7 @@ local function getRequiredRank(missionId)
     return requiredRank
 end
 
-function getMissionMask(player)
+xi.mission.getMissionMask = function(player)
     local nation = player:getNation()
     local rank = player:getRank(nation)
 
@@ -824,7 +766,7 @@ function getMissionMask(player)
                 rank > getRequiredRank(missionId) or
                 (
                     rank == getRequiredRank(missionId) and
-                    getMissionRankPoints(player, missionId)
+                    xi.mission.getMissionRankPoints(player, missionId)
                 )
             )
             and
@@ -866,108 +808,35 @@ function getMissionMask(player)
     return missionMask, repeatMission
 end
 
-function getMissionOffset(player, guard, pMission, missionStatus)
-    local offset = 0
-    local cs = 0
-    local params = {0, 0, 0, 0, 0, 0, 0, 0}
-    local nation = player:getNation()
-    local GuardCS = 0
-
-    if (nation == xi.nation.WINDURST) then
-            if (guard == 1) then GuardCS = {127, 136, 150, 154, 160, 473, 177}
-        elseif (guard == 2) then GuardCS = {123, 131, 310, 148, 156, 177, 215}
-        elseif (guard == 3) then GuardCS = {89, 105, 110, 114, 120, 133, 138}
-        elseif (guard == 4) then GuardCS = {99, 107, 112, 116, 122, 127, 134}
-        end
-
-        switch (pMission) : caseof {
-            [1] = function (x) cs = GuardCS[2] end,
-            [2] = function (x) if (missionStatus <= 2) then cs = GuardCS[3] else cs = GuardCS[4] end end,
-            [3] = function (x) cs = GuardCS[5] end,
-            [4] = function (x) cs = GuardCS[6] end,
-            [5] = function (x) cs = GuardCS[7] end,
-        }
-        return cs, params, offset
-    end
+-- Interaction Framework Helper Functions
+local function getVarPrefix(areaId, questId)
+    return string.format("Mission[%d][%d]", areaId, questId)
 end
 
-function finishMissionTimeline(player, guard, csid, option)
-    local nation = player:getNation()
-    local timeline = {}
-    -- To prevent the cs conflict, use the 1st and 2nd for guard and 3/4 for npc
-    -- missionid, {Guard1CS, option}, {Guard2CS, option}, {NPC1 CS, option}, {NPC2 CS, option}, {{function, value}, ...},
-    --  1: player:addMission(nation, mission)
-    --  2: player:messageSpecial(YOU_ACCEPT_THE_MISSION)
-    --  3: player:setCharVar(variablename, value)
-    --  4: player:tradeComplete()
-    --  5: player:addRankPoints(number)
-    --  6: player:setRankPoints(0)
-    --  7: player:addPoint(player:getNation(), number) player:messageSpecial(YOUVE_EARNED_CONQUEST_POINTS)
-    --  8: player:addGil(GIL_RATE*number) player:messageSpecial(GIL_OBTAINED, GIL_RATE*number)
-    --  9: player:delKeyItem(number)
-    -- 10: player:addKeyItem(number) player:messageSpecial(KEYITEM_OBTAINED, number)
-    -- 11: player:setRank(number)
-    -- 12: player:completeMission(nation, mission)
-    -- 13: player:addTitle(number)
-    -- 14: player:setMissionStatus(nation, value)
+xi.mission.addVar = function(player, areaId, questId, name, value)
+    return player:addCharVar(getVarPrefix(areaId, questId) .. name, value)
+end
 
-    if (nation == xi.nation.WINDURST) then
-        local guardlist = {114, 111, 78, 93}
-        if (csid == guardlist[guard] and option ~= 1073741824 and option ~= 31 and option > 0) then -- last part of conditional is for converted missions, increment for each converted
-            timeline = {option, {guardlist[guard], option}, {guardlist[guard], option}, {guardlist[guard], option}, {guardlist[guard], option}, {{1}, {2}}}
-        else
-            timeline =
-            { -- ID    Guard 1      Guard 2      Guard 3     Guard 4        Function List
-                 1,    {132, 1},    {130, 1},   {104, 1},   {106, 1},       {{1}, {2}},                                                 -- MISSION 1-2 [START]
-                 1,    {143, 0},      {0, 0},     {0, 0},     {0, 0},       {{14, 0}, {5, 200}, {12}},                                  -- MISSION 1-2 (Finish (Apururu)) [WITHOUT ORB]
-                 1,    {145, 0},      {0, 0},     {0, 0},     {0, 0},       {{14, 0}, {5, 250}, {12}},                                  -- MISSION 1-2 (Finish (Apururu)) [WITH ORB]
-                 2,    {149, 2},    {135, 2},   {109, 2},   {111, 2},       {{1}, {2}},                                                 -- MISSION 1-3 [START]
-                 2,    {154, 0},    {148, 0},   {114, 0},   {116, 0},       {{11, 2}, {14, 0}, {5, 300}, {8, 1000}, {12}},              -- MISSION 1-3
-                 3,    {168, 0},      {0, 0},     {0, 0},     {0, 0},       {{14, 0}, {5, 350}, {12}},                                  -- MISSION 2-1 (Finish (Tosuka-Porika))
-                 4,    {201, 0},      {0, 0},     {0, 0},     {0, 0},       {{14, 0}, {9, 38}, {5, 400}, {12}},                         -- MISSION 2-2 (Finish (Moreno-Toeno)) (+35 mob killed)
-                 4,    {206, 0},      {0, 0},     {0, 0},     {0, 0},       {{14, 0}, {9, 38}, {5, 400}, {12}},                         -- MISSION 2-2 (Finish (Moreno-Toeno)) (+35 mob killed) [Repeat]
-                 4,    {200, 0},      {0, 0},     {0, 0},     {0, 0},       {{14, 0}, {9, 38}, {5, 250}, {12}},                         -- MISSION 2-2 (Finish (Moreno-Toeno)) (30-34 mob killed)
-                 4,    {209, 0},      {0, 0},     {0, 0},     {0, 0},       {{14, 0}, {9, 38}, {5, 250}, {12}},                         -- MISSION 2-2 (Finish (Moreno-Toeno)) (30-34 mob killed) [Repeat]
-                 5,    {101, 0},      {0, 0},     {0, 0},     {0, 0},       {{10, 35}, {6}, {13, 207}, {8, 3000}, {11, 3}, {9, 29}, {14, 0}, {12}}, -- MISSION 2-3 (Finish (Kupipi))
-                10,      {0, 0},    {114, 0},     {0, 0},     {0, 0},       {{5, 450}, {14, 0}, {12}},                                  -- MISSION 3-1 (Finish (Rhy Epocan))
-                11,    {135, 0},      {0, 0},     {0, 0},     {0, 0},       {{5, 500}, {14, 0}, {12}},                                  -- MISSION 3-2 (Finish (Zubaba))
-                11,    {151, 0},      {0, 0},     {0, 0},     {0, 0},       {{5, 400}, {14, 0}, {12}},                                  -- MISSION 3-2 (Finish (Zubaba)) [Repeat]
-                12,     {40, 0},      {0, 0},     {0, 0},     {0, 0},       {{11, 4}, {9, 30}, {14, 0}, {6}, {8, 5000}, {12}},          -- MISSION 3-3 (Finish (Ambassador's door))
-                15,    {216, 0},      {0, 0},     {0, 0},     {0, 0},       {{11, 6}, {14, 0}, {9, 74}, {8, 20000}, {6}, {12}},         -- MISSION 5-2 (Finish (Star Sibyl))
-                16,      {0, 0},      {0, 0},    {50, 0},     {0, 0},       {{14, 0}, {5, 650}, {0, 0}, {0, 0}, {0, 0}, {12}},          -- MISSION 6-1 (Finish (Zone: Full Moon Fountain))
-                17,      {0, 0},      {0, 0},   {312, 0},     {0, 0},       {{14, 0}, {11, 7}, {8, 40000}, {6}, {0, 0}, {12}},          -- MISSION 6-2 (Finish (Star Sibyl))
-                18,      {0, 0},      {0, 0},   {724, 0},     {0, 0},       {{14, 0}, {5, 700}, {9, 250}, {10, 251}, {0, 0}, {0, 0}, {12}}, -- MISSION 7-1 (Finish (Tosuka-Porika))
-                19,      {0, 0},      {0, 0},   {742, 0},     {0, 0},       {{14, 0}, {11, 8}, {8, 60000}, {6}, {0, 0}, {12}},          -- MISSION 7-2 (Finish (Leepe-Hoppe))
-                20,      {0, 0},      {0, 0},   {758, 0},     {0, 0},       {{14, 0}, {5, 750}, {0, 0}, {0}, {0, 0}, {12}},             -- MISSION 8-1 (Finish (Morno-Toeno))
-                21,      {0, 0},      {0, 0},   {609, 0},     {0, 0},       {{14, 0}, {11, 9}, {8, 80000}, {6}, {0, 0}, {12}},          -- MISSION 8-2 (Finish (Apururu))
-                22,      {0, 0},      {0, 0},    {61, 0},     {0, 0},       {{14, 0}, {5, 800}, {13, 293}, {0}, {0, 0}, {12}},          -- MISSION 9-1 (Finish (Zone: Full Moon Fountain))
-                23,      {0, 0},      {0, 0},   {407, 0},     {0, 0},       {{13, 294}, {11, 10}, {8, 100000}, {6}, {0, 0}, {12}}       -- MISSION 9-2 (Finish (Vestal Chamber))
-            }
-        end
-    end
+xi.mission.getVar = function(player, areaId, questId, name)
+    return player:getVar(getVarPrefix(areaId, questId) .. name)
+end
 
-    for cs = 1, #timeline, 6 do
-        if (csid == timeline[cs + guard][1] and option == timeline[cs + guard][2]) then
-            for nb = 1, #timeline[cs + 5], 1 do
-                local messList = timeline[cs + 5][nb]
+xi.mission.setVar = function(player, areaId, questId, name, value)
+    return player:setVar(getVarPrefix(areaId, questId) .. name, value)
+end
 
-                switch (messList[1]) : caseof {
-                    [1] = function (x) if (messList[2] ~= nil) then player:addMission(nation, messList[2]) else player:addMission(nation, timeline[cs]) end end,
-                    [2] = function (x) player:messageSpecial(zones[player:getZoneID()].text.YOU_ACCEPT_THE_MISSION) end,
-                    [3] = function (x) player:setCharVar(messList[2], messList[3]) end,
-                    [4] = function (x) player:tradeComplete() end,
-                    [5] = function (x) if ((player:getRankPoints() + messList[2]) > 4000) then player:setRankPoints(4000) else player:addRankPoints(messList[2]) end end,
-                    [6] = function (x) player:setRankPoints(0) end,
-                    [7] = function (x) player:addCP(messList[2]) player:messageSpecial(zones[player:getZoneID()].text.YOUVE_EARNED_CONQUEST_POINTS) end,
-                    [8] = function (x) player:addGil(xi.settings.GIL_RATE * messList[2]) player:messageSpecial(zones[player:getZoneID()].text.GIL_OBTAINED, xi.settings.GIL_RATE*messList[2]) end,
-                    [9] = function (x) player:delKeyItem(messList[2]) end,
-                    [10] = function (x) player:addKeyItem(messList[2]) player:messageSpecial(zones[player:getZoneID()].text.KEYITEM_OBTAINED, messList[2]) end,
-                    [11] = function (x) player:setRank(messList[2]) end,
-                    [12] = function (x) player:completeMission(nation, timeline[cs]) end,
-                    [13] = function (x) player:addTitle(messList[2]) end,
-                    [14] = function (x) player:setMissionStatus(nation, messList[2]) end,
-                }
-            end
-        end
-    end
+xi.mission.getLocalVar = function(player, areaId, questId, name)
+    return player:getLocalVar(getVarPrefix(areaId, questId) .. name)
+end
+
+xi.mission.setLocalVar = function(player, areaId, questId, name, value)
+    return player:setLocalVar(getVarPrefix(areaId, questId) .. name, value)
+end
+
+xi.mission.getMustZone = function(player, areaId, questId, name)
+    return player:getLocalVar(getVarPrefix(areaId, questId) .. "mustZone") == 1 and true or false
+end
+
+xi.mission.setMustZone = function(player, areaId, questId, name, value)
+    player:setLocalVar(getVarPrefix(areaId, questId) .. "mustZone", 1)
 end

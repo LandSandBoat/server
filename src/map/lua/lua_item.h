@@ -78,6 +78,9 @@ public:
 
     auto getSignature() -> std::string;
 
+    uint8 getAppraisalID();         // get an appraisal ID
+    void  setAppraisalID(uint8 id); // set an appraisal ID
+
     bool isInstalled();
 
     void setSoulPlateData(std::string name, uint16 mobFamily, uint8 zeni, uint16 skillIndex, uint8 fp);

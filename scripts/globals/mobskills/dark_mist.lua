@@ -9,7 +9,7 @@
 -----------------------------------
 require("scripts/settings/main")
 require("scripts/globals/status")
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 -----------------------------------
 local mobskill_object = {}
 
@@ -25,10 +25,10 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local dmgmod = 1
     local typeEffect = xi.effect.WEIGHT
 
-    local info = MobMagicalMove(mob, target, skill, mob:getWeaponDmg()*4.0, xi.magic.ele.DARK, dmgmod, TP_MAB_BONUS)
-    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.DARK, MOBPARAM_IGNORE_SHADOWS)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg()*4.0, xi.magic.ele.DARK, dmgmod, xi.mobskills.magicalTpBonus.MAB_BONUS)
+    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.DARK, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
     target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.DARK)
-    MobStatusEffectMove(mob, target, typeEffect, 50, 0, 60)
+    xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 50, 0, 60)
 
     return dmg
 end

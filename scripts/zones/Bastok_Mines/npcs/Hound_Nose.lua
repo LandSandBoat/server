@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Bastok Mines
 --  NPC: Hound Nose
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

@@ -5,9 +5,10 @@
 -- Type: Enfeebling
 -- Utsusemi/Blink absorb: Ignores shadows
 -- Range: Melee
--- Notes: When used by the Cemetery Cherry and Jidra, it also deals damage, inflicts Poison, and resets hate. When used by Cernunnos, also drains HP equal to the damage inflicted.
+-- Notes: When used by the Cemetery Cherry and Jidra: it also deals damage, inflicts Poison, and resets hate.
+--        When used by Cernunnos: deals damage, also drains HP equal to the damage inflicted.
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
@@ -18,11 +19,23 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = xi.effect.BIND
+    if mob:getName() == "Cernunnos" then
+        local numhits = 3
+        local accmod = 1
+        local dmgmod = 2.0
+        local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
+        local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, info.hitslanded)
 
-    skill:setMsg(MobStatusEffectMove(mob, target, typeEffect, 1, 0, 30))
+        xi.mobskills.mobPhysicalDrainMove(mob, target, skill, xi.mobskills.drainType.HP, dmg)
 
-    return typeEffect
+        xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill,  xi.effect.BIND, 1, 0, 30)
+
+        return dmg
+    else
+        local typeEffect = xi.effect.BIND
+        skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 1, 0, 30))
+        return typeEffect
+    end
 end
 
 return mobskill_object

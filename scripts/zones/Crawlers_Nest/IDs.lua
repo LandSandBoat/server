@@ -30,6 +30,7 @@ zones[xi.zone.CRAWLERS_NEST] =
         YOU_BURY_THE                  = 7267,  -- You bury the <item> and <item>.
         NOTHING_WILL_HAPPEN_YET       = 7270,  -- It seems that nothing will happen yet.
         NOTHING_SEEMS_TO_HAPPEN       = 7271,  -- Nothing seems to happen.
+        COMBINE_INTO_A_CLUMP          = 7341,  -- You combine the % you have accumulated into a single clump.
         PLAYER_OBTAINS_ITEM           = 7346,  -- <name> obtains <item>!
         UNABLE_TO_OBTAIN_ITEM         = 7347,  -- You were unable to obtain the item.
         PLAYER_OBTAINS_TEMP_ITEM      = 7348,  -- <name> obtains the temporary item: <item>!

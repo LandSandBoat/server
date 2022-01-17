@@ -1,10 +1,11 @@
 -----------------------------------
 -- Full Speed Ahead! Helper
 -----------------------------------
-local ID = require("scripts/zones/Batallia_Downs/IDs")
-require("scripts/globals/status")
-require("scripts/globals/utils")
-require("scripts/globals/zone")
+require('scripts/globals/status')
+require('scripts/globals/utils')
+require('scripts/globals/zone')
+-----------------------------------
+local ID = require('scripts/zones/Batallia_Downs/IDs')
 -----------------------------------
 
 --[[
@@ -64,8 +65,7 @@ xi.full_speed_ahead.tick = function(player, effect)
     local motivation = player:getLocalVar("FSA_Motivation")
     local pep = player:getLocalVar("FSA_Pep")
     local food_byte = player:getLocalVar("FSA_Food")
-    local food_count = player:getLocalVar("FSA_FoodCount")
-    utils.unused(food_count)
+    -- local food_count = player:getLocalVar("FSA_FoodCount")
 
     local food_data = {}
     for i = 0, 7 do

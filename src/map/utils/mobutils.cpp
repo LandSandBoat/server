@@ -428,7 +428,7 @@ namespace mobutils
             sCHR /= 2;
             sVIT /= 2;
         }
-        else if (mLvl < 45 && mLvl > 30)
+        else if (mLvl > 30)
         {
             sSTR /= 3;
             sDEX /= 3;
@@ -604,11 +604,11 @@ namespace mobutils
         JOBTYPE sJob = PMob->GetSJob();
         JOBTYPE job;
 
-        if (grade::GetJobGrade(mJob, 1) > 0) // check if mainjob gives mp
+        if (grade::GetJobGrade(mJob, 1) > 0 || mJob == JOB_NIN) // check if mainjob gives mp or is NIN
         {
             job = mJob;
         }
-        else // if mainjob had no MP, use subjob in switch cases.
+        else // if mainjob had no MP (and isn't NIN), use subjob in switch cases.
         {
             job = sJob;
         }
@@ -640,9 +640,6 @@ namespace mobutils
                 PMob->defaultMobMod(MOBMOD_BUFF_CHANCE, 60);
                 PMob->defaultMobMod(MOBMOD_MAGIC_DELAY, 10);
                 break;
-            case JOB_BLU:
-                PMob->defaultMobMod(MOBMOD_MAGIC_COOL, 35);
-                break;
             case JOB_RDM:
                 PMob->defaultMobMod(MOBMOD_MAGIC_COOL, 35);
                 PMob->defaultMobMod(MOBMOD_GA_CHANCE, 15);
@@ -658,6 +655,18 @@ namespace mobutils
                 PMob->defaultMobMod(MOBMOD_MAGIC_COOL, 35);
                 PMob->defaultMobMod(MOBMOD_BUFF_CHANCE, 20);
                 PMob->defaultMobMod(MOBMOD_MAGIC_DELAY, 7);
+                break;
+            case JOB_BLU:
+                PMob->defaultMobMod(MOBMOD_MAGIC_COOL, 35);
+                break;
+            case JOB_SCH:
+                PMob->defaultMobMod(MOBMOD_MAGIC_COOL, 35);
+                break;
+            case JOB_GEO:
+                PMob->defaultMobMod(MOBMOD_MAGIC_COOL, 35);
+                break;
+            case JOB_RUN:
+                PMob->defaultMobMod(MOBMOD_MAGIC_COOL, 35);
                 break;
             default:
                 break;

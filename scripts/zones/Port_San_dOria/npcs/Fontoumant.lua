@@ -15,47 +15,36 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     local count = trade:getItemCount()
-    if (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM) == QUEST_ACCEPTED) then
-        if (count == 1 and trade:getGil() == 100) then  -- pay to replace package
+    if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM) == QUEST_ACCEPTED then
+        if count == 1 and trade:getGil() == 100 then  -- pay to replace package
             local prog = player:getCharVar("TheBrugaireConsortium-Parcels")
-            if (prog == 10 and player:hasItem(593) == false) then
+            if prog == 10 and player:hasItem(593) == false then
                 player:startEvent(608)
                 player:setCharVar("TheBrugaireConsortium-Parcels", 11)
-            elseif (prog == 20 and player:hasItem(594) == false) then
+            elseif prog == 20 and player:hasItem(594) == false then
                 player:startEvent(609)
                 player:setCharVar("TheBrugaireConsortium-Parcels", 21)
-            elseif (prog == 30 and player:hasItem(595) == false) then
+            elseif prog == 30 and player:hasItem(595) == false then
                 player:startEvent(610)
                 player:setCharVar("TheBrugaireConsortium-Parcels", 31)
             end
         end
     end
-
-    if (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and player:getCharVar("ridingOnTheClouds_1") == 6) then
-        if (trade:hasItemQty(1127, 1) and count == 1) then -- Trade Kindred seal
-            player:setCharVar("ridingOnTheClouds_1", 0)
-            player:tradeComplete()
-            player:addKeyItem(xi.ki.SCOWLING_STONE)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SCOWLING_STONE)
-        end
-    end
-
 end
 
 entity.onTrigger = function(player, npc)
-
     local TheBrugaireConsortium = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM)
 
-    if (TheBrugaireConsortium == QUEST_AVAILABLE) then
+    if TheBrugaireConsortium == QUEST_AVAILABLE then
         player:startEvent(509)
-    elseif (TheBrugaireConsortium == QUEST_ACCEPTED) then
-
+    elseif TheBrugaireConsortium == QUEST_ACCEPTED then
         local prog = player:getCharVar("TheBrugaireConsortium-Parcels")
-        if (prog == 11) then
+
+        if prog == 11 then
             player:startEvent(511)
-        elseif (prog == 21) then
+        elseif prog == 21 then
             player:startEvent(512)
-        elseif (prog == 31) then
+        elseif prog == 31 then
             player:startEvent(515)
         else
             player:startEvent(560)
@@ -65,7 +54,6 @@ entity.onTrigger = function(player, npc)
     else
         player:startEvent(561)
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)
@@ -73,8 +61,8 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     local freeSlots = player:getFreeSlotsCount()
-    if (csid == 509 and option == 0) then
-        if (freeSlots ~= 0) then
+    if csid == 509 and option == 0 then
+        if freeSlots ~= 0 then
             player:addItem(593)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 593)
             player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM)
@@ -82,26 +70,26 @@ entity.onEventFinish = function(player, csid, option)
         else
             player:startEvent(537)
         end
-    elseif (csid == 511) then
-        if (freeSlots ~= 0) then
+    elseif csid == 511 then
+        if freeSlots ~= 0 then
             player:addItem(594)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 594)
             player:setCharVar("TheBrugaireConsortium-Parcels", 20)
         else
             player:startEvent(537)
         end
-    elseif (csid == 512) then
-        if (freeSlots ~= 0) then
+    elseif csid == 512 then
+        if freeSlots ~= 0 then
             player:addItem(595)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 595)
             player:setCharVar("TheBrugaireConsortium-Parcels", 30)
         else
             player:startEvent(537)
         end
-    elseif (csid == 608 or csid == 609 or csid == 610) then
+    elseif csid == 608 or csid == 609 or csid == 610 then
         player:tradeComplete()
-    elseif (csid == 515) then
-        if (freeSlots ~= 0) then
+    elseif csid == 515 then
+        if freeSlots ~= 0 then
             player:addItem(12289)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 12289)
             player:addTitle(xi.title.COURIER_EXTRAORDINAIRE)
@@ -112,7 +100,6 @@ entity.onEventFinish = function(player, csid, option)
             player:startEvent(537)
         end
     end
-
 end
 
 return entity

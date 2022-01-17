@@ -33,23 +33,23 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 11 then
-        local inst = player:getBattlefield():getArea()
+        local battlefield = player:getBattlefield()
+        local inst = battlefield:getArea()
 
-        if inst >= 1 and inst <= 3 then
-            -- players are healed in between fights, but their TP is set to 0
-            player:setHP(player:getMaxHP())
-            player:setMP(player:getMaxMP())
-            player:setTP(0)
-            player:setLocalVar("[OTBF]cs", 2)
+        -- players are healed in between fights, but their TP is set to 0
+        player:setHP(player:getMaxHP())
+        player:setMP(player:getMaxMP())
+        player:setTP(0)
 
-            -- move player to instance
-            if inst == 1 then
-                player:setPos(-779, -103, -80)
-            elseif inst == 2 then
-                player:setPos(-140, -23, -440)
-            elseif inst == 3 then
-                player:setPos(499, 56, -802)
-            end
+        player:setLocalVar("[OTBF]cs", 2)
+
+        -- move player to instance
+        if inst == 1 then
+            player:setPos(-779, -103, -80)
+        elseif inst == 2 then
+            player:setPos(-140, -23, -440)
+        elseif inst == 3 then
+            player:setPos(499, 56, -802)
         end
     end
 end

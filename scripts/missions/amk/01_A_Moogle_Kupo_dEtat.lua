@@ -3,11 +3,11 @@
 -- A Moogle Kupo d'Etat M1
 -- !addmission 10 0
 -----------------------------------
-require("scripts/globals/missions")
-require("scripts/globals/moghouse")
-require("scripts/settings/main")
-require("scripts/globals/interaction/mission")
-require("scripts/globals/zone")
+require('scripts/globals/missions')
+require('scripts/globals/moghouse')
+require('scripts/settings/main')
+require('scripts/globals/interaction/mission')
+require('scripts/globals/zone')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.AMK, xi.mission.id.amk.A_MOOGLE_KUPO_DETAT)
@@ -24,14 +24,14 @@ mission.sections[1] = {} -- REMEMBER: Lua is 1-indexed!
 
 mission.sections[1].check = function(player, currentMission, missionStatus, vars)
     return currentMission == mission.missionId and
-           xi.settings.ENABLE_AMK == 1 and
-           xi.moghouse.isInMogHouseInHomeNation(player) and
-           player:getMainLvl() >= 10
+        xi.settings.ENABLE_AMK == 1 and
+        xi.moghouse.isInMogHouseInHomeNation(player) and
+        player:getMainLvl() >= 10
 end
 
 local moogleTriggerEvent =
 {
-    ["Moogle"] =
+    ['Moogle'] =
     {
         onTrigger = function(player, npc)
             return mission:progressEvent(30023)

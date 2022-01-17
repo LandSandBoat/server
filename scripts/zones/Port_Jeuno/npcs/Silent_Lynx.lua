@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Port Jeuno
 --  NPC: Silent Lynx
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

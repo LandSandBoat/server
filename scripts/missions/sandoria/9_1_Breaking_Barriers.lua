@@ -19,7 +19,7 @@ require('scripts/settings/main')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------
-local batalliaID = require("scripts/zones/Batallia_Downs/IDs")
+local batalliaID = require('scripts/zones/Batallia_Downs/IDs')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.BREAKING_BARRIERS)
@@ -161,7 +161,7 @@ mission.sections =
                         (not fledglingMob:isSpawned() or fledglingMob:isDead())
                     then
                         if mission:getVar(player, 'Prog') > 0 then
-                            player:startEvent(904)
+                            return mission:progressEvent(904)
                         else
                             SpawnMob(batalliaID.mob.SUPARNA)
                             SpawnMob(batalliaID.mob.SUPARNA_FLEDGLING)

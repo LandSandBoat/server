@@ -22,6 +22,13 @@ spell_object.onMobSpawn = function(mob)
     -- On cooldown
     mob:addSimpleGambit(ai.t.SELF, ai.c.ALWAYS, 0,
                         ai.r.JA, ai.s.SPECIFIC, xi.ja.MANTRA)
+
+    mob:addListener("WEAPONSKILL_USE", "MAAT_WEAPONSKILL_USE", function(mobArg, target, wsid, tp, action)
+        if wsid == 3263 then -- Bear Killer
+            --  Heh heh heh
+            xi.trust.message(mobArg, xi.trust.message_offset.SPECIAL_MOVE_1)
+        end
+    end)
 end
 
 spell_object.onMobDespawn = function(mob)

@@ -19,6 +19,7 @@
 ===========================================================================
 */
 
+#include "../../common/filewatcher.h"
 #include "../../common/logging.h"
 #include "../../common/utils.h"
 #include "../../common/version.h"
@@ -87,13 +88,6 @@
 #include "../vana_time.h"
 #include "../weapon_skill.h"
 
-// TODO: Implement FileWatch backend for OSX
-#ifndef __APPLE__
-// TODO: Fix path
-#include "../../ext/filewatch/filewatch/FileWatch.hpp"
-std::unique_ptr<filewatch::FileWatch<std::string>> watch = nullptr;
-#endif // __APPLE__
-
 namespace luautils
 {
     sol::state lua;
@@ -102,6 +96,7 @@ namespace luautils
     bool                                  contentRestrictionEnabled;
     std::unordered_map<std::string, bool> contentEnabledMap;
 
+    std::unique_ptr<Filewatcher>  filewatcher;
     std::mutex                    reloadListBottleneck;
     std::map<std::string, uint64> toReloadList;
     std::vector<std::string>      filteredList;
@@ -222,8 +217,7 @@ namespace luautils
         set_function("GetCachedInstanceScript", &luautils::GetCachedInstanceScript);
 
         // This binding specifically exists to forcefully crash the server.
-        // cppcheck-suppress nullPointer
-        set_function("ForceCrash", [](){ *((unsigned int*)0) = 0xDEAD; });
+        set_function("ForceCrash", [](){ crash(); });
 
         // Register Sol Bindings
         CLuaAbility::Register();
@@ -308,40 +302,39 @@ namespace luautils
         return 0;
     }
 
-// TODO: Implement FileWatch backend for OSX
-#ifndef __APPLE__
     void EnableFilewatcher()
     {
-        // Prepare script file watcher
-        auto watchReaction = [](const std::filesystem::path& path, const filewatch::Event change_type) {
-            // If a Lua file is modified
-            if (path.extension() == ".lua" && change_type == filewatch::Event::modified)
+        // clang-format off
+        filewatcher = std::make_unique<Filewatcher>("scripts",
+            [](const std::filesystem::path& path)
             {
-                TracyZoneScoped;
-                TracyZoneString(path.generic_string());
+                if (path.extension() == ".lua")
+                {
+                    TracyZoneScoped;
+                    TracyZoneString(path.generic_string());
 
-                auto real_path          = "./scripts/" + path.generic_string();
-                auto modified           = std::filesystem::last_write_time(real_path).time_since_epoch().count();
-                auto modified_timestamp = static_cast<uint64>(modified);
-                SafeApplyFunc_ReloadList([&](std::map<std::string, uint64>& list) {
-                    if (list.find(real_path) == list.end())
-                    {
-                        // No entry, make one
-                        list[real_path] = modified_timestamp;
-                    }
-                    else
-                    {
-                        auto last_modified = list.at(real_path);
-                        if (last_modified < modified_timestamp)
+                    auto real_path          = path.generic_string();
+                    auto modified           = std::filesystem::last_write_time(real_path).time_since_epoch().count();
+                    auto modified_timestamp = static_cast<uint64>(modified);
+                    SafeApplyFunc_ReloadList([&](std::map<std::string, uint64>& list) {
+                        if (list.find(real_path) == list.end())
                         {
+                            // No entry, make one
                             list[real_path] = modified_timestamp;
-                            filteredList.emplace_back(real_path);
                         }
-                    }
-                });
-            }
-        };
-        watch = std::make_unique<filewatch::FileWatch<std::string>>("./scripts/", watchReaction);
+                        else
+                        {
+                            auto last_modified = list.at(real_path);
+                            if (last_modified < modified_timestamp)
+                            {
+                                list[real_path] = modified_timestamp;
+                                filteredList.emplace_back(real_path);
+                            }
+                        }
+                    });
+                }
+            });
+        // clang-format on
     }
 
     void ReloadFilewatchList()
@@ -357,17 +350,6 @@ namespace luautils
             filteredList.clear();
         });
     }
-#else
-    void EnableFilewatcher()
-    {
-        // Intentionally blank
-    }
-
-    void ReloadFilewatchList()
-    {
-        // Intentionally blank
-    }
-#endif // __APPLE__
 
     std::vector<std::string> GetQuestAndMissionFilenamesList()
     {
@@ -414,7 +396,7 @@ namespace luautils
         {
             case sol::type::none:
                 [[fallthrough]];
-            case sol::type::nil:
+            case sol::type::lua_nil:
             {
                 return "nil";
             }
@@ -549,26 +531,59 @@ namespace luautils
 
         auto name = (const char*)PSpell->getName();
 
-        if (PSpell->getSpellGroup() == SPELLGROUP_BLUE)
+        std::string switchKey = "";
+        switch (PSpell->getSpellGroup())
         {
-            if (auto cached_func = lua["xi"]["globals"]["spells"]["bluemagic"][name][funcName]; cached_func.valid())
+            case SPELLGROUP_WHITE:
             {
-                return cached_func;
+                switchKey = "white";
             }
+            break;
+            case SPELLGROUP_BLACK:
+            {
+                switchKey = "black";
+            }
+            break;
+            case SPELLGROUP_SONG:
+            {
+                switchKey = "songs";
+            }
+            break;
+            case SPELLGROUP_NINJUTSU:
+            {
+                switchKey = "ninjutsu";
+            }
+            break;
+            case SPELLGROUP_SUMMONING:
+            {
+                switchKey = "summoning";
+            }
+            break;
+            case SPELLGROUP_BLUE:
+            {
+                switchKey = "blue";
+            }
+            break;
+            case SPELLGROUP_GEOMANCY:
+            {
+                switchKey = "geomancy";
+            }
+            break;
+            case SPELLGROUP_TRUST:
+            {
+                switchKey = "trust";
+            }
+            break;
+            default:
+            {
+                ShowError("luautils::getSpellCachedFunction: Spell %s not inside a folder or doesnt have a SpellGroup", name);
+            }
+            break;
         }
-        else if (PSpell->getSpellGroup() == SPELLGROUP_TRUST)
+
+        if (auto cached_func = lua["xi"]["globals"]["spells"][switchKey][name][funcName]; cached_func.valid())
         {
-            if (auto cached_func = lua["xi"]["globals"]["spells"]["trust"][name][funcName]; cached_func.valid())
-            {
-                return cached_func;
-            }
-        }
-        else
-        {
-            if (auto cached_func = lua["xi"]["globals"]["spells"][name][funcName]; cached_func.valid())
-            {
-                return cached_func;
-            }
+            return cached_func;
         }
 
         // Didn't find it
@@ -1255,16 +1270,19 @@ namespace luautils
                 {
                     return true;
                 }
+                break;
             case 1: // Waning (decending)
-                if (phase <= 10 && phase >= 0)
+                if (phase <= 10)
                 {
                     return true;
                 }
+                break;
             case 2: // Waxing (increasing)
-                if (phase >= 0 && phase <= 5)
+                if (phase <= 5)
                 {
                     return true;
                 }
+                break;
         }
 
         return false;
@@ -1859,6 +1877,9 @@ namespace luautils
     {
         TracyZoneScoped;
 
+        EventPrep* previousPrep = PChar->eventPreparation;
+        PChar->eventPreparation = PChar->currentEvent;
+
         auto onEventUpdate = LoadEventScript(PChar, "onEventUpdate");
         if (!onEventUpdate.valid())
         {
@@ -1880,6 +1901,8 @@ namespace luautils
             return -1;
         }
 
+        PChar->eventPreparation = previousPrep;
+
         return func_result.get_type() == sol::type::number ? func_result.get<int32>() : 1;
     }
 
@@ -1891,6 +1914,9 @@ namespace luautils
     int32 OnEventUpdate(CCharEntity* PChar, uint16 eventID, uint32 result)
     {
         TracyZoneScoped;
+
+        EventPrep* previousPrep = PChar->eventPreparation;
+        PChar->eventPreparation = PChar->currentEvent;
 
         auto onEventUpdateFramework = lua["xi"]["globals"]["interaction"]["interaction_global"]["onEventUpdate"];
         auto onEventUpdate = LoadEventScript(PChar, "onEventUpdate");
@@ -1909,12 +1935,17 @@ namespace luautils
             return -1;
         }
 
+        PChar->eventPreparation = previousPrep;
+
         return func_result.get_type() == sol::type::number ? func_result.get<int32>() : 1;
     }
 
     int32 OnEventUpdate(CCharEntity* PChar, std::string const& updateString)
     {
         TracyZoneScoped;
+
+        EventPrep* previousPrep = PChar->eventPreparation;
+        PChar->eventPreparation = PChar->currentEvent;
 
         auto onEventUpdateFramework = lua["xi"]["globals"]["interaction"]["interaction_global"]["onEventUpdate"];
         auto onEventUpdate = LoadEventScript(PChar, "onEventUpdate");
@@ -1933,6 +1964,8 @@ namespace luautils
             return -1;
         }
 
+        PChar->eventPreparation = previousPrep;
+
         return 0;
     }
 
@@ -1945,6 +1978,9 @@ namespace luautils
     int32 OnEventFinish(CCharEntity* PChar, uint16 eventID, uint32 result)
     {
         TracyZoneScoped;
+
+        EventPrep* previousPrep = PChar->eventPreparation;
+        PChar->eventPreparation = PChar->currentEvent;
 
         auto onEventFinishFramework = lua["xi"]["globals"]["interaction"]["interaction_global"]["onEventFinish"];
         auto onEventFinish = LoadEventScript(PChar, "onEventFinish");
@@ -1967,6 +2003,8 @@ namespace luautils
             ShowError("luautils::onEventFinish %s", err.what());
             return -1;
         }
+
+        PChar->eventPreparation = previousPrep;
 
         if (PChar->currentEvent->scriptFile.find("/bcnms/") > 0 && PChar->health.hp <= 0)
         { // for some reason the event doesnt enforce death afterwards
@@ -2036,17 +2074,13 @@ namespace luautils
         return 0;
     }
 
-    int32 OnAdditionalEffect(CBattleEntity* PAttacker, CBattleEntity* PDefender, CItemWeapon* PItem, actionTarget_t* Action, int32 damage)
+    // Used by mobs
+    int32 OnAdditionalEffect(CBattleEntity* PAttacker, CBattleEntity* PDefender, actionTarget_t* Action, int32 damage)
     {
         TracyZoneScoped;
 
         sol::function onAdditionalEffect;
-        if (PAttacker->objtype == TYPE_PC)
-        {
-            auto name          = (const char*)PItem->getName();
-            onAdditionalEffect = lua[sol::create_if_nil]["xi"]["globals"]["items"][name]["onAdditionalEffect"];
-        }
-        else
+        if (PAttacker->objtype == TYPE_MOB)
         {
             auto zone          = (const char*)PAttacker->loc.zone->GetName();
             auto name          = (const char*)PAttacker->GetName();
@@ -2073,7 +2107,8 @@ namespace luautils
         return 0;
     }
 
-    int32 OnSpikesDamage(CBattleEntity* PDefender, CBattleEntity* PAttacker, actionTarget_t* Action, uint32 damage)
+    // Used by mobs
+    int32 OnSpikesDamage(CBattleEntity* PDefender, CBattleEntity* PAttacker, actionTarget_t* Action, int32 damage)
     {
         TracyZoneScoped;
 
@@ -2091,6 +2126,63 @@ namespace luautils
         {
             sol::error err = result;
             ShowError("luautils::onSpikesDamage: %s", err.what());
+            return -1;
+        }
+
+        Action->additionalEffect = (SUBEFFECT)(result.get_type(0) == sol::type::number ? result.get<int32>(0) : 0);
+        Action->addEffectMessage = result.get_type(1) == sol::type::number ? result.get<int32>(1) : 0;
+        Action->addEffectParam   = result.get_type(2) == sol::type::number ? result.get<int32>(2) : 0;
+
+        return 0;
+    }
+
+    // Used by items
+    int32 additionalEffectAttack(CBattleEntity* PAttacker, CBattleEntity* PDefender, CItemWeapon* PItem, actionTarget_t* Action, int32 baseAttackDamage)
+    {
+        TracyZoneScoped;
+
+        sol::function additionalEffectAttack;
+        if (PAttacker->objtype == TYPE_PC)
+        {
+            additionalEffectAttack = lua[sol::create_if_nil]["xi"]["additionalEffect"]["attack"];
+        }
+
+        if (!additionalEffectAttack.valid())
+        {
+            return -1;
+        }
+
+        auto result = additionalEffectAttack(CLuaBaseEntity(PAttacker), CLuaBaseEntity(PDefender), baseAttackDamage, CLuaItem(PItem));
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("luautils::additionalEffectAttack: %s", err.what());
+            return -1;
+        }
+
+        Action->additionalEffect = (SUBEFFECT)(result.get_type(0) == sol::type::number ? result.get<int32>(0) : 0);
+        Action->addEffectMessage = result.get_type(1) == sol::type::number ? result.get<int32>(1) : 0;
+        Action->addEffectParam   = result.get_type(2) == sol::type::number ? result.get<int32>(2) : 0;
+
+        return 0;
+    }
+
+    // future use: migrating items to scripts\globals\additional_effects.lua
+    int32 additionalEffectSpikes(CBattleEntity* PDefender, CBattleEntity* PAttacker, CItemEquipment* PItem, actionTarget_t* Action, int32 baseAttackDamage)
+    {
+        TracyZoneScoped;
+
+        auto additionalEffectSpikes = lua["xi"]["additionalEffect"]["spikes"];
+        if (!additionalEffectSpikes.valid())
+        {
+            return -1;
+        }
+
+        auto result = additionalEffectSpikes(CLuaBaseEntity(PDefender), CLuaBaseEntity(PAttacker), baseAttackDamage, CLuaItem(PItem));
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("luautils::additionalEffectSpikes: %s", err.what());
             return -1;
         }
 
@@ -3298,6 +3390,38 @@ namespace luautils
         return std::make_tuple(dmg, tpHitsLanded, extraHitsLanded);
     }
 
+    uint16 OnMobWeaponSkillPrepare(CBattleEntity* PMob, CBattleEntity* PTarget)
+    {
+        TracyZoneScoped;
+
+        if (PMob == nullptr || PTarget == nullptr)
+        {
+            return 0;
+        }
+
+        sol::function onMobWeaponSkillPrepare = getEntityCachedFunction(PMob, "onMobWeaponSkillPrepare");
+        if (!onMobWeaponSkillPrepare.valid())
+        {
+            return 0;
+        }
+
+        auto result = onMobWeaponSkillPrepare(CLuaBaseEntity(PMob), CLuaBaseEntity(PTarget));
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("luautils::onMobWeaponSkillPrepare: %s", err.what());
+            return 0;
+        }
+
+        uint16 retVal = result.get_type(0) == sol::type::number ? result.get<uint16>(0) : 0;
+        if (retVal > 0)
+        {
+            return static_cast<uint16>(retVal);
+        }
+
+        return 0;
+    }
+
     int32 OnMobWeaponSkill(CBaseEntity* PTarget, CBaseEntity* PMob, CMobSkill* PMobSkill, action_t* action)
     {
         TracyZoneScoped;
@@ -3361,6 +3485,37 @@ namespace luautils
         }
 
         return result.get_type(0) == sol::type::number ? result.get<int32>(0) : -5;
+    }
+
+    CBattleEntity* OnMobSkillTarget(CBattleEntity* PTarget, CBaseEntity* PMob, CMobSkill* PMobSkill)
+    {
+        TracyZoneScoped;
+
+        auto zone = (const char*)PMob->loc.zone->GetName();
+        auto name = (const char*)PMob->GetName();
+
+        auto onMobSkillTarget = lua["xi"]["zones"][zone]["mobs"][name]["onMobSkillTarget"];
+        if (!onMobSkillTarget.valid())
+        {
+            return PTarget;
+        }
+
+        auto result = onMobSkillTarget(CLuaBaseEntity(static_cast<CBaseEntity*>(PTarget)), CLuaBaseEntity(PMob), CLuaMobSkill(PMobSkill));
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("luautils::onMobSkillTarget: %s", err.what());
+            return PTarget;
+        }
+
+        if (result.get_type(0) == sol::type::userdata || result.get_type(0) == sol::type::lua_nil)
+        {
+            CLuaBaseEntity* PEntity = result.get<CLuaBaseEntity*>(0);
+
+            return (PEntity && PEntity->GetBaseEntity()) ? static_cast<CBattleEntity*>(PEntity->GetBaseEntity()) : PTarget;
+        }
+
+        return PTarget;
     }
 
     int32 OnAutomatonAbilityCheck(CBaseEntity* PTarget, CAutomatonEntity* PAutomaton, CMobSkill* PMobSkill)
@@ -3598,7 +3753,7 @@ namespace luautils
         if (!cachedInstanceScript.valid())
         {
             ShowError("luautils::GetCachedInstanceScript: Could not retrieve cache entry for %d", instanceId);
-            return sol::nil;
+            return sol::lua_nil;
         }
 
         return cachedInstanceScript;
@@ -4502,6 +4657,26 @@ namespace luautils
         {
             sol::error err = result;
             ShowError("luautils::onPlayerEmote: %s", err.what());
+            return;
+        }
+    }
+
+    void OnPlayerVolunteer(CCharEntity* PChar, std::string text)
+    {
+        TracyZoneScoped;
+
+        auto onPlayerVolunteer = lua["xi"]["player"]["onPlayerVolunteer"];
+        if (!onPlayerVolunteer.valid())
+        {
+            ShowWarning("luautils::onPlayerVolunteer");
+            return;
+        }
+
+        auto result = onPlayerVolunteer(CLuaBaseEntity(PChar), text);
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("luautils::onPlayerVolunteer: %s", err.what());
             return;
         }
     }

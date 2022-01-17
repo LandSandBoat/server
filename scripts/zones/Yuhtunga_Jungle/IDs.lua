@@ -28,6 +28,7 @@ zones[xi.zone.YUHTUNGA_JUNGLE] =
         FISHING_MESSAGE_OFFSET      = 7554,  -- You can't fish here.
         DIG_THROW_AWAY              = 7567,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
         FIND_NOTHING                = 7569,  -- You dig and you dig, but find nothing.
+        AMK_DIGGING_OFFSET          = 7635,  -- You spot some familiar footprints. You are convinced that your moogle friend has been digging in the immediate vicinity.
         FLOWER_BLOOMING             = 7660,  -- A large flower is blooming.
         FOUND_NOTHING_IN_FLOWER     = 7663,  -- You find nothing inside the flower.
         FEEL_DIZZY                  = 7664,  -- You feel slightly dizzy. You must have breathed in too much of the pollen.
@@ -39,15 +40,15 @@ zones[xi.zone.YUHTUNGA_JUNGLE] =
         ZILART_MONUMENT             = 7684,  -- It is an ancient Zilart monument.
         LOGGING_IS_POSSIBLE_HERE    = 7701,  -- Logging is possible here if you have <item>.
         HARVESTING_IS_POSSIBLE_HERE = 7708,  -- Harvesting is possible here if you have <item>.
-        SOMETHING_IS_BURIED_HERE    = 7769,  -- It looks like something is buried here. If you had <item> you could dig it up.
-        SWARM_APPEARED              = 7842,  -- A swarm has appeared!
-        PLAYER_OBTAINS_ITEM         = 7882,  -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM       = 7883,  -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM    = 7884,  -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP        = 7885,  -- You already possess that temporary item.
-        NO_COMBINATION              = 7890,  -- You were unable to enter a combination.
-        REGIME_REGISTERED           = 10068, -- New training regime registered!
-        COMMON_SENSE_SURVIVAL       = 12062, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        SOMETHING_IS_BURIED_HERE    = 7762,  -- It looks like something is buried here. If you had <item> you could dig it up.
+        SWARM_APPEARED              = 7835,  -- A swarm has appeared!
+        PLAYER_OBTAINS_ITEM         = 7875,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM       = 7876,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM    = 7877,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP        = 7878,  -- You already possess that temporary item.
+        NO_COMBINATION              = 7883,  -- You were unable to enter a combination.
+        REGIME_REGISTERED           = 10061, -- New training regime registered!
+        COMMON_SENSE_SURVIVAL       = 12055, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {
@@ -65,37 +66,37 @@ zones[xi.zone.YUHTUNGA_JUNGLE] =
     },
     npc =
     {
-        CASKET_BASE           = 17281558,
-        BLUE_RAFFLESIA_OFFSET = 17281585,
-        TUNING_OUT_QM         = 17281589, -- qm2 in npc_list
-        OVERSEER_BASE         = 17281599, -- Zorchorevi_RK in npc_list
-        CERMET_HEADSTONE      = 17281624,
-        PEDDLESTOX            = 17281639,
+        CASKET_BASE           = 17281559,
+        BLUE_RAFFLESIA_OFFSET = 17281586,
+        TUNING_OUT_QM         = 17281590, -- qm2 in npc_list
+        OVERSEER_BASE         = 17281600, -- Zorchorevi_RK in npc_list
+        CERMET_HEADSTONE      = 17281625,
+        PEDDLESTOX            = 17281640,
         BEASTMEN_TREASURE     =
         {
-            17281642, -- qm3
-            17281643, -- qm4
-            17281644, -- qm5
-            17281645, -- qm6
-            17281646, -- qm7
-            17281647, -- qm8
-            17281648, -- qm9
-            17281649, -- qm10
+            17281643, -- qm3
+            17281644, -- qm4
+            17281645, -- qm5
+            17281646, -- qm6
+            17281647, -- qm7
+            17281648, -- qm8
+            17281649, -- qm9
+            17281650, -- qm10
         },
         HARVESTING =
         {
-            17281635,
             17281636,
             17281637,
+            17281638,
         },
         LOGGING =
         {
-            17281629,
             17281630,
             17281631,
             17281632,
             17281633,
             17281634,
+            17281635,
         },
     },
 }

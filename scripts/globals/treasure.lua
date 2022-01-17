@@ -29,6 +29,13 @@ local keyType =
     LIVING_KEY    = 4,
 }
 
+local thiefKeyInfo =
+{--  Key                       Item ID                       Success Modifier
+    [keyType.THIEF_TOOLS ] = { xi.items.SET_OF_THIEFS_TOOLS, 0.1  },
+    [keyType.SKELETON_KEY] = { xi.items.SKELETON_KEY,        0.2  },
+    [keyType.LIVING_KEY  ] = { xi.items.LIVING_KEY,          0.15 },
+}
+
 local treasureInfo =
 {
     [xi.treasure.type.CHEST] =
@@ -369,7 +376,7 @@ local treasureInfo =
             {
                 treasureLvl = 53,
                 key = 1055,
-                map = xi.ki.MAP_OF_THE_SEA_SERPENT_GROTTO,
+                map = xi.ki.MAP_OF_SEA_SERPENT_GROTTO,
                 misc =
                 {
                     {
@@ -693,7 +700,7 @@ local treasureInfo =
             {
                 treasureLvl = 43,
                 key = 1056,
-                map = xi.ki.MAP_OF_THE_LABYRINTH_OF_ONZOZO,
+                map = xi.ki.MAP_OF_LABYRINTH_OF_ONZOZO,
                 misc =
                 {
                     {
@@ -900,7 +907,7 @@ local treasureInfo =
             {
                 treasureLvl = 53,
                 key = 1049,
-                map = xi.ki.MAP_OF_THE_TEMPLE_OF_UGGALEPIH,
+                map = xi.ki.MAP_OF_TEMPLE_OF_UGGALEPIH,
                 af =
                 {
                     [xi.job.SMN] = {quest = xi.quest.id.jeuno.BORGHERTZ_S_CALLING_HANDS, reward = 12650}, -- Evoker's Doublet
@@ -1060,7 +1067,7 @@ local treasureInfo =
             {
                 treasureLvl = 53,
                 key = 1059,
-                map = xi.ki.MAP_OF_THE_SEA_SERPENT_GROTTO,
+                map = xi.ki.MAP_OF_SEA_SERPENT_GROTTO,
                 hands = {
                     [xi.job.SMN] = true,
                 },
@@ -1089,7 +1096,7 @@ local treasureInfo =
             {
                 treasureLvl = 53,
                 key = 1060,
-                map = xi.ki.MAP_OF_THE_VELUGANNON_PALACE,
+                map = xi.ki.MAP_OF_VELUGANNON_PALACE,
                 points =
                 {
                     { 101.588,   15.837,  380.587,   1},
@@ -1325,13 +1332,49 @@ end
     7 The chest appears to be locked. If only you had <item>, perhaps you could open it...
 --]]
 
+local function getKeyTraded(player, trade, chestInfo)
+    if npcUtil.tradeHasExactly(trade, chestInfo.key) then
+        return keyType.ZONE_KEY
+    elseif player:getMainJob() == xi.job.THF then
+        for keyValue, keyData in pairs(thiefKeyInfo) do
+            if npcUtil.tradeHasExactly(trade, keyData[1]) then
+                return keyValue
+            end
+        end
+    end
+
+    return nil
+end
+
+local function getLockpickSuccessRate(player, keyTraded, chestInfo)
+    if
+        player:getMainJob() == xi.job.THF and
+        player:getMainLvl() >= chestInfo.treasureLvl - 10
+    then
+        return (player:getMainLvl() / chestInfo.treasureLvl) - 0.50 + thiefKeyInfo[keyTraded][2]
+    end
+
+    return 0
+end
+
+local function handleLockpickFailure(player, npc, messageOffset, failureType)
+    if failureType == 1 then
+        player:messageSpecial(messageOffset + 1, player:getID()) -- "<name> fails to open the chest."
+    elseif failureType == 2 then
+        player:messageSpecial(messageOffset + 2) -- "The chest was trapped!"
+        player:addStatusEffect(xi.effect.WEAKNESS, 1, 0, math.random(300, 10800)) -- 5 minutes to 3 hours
+    else
+        player:messageSpecial(messageOffset + 4) -- "The chest was a mimic!"
+        spawnMimic(player, npc)
+    end
+end
+
 xi.treasure.onTrade = function(player, npc, trade, chestType)
     local zoneId = player:getZoneID()
     local ID = zones[zoneId]
     local msgBase = ID.text.CHEST_UNLOCKED
     local info = treasureInfo[chestType].zone[zoneId]
     local mJob = player:getMainJob()
-    local mLvl = player:getMainLvl()
     local activeHands = player:getCharVar("BorghertzAlreadyActiveWithJob")
     local illusionCooldown  = npc:getLocalVar("illusionCooldown")
 
@@ -1342,17 +1385,7 @@ xi.treasure.onTrade = function(player, npc, trade, chestType)
     player:delStatusEffect(xi.effect.SNEAK)
 
     -- determine type of key traded
-    local keyTraded = nil
-    local isThief = player:getMainJob() == xi.job.THF
-    if npcUtil.tradeHasExactly(trade, info.key) then
-        keyTraded = keyType.ZONE_KEY
-    elseif isThief and npcUtil.tradeHasExactly(trade, 1022) then
-        keyTraded = keyType.THIEF_TOOLS
-    elseif isThief and npcUtil.tradeHasExactly(trade, 1115) then
-        keyTraded = keyType.SKELETON_KEY
-    elseif isThief and npcUtil.tradeHasExactly(trade, 1023) then
-        keyTraded = keyType.LIVING_KEY
-    end
+    local keyTraded = getKeyTraded(player, trade, info)
 
     -- invalid trade: show default locked message
     if not keyTraded then
@@ -1369,74 +1402,47 @@ xi.treasure.onTrade = function(player, npc, trade, chestType)
             return
         end
 
-        -- determine chance of success
-        local success = 0
-        if mJob ~= xi.job.THF or mLvl < (info.treasureLvl - 10) then
-            success = 0
-        elseif keyTraded == keyType.SKELETON_KEY then
-            success = (mLvl / info.treasureLvl) - 0.50 + 0.2
-        elseif keyTraded == keyType.LIVING_KEY then
-            success = (mLvl / info.treasureLvl) - 0.50 + 0.15
-        elseif keyTraded == keyType.THIEF_TOOLS then
-            success = (mLvl / info.treasureLvl) - 0.50 + 0.1
-        end
-
         -- failed lockpick
-        if math.random() > success then
+        if math.random() > getLockpickSuccessRate(player, keyTraded, info) then
             -- take key
             player:confirmTrade()
 
-            -- determine type of failure
-            local failureType = 1
-            if chestType == xi.treasure.type.COFFER then
-                failureType = math.random(3)
-            else
-                failureType = math.random(2)
-            end
-
-            if failureType == 1 then
-                player:messageSpecial(msgBase + 1, player:getID()) -- "<name> fails to open the chest."
-            elseif failureType == 2 then
-                player:messageSpecial(msgBase + 2) -- "The chest was trapped!"
-                player:addStatusEffect(xi.effect.WEAKNESS, 1, 0, math.random(300, 10800)) -- 5 minutes to 3 hours
-            else
-                player:messageSpecial(msgBase + 4) -- "The chest was a mimic!"
-                spawnMimic(player, npc)
-            end
-
+            -- Determine type of failure, Coffers have 3 possibilities, and chests have 2
+            -- Use xi.treasure.type table to establish base value.
+            handleLockpickFailure(player, npc, msgBase, math.random(chestType + 1))
             return
         end
     end
 
-    -- old gauntlets
-    if
-        chestType == xi.treasure.type.COFFER and
-        activeHands > 0 and
-        info.hands and
-        info.hands[activeHands] and
-        not player:hasKeyItem(xi.ki.OLD_GAUNTLETS)
-    then
-        player:messageSpecial(msgBase)
-        npcUtil.giveKeyItem(player, xi.ki.OLD_GAUNTLETS)
-        player:confirmTrade()
-        moveChest(npc, zoneId, chestType)
-        return
-    end
-
-    -- artifact armor
-    if
-        chestType == xi.treasure.type.COFFER and
-        info.af and
-        info.af[mJob] and
-        player:getQuestStatus(xi.quest.log_id.JEUNO, info.af[mJob].quest) >= QUEST_ACCEPTED and
-        not player:hasItem(info.af[mJob].reward)
-    then
-        player:messageSpecial(msgBase)
-        if npcUtil.giveItem(player, info.af[mJob].reward) then
+    if chestType == xi.treasure.type.COFFER then
+        -- old gauntlets
+        if
+            activeHands > 0 and
+            info.hands and
+            info.hands[activeHands] and
+            not player:hasKeyItem(xi.ki.OLD_GAUNTLETS)
+        then
+            player:messageSpecial(msgBase)
+            npcUtil.giveKeyItem(player, xi.ki.OLD_GAUNTLETS)
             player:confirmTrade()
             moveChest(npc, zoneId, chestType)
+            return
         end
-        return
+
+        -- artifact armor
+        if
+            info.af and
+            info.af[mJob] and
+            player:getQuestStatus(xi.quest.log_id.JEUNO, info.af[mJob].quest) >= QUEST_ACCEPTED and
+            not player:hasItem(info.af[mJob].reward)
+        then
+            player:messageSpecial(msgBase)
+            if npcUtil.giveItem(player, info.af[mJob].reward) then
+                player:confirmTrade()
+                moveChest(npc, zoneId, chestType)
+            end
+            return
+        end
     end
 
     -- miscellaneous quests

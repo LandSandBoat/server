@@ -2,8 +2,8 @@
 -- Area: Apollyon SE
 --  Mob: Grave Digger
 -----------------------------------
-require("scripts/globals/limbus")
 local ID = require("scripts/zones/Apollyon/IDs")
+require("scripts/globals/limbus")
 -----------------------------------
 local entity = {}
 

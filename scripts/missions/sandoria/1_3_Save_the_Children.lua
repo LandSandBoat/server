@@ -43,7 +43,7 @@ end
 local handleCompleteEventFinish = function(player, csid, option, npc)
     if not player:hasCompletedMission(mission.areaId, mission.missionId) then
         player:setRank(2)
-        npcUtil.giveCurrency(player, "gil", 1000)
+        npcUtil.giveCurrency(player, 'gil', 1000)
     else
         player:addRankPoints(250)
     end
@@ -156,7 +156,7 @@ mission.sections =
             onEventFinish =
             {
                 [32001] = function(player, csid, option, npc)
-                    if player:getLocalVar("battlefieldWin") == 32 then
+                    if player:getLocalVar('battlefieldWin') == 32 then
                         npcUtil.giveKeyItem(player, xi.ki.ORCISH_HUT_KEY)
                         player:setTitle(xi.title.FODDERCHIEF_FLAYER)
                         player:setMissionStatus(mission.areaId, 3)

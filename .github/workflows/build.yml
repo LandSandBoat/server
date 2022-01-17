@@ -94,6 +94,29 @@ jobs:
         run: |
           cmake --build .
 
+  MacOS_BigSur_11:
+    # https://github.com/actions/virtual-environments/blob/main/images/macos/macos-11-Readme.md
+    runs-on: macos-11
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+      - name: Install Dependencies (Brew)
+        run: |
+          brew install mariadb zeromq zmq
+      - name: Install Dependencies (LuaJIT)
+        run: |
+          git clone https://github.com/LuaJIT/LuaJIT.git
+          cd LuaJIT
+          sudo make install MACOSX_DEPLOYMENT_TARGET=$(sw_vers -productVersion) -j $(sysctl -n hw.physicalcpu)
+          sudo ln -sf luajit-2.1.0-beta3 /usr/local/bin/luajit
+      - name: Configure CMake
+        run: |
+          cmake .
+      - name: Build
+        run: |
+          make -j $(sysctl -n hw.physicalcpu)
+
   Style_Checks:
     runs-on: ubuntu-20.04
     steps:
@@ -103,9 +126,8 @@ jobs:
     - name: Install Dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y software-properties-common clang-format cppcheck luajit-5.1-dev luarocks mariadb-server-10.3 mariadb-client-10.3 libmariadb-dev-compat
+        sudo apt-get install -y software-properties-common clang-format cppcheck luajit-5.1-dev luarocks mariadb-server mariadb-client libmariadb-dev-compat
         luarocks install luacheck --local
-        luarocks install lanes --local
     - id: changed-files
       name: Get Changed Files
       uses: jitterbit/get-changed-files@v1
@@ -121,9 +143,10 @@ jobs:
       run: |
         touch cpp_checks.txt
         for changed_file in ${{ steps.changed-files.outputs.all }}; do
-          if [[ $changed_file == *.cpp ]]
-          then
-            bash tools/ci/cpp.sh ${changed_file} 2>> cpp_checks.txt || true
+          if [[ -f $changed_file ]]; then
+            if [[ $changed_file == *.cpp ]]; then
+              bash tools/ci/cpp.sh ${changed_file} 2>> cpp_checks.txt || true
+            fi
           fi
         done
         cat cpp_checks.txt
@@ -137,9 +160,10 @@ jobs:
       run: |
         touch lua_checks.txt
         for changed_file in ${{ steps.changed-files.outputs.all }}; do
-          if [[ $changed_file == *.lua ]]
-          then
-            bash tools/ci/lua.sh ${changed_file} | grep -v "Total:" >> lua_checks.txt || true
+          if [[ -f $changed_file ]]; then
+            if [[ $changed_file == *.lua ]]; then
+              bash tools/ci/lua.sh ${changed_file} | grep -v "Total:" >> lua_checks.txt || true
+            fi
           fi
         done
         cat lua_checks.txt
@@ -153,9 +177,10 @@ jobs:
       run: |
         touch sql_checks.txt
         for changed_file in ${{ steps.changed-files.outputs.all }}; do
-          if [[ $changed_file == *.sql ]]
-          then
-            bash tools/ci/sql.sh ${changed_file} >> sql_checks.txt || true
+          if [[ -f $changed_file ]]; then
+            if [[ $changed_file == *.sql ]]; then
+              bash tools/ci/sql.sh ${changed_file} >> sql_checks.txt || true
+            fi
           fi
         done
         cat sql_checks.txt
@@ -247,8 +272,6 @@ jobs:
           printf "\nWaiting 90s for servers to fully start up\n"
           sleep 90s
           
-          printf "\nInstalling HeadlessXI\n"
-          pip3 install --upgrade git+https://github.com/zach2good/HeadlessXI.git
           printf "\nPopulating database\n"
           mysql xidb -h 127.0.0.1 -uroot -proot << EOF
           -- Clean out anything already there (just in case)
@@ -281,10 +304,11 @@ jobs:
           VALUES(1, 'GodMode', 1);
           SELECT * FROM char_vars;
           EOF
+
           printf "\nRunning HeadlessXI for 60 seconds\n"
           python3 << EOF
           import time
-          from headlessxi import HXIClient
+          from tools.headlessxi.hxiclient import HXIClient
           hxi_client = HXIClient('admin', 'admin', 'localhost')
           hxi_client.login()
           print('Sleeping 30s')
@@ -293,19 +317,34 @@ jobs:
           EOF
           
           killall screen
-    - name: Check for errors
+    - name: Check for errors and warnings
       if: ${{ success() || failure() }}
       run: |
         cat login-server*.log
         cat map-server*.log
         cat search-server*.log
-        if grep -qi "Error" login-server*.log; then
+
+        if grep -qi "error" login-server*.log; then
             exit -1
         fi
-        if grep -qi "Error" map-server*.log; then
+
+        if grep -qi "error" map-server*.log; then
             exit -1
         fi
-        if grep -qi "Error" search-server*.log; then
+
+        if grep -qi "error" search-server*.log; then
+            exit -1
+        fi
+
+        if grep -qi "warning" login-server*.log; then
+            exit -1
+        fi
+
+        if grep -qi "warning" map-server*.log; then
+            exit -1
+        fi
+
+        if grep -qi "warning" search-server*.log; then
             exit -1
         fi
 
@@ -368,7 +407,7 @@ jobs:
         screen -d -m -S topaz_game ./topaz_game --log map-server-1.log --port 54231
         sleep 2m
         killall screen
-    - name: Check for errors
+    - name: Check for errors and warnings
       if: ${{ success() || failure() }}
       run: |
         cat login-server*.log
@@ -376,18 +415,34 @@ jobs:
         cat map-server-0*.log
         cat map-server-1*.log
 
-        if grep -qi "Error" login-server*.log; then
+        if grep -qi "error" login-server*.log; then
             exit -1
         fi
 
-        if grep -qi "Error" search-server*.log; then
+        if grep -qi "error" search-server*.log; then
             exit -1
         fi
 
-        if grep -qi "Error" map-server-0*.log; then
+        if grep -qi "error" map-server-0*.log; then
             exit -1
         fi
 
-        if grep -qi "Error" map-server-1*.log; then
+        if grep -qi "error" map-server-1*.log; then
+          exit -1
+        fi
+
+        if grep -qi "warning" login-server*.log; then
+            exit -1
+        fi
+
+        if grep -qi "warning" search-server*.log; then
+            exit -1
+        fi
+
+        if grep -qi "warning" map-server-0*.log; then
+            exit -1
+        fi
+
+        if grep -qi "warning" map-server-1*.log; then
           exit -1
         fi

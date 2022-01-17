@@ -20,7 +20,7 @@ CREATE TABLE `status_effects` (
   `id` smallint(5) unsigned NOT NULL,
   `name` varchar(50) NOT NULL,
   `flags` int(8) unsigned NOT NULL DEFAULT 0,
-  `type` smallint(5) unsigned NOT NULL DEFAULT 0,
+  `type` smallint(5) unsigned NOT NULL DEFAULT 0, -- This needs renamed eventually. See struct EffectParams_t in status_effect_container.cpp
   `negative_id` smallint(5) unsigned DEFAULT 0,
   `overwrite` smallint(5) unsigned NOT NULL DEFAULT 0,
   `block_id` smallint(5) unsigned DEFAULT 0,
@@ -29,7 +29,7 @@ CREATE TABLE `status_effects` (
   `min_duration` smallint(5) unsigned NOT NULL DEFAULT 0,
   `sort_key` smallint(5) unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -90,8 +90,8 @@ INSERT INTO `status_effects` VALUES (52,'soul_voice',32,0,0,0,0,0,7,0,0);
 INSERT INTO `status_effects` VALUES (53,'eagle_eye_shot',32,0,0,0,0,0,5,0,0);
 INSERT INTO `status_effects` VALUES (54,'meikyo_shisui',32,0,0,0,0,0,5,0,0);
 INSERT INTO `status_effects` VALUES (55,'astral_flow',32,0,0,0,0,0,5,0,0);
-INSERT INTO `status_effects` VALUES (56,'berserk',41,56,0,0,0,0,1,0,0);
-INSERT INTO `status_effects` VALUES (57,'defender',33,56,0,0,0,0,4,0,0);
+INSERT INTO `status_effects` VALUES (56,'berserk',41,0,0,0,0,0,1,0,0);
+INSERT INTO `status_effects` VALUES (57,'defender',33,0,0,0,0,0,4,0,0);
 INSERT INTO `status_effects` VALUES (58,'aggressor',33,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (59,'focus',41,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (60,'dodge',41,0,0,0,0,0,0,0,0);

@@ -315,7 +315,7 @@ void CLuaBaseEntity::PrintToArea(std::string const& message, sol::object const& 
 
     // see scripts\globals\msg.lua or src\map\packets\chat_message.h for values
     CHAT_MESSAGE_TYPE messageLook  = (arg1 == sol::lua_nil) ? MESSAGE_SYSTEM_1 : arg1.as<CHAT_MESSAGE_TYPE>();
-    uint8             messageRange = (arg2 == sol::lua_nil) ? 0 : arg2.as<CHAT_MESSAGE_TYPE>();
+    uint8             messageRange = (arg2 == sol::lua_nil) ? 0 : arg2.as<uint8>();
     std::string       name         = (arg3 == sol::lua_nil) ? std::string() : arg3.as<std::string>();
 
     if (messageRange == 0) // All zones world wide
@@ -1576,7 +1576,7 @@ bool CLuaBaseEntity::pathThrough(sol::table const& pointsTable, sol::object cons
     std::vector<position_t> points;
 
     // Grab points from array and store in points array
-    for (uint8 i = 1; i < pointsTable.size(); i += 3)
+    for (std::size_t i = 1; i < pointsTable.size(); i += 3)
     {
         points.push_back({ (float)pointsTable[i], (float)pointsTable[i + 1], (float)pointsTable[i + 2], 0, 0 });
     }
@@ -3210,6 +3210,12 @@ bool CLuaBaseEntity::addItem(sol::variadic_args va)
                     PItem->setSignature(EncodeStringSignature((int8*)signature.c_str(), encoded));
                 }
 
+                sol::object appraisalObj = table["appraisal"];
+                if (appraisalObj.get_type() == sol::type::number)
+                {
+                    PItem->setAppraisalID(appraisalObj.as<uint8>());
+                }
+
                 if (PItem->isType(ITEM_EQUIPMENT))
                 {
                     uint16 trial = table.get_or("trial", 0);
@@ -3727,11 +3733,11 @@ auto CLuaBaseEntity::addSoulPlate(std::string const& name, uint16 mobFamily, uin
     {
         // Deduct Blank Plate
         battleutils::RemoveAmmo(PChar);
-        
+
         PChar->pushPacket(new CInventoryFinishPacket());
 
         // Used Soul Plate
-        CItem* PItem = itemutils::GetItem(2477); 
+        CItem* PItem = itemutils::GetItem(2477);
         PItem->setQuantity(1);
         PItem->setSoulPlateData(name, mobFamily, zeni, skillIndex, fp);
         auto SlotID = charutils::AddItem(PChar, LOC_INVENTORY, PItem, true);
@@ -4080,7 +4086,7 @@ void CLuaBaseEntity::clearGearSetMods()
 {
     if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
     {
-        for (uint8 i = 0; i < PChar->m_GearSetMods.size(); ++i)
+        for (std::size_t i = 0; i < PChar->m_GearSetMods.size(); ++i)
         {
             GearSetMod_t gearSetMod = PChar->m_GearSetMods.at(i);
             PChar->delModifier(gearSetMod.modId, gearSetMod.modValue);
@@ -4098,7 +4104,11 @@ void CLuaBaseEntity::clearGearSetMods()
 
 std::optional<CLuaItem> CLuaBaseEntity::getStorageItem(uint8 container, uint8 slotID, uint8 equipID)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowWarning("%s is trying to access their inventory, but is not TYPE_PC, so doesn't have one!", (const char*)m_PBaseEntity->GetName());
+        return std::nullopt;
+    }
 
     CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
 
@@ -5687,7 +5697,7 @@ void CLuaBaseEntity::setRank(uint8 rank)
  *  Example : player:getRankPoints()
  ************************************************************************/
 
-uint32 CLuaBaseEntity::getRankPoints()
+uint16 CLuaBaseEntity::getRankPoints()
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
@@ -5701,13 +5711,13 @@ uint32 CLuaBaseEntity::getRankPoints()
  *  Notes   : Like, when you trade crystals
  ************************************************************************/
 
-void CLuaBaseEntity::addRankPoints(uint32 rankpoints)
+void CLuaBaseEntity::addRankPoints(uint16 rankPoints)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    PChar->profile.rankpoints += rankpoints;
+    PChar->profile.rankpoints = std::min<uint16>(PChar->profile.rankpoints + rankPoints, 4000);
 
     charutils::SaveMissionsList(PChar);
 }
@@ -5719,13 +5729,15 @@ void CLuaBaseEntity::addRankPoints(uint32 rankpoints)
  *  Notes   : player:setRankPoints(0) is called after switching nations
  ************************************************************************/
 
-void CLuaBaseEntity::setRankPoints(uint32 rankpoints)
+void CLuaBaseEntity::setRankPoints(uint16 rankPoints)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    PChar->profile.rankpoints = rankpoints;
+    // NOTE: Any value over 4000 currently causes visual defects in the client; therefore, is
+    // hard-coded here and in the above function to limit values.
+    PChar->profile.rankpoints = std::min<uint16>(rankPoints, 4000);
     charutils::SaveMissionsList(PChar);
 }
 
@@ -10039,7 +10051,7 @@ bool CLuaBaseEntity::delStatusEffectSilent(uint16 StatusID)
     }
 
     auto effect_StatusID = static_cast<EFFECT>(StatusID);
-    return PBattleEntity->StatusEffectContainer->DelStatusEffect(effect_StatusID);
+    return PBattleEntity->StatusEffectContainer->DelStatusEffectSilent(effect_StatusID);
 }
 
 /************************************************************************
@@ -11397,6 +11409,42 @@ uint8 CLuaBaseEntity::getPetElement()
 }
 
 /************************************************************************
+ *  Function: setPet()
+ *  Purpose : Sets Pet outside of DB interaction
+ *  Example : mob:setPet(mobObject)
+ ************************************************************************/
+
+void CLuaBaseEntity::setPet(sol::object const& petObj)
+{
+    if (m_PBaseEntity->objtype == TYPE_NPC)
+    {
+        return;
+    }
+
+    CBattleEntity* PTarget = static_cast<CBattleEntity*>(m_PBaseEntity);
+    CLuaBaseEntity* PLuaBaseEntity = petObj.is<CLuaBaseEntity*>() ? petObj.as<CLuaBaseEntity*>() : nullptr;
+
+    if (PLuaBaseEntity == nullptr)
+    {
+        if (PTarget->PPet)
+        {
+            PTarget->PPet->PMaster = nullptr;
+            PTarget->PPet          = nullptr;
+        }
+        return;
+    }
+
+    CBattleEntity* pet = dynamic_cast<CBattleEntity*>(PLuaBaseEntity->GetBaseEntity());
+    if (pet)
+    {
+        PTarget->PPet = pet;
+        pet->PMaster  = PTarget;
+    }
+
+    return;
+}
+
+/************************************************************************
  *  Function: getMaster()
  *  Purpose : Returns the Entity object for a pet's master
  *  Example : local master = pet:petMaster()
@@ -11488,6 +11536,19 @@ void CLuaBaseEntity::setPetName(uint8 pType, uint16 value, sol::object const& ar
                       value);
         }
     }
+}
+
+void CLuaBaseEntity::registerChocobo(uint32 value)
+{
+    if (m_PBaseEntity == nullptr || m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowWarning("Invalid Entity");
+        return;
+    }
+
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+    PChar->m_FieldChocobo = value;
+    Sql_Query(SqlHandle, "UPDATE char_pet SET field_chocobo = %u WHERE charid = %u;", value, PChar->id);
 }
 
 /************************************************************************
@@ -12321,11 +12382,11 @@ void CLuaBaseEntity::SetMobAbilityEnabled(bool state)
  *  Notes   : Used in Ouryu, Jormungand, Tiamat, etc
  ************************************************************************/
 
-void CLuaBaseEntity::SetMobSkillAttack(int16 value)
+void CLuaBaseEntity::SetMobSkillAttack(int16 listId)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB);
 
-    static_cast<CMobEntity*>(m_PBaseEntity)->setMobMod(MOBMOD_ATTACK_SKILL_LIST, value);
+    static_cast<CMobEntity*>(m_PBaseEntity)->setMobMod(MOBMOD_ATTACK_SKILL_LIST, listId);
 }
 
 /************************************************************************
@@ -12475,7 +12536,7 @@ void CLuaBaseEntity::setRoamFlags(uint16 newRoamFlags)
 
 /************************************************************************
  *  Function: getTarget()
- *  Purpose : Return available targets as a Lua table to the Mob
+ *  Purpose : Return Battle Target entity
  *  Example : mob:getTarget(); pet:getTarget(); if not v:getTarget() then
  *  Notes   :
  ************************************************************************/
@@ -13655,10 +13716,12 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getPet", CLuaBaseEntity::getPet);
     SOL_REGISTER("getPetID", CLuaBaseEntity::getPetID);
     SOL_REGISTER("getPetElement", CLuaBaseEntity::getPetElement);
+    SOL_REGISTER("setPet", CLuaBaseEntity::setPet);
     SOL_REGISTER("getMaster", CLuaBaseEntity::getMaster);
 
     SOL_REGISTER("getPetName", CLuaBaseEntity::getPetName);
     SOL_REGISTER("setPetName", CLuaBaseEntity::setPetName);
+    SOL_REGISTER("registerChocobo", CLuaBaseEntity::registerChocobo);
 
     SOL_REGISTER("getCharmChance", CLuaBaseEntity::getCharmChance);
     SOL_REGISTER("charmPet", CLuaBaseEntity::charmPet);

@@ -12,7 +12,6 @@ require("scripts/globals/utils")
 -----------------------------------
 local entity = {}
 
-
 -----------------------------------
 -- artifact armor upgrade data
 -- [combinationId] = {trade = {afBase, temenosItem, apollyonItem, craftedItem}, abc = ABCsRequired, reward = afPlusOne},
@@ -254,7 +253,7 @@ local abcShop =
 
 local COSMO_READY = 2147483649 -- BITMASK for the purchase
 
-local function getCosmoCleanseTime(player)
+local function getCOSMO_CLEANSETime(player)
     local cosmoWaitTime = player:hasKeyItem(xi.ki.RHAPSODY_IN_MAUVE) and 3600 or 72000
     local lastCosmoTime = player:getCharVar("Cosmo_Cleanse_TIME")
 
@@ -315,7 +314,6 @@ entity.onTrade = function(player, npc, trade)
 
         -- found a match
         if tradedCombo > 0 then
-
             player:confirmTrade()
             player:setCharVar("AFupgrade", tradedCombo)
             player:setCharVar("AFupgradeDay", getVanaMidnight()) -- Current time + Remaining minutes in the hour in seconds (Day Change)
@@ -328,7 +326,10 @@ entity.onTrigger = function(player, npc)
     local wildcatJeuno = player:getCharVar("WildcatJeuno")
 
     -- LURE OF THE WILDCAT
-    if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(wildcatJeuno, 19) then
+    if
+        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and
+        not utils.mask.getBit(wildcatJeuno, 19)
+    then
         player:startEvent(313)
 
     -- DEFAULT DIALOG (menu)
@@ -338,7 +339,7 @@ entity.onTrigger = function(player, npc)
         local arg4 = 0
         local afUpgrade = player:getCharVar("AFupgrade")
         local gil = player:getGil()
-        local hasCosmoCleanse = 0
+        local hasCOSMO_CLEANSE = 0
         local storedABCs = player:getCurrency("ancient_beastcoin")
 
         -- if player is waiting for an upgraded af or relic
@@ -349,16 +350,16 @@ entity.onTrigger = function(player, npc)
             end
         end
 
-        -- calculate cosmocleanse parameters
+        -- calculate COSMO_CLEANSE parameters
         local cosmoTime = 0
 
-        if player:hasKeyItem(xi.ki.COSMOCLEANSE) then
-            hasCosmoCleanse = 1
+        if player:hasKeyItem(xi.ki.COSMO_CLEANSE) then
+            hasCOSMO_CLEANSE = 1
         else
-            cosmoTime = getCosmoCleanseTime(player)
+            cosmoTime = getCOSMO_CLEANSETime(player)
         end
 
-        player:startEvent(310, 3, arg3, arg4, gil, cosmoTime, 1, hasCosmoCleanse, storedABCs)
+        player:startEvent(310, 3, arg3, arg4, gil, cosmoTime, 1, hasCOSMO_CLEANSE, storedABCs)
     end
 end
 
@@ -382,11 +383,11 @@ entity.onEventFinish = function(player, csid, option)
     if csid == 313 then
         player:setCharVar("WildcatJeuno", utils.mask.setBit(player:getCharVar("WildcatJeuno"), 19, true))
 
-    -- purchase cosmocleanse
+    -- purchase COSMO_CLEANSE
     elseif csid == 310 and option == 3 then
-        local cosmoTime = getCosmoCleanseTime(player)
+        local cosmoTime = getCOSMO_CLEANSETime(player)
         if cosmoTime == COSMO_READY and player:delGil(15000) then
-            npcUtil.giveKeyItem(player, xi.ki.COSMOCLEANSE)
+            npcUtil.giveKeyItem(player, xi.ki.COSMO_CLEANSE)
         end
 
     -- purchase item using ancient beastcoins

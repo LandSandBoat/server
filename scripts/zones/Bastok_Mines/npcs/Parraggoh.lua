@@ -3,10 +3,9 @@
 --  NPC: Parraggoh
 -- Finishes Quest: Beauty and the Galka
 -----------------------------------
-require("scripts/globals/quests")
-require("scripts/settings/main")
-require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Bastok_Mines/IDs")
+require("scripts/globals/quests")
+require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
 
@@ -15,20 +14,24 @@ end
 
 entity.onTrigger = function(player, npc)
     local BeautyAndTheGalka = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BEAUTY_AND_THE_GALKA)
-    local theEleventhsHour = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_ELEVENTH_S_HOUR)
 
+    -- Beauty and the Galka
     if player:hasKeyItem(xi.ki.PALBOROUGH_MINES_LOGS) then
         player:startEvent(10)
+
     elseif BeautyAndTheGalka == QUEST_ACCEPTED then
         if math.random(2) == 1 then
             player:startEvent(8)
         else
             player:startEvent(9)
         end
+
     elseif player:getCharVar("BeautyAndTheGalkaDenied") == 1 then
         player:startEvent(7)
+
+    -- The eleventh's hour
     elseif BeautyAndTheGalka == QUEST_COMPLETED then
-        if theEleventhsHour == QUEST_ACCEPTED then
+        if player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_ELEVENTH_S_HOUR) == QUEST_ACCEPTED then
             player:startEvent(46)
         else
             player:startEvent(12)

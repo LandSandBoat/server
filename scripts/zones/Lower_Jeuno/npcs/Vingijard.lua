@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Lower Jeuno
 --  NPC: Vingijard
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS `item_mods_pet` (
  `value` smallint(5) NOT NULL DEFAULT '0',
  `petType` tinyint(3) unsigned NOT NULL DEFAULT '0',
  PRIMARY KEY (`itemId`,`modId`,`petType`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=13 PACK_KEYS=1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=13 PACK_KEYS=1;
 
 -- (Please keep item ID sequential)
 INSERT INTO `item_mods_pet` VALUES (10296,25,3,3);      -- Charivari Earring Automaton: Accuracy+3
@@ -192,6 +192,17 @@ INSERT INTO `item_mods_pet` VALUES (19827,23,80,0);     -- Aymur 99 Pet: Attack+
 INSERT INTO `item_mods_pet` VALUES (19833,28,40,1);     -- Nirvana 99 Avatar: "Magic Atk. Bonus"+40
 INSERT INTO `item_mods_pet` VALUES (19956,23,80,0);     -- Aymur 99 AG Pet: Attack+80
 INSERT INTO `item_mods_pet` VALUES (19962,28,40,1);     -- Nirvana 99 AG Avatar: "Magic Atk. Bonus"+40
+INSERT INTO `item_mods_pet` VALUES (20516,369,4,3);     -- Denouements Automaton: "Refresh"+4
+INSERT INTO `item_mods_pet` VALUES (20516,370,4,3);     -- Denouements Automaton: "Regen"+4
+INSERT INTO `item_mods_pet` VALUES (20535,368,10,3);    -- Ohtas Automaton: "Regain"+10
+INSERT INTO `item_mods_pet` VALUES (20535,369,1,3);     -- Ohtas Automaton: "Refresh"+1
+INSERT INTO `item_mods_pet` VALUES (20536,23,15,3);     -- Tinhaspa Automaton: Attack+15
+INSERT INTO `item_mods_pet` VALUES (20536,24,15,3);     -- Tinhaspa Automaton: Ranged Attack+15
+INSERT INTO `item_mods_pet` VALUES (20536,28,15,3);     -- Tinhaspa Automaton: "Magic Atk. Bonus"+15
+-- INSERT INTO `item_mods_pet` VALUES (20542,0,0,3);    -- Gnafron's Adargas Automaton: Increases maximum HP and MP Increases skill effects
+INSERT INTO `item_mods_pet` VALUES (20549,25,20,3);     -- Rigor Baghnakhs Automaton: Accuracy+20
+INSERT INTO `item_mods_pet` VALUES (20549,26,20,3);     -- Rigor Baghnakhs Automaton: Ranged Accuracy+20
+INSERT INTO `item_mods_pet` VALUES (20549,30,20,3);     -- Rigor Baghnakhs Automaton: Magic Accuracy+20
 INSERT INTO `item_mods_pet` VALUES (20792,23,80,0);     -- Aymur 119 Pet: Attack+80
 INSERT INTO `item_mods_pet` VALUES (20793,23,80,0);     -- Aymur 119 AG Pet: Attack+80
 INSERT INTO `item_mods_pet` VALUES (20822,27,6,0);      -- Anahera Tabar Pet: Enmity +6
@@ -210,9 +221,29 @@ INSERT INTO `item_mods_pet` VALUES (21167,28,120,1);    -- Avatar: "Magic Atk. B
 INSERT INTO `item_mods_pet` VALUES (21167,27,10,1);     -- Avatar: Enmity+10
 INSERT INTO `item_mods_pet` VALUES (21183,28,108,1);    -- Eminent Pole Avatar: "Magic Atk. Bonus"+108
 INSERT INTO `item_mods_pet` VALUES (21361,28,6,0);      -- Esper Stone +1 Pet: "Magic Atk. Bonus"+6
+INSERT INTO `item_mods_pet` VALUES (21504,25,10,3);     -- Arasy Sainti Automaton: Accuracy+10
+INSERT INTO `item_mods_pet` VALUES (21504,30,10,3);     -- Arasy Sainti Automaton: Magic Accuracy+10
+INSERT INTO `item_mods_pet` VALUES (21505,25,15,3);     -- Arasy Sainti +1 Automaton: Accuracy+15
+INSERT INTO `item_mods_pet` VALUES (21505,30,15,3);     -- Arasy Sainti +1 Automaton: Magic Accuracy+15
 INSERT INTO `item_mods_pet` VALUES (21526,25,50,3);     -- Xiucoatl: Automaton: Accuracy+50
 INSERT INTO `item_mods_pet` VALUES (21526,26,50,3);     -- Xiucoatl: Automaton: Ranged Accuracy+50
 INSERT INTO `item_mods_pet` VALUES (21526,30,50,3);     -- Xiucoatl: Automaton: Magic Accuracy+50
+INSERT INTO `item_mods_pet` VALUES (21527,8,20,3);      -- Sakpata's Fists: Automaton: STR+20
+INSERT INTO `item_mods_pet` VALUES (21527,9,20,3);      -- Sakpata's Fists: Automaton: DEX+20
+INSERT INTO `item_mods_pet` VALUES (21527,10,20,3);     -- Sakpata's Fists: Automaton: VIT+20
+INSERT INTO `item_mods_pet` VALUES (21527,11,20,3);     -- Sakpata's Fists: Automaton: AGI+20
+INSERT INTO `item_mods_pet` VALUES (21527,12,20,3);     -- Sakpata's Fists: Automaton: INT+20
+INSERT INTO `item_mods_pet` VALUES (21527,13,20,3);     -- Sakpata's Fists: Automaton: MND+20
+INSERT INTO `item_mods_pet` VALUES (21527,14,20,3);     -- Sakpata's Fists: Automaton: CHR+20
+INSERT INTO `item_mods_pet` VALUES (21527,25,50,3);     -- Sakpata's Fists: Automaton: Accuracy+50
+INSERT INTO `item_mods_pet` VALUES (21527,26,50,3);     -- Sakpata's Fists: Automaton: Ranged Accuracy+50
+INSERT INTO `item_mods_pet` VALUES (21527,30,50,3);     -- Sakpata's Fists: Automaton: Magic Accuracy+50
+INSERT INTO `item_mods_pet` VALUES (21528,25,40,0);     -- Dragon Fangs - Pet: Accuracy+40
+INSERT INTO `item_mods_pet` VALUES (21528,26,40,0);     -- Dragon Fangs - Pet: Ranged Accuracy+40
+INSERT INTO `item_mods_pet` VALUES (21528,30,40,0);     -- Dragon Fangs - Pet: Magic Accuracy+40
+INSERT INTO `item_mods_pet` VALUES (21529,25,40,0);     -- Premium Heart - Pet: Accuracy+40
+INSERT INTO `item_mods_pet` VALUES (21529,26,40,0);     -- Premium Heart - Pet: Ranged Accuracy+40
+INSERT INTO `item_mods_pet` VALUES (21529,30,40,0);     -- Premium Heart - Pet: Magic Accuracy+40
 INSERT INTO `item_mods_pet` VALUES (21715,25,30,0);     -- Monster Axe: Pet: Accuracy+30
 INSERT INTO `item_mods_pet` VALUES (21715,26,30,0);     -- Monster Axe: Pet: Ranged Accuracy+30
 INSERT INTO `item_mods_pet` VALUES (21715,30,30,0);     -- Monster Axe: Pet: Magic Accuracy+30
@@ -298,9 +329,24 @@ INSERT INTO `item_mods_pet` VALUES (23768,30,50,0);     -- Nyame Mail: Pet: Magi
 INSERT INTO `item_mods_pet` VALUES (23775,25,50,0);     -- Nyame Gauntlets: Pet: Accuracy+50
 INSERT INTO `item_mods_pet` VALUES (23775,26,50,0);     -- Nyame Gauntlets: Pet: Ranged Accuracy+50
 INSERT INTO `item_mods_pet` VALUES (23775,30,50,0);     -- Nyame Gauntlets: Pet: Magic Accuracy+50
+INSERT INTO `item_mods_pet` VALUES (23781,25,50,0);     -- Bunzi's Pants: Pet: Acc.+50
+INSERT INTO `item_mods_pet` VALUES (23781,26,50,0);     -- Bunzi's Pants: Pet: Ranged Acc.+50
+INSERT INTO `item_mods_pet` VALUES (23781,30,50,0);     -- Bunzi's Pants: Pet: Magic Acc.+50
 INSERT INTO `item_mods_pet` VALUES (23782,25,50,0);     -- Nyame Flanchard: Pet: Accuracy+50
 INSERT INTO `item_mods_pet` VALUES (23782,26,50,0);     -- Nyame Flanchard: Pet: Ranged Accuracy+50
 INSERT INTO `item_mods_pet` VALUES (23782,30,50,0);     -- Nyame Flanchard: Pet: Magic Accuracy+50
+INSERT INTO `item_mods_pet` VALUES (23784,25,50,0);     -- Gleti's Boots: Pet: Accuracy+50
+INSERT INTO `item_mods_pet` VALUES (23784,26,50,0);     -- Gleti's Boots: Pet: Ranged Accuracy+50
+INSERT INTO `item_mods_pet` VALUES (23784,30,50,0);     -- Gleti's Boots: Pet: Magic Accuracy+50
+-- INSERT INTO `item_mods_pet` VALUES (23784,,1,);      -- Gleti's Boots: Summoned Pet: Lv.+1
+INSERT INTO `item_mods_pet` VALUES (23786,25,50,0);     -- Mpaca's Boots: Pet: Accuracy+50
+INSERT INTO `item_mods_pet` VALUES (23786,26,50,0);     -- Mpaca's Boots: Pet: Ranged Accuracy+50
+INSERT INTO `item_mods_pet` VALUES (23786,30,50,0);     -- Mpaca's Boots: Pet: Magic Accuracy+50
+-- INSERT INTO `item_mods_pet` VALUES (23786,,1,3);     -- Mpaca's Boots: Pet: Automaton: Lv.+1
+INSERT INTO `item_mods_pet` VALUES (23788,25,50,0);     -- Bunzi's Sabots: Pet: Accuracy+50
+INSERT INTO `item_mods_pet` VALUES (23788,26,50,0);     -- Bunzi's Sabots: Pet: Ranged Accuracy+50
+INSERT INTO `item_mods_pet` VALUES (23788,30,50,0);     -- Bunzi's Sabots: Pet: Magic Accuracy+50
+-- INSERT INTO `item_mods_pet` VALUES (23788,,1,1);     -- Bunzi's Sabots: Avatar: Lv.+1
 INSERT INTO `item_mods_pet` VALUES (23789,25,50,0);     -- Nyame Sollerets: Pet: Accuracy+50
 INSERT INTO `item_mods_pet` VALUES (23789,26,50,0);     -- Nyame Sollerets: Pet: Ranged Accuracy+50
 INSERT INTO `item_mods_pet` VALUES (23789,30,50,0);     -- Nyame Sollerets: Pet: Magic Accuracy+50

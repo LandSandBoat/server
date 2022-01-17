@@ -28,7 +28,7 @@ entity.onTrigger = function(player, npc)
         else
             player:startEvent(235) -- IAS start
         end
-    elseif inAStewCS == 4 and player:hasKeyItem(xi.ki.RANPIMONPIS_SPECIAL_STEW) then
+    elseif inAStewCS == 4 and player:hasKeyItem(xi.ki.RANPI_MONPIS_SPECIAL_STEW) then
         player:startEvent(239) -- IAS turn in
     elseif inAStew == QUEST_ACCEPTED then
         player:startEvent(236) -- reminder dialog
@@ -69,7 +69,7 @@ entity.onEventFinish = function(player, csid, option)
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.IN_A_STEW)
         player:setCharVar("IASvar", 1)
     elseif csid == 239 and npcUtil.completeQuest(player, WINDURST, xi.quest.id.windurst.IN_A_STEW, {fame=50, gil=900, var="IASvar"}) then
-        player:delKeyItem(xi.ki.RANPIMONPIS_SPECIAL_STEW)
+        player:delKeyItem(xi.ki.RANPI_MONPIS_SPECIAL_STEW)
     elseif csid == 234 and option == 1 then -- start repeat
         player:setCharVar("IASvar", 3)
     end

@@ -9,8 +9,8 @@ require("scripts/globals/ephemeral")
 local entity = {}
 
 local triggerEvent = 617
-local tradeEvent = 618
-local failEvent = 619
+local tradeEvent   = 618
+local failEvent    = 619
 
 entity.onTrade = function(player, npc, trade)
     xi.ephemeral.onTrade(player, trade, tradeEvent, failEvent)

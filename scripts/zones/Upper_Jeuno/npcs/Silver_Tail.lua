@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Upper Jeuno
 --  NPC: Silver Tail
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

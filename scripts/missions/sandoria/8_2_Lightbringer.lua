@@ -24,8 +24,8 @@ require('scripts/settings/main')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------
-local chateauID   = require("scripts/zones/Chateau_dOraguille/IDs")
-local uggalepihID = require("scripts/zones/Temple_of_Uggalepih/IDs")
+local chateauID   = require('scripts/zones/Chateau_dOraguille/IDs')
+local uggalepihID = require('scripts/zones/Temple_of_Uggalepih/IDs')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.LIGHTBRINGER)
@@ -184,7 +184,7 @@ mission.sections =
                         (not nioHum:isSpawned() or nioHum:isDead())
                     then
                         if mission:getVar(player, 'Prog') > 0 then
-                            player:startEvent(65)
+                            return mission:progressEvent(65)
                         else
                             SpawnMob(uggalepihID.mob.NIO_A)
                             SpawnMob(uggalepihID.mob.NIO_HUM)

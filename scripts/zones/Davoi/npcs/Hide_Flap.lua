@@ -31,9 +31,9 @@ entity.onTrigger = function(player, npc)
         end
 
     -- THE FIRST MEETING
-    elseif offset == 1 and player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_FIRST_MEETING) == QUEST_ACCEPTED and not player:hasKeyItem(xi.ki.SANDORIAN_MARTIAL_ARTS_SCROLL) then
+    elseif offset == 1 and player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_FIRST_MEETING) == QUEST_ACCEPTED and not player:hasKeyItem(xi.ki.SAN_DORIAN_MARTIAL_ARTS_SCROLL) then
         if player:getCharVar("theFirstMeetingKilledNM") >= 2 then
-            npcUtil.giveKeyItem(player, xi.ki.SANDORIAN_MARTIAL_ARTS_SCROLL)
+            npcUtil.giveKeyItem(player, xi.ki.SAN_DORIAN_MARTIAL_ARTS_SCROLL)
             player:setCharVar("theFirstMeetingKilledNM", 0)
         elseif not GetMobByID(ID.mob.BILOPDOP):isSpawned() and not GetMobByID(ID.mob.DELOKNOK):isSpawned() then
             SpawnMob(ID.mob.BILOPDOP):updateClaim(player)

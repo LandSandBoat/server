@@ -4,14 +4,14 @@
 -- Log ID: 3, Quest ID: 91
 -- Faursel : !pos 37.985 3.118 -45.208 245
 -----------------------------------
-require("scripts/globals/items")
-require("scripts/globals/keyitems")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/settings/main")
-require("scripts/globals/teleports")
-require("scripts/globals/zone")
-require("scripts/globals/interaction/quest")
+require('scripts/globals/items')
+require('scripts/globals/keyitems')
+require('scripts/globals/npc_util')
+require('scripts/globals/quests')
+require('scripts/settings/main')
+require('scripts/globals/teleports')
+require('scripts/globals/zone')
+require('scripts/globals/interaction/quest')
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_ROAD_TO_AHT_URHGAN)
@@ -94,9 +94,9 @@ local function handleSelectionEventFinish(player, csid, option, npc)
         option == 1 and
         player:getCurrentMission(xi.mission.log_id.ROV) == xi.mission.id.rov.INESCAPABLE_BINDS
     then
-        quest:complete(player)
-        npcUtil.giveKeyItem(player, xi.ki.BOARDING_PERMIT)
-
+        if quest:complete(player) then
+            npcUtil.giveKeyItem(player, xi.ki.BOARDING_PERMIT)
+        end
     -- Let me think about it.
     elseif option == 2 then
         quest:setVar(player, 'Prog', 1)
@@ -213,6 +213,7 @@ quest.sections =
                 end,
 
                 [10069] = function(player, csid, option, npc)
+                    player:confirmTrade()
                     quest:setMustZone(player)
                     quest:setVar(player, 'Prog', 3)
                     quest:setVar(player, 'Timer', VanadielUniqueDay() + 1)
@@ -220,7 +221,6 @@ quest.sections =
 
                 [10070] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:confirmTrade()
                         npcUtil.giveKeyItem(player, xi.ki.BOARDING_PERMIT)
                     end
                 end,
@@ -233,7 +233,7 @@ quest.sections =
             {
                 function(player)
                     -- Player won't see these messages due to teleporting at the
-                    -- end of the cutscene if awarded then.  Display after they zone in.
+                    -- end of the cutscene if awarded then. Display after they zone in.
                     -- NOTE: Prog value of 4 is set immediately before teleporting the player.
                     if
                         quest:getVar(player, 'Prog') == 4

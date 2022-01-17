@@ -3,7 +3,7 @@
 -----------------------------------
 require("scripts/settings/main")
 require("scripts/globals/status")
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/globals/magic")
 -----------------------------------
 local ability_object = {}
@@ -14,11 +14,11 @@ end
 
 ability_object.onPetAbility = function(target, pet, skill)
     local dmg = 10 + pet:getMainLvl() * 2
-    local resist = applyPlayerResistance(pet, -1, target, 0, xi.skill.ELEMENTAL_MAGIC, xi.magic.ele.DARK)
+    local resist = xi.mobskills.applyPlayerResistance(pet, -1, target, 0, xi.skill.ELEMENTAL_MAGIC, xi.magic.ele.DARK)
     local duration = 120
 
     dmg = dmg*resist
-    dmg = mobAddBonuses(pet, target, dmg, xi.magic.ele.DARK)
+    dmg = xi.mobskills.mobAddBonuses(pet, target, dmg, xi.magic.ele.DARK)
 
     -- TODO: spell is nil here
     --dmg = finalMagicAdjustments(pet, target, spell, dmg)

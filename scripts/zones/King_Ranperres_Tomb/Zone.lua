@@ -36,7 +36,7 @@ end
 
 zone_object.onRegionEnter = function(player, region)
     if region:GetRegionID() == 1 then
-        player:startEvent(9)
+        player:startCutscene(9)
     end
 end
 

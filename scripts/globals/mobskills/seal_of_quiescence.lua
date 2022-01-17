@@ -1,7 +1,7 @@
 -----------------------------------
 -- Seal of Quiescence
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 local ID = require("scripts/zones/Empyreal_Paradox/IDs")
@@ -18,7 +18,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local power = 30
     local duration = 75
 
-    skill:setMsg(MobStatusEffectMove(mob, target, typeEffect, power, 0, duration))
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, power, 0, duration))
 
     return typeEffect
 end

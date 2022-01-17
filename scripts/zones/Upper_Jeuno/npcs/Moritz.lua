@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Upper Jeuno
 --  NPC: Moritz
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

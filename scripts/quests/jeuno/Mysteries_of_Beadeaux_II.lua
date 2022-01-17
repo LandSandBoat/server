@@ -4,11 +4,11 @@
 -- Log ID: 3, Quest ID: 32
 -- Sattal-Mansal : !pos 40 3 -53 245
 -----------------------------------
-require("scripts/globals/items")
-require("scripts/globals/keyitems")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/zone")
+require('scripts/globals/items')
+require('scripts/globals/keyitems')
+require('scripts/globals/npc_util')
+require('scripts/globals/quests')
+require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------
 

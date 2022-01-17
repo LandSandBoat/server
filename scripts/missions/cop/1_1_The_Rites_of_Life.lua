@@ -113,8 +113,9 @@ mission.sections =
                 end,
 
                 [207] = function(player, csid, option, npc)
-                    player:setMissionStatus(xi.mission.log_id.COP, 0)
-                    mission:complete(player)
+                    if mission:complete(player) then
+                        player:setMissionStatus(xi.mission.log_id.COP, 0)
+                    end
                 end,
             },
         },

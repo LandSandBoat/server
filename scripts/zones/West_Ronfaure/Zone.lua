@@ -1,7 +1,5 @@
 -----------------------------------
---
 -- Zone: West_Ronfaure (100)
---
 -----------------------------------
 local ID = require("scripts/zones/West_Ronfaure/IDs")
 require("scripts/quests/i_can_hear_a_rainbow")
@@ -28,8 +26,6 @@ zone_object.onZoneIn = function(player, prevZone)
 
     if quests.rainbow.onZoneIn(player) then
         cs = 51
-    elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.VAIN and player:getMissionStatus(player:getNation()) == 1 then
-        cs = 53
     end
 
     return cs
@@ -45,8 +41,6 @@ end
 zone_object.onEventUpdate = function(player, csid, option)
     if csid == 51 then
         quests.rainbow.onEventUpdate(player)
-    elseif csid == 53 then
-        player:updateEvent(0, 0, 0, 0, 0, 5)
     end
 end
 

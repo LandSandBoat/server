@@ -94,7 +94,6 @@ xi.settings =
     DARK_POWER      = 1.000, -- Multiplies amount drained by Dark Magic.
     ITEM_POWER      = 1.000, -- Multiplies the effect of items such as Potions and Ethers.
     WEAPON_SKILL_POWER  = 1.000, -- Multiplies damage dealt by Weapon Skills.
-    WEAPON_SKILL_POINTS = 1.000, -- Multiplies points earned during weapon unlocking. (Not Implemented)
     USE_ADOULIN_WEAPON_SKILL_CHANGES = true, -- true/false. Change to toggle new Adoulin weapon skill damage calculations
 
     -- TRUSTS
@@ -148,6 +147,7 @@ xi.settings =
     OLDSCHOOL_G1    = false, -- Set to true to require farming Exoray Mold, Bombd Coal, and Ancient Papyrus drops instead of allowing key item method.
     OLDSCHOOL_G2    = false, -- Set true to require the NMs for "Atop the Highest Mountains" be dead to get KI like before SE changed it.
     FRIGICITE_TIME  = 30,    -- When OLDSCHOOL_G2 is enabled, this is the time (in seconds) you have from killing Boreal NMs to click the "???" target.
+    ASSAULT_MINIMUM = 1,     -- Minimum amount of people needed to start an assault mission. TOAU era is 3, Default is 1.
 
     -- SPELL SPECIFIC SETTINGS
     DIA_OVERWRITE                   = 1,     -- Set to 1 to allow Bio to overwrite same tier Dia.  Default is 1.
@@ -167,6 +167,10 @@ xi.settings =
     EXPLORER_MOOGLE_LV              = 10, -- Enables Explorer Moogle teleports and sets required level. Zero to disable.
     HALLOWEEN_2005                  = 0,  -- Set to 1 to Enable the 2005 version of Harvest Festival, will start on Oct. 20 and end Nov. 1.
     HALLOWEEN_YEAR_ROUND            = 0,  -- Set to 1 to have Harvest Festival initialize outside of normal times.
+
+    -- Login Campaign (Set to 0 if you don't want to run a Login Campaign)
+    -- Please visit scripts/globals/events/login_campaign.lua for assigning the correct campaign dates.
+    ENABLE_LOGIN_CAMPAIGN = 0,
 
     -- MISC
     RIVERNE_PORTERS              = 120,  -- Time in seconds that Unstable Displacements in Cape Riverne stay open after trading a scale.

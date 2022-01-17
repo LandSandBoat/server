@@ -9,7 +9,7 @@
 -- Notes: If Orcus uses this, it gains an aura which inflicts Weight & Defense Down to targets in range.
 -- Shell lowers the damage of this, and items like Jelly Ring can get you killed.
 -----------------------------------
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/magic")
@@ -32,10 +32,10 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
         baseDamage = currentHP
     end
 
-    -- Because shell matters, but we don't want to calculate damage normally via MobMagicalMove since this is a % attack
+    -- Because shell matters, but we don't want to calculate damage normally via xi.mobskills.mobMagicalMove since this is a % attack
     local damage = baseDamage * getElementalDamageReduction(target, xi.magic.ele.WIND)
     -- we still need final adjustments to handle stoneskin etc though
-    damage = MobFinalAdjustments(damage, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.WIND, MOBPARAM_WIPE_SHADOWS)
+    damage = xi.mobskills.mobFinalAdjustments(damage, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.WIND, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
 
     target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.WIND)
     mob:resetEnmity(target)

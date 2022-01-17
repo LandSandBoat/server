@@ -131,7 +131,7 @@ quest.sections =
             onEventFinish =
             {
                 [980] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.RANPIMONPI_SPECIALTY)
+                    npcUtil.giveKeyItem(player, xi.ki.RANPI_MONPI_SPECIALTY)
                     quest:setVar(player, 'Prog', 4)
                     quest:setVar(player, "Timer", 0)
                 end,
@@ -152,23 +152,11 @@ quest.sections =
             onEventFinish =
             {
                 [118] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.RANPIMONPI_SPECIALTY)
+                    player:delKeyItem(xi.ki.RANPI_MONPI_SPECIALTY)
                     npcUtil.giveKeyItem(player, xi.ki.CULINARY_KNIFE)
                     quest:setVar(player, 'Prog', 5)
                 end,
             },
-        },
-    },
-
-    -- New default text for Ranpi
-    {
-        check = function(player, status, vars)
-            return vars.Prog == 5 or status == QUEST_COMPLETED
-        end,
-
-        [xi.zone.WINDURST_WATERS_S] =
-        {
-            ['Ranpi-Monpi'] = quest:event(120):replaceDefault(),
         },
     },
 
@@ -190,6 +178,18 @@ quest.sections =
                     end
                 end,
             },
+        },
+    },
+
+    -- New default text for Ranpi
+    {
+        check = function(player, status, vars)
+            return status == QUEST_COMPLETED or vars.Prog == 5
+        end,
+
+        [xi.zone.WINDURST_WATERS_S] =
+        {
+            ['Ranpi-Monpi'] = quest:event(120):replaceDefault(),
         },
     },
 }

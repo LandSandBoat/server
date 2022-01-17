@@ -43,16 +43,6 @@ battlefield_object.onEventUpdate = function(player, csid, option)
 end
 
 battlefield_object.onEventFinish = function(player, csid, option)
-    if csid == 32001 then
-        if
-            player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_THREE_KINGDOMS_SANDORIA2 and
-            player:getMissionStatus(player:getNation()) == 9
-        then
-            npcUtil.giveKeyItem(player, xi.ki.KINDRED_CREST)
-            player:delKeyItem(xi.ki.DARK_KEY)
-            player:setMissionStatus(player:getNation(), 10)
-        end
-    end
 end
 
 return battlefield_object

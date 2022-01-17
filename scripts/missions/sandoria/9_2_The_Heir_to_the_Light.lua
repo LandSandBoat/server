@@ -17,6 +17,7 @@ require('scripts/settings/main')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/titles')
 require('scripts/globals/zone')
+local chateauID = require("scripts/zones/Chateau_dOraguille/IDs")
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT)
@@ -132,7 +133,7 @@ mission.sections =
                     elseif missionStatus > 5 then
                         return mission:progressEvent(30)
                     elseif missionStatus > 4 then
-                        return mission:progressEvent(npc, ID.text.HEIR_TO_LIGHT_EXTRA)
+                        return mission:progressEvent(npc, chateauID.text.HEIR_TO_LIGHT_EXTRA)
                     elseif missionStatus > 1 then
                         return mission:progressEvent(29)
                     end
@@ -287,7 +288,7 @@ mission.sections =
                 [32001] = function(player, csid, option, npc)
                     if
                         player:getMissionStatus(mission.areaId) == 3 and
-                        player:getLocalVar("battlefieldWin") == 516
+                        player:getLocalVar('battlefieldWin') == 516
                     then
                         player:setMissionStatus(mission.areaId, 4)
                     end

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Lower Jeuno
 --  NPC: Bogharg
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

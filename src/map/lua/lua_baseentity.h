@@ -327,9 +327,9 @@ public:
 
     uint8  getRank(uint8 nation);            // Get Rank for current active nation
     void   setRank(uint8 rank);              // Set Rank
-    uint32 getRankPoints();                  // Get Current Rank points
-    void   addRankPoints(uint32 rankpoints); // Add rank points to existing rank point total
-    void   setRankPoints(uint32 rankpoints); // Set Current Rank points
+    uint16 getRankPoints();                  // Get Current Rank points
+    void   addRankPoints(uint16 rankpoints); // Add rank points to existing rank point total
+    void   setRankPoints(uint16 rankpoints); // Set Current Rank points
 
     void  addQuest(uint8 questLogID, uint16 questID);          // Add Quest to Entity Quest Log
     void  delQuest(uint8 questLogID, uint16 questID);          // Remove quest from quest log (should be used for debugging only)
@@ -669,9 +669,11 @@ public:
     uint32 getPetID();                                // If the entity has a pet, returns the PetID to identify pet type.
     auto   getMaster() -> std::optional<CLuaBaseEntity>;
     uint8  getPetElement();
+    void   setPet(sol::object const& petObj);
 
     auto getPetName() -> const char*;
     void setPetName(uint8 pType, uint16 value, sol::object const& arg2);
+    void registerChocobo(uint32 value);
 
     float getCharmChance(CLuaBaseEntity const* target, sol::object const& mods); // Gets the chance the entity has to charm its target.
     void  charmPet(CLuaBaseEntity const* target);                                // Charms Pet (Beastmaster ability only)
@@ -732,7 +734,7 @@ public:
     void SetAutoAttackEnabled(bool state);   // halts/resumes auto attack of entity
     void SetMagicCastingEnabled(bool state); // halt/resumes casting magic
     void SetMobAbilityEnabled(bool state);   // halt/resumes mob skills
-    void SetMobSkillAttack(int16 value);     // enable/disable using mobskills as regular attacks
+    void SetMobSkillAttack(int16 listId);     // enable/disable using mobskills as regular attacks
 
     int16 getMobMod(uint16 mobModID);
     void  setMobMod(uint16 mobModID, int16 value);

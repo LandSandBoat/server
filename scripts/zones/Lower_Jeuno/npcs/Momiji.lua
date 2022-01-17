@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Lower Jeuno
 --  NPC: Momiji
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

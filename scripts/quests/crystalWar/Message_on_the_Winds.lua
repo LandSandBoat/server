@@ -23,10 +23,11 @@ quest.reward =
 
 quest.sections =
 {
-    -- Talk to Romualdo at the Cannonry in the Metalworks (second floor, K-9).
+    -- Section: Talk to Romualdo at the Cannonry in the Metalworks (second floor, K-9).
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and player:getMainLvl() >= 20
+            return status == QUEST_AVAILABLE and
+                player:getMainLvl() >= 20
         end,
 
         [xi.zone.METALWORKS] =
@@ -42,7 +43,7 @@ quest.sections =
         },
     },
 
-    -- Travel to the past and speak to him again, this time in Batallia Downs (S) (I-7).
+    -- Section: Travel to the past and speak to him again, this time in Batallia Downs (S) (I-7).
     {
         check = function(player, status, vars)
             return vars.Prog == 1
@@ -62,7 +63,7 @@ quest.sections =
         },
     },
 
-    -- Speak with Childerich in Grauberg (S) at the west side of the house at (E-12).
+    -- Section: Speak with Childerich in Grauberg (S) at the west side of the house at (E-12).
     {
         check = function(player, status, vars)
             return status == QUEST_ACCEPTED and vars.Prog == 2
@@ -152,7 +153,7 @@ quest.sections =
         },
     },
 
-    -- Post quest cutscene with Romualdo
+    -- Section: Post quest cutscene with Romualdo
     {
         check = function(player, status, vars)
             return status == QUEST_COMPLETED and quest:getVar(player, "PostCS") == 1

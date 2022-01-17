@@ -3,26 +3,27 @@
 -- Brutus !pos -55 8 95 244
 -- qm9 !pos 218 -8 206 159
 -----------------------------------
-require("scripts/globals/interaction/quest")
-require("scripts/globals/weaponskillids")
-require("scripts/globals/keyitems")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/status")
-require("scripts/globals/items")
+require('scripts/globals/interaction/quest')
+require('scripts/globals/weaponskillids')
+require('scripts/globals/keyitems')
+require('scripts/globals/npc_util')
+require('scripts/globals/quests')
+require('scripts/globals/status')
+require('scripts/globals/items')
 -----------------------------------
-local upperJeunoID = require("scripts/zones/Upper_Jeuno/IDs")
-local uggalepihID = require("scripts/zones/Temple_of_Uggalepih/IDs")
+local upperJeunoID = require('scripts/zones/Upper_Jeuno/IDs')
+local uggalepihID = require('scripts/zones/Temple_of_Uggalepih/IDs')
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.AXE_THE_COMPETITION)
 
-quest.reward = {
+quest.reward =
+{
     fame = 30,
 }
 
-quest.sections = {
-
+quest.sections =
+{
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
@@ -31,16 +32,22 @@ quest.sections = {
                 not player:hasKeyItem(xi.keyItem.WEAPON_TRAINING_GUIDE)
         end,
 
-        [xi.zone.UPPER_JEUNO] = {
-            ['Brutus'] = {
+        [xi.zone.UPPER_JEUNO] =
+        {
+            ['Brutus'] =
+            {
                 onTrigger = function(player, npc)
                     return quest:event(12):oncePerZone() -- start
                 end,
             },
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [12] = function(player, csid, option, npc)
-                    if option == 1 and (player:hasItem(xi.items.PICK_OF_TRIALS) or npcUtil.giveItem(player, xi.items.PICK_OF_TRIALS)) then
+                    if
+                        option == 1 and
+                        (player:hasItem(xi.items.PICK_OF_TRIALS) or npcUtil.giveItem(player, xi.items.PICK_OF_TRIALS))
+                    then
                         npcUtil.giveKeyItem(player, xi.keyItem.WEAPON_TRAINING_GUIDE)
                         quest:begin(player)
                     end
@@ -54,8 +61,10 @@ quest.sections = {
             return status == QUEST_ACCEPTED
         end,
 
-        [xi.zone.UPPER_JEUNO] = {
-            ['Brutus'] = {
+        [xi.zone.UPPER_JEUNO] =
+        {
+            ['Brutus'] =
+            {
                 onTrigger = function(player, npc)
                     if player:hasKeyItem(xi.ki.ANNALS_OF_TRUTH) then
                         return quest:progressEvent(17) -- complete
@@ -79,7 +88,8 @@ quest.sections = {
                 end,
             },
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [15] = function(player, csid, option, npc)
                     if option == 1 and not player:hasItem(xi.items.PICK_OF_TRIALS) then
                         npcUtil.giveItem(player, xi.items.PICK_OF_TRIALS)
@@ -96,18 +106,21 @@ quest.sections = {
                 end,
 
                 [17] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
-                    player:delKeyItem(xi.ki.ANNALS_OF_TRUTH)
-                    player:delKeyItem(xi.ki.WEAPON_TRAINING_GUIDE)
-                    player:addLearnedWeaponskill(xi.ws_unlock.DECIMATION)
-                    player:messageSpecial(upperJeunoID.text.DECIMATION_LEARNED)
-                    quest:complete(player)
+                    if quest:complete(player) then
+                        player:delKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
+                        player:delKeyItem(xi.ki.ANNALS_OF_TRUTH)
+                        player:delKeyItem(xi.ki.WEAPON_TRAINING_GUIDE)
+                        player:addLearnedWeaponskill(xi.ws_unlock.DECIMATION)
+                        player:messageSpecial(upperJeunoID.text.DECIMATION_LEARNED)
+                    end
                 end,
             },
         },
 
-        [xi.zone.TEMPLE_OF_UGGALEPIH] = {
-            ['qm9'] = {
+        [xi.zone.TEMPLE_OF_UGGALEPIH] =
+        {
+            ['qm9'] =
+            {
                 onTrigger = function(player, npc)
                     if player:getLocalVar('killed_wsnm') == 1 then
                         player:setLocalVar('killed_wsnm', 0)
@@ -123,7 +136,8 @@ quest.sections = {
                 end,
             },
 
-            ['Yallery_Brown'] = {
+            ['Yallery_Brown'] =
+            {
                 onMobDeath = function(mob, player, isKiller, firstCall)
                     player:setLocalVar('killed_wsnm', 1)
                 end,

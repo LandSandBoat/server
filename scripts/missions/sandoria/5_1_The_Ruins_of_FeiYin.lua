@@ -20,7 +20,7 @@ require('scripts/settings/main')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------
-local chateauID = require("scripts/zones/Chateau_dOraguille/IDs")
+local chateauID = require('scripts/zones/Chateau_dOraguille/IDs')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.THE_RUINS_OF_FEI_YIN)
@@ -183,7 +183,7 @@ mission.sections =
                 [32001] = function(player, csid, option, npc)
                     if
                         player:getMissionStatus(mission.areaId) == 11 and
-                        player:getLocalVar("battlefieldWin") == 512
+                        player:getLocalVar('battlefieldWin') == 512
                     then
                         npcUtil.giveKeyItem(player, xi.ki.BURNT_SEAL)
                         player:setMissionStatus(mission.areaId, 12)

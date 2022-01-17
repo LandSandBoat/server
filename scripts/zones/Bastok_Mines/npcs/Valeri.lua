@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Bastok Mines
 --  NPC: Valeri
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

@@ -17,6 +17,7 @@ zones[xi.zone.TAVNAZIAN_SAFEHOLD] =
         CARRIED_OVER_POINTS            = 6428,  -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY        = 6429,  -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER                   = 6430,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
+        YOU_LEARNED_TRUST              = 6452,  -- You learned Trust: <name>!
         CONQUEST_BASE                  = 6540,  -- Tallying conquest results...
         REGIME_CANCELED                = 6706,  -- Current training regime canceled.
         HUNT_ACCEPTED                  = 6724,  -- Hunt accepted!

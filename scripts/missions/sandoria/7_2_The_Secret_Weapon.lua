@@ -42,7 +42,7 @@ mission.sections =
                 player:getNation() == mission.areaId and
                 player:getRank(player:getNation()) == 7 and
                 player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.PRESTIGE_OF_THE_PAPSQUE) and
-                getMissionRankPoints(player, mission.missionId)
+                xi.mission.getMissionRankPoints(player, mission.missionId)
         end,
 
         [xi.zone.NORTHERN_SAN_DORIA] =
@@ -140,7 +140,7 @@ mission.sections =
                 [32001] = function(player, csid, option, npc)
                     if
                         player:getMissionStatus(mission.areaId) == 2 and
-                        player:getLocalVar("battlefieldWin") == 3
+                        player:getLocalVar('battlefieldWin') == 3
                     then
                         npcUtil.giveKeyItem(player, xi.ki.CRYSTAL_DOWSER)
                         player:setMissionStatus(mission.areaId, 3)

@@ -21,7 +21,7 @@ local shop = {
     33, 1460, -- Koh-I-Noor
 }
 local maps = {
-    [xi.ki.MAP_OF_DYNAMIS_SANDORIA]   = 10000,
+    [xi.ki.MAP_OF_DYNAMIS_SAN_DORIA]   = 10000,
     [xi.ki.MAP_OF_DYNAMIS_BASTOK]     = 10000,
     [xi.ki.MAP_OF_DYNAMIS_WINDURST]   = 10000,
     [xi.ki.MAP_OF_DYNAMIS_JEUNO]      = 10000,

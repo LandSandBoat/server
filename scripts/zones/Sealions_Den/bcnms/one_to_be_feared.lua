@@ -35,14 +35,18 @@ battlefield_object.onEventUpdate = function(player, csid, option)
 end
 
 battlefield_object.onEventFinish = function(player, csid, option)
+    -- NOTE: On completion, all members are sent back to Sealion's Den.
+    --       If you're eligable for the cutscene when you zone in, you'll
+    --       be sent to Lufaise directly afterwards.
+
+    -- TODO: This transition from BCNM end to Sealion's Den to Lufaise is pretty ugly.
+    --       Could/should be fixed in the future.
     if csid == 32001 then
-        if player:getCurrentMission(COP) == xi.mission.id.cop.ONE_TO_BE_FEARED and player:getCharVar("PromathiaStatus") == 2 then
-            player:completeMission(xi.mission.log_id.COP, xi.mission.id.cop.ONE_TO_BE_FEARED)
-            player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.CHAINS_AND_BONDS)
-            player:setCharVar("PromathiaStatus", 0)
+        if player:getCurrentMission(COP) == xi.mission.id.cop.ONE_TO_BE_FEARED and player:getCharVar("PromathiaStatus") == 3 then
+            player:setCharVar("PromathiaStatus", 4)
         end
         player:addExp(1500)
-        player:setPos(438, 0, -18, 11, 24) -- Lufaise
+        player:setPos(0, 0, 0, 0, xi.zone.SEALIONS_DEN) -- TODO: This might not be needed
     end
 end
 

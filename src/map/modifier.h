@@ -689,18 +689,14 @@ enum class Mod
     PHYS_ABSORB      = 512, // Occasionally absorbs physical damage taken, in percents
     ABSORB_DMG_TO_MP = 516, // Unlike PLD gear mod, works on all damage types (Ethereal Earring)
 
-    ADDITIONAL_EFFECT  = 431, //
-    ITEM_SPIKES_TYPE   = 499, // Type spikes an item has
-    ITEM_SPIKES_DMG    = 500, // Damage of an items spikes
-    ITEM_SPIKES_CHANCE = 501, // Chance of an items spike proc
-    // ITEM_ADDEFFECT_TYPE       = 431, // 1 = Status Effect/DMG/HP Drain, 2 = MP Drain, 3 = TP Drain, 4 = Dispel, 5 = Self-Buff, 6 = Instant Death
-    // ITEM_SUBEFFECT            = 499, // Animation ID of Spikes and Additional Effects
-    // ITEM_ADDEFFECT_DMG        = 500, // Damage of an items Additional Effect or Spikes
-    // ITEM_ADDEFFECT_CHANCE     = 501, // Chance of an items Additional Effect or Spikes
-    // ITEM_ADDEFFECT_ELEMENT    = 950, // Element of the Additional Effect or Spikes, for resist purposes
-    // ITEM_ADDEFFECT_STATUS     = 951, // Status Effect ID to try to apply via Additional Effect or Spikes
-    // ITEM_ADDEFFECT_POWER      = 952, // Base Power for effect in MOD_ITEM_ADDEFFECT_STATUS
-    // ITEM_ADDEFFECT_DURATION   = 953, // Base Duration for effect in MOD_ITEM_ADDEFFECT_STATUS
+    ITEM_ADDEFFECT_TYPE       = 431, // see procType table in scripts\globals\additional_effects.lua
+    ITEM_SUBEFFECT            = 499, // Animation ID of Spikes and Additional Effects
+    ITEM_ADDEFFECT_DMG        = 500, // Damage of an items Additional Effect or Spikes
+    ITEM_ADDEFFECT_CHANCE     = 501, // Chance of an items Additional Effect or Spikes
+    ITEM_ADDEFFECT_ELEMENT    = 950, // Element of the Additional Effect or Spikes, for resist purposes
+    ITEM_ADDEFFECT_STATUS     = 951, // Status Effect ID to try to apply via Additional Effect or Spikes
+    ITEM_ADDEFFECT_POWER      = 952, // Base Power for effect in MOD_ITEM_ADDEFFECT_STATUS
+    ITEM_ADDEFFECT_DURATION   = 953, // Base Duration for effect in MOD_ITEM_ADDEFFECT_STATUS
 
     GOV_CLEARS = 496, // 4% bonus per Grounds of Valor Page clear
 
@@ -724,6 +720,7 @@ enum class Mod
     ENHANCES_CURSNA_RCVD = 67,  // Potency of "Cursna" effects received
     ENHANCES_CURSNA      = 310, // Used by gear with the "Enhances Cursna" or "Cursna+" attribute
     ENHANCES_HOLYWATER   = 495, // Used by gear with the "Enhances Holy Water" or "Holy Water+" attribute
+    ENHANCES_PROT_SHELL_RCVD  = 977, // Enhances Protect and Shell Effects Received (Binary MOD)
 
     RETALIATION = 414, // Increases damage of Retaliation hits
 

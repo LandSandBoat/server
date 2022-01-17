@@ -34,7 +34,7 @@ if not subprocess.call(['git', '-C', "../", 'status'], stderr=subprocess.STDOUT,
 # External Deps (requirements.txt)
 try:
     import mysql.connector
-    from mysql.connector import Error, errorcode
+    from mysql.connector import errorcode
     from git import Repo
     import yaml
     import colorama
@@ -61,7 +61,7 @@ from migrations import eminence_blob
 from migrations import char_timestamp
 from migrations import currency_columns
 from migrations import add_instance_zone_column
-from migrations import convert_all_tables_to_innodb
+from migrations import convert_tables_to_innodb
 from migrations import char_points_weekly_unity
 from migrations import char_profile_unity_leader
 from migrations import convert_mission_status
@@ -70,6 +70,7 @@ from migrations import add_job_master_column_chars
 from migrations import currency2
 from migrations import extend_valid_targets
 from migrations import languages
+from migrations import add_field_chocobo_column
 
 # Append new migrations to this list and import above
 migrations = [
@@ -89,7 +90,7 @@ migrations = [
     char_timestamp,
     currency_columns,
     add_instance_zone_column,
-    convert_all_tables_to_innodb,
+    convert_tables_to_innodb,
     char_points_weekly_unity,
     char_profile_unity_leader,
     convert_mission_status,
@@ -97,7 +98,8 @@ migrations = [
     add_job_master_column_chars,
     currency2,
     extend_valid_targets,
-    languages
+    languages,
+    add_field_chocobo_column
 ]
 
 # These are the 'protected' files
@@ -555,7 +557,7 @@ def bad_selection():
 
 def menu():
     print(Fore.GREEN + 'o' + Fore.RED + '--------------------------------' + Fore.GREEN + 'o\n' + Fore.RED + 
-          '| ' + Style.RESET_ALL + 'Topaz Database Management Tool ' + Fore.RED + '|\n'
+          '| ' + Style.RESET_ALL + 'LandSandBoat Database Management Tool ' + Fore.RED + '|\n'
           '| ' + Style.RESET_ALL + str('Connected to ' + database).center(30) + Fore.RED + ' |')
     if current_version:
         print(Fore.RED + '| ' + Style.RESET_ALL + str('#' + current_version).center(30) + Fore.RED + ' |')

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Bastok Mines
 --  NPC: Amar
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

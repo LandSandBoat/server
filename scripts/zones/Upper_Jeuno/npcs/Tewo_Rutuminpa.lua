@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Upper Jeuno
 --  NPC: Tewo Rutuminpa
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

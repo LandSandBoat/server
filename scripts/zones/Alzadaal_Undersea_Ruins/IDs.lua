@@ -19,9 +19,9 @@ zones[xi.zone.ALZADAAL_UNDERSEA_RUINS] =
         CARRIED_OVER_POINTS     = 7000, -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY = 7001, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER            = 7002, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
-        MOVE_CLOSER             = 7213, -- You must move closer.
-        IMPERIAL_CONTROL        = 7214, -- This gate guards an area under Imperial control.
-        STAGING_POINT_NYZUL     = 7220, -- Nyzul Isle Staging Point.
+        STAGING_GATE_CLOSER     = 7213, -- You must move closer.
+        STAGING_GATE_INTERACT   = 7214, -- This gate guards an area under Imperial control.
+        STAGING_GATE_NYZUL      = 7220, -- Nyzul Isle Staging Point.
         CANNOT_LEAVE            = 7224, -- You cannot leave this area while in the possession of <keyitem>.
         RESPONSE                = 7233, -- There is no response...
         DEVICE_MALFUNCTIONING   = 7249, -- The device appears to be malfunctioning...
@@ -52,9 +52,9 @@ zones[xi.zone.ALZADAAL_UNDERSEA_RUINS] =
     },
     npc =
     {
-        RUNIC_PORTAL_NORTH      = 17072236,
-        RUNIC_PORTAL_SOUTH      = 17072237,
-        NEPIONIC_QM             = 17072271,
+        RUNIC_PORTAL_NORTH      = 17072337,
+        RUNIC_PORTAL_SOUTH      = 17072338,
+        NEPIONIC_QM             = 17072372,
     },
 }
 

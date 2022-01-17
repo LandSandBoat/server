@@ -1,10 +1,9 @@
 -----------------------------------
---
 -- Zone: Ceizak Battlegrounds (261)
---
 -----------------------------------
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
+require("scripts/globals/colonization_reives")
 require("scripts/globals/status")
 require("scripts/globals/zone")
 local ID = require("scripts/zones/Ceizak_Battlegrounds/IDs")
@@ -16,18 +15,15 @@ zone_object.onInitialize = function(zone)
     zone:registerRegion(1, 357.819, 11, -250.201, 0, 0, 0)
     -- Ergon Locus area at I-8
     zone:registerRegion(2, 87.2, 8, 72.9, 0, 0, 0)
+
+    xi.reives.setupZone(zone)
 end
 
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
-    local onwardToAdoulin = player:getCurrentMission(SOA) == xi.mission.id.soa.ONWARD_TO_ADOULIN
 
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
         player:setPos(431, 0, 178, 110)
-    end
-
-    if onwardToAdoulin then
-        cs = 3
     end
 
     return cs
@@ -59,10 +55,6 @@ zone_object.onEventUpdate = function(player, csid, option)
 end
 
 zone_object.onEventFinish = function(player, csid, option)
-    if csid == 3 then
-        player:completeMission(xi.mission.log_id.SOA, xi.mission.id.soa.ONWARD_TO_ADOULIN)
-        player:addMission(xi.mission.log_id.SOA, xi.mission.id.soa.HEARTWINGS_AND_THE_KINDHEARTED)
-    end
 end
 
 return zone_object

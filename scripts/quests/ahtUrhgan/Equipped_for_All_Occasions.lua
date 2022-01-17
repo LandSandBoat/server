@@ -7,13 +7,13 @@
 -- _5i0 (Iron Door) : !pos 247.735 18.499 -142.267 198
 -- Ratihb           : !pos 75.225 -6.000 -137.203 50
 -----------------------------------
-require("scripts/globals/items")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/settings/main")
+require('scripts/globals/items')
+require('scripts/globals/npc_util')
+require('scripts/globals/quests')
+require('scripts/settings/main')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local mazeID = require("scripts/zones/Maze_of_Shakhrami/IDs")
+local mazeID = require('scripts/zones/Maze_of_Shakhrami/IDs')
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.EQUIPPED_FOR_ALL_OCCASIONS)
@@ -25,6 +25,7 @@ quest.reward =
 
 quest.sections =
 {
+    -- Section: Quest
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
@@ -51,6 +52,7 @@ quest.sections =
         },
     },
 
+    -- Section: Quest accepted
     {
         check = function(player, status, vars)
             return status == QUEST_ACCEPTED
@@ -114,6 +116,7 @@ quest.sections =
             ['Ratihb'] =
             {
                 onTrigger = function(player, npc)
+                    -- Variable 'Stage' is set on quest 'Luck of the Draw', on section 'Quest completed'.
                     if quest:getVar(player, 'Prog') == 4 and quest:getVar(player, 'Stage') == 1 then
                         return quest:progressEvent(772)
                     end

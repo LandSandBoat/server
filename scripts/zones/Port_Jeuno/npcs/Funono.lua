@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Port Jeuno
 --  NPC: Funono
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

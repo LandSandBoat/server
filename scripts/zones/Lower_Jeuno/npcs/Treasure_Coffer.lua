@@ -481,44 +481,62 @@ end
 entity.onTrade = function(player, npc, trade)
 end
 
+local argumentKeyItems =
+{
+    [1] =
+    {
+        xi.ki.CRIMSON_KEY,
+        xi.ki.VIRIDIAN_KEY,
+        xi.ki.AMBER_KEY,
+        xi.ki.AZURE_KEY,
+        xi.ki.IVORY_KEY,
+        xi.ki.EBON_KEY,
+        xi.ki.PRISMATIC_KEY,
+    },
+
+    [2] =
+    {
+        xi.ki.WHITE_CORAL_KEY,
+        xi.ki.BLUE_CORAL_KEY,
+        xi.ki.PEACH_CORAL_KEY,
+        xi.ki.BLACK_CORAL_KEY,
+        xi.ki.RED_CORAL_KEY,
+        xi.ki.ANGEL_SKIN_KEY,
+        xi.ki.OXBLOOD_KEY,
+    },
+
+    [3] =
+    {
+        xi.ki.MOOGLE_KEY,
+        xi.ki.BIRD_KEY,
+        xi.ki.CACTUAR_KEY,
+        xi.ki.BOMB_KEY,
+        xi.ki.CHOCOBO_KEY,
+        xi.ki.TONBERRY_KEY,
+        xi.ki.BEHEMOTH_KEY,
+    },
+}
+
 entity.onTrigger = function(player, npc)
     local receivedNexusCape = player:getCharVar("receivedNexusCape")
+    local kiArgs = { 0, 0, 0 }
 
-    local arg1 =
-        (not player:hasKeyItem(xi.ki.CRIMSON_KEY)   and   2 or 0) +
-        (not player:hasKeyItem(xi.ki.VIRIDIAN_KEY)  and   4 or 0) +
-        (not player:hasKeyItem(xi.ki.AMBER_KEY)     and   8 or 0) +
-        (not player:hasKeyItem(xi.ki.AZURE_KEY)     and  16 or 0) +
-        (not player:hasKeyItem(xi.ki.IVORY_KEY)     and  32 or 0) +
-        (not player:hasKeyItem(xi.ki.EBON_KEY)      and  64 or 0) +
-        (not player:hasKeyItem(xi.ki.PRISMATIC_KEY) and 128 or 0)
-
-    local arg2 =
-        (not player:hasKeyItem(xi.ki.WHITE_CORAL_KEY) and   2 or 0) +
-        (not player:hasKeyItem(xi.ki.BLUE_CORAL_KEY)  and   4 or 0) +
-        (not player:hasKeyItem(xi.ki.PEACH_CORAL_KEY) and   8 or 0) +
-        (not player:hasKeyItem(xi.ki.BLACK_CORAL_KEY) and  16 or 0) +
-        (not player:hasKeyItem(xi.ki.RED_CORAL_KEY)   and  32 or 0) +
-        (not player:hasKeyItem(xi.ki.ANGEL_SKIN_KEY)  and  64 or 0) +
-        (not player:hasKeyItem(xi.ki.OXBLOOD_KEY)     and 128 or 0)
-
-    local arg3 =
-        (not player:hasKeyItem(xi.ki.MOOGLE_KEY)   and   2 or 0) +
-        (not player:hasKeyItem(xi.ki.BIRD_KEY)     and   4 or 0) +
-        (not player:hasKeyItem(xi.ki.CACTUAR_KEY)  and   8 or 0) +
-        (not player:hasKeyItem(xi.ki.BOMB_KEY)     and  16 or 0) +
-        (not player:hasKeyItem(xi.ki.CHOCOBO_KEY)  and  32 or 0) +
-        (not player:hasKeyItem(xi.ki.TONBERRY_KEY) and  64 or 0) +
-        (not player:hasKeyItem(xi.ki.BEHEMOTH_KEY) and 128 or 0)
+    for argNum = 1, 3 do
+        for bitPos, keyItem in ipairs(argumentKeyItems[argNum]) do
+            if not player:hasKeyItem(keyItem) then
+                kiArgs[argNum] = utils.mask.setBit(kiArgs[argNum], bitPos, true)
+            end
+        end
+    end
 
     local arg4 =
-        ((xi.settings.ENABLE_ACP == 0 or arg1 == 254) and 2 or 0) +
-        ((xi.settings.ENABLE_AMK == 0 or arg2 == 254) and 4 or 0) +
-        ((xi.settings.ENABLE_ASA == 0 or arg3 == 254) and 8 or 0) +
+        ((xi.settings.ENABLE_ACP == 0 or kiArgs[1] == 254) and 2 or 0) +
+        ((xi.settings.ENABLE_AMK == 0 or kiArgs[2] == 254) and 4 or 0) +
+        ((xi.settings.ENABLE_ASA == 0 or kiArgs[3] == 254) and 8 or 0) +
         ((xi.settings.ENABLE_ACP * xi.settings.ENABLE_AMK * xi.settings.ENABLE_ASA == 0 or receivedNexusCape == 1) and 16 or 0) +
         ((xi.settings.ENABLE_ACP * xi.settings.ENABLE_AMK * xi.settings.ENABLE_ASA == 0 or receivedNexusCape == 0) and 32 or 0)
 
-    player:startEvent(10099, arg1, arg2, arg3, arg4, 0, 0, 0, 0)
+    player:startEvent(10099, kiArgs[1], kiArgs[2], kiArgs[3], arg4, 0, 0, 0, 0)
 end
 
 entity.onEventUpdate = function(player, csid, option)
@@ -526,10 +544,19 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 10099 then
-        if option == 16777216 and player:getCharVar("receivedNexusCape") == 0 and npcUtil.giveItem(player, xi.items.NEXUS_CAPE) then
+        if
+            option == 16777216 and
+            player:getCharVar("receivedNexusCape") == 0 and
+            npcUtil.giveItem(player, xi.items.NEXUS_CAPE)
+        then
             player:setCharVar("receivedNexusCape", 1)
-        elseif option == 33554432 or (option == 16777216 and player:getCharVar("receivedNexusCape") == 0) then
+
+        elseif
+            option == 33554432 or
+            (option == 16777216 and player:getCharVar("receivedNexusCape") == 0)
+        then
             player:addUsedItem(xi.items.NEXUS_CAPE)
+
         elseif option >= 1 and option <= 20 then
             local ki = optionToKI[option]
             if ki ~= nil then
