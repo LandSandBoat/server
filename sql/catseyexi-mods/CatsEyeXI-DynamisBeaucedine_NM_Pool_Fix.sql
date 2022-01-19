@@ -8,4 +8,4 @@ DELETE FROM `mob_droplist` WHERE `dropId` = 493 AND `itemId` = @ItemId;
 INSERT `mob_droplist` (`dropId`,`dropType`,`groupId`,`groupRate`,`itemId`,`itemRate`) VALUES (176,0,0,1000,@ItemId,260);
 INSERT `mob_droplist` (`dropId`,`dropType`,`groupId`,`groupRate`,`itemId`,`itemRate`) VALUES (261,0,0,1000,@ItemId,260);
 INSERT `mob_droplist` (`dropId`,`dropType`,`groupId`,`groupRate`,`itemId`,`itemRate`) VALUES (265,0,0,1000,@ItemId,260);
-INSERT `mob_droplist` (`dropId`,`dropType`,`groupId`,`groupRate`,`itemId`,`itemRate`) VALUES (496,0,0,1000,@ItemId,260);
+--INSERT `mob_droplist` (`dropId`,`dropType`,`groupId`,`groupRate`,`itemId`,`itemRate`) VALUES (496,0,0,1000,@ItemId,260);
