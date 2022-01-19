@@ -1,11 +1,10 @@
 ---------------------------------------------
 -- Sudden Lunge
 -- Knockback damage and Stun effect. Ignores Utsusemi, reduces Ladybug's HP by 5%-15% whether it hits or not.
--- Ignores Shadows
 ---------------------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
+require("scripts/settings/main")
+require("scripts/globals/status")
 ---------------------------------------------------
 local mobskill_object = {}
 
@@ -21,7 +20,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.BLUNT, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
 
     local typeEffect = xi.effect.STUN
-    xi.mobskills.MobPhysicalStatusEffectMove(mob, target, skill, typeEffect, 1, 0, 4)
+    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, typeEffect, 1, 0, 4)
 
     local currentHP = mob:getHP()
     local newHP = currentHP - (currentHP * (math.random(5,15)/100))
