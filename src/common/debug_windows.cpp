@@ -18,6 +18,7 @@
 namespace
 {
     time_point StartUpTime = server_clock::now();
+    uint8 CrashDepth = 0U;
 
     struct SymChild
     {
@@ -773,6 +774,21 @@ namespace debug
         // Disconnect this handler in case our handling code fails - creating a deathloop
         RemoveVectoredExceptionHandler(gExceptionHandlerHandle);
 
+        // It appears as though removing the handle doesn't take effect immediately.
+        // As a safety precaution, we will track the "depth" of how many times we've
+        // used this handler.
+        // If we go deeper than 0, we're in a loop, so abort!
+        if (CrashDepth > 0)
+        {
+            ShowStacktrace("================================================================");
+            ShowStacktrace("!!! INTERNAL CRASH !!!");
+            ShowStacktrace("Exception %s occured!", SystemErrorToString(pExceptionInfo->ExceptionRecord->ExceptionCode));
+            ShowStacktrace("The internal erorr handler has crashed, please report this to upstream!");
+            ShowStacktrace("================================================================");
+            TerminateProcess(GetCurrentProcess(), 1);
+        }
+        ++CrashDepth;
+
         auto        exeName = getExeFilename();
         std::time_t t       = std::time(nullptr);
         auto        timeStr = fmt::format("{:%Y_%m_%d_%H_%M_%S}", fmt::localtime(t));
@@ -960,8 +976,9 @@ namespace debug
             sf.InstructionOffset = stack.AddrPC.Offset;
             SymSetContext(process, &sf, NULL);
 
-            char* Mask = "*";
-            SymEnumSymbols(process, 0, Mask, EnumSymProc, &stack);
+            // TODO: This is a bit error prone, FIXME
+            //char* Mask = "*";
+            //SymEnumSymbols(process, 0, Mask, EnumSymProc, &stack);
 
             // No need to dig deeper than main
             if (std::strcmp(pSymbol->Name, "main") == 0)

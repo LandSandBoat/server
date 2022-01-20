@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -73,7 +73,7 @@ bool CMobController::TryDeaggro()
     // target is no longer valid, so wipe them from our enmity list
     if (!PTarget || PTarget->isDead() || PTarget->isMounted() || PTarget->loc.zone->GetID() != PMob->loc.zone->GetID() ||
         PMob->StatusEffectContainer->GetConfrontationEffect() != PTarget->StatusEffectContainer->GetConfrontationEffect() ||
-        PMob->allegiance == PTarget->allegiance || CheckDetection(PTarget) || CheckHide(PTarget))
+        PMob->allegiance == PTarget->allegiance || CheckDetection(PTarget) || CheckHide(PTarget) || CheckLock(PTarget))
     {
         if (PTarget)
         {
@@ -111,6 +111,36 @@ bool CMobController::CheckHide(CBattleEntity* PTarget)
     }
     return false;
 }
+
+bool CMobController::CheckLock(CBattleEntity* PTarget)
+{
+    TracyZoneScoped;
+    if (PTarget->objtype == TYPE_PC)
+    {
+        CCharEntity* PChar = dynamic_cast<CCharEntity*>(PTarget);
+        if (PChar->m_Locked)
+        {
+            return !CanPursueTarget(PTarget);
+        }
+    }
+    else if (PTarget->objtype == TYPE_PET)
+    {
+        CPetEntity*  PPet  = dynamic_cast<CPetEntity*>(PTarget);
+        CCharEntity* PChar = dynamic_cast<CCharEntity*>(PPet->PMaster);
+
+        if (PChar == nullptr)
+        {
+            return false;
+        }
+
+        if (PChar->m_Locked)
+        {
+            return !CanPursueTarget(PTarget);
+        }
+    }
+    return false;
+}
+
 
 bool CMobController::CheckDetection(CBattleEntity* PTarget)
 {

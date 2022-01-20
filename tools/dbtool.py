@@ -71,6 +71,7 @@ from migrations import currency2
 from migrations import extend_valid_targets
 from migrations import languages
 from migrations import abyssea_unlocks
+from migrations import add_field_chocobo_column
 
 # Append new migrations to this list and import above
 migrations = [
@@ -100,6 +101,7 @@ migrations = [
     extend_valid_targets,
     languages,
     abyssea_unlocks,
+    add_field_chocobo_column,
 ]
 
 # These are the 'protected' files

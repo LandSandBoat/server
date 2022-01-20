@@ -675,6 +675,7 @@ public:
 
     auto getPetName() -> const char*;
     void setPetName(uint8 pType, uint16 value, sol::object const& arg2);
+    void registerChocobo(uint32 value);
 
     float getCharmChance(CLuaBaseEntity const* target, sol::object const& mods); // Gets the chance the entity has to charm its target.
     void  charmPet(CLuaBaseEntity const* target);                                // Charms Pet (Beastmaster ability only)
@@ -737,7 +738,7 @@ public:
     void SetAutoAttackEnabled(bool state);   // halts/resumes auto attack of entity
     void SetMagicCastingEnabled(bool state); // halt/resumes casting magic
     void SetMobAbilityEnabled(bool state);   // halt/resumes mob skills
-    void SetMobSkillAttack(int16 value);     // enable/disable using mobskills as regular attacks
+    void SetMobSkillAttack(int16 listId);     // enable/disable using mobskills as regular attacks
 
     int16 getMobMod(uint16 mobModID);
     void  setMobMod(uint16 mobModID, int16 value);

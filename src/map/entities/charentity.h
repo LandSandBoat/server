@@ -251,6 +251,7 @@ public:
     void              setPetZoningInfo();            // set pet zoning info (when zoning and logging out)
     void              resetPetZoningInfo();          // reset pet zoning info (when changing job ect)
     uint8             m_SetBlueSpells[20];           // The 0x200 offsetted blue magic spell IDs which the user has set. (1 byte per spell)
+    uint32            m_FieldChocobo;
 
     UnlockedAttachments_t m_unlockedAttachments; // Unlocked Automaton Attachments (1 bit per attachment)
     CAutomatonEntity*     PAutomaton;            // Automaton statistics
@@ -455,6 +456,8 @@ public:
     virtual void           OnRaise() override;
     virtual void           OnItemFinish(CItemState&, action_t&);
 
+    bool m_Locked; // Is the player locked in a cutscene
+
     CCharEntity();  // constructor
     ~CCharEntity(); // destructor
 
@@ -477,7 +480,6 @@ private:
     std::unique_ptr<CItemContainer> m_Wardrobe3;
     std::unique_ptr<CItemContainer> m_Wardrobe4;
 
-    bool m_Locked; // Is the player locked in a cutscene
     bool m_isStyleLocked;
     bool m_isBlockingAid;
     bool m_reloadParty;

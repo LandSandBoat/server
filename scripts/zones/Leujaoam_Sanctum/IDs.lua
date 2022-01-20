@@ -22,15 +22,15 @@ zones[xi.zone.LEUJAOAM_SANCTUM] =
         CARRIED_OVER_POINTS        = 7000, -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY    = 7001, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER               = 7002, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
-        PLAYER_OBTAINS_ITEM        = 7312, -- <player> obtains a <item>!
-        ASSAULT_START_OFFSET       = 7447, -- Max MP Down removed for <player>
-        TIME_TO_COMPLETE           = 7508, -- You have <number> [minute/minutes] (Earth time) to complete this mission.
-        MISSION_FAILED             = 7509, -- The mission has failed. Leaving area.
-        RUNE_UNLOCKED_POS          = 7510, -- ission objective completed. Unlocking Rune of Release ([A/B/C/D/E/F/G/H/I/J/K/L/M/N/O/P/Q/R/S/T/U/V/W/X/Y/Z]-#).
-        ASSAULT_POINTS_OBTAINED    = 7512, -- You gain <number> [Assault point/Assault points]!
-        TIME_REMAINING_MINUTES     = 7513, -- ime remaining: <number> [minute/minutes] (Earth time).
-        TIME_REMAINING_SECONDS     = 7514, -- ime remaining: <number> [second/seconds] (Earth time).
-        PARTY_FALLEN               = 7516, -- ll party members have fallen in battle. Mission failure in <number> [minute/minutes].
+        PLAYER_OBTAINS_ITEM        = 7315, -- <player> obtains <item>!
+        ASSAULT_START_OFFSET       = 7450, -- Max MP Down removed for <player>.
+        TIME_TO_COMPLETE           = 7511, -- You have <number> [minute/minutes] (Earth time) to complete this mission.
+        MISSION_FAILED             = 7512, -- The mission has failed. Leaving area.
+        RUNE_UNLOCKED_POS          = 7513, -- ission objective completed. Unlocking Rune of Release ([A/B/C/D/E/F/G/H/I/J/K/L/M/N/O/P/Q/R/S/T/U/V/W/X/Y/Z]-#).
+        ASSAULT_POINTS_OBTAINED    = 7515, -- You gain <number> [Assault point/Assault points]!
+        TIME_REMAINING_MINUTES     = 7516, -- ime remaining: <number> [minute/minutes] (Earth time).
+        TIME_REMAINING_SECONDS     = 7517, -- ime remaining: <number> [second/seconds] (Earth time).
+        PARTY_FALLEN               = 7519, -- ll party members have fallen in battle. Mission failure in <number> [minute/minutes].
     },
 
     mob =

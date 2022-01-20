@@ -20,20 +20,21 @@ zones[xi.zone.RUAUN_GARDENS] =
         CARRIED_OVER_POINTS        = 7000,  -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY    = 7001,  -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER               = 7002,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
-        FISHING_MESSAGE_OFFSET     = 7053,  -- You can't fish here.
-        CONQUEST_BASE              = 7153,  -- Tallying conquest results...
-        IT_IS_ALREADY_FUNCTIONING  = 7313,  -- It is already functioning.
-        CHEST_UNLOCKED             = 7347,  -- You unlock the chest!
-        SKY_GOD_OFFSET             = 7364,  -- A strange insignia pointing north is carved into the wall.
-        PLAYER_OBTAINS_ITEM        = 7566,  -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM      = 7567,  -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM   = 7568,  -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP       = 7569,  -- You already possess that temporary item.
-        NO_COMBINATION             = 7574,  -- You were unable to enter a combination.
-        REGIME_REGISTERED          = 9730,  -- New training regime registered!
-        HOMEPOINT_SET              = 11651, -- Home point set!
-        COMMON_SENSE_SURVIVAL      = 11671, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        FISHING_MESSAGE_OFFSET     = 7056,  -- You can't fish here.
+        CONQUEST_BASE              = 7156,  -- Tallying conquest results...
+        IT_IS_ALREADY_FUNCTIONING  = 7316,  -- It is already functioning.
+        CHEST_UNLOCKED             = 7350,  -- You unlock the chest!
+        SKY_GOD_OFFSET             = 7367,  -- A strange insignia pointing north is carved into the wall.
+        PLAYER_OBTAINS_ITEM        = 7569,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM      = 7570,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM   = 7571,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP       = 7572,  -- You already possess that temporary item.
+        NO_COMBINATION             = 7577,  -- You were unable to enter a combination.
+        REGIME_REGISTERED          = 9733,  -- New training regime registered!
+        HOMEPOINT_SET              = 11654, -- Home point set!
+        COMMON_SENSE_SURVIVAL      = 11674, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
         DESPOT_PH =
@@ -61,12 +62,19 @@ zones[xi.zone.RUAUN_GARDENS] =
         BYAKKO    = 17309982,
         SUZAKU    = 17309983,
     },
+
     npc =
     {
-        CASKET_BASE     = 17310003,
-        TREASURE_COFFER = 17310019,
+        CASKET_BASE      = 17310003,
+        TREASURE_COFFER  = 17310019,
+        PORTAL_TO_SEIRYU = 17310056,
+        PORTAL_TO_GENBU  = 17310059,
+        PORTAL_TO_BYAKKO = 17310062,
+        PORTAL_TO_SUZAKU = 17310065,
+
         PINCERSTONES =
         {
+            -- [Pincerstone NPC ID] = Portal NPC ID
             [17310031] = 17310054, -- Main to Seriyu
             [17310033] = 17310055, -- Seriyu to Main
             [17310035] = 17310057, -- Seriyu to Genbu
@@ -80,44 +88,44 @@ zones[xi.zone.RUAUN_GARDENS] =
         },
         PORTALS      =
         {
-            { coords = {  -3, -54, -583,    1, -50, -579}, event = 0       },
-            { coords = { 147, -26, -449,  151, -22, -445}, event = 1       },
-            { coords = { 186, -43, -405,  190, -39, -401}, event = 2       },
-            { coords = { 272, -42, -379,  276, -38, -375}, event = {4, 5}   },
-            { coords = { 306, -39, -317,  310, -35, -313}, event = 6       },
-            { coords = { 393, -39,  193,  397, -35,  197}, event = 9       },
-            { coords = {  62, -39,  434,   66, -35,  438}, event = 16      },
-            { coords = {  -2, -42,  464,    2, -38,  468}, event = {18, 19} },
-            { coords = { -65, -39,  434,  -61, -35,  438}, event = 20      },
-            { coords = {-397, -39,  193, -393, -35,  197}, event = 23      },
-            { coords = {-445, -42,  142, -441, -38,  146}, event = {25, 26} },
-            { coords = {-276, -42, -379, -272, -38, -375}, event = {32, 33} },
-            { coords = {-191, -43, -405, -187, -39, -401}, event = 34      },
-            { coords = {-151, -26, -449, -147, -22, -445}, event = 36      },
-            { coords = { 543, -73,  -19,  547, -69,  -15}, event = 37      },
-            { coords = { 182, -73,  511,  186, -69,  515}, event = 38      },
-            { coords = {-432, -73,  332, -428, -69,  336}, event = 39      },
-            { coords = {-453, -73, -308, -449, -69, -304}, event = 40      },
-            { coords = {-436, -39,   71, -432, -35,   75}, event = 27      },
-            { coords = {-310, -39, -317, -306, -35, -313}, event = 30      },
-            { coords = { 441, -42,  142,  445, -38,  146}, event = {11, 12} },
-            { coords = { 432, -39,   71,  436, -35,   75}, event = 9       },
-            { coords = { 162.5, -31, -353.5,  168.5, -30, -347.5}, event = 3,  portal = 17310054 },
-            { coords = { 374.5, -25,   61.5,  380.5, -24,   67.5}, event = 10, portal = 17310057 },
-            { coords = {  52.5, -25,  376.5,   58.5, -24,  382.5}, event = 17, portal = 17310060 },
-            { coords = {-346.5, -25,  166.5, -340.5, -24,  172.5}, event = 24, portal = 17310063 },
-            { coords = {-270.5, -25, -277.5, -264.5, -24, -271.5}, event = 31, portal = 17310066 },
-            { coords = {-170.0, -31, -354.4, -162.0, -30, -347.2}, event = 35, portal = 17310067 },
-            { coords = {-381.0, -25,   61.5, -374.5, -24,   67.5}, event = 28, portal = 17310064 },
-            { coords = { -58.0, -25,  376.5,  -52.0, -24,  382.5}, event = 21, portal = 17310061 },
-            { coords = { 340.5, -25,  166.5,  346.5, -24,  172.5}, event = 14, portal = 17310058 },
-            { coords = { 264.5, -25, -277.5,  270.5, -24, -271.5}, event = 7,  portal = 17310055 },
-            { coords = { 454, -5, -149,  456, -3, -147}, event = 8  },
-            { coords = { 278, -5,  383,  281, -3,  386}, event = 15 },
-            { coords = {-283, -5,  386, -280, -3,  389}, event = 22 },
-            { coords = {-456, -5, -149, -454, -3, -147}, event = 29 },
-            {coords={-145, -41, -156, -142, -39, -153}, green = true},
-            {coords={ 142, -41, -156,  145, -39, -153}, green = true},
+            { coords = {    -3, -54,   -583,      1, -50,   -579}, event = 0        },
+            { coords = {   147, -26,   -449,    151, -22,   -445}, event = 1        },
+            { coords = {   186, -43,   -405,    190, -39,   -401}, event = 2        },
+            { coords = {   272, -42,   -379,    276, -38,   -375}, event = {4, 5}   },
+            { coords = {   306, -39,   -317,    310, -35,   -313}, event = 6        },
+            { coords = {   393, -39,    193,    397, -35,    197}, event = 9        },
+            { coords = {    62, -39,    434,     66, -35,    438}, event = 16       },
+            { coords = {    -2, -42,    464,      2, -38,    468}, event = {18, 19} },
+            { coords = {   -65, -39,    434,    -61, -35,    438}, event = 20       },
+            { coords = {  -397, -39,    193,   -393, -35,    197}, event = 23       },
+            { coords = {  -445, -42,    142,   -441, -38,    146}, event = {25, 26} },
+            { coords = {  -276, -42,   -379,   -272, -38,   -375}, event = {32, 33} },
+            { coords = {  -191, -43,   -405,   -187, -39,   -401}, event = 34       },
+            { coords = {  -151, -26,   -449,   -147, -22,   -445}, event = 36       },
+            { coords = {   543, -73,    -19,    547, -69,    -15}, event = 37       },
+            { coords = {   182, -73,    511,    186, -69,    515}, event = 38       },
+            { coords = {  -432, -73,    332,   -428, -69,    336}, event = 39       },
+            { coords = {  -453, -73,   -308,   -449, -69,   -304}, event = 40       },
+            { coords = {  -436, -39,     71,   -432, -35,     75}, event = 27       },
+            { coords = {  -310, -39,   -317,   -306, -35,   -313}, event = 30       },
+            { coords = {   441, -42,    142,    445, -38,    146}, event = {11, 12} },
+            { coords = {   432, -39,     71,    436, -35,     75}, event = 9        },
+            { coords = { 162.5, -31, -353.5,  168.5, -30, -347.5}, event = 3,  portal = 17310054 }, -- Blue Teleport from Main Island to SE Island
+            { coords = { 264.5, -25, -277.5,  270.5, -24, -271.5}, event = 7,  portal = 17310055 }, -- Blue Teleport from SE Island to Main Island
+            { coords = { 374.5, -25,   61.5,  380.5, -24,   67.5}, event = 10, portal = 17310057 }, -- Blue Teleport from SE Island to NE Island
+            { coords = { 340.5, -25,  166.5,  346.5, -24,  172.5}, event = 14, portal = 17310058 }, -- Blue Teleport from NE Island to SE Island
+            { coords = {  52.5, -25,  376.5,   58.5, -24,  382.5}, event = 17, portal = 17310060 }, -- Blue Teleport from NE Island to NW Island
+            { coords = { -58.0, -25,  376.5,  -52.0, -24,  382.5}, event = 21, portal = 17310061 }, -- Blue Teleport from NW Island to NE Island
+            { coords = {-346.5, -25,  166.5, -340.5, -24,  172.5}, event = 24, portal = 17310063 }, -- Blue Teleport from NW Island to SW Island
+            { coords = {-381.0, -25,   61.5, -374.5, -24,   67.5}, event = 28, portal = 17310064 }, -- Blue Teleport from SW Island to NW Island
+            { coords = {-270.5, -25, -277.5, -264.5, -24, -271.5}, event = 31, portal = 17310066 }, -- Blue Teleport from SW Island to Main Island
+            { coords = {-170.0, -31, -354.4, -162.0, -30, -347.2}, event = 35, portal = 17310067 }, -- Blue Teleport from Main Island to SW Island
+            { coords = {   454,  -5,   -149,    456,  -3,   -147}, event = 8,  seiryu = true },     -- Yellow Teleport to Seiryu Island
+            { coords = {   278,  -5,    383,    281,  -3,    386}, event = 15, genbu  = true },     -- Yellow Teleport to Genbu Island
+            { coords = {  -283,  -5,    386,   -280,  -3,    389}, event = 22, byakko = true },     -- Yellow Teleport to Byakko Island
+            { coords = {  -456,  -5,   -149,   -454,  -3,   -147}, event = 29, suzaku = true },     -- Yellow Teleport to Suzaku Island
+            { coords = {  -145, -41,   -156,   -142, -39,   -153}, green = true },
+            { coords = {   142, -41,   -156,    145, -39,   -153}, green = true },
         },
         OVERSEER_BASE   = 17310080,
     },

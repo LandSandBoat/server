@@ -12,13 +12,13 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if npcUtil.tradeHas(trade, 549) then -- Delkfutt Key
-        player:startEvent(16)
+        player:startOptionalCutscene(16)
     end
 end
 
 entity.onTrigger = function(player, npc)
     if player:hasKeyItem(xi.ki.DELKFUTT_KEY) then
-        player:startEvent(16)
+        player:startOptionalCutscene(16)
     else
         player:startEvent(10) -- door is firmly shut
     end

@@ -132,7 +132,7 @@ xi.promyvion.onRegionEnter = function(player, region)
         end
 
         if event ~= nil then
-            player:startEvent(event)
+            player:startOptionalCutscene(event)
         end
     end
 end

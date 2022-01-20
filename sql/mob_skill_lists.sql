@@ -3647,7 +3647,10 @@ INSERT INTO `mob_skill_lists` VALUES ('TRUST_Zied_II',1125,56); -- Ground Strike
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Ingrid_II',1131,0);
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Arciela_II',1132,0);
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Iroha_II',1133,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Shantotto_II',1134,0);
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Shantotto_II',1134,3740); -- final_exam
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Shantotto_II',1134,3741); -- doctors_orders
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Shantotto_II',1134,3742); -- empirical_research
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Shantotto_II',1134,3743); -- lesson_in_pain
 -- Reserved for future Trust 6020 (ID: 1135)
 -- Reserved for future Trust 6021 (ID: 1136)
 -- Reserved for future Trust 6022 (ID: 1137)
@@ -3758,7 +3761,11 @@ INSERT INTO `mob_skill_lists` VALUES ('The_Briars_elv',1160,42); -- Savage Blade
 INSERT INTO `mob_skill_lists` VALUES ('The_Briars_gal',1161,86); -- Raging Rush
 INSERT INTO `mob_skill_lists` VALUES ('The_Briars_gal',1161,91); -- Fell Cleave
 
--- Next available ID: 1163
+-- 1162 -> Wamouracampa_curl
+
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Shantotto_II_Melee',1163,3739); -- shantotto_ii_melee (no name)
+
+-- Next available ID: 1164
 
 -- ------------------------------------------------------------
 -- Start of Ambuscade section

@@ -2,9 +2,9 @@
 -- Area: Apollyon SW
 --  Mob: Armoury Crate
 -----------------------------------
+local ID = require("scripts/zones/Apollyon/IDs")
 require("scripts/globals/status")
 require("scripts/globals/limbus")
-local ID = require("scripts/zones/Apollyon/IDs")
 -----------------------------------
 local entity = {}
 
@@ -22,13 +22,14 @@ end
 
 entity.onMobDespawn = function(mob)
     if mob:getBattlefield() then
-        local mobID = mob:getID()
+        local mobID        = mob:getID()
         local mimicSpawned = mob:getBattlefield():getLocalVar("mimicSpawned")
+
         if mobID == ID.mob.APOLLYON_SW_MOB[3] then
             mob:getBattlefield():setLocalVar("mimicSpawned", mimicSpawned-1)
-        elseif mobID == ID.mob.APOLLYON_SW_MOB[3]+1 then
+        elseif mobID == ID.mob.APOLLYON_SW_MOB[3] + 1 then
             mob:getBattlefield():setLocalVar("mimicSpawned", mimicSpawned-2)
-        elseif mobID == ID.mob.APOLLYON_SW_MOB[3]+2 then
+        elseif mobID == ID.mob.APOLLYON_SW_MOB[3] + 2 then
             mob:getBattlefield():setLocalVar("mimicSpawned", mimicSpawned-4)
         end
     end
