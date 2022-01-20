@@ -25,6 +25,7 @@
 
 #include "../entities/charentity.h"
 #include "../instance.h"
+#include "../status_effect_container.h"
 #include "../utils/zoneutils.h"
 #include "../vana_time.h"
 
@@ -135,6 +136,12 @@ CZoneInPacket::CZoneInPacket(CCharEntity* PChar, int16 csid)
     ref<uint8>(0x1D) = PChar->speedsub;
     ref<uint8>(0x1E) = PChar->GetHPP();
     ref<uint8>(0x1F) = PChar->animation;
+
+    if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_MOUNTED))
+    {
+        ref<uint8>(0x20) = static_cast<uint8>(PChar->StatusEffectContainer->GetStatusEffect(EFFECT_MOUNTED)->GetSubPower());
+    }
+
     ref<uint8>(0x21) = PChar->GetGender() * 128 + (1 << PChar->look.size);
 
     look_t* look      = (PChar->getStyleLocked() ? &PChar->mainlook : &PChar->look);
@@ -190,8 +197,8 @@ CZoneInPacket::CZoneInPacket(CCharEntity* PChar, int16 csid)
     {
         ref<uint8>(0x80)  = 2;
         ref<uint16>(0xAA) = 0x01FF;
-        ref<uint8>(0xAC)  = csid > 0 ? 0x01 : 0x00;                   // if 0x01 then pause between zone
-        ref<uint8>(0xAF) = PChar->loc.zone->CanUseMisc(MISC_MOGMENU); // флаг, позволяет использовать mog menu за пределами mog house
+        ref<uint8>(0xAC)  = csid > 0 ? 0x01 : 0x00;                    // if 0x01 then pause between zone
+        ref<uint8>(0xAF)  = PChar->loc.zone->CanUseMisc(MISC_MOGMENU); // флаг, позволяет использовать mog menu за пределами mog house
     }
 
     ref<uint32>(0xA0) = PChar->GetPlayTime(); // время, проведенное персонажем в игре с момента создания
@@ -213,5 +220,5 @@ CZoneInPacket::CZoneInPacket(CCharEntity* PChar, int16 csid)
 
     // ref<uint8>(0xF4) = 0x18; // Replace with menuConfigFlags
 
-    ref<uint8>(0x100) = 0x01;
+    ref<uint8>(0x100) = 0x01; // observed: RoZ = 3, CoP = 5, ToAU = 9, WoTG = 11, SoA/original areas = 1
 }

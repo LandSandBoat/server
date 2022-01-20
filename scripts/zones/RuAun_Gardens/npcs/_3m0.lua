@@ -9,7 +9,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-
     local DoorID = npc:getID()
 
     GetNPCByID(DoorID):openDoor(7)

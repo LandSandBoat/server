@@ -18,12 +18,12 @@ zones[xi.zone.MAMOOK] =
         CARRIED_OVER_POINTS      = 7000, -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY  = 7001, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER             = 7002, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
-        FISHING_MESSAGE_OFFSET   = 7050, -- You can't fish here.
-        LOGGING_IS_POSSIBLE_HERE = 7535, -- Logging is possible here if you have <item>.
-        IMPENDING_BATTLE         = 8046, -- You feel the rush of impending battle!
-        SICKLY_SWEET             = 8645, -- A sickly sweet fragrance pervades the air...
-        DRAWS_NEAR               = 8667, -- Something draws near!
-        COMMON_SENSE_SURVIVAL    = 9538, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        FISHING_MESSAGE_OFFSET   = 7053, -- You can't fish here.
+        LOGGING_IS_POSSIBLE_HERE = 7538, -- Logging is possible here if you have <item>.
+        IMPENDING_BATTLE         = 8049, -- You feel the rush of impending battle!
+        SICKLY_SWEET             = 8648, -- A sickly sweet fragrance pervades the air...
+        DRAWS_NEAR               = 8670, -- Something draws near!
+        COMMON_SENSE_SURVIVAL    = 9541, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {
