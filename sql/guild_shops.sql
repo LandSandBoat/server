@@ -590,7 +590,7 @@ INSERT INTO `guild_shops` VALUES (5272,663,20240,45600,80,16,32);    -- mythril_
 INSERT INTO `guild_shops` VALUES (5272,673,210,1108,255,48,100);     -- brass_scales
 INSERT INTO `guild_shops` VALUES (5272,681,10500,30800,30,6,12);     -- mythril_chain
 INSERT INTO `guild_shops` VALUES (5272,736,315,1260,255,48,100);     -- silver_ore
-INSERT INTO `guild_shops` VALUES (5272,738,58032,116245,30,0,12);    -- platinum_ore
+INSERT INTO `guild_shops` VALUES (5272,738,1000,6000,30,0,12);       -- platinum_ore
 INSERT INTO `guild_shops` VALUES (5272,744,4095,9996,80,0,32);       -- silver_ingot
 INSERT INTO `guild_shops` VALUES (5272,760,29172,74880,55,0,22);     -- silver_chain
 INSERT INTO `guild_shops` VALUES (5272,769,1288,7000,165,33,65);     -- red_rock
