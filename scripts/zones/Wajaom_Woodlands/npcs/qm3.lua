@@ -16,7 +16,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:messageSpecial(ID.text.INSECT_WINGS)
+    player:messageSpecial(ID.text.BROKEN_SHARDS)
 end
 
 entity.onEventUpdate = function(player, csid, option)
