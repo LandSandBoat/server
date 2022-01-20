@@ -204,7 +204,7 @@ xi.znm.sanraku.onTrade = function(player, npc, trade)
 
     if trade:getItemCount() == 1 then
         if trade:hasItemQty(2477,1) then -- Trade Soul Plate
-            zeni = math.random(1,200) -- random value since soul plates aren't implemented yet.
+            zeni = math.random(5,1000) -- random value since soul plates aren't implemented yet.
             player:tradeComplete()
             player:addCurrency("zeni_point", zeni)
             player:startEvent(910,zeni)
