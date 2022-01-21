@@ -12384,7 +12384,7 @@ void CLuaBaseEntity::SetMobAbilityEnabled(bool state)
 
 void CLuaBaseEntity::SetMobSkillAttack(int16 listId)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB);
+    XI_DEBUG_BREAK_IF(!(m_PBaseEntity->objtype == TYPE_MOB || m_PBaseEntity->objtype == TYPE_TRUST));
 
     static_cast<CMobEntity*>(m_PBaseEntity)->setMobMod(MOBMOD_ATTACK_SKILL_LIST, listId);
 }
