@@ -370,7 +370,6 @@ UPDATE `mob_groups` set `dropId` = "4000" WHERE `name` = "Poroggo_Casanova";
 UPDATE `mob_groups` set `dropId` = "4000" WHERE `name` = "Lamia_Fatedealer";
 UPDATE `mob_groups` set `dropId` = "4000" WHERE `name` = "Qutrub_Devourer";
 UPDATE `mob_groups` set `dropId` = "4000" WHERE `name` = "Lamia_Spoliator";
-UPDATE `mob_groups` set `dropId` = "4000" WHERE `name` = "Khimaira";
 UPDATE `mob_groups` set `dropId` = "4000" WHERE `name` = "Lamie_No8";
 UPDATE `mob_groups` set `dropId` = "4000" WHERE `name` = "Lamie_No7";
 UPDATE `mob_groups` set `dropId` = "4000" WHERE `name` = "Merrow_No5";
