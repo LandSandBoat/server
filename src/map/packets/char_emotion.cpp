@@ -67,6 +67,13 @@ CCharEmotionPacket::CCharEmotionPacket(CCharEntity* PChar, uint32 TargetID, uint
             }
         }
     }
+    else if (EmoteID == Emote::BELL)
+    {
+        // No emote text for /bell
+        emoteMode = EmoteMode::MOTION;
+
+        ref<uint8>(0x12) = (extra - 0x06);
+    }
     else if (EmoteID == Emote::JOB)
     {
         ref<uint8>(0x12) = (extra - 0x1F);

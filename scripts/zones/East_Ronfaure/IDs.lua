@@ -21,30 +21,30 @@ zones[xi.zone.EAST_RONFAURE] =
         CARRIED_OVER_POINTS      = 7022,  -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY  = 7023,  -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER             = 7024,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
-        CONQUEST_BASE            = 7075,  -- Tallying conquest results...
-        FISHING_MESSAGE_OFFSET   = 7234,  -- You can't fish here.
-        DIG_THROW_AWAY           = 7247,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
-        FIND_NOTHING             = 7249,  -- You dig and you dig, but find nothing.
-        RAYOCHINDOT_DIALOG       = 7414,  -- If you are outmatched, run to the city as quickly as you can.
-        CROTEILLARD_DIALOG       = 7415,  -- Sorry, no chatting while I'm on duty.
-        CHEVAL_RIVER_WATER       = 7440,  -- You fill your waterskin with water from the river. You now have <item>.
-        BLESSED_WATERSKIN        = 7459,  -- To get water, trade the waterskin you hold with the river.
-        LOGGING_IS_POSSIBLE_HERE = 7490,  -- Logging is possible here if you have <item>.
-        PLAYER_OBTAINS_ITEM      = 7501,  -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM    = 7502,  -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM = 7503,  -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP     = 7504,  -- You already possess that temporary item.
-        NO_COMBINATION           = 7509,  -- You were unable to enter a combination.
-        VOIDWALKER_DESPAWN       = 7540,  -- The monster fades before your eyes, a look of disappointment on its face.
-        REGIME_REGISTERED        = 9887,  -- New training regime registered!
-        VOIDWALKER_NO_MOB        = 11060, -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
-        VOIDWALKER_MOB_TOO_FAR   = 11061, -- The <keyitem> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
-        VOIDWALKER_MOB_HINT      = 11062, -- The <keyitem> resonates [feebly/softly/solidly/strongly/very strongly/furiously], sending a radiant beam of light lancing towards a spot roughly <number> [yalm/yalms] [east/southeast/south/southwest/west/northwest/north/northeast] of here.
-        VOIDWALKER_SPAWN_MOB     = 11063, -- A monster materializes out of nowhere!
-        VOIDWALKER_UPGRADE_KI_1  = 11065, -- The <keyitem> takes on a slightly deeper hue and becomes <keyitem>!
-        VOIDWALKER_UPGRADE_KI_2  = 11066, -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
-        VOIDWALKER_BREAK_KI      = 11067, -- The <keyitem> shatters into tiny fragments.
-        VOIDWALKER_OBTAIN_KI     = 11068, -- Obtained key item: <keyitem>!
+        CONQUEST_BASE            = 7078,  -- Tallying conquest results...
+        FISHING_MESSAGE_OFFSET   = 7237,  -- You can't fish here.
+        DIG_THROW_AWAY           = 7250,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
+        FIND_NOTHING             = 7252,  -- You dig and you dig, but find nothing.
+        RAYOCHINDOT_DIALOG       = 7417,  -- If you are outmatched, run to the city as quickly as you can.
+        CROTEILLARD_DIALOG       = 7418,  -- Sorry, no chatting while I'm on duty.
+        CHEVAL_RIVER_WATER       = 7443,  -- You fill your waterskin with water from the river. You now have <item>.
+        BLESSED_WATERSKIN        = 7462,  -- To get water, trade the waterskin you hold with the river.
+        LOGGING_IS_POSSIBLE_HERE = 7493,  -- Logging is possible here if you have <item>.
+        PLAYER_OBTAINS_ITEM      = 7504,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM    = 7505,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM = 7506,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP     = 7507,  -- You already possess that temporary item.
+        NO_COMBINATION           = 7512,  -- You were unable to enter a combination.
+        VOIDWALKER_DESPAWN       = 7543,  -- The monster fades before your eyes, a look of disappointment on its face.
+        REGIME_REGISTERED        = 9883,  -- New training regime registered!
+        VOIDWALKER_NO_MOB        = 11056, -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
+        VOIDWALKER_MOB_TOO_FAR   = 11057, -- The <keyitem> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
+        VOIDWALKER_MOB_HINT      = 11058, -- The <keyitem> resonates [feebly/softly/solidly/strongly/very strongly/furiously], sending a radiant beam of light lancing towards a spot roughly <number> [yalm/yalms] [east/southeast/south/southwest/west/northwest/north/northeast] of here.
+        VOIDWALKER_SPAWN_MOB     = 11059, -- A monster materializes out of nowhere!
+        VOIDWALKER_UPGRADE_KI_1  = 11061, -- The <keyitem> takes on a slightly deeper hue and becomes <keyitem>!
+        VOIDWALKER_UPGRADE_KI_2  = 11062, -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
+        VOIDWALKER_BREAK_KI      = 11063, -- The <keyitem> shatters into tiny fragments.
+        VOIDWALKER_OBTAIN_KI     = 11064, -- Obtained key item: <keyitem>!
     },
     mob =
     {
@@ -90,15 +90,15 @@ zones[xi.zone.EAST_RONFAURE] =
     },
     npc =
     {
-        CASKET_BASE = 17191481,
+        CASKET_BASE = 17191482,
         LOGGING =
         {
-            17191529,
             17191530,
             17191531,
             17191532,
             17191533,
             17191534,
+            17191535,
         },
     },
 }

@@ -21,29 +21,29 @@ zones[xi.zone.PASHHOW_MARSHLANDS] =
         CARRIED_OVER_POINTS      = 7022,  -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY  = 7023,  -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER             = 7024,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
-        CONQUEST_BASE            = 7075,  -- Tallying conquest results...
-        BEASTMEN_BANNER          = 7156,  -- There is a beastmen's banner.
-        FISHING_MESSAGE_OFFSET   = 7234,  -- You can't fish here.
-        DIG_THROW_AWAY           = 7247,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
-        FIND_NOTHING             = 7249,  -- You dig and you dig, but find nothing.
-        AMK_DIGGING_OFFSET       = 7315,  -- You spot some familiar footprints. You are convinced that your moogle friend has been digging in the immediate vicinity.
-        CONQUEST                 = 7923,  -- You've earned conquest points!
-        PLAYER_OBTAINS_ITEM      = 8479,  -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM    = 8480,  -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM = 8481,  -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP     = 8482,  -- You already possess that temporary item.
-        NO_COMBINATION           = 8487,  -- You were unable to enter a combination.
-        VOIDWALKER_DESPAWN       = 8518,  -- The monster fades before your eyes, a look of disappointment on its face.
-        REGIME_REGISTERED        = 10728, -- New training regime registered!
-        VOIDWALKER_NO_MOB        = 11847, -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
-        VOIDWALKER_MOB_TOO_FAR   = 11848, -- The <keyitem> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
-        VOIDWALKER_MOB_HINT      = 11849, -- The <keyitem> resonates [feebly/softly/solidly/strongly/very strongly/furiously], sending a radiant beam of light lancing towards a spot roughly <number> [yalm/yalms] [east/southeast/south/southwest/west/northwest/north/northeast] of here.
-        VOIDWALKER_SPAWN_MOB     = 11850, -- A monster materializes out of nowhere!
-        VOIDWALKER_UPGRADE_KI_1  = 11852, -- The <keyitem> takes on a slightly deeper hue and becomes <keyitem>!
-        VOIDWALKER_UPGRADE_KI_2  = 11853, -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
-        VOIDWALKER_BREAK_KI      = 11854, -- The <keyitem> shatters into tiny fragments.
-        VOIDWALKER_OBTAIN_KI     = 11855, -- Obtained key item: <keyitem>!
-        COMMON_SENSE_SURVIVAL    = 12839, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        CONQUEST_BASE            = 7078,  -- Tallying conquest results...
+        BEASTMEN_BANNER          = 7159,  -- There is a beastmen's banner.
+        FISHING_MESSAGE_OFFSET   = 7237,  -- You can't fish here.
+        DIG_THROW_AWAY           = 7250,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
+        FIND_NOTHING             = 7252,  -- You dig and you dig, but find nothing.
+        AMK_DIGGING_OFFSET       = 7318,  -- You spot some familiar footprints. You are convinced that your moogle friend has been digging in the immediate vicinity.
+        CONQUEST                 = 7926,  -- You've earned conquest points!
+        PLAYER_OBTAINS_ITEM      = 8475,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM    = 8476,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM = 8477,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP     = 8478,  -- You already possess that temporary item.
+        NO_COMBINATION           = 8483,  -- You were unable to enter a combination.
+        VOIDWALKER_DESPAWN       = 8514,  -- The monster fades before your eyes, a look of disappointment on its face.
+        REGIME_REGISTERED        = 10724, -- New training regime registered!
+        VOIDWALKER_NO_MOB        = 11843, -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
+        VOIDWALKER_MOB_TOO_FAR   = 11844, -- The <keyitem> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
+        VOIDWALKER_MOB_HINT      = 11845, -- The <keyitem> resonates [feebly/softly/solidly/strongly/very strongly/furiously], sending a radiant beam of light lancing towards a spot roughly <number> [yalm/yalms] [east/southeast/south/southwest/west/northwest/north/northeast] of here.
+        VOIDWALKER_SPAWN_MOB     = 11846, -- A monster materializes out of nowhere!
+        VOIDWALKER_UPGRADE_KI_1  = 11848, -- The <keyitem> takes on a slightly deeper hue and becomes <keyitem>!
+        VOIDWALKER_UPGRADE_KI_2  = 11849, -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
+        VOIDWALKER_BREAK_KI      = 11850, -- The <keyitem> shatters into tiny fragments.
+        VOIDWALKER_OBTAIN_KI     = 11851, -- Obtained key item: <keyitem>!
+        COMMON_SENSE_SURVIVAL    = 12835, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {
@@ -99,8 +99,8 @@ zones[xi.zone.PASHHOW_MARSHLANDS] =
     },
     npc =
     {
-        CASKET_BASE   = 17224274,
-        OVERSEER_BASE = 17224325, -- Mesachedeau_RK in npc_list
+        CASKET_BASE   = 17224275,
+        OVERSEER_BASE = 17224326, -- Mesachedeau_RK in npc_list
     },
 }
 

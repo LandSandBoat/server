@@ -19,16 +19,16 @@ zones[xi.zone.UPPER_DELKFUTTS_TOWER] =
         CARRIED_OVER_POINTS      = 7035,  -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY  = 7036,  -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER             = 7037,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
-        FISHING_MESSAGE_OFFSET   = 7088,  -- You can't fish here.
-        CONQUEST_BASE            = 7188,  -- Tallying conquest results...
-        CHEST_UNLOCKED           = 7355,  -- You unlock the chest!
-        PLAYER_OBTAINS_ITEM      = 7378,  -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM    = 7379,  -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM = 7380,  -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP     = 7381,  -- You already possess that temporary item.
-        NO_COMBINATION           = 7386,  -- You were unable to enter a combination.
-        REGIME_REGISTERED        = 9464,  -- New training regime registered!
-        HOMEPOINT_SET            = 10523, -- Home point set!
+        FISHING_MESSAGE_OFFSET   = 7091,  -- You can't fish here.
+        CONQUEST_BASE            = 7191,  -- Tallying conquest results...
+        CHEST_UNLOCKED           = 7358,  -- You unlock the chest!
+        PLAYER_OBTAINS_ITEM      = 7381,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM    = 7382,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM = 7383,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP     = 7384,  -- You already possess that temporary item.
+        NO_COMBINATION           = 7389,  -- You were unable to enter a combination.
+        REGIME_REGISTERED        = 9467,  -- New training regime registered!
+        HOMEPOINT_SET            = 10526, -- Home point set!
     },
     mob =
     {

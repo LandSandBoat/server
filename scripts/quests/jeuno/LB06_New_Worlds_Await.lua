@@ -28,10 +28,10 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
+                xi.settings.MAX_LEVEL >= 75 and
                 player:getMainLvl() >= 75 and
                 player:getLevelCap() == 75 and
-                not player:hasKeyItem(xi.ki.LIMIT_BREAKER) and
-                xi.settings.MAX_LEVEL >= 75
+                not player:hasKeyItem(xi.ki.LIMIT_BREAKER)
         end,
 
         [xi.zone.RULUDE_GARDENS] =
@@ -63,10 +63,10 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
+                xi.settings.MAX_LEVEL == 75 and
                 player:getMainLvl() >= 75 and
                 player:getLevelCap() == 75 and
-                player:hasKeyItem(xi.ki.LIMIT_BREAKER) and
-                xi.settings.MAX_LEVEL == 75
+                player:hasKeyItem(xi.ki.LIMIT_BREAKER)
         end,
 
         [xi.zone.RULUDE_GARDENS] =
@@ -84,10 +84,10 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
+                xi.settings.MAX_LEVEL >= 80 and
                 player:getMainLvl() >= 75 and
                 player:getLevelCap() == 75 and
-                player:hasKeyItem(xi.ki.LIMIT_BREAKER) and
-                xi.settings.MAX_LEVEL >= 80
+                player:hasKeyItem(xi.ki.LIMIT_BREAKER)
         end,
 
         [xi.zone.RULUDE_GARDENS] =

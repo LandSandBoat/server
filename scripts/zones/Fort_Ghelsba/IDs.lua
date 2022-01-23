@@ -19,8 +19,8 @@ zones[xi.zone.FORT_GHELSBA] =
         CARRIED_OVER_POINTS     = 7159, -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY = 7160, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER            = 7161, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
-        CHEST_UNLOCKED          = 7359, -- You unlock the chest!
-        COMMON_SENSE_SURVIVAL   = 7367, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        CHEST_UNLOCKED          = 7362, -- You unlock the chest!
+        COMMON_SENSE_SURVIVAL   = 7370, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {

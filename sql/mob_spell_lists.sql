@@ -4122,24 +4122,17 @@ INSERT INTO `mob_spell_lists` VALUES ('The_Briars_elv',458,57,1,255); -- Haste
 INSERT INTO `mob_spell_lists` VALUES ('The_Briars_elv',458,79,1,255); -- Slow II
 INSERT INTO `mob_spell_lists` VALUES ('The_Briars_elv',458,80,1,255); -- Paralyze II
 
-INSERT INTO `mob_spell_lists` VALUES ('Nepionic_Soulflayer',461,151,1,60); -- blizzard_III
-INSERT INTO `mob_spell_lists` VALUES ('Nepionic_Soulflayer',461,166,1,60); -- thunder_III
-INSERT INTO `mob_spell_lists` VALUES ('Nepionic_Soulflayer',461,180,1,60); -- blizzaga_II
-INSERT INTO `mob_spell_lists` VALUES ('Nepionic_Soulflayer',461,191,1,60); -- stonega_III
-INSERT INTO `mob_spell_lists` VALUES ('Nepionic_Soulflayer',461,195,1,60); -- thundaga_II
-INSERT INTO `mob_spell_lists` VALUES ('Nepionic_Soulflayer',461,201,1,60); -- waterga_III
-INSERT INTO `mob_spell_lists` VALUES ('Nepionic_Soulflayer',461,212,1,60); -- burst
-INSERT INTO `mob_spell_lists` VALUES ('Nepionic_Soulflayer',461,214,1,60); -- flood
-INSERT INTO `mob_spell_lists` VALUES ('Nepionic_Soulflayer',461,231,1,60); -- bio_II
-INSERT INTO `mob_spell_lists` VALUES ('Nepionic_Soulflayer',461,238,1,60); -- rasp
-INSERT INTO `mob_spell_lists` VALUES ('Nepionic_Soulflayer',461,250,1,60); -- ice_spikes
-INSERT INTO `mob_spell_lists` VALUES ('Nepionic_Soulflayer',461,252,1,60); -- stun
-INSERT INTO `mob_spell_lists` VALUES ('Nepionic_Soulflayer',461,253,1,60); -- sleep
-INSERT INTO `mob_spell_lists` VALUES ('Nepionic_Soulflayer',461,259,1,60); -- sleep_II
-INSERT INTO `mob_spell_lists` VALUES ('Nepionic_Soulflayer',461,273,1,60); -- sleepga
-INSERT INTO `mob_spell_lists` VALUES ('Nepionic_Soulflayer',461,274,1,60); -- sleepga_II
+INSERT INTO `mob_spell_lists` VALUES ('Cernunnos',459,3,1,255); -- Cure III
+INSERT INTO `mob_spell_lists` VALUES ('Cernunnos',459,4,1,255); -- Cure IV
+INSERT INTO `mob_spell_lists` VALUES ('Cernunnos',459,5,1,255); -- Cure V
+INSERT INTO `mob_spell_lists` VALUES ('Cernunnos',459,46,1,255); -- Protect IV
+INSERT INTO `mob_spell_lists` VALUES ('Cernunnos',459,51,1,255); -- Shell IV
+INSERT INTO `mob_spell_lists` VALUES ('Cernunnos',459,54,1,255); -- Stoneskin
+INSERT INTO `mob_spell_lists` VALUES ('Cernunnos',459,162,1,255); -- Stone IV
+INSERT INTO `mob_spell_lists` VALUES ('Cernunnos',459,191,1,255); -- Stonega III
+INSERT INTO `mob_spell_lists` VALUES ('Cernunnos',459,255,1,255); -- Break
 
--- Next Available: 462
+-- Next Available: 460
 
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;

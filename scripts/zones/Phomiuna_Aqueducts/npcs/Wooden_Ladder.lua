@@ -78,7 +78,7 @@ entity.onTrigger = function(player, npc)
             elseif eventID == 99 then
                 player:messageSpecial(ID.text.DOOR_SEALED_SHUT)
             else
-                player:startEvent(eventID)
+                player:startOptionalCutscene(eventID)
             end
         end
     end

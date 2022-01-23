@@ -80,21 +80,28 @@ local loot =
 entity.onMobDeath = function(mob, player, isKiller, noKiller)
     if isKiller or noKiller then
         local players = mob:getBattlefield():getPlayers()
-        local random = math.random(1, 4)
+        local random  = math.random(1, 4)
+
         for i = 1, #loot[random] do
             local lootGroup = loot[random][i]
+
             if lootGroup then
                 local max = 0
+
                 for _, entry in pairs(lootGroup) do
                     max = max + entry.droprate
                 end
+
                 local roll = math.random(max)
+
                 for _, entry in pairs(lootGroup) do
                     max = max - entry.droprate
+
                     if roll > max then
                         if entry.itemid ~= 0 then
                             players[1]:addTreasure(entry.itemid, mob)
                         end
+
                         break
                     end
                 end

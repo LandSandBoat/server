@@ -38,6 +38,7 @@
 #include "spdlog/fmt/bundled/core.h"
 #include "spdlog/fmt/bundled/format.h"
 #include "spdlog/fmt/bundled/printf.h"
+#include "spdlog/fmt/bundled/chrono.h"
 
 enum MSGTYPE
 {

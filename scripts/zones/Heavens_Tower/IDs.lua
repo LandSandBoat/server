@@ -24,8 +24,8 @@ zones[xi.zone.HEAVENS_TOWER] =
         LOGIN_NUMBER            = 7171, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         YOU_LEARNED_TRUST       = 7193, -- You learned Trust: <name>!
         CALL_MULTIPLE_ALTER_EGO = 7194, -- You are now able to call multiple alter egos.
-        FISHING_MESSAGE_OFFSET  = 7370, -- You can't fish here.
-        CELEBRATORY_GOODS       = 9103, -- An assortment of celebratory goods is available for purchase.
+        FISHING_MESSAGE_OFFSET  = 7373, -- You can't fish here.
+        CELEBRATORY_GOODS       = 9106, -- An assortment of celebratory goods is available for purchase.
     },
     mob =
     {

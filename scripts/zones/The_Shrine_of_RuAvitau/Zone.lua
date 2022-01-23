@@ -63,49 +63,49 @@ zone_object.onRegionEnter = function(player, region)
     switch (region:GetRegionID()): caseof
     {
         [1] = function (x)
-            player:startEvent(17) --> F
+            player:startOptionalCutscene(17) --> F
         end,
         [2] = function (x)
-            player:startEvent(16) --> E
+            player:startOptionalCutscene(16) --> E
         end,
         [3] = function (x)
-            player:startEvent(5) --> L --> Kirin !
+            player:startOptionalCutscene(5) --> L --> Kirin !
         end,
         [4] = function (x)
-            player:startEvent(4) --> G
+            player:startOptionalCutscene(4) --> G
         end,
         [5] = function (x)
-            player:startEvent(1) --> J
+            player:startOptionalCutscene(1) --> J
         end,
         [6] = function (x)
-            player:startEvent(3) --> H
+            player:startOptionalCutscene(3) --> H
         end,
         [7] = function (x)
-            player:startEvent(7) --> I
+            player:startOptionalCutscene(7) --> I
         end,
         [8] = function (x)
-            player:startEvent(6) --> K
+            player:startOptionalCutscene(6) --> K
         end,
         [9] = function (x)
-            player:startEvent(10) --> L'
+            player:startOptionalCutscene(10) --> L'
         end,
         [10] = function (x)
-            player:startEvent(11)
+            player:startOptionalCutscene(11)
         end,
         [11] = function (x)
-            player:startEvent(8)
+            player:startOptionalCutscene(8)
         end,
         [12] = function (x)
-            player:startEvent(15) --> D
+            player:startOptionalCutscene(15) --> D
         end,
         [13] = function (x)
-            player:startEvent(14) --> P
+            player:startOptionalCutscene(14) --> P
         end,
         [14] = function (x)
-            player:startEvent(13) --> M
+            player:startOptionalCutscene(13) --> M
         end,
         [15] = function (x)
-            player:startEvent(12) --> C
+            player:startOptionalCutscene(12) --> C
         end,
 
         default = function (x)
