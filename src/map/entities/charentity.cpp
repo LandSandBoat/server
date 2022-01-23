@@ -1912,11 +1912,18 @@ void CCharEntity::OnItemFinish(CItemState& state, action_t& action)
         // clang-format off
         PTarget->ForParty([this, PItem, PTarget, isParalyzed](CBattleEntity* PMember)
         {
+            // Trigger for the item user last to prevent any teleportation miscues (Tidal Talisman)
+            if (this->id == PMember->id)
+                continue;
+
             if (!PMember->isDead() && distance(PTarget->loc.p, PMember->loc.p) <= 10 && !isParalyzed)
             {
                 luautils::OnItemUse(this, PMember, PItem);
             }
         });
+
+        // Triggering for item user
+        luautils::OnItemUse(this, PItem, this);
         // clang-format on
     }
     else
