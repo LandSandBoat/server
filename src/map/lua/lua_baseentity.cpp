@@ -315,7 +315,7 @@ void CLuaBaseEntity::PrintToArea(std::string const& message, sol::object const& 
 
     // see scripts\globals\msg.lua or src\map\packets\chat_message.h for values
     CHAT_MESSAGE_TYPE messageLook  = (arg1 == sol::lua_nil) ? MESSAGE_SYSTEM_1 : arg1.as<CHAT_MESSAGE_TYPE>();
-    uint8             messageRange = (arg2 == sol::lua_nil) ? 0 : arg2.as<CHAT_MESSAGE_TYPE>();
+    uint8             messageRange = (arg2 == sol::lua_nil) ? 0 : arg2.as<uint8>();
     std::string       name         = (arg3 == sol::lua_nil) ? std::string() : arg3.as<std::string>();
 
     if (messageRange == 0) // All zones world wide
@@ -3733,11 +3733,11 @@ auto CLuaBaseEntity::addSoulPlate(std::string const& name, uint16 mobFamily, uin
     {
         // Deduct Blank Plate
         battleutils::RemoveAmmo(PChar);
-        
+
         PChar->pushPacket(new CInventoryFinishPacket());
 
         // Used Soul Plate
-        CItem* PItem = itemutils::GetItem(2477); 
+        CItem* PItem = itemutils::GetItem(2477);
         PItem->setQuantity(1);
         PItem->setSoulPlateData(name, mobFamily, zeni, skillIndex, fp);
         auto SlotID = charutils::AddItem(PChar, LOC_INVENTORY, PItem, true);
@@ -11422,7 +11422,7 @@ void CLuaBaseEntity::setPet(sol::object const& petObj)
     }
 
     CBattleEntity* PTarget = static_cast<CBattleEntity*>(m_PBaseEntity);
-    CLuaBaseEntity* PLuaBaseEntity = petObj.is<CLuaBaseEntity*>() ? petObj.as<CLuaBaseEntity*>() : nullptr; 
+    CLuaBaseEntity* PLuaBaseEntity = petObj.is<CLuaBaseEntity*>() ? petObj.as<CLuaBaseEntity*>() : nullptr;
 
     if (PLuaBaseEntity == nullptr)
     {
@@ -11536,6 +11536,19 @@ void CLuaBaseEntity::setPetName(uint8 pType, uint16 value, sol::object const& ar
                       value);
         }
     }
+}
+
+void CLuaBaseEntity::registerChocobo(uint32 value)
+{
+    if (m_PBaseEntity == nullptr || m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowWarning("Invalid Entity");
+        return;
+    }
+
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+    PChar->m_FieldChocobo = value;
+    Sql_Query(SqlHandle, "UPDATE char_pet SET field_chocobo = %u WHERE charid = %u;", value, PChar->id);
 }
 
 /************************************************************************
@@ -12369,11 +12382,11 @@ void CLuaBaseEntity::SetMobAbilityEnabled(bool state)
  *  Notes   : Used in Ouryu, Jormungand, Tiamat, etc
  ************************************************************************/
 
-void CLuaBaseEntity::SetMobSkillAttack(int16 value)
+void CLuaBaseEntity::SetMobSkillAttack(int16 listId)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB);
+    XI_DEBUG_BREAK_IF(!(m_PBaseEntity->objtype == TYPE_MOB || m_PBaseEntity->objtype == TYPE_TRUST));
 
-    static_cast<CMobEntity*>(m_PBaseEntity)->setMobMod(MOBMOD_ATTACK_SKILL_LIST, value);
+    static_cast<CMobEntity*>(m_PBaseEntity)->setMobMod(MOBMOD_ATTACK_SKILL_LIST, listId);
 }
 
 /************************************************************************
@@ -13708,6 +13721,7 @@ void CLuaBaseEntity::Register()
 
     SOL_REGISTER("getPetName", CLuaBaseEntity::getPetName);
     SOL_REGISTER("setPetName", CLuaBaseEntity::setPetName);
+    SOL_REGISTER("registerChocobo", CLuaBaseEntity::registerChocobo);
 
     SOL_REGISTER("getCharmChance", CLuaBaseEntity::getCharmChance);
     SOL_REGISTER("charmPet", CLuaBaseEntity::charmPet);

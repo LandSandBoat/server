@@ -23,6 +23,7 @@ xi.trust.message_offset =
     DEATH          = 9,
     DESPAWN        = 11,
     SPECIAL_MOVE_1 = 18,
+    SPECIAL_MOVE_2 = 19,
 }
 
 local MAX_MESSAGE_PAGE = 121
@@ -188,24 +189,31 @@ xi.trust.onTradeCipher = function(player, trade, csid, rovCs, arkAngelCs)
     local subId = trade:getItemSubId(0)
     local isCipher = itemId >= 10112 and itemId <= 10193
 
-    if xi.trust.hasPermit(player) and trade:getSlotCount() == 1 and subId ~= 0 and isCipher then
-        -- subId is a smallInt in the database (16 bits).
-        -- The bottom 12 bits of the subId are the spellId taught by the ciper
-        -- The top 4 bits of the subId are for the flags to be given to the csid
-        local spellId = bit.band(subId, 0x0FFF)
-        local flags = bit.rshift(bit.band(subId, 0xF000), 12)
+    -- subId is a smallInt in the database (16 bits).
+    -- The bottom 12 bits of the subId are the spellId taught by the ciper
+    -- The top 4 bits of the subId are for the flags to be given to the csid
+    local spellId = bit.band(subId, 0x0FFF)
+    local flags = bit.rshift(bit.band(subId, 0xF000), 12)
 
-        -- To generate this packed subId for storage in the db:
-        -- local encoded = spellId + bit.lshift(flags, 12)
+    -- To generate this packed subId for storage in the db:
+    -- local encoded = spellId + bit.lshift(flags, 12)
 
-        -- Cipher type cs args (Wetata's text as example):
-        -- 0 (add 0)    : Did you know that the person mentioned here is also a participant in the Trust initiative?
-        --                All the stuffiest scholars... (Default)
-        -- 1 (add 4096) : Wait a second... just who is that? How am I supposed to use <cipher> in conditions like these? (WOTG)
-        -- 2 (add 8192) : You may be shocked to hear that there are trusts beyond the five races (Beasts & Monsters)
-        -- 3 (add 12288): How on earth did you get your hands on this? If it's a real cipher I have to try! (Special)
-        -- 4 (add 16384): Progressed leaps and bounds. You and that person must have something truly special-wecial going on between you.
-        --                (Mainline story princesses and II trust versions??)
+    -- Cipher type cs args (Wetata's text as example):
+    -- 0 (add 0)    : Did you know that the person mentioned here is also a participant in the Trust initiative?
+    --                All the stuffiest scholars... (Default)
+    -- 1 (add 4096) : Wait a second... just who is that? How am I supposed to use <cipher> in conditions like these? (WOTG)
+    -- 2 (add 8192) : You may be shocked to hear that there are trusts beyond the five races (Beasts & Monsters)
+    -- 3 (add 12288): How on earth did you get your hands on this? If it's a real cipher I have to try! (Special)
+    -- 4 (add 16384): Progressed leaps and bounds. You and that person must have something truly special-wecial going on between you.
+    --                (Mainline story princesses and II trust versions??)
+
+    if
+        xi.trust.hasPermit(player) and
+        trade:getSlotCount() == 1 and
+        subId ~= 0 and
+        isCipher and
+        not player:hasSpell(spellId)
+    then
 
         player:setLocalVar("TradingTrustCipher", spellId)
 
@@ -367,7 +375,7 @@ xi.trust.teamworkMessage = function(mob, teamwork_messages)
         end
     end
 
-    if table.getn(messages) > 0 then
+    if #messages > 0 then
         xi.trust.message(mob, messages[math.random(#messages)])
     else
         -- Defaults to regular spawn message
@@ -384,6 +392,6 @@ end
 
 xi.trust.dumpMessagePages = function(mob)
     for i=0, 120 do
-        xi.trust.message(mob, i, xi.trust.message_offset.SPAWN)
+        xi.trust.message(mob, i)
     end
 end

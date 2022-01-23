@@ -5,12 +5,16 @@
 -- !pos 569 -70 -80 130
 -----------------------------------
 local ID = require("scripts/zones/RuAun_Gardens/IDs")
+require("scripts/globals/items")
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if npcUtil.tradeHas(trade, {1418, 1419}) and npcUtil.popFromQM(player, npc, ID.mob.SEIRYU) then -- Gem of the East and Springstone
+    if
+        npcUtil.tradeHasExactly(trade, {xi.items.GEM_OF_THE_EAST, xi.items.SPRINGSTONE}) and
+        npcUtil.popFromQM(player, npc, ID.mob.SEIRYU)
+    then -- Gem of the East and Springstone
         player:showText(npc, ID.text.SKY_GOD_OFFSET + 9)
         player:confirmTrade()
     end

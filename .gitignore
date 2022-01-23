@@ -214,3 +214,9 @@ ext/tracy/
 *.callgrind.log
 callgrind.out.*
 memcheck.out.*
+
+# Memory dumps
+*.dmp
+
+# Auto-generated files
+/src/common/version.cpp

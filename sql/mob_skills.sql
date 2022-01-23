@@ -3556,11 +3556,11 @@ INSERT INTO `mob_skills` VALUES (3735,490,'amatsu_choun',0,7.0,2000,1500,4,0,0,0
 INSERT INTO `mob_skills` VALUES (3736,491,'amatsu_gachirin',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (3737,493,'amatsu_suien',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (3738,516,'rise_from_ashes',0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (3739,498,'',0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (3740,499,'final_exam',0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (3741,500,'doctors_orders',0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (3742,501,'empirical_research',0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (3743,502,'lesson_in_pain',0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (3739,2546,'shantotto_ii_melee',0,7.0,2000,0,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (3740,2547,'final_exam',0,7.0,2000,1500,4,0,0,0,13,11,0);
+INSERT INTO `mob_skills` VALUES (3741,2548,'doctors_orders',0,7.0,2000,1500,4,0,0,0,14,9,0);
+INSERT INTO `mob_skills` VALUES (3742,2549,'empirical_research',0,7.0,2000,1500,4,0,0,0,12,1,0);
+INSERT INTO `mob_skills` VALUES (3743,2550,'lesson_in_pain',0,7.0,2000,1500,4,0,0,0,10,4,0);
 -- INSERT INTO `mob_skills` VALUES (3744,503,'peccant_typhoon',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (3745,504,'censure',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (3746,505,'osmotic_wave',0,7.0,2000,1500,4,0,0,0,0,0,0);

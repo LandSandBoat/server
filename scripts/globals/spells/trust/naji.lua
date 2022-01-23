@@ -19,7 +19,10 @@ spell_object.onSpellCast = function(caster, target, spell)
     local bastokFirstTrust = caster:getCharVar("Quest[1][92]Prog")
     local zone = caster:getZoneID()
 
-    if bastokFirstTrust == 1 and (zone == xi.zone.NORTH_GUSTABERG or zone == xi.zone.SOUTH_GUSTABERG) then
+    if
+        bastokFirstTrust == 1 and
+        (zone == xi.zone.NORTH_GUSTABERG or zone == xi.zone.SOUTH_GUSTABERG)
+    then
         caster:setCharVar("Quest[1][92]Prog", 2)
     end
 

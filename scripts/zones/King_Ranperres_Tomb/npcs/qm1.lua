@@ -10,7 +10,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:startEvent(10)
+    player:startOptionalCutscene(10)
 end
 
 entity.onEventUpdate = function(player, csid, option)

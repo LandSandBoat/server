@@ -1,0 +1,21 @@
+#include "version.h"
+
+std::string version::GetGitSha()
+{
+    return "@GIT_SHA1@";
+}
+
+std::string version::GetGitBranch()
+{
+    return "@GIT_BRANCH@";
+}
+
+std::string version::GetGitDate()
+{
+    return "@GIT_DATE@";
+}
+
+std::string version::GetGitCommitSubject()
+{
+    return "@GIT_COMMIT_SUBJECT@";
+}

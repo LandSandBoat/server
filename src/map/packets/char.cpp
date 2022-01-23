@@ -113,13 +113,14 @@ CCharPacket::CCharPacket(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask
                     ref<uint8>(0x2A) |= 0x80;
                 }
 
-                ref<uint32>(0x34) = 0x010CA248; // black chocobo
-
-                if (PChar->animation == ANIMATION_MOUNT)
+                if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_MOUNTED))
                 {
+                    ref<uint8>(0x20) |= static_cast<uint8>(PChar->StatusEffectContainer->GetStatusEffect(EFFECT_MOUNTED)->GetSubPower());
+                    ref<uint32>(0x34) = PChar->m_FieldChocobo;
                     ref<uint16>(0x44) = PChar->StatusEffectContainer->GetStatusEffect(EFFECT_MOUNTED)->GetPower() << 4;
                 }
             }
+
             if (PChar->PPet != nullptr)
             {
                 ref<uint16>(0x3C) = PChar->PPet->targid;
