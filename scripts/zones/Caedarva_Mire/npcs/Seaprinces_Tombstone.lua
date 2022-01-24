@@ -18,7 +18,7 @@ entity.onTrade = function(player, npc, trade)
 	local gurfurlursHelmet = npcUtil.tradeHas(trade, 2356)
 	local medusasArmlet = npcUtil.tradeHas(trade, 2357)
 	local jajasChestplate = npcUtil.tradeHas(trade, 2355)
-	local ancientBeastcoins = trade:hasItemQty(2187, 99)
+	local imperialGoldPieces = trade:hasItemQty(2187, 99)
 	local catsEye = npcUtil.tradeHas(trade, 3443)
 	local titleCheck = (player:hasTitle(xi.title.CERBERUS_MUZZLER) and player:hasTitle(xi.title.HYDRA_HEADHUNTER) and player:hasTitle(xi.title.KHIMAIRA_CARVER) and
     player:hasTitle(xi.title.GORGONSTONE_SUNDERER) and player:hasTitle(xi.title.GORGONSTONE_SUNDERER) and player:hasTitle(xi.title.SHINING_SCALE_RIFLER))
@@ -103,7 +103,7 @@ entity.onTrade = function(player, npc, trade)
 	    player:setCharVar("MythicReward", 18990)
 	    player:tradeComplete()
 		player:startEvent(25, 20)
-	elseif (titleCheck == true and tinninsFang and sarameyasHide and tygersTail and gurfurlursHelmet and medusasArmlet and jajasChestplate and catsEye and ancientBeastcoins) then
+	elseif (titleCheck == true and tinninsFang and sarameyasHide and tygersTail and gurfurlursHelmet and medusasArmlet and jajasChestplate and catsEye and imperialGoldPieces) then
 		player:tradeComplete()
 		player:setCharVar("PendingMythic", 1)
 		player:PrintToPlayer("Balrahn Eidolon: I have nearly everything I need... Come back with your base weapon to complete the upgrade.", 0xD)
