@@ -252,7 +252,7 @@ xi.shop =
                  678,    5000,   xi.craftRank.APPRENTICE,      -- Aluminum Ore
                  752,   32000,   xi.craftRank.JOURNEYMAN,      -- Gold Sheet
                  761,   58000,   xi.craftRank.JOURNEYMAN,      -- Gold Chain
-                 738,    5000,    xi.craftRank.CRAFTSMAN,      -- Platinum Ore
+                 738,    6000,    xi.craftRank.CRAFTSMAN,      -- Platinum Ore
                 8833,     300,      xi.craftRank.AMATEUR,      -- Goldsmithing Kit 5
                 8834,     400,      xi.craftRank.AMATEUR,      -- Goldsmithing Kit 10
                 8835,     650,      xi.craftRank.AMATEUR,      -- Goldsmithing Kit 15

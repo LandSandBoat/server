@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -564,7 +564,7 @@ void CMobEntity::Spawn()
     // add people to my posse
     if (getMobMod(MOBMOD_ASSIST))
     {
-        for (int8 i = 1; i < getMobMod(MOBMOD_ASSIST) + 1; i++)
+        for (int32 i = 1; i < getMobMod(MOBMOD_ASSIST) + 1; i++)
         {
             CMobEntity* PMob = (CMobEntity*)GetEntity(targid + i, TYPE_MOB);
 
@@ -839,173 +839,124 @@ void CMobEntity::DistributeRewards()
 
 void CMobEntity::DropItems(CCharEntity* PChar)
 {
-//   CDynamisHandler* PDynamisHandler = zoneutils::GetZone(this->getZone())->m_DynamisHandler;
-
-    //Adds an item to the treasure pool.
+    // Adds an item to the treasure pool and returns true if the pool has been filled
     auto AddItemToPool = [this, PChar](uint16 ItemID, uint8 dropCount)
     {
         PChar->PTreasurePool->AddItem(ItemID, this);
-        // return dropCount >= TREASUREPOOL_SIZE; // This was capping loot to 10 items.
-		return false; // This is unlimited loot items.
+        return dropCount >= TREASUREPOOL_SIZE;
     };
 
-    //Limit number of items that can drop to the treasure pool size
-    uint8 dropCount = 0;
-
-    DropList_t* DropList = itemutils::GetDropList(m_DropID);
-    //ShowDebug(CL_CYAN"DropID: %u dropping with TH Level: %u\n" CL_RESET, PMob->m_DropID, PMob->m_THLvl);
-
-    if (DropList != nullptr && !getMobMod(MOBMOD_NO_DROPS) && (DropList->Items.size() || DropList->Groups.size()))
+    auto UpdateDroprateOrAddToList = [&](std::vector<DropItem_t>& list, uint8 dropType, uint16 itemID, uint16 dropRate)
     {
-        //THLvl is the number of 'extra chances' at an item. If the item is obtained, then break out.
-        //uint8 maxRolls = 1 + (m_THLvl > 2 ? 2 : m_THLvl);
-        //only roll once now, always
-        uint8 maxRolls = 1;
-        //uint8 bonus = (m_THLvl > 2 ? (m_THLvl - 2) * 10 : 0);
-        //no flat bonus anymore
-        uint8 bonus = 0;
-        float mult = 0.00f;
-        if (m_THLvl == 1)
+        // Try and update droprate for an item in place
+        bool updated = false;
+        for (auto& entry : list)
         {
-            mult = 0.80f;
-        }
-        else if (m_THLvl == 2)
-        {
-            mult = 0.41f;
-            maxRolls = 2;
-        }
-        else if (m_THLvl == 3)
-        {
-            mult = 0.03f;
-            maxRolls = 3;
-        }
-        else if (m_THLvl == 4)
-        {
-            mult = 0.43f;
-            maxRolls = 3;
-        }
-        else if (m_THLvl >= 5)
-        {
-            mult = 0.91f;
-            maxRolls = 3;
-        }
-
-        //ShowDebug("m_THLvl was %u, mult was %.2f, maxRolls was %u\n",m_THLvl,mult,maxRolls);
-
-        for (const DropGroup_t& group : DropList->Groups)
-        {
-            for (uint8 roll = 0; roll < maxRolls; ++roll)
+            if (!updated && entry.ItemID == itemID)
             {
-                //Determine if this group should drop an item
-
-                // 0.8 is the TH level:
-
-                // 1 % +(1 % * 99 % * 0.8) = 1.792 %
-
-                // 50 % +(50 % * 50 % * 0.8) = 70 %
-
-                // 80 % +(80 % * 20 % * 0.8) = 92.8 %
-
-                uint16 rate = group.GroupRate;
-
-                if (roll + 1 < maxRolls) // not our last roll
-                {
-                    //ShowDebug("doing NON-last roll\n");
-                    if (rate > 0 && ((xirand::GetRandomNumber(1000) < rate) || m_THLvl > 68))
-                    {
-                        //Each item in the group is given its own weight range which is the previous value to the previous value + item.DropRate
-                        //Such as 2 items with drop rates of 200 and 800 would be 0-199 and 200-999 respectively
-                        uint16 previousRateValue = 0;
-                        uint16 itemRoll = xirand::GetRandomNumber(1000);
-                        for (const DropItem_t& item : group.Items)
-                        {
-                            if (previousRateValue + item.DropRate > itemRoll)
-                            {
-                                if (AddItemToPool(item.ItemID, ++dropCount))
-                                    return;
-                                break;
-                            }
-                            previousRateValue += item.DropRate;
-                        }
-                        break;
-                    }
-                }
-                else // is our last roll, apply the mult
-                {
-                    //ShowDebug("doing last roll\n");
-                    if (rate > 0 && (xirand::GetRandomNumber(1000) < (rate + (rate * (1000 - rate)/1000 * mult)) || m_THLvl > 68))
-                    {
-                        //Each item in the group is given its own weight range which is the previous value to the previous value + item.DropRate
-                        //Such as 2 items with drop rates of 200 and 800 would be 0-199 and 200-999 respectively
-                        uint16 previousRateValue = 0;
-                        uint16 itemRoll = xirand::GetRandomNumber(1000);
-                        for (const DropItem_t& item : group.Items)
-                        {
-                            if (previousRateValue + item.DropRate > itemRoll)
-                            {
-                                if (AddItemToPool(item.ItemID, ++dropCount))
-                                    return;
-                                break;
-                            }
-                            previousRateValue += item.DropRate;
-                        }
-                        break;
-                    }
-                }
-
+                entry.DropRate = dropRate;
+                updated        = true;
             }
         }
 
-        for (const DropItem_t& item : DropList->Items)
+        // If that item wasn't found and updated, add the item and droprate to the list
+        if (!updated)
         {
-            for (uint8 roll = 0; roll < maxRolls; ++roll)
+            list.emplace_back(DropItem_t(dropType, itemID, dropRate));
+        }
+    };
+
+    // Limit number of items that can drop to the treasure pool size
+    uint8 dropCount = 0;
+
+    // Make a temporary copy of the global droplist entry for this drop id
+    // so we can modify it without modifying the global lists
+    DropList_t DropList;
+    if (auto droplistPtr = itemutils::GetDropList(m_DropID))
+    {
+        DropList = *droplistPtr;
+    }
+
+    // Apply m_DropListModifications changes to DropList
+    for (auto& entry : m_DropListModifications)
+    {
+        uint16 itemID = entry.first;
+        uint16 dropRate = entry.second.first;
+        DROP_TYPE dropType = static_cast<DROP_TYPE>(entry.second.second);
+
+        if (dropType == DROP_NORMAL)
+        {
+            UpdateDroprateOrAddToList(DropList.Items, DROP_NORMAL, itemID, dropRate);
+        }
+        else if (dropType == DROP_GROUPED)
+        {
+            for (auto& group : DropList.Groups)
             {
-                //Determine if this group should drop an item
+                UpdateDroprateOrAddToList(group.Items, DROP_NORMAL, itemID, dropRate);
+            }
+        }
+    }
 
-                // 0.8 is the TH level:
+    // Make sure m_DropListModifications doesn't persist by clearing it out now
+    m_DropListModifications.clear();
 
-                // 1 % +(1 % * 99 % * 0.8) = 1.792 %
+    if (!getMobMod(MOBMOD_NO_DROPS) && (!DropList.Items.empty() || !DropList.Groups.empty()))
+    {
+        // THLvl is the number of 'extra chances' at an item. If the item is obtained, then break out.
+        int16 maxRolls = 1 + (m_THLvl > 2 ? 2 : m_THLvl);
+        int16 bonus    = (m_THLvl > 2 ? (m_THLvl - 2) * 10 : 0);
 
-                // 50 % +(50 % * 50 % * 0.8) = 70 %
-
-                // 80 % +(80 % * 20 % * 0.8) = 92.8 %
-
-                uint16 rate = item.DropRate;
-
-                if (roll + 1 < maxRolls) // not our last roll
+        for (const DropGroup_t& group : DropList.Groups)
+        {
+            for (int16 roll = 0; roll < maxRolls; ++roll)
+            {
+                // Determine if this group should drop an item
+                if (group.GroupRate > 0 && xirand::GetRandomNumber(1000) < group.GroupRate * map_config.drop_rate_multiplier + bonus)
                 {
-                    //ShowDebug("doing NON-last roll\n");
-                    if (rate > 0 && ((xirand::GetRandomNumber(1000) < rate) || m_THLvl > 68))
+                    // Each item in the group is given its own weight range which is the previous value to the previous value + item.DropRate
+                    // Such as 2 items with drop rates of 200 and 800 would be 0-199 and 200-999 respectively
+                    uint16 previousRateValue = 0;
+                    uint16 itemRoll          = xirand::GetRandomNumber(1000);
+                    for (const DropItem_t& item : group.Items)
                     {
-                        if (AddItemToPool(item.ItemID, ++dropCount))
-                            return;
-                        break;
+                        if (previousRateValue + item.DropRate > itemRoll)
+                        {
+                            if (AddItemToPool(item.ItemID, ++dropCount))
+                            {
+                                return;
+                            }
+                            break;
+                        }
+                        previousRateValue += item.DropRate;
                     }
+                    break;
                 }
-                else // is our last roll, apply the mult
+            }
+        }
+
+        for (const DropItem_t& item : DropList.Items)
+        {
+            for (int16 roll = 0; roll < maxRolls; ++roll)
+            {
+                if (item.DropRate > 0 && xirand::GetRandomNumber(1000) < item.DropRate * map_config.drop_rate_multiplier + bonus)
                 {
-                    //ShowDebug("doing last roll\n");
-                    if (rate > 0 && (xirand::GetRandomNumber(1000) < (rate + (rate * (1000 - rate)/1000 * mult)) || m_THLvl > 68))
+                    if (AddItemToPool(item.ItemID, ++dropCount))
                     {
-                        if (AddItemToPool(item.ItemID, ++dropCount))
-                            return;
-                        break;
+                        return;
                     }
+                    break;
                 }
             }
         }
     }
 
+    uint16 Pzone = PChar->getZone();
 
+    bool validZone = ((Pzone > 0 && Pzone < 39) || (Pzone > 42 && Pzone < 134) || (Pzone > 135 && Pzone < 185) || (Pzone > 188 && Pzone < 255));
 
-    uint16 zoneID = PChar->getZone();
-
-    bool validZone = ((zoneID > 0 && zoneID < 39) || (zoneID > 42 && zoneID < 134) || (zoneID > 135 && zoneID < 185) || (zoneID > 188 && zoneID < 255));
-
-     if (validZone && charutils::CheckMob(m_HiPCLvl, GetMLevel()) > EMobDifficulty::TooWeak)
+    if (validZone && charutils::CheckMob(m_HiPCLvl, GetMLevel()) > EMobDifficulty::TooWeak)
     {
-
-        //check for seal drops
+        // check for seal drops
         /* MobLvl >= 1 = Beastmen Seals ID=1126
         >= 50 = Kindred Seals ID=1127
         >= 75 = Kindred Crests ID=2955
@@ -1013,25 +964,217 @@ void CMobEntity::DropItems(CCharEntity* PChar)
         */
         if (xirand::GetRandomNumber(100) < 20 && PChar->PTreasurePool->CanAddSeal() && !getMobMod(MOBMOD_NO_DROPS))
         {
+            // RULES: Only 1 kind may drop per mob
+            if (GetMLevel() >= 75 && luautils::IsContentEnabled("ABYSSEA")) // all 4 types
+            {
+                switch (xirand::GetRandomNumber(4))
+                {
+                    case 0:
 
-            if (GetMLevel() >= 50) //b.seal & k.seal only
+                        if (AddItemToPool(1126, ++dropCount))
+                        {
+                            return;
+                        }
+                        break;
+                    case 1:
+                        if (AddItemToPool(1127, ++dropCount))
+                        {
+                            return;
+                        }
+                        break;
+                    case 2:
+                        if (AddItemToPool(2955, ++dropCount))
+                        {
+                            return;
+                        }
+                        break;
+                    case 3:
+                        if (AddItemToPool(2956, ++dropCount))
+                        {
+                            return;
+                        }
+                        break;
+                }
+            }
+            else if (GetMLevel() >= 70 && luautils::IsContentEnabled("ABYSSEA")) // b.seal & k.seal & k.crest
+            {
+                switch (xirand::GetRandomNumber(3))
+                {
+                    case 0:
+                        if (AddItemToPool(1126, ++dropCount))
+                        {
+                            return;
+                        }
+                        break;
+                    case 1:
+                        if (AddItemToPool(1127, ++dropCount))
+                        {
+                            return;
+                        }
+                        break;
+                    case 2:
+                        if (AddItemToPool(2955, ++dropCount))
+                        {
+                            return;
+                        }
+                        break;
+                }
+            }
+            else if (GetMLevel() >= 50) // b.seal & k.seal only
             {
                 if (xirand::GetRandomNumber(2) == 0)
                 {
                     if (AddItemToPool(1126, ++dropCount))
+                    {
                         return;
+                    }
                 }
                 else
                 {
                     if (AddItemToPool(1127, ++dropCount))
+                    {
                         return;
+                    }
                 }
             }
             else
             {
-                //b.seal only
+                // b.seal only
                 if (AddItemToPool(1126, ++dropCount))
+                {
                     return;
+                }
+            }
+        }
+
+        /* check for Avatarite/Geode Drops.
+            LV >= 50 = Geodes can drop IF matching weather or day.
+            Weather gets priority e.g. rainstorm on firesday would get Water Geode instead of fire
+            LV >= 80 = Avatrites can also drop, same rules. If one drops, the other does not.
+            unfortunately, the order of the items/weathers/days don't match.
+        */
+        if (GetMLevel() >= 50)
+        {
+            uint8 weather = PChar->loc.zone->GetWeather();
+            uint8 element = 0;
+
+            // Set element by weather
+            if (weather >= 4 && weather <= 19)
+            {
+                /*
+                element = zoneutils::GetWeatherElement(weather);
+                Can't use this because of the TODO in zoneutils about broken element order >.<
+                So we have this ugly switch until then.
+                */
+                switch (weather)
+                {
+                    case 4:
+                    case 5:
+                        element = ELEMENT_FIRE;
+                        break;
+                    case 6:
+                    case 7:
+                        element = ELEMENT_WATER;
+                        break;
+                    case 8:
+                    case 9:
+                        element = ELEMENT_EARTH;
+                        break;
+                    case 10:
+                    case 11:
+                        element = ELEMENT_WIND;
+                        break;
+                    case 12:
+                    case 13:
+                        element = ELEMENT_ICE;
+                        break;
+                    case 14:
+                    case 15:
+                        element = ELEMENT_THUNDER;
+                        break;
+                    case 16:
+                    case 17:
+                        element = ELEMENT_LIGHT;
+                        break;
+                    case 18:
+                    case 19:
+                        element = ELEMENT_DARK;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            // Set element from day instead
+            else
+            {
+                element = battleutils::GetDayElement();
+            }
+
+            // Roll for Geode, dude!
+            if (xirand::GetRandomNumber(100) < 20)
+            {
+                switch (element)
+                {
+                    case ELEMENT_FIRE:
+                        AddItemToPool(3297, ++dropCount); // Flame Geode
+                        break;
+                    case ELEMENT_EARTH:
+                        AddItemToPool(3300, ++dropCount); // Soil Geode
+                        break;
+                    case ELEMENT_WATER:
+                        AddItemToPool(3302, ++dropCount); // Aqua Geode
+                        break;
+                    case ELEMENT_WIND:
+                        AddItemToPool(3299, ++dropCount); // Breeze Geode
+                        break;
+                    case ELEMENT_ICE:
+                        AddItemToPool(3298, ++dropCount); // Snow Geode
+                        break;
+                    case ELEMENT_THUNDER:
+                        AddItemToPool(3301, ++dropCount); // Thunder Geode
+                        break;
+                    case ELEMENT_LIGHT:
+                        AddItemToPool(3303, ++dropCount); // Light Geode
+                        break;
+                    case ELEMENT_DARK:
+                        AddItemToPool(3304, ++dropCount); // Shadow Geode
+                        break;
+                    default:
+                        break;
+                }
+            }
+            // At LV 80 and above, you may get Avatarite if a Geode didn't drop
+            else if (GetMLevel() >= 80 && xirand::GetRandomNumber(100) < 20)
+            {
+                switch (element)
+                {
+                    case ELEMENT_FIRE:
+                        AddItemToPool(3520, ++dropCount); // Ifritite
+                        break;
+                    case ELEMENT_EARTH:
+                        AddItemToPool(3523, ++dropCount); // Titanite
+                        break;
+                    case ELEMENT_WATER:
+                        AddItemToPool(3525, ++dropCount); // Leviatite
+                        break;
+                    case ELEMENT_WIND:
+                        AddItemToPool(3522, ++dropCount); // Garudite
+                        break;
+                    case ELEMENT_ICE:
+                        AddItemToPool(3521, ++dropCount); // Shivite
+                        break;
+                    case ELEMENT_THUNDER:
+                        AddItemToPool(3524, ++dropCount); // Ramuite
+                        break;
+                    case ELEMENT_LIGHT:
+                        AddItemToPool(3526, ++dropCount); // Carbit
+                        break;
+                    case ELEMENT_DARK:
+                        AddItemToPool(3527, ++dropCount); // Fenrite
+                        break;
+                    default:
+                        break;
+                }
             }
         }
 
@@ -1104,78 +1247,6 @@ void CMobEntity::DropItems(CCharEntity* PChar)
         }
     }
 }
-
-        // Todo: Avatarite and Geode drops during day/weather. Much higher chance during weather than day.
-        // Item element matches day/weather element, not mob crystal. Lv80+ xp mobs can drop Avatarite.
-        // Wiki's have conflicting info on mob lv required for Geodes. One says 50 the other 75. I think 50 is correct.
-
-        /* -- Wings implementation seems better
-        uint8 effect = 0; // Begin Adding Crystals
-
-        if (m_Element > 0)
-        {
-            uint8 regionID = PChar->loc.zone->GetRegionID();
-            switch (regionID)
-            {
-                // Sanction Regions
-                case REGION_WEST_AHT_URHGAN:
-                case REGION_MAMOOL_JA_SAVAGE:
-                case REGION_HALVUNG:
-                case REGION_ARRAPAGO:
-                    effect = 2;
-                    break;
-                // Sigil Regions
-                case REGION_RONFAURE_FRONT:
-                case REGION_NORVALLEN_FRONT:
-                case REGION_GUSTABERG_FRONT:
-                case REGION_DERFLAND_FRONT:
-                case REGION_SARUTA_FRONT:
-                case REGION_ARAGONEAU_FRONT:
-                case REGION_FAUREGANDI_FRONT:
-                case REGION_VALDEAUNIA_FRONT:
-                    effect = 3;
-                    break;
-                // Signet Regions
-                default:
-                    effect = (conquest::GetRegionOwner(PChar->loc.zone->GetRegionID()) <= 2) ? 1 : 0;
-                    break;
-            }
-        }
-        uint8 crystalRolls = 0;
-        PChar->ForParty([this, &crystalRolls, &effect](CBattleEntity* PMember)
-        {
-            switch(effect)
-            {
-                case 1:
-                    if (PMember->StatusEffectContainer->HasStatusEffect(EFFECT_SIGNET) && PMember->getZone() == getZone() && distance(PMember->loc.p, loc.p) < 100)
-                    {
-                        crystalRolls++;
-                    }
-                    break;
-                case 2:
-                    if (PMember->StatusEffectContainer->HasStatusEffect(EFFECT_SANCTION) && PMember->getZone() == getZone() && distance(PMember->loc.p, loc.p) < 100)
-                    {
-                        crystalRolls++;
-                    }
-                    break;
-                case 3:
-                    if (PMember->StatusEffectContainer->HasStatusEffect(EFFECT_SIGIL) && PMember->getZone() == getZone() && distance(PMember->loc.p, loc.p) < 100)
-                    {
-                        crystalRolls++;
-                    }
-                    break;
-                default:
-                    break;
-            }
-        });
-        for (uint8 i = 0; i < crystalRolls; i++)
-        {
-            if (xirand::GetRandomNumber(100) < 20 && AddItemToPool(4095 + m_Element, ++dropCount))
-            {
-                return;
-            }
-        }
-        */
 
 bool CMobEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>& errMsg)
 {
