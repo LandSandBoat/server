@@ -21,10 +21,10 @@ zones[xi.zone.GHELSBA_OUTPOST] =
         CARRIED_OVER_POINTS              = 7530, -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY          = 7531, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER                     = 7532, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
-        FISHING_MESSAGE_OFFSET           = 7583, -- You can't fish here.
-        HUT_DOOR                         = 7717, -- This looks like an Orcish dwelling. The door is firmly shut.
-        LOGGING_IS_POSSIBLE_HERE         = 7744, -- Logging is possible here if you have <item>.
-        YOU_CAN_NOW_BECOME_A_DRAGOON     = 7784, -- You can now become a dragoon!
+        FISHING_MESSAGE_OFFSET           = 7586, -- You can't fish here.
+        HUT_DOOR                         = 7720, -- This looks like an Orcish dwelling. The door is firmly shut.
+        LOGGING_IS_POSSIBLE_HERE         = 7747, -- Logging is possible here if you have <item>.
+        YOU_CAN_NOW_BECOME_A_DRAGOON     = 7787, -- You can now become a dragoon!
     },
     mob =
     {
