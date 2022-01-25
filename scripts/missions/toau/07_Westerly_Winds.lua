@@ -34,7 +34,7 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if player:getMissionStatus(mission.areaId) == 1 then
-                        return mission:progressEvent(3028, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+                        return mission:progressEvent(3028, { text_table = 0 })
                     end
                 end,
             },
@@ -43,7 +43,7 @@ mission.sections =
             {
                 [5] = function(player, region)
                     if player:getMissionStatus(mission.areaId) == 0 then
-                        return mission:progressEvent(3027, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+                        return mission:progressEvent(3027, { text_table = 0 })
                     end
                 end,
             },

@@ -37,9 +37,9 @@ mission.sections =
                         not mission:getMustZone(player) and
                         VanadielUniqueDay() >= mission:getVar(player, 'Timer')
                     then
-                        return mission:progressEvent(3130, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+                        return mission:progressEvent(3130, { text_table = 0 })
                     else
-                        return mission:progressEvent(3120, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+                        return mission:progressEvent(3120, { text_table = 0 })
                     end
                 end,
             },

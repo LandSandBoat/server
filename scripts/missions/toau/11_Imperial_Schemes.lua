@@ -30,13 +30,13 @@ mission.sections =
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =
         {
-            ['Naja_Salaheem'] = mission:event(3053, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+            ['Naja_Salaheem'] = mission:event(3053, { text_table = 0 }),
 
             onRegionEnter =
             {
                 [6] = function(player, region)
                     if not mission:getMustZone(player) and VanadielUniqueDay() >= mission:getVar(player, 'Timer') then
-                        return mission:progressEvent(3070, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+                        return mission:progressEvent(3070, { text_table = 0 })
                     end
                 end,
             },

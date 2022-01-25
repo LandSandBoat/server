@@ -37,7 +37,7 @@ mission.sections =
                 [3] = function(player, region)
                     -- Naja Salaheem interactions require the 9th argument set to 0.
                     -- This is because Aht Uhrgan Whitegate uses 2 different dats.
-                    return mission:progressEvent(3000, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+                    return mission:progressEvent(3000, { text_table = 0 })
                 end,
             },
 

@@ -55,9 +55,9 @@ mission.sections =
                     if not player:hasKeyItem(xi.ki.SUPPLIES_PACKAGE) then
                         -- Naja Salaheem interactions require the 9th argument in events set to 0.
                         -- This is because Aht Uhrgan Whitegate uses 2 different dats.
-                        return mission:progressEvent(3002, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+                        return mission:progressEvent(3002, { text_table = 0 })
                     else
-                        return mission:event(3001, 0, 0, 0, 0, 0, 0, 0, 0, 0) -- Default Dialog.
+                        return mission:event(3001, { text_table = 0 }) -- Default Dialog.
                     end
                 end,
             },

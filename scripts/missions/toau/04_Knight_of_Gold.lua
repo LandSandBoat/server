@@ -38,7 +38,7 @@ mission.sections =
                         (npcUtil.tradeHasExactly(trade, {{ 'gil', 1000 }}) or
                         npcUtil.tradeHasExactly(trade, xi.items.IMPERIAL_BRONZE_PIECE))
                     then
-                        return mission:progressEvent(3022, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+                        return mission:progressEvent(3022, { text_table = 0 })
                     end
                 end,
 
@@ -46,9 +46,9 @@ mission.sections =
                     local missionStatus = player:getMissionStatus(mission.areaId)
 
                     if missionStatus == 0 then
-                        return mission:progressEvent(3035, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+                        return mission:progressEvent(3035, { text_table = 0 })
                     elseif missionStatus == 1 then
-                        return mission:progressEvent(3036, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+                        return mission:progressEvent(3036, { text_table = 0 })
                     end
                 end,
             },
@@ -57,7 +57,7 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if player:getMissionStatus(mission.areaId) == 0 then
-                        return mission:progressEvent(3021, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+                        return mission:progressEvent(3021, { text_table = 0 })
                     end
                 end,
             },
@@ -66,13 +66,13 @@ mission.sections =
             {
                 [4] = function(player, region)
                     if player:getMissionStatus(mission.areaId) == 2 then
-                        return mission:progressEvent(3024, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+                        return mission:progressEvent(3024, { text_table = 0 })
                     end
                 end,
 
                 [5] = function(player, region)
                     if player:getMissionStatus(mission.areaId) == 3 then
-                        return mission:progressEvent(3026, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+                        return mission:progressEvent(3026, { text_table = 0 })
                     end
                 end,
             },

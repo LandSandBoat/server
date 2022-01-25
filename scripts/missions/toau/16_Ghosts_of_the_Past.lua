@@ -40,7 +40,7 @@ mission.sections =
                     if whitegateShared.doRoyalPalaceArmorCheck(player) then
                         return mission:progressEvent(3074, 1, 0, 0, 0, 0, 0, 0, 1, 0)
                     else
-                        return mission:progressEvent(3074, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+                        return mission:progressEvent(3074, { text_table = 0 })
                     end
                 end,
             },

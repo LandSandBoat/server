@@ -35,9 +35,9 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if not player:hasKeyItem(xi.ki.MYTHRIL_MIRROR) then
-                        return mission:progressEvent(3156, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+                        return mission:progressEvent(3156, { text_table = 0 })
                     else
-                        return mission:progressEvent(3149, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+                        return mission:progressEvent(3149, { text_table = 0 })
                     end
                 end,
             },

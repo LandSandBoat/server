@@ -32,7 +32,7 @@ mission.sections =
             onRegionEnter =
             {
                 [3] = function(player, region)
-                    return mission:progressEvent(3139, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+                    return mission:progressEvent(3139, { text_table = 0 })
                 end,
             },
 

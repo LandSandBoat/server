@@ -34,15 +34,15 @@ mission.sections =
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =
         {
-            ['Naja_Salaheem'] = mission:event(3148, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+            ['Naja_Salaheem'] = mission:event(3148, { text_table = 0 }),
 
             ['Rodin-Comidin'] =
             {
                 onTrigger = function(player, npc)
                     if not player:hasKeyItem(xi.ki.NYZUL_ISLE_ROUTE) then
-                        return mission:progressEvent(3142, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+                        return mission:progressEvent(3142, { text_table = 0 })
                     else
-                        return mission:progressEvent(3141, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+                        return mission:progressEvent(3141, { text_table = 0 })
                     end
                 end,
             },
@@ -55,7 +55,7 @@ mission.sections =
                     if player:getMissionStatus(mission.areaId) > 0 then
                         local blockedDialog = mission:getLocalVar(player, 'blockedDialog')
 
-                        return mission:progressEvent(3143, 0, 0, 0, 0, 0, 0, blockedDialog, 0, 0)
+                        return mission:progressEvent(3143, { [6] = blockedDialog, text_table = 0 })
                     end
                 end,
             },

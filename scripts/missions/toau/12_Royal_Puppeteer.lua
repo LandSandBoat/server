@@ -34,7 +34,7 @@ mission.sections =
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =
         {
-            ['Naja_Salaheem'] = mission:progressEvent(3071, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+            ['Naja_Salaheem'] = mission:progressEvent(3071, { text_table = 0 }),
         },
 
         [xi.zone.NASHMAU] =

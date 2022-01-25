@@ -37,11 +37,11 @@ mission.sections =
                     local missionStatus = player:getMissionStatus(mission.areaId)
 
                     if missionStatus == 1 then
-                        return mission:progressEvent(73, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+                        return mission:progressEvent(73, { text_table = 0 })
                     elseif missionStatus == 2 and not mission:getMustZone(player) then
-                        return mission:progressEvent(3020, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+                        return mission:progressEvent(3020, { text_table = 0 })
                     else
-                        return mission:event(3003, xi.besieged.getMercenaryRank(player), 0, 0, 0, 0, 0, 0, 0, 0) -- Default Dialog.
+                        return mission:event(3003, { [0] = xi.besieged.getMercenaryRank(player), text_table = 0 }) -- Default Dialog.
                     end
                 end,
             },
@@ -50,7 +50,7 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if player:getMissionStatus(mission.areaId) == 0 then
-                        return mission:progressEvent(269, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+                        return mission:progressEvent(269, { text_table = 0 })
                     end
                 end,
             },
