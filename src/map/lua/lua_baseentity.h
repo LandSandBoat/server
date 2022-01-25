@@ -80,7 +80,7 @@ public:
     void entityAnimationPacket(const char* command);
 
     void       StartEventHelper(int32 EventID, sol::variadic_args va, EVENT_TYPE eventType);
-    EventInfo* ParseEvent(int32 EventID, sol::variadic_args va, EventPrep* eventPreparation, EVENT_TYPE eventType);
+    std::unique_ptr<EventInfo> ParseEvent(int32 EventID, sol::variadic_args va, std::unique_ptr<EventPrep>&& eventPreparation, EVENT_TYPE eventType);
     void       startEvent(int32 EventID, sol::variadic_args va);
     void       startEventString(int32 EventID, sol::variadic_args va); // Begins Event with string param (0x33 packet)
     void       startCutscene(int32 EventID, sol::variadic_args va); // Begins cutscene which locks the character

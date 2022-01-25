@@ -89,8 +89,8 @@ CCharEntity::CCharEntity()
     objtype     = TYPE_PC;
     m_EcoSystem = ECOSYSTEM::HUMANOID;
 
-    eventPreparation = new EventPrep();
-    currentEvent     = new EventInfo();
+    eventPreparation = std::make_unique<EventPrep>();
+    currentEvent     = std::make_unique<EventInfo>();
 
     inSequence = false;
     gotMessage = false;
@@ -247,13 +247,13 @@ CCharEntity::~CCharEntity()
     delete PMeritPoints;
     delete PJobPoints;
 
-    delete eventPreparation;
-    delete currentEvent;
+    eventPreparation = nullptr;
+    currentEvent = nullptr;
     while (!eventQueue.empty())
     {
-        auto head = eventQueue.front();
+        auto head = std::move(eventQueue.front());
         eventQueue.pop_front();
-        delete head;
+        head = nullptr;
     }
 }
 
@@ -2192,9 +2192,9 @@ void CCharEntity::endCurrentEvent()
     tryStartNextEvent();
 }
 
-void CCharEntity::queueEvent(EventInfo* eventToQueue)
+void CCharEntity::queueEvent(std::unique_ptr<EventInfo>&& eventToQueue)
 {
-    eventQueue.push_back(eventToQueue);
+    eventQueue.push_back(std::move(eventToQueue));
     tryStartNextEvent();
 }
 
@@ -2203,10 +2203,10 @@ void CCharEntity::tryStartNextEvent()
     if (isInEvent() || eventQueue.empty())
         return;
 
-    EventInfo* oldEvent = currentEvent;
-    currentEvent        = eventQueue.front();
+    auto oldEvent = std::move(currentEvent);
+    currentEvent        = std::move(eventQueue.front());
     eventQueue.pop_front();
-    delete oldEvent;
+    oldEvent = nullptr;
 
     eventPreparation->reset();
 
@@ -2237,11 +2237,11 @@ void CCharEntity::tryStartNextEvent()
 
     if (currentEvent->strings.empty())
     {
-        pushPacket(new CEventPacket(this, currentEvent));
+        pushPacket(new CEventPacket(this, std::move(currentEvent)));
     }
     else
     {
-        pushPacket(new CEventStringPacket(this, currentEvent));
+        pushPacket(new CEventStringPacket(this, std::move(currentEvent)));
     }
 }
 

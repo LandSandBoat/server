@@ -204,9 +204,10 @@ public:
     jobs_t     jobs;       // доступрые профессии персонажа
     keyitems_t keys;       // таблица ключевых предметов
 
-    EventPrep* eventPreparation;      // Information about a potential upcoming event
-    EventInfo* currentEvent;          // The currently ongoing event playing for the player
-    std::list<EventInfo*> eventQueue; // The queued events to play for the player
+    std::unique_ptr<EventPrep> eventPreparation;      // Information about a potential upcoming event
+    std::unique_ptr<EventInfo> currentEvent;          // The currently ongoing event playing for the player
+    std::list<std::unique_ptr<EventInfo>> eventQueue; // The queued events to play for the player
+
     bool       inSequence;            // True if the player is locked in a NPC sequence
     bool       gotMessage;            // Used to let the interaction framework know that a message outside of it was triggered.
 
@@ -427,7 +428,7 @@ public:
 
     bool isInEvent();
     bool isNpcLocked();
-    void queueEvent(EventInfo* eventToQueue);
+    void queueEvent(std::unique_ptr<EventInfo>&& eventToQueue);
     void endCurrentEvent();
     void tryStartNextEvent();
     void skipEvent();

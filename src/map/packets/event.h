@@ -40,7 +40,7 @@ class CCharEntity;
 class CEventPacket : public CBasicPacket
 {
 public:
-    CEventPacket(CCharEntity* PChar, EventInfo* eventInfo);
+    CEventPacket(CCharEntity* PChar, std::unique_ptr<EventInfo>&& eventInfo);
 };
 
 #endif

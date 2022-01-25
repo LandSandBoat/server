@@ -1877,8 +1877,8 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        EventPrep* previousPrep = PChar->eventPreparation;
-        PChar->eventPreparation = PChar->currentEvent;
+        auto previousPrep = std::move(PChar->eventPreparation);
+        //PChar->eventPreparation = std::move(PChar->currentEvent);
 
         auto onEventUpdate = LoadEventScript(PChar, "onEventUpdate");
         if (!onEventUpdate.valid())
@@ -1901,7 +1901,7 @@ namespace luautils
             return -1;
         }
 
-        PChar->eventPreparation = previousPrep;
+        PChar->eventPreparation = std::move(previousPrep);
 
         return func_result.get_type() == sol::type::number ? func_result.get<int32>() : 1;
     }
@@ -1915,8 +1915,8 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        EventPrep* previousPrep = PChar->eventPreparation;
-        PChar->eventPreparation = PChar->currentEvent;
+        auto previousPrep = std::move(PChar->eventPreparation);
+        //PChar->eventPreparation = std::move(PChar->currentEvent);
 
         auto onEventUpdateFramework = lua["xi"]["globals"]["interaction"]["interaction_global"]["onEventUpdate"];
         auto onEventUpdate = LoadEventScript(PChar, "onEventUpdate");
@@ -1935,7 +1935,7 @@ namespace luautils
             return -1;
         }
 
-        PChar->eventPreparation = previousPrep;
+        PChar->eventPreparation = std::move(previousPrep);
 
         return func_result.get_type() == sol::type::number ? func_result.get<int32>() : 1;
     }
@@ -1944,8 +1944,8 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        EventPrep* previousPrep = PChar->eventPreparation;
-        PChar->eventPreparation = PChar->currentEvent;
+        auto previousPrep = std::move(PChar->eventPreparation);
+        //PChar->eventPreparation = std::move(PChar->currentEvent);
 
         auto onEventUpdateFramework = lua["xi"]["globals"]["interaction"]["interaction_global"]["onEventUpdate"];
         auto onEventUpdate = LoadEventScript(PChar, "onEventUpdate");
@@ -1964,7 +1964,7 @@ namespace luautils
             return -1;
         }
 
-        PChar->eventPreparation = previousPrep;
+        PChar->eventPreparation = std::move(previousPrep);
 
         return 0;
     }
@@ -1979,8 +1979,8 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        EventPrep* previousPrep = PChar->eventPreparation;
-        PChar->eventPreparation = PChar->currentEvent;
+        auto previousPrep = std::move(PChar->eventPreparation);
+        //PChar->eventPreparation = std::move(PChar->currentEvent);
 
         auto onEventFinishFramework = lua["xi"]["globals"]["interaction"]["interaction_global"]["onEventFinish"];
         auto onEventFinish = LoadEventScript(PChar, "onEventFinish");
@@ -2004,7 +2004,7 @@ namespace luautils
             return -1;
         }
 
-        PChar->eventPreparation = previousPrep;
+        PChar->eventPreparation = std::move(previousPrep);
 
         if (PChar->currentEvent->scriptFile.find("/bcnms/") > 0 && PChar->health.hp <= 0)
         { // for some reason the event doesnt enforce death afterwards

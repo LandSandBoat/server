@@ -26,7 +26,7 @@
 #include "../entities/charentity.h"
 #include "event.h"
 
-CEventPacket::CEventPacket(CCharEntity* PChar, EventInfo* eventInfo)
+CEventPacket::CEventPacket(CCharEntity* PChar, std::unique_ptr<EventInfo>&& eventInfo)
 {
     this->type = 0x32;
     this->size = 0x0A;

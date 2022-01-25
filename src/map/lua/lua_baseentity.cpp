@@ -803,16 +803,16 @@ void CLuaBaseEntity::StartEventHelper(int32 EventID, sol::variadic_args va, EVEN
         return;
     }
 
-    PChar->queueEvent(ParseEvent(EventID, va, PChar->eventPreparation, eventType));
+    PChar->queueEvent(ParseEvent(EventID, va, std::move(PChar->eventPreparation), eventType));
 }
 
 /************************************************************************
  *  Helper function for parsing event information from lua.
  ************************************************************************/
-EventInfo* CLuaBaseEntity::ParseEvent(int32 EventID, sol::variadic_args va, EventPrep* eventPreparation, EVENT_TYPE eventType)
+std::unique_ptr<EventInfo> CLuaBaseEntity::ParseEvent(int32 EventID, sol::variadic_args va, std::unique_ptr<EventPrep>&& eventPreparation, EVENT_TYPE eventType)
 {
-    EventInfo* eventToStart = new EventInfo();
-    eventToStart->eventId   = EventID;
+    auto eventToStart = std::make_unique<EventInfo>();
+    eventToStart->eventId = EventID;
     if (eventPreparation)
     {
         eventToStart->targetEntity = eventPreparation->targetEntity;
@@ -904,7 +904,6 @@ EventInfo* CLuaBaseEntity::ParseEvent(int32 EventID, sol::variadic_args va, Even
         eventToStart->textTable = va.get_type(8) == sol::type::number ? va.get<int16>(8) : -1;
     }
 
-
     if (eventType == OPTIONAL_CUTSCENE)
     {
         // If it's a teleporter or door, where the player has to select the option to
@@ -912,7 +911,7 @@ EventInfo* CLuaBaseEntity::ParseEvent(int32 EventID, sol::variadic_args va, Even
         eventToStart->cutsceneOptions = std::move(cutsceneOptions);
     }
 
-    return eventToStart;
+    return std::move(eventToStart);
 }
 
 /************************************************************************
