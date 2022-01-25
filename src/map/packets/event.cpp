@@ -45,7 +45,7 @@ CEventPacket::CEventPacket(CCharEntity* PChar, EventInfo* eventInfo)
     }
     ref<uint32>(0x04) = npcID;
 
-    if (eventInfo->params.size() > 0)
+    if (eventInfo->params.size() > 0 || eventInfo->textTable != -1)
     {
         this->type = 0x34;
         this->size = 0x1A;

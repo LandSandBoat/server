@@ -1046,9 +1046,137 @@ void CMobEntity::DropItems(CCharEntity* PChar)
                 }
             }
         }
-        // Todo: Avatarite and Geode drops during day/weather. Much higher chance during weather than day.
-        // Item element matches day/weather element, not mob crystal. Lv80+ xp mobs can drop Avatarite.
-        // Wiki's have conflicting info on mob lv required for Geodes. One says 50 the other 75. I think 50 is correct.
+
+        /* check for Avatarite/Geode Drops.
+            LV >= 50 = Geodes can drop IF matching weather or day.
+            Weather gets priority e.g. rainstorm on firesday would get Water Geode instead of fire
+            LV >= 80 = Avatrites can also drop, same rules. If one drops, the other does not.
+            unfortunately, the order of the items/weathers/days don't match.
+        */
+        if (GetMLevel() >= 50)
+        {
+            uint8 weather = PChar->loc.zone->GetWeather();
+            uint8 element = 0;
+
+            // Set element by weather
+            if (weather >= 4 && weather <= 19)
+            {
+                /*
+                element = zoneutils::GetWeatherElement(weather);
+                Can't use this because of the TODO in zoneutils about broken element order >.<
+                So we have this ugly switch until then.
+                */
+                switch (weather)
+                {
+                    case 4:
+                    case 5:
+                        element = ELEMENT_FIRE;
+                        break;
+                    case 6:
+                    case 7:
+                        element = ELEMENT_WATER;
+                        break;
+                    case 8:
+                    case 9:
+                        element = ELEMENT_EARTH;
+                        break;
+                    case 10:
+                    case 11:
+                        element = ELEMENT_WIND;
+                        break;
+                    case 12:
+                    case 13:
+                        element = ELEMENT_ICE;
+                        break;
+                    case 14:
+                    case 15:
+                        element = ELEMENT_THUNDER;
+                        break;
+                    case 16:
+                    case 17:
+                        element = ELEMENT_LIGHT;
+                        break;
+                    case 18:
+                    case 19:
+                        element = ELEMENT_DARK;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            // Set element from day instead
+            else
+            {
+                element = battleutils::GetDayElement();
+            }
+
+            // Roll for Geode, dude!
+            if (xirand::GetRandomNumber(100) < 20)
+            {
+                switch (element)
+                {
+                    case ELEMENT_FIRE:
+                        AddItemToPool(3297, ++dropCount); // Flame Geode
+                        break;
+                    case ELEMENT_EARTH:
+                        AddItemToPool(3300, ++dropCount); // Soil Geode
+                        break;
+                    case ELEMENT_WATER:
+                        AddItemToPool(3302, ++dropCount); // Aqua Geode
+                        break;
+                    case ELEMENT_WIND:
+                        AddItemToPool(3299, ++dropCount); // Breeze Geode
+                        break;
+                    case ELEMENT_ICE:
+                        AddItemToPool(3298, ++dropCount); // Snow Geode
+                        break;
+                    case ELEMENT_THUNDER:
+                        AddItemToPool(3301, ++dropCount); // Thunder Geode
+                        break;
+                    case ELEMENT_LIGHT:
+                        AddItemToPool(3303, ++dropCount); // Light Geode
+                        break;
+                    case ELEMENT_DARK:
+                        AddItemToPool(3304, ++dropCount); // Shadow Geode
+                        break;
+                    default:
+                        break;
+                }
+            }
+            // At LV 80 and above, you may get Avatarite if a Geode didn't drop
+            else if (GetMLevel() >= 80 && xirand::GetRandomNumber(100) < 20)
+            {
+                switch (element)
+                {
+                    case ELEMENT_FIRE:
+                        AddItemToPool(3520, ++dropCount); // Ifritite
+                        break;
+                    case ELEMENT_EARTH:
+                        AddItemToPool(3523, ++dropCount); // Titanite
+                        break;
+                    case ELEMENT_WATER:
+                        AddItemToPool(3525, ++dropCount); // Leviatite
+                        break;
+                    case ELEMENT_WIND:
+                        AddItemToPool(3522, ++dropCount); // Garudite
+                        break;
+                    case ELEMENT_ICE:
+                        AddItemToPool(3521, ++dropCount); // Shivite
+                        break;
+                    case ELEMENT_THUNDER:
+                        AddItemToPool(3524, ++dropCount); // Ramuite
+                        break;
+                    case ELEMENT_LIGHT:
+                        AddItemToPool(3526, ++dropCount); // Carbit
+                        break;
+                    case ELEMENT_DARK:
+                        AddItemToPool(3527, ++dropCount); // Fenrite
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
 
         uint8 effect = 0; // Begin Adding Crystals
 
