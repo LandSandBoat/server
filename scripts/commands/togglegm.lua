@@ -38,12 +38,16 @@ function onTrigger(player)
         local gmlvl = player:getGMLevel()
         if (gmlvl >= MINLVL_GM_PRODUCER) then
             player:setFlag(FLAG_GM_PRODUCER)
+			player:PrintToPlayer( "Producer" )
         elseif (gmlvl >= MINLVL_GM_LEAD) then
             player:setFlag(FLAG_GM_LEAD)
+			player:PrintToPlayer( "Lead GM" )
         elseif (gmlvl >= MINLVL_GM_SENIOR) then
             player:setFlag(FLAG_GM_SENIOR)
+			player:PrintToPlayer( "Senior GM" )
         elseif (gmlvl >= MINLVL_GM) then
             player:setFlag(FLAG_GM)
+			player:PrintToPlayer( "GM" )
         end
     end
 end
