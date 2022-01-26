@@ -50,16 +50,13 @@ mob:setMod(xi.mod.UDMGBREATH, -10000) -- immune to breath damage
     mob:setMod(xi.mod.THUNDER_RES, 200)
     mob:setMod(xi.mod.WIND_RES, 200)
     mob:setMod(xi.mod.SILENCERES, 100)
-    mob:setMod(xi.mod.STUNRES, 99)
-    -- Adding Resbuild for Stun as it was too potent.
-    mob:setMod(xi.mod.RESBUILD_STUN, 50)
+    mob:setMod(xi.mod.STUNRES, 50)
     mob:setMod(xi.mod.BINDRES, 100)
     mob:setMod(xi.mod.GRAVITYRES, 100)
     mob:setMod(xi.mod.SLEEPRES, 100)
     mob:setMod(xi.mod.POISONRES, 100)
     mob:setMod(xi.mod.PARALYZERES, 100)
     mob:setMod(xi.mod.LULLABYRES, 100)
-    mob:setMod(xi.mod.RESBUILD_SLOW, 10)
     mob:setMod(xi.mod.FASTCAST, 10)
     -- Status Effecs Based On https://ffxiclopedia.fandom.com/wiki/Buarainech
     mob:addStatusEffect(xi.effect.SHOCK_SPIKES, 50, 0, 0)

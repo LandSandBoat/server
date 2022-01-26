@@ -2,10 +2,6 @@
 -- Area: Crawlers Nest [S]
 --   NM: Lugh
 ------------------------------
-------------------------------
--- Area: Garlaige Citadel [S]
---   NM: Elatha
-------------------------------
 mixins =
 {
 	require("scripts/mixins/fomor_hate"),
@@ -51,9 +47,7 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.WIND_RES, 170)
     mob:setMod(xi.mod.SILENCERES, 100)
     mob:setMod(xi.mod.FIRE_ABSORB, 100)
-    mob:setMod(xi.mod.STUNRES, 99)
-    -- Adding Resbuild for Stun as it was too potent.
-    mob:setMod(xi.mod.RESBUILD_STUN, 50)
+    mob:setMod(xi.mod.STUNRES, 50)
     mob:setMod(xi.mod.BINDRES, 100)
     mob:setMod(xi.mod.GRAVITYRES, 100)
     mob:setMod(xi.mod.SLEEPRES, 100)
