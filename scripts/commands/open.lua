@@ -23,6 +23,4 @@ function onTrigger(player, open_time, target)
     end
 
     targ:openDoor(open_time)
-
-
 end
