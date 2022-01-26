@@ -2,10 +2,6 @@
 -- Area: The Eldieme Necropolis [S]
 --   NM: Tethra
 ------------------------------
-------------------------------
--- Area: Garlaige Citadel [S]
---   NM: Elatha
-------------------------------
 mixins =
 {
 	require("scripts/mixins/fomor_hate"),
@@ -30,7 +26,7 @@ end
 
 entity.onMobSpawn = function(mob)
     -- All Mods Here Are Assigned For Initial Difficulty Tuning
-		mob:setMobMod(xi.mobMod.DRAW_IN, 1)
+	mob:setMobMod(xi.mobMod.DRAW_IN, 1)
     mob:addMod(xi.mod.MAIN_DMG_RATING, 50)
     mob:addMod(xi.mod.STR, 40)
     mob:addMod(xi.mod.VIT, 20)
@@ -54,9 +50,7 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.WIND_RES, 128)
     mob:setMod(xi.mod.ICE_RES, 200)
     mob:setMod(xi.mod.SILENCERES, 100)
-    mob:setMod(xi.mod.STUNRES, 99)
-    -- Adding Resbuild for Stun as it was too potent.
-    mob:setMod(xi.mod.RESBUILD_STUN, 50)
+    mob:setMod(xi.mod.STUNRES, 50)
     mob:setMod(xi.mod.BINDRES, 100)
     mob:setMod(xi.mod.GRAVITYRES, 100)
     mob:setMod(xi.mod.SLEEPRES, 100)
