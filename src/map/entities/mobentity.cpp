@@ -843,7 +843,8 @@ void CMobEntity::DropItems(CCharEntity* PChar)
     auto AddItemToPool = [this, PChar](uint16 ItemID, uint8 dropCount)
     {
         PChar->PTreasurePool->AddItem(ItemID, this);
-        return dropCount >= TREASUREPOOL_SIZE;
+        // return dropCount >= TREASUREPOOL_SIZE; // This was capping loot to 10 items.		
+        return false; // This is unlimited loot items.
     };
 
     auto UpdateDroprateOrAddToList = [&](std::vector<DropItem_t>& list, uint8 dropType, uint16 itemID, uint16 dropRate)
