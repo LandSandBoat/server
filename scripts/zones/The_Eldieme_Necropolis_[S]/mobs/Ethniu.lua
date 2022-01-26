@@ -18,6 +18,12 @@ require("scripts/globals/job_utils/geomancer")
 ------------------------------
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.GIL_MIN, 12000)
+    mob:setMobMod(xi.mobMod.GIL_MAX, 30000)
+    mob:setMobMod(xi.mobMod.MUG_GIL, 8000)
+end
+
 entity.onMobSpawn = function(mob)
     -- All Mods Here Are Assigned For Initial Difficulty Tuning
 	mob:setMobMod(xi.mobMod.DRAW_IN, 1)
@@ -47,15 +53,12 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.ICE_RES, 200)
     mob:setMod(xi.mod.WIND_RES, 170)
     mob:setMod(xi.mod.SILENCERES, 100)
-    mob:setMod(xi.mod.STUNRES, 99)
-    -- Adding Resbuild for Stun as it was too potent.
-    mob:setMod(xi.mod.RESBUILD_STUN, 50)
+    mob:setMod(xi.mod.STUNRES, 50)
     mob:setMod(xi.mod.BINDRES, 100)
     mob:setMod(xi.mod.GRAVITYRES, 100)
     mob:setMod(xi.mod.SLEEPRES, 100)
     mob:setMod(xi.mod.PARALYZERES, 100)
     mob:setMod(xi.mod.LULLABYRES, 100)
-    mob:setMod(xi.mod.RESBUILD_SLOW, 10)
     mob:setMod(xi.mod.FASTCAST, 10)
     -- Status Effecs Based On https://ffxiclopedia.fandom.com/wiki/Ethniu
     mob:addStatusEffect(xi.effect.REGAIN, 10, 3, 0)
