@@ -1,6 +1,6 @@
 ---------------------------------------------------------------------------------------------------
 -- func: spin <player>
--- desc: Spins a character in place. Used for fishbot detection.
+-- desc: Spins a character in place. Used for fishbot detection. Changes player direction
 ---------------------------------------------------------------------------------------------------
 
 cmdprops =
