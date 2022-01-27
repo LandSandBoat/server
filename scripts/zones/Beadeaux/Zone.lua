@@ -31,7 +31,7 @@ zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
 
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
-        player:setPos(387.382, 38.029, 19.694, 3)
+        player:setPos(-278, 1, 100, 246)
     end
 
     if prevZone == xi.zone.PASHHOW_MARSHLANDS then
