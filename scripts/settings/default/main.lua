@@ -83,6 +83,7 @@ xi.settings =
     GIL_RATE        = 1.000, -- Multiplies gil earned from quests.  Won't always display in game.
     BAYLD_RATE      = 1.000, -- Multiples bayld earned from quests.
     EXP_RATE        = 1.000, -- Multiplies exp earned from fov and quests.
+    FOV_EXP_RATE	= 1.000, -- Multiplies exp from FoV.
     TABS_RATE       = 1.000, -- Multiplies tabs earned from fov.
     ROE_EXP_RATE    = 1.000, -- Multiplies exp earned from records of eminence.
     SPARKS_RATE     = 1.000, -- Multiplies sparks earned from records of eminence.
