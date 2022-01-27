@@ -913,6 +913,14 @@ local helmInfo =
                     { 600, 1638}, -- Moblin Mask
                     { 570,  568}, -- Goblin Die
                     { 570, 1631}, -- Moblin Armor
+                    { 30, 1255}, -- chunk_of_fire_ore
+                    { 30, 1256}, -- chunk_of_ice_ore
+                    { 30, 1257}, -- chunk_of_wind_ore
+                    { 30, 1258}, -- chunk_of_earth_ore
+                    { 30, 1259}, -- chunk_of_lightning_ore
+                    { 30, 1260}, -- chunk_of_water_ore
+                    { 30, 1261}, -- chunk_of_light_ore
+                    { 30, 1262}, -- chunk_of_dark_ore					
                     {  80,  645}, -- Darksteel Ore
                     {  80,  644}, -- Mythril Ore
                     {  70,  737}, -- Gold Ore
@@ -950,6 +958,14 @@ local helmInfo =
                     { 210,  644}, -- Mythril Ore
                     { 140,  737}, -- Gold Ore
                     { 340,  738}, -- Platium Ore
+                    { 30, 1255}, -- chunk_of_fire_ore
+                    { 30, 1256}, -- chunk_of_ice_ore
+                    { 30, 1257}, -- chunk_of_wind_ore
+                    { 30, 1258}, -- chunk_of_earth_ore
+                    { 30, 1259}, -- chunk_of_lightning_ore
+                    { 30, 1260}, -- chunk_of_water_ore
+                    { 30, 1261}, -- chunk_of_light_ore
+                    { 30, 1262}, -- chunk_of_dark_ore
                     {  70,  769}, -- Colored Rock
                 },
                 points =
@@ -981,6 +997,14 @@ local helmInfo =
                     { 380, 2160}, -- Troll Pauldron
                     { 450, 2161}, -- Troll Vambrace
                     { 430, 1638}, -- Moblin Mask
+                    { 30, 1255}, -- chunk_of_fire_ore
+                    { 30, 1256}, -- chunk_of_ice_ore
+                    { 30, 1257}, -- chunk_of_wind_ore
+                    { 30, 1258}, -- chunk_of_earth_ore
+                    { 30, 1259}, -- chunk_of_lightning_ore
+                    { 30, 1260}, -- chunk_of_water_ore
+                    { 30, 1261}, -- chunk_of_light_ore
+                    { 30, 1262}, -- chunk_of_dark_ore
                     { 210,  902}, -- Demon Horn
                     { 140,  646}, -- Adaman Ore
                     {  30,  685}, -- Khroma Ore
@@ -1029,6 +1053,14 @@ local helmInfo =
                     {1200, 1108}, -- Pinch of Sulfur
                     { 480, 2160}, -- Troll Pauldron
                     { 330, 2161}, -- Troll Vambrace
+                    { 30, 1255}, -- chunk_of_fire_ore
+                    { 30, 1256}, -- chunk_of_ice_ore
+                    { 30, 1257}, -- chunk_of_wind_ore
+                    { 30, 1258}, -- chunk_of_earth_ore
+                    { 30, 1259}, -- chunk_of_lightning_ore
+                    { 30, 1260}, -- chunk_of_water_ore
+                    { 30, 1261}, -- chunk_of_light_ore
+                    { 30, 1262}, -- chunk_of_dark_ore					
                 },
                 points =
                 {
@@ -1065,6 +1097,14 @@ local helmInfo =
                     { 860,   736}, -- Silver Ore
                     {1180,   643}, -- Iron Ore
                     { 750,   644}, -- Mythril Ore
+                    { 30, 1255}, -- chunk_of_fire_ore
+                    { 30, 1256}, -- chunk_of_ice_ore
+                    { 30, 1257}, -- chunk_of_wind_ore
+                    { 30, 1258}, -- chunk_of_earth_ore
+                    { 30, 1259}, -- chunk_of_lightning_ore
+                    { 30, 1260}, -- chunk_of_water_ore
+                    { 30, 1261}, -- chunk_of_light_ore
+                    { 30, 1262}, -- chunk_of_dark_ore
                     { 210,  1638}, -- Moblin Mask
                     { 110,  1625}, -- Moblin Helm
                     { 110,  1632}, -- Moblin Mail
@@ -1115,6 +1155,14 @@ local helmInfo =
                     {1320,   642}, -- Zinc Ore
                     { 840,   768}, -- Flint Stone
                     { 360,   736}, -- Silver Ore
+                    { 30, 1255}, -- chunk_of_fire_ore
+                    { 30, 1256}, -- chunk_of_ice_ore
+                    { 30, 1257}, -- chunk_of_wind_ore
+                    { 30, 1258}, -- chunk_of_earth_ore
+                    { 30, 1259}, -- chunk_of_lightning_ore
+                    { 30, 1260}, -- chunk_of_water_ore
+                    { 30, 1261}, -- chunk_of_light_ore
+                    { 30, 1262}, -- chunk_of_dark_ore
                     { 170,   769}, -- Colored Rock
                     { 150,   645}, -- Darksteel Ore
                     { 110,   737}, -- Gold Ore
@@ -1168,6 +1216,14 @@ local helmInfo =
                     { 900,   644}, -- Mythril Ore
                     { 900,   736}, -- Silver Ore
                     { 800,   640}, -- Copper Ore
+                    { 30, 1255}, -- chunk_of_fire_ore
+                    { 30, 1256}, -- chunk_of_ice_ore
+                    { 30, 1257}, -- chunk_of_wind_ore
+                    { 30, 1258}, -- chunk_of_earth_ore
+                    { 30, 1259}, -- chunk_of_lightning_ore
+                    { 30, 1260}, -- chunk_of_water_ore
+                    { 30, 1261}, -- chunk_of_light_ore
+                    { 30, 1262}, -- chunk_of_dark_ore
                     { 100,   738}, -- Platium Ore
                 },
                 points =
@@ -1205,6 +1261,14 @@ local helmInfo =
                     {1330,   642}, -- Zinc Ore
                     {1120,   641}, -- Tin Ore
                     { 550,  1984}, -- Snapping Mole
+                    { 30, 1255}, -- chunk_of_fire_ore
+                    { 30, 1256}, -- chunk_of_ice_ore
+                    { 30, 1257}, -- chunk_of_wind_ore
+                    { 30, 1258}, -- chunk_of_earth_ore
+                    { 30, 1259}, -- chunk_of_lightning_ore
+                    { 30, 1260}, -- chunk_of_water_ore
+                    { 30, 1261}, -- chunk_of_light_ore
+                    { 30, 1262}, -- chunk_of_dark_ore
                     { 180,   736}, -- Silver Ore
                     {  40,   645}, -- Darksteel Ore
                 },
@@ -1248,7 +1312,15 @@ local helmInfo =
                     { 810,   736}, -- Silver Ore
                     { 590,   645}, -- Darksteel Ore
                     { 400,   769}, -- Colored Rock
-                    {  80,   737}, -- Gold Ore
+                    { 30, 1255}, -- chunk_of_fire_ore
+                    { 30, 1256}, -- chunk_of_ice_ore
+                    { 30, 1257}, -- chunk_of_wind_ore
+                    { 30, 1258}, -- chunk_of_earth_ore
+                    { 30, 1259}, -- chunk_of_lightning_ore
+                    { 30, 1260}, -- chunk_of_water_ore
+                    { 30, 1261}, -- chunk_of_light_ore
+                    { 30, 1262}, -- chunk_of_dark_ore
+					{  80,   737}, -- Gold Ore
                 },
                 points =
                 {
@@ -1285,6 +1357,14 @@ local helmInfo =
                     { 250,   646}, -- Adaman Ore
                     { 600,   645}, -- Darksteel Ore
                     {1520,  2126}, -- Orpiment
+                    { 30, 1255}, -- chunk_of_fire_ore
+                    { 30, 1256}, -- chunk_of_ice_ore
+                    { 30, 1257}, -- chunk_of_wind_ore
+                    { 30, 1258}, -- chunk_of_earth_ore
+                    { 30, 1259}, -- chunk_of_lightning_ore
+                    { 30, 1260}, -- chunk_of_water_ore
+                    { 30, 1261}, -- chunk_of_light_ore
+                    { 30, 1262}, -- chunk_of_dark_ore
                     { 100,   739}, -- Orichalcum Ore
                     { 220,   769}, -- Colored Rock
                 },
