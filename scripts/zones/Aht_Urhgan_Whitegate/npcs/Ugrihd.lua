@@ -39,9 +39,13 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local rank = xi.besieged.getMercenaryRank(player)
-    local badge = xi.besieged.badges[rank]
     local points = player:getCurrency("imperial_standing")
+    local rank   = xi.besieged.getMercenaryRank(player)
+    local badge  = 0
+    if rank > 0 then
+        badge = xi.besieged.badges[rank]
+    end
+
     player:startEvent(150, rank, badge, points, 0, 0, 0, 0, 0, 0)
 end
 
@@ -49,13 +53,13 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    if csid == 150 and option < 0x40000000 then
-        local quantity = bit.rshift(option, 0x8)
-        local stacks = math.floor(quantity / 99)
+    if csid == 150 and option < 0x40000000 and option > 255 then
+        local coinType  = bit.band(option, 0xFF)
+        local quantity  = bit.rshift(option, 0x8)
+        local stacks    = math.floor(quantity / 99)
         local remainder = quantity % 99
-        local coinType = bit.band(option, 0xFF)
-        local item = ImperialPieces[coinType].item
-        local price = ImperialPieces[coinType].price
+        local item      = ImperialPieces[coinType].item
+        local price     = ImperialPieces[coinType].price
 
         if player:getCurrency("imperial_standing") < quantity * price then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, item)
