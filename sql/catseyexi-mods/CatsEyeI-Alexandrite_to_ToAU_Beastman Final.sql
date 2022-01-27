@@ -57,6 +57,10 @@ INSERT INTO `mob_droplist` VALUES (1523,0,0,1000,5736,50);
 INSERT INTO `mob_droplist` VALUES (2794,0,0,1000,5736,50);
 INSERT INTO `mob_droplist` VALUES (1492,0,0,1000,5736,50);
 
+
+
+
+
 # 100% Alexandrite Drop Chance
 INSERT INTO `mob_droplist` VALUES (572,0,0,1000,2488,1000);
 INSERT INTO `mob_droplist` VALUES (646,0,0,1000,2488,1000);
