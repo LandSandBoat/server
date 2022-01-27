@@ -1853,8 +1853,6 @@ namespace luautils
         PChar->eventPreparation->targetEntity = PNpc;
         PChar->eventPreparation->scriptFile   = filename;
 
-        PChar->StatusEffectContainer->DelStatusEffect(EFFECT_BOOST);
-
         auto onTriggerFramework = lua["xi"]["globals"]["interaction"]["interaction_global"]["onTrigger"];
         auto onTrigger = GetCacheEntryFromFilename(filename)["onTrigger"];
 
