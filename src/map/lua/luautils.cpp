@@ -245,6 +245,7 @@ namespace luautils
         lua.script_file("./scripts/globals/battlefield.lua");
         lua.script_file("./scripts/globals/mobs.lua");
         lua.script_file("./scripts/globals/mixins.lua");
+        lua.script_file("./scripts/globals/additional_effects.lua");
 
         // Pet Scripts
         CacheLuaObjectFromFile("./scripts/globals/pets/automaton.lua");
