@@ -42,6 +42,7 @@ RoeSystemData                         roeutils::RoeSystem;
 
 void SaveEminenceDataNice(CCharEntity* PChar)
 {
+    TracyZoneScoped;
     if (PChar->m_eminenceCache.lastWriteout < time(nullptr) - ROE_CACHETIME)
     {
         charutils::SaveEminenceData(PChar);
@@ -50,6 +51,7 @@ void SaveEminenceDataNice(CCharEntity* PChar)
 
 void call_onRecordTrigger(CCharEntity* PChar, uint16 recordID, const RoeDatagramList& payload)
 {
+    TracyZoneScoped;
     // TODO: Move this Lua interaction into luautils
     auto onRecordTrigger = luautils::lua["xi"]["roe"]["onRecordTrigger"];
     if (!onRecordTrigger.valid())
@@ -96,6 +98,7 @@ namespace roeutils
 {
     void init()
     {
+        TracyZoneScoped;
         roeutils::RoeSystem.RoeEnabled   = luautils::lua["xi"]["settings"]["ENABLE_ROE"].get_or(0);
         luautils::lua["RoeParseRecords"] = &roeutils::ParseRecords;
         luautils::lua["RoeParseTimed"]   = &roeutils::ParseTimedSchedule;
@@ -104,6 +107,7 @@ namespace roeutils
 
     void ParseRecords(sol::table const& records_table)
     {
+        TracyZoneScoped;
         RoeHandlers.fill(RoeCheckHandler());
         roeutils::RoeSystem.ImplementedRecords.reset();
         roeutils::RoeSystem.RepeatableRecords.reset();
@@ -194,6 +198,7 @@ namespace roeutils
 
     void ParseTimedSchedule(sol::table const& schedule_table)
     {
+        TracyZoneScoped;
         roeutils::RoeSystem.TimedRecords.reset();
         roeutils::RoeSystem.TimedRecordTable.fill(RecordTimetable_D{});
 
@@ -242,11 +247,13 @@ namespace roeutils
 
     bool event(ROE_EVENT eventID, CCharEntity* PChar, const RoeDatagram& data) // shorthand for single-datagram calls.
     {
+        TracyZoneScoped;
         return event(eventID, PChar, RoeDatagramList{ data });
     }
 
     void SetEminenceRecordCompletion(CCharEntity* PChar, uint16 recordID, bool newStatus)
     {
+        TracyZoneScoped;
         uint16 page = recordID / 8;
         uint8  bit  = recordID % 8;
         if (newStatus)
@@ -268,6 +275,7 @@ namespace roeutils
 
     bool GetEminenceRecordCompletion(CCharEntity* PChar, uint16 recordID)
     {
+        TracyZoneScoped;
         uint16 page = recordID / 8;
         uint8  bit  = recordID % 8;
         return PChar->m_eminenceLog.complete[page] & (1 << bit);
@@ -275,6 +283,7 @@ namespace roeutils
 
     uint16 GetNumEminenceCompleted(CCharEntity* PChar)
     {
+        TracyZoneScoped;
         uint16 completedCount {0};
 
         for (uint16 page = 0; page < 512; page++)
@@ -299,6 +308,7 @@ namespace roeutils
 
     bool AddEminenceRecord(CCharEntity* PChar, uint16 recordID)
     {
+        TracyZoneScoped;
         // We deny taking records which aren't implemented in the Lua
         if (!roeutils::RoeSystem.ImplementedRecords.test(recordID))
         {
@@ -341,6 +351,7 @@ namespace roeutils
 
     bool DelEminenceRecord(CCharEntity* PChar, uint16 recordID)
     {
+        TracyZoneScoped;
         for (int i = 0; i < 30; i++)
         {
             if (PChar->m_eminenceLog.active[i] == recordID)
@@ -364,11 +375,13 @@ namespace roeutils
 
     bool HasEminenceRecord(CCharEntity* PChar, uint16 recordID)
     {
+        TracyZoneScoped;
         return PChar->m_eminenceCache.activemap.test(recordID);
     }
 
     uint32 GetEminenceRecordProgress(CCharEntity* PChar, uint16 recordID)
     {
+        TracyZoneScoped;
         for (int i = 0; i < 31; i++)
         {
             if (PChar->m_eminenceLog.active[i] == recordID)
@@ -381,6 +394,7 @@ namespace roeutils
 
     bool SetEminenceRecordProgress(CCharEntity* PChar, uint16 recordID, uint32 progress)
     {
+        TracyZoneScoped;
         for (int i = 0; i < 31; i++)
         {
             if (PChar->m_eminenceLog.active[i] == recordID)
@@ -401,6 +415,7 @@ namespace roeutils
 
     void UpdateUnityTrust(CCharEntity* PChar, bool sendUpdate)
     {
+        TracyZoneScoped;
         int32  curPoints        = charutils::GetPoints(PChar, "prev_accolades") / 1000;
         int32  prevPoints       = charutils::GetPoints(PChar, "current_accolades") / 1000;
         uint16 unityLeaderTrust = (PChar->profile.unity_leader > 0) ? ROE_TRUST_ID[PChar->profile.unity_leader - 1] : 0;
@@ -427,6 +442,7 @@ namespace roeutils
 
     void onCharLoad(CCharEntity* PChar)
     {
+        TracyZoneScoped;
         if (!RoeSystem.RoeEnabled)
         {
             return;
@@ -486,6 +502,7 @@ namespace roeutils
 
     void onRecordTake(CCharEntity* PChar, uint16 recordID)
     {
+        TracyZoneScoped;
         if (RoeSystem.RetroactiveRecords.test(recordID))
         {
             call_onRecordTrigger(PChar, recordID, RoeDatagramList{});
@@ -495,6 +512,7 @@ namespace roeutils
 
     bool onRecordClaim(CCharEntity* PChar, uint16 recordID)
     {
+        TracyZoneScoped;
         if (roeutils::HasEminenceRecord(PChar, recordID))
         {
             call_onRecordTrigger(PChar, recordID, RoeDatagramList{ RoeDatagram("claim", 1) });
@@ -505,6 +523,7 @@ namespace roeutils
 
     uint16 GetActiveTimedRecord()
     {
+        TracyZoneScoped;
         uint8 day   = static_cast<uint8>(CVanaTime::getInstance()->getJstWeekDay());
         uint8 block = static_cast<uint8>(CVanaTime::getInstance()->getJstHour() / 4);
         return RoeSystem.TimedRecordTable[day][block];
@@ -512,6 +531,7 @@ namespace roeutils
 
     void AddActiveTimedRecord(CCharEntity* PChar)
     {
+        TracyZoneScoped;
         // Clear old timed entries from log
         PChar->m_eminenceLog.progress[30] = 0;
         PChar->m_eminenceCache.activemap &= ~RoeSystem.TimedRecords;
@@ -531,6 +551,7 @@ namespace roeutils
 
     void ClearDailyRecords(CCharEntity* PChar)
     {
+        TracyZoneScoped;
         // Set daily record progress to 0
         for (int i = 0; i < 30; i++)
         {
@@ -596,6 +617,7 @@ namespace roeutils
 
     void ClearWeeklyRecords(CCharEntity* PChar)
     {
+        TracyZoneScoped;
         // Set daily record progress to 0
         for (int i = 0; i < 30; i++)
         {
@@ -645,6 +667,7 @@ namespace roeutils
     // Weekly Ranking Reset
     void CycleUnityRankings()
     {
+        TracyZoneScoped;
         const char* rankingQuery = "UPDATE unity_system SET members_prev = members_current, points_prev = points_current, members_current = 0, points_current = 0;";
         Sql_Query(SqlHandle, rankingQuery);
 
@@ -653,6 +676,7 @@ namespace roeutils
 
     void UpdateUnityRankings()
     {
+        TracyZoneScoped;
         const char* memberQuery = "UPDATE unity_system JOIN (SELECT unity_leader, COUNT(*) AS members FROM char_profile GROUP BY unity_leader) TMP ON unity_system.leader = unity_leader SET unity_system.members_current = members;";
         Sql_Query(SqlHandle, memberQuery);
 
