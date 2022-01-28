@@ -25,7 +25,7 @@ zone_object.onZoneIn = function(player, prevZone)
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(-519, 1, -33, 193)
     end
-   return cs
+    return cs
 end
 
 zone_object.onRegionEnter = function(player, region)
