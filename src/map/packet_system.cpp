@@ -377,7 +377,7 @@ void SmallPacket0x00A(map_session_data_t* const PSession, CCharEntity* const PCh
                     }
                 }
             }
-        }   
+        }
     }
 
     PChar->pushPacket(new CDownloadingDataPacket());
@@ -1169,7 +1169,8 @@ void SmallPacket0x028(map_session_data_t* const PSession, CCharEntity* const PCh
 
         if (charutils::UpdateItem(PChar, container, slotID, -quantity) != 0)
         {
-            // ShowNotice(CL_CYAN"Player %s DROPPING itemID %u (quantity: %u)", PChar->GetName(), ItemID, quantity);
+            // Todo: add item NAME to this msg before ID. Problem is it's not a string.
+            ShowNotice("Player %s DROPPING itemID: %u quantity: %u", PChar->GetName(), ItemID, quantity);
             PChar->pushPacket(new CMessageStandardPacket(nullptr, ItemID, quantity, MsgStd::ThrowAway));
             PChar->pushPacket(new CInventoryFinishPacket());
         }
@@ -1763,7 +1764,7 @@ void SmallPacket0x03B(map_session_data_t* const PSession, CCharEntity* const PCh
         return;
     }
 
-    if (itemStorageLoc != LOC_STORAGE && action == 1) // Only valid for direct equip/unequip 
+    if (itemStorageLoc != LOC_STORAGE && action == 1) // Only valid for direct equip/unequip
     {
         ShowExploit("SmallPacket0x03B: Invalid item location passed to Mannequin Equip packet %u by %s", itemStorageLoc, PChar->GetName());
         return;
@@ -1869,7 +1870,7 @@ void SmallPacket0x03B(map_session_data_t* const PSession, CCharEntity* const PCh
     uint16 feetId  = getModelIdFromStorageSlot(PChar, PMannequin->m_extra[10 + 7]);
     // 10 + 8 = Race
     // 10 + 9 = Pose
- 
+
     // Write out to Mannequin
     char extra[sizeof(PMannequin->m_extra) * 2 + 1];
     Sql_EscapeStringLen(SqlHandle, extra, (const char*)PMannequin->m_extra, sizeof(PMannequin->m_extra));
