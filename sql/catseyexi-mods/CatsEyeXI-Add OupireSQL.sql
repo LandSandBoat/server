@@ -22,7 +22,6 @@ DELETE FROM `mob_spell_lists` WHERE  `spell_list_id`=150 AND `spell_id`=274;
 -- Update Ouire Animation sub from 8 to 0
 UPDATE `mob_pools` SET `animationsub`='0' WHERE  `poolid`=3069;
 
-
 -- Update Oupire's HP/MP Max level
 UPDATE `mob_groups` SET `HP`='38000', `MP`='9999', `maxLevel`='88' WHERE  `zoneid`=72 AND `groupid`=7;
 

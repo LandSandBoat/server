@@ -18,6 +18,7 @@ require("scripts/globals/job_utils/geomancer")
 ------------------------------
 local entity = {}
 
+
 entity.onMobSpawn = function(mob)
     -- All Mods Here Are Assigned For Initial Difficulty Tuning
 	mob:setMobMod(xi.mobMod.DRAW_IN, 1)
@@ -85,20 +86,6 @@ entity.onMobFight = function(mob, target)
         end
     end
 
-    -- Arena Style Draw-In
-    -- Should Draw Into A Single Point In the Room, Draws In Anyone In Range (https://ffxiclopedia.fandom.com/wiki/Lugh)
-    local drawInWait = mob:getLocalVar("DrawInWait")
-
-    if (target:getZPos() < 214.00 or target:getZPos() > 240.00) and os.time() > drawInWait then
-        target:setPos(-196.076, -0.447, 220.810)
-        mob:messageBasic(232, 0, 0, target)
-        mob:setLocalVar("DrawInWait", os.time() + 2)
-    elseif (target:getXPos() < -218.00 or target:getXPos() > -175.00) and os.time() > drawInWait then
-        target:setPos(-196.076, -0.447, 220.810)
-        mob:messageBasic(232, 0, 0, target)
-        mob:setLocalVar("DrawInWait", os.time() + 2)
-    end
-
     -- 20 Yalm Intimidate Aura Wtih Might Strikes Active (https://ffxiclopedia.fandom.com/wiki/Lugh)
     -- This just silently removes and adds Intimidate. Has 20% proc chance.
     if mob:hasStatusEffect(xi.effect.MIGHTY_STRIKES) == true then
@@ -160,6 +147,22 @@ entity.onMobFight = function(mob, target)
     mob:addListener("WEAPONSKILL_TAKE", "LUGH_WEAPONSKILL_TAKE", function(target, attacker, skillid, tp, action)
         target:addEnmity(attacker, 1000, 1000)
     end)
+end
+
+entity.onMobDrawIn = function(mob, target)
+    -- Arena Style Draw-In
+    -- Should Draw Into A Single Point In the Room, Draws In Anyone In Range (https://ffxiclopedia.fandom.com/wiki/Lugh)
+    local drawInWait = mob:getLocalVar("DrawInWait")
+
+    if (target:getZPos() < 214.00 or target:getZPos() > 240.00) and os.time() > drawInWait then
+        target:setPos(-196.076, -0.447, 220.810)
+        mob:messageBasic(232, 0, 0, target)
+        mob:setLocalVar("DrawInWait", os.time() + 2)
+    elseif (target:getXPos() < -218.00 or target:getXPos() > -175.00) and os.time() > drawInWait then
+        target:setPos(-196.076, -0.447, 220.810)
+        mob:messageBasic(232, 0, 0, target)
+        mob:setLocalVar("DrawInWait", os.time() + 2)
+    end
 end
 
 entity.onMobWeaponSkill = function(target, mob, skill)
