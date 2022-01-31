@@ -170,6 +170,7 @@ entity.onMobFight = function(mob, target)
 
 end
 
+
 entity.onMobDrawIn = function(mob, target)
     -- Arena Style Draw-In
     -- Should Draw Into A Single Point In the Room, Draws In Anyone In Range (https://ffxiclopedia.fandom.com/wiki/Elatha)

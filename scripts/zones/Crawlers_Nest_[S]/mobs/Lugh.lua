@@ -18,6 +18,7 @@ require("scripts/globals/job_utils/geomancer")
 ------------------------------
 local entity = {}
 
+
 entity.onMobSpawn = function(mob)
     -- All Mods Here Are Assigned For Initial Difficulty Tuning
 	mob:setMobMod(xi.mobMod.DRAW_IN, 1)
