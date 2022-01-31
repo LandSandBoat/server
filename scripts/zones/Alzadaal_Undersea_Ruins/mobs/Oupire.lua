@@ -89,6 +89,7 @@ local function attackPattern(mob, doubleRate, tripleRate, quadrupleRate)
 end
 
 entity.onMobInitialize = function(mob)
+
 end
 
 entity.onMobSpawn = function(mob)
