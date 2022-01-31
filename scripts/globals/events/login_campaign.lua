@@ -13,10 +13,10 @@ xi.events.loginCampaign = xi.events.loginCampaign or {}
 
 -- Change vars below to modify settings for current login campaign
 -- NOTE: the year and month values are used in the Moogle's Event!
-local loginCampaignYear = 2021
-local loginCampaignMonth = 12
-local loginCampaignDay = 13
-local loginCampaignDuration = 50 -- Duration is set in Earth days (Average is 23 days)
+local loginCampaignYear = 2022
+local loginCampaignMonth = 2
+local loginCampaignDay = 1
+local loginCampaignDuration = 58 -- Duration is set in Earth days (Average is 23 days)
 
 -- Checks if a Login Campaign is active.
 xi.events.loginCampaign.isCampaignActive = function()

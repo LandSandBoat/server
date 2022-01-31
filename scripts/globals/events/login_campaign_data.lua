@@ -84,46 +84,46 @@ local prizes =
 			-- 26889, -- Heart Apron
 			
 			-- Cycle #2
-            25606, -- Agent Hood
-			26974, -- Agent Coat
-			27111, -- Agent Cuffs
-			27296, -- Agent Pants
-			27467, -- Agent Boots
-			25607, -- Starlet Flower
-			26975, -- Starlet Jabot
-			27112, -- Starlet Gloves
-			27297, -- Starlet Skirt
-			27468, -- Starlet Boots
-			25657, -- Wyrmking Masque
-			25756, -- Wyrmking Suit
-			25585, -- Bl. Chocobo Cap
-			25776, -- Bl. Chocobo Suit
-			26514, -- Poroggo Fleece
-			27717, -- Worm Masque
-			11491, -- Snow Bunny Hat +1
-			23730, -- Karakul Cap
-			25850, -- Pink Subligar
+            -- 25606, -- Agent Hood
+			-- 26974, -- Agent Coat
+			-- 27111, -- Agent Cuffs
+			-- 27296, -- Agent Pants
+			-- 27467, -- Agent Boots
+			-- 25607, -- Starlet Flower
+			-- 26975, -- Starlet Jabot
+			-- 27112, -- Starlet Gloves
+			-- 27297, -- Starlet Skirt
+			-- 27468, -- Starlet Boots
+			-- 25657, -- Wyrmking Masque
+			-- 25756, -- Wyrmking Suit
+			-- 25585, -- Bl. Chocobo Cap
+			-- 25776, -- Bl. Chocobo Suit
+			-- 26514, -- Poroggo Fleece
+			-- 27717, -- Worm Masque
+			-- 11491, -- Snow Bunny Hat +1
+			-- 23730, -- Karakul Cap
+			-- 25850, -- Pink Subligar
 			
 			-- Cycle #3
-			-- 25774, -- Fancy Gilet
-			-- 25838, -- Fancy Trunks
-			-- 25775, -- Fancy Top
-			-- 25839, -- Fancy Shorts
-			-- 26964, -- Pupil's Camisa 
-			-- 26946, -- Pupil's Shirt
-			-- 27281, -- Pupil's Trousers
-			-- 27455, -- Pupil's Shoes 
-			-- 25639, -- Korrigan Masque
-			-- 25715, -- Korrigan Suit
-			-- 25645, -- Kupo Masque
-			-- 25726, -- Kupo Suit
-			-- 11812, -- Charity Cap
-			-- 26719, -- Sheep Cap
-			-- 26717, -- Cait Sith Cap
-			-- 26738, -- Leafkin Cap
-			-- 26707, -- Flan Masque
-			-- 23737, -- Byakko Masque
-			-- 26789, -- Shobuhouou Kabuto
+			25774, -- Fancy Gilet
+			25838, -- Fancy Trunks
+			25775, -- Fancy Top
+			25839, -- Fancy Shorts
+			26964, -- Pupil's Camisa 
+			26946, -- Pupil's Shirt
+			27281, -- Pupil's Trousers
+			27455, -- Pupil's Shoes 
+			25639, -- Korrigan Masque
+			25715, -- Korrigan Suit
+			25645, -- Kupo Masque
+			25726, -- Kupo Suit
+			11812, -- Charity Cap
+			26719, -- Sheep Cap
+			26717, -- Cait Sith Cap
+			26738, -- Leafkin Cap
+			26707, -- Flan Masque
+			23737, -- Byakko Masque
+			26789, -- Shobuhouou Kabuto
 			
 			-- Cycle #4
 			-- 27899, -- Alliance Shirt
@@ -204,47 +204,47 @@ local prizes =
 		   -- 22153, -- Silver Gun
 		   
 		   -- Cycle #2
-		   20532, -- Worm Feelers
-		   20577, -- Chicken Knife II
-		   20713, -- Excalipoor
-		   28652, -- Hatchling Shield
-		   27631, -- Cait Sith Guard
-		   27625, -- Morbol Shield
-		   28655, -- Slime Shield
-		   21770, -- Helgoland
-		   21658, -- Brave Blade II
-		   18441, -- Shinai
-		   21967, -- Melon Slicer
-		   21863, -- Tzee Xicu's Blade
-		   18102, -- Pitchfork
-		   22017, -- Seika Uchiwa
-		   21107, -- Kyuka Uchiwa
-		   18864, -- Dream Bell +1
-		   22072, -- Lamia Staff
-		   22069, -- Hapy Staff
-		   20909, -- Hoe
+		   -- 20532, -- Worm Feelers
+		   -- 20577, -- Chicken Knife II
+		   -- 20713, -- Excalipoor
+		   -- 28652, -- Hatchling Shield
+		   -- 27631, -- Cait Sith Guard
+		   -- 27625, -- Morbol Shield
+		   -- 28655, -- Slime Shield
+		   -- 21770, -- Helgoland
+		   -- 21658, -- Brave Blade II
+		   -- 18441, -- Shinai
+		   -- 21967, -- Melon Slicer
+		   -- 21863, -- Tzee Xicu's Blade
+		   -- 18102, -- Pitchfork
+		   -- 22017, -- Seika Uchiwa
+		   -- 21107, -- Kyuka Uchiwa
+		   -- 18864, -- Dream Bell +1
+		   -- 22072, -- Lamia Staff
+		   -- 22069, -- Hapy Staff
+		   -- 20909, -- Hoe
 
 		   
 		   -- Cycle #3
-		   -- 21509, -- Premium Mogti
-		   -- 20573, -- Aern Dagger
-		   -- 20674, -- Aern Sword
-		   -- 18912, -- Ark Saber
-		   -- 18913, -- Ark Sword
-		   -- 26489, -- Troth
-		   -- 10808, -- Janus Guard
-		   -- 10811, -- Chocobo Shield
-		   -- 21759, -- Autarch's Axe
-		   -- 21682, -- Lament
-		   -- 21742, -- Aern Axe
-		   -- 18545, -- Ark Tabar
-		   -- 18464, -- Ark Tachi
-		   -- 21860, -- Aern Spear
-		   -- 20953, -- Escritorio
-		   -- 22004, -- Soulflayer's Wand
-		   -- 18399, -- Charm Wand
-		   -- 22065, -- Aern Staff
-		   -- 18563, -- Ark Scythe
+		   21509, -- Premium Mogti
+		   20573, -- Aern Dagger
+		   20674, -- Aern Sword
+		   18912, -- Ark Saber
+		   18913, -- Ark Sword
+		   26489, -- Troth
+		   10808, -- Janus Guard
+		   10811, -- Chocobo Shield
+		   21759, -- Autarch's Axe
+		   21682, -- Lament
+		   21742, -- Aern Axe
+		   18545, -- Ark Tabar
+		   18464, -- Ark Tachi
+		   21860, -- Aern Spear
+		   20953, -- Escritorio
+		   22004, -- Soulflayer's Wand
+		   18399, -- Charm Wand
+		   22065, -- Aern Staff
+		   18563, -- Ark Scythe
 		   
 		   -- Cycle #4
 		   -- 20571, -- Infiltrator
@@ -390,45 +390,48 @@ local prizes =
 			-- 15735, -- Goliard Clogs
 			
 			-- Cycle #2 -- Nexus/ToAU rings/Odin Prime/Alexander Prime/CoP items
-			11538, -- Nexus Cape
-			15807, -- Balrahn's Ring
-			15808, -- Ulthalam's Ring
-			15809, -- Jalzahn's Ring
-			11589, -- Aesir Torque
-			11546, -- Aesir Mantle
-			16057, -- Aesir Ear Pendant
-			11590, -- Colossus's Torque
-			11547, -- Colossus's Mantle
-			16058, -- Colossus's Earring
-			17208, -- Hamayumi
-			17466, -- Dia Wand
-			13177, -- Stone Gorget
-			18019, -- X's Knife
-			18057, -- Y's Scythe
-			18101, -- Z's Trident
-			15457, -- Swift Belt
-			14889, -- Barbarian Mittens
-			15349, -- Rutter Sabatons
+			-- 11538, -- Nexus Cape
+			-- 15807, -- Balrahn's Ring
+			-- 15808, -- Ulthalam's Ring
+			-- 15809, -- Jalzahn's Ring
+			-- 11589, -- Aesir Torque
+			-- 11546, -- Aesir Mantle
+			-- 16057, -- Aesir Ear Pendant
+			-- 11590, -- Colossus's Torque
+			-- 11547, -- Colossus's Mantle
+			-- 16058, -- Colossus's Earring
+			-- 17208, -- Hamayumi
+			-- 17466, -- Dia Wand
+			-- 13177, -- Stone Gorget
+			-- 18019, -- X's Knife
+			-- 18057, -- Y's Scythe
+			-- 18101, -- Z's Trident
+			-- 15457, -- Swift Belt
+			-- 14889, -- Barbarian Mittens
+			-- 15349, -- Rutter Sabatons
 			
-			-- Cycle #3 -- Elemental obis/WS gorgets
-			-- 15435, -- Karin Obi
-			-- 15436, -- Hyorin Obi
-			-- 15437, -- Furin Obi
-			-- 15438, -- Dorin Obi
-			-- 15439, -- Rairin Obi
-			-- 15440, -- Suirin Obi
-			-- 15441, -- Korin Obi
-			-- 15442, -- Anrin Obi
-			-- 15495, -- Flame Gorget
-			-- 15496, -- Snow Gorget
-			-- 15497, -- Breeze Gorget
-			-- 15498, -- Soil Gorget
-			-- 15499, -- Thunder Gorget
-			-- 15500, -- Aqua Gorgot
-			-- 15501, -- Light Gorget
-			-- 15502, -- Shadow Gorget
+			-- Cycle #3 -- WotG items/Elemental obis/WS gorgets
+			11343, -- Thrakon Breastplate
+			16036, -- Wilhelm's Earring
+			16035, -- Altdorf's Earring
+			15435, -- Karin Obi
+			15436, -- Hyorin Obi
+			15437, -- Furin Obi
+			15438, -- Dorin Obi
+			15439, -- Rairin Obi
+			15440, -- Suirin Obi
+			15441, -- Korin Obi
+			15442, -- Anrin Obi
+			15495, -- Flame Gorget
+			15496, -- Snow Gorget
+			15497, -- Breeze Gorget
+			15498, -- Soil Gorget
+			15499, -- Thunder Gorget
+			15500, -- Aqua Gorgot
+			15501, -- Light Gorget
+			15502, -- Shadow Gorget
 			
-			-- Cycle #4 -- Carbuncle Prime/WOTG Fomors/
+			-- Cycle #4 -- Carbuncle Prime/
 			-- 14931, -- Carbuncle's Cuffs
 			-- 18063, -- Garuda's Sickle
 			-- 17192, -- Ifrit's Bow
@@ -436,11 +439,10 @@ local prizes =
 			-- 18404, -- Ramuh's Mace
 			-- 17711, -- Shiva's Shotel
 			-- 18021, -- Titan's Baselarde
-			-- 11411, -- Shrewd Pumps
-			-- 15057, -- Bricta's Cuffs
-			-- 16376, -- Bahram Cuisses
-			-- 11410, -- Setanta's Ledelsens
-			-- 16302, -- Bloodbead Gorget
+			-- wotg set ring 1
+			-- wotg set ring 2
+			
+			-- Cycle #5 -- WotG Nation sets
 			--
 			
 			-- Cycle #5 -- ZNM sets
@@ -480,26 +482,46 @@ local prizes =
 			-- 15545, -- Tamas Ring
 			
 			-- Cycle #2 -- Divine Might/Apocalypse Nigh/Sea capes/Sea torques
-			15962, -- Static Earring
-			15963, -- Magnetic Earring
-			15964, -- Hollow Earring
-			15965, -- Ethereal Earring
-			14739, -- Suppanomimi
-			14740, -- Knight's Earring
-			14741, -- Abyssal Earring
-			14742, -- Beastly Earring
-			14743, -- Bushinomimi
-			15471, -- Merciful Cape
-			15472, -- Altruistic Cape
-			15473, -- Astute Cape
-			15508, -- Justice Torque
-			15509, -- Hope Torque
-			15510, -- Prudence Torque
-			15511, -- Fortitude Torque
-			15512, -- Faith Torque
-			15513, -- Temperance Torque
-			15514, -- Love Torque			
+			-- 15962, -- Static Earring
+			-- 15963, -- Magnetic Earring
+			-- 15964, -- Hollow Earring
+			-- 15965, -- Ethereal Earring
+			-- 14739, -- Suppanomimi
+			-- 14740, -- Knight's Earring
+			-- 14741, -- Abyssal Earring
+			-- 14742, -- Beastly Earring
+			-- 14743, -- Bushinomimi
+			-- 15471, -- Merciful Cape
+			-- 15472, -- Altruistic Cape
+			-- 15473, -- Astute Cape
+			-- 15508, -- Justice Torque
+			-- 15509, -- Hope Torque
+			-- 15510, -- Prudence Torque
+			-- 15511, -- Fortitude Torque
+			-- 15512, -- Faith Torque
+			-- 15513, -- Temperance Torque
+			-- 15514, -- Love Torque			
 			
+			-- Cycle #3 -- Useful NM drops/MMM
+			15351, -- Bounding Boots
+			15224, -- Empress Hairpin
+			14986, -- Ochimusha Kote
+			15737, -- Sarutobi Kyahan
+			15736, -- Trotter Boots
+			15515, -- Peacock Amulet
+			18752, -- Retaliators
+			18714, -- Vali's Bow
+			15899, -- Velocious Belt
+			18852, -- Octave Club
+			14469, -- Reverend Mail
+			13915, -- Optical Hat
+			14062, -- Carbuncle Mitts
+			15221, -- Patroclus's Helm
+			13567, -- Bomb Queen Ring
+			15350, -- Rostrum Pumps
+			13303, -- Jelly Ring
+			15223, -- Ace's Helm
+			17759, -- Koggelmander
 			
 			-- Cycle #idk -- Limbus gear
 			-- 15240, -- Homam Zucchetto
@@ -532,6 +554,12 @@ local prizes =
 			-- 18594, -- Dorje
 			-- 18759, -- Shenlong's Baghnakhs
 			
+			-- Cycle #idk -- WotG Fomors
+			-- 11411, -- Shrewd Pumps
+			-- 15057, -- Bricta's Cuffs
+			-- 16376, -- Bahram Cuisses
+			-- 11410, -- Setanta's Ledelsens
+			-- 16302, -- Bloodbead Gorget
         },
     },
 }
