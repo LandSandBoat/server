@@ -245,6 +245,7 @@ namespace luautils
         lua.script_file("./scripts/globals/battlefield.lua");
         lua.script_file("./scripts/globals/mobs.lua");
         lua.script_file("./scripts/globals/mixins.lua");
+        lua.script_file("./scripts/globals/additional_effects.lua");
 
         // Pet Scripts
         CacheLuaObjectFromFile("./scripts/globals/pets/automaton.lua");
@@ -1851,8 +1852,6 @@ namespace luautils
 
         PChar->eventPreparation->targetEntity = PNpc;
         PChar->eventPreparation->scriptFile   = filename;
-
-        PChar->StatusEffectContainer->DelStatusEffect(EFFECT_BOOST);
 
         auto onTriggerFramework = lua["xi"]["globals"]["interaction"]["interaction_global"]["onTrigger"];
         auto onTrigger = GetCacheEntryFromFilename(filename)["onTrigger"];
