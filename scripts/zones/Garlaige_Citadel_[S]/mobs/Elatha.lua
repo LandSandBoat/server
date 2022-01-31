@@ -102,20 +102,6 @@ entity.onMobFight = function(mob, target)
         end
     end
 
-    -- Arena Style Draw-In
-    -- Should Draw Into A Single Point In the Room, Draws In Anyone In Range (https://ffxiclopedia.fandom.com/wiki/Elatha)
-    local drawInWait = mob:getLocalVar("DrawInWait")
-
-    if (target:getZPos() < -111.00 or target:getZPos() > -82.00) and os.time() > drawInWait then
-        target:setPos(-140.25, 0.00, -100.00)
-        mob:messageBasic(232, 0, 0, target)
-        mob:setLocalVar("DrawInWait", os.time() + 2)
-    elseif (target:getXPos() < -155.00 or target:getXPos() > -122.00) and os.time() > drawInWait then
-        target:setPos(-140.25, 0.00, -100.00)
-        mob:messageBasic(232, 0, 0, target)
-        mob:setLocalVar("DrawInWait", os.time() + 2)
-    end
-
     -- Combat Tick Logic
     mob:addListener("COMBAT_TICK", "ELATHA_CTICK", function(mob)
         local retaliate = mob:getLocalVar("ERetaliate")
@@ -182,6 +168,22 @@ entity.onMobFight = function(mob, target)
         target:addEnmity(attacker, 1000, 1000)
     end)
 
+end
+
+entity.onMobDrawIn = function(mob, target)
+    -- Arena Style Draw-In
+    -- Should Draw Into A Single Point In the Room, Draws In Anyone In Range (https://ffxiclopedia.fandom.com/wiki/Elatha)
+    local drawInWait = mob:getLocalVar("DrawInWait")
+
+    if (target:getZPos() < -111.00 or target:getZPos() > -82.00) and os.time() > drawInWait then
+        target:setPos(-140.25, 0.00, -100.00)
+        mob:messageBasic(232, 0, 0, target)
+        mob:setLocalVar("DrawInWait", os.time() + 2)
+    elseif (target:getXPos() < -155.00 or target:getXPos() > -122.00) and os.time() > drawInWait then
+        target:setPos(-140.25, 0.00, -100.00)
+        mob:messageBasic(232, 0, 0, target)
+        mob:setLocalVar("DrawInWait", os.time() + 2)
+    end
 end
 
 entity.onMobDisengage = function(mob)
