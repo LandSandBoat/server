@@ -13,18 +13,16 @@ function utils.unused(...)
     return
 end
 
--- Shuffles a table and returns a copy of it, not the original.
-function utils.shuffle(tab)
-    local copy = {}
-    for k, v in pairs(tab) do
-        copy[k] = v
+-- Shuffles a table and returns a new table containing the randomized result.
+function utils.shuffle(inputTable)
+    local shuffledTable = {}
+
+    for _, v in ipairs(inputTable) do
+        local pos = math.random(1, #shuffledTable + 1)
+        table.insert(shuffledTable, pos, v)
     end
 
-    local res = {}
-    while next(copy) do
-        res[#res + 1] = table.remove(copy, math.random(#copy))
-    end
-    return res
+    return shuffledTable
 end
 
 -- Generates a random permutation of integers >= min_val and <= max_val
