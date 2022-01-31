@@ -172,6 +172,7 @@ xi.settings =
     HALLOWEEN_YEAR_ROUND            = 0,  -- Set to 1 to have Harvest Festival initialize outside of normal times.
 
     -- MISC
+	AVATAR_DAMAGE_MOD			 = .8,   -- Summoner avatars damage modifier (ex. .8 = 80% of original damage)
     RIVERNE_PORTERS              = 120,  -- Time in seconds that Unstable Displacements in Cape Riverne stay open after trading a scale.
     LANTERNS_STAY_LIT            = 1200, -- time in seconds that lanterns in the Den of Rancor stay lit.
     ENABLE_COP_ZONE_CAP          = 0,    -- Enable or disable lvl cap
