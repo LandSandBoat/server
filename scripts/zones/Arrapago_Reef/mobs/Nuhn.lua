@@ -1,19 +1,13 @@
 -----------------------------------
--- Area: Caedarva Mire (79)
---  ZNM: Experimental Lamia
--- !pos -773.369 -11.824 322.298 79
+-- Area: Arrapago Reef
+--  ZNM: Nuhn
 -----------------------------------
-local ID = require("scripts/zones/Caedarva_Mire/IDs")
+mixins = {require("scripts/mixins/rage")}
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}
--- TODO INITIAL COMMIT Just put here so players cannot run through the NM's 
-entity.onMobSpawn = function(mob)
-    mob:addMod(xi.mod.SLEEPRES, 30)
-    mob:addMod(xi.mod.BINDRES, 30)
-    mob:addMod(xi.mod.GRAVITYRES, 30)
-    mob:addMod(xi.mod.ATT, 200)
-    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
+
+entity.onMobInitialize = function(mob)
     mob:addMod(xi.mod.MDEF, 150)
     mob:addMod(xi.mod.DEF, 100)
     mob:addMod(xi.mod.MAIN_DMG_RATING, 50)
@@ -57,41 +51,6 @@ entity.onMobSpawn = function(mob)
     mob:addStatusEffect(xi.effect.REFRESH, 50, 3, 0)
     mob:addMod(xi.mod.MOVE, 12)
     mob:setAnimationSub(0)
-end
-
-local function spawnMinions(mob, target)
-    mob:setLocalVar("spawnedMinions", 1)
-
-    local x = mob:getXPos()
-    local y = mob:getYPos()
-    local z = mob:getZPos()
-
-    for i = ID.mob.EXPERIMENTAL_LAMIA + 1, ID.mob.EXPERIMENTAL_LAMIA + 3 do
-        local minion = GetMobByID(i)
-        minion:setSpawn(x + math.random(-2, 2), y, z + math.random(-2, 2))
-        minion:spawn()
-        minion:updateEnmity(target)
-    end
-end
-
-entity.onMobFight = function(mob, target)
-    if mob:getHPP() < 75 and mob:getLocalVar("spawnedMinions") == 0 then
-        spawnMinions(mob, target)
-    end
-
-    -- make sure minions have a target
-    for i = ID.mob.EXPERIMENTAL_LAMIA + 1, ID.mob.EXPERIMENTAL_LAMIA + 3 do
-        local minion = GetMobByID(i)
-        if minion:getCurrentAction() == xi.act.ROAMING then
-            minion:updateEnmity(target)
-        end
-    end
-end
-
-entity.onMobWeaponSkill = function(target, mob, skill)
-    if mob:getLocalVar("spawnedMinions") == 0 then
-        spawnMinions(mob, target)
-    end
 end
 
 entity.onMobDeath = function(mob, player, isKiller)

@@ -296,7 +296,6 @@ INSERT INTO `mob_droplist` VALUES (2996,0,0,1000,5735,100);
 INSERT INTO `mob_droplist` VALUES (1523,0,0,1000,5735,100);
 INSERT INTO `mob_droplist` VALUES (2794,0,0,1000,5735,100);
 
-
 # Add dropId to beastmen in ToAU zones that dont currently have one
 UPDATE `mob_groups` SET `dropId` = "4000" WHERE `zoneid` = "62" AND `dropid` = "0" AND `name` = "Troll_Mythril_Guard";
 UPDATE `mob_groups` SET `dropId` = "4000" WHERE `zoneid` = "62" AND `dropid` = "0" AND `name` = "Hilltroll_Mirror_Guard";
