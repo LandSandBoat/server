@@ -24,7 +24,7 @@ end
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
-        player:setPos(-100, -13.5, -479.514, 60)
+        player:setPos(432, -7, -39, 135)
     end
     if (prevZone == xi.zone.MAMOOL_JA_TRAINING_GROUNDS) then
         player:setPos(-186, -10, -802, 80)

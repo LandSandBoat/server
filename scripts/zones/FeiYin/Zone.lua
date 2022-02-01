@@ -22,7 +22,7 @@ zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
 
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
-        player:setPos(99.98, -1.768, 275.993, 70)
+        player:setPos(-180, -24, -187, 198)
     end
 
     if (player:getCharVar("peaceForTheSpiritCS") == 1 and not player:hasItem(1093)) then -- Antique Coin

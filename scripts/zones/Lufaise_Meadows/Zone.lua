@@ -35,7 +35,7 @@ zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
 
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
-        player:setPos(-475.825, -20.461, 281.149, 11)
+        player:setPos(458, 6, -4, 82)
     end
 
     if player:getCurrentMission(COP) == xi.mission.id.cop.AN_INVITATION_WEST and player:getCharVar("PromathiaStatus") == 0 then

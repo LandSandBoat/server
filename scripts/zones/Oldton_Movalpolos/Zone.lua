@@ -26,7 +26,7 @@ zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
 
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
-        player:setPos(70.956, 5.99, 139.843, 134)
+        player:setPos(-286, 0, -99, 253)
     end
 
     if player:getCurrentMission(COP) == xi.mission.id.cop.THREE_PATHS and (louverancePath == 3 or louverancePath == 4) then

@@ -23,7 +23,7 @@ zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
 
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
-        player:setPos(27.971, -14.068, 43.735, 66)
+        player:setPos(-4, -26, 134, 87)
     end
 
     if (player:getCurrentMission(COP) == xi.mission.id.cop.AN_INVITATION_WEST) then
