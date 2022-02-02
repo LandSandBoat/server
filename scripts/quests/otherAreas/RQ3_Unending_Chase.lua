@@ -24,10 +24,10 @@ quest.reward =
 
 quest.sections =
 {
-    -- Section: Quest is available and never interacted.
+    -- Section: Quest is available.
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and player:getFameLevel(WINDURST) > 2 and vars.Prog == 0 and
+            return status == QUEST_AVAILABLE and
                 player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.WAY_OF_THE_COOK) == QUEST_COMPLETED
         end,
 
@@ -36,11 +36,22 @@ quest.sections =
             ['Rycharde'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getCharVar("Quest[4][1]DayCompleted") + 7 < VanadielUniqueDay() then
-                        return quest:progressEvent(82, xi.items.PUFFBALL) -- Unending Chase starting event.
+                    if
+                        player:getCharVar("Quest[4][1]DayCompleted") + 7 < VanadielUniqueDay() and
+                        player:getFameLevel(WINDURST) > 2
+                    then
+                        if quest:getVar(player, 'Prog') == 0 then
+                            return quest:progressEvent(82, xi.items.PUFFBALL) -- Unending Chase starting event.
+                        else
+                            return quest:progressEvent(84, xi.items.PUFFBALL) -- Unending Chase starting event after rejecting it.
+                        end
+                    else
+                        return quest:event(75)
                     end
                 end,
             },
+
+            ['Take'] = quest:event(65),
 
             onEventFinish =
             {
@@ -51,27 +62,7 @@ quest.sections =
                         quest:begin(player)
                     end
                 end,
-            },
-        },
-    },
 
-    -- Section: (OPTIONAL) Quest available but rejected.
-    {
-        check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and vars.Prog == 1
-        end,
-
-        [xi.zone.MHAURA] =
-        {
-            ['Rycharde'] =
-            {
-                onTrigger = function(player, npc)
-                    return quest:progressEvent(84, xi.items.PUFFBALL) -- Unending Chase starting event.
-                end,
-            },
-
-            onEventFinish =
-            {
                 [84] = function(player, csid, option, npc)
                     if option == 78 then -- Accept quest option.
                         quest:begin(player)
@@ -84,7 +75,7 @@ quest.sections =
     -- Section: Quest accepted.
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and vars.Prog == 1
+            return status == QUEST_ACCEPTED
         end,
 
         [xi.zone.MHAURA] =

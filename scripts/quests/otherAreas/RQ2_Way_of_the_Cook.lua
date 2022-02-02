@@ -43,12 +43,14 @@ quest.sections =
                         player:getCharVar("Quest[4][0]DayCompleted") + 7 < VanadielUniqueDay() and
                         player:getFameLevel(WINDURST) > 2
                     then
-                        return quest:progressEvent(76, xi.items.DHALMEL_MEAT, xi.items.BEEHIVE_CHIP) -- Way of the Cook starting event.
+                        return quest:progressEvent(76, xi.items.BEEHIVE_CHIP, xi.items.DHALMEL_MEAT) -- Way of the Cook starting event.
                     else
                         return quest:event(75) -- Default dialog after completing previous quest.
                     end
                 end,
             },
+
+            ['Take'] = quest:event(68),
 
             onEventFinish =
             {
@@ -95,9 +97,16 @@ quest.sections =
                         else
                             return quest:progressEvent(81) -- Quest completed late.
                         end
+                    elseif
+                        npcUtil.tradeHasExactly(trade, {xi.items.DHALMEL_MEAT}) or
+                        npcUtil.tradeHasExactly(trade, {xi.items.BEEHIVE_CHIP})
+                    then
+                        return quest:event(73) -- Incomplete trade.
                     end
                 end,
             },
+
+            ['Take'] = quest:event(65),
 
             onEventFinish =
             {

@@ -50,7 +50,7 @@ quest.sections =
                     if quest:getVar(player, 'Prog') == 1 then
                         quest:progressEvent(60)
                     elseif quest:getVar(player, 'Prog') > 1 then
-                        quest:progressEvent(68)
+                        quest:event(68)
                     end
                 end,
             },
@@ -107,7 +107,7 @@ quest.sections =
                 end,
             },
 
-            ['Take'] = quest:progressEvent(68), -- Optional dialog.
+            ['Take'] = quest:event(68), -- Optional dialog.
 
             onEventFinish =
             {
