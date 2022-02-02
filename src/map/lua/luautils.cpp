@@ -1880,14 +1880,15 @@ namespace luautils
         }
 
         auto func_result = onEventUpdate(CLuaBaseEntity(PChar), eventID, result, extras, optTarget);
+
+        PChar->eventPreparation = previousPrep;
+
         if (!func_result.valid())
         {
             sol::error err = func_result;
             ShowError("luautils::onEventUpdate: %s", err.what());
             return -1;
         }
-
-        PChar->eventPreparation = previousPrep;
 
         return func_result.get_type() == sol::type::number ? func_result.get<int32>() : 1;
     }
@@ -1914,14 +1915,15 @@ namespace luautils
         }
 
         auto func_result = onEventUpdateFramework(CLuaBaseEntity(PChar), eventID, result, optTarget, onEventUpdate);
+
+        PChar->eventPreparation = previousPrep;
+
         if (!func_result.valid())
         {
             sol::error err = func_result;
             ShowError("luautils::onEventUpdate: %s", err.what());
             return -1;
         }
-
-        PChar->eventPreparation = previousPrep;
 
         return func_result.get_type() == sol::type::number ? func_result.get<int32>() : 1;
     }
@@ -1943,14 +1945,15 @@ namespace luautils
         }
 
         auto result = onEventUpdateFramework(CLuaBaseEntity(PChar), PChar->currentEvent->eventId, updateString, optTarget, onEventUpdate);
+
+        PChar->eventPreparation = previousPrep;
+
         if (!result.valid())
         {
             sol::error err = result;
             ShowError("luautils::onEventUpdate: %s", err.what());
             return -1;
         }
-
-        PChar->eventPreparation = previousPrep;
 
         return 0;
     }
