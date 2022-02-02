@@ -30,7 +30,7 @@ quest.sections =
     -- Section: Check if quest is available.
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and player:getFameLevel(WINDURST) > 2 and
+            return status == QUEST_AVAILABLE and
                 player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.RYCHARDE_THE_CHEF) == QUEST_COMPLETED
         end,
 
@@ -39,8 +39,13 @@ quest.sections =
             ['Rycharde'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getCharVar("Quest[4][0]DayCompleted") + 7 < VanadielUniqueDay() then
+                    if
+                        player:getCharVar("Quest[4][0]DayCompleted") + 7 < VanadielUniqueDay() and
+                        player:getFameLevel(WINDURST) > 2
+                    then
                         return quest:progressEvent(76, xi.items.DHALMEL_MEAT, xi.items.BEEHIVE_CHIP) -- Way of the Cook starting event.
+                    else
+                        return quest:event(75) -- Default dialog after completing previous quest.
                     end
                 end,
             },
