@@ -1983,14 +1983,16 @@ namespace luautils
         }
 
         auto func_result = onEventFinishFramework(CLuaBaseEntity(PChar), eventID, result, optTarget, onEventFinish);
+
+        // Restore eventPreparation before potentially bailing out of function due to errors
+        PChar->eventPreparation = previousPrep;
+
         if (!func_result.valid())
         {
             sol::error err = func_result;
             ShowError("luautils::onEventFinish %s", err.what());
             return -1;
         }
-
-        PChar->eventPreparation = previousPrep;
 
         if (PChar->currentEvent->scriptFile.find("/bcnms/") > 0 && PChar->health.hp <= 0)
         { // for some reason the event doesnt enforce death afterwards
