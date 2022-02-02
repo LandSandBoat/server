@@ -37,6 +37,7 @@ mission.reward =
 local handleAcceptMission = function(player, csid, option, npc)
     if option == 5 then
         mission:begin(player)
+        player:setMissionStatus(mission.areaId, 1)
         player:messageSpecial(zones[player:getZoneID()].text.YOU_ACCEPT_THE_MISSION)
     end
 end
@@ -114,7 +115,7 @@ mission.sections =
                 onTrigger = function(player, npc)
                     local missionStatus = player:getMissionStatus(mission.areaId)
 
-                    if missionStatus == 0 then
+                    if missionStatus == 1 and not player:hasKeyItem(xi.ki.LETTER_TO_THE_CONSULS_WINDURST) then
                         return mission:progressEvent(95, 0, 0, 0, xi.ki.LETTER_TO_THE_CONSULS_WINDURST)
                     elseif missionStatus == 11 then
                         return mission:progressEvent(101, 0, 0, xi.ki.ADVENTURERS_CERTIFICATE)
