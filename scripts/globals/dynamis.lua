@@ -763,20 +763,20 @@ function dynamis.procMonster(mob, player)
         if extensions > 2 then
             if player:getSubJob() == xi.job.NONE and math.random(0, 99) == 0 then
                 mob:setLocalVar("dynamis_proc", 4)
-                mob:weaknessTrigger(3)
                 mob:addStatusEffect(xi.effect.TERROR, 0, 0, 30)
+                mob:weaknessTrigger(3)
             elseif extensions == 5 then
                 mob:setLocalVar("dynamis_proc", 3)
-                mob:weaknessTrigger(2)
                 mob:addStatusEffect(xi.effect.TERROR, 0, 0, 30)
+                mob:weaknessTrigger(2)
             elseif extensions == 4 then
                 mob:setLocalVar("dynamis_proc", 2)
-                mob:weaknessTrigger(1)
                 mob:addStatusEffect(xi.effect.TERROR, 0, 0, 30)
+                mob:weaknessTrigger(1)
             elseif extensions == 3 then
                 mob:setLocalVar("dynamis_proc", 1)
-                mob:weaknessTrigger(0)
                 mob:addStatusEffect(xi.effect.TERROR, 0, 0, 30)
+                mob:weaknessTrigger(0)
             end
         end
     end
