@@ -1,8 +1,9 @@
 -----------------------------------
--- Area: Apollyon SE
+-- Area: Apollyon SE, Floor 2
 --  Mob: Adamantshell
 -----------------------------------
 local ID = require("scripts/zones/Apollyon/IDs")
+require("scripts/zones/Apollyon/helpers/apollyon_se")
 require("scripts/globals/pathfind")
 -----------------------------------
 local entity = {}
@@ -42,19 +43,7 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, isKiller, noKiller)
-    if isKiller or noKiller then
-        local battlefield = mob:getBattlefield()
-        battlefield:setLocalVar("killCountF2", battlefield:getLocalVar("killCountF2") + 1)
-        local killCount = battlefield:getLocalVar("killCountF2")
-
-        if killCount == 2 then
-            GetNPCByID(ID.npc.APOLLYON_SE_CRATE[2]):setStatus(xi.status.NORMAL)
-        elseif killCount == 4 then
-            GetNPCByID(ID.npc.APOLLYON_SE_CRATE[2] + 1):setStatus(xi.status.NORMAL)
-        elseif killCount == 8 then
-            GetNPCByID(ID.npc.APOLLYON_SE_CRATE[2] + 2):setStatus(xi.status.NORMAL)
-        end
-    end
+    xi.apollyon_se.handleMobDeathFloorTwo(mob, player, isKiller, noKiller)
 end
 
 return entity
