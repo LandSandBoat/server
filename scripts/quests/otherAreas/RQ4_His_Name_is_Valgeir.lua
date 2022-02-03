@@ -21,9 +21,9 @@ local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.HIS_
 
 quest.reward =
 {
-    fame    = 120,
+    fame = 120,
     fameArea = MHAURA,
-    gil     = 2000,
+    gil = 2000,
     keyItem = xi.ki.MAP_OF_THE_TORAIMARAI_CANAL,
 }
 
@@ -32,7 +32,7 @@ quest.sections =
     -- Section: Quest is available.
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and player:getFameLevel(WINDURST) > 2 and
+            return status == QUEST_AVAILABLE and
                 player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.UNENDING_CHASE) == QUEST_COMPLETED
         end,
 
@@ -41,18 +41,25 @@ quest.sections =
             ['Rycharde'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getCharVar("Quest[4][2]DayCompleted") + 2 < VanadielUniqueDay() then
+                    if
+                        player:getCharVar("Quest[4][2]DayCompleted") + 2 < VanadielUniqueDay() and
+                        player:getFameLevel(WINDURST) > 2
+                    then
                         return quest:progressEvent(86) -- His Name is Valgeir starting event.
+                    else
+                        return quest:event(75)
                     end
                 end,
             },
+
+            ['Take'] = quest:event(65),
 
             onEventFinish =
             {
                 [86] = function(player, csid, option, npc)
                     if option == 80 then -- Accept quest option.
-                        player:setCharVar("Quest[4][2]DayCompleted", 0)  -- Delete previous quest (Unending Chase) variables
-                        npcUtil.giveKeyItem(player, xi.ki.ARAGONEU_PIZZA)   --give pizza to player
+                        player:setCharVar("Quest[4][2]DayCompleted", 0)   -- Delete previous quest (Unending Chase) variables
+                        npcUtil.giveKeyItem(player, xi.ki.ARAGONEU_PIZZA) -- Give pizza to player
                         quest:begin(player)
                     end
                 end,

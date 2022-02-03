@@ -19,7 +19,7 @@ quest.reward =
     fame  = 120,
     fameArea = MHAURA,
     title = xi.title.TWO_STAR_PURVEYOR,
-    gil   = 2100,
+    gil = 2100,
 }
 
 quest.sections =
@@ -92,6 +92,8 @@ quest.sections =
                     end
                 end,
             },
+
+            ['Take'] = quest:event(65),
 
             onEventFinish =
             {

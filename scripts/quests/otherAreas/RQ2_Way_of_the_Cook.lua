@@ -56,7 +56,7 @@ quest.sections =
             {
                 [76] = function(player, csid, option, npc)
                     if option == 74 then -- Accept quest option.
-                        player:setCharVar("Quest[4][0]DayCompleted", 0)         -- Delete previous quest (Rycharde the Chef) variables
+                        player:setCharVar("Quest[4][0]DayCompleted", 0)            -- Delete previous quest (Rycharde the Chef) variables
                         quest:setVar(player, 'HourStarted', VanadielHour())        -- Set current quest started variables
                         quest:setVar(player, 'DayStarted', VanadielDayOfTheYear()) -- Set current quest started variables
                         quest:begin(player)
