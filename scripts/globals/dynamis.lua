@@ -708,37 +708,27 @@ end
 -- Produces a bitmask for the goblin ancient currency NPCs
 -----------------------------------
 
+local dynamisMapKI =
+{
+    xi.ki.MAP_OF_DYNAMIS_SAN_DORIA,
+    xi.ki.MAP_OF_DYNAMIS_BASTOK,
+    xi.ki.MAP_OF_DYNAMIS_WINDURST,
+    xi.ki.MAP_OF_DYNAMIS_JEUNO,
+    xi.ki.MAP_OF_DYNAMIS_BEAUCEDINE,
+    xi.ki.MAP_OF_DYNAMIS_XARCABARD,
+    xi.ki.MAP_OF_DYNAMIS_VALKURM,
+    xi.ki.MAP_OF_DYNAMIS_BUBURIMU,
+    xi.ki.MAP_OF_DYNAMIS_QUFIM,
+    xi.ki.MAP_OF_DYNAMIS_TAVNAZIA,
+}
+
 function getDynamisMapList(player)
     local bitmask = 0
-    if (player:hasKeyItem(xi.ki.MAP_OF_DYNAMIS_SAN_DORIA) == true) then
-        bitmask = bitmask + 2
-    end
-    if (player:hasKeyItem(xi.ki.MAP_OF_DYNAMIS_BASTOK) == true) then
-        bitmask = bitmask + 4
-    end
-    if (player:hasKeyItem(xi.ki.MAP_OF_DYNAMIS_WINDURST) == true) then
-        bitmask = bitmask + 8
-    end
-    if (player:hasKeyItem(xi.ki.MAP_OF_DYNAMIS_JEUNO) == true) then
-        bitmask = bitmask + 16
-    end
-    if (player:hasKeyItem(xi.ki.MAP_OF_DYNAMIS_BEAUCEDINE) == true) then
-        bitmask = bitmask + 32
-    end
-    if (player:hasKeyItem(xi.ki.MAP_OF_DYNAMIS_XARCABARD) == true) then
-        bitmask = bitmask + 64
-    end
-    if (player:hasKeyItem(xi.ki.MAP_OF_DYNAMIS_VALKURM) == true) then
-        bitmask = bitmask + 128
-    end
-    if (player:hasKeyItem(xi.ki.MAP_OF_DYNAMIS_BUBURIMU) == true) then
-        bitmask = bitmask + 256
-    end
-    if (player:hasKeyItem(xi.ki.MAP_OF_DYNAMIS_QUFIM) == true) then
-        bitmask = bitmask + 512
-    end
-    if (player:hasKeyItem(xi.ki.MAP_OF_DYNAMIS_TAVNAZIA) == true) then
-        bitmask = bitmask + 1024
+
+    for position, keyItem in ipairs(dynamisMapKI) do
+        if player:hasKeyItem(keyItem) then
+            bitmask = bitmask + bit.lshift(1, position)
+        end
     end
 
     return bitmask
