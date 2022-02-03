@@ -2,11 +2,11 @@
 -- Area: Apollyon
 --  NPC: Armoury Crate
 -----------------------------------
+local ID = require("scripts/zones/Apollyon/IDs")
 require("scripts/globals/titles")
 require("scripts/globals/quests")
 require("scripts/globals/limbus")
 require("scripts/globals/zone")
-local ID = require("scripts/zones/Apollyon/IDs")
 -----------------------------------
 local entity = {}
 
@@ -392,6 +392,8 @@ local loot =
             },
         },
     },
+
+    -- Apollyon: SW
     [1291] =
     {
         -- SW_Apollyon floor 1
@@ -562,6 +564,8 @@ local loot =
             },
         },
     },
+
+    -- Apollyon: NW
     [1290] =
     {
         -- NW_Apollyon floor 1
@@ -805,9 +809,10 @@ local loot =
             },
         },
     },
+
+    -- CS Apollyon
     [1294] =
     {
-        -- CS_Apollyon
         [1] =
         {
             {
@@ -839,9 +844,11 @@ local loot =
             },
         },
     },
+
+    -- Central Apollyon
     [1296] =
     {
-        -- omega
+        -- Proto-Omega
         [1] =
         {
             {
@@ -888,20 +895,24 @@ end
 
 entity.onTrigger = function(player, npc)
     local battlefield = player:getBattlefield()
+
     if not battlefield then
         return
     end
+
     local crateID = npc:getID()
-    local model = npc:getModelId()
-    local X = npc:getXPos()
-    local Y = npc:getYPos()
-    local Z = npc:getZPos()
-    local bfid = battlefield:getID()
-    local hold = false
+    local model   = npc:getModelId()
+    local X       = npc:getXPos()
+    local Y       = npc:getYPos()
+    local Z       = npc:getZPos()
+    local bfid    = battlefield:getID()
+    local hold    = false
+
     if npc:getLocalVar("open") == 0 then
         switch (bfid): caseof
         {
-            [1290] = function() -- NW Apollyon Crate Handling
+            -- NW Apollyon Crate Handling
+            [1290] = function()
                 if crateID ~= ID.npc.APOLLYON_NW_CRATE[5] then
                     for i = 1, 4 do
                         for j = 1, 5 do
@@ -922,7 +933,9 @@ entity.onTrigger = function(player, npc)
                     battlefield:setLocalVar("lootSeen", 1)
                 end
             end,
-            [1291] = function() -- SW Apollyon Crate Handling
+
+            -- SW Apollyon Crate Handling
+            [1291] = function()
                 if crateID ~= ID.npc.APOLLYON_SW_CRATE[4] then
                     for i = 1, 3 do
                         if i == 3 then
@@ -988,7 +1001,10 @@ entity.onTrigger = function(player, npc)
                     battlefield:setLocalVar("lootSeen", 1)
                 end
             end,
-            [1292] = function() -- NE Apollyon Crate Handling
+
+            -- NE Apollyon Crate Handling
+            [1292] = function()
+                -- Floors 1 to 4
                 if crateID ~= ID.npc.APOLLYON_NE_CRATE[5] then
                     for i = 1, 4 do
                         for j = 1, 5 do
@@ -1003,13 +1019,16 @@ entity.onTrigger = function(player, npc)
                             end
                         end
                     end
+                -- Floor 5 (Last)
                 else
                     xi.limbus.handleLootRolls(battlefield, loot[bfid][5], nil, npc)
                     battlefield:setLocalVar("cutsceneTimer", 10)
                     battlefield:setLocalVar("lootSeen", 1)
                 end
             end,
-            [1293] = function() -- SE Apollyon Crate Handling
+
+            -- SE Apollyon Crate Handling
+            [1293] = function()
                 if crateID ~= ID.npc.APOLLYON_SE_CRATE[4] then
                     for i = 1, 3 do
                         for j = 0, 2 do
@@ -1033,7 +1052,9 @@ entity.onTrigger = function(player, npc)
                     battlefield:setLocalVar("lootSeen", 1)
                 end
             end,
-            [1294] = function() -- CS Apollyon Crate Handling
+
+            -- CS Apollyon Crate Handling
+            [1294] = function()
                 if crateID ~= ID.npc.APOLLYON_CS_CRATE then
                     xi.limbus.extendTimeLimit(battlefield, 5, xi.zone.APOLLYON)
                 else
@@ -1042,12 +1063,15 @@ entity.onTrigger = function(player, npc)
                     battlefield:setLocalVar("lootSeen", 1)
                 end
             end,
-            [1296] = function() -- Central Apollyon Crate Handling
+
+            -- Central Apollyon Crate Handling
+            [1296] = function()
                 xi.limbus.handleLootRolls(battlefield, loot[bfid][1], nil, npc)
                 battlefield:setLocalVar("cutsceneTimer", 10)
                 battlefield:setLocalVar("lootSeen", 1)
             end,
         }
+
         if not hold then
             npc:entityAnimationPacket("open")
             npc:setLocalVar("open", 1)

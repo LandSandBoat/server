@@ -6,10 +6,16 @@ local ID = require("scripts/zones/Apollyon/IDs")
 require("scripts/globals/limbus")
 require("scripts/globals/battlefield")
 require("scripts/globals/keyitems")
+require("scripts/globals/utils")
 -----------------------------------
 local battlefield_object = {}
 
 battlefield_object.onBattlefieldInitialise = function(battlefield)
+    local randomOne, randomTwo, randomThree = unpack(utils.uniqueRandomTable(1, 6, 3))
+
+    battlefield:setLocalVar("randomCrate1", randomOne)
+    battlefield:setLocalVar("randomCrate2", randomTwo)
+    battlefield:setLocalVar("randomCrate3", randomThree)
     battlefield:setLocalVar("loot", 1)
     SetServerVariable("[SE_Apollyon]Time", battlefield:getTimeLimit() / 60)
     xi.limbus.handleDoors(battlefield)
@@ -43,9 +49,9 @@ battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
 
     if leavecode == xi.battlefield.leaveCode.WON then
         local _, clearTime, partySize = battlefield:getRecord()
-        player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar("[cs]bit"), 0)
+        player:startCutscene(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar("[cs]bit"), 0)
     elseif leavecode == xi.battlefield.leaveCode.LOST then
-        player:startEvent(32002)
+        player:startCutscene(32002)
     end
 end
 

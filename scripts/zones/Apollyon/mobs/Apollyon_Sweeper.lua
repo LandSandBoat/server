@@ -1,23 +1,13 @@
 -----------------------------------
--- Area: Apollyon NE
+-- Area: Apollyon NE, Floor 3
 --  Mob: Apollyon Sweeper
 -----------------------------------
-local ID = require("scripts/zones/Apollyon/IDs")
-require("scripts/globals/limbus")
+require("scripts/zones/Apollyon/helpers/apollyon_ne")
 -----------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, isKiller, noKiller)
-    if isKiller or noKiller then
-        local mobID           = mob:getID()
-        local battlefield     = mob:getBattlefield()
-        local portalTriggerF3 = battlefield:getLocalVar("portalTriggerF3")
-
-        if portalTriggerF3 == mobID then
-            battlefield:setLocalVar("randomF4", ID.mob.APOLLYON_NE_MOB[4] + math.random(0, 2))
-            xi.limbus.handleDoors(battlefield, true, ID.npc.APOLLYON_NE_PORTAL[3])
-        end
-    end
+    xi.apollyon_ne.handleMobDeathFloorThree(mob, player, isKiller, noKiller)
 end
 
 return entity
