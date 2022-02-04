@@ -10,17 +10,17 @@ require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskill_object = {}
+---------------------------------------------------
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)
-    if (mob:getMobMod(xi.mobMod.VAR) == 1) then
+    if (mob:getAnimationSub() == 1) then
         return 0
     end
     return 1
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-
-    mob:setMobMod(xi.mobMod.VAR, 2)
+    mob:setAnimationSub(2) -- Removes a cap from it's head
     local numhits = 1
     local accmod = 1
     local dmgmod = 2

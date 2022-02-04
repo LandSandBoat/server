@@ -14,15 +14,17 @@ require("scripts/globals/mobskills")
 -----------------------------------
 local mobskill_object = {}
 
+---------------------------------------------------
+
 mobskill_object.onMobSkillCheck = function(target, mob, skill)
-    if (mob:getMobMod(xi.mobMod.VAR) == 0) then
+    if (mob:getAnimationSub() == 0) or (mob:getAnimationSub() == 4)  then
         return 0
     end
     return 1
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    mob:setMobMod(xi.mobMod.VAR, 1)
+    mob:setAnimationSub(1) -- Removes a cap from it's head
     local numhits = 1
     local accmod = 1
     local dmgmod = 2
