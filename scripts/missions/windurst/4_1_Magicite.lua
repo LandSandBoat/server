@@ -89,7 +89,7 @@ mission.sections =
                 onTrigger = function(player, npc)
                     if player:getMissionStatus(mission.areaId) == 0 then
                         local hasKIParam = player:hasKeyItem(xi.ki.ARCHDUCAL_AUDIENCE_PERMIT) and 1 or 0
-                        return mission:progressEvent(129, hasKIParam)
+                        return mission:progressEvent(131, hasKIParam)
                     end
                 end,
             },
