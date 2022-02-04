@@ -22,7 +22,7 @@ local hoursLeft  = 0
 
 quest.reward =
 {
-    item  = {xi.items.TABLEWARE_SET},
+    item  = xi.items.TABLEWARE_SET,
     title = xi.title.THREE_STAR_PURVEYOR,
 }
 
@@ -31,17 +31,25 @@ quest.sections =
     -- Section: Quest is available.
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and player:getFameLevel(WINDURST) > 2 and
+            return status == QUEST_AVAILABLE and
                 player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.HIS_NAME_IS_VALGEIR) == QUEST_COMPLETED
         end,
 
         [xi.zone.MHAURA] =
         {
+
+            ['Rycharde'] = quest:event(89)
+
             ['Take'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getCharVar("Quest[4][3]DayCompleted") + 8 < VanadielUniqueDay() then
+                    if
+                        player:getFameLevel(WINDURST) > 2 and
+                        player:getCharVar("Quest[4][3]DayCompleted") + 8 < VanadielUniqueDay()
+                    then
                         return quest:progressEvent(61) -- Quest starting event.
+                    else
+                        return quest:event(65)
                     end
                 end,
             },
