@@ -31,8 +31,6 @@
 #include "spdlog/fmt/fmt.h"
 #include "spdlog/fmt/bundled/printf.h"
 
-uint32 filterMask = 0;
-
 namespace logging
 {
     void InitializeLog(std::string serverName, std::string logFile, bool appendDate)
@@ -134,11 +132,9 @@ namespace logging
         spdlog::shutdown();
     }
 
-    void SetFilters(uint32 _filterMask)
+    void SetFilters(int filterMask)
     {
         TracyZoneScoped;
-
-        filterMask = _filterMask;
 
         // TODO: Loopify this, this sucks
         if (filterMask & MSG_STANDARD)
