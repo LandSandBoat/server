@@ -1101,24 +1101,29 @@ namespace battleutils
 
                 if (PAttacker->objtype == TYPE_PC && PAttacker->PParty != nullptr)
                 {
-                    auto* PLeader = static_cast<CCharEntity*>(PAttacker->PParty->GetLeader());
-                    PLeader->ForPartyWithTrusts([&](CBattleEntity* PMember)
+                    if (auto* PLeader = dynamic_cast<CCharEntity*>(PAttacker->PParty->GetLeader()))
                     {
-                        if (attackerID == PMember->id)
+                        PLeader->ForPartyWithTrusts([&](CBattleEntity* PMember)
                         {
-                            power = PDefender->StatusEffectContainer->GetStatusEffect(daze)->GetPower();
-                        }
-                    });
-
+                            if (attackerID == PMember->id)
+                            {
+                                power = PDefender->StatusEffectContainer->GetStatusEffect(daze)->GetPower();
+                            }
+                        });
+                    }
                 }
-                else if (PAttacker->objtype == TYPE_TRUST && PAttacker->PMaster)
+                else if (PAttacker->objtype == TYPE_TRUST)
                 {
-                    static_cast<CCharEntity*>(PAttacker->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember) {
-                        if (attackerID == PMember->id)
+                    if (auto* PMaster = dynamic_cast<CCharEntity*>(PAttacker->PMaster))
+                    {
+                        PMaster->ForPartyWithTrusts([&](CBattleEntity* PMember)
                         {
-                            power = PDefender->StatusEffectContainer->GetStatusEffect(daze)->GetPower();
-                        }
-                    });
+                            if (attackerID == PMember->id)
+                            {
+                                power = PDefender->StatusEffectContainer->GetStatusEffect(daze)->GetPower();
+                            }
+                        });
+                    }
                 }
                 else if (PAttacker->PMaster == nullptr)
                 {
