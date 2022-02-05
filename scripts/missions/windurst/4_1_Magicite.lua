@@ -121,7 +121,7 @@ mission.sections =
                     npcUtil.giveKeyItem(player, xi.ki.LETTER_TO_ALDO)
                 end,
 
-                [129] = function(player, csid, option, npc)
+                [131] = function(player, csid, option, npc)
                     player:setMissionStatus(mission.areaId, 1)
                     npcUtil.giveKeyItem(player, xi.ki.ARCHDUCAL_AUDIENCE_PERMIT)
                 end,
