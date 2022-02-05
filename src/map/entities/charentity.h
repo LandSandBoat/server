@@ -255,20 +255,24 @@ public:
     CAutomatonEntity*     PAutomaton;            // Automaton statistics
 
     std::vector<CTrustEntity*> PTrusts; // Active trusts
+
     template <typename F, typename... Args>
     void ForPartyWithTrusts(F func, Args&&... args)
     {
         if (PParty)
         {
-            for (auto PMember : PParty->members)
+            for (auto* PMember : PParty->members)
             {
                 func(PMember, std::forward<Args>(args)...);
             }
-            for (auto PMember : PParty->members)
+            for (auto* PMember : PParty->members)
             {
-                for (auto PTrust : static_cast<CCharEntity*>(PMember)->PTrusts)
+                if (auto* PCharMember = dynamic_cast<CCharEntity*>(PMember))
                 {
-                    func(PTrust, std::forward<Args>(args)...);
+                    for (auto* PTrust : PCharMember->PTrusts)
+                    {
+                        func(PTrust, std::forward<Args>(args)...);
+                    }
                 }
             }
         }
