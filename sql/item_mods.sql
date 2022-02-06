@@ -53440,6 +53440,55 @@ INSERT INTO `item_mods` VALUES (23736, 29, 7); -- Magic Def. Bonus
 INSERT INTO `item_mods` VALUES (23736, 384, 300); -- Haste
 INSERT INTO `item_mods` VALUES (23736, 73, 10); -- Store TP
 INSERT INTO `item_mods` VALUES (23736, 161, -700); -- Damage taken
+INSERT INTO `item_mods` VALUES (21430, 25, 10); --  Accuracy 
+INSERT INTO `item_mods` VALUES (21430, 27, -3); -- Enmity
+INSERT INTO `item_mods` VALUES (21432, 541, 5); -- Bloodpact Delay II
+INSERT INTO `item_mods` VALUES (21433, 25, 10); -- Accuracy
+INSERT INTO `item_mods` VALUES (21433, 814, 5); -- WS Damage
+INSERT INTO `item_mods` VALUES (21431, 288, 3); -- Double Attack
+INSERT INTO `item_mods` VALUES (21431, 73, 3); -- Store TP
+INSERT INTO `item_mods` VALUES (21568, 171, 201); -- Delay
+INSERT INTO `item_mods` VALUES (21568, 2, 114); -- HP
+INSERT INTO `item_mods` VALUES (21568, 10, 15); -- VIT
+INSERT INTO `item_mods` VALUES (21568, 11, 15); -- AGI
+INSERT INTO `item_mods` VALUES (21568, 25, 40); -- Accuracy
+INSERT INTO `item_mods` VALUES (21568, 30, 40); -- Magic Accuracy
+INSERT INTO `item_mods` VALUES (21568, 68, 30); -- Evasion
+INSERT INTO `item_mods` VALUES (21568, 31, 30); -- Magic Evasion
+INSERT INTO `item_mods` VALUES (21568, 81, 247); -- Dagger Skill
+INSERT INTO `item_mods` VALUES (21568, 110, 247); -- Parry Skill
+--INSERT INTO `item_mods` VALUES (21568, 0, 234); -- Magic Acc Skill
+INSERT INTO `item_mods` VALUES (21568, 27, 10); -- Enmity 
+INSERT INTO `item_mods` VALUES (21568, 73, 3); -- Store TP
+INSERT INTO `item_mods` VALUES (21568, 161, -800); -- Damage taken
+INSERT INTO `item_mods` VALUES (21926, 171, 190); -- Delay
+INSERT INTO `item_mods` VALUES (21926, 2, 114); -- HP
+INSERT INTO `item_mods` VALUES (21926, 10, 15); -- VIT
+INSERT INTO `item_mods` VALUES (21926, 11, 15); -- AGI
+INSERT INTO `item_mods` VALUES (21926, 25, 40); -- Accuracy
+INSERT INTO `item_mods` VALUES (21926, 26, 40); -- Range Accuracy
+INSERT INTO `item_mods` VALUES (21926, 30, 40); -- Magic Accuracy
+INSERT INTO `item_mods` VALUES (21926, 68, 30); -- Evasion
+INSERT INTO `item_mods` VALUES (21926, 31, 30); -- Magic Evasion
+INSERT INTO `item_mods` VALUES (21926, 88, 242); -- Katana Skill
+INSERT INTO `item_mods` VALUES (21926, 110, 242); -- Parry Skill
+--INSERT INTO `item_mods` VALUES (21926, 0, 242); -- Magic Acc Skill
+INSERT INTO `item_mods` VALUES (21926, 27, 10); -- Enmity 
+INSERT INTO `item_mods` VALUES (21926, 161, -800); -- Damage taken
+INSERT INTO `item_mods` VALUES (26218, 8, 3); -- STR
+INSERT INTO `item_mods` VALUES (26218, 9, 3); -- DEX
+INSERT INTO `item_mods` VALUES (26218, 10, 3); -- VIT
+INSERT INTO `item_mods` VALUES (26218, 11, 3); -- AGI
+INSERT INTO `item_mods` VALUES (26218, 814, 2); -- WS Damage
+INSERT INTO `item_mods` VALUES (26116, 8, 5); -- STR
+INSERT INTO `item_mods` VALUES (26116, 288, 6); -- Double Attack
+INSERT INTO `item_mods` VALUES (26116, 289, 3); -- Subtle Blow
+INSERT INTO `item_mods` VALUES (26116, 11, 3); -- AGI
+INSERT INTO `item_mods` VALUES (26362, 11, 3); -- AGI
+--INSERT INTO `item_mods` VALUES (26362, 0, 5); -- True Shot
+INSERT INTO `item_mods` VALUES (26362, 73, 4); -- Store TP
+INSERT INTO `item_mods` VALUES (26363, 13, 5); -- Mnd
+INSERT INTO `item_mods` VALUES (26363, 114, 5); -- Enfeebling
 /*!40000 ALTER TABLE `item_mods` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
