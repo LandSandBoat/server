@@ -91,7 +91,6 @@
 namespace luautils
 {
     sol::state lua;
-    lua_State* LuaHandle = nullptr;
 
     bool                                  contentRestrictionEnabled;
     std::unordered_map<std::string, bool> contentEnabledMap;
@@ -120,9 +119,6 @@ namespace luautils
         lua = sol::state();
         lua.open_libraries();
 
-        // Compatability with old style
-        LuaHandle = lua.lua_state();
-
         // Globally require bit library
         lua.do_string("if not bit then bit = require('bit') end");
 
@@ -139,85 +135,66 @@ namespace luautils
                           [](float n, float m) { return xirand::GetRandomNumber<float>(n, m); });
         // clang-format on
 
-        // Get-or-create xi.core
-        auto xi      = lua["xi"].get_or_create<sol::table>();
-        auto xi_core = xi["core"].get_or_create<sol::table>();
-
-        // Set functions in both global namespace and as part of xi.core
-        // Example:
-        // set_function("getNPCByID", &luautils::GetNPCByID);
-        // -> GetNPCByID() or xi.core.getNPCByID()
-        auto set_function = [&](std::string const& name, auto&& func) {
-            auto lowerName = name;
-            auto upperName = name;
-
-            lowerName[0] = std::tolower(lowerName[0]);
-            upperName[0] = std::toupper(upperName[0]);
-
-            xi_core.set_function(lowerName, func);
-            lua.set_function(upperName, func);
-        };
-
-        set_function("garbageCollectStep", &luautils::garbageCollectStep);
-        set_function("garbageCollectFull", &luautils::garbageCollectFull);
-        set_function("GetZone", &luautils::GetZone);
-        set_function("getNPCByID", &luautils::GetNPCByID);
-        set_function("getMobByID", &luautils::GetMobByID);
-        set_function("weekUpdateConquest", &luautils::WeekUpdateConquest);
-        set_function("getRegionOwner", &luautils::GetRegionOwner);
-        set_function("getRegionInfluence", &luautils::GetRegionInfluence);
-        set_function("getNationRank", &luautils::GetNationRank);
-        set_function("getConquestBalance", &luautils::GetConquestBalance);
-        set_function("isConquestAlliance", &luautils::IsConquestAlliance);
-        set_function("spawnMob", &luautils::SpawnMob);
-        set_function("despawnMob", &luautils::DespawnMob);
-        set_function("getPlayerByName", &luautils::GetPlayerByName);
-        set_function("getPlayerByID", &luautils::GetPlayerByID);
-        set_function("getMagianTrial", &luautils::GetMagianTrial);
-        set_function("getMagianTrialsWithParent", &luautils::GetMagianTrialsWithParent);
-        set_function("jstMidnight", &luautils::JstMidnight);
-        set_function("jstWeekday", &luautils::JstWeekday);
-        set_function("vanadielTime", &luautils::VanadielTime);
-        set_function("vanadielTOTD", &luautils::VanadielTOTD);
-        set_function("vanadielHour", &luautils::VanadielHour);
-        set_function("vanadielMinute", &luautils::VanadielMinute);
-        set_function("vanadielDayOfTheWeek", &luautils::VanadielDayOfTheWeek);
-        set_function("vanadielDayOfTheMonth", &luautils::VanadielDayOfTheMonth);
-        set_function("vanadielDayOfTheYear", &luautils::VanadielDayOfTheYear);
-        set_function("vanadielYear", &luautils::VanadielYear);
-        set_function("vanadielMonth", &luautils::VanadielMonth);
-        set_function("vanadielUniqueDay", &luautils::VanadielUniqueDay);
-        set_function("vanadielDayElement", &luautils::VanadielDayElement);
-        set_function("vanadielMoonPhase", &luautils::VanadielMoonPhase);
-        set_function("vanadielMoonDirection", &luautils::VanadielMoonDirection);
-        set_function("vanadielRSERace", &luautils::VanadielRSERace);
-        set_function("vanadielRSELocation", &luautils::VanadielRSELocation);
-        set_function("setVanadielTimeOffset", &luautils::SetVanadielTimeOffset);
-        set_function("isMoonNew", &luautils::IsMoonNew);
-        set_function("isMoonFull", &luautils::IsMoonFull);
-        set_function("runElevator", &luautils::StartElevator);
-        set_function("getServerVariable", &luautils::GetServerVariable);
-        set_function("setServerVariable", &luautils::SetServerVariable);
-        set_function("clearVarFromAll", &luautils::ClearVarFromAll);
-        set_function("sendEntityVisualPacket", &luautils::SendEntityVisualPacket);
-        set_function("updateServerMessage", &luautils::UpdateServerMessage);
-        set_function("getServerVersion", &luautils::GetServerVersion);
-        set_function("getMobRespawnTime", &luautils::GetMobRespawnTime);
-        set_function("disallowRespawn", &luautils::DisallowRespawn);
-        set_function("updateNMSpawnPoint", &luautils::UpdateNMSpawnPoint);
-        set_function("setDropRate", &luautils::SetDropRate);
-        set_function("nearLocation", &luautils::NearLocation);
-        set_function("terminate", &luautils::Terminate);
-        set_function("getHealingTickDelay", &luautils::GetHealingTickDelay);
-        set_function("getReadOnlyItem", &luautils::GetReadOnlyItem);
-        set_function("getAbility", &luautils::GetAbility);
-        set_function("getSpell", &luautils::GetSpell);
-        set_function("selectDailyItem", &luautils::SelectDailyItem);
-        set_function("GetQuestAndMissionFilenamesList", &luautils::GetQuestAndMissionFilenamesList);
-        set_function("GetCachedInstanceScript", &luautils::GetCachedInstanceScript);
+        lua.set_function("GarbageCollectStep", &luautils::garbageCollectStep);
+        lua.set_function("GarbageCollectFull", &luautils::garbageCollectFull);
+        lua.set_function("GetZone", &luautils::GetZone);
+        lua.set_function("GetNPCByID", &luautils::GetNPCByID);
+        lua.set_function("GetMobByID", &luautils::GetMobByID);
+        lua.set_function("WeekUpdateConquest", &luautils::WeekUpdateConquest);
+        lua.set_function("GetRegionOwner", &luautils::GetRegionOwner);
+        lua.set_function("GetRegionInfluence", &luautils::GetRegionInfluence);
+        lua.set_function("GetNationRank", &luautils::GetNationRank);
+        lua.set_function("GetConquestBalance", &luautils::GetConquestBalance);
+        lua.set_function("IsConquestAlliance", &luautils::IsConquestAlliance);
+        lua.set_function("SpawnMob", &luautils::SpawnMob);
+        lua.set_function("DespawnMob", &luautils::DespawnMob);
+        lua.set_function("GetPlayerByName", &luautils::GetPlayerByName);
+        lua.set_function("GetPlayerByID", &luautils::GetPlayerByID);
+        lua.set_function("GetMagianTrial", &luautils::GetMagianTrial);
+        lua.set_function("GetMagianTrialsWithParent", &luautils::GetMagianTrialsWithParent);
+        lua.set_function("JstMidnight", &luautils::JstMidnight);
+        lua.set_function("JstWeekday", &luautils::JstWeekday);
+        lua.set_function("VanadielTime", &luautils::VanadielTime);
+        lua.set_function("VanadielTOTD", &luautils::VanadielTOTD);
+        lua.set_function("VanadielHour", &luautils::VanadielHour);
+        lua.set_function("VanadielMinute", &luautils::VanadielMinute);
+        lua.set_function("VanadielDayOfTheWeek", &luautils::VanadielDayOfTheWeek);
+        lua.set_function("VanadielDayOfTheMonth", &luautils::VanadielDayOfTheMonth);
+        lua.set_function("VanadielDayOfTheYear", &luautils::VanadielDayOfTheYear);
+        lua.set_function("VanadielYear", &luautils::VanadielYear);
+        lua.set_function("VanadielMonth", &luautils::VanadielMonth);
+        lua.set_function("VanadielUniqueDay", &luautils::VanadielUniqueDay);
+        lua.set_function("VanadielDayElement", &luautils::VanadielDayElement);
+        lua.set_function("VanadielMoonPhase", &luautils::VanadielMoonPhase);
+        lua.set_function("VanadielMoonDirection", &luautils::VanadielMoonDirection);
+        lua.set_function("VanadielRSERace", &luautils::VanadielRSERace);
+        lua.set_function("VanadielRSELocation", &luautils::VanadielRSELocation);
+        lua.set_function("SetVanadielTimeOffset", &luautils::SetVanadielTimeOffset);
+        lua.set_function("IsMoonNew", &luautils::IsMoonNew);
+        lua.set_function("IsMoonFull", &luautils::IsMoonFull);
+        lua.set_function("RunElevator", &luautils::StartElevator);
+        lua.set_function("GetServerVariable", &luautils::GetServerVariable);
+        lua.set_function("SetServerVariable", &luautils::SetServerVariable);
+        lua.set_function("ClearVarFromAll", &luautils::ClearVarFromAll);
+        lua.set_function("SendEntityVisualPacket", &luautils::SendEntityVisualPacket);
+        lua.set_function("UpdateServerMessage", &luautils::UpdateServerMessage);
+        lua.set_function("GetServerVersion", &luautils::GetServerVersion);
+        lua.set_function("GetMobRespawnTime", &luautils::GetMobRespawnTime);
+        lua.set_function("DisallowRespawn", &luautils::DisallowRespawn);
+        lua.set_function("UpdateNMSpawnPoint", &luautils::UpdateNMSpawnPoint);
+        lua.set_function("SetDropRate", &luautils::SetDropRate);
+        lua.set_function("NearLocation", &luautils::NearLocation);
+        lua.set_function("Terminate", &luautils::Terminate);
+        lua.set_function("GetHealingTickDelay", &luautils::GetHealingTickDelay);
+        lua.set_function("GetReadOnlyItem", &luautils::GetReadOnlyItem);
+        lua.set_function("GetAbility", &luautils::GetAbility);
+        lua.set_function("GetSpell", &luautils::GetSpell);
+        lua.set_function("SelectDailyItem", &luautils::SelectDailyItem);
+        lua.set_function("GetQuestAndMissionFilenamesList", &luautils::GetQuestAndMissionFilenamesList);
+        lua.set_function("GetCachedInstanceScript", &luautils::GetCachedInstanceScript);
 
         // This binding specifically exists to forcefully crash the server.
-        set_function("ForceCrash", [](){ crash(); });
+        lua.set_function("ForceCrash", [](){ crash(); });
 
         // Register Sol Bindings
         CLuaAbility::Register();
@@ -234,17 +211,28 @@ namespace luautils
         CLuaItem::Register();
 
         // Load globals
-        // TODO: give "core side requires" a better home + decide which ones truly need to be core side.
+        // Truly global files first
         lua.script_file("./scripts/settings/main.lua");
         lua.script_file("./scripts/globals/common.lua");
-        lua.script_file("./scripts/globals/conquest.lua");
-        lua.script_file("./scripts/globals/player.lua");
-        roeutils::init();
-        lua.script_file("./scripts/globals/roe.lua");
-        lua.script_file("./scripts/globals/gear_sets.lua");
-        lua.script_file("./scripts/globals/battlefield.lua");
-        lua.script_file("./scripts/globals/mobs.lua");
-        lua.script_file("./scripts/globals/mixins.lua");
+        roeutils::init(); // TODO: Get rid of the need to do this
+
+        // Then the rest...
+        for (auto entry : std::filesystem::directory_iterator("./scripts/globals"))
+        {
+            if (entry.path().extension() == ".lua")
+            {
+                // TODO: Add to verbose logging
+                auto relative_path_string = entry.path().relative_path().generic_string();
+                //auto lua_path = std::filesystem::relative(entry.path(), "./").replace_extension("").generic_string();
+                //ShowInfo("Loading global script %s", lua_path);
+                auto result = lua.safe_script_file(relative_path_string);
+                if (!result.valid())
+                {
+                    sol::error err = result;
+                    ShowError(err.what());
+                }
+            }
+        }
 
         // Pet Scripts
         CacheLuaObjectFromFile("./scripts/globals/pets/automaton.lua");
@@ -254,7 +242,7 @@ namespace luautils
         // Handle settings
         contentRestrictionEnabled = GetSettingsVariable("RESTRICT_CONTENT") != 0;
 
-        TracyReportLuaMemory(LuaHandle);
+        TracyReportLuaMemory(lua.lua_state());
 
         return 0;
     }
@@ -268,7 +256,7 @@ namespace luautils
     int32 garbageCollectStep()
     {
         TracyZoneScoped;
-        TracyReportLuaMemory(LuaHandle);
+        TracyReportLuaMemory(lua.lua_state());
 
         lua.step_gc(10); // LUA_GCSTEP 10 (performs an incremental step of garbage collection. Step size 10kb.)
 
@@ -276,9 +264,9 @@ namespace luautils
         //       this request!
 
         ShowScript("Garbage Collected (Step)");
-        ShowScript("Current State Top: %d, Total Memory Used: %dkb", lua_gettop(LuaHandle), lua.memory_used() / 1024);
+        ShowScript("Current State Top: %d, Total Memory Used: %dkb", lua_gettop(lua.lua_state()), lua.memory_used() / 1024);
 
-        TracyReportLuaMemory(LuaHandle);
+        TracyReportLuaMemory(lua.lua_state());
 
         return 0;
     }
@@ -286,7 +274,7 @@ namespace luautils
     int32 garbageCollectFull()
     {
         TracyZoneScoped;
-        TracyReportLuaMemory(LuaHandle);
+        TracyReportLuaMemory(lua.lua_state());
 
         auto before_mem_kb = lua.memory_used() / 1024;
 
@@ -295,9 +283,9 @@ namespace luautils
         auto after_mem_kb = lua.memory_used() / 1024;
 
         ShowScript("Garbage Collected (Full)");
-        ShowScript("Current State Top: %d, Total Memory Used: %dkb -> %dkb", lua_gettop(LuaHandle), before_mem_kb, after_mem_kb);
+        ShowScript("Current State Top: %d, Total Memory Used: %dkb -> %dkb", lua_gettop(lua.lua_state()), before_mem_kb, after_mem_kb);
 
-        TracyReportLuaMemory(LuaHandle);
+        TracyReportLuaMemory(lua.lua_state());
 
         return 0;
     }
@@ -1852,8 +1840,6 @@ namespace luautils
         PChar->eventPreparation->targetEntity = PNpc;
         PChar->eventPreparation->scriptFile   = filename;
 
-        PChar->StatusEffectContainer->DelStatusEffect(EFFECT_BOOST);
-
         auto onTriggerFramework = lua["xi"]["globals"]["interaction"]["interaction_global"]["onTrigger"];
         auto onTrigger = GetCacheEntryFromFilename(filename)["onTrigger"];
 
@@ -1894,14 +1880,15 @@ namespace luautils
         }
 
         auto func_result = onEventUpdate(CLuaBaseEntity(PChar), eventID, result, extras, optTarget);
+
+        PChar->eventPreparation = previousPrep;
+
         if (!func_result.valid())
         {
             sol::error err = func_result;
             ShowError("luautils::onEventUpdate: %s", err.what());
             return -1;
         }
-
-        PChar->eventPreparation = previousPrep;
 
         return func_result.get_type() == sol::type::number ? func_result.get<int32>() : 1;
     }
@@ -1928,14 +1915,15 @@ namespace luautils
         }
 
         auto func_result = onEventUpdateFramework(CLuaBaseEntity(PChar), eventID, result, optTarget, onEventUpdate);
+
+        PChar->eventPreparation = previousPrep;
+
         if (!func_result.valid())
         {
             sol::error err = func_result;
             ShowError("luautils::onEventUpdate: %s", err.what());
             return -1;
         }
-
-        PChar->eventPreparation = previousPrep;
 
         return func_result.get_type() == sol::type::number ? func_result.get<int32>() : 1;
     }
@@ -1957,14 +1945,15 @@ namespace luautils
         }
 
         auto result = onEventUpdateFramework(CLuaBaseEntity(PChar), PChar->currentEvent->eventId, updateString, optTarget, onEventUpdate);
+
+        PChar->eventPreparation = previousPrep;
+
         if (!result.valid())
         {
             sol::error err = result;
             ShowError("luautils::onEventUpdate: %s", err.what());
             return -1;
         }
-
-        PChar->eventPreparation = previousPrep;
 
         return 0;
     }
@@ -1997,14 +1986,16 @@ namespace luautils
         }
 
         auto func_result = onEventFinishFramework(CLuaBaseEntity(PChar), eventID, result, optTarget, onEventFinish);
+
+        // Restore eventPreparation before potentially bailing out of function due to errors
+        PChar->eventPreparation = previousPrep;
+
         if (!func_result.valid())
         {
             sol::error err = func_result;
             ShowError("luautils::onEventFinish %s", err.what());
             return -1;
         }
-
-        PChar->eventPreparation = previousPrep;
 
         if (PChar->currentEvent->scriptFile.find("/bcnms/") > 0 && PChar->health.hp <= 0)
         { // for some reason the event doesnt enforce death afterwards

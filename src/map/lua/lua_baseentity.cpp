@@ -803,6 +803,8 @@ void CLuaBaseEntity::StartEventHelper(int32 EventID, sol::variadic_args va, EVEN
         return;
     }
 
+    PChar->StatusEffectContainer->DelStatusEffect(EFFECT_BOOST);
+
     PChar->queueEvent(ParseEvent(EventID, va, PChar->eventPreparation, eventType));
 }
 

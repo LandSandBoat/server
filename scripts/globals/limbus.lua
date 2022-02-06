@@ -224,14 +224,14 @@ function xi.limbus.handleDoors(battlefield, open, door)
 
         -- NE Apollyon
         [1292] = function()
-            for i = 1, 5 do
+            for i = 1, 4 do
                 GetNPCByID(ID.npc.APOLLYON_NE_PORTAL[i]):setAnimation(animation)
             end
         end,
 
         -- SE Apollyon
         [1293] = function()
-            for i = 1, 4 do
+            for i = 1, 3 do
                 GetNPCByID(ID.npc.APOLLYON_SE_PORTAL[i]):setAnimation(animation)
             end
         end,
@@ -391,8 +391,8 @@ function xi.limbus.spawnRandomCrate(npc, battlefield, var, mask, canMimic)
                 end
             end,
 
-
-            [2] = function() -- spawn bronze or blue
+            -- Spawn bronze or blue
+            [2] = function()
                 if spawnMimic and canMimic then
                     GetNPCByID(npc):setModelId(961) --mimic
                     GetNPCByID(npc):setStatus(xi.status.NORMAL)
@@ -402,8 +402,8 @@ function xi.limbus.spawnRandomCrate(npc, battlefield, var, mask, canMimic)
                     if random == 1 then random = 2 end
                     switch (random): caseof
                     {
-                        [0] = function() GetNPCByID(npc):setModelId(960) end, --bronze
-                        [2] = function() GetNPCByID(npc):setModelId(962) end, --blue
+                        [0] = function() GetNPCByID(npc):setModelId(960) end, -- Bronze
+                        [2] = function() GetNPCByID(npc):setModelId(962) end, -- Blue
                     }
                     GetNPCByID(npc):setStatus(xi.status.NORMAL)
                     battlefield:setLocalVar(var, bit.bor(math.pow(2,random), mask))

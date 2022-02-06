@@ -1,9 +1,8 @@
 -----------------------------------
--- Area: Apollyon SE
+-- Area: Apollyon SE, Floor 1
 --  Mob: Ghost Clot
 -----------------------------------
-local ID = require("scripts/zones/Apollyon/IDs")
-require("scripts/globals/limbus")
+require("scripts/zones/Apollyon/helpers/apollyon_se")
 -----------------------------------
 local entity = {}
 
@@ -14,9 +13,7 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, isKiller, noKiller)
-    if isKiller or noKiller then
-        xi.limbus.handleDoors(player:getBattlefield(), true, ID.npc.APOLLYON_SE_PORTAL[1])
-    end
+    xi.apollyon_se.handleMobDeathKey(mob, player, isKiller, noKiller, 1)
 end
 
 return entity

@@ -708,37 +708,27 @@ end
 -- Produces a bitmask for the goblin ancient currency NPCs
 -----------------------------------
 
+local dynamisMapKI =
+{
+    xi.ki.MAP_OF_DYNAMIS_SAN_DORIA,
+    xi.ki.MAP_OF_DYNAMIS_BASTOK,
+    xi.ki.MAP_OF_DYNAMIS_WINDURST,
+    xi.ki.MAP_OF_DYNAMIS_JEUNO,
+    xi.ki.MAP_OF_DYNAMIS_BEAUCEDINE,
+    xi.ki.MAP_OF_DYNAMIS_XARCABARD,
+    xi.ki.MAP_OF_DYNAMIS_VALKURM,
+    xi.ki.MAP_OF_DYNAMIS_BUBURIMU,
+    xi.ki.MAP_OF_DYNAMIS_QUFIM,
+    xi.ki.MAP_OF_DYNAMIS_TAVNAZIA,
+}
+
 function getDynamisMapList(player)
     local bitmask = 0
-    if (player:hasKeyItem(xi.ki.MAP_OF_DYNAMIS_SAN_DORIA) == true) then
-        bitmask = bitmask + 2
-    end
-    if (player:hasKeyItem(xi.ki.MAP_OF_DYNAMIS_BASTOK) == true) then
-        bitmask = bitmask + 4
-    end
-    if (player:hasKeyItem(xi.ki.MAP_OF_DYNAMIS_WINDURST) == true) then
-        bitmask = bitmask + 8
-    end
-    if (player:hasKeyItem(xi.ki.MAP_OF_DYNAMIS_JEUNO) == true) then
-        bitmask = bitmask + 16
-    end
-    if (player:hasKeyItem(xi.ki.MAP_OF_DYNAMIS_BEAUCEDINE) == true) then
-        bitmask = bitmask + 32
-    end
-    if (player:hasKeyItem(xi.ki.MAP_OF_DYNAMIS_XARCABARD) == true) then
-        bitmask = bitmask + 64
-    end
-    if (player:hasKeyItem(xi.ki.MAP_OF_DYNAMIS_VALKURM) == true) then
-        bitmask = bitmask + 128
-    end
-    if (player:hasKeyItem(xi.ki.MAP_OF_DYNAMIS_BUBURIMU) == true) then
-        bitmask = bitmask + 256
-    end
-    if (player:hasKeyItem(xi.ki.MAP_OF_DYNAMIS_QUFIM) == true) then
-        bitmask = bitmask + 512
-    end
-    if (player:hasKeyItem(xi.ki.MAP_OF_DYNAMIS_TAVNAZIA) == true) then
-        bitmask = bitmask + 1024
+
+    for position, keyItem in ipairs(dynamisMapKI) do
+        if player:hasKeyItem(keyItem) then
+            bitmask = bitmask + bit.lshift(1, position)
+        end
     end
 
     return bitmask
@@ -763,20 +753,20 @@ function dynamis.procMonster(mob, player)
         if extensions > 2 then
             if player:getSubJob() == xi.job.NONE and math.random(0, 99) == 0 then
                 mob:setLocalVar("dynamis_proc", 4)
-                mob:weaknessTrigger(3)
                 mob:addStatusEffect(xi.effect.TERROR, 0, 0, 30)
+                mob:weaknessTrigger(3)
             elseif extensions == 5 then
                 mob:setLocalVar("dynamis_proc", 3)
-                mob:weaknessTrigger(2)
                 mob:addStatusEffect(xi.effect.TERROR, 0, 0, 30)
+                mob:weaknessTrigger(2)
             elseif extensions == 4 then
                 mob:setLocalVar("dynamis_proc", 2)
-                mob:weaknessTrigger(1)
                 mob:addStatusEffect(xi.effect.TERROR, 0, 0, 30)
+                mob:weaknessTrigger(1)
             elseif extensions == 3 then
                 mob:setLocalVar("dynamis_proc", 1)
-                mob:weaknessTrigger(0)
                 mob:addStatusEffect(xi.effect.TERROR, 0, 0, 30)
+                mob:weaknessTrigger(0)
             end
         end
     end

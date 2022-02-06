@@ -3,6 +3,7 @@
 
 #ifdef TRACY_ENABLE
 #include "Tracy.hpp"
+#include "cbasetypes.h"
 #include "spdlog/fmt/fmt.h"
 #include "spdlog/fmt/bundled/core.h"
 #include "spdlog/fmt/bundled/format.h"

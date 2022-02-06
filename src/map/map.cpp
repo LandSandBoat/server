@@ -433,7 +433,7 @@ int32 do_sockets(fd_set* rfd, duration next)
         }
     }
 
-    TracyReportLuaMemory(luautils::LuaHandle);
+    TracyReportLuaMemory(luautils::lua.lua_state());
 
     return 0;
 }
