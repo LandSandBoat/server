@@ -11667,7 +11667,7 @@ INSERT INTO `item_equipment` VALUES (25588,'aya._zucchetto',99,119,2130452,159,0
 INSERT INTO `item_equipment` VALUES (25589,'aya._zucchetto_+1',99,119,2130452,159,0,0,16,0,0);
 INSERT INTO `item_equipment` VALUES (25590,'taliah_turban',99,119,147712,160,0,0,16,0,0);
 INSERT INTO `item_equipment` VALUES (25591,'taliah_turban_+1',99,119,147712,160,0,0,16,0,0);
-INSERT INTO `item_equipment` VALUES (25593, 'cath_palug_crown', 99, 0, 1589276, 53, 0, 0, 16, 0, 0);
+INSERT INTO `item_equipment` VALUES (25593,'cath_palug_crown',99,0,1589276,53,0,0,16,0,0);
 INSERT INTO `item_equipment` VALUES (25600,'maiitsoh_haube',99,119,14785,218,0,0,16,0,0);
 INSERT INTO `item_equipment` VALUES (25601,'blistering_sallet',99,119,4194303,29,0,0,16,0,0);
 INSERT INTO `item_equipment` VALUES (25602,'blistering_sallet_+1',99,119,4194303,29,0,0,16,0,0);
@@ -12069,7 +12069,7 @@ INSERT INTO `item_equipment` VALUES (26082,'lugalbanda_earring',99,0,1589256,0,0
 INSERT INTO `item_equipment` VALUES (26083,'enmerkar_earring',99,0,155904,0,0,0,6144,0,0);
 INSERT INTO `item_equipment` VALUES (26084,'sherida_earring',99,0,2368818,0,0,0,6144,0,0);
 INSERT INTO `item_equipment` VALUES (26085,'regal_earring',99,0,1606172,0,0,0,6144,0,0);
-INSERT INTO `item_equipment` VALUES (26088, 'malignance_earring', 99, 0, 1589404, 0, 0, 0, 6144, 0, 0);
+INSERT INTO `item_equipment` VALUES (26088,'malignance_earring',99,0,1589404,0,0,0,6144,0,0);
 INSERT INTO `item_equipment` VALUES (26108,'odr_earring',99,0,2462754,0,0,0,6144,0,0);
 INSERT INTO `item_equipment` VALUES (26109,'snotra_earring',99,0,16,0,0,0,6144,0,0);
 INSERT INTO `item_equipment` VALUES (26160,'evanescence_ring',99,0,4194303,0,0,0,24576,0,0);
@@ -14101,7 +14101,7 @@ INSERT INTO `item_equipment` VALUES (28467,'dynamic_belt_+1',99,0,2473969,0,0,0,
 INSERT INTO `item_equipment` VALUES (28468,'matanki_earring',99,0,4194303,0,0,0,6144,0,0);
 INSERT INTO `item_equipment` VALUES (28470,'emporoxs_ring',99,0,4194303,0,0,0,24576,0,0);
 INSERT INTO `item_equipment` VALUES (28471,'gere_ring',99,0,2494754,0,0,0,24576,0,0);
-INSERT INTO `item_equipment` VALUES (28472, 'freke_ring', 99, 0, 1589276, 0, 0, 0, 24576, 0, 0);
+INSERT INTO `item_equipment` VALUES (28472,'freke_ring',99,0,1589276,0,0,0,24576,0,0);
 INSERT INTO `item_equipment` VALUES (28474,'mendi._earring',99,0,4194303,0,0,0,6144,0,0);
 INSERT INTO `item_equipment` VALUES (28475,'infused_earring',99,0,4194303,0,0,0,6144,0,0);
 INSERT INTO `item_equipment` VALUES (28476,'calamitous_earring',99,0,4194303,0,0,0,6144,0,0);
