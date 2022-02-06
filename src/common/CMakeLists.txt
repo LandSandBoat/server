@@ -1,4 +1,6 @@
 set(SOURCES
+    application.cpp
+    application.h
     blowfish.cpp
     blowfish.h
     cbasetypes.h
@@ -9,9 +11,13 @@ set(SOURCES
     kernel.h
     logging.cpp
     logging.h
+    logging_service.cpp
+    logging_service.h
     md52.cpp
     md52.h
     mmo.h
+    settings.cpp
+    settings.h
     socket.cpp
     socket.h
     sql_prepared_stmt.cpp
