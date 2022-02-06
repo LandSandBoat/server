@@ -52958,7 +52958,7 @@ INSERT INTO `item_mods` VALUES (27474, 302, 6);
 INSERT INTO `item_mods` VALUES (27474, 28, 39);
 INSERT INTO `item_mods` VALUES (27474, 165, 6);
 INSERT INTO `item_mods` VALUES (27474, 24, 34);
-INSERT INTO `item_mods` VALUES (25614, 1, 102); --Adhemar Bonnet +1
+INSERT INTO `item_mods` VALUES (25614, 1, 102); -- Adhemar Bonnet +1
 INSERT INTO `item_mods` VALUES (25614, 2, 41);
 INSERT INTO `item_mods` VALUES (25614, 8, 19);
 INSERT INTO `item_mods` VALUES (25614, 9, 23);
