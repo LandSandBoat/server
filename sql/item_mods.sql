@@ -53457,6 +53457,7 @@ INSERT INTO `item_mods` VALUES (21568, 68, 30); -- Evasion
 INSERT INTO `item_mods` VALUES (21568, 31, 30); -- Magic Evasion
 INSERT INTO `item_mods` VALUES (21568, 81, 247); -- Dagger Skill
 INSERT INTO `item_mods` VALUES (21568, 110, 247); -- Parry Skill
+-- INSERT INTO `item_mods` VALUES (21568, 0, 234); -- Magic Acc Skill
 INSERT INTO `item_mods` VALUES (21568, 27, 10); -- Enmity 
 INSERT INTO `item_mods` VALUES (21568, 73, 3); -- Store TP
 INSERT INTO `item_mods` VALUES (21568, 161, -800); -- Damage taken
@@ -53471,6 +53472,7 @@ INSERT INTO `item_mods` VALUES (21926, 68, 30); -- Evasion
 INSERT INTO `item_mods` VALUES (21926, 31, 30); -- Magic Evasion
 INSERT INTO `item_mods` VALUES (21926, 88, 242); -- Katana Skill
 INSERT INTO `item_mods` VALUES (21926, 110, 242); -- Parry Skill
+-- INSERT INTO `item_mods` VALUES (21926, 0, 242); -- Magic Acc Skill
 INSERT INTO `item_mods` VALUES (21926, 27, 10); -- Enmity 
 INSERT INTO `item_mods` VALUES (21926, 161, -800); -- Damage taken
 INSERT INTO `item_mods` VALUES (26218, 8, 3); -- STR
@@ -53483,6 +53485,7 @@ INSERT INTO `item_mods` VALUES (26116, 288, 6); -- Double Attack
 INSERT INTO `item_mods` VALUES (26116, 289, 3); -- Subtle Blow
 INSERT INTO `item_mods` VALUES (26116, 11, 3); -- AGI
 INSERT INTO `item_mods` VALUES (26362, 11, 3); -- AGI
+-- INSERT INTO `item_mods` VALUES (26362, 0, 5); -- True Shot
 INSERT INTO `item_mods` VALUES (26362, 73, 4); -- Store TP
 INSERT INTO `item_mods` VALUES (26363, 13, 5); -- Mnd
 INSERT INTO `item_mods` VALUES (26363, 114, 5); -- Enfeebling
