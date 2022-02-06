@@ -24,8 +24,7 @@
 #include "application.h"
 #include "logging.h"
 
-LoggingService::LoggingService(Application* pApplication)
-: Service(pApplication)
+LoggingService::LoggingService()
 {
     std::cout << "Starting Logging Service\n";
     logging::InitializeLog("world_server", "log\\world-server.log", false);

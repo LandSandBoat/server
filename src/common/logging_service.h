@@ -25,21 +25,16 @@
 #include <memory>
 #include <string>
 
-class Application;
+#include "singleton.h"
 
-class Service
+class LoggingService : public Singleton<LoggingService>
 {
 public:
-    Service(Application* pApplication)
-    : gApplication(pApplication)
-    {
-    }
-    Application* gApplication;
-};
-
-class LoggingService final : public Service
-{
-public:
-    LoggingService(Application* pApplication);
+    LoggingService();
     ~LoggingService();
+
+    void Info(std::string_view str)
+    {
+
+    }
 };

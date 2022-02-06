@@ -44,17 +44,10 @@ public:
     Application& operator=(const Application&) = delete; // Copy assignment operator
     Application& operator=(Application&&) = delete;      // Move assignment operator
 
-    bool IsRunning();
-    void Tick();
+    virtual bool IsRunning();
+    virtual void Tick();
 
     std::unique_ptr<argparse::ArgumentParser> gArgParser;
-
-    std::unique_ptr<LoggingService>  gLogging;
-    std::unique_ptr<SettingsService> gSettings;
-    std::unique_ptr<ZMQService>      gZMQ;
-    std::unique_ptr<SQLService>      gSQL;
-    std::unique_ptr<DebugService>    gDebug;
-    std::unique_ptr<TaskManager>     gTaskManager;
 
     bool bIsRunning;
 

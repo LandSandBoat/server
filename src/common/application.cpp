@@ -22,12 +22,18 @@
 #include "application.h"
 
 #include <iostream>
+#include <string>
 
 Application::Application(std::unique_ptr<argparse::ArgumentParser>&& pArgParser)
 : gArgParser(std::move(pArgParser))
 {
-    // Before anything else, we need to load logging!
-    gLogging     = std::make_unique<LoggingService>(this);
+    logging::Init(this);
+    lua::Init(this);
+    settings::Init(this);
+    zmq::Init(this);
+    sql::Init(this);
+    debug::Init(this);
+    task::Init(this);
 
     //gSettings    = std::make_unique<SettingsService>(this);
     //gZMQ         = std::make_unique<ZMQService>(this);

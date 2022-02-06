@@ -31,11 +31,10 @@
 #include "zmq.hpp"
 // #include "zmq_addon.hpp"
 
-class ZMQService final : public Service
+class ZMQService final : public Singleton<ZMQService>
 {
 public:
-    ZMQService(Application* pApplication)
-    : Service(pApplication)
+    ZMQService()
     {
         pContext = std::make_unique<zmq::context_t>();
         pSocket  = std::make_unique<zmq::socket_t>(*pContext, zmq::socket_type::router);
