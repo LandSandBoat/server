@@ -225,7 +225,6 @@ INSERT INTO `item_mods_pet` VALUES (21430,25,10,0);     -- Pet Acc
 INSERT INTO `item_mods_pet` VALUES (21430,26,10,0);     -- Pet Range Acc
 INSERT INTO `item_mods_pet` VALUES (21430,30,10,0);     -- Pet Magic Acc
 INSERT INTO `item_mods_pet` VALUES (21432,126,16,1);     -- Increases "Blood Pact" damage +16%
---INSERT INTO `item_mods_pet` VALUES (21433,0,0,3);     -- Automaton: Damage
 INSERT INTO `item_mods_pet` VALUES (21504,25,10,3);     -- Arasy Sainti Automaton: Accuracy+10
 INSERT INTO `item_mods_pet` VALUES (21504,30,10,3);     -- Arasy Sainti Automaton: Magic Accuracy+10
 INSERT INTO `item_mods_pet` VALUES (21505,25,15,3);     -- Arasy Sainti +1 Automaton: Accuracy+15
