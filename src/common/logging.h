@@ -57,15 +57,12 @@ enum MSGTYPE
     MSG_EXPLOIT     = 0x1000,
 };
 
-// TODO: Extern bad
-extern uint32 filterMask;
-
 namespace logging
 {
     void InitializeLog(std::string serverName, std::string logFile, bool appendDate);
     void ShutDown();
 
-    void SetFilters(uint32 _filterMask);
+    void SetFilters(int _filterMask);
 }
 
 // TODO: Build helpers around this macro (so function and line info can be preserved)

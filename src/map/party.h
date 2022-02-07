@@ -90,14 +90,17 @@ public:
     uint32 GetTimeLastMemberJoined();
     bool   HasTrusts();
 
-    void       PushPacket(uint32 senderID, uint16 ZoneID, CBasicPacket* packet); // отправляем пакет всем членам группы, за исключением PPartyMember
+    std::size_t GetMemberCountAcrossAllProcesses();
+
+    void       PushPacket(uint32 senderID, uint16 ZoneID, CBasicPacket* packet); // Send a packet to all group members, with the exception of PPartyMember
     void       PushEffectsPacket();
     void       EffectsChanged();
+
     CAlliance* m_PAlliance;
 
-    // ВНИМАНИЕ: НЕ ИЗМЕНЯТЬ ЗНАЧЕНИЯ СПИСКА ВНЕ КЛАССА ГРУППЫ
+    // ATTENTION: Do not change the list values outside the party class
 
-    std::vector<CBattleEntity*> members; // список участников группы
+    std::vector<CBattleEntity*> members;
 
 private:
     struct partyInfo_t;

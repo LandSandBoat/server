@@ -150,12 +150,12 @@ local battlefields = {
 
     [xi.zone.APOLLYON] =
     {
-     { 0, 1291,    0},   -- SW Apollyon
-     { 1, 1290,    0},   -- NW Apollyon
-     { 2, 1293,    0},   -- SE Apollyon
-     { 3, 1292,    0},   -- NE Apollyon
-     { 4, 1296,   -2},   -- Central Apollyon (multiple items needed: 1909 1910 1987 1988)
-     { 5, 1294, 2127},   -- CS Apollyon
+        { 0, 1291,    0},   -- SW Apollyon
+        { 1, 1290,    0},   -- NW Apollyon
+        { 2, 1293,    0},   -- SE Apollyon
+        { 3, 1292,    0},   -- NE Apollyon
+        { 4, 1296,   -2},   -- Central Apollyon (multiple items needed: 1909 1910 1987 1988)
+        { 5, 1294, 2127},   -- CS Apollyon
      -- { 6, 1295,    0},   -- CS Apollyon II
      -- { 7, 1297,    0},   -- Central Apollyon II
     },

@@ -1,8 +1,8 @@
 -----------------------------------
--- Area: Apollyon SE
+-- Area: Apollyon SE, Floor 4
 --  Mob: Evil Armory
 -----------------------------------
-local ID = require("scripts/zones/Apollyon/IDs")
+require("scripts/zones/Apollyon/helpers/apollyon_se")
 -----------------------------------
 local entity = {}
 
@@ -12,9 +12,7 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, isKiller, noKiller)
-    if isKiller or noKiller then
-        GetNPCByID(ID.npc.APOLLYON_SE_CRATE[4]):setStatus(xi.status.NORMAL)
-    end
+    xi.apollyon_se.handleMobDeathKey(mob, player, isKiller, noKiller, 4)
 end
 
 return entity

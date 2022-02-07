@@ -98,6 +98,11 @@ xi.magic_utils.spell_song_enhancing.calculateEnhancingPower = function(caster, t
         end
     end
 
+    -- EXCEPTION: AUGMENT_SONG_STAT works differently for etudes, becouse they already boost an stat. And becouse we can't have anything be straightforward in this game.
+    if songEffect == xi.effect.ETUDE then
+        power = power + caster:getMod(xi.mod.AUGMENT_SONG_STAT)
+    end
+
     -- Finish
     return power
 end
@@ -155,6 +160,11 @@ xi.magic_utils.spell_song_enhancing.useEnhancingSong = function(caster, target, 
     -- Calculate Song Pottency, Duration and SubEffect.
     local power    = xi.magic_utils.spell_song_enhancing.calculateEnhancingPower(caster, target, spell, spellId, tier, songEffect, instrumentBoost, soulVoicePower)
     local duration = xi.magic_utils.spell_song_enhancing.calculateEnhancingDuration(caster, target, spell, instrumentBoost, soulVoicePower)
+
+    -- EXCEPTION: Carols already have a sub-effect in place. The game adds AUGMENT_SONG_STAT * 100 on top of it.
+    if songEffect == xi.effect.CAROL then
+        subEffect = subEffect + (caster:getMod(xi.mod.AUGMENT_SONG_STAT) * 100)
+    end
 
     -- EXCEPTION: Tier 2 Ettudes Fourth Parameter.
     if songEffect == xi.effect.ETUDE and tier == 2 then

@@ -1,9 +1,8 @@
 -----------------------------------
--- Area: Apollyon NE
+-- Area: Apollyon NE, Floor 4
 --  Mob: Hyperion
 -----------------------------------
-local ID = require("scripts/zones/Apollyon/IDs")
-require("scripts/globals/limbus")
+require("scripts/zones/Apollyon/helpers/apollyon_ne")
 -----------------------------------
 local entity = {}
 
@@ -12,15 +11,7 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, isKiller, noKiller)
-    if isKiller or noKiller then
-        local mobID       = mob:getID()
-        local battlefield = mob:getBattlefield()
-        local randomF4    = battlefield:getLocalVar("randomF4")
-
-        if randomF4 == mobID then
-            xi.limbus.handleDoors(battlefield, true, ID.npc.APOLLYON_NE_PORTAL[4])
-        end
-    end
+    xi.apollyon_ne.handleMobDeathFloorFour(mob, player, isKiller, noKiller)
 end
 
 return entity
