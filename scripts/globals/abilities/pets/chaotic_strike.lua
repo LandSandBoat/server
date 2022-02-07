@@ -20,6 +20,7 @@ ability_object.onPetAbility = function(target, pet, skill)
     local totaldamage = 0
     local damage = AvatarPhysicalMove(pet, target, skill, numhits, accmod, dmgmod, dmgmodsubsequent, xi.mobskills.magicalTpBonus.NO_EFFECT, 1, 2, 3)
     totaldamage = AvatarFinalAdjustments(damage.dmg, pet, skill, target, xi.attackType.PHYSICAL, xi.damageType.BLUNT, numhits)
+	totaldamage = math.floor(totaldamage * xi.settings.AVATAR_DAMAGE_MOD)
     target:addStatusEffect(xi.effect.STUN, 1, 0, 2)
     target:takeDamage(totaldamage, pet, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
     target:updateEnmityFromDamage(pet, totaldamage)
