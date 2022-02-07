@@ -31,8 +31,8 @@
 
 CInventoryItemPacket::CInventoryItemPacket(CItem* PItem, uint8 LocationID, uint8 SlotID)
 {
-    this->type = 0x20;
-    this->size = 0x16;
+    this->setType(0x20);
+    this->setSize(0x16);
 
     ref<uint8>(0x0E) = LocationID;
     ref<uint8>(0x0F) = SlotID;

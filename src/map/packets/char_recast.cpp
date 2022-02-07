@@ -31,8 +31,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 CCharRecastPacket::CCharRecastPacket(CCharEntity* PChar)
 {
-    this->type = 0x19;
-    this->size = 0x83;
+    this->setType(0x119);
+    this->setSize(0x83);
 
     uint8 count = 0;
 

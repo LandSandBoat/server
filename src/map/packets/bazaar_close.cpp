@@ -28,8 +28,8 @@
 
 CBazaarClosePacket::CBazaarClosePacket(CCharEntity* PChar)
 {
-    this->type = 0x07; // 0x107
-    this->size = 0x0B;
+    this->setType(0x107);
+    this->setSize(0x0B);
 
     memcpy(data + (0x04), PChar->GetName(), PChar->name.size());
 }

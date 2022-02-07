@@ -26,8 +26,8 @@
 
 CMessageTextPacket::CMessageTextPacket(CBaseEntity* PEntity, uint16 messageID, bool showName, uint8 mode)
 {
-    this->type = 0x36;
-    this->size = 0x08;
+    this->setType(0x36);
+    this->setSize(0x08);
 
     // если в качестве объекта передается персонаж,
     // то не будем отображать имя

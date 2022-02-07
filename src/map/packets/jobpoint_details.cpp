@@ -23,8 +23,8 @@
 
 CJobPointDetailsPacket::CJobPointDetailsPacket(CCharEntity* PChar)
 {
-    this->type = 0x8D;
-    this->size = 0x82;
+    this->setType(0x8D);
+    this->setSize(0x82);
 
     JobPoints_t* PJobPoints = PChar->PJobPoints->GetAllJobPoints();
 
@@ -51,7 +51,7 @@ CJobPointDetailsPacket::CJobPointDetailsPacket(CCharEntity* PChar)
             }
         }
 
-        //Send a packet every 2 jobs...
+        // Send a packet every 2 jobs...
         if (i % 2 == 1)
         {
             PChar->pushPacket(new CBasicPacket(*this));

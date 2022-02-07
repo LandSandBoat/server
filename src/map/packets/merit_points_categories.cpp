@@ -27,12 +27,6 @@
 
 #include "../entities/charentity.h"
 
-/************************************************************************
- *                                                                       *
- *  Примечание                                                           *
- *                                                                       *
- ************************************************************************/
-
 /*
 пакет, содержащий информацию об примененных меритах и количестве, необходимом для следующего усиления
 информации много, отправляется в трех пакетах. начало у всех стандартное:
@@ -63,8 +57,8 @@ struct
 
 CMeritPointsCategoriesPacket::CMeritPointsCategoriesPacket(CCharEntity* PChar)
 {
-    this->type = 0x8C;
-    this->size = 0x80;
+    this->setType(0x8C);
+    this->setSize(0x80);
 
     ref<uint8>(0x04) = MAX_MERITS_IN_PACKET;
 
@@ -85,8 +79,8 @@ CMeritPointsCategoriesPacket::CMeritPointsCategoriesPacket(CCharEntity* PChar)
 
 CMeritPointsCategoriesPacket::CMeritPointsCategoriesPacket(CCharEntity* PChar, MERIT_TYPE merit)
 {
-    this->type = 0x8C;
-    this->size = 0x08;
+    this->setType(0x8C);
+    this->setSize(0x08);
 
     ref<uint8>(0x04)  = 1;
     ref<uint32>(0x08) = PChar->PMeritPoints->GetMerit(merit)->data;

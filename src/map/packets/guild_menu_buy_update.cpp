@@ -32,8 +32,8 @@
 
 CGuildMenuBuyUpdatePacket::CGuildMenuBuyUpdatePacket(CCharEntity* PChar, uint8 stock, uint16 itemID, uint8 quantity)
 {
-    this->type = 0x82;
-    this->size = 0x04;
+    this->setType(0x82);
+    this->setSize(0x04);
 
     XI_DEBUG_BREAK_IF(PChar == nullptr);
 

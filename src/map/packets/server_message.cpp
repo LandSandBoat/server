@@ -26,8 +26,8 @@
 
 CServerMessagePacket::CServerMessagePacket(const string_t& message, int8 language, int32 timestamp, int32 message_offset)
 {
-    this->type = 0x4D;
-    this->size = 0x0E;
+    this->setType(0x4D);
+    this->setSize(0x0E);
 
     ref<uint8>(0x04)  = message_offset == 0 ? 1 : 2;
     ref<uint8>(0x05)  = 1;
@@ -51,6 +51,6 @@ CServerMessagePacket::CServerMessagePacket(const string_t& message, int8 languag
         memcpy((data + (0x18)), message.c_str() + message_offset, sndLength);
 
         auto textSize = (uint8)(sndLength + sndLength % 2);
-        this->size    = ((((0x14 + textSize) + 4) >> 1) & 0xFE);
+        this->setSize((((0x14 + textSize) + 4) >> 1) & 0xFE);
     }
 }

@@ -26,8 +26,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 CMapMarkerPacket::CMapMarkerPacket(CCharEntity* PChar)
 {
-    this->id(0x063);
-    this->length(0x48);
+    this->setType(0x063);
+    this->setSize(0x48);
 
     ref<uint8>(0x04) = 0x06;
 

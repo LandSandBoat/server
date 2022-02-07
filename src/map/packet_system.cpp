@@ -182,7 +182,7 @@ void PrintPacket(CBasicPacket data)
     char message[50];
     memset(&message, 0, 50);
 
-    for (size_t y = 0; y < data.length(); y++)
+    for (size_t y = 0; y < data.getSize(); y++)
     {
         // TODO: -Wno-restrict - undefined behavior to print and write src into dest
         // TODO: -Wno-format-overflow - writing between 4 and 53 bytes into destination of 50
@@ -1108,7 +1108,7 @@ void SmallPacket0x01E(map_session_data_t* const PSession, CCharEntity* const PCh
     const uint8 HEADER_LENGTH = 4;
 
     std::vector<char> chars;
-    std::for_each(data[HEADER_LENGTH], data[HEADER_LENGTH] + (data.length() - HEADER_LENGTH), [&](char ch)
+    std::for_each(data[HEADER_LENGTH], data[HEADER_LENGTH] + (data.getSize() - HEADER_LENGTH), [&](char ch)
     {
         if ((ch >= 0 && ch < 128) && ch != '\0') // isascii && nonnull
         {
@@ -5750,7 +5750,7 @@ void SmallPacket0x0E0(map_session_data_t* const PSession, CCharEntity* const PCh
     char message[256];
     Sql_EscapeString(SqlHandle, message, (const char*)data[4]);
 
-    uint8 type = strlen(message) == 0 ? 0 : data.ref<uint8>(data.length() - 4);
+    uint8 type = strlen(message) == 0 ? 0 : data.ref<uint8>(data.getSize() - 4);
 
     if (type == PChar->search.messagetype && strcmp(message, PChar->search.message.c_str()) == 0)
     {

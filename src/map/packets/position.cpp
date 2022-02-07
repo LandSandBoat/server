@@ -26,8 +26,8 @@
 
 CPositionPacket::CPositionPacket(CBaseEntity* PEntity)
 {
-    this->type = 0x5B;
-    this->size = 0x0E;
+    this->setType(0x5B);
+    this->setSize(0x0E);
 
     ref<float>(0x04) = PEntity->loc.p.x;
     ref<float>(0x08) = PEntity->loc.p.y;

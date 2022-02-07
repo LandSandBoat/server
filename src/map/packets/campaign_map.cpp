@@ -47,8 +47,8 @@ uint8 packet1[] = { 0x02, 0x01, 0xC4, 0x00, 0x01, 0x0D, 0x00, 0x00, 0x00, 0x00, 
 
 CCampaignPacket::CCampaignPacket(CCharEntity* PChar, uint8 number)
 {
-    this->type = 0x71;
-    this->size = 0x66;
+    this->setType(0x71);
+    this->setSize(0x66);
 
     switch (number)
     {

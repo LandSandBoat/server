@@ -25,8 +25,8 @@
 
 CMessageSystemPacket::CMessageSystemPacket(uint32 param0, uint32 param1, uint16 messageID)
 {
-    this->type = 0x53;
-    this->size = 0x08;
+    this->setType(0x53);
+    this->setSize(0x08);
 
     ref<uint32>(0x04) = param0;
     ref<uint32>(0x08) = param1;

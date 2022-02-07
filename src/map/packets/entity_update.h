@@ -38,12 +38,6 @@ enum MODELTYPE
     MODEL_CHOCOBO = 7
 };
 
-/************************************************************************
- *																		*
- *  																		*
- *																		*
- ************************************************************************/
-
 class CBaseEntity;
 
 class CEntityUpdatePacket : public CBasicPacket

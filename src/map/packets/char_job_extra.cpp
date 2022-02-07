@@ -32,8 +32,8 @@
 
 CCharJobExtraPacket::CCharJobExtraPacket(CCharEntity* PChar, bool mjob)
 {
-    this->type = 0x44;
-    this->size = 0x50;
+    this->setType(0x44);
+    this->setSize(0x50);
 
     JOBTYPE job = JOB_NON;
 

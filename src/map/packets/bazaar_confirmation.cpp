@@ -30,8 +30,8 @@
 
 CBazaarConfirmationPacket::CBazaarConfirmationPacket(CCharEntity* PChar, uint8 SlotID, uint8 Quantity)
 {
-    this->type = 0x09; // 0x109
-    this->size = 0x13;
+    this->setType(0x109);
+    this->setSize(0x13);
 
     ref<uint32>(0x04) = PChar->id;
     ref<uint8>(0x08)  = Quantity;
@@ -42,8 +42,8 @@ CBazaarConfirmationPacket::CBazaarConfirmationPacket(CCharEntity* PChar, uint8 S
 
 CBazaarConfirmationPacket::CBazaarConfirmationPacket(CCharEntity* PChar, CItem* PItem)
 {
-    this->type = 0x0A; // 0x10A
-    this->size = 0x11;
+    this->setType(0x10A);
+    this->setSize(0x11);
 
     if (PItem)
     {

@@ -36,18 +36,18 @@
 #include "../weapon_skill.h"
 
 /************************************************************************
- *																		*
- *  ActionTargetID содержит ID цели, над которой производится действие,	*
- *  Если над целью необходимо произвести несколько действий, то в		*
- *  последующих структурах это поле оставляется пустым (равным нулю),	*
- *  это говорит о том, что это действие над ранее указанной целью		*
- *																		*
- ************************************************************************/
+ *
+ * ActionTargetID Contains the target ID on which the action is performed
+ * If you need to make several actions, then in
+ * Subsequent structures this field is left blank (equal to zero),
+ * This suggests that this action on the previously specified purpose
+ *
+ *************************************************************************/
 
 CActionPacket::CActionPacket(action_t& action)
 {
-    this->type = 0x28;
-    this->size = 0x12;
+    this->setType(0x28);
+    this->setSize(0x12);
 
     ref<uint32>(0x05) = action.id;
 
@@ -384,7 +384,7 @@ CActionPacket::CActionPacket(action_t& action)
     ref<uint8>(0x09) = targets;
     uint8 WorkSize   = ((bitOffset >> 3) + (bitOffset % 8 != 0));
 
-    this->size = ((((WorkSize + 7) >> 1) + 1) & -2);
+    this->setSize((((WorkSize + 7) >> 1) + 1) & -2);
 
     ref<uint8>(0x04) = WorkSize;
 }

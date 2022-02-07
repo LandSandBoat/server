@@ -30,8 +30,8 @@
 
 CFurnitureInteractPacket::CFurnitureInteractPacket(CItem* PItem, uint8 LocationID, uint8 SlotID)
 {
-    this->type = 0xFA;
-    this->size = 0x16;
+    this->setType(0xFA);
+    this->setSize(0x16);
 
     ref<uint32>(0x04) = PItem->getID();
 

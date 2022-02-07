@@ -25,16 +25,10 @@
 
 #include "trade_request.h"
 
-/************************************************************************
- *																		*
- *																		*
- *																		*
- ************************************************************************/
-
 CTradeRequestPacket::CTradeRequestPacket(CCharEntity* PChar)
 {
-    this->type = 0x21;
-    this->size = 0x06;
+    this->setType(0x21);
+    this->setSize(0x06);
 
     ref<uint32>(0x04) = PChar->id;
     ref<uint16>(0x08) = PChar->targid;

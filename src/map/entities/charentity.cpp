@@ -290,8 +290,8 @@ void CCharEntity::pushPacket(CBasicPacket* packet)
     // and storing the position in the queue of that entry
     for (auto&& entry : PacketList)
     {
-        if (packet->id() == 0x0E && entry->id() == 0x0E || // Entity Update (CEntityUpdatePacket)
-            packet->id() == 0x0D && entry->id() == 0x0D)   // Char Packet (CCharPacket)
+        if (packet->getType() == 0x0E && entry->getType() == 0x0E || // Entity Update (CEntityUpdatePacket)
+            packet->getType() == 0x0D && entry->getType() == 0x0D)   // Char Packet (CCharPacket)
         {
             bool sameMainId     = packet->ref<uint32>(0x04) == entry->ref<uint32>(0x04);
             bool sameTargId     = packet->ref<uint16>(0x08) == entry->ref<uint16>(0x08);

@@ -33,12 +33,14 @@ CChatMessagePacket::CChatMessagePacket(CCharEntity* PChar, CHAT_MESSAGE_TYPE Mes
     // until that can be found, we'll just use the max length
     auto               buffSize = std::min<size_t>(message.size(), 236);
     const std::string& name     = sender.empty() ? (const char*)PChar->GetName() : sender;
+
     // Build the packet..
-    CBasicPacket::id(id);
-    this->type = 0x17;
+    //CBasicPacket::id(id);
+    this->setType(0x17);
+
     // 12 (base length / 2) + ((buffSize in chunks of 4) / 2)
     // this->size = 12 + ((buffSize / 4) + 1) * 2;
-    this->size = 0x82;
+    this->setSize(0x82);
 
     ref<uint8>(0x04) = MessageType;
 

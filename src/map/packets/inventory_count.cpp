@@ -23,8 +23,8 @@
 
 CInventoryCountPacket::CInventoryCountPacket(uint8 locationId, uint8 slotId)
 {
-    this->type = 0x26; // this->type = 0x026;
-    this->size = 0x1C;
+    this->setType(0x26); // this->type = 0x026; // TODO
+    this->setSize(0x1C);
 
     ref<uint8>(0x04) = locationId;
     ref<uint8>(0x05) = slotId;
@@ -33,8 +33,8 @@ CInventoryCountPacket::CInventoryCountPacket(uint8 locationId, uint8 slotId)
 // For Mannequin updates
 CInventoryCountPacket::CInventoryCountPacket(uint8 locationId, uint8 slotId, uint16 headId, uint16 bodyId, uint16 handsId, uint16 legId, uint16 feetId, uint16 mainId, uint16 subId, uint16 rangeId)
 {
-    this->type = 0x26; // this->type = 0x026; 
-    this->size = 0x1C;
+    this->setType(0x26);
+    this->setSize(0x1C);
 
     ref<uint8>(0x04) = 0x01;
     ref<uint8>(0x05) = locationId;

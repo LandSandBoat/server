@@ -6,8 +6,8 @@
 
 CTimerBarUtilPacket::CTimerBarUtilPacket()
 {
-    this->type = 0x75;
-    this->size = 0x56;
+    this->setType(0x75);
+    this->setSize(0x56);
 }
 
 void CTimerBarUtilPacket::addCountdown(uint32 seconds)

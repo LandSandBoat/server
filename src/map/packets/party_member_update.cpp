@@ -32,13 +32,13 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 CPartyMemberUpdatePacket::CPartyMemberUpdatePacket(CCharEntity* PChar, uint8 MemberNumber, uint16 memberflags, uint16 ZoneID)
 {
-    this->type = 0xDD;
+    this->setType(0xDD);
 
     // This packet size may have changed in the Nov 2021 Update with the introduction of master levels, but it broke things for us in the following ways:
     // 1. Trusts would not appear in the party list
     // 2. Players in a party would always appear as out of zone
     // Modify with caution for the below functions!
-    this->size = 0x20;
+    this->setSize(0x20);
 
     XI_DEBUG_BREAK_IF(PChar == nullptr);
 
@@ -74,8 +74,8 @@ CPartyMemberUpdatePacket::CPartyMemberUpdatePacket(CCharEntity* PChar, uint8 Mem
 
 CPartyMemberUpdatePacket::CPartyMemberUpdatePacket(CTrustEntity* PTrust, uint8 MemberNumber)
 {
-    this->type = 0xDD;
-    this->size = 0x20;
+    this->setType(0xDD);
+    this->setSize(0x20);
 
     XI_DEBUG_BREAK_IF(PTrust == nullptr);
 
@@ -100,8 +100,8 @@ CPartyMemberUpdatePacket::CPartyMemberUpdatePacket(CTrustEntity* PTrust, uint8 M
 
 CPartyMemberUpdatePacket::CPartyMemberUpdatePacket(uint32 id, const int8* name, uint16 memberFlags, uint8 MemberNumber, uint16 ZoneID)
 {
-    this->type = 0xDD;
-    this->size = 0x20;
+    this->setType(0xDD);
+    this->setSize(0x20);
 
     ref<uint32>(0x04) = id;
 

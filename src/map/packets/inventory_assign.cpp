@@ -27,8 +27,8 @@
 
 CInventoryAssignPacket::CInventoryAssignPacket(CItem* PItem, uint8 Flag)
 {
-    this->type = 0x1F;
-    this->size = 0x08;
+    this->setType(0x1F);
+    this->setSize(0x08);
 
     ref<uint32>(0x04) = PItem->getQuantity();
     ref<uint16>(0x08) = PItem->getID();

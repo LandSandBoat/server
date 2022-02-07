@@ -64,12 +64,6 @@ enum CHAT_MESSAGE_TYPE
     MESSAGE_NA_ASSIST     = 35,
 };
 
-/************************************************************************
- *																		*
- *  																		*
- *																		*
- ************************************************************************/
-
 class CCharEntity;
 
 class CChatMessagePacket : public CBasicPacket

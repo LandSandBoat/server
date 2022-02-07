@@ -27,16 +27,16 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "inventory_size.h"
 
 /************************************************************************
- *																		*
- *  Отсутствие значения в 0x1C управляет доступом к MOGLOCKER.			*
- *  По сюжету он заблокирован до выполнения соответствующей задачи		*
- *																		*
- ************************************************************************/
+ *
+ * No value in 0x1C controls access to MOGLOCKER.
+ * In the plot it is blocked before performing the appropriate task
+ *
+ *************************************************************************/
 
 CInventorySizePacket::CInventorySizePacket(CCharEntity* PChar)
 {
-    this->type = 0x1C;
-    this->size = 0x1A;
+    this->setType(0x1C);
+    this->setSize(0x1A);
 
     ref<uint8>(0x04) = 1 + PChar->getStorage(LOC_INVENTORY)->GetSize();
     ref<uint8>(0x05) = 1 + PChar->getStorage(LOC_MOGSAFE)->GetSize();
@@ -56,6 +56,7 @@ CInventorySizePacket::CInventorySizePacket(CCharEntity* PChar)
     ref<uint16>(0x16) = 1 + PChar->getStorage(LOC_MOGSAFE)->GetBuff();
     ref<uint16>(0x18) = 1 + PChar->getStorage(LOC_STORAGE)->GetBuff();
     ref<uint16>(0x1A) = 1 + PChar->getStorage(LOC_TEMPITEMS)->GetBuff();
+
     if (charutils::hasMogLockerAccess(PChar))
     {
         ref<uint16>(0x1C) = 1 + PChar->getStorage(LOC_MOGLOCKER)->GetBuff();

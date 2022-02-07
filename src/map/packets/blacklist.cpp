@@ -26,8 +26,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 CBlacklistPacket::CBlacklistPacket(uint32 accid, const int8* targetName, int8 action)
 {
-    this->type = 0x42;
-    this->size = 0x0E;
+    this->setType(0x42);
+    this->setSize(0x0E);
 
     switch (action)
     {

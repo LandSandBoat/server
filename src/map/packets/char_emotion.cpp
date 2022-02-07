@@ -26,8 +26,8 @@
 
 CCharEmotionPacket::CCharEmotionPacket(CCharEntity* PChar, uint32 TargetID, uint16 TargetIndex, Emote EmoteID, EmoteMode emoteMode, uint16 extra)
 {
-    this->id(0x5A);
-    this->length(56);
+    this->setType(0x5A);
+    this->setSize(56);
 
     ref<uint32>(0x04) = PChar->id;
     ref<uint32>(0x08) = TargetID;

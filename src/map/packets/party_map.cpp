@@ -27,8 +27,8 @@
 
 CPartyMapPacket::CPartyMapPacket(CCharEntity* PChar)
 {
-    this->type = 0xA0;
-    this->size = 0x0C;
+    this->setType(0xA0);
+    this->setSize(0x0C);
 
     XI_DEBUG_BREAK_IF(PChar == nullptr);
 

@@ -28,8 +28,8 @@
 
 CMenuMeritPacket::CMenuMeritPacket(CCharEntity* PChar)
 {
-    this->type = 0x63;
-    this->size = 0x08;
+    this->setType(0x63);
+    this->setSize(0x08);
 
     ref<uint8>(0x04) = 0x02;
     ref<uint8>(0x06) = 0x0C;
@@ -59,7 +59,7 @@ CMenuMeritPacket::CMenuMeritPacket(CCharEntity* PChar)
     // Update Type 3 : Monstrosity 1 (Possible to move these packets out of here?)
     // --------------------------------------------
 
-    this->size = 0x6E;
+    this->setSize(0x6E);
 
     memset(data + 4, 0, sizeof(PACKET_SIZE - 4));
 
@@ -75,7 +75,7 @@ CMenuMeritPacket::CMenuMeritPacket(CCharEntity* PChar)
     // Update Type 4 : Monstrosity 2
     // --------------------------------------------
 
-    this->size = 0x5A;
+    this->setSize(0x5A);
 
     memset(data + 4, 0, sizeof(PACKET_SIZE - 4));
 

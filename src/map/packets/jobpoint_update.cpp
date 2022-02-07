@@ -23,11 +23,12 @@
 
 CJobPointUpdatePacket::CJobPointUpdatePacket(CCharEntity* PChar, JOBPOINT_TYPE jpType)
 {
-    this->type = 0x8D;
-    this->size = 0x82;
+    this->setType(0x8D);
+    this->setSize(0x82);
 
     JobPointType_t* PJobPoint = PChar->PJobPoints->GetJobPointType(jpType);
-    ref<uint16>(0x04)         = PJobPoint->id;
-    ref<uint8>(0x06)          = JobPointCost(PJobPoint->value);
-    ref<uint8>(0x07)          = JobPointValueFormat(PJobPoint->value);
+
+    ref<uint16>(0x04) = PJobPoint->id;
+    ref<uint8>(0x06)  = JobPointCost(PJobPoint->value);
+    ref<uint8>(0x07)  = JobPointValueFormat(PJobPoint->value);
 }

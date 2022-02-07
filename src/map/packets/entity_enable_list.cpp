@@ -6,8 +6,8 @@
 
 CEntityEnableList::CEntityEnableList(const std::vector<uint32>& list)
 {
-    this->type = 0x77;
-    this->size = 0x88;
+    this->setType(0x77);
+    this->setSize(0x88);
 
     ref<uint32>(0x04) = 1;
 

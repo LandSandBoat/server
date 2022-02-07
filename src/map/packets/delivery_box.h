@@ -31,12 +31,6 @@
 #define AH_WINDURST "AH-Windurst"
 #define AH_BASTOK   "AH-Bastok"
 
-/************************************************************************
- *																		*
- *  																		*
- *																		*
- ************************************************************************/
-
 class CDeliveryBoxPacket : public CBasicPacket
 {
 public:

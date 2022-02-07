@@ -732,15 +732,18 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
             PacketList_t packetList = PChar->getPacketList();
             packets                 = 0;
 
-            while (!packetList.empty() && *buffsize + packetList.front()->length() < map_config.buffer_size && packets < PacketCount)
+            while (!packetList.empty() && *buffsize + packetList.front()->getSize() < map_config.buffer_size && packets < PacketCount)
             {
                 PSmallPacket = packetList.front();
-
-                PSmallPacket->sequence(map_session_data->server_packet_id);
-                memcpy(buff + *buffsize, *PSmallPacket, PSmallPacket->length());
-
-                *buffsize += PSmallPacket->length();
                 packetList.pop_front();
+
+                ShowInfo("> Outgoing packet: Type: 0x%X, Size: (%d / 0x%X)", PSmallPacket->getType(), PSmallPacket->getSize(), PSmallPacket->getSize());
+
+                PSmallPacket->setSequence(map_session_data->server_packet_id);
+                memcpy(buff + *buffsize, *PSmallPacket, PSmallPacket->getSize());
+
+                *buffsize += PSmallPacket->getSize();
+
                 packets++;
             }
 

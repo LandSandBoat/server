@@ -27,8 +27,8 @@ CMessageNamePacket::CMessageNamePacket(CBaseEntity* PActor, uint16 messageID, CB
                                        int32 param1 /* = 0*/, int32 param2 /* = 0*/, int32 param3 /* = 0*/, int32 chatType /* = 4*/,
                                        bool showSender /* = false*/)
 {
-    this->id(0x27);
-    this->length(0x70);
+    this->setType(0x27);
+    this->setSize(0x70);
 
     ref<int32>(0x04)  = PActor->id;
     ref<uint16>(0x08) = PActor->targid;

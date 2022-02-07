@@ -29,8 +29,8 @@
 
 CDeliveryBoxPacket::CDeliveryBoxPacket(uint8 action, uint8 boxid, uint8 count, uint8 param)
 {
-    this->type = 0x4B;
-    this->size = 0x0A;
+    this->setType(0x4B);
+    this->setSize(0x0A);
 
     memset(data + 4, 0xFF, 12);
 
@@ -57,8 +57,8 @@ CDeliveryBoxPacket::CDeliveryBoxPacket(uint8 action, uint8 boxid, uint8 count, u
 
 CDeliveryBoxPacket::CDeliveryBoxPacket(uint8 action, uint8 boxid, CItem* PItem, uint8 slotid, uint8 count, uint8 message)
 {
-    this->type = 0x4B;
-    this->size = 0x2C;
+    this->setType(0x4B);
+    this->setSize(0x2C);
 
     memset(data + 4, 0xFF, 12);
 

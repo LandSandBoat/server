@@ -28,8 +28,8 @@
 
 CEventStringPacket::CEventStringPacket(CCharEntity* PChar, EventInfo* eventInfo)
 {
-    this->type = 0x33;
-    this->size = 0x38;
+    this->setType(0x33);
+    this->setSize(0x38);
 
     ref<uint32>(0x04) = PChar->id;
     ref<uint16>(0x08) = PChar->m_TargID;
