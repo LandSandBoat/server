@@ -6,11 +6,15 @@ local ID = require("scripts/zones/Apollyon/IDs")
 require("scripts/globals/limbus")
 require("scripts/globals/battlefield")
 require("scripts/globals/keyitems")
+require("scripts/globals/utils")
 -----------------------------------
 local battlefield_object = {}
 
 battlefield_object.onBattlefieldInitialise = function(battlefield)
-    battlefield:setLocalVar("randomF1", math.random(1, 6))
+    local F1key, F1chest = unpack(utils.uniqueRandomTable(1, 3, 2))
+
+    battlefield:setLocalVar("randomF1key", F1key)     -- Set var to determine Floor 1 Key Mob.
+    battlefield:setLocalVar("randomF1chest", F1chest) -- Set var to determine Floor 1 Chest Mob.
     battlefield:setLocalVar("loot", 1)
     SetServerVariable("[NE_Apollyon]Time", battlefield:getTimeLimit() / 60)
     xi.limbus.handleDoors(battlefield)
@@ -44,9 +48,9 @@ battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
 
     if leavecode == xi.battlefield.leaveCode.WON then
         local _, clearTime, partySize = battlefield:getRecord()
-        player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar("[cs]bit"), 0)
+        player:startCutscene(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar("[cs]bit"), 0)
     elseif leavecode == xi.battlefield.leaveCode.LOST then
-        player:startEvent(32002)
+        player:startCutscene(32002)
     end
 end
 

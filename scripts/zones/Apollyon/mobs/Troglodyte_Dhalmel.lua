@@ -1,8 +1,9 @@
 -----------------------------------
--- Area: Apollyon NE
+-- Area: Apollyon NE, Floor 5
 --  Mob: Troglodyte Dhalmel
 -----------------------------------
 local ID = require("scripts/zones/Apollyon/IDs")
+require("scripts/zones/Apollyon/helpers/apollyon_ne")
 require("scripts/globals/pathfind")
 -----------------------------------
 local entity = {}
@@ -39,21 +40,7 @@ entity.onMobRoam = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, isKiller, noKiller)
-    if isKiller or noKiller then
-        local allDead = true
-
-        for i = 2, 9 do
-            if GetMobByID(ID.mob.APOLLYON_NE_MOB[5]+i):isAlive() then
-                allDead = false
-
-                break
-            end
-        end
-
-        if allDead then
-            GetNPCByID(ID.npc.APOLLYON_NE_CRATE[5]):setStatus(xi.status.NORMAL)
-        end
-    end
+    xi.apollyon_ne.handleMobDeathFloorFive(mob, player, isKiller, noKiller)
 end
 
 return entity

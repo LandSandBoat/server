@@ -13,18 +13,16 @@ function utils.unused(...)
     return
 end
 
--- Shuffles a table and returns a copy of it, not the original.
-function utils.shuffle(tab)
-    local copy = {}
-    for k, v in pairs(tab) do
-        copy[k] = v
+-- Shuffles a table and returns a new table containing the randomized result.
+function utils.shuffle(inputTable)
+    local shuffledTable = {}
+
+    for _, v in ipairs(inputTable) do
+        local pos = math.random(1, #shuffledTable + 1)
+        table.insert(shuffledTable, pos, v)
     end
 
-    local res = {}
-    while next(copy) do
-        res[#res + 1] = table.remove(copy, math.random(#copy))
-    end
-    return res
+    return shuffledTable
 end
 
 -- Generates a random permutation of integers >= min_val and <= max_val
@@ -44,6 +42,29 @@ function utils.permgen(max_val, min_val)
     end
 
     return utils.shuffle(indices)
+end
+
+-- Generates a table of unique values given a range and number of entries. This should
+-- only be used when you need unique random values smaller than the input range.  Use
+-- utils.shuffle() or utils.permgen() directly if length of array is equal to the input
+-- list.
+-- Examples:
+-- Input: (1, 3, 2)  Sample Output: { 3, 1 }    (randomized)
+-- Input: (1, 10, 3) Sample Output: { 4, 9, 2 } (randomized)
+function utils.uniqueRandomTable(minVal, maxVal, numEntries)
+    local resultTable = {}
+    local shuffledTable = utils.permgen(maxVal, minVal)
+
+    if numEntries > #shuffledTable then
+        print("utils.uniqueRandomTable(): numEntries exceeds length of shuffledTable!")
+        return nil
+    end
+
+    for i = 1, numEntries do
+        resultTable[i] = shuffledTable[i]
+    end
+
+    return resultTable
 end
 
 function utils.clamp(input, min_val, max_val)

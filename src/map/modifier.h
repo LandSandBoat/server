@@ -405,6 +405,7 @@ enum class Mod
     SONG_DURATION_BONUS    = 454, //
     SONG_SPELLCASTING_TIME = 455, //
     SONG_RECAST_DELAY      = 833, // Reduces song recast time in seconds.
+    AUGMENT_SONG_STAT      = 1003, // Bonus to Stat of Element of Enhancing Song.
 
     // Ranger
     CAMOUFLAGE_DURATION     = 98,  // Camouflage duration in percents
@@ -839,7 +840,7 @@ enum class Mod
 
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.
-    // SPARE = 1003,
+    // SPARE = 1004,
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it
