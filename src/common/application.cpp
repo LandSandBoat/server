@@ -20,6 +20,8 @@
 */
 
 #include "application.h"
+#include "settings_manager.h"
+#include "debug.h"
 
 #include <iostream>
 #include <string>
@@ -27,13 +29,17 @@
 Application::Application(std::unique_ptr<argparse::ArgumentParser>&& pArgParser)
 : gArgParser(std::move(pArgParser))
 {
-    logging::Init(this);
-    lua::Init(this);
-    settings::Init(this);
-    zmq::Init(this);
-    sql::Init(this);
-    debug::Init(this);
-    task::Init(this);
+    //debug::init();
+
+    // logging::Init(this);
+    // lua::Init(this);
+    // settings::Init(this);
+    // zmq::Init(this);
+    // sql::Init(this);
+    // debug::Init(this);
+    // task::Init(this);
+
+    std::cout << SettingsManager::Get<bool>(MainSettings::ENABLE_TOAU);
 
     //gSettings    = std::make_unique<SettingsService>(this);
     //gZMQ         = std::make_unique<ZMQService>(this);

@@ -21,6 +21,8 @@ int main(int argc, char** argv)
     while (pWorldServer->IsRunning())
     {
         pWorldServer->Tick();
+
+        // DEBUG
         pWorldServer->bIsRunning = false;
     }
 

@@ -1,0 +1,666 @@
+# This file is the input for <root>/tools/generate_settings.py
+#
+# You only have to modify this file if you're ADDING NEW SETTINGS
+# OR REMOVING OLD ONES. If you just want to change settings values,
+# you should be looking in the <root>/settings/ folder and changing
+# things there.
+#
+# Content after a # is ignored (comments)
+# Section titles marked with [name] 
+# One setting per line
+# All leading and trailing whitespace will be stripped
+#
+# Settings format: type, name, default, description
+# Valid types are: bool, float, uint, string
+# Rules:
+# - Names cannot contain spaces
+#
+# Examples:
+#
+# float, <name>, 1.0, <description> -> The 1.0 will be converted to a float (1.0f) 
+# 
+# bool, <name>, 1, <description> -> The 1 will be converted to a bool (true)
+#
+# string, <name>
+
+[main] # Will generate settings/main.lua
+string, SERVER_NAME, Nameless, The name of the server
+bool,  ENABLE_TOAU, true, Enables the expansion: Treasures of Aht Urghan
+float, DAMAGE_MULT, 1.0,  The multiplier applied to all damage directed towards players
+
+[sql] # Will generate settings/sql.lua
+string, HOST,     127.0.0.1, The IP Address of the host machine
+uint,   PORT,     3306,      The Port
+string, LOGIN,    root,      The Login
+string, PASSWORD, root,      The Password
+string, DATABASE, xidb,      The Database
+
+[logging] # Will generate settings/logging.lua
+bool, ENABLED, true, Whether or not logging is on
+string, TIMESTAMP_FORMAT, [%d/%b] [%H:%M:%S], Timestamp format
+bool, ENABLE_STANDARD, true, Enable standard logging messages (ShowStandard(...))
+bool, ENABLE_INFO, true, Enable standard logging messages (ShowStandard(...))
+bool, ENABLE_NOTICE, true, Enable standard logging messages (ShowStandard(...))
+bool, ENABLE_WARN, true, Enable standard logging messages (ShowStandard(...))
+bool, ENABLE_DEBUG, true, Enable debug logging messages (ShowDebug(...))
+bool, ENABLE_ERROR, true, Enable x logging messages
+bool, ENABLE_FATAL_ERROR, true, Enable x logging messages
+bool, ENABLE_SQL, true, Enable x logging messages
+bool, ENABLE_LUA, true, Enable x logging messages
+bool, ENABLE_NAVMESH, true, Enable x logging messages
+bool, ENABLE_ACTION, true, Enable x logging messages
+bool, ENABLE_EXPLOIT, true, Enable x logging messages
+
+[login]
+bool, ENABLED, true, Whether or not logging is on
+string, DATA_IP, 0.0.0.0, Data IP
+uint, DATA_PORT, 54230, Data Port
+string, VIEW_IP, 0.0.0.0, View IP
+uint, VIEW_PORT, 54001, View Port
+string, AUTH_IP, 0.0.0.0, Auth IP
+uint, AUTH_PORT, 54231, Auth Port
+
+[map]
+bool, ENABLED, true, Whether or not logging is on
+
+[search]
+bool, ENABLED, true, Whether or not logging is on
+uint, SERVER_PORT, 54002, Search server port
+
+[world]
+bool, ENABLED, true, Whether or not logging is on
+
+[zmq]
+string, SERVER_IP, 127.0.0.1, The IP of the machine ZMQ operates on. THIS SHOULD BE YOUR LOCAL MACHINE!
+uint, SERVER_PORT, 54003, The port ZMQ operates on (inter-process messaging)
+
+[version]
+string, CLIENT_VER, 30211225_1, Expected Client version (wrong version cannot log in)
+
+##WE STRONGLY ADVISE AGAINST LOCKING THE SERVER TO OLDER VERSIONS. IT IS A UNIVERSALLY BAD IDEA.
+##0 - disabled (every version allowed)
+##1 - enabled - strict (only exact CLIENT_VER allowed)
+##2 - enabled - greater than or equal  (matching or greater than CLIENT_VER allowed, default)
+uint, VER_LOCK, 2, Version lock scheme
+
+##--------------------------------
+##TCP/IP parameters
+##--------------------------------
+#
+#login_data_ip: 0.0.0.0
+#login_data_port: 54230
+#login_view_ip: 0.0.0.0
+#login_view_port: 54001
+#login_auth_ip: 0.0.0.0
+#login_auth_port: 54231
+#
+##--------------------------------
+##SQL parameters
+##--------------------------------
+#
+#mysql_host:      127.0.0.1
+#mysql_port:      3306
+#mysql_login:     root
+#mysql_password:  root
+#mysql_database:  xidb
+#
+##Search Server Port
+#search_server_port: 54002
+#
+##Server name (not longer than 15 characters)
+#servername: Nameless
+#
+##Central message server settings (ensure these are the same on both all map servers and the central (lobby) server
+#msg_server_port: 54003
+#msg_server_ip: 127.0.0.1
+#
+##Logging of user IP address to database (true/false)
+#log_user_ip: false
+#
+##Allow account creation via the loader (true/false)
+#account_creation: true
+#
+##0 - disabled (normal operation)
+##1 - enabled (only GM characters allowed online, no new character creation)
+#MAINT_MODE: 0
+#
+##map server conf
+#
+##--------------------------------
+##map server parameters
+##--------------------------------
+#
+##map server port
+#map_port: 54230
+#
+##Time-stamp format which will be printed before all messages.
+##Can at most be 20 characters long.
+##Common formats:
+## %I:%M:%S %p (hour:minute:second 12 hour, AM/PM format)
+## %H:%M:%S (hour:minute:second, 24 hour format)
+## %d/%b/%Y (day/Month/year)
+##For full format information, consult the strftime() manual.
+#timestamp_format: [%d/%b] [%H:%M:%S]
+#
+##If redirected output contains escape sequences (color codes)
+#stdout_with_ansisequence: no
+#
+##Makes server output more silent by omitting certain types of messages:
+##Standard     = 1
+##Status       = 2
+##Info         = 4
+##Notice       = 8
+##Warn         = 16
+##Debug        = 32
+##Error        = 64
+##Fatal Error  = 128
+##SQL          = 256
+##Lua          = 512
+##Navmesh      = 1024
+##Action       = 2048
+##Exploit      = 4096
+##Example: "console_silent: 7" Hides standard, status and information messages (1+2+4)
+#console_silent: 0
+#
+##--------------------------------
+##SQL parameters
+##--------------------------------
+#
+#mysql_host:      127.0.0.1
+#mysql_port:      3306
+#mysql_login:     root
+#mysql_password:  root
+#mysql_database:  xidb
+#
+##--------------------------------
+##Packet settings
+##--------------------------------
+#
+#buff_maxsize: 1750
+#max_time_lastupdate: 60
+#
+##--------------------------------
+##Game settings
+##--------------------------------
+#
+## PacketGuard will block and report any packets that aren't in the allow-list for a
+## player's current state.
+#packetguard_enabled: 1
+#
+##Minimal number of 0x3A packets which uses for detect lightluggage (set 0 for disable)
+#lightluggage_block:   4
+#
+## AH fee structure, defaults are retail.
+#ah_base_fee_single: 1
+#ah_base_fee_stacks: 4
+#ah_tax_rate_single: 1.0
+#ah_tax_rate_stacks: 0.5
+#ah_max_fee: 10000
+#
+## Max open listings per player, 0 = no limit. (Default 7)
+## Note: Settings over 7 may need client-side plugin to work under all circumstances.
+#ah_list_limit: 7
+#
+##Misc EXP related settings
+#exp_rate: 1.0
+#exp_loss_rate: 1.0
+#exp_party_gap_penalties: 1
+#
+## Capacity Point Settings
+#capacity_rate: 1.0
+#
+##Determines Vana'diel time epoch (886/1/1 Firesday)
+## current timestamp - vanadiel_time_epoch = vana'diel time
+## 0 defaults to SE epoch 1009810800 (JP midnight 1/1/2002)
+##safe range is 1 - current timestamp
+#vanadiel_time_epoch: 0
+#
+##For old fame calculation use .25
+#fame_multiplier: 1.00
+#
+##Percentage of experience normally lost to keep upon death. 0 means full loss, where 1 means no loss.
+#exp_retain: 0
+#
+##Minimum level at which experience points can be lost
+#exp_loss_level: 31
+#
+##Enable/disable Level Sync
+#level_sync_enable: 1
+#
+##Disables ability to equip higher level gear when level cap/sync effect is on player.
+#disable_gear_scaling: 0
+#
+##Enable/disable jobs other than BST and RNG having widescan
+#all_jobs_widescan: 1
+#
+##Modifier to apply to player speed. 0 means default speed of 50, where 20 would mean speed 70 or -10 would mean speed 40.
+#speed_mod: 0
+#
+##Modifier to apply to mount speed. 0 means default speed of 80, where 20 would mean speed 100 or -20 would mean speed 60.
+#mount_speed_mod: 0
+#
+##Modifier to apply to agro'd monster speed. 0 means default speed, where 20 would mean default speed + 20 or -10 would mean default speed - 10.
+#mob_speed_mod: 0
+#
+##Allows you to manipulate the constant multiplier in the skill-up rate formulas, having a potent effect on skill-up rates.
+#skillup_chance_multiplier: 1.0
+#craft_chance_multiplier: 1.0
+#
+##Multiplier for skillup amounts. Using anything above 1 will break the 0.5 cap, the cap will become 0.9 (For maximum, set to 5)
+#skillup_amount_multiplier: 1
+#craft_amount_multiplier: 1
+#
+##Gardening Factors: DO NOT change defaults without verifiable proof that your change IS how retail does it. Myths need to be optional.
+#garden_day_matters: 0
+#garden_moonphase_matters: 0
+#garden_pot_matters: 0
+#garden_mh_aura_matters: 0
+#
+##Craft level limit from witch specialization points beging to count. (Retail: 700; Level 75 era:600)
+#craft_common_cap: 700
+#
+##Amount of points allowed in crafts over the level defined above. Points are shared across all crafting skills. (Retail: 400; All skills can go to max: 3200)
+#craft_specialization_points: 400
+#
+##Enable/disable skill-ups from bloodpacts
+#skillup_bloodpact: 1
+#
+##Adjust rate of TP gain for mobs, and players. Acts as a multiplier, so default is 1.
+#mob_tp_multiplier:       1.0
+#player_tp_multiplier:    1.0
+#
+##Adjust max HP pool for NMs, regular mobs, players, and trusts/fellows. Acts as a multiplier, so default is 1.
+#nm_hp_multiplier:        1.0
+#mob_hp_multiplier:       1.0
+#player_hp_multiplier:    1.0
+#alter_ego_hp_multiplier: 1.0
+#
+##Adjust max MP pool for NMs, regular mobs, players, and trusts/fellows. Acts as a multiplier, so default is 1.
+#nm_mp_multiplier:        1.0
+#mob_mp_multiplier:       1.0
+#player_mp_multiplier:    1.0
+#alter_ego_mp_multiplier: 1.0
+#
+##Sets the fraction of MP a subjob provides to the main job. Retail is half and this acts as a divisor so default is 2
+#sj_mp_divisor: 2.0
+#
+## Modify ratio of subjob-to-mainjob
+## 0 = no subjobs
+## 1 = 1/2   (default, 75/37, 99/49)
+## 2 = 2/3   (75/50, 99/66)
+## 3 = equal (75/75, 99/99)
+#subjob_ratio: 1
+#
+##Also adjust monsters subjob in ratio adjustments? 1= true / 0 = false
+#include_mob_sj: 0
+#
+##Adjust base stats (str/vit/etc.) for NMs, regular mobs, players, and trusts/fellows. Acts as a multiplier, so default is 1.
+#nm_stat_multiplier:        1.0
+#mob_stat_multiplier:       1.0
+#player_stat_multiplier:    1.0
+#alter_ego_stat_multiplier: 1.0
+#
+##Adjust skill caps for trusts/fellows. Acts as a multiplier, so default is 1.
+#alter_ego_skill_multiplier: 1.0
+#
+##Adjust the recast time for abilities. Acts as a multiplier, so default is 1
+#ability_recast_multiplier: 1.0
+#
+##Enable/disable shared blood pact timer
+#blood_pact_shared_timer: 0
+#
+##Adjust mob drop rate. Acts as a multiplier, so default is 1.
+#drop_rate_multiplier: 1.0
+#
+##Multiplier for gil naturally dropped by mobs. Does not apply to the bonus gil from all_mobs_gil_bonus. Default is 1.0.
+#mob_gil_multiplier: 1.0
+#
+##All mobs drop this much extra gil per mob LV even if they normally drop zero.
+#all_mobs_gil_bonus: 0
+#
+##Maximum total bonus gil that can be dropped. Default 9999 gil.
+#max_gil_bonus: 9999
+#
+## Allow mobs to walk back home instead of despawning
+#mob_no_despawn: 0
+#
+##Allows parry, block, and guard to skill up regardless of the action occuring.
+## Bin  Dec Note
+## 0000 0   Classic
+## 0001 1   Parry
+## 0010 2   Block
+## 0100 4   Guard
+## 0111 7   Parry, Block, & Guard
+#newstyle_skillups: 7
+#
+##Globally adjusts ALL battlefield level caps by this many levels.
+#Battle_cap_tweak: 0
+#
+##Enable/disable level cap of mission battlefields stored in database.
+#lv_cap_mission_bcnm: 0
+#
+##Max allowed merits points players can hold
+## 10 classic
+## 30 abyssea
+#max_merit_points: 30
+#
+##Minimum time between uses of yell command (in seconds).
+#yell_cooldown: 30
+#
+##Command Audit[logging] commands with lower permission than this will not be logged.
+## Zero for no logging at all. Commands given to non GMs are not logged. Autotranslate is not parsed.
+#audit_gm_cmd: 0
+#
+##Todo: other logging including anti-cheat messages
+#
+##Chat Audit[logging] settings
+#audit_chat: 0
+#audit_say: 0
+#audit_shout: 0
+#audit_tell: 0
+#audit_yell: 0
+#audit_linkshell: 0
+#audit_unity: 0
+#audit_party: 0
+#
+##Seconds between healing ticks. Default is 10
+#healing_tick_delay: 10
+#
+##Central message server settings (ensure these are the same on both all map servers and the central (lobby) server
+#msg_server_port: 54003
+#msg_server_ip: 127.0.0.1
+#
+##Set to 1 to enable server side anti-cheating measurements
+##anticheat_enabled: 1
+##Set to 1 to completely disable auto-jailing offenders
+##anticheat_jail_disable: 0
+#
+## Gobbie Mystery Box settings
+#daily_tally_amount: 10
+#daily_tally_limit: 50000
+#
+#// tcp sockets Configuration file
+#
+#// Display debug reports (When something goes wrong during the report, the report is saved.)
+#debug: no
+#
+#// How long can a socket stall before closing the connection (in seconds)
+#stall_time: 60
+#
+#//----- IP Rules Settings -----
+#
+#// If IP's are checked when connecting.
+#// This also enables DDoS protection.
+#enable_ip_rules: yes
+#
+#// Order of the checks
+#//   deny,allow     : Checks deny rules, then allow rules. Allows if no rules match.
+#//   allow,deny     : Checks allow rules, then deny rules. Allows if no rules match.
+#//   mutual-failure : Allows only if an allow rule matches and no deny rules match.
+#// (default is deny,allow)
+#
+#order: deny,allow
+#// order: allow,deny
+#// order: mutual-failture
+#
+#// IP rules
+#//   allow : Accepts connections from the ip range (even if flagged as DDoS)
+#//   deny  : Rejects connections from the ip range
+#// The rules are processed in order, the first matching rule of each list (allow and deny) is used
+#
+#// allow: 127.0.0.1
+#// allow: 192.168.0.0/16
+#// allow: 10.0.0.0/255.0.0.0
+#// allow: all
+#
+#// deny: 127.0.0.1
+#
+#
+#//---- DDoS Protection Settings ----
+#// If ddos_count connection request are made within ddos_interval msec, it assumes it's a DDoS attack
+#
+#// Consecutive attempts interval (msec)
+#// (default is 3000 msecs, 3 seconds)
+#ddos_interval: 3000
+#
+#// Consecutive attempts trigger
+#// (default is 5 attemps)
+#ddos_count: 5
+#
+#// The time interval after which the threat of DDoS is assumed to be gone. (msec)
+#// After this amount of time, the DDoS restrictions are lifted.
+#// (default is 600000 msecs, 10 minutes)
+#ddos_autoreset: 600000
+#
+#
+#//import: conf/import/packet_conf.txt
+#
+#// tcp sockets Configuration file
+#
+#// Display debug reports (When something goes wrong during the report, the report is saved.)
+#debug: no
+#
+##search server config
+#
+##--------------------------------
+##SQL parameters
+##--------------------------------
+#
+#mysql_host:      127.0.0.1
+#mysql_port:      3306
+#mysql_login:     root
+#mysql_password:  root
+#mysql_database:  xidb
+## Enabled = 1, Disabled = 0
+#expire_auctions: 1
+## Expire items older than this number of days
+#expire_days: 3
+## Interval is in seconds, default is one hour
+#expire_interval: 3600
+#
+##Expected Client version (wrong version cannot log in)
+#CLIENT_VER: 30211225_1
+#
+##WE STRONGLY ADVISE AGAINST LOCKING THE SERVER TO OLDER VERSIONS. IT IS A UNIVERSALLY BAD IDEA.
+#
+##0 - disabled (every version allowed)
+##1 - enabled - strict (only exact CLIENT_VER allowed)
+##2 - enabled - greater than or equal  (matching or greater than CLIENT_VER allowed, default)
+#VER_LOCK: 2
+#
+##DB_VER: f50c8
+#
+#
+#-----------------------------------
+#-- GLOBAL SETTINGS
+#-----------------------------------
+#-- This is to allow server operators to further customize their servers.  As more features are added to the server, the list will surely expand.
+#-- Anything scripted can be customized with proper script editing.
+#
+#-- PLEASE REQUIRE THIS SCRIPT IN ANY SCRIPTS USING SETTINGS: ADD THIS LINE TO THE TOP!!!!
+#-- require("scripts/settings/main")
+#-- With this script added to yours, you can pull variables from it!!
+#-----------------------------------
+#
+#xi = xi or {}
+#
+#xi.settings =
+#{
+#    -- Enable Expansion (1 = Enabled, 0 = Disabled)
+#    ENABLE_COP       = 1,
+#    ENABLE_TOAU      = 1,
+#    ENABLE_WOTG      = 1,
+#    ENABLE_ACP       = 1,
+#    ENABLE_AMK       = 1,
+#    ENABLE_ASA       = 1,
+#    ENABLE_ABYSSEA   = 1,
+#    ENABLE_SOA       = 1,
+#    ENABLE_ROV       = 1,
+#    ENABLE_VOIDWATCH = 1, -- Not an expansion, but has its own storyline. (Not Implemented)
+#
+#    -- FIELDS OF VALOR/Grounds of Valor settings
+#    ENABLE_FIELD_MANUALS  = 1, -- Enables Fields of Valor
+#    ENABLE_GROUNDS_TOMES  = 1, -- Enables Grounds of Valor
+#    ENABLE_SURVIVAL_GUIDE = 1, -- Enables Survival Guides (Not Implemented)
+#    REGIME_WAIT           = 1, -- Make people wait till 00:00 game time as in retail. If it's 0, there is no wait time.
+#    FOV_REWARD_ALLIANCE   = 0, -- Allow Fields of Valor rewards while being a member of an alliance. (default retail behavior: 0)
+#    GOV_REWARD_ALLIANCE   = 1, -- Allow Grounds of Valor rewards while being a member of an alliance. (default retail behavior: 1)
+#
+#    -- Records of Eminence
+#    ENABLE_ROE            = 1,
+#    ENABLE_ROE_TIMED      = 1, -- Enable 4-hour timed records
+#    ENABLE_EXCHANGE_LIMIT = 1, -- Enable Maximum limit of sparks spent per Week (default retail behavior: 1)
+#
+#    WEEKLY_EXCHANGE_LIMIT = 100000, -- Maximum amount of sparks/accolades that can be spent per week (default retail value: 100000)
+#
+#    -- Currency Caps (Change at your own risk!)
+#    CAP_CURRENCY_ACCOLADES = 99999,
+#    CAP_CURRENCY_BALLISTA  = 2000,
+#    CAP_CURRENCY_SPARKS    = 99999,
+#    CAP_CURRENCY_VALOR     = 50000,
+#
+#    -- Magian Trials
+#    ENABLE_MAGIAN_TRIALS             = 1,
+#    MAGIAN_TRIALS_MOBKILL_MULTIPLIER = 1,
+#    MAGIAN_TRIALS_TRADE_MULTIPLIER   = 1,
+#
+#    -- VoidWalker
+#    ENABLE_VOIDWALKER = 1,
+#
+#    -- TREASURE CASKETS
+#    -- Retail droprate = 0.1 (10%) with no other effects active
+#    -- Set to 0 to disable caskets.
+#    -- max is clamped to 1.0 (100%)
+#    CASKET_DROP_RATE = 0.1,
+#
+#    -- Setting to lock content more accurately to the content you have defined above
+#    -- This generally results in a more accurate presentation of your selected expansions
+#    -- as well as a less confusing player experience for things that are disabled (things that are disabled are not loaded)
+#    -- This feature correlates to the content_tag column in the SQL files
+#    RESTRICT_CONTENT = 0,
+#
+#    -- CHARACTER CONFIG
+#    INITIAL_LEVEL_CAP              = 50, -- The initial level cap for new players.  There seems to be a hardcap of 255.
+#    MAX_LEVEL                      = 99, -- Level max of the server, lowers the attainable cap by disabling Limit Break quests.
+#    NORMAL_MOB_MAX_LEVEL_RANGE_MIN = 0,  -- Lower Bound of Max Level Range for Normal Mobs (0 = Uncapped)
+#    NORMAL_MOB_MAX_LEVEL_RANGE_MAX = 0,  -- Upper Bound of Max Level Range for Normal Mobs (0 = Uncapped)
+#    START_GIL                      = 10, -- Amount of gil given to newly created characters.
+#    START_INVENTORY                = 30, -- Starting inventory and satchel size.  Ignores values < 30.  Do not set above 80!
+#    NEW_CHARACTER_CUTSCENE         = 1,  -- Set to 1 to enable opening cutscenes, 0 to disable.
+#    SUBJOB_QUEST_LEVEL             = 18, -- Minimum level to accept either subjob quest.  Set to 0 to start the game with subjobs unlocked.
+#    ADVANCED_JOB_LEVEL             = 30, -- Minimum level to accept advanced job quests.  Set to 0 to start the game with advanced jobs.
+#    ALL_MAPS                       = 0,  -- Set to 1 to give starting characters all the maps.
+#    UNLOCK_OUTPOST_WARPS           = 0,  -- Set to 1 to give starting characters all outpost warps.  2 to add Tu'Lia and Tavnazia.
+#
+#    SHOP_PRICE      = 1.000, -- Multiplies prices in NPC shops.
+#    GIL_RATE        = 1.000, -- Multiplies gil earned from quests.  Won't always display in game.
+#    BAYLD_RATE      = 1.000, -- Multiples bayld earned from quests.
+#    -- Note: EXP rates are also influenced by conf setting
+#    EXP_RATE        = 1.000, -- Multiplies exp from script (except FoV/GoV).
+#    BOOK_EXP_RATE   = 1.000, -- Multiplies exp from FoV/GoV book pages.
+#    TABS_RATE       = 1.000, -- Multiplies tabs earned from fov.
+#    ROE_EXP_RATE    = 1.000, -- Multiplies exp earned from records of eminence.
+#    SPARKS_RATE     = 1.000, -- Multiplies sparks earned from records of eminence.
+#    CURE_POWER      = 1.000, -- Multiplies amount healed from Healing Magic, including the relevant Blue Magic.
+#    ELEMENTAL_POWER = 1.000, -- Multiplies damage dealt by Elemental and non-drain Dark Magic.
+#    DIVINE_POWER    = 1.000, -- Multiplies damage dealt by Divine Magic.
+#    NINJUTSU_POWER  = 1.000, -- Multiplies damage dealt by Ninjutsu Magic.
+#    BLUE_POWER      = 1.000, -- Multiplies damage dealt by Blue Magic.
+#    DARK_POWER      = 1.000, -- Multiplies amount drained by Dark Magic.
+#    ITEM_POWER      = 1.000, -- Multiplies the effect of items such as Potions and Ethers.
+#    WEAPON_SKILL_POWER  = 1.000, -- Multiplies damage dealt by Weapon Skills.
+#    USE_ADOULIN_WEAPON_SKILL_CHANGES = true, -- true/false. Change to toggle new Adoulin weapon skill damage calculations
+#
+#    -- TRUSTS
+#    ENABLE_TRUST_CASTING = 1,
+#    ENABLE_TRUST_QUESTS  = 1,
+#
+#    HARVESTING_BREAK_CHANCE = 33, -- % chance for the sickle to break during harvesting.  Set between 0 and 100.
+#    EXCAVATION_BREAK_CHANCE = 33, -- % chance for the pickaxe to break during excavation.  Set between 0 and 100.
+#    LOGGING_BREAK_CHANCE    = 33, -- % chance for the hatchet to break during logging.  Set between 0 and 100.
+#    MINING_BREAK_CHANCE     = 33, -- % chance for the pickaxe to break during mining.  Set between 0 and 100.
+#    HARVESTING_RATE         = 50, -- % chance to recieve an item from haresting.  Set between 0 and 100.
+#    EXCAVATION_RATE         = 50, -- % chance to recieve an item from excavation.  Set between 0 and 100.
+#    LOGGING_RATE            = 50, -- % chance to recieve an item from logging.  Set between 0 and 100.
+#    MINING_RATE             = 50, -- % chance to recieve an item from mining.  Set between 0 and 100.
+#    DIGGING_RATE            = 85, -- % chance to receive an item from chocbo digging during favorable weather.  Set between 0 and 100.
+#
+#    HEALING_TP_CHANGE       = -100, -- Change in TP for each healing tick. Default is -100
+#
+#    -- SE implemented coffer/chest illusion time in order to prevent coffer farming. No-one in the same area can open a chest or coffer for loot (gil, gems & items)
+#    -- till a random time between MIN_ILLSION_TIME and MAX_ILLUSION_TIME. During this time players can loot keyitem and item related to quests (AF, maps... etc.)
+#    COFFER_MAX_ILLUSION_TIME = 3600,  -- 1 hour
+#    COFFER_MIN_ILLUSION_TIME = 1800,  -- 30 minutes
+#    CHEST_MAX_ILLUSION_TIME  = 3600,  -- 1 hour
+#    CHEST_MIN_ILLUSION_TIME  = 1800,  -- 30 minutes
+#
+#    -- Sets spawn type for: Behemoth, Fafnir, Adamantoise, King Behemoth, Nidhog, Aspidochelone.
+#    -- Use 0 for timed spawns, 1 for force pop only, 2 for both
+#    LandKingSystem_NQ = 1,
+#    LandKingSystem_HQ = 1,
+#
+#    -- Multiplier to NM lottery spawn chance. (Default 1.0) eg. 0 = disable lottery spawns. -1 for always 100% chance.
+#    NM_LOTTERY_CHANCE = 1.0,
+#    -- Multiplier to NM lottery cooldown time (Default 1.0) eg. 2.0 = twice as long. 0 = no cooldowns.
+#    NM_LOTTERY_COOLDOWN = 1.0,
+#
+#    -- DYNAMIS SETTINGS
+#    BETWEEN_2DYNA_WAIT_TIME     = 24,       -- Hours before player can re-enter Dynamis. Default is 1 Earthday (24 hours).
+#    DYNA_MIDNIGHT_RESET         = true,     -- If true, makes the wait time count by number of server midnights instead of full 24 hour intervals
+#    DYNA_LEVEL_MIN              = 65,       -- Level min for entering in Dynamis
+#    TIMELESS_HOURGLASS_COST     = 500000,   -- Refund for the timeless hourglass for Dynamis.
+#    PRISMATIC_HOURGLASS_COST    = 50000,    -- Cost of the prismatic hourglass for Dynamis.
+#    CURRENCY_EXCHANGE_RATE      = 100,      -- X Tier 1 ancient currency -> 1 Tier 2, and so on. Certain values may conflict with shop items. Not designed to exceed 198.
+#    RELIC_2ND_UPGRADE_WAIT_TIME = 7200,     -- Wait time for 2nd relic upgrade (stage 2 -> stage 3) in seconds. 7200s = 2 hours.
+#    RELIC_3RD_UPGRADE_WAIT_TIME = 3600,     -- Wait time for 3rd relic upgrade (stage 3 -> stage 4) in seconds. 3600s = 1 hour.
+#    FREE_COP_DYNAMIS            = 0,        -- Authorize player to entering inside COP Dynamis without completing COP mission (1 = enable 0 = disable)
+#
+#    -- QUEST/MISSION SPECIFIC SETTINGS
+#    AF1_QUEST_LEVEL = 40,    -- Minimum level to start AF1 quest
+#    AF2_QUEST_LEVEL = 50,    -- Minimum level to start AF2 quest
+#    AF3_QUEST_LEVEL = 50,    -- Minimum level to start AF3 quest
+#    OLDSCHOOL_G1    = false, -- Set to true to require farming Exoray Mold, Bombd Coal, and Ancient Papyrus drops instead of allowing key item method.
+#    OLDSCHOOL_G2    = false, -- Set true to require the NMs for "Atop the Highest Mountains" be dead to get KI like before SE changed it.
+#    FRIGICITE_TIME  = 30,    -- When OLDSCHOOL_G2 is enabled, this is the time (in seconds) you have from killing Boreal NMs to click the "???" target.
+#    ASSAULT_MINIMUM = 1,     -- Minimum amount of people needed to start an assault mission. TOAU era is 3, Default is 1.
+#
+#    -- SPELL SPECIFIC SETTINGS
+#    DIA_OVERWRITE                   = 1,     -- Set to 1 to allow Bio to overwrite same tier Dia.  Default is 1.
+#    BIO_OVERWRITE                   = 0,     -- Set to 1 to allow Dia to overwrite same tier Bio.  Default is 0.
+#    STONESKIN_CAP                   = 350,   -- Soft cap for hp absorbed by stoneskin
+#    BLINK_SHADOWS                   = 2,     -- Number of shadows supplied by Blink spell
+#    SPIKE_EFFECT_DURATION           = 180,   -- the duration of RDM, BLM spikes effects (not Reprisal)
+#    ELEMENTAL_DEBUFF_DURATION       = 120,   -- base duration of elemental debuffs
+#    AQUAVEIL_COUNTER                = 1,     -- Base amount of hits Aquaveil absorbs to prevent spell interrupts. Retail is 1.
+#    ABSORB_SPELL_AMOUNT             = 8,     -- how much of a stat gets absorbed by DRK absorb spells - expected to be a multiple of 8.
+#    ABSORB_SPELL_TICK               = 9,     -- duration of 1 absorb spell tick
+#    SNEAK_INVIS_DURATION_MULTIPLIER = 1,     -- multiplies duration of sneak, invis, deodorize to reduce player torture. 1 = retail behavior.
+#    USE_OLD_CURE_FORMULA            = false, -- true/false. if true, uses older cure formula (3*MND + VIT + 3*(healing skill/5)) // cure 6 will use the newer formula
+#    USE_OLD_MAGIC_DAMAGE            = false, -- true/false. if true, uses older magic damage formulas
+#
+#    -- CELEBRATIONS
+#    EXPLORER_MOOGLE_LV              = 10, -- Enables Explorer Moogle teleports and sets required level. Zero to disable.
+#    HALLOWEEN_2005                  = 0,  -- Set to 1 to Enable the 2005 version of Harvest Festival, will start on Oct. 20 and end Nov. 1.
+#    HALLOWEEN_YEAR_ROUND            = 0,  -- Set to 1 to have Harvest Festival initialize outside of normal times.
+#
+#    -- Login Campaign (Set to 0 if you don't want to run a Login Campaign)
+#    -- Please visit scripts/globals/events/login_campaign.lua for assigning the correct campaign dates.
+#    ENABLE_LOGIN_CAMPAIGN = 0,
+#
+#    -- MISC
+#    RIVERNE_PORTERS              = 120,  -- Time in seconds that Unstable Displacements in Cape Riverne stay open after trading a scale.
+#    LANTERNS_STAY_LIT            = 1200, -- time in seconds that lanterns in the Den of Rancor stay lit.
+#    ENABLE_COP_ZONE_CAP          = 0,    -- Enable or disable lvl cap
+#    ALLOW_MULTIPLE_EXP_RINGS     = 0,    -- Set to 1 to remove ownership restrictions on the Chariot/Empress/Emperor Band trio.
+#    BYPASS_EXP_RING_ONE_PER_WEEK = 0,    -- Set to 1 to bypass the limit of one ring per Conquest Tally Week.
+#    NUMBER_OF_DM_EARRINGS        = 1,    -- Number of earrings players can simultaneously own from Divine Might before scripts start blocking them (Default: 1)
+#    HOMEPOINT_TELEPORT           = 1,    -- Enables the homepoint teleport system
+#    DIG_ABUNDANCE_BONUS          = 0,    -- Increase chance of digging up an item (450  = item digup chance +45)
+#    DIG_FATIGUE                  = 1,    -- Set to 0 to disable Dig Fatigue
+#    DIG_GRANT_BURROW             = 0,    -- Set to 1 to grant burrow ability
+#    DIG_GRANT_BORE               = 0,    -- Set to 1 to grant bore ability
+#    ENM_COOLDOWN                 = 120,  -- Number of hours before a player can obtain same KI for ENMs (default: 5 days)
+#    FORCE_SPAWN_QM_RESET_TIME    = 300,  -- Number of seconds the ??? remains hidden for after the despawning of the mob it force spawns.
+#    GOBBIE_BOX_MIN_AGE           = 45,   -- Minimum character age in days before a character can sign up for Gobbie Mystery Box
+#}
+#

@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2022 LandSandBoat Dev Teams
@@ -28,56 +28,94 @@
 
     Usage (C++)
 
-    bool isTOAUEnabled = SettingsManager::Get<bool>(Settings::ENABLE_TOAU);
+    TODO
 
     Usage (Lua)
 
-    local isTOAUEnabled = xi.settings.ENABLE_TOAU
+    TODO
 */
 
 #pragma once
 
+#include "settings_impl.h"
 #include "singleton.h"
 
+#include <filesystem>
+#include <fstream>
+#include <functional>
 #include <iostream>
+#include <memory>
 #include <string>
 #include <unordered_map>
 #include <variant>
 
-enum class Settings
-{
-    ENABLE_TOAU,
-    DAMAGE_MULT,
-};
-
-using variant_t = std::variant<bool, float, unsigned int, std::string>;
-
-struct SettingsDetails
-{
-    std::string name;
-    variant_t value;
-};
+using variant_value_t = std::variant<bool, float, unsigned int, std::string>;
 
 class SettingsManager : public Singleton<SettingsManager>
 {
+private:
+    struct SettingsDetails
+    {
+        std::string     name;
+        variant_value_t value;
+    };
+
+    std::unordered_map<variant_settings_t, SettingsDetails> map;
+
+    void ParseSettingsLine(std::string const& section, std::string const& line)
+    {
+        std::string sectionTitle = section + "Settings::";
+        sectionTitle[0] = std::toupper(sectionTitle[0]);
+        std::cout << sectionTitle << "\n";
+
+        // TODO: Parse data from line
+        //     HOST = "127.0.0.1", -- (string) The IP Address of the host machine
+        //     PORT = 3306, -- (uint) The Port
+
+        std::string lookupString = sectionTitle + ""; // TODO
+        //variant_settings_lookup[lookupString] = 0U;
+    }
+
 public:
     SettingsManager()
     {
-        std::cout << "Init SettingsManager\n";
+        populate_settings_lookup();
 
         // Parse from files
+        if (std::filesystem::is_empty("./settings"))
+        {
+            // Show angry message about copying your settings files across!
+            // std::cout << "Settings is empty!";
+        }
 
-        map[Settings::ENABLE_TOAU] = SettingsDetails{"ENABLE_TOAU", true};
-        map[Settings::DAMAGE_MULT] = SettingsDetails{"DAMAGE_MULT", 1.0f};
+        // auto fp = RIAA_FILE("test.txt");
+
+        for (auto& entry : std::filesystem::directory_iterator("./settings"))
+        {
+            auto& path = entry.path();
+            if (path.extension() == ".lua")
+            {
+                std::ifstream file(path.generic_string());
+                std::string   line;
+                if (file.is_open())
+                {
+                    while (!file.eof())
+                    {
+                        std::getline(file, line);
+                        ParseSettingsLine(path.filename().replace_extension("").string(), line);
+                    }
+                    file.close();
+                }
+            }
+        }
     }
 
-    template<typename T>
-    [[nodiscard]] static T Get(Settings key)
+    template <typename T>
+    [[nodiscard]] static T Get(variant_settings_t key)
     {
         auto& instance = SettingsManager::GetInstance();
-        auto detail = instance.map[key];
+        // TODO: Helpful error logging here for bad lookups
+        auto detail = instance.map.at(key);
         return std::get<T>(detail.value);
     }
-
-    std::unordered_map<Settings, SettingsDetails> map;
 };
