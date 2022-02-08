@@ -32,7 +32,7 @@
 CBazaarItemPacket::CBazaarItemPacket(CItem* PItem, uint8 SlotID, uint16 Tax)
 {
     this->setType(0x105);
-    this->setSize(0x17);
+    this->setSize(0x2E);
 
     ref<uint8>(0x10) = SlotID;
 

@@ -33,7 +33,7 @@
 CCharStatsPacket::CCharStatsPacket(CCharEntity* PChar)
 {
     this->setType(0x61);
-    this->setSize(0x70);
+    this->setSize(0xE0);
 
     ref<uint32>(0x04) = PChar->GetMaxHP();
     ref<uint32>(0x08) = PChar->GetMaxMP();

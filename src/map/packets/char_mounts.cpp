@@ -30,7 +30,7 @@
 CCharMountsPacket::CCharMountsPacket(CCharEntity* PChar)
 {
     this->setType(0xAE);
-    this->setSize(0x06);
+    this->setSize(0x0C);
 
     memcpy(data + (0x04), &(PChar->keys.tables[6].keyList), 0x0C);
 }

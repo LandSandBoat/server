@@ -33,7 +33,7 @@
 CConquestPacket::CConquestPacket(CCharEntity* PChar)
 {
     this->setType(0x5E);
-    this->setSize(0x5A);
+    this->setSize(0xB4);
 
     const char* Query = "SELECT region_id, region_control, region_control_prev, \
                          sandoria_influence, bastok_influence, windurst_influence, \

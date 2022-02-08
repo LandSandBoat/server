@@ -36,7 +36,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 CInventorySizePacket::CInventorySizePacket(CCharEntity* PChar)
 {
     this->setType(0x1C);
-    this->setSize(0x1A);
+    this->setSize(0x34);
 
     ref<uint8>(0x04) = 1 + PChar->getStorage(LOC_INVENTORY)->GetSize();
     ref<uint8>(0x05) = 1 + PChar->getStorage(LOC_MOGSAFE)->GetSize();

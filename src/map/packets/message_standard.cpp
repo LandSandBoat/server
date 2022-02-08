@@ -30,7 +30,7 @@
 CMessageStandardPacket::CMessageStandardPacket(MsgStd MessageID)
 {
     this->setType(0x09);
-    this->setSize(0x08);
+    this->setSize(0x10);
 
     ref<uint16>(0x0A) = static_cast<uint16>(MessageID);
 }
@@ -38,7 +38,7 @@ CMessageStandardPacket::CMessageStandardPacket(MsgStd MessageID)
 CMessageStandardPacket::CMessageStandardPacket(uint32 param0, uint16 MessageID)
 {
     this->setType(0x09);
-    this->setSize(0x0E);
+    this->setSize(0x1C);
 
     ref<uint16>(0x0A) = MessageID;
 
@@ -48,7 +48,7 @@ CMessageStandardPacket::CMessageStandardPacket(uint32 param0, uint16 MessageID)
 CMessageStandardPacket::CMessageStandardPacket(uint32 param0, uint32 param1, uint16 MessageID)
 {
     this->setType(0x09);
-    this->setSize(0x24);
+    this->setSize(0x48);
 
     ref<uint16>(0x0A) = MessageID;
 
@@ -58,7 +58,7 @@ CMessageStandardPacket::CMessageStandardPacket(uint32 param0, uint32 param1, uin
 CMessageStandardPacket::CMessageStandardPacket(CCharEntity* PChar, uint32 param0, uint32 param1, MsgStd MessageID)
 {
     this->setType(0x09);
-    this->setSize(0x12);
+    this->setSize(0x24);
 
     ref<uint16>(0x0A) = static_cast<uint16>(MessageID);
 
@@ -69,7 +69,7 @@ CMessageStandardPacket::CMessageStandardPacket(CCharEntity* PChar, uint32 param0
 
         if (MessageID == MsgStd::Examine)
         {
-            this->setSize(0x30);
+            this->setSize(0x60);
 
             ref<uint8>(0x0C) = 0x10;
 
@@ -85,7 +85,7 @@ CMessageStandardPacket::CMessageStandardPacket(CCharEntity* PChar, uint32 param0
 CMessageStandardPacket::CMessageStandardPacket(uint32 param0, uint32 param1, uint32 param2, uint32 param3, MsgStd MessageID)
 {
     this->setType(0x09);
-    this->setSize(0x08);
+    this->setSize(0x10);
 
     ref<uint16>(0x0A) = static_cast<uint16>(MessageID);
 
@@ -98,7 +98,7 @@ CMessageStandardPacket::CMessageStandardPacket(uint32 param0, uint32 param1, uin
 CMessageStandardPacket::CMessageStandardPacket(CCharEntity* PChar, uint32 param0, MsgStd MessageID)
 {
     this->setType(0x09);
-    this->setSize(0x18);
+    this->setSize(0x30);
 
     // XI_DEBUG_BREAK_IF(MessageID != 0x58);
 

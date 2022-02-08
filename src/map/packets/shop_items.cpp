@@ -30,7 +30,7 @@
 CShopItemsPacket::CShopItemsPacket(CCharEntity* PChar)
 {
     this->setType(0x3C);
-    this->setSize(0x04);
+    this->setSize(0x08);
 
     uint8 ItemsCount = PChar->Container->getItemsCount();
 
@@ -42,10 +42,10 @@ CShopItemsPacket::CShopItemsPacket(CCharEntity* PChar)
             PChar->pushPacket(new CBasicPacket(*this));
 
             i          = 0;
-            this->setSize(0x04);
+            this->setSize(0x08);
             memset(data + 4, 0, PACKET_SIZE - 8);
         }
-        this->setSize(this->getSize() + 0x06);
+        this->setSize(this->getSize() + 0x0C); // TODO: Verify
 
         ref<uint32>(i * 12 + 0x08) = PChar->Container->getQuantity(slotID);
         ref<uint16>(i * 12 + 0x0C) = PChar->Container->getItemID(slotID);

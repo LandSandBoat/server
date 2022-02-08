@@ -26,7 +26,7 @@
 CInventoryModifyPacket::CInventoryModifyPacket(uint8 LocationID, uint8 slotID, uint32 quantity)
 {
     this->setType(0x1E);
-    this->setSize(0x08);
+    this->setSize(0x10);
 
     ref<uint32>(0x04) = quantity;
     ref<uint8>(0x08)  = LocationID;

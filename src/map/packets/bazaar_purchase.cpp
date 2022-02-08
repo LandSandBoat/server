@@ -30,7 +30,7 @@
 CBazaarPurchasePacket::CBazaarPurchasePacket(CCharEntity* PChar, bool result)
 {
     this->setType(0x106);
-    this->setSize(0x0D);
+    this->setSize(0x1A);
 
     ref<uint8>(0x04) = !result;
 

@@ -29,7 +29,7 @@
 CCharHealthPacket::CCharHealthPacket(CCharEntity* PChar)
 {
     this->setType(0xDF);
-    this->setSize(0x14);
+    this->setSize(0x28);
 
     ref<uint32>(0x04) = PChar->id;
 
@@ -56,7 +56,7 @@ CCharHealthPacket::CCharHealthPacket(CCharEntity* PChar)
 CCharHealthPacket::CCharHealthPacket(CTrustEntity* PTrust)
 {
     this->setType(0xDF);
-    this->setSize(0x12);
+    this->setSize(0x24);
 
     ref<uint32>(0x04) = PTrust->id;
 

@@ -33,7 +33,7 @@
 CGuildMenuBuyPacket::CGuildMenuBuyPacket(CCharEntity* PChar, CItemContainer* PGuild)
 {
     this->setType(0x83);
-    this->setSize(0x7C);
+    this->setSize(0xF8);
 
     XI_DEBUG_BREAK_IF(PChar == nullptr);
     XI_DEBUG_BREAK_IF(PGuild == nullptr);

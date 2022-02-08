@@ -33,7 +33,7 @@
 CCheckPacket::CCheckPacket(CCharEntity* PChar, CCharEntity* PTarget)
 {
     this->setType(0xC9);
-    this->setSize(0x06);
+    this->setSize(0x0C);
 
     ref<uint32>(0x04) = PTarget->id;
     ref<uint16>(0x08) = PTarget->targid;
@@ -48,7 +48,7 @@ CCheckPacket::CCheckPacket(CCharEntity* PChar, CCharEntity* PTarget)
 
         if (PItem != nullptr)
         {
-            auto size = this->getSize();
+            auto size = this->getSize() / 2; // TODO: Verify this, size used to use the old two-byte value
             ref<uint16>(size * 2 + 0x00) = PItem->getID();
             ref<uint8>(size * 2 + 0x02)  = i;
 
@@ -77,7 +77,7 @@ CCheckPacket::CCheckPacket(CCharEntity* PChar, CCharEntity* PTarget)
 
             memcpy(data + (size * 2 + 0x10), PItem->getSignature(), std::clamp<size_t>(strlen((const char*)PItem->getSignature()), 0, 12));
 
-            this->setSize(size + 0x0E);
+            this->setSize(size * 2 + 0x1C);
             count++;
 
             if (count == 8)
@@ -86,7 +86,7 @@ CCheckPacket::CCheckPacket(CCharEntity* PChar, CCharEntity* PTarget)
 
                 PChar->pushPacket(new CBasicPacket(*this));
 
-                this->setSize(0x06);
+                this->setSize(0x0C);
                 memset(data + (0x0B), 0, PACKET_SIZE - 11);
             }
         }
@@ -94,7 +94,7 @@ CCheckPacket::CCheckPacket(CCharEntity* PChar, CCharEntity* PTarget)
 
     if (count == 0)
     {
-        this->setSize(0x14);
+        this->setSize(0x28);
         PChar->pushPacket(new CBasicPacket(*this));
     }
     else if (count != 8)
@@ -103,7 +103,7 @@ CCheckPacket::CCheckPacket(CCharEntity* PChar, CCharEntity* PTarget)
         PChar->pushPacket(new CBasicPacket(*this));
     }
 
-    this->setSize(0x2A);
+    this->setSize(0x54);
     memset(data + (0x0B), 0, PACKET_SIZE - 11);
 
     ref<uint8>(0x0A) = 0x01;

@@ -28,7 +28,7 @@
 CEntityVisualPacket::CEntityVisualPacket(CBaseEntity* PEntity, const char type[4])
 {
     this->setType(0x39);
-    this->setSize(0x0A);
+    this->setSize(0x14);
 
     if (PEntity)
     {

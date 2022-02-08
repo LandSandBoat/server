@@ -24,7 +24,7 @@
 CJobPointUpdatePacket::CJobPointUpdatePacket(CCharEntity* PChar, JOBPOINT_TYPE jpType)
 {
     this->setType(0x8D);
-    this->setSize(0x82);
+    this->setSize(0x104);
 
     JobPointType_t* PJobPoint = PChar->PJobPoints->GetJobPointType(jpType);
 

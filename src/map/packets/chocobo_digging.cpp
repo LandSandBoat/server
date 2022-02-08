@@ -28,7 +28,7 @@
 CChocoboDiggingPacket::CChocoboDiggingPacket(CCharEntity* PChar)
 {
     this->setType(0x2F);
-    this->setSize(0x06);
+    this->setSize(0x0C);
 
     ref<uint32>(0x04) = PChar->id;
     ref<uint16>(0x08) = PChar->targid;

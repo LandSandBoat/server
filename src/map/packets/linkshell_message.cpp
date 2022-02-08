@@ -28,7 +28,7 @@
 CLinkshellMessagePacket::CLinkshellMessagePacket(const int8* poster, const int8* message, const int8* lsname, uint32 posttime, bool ls1)
 {
     this->setType(id);
-    this->setSize(0x58);
+    this->setSize(0xB0);
 
     ref<uint8>(0x04) = 0x03;
     ref<uint8>(0x05) = 0x90;

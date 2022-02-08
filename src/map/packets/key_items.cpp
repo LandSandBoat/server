@@ -29,7 +29,7 @@
 CKeyItemsPacket::CKeyItemsPacket(CCharEntity* PChar, KEYS_TABLE KeyTable)
 {
     this->setType(0x55);
-    this->setSize(0x44);
+    this->setSize(0x88);
 
     XI_DEBUG_BREAK_IF(KeyTable >= MAX_KEYS_TABLE);
 

@@ -29,7 +29,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 CSynthResultMessagePacket::CSynthResultMessagePacket(CCharEntity* PChar, SYNTH_MESSAGE messageID, uint16 itemID, uint8 quantity)
 {
     this->setType(0x70);
-    this->setSize(0x30);
+    this->setSize(0x60);
 
     ref<uint8>(0x04) = messageID;
 

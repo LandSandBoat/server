@@ -27,7 +27,7 @@
 CEventUpdatePacket::CEventUpdatePacket(std::vector<std::pair<uint8, uint32>> params)
 {
     this->setType(0x5C);
-    this->setSize(0x12);
+    this->setSize(0x24);
 
     for (auto paramPair : params)
     {

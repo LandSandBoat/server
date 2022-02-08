@@ -30,7 +30,7 @@
 CPartyInvitePacket::CPartyInvitePacket(uint32 id, uint16 targid, CCharEntity* PInviter, INVITETYPE InviteType)
 {
     this->setType(0xDC);
-    this->setSize(0x10);
+    this->setSize(0x20);
 
     // XI_DEBUG_BREAK_IF(PInviter->name.size() > 15);
 

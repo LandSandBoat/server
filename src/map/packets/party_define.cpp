@@ -34,7 +34,7 @@ const char* msg = "SELECT chars.charid, partyflag, pos_zone, pos_prevzone FROM a
 CPartyDefinePacket::CPartyDefinePacket(CParty* PParty, bool loadTrust)
 {
     this->setType(0xC8);
-    this->setSize(0x7C);
+    this->setSize(0xF8);
 
     if (PParty)
     {

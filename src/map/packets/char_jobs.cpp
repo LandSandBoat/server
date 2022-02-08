@@ -29,7 +29,7 @@
 CCharJobsPacket::CCharJobsPacket(CCharEntity* PChar)
 {
     this->setType(0x1B);
-    this->setSize(0x34);
+    this->setSize(0x68);
 
     ref<uint8>(0x04) = PChar->look.race;
 

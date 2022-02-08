@@ -31,7 +31,7 @@
 CTreasureLotItemPacket::CTreasureLotItemPacket(uint8 slotID, ITEMLOTTYPE MessageType)
 {
     this->setType(0xD3);
-    this->setSize(0x1E);
+    this->setSize(0x3C);
 
     ref<uint8>(0x14) = slotID;
     ref<uint8>(0x15) = MessageType;
@@ -40,7 +40,7 @@ CTreasureLotItemPacket::CTreasureLotItemPacket(uint8 slotID, ITEMLOTTYPE Message
 CTreasureLotItemPacket::CTreasureLotItemPacket(CBaseEntity* PWinner, uint8 slotID, uint16 Lot, ITEMLOTTYPE MessageType)
 {
     this->setType(0xD3);
-    this->setSize(0x1E);
+    this->setSize(0x3C);
 
     ref<uint32>(0x04) = PWinner->id;
     ref<uint16>(0x0C) = PWinner->targid;
@@ -55,7 +55,7 @@ CTreasureLotItemPacket::CTreasureLotItemPacket(CBaseEntity* PWinner, uint8 slotI
 CTreasureLotItemPacket::CTreasureLotItemPacket(CBaseEntity* PHighestLotter, uint16 HighestLot, CBaseEntity* PLotter, uint8 SlotID, uint16 Lot)
 {
     this->setType(0xD3);
-    this->setSize(0x1E);
+    this->setSize(0x3C);
 
     if (PHighestLotter)
     {

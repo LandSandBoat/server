@@ -40,7 +40,7 @@ CChatMessagePacket::CChatMessagePacket(CCharEntity* PChar, CHAT_MESSAGE_TYPE Mes
 
     // 12 (base length / 2) + ((buffSize in chunks of 4) / 2)
     // this->size = 12 + ((buffSize / 4) + 1) * 2;
-    this->setSize(0x82);
+    this->setSize(0x104);
 
     ref<uint8>(0x04) = MessageType;
 

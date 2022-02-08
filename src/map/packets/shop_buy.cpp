@@ -26,7 +26,7 @@
 CShopBuyPacket::CShopBuyPacket(uint8 slotID, uint32 quantity)
 {
     this->setType(0x3F);
-    this->setSize(0x06);
+    this->setSize(0x0C);
 
     ref<uint8>(0x04)  = slotID;
     ref<uint32>(0x08) = quantity;

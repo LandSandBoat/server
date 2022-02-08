@@ -29,7 +29,7 @@
 CStopDownloadingPacket::CStopDownloadingPacket(CCharEntity* PChar, std::vector<std::pair<uint32, string_t>> blacklist)
 {
     this->setType(0x41);
-    this->setSize(0x7C);
+    this->setSize(0xF8);
 
     for (size_t x = 0; x < blacklist.size(); x++)
     {

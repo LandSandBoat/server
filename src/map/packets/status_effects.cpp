@@ -27,7 +27,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 CStatusEffectPacket::CStatusEffectPacket(CCharEntity* PChar)
 {
     this->setType(0x63);
-    this->setSize(0x64);
+    this->setSize(0xC8);
 
     int i = 0;
 

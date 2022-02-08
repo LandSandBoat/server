@@ -29,7 +29,7 @@
 CLockOnPacket::CLockOnPacket(CCharEntity* PChar, CBattleEntity* PTarget)
 {
     this->setType(0x58);
-    this->setSize(0x08);
+    this->setSize(0x10);
 
     ref<uint32>(0x04) = PChar->id;
     ref<uint16>(0x0C) = PChar->targid;

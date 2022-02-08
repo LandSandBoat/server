@@ -27,7 +27,7 @@
 CCharAppearancePacket::CCharAppearancePacket(CCharEntity* PChar)
 {
     this->setType(0x51);
-    this->setSize(0x0C);
+    this->setSize(0x18);
 
     look_t* look      = (PChar->getStyleLocked() ? &PChar->mainlook : &PChar->look);
     ref<uint8>(0x04)  = look->face;

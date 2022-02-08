@@ -30,7 +30,7 @@
 CBazaarCheckPacket::CBazaarCheckPacket(CCharEntity* PChar, BAZAARCHECK type)
 {
     this->setType(0x108);
-    this->setSize(0x11);
+    this->setSize(0x22);
 
     ref<uint32>(0x04) = PChar->id;
     ref<uint8>(0x08)  = type;
