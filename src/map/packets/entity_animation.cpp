@@ -30,7 +30,7 @@ const char* CEntityAnimationPacket::Fade_Out = "kesu";
 CEntityAnimationPacket::CEntityAnimationPacket(CBaseEntity* PEntity, const char type[4])
 {
     this->setType(0x38);
-    this->setSize(0x0A);
+    this->setSize(0x14);
 
     ref<uint32>(0x04) = PEntity->id;
     ref<uint32>(0x08) = PEntity->id;

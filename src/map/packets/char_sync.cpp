@@ -29,7 +29,7 @@
 CCharSyncPacket::CCharSyncPacket(CCharEntity* PChar)
 {
     this->setType(0x67);
-    this->setSize(0x14);
+    this->setSize(0x28);
 
     ref<uint8>(0x04)  = 0x02;
     ref<uint8>(0x05)  = 0x09;

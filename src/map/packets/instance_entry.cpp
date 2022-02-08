@@ -27,7 +27,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 CInstanceEntryPacket::CInstanceEntryPacket(CBaseEntity* PEntrance, uint32 response)
 {
     this->setType(0xBF);
-    this->setSize(0x0E);
+    this->setSize(0x1C);
 
     ref<uint8>(0x06)  = response;
     ref<uint16>(0x0C) = PEntrance->targid;

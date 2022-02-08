@@ -24,7 +24,7 @@
 CJobPointDetailsPacket::CJobPointDetailsPacket(CCharEntity* PChar)
 {
     this->setType(0x8D);
-    this->setSize(0x82);
+    this->setSize(0x104);
 
     JobPoints_t* PJobPoints = PChar->PJobPoints->GetAllJobPoints();
 

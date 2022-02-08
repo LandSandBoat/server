@@ -27,8 +27,8 @@
 
 CMessageCombatPacket::CMessageCombatPacket(CBaseEntity* PSender, CBaseEntity* PTarget, int32 param0, int32 param1, uint16 messageID)
 {
-    this->setType(0x2d);
-    this->setSize(0x0e);
+    this->setType(0x2D);
+    this->setSize(0x1C);
 
     ref<uint32>(0x04) = PSender->id;
     ref<uint32>(0x08) = PTarget->id;

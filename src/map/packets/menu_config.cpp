@@ -28,7 +28,7 @@
 CMenuConfigPacket::CMenuConfigPacket(CCharEntity* PChar)
 {
     this->setType(0xB4);
-    this->setSize(0x0C);
+    this->setSize(0x18);
 
     // Invite, Online/Away, and Anon are handled in the first byte.
     // Due to the way invites are cleared from nameflags when and handled in

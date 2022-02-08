@@ -24,5 +24,5 @@
 CDownloadingDataPacket::CDownloadingDataPacket()
 {
     this->setType(0x4F);
-    this->setSize(0x04);
+    this->setSize(0x08);
 }

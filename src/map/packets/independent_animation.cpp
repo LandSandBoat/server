@@ -7,7 +7,7 @@
 CIndependentAnimationPacket::CIndependentAnimationPacket(CBaseEntity* PEntity, CBaseEntity* PTarget, uint16 animId, uint8 type)
 {
     this->setType(0x3A);
-    this->setSize(0x14);
+    this->setSize(0x28);
 
     if (PEntity)
     {

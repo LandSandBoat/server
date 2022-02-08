@@ -29,7 +29,7 @@
 CWideScanTrackPacket::CWideScanTrackPacket(CBaseEntity* PEntity)
 {
     this->setType(0xF5);
-    this->setSize(0x0C);
+    this->setSize(0x18);
 
     ref<float>(0x04) = PEntity->loc.p.x;
     ref<float>(0x08) = PEntity->loc.p.y;

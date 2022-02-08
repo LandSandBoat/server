@@ -31,7 +31,7 @@
 CCharSkillsPacket::CCharSkillsPacket(CCharEntity* PChar)
 {
     this->setType(0x62);
-    this->setSize(0x80);
+    this->setSize(0x100);
 
     memcpy(data + (0x80), &PChar->WorkingSkills, 128);
 

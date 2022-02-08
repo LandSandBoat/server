@@ -26,5 +26,5 @@
 CMenuMogPacket::CMenuMogPacket()
 {
     this->setType(0x2E);
-    this->setSize(0x02);
+    this->setSize(0x04);
 }

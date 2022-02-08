@@ -29,7 +29,7 @@
 CWideScanPacket::CWideScanPacket(WIDESCAN_STATUS status)
 {
     this->setType(0xF6);
-    this->setSize(0x04);
+    this->setSize(0x08);
 
     ref<uint8>(0x04) = status;
 }
@@ -37,7 +37,7 @@ CWideScanPacket::CWideScanPacket(WIDESCAN_STATUS status)
 CWideScanPacket::CWideScanPacket(CCharEntity* PChar, CBaseEntity* PEntity)
 {
     this->setType(0xF4);
-    this->setSize(0x0E);
+    this->setSize(0x1C);
 
     ref<uint16>(0x04) = PEntity->targid;
     if (PEntity->objtype == TYPE_MOB)

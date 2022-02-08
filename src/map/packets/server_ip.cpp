@@ -28,7 +28,7 @@
 CServerIPPacket::CServerIPPacket(CCharEntity* PChar, uint8 type, uint64 ipp)
 {
     this->setType(0x0B);
-    this->setSize(0x0E);
+    this->setSize(0x1C);
 
     ref<uint8>(0x04)  = type;
     ref<uint32>(0x08) = (uint32)ipp;

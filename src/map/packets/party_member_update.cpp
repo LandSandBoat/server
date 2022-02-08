@@ -38,7 +38,7 @@ CPartyMemberUpdatePacket::CPartyMemberUpdatePacket(CCharEntity* PChar, uint8 Mem
     // 1. Trusts would not appear in the party list
     // 2. Players in a party would always appear as out of zone
     // Modify with caution for the below functions!
-    this->setSize(0x20);
+    this->setSize(0x40);
 
     XI_DEBUG_BREAK_IF(PChar == nullptr);
 
@@ -75,7 +75,7 @@ CPartyMemberUpdatePacket::CPartyMemberUpdatePacket(CCharEntity* PChar, uint8 Mem
 CPartyMemberUpdatePacket::CPartyMemberUpdatePacket(CTrustEntity* PTrust, uint8 MemberNumber)
 {
     this->setType(0xDD);
-    this->setSize(0x20);
+    this->setSize(0x40);
 
     XI_DEBUG_BREAK_IF(PTrust == nullptr);
 
@@ -101,7 +101,7 @@ CPartyMemberUpdatePacket::CPartyMemberUpdatePacket(CTrustEntity* PTrust, uint8 M
 CPartyMemberUpdatePacket::CPartyMemberUpdatePacket(uint32 id, const int8* name, uint16 memberFlags, uint8 MemberNumber, uint16 ZoneID)
 {
     this->setType(0xDD);
-    this->setSize(0x20);
+    this->setSize(0x40);
 
     ref<uint32>(0x04) = id;
 

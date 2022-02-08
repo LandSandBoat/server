@@ -27,7 +27,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 CPartyEffectsPacket::CPartyEffectsPacket()
 {
     this->setType(0x76);
-    this->setSize(0x7A);
+    this->setSize(0xF4);
 }
 
 void CPartyEffectsPacket::AddMemberEffects(CBattleEntity* PMember)

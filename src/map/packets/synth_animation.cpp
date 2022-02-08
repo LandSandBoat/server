@@ -27,7 +27,7 @@
 CSynthAnimationPacket::CSynthAnimationPacket(CCharEntity* PChar, uint16 effect, uint8 param)
 {
     this->setType(0x30);
-    this->setSize(0x08);
+    this->setSize(0x10);
 
     ref<uint32>(0x04) = PChar->id;
     ref<uint16>(0x08) = PChar->targid;

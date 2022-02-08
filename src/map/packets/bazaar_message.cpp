@@ -30,7 +30,7 @@
 CBazaarMessagePacket::CBazaarMessagePacket(CCharEntity* PChar)
 {
     this->setType(0xCA);
-    this->setSize(0x4A);
+    this->setSize(0x94);
 
     memcpy(data + 0x04, PChar->bazaar.message.c_str(), (PChar->bazaar.message.size() > 120) ? 120 : PChar->bazaar.message.size());
 

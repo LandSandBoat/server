@@ -34,7 +34,7 @@ CAddtoEquipSet::CAddtoEquipSet(uint8* orig)
     // Should Push 0x116 (size 68) in responce
     // 0x04 is start, contains 16 4 byte parts repersently each slot in order
     this->setType(0x16); // TODO
-    this->setSize(0x23);
+    this->setSize(0x46);
 
     uint8 slotID = ::ref<uint8>(orig, 0x04);
     for (int i = 0; i < 0x10; i++)

@@ -28,7 +28,7 @@
 CMessageBasicPacket::CMessageBasicPacket(CBaseEntity* PSender, CBaseEntity* PTarget, int32 param, int32 value, uint16 messageID)
 {
     this->setType(0x29);
-    this->setSize(0x0E);
+    this->setSize(0x1C);
 
     ref<uint32>(0x04) = PSender->id;
     ref<uint32>(0x08) = PTarget->id;

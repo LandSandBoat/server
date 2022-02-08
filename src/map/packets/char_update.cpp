@@ -36,7 +36,7 @@
 CCharUpdatePacket::CCharUpdatePacket(CCharEntity* PChar)
 {
     this->setType(0x37);
-    this->setSize(0x30);
+    this->setSize(0x60);
 
     memcpy(data + (0x04), PChar->StatusEffectContainer->m_StatusIcons, 32);
 

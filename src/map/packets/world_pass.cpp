@@ -28,7 +28,7 @@
 CWorldPassPacket::CWorldPassPacket(uint32 WorldPass)
 {
     this->setType(0x59);
-    this->setSize(0x12);
+    this->setSize(0x24);
 
     ref<uint32>(0x0C) = 10000; // price
 

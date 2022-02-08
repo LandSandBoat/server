@@ -28,7 +28,7 @@
 CTradeItemPacket::CTradeItemPacket(CItem* PItem, uint8 slot)
 {
     this->setType(0x25);
-    this->setSize(0x06);
+    this->setSize(0x0C);
 
     uint32 amount = PItem->getReserve();
 

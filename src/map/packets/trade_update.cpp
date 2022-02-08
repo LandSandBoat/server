@@ -32,7 +32,7 @@
 CTradeUpdatePacket::CTradeUpdatePacket(CItem* PItem, uint8 SlotID)
 {
     this->setType(0x23);
-    this->setSize(0x14);
+    this->setSize(0x28);
 
     uint32 amount = PItem->getReserve();
 

@@ -35,7 +35,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 CPetSyncPacket::CPetSyncPacket(CCharEntity* PChar)
 {
     this->setType(0x68);
-    this->setSize(0x0E);
+    this->setSize(0x1C);
 
     ref<uint8>(0x04) |= 0x04;                    // Message Type
     packBitsBE(data + (0x04), (0x18), 0, 6, 10); // Message Size (0 for Despawn)
@@ -44,7 +44,7 @@ CPetSyncPacket::CPetSyncPacket(CCharEntity* PChar)
 
     if (PChar->PPet != nullptr)
     {
-        this->setSize(0x16);
+        this->setSize(0x2C);
         packBitsBE(data + (0x04), (0x18) + PChar->PPet->name.size(), 0, 6, 10); // Message Size
         ref<uint16>(0x0C) = PChar->PPet->targid;
         ref<uint8>(0x0E)  = PChar->PPet->GetHPP();

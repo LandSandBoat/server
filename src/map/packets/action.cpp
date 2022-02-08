@@ -47,7 +47,7 @@
 CActionPacket::CActionPacket(action_t& action)
 {
     this->setType(0x28);
-    this->setSize(0x12);
+    this->setSize(0x24);
 
     ref<uint32>(0x05) = action.id;
 
@@ -384,7 +384,8 @@ CActionPacket::CActionPacket(action_t& action)
     ref<uint8>(0x09) = targets;
     uint8 WorkSize   = ((bitOffset >> 3) + (bitOffset % 8 != 0));
 
-    this->setSize((((WorkSize + 7) >> 1) + 1) & -2);
+    // TODO: Verify and improve math on this
+    this->setSize(((((WorkSize + 7) >> 1) + 1) & -2) * 2);
 
     ref<uint8>(0x04) = WorkSize;
 }

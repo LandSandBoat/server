@@ -31,7 +31,7 @@ CTrustSyncPacket::CTrustSyncPacket(CCharEntity* PChar, CTrustEntity* PTrust)
     // The purpose of this packet is to make the client aware that this pet is a trust, and hence
     // to show trust options in the menu (like "Release").
     this->setType(0x67);
-    this->setSize(0x16);
+    this->setSize(0x2C);
 
     // Sample packet:
     // 67 0C 58 00 03 05 F4 07 F4 28 08 01 00 04 00 00
