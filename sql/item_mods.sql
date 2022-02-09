@@ -20693,7 +20693,7 @@ INSERT INTO `item_mods` VALUES (16936,500,21);  -- Additional effect damage
 INSERT INTO `item_mods` VALUES (16936,501,10);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (16936,950,8);   -- Additional effect element Darkness (xi.magic.element)
 INSERT INTO `item_mods` VALUES (16937,16,8); -- ICE_RES
-INSERT INTO `item_mods` VALUES (16937,431,1);   --Icicle Sword (Additional effect: Ice Damage)
+INSERT INTO `item_mods` VALUES (16937,431,1);   -- Icicle Sword (Additional effect: Ice Damage)
 INSERT INTO `item_mods` VALUES (16937,499,2);   -- Additional effect animation (subEffect)
 INSERT INTO `item_mods` VALUES (16937,500,10);  -- Additional effect damage
 INSERT INTO `item_mods` VALUES (16937,501,5);   -- Additional effect Chance 5%
