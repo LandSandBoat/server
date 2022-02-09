@@ -19942,7 +19942,7 @@ INSERT INTO `item_mods` VALUES (16383,27,-5);
 INSERT INTO `item_mods` VALUES (16385,25,3);
 INSERT INTO `item_mods` VALUES (16386,25,3);
 INSERT INTO `item_mods` VALUES (16387,25,3);
-INSERT INTO `item_mods` VALUES (16387,431,2);   -- Additional effect: Poison(Type DEBUFF)Poison Cesti
+INSERT INTO `item_mods` VALUES (16387,431,2);   -- Poison Cesti (Additional effect: Poison)
 INSERT INTO `item_mods` VALUES (16387,499,10);  -- Additional effect animation (subEffect) xi.subEffect.Poison
 INSERT INTO `item_mods` VALUES (16387,501,10);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (16387,951,3);   -- Additional effect Status ID xi.effect.Poison
@@ -19964,25 +19964,25 @@ INSERT INTO `item_mods` VALUES (16396,25,2);
 INSERT INTO `item_mods` VALUES (16397,2,15);
 INSERT INTO `item_mods` VALUES (16397,25,3);
 INSERT INTO `item_mods` VALUES (16398,25,3);
-INSERT INTO `item_mods` VALUES (16398,431,1);   -- Additional effect: Fire Damage (Type DAMAGE)--burning_cesti 16398
+INSERT INTO `item_mods` VALUES (16398,431,1);   -- Burning Cesti (Additional effect: Fire Damage) 
 INSERT INTO `item_mods` VALUES (16398,499,1);   -- Additional effect animation (subEffect)
 INSERT INTO `item_mods` VALUES (16398,500,10);  -- Additional effect damage
 INSERT INTO `item_mods` VALUES (16398,501,5);   -- Additional effect Chance 5%
 INSERT INTO `item_mods` VALUES (16398,950,1);   -- Additional effect element Fire (xi.magic.element)
-INSERT INTO `item_mods` VALUES (16403,431,2);   -- Additional effect: Poison (Type DEBUFF)poison_katars 16403
+INSERT INTO `item_mods` VALUES (16403,431,2);   -- Poison Katars (Additional effect: Poison)
 INSERT INTO `item_mods` VALUES (16403,499,10);  -- Additional effect animation (subEffect) xi.subEffect.Poison
 INSERT INTO `item_mods` VALUES (16403,501,10);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (16403,951,3);   -- Additional effect Status ID xi.effect.Poison
 INSERT INTO `item_mods` VALUES (16403,952,4);   -- Additional effect Status Potency 4
 INSERT INTO `item_mods` VALUES (16403,953,30);  -- Additional effect Status Duration 30sec
-INSERT INTO `item_mods` VALUES (16410,431,2);   -- Additional effect: Poison (Type DEBUFF)poison_baghnakhs 16410
+INSERT INTO `item_mods` VALUES (16410,431,2);   -- Poison Baghnakhs (Additional effect: Poison)
 INSERT INTO `item_mods` VALUES (16410,499,10);  -- Additional effect animation (subEffect) xi.subEffect.Poison
 INSERT INTO `item_mods` VALUES (16410,501,10);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (16410,951,3);   -- Additional effect Status ID xi.effect.Poison
 INSERT INTO `item_mods` VALUES (16410,952,4);   -- Additional effect Status Potency 4
 INSERT INTO `item_mods` VALUES (16410,953,30);  -- Additional effect Status Duration 30sec
 INSERT INTO `item_mods` VALUES (16416,15,5);
-INSERT INTO `item_mods` VALUES (16417,431,2);   -- Additional effect: Poison (Type DEBUFF)poison_claws 16417
+INSERT INTO `item_mods` VALUES (16417,431,2);   -- Poison Claws (Additional effect: Poison)
 INSERT INTO `item_mods` VALUES (16417,499,10);  -- Additional effect animation (subEffect) xi.subEffect.Poison
 INSERT INTO `item_mods` VALUES (16417,501,10);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (16417,951,3);   -- Additional effect Status ID xi.effect.Poison
@@ -20026,7 +20026,7 @@ INSERT INTO `item_mods` VALUES (16432,953,5);   -- Additional effect Status Dura
 INSERT INTO `item_mods` VALUES (16433,23,3);
 INSERT INTO `item_mods` VALUES (16433,25,2);
 INSERT INTO `item_mods` VALUES (16434,25,2);
-INSERT INTO `item_mods` VALUES (16434,431,1);   -- Additional effect: Wind Damage (Type DAMAGE)--sonic_knuckles 16434
+INSERT INTO `item_mods` VALUES (16434,431,1);   -- Sonic Knuckles Additional effect: Wind Damage 
 INSERT INTO `item_mods` VALUES (16434,499,3);   -- Additional effect animation (subEffect)
 INSERT INTO `item_mods` VALUES (16434,500,15);  -- Additional effect damage
 INSERT INTO `item_mods` VALUES (16434,501,10);  -- Additional effect Chance 10%
@@ -20038,7 +20038,7 @@ INSERT INTO `item_mods` VALUES (16438,501,15);  -- Additional effect Chance 15%
 INSERT INTO `item_mods` VALUES (16438,951,6);   -- Additional effect Status ID xi.effect.SILENCE
 INSERT INTO `item_mods` VALUES (16438,952,1);   -- Additional effect Status Potency 1
 INSERT INTO `item_mods` VALUES (16438,953,30);  -- Additional effect Status Duration 30sec
-INSERT INTO `item_mods` VALUES (16439,431,2);   -- Additional effect: Poison (Type DEBUFF)poison_claws +1 16439
+INSERT INTO `item_mods` VALUES (16439,431,2);   -- Poison Claws +1 (Additional effect: Poison)
 INSERT INTO `item_mods` VALUES (16439,499,10);  -- Additional effect animation (subEffect) xi.subEffect.Poison
 INSERT INTO `item_mods` VALUES (16439,501,15);  -- Additional effect Chance 15%
 INSERT INTO `item_mods` VALUES (16439,951,3);   -- Additional effect Status ID xi.effect.Poison
@@ -20059,7 +20059,7 @@ INSERT INTO `item_mods` VALUES (16454,501,10);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (16454,951,5);   -- Additional effect Status ID xi.effect.BLINDNESS
 INSERT INTO `item_mods` VALUES (16454,952,10);  -- Additional effect Status Potency 10
 INSERT INTO `item_mods` VALUES (16454,953,30);  -- Additional effect Status Duration 30sec
-INSERT INTO `item_mods` VALUES (16458,431,2);   -- Additional effect: Poison(Type DEBUFF)Poison_baselard 16458
+INSERT INTO `item_mods` VALUES (16458,431,2);   -- Poison Baselard (Additional effect: Poison)
 INSERT INTO `item_mods` VALUES (16458,499,10);  -- Additional effect animation (subEffect) xi.subEffect.Poison
 INSERT INTO `item_mods` VALUES (16458,501,10);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (16458,951,3);   -- Additional effect Status ID xi.effect.Poison
@@ -20085,13 +20085,13 @@ INSERT INTO `item_mods` VALUES (16471,501,10);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (16471,951,5);   -- Additional effect Status ID xi.effect.BLINDNESS
 INSERT INTO `item_mods` VALUES (16471,952,10);  -- Additional effect Status Potency 10
 INSERT INTO `item_mods` VALUES (16471,953,30);  -- Additional effect Status Duration 30sec
-INSERT INTO `item_mods` VALUES (16472,431,2);   -- Additional effect: Poison(Type DEBUFF)Poison_knife 16472
+INSERT INTO `item_mods` VALUES (16472,431,2);   -- Poison Knife (Additional effect: Poison)
 INSERT INTO `item_mods` VALUES (16472,499,10);  -- Additional effect animation (subEffect) xi.subEffect.Poison
 INSERT INTO `item_mods` VALUES (16472,501,10);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (16472,951,3);   -- Additional effect Status ID xi.effect.Poison
 INSERT INTO `item_mods` VALUES (16472,952,4);   -- Additional effect Status Potency 4
 INSERT INTO `item_mods` VALUES (16472,953,30);  -- Additional effect Status Duration 30sec
-INSERT INTO `item_mods` VALUES (16478,431,2);   -- Additional effect: Poison(Type DEBUFF)poison_kukri 16478
+INSERT INTO `item_mods` VALUES (16478,431,2);   -- Poison Kukri (Additional effect: Poison)
 INSERT INTO `item_mods` VALUES (16478,499,10);  -- Additional effect animation (subEffect) xi.subEffect.Poison
 INSERT INTO `item_mods` VALUES (16478,501,10);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (16478,951,3);   -- Additional effect Status ID xi.effect.Poison
@@ -20117,7 +20117,7 @@ INSERT INTO `item_mods` VALUES (16487,68,3);
 INSERT INTO `item_mods` VALUES (16488,11,7);
 INSERT INTO `item_mods` VALUES (16488,24,10);
 INSERT INTO `item_mods` VALUES (16488,26,-5);
-INSERT INTO `item_mods` VALUES (16489,431,2);   -- Additional effect: Poison(Type DEBUFF)poison_kukri +1 16489
+INSERT INTO `item_mods` VALUES (16489,431,2);   -- Poison Kukri +1 (Additional effect: Poison)
 INSERT INTO `item_mods` VALUES (16489,499,10);  -- Additional effect animation (subEffect) xi.subEffect.Poison
 INSERT INTO `item_mods` VALUES (16489,501,15);  -- Additional effect Chance 15%
 INSERT INTO `item_mods` VALUES (16489,951,3);   -- Additional effect Status ID xi.effect.Poison
@@ -20147,13 +20147,13 @@ INSERT INTO `item_mods` VALUES (16495,501,10);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (16495,951,6);   -- Additional effect Status ID xi.effect.SILENCE
 INSERT INTO `item_mods` VALUES (16495,952,1);   -- Additional effect Status Potency 1
 INSERT INTO `item_mods` VALUES (16495,953,30);  -- Additional effect Status Duration 30sec
-INSERT INTO `item_mods` VALUES (16496,431,2);   -- Additional effect: Poison(Type DEBUFF)poison_dagger 16496
+INSERT INTO `item_mods` VALUES (16496,431,2);   -- Poison Dagger (Additional effect: Poison)
 INSERT INTO `item_mods` VALUES (16496,499,10);  -- Additional effect animation (subEffect) xi.subEffect.Poison
 INSERT INTO `item_mods` VALUES (16496,501,10);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (16496,951,3);   -- Additional effect Status ID xi.effect.Poison
 INSERT INTO `item_mods` VALUES (16496,952,4);   -- Additional effect Status Potency 4
 INSERT INTO `item_mods` VALUES (16496,953,30);  -- Additional effect Status Duration 30sec
-INSERT INTO `item_mods` VALUES (16497,431,2);   -- Additional effect: Sleep (Type DEBUFF)Sleep dagger 16497
+INSERT INTO `item_mods` VALUES (16497,431,2);   -- Sleep Dagger (Additional effect: Sleep)
 INSERT INTO `item_mods` VALUES (16497,499,9);   -- Additional effect animation (subEffect) xi.subEffect.Sleep
 INSERT INTO `item_mods` VALUES (16497,501,10);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (16497,951,2);   -- Additional effect Status ID xi.effect.Sleep
@@ -20181,12 +20181,12 @@ INSERT INTO `item_mods` VALUES (16503,952,10);  -- Additional effect Status Pote
 INSERT INTO `item_mods` VALUES (16503,953,5);   -- Additional effect Status Duration 5sec
 
 INSERT INTO `item_mods` VALUES (16504,250,2);
-INSERT INTO `item_mods` VALUES (16504,431,11);   -- Additional effect: Haste (Type SELF_BUFF)oynos_knife 16504
+INSERT INTO `item_mods` VALUES (16504,431,11);  -- Oynos Knife (Additional effect: Haste)
 INSERT INTO `item_mods` VALUES (16504,499,23);  -- Additional effect animation (subEffect) xi.subEffect.Haste
 INSERT INTO `item_mods` VALUES (16504,501,10);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (16504,951,3);   -- Additional effect Status ID xi.effect.Haste
-INSERT INTO `item_mods` VALUES (16504,952,15);   -- Additional effect Status Potency 15
-INSERT INTO `item_mods` VALUES (16504,953,180);  -- Additional effect Status Duration 180sec
+INSERT INTO `item_mods` VALUES (16504,952,15);  -- Additional effect Status Potency 15
+INSERT INTO `item_mods` VALUES (16504,953,180); -- Additional effect Status Duration 180sec
 
 -- Stun Kukri
 INSERT INTO `item_mods` VALUES (16506,431,2);   -- Additional effect: "Stun" (Type DEBUFF)
@@ -20202,8 +20202,8 @@ INSERT INTO `item_mods` VALUES (16508,501,15);  -- Additional effect Chance 15%
 INSERT INTO `item_mods` VALUES (16508,951,6);   -- Additional effect Status ID xi.effect.SILENCE
 INSERT INTO `item_mods` VALUES (16508,952,1);   -- Additional effect Status Potency 1
 INSERT INTO `item_mods` VALUES (16508,953,30);  -- Additional effect Status Duration 30sec
-INSERT INTO `item_mods` VALUES (16509,431,6);   -- Additional effect: Aspir (Type DEBUFF)aspir_knife 16509
-INSERT INTO `item_mods` VALUES (16509,499,22);   -- Additional effect animation (subEffect) xi.subEffect.Aspir
+INSERT INTO `item_mods` VALUES (16509,431,6);   -- Aspir Knife Additional effect: Aspir (Type DEBUFF)
+INSERT INTO `item_mods` VALUES (16509,499,22);  -- Additional effect animation (subEffect) xi.subEffect.Aspir
 INSERT INTO `item_mods` VALUES (16509,500,3);   -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (16509,501,10);  -- Additional effect DAMAGE
 INSERT INTO `item_mods` VALUES (16509,950,1);   -- Additional effect element Darkness (xi.magic.element)
@@ -20218,7 +20218,7 @@ INSERT INTO `item_mods` VALUES (16541,11,2);
 INSERT INTO `item_mods` VALUES (16542,8,2);
 INSERT INTO `item_mods` VALUES (16542,10,2);
 INSERT INTO `item_mods` VALUES (16542,11,2);
-INSERT INTO `item_mods` VALUES (16543,431,1);   -- Additional effect: Fire Damage (Type DAMAGE)--fire_sword 16543
+INSERT INTO `item_mods` VALUES (16543,431,1);   -- Fire Sword (Additional effect: Fire Damage) 
 INSERT INTO `item_mods` VALUES (16543,499,1);   -- Additional effect animation (subEffect)
 INSERT INTO `item_mods` VALUES (16543,500,10);  -- Additional effect damage
 INSERT INTO `item_mods` VALUES (16543,501,5);   -- Additional effect Chance 5%
@@ -20227,28 +20227,28 @@ INSERT INTO `item_mods` VALUES (16547,2,10);
 INSERT INTO `item_mods` VALUES (16547,9,2);
 INSERT INTO `item_mods` VALUES (16547,10,2);
 INSERT INTO `item_mods` VALUES (16548,20,8); -- WATER_RES
-INSERT INTO `item_mods` VALUES (16549,431,1);   -- Additional effect: Light Damage (Type DAMAGE)--divine_sword 16549
+INSERT INTO `item_mods` VALUES (16549,431,1);   -- Divine Sword (Additional effect: Light Damage) 
 INSERT INTO `item_mods` VALUES (16549,499,7);   -- Additional effect animation (subEffect)
 INSERT INTO `item_mods` VALUES (16549,500,21);  -- Additional effect damage
 INSERT INTO `item_mods` VALUES (16549,501,5);   -- Additional effect Chance 5%
-INSERT INTO `item_mods` VALUES (16549,950,7);  -- Additional effect element Light (xi.magic.element)
-INSERT INTO `item_mods` VALUES (16550,431,1);   -- Additional effect: Light Damage (Type DAMAGE)--hallowed_sword 16550
+INSERT INTO `item_mods` VALUES (16549,950,7);   -- Additional effect element Light (xi.magic.element)
+INSERT INTO `item_mods` VALUES (16550,431,1);   -- Hallowed Sword (Additional effect: Light Damage) 
 INSERT INTO `item_mods` VALUES (16550,499,7);   -- Additional effect animation (subEffect)
-INSERT INTO `item_mods` VALUES (16550,500,21);   -- Additional effect damage
-INSERT INTO `item_mods` VALUES (16550,501,5);  -- Additional effect Chance 5%
-INSERT INTO `item_mods` VALUES (16550,950,7);  -- Additional effect element Light (xi.magic.element)
-INSERT INTO `item_mods` VALUES (16556,431,5);   -- Additional effect: HP Drain (Type DAMAGE)--Bloody Blade
-INSERT INTO `item_mods` VALUES (16556,499,21);   -- Additional effect animation (subEffect)
-INSERT INTO `item_mods` VALUES (16556,500,10);   -- Additional effect damage
-INSERT INTO `item_mods` VALUES (16556,501,5);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (16550,500,21);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (16550,501,5);   -- Additional effect Chance 5%
+INSERT INTO `item_mods` VALUES (16550,950,7);   -- Additional effect element Light (xi.magic.element)
+INSERT INTO `item_mods` VALUES (16556,431,5);   -- Bloody Blade Additional effect: HP Drain 
+INSERT INTO `item_mods` VALUES (16556,499,21);  -- Additional effect animation (subEffect)
+INSERT INTO `item_mods` VALUES (16556,500,10);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (16556,501,5);   -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (16556,950,8);   -- Additional effect element Darkness (xi.magic.element)
 INSERT INTO `item_mods` VALUES (16557,23,6);
 INSERT INTO `item_mods` VALUES (16557,25,3);
 INSERT INTO `item_mods` VALUES (16562,9,1);
-INSERT INTO `item_mods` VALUES (16564,431,1);   -- Additional effect: Fire Damage (Type DAMAGE)--Flame_Blade 16564
+INSERT INTO `item_mods` VALUES (16564,431,1);   -- Flame Blade (Additional effect: Fire Damage) 
 INSERT INTO `item_mods` VALUES (16564,499,1);   -- Additional effect animation (subEffect)
-INSERT INTO `item_mods` VALUES (16564,500,10);   -- Additional effect damage
-INSERT INTO `item_mods` VALUES (16564,501,5);  -- Additional effect Chance 5%
+INSERT INTO `item_mods` VALUES (16564,500,10);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (16564,501,5);   -- Additional effect Chance 5%
 INSERT INTO `item_mods` VALUES (16564,950,1);   -- Additional effect element Fire (xi.magic.element)
 INSERT INTO `item_mods` VALUES (16575,14,7);
 INSERT INTO `item_mods` VALUES (16578,10,2);
@@ -20264,23 +20264,23 @@ INSERT INTO `item_mods` VALUES (16580,11,4);
 INSERT INTO `item_mods` VALUES (16580,12,4);
 INSERT INTO `item_mods` VALUES (16580,13,-8);
 INSERT INTO `item_mods` VALUES (16580,14,-8);
-INSERT INTO `item_mods` VALUES (16581,431,1);   -- Additional effect: Light Damage (Type DAMAGE)--Holy_sword 16581
+INSERT INTO `item_mods` VALUES (16581,431,1);   -- HOly Sword (Additional effect: Light Damage) 
 INSERT INTO `item_mods` VALUES (16581,499,7);   -- Additional effect animation (subEffect)
-INSERT INTO `item_mods` VALUES (16581,500,10);   -- Additional effect damage
-INSERT INTO `item_mods` VALUES (16581,501,5);  -- Additional effect Chance 5%
-INSERT INTO `item_mods` VALUES (16581,950,7);  -- Additional effect element Light (xi.magic.element)
+INSERT INTO `item_mods` VALUES (16581,500,10);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (16581,501,5);   -- Additional effect Chance 5%
+INSERT INTO `item_mods` VALUES (16581,950,7);   -- Additional effect element Light (xi.magic.element)
 INSERT INTO `item_mods` VALUES (16582,2,30);     -- vetala_sword HP+30
 INSERT INTO `item_mods` VALUES (16582,8,3);      -- STR+3
 INSERT INTO `item_mods` VALUES (16587,25,4);
-INSERT INTO `item_mods` VALUES (16588,431,1);   -- Additional effect: Fire Damage (Type DAMAGE)--Fire_claymore 16588
+INSERT INTO `item_mods` VALUES (16588,431,1);   -- Fire Claymore (Additional effect: Fire Damage) 
 INSERT INTO `item_mods` VALUES (16588,499,1);   -- Additional effect animation (subEffect)
-INSERT INTO `item_mods` VALUES (16588,500,10);   -- Additional effect damage
-INSERT INTO `item_mods` VALUES (16588,501,5);  -- Additional effect Chance 5%
+INSERT INTO `item_mods` VALUES (16588,500,10);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (16588,501,5);   -- Additional effect Chance 5%
 INSERT INTO `item_mods` VALUES (16588,950,1);   -- Additional effect element Fire (xi.magic.element)
-INSERT INTO `item_mods` VALUES (16594,431,1);   -- Additional effect: Fire Damage (Type DAMAGE)--Inferno_Sword 16594
+INSERT INTO `item_mods` VALUES (16594,431,1);   -- Inferno Sword (Additional effect: Fire Damage) 
 INSERT INTO `item_mods` VALUES (16594,499,1);   -- Additional effect animation (subEffect)
-INSERT INTO `item_mods` VALUES (16594,500,10);   -- Additional effect damage
-INSERT INTO `item_mods` VALUES (16594,501,5);  -- Additional effect Chance 5%
+INSERT INTO `item_mods` VALUES (16594,500,10);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (16594,501,5);   -- Additional effect Chance 5%
 INSERT INTO `item_mods` VALUES (16594,950,1);   -- Additional effect element Fire (xi.magic.element)
 INSERT INTO `item_mods` VALUES (16596,13,2);
 INSERT INTO `item_mods` VALUES (16596,23,5);
@@ -20296,14 +20296,14 @@ INSERT INTO `item_mods` VALUES (16604,967,5);    -- Save the Queen - Cover Durat
 INSERT INTO `item_mods` VALUES (16605,432,5);
 INSERT INTO `item_mods` VALUES (16610,25,2);
 INSERT INTO `item_mods` VALUES (16611,25,2);
-INSERT INTO `item_mods` VALUES (16613,431,1);   -- Additional effect: Light Damage (Type DAMAGE)--Spirit_sword 16613
+INSERT INTO `item_mods` VALUES (16613,431,1);   -- Spirit Sword (Additional effect: Light Damage) 
 INSERT INTO `item_mods` VALUES (16613,499,7);   -- Additional effect animation (subEffect)
-INSERT INTO `item_mods` VALUES (16613,500,21);   -- Additional effect damage
-INSERT INTO `item_mods` VALUES (16613,501,5);  -- Additional effect Chance 5%
-INSERT INTO `item_mods` VALUES (16613,950,7);  -- Additional effect element Light (xi.magic.element)
+INSERT INTO `item_mods` VALUES (16613,500,21);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (16613,501,5);   -- Additional effect Chance 5%
+INSERT INTO `item_mods` VALUES (16613,950,7);   -- Additional effect element Light (xi.magic.element)
 INSERT INTO `item_mods` VALUES (16619,25,3);
 INSERT INTO `item_mods` VALUES (16620,20,9); -- WATER_RES
-INSERT INTO `item_mods` VALUES (16621,431,1);   -- Additional effect: Fire Damage (Type DAMAGE)--Flame_sword 16621
+INSERT INTO `item_mods` VALUES (16621,431,1);   -- Flame Sword (Additional effect: Fire Damage) 
 INSERT INTO `item_mods` VALUES (16621,499,1);   -- Additional effect animation (subEffect)
 INSERT INTO `item_mods` VALUES (16621,500,9);   -- Additional effect damage
 INSERT INTO `item_mods` VALUES (16621,501,10);  -- Additional effect Chance 10%
@@ -20355,13 +20355,13 @@ INSERT INTO `item_mods` VALUES (16689,25,3);
 INSERT INTO `item_mods` VALUES (16690,25,4);
 INSERT INTO `item_mods` VALUES (16691,25,3);
 INSERT INTO `item_mods` VALUES (16691,15,2); -- FIRE_RES
-INSERT INTO `item_mods` VALUES (16692,431,2);   -- Additional effect: Poison (Type DEBUFF)poison_baghnakhs +1 16692
+INSERT INTO `item_mods` VALUES (16692,431,2);   -- poison baghnakhs +1 (Additional effect: Poison)
 INSERT INTO `item_mods` VALUES (16692,499,10);  -- Additional effect animation (subEffect) xi.subEffect.Poison
 INSERT INTO `item_mods` VALUES (16692,501,15);  -- Additional effect Chance 15%
 INSERT INTO `item_mods` VALUES (16692,951,3);   -- Additional effect Status ID xi.effect.Poison
 INSERT INTO `item_mods` VALUES (16692,952,4);   -- Additional effect Status Potency 4
 INSERT INTO `item_mods` VALUES (16692,953,30);  -- Additional effect Status Duration 30sec
-INSERT INTO `item_mods` VALUES (16693,431,2);   -- Additional effect: Poison (Type DEBUFF)poison_katars +1 16693
+INSERT INTO `item_mods` VALUES (16693,431,2);   -- poison katars +1 (Additional effect: Poison)
 INSERT INTO `item_mods` VALUES (16693,499,10);  -- Additional effect animation (subEffect) xi.subEffect.Poison
 INSERT INTO `item_mods` VALUES (16693,501,15);  -- Additional effect Chance 15%
 INSERT INTO `item_mods` VALUES (16693,951,3);   -- Additional effect Status ID xi.effect.Poison
@@ -20372,7 +20372,7 @@ INSERT INTO `item_mods` VALUES (16694,23,10);
 INSERT INTO `item_mods` VALUES (16698,25,3);
 INSERT INTO `item_mods` VALUES (16699,25,4);
 INSERT INTO `item_mods` VALUES (16700,25,4);
-INSERT INTO `item_mods` VALUES (16700,431,2);   -- Additional effect: Poison(Type DEBUFF)Poison Cesti +1 16700
+INSERT INTO `item_mods` VALUES (16700,431,2);   -- Poison Cesti +1 (Additional effect: Poison)
 INSERT INTO `item_mods` VALUES (16700,499,10);  -- Additional effect animation (subEffect) xi.subEffect.Poison
 INSERT INTO `item_mods` VALUES (16700,501,15);  -- Additional effect Chance 15%
 INSERT INTO `item_mods` VALUES (16700,951,3);   -- Additional effect Status ID xi.effect.Poison
@@ -20380,9 +20380,9 @@ INSERT INTO `item_mods` VALUES (16700,952,4);   -- Additional effect Status Pote
 INSERT INTO `item_mods` VALUES (16700,953,30);  -- Additional effect Status Duration 30sec
 INSERT INTO `item_mods` VALUES (16701,9,2);
 INSERT INTO `item_mods` VALUES (16702,16,4); -- ICE_RES
-INSERT INTO `item_mods` VALUES (16702,431,1);   -- Additional effect: Ice Damage (Type DAMAGE)--cougar_baghnakhs 16702
+INSERT INTO `item_mods` VALUES (16702,431,1);   -- Cougar Baghnakhs (Additional effect: Ice Damage)
 INSERT INTO `item_mods` VALUES (16702,499,2);   -- Additional effect animation (subEffect)
-INSERT INTO `item_mods` VALUES (16702,500,10);   -- Additional effect damage
+INSERT INTO `item_mods` VALUES (16702,500,10);  -- Additional effect damage
 INSERT INTO `item_mods` VALUES (16702,501,10);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (16702,950,2);   -- Additional effect element Ice (xi.magic.element)
 INSERT INTO `item_mods` VALUES (16703,8,1);
@@ -20392,19 +20392,19 @@ INSERT INTO `item_mods` VALUES (16707,9,2);
 INSERT INTO `item_mods` VALUES (16707,10,2);
 INSERT INTO `item_mods` VALUES (16708,10,1);
 INSERT INTO `item_mods` VALUES (16708,23,8);
-INSERT INTO `item_mods` VALUES (16709,431,1);   -- Additional effect: Fire Damage (Type DAMAGE)--Inferno_Axe 16709
+INSERT INTO `item_mods` VALUES (16709,431,1);   -- Inferno Axe (Additional effect: Fire Damage) 
 INSERT INTO `item_mods` VALUES (16709,499,1);   -- Additional effect animation (subEffect)
-INSERT INTO `item_mods` VALUES (16709,500,10);   -- Additional effect damage
-INSERT INTO `item_mods` VALUES (16709,501,5);  -- Additional effect Chance 5%
+INSERT INTO `item_mods` VALUES (16709,500,10);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (16709,501,5);   -- Additional effect Chance 5%
 INSERT INTO `item_mods` VALUES (16709,950,1);   -- Additional effect element Fire (xi.magic.element)
 INSERT INTO `item_mods` VALUES (16710,8,4);
 INSERT INTO `item_mods` VALUES (16710,12,-4);
 INSERT INTO `item_mods` VALUES (16711,8,6);
 INSERT INTO `item_mods` VALUES (16711,12,6);
 INSERT INTO `item_mods` VALUES (16711,116,6);
-INSERT INTO `item_mods` VALUES (16713,431,1);   -- Additional effect: Fire Damage (Type DAMAGE)--hellfire_axe 16713
+INSERT INTO `item_mods` VALUES (16713,431,1);   -- Hellfire Axe (Additional effect: Fire Damage) 
 INSERT INTO `item_mods` VALUES (16713,499,1);   -- Additional effect animation (subEffect)
-INSERT INTO `item_mods` VALUES (16713,500,10);   -- Additional effect damage
+INSERT INTO `item_mods` VALUES (16713,500,10);  -- Additional effect damage
 INSERT INTO `item_mods` VALUES (16713,501,10);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (16713,950,1);   -- Additional effect element Fire (xi.magic.element)
 INSERT INTO `item_mods` VALUES (16714,25,5);
@@ -20428,19 +20428,19 @@ INSERT INTO `item_mods` VALUES (16731,12,-5);
 INSERT INTO `item_mods` VALUES (16735,2,20);
 INSERT INTO `item_mods` VALUES (16735,18,10); -- EARTH_RES
 INSERT INTO `item_mods` VALUES (16735,20,10); -- WATER_RES
-INSERT INTO `item_mods` VALUES (16741,431,2);   -- Additional effect: Poison(Type DEBUFF)Poison dagger +1 16741
+INSERT INTO `item_mods` VALUES (16741,431,2);   -- Poison Dagger (Additional effect: Poison)
 INSERT INTO `item_mods` VALUES (16741,499,10);  -- Additional effect animation (subEffect) xi.subEffect.Poison
 INSERT INTO `item_mods` VALUES (16741,501,15);  -- Additional effect Chance 15%
 INSERT INTO `item_mods` VALUES (16741,951,3);   -- Additional effect Status ID xi.effect.Poison
 INSERT INTO `item_mods` VALUES (16741,952,4);   -- Additional effect Status Potency 4
 INSERT INTO `item_mods` VALUES (16741,953,30);  -- Additional effect Status Duration 30sec
-INSERT INTO `item_mods` VALUES (16742,431,2);   -- Additional effect: Poison(Type DEBUFF)Poison knife +1 16742
+INSERT INTO `item_mods` VALUES (16742,431,2);   -- Poison Knife +1 (Additional effect: Poison)
 INSERT INTO `item_mods` VALUES (16742,499,10);  -- Additional effect animation (subEffect) xi.subEffect.Poison
 INSERT INTO `item_mods` VALUES (16742,501,15);  -- Additional effect Chance 15%
 INSERT INTO `item_mods` VALUES (16742,951,3);   -- Additional effect Status ID xi.effect.Poison
 INSERT INTO `item_mods` VALUES (16742,952,4);   -- Additional effect Status Potency 4
 INSERT INTO `item_mods` VALUES (16742,953,30);  -- Additional effect Status Duration 30sec
-INSERT INTO `item_mods` VALUES (16743,431,2);   -- Additional effect: Poison(Type DEBUFF)python_baselard 16743
+INSERT INTO `item_mods` VALUES (16743,431,2);   -- Python Baselard (Additional effect: Poison)
 INSERT INTO `item_mods` VALUES (16743,499,10);  -- Additional effect animation (subEffect) xi.subEffect.Poison
 INSERT INTO `item_mods` VALUES (16743,501,15);  -- Additional effect Chance 15%
 INSERT INTO `item_mods` VALUES (16743,951,3);   -- Additional effect Status ID xi.effect.Poison
@@ -20473,21 +20473,21 @@ INSERT INTO `item_mods` VALUES (16773,12,2);
 INSERT INTO `item_mods` VALUES (16773,13,-2);
 INSERT INTO `item_mods` VALUES (16773,21,-2); -- LIGHT_RES
 INSERT INTO `item_mods` VALUES (16773,22,2);  -- DARK_RES
-INSERT INTO `item_mods` VALUES (16773,431,2);   -- Additional effect: Evasion_Down (Type DEBUFF)cruel_scythe 16773
+INSERT INTO `item_mods` VALUES (16773,431,2);   -- Cruel Scythe (Additional effect: Evasion Down)
 INSERT INTO `item_mods` VALUES (16773,499,18);  -- Additional effect animation (subEffect) xi.subEffect.EVASION_DOWN
 INSERT INTO `item_mods` VALUES (16773,501,10);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (16773,951,148); -- Additional effect Status ID xi.effect.EVASION_DOWN
-INSERT INTO `item_mods` VALUES (16773,952,12);   -- Additional effect Status Potency 12
+INSERT INTO `item_mods` VALUES (16773,952,12);  -- Additional effect Status Potency 12
 INSERT INTO `item_mods` VALUES (16773,953,60);  -- Additional effect Status Duration 60sec
-INSERT INTO `item_mods` VALUES (16777,431,5);   -- Additional effect: HP_DRAIN(Type HP_DRAIN)death_scythe 16777
+INSERT INTO `item_mods` VALUES (16777,431,5);   -- Death Scythe (Additional effect: HP DRAIN)
 INSERT INTO `item_mods` VALUES (16777,499,21);  -- Additional effect animation (subEffect) xi.subEffect.HP_DRAIN
-INSERT INTO `item_mods` VALUES (16777,500,10);   -- Additional effect damage
+INSERT INTO `item_mods` VALUES (16777,500,10);  -- Additional effect damage
 INSERT INTO `item_mods` VALUES (16777,501,10);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (16777,950,8);   -- Additional effect element Darkness (xi.magic.element)
 INSERT INTO `item_mods` VALUES (16780,8,2);
 INSERT INTO `item_mods` VALUES (16780,10,-1);
 INSERT INTO `item_mods` VALUES (16784,16,6); -- ICE_RES
-INSERT INTO `item_mods` VALUES (16784,431,1);   -- Additional effect: Ice Damage (Type DAMAGE)--frostreaper 16784
+INSERT INTO `item_mods` VALUES (16784,431,1);   -- Frostreaper (Additional effect: Ice Damage)
 INSERT INTO `item_mods` VALUES (16784,499,2);   -- Additional effect animation (subEffect)
 INSERT INTO `item_mods` VALUES (16784,500,5);   -- Additional effect damage
 INSERT INTO `item_mods` VALUES (16784,501,10);  -- Additional effect Chance 10%
@@ -20497,9 +20497,9 @@ INSERT INTO `item_mods` VALUES (16786,25,-5);
 INSERT INTO `item_mods` VALUES (16787,22,12); -- DARK_RES
 INSERT INTO `item_mods` VALUES (16788,3,-5);
 INSERT INTO `item_mods` VALUES (16788,25,5);
-INSERT INTO `item_mods` VALUES (16791,431,5);   -- Additional effect: HP_DRAIN(Type HP_DRAIN)death_scythe +1 16791
+INSERT INTO `item_mods` VALUES (16791,431,5);   -- Death Scythe +1 (Additional effect: HP DRAIN)
 INSERT INTO `item_mods` VALUES (16791,499,21);  -- Additional effect animation (subEffect) xi.subEffect.HP_DRAIN
-INSERT INTO `item_mods` VALUES (16791,500,10);   -- Additional effect damage
+INSERT INTO `item_mods` VALUES (16791,500,10);  -- Additional effect damage
 INSERT INTO `item_mods` VALUES (16791,501,10);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (16791,950,8);   -- Additional effect element Darkness (xi.magic.element)
 INSERT INTO `item_mods` VALUES (16793,2,20);
@@ -20518,22 +20518,22 @@ INSERT INTO `item_mods` VALUES (16808,1,3);
 INSERT INTO `item_mods` VALUES (16808,68,3);
 INSERT INTO `item_mods` VALUES (16809,23,14);
 INSERT INTO `item_mods` VALUES (16810,23,12);
-INSERT INTO `item_mods` VALUES (16816,431,1);   -- Additional effect: Light Damage (Type DAMAGE)--Holy_sword +1 16816
+INSERT INTO `item_mods` VALUES (16816,431,1);   -- Holy Sword +1 (Additional effect: Light Damage) 
 INSERT INTO `item_mods` VALUES (16816,499,7);   -- Additional effect animation (subEffect)
-INSERT INTO `item_mods` VALUES (16816,500,10);   -- Additional effect damage
+INSERT INTO `item_mods` VALUES (16816,500,10);  -- Additional effect damage
 INSERT INTO `item_mods` VALUES (16816,501,10);  -- Additional effect Chance 10%
-INSERT INTO `item_mods` VALUES (16816,950,7);  -- Additional effect element Light (xi.magic.element)
+INSERT INTO `item_mods` VALUES (16816,950,7);   -- Additional effect element Light (xi.magic.element)
 INSERT INTO `item_mods` VALUES (16818,23,5);
 INSERT INTO `item_mods` VALUES (16819,9,3);
 INSERT INTO `item_mods` VALUES (16820,11,3);
 INSERT INTO `item_mods` VALUES (16821,110,10);
 INSERT INTO `item_mods` VALUES (16822,5,10);
 INSERT INTO `item_mods` VALUES (16822,12,5);
-INSERT INTO `item_mods` VALUES (16826,431,1);   -- Additional effect: Light Damage (Type DAMAGE)--divine_sword +1 16826
+INSERT INTO `item_mods` VALUES (16826,431,1);   -- Divine Sword +1 (Additional effect: Light Damage) 
 INSERT INTO `item_mods` VALUES (16826,499,7);   -- Additional effect animation (subEffect)
-INSERT INTO `item_mods` VALUES (16826,500,21);   -- Additional effect damage
+INSERT INTO `item_mods` VALUES (16826,500,21);  -- Additional effect damage
 INSERT INTO `item_mods` VALUES (16826,501,10);  -- Additional effect Chance 10%
-INSERT INTO `item_mods` VALUES (16826,950,7);  -- Additional effect element Light (xi.magic.element)
+INSERT INTO `item_mods` VALUES (16826,950,7);   -- Additional effect element Light (xi.magic.element)
 INSERT INTO `item_mods` VALUES (16829,5,10);
 INSERT INTO `item_mods` VALUES (16829,12,1);
 INSERT INTO `item_mods` VALUES (16829,13,1);
@@ -20572,11 +20572,11 @@ INSERT INTO `item_mods` VALUES (16863,12,2);
 INSERT INTO `item_mods` VALUES (16863,13,-2);
 INSERT INTO `item_mods` VALUES (16863,21,-2); -- LIGHT_RES
 INSERT INTO `item_mods` VALUES (16863,22,2);  -- DARK_RES
-INSERT INTO `item_mods` VALUES (16863,431,2);   -- Additional effect: Evasion_Down (Type DEBUFF)cruel_spear 16863
+INSERT INTO `item_mods` VALUES (16863,431,2);   -- Cruel Spear (Additional effect: Evasion Down)
 INSERT INTO `item_mods` VALUES (16863,499,18);  -- Additional effect animation (subEffect) xi.subEffect.EVASION_DOWN
 INSERT INTO `item_mods` VALUES (16863,501,10);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (16863,951,148); -- Additional effect Status ID xi.effect.EVASION_DOWN
-INSERT INTO `item_mods` VALUES (16863,952,12);   -- Additional effect Status Potency 12
+INSERT INTO `item_mods` VALUES (16863,952,12);  -- Additional effect Status Potency 12
 INSERT INTO `item_mods` VALUES (16863,953,60);  -- Additional effect Status Duration 60sec
 INSERT INTO `item_mods` VALUES (16867,2,7);
 INSERT INTO `item_mods` VALUES (16867,14,4);
@@ -20622,63 +20622,63 @@ INSERT INTO `item_mods` VALUES (16894,9,3);
 INSERT INTO `item_mods` VALUES (16894,10,3);
 INSERT INTO `item_mods` VALUES (16899,25,3);
 INSERT INTO `item_mods` VALUES (16904,165,3);
-INSERT INTO `item_mods` VALUES (16905,431,2);   -- Additional effect: BLIND (Type DEBUFF)bokuto 16905
+INSERT INTO `item_mods` VALUES (16905,431,2);   -- Bokuto (Additional effect: BLIND)
 INSERT INTO `item_mods` VALUES (16905,499,12);  -- Additional effect animation (subEffect) xi.subEffect.BLIND
 INSERT INTO `item_mods` VALUES (16905,501,10);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (16905,951,5);   -- Additional effect Status ID xi.effect.Blindness
 INSERT INTO `item_mods` VALUES (16905,952,10);  -- Additional effect Status Potency 1
 INSERT INTO `item_mods` VALUES (16905,953,30);  -- Additional effect Status Duration 30sec
-INSERT INTO `item_mods` VALUES (16906,431,2);   -- Additional effect: Silence (Type DEBUFF)mokuto 16906
+INSERT INTO `item_mods` VALUES (16906,431,2);   -- Mokuto (Additional effect: Silence)
 INSERT INTO `item_mods` VALUES (16906,499,13);  -- Additional effect animation (subEffect) xi.subEffect.SILENCE
 INSERT INTO `item_mods` VALUES (16906,501,10);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (16906,951,6);   -- Additional effect Status ID xi.effect.SILENCE
 INSERT INTO `item_mods` VALUES (16906,952,5);   -- Additional effect Status Potency 5
 INSERT INTO `item_mods` VALUES (16906,953,30);  -- Additional effect Status Duration 30sec
-INSERT INTO `item_mods` VALUES (16907,431,2);   -- Additional effect: Poison(Type DEBUFF)busuto 16907
+INSERT INTO `item_mods` VALUES (16907,431,2);   -- Busuto (Additional effect: Poison)
 INSERT INTO `item_mods` VALUES (16907,499,10);  -- Additional effect animation (subEffect) xi.subEffect.Poison
 INSERT INTO `item_mods` VALUES (16907,501,10);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (16907,951,3);   -- Additional effect Status ID xi.effect.Poison
 INSERT INTO `item_mods` VALUES (16907,952,4);   -- Additional effect Status Potency 4
 INSERT INTO `item_mods` VALUES (16907,953,30);  -- Additional effect Status Duration 30sec
-INSERT INTO `item_mods` VALUES (16908,431,2);   -- Additional effect: DEFENSE_DOWN (Type DEBUFF)yoto 16908
+INSERT INTO `item_mods` VALUES (16908,431,2);   -- Yoto (Additional effect: DEFENSE_DOWN)
 INSERT INTO `item_mods` VALUES (16908,499,18);  -- Additional effect animation (subEffect) xi.subEffect.DEFENSE_DOWN
-INSERT INTO `item_mods` VALUES (16908,501,5);  -- Additional effect Chance 5%
+INSERT INTO `item_mods` VALUES (16908,501,5);   -- Additional effect Chance 5%
 INSERT INTO `item_mods` VALUES (16908,951,149); -- Additional effect Status ID xi.effect.DEFENSE_DOWN
 INSERT INTO `item_mods` VALUES (16908,952,12);  -- Additional effect Status Potency 12
 INSERT INTO `item_mods` VALUES (16908,953,60);  -- Additional effect Status Duration 60sec
-INSERT INTO `item_mods` VALUES (16910,431,2);   -- Additional effect: Stun (Type DEBUFF)mamushito 16910
+INSERT INTO `item_mods` VALUES (16910,431,2);   -- mamushito (Additional effect: Stun)
 INSERT INTO `item_mods` VALUES (16910,499,16);  -- Additional effect animation (subEffect) xi.subEffect.STUN
-INSERT INTO `item_mods` VALUES (16910,501,5);  -- Additional effect Chance 10%
-INSERT INTO `item_mods` VALUES (16910,951,10); -- Additional effect Status ID xi.effect.STUN
-INSERT INTO `item_mods` VALUES (16910,953,3);  -- Additional effect Status Duration 3sec
+INSERT INTO `item_mods` VALUES (16910,501,5);   -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (16910,951,10);  -- Additional effect Status ID xi.effect.STUN
+INSERT INTO `item_mods` VALUES (16910,953,3);   -- Additional effect Status Duration 3sec
 INSERT INTO `item_mods` VALUES (16911,25,-1);
 INSERT INTO `item_mods` VALUES (16913,9,3);
 INSERT INTO `item_mods` VALUES (16924,135,3);
-INSERT INTO `item_mods` VALUES (16925,431,2);   -- Additional effect: Silence (Type DEBUFF)mokuto +1 16925
+INSERT INTO `item_mods` VALUES (16925,431,2);   -- mokuto +1 (Additional effect: Silence)
 INSERT INTO `item_mods` VALUES (16925,499,13);  -- Additional effect animation (subEffect) xi.subEffect.SILENCE
 INSERT INTO `item_mods` VALUES (16925,501,15);  -- Additional effect Chance 15%
 INSERT INTO `item_mods` VALUES (16925,951,6);   -- Additional effect Status ID xi.effect.SILENCE
 INSERT INTO `item_mods` VALUES (16925,953,30);  -- Additional effect Status Duration 30sec
-INSERT INTO `item_mods` VALUES (16926,431,2);   -- Additional effect: BLIND (Type DEBUFF)bokuto +1 16926
+INSERT INTO `item_mods` VALUES (16926,431,2);   -- bokuto +1 (Additional effect: BLIND)
 INSERT INTO `item_mods` VALUES (16926,499,12);  -- Additional effect animation (subEffect) xi.subEffect.BLIND
 INSERT INTO `item_mods` VALUES (16926,501,15);  -- Additional effect Chance 15%
 INSERT INTO `item_mods` VALUES (16926,951,5);   -- Additional effect Status ID xi.effect.Blindness
 INSERT INTO `item_mods` VALUES (16926,952,10);  -- Additional effect Status Potency 10
 INSERT INTO `item_mods` VALUES (16926,953,30);  -- Additional effect Status Duration 30sec
-INSERT INTO `item_mods` VALUES (16927,431,2);   -- Additional effect: Poison(Type DEBUFF)busuto +1 16927
+INSERT INTO `item_mods` VALUES (16927,431,2);   -- busuto +1 (Additional effect: Poison)
 INSERT INTO `item_mods` VALUES (16927,499,10);  -- Additional effect animation (subEffect) xi.subEffect.Poison
 INSERT INTO `item_mods` VALUES (16927,501,15);  -- Additional effect Chance 15%
 INSERT INTO `item_mods` VALUES (16927,951,3);   -- Additional effect Status ID xi.effect.Poison
 INSERT INTO `item_mods` VALUES (16927,952,4);   -- Additional effect Status Potency 4
 INSERT INTO `item_mods` VALUES (16927,953,30);  -- Additional effect Status Duration sec
-INSERT INTO `item_mods` VALUES (16928,431,1);   -- Additional effect: Fire Damage (Type DAMAGE)--hellfire_sword 16928
+INSERT INTO `item_mods` VALUES (16928,431,1);   -- Hellfire Sword (Additional effect: Fire Damage) 
 INSERT INTO `item_mods` VALUES (16928,499,1);   -- Additional effect animation (subEffect)
-INSERT INTO `item_mods` VALUES (16928,500,10);   -- Additional effect damage
+INSERT INTO `item_mods` VALUES (16928,500,10);  -- Additional effect damage
 INSERT INTO `item_mods` VALUES (16928,501,10);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (16928,950,1);   -- Additional effect element Fire (xi.magic.element)
-INSERT INTO `item_mods` VALUES (16929,431,1);   -- Additional effect: Fire Damage (Type DAMAGE)--burning_claymore 16929
+INSERT INTO `item_mods` VALUES (16929,431,1);   -- Burning Claymore (Additional effect: Fire Damage) 
 INSERT INTO `item_mods` VALUES (16929,499,1);   -- Additional effect animation (subEffect)
-INSERT INTO `item_mods` VALUES (16929,500,10);   -- Additional effect damage
+INSERT INTO `item_mods` VALUES (16929,500,10);  -- Additional effect damage
 INSERT INTO `item_mods` VALUES (16929,501,10);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (16929,950,1);   -- Additional effect element Fire (xi.magic.element)
 INSERT INTO `item_mods` VALUES (16930,23,7);
@@ -20687,16 +20687,16 @@ INSERT INTO `item_mods` VALUES (16934,25,5);
 INSERT INTO `item_mods` VALUES (16935,23,15);
 INSERT INTO `item_mods` VALUES (16935,25,-5);
 INSERT INTO `item_mods` VALUES (16936,22,8); -- DARK_RES
-INSERT INTO `item_mods` VALUES (16936,431,1);   -- Additional effect: Darkness Damage (Type DAMAGE)--demonic_sword 16936
+INSERT INTO `item_mods` VALUES (16936,431,1);   -- Demonic Sword (Additional effect: Darkness Damage)
 INSERT INTO `item_mods` VALUES (16936,499,8);   -- Additional effect animation (subEffect)
-INSERT INTO `item_mods` VALUES (16936,500,21);   -- Additional effect damage
+INSERT INTO `item_mods` VALUES (16936,500,21);  -- Additional effect damage
 INSERT INTO `item_mods` VALUES (16936,501,10);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (16936,950,8);   -- Additional effect element Darkness (xi.magic.element)
 INSERT INTO `item_mods` VALUES (16937,16,8); -- ICE_RES
-INSERT INTO `item_mods` VALUES (16937,431,1);   -- Additional effect: Ice Damage (Type DAMAGE)--icicle_sword 16937
+INSERT INTO `item_mods` VALUES (16937,431,1);   --Icicle Sword (Additional effect: Ice Damage)
 INSERT INTO `item_mods` VALUES (16937,499,2);   -- Additional effect animation (subEffect)
-INSERT INTO `item_mods` VALUES (16937,500,10);   -- Additional effect damage
-INSERT INTO `item_mods` VALUES (16937,501,5);  -- Additional effect Chance 5%
+INSERT INTO `item_mods` VALUES (16937,500,10);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (16937,501,5);   -- Additional effect Chance 5%
 INSERT INTO `item_mods` VALUES (16937,950,2);   -- Additional effect element Ice (xi.magic.element)
 INSERT INTO `item_mods` VALUES (16938,21,12); -- LIGHT_RES
 INSERT INTO `item_mods` VALUES (16941,13,3);
@@ -20734,24 +20734,24 @@ INSERT INTO `item_mods` VALUES (16968,25,5);
 INSERT INTO `item_mods` VALUES (16971,8,3);
 INSERT INTO `item_mods` VALUES (16971,10,3);
 INSERT INTO `item_mods` VALUES (16972,14,2);
-INSERT INTO `item_mods` VALUES (16973,431,1);   -- Additional effect: Fire Damage (Type DAMAGE)--homura 16973
+INSERT INTO `item_mods` VALUES (16973,431,1);   -- Homura (Additional effect: Fire Damage) 
 INSERT INTO `item_mods` VALUES (16973,499,1);   -- Additional effect animation (subEffect)
-INSERT INTO `item_mods` VALUES (16973,500,19);   -- Additional effect damage
-INSERT INTO `item_mods` VALUES (16973,501,5);  -- Additional effect Chance 5%
+INSERT INTO `item_mods` VALUES (16973,500,19);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (16973,501,5);   -- Additional effect Chance 5%
 INSERT INTO `item_mods` VALUES (16973,950,1);   -- Additional effect element Fire (xi.magic.element)
-INSERT INTO `item_mods` VALUES (16974,431,2);   -- Additional effect: EVASION_DOWN (Type DEBUFF)dotanuki 16974
+INSERT INTO `item_mods` VALUES (16974,431,2);   -- Dotanuki (Additional effect: Evasion Down)
 INSERT INTO `item_mods` VALUES (16974,499,18);  -- Additional effect animation (subEffect) xi.subEffect.EVASION_DOWN
 INSERT INTO `item_mods` VALUES (16974,501,30);  -- Additional effect Chance 30%
-INSERT INTO `item_mods` VALUES (16974,951,148);   -- Additional effect Status ID xi.effect.EVASION_DOWN
-INSERT INTO `item_mods` VALUES (16974,952,10);   -- Additional effect Status Potency 10
+INSERT INTO `item_mods` VALUES (16974,951,148); -- Additional effect Status ID xi.effect.EVASION_DOWN
+INSERT INTO `item_mods` VALUES (16974,952,10);  -- Additional effect Status Potency 10
 INSERT INTO `item_mods` VALUES (16974,953,30);  -- Additional effect Status Duration 30sec
 INSERT INTO `item_mods` VALUES (16977,8,4);
 INSERT INTO `item_mods` VALUES (16977,10,4);
 INSERT INTO `item_mods` VALUES (16980,23,7);
 INSERT INTO `item_mods` VALUES (16980,288,1);
-INSERT INTO `item_mods` VALUES (16986,431,1);   -- Additional effect: Fire Damage (Type DAMAGE)--homura +1 16986
+INSERT INTO `item_mods` VALUES (16986,431,1);   -- Homura +1 (Additional effect: Fire Damage) 
 INSERT INTO `item_mods` VALUES (16986,499,1);   -- Additional effect animation (subEffect)
-INSERT INTO `item_mods` VALUES (16986,500,23);   -- Additional effect damage
+INSERT INTO `item_mods` VALUES (16986,500,23);  -- Additional effect damage
 INSERT INTO `item_mods` VALUES (16986,501,10);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (16986,950,1);   -- Additional effect element Fire (xi.magic.element)
 INSERT INTO `item_mods` VALUES (16990,8,3);
@@ -20792,15 +20792,15 @@ INSERT INTO `item_mods` VALUES (17065,2,18);
 INSERT INTO `item_mods` VALUES (17067,2,18);
 INSERT INTO `item_mods` VALUES (17067,13,1);
 INSERT INTO `item_mods` VALUES (17067,14,1);
-INSERT INTO `item_mods` VALUES (17069,431,2);   -- Additional effect: Flash (Type DEBUFF)moepapa_mace 17069
+INSERT INTO `item_mods` VALUES (17069,431,2);   -- Moepapa Mace (Additional effect: Flash)
 INSERT INTO `item_mods` VALUES (17069,499,12);  -- Additional effect animation (subEffect) xi.subEffect.Blind
 INSERT INTO `item_mods` VALUES (17069,501,10);  -- Additional effect Chance 10%
-INSERT INTO `item_mods` VALUES (17069,951,155);   -- Additional effect Status ID xi.effect.Flash
+INSERT INTO `item_mods` VALUES (17069,951,155); -- Additional effect Status ID xi.effect.Flash
 INSERT INTO `item_mods` VALUES (17069,953,12);  -- Additional effect Status Duration 3sec
 INSERT INTO `item_mods` VALUES (17070,2,21);
-INSERT INTO `item_mods` VALUES (17071,431,1);   -- Additional effect: lightning Damage (Type DAMAGE)--heat_rod 17071
+INSERT INTO `item_mods` VALUES (17071,431,1);   -- Head Rod Additional effect: lightning Damage 
 INSERT INTO `item_mods` VALUES (17071,499,5);   -- Additional effect animation (subEffect)
-INSERT INTO `item_mods` VALUES (17071,500,20);   -- Additional effect damage
+INSERT INTO `item_mods` VALUES (17071,500,20);  -- Additional effect damage
 INSERT INTO `item_mods` VALUES (17071,501,10);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (17071,950,5);   -- Additional effect element lightning (xi.magic.element)
 INSERT INTO `item_mods` VALUES (17072,5,10);
@@ -20809,9 +20809,9 @@ INSERT INTO `item_mods` VALUES (17073,12,10);
 INSERT INTO `item_mods` VALUES (17073,13,10);
 INSERT INTO `item_mods` VALUES (17074,511,30);    -- Chocobo Wand: Chocobo riding time +30
 INSERT INTO `item_mods` VALUES (17075,2,27);
-INSERT INTO `item_mods` VALUES (17076,431,1);   -- Additional effect: earth Damage (Type DAMAGE)--earth_wand 17076
+INSERT INTO `item_mods` VALUES (17076,431,1);   -- Earth Wand (Additional effect: earth Damage)
 INSERT INTO `item_mods` VALUES (17076,499,4);   -- Additional effect animation (subEffect)
-INSERT INTO `item_mods` VALUES (17076,500,20);   -- Additional effect damage
+INSERT INTO `item_mods` VALUES (17076,500,20);  -- Additional effect damage
 INSERT INTO `item_mods` VALUES (17076,501,10);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (17076,950,4);   -- Additional effect element earth (xi.magic.element)
 INSERT INTO `item_mods` VALUES (17077,112,15);    -- Beneficus: Healing magic skill +15
@@ -20825,11 +20825,11 @@ INSERT INTO `item_mods` VALUES (17079,10,3);      -- VIT +3
 INSERT INTO `item_mods` VALUES (17079,170,2);     -- Fast Cast +2%
 INSERT INTO `item_mods` VALUES (17080,13,2);
 INSERT INTO `item_mods` VALUES (17080,22,3);      -- DARKRES
-INSERT INTO `item_mods` VALUES (17080,431,1);   -- Additional effect: Light Damage (Type DAMAGE)--holy_maul 17080
+INSERT INTO `item_mods` VALUES (17080,431,1);   -- Holy Maul (Additional effect: Light Damage) 
 INSERT INTO `item_mods` VALUES (17080,499,7);   -- Additional effect animation (subEffect)
-INSERT INTO `item_mods` VALUES (17080,500,21);   -- Additional effect damage
-INSERT INTO `item_mods` VALUES (17080,501,5);  -- Additional effect Chance 5%
-INSERT INTO `item_mods` VALUES (17080,950,7);  -- Additional effect element Light (xi.magic.element)
+INSERT INTO `item_mods` VALUES (17080,500,21);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (17080,501,5);   -- Additional effect Chance 5%
+INSERT INTO `item_mods` VALUES (17080,950,7);   -- Additional effect element Light (xi.magic.element)
 INSERT INTO `item_mods` VALUES (17081,2,3);
 INSERT INTO `item_mods` VALUES (17081,12,1);
 INSERT INTO `item_mods` VALUES (17082,5,5);
@@ -20867,21 +20867,21 @@ INSERT INTO `item_mods` VALUES (17113,160,1000);   -- owleyes Damage Taken +10%
 INSERT INTO `item_mods` VALUES (17113,369,1);    -- Refresh+1
 INSERT INTO `item_mods` VALUES (17114,13,3);
 INSERT INTO `item_mods` VALUES (17114,22,4);     -- DARKRES
-INSERT INTO `item_mods` VALUES (17114,431,1);   -- Additional effect: Light Damage (Type DAMAGE)--holy_maul +1 17114
-INSERT INTO `item_mods` VALUES (17114,499,7);   -- Additional effect animation (subEffect)
+INSERT INTO `item_mods` VALUES (17114,431,1);    -- Holy Maul +1 (Additional effect: Light Damage) 
+INSERT INTO `item_mods` VALUES (17114,499,7);    -- Additional effect animation (subEffect)
 INSERT INTO `item_mods` VALUES (17114,500,21);   -- Additional effect damage
-INSERT INTO `item_mods` VALUES (17114,501,10);  -- Additional effect Chance 10%
-INSERT INTO `item_mods` VALUES (17114,950,7);  -- Additional effect element Light (xi.magic.element)
-INSERT INTO `item_mods` VALUES (17116,431,2);   -- Additional effect: Curse (Type DEBUFF)misery_staff 17116
-INSERT INTO `item_mods` VALUES (17116,499,17);  -- Additional effect animation (subEffect) xi.subEffect.Curse
-INSERT INTO `item_mods` VALUES (17116,501,10);  -- Additional effect Chance 10%
-INSERT INTO `item_mods` VALUES (17116,951,9);   -- Additional effect Status ID xi.effect.Curse
-INSERT INTO `item_mods` VALUES (17116,953,30);  -- Additional effect Status Duration 30sec
-INSERT INTO `item_mods` VALUES (17117,431,2);   -- Additional effect: Sleep (Type DEBUFF)hypno_staff 17117
-INSERT INTO `item_mods` VALUES (17117,499,9);  -- Additional effect animation (subEffect) xi.subEffect.Sleep
-INSERT INTO `item_mods` VALUES (17117,501,10);  -- Additional effect Chance 10%
-INSERT INTO `item_mods` VALUES (17117,951,2);   -- Additional effect Status ID xi.effect.Sleep
-INSERT INTO `item_mods` VALUES (17117,953,25);  -- Additional effect Status Duration 25sec
+INSERT INTO `item_mods` VALUES (17114,501,10);   -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (17114,950,7);    -- Additional effect element Light (xi.magic.element)
+INSERT INTO `item_mods` VALUES (17116,431,2);    -- Misery Staff (Additional effect: Curse)
+INSERT INTO `item_mods` VALUES (17116,499,17);   -- Additional effect animation (subEffect) xi.subEffect.Curse
+INSERT INTO `item_mods` VALUES (17116,501,10);   -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (17116,951,9);    -- Additional effect Status ID xi.effect.Curse
+INSERT INTO `item_mods` VALUES (17116,953,30);   -- Additional effect Status Duration 30sec
+INSERT INTO `item_mods` VALUES (17117,431,2);    -- Hypno Staff (Additional effect: Sleep)
+INSERT INTO `item_mods` VALUES (17117,499,9);    -- Additional effect animation (subEffect) xi.subEffect.Sleep
+INSERT INTO `item_mods` VALUES (17117,501,10);   -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (17117,951,2);    -- Additional effect Status ID xi.effect.Sleep
+INSERT INTO `item_mods` VALUES (17117,953,25);   -- Additional effect Status Duration 25sec
 INSERT INTO `item_mods` VALUES (17118,11,4);     -- littus_+1 AGI+4
 INSERT INTO `item_mods` VALUES (17118,12,4);     -- INT+4
 INSERT INTO `item_mods` VALUES (17123,2,3);
@@ -20911,11 +20911,11 @@ INSERT INTO `item_mods` VALUES (17133,119,4);
 INSERT INTO `item_mods` VALUES (17134,2,7);
 INSERT INTO `item_mods` VALUES (17134,5,7);
 INSERT INTO `item_mods` VALUES (17134,20,6); -- WATER_RES
-INSERT INTO `item_mods` VALUES (17134,431,1);   -- Additional effect: water Damage (Type DAMAGE)--dolphin_staff 17134
+INSERT INTO `item_mods` VALUES (17134,431,1);   -- Dolphin Staff (Additional effect: water Damage)
 INSERT INTO `item_mods` VALUES (17134,499,6);   -- Additional effect animation (subEffect)
-INSERT INTO `item_mods` VALUES (17134,500,10);   -- Additional effect damage
-INSERT INTO `item_mods` VALUES (17134,501,5);  -- Additional effect Chance 5%
-INSERT INTO `item_mods` VALUES (17134,950,6);  -- Additional effect element water (xi.magic.element)
+INSERT INTO `item_mods` VALUES (17134,500,10);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (17134,501,5);   -- Additional effect Chance 5%
+INSERT INTO `item_mods` VALUES (17134,950,6);   -- Additional effect element water (xi.magic.element)
 INSERT INTO `item_mods` VALUES (17135,2,9);
 INSERT INTO `item_mods` VALUES (17135,5,9);
 INSERT INTO `item_mods` VALUES (17135,16,10); -- ICE_RES
@@ -21080,7 +21080,7 @@ INSERT INTO `item_mods` VALUES (17294,22,4); -- DARK_RES
 INSERT INTO `item_mods` VALUES (17295,26,10);
 INSERT INTO `item_mods` VALUES (17300,26,10);
 INSERT INTO `item_mods` VALUES (17317,26,15);
-INSERT INTO `item_mods` VALUES (17325,431,2);   -- Additional effect: Silence (Type DEBUFF)kabura_arrow 17325
+INSERT INTO `item_mods` VALUES (17325,431,2);   -- Kabura Arrow (Additional effect: Silence)
 INSERT INTO `item_mods` VALUES (17325,499,13);  -- Additional effect animation (subEffect) xi.subEffect.SILENCE
 INSERT INTO `item_mods` VALUES (17325,501,95);  -- Additional effect Chance 75%
 INSERT INTO `item_mods` VALUES (17325,951,6);   -- Additional effect Status ID xi.effect.SILENCE
@@ -21091,7 +21091,7 @@ INSERT INTO `item_mods` VALUES (17328,24,20);
 INSERT INTO `item_mods` VALUES (17328,26,10);
 INSERT INTO `item_mods` VALUES (17329,24,10);    -- Ranged Attack+10
 INSERT INTO `item_mods` VALUES (17329,26,40);
-INSERT INTO `item_mods` VALUES (17329,431,2);   -- Additional effect: PARALYSIS (Type DEBUFF)patriarch_protectors_arrow 17329
+INSERT INTO `item_mods` VALUES (17329,431,2);   -- Patriarch Protectors Arrow (Additional effect: PARALYSIS)
 INSERT INTO `item_mods` VALUES (17329,499,11);  -- Additional effect animation (subEffect) xi.subEffect.PARALYSIS
 INSERT INTO `item_mods` VALUES (17329,501,95);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (17329,951,4);   -- Additional effect Status ID xi.effect.PARALYSIS
@@ -21157,11 +21157,11 @@ INSERT INTO `item_mods` VALUES (17413,168,25);    -- Spell interruption rate dow
 INSERT INTO `item_mods` VALUES (17414,25,5);
 INSERT INTO `item_mods` VALUES (17414,21,3); -- LIGHT_RES
 INSERT INTO `item_mods` VALUES (17414,22,3); -- DARK_RES
-INSERT INTO `item_mods` VALUES (17414,431,1);   -- Additional effect: Light Damage (Type DAMAGE)--pixie_mace 17414
+INSERT INTO `item_mods` VALUES (17414,431,1);   -- Pixie Mace (Additional effect: Light Damage) 
 INSERT INTO `item_mods` VALUES (17414,499,7);   -- Additional effect animation (subEffect)
-INSERT INTO `item_mods` VALUES (17414,500,11);   -- Additional effect damage
+INSERT INTO `item_mods` VALUES (17414,500,11);  -- Additional effect damage
 INSERT INTO `item_mods` VALUES (17414,501,10);  -- Additional effect Chance 10%
-INSERT INTO `item_mods` VALUES (17414,950,7);  -- Additional effect element Light (xi.magic.element)
+INSERT INTO `item_mods` VALUES (17414,950,7);   -- Additional effect element Light (xi.magic.element)
 INSERT INTO `item_mods` VALUES (17415,2,7);
 INSERT INTO `item_mods` VALUES (17415,14,4);
 INSERT INTO `item_mods` VALUES (17417,3,1);
@@ -21294,7 +21294,7 @@ INSERT INTO `item_mods` VALUES (17484,951,10);  -- Additional effect Status ID x
 INSERT INTO `item_mods` VALUES (17484,952,10);  -- Additional effect Status Potency 10
 INSERT INTO `item_mods` VALUES (17484,953,5);   -- Additional effect Status Duration 5sec
 
-INSERT INTO `item_mods` VALUES (17485,15,6);  -- FIRE_RES
+INSERT INTO `item_mods` VALUES (17485,15,6);    -- FIRE_RES
 INSERT INTO `item_mods` VALUES (17486,431,2);   -- Stun claws +1 (Additional effect: "Stun")
 INSERT INTO `item_mods` VALUES (17486,499,16);  -- Additional effect animation (subEffect) xi.subEffect.STUN
 INSERT INTO `item_mods` VALUES (17486,501,10);  -- Additional effect Chance 10%
@@ -21312,11 +21312,11 @@ INSERT INTO `item_mods` VALUES (17491,25,2);
 -- Shiva's Claws
 INSERT INTO `item_mods` VALUES (17492,12,3);
 INSERT INTO `item_mods` VALUES (17492,25,8);
-INSERT INTO `item_mods` VALUES (17492,431,2);   -- Additional effect: PARALYSIS (Type DEBUFF)shvia_claws 17492
+INSERT INTO `item_mods` VALUES (17492,431,2);   -- (Additional effect: PARALYSIS)
 INSERT INTO `item_mods` VALUES (17492,499,11);  -- Additional effect animation (subEffect) xi.subEffect.PARALYSIS
 INSERT INTO `item_mods` VALUES (17492,501,10);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (17492,951,4);   -- Additional effect Status ID xi.effect.PARALYSIS
-INSERT INTO `item_mods` VALUES (17492,952,10);   -- Additional effect Status Potency 10
+INSERT INTO `item_mods` VALUES (17492,952,10);  -- Additional effect Status Potency 10
 INSERT INTO `item_mods` VALUES (17492,953,30);  -- Additional effect Status Duration 30sec
 
 INSERT INTO `item_mods` VALUES (17493,25,10);
@@ -21360,9 +21360,9 @@ INSERT INTO `item_mods` VALUES (17507,18,10); -- EARTH_RES
 INSERT INTO `item_mods` VALUES (17507,20,10); -- WATER_RES
 INSERT INTO `item_mods` VALUES (17508,241,2);
 INSERT INTO `item_mods` VALUES (17509,377,13);
-INSERT INTO `item_mods` VALUES (17510,431,5);   -- Additional effect: HP DRAIN (Type DEBUFF)vampiric_claws 17510
+INSERT INTO `item_mods` VALUES (17510,431,5);   -- Vampiric Claws (Additional effect: HP DRAIN)
 INSERT INTO `item_mods` VALUES (17510,499,21);  -- Additional effect animation (subEffect) xi.subEffect.HP_Drain
-INSERT INTO `item_mods` VALUES (17510,500,15);   -- Additional effect damage
+INSERT INTO `item_mods` VALUES (17510,500,15);  -- Additional effect damage
 INSERT INTO `item_mods` VALUES (17510,501,10);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (17510,950,8);   -- Additional effect element Darkness (xi.magic.element)
 INSERT INTO `item_mods` VALUES (17511,302,1);
@@ -21393,19 +21393,19 @@ INSERT INTO `item_mods` VALUES (17532,5,20);
 INSERT INTO `item_mods` VALUES (17533,2,14);
 INSERT INTO `item_mods` VALUES (17533,5,7);
 INSERT INTO `item_mods` VALUES (17533,20,7); -- WATER_RES
-INSERT INTO `item_mods` VALUES (17533,431,1);   -- Additional effect: water Damage (Type DAMAGE)--whale_staff 17533
+INSERT INTO `item_mods` VALUES (17533,431,1);   -- Whale Staff (Additional effect: water Damage)
 INSERT INTO `item_mods` VALUES (17533,499,6);   -- Additional effect animation (subEffect)
-INSERT INTO `item_mods` VALUES (17533,500,10);   -- Additional effect damage
-INSERT INTO `item_mods` VALUES (17533,501,5);  -- Additional effect Chance 10%
-INSERT INTO `item_mods` VALUES (17533,950,6);  -- Additional effect element water (xi.magic.element)
+INSERT INTO `item_mods` VALUES (17533,500,10);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (17533,501,5);   -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (17533,950,6);   -- Additional effect element water (xi.magic.element)
 INSERT INTO `item_mods` VALUES (17534,2,15);
 INSERT INTO `item_mods` VALUES (17534,5,7);
 INSERT INTO `item_mods` VALUES (17534,20,8); -- WATER_RES
-INSERT INTO `item_mods` VALUES (17534,431,1);   -- Additional effect: water Damage (Type DAMAGE)--whale_staff +1 17534
+INSERT INTO `item_mods` VALUES (17534,431,1);   -- Whale Staff +1 (Additional effect: water Damage)
 INSERT INTO `item_mods` VALUES (17534,499,6);   -- Additional effect animation (subEffect)
-INSERT INTO `item_mods` VALUES (17534,500,10);   -- Additional effect damage
+INSERT INTO `item_mods` VALUES (17534,500,10);  -- Additional effect damage
 INSERT INTO `item_mods` VALUES (17534,501,10);  -- Additional effect Chance 10%
-INSERT INTO `item_mods` VALUES (17534,950,6);  -- Additional effect element water (xi.magic.element)
+INSERT INTO `item_mods` VALUES (17534,950,6);   -- Additional effect element water (xi.magic.element)
 INSERT INTO `item_mods` VALUES (17535,23,3);
 INSERT INTO `item_mods` VALUES (17536,23,5);
 INSERT INTO `item_mods` VALUES (17537,2,6);
@@ -21750,11 +21750,11 @@ INSERT INTO `item_mods` VALUES (17626,259,5);
 INSERT INTO `item_mods` VALUES (17626,289,10);
 INSERT INTO `item_mods` VALUES (17627,11,3);
 INSERT INTO `item_mods` VALUES (17627,23,7);
-INSERT INTO `item_mods` VALUES (17627,431,2);   -- Additional effect: Silence (Type DEBUFF)garudas_dagger 17627
+INSERT INTO `item_mods` VALUES (17627,431,2);   -- Garudas Dagger (Additional effect: Silence)
 INSERT INTO `item_mods` VALUES (17627,499,13);  -- Additional effect animation (subEffect) xi.subEffect.SILENCE
 INSERT INTO `item_mods` VALUES (17627,501,10);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (17627,951,6);   -- Additional effect Status ID xi.effect.SILENCE
-INSERT INTO `item_mods` VALUES (17627,952,10);   -- Additional effect Status Potency 1
+INSERT INTO `item_mods` VALUES (17627,952,10);  -- Additional effect Status Potency 1
 INSERT INTO `item_mods` VALUES (17627,953,30);  -- Additional effect Status Duration 30sec
 INSERT INTO `item_mods` VALUES (17628,2,25);
 INSERT INTO `item_mods` VALUES (17628,23,8);
@@ -21783,7 +21783,7 @@ INSERT INTO `item_mods` VALUES (17647,25,3);
 INSERT INTO `item_mods` VALUES (17647,110,5);
 INSERT INTO `item_mods` VALUES (17648,13,1);
 INSERT INTO `item_mods` VALUES (17650,20,3); -- WATER_RES
-INSERT INTO `item_mods` VALUES (17650,431,2);   -- Additional effect: Poison(Type DEBUFF)nadrs 17650
+INSERT INTO `item_mods` VALUES (17650,431,2);   -- Nadrs (Additional effect: Poison)
 INSERT INTO `item_mods` VALUES (17650,499,10);  -- Additional effect animation (subEffect) xi.subEffect.Poison
 INSERT INTO `item_mods` VALUES (17650,501,10);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (17650,951,3);   -- Additional effect Status ID xi.effect.Poison
@@ -21833,11 +21833,11 @@ INSERT INTO `item_mods` VALUES (17676,23,12);
 INSERT INTO `item_mods` VALUES (17677,23,12);
 INSERT INTO `item_mods` VALUES (17678,2,4);
 INSERT INTO `item_mods` VALUES (17679,2,6);
-INSERT INTO `item_mods` VALUES (17682,431,1);   -- Additional effect: Light Damage (Type DAMAGE)--sacred_sword 17682
+INSERT INTO `item_mods` VALUES (17682,431,1);   -- Sacred Sword (Additional effect: Light Damage) 
 INSERT INTO `item_mods` VALUES (17682,499,7);   -- Additional effect animation (subEffect)
-INSERT INTO `item_mods` VALUES (17682,500,21);   -- Additional effect damage
-INSERT INTO `item_mods` VALUES (17682,501,5);  -- Additional effect Chance 5%
-INSERT INTO `item_mods` VALUES (17682,950,7);  -- Additional effect element Light (xi.magic.element)
+INSERT INTO `item_mods` VALUES (17682,500,21);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (17682,501,5);   -- Additional effect Chance 5%
+INSERT INTO `item_mods` VALUES (17682,950,7);   -- Additional effect element Light (xi.magic.element)
 INSERT INTO `item_mods` VALUES (17690,110,5);
 INSERT INTO `item_mods` VALUES (17691,110,6);
 INSERT INTO `item_mods` VALUES (17693,27,1);
@@ -21845,11 +21845,11 @@ INSERT INTO `item_mods` VALUES (17694,8,1);
 INSERT INTO `item_mods` VALUES (17694,13,6);
 INSERT INTO `item_mods` VALUES (17695,8,3);
 INSERT INTO `item_mods` VALUES (17695,13,3);
-INSERT INTO `item_mods` VALUES (17695,431,2);   -- Additional effect: EVASION_DOWN (Type DEBUFF)bayards_sword 17695
+INSERT INTO `item_mods` VALUES (17695,431,2);   -- Bayards Sword (Additional effect: Evasion Down)
 INSERT INTO `item_mods` VALUES (17695,499,18);  -- Additional effect animation (subEffect) xi.subEffect.EVASION_DOWN
 INSERT INTO `item_mods` VALUES (17695,501,10);  -- Additional effect Chance 10%
-INSERT INTO `item_mods` VALUES (17695,951,148);   -- Additional effect Status ID xi.effect.EVASION_DOWN
-INSERT INTO `item_mods` VALUES (17695,952,10);   -- Additional effect Status Potency 10
+INSERT INTO `item_mods` VALUES (17695,951,148); -- Additional effect Status ID xi.effect.EVASION_DOWN
+INSERT INTO `item_mods` VALUES (17695,952,10);  -- Additional effect Status Potency 10
 INSERT INTO `item_mods` VALUES (17695,953,60);  -- Additional effect Status Duration 60sec
 INSERT INTO `item_mods` VALUES (17696,9,1);
 INSERT INTO `item_mods` VALUES (17696,432,2);    -- Sword enhancement spell damage +2
@@ -21868,10 +21868,10 @@ INSERT INTO `item_mods` VALUES (17702,109,-3);
 INSERT INTO `item_mods` VALUES (17703,2,10);
 INSERT INTO `item_mods` VALUES (17703,9,2);
 INSERT INTO `item_mods` VALUES (17703,10,2);
-INSERT INTO `item_mods` VALUES (17704,431,1);   -- Additional effect: Fire Damage (Type DAMAGE)--vulcan_sword 17704
+INSERT INTO `item_mods` VALUES (17704,431,1);   -- Vulcan Sword (Additional effect: Fire Damage) 
 INSERT INTO `item_mods` VALUES (17704,499,1);   -- Additional effect animation (subEffect)
-INSERT INTO `item_mods` VALUES (17704,500,10);   -- Additional effect damage
-INSERT INTO `item_mods` VALUES (17704,501,5);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (17704,500,10);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (17704,501,5);   -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (17704,950,1);   -- Additional effect element Fire (xi.magic.element)
 INSERT INTO `item_mods` VALUES (17707,345,1000);  -- Martial Anelace: TP Bonus +1000
 INSERT INTO `item_mods` VALUES (17708,25,2);
@@ -21976,17 +21976,17 @@ INSERT INTO `item_mods` VALUES (17760,11,2);
 INSERT INTO `item_mods` VALUES (17760,68,2);
 INSERT INTO `item_mods` VALUES (17762,366,4);
 INSERT INTO `item_mods` VALUES (17763,366,6);
-INSERT INTO `item_mods` VALUES (17768,431,2);   -- Additional effect: DEFENSE_DOWN (Type DEBUFF)yoto +1 17768
+INSERT INTO `item_mods` VALUES (17768,431,2);   -- Yoto +1 (Additional effect: DEFENSE_DOWN)
 INSERT INTO `item_mods` VALUES (17768,499,18);  -- Additional effect animation (subEffect) xi.subEffect.DEFENSE_DOWN
 INSERT INTO `item_mods` VALUES (17768,501,15);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (17768,951,149); -- Additional effect Status ID xi.effect.DEFENSE_DOWN
 INSERT INTO `item_mods` VALUES (17768,952,12);  -- Additional effect Status Potency 12
 INSERT INTO `item_mods` VALUES (17768,953,60);  -- Additional effect Status Duration 60sec
-INSERT INTO `item_mods` VALUES (17770,431,2);   -- Additional effect: Stun (Type DEBUFF)mamushito +1 17770
+INSERT INTO `item_mods` VALUES (17770,431,2);   -- Mamushito +1 (Additional effect: Stun)
 INSERT INTO `item_mods` VALUES (17770,499,16);  -- Additional effect animation (subEffect) xi.subEffect.STUN
 INSERT INTO `item_mods` VALUES (17770,501,10);  -- Additional effect Chance 10%
-INSERT INTO `item_mods` VALUES (17770,951,10); -- Additional effect Status ID xi.effect.STUN
-INSERT INTO `item_mods` VALUES (17770,953,3);  -- Additional effect Status Duration 3sec
+INSERT INTO `item_mods` VALUES (17770,951,10);  -- Additional effect Status ID xi.effect.STUN
+INSERT INTO `item_mods` VALUES (17770,953,3);   -- Additional effect Status Duration 3sec
 INSERT INTO `item_mods` VALUES (17771,8,-1);
 INSERT INTO `item_mods` VALUES (17771,9,2);
 INSERT INTO `item_mods` VALUES (17772,8,2);
@@ -21995,11 +21995,11 @@ INSERT INTO `item_mods` VALUES (17773,2,20);
 INSERT INTO `item_mods` VALUES (17773,15,10); -- FIRE_RES
 INSERT INTO `item_mods` VALUES (17773,21,10); -- LIGHT_RES
 INSERT INTO `item_mods` VALUES (17774,68,3);
---INSERT INTO `item_mods` VALUES (17774,431,1);   -- Additional effect: Light Damage (Type DAMAGE)--shiranui 17774
+--INSERT INTO `item_mods` VALUES (17774,431,1);   -- Shiranui (Additional effect: Light Damage) 
 --INSERT INTO `item_mods` VALUES (17774,499,7);   -- Additional effect animation (subEffect)
---INSERT INTO `item_mods` VALUES (17774,500,11);   -- Additional effect damage
+--INSERT INTO `item_mods` VALUES (17774,500,11);  -- Additional effect damage
 --INSERT INTO `item_mods` VALUES (17774,501,15);  -- Additional effect Chance 10% -- Nightime only
---INSERT INTO `item_mods` VALUES (17774,950,7);  -- Additional effect element Light (xi.magic.element)
+--INSERT INTO `item_mods` VALUES (17774,950,7);   -- Additional effect element Light (xi.magic.element)
 INSERT INTO `item_mods` VALUES (17775,8,1);
 INSERT INTO `item_mods` VALUES (17775,11,1);
 INSERT INTO `item_mods` VALUES (17787,8,1);
@@ -22019,7 +22019,7 @@ INSERT INTO `item_mods` VALUES (17793,377,13);
 INSERT INTO `item_mods` VALUES (17794,288,1);
 INSERT INTO `item_mods` VALUES (17795,110,3);
 INSERT INTO `item_mods` VALUES (17796,110,5);
-INSERT INTO `item_mods` VALUES (17797,431,2);   -- Additional effect: Silence (Type DEBUFF)seito 17797
+INSERT INTO `item_mods` VALUES (17797,431,2);   -- Seito (Additional effect: Silence)
 INSERT INTO `item_mods` VALUES (17797,499,13);  -- Additional effect animation (subEffect) xi.subEffect.SILENCE
 INSERT INTO `item_mods` VALUES (17797,501,10);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (17797,951,6);   -- Additional effect Status ID xi.effect.SILENCE
@@ -22057,10 +22057,10 @@ INSERT INTO `item_mods` VALUES (17823,11,1);
 INSERT INTO `item_mods` VALUES (17823,12,-1);
 INSERT INTO `item_mods` VALUES (17824,8,2);
 INSERT INTO `item_mods` VALUES (17826,14,2);
-INSERT INTO `item_mods` VALUES (17828,431,1);   -- Additional effect: Fire Damage (Type DAMAGE)--koen 17828
+INSERT INTO `item_mods` VALUES (17828,431,1);   -- Koen (Additional effect: Fire Damage) 
 INSERT INTO `item_mods` VALUES (17828,499,1);   -- Additional effect animation (subEffect)
-INSERT INTO `item_mods` VALUES (17828,500,19);   -- Additional effect damage
-INSERT INTO `item_mods` VALUES (17828,501,5);  -- Additional effect Chance 5%
+INSERT INTO `item_mods` VALUES (17828,500,19);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (17828,501,5);   -- Additional effect Chance 5%
 INSERT INTO `item_mods` VALUES (17828,950,1);   -- Additional effect element Fire (xi.magic.element)
 INSERT INTO `item_mods` VALUES (17829,345,1000);  -- Hagun: TP Bonus +1000
 INSERT INTO `item_mods` VALUES (17832,2,20);
@@ -22223,7 +22223,7 @@ INSERT INTO `item_mods` VALUES (18008,501,10);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (18008,951,6);   -- Additional effect Status ID xi.effect.SILENCE
 INSERT INTO `item_mods` VALUES (18008,952,5);   -- Additional effect Status Potency 5
 INSERT INTO `item_mods` VALUES (18008,953,30);  -- Additional effect Status Duration 30sec
-INSERT INTO `item_mods` VALUES (18009,345,1000);  -- Martial Knife: TP Bonus +1000
+INSERT INTO `item_mods` VALUES (18009,345,1000);-- Martial Knife: TP Bonus +1000
 INSERT INTO `item_mods` VALUES (18010,431,2);   -- Melt Dagger (Additional effect: Weakens defense)
 INSERT INTO `item_mods` VALUES (18010,499,18);  -- Additional effect animation (subEffect) xi.subEffect.DEFENSE_DOWN
 INSERT INTO `item_mods` VALUES (18010,501,10);  -- Additional effect Chance 10%
@@ -22252,7 +22252,7 @@ INSERT INTO `item_mods` VALUES (18013,953,60);  -- Additional effect Status Dura
 -- Sirocco Kukri
 INSERT INTO `item_mods` VALUES (18018,16,-7);   -- ICE_RES
 INSERT INTO `item_mods` VALUES (18018,17,7);    -- WIND_RES
-INSERT INTO `item_mods` VALUES (18018,431,1);   -- Additional effect: Wind Damage (Type DAMAGE)
+INSERT INTO `item_mods` VALUES (18018,431,1);   -- Additional effect: Wind Damage 
 INSERT INTO `item_mods` VALUES (18018,499,3);   -- Additional effect animation (subEffect)
 INSERT INTO `item_mods` VALUES (18018,500,9);   -- Additional effect damage
 INSERT INTO `item_mods` VALUES (18018,501,100); -- Additional effect Chance 100%
@@ -22283,21 +22283,21 @@ INSERT INTO `item_mods` VALUES (18032,2,15);
 INSERT INTO `item_mods` VALUES (18032,68,4);
 INSERT INTO `item_mods` VALUES (18032,241,2);
 INSERT INTO `item_mods` VALUES (18032,246,2);
-INSERT INTO `item_mods` VALUES (18032,431,2);   -- Additional effect: EVASION_DOWN (Type DEBUFF)adder_jambiya 18032
+INSERT INTO `item_mods` VALUES (18032,431,2);   -- Adder Jambiya (Additional effect: Evasion Down)
 INSERT INTO `item_mods` VALUES (18032,499,18);  -- Additional effect animation (subEffect) xi.subEffect.EVASION_DOWN
 INSERT INTO `item_mods` VALUES (18032,501,10);  -- Additional effect Chance 10%
-INSERT INTO `item_mods` VALUES (18032,951,148);   -- Additional effect Status ID xi.effect.EVASION_DOWN
-INSERT INTO `item_mods` VALUES (18032,952,10);   -- Additional effect Status Potency 10
+INSERT INTO `item_mods` VALUES (18032,951,148); -- Additional effect Status ID xi.effect.EVASION_DOWN
+INSERT INTO `item_mods` VALUES (18032,952,10);  -- Additional effect Status Potency 10
 INSERT INTO `item_mods` VALUES (18032,953,60);  -- Additional effect Status Duration 60sec
 INSERT INTO `item_mods` VALUES (18033,2,20);
 INSERT INTO `item_mods` VALUES (18033,68,5);
 INSERT INTO `item_mods` VALUES (18033,241,3);
 INSERT INTO `item_mods` VALUES (18033,246,3);
-INSERT INTO `item_mods` VALUES (18033,431,2);   -- Additional effect: EVASION_DOWN (Type DEBUFF)adder_jambiya +1 18033
+INSERT INTO `item_mods` VALUES (18033,431,2);   -- Adder Jambiya +1 (Additional effect: Evasion Down)
 INSERT INTO `item_mods` VALUES (18033,499,18);  -- Additional effect animation (subEffect) xi.subEffect.EVASION_DOWN
 INSERT INTO `item_mods` VALUES (18033,501,15);  -- Additional effect Chance 10%
-INSERT INTO `item_mods` VALUES (18033,951,148);   -- Additional effect Status ID xi.effect.EVASION_DOWN
-INSERT INTO `item_mods` VALUES (18033,952,10);   -- Additional effect Status Potency 1
+INSERT INTO `item_mods` VALUES (18033,951,148); -- Additional effect Status ID xi.effect.EVASION_DOWN
+INSERT INTO `item_mods` VALUES (18033,952,10);  -- Additional effect Status Potency 1
 INSERT INTO `item_mods` VALUES (18033,953,60);  -- Additional effect Status Duration 15sec
 INSERT INTO `item_mods` VALUES (18035,23,3);
 INSERT INTO `item_mods` VALUES (18035,25,3);
@@ -22369,10 +22369,10 @@ INSERT INTO `item_mods` VALUES (18097,377,13);
 INSERT INTO `item_mods` VALUES (18098,345,1000);  -- Martial Lance: TP Bonus +1000
 INSERT INTO `item_mods` VALUES (18100,9,7);
 INSERT INTO `item_mods` VALUES (18100,826,2);
-INSERT INTO `item_mods` VALUES (18104,431,1);   -- Additional effect: lightning Damage (Type DAMAGE)--fuscina 18104
+INSERT INTO `item_mods` VALUES (18104,431,1);   -- Fuscina (Additional effect: lightning Damage)
 INSERT INTO `item_mods` VALUES (18104,499,5);   -- Additional effect animation (subEffect)
-INSERT INTO `item_mods` VALUES (18104,500,10);   -- Additional effect damage
-INSERT INTO `item_mods` VALUES (18104,501,5);  -- Additional effect Chance 5%
+INSERT INTO `item_mods` VALUES (18104,500,10);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (18104,501,5);   -- Additional effect Chance 5%
 INSERT INTO `item_mods` VALUES (18104,950,5);   -- Additional effect element lightning (xi.magic.element)
 INSERT INTO `item_mods` VALUES (18105,25,2);
 INSERT INTO `item_mods` VALUES (18105,26,2);
@@ -22384,35 +22384,35 @@ INSERT INTO `item_mods` VALUES (18109,13,8);
 INSERT INTO `item_mods` VALUES (18109,23,8);
 INSERT INTO `item_mods` VALUES (18110,8,2);
 INSERT INTO `item_mods` VALUES (18110,10,2);
-INSERT INTO `item_mods` VALUES (18110,431,2);   -- Additional effect: EVASION_DOWN (Type DEBUFF)mezraq 18110
+INSERT INTO `item_mods` VALUES (18110,431,2);   -- Mezraq (Additional effect: Evasion Down)
 INSERT INTO `item_mods` VALUES (18110,499,18);  -- Additional effect animation (subEffect) xi.subEffect.EVASION_DOWN
 INSERT INTO `item_mods` VALUES (18110,501,10);  -- Additional effect Chance 10%
-INSERT INTO `item_mods` VALUES (18110,951,148);   -- Additional effect Status ID xi.effect.EVASION_DOWN
-INSERT INTO `item_mods` VALUES (18110,952,25);   -- Additional effect Status Potency 25
+INSERT INTO `item_mods` VALUES (18110,951,148); -- Additional effect Status ID xi.effect.EVASION_DOWN
+INSERT INTO `item_mods` VALUES (18110,952,25);  -- Additional effect Status Potency 25
 INSERT INTO `item_mods` VALUES (18110,953,30);  -- Additional effect Status Duration 30sec
 INSERT INTO `item_mods` VALUES (18111,8,3);
 INSERT INTO `item_mods` VALUES (18111,10,3);
-INSERT INTO `item_mods` VALUES (18111,431,2);   -- Additional effect: EVASION_DOWN (Type DEBUFF)mezraq +1 18111
+INSERT INTO `item_mods` VALUES (18111,431,2);   -- Mezraq +1 (Additional effect: Evasion Down)
 INSERT INTO `item_mods` VALUES (18111,499,18);  -- Additional effect animation (subEffect) xi.subEffect.EVASION_DOWN
 INSERT INTO `item_mods` VALUES (18111,501,15);  -- Additional effect Chance 15%
-INSERT INTO `item_mods` VALUES (18111,951,148);   -- Additional effect Status ID xi.effect.EVASION_DOWN
-INSERT INTO `item_mods` VALUES (18111,952,10);   -- Additional effect Status Potency 10
+INSERT INTO `item_mods` VALUES (18111,951,148); -- Additional effect Status ID xi.effect.EVASION_DOWN
+INSERT INTO `item_mods` VALUES (18111,952,10);  -- Additional effect Status Potency 10
 INSERT INTO `item_mods` VALUES (18111,953,30);  -- Additional effect Status Duration 30sec
 INSERT INTO `item_mods` VALUES (18114,73,3);
 INSERT INTO `item_mods` VALUES (18115,25,2);
 INSERT INTO `item_mods` VALUES (18115,73,1);
 INSERT INTO `item_mods` VALUES (18116,25,3);
-INSERT INTO `item_mods` VALUES (18118,431,2);   -- Additional effect: EVASION_DOWN (Type DEBUFF)dark_mezraq 18118
+INSERT INTO `item_mods` VALUES (18118,431,2);   -- Dark Mezraq (Additional effect: Evasion Down)
 INSERT INTO `item_mods` VALUES (18118,499,18);  -- Additional effect animation (subEffect) xi.subEffect.EVASION_DOWN
 INSERT INTO `item_mods` VALUES (18118,501,10);  -- Additional effect Chance 10%
-INSERT INTO `item_mods` VALUES (18118,951,148);   -- Additional effect Status ID xi.effect.EVASION_DOWN
-INSERT INTO `item_mods` VALUES (18118,952,25);   -- Additional effect Status Potency 10
+INSERT INTO `item_mods` VALUES (18118,951,148); -- Additional effect Status ID xi.effect.EVASION_DOWN
+INSERT INTO `item_mods` VALUES (18118,952,25);  -- Additional effect Status Potency 10
 INSERT INTO `item_mods` VALUES (18118,953,30);  -- Additional effect Status Duration 30sec
-INSERT INTO `item_mods` VALUES (18119,431,2);   -- Additional effect: EVASION_DOWN (Type DEBUFF)dark_mezraq +1 18119
+INSERT INTO `item_mods` VALUES (18119,431,2);   -- Dark Mezraq +1 (Additional effect: EVASION_DOWN)
 INSERT INTO `item_mods` VALUES (18119,499,18);  -- Additional effect animation (subEffect) xi.subEffect.EVASION_DOWN
 INSERT INTO `item_mods` VALUES (18119,501,15);  -- Additional effect Chance 15%
-INSERT INTO `item_mods` VALUES (18119,951,148);   -- Additional effect Status ID xi.effect.EVASION_DOWN
-INSERT INTO `item_mods` VALUES (18119,952,10);   -- Additional effect Status Potency 10
+INSERT INTO `item_mods` VALUES (18119,951,148); -- Additional effect Status ID xi.effect.EVASION_DOWN
+INSERT INTO `item_mods` VALUES (18119,952,10);  -- Additional effect Status Potency 10
 INSERT INTO `item_mods` VALUES (18119,953,30);  -- Additional effect Status Duration 30sec
 INSERT INTO `item_mods` VALUES (18121,288,3); -- Valkyrie's fork - "Double Attack"+3%
 INSERT INTO `item_mods` VALUES (18121,73,3); -- Store tp +3
@@ -22423,21 +22423,21 @@ INSERT INTO `item_mods` VALUES (18123,2,10);
 INSERT INTO `item_mods` VALUES (18123,9,2);
 INSERT INTO `item_mods` VALUES (18123,10,2);
 INSERT INTO `item_mods` VALUES (18123,245,2);
-INSERT INTO `item_mods` VALUES (18123,431,2);   -- Additional effect: EVASION_DOWN (Type DEBUFF)thalassocrat 18123
+INSERT INTO `item_mods` VALUES (18123,431,2);   -- Thalassocrat (Additional effect: EVASION_DOWN)
 INSERT INTO `item_mods` VALUES (18123,499,18);  -- Additional effect animation (subEffect) xi.subEffect.EVASION_DOWN
-INSERT INTO `item_mods` VALUES (18123,501,5);  -- Additional effect Chance 5%
-INSERT INTO `item_mods` VALUES (18123,951,148);   -- Additional effect Status ID xi.effect.EVASION_DOWN
-INSERT INTO `item_mods` VALUES (18123,952,25);   -- Additional effect Status Potency 25
+INSERT INTO `item_mods` VALUES (18123,501,5);   -- Additional effect Chance 5%
+INSERT INTO `item_mods` VALUES (18123,951,148); -- Additional effect Status ID xi.effect.EVASION_DOWN
+INSERT INTO `item_mods` VALUES (18123,952,25);  -- Additional effect Status Potency 25
 INSERT INTO `item_mods` VALUES (18123,953,30);  -- Additional effect Status Duration 30sec
 INSERT INTO `item_mods` VALUES (18124,2,12);
 INSERT INTO `item_mods` VALUES (18124,9,3);
 INSERT INTO `item_mods` VALUES (18124,10,3);
 INSERT INTO `item_mods` VALUES (18124,245,3);
-INSERT INTO `item_mods` VALUES (18124,431,2);   -- Additional effect: EVASION_DOWN (Type DEBUFF)thalassocrat +1 18124
+INSERT INTO `item_mods` VALUES (18124,431,2);   -- Thalassocrat +1 (Additional effect: EVASION_DOWN)
 INSERT INTO `item_mods` VALUES (18124,499,18);  -- Additional effect animation (subEffect) xi.subEffect.EVASION_DOWN
 INSERT INTO `item_mods` VALUES (18124,501,10);  -- Additional effect Chance 10%
-INSERT INTO `item_mods` VALUES (18124,951,148);   -- Additional effect Status ID xi.effect.EVASION_DOWN
-INSERT INTO `item_mods` VALUES (18124,952,25);   -- Additional effect Status Potency 25
+INSERT INTO `item_mods` VALUES (18124,951,148); -- Additional effect Status ID xi.effect.EVASION_DOWN
+INSERT INTO `item_mods` VALUES (18124,952,25);  -- Additional effect Status Potency 25
 INSERT INTO `item_mods` VALUES (18124,953,30);  -- Additional effect Status Duration 30sec
 INSERT INTO `item_mods` VALUES (18125,2,15);
 INSERT INTO `item_mods` VALUES (18125,5,15);
@@ -22493,8 +22493,8 @@ INSERT INTO `item_mods` VALUES (18148,501,10);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (18148,951,149); -- Additional effect Status ID xi.effect.DEFENSE_DOWN
 INSERT INTO `item_mods` VALUES (18148,952,12);  -- Additional effect Status Potency 12
 INSERT INTO `item_mods` VALUES (18148,953,60);  -- Additional effect Status Duration 60sec
-INSERT INTO `item_mods` VALUES (18149,431,2);   -- Additional effect: Sleep (Type DEBUFF)Sleep Bolt
-INSERT INTO `item_mods` VALUES (18149,499,9);  -- Additional effect animation (subEffect) xi.subEffect.Sleep
+INSERT INTO `item_mods` VALUES (18149,431,2);   -- Sleep Bolt (Additional effect: Sleep)
+INSERT INTO `item_mods` VALUES (18149,499,9);   -- Additional effect animation (subEffect) xi.subEffect.Sleep
 INSERT INTO `item_mods` VALUES (18149,501,95);  -- Additional effect Chance 75%
 INSERT INTO `item_mods` VALUES (18149,951,2);   -- Additional effect Status ID xi.effect.Sleep
 INSERT INTO `item_mods` VALUES (18149,953,25);  -- Additional effect Status Duration 25sec
@@ -22504,41 +22504,41 @@ INSERT INTO `item_mods` VALUES (18150,501,10);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (18150,951,5);   -- Additional effect Status ID xi.effect.BLINDNESS
 INSERT INTO `item_mods` VALUES (18150,952,10);  -- Additional effect Status Potency 10
 INSERT INTO `item_mods` VALUES (18150,953,30);  -- Additional effect Status Duration 30sec
-INSERT INTO `item_mods` VALUES (18151,431,5);   -- Additional effect: HP DRAIN (Type DEBUFF)Bloody Bolt 18151
+INSERT INTO `item_mods` VALUES (18151,431,5);   -- Bloody Bolt (Additional effect: HP DRAIN)
 INSERT INTO `item_mods` VALUES (18151,499,21);  -- Additional effect animation (subEffect) xi.subEffect.HP_Drain
-INSERT INTO `item_mods` VALUES (18151,500,10);   -- Additional effect damage
+INSERT INTO `item_mods` VALUES (18151,500,10);  -- Additional effect damage
 INSERT INTO `item_mods` VALUES (18151,501,95);  -- Additional effect Chance 95%
 INSERT INTO `item_mods` VALUES (18151,950,8);   -- Additional effect element Darkness (xi.magic.element)
-INSERT INTO `item_mods` VALUES (18152,431,2);   -- Additional effect: Poison (Type DEBUFF)venom bolt 18152
+INSERT INTO `item_mods` VALUES (18152,431,2);   -- Venom Bolt (Additional effect: Poison)
 INSERT INTO `item_mods` VALUES (18152,499,10);  -- Additional effect animation (subEffect) xi.subEffect.poison
 INSERT INTO `item_mods` VALUES (18152,501,95);  -- Additional effect Chance 75%
 INSERT INTO `item_mods` VALUES (18152,951,3);   -- Additional effect Status ID xi.effect.poison
 INSERT INTO `item_mods` VALUES (18152,952,4);   -- Additional effect Status Potency 4
 INSERT INTO `item_mods` VALUES (18152,953,30);  -- Additional effect Status Duration 30sec
-INSERT INTO `item_mods` VALUES (18153,431,1);   -- Additional effect: Light Damage (Type DAMAGE)--holy_bolt 18153
+INSERT INTO `item_mods` VALUES (18153,431,1);   -- Holy Bolt ((Additional effect: Light Damage))
 INSERT INTO `item_mods` VALUES (18153,499,7);   -- Additional effect animation (subEffect)
-INSERT INTO `item_mods` VALUES (18153,500,40);   -- Additional effect damage
-INSERT INTO `item_mods` VALUES (18153,501,100);  -- Additional effect Chance 100%
-INSERT INTO `item_mods` VALUES (18153,950,7);  -- Additional effect element Light (xi.magic.element)
+INSERT INTO `item_mods` VALUES (18153,500,40);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (18153,501,100); -- Additional effect Chance 100%
+INSERT INTO `item_mods` VALUES (18153,950,7);   -- Additional effect element Light (xi.magic.element)
 INSERT INTO `item_mods` VALUES (18154,26,5);
 INSERT INTO `item_mods` VALUES (18155,26,5);
 INSERT INTO `item_mods` VALUES (18156,26,5);
-INSERT INTO `item_mods` VALUES (18157,431,2);   -- Additional effect: Poison (Type DEBUFF)Poison Arrow 18157
+INSERT INTO `item_mods` VALUES (18157,431,2);   -- Poison Arrow (Additional effect: Poison)
 INSERT INTO `item_mods` VALUES (18157,499,10);  -- Additional effect animation (subEffect) xi.subEffect.poison
 INSERT INTO `item_mods` VALUES (18157,501,95);  -- Additional effect Chance 95%
 INSERT INTO `item_mods` VALUES (18157,951,3);   -- Additional effect Status ID xi.effect.poison
 INSERT INTO `item_mods` VALUES (18157,952,4);   -- Additional effect Status Potency 1
 INSERT INTO `item_mods` VALUES (18157,953,30);  -- Additional effect Status Duration 30sec
-INSERT INTO `item_mods` VALUES (18158,431,2);   -- Additional effect: Sleep (Type DEBUFF)Sleep Arrow
+INSERT INTO `item_mods` VALUES (18158,431,2);   -- Sleep Arrow (Additional effect: Sleep)
 INSERT INTO `item_mods` VALUES (18158,499,9);   -- Additional effect animation (subEffect) xi.subEffect.Sleep
 INSERT INTO `item_mods` VALUES (18158,501,95);  -- Additional effect Chance 75%
 INSERT INTO `item_mods` VALUES (18158,951,2);   -- Additional effect Status ID xi.effect.Sleep
 INSERT INTO `item_mods` VALUES (18158,953,25);  -- Additional effect Status Duration 15sec
-INSERT INTO `item_mods` VALUES (18159,431,2);   -- Additional effect: ATTACK_DOWN (Type DEBUFF)demon_arrow 18159
+INSERT INTO `item_mods` VALUES (18159,431,2);   -- Demon Arrow (Additional effect: ATTACK_DOWN)
 INSERT INTO `item_mods` VALUES (18159,499,18);  -- Additional effect animation (subEffect) xi.subEffect.ATTACK_DOWN
 INSERT INTO `item_mods` VALUES (18159,501,95);  -- Additional effect Chance 95%
-INSERT INTO `item_mods` VALUES (18159,951,147);   -- Additional effect Status ID xi.effect.ATTACK_DOWN
-INSERT INTO `item_mods` VALUES (18159,952,12);   -- Additional effect Status Potency 12
+INSERT INTO `item_mods` VALUES (18159,951,147); -- Additional effect Status ID xi.effect.ATTACK_DOWN
+INSERT INTO `item_mods` VALUES (18159,952,12);  -- Additional effect Status Potency 12
 INSERT INTO `item_mods` VALUES (18159,953,60);  -- Additional effect Status Duration 60sec
 
 -- Spartan Bullet
@@ -22605,12 +22605,12 @@ INSERT INTO `item_mods` VALUES (18211,11,-2);
 INSERT INTO `item_mods` VALUES (18212,11,1);
 INSERT INTO `item_mods` VALUES (18213,10,1);
 INSERT INTO `item_mods` VALUES (18213,11,1);
-INSERT INTO `item_mods` VALUES (18220,431,1);   -- Additional effect: Fire Damage (Type DAMAGE)--prominence_axe 18220
+INSERT INTO `item_mods` VALUES (18220,431,1);   -- Prominence Axe ((Additional effect: Fire Damage))
 INSERT INTO `item_mods` VALUES (18220,499,1);   -- Additional effect animation (subEffect)
-INSERT INTO `item_mods` VALUES (18220,500,10);   -- Additional effect damage
-INSERT INTO `item_mods` VALUES (18220,501,5);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (18220,500,10);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (18220,501,5);   -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (18220,950,1);   -- Additional effect element Fire (xi.magic.element)
-INSERT INTO `item_mods` VALUES (18221,345,1000);  -- Martial Bhuj: TP Bonus +1000
+INSERT INTO `item_mods` VALUES (18221,345,1000);-- Martial Bhuj: TP Bonus +1000
 INSERT INTO `item_mods` VALUES (18222,10,7);
 INSERT INTO `item_mods` VALUES (18222,826,2);
 INSERT INTO `item_mods` VALUES (18223,2,10);
@@ -22648,32 +22648,32 @@ INSERT INTO `item_mods` VALUES (18256,119,1);
 INSERT INTO `item_mods` VALUES (18257,10,4);
 INSERT INTO `item_mods` VALUES (18257,20,3); -- WATER_RES
 INSERT INTO `item_mods` VALUES (18257,228,2);
-INSERT INTO `item_mods` VALUES (18263,256,1); -- Stage 4 Spharai - Aftermath
-INSERT INTO `item_mods` VALUES (18263,356,10); -- Final Heaven
-INSERT INTO `item_mods` VALUES (18264,23,20); -- Spharai LV75 - ATT +20
-INSERT INTO `item_mods` VALUES (18264,256,1); -- Aftermath
-INSERT INTO `item_mods` VALUES (18264,291,5); -- Counter +5
-INSERT INTO `item_mods` VALUES (18264,355,10); -- Final Heaven
-INSERT INTO `item_mods` VALUES (18264,506,50); -- Extra DMG Chance 5%
+INSERT INTO `item_mods` VALUES (18263,256,1);   -- Stage 4 Spharai - Aftermath
+INSERT INTO `item_mods` VALUES (18263,356,10);  -- Final Heaven
+INSERT INTO `item_mods` VALUES (18264,23,20);   -- Spharai LV75 - ATT +20
+INSERT INTO `item_mods` VALUES (18264,256,1);   -- Aftermath
+INSERT INTO `item_mods` VALUES (18264,291,5);   -- Counter +5
+INSERT INTO `item_mods` VALUES (18264,355,10);  -- Final Heaven
+INSERT INTO `item_mods` VALUES (18264,506,50);  -- Extra DMG Chance 5%
 INSERT INTO `item_mods` VALUES (18264,507,300); -- Extra DMG X3
-INSERT INTO `item_mods` VALUES (18265,23,25); -- Spharai LV80 - ATT +25
-INSERT INTO `item_mods` VALUES (18265,256,1); -- Aftermath
-INSERT INTO `item_mods` VALUES (18265,291,7); -- Counter +7
-INSERT INTO `item_mods` VALUES (18265,355,10); -- Final Heaven
-INSERT INTO `item_mods` VALUES (18265,506,50); -- Extra DMG Chance 5%
+INSERT INTO `item_mods` VALUES (18265,23,25);   -- Spharai LV80 - ATT +25
+INSERT INTO `item_mods` VALUES (18265,256,1);   -- Aftermath
+INSERT INTO `item_mods` VALUES (18265,291,7);   -- Counter +7
+INSERT INTO `item_mods` VALUES (18265,355,10);  -- Final Heaven
+INSERT INTO `item_mods` VALUES (18265,506,50);  -- Extra DMG Chance 5%
 INSERT INTO `item_mods` VALUES (18265,507,300); -- Extra DMG X3
-INSERT INTO `item_mods` VALUES (18269,256,2); -- Stage 4 Mandau - Aftermath
-INSERT INTO `item_mods` VALUES (18269,356,26); -- Mercy Stroke
-INSERT INTO `item_mods` VALUES (18270,23,20); -- Mandau LV75 - ATT +20
-INSERT INTO `item_mods` VALUES (18270,256,2); -- Aftermath
-INSERT INTO `item_mods` VALUES (18270,355,26); -- Mercy Stroke
-INSERT INTO `item_mods` VALUES (18270,431,2);   -- Additional effect:Poison (Type DEBUFF)Mandau 18270
+INSERT INTO `item_mods` VALUES (18269,256,2);   -- Stage 4 Mandau - Aftermath
+INSERT INTO `item_mods` VALUES (18269,356,26);  -- Mercy Stroke
+INSERT INTO `item_mods` VALUES (18270,23,20);   -- Mandau LV75 - ATT +20
+INSERT INTO `item_mods` VALUES (18270,256,2);   -- Aftermath
+INSERT INTO `item_mods` VALUES (18270,355,26);  -- Mercy Stroke
+INSERT INTO `item_mods` VALUES (18270,431,2);   -- Mandau (Additional effect:Poison)
 INSERT INTO `item_mods` VALUES (18270,499,10);  -- Additional effect animation (subEffect) xi.subEffect.Poison
 INSERT INTO `item_mods` VALUES (18270,501,10);  -- Additional effect Chance 10%
-INSERT INTO `item_mods` VALUES (18270,506,50); -- Extra DMG Chance 5%
+INSERT INTO `item_mods` VALUES (18270,506,50);  -- Extra DMG Chance 5%
 INSERT INTO `item_mods` VALUES (18270,507,300); -- Extra DMG X3
 INSERT INTO `item_mods` VALUES (18270,951,3);   -- Additional effect Status ID xi.effect.Poison
-INSERT INTO `item_mods` VALUES (18270,952,10);   -- Additional effect Status Potency 1
+INSERT INTO `item_mods` VALUES (18270,952,10);  -- Additional effect Status Potency 1
 INSERT INTO `item_mods` VALUES (18270,953,30);  -- Additional effect Status Duration 30sec
 INSERT INTO `item_mods` VALUES (18271,23,25); -- Mandau LV80 - ATT +25
 INSERT INTO `item_mods` VALUES (18271,256,2); -- Aftermath
@@ -22714,8 +22714,8 @@ INSERT INTO `item_mods` VALUES (18287,356,73); -- Onslaught
 INSERT INTO `item_mods` VALUES (18288,23,20); -- Guttler LV75 - ATT +20
 INSERT INTO `item_mods` VALUES (18288,256,5); -- Aftermath
 INSERT INTO `item_mods` VALUES (18288,355,73); -- Onslaught
-INSERT INTO `item_mods` VALUES (18288,431,2);   -- Additional effect: Choke (Type DEBUFF)Gutler 18288
-INSERT INTO `item_mods` VALUES (18288,499,3);  -- Additional effect animation (subEffect) xi.subEffect.Choke
+INSERT INTO `item_mods` VALUES (18288,431,2);   -- Gutler (Additional effect: Choke)
+INSERT INTO `item_mods` VALUES (18288,499,3);   -- Additional effect animation (subEffect) xi.subEffect.Choke
 INSERT INTO `item_mods` VALUES (18288,501,10);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (18288,506,50); -- Extra DMG Chance 5%
 INSERT INTO `item_mods` VALUES (18288,507,250); -- Extra DMG X2.5
@@ -22725,7 +22725,7 @@ INSERT INTO `item_mods` VALUES (18288,953,60);  -- Additional effect Status Dura
 INSERT INTO `item_mods` VALUES (18289,23,25); -- Guttler LV80 - ATT +25
 INSERT INTO `item_mods` VALUES (18289,256,5); -- Aftermath
 INSERT INTO `item_mods` VALUES (18289,355,73); -- Onslaught
-INSERT INTO `item_mods` VALUES (18289,431,1); -- Additional Effect
+INSERT INTO `item_mods` VALUES (18289,431,1);  -- Additional Effect
 INSERT INTO `item_mods` VALUES (18289,506,50); -- Extra DMG Chance 5%
 INSERT INTO `item_mods` VALUES (18289,507,250); -- Extra DMG X2.5
 INSERT INTO `item_mods` VALUES (18293,256,6); -- Stage 4 Bravura - Aftermath
@@ -22733,13 +22733,13 @@ INSERT INTO `item_mods` VALUES (18293,356,89); -- Metatron Torment
 INSERT INTO `item_mods` VALUES (18294,25,20); -- Bravura LV75 - ACC +20
 INSERT INTO `item_mods` VALUES (18294,256,6); -- Aftermath
 INSERT INTO `item_mods` VALUES (18294,355,89); -- Metatron Torment
-INSERT INTO `item_mods` VALUES (18294,431,2);   -- Additional effect: EVASION_DOWN (Type DEBUFF)BROvura 18294
+INSERT INTO `item_mods` VALUES (18294,431,2);   -- BROvura (Additional effect: EVASION_DOWN)
 INSERT INTO `item_mods` VALUES (18294,499,18);  -- Additional effect animation (subEffect) xi.subEffect.EVASION_DOWN
 INSERT INTO `item_mods` VALUES (18294,501,10);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (18294,506,50); -- Extra DMG Chance 5%
 INSERT INTO `item_mods` VALUES (18294,507,200); -- Extra DMG X2
-INSERT INTO `item_mods` VALUES (18294,951,148);   -- Additional effect Status ID xi.effect.EVASION_DOWN
-INSERT INTO `item_mods` VALUES (18294,952,15);   -- Additional effect Status Potency 15gung
+INSERT INTO `item_mods` VALUES (18294,951,148); -- Additional effect Status ID xi.effect.EVASION_DOWN
+INSERT INTO `item_mods` VALUES (18294,952,15);  -- Additional effect Status Potency 15gung
 INSERT INTO `item_mods` VALUES (18294,953,60);  -- Additional effect Status Duration 60sec
 INSERT INTO `item_mods` VALUES (18295,25,25); -- Bravura LV80 - ACC +25
 INSERT INTO `item_mods` VALUES (18295,256,6); -- Aftermath
@@ -22752,13 +22752,13 @@ INSERT INTO `item_mods` VALUES (18299,356,121); -- Geirskogul
 INSERT INTO `item_mods` VALUES (18300,25,20); -- Gungnir LV75 - ACC +20
 INSERT INTO `item_mods` VALUES (18300,256,8); -- Aftermath
 INSERT INTO `item_mods` VALUES (18300,355,121); -- Geirskogul
-INSERT INTO `item_mods` VALUES (18300,431,2);   -- Additional effect: DEFENSE_DOWN (Type DEBUFF)Gungnir 18300
+INSERT INTO `item_mods` VALUES (18300,431,2);   -- Gungnir (Additional effect: DEFENSE_DOWN)
 INSERT INTO `item_mods` VALUES (18300,499,18);  -- Additional effect animation (subEffect) xi.subEffect.DEFENSE_DOWN
 INSERT INTO `item_mods` VALUES (18300,501,10);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (18300,506,50); -- Extra DMG Chance %5
 INSERT INTO `item_mods` VALUES (18300,507,200); -- Extra DMG X2
-INSERT INTO `item_mods` VALUES (18300,951,149);   -- Additional effect Status ID xi.effect.DEFENSE_DOWN
-INSERT INTO `item_mods` VALUES (18300,952,17);   -- Additional effect Status Potency 1
+INSERT INTO `item_mods` VALUES (18300,951,149); -- Additional effect Status ID xi.effect.DEFENSE_DOWN
+INSERT INTO `item_mods` VALUES (18300,952,17);  -- Additional effect Status Potency 1
 INSERT INTO `item_mods` VALUES (18300,953,60);  -- Additional effect Status Duration 60sec
 INSERT INTO `item_mods` VALUES (18301,25,25); -- Gungnir LV80 - ACC +25
 INSERT INTO `item_mods` VALUES (18301,256,8); -- Aftermath
@@ -22771,13 +22771,13 @@ INSERT INTO `item_mods` VALUES (18305,356,105); -- Catastrophe
 INSERT INTO `item_mods` VALUES (18306,25,20); -- Apocalypse LV75 - ACC +20
 INSERT INTO `item_mods` VALUES (18306,256,7); -- Aftermath
 INSERT INTO `item_mods` VALUES (18306,355,105); -- Catastrophe
-INSERT INTO `item_mods` VALUES (18306,431,2);   -- Additional effect: BLIND (Type DEBUFF)Apocalypse 18306
+INSERT INTO `item_mods` VALUES (18306,431,2);   -- Apocalypse (Additional effect: BLIND)
 INSERT INTO `item_mods` VALUES (18306,499,12);  -- Additional effect animation (subEffect) xi.subEffect.BLIND
 INSERT INTO `item_mods` VALUES (18306,501,10);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (18306,506,50); -- Extra DMG Chance 5%
 INSERT INTO `item_mods` VALUES (18306,507,200); -- Extra DMG X2
 INSERT INTO `item_mods` VALUES (18306,951,5);   -- Additional effect Status ID xi.effect.Blindness
-INSERT INTO `item_mods` VALUES (18306,952,15);   -- Additional effect Status Potency 1
+INSERT INTO `item_mods` VALUES (18306,952,15);  -- Additional effect Status Potency 1
 INSERT INTO `item_mods` VALUES (18306,953,30);  -- Additional effect Status Duration 30sec
 INSERT INTO `item_mods` VALUES (18307,25,25); -- Apocalypse LV80 - ACC +25
 INSERT INTO `item_mods` VALUES (18307,256,7); -- Aftermath
@@ -22790,13 +22790,13 @@ INSERT INTO `item_mods` VALUES (18311,356,137); -- Blade: Metsu
 INSERT INTO `item_mods` VALUES (18312,23,20); -- Kikoku LV75 - ATT +20
 INSERT INTO `item_mods` VALUES (18312,256,9); -- Aftermath
 INSERT INTO `item_mods` VALUES (18312,355,137); -- Blade: Metsu
-INSERT INTO `item_mods` VALUES (18312,431,2);   -- Additional effect: PARALYSIS (Type DEBUFF)Kikoku 18312
+INSERT INTO `item_mods` VALUES (18312,431,2);   -- Kikoku (Additional effect: PARALYSIS)
 INSERT INTO `item_mods` VALUES (18312,499,11);  -- Additional effect animation (subEffect) xi.subEffect.PARALYSIS
 INSERT INTO `item_mods` VALUES (18312,501,10);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (18312,506,50); -- Extra DMG Chance 5%
 INSERT INTO `item_mods` VALUES (18312,507,300); -- Extra DMG X3
 INSERT INTO `item_mods` VALUES (18312,951,4);   -- Additional effect Status ID xi.effect.PARALYSIS
-INSERT INTO `item_mods` VALUES (18312,952,17);   -- Additional effect Status Potency 1
+INSERT INTO `item_mods` VALUES (18312,952,17);  -- Additional effect Status Potency 1
 INSERT INTO `item_mods` VALUES (18312,953,30);  -- Additional effect Status Duration 30sec
 INSERT INTO `item_mods` VALUES (18313,23,25); -- Kikoku LV80 - ATT +25
 INSERT INTO `item_mods` VALUES (18313,256,9); -- Aftermath
@@ -22809,13 +22809,13 @@ INSERT INTO `item_mods` VALUES (18317,356,153); -- Tachi: Kaiten
 INSERT INTO `item_mods` VALUES (18318,25,20); -- Amanomurakumo LV75 - ACC +20
 INSERT INTO `item_mods` VALUES (18318,256,10); -- Aftermath
 INSERT INTO `item_mods` VALUES (18318,355,153); -- Tachi: Kaiten
-INSERT INTO `item_mods` VALUES (18318,431,2);   -- Additional effect: ATTACK_DOWN (Type DEBUFF)Amanomurakumo 18318
+INSERT INTO `item_mods` VALUES (18318,431,2);   -- Amanomurakumo (Additional effect: ATTACK_DOWN)
 INSERT INTO `item_mods` VALUES (18318,499,18);  -- Additional effect animation (subEffect) xi.subEffect.ATTACK_DOWN
 INSERT INTO `item_mods` VALUES (18318,501,10);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (18318,506,50); -- Extra DMG Chance 5%
 INSERT INTO `item_mods` VALUES (18318,507,250); -- Extra DMG X2.5
-INSERT INTO `item_mods` VALUES (18318,951,147);   -- Additional effect Status ID xi.effect.ATTACK_DOWN
-INSERT INTO `item_mods` VALUES (18318,952,10);   -- Additional effect Status Potency 1
+INSERT INTO `item_mods` VALUES (18318,951,147); -- Additional effect Status ID xi.effect.ATTACK_DOWN
+INSERT INTO `item_mods` VALUES (18318,952,10);  -- Additional effect Status Potency 1
 INSERT INTO `item_mods` VALUES (18318,953,60);  -- Additional effect Status Duration 60sec
 INSERT INTO `item_mods` VALUES (18319,25,25); -- Amanomurakumo LV80 - ACC +25
 INSERT INTO `item_mods` VALUES (18319,256,10); -- Aftermath
@@ -22828,9 +22828,9 @@ INSERT INTO `item_mods` VALUES (18323,356,170); -- Randgrith
 INSERT INTO `item_mods` VALUES (18324,23,20); -- Mjollnir LV75 - ATT +20
 INSERT INTO `item_mods` VALUES (18324,256,11); -- Aftermath
 INSERT INTO `item_mods` VALUES (18324,355,170); -- Randgrith
-INSERT INTO `item_mods` VALUES (18324,431,4);   -- Additional effect: MP_DRAIN (MP_HEAL) --Mjollnir 18324
+INSERT INTO `item_mods` VALUES (18324,431,4);   -- Mjollnir (Additional effect: MP_HEAL)
 INSERT INTO `item_mods` VALUES (18324,499,18);  -- Additional effect animation (subEffect) xi.subEffect.MP_DRAIN
-INSERT INTO `item_mods` VALUES (18324,500,16);   -- Additional effect damage
+INSERT INTO `item_mods` VALUES (18324,500,16);  -- Additional effect damage
 INSERT INTO `item_mods` VALUES (18324,501,10);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (18324,506,50); -- Extra DMG Chance 5%
 INSERT INTO `item_mods` VALUES (18324,507,300); -- Extra DMG X3
@@ -22845,8 +22845,8 @@ INSERT INTO `item_mods` VALUES (18329,356,185); -- Gates of Tartarus
 INSERT INTO `item_mods` VALUES (18330,25,20); -- Claustrum LV75 - ACC +20
 INSERT INTO `item_mods` VALUES (18330,256,12); -- Aftermath
 INSERT INTO `item_mods` VALUES (18330,355,185); -- Gate of Tartarus
-INSERT INTO `item_mods` VALUES (18330,431,9);   -- Additional effect: DISPEL (Type DEBUFF)Claustrum 18330
-INSERT INTO `item_mods` VALUES (18330,499,8);  -- Additional effect animation (subEffect) xi.subEffect.DARKNESS_DAMAGE
+INSERT INTO `item_mods` VALUES (18330,431,9);   -- Claustrum (Additional effect: DISPEL)
+INSERT INTO `item_mods` VALUES (18330,499,8);   -- Additional effect animation (subEffect) xi.subEffect.DARKNESS_DAMAGE
 INSERT INTO `item_mods` VALUES (18330,501,15);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (18330,506,50); -- Extra DMG Chance 5%
 INSERT INTO `item_mods` VALUES (18330,507,250); -- Extra DMG X2.5
@@ -22913,10 +22913,10 @@ INSERT INTO `item_mods` VALUES (18357,501,10);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (18357,951,149); -- Additional effect Status ID xi.effect.DEFENSE_DOWN
 INSERT INTO `item_mods` VALUES (18357,952,12);  -- Additional effect Status Potency 12
 INSERT INTO `item_mods` VALUES (18357,953,60);  -- Additional effect Status Duration 60sec
-INSERT INTO `item_mods` VALUES (18359,431,1);   -- Additional effect: Wind Damage (Type DAMAGE)--boreas_cesti 18359
+INSERT INTO `item_mods` VALUES (18359,431,1);   -- Boreas Cesti (Additional effect: Wind Damage)
 INSERT INTO `item_mods` VALUES (18359,499,3);   -- Additional effect animation (subEffect)
-INSERT INTO `item_mods` VALUES (18359,500,15);   -- Additional effect damage
-INSERT INTO `item_mods` VALUES (18359,501,5);  -- Additional effect Chance 5%
+INSERT INTO `item_mods` VALUES (18359,500,15);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (18359,501,5);   -- Additional effect Chance 5%
 INSERT INTO `item_mods` VALUES (18359,950,3);   -- Additional effect element Wind (xi.magic.element)
 INSERT INTO `item_mods` VALUES (18360,13,7);
 INSERT INTO `item_mods` VALUES (18360,826,2);
@@ -22938,16 +22938,16 @@ INSERT INTO `item_mods` VALUES (18373,12,2);
 INSERT INTO `item_mods` VALUES (18374,8,1);
 INSERT INTO `item_mods` VALUES (18374,9,1);
 INSERT INTO `item_mods` VALUES (18378,377,13);
-INSERT INTO `item_mods` VALUES (18379,431,1);   -- Additional effect: Fire Damage (Type DAMAGE)--vulcan_claymore 18379
+INSERT INTO `item_mods` VALUES (18379,431,1);   -- Vulcan Claymore ((Additional effect: Fire Damage))
 INSERT INTO `item_mods` VALUES (18379,499,1);   -- Additional effect animation (subEffect)
-INSERT INTO `item_mods` VALUES (18379,500,10);   -- Additional effect damage
-INSERT INTO `item_mods` VALUES (18379,501,5);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (18379,500,10);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (18379,501,5);   -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (18379,950,1);   -- Additional effect element Fire (xi.magic.element)
 INSERT INTO `item_mods` VALUES (18380,345,1000);  -- Martial Sword: TP Bonus +1000
-INSERT INTO `item_mods` VALUES (18381,431,1);   -- Additional effect: Fire Damage (Type DAMAGE)--prominence_sword 18381
+INSERT INTO `item_mods` VALUES (18381,431,1);   -- Prominence Sword ((Additional effect: Fire Damage))
 INSERT INTO `item_mods` VALUES (18381,499,1);   -- Additional effect animation (subEffect)
-INSERT INTO `item_mods` VALUES (18381,500,10);   -- Additional effect damage
-INSERT INTO `item_mods` VALUES (18381,501,5);  -- Additional effect Chance 5%
+INSERT INTO `item_mods` VALUES (18381,500,10);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (18381,501,5);   -- Additional effect Chance 5%
 INSERT INTO `item_mods` VALUES (18381,950,1);   -- Additional effect element Fire (xi.magic.element)
 INSERT INTO `item_mods` VALUES (18385,23,3);
 INSERT INTO `item_mods` VALUES (18385,302,3);
@@ -22956,11 +22956,11 @@ INSERT INTO `item_mods` VALUES (18386,30,2);
 INSERT INTO `item_mods` VALUES (18389,392,15);    -- Crude Sword: "Weapon Bash"+15
 INSERT INTO `item_mods` VALUES (18392,13,2);
 INSERT INTO `item_mods` VALUES (18392,22,3); -- DARK_RES
-INSERT INTO `item_mods` VALUES (18392,431,1);   -- Additional effect: Light Damage (Type DAMAGE)--sacred_maul 18392
+INSERT INTO `item_mods` VALUES (18392,431,1);   -- Sacred Maul ((Additional effect: Light Damage))
 INSERT INTO `item_mods` VALUES (18392,499,7);   -- Additional effect animation (subEffect)
-INSERT INTO `item_mods` VALUES (18392,500,21);   -- Additional effect damage
-INSERT INTO `item_mods` VALUES (18392,501,5);  -- Additional effect Chance 10%
-INSERT INTO `item_mods` VALUES (18392,950,7);  -- Additional effect element Light (xi.magic.element)
+INSERT INTO `item_mods` VALUES (18392,500,21);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (18392,501,5);   -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (18392,950,7);   -- Additional effect element Light (xi.magic.element)
 INSERT INTO `item_mods` VALUES (18393,111,4);
 INSERT INTO `item_mods` VALUES (18394,71,2);
 INSERT INTO `item_mods` VALUES (18395,8,5);
@@ -23044,10 +23044,10 @@ INSERT INTO `item_mods` VALUES (18447,306,100);
 INSERT INTO `item_mods` VALUES (18448,25,4);
 INSERT INTO `item_mods` VALUES (18449,27,5);
 INSERT INTO `item_mods` VALUES (18450,289,2);
-INSERT INTO `item_mods` VALUES (18451,431,1);   -- Additional effect: Wind Damage (Type DAMAGE)--mokusa 18451
+INSERT INTO `item_mods` VALUES (18451,431,1);   -- Mokusa (Additional effect: Wind Damage)
 INSERT INTO `item_mods` VALUES (18451,499,3);   -- Additional effect animation (subEffect)
-INSERT INTO `item_mods` VALUES (18451,500,19);   -- Additional effect damage
-INSERT INTO `item_mods` VALUES (18451,501,5);  -- Additional effect Chance 5%
+INSERT INTO `item_mods` VALUES (18451,500,19);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (18451,501,5);   -- Additional effect Chance 5%
 INSERT INTO `item_mods` VALUES (18451,950,3);   -- Additional effect element Wind (xi.magic.element)
 INSERT INTO `item_mods` VALUES (18454,10,10);     -- Ishikirimaru: VIT+10
 INSERT INTO `item_mods` VALUES (18454,18,10);     -- Earth+10
@@ -23125,9 +23125,9 @@ INSERT INTO `item_mods` VALUES (18498,161,-800);
 INSERT INTO `item_mods` VALUES (18499,2,10);
 INSERT INTO `item_mods` VALUES (18499,5,10);
 INSERT INTO `item_mods` VALUES (18500,384,100);
-INSERT INTO `item_mods` VALUES (18503,431,1);   -- Additional effect: Ice Damage (Type DAMAGE)--mammut 18503
+INSERT INTO `item_mods` VALUES (18503,431,1);   -- Mammut (Additional effect: Ice Damage)
 INSERT INTO `item_mods` VALUES (18503,499,2);   -- Additional effect animation (subEffect)
-INSERT INTO `item_mods` VALUES (18503,500,15);   -- Additional effect damage
+INSERT INTO `item_mods` VALUES (18503,500,15);  -- Additional effect damage
 INSERT INTO `item_mods` VALUES (18503,501,10);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (18503,950,2);   -- Additional effect element Ice (xi.magic.element)
 INSERT INTO `item_mods` VALUES (18504,11,4);
@@ -23268,7 +23268,7 @@ INSERT INTO `item_mods` VALUES (18595,73,5);
 INSERT INTO `item_mods` VALUES (18596,29,5);
 INSERT INTO `item_mods` VALUES (18597,487,5);     -- Catalyst: Bonus damage added to magic burst
 INSERT INTO `item_mods` VALUES (18599,5,10);
-INSERT INTO `item_mods` VALUES (18599,431,6);   -- Additional effect: MP DRAIN (Type DAMAGE)--pestle 18599
+INSERT INTO `item_mods` VALUES (18599,431,6);   -- Pestle (Additional effect: MP DRAIN) 
 INSERT INTO `item_mods` VALUES (18599,499,22);  -- Additional effect animation (subEffect)
 INSERT INTO `item_mods` VALUES (18599,500,8);   -- Additional effect damage
 INSERT INTO `item_mods` VALUES (18599,501,10);  -- Additional effect Chance 10%
@@ -23916,11 +23916,11 @@ INSERT INTO `item_mods` VALUES (18849,10,6);
 INSERT INTO `item_mods` VALUES (18851,8,8);
 INSERT INTO `item_mods` VALUES (18853,13,2);
 INSERT INTO `item_mods` VALUES (18853,22,3); -- DARK_RES
-INSERT INTO `item_mods` VALUES (18853,431,1);   -- Additional effect: Light Damage (Type DAMAGE)--spirit_maul 18853
+INSERT INTO `item_mods` VALUES (18853,431,1);   -- Spirit Maul ((Additional effect: Light Damage))
 INSERT INTO `item_mods` VALUES (18853,499,7);   -- Additional effect animation (subEffect)
-INSERT INTO `item_mods` VALUES (18853,500,21);   -- Additional effect damage
-INSERT INTO `item_mods` VALUES (18853,501,5);  -- Additional effect Chance 5%
-INSERT INTO `item_mods` VALUES (18853,950,7);  -- Additional effect element Light (xi.magic.element)
+INSERT INTO `item_mods` VALUES (18853,500,21);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (18853,501,5);   -- Additional effect Chance 5%
+INSERT INTO `item_mods` VALUES (18853,950,7);   -- Additional effect element Light (xi.magic.element)
 INSERT INTO `item_mods` VALUES (18854,2,30);
 INSERT INTO `item_mods` VALUES (18854,5,30);
 INSERT INTO `item_mods` VALUES (18854,28,4);
@@ -24069,11 +24069,11 @@ INSERT INTO `item_mods` VALUES (18951,230,2);
 INSERT INTO `item_mods` VALUES (18952,161,-500);
 INSERT INTO `item_mods` VALUES (18953,2,12);
 INSERT INTO `item_mods` VALUES (18953,5,12);
-INSERT INTO `item_mods` VALUES (18953,431,1);   -- Additional effect: water Damage (Type DAMAGE)--beluga 18953
+INSERT INTO `item_mods` VALUES (18953,431,1);   -- Beluga (Additional effect: Water Damage)
 INSERT INTO `item_mods` VALUES (18953,499,6);   -- Additional effect animation (subEffect)
-INSERT INTO `item_mods` VALUES (18953,500,21);   -- Additional effect damage
+INSERT INTO `item_mods` VALUES (18953,500,21);  -- Additional effect damage
 INSERT INTO `item_mods` VALUES (18953,501,10);  -- Additional effect Chance 10%
-INSERT INTO `item_mods` VALUES (18953,950,6);  -- Additional effect element water (xi.magic.element)
+INSERT INTO `item_mods` VALUES (18953,950,6);   -- Additional effect element water (xi.magic.element)
 INSERT INTO `item_mods` VALUES (18957,392,8);     -- Smiting Scythe: "Weapon Bash"+8
 INSERT INTO `item_mods` VALUES (18960,392,10);    -- Smiting Scythe +1: "Weapon Bash"+10
 INSERT INTO `item_mods` VALUES (18964,9,3);
@@ -25801,7 +25801,7 @@ INSERT INTO `item_mods` VALUES (20563,355,31); -- Rudra's Storm
 INSERT INTO `item_mods` VALUES (20564,9,20);   -- Twasthar 119 AG - DEX+20
 INSERT INTO `item_mods` VALUES (20564,256,44); -- Aftermath
 INSERT INTO `item_mods` VALUES (20564,355,31); -- Rudra's Storm
-INSERT INTO `item_mods` VALUES (20568,431,1);  -- Wind Knife +1: Additional effect: Wind Damage (Type DAMAGE)
+INSERT INTO `item_mods` VALUES (20568,431,1);  -- Wind Knife +1: Additional effect: Wind Damage 
 INSERT INTO `item_mods` VALUES (20568,499,3);  -- Additional effect animation (subEffect)
 INSERT INTO `item_mods` VALUES (20568,500,2);  -- Additional effect damage before resists
 INSERT INTO `item_mods` VALUES (20568,501,80); -- Additional effect Chance 80% (per https://www.bg-wiki.com/ffxi/Wind_Knife_+1)
@@ -26012,7 +26012,7 @@ INSERT INTO `item_mods` VALUES (20716,8,12);      -- Perfervid sword - STR+15
 INSERT INTO `item_mods` VALUES (20716,15,25);     -- [Element: Fire]+25
 INSERT INTO `item_mods` VALUES (20716,25,25);     -- Accuracy+20
 INSERT INTO `item_mods` VALUES (20716,32,15);     -- Fire elemental "Magic Atk. Bonus"+15
--- INSERT INTO `item_mods` VALUES (20716,431,1);     -- Additional effect: Fire damage
+-- INSERT INTO `item_mods` VALUES (20716,431,1);  -- (Additional effect: Fire Damage)
 INSERT INTO `item_mods` VALUES (20717,25,27);     -- Arendsi Fleuret (iLvl 119): Accuracy +27
 INSERT INTO `item_mods` VALUES (20717,30,15);     -- Magic Accuracy +15
 INSERT INTO `item_mods` VALUES (20717,68,13);     -- Evasion +13
@@ -28616,7 +28616,7 @@ INSERT INTO `item_mods` VALUES (22286,25,15);     -- Accuracy+15
 INSERT INTO `item_mods` VALUES (22287,26,25);     -- Scout's Bolt: Ranged Accuracy+25
 INSERT INTO `item_mods` VALUES (22287,30,25);     -- Scout's Bolt: Magic Accuracy+25
 INSERT INTO `item_mods` VALUES (22287,305,20);    -- Scout's Bolt: "Recycle"+20
--- INSERT INTO `item_mods` VALUES (22287,431,1);  -- Scout's Bolt: Additional effect: Light damage
+-- INSERT INTO `item_mods` VALUES (22287,431,1);  -- Scout's Bolt: (Additional effect: Light Damage)
 INSERT INTO `item_mods` VALUES (22300,8,3);       -- Crepuscular Pebble: STR+3
 INSERT INTO `item_mods` VALUES (22300,10,3);      -- VIT+3
 -- INSERT INTO `item_mods` VALUES (22300,,3);     -- Physical damage cap +3%
