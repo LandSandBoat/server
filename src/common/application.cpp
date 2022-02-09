@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2022 LandSandBoat Dev Teams
@@ -31,17 +31,9 @@ Application::Application(std::unique_ptr<argparse::ArgumentParser>&& pArgParser)
 {
     //debug::init();
 
-    // logging::Init(this);
-    // lua::Init(this);
-    // settings::Init(this);
-    // zmq::Init(this);
-    // sql::Init(this);
-    // debug::Init(this);
-    // task::Init(this);
+    auto toau = SettingsManager::Get<bool>(MainSettings::ENABLE_TOAU);
+    std::cout << toau;
 
-    std::cout << SettingsManager::Get<bool>(MainSettings::ENABLE_TOAU);
-
-    //gSettings    = std::make_unique<SettingsService>(this);
     //gZMQ         = std::make_unique<ZMQService>(this);
     //gSQL         = std::make_unique<SQLService>(this);
     //gDebug       = std::make_unique<DebugService>(this);

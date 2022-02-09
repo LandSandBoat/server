@@ -21,11 +21,22 @@
 # 
 # bool, <name>, 1, <description> -> The 1 will be converted to a bool (true)
 #
-# string, <name>
+# string, <name>, "your value", <description> -> "your value" will have the "'s stripped from it: your value
 
 [main] # Will generate settings/main.lua
 string, SERVER_NAME, Nameless, The name of the server
-bool,  ENABLE_TOAU, true, Enables the expansion: Treasures of Aht Urghan
+
+bool, ENABLE_COP      , true, Enables expansion: Chains of Promathia
+bool, ENABLE_TOAU     , true, Enables expansion: Treasure of Aht Urghan
+bool, ENABLE_WOTG     , true, Enables expansion: Wings of the Goddess
+bool, ENABLE_ACP      , true, Enables mini-expansion: A Crystaline Prophecy
+bool, ENABLE_AMK      , true, Enables mini-expansion: A Moogle Kupo d'Etat
+bool, ENABLE_ASA      , true, Enables mini-expansion: A Shantotto Ascenscion
+bool, ENABLE_ABYSSEA  , true, Enables expansion: Abyssea
+bool, ENABLE_SOA      , true, Enables expansion: Seekers of Adoulin
+bool, ENABLE_ROV      , true, Enables expansion: Rhapsodies of Vana'diel
+bool, ENABLE_VOIDWATCH, true, Enables Voidwatch (Not an expansion, but has its own storyline)
+
 float, DAMAGE_MULT, 1.0,  The multiplier applied to all damage directed towards players
 
 [sql] # Will generate settings/sql.lua
@@ -76,12 +87,12 @@ uint, SERVER_PORT, 54003, The port ZMQ operates on (inter-process messaging)
 
 [version]
 string, CLIENT_VER, 30211225_1, Expected Client version (wrong version cannot log in)
-
-##WE STRONGLY ADVISE AGAINST LOCKING THE SERVER TO OLDER VERSIONS. IT IS A UNIVERSALLY BAD IDEA.
-##0 - disabled (every version allowed)
-##1 - enabled - strict (only exact CLIENT_VER allowed)
-##2 - enabled - greater than or equal  (matching or greater than CLIENT_VER allowed, default)
 uint, VER_LOCK, 2, Version lock scheme
+
+[trusts]
+bool, ENABLE_TRUST_CASTING, true,
+bool, ENABLE_TRUST_QUESTS, true,
+
 
 ##--------------------------------
 ##TCP/IP parameters

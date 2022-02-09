@@ -37,6 +37,7 @@
 
 #pragma once
 
+#include "cbasetypes.h"
 #include "settings_impl.h"
 #include "singleton.h"
 
@@ -51,6 +52,26 @@
 
 using variant_value_t = std::variant<bool, float, unsigned int, std::string>;
 
+// TODO: A string utils area
+
+// https://stackoverflow.com/questions/18800796/c-get-string-between-two-delimiter-string/18800868
+std::string get_str_between_two_str(const std::string &s,
+        const std::string &start_delim,
+        const std::string &stop_delim)
+{
+    std::size_t first_delim_pos = s.find(start_delim);
+    std::size_t end_pos_of_first_delim = first_delim_pos + start_delim.length();
+    std::size_t last_delim_pos = s.find_first_of(stop_delim, end_pos_of_first_delim);
+
+    return s.substr(end_pos_of_first_delim,
+            last_delim_pos - end_pos_of_first_delim);
+}
+
+bool string_starts_with(const std::string& s, const std::string& subString)
+{
+    return s.rfind(subString, 0) == 0;
+}
+
 class SettingsManager : public Singleton<SettingsManager>
 {
 private:
@@ -64,16 +85,43 @@ private:
 
     void ParseSettingsLine(std::string const& section, std::string const& line)
     {
+        if (!string_starts_with(line, "    "))
+        {
+            return;
+        }
+
+        // TODO: Validate line
+
+        auto nameString = get_str_between_two_str(line, "    ", " = ");
+        auto typeString = get_str_between_two_str(line, "-- (", ") ");
+        auto valueString = get_str_between_two_str(line, " = ", ", --");
+
         std::string sectionTitle = section + "Settings::";
-        sectionTitle[0] = std::toupper(sectionTitle[0]);
-        std::cout << sectionTitle << "\n";
+        sectionTitle[0]          = std::toupper(sectionTitle[0]);
+        std::string lookupString = sectionTitle + nameString;
+        auto        enumSetting  = variant_settings_lookup[lookupString];
 
-        // TODO: Parse data from line
-        //     HOST = "127.0.0.1", -- (string) The IP Address of the host machine
-        //     PORT = 3306, -- (uint) The Port
-
-        std::string lookupString = sectionTitle + ""; // TODO
-        //variant_settings_lookup[lookupString] = 0U;
+        if (typeString == "string")
+        {
+            valueString = get_str_between_two_str(line, " = \"", "\", --");
+            map[enumSetting] = SettingsDetails{ nameString, valueString };
+        }
+        else if (typeString == "bool")
+        {
+            map[enumSetting] = SettingsDetails{ nameString, valueString == "true" };
+        }
+        else if (typeString == "float")
+        {
+            map[enumSetting] = SettingsDetails{ nameString, std::stof(valueString) };
+        }
+        else if (typeString == "uint")
+        {
+            map[enumSetting] = SettingsDetails{ nameString, static_cast<uint32>(std::stoul(valueString)) };
+        }
+        else
+        {
+            std::cerr << "Invalid settings type! " << nameString << ", " << typeString << "\n";
+        }
     }
 
 public:
@@ -88,7 +136,9 @@ public:
             // std::cout << "Settings is empty!";
         }
 
-        // auto fp = RIAA_FILE("test.txt");
+        // TODO: Go through "./settings/defaults" and build a list of all the default
+        // settings that exist. Then compare them to whatever is in "./settings" and
+        // report if there are settings missing.
 
         for (auto& entry : std::filesystem::directory_iterator("./settings"))
         {
@@ -113,9 +163,16 @@ public:
     template <typename T>
     [[nodiscard]] static T Get(variant_settings_t key)
     {
-        auto& instance = SettingsManager::GetInstance();
-        // TODO: Helpful error logging here for bad lookups
-        auto detail = instance.map.at(key);
-        return std::get<T>(detail.value);
+        try
+        {
+            auto& instance = SettingsManager::GetInstance();
+            auto detail = instance.map.at(key);
+            return std::get<T>(detail.value);
+        }
+        catch(const std::exception& e)
+        {
+            std::cerr << e.what() << '\n';
+        }
+        return T();
     }
 };
