@@ -2,8 +2,7 @@
 -- Area: Sealions Den
 --  Mob: Omega
 -----------------------------------
-local ID = require("scripts/zones/Sealions_Den/IDs")
-require("scripts/globals/titles")
+local oneToBeFeared = require("scripts/zones/Sealions_Den/helpers/One_to_be_Feared")
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
@@ -27,31 +26,11 @@ entity.onAdditionalEffect = function(mob, target, damage)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    player:addTitle(xi.title.OMEGA_OSTRACIZER)
-    player:startEvent(11)
+    oneToBeFeared.handleOmegaDeath(mob, player, isKiller)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 11 then
-        local battlefield = player:getBattlefield()
-        local inst = battlefield:getArea()
-
-        -- players are healed in between fights, but their TP is set to 0
-        player:setHP(player:getMaxHP())
-        player:setMP(player:getMaxMP())
-        player:setTP(0)
-
-        player:setLocalVar("[OTBF]cs", 2)
-
-        -- move player to instance
-        if inst == 1 then
-            player:setPos(-779, -103, -80)
-        elseif inst == 2 then
-            player:setPos(-140, -23, -440)
-        elseif inst == 3 then
-            player:setPos(499, 56, -802)
-        end
-    end
+    oneToBeFeared.handleOmegaBattleEnding(player, csid, option)
 end
 
 return entity

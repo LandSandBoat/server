@@ -23,8 +23,6 @@ zone_object.onZoneIn = function(player, prevZone)
 
     if player:getCurrentMission(COP) == xi.mission.id.cop.ONE_TO_BE_FEARED and player:getCharVar("PromathiaStatus") == 1 then
         cs = 15
-    elseif player:getCurrentMission(COP) == xi.mission.id.cop.ONE_TO_BE_FEARED and player:getCharVar("PromathiaStatus") == 4 then
-        cs = 33
     elseif player:getCurrentMission(COP) == xi.mission.id.cop.CHAINS_AND_BONDS and player:getCharVar("PromathiaStatus") == 2 then
         cs = 14
     elseif
@@ -50,11 +48,6 @@ zone_object.onEventFinish = function(player, csid, option)
         player:setCharVar("PromathiaStatus", 3);
     elseif csid == 29 then
         player:setCharVar('ApocalypseNigh', 2)
-    elseif csid == 33 then
-        player:completeMission(xi.mission.log_id.COP, xi.mission.id.cop.ONE_TO_BE_FEARED)
-        player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.CHAINS_AND_BONDS)
-        player:setCharVar("PromathiaStatus", 0)
-        player:setPos(438, 0, -18, 11, xi.zone.LUFAISE_MEADOWS)
     end
 end
 

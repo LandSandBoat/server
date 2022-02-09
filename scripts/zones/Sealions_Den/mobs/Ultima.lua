@@ -2,7 +2,7 @@
 -- Area: Sealions Den
 --   NM: Ultima
 -----------------------------------
-require("scripts/globals/titles")
+local oneToBeFeared = require("scripts/zones/Sealions_Den/helpers/One_to_be_Feared")
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
@@ -26,8 +26,7 @@ entity.onAdditionalEffect = function(mob, target, damage)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    player:addTitle(xi.title.ULTIMA_UNDERTAKER)
-    player:setLocalVar("[OTBF]cs", 0)
+    oneToBeFeared.handleUltimaDeath(mob, player, isKiller)
 end
 
 return entity
