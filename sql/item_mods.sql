@@ -22733,7 +22733,7 @@ INSERT INTO `item_mods` VALUES (18293,356,89); -- Metatron Torment
 INSERT INTO `item_mods` VALUES (18294,25,20); -- Bravura LV75 - ACC +20
 INSERT INTO `item_mods` VALUES (18294,256,6); -- Aftermath
 INSERT INTO `item_mods` VALUES (18294,355,89); -- Metatron Torment
-INSERT INTO `item_mods` VALUES (18294,431,2);   -- BROvura (Additional effect: EVASION_DOWN)
+INSERT INTO `item_mods` VALUES (18294,431,2);   -- Bravura (Additional effect: EVASION_DOWN)
 INSERT INTO `item_mods` VALUES (18294,499,18);  -- Additional effect animation (subEffect) xi.subEffect.EVASION_DOWN
 INSERT INTO `item_mods` VALUES (18294,501,10);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (18294,506,50); -- Extra DMG Chance 5%
