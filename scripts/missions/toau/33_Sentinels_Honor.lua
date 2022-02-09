@@ -17,7 +17,6 @@ local mission = Mission:new(xi.mission.log_id.TOAU, xi.mission.id.toau.SENTINELS
 
 mission.reward =
 {
-    item        = xi.items.IMPERIAL_GOLD_PIECE,
     nextMission = { xi.mission.log_id.TOAU, xi.mission.id.toau.TESTING_THE_WATERS },
 }
 

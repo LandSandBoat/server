@@ -76,10 +76,4 @@ instance_object.onInstanceComplete = function(instance)
     end
 end
 
-instance_object.onEventUpdate = function(player, csid, option)
-end
-
-instance_object.onEventFinish = function(player, csid, option)
-end
-
 return instance_object
