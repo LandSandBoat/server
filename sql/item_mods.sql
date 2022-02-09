@@ -21995,11 +21995,11 @@ INSERT INTO `item_mods` VALUES (17773,2,20);
 INSERT INTO `item_mods` VALUES (17773,15,10); -- FIRE_RES
 INSERT INTO `item_mods` VALUES (17773,21,10); -- LIGHT_RES
 INSERT INTO `item_mods` VALUES (17774,68,3);
---INSERT INTO `item_mods` VALUES (17774,431,1);   -- Shiranui (Additional effect: Light Damage) 
---INSERT INTO `item_mods` VALUES (17774,499,7);   -- Additional effect animation (subEffect)
---INSERT INTO `item_mods` VALUES (17774,500,11);  -- Additional effect damage
---INSERT INTO `item_mods` VALUES (17774,501,15);  -- Additional effect Chance 10% -- Nightime only
---INSERT INTO `item_mods` VALUES (17774,950,7);   -- Additional effect element Light (xi.magic.element)
+-- INSERT INTO `item_mods` VALUES (17774,431,1);  -- Shiranui (Additional effect: Light Damage) 
+-- INSERT INTO `item_mods` VALUES (17774,499,7);  -- Additional effect animation (subEffect)
+-- INSERT INTO `item_mods` VALUES (17774,500,11); -- Additional effect damage
+-- INSERT INTO `item_mods` VALUES (17774,501,15); -- Additional effect Chance 10% -- Nightime only
+-- INSERT INTO `item_mods` VALUES (17774,950,7);  -- Additional effect element Light (xi.magic.element)
 INSERT INTO `item_mods` VALUES (17775,8,1);
 INSERT INTO `item_mods` VALUES (17775,11,1);
 INSERT INTO `item_mods` VALUES (17787,8,1);
