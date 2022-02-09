@@ -319,7 +319,7 @@ INSERT INTO `item_mods` VALUES (10327,30,4); -- MACC +4
 INSERT INTO `item_mods` VALUES (10327,111,11); -- Divine +11
 INSERT INTO `item_mods` VALUES (10327,112,11); -- Healing +11
 INSERT INTO `item_mods` VALUES (10327,114,11); -- Enfeebling +11
-INSERT INTO `item_mods` VALUES (10327,384,300);-- Haste +3%
+INSERT INTO `item_mods` VALUES (10327,384,300); -- Haste +3%
 INSERT INTO `item_mods` VALUES (10328,1,49); -- Murzim Cosciales DEF + 49
 INSERT INTO `item_mods` VALUES (10328,2,36); -- HP +36
 INSERT INTO `item_mods` VALUES (10328,5,36); -- MP +36
@@ -22223,7 +22223,7 @@ INSERT INTO `item_mods` VALUES (18008,501,10);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (18008,951,6);   -- Additional effect Status ID xi.effect.SILENCE
 INSERT INTO `item_mods` VALUES (18008,952,5);   -- Additional effect Status Potency 5
 INSERT INTO `item_mods` VALUES (18008,953,30);  -- Additional effect Status Duration 30sec
-INSERT INTO `item_mods` VALUES (18009,345,1000);-- Martial Knife: TP Bonus +1000
+INSERT INTO `item_mods` VALUES (18009,345,1000); -- Martial Knife: TP Bonus +1000
 INSERT INTO `item_mods` VALUES (18010,431,2);   -- Melt Dagger (Additional effect: Weakens defense)
 INSERT INTO `item_mods` VALUES (18010,499,18);  -- Additional effect animation (subEffect) xi.subEffect.DEFENSE_DOWN
 INSERT INTO `item_mods` VALUES (18010,501,10);  -- Additional effect Chance 10%
@@ -22610,7 +22610,7 @@ INSERT INTO `item_mods` VALUES (18220,499,1);   -- Additional effect animation (
 INSERT INTO `item_mods` VALUES (18220,500,10);  -- Additional effect damage
 INSERT INTO `item_mods` VALUES (18220,501,5);   -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (18220,950,1);   -- Additional effect element Fire (xi.magic.element)
-INSERT INTO `item_mods` VALUES (18221,345,1000);-- Martial Bhuj: TP Bonus +1000
+INSERT INTO `item_mods` VALUES (18221,345,1000); -- Martial Bhuj: TP Bonus +1000
 INSERT INTO `item_mods` VALUES (18222,10,7);
 INSERT INTO `item_mods` VALUES (18222,826,2);
 INSERT INTO `item_mods` VALUES (18223,2,10);
@@ -39622,7 +39622,7 @@ INSERT INTO `item_mods` VALUES (26971,68,22); -- Evasion +22
 INSERT INTO `item_mods` VALUES (26971,31,37); -- Magic Evasion +37
 INSERT INTO `item_mods` VALUES (26971,29,6); -- "Magic Def. Bonus"+6
 INSERT INTO `item_mods` VALUES (26971,384,400); -- Haste +4
-INSERT INTO `item_mods` VALUES (26971,905,3);-- "Shield Def. Bonus"+3
+INSERT INTO `item_mods` VALUES (26971,905,3); -- "Shield Def. Bonus"+3
 INSERT INTO `item_mods` VALUES (26971,369,2); -- "Refresh"+2
 INSERT INTO `item_mods` VALUES (26971,160,-800); -- Damage taken -8%
 INSERT INTO `item_mods` VALUES (26973,255,15); -- Samnuha Coat "Death" Resistance +15
