@@ -26,7 +26,8 @@ mission.sections[1].check = function(player, currentMission, missionStatus, vars
     return currentMission == mission.missionId and
         xi.settings.ENABLE_AMK == 1 and
         xi.moghouse.isInMogHouseInHomeNation(player) and
-        player:getMainLvl() >= 10
+        player:getMainLvl() >= 10 and
+        player:getCharVar("MoghouseExplication") == 0
 end
 
 local moogleTriggerEvent =
