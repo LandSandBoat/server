@@ -1088,6 +1088,7 @@ xi.title =
     BELOVED_BY_THE_SEA_GOD                    = 1137,
     DESTINY_MASTER                            = 1138,
     TIRELESS_TRACKER                          = 1139,
+    GALKAN_HAZARD                             = 1140,
 }
 
 -----------------------------------

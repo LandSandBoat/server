@@ -27,8 +27,8 @@
 
 CCurrencyPacket2::CCurrencyPacket2(CCharEntity* PChar)
 {
-    this->id(0x118);
-    this->length(132);
+    this->setType(0x118);
+    this->setSize(132);
 
     const char* query  = "SELECT bayld, kinetic_unit, imprimaturs, mystical_canteen, obsidian_fragment, lebondopt_wing, \
                          pulchridopt_wing, mweya_plasm, ghastly_stone, ghastly_stone_1, ghastly_stone_2, verdigris_stone, \

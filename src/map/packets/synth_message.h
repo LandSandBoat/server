@@ -38,12 +38,6 @@ enum SYNTH_MESSAGE
     SYNTH_CANCELRARE
 };
 
-/************************************************************************
- *																		*
- *  																		*
- *																		*
- ************************************************************************/
-
 class CCharEntity;
 
 class CSynthMessagePacket : public CBasicPacket

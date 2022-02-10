@@ -3139,7 +3139,7 @@ bool CLuaBaseEntity::hasItem(uint16 itemID, sol::object const& location)
         uint8 locationID = LOC_INVENTORY;
 
         locationID = location.as<uint8>();
-        locationID = (locationID < MAX_CONTAINER_ID ? locationID : LOC_INVENTORY);
+        locationID = (locationID < CONTAINER_ID::MAX_CONTAINER_ID ? locationID : LOC_INVENTORY);
 
         return PChar->getStorage(locationID)->SearchItem(itemID) != ERROR_SLOTID;
     }
@@ -3372,7 +3372,7 @@ bool CLuaBaseEntity::delItem(uint16 itemID, int32 quantity, sol::object const& c
 
     uint8 location = containerID.get_type() == sol::type::number ? containerID.as<uint8>() : 0;
 
-    if (location >= MAX_CONTAINER_ID)
+    if (location >= CONTAINER_ID::MAX_CONTAINER_ID)
     {
         ShowWarning("Lua::delItem: Attempting to delete an item from an invalid slot. Defaulting to main inventory.");
     }
@@ -3538,7 +3538,7 @@ std::optional<CLuaItem> CLuaBaseEntity::findItem(uint16 itemID, sol::object cons
         uint8 locationID = LOC_INVENTORY;
 
         locationID = location.as<uint8>();
-        locationID = (locationID < MAX_CONTAINER_ID ? locationID : LOC_INVENTORY);
+        locationID = (locationID < CONTAINER_ID::MAX_CONTAINER_ID ? locationID : LOC_INVENTORY);
 
         if (auto slot = PChar->getStorage(locationID)->SearchItem(itemID); slot != ERROR_SLOTID)
         {
@@ -3548,7 +3548,7 @@ std::optional<CLuaItem> CLuaBaseEntity::findItem(uint16 itemID, sol::object cons
     }
     else // Look in all containers
     {
-        for (uint8 i = 0; i < MAX_CONTAINER_ID; ++i)
+        for (uint8 i = 0; i < CONTAINER_ID::MAX_CONTAINER_ID; ++i)
         {
             if (auto slot = PChar->getStorage(i)->SearchItem(itemID); slot != ERROR_SLOTID)
             {
@@ -3778,7 +3778,7 @@ void CLuaBaseEntity::changeContainerSize(uint8 locationID, int8 newSize)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    if (locationID < MAX_CONTAINER_ID)
+    if (locationID < CONTAINER_ID::MAX_CONTAINER_ID)
     {
         auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
@@ -9334,7 +9334,7 @@ bool CLuaBaseEntity::checkImbuedItems()
 
     auto* PChar{ static_cast<CCharEntity*>(m_PBaseEntity) };
 
-    for (uint8 LocID = 0; LocID < MAX_CONTAINER_ID; ++LocID)
+    for (uint8 LocID = 0; LocID < CONTAINER_ID::MAX_CONTAINER_ID; ++LocID)
     {
         bool found = false;
         PChar->getStorage(LocID)->ForEachItem([&found](CItem* PItem) {

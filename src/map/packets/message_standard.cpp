@@ -29,16 +29,16 @@
 
 CMessageStandardPacket::CMessageStandardPacket(MsgStd MessageID)
 {
-    this->type = 0x09;
-    this->size = 0x08;
+    this->setType(0x09);
+    this->setSize(0x10);
 
     ref<uint16>(0x0A) = static_cast<uint16>(MessageID);
 }
 
 CMessageStandardPacket::CMessageStandardPacket(uint32 param0, uint16 MessageID)
 {
-    this->type = 0x09;
-    this->size = 0x0E;
+    this->setType(0x09);
+    this->setSize(0x1C);
 
     ref<uint16>(0x0A) = MessageID;
 
@@ -47,8 +47,8 @@ CMessageStandardPacket::CMessageStandardPacket(uint32 param0, uint16 MessageID)
 
 CMessageStandardPacket::CMessageStandardPacket(uint32 param0, uint32 param1, uint16 MessageID)
 {
-    this->type = 0x09;
-    this->size = 0x24;
+    this->setType(0x09);
+    this->setSize(0x48);
 
     ref<uint16>(0x0A) = MessageID;
 
@@ -57,8 +57,8 @@ CMessageStandardPacket::CMessageStandardPacket(uint32 param0, uint32 param1, uin
 
 CMessageStandardPacket::CMessageStandardPacket(CCharEntity* PChar, uint32 param0, uint32 param1, MsgStd MessageID)
 {
-    this->type = 0x09;
-    this->size = 0x12;
+    this->setType(0x09);
+    this->setSize(0x24);
 
     ref<uint16>(0x0A) = static_cast<uint16>(MessageID);
 
@@ -69,7 +69,7 @@ CMessageStandardPacket::CMessageStandardPacket(CCharEntity* PChar, uint32 param0
 
         if (MessageID == MsgStd::Examine)
         {
-            this->size = 0x30;
+            this->setSize(0x60);
 
             ref<uint8>(0x0C) = 0x10;
 
@@ -84,21 +84,21 @@ CMessageStandardPacket::CMessageStandardPacket(CCharEntity* PChar, uint32 param0
 
 CMessageStandardPacket::CMessageStandardPacket(uint32 param0, uint32 param1, uint32 param2, uint32 param3, MsgStd MessageID)
 {
-    this->type = 0x09;
-    this->size = 0x08;
+    this->setType(0x09);
+    this->setSize(0x10);
 
     ref<uint16>(0x0A) = static_cast<uint16>(MessageID);
 
     snprintf((char*)data + (0x0D), 100, "Para0 %d Para1 %d Para2 %d Para3 %d", param0, param1, param2, param3);
 
-    this->size += (strlen((char*)data + (0x0D)) >> 1) & 0xFE;
+    this->setSize(this->getSize() + (strlen((char*)data + (0x0D)) >> 1) & 0xFE);
 }
 
 // Only used with MsgStd::DiceRoll (/random)
 CMessageStandardPacket::CMessageStandardPacket(CCharEntity* PChar, uint32 param0, MsgStd MessageID)
 {
-    this->type = 0x09;
-    this->size = 0x18;
+    this->setType(0x09);
+    this->setSize(0x30);
 
     // XI_DEBUG_BREAK_IF(MessageID != 0x58);
 

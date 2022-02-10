@@ -29,8 +29,8 @@
 
 CCharAbilitiesPacket::CCharAbilitiesPacket(CCharEntity* PChar)
 {
-    this->type = 0xAC;
-    this->size = 0x72;
+    this->setType(0xAC);
+    this->setSize(0xE4);
 
     memcpy(data + (0x04), PChar->m_WeaponSkills, 32);
     memcpy(data + (0x44), PChar->m_Abilities, 62);

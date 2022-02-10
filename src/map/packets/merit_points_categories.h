@@ -28,12 +28,6 @@
 
 #include "basic.h"
 
-/************************************************************************
- *																		*
- *  																		*
- *																		*
- ************************************************************************/
-
 class CCharEntity;
 
 class CMeritPointsCategoriesPacket : public CBasicPacket

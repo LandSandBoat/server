@@ -28,8 +28,8 @@
 
 CQuestMissionLogPacket::CQuestMissionLogPacket(CCharEntity* PChar, uint8 logID, LOG_TYPE logType)
 {
-    this->type = 0x56;
-    this->size = 0x14;
+    this->setType(0x56);
+    this->setSize(0x28);
 
     uint16 packetType = 0x00;
 
