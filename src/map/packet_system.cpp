@@ -3119,6 +3119,7 @@ void SmallPacket0x050(map_session_data_t* const PSession, CCharEntity* const PCh
     luautils::CheckForGearSet(PChar); // check for gear set on gear change
     PChar->UpdateHealth();
 }
+
 /************************************************************************
  *                                                                       *
  *  Equip Macro Set                                                      *
@@ -3150,6 +3151,7 @@ void SmallPacket0x051(map_session_data_t* const PSession, CCharEntity* const PCh
     luautils::CheckForGearSet(PChar); // check for gear set on gear change
     PChar->UpdateHealth();
 }
+
 /************************************************************************
  *                                                                        *
  *  Add Equipment to set                                                 *

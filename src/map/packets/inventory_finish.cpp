@@ -26,7 +26,23 @@
 CInventoryFinishPacket::CInventoryFinishPacket()
 {
     this->setType(0x1D);
-    this->setSize(0x08);
+    this->setSize(0x0C);
 
-    ref<uint8>(0x04) = 1;
+    ref<uint8>(0x04) = 1; // "Finished" flag
+    ref<uint8>(0x05) = CONTAINER_ID::MAX_CONTAINER_ID;
+    ref<uint8>(0x06) = 0x00;
+    ref<uint8>(0x07) = 0x00;
+    ref<uint8>(0x08) = 0xFF;
+    ref<uint8>(0x09) = 0xFF;
+    ref<uint8>(0x0A) = 0x03;
+    ref<uint8>(0x0B) = 0x00;
+}
+
+CInventoryFinishPacket::CInventoryFinishPacket(CONTAINER_ID id)
+{
+    this->setType(0x1D);
+    this->setSize(0x0C);
+
+    ref<uint8>(0x04) = 0; // "Finished" flag
+    ref<uint8>(0x05) = id;
 }

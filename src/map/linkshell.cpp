@@ -277,7 +277,7 @@ void CLinkshell::RemoveMemberByName(int8* MemberName, uint8 kickerRank, bool bre
                 PMember->pushPacket(new CLinkshellEquipPacket(PMember, lsNum));
             }
 
-            for (uint8 LocationID = 0; LocationID < MAX_CONTAINER_ID; ++LocationID)
+            for (uint8 LocationID = 0; LocationID < CONTAINER_ID::MAX_CONTAINER_ID; ++LocationID)
             {
                 CItemContainer* Inventory = PMember->getStorage(LocationID);
                 for (uint8 SlotID = 0; SlotID < Inventory->GetSize(); ++SlotID)

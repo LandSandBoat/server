@@ -97,7 +97,7 @@ public:
 
 private:
     uint16 m_id;
-    uint16 m_buff;
+    uint16 m_buff; // This appears to be the "usable" amount of your storage. You can have a locker size of 30, but a "buff" of 0 when it is out of use.
     uint8  m_size;
     uint8  m_count;
 

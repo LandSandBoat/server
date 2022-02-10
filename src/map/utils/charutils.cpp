@@ -1146,13 +1146,14 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Отправляем персонажу весь его инвентарь                              *
+     *  We send the character all its inventory                              *
      *                                                                       *
      ************************************************************************/
 
     void SendInventory(CCharEntity* PChar)
     {
-        auto pushContainer = [&](auto LocationID) {
+        auto pushContainer = [&](auto LocationID)
+        {
             CItemContainer* container = PChar->getStorage(LocationID);
             if (container == nullptr)
             {
@@ -1168,6 +1169,8 @@ namespace charutils
                     PChar->pushPacket(new CInventoryItemPacket(PItem, LocationID, slotID));
                 }
             }
+
+            PChar->pushPacket(new CInventoryFinishPacket(LocationID));
         };
 
         // Send important items first
@@ -1216,7 +1219,8 @@ namespace charutils
             PChar->pushPacket(new CInventoryAssignPacket(PItem, INV_LINKSHELL));
             PChar->pushPacket(new CLinkshellEquipPacket(PChar, 2));
         }
-        PChar->pushPacket(new CInventoryFinishPacket());
+
+        PChar->pushPacket(new CInventoryFinishPacket()); // "Finish" type
     }
 
     /************************************************************************
