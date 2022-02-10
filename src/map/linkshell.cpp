@@ -356,11 +356,11 @@ void CLinkshell::PushPacket(uint32 senderID, CBasicPacket* packet)
             CBasicPacket* newPacket = new CBasicPacket(*packet);
             if (member->PLinkshell2 == this)
             {
-                if (newPacket->id() == CChatMessagePacket::id)
+                if (newPacket->getType() == CChatMessagePacket::id)
                 {
                     newPacket->ref<uint8>(0x04) = MESSAGE_LINKSHELL2;
                 }
-                else if (newPacket->id() == CLinkshellMessagePacket::id)
+                else if (newPacket->getType() == CLinkshellMessagePacket::id)
                 {
                     newPacket->ref<uint8>(0x05) |= 0x40;
                 }

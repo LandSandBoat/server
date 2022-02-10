@@ -29,16 +29,10 @@
 
 #include "trade_update.h"
 
-/************************************************************************
- *                                                                       *
- *                                                                       *
- *                                                                       *
- ************************************************************************/
-
 CTradeUpdatePacket::CTradeUpdatePacket(CItem* PItem, uint8 SlotID)
 {
-    this->type = 0x23;
-    this->size = 0x14;
+    this->setType(0x23);
+    this->setSize(0x28);
 
     uint32 amount = PItem->getReserve();
 

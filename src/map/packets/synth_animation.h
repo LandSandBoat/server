@@ -41,12 +41,6 @@
 #define EFFECT_LIGHTSYNTH     0x0016
 #define EFFECT_DARKSYNTH      0x0017
 
-/************************************************************************
- *																		*
- *  																		*
- *																		*
- ************************************************************************/
-
 class CCharEntity;
 
 class CSynthAnimationPacket : public CBasicPacket

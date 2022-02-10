@@ -27,12 +27,6 @@
 #include "../merit.h"
 #include "basic.h"
 
-/************************************************************************
- *																		*
- *  																		*
- *																		*
- ************************************************************************/
-
 class CCharEntity;
 
 class CMenuMeritPacket : public CBasicPacket

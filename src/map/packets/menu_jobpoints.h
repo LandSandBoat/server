@@ -22,12 +22,6 @@
 #include "../job_points.h"
 #include "basic.h"
 
-/************************************************************************
-*																		*
-*  																		*
-*																		*
-************************************************************************/
-
 class CCharEntity;
 
 class CMenuJobPointsPacket : public CBasicPacket

@@ -27,8 +27,8 @@
 
 CCSPositionPacket::CCSPositionPacket(CCharEntity* PChar)
 {
-    this->type = 0x65;
-    this->size = 0x10;
+    this->setType(0x65);
+    this->setSize(0x20);
 
     ref<float>(0x04) = PChar->loc.p.x;
     ref<float>(0x08) = PChar->loc.p.y;

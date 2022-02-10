@@ -25,8 +25,8 @@
 
 CInventoryFinishPacket::CInventoryFinishPacket()
 {
-    this->type = 0x1D;
-    this->size = 0x04;
+    this->setType(0x1D);
+    this->setSize(0x08);
 
     ref<uint8>(0x04) = 1;
 }

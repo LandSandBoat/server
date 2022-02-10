@@ -32,12 +32,6 @@ enum INVITETYPE
     INVITE_ALLIANCE = 5
 };
 
-/************************************************************************
- *																		*
- *  																		*
- *																		*
- ************************************************************************/
-
 class CCharEntity;
 
 class CPartyInvitePacket : public CBasicPacket

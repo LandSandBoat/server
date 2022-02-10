@@ -24,8 +24,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 CSpecialReleasePacket::CSpecialReleasePacket(CCharEntity* PChar)
 {
-    this->id(0x10E);
-    this->length(0x08);
+    this->setType(0x10E);
+    this->setSize(0x08);
 
     ref<uint8>(0x04) = 0; // unknown1
 }
