@@ -33,12 +33,6 @@ enum REVIVAL_TYPE
     TYPE_TRACTOR   = 2
 };
 
-/************************************************************************
- *																		*
- *  																		*
- *																		*
- ************************************************************************/
-
 class CCharEntity;
 
 class CRaiseTractorMenuPacket : public CBasicPacket

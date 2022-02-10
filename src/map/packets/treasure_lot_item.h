@@ -35,12 +35,6 @@ enum ITEMLOTTYPE
 
 class CBaseEntity;
 
-/************************************************************************
- *																		*
- *  																		*
- *																		*
- ************************************************************************/
-
 class CTreasureLotItemPacket : public CBasicPacket
 {
 public:

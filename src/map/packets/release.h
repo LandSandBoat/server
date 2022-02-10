@@ -35,12 +35,6 @@ enum class RELEASE_TYPE : uint8
     FISHING  = 4
 };
 
-/************************************************************************
- *																		*
- *  																		*
- *																		*
- ************************************************************************/
-
 class CCharEntity;
 
 class CReleasePacket : public CBasicPacket

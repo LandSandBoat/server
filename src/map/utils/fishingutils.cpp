@@ -36,6 +36,7 @@
 #include "../packets/message_system.h"
 #include "../packets/message_text.h"
 #include "../packets/release.h"
+#include "../packets/chat_message.h"
 
 #include "../map.h"
 #include "../vana_time.h"
@@ -80,6 +81,8 @@ namespace fishingutils
     {
         // NOTE: Fishing is disabled until further notice, since it is a security liability.
         ShowWarning("Fishing is currently disabled");
+        PChar->pushPacket(new CChatMessagePacket(PChar, CHAT_MESSAGE_TYPE::MESSAGE_SYSTEM_1, "Fishing is currently disabled"));
+        PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::FISHING));
         return;
 
         if (PChar->animation != ANIMATION_NONE)
@@ -379,7 +382,10 @@ namespace fishingutils
 
     void FishingAction(CCharEntity* PChar, FISH_ACTION action, uint16 stamina, uint32 special)
     {
-        ShowWarning("Fishing is currently disabled");
+        // NOTE: Fishing is disabled until further notice, since it is a security liability.
+        ShowWarning("Fishing is currently disabled, but somehow we have somone commencing a fishing action");
+        // Unlikely anyone can get here legit, since we already disabled "startFishing"
+        PChar->animation = ANIMATION_FISHING_STOP;
         return;
 
         uint16 MessageOffset = GetMessageOffset(PChar->getZone());

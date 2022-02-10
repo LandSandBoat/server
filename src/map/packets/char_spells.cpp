@@ -29,8 +29,8 @@
 
 CCharSpellsPacket::CCharSpellsPacket(CCharEntity* PChar)
 {
-    this->type = 0xAA;
-    this->size = 0x42;
+    this->setType(0xAA);
+    this->setSize(0x84);
 
     ref<std::bitset<1024>>(0x04) = PChar->m_SpellList;
 }

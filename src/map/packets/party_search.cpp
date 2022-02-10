@@ -28,8 +28,8 @@
 
 CPartySearchPacket::CPartySearchPacket(CCharEntity* PChar)
 {
-    this->type = 0xE1;
-    this->size = 0x04;
+    this->setType(0xE1);
+    this->setSize(0x08);
 
     if (PChar->PParty != nullptr)
     {

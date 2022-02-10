@@ -27,12 +27,6 @@
 #include "basic.h"
 #include <vector>
 
-/************************************************************************
- *																		*
- *  																		*
- *																		*
- ************************************************************************/
-
 class CCharEntity;
 
 class CStopDownloadingPacket : public CBasicPacket
