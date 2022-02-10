@@ -153,7 +153,7 @@ xi.magic_utils.spell_song_enhancing.useEnhancingSong = function(caster, target, 
     -- Get Variables from Parameters Table.
     local tier            = enhancingTable[spellId][1]
     local songEffect      = enhancingTable[spellId][2]
-    local subEffect       = enhancingTable[spellId][3]
+    local subEffect       = 0
     local instrumentBoost = caster:getMod(enhancingTable[spellId][4]) + caster:getMod(xi.mod.ALL_SONGS_EFFECT)
     local soulVoicePower  = enhancingTable[spellId][12]
 
@@ -161,9 +161,13 @@ xi.magic_utils.spell_song_enhancing.useEnhancingSong = function(caster, target, 
     local power    = xi.magic_utils.spell_song_enhancing.calculateEnhancingPower(caster, target, spell, spellId, tier, songEffect, instrumentBoost, soulVoicePower)
     local duration = xi.magic_utils.spell_song_enhancing.calculateEnhancingDuration(caster, target, spell, instrumentBoost, soulVoicePower)
 
-    -- EXCEPTION: Carols already have a sub-effect in place. The game adds AUGMENT_SONG_STAT * 100 on top of it.
+    -- Handle subEffect
     if songEffect == xi.effect.CAROL then
-        subEffect = subEffect + (caster:getMod(xi.mod.AUGMENT_SONG_STAT) * 100)
+        subEffect = enhancingTable[spellId][3] + (caster:getMod(xi.mod.AUGMENT_SONG_STAT) * 100)
+    elseif songEffect == xi.effect.ETUDE then
+        subEffect = enhancingTable[spellId][3]
+    else
+        subEffect = caster:getMod(enhancingTable[spellId][3])
     end
 
     -- EXCEPTION: Tier 2 Ettudes Fourth Parameter.
