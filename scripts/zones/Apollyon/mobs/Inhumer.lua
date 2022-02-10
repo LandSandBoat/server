@@ -1,8 +1,9 @@
 -----------------------------------
--- Area: Apollyon SE
+-- Area: Apollyon SE, Floor 3
 --  Mob: Inhumer
 -----------------------------------
 local ID = require("scripts/zones/Apollyon/IDs")
+require("scripts/zones/Apollyon/helpers/apollyon_se")
 require("scripts/globals/pathfind")
 -----------------------------------
 local entity = {}
@@ -51,33 +52,7 @@ entity.onMobEngaged = function(mob, target)
 end
 
 entity.onMobDeath = function(mob, player, isKiller, noKiller)
-    if isKiller or noKiller then
-        local cratePos =
-        {
-            [1] = { 366.000, -0.500, -313.000 },
-            [2] = { 313.021,  0.000, -317.754 },
-            [3] = { 376.097,  0.000, -259.382 },
-            [4] = { 321.552,  0.000, -293.187 },
-            [5] = { 337.399, -0.388, -313.442 },
-            [6] = { 354.661, -0.072, -273.424 },
-        }
-
-        local battlefield = mob:getBattlefield()
-        battlefield:setLocalVar("killCountF3", battlefield:getLocalVar("killCountF3") + 1)
-        local killCount = battlefield:getLocalVar("killCountF3")
-        local random    = math.random(1, 6)
-
-        if killCount == 2 then
-            GetNPCByID(ID.npc.APOLLYON_SE_CRATE[3]):setPos(cratePos[random])
-            GetNPCByID(ID.npc.APOLLYON_SE_CRATE[3]):setStatus(xi.status.NORMAL)
-        elseif killCount == 4 then
-            GetNPCByID(ID.npc.APOLLYON_SE_CRATE[3]+1):setPos(cratePos[random])
-            GetNPCByID(ID.npc.APOLLYON_SE_CRATE[3]+1):setStatus(xi.status.NORMAL)
-        elseif killCount == 8 then
-            GetNPCByID(ID.npc.APOLLYON_SE_CRATE[3]+2):setPos(cratePos[random])
-            GetNPCByID(ID.npc.APOLLYON_SE_CRATE[3]+2):setStatus(xi.status.NORMAL)
-        end
-    end
+    xi.apollyon_se.handleMobDeathFloorThree(mob, player, isKiller, noKiller)
 end
 
 return entity

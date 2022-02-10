@@ -98,6 +98,11 @@ xi.magic_utils.spell_song_enhancing.calculateEnhancingPower = function(caster, t
         end
     end
 
+    -- EXCEPTION: AUGMENT_SONG_STAT works differently for etudes, becouse they already boost an stat. And becouse we can't have anything be straightforward in this game.
+    if songEffect == xi.effect.ETUDE then
+        power = power + caster:getMod(xi.mod.AUGMENT_SONG_STAT)
+    end
+
     -- Finish
     return power
 end
@@ -148,13 +153,22 @@ xi.magic_utils.spell_song_enhancing.useEnhancingSong = function(caster, target, 
     -- Get Variables from Parameters Table.
     local tier            = enhancingTable[spellId][1]
     local songEffect      = enhancingTable[spellId][2]
-    local subEffect       = enhancingTable[spellId][3]
+    local subEffect       = 0
     local instrumentBoost = caster:getMod(enhancingTable[spellId][4]) + caster:getMod(xi.mod.ALL_SONGS_EFFECT)
     local soulVoicePower  = enhancingTable[spellId][12]
 
     -- Calculate Song Pottency, Duration and SubEffect.
     local power    = xi.magic_utils.spell_song_enhancing.calculateEnhancingPower(caster, target, spell, spellId, tier, songEffect, instrumentBoost, soulVoicePower)
     local duration = xi.magic_utils.spell_song_enhancing.calculateEnhancingDuration(caster, target, spell, instrumentBoost, soulVoicePower)
+
+    -- Handle subEffect
+    if songEffect == xi.effect.CAROL then
+        subEffect = enhancingTable[spellId][3] + (caster:getMod(xi.mod.AUGMENT_SONG_STAT) * 100)
+    elseif songEffect == xi.effect.ETUDE then
+        subEffect = enhancingTable[spellId][3]
+    else
+        subEffect = caster:getMod(enhancingTable[spellId][3])
+    end
 
     -- EXCEPTION: Tier 2 Ettudes Fourth Parameter.
     if songEffect == xi.effect.ETUDE and tier == 2 then

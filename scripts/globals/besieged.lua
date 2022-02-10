@@ -13,10 +13,10 @@ xi = xi or {}
 xi.besieged = xi.besieged or {}
 
 local function getMapBitmask(player)
-    local mamook = player:hasKeyItem(xi.ki.MAP_OF_MAMOOK) and 1 or 0 -- Map of Mammok
-    local halvung = player:hasKeyItem(xi.ki.MAP_OF_HALVUNG) and 2 or 0 -- Map of Halvung
+    local mamook   = player:hasKeyItem(xi.ki.MAP_OF_MAMOOK) and 1 or 0 -- Map of Mammok
+    local halvung  = player:hasKeyItem(xi.ki.MAP_OF_HALVUNG) and 2 or 0 -- Map of Halvung
     local arrapago = player:hasKeyItem(xi.ki.MAP_OF_ARRAPAGO_REEF) and 4 or 0 -- Map of Arrapago Reef
-    local astral = bit.lshift(xi.besieged.getAstralCandescence(), 31) -- Include astral candescence in the top byte
+    local astral   = bit.lshift(xi.besieged.getAstralCandescence(), 31) -- Include astral candescence in the top byte
 
     return bit.bor(mamook, halvung, arrapago, astral)
 end
@@ -180,11 +180,11 @@ end
 -----------------------------------
 -- Variable for addTeleport and getRegionPoint
 -----------------------------------
-LEUJAOAM_ASSAULT_POINT = 0
-MAMOOL_ASSAULT_POINT = 1
-LEBROS_ASSAULT_POINT = 2
-PERIQIA_ASSAULT_POINT = 3
-ILRUSI_ASSAULT_POINT = 4
+LEUJAOAM_ASSAULT_POINT   = 0
+MAMOOL_ASSAULT_POINT     = 1
+LEBROS_ASSAULT_POINT     = 2
+PERIQIA_ASSAULT_POINT    = 3
+ILRUSI_ASSAULT_POINT     = 4
 NYZUL_ISLE_ASSAULT_POINT = 5
 
 xi.besieged.addRunicPortal = function(player, portal)
@@ -216,14 +216,28 @@ xi.besieged.getAstralCandescence = function()
     return 1 -- Hardcoded to 1 for now
 end
 
-xi.besieged.badges = { 780, 783, 784, 794, 795, 825, 826, 827, 894, 900, 909 }
+xi.besieged.badges =
+{
+    xi.ki.PSC_WILDCAT_BADGE,
+    xi.ki.PFC_WILDCAT_BADGE,
+    xi.ki.SP_WILDCAT_BADGE,
+    xi.ki.LC_WILDCAT_BADGE,
+    xi.ki.C_WILDCAT_BADGE,
+    xi.ki.S_WILDCAT_BADGE,
+    xi.ki.SM_WILDCAT_BADGE,
+    xi.ki.CS_WILDCAT_BADGE,
+    xi.ki.SL_WILDCAT_BADGE,
+    xi.ki.FL_WILDCAT_BADGE,
+    xi.ki.CAPTAIN_WILDCAT_BADGE
+}
 
 xi.besieged.getMercenaryRank = function(player)
     local rank = 0
 
-    for _, v in ipairs(xi.besieged.badges) do
-        if player:hasKeyItem(v) then
-            rank = rank + 1
+    for k = #xi.besieged.badges, 1, -1 do
+        if player:hasKeyItem(xi.besieged.badges[k]) then
+            rank = k
+            break
         end
     end
 

@@ -110,8 +110,8 @@ uint8 GetMogHouseFlag(CCharEntity* PChar)
 
 CZoneInPacket::CZoneInPacket(CCharEntity* PChar, int16 csid)
 {
-    this->type = 0x0A;
-    this->size = 0x82;
+    this->setType(0x0A);
+    this->setSize(0x104);
 
     // необходимо для работы manaklipper
     // последние 8 байт похожи на время

@@ -27,8 +27,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 CSynthSuggestionPacket::CSynthSuggestionPacket(uint16 skillID, uint16 skillLevel)
 {
-    this->type = 0x31;
-    this->size = 0x1A;
+    this->setType(0x31);
+    this->setSize(0x34);
 
     char craftname[8];
     memset(craftname, 0, 8);

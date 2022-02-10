@@ -19,8 +19,8 @@
 
 CCharEmotionJumpPacket::CCharEmotionJumpPacket(CCharEntity* PChar, uint16 targetIndex, uint16 extra)
 {
-    this->id(0x11E);
-    this->length(8);
+    this->setType(0x11E);
+    this->setSize(8);
 
     ref<uint16>(0x04) = targetIndex;
     ref<uint16>(0x06) = extra;

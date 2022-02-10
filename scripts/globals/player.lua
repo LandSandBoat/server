@@ -126,7 +126,7 @@ local function CharCreate(player)
 
     player:addItem(536) -- adventurer coupon
     player:addTitle(xi.title.NEW_ADVENTURER)
-    player:setCharVar("MoghouseExplication", 1) -- needs Moghouse intro
+    player:setCharVar("HQuest[moghouseExpo]notSeen", 1) -- needs Moghouse intro
     player:setCharVar("spokeKindlix", 1) -- Kindlix introduction
     player:setCharVar("spokePyropox", 1) -- Pyropox introduction
     player:setCharVar("TutorialProgress", 1) -- Has not started tutorial

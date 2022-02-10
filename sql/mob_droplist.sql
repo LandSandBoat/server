@@ -17116,6 +17116,7 @@ INSERT INTO `mob_droplist` VALUES (3205,0,0,1000,3542,50); -- (Flume Toad) fossi
 INSERT INTO `mob_droplist` VALUES (3205,0,0,1000,4109,1); -- (Flume Toad) water_cluster
 INSERT INTO `mob_droplist` VALUES (3206,0,0,1000,2151,150); -- (Marid) marid_hide
 INSERT INTO `mob_droplist` VALUES (3206,0,0,1000,2166,5); -- (Marid) lock_of_marid_hair
+INSERT INTO `mob_droplist` VALUES (3207,0,0,1000,3424,1000); -- (Angra Mainyu) fiendish_tome_chapter_21
 
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;

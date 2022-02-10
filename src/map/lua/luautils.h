@@ -108,8 +108,7 @@ enum class Emote : uint8;
 
 namespace luautils
 {
-    extern sol::state        lua;
-    extern struct lua_State* LuaHandle;
+    extern sol::state lua;
 
     void SafeApplyFunc_ReloadList(std::function<void(std::map<std::string, uint64>&)> func);
 

@@ -28,8 +28,8 @@
 
 CCurrencyPacket1::CCurrencyPacket1(CCharEntity* PChar)
 {
-    this->id(0x113);
-    this->length(252);
+    this->setType(0x113);
+    this->setSize(252);
 
     const char* query = "SELECT sandoria_cp, bastok_cp, windurst_cp, beastman_seal, kindred_seal, kindred_crest, \
                         high_kindred_crest, sacred_kindred_crest, ancient_beastcoin, valor_point, scyld, \

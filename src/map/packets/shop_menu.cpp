@@ -27,8 +27,8 @@
 
 CShopMenuPacket::CShopMenuPacket(CCharEntity* PChar)
 {
-    this->type = 0x3E;
-    this->size = 0x04;
+    this->setType(0x3E);
+    this->setSize(0x08);
 
     ref<uint8>(0x04) = PChar->Container->getItemsCount();
 }

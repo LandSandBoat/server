@@ -27,16 +27,16 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "inventory_size.h"
 
 /************************************************************************
- *																		*
- *  Отсутствие значения в 0x1C управляет доступом к MOGLOCKER.			*
- *  По сюжету он заблокирован до выполнения соответствующей задачи		*
- *																		*
- ************************************************************************/
+ *
+ * No value in 0x1C controls access to MOGLOCKER.
+ * In the plot it is blocked before performing the appropriate task
+ *
+ *************************************************************************/
 
 CInventorySizePacket::CInventorySizePacket(CCharEntity* PChar)
 {
-    this->type = 0x1C;
-    this->size = 0x1A;
+    this->setType(0x1C);
+    this->setSize(0x64);
 
     ref<uint8>(0x04) = 1 + PChar->getStorage(LOC_INVENTORY)->GetSize();
     ref<uint8>(0x05) = 1 + PChar->getStorage(LOC_MOGSAFE)->GetSize();
@@ -51,26 +51,29 @@ CInventorySizePacket::CInventorySizePacket(CCharEntity* PChar)
     ref<uint8>(0x0E) = 1 + PChar->getStorage(LOC_WARDROBE2)->GetSize();
     ref<uint8>(0x0F) = 1 + PChar->getStorage(LOC_WARDROBE3)->GetSize();
     ref<uint8>(0x10) = 1 + PChar->getStorage(LOC_WARDROBE4)->GetSize();
+    ref<uint8>(0x11) = 1 + PChar->getStorage(LOC_WARDROBE5)->GetSize();
+    ref<uint8>(0x12) = 1 + PChar->getStorage(LOC_WARDROBE6)->GetSize();
+    ref<uint8>(0x13) = 1 + PChar->getStorage(LOC_WARDROBE7)->GetSize();
+    ref<uint8>(0x14) = 1 + PChar->getStorage(LOC_WARDROBE8)->GetSize();
+    ref<uint8>(0x15) = 1 + PChar->getStorage(LOC_RECYCLEBIN)->GetSize();
 
-    ref<uint16>(0x14) = 1 + PChar->getStorage(LOC_INVENTORY)->GetBuff();
-    ref<uint16>(0x16) = 1 + PChar->getStorage(LOC_MOGSAFE)->GetBuff();
-    ref<uint16>(0x18) = 1 + PChar->getStorage(LOC_STORAGE)->GetBuff();
-    ref<uint16>(0x1A) = 1 + PChar->getStorage(LOC_TEMPITEMS)->GetBuff();
-    if (charutils::hasMogLockerAccess(PChar))
-    {
-        ref<uint16>(0x1C) = 1 + PChar->getStorage(LOC_MOGLOCKER)->GetBuff();
-    }
-    else
-    {
-        ref<uint16>(0x1C) = 0x00;
-    }
-
-    ref<uint16>(0x1E) = 1 + PChar->getStorage(LOC_MOGSATCHEL)->GetBuff();
-    ref<uint16>(0x20) = 1 + PChar->getStorage(LOC_MOGSACK)->GetBuff();
-    ref<uint16>(0x22) = 1 + PChar->getStorage(LOC_MOGCASE)->GetBuff();
-    ref<uint16>(0x24) = 1 + PChar->getStorage(LOC_WARDROBE)->GetBuff();
-    ref<uint16>(0x26) = 1 + PChar->getStorage(LOC_MOGSAFE2)->GetBuff();
-    ref<uint16>(0x28) = 1 + PChar->getStorage(LOC_WARDROBE2)->GetBuff();
-    ref<uint16>(0x2A) = 1 + PChar->getStorage(LOC_WARDROBE3)->GetBuff();
-    ref<uint16>(0x2C) = 1 + PChar->getStorage(LOC_WARDROBE4)->GetBuff();
+    // These set the usable amount of the container. 0x00 disables the container.
+    ref<uint8>(0x24) = 1 + PChar->getStorage(LOC_INVENTORY)->GetBuff();
+    ref<uint8>(0x26) = 1 + PChar->getStorage(LOC_MOGSAFE)->GetBuff();
+    ref<uint8>(0x28) = 1 + PChar->getStorage(LOC_STORAGE)->GetBuff();
+    ref<uint8>(0x2A) = 1 + PChar->getStorage(LOC_TEMPITEMS)->GetBuff();
+    ref<uint8>(0x2C) = charutils::hasMogLockerAccess(PChar) ? 1 + PChar->getStorage(LOC_MOGLOCKER)->GetBuff() : 0x00;
+    ref<uint8>(0x2E) = 1 + PChar->getStorage(LOC_MOGSATCHEL)->GetBuff();
+    ref<uint8>(0x30) = 1 + PChar->getStorage(LOC_MOGSACK)->GetBuff();
+    ref<uint8>(0x32) = 1 + PChar->getStorage(LOC_MOGCASE)->GetBuff();
+    ref<uint8>(0x34) = 1 + PChar->getStorage(LOC_WARDROBE)->GetBuff();
+    ref<uint8>(0x36) = 1 + PChar->getStorage(LOC_MOGSAFE2)->GetBuff();
+    ref<uint8>(0x38) = 1 + PChar->getStorage(LOC_WARDROBE2)->GetBuff();
+    ref<uint8>(0x3A) = 1 + PChar->getStorage(LOC_WARDROBE3)->GetBuff();
+    ref<uint8>(0x3C) = 1 + PChar->getStorage(LOC_WARDROBE4)->GetBuff();
+    ref<uint8>(0x3E) = 1 + PChar->getStorage(LOC_WARDROBE5)->GetBuff();
+    ref<uint8>(0x40) = 1 + PChar->getStorage(LOC_WARDROBE6)->GetBuff();
+    ref<uint8>(0x42) = 1 + PChar->getStorage(LOC_WARDROBE7)->GetBuff();
+    ref<uint8>(0x44) = 1 + PChar->getStorage(LOC_WARDROBE8)->GetBuff();
+    ref<uint8>(0x46) = 1 + PChar->getStorage(LOC_RECYCLEBIN)->GetBuff();
 }

@@ -35,8 +35,8 @@
 
 CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 updatemask)
 {
-    this->type = 0x0E;
-    this->size = 0x2C;
+    this->setType(0x0E);
+    this->setSize(0x58);
 
     ref<uint32>(0x04) = PEntity->id;
     ref<uint16>(0x08) = PEntity->targid;
@@ -146,7 +146,7 @@ CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type
             if (updatemask & UPDATE_NAME)
             {
                 // depending on size of name, this can be 0x20, 0x22, or 0x24
-                this->size = 0x24;
+                this->setSize(0x48);
                 if (PMob->packetName.empty())
                 {
                     memcpy(data + (0x34), PEntity->GetName(), std::min<size_t>(PEntity->name.size(), PacketNameLength));
@@ -187,7 +187,7 @@ CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type
         case MODEL_EQUIPED:
         case MODEL_CHOCOBO:
         {
-            this->size = 0x24;
+            this->setSize(0x48);
 
             memcpy(data + (0x30), &(PEntity->look), 20);
         }
@@ -196,7 +196,7 @@ CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type
         case MODEL_ELEVATOR:
         case MODEL_SHIP:
         {
-            this->size = 0x24;
+            this->setSize(0x48);
 
             ref<uint16>(0x30) = PEntity->look.size;
             memcpy(data + (0x34), PEntity->GetName(), (PEntity->name.size() > 12 ? 12 : PEntity->name.size()));
