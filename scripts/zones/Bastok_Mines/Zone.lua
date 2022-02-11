@@ -1,7 +1,5 @@
 -----------------------------------
---
 -- Zone: Bastok_Mines (234)
---
 -----------------------------------
 local ID = require("scripts/zones/Bastok_Mines/IDs")
 require("scripts/globals/events/harvest_festivals")
@@ -22,10 +20,6 @@ end
 
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
-
-    if xi.settings.ENABLE_ROV == 1 and player:getCurrentMission(ROV) == xi.mission.id.rov.RHAPSODIES_OF_VANADIEL and player:getMainLvl()>=3 then
-        cs = 30035
-    end
 
     if
         player:getCurrentMission(ROV) == xi.mission.id.rov.FATES_CALL and
@@ -66,9 +60,6 @@ end
 zone_object.onEventFinish = function(player, csid, option)
     if csid == 1 then
         player:messageSpecial(ID.text.ITEM_OBTAINED, 536) -- adventurer coupon
-    elseif csid == 30035 then
-        player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.RHAPSODIES_OF_VANADIEL)
-        player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.RESONACE)
     elseif csid == 30036 then
         player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.FATES_CALL)
         player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.WHAT_LIES_BEYOND)

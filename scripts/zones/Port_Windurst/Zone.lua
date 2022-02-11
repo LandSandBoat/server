@@ -1,7 +1,5 @@
 -----------------------------------
---
 -- Zone: Port_Windurst (240)
---
 -----------------------------------
 local ID = require("scripts/zones/Port_Windurst/IDs")
 require("scripts/globals/conquest")
@@ -16,10 +14,6 @@ end
 
 zone_object.onZoneIn = function(player,prevZone)
     local cs = -1
-
-    if xi.settings.ENABLE_ROV == 1 and player:getCurrentMission(ROV) == xi.mission.id.rov.RHAPSODIES_OF_VANADIEL and player:getMainLvl()>=3 then
-        cs = 30035
-    end
 
     if
         player:getCurrentMission(ROV) == xi.mission.id.rov.FATES_CALL and
@@ -65,9 +59,6 @@ zone_object.onEventFinish = function(player, csid, option)
         player:messageSpecial(ID.text.ITEM_OBTAINED, 536)
     elseif (csid == 10002) then
         player:setPos(0, 0, 0, 0, 225)
-    elseif csid == 30035 then
-        player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.RHAPSODIES_OF_VANADIEL)
-        player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.RESONACE)
     elseif csid == 30036 then
         player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.FATES_CALL)
         player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.WHAT_LIES_BEYOND)

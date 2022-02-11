@@ -1,7 +1,5 @@
 -----------------------------------
---
 -- Zone: Port_San_dOria (232)
---
 -----------------------------------
 local ID = require("scripts/zones/Port_San_dOria/IDs")
 require("scripts/quests/flyers_for_regine")
@@ -18,10 +16,6 @@ end
 
 zone_object.onZoneIn = function(player,prevZone)
     local cs = -1
-
-    if xi.settings.ENABLE_ROV == 1 and player:getCurrentMission(ROV) == xi.mission.id.rov.RHAPSODIES_OF_VANADIEL and player:getMainLvl()>=3 then
-        cs = 30035
-    end
 
     if
         player:getCurrentMission(ROV) == xi.mission.id.rov.FATES_CALL and
@@ -79,9 +73,6 @@ zone_object.onEventFinish = function(player, csid, option)
         player:setPos(0, 0, 0, 0, 223)
     elseif (csid == 4) then
         player:setCharVar("COP_Ulmia_s_Path",2)
-    elseif csid == 30035 then
-        player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.RHAPSODIES_OF_VANADIEL)
-        player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.RESONACE)
     elseif csid == 30036 then
         player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.FATES_CALL)
         player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.WHAT_LIES_BEYOND)

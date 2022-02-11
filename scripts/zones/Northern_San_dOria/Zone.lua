@@ -34,8 +34,6 @@ zone_object.onZoneIn = function(player, prevZone)
         end
         player:setPos(0, 0, -11, 191)
         player:setHomePoint()
-    elseif xi.settings.ENABLE_ROV == 1 and player:getCurrentMission(ROV) == xi.mission.id.rov.RHAPSODIES_OF_VANADIEL and player:getMainLvl()>=3 then
-        cs = 30035
     elseif
         player:getCurrentMission(ROV) == xi.mission.id.rov.FATES_CALL and
         (player:getRank(player:getNation()) > 5 or
@@ -66,8 +64,9 @@ zone_object.onRegionEnter = function(player, region)
     switch (region:GetRegionID()): caseof
     {
         [1] = function (x)  -- Chateau d'Oraguille access
-        local pNation = player:getNation()
-        local currentMission = player:getCurrentMission(pNation)
+            local pNation = player:getNation()
+            local currentMission = player:getCurrentMission(pNation)
+
             if (pNation == 0 and player:getRank(player:getNation()) >= 2) or (pNation > 0 and player:hasCompletedMission(pNation, 5) == 1) or (currentMission >= 5 and currentMission <= 9) or (player:getRank(player:getNation()) >= 3) then
                 player:startEvent(569)
             else
@@ -94,9 +93,6 @@ zone_object.onEventFinish = function(player, csid, option)
     elseif csid == 16 then
         player:setCharVar("Wait1DayM8-1_date", 0)
         player:setCharVar("Mission8-1Completed", 1)
-    elseif csid == 30035 then
-        player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.RHAPSODIES_OF_VANADIEL)
-        player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.RESONACE)
     elseif csid == 30036 then
         player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.FATES_CALL)
         player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.WHAT_LIES_BEYOND)
