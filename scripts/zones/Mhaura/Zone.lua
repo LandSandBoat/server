@@ -1,7 +1,5 @@
 -----------------------------------
---
 -- Zone: Mhaura (249)
---
 -----------------------------------
 local ID = require("scripts/zones/Mhaura/IDs")
 require("scripts/globals/conquest")
@@ -31,10 +29,6 @@ end
 
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
-
-    if player:getCurrentMission(ROV) == xi.mission.id.rov.RESONACE and player:getCharVar("RhapsodiesStatus") == 0 then
-        cs = 368
-    end
 
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         if prevZone == xi.zone.SHIP_BOUND_FOR_MHAURA or prevZone == xi.zone.OPEN_SEA_ROUTE_TO_MHAURA or prevZone == xi.zone.SHIP_BOUND_FOR_MHAURA_PIRATES then
@@ -88,11 +82,6 @@ zone_object.onEventFinish = function(player, csid, option)
         end
     elseif csid == 322 then
         player:setCharVar("COP_shikarees_story", 1)
-    elseif csid == 368 then
-        -- Flag ROV 1-3 Mhuara Route (2)
-        player:setCharVar("RhapsodiesStatus", 2)
-        player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.RESONACE)
-        player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.EMISSARY_FROM_THE_SEAS)
     end
 end
 
