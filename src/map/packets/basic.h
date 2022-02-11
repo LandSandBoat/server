@@ -47,10 +47,14 @@ enum ENTITYUPDATE
  */
 class CBasicPacket
 {
+// Mark these members as private, so that they can't be set without using their
+// specialised setters.
+private:
+    uint8& type;
+    uint8& size;
+
 protected:
     uint8*  data;
-    uint8&  type;
-    uint8&  size;
     uint16& code;
     bool    owner;
 
@@ -107,15 +111,17 @@ public:
 
     /* Getters for the header */
 
-    uint16 id()
+    uint16 getType()
     {
         return ref<uint16>(0) & 0x1FF;
     }
-    std::size_t length()
+
+    std::size_t getSize()
     {
         return 2 * (ref<uint8>(1) & ~1);
     }
-    unsigned short sequence()
+
+    unsigned short getSequence()
     {
         return ref<uint16>(2);
     }
@@ -123,7 +129,7 @@ public:
     /* Setters for the header */
 
     // Set the first 9 bits to the ID. The highest bit overflows into the second byte.
-    void id(unsigned int new_id)
+    void setType(unsigned int new_id)
     {
         ref<uint16>(0) &= ~0x1FF;
         ref<uint16>(0) |= new_id & 0x1FF;
@@ -131,13 +137,13 @@ public:
 
     // The length "byte" is actually just the highest 7 bits.
     // Need to preserve the lowest bit for the ID.
-    void length(std::size_t new_size)
+    void setSize(std::size_t new_size)
     {
         ref<uint8>(1) &= 1;
         ref<uint8>(1) |= ((new_size + 3) & ~3) / 2;
     }
 
-    void sequence(unsigned short new_sequence)
+    void setSequence(unsigned short new_sequence)
     {
         ref<uint16>(2) = new_sequence;
     }

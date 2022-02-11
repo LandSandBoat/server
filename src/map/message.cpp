@@ -671,7 +671,7 @@ namespace message
 
         if (packet)
         {
-            msg.packet = new zmq::message_t(*packet, packet->length(), [](void* data, void* hint) { delete[](uint8*) data; });
+            msg.packet = new zmq::message_t(*packet, packet->getSize(), [](void* data, void* hint) { delete[](uint8*) data; });
         }
         else
         {

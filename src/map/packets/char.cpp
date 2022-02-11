@@ -31,8 +31,8 @@
 
 CCharPacket::CCharPacket(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask)
 {
-    this->type = 0x0D;
-    this->size = 0x3A;
+    this->setType(0x0D);
+    this->setSize(0x74);
 
     ref<uint32>(0x04) = PChar->id;
     ref<uint16>(0x08) = PChar->targid;

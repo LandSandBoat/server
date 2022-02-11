@@ -154,12 +154,6 @@ enum MSGBASIC_ID : uint16
     MSGBASIC_DEBUG_SUCCESS_CHANCE   = 255 /* DEBUG: ..% chance of success */
 };
 
-/************************************************************************
- *																		*
- *  																		*
- *																		*
- ************************************************************************/
-
 class CBaseEntity;
 
 class CMessageBasicPacket : public CBasicPacket

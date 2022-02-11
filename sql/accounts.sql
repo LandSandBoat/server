@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS `accounts` (
   `timelastmodify` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `content_ids` tinyint(2) unsigned NOT NULL DEFAULT '16',
   `expansions` smallint(4) UNSIGNED NOT NULL DEFAULT '4094',
-  `features` tinyint(2) UNSIGNED NOT NULL DEFAULT '13',
+  `features` tinyint(2) UNSIGNED NOT NULL DEFAULT '253',
   `status` tinyint(3) unsigned NOT NULL DEFAULT '1',
   `priv` tinyint(3) unsigned NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)

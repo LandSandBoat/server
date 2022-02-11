@@ -34,8 +34,8 @@ bool IsAuctionOpen = true; // Trading is allowed at the auction
 
 CAuctionHousePacket::CAuctionHousePacket(uint8 action)
 {
-    this->type = 0x4C;
-    this->size = 0x1E;
+    this->setType(0x4C);
+    this->setSize(0x3C);
 
     ref<uint8>(0x04) = action;
     ref<uint8>(0x05) = 0xFF;
@@ -49,8 +49,8 @@ CAuctionHousePacket::CAuctionHousePacket(uint8 action)
 
 CAuctionHousePacket::CAuctionHousePacket(uint8 action, CItem* PItem, uint8 quantity, uint32 price)
 {
-    this->type = 0x4C;
-    this->size = 0x1E;
+    this->setType(0x4C);
+    this->setSize(0x3C);
 
     uint32 auctionFee = 0;
     if (quantity == 0) // This is a stack..Yes, zero for stacks.. Why is this being called quantity?
@@ -80,8 +80,8 @@ CAuctionHousePacket::CAuctionHousePacket(uint8 action, CItem* PItem, uint8 quant
 // e.g. client history, client probes a slot number which you give the correct itemId+price
 CAuctionHousePacket::CAuctionHousePacket(uint8 action, uint8 slot, CCharEntity* PChar)
 {
-    this->type = 0x4C;
-    this->size = 0x1E;
+    this->setType(0x4C);
+    this->setSize(0x3C);
 
     ref<uint8>(0x04) = action;
     ref<uint8>(0x05) = slot; // Serial number of the subject
@@ -103,8 +103,8 @@ CAuctionHousePacket::CAuctionHousePacket(uint8 action, uint8 slot, CCharEntity* 
 
 CAuctionHousePacket::CAuctionHousePacket(uint8 action, uint8 message, uint16 itemid, uint32 price)
 {
-    this->type = 0x4C;
-    this->size = 0x1E;
+    this->setType(0x4C);
+    this->setSize(0x3C);
 
     ref<uint8>(0x04)  = action;
     ref<uint8>(0x06)  = message;
@@ -114,8 +114,8 @@ CAuctionHousePacket::CAuctionHousePacket(uint8 action, uint8 message, uint16 ite
 
 CAuctionHousePacket::CAuctionHousePacket(uint8 action, uint8 message, CCharEntity* PChar, uint8 slot, bool keepItem)
 {
-    this->type = 0x4C;
-    this->size = 0x1E;
+    this->setType(0x4C);
+    this->setSize(0x3C);
 
     ref<uint8>(0x04) = action;
     ref<uint8>(0x05) = slot;

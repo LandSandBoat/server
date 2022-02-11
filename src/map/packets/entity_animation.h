@@ -27,10 +27,8 @@
 #include "basic.h"
 
 /************************************************************************
- *																		*
- *  	Animates an entity in some fashion.  The parameter is a 4 byte      *
- *   ASCII word that the client will parse (and change to a proper anim) *
- *																		*
+ *   Animates an entity in some fashion.  The parameter is a 4 byte
+ *   ASCII word that the client will parse (and change to a proper anim)
  ************************************************************************/
 
 class CBaseEntity;

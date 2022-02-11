@@ -27,8 +27,8 @@
 
 CSynthMessagePacket::CSynthMessagePacket(CCharEntity* PChar, SYNTH_MESSAGE messageID, uint16 itemID, uint8 quantity)
 {
-    id(0x6F);
-    length(0x38);
+    this->setType(0x6F);
+    this->setSize(0x38);
 
     ref<uint8>(0x04) = messageID;
 

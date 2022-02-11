@@ -41,12 +41,6 @@ enum KEYS_TABLE
 
 #define MAX_KEYS_TABLE 7
 
-/************************************************************************
- *																		*
- *  																		*
- *																		*
- ************************************************************************/
-
 class CCharEntity;
 
 class CKeyItemsPacket : public CBasicPacket
