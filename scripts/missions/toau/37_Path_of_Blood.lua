@@ -31,28 +31,14 @@ mission.sections =
             onRegionEnter =
             {
                 [3] = function(player, region)
-                    return mission:progressEvent(3131, 1, 1, 1, 1, 1, 1, 1, 1)
-                end,
-            },
-
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if player:getMissionStatus(mission.areaId) == 1 then
-                        return 3220
-                    end
+                    -- Event 3131 will automatically move the player to the end point
+                    player:startEvent(3131)
+                    return mission:progressEvent(3220)
                 end,
             },
 
             onEventFinish =
             {
-                [3131] = function(player, csid, option, npc)
-                    player:setMissionStatus(mission.areaId, 1)
-
-                    -- TODO: Verify this setPos changes zone/Downloading Data
-                    player:setPos(-97.936, 0, 0.109, 0, 50)
-                end,
-
                 [3220] = function(player, csid, option, npc)
                     if mission:complete(player) then
                         player:setLocalVar('Mission[4][37]mustZone', 1)

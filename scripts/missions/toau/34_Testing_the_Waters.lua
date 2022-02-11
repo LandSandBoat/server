@@ -42,8 +42,10 @@ mission.sections =
             onEventFinish =
             {
                 [15] = function(player, csid, option, npc)
-                    player:setMissionStatus(mission.areaId, 1)
-                    player:setPos(0, 0, 0, 0, 57)
+                    if option == 1 then
+                        player:setMissionStatus(mission.areaId, 1)
+                        player:setPos(-88.879, -7.318, -109.233, 173, 57)
+                    end
                 end,
             },
         },
@@ -54,7 +56,6 @@ mission.sections =
             {
                 function(player, prevZone)
                     if player:getMissionStatus(mission.areaId) == 1 then
-                        player:setPos(-88.879, -7.318, -109.233, 173)
                         return 106
                     end
                 end,

@@ -52,6 +52,10 @@ mission.sections =
                     if option == 1 then
                         -- Title can be obtained immediately following this event.  Since these are stringed
                         -- together, set it at the end for clarity in mission rewards.
+
+                        -- NOTE: Setting absolute pos here in the past has caused issues, so we chuck to Wajaom
+                        -- and then start moving things around.  This is probably something good to fix in the
+                        -- future for all events.
                         player:setPos(0, 0, 0, 0, 51)
                     else
                         mission:setMustZone(player)
