@@ -837,6 +837,7 @@ namespace charutils
         PChar->StatusEffectContainer->LoadStatusEffects();
 
         charutils::LoadEquip(PChar);
+        charutils::EmptyRecycleBin(PChar);
         PChar->health.hp = zoneutils::IsResidentialArea(PChar) ? PChar->GetMaxHP() : HP;
         PChar->health.mp = zoneutils::IsResidentialArea(PChar) ? PChar->GetMaxMP() : MP;
         PChar->UpdateHealth();
@@ -1514,6 +1515,17 @@ namespace charutils
             }
         }
         return ItemID;
+    }
+
+    // A wrapper around UpdateItem, with some packets
+    void DropItem(CCharEntity* PChar, uint8 container, uint8 slotID, int32 quantity, uint16 ItemID)
+    {
+        if (charutils::UpdateItem(PChar, container, slotID, -quantity) != 0)
+        {
+            ShowNotice("Player %s DROPPING itemID: %s (%u) quantity: %u", PChar->GetName(), itemutils::GetItem(ItemID)->getName(), ItemID, quantity);
+            PChar->pushPacket(new CMessageStandardPacket(nullptr, ItemID, quantity, MsgStd::ThrowAway));
+            PChar->pushPacket(new CInventoryFinishPacket());
+        }
     }
 
     /************************************************************************
@@ -2196,6 +2208,17 @@ namespace charutils
                 PChar->mainlook.feet = appearanceModel;
                 break;
         }
+    }
+
+    void AddItemToRecycleBin(CCharEntity* PChar, uint32 container, uint8 slotID, uint8 quantity)
+    {
+        // TODO
+    }
+
+    void EmptyRecycleBin(CCharEntity* PChar)
+    {
+        ShowNotice("EmptyRecycleBin");
+        // TODO
     }
 
     /************************************************************************
