@@ -170,9 +170,9 @@ xi.teleport.type =
 xi.teleport.runic_portal =
 {
     AZOUPH  = 1,
-    MAMOOL  = 2,
-    HALVUNG = 3,
-    DVUCCA  = 4,
+    DVUCCA  = 2,
+    MAMOOL  = 3,
+    HALVUNG = 4,
     ILRUSI  = 5,
     NYZUL   = 6,
 }

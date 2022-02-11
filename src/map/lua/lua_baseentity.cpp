@@ -1053,7 +1053,7 @@ std::optional<CLuaBaseEntity> CLuaBaseEntity::getEventTarget()
     auto* PChar = (CCharEntity*)m_PBaseEntity;
     if (PChar->currentEvent->targetEntity == nullptr)
     {
-        ShowWarning("EventTarget is empty: %s", m_PBaseEntity->GetName());
+        ShowWarning("EventTarget for event %d is empty: %s", PChar->currentEvent->eventId, m_PBaseEntity->GetName());
         return std::nullopt;
     }
 
