@@ -1,6 +1,6 @@
 -----------------------------------
 -- Rhapsodies of Vana'diel
--- Rhapsodies of Vana'diel Mission 1
+-- Rhapsodies of Vana'diel Mission 1-1
 -----------------------------------
 -- NOTE: xi.mission.id.rov.RHAPSODIES_OF_VANADIEL is set by default
 -- !addmission 13 0
@@ -39,7 +39,7 @@ mission.sections[1].check = function(player, currentMission, missionStatus, vars
     return currentMission == mission.missionId and
         xi.settings.ENABLE_ROV == 1 and
         player:getMainLvl() >= 3
-end,
+end
 
 local rovZoneInEvent =
 {

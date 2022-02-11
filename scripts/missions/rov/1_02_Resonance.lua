@@ -1,8 +1,8 @@
 -----------------------------------
 -- Resonance
--- Rhapsodies of Vana'diel Mission 2
+-- Rhapsodies of Vana'diel Mission 1-2
 -----------------------------------
--- !addmission 13 1
+-- !addmission 13 2
 -----------------------------------
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
