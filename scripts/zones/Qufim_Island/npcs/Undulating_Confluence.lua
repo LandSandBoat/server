@@ -13,10 +13,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getCurrentMission(ROV) == xi.mission.id.rov.THE_LIONS_ROAR then
-        npcUtil.popFromQM(player, npc, ID.mob.OPHIOTAURUS, { look=true, hide=0 })
-        -- overcome with a sense of foreboding
-    elseif player:getCurrentMission(ROV) == xi.mission.id.rov.EDDIES_OF_DESPAIR_I then
+    if player:getCurrentMission(ROV) == xi.mission.id.rov.EDDIES_OF_DESPAIR_I then
         player:startEvent(64)
     elseif player:getCurrentMission(ROV) >= xi.mission.id.rov.SET_FREE then
         player:startEvent(65)
