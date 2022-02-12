@@ -52890,6 +52890,8 @@ INSERT INTO `item_mods` VALUES (28583,2,50);      -- Vexer Ring +1: HP +50
 INSERT INTO `item_mods` VALUES (28583,27,3);      -- Enmity +3
 INSERT INTO `item_mods` VALUES (28583,29,3);      -- Magic Def. Bonus +3
 INSERT INTO `item_mods` VALUES (28584,2,55);      -- Vexer Ring +1: HP +55
+INSERT INTO `item_mods` VALUES (28585,861,-1);    -- Craftkeeper's Ring: Synthesis material loss -1%
+INSERT INTO `item_mods` VALUES (28586,862,1);     -- Craftmaster's Ring: Increase rate of HQ +1%
 INSERT INTO `item_mods` VALUES (28584,27,4);      -- Enmity +4
 INSERT INTO `item_mods` VALUES (28584,29,4);      -- Magic Def. Bonus +4
 INSERT INTO `item_mods` VALUES (28587,851,1);     -- Artificier's Ring Synthesis Skill +1
