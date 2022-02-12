@@ -20,14 +20,6 @@ end
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    if
-        player:getCurrentMission(ROV) == xi.mission.id.rov.FATES_CALL and
-        (player:getRank(player:getNation()) > 5 or
-        (player:getCurrentMission(player:getNation()) == xi.mission.id.nation.SHADOW_LORD and player:getMissionStatus(player:getNation()) >= 4))
-    then
-        cs = 30036
-    end
-
     -- FIRST LOGIN (START CS)
     if player:getPlaytime(false) == 0 then
         if xi.settings.NEW_CHARACTER_CUTSCENE == 1 then
@@ -62,9 +54,6 @@ end
 zone_object.onEventFinish = function(player, csid, option)
     if csid == 531 then
         player:messageSpecial(ID.text.ITEM_OBTAINED, 536)
-    elseif csid == 30036 then
-        player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.FATES_CALL)
-        player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.WHAT_LIES_BEYOND)
     end
 end
 

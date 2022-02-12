@@ -25,12 +25,6 @@ zone_object.onZoneIn = function(player, prevZone)
         end
         player:setPos(0, 0, -50, 0)
         player:setHomePoint()
-    elseif
-        player:getCurrentMission(ROV) == xi.mission.id.rov.FATES_CALL and
-        (player:getRank(player:getNation()) > 5 or
-        (player:getCurrentMission(player:getNation()) == xi.mission.id.nation.SHADOW_LORD and player:getMissionStatus(player:getNation()) >= 4))
-    then
-        cs = 30036
     end
 
     -- MOG HOUSE EXIT
@@ -55,9 +49,6 @@ end
 zone_object.onEventFinish = function(player, csid, option)
     if csid == 367 then
         player:messageSpecial(ID.text.ITEM_OBTAINED, 536)
-    elseif csid == 30036 then
-        player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.FATES_CALL)
-        player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.WHAT_LIES_BEYOND)
     end
 end
 

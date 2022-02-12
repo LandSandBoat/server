@@ -20,11 +20,7 @@ entity.onTrigger = function(player, npc)
     local RhapsodiesMission = player:getCurrentMission(ROV)
 
     -- On retail, ROV missions always take precedence over other missions
-    if RhapsodiesMission == xi.mission.id.rov.FATES_CALL and player:getRank(player:getNation()) > 5 then
-        player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.FATES_CALL)
-        player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.WHAT_LIES_BEYOND)
-        player:startEvent(278)
-    elseif RhapsodiesMission == xi.mission.id.rov.WHAT_LIES_BEYOND then
+    if RhapsodiesMission == xi.mission.id.rov.WHAT_LIES_BEYOND then
         player:startEvent(278)
     elseif player:getCharVar("ZeidIICipher") == 1 then
         if npcUtil.giveItem(player, xi.items.CIPHER_OF_ZEIDS_ALTER_EGO_II) then -- Cipher: Zeid II

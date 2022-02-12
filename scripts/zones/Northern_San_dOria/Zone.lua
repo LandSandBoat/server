@@ -24,7 +24,6 @@ zone_object.onInitialize = function(zone)
 end
 
 zone_object.onZoneIn = function(player, prevZone)
-    local missionStatus = player:getMissionStatus(player:getNation())
     local cs = -1
 
     -- FIRST LOGIN (START CS)
@@ -34,12 +33,6 @@ zone_object.onZoneIn = function(player, prevZone)
         end
         player:setPos(0, 0, -11, 191)
         player:setHomePoint()
-    elseif
-        player:getCurrentMission(ROV) == xi.mission.id.rov.FATES_CALL and
-        (player:getRank(player:getNation()) > 5 or
-        (player:getCurrentMission(player:getNation()) == xi.mission.id.nation.SHADOW_LORD and missionStatus >= 4))
-    then
-        cs = 30036
     -- RDM AF3 CS
     elseif player:getCharVar("peaceForTheSpiritCS") == 5 and player:getFreeSlotsCount() >= 1 then
         cs = 49
@@ -93,9 +86,6 @@ zone_object.onEventFinish = function(player, csid, option)
     elseif csid == 16 then
         player:setCharVar("Wait1DayM8-1_date", 0)
         player:setCharVar("Mission8-1Completed", 1)
-    elseif csid == 30036 then
-        player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.FATES_CALL)
-        player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.WHAT_LIES_BEYOND)
     end
 end
 
