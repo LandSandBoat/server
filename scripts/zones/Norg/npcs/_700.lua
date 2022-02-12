@@ -20,9 +20,7 @@ entity.onTrigger = function(player, npc)
     local RhapsodiesMission = player:getCurrentMission(ROV)
 
     -- On retail, ROV missions always take precedence over other missions
-    if RhapsodiesMission == xi.mission.id.rov.FLAMES_OF_PRAYER then
-        player:startEvent(277)
-    elseif RhapsodiesMission == xi.mission.id.rov.FATES_CALL and player:getRank(player:getNation()) > 5 then
+    if RhapsodiesMission == xi.mission.id.rov.FATES_CALL and player:getRank(player:getNation()) > 5 then
         player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.FATES_CALL)
         player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.WHAT_LIES_BEYOND)
         player:startEvent(278)
@@ -63,11 +61,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 277 then
-        npcUtil.giveKeyItem(player, xi.ki.RHAPSODY_IN_WHITE)
-        player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.FLAMES_OF_PRAYER)
-        player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.THE_PATH_UNTRAVELED)
-    elseif csid == 278 then
+    if csid == 278 then
         player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.WHAT_LIES_BEYOND)
         player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.THE_TIES_THAT_BIND)
     elseif csid == 279 then
