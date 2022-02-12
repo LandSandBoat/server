@@ -1,6 +1,6 @@
 -----------------------------------
 -- ID: 28562
--- Item: Duodecennial Ring 
+-- Item: Duodecennial Ring
 -- Experience point bonus
 -----------------------------------
 -- Bonus: +100%
