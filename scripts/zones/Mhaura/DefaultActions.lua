@@ -7,4 +7,5 @@ return {
     ['Phoochuchu']    = { event = 300 },
     ['Rycharde']      = { event = 69 },
     ['Take']          = { event = 59 },
+    ['Tonasav']       = { event = 372 },
 }
