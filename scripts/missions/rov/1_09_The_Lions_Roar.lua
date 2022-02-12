@@ -31,7 +31,7 @@ mission.sections =
             ['Undulating_Confluence'] =
             {
                 onTrigger = function(player, npc)
-                    if npcUtil.popFromQM(player, npc, ID.mob.OPHIOTAURUS, { look = true, hide = 0 }) then
+                    if npcUtil.popFromQM(player, npc, qufimID.mob.OPHIOTAURUS, { look = true, hide = 0 }) then
                         return mission:messageSpecial(qufimID.text.SENSE_OF_FOREBODING)
                     else
                         return mission:messageSpecial(qufimID.text.NOW_IS_NOT_THE_TIME)
