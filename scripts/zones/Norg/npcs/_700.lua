@@ -20,15 +20,7 @@ entity.onTrigger = function(player, npc)
     local RhapsodiesMission = player:getCurrentMission(ROV)
 
     -- On retail, ROV missions always take precedence over other missions
-    if player:getCharVar("ZeidIICipher") == 1 then
-        if npcUtil.giveItem(player, xi.items.CIPHER_OF_ZEIDS_ALTER_EGO_II) then -- Cipher: Zeid II
-            player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.VOLTO_OSCURO)
-            player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.RING_MY_BELL)
-            player:setCharVar("ZeidIICipher", 0)
-        end
-    elseif RhapsodiesMission == xi.mission.id.rov.VOLTO_OSCURO then
-        player:startEvent(279)
-    elseif RhapsodiesMission == xi.mission.id.rov.RING_MY_BELL and xi.rhapsodies.charactersAvailable(player) then
+    if RhapsodiesMission == xi.mission.id.rov.RING_MY_BELL and xi.rhapsodies.charactersAvailable(player) then
         -- Below params change depending on how well you know COP characters. The precise COP mission values are
         -- currently unknown. What's known from retail is that a character that has never started COP gets Tenzen
         -- and Prishe params of 0, while characters who have completed it get Tenzen value of 2 and Prishe value of 1.
@@ -55,14 +47,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 279 then
-        if npcUtil.giveItem(player, xi.items.CIPHER_OF_ZEIDS_ALTER_EGO_II) then -- Cipher: Zeid II
-            player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.VOLTO_OSCURO)
-            player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.RING_MY_BELL)
-        else
-            player:setCharVar("ZeidIICipher", 1)
-        end
-    elseif csid == 284 then
+    if csid == 284 then
         player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.RING_MY_BELL)
         player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.SPIRITS_AWOKEN)
     end
