@@ -3,9 +3,8 @@
 --  NPC: Undulating Confluence
 -- !pos -204.531 -20.027 75.318 126
 -----------------------------------
-local ID = require("scripts/zones/Qufim_Island/IDs")
 require("scripts/globals/missions")
-require("scripts/globals/npc_util")
+require("scripts/globals/teleports")
 -----------------------------------
 local entity = {}
 
@@ -13,9 +12,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getCurrentMission(ROV) == xi.mission.id.rov.EDDIES_OF_DESPAIR_I then
-        player:startEvent(64)
-    elseif player:getCurrentMission(ROV) >= xi.mission.id.rov.SET_FREE then
+    if player:getCurrentMission(ROV) >= xi.mission.id.rov.SET_FREE then
         player:startEvent(65)
     end
 end
@@ -24,9 +21,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 64 then
-        xi.teleport.to(player, xi.teleport.id.ESCHA_ZITAH)
-    elseif csid == 65 and option == 1 then
+    if csid == 65 and option == 1 then
         xi.teleport.to(player, xi.teleport.id.ESCHA_ZITAH)
     end
 end
