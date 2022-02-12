@@ -19,9 +19,7 @@ entity.onTrigger = function(player, npc)
     local copMission = player:getCurrentMission(COP)
 
     -- RoV Missions
-    if rovMission == xi.mission.id.rov.THE_PATH_UNTRAVELED and player:getRank(player:getNation()) >= 3 then
-        player:startEvent(41)
-    elseif player:getCharVar("LionIICipher") == 1 then
+    if player:getCharVar("LionIICipher") == 1 then
         if npcUtil.giveItem(player, xi.items.CIPHER_OF_LIONS_ALTER_EGO_II) then -- Cipher: Lion II
             npcUtil.giveKeyItem(player, xi.ki.RHAPSODY_IN_UMBER)
             player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.A_LAND_AFTER_TIME)
@@ -68,10 +66,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     -- RoV Missions
-    if csid == 41 then
-        player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.THE_PATH_UNTRAVELED)
-        player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.AT_THE_HEAVENS_DOOR)
-    elseif csid == 42 then
+    if csid == 42 then
         if npcUtil.giveItem(player, xi.items.CIPHER_OF_LIONS_ALTER_EGO_II) then -- Cipher: Lion II
             npcUtil.giveKeyItem(player, xi.ki.RHAPSODY_IN_UMBER)
             player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.A_LAND_AFTER_TIME)
