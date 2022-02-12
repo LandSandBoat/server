@@ -20,9 +20,7 @@ entity.onTrigger = function(player, npc)
     local RhapsodiesMission = player:getCurrentMission(ROV)
 
     -- On retail, ROV missions always take precedence over other missions
-    if RhapsodiesMission == xi.mission.id.rov.WHAT_LIES_BEYOND then
-        player:startEvent(278)
-    elseif player:getCharVar("ZeidIICipher") == 1 then
+    if player:getCharVar("ZeidIICipher") == 1 then
         if npcUtil.giveItem(player, xi.items.CIPHER_OF_ZEIDS_ALTER_EGO_II) then -- Cipher: Zeid II
             player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.VOLTO_OSCURO)
             player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.RING_MY_BELL)
@@ -57,10 +55,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 278 then
-        player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.WHAT_LIES_BEYOND)
-        player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.THE_TIES_THAT_BIND)
-    elseif csid == 279 then
+    if csid == 279 then
         if npcUtil.giveItem(player, xi.items.CIPHER_OF_ZEIDS_ALTER_EGO_II) then -- Cipher: Zeid II
             player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.VOLTO_OSCURO)
             player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.RING_MY_BELL)
