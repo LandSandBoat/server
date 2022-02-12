@@ -2,6 +2,7 @@ require('scripts/globals/interaction/actions/event')
 require('scripts/globals/interaction/actions/message')
 require('scripts/globals/interaction/actions/sequence')
 require('scripts/globals/interaction/actions/lambdaaction')
+require('scripts/globals/interaction/actions/noaction')
 
 actionUtil = actionUtil or {}
 
