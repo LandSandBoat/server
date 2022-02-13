@@ -9,13 +9,13 @@ require("scripts/globals/keyitems")
 local instance_object = {}
 
 instance_object.registryRequirements = function(player)
-    return player:getCurrentMission(TOAU) == xi.mission.id.toau.NASHMEIRAS_PLEA and
-           player:hasKeyItem(xi.ki.MYTHRIL_MIRROR) and
-           player:getCharVar("AhtUrganStatus") == 1
+    return player:getCurrentMission(xi.mission.log_id.TOAU) == xi.mission.id.toau.NASHMEIRAS_PLEA and
+        player:hasKeyItem(xi.ki.MYTHRIL_MIRROR) and
+        player:getMissionStatus(xi.mission.log_id.TOAU) == 1
 end
 
 instance_object.entryRequirements = function(player)
-    return player:getCurrentMission(TOAU) >= xi.mission.id.toau.NASHMEIRAS_PLEA
+    return player:getCurrentMission(xi.mission.log_id.TOAU) >= xi.mission.id.toau.NASHMEIRAS_PLEA
 end
 
 instance_object.onInstanceCreated = function(instance)
@@ -77,12 +77,18 @@ instance_object.onInstanceComplete = function(instance)
     local chars = instance:getChars()
 
     for i, v in pairs(chars) do
-        if v:getCurrentMission(TOAU) == xi.mission.id.toau.NASHMEIRAS_PLEA and v:getCharVar("AhtUrganStatus") == 1 then
-            v:setCharVar("AhtUrganStatus", 2)
+        if
+            v:getCurrentMission(xi.mission.log_id.TOAU) == xi.mission.id.toau.NASHMEIRAS_PLEA and
+            v:getMissionStatus(xi.mission.log_id.TOAU) == 1
+        then
+            v:setMissionStatus(xi.mission.log_id.TOAU, 2)
         end
 
         v:setPos(0, 0, 0, 0, 72)
     end
+end
+
+instance_object.onEventFinish = function(player, csid, option)
 end
 
 return instance_object

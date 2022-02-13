@@ -4,6 +4,8 @@
 require("scripts/settings/main")
 -----------------------------------
 
+local sharedObj = {}
+
 -- Set of Royal Palace Approved Armor
 local ROYAL_PALACE_ALLOWED_BODY_ARMORS = set{
     12548, -- Adaman Cuirass Lv. 73 WAR / PLD
@@ -71,7 +73,7 @@ local ROYAL_PALACE_ALLOWED_BODY_ARMORS = set{
 }
 
 -- Function to check if the player is wearing armor that is appropriate for the royal palace.
-function doRoyalPalaceArmorCheck(player)
+sharedObj.doRoyalPalaceArmorCheck = function(player)
     local bodyArmor = player:getEquipID(xi.slot.BODY)
     local check = (ROYAL_PALACE_ALLOWED_BODY_ARMORS[bodyArmor] ~= nil)
 
@@ -88,3 +90,5 @@ function doRoyalPalaceArmorCheck(player)
 
     return check
 end
+
+return sharedObj

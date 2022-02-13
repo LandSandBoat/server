@@ -56,16 +56,6 @@ entity.onTrigger = function(player, npc)
     then
         player:startEvent(10049)
 
-    elseif player:getCurrentMission(TOAU) == xi.mission.id.toau.UNRAVELING_REASON then
-        if
-            player:getCharVar("TOAUM40_STARTDAY") ~= VanadielDayOfTheYear() and
-            player:needToZone() == false
-        then
-            player:startEvent(10098, 0, 0, 0, 0, 0, 0, 0, 0)
-        else
-            player:startEvent(10099)
-        end
-
     else
         player:startEvent(155)
     end
@@ -75,9 +65,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 10098 then
-        player:setPos(0, 0, 0, 0, 51)
-    elseif csid == 24 then
+    if csid == 24 then
         player:setCharVar("PromathiaStatus", 1) -- first cs mission 1.2 has been seen YOU CAN NOW ENTER TO PROMYVION
         player:setCharVar("FirstPromyvionHolla", 1)
         player:setCharVar("FirstPromyvionMea", 1)
