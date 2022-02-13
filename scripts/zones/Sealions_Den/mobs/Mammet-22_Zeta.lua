@@ -2,8 +2,7 @@
 -- Area: Sealions Den
 --  Mob: Mammet-22 Zeta
 -----------------------------------
-local ID = require("scripts/zones/Sealions_Den/IDs")
-require("scripts/globals/titles")
+local oneToBeFeared = require("scripts/zones/Sealions_Den/helpers/One_to_be_Feared")
 -----------------------------------
 local entity = {}
 
@@ -93,49 +92,11 @@ entity.onMobWeaponSkillPrepare = function(mob, target)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    -- find mob offset for given battlefield instance
-    local battlefield = mob:getBattlefield()
-    local inst = battlefield:getArea()
-    local instOffset = ID.mob.ONE_TO_BE_FEARED_OFFSET + (7 * (inst - 1))
-
-    -- if all five mammets in this instance are dead, start event
-    local allMammetsDead = true
-    for i = instOffset + 0, instOffset + 4 do
-        if not GetMobByID(i):isDead() then
-            allMammetsDead = false
-            break
-        end
-    end
-
-    local mammetEventGuard = battlefield:getLocalVar("mammetEventGuard")
-    if allMammetsDead and mammetEventGuard == 0 then
-        player:startEvent(11)
-        battlefield:setLocalVar("mammetEventGuard", 1)
-    end
+    oneToBeFeared.handleMammetDeath(mob, player, isKiller)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 11 then
-        local battlefield = player:getBattlefield()
-        local inst = battlefield:getArea()
-
-        -- players are healed in between fights, but their TP is set to 0
-        player:addTitle(xi.title.BRANDED_BY_LIGHTNING)
-        player:setHP(player:getMaxHP())
-        player:setMP(player:getMaxMP())
-        player:setTP(0)
-
-        player:setLocalVar("[OTBF]cs", 1)
-
-        -- move player to instance
-        if inst == 1 then
-            player:setPos(-779, -103, -80)
-        elseif inst == 2 then
-            player:setPos(-140, -23, -440)
-        elseif inst == 3 then
-            player:setPos(499, 56, -802)
-        end
-    end
+    oneToBeFeared.handleMammetBattleEnding(player, csid, option)
 end
 
 return entity

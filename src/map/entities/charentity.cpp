@@ -119,6 +119,11 @@ CCharEntity::CCharEntity()
     m_Wardrobe2  = std::make_unique<CItemContainer>(LOC_WARDROBE2);
     m_Wardrobe3  = std::make_unique<CItemContainer>(LOC_WARDROBE3);
     m_Wardrobe4  = std::make_unique<CItemContainer>(LOC_WARDROBE4);
+    m_Wardrobe5  = std::make_unique<CItemContainer>(LOC_WARDROBE5);
+    m_Wardrobe6  = std::make_unique<CItemContainer>(LOC_WARDROBE6);
+    m_Wardrobe7  = std::make_unique<CItemContainer>(LOC_WARDROBE7);
+    m_Wardrobe8  = std::make_unique<CItemContainer>(LOC_WARDROBE8);
+    m_RecycleBin = std::make_unique<CItemContainer>(LOC_RECYCLEBIN);
 
     memset(&jobs, 0, sizeof(jobs));
     // TODO: -Wno-class-memaccess - clearing an object on non-trivial type use assignment or value-init
@@ -290,8 +295,8 @@ void CCharEntity::pushPacket(CBasicPacket* packet)
     // and storing the position in the queue of that entry
     for (auto&& entry : PacketList)
     {
-        if (packet->id() == 0x0E && entry->id() == 0x0E || // Entity Update (CEntityUpdatePacket)
-            packet->id() == 0x0D && entry->id() == 0x0D)   // Char Packet (CCharPacket)
+        if (packet->getType() == 0x0E && entry->getType() == 0x0E || // Entity Update (CEntityUpdatePacket)
+            packet->getType() == 0x0D && entry->getType() == 0x0D)   // Char Packet (CCharPacket)
         {
             bool sameMainId     = packet->ref<uint32>(0x04) == entry->ref<uint32>(0x04);
             bool sameTargId     = packet->ref<uint16>(0x08) == entry->ref<uint16>(0x08);
@@ -382,13 +387,13 @@ void CCharEntity::resetPetZoningInfo()
     petZoningInfo.petType    = PET_TYPE::AVATAR;
 }
 /************************************************************************
- *																		*
- *  Возвращаем контейнер с указанным ID. Если ID выходит за рамки, то	*
- *  защищаем сервер от падения использованием контейнера временных		*
- *  предметов в качестве заглушки (из этого контейнера предметы нельзя	*
- *  перемещать, надевать, передавать, продавать и т.д.). Отображаем		*
- *  сообщение о фатальной ошибке.										*
- *																		*
+ *
+ * Return the container with the specified ID.If the ID goes beyond, then *
+ * We protect the server from falling the use of temporary container *
+ * Items as a plug (from this container items can not *
+ * Move, wear, transmit, sell, etc.).Display *
+ * Fatal error message.*
+ *
  ************************************************************************/
 
 CItemContainer* CCharEntity::getStorage(uint8 LocationID)
@@ -421,9 +426,19 @@ CItemContainer* CCharEntity::getStorage(uint8 LocationID)
             return m_Wardrobe3.get();
         case LOC_WARDROBE4:
             return m_Wardrobe4.get();
+        case LOC_WARDROBE5:
+            return m_Wardrobe5.get();
+        case LOC_WARDROBE6:
+            return m_Wardrobe6.get();
+        case LOC_WARDROBE7:
+            return m_Wardrobe7.get();
+        case LOC_WARDROBE8:
+            return m_Wardrobe8.get();
+        case LOC_RECYCLEBIN:
+            return m_RecycleBin.get();
     }
 
-    XI_DEBUG_BREAK_IF(LocationID >= MAX_CONTAINER_ID); // неразрешенный ID хранилища
+    XI_DEBUG_BREAK_IF(LocationID >= CONTAINER_ID::MAX_CONTAINER_ID); // Unresolved storage ID
     return nullptr;
 }
 

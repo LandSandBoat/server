@@ -1,7 +1,5 @@
 -----------------------------------
---
 -- Zone: Aydeewa_Subterrane (68)
---
 -----------------------------------
 local ID = require("scripts/zones/Aydeewa_Subterrane/IDs")
 require("scripts/globals/keyitems")
@@ -22,10 +20,6 @@ zone_object.onZoneIn = function(player, prevZone)
 
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(356.503, -0.364, -179.607, 122)
-    end
-
-    if player:getCurrentMission(TOAU) == xi.mission.id.toau.TEAHOUSE_TUMULT and player:getCharVar("AhtUrganStatus") == 0 then
-        cs = 10
     end
 
     return cs
@@ -59,8 +53,6 @@ zone_object.onEventFinish = function(player, csid, option)
         player:setCharVar("EmptyVesselStone", 0)
         player:delQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.AN_EMPTY_VESSEL)
         player:setPos(148, -2, 0, 130, 50)
-    elseif csid == 10 then
-        player:setCharVar("AhtUrganStatus", 1)
     end
 end
 

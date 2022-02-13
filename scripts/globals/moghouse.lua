@@ -102,12 +102,7 @@ xi.moghouse.moogleTrigger = function(player, npc)
             end
         end
 
-        if player:getCharVar("MoghouseExplication") == 1 then
-            player:startEvent(30000)
-
-        else
-            player:sendMenu(1)
-        end
+        player:sendMenu(1)
     end
 end
 
@@ -115,11 +110,6 @@ xi.moghouse.moogleEventUpdate = function(player, csid, option)
 end
 
 xi.moghouse.moogleEventFinish = function(player, csid, option)
-    if player:isInMogHouse() then
-        if csid == 30000 then
-            player:setCharVar("MoghouseExplication", 0)
-        end
-    end
 end
 
 -- Unlocks a mog locker for a player. Returns the 'expired' timestamp (-1)

@@ -65,7 +65,7 @@ uint8 CItemContainer::GetFreeSlotsCount() const
 
 /************************************************************************
  *                                                                       *
- *  Установка размера контейнера                                         *
+ *  Setting the size of the container                                    *
  *                                                                       *
  ************************************************************************/
 
@@ -77,16 +77,16 @@ uint16 CItemContainer::GetBuff() const
 uint8 CItemContainer::AddBuff(int8 buff)
 {
     m_buff += buff;
-    return SetSize(std::min<uint8>((uint8)m_buff, 80)); // ограничение в 80 ячеек для персонажа
+    return SetSize(std::min<uint8>((uint8)m_buff, 80)); // Limit in 80 cells for character
 }
 
 /************************************************************************
  *                                                                       *
- *  Установка размера контейнера                                         *
+ *  Setting the size of the container                                    *
  *                                                                       *
  ************************************************************************/
 
-// контейнер не несет ответственности за то, что предметы могут остаться за пределами размера
+// The container is not responsible for the fact that items can remain outside the size.
 
 uint8 CItemContainer::SetSize(uint8 size)
 {

@@ -26,8 +26,8 @@
 
 CReleasePacket::CReleasePacket(CCharEntity* PChar, RELEASE_TYPE releaseType)
 {
-    this->type = 0x52;
-    this->size = 0x04;
+    this->setType(0x52);
+    this->setSize(0x08);
 
     ref<uint8>(0x04) = static_cast<uint8>(releaseType);
 

@@ -182,7 +182,7 @@ void PrintPacket(CBasicPacket data)
     char message[50];
     memset(&message, 0, 50);
 
-    for (size_t y = 0; y < data.length(); y++)
+    for (size_t y = 0; y < data.getSize(); y++)
     {
         // TODO: -Wno-restrict - undefined behavior to print and write src into dest
         // TODO: -Wno-format-overflow - writing between 4 and 53 bytes into destination of 50
@@ -1108,7 +1108,7 @@ void SmallPacket0x01E(map_session_data_t* const PSession, CCharEntity* const PCh
     const uint8 HEADER_LENGTH = 4;
 
     std::vector<char> chars;
-    std::for_each(data[HEADER_LENGTH], data[HEADER_LENGTH] + (data.length() - HEADER_LENGTH), [&](char ch)
+    std::for_each(data[HEADER_LENGTH], data[HEADER_LENGTH] + (data.getSize() - HEADER_LENGTH), [&](char ch)
     {
         if ((ch >= 0 && ch < 128) && ch != '\0') // isascii && nonnull
         {
@@ -1138,7 +1138,7 @@ void SmallPacket0x028(map_session_data_t* const PSession, CCharEntity* const PCh
     }
     uint16 ItemID   = PItem->getID();
 
-    if (container >= MAX_CONTAINER_ID)
+    if (container >= CONTAINER_ID::MAX_CONTAINER_ID)
     {
         ShowExploit("SmallPacket0x028: Invalid container ID passed to packet %u by %s", container, PChar->GetName());
         return;
@@ -1202,7 +1202,7 @@ void SmallPacket0x029(map_session_data_t* const PSession, CCharEntity* const PCh
     uint8  FromSlotID     = data.ref<uint8>(0x0A);
     uint8  ToSlotID       = data.ref<uint8>(0x0B);
 
-    if (ToLocationID >= MAX_CONTAINER_ID || FromLocationID >= MAX_CONTAINER_ID)
+    if (ToLocationID >= CONTAINER_ID::MAX_CONTAINER_ID || FromLocationID >= CONTAINER_ID::MAX_CONTAINER_ID)
     {
         return;
     }
@@ -1643,7 +1643,7 @@ void SmallPacket0x037(map_session_data_t* const PSession, CCharEntity* const PCh
     uint8  SlotID    = data.ref<uint8>(0x0E);
     uint8  StorageID = data.ref<uint8>(0x10);
 
-    if (StorageID >= MAX_CONTAINER_ID)
+    if (StorageID >= CONTAINER_ID::MAX_CONTAINER_ID)
     {
         ShowExploit("SmallPacket0x037: Invalid storage ID passed to packet %u by %s", StorageID, PChar->GetName());
         return;
@@ -1672,7 +1672,7 @@ void SmallPacket0x03A(map_session_data_t* const PSession, CCharEntity* const PCh
 
     uint8 container = data.ref<uint8>(0x04);
 
-    if (container >= MAX_CONTAINER_ID)
+    if (container >= CONTAINER_ID::MAX_CONTAINER_ID)
     {
         ShowExploit("SmallPacket0x03A: Invalid container ID passed to packet %u by %s", container, PChar->GetName());
         return;
@@ -2995,7 +2995,7 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
                 {
                     if (PItem->getFlag() & ITEM_FLAG_RARE)
                     {
-                        for (uint8 LocID = 0; LocID < MAX_CONTAINER_ID; ++LocID)
+                        for (uint8 LocID = 0; LocID < CONTAINER_ID::MAX_CONTAINER_ID; ++LocID)
                         {
                             if (PChar->getStorage(LocID)->SearchItem(itemid) != ERROR_SLOTID)
                             {
@@ -3100,7 +3100,8 @@ void SmallPacket0x050(map_session_data_t* const PSession, CCharEntity* const PCh
     uint8 containerID = data.ref<uint8>(0x06); // container id
 
     if (containerID != LOC_INVENTORY && containerID != LOC_WARDROBE && containerID != LOC_WARDROBE2 && containerID != LOC_WARDROBE3 &&
-        containerID != LOC_WARDROBE4)
+        containerID != LOC_WARDROBE4 && containerID != LOC_WARDROBE5 && containerID != LOC_WARDROBE6 &&  containerID != LOC_WARDROBE7 &&
+        containerID != LOC_WARDROBE8)
     {
         if (equipSlotID != 16 && equipSlotID != 17)
         {
@@ -3118,6 +3119,7 @@ void SmallPacket0x050(map_session_data_t* const PSession, CCharEntity* const PCh
     luautils::CheckForGearSet(PChar); // check for gear set on gear change
     PChar->UpdateHealth();
 }
+
 /************************************************************************
  *                                                                       *
  *  Equip Macro Set                                                      *
@@ -3138,7 +3140,8 @@ void SmallPacket0x051(map_session_data_t* const PSession, CCharEntity* const PCh
         uint8 equipSlotID = data.ref<uint8>(0x09 + (0x04 * i)); // charequip slot
         uint8 containerID = data.ref<uint8>(0x0A + (0x04 * i)); // container id
         if (containerID == LOC_INVENTORY || containerID == LOC_WARDROBE || containerID == LOC_WARDROBE2 || containerID == LOC_WARDROBE3 ||
-            containerID == LOC_WARDROBE4)
+            containerID == LOC_WARDROBE4 || containerID == LOC_WARDROBE5 || containerID == LOC_WARDROBE6 || containerID == LOC_WARDROBE7 ||
+            containerID == LOC_WARDROBE8)
         {
             charutils::EquipItem(PChar, slotID, equipSlotID, containerID);
         }
@@ -3148,6 +3151,7 @@ void SmallPacket0x051(map_session_data_t* const PSession, CCharEntity* const PCh
     luautils::CheckForGearSet(PChar); // check for gear set on gear change
     PChar->UpdateHealth();
 }
+
 /************************************************************************
  *                                                                        *
  *  Add Equipment to set                                                 *
@@ -5750,7 +5754,7 @@ void SmallPacket0x0E0(map_session_data_t* const PSession, CCharEntity* const PCh
     char message[256];
     Sql_EscapeString(SqlHandle, message, (const char*)data[4]);
 
-    uint8 type = strlen(message) == 0 ? 0 : data.ref<uint8>(data.length() - 4);
+    uint8 type = strlen(message) == 0 ? 0 : data.ref<uint8>(data.getSize() - 4);
 
     if (type == PChar->search.messagetype && strcmp(message, PChar->search.message.c_str()) == 0)
     {

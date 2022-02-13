@@ -28,8 +28,8 @@
 
 CLinkshellEquipPacket::CLinkshellEquipPacket(CCharEntity* PChar, uint8 number)
 {
-    this->type = 0xE0;
-    this->size = 0x04;
+    this->setType(0xE0);
+    this->setSize(0x08);
 
     ref<uint8>(0x04) = number;
     if (number == 1)

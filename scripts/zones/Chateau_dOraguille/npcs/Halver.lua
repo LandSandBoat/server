@@ -31,10 +31,6 @@ entity.onTrigger = function(player, npc)
         player:startEvent(549)
         player:setCharVar("BlackMailQuest", 1)
         player:delKeyItem(xi.ki.SUSPICIOUS_ENVELOPE)
-    elseif player:getCurrentMission(TOAU) == xi.mission.id.toau.CONFESSIONS_OF_ROYALTY and player:hasKeyItem(xi.ki.RAILLEFALS_LETTER) then
-        player:startEvent(564)
-    elseif player:getCurrentMission(TOAU) == xi.mission.id.toau.EASTERLY_WINDS and player:getCharVar("AhtUrganStatus") == 0 then
-        player:startEvent(565)
     elseif pNation == xi.nation.SANDORIA then
         -- Rank 10 default dialogue
         if player:getRank(player:getNation()) == 10 then
@@ -54,11 +50,6 @@ end
 entity.onEventFinish = function(player, csid, option)
     if csid == 558 then
         player:setCharVar("WildcatSandy", utils.mask.setBit(player:getCharVar("WildcatSandy"), 16, true))
-    elseif csid == 564 and option == 1 then
-        player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.CONFESSIONS_OF_ROYALTY)
-        player:addMission(xi.mission.log_id.TOAU, xi.mission.id.toau.EASTERLY_WINDS)
-        player:delKeyItem(xi.ki.RAILLEFALS_LETTER)
-        player:setCharVar("AhtUrganStatus", 1)
     end
 end
 

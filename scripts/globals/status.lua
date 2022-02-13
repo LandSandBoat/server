@@ -1397,7 +1397,7 @@ xi.mod =
     RERAISE_II                      = 457, -- Reraise II.
     RERAISE_III                     = 458, -- Reraise III.
 
-    ITEM_ADDEFFECT_TYPE     = 431, -- see procType table in scripts\globals\assitional_effects.lua
+    ITEM_ADDEFFECT_TYPE     = 431, -- see procType table in scripts\globals\additional_effects.lua
     ITEM_SUBEFFECT          = 499, -- Animation ID of Spikes and Additional Effects
     ITEM_ADDEFFECT_DMG      = 500, -- Damage of an items Additional Effect or Spikes
     ITEM_ADDEFFECT_CHANCE   = 501, -- Chance of an items Additional Effect or Spikes
@@ -2150,19 +2150,25 @@ xi.merit =
 
 xi.inventoryLocation =
 {
-    INVENTORY       = 0,
-    MOGSAFE         = 1,
-    STORAGE         = 2,
-    TEMPITEMS       = 3,
-    MOGLOCKER       = 4,
-    MOGSATCHEL      = 5,
-    MOGSACK         = 6,
-    MOGCASE         = 7,
-    WARDROBE        = 8,
-    MOGSAFE2        = 9,
-    WARDROBE2       = 10,
-    WARDROBE3       = 11,
-    WARDROBE4       = 12,
+    INVENTORY        = 0,
+    MOGSAFE          = 1,
+    STORAGE          = 2,
+    TEMPITEMS        = 3,
+    MOGLOCKER        = 4,
+    MOGSATCHEL       = 5,
+    MOGSACK          = 6,
+    MOGCASE          = 7,
+    WARDROBE         = 8,
+    MOGSAFE2         = 9,
+    WARDROBE2        = 10,
+    WARDROBE3        = 11,
+    WARDROBE4        = 12,
+    WARDROBE5        = 13,
+    WARDROBE6        = 14,
+    WARDROBE7        = 15,
+    WARDROBE8        = 16,
+    RECYCLEBIN       = 17,
+    MAX_CONTAINER_ID = 18,
 }
 xi.inv = xi.inventoryLocation
 
