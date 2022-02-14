@@ -7,6 +7,29 @@
 
 require("scripts/globals/zone")
 
+mazeMongersLootPool = {
+	-- Weapons
+	17964, -- Barkborer
+	19113, -- Ermine's Tail
+	18504, -- Eventreuse
+	17759, -- Koggelmander
+	19273, -- Onishibari
+	19158, -- Scheherazade
+	18131, -- Zaide
+	18865, -- Zonure
+	-- Equipment
+	15839, -- Antica Ring
+	11484, -- Antica Band
+	11483, -- Gnole Crown
+	16283, -- Gnole Torque
+	16011, -- Lycopodium Earring
+	15928, -- Lycopodium Sash
+	16012, -- Mamool Ja Earring
+	16250, -- Mamool Ja Mantle
+}
+
+local mazeMongersDrop = math.random(#mazeMongersLootPool)
+
 xi = xi or {}
 xi.casket_loot = xi.casket_loot or {}
 
@@ -2098,7 +2121,7 @@ xi.casket_loot.casketItems =
     },
     [xi.zone.THE_BOYAHDA_TREE] =
     {
-        regionalItems = {11038, 10948}, -- Dragonkin Earring | Carver's Torque
+        regionalItems = {mazeMongersDrop, 10948}, -- Dragonkin Earring | Carver's Torque
         temps =
         {
         -----------------------------------
@@ -2226,7 +2249,7 @@ xi.casket_loot.casketItems =
     },
     [xi.zone.UPPER_DELKFUTTS_TOWER] =
     {
-        regionalItems = {19779}, -- Potestas Bomblet
+        regionalItems = {mazeMongersDrop}, -- Potestas Bomblet
         temps =
         {
         -----------------------------------
@@ -2326,7 +2349,7 @@ xi.casket_loot.casketItems =
     },
     [xi.zone.DEN_OF_RANCOR] =
     {
-        regionalItems = {10950, 10991}, -- Goldsm. Torque | Rancorous Mantle
+        regionalItems = {10950, mazeMongersDrop}, -- Goldsm. Torque | Rancorous Mantle
         temps =
         {
         -----------------------------------
@@ -2392,7 +2415,7 @@ xi.casket_loot.casketItems =
     },
     [xi.zone.RANGUEMONT_PASS] =
     {
-        regionalItems = {11575}, -- Grapevine Cape
+        regionalItems = {mazeMongersDrop}, -- Grapevine Cape
         temps =
         {
         -----------------------------------
@@ -2434,7 +2457,7 @@ xi.casket_loot.casketItems =
     },
     [xi.zone.BOSTAUNIEUX_OUBLIETTE] =
     {
-        regionalItems = {11920}, -- Melaco Mittens
+        regionalItems = {mazeMongersDrop}, -- Melaco Mittens
         temps =
         {
         -----------------------------------
@@ -2503,7 +2526,7 @@ xi.casket_loot.casketItems =
     },
     [xi.zone.TORAIMARAI_CANAL] =
     {
-        regionalItems = {11576}, -- Bond Cape
+        regionalItems = {mazeMongersDrop}, -- Bond Cape
         temps =
         {
         -----------------------------------
@@ -2572,7 +2595,7 @@ xi.casket_loot.casketItems =
     },
     [xi.zone.ZERUHN_MINES] =
     {
-        regionalItems = {11677}, -- Prouesse Ring
+        regionalItems = {mazeMongersDrop}, -- Prouesse Ring
         tempsLow =
         {
         -----------------------------------
@@ -2708,7 +2731,7 @@ xi.casket_loot.casketItems =
     },
     [xi.zone.KORROLOKA_TUNNEL] =
     {
-        regionalItems = {11039}, -- Brachyura Earring
+        regionalItems = {mazeMongersDrop}, -- Brachyura Earring
         tempsLow =
         {
         -----------------------------------
@@ -2820,7 +2843,7 @@ xi.casket_loot.casketItems =
     },
     [xi.zone.KUFTAL_TUNNEL] =
     {
-        regionalItems = {18816}, -- Wizzan Grip
+        regionalItems = {mazeMongersDrop}, -- Wizzan Grip
         temps =
         {
         -----------------------------------
@@ -2889,7 +2912,7 @@ xi.casket_loot.casketItems =
     },
     [xi.zone.SEA_SERPENT_GROTTO] =
     {
-        regionalItems = {19780}, -- Mana Ampulla
+        regionalItems = {mazeMongersDrop}, -- Mana Ampulla
         temps =
         {
         -----------------------------------
@@ -3029,7 +3052,7 @@ xi.casket_loot.casketItems =
     },
     [xi.zone.THE_SHRINE_OF_RUAVITAU] =
     {
-        regionalItems = {11040, 10951}, -- Terminus Earring | Weaver's Torque
+        regionalItems = {mazeMongersDrop, 10951}, -- Terminus Earring | Weaver's Torque
         temps =
         {
         -----------------------------------
@@ -3158,7 +3181,7 @@ xi.casket_loot.casketItems =
     },
     [xi.zone.KING_RANPERRES_TOMB] =
     {
-        regionalItems = {10924}, -- Chocobo Torque
+        regionalItems = {mazeMongersDrop}, -- Chocobo Torque
         tempsLow =
         {
         -----------------------------------
@@ -3286,7 +3309,7 @@ xi.casket_loot.casketItems =
     },
     [xi.zone.DANGRUF_WADI] =
     {
-        regionalItems = {11769}, -- Field Rope
+        regionalItems = {mazeMongersDrop}, -- Field Rope
         tempsLow =
         {
         -----------------------------------
@@ -3394,7 +3417,7 @@ xi.casket_loot.casketItems =
     },
     [xi.zone.INNER_HORUTOTO_RUINS] =
     {
-        regionalItems = {18624}, -- Numen Staff
+        regionalItems = {mazeMongersDrop}, -- Numen Staff
         temps =
         {
         -----------------------------------
@@ -3475,7 +3498,7 @@ xi.casket_loot.casketItems =
     },
     [xi.zone.ORDELLES_CAVES] =
     {
-        regionalItems = {11767}, -- Chocobo Rope
+        regionalItems = {mazeMongersDrop}, -- Chocobo Rope
         tempsLow =
         {
         -----------------------------------
@@ -3599,7 +3622,7 @@ xi.casket_loot.casketItems =
     },
     [xi.zone.OUTER_HORUTOTO_RUINS] =
     {
-        regionalItems = {10925}, -- Fisher's Torque
+        regionalItems = {mazeMongersDrop}, -- Fisher's Torque
         tempsLow =
         {
         -----------------------------------
@@ -3735,7 +3758,7 @@ xi.casket_loot.casketItems =
     },
     [xi.zone.THE_ELDIEME_NECROPOLIS] =
     {
-        regionalItems = {18812}, -- Ossa Grip
+        regionalItems = {mazeMongersDrop}, -- Ossa Grip
         temps =
         {
         -----------------------------------
@@ -3802,7 +3825,7 @@ xi.casket_loot.casketItems =
     },
     [xi.zone.GUSGEN_MINES] =
     {
-        regionalItems = {10926}, -- Field Torque
+        regionalItems = {mazeMongersDrop}, -- Field Torque
         tempsLow =
         {
         -----------------------------------
@@ -3927,7 +3950,7 @@ xi.casket_loot.casketItems =
     },
     [xi.zone.CRAWLERS_NEST] =
     {
-        regionalItems = {11823}, -- Cocoon Band
+        regionalItems = {mazeMongersDrop}, -- Cocoon Band
         temps =
         {
         -----------------------------------
@@ -3994,7 +4017,7 @@ xi.casket_loot.casketItems =
     },
     [xi.zone.MAZE_OF_SHAKHRAMI] =
     {
-        regionalItems = {11768}, -- Fisher's Rope
+        regionalItems = {mazeMongersDrop}, -- Fisher's Rope
         tempsLow =
         {
         -----------------------------------
@@ -4119,7 +4142,7 @@ xi.casket_loot.casketItems =
     },
     [xi.zone.GARLAIGE_CITADEL] =
     {
-        regionalItems = {18784}, -- Metasoma Katars
+        regionalItems = {mazeMongersDrop}, -- Metasoma Katars
         temps =
         {
         -----------------------------------
@@ -4189,7 +4212,7 @@ xi.casket_loot.casketItems =
     },
     [xi.zone.FEIYIN] =
     {
-        regionalItems = {16202}, -- Dagda's Shield
+        regionalItems = {mazeMongersDrop}, -- Dagda's Shield
         temps =
         {
         -----------------------------------
@@ -4337,7 +4360,7 @@ xi.casket_loot.casketItems =
     },
     [xi.zone.GUSTAV_TUNNEL] =
     {
-        regionalItems = {10955, 11041}, -- Culinarian's Torque | Liminus Earring
+        regionalItems = {10955, mazeMongersDrop}, -- Culinarian's Torque | Liminus Earring
         temps =
         {
         -----------------------------------
@@ -4409,7 +4432,7 @@ xi.casket_loot.casketItems =
     },
     [xi.zone.LABYRINTH_OF_ONZOZO] =
     {
-        regionalItems = {18817}, -- Furtive Grip
+        regionalItems = {mazeMongersDrop}, -- Furtive Grip
         temps =
         {
         -----------------------------------
