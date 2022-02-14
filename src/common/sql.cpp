@@ -167,10 +167,18 @@ int32 Sql_SetEncoding(Sql_t* self, const char* encoding)
 
 int32 Sql_Ping(Sql_t* self)
 {
-    if (self && mysql_ping(&self->handle) == 0)
+    try
     {
-        return SQL_SUCCESS;
+        if (self && mysql_ping(&self->handle) == 0)
+        {
+            return SQL_SUCCESS;
+        }
     }
+    catch (const std::exception& e)
+    {
+        throw std::runtime_error(fmt::format("mysql_ping failed: {}", e.what()));
+    }
+
     return SQL_ERROR;
 }
 
@@ -180,13 +188,19 @@ int32 Sql_Ping(Sql_t* self)
  *																		*
  ************************************************************************/
 
-// @private
-
 static int32 Sql_P_KeepaliveTimer(time_point tick, CTaskMgr::CTask* PTask)
 {
-    Sql_t* self = std::any_cast<Sql_t*>(PTask->m_data);
     ShowInfo("Pinging SQL server to keep connection alive...");
-    Sql_Ping(self);
+
+    if (Sql_t* self = std::any_cast<Sql_t*>(PTask->m_data); self != nullptr)
+    {
+        std::ignore = Sql_Ping(self);
+    }
+    else
+    {
+        throw std::runtime_error("Failed to obtain Sql_t* from KeepaliveTimer task!");
+    }
+
     return 0;
 }
 

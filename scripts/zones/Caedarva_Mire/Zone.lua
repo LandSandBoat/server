@@ -1,7 +1,5 @@
 -----------------------------------
---
 -- Zone: Caedarva_Mire (79)
---
 -----------------------------------
 local ID = require("scripts/zones/Caedarva_Mire/IDs")
 require("scripts/globals/missions")
@@ -21,18 +19,17 @@ end
 
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
+
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
         player:setPos(339.996, 2.5, -721.286, 200)
     end
+
     if prevZone == xi.zone.LEUJAOAM_SANCTUM then
         player:setPos(495.450, -28.25, -478.43, 32)
     end
+
     if prevZone == xi.zone.PERIQIA then
         player:setPos(-252.715, -7.666, -30.64, 128)
-    end
-
-    if (player:getCurrentMission(TOAU) == xi.mission.id.toau.SHADES_OF_VENGEANCE and player:getCharVar("AhtUrganStatus") == 1) then
-        cs = 21
     end
 
     return cs
@@ -52,14 +49,7 @@ zone_object.onEventUpdate = function(player, csid, option)
 end
 
 zone_object.onEventFinish = function(player, csid, option)
-
-    if csid == 21 then
-        player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.SHADES_OF_VENGEANCE)
-        player:setCharVar("AhtUrganStatus", 0)
-        player:setCharVar("TOAUM31_PERMITDAY", 0)
-        player:setTitle(xi.title.NASHMEIRAS_MERCENARY)
-        player:addMission(xi.mission.log_id.TOAU, xi.mission.id.toau.IN_THE_BLOOD)
-    elseif csid == 133 then -- enter instance, warp to periqia
+    if csid == 133 then -- enter instance, warp to periqia
         player:setPos(0, 0, 0, 0, 56)
     elseif csid == 130 then
         player:setPos(0, 0, 0, 0, 69)
