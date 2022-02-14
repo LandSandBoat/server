@@ -1,13 +1,14 @@
 -----------------------------------
 -- Area: Alzadaal Undersea Ruins
 --  NPC: Runic Portal
--- Arrapago Reef Teleporter Back to Aht Urgan Whitegate
+-- Arrapago Reef Teleporter Back to Aht Urhgan Whitegate
 -- !pos 206.500 -1.220 33.500 72
 -- !pos 206.500 -1.220 6.500 72
 -----------------------------------
 local ID = require("scripts/zones/Alzadaal_Undersea_Ruins/IDs")
 -----------------------------------
 require("scripts/globals/besieged")
+require('scripts/globals/keyitems')
 require("scripts/globals/missions")
 require("scripts/globals/teleports")
 -----------------------------------
@@ -20,9 +21,7 @@ entity.onTrigger = function(player, npc)
     local npcid = npc:getID()
     local event = nil
 
-    if player:getCurrentMission(TOAU) == xi.mission.id.toau.IMMORTAL_SENTRIES and player:getCharVar("AhtUrganStatus") == 1 then
-        event = npcid == ID.npc.RUNIC_PORTAL_NORTH and 121 or 122
-    elseif player:getCurrentMission(TOAU) > xi.mission.id.toau.IMMORTAL_SENTRIES then
+    if player:getCurrentMission(TOAU) >= xi.mission.id.toau.IMMORTAL_SENTRIES and not player:hasKeyItem(xi.ki.SUPPLIES_PACKAGE) then
         if xi.besieged.hasRunicPortal(player, xi.teleport.runic_portal.NYZUL) then
             event = npcid == ID.npc.RUNIC_PORTAL_NORTH and 117 or 118
         else

@@ -27,7 +27,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.KNOW_ONE_S_ONIONS)
+                player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.KNOW_ONES_ONIONS)
         end,
 
         [xi.zone.PORT_WINDURST] =
