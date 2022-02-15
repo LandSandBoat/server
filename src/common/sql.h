@@ -7,15 +7,12 @@
 #ifndef _CBASETYPES_H_
 #include "../common/cbasetypes.h"
 #endif
-//#include <stdarg.h>// va_list
 
 #ifdef WIN32
-#include "mariadb/mysql.h"
 #include <winsock2.h>
-#else
-#include <mysql/mysql.h>
 #endif
-//#endif
+
+#include "mariadb/mysql.h"
 
 #include "logging.h"
 

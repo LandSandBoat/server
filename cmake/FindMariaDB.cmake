@@ -11,10 +11,12 @@ endif()
 
 # Copy DLL
 if (WIN32)
-    configure_file(
-        ${PROJECT_SOURCE_DIR}/ext/${MARIADB_PARTIAL_PATH}/bin/libmariadb.dll
-        ${CMAKE_SOURCE_DIR}
-        COPYONLY)
+    add_custom_target(copy_mariadb_dll ALL
+                COMMENT "Copying MariaDB dll to project root")
+    add_custom_command(TARGET copy_mariadb_dll PRE_BUILD
+                COMMAND ${CMAKE_COMMAND} -E copy_if_different
+                    ${PROJECT_SOURCE_DIR}/ext/${MARIADB_PARTIAL_PATH}/bin/libmariadb.dll
+                    ${CMAKE_SOURCE_DIR})
 endif()
 
 find_library(MARIADB_LIBRARY
