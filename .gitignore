@@ -222,4 +222,4 @@ memcheck.out.*
 /src/common/version.cpp
 
 # Root-level dlls
-libmariadb.dll
+/libmariadb.dll
