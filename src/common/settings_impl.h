@@ -9,7 +9,10 @@
 
 enum class MainSettings
 {
-    SERVER_NAME, // (string) The name of the server
+    SERVER_NAME, // (string) The name of the server (not longer than 15 characters)
+    SERVER_MESSAGE, // (string) Shown to players on login. Modify this in server_message.txt
+
+    // Content Switches
     ENABLE_COP, // (bool) Enables expansion: Chains of Promathia
     ENABLE_TOAU, // (bool) Enables expansion: Treasure of Aht Urghan
     ENABLE_WOTG, // (bool) Enables expansion: Wings of the Goddess
@@ -19,8 +22,98 @@ enum class MainSettings
     ENABLE_ABYSSEA, // (bool) Enables expansion: Abyssea
     ENABLE_SOA, // (bool) Enables expansion: Seekers of Adoulin
     ENABLE_ROV, // (bool) Enables expansion: Rhapsodies of Vana'diel
-    ENABLE_VOIDWATCH, // (bool) Enables Voidwatch (Not an expansion
-    DAMAGE_MULT, // (float) The multiplier applied to all damage directed towards players
+
+    ENABLE_VOIDWATCH, // (bool) Enables Voidwatch
+    ENABLE_VOIDWALKER, // (bool) Enables Voidwalker
+
+    ENABLE_FIELD_MANUALS, // (bool) Enables Fields of Valor Books
+    ENABLE_GROUNDS_TOMES, // (bool) Enables Grounds of Valor Books
+    ENABLE_SURVIVAL_GUIDE, // (bool) Enables Survival Guides
+
+    REGIME_WAIT, // (bool) Make people wait till 00:00 game time as in retail. If it's false there is no wait time.
+    FOV_REWARD_ALLIANCE, // (bool) Allow Fields of Valor rewards while being a member of an alliance.
+    GOV_REWARD_ALLIANCE, // (bool) Allow Grounds of Valor rewards while being a member of an alliance.
+
+    ENABLE_ROE, // (bool) Enables Records of Eminence
+    ENABLE_ROE_TIMED, // (bool) Enable 4-hour timed records
+    ENABLE_EXCHANGE_LIMIT, // (bool) Enable Maximum limit of sparks spent per Week
+
+    WEEKLY_EXCHANGE_LIMIT, // (uint) Maximum amount of sparks/accolades that can be spent per week
+
+    // Currency Caps (Change at your own risk!)
+    CAP_CURRENCY_ACCOLADES, // (uint) Maximum accolades characters may hold at one time
+    CAP_CURRENCY_BALLISTA, // (uint) Maximum ballista currency characters may hold at one time
+    CAP_CURRENCY_SPARKS, // (uint) Maximum sparks characters may hold at one time
+    CAP_CURRENCY_VALOR, // (uint) Maximum valor characters may hold at one time
+
+    // Magian Trials
+    ENABLE_MAGIAN_TRIALS, // (bool) Enables Magian Trials
+    MAGIAN_TRIALS_MOBKILL_MULTIPLIER, // (float) TODO: Multiplier applied to...
+    MAGIAN_TRIALS_TRADE_MULTIPLIER, // (float) TODO: Multiplier applied to...
+
+    // Treasure Caskets
+    // Retail droprate = 0.1 (10%) with no other effects active
+    // Set to 0 to disable caskets.
+    // Max is clamped to 1.0 (100%)
+    CASKET_DROP_RATE, // (float) Drop rate for caskets
+
+    // Character Config
+    INITIAL_LEVEL_CAP, // (uint) The initial level cap for new players. There seems to be a hardcap of 255.
+    MAX_LEVEL, // (uint) Level max of the server lowers the attainable cap by disabling Limit Break quests.
+    NORMAL_MOB_MAX_LEVEL_RANGE_MIN, // (uint) Lower Bound of Max Level Range for Normal Mobs (0 = Uncapped)
+    NORMAL_MOB_MAX_LEVEL_RANGE_MAX, // (uint) Upper Bound of Max Level Range for Normal Mobs (0 = Uncapped)
+    START_GIL, // (uint) Amount of gil given to newly created characters.
+    START_INVENTORY, // (uint) Starting inventory and satchel size. Ignores values < 30. Do not set above 80!
+    NEW_CHARACTER_CUTSCENE, // (bool) Enable opening cutscenes for new characters.
+    SUBJOB_QUEST_LEVEL, // (uint) Minimum level to accept either subjob quest. Set to 0 to start the game with subjobs unlocked.
+    ADVANCED_JOB_LEVEL, // (uint) Minimum level to accept advanced job quests. Set to 0 to start the game with advanced jobs.
+    ALL_MAPS, // (bool) Give starting characters all the maps.
+    UNLOCK_OUTPOST_WARPS, // (bool) Give starting characters all outpost warps (not including Tu'Lia and Tavnazia).
+    UNLOCK_OUTPOST_WARPS_SEA_SKY, // (bool) Give starting characters outpost warps for Tu'Lia and Tavnazia.
+
+    // Rate Modifiers
+    SHOP_PRICE, // (float) Multiplies prices in NPC shops.
+    GIL_RATE, // (float) Multiplies gil earned from quests. Won't always display in game.
+    BAYLD_RATE, // (float) Multiples bayld earned from quests.
+    EXP_RATE, // (float) Multiplies exp from script (except FoV/GoV).
+    BOOK_EXP_RATE, // (float) Multiplies exp from FoV/GoV book pages.
+    TABS_RATE, // (float) Multiplies tabs earned from fov.
+    ROE_EXP_RATE, // (float) Multiplies exp earned from records of eminence.
+    SPARKS_RATE, // (float) Multiplies sparks earned from records of eminence.
+    CURE_POWER, // (float) Multiplies amount healed from Healing Magic
+    ELEMENTAL_POWER, // (float) Multiplies damage dealt by Elemental and non-drain Dark Magic.
+    DIVINE_POWER, // (float) Multiplies damage dealt by Divine Magic.
+    NINJUTSU_POWER, // (float) Multiplies damage dealt by Ninjutsu Magic.
+    BLUE_POWER, // (float) Multiplies damage dealt by Blue Magic.
+    DARK_POWER, // (float) Multiplies amount drained by Dark Magic.
+    ITEM_POWER, // (float) Multiplies the effect of items such as Potions and Ethers.
+
+    WEAPON_SKILL_POWER, // (float) Multiplies damage dealt by Weapon Skills.
+    USE_ADOULIN_WEAPON_SKILL_CHANGES, // (bool) Use Adoulin weapon skill damage calculations.
+
+    // Trusts
+    ENABLE_TRUST_CASTING, // (bool) Enable the casting of Trust spells
+    ENABLE_TRUST_QUESTS, // (bool) Enable accepting and completion of the various Trust acquisition quests.
+
+    HARVESTING_BREAK_CHANCE, // (uint) % chance for the sickle to break during harvesting. Set between 0 and 100.
+    EXCAVATION_BREAK_CHANCE, // (uint) % chance for the pickaxe to break during excavation. Set between 0 and 100.
+    LOGGING_BREAK_CHANCE, // (uint) % chance for the hatchet to break during logging. Set between 0 and 100.
+    MINING_BREAK_CHANCE, // (uint) % chance for the pickaxe to break during mining. Set between 0 and 100.
+    HARVESTING_RATE, // (uint) % chance to recieve an item from haresting. Set between 0 and 100.
+    EXCAVATION_RATE, // (uint) % chance to recieve an item from excavation. Set between 0 and 100.
+    LOGGING_RATE, // (uint) % chance to recieve an item from logging. Set between 0 and 100.
+    MINING_RATE, // (uint) % chance to recieve an item from mining. Set between 0 and 100.
+    DIGGING_RATE, // (uint) % chance to receive an item from chocbo digging during favorable weather. Set between 0 and 100.
+
+    HEALING_TP_REDUCTION, // (uint) Reduction in TP for each healing tick.
+
+    // SE implemented coffer/chest illusion time in order to prevent coffer farming. No-one in the same area can open a chest or coffer for loot (gil, gems & items)
+    // till a random time between MIN_ILLSION_TIME and MAX_ILLUSION_TIME. During this time players can loot keyitem and item related to quests (AF, maps... etc.)
+    COFFER_MAX_ILLUSION_TIME, // (uint) TODO: Commen (1 hour)
+    COFFER_MIN_ILLUSION_TIME, // (uint) TODO: Commen (30 minutes)
+    CHEST_MAX_ILLUSION_TIME, // (uint) TODO: Commen (1 hour)
+    CHEST_MIN_ILLUSION_TIME, // (uint) TODO: Commen (30 minutes)
+
 };
 
 enum class SqlSettings
@@ -30,13 +123,14 @@ enum class SqlSettings
     LOGIN, // (string) The Login
     PASSWORD, // (string) The Password
     DATABASE, // (string) The Database
+
 };
 
 enum class LoggingSettings
 {
-    ENABLED, // (bool) Whether or not logging is on
     TIMESTAMP_FORMAT, // (string) Timestamp format
     ENABLE_STANDARD, // (bool) Enable standard logging messages (ShowStandard(...))
+    ENABLE_STATUS, // (bool) Enable standard logging messages (ShowStandard(...))
     ENABLE_INFO, // (bool) Enable standard logging messages (ShowStandard(...))
     ENABLE_NOTICE, // (bool) Enable standard logging messages (ShowStandard(...))
     ENABLE_WARN, // (bool) Enable standard logging messages (ShowStandard(...))
@@ -48,45 +142,65 @@ enum class LoggingSettings
     ENABLE_NAVMESH, // (bool) Enable x logging messages
     ENABLE_ACTION, // (bool) Enable x logging messages
     ENABLE_EXPLOIT, // (bool) Enable x logging messages
+
 };
 
 enum class LoginSettings
 {
-    ENABLED, // (bool) Whether or not logging is on
     DATA_IP, // (string) Data IP
     DATA_PORT, // (uint) Data Port
     VIEW_IP, // (string) View IP
     VIEW_PORT, // (uint) View Port
     AUTH_IP, // (string) Auth IP
     AUTH_PORT, // (uint) Auth Port
+
+    LOG_USER_IP, // (bool) Logging of user IP address to database
+    ACCOUNT_CREATION, // (bool) Allow account creation via the loader
+
+};
+
+enum class MaintenanceSettings
+{
+    MAINT_MODE, // (bool) False: Normal operation. True: only GM characters allowed online & no new character creation
+
 };
 
 enum class MapSettings
 {
     ENABLED, // (bool) Whether or not logging is on
+
 };
 
 enum class SearchSettings
 {
     ENABLED, // (bool) Whether or not logging is on
-    SERVER_PORT, // (uint) Search server port
+    PORT, // (uint) Search server port
+
 };
 
 enum class WorldSettings
 {
     ENABLED, // (bool) Whether or not logging is on
+
 };
 
 enum class ZmqSettings
 {
-    SERVER_IP, // (string) The IP of the machine ZMQ operates on. THIS SHOULD BE YOUR LOCAL MACHINE!
-    SERVER_PORT, // (uint) The port ZMQ operates on (inter-process messaging)
+    IP, // (string) The IP of the machine ZMQ operates on. THIS SHOULD BE YOUR LOCAL MACHINE!
+    PORT, // (uint) The port ZMQ operates on (inter-process messaging)
+
 };
 
 enum class VersionSettings
 {
     CLIENT_VER, // (string) Expected Client version (wrong version cannot log in)
+
+    // WE STRONGLY ADVISE AGAINST LOCKING THE SERVER TO OLDER VERSIONS. IT IS A UNIVERSALLY BAD IDEA.
+    // 0 - disabled (every version allowed)
+    // 1 - enabled - strict (only exact CLIENT_VER allowed)
+    // 2 - enabled - greater than or equal  (matching or greater than CLIENT_VER allowed, default)
     VER_LOCK, // (uint) Version lock scheme
+
 };
 
 enum class TrustsSettings
@@ -100,6 +214,7 @@ using variant_settings_t = std::variant<
    SqlSettings,
    LoggingSettings,
    LoginSettings,
+   MaintenanceSettings,
    MapSettings,
    SearchSettings,
    WorldSettings,
@@ -113,6 +228,9 @@ std::unordered_map<std::string, variant_settings_t> variant_settings_lookup;
 void populate_settings_lookup()
 {
     variant_settings_lookup["MainSettings::SERVER_NAME"] = MainSettings::SERVER_NAME;
+    variant_settings_lookup["MainSettings::SERVER_MESSAGE"] = MainSettings::SERVER_MESSAGE;
+
+    // Content Switches
     variant_settings_lookup["MainSettings::ENABLE_COP"] = MainSettings::ENABLE_COP;
     variant_settings_lookup["MainSettings::ENABLE_TOAU"] = MainSettings::ENABLE_TOAU;
     variant_settings_lookup["MainSettings::ENABLE_WOTG"] = MainSettings::ENABLE_WOTG;
@@ -122,8 +240,98 @@ void populate_settings_lookup()
     variant_settings_lookup["MainSettings::ENABLE_ABYSSEA"] = MainSettings::ENABLE_ABYSSEA;
     variant_settings_lookup["MainSettings::ENABLE_SOA"] = MainSettings::ENABLE_SOA;
     variant_settings_lookup["MainSettings::ENABLE_ROV"] = MainSettings::ENABLE_ROV;
+
     variant_settings_lookup["MainSettings::ENABLE_VOIDWATCH"] = MainSettings::ENABLE_VOIDWATCH;
-    variant_settings_lookup["MainSettings::DAMAGE_MULT"] = MainSettings::DAMAGE_MULT;
+    variant_settings_lookup["MainSettings::ENABLE_VOIDWALKER"] = MainSettings::ENABLE_VOIDWALKER;
+
+    variant_settings_lookup["MainSettings::ENABLE_FIELD_MANUALS"] = MainSettings::ENABLE_FIELD_MANUALS;
+    variant_settings_lookup["MainSettings::ENABLE_GROUNDS_TOMES"] = MainSettings::ENABLE_GROUNDS_TOMES;
+    variant_settings_lookup["MainSettings::ENABLE_SURVIVAL_GUIDE"] = MainSettings::ENABLE_SURVIVAL_GUIDE;
+
+    variant_settings_lookup["MainSettings::REGIME_WAIT"] = MainSettings::REGIME_WAIT;
+    variant_settings_lookup["MainSettings::FOV_REWARD_ALLIANCE"] = MainSettings::FOV_REWARD_ALLIANCE;
+    variant_settings_lookup["MainSettings::GOV_REWARD_ALLIANCE"] = MainSettings::GOV_REWARD_ALLIANCE;
+
+    variant_settings_lookup["MainSettings::ENABLE_ROE"] = MainSettings::ENABLE_ROE;
+    variant_settings_lookup["MainSettings::ENABLE_ROE_TIMED"] = MainSettings::ENABLE_ROE_TIMED;
+    variant_settings_lookup["MainSettings::ENABLE_EXCHANGE_LIMIT"] = MainSettings::ENABLE_EXCHANGE_LIMIT;
+
+    variant_settings_lookup["MainSettings::WEEKLY_EXCHANGE_LIMIT"] = MainSettings::WEEKLY_EXCHANGE_LIMIT;
+
+    // Currency Caps (Change at your own risk!)
+    variant_settings_lookup["MainSettings::CAP_CURRENCY_ACCOLADES"] = MainSettings::CAP_CURRENCY_ACCOLADES;
+    variant_settings_lookup["MainSettings::CAP_CURRENCY_BALLISTA"] = MainSettings::CAP_CURRENCY_BALLISTA;
+    variant_settings_lookup["MainSettings::CAP_CURRENCY_SPARKS"] = MainSettings::CAP_CURRENCY_SPARKS;
+    variant_settings_lookup["MainSettings::CAP_CURRENCY_VALOR"] = MainSettings::CAP_CURRENCY_VALOR;
+
+    // Magian Trials
+    variant_settings_lookup["MainSettings::ENABLE_MAGIAN_TRIALS"] = MainSettings::ENABLE_MAGIAN_TRIALS;
+    variant_settings_lookup["MainSettings::MAGIAN_TRIALS_MOBKILL_MULTIPLIER"] = MainSettings::MAGIAN_TRIALS_MOBKILL_MULTIPLIER;
+    variant_settings_lookup["MainSettings::MAGIAN_TRIALS_TRADE_MULTIPLIER"] = MainSettings::MAGIAN_TRIALS_TRADE_MULTIPLIER;
+
+    // Treasure Caskets
+    // Retail droprate = 0.1 (10%) with no other effects active
+    // Set to 0 to disable caskets.
+    // Max is clamped to 1.0 (100%)
+    variant_settings_lookup["MainSettings::CASKET_DROP_RATE"] = MainSettings::CASKET_DROP_RATE;
+
+    // Character Config
+    variant_settings_lookup["MainSettings::INITIAL_LEVEL_CAP"] = MainSettings::INITIAL_LEVEL_CAP;
+    variant_settings_lookup["MainSettings::MAX_LEVEL"] = MainSettings::MAX_LEVEL;
+    variant_settings_lookup["MainSettings::NORMAL_MOB_MAX_LEVEL_RANGE_MIN"] = MainSettings::NORMAL_MOB_MAX_LEVEL_RANGE_MIN;
+    variant_settings_lookup["MainSettings::NORMAL_MOB_MAX_LEVEL_RANGE_MAX"] = MainSettings::NORMAL_MOB_MAX_LEVEL_RANGE_MAX;
+    variant_settings_lookup["MainSettings::START_GIL"] = MainSettings::START_GIL;
+    variant_settings_lookup["MainSettings::START_INVENTORY"] = MainSettings::START_INVENTORY;
+    variant_settings_lookup["MainSettings::NEW_CHARACTER_CUTSCENE"] = MainSettings::NEW_CHARACTER_CUTSCENE;
+    variant_settings_lookup["MainSettings::SUBJOB_QUEST_LEVEL"] = MainSettings::SUBJOB_QUEST_LEVEL;
+    variant_settings_lookup["MainSettings::ADVANCED_JOB_LEVEL"] = MainSettings::ADVANCED_JOB_LEVEL;
+    variant_settings_lookup["MainSettings::ALL_MAPS"] = MainSettings::ALL_MAPS;
+    variant_settings_lookup["MainSettings::UNLOCK_OUTPOST_WARPS"] = MainSettings::UNLOCK_OUTPOST_WARPS;
+    variant_settings_lookup["MainSettings::UNLOCK_OUTPOST_WARPS_SEA_SKY"] = MainSettings::UNLOCK_OUTPOST_WARPS_SEA_SKY;
+
+    // Rate Modifiers
+    variant_settings_lookup["MainSettings::SHOP_PRICE"] = MainSettings::SHOP_PRICE;
+    variant_settings_lookup["MainSettings::GIL_RATE"] = MainSettings::GIL_RATE;
+    variant_settings_lookup["MainSettings::BAYLD_RATE"] = MainSettings::BAYLD_RATE;
+    variant_settings_lookup["MainSettings::EXP_RATE"] = MainSettings::EXP_RATE;
+    variant_settings_lookup["MainSettings::BOOK_EXP_RATE"] = MainSettings::BOOK_EXP_RATE;
+    variant_settings_lookup["MainSettings::TABS_RATE"] = MainSettings::TABS_RATE;
+    variant_settings_lookup["MainSettings::ROE_EXP_RATE"] = MainSettings::ROE_EXP_RATE;
+    variant_settings_lookup["MainSettings::SPARKS_RATE"] = MainSettings::SPARKS_RATE;
+    variant_settings_lookup["MainSettings::CURE_POWER"] = MainSettings::CURE_POWER;
+    variant_settings_lookup["MainSettings::ELEMENTAL_POWER"] = MainSettings::ELEMENTAL_POWER;
+    variant_settings_lookup["MainSettings::DIVINE_POWER"] = MainSettings::DIVINE_POWER;
+    variant_settings_lookup["MainSettings::NINJUTSU_POWER"] = MainSettings::NINJUTSU_POWER;
+    variant_settings_lookup["MainSettings::BLUE_POWER"] = MainSettings::BLUE_POWER;
+    variant_settings_lookup["MainSettings::DARK_POWER"] = MainSettings::DARK_POWER;
+    variant_settings_lookup["MainSettings::ITEM_POWER"] = MainSettings::ITEM_POWER;
+
+    variant_settings_lookup["MainSettings::WEAPON_SKILL_POWER"] = MainSettings::WEAPON_SKILL_POWER;
+    variant_settings_lookup["MainSettings::USE_ADOULIN_WEAPON_SKILL_CHANGES"] = MainSettings::USE_ADOULIN_WEAPON_SKILL_CHANGES;
+
+    // Trusts
+    variant_settings_lookup["MainSettings::ENABLE_TRUST_CASTING"] = MainSettings::ENABLE_TRUST_CASTING;
+    variant_settings_lookup["MainSettings::ENABLE_TRUST_QUESTS"] = MainSettings::ENABLE_TRUST_QUESTS;
+
+    variant_settings_lookup["MainSettings::HARVESTING_BREAK_CHANCE"] = MainSettings::HARVESTING_BREAK_CHANCE;
+    variant_settings_lookup["MainSettings::EXCAVATION_BREAK_CHANCE"] = MainSettings::EXCAVATION_BREAK_CHANCE;
+    variant_settings_lookup["MainSettings::LOGGING_BREAK_CHANCE"] = MainSettings::LOGGING_BREAK_CHANCE;
+    variant_settings_lookup["MainSettings::MINING_BREAK_CHANCE"] = MainSettings::MINING_BREAK_CHANCE;
+    variant_settings_lookup["MainSettings::HARVESTING_RATE"] = MainSettings::HARVESTING_RATE;
+    variant_settings_lookup["MainSettings::EXCAVATION_RATE"] = MainSettings::EXCAVATION_RATE;
+    variant_settings_lookup["MainSettings::LOGGING_RATE"] = MainSettings::LOGGING_RATE;
+    variant_settings_lookup["MainSettings::MINING_RATE"] = MainSettings::MINING_RATE;
+    variant_settings_lookup["MainSettings::DIGGING_RATE"] = MainSettings::DIGGING_RATE;
+
+    variant_settings_lookup["MainSettings::HEALING_TP_REDUCTION"] = MainSettings::HEALING_TP_REDUCTION;
+
+    // SE implemented coffer/chest illusion time in order to prevent coffer farming. No-one in the same area can open a chest or coffer for loot (gil, gems & items)
+    // till a random time between MIN_ILLSION_TIME and MAX_ILLUSION_TIME. During this time players can loot keyitem and item related to quests (AF, maps... etc.)
+    variant_settings_lookup["MainSettings::COFFER_MAX_ILLUSION_TIME"] = MainSettings::COFFER_MAX_ILLUSION_TIME;
+    variant_settings_lookup["MainSettings::COFFER_MIN_ILLUSION_TIME"] = MainSettings::COFFER_MIN_ILLUSION_TIME;
+    variant_settings_lookup["MainSettings::CHEST_MAX_ILLUSION_TIME"] = MainSettings::CHEST_MAX_ILLUSION_TIME;
+    variant_settings_lookup["MainSettings::CHEST_MIN_ILLUSION_TIME"] = MainSettings::CHEST_MIN_ILLUSION_TIME;
+
 
     variant_settings_lookup["SqlSettings::HOST"] = SqlSettings::HOST;
     variant_settings_lookup["SqlSettings::PORT"] = SqlSettings::PORT;
@@ -131,9 +339,10 @@ void populate_settings_lookup()
     variant_settings_lookup["SqlSettings::PASSWORD"] = SqlSettings::PASSWORD;
     variant_settings_lookup["SqlSettings::DATABASE"] = SqlSettings::DATABASE;
 
-    variant_settings_lookup["LoggingSettings::ENABLED"] = LoggingSettings::ENABLED;
+
     variant_settings_lookup["LoggingSettings::TIMESTAMP_FORMAT"] = LoggingSettings::TIMESTAMP_FORMAT;
     variant_settings_lookup["LoggingSettings::ENABLE_STANDARD"] = LoggingSettings::ENABLE_STANDARD;
+    variant_settings_lookup["LoggingSettings::ENABLE_STATUS"] = LoggingSettings::ENABLE_STATUS;
     variant_settings_lookup["LoggingSettings::ENABLE_INFO"] = LoggingSettings::ENABLE_INFO;
     variant_settings_lookup["LoggingSettings::ENABLE_NOTICE"] = LoggingSettings::ENABLE_NOTICE;
     variant_settings_lookup["LoggingSettings::ENABLE_WARN"] = LoggingSettings::ENABLE_WARN;
@@ -146,7 +355,7 @@ void populate_settings_lookup()
     variant_settings_lookup["LoggingSettings::ENABLE_ACTION"] = LoggingSettings::ENABLE_ACTION;
     variant_settings_lookup["LoggingSettings::ENABLE_EXPLOIT"] = LoggingSettings::ENABLE_EXPLOIT;
 
-    variant_settings_lookup["LoginSettings::ENABLED"] = LoginSettings::ENABLED;
+
     variant_settings_lookup["LoginSettings::DATA_IP"] = LoginSettings::DATA_IP;
     variant_settings_lookup["LoginSettings::DATA_PORT"] = LoginSettings::DATA_PORT;
     variant_settings_lookup["LoginSettings::VIEW_IP"] = LoginSettings::VIEW_IP;
@@ -154,18 +363,35 @@ void populate_settings_lookup()
     variant_settings_lookup["LoginSettings::AUTH_IP"] = LoginSettings::AUTH_IP;
     variant_settings_lookup["LoginSettings::AUTH_PORT"] = LoginSettings::AUTH_PORT;
 
+    variant_settings_lookup["LoginSettings::LOG_USER_IP"] = LoginSettings::LOG_USER_IP;
+    variant_settings_lookup["LoginSettings::ACCOUNT_CREATION"] = LoginSettings::ACCOUNT_CREATION;
+
+
+    variant_settings_lookup["MaintenanceSettings::MAINT_MODE"] = MaintenanceSettings::MAINT_MODE;
+
+
     variant_settings_lookup["MapSettings::ENABLED"] = MapSettings::ENABLED;
 
+
     variant_settings_lookup["SearchSettings::ENABLED"] = SearchSettings::ENABLED;
-    variant_settings_lookup["SearchSettings::SERVER_PORT"] = SearchSettings::SERVER_PORT;
+    variant_settings_lookup["SearchSettings::PORT"] = SearchSettings::PORT;
+
 
     variant_settings_lookup["WorldSettings::ENABLED"] = WorldSettings::ENABLED;
 
-    variant_settings_lookup["ZmqSettings::SERVER_IP"] = ZmqSettings::SERVER_IP;
-    variant_settings_lookup["ZmqSettings::SERVER_PORT"] = ZmqSettings::SERVER_PORT;
+
+    variant_settings_lookup["ZmqSettings::IP"] = ZmqSettings::IP;
+    variant_settings_lookup["ZmqSettings::PORT"] = ZmqSettings::PORT;
+
 
     variant_settings_lookup["VersionSettings::CLIENT_VER"] = VersionSettings::CLIENT_VER;
+
+    // WE STRONGLY ADVISE AGAINST LOCKING THE SERVER TO OLDER VERSIONS. IT IS A UNIVERSALLY BAD IDEA.
+    // 0 - disabled (every version allowed)
+    // 1 - enabled - strict (only exact CLIENT_VER allowed)
+    // 2 - enabled - greater than or equal  (matching or greater than CLIENT_VER allowed, default)
     variant_settings_lookup["VersionSettings::VER_LOCK"] = VersionSettings::VER_LOCK;
+
 
     variant_settings_lookup["TrustsSettings::ENABLE_TRUST_CASTING"] = TrustsSettings::ENABLE_TRUST_CASTING;
     variant_settings_lookup["TrustsSettings::ENABLE_TRUST_QUESTS"] = TrustsSettings::ENABLE_TRUST_QUESTS;

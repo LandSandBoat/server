@@ -939,7 +939,8 @@ void CZone::createZoneTimer()
 void CZone::CharZoneIn(CCharEntity* PChar)
 {
     TracyZoneScoped;
-    // ищем свободный targid для входящего в зону персонажа
+
+    // We are looking for a free targid for a character included in the zone
 
     PChar->loc.zone         = this;
     PChar->loc.zoning       = false;

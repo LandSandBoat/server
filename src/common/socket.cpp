@@ -800,13 +800,13 @@ int32 makeListenBind_tcp(const char* ip, uint16 port, RecvFunc connect_client)
     result = sBind(fd, (struct sockaddr*)&server_address, sizeof(server_address));
     if (result == SOCKET_ERROR)
     {
-        ShowError("make_listen_bind: bind failed (socket #%d, code %d)!", fd, sErrno);
+        ShowError("make_listen_bind: bind failed (socket #%d, code %d, port %d)!", fd, sErrno, port);
         do_final(EXIT_FAILURE);
     }
     result = sListen(fd, 5);
     if (result == SOCKET_ERROR)
     {
-        ShowError("make_listen_bind: listen failed (socket #%d, code %d)!", fd, sErrno);
+        ShowError("make_listen_bind: listen failed (socket #%d, code %d, port %d)!", fd, sErrno, port);
         do_final(EXIT_FAILURE);
     }
 

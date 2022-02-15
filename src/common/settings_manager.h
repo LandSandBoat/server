@@ -96,10 +96,16 @@ private:
         auto typeString = get_str_between_two_str(line, "-- (", ") ");
         auto valueString = get_str_between_two_str(line, " = ", ", --");
 
+        if (nameString == "--")
+        {
+            return;
+        }
+
         std::string sectionTitle = section + "Settings::";
         sectionTitle[0]          = std::toupper(sectionTitle[0]);
         std::string lookupString = sectionTitle + nameString;
         auto        enumSetting  = variant_settings_lookup[lookupString];
+
 
         if (typeString == "string")
         {
@@ -120,8 +126,39 @@ private:
         }
         else
         {
-            std::cerr << "Invalid settings type! " << nameString << ", " << typeString << "\n";
+            std::cerr << sectionTitle << " : " << lookupString << ": invalid settings type! " << nameString << ", " << typeString << "\n";
         }
+    }
+
+    void ReadServerMessage()
+    {
+        // TODO
+        if (std::filesystem::is_empty("./settings/server_message.txt"))
+        {
+            //
+        }
+
+        std::string serverMessage;
+        std::ifstream file("./settings/server_message.txt");
+        std::string   line;
+
+        // TODO: This is a lame hack
+        bool firstLine = true;
+        if (file.is_open())
+        {
+            while (!file.eof())
+            {
+                std::getline(file, line);
+                if (!firstLine)
+                {
+                    serverMessage += "\n";
+                }
+                serverMessage += line;
+                firstLine = false;
+            }
+            file.close();
+        }
+        this->map[MainSettings::SERVER_MESSAGE] = SettingsDetails{ "MainSettings::SERVER_MESSAGE", serverMessage };
     }
 
 public:
@@ -158,6 +195,8 @@ public:
                 }
             }
         }
+
+        ReadServerMessage();
     }
 
     template <typename T>
@@ -171,7 +210,7 @@ public:
         }
         catch(const std::exception& e)
         {
-            std::cerr << e.what() << '\n';
+            std::cerr << "Error: SettingsManager::Get: " << e.what() << '\n';
         }
         return T();
     }

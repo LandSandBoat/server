@@ -16,10 +16,24 @@ xi.settings.{current_header} =
 {{
 """
             for v in header_entries:
+                if len(v) == 0:
+                    output += "\n"
+                    continue
+
+                if isinstance(v, str):
+                    output += f"    -- {v}\n"
+                    continue
+
                 type = v[0]
                 name = v[1]
                 value = v[2]
                 description = v[3]
+
+                if "SERVER_MESSAGE" in name:
+                    continue
+
+                if type == "float":
+                    value = value.replace("f", "")
 
                 # Content
                 if type == "string":
@@ -40,6 +54,14 @@ def write_cpp_settings_files(headers):
         for current_header, header_entries in headers.items():
             output += f"enum class {current_header.capitalize()}Settings\n{{\n"
             for v in header_entries:
+                if len(v) == 0:
+                    output += "\n"
+                    continue
+
+                if isinstance(v, str):
+                    output += f"    // {v}\n"
+                    continue
+
                 type = v[0]
                 name = v[1]
                 #value = v[2]
@@ -59,6 +81,14 @@ def write_cpp_settings_files(headers):
         output += "void populate_settings_lookup()\n{\n"
         for current_header, header_entries in headers.items():
             for v in header_entries:
+                if len(v) == 0:
+                    output += "\n"
+                    continue
+
+                if isinstance(v, str):
+                    output += f"    // {v}\n"
+                    continue
+
                 name = v[1]
                 output += f"    variant_settings_lookup[\"{current_header.capitalize()}Settings::{name}\"] = {current_header.capitalize()}Settings::{name};\n"
             output += "\n"
@@ -80,18 +110,29 @@ def main():
     for line in list:
         line = line.strip()
 
-        # Comments
-        if line.startswith("#") or line == "":
+        # Empty lines as spacing
+        if len(current_header) == 0 and line == "":
+            continue
+
+        # Start of a section header
+        if line.startswith("["):
+            current_header = line.replace("[", "").replace("]", "").strip()
+            headers[current_header] = []
+            continue
+
+        if len(current_header) == 0:
+            continue
+
+        if line.startswith("#"):
+            headers[current_header].append(line.replace("#", "").strip())
             continue
 
         if "#" in line:
             # TODO: This is kinda fragile
             line = line.split("#")[0]
 
-        # Start of a section header
-        if line.startswith("["):
-            current_header = line.replace("[", "").replace("]", "").strip()
-            headers[current_header] = []
+        if line == "":
+            headers[current_header].append(())
             continue
 
         if current_header == "":
@@ -108,6 +149,10 @@ def main():
 
         write_lua_settings_files(headers)
         write_cpp_settings_files(headers)
+
+        with open(f"../settings/default/server_message.txt", "w") as fd:
+            fd.write("Please visit https://github.com/LandSandBoat/server for the latest information on the project.\n"
+                     "Thank you, and we hope you enjoy sailing the sands!")
 
 if __name__ == "__main__":
     main()

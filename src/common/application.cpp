@@ -32,7 +32,10 @@ Application::Application(std::unique_ptr<argparse::ArgumentParser>&& pArgParser)
     //debug::init();
 
     auto toau = SettingsManager::Get<bool>(MainSettings::ENABLE_TOAU);
-    std::cout << toau;
+    std::cout << "TOAU: " << toau << "\n";
+
+    auto serverMessage = SettingsManager::Get<std::string>(MainSettings::SERVER_MESSAGE);
+    std::cout << serverMessage << "\n";
 
     //gZMQ         = std::make_unique<ZMQService>(this);
     //gSQL         = std::make_unique<SQLService>(this);
