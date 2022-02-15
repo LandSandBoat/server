@@ -33,8 +33,9 @@ spell_object.onMobSpawn = function(mob)
     mob:addSimpleGambit(ai.t.SELF, ai.c.NOT_STATUS, xi.effect.DOUBLE_SHOT,
                         ai.r.JA, ai.s.SPECIFIC, xi.ja.DOUBLE_SHOT)
 
-    mob:addSimpleGambit(ai.t.SELF, ai.c.HAS_TOP_ENMITY, 0,
-                        ai.r.JA, ai.s.SPECIFIC, xi.ja.STEALTH_SHOT)
+    -- TODO: Stealth Shot not yet implemented
+    -- mob:addSimpleGambit(ai.t.SELF, ai.c.HAS_TOP_ENMITY, 0,
+    --                    ai.r.JA, ai.s.SPECIFIC, xi.ja.STEALTH_SHOT)
 
     mob:addListener("WEAPONSKILL_USE", "SEMIH_LAFIHNA_WEAPONSKILL_USE", function(mobArg, target, wsid, tp, action)
         if wsid == 3490 then -- Stellar Arrow
@@ -48,7 +49,7 @@ spell_object.onMobSpawn = function(mob)
 
     mob:SetAutoAttackEnabled(false)
 
-    mob:addMod(xi.mod.STORETP, 30)
+    mob:addMod(xi.mod.STORETP, 40)
 end
 
 spell_object.onMobDespawn = function(mob)
