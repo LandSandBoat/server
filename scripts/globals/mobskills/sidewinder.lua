@@ -1,7 +1,9 @@
 -----------------------------------
--- Lux Arrow
+-- Sidewinder
 -- Trust: Semih Lafihna
--- Fragmentation/Distortion skillchain properties
+-- Delivers an inaccurate attack that deals quintuple damage. Accuracy varies with TP.
+-- Reverberation/Transfixtion/Detonation skillchain properties
+-- Modifiers: STR:20%; AGI:50%
 -----------------------------------
 require("scripts/settings/main")
 require("scripts/globals/status")
@@ -14,9 +16,11 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local dmgmod = 1
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg()*2.5, xi.magic.ele.LIGHT, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
-    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.RANGED, xi.damageType.PIERCING, info.hitslanded)
+    local numhits = 1
+    local accmod = 1
+    local dmgmod = 5.0
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
+    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.RANGED, xi.damageType.PIERCING, xi.mobskills.shadowBehavior.NUMSHADOWS_1)
     target:takeDamage(dmg, mob, xi.attackType.RANGED, xi.damageType.PIERCING)
     return dmg
 end
