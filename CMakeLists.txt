@@ -79,8 +79,8 @@ set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
 link_libraries(${CMAKE_THREAD_LIBS_INIT})
 
-# Find MySQL
-find_package(MySQL REQUIRED)
+# Find MariaDB
+find_package(MariaDB REQUIRED)
 
 # Find ZMQ
 find_package(ZeroMQ REQUIRED)
