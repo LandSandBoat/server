@@ -31,6 +31,7 @@ mission.sections =
             onZoneIn =
             {
                 function(player, prevZone)
+                    -- NOTE: Entering via any other means (including the Mog House) will not trigger the staring cutscene.
                     if
                         prevZone == xi.zone.WINDURST_WATERS or
                         prevZone == xi.zone.WINDURST_WOODS
