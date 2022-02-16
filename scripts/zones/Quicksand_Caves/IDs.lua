@@ -42,46 +42,56 @@ zones[xi.zone.QUICKSAND_CAVES] =
     },
     mob =
     {
-        SAGITTARIUS_X_XIII_PH =
+        SAGITTARIUS_X_XIII_PH   =
         {
             [17629296] = 17629301, -- 641 -16.786 -774
         },
-        NUSSKNACKER_PH        =
+        NUSSKNACKER_PH          =
         {
             [17629396] = 17629403, -- 189 2 4
             [17629397] = 17629403, -- 200 2 -4
         },
-        CENTURIO_X_I_PH       =
+        CENTURIO_X_I_PH         =
         {
             [17629237] = 17629238, -- 773.581 1.576 -568.904
         },
-        ANTICAN_MAGISTER_PH   =
+        ANTICAN_MAGISTER_PH     =
         {
             [17629280] = 17629280, -- 856.187 1.120 -657.310
         },
-        ANTICAN_PRAEFECTUS_PH =
+        ANTICAN_PRAEFECTUS_PH   =
         {
             [17629280] = 17629281, -- -90.01 -0.567 -29.424
         },
-        ANTICAN_PROCONSUL_PH  =
+        ANTICAN_PROCONSUL_PH    =
         {
             [17629420] = 17629421, -- 89.575 -0.299 -196.206
         },
-        DIAMOND_DAIG_PH       =
+        DIAMOND_DAIG_PH         =
         {
             [17629439] = 17629430, -- -95.632 -0.5 -214.732
         },
-        ANTICAN_TRIBUNUS_PH   =
+        ANTICAN_TRIBUNUS_PH     =
         {
             [17629501] = 17629483, -- -575.455 -0.401 -433.802
         },
-        TRIARIUS_X_XV_PH      =
+        TRIARIUS_X_XV_PH        =
         {
             [17629533] = 17629524, -- -786.730 -0.5 -343.963
         },
-        HASTATUS_XI_XII_PH    =
+        HASTATUS_XI_XII_PH      =
         {
             [17629557] = 17629561, -- -343.859 -0.411 751.608
+        SABOTENDER_BAILARIN_PH  =
+        {
+            [17629261] = 17629264, -- 604 -5.5 -680
+            [17629262] = 17629264, -- 600 -5.5 -673
+        },
+        SABOTENDER_BAILARINA_PH =
+        {
+            [17629582] = 17629587, -- -458 0 780
+            [17629586] = 17629587, -- -522 1 779
+        },
         },
         VALOR                 = 17629185,
         HONOR                 = 17629186,
