@@ -231,3 +231,28 @@ INSERT INTO `mob_droplist` VALUES (2908,0,0,1000,2471,200);
 INSERT INTO `mob_droplist` VALUES (179,0,0,1000,17597,300);
 INSERT INTO `mob_droplist` VALUES (21,0,0,1000,2654,100);
 INSERT INTO `mob_droplist` VALUES (21,0,0,1000,2655,100);
+-- Add ores to Sky NM's
+INSERT INTO `mob_droplist` VALUES (2326,0,0,1000,734,100);   -- Steam Cleaner
+INSERT INTO `mob_droplist` VALUES (2326,0,0,1000,741,100);   -- Steam Cleaner
+INSERT INTO `mob_droplist` VALUES (2326,0,0,1000,730,100);   -- Steam Cleaner
+INSERT INTO `mob_droplist` VALUES (2820,0,0,1000,734,100);   -- Mother Globe
+INSERT INTO `mob_droplist` VALUES (2820,0,0,1000,741,100);   -- Mother Globe
+INSERT INTO `mob_droplist` VALUES (2820,0,0,1000,730,100);   -- Mother Globe
+INSERT INTO `mob_droplist` VALUES (357,0,0,1000,734,100);   -- Brigandish Blade
+INSERT INTO `mob_droplist` VALUES (357,0,0,1000,741,100);   -- Brigandish Blade
+INSERT INTO `mob_droplist` VALUES (357,0,0,1000,730,100);   -- Brigandish Blade
+INSERT INTO `mob_droplist` VALUES (2821,0,0,1000,734,100);   -- Faust
+INSERT INTO `mob_droplist` VALUES (2821,0,0,1000,741,100);   -- Faust
+INSERT INTO `mob_droplist` VALUES (2821,0,0,1000,730,100);   -- Faust
+INSERT INTO `mob_droplist` VALUES (638,0,0,1000,734,100);   -- Despot
+INSERT INTO `mob_droplist` VALUES (638,0,0,1000,741,100);   -- Despot
+INSERT INTO `mob_droplist` VALUES (638,0,0,1000,730,100);   -- Despot
+INSERT INTO `mob_droplist` VALUES (2822,0,0,1000,734,100);   -- Ullikummi
+INSERT INTO `mob_droplist` VALUES (2822,0,0,1000,741,100);   -- Ullikummi
+INSERT INTO `mob_droplist` VALUES (2822,0,0,1000,730,100);   -- Ullikummi
+INSERT INTO `mob_droplist` VALUES (2800,0,0,1000,734,100);   -- Zipacna
+INSERT INTO `mob_droplist` VALUES (2800,0,0,1000,741,100);   -- Zipacna
+INSERT INTO `mob_droplist` VALUES (2800,0,0,1000,730,100);   -- Zipacna
+INSERT INTO `mob_droplist` VALUES (2823,0,0,1000,734,100);   -- Olla Grande
+INSERT INTO `mob_droplist` VALUES (2823,0,0,1000,741,100);   -- Olla Grande
+INSERT INTO `mob_droplist` VALUES (2823,0,0,1000,730,100);   -- Olla Grande
