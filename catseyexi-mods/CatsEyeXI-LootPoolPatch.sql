@@ -18,10 +18,10 @@ UPDATE `mob_droplist` SET `itemId`= 17472 WHERE `dropId`=2645 AND `itemId`=18752
 ######
 ## Update Angel skin drop-rates
 ######
-DELETE FROM `mob_droplist` WHERE dropId = 5000 AND itemId= 1312; #Remove rookie mistake
-DELETE FROM `mob_droplist` WHERE dropId = 4000 AND itemId= 1312; #Remove from Nostokulshedra
-DELETE FROM `mob_droplist` WHERE dropId = 456 AND itemId= 1312; #Remove from Chary
-INSERT `mob_droplist` VALUES(4000,0,1,1000,1312,10); #piece_of_angel_skin Nostokulshedra
+# DELETE FROM `mob_droplist` WHERE dropId = 5000 AND itemId= 1312; #Remove rookie mistake
+# DELETE FROM `mob_droplist` WHERE dropId = 4000 AND itemId= 1312; #Remove from Nostokulshedra
+# DELETE FROM `mob_droplist` WHERE dropId = 456 AND itemId= 1312; #Remove from Chary
+# INSERT `mob_droplist` VALUES(4000,0,1,1000,1312,10); #piece_of_angel_skin Nostokulshedra
 INSERT `mob_droplist` VALUES(456,0,1,1000,1312,70); #piece_of_angel_skin Charybdis
 UPDATE `mob_droplist` SET itemRate = 70 WHERE dropId = 2196 AND itemId = 1312; #Update Seiryu droprate
 UPDATE mob_groups SET dropId = 4000 WHERE zoneId = 54 AND groupId = 52 AND `name` = 'Nostokulshedra'; #Add drop to this thing
