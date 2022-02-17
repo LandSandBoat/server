@@ -31,6 +31,15 @@
 #include <cstdlib>
 #include <cstring>
 
+struct SqlConnectionCredentials_t
+{
+    std::string user;
+    std::string password;
+    std::string host;
+    uint32 port;
+    std::string db;
+} gSqlCredentials;
+
 /************************************************************************
  *																		*
  *  Column length receiver.												*
@@ -74,8 +83,21 @@ int32 Sql_Connect(Sql_t* self, const char* user, const char* passwd, const char*
         return SQL_ERROR;
     }
 
+    gSqlCredentials.user = user;
+    gSqlCredentials.password = passwd;
+    gSqlCredentials.host = host;
+    gSqlCredentials.port = port;
+    gSqlCredentials.db = db;
+
     self->buf.clear();
-    if (!mysql_real_connect(&self->handle, host, user, passwd, db, (uint32)port, nullptr /*unix_socket*/, 0 /*clientflag*/))
+    if (!mysql_real_connect(&self->handle,
+        gSqlCredentials.host.c_str(),
+        gSqlCredentials.user.c_str(),
+        gSqlCredentials.password.c_str(),
+        gSqlCredentials.db.c_str(),
+        gSqlCredentials.port,
+        nullptr /*unix_socket*/,
+        0 /*clientflag*/))
     {
         ShowSQL("%s", mysql_error(&self->handle));
         return SQL_ERROR;
@@ -167,17 +189,45 @@ int32 Sql_SetEncoding(Sql_t* self, const char* encoding)
 
 int32 Sql_Ping(Sql_t* self)
 {
-    try
+    if (self == nullptr)
     {
-        if (self && mysql_ping(&self->handle) == 0)
+        return SQL_ERROR;
+    }
+
+    if (mysql_ping(&self->handle) == 0)
+    {
+        return SQL_SUCCESS;
+    }
+
+    ShowSQL("%s", mysql_error(&self->handle));
+
+    // Try to reconnect 10 times
+    for (size_t i = 0; i < 10; i++)
+    {
+        ShowSQL("Trying to reconnect to the database (%i/10)", i + 1);
+
+        // This call blocks
+        if (mysql_real_connect(&self->handle,
+            gSqlCredentials.host.c_str(),
+            gSqlCredentials.user.c_str(),
+            gSqlCredentials.password.c_str(),
+            gSqlCredentials.db.c_str(),
+            gSqlCredentials.port,
+            nullptr /*unix_socket*/,
+            0 /*clientflag*/) != nullptr)
         {
             return SQL_SUCCESS;
         }
+        else
+        {
+            ShowSQL("%s", mysql_error(&self->handle));
+            std::this_thread::sleep_for(std::chrono::seconds(1));
+        }
     }
-    catch (const std::exception& e)
-    {
-        throw std::runtime_error(fmt::format("mysql_ping failed: {}", e.what()));
-    }
+
+    // If you get here, all hope is lost.
+    ShowFatalError("Could not reconnect to the database 10 times! Exiting.");
+    std::exit(-1);
 
     return SQL_ERROR;
 }
@@ -229,6 +279,7 @@ int32 Sql_Keepalive(Sql_t* self)
     }
     // establish keepalive
     ping_interval = timeout - 30; // 30-second reserve
+
     CTaskMgr::getInstance()->AddTask("Sql_P_KeepAliveTimer", server_clock::now() + std::chrono::seconds(ping_interval), self, CTaskMgr::TASK_INTERVAL,
                                      Sql_P_KeepaliveTimer, std::chrono::seconds(ping_interval));
     return 0;
