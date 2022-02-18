@@ -83,8 +83,8 @@ local optionToItem = {
         [19] = { cost = 50, id = 16966 }, -- Tachi
         [20] = { cost = 50, id = 17024 }, -- Ash club
         [21] = { cost = 50, id = 17034 }, -- Bronze mace
-        [22] = { cost = 50, id = 4181  }, -- Bronze hammer
-        [23] = { cost = 50, id = 17042 }, -- Bronze rod
+        [22] = { cost = 50, id = 17042 }, -- Bronze hammer
+        [23] = { cost = 50, id = 17059 }, -- Bronze rod
         [24] = { cost = 50, id = 17050 }, -- Willow wand
         [25] = { cost = 50, id = 17088 }, -- Ash staff
         [26] = { cost = 50, id = 17095 }, -- Ash pole
