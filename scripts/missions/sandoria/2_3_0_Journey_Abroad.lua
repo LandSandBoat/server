@@ -151,6 +151,45 @@ mission.sections =
 
         [xi.zone.METALWORKS] =
         {
+            ['Chantain'] =
+            {
+                onTrigger = function(player, npc)
+                    local missionStatus = player:getMissionStatus(mission.areaId)
+
+                    if missionStatus == 7 then
+                        return mission:progressEvent(216)
+                    elseif missionStatus == 11 then
+                        return mission:progressEvent(218)
+                    end
+                end,
+            },
+
+            ['Lutia'] =
+            {
+                onTrigger = function(player, npc)
+                    local missionStatus = player:getMissionStatus(mission.areaId)
+
+                    if missionStatus == 7 then
+                        return mission:progressEvent(213)
+                    elseif missionStatus == 11 then
+                        return mission:progressEvent(215)
+                    end
+                end,
+            },
+
+            ['Riault'] =
+            {
+                onTrigger = function(player, npc)
+                    local missionStatus = player:getMissionStatus(mission.areaId)
+
+                    if missionStatus == 7 then
+                        return mission:progressEvent(210)
+                    elseif missionStatus == 11 then
+                        return mission:progressEvent(212)
+                    end
+                end,
+            },
+
             ['Savae_E_Paleade'] =
             {
                 onTrigger = function(player, npc)
@@ -162,6 +201,8 @@ mission.sections =
                     -- Part II - Windurst > Bastok
                     elseif missionStatus == 7 then
                         return mission:progressEvent(206)
+                    elseif missionStatus == 11 then
+                        return mission:progressEvent(209)
                     end
                 end,
             },

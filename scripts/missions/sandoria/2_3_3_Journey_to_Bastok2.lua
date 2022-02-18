@@ -28,6 +28,28 @@ mission.sections =
 
         [xi.zone.METALWORKS] =
         {
+            ['Chantain'] =
+            {
+                onTrigger = function(player, npc)
+                    local missionStatus = player:getMissionStatus(mission.areaId)
+
+                    if missionStatus >= 8 and missionStatus <= 10 then
+                        return mission:progressEvent(217)
+                    end
+                end,
+            },
+
+            ['Lutia'] =
+            {
+                onTrigger = function(player, npc)
+                    local missionStatus = player:getMissionStatus(mission.areaId)
+
+                    if missionStatus >= 8 and missionStatus <= 10 then
+                        return mission:progressEvent(214)
+                    end
+                end,
+            },
+
             ['Grohm'] =
             {
                 onTrigger = function(player, npc)
@@ -52,10 +74,25 @@ mission.sections =
                 end,
             },
 
+            ['Riault'] =
+            {
+                onTrigger = function(player, npc)
+                    local missionStatus = player:getMissionStatus(mission.areaId)
+
+                    if missionStatus >= 8 and missionStatus <= 10 then
+                        return mission:progressEvent(211)
+                    end
+                end,
+            },
+
             ['Savae_E_Paleade'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getMissionStatus(mission.areaId) == 11 then
+                    local missionStatus = player:getMissionStatus(mission.areaId)
+
+                    if missionStatus >= 8 and missionStatus <= 10 then
+                        return mission:progressEvent(208)
+                    elseif missionStatus == 11 then
                         return mission:progressEvent(207)
                     end
                 end,
