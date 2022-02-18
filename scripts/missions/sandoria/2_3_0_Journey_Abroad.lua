@@ -185,6 +185,42 @@ mission.sections =
 
         [xi.zone.WINDURST_WOODS] =
         {
+            ['Catalia'] =
+            {
+                onTrigger = function(player, npc)
+                    if
+                        player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_TO_WINDURST) and
+                        player:getMissionStatus(mission.areaId) == 7
+                    then
+                        return mission:progressEvent(459)
+                    end
+                end,
+            },
+
+            ['Erpolant'] =
+            {
+                onTrigger = function(player, npc)
+                    if
+                        player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_TO_WINDURST) and
+                        player:getMissionStatus(mission.areaId) == 7
+                    then
+                        return mission:progressEvent(460)
+                    end
+                end,
+            },
+
+            ['Forine'] =
+            {
+                onTrigger = function(player, npc)
+                    if
+                        player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_TO_WINDURST) and
+                        player:getMissionStatus(mission.areaId) == 7
+                    then
+                        return mission:progressEvent(461)
+                    end
+                end,
+            },
+
             ['Mourices'] =
             {
                 onTrigger = function(player, npc)
