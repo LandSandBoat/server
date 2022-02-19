@@ -3,10 +3,10 @@
 -- Rhapsodies of Vana'diel Mission 1-5
 -----------------------------------
 -- !addmission 13 6
--- Tonasav    :
--- Pacomart   :
+-- Tonasav    : !pos -18.1 -8 28.4 249
+-- Pacomart   : !pos -14.4 -1 -30.6 248
 -- Comitiolus : !pos 100 -7 -13 252
--- Heillal    :
+-- Heillal    : !pos 30.8 -5.8 2.3 252
 -- Oaken Door : !pos 97 -7 -12 252
 -----------------------------------
 require('scripts/globals/missions')
@@ -74,7 +74,7 @@ mission.sections =
         [xi.zone.NORG] =
         {
             ['_700']       = mission:event(276):setPriority(1005), -- RoV objectives are highest priority, set higher than progressEvent (1000)
-            ['Comitiolus'] = mission:event(6),
+            ['Comitiolus'] = mission:event(6), -- NPC Chat 12321, not event 6
             ['Heillal']    = mission:progressEvent(281),
 
             onEventFinish =

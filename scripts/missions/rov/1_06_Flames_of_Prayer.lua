@@ -28,7 +28,14 @@ mission.sections =
 
         [xi.zone.NORG] =
         {
-            ['_700'] = mission:event(277):setPriority(1005), -- RoV objectives are highest priority, set higher than progressEvent (1000)
+            ['_700'] =
+            {
+                onTrigger = function(player, npc)
+                    local isRank3 = player:getRank(player:getNation()) >= 3 and 1 or 0
+
+                    return mission:event(277, { [7] = isRank3 }):setPriority(1005)
+                end,
+            },
 
             onEventFinish =
             {

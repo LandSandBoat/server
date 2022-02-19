@@ -37,7 +37,9 @@ mission.sections =
                 onTrigger = function(player, npc)
                     if mission:getVar(player, 'hasSeenEvent') == 0 then
                         local rank6 = (player:getRank(player:getNation()) >= 6) and 1 or 0
-                        return mission:event(4, player:getZoneID(), 0, 0, 0, 0, 0, rank6):setPriority(1005)
+                        local isLionGhost = player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_CELESTIAL_NEXUS) and 1 or 0
+
+                        return mission:event(4, player:getZoneID(), 0, 0, 0, 0, 0, rank6, isLionGhost):setPriority(1005)
                     else
                         -- Note: mission:complete() calls npcUtil.completeMission() and checks giving item
                         -- reward first.  We can spam this until the player can successfully receive everything.
@@ -64,7 +66,9 @@ mission.sections =
                 onTrigger = function(player, npc)
                     if mission:getVar(player, 'hasSeenEvent') == 0 then
                         local rank6 = (player:getRank(player:getNation()) >= 6) and 1 or 0
-                        return mission:event(15, player:getZoneID(), 0, 0, 0, 0, 0, rank6):setPriority(1005)
+                        local isLionGhost = player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_CELESTIAL_NEXUS) and 1 or 0
+
+                        return mission:event(15, player:getZoneID(), 0, 0, 0, 0, 0, rank6, isLionGhost):setPriority(1005)
                     else
                         mission:complete(player)
                         return mission:noAction()
@@ -89,7 +93,9 @@ mission.sections =
                 onTrigger = function(player, npc)
                     if mission:getVar(player, 'hasSeenEvent') == 0 then
                         local rank6 = (player:getRank(player:getNation()) >= 6) and 1 or 0
-                        return mission:event(42, player:getZoneID(), 0, 0, 0, 0, 0, rank6):setPriority(1005)
+                        local isLionGhost = player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_CELESTIAL_NEXUS) and 1 or 0
+
+                        return mission:event(42, player:getZoneID(), 0, 0, 0, 0, 0, rank6, isLionGhost):setPriority(1005)
                     else
                         mission:complete(player)
                         return mission:noAction()

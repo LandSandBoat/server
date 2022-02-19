@@ -9,6 +9,8 @@ require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------
+local norgID = require("scripts/zones/Norg/IDs")
+-----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.AT_THE_HEAVENS_DOOR)
 
@@ -26,7 +28,14 @@ mission.sections =
 
         [xi.zone.QUFIM_ISLAND] =
         {
-            ['Undulating_Confluence'] = mission:event(63):setPriority(1005),
+            ['Undulating_Confluence'] =
+            {
+                onTrigger = function(player, npc)
+                    local isLionGhost = player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_CELESTIAL_NEXUS) and 1 or 0
+
+                    return mission:event(63, { [7] = isLionGhost }):setPriority(1005)
+                end,
+            },
 
             onEventFinish =
             {
@@ -34,6 +43,11 @@ mission.sections =
                     mission:complete(player)
                 end,
             },
+        },
+
+        [xi.zone.NORG] =
+        {
+            ['_700'] = mission:messageSpecial(norgID.text.DOOR_IS_LOCKED),
         },
     },
 }

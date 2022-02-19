@@ -34,7 +34,7 @@ mission.sections =
                     if npcUtil.popFromQM(player, npc, qufimID.mob.OPHIOTAURUS, { look = true, hide = 0 }) then
                         return mission:messageSpecial(qufimID.text.SENSE_OF_FOREBODING)
                     else
-                        return mission:messageSpecial(qufimID.text.NOW_IS_NOT_THE_TIME)
+                        return mission:messageSpecial(qufimID.text.WAIT_A_BIT_LONGER)
                     end
                 end,
             },

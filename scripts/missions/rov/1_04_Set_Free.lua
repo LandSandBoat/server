@@ -59,7 +59,7 @@ mission.sections =
                 end,
 
                 onTrigger = function(player, npc)
-                    return mission:progressEvent(181)
+                    return mission:event(181):importantOnce()
                 end,
             },
 
@@ -80,6 +80,10 @@ mission.sections =
                     then
                         return mission:progressEvent(370, 0, 0, 0, 0, 0, 0, player:hasJob(0) and 1 or 0)
                     end
+                end,
+
+                onTrigger = function(player, npc)
+                    return mission:event(373):importantOnce()
                 end,
             },
 

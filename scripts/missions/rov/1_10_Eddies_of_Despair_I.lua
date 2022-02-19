@@ -27,7 +27,14 @@ mission.sections =
 
         [xi.zone.QUFIM_ISLAND] =
         {
-            ['Undulating_Confluence'] = mission:event(64):setPriority(1005),
+            ['Undulating_Confluence'] =
+            {
+                onTrigger = function(player, npc)
+                    local isLionGhost = player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_CELESTIAL_NEXUS) and 1 or 0
+
+                    return mission:event(64, { [7] = isLionGhost }):setPriority(1005)
+                end,
+            },
 
             onEventFinish =
             {
@@ -43,6 +50,17 @@ mission.sections =
             {
                 function(player, prevZone)
                     return 1
+                end,
+            },
+
+            onEventUpdate =
+            {
+                [1] = function(player, csid, option, npc)
+                    if option == 1 then
+                        local isLionGhost = player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_CELESTIAL_NEXUS) and 2 or 0
+
+                        player:updateEvent(0, 0, 0, 0, 0, 0, 0, isLionGhost)
+                    end
                 end,
             },
 

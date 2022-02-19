@@ -11,6 +11,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
+    -- TODO: This is not a random sequence, but 51 is displayed on first interaction ever,
+    -- 52 is displayed all subsequent times (tested against zone and logout).
     if math.random() > 0.5 then
         player:startEvent(51)
     else

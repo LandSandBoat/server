@@ -3,6 +3,8 @@
 -- Rhapsodies of Vana'diel Mission 1-3
 -----------------------------------
 -- !addmission 13 3
+-- Naillina     : !pos -66.8 -11.3 -0.8 248
+-- Numi Adaligo : !pos -80.3 -24 34.8 249
 -----------------------------------
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')

@@ -18,6 +18,7 @@ zones[xi.zone.QUFIM_ISLAND] =
         NOTHING_OUT_OF_ORDINARY        = 6403,  -- There is nothing out of the ordinary here.
         SENSE_OF_FOREBODING            = 6404,  -- You are suddenly overcome with a sense of foreboding...
         NOW_IS_NOT_THE_TIME            = 6405,  -- Now is not the time for that!
+        WAIT_A_BIT_LONGER              = 6406,  -- It seems that you will have to wait a bit longer...
         FELLOW_MESSAGE_OFFSET          = 6418,  -- I'm ready. I suppose.
         CARRIED_OVER_POINTS            = 7000,  -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY        = 7001,  -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>

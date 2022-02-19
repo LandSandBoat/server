@@ -12,6 +12,8 @@ require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------
+local norgID = require("scripts/zones/Norg/IDs")
+-----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.THE_PATH_UNTRAVELED)
 
@@ -24,13 +26,19 @@ mission.sections =
 {
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId and
-                player:getRank(player:getNation()) >= 3
+            return currentMission == mission.missionId
         end,
 
         [xi.zone.KONSCHTAT_HIGHLANDS] =
         {
-            ['Shattered_Telepoint'] = mission:event(3):setPriority(1005),
+            ['Shattered_Telepoint'] =
+            {
+                onTrigger = function(player, npc)
+                    local isLionGhost = player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_CELESTIAL_NEXUS) and 1 or 0
+
+                    return mission:event(3, { [7] = isLionGhost }):setPriority(1005)
+                end,
+            },
 
             onEventFinish =
             {
@@ -42,7 +50,14 @@ mission.sections =
 
         [xi.zone.LA_THEINE_PLATEAU] =
         {
-            ['Shattered_Telepoint'] = mission:event(14):setPriority(1005),
+            ['Shattered_Telepoint'] =
+            {
+                onTrigger = function(player, npc)
+                    local isLionGhost = player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_CELESTIAL_NEXUS) and 1 or 0
+
+                    return mission:event(14, { [7] = isLionGhost }):setPriority(1005)
+                end,
+            },
 
             onEventFinish =
             {
@@ -54,7 +69,14 @@ mission.sections =
 
         [xi.zone.TAHRONGI_CANYON] =
         {
-            ['Shattered_Telepoint'] = mission:event(41):setPriority(1005),
+            ['Shattered_Telepoint'] =
+            {
+                onTrigger = function(player, npc)
+                    local isLionGhost = player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_CELESTIAL_NEXUS) and 1 or 0
+
+                    return mission:event(41, { [7] = isLionGhost }):setPriority(1005)
+                end,
+            },
 
             onEventFinish =
             {
@@ -73,7 +95,8 @@ mission.sections =
 
         [xi.zone.NORG] =
         {
-            ['Gilgamesh'] = mission:event(263),
+            ['_700']      = mission:messageSpecial(norgID.text.DOOR_IS_LOCKED),
+            ['Gilgamesh'] = mission:event(263), -- NOTE: This might not be accessible
         },
     },
 }
