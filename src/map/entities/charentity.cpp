@@ -1341,7 +1341,7 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
             }
             else
             {
-                bool  isCritical = xirand::GetRandomNumber(100) < battleutils::GetCritHitRate(this, PTarget, true);
+                bool  isCritical = xirand::GetRandomNumber(100) < battleutils::GetRangedCritHitRate(this, PTarget);
                 float pdif       = battleutils::GetRangedDamageRatio(this, PTarget, isCritical);
 
                 if (isCritical)
