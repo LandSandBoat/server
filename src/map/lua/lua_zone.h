@@ -40,6 +40,9 @@ public:
 
     friend std::ostream& operator<<(std::ostream& out, const CLuaZone& zone);
 
+    auto getLocalVar(const char* key);
+    void setLocalVar(const char* key, uint32 value);
+
     void        registerRegion(uint32 RegionID, float x1, float y1, float z1, float x2, float y2, float z2);
     sol::object levelRestriction();
     auto        getPlayers() -> sol::table;
@@ -52,6 +55,15 @@ public:
     bool        battlefieldsFull(int battlefieldId);
     WEATHER     getWeather();
     void        reloadNavmesh();
+
+    auto getSoloBattleMusic();
+    auto getPartyBattleMusic();
+    auto getBackgroundMusicDay();
+    auto getBackgroundMusicNight();
+    void setSoloBattleMusic(uint8 musicId);
+    void setPartyBattleMusic(uint8 musicId);
+    void setBackgroundMusicDay(uint8 musicId);
+    void setBackgroundMusicNight(uint8 musicId);
 
     static void Register();
 };

@@ -154,6 +154,7 @@ namespace luautils
     auto   GetPlayerByID(uint32 pid) -> std::optional<CLuaBaseEntity>;
     auto   GetMagianTrial(sol::variadic_args va) -> sol::table;
     auto   GetMagianTrialsWithParent(int32 parentTrial) -> sol::table;
+
     uint32 JstMidnight();
     uint32 JstWeekday();
     uint32 VanadielTime();          // Gets the current Vanadiel Time in timestamp format (SE epoch in earth seconds)
@@ -315,4 +316,4 @@ namespace luautils
     void OnPlayerVolunteer(CCharEntity* PChar, std::string text);
 }; // namespace luautils
 
-#endif //- _LUAUTILS_H -
+#endif // _LUAUTILS_H -
