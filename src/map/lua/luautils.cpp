@@ -197,8 +197,6 @@ namespace luautils
         // This binding specifically exists to forcefully crash the server.
         lua.set_function("ForceCrash", [](){ crash(); });
 
-        lua.set_function("SendCampaignUpdate", [](CLuaBaseEntity* entity) { campaign::SendUpdate((CCharEntity*)entity->GetBaseEntity()); });
-
         // Register Sol Bindings
         CLuaAbility::Register();
         CLuaAction::Register();
@@ -214,7 +212,6 @@ namespace luautils
         CLuaItem::Register();
 
         // Load globals
-
         // Truly global files first
         lua.script_file("./scripts/settings/main.lua");
         lua.script_file("./scripts/globals/common.lua");
@@ -1552,38 +1549,6 @@ namespace luautils
         }
 
         return sol::lua_nil;
-    }
-
-    /************************************************************************
-    *                                                                       *
-    *  Start a campaign battle in the zone                                  *
-    *                                                                       *
-    ************************************************************************/
-
-    void CampaignStart(uint32 zoneid)
-    {
-        TracyZoneScoped;
-        auto* zone = zoneutils::GetZone(zoneid);
-        if (zone != nullptr)
-        {
-            luautils::OnCampaignStart(zone);
-        }
-    }
-
-    /************************************************************************
-    *                                                                       *
-    *  End a campaign battle in the zone                                    *
-    *                                                                       *
-    ************************************************************************/
-
-    void CampaignEnd(uint32 zoneid)
-    {
-        TracyZoneScoped;
-        auto* zone = zoneutils::GetZone(zoneid);
-        if (zone != nullptr)
-        {
-            luautils::OnCampaignEnd(zone);
-        }
     }
 
     /************************************************************************
@@ -4707,46 +4672,6 @@ namespace luautils
         {
             sol::error err = result;
             ShowError("luautils::onPlayerVolunteer: %s", err.what());
-            return;
-        }
-    }
-
-    void OnCampaignStart(CZone* Zone)
-    {
-        TracyZoneScoped;
-
-        auto onCampaignStart = lua["xi"]["campaign"]["onCampaignStart"];
-        if (!onCampaignStart.valid())
-        {
-            ShowWarning("luautils::onCampaignStart\n");
-            return;
-        }
-
-        auto result = onCampaignStart(CLuaZone(Zone));
-        if (!result.valid())
-        {
-            sol::error err = result;
-            ShowError("luautils::onCampaignStart: %s\n", err.what());
-            return;
-        }
-    }
-
-    void OnCampaignEnd(CZone* Zone)
-    {
-        TracyZoneScoped;
-
-        auto onCampaignEnd = lua["xi"]["campaign"]["onCampaignEnd"];
-        if (!onCampaignEnd.valid())
-        {
-            ShowWarning("luautils::onCampaignEnd\n");
-            return;
-        }
-
-        auto result = onCampaignEnd(CLuaZone(Zone));
-        if (!result.valid())
-        {
-            sol::error err = result;
-            ShowError("luautils::onCampaignEnd: %s\n", err.what());
             return;
         }
     }

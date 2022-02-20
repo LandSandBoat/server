@@ -1,316 +1,82 @@
-----------------------------------------
+-----------------------------------
 -- Campaign global
-----------------------------------------
+-----------------------------------
 require("scripts/globals/teleports")
 require("scripts/globals/zone")
 require("scripts/globals/status")
-----------------------------------------
+-----------------------------------
 xi = xi or {}
 xi.campaign = {}
 
 xi.campaign.control =
 {
     Sandoria = 2,
-    Bastok = 4,
+    Bastok   = 4,
     Windurst = 6,
     Beastman = 8,
 }
 
 xi.campaign.union =
 {
-    Adder = 1,
-    Bison = 2,
+    Adder  = 1,
+    Bison  = 2,
     Coyote = 3,
-    Dhole = 4,
-	Eland = 5,
+    Dhole  = 4,
+    Eland  = 5,
 }
 
 xi.campaign.army =
 {
     Sandoria = 0,
-    Bastok = 1,
+    Bastok   = 1,
     Windurst = 2,
-    Orcish = 3,
-    Quadav = 4,
-    Yagudo = 5,
-    Kindred = 6,
+    Orcish   = 3,
+    Quadav   = 4,
+    Yagudo   = 5,
+    Kindred  = 6,
 }
 
 xi.campaign.zone =
 {
-    SouthernSandOria = 80,
-    EastRonfaure = 81,
-    JugnerForest = 82,
-    VunkerlInlet = 83,
-    BatalliaDowns = 84,
-    LaVaule = 85,
+    SouthernSandOria     = 80,
+    EastRonfaure         = 81,
+    JugnerForest         = 82,
+    VunkerlInlet         = 83,
+    BatalliaDowns        = 84,
+    LaVaule              = 85,
     TheEldiemeNecropolis = 175,
-    BastokMarkets = 87,
-    NorthGustaberg = 88,
-    Grauberg = 89,
-    PashhowMarshlands = 90,
-    RolanberryFields = 91,
-    Beadeaux = 92,
-    CrawlersNest = 171,
-    WindurstWaters = 94,
-    WestSarutabaruta = 95,
-    FortKarugoNarugo = 96,
+    BastokMarkets        = 87,
+    NorthGustaberg       = 88,
+    Grauberg             = 89,
+    PashhowMarshlands    = 90,
+    RolanberryFields     = 91,
+    Beadeaux             = 92,
+    CrawlersNest         = 171,
+    WindurstWaters       = 94,
+    WestSarutabaruta     = 95,
+    FortKarugoNarugo     = 96,
     MeriphataudMountains = 97,
-    SauromugueChampaign = 98,
-    CastleOztroja = 99,
-    GarlaigeCitadel = 164,
-    BeaucedineGlacier = 136,
-    Xarcabard = 137,
-    CastleZvahlBaileys = 138,
-    CastleZvahlKeep = 155,
-    ThroneRoom = 156,
+    SauromugueChampaign  = 98,
+    CastleOztroja        = 99,
+    GarlaigeCitadel      = 164,
+    BeaucedineGlacier    = 136,
+    Xarcabard            = 137,
+    CastleZvahlBaileys   = 138,
+    CastleZvahlKeep      = 155,
+    ThroneRoom           = 156,
 }
-
-xi.campaign.initZone = function(zone)
-	zone:setLocalVar("DayMusic", zone:getBackgroundMusicDay())
-	zone:setLocalVar("NightMusic", zone:getBackgroundMusicNight())
-	zone:setLocalVar("SoloMusic", zone:getSoloBattleMusic())
-	zone:setLocalVar("PartyMusic", zone:getPartyBattleMusic())
-	if(zone:getCampaignBattleStatus()) then
-		zone:setBackgroundMusicDay(247)
-		zone:setBackgroundMusicNight(247)
-		zone:setSoloBattleMusic(247)
-		zone:setPartyBattleMusic(247)
-	end
-end
-
------------------------------------------------------------------
--- Returns the battle flag for the zone
--- zone: xi.campaign.zone
--- Return: 1 or 0
------------------------------------------------------------------
-xi.campaign.getBattleStatus = function(zone)
-    return zone:getCampaignBattleStatus()
-end
-
------------------------------------------------------------------
--- Sets the battle flag for the zone
--- zone: xi.campaign.zone
--- status: 1 or 0
------------------------------------------------------------------
-xi.campaign.setBattleStatus = function(zone, status)
-    zone:setCampaignBattleStatus(status)
-end
-
-
------------------------------------------------------------------
--- Returns the heroism value for the zone
--- zone: xi.campaign.zone
--- amount: 0 to 200 [retail max is unknown]
------------------------------------------------------------------
-xi.campaign.getHeroism = function(zone)
-    return zone:getCampaignHeroism()
-end
-
------------------------------------------------------------------
--- Modifies the heroism value by the amount for the zone
--- zone: xi.campaign.zone
--- amount: 0 to 200 [retail max is unknown]
------------------------------------------------------------------
-xi.campaign.setHeroism = function(zone, amount)
-    zone:setCampaignHeroism(amount)
-end
-
-
------------------------------------------------------------------
--- Returns the xi.campaign.control value for the zone
--- zone: xi.campaign.zone
--- Return: xi.campaign.control
------------------------------------------------------------------
-xi.campaign.getZoneControl = function(zone)
-    return zone:getCampaignZoneControl()
-end
-
------------------------------------------------------------------
--- Modifies the fortification value by the amount for the zone
--- zone: xi.campaign.zone
--- control: xi.campaign.control
------------------------------------------------------------------
-xi.campaign.setZoneControl = function(zone, control)
-    zone:setCampaignZoneControl(control)
-end
-
------------------------------------------------------------------
--- Returns the fortification value for the zone
--- zone: xi.campaign.zone
--- amount: 0 to 1023 [retail max is unknown]
------------------------------------------------------------------
-xi.campaign.getFortification = function(zone)
-    zone:getCampaignFortification()
-end
-
------------------------------------------------------------------
--- Modifies the fortification value by the amount for the zone
--- zone: xi.campaign.zone
--- amount: 0 to 1023 [retail max is unknown]
------------------------------------------------------------------
-xi.campaign.setFortification = function(zone, amount)
-    zone:setCampaignFortification(amount)
-end
-
------------------------------------------------------------------
--- Returns the max fortification value for the zone
--- zone: xi.campaign.zone
--- amount: 0 to 1023 [retail max is unknown]
------------------------------------------------------------------
-xi.campaign.getMaxFortification = function(zone)
-    zone:getCampaignMaxFortification()
-end
-
------------------------------------------------------------------
--- Modifies the max fortification value by the amount for the zone
--- zone: xi.campaign.zone
--- amount: -1000 to 1000 [retail max is unknown]
------------------------------------------------------------------
-xi.campaign.setMaxFortification = function(zone, amount)
-    zone:setCampaignMaxFortification(amount)
-end
-
------------------------------------------------------------------
--- Returns the resource value for the zone
--- zone: xi.campaign.zone
--- amount: 0 to 1023 [retail max is unknown]
------------------------------------------------------------------
-xi.campaign.getResource = function(zone)
-    zone:getCampaignResource()
-end
-
------------------------------------------------------------------
--- Modifies the resource value by the amount for the zone
--- zone: xi.campaign.zone
--- amount: -1000 to 1000 [retail max is unknown]
------------------------------------------------------------------
-xi.campaign.setResource = function(zone, amount)
-    zone:setCampaignResource(amount)
-end
-
------------------------------------------------------------------
--- Returns the resource value for the zone
--- zone: xi.campaign.zone
--- amount: 0 to 1023 [retail max is unknown]
------------------------------------------------------------------
-xi.campaign.getMaxResource = function(zone)
-    zone:getCampaignMaxResource()
-end
-
------------------------------------------------------------------
--- Modifies the max resource value by the amount for the zone
--- zone: xi.campaign.zone
--- amount: -1000 to 1000 [retail max is unknown]
------------------------------------------------------------------
-xi.campaign.setMaxResource = function(zone, amount)
-    zone:setCampaignMaxResource(amount)
-end
-
------------------------------------------------------------------
--- Returns the army's influence value for the zone
--- army: xi.campaign.army
--- zone: xi.campaign.zone
--- amount: 0 to 250
------------------------------------------------------------------
-xi.campaign.getInfluence = function(zone, army)
-    zone:getCampaignInfluence(army)
-end
-
------------------------------------------------------------------
--- Modifies the army's influence value by the amount for the zone
--- army: xi.campaign.army
--- zone: xi.campaign.zone
--- amount: -250 to 250
------------------------------------------------------------------
-xi.campaign.setInfluence = function(zone, army, amount)
-    zone:setCampaignInfluence(army, amount)
-end
-
------------------------------------------------------------------
--- Returns the army's reconnaissance value
--- army: xi.campaign.army
--- amount: 0 to 10
------------------------------------------------------------------
-xi.campaign.getReconnaissance = function(zone, army)
-    zone:getCampaignReconnaissance(army)
-end
-
------------------------------------------------------------------
--- Modifies the army's reconnaissance value by the amount
--- army: xi.campaign.army
--- amount: 0 to 10
------------------------------------------------------------------
-xi.campaign.setReconnaissance = function(zone, army, amount)
-    zone:setCampaignReconnaissance(army, amount)
-end
-
-
------------------------------------------------------------------
--- Return the army's morale value
--- army: xi.campaign.army
--- amount: 0 to 100
------------------------------------------------------------------
-xi.campaign.getMorale = function(zone, army)
-    zone:getCampaignMorale(army)
-end
-
------------------------------------------------------------------
--- Modifies the army's morale value by the amount
--- army: xi.campaign.army
--- amount: 0 to 100
------------------------------------------------------------------
-xi.campaign.setMorale = function(zone, army, amount)
-    zone:setCampaignMorale(army, amount)
-end
-
-
------------------------------------------------------------------
--- Returns the army's prosperity value
--- army: xi.campaign.army
--- amount: 0 to 100
------------------------------------------------------------------
-xi.campaign.getProsperity = function(zone, army)
-    zone:getCampaignProsperity(army)
-end
-
------------------------------------------------------------------
--- Modifies the army's prosperity value by the amount
--- army: xi.campaign.army
--- amount: 0 to 100
------------------------------------------------------------------
-xi.campaign.setProsperity = function(zone, army, amount)
-    zone:setCampaignProsperity(army, amount)
-end
-
-
------------------------------------------------------------------
--- Returns the zone's union count
--- army: xi.campaign.union
--- amount: 0 to 50
------------------------------------------------------------------
-xi.campaign.getUnionCount = function(zone, union)
-    return zone:getCampaignUnionCount(union)
-end
-
------------------------------------------------------------------
--- Modifies the zone's union count by the amount
--- army: xi.campaign.union
--- amount: 0 to 50
------------------------------------------------------------------
-xi.campaign.setUnionCount = function(zone, union, amount)
-    zone:setCampaignUnionCount(union, amount)
-end
 
 -----------------------------------------------------------------
 -- Variable for getNationTeleport and getPoint
 -----------------------------------------------------------------
 
+--[[
 ALLIED_NOTES = 11
 MAW = 4
 PAST_SANDORIA = 5
 PAST_BASTOK = 6
 PAST_WINDURST = 7
+]]
 
 -- -------------------------------------------------------------------
 -- getMedalRank()
@@ -501,13 +267,13 @@ end
 -- 6    64  East Ronfaure (S) (H-5)
 -- 7    128 North Gustaberg (S) (K-7)
 -- 8    256 West Sarutabaruta (S) (H-9)
-
-function hasMawActivated(player,portal)
+--[[
+function hasMawActivated(player, portal)
     local mawActivated = player:getNationTeleport(MAW)
     local bit = {}
 
     for i = 8,0,-1 do
-        twop = 2^i
+        local twop = 2^i
 
         if (mawActivated >= twop) then
             bit[i]=true mawActivated = mawActivated - twop
@@ -518,118 +284,6 @@ function hasMawActivated(player,portal)
 
     return bit[portal]
 end
-
+]]
 -- TODO:
 -- Past nation teleport
-
--- -------------------------------------------------------------------
--- Campaign Battle Functions
--- This is for the time-stamp telling player what day/time the
--- effect will last until, NOT the actual status effect duration.
--- -------------------------------------------------------------------
-xi.campaign.startCampaign = function(zone)
-	local chars = zone:getPlayers()
-
-	xi.campaign.setBattleStatus(zone, 1)
-
-	zone:setBackgroundMusicDay(247)
-	zone:setBackgroundMusicNight(247)
-	zone:setSoloBattleMusic(247)
-	zone:setPartyBattleMusic(247)
-
-    for i, entity in pairs(chars) do
-		entity:ChangeMusic(0, 247)
-		entity:ChangeMusic(1, 247)
-		entity:ChangeMusic(2, 247)
-		entity:ChangeMusic(3, 247)
-    end
-
-	-- add spawning of npcs and enemies functions
-end
-
-xi.campaign.endCampaign = function(zone)
-	local chars = zone:getPlayers()
-
-	local DayMusic = zone:getLocalVar("DayMusic")
-	local NightMusic = zone:getLocalVar("NightMusic")
-	local SoloMusic = zone:getLocalVar("SoloMusic")
-	local PartyMusic = zone:getLocalVar("PartyMusic")
-
-	xi.campaign.setBattleStatus(zone, 0)
-
-    zone:setBackgroundMusicDay(DayMusic)
-	zone:setBackgroundMusicNight(NightMusic)
-	zone:setSoloBattleMusic(SoloMusic)
-	zone:setPartyBattleMusic(PartyMusic)
-
-    for i, entity in pairs(chars) do
-		entity:ChangeMusic(0, DayMusic)
-		entity:ChangeMusic(1, NightMusic)
-		entity:ChangeMusic(2, SoloMusic)
-		entity:ChangeMusic(3, PartyMusic)
-
-		if(entity:hasStatusEffect(xi.effect.ALLIED_TAGS)) then
-			entity:delStatusEffect(xi.effect.ALLIED_TAGS)
-			--perform assessment
-			--reward exp and allied_notes
-		end
-    end
-
-	for i=1,5 do
-		xi.campaign.setUnionCount(zone, i, 0)
-	end
-
-	-- add despawning of npcs and enemies functions
-end
-
-xi.campaign.SpawnBattleEntities = function(zone, entityList, entityName)
-	if(entityList ~= nil) then
-		local num = math.random(1, #entityList)
-		local selectedList = entityList[num]
-		zone:setLocalVar(entityName, num)
-		for i, id in pairs(selectedList) do
-			SpawnMob(id):updateCampaignToEntireZone(1)
-		end
-	end
-end
-
-xi.campaign.DespawnBattleEntities = function(zone, entityList, entityName)
-	if(entityList ~= nil) then
-		for i, id in pairs(entityList) do
-			local entity = GetMobByID(id)
-			if(entity ~= nil and entity:isAlive())then
-				entity:resetAI()
-				if entity:isEngaged() == true then
-					entity:disengage()
-				end
-				entity:injectActionPacket(4, 261,0,0,0)
-				DespawnMob(id,1)
-			end
-		end
-	end
-	zone:setLocalVar(entityName, 0)
-end
-
-xi.campaign.EngageOpposingEntities = function(entity, opposingEntities)
-	local opposingEntity = nil
-	local distance = 0
-	local closestDistance = 0
-	local entityId = 0
-
-	if(opposingEntities ~= nil) then
-
-		for i, id in pairs(opposingEntities) do
-			opposingEntity = GetMobByID(id)
-			distance = entity:checkDistance(opposingEntity)
-			if distance < 20 and entity:isEngaged() == false and entity:getStatus() ~= 2 then
-				if closestDistance == 0 or distance < closestDistance then
-					closestDistance = distance
-					entityId = opposingEntity:getShortID()
-				end
-			end
-		end
-		if entityId ~= 0 then
-			entity:engage(entityId)
-		end
-	end
-end
