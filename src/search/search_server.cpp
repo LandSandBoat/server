@@ -53,7 +53,7 @@ typedef u_int SOCKET;
 #include <sstream>
 
 #include "data_loader.h"
-#include "search.h"
+#include "search_server.h"
 #include "tcp_request.h"
 
 #include "packets/auction_history.h"
@@ -68,13 +68,6 @@ typedef u_int SOCKET;
 #define CODE_JOB       13
 #define CODE_ZONE      20
 #define CODE_ZONE_ALL  16
-
-struct SearchCommInfo
-{
-    SOCKET socket;
-    uint32 ip;
-    uint16 port;
-};
 
 void TaskManagerThread();
 

@@ -8,8 +8,6 @@ public:
     WorldServer(std::unique_ptr<argparse::ArgumentParser>&& pArgParser)
     : Application(std::move(pArgParser))
     {
-        std::cout << "\033[1;31mWORLD SERVER\033[0m\n";
-
         // World server should _mostly_ be comprised of ZMQ handlers and timed tasks.
     }
 

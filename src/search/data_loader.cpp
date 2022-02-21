@@ -20,14 +20,15 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 */
 #include <cstring>
 
-#include "../common/logging.h"
-#include "../common/mmo.h"
-#include "../common/sql.h"
+#include "common/mmo.h"
+#include "common/logging.h"
+#include "common/sql.h"
+#include "common/settings_manager.h"
 
 #include <algorithm>
 
 #include "data_loader.h"
-#include "search.h"
+#include "search_server.h"
 
 CDataLoader::CDataLoader()
 : sql(std::make_unique<SqlConnection>(search_config.mysql_login.c_str(),

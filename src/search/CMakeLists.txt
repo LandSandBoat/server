@@ -1,8 +1,9 @@
 set(SOURCES
     data_loader.cpp
     data_loader.h
-    search.cpp
-    search.h
+    main.cpp
+    search_server.cpp
+    search_server.h
     tcp_request.cpp
     tcp_request.h)
 

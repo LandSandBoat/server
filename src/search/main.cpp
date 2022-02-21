@@ -1,5 +1,5 @@
 
-#include "world_server.h"
+#include "search_server.h"
 
 int main(int argc, char** argv)
 {
@@ -16,11 +16,11 @@ int main(int argc, char** argv)
         std::exit(1);
     }
 
-    auto pWorldServer = std::make_unique<WorldServer>(std::move(argParser));
+    auto pSearchServer = std::make_unique<SearchServer>(std::move(argParser));
 
-    while (pWorldServer->IsRunning())
+    while (pSearchServer->IsRunning())
     {
-        pWorldServer->Tick();
+        pSearchServer->Tick();
     }
 
     return 0;
