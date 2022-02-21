@@ -3,10 +3,11 @@
 --   NM: Sabotender Bailarina
 -----------------------------------
 require("scripts/globals/hunts")
+require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
-function onMobFight(mob, target)
+entity.onMobFight(mob, target)
     local lifePercent = mob:getHPP()
     local phase = mob:getLocalVar("phase")
     local TP = mob:getTP()
