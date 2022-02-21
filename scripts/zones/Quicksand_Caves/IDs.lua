@@ -82,6 +82,7 @@ zones[xi.zone.QUICKSAND_CAVES] =
         HASTATUS_XI_XII_PH      =
         {
             [17629557] = 17629561, -- -343.859 -0.411 751.608
+        },
         SABOTENDER_BAILARIN_PH  =
         {
             [17629261] = 17629264, -- 604 -5.5 -680
@@ -91,7 +92,6 @@ zones[xi.zone.QUICKSAND_CAVES] =
         {
             [17629582] = 17629587, -- -458 0 780
             [17629586] = 17629587, -- -522 1 779
-        },
         },
         VALOR                 = 17629185,
         HONOR                 = 17629186,
