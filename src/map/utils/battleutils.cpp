@@ -2498,7 +2498,7 @@ namespace battleutils
 
     uint8 GetCritHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool ignoreSneakTrickAttack)
     {
-        int32 crithitrate = 5;
+        int32 critHitRate = 5;
         if (PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_MIGHTY_STRIKES, 0) ||
             PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_MIGHTY_STRIKES))
         {
@@ -2508,7 +2508,7 @@ namespace battleutils
         {
             if (behind(PAttacker->loc.p, PDefender->loc.p, 64) || PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_HIDE))
             {
-                crithitrate = 100;
+                critHitRate = 100;
             }
         }
         else if (PAttacker->objtype == TYPE_PC && PAttacker->GetMJob() == JOB_THF && charutils::hasTrait((CCharEntity*)PAttacker, TRAIT_ASSASSIN) &&
@@ -2517,7 +2517,7 @@ namespace battleutils
             CBattleEntity* taChar = battleutils::getAvailableTrickAttackChar(PAttacker, PDefender);
             if (taChar != nullptr)
             {
-                crithitrate = 100;
+                critHitRate = 100;
             }
         }
         else
@@ -2526,7 +2526,7 @@ namespace battleutils
             if (PAttacker->objtype == TYPE_PC)
             {
                 CCharEntity* PCharAttacker = static_cast<CCharEntity*>(PAttacker);
-                crithitrate += PCharAttacker->PMeritPoints->GetMeritValue(MERIT_CRIT_HIT_RATE, PCharAttacker);
+                critHitRate += PCharAttacker->PMeritPoints->GetMeritValue(MERIT_CRIT_HIT_RATE, PCharAttacker);
 
                 // Add Fencer crit hit rate
                 CItemWeapon* PMain = dynamic_cast<CItemWeapon*>(PCharAttacker->m_Weapons[SLOT_MAIN]);
@@ -2534,43 +2534,43 @@ namespace battleutils
                 if (PMain && !PMain->isTwoHanded() && !PMain->isHandToHand() &&
                     (!PSub || PSub->getSkillType() == SKILL_NONE || PCharAttacker->m_Weapons[SLOT_SUB]->IsShield()))
                 {
-                    crithitrate += PCharAttacker->getMod(Mod::FENCER_CRITHITRATE);
+                    critHitRate += PCharAttacker->getMod(Mod::FENCER_CRITHITRATE);
                 }
             }
 
             // ShowDebug("Crit rate mod before Innin/Yonin: %d", crithitrate);
             if (PDefender->objtype == TYPE_PC)
             {
-                crithitrate -= ((CCharEntity*)PDefender)->PMeritPoints->GetMeritValue(MERIT_ENEMY_CRIT_RATE, (CCharEntity*)PDefender);
+                critHitRate -= ((CCharEntity*)PDefender)->PMeritPoints->GetMeritValue(MERIT_ENEMY_CRIT_RATE, (CCharEntity*)PDefender);
             }
 
             // Check for Innin crit rate bonus from behind target
             if (PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_INNIN) && behind(PAttacker->loc.p, PDefender->loc.p, 64))
             {
-                crithitrate += PAttacker->StatusEffectContainer->GetStatusEffect(EFFECT_INNIN)->GetPower();
+                critHitRate += PAttacker->StatusEffectContainer->GetStatusEffect(EFFECT_INNIN)->GetPower();
             }
             // Check for Yonin enemy crit rate reduction while in front of target
             if (PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_YONIN) && infront(PDefender->loc.p, PAttacker->loc.p, 64))
             {
-                crithitrate -= PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_YONIN)->GetPower();
+                critHitRate -= PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_YONIN)->GetPower();
             }
 
             // ShowDebug("Crit rate mod after Innin/Yonin: %d", crithitrate);
 
-            crithitrate += GetDexCritBonus(PAttacker, PDefender);
-            crithitrate += PAttacker->getMod(Mod::CRITHITRATE);
-            crithitrate += PDefender->getMod(Mod::ENEMYCRITRATE);
-            crithitrate = std::clamp(crithitrate, 0, 100);
+            critHitRate += GetDexCritBonus(PAttacker, PDefender);
+            critHitRate += PAttacker->getMod(Mod::CRITHITRATE);
+            critHitRate += PDefender->getMod(Mod::ENEMYCRITRATE);
+            critHitRate = std::clamp(critHitRate, 0, 100);
         }
-        return (uint8)crithitrate;
+        return (uint8)critHitRate;
     }
 
     int8 GetDexCritBonus(CBattleEntity* PAttacker, CBattleEntity* PDefender)
     {
         // https://www.bg-wiki.com/bg/Critical_Hit_Rate
-        int32 attackerdex = PAttacker->DEX();
-        int32 defenderagi = PDefender->AGI();
-        int32 dDex        = attackerdex - defenderagi;
+        int32 attackerDex = PAttacker->DEX();
+        int32 defenderAgi = PDefender->AGI();
+        int32 dDex        = attackerDex - defenderAgi;
         int32 dDexAbs     = std::abs(dDex);
         int32 sign        = 1;
 
@@ -2608,6 +2608,69 @@ namespace battleutils
         }
 
         // Crit rate delta from stats caps at +-15
+        return std::min(critRate, static_cast<int32>(15)) * sign;
+    }
+
+    /************************************************************************
+    *                                                                       *
+    *  Ranged Crit Rate                                                     *
+    *                                                                       *
+    ************************************************************************/
+
+    uint8 GetRangedCritHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender)
+    {
+        int32 critHitRate = 5;
+        // apply merit mods and traits
+        if (PAttacker->objtype == TYPE_PC)
+        {
+                CCharEntity* PCharAttacker = static_cast<CCharEntity*>(PAttacker);
+                critHitRate += PCharAttacker->PMeritPoints->GetMeritValue(MERIT_CRIT_HIT_RATE, PCharAttacker);
+        }
+
+        if (PDefender->objtype == TYPE_PC)
+        {
+            critHitRate -= ((CCharEntity*)PDefender)->PMeritPoints->GetMeritValue(MERIT_ENEMY_CRIT_RATE, (CCharEntity*)PDefender);
+        }
+
+        // Check for Innin crit rate bonus from behind target
+        if (PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_INNIN) && behind(PAttacker->loc.p, PDefender->loc.p, 64))
+        {
+            critHitRate += PAttacker->StatusEffectContainer->GetStatusEffect(EFFECT_INNIN)->GetPower();
+        }
+        // Check for Yonin enemy crit rate reduction while in front of target
+        if (PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_YONIN) && infront(PDefender->loc.p, PAttacker->loc.p, 64))
+        {
+            critHitRate -= PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_YONIN)->GetPower();
+        }
+
+        critHitRate += GetAGICritBonus(PAttacker, PDefender);
+        critHitRate += PAttacker->getMod(Mod::CRITHITRATE);
+        critHitRate += PDefender->getMod(Mod::ENEMYCRITRATE);
+        critHitRate = std::clamp(critHitRate, 0, 100);
+
+        return (uint8)critHitRate;
+    }
+
+    int8 GetAGICritBonus(CBattleEntity* PAttacker, CBattleEntity* PDefender)
+    {
+        // https://www.bg-wiki.com/bg/Critical_Hit_Rate
+        int32 attackerAgi = PAttacker->AGI();
+        int32 defenderAgi = PDefender->AGI();
+        int32 dAGI        = attackerAgi - defenderAgi;
+        int32 dAgiAbs     = std::abs(dAGI);
+        int32 sign        = 1;
+
+        if (dAGI < 0)
+        {
+            // Target has higher AGI so this will be a decrease to crit rate
+            sign = -1;
+        }
+
+        // Default to +0 crit rate
+        int32 critRate = 0;
+
+        critRate = dAgiAbs/10;
+
         return std::min(critRate, static_cast<int32>(15)) * sign;
     }
 
