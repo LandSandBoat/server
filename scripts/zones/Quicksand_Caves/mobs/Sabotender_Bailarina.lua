@@ -7,7 +7,7 @@ require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
-entity.onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local lifePercent = mob:getHPP()
     local phase = mob:getLocalVar("phase")
     local TP = mob:getTP()
