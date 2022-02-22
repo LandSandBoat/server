@@ -218,6 +218,36 @@ auto CLuaZone::getBackgroundMusicNight()
     return m_pLuaZone->GetBackgroundMusicNight();
 }
 
+sol::table CLuaZone::queryEntitiesByName(std::string const& name)
+{
+    auto table = luautils::lua.create_table();
+
+    // TODO: Make work for instances
+    // TODO: Replace with a constant-time lookup
+    m_pLuaZone->ForEachNpc([&](CNpcEntity* PNpc)
+    {
+        if (std::string((const char*)PNpc->GetName()) == name)
+        {
+            table.add(CLuaBaseEntity(PNpc));
+        }
+    });
+
+    m_pLuaZone->ForEachMob([&](CMobEntity* PMob)
+    {
+        if (std::string((const char*)PMob->GetName()) == name)
+        {
+            table.add(CLuaBaseEntity(PMob));
+        }
+    });
+
+    if (table.empty())
+    {
+        ShowWarning("Query for entity name: %s in zone: %s returned no results", name, m_pLuaZone->GetName());
+    }
+
+    return table;
+}
+
 //======================================================//
 
 void CLuaZone::Register()
@@ -248,6 +278,8 @@ void CLuaZone::Register()
     SOL_REGISTER("setPartyBattleMusic", CLuaZone::setPartyBattleMusic);
     SOL_REGISTER("setBackgroundMusicDay", CLuaZone::setBackgroundMusicDay);
     SOL_REGISTER("setBackgroundMusicNight", CLuaZone::setBackgroundMusicNight);
+
+    SOL_REGISTER("queryEntitiesByName", CLuaZone::queryEntitiesByName);
 }
 
 std::ostream& operator<<(std::ostream& os, const CLuaZone& zone)

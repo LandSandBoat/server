@@ -543,10 +543,10 @@ public:
     const int8*    GetName();
     zoneLine_t*    GetZoneLine(uint32 zoneLineID);
 
-    uint8          GetSoloBattleMusic() const;
-    uint8          GetPartyBattleMusic() const;
-    uint8          GetBackgroundMusicDay() const;
-    uint8          GetBackgroundMusicNight() const;
+    uint8 GetSoloBattleMusic() const;
+    uint8 GetPartyBattleMusic() const;
+    uint8 GetBackgroundMusicDay() const;
+    uint8 GetBackgroundMusicNight() const;
 
     void SetSoloBattleMusic(uint8 music);
     void SetPartyBattleMusic(uint8 music);
