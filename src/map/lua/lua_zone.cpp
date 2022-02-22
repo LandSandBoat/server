@@ -220,6 +220,8 @@ auto CLuaZone::getBackgroundMusicNight()
 
 sol::table CLuaZone::queryEntitiesByName(std::string const& name)
 {
+    TracyZoneScoped;
+
     auto table = luautils::lua.create_table();
 
     // TODO: Make work for instances

@@ -16,6 +16,7 @@ zone_object.onInitialize = function(zone)
     quests.ffr.initZone(zone) -- register regions 2 through 6
     applyHalloweenNpcCostumes(zone:getID())
     xi.chocobo.initZone(zone)
+    xi.conquest.toggleRegionalNPCs(zone)
 end
 
 zone_object.onZoneIn = function(player, prevZone)
