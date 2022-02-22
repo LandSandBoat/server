@@ -566,7 +566,6 @@ local function conquestRanking()
     return GetNationRank(xi.nation.SANDORIA) + 4 * GetNationRank(xi.nation.BASTOK) + 16 * GetNationRank(xi.nation.WINDURST)
 end
 
-
 xi.conquest.toggleRegionalNPCs = function(zone)
     -- Show/Hide regional NPCs
     -- If there is a draw or a 1st place Alliance, those NPCs won't be available.
