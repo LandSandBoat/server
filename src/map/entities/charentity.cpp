@@ -1534,7 +1534,7 @@ void CCharEntity::OnRaise()
     if (m_hasRaise > 0)
     {
         uint8 weaknessLvl = 1;
-        if (StatusEffectContainer->HasStatusEffect(EFFECT_WEAKNESS))
+        if (GetLocalVar("Weakness") != 0)
         {
             // double weakness!
             weaknessLvl = 2;
@@ -1543,7 +1543,15 @@ void CCharEntity::OnRaise()
         // add weakness effect (75% reduction in HP/MP)
         if (GetLocalVar("MijinGakure") == 0)
         {
-            CStatusEffect* PWeaknessEffect = new CStatusEffect(EFFECT_WEAKNESS, EFFECT_WEAKNESS, weaknessLvl, 0, 300);
+            uint32 weaknessTime = 300;
+
+            // Arise has a reduced weakness time of 3 mins
+            if (GetLocalVar("Arise") != 0)
+            {
+                weaknessTime = 180;
+            }
+
+            CStatusEffect* PWeaknessEffect = new CStatusEffect(EFFECT_WEAKNESS, EFFECT_WEAKNESS, weaknessLvl, 0, weaknessTime);
             StatusEffectContainer->AddStatusEffect(PWeaknessEffect);
         }
 
@@ -1578,7 +1586,7 @@ void CCharEntity::OnRaise()
         else if (m_hasRaise == 3)
         {
             actionTarget.animation = 496;
-            hpReturned             = (uint16)(GetMaxHP() * 0.5);
+            hpReturned             = (uint16)((GetLocalVar("Arise") != 0) ? GetMaxHP() : GetMaxHP()  * 0.5);
             ratioReturned          = ((GetMLevel() <= 50) ? 0.50f : 0.90f) * (1 - map_config.exp_retain);
         }
         else if (m_hasRaise == 4)
@@ -1587,6 +1595,7 @@ void CCharEntity::OnRaise()
             hpReturned             = (uint16)GetMaxHP();
             ratioReturned          = ((GetMLevel() <= 50) ? 0.50f : 0.90f) * (1 - map_config.exp_retain);
         }
+
         addHP(((hpReturned < 1) ? 1 : hpReturned));
         updatemask |= UPDATE_HP;
         actionTarget.speceffect = SPECEFFECT::RAISE;
@@ -1612,7 +1621,15 @@ void CCharEntity::OnRaise()
             charutils::AddExperiencePoints(true, this, this, xpReturned);
         }
 
+        // If Arise was used then apply a reraise 3 effect on the target
+        if (GetLocalVar("Arise") != 0)
+        {
+            CStatusEffect* PReraiseEffect = new CStatusEffect(EFFECT_RERAISE, EFFECT_RERAISE, 3, 0, 3600);
+            StatusEffectContainer->AddStatusEffect(PReraiseEffect);
+        }
+
         SetLocalVar("MijinGakure", 0);
+        SetLocalVar("Arise", 0);
 
         m_hasRaise = 0;
     }
@@ -1744,6 +1761,18 @@ void CCharEntity::Die()
 void CCharEntity::Die(duration _duration)
 {
     this->ClearTrusts();
+
+    if (StatusEffectContainer->HasStatusEffect(EFFECT_WEAKNESS))
+    {
+        // Remove weakness effect as per retail but keep track of weakness
+        SetLocalVar("Weakness", 1);
+        StatusEffectContainer->DelStatusEffectSilent(EFFECT_WEAKNESS);
+    }
+    else
+    {
+        // Make sure this gets reset if the player did not have weakness prior
+        SetLocalVar("Weakness", 0);
+    }
 
     m_deathSyncTime = server_clock::now() + death_update_frequency;
     PAI->ClearStateStack();
