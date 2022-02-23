@@ -204,7 +204,6 @@ xi.magic_utils.spell_damage.calculateMagianAffinity = function(caster, spell)
 end
 
 -- Elemental Specific Damage Taken (Elemental SDT)
--- Multiple things can affect dmg. In our core SDT is a % reduction in its own step.
 xi.magic_utils.spell_damage.calculateSDT = function(caster, target, spell, spellElement)
     local SDT    = 1 -- The variable we want to calculate
     local SDTMod = 0
@@ -212,22 +211,16 @@ xi.magic_utils.spell_damage.calculateSDT = function(caster, target, spell, spell
     if spellElement > 0 then
         SDTMod = target:getMod(xi.magic.specificDmgTakenMod[spellElement])
 
-        -- TODO: Ths conversion right here needs to be updated once work on SDT modifiers is finished.
-        -- Current behaviour goes like this:
-        -- In the database, the modifiers as set as the numbers we actually want.
-        -- A 1 = same damage/no change.
-        -- A 0.5 = Half damage.
+    -- SDT (Species/Specific Damage Taken) is a stat/mod present in mobs and players that applies a % to specific damage types.
+    -- Each of the 8 elements has an SDT modifier (Modifiers 54 to 61. Check script(globals/status.lua)
+    -- Mob elemental modifiers are populated by the values set in "mob_resistances.sql" (The database). SDT columns.
+    -- The value of the modifiers are base 10000. Positive numbers mean less damage taken. Negative mean more damage taken.
+    -- Examples:
+    -- A value of 5000 -> 50% LESS damage taken.
+    -- A value of -5000 -> 50% MORE damage taken.
 
-        -- THEN in C++ land, in zoneutils.cpp we CONVERT this values with the following equation:
-        -- Mod::FIRE_SDT, (int16)((Sql_GetFloatData(SqlInstanceHandle, 41) - 1) * -100));
-        -- And we populate the modifiers with said NEW number. We wanted the old one though, so we need to convert it back here.
         SDT = (SDTMod / -100) + 1
     end
-
-    -- SDT (Species/Specific Damage Taken) is a stat/mod present in mobs and players that applies a % to specific damage types.
-    -- Think of it as an extension (or the actual base) of elemental resistances in past FF games.
-    -- Each of the 8 elements has an SDT modifier (Modifiers 54 to 61. Check script(globals/status.lua)
-    -- Mob elemental modifiers are populated by the values set in "mob_resistances.sql" (This is in the database). SDT columns.
 
     -- A word on SDT as understood in some wikis, even if they are refering to resistance and not actual SDT
     -- SDT under 50% applies a flat 1/2 *, which was for a long time confused with an additional resist tier, which, in reality, its an independent multiplier.
@@ -256,17 +249,16 @@ xi.magic_utils.spell_damage.calculateResist = function(caster, target, spell, sk
     local _, skillchainCount = FormMagicBurst(spellElement, target)
 
     -- Function flow:
+    -- Step 0: We check for exceptions that would make the next steps obsolete.
     -- Step 1: We calculate caster magic Accuracy. Substeps categorized. Magic accuracy has no effect on potency.
     -- Step 2: We calculate target magic Evasion.
-    -- Step 3: We calculate magic Hit Rate.
+    -- Step 3: We calculate magic Hit Rate with the values calculated in steps 1 and 2.
     -- Step 4: We calculate resist tiers based off magic hit rate.
 
-    -- Get Caster Magic accuracy, Target Magic Evasion and with both, Magic Hit Rate
-
     -----------------------------------
-    -- STEP 0: Exceptions. Lets lower that complexity
+    -- STEP 0: Exceptions.
     -----------------------------------
-    -- Magic Shield exception and magic burst exceptions.
+    -- Magic Shield and magic burst exceptions.
     if target:hasStatusEffect(xi.effect.MAGIC_SHIELD, 0) then
         resist = 0
         return resist
@@ -281,7 +273,7 @@ xi.magic_utils.spell_damage.calculateResist = function(caster, target, spell, sk
     if skillType ~= 0 then
         magicAcc = magicAcc + caster:getSkillLevel(skillType)
     else
-        -- for mob skills / additional effects which don't have a skill
+        -- For mob skills / additional effects which don't have a skill.
         magicAcc = magicAcc + utils.getSkillLvl(1, caster:getMainLvl())
     end
 
@@ -350,19 +342,16 @@ xi.magic_utils.spell_damage.calculateResist = function(caster, target, spell, sk
         end
         -- RDM Job Point: Magic Accuracy Bonus, All MACC + 1
         magicAcc = magicAcc + caster:getJobPointLevel(xi.jp.RDM_MAGIC_ACC_BONUS)
-    -- NIN Job Points
-    elseif casterJob == xi.job.NIN then
-        -- NIN Job Point: Ninjutsu Accuracy Bonus
-        if skillType == xi.skill.NINJUTSU then
-            magicAcc = magicAcc + caster:getJobPointLevel(xi.jp.NINJITSU_ACC_BONUS)
-        end
+    -- NIN Job Points: Ninjutsu Accuracy Bonus
+    elseif casterJob == xi.job.NIN and skillType == xi.skill.NINJUTSU then
+        magicAcc = magicAcc + caster:getJobPointLevel(xi.jp.NINJITSU_ACC_BONUS)
     -- SCH Job Points
-    elseif casterJob == xi.job.SCH then
-        if (spellGroup == xi.magic.spellGroup.WHITE and caster:hasStatusEffect(xi.effect.PARSIMONY)) or
-            (spellGroup == xi.magic.spellGroup.BLACK and caster:hasStatusEffect(xi.effect.PENURY))
-        then
-            magicAcc = magicAcc + caster:getJobPointLevel(xi.jp.STRATEGEM_EFFECT_I)
-        end
+    elseif
+        casterJob == xi.job.SCH and
+        (spellGroup == xi.magic.spellGroup.WHITE and caster:hasStatusEffect(xi.effect.PARSIMONY)) or
+        (spellGroup == xi.magic.spellGroup.BLACK and caster:hasStatusEffect(xi.effect.PENURY))
+    then
+        magicAcc = magicAcc + caster:getJobPointLevel(xi.jp.STRATEGEM_EFFECT_I)
     end
 
     -----------------------------------
@@ -421,21 +410,26 @@ xi.magic_utils.spell_damage.calculateResist = function(caster, target, spell, sk
     -- STEP 4: Get Resist Tier
     -----------------------------------
     local resistTier = 0
-    local randomVar  = 0
+    local randomVar  = math.random(1, 100)
 
+    -- 3 random rolls.
     for i = 3, 1, -1 do
-        randomVar = math.random(1, 100)
         if randomVar > magicHitRate then
             resistTier = resistTier + 1
         end
+        randomVar = math.random(1, 100)
+    end
 
-        -- Apply elemental resistance boons.
-        if resMod > 0 and resistTier < 3 then
+    -- Apply extra roll for elemental resistance boons. Testimonial. This needs retail testing.
+    if randomVar > 50 then
+        if resMod > 0 then
             resistTier = resistTier + 1
-        elseif resMod < 0 and resistTier > 0 then
+        elseif resMod < 0 then
             resistTier = resistTier - 1
         end
     end
+
+    resistTier = utils.clamp(resistTier, 0, 3)
 
     if resistTier == 0 then     -- Unresisted
         resist = 1
@@ -556,6 +550,7 @@ xi.magic_utils.spell_damage.calculateDayAndWeather = function(caster, target, sp
     return dayAndWeather
 end
 
+-- Magic Attack Bonus VS Magic Defense Bonus
 xi.magic_utils.spell_damage.calculateMagicBonusDiff = function(caster, target, spell, spellId, skillType, spellElement)
     local magicBonusDiff = 1 -- The variable we want to calculate
     local casterJob      = caster:getMainJob()
@@ -633,11 +628,12 @@ xi.magic_utils.spell_damage.calculateTMDA = function(caster, target, spell)
     local magicDamageTakenII  = target:getMod(xi.mod.DMGMAGIC_II) / 10000 -- Mod is base 10000
     local combinedDamageTaken = utils.clamp(magicDamageTaken + globalDamageTaken, -0.5, 0.5) -- The combination of regular "Damage Taken" and "Magic Damage Taken" caps at 50%
 
-    TMDA = combinedDamageTaken + magicDamageTakenII -- "Magic Damage Taken II" bypasses the regular cap.
+    TMDA = 1 + combinedDamageTaken + magicDamageTakenII -- "Magic Damage Taken II" bypasses the regular cap.
 
     return TMDA
 end
 
+-- Ebullience applies an entirely separate multiplier.
 xi.magic_utils.spell_damage.calculateEbullienceMultiplier = function(caster, target, spell)
     local ebullienceMultiplier = 1
 
@@ -753,6 +749,7 @@ xi.magic_utils.spell_damage.useDamageSpell = function(caster, target, spell)
     -- Debug
     -- printf("=====================")
     -- printf("spellDamage = %s", spellDamage)
+    -- printf("======Multipliers====")
     -- printf("MTDR = %s", MTDR)
     -- printf("eleStaffBonus = %s", eleStaffBonus)
     -- printf("magianAffinity = %s", magianAffinity)
