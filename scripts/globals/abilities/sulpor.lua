@@ -12,7 +12,7 @@ require("scripts/globals/abilities/rune_enchantment")
 local ability_object = {}
 
 ability_object.onAbilityCheck = function(player, target, ability)
-        return 0, 0
+    return 0, 0
 end
 
 ability_object.onUseAbility = function(caster, target, ability, action)
