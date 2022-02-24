@@ -15,25 +15,21 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(user, target, ability)
-    --Leave blank.
+    -- Leave blank.
 end
 
---helpers for runes
+-- helpers for runes
 function getRUNLevel(player)
     return player:getMainJob() == xi.job.RUN and player:getMainLvl() or player:getSubLvl()
 end
 
 function applyRuneEnhancement(effectType, player)
     local RUNLevel = getRUNLevel(player)
-    local meritBonus = (player:getMerit(xi.merit.MERIT_RUNE_ENHANCE) * 2) --2 more elemental resistance per merit for a maximum total of (2*5) = 10
-    local jobPointBonus = player:getJobPointLevel(xi.jp.RUNE_ENCHANTMENT_EFFECT) --1 more elemental resistance per level for a maximum total of 20
-	
-    printf("RUN level = " .. tostring(RUNLevel))
-    printf("Effect Type = " .. tostring(effectType))
+    local meritBonus = (player:getMerit(xi.merit.MERIT_RUNE_ENHANCE) * 2) -- 2 more elemental resistance per merit for a maximum total of (2*5) = 10
+    local jobPointBonus = player:getJobPointLevel(xi.jp.RUNE_ENCHANTMENT_EFFECT) -- 1 more elemental resistance per level for a maximum total of 20
 	
     -- see https://www.bg-wiki.com/ffxi/Category:Rune
     local power = math.floor((49 * RUNLevel / 99) + 5.5) + meritBonus  + jobPointBonus
-    printf("power = " .. tostring(power))
     player:addStatusEffect(effectType, power, 0, 300)
 end
 
@@ -45,7 +41,6 @@ function enforceRuneCounts(target)
     local i = 0
 
     for _, effect in ipairs(effects) do
-        printf("type = " .. tostring(effect:getType()))
         type = effect:getType()
         if type >= xi.effect.IGNIS and type <= xi.effect.TENEBRAE then
             runes[i+1] = effect
@@ -53,7 +48,7 @@ function enforceRuneCounts(target)
         end
     end
 
-    if i >= maxRunes then --delete the first rune in the list with the least duration
+    if i >= maxRunes then -- delete the first rune in the list with the least duration
         target:delStatusEffect(runes[1]:getType())
     end
 end
