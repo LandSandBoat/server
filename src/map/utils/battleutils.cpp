@@ -305,12 +305,28 @@ namespace battleutils
 
     uint16 GetMaxSkill(SKILLTYPE SkillID, JOBTYPE JobID, uint8 level)
     {
-        return g_SkillTable[level][g_SkillRanks[SkillID][JobID]];
+        // The skill_caps table is 0-indexed, so our maximum level should one lower
+        // than the size of the array.
+        std::size_t maxLevel = g_SkillTable.size() - 1;
+
+        if (level > maxLevel)
+        {
+            ShowDebug("battleutils::GetMaxSkill() received level value greater than array size! (Received: %d, Clamped to: %d)", level, maxLevel);
+        }
+
+        return g_SkillTable[std::clamp<uint8>(level, 0, maxLevel)][g_SkillRanks[SkillID][JobID]];
     }
 
     uint16 GetMaxSkill(uint8 rank, uint8 level)
     {
-        return g_SkillTable[level][rank];
+        std::size_t maxLevel = g_SkillTable.size() - 1;
+
+        if (level > maxLevel)
+        {
+            ShowDebug("battleutils::GetMaxSkill() received level value greater than array size! (Received: %d, Clamped to: %d)", level, maxLevel);
+        }
+
+        return g_SkillTable[std::clamp<uint8>(level, 0, maxLevel)][rank];
     }
 
     bool isValidSelfTargetWeaponskill(int wsid)
