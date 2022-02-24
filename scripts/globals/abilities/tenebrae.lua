@@ -7,7 +7,7 @@
 -----------------------------------
 require("scripts/settings/main")
 require("scripts/globals/status")
-require("scripts/globals/abilities/rune_enchantment")
+require("scripts/globals/job_utils/rune_fencer")
 -----------------------------------
 local ability_object = {}
 
@@ -15,10 +15,8 @@ ability_object.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-ability_object.onUseAbility = function(caster, target, ability, action)
-    local effect = xi.effect.TENEBRAE
-    enforceRuneCounts(target)
-    applyRuneEnhancement(effect, target)
+ability_object.onUseAbility = function(player, target, ability, action)
+    xi.job_utils.rune_fencer.useRuneEnchantment(player, target, ability, xi.effect.TENEBRAE)
 end
 
 return ability_object
