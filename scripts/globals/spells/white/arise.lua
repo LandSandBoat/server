@@ -12,7 +12,7 @@ end
 
 spell_object.onSpellCast = function(caster, target, spell)
     if (target:isPC()) then
-        target:sendRaise(5)
+        target:sendRaise(4)
     else
         if (target:getName() == "Prishe") then
             -- CoP 8-4 Prishe
@@ -25,7 +25,7 @@ spell_object.onSpellCast = function(caster, target, spell)
 
     spell:setMsg(xi.msg.basic.MAGIC_CASTS_ON)
 
-    return 5
+    return 4
 end
 
 return spell_object

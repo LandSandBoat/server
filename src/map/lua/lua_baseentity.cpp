@@ -8911,14 +8911,14 @@ void CLuaBaseEntity::sendRaise(uint8 raiseLevel)
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    if (raiseLevel == 0 || raiseLevel == 4 || raiseLevel > 5)
+    if (raiseLevel == 0 || raiseLevel > 4)
     {
         ShowDebug("lua::sendRaise raise value is not valid!");
     }
     else if (PChar->m_hasTractor == 0 && PChar->m_hasRaise == 0)
     {
         PChar->m_hasRaise = raiseLevel;
-        if (raiseLevel == 5)
+        if (raiseLevel == 4)
         {
             PChar->m_hasArise = true;
         }
