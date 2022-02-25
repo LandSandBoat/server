@@ -50,7 +50,8 @@ local optionToGear =
     [9] = {addon = 3, itemid = 16371}, -- tatsumaki_sitagoromo
 }
 
-
+-- Below are the tables for augment selection. Power can be adjusted to increase the augment effects
+-- Increasing power will not display correctly within menu selections but will print and apply any changes made
 local optionToAugment =
 {
     [1] = -- ACP
@@ -149,15 +150,15 @@ local prizes =
 {
     [xi.ki.CRIMSON_KEY] =
     {
-         {cutoff =   70, itemId = 13206, augments = {{9, 0,  5}, {516, 0, 1}, {517, 0, 1}, {518, 0, 1}, { 32, 0, 1}, { 96, 0, 1}}}, -- Gold Obi
-         {cutoff =   80, itemId = 13445, augments = {{9, 0,  8}, {516, 0, 1}, {517, 0, 1}, {518, 0, 2}, { 39, 0, 1}, { 35, 0, 2}}}, -- Gold Ring
-         {cutoff =  186, itemId = 13446, augments = {{1, 0, 15}, { 13, 0, 2}, { 25, 0, 5}, { 31, 0, 2}, {195, 0, 1}, { 35, 0, 2}}}, -- Mythril Ring
-         {cutoff =  276, itemId = 13643, augments = {{9, 0,  5}, {516, 0, 1}, {517, 0, 1}, {518, 0, 1}, {100, 0, 1}, { 39, 0, 1}}}, -- Sarcenet Cape
-         {cutoff =  351, itemId = 13196, augments = {{1, 0,  5}, { 23, 0, 1}, { 27, 0, 1}, {512, 0, 1}, {520, 0, 1}, {515, 0, 1}}}, -- Silver Belt
-         {cutoff =  460, itemId = 13571, augments = {{1, 0,  5}, { 25, 0, 3}, { 29, 0, 3}, {512, 0, 0}, {769, 0, 1}, { 32, 0, 1}}}, -- Wolf Mantle
-         {cutoff =  468, itemId =   694}, -- Chestnut Log
-         {cutoff =  471, itemId =   887}, -- Coral Fragment
-         {cutoff =  476, itemId =  4903}, -- Dark Spirit Pact
+        {cutoff =   70, itemId = 13206, augments = {{9, 0,  5}, {516, 0, 1}, {517, 0, 1}, {518, 0, 1}, { 32, 0, 1}, { 96, 0, 1}}}, -- Gold Obi
+        {cutoff =   80, itemId = 13445, augments = {{9, 0,  8}, {516, 0, 1}, {517, 0, 1}, {518, 0, 2}, { 39, 0, 1}, { 35, 0, 2}}}, -- Gold Ring
+        {cutoff =  186, itemId = 13446, augments = {{1, 0, 15}, { 13, 0, 2}, { 25, 0, 5}, { 31, 0, 2}, {195, 0, 1}, { 35, 0, 2}}}, -- Mythril Ring
+        {cutoff =  276, itemId = 13643, augments = {{9, 0,  5}, {516, 0, 1}, {517, 0, 1}, {518, 0, 1}, {100, 0, 1}, { 39, 0, 1}}}, -- Sarcenet Cape
+        {cutoff =  351, itemId = 13196, augments = {{1, 0,  5}, { 23, 0, 1}, { 27, 0, 1}, {512, 0, 1}, {520, 0, 1}, {515, 0, 1}}}, -- Silver Belt
+        {cutoff =  460, itemId = 13571, augments = {{1, 0,  5}, { 25, 0, 3}, { 29, 0, 3}, {512, 0, 0}, {769, 0, 1}, { 32, 0, 1}}}, -- Wolf Mantle
+        {cutoff =  468, itemId =   694}, -- Chestnut Log
+        {cutoff =  471, itemId =   887}, -- Coral Fragment
+        {cutoff =  476, itemId =  4903}, -- Dark Spirit Pact
         {cutoff =  479, itemId =   654}, -- Darksteel Ingot
         {cutoff =  500, itemId =   645}, -- Darksteel Ore
         {cutoff =  523, itemId =  4868}, -- Scroll of Dispel
@@ -180,15 +181,15 @@ local prizes =
     },
     [xi.ki.VIRIDIAN_KEY] =
     {
-         {cutoff =   65, itemId = 13639}, -- Aurora Mantle
-         {cutoff =  142, itemId = 13271}, -- Corsette
-         {cutoff =  237, itemId = 12364}, -- Nymph Shield
-         {cutoff =  356, itemId = 13570}, -- Ram Mantle
-         {cutoff =  457, itemId = 13198}, -- Swordbelt
-         {cutoff =  463, itemId = 13207}, -- Brocade Obi
-         {cutoff =  469, itemId =   793}, -- Black Pearl
-         {cutoff =  497, itemId =   775}, -- Black Rock
-         {cutoff =  515, itemId =   770}, -- Blue Rock
+        {cutoff =   65, itemId = 13639}, -- Aurora Mantle
+        {cutoff =  142, itemId = 13271}, -- Corsette
+        {cutoff =  237, itemId = 12364}, -- Nymph Shield
+        {cutoff =  356, itemId = 13570}, -- Ram Mantle
+        {cutoff =  457, itemId = 13198}, -- Swordbelt
+        {cutoff =  463, itemId = 13207}, -- Brocade Obi
+        {cutoff =  469, itemId =   793}, -- Black Pearl
+        {cutoff =  497, itemId =   775}, -- Black Rock
+        {cutoff =  515, itemId =   770}, -- Blue Rock
         {cutoff =  616, itemId =  4145}, -- Elixir
         {cutoff =  670, itemId =  4129}, -- Ether +1
         {cutoff =  676, itemId =   790}, -- Garnet
@@ -210,15 +211,15 @@ local prizes =
     },
     [xi.ki.AMBER_KEY] =
     {
-         {cutoff = 111, itemId = 16263}, -- Beak Necklace
-         {cutoff = 219, itemId = 13207}, -- Brocade Obi
-         {cutoff = 334, itemId = 13091}, -- Carapace Gorget
-         {cutoff = 436, itemId = 13445}, -- Gold Ring
-         {cutoff = 561, itemId = 13593}, -- Raptor Mantle
-         {cutoff = 564, itemId =   887}, -- Coral Fragment
-         {cutoff = 576, itemId =   645}, -- Darksteel Ore
-         {cutoff = 599, itemId =   902}, -- Demon Horn
-         {cutoff = 616, itemId =   702}, -- Ebony Log
+        {cutoff = 111, itemId = 16263}, -- Beak Necklace
+        {cutoff = 219, itemId = 13207}, -- Brocade Obi
+        {cutoff = 334, itemId = 13091}, -- Carapace Gorget
+        {cutoff = 436, itemId = 13445}, -- Gold Ring
+        {cutoff = 561, itemId = 13593}, -- Raptor Mantle
+        {cutoff = 564, itemId =   887}, -- Coral Fragment
+        {cutoff = 576, itemId =   645}, -- Darksteel Ore
+        {cutoff = 599, itemId =   902}, -- Demon Horn
+        {cutoff = 616, itemId =   702}, -- Ebony Log
         {cutoff = 625, itemId =   737}, -- Gold Ore
         {cutoff = 683, itemId =  4144}, -- Hi-Elixer
         {cutoff = 730, itemId =  4132}, -- Hi-Ether
@@ -237,15 +238,15 @@ local prizes =
     },
     [xi.ki.AZURE_KEY] =
     {
-         {cutoff = 106, itemId = 13597}, -- Beak Mantle
-         {cutoff = 203, itemId = 13092}, -- Coeurl Gorget
-         {cutoff = 305, itemId = 13447}, -- Platinum Ring
-         {cutoff = 386, itemId = 13208}, -- Rainbow Obi
-         {cutoff = 490, itemId = 13125}, -- Torque
-         {cutoff = 498, itemId =   791}, -- Aquamarine
-         {cutoff = 502, itemId =   801}, -- Chrysoberyl
-         {cutoff = 536, itemId =   654}, -- Darksteel Ingot
-         {cutoff = 612, itemId =   645}, -- Darksteel Ore
+        {cutoff = 106, itemId = 13597}, -- Beak Mantle
+        {cutoff = 203, itemId = 13092}, -- Coeurl Gorget
+        {cutoff = 305, itemId = 13447}, -- Platinum Ring
+        {cutoff = 386, itemId = 13208}, -- Rainbow Obi
+        {cutoff = 490, itemId = 13125}, -- Torque
+        {cutoff = 498, itemId =   791}, -- Aquamarine
+        {cutoff = 502, itemId =   801}, -- Chrysoberyl
+        {cutoff = 536, itemId =   654}, -- Darksteel Ingot
+        {cutoff = 612, itemId =   645}, -- Darksteel Ore
         {cutoff = 659, itemId =   702}, -- Ebony Log
         {cutoff = 693, itemId =   745}, -- Gold Ingot
         {cutoff = 786, itemId =  4144}, -- Hi-Elixir
@@ -262,15 +263,15 @@ local prizes =
     },
     [xi.ki.IVORY_KEY] =
     {
-         {cutoff =   62, itemId = 13357}, -- Angels Earring
-         {cutoff =   70, itemId = 13356}, -- Death Earring
-         {cutoff =  113, itemId = 13353}, -- Diamond Earring
-         {cutoff =  196, itemId = 13351}, -- Emerald Earring
-         {cutoff =  301, itemId = 13352}, -- Ruby Earring
-         {cutoff =  392, itemId = 13355}, -- Sapphire Earring
-         {cutoff =  478, itemId = 13354}, -- Spinel Earring
-         {cutoff =  497, itemId = 13318}, -- Topaz Earring
-         {cutoff =  546, itemId =  1110}, -- Beetle Blood
+        {cutoff =   62, itemId = 13357}, -- Angels Earring
+        {cutoff =   70, itemId = 13356}, -- Death Earring
+        {cutoff =  113, itemId = 13353}, -- Diamond Earring
+        {cutoff =  196, itemId = 13351}, -- Emerald Earring
+        {cutoff =  301, itemId = 13352}, -- Ruby Earring
+        {cutoff =  392, itemId = 13355}, -- Sapphire Earring
+        {cutoff =  478, itemId = 13354}, -- Spinel Earring
+        {cutoff =  497, itemId = 13318}, -- Topaz Earring
+        {cutoff =  546, itemId =  1110}, -- Beetle Blood
         {cutoff =  602, itemId =   823}, -- Gold Thread
         {cutoff =  627, itemId =  1465}, -- Granite
         {cutoff =  658, itemId =  4134}, -- Hi-Ether +2
@@ -284,15 +285,15 @@ local prizes =
     },
     [xi.ki.EBON_KEY] =
     {
-         {cutoff =  31, itemId = 13463}, -- Angels Ring
-         {cutoff =  82, itemId = 13462}, -- Death Ring
-         {cutoff = 174, itemId = 13450}, -- Diamond Ring
-         {cutoff = 225, itemId = 13448}, -- Emerald Ring
-         {cutoff = 296, itemId = 13449}, -- Ruby Ring
-         {cutoff = 357, itemId = 13452}, -- Sapphire Ring
-         {cutoff = 459, itemId = 13451}, -- Spinel Ring
-         {cutoff = 500, itemId = 13453}, -- Topaz Ring
-         {cutoff = 510, itemId =   655}, -- Adaman Ingot
+        {cutoff =  31, itemId = 13463}, -- Angels Ring
+        {cutoff =  82, itemId = 13462}, -- Death Ring
+        {cutoff = 174, itemId = 13450}, -- Diamond Ring
+        {cutoff = 225, itemId = 13448}, -- Emerald Ring
+        {cutoff = 296, itemId = 13449}, -- Ruby Ring
+        {cutoff = 357, itemId = 13452}, -- Sapphire Ring
+        {cutoff = 459, itemId = 13451}, -- Spinel Ring
+        {cutoff = 500, itemId = 13453}, -- Topaz Ring
+        {cutoff = 510, itemId =   655}, -- Adaman Ingot
         {cutoff = 541, itemId =   813}, -- Angelstone
         {cutoff = 561, itemId =   645}, -- Darksteel Ore
         {cutoff = 592, itemId =   812}, -- Deathstone
@@ -312,15 +313,15 @@ local prizes =
     },
     [xi.ki.WHITE_CORAL_KEY] =
     {
-         {cutoff =   31, itemId = 12433}, -- Brass Mask
-         {cutoff =  109, itemId = 12986}, -- Chestnut Sabots
-         {cutoff =  218, itemId = 12721}, -- Cotton Gloves
-         {cutoff =  296, itemId = 12826}, -- Studded Trousers
-         {cutoff =  437, itemId = 12602}, -- Wool Robe
-         {cutoff =  468, itemId =   694}, -- Chestnut Log
-         {cutoff =  499, itemId =   645}, -- Darksteel Ore
-         {cutoff =  624, itemId =  4145}, -- Elixir
-         {cutoff =  655, itemId =   690}, -- Elm Log
+        {cutoff =   31, itemId = 12433}, -- Brass Mask
+        {cutoff =  109, itemId = 12986}, -- Chestnut Sabots
+        {cutoff =  218, itemId = 12721}, -- Cotton Gloves
+        {cutoff =  296, itemId = 12826}, -- Studded Trousers
+        {cutoff =  437, itemId = 12602}, -- Wool Robe
+        {cutoff =  468, itemId =   694}, -- Chestnut Log
+        {cutoff =  499, itemId =   645}, -- Darksteel Ore
+        {cutoff =  624, itemId =  4145}, -- Elixir
+        {cutoff =  655, itemId =   690}, -- Elm Log
         {cutoff =  686, itemId =   643}, -- Iron Ore
         {cutoff =  717, itemId =   651}, -- Iron Ingot
         {cutoff =  764, itemId =   653}, -- Mythril Ingot
@@ -335,15 +336,15 @@ local prizes =
     },
     [xi.ki.BLUE_CORAL_KEY] =
     {
-         {cutoff =   42, itemId = 12571}, -- Cuir Bouilli
-         {cutoff =  250, itemId = 14118}, -- Iron Greaves
-         {cutoff =  292, itemId = 12866}, -- Linen Slacks
-         {cutoff =  375, itemId = 12450}, -- Padded Cap
-         {cutoff =  458, itemId = 12731}, -- Velvet Cuffs
-         {cutoff =  500, itemId =   793}, -- Black Pearl
-         {cutoff =  583, itemId =  4145}, -- Elixir
-         {cutoff =  625, itemId =  4129}, -- Ether +1
-         {cutoff =  667, itemId =   790}, -- Garnet
+        {cutoff =   42, itemId = 12571}, -- Cuir Bouilli
+        {cutoff =  250, itemId = 14118}, -- Iron Greaves
+        {cutoff =  292, itemId = 12866}, -- Linen Slacks
+        {cutoff =  375, itemId = 12450}, -- Padded Cap
+        {cutoff =  458, itemId = 12731}, -- Velvet Cuffs
+        {cutoff =  500, itemId =   793}, -- Black Pearl
+        {cutoff =  583, itemId =  4145}, -- Elixir
+        {cutoff =  625, itemId =  4129}, -- Ether +1
+        {cutoff =  667, itemId =   790}, -- Garnet
         {cutoff =  709, itemId =   788}, -- Peridot
         {cutoff =  751, itemId =  4113}, -- Potion +1
         {cutoff =  876, itemId =   669}, -- Oak Log
@@ -353,15 +354,15 @@ local prizes =
     },
     [xi.ki.PEACH_CORAL_KEY] =
     {
-         {cutoff =   66, itemId = 13712}, -- Carapace Harness
-         {cutoff =  198, itemId = 12956}, -- Raptor Ledelsens
-         {cutoff =  303, itemId = 12476}, -- Silk Hat
-         {cutoff =  395, itemId = 14003}, -- Steel Finger Gauntlets
-         {cutoff =  487, itemId = 12867}, -- White Slacks
-         {cutoff =  500, itemId =   645}, -- Darksteel Ore
-         {cutoff =  526, itemId =   902}, -- Demon Horn
-         {cutoff =  565, itemId =   702}, -- Ebony Log
-         {cutoff =  591, itemId =   737}, -- Gold Ore
+        {cutoff =   66, itemId = 13712}, -- Carapace Harness
+        {cutoff =  198, itemId = 12956}, -- Raptor Ledelsens
+        {cutoff =  303, itemId = 12476}, -- Silk Hat
+        {cutoff =  395, itemId = 14003}, -- Steel Finger Gauntlets
+        {cutoff =  487, itemId = 12867}, -- White Slacks
+        {cutoff =  500, itemId =   645}, -- Darksteel Ore
+        {cutoff =  526, itemId =   902}, -- Demon Horn
+        {cutoff =  565, itemId =   702}, -- Ebony Log
+        {cutoff =  591, itemId =   737}, -- Gold Ore
         {cutoff =  696, itemId =  4144}, -- Hi-Elixer
         {cutoff =  747, itemId =  4132}, -- Hi-Ether
         {cutoff =  773, itemId =  4116}, -- Hi-Potion
@@ -379,15 +380,15 @@ local prizes =
     },
     [xi.ki.BLACK_CORAL_KEY] =
     {
-         {cutoff =   90, itemId = 13698}, -- Beak Helm
-         {cutoff =  194, itemId = 12988}, -- Pigaches
-         {cutoff =  224, itemId = 12811}, -- Darksteel Breeches
-         {cutoff =  433, itemId = 12707}, -- Scorpion Mitts
-         {cutoff =  552, itemId = 12604}, -- Silk Coat
-         {cutoff =  597, itemId =   645}, -- Darksteel Ore
-         {cutoff =  612, itemId =   654}, -- Darksteel Ingot
-         {cutoff =  642, itemId =   745}, -- Gold Ingot
-         {cutoff =  776, itemId =  4144}, -- Hi-Elixer
+        {cutoff =   90, itemId = 13698}, -- Beak Helm
+        {cutoff =  194, itemId = 12988}, -- Pigaches
+        {cutoff =  224, itemId = 12811}, -- Darksteel Breeches
+        {cutoff =  433, itemId = 12707}, -- Scorpion Mitts
+        {cutoff =  552, itemId = 12604}, -- Silk Coat
+        {cutoff =  597, itemId =   645}, -- Darksteel Ore
+        {cutoff =  612, itemId =   654}, -- Darksteel Ingot
+        {cutoff =  642, itemId =   745}, -- Gold Ingot
+        {cutoff =  776, itemId =  4144}, -- Hi-Elixer
         {cutoff =  821, itemId =  4133}, -- Hi-Ether +1
         {cutoff =  851, itemId =  4117}, -- Hi-Potion +1
         {cutoff =  866, itemId =   700}, -- Mahogany Log
@@ -398,15 +399,15 @@ local prizes =
     },
     [xi.ki.RED_CORAL_KEY] =
     {
-         {cutoff =  109, itemId = 16289}, -- Alloy Torque
-         {cutoff =  200, itemId = 16288}, -- Aureate Necklace
-         {cutoff =  273, itemId = 16290}, -- Burly Gorget
-         {cutoff =  382, itemId = 16286}, -- Nitid Choker
-         {cutoff =  473, itemId = 16287}, -- Pneuma Collar
-         {cutoff =  528, itemId =  1110}, -- Beetle Blood
-         {cutoff =  619, itemId =   823}, -- Gold Thread
-         {cutoff =  692, itemId =  1465}, -- Granite
-         {cutoff =  728, itemId =  4134}, -- Hi-Ether +2
+        {cutoff =  109, itemId = 16289}, -- Alloy Torque
+        {cutoff =  200, itemId = 16288}, -- Aureate Necklace
+        {cutoff =  273, itemId = 16290}, -- Burly Gorget
+        {cutoff =  382, itemId = 16286}, -- Nitid Choker
+        {cutoff =  473, itemId = 16287}, -- Pneuma Collar
+        {cutoff =  528, itemId =  1110}, -- Beetle Blood
+        {cutoff =  619, itemId =   823}, -- Gold Thread
+        {cutoff =  692, itemId =  1465}, -- Granite
+        {cutoff =  728, itemId =  4134}, -- Hi-Ether +2
         {cutoff =  764, itemId =   837}, -- Malboro Fiber
         {cutoff =  782, itemId =   924}, -- Philosophers Stone
         {cutoff =  800, itemId =   844}, -- Phoenix Feather
@@ -417,15 +418,15 @@ local prizes =
     },
     [xi.ki.ANGEL_SKIN_KEY] =
     {
-         {cutoff =   65, itemId = 16254}, -- Altius Mantle
-         {cutoff =  162, itemId = 16253}, -- Chiffon Cape
-         {cutoff =  243, itemId = 16255}, -- Cortege Cape
-         {cutoff =  356, itemId = 16252}, -- Resilient Mantle
-         {cutoff =  437, itemId = 16256}, -- Rugged Mantle
-         {cutoff =  469, itemId =   646}, -- Adaman Ore
-         {cutoff =  501, itemId =   813}, -- Angelstone
-         {cutoff =  517, itemId =   645}, -- Darksteel Ore
-         {cutoff =  582, itemId =   812}, -- Deathstone
+        {cutoff =   65, itemId = 16254}, -- Altius Mantle
+        {cutoff =  162, itemId = 16253}, -- Chiffon Cape
+        {cutoff =  243, itemId = 16255}, -- Cortege Cape
+        {cutoff =  356, itemId = 16252}, -- Resilient Mantle
+        {cutoff =  437, itemId = 16256}, -- Rugged Mantle
+        {cutoff =  469, itemId =   646}, -- Adaman Ore
+        {cutoff =  501, itemId =   813}, -- Angelstone
+        {cutoff =  517, itemId =   645}, -- Darksteel Ore
+        {cutoff =  582, itemId =   812}, -- Deathstone
         {cutoff =  614, itemId =   787}, -- Diamond
         {cutoff =  646, itemId =   785}, -- Emerald
         {cutoff =  662, itemId =  4135}, -- Hi-Ether +3
@@ -441,24 +442,24 @@ local prizes =
     },
     [xi.ki.MOOGLE_KEY] =
     {
-         {cutoff =  167, itemId = 12442}, -- Studded Bandana
-         {cutoff =  374, itemId = 13209}, -- Chain Belt
-         {cutoff =  707, itemId = 13083}, -- Chain Choker
-         {cutoff =  874, itemId =  4751}, -- Scroll of Erase
-         {cutoff = 1041, itemId =   653}, -- Mythril Ingot
-         {cutoff = 1100, itemId =   744}, -- Silver Ingot
+        {cutoff =  167, itemId = 12442}, -- Studded Bandana
+        {cutoff =  374, itemId = 13209}, -- Chain Belt
+        {cutoff =  707, itemId = 13083}, -- Chain Choker
+        {cutoff =  874, itemId =  4751}, -- Scroll of Erase
+        {cutoff = 1041, itemId =   653}, -- Mythril Ingot
+        {cutoff = 1100, itemId =   744}, -- Silver Ingot
     },
     [xi.ki.BIRD_KEY] =
     {
-         {cutoff = 143, itemId = 12987}, -- Ebony Sabots
-         {cutoff = 393, itemId = 13783}, -- Iron Scale Mail
-         {cutoff = 536, itemId = 12293}, -- Oak Shield
-         {cutoff = 653, itemId = 13200}, -- Waistbelt
-         {cutoff = 663, itemId =   793}, -- Black Pearl
-         {cutoff = 678, itemId =   770}, -- Blue Rock
-         {cutoff = 770, itemId =  4145}, -- Elixir
-         {cutoff = 801, itemId =  4129}, -- Ether +1
-         {cutoff = 816, itemId =   808}, -- Goshenite
+        {cutoff = 143, itemId = 12987}, -- Ebony Sabots
+        {cutoff = 393, itemId = 13783}, -- Iron Scale Mail
+        {cutoff = 536, itemId = 12293}, -- Oak Shield
+        {cutoff = 653, itemId = 13200}, -- Waistbelt
+        {cutoff = 663, itemId =   793}, -- Black Pearl
+        {cutoff = 678, itemId =   770}, -- Blue Rock
+        {cutoff = 770, itemId =  4145}, -- Elixir
+        {cutoff = 801, itemId =  4129}, -- Ether +1
+        {cutoff = 816, itemId =   808}, -- Goshenite
         {cutoff = 847, itemId =   669}, -- Oak Log
         {cutoff = 852, itemId =   792}, -- Pearl
         {cutoff = 862, itemId =   788}, -- Peridot
@@ -472,15 +473,15 @@ local prizes =
     },
     [xi.ki.CACTUAR_KEY] =
     {
-         {cutoff = 109, itemId = 13111}, -- Nodowa
-         {cutoff = 196, itemId = 12604}, -- Silk Coat
-         {cutoff = 305, itemId = 13981}, -- Turtle Bangles
-         {cutoff = 370, itemId = 13711}, -- Carapace Mask
-         {cutoff = 435, itemId =  4132}, -- Hi-Ether
-         {cutoff = 544, itemId =  4144}, -- Hi-Elixer
-         {cutoff = 609, itemId =   645}, -- Darksteel Ore
-         {cutoff = 631, itemId =   737}, -- Gold Ore
-         {cutoff = 674, itemId =  4719}, -- Scroll of Regen III
+        {cutoff = 109, itemId = 13111}, -- Nodowa
+        {cutoff = 196, itemId = 12604}, -- Silk Coat
+        {cutoff = 305, itemId = 13981}, -- Turtle Bangles
+        {cutoff = 370, itemId = 13711}, -- Carapace Mask
+        {cutoff = 435, itemId =  4132}, -- Hi-Ether
+        {cutoff = 544, itemId =  4144}, -- Hi-Elixer
+        {cutoff = 609, itemId =   645}, -- Darksteel Ore
+        {cutoff = 631, itemId =   737}, -- Gold Ore
+        {cutoff = 674, itemId =  4719}, -- Scroll of Regen III
         {cutoff = 696, itemId =  4621}, -- Scroll of Raise II
         {cutoff = 718, itemId =   738}, -- Platinum Ore
         {cutoff = 761, itemId =   866}, -- Wyvern Scales
@@ -493,25 +494,25 @@ local prizes =
     },
     [xi.ki.BOMB_KEY] =
     {
-         {cutoff = 308, itemId = 12980}, -- Battle Boots
-         {cutoff = 462, itemId = 12860}, -- Silk Slops
-         {cutoff = 616, itemId = 13589}, -- Tiger Mantle
-         {cutoff = 693, itemId = 12427}, -- Bascinet
-         {cutoff = 747, itemId =  4144}, -- Hi-Elixer
-         {cutoff = 824, itemId =   654}, -- Darksteel Ingot
-         {cutoff = 901, itemId =   645}, -- Darksteel Ore
+        {cutoff = 308, itemId = 12980}, -- Battle Boots
+        {cutoff = 462, itemId = 12860}, -- Silk Slops
+        {cutoff = 616, itemId = 13589}, -- Tiger Mantle
+        {cutoff = 693, itemId = 12427}, -- Bascinet
+        {cutoff = 747, itemId =  4144}, -- Hi-Elixer
+        {cutoff = 824, itemId =   654}, -- Darksteel Ingot
+        {cutoff = 901, itemId =   645}, -- Darksteel Ore
     },
     [xi.ki.CHOCOBO_KEY] =
     {
-         {cutoff =  190, itemId = 16008}, -- Aptus Earring
-         {cutoff =  285, itemId = 16372}, -- Stearc Subligar
-         {cutoff =  571, itemId = 16295}, -- Varius Torque
-         {cutoff =  595, itemId =   823}, -- Gold Thread
-         {cutoff =  643, itemId =  4134}, -- Hi-Ether +2
-         {cutoff =  714, itemId =  4118}, -- Hi-Potion +2
-         {cutoff =  785, itemId =   837}, -- Malboro Fiber
-         {cutoff =  856, itemId =  1110}, -- Beetle Blood
-         {cutoff =  927, itemId =   924}, -- Philosophers Stone
+        {cutoff =  190, itemId = 16008}, -- Aptus Earring
+        {cutoff =  285, itemId = 16372}, -- Stearc Subligar
+        {cutoff =  571, itemId = 16295}, -- Varius Torque
+        {cutoff =  595, itemId =   823}, -- Gold Thread
+        {cutoff =  643, itemId =  4134}, -- Hi-Ether +2
+        {cutoff =  714, itemId =  4118}, -- Hi-Potion +2
+        {cutoff =  785, itemId =   837}, -- Malboro Fiber
+        {cutoff =  856, itemId =  1110}, -- Beetle Blood
+        {cutoff =  927, itemId =   924}, -- Philosophers Stone
         {cutoff =  995, itemId =   830}, -- Rainbow Cloth
         {cutoff = 1043, itemId =  1132}, -- Raxa
         {cutoff = 1067, itemId =  1465}, -- Granite
@@ -520,15 +521,15 @@ local prizes =
     },
     [xi.ki.TONBERRY_KEY] =
     {
-         {cutoff =  291, itemId = 15938}, -- Esprit Belt
-         {cutoff =  600, itemId = 15937}, -- Fettle Belt
-         {cutoff =  636, itemId =   813}, -- Angelstone
-         {cutoff =  654, itemId =   812}, -- Deathstone
-         {cutoff =  690, itemId =   645}, -- Darksteel Ore
-         {cutoff =  708, itemId =   787}, -- Diamond
-         {cutoff =  744, itemId =   785}, -- Emerald
-         {cutoff =  780, itemId =   823}, -- Gold Thread
-         {cutoff =  798, itemId =  4119}, -- Hi-Potion +3
+        {cutoff =  291, itemId = 15938}, -- Esprit Belt
+        {cutoff =  600, itemId = 15937}, -- Fettle Belt
+        {cutoff =  636, itemId =   813}, -- Angelstone
+        {cutoff =  654, itemId =   812}, -- Deathstone
+        {cutoff =  690, itemId =   645}, -- Darksteel Ore
+        {cutoff =  708, itemId =   787}, -- Diamond
+        {cutoff =  744, itemId =   785}, -- Emerald
+        {cutoff =  780, itemId =   823}, -- Gold Thread
+        {cutoff =  798, itemId =  4119}, -- Hi-Potion +3
         {cutoff =  816, itemId =   738}, -- Platinum Ore
         {cutoff =  834, itemId =   739}, -- Orichalcum Ore
         {cutoff =  870, itemId =   786}, -- Ruby
@@ -591,33 +592,35 @@ end
 
 
 function addonGear(player, option, addonReward)
-    local param1     = 0
-    local param2     = 0
-    local param3     = 0
-    local gear       = 0
-    local addon      = 0
-    local parameter1 = optionToAugment[addon][param1]
-    local parameter2 = optionToAugment[addon][param2]
+    local param1     = 0 -- Placement of augment 1 table
+    local param2     = 0 -- Placement of augment 2 table
+    local param3     = 0 -- Leftover bits
+    local gear       = 0 -- Gear selected
+    local addon      = 0 -- ACP, AMK, ASA
+    local parameter1 = optionToAugment[addon][param1] -- Gathering table augments
+    local parameter2 = optionToAugment[addon][param2] -- Gathering table augments
     local addAug     = {}
 
-    param3   = bit.rshift(option, 21)
-    param2   = bit.rshift(option, 16) - (param3 * 32)
-    param1   = bit.rshift(option, 11) - (param3 * 1024) - (param2 * 32)
-    gear     = bit.rshift(option, 6)  - (param3 * 32768)- (param2 * 1024) - (param1 * 32)
+    param3   = bit.rshift(option, 21)                                                      -- These bits are lefover. Non critial to implement
+    param2   = bit.rshift(option, 16) - (param3 * 32)                                      -- Second selected augment option
+    param1   = bit.rshift(option, 11) - (param3 * 1024) - (param2 * 32)                    -- First selected augment option
+    gear     = bit.rshift(option, 6)  - (param3 * 32768)- (param2 * 1024) - (param1 * 32)  -- Gear selection
     addon    = optionToGear[gear].addon
 
     if addonReward then
         option = option  - 8388615 -- extra bit passed when recieving armor
     end
+
     if addonReward then
-        for i = 1, #parameter1 do
+        for i = 1, #parameter1 do                        -- Adding parameter1 augments table
             table.insert(addAug, parameter1[i].augment)
             table.insert(addAug, parameter1[i].power)
         end
-        for i = 1, #parameter2 do
+        for i = 1, #parameter2 do                        -- Adding parameter2 augments table
             table.insert(addAug, parameter2[i].augment)
             table.insert(addAug, parameter2[i].power)
         end
+
         if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, optionToGear[gear].itemid)
         else
@@ -626,22 +629,23 @@ function addonGear(player, option, addonReward)
             player:delKeyItem(({xi.ki.PRISMATIC_KEY, xi.ki.OXBLOOD_KEY, xi.ki.BEHEMOTH_KEY})[addon])
         end
     else
-        for i = 1, #parameter1 do
+        for i = 1, #parameter1 do -- Converting augment selection 1 integer values into binary for updateEvent (5 bits for power followed by 11 bits for ID)
             table.insert(addAug, string.format("%05i%011i", intToBinary(parameter1[i].power), intToBinary(parameter1[i].augment)))
         end
-        for i = 1, #parameter2 do
+        for i = 1, #parameter2 do -- Converting augment selection 2 integer values into binary for updateEvent (5 bits for power followed by 11 bits for ID)
             table.insert(addAug, string.format("%05i%011i", intToBinary(parameter2[i].power), intToBinary(parameter2[i].augment)))
         end
         for i = #addAug, 5 do
             table.insert(addAug, "0000000000000000")
         end
-        if addon == 1 then
+
+        if addon == 1 then -- Printing augment 1 and 2 selections for visuals in binary. The first argument must contact the string below.
             player:updateEvent(tonumber(addAug[1] .. "0000001100000010", 2), tonumber(addAug[2], 2), tonumber(addAug[3], 2), tonumber(addAug[4] .. addAug[5], 2))
         elseif addon == 2 then
             player:updateEvent(tonumber(addAug[1] .. "0000001100000010", 2), tonumber(addAug[2] .. addAug[3], 2), tonumber(addAug[4], 2), tonumber(addAug[5], 2))
         elseif addon == 3 then
             player:updateEvent(tonumber(addAug[1] .. "0000001100000010", 2), tonumber(addAug[2] .. addAug[3], 2), tonumber(addAug[4], 2), tonumber(addAug[5], 2))
-        end
+        end -- Param placement is as follows (Aug1, Aug2 + Aug3, Aug4)
     end
 end
 
