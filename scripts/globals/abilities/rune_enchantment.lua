@@ -2,7 +2,7 @@
 -- Ability: Rune Enchantment
 -- Allows you to harbor runes
 -- Obtained: Rune Fencer Level 5
--- Recast Time: 0:10
+-- Recast Time: 0:05
 -- Duration: 5:00
 -----------------------------------
 require("scripts/globals/status")
