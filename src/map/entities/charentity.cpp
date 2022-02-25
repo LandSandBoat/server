@@ -183,6 +183,8 @@ CCharEntity::CCharEntity()
     m_Monstrosity        = 0;
     m_hasTractor         = 0;
     m_hasRaise           = 0;
+    m_weaknessLvl        = 0;
+    m_hasArise           = false;
     m_hasAutoTarget      = 1;
     m_InsideRegionID     = 0;
     m_LevelRestriction   = 0;
@@ -1533,11 +1535,10 @@ void CCharEntity::OnRaise()
     // TODO: Moghancement Experience needs to be factored in here somewhere.
     if (m_hasRaise > 0)
     {
-        uint8 weaknessLvl = 1;
-        if (GetLocalVar("Weakness") != 0)
+        // Player had no weakness prior, so set this to 1
+        if (m_weaknessLvl == 0)
         {
-            // double weakness!
-            weaknessLvl = 2;
+            m_weaknessLvl = 1;
         }
 
         // add weakness effect (75% reduction in HP/MP)
@@ -1546,12 +1547,12 @@ void CCharEntity::OnRaise()
             uint32 weaknessTime = 300;
 
             // Arise has a reduced weakness time of 3 mins
-            if (GetLocalVar("Arise") != 0)
+            if (m_hasArise)
             {
                 weaknessTime = 180;
             }
 
-            CStatusEffect* PWeaknessEffect = new CStatusEffect(EFFECT_WEAKNESS, EFFECT_WEAKNESS, weaknessLvl, 0, weaknessTime);
+            CStatusEffect* PWeaknessEffect = new CStatusEffect(EFFECT_WEAKNESS, EFFECT_WEAKNESS, m_weaknessLvl, 0, weaknessTime);
             StatusEffectContainer->AddStatusEffect(PWeaknessEffect);
         }
 
@@ -1586,12 +1587,18 @@ void CCharEntity::OnRaise()
         else if (m_hasRaise == 3)
         {
             actionTarget.animation = 496;
-            hpReturned             = (uint16)((GetLocalVar("Arise") != 0) ? GetMaxHP() : GetMaxHP()  * 0.5);
+            hpReturned             = (uint16)(GetMaxHP() * 0.5);
             ratioReturned          = ((GetMLevel() <= 50) ? 0.50f : 0.90f) * (1 - map_config.exp_retain);
         }
         else if (m_hasRaise == 4)
         {
             actionTarget.animation = 496; // TODO: Verify this Reraise animation
+            hpReturned             = (uint16)GetMaxHP();
+            ratioReturned          = ((GetMLevel() <= 50) ? 0.50f : 0.90f) * (1 - map_config.exp_retain);
+        }
+        else if (m_hasRaise == 5)
+        {
+            actionTarget.animation = 496;
             hpReturned             = (uint16)GetMaxHP();
             ratioReturned          = ((GetMLevel() <= 50) ? 0.50f : 0.90f) * (1 - map_config.exp_retain);
         }
@@ -1622,15 +1629,14 @@ void CCharEntity::OnRaise()
         }
 
         // If Arise was used then apply a reraise 3 effect on the target
-        if (GetLocalVar("Arise") != 0)
+        if (m_hasArise)
         {
             CStatusEffect* PReraiseEffect = new CStatusEffect(EFFECT_RERAISE, EFFECT_RERAISE, 3, 0, 3600);
             StatusEffectContainer->AddStatusEffect(PReraiseEffect);
         }
 
         SetLocalVar("MijinGakure", 0);
-        SetLocalVar("Arise", 0);
-
+        m_hasArise = false;
         m_hasRaise = 0;
     }
 }
@@ -1765,13 +1771,14 @@ void CCharEntity::Die(duration _duration)
     if (StatusEffectContainer->HasStatusEffect(EFFECT_WEAKNESS))
     {
         // Remove weakness effect as per retail but keep track of weakness
-        SetLocalVar("Weakness", 1);
         StatusEffectContainer->DelStatusEffectSilent(EFFECT_WEAKNESS);
+        // Increase the weakness counter if previously weakened
+        m_weaknessLvl++;
     }
     else
     {
-        // Make sure this gets reset if the player did not have weakness prior
-        SetLocalVar("Weakness", 0);
+        // Reset weakness here, then +1 it on raise as we had no weakness prior
+        m_weaknessLvl = 0;
     }
 
     m_deathSyncTime = server_clock::now() + death_update_frequency;
