@@ -2,10 +2,9 @@
 -- Ability: Tellus
 -- Increases resistance against thunder and deals earth damage.
 -- Obtained: Rune Fencer Level 5
--- Recast Time: 0:10
+-- Recast Time: 0:05
 -- Duration: 5:00
 -----------------------------------
-require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/job_utils/rune_fencer")
 -----------------------------------
