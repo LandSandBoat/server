@@ -34,6 +34,118 @@ local optionToKI =
     [20] = xi.ki.TONBERRY_KEY,
 }
 
+local optionToGear =
+{
+    --ACP
+    [1] = {addon = 1, itemid = 11313}, -- nuevo_coselete
+    [2] = {addon = 1, itemid = 11314}, -- mirke_wardecors
+    [3] = {addon = 1, itemid = 11315}, -- royal_redingote
+    --AMK
+    [4] = {addon = 2, itemid = 11487}, -- champions_galea
+    [5] = {addon = 2, itemid = 11488}, -- anwig_salade
+    [6] = {addon = 2, itemid = 11489}, -- selenian_cap
+    --ASA
+    [7] = {addon = 3, itemid = 16369}, -- blitzer_poleyn
+    [8] = {addon = 3, itemid = 16370}, -- desultor_tassets
+    [9] = {addon = 3, itemid = 16371}, -- tatsumaki_sitagoromo
+}
+
+-- Below are the tables for augment selection. Power can be adjusted to increase the augment effects
+-- Increasing power will not display correctly within menu selections but will print and apply any changes made
+local optionToAugment =
+{
+    [1] = -- ACP
+    {
+        [ 1] = {{augment =  23, power =  9}}, -- Accuracy+10
+        [ 2] = {{augment =  25, power =  9}}, -- Attack+10
+        [ 3] = {{augment =  27, power =  9}}, -- Ranged Accuracy+10
+        [ 4] = {{augment =  29, power =  9}}, -- Ranged Attack+10
+        [ 5] = {{augment =  31, power =  9}}, -- Evasion+10
+        [ 6] = {{augment =  35, power =  3}}, -- Magic Accuracy+4
+        [ 7] = {{augment = 133, power =  3}}, -- "Magic Atk, Bonus"+4
+        [ 8] = {{augment = 143, power =  1}}, -- "Double Attack"+2
+        [ 9] = {{augment =  41, power =  2}}, -- Critical hit rate +3
+        [10] = {{augment =  44, power =  3}}, -- Store TP"+4 "Subtle Blow"+4
+        [11] = {{augment =  39, power =  4}}, -- Enmity+5
+        [12] = {{augment =  40, power =  4}}, -- Enmity-5
+        [13] = {{augment = 140, power =  4}}, -- Enhances "Fast Cast" effect +5
+        [14] = {{augment = 324, power = 14}}, -- "Call Beast" ability delay -15
+        [15] = {{augment = 211, power =  4}}, -- "Snapshot"+5
+        [16] = {{augment = 146, power =  2}}, -- Enhances "Dual Wield" effect +3
+        [17] = {{augment = 320, power =  3}}, -- "Blood Pact" ability delay -4
+        [18] = {{augment = 321, power =  1}}, -- Avatar perpetuation cost -2
+        [19] = {{augment = 325, power =  4}}, -- Quick Draw" ability delay -5
+        [20] = {{augment =  96, power = 14}}, -- Pet: Accuracy+15 Ranged Accuracy+15
+        [21] = {{augment =  97, power = 14}}, -- Pet: Attack+15 Ranged Attack+15
+        [22] = {{augment = 108, power =  6}}, -- Pet: Magic Acc.+7 "Magic Atk. Bonus"+7
+        [23] = {{augment = 109, power =  1}}, -- Pet: "Double Attack"+2 Crit. hit rate +2
+    },
+    [2] = -- AMK
+    {
+        [ 1] = {{augment = 49, power =  2}, {augment = 211, power =  2}}, -- Haste+3 "Snapshot"+3
+        [ 2] = {{augment = 512, power = 3}, {augment = 326, power = 14}}, -- STR+4 Weapon Skill Accuracy +15
+        [ 3] = {{augment = 513, power = 3}, {augment = 328, power =  1}}, -- DEX+4 Increases Critical Hit Damage (+2%)
+        [ 4] = {{augment = 514, power = 3}, {augment = 286, power =  4}}, -- VIT+4 Shield Skill +5
+        [ 5] = {{augment = 515, power = 3}, {augment = 327, power =  1}}, -- AGI+4 Increases weapon skill damage (+2%)
+        [ 6] = {{augment = 516, power = 3}, {augment =  35, power =  1}}, -- INT+4 Magic Accuracy+2
+        [ 7] = {{augment = 517, power = 3}, {augment = 329, power =  2}}, -- MND+4 "Cure" potency +3%
+        [ 8] = {{augment = 518, power = 3}, {augment = 331, power =  1}}, -- CHR+4 "Waltz" ability delay -2
+        [ 9] = {{augment =  23, power = 9}, {augment =  25, power =  4}}, -- Accuracy+10 Attack+5
+        [10] = {{augment =  27, power = 9}, {augment =  29, power =  4}}, -- Ranged Accuracy+10 Ranged Attack+5
+        [11] = {{augment =  31, power = 9}, {augment = 142, power =  3}}, -- Evasion+10 Store TP +4
+        [12] = {{augment =  35, power = 2}, {augment =  52, power =  2}}, -- Magic Accuracy+3 MP recovered while healing +3
+        [13] = {{augment = 133, power = 1}, {augment =  51, power =  2}}, -- "Magic Attack Bonus"+2 HP recovered while healing +3
+        [14] = {{augment =  55, power = 1}, {augment =  39, power =  3}}, -- Magic damage taken -2% Enmity+4
+        [15] = {{augment =  57, power = 9}, {augment =  40, power =  3}}, -- Magic critical hit rate +10% Enmity-4
+        [16] = {{augment = 140, power = 2}, {augment = 320, power =  2}}, -- Enhances "Fast Cast" effect (+3%) "Blood Pact" ability delay -3
+        [17] = {{augment = 512, power = 1}, {augment =  49, power =  1}}, -- STR+2 Haste +2%
+        [18] = {{augment = 513, power = 1}, {augment =  49, power =  1}}, -- DEX+2 Haste +2%
+        [19] = {{augment = 514, power = 1}, {augment =  49, power =  1}}, -- VIT+2 Haste +2%
+        [20] = {{augment = 515, power = 1}, {augment =  49, power =  1}}, -- AGI+2 Haste +2%
+        [21] = {{augment = 516, power = 1}, {augment = 140, power =  1}}, -- INT+2 Enhances "Fast Cast" effect (+2%)
+        [22] = {{augment = 517, power = 1}, {augment = 140, power =  1}}, -- MND+2 Enhances "Fast Cast" effect (+2%)
+        [23] = {{augment = 518, power = 1}, {augment = 140, power =  1}}, -- CHR+2 Enhances "Fast Cast" effect (+2%)
+        [24] = {{augment =  23, power = 2}, {augment = 111, power =  4}}, -- Accuracy+3 Pet: Haste +5%
+        [25] = {{augment =  23, power = 2}, {augment = 102, power =  2}}, -- Accuracy+3 Pet: Critical Hit Rate +3%
+        [26] = {{augment =  25, power = 2}, {augment = 110, power =  0}}, -- Attack+3 Pet: Adds "Regen" effect
+        [27] = {{augment =  25, power = 2}, {augment = 112, power =  9}}, -- Attack+3 Pet: Damage taken -10%
+    },
+    [3] = -- ASA
+    {
+        [ 1] = {{augment =   1, power = 24}, {augment = 39, power =  3}}, -- HP+25 Enmity+4
+        [ 2] = {{augment =   9, power = 24}, {augment = 40, power =  3}}, -- MP+25 Enmity-4
+        [ 3] = {{augment =  23, power =  6}                            }, -- Accuracy+7
+        [ 4] = {{augment =  25, power =  6}                            }, -- Attack+7
+        [ 5] = {{augment =  27, power =  6}                            }, -- Ranged Accuracy+7
+        [ 6] = {{augment =  29, power =  6}                            }, -- Ranged Attack+7
+        [ 7] = {{augment =  31, power =  6}                            }, -- Evasion+7
+        [ 8] = {{augment =  35, power =  3}                            }, -- Magic Accuracy+4
+        [ 9] = {{augment = 133, power =  3}                            }, -- "Magic Atk. Bonus" +4
+        [10] = {{augment =  49, power =  2}                            }, -- Haste +3%
+        [11] = {{augment = 143, power =  1}                            }, -- "Double Attack" +2%
+        [12] = {{augment = 328, power =  2}                            }, -- Increases Critical Hit Damage +3%
+        [13] = {{augment = 332, power =  4}                            }, -- Skillchain damage +5%
+        [14] = {{augment = 333, power =  4}                            }, -- "Conserve TP"+5
+        [15] = {{augment =  54, power =  3}                            }, -- Physical damage taken -4%
+        [16] = {{augment = 335, power =  9}                            }, -- Magic Critical Hit damage +10%
+        [17] = {{augment = 334, power =  9}                            }, -- Magic Burst damage +10%
+        [18] = {{augment = 194, power =  4}                            }, -- "Kick Attacks" +5
+        [19] = {{augment = 329, power =  4}                            }, -- "Cure" potency +5%
+        [20] = {{augment = 336, power =  4}                            }, -- "Sic" & "Ready" ability delay -5     (TODO Add into Augments with modID)
+        [21] = {{augment = 337, power =  2}                            }, -- Song Recast Delay -3
+        [22] = {{augment = 338, power =  0}                            }, -- "Barrage" +1                         (TODO Add into Augments with modID)
+        [23] = {{augment = 339, power =  3}                            }, -- "Elemental Siphon" +20
+        [24] = {{augment = 340, power =  4}                            }, -- "Phantom Roll" ability delay -5      (TODO Add into Augments with modID)
+        [25] = {{augment = 341, power =  9}                            }, -- "Repair" potency +10%
+        [26] = {{augment = 342, power =  4}                            }, -- "Waltz" TP cost -50                  (TODO Add into Augments with modID)
+        [27] = {{augment =  96, power =  6}                            }, -- Pet: Accuracy +7 Ranged Accuracy +7
+        [28] = {{augment =  97, power =  6}                            }, -- Pet: Attack +7 Ranged Attack +7
+        [29] = {{augment = 115, power =  7}, {augment = 116, power = 7}}, -- Pet: "Store TP" +8 "Subtle Blow" +8
+        [30] = {{augment = 100, power =  6}                            }, -- Pet: Magic Accuracy +7
+        [31] = {{augment = 913, power =  2}                            }, -- Movement Speed +8%
+    },
+}
+
 local prizes =
 {
     [xi.ki.CRIMSON_KEY] =
@@ -478,6 +590,77 @@ local function givePrize(player, ki)
     end
 end
 
+
+function addonGear(player, option, addonReward)
+    local param1     = 0 -- Placement of augment 1 table
+    local param2     = 0 -- Placement of augment 2 table
+    local param3     = 0 -- Leftover bits
+    local gear       = 0 -- Gear selected
+    local addon      = 0 -- ACP, AMK, ASA
+    local parameter1 = optionToAugment[addon][param1] -- Gathering table augments
+    local parameter2 = optionToAugment[addon][param2] -- Gathering table augments
+    local addAug     = {}
+
+    param3   = bit.rshift(option, 21)                                                      -- These bits are lefover. Non critial to implement
+    param2   = bit.rshift(option, 16) - (param3 * 32)                                      -- Second selected augment option
+    param1   = bit.rshift(option, 11) - (param3 * 1024) - (param2 * 32)                    -- First selected augment option
+    gear     = bit.rshift(option, 6)  - (param3 * 32768)- (param2 * 1024) - (param1 * 32)  -- Gear selection
+    addon    = optionToGear[gear].addon
+
+    if addonReward then
+        option = option  - 8388615 -- extra bit passed when recieving armor
+    end
+
+    if addonReward then
+        for i = 1, #parameter1 do                        -- Adding parameter1 augments table
+            table.insert(addAug, parameter1[i].augment)
+            table.insert(addAug, parameter1[i].power)
+        end
+        for i = 1, #parameter2 do                        -- Adding parameter2 augments table
+            table.insert(addAug, parameter2[i].augment)
+            table.insert(addAug, parameter2[i].power)
+        end
+
+        if player:getFreeSlotsCount() == 0 then
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, optionToGear[gear].itemid)
+        else
+            player:addItem(optionToGear[gear].itemid, 1, unpack(addAug))
+            player:messageSpecial(ID.text.ITEM_OBTAINED, optionToGear[gear].itemid)
+            player:delKeyItem(({xi.ki.PRISMATIC_KEY, xi.ki.OXBLOOD_KEY, xi.ki.BEHEMOTH_KEY})[addon])
+        end
+    else
+        for i = 1, #parameter1 do -- Converting augment selection 1 integer values into binary for updateEvent (5 bits for power followed by 11 bits for ID)
+            table.insert(addAug, string.format("%05i%011i", intToBinary(parameter1[i].power), intToBinary(parameter1[i].augment)))
+        end
+        for i = 1, #parameter2 do -- Converting augment selection 2 integer values into binary for updateEvent (5 bits for power followed by 11 bits for ID)
+            table.insert(addAug, string.format("%05i%011i", intToBinary(parameter2[i].power), intToBinary(parameter2[i].augment)))
+        end
+        for i = #addAug, 5 do
+            table.insert(addAug, "0000000000000000")
+        end
+
+        if addon == 1 then -- Printing augment 1 and 2 selections for visuals in binary. The first argument must contact the string below.
+            player:updateEvent(tonumber(addAug[1] .. "0000001100000010", 2), tonumber(addAug[2], 2), tonumber(addAug[3], 2), tonumber(addAug[4] .. addAug[5], 2))
+        elseif addon == 2 then
+            player:updateEvent(tonumber(addAug[1] .. "0000001100000010", 2), tonumber(addAug[2] .. addAug[3], 2), tonumber(addAug[4], 2), tonumber(addAug[5], 2))
+        elseif addon == 3 then
+            player:updateEvent(tonumber(addAug[1] .. "0000001100000010", 2), tonumber(addAug[2] .. addAug[3], 2), tonumber(addAug[4], 2), tonumber(addAug[5], 2))
+        end -- Param placement is as follows (Aug1, Aug2 + Aug3, Aug4)
+    end
+end
+
+function intToBinary(x)
+
+    local bin = ""
+    while x > 1 do
+        bin = tostring(x % 2) .. bin
+        x = math.floor(x / 2)
+    end
+    bin = tostring(x) .. bin
+    return bin
+end
+
+
 entity.onTrade = function(player, npc, trade)
 end
 
@@ -540,6 +723,11 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option)
+    if csid == 10099 then
+        if option >= 2048 and option < 16777216 then
+            addonGear(player, option, false)
+        end
+    end
 end
 
 entity.onEventFinish = function(player, csid, option)
@@ -550,18 +738,18 @@ entity.onEventFinish = function(player, csid, option)
             npcUtil.giveItem(player, xi.items.NEXUS_CAPE)
         then
             player:setCharVar("receivedNexusCape", 1)
-
         elseif
             option == 33554432 or
             (option == 16777216 and player:getCharVar("receivedNexusCape") == 0)
         then
             player:addUsedItem(xi.items.NEXUS_CAPE)
-
         elseif option >= 1 and option <= 20 then
             local ki = optionToKI[option]
             if ki ~= nil then
                 givePrize(player, ki)
             end
+        elseif option >= 2048 and option < 16777216 then
+            addonGear(player, option, true)
         end
     end
 end
