@@ -1108,7 +1108,7 @@ INSERT INTO `augments` VALUES (909,0,0,0,0,0);
 INSERT INTO `augments` VALUES (910,0,0,0,0,0);
 INSERT INTO `augments` VALUES (911,0,0,0,0,0);
 INSERT INTO `augments` VALUES (912,0,0,0,0,0);
-INSERT INTO `augments` VALUES (913,0,0,0,0,0);
+INSERT INTO `augments` VALUES (913,2,169,2,0,0); -- Movement speed +8%
 INSERT INTO `augments` VALUES (914,0,0,0,0,0);
 INSERT INTO `augments` VALUES (915,0,0,0,0,0);
 INSERT INTO `augments` VALUES (916,0,0,0,0,0);
