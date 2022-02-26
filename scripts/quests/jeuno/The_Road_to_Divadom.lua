@@ -49,7 +49,8 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == QUEST_ACCEPTED and
+                player:getMainJob() == xi.job.DNC
         end,
 
         [xi.zone.UPPER_JEUNO] =
@@ -62,6 +63,9 @@ quest.sections =
                     if questProgress == 0 then
                         return quest:progressEvent(10137)
                     elseif questProgress == 3 then
+                        -- Note: Retail handles this as a progression of onZoneIn events.
+                        -- Instead, we queue these here.
+
                         player:startEvent(10139)
                         player:startEvent(10214)
                         player:startEvent(10215)
@@ -132,6 +136,19 @@ quest.sections =
                     quest:setVar(player, 'Prog', 3)
                 end,
             },
+        },
+    },
+
+    {
+        check = function(player, status, vars)
+            return status == QUEST_COMPLETED and
+                not player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COMEBACK_QUEEN)
+        end,
+
+        [xi.zone.UPPER_JEUNO] =
+        {
+            ['Laila']        = quest:event(10140):replaceDefault(),
+            ['Rhea_Myuliah'] = quest:event(10141):replaceDefault(),
         },
     },
 }
