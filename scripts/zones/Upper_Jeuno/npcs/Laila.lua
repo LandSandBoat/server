@@ -20,27 +20,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if
-        (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_UNFINISHED_WALTZ) == QUEST_AVAILABLE or
-        (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_UNFINISHED_WALTZ) == QUEST_COMPLETED and player:hasItem(19203) == false)) and
-        player:getMainJob() == xi.job.DNC and
-        player:getMainLvl() >= 40
-    then
-        player:startEvent(10129)
-
-    elseif
-        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_UNFINISHED_WALTZ) == QUEST_ACCEPTED and
-        player:getCharVar("QuestStatus_DNC_AF1") == 5 and
-        player:seenKeyItem(xi.ki.THE_ESSENCE_OF_DANCE) and
-        player:getMainJob() == xi.job.DNC
-    then
-        player:startEvent(10133)
-
-    elseif player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_UNFINISHED_WALTZ) == QUEST_ACCEPTED then
-        player:startEvent(10134)
-
     -- Dancer AF: Comeback Queen
-    elseif
+    if
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_ROAD_TO_DIVADOM) == QUEST_COMPLETED and
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COMEBACK_QUEEN) == QUEST_AVAILABLE and
         player:getMainJob() == xi.job.DNC
@@ -69,9 +50,6 @@ entity.onTrigger = function(player, npc)
         player:getCharVar("comebackQueenCS") == 5
     then
         player:startEvent(10154) -- This occurs if the player's inventory was full during the final chain of events or if the player speaks with laila afterwards.
-
-    else
-        player:startEvent(10120) -- Default
     end
 end
 
@@ -79,26 +57,8 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid== 10129 then
-        if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_UNFINISHED_WALTZ) == QUEST_COMPLETED then
-            player:delQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_UNFINISHED_WALTZ)
-            player:delKeyItem(xi.ki.THE_ESSENCE_OF_DANCE)
-        end
-        player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_UNFINISHED_WALTZ)
-        player:setCharVar("QuestStatus_DNC_AF1", 1)
-
-    elseif csid== 10133 then
-        if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 19203)
-        else
-            player:setCharVar("QuestStatus_DNC_AF1", 0)
-            player:addItem(19203) -- war hoop
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 19203)
-            player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_UNFINISHED_WALTZ)
-        end
-
     -- Dancer AF: Comeback Queen
-    elseif csid == 10143 then
+    if csid == 10143 then
         player:setCharVar("comebackQueenCS", 1)
         player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COMEBACK_QUEEN)
         player:addKeyItem(xi.ki.WYATTS_PROPOSAL)

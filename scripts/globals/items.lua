@@ -827,6 +827,7 @@ xi.items =
     TRAINEE_HAMMER                  = 18855,
     TRAINEE_KNIFE                   = 19101,
     SMART_GRENADE                   = 19202,
+    WAR_HOOP                        = 19203,
     SOWILO_CLAYMORE                 = 20781,
     BERYLLIUM_ARROW                 = 21295,
     CHRONO_BULLET                   = 21296,
