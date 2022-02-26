@@ -29,7 +29,9 @@ quest.sections =
             return status == QUEST_AVAILABLE and
                 player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_UNFINISHED_WALTZ) and
                 player:getMainJob() == xi.job.DNC and
-                player:getMainLvl() >= xi.settings.AF2_QUEST_LEVEL
+                player:getMainLvl() >= xi.settings.AF2_QUEST_LEVEL and
+                not quest:getMustZone(player) and
+                quest:getVar(player, 'Timer') >= VanadielUniqueDay()
         end,
 
         [xi.zone.UPPER_JEUNO] =

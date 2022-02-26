@@ -19,6 +19,8 @@ zones[xi.zone.GRAUBERG_S] =
         LOGIN_CAMPAIGN_UNDERWAY     = 7001, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER                = 7002, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         FISHING_MESSAGE_OFFSET      = 7056, -- You can't fish here.
+        A_SHIVER_RUNS_DOWN          = 7426, -- A shiver runs down your spine...
+        ATTEND_TO_MORE_PRESSING     = 7427, -- Perhaps you should first attend to more pressing matters...
         HARVESTING_IS_POSSIBLE_HERE = 7694, -- Harvesting is possible here if you have <item>.
         COMMON_SENSE_SURVIVAL       = 9299, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },

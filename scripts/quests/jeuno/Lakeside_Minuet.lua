@@ -172,7 +172,8 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED
+            return status == QUEST_COMPLETED and
+                not player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_UNFINISHED_WALTZ)
         end,
 
         [xi.zone.UPPER_JEUNO] =
