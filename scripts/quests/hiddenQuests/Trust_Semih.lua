@@ -18,7 +18,7 @@ quest.sections =
                 player:hasCompletedMission(xi.mission.log_id.ROV, xi.mission.id.rov.THE_PATH_UNTRAVELED)
         end,
 
-        [xi.zone.CHATEAU_DORAGUILLE] =
+        [xi.zone.HEAVENS_TOWER] =
         {
             ['Kupipi'] =
             {
