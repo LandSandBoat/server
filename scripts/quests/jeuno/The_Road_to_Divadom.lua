@@ -31,7 +31,7 @@ quest.sections =
                 player:getMainJob() == xi.job.DNC and
                 player:getMainLvl() >= xi.settings.AF2_QUEST_LEVEL and
                 not quest:getMustZone(player) and
-                quest:getVar(player, 'Timer') >= VanadielUniqueDay()
+                quest:getVar(player, 'Timer') <= VanadielUniqueDay()
         end,
 
         [xi.zone.UPPER_JEUNO] =
@@ -85,6 +85,8 @@ quest.sections =
 
                     if npcUtil.giveItem(player, tightsItemID) then
                         quest:complete(player)
+                        player:setCharVar('Quest[3][98]Timer', VanadielUniqueDay() + 1)
+                        player:setLocalVar('Quest[3][98]mustZone', 1)
                     else
                         quest:setVar(player, 'Prog', 4)
                     end
