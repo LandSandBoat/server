@@ -117,7 +117,7 @@ static const MeritCategoryInfo_t meritCatInfo[] = {
     { 14, 15, 8 },  // MCATEGORY_WS          catNumber 25
 
     { 5, 10, 6 },   // MCATEGORY_GEO_1       catNumber 26
-    { 0, 0, 6 },    // MCATEGORY_RUN_1       catNumber 27 (not in yet)
+    { 5, 10, 6 },   // MCATEGORY_RUN_1       catNumber 27
 
     { 0, 0, 8 },    // MCATEGORY_UNK_0       catNumber 28
     { 0, 0, 8 },    // MCATEGORY_UNK_1       catNumber 29
@@ -145,7 +145,7 @@ static const MeritCategoryInfo_t meritCatInfo[] = {
     { 6, 10, 7 },   // MCATEGORY_SHC_2       catNumber 50
     { 0, 0, 8 },    // MCATEGORY_UNK_3       catNumber 51
     { 4, 10, 7 },   // MCATEGORY_GEO_2       catNumber 52
-    { 0, 0, 7 },    // MCATEGORY_RUN_2       catNumber 53 (not in yet)
+    { 4, 10, 7 },   // MCATEGORY_RUN_2       catNumber 53
 };
 
 #define GetMeritCategory(merit) (((merit) >> 6) - 1)  // получаем категорию из merit
@@ -200,9 +200,9 @@ void CMeritPoints::LoadMeritPoints(uint32 charid)
 
     for (uint16 i = 0; i < MERITS_COUNT; ++i)
     {
-        if ((catNumber <= maxCatCount && i == meritNameSpace::groupOffset[catNumber]) || (catNumber > 26 && catNumber < 31) || catNumber == 51)
+        if ((catNumber <= maxCatCount && i == meritNameSpace::groupOffset[catNumber]) || (catNumber > 27 && catNumber < 31) || catNumber == 51) // Increment category number if known (or known unknown)
         {
-            if ((catNumber > 26 && catNumber < 31) || catNumber == 51)
+            if ((catNumber > 27 && catNumber < 31) || catNumber == 51) // 28-30 are UNK, 51 is UNK.
             {
                 Categories[catNumber] = &merits[163]; // point these to valid merits to prevent crash
             }
@@ -352,7 +352,7 @@ bool CMeritPoints::IsMeritExist(MERIT_TYPE merit)
     {
         return false;
     }
-    if ((int16)merit >= MCATEGORY_COUNT)
+    if ((int16)merit > MCATEGORY_COUNT)
     {
         return false;
     }
