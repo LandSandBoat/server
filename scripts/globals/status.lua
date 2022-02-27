@@ -837,6 +837,8 @@ xi.effect =
     MEDITATE                 = 801, -- Dummy effect for SAM Meditate JA
     ELEMENTALRES_DOWN        = 802, -- Elemental resistance down
     FULL_SPEED_AHEAD         = 803, -- Helper for quest: Full Speed Ahead!
+
+
     -- PLACEHOLDER           = 804, -- Description
     -- 804-1022
     -- PLACEHOLDER             = 1023 -- The client dat file seems to have only this many "slots", results of exceeding that are untested.
@@ -1411,7 +1413,7 @@ xi.mod =
     ABSORB_DMG_TO_MP                = 516, -- Unlike PLD gear mod, works on all damage types (Ethereal Earring)
 
     WARCRY_DURATION                 = 483, -- Warcy duration bonus from gear
-    AUSPICE_EFFECT                  = 484, -- Auspice Subtle Blow Bonus
+    AUSPICE_EFFECT                  = 484, -- Auspice wSubtle Blow Bonus
     TACTICAL_PARRY                  = 486, -- Tactical Parry TP Bonus
     MAG_BURST_BONUS                 = 487, -- Magic Burst Bonus
     INHIBIT_TP                      = 488, -- Inhibits TP Gain (percent)
@@ -1580,6 +1582,7 @@ xi.mod =
     -- Per https://www.bg-wiki.com/bg/Weapon_Skill_Damage we need all 3..
     ALL_WSDMG_FIRST_HIT             = 841, -- Generic (all Weaponskills) damage, first hit only.
     WS_NO_DEPLETE                   = 949, -- % chance a Weaponskill depletes no TP.
+    INQUARTATA                      = 963, -- additive % bonus to base parry rate
     WS_STR_BONUS                    = 980, -- % bonus to str_wsc.
     WS_DEX_BONUS                    = 957, -- % bonus to dex_wsc.
     WS_VIT_BONUS                    = 981, -- % bonus to vit_wsc.
