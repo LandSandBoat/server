@@ -653,6 +653,7 @@ xi.items =
     AMIR_KORAZIN                    = 14525,
     YIGIT_GOMLEK                    = 14527,
     PAHLUWAN_KHAZAGAND              = 14530,
+    DANCERS_CASAQUE                 = 14579,
     AURORE_BRAIS                    = 14257,
     TEAL_SLOPS                      = 14258,
     DUCAL_GUARDS_RING               = 14657,
