@@ -99,6 +99,7 @@ jobs:
             topaz_connect_64.exe
             topaz_game_64.exe
             topaz_search_64.exe
+            libmariadb.dll
 
   MacOS_BigSur_11:
     # https://github.com/actions/virtual-environments/blob/main/images/macos/macos-11-Readme.md
