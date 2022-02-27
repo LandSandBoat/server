@@ -74,6 +74,9 @@ int32 Sql_Connect(Sql_t* self, const char* user, const char* passwd, const char*
         return SQL_ERROR;
     }
 
+    bool reconnect = true;
+    mysql_options(&self->handle, MYSQL_OPT_RECONNECT, &reconnect);
+
     self->buf.clear();
     if (!mysql_real_connect(&self->handle, host, user, passwd, db, (uint32)port, nullptr /*unix_socket*/, 0 /*clientflag*/))
     {
@@ -176,7 +179,11 @@ int32 Sql_Ping(Sql_t* self)
     }
     catch (const std::exception& e)
     {
-        throw std::runtime_error(fmt::format("mysql_ping failed: {}", e.what()));
+        ShowFatalError(fmt::format("mysql_ping failed: {}", e.what()));
+    }
+    catch (...)
+    {
+        ShowFatalError("mysql_ping failed with unhandled exception");
     }
 
     return SQL_ERROR;
