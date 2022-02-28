@@ -9,6 +9,12 @@ add_subdirectory(spdlog)
 # CPM Modules
 CPMAddPackage(
     NAME efsw
-    GITHUB_REPOSITORY LandSandBoat/efsw
-    GIT_TAG b477e1c8f00bf483b1be256321d5e32784d6df96
+    GITHUB_REPOSITORY SpartanJ/efsw
+    GIT_TAG 74ca09bff89bc8de1f7b8bf3faaa6275ce23b4c5
+    OPTIONS
+        "VERBOSE OFF"
+        "NO_ATOMICS OFF"
+        "BUILD_SHARED_LIBS OFF"
+        "BUILD_TEST_APP OFF"
+        "EFSW_INSTALL OFF"
 )
