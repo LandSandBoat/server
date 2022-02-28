@@ -182,9 +182,12 @@ def fetch_credentials():
             while True:
                 line = f.readline()
                 if not line: break
-                match = re.match(r'(mysql_\w+):\s+(\S+)', line)
-                if match:
-                    credentials[match.group(1)] = match.group(2)
+                if "mysql_" in line:
+                    parts = line.split(":")
+                    type = parts[0].strip()
+                    val = parts[1].strip()
+                    credentials[type] = val
+
         database = os.getenv('XI_DB_NAME') or credentials['mysql_database']
         host = os.getenv('XI_DB_HOST') or credentials['mysql_host']
         port = os.getenv('XI_DB_PORT') or int(credentials['mysql_port'])
