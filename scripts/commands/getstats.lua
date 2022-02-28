@@ -49,6 +49,8 @@ function onTrigger(player)
     player:PrintToPlayer(string.format("Magic Attack bonus: %i ", target:getMod(xi.mod.MATT)), xi.msg.channel.SYSTEM_3)
     player:PrintToPlayer(string.format("Magic Defense bonus: %i ", target:getMod(xi.mod.MDEF)), xi.msg.channel.SYSTEM_3)
     player:PrintToPlayer(string.format("Magic Accuracy bonus: %i ", target:getMod(xi.mod.MACC)), xi.msg.channel.SYSTEM_3)
+    player:PrintToPlayer(string.format("Total Subtle Blow: %i ", target:getMod(xi.mod.SUBTLE_BLOW)), xi.msg.channel.SYSTEM_3)
+    player:PrintToPlayer(string.format("Total Store TP: %i ", target:getMod(xi.mod.STORETP)), xi.msg.channel.SYSTEM_3)
     -- player:PrintToPlayer("Cannot easily and accurately get Magic Evasion with current methods.")
 
     if targetType == xi.objType.PC then
