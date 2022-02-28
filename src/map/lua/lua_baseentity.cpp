@@ -8901,7 +8901,7 @@ bool CLuaBaseEntity::isDead()
 /************************************************************************
  *  Function: sendRaise()
  *  Purpose : Updates the m_hasRaise private member with the Raise Level
- *  Example : target:sendRaise(1) -- 2, 3 or 5 for R2, R3, Arise
+ *  Example : target:sendRaise(1) -- 2, 3 or 4 for R2, R3, Arise
  *  Notes   : Sending the Raise menu is handled by CDeathState::Update
  ************************************************************************/
 
