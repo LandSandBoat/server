@@ -297,8 +297,11 @@ namespace luautils
 
     auto NearLocation(sol::table const& table, float radius, float theta) -> sol::table;
 
+    void OnPlayerDeath(CCharEntity* PChar);
     void OnPlayerLevelUp(CCharEntity* PChar);
     void OnPlayerLevelDown(CCharEntity* PChar);
+    void OnPlayerEmote(CCharEntity* PChar, Emote EmoteID);
+    void OnPlayerVolunteer(CCharEntity* PChar, std::string text);
 
     bool OnChocoboDig(CCharEntity* PChar, bool pre);                    // chocobo digging, pre = check
 
@@ -311,9 +314,6 @@ namespace luautils
     void OnFurnitureRemoved(CCharEntity* PChar, CItemFurnishing* itemId);
 
     uint16 SelectDailyItem(CLuaBaseEntity* PLuaBaseEntity, uint8 dial);
-
-    void OnPlayerEmote(CCharEntity* PChar, Emote EmoteID);
-    void OnPlayerVolunteer(CCharEntity* PChar, std::string text);
 }; // namespace luautils
 
 #endif // _LUAUTILS_H -

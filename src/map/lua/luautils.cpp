@@ -4461,6 +4461,26 @@ namespace luautils
         return nearPos;
     }
 
+    void OnPlayerDeath(CCharEntity* PChar)
+    {
+        TracyZoneScoped;
+
+        auto onPlayerDeath = lua["xi"]["player"]["onPlayerDeath"];
+        if (!onPlayerDeath.valid())
+        {
+            ShowWarning("luautils::onPlayerDeath");
+            return;
+        }
+
+        auto result = onPlayerDeath(CLuaBaseEntity(PChar));
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("luautils::onPlayerDeath: %s", err.what());
+            return;
+        }
+    }
+
     void OnPlayerLevelUp(CCharEntity* PChar)
     {
         TracyZoneScoped;
@@ -4497,6 +4517,46 @@ namespace luautils
         {
             sol::error err = result;
             ShowError("luautils::onPlayerLevelDown: %s", err.what());
+            return;
+        }
+    }
+
+    void OnPlayerEmote(CCharEntity* PChar, Emote EmoteID)
+    {
+        TracyZoneScoped;
+
+        auto onPlayerEmote = lua["xi"]["player"]["onPlayerEmote"];
+        if (!onPlayerEmote.valid())
+        {
+            ShowWarning("luautils::onPlayerEmote");
+            return;
+        }
+
+        auto result = onPlayerEmote(CLuaBaseEntity(PChar), static_cast<uint8>(EmoteID));
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("luautils::onPlayerEmote: %s", err.what());
+            return;
+        }
+    }
+
+    void OnPlayerVolunteer(CCharEntity* PChar, std::string text)
+    {
+        TracyZoneScoped;
+
+        auto onPlayerVolunteer = lua["xi"]["player"]["onPlayerVolunteer"];
+        if (!onPlayerVolunteer.valid())
+        {
+            ShowWarning("luautils::onPlayerVolunteer");
+            return;
+        }
+
+        auto result = onPlayerVolunteer(CLuaBaseEntity(PChar), text);
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("luautils::onPlayerVolunteer: %s", err.what());
             return;
         }
     }
@@ -4637,45 +4697,5 @@ namespace luautils
         TracyZoneScoped;
         CCharEntity* player = dynamic_cast<CCharEntity*>(PLuaBaseEntity->GetBaseEntity());
         return daily::SelectItem(player, dial);
-    }
-
-    void OnPlayerEmote(CCharEntity* PChar, Emote EmoteID)
-    {
-        TracyZoneScoped;
-
-        auto onPlayerEmote = lua["xi"]["player"]["onPlayerEmote"];
-        if (!onPlayerEmote.valid())
-        {
-            ShowWarning("luautils::onPlayerEmote");
-            return;
-        }
-
-        auto result = onPlayerEmote(CLuaBaseEntity(PChar), static_cast<uint8>(EmoteID));
-        if (!result.valid())
-        {
-            sol::error err = result;
-            ShowError("luautils::onPlayerEmote: %s", err.what());
-            return;
-        }
-    }
-
-    void OnPlayerVolunteer(CCharEntity* PChar, std::string text)
-    {
-        TracyZoneScoped;
-
-        auto onPlayerVolunteer = lua["xi"]["player"]["onPlayerVolunteer"];
-        if (!onPlayerVolunteer.valid())
-        {
-            ShowWarning("luautils::onPlayerVolunteer");
-            return;
-        }
-
-        auto result = onPlayerVolunteer(CLuaBaseEntity(PChar), text);
-        if (!result.valid())
-        {
-            sol::error err = result;
-            ShowError("luautils::onPlayerVolunteer: %s", err.what());
-            return;
-        }
     }
 }; // namespace luautils
