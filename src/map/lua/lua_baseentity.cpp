@@ -8901,7 +8901,7 @@ bool CLuaBaseEntity::isDead()
 /************************************************************************
  *  Function: sendRaise()
  *  Purpose : Updates the m_hasRaise private member with the Raise Level
- *  Example : target:sendRaise(1) -- 2, or 3 for R2, R3
+ *  Example : target:sendRaise(1) -- 2, 3 or 5 for R2, R3, Arise
  *  Notes   : Sending the Raise menu is handled by CDeathState::Update
  ************************************************************************/
 
@@ -8911,13 +8911,17 @@ void CLuaBaseEntity::sendRaise(uint8 raiseLevel)
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    if (raiseLevel == 0 || raiseLevel > 3)
+    if (raiseLevel == 0 || raiseLevel > 4)
     {
         ShowDebug("lua::sendRaise raise value is not valid!");
     }
     else if (PChar->m_hasTractor == 0 && PChar->m_hasRaise == 0)
     {
         PChar->m_hasRaise = raiseLevel;
+        if (raiseLevel == 4)
+        {
+            PChar->m_hasArise = true;
+        }
         PChar->pushPacket(new CRaiseTractorMenuPacket(PChar, TYPE_RAISE));
     }
 }
