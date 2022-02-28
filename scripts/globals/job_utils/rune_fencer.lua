@@ -75,9 +75,7 @@ local function getRuneHealAmount(effect, target)
     return 0
 end
 
-
-
---source https://www.bg-wiki.com/ffxi/Vivacious_Pulse
+-- source https://www.bg-wiki.com/ffxi/Vivacious_Pulse
 local function calculateVivaciousPulseHealing(target)
 
     local divineMagicSkillLevel = target:getSkillLevel(xi.skill.DIVINE_MAGIC)
@@ -93,12 +91,14 @@ local function calculateVivaciousPulseHealing(target)
         local type = effect:getType()
         if type >= xi.effect.IGNIS and type <= xi.effect.TENEBRAE then
             HPHealAmount = HPHealAmount + getRuneHealAmount(effect, target)
-	    elseif type == xi.effect.POISON or type == xi.effect.PARALYSIS or type == xi.effect.BLINDNESS
-            or type == xi.effect.SILENCE or type == xi.effect.MUTE or type == xi.effect.CURSE_I
-            or type == xi.effect.CURSE_II or type == xi.effect.DOOM or type == xi.effect.VIRUS
-            or type == xi.effect.PLAGUE or type == xi.effect.PETRIFICATION then
-             debuffs[debuffCount+1] = type
-             debuffCount = debuffCount + 1
+        elseif
+            type == xi.effect.POISON or type == xi.effect.PARALYSIS or
+            type == xi.effect.BLINDNESS or type == xi.effect.SILENCE or type == xi.effect.MUTE or type == xi.effect.CURSE_I or
+            type == xi.effect.CURSE_II or type == xi.effect.DOOM or type == xi.effect.VIRUS or
+            type == xi.effect.PLAGUE or type == xi.effect.PETRIFICATION
+        then
+            debuffs[debuffCount+1] = type
+        debuffCount = debuffCount + 1
         end
 
         if type == xi.effect.TENEBRAE then -- runes that also restore MP
@@ -123,16 +123,13 @@ local function calculateVivaciousPulseHealing(target)
     return HPHealAmount
 end
 
-
 xi.job_utils.rune_fencer.useRuneEnchantment = function(player, target, ability, effect)
     enforceRuneCounts(target)
     applyRuneEnhancement(effect, target)
 end
 
-
 xi.job_utils.rune_fencer.useSwordplay = function(player, target, ability)
     local power = 0 --Swordplay starts at +0 bonus without swaps
-
 
     -- see https://www.bg-wiki.com/ffxi/Sleight_of_Sword for levels
     local meritBonus =  player:getMerit(xi.merit.MERIT_SLEIGHT_OF_SWORD)
@@ -140,7 +137,7 @@ xi.job_utils.rune_fencer.useSwordplay = function(player, target, ability)
 
     -- gear bonuses from https://www.bg-wiki.com/ffxi/Swordplay
     if player:getMainJob() == xi.job.RUN and target:getMainLvl() == 99 then -- don't bother with gear boost checks until 99 and main RUN
-        local tickPower = 3 --Tick power appears to be 3/tick, not 6/tick if RUN main and 3/tick if RUN sub; source : https://www.ffxiah.com/forum/topic/37086/endeavoring-to-awaken-a-guide-to-rune-fencer/180/#3615377
+        local tickPower = 3 -- Tick power appears to be 3/tick, not 6/tick if RUN main and 3/tick if RUN sub; source : https://www.ffxiah.com/forum/topic/37086/endeavoring-to-awaken-a-guide-to-rune-fencer/180/#3615377
         local handsSlotID = target:getEquipID(xi.slot.HANDS)
 
         -- add starting tick bonuses if appropriate gear is equipped
@@ -156,11 +153,11 @@ xi.job_utils.rune_fencer.useSwordplay = function(player, target, ability)
     end
 
     if power > 0 then -- add aug bonus if appropriate gear is equipped. Note: ilvl 109+ "relic" or "AF2" gear always has the augment, so no need to check extdata. RUN does not have AF/AF2/AF3 gear below i109.
-            augBonus = (meritBonus / 5) * 2
+        augBonus = (meritBonus / 5) * 2
     end
+
     player:addStatusEffect(xi.effect.SWORDPLAY, power, 3, 120, 0, meritBonus + augBonus, 0)
 end
-
 
 xi.job_utils.rune_fencer.onSwordplayEffectGain = function(target, effect)
     local power = effect:getPower()
