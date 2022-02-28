@@ -50,8 +50,166 @@ local function enforceRuneCounts(target)
     end
 end
 
+--source https://www.bluegartr.com/threads/124844-Vivacious-Pulse-testing?p=6038534&viewfull=1#post6038534 and following posts
+local function getRuneHealAmount(effect, target)
+
+    if effect == xi.effect.TENEBRAE then -- Tenebrae primarily restores MP, but also uses the base divine skill/2 bonus but no raw stat bonus.
+        return 0
+    end
+
+    local runeStatMap = {
+                            [xi.effect.IGNIS]  = xi.mod.STR,
+                            [xi.effect.GELUS]  = xi.mod.DEX,
+                            [xi.effect.FLABRA] = xi.mod.VIT,
+                            [xi.effect.TELLUS] = xi.mod.AGI,
+                            [xi.effect.SULPOR] = xi.mod.INT,
+                            [xi.effect.UNDA]   = xi.mod.MND,
+                            [xi.effect.LUX]    = xi.mod.CHR,
+                        }
+
+    local stat = runeStatMap[effect:getType()]
+    if stat ~= nil then
+        return math.floor(target:getStat(stat) * 0.5)
+    end
+
+    return 0
+end
+
+
+
+--source https://www.bg-wiki.com/ffxi/Vivacious_Pulse
+local function calculateVivaciousPulseHealing(target)
+
+    local divineMagicSkillLevel = target:getSkillLevel(xi.skill.DIVINE_MAGIC)
+    local HPHealAmount = 10 + math.floor(divineMagicSkillLevel / 2 * (100 + target:getJobPointLevel(xi.jp.VIVACIOUS_PULSE_EFFECT)) / 100) -- Bonus of 1-20%  from Vivacious pulse job points.
+    local tenebraeRuneCount = 0
+    local bonusPct = 1.0 -- todo, add in bonus from augment attached to Futhark Claymore, Peord Claymore, and Morgelai. Need extdata for proper values.
+
+    local debuffs = {}
+    local debuffCount = 0
+
+    local effects = target:getStatusEffects()
+    for _, effect in ipairs(effects) do
+        local type = effect:getType()
+        if type >= xi.effect.IGNIS and type <= xi.effect.TENEBRAE then
+            HPHealAmount = HPHealAmount + getRuneHealAmount(effect, target)
+	    elseif type == xi.effect.POISON or type == xi.effect.PARALYSIS or type == xi.effect.BLINDNESS
+            or type == xi.effect.SILENCE or type == xi.effect.MUTE or type == xi.effect.CURSE_I
+            or type == xi.effect.CURSE_II or type == xi.effect.DOOM or type == xi.effect.VIRUS
+            or type == xi.effect.PLAGUE or type == xi.effect.PETRIFICATION then
+             debuffs[debuffCount+1] = type
+             debuffCount = debuffCount + 1
+        end
+
+        if type == xi.effect.TENEBRAE then -- runes that also restore MP
+            tenebraeRuneCount = tenebraeRuneCount + 1
+        end
+    end
+
+    if tenebraeRuneCount > 0 then -- only restore MP if there's one or more tenebrae rune active
+        local MPHealAmount = math.floor(divineMagicSkillLevel / 10 * (100 + target:getJobPointLevel(xi.jp.VIVACIOUS_PULSE_EFFECT)) / 100) * (tenebraeRuneCount + 1)
+        target:addMP(MPHealAmount) -- augment bonusPct does not apply here according to testing.
+    end
+
+    if debuffCount > 0 and (target:getEquipID(xi.slot.HEAD) == 26782 or target:getEquipID(xi.slot.HEAD) == 26783) then -- add random removal of Poison, Paralyze, Blind, Silence, Mute, Curse, Bane, Doom, Virus, Plague, Petrification via AF3 head (source: https://www.bg-wiki.com/ffxi/Erilaz_Galea)
+        target:delStatusEffect(debuffs[math.random(debuffCount)])
+    end
+
+    HPHealAmount = HPHealAmount * bonusPct
+    if (target:getHP() + HPHealAmount > target:getMaxHP()) then
+        HPHealAmount = target:getMaxHP() - target:getHP() -- don't go over cap
+    end
+
+    return HPHealAmount
+end
+
 
 xi.job_utils.rune_fencer.useRuneEnchantment = function(player, target, ability, effect)
     enforceRuneCounts(target)
     applyRuneEnhancement(effect, target)
+end
+
+
+xi.job_utils.rune_fencer.useSwordplay = function(player, target, ability)
+    local power = 0 --Swordplay starts at +0 bonus without swaps
+
+
+    -- see https://www.bg-wiki.com/ffxi/Sleight_of_Sword for levels
+    local meritBonus =  player:getMerit(xi.merit.MERIT_SLEIGHT_OF_SWORD)
+    local augBonus = 0 -- augBonus = 2 per level of merit
+
+    -- gear bonuses from https://www.bg-wiki.com/ffxi/Swordplay
+    if player:getMainJob() == xi.job.RUN and target:getMainLvl() == 99 then -- don't bother with gear boost checks until 99 and main RUN
+        local tickPower = 3 --Tick power appears to be 3/tick, not 6/tick if RUN main and 3/tick if RUN sub; source : https://www.ffxiah.com/forum/topic/37086/endeavoring-to-awaken-a-guide-to-rune-fencer/180/#3615377
+        local handsSlotID = target:getEquipID(xi.slot.HANDS)
+
+        -- add starting tick bonuses if appropriate gear is equipped
+        if handsSlotID      == 27018 then
+            power = 3 * tickPower
+        elseif handsSlotID  == 27019 then
+            power = 5 * tickPower
+        elseif handsSlotID  == 23218 then
+            power = 7 * tickPower
+        elseif handsSlotID  == 23553 then
+            power = 9 * tickPower
+        end
+    end
+
+    if power > 0 then -- add aug bonus if appropriate gear is equipped. Note: ilvl 109+ "relic" or "AF2" gear always has the augment, so no need to check extdata. RUN does not have AF/AF2/AF3 gear below i109.
+            augBonus = (meritBonus / 5) * 2
+    end
+    player:addStatusEffect(xi.effect.SWORDPLAY, power, 3, 120, 0, meritBonus + augBonus, 0)
+end
+
+
+xi.job_utils.rune_fencer.onSwordplayEffectGain = function(target, effect)
+    local power = effect:getPower()
+    local subPower = effect:getSubPower()
+
+    if power > 0 then
+        target:addMod(xi.mod.ACC, power)
+        target:addMod(xi.mod.EVASION, power)
+    end
+
+    if subPower > 0 then
+        target:addMod(xi.mod.SUBTLE_BLOW,subPower)
+    end
+end
+
+-- tick values from https://www.bg-wiki.com/ffxi/Swordplay
+xi.job_utils.rune_fencer.onSwordplayEffectTick = function (target, effect)
+    local power  = effect:getPower()
+    local tickPower = 3
+    local jobPointBonus = target:getJobPointLevel(xi.jp.SWORDPLAY_EFFECT)
+    local maxPower = 60 + jobPointBonus  -- ACC/EVA bonus caps at 60, + 1 per level of job point.
+
+    if power < maxPower then
+        if power + tickPower > maxPower then
+            tickPower = maxPower - power
+        end
+
+        if tickPower > 0 then
+            target:addMod(xi.mod.ACC, tickPower)
+            target:addMod(xi.mod.EVASION, tickPower)
+        end
+
+        power = math.min(power + tickPower, maxPower)
+        effect:setPower(power)
+    end
+end
+
+xi.job_utils.rune_fencer.onSwordplayEffectLose = function (target, effect)
+    local power = effect:getPower()
+    local subPower = effect:getSubPower()
+
+    target:delMod(xi.mod.ACC, power)
+    target:delMod(xi.mod.EVASION, power)
+
+    if subPower > 0 then
+        target:delMod(xi.mod.SUBTLE_BLOW,subPower)
+    end
+end
+
+xi.job_utils.rune_fencer.useVivaciousPulse = function(player, target, ability, effect)
+    return calculateVivaciousPulseHealing(player, target)
 end
