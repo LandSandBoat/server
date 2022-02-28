@@ -170,10 +170,18 @@ int32 Sql_SetEncoding(Sql_t* self, const char* encoding)
 
 int32 Sql_Ping(Sql_t* self)
 {
+    auto startId = mysql_thread_id(&self->handle);
     try
     {
-        if (self && mysql_ping(&self->handle) == 0)
+        if (self &&
+            &self->handle &&
+            mysql_ping(&self->handle) == 0)
         {
+            auto endId = mysql_thread_id(&self->handle);
+            if (startId != endId)
+            {
+                ShowWarning("DB thread ID has changed. You have been reconnected.");
+            }
             return SQL_SUCCESS;
         }
     }
