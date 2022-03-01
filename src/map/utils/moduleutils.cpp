@@ -28,7 +28,7 @@
 
 namespace moduleutils
 {
-    void LoadModules()
+    void LoadLuaModules()
     {
         sol::state& lua = luautils::lua;
 

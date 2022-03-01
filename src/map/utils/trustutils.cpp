@@ -242,14 +242,14 @@ namespace trustutils
                 trust->hth_sdt    = (uint16)(Sql_GetFloatData(SqlHandle, 33) * 1000);
                 trust->impact_sdt = (uint16)(Sql_GetFloatData(SqlHandle, 34) * 1000);
 
-                trust->fire_sdt    = (int16)((Sql_GetFloatData(SqlHandle, 35) - 1) * -100);
-                trust->ice_sdt     = (int16)((Sql_GetFloatData(SqlHandle, 36) - 1) * -100);
-                trust->wind_sdt    = (int16)((Sql_GetFloatData(SqlHandle, 37) - 1) * -100);
-                trust->earth_sdt   = (int16)((Sql_GetFloatData(SqlHandle, 38) - 1) * -100);
-                trust->thunder_sdt = (int16)((Sql_GetFloatData(SqlHandle, 39) - 1) * -100);
-                trust->water_sdt   = (int16)((Sql_GetFloatData(SqlHandle, 40) - 1) * -100);
-                trust->light_sdt   = (int16)((Sql_GetFloatData(SqlHandle, 41) - 1) * -100);
-                trust->dark_sdt    = (int16)((Sql_GetFloatData(SqlHandle, 42) - 1) * -100);
+                trust->fire_sdt    = (int16)Sql_GetFloatData(SqlHandle, 35); // Modifier 54, base 10000 stored as signed integer. Positives signify less damage.
+                trust->ice_sdt     = (int16)Sql_GetFloatData(SqlHandle, 36); // Modifier 55, base 10000 stored as signed integer. Positives signify less damage.
+                trust->wind_sdt    = (int16)Sql_GetFloatData(SqlHandle, 37); // Modifier 56, base 10000 stored as signed integer. Positives signify less damage.
+                trust->earth_sdt   = (int16)Sql_GetFloatData(SqlHandle, 38); // Modifier 57, base 10000 stored as signed integer. Positives signify less damage.
+                trust->thunder_sdt = (int16)Sql_GetFloatData(SqlHandle, 39); // Modifier 58, base 10000 stored as signed integer. Positives signify less damage.
+                trust->water_sdt   = (int16)Sql_GetFloatData(SqlHandle, 40); // Modifier 59, base 10000 stored as signed integer. Positives signify less damage.
+                trust->light_sdt   = (int16)Sql_GetFloatData(SqlHandle, 41); // Modifier 60, base 10000 stored as signed integer. Positives signify less damage.
+                trust->dark_sdt    = (int16)Sql_GetFloatData(SqlHandle, 42); // Modifier 61, base 10000 stored as signed integer. Positives signify less damage.
 
                 trust->fire_res    = (int16)Sql_GetIntData(SqlHandle, 43);
                 trust->ice_res     = (int16)Sql_GetIntData(SqlHandle, 44);

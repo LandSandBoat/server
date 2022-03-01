@@ -24,7 +24,7 @@
 
 namespace moduleutils
 {
-    void LoadModules();
+    void LoadLuaModules();
 }; // namespace moduleutils
 
 #endif // _MODULEUTILS_H
