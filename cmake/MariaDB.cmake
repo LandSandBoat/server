@@ -1,15 +1,17 @@
 if(WIN32)
     # How to build MariaDB Libs:
     #
-    # cmake cmake -A Win32 -DBUILD_MARIADB_FROM_SOURCE=ON ..
-    # cmake --build . --target libmariadb
-    # cmake --build .
+    # <Clear your cache>
+    #
+    # cmake -A Win32 -DCMAKE_BUILD_TYPE=Release -DBUILD_MARIADB_FROM_SOURCE=ON ..
+    # cmake --build . --config Release --target libmariadb
+    # cmake --build . --config Release --target copy_mariadb_dll_to_ext
     #
     # <Clear your cache>
     #
-    # cmake cmake -A x64 -DBUILD_MARIADB_FROM_SOURCE=ON ..
-    # cmake --build . --target libmariadb
-    # cmake --build .
+    # cmake -A x64 -DCMAKE_BUILD_TYPE=Release -DBUILD_MARIADB_FROM_SOURCE=ON ..
+    # cmake --build . --config Release --target libmariadb
+    # cmake --build . --config Release --target copy_mariadb_dll_to_ext
     #
     # Remove any non-".h" files from the include folder
     #
@@ -31,11 +33,11 @@ if(WIN32)
         add_custom_target(copy_mariadb_dll_to_ext ALL)
         add_custom_command(TARGET copy_mariadb_dll_to_ext
             COMMAND ${CMAKE_COMMAND} -E copy
-                ${mariadb_BINARY_DIR}/libmariadb/Debug/libmariadb.lib
+                ${mariadb_BINARY_DIR}/libmariadb/${CMAKE_BUILD_TYPE}/libmariadb.lib
                 ${CMAKE_SOURCE_DIR}/ext/mariadb/${libpath}/libmariadb.lib
 
             COMMAND ${CMAKE_COMMAND} -E copy
-                ${mariadb_BINARY_DIR}/libmariadb/Debug/libmariadb.dll
+                ${mariadb_BINARY_DIR}/libmariadb/${CMAKE_BUILD_TYPE}/libmariadb.dll
                 ${CMAKE_SOURCE_DIR}/ext/mariadb/${libpath}/libmariadb.dll
 
             COMMAND ${CMAKE_COMMAND} -E copy_directory
