@@ -220,6 +220,3 @@ memcheck.out.*
 
 # Auto-generated files
 /src/common/version.cpp
-
-/libmariadb.dll
-
