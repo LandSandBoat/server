@@ -55,7 +55,7 @@ if(WIN32)
     # Copy from ext folder into root
     add_custom_target(copy_mariadb_dll_to_root ALL)
     add_custom_command(TARGET copy_mariadb_dll_to_root POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
             ${CMAKE_SOURCE_DIR}/ext/mariadb/${libpath}/libmariadb.dll
             ${CMAKE_SOURCE_DIR}
     )

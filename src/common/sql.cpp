@@ -57,7 +57,6 @@ Sql_t* Sql_Malloc()
     mysql_init(&self->handle);
     self->lengths   = nullptr;
     self->result    = nullptr;
-    self->keepalive = CTaskMgr::TASK_INVALID;
     return self;
 }
 
@@ -227,10 +226,12 @@ static int32 Sql_P_KeepaliveTimer(time_point tick, CTaskMgr::CTask* PTask)
 
 /// @return the keepalive timer id, or INVALID_TIMER
 
-int32 Sql_Keepalive(Sql_t* self)
+int32 Sql_Keepalive(Sql_t* self, std::string const& keepaliveTaskName)
 {
     uint32 timeout;
     uint32 ping_interval;
+
+    self->keepaliveTaskName = keepaliveTaskName;
 
     // set a default value first
     timeout = 7200; // 2 hours
@@ -242,9 +243,10 @@ int32 Sql_Keepalive(Sql_t* self)
     {
         timeout = 60;
     }
+
     // establish keepalive
     ping_interval = timeout - 30; // 30-second reserve
-    CTaskMgr::getInstance()->AddTask("Sql_P_KeepAliveTimer", server_clock::now() + std::chrono::seconds(ping_interval), self, CTaskMgr::TASK_INTERVAL,
+    CTaskMgr::getInstance()->AddTask(keepaliveTaskName, server_clock::now() + std::chrono::seconds(ping_interval), self, CTaskMgr::TASK_INTERVAL,
                                      Sql_P_KeepaliveTimer, std::chrono::seconds(ping_interval));
     return 0;
 }
@@ -558,9 +560,9 @@ void Sql_Free(Sql_t* self)
     {
         mysql_close(&self->handle);
         Sql_FreeResult(self);
-        if (self->keepalive != CTaskMgr::TASK_INVALID)
+        if (!self->keepaliveTaskName.empty())
         {
-            CTaskMgr::getInstance()->RemoveTask("Sql_P_KeepAliveTimer");
+            CTaskMgr::getInstance()->RemoveTask(self->keepaliveTaskName);
         }
         delete self;
     }
