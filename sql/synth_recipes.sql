@@ -3168,7 +3168,7 @@ INSERT INTO `synth_recipes` VALUES (49919,1,0,0,0,0,0,94,0,0,0,4100,4242,14372,0
 INSERT INTO `synth_recipes` VALUES (49920,1,0,0,0,0,0,70,0,0,0,4100,4242,13754,0,0,0,0,0,0,0,851,855,855,855,1,1,1,1,'Black Cotehardie (desynth)');  -- 2021.11.15 Based on synth.  Sites that show are in agreement.
 INSERT INTO `synth_recipes` VALUES (49921,1,0,0,0,0,0,8,0,0,0,4100,4242,12696,0,0,0,0,0,0,0,817,817,850,850,2,3,2,3,'Leather Gloves (desynth)');  -- 2021.11.15 Based on synth.  Sites that show are in agreement.
 INSERT INTO `synth_recipes` VALUES (49922,1,0,0,0,0,0,43,0,0,0,4100,4242,13200,0,0,0,0,0,0,0,817,851,851,851,1,1,2,2,'Waistbelt (desynth)');  -- 2021.11.15 Based on synth.  Sites that show are in agreement.
-INSERT INTO `synth_recipes` VALUES (49923,1,0,0,0,0,0,30,0,0,0,4100,4242,12826,0,0,0,0,0,0,0,817,817,651,848,6,6,2,1,'Studded Trousers (desynth)'); -- 2022.03.01 Basded on FFXIclopedia then change to reflect normal desynth behavior (says dhamlmel leather X 6 but recepie only use one)
+INSERT INTO `synth_recipes` VALUES (49923,1,0,0,0,0,0,30,0,0,0,4100,4242,12826,0,0,0,0,0,0,0,817,848,651,651,6,6,2,2,'Studded Trousers (desynth)'); -- 2022.03.01 Basded on FFXIclopedia
 INSERT INTO `synth_recipes` VALUES (49924,1,0,0,0,0,0,53,0,0,0,4100,4242,13593,0,0,0,0,0,0,0,817,853,853,853,1,1,2,2,'Raptor Mantle (desynth)');  -- 2021.11.15 Based on synth.  Sites that show are in agreement.
 INSERT INTO `synth_recipes` VALUES (49925,1,0,0,0,0,0,49,0,0,0,4100,4242,13570,0,0,0,0,0,0,0,820,820,859,859,1,1,1,1,'Ram Mantle (desynth)');  -- 2021.11.15 Based on synth.  FFXIclopedia and FFXIAH are in agreement though Allakhazam does not show Ram Skin as a result.
 INSERT INTO `synth_recipes` VALUES (49926,1,0,0,0,0,0,40,0,0,0,4100,4242,12699,0,0,0,0,0,0,0,850,850,850,850,2,2,2,2,'Cuir Gloves (desynth)');  -- 2021.11.15 Based on synth.  Sites that show are in agreement.
@@ -3195,20 +3195,20 @@ INSERT INTO `synth_recipes` VALUES (49946,1,0,0,0,0,0,24,0,0,0,4100,4242,12442,0
 INSERT INTO `synth_recipes` VALUES (49947,1,0,0,0,0,0,29,0,0,0,4100,4242,12993,0,0,0,0,0,0,0,850,850,848,848,1,1,1,1,'Sandals (desynth)');  -- 2021.11.15 Based on synth.  Sites that show are in agreement.
 INSERT INTO `synth_recipes` VALUES (49948,1,0,0,0,0,0,85,0,0,0,4100,4242,13595,0,0,0,0,0,0,0,820,863,863,863,1,1,1,1,'Coeurl Mantle (desynth)');
 INSERT INTO `synth_recipes` VALUES (49949,1,0,0,0,0,0,34,0,0,0,4098,4240,1638,0,0,0,0,0,0,0,850,850,850,850,1,1,1,1,'Moblin Mask (desynth)');  -- 2021.11.15 JPWiki and FFXIclopedia show level 34
-INSERT INTO `synth_recipes` VALUES (49950,1,0,0,0,0,0,26,0,0,0,4100,4242,12698,0,0,0,0,0,0,0,848,651,651,651,1,1,2,2,'Studded Gloves (desynth)');  -- 2022.03.01 Base on FFXIclopedia
-INSERT INTO `synth_recipes` VALUES (49951,1,0,0,0,0,0,32,0,0,0,4100,4242,12570,0,0,0,0,0,0,0,848,651,848,851,1,2,1,1,'Studded Vest (desynth)'); -- Based on normal desynth behavior
-INSERT INTO `synth_recipes` VALUES (49952,1,0,0,4,0,0,3,0,0,0,4100,4242,12448,0,0,0,0,0,0,0,649,649,850,850,1,1,1,2,'Bronze Cap (desynth)'); -- 2022.03.01 Base on FFXIclopedia
-INSERT INTO `synth_recipes` VALUES (49953,1,0,0,0,0,0,5,22,0,0,4100,4242,12966,0,0,0,0,0,0,0,880,850,850,893,1,1,2,1,'Bone Leggings (desynth)');  -- 2022.03.01 Base on FFXIclopedia
-INSERT INTO `synth_recipes` VALUES (49954,1,0,0,0,0,0,5,20,0,0,4100,4242,12710,0,0,0,0,0,0,0,880,880,850,850,1,2,1,2,'Bone Mittens (desynth)'); -- 2022.03.01 Base on normal desynth behavior
-INSERT INTO `synth_recipes` VALUES (49955,1,0,0,0,0,0,6,24,0,0,4100,4242,12834,0,0,0,0,0,0,0,817,880,850,850,3,1,1,2,'Bone Subligar (desynth)'); -- 2022.03.01 Base on FFXIclopedia
+INSERT INTO `synth_recipes` VALUES (49950,1,0,0,0,0,0,26,0,0,0,4100,4242,12698,0,0,0,0,0,0,0,817,850,848,651,3,2,1,2,'Studded Gloves (desynth)');  -- 2022.03.01 Base on FFXIclopedia
+-- INSERT INTO `synth_recipes` VALUES (49951,1,0,0,0,0,0,32,0,0,0,4100,4242,12570,0,0,0,0,0,0,0,848,651,848,851,1,2,1,1,'Studded Vest (desynth)'); -- Based on normal desynth behavior, More info needed
+INSERT INTO `synth_recipes` VALUES (49952,1,0,0,4,0,0,0,0,0,0,4100,4242,12448,0,0,0,0,0,0,0,649,649,850,850,1,1,1,2,'Bronze Cap (desynth)'); -- 2022.03.01 Base on FFXIclopedia
+INSERT INTO `synth_recipes` VALUES (49953,1,0,0,0,0,0,0,22,0,0,4100,4242,12966,0,0,0,0,0,0,0,880,850,850,850,1,1,2,2,'Bone Leggings (desynth)');  -- 2022.03.01 Base on FFXIclopedia
+-- INSERT INTO `synth_recipes` VALUES (49954,1,0,0,0,0,0,5,20,0,0,4100,4242,12710,0,0,0,0,0,0,0,880,880,850,850,1,2,1,2,'Bone Mittens (desynth)'); -- 2022.03.01 Base on normal desynth behavior, More info needed
+INSERT INTO `synth_recipes` VALUES (49955,1,0,0,0,0,0,0,24,0,0,4100,4242,12834,0,0,0,0,0,0,0,817,880,850,850,3,1,1,2,'Bone Subligar (desynth)'); -- 2022.03.01 Base on FFXIclopedia
 INSERT INTO `synth_recipes` VALUES (49956,1,0,0,33,0,0,6,0,0,0,4100,4242,12936,0,0,0,0,0,0,0,851,651,651,651,1,1,2,3,'Greaves (desynth)'); -- 2022.03.01 Base on FFXIclopedia
-INSERT INTO `synth_recipes` VALUES (49957,1,0,0,0,0,0,7,26,0,0,4100,4242,12582,0,0,0,0,0,0,0,880,868,850,893,1,1,2,1,'Bone Harness (desynth)'); -- 2022.03.01 Base on FFXIclopedia
-INSERT INTO `synth_recipes` VALUES (49958,1,0,0,35,0,0,7,0,0,0,4100,4242,12808,0,0,0,0,0,0,0,819,819,851,651,1,3,1,1,'Chain Hose (desynth)'); -- 2022.03.01 Base on FFXIclopedia
-INSERT INTO `synth_recipes` VALUES (49959,1,0,0,0,0,0,8,32,0,0,4100,4242,12967,0,0,0,0,0,0,0,889,852,852,894,1,1,2,1,'Beetle Leggings (desynth)'); -- 2022.03.01 Base on FFXIclopedia
-INSERT INTO `synth_recipes` VALUES (49960,1,0,0,0,0,0,9,34,0,0,4100,4242,12835,0,0,0,0,0,0,0,818,818,852,894,1,3,1,1,'Beetle Subligar (desynth)'); -- 2022.03.01 Base on normal desynth behavior
-INSERT INTO `synth_recipes` VALUES (49961,1,0,0,0,48,0,9,0,0,0,4100,4242,12810,0,0,0,0,0,0,0,819,851,851,653,3,1,2,2,'Breeches (desynth)'); -- 2022.03.01 Base on normal desynth behavior
-INSERT INTO `synth_recipes` VALUES (49962,1,0,0,0,0,22,9,0,0,0,4100,4242,15207,0,0,0,0,0,0,0,1828,1828,818,818,3,7,3,3,'Trader\'s Chapeau (desynth)'); -- 2022.03.01 Base on FFXIclopedia show X6 cotton thread in hq 2 but recepie doesnt use 6 cotton thread
-INSERT INTO `synth_recipes` VALUES (49963,1,0,0,0,0,23,9,0,0,0,4100,4242,14053,0,0,0,0,0,0,0,1828,818,850,850,3,3,2,2,'Trader\'s Cuffs (desynth)'); -- 2022.03.01 Base on FFXIclopedia
+INSERT INTO `synth_recipes` VALUES (49957,1,0,0,0,0,0,0,26,0,0,4100,4242,12582,0,0,0,0,0,0,0,880,868,893,893,1,1,1,1,'Bone Harness (desynth)'); -- 2022.03.01 Base on FFXIclopedia
+-- INSERT INTO `synth_recipes` VALUES (49958,1,0,0,35,0,0,7,0,0,0,4100,4242,12808,0,0,0,0,0,0,0,819,819,851,651,1,3,1,1,'Chain Hose (desynth)'); -- 2022.03.01 Base on FFXIclopedia, info impossible need verification
+-- INSERT INTO `synth_recipes` VALUES (49959,1,0,0,0,0,0,8,32,0,0,4100,4242,12967,0,0,0,0,0,0,0,889,852,852,894,1,1,2,1,'Beetle Leggings (desynth)'); -- 2022.03.01 Base on FFXIclopedia
+-- INSERT INTO `synth_recipes` VALUES (49960,1,0,0,0,0,0,9,34,0,0,4100,4242,12835,0,0,0,0,0,0,0,818,818,852,894,1,3,1,1,'Beetle Subligar (desynth)'); -- 2022.03.01 Base on normal desynth behavior
+-- INSERT INTO `synth_recipes` VALUES (49961,1,0,0,0,48,0,9,0,0,0,4100,4242,12810,0,0,0,0,0,0,0,819,851,851,653,3,1,2,2,'Breeches (desynth)'); -- 2022.03.01 Base on normal desynth behavior
+INSERT INTO `synth_recipes` VALUES (49962,1,0,0,0,0,22,0,0,0,0,4100,4242,15207,0,0,0,0,0,0,0,1828,818,818,818,3,3,6,6,'Trader\'s Chapeau (desynth)'); -- 2022.03.01 Base on FFXIclopedia show X6 cotton thread in hq 2 but recepie doesnt use 6 cotton thread
+INSERT INTO `synth_recipes` VALUES (49963,1,0,0,0,0,24,0,0,0,0,4100,4242,14053,0,0,0,0,0,0,0,1828,818,850,850,3,3,2,2,'Trader\'s Cuffs (desynth)'); -- 2022.03.01 Base on FFXIclopedia
 INSERT INTO `synth_recipes` VALUES (50001,0,0,0,0,0,0,0,1,0,0,4098,4240,888,888,888,0,0,0,0,0,1883,1883,1883,1883,1,2,3,4,'Shell Powder');
 INSERT INTO `synth_recipes` VALUES (50002,0,2025,0,0,0,0,0,1,0,0,4098,4240,880,1642,1644,1648,0,0,0,0,2141,2141,2141,2141,1,1,1,1,'Wailing Bone Chip');
 INSERT INTO `synth_recipes` VALUES (50003,0,0,0,0,0,0,0,3,0,0,4098,4240,888,888,0,0,0,0,0,0,13313,13314,13314,13314,1,1,1,1,'Shell Earring');
