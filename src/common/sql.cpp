@@ -19,10 +19,11 @@
 ===========================================================================
 */
 
-#include "../common/logging.h"
-#include "../common/taskmgr.h"
-#include "../common/timer.h"
-#include "../common/tracy.h"
+#include "logging.h"
+#include "taskmgr.h"
+#include "timer.h"
+#include "tracy.h"
+#include "xirand.h"
 
 #include "sql.h"
 
@@ -244,8 +245,10 @@ int32 Sql_Keepalive(Sql_t* self, std::string const& keepaliveTaskName)
         timeout = 60;
     }
 
+    auto randomOffset = xirand::GetRandomNumber(0, 10);
+
     // establish keepalive
-    ping_interval = timeout - 30; // 30-second reserve
+    ping_interval = timeout + randomOffset - 30; // 30-second reserve
     CTaskMgr::getInstance()->AddTask(keepaliveTaskName, server_clock::now() + std::chrono::seconds(ping_interval), self, CTaskMgr::TASK_INTERVAL,
                                      Sql_P_KeepaliveTimer, std::chrono::seconds(ping_interval));
     return 0;
