@@ -282,7 +282,7 @@ void message_server_init()
         exit(EXIT_FAILURE);
     }
 
-    Sql_Keepalive(ChatSqlHandle);
+    Sql_Keepalive(ChatSqlHandle, "MessageKeepalive");
 
     zContext = zmq::context_t(1);
     zSocket  = new zmq::socket_t(zContext, ZMQ_ROUTER);
