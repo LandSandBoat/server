@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -58,6 +58,7 @@
 #include "../ai/states/weaponskill_state.h"
 #include "../alliance.h"
 #include "../battlefield.h"
+#include "../campaign_system.h"
 #include "../conquest_system.h"
 #include "../daily_system.h"
 #include "../entities/automatonentity.h"
@@ -84,6 +85,7 @@
 #include "../utils/charutils.h"
 #include "../utils/instanceutils.h"
 #include "../utils/itemutils.h"
+#include "../utils/moduleutils.h"
 #include "../utils/zoneutils.h"
 #include "../vana_time.h"
 #include "../weapon_skill.h"
@@ -241,6 +243,8 @@ namespace luautils
 
         // Handle settings
         contentRestrictionEnabled = GetSettingsVariable("RESTRICT_CONTENT") != 0;
+
+        moduleutils::LoadLuaModules();
 
         TracyReportLuaMemory(lua.lua_state());
 
@@ -4457,6 +4461,26 @@ namespace luautils
         return nearPos;
     }
 
+    void OnPlayerDeath(CCharEntity* PChar)
+    {
+        TracyZoneScoped;
+
+        auto onPlayerDeath = lua["xi"]["player"]["onPlayerDeath"];
+        if (!onPlayerDeath.valid())
+        {
+            ShowWarning("luautils::onPlayerDeath");
+            return;
+        }
+
+        auto result = onPlayerDeath(CLuaBaseEntity(PChar));
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("luautils::onPlayerDeath: %s", err.what());
+            return;
+        }
+    }
+
     void OnPlayerLevelUp(CCharEntity* PChar)
     {
         TracyZoneScoped;
@@ -4493,6 +4517,46 @@ namespace luautils
         {
             sol::error err = result;
             ShowError("luautils::onPlayerLevelDown: %s", err.what());
+            return;
+        }
+    }
+
+    void OnPlayerEmote(CCharEntity* PChar, Emote EmoteID)
+    {
+        TracyZoneScoped;
+
+        auto onPlayerEmote = lua["xi"]["player"]["onPlayerEmote"];
+        if (!onPlayerEmote.valid())
+        {
+            ShowWarning("luautils::onPlayerEmote");
+            return;
+        }
+
+        auto result = onPlayerEmote(CLuaBaseEntity(PChar), static_cast<uint8>(EmoteID));
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("luautils::onPlayerEmote: %s", err.what());
+            return;
+        }
+    }
+
+    void OnPlayerVolunteer(CCharEntity* PChar, std::string text)
+    {
+        TracyZoneScoped;
+
+        auto onPlayerVolunteer = lua["xi"]["player"]["onPlayerVolunteer"];
+        if (!onPlayerVolunteer.valid())
+        {
+            ShowWarning("luautils::onPlayerVolunteer");
+            return;
+        }
+
+        auto result = onPlayerVolunteer(CLuaBaseEntity(PChar), text);
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("luautils::onPlayerVolunteer: %s", err.what());
             return;
         }
     }
@@ -4634,45 +4698,4 @@ namespace luautils
         CCharEntity* player = dynamic_cast<CCharEntity*>(PLuaBaseEntity->GetBaseEntity());
         return daily::SelectItem(player, dial);
     }
-
-    void OnPlayerEmote(CCharEntity* PChar, Emote EmoteID)
-    {
-        TracyZoneScoped;
-
-        auto onPlayerEmote = lua["xi"]["player"]["onPlayerEmote"];
-        if (!onPlayerEmote.valid())
-        {
-            ShowWarning("luautils::onPlayerEmote");
-            return;
-        }
-
-        auto result = onPlayerEmote(CLuaBaseEntity(PChar), static_cast<uint8>(EmoteID));
-        if (!result.valid())
-        {
-            sol::error err = result;
-            ShowError("luautils::onPlayerEmote: %s", err.what());
-            return;
-        }
-    }
-
-    void OnPlayerVolunteer(CCharEntity* PChar, std::string text)
-    {
-        TracyZoneScoped;
-
-        auto onPlayerVolunteer = lua["xi"]["player"]["onPlayerVolunteer"];
-        if (!onPlayerVolunteer.valid())
-        {
-            ShowWarning("luautils::onPlayerVolunteer");
-            return;
-        }
-
-        auto result = onPlayerVolunteer(CLuaBaseEntity(PChar), text);
-        if (!result.valid())
-        {
-            sol::error err = result;
-            ShowError("luautils::onPlayerVolunteer: %s", err.what());
-            return;
-        }
-    }
-
 }; // namespace luautils
