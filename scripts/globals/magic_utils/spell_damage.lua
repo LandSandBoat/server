@@ -219,7 +219,7 @@ xi.magic_utils.spell_damage.calculateSDT = function(caster, target, spell, spell
     -- A value of 5000 -> 50% LESS damage taken.
     -- A value of -5000 -> 50% MORE damage taken.
 
-        SDT = (SDTMod / -100) + 1
+        SDT = (SDTMod / -10000) + 1
     end
 
     -- A word on SDT as understood in some wikis, even if they are refering to resistance and not actual SDT
@@ -342,16 +342,20 @@ xi.magic_utils.spell_damage.calculateResist = function(caster, target, spell, sk
         end
         -- RDM Job Point: Magic Accuracy Bonus, All MACC + 1
         magicAcc = magicAcc + caster:getJobPointLevel(xi.jp.RDM_MAGIC_ACC_BONUS)
-    -- NIN Job Points: Ninjutsu Accuracy Bonus
-    elseif casterJob == xi.job.NIN and skillType == xi.skill.NINJUTSU then
-        magicAcc = magicAcc + caster:getJobPointLevel(xi.jp.NINJITSU_ACC_BONUS)
+    -- NIN Job Points
+    elseif casterJob == xi.job.NIN then
+        -- NIN Job Points: Ninjutsu Accuracy Bonus
+        if skillType == xi.skill.NINJUTSU then
+            magicAcc = magicAcc + caster:getJobPointLevel(xi.jp.NINJITSU_ACC_BONUS)
+        end
     -- SCH Job Points
-    elseif
-        casterJob == xi.job.SCH and
-        (spellGroup == xi.magic.spellGroup.WHITE and caster:hasStatusEffect(xi.effect.PARSIMONY)) or
-        (spellGroup == xi.magic.spellGroup.BLACK and caster:hasStatusEffect(xi.effect.PENURY))
-    then
-        magicAcc = magicAcc + caster:getJobPointLevel(xi.jp.STRATEGEM_EFFECT_I)
+    elseif casterJob == xi.job.SCH then
+        if
+            (spellGroup == xi.magic.spellGroup.WHITE and caster:hasStatusEffect(xi.effect.PARSIMONY)) or
+            (spellGroup == xi.magic.spellGroup.BLACK and caster:hasStatusEffect(xi.effect.PENURY))
+        then
+            magicAcc = magicAcc + caster:getJobPointLevel(xi.jp.STRATEGEM_EFFECT_I)
+        end
     end
 
     -----------------------------------
