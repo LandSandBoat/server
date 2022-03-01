@@ -51,25 +51,25 @@ local function enforceRuneCounts(target)
 end
 
 --source https://www.bluegartr.com/threads/124844-Vivacious-Pulse-testing?p=6038534&viewfull=1#post6038534 and following posts
-local function getRuneHealAmount(effect, target)
+local function getRuneHealAmount(type, target)
 
-    if effect == xi.effect.TENEBRAE then -- Tenebrae primarily restores MP, but also uses the base divine skill/2 bonus but no raw stat bonus.
-        return 0
-    end
+    if type >= xi.effect.IGNIS and type <= xi.effect.TENEBRAE then
 
-    local runeStatMap = {
-                            [xi.effect.IGNIS]  = xi.mod.STR,
-                            [xi.effect.GELUS]  = xi.mod.DEX,
-                            [xi.effect.FLABRA] = xi.mod.VIT,
-                            [xi.effect.TELLUS] = xi.mod.AGI,
-                            [xi.effect.SULPOR] = xi.mod.INT,
-                            [xi.effect.UNDA]   = xi.mod.MND,
-                            [xi.effect.LUX]    = xi.mod.CHR,
-                        }
+        if type == xi.effect.TENEBRAE then -- Tenebrae primarily restores MP, but also uses the base divine skill/2 bonus but no raw stat bonus.
+            return 0
+        end
 
-    local stat = runeStatMap[effect:getType()]
-    if stat ~= nil then
-        return math.floor(target:getStat(stat) * 0.5)
+        local runeStatMap =
+        {
+            [xi.effect.IGNIS]  = xi.mod.STR,
+            [xi.effect.GELUS]  = xi.mod.DEX,
+            [xi.effect.FLABRA] = xi.mod.VIT,
+            [xi.effect.TELLUS] = xi.mod.AGI,
+            [xi.effect.SULPOR] = xi.mod.INT,
+            [xi.effect.UNDA]   = xi.mod.MND,
+            [xi.effect.LUX]    = xi.mod.CHR,
+        }
+        return math.floor(target:getStat(runeStatMap[type]) * 0.5)
     end
 
     return 0
@@ -86,19 +86,30 @@ local function calculateVivaciousPulseHealing(target)
     local debuffs = {}
     local debuffCount = 0
 
+    local removableDebuffMap = -- map of debuffs that can be removed by AF3 head augment
+    {
+        [xi.effect.POISON]        = true,
+        [xi.effect.PARALYSIS]     = true,
+        [xi.effect.BLINDNESS]     = true,
+        [xi.effect.SILENCE]       = true,
+        [xi.effect.MUTE]          = true,
+        [xi.effect.CURSE_I]       = true,
+        [xi.effect.CURSE_II]      = true,
+        [xi.effect.DOOM]          = true,
+        [xi.effect.PLAGUE]        = true,
+        [xi.effect.DISEASE]       = true,
+        [xi.effect.PETRIFICATION] = true,
+    }
+
     local effects = target:getStatusEffects()
     for _, effect in ipairs(effects) do
         local type = effect:getType()
-        if type >= xi.effect.IGNIS and type <= xi.effect.TENEBRAE then
-            HPHealAmount = HPHealAmount + getRuneHealAmount(effect, target)
-        elseif
-            type == xi.effect.POISON or type == xi.effect.PARALYSIS or
-            type == xi.effect.BLINDNESS or type == xi.effect.SILENCE or type == xi.effect.MUTE or type == xi.effect.CURSE_I or
-            type == xi.effect.CURSE_II or type == xi.effect.DOOM or type == xi.effect.VIRUS or
-            type == xi.effect.PLAGUE or type == xi.effect.PETRIFICATION
-        then
+
+        HPHealAmount = HPHealAmount + getRuneHealAmount(type, target) -- type checked internally
+
+        if removableDebuffMap[type] ~= nil then -- effect in debuff table, count it as a debuff.
             debuffs[debuffCount+1] = type
-        debuffCount = debuffCount + 1
+            debuffCount = debuffCount + 1
         end
 
         if type == xi.effect.TENEBRAE then -- runes that also restore MP
@@ -116,7 +127,7 @@ local function calculateVivaciousPulseHealing(target)
     end
 
     HPHealAmount = HPHealAmount * bonusPct
-    if (target:getHP() + HPHealAmount > target:getMaxHP()) then
+    if target:getHP() + HPHealAmount > target:getMaxHP() then
         HPHealAmount = target:getMaxHP() - target:getHP() -- don't go over cap
     end
 
