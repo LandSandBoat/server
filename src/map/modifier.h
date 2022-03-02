@@ -582,8 +582,24 @@ enum class Mod
     CONSERVE_TP = 944, // Conserve TP trait, random chance between 10 and 200 TP
 
     // Rune Fencer
-
-    INQUARTATA = 963, // increases parry rate by a flat %.
+    INQUARTATA                  = 963,  // Increases parry rate by a flat %.
+    ENHANCES_BATTUTA            = 1004, //
+    ENHANCES_ELEMENTAL_SFORZO   = 1005, //
+    ENHANCES_SLEIGHT_OF_SWORD   = 1006, //
+    ENHANCES_INSPIRATION        = 1007, //
+    SWORDPLAY                   = 1008, //
+    LIEMENT                     = 1009, //
+    VALIANCE_VALLATION_DURATION = 1010, //
+    PFLUG                       = 1011, //
+    VIVACIOUS_PULSE_POTENCY     = 1012, //
+    AUGMENTS_VIVACIOUS_PULSE    = 1013, //
+    RAYKE_DURATION              = 1014, //
+    ODYLLIC_SUBTERFUGE_DURATION = 1015, //
+    SWIPE                       = 1016, //
+    LIEMENT_DURATION            = 1017, //
+    GAMBIT_DURATION             = 1018, //
+    EMBOLDEN_DURATION           = 1019, //
+    LIEMENT_EXTENDS_TO_AREA     = 1020, //
 
     // Stores the amount of elemental affinity (elemental staves mostly) - damage, acc, and perpetuation is all handled separately
     FIRE_AFFINITY_DMG    = 347, // They're stored separately due to Magian stuff - they can grant different levels of
@@ -840,7 +856,7 @@ enum class Mod
 
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.
-    // SPARE = 1004,
+    // SPARE = 1021,
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it
