@@ -33,11 +33,11 @@
 #include <cstring>
 
 /************************************************************************
- *																		*
- *  Column length receiver.												*
- *  Takes care of the possible size missmatch between uint32 and			*
- *  unsigned long.				  										*
- *																		*
+ *                                                                        *
+ *  Column length receiver.                                               *
+ *  Takes care of the possible size missmatch between uint32 and          *
+ *  unsigned long.                                                        *
+ *                                                                        *
  ************************************************************************/
 
 struct s_column_length
@@ -47,24 +47,24 @@ struct s_column_length
 };
 
 /************************************************************************
- *																		*
- *  Allocates and initializes a new Sql handle.							*
- *																		*
+ *                                                                        *
+ *  Allocates and initializes a new Sql handle.                           *
+ *                                                                        *
  ************************************************************************/
 
 Sql_t* Sql_Malloc()
 {
     Sql_t* self = new Sql_t{};
     mysql_init(&self->handle);
-    self->lengths   = nullptr;
-    self->result    = nullptr;
+    self->lengths = nullptr;
+    self->result  = nullptr;
     return self;
 }
 
 /************************************************************************
- *																		*
- *  Establishes a connection.											*
- *																		*
+ *                                                                        *
+ *  Establishes a connection.                                             *
+ *                                                                        *
  ************************************************************************/
 
 int32 Sql_Connect(Sql_t* self, const char* user, const char* passwd, const char* host, uint16 port, const char* db)
@@ -88,9 +88,9 @@ int32 Sql_Connect(Sql_t* self, const char* user, const char* passwd, const char*
 }
 
 /************************************************************************
- *																		*
- *  Retrieves the timeout of the connection.								*
- *																		*
+ *                                                                        *
+ *  Retrieves the timeout of the connection.                              *
+ *                                                                        *
  ************************************************************************/
 
 int32 Sql_GetTimeout(Sql_t* self, uint32* out_timeout)
@@ -111,10 +111,10 @@ int32 Sql_GetTimeout(Sql_t* self, uint32* out_timeout)
 }
 
 /************************************************************************
- *																		*
- *  Retrieves the name of the columns of a table into out_buf, with		*
- *  the separator after each name.										*
- *																		*
+ *                                                                        *
+ *  Retrieves the name of the columns of a table into out_buf, with       *
+ *  the separator after each name.                                        *
+ *                                                                        *
  ************************************************************************/
 
 int32 Sql_GetColumnNames(Sql_t* self, const char* table, char* out_buf, size_t buf_len, char sep)
@@ -148,9 +148,9 @@ int32 Sql_GetColumnNames(Sql_t* self, const char* table, char* out_buf, size_t b
 }
 
 /************************************************************************
- *																		*
- *  Changes the encoding of the connection.								*
- *																		*
+ *                                                                        *
+ *  Changes the encoding of the connection.                               *
+ *                                                                        *
  ************************************************************************/
 
 int32 Sql_SetEncoding(Sql_t* self, const char* encoding)
@@ -163,9 +163,9 @@ int32 Sql_SetEncoding(Sql_t* self, const char* encoding)
 }
 
 /************************************************************************
- *																		*
- *  Pings the connection.												*
- *																		*
+ *                                                                        *
+ *  Pings the connection.                                                 *
+ *                                                                        *
  ************************************************************************/
 
 int32 Sql_Ping(Sql_t* self)
@@ -198,17 +198,16 @@ int32 Sql_Ping(Sql_t* self)
 }
 
 /************************************************************************
- *																		*
- *  Wrapper function for Sql_Ping.										*
- *																		*
+ *                                                                        *
+ *  Wrapper function for Sql_Ping.                                        *
+ *                                                                        *
  ************************************************************************/
 
 static int32 Sql_P_KeepaliveTimer(time_point tick, CTaskMgr::CTask* PTask)
 {
-    ShowInfo("Pinging SQL server to keep connection alive...");
-
     if (Sql_t* self = std::any_cast<Sql_t*>(PTask->m_data); self != nullptr)
     {
+        ShowInfo("(%s) Pinging SQL server to keep connection alive...", self->keepaliveTaskName);
         std::ignore = Sql_Ping(self);
     }
     else
@@ -220,9 +219,9 @@ static int32 Sql_P_KeepaliveTimer(time_point tick, CTaskMgr::CTask* PTask)
 }
 
 /************************************************************************
- *																		*
- *  Establishes keepalive (periodic ping) on the connection				*
- *																		*
+ *                                                                        *
+ *  Establishes keepalive (periodic ping) on the connection               *
+ *                                                                        *
  ************************************************************************/
 
 /// @return the keepalive timer id, or INVALID_TIMER
@@ -245,19 +244,26 @@ int32 Sql_Keepalive(Sql_t* self, std::string const& keepaliveTaskName)
         timeout = 60;
     }
 
-    auto randomOffset = xirand::GetRandomNumber(0, 10);
+    // Every time we add a keepalive, add a small offset to make
+    // sure they aren't all firing back-to-back
+    static uint8 offset = 0;
+    offset += 2;
+
+    // 30-second reserve
+    uint8 reserve = 30;
 
     // establish keepalive
-    ping_interval = timeout + randomOffset - 30; // 30-second reserve
+    ping_interval = timeout + offset - reserve;
+    ShowInfo("Adding Keepalive task (%s) for every %i seconds", keepaliveTaskName, ping_interval);
     CTaskMgr::getInstance()->AddTask(keepaliveTaskName, server_clock::now() + std::chrono::seconds(ping_interval), self, CTaskMgr::TASK_INTERVAL,
                                      Sql_P_KeepaliveTimer, std::chrono::seconds(ping_interval));
     return 0;
 }
 
 /************************************************************************
- *																		*
- *  Escapes a string.													*
- *																		*
+ *                                                                        *
+ *  Escapes a string.                                                     *
+ *                                                                        *
  ************************************************************************/
 
 size_t Sql_EscapeStringLen(Sql_t* self, char* out_to, const char* from, size_t from_len)
@@ -272,9 +278,9 @@ size_t Sql_EscapeStringLen(Sql_t* self, char* out_to, const char* from, size_t f
 }
 
 /************************************************************************
- *																		*
- *  Escapes a string.													*
- *																		*
+ *                                                                        *
+ *  Escapes a string.                                                     *
+ *                                                                        *
  ************************************************************************/
 
 size_t Sql_EscapeString(Sql_t* self, char* out_to, const char* from)
@@ -283,9 +289,9 @@ size_t Sql_EscapeString(Sql_t* self, char* out_to, const char* from)
 }
 
 /************************************************************************
- *																		*
- *  Executes a query.													*
- *																		*
+ *                                                                        *
+ *  Executes a query.                                                     *
+ *                                                                        *
  ************************************************************************/
 
 int32 Sql_QueryStr(Sql_t* self, const char* query)
@@ -316,9 +322,9 @@ int32 Sql_QueryStr(Sql_t* self, const char* query)
 }
 
 /************************************************************************
- *																		*
- *				  														*
- *																		*
+ *                                                                        *
+ *                                                                        *
+ *                                                                        *
  ************************************************************************/
 
 uint64 Sql_AffectedRows(Sql_t* self)
@@ -331,10 +337,10 @@ uint64 Sql_AffectedRows(Sql_t* self)
 }
 
 /************************************************************************
- *																		*
- *  Returns the number of the AUTO_INCREMENT column of the last			*
- *  INSERT/UPDATE query.				  									*
- *																		*
+ *                                                                        *
+ *  Returns the number of the AUTO_INCREMENT column of the last           *
+ *  INSERT/UPDATE query.                                                  *
+ *                                                                        *
  ************************************************************************/
 
 uint64 Sql_LastInsertId(Sql_t* self)
@@ -347,9 +353,9 @@ uint64 Sql_LastInsertId(Sql_t* self)
 }
 
 /************************************************************************
- *																		*
- *  Returns the number of columns in each row of the result.				*
- *																		*
+ *                                                                        *
+ *  Returns the number of columns in each row of the result.              *
+ *                                                                        *
  ************************************************************************/
 
 uint32 Sql_NumColumns(Sql_t* self)
@@ -362,9 +368,9 @@ uint32 Sql_NumColumns(Sql_t* self)
 }
 
 /************************************************************************
- *																		*
- *  Returns the number of rows in the result.							*
- *																		*
+ *                                                                        *
+ *  Returns the number of rows in the result.                             *
+ *                                                                        *
  ************************************************************************/
 
 uint64 Sql_NumRows(Sql_t* self)
@@ -377,9 +383,9 @@ uint64 Sql_NumRows(Sql_t* self)
 }
 
 /************************************************************************
- *																		*
- *  Fetches the next row.												*
- *																		*
+ *                                                                        *
+ *  Fetches the next row.                                                 *
+ *                                                                        *
  ************************************************************************/
 
 int32 Sql_NextRow(Sql_t* self)
@@ -403,9 +409,9 @@ int32 Sql_NextRow(Sql_t* self)
 }
 
 /************************************************************************
- *																		*
- *  Gets the data of a column.											*
- *																		*
+ *                                                                        *
+ *  Gets the data of a column.                                            *
+ *                                                                        *
  ************************************************************************/
 
 int32 Sql_GetData(Sql_t* self, size_t col, char** out_buf, size_t* out_len)
@@ -441,9 +447,9 @@ int32 Sql_GetData(Sql_t* self, size_t col, char** out_buf, size_t* out_len)
 }
 
 /************************************************************************
- *																		*
- *				  														*
- *																		*
+ *                                                                        *
+ *                                                                        *
+ *                                                                        *
  ************************************************************************/
 
 int8* Sql_GetData(Sql_t* self, size_t col)
@@ -460,9 +466,9 @@ int8* Sql_GetData(Sql_t* self, size_t col)
 }
 
 /************************************************************************
- *																		*
- *				  														*
- *																		*
+ *                                                                        *
+ *                                                                        *
+ *                                                                        *
  ************************************************************************/
 
 int32 Sql_GetIntData(Sql_t* self, size_t col)
@@ -479,9 +485,9 @@ int32 Sql_GetIntData(Sql_t* self, size_t col)
 }
 
 /************************************************************************
- *																		*
- *				  														*
- *																		*
+ *                                                                        *
+ *                                                                        *
+ *                                                                        *
  ************************************************************************/
 
 uint32 Sql_GetUIntData(Sql_t* self, size_t col)
@@ -498,9 +504,9 @@ uint32 Sql_GetUIntData(Sql_t* self, size_t col)
 }
 
 /************************************************************************
- *																		*
- *				  														*
- *																		*
+ *                                                                        *
+ *                                                                        *
+ *                                                                        *
  ************************************************************************/
 
 float Sql_GetFloatData(Sql_t* self, size_t col)
@@ -517,9 +523,9 @@ float Sql_GetFloatData(Sql_t* self, size_t col)
 }
 
 /************************************************************************
- *																		*
- *  Frees the result of the query.										*
- *																		*
+ *                                                                        *
+ *  Frees the result of the query.                                        *
+ *                                                                        *
  ************************************************************************/
 
 void Sql_FreeResult(Sql_t* self)
@@ -534,27 +540,9 @@ void Sql_FreeResult(Sql_t* self)
 }
 
 /************************************************************************
- *																		*
- *  Shows debug information (last query).								*
- *																		*
- ************************************************************************/
-
-void Sql_ShowDebug_(Sql_t* self, const char* debug_file, const unsigned long debug_line)
-{
-    if (self->buf.length() > 0)
-    {
-        ShowDebug("at %s:%lu - %s", debug_file, debug_line, self->buf.c_str());
-    }
-    else
-    {
-        ShowDebug("at %s:%lu", debug_file, debug_line);
-    }
-}
-
-/************************************************************************
- *																		*
- *  Frees a Sql handle returned by Sql_Malloc.							*
- *																		*
+ *                                                                        *
+ *  Frees a Sql handle returned by Sql_Malloc.                            *
+ *                                                                        *
  ************************************************************************/
 
 void Sql_Free(Sql_t* self)
@@ -571,6 +559,12 @@ void Sql_Free(Sql_t* self)
     }
 }
 
+/************************************************************************
+ *                                                                        *
+ *                                                                        *
+ *                                                                        *
+ ************************************************************************/
+
 bool Sql_SetAutoCommit(Sql_t* self, bool value)
 {
     uint8 val = (value) ? 1 : 0;
@@ -584,6 +578,12 @@ bool Sql_SetAutoCommit(Sql_t* self, bool value)
     ShowFatalError("Sql_SetAutoCommit: SQL_ERROR");
     return false;
 }
+
+/************************************************************************
+ *                                                                        *
+ *                                                                        *
+ *                                                                        *
+ ************************************************************************/
 
 bool Sql_GetAutoCommit(Sql_t* self)
 {
@@ -601,6 +601,12 @@ bool Sql_GetAutoCommit(Sql_t* self)
     return false;
 }
 
+/************************************************************************
+ *                                                                        *
+ *                                                                        *
+ *                                                                        *
+ ************************************************************************/
+
 bool Sql_TransactionStart(Sql_t* self)
 {
     if (self && Sql_Query(self, "START TRANSACTION;") != SQL_ERROR)
@@ -612,6 +618,12 @@ bool Sql_TransactionStart(Sql_t* self)
     return false;
 }
 
+/************************************************************************
+ *                                                                        *
+ *                                                                        *
+ *                                                                        *
+ ************************************************************************/
+
 bool Sql_TransactionCommit(Sql_t* self)
 {
     if (self && mysql_commit(&self->handle) == 0)
@@ -622,6 +634,12 @@ bool Sql_TransactionCommit(Sql_t* self)
     ShowFatalError("Sql_TransactionCommit: SQL_ERROR");
     return false;
 }
+
+/************************************************************************
+ *                                                                        *
+ *                                                                        *
+ *                                                                        *
+ ************************************************************************/
 
 bool Sql_TransactionRollback(Sql_t* self)
 {

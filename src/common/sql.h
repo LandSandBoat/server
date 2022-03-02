@@ -58,7 +58,7 @@ enum SqlDataType
 
 struct Sql_t
 {
-    std::string    buf;
+    std::string buf;
 
     // NOTE: Access to any of the MySQL resources is NOT thread-safe.
     // You will encounter very difficult to debug crashes and failed
@@ -165,15 +165,6 @@ float  Sql_GetFloatData(Sql_t* self, size_t col);
 
 /// Frees the result of the query.
 void Sql_FreeResult(Sql_t* self);
-
-#if defined(SQL_REMOVE_SHOWDEBUG)
-#define Sql_ShowDebug(self) (void)0
-#else
-#define Sql_ShowDebug(self) Sql_ShowDebug_(self, __FILE__, __LINE__)
-#endif
-
-/// Shows debug information (last query).
-void Sql_ShowDebug_(Sql_t* self, const char* debug_file, const unsigned long debug_line);
 
 /// Frees a Sql handle returned by Sql_Malloc.
 void Sql_Free(Sql_t* self);
