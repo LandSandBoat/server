@@ -25,7 +25,7 @@ spell_object.onMobSpawn = function(mob)
 
     -- Notable: Uses a balance of melee and ranged attacks.
     -- TODO: Observe his WS behaviour on retail
---    mob:setTrustTPSkillSettings(ai.tp.CLOSER, ai.s.RANDOM)
+    mob:setTrustTPSkillSettings(ai.tp.ASAP, ai.s.RANDOM)
 
 end
 
