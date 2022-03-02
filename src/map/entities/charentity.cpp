@@ -234,7 +234,7 @@ CCharEntity::CCharEntity()
 
     m_Substate = CHAR_SUBSTATE::SUBSTATE_NONE;
 
-    m_TimeLastMemberJoined = server_clock::now() - std::chrono::seconds(120); // default time
+    m_LeaderCreatedPartyTime = server_clock::now() - std::chrono::seconds(120); // default time
 
     PAI = std::make_unique<CAIContainer>(this, nullptr, std::make_unique<CPlayerController>(this), std::make_unique<CTargetFind>(this));
 }
