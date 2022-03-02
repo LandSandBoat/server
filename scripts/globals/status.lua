@@ -943,7 +943,6 @@ xi.mod =
     ACC                             = 25,
     RACC                            = 26,
     ENMITY                          = 27,
-    ENMITY_LOSS_REDUCTION           = 427,
     MATT                            = 28,
     MDEF                            = 29,
     MACC                            = 30,
@@ -969,6 +968,9 @@ xi.mod =
     PIERCE_SDT                      = 50,
     IMPACT_SDT                      = 51,
     HTH_SDT                         = 52,
+
+    -- SPARE ID 53
+
     FIRE_SDT                        = 54,
     ICE_SDT                         = 55,
     WIND_SDT                        = 56,
@@ -982,12 +984,16 @@ xi.mod =
     COMBAT_SKILLUP_RATE             = 64, -- % increase in skillup combat rate
     MAGIC_SKILLUP_RATE              = 65, -- % increase in skillup magic rate
     RATTP                           = 66,
+    ENHANCES_CURSNA_RCVD            = 67,  -- Potency of "Cursna" effects received
     EVA                             = 68,
     RDEF                            = 69,
     REVA                            = 70,
     MPHEAL                          = 71,
     HPHEAL                          = 72,
     STORETP                         = 73,
+
+    -- SPARE IDs 74 to 79
+
     HTH                             = 80,
     DAGGER                          = 81,
     SWORD                           = 82,
@@ -1005,10 +1011,10 @@ xi.mod =
     MEDITATE_DURATION               = 94,  -- Meditate duration in seconds
     WARDING_CIRCLE_DURATION         = 95,  -- Warding Circle duration in seconds
     SOULEATER_EFFECT                = 96,  -- Souleater power in percents
-    DESPERATE_BLOWS                 = 906, -- Adds ability haste to Last Resort
-    STALWART_SOUL                   = 907, -- Reduces damage taken from Souleater
     BOOST_EFFECT                    = 97,  -- Boost power in tenths
     CAMOUFLAGE_DURATION             = 98,  -- Camouflage duration in percents
+    FOOD_MACCP                      = 99,
+    FOOD_MACC_CAP                   = 100,
     AUTO_MELEE_SKILL                = 101,
     AUTO_RANGED_SKILL               = 102,
     AUTO_MAGIC_SKILL                = 103,
@@ -1046,6 +1052,9 @@ xi.mod =
     COOK                            = 135,
     SYNERGY                         = 136,
     RIDING                          = 137,
+
+    -- SPARE IDs 138 to 143
+
     ANTIHQ_WOOD                     = 144,
     ANTIHQ_SMITH                    = 145,
     ANTIHQ_GOLDSMITH                = 146,
@@ -1054,39 +1063,25 @@ xi.mod =
     ANTIHQ_BONE                     = 149,
     ANTIHQ_ALCHEMY                  = 150,
     ANTIHQ_COOK                     = 151,
+
+    -- SPARE IDs 152 to 159
+
     DMG                             = 160, -- All damage modifiers are base 10000, so 375 = 3.75% YES WE KNOW retail is using base 256.
     DMGPHYS                         = 161, -- We're using a % with extra decimal places. We don't need you to do converting in script.
-    DMGPHYS_II                      = 190, -- Physical Damage Taken II % (Burtgang)
     DMGBREATH                       = 162,
     DMGMAGIC                        = 163,
-    DMGMAGIC_II                     = 831, -- Magic Damage Taken II % (Aegis)
     DMGRANGE                        = 164,
-    UDMGPHYS                        = 387,
-    UDMGBREATH                      = 388,
-    UDMGMAGIC                       = 389,
-    UDMGRANGE                       = 390,
     CRITHITRATE                     = 165,
-    CRIT_DMG_INCREASE               = 421,
-    RANGED_CRIT_DMG_INCREASE        = 964, -- Increases ranged critical damage by a percent
     ENEMYCRITRATE                   = 166,
-    CRIT_DEF_BONUS                  = 908, -- Reduces crit hit damage
-    MAGIC_CRITHITRATE               = 562,
-    MAGIC_CRIT_DMG_INCREASE         = 563,
     HASTE_MAGIC                     = 167,
     SPELLINTERRUPT                  = 168,
     MOVE                            = 169, -- % Movement Speed
-    MOUNT_MOVE                      = 972, -- % Mount Movement Speed
     FASTCAST                        = 170,
-    UFASTCAST                       = 407,
-    CURE_CAST_TIME                  = 519,
-    ELEMENTAL_CELERITY              = 901, -- Quickens Elemental Magic Casting
     DELAY                           = 171,
     RANGED_DELAY                    = 172,
     MARTIAL_ARTS                    = 173,
     SKILLCHAINBONUS                 = 174,
     SKILLCHAINDMG                   = 175,
-    MAX_SWINGS                      = 978,
-    ADDITIONAL_SWING_CHANCE         = 979,
     FOOD_HPP                        = 176,
     FOOD_HP_CAP                     = 177,
     FOOD_MPP                        = 178,
@@ -1101,9 +1096,11 @@ xi.mod =
     FOOD_RATT_CAP                   = 187,
     FOOD_RACCP                      = 188,
     FOOD_RACC_CAP                   = 189,
-    FOOD_MACCP                      =  99,
-    FOOD_MACC_CAP                   = 100,
-    FOOD_DURATION                   = 937, -- Percentage to increase food duration
+    DMGPHYS_II                      = 190, -- Physical Damage Taken II % (Burtgang)
+    QUICK_DRAW_MACC                 = 191, -- Quick draw magic accuracy
+
+    -- SPARE IDs 192 to 223
+
     VERMIN_KILLER                   = 224,
     BIRD_KILLER                     = 225,
     AMORPH_KILLER                   = 226,
@@ -1119,6 +1116,9 @@ xi.mod =
     HUMANOID_KILLER                 = 236,
     LUMORIAN_KILLER                 = 237,
     LUMINION_KILLER                 = 238,
+
+    -- SPARE ID 239
+
     SLEEPRES                        = 240,
     POISONRES                       = 241,
     PARALYZERES                     = 242,
@@ -1135,14 +1135,16 @@ xi.mod =
     AMNESIARES                      = 253,
     LULLABYRES                      = 254,
     DEATHRES                        = 255,
-    STATUSRES                       = 958, -- "Resistance to All Status Ailments"
     AFTERMATH                       = 256,
     PARALYZE                        = 257,
     MIJIN_RERAISE                   = 258,
     DUAL_WIELD                      = 259,
+    CURE_POTENCY_II                 = 260, -- % cure potency II | bonus from gear is capped at 30
+
+    -- SPARE IDs 261 to 287
+
     DOUBLE_ATTACK                   = 288,
     SUBTLE_BLOW                     = 289,
-    SUBTLE_BLOW_II                  = 973, -- Subtle Blow II Effect (Cap 50%) Total Effect (SB + SB_II cap 75%)
     ENF_MAG_POTENCY                 = 290, -- Increases Enfeebling magic potency %
     COUNTER                         = 291,
     KICK_ATTACK_RATE                = 292,
@@ -1152,8 +1154,6 @@ xi.mod =
     CONSERVE_MP                     = 296,
     ENHANCES_SABOTEUR               = 297, -- Increases Saboteur Potency %
     STEAL                           = 298,
-    DESPOIL                         = 896,
-    PERFECT_DODGE                   = 883, -- Increases Perfect Dodge duration in seconds
     BLINK                           = 299,
     STONESKIN                       = 300,
     PHALANX                         = 301,
@@ -1163,10 +1163,14 @@ xi.mod =
     RECYCLE                         = 305,
     ZANSHIN                         = 306,
     UTSUSEMI                        = 307,
-    UTSUSEMI_BONUS                  = 900, -- Extra shadows from gear
     NINJA_TOOL                      = 308,
     BLUE_POINTS                     = 309, -- Tracks extra blue points
-    BLUE_LEARN_CHANCE               = 945, -- Additional chance to learn blue magic
+    ENHANCES_CURSNA                 = 310, -- Raises success rate of Cursna when removing effect (like Doom) that are not 100% chance to remove
+    MAGIC_DAMAGE                    = 311, --  Magic damage added directly to the spell's base damage
+    SCAVENGE_EFFECT                 = 312, --
+    DIA_DOT                         = 313, -- Increases the DoT damage of Dia
+    SHARPSHOT                       = 314, -- Sharpshot accuracy bonus
+    ENH_DRAIN_ASPIR                 = 315, -- % damage boost to Drain and Aspir
     DMG_REFLECT                     = 316,
     ROLL_ROGUES                     = 317,
     ROLL_GALLANTS                   = 318,
@@ -1183,58 +1187,21 @@ xi.mod =
     ROLL_PUPPET                     = 329,
     ROLL_DANCERS                    = 330,
     ROLL_SCHOLARS                   = 331,
-    -- Corsair Rolls Level 65+
-    ROLL_BOLTERS                    = 869,
-    ROLL_CASTERS                    = 870,
-    ROLL_COURSERS                   = 871,
-    ROLL_BLITZERS                   = 872,
-    ROLL_TACTICIANS                 = 873,
-    ROLL_ALLIES                     = 874,
-    ROLL_MISERS                     = 875,
-    ROLL_COMPANIONS                 = 876,
-    ROLL_AVENGERS                   = 877,
-    ROLL_NATURALISTS                = 878,
-    ROLL_RUNEISTS                   = 879,
     BUST                            = 332,
     FINISHING_MOVES                 = 333,
-    SAMBA_DURATION                  = 490, -- Samba duration bonus
-    WALTZ_POTENTCY                  = 491, -- Waltz Potentcy Bonus
-    JIG_DURATION                    = 492, -- Jig duration bonus in percents
-    VFLOURISH_MACC                  = 493, -- Violent Flourish accuracy bonus
-    STEP_FINISH                     = 494, -- Bonus finishing moves from steps
-    STEP_ACCURACY                   = 403, -- Accuracy bonus for steps
-    WALTZ_DELAY                     = 497, -- Waltz Ability Delay modifier (-1 mod is -1 second)
-    SAMBA_PDURATION                 = 498, -- Samba percent duration bonus
+    LIGHT_ARTS_EFFECT               = 334,
+    DARK_ARTS_EFFECT                = 335,
+    LIGHT_ARTS_SKILL                = 336,
+    DARK_ARTS_SKILL                 = 337,
+    LIGHT_ARTS_REGEN                = 338, -- Regen bonus HP from Light Arts and Tabula Rasa
+    REGEN_DURATION                  = 339,
     WIDESCAN                        = 340,
-    BARRAGE_ACC                     = 420,
     ENSPELL                         = 341,
     SPIKES                          = 342,
     ENSPELL_DMG                     = 343,
-    ENSPELL_CHANCE                  = 856,
     SPIKES_DMG                      = 344,
     TP_BONUS                        = 345,
     PERPETUATION_REDUCTION          = 346,
-
-    -- Rune Fencer
-    INQUARTATA                  = 963,  -- Increases parry rate by a flat %.
-    ENHANCES_BATTUTA            = 1004, --
-    ENHANCES_ELEMENTAL_SFORZO   = 1005, --
-    ENHANCES_SLEIGHT_OF_SWORD   = 1006, --
-    ENHANCES_INSPIRATION        = 1007, --
-    SWORDPLAY                   = 1008, --
-    LIEMENT                     = 1009, --
-    VALIANCE_VALLATION_DURATION = 1010, --
-    PFLUG                       = 1011, --
-    VIVACIOUS_PULSE_POTENCY     = 1012, --
-    AUGMENTS_VIVACIOUS_PULSE    = 1013, --
-    RAYKE_DURATION              = 1014, --
-    ODYLLIC_SUBTERFUGE_DURATION = 1015, --
-    SWIPE                       = 1016, --
-    LIEMENT_DURATION            = 1017, --
-    GAMBIT_DURATION             = 1018, --
-    EMBOLDEN_DURATION           = 1019, --
-    LIEMENT_EXTENDS_TO_AREA     = 1020, --
-
     FIRE_AFFINITY_DMG               = 347,
     ICE_AFFINITY_DMG                = 348,
     WIND_AFFINITY_DMG               = 349,
@@ -1243,25 +1210,6 @@ xi.mod =
     WATER_AFFINITY_DMG              = 352,
     LIGHT_AFFINITY_DMG              = 353,
     DARK_AFFINITY_DMG               = 354,
-
-    FIRE_AFFINITY_ACC               = 544,
-    ICE_AFFINITY_ACC                = 545,
-    WIND_AFFINITY_ACC               = 546,
-    EARTH_AFFINITY_ACC              = 547,
-    THUNDER_AFFINITY_ACC            = 548,
-    WATER_AFFINITY_ACC              = 549,
-    LIGHT_AFFINITY_ACC              = 550,
-    DARK_AFFINITY_ACC               = 551,
-
-    FIRE_AFFINITY_PERP              = 553,
-    ICE_AFFINITY_PERP               = 554,
-    WIND_AFFINITY_PERP              = 555,
-    EARTH_AFFINITY_PERP             = 556,
-    THUNDER_AFFINITY_PERP           = 557,
-    WATER_AFFINITY_PERP             = 558,
-    LIGHT_AFFINITY_PERP             = 559,
-    DARK_AFFINITY_PERP              = 560,
-
     ADDS_WEAPONSKILL                = 355,
     ADDS_WEAPONSKILL_DYN            = 356,
     BP_DELAY                        = 357,
@@ -1282,9 +1230,11 @@ xi.mod =
     WEATHER_REDUCTION               = 372,
     DAY_REDUCTION                   = 373,
     CURE_POTENCY                    = 374,
-    CURE_POTENCY_II                 = 260, -- % cure potency II | bonus from gear is capped at 30
     CURE_POTENCY_RCVD               = 375,
     RANGED_DMG_RATING               = 376,
+
+    -- SPARE IDs 377 to 379
+
     DELAYP                          = 380,
     RANGED_DELAYP                   = 381,
     EXP_BONUS                       = 382,
@@ -1292,6 +1242,10 @@ xi.mod =
     HASTE_GEAR                      = 384,
     SHIELD_BASH                     = 385,
     KICK_DMG                        = 386,
+    UDMGPHYS                        = 387,
+    UDMGBREATH                      = 388,
+    UDMGMAGIC                       = 389,
+    UDMGRANGE                       = 390,
     CHARM_CHANCE                    = 391,
     WEAPON_BASH                     = 392,
     BLACK_MAGIC_COST                = 393,
@@ -1301,57 +1255,39 @@ xi.mod =
     BLACK_MAGIC_RECAST              = 397,
     WHITE_MAGIC_RECAST              = 398,
     ALACRITY_CELERITY_EFFECT        = 399,
-    LIGHT_ARTS_EFFECT               = 334,
-    DARK_ARTS_EFFECT                = 335,
-    LIGHT_ARTS_SKILL                = 336,
-    DARK_ARTS_SKILL                 = 337,
-    LIGHT_ARTS_REGEN                = 338, -- Regen bonus HP from Light Arts and Tabula Rasa
-    REGEN_DURATION                  = 339,
-    HELIX_EFFECT                    = 478,
-    HELIX_DURATION                  = 477,
     STORMSURGE_EFFECT               = 400,
     SUBLIMATION_BONUS               = 401,
-    GRIMOIRE_SPELLCASTING           = 489, -- "Grimoire: Reduces spellcasting time" bonus
     WYVERN_BREATH                   = 402,
+    STEP_ACCURACY                   = 403, -- Accuracy bonus for steps
     REGEN_DOWN                      = 404, -- poison
     REFRESH_DOWN                    = 405, -- plague, reduce mp
     REGAIN_DOWN                     = 406, -- plague, reduce tp
-    MAGIC_DAMAGE                    = 311, --  Magic damage added directly to the spell's base damage
-
-    -- Gear set modifiers
+    UFASTCAST                       = 407,
     DA_DOUBLE_DAMAGE                = 408,  -- Double attack's double damage chance %.
     TA_TRIPLE_DAMAGE                = 409,  -- Triple attack's triple damage chance %.
     ZANSHIN_DOUBLE_DAMAGE           = 410,  -- Zanshin's double damage chance %.
-    RAPID_SHOT_DOUBLE_DAMAGE        = 479,  -- Rapid shot's double damage chance %.
-    ABSORB_DMG_CHANCE               = 480,  -- Chance to absorb damage %
-    EXTRA_DUAL_WIELD_ATTACK         = 481,  -- Chance to land an extra attack when dual wielding
-    EXTRA_KICK_ATTACK               = 482,  -- Occasionally allows a second Kick Attack during an attack round without the use of Footwork.
+    QUICK_DRAW_DMG                  = 411, --
+    EAT_RAW_FISH                    = 412, --
+    EAT_RAW_MEAT                    = 413, --
+    RETALIATION                     = 414, -- Increases damage of Retaliation hits
     SAMBA_DOUBLE_DAMAGE             = 415,  -- Double damage chance when samba is up.
     NULL_PHYSICAL_DAMAGE            = 416,  -- Occasionally annuls damage from physical attacks, in percents
     QUICK_DRAW_TRIPLE_DAMAGE        = 417,  -- Chance to do triple damage with quick draw.
     BAR_ELEMENT_NULL_CHANCE         = 418,  -- Bar Elemental spells will occasionally nullify damage of the same element.
     GRIMOIRE_INSTANT_CAST           = 419,  -- Spells that match your current Arts will occasionally cast instantly, without recast.
-    COUNTERSTANCE_EFFECT            = 543,  -- Counterstance effect in percents
-    DODGE_EFFECT                    = 552,  -- Dodge effect in percents
-    FOCUS_EFFECT                    = 561,  -- Focus effect in percents
-    MUG_EFFECT                      = 835,  -- Mug effect as multiplier
-    ACC_COLLAB_EFFECT               = 884,  -- Increases amount of enmity transferred
-    HIDE_DURATION                   = 885,  -- Hide duration increase (percentage based
-    GILFINDER                       = 897,  -- Gil % increase
-    REVERSE_FLOURISH_EFFECT         = 836,  -- Reverse Flourish effect in tenths of squared term multiplier
-    SENTINEL_EFFECT                 = 837,  -- Sentinel effect in percents
-    REGEN_MULTIPLIER                = 838,  -- Regen base multiplier
-    AUGMENT_SONG_STAT               = 1003, -- Stat MOD Value based on song element
-
+    BARRAGE_ACC                     = 420,
+    CRIT_DMG_INCREASE               = 421,
     DOUBLE_SHOT_RATE                = 422, -- The rate that double shot can proc
     VELOCITY_SNAPSHOT_BONUS         = 423, -- Increases Snapshot whilst Velocity Shot is up.
     VELOCITY_RATT_BONUS             = 424, -- Increases Ranged Attack whilst Velocity Shot is up.
     SHADOW_BIND_EXT                 = 425, -- Extends the time of shadowbind
     ABSORB_PHYSDMG_TO_MP            = 426, -- Absorbs a percentage of physical damage taken to MP.
-    SHIELD_MASTERY_TP               = 485, -- Shield mastery TP bonus when blocking with a shield
+    ENMITY_LOSS_REDUCTION           = 427,
     PERFECT_COUNTER_ATT             = 428, -- Raises weapon damage by 20 when countering while under the Perfect Counter effects. This also affects Weapon Rank (though not if fighting barehanded).
     FOOTWORK_ATT_BONUS              = 429, -- Raises the attack bonus of Footwork. (Tantra Gaiters +2 raise 100/1024 to 152/1024)
-
+    QUAD_ATTACK                     = 430, -- Quadruple attack chance.
+    ITEM_ADDEFFECT_TYPE             = 431, -- see procType table in scripts\globals\additional_effects.lua
+    ENSPELL_DMG_BONUS               = 432,
     MINNE_EFFECT                    = 433, --
     MINUET_EFFECT                   = 434, --
     PAEON_EFFECT                    = 435, --
@@ -1375,13 +1311,9 @@ xi.mod =
     MAXIMUM_SONGS_BONUS             = 453, --
     SONG_DURATION_BONUS             = 454, --
     SONG_SPELLCASTING_TIME          = 455, --
-
-    QUICK_DRAW_DMG                  = 411, --
-    QUICK_DRAW_MACC                 = 191, -- Quick draw magic accuracy
-    QUAD_ATTACK                     = 430, -- Quadruple attack chance.
-
-    ENSPELL_DMG_BONUS               = 432,
-
+    RERAISE_I                       = 456, -- Reraise.
+    RERAISE_II                      = 457, -- Reraise II.
+    RERAISE_III                     = 458, -- Reraise III.
     FIRE_ABSORB                     = 459, -- Occasionally absorbs fire elemental damage, in percents
     ICE_ABSORB                      = 460, -- Occasionally absorbs ice elemental damage, in percents
     WIND_ABSORB                     = 461, -- Occasionally absorbs wind elemental damage, in percents
@@ -1390,7 +1322,6 @@ xi.mod =
     WATER_ABSORB                    = 464, -- Occasionally absorbs water elemental damage, in percents
     LIGHT_ABSORB                    = 465, -- Occasionally absorbs light elemental damage, in percents
     DARK_ABSORB                     = 466, -- Occasionally absorbs dark elemental damage, in percents
-
     FIRE_NULL                       = 467, --
     ICE_NULL                        = 468, --
     WIND_NULL                       = 469, --
@@ -1399,88 +1330,62 @@ xi.mod =
     WATER_NULL                      = 472, --
     LIGHT_NULL                      = 473, --
     DARK_NULL                       = 474, --
-
     MAGIC_ABSORB                    = 475, -- Occasionally absorbs magic damage taken, in percents
     MAGIC_NULL                      = 476, -- Occasionally annuls magic damage taken, in percents
-    PHYS_ABSORB                     = 512, -- Occasionally absorbs physical damage taken, in percents
-    ABSORB_DMG_TO_MP                = 516, -- Unlike PLD gear mod, works on all damage types (Ethereal Earring)
-
+    HELIX_DURATION                  = 477,
+    HELIX_EFFECT                    = 478,
+    RAPID_SHOT_DOUBLE_DAMAGE        = 479,  -- Rapid shot's double damage chance %.
+    ABSORB_DMG_CHANCE               = 480,  -- Chance to absorb damage %
+    EXTRA_DUAL_WIELD_ATTACK         = 481,  -- Chance to land an extra attack when dual wielding
+    EXTRA_KICK_ATTACK               = 482,  -- Occasionally allows a second Kick Attack during an attack round without the use of Footwork.
     WARCRY_DURATION                 = 483, -- Warcy duration bonus from gear
     AUSPICE_EFFECT                  = 484, -- Auspice Subtle Blow Bonus
+    SHIELD_MASTERY_TP               = 485, -- Shield mastery TP bonus when blocking with a shield
     TACTICAL_PARRY                  = 486, -- Tactical Parry TP Bonus
     MAG_BURST_BONUS                 = 487, -- Magic Burst Bonus
     INHIBIT_TP                      = 488, -- Inhibits TP Gain (percent)
-
+    GRIMOIRE_SPELLCASTING           = 489, -- "Grimoire: Reduces spellcasting time" bonus
+    SAMBA_DURATION                  = 490, -- Samba duration bonus
+    WALTZ_POTENTCY                  = 491, -- Waltz Potentcy Bonus
+    JIG_DURATION                    = 492, -- Jig duration bonus in percents
+    VFLOURISH_MACC                  = 493, -- Violent Flourish accuracy bonus
+    STEP_FINISH                     = 494, -- Bonus finishing moves from steps
+    ENHANCES_HOLYWATER              = 495, -- Used by gear with the "Enhances Holy Water" or "Holy Water+" attribute
     GOV_CLEARS                      = 496, -- Tracks GoV page completion (for 4% bonus on rewards).
+    WALTZ_DELAY                     = 497, -- Waltz Ability Delay modifier (-1 mod is -1 second)
+    SAMBA_PDURATION                 = 498, -- Samba percent duration bonus
+    ITEM_SUBEFFECT                  = 499, -- Animation ID of Spikes and Additional Effects
+    ITEM_ADDEFFECT_DMG              = 500, -- Damage of an items Additional Effect or Spikes
+    ITEM_ADDEFFECT_CHANCE           = 501, -- Chance of an items Additional Effect or Spikes
 
-    -- Reraise (Auto Reraise, will be used by ATMA)
-    RERAISE_I                       = 456, -- Reraise.
-    RERAISE_II                      = 457, -- Reraise II.
-    RERAISE_III                     = 458, -- Reraise III.
-
-    ITEM_ADDEFFECT_TYPE     = 431, -- see procType table in scripts\globals\additional_effects.lua
-    ITEM_SUBEFFECT          = 499, -- Animation ID of Spikes and Additional Effects
-    ITEM_ADDEFFECT_DMG      = 500, -- Damage of an items Additional Effect or Spikes
-    ITEM_ADDEFFECT_CHANCE   = 501, -- Chance of an items Additional Effect or Spikes
-    ITEM_ADDEFFECT_ELEMENT  = 950, -- Element of the Additional Effect or Spikes, for resist purposes
-    ITEM_ADDEFFECT_STATUS   = 951, -- Status Effect ID to try to apply via Additional Effect or Spikes
-    ITEM_ADDEFFECT_POWER    = 952, -- Base Power for effect in MOD_ITEM_ADDEFFECT_STATUS
-    ITEM_ADDEFFECT_DURATION = 953, -- Base Duration for effect in MOD_ITEM_ADDEFFECT_STATUS
+    -- SPARE ID 502
 
     FERAL_HOWL_DURATION             = 503, -- +20% duration per merit when wearing augmented Monster Jackcoat +2
     MANEUVER_BONUS                  = 504, -- Maneuver Stat Bonus
     OVERLOAD_THRESH                 = 505, -- Overload Threshold Bonus
-    BURDEN_DECAY                    = 847, -- Increases amount of burden removed per tick
-    REPAIR_EFFECT                   = 853, -- Removes # of status effects from the Automaton
-    REPAIR_POTENCY                  = 854, -- Note: Only affects amount regenerated by a %, not the instant restore!
-    PREVENT_OVERLOAD                = 855, -- Overloading erases a water maneuver (except on water overloads) instead, if there is one
     EXTRA_DMG_CHANCE                = 506, -- Proc rate of OCC_DO_EXTRA_DMG. 111 would be 11.1%
     OCC_DO_EXTRA_DMG                = 507, -- Multiplier for "Occasionally do x times normal damage". 250 would be 2.5 times damage.
-
-    REM_OCC_DO_DOUBLE_DMG           = 863, -- Proc rate for REM Aftermaths that apply "Occasionally do double damage"
-    REM_OCC_DO_TRIPLE_DMG           = 864, -- Proc rate for REM Aftermaths that apply "Occasionally do triple damage"
-
-    REM_OCC_DO_DOUBLE_DMG_RANGED    = 867, -- Ranged attack specific
-    REM_OCC_DO_TRIPLE_DMG_RANGED    = 868, -- Ranged attack specific
-
-    MYTHIC_OCC_ATT_TWICE            = 865, -- Proc rate for "Occasionally attacks twice"
-    MYTHIC_OCC_ATT_THRICE           = 866, -- Proc rate for "Occasionally attacks thrice"
-
-    EAT_RAW_FISH                    = 412, --
-    EAT_RAW_MEAT                    = 413, --
-
-    ENHANCES_CURSNA_RCVD            = 67,  -- Potency of "Cursna" effects received
-    ENHANCES_CURSNA                 = 310, -- Raises success rate of Cursna when removing effect (like Doom) that are not 100% chance to remove
-    ENHANCES_HOLYWATER              = 495, -- Used by gear with the "Enhances Holy Water" or "Holy Water+" attribute
-    ENHANCES_PROT_SHELL_RCVD        = 977, -- Enhances Protect and Shell Effects Received (Binary MOD)
-
-    RETALIATION                     = 414, -- Increases damage of Retaliation hits
     THIRD_EYE_COUNTER_RATE          = 508, -- Adds counter to 3rd eye anticipates & if using Seigan counter rate is increased by 15%
-    THIRD_EYE_ANTICIPATE_RATE       = 839, -- Adds anticipate rate in percents
-
     CLAMMING_IMPROVED_RESULTS       = 509, --
     CLAMMING_REDUCED_INCIDENTS      = 510, --
     CHOCOBO_RIDING_TIME             = 511, -- Increases chocobo riding time
+    PHYS_ABSORB                     = 512, -- Occasionally absorbs physical damage taken, in percents
     HARVESTING_RESULT               = 513, -- Improves harvesting results
     LOGGING_RESULT                  = 514, -- Improves logging results
     MINING_RESULT                   = 515, -- Improves mining results
+    ABSORB_DMG_TO_MP                = 516, -- Unlike PLD gear mod, works on all damage types (Ethereal Earring)
     EGGHELM                         = 517, -- Egg Helm (Chocobo Digging)
-
     SHIELDBLOCKRATE                 = 518, -- Affects shield block rate, percent based
-    SCAVENGE_EFFECT                 = 312, --
-    DIA_DOT                         = 313, -- Increases the DoT damage of Dia
-    SHARPSHOT                       = 314, -- Sharpshot accuracy bonus
-    ENH_DRAIN_ASPIR                 = 315, -- % damage boost to Drain and Aspir
-    SNEAK_ATK_DEX                   = 874, -- % DEX boost to Sneak Attack (if gear mod, needs to be equipped on hit)
+    CURE_CAST_TIME                  = 519,
     TRICK_ATK_AGI                   = 520, -- % AGI boost to Trick Attack (if gear mod, needs to be equipped on hit)
+    AUGMENTS_ABSORB                 = 521, -- Direct Absorb spell increase while Liberator is equipped (percentage based)
     NIN_NUKE_BONUS                  = 522, -- magic attack bonus for NIN nukes
-    DAKEN                           = 911, -- Chance to throw shuriken on attack
     AMMO_SWING                      = 523, -- Extra swing rate w/ ammo (ie. Jailer weapons). Use gearsets, and does nothing for non-players.
-    AMMO_SWING_TYPE                 = 826, -- For the handedness of the weapon - 1h (1) vs. 2h/h2h (2). h2h can safely use the same function as 2h.
+    AOE_NA                          = 524, -- Set to 1 to make -na spells/erase always AoE w/ Divine Veil
+    AUGMENTS_CONVERT                = 525, -- Convert HP to MP Ratio Multiplier. Value = MP multiplier rate.
+    AUGMENTS_SA                     = 526, -- Adds Critical Attack Bonus to Sneak Attack, percentage based.
+    AUGMENTS_TA                     = 527, -- Adds Critical Attack Bonus to Trick Attack, percentage based.
     ROLL_RANGE                      = 528, -- Additional range for COR roll abilities.
-    PHANTOM_ROLL                    = 881, -- Phantom Roll+ Effect from SOA Rings.
-    PHANTOM_DURATION                = 882, -- Phantom Roll Duration +.
-
     ENHANCES_REFRESH                = 529, -- "Enhances Refresh" adds +1 per modifier to spell's tick result.
     NO_SPELL_MP_DEPLETION           = 530, -- % to not deplete MP on spellcast.
     FORCE_FIRE_DWBONUS              = 531, -- Set to 1 to force fire day/weather spell bonus/penalty. Do not have it total more than 1.
@@ -1495,63 +1400,139 @@ xi.mod =
     ENHANCES_ELEMENTAL_SIPHON       = 540, -- Bonus Base MP added to Elemental Siphon skill.
     BP_DELAY_II                     = 541, -- Blood Pact Delay Reduction II
     JOB_BONUS_CHANCE                = 542, -- Chance to apply job bonus to COR roll without having the job in the party.
+    COUNTERSTANCE_EFFECT            = 543,  -- Counterstance effect in percents
+    FIRE_AFFINITY_ACC               = 544,
+    ICE_AFFINITY_ACC                = 545,
+    WIND_AFFINITY_ACC               = 546,
+    EARTH_AFFINITY_ACC              = 547,
+    THUNDER_AFFINITY_ACC            = 548,
+    WATER_AFFINITY_ACC              = 549,
+    LIGHT_AFFINITY_ACC              = 550,
+    DARK_AFFINITY_ACC               = 551,
+    DODGE_EFFECT                    = 552,  -- Dodge effect in percents
+    FIRE_AFFINITY_PERP              = 553,
+    ICE_AFFINITY_PERP               = 554,
+    WIND_AFFINITY_PERP              = 555,
+    EARTH_AFFINITY_PERP             = 556,
+    THUNDER_AFFINITY_PERP           = 557,
+    WATER_AFFINITY_PERP             = 558,
+    LIGHT_AFFINITY_PERP             = 559,
+    DARK_AFFINITY_PERP              = 560,
+    FOCUS_EFFECT                    = 561,  -- Focus effect in percents
+    MAGIC_CRITHITRATE               = 562,
+    MAGIC_CRIT_DMG_INCREASE         = 563,
+    JUG_LEVEL_RANGE                 = 564, -- Decreases the level range of spawned jug pets. Maxes out at 2.
     DAY_NUKE_BONUS                  = 565, -- Bonus damage from "Elemental magic affected by day" (Sorc. Tonban)
     IRIDESCENCE                     = 566, -- Iridescence trait (additional weather damage/penalty)
     BARSPELL_AMOUNT                 = 567, -- Additional elemental resistance granted by bar- spells
-    BARSPELL_MDEF_BONUS             = 827, -- Extra magic defense bonus granted to the bar- spell effect
     RAPTURE_AMOUNT                  = 568, -- Bonus amount added to Rapture effect
     EBULLIENCE_AMOUNT               = 569, -- Bonus amount added to Ebullience effect
+    WEAPONSKILL_DAMAGE_BASE         = 570, -- Specific to 1 Weaponskill: See modifier.h for how this is used
+
+--------------------------------------------------
+-- IDs 570 to 825 ARE USED EVEN IF NOT LISTED
+--------------------------------------------------
+
+    AMMO_SWING_TYPE                 = 826, -- For the handedness of the weapon - 1h (1) vs. 2h/h2h (2). h2h can safely use the same function as 2h.
+    BARSPELL_MDEF_BONUS             = 827, -- Extra magic defense bonus granted to the bar- spell effect
+    FORCE_JUMP_CRIT                 = 828, -- Critical hit rate bonus for jump and high jump
     WYVERN_EFFECTIVE_BREATH         = 829, -- Increases the threshold for triggering healing breath
+
+    -- SPARE ID 830
+
+    DMGMAGIC_II                     = 831, -- Magic Damage Taken II % (Aegis)
     AQUAVEIL_COUNT                  = 832, -- Modifies the amount of hits that Aquaveil absorbs before being removed
     SONG_RECAST_DELAY               = 833, -- Reduces song recast time in seconds.
+    QUICK_DRAW_DMG_PERCENT          = 834, -- Percentage increase to QD damage
+    MUG_EFFECT                      = 835,  -- Mug effect as multiplier
+    REVERSE_FLOURISH_EFFECT         = 836,  -- Reverse Flourish effect in tenths of squared term multiplier
+    SENTINEL_EFFECT                 = 837,  -- Sentinel effect in percents
+    REGEN_MULTIPLIER                = 838,  -- Regen base multiplier
+    THIRD_EYE_ANTICIPATE_RATE       = 839, -- Adds anticipate rate in percents
+    ALL_WSDMG_ALL_HITS              = 840, -- Generic (all Weaponskills) damage, on all hits.
+    ALL_WSDMG_FIRST_HIT             = 841, -- Generic (all Weaponskills) damage, first hit only.
+    AUTO_DECISION_DELAY             = 842, -- Reduces the Automaton's global decision delay
+    AUTO_SHIELD_BASH_DELAY          = 843, -- Reduces the Automaton's global shield bash delay
+    AUTO_MAGIC_DELAY                = 844, -- Reduces the Automaton's global magic delay
+    AUTO_HEALING_DELAY              = 845, -- Reduces the Automaton's global healing delay
+    AUTO_HEALING_THRESHOLD          = 846, -- Increases the healing trigger threshold
+    BURDEN_DECAY                    = 847, -- Increases amount of burden removed per tick
+    AUTO_SHIELD_BASH_SLOW           = 848, -- Adds a slow effect to Shield Bash
+    AUTO_TP_EFFICIENCY              = 849, -- Causes the Automaton to wait to form a skillchain when its master is > 90% TP
+    AUTO_SCAN_RESISTS               = 850, -- Causes the Automaton to scan a target's resistances
+    SYNTH_SUCCESS                   = 851, -- Rate of synthesis success
+    SYNTH_SKILL_GAIN                = 852, -- Synthesis skill gain rate
+    REPAIR_EFFECT                   = 853, -- Removes # of status effects from the Automaton
+    REPAIR_POTENCY                  = 854, -- Note: Only affects amount regenerated by a %, not the instant restore!
+    PREVENT_OVERLOAD                = 855, -- Overloading erases a water maneuver (except on water overloads) instead, if there is one
+    ENSPELL_CHANCE                  = 856,
+    HOLY_CIRCLE_DURATION            = 857,
+    ARCANE_CIRCLE_DURATION          = 858,
+    ANCIENT_CIRCLE_DURATION         = 859,
+    CURE2MP_PERCENT                 = 860, -- Converts % of "Cure" amount to MP
+    SYNTH_FAIL_RATE                 = 861, -- Synthesis failure rate (percent)
+    SYNTH_HQ_RATE                   = 862, -- High-quality success rate (not a percent)
+    REM_OCC_DO_DOUBLE_DMG           = 863, -- Proc rate for REM Aftermaths that apply "Occasionally do double damage"
+    REM_OCC_DO_TRIPLE_DMG           = 864, -- Proc rate for REM Aftermaths that apply "Occasionally do triple damage"
+    MYTHIC_OCC_ATT_TWICE            = 865, -- Proc rate for "Occasionally attacks twice"
+    MYTHIC_OCC_ATT_THRICE           = 866, -- Proc rate for "Occasionally attacks thrice"
+    REM_OCC_DO_DOUBLE_DMG_RANGED    = 867, -- Ranged attack specific
+    REM_OCC_DO_TRIPLE_DMG_RANGED    = 868, -- Ranged attack specific
+    ROLL_BOLTERS                    = 869,
+    ROLL_CASTERS                    = 870,
+    ROLL_COURSERS                   = 871,
+    ROLL_BLITZERS                   = 872,
+    ROLL_TACTICIANS                 = 873,
+
+    -- PROBLEM MARK 873 and 874
+    AUGMENTS_FEINT                  = 873, -- Feint will give another -10 Evasion per merit level
+    SNEAK_ATK_DEX                   = 874, -- % DEX boost to Sneak Attack (if gear mod, needs to be equipped on hit)
+    -- PROBLEM MARK
+
+    ROLL_ALLIES                     = 874,
+    ROLL_MISERS                     = 875,
+    ROLL_COMPANIONS                 = 876,
+    ROLL_AVENGERS                   = 877,
+    ROLL_NATURALISTS                = 878,
+    ROLL_RUNEISTS                   = 879,
+    SAVETP                          = 880, -- SAVETP Effect for Miser's Roll / ATMA / Hagakure.
+    PHANTOM_ROLL                    = 881, -- Phantom Roll+ Effect from SOA Rings.
+    PHANTOM_DURATION                = 882, -- Phantom Roll Duration +.
+    PERFECT_DODGE                   = 883, -- Increases Perfect Dodge duration in seconds
+    ACC_COLLAB_EFFECT               = 884,  -- Increases amount of enmity transferred
+    HIDE_DURATION                   = 885,  -- Hide duration increase (percentage based
+    AUGMENTS_ASSASSINS_CHARGE       = 886, -- Gives Assassin's Charge +1% Critical Hit Rate per merit level
+    AUGMENTS_AMBUSH                 = 887, -- Gives +1% Triple Attack per merit level when Ambush conditions are met
+
+    -- SPARE ID 888
+
+    AUGMENTS_AURA_STEAL             = 889, -- 20% chance of 2 effects to be dispelled or stolen per merit level
     ENH_MAGIC_DURATION              = 890, -- Enhancing Magic Duration increase %
     ENHANCES_COURSERS_ROLL          = 891, -- Courser's Roll Bonus % chance
     ENHANCES_CASTERS_ROLL           = 892, -- Caster's Roll Bonus % chance
     ENHANCES_BLITZERS_ROLL          = 893, -- Blitzer's Roll Bonus % chance
     ENHANCES_ALLIES_ROLL            = 894, -- Allies' Roll Bonus % chance
     ENHANCES_TACTICIANS_ROLL        = 895, -- Tactician's Roll Bonus % chance
+    DESPOIL                         = 896,
+    GILFINDER                       = 897,  -- Gil % increase
+    SMITE                           = 898, -- Att increase with H2H or 2H weapons
+    TACTICAL_GUARD                  = 899, -- Tp gain increase when guarding
+    UTSUSEMI_BONUS                  = 900, -- Extra shadows from gear
+    ELEMENTAL_CELERITY              = 901, -- Quickens Elemental Magic Casting
     OCCULT_ACUMEN                   = 902, -- Grants bonus TP when dealing damage with elemental or dark magic
-
+    FENCER_TP_BONUS                 = 903, -- TP Bonus to weapon skills from Fencer Trait
+    FENCER_CRITHITRATE              = 904, -- Increased Crit chance from Fencer Trait
+    SHIELD_DEF_BONUS                = 905, -- Shield Defense Bonus
+    DESPERATE_BLOWS                 = 906, -- Adds ability haste to Last Resort
+    STALWART_SOUL                   = 907, -- Reduces damage taken from Souleater
+    CRIT_DEF_BONUS                  = 908, -- Reduces crit hit damage
     QUICK_MAGIC                     = 909, -- Percent chance spells cast instantly (also reduces recast to 0, similar to Chainspell)
-
-    -- Automaton mods
-    AUTO_DECISION_DELAY             = 842, -- Reduces the Automaton's global decision delay
-    AUTO_SHIELD_BASH_DELAY          = 843, -- Reduces the Automaton's global shield bash delay
-    AUTO_MAGIC_DELAY                = 844, -- Reduces the Automaton's global magic delay
-    AUTO_HEALING_DELAY              = 845, -- Reduces the Automaton's global healing delay
-    AUTO_HEALING_THRESHOLD          = 846, -- Increases the healing trigger threshold
-    AUTO_SHIELD_BASH_SLOW           = 848, -- Adds a slow effect to Shield Bash
-    AUTO_TP_EFFICIENCY              = 849, -- Causes the Automaton to wait to form a skillchain when its master is > 90% TP
-    AUTO_SCAN_RESISTS               = 850, -- Causes the Automaton to scan a target's resistances
-    AUTO_STEAM_JACKET               = 938, -- Causes the Automaton to mitigate damage from successive attacks of the same type
-    AUTO_STEAM_JACKET_REDUCTION     = 939, -- Amount of damage reduced with Steam Jacket
-    AUTO_SCHURZEN                   = 940, -- Prevents fatal damage leaving the automaton at 1HP and consumes an Earth manuever
-    AUTO_EQUALIZER                  = 941, -- Reduces damage received according to damage taken
-    AUTO_PERFORMANCE_BOOST          = 942, -- Increases the performance of other attachments by a percentage
-    AUTO_ANALYZER                   = 943, -- Causes the Automaton to mitigate damage from a special attack a number of times
-    AUTO_RANGED_DELAY               = 1001, -- Decreases the amount of time between ranged attacks
-    AUTO_RANGED_DAMAGEP             = 1002, -- Increases Automaton Ranged Weapon damage by a %
-
-    -- Mythic Weapon Mods
-    AUGMENTS_ABSORB                 = 521, -- Direct Absorb spell increase while Liberator is equipped (percentage based)
-    AOE_NA                          = 524, -- Set to 1 to make -na spells/erase always AoE w/ Divine Veil
-    AUGMENTS_CONVERT                = 525, -- Convert HP to MP Ratio Multiplier. Value = MP multiplier rate.
-    AUGMENTS_SA                     = 526, -- Adds Critical Attack Bonus to Sneak Attack, percentage based.
-    AUGMENTS_TA                     = 527, -- Adds Critical Attack Bonus to Trick Attack, percentage based.
-    AUGMENTS_FEINT                  = 873, -- Feint will give another -10 Evasion per merit level
-    AUGMENTS_ASSASSINS_CHARGE       = 886, -- Gives Assassin's Charge +1% Critical Hit Rate per merit level
-    AUGMENTS_AMBUSH                 = 887, -- Gives +1% Triple Attack per merit level when Ambush conditions are met
-    AUGMENTS_AURA_STEAL             = 889, -- 20% chance of 2 effects to be dispelled or stolen per merit level
+    DIVINE_BENISON                  = 910, -- Adds fast cast and enmity reduction to -Na spells (includes Erase). Enmity reduction is half of the fast cast amount
+    DAKEN                           = 911, -- Chance to throw shuriken on attack
     AUGMENTS_CONSPIRATOR            = 912, -- Applies Conspirator benefits to player at the top of the hate list
-    JUG_LEVEL_RANGE                 = 564, -- Decreases the level range of spawned jug pets. Maxes out at 2.
-    FORCE_JUMP_CRIT                 = 828, -- Critical hit rate bonus for jump and high jump
-    QUICK_DRAW_DMG_PERCENT          = 834, -- Percentage increase to QD damage
 
-    -- Crafting food effects
-    SYNTH_SUCCESS                   = 851, -- Rate of synthesis success
-    SYNTH_SKILL_GAIN                = 852, -- Synthesis skill gain rate
-    SYNTH_FAIL_RATE                 = 861, -- Synthesis failure rate (percent)
-    SYNTH_HQ_RATE                   = 862, -- High-quality success rate (not a percent)
+    -- SPARE IDs 913 to 915
+
     DESYNTH_SUCCESS                 = 916, -- Rate of desynthesis success
     SYNTH_FAIL_RATE_FIRE            = 917, -- Amount synthesis failure rate is reduced when using a fire crystal
     SYNTH_FAIL_RATE_ICE             = 918, -- Amount synthesis failure rate is reduced when using a ice crystal
@@ -1570,68 +1551,96 @@ xi.mod =
     SYNTH_FAIL_RATE_ALCHEMY         = 931, -- Amount synthesis failure rate is reduced when doing alchemy
     SYNTH_FAIL_RATE_COOK            = 932, -- Amount synthesis failure rate is reduced when doing cooking
 
-    WEAPONSKILL_DAMAGE_BASE         = 570, -- Specific to 1 Weaponskill: See modifier.h for how this is used
-    ALL_WSDMG_ALL_HITS              = 840, -- Generic (all Weaponskills) damage, on all hits.
-    -- Per https://www.bg-wiki.com/bg/Weapon_Skill_Damage we need all 3..
-    ALL_WSDMG_FIRST_HIT             = 841, -- Generic (all Weaponskills) damage, first hit only.
+    -- SPARE IDs 933 to 936
+
+    FOOD_DURATION                   = 937, -- Percentage to increase food duration
+    AUTO_STEAM_JACKET               = 938, -- Causes the Automaton to mitigate damage from successive attacks of the same type
+    AUTO_STEAM_JACKET_REDUCTION     = 939, -- Amount of damage reduced with Steam Jacket
+    AUTO_SCHURZEN                   = 940, -- Prevents fatal damage leaving the automaton at 1HP and consumes an Earth manuever
+    AUTO_EQUALIZER                  = 941, -- Reduces damage received according to damage taken
+    AUTO_PERFORMANCE_BOOST          = 942, -- Increases the performance of other attachments by a percentage
+    AUTO_ANALYZER                   = 943, -- Causes the Automaton to mitigate damage from a special attack a number of times
+
+    -- SPARE ID 944
+
+    BLUE_LEARN_CHANCE               = 945, -- Additional chance to learn blue magic
+    SNEAK_DURATION                  = 946, -- Additional duration in seconds
+    INVISIBLE_DURATION              = 947, -- Additional duration in seconds
+    BERSERK_EFFECT                  = 948, -- Conqueror Berserk Effect
     WS_NO_DEPLETE                   = 949, -- % chance a Weaponskill depletes no TP.
-    WS_STR_BONUS                    = 980, -- % bonus to str_wsc.
+    ITEM_ADDEFFECT_ELEMENT          = 950, -- Element of the Additional Effect or Spikes, for resist purposes
+    ITEM_ADDEFFECT_STATUS           = 951, -- Status Effect ID to try to apply via Additional Effect or Spikes
+    ITEM_ADDEFFECT_POWER            = 952, -- Base Power for effect in MOD_ITEM_ADDEFFECT_STATUS
+    ITEM_ADDEFFECT_DURATION         = 953, -- Base Duration for effect in MOD_ITEM_ADDEFFECT_STATUS
+    BERSERK_DURATION                = 954, -- Berserk Duration
+    AGGRESSOR_DURATION              = 955, -- Aggressor Duration
+    DEFENDER_DURATION               = 956, -- Defender Duration
     WS_DEX_BONUS                    = 957, -- % bonus to dex_wsc.
+    STATUSRES                       = 958, -- "Resistance to All Status Ailments"
+    CARDINAL_CHANT                  = 959,
+    INDI_DURATION                   = 960,
+    GEOMANCY                        = 961,
+    WIDENED_COMPASS                 = 962,
+    INQUARTATA                      = 963,  -- Increases parry rate by a flat %.
+    RANGED_CRIT_DMG_INCREASE        = 964, -- Increases ranged critical damage by a percent
+    COVER_TO_MP                     = 965, -- Converts a successful cover's phsyical damage to MP
+    COVER_MAGIC_AND_RANGED          = 966, -- Redirects ranged and single target magic attacks to the cover ability user
+    COVER_DURATION                  = 967, -- Increases Cover Duration
+    MENDING_HALATION                = 968,
+    RADIAL_ARCANA                   = 969,
+    CURATIVE_RECANTATION            = 970,
+    PRIMEVAL_ZEAL                   = 971,
+    MOUNT_MOVE                      = 972, -- % Mount Movement Speed
+    SUBTLE_BLOW_II                  = 973, -- Subtle Blow II Effect (Cap 50%) Total Effect (SB + SB_II cap 75%)
+    WYVERN_SUBJOB_TRAITS            = 974, -- Adds subjob traits to wyvern
+    GARDENING_WILT_BONUS            = 975, -- Increases the number of Vanadays a plant can survive before it wilts
+    GUARD_PERCENT                   = 976, -- Guard Percent
+    ENHANCES_PROT_SHELL_RCVD        = 977, -- Enhances Protect and Shell Effects Received (Binary MOD)
+    MAX_SWINGS                      = 978,
+    ADDITIONAL_SWING_CHANCE         = 979,
+    WS_STR_BONUS                    = 980, -- % bonus to str_wsc.
     WS_VIT_BONUS                    = 981, -- % bonus to vit_wsc.
     WS_AGI_BONUS                    = 982, -- % bonus to agi_wsc.
     WS_INT_BONUS                    = 983, -- % bonus to int_wsc.
     WS_MND_BONUS                    = 984, -- % bonus to mnd_wsc.
     WS_CHR_BONUS                    = 985, -- % bonus to chr_wsc.
+    WYVERN_BREATH_MACC              = 986,
 
+    -- SPARE IDs 987 and 988
+
+    REGEN_BONUS                     = 989,
     PET_ATK_DEF                     = 990, -- Increases pet physical attack, ranged attack, and physical defense
     PET_ACC_EVA                     = 991, -- Increases pet physical accuracy, ranged accuracy, and evasion
     PET_MAB_MDB                     = 992, -- Increases pet magic attack and magic defense
     PET_MACC_MEVA                   = 993, -- Increases pet magic accuracy and evasion
     PET_ATTR_BONUS                  = 994, -- Increases pet attributes
     PET_TP_BONUS                    = 995, -- Increases pet TP bonus
+    ONE_HOUR_RECAST                 = 996, -- Decreases the recast time of one-hour abilities by n minutes.
+    SUPERIOR_LEVEL                  = 997, -- SU0..5
+    DREAD_SPIKES_EFFECT             = 998,
 
-    -- Circle Abilities Extended Duration from AF/AF+1
-    HOLY_CIRCLE_DURATION            = 857,
-    ARCANE_CIRCLE_DURATION          = 858,
-    ANCIENT_CIRCLE_DURATION         = 859,
+    -- SPARE IDs 999 and 1000
 
-    -- Other
-    CURE2MP_PERCENT                 = 860, -- Converts % of "Cure" amount to MP
-    DIVINE_BENISON                  = 910, -- Adds fast cast and enmity reduction to -Na spells (includes Erase). Enmity reduction is half of the fast cast amount
-    SAVETP                          = 880, -- SAVETP Effect for Miser's Roll / ATMA / Hagakure.
-    SMITE                           = 898, -- Att increase with H2H or 2H weapons
-    TACTICAL_GUARD                  = 899, -- Tp gain increase when guarding
-    GUARD_PERCENT                   = 976, -- Guard Percent
-    FENCER_TP_BONUS                 = 903, -- TP Bonus to weapon skills from Fencer Trait
-    FENCER_CRITHITRATE              = 904, -- Increased Crit chance from Fencer Trait
-    SHIELD_DEF_BONUS                = 905, -- Shield Defense Bonus
-    SNEAK_DURATION                  = 946, -- Additional duration in seconds
-    INVISIBLE_DURATION              = 947, -- Additional duration in seconds
-    BERSERK_EFFECT                  = 948, -- Conqueror Berserk Effect
-    BERSERK_DURATION                = 954, -- Berserk Duration
-    AGGRESSOR_DURATION              = 955, -- Aggressor Duration
-    DEFENDER_DURATION               = 956, -- Defender Duration
-    CARDINAL_CHANT                  = 959,
-    INDI_DURATION                   = 960,
-    GEOMANCY                        = 961,
-    WIDENED_COMPASS                 = 962,
-    MENDING_HALATION                = 968,
-    RADIAL_ARCANA                   = 969,
-    CURATIVE_RECANTATION            = 970,
-    PRIMEVAL_ZEAL                   = 971,
-    COVER_TO_MP                     = 965, -- Converts a successful cover's phsyical damage to MP
-    COVER_MAGIC_AND_RANGED          = 966, -- Redirects ranged and single target magic attacks to the cover ability user
-    COVER_DURATION                  = 967, -- Increases Cover Duration
-    WYVERN_SUBJOB_TRAITS            = 974, -- Adds subjob traits to wyvern
-    GARDENING_WILT_BONUS            = 975, -- Increases the number of Vanadays a plant can survive before it wilts
-
-    WYVERN_BREATH_MACC              = 986,
-    REGEN_BONUS                     = 989,
-
-    SUPERIOR_LEVEL  = 997, -- SU0..5
-    ONE_HOUR_RECAST = 996, -- Decreases the recast time of one-hour abilities by n minutes.
-
-    DREAD_SPIKES_EFFECT = 998,
+    AUTO_RANGED_DELAY               = 1001, -- Decreases the amount of time between ranged attacks
+    AUTO_RANGED_DAMAGEP             = 1002, -- Increases Automaton Ranged Weapon damage by a %
+    AUGMENT_SONG_STAT               = 1003, -- Stat MOD Value based on song element
+    ENHANCES_BATTUTA                = 1004, --
+    ENHANCES_ELEMENTAL_SFORZO       = 1005, --
+    ENHANCES_SLEIGHT_OF_SWORD       = 1006, --
+    ENHANCES_INSPIRATION            = 1007, --
+    SWORDPLAY                       = 1008, --
+    LIEMENT                         = 1009, --
+    VALIANCE_VALLATION_DURATION     = 1010, --
+    PFLUG                           = 1011, --
+    VIVACIOUS_PULSE_POTENCY         = 1012, --
+    AUGMENTS_VIVACIOUS_PULSE        = 1013, --
+    RAYKE_DURATION                  = 1014, --
+    ODYLLIC_SUBTERFUGE_DURATION     = 1015, --
+    SWIPE                           = 1016, --
+    LIEMENT_DURATION                = 1017, --
+    GAMBIT_DURATION                 = 1018, --
+    EMBOLDEN_DURATION               = 1019, --
+    LIEMENT_EXTENDS_TO_AREA         = 1020, --
 
     -- The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     -- 570 - 825 used by WS DMG mods these are not spares.
