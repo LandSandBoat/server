@@ -499,7 +499,11 @@ void CParty::AddMember(CBattleEntity* PEntity)
     if (PEntity->objtype == TYPE_PC && this->members.size() > 1)
     {
         auto* PLeader = dynamic_cast<CCharEntity*>(CParty::GetLeader());
-        PLeader->m_LeaderCreatedPartyTime = server_clock::now();
+
+        if (PLeader)
+        {
+            PLeader->m_LeaderCreatedPartyTime = server_clock::now();
+        }
     }
 
     if (m_PartyType == PARTY_PCS)
@@ -1216,8 +1220,14 @@ void CParty::SetPartyNumber(uint8 number)
 uint32 CParty::GetTimeLastMemberJoined()
 {
     auto* PLeader = dynamic_cast<CCharEntity*>(CParty::GetLeader());
+    auto LeaderMemberLastJoinedTime = server_clock::now();
 
-    return (uint32)std::chrono::time_point_cast<std::chrono::seconds>(PLeader->m_LeaderCreatedPartyTime).time_since_epoch().count();
+    if (PLeader)
+    {
+        LeaderMemberLastJoinedTime = PLeader->m_LeaderCreatedPartyTime;
+    }
+
+    return (uint32)std::chrono::time_point_cast<std::chrono::seconds>(LeaderMemberLastJoinedTime).time_since_epoch().count();
 }
 
 bool CParty::HasTrusts()
