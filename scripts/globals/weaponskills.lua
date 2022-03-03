@@ -239,22 +239,31 @@ local function cRangedRatio(attacker, defender, params, ignoredDef, tp)
     local pdifmax = 0
 
     if cratio < 0.9 then
-        pdifmax = cratio * (10 / 9)
-    elseif cratio < 1.1 then
+        pdifmax = cratio * (10 / 9)    
+    elseif cratio >= 0.9 then
         pdifmax = 1
-    else
-        pdifmax = cratio
     end
+    -- elseif cratio < 1.1 then
+    -- right now pdifmax can be from 1.1 to infinite also 0.9 * (10/9) = 1 hence there is no need to check between 0.9 and 1.1
+    --    pdifmax = 1
+    -- else
+    --    pdifmax = cratio
+    -- end
 
     -- min
     local pdifmin = 0
-
-    if cratio < 0.9 then
-        pdifmin = cratio
-    elseif cratio < 1.1 then
-        pdifmin = 1
-    else
+    -- Problem cratio of 1.2 would give a pdifmin of 1.105263... (1.2 * (20 / 19)) - (3 / 19)) I do not see the relevence
+    -- is there any point to checking if cratio is under 0.9 instead of 1.1
+    -- if cratio < 0.9 then
+    --    pdifmin = cratio
+    if cratio < 1.1 and cratio > 0.15 then -- formula over 1.1 would always be higher than 1 and lower than 0.15 would be negative
         pdifmin = (cratio * (20 / 19)) - (3 / 19)
+    -- elseif cratio < 1.1 then
+    elseif cratio >= 1.1 then
+        pdifmin = 1
+    else   
+        pdifmin = 0
+    --    pdifmin = (cratio * (20 / 19)) - (3 / 19)
     end
 
     local pdif = {}
@@ -298,14 +307,8 @@ local function getRangedHitRate(attacker, target, capHitRate, bonus)
 
     local hitdiff = 0
     local hitrate = 75
-
-    if acc > eva then
-        hitdiff = (acc - eva) / 2
-    end
-
-    if eva > acc then
-        hitdiff = ((-1) * (eva - acc)) / 2
-    end
+    
+    hitdiff = (acc - eva) / 2 -- no need to check if eva is hier or lower than acc it will be negative if eva is higher and positive if acc is higher
 
     hitrate = hitrate + hitdiff
     hitrate = hitrate / 100
@@ -425,7 +428,7 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
 
     -- Calculate alpha, WSC, and our modifiers for our base per-hit damage
     if not calcParams.alpha then
-        if xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES then
+        if xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES or xi.settings.USE_MULTI_HIT_FTP_WEAPON_SKILL_CHANGES then
             calcParams.alpha = 1
         else
             calcParams.alpha = getAlpha(attacker:getMainLvl())
@@ -463,9 +466,24 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
             critrate = critrate + (10 + calcParams.flourishEffect:getSubPower()/2)/100
         end
 
-        -- Add on native crit hit rate (guesstimated, it actually follows an exponential curve)
-        nativecrit = (attacker:getStat(xi.mod.DEX) - target:getStat(xi.mod.AGI)) * 0.005 -- assumes +0.5% crit rate per 1 dDEX
-        nativecrit = utils.clamp(nativecrit, 0.05, 0.2) -- caps only apply to base rate, not merits and mods
+        -- See reference at https://www.bg-wiki.com/ffxi/Critical_Hit_Rate
+        local dexVsAgi = attacker:getStat(xi.mod.DEX) - target:getStat(xi.mod.AGI)
+        if dexVsAgi < 7 then
+            nativecrit = 0
+        elseif dexVsAgi >= 7 and dexVsAgi < 14 then
+            nativecrit = 0.01
+        elseif dexVsAgi >= 14 and dexVsAgi < 20 then
+            nativecrit = 0.02
+        elseif dexVsAgi >= 20 and dexVsAgi < 30 then
+            nativecrit = 0.03
+        elseif dexVsAgi >= 30 and dexVsAgi < 40 then
+            nativecrit = 0.04
+        elseif dexVsAgi >= 40 and dexVsAgi <= 50 then
+            nativecrit = (dexVsAgi - 35) / 100
+        else
+            nativecrit = 0.15 -- caps only apply to base rate, not merits and mods
+        end
+
 
         local fencerBonusVal = calcParams.fencerBonus or 0
         nativecrit = nativecrit + attacker:getMod(xi.mod.CRITHITRATE) / 100 + attacker:getMerit(xi.merit.CRIT_HIT_RATE) / 100

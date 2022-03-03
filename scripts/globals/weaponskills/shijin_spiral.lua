@@ -33,6 +33,12 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
         params.dex_wsc = 0.7 + (player:getMerit(xi.merit.SHIJIN_SPIRAL) * 0.03)
     end
 
+    if (xi.settings.USE_MULTI_HIT_FTP_WEAPON_SKILL_CHANGES == true) then
+        params.multiHitfTP = true
+        params.ftp100 = 1.5 params.ftp200 = 1.5 params.ftp300 = 1.5
+        params.dex_wsc = 0.7 + (player:getMerit(xi.merit.SHIJIN_SPIRAL) * 0.03)
+    end
+
     if (damage > 0) then
         local duration = (tp/1000) + 4
         if (target:hasStatusEffect(xi.effect.PLAGUE) == false) then

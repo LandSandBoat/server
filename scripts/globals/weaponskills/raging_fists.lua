@@ -7,9 +7,9 @@
 -- Aligned with the Thunder Gorget.
 -- Aligned with the Thunder Belt.
 -- Element: None
--- Modifiers: STR:30%  DEX:30%
+-- Modifiers: STR:20%  DEX:20%
 -- 100%TP    200%TP    300%TP
--- 1.00       4.6        9
+-- 1.00       1.5        2
 -----------------------------------
 require("scripts/globals/status")
 require("scripts/settings/main")
@@ -29,7 +29,13 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     params.atk100 = 1; params.atk200 = 1; params.atk300 = 1
 
     if (xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then
-        params.ftp200 = 4.6 params.ftp300 = 9
+        params.ftp200 = 4.5 params.ftp300 = 9
+        params.str_wsc = 0.3 params.dex_wsc = 0.3
+    end
+
+    if (xi.settings.USE_MULTI_HIT_FTP_WEAPON_SKILL_CHANGES == true) then
+        params.multiHitfTP = true
+        params.ftp200 = 2.1875 params.ftp300 = 3.75
         params.str_wsc = 0.3 params.dex_wsc = 0.3
     end
 

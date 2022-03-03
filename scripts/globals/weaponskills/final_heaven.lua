@@ -18,7 +18,7 @@ local weaponskill_object = {}
 weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
     -- number of normal hits for ws
-    params.numHits = 1
+    params.numHits = 2
     -- stat-modifiers (0.0 = 0%, 0.2 = 20%, 0.5 = 50%..etc)
     params.str_wsc = 0.0        params.dex_wsc = 0.0
     params.vit_wsc = 0.6        params.agi_wsc = 0.0
@@ -36,6 +36,7 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
 
     if xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.vit_wsc = 0.8
+        -- as of 02.03.2022 the ws doesnt yet apply ftp to all stage, was delaied to be done in line with other relic ws
     end
 
     -- Apply aftermath
