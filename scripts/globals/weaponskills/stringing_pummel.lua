@@ -31,6 +31,7 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
 
     if xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.ftp100 = 1 params.ftp200 = 1 params.ftp300 = 1
+-- http://wiki.ffo.jp/html/15882.html
     end
 
     -- Apply Aftermath

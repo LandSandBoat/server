@@ -33,7 +33,7 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
         params.ftp200 = 4.75 params.ftp300 = 8
         params.str_wsc = 0.2 params.vit_wsc = 0.5
     end
-
+-- http://wiki.ffo.jp/html/2422.html
     if (xi.settings.USE_MULTI_HIT_FTP_WEAPON_SKILL_CHANGES == true) then
         params.multiHitfTP = true
         params.ftp100 = 2.05 params.ftp200 = 3.55 params.ftp300 = 5.75

@@ -239,7 +239,7 @@ local function cRangedRatio(attacker, defender, params, ignoredDef, tp)
     local pdifmax = 0
 
     if cratio < 0.9 then
-        pdifmax = cratio * (10 / 9)    
+        pdifmax = cratio * (10 / 9)
     elseif cratio >= 0.9 then
         pdifmax = 1
     end

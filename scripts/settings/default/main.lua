@@ -98,7 +98,7 @@ xi.settings =
     WEAPON_SKILL_POWER  = 1.000, -- Multiplies damage dealt by Weapon Skills.
     USE_ADOULIN_WEAPON_SKILL_CHANGES = true, -- true/false. Change to toggle new Adoulin weapon skill damage calculations
     USE_MULTI_HIT_FTP_WEAPON_SKILL_CHANGES = true, -- true/false. Change to toggle new job enhancement weapon skill damage calculations started in 2019, will take precedence over adoulin when applicable
-
+    -- https://forum.square-enix.com/ffxi/threads/55998-October-2019-FINAL-FANTASY-XI-Digest?highlight=2019+update and http://wiki.ffo.jp on relevent ws page
     -- TRUSTS
     ENABLE_TRUST_CASTING = 1,
     ENABLE_TRUST_QUESTS  = 1,
