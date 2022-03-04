@@ -226,13 +226,14 @@ local function cRangedRatio(attacker, defender, params, ignoredDef, tp)
 
     cratio = cratio - levelCorrection
     cratio = cratio * atkmulti
-
-    if cratio > 3 - levelCorrection then
-        cratio = 3 - levelCorrection
-    end
-
-    if cratio < 0 then
+    -- lcoal attWeap = attacker:get
+    -- I would need help to finish this part as I dont know how to get the weapon been used to apply the right cap
+    -- cap should be 3.25 for archery and throwing, and 3.5 for marksmanship, for now I will bump it to 3.25
+   local cratioCap = 3.25 
+   if cratio < 0 then
         cratio = 0
+    elseif cratio > cratioCap then
+        cratio = cratioCap
     end
 
     -- max
@@ -240,30 +241,23 @@ local function cRangedRatio(attacker, defender, params, ignoredDef, tp)
 
     if cratio < 0.9 then
         pdifmax = cratio * (10 / 9)
-    elseif cratio >= 0.9 then
+    elseif cratio >= 0.9 and cratio < 1.1 then
         pdifmax = 1
+    elseif cratio >= 1.1 then
+        pdifmax = cratio
     end
-    -- elseif cratio < 1.1 then
-    -- right now pdifmax can be from 1.1 to infinite also 0.9 * (10/9) = 1 hence there is no need to check between 0.9 and 1.1
-    --    pdifmax = 1
-    -- else
-    --    pdifmax = cratio
-    -- end
 
+    -- old fomula had mistake and didnt check between two value
+    -- reworked with the https://www.bg-wiki.com/ffxi/PDIF info
     -- min
     local pdifmin = 0
-    -- Problem cratio of 1.2 would give a pdifmin of 1.105263... (1.2 * (20 / 19)) - (3 / 19)) I do not see the relevence
-    -- is there any point to checking if cratio is under 0.9 instead of 1.1
-    -- if cratio < 0.9 then
-    --    pdifmin = cratio
-    if cratio < 1.1 and cratio > 0.15 then -- formula over 1.1 would always be higher than 1 and lower than 0.15 would be negative
-        pdifmin = (cratio * (20 / 19)) - (3 / 19)
-    -- elseif cratio < 1.1 then
-    elseif cratio >= 1.1 then
+
+    if cratio < 0.9 then
+        pdifmin = cratio
+    elseif cratio >= 0.9 and cratio < 1.1 then
         pdifmin = 1
-    else   
-        pdifmin = 0
-    --    pdifmin = (cratio * (20 / 19)) - (3 / 19)
+    elseif 
+        pdifmin = (cratio * (20 / 19)) - (3 / 19)
     end
 
     local pdif = {}
