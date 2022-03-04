@@ -105,46 +105,46 @@ local prizes =
 			-- 25850, -- Pink Subligar
 			
 			-- Cycle #3
-			25774, -- Fancy Gilet
-			25838, -- Fancy Trunks
-			25775, -- Fancy Top
-			25839, -- Fancy Shorts
-			26964, -- Pupil's Camisa 
-			26946, -- Pupil's Shirt
-			27281, -- Pupil's Trousers
-			27455, -- Pupil's Shoes 
-			25639, -- Korrigan Masque
-			25715, -- Korrigan Suit
-			25645, -- Kupo Masque
-			25726, -- Kupo Suit
-			11812, -- Charity Cap
-			26719, -- Sheep Cap
-			26717, -- Cait Sith Cap
-			26738, -- Leafkin Cap
-			26707, -- Flan Masque
-			23737, -- Byakko Masque
-			26789, -- Shobuhouou Kabuto
+			-- 25774, -- Fancy Gilet
+			-- 25838, -- Fancy Trunks
+			-- 25775, -- Fancy Top
+			-- 25839, -- Fancy Shorts
+			-- 26964, -- Pupil's Camisa 
+			-- 26946, -- Pupil's Shirt
+			-- 27281, -- Pupil's Trousers
+			-- 27455, -- Pupil's Shoes 
+			-- 25639, -- Korrigan Masque
+			-- 25715, -- Korrigan Suit
+			-- 25645, -- Kupo Masque
+			-- 25726, -- Kupo Suit
+			-- 11812, -- Charity Cap
+			-- 26719, -- Sheep Cap
+			-- 26717, -- Cait Sith Cap
+			-- 26738, -- Leafkin Cap
+			-- 26707, -- Flan Masque
+			-- 23737, -- Byakko Masque
+			-- 26789, -- Shobuhouou Kabuto
 			
 			-- Cycle #4
-			-- 27899, -- Alliance Shirt
-			-- 28185, -- Alliance Pants
-			-- 28324, -- Alliance Boots 
-			-- 26967, -- Cossie Top
-			-- 27293, -- Cossie Bottom
-			-- 26965, -- Ta Moko
-			-- 27291, -- Swimming Togs
-			-- 25713, -- Track Shirt
-			-- 27325, -- Track Pants 
-			-- 25649, -- Gazer's Helmet
-			-- 26519, -- Mandragora Shirt
-			-- 26516, -- Citrullus Shirt
-			-- 25755, -- Crustacean Shirt
-			-- 26524, -- Gil Nabber Shirt
-			-- 26518, -- Jody Shirt
-			-- 25722, -- Jubilee Shirt
-			-- 26545, -- Mithkabob Shirt
-			-- 25758, -- Rhapsody Shirt
-			-- 26517, -- Shadow Lord Shirt
+			27899, -- Alliance Shirt
+			28185, -- Alliance Pants
+			28324, -- Alliance Boots 
+			26967, -- Cossie Top
+			27293, -- Cossie Bottom
+			26965, -- Ta Moko
+			27291, -- Swimming Togs
+			25713, -- Track Shirt
+			27325, -- Track Pants 
+			25649, -- Gazer's Helmet
+			26519, -- Mandragora Shirt
+			26516, -- Citrullus Shirt
+			25755, -- Crustacean Shirt
+			26524, -- Gil Nabber Shirt
+			26518, -- Jody Shirt
+			25722, -- Jubilee Shirt
+			26545, -- Mithkabob Shirt
+			25758, -- Rhapsody Shirt
+			26517, -- Shadow Lord Shirt
             
 			-- Cycle #5
 			-- 26520, -- Akitu Shirt
@@ -191,8 +191,8 @@ local prizes =
 		   -- 28661, -- Glinting Shield
 		   -- 21741, -- Demonic Axe
 		   -- 21693, -- Irradiance Blade
-		   --21745, -- Dullahan Axe
-		  -- 21977, -- Mutsonokami		-- BROKEN
+		   -- 21745, -- Dullahan Axe
+		   -- 21977, -- Mutsonokami		-- BROKEN
 		   -- 21862, -- Mizukage Naginata
 		   -- 22005, -- Burrower's Wand
 		   -- 22019, -- Jingly Rod
@@ -226,46 +226,46 @@ local prizes =
 
 		   
 		   -- Cycle #3
-		   21509, -- Premium Mogti
-		   20573, -- Aern Dagger
-		   20674, -- Aern Sword
-		   18912, -- Ark Saber
-		   18913, -- Ark Sword
-		   26489, -- Troth
-		   10808, -- Janus Guard
-		   10811, -- Chocobo Shield
-		   21759, -- Autarch's Axe
-		   21682, -- Lament
-		   21742, -- Aern Axe
-		   18545, -- Ark Tabar
-		   18464, -- Ark Tachi
-		   21860, -- Aern Spear
-		   20953, -- Escritorio
-		   22004, -- Soulflayer's Wand
-		   18399, -- Charm Wand
-		   22065, -- Aern Staff
-		   18563, -- Ark Scythe
+		   -- 21509, -- Premium Mogti
+		   -- 20573, -- Aern Dagger
+		   -- 20674, -- Aern Sword
+		   -- 18912, -- Ark Saber
+		   -- 18913, -- Ark Sword
+		   -- 26489, -- Troth
+		   -- 10808, -- Janus Guard
+		   -- 10811, -- Chocobo Shield
+		   -- 21759, -- Autarch's Axe
+		   -- 21682, -- Lament
+		   -- 21742, -- Aern Axe
+		   -- 18545, -- Ark Tabar
+		   -- 18464, -- Ark Tachi
+		   -- 21860, -- Aern Spear
+		   -- 20953, -- Escritorio
+		   -- 22004, -- Soulflayer's Wand
+		   -- 18399, -- Charm Wand
+		   -- 22065, -- Aern Staff
+		   -- 18563, -- Ark Scythe
 		   
 		   -- Cycle #4
-		   -- 20571, -- Infiltrator
-		   -- 20569, -- Esikuva
-		   -- 20576, -- Qutrub Knife
-		   -- 21608, -- Onion Sword II
-		   -- 21609, -- Save The Queen II
-		   -- 21636, -- Nihility
-		   -- 20668, -- Firetongue
-		   -- 20666, -- Blizzard Brand
-		   -- 26410, -- Diamond Buckler
-		   -- 10809, -- Moogle Guard
-		   -- 21965, -- Zanmato
-		   -- 21867, -- Sha Wujing's Lance
-		   -- 20933, -- Hotengeki
-		   -- 21086, -- Heartstopper
-		   -- 21095, -- Heartbeater
-		   -- 22039, -- Floral Hagoita
-		   -- 21074, -- Kupo Rod
-		   -- 21153, -- Malice Masher
-		   -- 22089, -- Sophistry
+		   20571, -- Infiltrator
+		   20569, -- Esikuva
+		   20576, -- Qutrub Knife
+		   21608, -- Onion Sword II
+		   21609, -- Save The Queen II
+		   21636, -- Nihility
+		   20668, -- Firetongue
+		   20666, -- Blizzard Brand
+		   26410, -- Diamond Buckler
+		   10809, -- Moogle Guard
+		   21965, -- Zanmato
+		   21867, -- Sha Wujing's Lance
+		   20933, -- Hotengeki
+		   21086, -- Heartstopper
+		   21095, -- Heartbeater
+		   22039, -- Floral Hagoita
+		   21074, -- Kupo Rod
+		   21153, -- Malice Masher
+		   22089, -- Sophistry
 
 
         },
@@ -370,7 +370,7 @@ local prizes =
         {
 		-- NICE TO HAVE STUFF
 
-			-- Cycle #1 -- Crafting/Nyzul sets
+			-- Cycle #1 -- Crafting/Nyzul sets <- These need to be highest login tier next time!
 			-- 28587, -- Artificer's Ring
 			-- 28585, -- Craftkeeper's Ring
 			-- 16106, -- Askar Zucchetto
@@ -411,56 +411,48 @@ local prizes =
 			-- 15349, -- Rutter Sabatons
 			
 			-- Cycle #3 -- WotG items/Elemental obis/WS gorgets
-			11343, -- Thrakon Breastplate
-			16036, -- Wilhelm's Earring
-			16035, -- Altdorf's Earring
-			15435, -- Karin Obi
-			15436, -- Hyorin Obi
-			15437, -- Furin Obi
-			15438, -- Dorin Obi
-			15439, -- Rairin Obi
-			15440, -- Suirin Obi
-			15441, -- Korin Obi
-			15442, -- Anrin Obi
-			15495, -- Flame Gorget
-			15496, -- Snow Gorget
-			15497, -- Breeze Gorget
-			15498, -- Soil Gorget
-			15499, -- Thunder Gorget
-			15500, -- Aqua Gorgot
-			15501, -- Light Gorget
-			15502, -- Shadow Gorget
+			-- 11343, -- Thrakon Breastplate
+			-- 16036, -- Wilhelm's Earring
+			-- 16035, -- Altdorf's Earring
+			-- 15435, -- Karin Obi
+			-- 15436, -- Hyorin Obi
+			-- 15437, -- Furin Obi
+			-- 15438, -- Dorin Obi
+			-- 15439, -- Rairin Obi
+			-- 15440, -- Suirin Obi
+			-- 15441, -- Korin Obi
+			-- 15442, -- Anrin Obi
+			-- 15495, -- Flame Gorget
+			-- 15496, -- Snow Gorget
+			-- 15497, -- Breeze Gorget
+			-- 15498, -- Soil Gorget
+			-- 15499, -- Thunder Gorget
+			-- 15500, -- Aqua Gorgot
+			-- 15501, -- Light Gorget
+			-- 15502, -- Shadow Gorget
 			
-			-- Cycle #4 -- Carbuncle Prime/
-			-- 14931, -- Carbuncle's Cuffs
-			-- 18063, -- Garuda's Sickle
-			-- 17192, -- Ifrit's Bow
-			-- 18109, -- Leviathan's Couse
-			-- 18404, -- Ramuh's Mace
-			-- 17711, -- Shiva's Shotel
-			-- 18021, -- Titan's Baselarde
-			-- wotg set ring 1
-			-- wotg set ring 2
+			-- Cycle #4 -- WOTG Nations
+			16149, -- Cobra Cloche
+			14591, -- Cobra Robe
+			15012, -- Cobra Gloves
+			16318, -- Cobra Trews
+			15758, -- Cobra Crackows
+			16148, -- Cobra Cap
+			14590, -- Cobra Harness
+			15011, -- Cobra Mittens
+			16317, -- Cobra Subligar
+			15757, -- Cobra Leggings
+			16147, -- Fourth Haube
+			14589, -- Fourth Brunne
+			15010, -- Fourth Hentzes
+			16316, -- Fourth Schoss
+			15756, -- Fourth Schuhs
 			
-			-- Cycle #5 -- WotG Nation sets
+			
+			-- Cycle #5 -- 
 			--
 			
-			-- Cycle #5 -- ZNM sets
-			-- 16155, -- Aurum Armet
-			-- 11282, -- Aurum Cuirass
-			-- 15021, -- Aurum Gauntlets
-			-- 16341, -- Aurum Cuisses
-			-- 11376, -- Aurum Sabatons
-			-- 16156, -- Oracle's Cap
-			-- 11283, -- Oracle's Robe
-			-- 15022, -- Oracle's Gloves
-			-- 16342, -- Oracle's Braconi
-			-- 11377, -- Oracle's Pigaches
-			-- 16157, -- Enkidu's Cap
-			-- 11284, -- Enkidu's Harness
-			-- 15023, -- Enkidu's Mittens
-			-- 16343, -- Enkidu's Subligar
-			-- 11378, -- Enkidu's Leggings
+
 
         },
     },
@@ -503,27 +495,47 @@ local prizes =
 			-- 15514, -- Love Torque			
 			
 			-- Cycle #3 -- Useful NM drops/MMM
-			15351, -- Bounding Boots
-			15224, -- Empress Hairpin
-			14986, -- Ochimusha Kote
-			15737, -- Sarutobi Kyahan
-			15736, -- Trotter Boots
-			15515, -- Peacock Amulet
-			18752, -- Retaliators
-			18714, -- Vali's Bow
-			15899, -- Velocious Belt
-			18852, -- Octave Club
-			14469, -- Reverend Mail
-			13915, -- Optical Hat
-			14062, -- Carbuncle Mitts
-			15221, -- Patroclus's Helm
-			13567, -- Bomb Queen Ring
-			15350, -- Rostrum Pumps
-			13303, -- Jelly Ring
-			15223, -- Ace's Helm
-			17759, -- Koggelmander
+			-- 15351, -- Bounding Boots
+			-- 15224, -- Empress Hairpin
+			-- 14986, -- Ochimusha Kote
+			-- 15737, -- Sarutobi Kyahan
+			-- 15736, -- Trotter Boots
+			-- 15515, -- Peacock Amulet
+			-- 18752, -- Retaliators
+			-- 18714, -- Vali's Bow
+			-- 15899, -- Velocious Belt
+			-- 18852, -- Octave Club
+			-- 14469, -- Reverend Mail
+			-- 13915, -- Optical Hat
+			-- 14062, -- Carbuncle Mitts
+			-- 15221, -- Patroclus's Helm
+			-- 13567, -- Bomb Queen Ring
+			-- 15350, -- Rostrum Pumps
+			-- 13303, -- Jelly Ring
+			-- 15223, -- Ace's Helm
+			-- 17759, -- Koggelmander
 			
-			-- Cycle #idk -- Limbus gear
+			-- Cycle #4 -- HQ Kings pop items/Carbuncle Prime/WOTG Nations/Naji's/TH+1 hat
+			3340,  -- Sweet Tea (Nidhogg pop)
+			3342,  -- Savory Shank (King Behemoth pop)
+			3344,  -- Red Pondweed (Aspidochelone pop)
+			14931, -- Carbuncle's Cuffs
+			18063, -- Garuda's Sickle
+			17192, -- Ifrit's Bow
+			18109, -- Leviathan's Couse
+			18404, -- Ramuh's Mace
+			17711, -- Shiva's Shotel
+			18021, -- Titan's Baselarde
+			26219, -- Naji's Loop
+			16146, -- Iron Ram Sallet
+			14588, -- Iron Ram Hauberk
+			15009, -- Iron Ram Dastanas
+			16315, -- Iron Ram Hose
+			15755, -- Iron Ram Greaves
+			25679, -- White Rarab Cap +1 (TH+1)
+			
+			---------------------------------------------------------------------------
+			-- Cycle #? -- Limbus gear
 			-- 15240, -- Homam Zucchetto
 			-- 14488, -- Homam Corazza
 			-- 14905, -- Homam Manopolas
@@ -535,8 +547,24 @@ local prizes =
 			-- 15577, -- Nashira Seraweels
 			-- 15662, -- Nashira Crackows
 
+			-- Cycle #? -- ZNM sets
+			-- 16155, -- Aurum Armet
+			-- 11282, -- Aurum Cuirass
+			-- 15021, -- Aurum Gauntlets
+			-- 16341, -- Aurum Cuisses
+			-- 11376, -- Aurum Sabatons
+			-- 16156, -- Oracle's Cap
+			-- 11283, -- Oracle's Robe
+			-- 15022, -- Oracle's Gloves
+			-- 16342, -- Oracle's Braconi
+			-- 11377, -- Oracle's Pigaches
+			-- 16157, -- Enkidu's Cap
+			-- 11284, -- Enkidu's Harness
+			-- 15023, -- Enkidu's Mittens
+			-- 16343, -- Enkidu's Subligar
+			-- 11378, -- Enkidu's Leggings
 			
-			-- Cycle #idk -- JoL/Absolute Virtue/Hachiryu/Pandemonium Warden
+			-- Cycle #? -- JoL/Absolute Virtue/Hachiryu/Pandemonium Warden
 			-- 14808, -- Novio Earring
 			-- 14809, -- Novia Earring
 			-- 15548, -- Mars's Ring
@@ -560,6 +588,7 @@ local prizes =
 			-- 16376, -- Bahram Cuisses
 			-- 11410, -- Setanta's Ledelsens
 			-- 16302, -- Bloodbead Gorget
+			
         },
     },
 }
