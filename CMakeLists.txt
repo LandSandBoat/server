@@ -80,7 +80,7 @@ find_package(Threads REQUIRED)
 link_libraries(${CMAKE_THREAD_LIBS_INIT})
 
 # Find MariaDB
-include(MariaDB)
+include(MariaDB) # defines mariadbclient
 
 # Find ZMQ
 find_package(ZeroMQ REQUIRED)
