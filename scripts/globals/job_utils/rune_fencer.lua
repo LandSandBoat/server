@@ -81,7 +81,7 @@ local function calculateVivaciousPulseHealing(target)
     local divineMagicSkillLevel = target:getSkillLevel(xi.skill.DIVINE_MAGIC)
     local HPHealAmount = 10 + math.floor(divineMagicSkillLevel / 2 * (100 + target:getJobPointLevel(xi.jp.VIVACIOUS_PULSE_EFFECT)) / 100) -- Bonus of 1-20%  from Vivacious pulse job points.
     local tenebraeRuneCount = 0
-    local bonusPct = 1.0 -- todo, add in bonus from augment attached to Futhark Claymore, Peord Claymore, and Morgelai. Need extdata for proper values.
+    local bonusPct = (100 + target:getMod(xi.mod.VIVACIOUS_PULSE_POTENCY)) / 100
 
     local debuffs = {}
     local debuffCount = 0
@@ -122,7 +122,7 @@ local function calculateVivaciousPulseHealing(target)
         target:addMP(MPHealAmount) -- augment bonusPct does not apply here according to testing.
     end
 
-    if debuffCount > 0 and (target:getEquipID(xi.slot.HEAD) == 26782 or target:getEquipID(xi.slot.HEAD) == 26783) then -- add random removal of Poison, Paralyze, Blind, Silence, Mute, Curse, Bane, Doom, Virus, Plague, Petrification via AF3 head (source: https://www.bg-wiki.com/ffxi/Erilaz_Galea)
+    if debuffCount > 0 and target:getMod(xi.mod.AUGMENTS_VIVACIOUS_PULSE) > 0 then -- add random removal of Poison, Paralyze, Blind, Silence, Mute, Curse, Bane, Doom, Virus, Plague, Petrification via AF3 head (source: https://www.bg-wiki.com/ffxi/Erilaz_Galea)
         target:delStatusEffect(debuffs[math.random(debuffCount)])
     end
 
@@ -130,6 +130,8 @@ local function calculateVivaciousPulseHealing(target)
     if target:getHP() + HPHealAmount > target:getMaxHP() then
         HPHealAmount = target:getMaxHP() - target:getHP() -- don't go over cap
     end
+
+    target:restoreHP(HPHealAmount)
 
     return HPHealAmount
 end
@@ -149,18 +151,9 @@ xi.job_utils.rune_fencer.useSwordplay = function(player, target, ability)
     -- gear bonuses from https://www.bg-wiki.com/ffxi/Swordplay
     if player:getMainJob() == xi.job.RUN and target:getMainLvl() == 99 then -- don't bother with gear boost checks until 99 and main RUN
         local tickPower = 3 -- Tick power appears to be 3/tick, not 6/tick if RUN main and 3/tick if RUN sub; source : https://www.ffxiah.com/forum/topic/37086/endeavoring-to-awaken-a-guide-to-rune-fencer/180/#3615377
-        local handsSlotID = target:getEquipID(xi.slot.HANDS)
 
         -- add starting tick bonuses if appropriate gear is equipped
-        if handsSlotID      == 27018 then
-            power = 3 * tickPower
-        elseif handsSlotID  == 27019 then
-            power = 5 * tickPower
-        elseif handsSlotID  == 23218 then
-            power = 7 * tickPower
-        elseif handsSlotID  == 23553 then
-            power = 9 * tickPower
-        end
+        power = tickPower + player:getMod(xi.mod.SWORDPLAY)
     end
 
     if power > 0 then -- add aug bonus if appropriate gear is equipped. Note: ilvl 109+ "relic" or "AF2" gear always has the augment, so no need to check extdata. RUN does not have AF/AF2/AF3 gear below i109.
