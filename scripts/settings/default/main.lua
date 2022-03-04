@@ -88,7 +88,7 @@ xi.settings =
     EXP_RATE        = 1.000, -- Multiplies exp from script (except FoV/GoV).
     BOOK_EXP_RATE   = 1.000, -- Multiplies exp from FoV/GoV book pages.
     TABS_RATE       = 3.000, -- Multiplies tabs earned from fov.
-    ROE_EXP_RATE    = 2.250, -- Multiplies exp earned from records of eminence.
+    ROE_EXP_RATE    = 1.750, -- Multiplies exp earned from records of eminence.
     SPARKS_RATE     = 1.500, -- Multiplies sparks earned from records of eminence.
     CURE_POWER      = 1.000, -- Multiplies amount healed from Healing Magic, including the relevant Blue Magic.
     ELEMENTAL_POWER = 1.000, -- Multiplies damage dealt by Elemental and non-drain Dark Magic.
@@ -174,7 +174,7 @@ xi.settings =
     HALLOWEEN_YEAR_ROUND            = 0,  -- Set to 1 to have Harvest Festival initialize outside of normal times.
 
     -- MISC
-	AVATAR_DAMAGE_MOD            = .8,
+	AVATAR_DAMAGE_MOD            = .6,
     RIVERNE_PORTERS              = 120,  -- Time in seconds that Unstable Displacements in Cape Riverne stay open after trading a scale.
     LANTERNS_STAY_LIT            = 1200, -- time in seconds that lanterns in the Den of Rancor stay lit.
     ENABLE_COP_ZONE_CAP          = 0,    -- Enable or disable lvl cap
