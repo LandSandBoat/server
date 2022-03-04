@@ -244,8 +244,6 @@ namespace luautils
         // Handle settings
         contentRestrictionEnabled = GetSettingsVariable("RESTRICT_CONTENT") != 0;
 
-        moduleutils::LoadLuaModules();
-
         TracyReportLuaMemory(lua.lua_state());
 
         return 0;
