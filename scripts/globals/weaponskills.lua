@@ -306,7 +306,7 @@ local function getRangedHitRate(attacker, target, capHitRate, bonus)
 
     local hitdiff = 0
     local hitrate = 75
-    
+
     hitdiff = (acc - eva) / 2 -- no need to check if eva is hier or lower than acc it will be negative if eva is higher and positive if acc is higher
 
     hitrate = hitrate + hitdiff
