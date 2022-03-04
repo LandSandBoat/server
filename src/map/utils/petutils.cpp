@@ -217,24 +217,24 @@ namespace petutils
                 Pet->hth_sdt    = (uint16)(Sql_GetFloatData(SqlHandle, 29) * 1000);
                 Pet->impact_sdt = (uint16)(Sql_GetFloatData(SqlHandle, 30) * 1000);
 
-                Pet->fire_sdt    = (uint16)((Sql_GetFloatData(SqlHandle, 31) - 1) * -100);
-                Pet->ice_sdt     = (uint16)((Sql_GetFloatData(SqlHandle, 32) - 1) * -100);
-                Pet->wind_sdt    = (uint16)((Sql_GetFloatData(SqlHandle, 33) - 1) * -100);
-                Pet->earth_sdt   = (uint16)((Sql_GetFloatData(SqlHandle, 34) - 1) * -100);
-                Pet->thunder_sdt = (uint16)((Sql_GetFloatData(SqlHandle, 35) - 1) * -100);
-                Pet->water_sdt   = (uint16)((Sql_GetFloatData(SqlHandle, 36) - 1) * -100);
-                Pet->light_sdt   = (uint16)((Sql_GetFloatData(SqlHandle, 37) - 1) * -100);
-                Pet->dark_sdt    = (uint16)((Sql_GetFloatData(SqlHandle, 38) - 1) * -100);
+                Pet->fire_sdt    = (int16)Sql_GetFloatData(SqlHandle, 31); // Modifier 54, base 10000 stored as signed integer. Positives signify less damage.
+                Pet->ice_sdt     = (int16)Sql_GetFloatData(SqlHandle, 32); // Modifier 55, base 10000 stored as signed integer. Positives signify less damage.
+                Pet->wind_sdt    = (int16)Sql_GetFloatData(SqlHandle, 33); // Modifier 56, base 10000 stored as signed integer. Positives signify less damage.
+                Pet->earth_sdt   = (int16)Sql_GetFloatData(SqlHandle, 34); // Modifier 57, base 10000 stored as signed integer. Positives signify less damage.
+                Pet->thunder_sdt = (int16)Sql_GetFloatData(SqlHandle, 35); // Modifier 58, base 10000 stored as signed integer. Positives signify less damage.
+                Pet->water_sdt   = (int16)Sql_GetFloatData(SqlHandle, 36); // Modifier 59, base 10000 stored as signed integer. Positives signify less damage.
+                Pet->light_sdt   = (int16)Sql_GetFloatData(SqlHandle, 37); // Modifier 60, base 10000 stored as signed integer. Positives signify less damage.
+                Pet->dark_sdt    = (int16)Sql_GetFloatData(SqlHandle, 38); // Modifier 61, base 10000 stored as signed integer. Positives signify less damage.
 
                 // resistances
-                Pet->fire_res    = (int16)(Sql_GetIntData(SqlHandle, 39));
-                Pet->ice_res     = (int16)(Sql_GetIntData(SqlHandle, 40));
-                Pet->wind_res    = (int16)(Sql_GetIntData(SqlHandle, 41));
-                Pet->earth_res   = (int16)(Sql_GetIntData(SqlHandle, 42));
-                Pet->thunder_res = (int16)(Sql_GetIntData(SqlHandle, 43));
-                Pet->water_res   = (int16)(Sql_GetIntData(SqlHandle, 44));
-                Pet->light_res   = (int16)(Sql_GetIntData(SqlHandle, 45));
-                Pet->dark_res    = (int16)(Sql_GetIntData(SqlHandle, 46));
+                Pet->fire_res    = (int16)Sql_GetIntData(SqlHandle, 39);
+                Pet->ice_res     = (int16)Sql_GetIntData(SqlHandle, 40);
+                Pet->wind_res    = (int16)Sql_GetIntData(SqlHandle, 41);
+                Pet->earth_res   = (int16)Sql_GetIntData(SqlHandle, 42);
+                Pet->thunder_res = (int16)Sql_GetIntData(SqlHandle, 43);
+                Pet->water_res   = (int16)Sql_GetIntData(SqlHandle, 44);
+                Pet->light_res   = (int16)Sql_GetIntData(SqlHandle, 45);
+                Pet->dark_res    = (int16)Sql_GetIntData(SqlHandle, 46);
 
                 Pet->cmbDelay       = (uint16)Sql_GetIntData(SqlHandle, 47);
                 Pet->name_prefix    = (uint8)Sql_GetUIntData(SqlHandle, 48);
@@ -892,6 +892,7 @@ namespace petutils
         PPet->allegiance = PMaster->allegiance;
         PMaster->StatusEffectContainer->CopyConfrontationEffect(PPet);
 
+        // TODO: Lets not do this here.
         if (PPet->m_EcoSystem == ECOSYSTEM::AVATAR || PPet->m_EcoSystem == ECOSYSTEM::ELEMENTAL)
         {
             // assuming elemental spawn
@@ -905,9 +906,9 @@ namespace petutils
         PPet->setModifier(Mod::HTH_SDT, petData->hth_sdt);
         PPet->setModifier(Mod::IMPACT_SDT, petData->impact_sdt);
 
-        PPet->setModifier(Mod::FIRE_SDT, petData->fire_sdt);       // These are stored as floating percentages
-        PPet->setModifier(Mod::ICE_SDT, petData->ice_sdt);         // and need to be adjusted into modifier units.
-        PPet->setModifier(Mod::WIND_SDT, petData->wind_sdt);       // Todo: make these work like the physical ones
+        PPet->setModifier(Mod::FIRE_SDT, petData->fire_sdt);
+        PPet->setModifier(Mod::ICE_SDT, petData->ice_sdt);
+        PPet->setModifier(Mod::WIND_SDT, petData->wind_sdt);
         PPet->setModifier(Mod::EARTH_SDT, petData->earth_sdt);
         PPet->setModifier(Mod::THUNDER_SDT, petData->thunder_sdt);
         PPet->setModifier(Mod::WATER_SDT, petData->water_sdt);

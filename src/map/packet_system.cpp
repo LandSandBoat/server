@@ -35,6 +35,10 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "ai/ai_container.h"
 #include "ai/states/death_state.h"
 #include "alliance.h"
+#include "utils/blueutils.h"
+#include "party.h"
+#include "packet_system.h"
+#include "campaign_system.h"
 #include "conquest_system.h"
 #include "enmity_container.h"
 #include "entities/charentity.h"
@@ -3287,17 +3291,18 @@ void SmallPacket0x059(map_session_data_t* const PSession, CCharEntity* const PCh
 }
 
 /************************************************************************
- *                                                                       *
- *  Map Update (Conquest, Besieged, Campaign)                            *
- *                                                                       *
- ************************************************************************/
+*                                                                       *
+*  Map Update (Conquest, Besieged, Campaign)                            *
+*                                                                       *
+************************************************************************/
 
 void SmallPacket0x05A(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
+    CampaignState state = campaign::GetCampaignState();
     PChar->pushPacket(new CConquestPacket(PChar));
-    PChar->pushPacket(new CCampaignPacket(PChar, 0));
-    PChar->pushPacket(new CCampaignPacket(PChar, 1));
+    PChar->pushPacket(new CCampaignPacket(PChar, state, 0));
+    PChar->pushPacket(new CCampaignPacket(PChar, state, 1));
 }
 
 /************************************************************************

@@ -3527,7 +3527,7 @@ INSERT INTO `mob_skills` VALUES (3705,408,'naakuals_vengeance',0,7.0,2000,1500,4
 -- INSERT INTO `mob_skills` VALUES (3707,3451,'#1915',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (3708,641,'swift_blade',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (3709,235,'chant_du_cygne',0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (3710,237,'arrogance_incarnate',0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (3710,642,'arrogance_incarnate',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (3711,643,'vorpal_blade',0,7.0,2000,1500,4,0,0,0,0,0,0); -- ArkEV
 -- INSERT INTO `mob_skills` VALUES (3712,635,'dominion_slash',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (3713,236,'chant_du_cygne',0,7.0,2000,1500,4,0,0,0,0,0,0);

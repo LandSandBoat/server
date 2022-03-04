@@ -202,6 +202,9 @@ xi.player.onGameIn = function(player, firstLogin, zoning)
     end)
 end
 
+xi.player.onPlayerDeath = function(player)
+end
+
 xi.player.onPlayerLevelUp = function(player)
 end
 

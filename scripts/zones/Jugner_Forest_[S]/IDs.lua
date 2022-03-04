@@ -22,6 +22,7 @@ zones[xi.zone.JUGNER_FOREST_S] =
         LOGGING_IS_POSSIBLE_HERE  = 7076, -- Logging is possible here if you have <item>.
         FISHING_MESSAGE_OFFSET    = 7369, -- You can't fish here.
         ALREADY_OBTAINED_TELE     = 7705, -- You already possess the gate crystal for this telepoint.
+        YOU_FIND_SPARKLING_STONE  = 7723, -- You find a sparkling stone.
         ELEGANT_FOOTPRINTS        = 8398, -- You see numerous sets of elegant footprints.
         LILISETTE_IS_PREPARING    = 8399, -- Lilisette is preparing a new trap in an attempt to catch the ever-elusive Cait Sith. Bring her <item> to use as bait.
         IDEAL_PLACE_TO_PLANT_ITEM = 8528, -- This seems to be an ideal place to plant <item>.
