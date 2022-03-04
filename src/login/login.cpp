@@ -137,8 +137,8 @@ int32 do_init(int32 argc, char** argv)
 
     if (attached)
     {
+        ShowStatus("Console input thread is ready...");
         consoleInputThread = std::thread([&]() {
-            ShowStatus("Console input thread is ready..\r");
             // ctrl c apparently causes log spam
             auto lastInputTime = server_clock::now();
             while (consoleThreadRun)
