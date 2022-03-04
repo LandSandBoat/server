@@ -227,8 +227,8 @@ local function cRangedRatio(attacker, defender, params, ignoredDef, tp)
     cratio = cratio - levelCorrection
     cratio = cratio * atkmulti
 
-    local weaponType = attacker:getWeaponSkillType(tpz.slot.RANGED)
-        
+    local weaponType = attacker:getWeaponSkillType(xi.slot.RANGED)
+    local cRaticoCap = 0
     if (weaponType == xi.skill.MARKSMANSHIP) then
         cRatioCap = 3.5
     else
