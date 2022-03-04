@@ -1220,14 +1220,14 @@ xi.mod =
     -- Rune Fencer
     ENHANCES_BATTUTA            = 1004, -- Used by RUN merit point cat 2 to add +N% bonus damage to parry spikes during Battuta effect
     ENHANCES_ELEMENTAL_SFORZO   = 1005, -- Bonus duration
-    ENHANCES_SLEIGHT_OF_SWORD   = 1006, -- Used by RUN merit point cat 2 to add +N Subtle Blow to Swordplay 
+    ENHANCES_SLEIGHT_OF_SWORD   = 1006, -- Used by RUN merit point cat 2 to add +N Subtle Blow to Swordplay
     ENHANCES_INSPIRATION        = 1007, -- Used by RUN merit point cat 2 to add +N Fast Cast to Vallation/Valiance
     SWORDPLAY                   = 1008, -- Adds bonus starting ticks to Swordplay
     LIEMENT                     = 1009, -- Adds bonus duration as +N seconds
     VALIANCE_VALLATION_DURATION = 1010, -- Adds bonus duration as +N seconds
     PFLUG                       = 1011, -- Adds flat additional all-resist rate in +N%
     VIVACIOUS_PULSE_POTENCY     = 1012, -- Adds final HP bonus +N% to calculation of Vivacious Pulse
-    AUGMENTS_VIVACIOUS_PULSE    = 1013, -- Adds random erase/-na to Vivacious Pulse 
+    AUGMENTS_VIVACIOUS_PULSE    = 1013, -- Adds random erase/-na to Vivacious Pulse
     RAYKE_DURATION              = 1014, -- Adds bonus duration as +N seconds
     ODYLLIC_SUBTERFUGE_DURATION = 1015, -- Adds bonus duration as +N seconds
     SWIPE                       = 1016, -- Adds bonus damage to the Swipe/Lunge magic damage calculation
