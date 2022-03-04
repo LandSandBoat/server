@@ -226,14 +226,19 @@ local function cRangedRatio(attacker, defender, params, ignoredDef, tp)
 
     cratio = cratio - levelCorrection
     cratio = cratio * atkmulti
-    -- lcoal attWeap = attacker:get
-    -- I would need help to finish this part as I dont know how to get the weapon been used to apply the right cap
-    -- cap should be 3.25 for archery and throwing, and 3.5 for marksmanship, for now I will bump it to 3.25
-   local cratioCap = 3.25 
-   if cratio < 0 then
+
+    local weaponType = attacker:getWeaponSkillType(tpz.slot.RANGED)
+        
+    if (weaponType == xi.skill.MARKSMANSHIP) then
+        cRatioCap = 3.5
+    else
+        cRatioCap = 3.25
+    end
+
+    if cratio < 0 then
         cratio = 0
-    elseif cratio > cratioCap then
-        cratio = cratioCap
+    elseif cratio > cRatioCap then
+        cratio = cRatioCap
     end
 
     -- max
@@ -256,7 +261,7 @@ local function cRangedRatio(attacker, defender, params, ignoredDef, tp)
         pdifmin = cratio
     elseif cratio >= 0.9 and cratio < 1.1 then
         pdifmin = 1
-    elseif 
+    else
         pdifmin = (cratio * (20 / 19)) - (3 / 19)
     end
 
