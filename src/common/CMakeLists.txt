@@ -37,6 +37,7 @@ add_library(common STATIC ${SOURCES})
 
 target_link_libraries(common
     PUBLIC
+    mariadbclient
     spdlog_header_only
     sol2_single
     efsw
