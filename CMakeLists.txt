@@ -86,7 +86,7 @@ include(MariaDB) # defines mariadbclient
 find_package(ZeroMQ REQUIRED)
 
 # Find LuaJIT
-include(LuaJIT) # defines luajit
+include(LuaJIT)
 
 # Link this 'library' to set the c++ standard / compile-time options requested
 add_library(project_options INTERFACE)
