@@ -15,7 +15,7 @@
 #
 # Use tools/rename_dll.py to properly rename the dlls and libs
 # python ..\..\..\..\tools\rename_dll.py lua51.dll libluajit.dll x86
-# python ..\..\..\..\tools\rename_dll.py lua51.dll libluajit_64.dll
+# python ..\..\..\..\tools\rename_dll.py lua51.dll libluajit_64.dll x64
 #
 # Move the libs into ext/luajit/lib and ext/luajit/lib64
 # Move the dlls into the repo root
