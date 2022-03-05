@@ -83,7 +83,7 @@ link_libraries(${CMAKE_THREAD_LIBS_INIT})
 include(MariaDB) # defines mariadbclient
 
 # Find ZMQ
-find_package(ZeroMQ REQUIRED)
+include(ZeroMQ)
 
 # Find LuaJIT
 include(LuaJIT)
