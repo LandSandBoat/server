@@ -68,6 +68,8 @@ message(STATUS "GIT_BRANCH: ${GIT_BRANCH}")
 message(STATUS "GIT_DATE: ${GIT_DATE}")
 message(STATUS "GIT_COMMIT_SUBJECT: ${GIT_COMMIT_SUBJECT}")
 
+string(REGEX REPLACE "\"" "'" GIT_COMMIT_SUBJECT ${GIT_COMMIT_SUBJECT})
+
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/src/common/version.cpp.in
                ${CMAKE_CURRENT_SOURCE_DIR}/src/common/version.cpp)
 
