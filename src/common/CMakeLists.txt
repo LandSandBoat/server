@@ -13,6 +13,8 @@ set(SOURCES
     logging.h
     logging_service.cpp
     logging_service.h
+    message_server.cpp
+    message_server.h
     md52.cpp
     md52.h
     mmo.h

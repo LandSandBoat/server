@@ -26,26 +26,21 @@
 #include <iostream>
 #include <string>
 
-Application::Application(std::unique_ptr<argparse::ArgumentParser>&& pArgParser)
-: gArgParser(std::move(pArgParser))
+Application::Application(std::string const& serverName, std::unique_ptr<argparse::ArgumentParser>&& pArgParser)
+: m_ServerName(serverName)
+, gArgParser(std::move(pArgParser))
+, m_IsRunning(true)
 {
-    //debug::init();
+    logging::InitializeLog(serverName, fmt::format("log/{}-server.log", serverName), false);
 
-    auto toau = SettingsManager::Get<bool>(MainSettings::ENABLE_TOAU);
-    std::cout << "TOAU: " << toau << "\n";
+    debug::init();
 
-    auto serverMessage = SettingsManager::Get<std::string>(MainSettings::SERVER_MESSAGE);
-    std::cout << serverMessage << "\n";
-
-    //gZMQ         = std::make_unique<ZMQService>(this);
-    //gSQL         = std::make_unique<SQLService>(this);
-    //gDebug       = std::make_unique<DebugService>(this);
-    //gTaskManager = std::make_unique<TaskManager>(this);
+    gConsoleService = std::make_unique<ConsoleService>();
 }
 
 bool Application::IsRunning()
 {
-    return bIsRunning;
+    return m_IsRunning;
 }
 
 void Application::Tick()

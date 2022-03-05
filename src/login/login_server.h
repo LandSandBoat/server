@@ -104,4 +104,38 @@ std::string maint_config_write(const char* key);
 int32 config_read(const char* fileName, const char* config, const std::function<void(const char*, const char*)>& method);
 int32 config_write(const char* fileName, const char* config, const std::function<std::string(const char*)>& method);
 
+#pragma once
+
+#include "common/application.h"
+
+class LoginServer final : public Application
+{
+public:
+    LoginServer(std::unique_ptr<argparse::ArgumentParser>&& pArgParser)
+    : Application(std::move(pArgParser))
+    {
+
+        else if (strcmp(argv[i], "--login_config") == 0 || strcmp(argv[i], "--login-config") == 0)
+        {
+            LOGIN_CONF_FILENAME = argv[i + 1];
+        }
+        else if (strcmp(argv[i], "--run_once") == 0)
+        { // close the zone-server as soon as its done.. for testing [Celest]
+            runflag = 0;
+        }
+    }
+
+    ~LoginServer() override
+    {
+    }
+
+    void Tick() override
+    {
+        Application::Tick();
+    }
+
+private:
+
+};
+
 #endif

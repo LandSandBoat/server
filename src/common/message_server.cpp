@@ -250,9 +250,9 @@ void message_server_init()
     zSocket->set(zmq::sockopt::rcvtimeo, 500);
 
     string_t server = "tcp://";
-    server.append(login_config.msg_server_ip);
-    server.append(":");
-    server.append(std::to_string(login_config.msg_server_port));
+    //server.append(login_config.msg_server_ip);
+    //server.append(":");
+    //server.append(std::to_string(login_config.msg_server_port));
 
     try
     {

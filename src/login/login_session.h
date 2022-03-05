@@ -22,7 +22,7 @@
 #ifndef _LOGIN_SESSION_H
 #define _LOGIN_SESSION_H
 
-#include "../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include <list>
 

@@ -29,7 +29,7 @@
 #include <cstring>
 
 #include "lobby.h"
-#include "login.h"
+#include "login_server.h"
 
 int32 login_lobbydata_fd;
 int32 login_lobbyview_fd;

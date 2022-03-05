@@ -19,13 +19,13 @@
 ===========================================================================
 */
 
-#include "../common/logging.h"
-#include "../common/socket.h"
+#include "common/logging.h"
+#include "common/socket.h"
+#include "common/message_server.h"
 
 #include "account.h"
-#include "login.h"
+#include "login_server.h"
 #include "login_auth.h"
-#include "message_server.h"
 
 #include <cctype>
 #include <cstdio>

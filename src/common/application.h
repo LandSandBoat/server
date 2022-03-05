@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2022 LandSandBoat Dev Teams
@@ -25,6 +25,7 @@
 #include <memory>
 #include <string>
 
+#include "common/console_service.h"
 #include "common/logging_service.h"
 #include "common/zmq_service.h"
 
@@ -36,7 +37,7 @@
 class Application
 {
 public:
-    Application(std::unique_ptr<argparse::ArgumentParser>&& pArgParser);
+    Application(std::string const& serverName, std::unique_ptr<argparse::ArgumentParser>&& pArgParser);
     virtual ~Application() = default;
 
     Application(const Application&) = delete;            // Copy constructor
@@ -48,8 +49,10 @@ public:
     virtual void Tick();
 
     std::unique_ptr<argparse::ArgumentParser> gArgParser;
+    std::unique_ptr<ConsoleService> gConsoleService;
 
-    bool bIsRunning;
+    bool m_IsRunning;
+    std::string m_ServerName;
 
 private:
     //

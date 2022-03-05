@@ -18,11 +18,12 @@
 
 ===========================================================================
 */
-#include "../common/logging.h"
-#include "../common/mmo.h"
-#include "../common/timer.h"
-#include "../common/utils.h"
-#include "../common/version.h"
+#include "common/mmo.h"
+#include "common/logging.h"
+#include "common/message_server.h"
+#include "common/timer.h"
+#include "common/utils.h"
+#include "common/version.h"
 
 #include <cstdio>
 #include <cstdlib>
@@ -34,72 +35,25 @@
 #include <thread>
 #include <vector>
 
-#ifdef WIN32
-#include <io.h>
-#define isatty _isatty
-#else
-#include <unistd.h>
-#endif
-
 #include "lobby.h"
-#include "login.h"
+#include "login_server.h"
 #include "login_auth.h"
-#include "message_server.h"
 
 const char* LOGIN_CONF_FILENAME   = nullptr;
 const char* VERSION_INFO_FILENAME = nullptr;
 const char* MAINT_CONF_FILENAME   = nullptr;
-
-volatile bool consoleThreadRun = true;
 
 login_config_t login_config; // main settings
 version_info_t version_info;
 maint_config_t maint_config;
 
 std::thread messageThread;
-std::thread consoleInputThread;
+
 
 std::unique_ptr<SqlConnection> sql;
 
 int32 do_init(int32 argc, char** argv)
 {
-    int32 i;
-    LOGIN_CONF_FILENAME   = "conf/login.conf";
-    VERSION_INFO_FILENAME = "conf/version.conf";
-    MAINT_CONF_FILENAME   = "conf/maint.conf";
-
-    // srand(gettick());
-
-    for (i = 1; i < argc; i++)
-    {
-        if (strcmp(argv[i], "--help") == 0 || strcmp(argv[i], "--h") == 0 || strcmp(argv[i], "--?") == 0 || strcmp(argv[i], "/?") == 0)
-        {
-            login_helpscreen(1);
-        }
-        else if (strcmp(argv[i], "--version") == 0 || strcmp(argv[i], "--v") == 0 || strcmp(argv[i], "-v") == 0 || strcmp(argv[i], "/v") == 0)
-        {
-            login_versionscreen(1);
-        }
-        else if (strcmp(argv[i], "--login_config") == 0 || strcmp(argv[i], "--login-config") == 0)
-        {
-            LOGIN_CONF_FILENAME = argv[i + 1];
-        }
-        else if (strcmp(argv[i], "--run_once") == 0)
-        { // close the zone-server as soon as its done.. for testing [Celest]
-            runflag = 0;
-        }
-    }
-
-    login_config_default();
-    config_read(LOGIN_CONF_FILENAME, "login", login_config_read);
-    login_config_read_from_env();
-
-    version_info_default();
-    config_read(VERSION_INFO_FILENAME, "version info", version_info_read);
-
-    maint_config_default();
-    config_read(MAINT_CONF_FILENAME, "maint", maint_config_read);
-
     login_fd = makeListenBind_tcp(login_config.login_auth_ip.c_str(), login_config.login_auth_port, connect_client_login);
     ShowStatus("The login-server-auth is ready (Server is listening on the port %u).", login_config.login_auth_port);
 
@@ -129,99 +83,6 @@ int32 do_init(int32 argc, char** argv)
         ShowStatus("New account creation is disabled in login_config.");
     }
 
-    messageThread = std::thread(message_server_init);
-
-    bool attached = isatty(0);
-    if (attached)
-    {
-        ShowStatus("Console input thread is ready");
-        consoleInputThread = std::thread([&]()
-                                         {
-            // ctrl c apparently causes log spam
-            auto lastInputTime = server_clock::now();
-            while (consoleThreadRun)
-            {
-                if ((server_clock::now() - lastInputTime) > 1s)
-                {
-                    std::string line;
-                    std::getline(std::cin, line);
-                    std::istringstream       stream(line);
-                    std::string              input;
-                    std::vector<std::string> inputs;
-                    while (stream >> input)
-                    {
-                        inputs.push_back(input);
-                    }
-
-                    if (!inputs.empty())
-                    {
-                        if (inputs[0] == "verlock")
-                        {
-                            // handle wrap around from 2->3 as 0
-                            auto temp             = (++version_info.ver_lock) % 3;
-                            version_info.ver_lock = temp;
-
-                            const char* value = "";
-                            switch (version_info.ver_lock)
-                            {
-                                case 0:
-                                    value = "disabled";
-                                    break;
-                                case 1:
-                                    value = "enabled - strict";
-                                    break;
-                                case 2:
-                                    value = "enabled - greater than or equal";
-                                    break;
-                            }
-                            ShowStatus("Version lock %i - %s\r", version_info.ver_lock, value);
-                        }
-                        else if (inputs[0] == "maint_mode")
-                        {
-                            if (inputs.size() >= 2)
-                            {
-                                uint8 mode = 0;
-                                try
-                                {
-                                    mode = std::stoi(inputs[1]);
-                                }
-                                catch (...)
-                                {
-                                    // set to invalid if string -> uint8 fails
-                                    mode = 0;
-                                }
-
-                                if (mode > 2)
-                                {
-                                    ShowStatus("Maintenance mode %i not supported\r", maint_config.maint_mode);
-                                }
-                                else
-                                {
-                                    maint_config.maint_mode = mode;
-                                    config_write(MAINT_CONF_FILENAME, "maint", maint_config_write);
-
-                                    ShowStatus("Maintenance mode changed to %i\r", maint_config.maint_mode);
-                                }
-                            }
-                            else
-                            {
-                                ShowStatus("Maintenance mode requires 1 argument (mode - 0-1)\r");
-                            }
-                        }
-                        else
-                        {
-                            ShowStatus("Unknown console input command\r");
-                        }
-                    }
-
-                    lastInputTime = server_clock::now();
-                }
-            };
-            ShowStatus("Console input thread exiting..\r"); });
-    }
-
-    // Small pause to wait for the console thread to set up
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
     ShowStatus("The login-server is ready to work!");
 
     return 0;

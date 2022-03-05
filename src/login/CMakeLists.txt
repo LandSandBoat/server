@@ -7,10 +7,9 @@ set(SOURCES
     login_auth.h
     login_session.cpp
     login_session.h
-    login.cpp
-    login.h
-    message_server.cpp
-    message_server.h)
+    login_server.cpp
+    login_server.h
+)
 
 if(UNIX)
     set(resource "")

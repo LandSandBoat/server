@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "common/application.h"
 
@@ -6,9 +6,14 @@ class WorldServer final : public Application
 {
 public:
     WorldServer(std::unique_ptr<argparse::ArgumentParser>&& pArgParser)
-    : Application(std::move(pArgParser))
+    : Application("world", std::move(pArgParser))
     {
         // World server should _mostly_ be comprised of ZMQ handlers and timed tasks.
+
+        gConsoleService->RegisterCommand("stats", "Print server runtime statistics", [&]()
+        {
+            fmt::print("TODO: Some stats!\n");
+        });
     }
 
     ~WorldServer() override
