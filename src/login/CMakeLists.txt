@@ -9,6 +9,7 @@ set(SOURCES
     login_session.h
     login_server.cpp
     login_server.h
+    main.cpp
 )
 
 if(UNIX)

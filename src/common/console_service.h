@@ -28,6 +28,7 @@
 #include <thread>
 
 #include "logging.h"
+#include "taskmgr.h"
 
 #ifdef WIN32
 #include <io.h>
@@ -60,10 +61,16 @@ public:
             }
         });
 
+        RegisterCommand("tasks", "Show the current amount of tasks registered to the application task manager.",
+        []()
+        {
+            fmt::print("> tasks registered to the application task manager: {}\n", CTaskMgr::getInstance()->getTaskList().size());
+        });
+
         RegisterCommand("exit", "Terminate the program.",
         []()
         {
-            fmt::print("Goodbye!");
+            fmt::print("> Goodbye!");
             std::terminate();
         });
 
@@ -101,6 +108,10 @@ public:
                             if (m_commands.find(input) != m_commands.end())
                             {
                                 m_commands[input].func();
+                            }
+                            else
+                            {
+                                fmt::print("> Unknown command.\n");
                             }
                         }
                     }

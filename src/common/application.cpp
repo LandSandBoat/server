@@ -22,6 +22,7 @@
 #include "application.h"
 #include "settings_manager.h"
 #include "debug.h"
+#include "taskmgr.h"
 
 #include <iostream>
 #include <string>
@@ -31,9 +32,17 @@ Application::Application(std::string const& serverName, std::unique_ptr<argparse
 , gArgParser(std::move(pArgParser))
 , m_IsRunning(true)
 {
+#ifdef _WIN32
+    SetConsoleTitle(fmt::format("{}-server", serverName).c_str());
+#endif
+
     logging::InitializeLog(serverName, fmt::format("log/{}-server.log", serverName), false);
+    ShowStatus("Begin %s-server initialisation...", serverName);
 
     debug::init();
+        
+    ShowStatus("The %s-server is ready to work...", serverName);
+    ShowStatus("=======================================================================");
 
     gConsoleService = std::make_unique<ConsoleService>();
 }
@@ -45,8 +54,11 @@ bool Application::IsRunning()
 
 void Application::Tick()
 {
-    // gZMQ->Tick();
-    // gSQL->Tick();
-    // gDebug->Tick();
-    // gTaskManager->Tick();
+    // Main runtime cycle
+    duration next;
+    while (m_IsRunning)
+    {
+        next = CTaskMgr::getInstance()->DoTimer(server_clock::now());
+        //do_sockets(&rfd, next);
+    }
 }

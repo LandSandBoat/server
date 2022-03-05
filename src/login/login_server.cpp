@@ -49,7 +49,6 @@ maint_config_t maint_config;
 
 std::thread messageThread;
 
-
 std::unique_ptr<SqlConnection> sql;
 
 int32 do_init(int32 argc, char** argv)
@@ -90,12 +89,12 @@ int32 do_init(int32 argc, char** argv)
 
 void do_final(int code)
 {
-    consoleThreadRun = false;
     message_server_close();
     if (messageThread.joinable())
     {
         messageThread.join();
     }
+
     if (consoleInputThread.joinable())
     {
         consoleInputThread.join();
@@ -415,7 +414,7 @@ void maint_config_read(const char* key, const char* value)
     }
     else
     {
-        ShowWarning("Unknown setting '%s' with value '%s' in  maint info file", key, value);
+        ShowWarning("Unknown setting '%s' with value '%s' in maint info file", key, value);
     }
 }
 

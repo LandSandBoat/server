@@ -23,7 +23,6 @@
 #define _KERNEL_H_
 
 #include "cbasetypes.h"
-#include <argparse/argparse.hpp>
 
 extern int    arg_c;
 extern char** arg_v;

@@ -112,17 +112,14 @@ class LoginServer final : public Application
 {
 public:
     LoginServer(std::unique_ptr<argparse::ArgumentParser>&& pArgParser)
-    : Application(std::move(pArgParser))
+    : Application("login", std::move(pArgParser))
     {
-
-        else if (strcmp(argv[i], "--login_config") == 0 || strcmp(argv[i], "--login-config") == 0)
+        gConsoleService->RegisterCommand("maint", "Toggle maintenance mode",
+        [&]()
         {
-            LOGIN_CONF_FILENAME = argv[i + 1];
-        }
-        else if (strcmp(argv[i], "--run_once") == 0)
-        { // close the zone-server as soon as its done.. for testing [Celest]
-            runflag = 0;
-        }
+            m_MaintenanceMode = !m_MaintenanceMode;
+            fmt::print("Toggled maintenance mode to: {}\n", m_MaintenanceMode ? "on" : "off");
+        });
     }
 
     ~LoginServer() override
@@ -135,7 +132,7 @@ public:
     }
 
 private:
-
+    std::atomic<bool> m_MaintenanceMode = false;
 };
 
 #endif
