@@ -251,7 +251,7 @@ namespace attackutils
      ************************************************************************/
     bool IsGuarded(CBattleEntity* PAttacker, CBattleEntity* PDefender)
     {
-        if (!PDefender->StatusEffectContainer->HasPreventActionEffect() && facing(PDefender->loc.p, PAttacker->loc.p, 64))
+        if (facing(PDefender->loc.p, PAttacker->loc.p, 64))
         {
             return (xirand::GetRandomNumber(100) < battleutils::GetGuardRate(PAttacker, PDefender));
         }
