@@ -1572,6 +1572,9 @@ int32 map_config_read(const int8* cfgName)
 int32 map_garbage_collect(time_point tick, CTaskMgr::CTask* PTask)
 {
     TracyZoneScoped;
+
+    ShowInfo("CTaskMgr Active Tasks: %i", CTaskMgr::getInstance()->getTaskList().size());
+    
     luautils::garbageCollectStep();
     return 0;
 }
