@@ -112,6 +112,7 @@ public:
     ~ConsoleService()
     {
         m_consoleThreadRun = false;
+        m_consoleInputThread.join();
     }
 
     // NOTE: If you capture things in this function, make sure they're protected (locked or atomic)!
