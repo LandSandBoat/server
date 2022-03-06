@@ -25,8 +25,8 @@ local mission = Mission:new(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.T
 
 mission.reward =
 {
-    -- Rank 6 is awarded prior to completing mission
-    gil = 20000,
+    gil  = 20000,
+    rank = 6,
 }
 
 local handleAcceptMission = function(player, csid, option, npc)
@@ -70,24 +70,6 @@ mission.sections =
 
         [xi.zone.CHATEAU_DORAGUILLE] =
         {
-            ['Arsha'] =
-            {
-                onTrigger = function(player, npc)
-                    if player:getMissionStatus(mission.areaId) == 5 then
-                        return mission:progressEvent(85)
-                    end
-                end,
-            },
-
-            ['Chupaile'] =
-            {
-                onTrigger = function(player, npc)
-                    if player:getMissionStatus(mission.areaId) == 5 then
-                        return mission:progressEvent(86)
-                    end
-                end,
-            },
-
             ['Halver'] =
             {
                 onTrigger = function(player, npc)
@@ -95,13 +77,15 @@ mission.sections =
 
                     if missionStatus == 0 then
                         return mission:progressEvent(546)
+                    elseif missionStatus == 1 then
+                        return mission:messageText(chateauID.text.PRINCE_TRION_CHAMBERS)
+                    elseif missionStatus == 2 then
+                        return mission:messageText(chateauID.text.WHAT_TRION_WILL_SAY)
                     elseif
                         missionStatus == 4 and
                         player:hasKeyItem(xi.ki.SHADOW_FRAGMENT)
                     then
                         return mission:progressEvent(548)
-                    elseif missionStatus == 5 then
-                        return mission:messageText(chateauID.text.HALVER_OFFSET + 471):replaceDefault()
                     end
                 end,
             },
@@ -115,23 +99,8 @@ mission.sections =
                 end,
             },
 
-            ['_6h4'] =
-            {
-                onTrigger = function(player, npc)
-                    if player:getMissionStatus(mission.areaId) == 5 then
-                        return mission:progressEvent(61)
-                    end
-                end,
-            },
-
             onEventFinish =
             {
-                [61] = function(player, csid, option, npc)
-                    if mission:complete(player) then
-                        player:delKeyItem(xi.ki.SHADOW_FRAGMENT)
-                    end
-                end,
-
                 [546] = function(player, csid, option, npc)
                     player:setMissionStatus(mission.areaId, 1)
                 end,
@@ -141,9 +110,10 @@ mission.sections =
                 end,
 
                 [548] = function(player, csid, option, npc)
-                    player:setRank(6)
-                    player:setRankPoints(0)
-                    player:setMissionStatus(mission.areaId, 5)
+                    if mission:complete(player) then
+                        player:delKeyItem(xi.ki.SHADOW_FRAGMENT)
+                        mission:setVar(player, 'hallEvent', 1)
+                    end
                 end,
             },
         },
@@ -191,32 +161,34 @@ mission.sections =
         },
     },
 
-    -- Optional Dialogue after Completion
+    -- Optional Great Hall event after completion.
     {
         check = function(player, currentMission, missionStatus, vars)
-            return player:hasCompletedMission(mission.areaId, mission.missionId)
+            return mission:getVar(player, 'hallEvent') == 1
         end,
 
         [xi.zone.CHATEAU_DORAGUILLE] =
         {
-            ['Halver'] =
+            ['_6h4']     = mission:progressEvent(61),
+            ['Arsha']    = mission:progressEvent(85),
+            ['Chupaile'] = mission:progressEvent(86),
+            ['Halver']   = mission:messageText(chateauID.text.HIS_MAJESTY_AWAITS),
+
+            onEventFinish =
             {
-                onTrigger = function(player, npc)
-                    if player:getCurrentMission(mission.areaId) == xi.mission.id.sandoria.NONE then
-                        return mission:messageText(chateauID.text.HALVER_OFFSET + 500):replaceDefault()
-                    end
+                [61] = function(player, csid, option, npc)
+                    mission:setVar(player, 'hallEvent', 0)
                 end,
             },
         },
     },
 
-    -- This cutscenes below are displayed any time after completing the Shadow Lord BCNM, up until
-    -- the next mission is accepted.  This is handled in both sections.
+    -- Optional Dialogue after Completion
     {
         check = function(player, currentMission, missionStatus, vars)
             return (currentMission == mission.missionId and player:getMissionStatus(mission.areaId) >= 4) or
                 (
-                    player:getCurrentMission(mission.areaId) == xi.mission.id.sandoria.NONE and
+                    currentMission == xi.mission.id.sandoria.NONE and
                     player:hasCompletedMission(mission.areaId, mission.missionId) and
                     not player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.LEAUTES_LAST_WISHES)
                 )
@@ -224,6 +196,15 @@ mission.sections =
 
         [xi.zone.CHATEAU_DORAGUILLE] =
         {
+            ['Halver'] =
+            {
+                onTrigger = function(player, npc)
+                    if mission:getVar(player, 'hallEvent') == 0 then
+                        return mission:messageText(chateauID.text.KNEW_YOU_WERE_THE_ONE)
+                    end
+                end,
+            },
+
             ['Aramaviont'] = mission:event(12),
             ['Curilla']    = mission:event(56),
             ['Milchupain'] = mission:event(33),

@@ -15,6 +15,10 @@ if(WIN32)
     #
     # Remove any non-".h" files from the include folder
     #
+    # Use tools/rename_dll.py to properly rename the x64 dll and lib to libmariadb64.lib/.dll
+    #
+    # Move the x86 and x64 dlls into the repo root
+    #
     # TEST AND MAKE SURE THAT EVERYTHING STILL WORKS!
 
     if(BUILD_MARIADB_FROM_SOURCE)
@@ -49,49 +53,34 @@ if(WIN32)
                 ${CMAKE_SOURCE_DIR}/ext/mariadb/include
         )
     endif()
-
-    set(MARIADB_FOUND TRUE)
-    set(MARIADB_LIBRARY ${CMAKE_SOURCE_DIR}/ext/mariadb/${libpath}/libmariadb.lib)
-    set(MARIADB_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/ext/mariadb/include)
-
-    # Copy from ext folder into root
-    add_custom_target(copy_mariadb_dll_to_root ALL)
-    add_custom_command(TARGET copy_mariadb_dll_to_root POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy
-            ${CMAKE_SOURCE_DIR}/ext/mariadb/${libpath}/libmariadb.dll
-            ${CMAKE_SOURCE_DIR}
-    )
-else()
-    find_library(MARIADB_LIBRARY
-        NAMES
-            libmariadb mariadb libmysql mysql
-        PATHS
-            ${PROJECT_SOURCE_DIR}/ext/mariadb/${libpath}/
-            /usr/
-            /usr/bin/
-            /usr/include/
-            /usr/lib/
-            /usr/local/
-            /usr/local/bin/
-            /opt/)
-
-    find_path(MARIADB_INCLUDE_DIR
-        NAMES
-            mysql.h
-        PATHS
-            ${PROJECT_SOURCE_DIR}/ext/mariadb/include/) # Only look internally
-
-    include(FindPackageHandleStandardArgs)
-    find_package_handle_standard_args(MariaDB DEFAULT_MSG MARIADB_LIBRARY MARIADB_INCLUDE_DIR)
 endif()
+
+find_library(MARIADB_LIBRARY
+    NAMES
+        libmariadb mariadb libmysql mysql libmariadb64 mariadb64 libmysql64 mysql64
+    PATHS
+        ${PROJECT_SOURCE_DIR}/ext/mariadb/${lib_dir}/
+        /usr/
+        /usr/bin/
+        /usr/include/
+        /usr/lib/
+        /usr/local/
+        /usr/local/bin/
+        /opt/)
+
+find_path(MARIADB_INCLUDE_DIR
+    NAMES
+        mysql.h
+    PATHS
+        ${PROJECT_SOURCE_DIR}/ext/mariadb/include/) # Only look internally
+
+include(FindPackageHandleStandardArgs)
+find_package_handle_standard_args(MariaDB DEFAULT_MSG MARIADB_LIBRARY MARIADB_INCLUDE_DIR)
 
 message(STATUS "MARIADB_FOUND: ${MARIADB_FOUND}")
 message(STATUS "MARIADB_LIBRARY: ${MARIADB_LIBRARY}")
 message(STATUS "MARIADB_INCLUDE_DIR: ${MARIADB_INCLUDE_DIR}")
 
-# TODO: Don't do all of this globally
-# We should be building a mariadb target and linking that to common
-if (${MARIADB_FOUND})
-    link_libraries(${MARIADB_LIBRARY})
-    include_directories(${MARIADB_INCLUDE_DIR})
-endif()
+add_library(mariadbclient INTERFACE)
+target_link_libraries(mariadbclient INTERFACE ${MARIADB_LIBRARY})
+target_include_directories(mariadbclient INTERFACE ${MARIADB_INCLUDE_DIR})

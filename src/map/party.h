@@ -119,8 +119,6 @@ private:
     void                     RemovePartyLeader(CBattleEntity* PEntity); // лидер покидает группу
     std::vector<partyInfo_t> GetPartyInfo() const;
     void                     RefreshFlags(std::vector<partyInfo_t>&);
-
-    time_point m_TimeLastMemberJoined;
 };
 
 #endif
