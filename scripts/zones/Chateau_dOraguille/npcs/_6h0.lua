@@ -69,9 +69,6 @@ entity.onTrigger = function(player, npc)
     -- San d'Oria Rank 10 (different default)
     elseif player:getNation() == xi.nation.SANDORIA and player:getRank(player:getNation()) == 10 then
         player:startEvent(62)
-
-    else
-        player:startEvent(522)
     end
 end
 

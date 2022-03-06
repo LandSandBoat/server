@@ -11,6 +11,10 @@ effect_object.onEffectGain = function(target, effect)
     target:addMod(xi.mod.UDMGBREATH, -power)
     target:addMod(xi.mod.UDMGMAGIC, -power)
     target:addMod(xi.mod.UDMGRANGE, -power)
+
+    if target:isPC() and target:hasTrait(77) then -- Iron Will
+        target:addMod(xi.mod.SPELLINTERRUPT, target:getMerit(xi.merit.IRON_WILL))
+    end
 end
 
 effect_object.onEffectTick = function(target, effect)
@@ -22,6 +26,10 @@ effect_object.onEffectLose = function(target, effect)
     target:delMod(xi.mod.UDMGBREATH, -power)
     target:delMod(xi.mod.UDMGMAGIC, -power)
     target:delMod(xi.mod.UDMGRANGE, -power)
+
+    if target:isPC() and target:hasTrait(77) then -- Iron Will
+        target:delMod(xi.mod.SPELLINTERRUPT, target:getMerit(xi.merit.IRON_WILL))
+    end
 end
 
 return effect_object

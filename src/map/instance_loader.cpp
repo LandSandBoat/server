@@ -60,7 +60,7 @@ CInstanceLoader::CInstanceLoader(uint16 instanceid, CCharEntity* PRequester)
     {
         do_final(EXIT_FAILURE);
     }
-    Sql_Keepalive(SqlInstanceHandle);
+    Sql_Keepalive(SqlInstanceHandle, "InstanceKeepalive");
 }
 
 CInstanceLoader::~CInstanceLoader()

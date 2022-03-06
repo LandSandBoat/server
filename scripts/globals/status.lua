@@ -915,6 +915,8 @@ end
 
 xi.mod =
 {
+    -- IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN src/map/modifier.h ASWELL!
+
     NONE                            = 0,
     DEF                             = 1,
     HP                              = 2,
@@ -1471,7 +1473,7 @@ xi.mod =
     DIA_DOT                         = 313, -- Increases the DoT damage of Dia
     SHARPSHOT                       = 314, -- Sharpshot accuracy bonus
     ENH_DRAIN_ASPIR                 = 315, -- % damage boost to Drain and Aspir
-    SNEAK_ATK_DEX                   = 874, -- % DEX boost to Sneak Attack (if gear mod, needs to be equipped on hit)
+    SNEAK_ATK_DEX                   = 830, -- % DEX boost to Sneak Attack (if gear mod, needs to be equipped on hit)
     TRICK_ATK_AGI                   = 520, -- % AGI boost to Trick Attack (if gear mod, needs to be equipped on hit)
     NIN_NUKE_BONUS                  = 522, -- magic attack bonus for NIN nukes
     DAKEN                           = 911, -- Chance to throw shuriken on attack
@@ -1538,7 +1540,7 @@ xi.mod =
     AUGMENTS_CONVERT                = 525, -- Convert HP to MP Ratio Multiplier. Value = MP multiplier rate.
     AUGMENTS_SA                     = 526, -- Adds Critical Attack Bonus to Sneak Attack, percentage based.
     AUGMENTS_TA                     = 527, -- Adds Critical Attack Bonus to Trick Attack, percentage based.
-    AUGMENTS_FEINT                  = 873, -- Feint will give another -10 Evasion per merit level
+    AUGMENTS_FEINT                  = 502, -- Feint will give another -10 Evasion per merit level
     AUGMENTS_ASSASSINS_CHARGE       = 886, -- Gives Assassin's Charge +1% Critical Hit Rate per merit level
     AUGMENTS_AMBUSH                 = 887, -- Gives +1% Triple Attack per merit level when Ambush conditions are met
     AUGMENTS_AURA_STEAL             = 889, -- 20% chance of 2 effects to be dispelled or stolen per merit level
@@ -1632,6 +1634,32 @@ xi.mod =
     ONE_HOUR_RECAST = 996, -- Decreases the recast time of one-hour abilities by n minutes.
 
     DREAD_SPIKES_EFFECT = 998,
+
+    PENGUIN_RING_EFFECT   = 152, -- +2 on fishing arrow delay / fish movement for mini - game
+    ALBATROSS_RING_EFFECT = 153, -- adds 30 seconds to mini - game time
+    PELICAN_RING_EFFECT   = 154, -- adds extra skillup roll for fishing
+
+    MAIN_DMG_RANK                = 377, -- adds weapon rank to main weapon http://wiki.bluegartr.com/bg/Weapon_Rank
+    SUB_DMG_RANK                 = 378, -- adds weapon rank to sub weapon
+    RANGED_DMG_RANK              = 379, -- adds weapon rank to ranged weapon
+
+    BLOOD_BOON                   = 913, -- Occasionally cuts down MP cost of Blood Pact abilities. Does not affect abilities that require Astral Flow.
+    EXPERIENCE_RETAINED          = 914, -- Experience points retained upon death (this is a percentage)
+    CAPACITY_BONUS               = 915, -- Capacity point bonus granted
+
+    CONQUEST_BONUS               = 933, -- Conquest points bonus granted (percentage)
+    CONQUEST_REGION_BONUS        = 934, -- Increases the influence points awarded to the player's nation when receiving conquest points
+    CAMPAIGN_BONUS               = 935, -- Increases the evaluation for allied forces by percentage
+
+    CONSERVE_TP                  = 944, -- Conserve TP trait, random chance between 10 and 200 TP
+
+    AUTO_ELEM_CAPACITY           = 987, -- Increases the automaton's elemental capacity for attachments
+    MAX_FINISHING_MOVE_BONUS     = 988, -- Increases the maximum number of finishing moves that may be stored
+
+    TRIPLE_SHOT_RATE             = 999, -- Percent increase to Triple Shot Rate
+    NINJUTSU_DURATION            = 1000,
+
+    -- IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN src/map/modifier.h ASWELL!
 
     -- The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     -- 570 - 825 used by WS DMG mods these are not spares.

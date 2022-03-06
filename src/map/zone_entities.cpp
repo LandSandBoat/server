@@ -899,7 +899,7 @@ CCharEntity* CZoneEntities::GetCharByID(uint32 id)
 void CZoneEntities::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message_type, CBasicPacket* packet)
 {
     TracyZoneScoped;
-    TracyZoneHex16(packet->id());
+    TracyZoneHex16(packet->getType());
 
     if (!packet)
     {
