@@ -681,8 +681,8 @@ namespace gambits
                 case G_TP_TRIGGER::OPENER:
                 {
                     bool result = false;
-                    static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&result](CBattleEntity* PMember) {
-                        if (PMember->health.tp >= 1000)
+                    static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember) {
+                        if (PMember->health.tp >= 1000 && PMember != POwner)
                         {
                             result = true;
                         }
