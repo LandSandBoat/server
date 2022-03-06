@@ -19829,6 +19829,8 @@ INSERT INTO `item_basic` VALUES (26348,0,'living_bullet_pouch','liv._bul._pouch'
 INSERT INTO `item_basic` VALUES (26349,0,'devastating_bullet_pouch','dev._bul._pouch',1,64584,0,0,0);
 INSERT INTO `item_basic` VALUES (26350,0,'chrono_bullet_pouch','chr._bul._pouch',1,64584,0,0,0);
 INSERT INTO `item_basic` VALUES (26351,0,'sacro_cord','sacro_cord',1,2052,23,0,4668);
+INSERT INTO `item_basic` VALUES (26356,0,'skrymir_cord','skrymir_cord',1,2084,23,0,0); -- Copied flag from item that had no flag not sure why normal and hq item seems to use different falg plz verify
+INSERT INTO `item_basic` VALUES (26357,0,'skrymir_cord_+1','skrymir_cord_+1',1,2080,23,0,0); -- Copied flag from item that had no flag not sure why normal and hq item seems to use different falg plz verify
 INSERT INTO `item_basic` VALUES (26359,0,'orpheuss_sash','orpheuss_sash',1,34820,0,0,0);
 INSERT INTO `item_basic` VALUES (26362,0,'tellen_belt','tellen_belt',1,59456,0,1,0);
 INSERT INTO `item_basic` VALUES (26363,0,'obstinate_sash','obstin._sash',1,59456,0,1,0);
