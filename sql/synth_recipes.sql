@@ -1321,14 +1321,14 @@ INSERT INTO `synth_recipes` VALUES (19920,1,0,0,23,0,0,0,0,0,0,4100,4242,16704,0
 INSERT INTO `synth_recipes` VALUES (19921,1,0,0,70,0,0,0,0,0,0,4100,4242,18014,0,0,0,0,0,0,0,654,654,654,654,1,1,1,1,'Odorous Knife (desynth)'); -- 2022.03.05 Base on FFXIclopedia no HQ result stated
 INSERT INTO `synth_recipes` VALUES (19922,1,0,0,46,0,0,0,0,0,0,4100,4242,17776,0,0,0,0,0,0,0,657,657,852,852,1,1,1,1,'Hibari (desynth)'); -- 2022.03.05 Base on FFXIclopedia
 INSERT INTO `synth_recipes` VALUES (19923,1,0,0,63,0,0,0,0,0,0,4100,4242,16457,0,0,0,0,0,0,0,1226,1226,1226,1226,4,4,4,4,'Dst. Baselard (desynth)'); -- 2022.03.05 Base on FFXIclopedia no HQ result stated
-INSERT INTO `synth_recipes` VALUES (19924,1,0,0,45,0,0,0,0,0,0,4100,4242,12836,0,0,0,0,0,0,0,852,651,818,818,1,1,1,3,'Iron Subligar (desynth)'); -- 2022.03.05 Base on FFXIclopedia
+INSERT INTO `synth_recipes` VALUES (19924,1,0,0,45,0,0,0,0,0,0,4100,4242,12836,0,0,0,0,0,0,0,852,651,818,818,1,1,1,1,'Iron Subligar (desynth)'); -- 2022.03.05 Base on FFXIclopedia
 INSERT INTO `synth_recipes` VALUES (19925,1,0,0,6,0,0,0,0,0,0,4100,4242,16535,0,0,0,0,0,0,0,649,649,850,850,1,2,1,1,'Bronze Sword (desynth)'); -- 2022.03.05 Base on FFXIclopedia
 INSERT INTO `synth_recipes` VALUES (19926,1,0,0,15,0,0,0,0,0,0,4100,4242,12816,0,0,0,0,0,0,0,649,649,649,649,2,2,2,2,'Scale Cuisses (desynth)'); -- 2022.03.05 Base on FFXIclopedia no HQ result stated
 INSERT INTO `synth_recipes` VALUES (19927,1,0,0,21,0,0,0,0,0,0,4100,4242,16466,0,0,0,0,0,0,0,707,707,651,651,1,1,1,1,'Knife (desynth)'); -- 2022.03.05 Base on FFXIclopedia
 -- INSERT INTO `synth_recipes` VALUES (19928,1,0,0,255,0,0,0,0,0,0,4100,4242,16631,0,0,0,0,0,0,0,895,801,651,651,1,1,1,2,'Kaiser Sword (desynth)'); -- 2022.03.05 Base on FFXIclopedia Unknown recipe level
 INSERT INTO `synth_recipes` VALUES (19929,1,0,0,42,0,0,0,0,0,0,4100,4242,16475,0,0,0,0,0,0,0,853,716,653,653,1,1,1,1,'Mythril Kukri (desynth)'); -- use synth lvl, ffxiclopedia results
 INSERT INTO `synth_recipes` VALUES (19930,1,0,0,36,0,0,0,0,0,0,4100,4242,16900,0,0,0,0,0,0,0,852,707,651,657,1,1,1,1,'Wakizashi (desynth)'); -- use desynth lvl, multi src agree
-INSERT INTO `synth_recipes` VALUES (19931,1,0,0,25,0,0,0,0,0,0,4100,4242,16536,0,0,0,0,0,0,0,852,652,652,652,1,1,2,2,'Iron Sword (desynth)'); -- 2022.03.05 Base on FFXIclopedia
+INSERT INTO `synth_recipes` VALUES (19931,1,0,0,25,0,0,0,0,0,0,4100,4242,16536,0,0,0,0,0,0,0,852,651,651,651,1,1,2,2,'Iron Sword (desynth)'); -- 2022.03.05 Base on FFXIclopedia
 INSERT INTO `synth_recipes` VALUES (19932,1,0,0,29,0,0,0,0,0,0,4100,4242,16896,0,0,0,0,0,0,0,852,852,652,652,1,1,1,1,'Kunai (desynth)'); -- 2022.03.05 Base on FFXIclopedia
 INSERT INTO `synth_recipes` VALUES (19933,1,0,0,58,0,0,0,0,0,0,4100,4242,17780,0,0,0,0,0,0,0,659,651,707,852,1,1,1,1,'Kyofu (desynth)'); -- 2022.03.05 Base on FFXIclopedia
 INSERT INTO `synth_recipes` VALUES (19934,1,0,0,35,0,0,0,0,0,0,4100,4242,12300,0,0,0,0,0,0,0,714,714,651,651,1,2,1,2,'Targe (desynth)'); -- 2022.03.05 Base on FFXIclopedia
@@ -1346,7 +1346,7 @@ INSERT INTO `synth_recipes` VALUES (19945,1,0,0,102,0,0,0,0,0,0,4100,4242,12676,
 -- INSERT INTO `synth_recipes` VALUES (19946,1,0,0,255,0,0,0,0,0,0,4100,4242,16745,0,0,0,0,0,0,0,651,651,651,651,1,1,1,1,'Decurion\'s Dagger (desynth)'); -- 2022.03.05 Base on FFXIclopedia Unknown recipe level
 INSERT INTO `synth_recipes` VALUES (19947,1,0,0,57,0,0,0,0,0,0,4100,4242,12672,0,0,0,0,0,0,0,817,850,850,651,6,3,4,2,'Gauntlets (desynth)'); -- 2022.03.05 Base on FFXIclopedia
 -- INSERT INTO `synth_recipes` VALUES (19948,1,0,0,255,0,0,0,0,0,0,4100,4242,17818,0,0,0,0,0,0,0,652,715,852,657,1,1,1,1,'Kanesada +1 (desynth)'); -- +1 desynth?
-INSERT INTO `synth_recipes` VALUES (19949,1,0,0,79,0,0,0,0,0,0,4098,4240,2160,0,0,0,0,0,0,0,660,2303,2303,2303,1,1,1,1,'Troll Pauldron (desynth)'); -- 2022.03.05 Base on FFXIclopedia
+-- INSERT INTO `synth_recipes` VALUES (19949,1,0,0,79,0,0,0,0,0,0,4098,4240,2160,0,0,0,0,0,0,0,660,2303,2303,2303,1,1,1,1,'Troll Pauldron (desynth)'); -- 2022.03.05 Recipe need comfirmation
 -- INSERT INTO `synth_recipes` VALUES (19950,1,0,0,255,0,0,0,0,0,0,4100,4242,16533,0,0,0,0,0,0,0,649,649,893,797,1,2,2,2,'Ancient Sword (desynth)'); -- 2022.03.05 Base on FFXIclopedia Unknown recipe level
 INSERT INTO `synth_recipes` VALUES (19951,1,0,0,45,0,0,0,0,0,0,4100,4242,17061,0,0,0,0,0,0,0,652,652,1226,653,1,2,6,2,'Mythril Rod (desynth)'); -- 2022.03.05 Base on FFXIclopedia
 -- INSERT INTO `synth_recipes` VALUES (19952,1,0,0,255,0,0,0,0,0,0,4100,4242,16702,0,0,0,0,0,0,0,649,649,649,649,1,1,1,1,'Cougar Baghnakhs (desynth)'); -- 2022.03.04 Base on FFXIclopedia Unknown recipe level
@@ -2077,7 +2077,7 @@ INSERT INTO `synth_recipes` VALUES (29948,1,0,0,0,71,0,0,0,0,0,4100,4242,12802,0
 INSERT INTO `synth_recipes` VALUES (29949,1,0,0,0,16,0,0,0,0,0,4100,4242,12833,0,0,0,0,0,0,0,817,850,649,650,3,1,1,1,'Brass Subligar (desynth)'); -- 2022.03.04 Base on FFXIclopedia
 -- INSERT INTO `synth_recipes` VALUES (29950,1,0,0,0,30,0,0,0,0,0,4100,4242,16451,0,0,0,0,0,0,0,1226,1226,1226,1226,6,6,6,6,'Mythril Dagger (desynth)'); -- 2022.03.04 Base on FFXIclopedia normal yield abnormal and no hq result
 INSERT INTO `synth_recipes` VALUES (29951,1,0,0,0,55,0,0,0,0,0,4100,4242,13478,0,0,0,0,0,0,0,808,808,653,653,1,1,1,2,'Goshenite Ring (desynth)');
-INSERT INTO `synth_recipes` VALUES (29952,1,0,0,0,21,0,0,0,0,0,4100,4242,17399,0,0,0,0,0,0,0,648,648,818,818,1,2,2,2,'Sabiki Rig (desynth)'); -- 2022.03.04 Base on FFXIclopedia removed Hq2 stated copper ingot X 3 strange result and flag needing verification
+-- INSERT INTO `synth_recipes` VALUES (29952,1,0,0,0,21,0,0,0,0,0,4100,4242,17399,0,0,0,0,0,0,0,648,648,818,818,1,2,2,2,'Sabiki Rig (desynth)'); -- 2022.03.04 Base on FFXIclopedia removed Hq2 stated copper ingot X 3 strange result and flag needing verification
 INSERT INTO `synth_recipes` VALUES (29953,1,0,0,0,66,0,0,0,0,0,4100,4242,12673,0,0,0,0,0,0,0,817,850,653,1228,6,4,1,6,'Mythril Gauntlets (desynth)'); -- 2022.03.04 Base on FFXIclopedia
 INSERT INTO `synth_recipes` VALUES (29954,1,0,0,0,48,0,0,0,0,0,4100,4242,12426,0,0,0,0,0,0,0,648,850,850,850,1,1,1,1,'Banded Helm (desynth)'); -- BGWiki desynth yield incomplete, but does not contradict this
 -- INSERT INTO `synth_recipes` VALUES (29955,1,0,0,0,85,0,0,0,0,0,4100,4242,13352,0,0,0,0,0,0,0,746,786,786,786,1,1,1,1,'Ruby Earring (desynth)'); -- 2022.03.04 Base on FFXIclopedia Level Unknown Hq3 rubyX2 strange result
@@ -2092,7 +2092,7 @@ INSERT INTO `synth_recipes` VALUES (29963,1,0,0,0,44,0,0,0,0,0,4100,4242,12809,0
 INSERT INTO `synth_recipes` VALUES (29964,1,0,0,0,74,0,0,0,0,0,4100,4242,16962,0,0,0,0,0,0,0,852,823,745,657,1,1,1,1,'Ashura (desynth)'); -- 2022.03.04 Base on FFXIclopedia
 -- INSERT INTO `synth_recipes` VALUES (29965,1,0,0,0,62,0,0,0,0,0,4100,4242,12417,0,0,0,0,0,0,0,648,850,653,654,1,1,1,1,'Mythril Sallet (desynth)'); -- 2022.03.04 Base on FFXIclopedia unknown yield
 INSERT INTO `synth_recipes` VALUES (29966,1,0,0,0,96,0,0,0,0,0,4100,4242,1378,0,0,0,0,0,0,0,931,931,931,931,1,1,1,1,'C. Handschuhs (desynth)'); -- 2022.03.04 Base on FFXIclopedia no hq listed
-INSERT INTO `synth_recipes` VALUES (29967,1,0,0,0,14,0,0,0,0,0,4100,4242,14139,0,0,0,0,0,0,0,649,650,850,850,1,1,1,2,'Bas. Leggings (desynth)'); -- 2022.03.04 Base on FFXIclopedia
+-- INSERT INTO `synth_recipes` VALUES (29967,1,0,0,0,14,0,0,0,0,0,4100,4242,14139,0,0,0,0,0,0,0,649,650,850,850,1,1,1,2,'Bas. Leggings (desynth)'); -- 2022.03.04 Base on FFXIclopedia
 INSERT INTO `synth_recipes` VALUES (29968,1,0,0,0,18,0,0,0,0,0,4100,4242,12577,0,0,0,0,0,0,0,649,649,850,650,1,3,2,3,'Brass Harness (desynth)'); -- 2022.03.04 Base on FFXIclopedia
 INSERT INTO `synth_recipes` VALUES (29969,1,0,0,0,74,0,0,0,0,0,4100,4242,12930,0,0,0,0,0,0,0,851,931,931,931,2,3,3,3,'Gold Sabatons (desynth)'); -- 2022.03.04 Base on FFXIclopedia
 INSERT INTO `synth_recipes` VALUES (29970,1,0,0,0,94,0,0,0,0,0,4100,4242,1382,0,0,0,0,0,0,0,931,931,931,931,1,2,2,2,'Cursed Schuhs (desynth)'); -- 2022.03.04 Base on FFXIclopedia
@@ -2664,7 +2664,7 @@ INSERT INTO `synth_recipes` VALUES (39910,1,0,0,0,0,24,0,0,0,0,4100,4242,12969,0
 INSERT INTO `synth_recipes` VALUES (39911,1,0,0,0,0,25,0,0,0,0,4100,4242,12857,0,0,0,0,0,0,0,818,818,819,819,2,3,6,7,'Linen Slops (desynth)'); -- Info from xiclopedia
 INSERT INTO `synth_recipes` VALUES (39912,1,0,0,0,0,24,0,0,0,0,4100,4242,14856,0,0,0,0,0,0,0,818,818,834,850,6,10,1,1,'Seer\'s Mitts (desynth)'); -- 2022.03.04 Base on FFXIclopedia
 INSERT INTO `synth_recipes` VALUES (39913,1,0,0,0,0,20,0,0,0,0,4100,4242,12498,0,0,0,0,0,0,0,818,818,818,932,1,2,3,1,'Cotton Headband (desynth)'); -- 2022.03.04 Base on FFXIclopedia
-INSERT INTO `synth_recipes` VALUES (39914,1,0,0,0,0,55,0,0,0,0,4100,4242,12475,0,0,0,0,0,0,0,650,816,816,816,1,2,3,6,'Velvet Hat (desynth)'); -- 2022.03.04 Base on FFXIclopedia
+INSERT INTO `synth_recipes` VALUES (39914,1,0,0,0,0,55,0,0,0,0,4100,4242,12475,0,0,0,0,0,0,0,650,816,816,820,1,2,3,6,'Velvet Hat (desynth)'); -- 2022.03.04 Base on FFXIclopedia
 INSERT INTO `synth_recipes` VALUES (39915,1,0,0,0,0,28,0,0,0,0,4100,4242,12585,0,0,0,0,0,0,0,817,818,818,818,1,7,8,9,'Cotton Dogi (desynth)'); -- 2022.03.03 Base on FFXIclopedia
 INSERT INTO `synth_recipes` VALUES (39916,1,0,0,0,0,18,0,0,0,0,4100,4242,12584,0,0,0,0,0,0,0,817,817,817,817,7,8,9,10,'Kenpogi (desynth)'); -- 2022.03.03 Base on FFXIclopedia
 INSERT INTO `synth_recipes` VALUES (39917,1,0,0,0,0,27,0,0,0,0,4100,4242,13204,0,0,0,0,0,0,0,817,818,818,818,1,4,5,6,'Heko Obi (desynth)');
@@ -3215,7 +3215,7 @@ INSERT INTO `synth_recipes` VALUES (49963,1,0,0,0,0,24,0,0,0,0,4100,4242,14053,0
 INSERT INTO `synth_recipes` VALUES (49964,1,0,0,0,0,0,42,0,0,0,4100,4242,12955,0,0,0,0,0,0,0,850,851,851,851,3,2,2,2,'Cuir Highboots (desynth)'); -- 2022.03.01 Base on FFXIclopedia
 -- INSERT INTO `synth_recipes` VALUES (49965,1,0,0,0,0,0,44,0,0,0,4100,4242,12827,0,0,0,0,0,0,0,850,850,850,850,2,2,2,2,'Cuir Trousers (desynth)'); -- 2022.03.01 Base on FFXIclopedia no hq results
 -- INSERT INTO `synth_recipes` VALUES (49966,1,0,0,0,0,0,46,0,0,0,4100,4242,12571,0,0,0,0,0,0,0,913,913,913,913,1,1,1,1,'Cuir Bouilli (desynth)'); -- 2022.03.01 Base on FFXIclopedia no hq results
-INSERT INTO `synth_recipes` VALUES (49967,1,0,0,0,21,0,0,0,0,0,4100,4242,12473,0,0,0,0,0,0,0,648,648,653,653,1,1,2,2,'Poet\'s Circlet (desynth)'); -- 2022.03.03 Base on FFXIclopedia
+INSERT INTO `synth_recipes` VALUES (49967,1,0,0,0,21,0,0,0,0,0,4100,4242,12473,0,0,0,0,0,0,0,648,648,653,653,1,1,1,1,'Poet\'s Circlet (desynth)'); -- 2022.03.03 Base on FFXIclopedia
 INSERT INTO `synth_recipes` VALUES (49968,1,0,0,0,0,24,20,0,0,0,4100,4242,15161,0,0,0,0,0,0,0,840,819,819,819,2,2,4,4,'Noct Beret (desynth)'); -- 2022.03.03 Base on FFXIclopedia
 -- INSERT INTO `synth_recipes` VALUES (49969,1,0,0,0,0,27,20,0,0,0,4100,4242,15311,0,0,0,0,0,0,0,850,850,819,819,1,2,6,9,'Noct Gaiters (desynth)'); -- 2022.03.03 Base on FFXIclopedia unknown yield
 -- INSERT INTO `synth_recipes` VALUES (49970,1,0,8,0,0,32,0,0,0,0,4100,4242,12714,0,0,0,0,0,0,0,706,817,819,819,1,1,3,6,'Soil Tekko (desynth)'); -- 2022.03.03 Base on normal desynth behavior
