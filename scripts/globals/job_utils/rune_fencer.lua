@@ -44,10 +44,7 @@ local function enforceRuneCounts(target)
 
             local remainingDuration = effect:getTimeRemaining()
 
-            if oldestRune == nil then
-                oldestRune = type
-                oldestRuneDuration = remainingDuration
-            elseif remainingDuration < oldestRuneDuration then
+            if oldestRune == nil or remainingDuration < oldestRuneDuration then
                 oldestRune = type
                 oldestRuneDuration = remainingDuration
             end
