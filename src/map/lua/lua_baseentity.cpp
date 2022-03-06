@@ -687,6 +687,9 @@ void CLuaBaseEntity::injectActionPacket(uint16 action, uint16 anim, uint16 spec,
         case 14:
             actiontype = ACTION_DANCE;
             break;
+        case 15:
+            actiontype = ACTION_RUN_WARD_EFFUSION;
+            break;
     }
 
     action_t Action;
