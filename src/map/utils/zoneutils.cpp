@@ -27,7 +27,7 @@
 #include "../ai/ai_container.h"
 
 #include "../lua/luautils.h"
-
+#include "../campaign_system.h"
 #include "../conquest_system.h"
 #include "../entities/mobentity.h"
 #include "../entities/npcentity.h"
@@ -446,14 +446,14 @@ namespace zoneutils
                     PMob->setModifier(Mod::HTH_SDT, (uint16)(Sql_GetFloatData(SqlHandle, 40) * 1000));
                     PMob->setModifier(Mod::IMPACT_SDT, (uint16)(Sql_GetFloatData(SqlHandle, 41) * 1000));
 
-                    PMob->setModifier(Mod::FIRE_SDT, (int16)((Sql_GetFloatData(SqlHandle, 42) - 1) * -100));    // These are stored as floating percentages
-                    PMob->setModifier(Mod::ICE_SDT, (int16)((Sql_GetFloatData(SqlHandle, 43) - 1) * -100));     // and need to be adjusted into modifier units.
-                    PMob->setModifier(Mod::WIND_SDT, (int16)((Sql_GetFloatData(SqlHandle, 44) - 1) * -100));    // Todo: make these work like the physical ones
-                    PMob->setModifier(Mod::EARTH_SDT, (int16)((Sql_GetFloatData(SqlHandle, 45) - 1) * -100));
-                    PMob->setModifier(Mod::THUNDER_SDT, (int16)((Sql_GetFloatData(SqlHandle, 46) - 1) * -100));
-                    PMob->setModifier(Mod::WATER_SDT, (int16)((Sql_GetFloatData(SqlHandle, 47) - 1) * -100));
-                    PMob->setModifier(Mod::LIGHT_SDT, (int16)((Sql_GetFloatData(SqlHandle, 48) - 1) * -100));
-                    PMob->setModifier(Mod::DARK_SDT, (int16)((Sql_GetFloatData(SqlHandle, 49) - 1) * -100));
+                    PMob->setModifier(Mod::FIRE_SDT, (int16)Sql_GetFloatData(SqlHandle, 42));    // Modifier 54, base 10000 stored as signed integer. Positives signify less damage.
+                    PMob->setModifier(Mod::ICE_SDT, (int16)Sql_GetFloatData(SqlHandle, 43));     // Modifier 55, base 10000 stored as signed integer. Positives signify less damage.
+                    PMob->setModifier(Mod::WIND_SDT, (int16)Sql_GetFloatData(SqlHandle, 44));    // Modifier 56, base 10000 stored as signed integer. Positives signify less damage.
+                    PMob->setModifier(Mod::EARTH_SDT, (int16)Sql_GetFloatData(SqlHandle, 45));   // Modifier 57, base 10000 stored as signed integer. Positives signify less damage.
+                    PMob->setModifier(Mod::THUNDER_SDT, (int16)Sql_GetFloatData(SqlHandle, 46)); // Modifier 58, base 10000 stored as signed integer. Positives signify less damage.
+                    PMob->setModifier(Mod::WATER_SDT, (int16)Sql_GetFloatData(SqlHandle, 47));   // Modifier 59, base 10000 stored as signed integer. Positives signify less damage.
+                    PMob->setModifier(Mod::LIGHT_SDT, (int16)Sql_GetFloatData(SqlHandle, 48));   // Modifier 60, base 10000 stored as signed integer. Positives signify less damage.
+                    PMob->setModifier(Mod::DARK_SDT, (int16)Sql_GetFloatData(SqlHandle, 49));    // Modifier 61, base 10000 stored as signed integer. Positives signify less damage.
 
                     PMob->setModifier(Mod::FIRE_RES, (int16)(Sql_GetIntData(SqlHandle, 50)));    // These are stored as signed integers which
                     PMob->setModifier(Mod::ICE_RES, (int16)(Sql_GetIntData(SqlHandle, 51)));     // is directly the modifier starting value.
@@ -677,6 +677,8 @@ namespace zoneutils
 
         LoadNPCList();
         LoadMOBList();
+        campaign::LoadState();
+        campaign::LoadNations();
 
         for (auto PZone : g_PZoneList)
         {

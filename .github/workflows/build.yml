@@ -68,9 +68,8 @@ jobs:
           fetch-depth: 1
       - name: Configure CMake
         shell: cmd
-        # windows-2019 CI machine has MySQL installed, need to specific our location by hand
         run: |
-          cmake -A Win32 . -DMYSQL_INCLUDE_DIR='%CD%/ext/mysql/include/mysql' -DMYSQL_LIBRARY='%CD%/ext/mysql/lib/libmariadb.lib'
+          cmake -A Win32 .
       - name: Build
         shell: cmd
         run: |
@@ -86,13 +85,21 @@ jobs:
           fetch-depth: 1
       - name: Configure CMake
         shell: cmd
-        # windows-2019 CI machine has MySQL installed, need to specific our location by hand
         run: |
-          cmake -A x64 . -DMYSQL_INCLUDE_DIR='%CD%/ext/mysql/include/mysql' -DMYSQL_LIBRARY='%CD%/ext/mysql/lib64/libmariadb64.lib'
+          cmake -A x64 .
       - name: Build
         shell: cmd
         run: |
           cmake --build .
+      - name: Archive Executables
+        uses: actions/upload-artifact@v2
+        with:
+          name: windows_executables
+          path: |
+            topaz_connect_64.exe
+            topaz_game_64.exe
+            topaz_search_64.exe
+            libmariadb.dll
 
   MacOS_BigSur_11:
     # https://github.com/actions/virtual-environments/blob/main/images/macos/macos-11-Readme.md
@@ -211,7 +218,7 @@ jobs:
             exit -1
         fi
 
-  Full_Startup_Checks_2004:
+  Full_Startup_Checks_Linux_2004:
     runs-on: ubuntu-20.04
     needs: Linux_2004_Clang11_64bit
     services:
@@ -348,7 +355,7 @@ jobs:
             exit -1
         fi
 
-  MultiInstance_Startup_Checks_2004:
+  MultiInstance_Startup_Checks_Linux_2004:
     runs-on: ubuntu-20.04
     needs: Linux_2004_Clang11_64bit
     services:
@@ -369,7 +376,7 @@ jobs:
         name: linux_executables
         path: .
     - name: Install Dependencies
-      run: |        
+      run: |
         sudo apt-get update
         sudo apt-get install -y software-properties-common cmake mariadb-server-10.3 mariadb-client-10.3 libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev luarocks python3.7
     - name: Verify MySQL connection from container
@@ -446,3 +453,60 @@ jobs:
         if grep -qi "warning" map-server-1*.log; then
           exit -1
         fi
+
+  Full_Startup_Checks_Windows_2019:
+    runs-on: windows-2019
+    needs: Windows_2019_64bit
+    steps:
+    - uses: actions/checkout@v1
+      with:
+        fetch-depth: 1
+    - uses: actions/download-artifact@v2
+      with:
+        name: windows_executables
+        path: .
+    - uses: zach2good/setup-mariadb@v1
+      with:
+          database: xidb
+    - name: Copy confs
+      run: |
+        cp conf/default/* conf/
+    - name: Copy settings
+      run: |
+        cp scripts/settings/default/* scripts/settings/
+    - name: Install Python Dependencies
+      run: |
+        pip install -r tools/requirements.txt
+    - name: Import SQL files
+      shell: bash
+      run: |
+        for f in sql/*.sql; do
+          echo -e "Importing $f into the database..."
+          mysql xidb -h 127.0.0.1 -uroot -proot < $f
+        done
+        mysql xidb -h 127.0.0.1 -uroot -proot -e "SHOW tables"
+    - name: Startup checks
+      shell: bash
+      run: |
+        python3 << EOF
+        import io
+        import subprocess
+        import time
+
+        p0 = subprocess.Popen(["topaz_connect_64","--log","connect-server.log"], stdout=subprocess.PIPE)
+        p1 = subprocess.Popen(["topaz_search_64","--log","search-server.log"], stdout=subprocess.PIPE)
+        p2 = subprocess.Popen(["topaz_game_64","--log","game-server.log"], stdout=subprocess.PIPE)
+
+        time.sleep(120)
+
+        p0.kill()
+        p1.kill()
+        p2.kill()
+
+        for proc in { p0, p1, p2 }:
+            for line in io.TextIOWrapper(proc.stdout, encoding="utf-8"):
+                if "error" in line or "warning" in line:
+                    print(line)
+                    exit(-1)
+        EOF
+

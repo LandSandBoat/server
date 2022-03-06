@@ -3424,7 +3424,7 @@ INSERT INTO `item_mods` VALUES (11109,8,8);
 INSERT INTO `item_mods` VALUES (11109,9,8);
 INSERT INTO `item_mods` VALUES (11109,23,16);
 INSERT INTO `item_mods` VALUES (11109,25,12);
-INSERT INTO `item_mods` VALUES (11109,874,12); -- Increases "Sneak Attack" damage
+INSERT INTO `item_mods` VALUES (11109,830,12); -- Increases "Sneak Attack" damage
 INSERT INTO `item_mods` VALUES (11110,1,35);
 INSERT INTO `item_mods` VALUES (11110,8,11);
 INSERT INTO `item_mods` VALUES (11110,10,11);
@@ -3910,7 +3910,7 @@ INSERT INTO `item_mods` VALUES (11209,8,6);
 INSERT INTO `item_mods` VALUES (11209,9,6);
 INSERT INTO `item_mods` VALUES (11209,23,10);
 INSERT INTO `item_mods` VALUES (11209,25,8);
-INSERT INTO `item_mods` VALUES (11209,874,10); -- Increases "Sneak Attack" damage
+INSERT INTO `item_mods` VALUES (11209,830,10); -- Increases "Sneak Attack" damage
 INSERT INTO `item_mods` VALUES (11210,1,33);
 INSERT INTO `item_mods` VALUES (11210,8,7);
 INSERT INTO `item_mods` VALUES (11210,10,7);
@@ -40525,7 +40525,7 @@ INSERT INTO `item_mods` VALUES (27062,29,1);
 INSERT INTO `item_mods` VALUES (27062,31,29);
 INSERT INTO `item_mods` VALUES (27062,68,16);
 INSERT INTO `item_mods` VALUES (27062,384,400);
-INSERT INTO `item_mods` VALUES (27062,874,12); -- Increases "Sneak Attack" damage
+INSERT INTO `item_mods` VALUES (27062,830,12); -- Increases "Sneak Attack" damage
 INSERT INTO `item_mods` VALUES (27063,1,91);
 INSERT INTO `item_mods` VALUES (27063,2,27);
 INSERT INTO `item_mods` VALUES (27063,8,14);
@@ -40541,7 +40541,7 @@ INSERT INTO `item_mods` VALUES (27063,29,2);
 INSERT INTO `item_mods` VALUES (27063,31,43);
 INSERT INTO `item_mods` VALUES (27063,68,36);
 INSERT INTO `item_mods` VALUES (27063,384,500);
-INSERT INTO `item_mods` VALUES (27063,874,12.5); -- Increases "Sneak Attack" damage
+INSERT INTO `item_mods` VALUES (27063,830,12.5); -- Increases "Sneak Attack" damage
 INSERT INTO `item_mods` VALUES (27064,1,77);
 INSERT INTO `item_mods` VALUES (27064,2,16);
 INSERT INTO `item_mods` VALUES (27064,5,12);
@@ -52890,6 +52890,8 @@ INSERT INTO `item_mods` VALUES (28583,2,50);      -- Vexer Ring +1: HP +50
 INSERT INTO `item_mods` VALUES (28583,27,3);      -- Enmity +3
 INSERT INTO `item_mods` VALUES (28583,29,3);      -- Magic Def. Bonus +3
 INSERT INTO `item_mods` VALUES (28584,2,55);      -- Vexer Ring +1: HP +55
+INSERT INTO `item_mods` VALUES (28585,861,-1);    -- Craftkeeper's Ring: Synthesis material loss -1%
+INSERT INTO `item_mods` VALUES (28586,862,1);     -- Craftmaster's Ring: Increase rate of HQ +1%
 INSERT INTO `item_mods` VALUES (28584,27,4);      -- Enmity +4
 INSERT INTO `item_mods` VALUES (28584,29,4);      -- Magic Def. Bonus +4
 INSERT INTO `item_mods` VALUES (28587,851,1);     -- Artificier's Ring Synthesis Skill +1

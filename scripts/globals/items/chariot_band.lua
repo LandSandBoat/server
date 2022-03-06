@@ -1,14 +1,11 @@
 -----------------------------------
 -- ID: 15761
--- Item: Chariot Band
------------------------------------
--- ID: 15761
 -- Item: chariot band
 -- Experience point bonus
 -----------------------------------
 -- Bonus: +75%
 -- Duration: 720 min
--- Max bonus: 750 exp
+-- Max bonus: 10000 exp
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
@@ -16,7 +13,7 @@ local item_object = {}
 
 item_object.onItemCheck = function(target)
     local result = 0
-    if (target:hasStatusEffect(xi.effect.DEDICATION) == true) then
+    if target:hasStatusEffect(xi.effect.DEDICATION) then
         result = 56
     end
     return result

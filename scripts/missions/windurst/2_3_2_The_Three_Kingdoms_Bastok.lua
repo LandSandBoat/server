@@ -36,7 +36,9 @@ mission.sections =
                     if mission:getVar(player, 'Option') == 1 then
                         return mission:progressEvent(425)
                     elseif missionStatus == 4 then
-                        return mission:progressEvent(423)
+                        local onPathUntraveled = player:getCurrentMission(xi.mission.log_id.ROV) == xi.mission.id.rov.THE_PATH_UNTRAVELED and 1 or 0
+
+                        return mission:progressEvent(423, { [7] = onPathUntraveled })
                     elseif missionStatus == 5 and not player:hasItem(xi.items.ONZ_OF_MYTHRIL_SAND) then
                         return mission:progressEvent(424)
                     else

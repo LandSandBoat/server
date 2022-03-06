@@ -12,6 +12,7 @@ local zone_object = {}
 zone_object.onInitialize = function(zone)
     zone:registerRegion(1, -112, -3, -17, -96, 3, -3)     -- event COP
     zone:registerRegion(2, 53.5, 5, -165.3, 66.5, 6, -72) -- drawbridge area
+    xi.conquest.toggleRegionalNPCs(zone)
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)

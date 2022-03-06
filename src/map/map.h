@@ -22,15 +22,15 @@
 #ifndef _MAP_H
 #define _MAP_H
 
-#include "../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
-#include "../common/blowfish.h"
-#include "../common/kernel.h"
-#include "../common/mmo.h"
-#include "../common/socket.h"
-#include "../common/sql.h"
-#include "../common/taskmgr.h"
-#include "../common/xirand.h"
+#include "common/blowfish.h"
+#include "common/kernel.h"
+#include "common/mmo.h"
+#include "common/socket.h"
+#include "common/sql.h"
+#include "common/taskmgr.h"
+#include "common/xirand.h"
 
 #include <list>
 #include <map>

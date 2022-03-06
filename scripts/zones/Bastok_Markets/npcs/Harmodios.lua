@@ -16,8 +16,6 @@ entity.onTrigger = function(player, npc)
 
     if player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatBastok, 10) then
         player:startEvent(430)
-    elseif player:getCharVar("comebackQueenCS") == 1 then
-        player:startEvent(490)
     else
         local stock =
         {
@@ -46,9 +44,6 @@ end
 entity.onEventFinish = function(player, csid, option)
     if csid == 430 then
         player:setCharVar("WildcatBastok", utils.mask.setBit(player:getCharVar("WildcatBastok"), 10, true))
-    elseif csid == 490 then
-        player:startEvent(491)
-        player:setCharVar("comebackQueenCS", 2)
     end
 end
 

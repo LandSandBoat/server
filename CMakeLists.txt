@@ -68,6 +68,10 @@ message(STATUS "GIT_BRANCH: ${GIT_BRANCH}")
 message(STATUS "GIT_DATE: ${GIT_DATE}")
 message(STATUS "GIT_COMMIT_SUBJECT: ${GIT_COMMIT_SUBJECT}")
 
+if (GIT_COMMIT_SUBJECT)
+    string(REGEX REPLACE "\"" "'" GIT_COMMIT_SUBJECT ${GIT_COMMIT_SUBJECT})
+endif()
+
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/src/common/version.cpp.in
                ${CMAKE_CURRENT_SOURCE_DIR}/src/common/version.cpp)
 
@@ -79,14 +83,14 @@ set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
 link_libraries(${CMAKE_THREAD_LIBS_INIT})
 
-# Find MySQL
-find_package(MySQL REQUIRED)
+# Find MariaDB
+include(MariaDB) # defines mariadbclient
 
 # Find ZMQ
-find_package(ZeroMQ REQUIRED)
+include(ZeroMQ)
 
 # Find LuaJIT
-find_package(LuaJIT REQUIRED)
+include(LuaJIT)
 
 # Link this 'library' to set the c++ standard / compile-time options requested
 add_library(project_options INTERFACE)
