@@ -35,6 +35,29 @@ mission.sections =
                 end,
             },
 
+            onEventUpdate =
+            {
+                [10094] = function(player, csid, option, npc)
+                    if option == 1 then
+                        -- Parameters 1 and 2 determine if certain NPCs will appear in the CS.
+                        -- Default values of 0 = They appear.
+                        local noVerena = 0
+                        local noSibyl  = 0
+
+                        -- TODO: Fact check this.
+                        if player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.WELCOME_TNORG) then
+                            noVerena = 1
+                        end
+
+                        if player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.MOON_READING) then
+                            noSibyl = 1
+                        end
+
+                        player:updateEvent(noVerena, noSibyl, 0, 0, 0, 0, 0, 0)
+                    end
+                end,
+            },
+
             onEventFinish =
             {
                 [10094] = function(player, csid, option, npc)
