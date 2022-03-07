@@ -1122,32 +1122,32 @@ void CStatusEffectContainer::Fold(uint32 charid)
 
 uint8 CStatusEffectContainer::GetActiveManeuverCount()
 {
-    return GetStatusEffectCountInRange(EFFECT_FIRE_MANEUVER, EFFECT_DARK_MANEUVER);
+    return GetStatusEffectCountInIDRange(EFFECT_FIRE_MANEUVER, EFFECT_DARK_MANEUVER);
 }
 
 void CStatusEffectContainer::RemoveOldestManeuver()
 {
-    RemoveOldestStatusEffectInRange(EFFECT_FIRE_MANEUVER, EFFECT_DARK_MANEUVER);
+    RemoveOldestStatusEffectInIDRange(EFFECT_FIRE_MANEUVER, EFFECT_DARK_MANEUVER);
 }
 
 void CStatusEffectContainer::RemoveAllManeuvers()
 {
-    RemoveAllStatusEffectsInRange(EFFECT_FIRE_MANEUVER, EFFECT_DARK_MANEUVER);
+    RemoveAllStatusEffectsInIDRange(EFFECT_FIRE_MANEUVER, EFFECT_DARK_MANEUVER);
 }
 
 uint8 CStatusEffectContainer::GetActiveRuneCount()
 {
-    return GetStatusEffectCountInRange(EFFECT_IGNIS, EFFECT_TENEBRAE);
+    return GetStatusEffectCountInIDRange(EFFECT_IGNIS, EFFECT_TENEBRAE);
 }
 
 void CStatusEffectContainer::RemoveOldestRune()
 {
-    RemoveOldestStatusEffectInRange(EFFECT_IGNIS, EFFECT_TENEBRAE);
+    RemoveOldestStatusEffectInIDRange(EFFECT_IGNIS, EFFECT_TENEBRAE);
 }
 
 void CStatusEffectContainer::RemoveAllRunes()
 {
-    RemoveAllStatusEffectsInRange(EFFECT_IGNIS, EFFECT_TENEBRAE);
+    RemoveAllStatusEffectsInIDRange(EFFECT_IGNIS, EFFECT_TENEBRAE);
 }
 
 /************************************************************************
@@ -1300,7 +1300,7 @@ void CStatusEffectContainer::UpdateStatusIcons()
     }
 }
 
-uint8 CStatusEffectContainer::GetStatusEffectCountInRange(EFFECT start, EFFECT end)
+uint8 CStatusEffectContainer::GetStatusEffectCountInIDRange(EFFECT start, EFFECT end)
 {
     uint8 count = 0;
     for (CStatusEffect* PStatusEffect : m_StatusEffectSet)
@@ -1313,7 +1313,7 @@ uint8 CStatusEffectContainer::GetStatusEffectCountInRange(EFFECT start, EFFECT e
     return count;
 }
 
-void CStatusEffectContainer::RemoveOldestStatusEffectInRange(EFFECT start, EFFECT end)
+void CStatusEffectContainer::RemoveOldestStatusEffectInIDRange(EFFECT start, EFFECT end)
 {
     CStatusEffect* oldest = nullptr;
     for (CStatusEffect* PStatusEffect : m_StatusEffectSet)
@@ -1332,7 +1332,7 @@ void CStatusEffectContainer::RemoveOldestStatusEffectInRange(EFFECT start, EFFEC
     }
 }
 
-void CStatusEffectContainer::RemoveAllStatusEffectsInRange(EFFECT start, EFFECT end)
+void CStatusEffectContainer::RemoveAllStatusEffectsInIDRange(EFFECT start, EFFECT end)
 {
     for (CStatusEffect* PStatusEffect : m_StatusEffectSet)
     {

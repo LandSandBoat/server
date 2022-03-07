@@ -70,9 +70,9 @@ public:
     CStatusEffect* GetStatusEffect(EFFECT StatusID);
     CStatusEffect* GetStatusEffect(EFFECT StatusID, uint32 SubID);
 
-    uint8 GetStatusEffectCountInRange(EFFECT start, EFFECT end);
-    void  RemoveOldestStatusEffectInRange(EFFECT start, EFFECT end);
-    void  RemoveAllStatusEffectsInRange(EFFECT start, EFFECT end);
+    uint8 GetStatusEffectCountInIDRange(EFFECT start, EFFECT end);
+    void  RemoveOldestStatusEffectInIDRange(EFFECT start, EFFECT end);
+    void  RemoveAllStatusEffectsInIDRange(EFFECT start, EFFECT end);
 
     void UpdateStatusIcons(); // пересчитываем иконки эффектов
     void CheckEffectsExpiry(time_point tick);
