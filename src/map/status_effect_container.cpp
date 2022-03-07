@@ -1120,47 +1120,34 @@ void CStatusEffectContainer::Fold(uint32 charid)
     }
 }
 
-uint8 CStatusEffectContainer::GetActiveManeuvers()
+uint8 CStatusEffectContainer::GetActiveManeuverCount()
 {
-    uint8 count = 0;
-    for (CStatusEffect* PStatusEffect : m_StatusEffectSet)
-    {
-        if (PStatusEffect->GetStatusID() >= EFFECT_FIRE_MANEUVER && PStatusEffect->GetStatusID() <= EFFECT_DARK_MANEUVER && !PStatusEffect->deleted)
-        {
-            count++;
-        }
-    }
-    return count;
+    return GetStatusEffectCountInRange(EFFECT_FIRE_MANEUVER, EFFECT_DARK_MANEUVER);
 }
 
 void CStatusEffectContainer::RemoveOldestManeuver()
 {
-    CStatusEffect* oldest = nullptr;
-    for (CStatusEffect* PStatusEffect : m_StatusEffectSet)
-    {
-        if (PStatusEffect->GetStatusID() >= EFFECT_FIRE_MANEUVER && PStatusEffect->GetStatusID() <= EFFECT_DARK_MANEUVER && !PStatusEffect->deleted)
-        {
-            if (!oldest || PStatusEffect->GetStartTime() < oldest->GetStartTime())
-            {
-                oldest = PStatusEffect;
-            }
-        }
-    }
-    if (oldest)
-    {
-        RemoveStatusEffect(oldest, true);
-    }
+    RemoveOldestStatusEffectInRange(EFFECT_FIRE_MANEUVER, EFFECT_DARK_MANEUVER);
 }
 
 void CStatusEffectContainer::RemoveAllManeuvers()
 {
-    for (CStatusEffect* PStatusEffect : m_StatusEffectSet)
-    {
-        if (PStatusEffect->GetStatusID() >= EFFECT_FIRE_MANEUVER && PStatusEffect->GetStatusID() <= EFFECT_DARK_MANEUVER)
-        {
-            RemoveStatusEffect(PStatusEffect, true);
-        }
-    }
+    RemoveAllStatusEffectsInRange(EFFECT_FIRE_MANEUVER, EFFECT_DARK_MANEUVER);
+}
+
+uint8 CStatusEffectContainer::GetActiveRuneCount()
+{
+    return GetStatusEffectCountInRange(EFFECT_IGNIS, EFFECT_TENEBRAE);
+}
+
+void CStatusEffectContainer::RemoveOldestRune()
+{
+    RemoveOldestStatusEffectInRange(EFFECT_IGNIS, EFFECT_TENEBRAE);
+}
+
+void CStatusEffectContainer::RemoveAllRunes()
+{
+    RemoveAllStatusEffectsInRange(EFFECT_IGNIS, EFFECT_TENEBRAE);
 }
 
 /************************************************************************
@@ -1310,6 +1297,49 @@ void CStatusEffectContainer::UpdateStatusIcons()
     if (PChar->PParty)
     {
         PChar->PParty->EffectsChanged();
+    }
+}
+
+uint8 CStatusEffectContainer::GetStatusEffectCountInRange(EFFECT start, EFFECT end)
+{
+    uint8 count = 0;
+    for (CStatusEffect* PStatusEffect : m_StatusEffectSet)
+    {
+        if (PStatusEffect->GetStatusID() >= start && PStatusEffect->GetStatusID() <= end && !PStatusEffect->deleted)
+        {
+            count++;
+        }
+    }
+    return count;
+}
+
+void CStatusEffectContainer::RemoveOldestStatusEffectInRange(EFFECT start, EFFECT end)
+{
+    CStatusEffect* oldest = nullptr;
+    for (CStatusEffect* PStatusEffect : m_StatusEffectSet)
+    {
+        if (PStatusEffect->GetStatusID() >= start && PStatusEffect->GetStatusID() <= end && !PStatusEffect->deleted)
+        {
+            if (!oldest || PStatusEffect->GetStartTime() < oldest->GetStartTime())
+            {
+                oldest = PStatusEffect;
+            }
+        }
+    }
+    if (oldest)
+    {
+        RemoveStatusEffect(oldest, true);
+    }
+}
+
+void CStatusEffectContainer::RemoveAllStatusEffectsInRange(EFFECT start, EFFECT end)
+{
+    for (CStatusEffect* PStatusEffect : m_StatusEffectSet)
+    {
+        if (PStatusEffect->GetStatusID() >= start && PStatusEffect->GetStatusID() <= end)
+        {
+            RemoveStatusEffect(PStatusEffect, true);
+        }
     }
 }
 
