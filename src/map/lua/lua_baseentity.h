@@ -692,11 +692,15 @@ public:
     uint8 getAutomatonFrame();
     uint8 getAutomatonHead();
     bool  unlockAttachment(uint16 itemID);
-    uint8 getActiveManeuvers();
+    uint8 getActiveManeuverCount();
     void  removeOldestManeuver();
     void  removeAllManeuvers();
     void  updateAttachments();
     void  reduceBurden(float percentReduction, sol::object const& intReductionObj);
+
+    uint8 getActiveRuneCount();
+    void  removeOldestRune();
+    void  removeAllRunes();
 
     // Mob Entity-Specific
     void   setMobLevel(uint8 level);

@@ -4,9 +4,7 @@
 #ifndef _COMMON_SQL_H
 #define _COMMON_SQL_H
 
-#ifndef _CBASETYPES_H_
-#include "../common/cbasetypes.h"
-#endif
+#include "cbasetypes.h"
 
 #include <mysql.h>
 
@@ -58,20 +56,18 @@ enum SqlDataType
     SQLDT_LASTID
 };
 
-/*
- *
- *					SQL LEVEL
- *
- */
-
 struct Sql_t
 {
-    std::string    buf;
+    std::string buf;
+
+    // NOTE: Access to any of the MySQL resources is NOT thread-safe.
+    // You will encounter very difficult to debug crashes and failed
+    // operations if you're not careful!
     MYSQL          handle;
     MYSQL_RES*     result;
     MYSQL_ROW      row;
     unsigned long* lengths;
-    int            keepalive;
+    std::string    keepaliveTaskName;
 };
 
 /// Allocates and initializes a new Sql handle.
@@ -154,7 +150,7 @@ int32 Sql_NextRow(Sql_t* self);
 /// Establishes keepalive (periodic ping) on the connection
 ///
 /// @return the keepalive timer id, or INVALID_TIMER
-int32 Sql_Keepalive(Sql_t* self);
+int32 Sql_Keepalive(Sql_t* self, std::string const& keepalive_name);
 
 /// Gets the data of a column.
 /// The data remains valid until the next row is fetched or the result is freed.
@@ -170,15 +166,6 @@ float  Sql_GetFloatData(Sql_t* self, size_t col);
 /// Frees the result of the query.
 void Sql_FreeResult(Sql_t* self);
 
-#if defined(SQL_REMOVE_SHOWDEBUG)
-#define Sql_ShowDebug(self) (void)0
-#else
-#define Sql_ShowDebug(self) Sql_ShowDebug_(self, __FILE__, __LINE__)
-#endif
-
-/// Shows debug information (last query).
-void Sql_ShowDebug_(Sql_t* self, const char* debug_file, const unsigned long debug_line);
-
 /// Frees a Sql handle returned by Sql_Malloc.
 void Sql_Free(Sql_t* self);
 
@@ -189,8 +176,4 @@ bool Sql_TransactionStart(Sql_t* self);
 bool Sql_TransactionCommit(Sql_t* self);
 bool Sql_TransactionRollback(Sql_t* self);
 
-#endif
-
-//											End level
-////
-//////////////////////////////////////////////////////////////////////////////////////////
+#endif // _COMMON_SQL_H

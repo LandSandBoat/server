@@ -6008,7 +6008,7 @@ namespace charutils
 
         if (highestItem > 99)
         {
-            itemLevelDiff += (highestItem - 99) / 2;
+            itemLevelDiff += (highestItem - 99) / 2.f;
         }
 
         for (uint8 slotID = 4; slotID < 9; ++slotID)
@@ -6017,7 +6017,7 @@ namespace charutils
 
             if (PItem && PItem->getILvl() > 99)
             {
-                itemLevelDiff += (PItem->getILvl() - 99) / 10;
+                itemLevelDiff += (PItem->getILvl() - 99) / 10.f;
             }
         }
 

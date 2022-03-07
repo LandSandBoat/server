@@ -114,7 +114,7 @@ int32 do_init(int32 argc, char** argv)
     {
         exit(EXIT_FAILURE);
     }
-    Sql_Keepalive(SqlHandle);
+    Sql_Keepalive(SqlHandle, "LoginKeepalive");
 
     const char* fmtQuery = "OPTIMIZE TABLE `accounts`,`accounts_banned`, `accounts_sessions`, `chars`,`char_equip`, \
                            `char_inventory`, `char_jobs`,`char_look`,`char_stats`, `char_vars`, `char_bazaar_msg`, \
@@ -137,8 +137,8 @@ int32 do_init(int32 argc, char** argv)
 
     if (attached)
     {
+        ShowStatus("Console input thread is ready...");
         consoleInputThread = std::thread([&]() {
-            ShowStatus("Console input thread is ready..\r");
             // ctrl c apparently causes log spam
             auto lastInputTime = server_clock::now();
             while (consoleThreadRun)

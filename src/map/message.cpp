@@ -603,7 +603,7 @@ namespace message
         {
             exit(EXIT_FAILURE);
         }
-        Sql_Keepalive(SqlHandle);
+        Sql_Keepalive(SqlHandle, "MessageKeepalive");
 
         zContext = zmq::context_t(1);
         zSocket  = new zmq::socket_t(zContext, ZMQ_DEALER);

@@ -38,6 +38,7 @@ local handleAcceptMission = function(player, csid, option, npc)
         mission:begin(player)
         player:setMissionStatus(mission.areaId, 9)
         player:delKeyItem(xi.ki.MESSAGE_TO_JEUNO_SANDORIA)
+        player:messageSpecial(zones[player:getZoneID()].text.YOU_ACCEPT_THE_MISSION)
     end
 end
 
@@ -98,6 +99,13 @@ mission.sections =
 
         [xi.zone.CHATEAU_DORAGUILLE] =
         {
+            ['Halver'] =
+            {
+                onTrigger = function(player, npc)
+                    return mission:messageSpecial(chateauID.text.SHALL_BEGIN_DISCUSSION)
+                end,
+            },
+
             onZoneIn =
             {
                 function(player, prevZone)
@@ -135,7 +143,7 @@ mission.sections =
                     if missionStatus == 9 then
                         return mission:progressEvent(533)
                     elseif missionStatus == 10 then
-                        return mission:messageText(chateauID.text.HALVER_OFFSET + 334):setPriority(1000)
+                        return mission:messageText(chateauID.text.FEI_YIN_NORTHEAST)
                     elseif missionStatus == 12 and player:hasKeyItem(xi.ki.BURNT_SEAL) then
                         return mission:progressEvent(534)
                     end
@@ -204,9 +212,10 @@ mission.sections =
 
         [xi.zone.CHATEAU_DORAGUILLE] =
         {
-            ['_6h0']    = mission:progressEvent(115),
-            ['Curilla'] = mission:progressEvent(545),
-            ['Rahal']   = mission:progressEvent(544),
+            ['_6h0']    = mission:event(115),
+            ['Curilla'] = mission:event(545),
+            ['Halver']  = mission:messageText(chateauID.text.TIME_TO_REACH_DECISION),
+            ['Rahal']   = mission:event(544),
         },
     },
 }
