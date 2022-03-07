@@ -28,11 +28,11 @@
 
 enum class RELEASE_TYPE : uint8
 {
-    STANDARD = 0,
-    EVENT    = 1,
-    SKIPPING = 2,
-    UNKNOWN  = 3, /* Used by Event Update (String Update) - Packet 0x060  */
-    FISHING  = 4
+    STANDARD      = 0,
+    EVENT         = 1,
+    SKIPPING      = 2,
+    PASSWORDINPUT = 3, /* Used by Event Update (String Update) - Packet 0x060  */
+    FISHING       = 4
 };
 
 class CCharEntity;
