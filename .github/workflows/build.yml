@@ -505,8 +505,9 @@ jobs:
 
         for proc in { p0, p1, p2 }:
             for line in io.TextIOWrapper(proc.stdout, encoding="utf-8"):
+                print(line)
                 if "error" in line or "warning" in line:
-                    print(line)
+                    print("^^^")
                     exit(-1)
         EOF
 
