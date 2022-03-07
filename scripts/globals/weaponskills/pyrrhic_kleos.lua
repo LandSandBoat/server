@@ -36,6 +36,12 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
         params.str_wsc = 0.4 params.dex_wsc = 0.4
     end
 
+    if xi.settings.USE_MULTI_HIT_FTP_WEAPON_SKILL_CHANGES then
+        params.multiHitfTP = true -- http://wiki.ffo.jp/html/15896.html
+        params.ftp100 = 1.75 params.ftp200 = 1.75 params.ftp300 = 1.75
+        params.str_wsc = 0.4 params.dex_wsc = 0.4
+    end
+
     local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
     -- Apply Aftermath
