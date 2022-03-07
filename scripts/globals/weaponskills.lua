@@ -226,7 +226,7 @@ local function cRangedRatio(attacker, defender, params, ignoredDef, tp)
 
     cratio = cratio - levelCorrection
     cratio = cratio * atkmulti
-
+    -- adding cap check base on weapon https://www.bg-wiki.com/ffxi/PDIF info
     local weaponType = attacker:getWeaponSkillType(xi.slot.RANGED)
     local cRatioCap = 0
     if (weaponType == xi.skill.MARKSMANSHIP) then
@@ -246,20 +246,18 @@ local function cRangedRatio(attacker, defender, params, ignoredDef, tp)
 
     if cratio < 0.9 then
         pdifmax = cratio * (10 / 9)
-    elseif cratio >= 0.9 and cratio < 1.1 then
+    elseif cratio < 1.1 then
         pdifmax = 1
-    elseif cratio >= 1.1 then
+    elseif
         pdifmax = cratio
     end
 
-    -- old fomula had mistake and didnt check between two value
-    -- reworked with the https://www.bg-wiki.com/ffxi/PDIF info
     -- min
     local pdifmin = 0
 
     if cratio < 0.9 then
         pdifmin = cratio
-    elseif cratio >= 0.9 and cratio < 1.1 then
+    elseif cratio < 1.1 then
         pdifmin = 1
     else
         pdifmin = (cratio * (20 / 19)) - (3 / 19)
@@ -465,19 +463,19 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
             critrate = critrate + (10 + calcParams.flourishEffect:getSubPower()/2)/100
         end
 
-        -- See reference at https://www.bg-wiki.com/ffxi/Critical_Hit_Rate
+        -- Changed meele crit formulat to follow curve See reference at https://www.bg-wiki.com/ffxi/Critical_Hit_Rate
         local dexVsAgi = attacker:getStat(xi.mod.DEX) - target:getStat(xi.mod.AGI)
         if dexVsAgi < 7 then
             nativecrit = 0
-        elseif dexVsAgi >= 7 and dexVsAgi < 14 then
+        elseif dexVsAgi < 14 then
             nativecrit = 0.01
-        elseif dexVsAgi >= 14 and dexVsAgi < 20 then
+        elseif dexVsAgi < 20 then
             nativecrit = 0.02
-        elseif dexVsAgi >= 20 and dexVsAgi < 30 then
+        elseif dexVsAgi < 30 then
             nativecrit = 0.03
-        elseif dexVsAgi >= 30 and dexVsAgi < 40 then
+        elseif dexVsAgi < 40 then
             nativecrit = 0.04
-        elseif dexVsAgi >= 40 and dexVsAgi <= 50 then
+        elseif dexVsAgi <= 50 then
             nativecrit = (dexVsAgi - 35) / 100
         else
             nativecrit = 0.15 -- caps only apply to base rate, not merits and mods
