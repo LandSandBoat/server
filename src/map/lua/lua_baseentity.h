@@ -699,6 +699,7 @@ public:
     void  reduceBurden(float percentReduction, sol::object const& intReductionObj);
 
     uint8 getActiveRuneCount();
+    uint16 getHighestRuneEffect();
     void  removeOldestRune();
     void  removeAllRunes();
 

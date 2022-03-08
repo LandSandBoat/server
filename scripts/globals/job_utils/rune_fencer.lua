@@ -126,6 +126,69 @@ local function calculateVivaciousPulseHealing(target)
     return HPHealAmount
 end
 
+local function getVallationValianceSDTType(type)
+
+    local runeSDTMap =
+    {
+        [xi.effect.IGNIS]    = xi.mod.ICE_SDT,
+        [xi.effect.GELUS]    = xi.mod.WIND_SDT,
+        [xi.effect.FLABRA]   = xi.mod.EARTH_SDT,
+        [xi.effect.TELLUS]   = xi.mod.THUNDER_SDT,
+        [xi.effect.SULPOR]   = xi.mod.WATER_SDT,
+        [xi.effect.UNDA]     = xi.mod.FIRE_SDT,
+        [xi.effect.LUX]      = xi.mod.DARK_SDT,
+        [xi.effect.TENEBRAE] = xi.mod.LIGHT_SDT
+    }
+    return runeSDTMap[type]
+end
+
+local function getBattutaSpikesType(type)
+
+    local runeSpikesMap =
+    {
+        [xi.effect.IGNIS]    = xi.subEffect.BLAZE_SPIKES,
+        [xi.effect.GELUS]    = xi.subEffect.ICE_SPIKES,
+        [xi.effect.FLABRA]   = xi.subEffect.GALE_SPIKES,
+        [xi.effect.TELLUS]   = xi.subEffect.CLOD_SPIKES,
+        [xi.effect.SULPOR]   = xi.subEffect.SHOCK_SPIKES,
+        [xi.effect.UNDA]     = xi.subEffect.DELUGE_SPIKES,
+        [xi.effect.LUX]      = xi.subEffect.REPSIRAL,
+        [xi.effect.TENEBRAE] = xi.subEffect.DEATH_SPIKES,
+    }
+    return runeSpikesMap[type]
+end
+
+local function getSpecEffectElementWard(type) -- verified via !injectaction 15 1 1-8, retail action packet dumps
+
+    local runeSpecEffectMap =
+    {
+        [xi.effect.IGNIS]    = 1,
+        [xi.effect.GELUS]    = 2,
+        [xi.effect.FLABRA]   = 3,
+        [xi.effect.TELLUS]   = 4,
+        [xi.effect.SULPOR]   = 5,
+        [xi.effect.UNDA]     = 6,
+        [xi.effect.LUX]      = 7,
+        [xi.effect.TENEBRAE] = 8
+    }
+    return runeSpecEffectMap[type]
+end
+
+local function applyVallationValianceSDTMods(target, SDTTypes, power, effect, duration) -- Vallation/Valiance can apply up to N where N is total rune different elemental resistances, or power*N for singular element, or any combination thereof.
+
+--    local numEffects = 0
+
+    local effectAdded = target:addStatusEffect(effect, power, 0, duration)
+    if effectAdded then
+        local newEffect = target:getStatusEffect(effect)
+
+        for _, SDT in ipairs(SDTTypes) do
+            target:addMod(SDT,power)
+            newEffect:addMod(SDT,power) -- due to order of events, this only adds mods to the container, not to the owner of the effect.
+        end
+    end
+end
+
 xi.job_utils.rune_fencer.useRuneEnchantment = function(player, target, ability, effect)
     enforceRuneCounts(target)
     applyRuneEnhancement(effect, target)
@@ -203,4 +266,125 @@ end
 
 xi.job_utils.rune_fencer.useVivaciousPulse = function(player, target, ability, effect)
     return calculateVivaciousPulseHealing(player, target)
+end
+
+xi.job_utils.rune_fencer.checkHaveRunes = function(player)
+
+    if player:getActiveRuneCount() > 0 then
+        return 0
+    end
+
+    return  xi.msg.basic.REQUIRE_RUNE, 0 -- That action requires the ability Rune Enchantment.
+end
+
+--see https://www.bg-wiki.com/ffxi/Vallation, https://www.bg-wiki.com/ffxi/Valiance, https://www.bg-wiki.com/ffxi/Inspiration
+xi.job_utils.rune_fencer.useVallationValiance = function(player, target, ability, action)
+
+    local abilityID = ability:getID()
+
+    local highestRune = player:getHighestRuneEffect()
+
+    action:speceffect(target:getID(), getSpecEffectElementWard(highestRune)) -- set element color for animation. This is set even on "sub targets" for valiance on retail even if the animation doesn't seem to change.
+
+    if player:getID() ~= target:getID() then -- Only the caster can apply effects, including to the party if valiance.
+
+        if abilityID == xi.jobAbility.VALIANCE and target:hasStatusEffect(xi.effect.VALLATION) then -- Valiance is being used on them, and they have Vallation already up
+            action:messageID(target:getID(),xi.msg.basic.NO_EFFECT) -- "No effect on <Target>"
+        end
+        return
+    end
+
+    local effects = target:getStatusEffects()
+    local SDTPower = 15
+    local meritBonus =  player:getMerit(xi.merit.MERIT_VALLATION_EFFECT)
+    local inspirationMerits = player:getMerit(xi.merit.MERIT_INSPIRATION)
+    local inspirationFCBonus = inspirationMerits + inspirationMerits / 10 * player:getMod(xi.mod.ENHANCES_INSPIRATION)  -- 10 FC per merit level, plus 2% per level from AF2 leg aug
+    local jobPointBonusDuration = player:getJobPointLevel(xi.jp.VALLATION_DURATION)
+
+    SDTPower = SDTPower + meritBonus
+
+    local SDTTypes = {} -- one SDT type per rune which can be additive
+    local i = 0
+
+    for _, effect in ipairs(effects) do
+        local type = effect:getType()
+
+        if type >= xi.effect.IGNIS and type <= xi.effect.TENEBRAE then
+            local SDTType = getVallationValianceSDTType(type)
+            SDTTypes[i+1] = SDTType
+            i = i + 1
+        end
+    end
+
+    if abilityID == xi.jobAbility.VALIANCE then -- apply effects to entire party (including target) (Valiance)
+        local party = player:getParty()
+        local duration = 120 + jobPointBonusDuration
+
+        for _, member in pairs(party) do
+            if not member:hasStatusEffect(xi.effect.VALLATION) then -- Valiance has no effect if Vallation is up
+
+                member:delStatusEffectSilent(xi.effect.VALIANCE) -- Remove Valiance if it's already up. The new one will overwrite.
+                applyVallationValianceSDTMods(member, SDTTypes, SDTPower, xi.effect.VALIANCE, duration)
+
+                if inspirationFCBonus > 0 then -- Inspiration FC is not applied unless Valiance is applied, tested on retail with 2 RUN in a party
+                    member:addStatusEffect(xi.effect.FAST_CAST, inspirationFCBonus, 0, duration)
+                end
+            elseif member:getID() == player:getID() then -- caster has Vallation, set no effect message.
+                    action:messageID(player:getID(),xi.msg.basic.JA_NO_EFFECT_2) -- "<Player> uses Valiance.\nNo effect on <Player>."
+            end
+
+        end
+    else -- apply effects to target (Vallation)
+        local duration = 180 + jobPointBonusDuration
+
+        target:delStatusEffectSilent(xi.effect.VALIANCE) -- Vallation overwrites Valiance
+        applyVallationValianceSDTMods(target, SDTTypes, SDTPower, xi.effect.VALLATION, duration)
+
+        if inspirationFCBonus > 0 then
+           target:addStatusEffect(xi.effect.FAST_CAST, inspirationFCBonus, 0, duration)
+        end
+    end
+end
+
+xi.job_utils.rune_fencer.onVallationValianceEffectGain = function(target, effect)
+    -- intentionally blank, handled in applyVallationValianceSDTMods
+end
+
+xi.job_utils.rune_fencer.onVallationValianceEffectLose = function(target, effect)
+    -- intentionally blank, the effect has a mod list that is deleted after this event is called in CStatusEffectContainer::RemoveStatusEffect
+end
+
+-- see https://www.bg-wiki.com/ffxi/Battuta
+xi.job_utils.rune_fencer.useBattuta = function(player, target, ability, action)
+
+    local meritPower = player:getMerit(xi.merit.MERIT_BATTUTA) -- power is 4
+    local modBonus = (100 + (player:getMod(xi.mod.ENHANCES_BATTUTA) *  meritPower / 4)) / 100
+    local inquartataPower = 36 + meritPower -- base 36% + merit power of 4% each = max of 56%
+    local spikesPower = 6 + meritPower    -- damage is static 26 per rune barring SDT/MDT at 5/5 Battuta merits. 6 + 4*5 = 26.
+    local runeCount = target:getActiveRuneCount()
+
+    spikesPower = spikesPower * runeCount
+
+    local highestRune = target:getHighestRuneEffect()
+    action:speceffect(target:getID(), getSpecEffectElementWard(highestRune)) -- set element color for animation.
+
+    target:addStatusEffect(xi.effect.BATTUTA, inquartataPower, 0, 90, 0, math.floor(spikesPower * modBonus), 0)
+end
+
+xi.job_utils.rune_fencer.onBattutaEffectGain = function(target, effect)
+
+    local highestRune = target:getHighestRuneEffect()
+    local spikesType = getBattutaSpikesType(highestRune)
+
+    effect:addMod(xi.mod.INQUARTATA,effect:getPower())
+
+    local spikesPower = effect:getSubPower()
+    if spikesPower > 0 then
+        effect:addMod(xi.mod.PARRY_SPIKES,spikesType) 
+        effect:addMod(xi.mod.PARRY_SPIKES_DMG,effect:getSubPower())
+    end
+end
+
+xi.job_utils.rune_fencer.onBattutaEffectLose = function(target, effect)
+    -- handled after EFFECT_LOSE in cpp
 end

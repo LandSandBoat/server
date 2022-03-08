@@ -96,6 +96,7 @@ public:
     void  RemoveAllManeuvers();
 
     uint8 GetActiveRuneCount();
+    EFFECT GetHighestRuneEffect();
     void  RemoveOldestRune();
     void  RemoveAllRunes();
 
