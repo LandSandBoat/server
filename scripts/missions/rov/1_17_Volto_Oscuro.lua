@@ -15,6 +15,7 @@ local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.VOLTO_OSCUR
 
 mission.reward =
 {
+    item        = xi.items.CIPHER_OF_ZEIDS_ALTER_EGO_II,
     nextMission = { xi.mission.log_id.ROV, xi.mission.id.rov.RING_MY_BELL },
 }
 
