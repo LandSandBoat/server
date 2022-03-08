@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.20)
+cmake_minimum_required(VERSION 3.16)
 project(topaz CXX)
 
 set_property(GLOBAL PROPERTY CXX_STANDARD 17)
