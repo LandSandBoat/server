@@ -21,6 +21,7 @@ Action.Type = {
     Wait = 5,
     Release = 6,
     KeyItem = 7,
+    NoAction = 8,
 }
 
 function Action:new(type)
