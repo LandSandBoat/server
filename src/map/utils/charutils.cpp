@@ -549,6 +549,9 @@ namespace charutils
             PChar->getStorage(LOC_WARDROBE6)->AddBuff((uint8)sql->GetIntData(11));
             PChar->getStorage(LOC_WARDROBE7)->AddBuff((uint8)sql->GetIntData(12));
             PChar->getStorage(LOC_WARDROBE8)->AddBuff((uint8)sql->GetIntData(13));
+
+            // NOTE: Not from the db, hard-coded to 10!
+            PChar->getStorage(LOC_RECYCLEBIN)->AddBuff(10);
         }
 
         fmtQuery = "SELECT face, race, size, head, body, hands, legs, feet, main, sub, ranged "
@@ -2212,13 +2215,36 @@ namespace charutils
 
     void AddItemToRecycleBin(CCharEntity* PChar, uint32 container, uint8 slotID, uint8 quantity)
     {
-        // TODO
+        CItem* PItem = PChar->getStorage(container)->GetItem(slotID);
+        uint8 NewSlotID = PChar->getStorage(LOC_RECYCLEBIN)->InsertItem(PItem);
+        if (NewSlotID != ERROR_SLOTID)
+        {
+            const char* Query = "UPDATE char_inventory SET location = %u, slot = %u WHERE charid = %u AND location = %u AND slot = %u;";
+
+            if (Sql_Query(SqlHandle, Query, LOC_RECYCLEBIN, NewSlotID, PChar->id, container, slotID) != SQL_ERROR && Sql_AffectedRows(SqlHandle) != 0)
+            {
+                PChar->getStorage(container)->InsertItem(nullptr, slotID);
+
+                PChar->pushPacket(new CInventoryItemPacket(nullptr, container, slotID));
+                PChar->pushPacket(new CInventoryItemPacket(PItem, LOC_RECYCLEBIN, NewSlotID));
+            }
+            else
+            {
+                PChar->getStorage(LOC_RECYCLEBIN)->InsertItem(nullptr, NewSlotID);
+                PChar->getStorage(container)->InsertItem(PItem, slotID);
+            }
+        }
+        PChar->pushPacket(new CInventoryFinishPacket());
     }
 
     void EmptyRecycleBin(CCharEntity* PChar)
     {
-        ShowNotice("EmptyRecycleBin");
-        // TODO
+        CItemContainer* recycleBin = PChar->getStorage(LOC_RECYCLEBIN);
+        const char* Query = "DELETE FROM char_inventory WHERE charid = %u AND location = 17;";
+        if (Sql_Query(SqlHandle, Query, PChar->id) != SQL_ERROR)
+        {
+            recycleBin->Clear();
+        }
     }
 
     /************************************************************************
