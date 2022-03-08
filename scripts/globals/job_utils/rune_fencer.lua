@@ -175,10 +175,8 @@ local function getSpecEffectElementWard(type) -- verified via !injectaction 15 1
 end
 
 local function applyVallationValianceSDTMods(target, SDTTypes, power, effect, duration) -- Vallation/Valiance can apply up to N where N is total rune different elemental resistances, or power*N for singular element, or any combination thereof.
-
---    local numEffects = 0
-
     local effectAdded = target:addStatusEffect(effect, power, 0, duration)
+    
     if effectAdded then
         local newEffect = target:getStatusEffect(effect)
 
@@ -271,7 +269,7 @@ end
 xi.job_utils.rune_fencer.checkHaveRunes = function(player)
 
     if player:getActiveRuneCount() > 0 then
-        return 0
+        return 0, 0
     end
 
     return  xi.msg.basic.REQUIRE_RUNE, 0 -- That action requires the ability Rune Enchantment.
@@ -380,7 +378,7 @@ xi.job_utils.rune_fencer.onBattutaEffectGain = function(target, effect)
 
     local spikesPower = effect:getSubPower()
     if spikesPower > 0 then
-        effect:addMod(xi.mod.PARRY_SPIKES,spikesType) 
+        effect:addMod(xi.mod.PARRY_SPIKES,spikesType)
         effect:addMod(xi.mod.PARRY_SPIKES_DMG,effect:getSubPower())
     end
 end
