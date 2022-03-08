@@ -425,7 +425,7 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
 
     -- Calculate alpha, WSC, and our modifiers for our base per-hit damage
     if not calcParams.alpha then
-        if xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES or xi.settings.USE_MULTI_HIT_FTP_WEAPON_SKILL_CHANGES then
+        if xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES then
             calcParams.alpha = 1
         else
             calcParams.alpha = getAlpha(attacker:getMainLvl())

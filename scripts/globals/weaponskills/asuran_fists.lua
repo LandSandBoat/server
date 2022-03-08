@@ -22,8 +22,8 @@ local weaponskill_object = {}
 weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
 
     local params = {}
-    params.numHits = 8
-    -- This is a 8 hit ws but H2H ws are done in a different way, the off hand hit is been taking into account in another place, it is possible that we are adding one hit too many but lacking data
+    params.numHits = 7
+    -- This is a 8 hit ws but H2H ws are done in a different way, the off hand hit is been taking into account in another place
     params.ftp100 = 1 params.ftp200 = 1 params.ftp300 = 1
     params.str_wsc = 0.1 params.dex_wsc = 0.0 params.vit_wsc = 0.1 params.agi_wsc = 0.0 params.int_wsc = 0.0 params.mnd_wsc = 0.0 params.chr_wsc = 0.0
     params.crit100 = 0.0 params.crit200 = 0.0 params.crit300 = 0.0
@@ -32,12 +32,7 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     params.atk100 = 1; params.atk200 = 1; params.atk300 = 1
 
     if xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.str_wsc = 0.15 params.vit_wsc = 0.15
-        params.ftp100 = 1.25 params.ftp200 = 1.25 params.ftp300 = 1.25
-    end
--- http://wiki.ffo.jp/html/2424.html
-    if xi.settings.USE_MULTI_HIT_FTP_WEAPON_SKILL_CHANGES then
-        params.multiHitfTP = true
+        params.multiHitfTP = true -- http://wiki.ffo.jp/html/2424.html
         params.str_wsc = 0.15 params.vit_wsc = 0.15
         params.ftp100 = 1.25 params.ftp200 = 1.25 params.ftp300 = 1.25
     end

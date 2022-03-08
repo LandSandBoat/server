@@ -31,11 +31,7 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
     if xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.vit_wsc = 1.0
-    end
--- http://wiki.ffo.jp/html/2417.html
-    if xi.settings.USE_MULTI_HIT_FTP_WEAPON_SKILL_CHANGES then
-        params.multiHitfTP = true
+        params.multiHitfTP = true -- http://wiki.ffo.jp/html/2417.html
         params.vit_wsc = 1.0
     end
 
