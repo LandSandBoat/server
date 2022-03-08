@@ -176,7 +176,7 @@ end
 
 local function applyVallationValianceSDTMods(target, SDTTypes, power, effect, duration) -- Vallation/Valiance can apply up to N where N is total rune different elemental resistances, or power*N for singular element, or any combination thereof.
     local effectAdded = target:addStatusEffect(effect, power, 0, duration)
-    
+
     if effectAdded then
         local newEffect = target:getStatusEffect(effect)
 
