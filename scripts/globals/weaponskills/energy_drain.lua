@@ -23,9 +23,11 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     end
 
     damagemod = damagemod * xi.settings.WEAPON_SKILL_POWER
-    local mpReturn = target:addMP(-damagemod)
-    player:addMP(mpReturn) -- this isnt the right way but the only way I could figure out
-    -- to do make undead undrainable
+
+    if not target:isUndead() then
+        local mpReturn = target:addMP(-damagemod)
+        player:addMP(mpReturn)
+    end
 
     return 1, 0, false, 0
 end
