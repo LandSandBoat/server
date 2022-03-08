@@ -13,6 +13,8 @@ require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------
+local norgID = require("scripts/zones/Norg/IDs")
+-----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.THE_BEGINNING)
 
@@ -74,7 +76,7 @@ mission.sections =
         [xi.zone.NORG] =
         {
             ['_700']       = mission:event(276):setPriority(1005), -- RoV objectives are highest priority, set higher than progressEvent (1000)
-            ['Comitiolus'] = mission:event(6), -- NPC Chat 12321, not event 6
+            ['Comitiolus'] = mission:messageSpecial(norgID.text.DIDYA_GET_BUMPED):setPriority(1005),
             ['Heillal']    = mission:progressEvent(281),
 
             onEventFinish =

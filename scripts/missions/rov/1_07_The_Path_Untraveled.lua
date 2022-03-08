@@ -34,6 +34,10 @@ mission.sections =
             ['Shattered_Telepoint'] =
             {
                 onTrigger = function(player, npc)
+                    -- TODO: This parameter may change after the completion of Apocolypse Nigh where Lion is freed
+                    -- from the crystal.  This could impact this parameter, along with several successive missions.
+                    -- All successive missions use the isLionGhost variable, and can be used to replace should this
+                    -- be verified.
                     local isLionGhost = player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_CELESTIAL_NEXUS) and 1 or 0
 
                     return mission:event(3, { [7] = isLionGhost }):setPriority(1005)

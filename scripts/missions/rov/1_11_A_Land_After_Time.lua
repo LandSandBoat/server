@@ -39,6 +39,12 @@ mission.sections =
                         local rank6 = (player:getRank(player:getNation()) >= 6) and 1 or 0
                         local isLionGhost = player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_CELESTIAL_NEXUS) and 1 or 0
 
+                        -- We will need to access this for an event in M1-13, store here, as this event displays the blocking
+                        -- message.
+                        if rank6 == 0 then
+                            player:setCharVar('Mission[13][30]wasBlocked', 1)
+                        end
+
                         return mission:event(4, player:getZoneID(), 0, 0, 0, 0, 0, rank6, isLionGhost):setPriority(1005)
                     else
                         -- Note: mission:complete() calls npcUtil.completeMission() and checks giving item
@@ -68,6 +74,10 @@ mission.sections =
                         local rank6 = (player:getRank(player:getNation()) >= 6) and 1 or 0
                         local isLionGhost = player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_CELESTIAL_NEXUS) and 1 or 0
 
+                        if rank6 == 0 then
+                            player:setCharVar('Mission[13][30]wasBlocked', 1)
+                        end
+
                         return mission:event(15, player:getZoneID(), 0, 0, 0, 0, 0, rank6, isLionGhost):setPriority(1005)
                     else
                         mission:complete(player)
@@ -94,6 +104,10 @@ mission.sections =
                     if mission:getVar(player, 'hasSeenEvent') == 0 then
                         local rank6 = (player:getRank(player:getNation()) >= 6) and 1 or 0
                         local isLionGhost = player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_CELESTIAL_NEXUS) and 1 or 0
+
+                        if rank6 == 0 then
+                            player:setCharVar('Mission[13][30]wasBlocked', 1)
+                        end
 
                         return mission:event(42, player:getZoneID(), 0, 0, 0, 0, 0, rank6, isLionGhost):setPriority(1005)
                     else

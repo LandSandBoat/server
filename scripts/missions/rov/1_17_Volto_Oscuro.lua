@@ -31,7 +31,13 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if mission:getVar(player, 'hasSeenEvent') == 0 then
-                        return mission:event(279):setPriority(1005)
+                        -- Tenzen parameter causes a small difference in dialogue if you answer that you do not know
+                        -- who he is.  This uses the logic previously implemented in 1-18 for determining the value.
+
+                        local promathiaMission = player:getCurrentMission(xi.mission.log_id.COP)
+                        local metTenzen = (promathiaMission >= xi.mission.id.cop.A_VESSEL_WITHOUT_A_CAPTAIN) and 1 or 0
+
+                        return mission:event(279, { [7] = metTenzen }):setPriority(1005)
                     else
                         mission:complete(player)
                         return mission:noAction()

@@ -26,7 +26,14 @@ mission.sections =
 
         [xi.zone.NORG] =
         {
-            ['_700'] = mission:event(278):setPriority(1005),
+            ['_700'] =
+            {
+                onTrigger = function(player, npc)
+                    return mission:progressEvent(278, { [5] = mission:getVar(player, 'wasBlocked') }):setPriority(1005)
+                end,
+            },
+
+            ['Comitiolus'] = mission:event(6),
 
             onEventFinish =
             {
