@@ -33,26 +33,10 @@ end
 local function enforceRuneCounts(target)
     local RUNLevel = getRUNLevel(target)
     local maxRunes = RUNLevel >= 65 and 3 or RUNLevel >= 35 and 2 or 1
-    local effects = target:getStatusEffects()
-    local oldestRune = nil
-    local oldestRuneDuration = 0
-    local i = 0
 
-    for _, effect in ipairs(effects) do
-        local type = effect:getType()
-        if type >= xi.effect.IGNIS and type <= xi.effect.TENEBRAE then
-
-            local remainingDuration = effect:getTimeRemaining()
-
-            if oldestRune == nil or remainingDuration < oldestRuneDuration then
-                oldestRune = type
-                oldestRuneDuration = remainingDuration
-            end
-            i = i + 1
-        end
-    end
-    if i >= maxRunes then -- delete the rune with the least duration
-        target:delStatusEffectSilent(oldestRune)
+    local activeRunes = target:getActiveRuneCount()
+    if activeRunes >= maxRunes then -- delete the rune with the least duration
+        target:removeOldestRune()
     end
 end
 
