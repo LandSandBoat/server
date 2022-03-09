@@ -36193,11 +36193,11 @@ INSERT INTO `item_mods` VALUES (26341,160,-600);    -- Damage Taken-6
 INSERT INTO `item_mods` VALUES (26341,302,8);     -- Triple Attack+8
 INSERT INTO `item_mods` VALUES (26341,973,15);    -- Subtle Blow II +15
 INSERT INTO `item_mods` VALUES (26356,30,5);    -- Skrymir Cord: Magic Accuracy + 5
-INSERT INTO `item_mods` VALUES (26356,28,5);    -- Skrymir Cord: Magic Attack Bonus + 5
-INSERT INTO `item_mods` VALUES (26356,311,30);    -- Skrymir Cord: Magic Damage + 30
+INSERT INTO `item_mods` VALUES (26356,28,5);    -- Magic Attack Bonus + 5
+INSERT INTO `item_mods` VALUES (26356,311,30);    -- Magic Damage + 30
 INSERT INTO `item_mods` VALUES (26357,30,7);    -- Skrymir Cord +1: Magic Accuracy + 7
-INSERT INTO `item_mods` VALUES (26357,28,7);    -- Skrymir Cord +1: Magic Attack Bonus + 7
-INSERT INTO `item_mods` VALUES (26357,311,35);    -- Skrymir Cord +1: Magic Damage + 35
+INSERT INTO `item_mods` VALUES (26357,28,7);    --  Magic Attack Bonus + 7
+INSERT INTO `item_mods` VALUES (26357,311,35);    -- Magic Damage + 35
 INSERT INTO `item_mods` VALUES (26400,1,60); -- Culminus: DEF+60
 INSERT INTO `item_mods` VALUES (26400,2,57); -- HP+57
 INSERT INTO `item_mods` VALUES (26400,5,64); -- MP+64
