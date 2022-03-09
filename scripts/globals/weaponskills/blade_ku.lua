@@ -32,6 +32,7 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     params.canCrit = false
     params.acc100 = 0.9 params.acc200= 1 params.acc300= 1.1
     --  the TP bonus for TP 1,000 and above has been raised, which has substantially raised the hit rate http://wiki.ffo.jp/html/732.html
+    -- data on ws accuracy are difficult to come by, would need to decide on sane value for the accuracy boost stated in JPWiki for now I'm only adding 0.1 per tier
     params.atk100 = 1; params.atk200 = 1; params.atk300 = 1
 
     if xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGE then
