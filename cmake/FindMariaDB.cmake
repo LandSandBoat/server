@@ -68,11 +68,7 @@ find_library(MARIADB_LIBRARY
         /usr/local/bin/
         /opt/)
 
-find_path(MARIADB_INCLUDE_DIR
-    NAMES
-        mysql.h
-    PATHS
-        ${PROJECT_SOURCE_DIR}/ext/mariadb/include/) # Only look internally
+set(MARIADB_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/ext/mariadb/include/) # Only look internally
 
 include(FindPackageHandleStandardArgs)
 find_package_handle_standard_args(MariaDB DEFAULT_MSG MARIADB_LIBRARY MARIADB_INCLUDE_DIR)
