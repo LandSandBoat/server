@@ -34,7 +34,7 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     --  the TP bonus for TP 1,000 and above has been raised, which has substantially raised the hit rate http://wiki.ffo.jp/html/732.html
     params.atk100 = 1; params.atk200 = 1; params.atk300 = 1
 
-    if (xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then
+    if xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGE then
         params.multiHitfTP = true -- http://wiki.ffo.jp/html/732.html
         params.str_wsc = 0.3 params.dex_wsc = 0.3
     end
