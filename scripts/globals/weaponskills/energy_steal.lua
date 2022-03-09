@@ -25,8 +25,7 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     damagemod = damagemod * xi.settings.WEAPON_SKILL_POWER
 
     if not target:isUndead() then
-        local mpReturn = target:addMP(-damagemod)
-        player:addMP(mpReturn)
+        player:addMP(target:addMP(-damagemod))
     end
 
     return 1, 0, false, 0
