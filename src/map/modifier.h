@@ -590,23 +590,26 @@ enum class Mod
 
     // Rune Fencer
     INQUARTATA                  = 963,  // Increases parry rate by a flat %.
-    ENHANCES_BATTUTA            = 1004, //
-    ENHANCES_ELEMENTAL_SFORZO   = 1005, //
-    ENHANCES_SLEIGHT_OF_SWORD   = 1006, //
-    ENHANCES_INSPIRATION        = 1007, //
-    SWORDPLAY                   = 1008, //
-    LIEMENT                     = 1009, //
-    VALIANCE_VALLATION_DURATION = 1010, //
-    PFLUG                       = 1011, //
-    VIVACIOUS_PULSE_POTENCY     = 1012, //
-    AUGMENTS_VIVACIOUS_PULSE    = 1013, //
-    RAYKE_DURATION              = 1014, //
-    ODYLLIC_SUBTERFUGE_DURATION = 1015, //
-    SWIPE                       = 1016, //
-    LIEMENT_DURATION            = 1017, //
-    GAMBIT_DURATION             = 1018, //
-    EMBOLDEN_DURATION           = 1019, //
-    LIEMENT_EXTENDS_TO_AREA     = 1020, //
+    ENHANCES_BATTUTA            = 1004, // Used by RUN merit point cat 2 to add +N% bonus damage to parry spikes during Battuta effect
+    ENHANCES_ELEMENTAL_SFORZO   = 1005, // Bonus duration
+    ENHANCES_SLEIGHT_OF_SWORD   = 1006, // Used by RUN merit point cat 2 to add +N Subtle Blow to Swordplay
+    ENHANCES_INSPIRATION        = 1007, // Used by RUN merit point cat 2 to add +N Fast Cast to Vallation/Valiance
+    SWORDPLAY                   = 1008, // Adds bonus starting ticks to Swordplay
+    LIEMENT                     = 1009, // Adds bonus duration as +N seconds
+    VALIANCE_VALLATION_DURATION = 1010, // Adds bonus duration as +N seconds
+    PFLUG                       = 1011, // Adds flat additional all-resist rate in +N%
+    VIVACIOUS_PULSE_POTENCY     = 1012, // Adds final HP bonus +N% to calculation of Vivacious Pulse
+    AUGMENTS_VIVACIOUS_PULSE    = 1013, // Adds random erase/-na to Vivacious Pulse
+    RAYKE_DURATION              = 1014, // Adds bonus duration as +N seconds
+    ODYLLIC_SUBTERFUGE_DURATION = 1015, // Adds bonus duration as +N seconds
+    SWIPE                       = 1016, // Adds bonus damage to the Swipe/Lunge magic damage calculation
+    LIEMENT_DURATION            = 1017, // Adds bonus duration as +N seconds
+    GAMBIT_DURATION             = 1018, // Adds bonus duration as +N seconds
+    EMBOLDEN_DURATION           = 1019, // Adds bonus duration as +N seconds
+    LIEMENT_EXTENDS_TO_AREA     = 1020, // Epeolatry's (RUN Ergon weapon) special effect, makes Liement AoE to party instead of self target only.
+    INSPIRATION_FAST_CAST       = 1021, // Inspiration Fast Cast, additive with Fast Cast with a combined cap beyond 80%
+    PARRY_SPIKES                = 1022, // Battuta parry spikes rate
+    PARRY_SPIKES_DMG            = 1023, // Battuta parry spikes damage
 
     // Stores the amount of elemental affinity (elemental staves mostly) - damage, acc, and perpetuation is all handled separately
     FIRE_AFFINITY_DMG    = 347, // They're stored separately due to Magian stuff - they can grant different levels of
@@ -876,8 +879,8 @@ enum class Mod
     // 261 to 287
     // 888
     // 936
-    // 
-    // SPARE = 1021, and onward
+    //
+    // SPARE = 1024, and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it
