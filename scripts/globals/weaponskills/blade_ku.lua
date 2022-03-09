@@ -35,7 +35,7 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     -- data on ws accuracy are difficult to come by, would need to decide on sane value for the accuracy boost stated in JPWiki for now I'm only adding 0.1 per tier
     params.atk100 = 1; params.atk200 = 1; params.atk300 = 1
 
-    if xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGE then
+    if xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.multiHitfTP = true -- http://wiki.ffo.jp/html/732.html
         params.str_wsc = 0.3 params.dex_wsc = 0.3
     end
