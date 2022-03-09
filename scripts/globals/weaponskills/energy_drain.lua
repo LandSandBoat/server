@@ -18,8 +18,7 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     local damagemod = damage * ((tp - 1000) / 2000 + 1) -- Simplified formula for getting difference in tp return from 1000 tp to 3000 tp
 
     if xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        local attMind = player:getStat(xi.mod.MND)
-        damagemod = damagemod + attMind * 1
+        damagemod = damagemod + player:getStat(xi.mod.MND)
     end
 
     damagemod = damagemod * xi.settings.WEAPON_SKILL_POWER
