@@ -181,8 +181,8 @@ local function applyVallationValianceSDTMods(target, SDTTypes, power, effect, du
         local newEffect = target:getStatusEffect(effect)
 
         for _, SDT in ipairs(SDTTypes) do
-            target:addMod(SDT,power)
-            newEffect:addMod(SDT,power) -- due to order of events, this only adds mods to the container, not to the owner of the effect.
+            target:addMod(SDT, power)
+            newEffect:addMod(SDT, power) -- due to order of events, this only adds mods to the container, not to the owner of the effect.
         end
     end
 end
@@ -224,7 +224,7 @@ xi.job_utils.rune_fencer.onSwordplayEffectGain = function(target, effect)
     end
 
     if subPower > 0 then
-        target:addMod(xi.mod.SUBTLE_BLOW,subPower)
+        target:addMod(xi.mod.SUBTLE_BLOW, subPower)
     end
 end
 
@@ -258,7 +258,7 @@ xi.job_utils.rune_fencer.onSwordplayEffectLose = function (target, effect)
     target:delMod(xi.mod.EVASION, power)
 
     if subPower > 0 then
-        target:delMod(xi.mod.SUBTLE_BLOW,subPower)
+        target:delMod(xi.mod.SUBTLE_BLOW, subPower)
     end
 end
 
@@ -287,7 +287,7 @@ xi.job_utils.rune_fencer.useVallationValiance = function(player, target, ability
     if player:getID() ~= target:getID() then -- Only the caster can apply effects, including to the party if valiance.
 
         if abilityID == xi.jobAbility.VALIANCE and target:hasStatusEffect(xi.effect.VALLATION) then -- Valiance is being used on them, and they have Vallation already up
-            action:messageID(target:getID(),xi.msg.basic.NO_EFFECT) -- "No effect on <Target>"
+            action:messageID(target:getID(), xi.msg.basic.NO_EFFECT) -- "No effect on <Target>"
         end
         return
     end
@@ -328,7 +328,7 @@ xi.job_utils.rune_fencer.useVallationValiance = function(player, target, ability
                     member:addStatusEffect(xi.effect.FAST_CAST, inspirationFCBonus, 0, duration)
                 end
             elseif member:getID() == player:getID() then -- caster has Vallation, set no effect message.
-                    action:messageID(player:getID(),xi.msg.basic.JA_NO_EFFECT_2) -- "<Player> uses Valiance.\nNo effect on <Player>."
+                    action:messageID(player:getID(), xi.msg.basic.JA_NO_EFFECT_2) -- "<Player> uses Valiance.\nNo effect on <Player>."
             end
 
         end
@@ -378,8 +378,8 @@ xi.job_utils.rune_fencer.onBattutaEffectGain = function(target, effect)
 
     local spikesPower = effect:getSubPower()
     if spikesPower > 0 then
-        effect:addMod(xi.mod.PARRY_SPIKES,spikesType)
-        effect:addMod(xi.mod.PARRY_SPIKES_DMG,effect:getSubPower())
+        effect:addMod(xi.mod.PARRY_SPIKES, spikesType)
+        effect:addMod(xi.mod.PARRY_SPIKES_DMG, effect:getSubPower())
     end
 end
 
