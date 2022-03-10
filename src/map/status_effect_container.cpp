@@ -1140,6 +1140,40 @@ uint8 CStatusEffectContainer::GetActiveRuneCount()
     return GetStatusEffectCountInIDRange(EFFECT_IGNIS, EFFECT_TENEBRAE);
 }
 
+EFFECT CStatusEffectContainer::GetHighestRuneEffect()
+{
+    std::unordered_map<EFFECT,uint8> runeEffects;
+
+    for (CStatusEffect* PStatusEffect : m_StatusEffectSet)
+    {
+        if (PStatusEffect->GetStatusID() >= EFFECT_IGNIS && PStatusEffect->GetStatusID() <= EFFECT_TENEBRAE && !PStatusEffect->deleted)
+        {
+            if (runeEffects.count(PStatusEffect->GetStatusID()) == 0)
+            {
+                runeEffects[PStatusEffect->GetStatusID()] = 1;
+            }
+            else
+            {
+                runeEffects.at(PStatusEffect->GetStatusID())++;
+            }
+        }
+    }
+
+    EFFECT highestRune = EFFECT_NONE;
+    int highestRuneValue;
+
+    for (auto iter = runeEffects.begin(); iter != runeEffects.end(); ++iter)
+    {
+        if (highestRune == EFFECT_NONE || iter->second > highestRuneValue)
+        {
+            highestRune = iter->first;
+            highestRuneValue = iter->second;
+        }
+    }
+
+    return highestRune;
+}
+
 void CStatusEffectContainer::RemoveOldestRune()
 {
     RemoveOldestStatusEffectInIDRange(EFFECT_IGNIS, EFFECT_TENEBRAE);

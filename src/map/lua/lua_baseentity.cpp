@@ -687,6 +687,9 @@ void CLuaBaseEntity::injectActionPacket(uint16 action, uint16 anim, uint16 spec,
         case 14:
             actiontype = ACTION_DANCE;
             break;
+        case 15:
+            actiontype = ACTION_RUN_WARD_EFFUSION;
+            break;
     }
 
     action_t Action;
@@ -11885,6 +11888,19 @@ uint8 CLuaBaseEntity::getActiveRuneCount()
 }
 
 /************************************************************************
+ *  Function: getHighestRuneEffect()
+ *  Purpose : Returns the effect ID of the strongest Rune Effect
+ *  Example : local highestEffect = player:getHighestRuneEffect()
+ *  Notes   :
+ ************************************************************************/
+
+uint16 CLuaBaseEntity::getHighestRuneEffect()
+{
+    auto* PEntity = static_cast<CBattleEntity*>(m_PBaseEntity);
+    return PEntity->StatusEffectContainer->GetHighestRuneEffect();
+}
+
+/************************************************************************
  *  Function: removeOldestRune()
  *  Purpose : Removes the oldest run (if available)
  *  Example : player:removeOldestRune()
@@ -13793,6 +13809,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("reduceBurden", CLuaBaseEntity::reduceBurden);
 
     SOL_REGISTER("getActiveRuneCount", CLuaBaseEntity::getActiveRuneCount);
+    SOL_REGISTER("getHighestRuneEffect", CLuaBaseEntity::getHighestRuneEffect);
     SOL_REGISTER("removeOldestRune", CLuaBaseEntity::removeOldestRune);
     SOL_REGISTER("removeAllRunes", CLuaBaseEntity::removeAllRunes);
 
