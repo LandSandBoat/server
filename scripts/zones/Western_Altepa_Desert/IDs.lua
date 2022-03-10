@@ -38,13 +38,13 @@ zones[xi.zone.WESTERN_ALTEPA_DESERT] =
         EVIL_LOOMING_ABOVE_YOU     = 7376,  -- You sense something evil looming above you.
         SENSE_OMINOUS_PRESENCE     = 7408,  -- You sense an ominous presence...
         SOMETHING_IS_BURIED_HERE   = 7426,  -- It looks like something is buried here. If you had <item> you could dig it up.
-        PLAYER_OBTAINS_ITEM        = 7639,  -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM      = 7640,  -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM   = 7641,  -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP       = 7642,  -- You already possess that temporary item.
-        NO_COMBINATION             = 7647,  -- You were unable to enter a combination.
-        REGIME_REGISTERED          = 9825,  -- New training regime registered!
-        COMMON_SENSE_SURVIVAL      = 11814, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        PLAYER_OBTAINS_ITEM        = 7646,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM      = 7647,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM   = 7648,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP       = 7649,  -- You already possess that temporary item.
+        NO_COMBINATION             = 7654,  -- You were unable to enter a combination.
+        REGIME_REGISTERED          = 9832,  -- New training regime registered!
+        COMMON_SENSE_SURVIVAL      = 11821, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {
