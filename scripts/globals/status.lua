@@ -2853,8 +2853,9 @@ xi.mount =
     WIVRE          = 30,
     RED_RAPTOR     = 31,
     IRON_GIANT     = 32,
+    BYAKKO         = 33,
     --
-    MOUNT_MAX      = 33,
+    MOUNT_MAX      = 34,
 }
 
 -----------------------------------
