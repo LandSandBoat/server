@@ -39,7 +39,7 @@ entity.onMobFight = function(mob)
                 mob:setMod(xi.magic.resistMod[n], 2000)
             end
             for n =1, #xi.magic.specificDmgTakenMod, 1 do
-                mob:setMod(xi.magic.specificDmgTakenMod[n], -1000)
+                mob:setMod(xi.magic.specificDmgTakenMod[n], -10000)
             end
         else -- Reset all damage types
             mob:setMod(xi.mod.HTH_SDT, 1000)
@@ -50,7 +50,7 @@ entity.onMobFight = function(mob)
                 mob:setMod(xi.magic.resistMod[n], 1000)
             end
             for n =1, #xi.magic.specificDmgTakenMod, 1 do
-                mob:setMod(xi.magic.specificDmgTakenMod[n], 1000)
+                mob:setMod(xi.magic.specificDmgTakenMod[n], 10000)
             end
         end
     end
