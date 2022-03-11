@@ -51,14 +51,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-
+    -- Note: CS 113 might occur after first exploring a Promyvion area
     if
-        player:getCurrentMission(COP) == xi.mission.id.cop.BELOW_THE_ARKS and
-        player:getCharVar("PromathiaStatus") == 1
-    then
-        player:startEvent(113)
-
-    elseif
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.EMPTY_MEMORIES) == QUEST_AVAILABLE and
         player:getCurrentMission(COP) >= xi.mission.id.cop.THE_MOTHERCRYSTALS
     then
@@ -67,9 +61,6 @@ entity.onTrigger = function(player, npc)
 
     elseif player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.EMPTY_MEMORIES) >= QUEST_ACCEPTED then
         player:startEvent(114)
-
-    else
-        player:startEvent(111)
     end
 end
 
