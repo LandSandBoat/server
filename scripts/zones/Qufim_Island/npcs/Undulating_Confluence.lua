@@ -22,7 +22,10 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 65 and option == 1 then
+    if csid == 63 then
+        player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.AT_THE_HEAVENS_DOOR)
+        player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.THE_LIONS_ROAR)
+    elseif csid == 64 then
         xi.teleport.to(player, xi.teleport.id.ESCHA_ZITAH)
     elseif csid == 65 and option == 1 then
         xi.teleport.to(player, xi.teleport.id.ESCHA_ZITAH)
