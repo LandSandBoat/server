@@ -3,7 +3,6 @@
 --  Mob: Siren NM for ROV
 -- !pos -406.471 16.683 -378.071 123
 -----------------------------------
-local ID = require("scripts/zones/Yuhtunga_Jungle/IDs")
 mixins = {require("scripts/mixins/job_special")}
 -----------------------------------
 local entity = {}
@@ -17,12 +16,6 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    local party = player:getParty()
-    for _, member in pairs(party) do
-        if member:getCurrentMission(ROV) == xi.mission.id.rov.THE_LOST_AVATAR then
-            player:setCharVar("RhapsodiesStatus", 1)
-        end
-    end
 end
 
 return entity

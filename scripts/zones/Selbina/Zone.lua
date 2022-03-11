@@ -1,7 +1,5 @@
 -----------------------------------
---
 -- Zone: Selbina (248)
---
 -----------------------------------
 local ID = require("scripts/zones/Selbina/IDs")
 require("scripts/globals/conquest")
@@ -37,10 +35,6 @@ zone_object.onZoneIn = function(player, prevZone)
         cs = 1101
     end
 
-    if player:getCurrentMission(ROV) == xi.mission.id.rov.RESONACE and player:getCharVar("RhapsodiesStatus") == 0 then
-        cs = 176
-    end
-
     return cs
 end
 
@@ -64,11 +58,6 @@ zone_object.onEventFinish = function(player, csid, option)
         end
     elseif csid == 1101 and npcUtil.completeQuest(player, OUTLANDS, xi.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX, {item = 14226, fame_area = NORG, var = {"Enagakure_Killed", "illTakeTheBigBoxCS"}}) then
         player:delKeyItem(xi.ki.SEANCE_STAFF)
-    elseif csid == 176 then
-        -- Flag ROV 1-3 Selbina Route (1)
-        player:setCharVar("RhapsodiesStatus", 1)
-        player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.RESONACE)
-        player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.EMISSARY_FROM_THE_SEAS)
     end
 end
 

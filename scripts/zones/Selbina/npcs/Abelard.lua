@@ -63,14 +63,6 @@ entity.onTrade = function(player, npc, trade)
             end
         end
     end
-
-    if
-        player:getCurrentMission(ROV) == xi.mission.id.rov.SET_FREE and
-        npcUtil.tradeHas(trade,{{xi.items.CLUMP_OF_BEE_POLLEN, 3}}) and
-        player:getCharVar("RhapsodiesStatus") == 1
-    then
-        player:startEvent(178, 0, 0, 0, 0, 0, 0, player:hasJob(0) and 1 or 0)
-    end
 end
 
 entity.onTrigger = function(player, npc)
@@ -102,8 +94,6 @@ entity.onTrigger = function(player, npc)
                 end
             end
         end
-    elseif player:getCurrentMission(ROV) == xi.mission.id.rov.SET_FREE then
-        player:startEvent(181)
     end
 end
 
@@ -147,17 +137,6 @@ entity.onEventFinish = function(player, csid, option)
         if (tablets % (2 * 0x7fff)) >= 0x7fff then
             npcUtil.giveKeyItem(player, xi.ki.MAP_OF_THE_CRAWLERS_NEST)
         end
-
-    -- RoV: Set Free
-    elseif csid == 178 then
-        player:confirmTrade()
-        if player:hasJob(0) == false then -- Is Subjob Unlocked
-            npcUtil.giveKeyItem(player, xi.ki.GILGAMESHS_INTRODUCTORY_LETTER)
-        else
-            if not npcUtil.giveItem(player, xi.items.COPPER_AMAN_VOUCHER) then return end
-        end
-        player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.SET_FREE)
-        player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.THE_BEGINNING)
     end
 end
 

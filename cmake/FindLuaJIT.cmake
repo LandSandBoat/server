@@ -35,11 +35,7 @@ find_library(LuaJIT_LIBRARY
         /usr/local/bin/
         /opt/)
 
-find_path(LuaJIT_INCLUDE_DIR
-    NAMES
-        lua.h
-    PATHS
-        ${PROJECT_SOURCE_DIR}/ext/luajit/include/) # Only look internally
+set(LuaJIT_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/ext/luajit/include/) # Only look internally
 
 include(FindPackageHandleStandardArgs)
 find_package_handle_standard_args(LuaJIT DEFAULT_MSG LuaJIT_LIBRARY LuaJIT_INCLUDE_DIR)

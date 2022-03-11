@@ -89,6 +89,9 @@ function Container:sequence(...)
     end
 end
 
+function Container:noAction(...)
+    return NoAction:new(...)
+end
 
 -----------------------------------
 -- Variable helper functions

@@ -43,6 +43,7 @@ zones[xi.zone.NORG] =
         BLADE_KU_LEARNED             = 10830, -- You have learned the weapon skill Blade: Ku!
         RETRIEVE_DIALOG_ID           = 11283, -- You retrieve <item> from the porter moogle's care.
         COMMON_SENSE_SURVIVAL        = 12293, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        DIDYA_GET_BUMPED             = 12321, -- Didya get bumped about by the waves on yer way here, <name>? No matter. The boss be waitin' inside fer ya.
     },
     mob =
     {

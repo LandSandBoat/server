@@ -726,23 +726,26 @@ enum class Mod
     AUTO_RANGED_DELAY            = 1001, // Decreases the amount of time between ranged attacks
     AUTO_RANGED_DAMAGEP          = 1002, // Increase automaton ranged weapon damage by a %
     AUGMENT_SONG_STAT            = 1003, // Bonus to Stat of Element of Enhancing Song.
-    ENHANCES_BATTUTA             = 1004, //
-    ENHANCES_ELEMENTAL_SFORZO    = 1005, //
-    ENHANCES_SLEIGHT_OF_SWORD    = 1006, //
-    ENHANCES_INSPIRATION         = 1007, //
-    SWORDPLAY                    = 1008, //
-    LIEMENT                      = 1009, //
-    VALIANCE_VALLATION_DURATION  = 1010, //
-    PFLUG                        = 1011, //
-    VIVACIOUS_PULSE_POTENCY      = 1012, //
-    AUGMENTS_VIVACIOUS_PULSE     = 1013, //
-    RAYKE_DURATION               = 1014, //
-    ODYLLIC_SUBTERFUGE_DURATION  = 1015, //
-    SWIPE                        = 1016, //
-    LIEMENT_DURATION             = 1017, //
-    GAMBIT_DURATION              = 1018, //
-    EMBOLDEN_DURATION            = 1019, //
-    LIEMENT_EXTENDS_TO_AREA      = 1020, //
+    ENHANCES_BATTUTA             = 1004, // Used by RUN merit point cat 2 to add +N% bonus damage to parry spikes during Battuta effect
+    ENHANCES_ELEMENTAL_SFORZO    = 1005, // Bonus duration
+    ENHANCES_SLEIGHT_OF_SWORD    = 1006, // Used by RUN merit point cat 2 to add +N Subtle Blow to Swordplay
+    ENHANCES_INSPIRATION         = 1007, // Used by RUN merit point cat 2 to add +N Fast Cast to Vallation/Valiance
+    SWORDPLAY                    = 1008, // Adds bonus starting ticks to Swordplay
+    LIEMENT                      = 1009, // Adds bonus duration as +N seconds
+    VALIANCE_VALLATION_DURATION  = 1010, // Adds bonus duration as +N seconds
+    PFLUG                        = 1011, // Adds flat additional all-resist rate in +N%
+    VIVACIOUS_PULSE_POTENCY      = 1012, // Adds final HP bonus +N% to calculation of Vivacious Pulse
+    AUGMENTS_VIVACIOUS_PULSE     = 1013, // Adds random erase/-na to Vivacious Pulse
+    RAYKE_DURATION               = 1014, // Adds bonus duration as +N seconds
+    ODYLLIC_SUBTERFUGE_DURATION  = 1015, // Adds bonus duration as +N seconds
+    SWIPE                        = 1016, // Adds bonus damage to the Swipe/Lunge magic damage calculation
+    LIEMENT_DURATION             = 1017, // Adds bonus duration as +N seconds
+    GAMBIT_DURATION              = 1018, // Adds bonus duration as +N seconds
+    EMBOLDEN_DURATION            = 1019, // Adds bonus duration as +N seconds
+    LIEMENT_EXTENDS_TO_AREA      = 1020, // Epeolatry's (RUN Ergon weapon) special effect, makes Liement AoE to party instead of self target only.
+    INSPIRATION_FAST_CAST        = 1021, // Inspiration Fast Cast, additive with Fast Cast with a combined cap beyond 80%
+    PARRY_SPIKES                 = 1022, // Battuta parry spikes rate
+    PARRY_SPIKES_DMG             = 1023, // Battuta parry spikes damage
 
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.
@@ -750,7 +753,7 @@ enum class Mod
     // The following modifier should not ever be set, but %damage modifiers to weaponskills use the next 255 IDs (this modifier + the WSID)
     // For example, +10% damage to Chant du Cygne would be ID 570 + 225 (795)
 
-    // SPARE = 1021,
+    // SPARE = 1024,
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it
