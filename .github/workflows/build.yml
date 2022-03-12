@@ -99,7 +99,6 @@ jobs:
             topaz_connect_64.exe
             topaz_game_64.exe
             topaz_search_64.exe
-            libmariadb.dll
 
   MacOS_BigSur_11:
     # https://github.com/actions/virtual-environments/blob/main/images/macos/macos-11-Readme.md
@@ -488,25 +487,4 @@ jobs:
     - name: Startup checks
       shell: bash
       run: |
-        python3 << EOF
-        import io
-        import subprocess
-        import time
-
-        p0 = subprocess.Popen(["topaz_connect_64","--log","connect-server.log"], stdout=subprocess.PIPE)
-        p1 = subprocess.Popen(["topaz_search_64","--log","search-server.log"], stdout=subprocess.PIPE)
-        p2 = subprocess.Popen(["topaz_game_64","--log","game-server.log"], stdout=subprocess.PIPE)
-
-        time.sleep(120)
-
-        p0.kill()
-        p1.kill()
-        p2.kill()
-
-        for proc in { p0, p1, p2 }:
-            for line in io.TextIOWrapper(proc.stdout, encoding="utf-8"):
-                if "error" in line or "warning" in line:
-                    print(line)
-                    exit(-1)
-        EOF
-
+        python3 ./tools/ci/startup_checks.py x64

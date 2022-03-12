@@ -3658,7 +3658,7 @@ void SmallPacket0x060(map_session_data_t* const PSession, CCharEntity* const PCh
     luautils::OnEventUpdate(PChar, updateString);
 
     PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::EVENT));
-    PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::UNKNOWN));
+    PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::PLAYERINPUT));
 }
 
 /************************************************************************

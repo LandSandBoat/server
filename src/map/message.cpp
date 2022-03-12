@@ -19,16 +19,16 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 ===========================================================================
 */
 
-#include <mutex>
+#include <concurrentqueue.h>
 #include <queue>
 
 #include "message.h"
 
 #include "alliance.h"
 #include "linkshell.h"
-#include "unitychat.h"
 #include "party.h"
 #include "status_effect_container.h"
+#include "unitychat.h"
 
 #include "entities/charentity.h"
 
@@ -44,23 +44,22 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 namespace message
 {
-    zmq::context_t             zContext;
-    zmq::socket_t*             zSocket = nullptr;
-    std::mutex                 send_mutex;
-    std::queue<chat_message_t> message_queue;
+    zmq::context_t zContext;
+    std::unique_ptr<zmq::socket_t> zSocket;
+
+    moodycamel::ConcurrentQueue<chat_message_t> outgoing_queue;
+    moodycamel::ConcurrentQueue<chat_message_t> incoming_queue;
 
     void send_queue()
     {
-        while (!message_queue.empty())
+        chat_message_t msg;
+        while (outgoing_queue.try_dequeue(msg))
         {
-            std::lock_guard<std::mutex> lk(send_mutex);
-            chat_message_t              msg = message_queue.front();
-            message_queue.pop();
             try
             {
-                zSocket->send(*msg.type, ZMQ_SNDMORE);
-                zSocket->send(*msg.data, ZMQ_SNDMORE);
-                zSocket->send(*msg.packet);
+                zSocket->send(msg.type, zmq::send_flags::sndmore);
+                zSocket->send(msg.data, zmq::send_flags::sndmore);
+                zSocket->send(msg.packet, zmq::send_flags::none);
             }
             catch (std::exception& e)
             {
@@ -69,18 +68,22 @@ namespace message
         }
     }
 
-    void parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_t* packet)
+    void parse(chat_message_t& message)
     {
+        auto  type   = (MSGSERVTYPE)ref<uint8>((uint8*)message.type.data(), 0);
+        auto& extra  = message.data;
+        auto& packet = message.packet;
+
         ShowDebug("Message: Received message %d from message server", static_cast<uint8>(type));
         switch (type)
         {
             case MSG_LOGIN:
             {
-                CCharEntity* PChar = zoneutils::GetChar(ref<uint32>((uint8*)extra->data(), 0));
+                CCharEntity* PChar = zoneutils::GetChar(ref<uint32>((uint8*)extra.data(), 0));
 
                 if (!PChar)
                 {
-                    Sql_Query(SqlHandle, "DELETE FROM accounts_sessions WHERE charid = %d;", ref<uint32>((uint8*)extra->data(), 0));
+                    Sql_Query(SqlHandle, "DELETE FROM accounts_sessions WHERE charid = %d;", ref<uint32>((uint8*)extra.data(), 0));
                 }
                 else
                 {
@@ -93,15 +96,15 @@ namespace message
             }
             case MSG_CHAT_TELL:
             {
-                CCharEntity* PChar = zoneutils::GetCharByName((int8*)extra->data() + 4);
+                CCharEntity* PChar = zoneutils::GetCharByName((int8*)extra.data() + 4);
                 if (PChar && PChar->status != STATUS_TYPE::DISAPPEAR && !jailutils::InPrison(PChar))
                 {
                     std::unique_ptr<CBasicPacket> newPacket = std::make_unique<CBasicPacket>();
-                    memcpy(*newPacket, packet->data(), std::min<size_t>(packet->size(), PACKET_SIZE));
+                    memcpy(*newPacket, packet.data(), std::min<size_t>(packet.size(), PACKET_SIZE));
                     auto gm_sent = newPacket->ref<uint8>(0x05);
                     if (PChar->nameflags.flags & FLAG_AWAY && !gm_sent)
                     {
-                        send(MSG_DIRECT, extra->data(), sizeof(uint32), new CMessageStandardPacket(PChar, 0, 0, MsgStd::TellNotReceivedAway));
+                        send(MSG_DIRECT, extra.data(), sizeof(uint32), new CMessageStandardPacket(PChar, 0, 0, MsgStd::TellNotReceivedAway));
                     }
                     else
                     {
@@ -110,13 +113,13 @@ namespace message
                 }
                 else
                 {
-                    send(MSG_DIRECT, extra->data(), sizeof(uint32), new CMessageStandardPacket(PChar, 0, 0, MsgStd::TellNotReceivedOffline));
+                    send(MSG_DIRECT, extra.data(), sizeof(uint32), new CMessageStandardPacket(PChar, 0, 0, MsgStd::TellNotReceivedOffline));
                 }
                 break;
             }
             case MSG_CHAT_PARTY:
             {
-                CCharEntity* PChar = zoneutils::GetChar(ref<uint32>((uint8*)extra->data(), 0));
+                CCharEntity* PChar = zoneutils::GetChar(ref<uint32>((uint8*)extra.data(), 0));
                 if (PChar)
                 {
                     if (PChar->PParty)
@@ -126,15 +129,15 @@ namespace message
                             for (auto& i : PChar->PParty->m_PAlliance->partyList)
                             {
                                 CBasicPacket* newPacket = new CBasicPacket();
-                                memcpy(*newPacket, packet->data(), std::min<size_t>(packet->size(), PACKET_SIZE));
-                                ((CParty*)i)->PushPacket(ref<uint32>((uint8*)extra->data(), 4), 0, newPacket);
+                                memcpy(*newPacket, packet.data(), std::min<size_t>(packet.size(), PACKET_SIZE));
+                                ((CParty*)i)->PushPacket(ref<uint32>((uint8*)extra.data(), 4), 0, newPacket);
                             }
                         }
                         else
                         {
                             CBasicPacket* newPacket = new CBasicPacket();
-                            memcpy(*newPacket, packet->data(), std::min<size_t>(packet->size(), PACKET_SIZE));
-                            PChar->PParty->PushPacket(ref<uint32>((uint8*)extra->data(), 4), 0, newPacket);
+                            memcpy(*newPacket, packet.data(), std::min<size_t>(packet.size(), PACKET_SIZE));
+                            PChar->PParty->PushPacket(ref<uint32>((uint8*)extra.data(), 4), 0, newPacket);
                         }
                     }
                 }
@@ -142,25 +145,25 @@ namespace message
             }
             case MSG_CHAT_LINKSHELL:
             {
-                uint32      linkshellID = ref<uint32>((uint8*)extra->data(), 0);
+                uint32      linkshellID = ref<uint32>((uint8*)extra.data(), 0);
                 CLinkshell* PLinkshell  = linkshell::GetLinkshell(linkshellID);
                 if (PLinkshell)
                 {
                     CBasicPacket* newPacket = new CBasicPacket();
-                    memcpy(*newPacket, packet->data(), std::min<size_t>(packet->size(), PACKET_SIZE));
-                    PLinkshell->PushPacket(ref<uint32>((uint8*)extra->data(), 4), newPacket);
+                    memcpy(*newPacket, packet.data(), std::min<size_t>(packet.size(), PACKET_SIZE));
+                    PLinkshell->PushPacket(ref<uint32>((uint8*)extra.data(), 4), newPacket);
                 }
                 break;
             }
             case MSG_CHAT_UNITY:
             {
-                uint32           leader = ref<uint32>((uint8*)extra->data(), 0);
+                uint32           leader = ref<uint32>((uint8*)extra.data(), 0);
                 CUnityChat* PUnityChat  = unitychat::GetUnityChat(leader);
                 if (PUnityChat)
                 {
                     CBasicPacket* newPacket = new CBasicPacket();
-                    memcpy(*newPacket, packet->data(), std::min<size_t>(packet->size(), PACKET_SIZE));
-                    PUnityChat->PushPacket(ref<uint32>((uint8*)extra->data(), 4), newPacket);
+                    memcpy(*newPacket, packet.data(), std::min<size_t>(packet.size(), PACKET_SIZE));
+                    PUnityChat->PushPacket(ref<uint32>((uint8*)extra.data(), 4), newPacket);
                 }
                 break;
             }
@@ -171,10 +174,10 @@ namespace message
                     {
                         PZone->ForEachChar([&packet, &extra](CCharEntity* PChar) {
                             // don't push to sender
-                            if (PChar->id != ref<uint32>((uint8*)extra->data(), 0))
+                            if (PChar->id != ref<uint32>((uint8*)extra.data(), 0))
                             {
                                 CBasicPacket* newPacket = new CBasicPacket();
-                                memcpy(*newPacket, packet->data(), std::min<size_t>(packet->size(), PACKET_SIZE));
+                                memcpy(*newPacket, packet.data(), std::min<size_t>(packet.size(), PACKET_SIZE));
 
                                 PChar->pushPacket(newPacket);
                             }
@@ -188,7 +191,7 @@ namespace message
                 zoneutils::ForEachZone([&packet](CZone* PZone) {
                     PZone->ForEachChar([&packet](CCharEntity* PChar) {
                         CBasicPacket* newPacket = new CBasicPacket();
-                        memcpy(*newPacket, packet->data(), std::min<size_t>(packet->size(), PACKET_SIZE));
+                        memcpy(*newPacket, packet.data(), std::min<size_t>(packet.size(), PACKET_SIZE));
                         PChar->pushPacket(newPacket);
                     });
                 });
@@ -196,9 +199,9 @@ namespace message
             }
             case MSG_PT_INVITE:
             {
-                uint32 id = ref<uint32>((uint8*)extra->data(), 0);
-                // uint16 targid = ref<uint16>((uint8*)extra->data(), 4);
-                uint8        inviteType = ref<uint8>((uint8*)packet->data(), 0x0B);
+                uint32 id = ref<uint32>((uint8*)extra.data(), 0);
+                // uint16 targid = ref<uint16>((uint8*)extra.data(), 4);
+                uint8        inviteType = ref<uint8>((uint8*)packet.data(), 0x0B);
                 CCharEntity* PInvitee   = zoneutils::GetChar(id);
 
                 if (PInvitee)
@@ -208,44 +211,44 @@ namespace message
                         (PInvitee->PParty && inviteType == INVITE_PARTY) ||
                         (inviteType == INVITE_ALLIANCE && (!PInvitee->PParty || PInvitee->PParty->GetLeader() != PInvitee || PInvitee->PParty->m_PAlliance)))
                     {
-                        ref<uint32>((uint8*)extra->data(), 0) = ref<uint32>((uint8*)extra->data(), 6);
-                        send(MSG_DIRECT, extra->data(), sizeof(uint32), new CMessageStandardPacket(PInvitee, 0, 0, MsgStd::CannotInvite));
+                        ref<uint32>((uint8*)extra.data(), 0) = ref<uint32>((uint8*)extra.data(), 6);
+                        send(MSG_DIRECT, extra.data(), sizeof(uint32), new CMessageStandardPacket(PInvitee, 0, 0, MsgStd::CannotInvite));
                         return;
                     }
                     // check /blockaid
                     if (PInvitee->getBlockingAid())
                     {
-                        ref<uint32>((uint8*)extra->data(), 0) = ref<uint32>((uint8*)extra->data(), 6);
+                        ref<uint32>((uint8*)extra.data(), 0) = ref<uint32>((uint8*)extra.data(), 6);
                         // Target is blocking assistance
-                        send(MSG_DIRECT, extra->data(), sizeof(uint32), new CMessageSystemPacket(0, 0, 225));
+                        send(MSG_DIRECT, extra.data(), sizeof(uint32), new CMessageSystemPacket(0, 0, 225));
                         // Interaction was blocked
                         PInvitee->pushPacket(new CMessageSystemPacket(0, 0, 226));
                         // You cannot invite that person at this time.
-                        send(MSG_DIRECT, extra->data(), sizeof(uint32), new CMessageStandardPacket(PInvitee, 0, 0, MsgStd::CannotInvite));
+                        send(MSG_DIRECT, extra.data(), sizeof(uint32), new CMessageStandardPacket(PInvitee, 0, 0, MsgStd::CannotInvite));
                         break;
                     }
                     if (PInvitee->StatusEffectContainer->HasStatusEffect(EFFECT_LEVEL_SYNC))
                     {
-                        ref<uint32>((uint8*)extra->data(), 0) = ref<uint32>((uint8*)extra->data(), 6);
-                        send(MSG_DIRECT, extra->data(), sizeof(uint32), new CMessageStandardPacket(PInvitee, 0, 0, MsgStd::CannotInviteLevelSync));
+                        ref<uint32>((uint8*)extra.data(), 0) = ref<uint32>((uint8*)extra.data(), 6);
+                        send(MSG_DIRECT, extra.data(), sizeof(uint32), new CMessageStandardPacket(PInvitee, 0, 0, MsgStd::CannotInviteLevelSync));
                         return;
                     }
 
-                    PInvitee->InvitePending.id     = ref<uint32>((uint8*)extra->data(), 6);
-                    PInvitee->InvitePending.targid = ref<uint16>((uint8*)extra->data(), 10);
+                    PInvitee->InvitePending.id     = ref<uint32>((uint8*)extra.data(), 6);
+                    PInvitee->InvitePending.targid = ref<uint16>((uint8*)extra.data(), 10);
                     CBasicPacket* newPacket        = new CBasicPacket();
-                    memcpy(*newPacket, packet->data(), std::min<size_t>(packet->size(), PACKET_SIZE));
+                    memcpy(*newPacket, packet.data(), std::min<size_t>(packet.size(), PACKET_SIZE));
                     PInvitee->pushPacket(newPacket);
                 }
                 break;
             }
             case MSG_PT_INV_RES:
             {
-                uint32 inviterId = ref<uint32>((uint8*)extra->data(), 0);
-                // uint16 inviterTargid = ref<uint16>((uint8*)extra->data(), 4);
-                uint32 inviteeId = ref<uint32>((uint8*)extra->data(), 6);
-                // uint16 inviteeTargid = ref<uint16>((uint8*)extra->data(), 10);
-                uint8        inviteAnswer = ref<uint8>((uint8*)extra->data(), 12);
+                uint32 inviterId = ref<uint32>((uint8*)extra.data(), 0);
+                // uint16 inviterTargid = ref<uint16>((uint8*)extra.data(), 4);
+                uint32 inviteeId = ref<uint32>((uint8*)extra.data(), 6);
+                // uint16 inviteeTargid = ref<uint16>((uint8*)extra.data(), 10);
+                uint8        inviteAnswer = ref<uint8>((uint8*)extra.data(), 12);
                 CCharEntity* PInviter     = zoneutils::GetChar(inviterId);
 
                 if (PInviter)
@@ -274,7 +277,7 @@ namespace message
                                 }
                                 else
                                 {
-                                    send(MSG_DIRECT, (uint8*)extra->data() + 6, sizeof(uint32),
+                                    send(MSG_DIRECT, (uint8*)extra.data() + 6, sizeof(uint32),
                                          new CMessageStandardPacket(PInviter, 0, 0, MsgStd::CannotBeProcessed));
                                 }
                             }
@@ -308,9 +311,9 @@ namespace message
             }
             case MSG_PT_RELOAD:
             {
-                if (extra->size() == 8)
+                if (extra.size() == 8)
                 {
-                    CCharEntity* PChar = zoneutils::GetCharToUpdate(ref<uint32>((uint8*)extra->data(), 4), ref<uint32>((uint8*)extra->data(), 0));
+                    CCharEntity* PChar = zoneutils::GetCharToUpdate(ref<uint32>((uint8*)extra.data(), 4), ref<uint32>((uint8*)extra.data(), 0));
                     if (PChar)
                     {
                         PChar->ReloadPartyInc();
@@ -319,7 +322,7 @@ namespace message
                 }
                 else
                 {
-                    CCharEntity* PChar = zoneutils::GetChar(ref<uint32>((uint8*)extra->data(), 0));
+                    CCharEntity* PChar = zoneutils::GetChar(ref<uint32>((uint8*)extra.data(), 0));
                     if (PChar)
                     {
                         PChar->ForAlliance([](CBattleEntity* PMember) { ((CCharEntity*)PMember)->ReloadPartyInc(); });
@@ -330,8 +333,8 @@ namespace message
             }
             case MSG_PT_DISBAND:
             {
-                CCharEntity* PChar = zoneutils::GetChar(ref<uint32>((uint8*)extra->data(), 0));
-                uint32       id    = ref<uint32>((uint8*)extra->data(), 4);
+                CCharEntity* PChar = zoneutils::GetChar(ref<uint32>((uint8*)extra.data(), 0));
+                uint32       id    = ref<uint32>((uint8*)extra.data(), 4);
                 if (PChar)
                 {
                     if (PChar->PParty)
@@ -350,57 +353,57 @@ namespace message
             }
             case MSG_DIRECT:
             {
-                CCharEntity* PChar = zoneutils::GetChar(ref<uint32>((uint8*)extra->data(), 0));
+                CCharEntity* PChar = zoneutils::GetChar(ref<uint32>((uint8*)extra.data(), 0));
                 if (PChar)
                 {
                     CBasicPacket* newPacket = new CBasicPacket();
-                    memcpy(*newPacket, packet->data(), std::min<size_t>(packet->size(), PACKET_SIZE));
+                    memcpy(*newPacket, packet.data(), std::min<size_t>(packet.size(), PACKET_SIZE));
                     PChar->pushPacket(newPacket);
                 }
                 break;
             }
             case MSG_LINKSHELL_RANK_CHANGE:
             {
-                CLinkshell* PLinkshell = linkshell::GetLinkshell(ref<uint32>((uint8*)extra->data(), 24));
+                CLinkshell* PLinkshell = linkshell::GetLinkshell(ref<uint32>((uint8*)extra.data(), 24));
 
                 if (PLinkshell)
                 {
-                    PLinkshell->ChangeMemberRank((int8*)extra->data() + 4, ref<uint8>((uint8*)extra->data(), 28));
+                    PLinkshell->ChangeMemberRank((int8*)extra.data() + 4, ref<uint8>((uint8*)extra.data(), 28));
                 }
                 break;
             }
             case MSG_LINKSHELL_REMOVE:
             {
-                CCharEntity* PChar = zoneutils::GetCharByName((int8*)extra->data() + 4);
+                CCharEntity* PChar = zoneutils::GetCharByName((int8*)extra.data() + 4);
 
-                if (PChar && PChar->PLinkshell1 && PChar->PLinkshell1->getID() == ref<uint32>((uint8*)extra->data(), 24))
+                if (PChar && PChar->PLinkshell1 && PChar->PLinkshell1->getID() == ref<uint32>((uint8*)extra.data(), 24))
                 {
-                    uint8           kickerRank = ref<uint8>((uint8*)extra->data(), 28);
+                    uint8           kickerRank = ref<uint8>((uint8*)extra.data(), 28);
                     CItemLinkshell* targetLS   = (CItemLinkshell*)PChar->getEquip(SLOT_LINK1);
                     if (targetLS && (kickerRank == LSTYPE_LINKSHELL || (kickerRank == LSTYPE_PEARLSACK && targetLS->GetLSType() == LSTYPE_LINKPEARL)))
                     {
-                        PChar->PLinkshell1->RemoveMemberByName((int8*)extra->data() + 4,
+                        PChar->PLinkshell1->RemoveMemberByName((int8*)extra.data() + 4,
                                                                (targetLS->GetLSType() == LSTYPE_LINKSHELL ? LSTYPE_PEARLSACK : kickerRank));
                     }
                 }
-                else if (PChar && PChar->PLinkshell2 && PChar->PLinkshell2->getID() == ref<uint32>((uint8*)extra->data(), 24))
+                else if (PChar && PChar->PLinkshell2 && PChar->PLinkshell2->getID() == ref<uint32>((uint8*)extra.data(), 24))
                 {
-                    uint8           kickerRank = ref<uint8>((uint8*)extra->data(), 28);
+                    uint8           kickerRank = ref<uint8>((uint8*)extra.data(), 28);
                     CItemLinkshell* targetLS   = (CItemLinkshell*)PChar->getEquip(SLOT_LINK2);
                     if (targetLS && (kickerRank == LSTYPE_LINKSHELL || (kickerRank == LSTYPE_PEARLSACK && targetLS->GetLSType() == LSTYPE_LINKPEARL)))
                     {
-                        PChar->PLinkshell2->RemoveMemberByName((int8*)extra->data() + 4, kickerRank);
+                        PChar->PLinkshell2->RemoveMemberByName((int8*)extra.data() + 4, kickerRank);
                     }
                 }
                 break;
             }
             case MSG_SEND_TO_ZONE:
             {
-                CCharEntity* PChar = zoneutils::GetChar(ref<uint32>((uint8*)extra->data(), 0));
+                CCharEntity* PChar = zoneutils::GetChar(ref<uint32>((uint8*)extra.data(), 0));
 
                 if (PChar && PChar->loc.zone)
                 {
-                    uint32 requester = ref<uint32>((uint8*)extra->data(), 4);
+                    uint32 requester = ref<uint32>((uint8*)extra.data(), 4);
 
                     if (requester != 0)
                     {
@@ -419,12 +422,12 @@ namespace message
                         break;
                     }
 
-                    uint16 zoneId     = ref<uint16>((uint8*)extra->data(), 8);
-                    float  x          = ref<float>((uint8*)extra->data(), 10);
-                    float  y          = ref<float>((uint8*)extra->data(), 14);
-                    float  z          = ref<float>((uint8*)extra->data(), 18);
-                    uint8  rot        = ref<uint8>((uint8*)extra->data(), 22);
-                    uint32 moghouseID = ref<uint32>((uint8*)extra->data(), 23);
+                    uint16 zoneId     = ref<uint16>((uint8*)extra.data(), 8);
+                    float  x          = ref<float>((uint8*)extra.data(), 10);
+                    float  y          = ref<float>((uint8*)extra.data(), 14);
+                    float  z          = ref<float>((uint8*)extra.data(), 18);
+                    uint8  rot        = ref<uint8>((uint8*)extra.data(), 22);
+                    uint32 moghouseID = ref<uint32>((uint8*)extra.data(), 23);
 
                     PChar->updatemask = 0;
 
@@ -448,21 +451,21 @@ namespace message
             case MSG_SEND_TO_ENTITY:
             {
                 // Need to check which server we're on so we don't get null pointers
-                bool toTargetServer = ref<bool>((uint8*)extra->data(), 0);
-                bool spawnedOnly    = ref<bool>((uint8*)extra->data(), 1);
+                bool toTargetServer = ref<bool>((uint8*)extra.data(), 0);
+                bool spawnedOnly    = ref<bool>((uint8*)extra.data(), 1);
 
                 if (toTargetServer) // This is going to the target's game server
                 {
-                    CBaseEntity* Entity = zoneutils::GetEntity(ref<uint32>((uint8*)extra->data(), 6));
+                    CBaseEntity* Entity = zoneutils::GetEntity(ref<uint32>((uint8*)extra.data(), 6));
 
                     if (Entity && Entity->loc.zone)
                     {
                         char buf[22];
                         memset(&buf[0], 0, sizeof(buf));
 
-                        uint16 targetZone = ref<uint16>((uint8*)extra->data(), 2);
-                        uint16 playerZone = ref<uint16>((uint8*)extra->data(), 4);
-                        uint16 playerID   = ref<uint16>((uint8*)extra->data(), 10);
+                        uint16 targetZone = ref<uint16>((uint8*)extra.data(), 2);
+                        uint16 playerZone = ref<uint16>((uint8*)extra.data(), 4);
+                        uint16 playerID   = ref<uint16>((uint8*)extra.data(), 10);
 
                         float X = Entity->GetXPos();
                         float Y = Entity->GetYPos();
@@ -510,17 +513,17 @@ namespace message
                 }
                 else // This is going to the player's game server
                 {
-                    CCharEntity* PChar = zoneutils::GetChar(ref<uint16>((uint8*)extra->data(), 4));
+                    CCharEntity* PChar = zoneutils::GetChar(ref<uint16>((uint8*)extra.data(), 4));
 
                     if (PChar && PChar->loc.zone)
                     {
-                        if (ref<bool>((uint8*)extra->data(), 1))
+                        if (ref<bool>((uint8*)extra.data(), 1))
                         {
-                            PChar->loc.p.x         = ref<float>((uint8*)extra->data(), 6);
-                            PChar->loc.p.y         = ref<float>((uint8*)extra->data(), 10);
-                            PChar->loc.p.z         = ref<float>((uint8*)extra->data(), 14);
-                            PChar->loc.p.rotation  = ref<uint8>((uint8*)extra->data(), 18);
-                            PChar->loc.destination = ref<uint16>((uint8*)extra->data(), 20);
+                            PChar->loc.p.x         = ref<float>((uint8*)extra.data(), 6);
+                            PChar->loc.p.y         = ref<float>((uint8*)extra.data(), 10);
+                            PChar->loc.p.z         = ref<float>((uint8*)extra.data(), 14);
+                            PChar->loc.p.rotation  = ref<uint8>((uint8*)extra.data(), 18);
+                            PChar->loc.destination = ref<uint16>((uint8*)extra.data(), 20);
 
                             PChar->m_moghouseID = 0;
                             PChar->loc.boundary = 0;
@@ -544,53 +547,59 @@ namespace message
         }
     }
 
+    void handle_incoming()
+    {
+        TracyZoneScoped;
+
+        chat_message_t message;
+        while (incoming_queue.try_dequeue(message))
+        {
+            parse(message);
+        }
+    }
+
     void listen()
     {
         while (true)
         {
-            zmq::message_t type;
-            zmq::message_t extra;
-            zmq::message_t packet;
+            if (!zSocket)
+            {
+                return;
+            }
 
             try
             {
-                if (!zSocket)
+                chat_message_t message;
+                if (!zSocket->recv(message.type, zmq::recv_flags::none))
                 {
-                    return;
-                }
-                if (!zSocket->recv(&type))
-                {
-                    if (!message_queue.empty())
-                    {
-                        send_queue();
-                    }
+                    send_queue();
                     continue;
                 }
 
-                int    more;
-                size_t size = sizeof(more);
-                zSocket->getsockopt(ZMQ_RCVMORE, &more, &size);
+                int more = zSocket->get(zmq::sockopt::rcvmore);
                 if (more)
                 {
-                    zSocket->recv(&extra);
-                    zSocket->getsockopt(ZMQ_RCVMORE, &more, &size);
+                    std::ignore = zSocket->recv(message.data);
+                    more = zSocket->get(zmq::sockopt::rcvmore);
                     if (more)
                     {
-                        zSocket->recv(&packet);
+                        std::ignore = zSocket->recv(message.packet);
                     }
                 }
+
+                incoming_queue.enqueue(std::move(message));
             }
             catch (zmq::error_t& e)
             {
-                if (!zSocket)
+                // Context was terminated (ETERM = 156384765)
+                // Exit loop
+                if (!zSocket || e.num() == 156384765)
                 {
                     return;
                 }
-                ShowError("Message: %s", e.what());
+                ShowError("Message: %s\n", e.what());
                 continue;
             }
-
-            parse((MSGSERVTYPE)ref<uint8>((uint8*)type.data(), 0), &extra, &packet);
         }
     }
 
@@ -603,10 +612,11 @@ namespace message
         {
             exit(EXIT_FAILURE);
         }
+
         Sql_Keepalive(SqlHandle, "MessageKeepalive");
 
         zContext = zmq::context_t(1);
-        zSocket  = new zmq::socket_t(zContext, ZMQ_DEALER);
+        zSocket  = std::make_unique<zmq::socket_t>(zContext, zmq::socket_type::dealer);
 
         uint64 ipp  = map_ip.s_addr;
         uint64 port = map_port;
@@ -621,12 +631,11 @@ namespace message
                 port = Sql_GetUIntData(SqlHandle, 1);
             }
         }
+
         ipp |= (port << 32);
 
-        zSocket->setsockopt(ZMQ_IDENTITY, &ipp, sizeof ipp);
-
-        uint32 to = 500;
-        zSocket->setsockopt(ZMQ_RCVTIMEO, &to, sizeof to);
+        zSocket->set(zmq::sockopt::routing_id, zmq::const_buffer(&ipp, sizeof(ipp)));
+        zSocket->set(zmq::sockopt::rcvtimeo, 500);
 
         string_t server = "tcp://";
         server.append(chatIp);
@@ -650,7 +659,6 @@ namespace message
         if (zSocket)
         {
             zSocket->close();
-            delete zSocket;
             zSocket = nullptr;
         }
         zContext.close();
@@ -658,25 +666,26 @@ namespace message
 
     void send(MSGSERVTYPE type, void* data, size_t datalen, CBasicPacket* packet)
     {
-        std::lock_guard<std::mutex> lk(send_mutex);
-        chat_message_t              msg;
-        msg.type                                = new zmq::message_t(sizeof(MSGSERVTYPE));
-        ref<uint8>((uint8*)msg.type->data(), 0) = type;
+        chat_message_t msg;
+        msg.type = zmq::message_t(sizeof(MSGSERVTYPE));
 
-        msg.data = new zmq::message_t(datalen);
+        ref<uint8>((uint8*)msg.type.data(), 0) = type;
+
+        msg.data = zmq::message_t(datalen);
         if (datalen > 0)
         {
-            memcpy(msg.data->data(), data, datalen);
+            memcpy(msg.data.data(), data, datalen);
         }
 
         if (packet)
         {
-            msg.packet = new zmq::message_t(*packet, packet->getSize(), [](void* data, void* hint) { delete[](uint8*) data; });
+            msg.packet = zmq::message_t(*packet, packet->getSize(), [](void* data, void* hint) { delete[](uint8*) data; });
         }
         else
         {
-            msg.packet = new zmq::message_t(0);
+            msg.packet = zmq::message_t(0);
         }
-        message_queue.push(msg);
+
+        outgoing_queue.enqueue(msg);
     }
 }; // namespace message

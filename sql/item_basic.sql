@@ -7519,6 +7519,7 @@ INSERT INTO `item_basic` VALUES (10076,0,'♪golden_bomb','♪golden_bomb',1,615
 INSERT INTO `item_basic` VALUES (10077,0,'♪buffalo','♪buffalo',1,61504,0,1,0);
 INSERT INTO `item_basic` VALUES (10078,0,'♪wivre','♪wivre',1,61504,0,1,0);
 INSERT INTO `item_basic` VALUES (10079,0,'♪iron_giant','♪iron_giant',1,61504,0,1,0);
+INSERT INTO `item_basic` VALUES (10080,0,'♪byakko','♪byakko',1,61504,0,1,0);
 INSERT INTO `item_basic` VALUES (10112,906,'cipher_of_zeids_alter_ego','cipher_zeid',1,61504,0,0,0);
 INSERT INTO `item_basic` VALUES (10113,907,'cipher_of_lions_alter_ego','cipher_lion',1,61504,0,0,0);
 INSERT INTO `item_basic` VALUES (10114,908,'cipher_of_tenzens_alter_ego','cipher_tenzen',1,61504,0,0,0);
@@ -19829,6 +19830,8 @@ INSERT INTO `item_basic` VALUES (26348,0,'living_bullet_pouch','liv._bul._pouch'
 INSERT INTO `item_basic` VALUES (26349,0,'devastating_bullet_pouch','dev._bul._pouch',1,64584,0,0,0);
 INSERT INTO `item_basic` VALUES (26350,0,'chrono_bullet_pouch','chr._bul._pouch',1,64584,0,0,0);
 INSERT INTO `item_basic` VALUES (26351,0,'sacro_cord','sacro_cord',1,2052,23,0,4668);
+INSERT INTO `item_basic` VALUES (26356,0,'skrymir_cord','skrymir_cord',1,2080,23,0,0);
+INSERT INTO `item_basic` VALUES (26357,0,'skrymir_cord_+1','skrymir_cord_+1',1,2080,23,0,0);
 INSERT INTO `item_basic` VALUES (26359,0,'orpheuss_sash','orpheuss_sash',1,34820,0,0,0);
 INSERT INTO `item_basic` VALUES (26362,0,'tellen_belt','tellen_belt',1,59456,0,1,0);
 INSERT INTO `item_basic` VALUES (26363,0,'obstinate_sash','obstin._sash',1,59456,0,1,0);

@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.16)
 project(topaz CXX)
 
 set_property(GLOBAL PROPERTY CXX_STANDARD 17)
@@ -21,10 +21,8 @@ include(ClangFormat)
 include(Tracy)
 include(Valgrind)
 
-# CMake adds "/W3" by default on MSVC, remove it.
-# Fixed with CMake 3.15
-if(MSVC)
-    string(REGEX REPLACE "/W3[ ]" "" CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS})
+if(WIN32)
+    set(CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH OFF)
 endif()
 
 message(STATUS "CMAKE_VERSION: ${CMAKE_VERSION}")
@@ -84,13 +82,13 @@ find_package(Threads REQUIRED)
 link_libraries(${CMAKE_THREAD_LIBS_INIT})
 
 # Find MariaDB
-include(MariaDB) # defines mariadbclient
+find_package(MariaDB REQUIRED)
 
 # Find ZMQ
-include(ZeroMQ)
+find_package(ZeroMQ REQUIRED)
 
 # Find LuaJIT
-include(LuaJIT)
+find_package(LuaJIT REQUIRED)
 
 # Link this 'library' to set the c++ standard / compile-time options requested
 add_library(project_options INTERFACE)

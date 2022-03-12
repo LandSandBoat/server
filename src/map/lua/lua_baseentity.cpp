@@ -11784,24 +11784,24 @@ bool CLuaBaseEntity::unlockAttachment(uint16 itemID)
 }
 
 /************************************************************************
- *  Function: getActiveManeuvers()
+ *  Function: getActiveManeuverCount()
  *  Purpose : Get the amount of active maneuvers for an automation
- *  Example : if target:getActiveManeuvers() == 3 then
+ *  Example : if target:getActiveManeuverCount() == 3 then
  *  Notes   :
  ************************************************************************/
 
-uint8 CLuaBaseEntity::getActiveManeuvers()
+uint8 CLuaBaseEntity::getActiveManeuverCount()
 {
     auto* PEntity = static_cast<CBattleEntity*>(m_PBaseEntity);
 
-    return PEntity->StatusEffectContainer->GetActiveManeuvers();
+    return PEntity->StatusEffectContainer->GetActiveManeuverCount();
 }
 
 /************************************************************************
  *  Function: removeOldestManeuver()
  *  Purpose : Removes the oldest maneuver in an automation set (FIFO)
  *  Example : target:removeOldestManeuver()
- *  Notes   : Often used if (target:getActiveManeuvers() == 3)
+ *  Notes   : Often used if (target:getActiveManeuverCount() == 3)
  ************************************************************************/
 
 void CLuaBaseEntity::removeOldestManeuver()
@@ -11869,6 +11869,45 @@ void CLuaBaseEntity::reduceBurden(float percentReduction, sol::object const& int
     }
 
     PAutomaton->setBurdenArray(burden);
+}
+
+/************************************************************************
+ *  Function: getActiveRunes()
+ *  Purpose : Returns the number of active runes
+ *  Example : local num = player:getActiveRunes()
+ *  Notes   :
+ ************************************************************************/
+
+uint8 CLuaBaseEntity::getActiveRuneCount()
+{
+    auto* PEntity = static_cast<CBattleEntity*>(m_PBaseEntity);
+    return PEntity->StatusEffectContainer->GetActiveRuneCount();
+}
+
+/************************************************************************
+ *  Function: removeOldestRune()
+ *  Purpose : Removes the oldest run (if available)
+ *  Example : player:removeOldestRune()
+ *  Notes   :
+ ************************************************************************/
+
+void CLuaBaseEntity::removeOldestRune()
+{
+    auto* PEntity = static_cast<CBattleEntity*>(m_PBaseEntity);
+    PEntity->StatusEffectContainer->RemoveOldestRune();
+}
+
+/************************************************************************
+ *  Function: removeAllRunes()
+ *  Purpose : Removes all runes (if available)
+ *  Example : player:removeAllRunes()
+ *  Notes   :
+ ************************************************************************/
+
+void CLuaBaseEntity::removeAllRunes()
+{
+    auto* PEntity = static_cast<CBattleEntity*>(m_PBaseEntity);
+    PEntity->StatusEffectContainer->RemoveAllRunes();
 }
 
 /************************************************************************
@@ -13747,11 +13786,15 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getAutomatonHead", CLuaBaseEntity::getAutomatonHead);
     SOL_REGISTER("unlockAttachment", CLuaBaseEntity::unlockAttachment);
 
-    SOL_REGISTER("getActiveManeuvers", CLuaBaseEntity::getActiveManeuvers);
+    SOL_REGISTER("getActiveManeuverCount", CLuaBaseEntity::getActiveManeuverCount);
     SOL_REGISTER("removeOldestManeuver", CLuaBaseEntity::removeOldestManeuver);
     SOL_REGISTER("removeAllManeuvers", CLuaBaseEntity::removeAllManeuvers);
     SOL_REGISTER("updateAttachments", CLuaBaseEntity::updateAttachments);
     SOL_REGISTER("reduceBurden", CLuaBaseEntity::reduceBurden);
+
+    SOL_REGISTER("getActiveRuneCount", CLuaBaseEntity::getActiveRuneCount);
+    SOL_REGISTER("removeOldestRune", CLuaBaseEntity::removeOldestRune);
+    SOL_REGISTER("removeAllRunes", CLuaBaseEntity::removeAllRunes);
 
     // Trust related
     SOL_REGISTER("spawnTrust", CLuaBaseEntity::spawnTrust);
