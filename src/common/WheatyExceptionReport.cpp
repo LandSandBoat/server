@@ -132,13 +132,6 @@ const char* GetUptimeString()
     return gUptimeString.c_str();
 }
 
-const char* GetTimeNowString()
-{
-    std::time_t t = std::time(nullptr);
-    gCrashDateString = fmt::format("{:%a %b %e %H:%M:%S %Y}", fmt::localtime(t));
-    return gCrashDateString.c_str();
-}
-
 const char* GetMemoryUsageString()
 {
     PROCESS_MEMORY_COUNTERS PMC;
@@ -263,7 +256,6 @@ LONG WINAPI WheatyExceptionReport::WheatyUnhandledExceptionFilter(
             section, offset);
 #endif
 
-        Log(_T("Crash Time: %s"), GetTimeNowString());
         Log(_T("Process Name: %s"), szFaultingModule);
         Log(_T("Full crash report: %s"), m_szLogFileName);
         Log(_T("Memory dump: %s"), m_szDumpFileName);
@@ -948,8 +940,6 @@ bool bWriteVariables, HANDLE pThreadHandle)                                     
         Log(_T("%016I64X  %016I64X  %s (%s)"), sf.AddrPC.Offset, sf.AddrFrame.Offset, funcNameBuffer.data(), fileNameBuffer.data());
 #endif
 
-        //Log(_T(""));
-
         // Write out the variables, if desired
         if (bWriteVariables)
         {
@@ -960,8 +950,6 @@ bool bWriteVariables, HANDLE pThreadHandle)                                     
 
             // Enumerate the locals/parameters
             SymEnumSymbols(m_hProcess, 0, nullptr, EnumerateSymbolsCallback, &sf);
-
-            //Log(_T(""));
         }
     }
 
@@ -1041,7 +1029,7 @@ STACKFRAME64* sf)
 
     // Indicate if the variable is a local or parameter
     if (pSym->Flags & IMAGEHLP_SYMBOL_INFO_PARAMETER)
-        symbolDetails.top().Prefix = "    Parameter ";
+        symbolDetails.top().Prefix = "    Param ";
     else if (pSym->Flags & IMAGEHLP_SYMBOL_INFO_LOCAL)
         symbolDetails.top().Prefix = "    Local ";
 
