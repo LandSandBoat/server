@@ -1,7 +1,5 @@
 -----------------------------------
---
 -- Zone: Promyvion-Holla (16)
---
 -----------------------------------
 local ID = require("scripts/zones/Promyvion-Holla/IDs")
 require("scripts/globals/promyvion")
@@ -23,11 +21,7 @@ zone_object.onZoneIn = function(player, prevZone)
         player:setPos(92.033, 0, 80.380, 255) -- To Floor 1 {R}
     end
 
-    if player:getCurrentMission(COP) == xi.mission.id.cop.BELOW_THE_ARKS and player:getCharVar("PromathiaStatus") == 2 then
-        player:completeMission(xi.mission.log_id.COP, xi.mission.id.cop.BELOW_THE_ARKS)
-        player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_MOTHERCRYSTALS) -- start mission 1.3
-        player:setCharVar("PromathiaStatus", 0)
-    elseif player:getCurrentMission(COP) == xi.mission.id.cop.THE_MOTHERCRYSTALS then
+    if player:getCurrentMission(COP) == xi.mission.id.cop.THE_MOTHERCRYSTALS then
         if player:hasKeyItem(xi.ki.LIGHT_OF_DEM) and player:hasKeyItem(xi.ki.LIGHT_OF_MEA) then
             if player:getCharVar("cslastpromy") == 1 then
                 player:setCharVar("cslastpromy", 0)
@@ -39,10 +33,6 @@ zone_object.onZoneIn = function(player, prevZone)
                 cs = 51
             end
         end
-    end
-
-    if player:getCharVar("FirstPromyvionHolla") == 1 then
-        cs = 50
     end
 
     return cs

@@ -44,16 +44,7 @@ battlefield_object.onEventFinish = function(player, csid, option)
         local teleportTo = xi.teleport.id.EXITPROMHOLLA
         local ki = xi.ki.LIGHT_OF_HOLLA
 
-        -- first promyvion completed
-        if player:getCurrentMission(COP) == xi.mission.id.cop.BELOW_THE_ARKS then
-            player:completeMission(xi.mission.log_id.COP, xi.mission.id.cop.BELOW_THE_ARKS)
-            player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_MOTHERCRYSTALS)
-            player:setCharVar("cspromy2", 1)
-            player:setCharVar("PromathiaStatus", 0)
-            player:addKeyItem(ki)
-            player:messageSpecial(ID.text.CANT_REMEMBER, ki)
-
-        elseif player:getCurrentMission(COP) == xi.mission.id.cop.THE_MOTHERCRYSTALS and not player:hasKeyItem(ki) then
+        if player:getCurrentMission(COP) == xi.mission.id.cop.THE_MOTHERCRYSTALS and not player:hasKeyItem(ki) then
 
             -- second promyvion completed
             if otherLights(player) < 2 then

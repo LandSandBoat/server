@@ -18,9 +18,7 @@ entity.onTrigger = function(player, npc)
     local copMission = player:getCurrentMission(COP)
 
     -- CoP Missions
-    if copMission == xi.mission.id.cop.BELOW_THE_ARKS and player:getCharVar("PromathiaStatus") == 1 then
-        player:startEvent(913, 0, 0, 1) -- first time in promy -> have you made your preparations cs
-    elseif
+    if
         copMission == xi.mission.id.cop.THE_MOTHERCRYSTALS and
         (
             player:hasKeyItem(xi.ki.LIGHT_OF_HOLLA) or
@@ -34,11 +32,7 @@ entity.onTrigger = function(player, npc)
         end
     elseif
         copMission > xi.mission.id.cop.THE_MOTHERCRYSTALS or
-        player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_LAST_VERSE) or
-        (
-            copMission == xi.mission.id.cop.BELOW_THE_ARKS and
-            player:getCharVar("PromathiaStatus") > 1
-        )
+        player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_LAST_VERSE)
     then
         player:startEvent(913) -- normal cs (third promyvion and each entrance after having that promyvion visited or mission completed)
 

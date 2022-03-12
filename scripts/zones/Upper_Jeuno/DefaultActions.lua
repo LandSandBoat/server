@@ -6,6 +6,7 @@ return {
     ['Guide_Stone']  = { messageSpecial = ID.text.GUIDE_STONE },
     ['Ilumida']      = { event = 189 },
     ['Laila']        = { event = 10120 },
+    ['Monberaux']    = { event = 28 },
     ['Olgald']       = { event = 10122 },
     ['Paya-Sabya']   = { event = 79 },
     ['Rhea_Myuliah'] = { event = 10121 },

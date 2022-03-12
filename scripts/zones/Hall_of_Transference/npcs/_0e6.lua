@@ -22,7 +22,7 @@ entity.onTrigger = function(player, npc)
     if player:getCharVar("DemChipRegistration") == 1 then
         player:messageSpecial(ID.text.NO_RESPONSE_OFFSET + 6) -- Device seems to be functioning correctly.
     else
-        player:startEvent(167) -- Hexagonal Cones
+        player:startEvent(165) -- Hexagonal Cones
     end
 end
 
