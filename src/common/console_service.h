@@ -70,7 +70,7 @@ public:
         RegisterCommand("exit", "Terminate the program.",
         []()
         {
-            fmt::print("> Goodbye!");
+            fmt::print("> Goodbye!\n");
             std::terminate();
         });
 
