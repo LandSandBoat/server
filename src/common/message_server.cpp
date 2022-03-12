@@ -24,7 +24,6 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include <queue>
 
 #include "common/logging.h"
-#include "login.h"
 #include "message_server.h"
 
 zmq::context_t                 zContext;
