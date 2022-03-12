@@ -21,20 +21,6 @@ zone_object.onZoneIn = function(player, prevZone)
         player:setPos(185.891, 0, -52.331, 128)
     end
 
-    if player:getCurrentMission(COP) == xi.mission.id.cop.THE_MOTHERCRYSTALS then
-        if player:hasKeyItem(xi.ki.LIGHT_OF_HOLLA) and player:hasKeyItem(xi.ki.LIGHT_OF_MEA) then
-            if player:getCharVar("cslastpromy") == 1 then
-                player:setCharVar("cslastpromy", 0)
-                cs = 52
-            end
-        elseif player:hasKeyItem(xi.ki.LIGHT_OF_HOLLA) or player:hasKeyItem(xi.ki.LIGHT_OF_MEA) then
-            if player:getCharVar("cs2ndpromy") == 1 then
-                player:setCharVar("cs2ndpromy", 0)
-                cs = 51
-            end
-        end
-    end
-
     return cs
 end
 
@@ -57,8 +43,6 @@ end
 zone_object.onEventFinish = function(player, csid, option)
     if csid == 46 and option == 1 then
         player:setPos(-226.193, -46.459, -280.046, 127, 14) -- To Hall of Transference {R}
-    elseif csid == 50 then
-        player:setCharVar("FirstPromyvionDem", 0)
     end
 end
 

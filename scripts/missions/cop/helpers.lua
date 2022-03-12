@@ -1,6 +1,9 @@
 -----------------------------------
 -- Chains of Promathia Helpers
 -----------------------------------
+require('scripts/globals/keyitems')
+require('scripts/globals/missions')
+-----------------------------------
 local hallID = require("scripts/zones/Hall_of_Transference/IDs")
 -----------------------------------
 
@@ -15,27 +18,81 @@ xi.cop.helpers.promyvionCrags =
     MEA   = 3,
 }
 
-local shatteredTelepointInfo =
+xi.cop.helpers.shatteredTelepointInfo =
 {
-    [xi.zone.LA_THEINE_PLATEAU  ] = { xi.cop.helpers.promyvionCrags.HOLLA, 202, 212, { -266.76,   -0.635,  280.058,   0, 14 } },
-    [xi.zone.KONSCHTAT_HIGHLANDS] = { xi.cop.helpers.promyvionCrags.DEM,   913, 918, { -267.194, -40.634, -280.019,   0, 14 } },
-    [xi.zone.TAHRONGI_CANYON    ] = { xi.cop.helpers.promyvionCrags.MEA,   913, 918, {  280.066, -80.635,  -67.096, 191, 14 } },
+    [xi.zone.LA_THEINE_PLATEAU  ] = { xi.cop.helpers.promyvionCrags.HOLLA, 202, 212, { -266.76,   -0.635,  280.058,   0, 14 }, xi.ki.LIGHT_OF_HOLLA },
+    [xi.zone.KONSCHTAT_HIGHLANDS] = { xi.cop.helpers.promyvionCrags.DEM,   913, 918, { -267.194, -40.634, -280.019,   0, 14 }, xi.ki.LIGHT_OF_DEM   },
+    [xi.zone.TAHRONGI_CANYON    ] = { xi.cop.helpers.promyvionCrags.MEA,   913, 918, {  280.066, -80.635,  -67.096, 191, 14 }, xi.ki.LIGHT_OF_MEA   },
 }
+
+xi.cop.helpers.numPromyvionCompleted = function(player, excludeArea)
+    local numKeyItems = 0
+
+    for keyItem = xi.ki.LIGHT_OF_HOLLA, xi.ki.LIGHT_OF_MEA do
+        if player:hasKeyItem(keyItem) then
+            if
+                excludeArea == nil or
+                excludeArea and xi.ki.LIGHT_OF_HOLLA + excludeArea - 1 ~= keyItem
+            then
+                numKeyItems = numKeyItems + 1
+            end
+        end
+    end
+
+    return numKeyItems
+end
+
+xi.cop.helpers.hasCompletedPromyvion = function(player, prevZone)
+    return player:hasKeyItem(xi.cop.helpers.shatteredTelepointInfo[player:getZoneID()][5])
+end
+
+xi.cop.helpers.promyvionOnZoneIn =
+{
+    function(player, prevZone)
+        if
+            mission:getVar('Option') == 0
+        then
+            return 50 + xi.cop.helpers.numPromyvionCompleted(player)
+        end
+    end,
+}
+
+xi.cop.helpers.sendToPromyvionZone = function(player, promyvionOffset)
+    if promyvionOffset == xi.cop.helpers.promyvionCrags.HOLLA then
+        player:setPos(92.033, 0, 80.380, 255, 16)
+    elseif promyvionOffset == xi.cop.helpers.promyvionCrags.DEM then
+        player:setPos(185.891, 0, -52.331, 128, 18)
+    elseif promyvionOffset == xi.cop.helpers.promyvionCrags.MEA then
+        player:setPos(-93.268, 0, 170.749, 162, 20)
+    end
+end
+
+xi.cop.helpers.sendToZoneOnFinish = function(player, csid, option, npc)
+    if option == 0 then
+        xi.cop.helpers.sendToPromyvionZone(player, player:getLocalVar('toPromyvion'))
+    end
+end
 
 xi.cop.helpers.shatteredTelepointOnTrigger = function(player, npc)
     if mission:getVar(player, 'Status') == 1 then -- TODO: Either move this, or set it in Mothercrystals
         local zoneId = player:getZoneID()
+        local promyvionId = (zoneId - 17) / 2
         local currentMemory = mission:getVar(player, 'Option')
 
         if
-            currentMemory == 0 or
-            currentMemory == shatteredTelepointInfo[zoneId][1]
+            player:hasKeyItem(xi.ki.LIGHT_OF_HOLLA + promyvionId)
         then
-            local firstEntry = currentMemory == 0 and 1 or 0
+            return mission:progressEvent(xi.cop.helpers.shatteredTelepointInfo[zoneId][2])
+        elseif
+            currentMemory == 0 or
+            currentMemory == xi.cop.helpers.shatteredTelepointInfo[zoneId][1] or
+            xi.cop.helpers.numPromyvionCompleted(player) == 2
+        then
+            local firstEntry = (currentMemory == 0 and player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.BELOW_THE_ARKS) and 1 or 0
 
-            return mission:progressEvent(shatteredTelepointInfo[zoneId][2], 0, 0, firstEntry)
+            return mission:progressEvent(xi.cop.helpers.shatteredTelepointInfo[zoneId][2], 0, 0, firstEntry)
         else
-            return mission:progressEvent(shatteredTelepointInfo[zoneId][3], currentMemory - 1)
+            return mission:progressEvent(xi.cop.helpers.shatteredTelepointInfo[zoneId][3], currentMemory - 1)
         end
     end
 end
@@ -44,7 +101,7 @@ xi.cop.helpers.shatteredTelepointEntry = function(player, csid, option, npc)
     if option == 0 then
         local zoneId = player:getZoneID()
 
-        player:setPos(unpack(shatteredTelepointInfo[zoneId][4]))
+        player:setPos(unpack(xi.cop.helpers.shatteredTelepointInfo[zoneId][4]))
     end
 end
 
@@ -69,7 +126,54 @@ end
 xi.cop.helpers.largeApparatusOnTrigger = function(player, npc)
     local currentMemory = mission:getVar(player, 'Option')
 
-    if currentMemory == 0 then
+    if
+        currentMemory == 0 and
+        player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.BELOW_THE_ARKS
+    then
         return mission:progressEvent(160)
+    elseif
+        xi.cop.helpers.numPromyvionCompleted(player) < 2
+    then
+        local cragLocation = math.ceil(tonumber(string.sub(npc:getName(), -1)) / 3)
+
+        if currentMemory == cragLocation then
+            player:setLocalVar('toExit', cragLocation + 1)
+            return mission:progressEvent(122 + 3 * cragLocation)
+        end
     end
+end
+
+xi.cop.helpers.largeApparatusOnEventFinish = function(player, csid, option, npc)
+    local isExit = player:getLocalVar('toExit')
+
+    if isExit > 0 then
+        mission:setVar(player, 'Option', 0)
+        xi.teleport.to(xi.teleport.id.EXITPROMHOLLA + isExit)
+    end
+end
+
+xi.cop.helpers.spireEventFinish = function(player, csid, option, npc)
+    -- This variable is an offset based on a 0-indexed version promyvionCrags table.
+    local promyvionId = (player:getZoneID() - 17) / 2
+    local teleportLocation = xi.teleport.id.EXITPROMHOLLA + promyvionId
+
+    player:addKeyItem(xi.ki.LIGHT_OF_HOLLA + promyvionId)
+    player:messageSpecial(zones[player:getZoneID()].text.CANT_REMEMBER, xi.ki.LIGHT_OF_HOLLA + promyvionId)
+    player:addExp(1500)
+    mission:setVar('Option', 0)
+
+    local numCompletedPromyvions = xi.cop.helpers.numPromyvionCompleted(player)
+
+    if
+        numCompletedPromyvions == 1 or
+        numCompletedPromyvions == 3
+    then
+        mission:complete(player)
+    end
+
+    if numCompletedPromyvions == 3 then
+        teleportLocation = xi.teleport.id.LUFAISE
+    end
+
+    player:addStatusEffectEx(xi.effect.TELEPORT, 0, teleportLocation, 0, 1)
 end

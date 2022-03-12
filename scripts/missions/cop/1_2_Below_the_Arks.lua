@@ -20,27 +20,6 @@ mission.reward =
     nextMission = { xi.mission.log_id.COP, xi.mission.id.cop.THE_MOTHERCRYSTALS },
 }
 
-local promyvionOnZoneIn =
-{
-    function(player, prevZone)
-        if mission:getVar(player, 'Option') == 0 then
-            return 50
-        end
-    end,
-}
-
--- TODO: This might be reused in Mothercrystals
-local spireEventFinish = function(player, csid, option, npc)
-    -- This variable is an offset based on a 0-indexed version promyvionCrags table.
-    local promyvionId = (player:getZoneID() - 17) / 2
-
-    player:addKeyItem(xi.ki.LIGHT_OF_HOLLA + promyvionId)
-    player:messageSpecial(zones[player:getZoneID()].text.CANT_REMEMBER, xi.ki.LIGHT_OF_HOLLA + promyvionId)
-    player:addExp(1500)
-    player:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.EXITPROMHOLLA + promyvionId, 0, 1)
-    mission:complete(player)
-end
-
 mission.sections =
 {
     {
@@ -184,6 +163,10 @@ mission.sections =
 
             onEventFinish =
             {
+                [123] = xi.cop.helpers.largeApparatusOnEventFinish,
+                [125] = xi.cop.helpers.largeApparatusOnEventFinish,
+                [128] = xi.cop.helpers.largeApparatusOnEventFinish,
+
                 [160] = function(player, csid, option, npc)
                     -- The same event is used by all Large Apparatus NPCs, so we need to determine where to send
                     -- the player.  For safety to not repeat this cutscene, the Option value isn't set until zoning
@@ -192,20 +175,14 @@ mission.sections =
 
                     local cragLocation = math.ceil(tonumber(string.sub(npc:getName(), -1)) / 3)
 
-                    if cragLocation == xi.cop.helpers.promyvionCrags.HOLLA then
-                        player:setPos(92.033, 0, 80.380, 255, 16)
-                    elseif cragLocation == xi.cop.helpers.promyvionCrags.DEM then
-                        player:setPos(185.891, 0, -52.331, 128, 18)
-                    elseif cragLocation == xi.cop.helpers.promyvionCrags.MEA then
-                        player:setPos(-93.268, 0, 170.749, 162, 20)
-                    end
+                    xi.cop.helpers.sendToPromyvionZone(player, cragLocation)
                 end,
             },
         },
 
         [xi.zone.PROMYVION_DEM] =
         {
-            onZoneIn = promyvionOnZoneIn,
+            onZoneIn = xi.cop.helpers.promyvionOnZoneIn,
 
             onEventFinish =
             {
@@ -219,13 +196,13 @@ mission.sections =
         {
             onEventFinish =
             {
-                [32001] = spireEventFinish,
+                [32001] = xi.cop.helpers.spireEventFinish,
             },
         },
 
         [xi.zone.PROMYVION_HOLLA] =
         {
-            onZoneIn = promyvionOnZoneIn,
+            onZoneIn = xi.cop.helpers.promyvionOnZoneIn,
 
             onEventFinish =
             {
@@ -239,13 +216,13 @@ mission.sections =
         {
             onEventFinish =
             {
-                [32001] = spireEventFinish,
+                [32001] = xi.cop.helpers.spireEventFinish,
             },
         },
 
         [xi.zone.PROMYVION_MEA] =
         {
-            onZoneIn = promyvionOnZoneIn,
+            onZoneIn = xi.cop.helpers.promyvionOnZoneIn,
 
             onEventFinish =
             {
@@ -259,7 +236,7 @@ mission.sections =
         {
             onEventFinish =
             {
-                [32001] = spireEventFinish,
+                [32001] = xi.cop.helpers.spireEventFinish,
             },
         },
     },

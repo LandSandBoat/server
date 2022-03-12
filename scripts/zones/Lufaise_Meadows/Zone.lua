@@ -1,7 +1,5 @@
 -----------------------------------
---
 -- Zone: Lufaise_Meadows (24)
---
 -----------------------------------
 local ID = require("scripts/zones/Lufaise_Meadows/IDs")
 require("scripts/globals/conquest")
