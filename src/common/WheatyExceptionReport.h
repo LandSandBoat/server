@@ -97,9 +97,9 @@ char const* const rgBaseType[] =
 struct SymbolPair
 {
     SymbolPair(DWORD type, DWORD_PTR offset)
+    : _type(type)
+    , _offset(offset)
     {
-        _type = type;
-        _offset = offset;
     }
 
     bool operator<(SymbolPair const& other) const

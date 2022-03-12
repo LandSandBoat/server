@@ -1,4 +1,4 @@
-// https://github.com/TrinityCore/TrinityCore/blob/master/src/common/Debugging/WheatyExceptionReport.cpp
+﻿// https://github.com/TrinityCore/TrinityCore/blob/master/src/common/Debugging/WheatyExceptionReport.cpp
 //==========================================
 // Matt Pietrek
 // MSDN Magazine, 2002
@@ -163,6 +163,10 @@ LONG WINAPI WheatyExceptionReport::WheatyUnhandledExceptionFilter(
 
     alreadyCrashed = true;
 
+    // A fatal event has occured, from this point on all code executed comes from our error handling.
+    // We no longer need to trace where each log comes from, so change to a cleaner pattern.
+    spdlog::set_pattern("[%D %T:%e]%^[%l][%n]%$ %v");
+
     TCHAR module_folder_name[MAX_PATH];
     GetModuleFileName(nullptr, module_folder_name, MAX_PATH);
     TCHAR* pos = _tcsrchr(module_folder_name, '\\');
@@ -228,15 +232,15 @@ LONG WINAPI WheatyExceptionReport::WheatyUnhandledExceptionFilter(
     {
         PEXCEPTION_RECORD pExceptionRecord = pExceptionInfo->ExceptionRecord;
 
-        Log(_T("=====================================================\r\n"));
-        Log(_T("!!! CRASH !!!\r\n"));
-        Log(_T("Exception code: %08X (%s)\r\n"),
+        Log(_T("====================================================="));
+        Log(_T("!!! CRASH !!!"));
+        Log(_T("Exception code: %08X (%s)"),
             pExceptionRecord->ExceptionCode,
             GetExceptionString(pExceptionRecord->ExceptionCode));
         if (pExceptionRecord->ExceptionCode == EXCEPTION_ASSERTION_FAILURE && pExceptionRecord->NumberParameters >= 2)
         {
             pExceptionRecord->ExceptionAddress = reinterpret_cast<PVOID>(pExceptionRecord->ExceptionInformation[1]);
-            Log(_T("Assertion message: %s\r\n"), pExceptionRecord->ExceptionInformation[0]);
+            Log(_T("Assertion message: %s"), pExceptionRecord->ExceptionInformation[0]);
         }
 
         // Now print information about where the fault occured
@@ -249,20 +253,20 @@ LONG WINAPI WheatyExceptionReport::WheatyUnhandledExceptionFilter(
             section, offset);
 
 #ifdef _M_IX86
-        Log(_T("Fault address: %08X %02X:%08X\r\n"),
+        Log(_T("Fault address: %08X %02X:%08X"),
             pExceptionRecord->ExceptionAddress,
             section, offset);
 #endif
 #ifdef _M_X64
-        Log(_T("Fault address: %016I64X %02X:%016I64X\r\n"),
+        Log(_T("Fault address: %016I64X %02X:%016I64X"),
             pExceptionRecord->ExceptionAddress,
             section, offset);
 #endif
 
-        Log(_T("Crash Time: %s\r\n"), GetTimeNowString());
-        Log(_T("Process Name: %s\r\n"), szFaultingModule);
-        Log(_T("Full crash report: %s\r\n"), m_szLogFileName);
-        Log(_T("Memory dump: %s\r\n"), m_szDumpFileName);
+        Log(_T("Crash Time: %s"), GetTimeNowString());
+        Log(_T("Process Name: %s"), szFaultingModule);
+        Log(_T("Full crash report: %s"), m_szLogFileName);
+        Log(_T("Memory dump: %s"), m_szDumpFileName);
 
         GenerateExceptionReport(pExceptionInfo);
 
@@ -504,64 +508,68 @@ void WheatyExceptionReport::PrintSystemInfo()
     ::GlobalMemoryStatus(&MemoryStatus);
     TCHAR sString[1024];
     if (_GetProcessorName(sString, std::size(sString)))
-        Log(_T("Processor: %s\r\nNumber Of Threads: %d\r\n"),
-            sString, SystemInfo.dwNumberOfProcessors);
+    {
+        Log(_T("Processor: %s"), sString);
+        Log(_T("Number Of Threads: %d"), SystemInfo.dwNumberOfProcessors);
+    }
     else
-        Log(_T("Processor: <unknown>\r\nNumber Of Threads: %d\r\n"),
+    {
+        Log(_T("Processor: <unknown>Number Of Threads: %d"),
             SystemInfo.dwNumberOfProcessors);
+    }
 
     if (_GetWindowsVersion(sString, std::size(sString)))
-        Log(_T("OS: %s\r\n"), sString);
+        Log(_T("OS: %s"), sString);
     else
-        Log(_T("OS: <unknown>\r\n"));
+        Log(_T("OS: <unknown>"));
 }
 
 //===========================================================================
 void WheatyExceptionReport::printTracesForAllThreads(bool bWriteVariables)
 {
-  THREADENTRY32 te32;
+    THREADENTRY32 te32;
 
-  DWORD dwOwnerPID = GetCurrentProcessId();
-  DWORD dwCurrentTID = GetCurrentThreadId();
-  m_hProcess = GetCurrentProcess();
-  // Take a snapshot of all running threads
-  HANDLE hThreadSnap = CreateToolhelp32Snapshot(TH32CS_SNAPTHREAD, 0);
-  if (hThreadSnap == INVALID_HANDLE_VALUE)
-    return;
+    DWORD dwOwnerPID   = GetCurrentProcessId();
+    DWORD dwCurrentTID = GetCurrentThreadId();
+    m_hProcess         = GetCurrentProcess();
+    // Take a snapshot of all running threads
+    HANDLE hThreadSnap = CreateToolhelp32Snapshot(TH32CS_SNAPTHREAD, 0);
+    if (hThreadSnap == INVALID_HANDLE_VALUE)
+        return;
 
-  // Fill in the size of the structure before using it.
-  te32.dwSize = sizeof(THREADENTRY32);
+    // Fill in the size of the structure before using it.
+    te32.dwSize = sizeof(THREADENTRY32);
 
-  // Retrieve information about the first thread,
-  // and exit if unsuccessful
-  if (!Thread32First(hThreadSnap, &te32))
-  {
-    CloseHandle(hThreadSnap);    // Must clean up the
-                                   //   snapshot object!
-    return;
-  }
-
-  // Now walk the thread list of the system,
-  // and display information about each thread
-  // associated with the specified process
-  do
-  {
-    if (te32.th32OwnerProcessID == dwOwnerPID && te32.th32ThreadID != dwCurrentTID)
+    // Retrieve information about the first thread,
+    // and exit if unsuccessful
+    if (!Thread32First(hThreadSnap, &te32))
     {
-        CONTEXT context;
-        context.ContextFlags = 0xffffffff;
-        HANDLE threadHandle = OpenThread(THREAD_GET_CONTEXT | THREAD_QUERY_INFORMATION, false, te32.th32ThreadID);
-        if (threadHandle)
-        {
-            if (GetThreadContext(threadHandle, &context))
-                WriteStackDetails(&context, bWriteVariables, threadHandle);
-            CloseHandle(threadHandle);
-        }
+        CloseHandle(hThreadSnap); // Must clean up the
+                                  //   snapshot object!
+        return;
     }
-  } while (Thread32Next(hThreadSnap, &te32));
 
-//  Don't forget to clean up the snapshot object.
-  CloseHandle(hThreadSnap);
+    // Now walk the thread list of the system,
+    // and display information about each thread
+    // associated with the specified process
+    do
+    {
+        if (te32.th32OwnerProcessID == dwOwnerPID && te32.th32ThreadID != dwCurrentTID)
+        {
+            CONTEXT context;
+            context.ContextFlags = 0xffffffff;
+            HANDLE threadHandle  = OpenThread(THREAD_GET_CONTEXT | THREAD_QUERY_INFORMATION, false, te32.th32ThreadID);
+            if (threadHandle)
+            {
+                if (GetThreadContext(threadHandle, &context))
+                    WriteStackDetails(&context, bWriteVariables, threadHandle);
+                CloseHandle(threadHandle);
+            }
+        }
+    } while (Thread32Next(hThreadSnap, &te32));
+
+    //  Don't forget to clean up the snapshot object.
+    CloseHandle(hThreadSnap);
 }
 
 //===========================================================================
@@ -576,46 +584,46 @@ PEXCEPTION_POINTERS pExceptionInfo)
     {
         PEXCEPTION_RECORD pExceptionRecord = pExceptionInfo->ExceptionRecord;
 
-        Log(_T("Process Uptime: %s\r\n"), GetUptimeString());
+        Log(_T("Process Uptime: %s"), GetUptimeString());
         PrintSystemInfo();
-        Log(_T("Process Memory Usage: %s\r\n"), GetMemoryUsageString());
-        Log(_T("Git Branch: %s\r\n"), version::GetGitBranch());
-        Log(_T("Git Commit Subject: %s\r\n"), version::GetGitCommitSubject());
-        Log(_T("Git SHA: %s\r\n"), version::GetGitSha());
-        Log(_T("Git Date: %s\r\n"), version::GetGitDate());
-        Log(_T("=====================================================\r\n"));
+        Log(_T("Process Memory Usage: %s"), GetMemoryUsageString());
+        Log(_T("Git Branch: %s"), version::GetGitBranch());
+        Log(_T("Git Commit Subject: %s"), version::GetGitCommitSubject());
+        Log(_T("Git SHA: %s"), version::GetGitSha());
+        Log(_T("Git Date: %s"), version::GetGitDate());
+        Log(_T("====================================================="));
 
         PCONTEXT pCtx = pExceptionInfo->ContextRecord;
 
         /*
         // Show the registers
 #ifdef _M_IX86                                          // X86 Only!
-        Log(_T("\r\n=== Registers ===\r\n"));
+        Log(_T("=== Registers ==="));
 
-        Log(_T("EAX:%08X\r\nEBX:%08X\r\nECX:%08X\r\nEDX:%08X\r\nESI:%08X\r\nEDI:%08X\r\n")
+        Log(_T("EAX:%08XEBX:%08XECX:%08XEDX:%08XESI:%08XEDI:%08X")
             , pCtx->Eax, pCtx->Ebx, pCtx->Ecx, pCtx->Edx,
             pCtx->Esi, pCtx->Edi);
 
-        Log(_T("CS:EIP:%04X:%08X\r\n"), pCtx->SegCs, pCtx->Eip);
-        Log(_T("SS:ESP:%04X:%08X  EBP:%08X\r\n"),
+        Log(_T("CS:EIP:%04X:%08X"), pCtx->SegCs, pCtx->Eip);
+        Log(_T("SS:ESP:%04X:%08X  EBP:%08X"),
             pCtx->SegSs, pCtx->Esp, pCtx->Ebp);
-        Log(_T("DS:%04X  ES:%04X  FS:%04X  GS:%04X\r\n"),
+        Log(_T("DS:%04X  ES:%04X  FS:%04X  GS:%04X"),
             pCtx->SegDs, pCtx->SegEs, pCtx->SegFs, pCtx->SegGs);
-        Log(_T("Flags:%08X\r\n"), pCtx->EFlags);
+        Log(_T("Flags:%08X"), pCtx->EFlags);
 #endif
 
 #ifdef _M_X64
-        Log(_T("\r\n=== Registers ===\r\n"));
-        Log(_T("RAX:%016I64X\r\nRBX:%016I64X\r\nRCX:%016I64X\r\nRDX:%016I64X\r\nRSI:%016I64X\r\nRDI:%016I64X\r\n")
-            _T("R8: %016I64X\r\nR9: %016I64X\r\nR10:%016I64X\r\nR11:%016I64X\r\nR12:%016I64X\r\nR13:%016I64X\r\nR14:%016I64X\r\nR15:%016I64X\r\n")
+        Log(_T("=== Registers ==="));
+        Log(_T("RAX:%016I64XRBX:%016I64XRCX:%016I64XRDX:%016I64XRSI:%016I64XRDI:%016I64X")
+            _T("R8: %016I64XR9: %016I64XR10:%016I64XR11:%016I64XR12:%016I64XR13:%016I64XR14:%016I64XR15:%016I64X")
             , pCtx->Rax, pCtx->Rbx, pCtx->Rcx, pCtx->Rdx,
             pCtx->Rsi, pCtx->Rdi, pCtx->R9, pCtx->R10, pCtx->R11, pCtx->R12, pCtx->R13, pCtx->R14, pCtx->R15);
-        Log(_T("CS:RIP:%04X:%016I64X\r\n"), pCtx->SegCs, pCtx->Rip);
-        Log(_T("SS:RSP:%04X:%016X  RBP:%08X\r\n"),
+        Log(_T("CS:RIP:%04X:%016I64X"), pCtx->SegCs, pCtx->Rip);
+        Log(_T("SS:RSP:%04X:%016X  RBP:%08X"),
             pCtx->SegSs, pCtx->Rsp, pCtx->Rbp);
-        Log(_T("DS:%04X  ES:%04X  FS:%04X  GS:%04X\r\n"),
+        Log(_T("DS:%04X  ES:%04X  FS:%04X  GS:%04X"),
             pCtx->SegDs, pCtx->SegEs, pCtx->SegFs, pCtx->SegGs);
-        Log(_T("Flags:%08X\r\n"), pCtx->EFlags);
+        Log(_T("Flags:%08X"), pCtx->EFlags);
 #endif
         */
 
@@ -624,7 +632,7 @@ PEXCEPTION_POINTERS pExceptionInfo)
         // Initialize DbgHelp
         if (!SymInitialize(GetCurrentProcess(), nullptr, TRUE))
         {
-            Log(_T("\n\rCRITICAL ERROR.\n\r Couldn't initialize the symbol handler for process.\n\rError [%s].\n\r\n\r"),
+            Log(_T("CRITICAL ERROR. Couldn't initialize the symbol handler for process.Error [%s]."),
                 ErrorMessage(GetLastError()));
         }
 
@@ -682,11 +690,11 @@ PEXCEPTION_POINTERS pExceptionInfo)
                 if (!exceptionPtr && exceptionTypeinfo == stdExceptionTypeInfo)
                     exceptionPtr = reinterpret_cast<std::exception*>(exceptionObject);
 
-                Log(_T("\r\nUncaught C++ exception info:"));
+                Log(_T("Uncaught C++ exception info:"));
                 if (exceptionPtr)
                     Log(_T(" %s"), exceptionPtr->what());
 
-                Log(_T("\r\n"));
+                //Log(_T(""));
 
                 char undName[MAX_SYM_NAME] = { };
                 if (UnDecorateSymbolName(&exceptionTypeinfo->name[1], &undName[0], MAX_SYM_NAME, UNDNAME_32_BIT_DECODE | UNDNAME_NAME_ONLY | UNDNAME_NO_ARGUMENTS))
@@ -713,12 +721,10 @@ PEXCEPTION_POINTERS pExceptionInfo)
         printTracesForAllThreads(true);
 
         SymCleanup(GetCurrentProcess());
-
-        Log(_T("\r\n"));
     }
     __except (EXCEPTION_EXECUTE_HANDLER)
     {
-        Log(_T("Error writing the crash log\r\n"));
+        Log(_T("Error writing the crash log"));
     }
 }
 
@@ -845,9 +851,8 @@ void WheatyExceptionReport::WriteStackDetails(
 PCONTEXT pContext,
 bool bWriteVariables, HANDLE pThreadHandle)                                      // true if local/params should be output
 {
-    Log(_T("\r\n=== Call stack ===\r\n"));
-
-    Log(_T("Address   Frame     Function      SourceFile\r\n"));
+    Log(_T("=== Call stack ==="));
+    Log(_T("Address           Frame             Function"));
 
     DWORD dwMachineType = 0;
     // Could use SymSetOptions here to add the SYMOPT_DEFERRED_LOADS flag
@@ -893,15 +898,11 @@ bool bWriteVariables, HANDLE pThreadHandle)                                     
             break;
         if (0 == sf.AddrFrame.Offset)                     // Basic sanity check to make sure
             break;                                          // the frame is OK.  Bail if not.
-#ifdef _M_IX86
-        Log(_T("%08X  %08X  "), sf.AddrPC.Offset, sf.AddrFrame.Offset);
-#endif
-#ifdef _M_X64
-        Log(_T("%016I64X  %016I64X  "), sf.AddrPC.Offset, sf.AddrFrame.Offset);
-#endif
 
         DWORD64 symDisplacement = 0;                        // Displacement of the input address,
         // relative to the start of the symbol
+
+        std::array<wchar_t, 1024> funcNameBuffer{};
 
         // Get the name of the function for this stack frame entry
         CSymbolInfoPackage sip;
@@ -911,8 +912,7 @@ bool bWriteVariables, HANDLE pThreadHandle)                                     
             &symDisplacement,                               // Address of the variable that will receive the displacement
             &sip.si))                                       // Address of the SYMBOL_INFO structure (inside "sip" object)
         {
-            Log(_T("%hs+%I64X"), sip.si.Name, symDisplacement);
-
+            wsprintf((LPSTR)funcNameBuffer.data(), "%hs+%I64X", sip.si.Name, symDisplacement);
         }
         else                                                // No symbol found.  Print out the logical address instead.
         {
@@ -923,23 +923,32 @@ bool bWriteVariables, HANDLE pThreadHandle)                                     
             GetLogicalAddress((PVOID)sf.AddrPC.Offset,
                 szModule, sizeof(szModule), section, offset);
 #ifdef _M_IX86
-            Log(_T("%04X:%08X %s"), section, offset, szModule);
+            wsprintf((LPSTR)funcNameBuffer.data(), "%04X:%08X %s", section, offset, szModule);
 #endif
 #ifdef _M_X64
-            Log(_T("%04X:%016I64X %s"), section, offset, szModule);
+            wsprintf((LPSTR)funcNameBuffer.data(), "%04X:%016I64X %s", section, offset, szModule);
 #endif
         }
 
         // Get the source line for this stack frame entry
+        std::array<wchar_t, 1024> fileNameBuffer{};
         IMAGEHLP_LINE64 lineInfo = { sizeof(IMAGEHLP_LINE64) };
         DWORD dwLineDisplacement;
         if (SymGetLineFromAddr64(m_hProcess, sf.AddrPC.Offset,
             &dwLineDisplacement, &lineInfo))
         {
-            Log(_T("  %s line %u"), lineInfo.FileName, lineInfo.LineNumber);
+            wsprintf((LPSTR)fileNameBuffer.data(), "%s, line %i", lineInfo.FileName, lineInfo.LineNumber);
         }
 
-        Log(_T("\r\n"));
+
+#ifdef _M_IX86
+        Log(_T("%08X  %08X  %s (%s)"), sf.AddrPC.Offset, sf.AddrFrame.Offset, funcNameBuffer.data(), fileNameBuffer.data());
+#endif
+#ifdef _M_X64
+        Log(_T("%016I64X  %016I64X  %s (%s)"), sf.AddrPC.Offset, sf.AddrFrame.Offset, funcNameBuffer.data(), fileNameBuffer.data());
+#endif
+
+        //Log(_T(""));
 
         // Write out the variables, if desired
         if (bWriteVariables)
@@ -952,7 +961,7 @@ bool bWriteVariables, HANDLE pThreadHandle)                                     
             // Enumerate the locals/parameters
             SymEnumSymbols(m_hProcess, 0, nullptr, EnumerateSymbolsCallback, &sf);
 
-            Log(_T("\r\n"));
+            //Log(_T(""));
         }
     }
 
@@ -981,7 +990,7 @@ PVOID         UserContext)
     }
     __except (EXCEPTION_EXECUTE_HANDLER)
     {
-        Log(_T("punting on symbol %s, partial output:\r\n"), pSymInfo->Name);
+        Log(_T("punting on symbol %s, partial output:"), pSymInfo->Name);
     }
 
     return TRUE;
@@ -994,8 +1003,13 @@ PVOID         UserContext)
 //////////////////////////////////////////////////////////////////////////////
 bool WheatyExceptionReport::FormatSymbolValue(
 PSYMBOL_INFO pSym,
-STACKFRAME64 * sf)
+STACKFRAME64* sf)
 {
+    if (!pSym || !sf)
+    {
+        return false;
+    }
+
     // If it's a function, don't do anything.
     if (pSym->Tag == SymTagFunction)                      // SymTagFunction from CVCONST.H from the DIA SDK
         return false;
@@ -1027,9 +1041,9 @@ STACKFRAME64 * sf)
 
     // Indicate if the variable is a local or parameter
     if (pSym->Flags & IMAGEHLP_SYMBOL_INFO_PARAMETER)
-        symbolDetails.top().Prefix = "Parameter ";
+        symbolDetails.top().Prefix = "    Parameter ";
     else if (pSym->Flags & IMAGEHLP_SYMBOL_INFO_LOCAL)
-        symbolDetails.top().Prefix = "Local ";
+        symbolDetails.top().Prefix = "    Local ";
 
     // Determine if the variable is a user defined type (UDT).  IF so, bHandled
     // will return true.
@@ -1288,7 +1302,7 @@ bool logChildren)
                             }
                             symbolDetails.top().Prefix.clear();
                             symbolDetails.top().Type.clear();
-                            symbolDetails.top().Suffix = "[" + std::to_string(index) + "]";
+                            symbolDetails.top().Suffix = "    [" + std::to_string(index) + "]";
                             symbolDetails.top().Name.clear();
                             PopSymbolDetail();
                         }
@@ -1519,29 +1533,44 @@ DWORD_PTR WheatyExceptionReport::DereferenceUnsafePointer(DWORD_PTR address)
     }
 }
 
+// trim from end (in place)
+static inline void rtrim(std::string &s)
+{
+    s.erase(std::find_if(s.rbegin(), s.rend(), [](unsigned char ch)
+    {
+        return !std::isspace(ch) && ch != '\n';
+    }).base(), s.end());
+}
+
 //============================================================================
 // Helper function that writes to the report file, and allows the user to use
 // printf style formating
 //============================================================================
-int __cdecl WheatyExceptionReport::Log(const TCHAR * format, ...)
+int __cdecl WheatyExceptionReport::Log(const TCHAR* format, ...)
 {
+    std::array<char, 1024> formatted;
+
     va_list argptr;
     va_start(argptr, format);
-    int retValue = _vftprintf(m_hReportFile, format, argptr);
+    _vsntprintf((TCHAR*)formatted.data(), formatted.size(), format, argptr);
     va_end(argptr);
 
-    if (gLogToConsole)
-    {
-        TCHAR buffer[1024];
-        va_list argptr;
-        va_start(argptr, format);
-        _vstprintf(buffer, format, argptr);
-        va_end(argptr);
+    std::string outString(formatted.data());
+    rtrim(outString);
 
-        _tprintf(buffer);
+    if (!outString.empty())
+    {
+        // Log to file
+        fprintf(m_hReportFile, (outString + "\n").data());
+
+        // Log to console
+        if (gLogToConsole)
+        {
+            ShowStacktrace(outString.c_str());
+        }
     }
 
-    return retValue;
+    return 0;
 }
 
 bool WheatyExceptionReport::StoreSymbol(DWORD type, DWORD_PTR offset)
@@ -1582,7 +1611,7 @@ void WheatyExceptionReport::PrintSymbolDetail()
     for (size_t i = 0; i < symbolDetails.size(); i++)
         Log(_T("    "));
 
-    Log(_T("%s\r\n"), symbolDetails.top().ToString().c_str());
+    Log(_T("%s"), symbolDetails.top().ToString().c_str());
 }
 
 std::string SymbolDetail::ToString()
