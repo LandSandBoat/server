@@ -1,0 +1,88 @@
+-----------------------------------
+-- The Lost City
+-- Promathia 2-2
+-----------------------------------
+-- !addmission 6 218
+-----------------------------------
+require('scripts/globals/interaction/mission')
+require('scripts/globals/keyitems')
+require('scripts/globals/missions')
+require('scripts/globals/zone')
+-----------------------------------
+
+local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.THE_LOST_CITY)
+
+mission.reward =
+{
+    nextMission = { xi.mission.log_id.COP, xi.mission.id.cop.DISTANT_BELIEFS },
+}
+
+mission.sections =
+{
+    {
+        check = function(player, currentMission, missionStatus, vars)
+            return currentMission == mission.missionId
+        end,
+
+        [xi.zone.TAVNAZIAN_SAFEHOLD] =
+        {
+            ['_0q1'] =
+            {
+                onTrigger = function(player, npc)
+                    if mission:getVar(player, 'Status') == 1 then
+                        return mission:progressEvent(103)
+                    end
+                end,
+            },
+
+            ['Arquil'] =
+            {
+                onTrigger = function(player, npc)
+                    if mission:getVar(player, 'Status') == 1 then
+                        return mission:event(291):replaceDefault()
+                    end
+                end,
+            },
+
+            ['Despachiaire'] =
+            {
+                onTrigger = function(player, npc)
+                    if mission:getVar(player, 'Status') == 0 then
+                        return mission:progressEvent(102)
+                    end
+                end,
+            },
+
+            ['Justinius'] =
+            {
+                onTrigger = function(player, npc)
+                    if mission:getVar(player, 'Status') == 1 then
+                        return mission:event(360):replaceDefault()
+                    end
+                end,
+            },
+
+            ['Liphatte'] =
+            {
+                onTrigger = function(player, npc)
+                    if mission:getVar(player, 'Status') == 1 then
+                        return mission:event(301):replaceDefault()
+                    end
+                end,
+            },
+
+            onEventFinish =
+            {
+                [102] = function(player, csid, option, npc)
+                    mission:setVar(player, 'Status', 1)
+                end,
+
+                [103] = function(player, csid, option, npc)
+                    mission:complete(player)
+                end,
+            },
+        },
+    },
+}
+
+return mission

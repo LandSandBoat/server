@@ -39,14 +39,12 @@ entity.onTrigger = function(player, npc)
         -- TODO: True default is 265, need to investigate this message
         -- player:startEvent(123)
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
     if csid == 113 then
         player:setCharVar("PromathiaStatus", 0)
         player:completeMission(xi.mission.log_id.COP, copMissions.DISTANT_BELIEFS)
@@ -59,7 +57,6 @@ entity.onEventFinish = function(player, csid, option)
         player:addMission(xi.mission.log_id.COP, copMissions.THE_SECRETS_OF_WORSHIP)
         player:addTitle(xi.title.NAGMOLADAS_UNDERLING)
     end
-
 end
 
 return entity

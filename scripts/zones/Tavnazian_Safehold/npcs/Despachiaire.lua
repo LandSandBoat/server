@@ -22,11 +22,8 @@ entity.onTrigger = function(player, npc)
     local copMissionStatus = player:getCharVar("PromathiaStatus")
     local copMissions = xi.mission.id.cop
 
-    -- COP 2-2 "The Lost City"
-    if copCurrentMission == copMissions.THE_LOST_CITY and copMissionStatus == 0 then
-        player:startEvent(102)
     -- COP 4-1 "Sheltering Doubt"
-    elseif copCurrentMission == copMissions.SHELTERING_DOUBT and copMissionStatus == 1 then
+    if copCurrentMission == copMissions.SHELTERING_DOUBT and copMissionStatus == 1 then
         player:startEvent(108)
     -- COP 4-4 "Slanderous Utterings" is an area approach handled in Tavnazian_Safehold/Zone.lua
     -- COP 5-1 "Sheltering Doubt" (optional)
@@ -56,15 +53,13 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
-    if csid == 102 or csid == 108 then
+    if csid == 108 then
         player:setCharVar("PromathiaStatus", 2)
     elseif csid == 117 then
         player:setCharVar("COP_optional_CS_Despachaire", 1)
     elseif csid == 118 then
         player:setCharVar("COP_Louverance_s_Path", 1)
     end
-
 end
 
 -- TODO: cutscenes including Despachiaire for reference
