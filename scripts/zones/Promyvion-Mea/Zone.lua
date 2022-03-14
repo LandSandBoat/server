@@ -1,7 +1,5 @@
 -----------------------------------
---
 -- Zone: Promyvion-Mea (20)
---
 -----------------------------------
 local ID = require("scripts/zones/Promyvion-Mea/IDs")
 require("scripts/globals/promyvion")
@@ -21,28 +19,6 @@ zone_object.onZoneIn = function(player, prevZone)
 
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(-93.268, 0, 170.749, 162) -- Floor 1 {R}
-    end
-
-    if player:getCurrentMission(COP) == xi.mission.id.cop.BELOW_THE_ARKS and player:getCharVar("PromathiaStatus") == 2 then
-        player:completeMission(xi.mission.log_id.COP, xi.mission.id.cop.BELOW_THE_ARKS)
-        player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_MOTHERCRYSTALS)
-        player:setCharVar("PromathiaStatus", 0)
-    elseif player:getCurrentMission(COP) == xi.mission.id.cop.THE_MOTHERCRYSTALS then
-        if player:hasKeyItem(xi.ki.LIGHT_OF_HOLLA) and player:hasKeyItem(xi.ki.LIGHT_OF_DEM) then
-            if player:getCharVar("cslastpromy") == 1 then
-                player:setCharVar("cslastpromy", 0)
-                cs = 52
-            end
-        elseif player:hasKeyItem(xi.ki.LIGHT_OF_HOLLA) or player:hasKeyItem(xi.ki.LIGHT_OF_DEM) then
-            if player:getCharVar("cs2ndpromy") == 1 then
-                player:setCharVar("cs2ndpromy", 0)
-                cs = 51
-            end
-        end
-    end
-
-    if player:getCharVar("FirstPromyvionMea") == 1 then
-        cs = 50
     end
 
     return cs
@@ -67,8 +43,6 @@ end
 zone_object.onEventFinish = function(player, csid, option)
     if csid == 46 and option == 1 then
         player:setPos(279.988, -86.459, -25.994, 63, 14) -- To Hall of Transferance {R}
-    elseif csid == 50 then
-        player:setCharVar("FirstPromyvionMea", 0)
     end
 end
 

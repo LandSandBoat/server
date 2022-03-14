@@ -47,6 +47,7 @@ zones[xi.zone.LA_THEINE_PLATEAU] =
         ALREADY_POSSESS_TEMP         = 7920,  -- You already possess that temporary item.
         NO_COMBINATION               = 7925,  -- You were unable to enter a combination.
         VOIDWALKER_DESPAWN           = 7956,  -- The monster fades before your eyes, a look of disappointment on its face.
+        MEMORIES_SEALED_OFF          = 8081,  -- A portion of your memories has been sealed off.
         REGIME_REGISTERED            = 10136, -- New training regime registered!
         VOIDWALKER_NO_MOB            = 11309, -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
         VOIDWALKER_MOB_TOO_FAR       = 11310, -- The <keyitem> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.

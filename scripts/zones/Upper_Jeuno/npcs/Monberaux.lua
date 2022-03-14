@@ -47,15 +47,8 @@ entity.onTrigger = function(player, npc)
     local TheLostCardien = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_LOST_CARDIAN)
     local CooksPride = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COOK_S_PRIDE)
 
-    -- COP mission 1-2
-    if
-        player:getCurrentMission(COP) == xi.mission.id.cop.BELOW_THE_ARKS and
-        player:getCharVar("PromathiaStatus") == 0
-    then
-        player:startEvent(9)
-
     -- COP mission 3-5
-    elseif
+    if
         player:getCurrentMission(COP) == xi.mission.id.cop.DARKNESS_NAMED and
         player:getCharVar("PromathiaStatus") == 0
     then
@@ -98,9 +91,6 @@ entity.onTrigger = function(player, npc)
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_KIND_CARDIAN) == QUEST_ACCEPTED
     then
         player:startEvent(32)
-
-    else
-        player:startEvent(28)
     end
 end
 
