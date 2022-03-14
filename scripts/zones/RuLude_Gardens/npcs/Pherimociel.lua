@@ -43,9 +43,6 @@ entity.onTrigger = function(player, npc)
         player:getCharVar("PromathiaStatus") == 0
     then
         player:startEvent(10049)
-
-    else
-        player:startEvent(155)
     end
 end
 

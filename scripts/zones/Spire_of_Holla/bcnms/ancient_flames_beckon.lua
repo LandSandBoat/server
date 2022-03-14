@@ -26,6 +26,17 @@ battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
     if leavecode == xi.battlefield.leaveCode.WON then
         local _, clearTime, partySize = battlefield:getRecord()
         local arg8 = xi.cop.helpers.numPromyvionCompleted(player, xi.cop.helpers.promyvionCrags.HOLLA) + 1
+        local copMission = player:getCurrentMission(xi.mission.log_id.COP)
+        local promyvionId = (player:getZoneID() - 17) / 2
+
+        if
+            (copMission == xi.mission.id.cop.BELOW_THE_ARKS or
+            copMission == xi.mission.id.cop.THE_MOTHERCRYSTALS) and
+            not player:hasKeyItem(xi.ki.LIGHT_OF_HOLLA + promyvionId)
+        then
+            player:setLocalVar('newPromy', 1)
+        end
+
         player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 0, battlefield:getLocalVar("[cs]bit"), 0, arg8)
     elseif leavecode == xi.battlefield.leaveCode.LOST then
         player:startEvent(32002)
@@ -36,6 +47,13 @@ battlefield_object.onEventUpdate = function(player, csid, option)
 end
 
 battlefield_object.onEventFinish = function(player, csid, option)
+    if
+        player:getCurrentMission(xi.mission.log_id.COP) > xi.mission.id.cop.THE_MOTHERCRYSTALS and
+        not player:getLocalVar('toLufaise') == 1
+    then
+        player:addExp(1500)
+        xi.teleport.to(player, xi.teleport.id.EXITPROMDEM)
+    end
 end
 
 return battlefield_object

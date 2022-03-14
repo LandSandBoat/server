@@ -3,6 +3,9 @@
 -- Promathia 1-3
 -----------------------------------
 -- !addmission 6 128
+-- Shattered Telepoint (Konschtat) : !pos 135 19 220 108
+-- Shattered Telepoint (La Theine) : !pos 334 19 -60 102
+-- Shattered Telepoint (Tahrongi)  : !pos 179 35 255 117
 -----------------------------------
 require('scripts/globals/interaction/mission')
 require('scripts/globals/keyitems')
@@ -20,6 +23,24 @@ mission.reward =
     nextMission = { xi.mission.log_id.COP, xi.mission.id.cop.AN_INVITATION_WEST },
 }
 
+-- Some helper functions require access to this mission class in order to operate.  The below
+-- functions wrap the helper to ensure that value gets to them.
+local shatteredTelepointSealMemory = function(player, csid, option, npc)
+    xi.cop.helpers.shatteredTelepointSealMemory(mission, player, csid, option, npc)
+end
+
+local largeApparatusOnTrigger = function(player, npc)
+    return xi.cop.helpers.largeApparatusOnTrigger(mission, player, npc)
+end
+
+local largeApparatusOnEventFinish = function(player, csid, option, npc)
+    xi.cop.helpers.largeApparatusOnEventFinish(mission, player, csid, option, npc)
+end
+
+local spireEventFinish = function(player, csid, option, npc)
+    xi.cop.helpers.spireEventFinish(mission, player, csid, option, npc)
+end
+
 local shatteredTelepointOnTrigger = function(player, npc)
     if
         xi.cop.helpers.numPromyvionCompleted(player) == 1 and
@@ -31,7 +52,7 @@ local shatteredTelepointOnTrigger = function(player, npc)
         player:setLocalVar('toPromyvion', xi.cop.helpers.shatteredTelepointInfo[zoneId][1])
         return mission:progressEvent(xi.cop.helpers.shatteredTelepointInfo[zoneId][2] - 1)
     else
-        return xi.cop.helpers.shatteredTelepointOnTrigger(player, npc)
+        return xi.cop.helpers.shatteredTelepointOnTrigger(mission, player, npc)
     end
 end
 
@@ -53,7 +74,7 @@ mission.sections =
             {
                 [912] = xi.cop.helpers.sendToZoneOnFinish,
                 [913] = xi.cop.helpers.shatteredTelepointEntry,
-                [918] = xi.cop.helpers.shatteredTelepointSealMemory,
+                [918] = shatteredTelepointSealMemory,
             },
         },
 
@@ -68,7 +89,7 @@ mission.sections =
             {
                 [201] = xi.cop.helpers.sendToZoneOnFinish,
                 [202] = xi.cop.helpers.shatteredTelepointEntry,
-                [212] = xi.cop.helpers.shatteredTelepointSealMemory,
+                [212] = shatteredTelepointSealMemory,
             },
         },
 
@@ -83,12 +104,27 @@ mission.sections =
             {
                 [912] = xi.cop.helpers.sendToZoneOnFinish,
                 [913] = xi.cop.helpers.shatteredTelepointEntry,
-                [918] = xi.cop.helpers.shatteredTelepointSealMemory,
+                [918] = shatteredTelepointSealMemory,
             },
         },
 
         [xi.zone.HALL_OF_TRANSFERENCE] =
         {
+            ['_0e3'] =
+            {
+                onTrigger = largeApparatusOnTrigger,
+            },
+
+            ['_0e5'] =
+            {
+                onTrigger = largeApparatusOnTrigger,
+            },
+
+            ['_0e7'] =
+            {
+                onTrigger = largeApparatusOnTrigger,
+            },
+
             onZoneIn =
             {
                 function(player, prevZone)
@@ -105,9 +141,9 @@ mission.sections =
 
             onEventFinish =
             {
-                [123] = xi.cop.helpers.largeApparatusOnEventFinish,
-                [125] = xi.cop.helpers.largeApparatusOnEventFinish,
-                [128] = xi.cop.helpers.largeApparatusOnEventFinish,
+                [122] = largeApparatusOnEventFinish,
+                [125] = largeApparatusOnEventFinish,
+                [128] = largeApparatusOnEventFinish,
 
                 [155] = function(player, csid, option, npc)
                     -- This event only happens once since there is no sealing component.
@@ -117,11 +153,27 @@ mission.sections =
             },
         },
 
+        [xi.zone.PROMYVION_DEM] =
+        {
+            onZoneIn = xi.cop.helpers.promyvionOnZoneIn,
+
+            onEventFinish =
+            {
+                [51] = function(player, csid, option, npc)
+                    mission:setVar(player, 'Option', xi.cop.helpers.promyvionCrags.DEM)
+                end,
+
+                [52] = function(player, csid, option, npc)
+                    mission:setVar(player, 'Option', xi.cop.helpers.promyvionCrags.DEM)
+                end,
+            },
+        },
+
         [xi.zone.SPIRE_OF_DEM] =
         {
             onEventFinish =
             {
-                [32001] = xi.cop.helpers.spireEventFinish,
+                [32001] = spireEventFinish,
             },
         },
 
@@ -131,7 +183,11 @@ mission.sections =
 
             onEventFinish =
             {
-                [50] = function(player, csid, option, npc)
+                [51] = function(player, csid, option, npc)
+                    mission:setVar(player, 'Option', xi.cop.helpers.promyvionCrags.HOLLA)
+                end,
+
+                [52] = function(player, csid, option, npc)
                     mission:setVar(player, 'Option', xi.cop.helpers.promyvionCrags.HOLLA)
                 end,
             },
@@ -141,7 +197,7 @@ mission.sections =
         {
             onEventFinish =
             {
-                [32001] = xi.cop.helpers.spireEventFinish,
+                [32001] = spireEventFinish,
             },
         },
 
@@ -151,7 +207,11 @@ mission.sections =
 
             onEventFinish =
             {
-                [50] = function(player, csid, option, npc)
+                [51] = function(player, csid, option, npc)
+                    mission:setVar(player, 'Option', xi.cop.helpers.promyvionCrags.MEA)
+                end,
+
+                [52] = function(player, csid, option, npc)
                     mission:setVar(player, 'Option', xi.cop.helpers.promyvionCrags.MEA)
                 end,
             },
@@ -161,7 +221,7 @@ mission.sections =
         {
             onEventFinish =
             {
-                [32001] = xi.cop.helpers.spireEventFinish,
+                [32001] = spireEventFinish,
             },
         },
     },

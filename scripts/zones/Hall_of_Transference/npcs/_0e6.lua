@@ -21,8 +21,10 @@ end
 entity.onTrigger = function(player, npc)
     if player:getCharVar("DemChipRegistration") == 1 then
         player:messageSpecial(ID.text.NO_RESPONSE_OFFSET + 6) -- Device seems to be functioning correctly.
-    else
+    elseif player:checkDistance(npc) <= 2.71 then
         player:startEvent(165) -- Hexagonal Cones
+    else
+        player:messageSpecial(ID.text.YOU_MUST_MOVE_CLOSER)
     end
 end
 

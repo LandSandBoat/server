@@ -4,7 +4,7 @@
 require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 -----------------------------------
-local hallID = require("scripts/zones/Hall_of_Transference/IDs")
+local hallID = require('scripts/zones/Hall_of_Transference/IDs')
 -----------------------------------
 
 xi = xi or {}
@@ -49,8 +49,10 @@ end
 xi.cop.helpers.promyvionOnZoneIn =
 {
     function(player, prevZone)
+        local missionOption = xi.mission.getVar(player, xi.mission.log_id.COP, player:getCurrentMission(xi.mission.log_id.COP), 'Option')
+
         if
-            mission:getVar('Option') == 0
+            missionOption == 0
         then
             return 50 + xi.cop.helpers.numPromyvionCompleted(player)
         end
@@ -73,27 +75,25 @@ xi.cop.helpers.sendToZoneOnFinish = function(player, csid, option, npc)
     end
 end
 
-xi.cop.helpers.shatteredTelepointOnTrigger = function(player, npc)
-    if mission:getVar(player, 'Status') == 1 then -- TODO: Either move this, or set it in Mothercrystals
-        local zoneId = player:getZoneID()
-        local promyvionId = (zoneId - 17) / 2
-        local currentMemory = mission:getVar(player, 'Option')
+xi.cop.helpers.shatteredTelepointOnTrigger = function(mission, player, npc)
+    local zoneId = player:getZoneID()
+    local promyvionOffset = xi.cop.helpers.shatteredTelepointInfo[zoneId][1] - 1
+    local currentMemory = mission:getVar(player, 'Option')
 
-        if
-            player:hasKeyItem(xi.ki.LIGHT_OF_HOLLA + promyvionId)
-        then
-            return mission:progressEvent(xi.cop.helpers.shatteredTelepointInfo[zoneId][2])
-        elseif
-            currentMemory == 0 or
-            currentMemory == xi.cop.helpers.shatteredTelepointInfo[zoneId][1] or
-            xi.cop.helpers.numPromyvionCompleted(player) == 2
-        then
-            local firstEntry = (currentMemory == 0 and player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.BELOW_THE_ARKS) and 1 or 0
+    if
+        player:hasKeyItem(xi.ki.LIGHT_OF_HOLLA + promyvionOffset)
+    then
+        return mission:progressEvent(xi.cop.helpers.shatteredTelepointInfo[zoneId][2])
+    elseif
+        currentMemory == 0 or
+        currentMemory == xi.cop.helpers.shatteredTelepointInfo[zoneId][1] or
+        xi.cop.helpers.numPromyvionCompleted(player) == 2
+    then
+        local firstEntry = (currentMemory == 0 and player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.BELOW_THE_ARKS) and 1 or 0
 
-            return mission:progressEvent(xi.cop.helpers.shatteredTelepointInfo[zoneId][2], 0, 0, firstEntry)
-        else
-            return mission:progressEvent(xi.cop.helpers.shatteredTelepointInfo[zoneId][3], currentMemory - 1)
-        end
+        return mission:progressEvent(xi.cop.helpers.shatteredTelepointInfo[zoneId][2], 0, 0, firstEntry)
+    else
+        return mission:progressEvent(xi.cop.helpers.shatteredTelepointInfo[zoneId][3], currentMemory - 1)
     end
 end
 
@@ -105,7 +105,8 @@ xi.cop.helpers.shatteredTelepointEntry = function(player, csid, option, npc)
     end
 end
 
-xi.cop.helpers.shatteredTelepointSealMemory = function(player, csid, option, npc)
+xi.cop.helpers.shatteredTelepointSealMemory = function(mission, player, csid, option, npc)
+    print(option)
     if option == 0 then
         local zoneId = player:getZoneID()
 
@@ -114,7 +115,7 @@ xi.cop.helpers.shatteredTelepointSealMemory = function(player, csid, option, npc
     end
 end
 
-xi.cop.helpers.cermetGateOnTrigger = function(player, npc)
+xi.cop.helpers.cermetGateOnTrigger = function(mission, player, npc)
     local cermetLocation = tonumber(string.sub(npc:getName(), -1)) + 1
     local currentMemory  = mission:getVar(player, 'Option')
 
@@ -123,7 +124,7 @@ xi.cop.helpers.cermetGateOnTrigger = function(player, npc)
     end
 end
 
-xi.cop.helpers.largeApparatusOnTrigger = function(player, npc)
+xi.cop.helpers.largeApparatusOnTrigger = function(mission, player, npc)
     local currentMemory = mission:getVar(player, 'Option')
 
     if
@@ -136,44 +137,54 @@ xi.cop.helpers.largeApparatusOnTrigger = function(player, npc)
     then
         local cragLocation = math.ceil(tonumber(string.sub(npc:getName(), -1)) / 3)
 
-        if currentMemory == cragLocation then
-            player:setLocalVar('toExit', cragLocation + 1)
-            return mission:progressEvent(122 + 3 * cragLocation)
+        -- TODO: Assumption is that previously-completed promyvions do not require sealing of memories
+        -- for "The Mothercrystals."
+        if
+            currentMemory == cragLocation and
+            not player:hasKeyItem(xi.ki.LIGHT_OF_HOLLA + cragLocation - 1)
+        then
+            player:setLocalVar('exitOffset', cragLocation)
+            return mission:progressEvent(122 + 3 * (cragLocation - 1))
         end
     end
 end
 
-xi.cop.helpers.largeApparatusOnEventFinish = function(player, csid, option, npc)
-    local isExit = player:getLocalVar('toExit')
+xi.cop.helpers.largeApparatusOnEventFinish = function(mission, player, csid, option, npc)
+    if option == 0 then
+        local exitOffset = player:getLocalVar('exitOffset') - 1
 
-    if isExit > 0 then
         mission:setVar(player, 'Option', 0)
-        xi.teleport.to(xi.teleport.id.EXITPROMHOLLA + isExit)
+        xi.teleport.to(player, xi.teleport.id.EXITPROMHOLLA + exitOffset)
     end
 end
 
-xi.cop.helpers.spireEventFinish = function(player, csid, option, npc)
-    -- This variable is an offset based on a 0-indexed version promyvionCrags table.
-    local promyvionId = (player:getZoneID() - 17) / 2
-    local teleportLocation = xi.teleport.id.EXITPROMHOLLA + promyvionId
+xi.cop.helpers.spireEventFinish = function(mission, player, csid, option, npc)
+    if player:getLocalVar('newPromy') == 1 then
+        -- This variable is an offset based on a 0-indexed version promyvionCrags table.
+        local promyvionId = (player:getZoneID() - 17) / 2
+        local teleportLocation = xi.teleport.id.EXITPROMHOLLA + promyvionId
 
-    player:addKeyItem(xi.ki.LIGHT_OF_HOLLA + promyvionId)
-    player:messageSpecial(zones[player:getZoneID()].text.CANT_REMEMBER, xi.ki.LIGHT_OF_HOLLA + promyvionId)
-    player:addExp(1500)
-    mission:setVar('Option', 0)
+        player:addKeyItem(xi.ki.LIGHT_OF_HOLLA + promyvionId)
+        player:messageSpecial(zones[player:getZoneID()].text.CANT_REMEMBER, xi.ki.LIGHT_OF_HOLLA + promyvionId)
+        player:addExp(1500)
+        mission:setVar(player, 'Option', 0)
 
-    local numCompletedPromyvions = xi.cop.helpers.numPromyvionCompleted(player)
+        local numCompletedPromyvions = xi.cop.helpers.numPromyvionCompleted(player)
 
-    if
-        numCompletedPromyvions == 1 or
-        numCompletedPromyvions == 3
-    then
-        mission:complete(player)
+        if
+            numCompletedPromyvions == 1 or
+            numCompletedPromyvions == 3
+        then
+            mission:complete(player)
+        end
+
+        if numCompletedPromyvions == 3 then
+            -- We need to make sure the fallthrough does not trigger an overriding
+            -- teleport.
+            player:setLocalVar('toLufaise', 1)
+            teleportLocation = xi.teleport.id.LUFAISE
+        end
+
+        xi.teleport.to(player, teleportLocation)
     end
-
-    if numCompletedPromyvions == 3 then
-        teleportLocation = xi.teleport.id.LUFAISE
-    end
-
-    player:addStatusEffectEx(xi.effect.TELEPORT, 0, teleportLocation, 0, 1)
 end

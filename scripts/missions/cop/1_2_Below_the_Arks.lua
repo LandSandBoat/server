@@ -3,6 +3,10 @@
 -- Promathia 1-2
 -----------------------------------
 -- !addmission 6 118
+-- Pherimociel                     : !pos -31.627 1.002 67.956 243
+-- Shattered Telepoint (Konschtat) : !pos 135 19 220 108
+-- Shattered Telepoint (La Theine) : !pos 334 19 -60 102
+-- Shattered Telepoint (Tahrongi)  : !pos 179 35 255 117
 -----------------------------------
 require('scripts/globals/interaction/mission')
 require('scripts/globals/keyitems')
@@ -19,6 +23,34 @@ mission.reward =
 {
     nextMission = { xi.mission.log_id.COP, xi.mission.id.cop.THE_MOTHERCRYSTALS },
 }
+
+-- Some helper functions require access to this mission class in order to operate.  The below
+-- functions wrap the helper to ensure that value gets to them.
+local cermetGateOnTrigger = function(player, npc)
+    return xi.cop.helpers.cermetGateOnTrigger(mission, player, npc)
+end
+
+local shatteredTelepointOnTrigger = function(player, npc)
+    if mission:getVar(player, 'Status') == 1 then
+        return xi.cop.helpers.shatteredTelepointOnTrigger(mission, player, npc)
+    end
+end
+
+local shatteredTelepointSealMemory = function(player, csid, option, npc)
+    xi.cop.helpers.shatteredTelepointSealMemory(mission, player, csid, option, npc)
+end
+
+local largeApparatusOnTrigger = function(player, npc)
+    return xi.cop.helpers.largeApparatusOnTrigger(mission, player, npc)
+end
+
+local largeApparatusOnEventFinish = function(player, csid, option, npc)
+    xi.cop.helpers.largeApparatusOnEventFinish(mission, player, csid, option, npc)
+end
+
+local spireEventFinish = function(player, csid, option, npc)
+    xi.cop.helpers.spireEventFinish(mission, player, csid, option, npc)
+end
 
 mission.sections =
 {
@@ -84,13 +116,13 @@ mission.sections =
         {
             ['Shattered_Telepoint'] =
             {
-                onTrigger = xi.cop.helpers.shatteredTelepointOnTrigger,
+                onTrigger = shatteredTelepointOnTrigger,
             },
 
             onEventFinish =
             {
                 [913] = xi.cop.helpers.shatteredTelepointEntry,
-                [918] = xi.cop.helpers.shatteredTelepointSealMemory,
+                [918] = shatteredTelepointSealMemory,
             },
         },
 
@@ -98,13 +130,13 @@ mission.sections =
         {
             ['Shattered_Telepoint'] =
             {
-                onTrigger = xi.cop.helpers.shatteredTelepointOnTrigger,
+                onTrigger = shatteredTelepointOnTrigger,
             },
 
             onEventFinish =
             {
                 [202] = xi.cop.helpers.shatteredTelepointEntry,
-                [212] = xi.cop.helpers.shatteredTelepointSealMemory,
+                [212] = shatteredTelepointSealMemory,
             },
         },
 
@@ -112,13 +144,13 @@ mission.sections =
         {
             ['Shattered_Telepoint'] =
             {
-                onTrigger = xi.cop.helpers.shatteredTelepointOnTrigger,
+                onTrigger = shatteredTelepointOnTrigger,
             },
 
             onEventFinish =
             {
                 [913] = xi.cop.helpers.shatteredTelepointEntry,
-                [918] = xi.cop.helpers.shatteredTelepointSealMemory,
+                [918] = shatteredTelepointSealMemory,
             },
         },
 
@@ -126,32 +158,32 @@ mission.sections =
         {
             ['_0e0'] =
             {
-                onTrigger = xi.cop.helpers.cermetGateOnTrigger,
+                onTrigger = cermetGateOnTrigger,
             },
 
             ['_0e1'] =
             {
-                onTrigger = xi.cop.helpers.cermetGateOnTrigger,
+                onTrigger = cermetGateOnTrigger,
             },
 
             ['_0e2'] =
             {
-                onTrigger = xi.cop.helpers.cermetGateOnTrigger,
+                onTrigger = cermetGateOnTrigger,
             },
 
             ['_0e3'] =
             {
-                onTrigger = xi.cop.helpers.largeApparatusOnTrigger,
+                onTrigger = largeApparatusOnTrigger,
             },
 
             ['_0e5'] =
             {
-                onTrigger = xi.cop.helpers.largeApparatusOnTrigger,
+                onTrigger = largeApparatusOnTrigger,
             },
 
             ['_0e7'] =
             {
-                onTrigger = xi.cop.helpers.largeApparatusOnTrigger,
+                onTrigger = largeApparatusOnTrigger,
             },
 
             onZoneIn =
@@ -163,9 +195,9 @@ mission.sections =
 
             onEventFinish =
             {
-                [123] = xi.cop.helpers.largeApparatusOnEventFinish,
-                [125] = xi.cop.helpers.largeApparatusOnEventFinish,
-                [128] = xi.cop.helpers.largeApparatusOnEventFinish,
+                [122] = largeApparatusOnEventFinish,
+                [125] = largeApparatusOnEventFinish,
+                [128] = largeApparatusOnEventFinish,
 
                 [160] = function(player, csid, option, npc)
                     -- The same event is used by all Large Apparatus NPCs, so we need to determine where to send
@@ -196,7 +228,7 @@ mission.sections =
         {
             onEventFinish =
             {
-                [32001] = xi.cop.helpers.spireEventFinish,
+                [32001] = spireEventFinish,
             },
         },
 
@@ -216,7 +248,7 @@ mission.sections =
         {
             onEventFinish =
             {
-                [32001] = xi.cop.helpers.spireEventFinish,
+                [32001] = spireEventFinish,
             },
         },
 
@@ -236,7 +268,7 @@ mission.sections =
         {
             onEventFinish =
             {
-                [32001] = xi.cop.helpers.spireEventFinish,
+                [32001] = spireEventFinish,
             },
         },
     },

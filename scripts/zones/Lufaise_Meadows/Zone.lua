@@ -36,7 +36,8 @@ zone_object.onZoneIn = function(player, prevZone)
         player:setPos(-475.825, -20.461, 281.149, 11)
     end
 
-    if player:getCurrentMission(COP) == xi.mission.id.cop.AN_INVITATION_WEST and player:getCharVar("PromathiaStatus") == 0 then
+    -- TODO: This variable will be used in the next mission when converted, but for now we can be assured that it is 0
+    if player:getCurrentMission(COP) == xi.mission.id.cop.AN_INVITATION_WEST and player:getCharVar("Mission[6][138]Status") == 0 then
         cs = 110
     elseif player:getCurrentMission(COP) == xi.mission.id.cop.CHAINS_AND_BONDS and player:getCharVar("PromathiaStatus") == 0 then
         cs = 111
@@ -65,7 +66,8 @@ zone_object.onEventFinish = function(player, csid, option)
     if csid == 110 then
         player:messageSpecial(ID.text.KI_STOLEN, 0, xi.ki.MYSTERIOUS_AMULET)
         player:delKeyItem(xi.ki.MYSTERIOUS_AMULET)
-        player:setCharVar("PromathiaStatus", 1)
+        player:setCharVar("PromathiaStatus", 1) -- To be deprecated for the Status var below
+        player:setCharVar("Mission[6][138]Status", 1)
     elseif csid == 111 and npcUtil.giveItem(player, xi.items.DUCAL_GUARDS_RING) then
         player:setCharVar("PromathiaStatus", 1)
     elseif csid == 116 then

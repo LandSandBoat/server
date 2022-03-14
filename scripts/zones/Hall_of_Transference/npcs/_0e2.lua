@@ -14,8 +14,6 @@ entity.onTrigger = function(player, npc)
     -- Note: Below the Arks uses a different scheme, but the mission script blocks actions
     -- if the player is not currently with this memory.
 
-    -- TODO: See if this still applies in the next mission!
-
     if player:getCurrentMission(COP) >= xi.mission.id.cop.BELOW_THE_ARKS then
         player:startEvent(150)
     end
