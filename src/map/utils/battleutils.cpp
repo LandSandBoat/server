@@ -3831,7 +3831,7 @@ namespace battleutils
         {
             damage = (int32)(damage * (1.f + PChar->PMeritPoints->GetMeritValue(MERIT_INNIN_EFFECT, PChar) / 100.f));
         }
-        damage = damage * (1000 - resistance) / 1000;
+        damage = damage * (10000 - resistance) / 10000;
         damage = MagicDmgTaken(PDefender, damage, appliedEle);
         if (damage > 0)
         {

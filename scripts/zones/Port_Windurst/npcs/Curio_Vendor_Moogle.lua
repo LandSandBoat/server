@@ -43,7 +43,7 @@ entity.onTrigger = function(player, npc)
 	elseif (player:hasCompletedMission(xi.mission.log_id.TOAU, xi.mission.id.toau.NASHMEIRAS_PLEA) and not player:hasKeyItem(xi.keyItem.FL_WILDCAT_BADGE)) then
 	    player:addKeyItem(xi.keyItem.FL_WILDCAT_BADGE)
 		player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.keyItem.FL_WILDCAT_BADGE)
-	elseif (player:hasCompletedMission(xi.mission.log_id.TOAU, xi.mission.id.toau.ETERNAL_MERCENARY) and not player:hasKeyItem(xi.keyItem.CAPTAIN_WILDCAT_BADGE)) then
+	elseif (player:getCurrentMission(xi.mission.log_id.TOAU, xi.mission.id.toau.ETERNAL_MERCENARY) and not player:hasKeyItem(xi.keyItem.CAPTAIN_WILDCAT_BADGE)) then
 	    player:addKeyItem(xi.keyItem.CAPTAIN_WILDCAT_BADGE)
 		player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.keyItem.CAPTAIN_WILDCAT_BADGE)
 	end	
