@@ -33,7 +33,7 @@ entity.onTrigger = function(player, npc)
         }
     end
 
-    player:showText(npc, ID.text.MISSEULIEU_SHOP_DIALOG)
+    player:showText(npc, ID.text.MISSEULIEU_SHOP_DIALOG) -- 10912 at least with 2 items available
     xi.shop.general(player, stock)
 end
 

@@ -14,7 +14,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-
     if (player:getCurrentMission(COP) == xi.mission.id.cop.AN_ETERNAL_MELODY and player:getCharVar("PromathiaStatus") == 0) then
         player:startEvent(104)
     elseif (player:getCurrentMission(COP) == xi.mission.id.cop.THE_SECRETS_OF_WORSHIP and player:getCharVar("PromathiaStatus") == 0) then
@@ -24,7 +23,6 @@ entity.onTrigger = function(player, npc)
     elseif (player:getCurrentMission(COP) == xi.mission.id.cop.DAWN and player:getCharVar("PromathiaStatus")==5) then
         player:startEvent(543)
     end
-    return 1
 end
 
 entity.onEventUpdate = function(player, csid, option)

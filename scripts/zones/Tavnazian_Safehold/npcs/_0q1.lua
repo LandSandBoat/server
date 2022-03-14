@@ -18,11 +18,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(116)
     elseif (player:getCurrentMission(COP) >= xi.mission.id.cop.DISTANT_BELIEFS or player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_LAST_VERSE)) then
         player:startEvent(502)
-    else
-        -- player:messageSpecial()
     end
-
-    return 1
 end
 
 entity.onEventUpdate = function(player, csid, option)

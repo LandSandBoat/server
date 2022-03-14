@@ -35,8 +35,9 @@ entity.onTrigger = function(player, npc)
         else
             player:startEvent(130) -- optional dialogue
         end
-    else
-        player:startEvent(123)
+    -- else
+        -- TODO: True default is 265, need to investigate this message
+        -- player:startEvent(123)
     end
 
 end

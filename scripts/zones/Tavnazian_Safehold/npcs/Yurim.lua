@@ -95,12 +95,9 @@ entity.onTrigger = function(player, npc)
         end
 
     -- STANDARD DIALOG
-    else
-        if math.random(100) <= 50 then
-            player:startEvent(527)
-        else
-            player:startEvent(519)
-        end
+    -- TODO: This is not a true default action, and needs to be verified for when this begins to be displayed
+    -- else
+    --    player:startEvent(519)
     end
 end
 
