@@ -5,7 +5,7 @@ import sys
 import re
 import time
 import fileinput
-import distutils.spawn
+import shutil
 
 # Pre-flight sanity checks
 def preflight_exit():
@@ -150,7 +150,7 @@ express_enabled = False
 auto_backup = None
 auto_update_client = True
 mysql_bin = ''
-mysql_env = distutils.spawn.find_executable('mysql')
+mysql_env = shutil.which('mysql')
 if mysql_env:
     mysql_bin = os.path.dirname(mysql_env).replace('\\','/')
     if mysql_bin[-1] != '/':
@@ -429,7 +429,7 @@ def adjust_mysql_bin():
     while True:
         choice = input('Please enter the path to your MySQL bin directory or press enter to check PATH.\ne.g. C:\\Program Files\\MariaDB 10.5\\bin\\\n> ').replace('\\', '/')
         if choice == '':
-            mysql_file = distutils.spawn.find_executable('mysql')
+            mysql_file = shutil.which('mysql')
             if not mysql_file:
                 continue
             choice = os.path.dirname(mysql_file).replace('\\','/')
