@@ -43,9 +43,6 @@ entity.onTrigger = function(player, npc)
     -- COP Default dialogue change
     elseif player:getCurrentMission(COP) > copMissions.DARKNESS_NAMED then
         player:startEvent(315) -- "Jeuno offered its help"; TODO: might trigger as early as 5-2?
-    -- Default dialogue
-    else
-        player:startEvent(106)
     end
 end
 

@@ -49,6 +49,8 @@ mission.sections =
                 onTrigger = function(player, npc)
                     if mission:getVar(player, 'Status') == 0 then
                         return mission:progressEvent(102)
+                    else
+                        return mission:event(106, 1):replaceDefault()
                     end
                 end,
             },
@@ -81,6 +83,18 @@ mission.sections =
                     mission:complete(player)
                 end,
             },
+        },
+    },
+
+    {
+        check = function(player, currentMission, missionStatus, vars)
+            return player:hasCompletedMission(mission.areaId, mission.missionId)
+        end,
+
+        [xi.zone.TAVNAZIAN_SAFEHOLD] =
+        {
+            ['Arquil']       = mission:event(291):replaceDefault(),
+            ['Despachiaire'] = mission:event(106):replaceDefault(),
         },
     },
 }

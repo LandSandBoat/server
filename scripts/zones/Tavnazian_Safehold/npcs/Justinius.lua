@@ -19,11 +19,8 @@ entity.onTrigger = function(player, npc)
     local copCurrentMission = player:getCurrentMission(COP)
     local copMissionStatus = player:getCharVar("PromathiaStatus")
 
-    -- COP 2-3
-    if copCurrentMission == copMissions.DISTANT_BELIEFS and copMissionStatus == 3 then
-        player:startEvent(113)
     -- COP 2-4
-    elseif copCurrentMission == copMissions.AN_ETERNAL_MELODY and copMissionStatus == 1 then
+    if copCurrentMission == copMissions.AN_ETERNAL_MELODY and copMissionStatus == 1 then
         player:startEvent(127) -- optional dialogue
     -- COP 4-1
     elseif copCurrentMission == copMissions.SHELTERING_DOUBT and copMissionStatus == 2 then
@@ -45,11 +42,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 113 then
-        player:setCharVar("PromathiaStatus", 0)
-        player:completeMission(xi.mission.log_id.COP, copMissions.DISTANT_BELIEFS)
-        player:addMission(xi.mission.log_id.COP, copMissions.AN_ETERNAL_MELODY)
-    elseif csid == 109 then
+    if csid == 109 then
         player:setCharVar("PromathiaStatus", 3)
     elseif csid == 110 then
         player:setCharVar("PromathiaStatus", 0)

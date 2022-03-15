@@ -8,6 +8,7 @@ return {
     ['Bibokk-Molbukk']   = { event = 339 },
     ['Calengeard']       = { event = 260 },
     ['Chemioue']         = { event = 280 },
+    ['Despachiaire']     = { event = 106 }, -- NOTE: 0-Parameter values appear to be default, but this has multiple outputs
     ['Dominec']          = { event = 380 },
     ['Epinolle']         = { event = 230 },
     ['Equette']          = { event = 162 },
