@@ -19,11 +19,11 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 ===========================================================================
 */
 
-#include "../../common/logging.h"
-#include "../../common/socket.h"
-#include "../../common/sql.h"
-#include "../../common/timer.h"
-#include "../../common/utils.h"
+#include "common/logging.h"
+#include "common/socket.h"
+#include "common/sql.h"
+#include "common/timer.h"
+#include "common/utils.h"
 
 #include <array>
 #include <chrono>
@@ -31,68 +31,68 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include <cstdio>
 #include <cstring>
 
-#include "../lua/luautils.h"
+#include "lua/luautils.h"
 
-#include "../ai/ai_container.h"
-#include "../ai/states/attack_state.h"
-#include "../ai/states/item_state.h"
+#include "ai/ai_container.h"
+#include "ai/states/attack_state.h"
+#include "ai/states/item_state.h"
 
-#include "../packets/char_abilities.h"
-#include "../packets/char_appearance.h"
-#include "../packets/char_equip.h"
-#include "../packets/char_health.h"
-#include "../packets/char_job_extra.h"
-#include "../packets/char_jobs.h"
-#include "../packets/char_recast.h"
-#include "../packets/char_skills.h"
-#include "../packets/char_stats.h"
-#include "../packets/char_sync.h"
-#include "../packets/char_update.h"
-#include "../packets/chat_message.h"
-#include "../packets/conquest_map.h"
-#include "../packets/delivery_box.h"
-#include "../packets/inventory_assign.h"
-#include "../packets/inventory_finish.h"
-#include "../packets/inventory_item.h"
-#include "../packets/inventory_modify.h"
-#include "../packets/key_items.h"
-#include "../packets/linkshell_equip.h"
-#include "../packets/menu_jobpoints.h"
-#include "../packets/menu_merit.h"
-#include "../packets/message_basic.h"
-#include "../packets/message_combat.h"
-#include "../packets/message_special.h"
-#include "../packets/message_standard.h"
-#include "../packets/quest_mission_log.h"
+#include "packets/char_abilities.h"
+#include "packets/char_appearance.h"
+#include "packets/char_equip.h"
+#include "packets/char_health.h"
+#include "packets/char_job_extra.h"
+#include "packets/char_jobs.h"
+#include "packets/char_recast.h"
+#include "packets/char_skills.h"
+#include "packets/char_stats.h"
+#include "packets/char_sync.h"
+#include "packets/char_update.h"
+#include "packets/chat_message.h"
+#include "packets/conquest_map.h"
+#include "packets/delivery_box.h"
+#include "packets/inventory_assign.h"
+#include "packets/inventory_finish.h"
+#include "packets/inventory_item.h"
+#include "packets/inventory_modify.h"
+#include "packets/key_items.h"
+#include "packets/linkshell_equip.h"
+#include "packets/menu_jobpoints.h"
+#include "packets/menu_merit.h"
+#include "packets/message_basic.h"
+#include "packets/message_combat.h"
+#include "packets/message_special.h"
+#include "packets/message_standard.h"
+#include "packets/quest_mission_log.h"
 
-#include "../packets/roe_sparkupdate.h"
-#include "../packets/server_ip.h"
-#include "../packets/timer_bar_util.h"
+#include "packets/roe_sparkupdate.h"
+#include "packets/server_ip.h"
+#include "packets/timer_bar_util.h"
 
-#include "../ability.h"
-#include "../alliance.h"
-#include "../conquest_system.h"
-#include "../grades.h"
-#include "../item_container.h"
-#include "../latent_effect_container.h"
-#include "../linkshell.h"
-#include "../map.h"
-#include "../mob_modifier.h"
-#include "../recast_container.h"
-#include "../roe.h"
-#include "../spell.h"
-#include "../status_effect_container.h"
-#include "../trait.h"
-#include "../treasure_pool.h"
-#include "../unitychat.h"
-#include "../universal_container.h"
-#include "../vana_time.h"
-#include "../weapon_skill.h"
+#include "ability.h"
+#include "alliance.h"
+#include "conquest_system.h"
+#include "grades.h"
+#include "item_container.h"
+#include "latent_effect_container.h"
+#include "linkshell.h"
+#include "map.h"
+#include "mob_modifier.h"
+#include "recast_container.h"
+#include "roe.h"
+#include "spell.h"
+#include "status_effect_container.h"
+#include "trait.h"
+#include "treasure_pool.h"
+#include "unitychat.h"
+#include "universal_container.h"
+#include "vana_time.h"
+#include "weapon_skill.h"
 
-#include "../entities/automatonentity.h"
-#include "../entities/charentity.h"
-#include "../entities/mobentity.h"
-#include "../entities/petentity.h"
+#include "entities/automatonentity.h"
+#include "entities/charentity.h"
+#include "entities/mobentity.h"
+#include "entities/petentity.h"
 
 #include "battleutils.h"
 #include "blueutils.h"
@@ -104,7 +104,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 /************************************************************************
  *                                                                       *
- *  Таблицы получаемого опыта                                            *
+ *  Experience tables                                                    *
  *                                                                       *
  ************************************************************************/
 
@@ -123,26 +123,24 @@ namespace charutils
 {
     /************************************************************************
      *                                                                       *
-     *  Расчет характеристик персонажей                                      *
+     *  Calculation of stats of characters                                   *
      *                                                                       *
      ************************************************************************/
 
     void CalculateStats(CCharEntity* PChar)
     {
-        // Объявление переменных, нужных для рассчета.
+        float raceStat  = 0; // The final HP number for a race-based level.
+        float jobStat   = 0; // Estimate HP level for the level based on the primary profession.
+        float sJobStat  = 0; // HP final number for a level based on a secondary profession.
+        int32 bonusStat = 0; // HP bonus number that is added subject to some conditions.
 
-        float raceStat  = 0; // конечное число HP для уровня на основе расы.
-        float jobStat   = 0; // конечное число HP для уровня на основе первичной профессии.
-        float sJobStat  = 0; // коенчное число HP для уровня на основе вторичной профессии.
-        int32 bonusStat = 0; // бонусное число HP которое добавляется при соблюдении некоторых условий.
-
-        int32 baseValueColumn   = 0; // номер колонки с базовым количеством HP
-        int32 scaleTo60Column   = 1; // номер колонки с модификатором до 60 уровня
-        int32 scaleOver30Column = 2; // номер колонки с модификатором после 30 уровня
-        int32 scaleOver60Column = 3; // номер колонки с модификатором после 60 уровня
-        int32 scaleOver75Column = 4; // номер колонки с модификатором после 75 уровня
-        int32 scaleOver60       = 2; // номер колонки с модификатором для расчета MP после 60 уровня
-        int32 scaleOver75       = 3; // номер колонки с модификатором для расчета Статов после 75-го уровня
+        int32 baseValueColumn   = 0; // Column number with base number HP
+        int32 scaleTo60Column   = 1; // Column number with modifier up to 60 levels
+        int32 scaleOver30Column = 2; // Column number with modifier after level 30
+        int32 scaleOver60Column = 3; // Column number with modifier after level 60
+        int32 scaleOver75Column = 4; // Column number with modifier after level 75
+        int32 scaleOver60       = 2; // Column number with modifier for MP calculation after level 60
+        int32 scaleOver75       = 3; // The speaker number with the modifier to calculate the stats after the 75th level
 
         uint8 grade;
 
@@ -152,7 +150,7 @@ namespace charutils
         JOBTYPE    sjob        = PChar->GetSJob();
         MERIT_TYPE statMerit[] = { MERIT_STR, MERIT_DEX, MERIT_VIT, MERIT_AGI, MERIT_INT, MERIT_MND, MERIT_CHR };
 
-        uint8 race = 0; // Human
+        uint8 race = 0; // Hume
 
         switch (PChar->look.race)
         {
@@ -172,26 +170,26 @@ namespace charutils
                 break; // Galka
         }
 
-        // Расчет прироста HP от main job
+        // HP Calculation from Main Job
 
-        int32 mainLevelOver30     = std::clamp(mlvl - 30, 0, 30); // Расчет условия +1HP каждый лвл после 30 уровня
-        int32 mainLevelUpTo60     = (mlvl < 60 ? mlvl - 1 : 59);  // Первый режим рассчета до 60 уровня (Используется так же и для MP)
-        int32 mainLevelOver60To75 = std::clamp(mlvl - 60, 0, 15); // Второй режим расчета после 60 уровня
-        int32 mainLevelOver75     = (mlvl < 75 ? 0 : mlvl - 75);  // Третий режим расчета после 75 уровня
+        int32 mainLevelOver30     = std::clamp(mlvl - 30, 0, 30); // Calculation of the condition + 1HP each LVL after level 30
+        int32 mainLevelUpTo60     = (mlvl < 60 ? mlvl - 1 : 59);  // The first time spent up to level 60 (is also used for MP)
+        int32 mainLevelOver60To75 = std::clamp(mlvl - 60, 0, 15); // The second calculation mode after level 60
+        int32 mainLevelOver75     = (mlvl < 75 ? 0 : mlvl - 75);  // Third Calculation Mode after level 75
 
-        //Расчет бонусного количества HP
+        // Calculation of the bonus amount of HP
 
-        int32 mainLevelOver10           = (mlvl < 10 ? 0 : mlvl - 10);  // +2HP на каждом уровне после 10
-        int32 mainLevelOver50andUnder60 = std::clamp(mlvl - 50, 0, 10); // +2HP на каждом уровне в промежутке от 50 до 60 уровня
+        int32 mainLevelOver10           = (mlvl < 10 ? 0 : mlvl - 10);  // + 2hp at each level after 10
+        int32 mainLevelOver50andUnder60 = std::clamp(mlvl - 50, 0, 10); // + 2hp at each level between 50 to 60 level
         int32 mainLevelOver60           = (mlvl < 60 ? 0 : mlvl - 60);
 
-        // Расчет прироста HP от дополнительной профессии
+        // HP calculation of an additional profession
 
-        int32 subLevelOver10 = std::clamp(slvl - 10, 0, 20); // +1HP на каждый уровень после 10 (/2)
-        int32 subLevelOver30 = (slvl < 30 ? 0 : slvl - 30);  // +1HP на каждый уровень после 30
+        int32 subLevelOver10 = std::clamp(slvl - 10, 0, 20); // + 1HP for each level after 10 (/ 2)
+        int32 subLevelOver30 = (slvl < 30 ? 0 : slvl - 30);  // + 1HP for each level after 30
 
-        // Расчет raceStat jobStat bonusStat sJobStat
-        // Расчет по расе
+        // Расчет Racestat Jobstat Bonusstat Sjobstat
+        // Calculation of race
 
         grade = grade::GetRaceGrades(race, 0);
 
@@ -201,17 +199,17 @@ namespace charutils
 
         // raceStat = (int32)(statScale[grade][baseValueColumn] + statScale[grade][scaleTo60Column] * (mlvl - 1));
 
-        // Расчет по main job
+        // Calculation on Main Job
         grade = grade::GetJobGrade(mjob, 0);
 
         jobStat = grade::GetHPScale(grade, baseValueColumn) + (grade::GetHPScale(grade, scaleTo60Column) * mainLevelUpTo60) +
                   (grade::GetHPScale(grade, scaleOver30Column) * mainLevelOver30) + (grade::GetHPScale(grade, scaleOver60Column) * mainLevelOver60To75) +
                   (grade::GetHPScale(grade, scaleOver75Column) * mainLevelOver75);
 
-        // Расчет бонусных HP
+        // Calculation of bonus HP.
         bonusStat = (mainLevelOver10 + mainLevelOver50andUnder60) * 2;
 
-        // Расчет по support job
+        // Calculation on Support Job
         if (slvl > 0)
         {
             grade = grade::GetJobGrade(sjob, 0);
@@ -224,32 +222,32 @@ namespace charutils
         uint16 MeritBonus   = PChar->PMeritPoints->GetMeritValue(MERIT_MAX_HP, PChar);
         PChar->health.maxhp = (int16)(map_config.player_hp_multiplier * (raceStat + jobStat + bonusStat + sJobStat) + MeritBonus);
 
-        //Начало расчера MP
+        // The beginning of the MP
 
         raceStat = 0;
         jobStat  = 0;
         sJobStat = 0;
 
-        // Расчет MP расе.
+        // Calculation of the MP race.
         grade = grade::GetRaceGrades(race, 1);
 
-        //Если у main job нет МП рейтинга, расчитиваем расовый бонус на основе уровня subjob уровня(при условии, что у него есть МП рейтинг)
+        // If Main Job has no MP rating, we calculate a racial bonus based on the level of the subjob level (provided that he has a MP rating)
         if (grade::GetJobGrade(mjob, 1) == 0)
         {
-            if (grade::GetJobGrade(sjob, 1) != 0 && slvl > 0) // В этом выражении ошибка
+            if (grade::GetJobGrade(sjob, 1) != 0 && slvl > 0) // TODO: In this expression, an error
             {
                 raceStat =
-                    (grade::GetMPScale(grade, 0) + grade::GetMPScale(grade, scaleTo60Column) * (slvl - 1)) / map_config.sj_mp_divisor; // Вот здесь ошибка
+                    (grade::GetMPScale(grade, 0) + grade::GetMPScale(grade, scaleTo60Column) * (slvl - 1)) / map_config.sj_mp_divisor; // TODO: Here is a mistake
             }
         }
         else
         {
-            //Расчет нормального расового бонуса
+            // Calculation of a normal racial bonus
             raceStat = grade::GetMPScale(grade, 0) + grade::GetMPScale(grade, scaleTo60Column) * mainLevelUpTo60 +
                        grade::GetMPScale(grade, scaleOver60) * mainLevelOver60;
         }
 
-        //Для главной профессии
+        // Main Job
         grade = grade::GetJobGrade(mjob, 1);
         if (grade > 0)
         {
@@ -257,7 +255,7 @@ namespace charutils
                       grade::GetMPScale(grade, scaleOver60) * mainLevelOver60;
         }
 
-        //Для дополнительной профессии
+        // Subjob
         if (slvl > 0)
         {
             grade    = grade::GetJobGrade(sjob, 1);
@@ -265,15 +263,15 @@ namespace charutils
         }
 
         MeritBonus          = PChar->PMeritPoints->GetMeritValue(MERIT_MAX_MP, PChar);
-        PChar->health.maxmp = (int16)(map_config.player_mp_multiplier * (raceStat + jobStat + sJobStat) + MeritBonus); // результат расчета MP
+        PChar->health.maxmp = (int16)(map_config.player_mp_multiplier * (raceStat + jobStat + sJobStat) + MeritBonus); // MP calculation result
 
-        //Начало расчета характеристик
+        // Start calculating Stats
 
         uint8 counter = 0;
 
         for (uint8 StatIndex = 2; StatIndex <= 8; ++StatIndex)
         {
-            // расчет по расе
+            // Calculation of race
             grade    = grade::GetRaceGrades(race, StatIndex);
             raceStat = grade::GetStatScale(grade, 0) + grade::GetStatScale(grade, scaleTo60Column) * mainLevelUpTo60;
 
@@ -287,7 +285,7 @@ namespace charutils
                 }
             }
 
-            // расчет по профессии
+            // Calculation by profession
             grade   = grade::GetJobGrade(mjob, StatIndex);
             jobStat = grade::GetStatScale(grade, 0) + grade::GetStatScale(grade, scaleTo60Column) * mainLevelUpTo60;
 
@@ -301,7 +299,7 @@ namespace charutils
                 }
             }
 
-            // расчет по дополнительной профессии
+            // Calculation for an additional profession
             if (slvl > 0)
             {
                 grade    = grade::GetJobGrade(sjob, StatIndex);
@@ -315,7 +313,7 @@ namespace charutils
             // get each merit bonus stat, str,dex,vit and so on...
             MeritBonus = PChar->PMeritPoints->GetMeritValue(statMerit[StatIndex - 2], PChar);
 
-            // Вывод значения
+            // Value output
             ref<uint16>(&PChar->stats, counter) = (uint16)(map_config.player_stat_multiplier * (raceStat + jobStat + sJobStat) + MeritBonus);
             counter += 2;
         }
@@ -323,8 +321,8 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Предварительная версия загрузки персонажа. Функция будет             *
-     *  оптимизирована после определения всех необходимых данных и таблиц    *
+     *  The preliminary version of the character loading. Function will be   *
+     *  optimized after determining all the necessary data and tables        *
      *                                                                       *
      ************************************************************************/
 
@@ -893,7 +891,7 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Загружаем инвентарь персонажа                                        *
+     *  Download Character inventory                                         *
      *                                                                       *
      ************************************************************************/
 
@@ -1097,7 +1095,7 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Отправляем список текущих/завершенных квестов и миссий               *
+     *  We send a list of current / completed quests and missions.           *
      *                                                                       *
      ************************************************************************/
 
@@ -1136,7 +1134,7 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Отправляем списки ключевых предметов персонажа                       *
+     *  Send lists of character key items                                    *
      *                                                                       *
      ************************************************************************/
 
@@ -1229,11 +1227,9 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Добавляем новый предмет персонажу в выбранный контейнер              *
+     *  Add a new item to the character in the selected container            *
      *                                                                       *
      ************************************************************************/
-
-    // TODO: мне не нравится параметр silens, нужно придумать что-нибудь более элегантное
 
     uint8 AddItem(CCharEntity* PChar, uint8 LocationID, uint16 ItemID, uint32 quantity, bool silence)
     {
@@ -1255,7 +1251,7 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Добавляем новый предмет персонажу в выбранный контейнер              *
+     *  Add a new item to the character in the selected container            *
      *                                                                       *
      ************************************************************************/
 
@@ -1329,7 +1325,7 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Проверяем наличие предмета у персонажа                               *
+     *  Check the availability of the item from the character                *
      *                                                                       *
      ************************************************************************/
 
@@ -1376,7 +1372,7 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Перемещаем предмет в указанную ячейки или первую пустую              *
+     *  Move the object to the specified cells or the first empty            *
      *                                                                       *
      ************************************************************************/
 
@@ -1411,7 +1407,7 @@ namespace charutils
                     PChar->pushPacket(new CInventoryItemPacket(PItemContainer->GetItem(NewSlotID), LocationID, NewSlotID));
                     return NewSlotID;
                 }
-                PItemContainer->InsertItem(nullptr, NewSlotID); // отменяем все изменения контейнера
+                PItemContainer->InsertItem(nullptr, NewSlotID); // We cancel all changes in the container
             }
         }
         ShowError("charutils::MoveItem: item can't be moved");
@@ -1562,7 +1558,7 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Совершаем обмен между персонажами                                    *
+     *  Do the exchange between characters                                   *
      *                                                                       *
      ************************************************************************/
 
@@ -1598,8 +1594,8 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Снимаем с персонажа экипированный предмет без обновления внешного    *
-     *  вида. Используется как вспомогательная функция в связке с другими    *
+     * Remove from the character equipped item without updating the external *
+     * species. Used as an auxiliary function in a bundle with others        *
      *                                                                       *
      ************************************************************************/
 
@@ -1684,7 +1680,7 @@ namespace charutils
             PChar->PLatentEffectContainer->DelLatentEffects(((CItemEquipment*)PItem)->getReqLvl(), equipSlotID);
             PChar->delPetModifiers(&((CItemEquipment*)PItem)->petModList);
 
-            PChar->pushPacket(new CInventoryAssignPacket(PItem, INV_NORMAL)); //???
+            PChar->pushPacket(new CInventoryAssignPacket(PItem, INV_NORMAL)); // ???
             PChar->pushPacket(new CEquipPacket(0, equipSlotID, LOC_INVENTORY));
 
             switch (equipSlotID)
@@ -1795,7 +1791,7 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Пытаемся экипировать предмет с соблюдением всех условий              *
+     * We are trying to equip the subject in compliance with all conditions  *
      *                                                                       *
      ************************************************************************/
 
@@ -2302,7 +2298,7 @@ namespace charutils
                         PChar->PRecastContainer->Add(RECAST_ITEM, slotID << 8 | containerID,
                                                      PItem->getReuseTime() / 1000); // add recast timer to Recast List from any bag
 
-                        // не забываем обновить таймер при экипировке предмета
+                        // Do not forget to update the timer when equipping the subject
 
                         PChar->pushPacket(new CInventoryItemPacket(PItem, containerID, slotID));
                         PChar->pushPacket(new CInventoryFinishPacket());
@@ -2357,7 +2353,7 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Проверяем возможность персонажа носить экипированные на нем предметы *
+     * Check the feature of the character wearing the items equipped on it   *
      *                                                                       *
      ************************************************************************/
 
@@ -2432,13 +2428,13 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Проверяем логику всей экипировки персонажа                           *
+     *  Check the logic of all character equipment                           *
      *                                                                       *
      ************************************************************************/
 
-    // позднее нужно будет сделать экипировку в структуре,
-    // куда добавить битовое поле, указывающее, в какой ячейке находится экипировка с условием
-    // для начала это поле избавит нас от проверки ячеек у персонажей без экипировки с условием
+    // Later will need to make equipment in the structure,
+    // where to add a bit field indicating in which cell is the equipment with the condition
+    // To begin with, this field will save us from checking cells in characters without equipment with the condition
 
     void CheckEquipLogic(CCharEntity* PChar, SCRIPTTYPE ScriptType, uint32 param)
     {
@@ -2583,8 +2579,8 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Собираем рабочую таблицу способностей персонажа. С нулевым уровнем   *
-     *  должны быть 2h способности. По этому условию отсеиваем их для sjob   *
+     *  Collect the work table of the character's abilities.With zero level  *
+     *  There must be 2H abilities.On this condition, sift them for SJOB     *
      *                                                                       *
      ************************************************************************/
 
@@ -2674,8 +2670,8 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Собираем рабочую таблицу умений персонажа на основе реальной.        *
-     *  Добавляем ограничения, отмечаем умения основной профессии (rank != 0)*
+     *  Collect the work table of the character skills based on real.        *
+     *  Add restrictions, note the skills of the main profession (rank! = 0) *
      *                                                                       *
      ************************************************************************/
 
