@@ -3,7 +3,7 @@
 -- Promathia 2-3
 -----------------------------------
 -- !addmission 6 228
--- Minotaur  :
+-- Minotaur    :
 -- Iron Gate   : !pos -70.800 -1.500 60.000 27
 -- Ornate Gate : !pos -95 -24 60 27
 -----------------------------------
@@ -88,7 +88,8 @@ mission.sections =
 
         [xi.zone.TAVNAZIAN_SAFEHOLD] =
         {
-            ['Justinius'] = mission:event(125):replaceDefault(),
+            ['Chemioue']    = mission:event(281):replaceDefault(), -- Carries over up to beginning of Ancient Vows
+            ['Mengrenaux']  = mission:event(271):replaceDefault(), -- Carries over up to beginning of Ancient Vows
         },
     },
 }

@@ -33,6 +33,7 @@ return {
     ['Noam']             = { event = 363 },
     ['Odeya']            = { event = 150 },
     ['Ondieulix']        = { event = 285 },
+    ['Parelbriaux']      = { event = 294 }, -- TODO: Verify, it takes a bit before we settle on this CS
     ['Pradiulot']        = { event = 192 },
     ['qm_unforgiven']    = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },
     ['Quelveuiat']       = { event = 122 },

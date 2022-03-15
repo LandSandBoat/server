@@ -19,11 +19,8 @@ entity.onTrigger = function(player, npc)
     local copCurrentMission = player:getCurrentMission(COP)
     local copMissionStatus = player:getCharVar("PromathiaStatus")
 
-    -- COP 2-4
-    if copCurrentMission == copMissions.AN_ETERNAL_MELODY and copMissionStatus == 1 then
-        player:startEvent(127) -- optional dialogue
     -- COP 4-1
-    elseif copCurrentMission == copMissions.SHELTERING_DOUBT and copMissionStatus == 2 then
+    if copCurrentMission == copMissions.SHELTERING_DOUBT and copMissionStatus == 2 then
         player:startEvent(109)
     -- COP 4-2
     elseif copCurrentMission == copMissions.THE_SAVAGE then
