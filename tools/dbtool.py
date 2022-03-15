@@ -566,22 +566,22 @@ def bad_selection():
     time.sleep(0.5)
 
 def menu():
-    print(colorama.Fore.GREEN + 'o' + colorama.Fore.RED + '--------------------------------' + colorama.Fore.GREEN + 'o\n' + colorama.Fore.RED +
+    print(colorama.Fore.GREEN + 'o' + colorama.Fore.RED + '---------------------------------------' + colorama.Fore.GREEN + 'o\n' + colorama.Fore.RED +
           '| ' + colorama.Style.RESET_ALL + 'LandSandBoat Database Management Tool ' + colorama.Fore.RED + '|\n'
-          '| ' + colorama.Style.RESET_ALL + str('Connected to ' + database).center(30) + colorama.Fore.RED + ' |')
+          '| ' + colorama.Style.RESET_ALL + str('Connected to ' + database).center(30) + colorama.Fore.RED + '        |')
     if current_version:
-        print(colorama.Fore.RED + '| ' + colorama.Style.RESET_ALL + str('#' + current_version).center(30) + colorama.Fore.RED + ' |')
-    print(colorama.Fore.GREEN + 'o' + colorama.Fore.RED + '--------------------------------' + colorama.Fore.GREEN + 'o')
-    if express_enabled: 
-        print(colorama.Fore.RED + '|' + colorama.Fore.GREEN + 'e' + colorama.Style.RESET_ALL + '. Express Update ' + str('(#' + release_version + ')').ljust(14) + colorama.Fore.RED + '|')
-    print(colorama.Fore.RED + '|' + colorama.Fore.GREEN + '1' + colorama.Style.RESET_ALL + '. Update DB                    ' + colorama.Fore.RED + '|\n'
-          '|' + colorama.Fore.GREEN + '2' + colorama.Style.RESET_ALL + '. Check migrations             ' + colorama.Fore.RED + '|\n'
-          '|' + colorama.Fore.GREEN + '3' + colorama.Style.RESET_ALL + '. Backup                       ' + colorama.Fore.RED + '|\n'
-          '|' + colorama.Fore.GREEN + '4' + colorama.Style.RESET_ALL + '. Restore/Import               ' + colorama.Fore.RED + '|\n'
-          '|' + colorama.Fore.GREEN + 'r' + colorama.Style.RESET_ALL + '. Reset DB                     ' + colorama.Fore.RED + '|\n'
-          '|' + colorama.Fore.GREEN + 's' + colorama.Style.RESET_ALL + '. Settings                     ' + colorama.Fore.RED + '|\n'
-          '|' + colorama.Fore.GREEN + 'q' + colorama.Style.RESET_ALL + '. Quit                         ' + colorama.Fore.RED + '|\n'
-          + colorama.Fore.GREEN + 'o' + colorama.Fore.RED + '--------------------------------' + colorama.Fore.GREEN + 'o')
+        print(colorama.Fore.RED + '| ' + colorama.Style.RESET_ALL + str('#' + current_version).center(30) + colorama.Fore.RED + '        |')
+    print(colorama.Fore.GREEN + 'o' + colorama.Fore.RED + '---------------------------------------' + colorama.Fore.GREEN + 'o')
+    if express_enabled:
+        print(colorama.Fore.RED + '|' + colorama.Fore.GREEN + 'e' + colorama.Style.RESET_ALL + '. Express Update ' + str('(#' + release_version + ')').ljust(14) + colorama.Fore.RED + '       |')
+    print(colorama.Fore.RED + '|' + colorama.Fore.GREEN + '1' + colorama.Style.RESET_ALL + '. Update DB                           ' + colorama.Fore.RED + '|\n'
+          '|' + colorama.Fore.GREEN + '2' + colorama.Style.RESET_ALL + '. Check migrations                    ' + colorama.Fore.RED + '|\n'
+          '|' + colorama.Fore.GREEN + '3' + colorama.Style.RESET_ALL + '. Backup                              ' + colorama.Fore.RED + '|\n'
+          '|' + colorama.Fore.GREEN + '4' + colorama.Style.RESET_ALL + '. Restore/Import                      ' + colorama.Fore.RED + '|\n'
+          '|' + colorama.Fore.GREEN + 'r' + colorama.Style.RESET_ALL + '. Reset DB                            ' + colorama.Fore.RED + '|\n'
+          '|' + colorama.Fore.GREEN + 's' + colorama.Style.RESET_ALL + '. Settings                            ' + colorama.Fore.RED + '|\n'
+          '|' + colorama.Fore.GREEN + 'q' + colorama.Style.RESET_ALL + '. Quit                                ' + colorama.Fore.RED + '|\n'
+          + colorama.Fore.GREEN + 'o' + colorama.Fore.RED + '---------------------------------------' + colorama.Fore.GREEN + 'o')
 
 def settings():
     fetch_configs()
