@@ -28,6 +28,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "common/timer.h"
 #include "common/utils.h"
 #include "common/version.h"
+#include "common/settings_manager.h"
 
 #include <cstring>
 #include <utility>

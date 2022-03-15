@@ -51,6 +51,7 @@ set(SOURCES
     latent_effect.h
     linkshell.cpp
     linkshell.h
+    main.cpp
     map.cpp
     map.h
     merit.cpp
