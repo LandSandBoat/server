@@ -156,6 +156,7 @@ namespace battleutils
                                 bool primary, float tpMultiplier, uint16 bonusTP, float targetTPMultiplier);
     int32 TakeSkillchainDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, int32 lastSkillDamage, CBattleEntity* taChar);
     int32 TakeSpellDamage(CBattleEntity* PDefender, CCharEntity* PAttacker, CSpell* PSpell, int32 damage, ATTACK_TYPE attackType, DAMAGE_TYPE damageType);
+    int32 TakeSwipeLungeDamage(CBattleEntity* PDefender, CCharEntity* PAttacker, int32 damage, ATTACK_TYPE attackType, DAMAGE_TYPE damageType);
 
     bool   TryInterruptSpell(CBattleEntity* PAttacker, CBattleEntity* PDefender, CSpell* PSpell);
     float  GetRangedDamageRatio(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool isCritical);

@@ -2381,6 +2381,29 @@ namespace battleutils
 
     /************************************************************************
     *                                                                       *
+    *  Handles Damage from Swipe/Lunge (dmg type reductions calced in lua)  *
+    *                                                                       *
+    ************************************************************************/
+
+    int32 TakeSwipeLungeDamage(CBattleEntity* PDefender, CCharEntity* PAttacker, int32 damage, ATTACK_TYPE attackType, DAMAGE_TYPE damageType)
+    {
+        PDefender->takeDamage(damage, PAttacker, attackType, damageType);
+
+        // Remove effects from damage
+        if (damage > 0)
+        {
+            PDefender->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DAMAGE);
+            // Check for bind breaking
+            BindBreakCheck(PAttacker, PDefender);
+
+            // Do targets get TP?
+        }
+
+        return damage;
+    }
+
+    /************************************************************************
+    *                                                                       *
     *  Calculate Probability attack will hit (20% min cap - 95~99% max cap) *
     *  attackNumber: 0=main, 1=sub, 2=kick                                  *
     *                                                                       *

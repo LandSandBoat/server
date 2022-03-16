@@ -618,6 +618,7 @@ public:
     int    getRACC();
     uint16 getRATT();
     uint16 getILvlMacc();
+    uint16 getILvlSkill();
     bool   isSpellAoE(uint16 spellId);
 
     int32 physicalDmgTaken(double damage, sol::variadic_args va);
@@ -648,6 +649,7 @@ public:
                                 float tpMultiplier, uint16 bonusTP, float targetTPMultiplier);
 
     int32 takeSpellDamage(CLuaBaseEntity* caster, CLuaSpell* spell, int32 damage, uint8 atkType, uint8 dmgType);
+    int32 takeSwipeLungeDamage(CLuaBaseEntity* caster, int32 damage, uint8 atkType, uint8 dmgType);
 
     // Pets and Automations
     void spawnPet(sol::object const& arg0); // Calls Pet
@@ -700,7 +702,9 @@ public:
 
     uint8 getActiveRuneCount();
     uint16 getHighestRuneEffect();
+    uint16 getNewestRuneEffect();
     void  removeOldestRune();
+    void  removeNewestRune();
     void  removeAllRunes();
 
     // Mob Entity-Specific

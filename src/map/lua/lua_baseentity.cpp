@@ -10672,6 +10672,23 @@ uint16 CLuaBaseEntity::getILvlMacc()
 }
 
 /************************************************************************
+ *  Function: getILvlSkill()
+ *  Purpose : Returns the Weapon Skill Bonus value of an equipped Main Weapon
+ *  Example : player:getILvlSkill()
+ *  Notes   : Value of m_iLvlSkill (private member of CItemWeapon)
+ ************************************************************************/
+
+uint16 CLuaBaseEntity::getILvlSkill()
+{
+    if (auto* weapon = dynamic_cast<CItemWeapon*>(static_cast<CBattleEntity*>(m_PBaseEntity)->m_Weapons[SLOT_MAIN]))
+    {
+        return weapon->getILvlSkill();
+    }
+
+    return 0;
+}
+
+/************************************************************************
  *  Function: isSpellAoE()
  *  Purpose : Returns true if a specified spell is AoE
  *  Example : if caster:isSpellAoE(spell:getID()) then
@@ -11105,6 +11122,22 @@ int32 CLuaBaseEntity::takeSpellDamage(CLuaBaseEntity* caster, CLuaSpell* spell, 
     DAMAGE_TYPE damageType = static_cast<DAMAGE_TYPE>(dmgType);
 
     return battleutils::TakeSpellDamage(static_cast<CBattleEntity*>(m_PBaseEntity), PChar, PSpell, damage, attackType, damageType);
+}
+
+/************************************************************************
+ *  Function: int32 TakeSwipeLungeDamage()
+ *  Purpose : Applies damage to target from Swipe/Lunge
+ *  Example : target:takeSwipeLungeDamage(caster, spell, finaldmg, attackType, damageType)
+ *  Notes   :
+ ************************************************************************/
+
+int32 CLuaBaseEntity::takeSwipeLungeDamage(CLuaBaseEntity* caster, int32 damage, uint8 atkType, uint8 dmgType)
+{
+    auto*       PChar      = static_cast<CCharEntity*>(caster->m_PBaseEntity);
+    ATTACK_TYPE attackType = static_cast<ATTACK_TYPE>(atkType);
+    DAMAGE_TYPE damageType = static_cast<DAMAGE_TYPE>(dmgType);
+
+    return battleutils::TakeSwipeLungeDamage(static_cast<CBattleEntity*>(m_PBaseEntity), PChar, damage, attackType, damageType);
 }
 
 /************************************************************************
@@ -11901,8 +11934,21 @@ uint16 CLuaBaseEntity::getHighestRuneEffect()
 }
 
 /************************************************************************
+ *  Function: getNewestRuneEffect()
+ *  Purpose : Returns the effect ID of the most recent Rune Effect
+ *  Example : local newestEffect = player:getNewestRuneEffect()
+ *  Notes   :
+ ************************************************************************/
+
+uint16 CLuaBaseEntity::getNewestRuneEffect()
+{
+    auto* PEntity = static_cast<CBattleEntity*>(m_PBaseEntity);
+    return PEntity->StatusEffectContainer->GetNewestRuneEffect();
+}
+
+/************************************************************************
  *  Function: removeOldestRune()
- *  Purpose : Removes the oldest run (if available)
+ *  Purpose : Removes the oldest rune (if available)
  *  Example : player:removeOldestRune()
  *  Notes   :
  ************************************************************************/
@@ -11911,6 +11957,19 @@ void CLuaBaseEntity::removeOldestRune()
 {
     auto* PEntity = static_cast<CBattleEntity*>(m_PBaseEntity);
     PEntity->StatusEffectContainer->RemoveOldestRune();
+}
+
+/************************************************************************
+ *  Function: removeNewestRune()
+ *  Purpose : Removes the newest rune (if available)
+ *  Example : player:removeNewestRune()
+ *  Notes   :
+ ************************************************************************/
+
+void CLuaBaseEntity::removeNewestRune()
+{
+    auto* PEntity = static_cast<CBattleEntity*>(m_PBaseEntity);
+    PEntity->StatusEffectContainer->RemoveNewestRune();
 }
 
 /************************************************************************
@@ -13736,6 +13795,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getRACC", CLuaBaseEntity::getRACC);
     SOL_REGISTER("getRATT", CLuaBaseEntity::getRATT);
     SOL_REGISTER("getILvlMacc", CLuaBaseEntity::getILvlMacc);
+    SOL_REGISTER("getILvlSkill", CLuaBaseEntity::getILvlSkill);
 
     SOL_REGISTER("isSpellAoE", CLuaBaseEntity::isSpellAoE);
 
@@ -13765,6 +13825,7 @@ void CLuaBaseEntity::Register()
 
     SOL_REGISTER("takeWeaponskillDamage", CLuaBaseEntity::takeWeaponskillDamage);
     SOL_REGISTER("takeSpellDamage", CLuaBaseEntity::takeSpellDamage);
+    SOL_REGISTER("takeSwipeLungeDamage", CLuaBaseEntity::takeSwipeLungeDamage);
 
     // Pets and Automations
     SOL_REGISTER("spawnPet", CLuaBaseEntity::spawnPet);
@@ -13810,7 +13871,9 @@ void CLuaBaseEntity::Register()
 
     SOL_REGISTER("getActiveRuneCount", CLuaBaseEntity::getActiveRuneCount);
     SOL_REGISTER("getHighestRuneEffect", CLuaBaseEntity::getHighestRuneEffect);
+    SOL_REGISTER("getNewestRuneEffect", CLuaBaseEntity::getNewestRuneEffect);
     SOL_REGISTER("removeOldestRune", CLuaBaseEntity::removeOldestRune);
+    SOL_REGISTER("removeNewestRune", CLuaBaseEntity::removeNewestRune);
     SOL_REGISTER("removeAllRunes", CLuaBaseEntity::removeAllRunes);
 
     // Trust related
