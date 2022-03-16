@@ -555,7 +555,7 @@ INSERT INTO `status_effects` VALUES (531,'vallation',32,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (532,'swordplay',32,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (533,'pflug',32,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (534,'emboldened',32,0,0,0,0,0,0,0,0);
-INSERT INTO `status_effects` VALUES (535,'valiance',32,0,0,0,0,0,0,0,0);
+INSERT INTO `status_effects` VALUES (535,'valiance',32,0,0,0,531,0,0,0,0);
 INSERT INTO `status_effects` VALUES (536,'gambit',32,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (537,'liement',32,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (538,'one_for_all',32,0,0,0,0,0,0,0,0);
