@@ -6,6 +6,8 @@ require("scripts/globals/status")
 require("scripts/globals/msg")
 require("scripts/globals/weaponskills")
 require("scripts/globals/jobpoints")
+require("scripts/globals/magic_utils/spell_damage")
+require("scripts/globals/utils")
 -----------------------------------
 xi = xi or {}
 xi.job_utils = xi.job_utils or {}
@@ -169,9 +171,61 @@ local function getSpecEffectElementWard(type) -- verified via !injectaction 15 1
         [xi.effect.SULPOR]   = 5,
         [xi.effect.UNDA]     = 6,
         [xi.effect.LUX]      = 7,
-        [xi.effect.TENEBRAE] = 8
+        [xi.effect.TENEBRAE] = 8,
     }
     return runeSpecEffectMap[type]
+end
+
+local function getSpecEffectElementEffusion(type)
+
+    local runeSpecEffectMap =
+    {
+        [xi.effect.IGNIS]    = 2,
+        [xi.effect.GELUS]    = 4,
+        [xi.effect.FLABRA]   = 6,
+        [xi.effect.TELLUS]   = 8,
+        [xi.effect.SULPOR]   = 10,
+        [xi.effect.UNDA]     = 12,
+        [xi.effect.LUX]      = 14,
+        [xi.effect.TENEBRAE] = 16,
+    }
+    return runeSpecEffectMap[type]
+end
+
+local function getSwipeLungeElement(type)
+
+    local runeElementEffectMap =
+    {
+        [xi.effect.IGNIS]    = xi.magic.ele.FIRE,
+        [xi.effect.GELUS]    = xi.magic.ele.ICE,
+        [xi.effect.FLABRA]   = xi.magic.ele.WIND,
+        [xi.effect.TELLUS]   = xi.magic.ele.EARTH,
+        [xi.effect.SULPOR]   = xi.magic.ele.THUNDER,
+        [xi.effect.UNDA]     = xi.magic.ele.WATER,
+        [xi.effect.LUX]      = xi.magic.ele.LIGHT,
+        [xi.effect.TENEBRAE] = xi.magic.ele.DARK,
+    }
+    return runeElementEffectMap[type]
+end
+
+local function getAnimationSwipeLunge(weaponSkillType) -- verified via retail action packets exclusively
+
+    local weaponAnimationMap =
+    {
+        [xi.skill.HAND_TO_HAND] = 6,
+        [xi.skill.DAGGER]       = 7,
+        [xi.skill.SWORD]        = 5,
+        [xi.skill.GREAT_SWORD]  = 10,
+        [xi.skill.AXE]          = 8,
+        [xi.skill.GREAT_AXE]    = 9, -- gaxe/scythe share the animation for Swipe/Lunge
+        [xi.skill.SCYTHE]       = 9,
+        [xi.skill.POLEARM]      = 11,
+        [xi.skill.KATANA]       = 12,
+        [xi.skill.GREAT_KATANA] = 13,
+        [xi.skill.CLUB]         = 8,
+        [xi.skill.STAFF]        = 14,
+    }
+    return weaponAnimationMap[weaponSkillType]
 end
 
 local function applyVallationValianceSDTMods(target, SDTTypes, power, effect, duration) -- Vallation/Valiance can apply up to N where N is total rune different elemental resistances, or power*N for singular element, or any combination thereof.
@@ -385,4 +439,162 @@ end
 
 xi.job_utils.rune_fencer.onBattutaEffectLose = function(target, effect)
     -- handled after EFFECT_LOSE in cpp
+end
+
+local function getSwipeLungeDamageMultipliers(player, target, element, bonusMacc) -- get these multipliers once and store them
+    local multipliers = {}
+
+    multipliers.eleStaffBonus        = xi.magic_utils.spell_damage.calculateEleStaffBonus(player, nil, element)
+    multipliers.magianAffinity       = xi.magic_utils.spell_damage.calculateMagianAffinity(player, nil)         -- presumed but untested
+    multipliers.SDT                  = xi.magic_utils.spell_damage.calculateSDT(player, target, nil, element)
+    multipliers.resist               = xi.magic_utils.spell_damage.calculateResist(player, target,  nil, 0, element, 0, bonusMacc)
+    multipliers.magicBurst           = xi.magic_utils.spell_damage.calculateIfMagicBurst(player, target,  0, element)
+    multipliers.magicBurstBonus      = xi.magic_utils.spell_damage.calculateIfMagicBurstBonus(player, target, nil, 0, element)
+    multipliers.dayAndWeather        = xi.magic_utils.spell_damage.calculateDayAndWeather(player, target, nil, 0, element)
+    multipliers.magicBonusDiff       = xi.magic_utils.spell_damage.calculateMagicBonusDiff(player, target, nil, 0, 0, element)
+    multipliers.TMDA                 = xi.magic_utils.spell_damage.calculateTMDA(player, target, nil)
+    multipliers.nukeAbsorbOrNullify  = xi.magic_utils.spell_damage.calculateNukeAbsorbOrNullify(player, target, nil, element)
+
+    return multipliers
+end
+
+local function calculateSwipeLungeDamage(player, target, skillModifier, gearBonus, numHits, multipliers)
+
+    local damage = math.floor(skillModifier *  (0.50 + 0.25 * numHits  + (gearBonus / 100)))
+
+    damage = damage + player:getMod(xi.mod.MAGIC_DAMAGE) -- add mdamage to base damage
+
+    damage = math.floor(damage * multipliers.eleStaffBonus)
+    damage = math.floor(damage * multipliers.magianAffinity)
+    damage = math.floor(damage * multipliers.SDT)
+    damage = math.floor(damage * multipliers.resist)
+    damage = math.floor(damage * multipliers.magicBurst)
+    damage = math.floor(damage * multipliers.magicBurstBonus)
+    damage = math.floor(damage * multipliers.dayAndWeather)
+    damage = math.floor(damage * multipliers.magicBonusDiff)
+    damage = math.floor(damage * multipliers.TMDA)
+    damage = math.floor(damage * multipliers.nukeAbsorbOrNullify)
+
+    damage = target:magicDmgTaken(damage)
+
+    -- Handle Phalanx
+    if damage > 0 then
+        damage = utils.clamp(damage - target:getMod(xi.mod.PHALANX), 0, 99999)
+    end
+
+    -- Handle Stoneskin
+    if damage > 0 then
+        damage = utils.clamp(utils.stoneskin(target, damage), -99999, 99999)
+    end
+
+    return damage
+end
+
+-- see https://www.bg-wiki.com/ffxi/Lunge. Swipe is just lunge, but with only one rune.
+xi.job_utils.rune_fencer.useSwipeLunge = function(player, target, ability, action)
+    local abilityID = ability:getID()
+    local newestRuneEffect = player:getNewestRuneEffect()
+    local highestRuneEffect = player:getHighestRuneEffect()
+    local highestRuneEffectCount = player:countEffect(highestRuneEffect)
+
+    local weaponSkillType = player:getWeaponSkillType(xi.slot.MAIN)
+    local gearBonus = player:getMod(xi.mod.SWIPE)
+    local jobPointBonus = player:getJobPointLevel(xi.jp.SWIPE_EFFECT)
+    local bonusMacc = player:getMerit(xi.merit.MERIT_RUNE_ENHANCE)
+    local numHits = 1
+
+    if abilityID == xi.jobAbility.LUNGE then   -- Lunge uses each rune individually
+        numHits = player:getActiveRuneCount()  -- num hits equals num active runes
+    end
+
+    local skillModifier = (player:getSkillLevel(weaponSkillType) + player:getILvlSkill()) * ((100 + jobPointBonus) / 100)
+
+    local shadowsHit = 0
+    local cumulativeDamage = 0
+    local runesUsed = 0
+    local absorbed = false
+    local magicBursted = false
+    target:updateClaim(player) -- claim target in case we end up doing 0 damage through shadows
+
+    for i = 0, numHits-1, 1
+    do
+        newestRuneEffect = player:getNewestRuneEffect()
+        local element = getSwipeLungeElement(newestRuneEffect)
+        player:removeNewestRune() --rune is always consumed if target is still alive
+        runesUsed = runesUsed + 1 -- keep track of runes used to change effect later
+
+        local shadows = utils.takeShadows(target, 1, 1)
+
+        if shadows == 0 then -- we hit a shadow, increment shadow counter and do nothing else.
+            shadowsHit = shadowsHit + 1
+        else
+            local runeStrength = 1
+            if newestRuneEffect == highestRuneEffect then
+                runeStrength = highestRuneEffectCount
+            end
+
+            local multipliers = getSwipeLungeDamageMultipliers(player, target, element, bonusMacc) -- store multipliers in case we need them for lowering rune strength on lunge
+            local damage = calculateSwipeLungeDamage(player, target, skillModifier, gearBonus, runeStrength, multipliers)
+
+            -- set absorb flag in case we end up dealing 0 damage cumulatively. For example using a wind swipe/lunge vs Puk with full hp will report it "absorbed" 0 HP.
+            if multipliers.nukeAbsorbOrNullify == -1 then
+                absorbed = true
+            end
+
+            -- Handle Magic Absorb
+            if damage < 0 then
+                damage = target:addHP(-damage)
+            else
+                -- We dealt damage. Check if we are going to kill it, and if we can kill it with less rune strength if rune strength > 1.
+                if numHits > 1 and runesUsed ~= numHits and target:getHP()-damage <= 0 and runeStrength > 1 then -- try less duplicate rune count if not on final duplicate rune
+                    for x = 1, runeStrength-1, 1
+                    do
+                        local lowerRuneStrengthDamage = calculateSwipeLungeDamage(player, target, skillModifier, gearBonus, runeStrength-x, multipliers)
+                        if target:getHP()-lowerRuneStrengthDamage <= 0 then
+                            damage = lowerRuneStrengthDamage
+                        end
+                    end
+                end
+
+                target:takeSwipeLungeDamage(player, damage, xi.attackType.MAGICAL, xi.damageType.ELEMENTAL + element)
+                -- Handle Afflatus Misery.
+                target:handleAfflatusMiseryDamage(damage)
+                -- Handle Enmity.
+                target:updateEnmityFromDamage(player, damage)
+            end
+
+            cumulativeDamage = cumulativeDamage + damage
+
+            if multipliers.magicBurst > 1 then
+                magicBursted = true
+            end
+
+            if target:getHP() <= 0 then -- we killed it, stop.
+                break
+            end
+        end
+    end
+
+    if runesUsed < 2 or (runesUsed == numHits and highestRuneEffectCount == 1) then          -- element strength is equal
+        action:speceffect(target:getID(), getSpecEffectElementEffusion(newestRuneEffect))    -- set element color to the last rune used
+    else
+        action:speceffect(target:getID(), getSpecEffectElementEffusion(highestRuneEffect))   -- set element color to the strongest effect
+    end
+
+    if shadowsHit == numHits and cumulativeDamage == 0 then
+        action:messageID(target:getID(), xi.msg.basic.SHADOW_ABSORB) -- set message to blinked hit(s)
+        return shadowsHit
+    end
+
+    action:setAnimation(target:getID(), getAnimationSwipeLunge(weaponSkillType)) -- set animation for currently equipped weapon
+
+    if cumulativeDamage < 0 or cumulativeDamage == 0 and absorbed then -- TODO: figre out how to set "unknown" bit in message 102
+                                                                       -- "unknown" = 4 on message 102 for healed MB
+        action:messageID(target:getID(), xi.msg.basic.JA_RECOVERS_HP)
+    end
+
+    if magicBursted then -- TODO: set MB message somehow by setting "unknown" = 4 on message 110 for MB
+    end
+
+    return cumulativeDamage
 end
