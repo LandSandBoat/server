@@ -1,5 +1,5 @@
 -----------------------------------
--- Spirits Within
+-- Arrogance Incarnate
 --
 -- Description: Delivers an unavoidable attack. Damage varies with HP and TP.
 -- Type: Magical/Breath

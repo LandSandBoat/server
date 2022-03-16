@@ -18,7 +18,7 @@ function onTrigger(player)
                      xi.zone.PORT_BASTOK, xi.zone.BASTOK_MINES, xi.zone.BASTOK_MARKETS, xi.zone.WINDURST_WATERS,
     				 xi.zone.PORT_WINDURST, xi.zone.WINDURST_WALLS, xi.zone.WINDURST_WOODS, xi.zone.SELBINA,
     				 xi.zone.RABAO, xi.zone.NORG, xi.zone.RULUDE_GARDENS, xi.zone.UPPER_JEUNO, xi.zone.LOWER_JEUNO,
-					 xi.zone.PORT_JEUNO }
+					 xi.zone.PORT_JEUNO, xi.zone.METALWORKS }
     				 
     for _, allowedZone in ipairs(allowedZones) do
         if currentZone == allowedZone then
