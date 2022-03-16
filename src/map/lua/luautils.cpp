@@ -98,18 +98,10 @@ namespace luautils
     std::unordered_map<std::string, bool> contentEnabledMap;
 
     std::unique_ptr<Filewatcher>  filewatcher;
-    std::mutex                    reloadListBottleneck;
-    std::map<std::string, uint64> toReloadList;
-    std::vector<std::string>      filteredList;
-    void                          SafeApplyFunc_ReloadList(std::function<void(std::map<std::string, uint64>&)> func)
-    {
-        std::lock_guard bottleneck(reloadListBottleneck);
-        func(toReloadList);
-    }
 
     /************************************************************************
      *                                                                       *
-     *  Инициализация lua, пользовательских классов и глобальных функций     *
+     *  Initialization of Lua user classes and global functions             *
      *                                                                       *
      ************************************************************************/
 
@@ -246,6 +238,8 @@ namespace luautils
 
         moduleutils::LoadLuaModules();
 
+        filewatcher = std::make_unique<Filewatcher>("scripts");
+
         TracyReportLuaMemory(lua.lua_state());
 
         return 0;
@@ -294,53 +288,24 @@ namespace luautils
         return 0;
     }
 
-    void EnableFilewatcher()
-    {
-        // clang-format off
-        filewatcher = std::make_unique<Filewatcher>("scripts",
-            [](const std::filesystem::path& path)
-            {
-                if (path.extension() == ".lua")
-                {
-                    TracyZoneScoped;
-                    TracyZoneString(path.generic_string());
-
-                    auto real_path          = path.generic_string();
-                    auto modified           = std::filesystem::last_write_time(real_path).time_since_epoch().count();
-                    auto modified_timestamp = static_cast<uint64>(modified);
-                    SafeApplyFunc_ReloadList([&](std::map<std::string, uint64>& list) {
-                        if (list.find(real_path) == list.end())
-                        {
-                            // No entry, make one
-                            list[real_path] = modified_timestamp;
-                        }
-                        else
-                        {
-                            auto last_modified = list.at(real_path);
-                            if (last_modified < modified_timestamp)
-                            {
-                                list[real_path] = modified_timestamp;
-                                filteredList.emplace_back(real_path);
-                            }
-                        }
-                    });
-                }
-            });
-        // clang-format on
-    }
-
     void ReloadFilewatchList()
     {
-        SafeApplyFunc_ReloadList([&](std::map<std::string, uint64>& list) {
-            TracyZoneScoped;
-            for (auto& path_string : filteredList)
-            {
-                CacheLuaObjectFromFile(path_string, true);
-            }
+        std::set<std::string> filenames; // For de-duping
 
-            // Erase list
-            filteredList.clear();
-        });
+        std::filesystem::path path;
+        while (filewatcher->modifiedQueue.try_dequeue(path))
+        {
+            if (path.extension() == ".lua")
+            {
+                std::string filename = path.relative_path().generic_string();
+                filenames.insert(filename);
+            }
+        }
+
+        for (auto const& filename : filenames)
+        {
+            CacheLuaObjectFromFile(filename, true);
+        }
     }
 
     std::vector<std::string> GetQuestAndMissionFilenamesList()

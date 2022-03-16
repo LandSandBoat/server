@@ -116,7 +116,6 @@ namespace luautils
     int32 garbageCollectStep();
     int32 garbageCollectFull();
 
-    void EnableFilewatcher();
     void ReloadFilewatchList();
 
     std::vector<std::string> GetQuestAndMissionFilenamesList();

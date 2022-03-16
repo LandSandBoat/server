@@ -18,6 +18,8 @@ zones[xi.zone.HALL_OF_TRANSFERENCE] =
         LOGIN_CAMPAIGN_UNDERWAY = 7001, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER            = 7002, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         NO_RESPONSE_OFFSET      = 7251, -- There is no response.
+        DOOR_FIRMLY_SHUT        = 7252, -- The door is firmly shut.
+        YOU_MUST_MOVE_CLOSER    = 7253, -- You must move closer to inspect the device.
     },
     mob =
     {

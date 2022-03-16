@@ -1140,6 +1140,50 @@ uint8 CStatusEffectContainer::GetActiveRuneCount()
     return GetStatusEffectCountInIDRange(EFFECT_IGNIS, EFFECT_TENEBRAE);
 }
 
+EFFECT CStatusEffectContainer::GetHighestRuneEffect()
+{
+    std::unordered_map<EFFECT,uint8> runeEffects;
+
+    for (CStatusEffect* PStatusEffect : m_StatusEffectSet)
+    {
+        if (PStatusEffect->GetStatusID() >= EFFECT_IGNIS && PStatusEffect->GetStatusID() <= EFFECT_TENEBRAE && !PStatusEffect->deleted)
+        {
+            if (runeEffects.count(PStatusEffect->GetStatusID()) == 0)
+            {
+                runeEffects[PStatusEffect->GetStatusID()] = 1;
+            }
+            else
+            {
+                runeEffects.at(PStatusEffect->GetStatusID())++;
+            }
+        }
+    }
+
+    EFFECT highestRune = EFFECT_NONE;
+    int highestRuneValue;
+
+    for (auto iter = runeEffects.begin(); iter != runeEffects.end(); ++iter)
+    {
+        if (highestRune == EFFECT_NONE || iter->second > highestRuneValue)
+        {
+            highestRune = iter->first;
+            highestRuneValue = iter->second;
+        }
+    }
+
+    return highestRune;
+}
+
+EFFECT CStatusEffectContainer::GetNewestRuneEffect()
+{
+    return GetNewestStatusEffectInIDRange(EFFECT_IGNIS, EFFECT_TENEBRAE);
+}
+
+void CStatusEffectContainer::RemoveNewestRune()
+{
+    RemoveNewestStatusEffectInIDRange(EFFECT_IGNIS, EFFECT_TENEBRAE);
+}
+
 void CStatusEffectContainer::RemoveOldestRune()
 {
     RemoveOldestStatusEffectInIDRange(EFFECT_IGNIS, EFFECT_TENEBRAE);
@@ -1313,6 +1357,26 @@ uint8 CStatusEffectContainer::GetStatusEffectCountInIDRange(EFFECT start, EFFECT
     return count;
 }
 
+EFFECT CStatusEffectContainer::GetNewestStatusEffectInIDRange(EFFECT start, EFFECT end)
+{
+    CStatusEffect* newest = nullptr;
+    for (CStatusEffect* PStatusEffect : m_StatusEffectSet)
+    {
+        if (PStatusEffect->GetStatusID() >= start && PStatusEffect->GetStatusID() <= end && !PStatusEffect->deleted)
+        {
+            if (!newest || PStatusEffect->GetStartTime() > newest->GetStartTime())
+            {
+                newest = PStatusEffect;
+            }
+        }
+    }
+    if (newest)
+    {
+        return newest->GetStatusID();
+    }
+    return EFFECT_NONE;
+}
+
 void CStatusEffectContainer::RemoveOldestStatusEffectInIDRange(EFFECT start, EFFECT end)
 {
     CStatusEffect* oldest = nullptr;
@@ -1329,6 +1393,26 @@ void CStatusEffectContainer::RemoveOldestStatusEffectInIDRange(EFFECT start, EFF
     if (oldest)
     {
         RemoveStatusEffect(oldest, true);
+    }
+
+}
+
+void CStatusEffectContainer::RemoveNewestStatusEffectInIDRange(EFFECT start, EFFECT end)
+{
+    CStatusEffect* newest = nullptr;
+    for (CStatusEffect* PStatusEffect : m_StatusEffectSet)
+    {
+        if (PStatusEffect->GetStatusID() >= start && PStatusEffect->GetStatusID() <= end && !PStatusEffect->deleted)
+        {
+            if (!newest || PStatusEffect->GetStartTime() > newest->GetStartTime())
+            {
+                newest = PStatusEffect;
+            }
+        }
+    }
+    if (newest)
+    {
+        RemoveStatusEffect(newest, true);
     }
 }
 

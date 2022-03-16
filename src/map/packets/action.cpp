@@ -80,6 +80,11 @@ CActionPacket::CActionPacket(action_t& action)
             packBitsBE(data, action.recast, 118, 10);
         }
         break;
+        case ACTION_RUN_WARD_EFFUSION:
+        {
+            packBitsBE(data, action.actionid, 86, 10);
+        }
+        break;
         case ACTION_WEAPONSKILL_START:
         case ACTION_MOBABILITY_START:
         {

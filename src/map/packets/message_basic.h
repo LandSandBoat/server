@@ -140,6 +140,14 @@ enum MSGBASIC_ID : uint16
     MSGBASIC_LUOPAN_HP_RATE_DOWN   = 663, /* <player> uses <ability>. The luopan's HP consumption rate has been reduced. */
     MSGBASIC_LUOPAN_HP_RATE_UP     = 664, /* <player> uses <ability>. The luopan's HP consumption rate has been increased. */
     MSGBASIC_HAS_LUOPON_NO_USE     = 665, /* <player> has a pet. Unable to use ability. */
+    /* RUN */
+    MSGBASIC_REQUIRE_RUNE                 = 666, /* That action requires the ability Rune Enchantment. */
+    MSGBASIC_SWORDPLAY_GAIN               = 667, /* <Player> uses <Ability>. Accuracy and evasion are enhanced. */
+    MSGBASIC_VALLATION_GAIN               = 668, /* <Target> receives the effect of Vallation, reducing damage taken from certain elemental magic spells. */ /* Vallation and Valiance both use this message for the RUN using the ja */
+    MSGBASIC_VALIANCE_GAIN_PARTY_MEMBER   = 669, /* Magic damage of a certain element is reduced for <Target> */ /* This message is when a party member recieves the aoe effect of Valiance */
+    MSGBASIC_LIEMENT_GAIN                 = 670, /* <Player> uses <Ability>. <Target> can now absorb magic damage of a certain element. */
+    MSGBASIC_PFLUG_GAIN                   = 671, /* <Player> uses <Ability>. <Target> now has enhanced resistance. */
+    MSGBASIC_GAMBIT_GAIN                  = 672, /* <Player> uses <Ability>. <Target> receives the effect of Gambit, reducing magic defense against magic of a certain element. */
     /* ROE */
     MSGBASIC_ROE_START    = 704,
     MSGBASIC_ROE_TIMED    = 705, // You have undertaken the timed record X.

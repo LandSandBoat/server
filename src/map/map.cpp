@@ -273,8 +273,6 @@ int32 do_init(int32 argc, char** argv)
 
     PacketGuard::Init();
 
-    luautils::EnableFilewatcher();
-
     ShowStatus("The map-server is ready to work...");
     ShowMessage("=======================================================================");
     return 0;

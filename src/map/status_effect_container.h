@@ -71,7 +71,9 @@ public:
     CStatusEffect* GetStatusEffect(EFFECT StatusID, uint32 SubID);
 
     uint8 GetStatusEffectCountInIDRange(EFFECT start, EFFECT end);
+    EFFECT GetNewestStatusEffectInIDRange(EFFECT start, EFFECT end);
     void  RemoveOldestStatusEffectInIDRange(EFFECT start, EFFECT end);
+    void  RemoveNewestStatusEffectInIDRange(EFFECT start, EFFECT end);
     void  RemoveAllStatusEffectsInIDRange(EFFECT start, EFFECT end);
 
     void UpdateStatusIcons(); // пересчитываем иконки эффектов
@@ -96,7 +98,10 @@ public:
     void  RemoveAllManeuvers();
 
     uint8 GetActiveRuneCount();
+    EFFECT GetHighestRuneEffect();
+    EFFECT GetNewestRuneEffect();
     void  RemoveOldestRune();
+    void  RemoveNewestRune();
     void  RemoveAllRunes();
 
     void WakeUp(); // remove sleep effects

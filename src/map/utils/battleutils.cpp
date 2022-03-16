@@ -821,6 +821,28 @@ namespace battleutils
         return false;
     }
 
+    bool HandleParrySpikesDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, actionTarget_t* Action, int32 damage)
+    {
+        Action->spikesEffect  = (SUBEFFECT)PDefender->getMod(Mod::PARRY_SPIKES);
+        Action->spikesMessage = 44;
+        Action->spikesParam   = std::max<int16>(PDefender->getMod(Mod::PARRY_SPIKES_DMG), 0);
+
+        if (Action->spikesEffect > 0)
+        {
+            // calculate damage
+            Action->spikesParam = HandleStoneskin(PAttacker, CalculateSpikeDamage(PAttacker, PDefender, Action, (uint16)(abs(damage))));
+            PAttacker->takeDamage(Action->spikesParam, PDefender, ATTACK_TYPE::MAGICAL, GetSpikesDamageType(Action->spikesEffect));
+
+            battleutils::DirtyExp(PAttacker, PDefender);
+            if (PAttacker->isDead())
+            {
+                battleutils::ClaimMob(PAttacker, PDefender);
+            }
+            return true;
+        }
+        return false;
+    }
+
     bool HandleSpikesEquip(CBattleEntity* PAttacker, CBattleEntity* PDefender, actionTarget_t* Action, uint8 damage, SUBEFFECT spikesType, uint8 chance)
     {
         int lvlDiff = std::clamp((PDefender->GetMLevel() - PAttacker->GetMLevel()), -5, 5) * 2;
@@ -2352,6 +2374,29 @@ namespace battleutils
             // Do we get TP for damaging spells?
             int16 tp = battleutils::CalculateSpellTP(PAttacker, PSpell);
             PAttacker->addTP(tp);
+        }
+
+        return damage;
+    }
+
+    /************************************************************************
+    *                                                                       *
+    *  Handles Damage from Swipe/Lunge (dmg type reductions calced in lua)  *
+    *                                                                       *
+    ************************************************************************/
+
+    int32 TakeSwipeLungeDamage(CBattleEntity* PDefender, CCharEntity* PAttacker, int32 damage, ATTACK_TYPE attackType, DAMAGE_TYPE damageType)
+    {
+        PDefender->takeDamage(damage, PAttacker, attackType, damageType);
+
+        // Remove effects from damage
+        if (damage > 0)
+        {
+            PDefender->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DAMAGE);
+            // Check for bind breaking
+            BindBreakCheck(PAttacker, PDefender);
+
+            // Do targets get TP?
         }
 
         return damage;
@@ -6118,8 +6163,9 @@ namespace battleutils
             }
         }
 
-        fastCast               = std::clamp<int16>(fastCast, -100, 80);
-        int16 uncappedFastCast = std::clamp<int16>(PEntity->getMod(Mod::UFASTCAST), -100, 100);
+        fastCast                  = std::clamp<int16>(fastCast, -100, 80);
+        int16 uncappedFastCast    = std::clamp<int16>(PEntity->getMod(Mod::UFASTCAST), -100, 100);
+        int16 inspirationFastCast = std::clamp<int16>(PEntity->getMod(Mod::INSPIRATION_FAST_CAST), -100, 100);
 
         // Add in fast cast from Divine Benison
         if (PSpell->isNa())
@@ -6127,7 +6173,7 @@ namespace battleutils
             uncappedFastCast = std::clamp<int16>(uncappedFastCast + PEntity->getMod(Mod::DIVINE_BENISON), -100, 100);
         }
 
-        float sumFastCast = std::clamp<float>((float)(fastCast + uncappedFastCast), -100.f, 100.f);
+        float sumFastCast = std::clamp<float>((float)(fastCast + uncappedFastCast + inspirationFastCast), -100.f, 100.f);
 
         return (uint32)(cast * ((100.0f - sumFastCast) / 100.0f));
     }
@@ -6504,6 +6550,10 @@ namespace battleutils
                 return DAMAGE_TYPE::WIND;
             case SUBEFFECT_CLOD_SPIKES:
                 return DAMAGE_TYPE::EARTH;
+            case SUBEFFECT_DELUGE_SPIKES:
+                return DAMAGE_TYPE::WATER;
+            case SUBEFFECT_DEATH_SPIKES:
+                return DAMAGE_TYPE::DARK;
             default:
                 return DAMAGE_TYPE::NONE;
         }
