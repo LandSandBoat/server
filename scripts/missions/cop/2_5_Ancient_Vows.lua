@@ -3,6 +3,7 @@
 -- Promathia 2-5
 -----------------------------------
 -- !addmission 6 248
+-- Dilapidated Gate : !pos -259 -30 276 25
 -----------------------------------
 require('scripts/globals/interaction/mission')
 require('scripts/globals/keyitems')

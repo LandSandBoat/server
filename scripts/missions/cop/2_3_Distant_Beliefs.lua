@@ -3,9 +3,10 @@
 -- Promathia 2-3
 -----------------------------------
 -- !addmission 6 228
--- Minotaur    :
+-- Minotaur    : !pos 60 0.5 304 27
 -- Iron Gate   : !pos -70.800 -1.500 60.000 27
 -- Ornate Gate : !pos -95 -24 60 27
+-- Justinius   : !pos 76 -34 68 26
 -----------------------------------
 require('scripts/globals/interaction/mission')
 require('scripts/globals/keyitems')

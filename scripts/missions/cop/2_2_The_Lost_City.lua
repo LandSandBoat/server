@@ -3,6 +3,8 @@
 -- Promathia 2-2
 -----------------------------------
 -- !addmission 6 218
+-- Despachiaire   : !pos 108 -40 -83 26
+-- Sewer Entrance : !pos 28 -12 44 26
 -----------------------------------
 require('scripts/globals/interaction/mission')
 require('scripts/globals/keyitems')
