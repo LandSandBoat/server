@@ -1218,7 +1218,6 @@ xi.mod =
     PERPETUATION_REDUCTION          = 346,
 
     -- Rune Fencer
-    INQUARTATA                  = 963,  -- additive % bonus to base parry rate
     ENHANCES_BATTUTA            = 1004, -- Used by RUN merit point cat 2 to add +N% bonus damage to parry spikes during Battuta effect
     ENHANCES_ELEMENTAL_SFORZO   = 1005, -- Bonus duration
     ENHANCES_SLEIGHT_OF_SWORD   = 1006, -- Used by RUN merit point cat 2 to add +N Subtle Blow to Swordplay
