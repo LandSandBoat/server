@@ -37,6 +37,7 @@ zones[xi.zone.KONSCHTAT_HIGHLANDS] =
         BLACKENED_MUST_BE_CLOSER     = 7458,  -- You have to be closer to place anything on the blackened spot.
         NOT_THE_TIME_FOR_THAT        = 7467,  -- This is not the time for that!
         TELEPOINT_HAS_BEEN_SHATTERED = 7494,  -- The telepoint has been shattered into a thousand pieces...
+        MEMORIES_SEALED_OFF          = 7607,  -- A portion of your memories has been sealed off.
         PLAYER_OBTAINS_ITEM          = 7612,  -- <name> obtains <item>!
         UNABLE_TO_OBTAIN_ITEM        = 7613,  -- You were unable to obtain the item.
         PLAYER_OBTAINS_TEMP_ITEM     = 7614,  -- <name> obtains the temporary item: <item>!

@@ -18,3 +18,9 @@ CPMAddPackage(
         "BUILD_TEST_APP OFF"
         "EFSW_INSTALL OFF"
 )
+
+CPMAddPackage(
+    NAME concurrentqueue
+    GITHUB_REPOSITORY cameron314/concurrentqueue
+    GIT_TAG v1.0.3
+)
