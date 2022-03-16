@@ -49,12 +49,8 @@ mission.sections =
                         not GetMobByID(caedarvaID.mob.JAZARAAT):isSpawned()
                     then
                         SpawnMob(caedarvaID.mob.JAZARAAT):updateEnmity(player)
-
-                        -- This is a hack that supresses default interaction.
-                        return mission:message(-1):importantOnce()
-
-                        -- TODO: There is no messageSpecial returned here, so we will need
-                        -- an option to suppress default action being hit.
+                        -- There is no message returned here in captures
+                        return mission:noAction()
                     elseif missionStatus == 2 then
                         return mission:progressEvent(9)
                     end

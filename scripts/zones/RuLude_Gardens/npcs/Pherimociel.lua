@@ -12,21 +12,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local Hrandom =math.random()
-
     if
-        player:getCurrentMission(COP) == xi.mission.id.cop.BELOW_THE_ARKS and
-        player:getCharVar("PromathiaStatus") == 0
-    then
-        player:startEvent(24)
-
-    elseif
-        player:getCurrentMission(COP) == xi.mission.id.cop.BELOW_THE_ARKS and
-        player:getCharVar("PromathiaStatus") == 1
-    then
-        player:startEvent(25)
-
-    elseif
         player:getCurrentMission(COP) == xi.mission.id.cop.THREE_PATHS and
         player:getCharVar("COP_Tenzen_s_Path") == 3
     then
@@ -42,6 +28,8 @@ entity.onTrigger = function(player, npc)
         player:getCurrentMission(COP) == xi.mission.id.cop.A_PLACE_TO_RETURN and
         player:getCharVar("PromathiaStatus") == 1
     then
+        local Hrandom = math.random()
+
         if Hrandom < 0.2 then
             player:startEvent(27)
         elseif Hrandom < 0.6 then
@@ -55,9 +43,6 @@ entity.onTrigger = function(player, npc)
         player:getCharVar("PromathiaStatus") == 0
     then
         player:startEvent(10049)
-
-    else
-        player:startEvent(155)
     end
 end
 
@@ -65,12 +50,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 24 then
-        player:setCharVar("PromathiaStatus", 1) -- first cs mission 1.2 has been seen YOU CAN NOW ENTER TO PROMYVION
-        player:setCharVar("FirstPromyvionHolla", 1)
-        player:setCharVar("FirstPromyvionMea", 1)
-        player:setCharVar("FirstPromyvionDem", 1)
-    elseif csid == 58 then
+    if csid == 58 then
         player:setCharVar("COP_Tenzen_s_Path", 4)
     elseif csid == 10046 or csid == 10049 then
         player:setCharVar("PromathiaStatus", 1)

@@ -290,6 +290,8 @@ uint16 CAbility::getAoEMsg() const
         case 437:
         case 439:
             return m_message + 1;
+        case 668: // Valiance has a seperate message for party member who gain the effect.
+            return m_message + 1;
 
         default:
             return m_message;

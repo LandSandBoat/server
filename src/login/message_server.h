@@ -18,11 +18,12 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 ===========================================================================
 */
-#include "../common/mmo.h"
-#include "../common/socket.h"
-#include "../common/sql.h"
+#include "common/mmo.h"
+#include "common/socket.h"
+#include "common/sql.h"
 
-#include "../common/zmq.hpp"
+#include <zmq.hpp>
+#include <zmq_addon.hpp>
 
 struct chat_message_t
 {

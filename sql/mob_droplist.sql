@@ -17127,6 +17127,16 @@ INSERT INTO `mob_droplist` VALUES (3205,0,0,1000,4109,1); -- (Flume Toad) water_
 INSERT INTO `mob_droplist` VALUES (3206,0,0,1000,2151,150); -- (Marid) marid_hide
 INSERT INTO `mob_droplist` VALUES (3206,0,0,1000,2166,5); -- (Marid) lock_of_marid_hair
 INSERT INTO `mob_droplist` VALUES (3207,0,0,1000,3424,1000); -- (Angra Mainyu) fiendish_tome_chapter_21
+INSERT INTO `mob_droplist` VALUES (3208,0,0,1000,18138,150); -- (Sabotender Bailarin) Bailathorn
+INSERT INTO `mob_droplist` VALUES (3208,0,0,1000,18138,150); -- (Sabotender Bailarin) Bailathorn
+INSERT INTO `mob_droplist` VALUES (3208,0,0,1000,18138,0); -- (Sabotender Bailarin) Bailathorn
+INSERT INTO `mob_droplist` VALUES (3208,0,0,1000,916,140); -- (Sabotender Bailarin) Cactaur Needle
+INSERT INTO `mob_droplist` VALUES (3208,0,0,1000,1592,80); -- (Sabotender Bailarin) Cactaur Root
+INSERT INTO `mob_droplist` VALUES (3208,0,0,1000,1236,180); -- (Sabotender Bailarin) Cactaur Stems
+INSERT INTO `mob_droplist` VALUES (3209,0,0,1000,14168,1000); -- (Sabotender Bailarina) Dune Boots
+INSERT INTO `mob_droplist` VALUES (3209,0,0,1000,916,140); -- (Sabotender Bailarin) Cactaur Needle
+INSERT INTO `mob_droplist` VALUES (3209,0,0,1000,1592,80); -- (Sabotender Bailarin) Cactaur Root
+INSERT INTO `mob_droplist` VALUES (3209,0,0,1000,1236,180); -- (Sabotender Bailarin) Cactaur Stems
 
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;

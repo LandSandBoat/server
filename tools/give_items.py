@@ -13,7 +13,13 @@ prizes = {
     8:"festiveMoogleChocoboShirt",
 }
 credentials = {}
-db = cur = database = host = port = login = password = None
+db = None
+cur = None
+database = None
+host = None
+port = None
+login = None
+password = None
 
 def connect():
     print("Loading conf/map.conf")

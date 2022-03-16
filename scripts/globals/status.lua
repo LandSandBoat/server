@@ -1218,24 +1218,22 @@ xi.mod =
     PERPETUATION_REDUCTION          = 346,
 
     -- Rune Fencer
-    INQUARTATA                  = 963,  -- Increases parry rate by a flat %.
-    ENHANCES_BATTUTA            = 1004, --
-    ENHANCES_ELEMENTAL_SFORZO   = 1005, --
-    ENHANCES_SLEIGHT_OF_SWORD   = 1006, --
-    ENHANCES_INSPIRATION        = 1007, --
-    SWORDPLAY                   = 1008, --
-    LIEMENT                     = 1009, --
-    VALIANCE_VALLATION_DURATION = 1010, --
-    PFLUG                       = 1011, --
-    VIVACIOUS_PULSE_POTENCY     = 1012, --
-    AUGMENTS_VIVACIOUS_PULSE    = 1013, --
-    RAYKE_DURATION              = 1014, --
-    ODYLLIC_SUBTERFUGE_DURATION = 1015, --
-    SWIPE                       = 1016, --
-    LIEMENT_DURATION            = 1017, --
-    GAMBIT_DURATION             = 1018, --
-    EMBOLDEN_DURATION           = 1019, --
-    LIEMENT_EXTENDS_TO_AREA     = 1020, --
+    ENHANCES_BATTUTA            = 1004, -- Used by RUN merit point cat 2 to add +N% bonus damage to parry spikes during Battuta effect
+    ENHANCES_ELEMENTAL_SFORZO   = 1005, -- Bonus duration
+    ENHANCES_SLEIGHT_OF_SWORD   = 1006, -- Used by RUN merit point cat 2 to add +N Subtle Blow to Swordplay
+    ENHANCES_INSPIRATION        = 1007, -- Used by RUN merit point cat 2 to add +N Fast Cast to Vallation/Valiance
+    SWORDPLAY                   = 1008, -- Adds bonus starting ticks to Swordplay
+    LIEMENT                     = 1009, -- Adds bonus duration as +N seconds
+    VALIANCE_VALLATION_DURATION = 1010, -- Adds bonus duration as +N seconds
+    PFLUG                       = 1011, -- Adds flat additional all-resist rate in +N%
+    VIVACIOUS_PULSE_POTENCY     = 1012, -- Adds final HP bonus +N% to calculation of Vivacious Pulse
+    AUGMENTS_VIVACIOUS_PULSE    = 1013, -- Adds random erase/-na to Vivacious Pulse
+    RAYKE_DURATION              = 1014, -- Adds bonus duration as +N seconds
+    SWIPE                       = 1016, -- Adds bonus damage to the Swipe/Lunge magic damage calculation
+    LIEMENT_EXTENDS_TO_AREA     = 1020, -- Epeolatry's (RUN Ergon weapon) special effect, makes Liement AoE to party instead of self target only.
+    INSPIRATION_FAST_CAST       = 1021, -- Inspiration's fast cast, additive with normal fast cast for a cap beyond 80%
+    PARRY_SPIKES                = 1022, -- Battuta parry spikes rate
+    PARRY_SPIKES_DMG            = 1023, -- Battuta parry spikes damage
 
     FIRE_AFFINITY_DMG               = 347,
     ICE_AFFINITY_DMG                = 348,
@@ -1577,6 +1575,7 @@ xi.mod =
     -- Per https://www.bg-wiki.com/bg/Weapon_Skill_Damage we need all 3..
     ALL_WSDMG_FIRST_HIT             = 841, -- Generic (all Weaponskills) damage, first hit only.
     WS_NO_DEPLETE                   = 949, -- % chance a Weaponskill depletes no TP.
+    INQUARTATA                      = 963, -- additive % bonus to base parry rate
     WS_STR_BONUS                    = 980, -- % bonus to str_wsc.
     WS_DEX_BONUS                    = 957, -- % bonus to dex_wsc.
     WS_VIT_BONUS                    = 981, -- % bonus to vit_wsc.
@@ -2850,8 +2849,9 @@ xi.mount =
     WIVRE          = 30,
     RED_RAPTOR     = 31,
     IRON_GIANT     = 32,
+    BYAKKO         = 33,
     --
-    MOUNT_MAX      = 33,
+    MOUNT_MAX      = 34,
 }
 
 -----------------------------------

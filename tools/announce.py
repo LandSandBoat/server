@@ -35,7 +35,7 @@ def build_chat_packet(msg_type, gm_flag, zone, sender, msg):
     buff_size = min(236, MESSAGE_OFFSET + len(msg))
     buffer = bytearray(buff_size)
 
-    if sender == None:
+    if sender is None:
         sender = ""
 
     buffer[0] = 0x17

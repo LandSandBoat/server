@@ -1,5 +1,5 @@
 -----------------------------------
--- Area: Selbina (249)
+-- Area: Mhaura (249)
 --  NPC: Tonasav
 -- Type: ROV NPC
 -----------------------------------
@@ -11,13 +11,8 @@ entity.onTrade = function(player,npc,trade)
 end
 
 entity.onTrigger = function(player,npc)
-    if
-        (player:getCurrentMission(ROV) == xi.mission.id.rov.THE_BEGINNING and player:getCharVar("RhapsodiesStatus") == 2) or
-        player:getCurrentMission(ROV) >= xi.mission.id.rov.FLAMES_OF_PRAYER
-    then
+    if player:getCurrentMission(ROV) >= xi.mission.id.rov.FLAMES_OF_PRAYER then
         player:startEvent(371)
-    else
-        player:startEvent(372)
     end
 end
 

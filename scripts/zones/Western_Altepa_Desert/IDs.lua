@@ -38,13 +38,13 @@ zones[xi.zone.WESTERN_ALTEPA_DESERT] =
         EVIL_LOOMING_ABOVE_YOU     = 7376,  -- You sense something evil looming above you.
         SENSE_OMINOUS_PRESENCE     = 7408,  -- You sense an ominous presence...
         SOMETHING_IS_BURIED_HERE   = 7426,  -- It looks like something is buried here. If you had <item> you could dig it up.
-        PLAYER_OBTAINS_ITEM        = 7639,  -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM      = 7640,  -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM   = 7641,  -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP       = 7642,  -- You already possess that temporary item.
-        NO_COMBINATION             = 7647,  -- You were unable to enter a combination.
-        REGIME_REGISTERED          = 9825,  -- New training regime registered!
-        COMMON_SENSE_SURVIVAL      = 11814, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        PLAYER_OBTAINS_ITEM        = 7646,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM      = 7647,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM   = 7648,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP       = 7649,  -- You already possess that temporary item.
+        NO_COMBINATION             = 7654,  -- You were unable to enter a combination.
+        REGIME_REGISTERED          = 9832,  -- New training regime registered!
+        COMMON_SENSE_SURVIVAL      = 11821, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {
@@ -77,19 +77,19 @@ zones[xi.zone.WESTERN_ALTEPA_DESERT] =
     },
     npc =
     {
-        CASKET_BASE       = 17289721,
-        ALTEPA_GATE       = 17289745,
-        PEDDLESTOX        = 17289770,
+        CASKET_BASE       = 17289722,
+        ALTEPA_GATE       = 17289746,
+        PEDDLESTOX        = 17289771,
         BEASTMEN_TREASURE =
         {
-            17289773, -- qm3
-            17289774, -- qm4
-            17289775, -- qm5
-            17289776, -- qm6
-            17289777, -- qm7
-            17289778, -- qm8
-            17289779, -- qm9
-            17289780, -- qm10
+            17289774, -- qm3
+            17289775, -- qm4
+            17289776, -- qm5
+            17289777, -- qm6
+            17289778, -- qm7
+            17289779, -- qm8
+            17289780, -- qm9
+            17289781, -- qm10
         },
     },
 }

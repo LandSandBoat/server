@@ -14,8 +14,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local rovMission = player:getCurrentMission(ROV)
-
     if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) == QUEST_ACCEPTED and
         player:getCharVar('ApocalypseNigh') == 6 and player:getCharVar('Apoc_Nigh_RewardCS1') == 0 then
         player:startEvent(232, 252)
@@ -23,8 +21,6 @@ entity.onTrigger = function(player, npc)
         player:startEvent(234, 252)
     elseif player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) then
         player:startEvent(233);
-    elseif rovMission == xi.mission.id.rov.THE_PATH_UNTRAVELED then
-        player:startEvent(263)
     end
 end
 

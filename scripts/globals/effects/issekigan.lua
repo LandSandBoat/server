@@ -1,5 +1,6 @@
 -----------------------------------
 -- xi.effect.ISSEKIGAN
+-- NOTE: This is all handled in core (battleutils)
 -----------------------------------
 local effect_object = {}
 

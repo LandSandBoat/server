@@ -30,6 +30,7 @@ zones[xi.zone.UPPER_JEUNO] =
         DURABLE_SHIELDS_SHOP_DIALOG      = 6987,  -- Welcome to Durable Shields.
         MP_SHOP_DIALOG                   = 6988,  -- Welcome to M & P's Market.
         GUIDE_STONE                      = 6989,  -- Up: Ru'Lude Gardens Down: Lower Jeuno (facing Bastok)
+        IT_READS_STAFF_ONLY              = 6991,  -- It reads, "Staff Only."
         LEILLAINE_SHOP_DIALOG            = 7014,  -- Hello. Are you feeling all right?
         YOU_CAN_NOW_BECOME_A_BEASTMASTER = 7194,  -- You can now become a beastmaster.
         CONQUEST                         = 7750,  -- You've earned conquest points!

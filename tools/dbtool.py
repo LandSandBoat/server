@@ -5,7 +5,7 @@ import sys
 import re
 import time
 import fileinput
-import distutils.spawn
+import shutil
 
 # Pre-flight sanity checks
 def preflight_exit():
@@ -17,7 +17,7 @@ def preflight_exit():
 # - git should installed and available
 try:
     subprocess.call(["git"], stdout=subprocess.PIPE)
-except:
+except: # lgtm [py/catch-base-exception]
     print("ERROR: Make sure git is installed and available on your system's PATH environment variable.")
     preflight_exit()
 
@@ -34,11 +34,9 @@ if not subprocess.call(['git', '-C', "../", 'status'], stderr=subprocess.STDOUT,
 # External Deps (requirements.txt)
 try:
     import mysql.connector
-    from mysql.connector import errorcode
     from git import Repo
     import yaml
     import colorama
-    from colorama import Fore, Style
 except Exception as e:
     print("ERROR: Exception occured while importing external dependencies:")
     print(e)
@@ -68,7 +66,6 @@ from migrations import convert_mission_status
 from migrations import convert_zilart_status
 from migrations import add_job_master_column_chars
 from migrations import currency2
-from migrations import extend_valid_targets
 from migrations import languages
 from migrations import add_field_chocobo_column
 from migrations import add_new_wardrobe_columns
@@ -98,7 +95,6 @@ migrations = [
     convert_zilart_status,
     add_job_master_column_chars,
     currency2,
-    extend_valid_targets,
     languages,
     add_field_chocobo_column,
     add_new_wardrobe_columns
@@ -126,7 +122,7 @@ player_data = [
     'char_spells.sql',
     'char_stats.sql',
     'char_storage.sql',
-    'char_style.sql',
+    'char_colorama.Style.sql',
     'char_unlocks.sql',
     'char_vars.sql',
     'chars.sql',
@@ -138,14 +134,23 @@ player_data = [
 ]
 import_files = []
 backups = []
-database = host = port = login = password = None
-db = cur = None
+database = None
+host = None
+port = None
+login = None
+password = None
+db = None
+cur = None
 repo = Repo('../')
-current_version = current_client = release_version = release_client = None
+current_version = None
+current_client = None
+release_version = None
+release_client = None
 express_enabled = False
-auto_backup = auto_update_client = True
+auto_backup = None
+auto_update_client = True
 mysql_bin = ''
-mysql_env = distutils.spawn.find_executable('mysql')
+mysql_env = shutil.which('mysql')
 if mysql_env:
     mysql_bin = os.path.dirname(mysql_env).replace('\\','/')
     if mysql_bin[-1] != '/':
@@ -166,9 +171,9 @@ def fetch_errors():
                 if not line: break
                 if 'Using a password on the command line interface can be insecure.' in line:
                     continue
-                print(Fore.RED + line)
+                print(colorama.Fore.RED + line)
         os.remove('error.log')
-    except:
+    except: # lgtm [py/catch-base-exception]
         return
 
 def fetch_credentials():
@@ -193,8 +198,8 @@ def fetch_credentials():
         port = os.getenv('XI_DB_PORT') or int(credentials['mysql_port'])
         login = os.getenv('XI_DB_USER') or credentials['mysql_login']
         password = os.getenv('XI_DB_USER_PASSWD') or credentials['mysql_password']
-    except:
-        print(Fore.RED + 'Error fetching credentials.\nCheck ../conf/map.conf.')
+    except: # lgtm [py/catch-base-exception]
+        print(colorama.Fore.RED + 'Error fetching credentials.\nCheck ../conf/map.conf.')
         return False
 
 def fetch_versions():
@@ -202,8 +207,8 @@ def fetch_versions():
     current_version = current_client = release_version = release_client = None
     try:
         release_version = repo.git.rev_parse(repo.head.object.hexsha, short=4)
-    except:
-        print(Fore.RED + 'Unable to read current version hash.')
+    except: # lgtm [py/catch-base-exception]
+        print(colorama.Fore.RED + 'Unable to read current version hash.')
     try:
         with open('../conf/default/version.conf') as f:
             while True:
@@ -212,8 +217,8 @@ def fetch_versions():
                 match = re.match(r'\S?CLIENT_VER:\s+(\S+)', line)
                 if match:
                     release_client = match.group(1)
-    except:
-        print(Fore.RED + 'Unable to read ../conf/default/version.conf.')
+    except: # lgtm [py/catch-base-exception]
+        print(colorama.Fore.RED + 'Unable to read ../conf/default/version.conf.')
     try:
         with open('../conf/version.conf') as f:
             while True:
@@ -226,8 +231,8 @@ def fetch_versions():
                     match = re.match(r'\S?CLIENT_VER:\s+(\S+)', line)
                     if match:
                         current_client = match.group(1)
-    except:
-        print(Fore.RED + 'Unable to read ../conf/version.conf.')
+    except: # lgtm [py/catch-base-exception]
+        print(colorama.Fore.RED + 'Unable to read ../conf/version.conf.')
     if current_version and release_version:
         fetch_files(True)
     else:
@@ -247,7 +252,7 @@ def fetch_configs():
                         auto_backup = int(value)
                     if key == 'auto_update_client':
                         auto_update_client = bool(value)
-    except:
+    except: # lgtm [py/catch-base-exception]
         write_configs()
 
 def write_configs():
@@ -269,8 +274,8 @@ def fetch_files(express=False):
                 express_enabled = False
                 if len(repo.commit(current_version).diff(release_version,paths='tools/migrations')) > 0:
                     express_enabled = True
-        except:
-            print(Fore.RED + 'Error checking diffs.\nCheck that hash is valid in ../conf/version.conf.')
+        except: # lgtm [py/catch-base-exception]
+            print(colorama.Fore.RED + 'Error checking diffs.\nCheck that hash is valid in ../conf/version.conf.')
     else:
         for (_, _, filenames) in os.walk('../sql/'):
             import_files.extend(filenames)
@@ -285,7 +290,7 @@ def fetch_files(express=False):
     import_files.sort()
     try:
         import_files.append(import_files.pop(import_files.index('triggers.sql')))
-    except:
+    except: # lgtm [py/catch-base-exception]
         return
 
 def write_version(silent=False):
@@ -312,11 +317,11 @@ def write_version(silent=False):
             with open('../conf/version.conf', 'a') as vfile:
                 vfile.write('\n#DB_VER: ' + release_version)
         if update_client:
-            print(Fore.GREEN + 'Updated client version!')
+            print(colorama.Fore.GREEN + 'Updated client version!')
         fetch_versions()
-    except:
+    except: # lgtm [py/catch-base-exception]
         fileinput.close()
-        print(Fore.RED + 'Error writing version.')
+        print(colorama.Fore.RED + 'Error writing version.')
 
 def import_file(file):
     print('Importing ' + file + '...')
@@ -333,7 +338,7 @@ def import_file(file):
     for line in result.stderr.splitlines():
         # Safe to ignore this warning
         if 'Using a password on the command line interface can be insecure' not in line:
-            print(Fore.RED + line)
+            print(colorama.Fore.RED + line)
 
 def connect():
     global db, cur
@@ -346,12 +351,12 @@ def connect():
                 use_pure=True)
         cur = db.cursor()
     except mysql.connector.Error as err:
-        if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
-            print(Fore.RED + 'Incorrect mysql_login or mysql_password, update ../conf/map.conf.')
+        if err.errno == mysql.connector.errorcodeER_ACCESS_DENIED_ERROR:
+            print(colorama.Fore.RED + 'Incorrect mysql_login or mysql_password, update ../conf/map.conf.')
             close()
             return False
-        elif err.errno == errorcode.ER_BAD_DB_ERROR:
-            print(Fore.RED + 'Database ' + database + ' does not exist.')
+        elif err.errno == mysql.connector.errorcodeER_BAD_DB_ERROR:
+            print(colorama.Fore.RED + 'Database ' + database + ' does not exist.')
             if input('Would you like to create new database: ' + database + '? [y/N] ').lower() == 'y':
                 create_command = '"' + mysql_bin + 'mysqladmin' + exe + '" -h ' + host + ' -P ' + str(port) + ' -u ' + login + ' -p' + password + ' CREATE ' + database
                 os.system(create_command + log_errors)
@@ -359,7 +364,7 @@ def connect():
                 setup_db()
                 connect()
         else:
-            print(Fore.RED + err)
+            print(colorama.Fore.RED + err)
         return False
 
 def close():
@@ -373,7 +378,7 @@ def setup_db():
     fetch_files()
     for sql_file in import_files:
         import_file(sql_file)
-    print(Fore.GREEN + 'Finished importing!')
+    print(colorama.Fore.GREEN + 'Finished importing!')
     write_version()
 
 def backup_db(silent=False,lite=False):
@@ -395,7 +400,7 @@ def backup_db(silent=False,lite=False):
                     ' > ../sql/backups/' + database + time.strftime('%Y%m%d-%H%M%S') + '-full.sql'
         os.system(dumpcmd + log_errors)
         fetch_errors()
-        print(Fore.GREEN + 'Database saved!')
+        print(colorama.Fore.GREEN + 'Database saved!')
         time.sleep(0.5)
 
 def express_update(silent=False):
@@ -407,7 +412,7 @@ def update_db(silent=False,express=False):
     if not express:
         fetch_files()
     if not silent:
-        print(Fore.GREEN + 'The following files will be imported:')
+        print(colorama.Fore.GREEN + 'The following files will be imported:')
         for sql_file in import_files:
             if sql_file not in player_data:
                 print(sql_file)
@@ -415,7 +420,7 @@ def update_db(silent=False,express=False):
         for sql_file in import_files:
             if sql_file not in player_data:
                 import_file(sql_file)
-        print(Fore.GREEN + 'Finished importing!')
+        print(colorama.Fore.GREEN + 'Finished importing!')
         run_all_migrations(silent or express)
         write_version(silent)
 
@@ -424,7 +429,7 @@ def adjust_mysql_bin():
     while True:
         choice = input('Please enter the path to your MySQL bin directory or press enter to check PATH.\ne.g. C:\\Program Files\\MariaDB 10.5\\bin\\\n> ').replace('\\', '/')
         if choice == '':
-            mysql_file = distutils.spawn.find_executable('mysql')
+            mysql_file = shutil.which('mysql')
             if not mysql_file:
                 continue
             choice = os.path.dirname(mysql_file).replace('\\','/')
@@ -465,9 +470,9 @@ def adjust_auto_update_client():
 
 def adjust_imports():
     while True:
-        print(Fore.GREEN + 'The following files are marked as protected and will not be imported:')
+        print(colorama.Fore.GREEN + 'The following files are marked as protected and will not be imported:')
         for i, safe_file in enumerate(player_data):
-            print(Fore.GREEN + str(i + 1) + Style.RESET_ALL + '. ' + safe_file)
+            print(colorama.Fore.GREEN + str(i + 1) + colorama.Style.RESET_ALL + '. ' + safe_file)
         choice = input('Choose a number to remove it from this list, or type a file name to include it.\n> ')
         if not choice:
             return
@@ -478,7 +483,7 @@ def adjust_imports():
 
 def run_all_migrations(silent=False):
     migrations_needed = []
-    print(Fore.GREEN + 'Checking migrations...')
+    print(colorama.Fore.GREEN + 'Checking migrations...')
     for migration in migrations:
         check_migration(migration, migrations_needed, silent)
     if len(migrations_needed) > 0:
@@ -492,43 +497,43 @@ def run_all_migrations(silent=False):
         for migration in migrations_needed:
             print('Running migrations for ' + migration.migration_name() + '...')
             migration.migrate(cur, db)
-        print(Fore.GREEN + 'Finished migrations!')
+        print(colorama.Fore.GREEN + 'Finished migrations!')
         if os.path.exists('migration_errors.log'):
-            print(Fore.RED + 'There were errors with some migrations, this likely means one or more characters \n'
+            print(colorama.Fore.RED + 'There were errors with some migrations, this likely means one or more characters \n'
                 'have corrupt data in some field. See migration_errors.log for more details.')
         time.sleep(0.5)
     else:
-        print(Fore.GREEN + 'No migrations required.')
+        print(colorama.Fore.GREEN + 'No migrations required.')
         time.sleep(0.5)
 
 def check_migration(migration, migrations_needed, silent=False):
     migration.check_preconditions(cur)
     if not migration.needs_to_run(cur):
         if not silent:
-            print(Fore.RED + '[' + Fore.GREEN + '*' + Fore.RED + '] ' + Style.RESET_ALL + migration.migration_name())
+            print(colorama.Fore.RED + '[' + colorama.Fore.GREEN + '*' + colorama.Fore.RED + '] ' + colorama.Style.RESET_ALL + migration.migration_name())
         return
     migrations_needed.append(migration)
     if not silent:
-        print(Fore.RED + '[ ] ' + Style.RESET_ALL + migration.migration_name())
+        print(colorama.Fore.RED + '[ ] ' + colorama.Style.RESET_ALL + migration.migration_name())
 
 def restore_backup():
     backup_db()
     fetch_files()
     while len(backups):
         for i, backup in enumerate(backups):
-            print(Fore.GREEN + str(i + 1) + Style.RESET_ALL + '. ' + backup)
+            print(colorama.Fore.GREEN + str(i + 1) + colorama.Style.RESET_ALL + '. ' + backup)
         choice = input('Choose a number to import, or type "delete #" to delete a file.\n> ')
         if choice.isnumeric():
             choice = int(choice)
             if 0 < choice < len(backups) + 1:
                 backup_file = backups[choice - 1]
                 print(colorama.ansi.clear_screen())
-                print(Fore.RED + 'If this is a full backup created by this tool, it is recommended to manually change \n'
+                print(colorama.Fore.RED + 'If this is a full backup created by this tool, it is recommended to manually change \n'
                     'the DB_VER in ../conf/version.conf to the hash sequence in the filename, after \n'
                     'the database name and the timestamp, so that express update functions properly.')
                 if input('Import ' + backup_file + '? [y/N] ').lower() == 'y':
                     import_file('backups/' + backup_file)
-                    print(Fore.GREEN + 'Finished importing!')
+                    print(colorama.Fore.GREEN + 'Finished importing!')
                     break
             else:
                 bad_selection()
@@ -541,7 +546,7 @@ def restore_backup():
                     print(colorama.ansi.clear_screen())
                     if input('Delete ' + backup_file + '? [y/N] ').lower() == 'y':
                         os.remove('../sql/backups/' + backup_file)
-                        print(Fore.GREEN + 'Deleted ' + backup_file + '!')
+                        print(colorama.Fore.GREEN + 'Deleted ' + backup_file + '!')
                         fetch_files()
                 else:
                     bad_selection()
@@ -550,43 +555,43 @@ def restore_backup():
 
 def reset_db():
     backup_db()
-    print(Fore.RED + 'Are you sure you want to reset your database to default?')
+    print(colorama.Fore.RED + 'Are you sure you want to reset your database to default?')
     choice = input('Type "reset ' + database + '" to confirm.\n> ')
     choice = re.match(r'^reset (\w+)$', choice)
     if choice and choice.group(1) == database:
         setup_db()
 
 def bad_selection():
-    print(Fore.RED + 'Invalid selection.')
+    print(colorama.Fore.RED + 'Invalid selection.')
     time.sleep(0.5)
 
 def menu():
-    print(Fore.GREEN + 'o' + Fore.RED + '--------------------------------' + Fore.GREEN + 'o\n' + Fore.RED + 
-          '| ' + Style.RESET_ALL + 'LandSandBoat Database Management Tool ' + Fore.RED + '|\n'
-          '| ' + Style.RESET_ALL + str('Connected to ' + database).center(30) + Fore.RED + ' |')
+    print(colorama.Fore.GREEN + 'o' + colorama.Fore.RED + '---------------------------------------' + colorama.Fore.GREEN + 'o\n' + colorama.Fore.RED +
+          '| ' + colorama.Style.RESET_ALL + 'LandSandBoat Database Management Tool ' + colorama.Fore.RED + '|\n'
+          '| ' + colorama.Style.RESET_ALL + str('Connected to ' + database).center(30) + colorama.Fore.RED + '        |')
     if current_version:
-        print(Fore.RED + '| ' + Style.RESET_ALL + str('#' + current_version).center(30) + Fore.RED + ' |')
-    print(Fore.GREEN + 'o' + Fore.RED + '--------------------------------' + Fore.GREEN + 'o')
-    if express_enabled: 
-        print(Fore.RED + '|' + Fore.GREEN + 'e' + Style.RESET_ALL + '. Express Update ' + str('(#' + release_version + ')').ljust(14) + Fore.RED + '|')
-    print(Fore.RED + '|' + Fore.GREEN + '1' + Style.RESET_ALL + '. Update DB                    ' + Fore.RED + '|\n'
-          '|' + Fore.GREEN + '2' + Style.RESET_ALL + '. Check migrations             ' + Fore.RED + '|\n'
-          '|' + Fore.GREEN + '3' + Style.RESET_ALL + '. Backup                       ' + Fore.RED + '|\n'
-          '|' + Fore.GREEN + '4' + Style.RESET_ALL + '. Restore/Import               ' + Fore.RED + '|\n'
-          '|' + Fore.GREEN + 'r' + Style.RESET_ALL + '. Reset DB                     ' + Fore.RED + '|\n'
-          '|' + Fore.GREEN + 's' + Style.RESET_ALL + '. Settings                     ' + Fore.RED + '|\n'
-          '|' + Fore.GREEN + 'q' + Style.RESET_ALL + '. Quit                         ' + Fore.RED + '|\n'
-          + Fore.GREEN + 'o' + Fore.RED + '--------------------------------' + Fore.GREEN + 'o')
+        print(colorama.Fore.RED + '| ' + colorama.Style.RESET_ALL + str('#' + current_version).center(30) + colorama.Fore.RED + '        |')
+    print(colorama.Fore.GREEN + 'o' + colorama.Fore.RED + '---------------------------------------' + colorama.Fore.GREEN + 'o')
+    if express_enabled:
+        print(colorama.Fore.RED + '|' + colorama.Fore.GREEN + 'e' + colorama.Style.RESET_ALL + '. Express Update ' + str('(#' + release_version + ')').ljust(14) + colorama.Fore.RED + '       |')
+    print(colorama.Fore.RED + '|' + colorama.Fore.GREEN + '1' + colorama.Style.RESET_ALL + '. Update DB                           ' + colorama.Fore.RED + '|\n'
+          '|' + colorama.Fore.GREEN + '2' + colorama.Style.RESET_ALL + '. Check migrations                    ' + colorama.Fore.RED + '|\n'
+          '|' + colorama.Fore.GREEN + '3' + colorama.Style.RESET_ALL + '. Backup                              ' + colorama.Fore.RED + '|\n'
+          '|' + colorama.Fore.GREEN + '4' + colorama.Style.RESET_ALL + '. Restore/Import                      ' + colorama.Fore.RED + '|\n'
+          '|' + colorama.Fore.GREEN + 'r' + colorama.Style.RESET_ALL + '. Reset DB                            ' + colorama.Fore.RED + '|\n'
+          '|' + colorama.Fore.GREEN + 's' + colorama.Style.RESET_ALL + '. Settings                            ' + colorama.Fore.RED + '|\n'
+          '|' + colorama.Fore.GREEN + 'q' + colorama.Style.RESET_ALL + '. Quit                                ' + colorama.Fore.RED + '|\n'
+          + colorama.Fore.GREEN + 'o' + colorama.Fore.RED + '---------------------------------------' + colorama.Fore.GREEN + 'o')
 
 def settings():
     fetch_configs()
-    print(Fore.GREEN + 'Current MySQL bin location: ' + Style.RESET_ALL + mysql_bin)
+    print(colorama.Fore.GREEN + 'Current MySQL bin location: ' + colorama.Style.RESET_ALL + mysql_bin)
     if input('Change this location? [y/N] ').lower() == 'y':
         adjust_mysql_bin()
-    print(Fore.GREEN + 'Automatic backup for command line updates: ' + Style.RESET_ALL + str(bool(auto_backup)))
+    print(colorama.Fore.GREEN + 'Automatic backup for command line updates: ' + colorama.Style.RESET_ALL + str(bool(auto_backup)))
     if input('Change this? [y/N] ').lower() == 'y':
         adjust_auto_backup()
-    print(Fore.GREEN + 'Automatic client version update for command line updates: ' + Style.RESET_ALL + str(auto_update_client))
+    print(colorama.Fore.GREEN + 'Automatic client version update for command line updates: ' + colorama.Style.RESET_ALL + str(auto_update_client))
     if input('Change this? [y/N] ').lower() == 'y':
         adjust_auto_update_client()
     adjust_imports()
@@ -621,7 +626,7 @@ def main():
             if len(sys.argv) > 2 and str(sys.argv[2]) == 'full':
                 full_update = True
             if current_version and release_version and not express_enabled and not full_update:
-                print(Fore.GREEN + 'Database is up to date.')
+                print(colorama.Fore.GREEN + 'Database is up to date.')
                 return
             if connect() != False:
                 if express_enabled and not full_update:
