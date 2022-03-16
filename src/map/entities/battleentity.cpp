@@ -1827,6 +1827,11 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
             battleutils::HandleSpikesDamage(this, PTarget, &actionTarget, attack.GetDamage());
         }
 
+        if (actionTarget.reaction == REACTION::PARRY && PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_BATTUTA))
+        {
+            battleutils::HandleParrySpikesDamage(this, PTarget, &actionTarget, attack.GetDamage());
+        }
+
         if (actionTarget.speceffect == SPECEFFECT::HIT && actionTarget.param > 0)
         {
             actionTarget.speceffect = SPECEFFECT::RECOIL;
