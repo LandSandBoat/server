@@ -1848,11 +1848,11 @@ namespace battleutils
 
                 // Issekigan grants parry rate bonus. From best available data, if you already capped out at 25% parry it grants another 25% bonus for ~50%
                 // parry rate
-                if (PDefender->objtype == TYPE_PC && PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_ISSEKIGAN))
+                if ((PDefender->objtype == TYPE_PC || PDefender->objtype == TYPE_TRUST)
+                    && PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_ISSEKIGAN))
                 {
                     int16 issekiganBonus = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_ISSEKIGAN)->GetPower();
-                    // ShowDebug(CL_CYAN"GetParryRate: Issekigan Active, Parry Rate %d -> %d...", parryRate, (parryRate+issekiganBonus));
-                    parryRate = parryRate + issekiganBonus;
+                    parryRate += issekiganBonus;
                 }
 
                 // Inquartata grants a flat parry rate bonus.
