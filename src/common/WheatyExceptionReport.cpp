@@ -709,6 +709,13 @@ PEXCEPTION_POINTERS pExceptionInfo)
         }
 
         CONTEXT trashableContext = *pCtx;
+        WriteStackDetails(&trashableContext, false, nullptr);
+        printTracesForAllThreads(false);
+
+        Log(_T("====================================================="));
+        Log(_T("=== Full Dumps ==="));
+
+        trashableContext = *pCtx;
         WriteStackDetails(&trashableContext, true, nullptr);
         printTracesForAllThreads(true);
 
