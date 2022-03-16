@@ -7,9 +7,8 @@
 
 #include "efsw/efsw.hpp"
 
-Filewatcher::Filewatcher(std::string const& path, std::function<void(const std::filesystem::path& path)> _func)
+Filewatcher::Filewatcher(std::string const& path)
 : basePath(path)
-, func(_func)
 #ifdef USE_GENERIC_FILEWATCHER
 , fileWatcher(std::make_unique<efsw::FileWatcher>(true))
 #else
@@ -31,7 +30,7 @@ void Filewatcher::handleFileAction(efsw::WatchID watchid, const std::string& dir
         case efsw::Actions::Delete:
             break;
         case efsw::Actions::Modified:
-            func(fullPath.generic_string());
+            modifiedQueue.enqueue(fullPath);
             break;
         case efsw::Actions::Moved:
             break;

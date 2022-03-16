@@ -36,10 +36,10 @@
 
 namespace version
 {
-    std::string GetGitSha();
-    std::string GetGitBranch();
-    std::string GetGitDate();
-    std::string GetGitCommitSubject();
+    const char* GetGitSha();
+    const char* GetGitBranch();
+    const char* GetGitDate();
+    const char* GetGitCommitSubject();
 }
 
 #endif /* _VERSION_H_ */

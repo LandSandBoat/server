@@ -273,8 +273,6 @@ int32 do_init(int32 argc, char** argv)
 
     PacketGuard::Init();
 
-    luautils::EnableFilewatcher();
-
     ShowStatus("The map-server is ready to work...");
     ShowMessage("=======================================================================");
     return 0;
@@ -352,6 +350,8 @@ void set_server_type()
 
 int32 do_sockets(fd_set* rfd, duration next)
 {
+    message::handle_incoming();
+
     struct timeval timeout;
     int32          ret;
     memcpy(rfd, &readfds, sizeof(*rfd));

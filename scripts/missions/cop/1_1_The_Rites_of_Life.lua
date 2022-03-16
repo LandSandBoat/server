@@ -61,8 +61,8 @@ mission.sections =
                 end,
 
                 [39] = function(player, csid, option, npc)
-                    player:setMissionStatus(xi.mission.log_id.COP, 0)
                     mission:begin(player)
+                    mission:setVar(player, 'Status', 1)
                 end,
             },
         },
@@ -71,7 +71,7 @@ mission.sections =
     -- 2. After the cutscene has finished, enter Upper Jeuno for another cutscene.
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId and missionStatus == 0
+            return currentMission == mission.missionId and vars.Status == 1
         end,
 
         [xi.zone.UPPER_JEUNO] =
@@ -86,7 +86,7 @@ mission.sections =
             onEventFinish =
             {
                 [2] = function(player, csid, option, npc)
-                    player:setMissionStatus(xi.mission.log_id.COP, 1)
+                    mission:setVar(player, 'Status', 2)
                 end,
             },
         },
@@ -95,7 +95,7 @@ mission.sections =
     -- 3. After the second cutscene finishes, speak to Monberaux (G-10, inside the Infirmary) for final cutscene and a Mysterious Amulet.
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId and missionStatus == 1
+            return currentMission == mission.missionId and vars.Status == 2
         end,
 
         [xi.zone.UPPER_JEUNO] =
@@ -113,11 +113,29 @@ mission.sections =
                 end,
 
                 [207] = function(player, csid, option, npc)
-                    if mission:complete(player) then
-                        player:setMissionStatus(xi.mission.log_id.COP, 0)
-                    end
+                    mission:complete(player)
                 end,
             },
+        },
+    },
+
+    -- 4. After the first cutscene, several NPCs permanently change their default dialogue.
+    {
+        check = function(player, currentMission, missionStatus, vars)
+            return player:hasCompletedMission(mission.areaId, mission.missionId) or
+                vars.Status > 0
+        end,
+
+        [xi.zone.RULUDE_GARDENS] =
+        {
+            ['Auchefort'] = mission:event(8):replaceDefault(),
+            ['Baran']     = mission:event(17):replaceDefault(),
+            ['Colti']     = mission:event(21):replaceDefault(),
+        },
+
+        [xi.zone.UPPER_JEUNO] =
+        {
+            ['Rosaline'] = mission:event(97):replaceDefault(),
         },
     },
 }

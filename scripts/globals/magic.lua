@@ -1034,9 +1034,7 @@ end
 function getElementalDamageReduction(target, element)
     local defense = 1
     if element > 0 then
-        -- Todo: make this 1000 scale not 256, and adjust all usages of it to match the new scale
-        defense = 1 - (target:getMod(xi.magic.specificDmgTakenMod[element]) / 256)
-
+        defense = 1 - (target:getMod(xi.magic.specificDmgTakenMod[element]) / 10000)
         return utils.clamp(defense, 0.0, 2.0)
     end
 
