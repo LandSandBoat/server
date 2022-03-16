@@ -118,15 +118,15 @@ const char* GetUptimeString()
     auto uptimeDuration = server_clock::now() - gStartUpTime;
     if (uptimeDuration < std::chrono::minutes(2))
     {
-        gUptimeString = fmt::format("Process Uptime: {} seconds", std::chrono::duration_cast<std::chrono::seconds>(uptimeDuration).count()).c_str();
+        gUptimeString = fmt::format("{} seconds", std::chrono::duration_cast<std::chrono::seconds>(uptimeDuration).count()).c_str();
     }
     else if (uptimeDuration > std::chrono::minutes(120))
     {
-        gUptimeString = fmt::format("Process Uptime: {} hours", std::chrono::duration_cast<std::chrono::hours>(uptimeDuration).count()).c_str();
+        gUptimeString = fmt::format("{} hours", std::chrono::duration_cast<std::chrono::hours>(uptimeDuration).count()).c_str();
     }
     else
     {
-        gUptimeString = fmt::format("Process Uptime: {} minutes", std::chrono::duration_cast<std::chrono::minutes>(uptimeDuration).count()).c_str();
+        gUptimeString = fmt::format("{} minutes", std::chrono::duration_cast<std::chrono::minutes>(uptimeDuration).count()).c_str();
     }
 
     return gUptimeString.c_str();
@@ -158,7 +158,7 @@ LONG WINAPI WheatyExceptionReport::WheatyUnhandledExceptionFilter(
 
     // A fatal event has occured, from this point on all code executed comes from our error handling.
     // We no longer need to trace where each log comes from, so change to a cleaner pattern.
-    spdlog::set_pattern("[%D %T:%e]%^[%l][%n]%$ %v");
+    spdlog::set_pattern("%v");
 
     TCHAR module_folder_name[MAX_PATH];
     GetModuleFileName(nullptr, module_folder_name, MAX_PATH);
@@ -226,7 +226,11 @@ LONG WINAPI WheatyExceptionReport::WheatyUnhandledExceptionFilter(
         PEXCEPTION_RECORD pExceptionRecord = pExceptionInfo->ExceptionRecord;
 
         Log(_T("====================================================="));
+        // Make this red
+        spdlog::set_pattern("%^%v%$");
         Log(_T("!!! CRASH !!!"));
+        spdlog::set_pattern("%v");
+
         Log(_T("Exception code: %08X (%s)"),
             pExceptionRecord->ExceptionCode,
             GetExceptionString(pExceptionRecord->ExceptionCode));
@@ -259,6 +263,8 @@ LONG WINAPI WheatyExceptionReport::WheatyUnhandledExceptionFilter(
         Log(_T("Process Name: %s"), szFaultingModule);
         Log(_T("Full crash report: %s"), m_szLogFileName);
         Log(_T("Memory dump: %s"), m_szDumpFileName);
+        std::time_t t = std::time(nullptr);
+        Log(_T(fmt::format("Time of crash: {:%Y/%m/%d %H:%M:%S}", fmt::localtime(t)).c_str()));
 
         GenerateExceptionReport(pExceptionInfo);
 
@@ -709,6 +715,13 @@ PEXCEPTION_POINTERS pExceptionInfo)
         }
 
         CONTEXT trashableContext = *pCtx;
+        WriteStackDetails(&trashableContext, false, nullptr);
+        printTracesForAllThreads(false);
+
+        Log(_T("====================================================="));
+        Log(_T("=== Full Dumps ==="));
+
+        trashableContext = *pCtx;
         WriteStackDetails(&trashableContext, true, nullptr);
         printTracesForAllThreads(true);
 
