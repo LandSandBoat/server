@@ -23,7 +23,10 @@ zone_object.onZoneIn = function(player, prevZone)
         player:setPos(-601.433, 35.204, -520.031, 1)
     end
 
-    if player:getCurrentMission(COP) == xi.mission.id.cop.THE_CALL_OF_THE_WYRMKING and player:getCharVar("VowsDone") == 1 then
+    if
+        player:getCurrentMission(COP) == xi.mission.id.cop.THE_CALL_OF_THE_WYRMKING and
+        xi.mission.getVar(player, xi.mission.log_id.COP, xi.mission.id.cop.THE_CALL_OF_THE_WYRMKING, 'Status') == 0
+    then
         cs = 906
     elseif quests.rainbow.onZoneIn(player) then
         cs = 901
@@ -47,11 +50,9 @@ end
 
 zone_object.onEventFinish = function(player, csid, option)
     if csid == 906 then
-        if player:getCurrentMission(COP) == xi.mission.id.cop.A_TRANSIENT_DREAM then
-            player:completeMission(xi.mission.log_id.COP, xi.mission.id.cop.A_TRANSIENT_DREAM)
-            player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_CALL_OF_THE_WYRMKING)
+        if player:getCurrentMission(COP) == xi.mission.id.cop.THE_CALL_OF_THE_WYRMKING then
+            xi.mission.setVar(player, xi.mission.log_id.COP, xi.mission.id.cop.THE_CALL_OF_THE_WYRMKING, 'Status', 1)
         end
-        player:setCharVar("VowsDone", 0)
     end
 end
 

@@ -33,7 +33,7 @@ entity.onTrigger = function(player, npc)
         }
     end
 
-    player:showText(npc, ID.text.MIGRAN_SHOP_DIALOG)
+    player:showText(npc, ID.text.MIGRAN_SHOP_DIALOG) -- 10914 with 2 items available, may change
     xi.shop.general(player, stock)
 end
 
