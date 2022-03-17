@@ -100,7 +100,7 @@ xi.survivalGuide.onTrigger = function(player)
     local tableIndex = survival.zoneIdToGuideIdMap[currentZoneId]
     local guide = survival.survivalGuides[tableIndex]
 
---    if guide then
+    if guide then
         -- If this survival guide hasn't been registered yet (saved to database) do that now.
         local foundRegisteredGuide = checkForRegisteredSurvivalGuide(player,
                                                                      guide)
