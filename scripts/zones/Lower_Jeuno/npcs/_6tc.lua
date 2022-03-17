@@ -50,12 +50,6 @@ end
 
 entity.onTrigger = function(player, npc)
     if
-        player:getCurrentMission(COP) == xi.mission.id.cop.A_VESSEL_WITHOUT_A_CAPTAIN and
-        player:getCharVar("PromathiaStatus") == 0
-    then
-        player:startEvent(86) --COP event
-
-    elseif
         player:getCurrentMission(COP) == xi.mission.id.cop.TENDING_AGED_WOUNDS and
         player:getCharVar("PromathiaStatus") == 1
     then
@@ -69,7 +63,6 @@ entity.onTrigger = function(player, npc)
 
     else
         player:messageSpecial(ID.text.ITS_LOCKED)
-        return 1
     end
 end
 
@@ -77,10 +70,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 86 then
-        player:setCharVar("PromathiaStatus", 1)
-        player:startEvent(9)
-    elseif csid == 22 then
+    if csid == 22 then
         player:completeMission(xi.mission.log_id.COP, xi.mission.id.cop.TENDING_AGED_WOUNDS)
         player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED)
         player:setCharVar("PromathiaStatus", 0)
