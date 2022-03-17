@@ -83,7 +83,7 @@ const char* MAP_CONF_FILENAME = nullptr;
 int8* g_PBuff   = nullptr; // Global packet clipboard
 int8* PTempBuff = nullptr; // Temporary packet clipboard
 
-thread_local Sql_t* SqlHandle = nullptr;
+Sql_t* SqlHandle = nullptr;
 
 int32  map_fd          = 0; // main socket
 uint32 map_amntplayers = 0; // map amnt unique players
@@ -215,7 +215,9 @@ int32 do_init(int32 argc, char** argv)
     ShowStatus("do_init: zlib is reading");
     zlib_init();
 
-    messageThread = std::thread(message::init, map_config.msg_server_ip.c_str(), map_config.msg_server_port);
+    ShowStatus("do_init: starting ZMQ thread");
+    message::init(map_config.msg_server_ip.c_str(), map_config.msg_server_port);
+    messageThread = std::thread(message::listen);
 
     ShowStatus("do_init: loading items");
     itemutils::Initialize();

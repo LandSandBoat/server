@@ -42,6 +42,9 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "utils/jailutils.h"
 #include "utils/zoneutils.h"
 
+// Use global SqlHandle
+extern Sql_t* SqlHandle;
+
 namespace message
 {
     zmq::context_t zContext;
@@ -605,16 +608,6 @@ namespace message
 
     void init(const char* chatIp, uint16 chatPort)
     {
-        SqlHandle = Sql_Malloc();
-
-        if (Sql_Connect(SqlHandle, map_config.mysql_login.c_str(), map_config.mysql_password.c_str(), map_config.mysql_host.c_str(), map_config.mysql_port,
-                        map_config.mysql_database.c_str()) == SQL_ERROR)
-        {
-            exit(EXIT_FAILURE);
-        }
-
-        Sql_Keepalive(SqlHandle, "MessageKeepalive");
-
         zContext = zmq::context_t(1);
         zSocket  = std::make_unique<zmq::socket_t>(zContext, zmq::socket_type::dealer);
 
@@ -650,8 +643,6 @@ namespace message
         {
             ShowFatalError("Message: Unable to connect chat socket: %s", err.what());
         }
-
-        listen();
     }
 
     void close()
