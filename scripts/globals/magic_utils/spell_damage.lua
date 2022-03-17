@@ -414,14 +414,22 @@ xi.magic_utils.spell_damage.calculateResist = function(caster, target, spell, sk
     -- STEP 4: Get Resist Tier
     -----------------------------------
     local resistTier = 0
-    local randomVar  = math.random(1, 100)
+    local randomVar  = math.random()
 
-    -- 3 random rolls.
-    for i = 3, 1, -1 do
-        if randomVar > magicHitRate then
-            resistTier = resistTier + 1
-        end
-        randomVar = math.random(1, 100)
+    -- Define tresholds for resists
+    local p = magicHitRate / 100
+    local half = (1 - p)
+	local quart = ((1 - p)^2)
+	local eighth = ((1 - p)^3)
+
+    if randomVar <= eighth then
+        resistTier = 3
+    elseif randomVar <= quart then
+        resistTier = 2
+    elseif randomVar <= half then
+        resistTier = 1
+    else
+        resistTier = 0
     end
 
     -- Apply extra roll for elemental resistance boons. Testimonial. This needs retail testing.
