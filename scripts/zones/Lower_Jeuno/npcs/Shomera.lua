@@ -1,20 +1,21 @@
 -----------------------------------
--- Area: Lower Jeuno
---  NPC: Shomera
+-- Area: Ru'Lude Gardens
+--  NPC: Survival Guide
+-----------------------------------
+require("scripts/globals/survival_guide")
 -----------------------------------
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
-entity.onTrigger = function(player, npc)
-    player:startEvent(195)
+entity.onTrigger = function(player, targetNpc)
+    xi.survivalGuide.onTrigger(player)
 end
 
 entity.onEventUpdate = function(player, csid, option)
+    xi.survivalGuide.onEventUpdate(player, csid, option)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, targetNpc)
+    xi.survivalGuide.onEventFinish(player, csid, option)
 end
 
 return entity

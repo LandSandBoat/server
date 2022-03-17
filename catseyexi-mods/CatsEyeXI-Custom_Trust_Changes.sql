@@ -15,3 +15,10 @@ UPDATE mob_skills SET mob_skill_aoe = '1', mob_anim_id = '642' WHERE mob_skill_i
 UPDATE mob_skills SET mob_anim_id = '236' WHERE mob_skill_id = '3711'; -- ArkEv Vorpal_Blade
 INSERT INTO `mob_skills` VALUES (3712,635,'dominion_slash',0,7.0,2000,1500,4,0,0,0,0,0,0); -- ArkEV Dominion_Slash
 UPDATE mob_skills SET mob_anim_id = '2920' WHERE mob_skill_id = '3713'; -- ArkEv Chant_du_Cygne
+
+-- Iroha II
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Iroha_II',1133,3733); -- Amatsu Kyori
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Iroha_II',1133,3734); -- Amatsu Hanadoki
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Iroha_II',1133,3736); -- Amatsu Gachirin
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Iroha_II',1133,3737); -- Amatsu Suien
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Iroha_II',1133,3738); -- Rise from Ashes
