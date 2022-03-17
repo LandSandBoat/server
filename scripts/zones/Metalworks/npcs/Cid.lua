@@ -125,10 +125,6 @@ entity.onTrigger = function(player, npc)
     elseif copMission == xi.mission.id.cop.THE_ENDURING_TUMULT_OF_WAR and copStatus == 1 then
         player:startEvent(849)
 
-    -- THE CALL OF THE WYRMKING
-    elseif copMission == xi.mission.id.cop.THE_CALL_OF_THE_WYRMKING and copStatus == 1 then
-        player:startEvent(845)
-
     -- THE ROAD FORKS
     elseif
         copMission == xi.mission.id.cop.THE_ROAD_FORKS and
@@ -155,10 +151,6 @@ entity.onTrigger = function(player, npc)
         player:startEvent(502) -- Reminder dialogue from Cid if you have not spoken to Hilda
     elseif cidsSecret == QUEST_ACCEPTED and hasLetter then
         player:startEvent(509)
-
-    -- DEFAULT DIALOG
-    else
-        player:startEvent(500)
     end
 end
 
@@ -199,10 +191,6 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("PromathiaStatus", 2)
     elseif csid == 856 then
         player:setCharVar("PromathiaStatus", 1)
-    elseif csid == 845 then
-        player:setCharVar("PromathiaStatus", 0)
-        player:completeMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_CALL_OF_THE_WYRMKING)
-        player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.A_VESSEL_WITHOUT_A_CAPTAIN)
     elseif csid == 847 then
         -- finishing mission 3.3 and all sub missions
         player:setCharVar("EMERALD_WATERS_Status", 0)
