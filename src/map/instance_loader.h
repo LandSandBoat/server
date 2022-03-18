@@ -24,9 +24,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include <future>
 
-#include "../common/cbasetypes.h"
-#include "../common/socket.h"
-#include "../common/sql.h"
+#include "common/cbasetypes.h"
+#include "common/socket.h"
 
 class CCharEntity;
 class CInstance;
