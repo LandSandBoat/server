@@ -142,7 +142,7 @@ map_session_data_t* mapsession_createsession(uint32 ip, uint16 port)
 
     int32 ret = sql::Query(fmtQuery, ip2str(map_session_data->client_addr));
 
-    if (ret == SQL_ERROR || Sql_NumRows(SqlHandle) == 0)
+    if (ret == SQL_ERROR || sql::NumRows() == 0)
     {
         ShowError("recv_parse: Invalid login attempt from %s", ip2str(map_session_data->client_addr));
         return nullptr;
@@ -522,7 +522,7 @@ int32 recv_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
 
             int32 ret = sql::Query(fmtQuery, CharID);
 
-            if (ret == SQL_ERROR || Sql_NumRows(SqlHandle) == 0 || Sql_NextRow(SqlHandle) != SQL_SUCCESS)
+            if (ret == SQL_ERROR || sql::NumRows() == 0 || sql::NextRow() != SQL_SUCCESS)
             {
                 ShowError("recv_parse: Cannot load charid %u", CharID);
                 return -1;
@@ -532,7 +532,7 @@ int32 recv_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
 
             ret = sql::Query(fmtQuery, CharID);
 
-            if (ret == SQL_ERROR || Sql_NumRows(SqlHandle) == 0 || Sql_NextRow(SqlHandle) != SQL_SUCCESS)
+            if (ret == SQL_ERROR || sql::NumRows() == 0 || sql::NextRow() != SQL_SUCCESS)
             {
                 ShowError("recv_parse: Cannot load session_key for charid %u", CharID);
             }

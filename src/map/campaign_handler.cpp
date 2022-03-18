@@ -30,7 +30,7 @@ void CCampaignHandler::LoadCampaignZone(CZone* PZone)
     static const char* query = "SELECT id, zoneid, isbattle, nation, heroism, influence_sandoria, influence_bastok, influence_windurst, influence_beastman, "
                                "current_fortifications, current_resources, max_fortifications, max_resources FROM campaign_map WHERE zoneid = %u";
 
-    if (sql::Query(query, PZone->GetID()) != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+    if (sql::Query(query, PZone->GetID()) != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
     {
         m_zoneCampaignId        = (uint8)Sql_GetUIntData(SqlHandle, 0);
         m_zoneId                = (uint8)Sql_GetUIntData(SqlHandle, 1);

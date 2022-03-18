@@ -1632,9 +1632,9 @@ namespace automaton
 
         int32 ret = sql::Query(Query);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (ret != SQL_ERROR && sql::NumRows() != 0)
         {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql::NextRow() == SQL_SUCCESS)
             {
                 SpellID        id = (SpellID)Sql_GetUIntData(SqlHandle, 0);
                 AutomatonSpell PSpell{ (uint16)Sql_GetUIntData(SqlHandle, 1), (uint8)Sql_GetUIntData(SqlHandle, 2), (EFFECT)Sql_GetUIntData(SqlHandle, 3),
@@ -1698,9 +1698,9 @@ namespace automaton
 
         int32 ret = sql::Query(Query);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (ret != SQL_ERROR && sql::NumRows() != 0)
         {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql::NextRow() == SQL_SUCCESS)
             {
                 uint16           id = (uint16)Sql_GetUIntData(SqlHandle, 0);
                 AutomatonAbility PAbility{ (uint8)Sql_GetUIntData(SqlHandle, 2), (uint16)Sql_GetUIntData(SqlHandle, 3) };

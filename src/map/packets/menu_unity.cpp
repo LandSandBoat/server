@@ -29,9 +29,9 @@ CMenuUnityPacket::CMenuUnityPacket(CCharEntity* PChar)
     std::pair<int32, double> unity_current[11];
     std::pair<int32, double> unity_previous[11];
 
-    if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+    if (ret != SQL_ERROR && sql::NumRows() != 0)
     {
-        while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        while (sql::NextRow() == SQL_SUCCESS)
         {
             int unity_leader        = Sql_GetIntData(SqlHandle, 0) - 1;
 

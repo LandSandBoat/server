@@ -61,9 +61,9 @@ namespace traits
 
         int32 ret = sql::Query(Query, MAX_TRAIT_ID);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (ret != SQL_ERROR && sql::NumRows() != 0)
         {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql::NextRow() == SQL_SUCCESS)
             {
                 char* contentTag = nullptr;
                 Sql_GetData(SqlHandle, 6, &contentTag, nullptr);
@@ -93,9 +93,9 @@ namespace traits
 
         ret = sql::Query(Query, MAX_TRAIT_ID);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (ret != SQL_ERROR && sql::NumRows() != 0)
         {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql::NextRow() == SQL_SUCCESS)
             {
                 CBlueTrait* PTrait = new CBlueTrait(Sql_GetIntData(SqlHandle, 0), Sql_GetIntData(SqlHandle, 2));
 

@@ -48,9 +48,9 @@ CPartyDefinePacket::CPartyDefinePacket(CParty* PParty, bool loadTrust)
 
         int ret = sql::Query(msg, allianceid, PParty->GetPartyID(), PARTY_SECOND | PARTY_THIRD);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) > 0)
+        if (ret != SQL_ERROR && sql::NumRows() > 0)
         {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql::NextRow() == SQL_SUCCESS)
             {
                 uint16       targid = 0;
                 CCharEntity* PChar  = zoneutils::GetChar(Sql_GetUIntData(SqlHandle, 0));

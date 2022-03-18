@@ -278,9 +278,9 @@ namespace zoneutils
         inet_ntop(AF_INET, &map_ip, address, INET_ADDRSTRLEN);
         int32 ret = sql::Query(Query, map_ip.s_addr, address, map_port);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (ret != SQL_ERROR && sql::NumRows() != 0)
         {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql::NextRow() == SQL_SUCCESS)
             {
                 const char* contentTag = (const char*)Sql_GetData(SqlHandle, 16);
 
@@ -370,9 +370,9 @@ namespace zoneutils
         inet_ntop(AF_INET, &map_ip, address, INET_ADDRSTRLEN);
         int32 ret = sql::Query(Query, map_ip.s_addr, address, map_port);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (ret != SQL_ERROR && sql::NumRows() != 0)
         {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql::NextRow() == SQL_SUCCESS)
             {
                 uint16    ZoneID   = (uint16)Sql_GetUIntData(SqlHandle, 0);
                 ZONE_TYPE zoneType = GetZone(ZoneID)->GetType();
@@ -564,9 +564,9 @@ namespace zoneutils
 
         ret = sql::Query(PetQuery, map_ip.s_addr, address, map_port);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (ret != SQL_ERROR && sql::NumRows() != 0)
         {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql::NextRow() == SQL_SUCCESS)
             {
                 uint16 ZoneID   = (uint16)Sql_GetUIntData(SqlHandle, 0);
                 uint32 masterid = (uint32)Sql_GetUIntData(SqlHandle, 1);
@@ -614,7 +614,7 @@ namespace zoneutils
         static const char* Query = "SELECT zonetype FROM zone_settings "
                                    "WHERE zoneid = %u LIMIT 1";
 
-        if (sql::Query(Query, ZoneID) != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        if (sql::Query(Query, ZoneID) != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
         {
             if (static_cast<ZONE_TYPE>(Sql_GetUIntData(SqlHandle, 0)) == ZONE_TYPE::DUNGEON_INSTANCED)
             {
@@ -650,9 +650,9 @@ namespace zoneutils
         inet_ntop(AF_INET, &map_ip, address, INET_ADDRSTRLEN);
         int ret = sql::Query(query, map_ip.s_addr, address, map_port);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (ret != SQL_ERROR && sql::NumRows() != 0)
         {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql::NextRow() == SQL_SUCCESS)
             {
                 zones.push_back(Sql_GetUIntData(SqlHandle, 0));
             }
@@ -1069,7 +1069,7 @@ namespace zoneutils
 
         int ret = sql::Query(query, zoneID);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
         {
             inet_pton(AF_INET, (const char*)Sql_GetData(SqlHandle, 0), &ipp);
             uint64 port = Sql_GetUIntData(SqlHandle, 1);

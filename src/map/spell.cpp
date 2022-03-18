@@ -430,9 +430,9 @@ namespace spell
 
         int32 ret = sql::Query(Query);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (ret != SQL_ERROR && sql::NumRows() != 0)
         {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql::NextRow() == SQL_SUCCESS)
             {
                 char*   contentTag;
                 CSpell* PSpell = nullptr;
@@ -546,9 +546,9 @@ namespace spell
 
         ret = sql::Query(blueQuery);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (ret != SQL_ERROR && sql::NumRows() != 0)
         {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql::NextRow() == SQL_SUCCESS)
             {
                 char* contentTag;
                 Sql_GetData(SqlHandle, 7, &contentTag, nullptr);
@@ -580,9 +580,9 @@ namespace spell
             SqlHandle,
             "SELECT spellId, modId, value FROM blue_spell_mods WHERE spellId IN (SELECT spellId FROM spell_list LEFT JOIN blue_spell_list USING (spellId))");
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (ret != SQL_ERROR && sql::NumRows() != 0)
         {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql::NextRow() == SQL_SUCCESS)
             {
                 uint16 spellId = (uint16)Sql_GetUIntData(SqlHandle, 0);
                 Mod    modID   = static_cast<Mod>(Sql_GetUIntData(SqlHandle, 1));
@@ -597,9 +597,9 @@ namespace spell
 
         ret = sql::Query("SELECT spellId, meritId, content_tag FROM spell_list INNER JOIN merits ON spell_list.name = merits.name;");
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (ret != SQL_ERROR && sql::NumRows() != 0)
         {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql::NextRow() == SQL_SUCCESS)
             {
                 char* contentTag;
                 Sql_GetData(SqlHandle, 2, &contentTag, nullptr);

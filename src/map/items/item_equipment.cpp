@@ -317,7 +317,7 @@ void CItemEquipment::SetAugmentMod(uint16 type, uint8 value)
 
     int32 ret = sql::Query(fmtQuery, type);
 
-    while (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+    while (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
     {
         uint8 multiplier = (uint8)Sql_GetUIntData(SqlHandle, 1);
         Mod   modId      = static_cast<Mod>(Sql_GetUIntData(SqlHandle, 2));

@@ -352,9 +352,9 @@ namespace ability
 
         int32 ret = sql::Query(Query, MAX_JOBTYPE, MAX_ABILITY_ID);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (ret != SQL_ERROR && sql::NumRows() != 0)
         {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql::NextRow() == SQL_SUCCESS)
             {
                 char* contentTag = nullptr;
                 Sql_GetData(SqlHandle, 20, &contentTag, nullptr);
@@ -402,9 +402,9 @@ namespace ability
 
         ret = sql::Query(Query2);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (ret != SQL_ERROR && sql::NumRows() != 0)
         {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql::NextRow() == SQL_SUCCESS)
             {
                 Charge_t* PCharge   = new Charge_t;
                 PCharge->ID         = Sql_GetUIntData(SqlHandle, 0);

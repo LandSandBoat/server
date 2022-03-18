@@ -220,9 +220,9 @@ void CMeritPoints::LoadMeritPoints(uint32 charid)
 
     if (sql::Query("SELECT meritid, upgrades FROM char_merit WHERE charid = %u", charid) != SQL_ERROR)
     {
-        for (uint64 j = 0; j < Sql_NumRows(SqlHandle); j++)
+        for (uint64 j = 0; j < sql::NumRows(); j++)
         {
-            if (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            if (sql::NextRow() == SQL_SUCCESS)
             {
                 uint32 meritID  = Sql_GetUIntData(SqlHandle, 0);
                 uint32 upgrades = Sql_GetUIntData(SqlHandle, 1);
@@ -524,7 +524,7 @@ namespace meritNameSpace
             spell_list sl ON m.name = sl.name ORDER BY m.meritid ASC LIMIT %u",
                               MERITS_COUNT);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != MERITS_COUNT)
+        if (ret != SQL_ERROR && sql::NumRows() != MERITS_COUNT)
         {
             // issue with unknown catagories causing massive confusion
 
@@ -533,7 +533,7 @@ namespace meritNameSpace
             int8   previousCatIndex = 0; // will be set on every loop, used for detecting a catagory change
             int8   catMeritIndex    = 0; // counts number of merits in a catagory
 
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql::NextRow() == SQL_SUCCESS)
             {
                 Merit_t Merit = {}; // creat a new merit template.
 
@@ -572,7 +572,7 @@ namespace meritNameSpace
 
             if (ret != SQL_ERROR)
             {
-                        while( Sql_NextRow(SqlHandle) == SQL_SUCCESS )
+                        while( sql::NextRow() == SQL_SUCCESS )
                         {
                     GMeritsTemplate
                         }

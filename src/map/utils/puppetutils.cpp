@@ -42,7 +42,7 @@ namespace puppetutils
 
         int32 ret = sql::Query(Query, PChar->id);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
         {
             size_t length      = 0;
             char*  attachments = nullptr;

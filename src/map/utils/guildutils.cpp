@@ -60,11 +60,11 @@ namespace guildutils
     void Initialize()
     {
         const char* fmtQuery = "SELECT DISTINCT id, points_name FROM guilds ORDER BY id ASC;";
-        if (sql::Query(fmtQuery) != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (sql::Query(fmtQuery) != SQL_ERROR && sql::NumRows() != 0)
         {
-            g_PGuildList.reserve((const unsigned int)Sql_NumRows(SqlHandle));
+            g_PGuildList.reserve((const unsigned int)sql::NumRows());
 
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql::NextRow() == SQL_SUCCESS)
             {
                 g_PGuildList.push_back(new CGuild(Sql_GetIntData(SqlHandle, 0), (const char*)Sql_GetData(SqlHandle, 1)));
             }
@@ -73,11 +73,11 @@ namespace guildutils
 
         fmtQuery = "SELECT DISTINCT guildid FROM guild_shops ORDER BY guildid ASC LIMIT 256;";
 
-        if (sql::Query(fmtQuery) != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (sql::Query(fmtQuery) != SQL_ERROR && sql::NumRows() != 0)
         {
-            g_PGuildShopList.reserve((const unsigned int)Sql_NumRows(SqlHandle));
+            g_PGuildShopList.reserve((const unsigned int)sql::NumRows());
 
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql::NextRow() == SQL_SUCCESS)
             {
                 g_PGuildShopList.push_back(new CItemContainer(Sql_GetIntData(SqlHandle, 0)));
             }
@@ -91,11 +91,11 @@ namespace guildutils
 
             int32 ret = sql::Query(fmtQuery, PGuildShop->GetID(), MAX_CONTAINER_SIZE);
 
-            if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+            if (ret != SQL_ERROR && sql::NumRows() != 0)
             {
-                PGuildShop->SetSize((uint8)Sql_NumRows(SqlHandle));
+                PGuildShop->SetSize((uint8)sql::NumRows());
 
-                while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+                while (sql::NextRow() == SQL_SUCCESS)
                 {
                     CItemShop* PItem = new CItemShop(Sql_GetIntData(SqlHandle, 0));
 
@@ -153,7 +153,7 @@ namespace guildutils
         int  ret    = sql::Query(query);
         bool update = false;
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) == 1 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        if (ret != SQL_ERROR && sql::NumRows() == 1 && sql::NextRow() == SQL_SUCCESS)
         {
             if (Sql_GetUIntData(SqlHandle, 0) != CVanaTime::getInstance()->getJstYearDay())
             {
@@ -174,7 +174,7 @@ namespace guildutils
 
         // load the pattern in case it was set by another server (and this server did not set it)
         sql::Query("SELECT value FROM server_variables WHERE name = '[GUILD]pattern';");
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) == 1 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        if (ret != SQL_ERROR && sql::NumRows() == 1 && sql::NextRow() == SQL_SUCCESS)
         {
             pattern = Sql_GetUIntData(SqlHandle, 0);
         }

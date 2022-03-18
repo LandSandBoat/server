@@ -50,7 +50,7 @@ CCurrencyPacket1::CCurrencyPacket1(CCharEntity* PChar)
                         FROM char_points WHERE charid = %d";
 
     int ret = sql::Query(query, PChar->id);
-    if (ret != SQL_ERROR && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+    if (ret != SQL_ERROR && sql::NextRow() == SQL_SUCCESS)
     {
         ref<uint32>(0x04) = Sql_GetIntData(SqlHandle, 0); // sandoria_cp
         ref<uint32>(0x08) = Sql_GetIntData(SqlHandle, 1); // bastok_cp

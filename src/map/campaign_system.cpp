@@ -30,9 +30,9 @@ namespace campaign
     {
         std::string query = "SELECT id, reconnaissance, morale, prosperity FROM campaign_nation ORDER BY id ASC;";
         int         ret   = sql::Query(query.c_str());
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (ret != SQL_ERROR && sql::NumRows() != 0)
         {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql::NextRow() == SQL_SUCCESS)
             {
                 CampaignNation nation;
                 nation.reconnaissance = (uint8)Sql_GetUIntData(SqlHandle, 1);

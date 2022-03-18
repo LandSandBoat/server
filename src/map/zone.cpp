@@ -305,9 +305,9 @@ void CZone::LoadZoneLines()
 
     int32 ret = sql::Query(fmtQuery, m_zoneID);
 
-    if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+    if (ret != SQL_ERROR && sql::NumRows() != 0)
     {
-        while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        while (sql::NextRow() == SQL_SUCCESS)
         {
             zoneLine_t* zl = new zoneLine_t;
 
@@ -343,9 +343,9 @@ void CZone::LoadZoneWeather()
     static const char* Query = "SELECT weather FROM zone_weather WHERE zone = %u;";
 
     int32 ret = sql::Query(Query, m_zoneID);
-    if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+    if (ret != SQL_ERROR && sql::NumRows() != 0)
     {
-        Sql_NextRow(SqlHandle);
+        sql::NextRow();
         auto* weatherBlob = reinterpret_cast<uint16*>(Sql_GetData(SqlHandle, 0));
         for (uint16 i = 0; i < WEATHER_CYCLE; i++)
         {
@@ -391,7 +391,7 @@ void CZone::LoadZoneSettings()
                                "WHERE zoneid = %u "
                                "LIMIT 1";
 
-    if (sql::Query(Query, m_zoneID) != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+    if (sql::Query(Query, m_zoneID) != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
     {
         m_zoneName.insert(0, (const char*)Sql_GetData(SqlHandle, 0));
 

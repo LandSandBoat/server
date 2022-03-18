@@ -57,9 +57,9 @@ namespace mobSpellList
 
         int32 ret = sql::Query(Query, MAX_MOBSPELLLIST_ID);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (ret != SQL_ERROR && sql::NumRows() != 0)
         {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql::NextRow() == SQL_SUCCESS)
             {
                 SpellID spellId = (SpellID)Sql_GetIntData(SqlHandle, 1);
                 uint16  minLvl  = (uint16)Sql_GetIntData(SqlHandle, 2);

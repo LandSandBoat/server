@@ -113,7 +113,7 @@ uint32 CAlliance::partyCount() const
 
     if (ret != SQL_ERROR)
     {
-        return (uint32)Sql_NumRows(SqlHandle);
+        return (uint32)sql::NumRows();
     }
     return 0;
 }
@@ -127,7 +127,7 @@ void CAlliance::removeParty(CParty* party)
                                 JOIN accounts_parties ON accounts_parties.charid = chars.charid WHERE allianceid = %u AND partyflag & %d \
                                 AND partyid != %d ORDER BY timestamp ASC LIMIT 1;",
                             m_AllianceID, PARTY_LEADER, party->GetPartyID());
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
         {
             std::string newLeader((const char*)Sql_GetData(SqlHandle, 0));
             assignAllianceLeader(newLeader.c_str());
@@ -208,9 +208,9 @@ void CAlliance::addParty(CParty* party)
     int ret = sql::Query("SELECT partyflag & %d FROM accounts_parties WHERE allianceid = %d ORDER BY partyflag & %d ASC;", PARTY_SECOND | PARTY_THIRD,
                         m_AllianceID, PARTY_SECOND | PARTY_THIRD);
 
-    if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) > 0)
+    if (ret != SQL_ERROR && sql::NumRows() > 0)
     {
-        while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        while (sql::NextRow() == SQL_SUCCESS)
         {
             if (Sql_GetUIntData(SqlHandle, 0) == newparty)
             {
@@ -242,9 +242,9 @@ void CAlliance::addParty(uint32 partyid) const
     int ret = sql::Query("SELECT partyflag FROM accounts_parties WHERE allianceid = %d ORDER BY partyflag & %d ASC;", m_AllianceID,
                         PARTY_SECOND | PARTY_THIRD);
 
-    if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) > 0)
+    if (ret != SQL_ERROR && sql::NumRows() > 0)
     {
-        while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        while (sql::NextRow() == SQL_SUCCESS)
         {
             uint8 partyflag = Sql_GetUIntData(SqlHandle, 0);
             uint8 oldparty  = partyflag & (PARTY_SECOND | PARTY_THIRD);
@@ -291,7 +291,7 @@ void CAlliance::assignAllianceLeader(const char* name)
                         "SELECT chars.charid from accounts_sessions JOIN chars USING (charid) JOIN accounts_parties USING (charid) "
                         "WHERE charname = '%s' AND allianceid = %d AND partyflag & %d;",
                         name, m_AllianceID, PARTY_LEADER);
-    if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) > 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+    if (ret != SQL_ERROR && sql::NumRows() > 0 && sql::NextRow() == SQL_SUCCESS)
     {
         int charid = Sql_GetUIntData(SqlHandle, 0);
 

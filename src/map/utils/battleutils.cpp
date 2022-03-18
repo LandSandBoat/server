@@ -110,9 +110,9 @@ namespace battleutils
 
         int32 ret = sql::Query(fmtQuery);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (ret != SQL_ERROR && sql::NumRows() != 0)
         {
-            for (uint32 x = 0; x < 100 && Sql_NextRow(SqlHandle) == SQL_SUCCESS; ++x)
+            for (uint32 x = 0; x < 100 && sql::NextRow() == SQL_SUCCESS; ++x)
             {
                 for (uint32 y = 0; y < 14; ++y)
                 {
@@ -127,9 +127,9 @@ namespace battleutils
 
         ret = sql::Query(fmtQuery);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (ret != SQL_ERROR && sql::NumRows() != 0)
         {
-            for (uint32 x = 0; x < MAX_SKILLTYPE && Sql_NextRow(SqlHandle) == SQL_SUCCESS; ++x)
+            for (uint32 x = 0; x < MAX_SKILLTYPE && sql::NextRow() == SQL_SUCCESS; ++x)
             {
                 auto SkillID = std::clamp<uint8>(Sql_GetIntData(SqlHandle, 0), 0, MAX_SKILLTYPE - 1);
 
@@ -155,9 +155,9 @@ namespace battleutils
 
         int32 ret = sql::Query(fmtQuery, MAX_WEAPONSKILL_ID);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (ret != SQL_ERROR && sql::NumRows() != 0)
         {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql::NextRow() == SQL_SUCCESS)
             {
                 CWeaponSkill* PWeaponSkill = new CWeaponSkill(Sql_GetIntData(SqlHandle, 0));
 
@@ -201,9 +201,9 @@ namespace battleutils
 
         int32 ret = sql::Query(specialQuery);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (ret != SQL_ERROR && sql::NumRows() != 0)
         {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql::NextRow() == SQL_SUCCESS)
             {
                 CMobSkill* PMobSkill = new CMobSkill(Sql_GetIntData(SqlHandle, 0));
                 PMobSkill->setAnimationID(Sql_GetIntData(SqlHandle, 1));
@@ -232,9 +232,9 @@ namespace battleutils
 
         ret = sql::Query(fmtQuery);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (ret != SQL_ERROR && sql::NumRows() != 0)
         {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql::NextRow() == SQL_SUCCESS)
             {
                 int16 skillListId = Sql_GetIntData(SqlHandle, 0);
 
@@ -253,9 +253,9 @@ namespace battleutils
 
         int32 ret = sql::Query(fmtQuery);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (ret != SQL_ERROR && sql::NumRows() != 0)
         {
-            for (uint32 x = 0; Sql_NextRow(SqlHandle) == SQL_SUCCESS; ++x)
+            for (uint32 x = 0; sql::NextRow() == SQL_SUCCESS; ++x)
             {
                 uint16 level                              = (uint16)Sql_GetIntData(SqlHandle, 0);
                 uint16 count                              = (uint16)Sql_GetIntData(SqlHandle, 1);

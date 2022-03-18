@@ -1434,9 +1434,9 @@ namespace luautils
             // Get all magian table columns to build lua keys
             const char*              ColumnQuery = "SHOW COLUMNS FROM `magian`;";
             std::vector<std::string> magianColumns;
-            if (sql::Query(ColumnQuery) == SQL_SUCCESS && Sql_NumRows(SqlHandle) != 0)
+            if (sql::Query(ColumnQuery) == SQL_SUCCESS && sql::NumRows() != 0)
             {
-                while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+                while (sql::NextRow() == SQL_SUCCESS)
                 {
                     magianColumns.push_back((const char*)Sql_GetData(SqlHandle, 0));
                 }
@@ -1453,7 +1453,7 @@ namespace luautils
             {
                 int32 trial = va[0].as<int32>();
                 int32 field{ 0 };
-                if (sql::Query(Query, trial) != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+                if (sql::Query(Query, trial) != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
                 {
                     for (auto column : magianColumns)
                     {
@@ -1469,7 +1469,7 @@ namespace luautils
                 for (auto trial : trials)
                 {
                     int32 ret = sql::Query(Query, trial);
-                    if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+                    if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
                     {
                         auto  inner_table = table.create_named(trial);
                         int32 field{ 0 };
@@ -1503,11 +1503,11 @@ namespace luautils
 
         const char* Query = "SELECT `trialId` from `magian` WHERE `previousTrial` = %u;";
         int32       ret   = sql::Query(Query, parentTrial);
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) > 0)
+        if (ret != SQL_ERROR && sql::NumRows() > 0)
         {
             auto  table = lua.create_table();
             int32 field{ 0 };
-            while (Sql_NextRow(SqlHandle) == 0)
+            while (sql::NextRow() == 0)
             {
                 int32 childTrial = Sql_GetIntData(SqlHandle, 0);
                 table[++field]   = childTrial;
@@ -3995,7 +3995,7 @@ namespace luautils
 
         int32 ret = sql::Query("SELECT value FROM server_variables WHERE name = '%s' LIMIT 1;", varName);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
         {
             value = (int32)Sql_GetIntData(SqlHandle, 0);
         }
@@ -4240,7 +4240,7 @@ namespace luautils
         {
             int32 r   = 0;
             int32 ret = sql::Query("SELECT count(mobid) FROM `nm_spawn_points` where mobid=%u", mobid);
-            if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS && Sql_GetUIntData(SqlHandle, 0) > 0)
+            if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS && Sql_GetUIntData(SqlHandle, 0) > 0)
             {
                 r = xirand::GetRandomNumber(Sql_GetUIntData(SqlHandle, 0));
             }
@@ -4251,7 +4251,7 @@ namespace luautils
             }
 
             ret = sql::Query("SELECT pos_x, pos_y, pos_z FROM `nm_spawn_points` WHERE mobid=%u AND pos=%i", mobid, r);
-            if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
             {
                 PMob->m_SpawnPoint.rotation = xirand::GetRandomNumber(256);
                 PMob->m_SpawnPoint.x        = Sql_GetFloatData(SqlHandle, 0);
@@ -4607,7 +4607,7 @@ namespace luautils
 
         uint16 effectId = 0;
         int32  ret      = sql::Query("SELECT effectId FROM despoil_effects WHERE itemId = %u", itemId);
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
         {
             effectId = (uint16)Sql_GetUIntData(SqlHandle, 0);
         }

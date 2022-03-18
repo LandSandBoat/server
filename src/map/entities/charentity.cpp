@@ -1841,7 +1841,7 @@ int32 CCharEntity::GetTimeCreated()
 
     int32 ret = sql::Query(fmtQuery, id);
 
-    if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+    if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
     {
         return Sql_GetIntData(SqlHandle, 0);
     }

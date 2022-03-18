@@ -82,7 +82,7 @@ CSynthSuggestionPacket::CSynthSuggestionPacket(uint16 skillID, uint16 skillLevel
     //      recipes intended for the craft we are seeking to improve?
     int32 ret = sql::Query(fmtQuery, craftname, craftname, skillLevel + 5, skillLevel + 10);
 
-    if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+    if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
     {
         std::map<uint16, uint16> ingredients;
         uint16                   subcraftIDs[3] = { 0u, 0u, 0u };

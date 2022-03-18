@@ -111,9 +111,9 @@ int32 login_parse(int32 fd)
                                     FROM accounts \
                                     WHERE accounts.login = '%s' AND accounts.password = PASSWORD('%s')";
                 int32       ret      = sql::Query(fmtQuery, escaped_name, escaped_pass);
-                if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+                if (ret != SQL_ERROR && sql::NumRows() != 0)
                 {
-                    ret = Sql_NextRow(SqlHandle);
+                    ret = sql::NextRow();
 
                     sd->accid    = (uint32)Sql_GetUIntData(SqlHandle, 0);
                     uint8 status = (uint8)Sql_GetUIntData(SqlHandle, 1);
@@ -124,7 +124,7 @@ int32 login_parse(int32 fd)
 
                         // int32 ret = Sql_Query(SqlHandle,fmtQuery,sd->accid);
 
-                        // if( ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 )
+                        // if( ret != SQL_ERROR && sql::NumRows() != 0 )
                         //{
                         //  ref<uint8>(session[fd]->wdata,0) = 0x05; // SESSION has already activated
                         //  WFIFOSET(fd,33);
@@ -138,9 +138,9 @@ int32 login_parse(int32 fd)
                                 ON accounts_sessions.accid = accounts.id \
                                 WHERE accounts.id = %d;";
                         ret      = sql::Query(fmtQuery, sd->accid);
-                        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) == 1)
+                        if (ret != SQL_ERROR && sql::NumRows() == 1)
                         {
-                            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+                            while (sql::NextRow() == SQL_SUCCESS)
                             {
                                 uint32 charid = Sql_GetUIntData(SqlHandle, 0);
                                 uint64 ip     = Sql_GetUIntData(SqlHandle, 1);
@@ -234,16 +234,16 @@ int32 login_parse(int32 fd)
                     return -1;
                 }
 
-                if (Sql_NumRows(SqlHandle) == 0)
+                if (sql::NumRows() == 0)
                 {
                     // creating new account_id
                     const char* fmtQuery = "SELECT max(accounts.id) FROM accounts;";
 
                     uint32 accid = 0;
 
-                    if (sql::Query(fmtQuery) != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+                    if (sql::Query(fmtQuery) != SQL_ERROR && sql::NumRows() != 0)
                     {
-                        Sql_NextRow(SqlHandle);
+                        sql::NextRow();
 
                         accid = Sql_GetUIntData(SqlHandle, 0) + 1;
                     }
@@ -296,7 +296,7 @@ int32 login_parse(int32 fd)
                                     FROM accounts \
                                     WHERE accounts.login = '%s' AND accounts.password = PASSWORD('%s')";
                 int32       ret      = sql::Query(fmtQuery, escaped_name, escaped_pass);
-                if (ret == SQL_ERROR || Sql_NumRows(SqlHandle) == 0)
+                if (ret == SQL_ERROR || sql::NumRows() == 0)
                 {
                     session[fd]->wdata.resize(1);
                     ref<uint8>(session[fd]->wdata.data(), 0) = LOGIN_ERROR;
@@ -305,7 +305,7 @@ int32 login_parse(int32 fd)
                     return 0;
                 }
 
-                ret = Sql_NextRow(SqlHandle);
+                ret = sql::NextRow();
 
                 sd->accid    = (uint32)Sql_GetUIntData(SqlHandle, 0);
                 uint8 status = (uint8)Sql_GetUIntData(SqlHandle, 1);

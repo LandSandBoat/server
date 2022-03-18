@@ -88,9 +88,9 @@ CInstance* CInstanceLoader::LoadInstance()
 
     int32 ret = Sql_Query(SqlHandle, Query, instance->GetID());
 
-    if (!instance->Failed() && ret != SQL_ERROR /*&& Sql_NumRows(SqlHandle) != 0*/)
+    if (!instance->Failed() && ret != SQL_ERROR /*&& sql::NumRows() != 0*/)
     {
-        while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        while (sql::NextRow() == SQL_SUCCESS)
         {
             CMobEntity* PMob = new CMobEntity;
 
@@ -234,9 +234,9 @@ CInstance* CInstanceLoader::LoadInstance()
 
         ret = Sql_Query(SqlHandle, Query, instance->GetID(), zoneMin, zoneMax);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (ret != SQL_ERROR && sql::NumRows() != 0)
         {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql::NextRow() == SQL_SUCCESS)
             {
                 CNpcEntity* PNpc = new CNpcEntity;
                 PNpc->id         = (uint32)Sql_GetUIntData(SqlHandle, 0);

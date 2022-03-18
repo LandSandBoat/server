@@ -126,9 +126,9 @@ namespace effects
             "SELECT id, name, flags, type, negative_id, overwrite, block_id, remove_id, element, min_duration, sort_key FROM status_effects WHERE id < %u",
             MAX_EFFECTID);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (ret != SQL_ERROR && sql::NumRows() != 0)
         {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql::NextRow() == SQL_SUCCESS)
             {
                 uint16 EffectID = (uint16)Sql_GetIntData(SqlHandle, 0);
 
@@ -1521,9 +1521,9 @@ void CStatusEffectContainer::LoadStatusEffects()
 
     std::vector<CStatusEffect*> PEffectList;
 
-    if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+    if (ret != SQL_ERROR && sql::NumRows() != 0)
     {
-        while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        while (sql::NextRow() == SQL_SUCCESS)
         {
             auto flags    = (uint32)Sql_GetUIntData(SqlHandle, 8);
             auto duration = (uint32)Sql_GetUIntData(SqlHandle, 4);

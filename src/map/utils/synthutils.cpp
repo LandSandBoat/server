@@ -85,7 +85,7 @@ namespace synthutils
                               PChar->CraftContainer->getItemID(4), PChar->CraftContainer->getItemID(5), PChar->CraftContainer->getItemID(6),
                               PChar->CraftContainer->getItemID(7), PChar->CraftContainer->getItemID(8));
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
         {
             uint16 KeyItemID = (uint16)Sql_GetUIntData(SqlHandle, 1); // Check if recipe needs KI
 

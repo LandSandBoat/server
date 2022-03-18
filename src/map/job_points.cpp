@@ -38,9 +38,9 @@ void CJobPoints::LoadJobPoints()
                              "FROM char_job_points WHERE charid = %u ORDER BY jobid ASC",
                   m_PChar->id) != SQL_ERROR)
     {
-        for (uint64 i = 0; i < Sql_NumRows(SqlHandle); i++)
+        for (uint64 i = 0; i < sql::NumRows(); i++)
         {
-            if (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            if (sql::NextRow() == SQL_SUCCESS)
             {
                 uint32      jobId       = Sql_GetUIntData(SqlHandle, 1);
                 uint16      jobCategory = JobPointsCategoryByJobId(jobId);
@@ -209,7 +209,7 @@ namespace jobpointutils
     {
         if (sql::Query("SELECT jobid, jp_needed, modid, value FROM job_point_gifts ORDER BY jp_needed ASC") != SQL_ERROR)
         {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql::NextRow() == SQL_SUCCESS)
             {
                 JobPointGifts_t gift = {};
 

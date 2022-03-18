@@ -56,9 +56,9 @@ namespace gardenutils
     {
         int32 ret = sql::Query("SELECT resultId, seed, element1, element2, result, min_quantity, max_quantity, weight FROM gardening_results");
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (ret != SQL_ERROR && sql::NumRows() != 0)
         {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql::NextRow() == SQL_SUCCESS)
             {
                 uint8 SeedID   = (uint8)Sql_GetUIntData(SqlHandle, 1);
                 uint8 Element1 = (uint8)Sql_GetUIntData(SqlHandle, 2);

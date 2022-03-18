@@ -68,7 +68,7 @@ namespace conquest
 
         int ret = sql::Query(Query.c_str(), static_cast<uint8>(region));
 
-        if (ret == SQL_ERROR || Sql_NextRow(SqlHandle) != SQL_SUCCESS)
+        if (ret == SQL_ERROR || sql::NextRow() != SQL_SUCCESS)
         {
             return;
         }
@@ -276,7 +276,7 @@ namespace conquest
 
         int32 ret = sql::Query(Query, static_cast<uint8>(regionid));
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
         {
             sandoria = Sql_GetIntData(SqlHandle, 0);
             bastok   = Sql_GetIntData(SqlHandle, 1);
@@ -471,9 +471,9 @@ namespace conquest
 
         int32 ret = sql::Query(Query);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (ret != SQL_ERROR && sql::NumRows() != 0)
         {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql::NextRow() == SQL_SUCCESS)
             {
                 if (Sql_GetIntData(SqlHandle, 0) == 0)
                 {
@@ -498,9 +498,9 @@ namespace conquest
 
         ret = sql::Query(Query);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (ret != SQL_ERROR && sql::NumRows() != 0)
         {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql::NextRow() == SQL_SUCCESS)
             {
                 if (Sql_GetIntData(SqlHandle, 0) == 0)
                 {
@@ -568,9 +568,9 @@ namespace conquest
 
         int32 ret = sql::Query(Query);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (ret != SQL_ERROR && sql::NumRows() != 0)
         {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql::NextRow() == SQL_SUCCESS)
             {
                 if (Sql_GetIntData(SqlHandle, 0) == 0)
                 {
@@ -595,9 +595,9 @@ namespace conquest
 
         ret = sql::Query(Query);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (ret != SQL_ERROR && sql::NumRows() != 0)
         {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql::NextRow() == SQL_SUCCESS)
             {
                 if (Sql_GetIntData(SqlHandle, 0) == 0)
                 {
@@ -643,7 +643,7 @@ namespace conquest
 
         int32 ret = sql::Query(Query, static_cast<uint8>(RegionID));
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
         {
             return Sql_GetIntData(SqlHandle, 0);
         }

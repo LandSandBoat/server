@@ -60,9 +60,9 @@ void CGuild::updateGuildPointsPattern(uint8 pattern)
                             "guildid = %u AND pattern = %u AND rank = %u";
         int ret = sql::Query(query.c_str(), m_id, pattern, m_GPItemsRank[i]);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) > 0)
+        if (ret != SQL_ERROR && sql::NumRows() > 0)
         {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql::NextRow() == SQL_SUCCESS)
             {
                 m_GPItems[i].push_back(
                     GPItem_t(itemutils::GetItemPointer(Sql_GetUIntData(SqlHandle, 0)), Sql_GetUIntData(SqlHandle, 2), Sql_GetUIntData(SqlHandle, 1)));

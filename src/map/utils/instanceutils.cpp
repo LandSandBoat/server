@@ -58,9 +58,9 @@ namespace instanceutils
         inet_ntop(AF_INET, &map_ip, address, INET_ADDRSTRLEN);
         int32 ret = sql::Query(query, map_ip.s_addr, address, map_port);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (ret != SQL_ERROR && sql::NumRows() != 0)
         {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql::NextRow() == SQL_SUCCESS)
             {
                 InstanceData_t data;
 

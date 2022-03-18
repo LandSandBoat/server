@@ -120,9 +120,9 @@ namespace trustutils
                  FROM spell_list, mob_pools \
                  WHERE spell_list.spellid >= 896 AND mob_pools.poolid = (spell_list.spellid+5000) ORDER BY spell_list.spellid";
 
-        if (sql::Query(Query) != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (sql::Query(Query) != SQL_ERROR && sql::NumRows() != 0)
         {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql::NextRow() == SQL_SUCCESS)
             {
                 TrustSpell_ID* trustID = new TrustSpell_ID();
 
@@ -191,9 +191,9 @@ namespace trustutils
 
         auto ret = sql::Query(Query, TrustID);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (ret != SQL_ERROR && sql::NumRows() != 0)
         {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql::NextRow() == SQL_SUCCESS)
             {
                 Trust_t* trust = new Trust_t();
 

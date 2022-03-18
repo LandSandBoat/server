@@ -124,7 +124,7 @@ int32 lobbydata_parse(int32 fd)
 
                 const char* pfmtQuery = "SELECT content_ids FROM accounts WHERE id = %u;";
                 int32       ret       = sql::Query(pfmtQuery, sd->accid);
-                if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+                if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
                 {
                     CharList[28] = Sql_GetUIntData(SqlHandle, 0);
                 }
@@ -171,7 +171,7 @@ int32 lobbydata_parse(int32 fd)
                 int i = 0;
                 // Read information about a specific character.
                 // Extract all the necessary information about the character from the database.
-                while (Sql_NextRow(SqlHandle) != SQL_NO_DATA)
+                while (sql::NextRow() != SQL_NO_DATA)
                 {
                     char* strCharName = nullptr;
 
@@ -301,9 +301,9 @@ int32 lobbydata_parse(int32 fd)
                 uint16      PrevZone = 0;
                 uint16      gmlevel  = 0;
 
-                if (sql::Query(fmtQuery, charid, sd->accid) != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+                if (sql::Query(fmtQuery, charid, sd->accid) != SQL_ERROR && sql::NumRows() != 0)
                 {
-                    Sql_NextRow(SqlHandle);
+                    sql::NextRow();
 
                     ZoneID   = (uint16)Sql_GetUIntData(SqlHandle, 2);
                     PrevZone = (uint16)Sql_GetUIntData(SqlHandle, 3);
@@ -544,7 +544,7 @@ int32 lobbyview_parse(int32 fd)
                 {
                     const char* pfmtQuery = "SELECT expansions,features FROM accounts WHERE id = %u;";
                     int32       ret       = sql::Query(pfmtQuery, sd->accid);
-                    if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+                    if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
                     {
                         LOBBY_026_RESERVEPACKET(ReservePacket);
                         ref<uint16>(ReservePacket, 32) = Sql_GetUIntData(SqlHandle, 0); // Expansion Bitmask
@@ -718,7 +718,7 @@ int32 lobbyview_parse(int32 fd)
                         return -1;
                     }
 
-                    if (Sql_NumRows(SqlHandle) != 0 || invalidName)
+                    if (sql::NumRows() != 0 || invalidName)
                     {
                         if (invalidName)
                         {
@@ -820,9 +820,9 @@ int32 lobby_createchar(login_session_data_t* loginsd, int8* buf)
 
     uint32 CharID = 0;
 
-    if (Sql_NumRows(SqlHandle) != 0)
+    if (sql::NumRows() != 0)
     {
-        Sql_NextRow(SqlHandle);
+        sql::NextRow();
 
         CharID = (uint32)Sql_GetUIntData(SqlHandle, 0) + 1;
     }

@@ -73,7 +73,7 @@ namespace anticheat
         const char* fmtQuery = "SELECT action_bitmask, warning_message FROM cheat_types WHERE cheatid = %u";
         int32       ret      = sql::Query(fmtQuery, static_cast<uint32>(cheatid));
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
         {
             if (warningmsg != nullptr)
             {

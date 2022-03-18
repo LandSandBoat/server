@@ -48,9 +48,9 @@ CConquestPacket::CConquestPacket(CCharEntity* PChar)
     uint8 bastok_prev      = 0;
     uint8 windurst_prev    = 0;
 
-    if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+    if (ret != SQL_ERROR && sql::NumRows() != 0)
     {
-        while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        while (sql::NextRow() == SQL_SUCCESS)
         {
             int regionid            = Sql_GetIntData(SqlHandle, 0);
             int region_control      = Sql_GetIntData(SqlHandle, 1);

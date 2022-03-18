@@ -361,9 +361,9 @@ namespace itemutils
 
         int32 ret = sql::Query(Query, MAX_ITEMID);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (ret != SQL_ERROR && sql::NumRows() != 0)
         {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql::NextRow() == SQL_SUCCESS)
             {
                 CItem* PItem = CreateItem(Sql_GetUIntData(SqlHandle, 0));
 
@@ -453,9 +453,9 @@ namespace itemutils
         ret = Sql_Query(SqlHandle,
                         "SELECT itemId, modId, value FROM item_mods WHERE itemId IN (SELECT itemId FROM item_basic LEFT JOIN item_equipment USING (itemId))");
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (ret != SQL_ERROR && sql::NumRows() != 0)
         {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql::NextRow() == SQL_SUCCESS)
             {
                 uint16 ItemID = (uint16)Sql_GetUIntData(SqlHandle, 0);
                 Mod    modID  = static_cast<Mod>(Sql_GetUIntData(SqlHandle, 1));
@@ -472,9 +472,9 @@ namespace itemutils
             SqlHandle,
             "SELECT itemId, modId, value, petType FROM item_mods_pet WHERE itemId IN (SELECT itemId FROM item_basic LEFT JOIN item_equipment USING (itemId))");
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (ret != SQL_ERROR && sql::NumRows() != 0)
         {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql::NextRow() == SQL_SUCCESS)
             {
                 uint16     ItemID  = (uint16)Sql_GetUIntData(SqlHandle, 0);
                 Mod        modID   = static_cast<Mod>(Sql_GetUIntData(SqlHandle, 1));
@@ -491,9 +491,9 @@ namespace itemutils
         ret = sql::Query("SELECT itemId, modId, value, latentId, latentParam FROM item_latents WHERE itemId IN (SELECT itemId FROM item_basic LEFT "
                                    "JOIN item_equipment USING (itemId))");
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (ret != SQL_ERROR && sql::NumRows() != 0)
         {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql::NextRow() == SQL_SUCCESS)
             {
                 uint16 ItemID      = (uint16)Sql_GetUIntData(SqlHandle, 0);
                 Mod    modID       = static_cast<Mod>(Sql_GetUIntData(SqlHandle, 1));
@@ -519,9 +519,9 @@ namespace itemutils
     {
         int32 ret = sql::Query("SELECT dropId, itemId, dropType, itemRate, groupId, groupRate FROM mob_droplist WHERE dropid < %u;", MAX_DROPID);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (ret != SQL_ERROR && sql::NumRows() != 0)
         {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql::NextRow() == SQL_SUCCESS)
             {
                 uint16 DropID = (uint16)Sql_GetUIntData(SqlHandle, 0);
 

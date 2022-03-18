@@ -64,9 +64,9 @@ std::vector<ahHistory*> CDataLoader::GetAHItemHystory(uint16 ItemID, bool stack)
 
     int32 ret = sql::Query(fmtQuery, ItemID, stack);
 
-    if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+    if (ret != SQL_ERROR && sql::NumRows() != 0)
     {
-        while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        while (sql::NextRow() == SQL_SUCCESS)
         {
             ahHistory* PAHHistory = new ahHistory;
 
@@ -106,9 +106,9 @@ std::vector<ahItem*> CDataLoader::GetAHItemsToCategory(uint8 AHCategoryID, int8*
 
     int32 ret = sql::Query(fmtQuery, AHCategoryID, OrderByString);
 
-    if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+    if (ret != SQL_ERROR && sql::NumRows() != 0)
     {
-        while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        while (sql::NextRow() == SQL_SUCCESS)
         {
             ahItem* PAHItem = new ahItem;
 
@@ -140,9 +140,9 @@ uint32 CDataLoader::GetPlayersCount(const search_req& sr)
     if (jobid > 0 && jobid < 21)
     {
         if (sql::Query("SELECT COUNT(*) FROM accounts_sessions LEFT JOIN char_stats USING (charid) WHERE mjob = %u", jobid) != SQL_ERROR &&
-            Sql_NumRows(SqlHandle) != 0)
+            sql::NumRows() != 0)
         {
-            if (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            if (sql::NextRow() == SQL_SUCCESS)
             {
                 return Sql_GetUIntData(SqlHandle, 0);
             }
@@ -150,9 +150,9 @@ uint32 CDataLoader::GetPlayersCount(const search_req& sr)
     }
     else
     {
-        if (sql::Query("SELECT COUNT(*) FROM accounts_sessions") != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (sql::Query("SELECT COUNT(*) FROM accounts_sessions") != SQL_ERROR && sql::NumRows() != 0)
         {
-            if (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            if (sql::NextRow() == SQL_SUCCESS)
             {
                 return Sql_GetUIntData(SqlHandle, 0);
             }
@@ -216,11 +216,11 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
 
     int32 ret = sql::Query(fmtQuery.c_str());
 
-    if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+    if (ret != SQL_ERROR && sql::NumRows() != 0)
     {
         int totalResults   = 0; // gives ALL matching criteria (total)
         int visibleResults = 0; // capped at first 20
-        while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        while (sql::NextRow() == SQL_SUCCESS)
         {
             SearchEntity* PPlayer = new SearchEntity;
             memset(PPlayer, 0, sizeof(SearchEntity));
@@ -419,9 +419,9 @@ std::list<SearchEntity*> CDataLoader::GetPartyList(uint16 PartyID, uint16 Allian
 
     int32 ret = sql::Query(Query, (!AllianceID ? PartyID : AllianceID), (!PartyID ? AllianceID : PartyID));
 
-    if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+    if (ret != SQL_ERROR && sql::NumRows() != 0)
     {
-        while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        while (sql::NextRow() == SQL_SUCCESS)
         {
             SearchEntity* PPlayer = new SearchEntity;
             memset(PPlayer, 0, sizeof(SearchEntity));
@@ -508,9 +508,9 @@ std::list<SearchEntity*> CDataLoader::GetLinkshellList(uint32 LinkshellID)
 
     int32 ret = sql::Query(fmtQuery, LinkshellID, LinkshellID);
 
-    if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+    if (ret != SQL_ERROR && sql::NumRows() != 0)
     {
-        while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        while (sql::NextRow() == SQL_SUCCESS)
         {
             SearchEntity* PPlayer = new SearchEntity;
             memset(PPlayer, 0, sizeof(SearchEntity));
@@ -574,7 +574,7 @@ std::string CDataLoader::GetSearchComment(uint32 playerId)
     std::string query = "SELECT seacom_message FROM accounts_sessions WHERE charid = %u";
 
     int32 ret = sql::Query(query.c_str(), playerId);
-    if (ret != SQL_SUCCESS || Sql_NumRows(SqlHandle) == 0 || Sql_NextRow(SqlHandle) != SQL_SUCCESS)
+    if (ret != SQL_SUCCESS || sql::NumRows() == 0 || sql::NextRow() != SQL_SUCCESS)
     {
         return std::string();
     }
@@ -590,10 +590,10 @@ void CDataLoader::ExpireAHItems()
     std::string qStr            = "SELECT T0.id,T0.itemid,T1.stacksize, T0.stack, T0.seller FROM auction_house T0 INNER JOIN item_basic T1 ON \
                             T0.itemid = T1.itemid WHERE datediff(now(),from_unixtime(date)) >=%u AND buyer_name IS NULL;";
     int32       ret             = sql::Query(qStr.c_str(), search_config.expire_days);
-    int64       expiredAuctions = Sql_NumRows(SqlHandle);
-    if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+    int64       expiredAuctions = sql::NumRows();
+    if (ret != SQL_ERROR && sql::NumRows() != 0)
     {
-        while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        while (sql::NextRow() == SQL_SUCCESS)
         {
             // iterate through the expired auctions and return them to the seller
             uint32 saleID    = (uint32)Sql_GetUIntData(SqlHandle, 0);
@@ -606,7 +606,7 @@ void CDataLoader::ExpireAHItems()
                             "(%u, (select charname from chars where charid=%u), 1, %u, 0, %u, 0, 'AH-Jeuno');",
                             seller, seller, itemID, ahStack == 1 ? itemStack : 1);
             //      ShowMessage(cC2, seller, seller, itemID);
-            if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+            if (ret != SQL_ERROR && sql::NumRows() != 0)
             {
                 // delete the item from the auction house
                 Sql_Query(sqlH2, "DELETE FROM auction_house WHERE id= %u", saleID);

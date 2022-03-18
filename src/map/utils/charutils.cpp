@@ -372,7 +372,7 @@ namespace charutils
 
         int32 ret = sql::Query(fmtQuery, PChar->id);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
         {
             PChar->targid = 0x400;
             PChar->SetName(Sql_GetData(SqlHandle, 0));
@@ -481,7 +481,7 @@ namespace charutils
 
         ret = sql::Query(fmtQuery, PChar->id);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
         {
             PChar->profile.rankpoints = Sql_GetUIntData(SqlHandle, 0);
 
@@ -529,7 +529,7 @@ namespace charutils
 
         ret = sql::Query(fmtQuery, PChar->id);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
         {
             PChar->getStorage(LOC_INVENTORY)->AddBuff((uint8)Sql_GetIntData(SqlHandle, 0));
             PChar->getStorage(LOC_MOGSAFE)->AddBuff((uint8)Sql_GetIntData(SqlHandle, 1));
@@ -557,7 +557,7 @@ namespace charutils
 
         ret = sql::Query(fmtQuery, PChar->id);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
         {
             PChar->look.face = (uint8)Sql_GetIntData(SqlHandle, 0);
             PChar->look.race = (uint8)Sql_GetIntData(SqlHandle, 1);
@@ -577,7 +577,7 @@ namespace charutils
         fmtQuery = "SELECT head, body, hands, legs, feet, main, sub, ranged FROM char_style WHERE charid = %u;";
         ret      = sql::Query(fmtQuery, PChar->id);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
         {
             PChar->styleItems[SLOT_HEAD]   = (uint16)Sql_GetIntData(SqlHandle, 0);
             PChar->styleItems[SLOT_BODY]   = (uint16)Sql_GetIntData(SqlHandle, 1);
@@ -595,7 +595,7 @@ namespace charutils
 
         ret = sql::Query(fmtQuery, PChar->id);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
         {
             PChar->jobs.unlocked = (uint32)Sql_GetUIntData(SqlHandle, 0);
             PChar->jobs.genkai   = (uint8)Sql_GetUIntData(SqlHandle, 1);
@@ -630,7 +630,7 @@ namespace charutils
 
         ret = sql::Query(fmtQuery, PChar->id);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
         {
             PChar->MeritMode         = (uint8)Sql_GetIntData(SqlHandle, 0);
             PChar->jobs.exp[JOB_WAR] = (uint16)Sql_GetIntData(SqlHandle, 1);
@@ -666,7 +666,7 @@ namespace charutils
         ret          = sql::Query(fmtQuery, PChar->id);
         uint8 zoning = 0;
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
         {
             PChar->nameflags.flags = (uint32)Sql_GetUIntData(SqlHandle, 0);
 
@@ -716,9 +716,9 @@ namespace charutils
         fmtQuery = "SELECT id, time, recast FROM char_recast WHERE charid = %u;";
 
         ret = sql::Query(fmtQuery, PChar->id);
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (ret != SQL_ERROR && sql::NumRows() != 0)
         {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql::NextRow() == SQL_SUCCESS)
             {
                 uint32    cast_time  = Sql_GetUIntData(SqlHandle, 1);
                 uint32    recast     = Sql_GetUIntData(SqlHandle, 2);
@@ -744,9 +744,9 @@ namespace charutils
 
         ret = sql::Query(fmtQuery, PChar->id);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (ret != SQL_ERROR && sql::NumRows() != 0)
         {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql::NextRow() == SQL_SUCCESS)
             {
                 uint8 SkillID = (uint8)Sql_GetUIntData(SqlHandle, 0);
 
@@ -768,7 +768,7 @@ namespace charutils
 
         ret = sql::Query(fmtQuery, PChar->id);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
         {
             PChar->teleport.outpostSandy   = Sql_GetUIntData(SqlHandle, 0);
             PChar->teleport.outpostBastok  = Sql_GetUIntData(SqlHandle, 1);
@@ -805,7 +805,7 @@ namespace charutils
 
         ret = sql::Query(fmtQuery, PChar->id);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
         {
             PChar->m_GMlevel             = (uint8)Sql_GetUIntData(SqlHandle, 0);
             PChar->m_mentorUnlocked      = Sql_GetUIntData(SqlHandle, 1) > 0;
@@ -816,8 +816,8 @@ namespace charutils
         ret = sql::Query("SELECT field_chocobo FROM char_pet WHERE charid = %u;", PChar->id);
 
         if (ret != SQL_ERROR &&
-            Sql_NumRows(SqlHandle) != 0 &&
-            Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            sql::NumRows() != 0 &&
+            sql::NextRow() == SQL_SUCCESS)
         {
             PChar->m_FieldChocobo = static_cast<uint32>(Sql_GetUIntData(SqlHandle, 0));
         }
@@ -873,9 +873,9 @@ namespace charutils
 
         int32 ret = sql::Query(fmtQuery, PChar->id, enabledContent.c_str());
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (ret != SQL_ERROR && sql::NumRows() != 0)
         {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql::NextRow() == SQL_SUCCESS)
             {
                 uint16 spellId = Sql_GetUIntData(SqlHandle, 0);
 
@@ -909,9 +909,9 @@ namespace charutils
 
         int32 ret = sql::Query(Query, PChar->id);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (ret != SQL_ERROR && sql::NumRows() != 0)
         {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql::NextRow() == SQL_SUCCESS)
             {
                 CItem* PItem = itemutils::GetItem(Sql_GetIntData(SqlHandle, 0));
 
@@ -1009,7 +1009,7 @@ namespace charutils
             CItemLinkshell* PLinkshell2   = nullptr;
             bool            hasMainWeapon = false;
 
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql::NextRow() == SQL_SUCCESS)
             {
                 if (Sql_GetUIntData(SqlHandle, 1) < 16)
                 {
@@ -1053,7 +1053,7 @@ namespace charutils
             if (PLinkshell1)
             {
                 ret = sql::Query("SELECT broken FROM linkshells WHERE linkshellid = %u LIMIT 1", PLinkshell1->GetLSID());
-                if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS && Sql_GetUIntData(SqlHandle, 0) == 1)
+                if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS && Sql_GetUIntData(SqlHandle, 0) == 1)
                 { // if the linkshell has been broken, unequip
                     uint8 SlotID     = PLinkshell1->getSlotID();
                     uint8 LocationID = PLinkshell1->getLocationID();
@@ -1070,7 +1070,7 @@ namespace charutils
             if (PLinkshell2)
             {
                 ret = sql::Query("SELECT broken FROM linkshells WHERE linkshellid = %u LIMIT 1", PLinkshell2->GetLSID());
-                if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS && Sql_GetUIntData(SqlHandle, 0) == 1)
+                if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS && Sql_GetUIntData(SqlHandle, 0) == 1)
                 { // if the linkshell has been broken, unequip
                     uint8 SlotID     = PLinkshell2->getSlotID();
                     uint8 LocationID = PLinkshell2->getLocationID();
@@ -3272,9 +3272,9 @@ namespace charutils
 
         int32 ret = sql::Query(fmtQuery, ExpTableRowCount);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (ret != SQL_ERROR && sql::NumRows() != 0)
         {
-            for (uint32 x = 0; x < ExpTableRowCount && Sql_NextRow(SqlHandle) == SQL_SUCCESS; ++x)
+            for (uint32 x = 0; x < ExpTableRowCount && sql::NextRow() == SQL_SUCCESS; ++x)
             {
                 for (uint32 y = 0; y < 20; ++y)
                 {
@@ -3285,9 +3285,9 @@ namespace charutils
 
         ret = sql::Query("SELECT level, exp FROM exp_base LIMIT 100;");
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (ret != SQL_ERROR && sql::NumRows() != 0)
         {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql::NextRow() == SQL_SUCCESS)
             {
                 uint8 level = (uint8)Sql_GetIntData(SqlHandle, 0) - 1;
 
@@ -5143,7 +5143,7 @@ namespace charutils
         char fmtQuery[] = "SELECT value FROM char_vars WHERE charid = %u AND varname = '%s' ";
         sql::Query(fmtQuery, PChar->id, "mog-locker-expiry-timestamp");
 
-        if (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        if (sql::NextRow() == SQL_SUCCESS)
         {
             auto tstamp = (uint32)Sql_GetIntData(SqlHandle, 0);
             if (CVanaTime::getInstance()->getVanaTime() < tstamp)
@@ -5432,7 +5432,7 @@ namespace charutils
                             "SELECT partyid, allianceid, partyflag & %d FROM accounts_sessions s JOIN accounts_parties p ON "
                             "s.charid = p.charid WHERE p.charid = %u;",
                             (PARTY_SECOND | PARTY_THIRD), PChar->id);
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
         {
             uint32 partyid     = Sql_GetUIntData(SqlHandle, 0);
             uint32 allianceid  = Sql_GetUIntData(SqlHandle, 1);
@@ -5611,7 +5611,7 @@ namespace charutils
 
         int ret = sql::Query(Query, type, PChar->id);
 
-        if (ret != SQL_ERROR && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        if (ret != SQL_ERROR && sql::NextRow() == SQL_SUCCESS)
         {
             return Sql_GetIntData(SqlHandle, 0);
         }
@@ -5740,7 +5740,7 @@ namespace charutils
 
         int32 ret = sql::Query(fmtQuery, PChar->id, var);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
         {
             return Sql_GetIntData(SqlHandle, 0);
         }
@@ -5902,7 +5902,7 @@ namespace charutils
                         "WHERE charid = %u;";
 
         auto ret = sql::Query(fmtQuery, PChar->id);
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
         {
             PChar->m_charHistory.enemiesDefeated   = Sql_GetUIntData(SqlHandle, 0);
             PChar->m_charHistory.timesKnockedOut   = Sql_GetUIntData(SqlHandle, 1);

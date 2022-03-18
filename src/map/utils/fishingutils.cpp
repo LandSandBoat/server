@@ -186,14 +186,14 @@ namespace fishingutils
 
             int32 ret = sql::Query(Query, PChar->getZone(), RodID, LureID);
 
-            if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+            if (ret != SQL_ERROR && sql::NumRows() != 0)
             {
                 // array to store fish ids that i can get
-                std::vector<int32> fishIDs((int32)Sql_NumRows(SqlHandle));
+                std::vector<int32> fishIDs((int32)sql::NumRows());
                 int32              fishCounter       = 0;
                 bool               caughtQuestedFish = false;
 
-                while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+                while (sql::NextRow() == SQL_SUCCESS)
                 {
                     // store fish id
                     fishIDs[fishCounter] = Sql_GetIntData(SqlHandle, 0);
@@ -226,7 +226,7 @@ namespace fishingutils
 
                 if (!caughtQuestedFish)
                 {
-                    int32 luckyFish = xirand::GetRandomNumber((int32)Sql_NumRows(SqlHandle));
+                    int32 luckyFish = xirand::GetRandomNumber((int32)sql::NumRows());
                     PFish           = new CItemFish(*itemutils::GetItemPointer(fishIDs[luckyFish]));
 
                     PChar->UContainer->SetType(UCONTAINER_FISHING);
@@ -254,12 +254,12 @@ namespace fishingutils
 
             int32 ret = sql::Query(Query, PChar->getZone(), RodID, LureID);
 
-            if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+            if (ret != SQL_ERROR && sql::NumRows() != 0)
             {
                 int32 FisherLuck    = 0;
                 int32 FishingChance = xirand::GetRandomNumber(1000);
 
-                while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+                while (sql::NextRow() == SQL_SUCCESS)
                 {
                     FisherLuck += Sql_GetIntData(SqlHandle, 7);
 

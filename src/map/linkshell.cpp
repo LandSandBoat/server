@@ -375,7 +375,7 @@ void CLinkshell::PushLinkshellMessage(CCharEntity* PChar, bool ls1)
 {
     auto ret = sql::Query("SELECT poster, message, messagetime FROM linkshells WHERE linkshellid = %u", m_id);
 
-    if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+    if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
     {
         PChar->pushPacket(
             new CLinkshellMessagePacket(Sql_GetData(SqlHandle, 0), Sql_GetData(SqlHandle, 1), (const int8*)m_name.c_str(), Sql_GetUIntData(SqlHandle, 2), ls1));
@@ -402,7 +402,7 @@ namespace linkshell
     {
         int32 ret = sql::Query("SELECT linkshellid, color, name, postrights FROM linkshells WHERE linkshellid = %d", id);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
         {
             auto PLinkshell = std::make_unique<CLinkshell>(Sql_GetUIntData(SqlHandle, 0));
 
@@ -502,7 +502,7 @@ namespace linkshell
     bool IsValidLinkshellName(const int8* name)
     {
         auto ret = sql::Query("SELECT linkshellid FROM linkshells WHERE name = '%s' AND broken != 1;", name);
-        return ret == SQL_ERROR || Sql_NumRows(SqlHandle) == 0;
+        return ret == SQL_ERROR || sql::NumRows() == 0;
     }
 
     /************************************************************************

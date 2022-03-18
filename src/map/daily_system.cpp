@@ -63,9 +63,9 @@ namespace daily
         uint16 aH;
         uint16 flags;
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (ret != SQL_ERROR && sql::NumRows() != 0)
         {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql::NextRow() == SQL_SUCCESS)
             {
                 itemid = Sql_GetUIntData(SqlHandle, 0);
                 aH     = Sql_GetUIntData(SqlHandle, 1);

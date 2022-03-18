@@ -1042,9 +1042,9 @@ Usage:
 
         int32 ret = sql::Query(QueryFamilyMods);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (ret != SQL_ERROR && sql::NumRows() != 0)
         {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql::NextRow() == SQL_SUCCESS)
             {
                 ModsList_t* familyMods = GetMobFamilyMods(Sql_GetUIntData(SqlHandle, 0), true);
 
@@ -1068,9 +1068,9 @@ Usage:
 
         ret = sql::Query(QueryPoolMods);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (ret != SQL_ERROR && sql::NumRows() != 0)
         {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql::NextRow() == SQL_SUCCESS)
             {
                 uint16      pool     = Sql_GetUIntData(SqlHandle, 0);
                 ModsList_t* poolMods = GetMobPoolMods(pool, true);
@@ -1097,9 +1097,9 @@ Usage:
 
         ret = sql::Query(QuerySpawnMods);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (ret != SQL_ERROR && sql::NumRows() != 0)
         {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql::NextRow() == SQL_SUCCESS)
             {
                 ModsList_t* spawnMods = GetMobSpawnMods(Sql_GetUIntData(SqlHandle, 0), true);
 
@@ -1258,9 +1258,9 @@ Usage:
 
         CMobEntity* PMob = nullptr;
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (ret != SQL_ERROR && sql::NumRows() != 0)
         {
-            if (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            if (sql::NextRow() == SQL_SUCCESS)
             {
                 PMob            = new CMobEntity;
                 PMob->PInstance = instance;

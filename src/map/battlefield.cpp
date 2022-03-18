@@ -673,7 +673,7 @@ void CBattlefield::Cleanup()
         const char* query        = "SELECT fastestTime FROM bcnm_info WHERE bcnmId = %u AND zoneId = %u";
         auto        ret          = sql::Query(query, this->GetID(), this->GetZoneID());
         bool        updateRecord = true;
-        if (ret != SQL_ERROR && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        if (ret != SQL_ERROR && sql::NextRow() == SQL_SUCCESS)
         {
             updateRecord = Sql_GetUIntData(SqlHandle, 0) > std::chrono::duration_cast<std::chrono::seconds>(m_Record.time).count();
         }
@@ -697,13 +697,13 @@ bool CBattlefield::LoadMobs()
 
     auto ret = sql::Query(fmtQuery, this->GetID(), this->GetArea());
 
-    if (ret == SQL_ERROR || Sql_NumRows(SqlHandle) == 0)
+    if (ret == SQL_ERROR || sql::NumRows() == 0)
     {
         ShowError("Battlefield::LoadMobs() : Cannot find any monster IDs for battlefield %i area %i ", this->GetID(), this->GetArea());
     }
     else
     {
-        while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        while (sql::NextRow() == SQL_SUCCESS)
         {
             auto  mobid     = Sql_GetUIntData(SqlHandle, 0);
             auto  condition = Sql_GetUIntData(SqlHandle, 1);
@@ -730,14 +730,14 @@ bool CBattlefield::SpawnLoot(CBaseEntity* PEntity)
         const auto* fmtQuery = "SELECT npcId FROM bcnm_treasure_chests WHERE bcnmId = %u AND battlefieldNumber = %u;";
         auto        ret      = sql::Query(fmtQuery, this->GetID(), this->GetArea());
 
-        if (ret == SQL_ERROR || Sql_NumRows(SqlHandle) == 0)
+        if (ret == SQL_ERROR || sql::NumRows() == 0)
         {
             ShowError("Battlefield::SpawnLoot() : Cannot find treasure chest for battlefield %i area %i ", this->GetID(), this->GetArea());
             return false;
         }
         else
         {
-            if (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            if (sql::NextRow() == SQL_SUCCESS)
             {
                 auto npcId = Sql_GetUIntData(SqlHandle, 0);
                 PEntity    = zoneutils::GetEntity(npcId);

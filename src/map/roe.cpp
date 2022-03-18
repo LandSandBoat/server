@@ -683,13 +683,13 @@ namespace roeutils
         const char* unityQuery = "SELECT leader, CASE WHEN members_prev = 0 THEN 0 ELSE FLOOR(points_prev/members_prev) END AS eval FROM unity_system ORDER BY eval DESC;";
         int32       ret        = sql::Query(unityQuery);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (ret != SQL_ERROR && sql::NumRows() != 0)
         {
             uint8 currentRank = 1;
             uint8 rankGap     = 0;
             int32 prev_eval   = 0;
 
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql::NextRow() == SQL_SUCCESS)
             {
                 int32 new_eval = Sql_GetIntData(SqlHandle, 1);
 

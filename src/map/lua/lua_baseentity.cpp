@@ -2928,7 +2928,7 @@ void CLuaBaseEntity::resetPlayer(const char* charName)
     const char* Query = "SELECT charid FROM chars WHERE charname = '%s';";
     int32 ret = sql::Query(Query, escapedCharName);
 
-    if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+    if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
     {
         id = (int32)Sql_GetIntData(SqlHandle, 0);
     }
@@ -3017,7 +3017,7 @@ bool CLuaBaseEntity::gotoPlayer(std::string const& playerName)
     const char* fmtQuery = "SELECT charid FROM chars WHERE charname = '%s';";
     int32       ret      = sql::Query(fmtQuery, playerName.c_str());
 
-    if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+    if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
     {
         char buf[30];
         memset(&buf[0], 0, sizeof(buf));
@@ -3046,7 +3046,7 @@ bool CLuaBaseEntity::bringPlayer(std::string const& playerName)
     const char* fmtQuery = "SELECT charid FROM chars WHERE charname = '%s';";
     int32       ret      = sql::Query(fmtQuery, playerName.c_str());
 
-    if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+    if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
     {
         char buf[30];
         memset(&buf[0], 0, sizeof(buf));
@@ -3654,7 +3654,7 @@ bool CLuaBaseEntity::breakLinkshell(std::string const& lsname)
     bool found = false;
 
     int32 ret = sql::Query("SELECT broken, linkshellid FROM linkshells WHERE name = '%s'", lsname.c_str());
-    if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+    if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
     {
         uint8 broken = Sql_GetUIntData(SqlHandle, 0);
 
@@ -3697,7 +3697,7 @@ bool CLuaBaseEntity::addLinkpearl(std::string const& lsname, bool equip)
     {
         const char* Query = "SELECT linkshellid, color FROM linkshells WHERE name = '%s' AND broken = 0";
         int32       ret   = sql::Query(Query, lsname);
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
         {
             // build linkpearl
             int8 EncodedString[16];
@@ -11766,7 +11766,7 @@ auto CLuaBaseEntity::getAutomatonName() -> const char*
 
     int32 ret = sql::Query(Query, m_PBaseEntity->id);
 
-    if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+    if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
     {
         return (const char*)Sql_GetData(SqlHandle, 0); // TODO: Fix c-style cast
     }
