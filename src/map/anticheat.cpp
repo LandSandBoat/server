@@ -78,13 +78,13 @@ namespace anticheat
             if (warningmsg != nullptr)
             {
                 memset(warningmsg, 0, warningsize);
-                char* warnptr = (char*)Sql_GetData(SqlHandle, 1);
+                char* warnptr = (char*)sql::GetData(1);
                 if (warnptr != nullptr)
                 {
                     strncpy(warningmsg, warnptr, warningsize - 1);
                 }
             }
-            return (CheatAction)Sql_GetUIntData(SqlHandle, 0);
+            return (CheatAction)sql::GetUIntData(0);
         }
         return CHEAT_ACTION_NOTHING;
     }

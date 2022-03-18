@@ -1046,9 +1046,9 @@ Usage:
         {
             while (sql::NextRow() == SQL_SUCCESS)
             {
-                ModsList_t* familyMods = GetMobFamilyMods(Sql_GetUIntData(SqlHandle, 0), true);
+                ModsList_t* familyMods = GetMobFamilyMods(sql::GetUIntData(0), true);
 
-                CModifier* mod = new CModifier(static_cast<Mod>(Sql_GetUIntData(SqlHandle, 1)));
+                CModifier* mod = new CModifier(static_cast<Mod>(sql::GetUIntData(1)));
                 mod->setModAmount(Sql_GetIntData(SqlHandle, 2));
 
                 int8 isMobMod = Sql_GetIntData(SqlHandle, 3);
@@ -1072,13 +1072,13 @@ Usage:
         {
             while (sql::NextRow() == SQL_SUCCESS)
             {
-                uint16      pool     = Sql_GetUIntData(SqlHandle, 0);
+                uint16      pool     = sql::GetUIntData(0);
                 ModsList_t* poolMods = GetMobPoolMods(pool, true);
 
-                Mod id = static_cast<Mod>(Sql_GetUIntData(SqlHandle, 1));
+                Mod id = static_cast<Mod>(sql::GetUIntData(1));
 
                 CModifier* mod = new CModifier(id);
-                mod->setModAmount(Sql_GetUIntData(SqlHandle, 2));
+                mod->setModAmount(sql::GetUIntData(2));
 
                 int8 isMobMod = Sql_GetIntData(SqlHandle, 3);
                 if (isMobMod == 1)
@@ -1101,10 +1101,10 @@ Usage:
         {
             while (sql::NextRow() == SQL_SUCCESS)
             {
-                ModsList_t* spawnMods = GetMobSpawnMods(Sql_GetUIntData(SqlHandle, 0), true);
+                ModsList_t* spawnMods = GetMobSpawnMods(sql::GetUIntData(0), true);
 
-                CModifier* mod = new CModifier(static_cast<Mod>(Sql_GetUIntData(SqlHandle, 1)));
-                mod->setModAmount(Sql_GetUIntData(SqlHandle, 2));
+                CModifier* mod = new CModifier(static_cast<Mod>(sql::GetUIntData(1)));
+                mod->setModAmount(sql::GetUIntData(2));
 
                 int8 isMobMod = Sql_GetIntData(SqlHandle, 3);
                 if (isMobMod == 1)
@@ -1265,12 +1265,12 @@ Usage:
                 PMob            = new CMobEntity;
                 PMob->PInstance = instance;
 
-                PMob->name.insert(0, (const char*)Sql_GetData(SqlHandle, 1));
-                PMob->packetName.insert(0, (const char*)Sql_GetData(SqlHandle, 2));
+                PMob->name.insert(0, (const char*)sql::GetData(1));
+                PMob->packetName.insert(0, (const char*)sql::GetData(2));
 
-                PMob->m_RespawnTime = Sql_GetUIntData(SqlHandle, 3) * 1000;
-                PMob->m_SpawnType   = (SPAWNTYPE)Sql_GetUIntData(SqlHandle, 4);
-                PMob->m_DropID      = Sql_GetUIntData(SqlHandle, 5);
+                PMob->m_RespawnTime = sql::GetUIntData(3) * 1000;
+                PMob->m_SpawnType   = (SPAWNTYPE)sql::GetUIntData(4);
+                PMob->m_DropID      = sql::GetUIntData(5);
 
                 PMob->HPmodifier = (uint32)Sql_GetIntData(SqlHandle, 6);
                 PMob->MPmodifier = (uint32)Sql_GetIntData(SqlHandle, 7);
@@ -1278,14 +1278,14 @@ Usage:
                 PMob->m_minLevel = (uint8)Sql_GetIntData(SqlHandle, 8);
                 PMob->m_maxLevel = (uint8)Sql_GetIntData(SqlHandle, 9);
 
-                memcpy(&PMob->look, Sql_GetData(SqlHandle, 10), 23);
+                memcpy(&PMob->look, sql::GetData(10), 23);
 
                 PMob->SetMJob(Sql_GetIntData(SqlHandle, 11));
                 PMob->SetSJob(Sql_GetIntData(SqlHandle, 12));
 
                 ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setMaxHit(1);
                 ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setSkillType(Sql_GetIntData(SqlHandle, 13));
-                PMob->m_dmgMult = Sql_GetUIntData(SqlHandle, 14);
+                PMob->m_dmgMult = sql::GetUIntData(14);
                 ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setDelay((Sql_GetIntData(SqlHandle, 15) * 1000) / 60);
                 ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setBaseDelay((Sql_GetIntData(SqlHandle, 15) * 1000) / 60);
 
@@ -1353,14 +1353,14 @@ Usage:
 
                 PMob->m_SpellListContainer = mobSpellList::GetMobSpellList(Sql_GetIntData(SqlHandle, 62));
 
-                PMob->m_Pool = Sql_GetUIntData(SqlHandle, 63);
+                PMob->m_Pool = sql::GetUIntData(63);
 
-                PMob->allegiance      = static_cast<ALLEGIANCE_TYPE>(Sql_GetUIntData(SqlHandle, 64));
-                PMob->namevis         = Sql_GetUIntData(SqlHandle, 65);
-                PMob->m_Aggro         = Sql_GetUIntData(SqlHandle, 66);
-                PMob->m_MobSkillList  = Sql_GetUIntData(SqlHandle, 67);
-                PMob->m_TrueDetection = Sql_GetUIntData(SqlHandle, 68);
-                PMob->m_Detects       = Sql_GetUIntData(SqlHandle, 69);
+                PMob->allegiance      = static_cast<ALLEGIANCE_TYPE>(sql::GetUIntData(64));
+                PMob->namevis         = sql::GetUIntData(65);
+                PMob->m_Aggro         = sql::GetUIntData(66);
+                PMob->m_MobSkillList  = sql::GetUIntData(67);
+                PMob->m_TrueDetection = sql::GetUIntData(68);
+                PMob->m_Detects       = sql::GetUIntData(69);
 
                 // must be here first to define mobmods
                 mobutils::InitializeMob(PMob, zoneutils::GetZone(zoneID));

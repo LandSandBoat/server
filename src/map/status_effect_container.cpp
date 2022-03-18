@@ -132,7 +132,7 @@ namespace effects
             {
                 uint16 EffectID = (uint16)Sql_GetIntData(SqlHandle, 0);
 
-                EffectsParams[EffectID].Name       = (const char*)Sql_GetData(SqlHandle, 1);
+                EffectsParams[EffectID].Name       = (const char*)sql::GetData(1);
                 EffectsParams[EffectID].Flag       = Sql_GetIntData(SqlHandle, 2);
                 EffectsParams[EffectID].Type       = Sql_GetIntData(SqlHandle, 3);
                 EffectsParams[EffectID].NegativeId = (EFFECT)Sql_GetIntData(SqlHandle, 4);
@@ -1525,11 +1525,11 @@ void CStatusEffectContainer::LoadStatusEffects()
     {
         while (sql::NextRow() == SQL_SUCCESS)
         {
-            auto flags    = (uint32)Sql_GetUIntData(SqlHandle, 8);
-            auto duration = (uint32)Sql_GetUIntData(SqlHandle, 4);
+            auto flags    = (uint32)sql::GetUIntData(8);
+            auto duration = (uint32)sql::GetUIntData(4);
             if (flags & EFFECTFLAG_OFFLINE_TICK)
             {
-                auto timestamp = (uint32)Sql_GetUIntData(SqlHandle, 9);
+                auto timestamp = (uint32)sql::GetUIntData(9);
                 if (server_clock::now() < time_point() + std::chrono::seconds(timestamp) + std::chrono::seconds(duration))
                 {
                     duration = (uint32)std::chrono::duration_cast<std::chrono::seconds>(time_point() + std::chrono::seconds(timestamp) +
@@ -1543,9 +1543,9 @@ void CStatusEffectContainer::LoadStatusEffects()
                 }
             }
             CStatusEffect* PStatusEffect =
-                new CStatusEffect((EFFECT)Sql_GetUIntData(SqlHandle, 0), (uint16)Sql_GetUIntData(SqlHandle, 1), (uint16)Sql_GetUIntData(SqlHandle, 2),
-                                  (uint32)Sql_GetUIntData(SqlHandle, 3), duration, (uint16)Sql_GetUIntData(SqlHandle, 5), (uint16)Sql_GetUIntData(SqlHandle, 6),
-                                  (uint16)Sql_GetUIntData(SqlHandle, 7), flags);
+                new CStatusEffect((EFFECT)sql::GetUIntData(0), (uint16)sql::GetUIntData(1), (uint16)sql::GetUIntData(2),
+                                  (uint32)sql::GetUIntData(3), duration, (uint16)sql::GetUIntData(5), (uint16)sql::GetUIntData(6),
+                                  (uint16)sql::GetUIntData(7), flags);
 
             PEffectList.push_back(PStatusEffect);
 

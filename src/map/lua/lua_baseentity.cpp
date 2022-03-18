@@ -3022,7 +3022,7 @@ bool CLuaBaseEntity::gotoPlayer(std::string const& playerName)
         char buf[30];
         memset(&buf[0], 0, sizeof(buf));
 
-        ref<uint16>(&buf, 0) = Sql_GetUIntData(SqlHandle, 0); // target char
+        ref<uint16>(&buf, 0) = sql::GetUIntData(0); // target char
         ref<uint16>(&buf, 4) = m_PBaseEntity->id;             // warping to target char, their server will send us a zoning message with their pos
 
         message::send(MSG_SEND_TO_ZONE, &buf[0], sizeof(buf), nullptr);
@@ -3051,7 +3051,7 @@ bool CLuaBaseEntity::bringPlayer(std::string const& playerName)
         char buf[30];
         memset(&buf[0], 0, sizeof(buf));
 
-        ref<uint16>(&buf, 0)  = Sql_GetUIntData(SqlHandle, 0); // target char
+        ref<uint16>(&buf, 0)  = sql::GetUIntData(0); // target char
         ref<uint16>(&buf, 4)  = 0;                             // wanting to bring target char here so wont give our id
         ref<uint16>(&buf, 8)  = m_PBaseEntity->getZone();
         ref<uint16>(&buf, 10) = static_cast<uint16>(m_PBaseEntity->loc.p.x);
@@ -3656,14 +3656,14 @@ bool CLuaBaseEntity::breakLinkshell(std::string const& lsname)
     int32 ret = sql::Query("SELECT broken, linkshellid FROM linkshells WHERE name = '%s'", lsname.c_str());
     if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
     {
-        uint8 broken = Sql_GetUIntData(SqlHandle, 0);
+        uint8 broken = sql::GetUIntData(0);
 
         if (broken)
         {
             return true;
         }
 
-        uint32      lsid       = Sql_GetUIntData(SqlHandle, 1);
+        uint32      lsid       = sql::GetUIntData(1);
         CLinkshell* PLinkshell = linkshell::GetLinkshell(lsid);
 
         if (!PLinkshell)
@@ -3703,7 +3703,7 @@ bool CLuaBaseEntity::addLinkpearl(std::string const& lsname, bool equip)
             int8 EncodedString[16];
             EncodeStringLinkshell((int8*)lsname.c_str(), EncodedString);
             ((CItem*)PItemLinkPearl)->setSignature(EncodedString);
-            PItemLinkPearl->SetLSID(Sql_GetUIntData(SqlHandle, 0));
+            PItemLinkPearl->SetLSID(sql::GetUIntData(0));
             PItemLinkPearl->SetLSColor(Sql_GetIntData(SqlHandle, 1));
             PItemLinkPearl->SetLSType(lstype);
             PItemLinkPearl->setQuantity(1);
@@ -11768,7 +11768,7 @@ auto CLuaBaseEntity::getAutomatonName() -> const char*
 
     if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
     {
-        return (const char*)Sql_GetData(SqlHandle, 0); // TODO: Fix c-style cast
+        return (const char*)sql::GetData(0); // TODO: Fix c-style cast
     }
 
     return 0; // TODO: Verify this case

@@ -66,7 +66,7 @@ namespace instanceutils
 
                 // Main data
                 data.id            = static_cast<uint16>(Sql_GetIntData(SqlHandle, 0));
-                data.instance_name = reinterpret_cast<const char*>(Sql_GetData(SqlHandle, 1));
+                data.instance_name = reinterpret_cast<const char*>(sql::GetData(1));
                 data.instance_zone = static_cast<uint16>(Sql_GetIntData(SqlHandle, 2));
                 data.entrance_zone = static_cast<uint16>(Sql_GetIntData(SqlHandle, 3));
                 data.time_limit    = static_cast<uint16>(Sql_GetIntData(SqlHandle, 4));
@@ -81,7 +81,7 @@ namespace instanceutils
 
                 // Meta data
                 data.instance_zone_name = reinterpret_cast<const char*>(zoneutils::GetZone(data.instance_zone)->GetName());
-                data.entrance_zone_name = reinterpret_cast<const char*>(Sql_GetData(SqlHandle, 13));
+                data.entrance_zone_name = reinterpret_cast<const char*>(sql::GetData(13));
                 data.filename           = fmt::format("./scripts/zones/{}/instances/{}.lua", data.instance_zone_name, data.instance_name);
 
                 // Add to data cache

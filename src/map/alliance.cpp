@@ -129,7 +129,7 @@ void CAlliance::removeParty(CParty* party)
                             m_AllianceID, PARTY_LEADER, party->GetPartyID());
         if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
         {
-            std::string newLeader((const char*)Sql_GetData(SqlHandle, 0));
+            std::string newLeader((const char*)sql::GetData(0));
             assignAllianceLeader(newLeader.c_str());
         }
         if (this->getMainParty() == party)
@@ -212,7 +212,7 @@ void CAlliance::addParty(CParty* party)
     {
         while (sql::NextRow() == SQL_SUCCESS)
         {
-            if (Sql_GetUIntData(SqlHandle, 0) == newparty)
+            if (sql::GetUIntData(0) == newparty)
             {
                 newparty++;
             }
@@ -246,7 +246,7 @@ void CAlliance::addParty(uint32 partyid) const
     {
         while (sql::NextRow() == SQL_SUCCESS)
         {
-            uint8 partyflag = Sql_GetUIntData(SqlHandle, 0);
+            uint8 partyflag = sql::GetUIntData(0);
             uint8 oldparty  = partyflag & (PARTY_SECOND | PARTY_THIRD);
             if (oldparty == newparty)
             {
@@ -293,7 +293,7 @@ void CAlliance::assignAllianceLeader(const char* name)
                         name, m_AllianceID, PARTY_LEADER);
     if (ret != SQL_ERROR && sql::NumRows() > 0 && sql::NextRow() == SQL_SUCCESS)
     {
-        int charid = Sql_GetUIntData(SqlHandle, 0);
+        int charid = sql::GetUIntData(0);
 
         sql::Query("UPDATE accounts_parties SET partyflag = partyflag & ~%d WHERE allianceid = %u AND partyflag & %d", ALLIANCE_LEADER, m_AllianceID,
                   ALLIANCE_LEADER);

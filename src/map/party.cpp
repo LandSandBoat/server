@@ -449,7 +449,7 @@ void CParty::RemovePartyLeader(CBattleEntity* PEntity)
                         m_PartyID, PARTY_LEADER);
     if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
     {
-        std::string newLeader((const char*)Sql_GetData(SqlHandle, 0));
+        std::string newLeader((const char*)sql::GetData(0));
         SetLeader(newLeader.c_str());
     }
     if (m_PLeader == PEntity)
@@ -474,9 +474,9 @@ std::vector<CParty::partyInfo_t> CParty::GetPartyInfo() const
     {
         while (sql::NextRow() == SQL_SUCCESS)
         {
-            memberinfo.push_back({ Sql_GetUIntData(SqlHandle, 0), Sql_GetUIntData(SqlHandle, 1), Sql_GetUIntData(SqlHandle, 2),
-                                   std::string((const char*)Sql_GetData(SqlHandle, 3)), static_cast<uint16>(Sql_GetUIntData(SqlHandle, 4)),
-                                   static_cast<uint16>(Sql_GetUIntData(SqlHandle, 5)), static_cast<uint16>(Sql_GetUIntData(SqlHandle, 6)) });
+            memberinfo.push_back({ sql::GetUIntData(0), sql::GetUIntData(1), sql::GetUIntData(2),
+                                   std::string((const char*)sql::GetData(3)), static_cast<uint16>(sql::GetUIntData(4)),
+                                   static_cast<uint16>(sql::GetUIntData(5)), static_cast<uint16>(sql::GetUIntData(6)) });
         }
     }
     return memberinfo;
@@ -942,7 +942,7 @@ void CParty::SetLeader(const char* MemberName)
 
         if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
         {
-            newId = Sql_GetUIntData(SqlHandle, 0);
+            newId = sql::GetUIntData(0);
         }
         else
         {

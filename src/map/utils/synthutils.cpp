@@ -87,24 +87,24 @@ namespace synthutils
 
         if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
         {
-            uint16 KeyItemID = (uint16)Sql_GetUIntData(SqlHandle, 1); // Check if recipe needs KI
+            uint16 KeyItemID = (uint16)sql::GetUIntData(1); // Check if recipe needs KI
 
             if ((KeyItemID == 0) || (charutils::hasKeyItem(PChar, KeyItemID))) // If recipe doesn't need KI OR Player has the required KI
             {
                 // in the ninth cell write the id of the recipe
-                PChar->CraftContainer->setItem(9, Sql_GetUIntData(SqlHandle, 0), 0xFF, 0);
-                PChar->CraftContainer->setItem(10 + 1, (uint16)Sql_GetUIntData(SqlHandle, 10), (uint8)Sql_GetUIntData(SqlHandle, 14), 0); // RESULT_SUCCESS
-                PChar->CraftContainer->setItem(10 + 2, (uint16)Sql_GetUIntData(SqlHandle, 11), (uint8)Sql_GetUIntData(SqlHandle, 15), 0); // RESULT_HQ
-                PChar->CraftContainer->setItem(10 + 3, (uint16)Sql_GetUIntData(SqlHandle, 12), (uint8)Sql_GetUIntData(SqlHandle, 16), 0); // RESULT_HQ2
-                PChar->CraftContainer->setItem(10 + 4, (uint16)Sql_GetUIntData(SqlHandle, 13), (uint8)Sql_GetUIntData(SqlHandle, 17), 0); // RESULT_HQ3
-                PChar->CraftContainer->setCraftType((uint8)Sql_GetUIntData(SqlHandle, 18)); // Store if it's a desynth
+                PChar->CraftContainer->setItem(9, sql::GetUIntData(0), 0xFF, 0);
+                PChar->CraftContainer->setItem(10 + 1, (uint16)sql::GetUIntData(10), (uint8)sql::GetUIntData(14), 0); // RESULT_SUCCESS
+                PChar->CraftContainer->setItem(10 + 2, (uint16)sql::GetUIntData(11), (uint8)sql::GetUIntData(15), 0); // RESULT_HQ
+                PChar->CraftContainer->setItem(10 + 3, (uint16)sql::GetUIntData(12), (uint8)sql::GetUIntData(16), 0); // RESULT_HQ2
+                PChar->CraftContainer->setItem(10 + 4, (uint16)sql::GetUIntData(13), (uint8)sql::GetUIntData(17), 0); // RESULT_HQ3
+                PChar->CraftContainer->setCraftType((uint8)sql::GetUIntData(18)); // Store if it's a desynth
 
                 uint16 skillValue   = 0;
                 uint16 currentSkill = 0;
 
                 for (uint8 skillID = SKILL_WOODWORKING; skillID <= SKILL_COOKING; ++skillID) // range for all 8 synth skills
                 {
-                    skillValue   = (uint16)Sql_GetUIntData(SqlHandle, (skillID - 49 + 2));
+                    skillValue   = (uint16)sql::GetUIntData((skillID - 49 + 2));
                     currentSkill = PChar->RealSkills.skill[skillID];
 
                     // skill write in the quantity field of cells 9-16
@@ -277,7 +277,7 @@ namespace synthutils
                 }
                 else
                 {
-                    canHQ = false; // Player skill level is lower than recipe skill level. Cannot HQ. 
+                    canHQ = false; // Player skill level is lower than recipe skill level. Cannot HQ.
 
                     if (PChar->CraftContainer->getCraftType() == 1) // if it's a desynth lower success rate
                     {
@@ -603,7 +603,7 @@ namespace synthutils
 
                 // Section 5: Handle messages and save results.
 
-                // Skill Up addition: 
+                // Skill Up addition:
                 PChar->RealSkills.skill[skillID] += skillUpAmount;
                 PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, skillID, skillUpAmount, 38));
 

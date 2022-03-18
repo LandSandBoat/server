@@ -67,9 +67,9 @@ namespace daily
         {
             while (sql::NextRow() == SQL_SUCCESS)
             {
-                itemid = Sql_GetUIntData(SqlHandle, 0);
-                aH     = Sql_GetUIntData(SqlHandle, 1);
-                flags  = Sql_GetUIntData(SqlHandle, 2);
+                itemid = sql::GetUIntData(0);
+                aH     = sql::GetUIntData(1);
+                flags  = sql::GetUIntData(2);
                 specialDialItems.push_back(itemid);
                 switch (aH)
                 {

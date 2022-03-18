@@ -60,9 +60,9 @@ namespace gardenutils
         {
             while (sql::NextRow() == SQL_SUCCESS)
             {
-                uint8 SeedID   = (uint8)Sql_GetUIntData(SqlHandle, 1);
-                uint8 Element1 = (uint8)Sql_GetUIntData(SqlHandle, 2);
-                uint8 Element2 = (uint8)Sql_GetUIntData(SqlHandle, 3);
+                uint8 SeedID   = (uint8)sql::GetUIntData(1);
+                uint8 Element1 = (uint8)sql::GetUIntData(2);
+                uint8 Element2 = (uint8)sql::GetUIntData(3);
 
                 uint32 uid = (SeedID << 8) + (Element1 << 4) + Element2;
 

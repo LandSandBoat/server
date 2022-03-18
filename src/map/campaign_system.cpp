@@ -35,9 +35,9 @@ namespace campaign
             while (sql::NextRow() == SQL_SUCCESS)
             {
                 CampaignNation nation;
-                nation.reconnaissance = (uint8)Sql_GetUIntData(SqlHandle, 1);
-                nation.morale         = (uint8)Sql_GetUIntData(SqlHandle, 2);
-                nation.prosperity     = (uint8)Sql_GetUIntData(SqlHandle, 3);
+                nation.reconnaissance = (uint8)sql::GetUIntData(1);
+                nation.morale         = (uint8)sql::GetUIntData(2);
+                nation.prosperity     = (uint8)sql::GetUIntData(3);
                 CState.nations.push_back(nation);
             }
         }

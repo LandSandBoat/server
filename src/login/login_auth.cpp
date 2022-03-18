@@ -115,8 +115,8 @@ int32 login_parse(int32 fd)
                 {
                     ret = sql::NextRow();
 
-                    sd->accid    = (uint32)Sql_GetUIntData(SqlHandle, 0);
-                    uint8 status = (uint8)Sql_GetUIntData(SqlHandle, 1);
+                    sd->accid    = (uint32)sql::GetUIntData(0);
+                    uint8 status = (uint8)sql::GetUIntData(1);
 
                     if (status & ACCST_NORMAL)
                     {
@@ -142,9 +142,9 @@ int32 login_parse(int32 fd)
                         {
                             while (sql::NextRow() == SQL_SUCCESS)
                             {
-                                uint32 charid = Sql_GetUIntData(SqlHandle, 0);
-                                uint64 ip     = Sql_GetUIntData(SqlHandle, 1);
-                                uint64 port   = Sql_GetUIntData(SqlHandle, 2);
+                                uint32 charid = sql::GetUIntData(0);
+                                uint64 ip     = sql::GetUIntData(1);
+                                uint64 port   = sql::GetUIntData(2);
 
                                 ip |= (port << 32);
 
@@ -245,7 +245,7 @@ int32 login_parse(int32 fd)
                     {
                         sql::NextRow();
 
-                        accid = Sql_GetUIntData(SqlHandle, 0) + 1;
+                        accid = sql::GetUIntData(0) + 1;
                     }
                     else
                     {
@@ -307,8 +307,8 @@ int32 login_parse(int32 fd)
 
                 ret = sql::NextRow();
 
-                sd->accid    = (uint32)Sql_GetUIntData(SqlHandle, 0);
-                uint8 status = (uint8)Sql_GetUIntData(SqlHandle, 1);
+                sd->accid    = (uint32)sql::GetUIntData(0);
+                uint8 status = (uint8)sql::GetUIntData(1);
 
                 if (status & ACCST_BANNED)
                 {

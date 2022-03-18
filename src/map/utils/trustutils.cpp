@@ -200,9 +200,9 @@ namespace trustutils
                 trust->trustID = TrustID;
 
                 trust->pool    = (uint32)Sql_GetIntData(SqlHandle, 0);
-                trust->name.insert(0, (const char*)Sql_GetData(SqlHandle, 1));
-                trust->packet_name.insert(0, (const char*)Sql_GetData(SqlHandle, 2));
-                memcpy(&trust->look, Sql_GetData(SqlHandle, 3), 20);
+                trust->name.insert(0, (const char*)sql::GetData(1));
+                trust->packet_name.insert(0, (const char*)sql::GetData(2));
+                memcpy(&trust->look, sql::GetData(3), 20);
 
                 trust->m_Family       = (uint16)Sql_GetIntData(SqlHandle, 4);
                 trust->mJob           = (uint8)Sql_GetIntData(SqlHandle, 5);
@@ -211,13 +211,13 @@ namespace trustutils
                 trust->spellList      = (uint16)Sql_GetIntData(SqlHandle, 8);
                 trust->cmbDmgMult     = (uint16)Sql_GetIntData(SqlHandle, 9);
                 trust->cmbDelay       = (uint16)Sql_GetIntData(SqlHandle, 10);
-                trust->name_prefix    = (uint8)Sql_GetUIntData(SqlHandle, 11);
-                trust->behaviour      = (uint16)Sql_GetUIntData(SqlHandle, 12);
-                trust->m_MobSkillList = (uint16)Sql_GetUIntData(SqlHandle, 13);
+                trust->name_prefix    = (uint8)sql::GetUIntData(11);
+                trust->behaviour      = (uint16)sql::GetUIntData(12);
+                trust->m_MobSkillList = (uint16)sql::GetUIntData(13);
 
-                std::ignore = (uint16)Sql_GetUIntData(SqlHandle, 14); // SpellID
+                std::ignore = (uint16)sql::GetUIntData(14); // SpellID
 
-                trust->size      = Sql_GetUIntData(SqlHandle, 15);
+                trust->size      = sql::GetUIntData(15);
                 trust->EcoSystem = (ECOSYSTEM)Sql_GetIntData(SqlHandle, 16);
                 trust->HPscale   = Sql_GetFloatData(SqlHandle, 17);
                 trust->MPscale   = Sql_GetFloatData(SqlHandle, 18);

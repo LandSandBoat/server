@@ -74,8 +74,8 @@ namespace blacklistutils
         int currentCount = 0;
         while (sql::NextRow() == SQL_SUCCESS)
         {
-            uint32   accid_target = Sql_GetUIntData(SqlHandle, 0);
-            string_t targetName   = (const char*)(Sql_GetData(SqlHandle, 1));
+            uint32   accid_target = sql::GetUIntData(0);
+            string_t targetName   = (const char*)(sql::GetData(1));
 
             blacklist.emplace_back(accid_target, targetName);
             currentCount++;

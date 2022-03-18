@@ -675,7 +675,7 @@ void CBattlefield::Cleanup()
         bool        updateRecord = true;
         if (ret != SQL_ERROR && sql::NextRow() == SQL_SUCCESS)
         {
-            updateRecord = Sql_GetUIntData(SqlHandle, 0) > std::chrono::duration_cast<std::chrono::seconds>(m_Record.time).count();
+            updateRecord = sql::GetUIntData(0) > std::chrono::duration_cast<std::chrono::seconds>(m_Record.time).count();
         }
 
         if (updateRecord)
@@ -705,8 +705,8 @@ bool CBattlefield::LoadMobs()
     {
         while (sql::NextRow() == SQL_SUCCESS)
         {
-            auto  mobid     = Sql_GetUIntData(SqlHandle, 0);
-            auto  condition = Sql_GetUIntData(SqlHandle, 1);
+            auto  mobid     = sql::GetUIntData(0);
+            auto  condition = sql::GetUIntData(1);
             auto* PMob      = static_cast<CMobEntity*>(zoneutils::GetEntity(mobid, TYPE_MOB | TYPE_PET));
 
             if (PMob)
@@ -739,7 +739,7 @@ bool CBattlefield::SpawnLoot(CBaseEntity* PEntity)
         {
             if (sql::NextRow() == SQL_SUCCESS)
             {
-                auto npcId = Sql_GetUIntData(SqlHandle, 0);
+                auto npcId = sql::GetUIntData(0);
                 PEntity    = zoneutils::GetEntity(npcId);
             }
         }

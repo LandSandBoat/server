@@ -66,7 +66,7 @@ namespace traits
             while (sql::NextRow() == SQL_SUCCESS)
             {
                 char* contentTag = nullptr;
-                Sql_GetData(SqlHandle, 6, &contentTag, nullptr);
+                sql::GetData(6, &contentTag, nullptr);
 
                 if (!luautils::IsContentEnabled(contentTag))
                 {

@@ -140,7 +140,7 @@ void CTransportHandler::InitializeTransport()
         {
             TransportZone_Town zoneTown;
 
-            zoneTown.ship.dock.zone = zoneutils::GetZone((Sql_GetUIntData(SqlHandle, 1) >> 12) & 0x0FFF);
+            zoneTown.ship.dock.zone = zoneutils::GetZone((sql::GetUIntData(1) >> 12) & 0x0FFF);
 
             zoneTown.ship.dock.p.x        = Sql_GetFloatData(SqlHandle, 3);
             zoneTown.ship.dock.p.y        = Sql_GetFloatData(SqlHandle, 4);
@@ -149,8 +149,8 @@ void CTransportHandler::InitializeTransport()
             zoneTown.ship.dock.boundary   = (uint16)Sql_GetIntData(SqlHandle, 7);
             zoneTown.ship.dock.prevzone   = (uint8)Sql_GetIntData(SqlHandle, 8);
 
-            zoneTown.npcDoor  = zoneutils::GetEntity(Sql_GetUIntData(SqlHandle, 2), TYPE_NPC);
-            zoneTown.ship.npc = zoneutils::GetEntity(Sql_GetUIntData(SqlHandle, 1), TYPE_SHIP);
+            zoneTown.npcDoor  = zoneutils::GetEntity(sql::GetUIntData(2), TYPE_NPC);
+            zoneTown.ship.npc = zoneutils::GetEntity(sql::GetUIntData(1), TYPE_SHIP);
             zoneTown.ship.npc->name.resize(8);
 
             zoneTown.ship.animationArrive = (uint8)Sql_GetIntData(SqlHandle, 9);
@@ -200,7 +200,7 @@ void CTransportHandler::InitializeTransport()
             TransportZone_Voyage voyageZone;
 
             voyageZone.voyageZone = nullptr;
-            voyageZone.voyageZone = zoneutils::GetZone((uint8)Sql_GetUIntData(SqlHandle, 0));
+            voyageZone.voyageZone = zoneutils::GetZone((uint8)sql::GetUIntData(0));
 
             if (voyageZone.voyageZone != nullptr && voyageZone.voyageZone->GetID() > 0)
             {

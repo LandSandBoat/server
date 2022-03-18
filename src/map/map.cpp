@@ -539,7 +539,7 @@ int32 recv_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
             else
             {
                 char* strSessionKey = nullptr;
-                Sql_GetData(SqlHandle, 0, &strSessionKey, nullptr);
+                sql::GetData(0, &strSessionKey, nullptr);
 
                 memcpy(map_session_data->blowfish.key, strSessionKey, 20);
             }

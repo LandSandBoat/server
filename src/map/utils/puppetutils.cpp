@@ -46,7 +46,7 @@ namespace puppetutils
         {
             size_t length      = 0;
             char*  attachments = nullptr;
-            Sql_GetData(SqlHandle, 0, &attachments, &length);
+            sql::GetData(0, &attachments, &length);
             memcpy(&PChar->m_unlockedAttachments, attachments, (length > sizeof(PChar->m_unlockedAttachments) ? sizeof(PChar->m_unlockedAttachments) : length));
 
             if (PChar->PAutomaton != nullptr)
@@ -68,10 +68,10 @@ namespace puppetutils
             if (PChar->GetMJob() == JOB_PUP || PChar->GetSJob() == JOB_PUP)
             {
                 PChar->PAutomaton = new CAutomatonEntity();
-                PChar->PAutomaton->name.insert(0, (const char*)Sql_GetData(SqlHandle, 1));
+                PChar->PAutomaton->name.insert(0, (const char*)sql::GetData(1));
                 automaton_equip_t tempEquip;
                 attachments = nullptr;
-                Sql_GetData(SqlHandle, 2, &attachments, &length);
+                sql::GetData(2, &attachments, &length);
                 memcpy(&tempEquip, attachments, (length > sizeof(tempEquip) ? sizeof(tempEquip) : length));
 
                 // If any of this happens then the Automaton failed to load properly and should just reset (Should only occur with older characters or if DB is

@@ -378,7 +378,7 @@ void CLinkshell::PushLinkshellMessage(CCharEntity* PChar, bool ls1)
     if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
     {
         PChar->pushPacket(
-            new CLinkshellMessagePacket(Sql_GetData(SqlHandle, 0), Sql_GetData(SqlHandle, 1), (const int8*)m_name.c_str(), Sql_GetUIntData(SqlHandle, 2), ls1));
+            new CLinkshellMessagePacket(sql::GetData(0), sql::GetData(1), (const int8*)m_name.c_str(), sql::GetUIntData(2), ls1));
     }
 }
 
@@ -404,19 +404,19 @@ namespace linkshell
 
         if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
         {
-            auto PLinkshell = std::make_unique<CLinkshell>(Sql_GetUIntData(SqlHandle, 0));
+            auto PLinkshell = std::make_unique<CLinkshell>(sql::GetUIntData(0));
 
             PLinkshell->setColor(Sql_GetIntData(SqlHandle, 1));
             int8 EncodedName[16];
-            EncodeStringLinkshell(Sql_GetData(SqlHandle, 2), EncodedName);
+            EncodeStringLinkshell(sql::GetData(2), EncodedName);
             PLinkshell->setName(EncodedName);
-            if (Sql_GetUIntData(SqlHandle, 3) < LSTYPE_LINKSHELL || Sql_GetUIntData(SqlHandle, 3) > LSTYPE_LINKPEARL)
+            if (sql::GetUIntData(3) < LSTYPE_LINKSHELL || sql::GetUIntData(3) > LSTYPE_LINKPEARL)
             {
                 PLinkshell->setPostRights(LSTYPE_PEARLSACK);
             }
             else
             {
-                PLinkshell->m_postRights = Sql_GetUIntData(SqlHandle, 3);
+                PLinkshell->m_postRights = sql::GetUIntData(3);
             }
             LinkshellList[id] = std::move(PLinkshell);
             return LinkshellList[id].get();

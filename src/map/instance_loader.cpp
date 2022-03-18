@@ -94,8 +94,8 @@ CInstance* CInstanceLoader::LoadInstance()
         {
             CMobEntity* PMob = new CMobEntity;
 
-            PMob->name.insert(0, (const char*)Sql_GetData(SqlHandle, 0));
-            PMob->id     = (uint32)Sql_GetUIntData(SqlHandle, 1);
+            PMob->name.insert(0, (const char*)sql::GetData(0));
+            PMob->id     = (uint32)sql::GetUIntData(1);
             PMob->targid = (uint16)PMob->id & 0x0FFF;
 
             PMob->m_SpawnPoint.rotation = (uint8)Sql_GetIntData(SqlHandle, 2);
@@ -103,9 +103,9 @@ CInstance* CInstanceLoader::LoadInstance()
             PMob->m_SpawnPoint.y        = Sql_GetFloatData(SqlHandle, 4);
             PMob->m_SpawnPoint.z        = Sql_GetFloatData(SqlHandle, 5);
 
-            PMob->m_RespawnTime = Sql_GetUIntData(SqlHandle, 6) * 1000;
-            PMob->m_SpawnType   = (SPAWNTYPE)Sql_GetUIntData(SqlHandle, 7);
-            PMob->m_DropID      = Sql_GetUIntData(SqlHandle, 8);
+            PMob->m_RespawnTime = sql::GetUIntData(6) * 1000;
+            PMob->m_SpawnType   = (SPAWNTYPE)sql::GetUIntData(7);
+            PMob->m_DropID      = sql::GetUIntData(8);
 
             PMob->HPmodifier = (uint32)Sql_GetIntData(SqlHandle, 9);
             PMob->MPmodifier = (uint32)Sql_GetIntData(SqlHandle, 10);
@@ -113,14 +113,14 @@ CInstance* CInstanceLoader::LoadInstance()
             PMob->m_minLevel = (uint8)Sql_GetIntData(SqlHandle, 11);
             PMob->m_maxLevel = (uint8)Sql_GetIntData(SqlHandle, 12);
 
-            memcpy(&PMob->look, Sql_GetData(SqlHandle, 13), 23);
+            memcpy(&PMob->look, sql::GetData(13), 23);
 
             PMob->SetMJob(Sql_GetIntData(SqlHandle, 14));
             PMob->SetSJob(Sql_GetIntData(SqlHandle, 15));
 
             ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setMaxHit(1);
             ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setSkillType(Sql_GetIntData(SqlHandle, 16));
-            PMob->m_dmgMult = Sql_GetUIntData(SqlHandle, 17);
+            PMob->m_dmgMult = sql::GetUIntData(17);
             ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setDelay((Sql_GetIntData(SqlHandle, 18) * 1000) / 60);
             ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setBaseDelay((Sql_GetIntData(SqlHandle, 18) * 1000) / 60);
 
@@ -188,12 +188,12 @@ CInstance* CInstanceLoader::LoadInstance()
 
             PMob->m_SpellListContainer = mobSpellList::GetMobSpellList(Sql_GetIntData(SqlHandle, 65));
 
-            PMob->m_Pool = Sql_GetUIntData(SqlHandle, 66);
+            PMob->m_Pool = sql::GetUIntData(66);
 
-            PMob->allegiance = static_cast<ALLEGIANCE_TYPE>(Sql_GetUIntData(SqlHandle, 67));
-            PMob->namevis    = Sql_GetUIntData(SqlHandle, 68);
+            PMob->allegiance = static_cast<ALLEGIANCE_TYPE>(sql::GetUIntData(67));
+            PMob->namevis    = sql::GetUIntData(68);
 
-            uint32 aggro  = Sql_GetUIntData(SqlHandle, 69);
+            uint32 aggro  = sql::GetUIntData(69);
             PMob->m_Aggro = aggro;
 
             // If a special instanced mob aggros, it should always aggro regardless of level.
@@ -202,11 +202,11 @@ CInstance* CInstanceLoader::LoadInstance()
                 PMob->setMobMod(MOBMOD_ALWAYS_AGGRO, aggro);
             }
 
-            PMob->m_MobSkillList  = Sql_GetUIntData(SqlHandle, 70);
-            PMob->m_TrueDetection = Sql_GetUIntData(SqlHandle, 71);
-            PMob->m_Detects       = Sql_GetUIntData(SqlHandle, 72);
+            PMob->m_MobSkillList  = sql::GetUIntData(70);
+            PMob->m_TrueDetection = sql::GetUIntData(71);
+            PMob->m_Detects       = sql::GetUIntData(72);
 
-            PMob->setMobMod(MOBMOD_CHARMABLE, Sql_GetUIntData(SqlHandle, 73));
+            PMob->setMobMod(MOBMOD_CHARMABLE, sql::GetUIntData(73));
 
             // Overwrite base family charmables depending on mob type. Disallowed mobs which should be charmable
             // can be set in mob_spawn_mods or in their onInitialize
@@ -239,18 +239,18 @@ CInstance* CInstanceLoader::LoadInstance()
             while (sql::NextRow() == SQL_SUCCESS)
             {
                 CNpcEntity* PNpc = new CNpcEntity;
-                PNpc->id         = (uint32)Sql_GetUIntData(SqlHandle, 0);
+                PNpc->id         = (uint32)sql::GetUIntData(0);
                 PNpc->targid     = PNpc->id & 0xFFF;
 
-                PNpc->name.insert(0, (const char*)Sql_GetData(SqlHandle, 1));
+                PNpc->name.insert(0, (const char*)sql::GetData(1));
 
                 PNpc->loc.p.rotation = (uint8)Sql_GetIntData(SqlHandle, 2);
                 PNpc->loc.p.x        = Sql_GetFloatData(SqlHandle, 3);
                 PNpc->loc.p.y        = Sql_GetFloatData(SqlHandle, 4);
                 PNpc->loc.p.z        = Sql_GetFloatData(SqlHandle, 5);
-                PNpc->loc.p.moving   = (uint16)Sql_GetUIntData(SqlHandle, 6);
+                PNpc->loc.p.moving   = (uint16)sql::GetUIntData(6);
 
-                PNpc->m_TargID = (uint32)Sql_GetUIntData(SqlHandle, 6) >> 16; // вполне вероятно
+                PNpc->m_TargID = (uint32)sql::GetUIntData(6) >> 16; // вполне вероятно
 
                 PNpc->speed        = (uint8)Sql_GetIntData(SqlHandle, 7);
                 PNpc->speedsub     = (uint8)Sql_GetIntData(SqlHandle, 8);
@@ -259,9 +259,9 @@ CInstance* CInstanceLoader::LoadInstance()
 
                 PNpc->namevis = (uint8)Sql_GetIntData(SqlHandle, 11);
                 PNpc->status  = static_cast<STATUS_TYPE>(Sql_GetIntData(SqlHandle, 12));
-                PNpc->m_flags = (uint32)Sql_GetUIntData(SqlHandle, 13);
+                PNpc->m_flags = (uint32)sql::GetUIntData(13);
 
-                memcpy(&PNpc->look, Sql_GetData(SqlHandle, 14), 20);
+                memcpy(&PNpc->look, sql::GetData(14), 20);
 
                 PNpc->name_prefix = (uint8)Sql_GetIntData(SqlHandle, 15);
                 PNpc->widescan    = (uint8)Sql_GetIntData(SqlHandle, 16);

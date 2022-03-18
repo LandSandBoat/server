@@ -126,7 +126,7 @@ int32 lobbydata_parse(int32 fd)
                 int32       ret       = sql::Query(pfmtQuery, sd->accid);
                 if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
                 {
-                    CharList[28] = Sql_GetUIntData(SqlHandle, 0);
+                    CharList[28] = sql::GetUIntData(0);
                 }
                 else
                 {
@@ -175,7 +175,7 @@ int32 lobbydata_parse(int32 fd)
                 {
                     char* strCharName = nullptr;
 
-                    Sql_GetData(SqlHandle, 1, &strCharName, nullptr);
+                    sql::GetData(1, &strCharName, nullptr);
 
                     auto gmlevel = Sql_GetIntData(SqlHandle, 36);
                     if (maint_config.maint_mode == 0 || gmlevel > 0)
@@ -305,9 +305,9 @@ int32 lobbydata_parse(int32 fd)
                 {
                     sql::NextRow();
 
-                    ZoneID   = (uint16)Sql_GetUIntData(SqlHandle, 2);
-                    PrevZone = (uint16)Sql_GetUIntData(SqlHandle, 3);
-                    gmlevel  = (uint16)Sql_GetUIntData(SqlHandle, 4);
+                    ZoneID   = (uint16)sql::GetUIntData(2);
+                    PrevZone = (uint16)sql::GetUIntData(3);
+                    gmlevel  = (uint16)sql::GetUIntData(4);
 
                     // new char only (first login from char create)
                     if (PrevZone == 0)
@@ -315,8 +315,8 @@ int32 lobbydata_parse(int32 fd)
                         key3[16] += 6;
                     }
 
-                    inet_pton(AF_INET, (const char*)Sql_GetData(SqlHandle, 0), &ZoneIP);
-                    ZonePort                           = (uint16)Sql_GetUIntData(SqlHandle, 1);
+                    inet_pton(AF_INET, (const char*)sql::GetData(0), &ZoneIP);
+                    ZonePort                           = (uint16)sql::GetUIntData(1);
                     ref<uint32>(ReservePacket, (0x38)) = ZoneIP;
                     ref<uint16>(ReservePacket, (0x3C)) = ZonePort;
                     ShowInfo("lobbydata_parse: zoneid:(%u),zoneip:(%s),zoneport:(%u) for char:(%u)", ZoneID, ip2str(ntohl(ZoneIP)), ZonePort, charid);
@@ -547,8 +547,8 @@ int32 lobbyview_parse(int32 fd)
                     if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
                     {
                         LOBBY_026_RESERVEPACKET(ReservePacket);
-                        ref<uint16>(ReservePacket, 32) = Sql_GetUIntData(SqlHandle, 0); // Expansion Bitmask
-                        ref<uint16>(ReservePacket, 36) = Sql_GetUIntData(SqlHandle, 1); // Feature Bitmask
+                        ref<uint16>(ReservePacket, 32) = sql::GetUIntData(0); // Expansion Bitmask
+                        ref<uint16>(ReservePacket, 36) = sql::GetUIntData(1); // Feature Bitmask
                         memcpy(MainReservePacket, ReservePacket, sendsize);
                     }
                     else
@@ -824,7 +824,7 @@ int32 lobby_createchar(login_session_data_t* loginsd, int8* buf)
     {
         sql::NextRow();
 
-        CharID = (uint32)Sql_GetUIntData(SqlHandle, 0) + 1;
+        CharID = (uint32)sql::GetUIntData(0) + 1;
     }
 
     if (lobby_createchar_save(loginsd->accid, CharID, &createchar) == -1)

@@ -224,8 +224,8 @@ void CMeritPoints::LoadMeritPoints(uint32 charid)
         {
             if (sql::NextRow() == SQL_SUCCESS)
             {
-                uint32 meritID  = Sql_GetUIntData(SqlHandle, 0);
-                uint32 upgrades = Sql_GetUIntData(SqlHandle, 1);
+                uint32 meritID  = sql::GetUIntData(0);
+                uint32 upgrades = sql::GetUIntData(1);
                 for (auto& merit : merits)
                 {
                     if (merit.id == meritID)
@@ -537,14 +537,14 @@ namespace meritNameSpace
             {
                 Merit_t Merit = {}; // creat a new merit template.
 
-                Merit.id        = Sql_GetUIntData(SqlHandle, 0); // set data from db.
-                Merit.value     = Sql_GetUIntData(SqlHandle, 1);
-                Merit.jobs      = Sql_GetUIntData(SqlHandle, 2);
-                Merit.upgrade   = Sql_GetUIntData(SqlHandle, 3);
-                Merit.upgradeid = Sql_GetUIntData(SqlHandle, 4);
-                Merit.catid     = Sql_GetUIntData(SqlHandle, 5);
+                Merit.id        = sql::GetUIntData(0); // set data from db.
+                Merit.value     = sql::GetUIntData(1);
+                Merit.jobs      = sql::GetUIntData(2);
+                Merit.upgrade   = sql::GetUIntData(3);
+                Merit.upgradeid = sql::GetUIntData(4);
+                Merit.catid     = sql::GetUIntData(5);
                 Merit.next      = upgrade[Merit.upgradeid][0];
-                Merit.spellid   = Sql_GetUIntData(SqlHandle, 6);
+                Merit.spellid   = sql::GetUIntData(6);
 
                 GMeritsTemplate[index] = Merit; // add the merit to the array
 

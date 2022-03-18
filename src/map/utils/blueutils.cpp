@@ -346,7 +346,7 @@ namespace blueutils
             {
                 size_t length      = 0;
                 char*  blue_spells = nullptr;
-                Sql_GetData(SqlHandle, 0, &blue_spells, &length);
+                sql::GetData(0, &blue_spells, &length);
                 memcpy(PChar->m_SetBlueSpells, blue_spells, (length > sizeof(PChar->m_SetBlueSpells) ? sizeof(PChar->m_SetBlueSpells) : length));
             }
             for (unsigned char& m_SetBlueSpell : PChar->m_SetBlueSpells)

@@ -53,15 +53,15 @@ CPartyDefinePacket::CPartyDefinePacket(CParty* PParty, bool loadTrust)
             while (sql::NextRow() == SQL_SUCCESS)
             {
                 uint16       targid = 0;
-                CCharEntity* PChar  = zoneutils::GetChar(Sql_GetUIntData(SqlHandle, 0));
+                CCharEntity* PChar  = zoneutils::GetChar(sql::GetUIntData(0));
                 if (PChar)
                 {
                     targid = PChar->targid;
                 }
-                ref<uint32>(12 * i + 0x08) = Sql_GetUIntData(SqlHandle, 0);
+                ref<uint32>(12 * i + 0x08) = sql::GetUIntData(0);
                 ref<uint16>(12 * i + 0x0C) = targid;
-                ref<uint16>(12 * i + 0x0E) = Sql_GetUIntData(SqlHandle, 1);
-                ref<uint16>(12 * i + 0x10) = Sql_GetUIntData(SqlHandle, 2) ? Sql_GetUIntData(SqlHandle, 2) : Sql_GetUIntData(SqlHandle, 3);
+                ref<uint16>(12 * i + 0x0E) = sql::GetUIntData(1);
+                ref<uint16>(12 * i + 0x10) = sql::GetUIntData(2) ? sql::GetUIntData(2) : sql::GetUIntData(3);
                 i++;
             }
         }

@@ -375,7 +375,7 @@ namespace charutils
         if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
         {
             PChar->targid = 0x400;
-            PChar->SetName(Sql_GetData(SqlHandle, 0));
+            PChar->SetName(sql::GetData(0));
 
             PChar->loc.destination = (uint16)Sql_GetIntData(SqlHandle, 1);
             PChar->loc.prevzone    = (uint16)Sql_GetIntData(SqlHandle, 2);
@@ -396,61 +396,61 @@ namespace charutils
 
             size_t length = 0;
             char*  quests = nullptr;
-            Sql_GetData(SqlHandle, 15, &quests, &length);
+            sql::GetData(15, &quests, &length);
             memcpy(PChar->m_questLog, quests, (length > sizeof(PChar->m_questLog) ? sizeof(PChar->m_questLog) : length));
 
             length         = 0;
             char* keyitems = nullptr;
-            Sql_GetData(SqlHandle, 16, &keyitems, &length);
+            sql::GetData(16, &keyitems, &length);
             memcpy((void*)&PChar->keys, keyitems, (length > sizeof(PChar->keys) ? sizeof(PChar->keys) : length));
 
             length          = 0;
             char* abilities = nullptr;
-            Sql_GetData(SqlHandle, 17, &abilities, &length);
+            sql::GetData(17, &abilities, &length);
             memcpy(PChar->m_LearnedAbilities, abilities, (length > sizeof(PChar->m_LearnedAbilities) ? sizeof(PChar->m_LearnedAbilities) : length));
 
             length             = 0;
             char* weaponskills = nullptr;
-            Sql_GetData(SqlHandle, 18, &weaponskills, &length);
+            sql::GetData(18, &weaponskills, &length);
             memcpy(&PChar->m_LearnedWeaponskills, weaponskills,
                    (length > sizeof(PChar->m_LearnedWeaponskills) ? sizeof(PChar->m_LearnedWeaponskills) : length));
 
             length       = 0;
             char* titles = nullptr;
-            Sql_GetData(SqlHandle, 19, &titles, &length);
+            sql::GetData(19, &titles, &length);
             memcpy(PChar->m_TitleList, titles, (length > sizeof(PChar->m_TitleList) ? sizeof(PChar->m_TitleList) : length));
 
             length      = 0;
             char* zones = nullptr;
-            Sql_GetData(SqlHandle, 20, &zones, &length);
+            sql::GetData(20, &zones, &length);
             memcpy(PChar->m_ZonesList, zones, (length > sizeof(PChar->m_ZonesList) ? sizeof(PChar->m_ZonesList) : length));
 
             length         = 0;
             char* missions = nullptr;
-            Sql_GetData(SqlHandle, 21, &missions, &length);
+            sql::GetData(21, &missions, &length);
             memcpy(PChar->m_missionLog, missions, (length > sizeof(PChar->m_missionLog) ? sizeof(PChar->m_missionLog) : length));
 
             length        = 0;
             char* assault = nullptr;
-            Sql_GetData(SqlHandle, 22, &assault, &length);
+            sql::GetData(22, &assault, &length);
             memcpy(&PChar->m_assaultLog, assault, (length > sizeof(PChar->m_assaultLog) ? sizeof(PChar->m_assaultLog) : length));
 
             length         = 0;
             char* campaign = nullptr;
-            Sql_GetData(SqlHandle, 23, &campaign, &length);
+            sql::GetData(23, &campaign, &length);
             memcpy(&PChar->m_campaignLog, campaign, (length > sizeof(PChar->m_campaignLog) ? sizeof(PChar->m_campaignLog) : length));
 
             length         = 0;
             char* eminence = nullptr;
-            Sql_GetData(SqlHandle, 24, &eminence, &length);
+            sql::GetData(24, &eminence, &length);
             memcpy(&PChar->m_eminenceLog, eminence, (length > sizeof(PChar->m_eminenceLog) ? sizeof(PChar->m_eminenceLog) : length));
 
-            PChar->SetPlayTime(Sql_GetUIntData(SqlHandle, 25));
+            PChar->SetPlayTime(sql::GetUIntData(25));
             PChar->profile.campaign_allegiance = (uint8)Sql_GetIntData(SqlHandle, 26);
             PChar->setStyleLocked(Sql_GetIntData(SqlHandle, 27) == 1);
-            PChar->SetMoghancement(Sql_GetUIntData(SqlHandle, 28));
-            PChar->lastOnline = Sql_GetUIntData(SqlHandle, 29);
-            PChar->search.language = (uint8)Sql_GetUIntData(SqlHandle, 30);
+            PChar->SetMoghancement(sql::GetUIntData(28));
+            PChar->lastOnline = sql::GetUIntData(29);
+            PChar->search.language = (uint8)sql::GetUIntData(30);
         }
 
         LoadSpells(PChar);
@@ -483,7 +483,7 @@ namespace charutils
 
         if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
         {
-            PChar->profile.rankpoints = Sql_GetUIntData(SqlHandle, 0);
+            PChar->profile.rankpoints = sql::GetUIntData(0);
 
             PChar->profile.rank[0] = (uint8)Sql_GetIntData(SqlHandle, 1);
             PChar->profile.rank[1] = (uint8)Sql_GetIntData(SqlHandle, 2);
@@ -504,7 +504,7 @@ namespace charutils
             PChar->profile.fame[12]     = (uint16)Sql_GetIntData(SqlHandle, 16); // AbysseaGrauberg
             PChar->profile.fame[13]     = (uint16)Sql_GetIntData(SqlHandle, 17); // AbysseaUleguerand
             PChar->profile.fame[14]     = (uint16)Sql_GetIntData(SqlHandle, 18); // Adoulin
-            PChar->profile.unity_leader = (uint8)Sql_GetUIntData(SqlHandle, 19);
+            PChar->profile.unity_leader = (uint8)sql::GetUIntData(19);
         }
 
         roeutils::onCharLoad(PChar);
@@ -597,8 +597,8 @@ namespace charutils
 
         if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
         {
-            PChar->jobs.unlocked = (uint32)Sql_GetUIntData(SqlHandle, 0);
-            PChar->jobs.genkai   = (uint8)Sql_GetUIntData(SqlHandle, 1);
+            PChar->jobs.unlocked = (uint32)sql::GetUIntData(0);
+            PChar->jobs.genkai   = (uint8)sql::GetUIntData(1);
 
             PChar->jobs.job[JOB_WAR] = (uint8)Sql_GetIntData(SqlHandle, 2);
             PChar->jobs.job[JOB_MNK] = (uint8)Sql_GetIntData(SqlHandle, 3);
@@ -668,10 +668,10 @@ namespace charutils
 
         if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
         {
-            PChar->nameflags.flags = (uint32)Sql_GetUIntData(SqlHandle, 0);
+            PChar->nameflags.flags = (uint32)sql::GetUIntData(0);
 
-            PChar->SetMJob(Sql_GetUIntData(SqlHandle, 1));
-            PChar->SetSJob(Sql_GetUIntData(SqlHandle, 2));
+            PChar->SetMJob(sql::GetUIntData(1));
+            PChar->SetSJob(sql::GetUIntData(2));
 
             HP = Sql_GetIntData(SqlHandle, 3);
             MP = Sql_GetIntData(SqlHandle, 4);
@@ -679,26 +679,26 @@ namespace charutils
             PChar->profile.mhflag = (uint8)Sql_GetIntData(SqlHandle, 5);
             PChar->profile.title  = (uint16)Sql_GetIntData(SqlHandle, 6);
 
-            int8* bazaarMessage = Sql_GetData(SqlHandle, 7);
+            int8* bazaarMessage = sql::GetData(7);
             if (bazaarMessage != nullptr)
             {
-                PChar->bazaar.message.insert(0, (char*)Sql_GetData(SqlHandle, 7));
+                PChar->bazaar.message.insert(0, (char*)sql::GetData(7));
             }
             else
             {
                 PChar->bazaar.message = '\0';
             }
 
-            zoning = Sql_GetUIntData(SqlHandle, 8);
+            zoning = sql::GetUIntData(8);
 
             // Determine if the pet should be respawned.
-            int16 petHP = Sql_GetUIntData(SqlHandle, 11);
+            int16 petHP = sql::GetUIntData(11);
             if (petHP)
             {
                 PChar->petZoningInfo.petHP      = petHP;
-                PChar->petZoningInfo.petID      = Sql_GetUIntData(SqlHandle, 9);
+                PChar->petZoningInfo.petID      = sql::GetUIntData(9);
                 PChar->petZoningInfo.petMP      = Sql_GetIntData(SqlHandle, 12);
-                PChar->petZoningInfo.petType    = static_cast<PET_TYPE>(Sql_GetUIntData(SqlHandle, 10));
+                PChar->petZoningInfo.petType    = static_cast<PET_TYPE>(sql::GetUIntData(10));
                 PChar->petZoningInfo.respawnPet = true;
             }
         }
@@ -720,12 +720,12 @@ namespace charutils
         {
             while (sql::NextRow() == SQL_SUCCESS)
             {
-                uint32    cast_time  = Sql_GetUIntData(SqlHandle, 1);
-                uint32    recast     = Sql_GetUIntData(SqlHandle, 2);
+                uint32    cast_time  = sql::GetUIntData(1);
+                uint32    recast     = sql::GetUIntData(2);
                 time_t    now        = time(nullptr);
                 uint32    chargeTime = 0;
                 uint8     maxCharges = 0;
-                Charge_t* charge     = ability::GetCharge(PChar, Sql_GetUIntData(SqlHandle, 0));
+                Charge_t* charge     = ability::GetCharge(PChar, sql::GetUIntData(0));
                 if (charge != nullptr)
                 {
                     chargeTime = charge->chargeTime;
@@ -733,7 +733,7 @@ namespace charutils
                 }
                 if (now < cast_time + recast)
                 {
-                    PChar->PRecastContainer->Load(RECAST_ABILITY, Sql_GetUIntData(SqlHandle, 0), (cast_time + recast - (uint32)now), chargeTime, maxCharges);
+                    PChar->PRecastContainer->Load(RECAST_ABILITY, sql::GetUIntData(0), (cast_time + recast - (uint32)now), chargeTime, maxCharges);
                 }
             }
         }
@@ -748,14 +748,14 @@ namespace charutils
         {
             while (sql::NextRow() == SQL_SUCCESS)
             {
-                uint8 SkillID = (uint8)Sql_GetUIntData(SqlHandle, 0);
+                uint8 SkillID = (uint8)sql::GetUIntData(0);
 
                 if (SkillID < MAX_SKILLTYPE)
                 {
-                    PChar->RealSkills.skill[SkillID] = (uint16)Sql_GetUIntData(SqlHandle, 1);
+                    PChar->RealSkills.skill[SkillID] = (uint16)sql::GetUIntData(1);
                     if (SkillID >= SKILL_FISHING)
                     {
-                        PChar->RealSkills.rank[SkillID] = (uint8)Sql_GetUIntData(SqlHandle, 2);
+                        PChar->RealSkills.rank[SkillID] = (uint8)sql::GetUIntData(2);
                     }
                 }
             }
@@ -770,23 +770,23 @@ namespace charutils
 
         if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
         {
-            PChar->teleport.outpostSandy   = Sql_GetUIntData(SqlHandle, 0);
-            PChar->teleport.outpostBastok  = Sql_GetUIntData(SqlHandle, 1);
-            PChar->teleport.outpostWindy   = Sql_GetUIntData(SqlHandle, 2);
-            PChar->teleport.runicPortal    = Sql_GetUIntData(SqlHandle, 3);
-            PChar->teleport.pastMaw        = Sql_GetUIntData(SqlHandle, 4);
-            PChar->teleport.campaignSandy  = Sql_GetUIntData(SqlHandle, 5);
-            PChar->teleport.campaignBastok = Sql_GetUIntData(SqlHandle, 6);
-            PChar->teleport.campaignWindy  = Sql_GetUIntData(SqlHandle, 7);
+            PChar->teleport.outpostSandy   = sql::GetUIntData(0);
+            PChar->teleport.outpostBastok  = sql::GetUIntData(1);
+            PChar->teleport.outpostWindy   = sql::GetUIntData(2);
+            PChar->teleport.runicPortal    = sql::GetUIntData(3);
+            PChar->teleport.pastMaw        = sql::GetUIntData(4);
+            PChar->teleport.campaignSandy  = sql::GetUIntData(5);
+            PChar->teleport.campaignBastok = sql::GetUIntData(6);
+            PChar->teleport.campaignWindy  = sql::GetUIntData(7);
 
             size_t length = 0;
             char*  buf    = nullptr;
-            Sql_GetData(SqlHandle, 8, &buf, &length);
+            sql::GetData(8, &buf, &length);
             memcpy(&PChar->teleport.homepoint, buf, (length > sizeof(PChar->teleport.homepoint) ? sizeof(PChar->teleport.homepoint) : length));
 
             length = 0;
             buf    = nullptr;
-            Sql_GetData(SqlHandle, 9, &buf, &length);
+            sql::GetData(9, &buf, &length);
             memcpy(&PChar->teleport.survival, buf, (length > sizeof(PChar->teleport.survival) ? sizeof(PChar->teleport.survival) : length));
         }
 
@@ -807,10 +807,10 @@ namespace charutils
 
         if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
         {
-            PChar->m_GMlevel             = (uint8)Sql_GetUIntData(SqlHandle, 0);
-            PChar->m_mentorUnlocked      = Sql_GetUIntData(SqlHandle, 1) > 0;
-            PChar->m_jobMasterDisplay    = Sql_GetUIntData(SqlHandle, 2) > 0;
-            PChar->menuConfigFlags.flags = (uint32)Sql_GetUIntData(SqlHandle, 3);
+            PChar->m_GMlevel             = (uint8)sql::GetUIntData(0);
+            PChar->m_mentorUnlocked      = sql::GetUIntData(1) > 0;
+            PChar->m_jobMasterDisplay    = sql::GetUIntData(2) > 0;
+            PChar->menuConfigFlags.flags = (uint32)sql::GetUIntData(3);
         }
 
         ret = sql::Query("SELECT field_chocobo FROM char_pet WHERE charid = %u;", PChar->id);
@@ -819,7 +819,7 @@ namespace charutils
             sql::NumRows() != 0 &&
             sql::NextRow() == SQL_SUCCESS)
         {
-            PChar->m_FieldChocobo = static_cast<uint32>(Sql_GetUIntData(SqlHandle, 0));
+            PChar->m_FieldChocobo = static_cast<uint32>(sql::GetUIntData(0));
         }
 
         charutils::LoadInventory(PChar);
@@ -877,7 +877,7 @@ namespace charutils
         {
             while (sql::NextRow() == SQL_SUCCESS)
             {
-                uint16 spellId = Sql_GetUIntData(SqlHandle, 0);
+                uint16 spellId = sql::GetUIntData(0);
 
                 if (spell::GetSpell(static_cast<SpellID>(spellId)) != nullptr)
                 {
@@ -917,14 +917,14 @@ namespace charutils
 
                 if (PItem != nullptr)
                 {
-                    PItem->setLocationID((uint8)Sql_GetUIntData(SqlHandle, 1));
-                    PItem->setSlotID(Sql_GetUIntData(SqlHandle, 2));
-                    PItem->setQuantity(Sql_GetUIntData(SqlHandle, 3));
-                    PItem->setCharPrice(Sql_GetUIntData(SqlHandle, 4));
+                    PItem->setLocationID((uint8)sql::GetUIntData(1));
+                    PItem->setSlotID(sql::GetUIntData(2));
+                    PItem->setQuantity(sql::GetUIntData(3));
+                    PItem->setCharPrice(sql::GetUIntData(4));
 
                     size_t length = 0;
                     char*  extra  = nullptr;
-                    Sql_GetData(SqlHandle, 6, &extra, &length);
+                    sql::GetData(6, &extra, &length);
                     memcpy(PItem->m_extra, extra, (length > sizeof(PItem->m_extra) ? sizeof(PItem->m_extra) : length));
 
                     if (PItem->getCharPrice() != 0)
@@ -939,13 +939,13 @@ namespace charutils
                             static_cast<CItemLinkshell*>(PItem)->SetLSType((LSTYPE)(PItem->getID() - 0x200));
                         }
                         int8 EncodedString[16];
-                        EncodeStringLinkshell(Sql_GetData(SqlHandle, 5), EncodedString);
+                        EncodeStringLinkshell(sql::GetData(5), EncodedString);
                         PItem->setSignature(EncodedString);
                     }
                     else if (PItem->getFlag() & (ITEM_FLAG_INSCRIBABLE))
                     {
                         int8 EncodedString[13];
-                        EncodeStringSignature(Sql_GetData(SqlHandle, 5), EncodedString);
+                        EncodeStringSignature(sql::GetData(5), EncodedString);
                         PItem->setSignature(EncodedString);
                     }
 
@@ -1011,20 +1011,20 @@ namespace charutils
 
             while (sql::NextRow() == SQL_SUCCESS)
             {
-                if (Sql_GetUIntData(SqlHandle, 1) < 16)
+                if (sql::GetUIntData(1) < 16)
                 {
-                    if (Sql_GetUIntData(SqlHandle, 1) == SLOT_MAIN)
+                    if (sql::GetUIntData(1) == SLOT_MAIN)
                     {
                         hasMainWeapon = true;
                     }
 
-                    EquipItem(PChar, Sql_GetUIntData(SqlHandle, 0), Sql_GetUIntData(SqlHandle, 1), Sql_GetUIntData(SqlHandle, 2));
+                    EquipItem(PChar, sql::GetUIntData(0), sql::GetUIntData(1), sql::GetUIntData(2));
                 }
                 else
                 {
-                    uint8  SlotID     = Sql_GetUIntData(SqlHandle, 0);
-                    uint8  equipSlot  = Sql_GetUIntData(SqlHandle, 1);
-                    uint8  LocationID = Sql_GetUIntData(SqlHandle, 2);
+                    uint8  SlotID     = sql::GetUIntData(0);
+                    uint8  equipSlot  = sql::GetUIntData(1);
+                    uint8  LocationID = sql::GetUIntData(2);
                     CItem* PItem      = PChar->getStorage(LocationID)->GetItem(SlotID);
 
                     if ((PItem != nullptr) && PItem->isType(ITEM_LINKSHELL))
@@ -1053,7 +1053,7 @@ namespace charutils
             if (PLinkshell1)
             {
                 ret = sql::Query("SELECT broken FROM linkshells WHERE linkshellid = %u LIMIT 1", PLinkshell1->GetLSID());
-                if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS && Sql_GetUIntData(SqlHandle, 0) == 1)
+                if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS && sql::GetUIntData(0) == 1)
                 { // if the linkshell has been broken, unequip
                     uint8 SlotID     = PLinkshell1->getSlotID();
                     uint8 LocationID = PLinkshell1->getLocationID();
@@ -1070,7 +1070,7 @@ namespace charutils
             if (PLinkshell2)
             {
                 ret = sql::Query("SELECT broken FROM linkshells WHERE linkshellid = %u LIMIT 1", PLinkshell2->GetLSID());
-                if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS && Sql_GetUIntData(SqlHandle, 0) == 1)
+                if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS && sql::GetUIntData(0) == 1)
                 { // if the linkshell has been broken, unequip
                     uint8 SlotID     = PLinkshell2->getSlotID();
                     uint8 LocationID = PLinkshell2->getLocationID();
@@ -5434,9 +5434,9 @@ namespace charutils
                             (PARTY_SECOND | PARTY_THIRD), PChar->id);
         if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
         {
-            uint32 partyid     = Sql_GetUIntData(SqlHandle, 0);
-            uint32 allianceid  = Sql_GetUIntData(SqlHandle, 1);
-            uint32 partynumber = Sql_GetUIntData(SqlHandle, 2);
+            uint32 partyid     = sql::GetUIntData(0);
+            uint32 allianceid  = sql::GetUIntData(1);
+            uint32 partynumber = sql::GetUIntData(2);
 
             // first, parties and alliances must be created or linked if the character's current party has changed
             // for example, joining a party from another server
@@ -5904,20 +5904,20 @@ namespace charutils
         auto ret = sql::Query(fmtQuery, PChar->id);
         if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
         {
-            PChar->m_charHistory.enemiesDefeated   = Sql_GetUIntData(SqlHandle, 0);
-            PChar->m_charHistory.timesKnockedOut   = Sql_GetUIntData(SqlHandle, 1);
-            PChar->m_charHistory.mhEntrances       = Sql_GetUIntData(SqlHandle, 2);
-            PChar->m_charHistory.joinedParties     = Sql_GetUIntData(SqlHandle, 3);
-            PChar->m_charHistory.joinedAlliances   = Sql_GetUIntData(SqlHandle, 4);
-            PChar->m_charHistory.spellsCast        = Sql_GetUIntData(SqlHandle, 5);
-            PChar->m_charHistory.abilitiesUsed     = Sql_GetUIntData(SqlHandle, 6);
-            PChar->m_charHistory.wsUsed            = Sql_GetUIntData(SqlHandle, 7);
-            PChar->m_charHistory.itemsUsed         = Sql_GetUIntData(SqlHandle, 8);
-            PChar->m_charHistory.chatsSent         = Sql_GetUIntData(SqlHandle, 9);
-            PChar->m_charHistory.npcInteractions   = Sql_GetUIntData(SqlHandle, 10);
-            PChar->m_charHistory.battlesFought     = Sql_GetUIntData(SqlHandle, 11);
-            PChar->m_charHistory.gmCalls           = Sql_GetUIntData(SqlHandle, 12);
-            PChar->m_charHistory.distanceTravelled = Sql_GetUIntData(SqlHandle, 13);
+            PChar->m_charHistory.enemiesDefeated   = sql::GetUIntData(0);
+            PChar->m_charHistory.timesKnockedOut   = sql::GetUIntData(1);
+            PChar->m_charHistory.mhEntrances       = sql::GetUIntData(2);
+            PChar->m_charHistory.joinedParties     = sql::GetUIntData(3);
+            PChar->m_charHistory.joinedAlliances   = sql::GetUIntData(4);
+            PChar->m_charHistory.spellsCast        = sql::GetUIntData(5);
+            PChar->m_charHistory.abilitiesUsed     = sql::GetUIntData(6);
+            PChar->m_charHistory.wsUsed            = sql::GetUIntData(7);
+            PChar->m_charHistory.itemsUsed         = sql::GetUIntData(8);
+            PChar->m_charHistory.chatsSent         = sql::GetUIntData(9);
+            PChar->m_charHistory.npcInteractions   = sql::GetUIntData(10);
+            PChar->m_charHistory.battlesFought     = sql::GetUIntData(11);
+            PChar->m_charHistory.gmCalls           = sql::GetUIntData(12);
+            PChar->m_charHistory.distanceTravelled = sql::GetUIntData(13);
         }
     }
 

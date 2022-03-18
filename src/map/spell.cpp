@@ -436,7 +436,7 @@ namespace spell
             {
                 char*   contentTag;
                 CSpell* PSpell = nullptr;
-                SpellID id     = (SpellID)Sql_GetUIntData(SqlHandle, 0);
+                SpellID id     = (SpellID)sql::GetUIntData(0);
 
                 if ((SPELLGROUP)Sql_GetIntData(SqlHandle, 3) == SPELLGROUP_BLUE)
                 {
@@ -447,8 +447,8 @@ namespace spell
                     PSpell = new CSpell(id);
                 }
 
-                PSpell->setName(Sql_GetData(SqlHandle, 1));
-                PSpell->setJob(Sql_GetData(SqlHandle, 2));
+                PSpell->setName(sql::GetData(1));
+                PSpell->setJob(sql::GetData(2));
                 PSpell->setSpellGroup((SPELLGROUP)Sql_GetIntData(SqlHandle, 3));
                 PSpell->setSpellFamily((SPELLFAMILY)Sql_GetIntData(SqlHandle, 4));
                 PSpell->setValidTarget(Sql_GetIntData(SqlHandle, 5));
@@ -469,7 +469,7 @@ namespace spell
                 PSpell->setVE(Sql_GetIntData(SqlHandle, 20));
                 PSpell->setRequirements(Sql_GetIntData(SqlHandle, 21));
 
-                Sql_GetData(SqlHandle, 22, &contentTag, nullptr);
+                sql::GetData(22, &contentTag, nullptr);
                 PSpell->setContentTag((int8*)contentTag);
 
                 PSpell->setRange(static_cast<float>(Sql_GetIntData(SqlHandle, 23)) / 10);
@@ -551,7 +551,7 @@ namespace spell
             while (sql::NextRow() == SQL_SUCCESS)
             {
                 char* contentTag;
-                Sql_GetData(SqlHandle, 7, &contentTag, nullptr);
+                sql::GetData(7, &contentTag, nullptr);
 
                 if (!luautils::IsContentEnabled(contentTag))
                 {
@@ -584,8 +584,8 @@ namespace spell
         {
             while (sql::NextRow() == SQL_SUCCESS)
             {
-                uint16 spellId = (uint16)Sql_GetUIntData(SqlHandle, 0);
-                Mod    modID   = static_cast<Mod>(Sql_GetUIntData(SqlHandle, 1));
+                uint16 spellId = (uint16)sql::GetUIntData(0);
+                Mod    modID   = static_cast<Mod>(sql::GetUIntData(1));
                 int16  value   = (int16)Sql_GetIntData(SqlHandle, 2);
 
                 if (PSpellList[spellId])
@@ -602,18 +602,18 @@ namespace spell
             while (sql::NextRow() == SQL_SUCCESS)
             {
                 char* contentTag;
-                Sql_GetData(SqlHandle, 2, &contentTag, nullptr);
+                sql::GetData(2, &contentTag, nullptr);
 
                 if (!luautils::IsContentEnabled(contentTag))
                 {
                     continue;
                 }
 
-                uint16 spellId = (uint16)Sql_GetUIntData(SqlHandle, 0);
+                uint16 spellId = (uint16)sql::GetUIntData(0);
 
                 if (PSpellList[spellId])
                 {
-                    PSpellList[spellId]->setMeritId(Sql_GetUIntData(SqlHandle, 1));
+                    PSpellList[spellId]->setMeritId(sql::GetUIntData(1));
                 }
             }
         }

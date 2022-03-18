@@ -357,7 +357,7 @@ namespace ability
             while (sql::NextRow() == SQL_SUCCESS)
             {
                 char* contentTag = nullptr;
-                Sql_GetData(SqlHandle, 20, &contentTag, nullptr);
+                sql::GetData(20, &contentTag, nullptr);
 
                 if (!luautils::IsContentEnabled(contentTag))
                 {
@@ -367,7 +367,7 @@ namespace ability
                 CAbility* PAbility = new CAbility(Sql_GetIntData(SqlHandle, 0));
 
                 PAbility->setMobSkillID(Sql_GetIntData(SqlHandle, 1));
-                PAbility->setName(Sql_GetData(SqlHandle, 2));
+                PAbility->setName(sql::GetData(2));
                 PAbility->setJob((JOBTYPE)Sql_GetIntData(SqlHandle, 3));
                 PAbility->setLevel(Sql_GetIntData(SqlHandle, 4));
                 PAbility->setValidTarget(Sql_GetIntData(SqlHandle, 5));
@@ -377,14 +377,14 @@ namespace ability
                 PAbility->setAnimationID(Sql_GetIntData(SqlHandle, 9));
                 PAbility->setAnimationTime(std::chrono::milliseconds(Sql_GetIntData(SqlHandle, 10)));
                 PAbility->setCastTime(std::chrono::milliseconds(Sql_GetIntData(SqlHandle, 11)));
-                PAbility->setActionType(static_cast<ACTIONTYPE>(Sql_GetUIntData(SqlHandle, 12)));
+                PAbility->setActionType(static_cast<ACTIONTYPE>(sql::GetUIntData(12)));
                 PAbility->setRange(Sql_GetFloatData(SqlHandle, 13));
                 PAbility->setAOE(Sql_GetIntData(SqlHandle, 14));
                 PAbility->setRecastId(Sql_GetIntData(SqlHandle, 15));
                 PAbility->setCE(Sql_GetIntData(SqlHandle, 16));
                 PAbility->setVE(Sql_GetIntData(SqlHandle, 17));
                 PAbility->setMeritModID(Sql_GetIntData(SqlHandle, 18));
-                PAbility->setAddType(Sql_GetUIntData(SqlHandle, 19));
+                PAbility->setAddType(sql::GetUIntData(19));
 
                 PAbilityList[PAbility->getID()] = PAbility;
                 PAbilitiesList[PAbility->getJob()].push_back(PAbility);
@@ -407,12 +407,12 @@ namespace ability
             while (sql::NextRow() == SQL_SUCCESS)
             {
                 Charge_t* PCharge   = new Charge_t;
-                PCharge->ID         = Sql_GetUIntData(SqlHandle, 0);
-                PCharge->job        = (JOBTYPE)Sql_GetUIntData(SqlHandle, 1);
-                PCharge->level      = Sql_GetUIntData(SqlHandle, 2);
-                PCharge->maxCharges = Sql_GetUIntData(SqlHandle, 3);
-                PCharge->chargeTime = Sql_GetUIntData(SqlHandle, 4);
-                PCharge->merit      = Sql_GetUIntData(SqlHandle, 5);
+                PCharge->ID         = sql::GetUIntData(0);
+                PCharge->job        = (JOBTYPE)sql::GetUIntData(1);
+                PCharge->level      = sql::GetUIntData(2);
+                PCharge->maxCharges = sql::GetUIntData(3);
+                PCharge->chargeTime = sql::GetUIntData(4);
+                PCharge->merit      = sql::GetUIntData(5);
 
                 PChargesList.push_back(PCharge);
             }

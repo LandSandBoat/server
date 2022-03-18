@@ -32,19 +32,19 @@ void CCampaignHandler::LoadCampaignZone(CZone* PZone)
 
     if (sql::Query(query, PZone->GetID()) != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
     {
-        m_zoneCampaignId        = (uint8)Sql_GetUIntData(SqlHandle, 0);
-        m_zoneId                = (uint8)Sql_GetUIntData(SqlHandle, 1);
-        m_status                = (uint8)Sql_GetUIntData(SqlHandle, 2);
-        m_controllingNation     = (uint8)Sql_GetUIntData(SqlHandle, 3);
-        m_heroism               = (uint8)Sql_GetUIntData(SqlHandle, 4);
-        m_influenceSandoria     = (uint8)Sql_GetUIntData(SqlHandle, 5);
-        m_influenceBastok       = (uint8)Sql_GetUIntData(SqlHandle, 6);
-        m_influenceWindurst     = (uint8)Sql_GetUIntData(SqlHandle, 7);
-        m_influenceBeastman     = (uint8)Sql_GetUIntData(SqlHandle, 8);
-        m_currentFortifications = (uint16)Sql_GetUIntData(SqlHandle, 9);
-        m_currentResources      = (uint16)Sql_GetUIntData(SqlHandle, 10);
-        m_maxFortifications     = (uint16)Sql_GetUIntData(SqlHandle, 11);
-        m_maxResources          = (uint16)Sql_GetUIntData(SqlHandle, 12);
+        m_zoneCampaignId        = (uint8)sql::GetUIntData(0);
+        m_zoneId                = (uint8)sql::GetUIntData(1);
+        m_status                = (uint8)sql::GetUIntData(2);
+        m_controllingNation     = (uint8)sql::GetUIntData(3);
+        m_heroism               = (uint8)sql::GetUIntData(4);
+        m_influenceSandoria     = (uint8)sql::GetUIntData(5);
+        m_influenceBastok       = (uint8)sql::GetUIntData(6);
+        m_influenceWindurst     = (uint8)sql::GetUIntData(7);
+        m_influenceBeastman     = (uint8)sql::GetUIntData(8);
+        m_currentFortifications = (uint16)sql::GetUIntData(9);
+        m_currentResources      = (uint16)sql::GetUIntData(10);
+        m_maxFortifications     = (uint16)sql::GetUIntData(11);
+        m_maxResources          = (uint16)sql::GetUIntData(12);
         m_PZone                 = PZone;
     }
 }

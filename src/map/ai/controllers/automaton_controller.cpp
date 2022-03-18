@@ -1636,11 +1636,11 @@ namespace automaton
         {
             while (sql::NextRow() == SQL_SUCCESS)
             {
-                SpellID        id = (SpellID)Sql_GetUIntData(SqlHandle, 0);
-                AutomatonSpell PSpell{ (uint16)Sql_GetUIntData(SqlHandle, 1), (uint8)Sql_GetUIntData(SqlHandle, 2), (EFFECT)Sql_GetUIntData(SqlHandle, 3),
-                                       (IMMUNITY)Sql_GetUIntData(SqlHandle, 4) };
+                SpellID        id = (SpellID)sql::GetUIntData(0);
+                AutomatonSpell PSpell{ (uint16)sql::GetUIntData(1), (uint8)sql::GetUIntData(2), (EFFECT)sql::GetUIntData(3),
+                                       (IMMUNITY)sql::GetUIntData(4) };
 
-                uint32 removes = Sql_GetUIntData(SqlHandle, 5);
+                uint32 removes = sql::GetUIntData(5);
                 while (removes > 0)
                 {
                     PSpell.removes.push_back((EFFECT)(removes & 0xFF));
@@ -1702,12 +1702,12 @@ namespace automaton
         {
             while (sql::NextRow() == SQL_SUCCESS)
             {
-                uint16           id = (uint16)Sql_GetUIntData(SqlHandle, 0);
-                AutomatonAbility PAbility{ (uint8)Sql_GetUIntData(SqlHandle, 2), (uint16)Sql_GetUIntData(SqlHandle, 3) };
+                uint16           id = (uint16)sql::GetUIntData(0);
+                AutomatonAbility PAbility{ (uint8)sql::GetUIntData(2), (uint16)sql::GetUIntData(3) };
 
                 autoAbilityList[id] = std::move(PAbility);
 
-                auto filename = fmt::format("./scripts/globals/abilities/pets/automaton/{}.lua", Sql_GetData(SqlHandle, 1));
+                auto filename = fmt::format("./scripts/globals/abilities/pets/automaton/{}.lua", sql::GetData(1));
                 luautils::CacheLuaObjectFromFile(filename);
             }
         }

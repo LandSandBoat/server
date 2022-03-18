@@ -620,8 +620,8 @@ namespace message
             int ret = sql::Query("SELECT zoneip, zoneport FROM zone_settings GROUP BY zoneip, zoneport ORDER BY COUNT(*) DESC;");
             if (ret != SQL_ERROR && sql::NumRows() > 0 && sql::NextRow() == SQL_SUCCESS)
             {
-                inet_pton(AF_INET, (const char*)Sql_GetData(SqlHandle, 0), &ipp);
-                port = Sql_GetUIntData(SqlHandle, 1);
+                inet_pton(AF_INET, (const char*)sql::GetData(0), &ipp);
+                port = sql::GetUIntData(1);
             }
         }
 

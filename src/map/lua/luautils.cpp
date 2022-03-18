@@ -1438,7 +1438,7 @@ namespace luautils
             {
                 while (sql::NextRow() == SQL_SUCCESS)
                 {
-                    magianColumns.push_back((const char*)Sql_GetData(SqlHandle, 0));
+                    magianColumns.push_back((const char*)sql::GetData(0));
                 }
             }
             else
@@ -4240,9 +4240,9 @@ namespace luautils
         {
             int32 r   = 0;
             int32 ret = sql::Query("SELECT count(mobid) FROM `nm_spawn_points` where mobid=%u", mobid);
-            if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS && Sql_GetUIntData(SqlHandle, 0) > 0)
+            if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS && sql::GetUIntData(0) > 0)
             {
-                r = xirand::GetRandomNumber(Sql_GetUIntData(SqlHandle, 0));
+                r = xirand::GetRandomNumber(sql::GetUIntData(0));
             }
             else
             {
@@ -4609,7 +4609,7 @@ namespace luautils
         int32  ret      = sql::Query("SELECT effectId FROM despoil_effects WHERE itemId = %u", itemId);
         if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
         {
-            effectId = (uint16)Sql_GetUIntData(SqlHandle, 0);
+            effectId = (uint16)sql::GetUIntData(0);
         }
 
         return effectId;

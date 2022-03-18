@@ -66,7 +66,7 @@ namespace guildutils
 
             while (sql::NextRow() == SQL_SUCCESS)
             {
-                g_PGuildList.push_back(new CGuild(Sql_GetIntData(SqlHandle, 0), (const char*)Sql_GetData(SqlHandle, 1)));
+                g_PGuildList.push_back(new CGuild(Sql_GetIntData(SqlHandle, 0), (const char*)sql::GetData(1)));
             }
         }
         XI_DEBUG_BREAK_IF(g_PGuildShopList.size() != 0);
@@ -155,7 +155,7 @@ namespace guildutils
 
         if (ret != SQL_ERROR && sql::NumRows() == 1 && sql::NextRow() == SQL_SUCCESS)
         {
-            if (Sql_GetUIntData(SqlHandle, 0) != CVanaTime::getInstance()->getJstYearDay())
+            if (sql::GetUIntData(0) != CVanaTime::getInstance()->getJstYearDay())
             {
                 update = true;
             }
@@ -176,7 +176,7 @@ namespace guildutils
         sql::Query("SELECT value FROM server_variables WHERE name = '[GUILD]pattern';");
         if (ret != SQL_ERROR && sql::NumRows() == 1 && sql::NextRow() == SQL_SUCCESS)
         {
-            pattern = Sql_GetUIntData(SqlHandle, 0);
+            pattern = sql::GetUIntData(0);
         }
 
         for (auto* PGuild : g_PGuildList)

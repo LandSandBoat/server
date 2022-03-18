@@ -178,13 +178,13 @@ namespace petutils
                 Pet_t* Pet = new Pet_t();
 
                 Pet->PetID = (uint16)Sql_GetIntData(SqlHandle, 0);
-                Pet->name.insert(0, (const char*)Sql_GetData(SqlHandle, 1));
+                Pet->name.insert(0, (const char*)sql::GetData(1));
 
-                memcpy(&Pet->look, Sql_GetData(SqlHandle, 2), 20);
+                memcpy(&Pet->look, sql::GetData(2), 20);
                 Pet->minLevel  = (uint8)Sql_GetIntData(SqlHandle, 3);
                 Pet->maxLevel  = (uint8)Sql_GetIntData(SqlHandle, 4);
-                Pet->time      = Sql_GetUIntData(SqlHandle, 5);
-                Pet->size      = Sql_GetUIntData(SqlHandle, 6);
+                Pet->time      = sql::GetUIntData(5);
+                Pet->size      = sql::GetUIntData(6);
                 Pet->EcoSystem = (ECOSYSTEM)Sql_GetIntData(SqlHandle, 7);
                 Pet->m_Family  = (uint16)Sql_GetIntData(SqlHandle, 8);
                 Pet->mJob      = (uint8)Sql_GetIntData(SqlHandle, 9);
@@ -237,8 +237,8 @@ namespace petutils
                 Pet->dark_res    = (int16)Sql_GetIntData(SqlHandle, 46);
 
                 Pet->cmbDelay       = (uint16)Sql_GetIntData(SqlHandle, 47);
-                Pet->name_prefix    = (uint8)Sql_GetUIntData(SqlHandle, 48);
-                Pet->m_MobSkillList = (uint16)Sql_GetUIntData(SqlHandle, 49);
+                Pet->name_prefix    = (uint8)sql::GetUIntData(48);
+                Pet->m_MobSkillList = (uint16)sql::GetUIntData(49);
 
                 g_PPetList.push_back(Pet);
             }
@@ -1301,7 +1301,7 @@ namespace petutils
                     if (wyvernid != 0)
                     {
                         PPetData->name.clear();
-                        PPetData->name.insert(0, (const char*)Sql_GetData(SqlHandle, 0));
+                        PPetData->name.insert(0, (const char*)sql::GetData(0));
                     }
                 }
             }
@@ -1327,7 +1327,7 @@ namespace petutils
                     if (adventuringfellowid != 0)
                     {
                         PPetData->name.clear();
-                        PPetData->name.insert(0, Sql_GetData(SqlHandle, 0));
+                        PPetData->name.insert(0, sql::GetData(0));
                     }
                 }
             }
@@ -1366,7 +1366,7 @@ namespace petutils
                             {
                                 if (chocoboname1 != 0 && chocoboname2 != 0)
                                 {
-                                    PPetData->name.insert(0, (const char*)Sql_GetData(SqlHandle, 0));
+                                    PPetData->name.insert(0, (const char*)sql::GetData(0));
                                 }
                             }
                         }

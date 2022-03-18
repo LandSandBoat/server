@@ -42,21 +42,21 @@ void CJobPoints::LoadJobPoints()
         {
             if (sql::NextRow() == SQL_SUCCESS)
             {
-                uint32      jobId       = Sql_GetUIntData(SqlHandle, 1);
+                uint32      jobId       = sql::GetUIntData(1);
                 uint16      jobCategory = JobPointsCategoryByJobId(jobId);
                 JobPoints_t currentJob  = {};
 
                 currentJob.jobId          = jobId;
                 currentJob.jobCategory    = jobCategory;
-                currentJob.capacityPoints = Sql_GetUIntData(SqlHandle, 2);
-                currentJob.currentJp      = Sql_GetUIntData(SqlHandle, 3);
-                currentJob.totalJpSpent   = Sql_GetUIntData(SqlHandle, 4);
+                currentJob.capacityPoints = sql::GetUIntData(2);
+                currentJob.currentJp      = sql::GetUIntData(3);
+                currentJob.totalJpSpent   = sql::GetUIntData(4);
 
                 for (uint8 j = 0; j < JOBPOINTS_JPTYPE_PER_CATEGORY; j++)
                 {
                     JobPointType_t currentType = {};
                     currentType.id             = currentJob.jobCategory + j;
-                    currentType.value          = Sql_GetUIntData(SqlHandle, JOBPOINTS_SQL_COLUMN_OFFSET + j);
+                    currentType.value          = sql::GetUIntData(JOBPOINTS_SQL_COLUMN_OFFSET + j);
                     memcpy(&currentJob.job_point_types[j], &currentType, sizeof(JobPointType_t));
                 }
 
@@ -213,10 +213,10 @@ namespace jobpointutils
             {
                 JobPointGifts_t gift = {};
 
-                uint8 jobId     = Sql_GetUIntData(SqlHandle, 0);
-                gift.jpRequired = Sql_GetUIntData(SqlHandle, 1);
-                gift.modId      = Sql_GetUIntData(SqlHandle, 2);
-                gift.value      = Sql_GetUIntData(SqlHandle, 3);
+                uint8 jobId     = sql::GetUIntData(0);
+                gift.jpRequired = sql::GetUIntData(1);
+                gift.modId      = sql::GetUIntData(2);
+                gift.value      = sql::GetUIntData(3);
 
                 jpGifts[jobId].push_back(gift);
             }
@@ -362,7 +362,7 @@ namespace jobpointutils
                     }
 
                     sendUpdate = true;
-                }                
+                }
                 break;
 
             case JOB_NIN:

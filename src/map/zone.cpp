@@ -346,7 +346,7 @@ void CZone::LoadZoneWeather()
     if (ret != SQL_ERROR && sql::NumRows() != 0)
     {
         sql::NextRow();
-        auto* weatherBlob = reinterpret_cast<uint16*>(Sql_GetData(SqlHandle, 0));
+        auto* weatherBlob = reinterpret_cast<uint16*>(sql::GetData(0));
         for (uint16 i = 0; i < WEATHER_CYCLE; i++)
         {
             if (weatherBlob[i])
@@ -393,20 +393,20 @@ void CZone::LoadZoneSettings()
 
     if (sql::Query(Query, m_zoneID) != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
     {
-        m_zoneName.insert(0, (const char*)Sql_GetData(SqlHandle, 0));
+        m_zoneName.insert(0, (const char*)sql::GetData(0));
 
-        inet_pton(AF_INET, (const char*)Sql_GetData(SqlHandle, 1), &m_zoneIP);
-        m_zonePort              = (uint16)Sql_GetUIntData(SqlHandle, 2);
-        m_zoneMusic.m_songDay   = (uint8)Sql_GetUIntData(SqlHandle, 3);           // background music (day)
-        m_zoneMusic.m_songNight = (uint8)Sql_GetUIntData(SqlHandle, 4);           // background music (night)
-        m_zoneMusic.m_bSongS    = (uint8)Sql_GetUIntData(SqlHandle, 5);           // solo battle music
-        m_zoneMusic.m_bSongM    = (uint8)Sql_GetUIntData(SqlHandle, 6);           // party battle music
+        inet_pton(AF_INET, (const char*)sql::GetData(1), &m_zoneIP);
+        m_zonePort              = (uint16)sql::GetUIntData(2);
+        m_zoneMusic.m_songDay   = (uint8)sql::GetUIntData(3);           // background music (day)
+        m_zoneMusic.m_songNight = (uint8)sql::GetUIntData(4);           // background music (night)
+        m_zoneMusic.m_bSongS    = (uint8)sql::GetUIntData(5);           // solo battle music
+        m_zoneMusic.m_bSongM    = (uint8)sql::GetUIntData(6);           // party battle music
         m_tax                   = (uint16)(Sql_GetFloatData(SqlHandle, 7) * 100); // tax for bazaar
-        m_miscMask              = (uint16)Sql_GetUIntData(SqlHandle, 8);
+        m_miscMask              = (uint16)sql::GetUIntData(8);
 
-        m_zoneType = static_cast<ZONE_TYPE>(Sql_GetUIntData(SqlHandle, 9));
+        m_zoneType = static_cast<ZONE_TYPE>(sql::GetUIntData(9));
 
-        if (Sql_GetData(SqlHandle, 10) != nullptr) // сейчас нельзя использовать bcnmid, т.к. они начинаются с нуля
+        if (sql::GetData(10) != nullptr) // сейчас нельзя использовать bcnmid, т.к. они начинаются с нуля
         {
             m_BattlefieldHandler = new CBattlefieldHandler(this);
         }

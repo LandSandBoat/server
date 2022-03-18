@@ -161,13 +161,13 @@ namespace battleutils
             {
                 CWeaponSkill* PWeaponSkill = new CWeaponSkill(Sql_GetIntData(SqlHandle, 0));
 
-                PWeaponSkill->setName(Sql_GetData(SqlHandle, 1));
-                PWeaponSkill->setJob(Sql_GetData(SqlHandle, 2));
+                PWeaponSkill->setName(sql::GetData(1));
+                PWeaponSkill->setJob(sql::GetData(2));
                 PWeaponSkill->setType(Sql_GetIntData(SqlHandle, 3));
                 PWeaponSkill->setSkillLevel(Sql_GetIntData(SqlHandle, 4));
                 PWeaponSkill->setElement(Sql_GetIntData(SqlHandle, 5));
                 PWeaponSkill->setAnimationId(Sql_GetIntData(SqlHandle, 6));
-                PWeaponSkill->setAnimationTime(std::chrono::milliseconds(Sql_GetUIntData(SqlHandle, 7)));
+                PWeaponSkill->setAnimationTime(std::chrono::milliseconds(sql::GetUIntData(7)));
                 PWeaponSkill->setRange(Sql_GetIntData(SqlHandle, 8));
                 PWeaponSkill->setAoe(Sql_GetIntData(SqlHandle, 9));
                 PWeaponSkill->setPrimarySkillchain(Sql_GetIntData(SqlHandle, 10));
@@ -207,7 +207,7 @@ namespace battleutils
             {
                 CMobSkill* PMobSkill = new CMobSkill(Sql_GetIntData(SqlHandle, 0));
                 PMobSkill->setAnimationID(Sql_GetIntData(SqlHandle, 1));
-                PMobSkill->setName(Sql_GetData(SqlHandle, 2));
+                PMobSkill->setName(sql::GetData(2));
                 PMobSkill->setAoe(Sql_GetIntData(SqlHandle, 3));
                 PMobSkill->setDistance(Sql_GetFloatData(SqlHandle, 4));
                 PMobSkill->setAnimationTime(Sql_GetIntData(SqlHandle, 5));
@@ -215,10 +215,10 @@ namespace battleutils
                 PMobSkill->setValidTargets(Sql_GetIntData(SqlHandle, 7));
                 PMobSkill->setFlag(Sql_GetIntData(SqlHandle, 8));
                 PMobSkill->setParam(Sql_GetIntData(SqlHandle, 9));
-                PMobSkill->setKnockback(Sql_GetUIntData(SqlHandle, 10));
-                PMobSkill->setPrimarySkillchain(Sql_GetUIntData(SqlHandle, 11));
-                PMobSkill->setSecondarySkillchain(Sql_GetUIntData(SqlHandle, 12));
-                PMobSkill->setTertiarySkillchain(Sql_GetUIntData(SqlHandle, 13));
+                PMobSkill->setKnockback(sql::GetUIntData(10));
+                PMobSkill->setPrimarySkillchain(sql::GetUIntData(11));
+                PMobSkill->setSecondarySkillchain(sql::GetUIntData(12));
+                PMobSkill->setTertiarySkillchain(sql::GetUIntData(13));
                 PMobSkill->setMsg(185); // standard damage message. Scripters will change this.
                 g_PMobSkillList[PMobSkill->getID()] = PMobSkill;
 

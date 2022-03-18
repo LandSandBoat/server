@@ -296,7 +296,7 @@ void SmallPacket0x00A(map_session_data_t* const PSession, CCharEntity* const PCh
         if (sql::NextRow() == SQL_SUCCESS)
         {
             // Update the character's death timestamp based off of how long they were previously dead
-            uint32 secondsSinceDeath = (uint32)Sql_GetUIntData(SqlHandle, 0);
+            uint32 secondsSinceDeath = (uint32)sql::GetUIntData(0);
             if (PChar->health.hp == 0)
             {
                 PChar->SetDeathTimestamp((uint32)time(nullptr) - secondsSinceDeath);
@@ -308,7 +308,7 @@ void SmallPacket0x00A(map_session_data_t* const PSession, CCharEntity* const PCh
         ret      = sql::Query(fmtQuery, PChar->id);
         if (ret != SQL_ERROR && sql::NextRow() == SQL_SUCCESS)
         {
-            if (PChar->getZone() == Sql_GetUIntData(SqlHandle, 0))
+            if (PChar->getZone() == sql::GetUIntData(0))
             {
                 PChar->loc.zoning = true;
             }
@@ -597,7 +597,7 @@ void SmallPacket0x011(map_session_data_t* const PSession, CCharEntity* const PCh
     if (ret != SQL_ERROR && sql::NextRow() == SQL_SUCCESS)
     {
         // On zone change, only sending a version message if mismatch
-        // if ((bool)Sql_GetUIntData(SqlHandle, 0))
+        // if ((bool)sql::GetUIntData(0))
         // PChar->pushPacket(new CChatMessagePacket(PChar, CHAT_MESSAGE_TYPE::MESSAGE_SYSTEM_1, "Server does not support this client version."));
     }
 }
@@ -1942,8 +1942,8 @@ void SmallPacket0x03D(map_session_data_t* const PSession, CCharEntity* const PCh
     }
 
     // Retrieve the data from Sql..
-    uint32 charid = Sql_GetUIntData(SqlHandle, 0);
-    uint32 accid  = Sql_GetUIntData(SqlHandle, 1);
+    uint32 charid = sql::GetUIntData(0);
+    uint32 accid  = sql::GetUIntData(1);
 
     // User is trying to add someone to their blacklist..
     if (cmd == 0x00)
@@ -2079,7 +2079,7 @@ void SmallPacket0x04B(map_session_data_t* const PSession, CCharEntity* const PCh
     int32       ret      = sql::Query(fmtQuery, PChar->id);
     if (ret != SQL_ERROR && sql::NextRow() == SQL_SUCCESS)
     {
-        if ((bool)Sql_GetUIntData(SqlHandle, 0))
+        if ((bool)sql::GetUIntData(0))
         {
             PChar->pushPacket(new CChatMessagePacket(PChar, CHAT_MESSAGE_TYPE::MESSAGE_SYSTEM_1, "Server does not support this client version."));
         }
@@ -2170,27 +2170,27 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
                         {
                             PItem->setSubID(Sql_GetIntData(SqlHandle, 1));
                             PItem->setSlotID(Sql_GetIntData(SqlHandle, 2));
-                            PItem->setQuantity(Sql_GetUIntData(SqlHandle, 3));
+                            PItem->setQuantity(sql::GetUIntData(3));
 
-                            if (Sql_GetUIntData(SqlHandle, 4) > 0)
+                            if (sql::GetUIntData(4) > 0)
                             {
                                 PItem->setSent(true);
                             }
 
                             size_t length = 0;
                             char*  extra  = nullptr;
-                            Sql_GetData(SqlHandle, 5, &extra, &length);
+                            sql::GetData(5, &extra, &length);
                             memcpy(PItem->m_extra, extra, (length > sizeof(PItem->m_extra) ? sizeof(PItem->m_extra) : length));
 
                             if (boxtype == 2)
                             {
-                                PItem->setSender(Sql_GetData(SqlHandle, 7));
-                                PItem->setReceiver(Sql_GetData(SqlHandle, 6));
+                                PItem->setSender(sql::GetData(7));
+                                PItem->setReceiver(sql::GetData(6));
                             }
                             else
                             {
-                                PItem->setSender(Sql_GetData(SqlHandle, 6));
-                                PItem->setReceiver(Sql_GetData(SqlHandle, 7));
+                                PItem->setSender(sql::GetData(6));
+                                PItem->setReceiver(sql::GetData(7));
                             }
 
                             PChar->UContainer->SetItem(PItem->getSlotID(), PItem);
@@ -2223,7 +2223,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
                 int32 ret = sql::Query("SELECT charid, accid FROM chars WHERE charname = '%s' LIMIT 1;", data[0x10]);
                 if (ret != SQL_ERROR && sql::NumRows() > 0 && sql::NextRow() == SQL_SUCCESS)
                 {
-                    uint32 charid = Sql_GetUIntData(SqlHandle, 0);
+                    uint32 charid = sql::GetUIntData(0);
 
                     if (PItem->getFlag() & ITEM_FLAG_NODELIVERY)
                     {
@@ -2232,9 +2232,9 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
                             return;
                         }
 
-                        uint32 accid = Sql_GetUIntData(SqlHandle, 1);
+                        uint32 accid = sql::GetUIntData(1);
                         int32  ret   = sql::Query("SELECT COUNT(*) FROM chars WHERE charid = '%u' AND accid = '%u' LIMIT 1;", PChar->id, accid);
-                        if (ret == SQL_ERROR || sql::NextRow() != SQL_SUCCESS || Sql_GetUIntData(SqlHandle, 0) == 0)
+                        if (ret == SQL_ERROR || sql::NextRow() != SQL_SUCCESS || sql::GetUIntData(0) == 0)
                         {
                             return;
                         }
@@ -2300,7 +2300,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
 
                         if (ret != SQL_ERROR && sql::NumRows() > 0 && sql::NextRow() == SQL_SUCCESS)
                         {
-                            uint32 charid = Sql_GetUIntData(SqlHandle, 0);
+                            uint32 charid = sql::GetUIntData(0);
 
                             ret = sql::Query("UPDATE delivery_box SET sent = 1 WHERE charid = %u AND senderid = %u AND slot = %u AND box = 2;",
                                             PChar->id, charid, slotID);
@@ -2358,7 +2358,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
 
                     if (ret != SQL_ERROR && sql::NumRows() > 0 && sql::NextRow() == SQL_SUCCESS)
                     {
-                        uint32 charid = Sql_GetUIntData(SqlHandle, 0);
+                        uint32 charid = sql::GetUIntData(0);
                         ret           = Sql_Query(SqlHandle,
                                         "UPDATE delivery_box SET sent = 0 WHERE charid = %u AND box = 2 AND slot = %u AND sent = 1 AND received = 0 LIMIT 1;",
                                         PChar->id, slotID);
@@ -2479,22 +2479,22 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
 
                     if (ret != SQL_ERROR && sql::NumRows() > 0 && sql::NextRow() == SQL_SUCCESS)
                     {
-                        PItem = itemutils::GetItem(Sql_GetUIntData(SqlHandle, 0));
+                        PItem = itemutils::GetItem(sql::GetUIntData(0));
 
                         if (PItem)
                         {
                             PItem->setSubID(Sql_GetIntData(SqlHandle, 1));
-                            PItem->setQuantity(Sql_GetUIntData(SqlHandle, 2));
+                            PItem->setQuantity(sql::GetUIntData(2));
 
                             size_t length = 0;
                             char*  extra  = nullptr;
-                            Sql_GetData(SqlHandle, 3, &extra, &length);
+                            sql::GetData(3, &extra, &length);
                             memcpy(PItem->m_extra, extra, (length > sizeof(PItem->m_extra) ? sizeof(PItem->m_extra) : length));
 
-                            PItem->setSender(Sql_GetData(SqlHandle, 4));
+                            PItem->setSender(sql::GetData(4));
                             if (PChar->UContainer->IsSlotEmpty(slotID))
                             {
-                                int senderID = Sql_GetUIntData(SqlHandle, 5);
+                                int senderID = sql::GetUIntData(5);
                                 PItem->setSlotID(slotID);
 
                                 // the result of this query doesn't really matter, it can be sent from the auction house which has no sender record
@@ -2506,7 +2506,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
                                 sql::Query("SELECT slot FROM delivery_box WHERE charid = %u AND box = 1 AND slot > 7 ORDER BY slot ASC;", PChar->id);
                                 if (ret != SQL_ERROR && sql::NumRows() > 0 && sql::NextRow() == SQL_SUCCESS)
                                 {
-                                    uint8 queue = Sql_GetUIntData(SqlHandle, 0);
+                                    uint8 queue = sql::GetUIntData(0);
                                     Query       = "UPDATE delivery_box SET slot = %u WHERE charid = %u AND box = 1 AND slot = %u;";
                                     ret         = sql::Query(Query.c_str(), slotID, PChar->id, queue);
                                     if (ret != SQL_ERROR)
@@ -2557,7 +2557,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
                 received_items = (uint8)sql::NumRows();
                 if (received_items && sql::NextRow() == SQL_SUCCESS)
                 {
-                    slotID = Sql_GetUIntData(SqlHandle, 0);
+                    slotID = sql::GetUIntData(0);
                     if (!PChar->UContainer->IsSlotEmpty(slotID))
                     {
                         CItem* PItem = PChar->UContainer->GetItem(slotID);
@@ -2618,8 +2618,8 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
 
                     if (ret != SQL_ERROR && sql::NumRows() > 0 && sql::NextRow() == SQL_SUCCESS)
                     {
-                        senderID = Sql_GetUIntData(SqlHandle, 0);
-                        senderName.insert(0, (const char*)Sql_GetData(SqlHandle, 1));
+                        senderID = sql::GetUIntData(0);
+                        senderName.insert(0, (const char*)sql::GetData(1));
 
                         if (senderID != 0)
                         {
@@ -2769,9 +2769,9 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
 
             if (ret != SQL_ERROR && sql::NumRows() > 0 && sql::NextRow() == SQL_SUCCESS)
             {
-                uint32 accid = Sql_GetUIntData(SqlHandle, 0);
+                uint32 accid = sql::GetUIntData(0);
                 ret          = sql::Query("SELECT COUNT(*) FROM chars WHERE charid = '%u' AND accid = '%u' LIMIT 1;", PChar->id, accid);
-                if (ret != SQL_ERROR && sql::NextRow() == SQL_SUCCESS && Sql_GetUIntData(SqlHandle, 0))
+                if (ret != SQL_ERROR && sql::NextRow() == SQL_SUCCESS && sql::GetUIntData(0))
                 {
                     PChar->pushPacket(new CDeliveryBoxPacket(action, boxtype, 0xFF, 0x02));
                     PChar->pushPacket(new CDeliveryBoxPacket(action, boxtype, 0x01, 0x01));
@@ -2887,7 +2887,7 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
                     {
                         AuctionHistory_t ah;
                         ah.itemid = (uint16)Sql_GetIntData(SqlHandle, 0);
-                        ah.price  = (uint32)Sql_GetUIntData(SqlHandle, 1);
+                        ah.price  = (uint32)sql::GetUIntData(1);
                         ah.stack  = (uint8)Sql_GetIntData(SqlHandle, 2);
                         ah.status = 0;
                         PChar->m_ah_history.push_back(ah);
@@ -4076,7 +4076,7 @@ void SmallPacket0x071(map_session_data_t* const PSession, CCharEntity* const PCh
                     int32 ret = sql::Query("SELECT charid FROM chars WHERE charname = '%s';", victimName);
                     if (ret != SQL_ERROR && sql::NumRows() == 1 && sql::NextRow() == SQL_SUCCESS)
                     {
-                        uint32 id = Sql_GetUIntData(SqlHandle, 0);
+                        uint32 id = sql::GetUIntData(0);
                         if (sql::Query("DELETE FROM accounts_parties WHERE partyid = %u AND charid = %u;", PChar->id, id) == SQL_SUCCESS &&
                             Sql_AffectedRows(SqlHandle))
                         {
@@ -4156,7 +4156,7 @@ void SmallPacket0x071(map_session_data_t* const PSession, CCharEntity* const PCh
                     int32 ret = sql::Query("SELECT charid FROM chars WHERE charname = '%s';", victimName);
                     if (ret != SQL_ERROR && sql::NumRows() == 1 && sql::NextRow() == SQL_SUCCESS)
                     {
-                        uint32 id = Sql_GetUIntData(SqlHandle, 0);
+                        uint32 id = sql::GetUIntData(0);
                         ret       = Sql_Query(SqlHandle,
                                         "SELECT partyid FROM accounts_parties WHERE charid = %u AND allianceid = %u AND partyflag & %d AND partyflag & %d", id,
                                         PChar->PParty->m_PAlliance->m_AllianceID, PARTY_LEADER, PARTY_SECOND | PARTY_THIRD);
@@ -5292,7 +5292,7 @@ void SmallPacket0x0C4(map_session_data_t* const PSession, CCharEntity* const PCh
                 case 1: // equip linkshell
                 {
                     auto ret = sql::Query("SELECT broken FROM linkshells WHERE linkshellid = %u LIMIT 1", PItemLinkshell->GetLSID());
-                    if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS && Sql_GetUIntData(SqlHandle, 0) == 1)
+                    if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS && sql::GetUIntData(0) == 1)
                     { // if the linkshell has been broken, break the item
                         PItemLinkshell->SetLSType(LSTYPE_BROKEN);
                         char extra[sizeof(PItemLinkshell->m_extra) * 2 + 1];
