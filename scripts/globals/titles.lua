@@ -1089,6 +1089,7 @@ xi.title =
     DESTINY_MASTER                            = 1138,
     TIRELESS_TRACKER                          = 1139,
     GALKAN_HAZARD                             = 1140,
+    BEARER_OF_SECRETS                         = 1141,
 }
 
 -----------------------------------

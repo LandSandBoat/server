@@ -3424,7 +3424,7 @@ INSERT INTO `item_mods` VALUES (11109,8,8);
 INSERT INTO `item_mods` VALUES (11109,9,8);
 INSERT INTO `item_mods` VALUES (11109,23,16);
 INSERT INTO `item_mods` VALUES (11109,25,12);
-INSERT INTO `item_mods` VALUES (11109,874,12); -- Increases "Sneak Attack" damage
+INSERT INTO `item_mods` VALUES (11109,830,12); -- Increases "Sneak Attack" damage
 INSERT INTO `item_mods` VALUES (11110,1,35);
 INSERT INTO `item_mods` VALUES (11110,8,11);
 INSERT INTO `item_mods` VALUES (11110,10,11);
@@ -3910,7 +3910,7 @@ INSERT INTO `item_mods` VALUES (11209,8,6);
 INSERT INTO `item_mods` VALUES (11209,9,6);
 INSERT INTO `item_mods` VALUES (11209,23,10);
 INSERT INTO `item_mods` VALUES (11209,25,8);
-INSERT INTO `item_mods` VALUES (11209,874,10); -- Increases "Sneak Attack" damage
+INSERT INTO `item_mods` VALUES (11209,830,10); -- Increases "Sneak Attack" damage
 INSERT INTO `item_mods` VALUES (11210,1,33);
 INSERT INTO `item_mods` VALUES (11210,8,7);
 INSERT INTO `item_mods` VALUES (11210,10,7);
@@ -36192,6 +36192,12 @@ INSERT INTO `item_mods` VALUES (26341,9,20);      -- DEX+20
 INSERT INTO `item_mods` VALUES (26341,160,-600);    -- Damage Taken-6
 INSERT INTO `item_mods` VALUES (26341,302,8);     -- Triple Attack+8
 INSERT INTO `item_mods` VALUES (26341,973,15);    -- Subtle Blow II +15
+INSERT INTO `item_mods` VALUES (26356,30,5);    -- Skrymir Cord: Magic Accuracy + 5
+INSERT INTO `item_mods` VALUES (26356,28,5);    -- Magic Attack Bonus + 5
+INSERT INTO `item_mods` VALUES (26356,311,30);    -- Magic Damage + 30
+INSERT INTO `item_mods` VALUES (26357,30,7);    -- Skrymir Cord +1: Magic Accuracy + 7
+INSERT INTO `item_mods` VALUES (26357,28,7);    --  Magic Attack Bonus + 7
+INSERT INTO `item_mods` VALUES (26357,311,35);    -- Magic Damage + 35
 INSERT INTO `item_mods` VALUES (26400,1,60); -- Culminus: DEF+60
 INSERT INTO `item_mods` VALUES (26400,2,57); -- HP+57
 INSERT INTO `item_mods` VALUES (26400,5,64); -- MP+64
@@ -40525,7 +40531,7 @@ INSERT INTO `item_mods` VALUES (27062,29,1);
 INSERT INTO `item_mods` VALUES (27062,31,29);
 INSERT INTO `item_mods` VALUES (27062,68,16);
 INSERT INTO `item_mods` VALUES (27062,384,400);
-INSERT INTO `item_mods` VALUES (27062,874,12); -- Increases "Sneak Attack" damage
+INSERT INTO `item_mods` VALUES (27062,830,12); -- Increases "Sneak Attack" damage
 INSERT INTO `item_mods` VALUES (27063,1,91);
 INSERT INTO `item_mods` VALUES (27063,2,27);
 INSERT INTO `item_mods` VALUES (27063,8,14);
@@ -40541,7 +40547,7 @@ INSERT INTO `item_mods` VALUES (27063,29,2);
 INSERT INTO `item_mods` VALUES (27063,31,43);
 INSERT INTO `item_mods` VALUES (27063,68,36);
 INSERT INTO `item_mods` VALUES (27063,384,500);
-INSERT INTO `item_mods` VALUES (27063,874,12.5); -- Increases "Sneak Attack" damage
+INSERT INTO `item_mods` VALUES (27063,830,12.5); -- Increases "Sneak Attack" damage
 INSERT INTO `item_mods` VALUES (27064,1,77);
 INSERT INTO `item_mods` VALUES (27064,2,16);
 INSERT INTO `item_mods` VALUES (27064,5,12);

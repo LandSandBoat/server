@@ -121,30 +121,29 @@ namespace effects
             EffectsParams[i].Flag = 0;
         }
 
-        int32 ret = Sql_Query(
-            SqlHandle,
+        int32 ret = sql->Query(
             "SELECT id, name, flags, type, negative_id, overwrite, block_id, remove_id, element, min_duration, sort_key FROM status_effects WHERE id < %u",
             MAX_EFFECTID);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (ret != SQL_ERROR && sql->NumRows() != 0)
         {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql->NextRow() == SQL_SUCCESS)
             {
-                uint16 EffectID = (uint16)Sql_GetIntData(SqlHandle, 0);
+                uint16 EffectID = (uint16)sql->GetIntData(0);
 
-                EffectsParams[EffectID].Name       = (const char*)Sql_GetData(SqlHandle, 1);
-                EffectsParams[EffectID].Flag       = Sql_GetIntData(SqlHandle, 2);
-                EffectsParams[EffectID].Type       = Sql_GetIntData(SqlHandle, 3);
-                EffectsParams[EffectID].NegativeId = (EFFECT)Sql_GetIntData(SqlHandle, 4);
-                EffectsParams[EffectID].Overwrite  = (EFFECTOVERWRITE)Sql_GetIntData(SqlHandle, 5);
-                EffectsParams[EffectID].BlockId    = (EFFECT)Sql_GetIntData(SqlHandle, 6);
-                EffectsParams[EffectID].RemoveId   = (EFFECT)Sql_GetIntData(SqlHandle, 7);
+                EffectsParams[EffectID].Name       = (const char*)sql->GetData(1);
+                EffectsParams[EffectID].Flag       = sql->GetIntData(2);
+                EffectsParams[EffectID].Type       = sql->GetIntData(3);
+                EffectsParams[EffectID].NegativeId = (EFFECT)sql->GetIntData(4);
+                EffectsParams[EffectID].Overwrite  = (EFFECTOVERWRITE)sql->GetIntData(5);
+                EffectsParams[EffectID].BlockId    = (EFFECT)sql->GetIntData(6);
+                EffectsParams[EffectID].RemoveId   = (EFFECT)sql->GetIntData(7);
 
-                EffectsParams[EffectID].Element = Sql_GetIntData(SqlHandle, 8);
+                EffectsParams[EffectID].Element = sql->GetIntData(8);
                 // convert from second to millisecond
-                EffectsParams[EffectID].MinDuration = Sql_GetIntData(SqlHandle, 9) * 1000;
+                EffectsParams[EffectID].MinDuration = sql->GetIntData(9) * 1000;
 
-                uint16 sortKey                  = Sql_GetIntData(SqlHandle, 10);
+                uint16 sortKey                  = sql->GetIntData(10);
                 EffectsParams[EffectID].SortKey = sortKey == 0 ? 10000 : sortKey; // default to high number to such that effects without a sort key aren't first
 
                 auto filename = fmt::format("./scripts/globals/effects/{}.lua", EffectsParams[EffectID].Name);
@@ -1120,47 +1119,78 @@ void CStatusEffectContainer::Fold(uint32 charid)
     }
 }
 
-uint8 CStatusEffectContainer::GetActiveManeuvers()
+uint8 CStatusEffectContainer::GetActiveManeuverCount()
 {
-    uint8 count = 0;
-    for (CStatusEffect* PStatusEffect : m_StatusEffectSet)
-    {
-        if (PStatusEffect->GetStatusID() >= EFFECT_FIRE_MANEUVER && PStatusEffect->GetStatusID() <= EFFECT_DARK_MANEUVER && !PStatusEffect->deleted)
-        {
-            count++;
-        }
-    }
-    return count;
+    return GetStatusEffectCountInIDRange(EFFECT_FIRE_MANEUVER, EFFECT_DARK_MANEUVER);
 }
 
 void CStatusEffectContainer::RemoveOldestManeuver()
 {
-    CStatusEffect* oldest = nullptr;
-    for (CStatusEffect* PStatusEffect : m_StatusEffectSet)
-    {
-        if (PStatusEffect->GetStatusID() >= EFFECT_FIRE_MANEUVER && PStatusEffect->GetStatusID() <= EFFECT_DARK_MANEUVER && !PStatusEffect->deleted)
-        {
-            if (!oldest || PStatusEffect->GetStartTime() < oldest->GetStartTime())
-            {
-                oldest = PStatusEffect;
-            }
-        }
-    }
-    if (oldest)
-    {
-        RemoveStatusEffect(oldest, true);
-    }
+    RemoveOldestStatusEffectInIDRange(EFFECT_FIRE_MANEUVER, EFFECT_DARK_MANEUVER);
 }
 
 void CStatusEffectContainer::RemoveAllManeuvers()
 {
+    RemoveAllStatusEffectsInIDRange(EFFECT_FIRE_MANEUVER, EFFECT_DARK_MANEUVER);
+}
+
+uint8 CStatusEffectContainer::GetActiveRuneCount()
+{
+    return GetStatusEffectCountInIDRange(EFFECT_IGNIS, EFFECT_TENEBRAE);
+}
+
+EFFECT CStatusEffectContainer::GetHighestRuneEffect()
+{
+    std::unordered_map<EFFECT,uint8> runeEffects;
+
     for (CStatusEffect* PStatusEffect : m_StatusEffectSet)
     {
-        if (PStatusEffect->GetStatusID() >= EFFECT_FIRE_MANEUVER && PStatusEffect->GetStatusID() <= EFFECT_DARK_MANEUVER)
+        if (PStatusEffect->GetStatusID() >= EFFECT_IGNIS && PStatusEffect->GetStatusID() <= EFFECT_TENEBRAE && !PStatusEffect->deleted)
         {
-            RemoveStatusEffect(PStatusEffect, true);
+            if (runeEffects.count(PStatusEffect->GetStatusID()) == 0)
+            {
+                runeEffects[PStatusEffect->GetStatusID()] = 1;
+            }
+            else
+            {
+                runeEffects.at(PStatusEffect->GetStatusID())++;
+            }
         }
     }
+
+    EFFECT highestRune = EFFECT_NONE;
+    int highestRuneValue;
+
+    for (auto iter = runeEffects.begin(); iter != runeEffects.end(); ++iter)
+    {
+        if (highestRune == EFFECT_NONE || iter->second > highestRuneValue)
+        {
+            highestRune = iter->first;
+            highestRuneValue = iter->second;
+        }
+    }
+
+    return highestRune;
+}
+
+EFFECT CStatusEffectContainer::GetNewestRuneEffect()
+{
+    return GetNewestStatusEffectInIDRange(EFFECT_IGNIS, EFFECT_TENEBRAE);
+}
+
+void CStatusEffectContainer::RemoveNewestRune()
+{
+    RemoveNewestStatusEffectInIDRange(EFFECT_IGNIS, EFFECT_TENEBRAE);
+}
+
+void CStatusEffectContainer::RemoveOldestRune()
+{
+    RemoveOldestStatusEffectInIDRange(EFFECT_IGNIS, EFFECT_TENEBRAE);
+}
+
+void CStatusEffectContainer::RemoveAllRunes()
+{
+    RemoveAllStatusEffectsInIDRange(EFFECT_IGNIS, EFFECT_TENEBRAE);
 }
 
 /************************************************************************
@@ -1313,6 +1343,89 @@ void CStatusEffectContainer::UpdateStatusIcons()
     }
 }
 
+uint8 CStatusEffectContainer::GetStatusEffectCountInIDRange(EFFECT start, EFFECT end)
+{
+    uint8 count = 0;
+    for (CStatusEffect* PStatusEffect : m_StatusEffectSet)
+    {
+        if (PStatusEffect->GetStatusID() >= start && PStatusEffect->GetStatusID() <= end && !PStatusEffect->deleted)
+        {
+            count++;
+        }
+    }
+    return count;
+}
+
+EFFECT CStatusEffectContainer::GetNewestStatusEffectInIDRange(EFFECT start, EFFECT end)
+{
+    CStatusEffect* newest = nullptr;
+    for (CStatusEffect* PStatusEffect : m_StatusEffectSet)
+    {
+        if (PStatusEffect->GetStatusID() >= start && PStatusEffect->GetStatusID() <= end && !PStatusEffect->deleted)
+        {
+            if (!newest || PStatusEffect->GetStartTime() > newest->GetStartTime())
+            {
+                newest = PStatusEffect;
+            }
+        }
+    }
+    if (newest)
+    {
+        return newest->GetStatusID();
+    }
+    return EFFECT_NONE;
+}
+
+void CStatusEffectContainer::RemoveOldestStatusEffectInIDRange(EFFECT start, EFFECT end)
+{
+    CStatusEffect* oldest = nullptr;
+    for (CStatusEffect* PStatusEffect : m_StatusEffectSet)
+    {
+        if (PStatusEffect->GetStatusID() >= start && PStatusEffect->GetStatusID() <= end && !PStatusEffect->deleted)
+        {
+            if (!oldest || PStatusEffect->GetStartTime() < oldest->GetStartTime())
+            {
+                oldest = PStatusEffect;
+            }
+        }
+    }
+    if (oldest)
+    {
+        RemoveStatusEffect(oldest, true);
+    }
+
+}
+
+void CStatusEffectContainer::RemoveNewestStatusEffectInIDRange(EFFECT start, EFFECT end)
+{
+    CStatusEffect* newest = nullptr;
+    for (CStatusEffect* PStatusEffect : m_StatusEffectSet)
+    {
+        if (PStatusEffect->GetStatusID() >= start && PStatusEffect->GetStatusID() <= end && !PStatusEffect->deleted)
+        {
+            if (!newest || PStatusEffect->GetStartTime() > newest->GetStartTime())
+            {
+                newest = PStatusEffect;
+            }
+        }
+    }
+    if (newest)
+    {
+        RemoveStatusEffect(newest, true);
+    }
+}
+
+void CStatusEffectContainer::RemoveAllStatusEffectsInIDRange(EFFECT start, EFFECT end)
+{
+    for (CStatusEffect* PStatusEffect : m_StatusEffectSet)
+    {
+        if (PStatusEffect->GetStatusID() >= start && PStatusEffect->GetStatusID() <= end)
+        {
+            RemoveStatusEffect(PStatusEffect, true);
+        }
+    }
+}
+
 /************************************************************************
  *                                                                       *
  *  Устанавливаем имя эффекта для работы со скриптами                    *
@@ -1403,19 +1516,19 @@ void CStatusEffectContainer::LoadStatusEffects()
                         "FROM char_effects "
                         "WHERE charid = %u;";
 
-    int32 ret = Sql_Query(SqlHandle, Query, m_POwner->id);
+    int32 ret = sql->Query(Query, m_POwner->id);
 
     std::vector<CStatusEffect*> PEffectList;
 
-    if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+    if (ret != SQL_ERROR && sql->NumRows() != 0)
     {
-        while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        while (sql->NextRow() == SQL_SUCCESS)
         {
-            auto flags    = (uint32)Sql_GetUIntData(SqlHandle, 8);
-            auto duration = (uint32)Sql_GetUIntData(SqlHandle, 4);
+            auto flags    = (uint32)sql->GetUIntData(8);
+            auto duration = (uint32)sql->GetUIntData(4);
             if (flags & EFFECTFLAG_OFFLINE_TICK)
             {
-                auto timestamp = (uint32)Sql_GetUIntData(SqlHandle, 9);
+                auto timestamp = (uint32)sql->GetUIntData(9);
                 if (server_clock::now() < time_point() + std::chrono::seconds(timestamp) + std::chrono::seconds(duration))
                 {
                     duration = (uint32)std::chrono::duration_cast<std::chrono::seconds>(time_point() + std::chrono::seconds(timestamp) +
@@ -1429,9 +1542,9 @@ void CStatusEffectContainer::LoadStatusEffects()
                 }
             }
             CStatusEffect* PStatusEffect =
-                new CStatusEffect((EFFECT)Sql_GetUIntData(SqlHandle, 0), (uint16)Sql_GetUIntData(SqlHandle, 1), (uint16)Sql_GetUIntData(SqlHandle, 2),
-                                  (uint32)Sql_GetUIntData(SqlHandle, 3), duration, (uint16)Sql_GetUIntData(SqlHandle, 5), (uint16)Sql_GetUIntData(SqlHandle, 6),
-                                  (uint16)Sql_GetUIntData(SqlHandle, 7), flags);
+                new CStatusEffect((EFFECT)sql->GetUIntData(0), (uint16)sql->GetUIntData(1), (uint16)sql->GetUIntData(2),
+                                  (uint32)sql->GetUIntData(3), duration, (uint16)sql->GetUIntData(5), (uint16)sql->GetUIntData(6),
+                                  (uint16)sql->GetUIntData(7), flags);
 
             PEffectList.push_back(PStatusEffect);
 
@@ -1465,7 +1578,7 @@ void CStatusEffectContainer::SaveStatusEffects(bool logout)
 {
     XI_DEBUG_BREAK_IF(m_POwner->objtype != TYPE_PC);
 
-    Sql_Query(SqlHandle, "DELETE FROM char_effects WHERE charid = %u", m_POwner->id);
+    sql->Query("DELETE FROM char_effects WHERE charid = %u", m_POwner->id);
 
     for (CStatusEffect* PStatusEffect : m_StatusEffectSet)
     {
@@ -1524,7 +1637,7 @@ void CStatusEffectContainer::SaveStatusEffects(bool logout)
                     }
                 }
             }
-            Sql_Query(SqlHandle, Query, m_POwner->id, PStatusEffect->GetStatusID(), PStatusEffect->GetIcon(), PStatusEffect->GetPower(), tick, duration,
+            sql->Query(Query, m_POwner->id, PStatusEffect->GetStatusID(), PStatusEffect->GetIcon(), PStatusEffect->GetPower(), tick, duration,
                       PStatusEffect->GetSubID(), PStatusEffect->GetSubPower(), PStatusEffect->GetTier(), PStatusEffect->GetFlag(),
                       std::chrono::duration_cast<std::chrono::seconds>(PStatusEffect->GetStartTime().time_since_epoch()).count());
         }

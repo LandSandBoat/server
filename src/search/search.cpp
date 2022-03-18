@@ -21,16 +21,16 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include <thread>
 
-#include "../common/blowfish.h"
-#include "../common/cbasetypes.h"
-#include "../common/md52.h"
-#include "../common/mmo.h"
-#include "../common/logging.h"
-#include "../common/socket.h"
-#include "../common/sql.h"
-#include "../common/taskmgr.h"
-#include "../common/timer.h"
-#include "../common/utils.h"
+#include "common/blowfish.h"
+#include "common/cbasetypes.h"
+#include "common/md52.h"
+#include "common/mmo.h"
+#include "common/logging.h"
+#include "common/socket.h"
+#include "common/sql.h"
+#include "common/taskmgr.h"
+#include "common/timer.h"
+#include "common/utils.h"
 
 #ifdef WIN32
 #include <winsock2.h>
@@ -757,7 +757,7 @@ search_req _HandleSearchRequest(CTCPRequestPacket& PTCPRequest)
 
         if ((EntryType != SEARCH_FRIEND) && (EntryType != SEARCH_LINKSHELL) && (EntryType != SEARCH_COMMENT) && (EntryType != SEARCH_FLAGS2))
         {
-            if ((bitOffset + 3) >= workloadBits) // so 0000000 at the end does not get interpretet as name entry ...
+            if ((bitOffset + 3) >= workloadBits) // so 0000000 at the end does not get interpret as name entry
             {
                 bitOffset = workloadBits;
                 break;

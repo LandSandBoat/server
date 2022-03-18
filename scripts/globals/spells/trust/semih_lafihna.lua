@@ -30,13 +30,26 @@ spell_object.onMobSpawn = function(mob)
     mob:addSimpleGambit(ai.t.SELF, ai.c.NOT_STATUS, xi.effect.SHARPSHOT,
                         ai.r.JA, ai.s.SPECIFIC, xi.ja.SHARPSHOT)
 
-    mob:addSimpleGambit(ai.t.SELF, ai.c.HAS_TOP_ENMITY, 0,
-                        ai.r.JA, ai.s.SPECIFIC, xi.ja.STEALTH_SHOT)
+    mob:addSimpleGambit(ai.t.SELF, ai.c.NOT_STATUS, xi.effect.DOUBLE_SHOT,
+                        ai.r.JA, ai.s.SPECIFIC, xi.ja.DOUBLE_SHOT)
+
+    -- TODO: Stealth Shot not yet implemented
+    -- mob:addSimpleGambit(ai.t.SELF, ai.c.HAS_TOP_ENMITY, 0,
+    --                    ai.r.JA, ai.s.SPECIFIC, xi.ja.STEALTH_SHOT)
+
+    mob:addListener("WEAPONSKILL_USE", "SEMIH_LAFIHNA_WEAPONSKILL_USE", function(mobArg, target, wsid, tp, action)
+        if wsid == 3490 then -- Stellar Arrow
+            -- I'll show you no quarter!
+            xi.trust.message(mobArg, xi.trust.message_offset.SPECIAL_MOVE_1)
+        end
+    end)
 
     -- Ranged Attack as much as possible (limited by "weapon" delay)
     mob:addSimpleGambit(ai.t.TARGET, ai.c.ALWAYS, 0, ai.r.RATTACK, 0, 0)
 
     mob:SetAutoAttackEnabled(false)
+
+    mob:addMod(xi.mod.STORETP, 40)
 end
 
 spell_object.onMobDespawn = function(mob)

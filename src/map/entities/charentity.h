@@ -354,6 +354,8 @@ public:
 
     uint8      m_hasTractor;     // checks if player has tractor already
     uint8      m_hasRaise;       // checks if player has raise already
+    uint8      m_weaknessLvl;    // tracks if the player was previously weakend
+    bool       m_hasArise;       // checks if the white magic spell arise was cast on the player and a re-raise effect should be applied
     uint8      m_hasAutoTarget;  // возможность использования AutoTarget функции
     position_t m_StartActionPos; // позиция начала действия (использование предмета, начало стрельбы, позиция tractor)
 
@@ -363,6 +365,8 @@ public:
     uint32 m_SaveTime;
 
     uint32 m_LastYell;
+
+    time_point m_LeaderCreatedPartyTime; // Time that a party member joined and this player was leader.
 
     uint8 m_GMlevel;    // Level of the GM flag assigned to this character
     bool  m_isGMHidden; // GM Hidden flag to prevent player updates from being processed.

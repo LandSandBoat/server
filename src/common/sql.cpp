@@ -19,10 +19,10 @@
 ===========================================================================
 */
 
-#include "../common/logging.h"
-#include "../common/taskmgr.h"
-#include "../common/timer.h"
-#include "../common/tracy.h"
+#include "logging.h"
+#include "timer.h"
+#include "tracy.h"
+#include "xirand.h"
 
 #include "sql.h"
 
@@ -30,108 +30,104 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
+#include <string>
 
-/************************************************************************
- *																		*
- *  Column length receiver.												*
- *  Takes care of the possible size missmatch between uint32 and			*
- *  unsigned long.				  										*
- *																		*
- ************************************************************************/
-
-struct s_column_length
+SqlConnection::SqlConnection(const char* user, const char* passwd, const char* host, uint16 port, const char* db)
 {
-    uint32* out_length;
-    uint32  length;
-};
-
-/************************************************************************
- *																		*
- *  Allocates and initializes a new Sql handle.							*
- *																		*
- ************************************************************************/
-
-Sql_t* Sql_Malloc()
-{
-    Sql_t* self = new Sql_t{};
+    self = new Sql_t{};
     mysql_init(&self->handle);
-    self->lengths   = nullptr;
-    self->result    = nullptr;
-    self->keepalive = CTaskMgr::TASK_INVALID;
-    return self;
-}
-
-/************************************************************************
- *																		*
- *  Establishes a connection.											*
- *																		*
- ************************************************************************/
-
-int32 Sql_Connect(Sql_t* self, const char* user, const char* passwd, const char* host, uint16 port, const char* db)
-{
     if (self == nullptr)
     {
-        return SQL_ERROR;
+        ShowFatalError("mysql_init failed!");
     }
+
+    self->lengths = nullptr;
+    self->result  = nullptr;
+
+    bool reconnect = true;
+    mysql_options(&self->handle, MYSQL_OPT_RECONNECT, &reconnect);
 
     self->buf.clear();
     if (!mysql_real_connect(&self->handle, host, user, passwd, db, (uint32)port, nullptr /*unix_socket*/, 0 /*clientflag*/))
     {
-        ShowSQL("%s", mysql_error(&self->handle));
-        return SQL_ERROR;
+        ShowFatalError("%s", mysql_error(&self->handle));
     }
 
-    return SQL_SUCCESS;
+    m_User = user;
+    m_Passwd = passwd;
+    m_Host = host;
+    m_Port = port;
+    m_Db = db;
+
+    InitPreparedStatements();
+
+    SetupKeepalive();
 }
 
 /************************************************************************
- *																		*
- *  Retrieves the timeout of the connection.								*
- *																		*
+ *                                                                        *
+ *                                                                        *
+ *                                                                        *
  ************************************************************************/
 
-int32 Sql_GetTimeout(Sql_t* self, uint32* out_timeout)
+SqlConnection::~SqlConnection()
 {
-    if (self && out_timeout && SQL_SUCCESS == Sql_Query(self, "SHOW VARIABLES LIKE 'wait_timeout'"))
+    if (self)
+    {
+        mysql_close(&self->handle);
+        FreeResult();
+        delete self;
+    }
+}
+
+/************************************************************************
+ *                                                                        *
+ *  Retrieves the timeout of the connection.                              *
+ *                                                                        *
+ ************************************************************************/
+
+int32 SqlConnection::GetTimeout(uint32* out_timeout)
+{
+    if (out_timeout && SQL_SUCCESS == Query("SHOW VARIABLES LIKE 'wait_timeout'"))
     {
         char*  data;
         size_t len;
-        if (SQL_SUCCESS == Sql_NextRow(self) && SQL_SUCCESS == Sql_GetData(self, 1, &data, &len))
+        if (SQL_SUCCESS == NextRow() && SQL_SUCCESS == GetData(1, &data, &len))
         {
             *out_timeout = (uint32)strtoul(data, nullptr, 10);
-            Sql_FreeResult(self);
+            FreeResult();
             return SQL_SUCCESS;
         }
-        Sql_FreeResult(self);
+        FreeResult();
     }
     return SQL_ERROR;
 }
 
 /************************************************************************
- *																		*
- *  Retrieves the name of the columns of a table into out_buf, with		*
- *  the separator after each name.										*
- *																		*
+ *                                                                        *
+ *  Retrieves the name of the columns of a table into out_buf, with       *
+ *  the separator after each name.                                        *
+ *                                                                        *
  ************************************************************************/
 
-int32 Sql_GetColumnNames(Sql_t* self, const char* table, char* out_buf, size_t buf_len, char sep)
+int32 SqlConnection::GetColumnNames(const char* table, char* out_buf, size_t buf_len, char sep)
 {
     char*  data;
     size_t len;
     size_t off = 0;
 
-    if (self == nullptr || SQL_ERROR == Sql_Query(self, "EXPLAIN `%s`", table))
+    if (self == nullptr || SQL_ERROR == Query("EXPLAIN `%s`", table))
     {
         return SQL_ERROR;
     }
 
     out_buf[off] = '\0';
-    while (SQL_SUCCESS == Sql_NextRow(self) && SQL_SUCCESS == Sql_GetData(self, 0, &data, &len))
+    while (SQL_SUCCESS == NextRow() && SQL_SUCCESS == GetData(0, &data, &len))
     {
         len = strnlen(data, len);
         if (off + len + 2 > buf_len)
         {
-            ShowDebug("Sql_GetColumns: output buffer is too small");
+            ShowDebug("GetColumns: output buffer is too small");
             *out_buf = '\0';
             return SQL_ERROR;
         }
@@ -140,135 +136,124 @@ int32 Sql_GetColumnNames(Sql_t* self, const char* table, char* out_buf, size_t b
         out_buf[off++] = sep;
     }
     out_buf[off] = '\0';
-    Sql_FreeResult(self);
+    FreeResult();
     return SQL_SUCCESS;
 }
 
 /************************************************************************
- *																		*
- *  Changes the encoding of the connection.								*
- *																		*
+ *                                                                        *
+ *  Changes the encoding of the connection.                               *
+ *                                                                        *
  ************************************************************************/
 
-int32 Sql_SetEncoding(Sql_t* self, const char* encoding)
+int32 SqlConnection::SetEncoding(const char* encoding)
 {
-    if (self && mysql_set_character_set(&self->handle, encoding) == 0)
+    if (mysql_set_character_set(&self->handle, encoding) == 0)
     {
         return SQL_SUCCESS;
     }
     return SQL_ERROR;
 }
 
+void SqlConnection::SetupKeepalive()
+{
+    auto now = std::chrono::system_clock::now().time_since_epoch();
+    auto nowSeconds = std::chrono::duration_cast<std::chrono::seconds>(now).count();
+    m_LastPing = nowSeconds;
+
+    // set a default value first
+    uint32 timeout = 7200; // 2 hours
+
+    // request the timeout value from the mysql server
+    GetTimeout(&timeout);
+
+    if (timeout < 60)
+    {
+        timeout = 60;
+    }
+
+    // 30-second reserve
+    uint8 reserve = 30;
+    m_PingInterval = timeout + reserve;
+}
+
 /************************************************************************
- *																		*
- *  Pings the connection.												*
- *																		*
+ *                                                                        *
+ *  Pings the connection.                                                 *
+ *                                                                        *
  ************************************************************************/
 
-int32 Sql_Ping(Sql_t* self)
+int32 SqlConnection::TryPing()
 {
-    try
+    auto now = std::chrono::system_clock::now().time_since_epoch();
+    auto nowSeconds = std::chrono::duration_cast<std::chrono::seconds>(now).count();
+
+    if (m_LastPing + m_PingInterval <= nowSeconds)
     {
-        if (self && mysql_ping(&self->handle) == 0)
+        ShowInfo("Pinging SQL server to keep connection alive");
+
+        auto startId = mysql_thread_id(&self->handle);
+        try
         {
-            return SQL_SUCCESS;
+            if (mysql_ping(&self->handle) == 0)
+            {
+                auto endId = mysql_thread_id(&self->handle);
+                if (startId != endId)
+                {
+                    ShowWarning("DB thread ID has changed. You have been reconnected.");
+                    // TODO: Maybe we need to refresh the prepared statements now?
+                }
+                return SQL_SUCCESS;
+            }
         }
-    }
-    catch (const std::exception& e)
-    {
-        throw std::runtime_error(fmt::format("mysql_ping failed: {}", e.what()));
+        catch (const std::exception& e)
+        {
+            ShowFatalError(fmt::format("mysql_ping failed: {}", e.what()));
+        }
+        catch (...)
+        {
+            ShowFatalError("mysql_ping failed with unhandled exception");
+        }
+
+        m_LastPing = nowSeconds;
     }
 
     return SQL_ERROR;
 }
 
 /************************************************************************
- *																		*
- *  Wrapper function for Sql_Ping.										*
- *																		*
+ *                                                                        *
+ *  Escapes a string.                                                     *
+ *                                                                        *
  ************************************************************************/
 
-static int32 Sql_P_KeepaliveTimer(time_point tick, CTaskMgr::CTask* PTask)
-{
-    ShowInfo("Pinging SQL server to keep connection alive...");
-
-    if (Sql_t* self = std::any_cast<Sql_t*>(PTask->m_data); self != nullptr)
-    {
-        std::ignore = Sql_Ping(self);
-    }
-    else
-    {
-        throw std::runtime_error("Failed to obtain Sql_t* from KeepaliveTimer task!");
-    }
-
-    return 0;
-}
-
-/************************************************************************
- *																		*
- *  Establishes keepalive (periodic ping) on the connection				*
- *																		*
- ************************************************************************/
-
-/// @return the keepalive timer id, or INVALID_TIMER
-
-int32 Sql_Keepalive(Sql_t* self)
-{
-    uint32 timeout;
-    uint32 ping_interval;
-
-    // set a default value first
-    timeout = 7200; // 2 hours
-
-    // request the timeout value from the mysql server
-    Sql_GetTimeout(self, &timeout);
-
-    if (timeout < 60)
-    {
-        timeout = 60;
-    }
-    // establish keepalive
-    ping_interval = timeout - 30; // 30-second reserve
-    CTaskMgr::getInstance()->AddTask("Sql_P_KeepAliveTimer", server_clock::now() + std::chrono::seconds(ping_interval), self, CTaskMgr::TASK_INTERVAL,
-                                     Sql_P_KeepaliveTimer, std::chrono::seconds(ping_interval));
-    return 0;
-}
-
-/************************************************************************
- *																		*
- *  Escapes a string.													*
- *																		*
- ************************************************************************/
-
-size_t Sql_EscapeStringLen(Sql_t* self, char* out_to, const char* from, size_t from_len)
+size_t SqlConnection::EscapeStringLen(char* out_to, const char* from, size_t from_len)
 {
     if (self)
     {
         return (size_t)mysql_real_escape_string(&self->handle, out_to, from, (uint32)from_len);
     }
-    {
-        return (size_t)mysql_escape_string(out_to, from, (uint32)from_len);
-    }
+    return (size_t)mysql_escape_string(out_to, from, (uint32)from_len);
 }
 
 /************************************************************************
- *																		*
- *  Escapes a string.													*
- *																		*
+ *                                                                        *
+ *  Escapes a string.                                                     *
+ *                                                                        *
  ************************************************************************/
 
-size_t Sql_EscapeString(Sql_t* self, char* out_to, const char* from)
+size_t SqlConnection::EscapeString(char* out_to, const char* from)
 {
-    return Sql_EscapeStringLen(self, out_to, from, strlen(from));
+    return EscapeStringLen(out_to, from, strlen(from));
 }
 
 /************************************************************************
- *																		*
- *  Executes a query.													*
- *																		*
+ *                                                                        *
+ *  Executes a query.                                                     *
+ *                                                                        *
  ************************************************************************/
 
-int32 Sql_QueryStr(Sql_t* self, const char* query)
+int32 SqlConnection::QueryStr(const char* query)
 {
     TracyZoneScoped;
     TracyZoneCString(query);
@@ -278,30 +263,33 @@ int32 Sql_QueryStr(Sql_t* self, const char* query)
         return SQL_ERROR;
     }
 
-    Sql_FreeResult(self);
+    FreeResult();
     self->buf.clear();
+
     self->buf += query;
     if (mysql_real_query(&self->handle, self->buf.c_str(), (unsigned int)self->buf.length()))
     {
         ShowSQL("DB error - %sSQL: %s", mysql_error(&self->handle), query);
         return SQL_ERROR;
     }
+
     self->result = mysql_store_result(&self->handle);
     if (mysql_errno(&self->handle) != 0)
     {
         ShowSQL("DB error - %sSQL: %s", mysql_error(&self->handle), query);
         return SQL_ERROR;
     }
+
     return SQL_SUCCESS;
 }
 
 /************************************************************************
- *																		*
- *				  														*
- *																		*
+ *                                                                        *
+ *                                                                        *
+ *                                                                        *
  ************************************************************************/
 
-uint64 Sql_AffectedRows(Sql_t* self)
+uint64 SqlConnection::AffectedRows()
 {
     if (self)
     {
@@ -311,13 +299,13 @@ uint64 Sql_AffectedRows(Sql_t* self)
 }
 
 /************************************************************************
- *																		*
- *  Returns the number of the AUTO_INCREMENT column of the last			*
- *  INSERT/UPDATE query.				  									*
- *																		*
+ *                                                                        *
+ *  Returns the number of the AUTO_INCREMENT column of the last           *
+ *  INSERT/UPDATE query.                                                  *
+ *                                                                        *
  ************************************************************************/
 
-uint64 Sql_LastInsertId(Sql_t* self)
+uint64 SqlConnection::LastInsertId()
 {
     if (self)
     {
@@ -327,12 +315,12 @@ uint64 Sql_LastInsertId(Sql_t* self)
 }
 
 /************************************************************************
- *																		*
- *  Returns the number of columns in each row of the result.				*
- *																		*
+ *                                                                        *
+ *  Returns the number of columns in each row of the result.              *
+ *                                                                        *
  ************************************************************************/
 
-uint32 Sql_NumColumns(Sql_t* self)
+uint32 SqlConnection::NumColumns()
 {
     if (self && self->result)
     {
@@ -342,12 +330,12 @@ uint32 Sql_NumColumns(Sql_t* self)
 }
 
 /************************************************************************
- *																		*
- *  Returns the number of rows in the result.							*
- *																		*
+ *                                                                        *
+ *  Returns the number of rows in the result.                             *
+ *                                                                        *
  ************************************************************************/
 
-uint64 Sql_NumRows(Sql_t* self)
+uint64 SqlConnection::NumRows()
 {
     if (self && self->result)
     {
@@ -357,12 +345,12 @@ uint64 Sql_NumRows(Sql_t* self)
 }
 
 /************************************************************************
- *																		*
- *  Fetches the next row.												*
- *																		*
+ *                                                                        *
+ *  Fetches the next row.                                                 *
+ *                                                                        *
  ************************************************************************/
 
-int32 Sql_NextRow(Sql_t* self)
+int32 SqlConnection::NextRow()
 {
     if (self && self->result)
     {
@@ -378,21 +366,21 @@ int32 Sql_NextRow(Sql_t* self)
             return SQL_NO_DATA;
         }
     }
-    ShowFatalError("Sql_NextRow: SQL_ERROR");
+    ShowFatalError("NextRow: SQL_ERROR: %s", mysql_error(&self->handle));
     return SQL_ERROR;
 }
 
 /************************************************************************
- *																		*
- *  Gets the data of a column.											*
- *																		*
+ *                                                                        *
+ *  Gets the data of a column.                                            *
+ *                                                                        *
  ************************************************************************/
 
-int32 Sql_GetData(Sql_t* self, size_t col, char** out_buf, size_t* out_len)
+int32 SqlConnection::GetData(size_t col, char** out_buf, size_t* out_len)
 {
     if (self && self->row)
     {
-        if (col < Sql_NumColumns(self))
+        if (col < NumColumns())
         {
             if (out_buf)
             {
@@ -416,93 +404,93 @@ int32 Sql_GetData(Sql_t* self, size_t col, char** out_buf, size_t* out_len)
         }
         return SQL_SUCCESS;
     }
-    ShowFatalError("Sql_GetData: SQL_ERROR");
+    ShowFatalError("GetData: SQL_ERROR: %s", mysql_error(&self->handle));
     return SQL_ERROR;
 }
 
 /************************************************************************
- *																		*
- *				  														*
- *																		*
+ *                                                                        *
+ *                                                                        *
+ *                                                                        *
  ************************************************************************/
 
-int8* Sql_GetData(Sql_t* self, size_t col)
+int8* SqlConnection::GetData(size_t col)
 {
     if (self && self->row)
     {
-        if (col < Sql_NumColumns(self))
+        if (col < NumColumns())
         {
             return (int8*)self->row[col];
         }
     }
-    ShowFatalError("Sql_GetData: SQL_ERROR");
+    ShowFatalError("GetData: SQL_ERROR: %s", mysql_error(&self->handle));
     return nullptr;
 }
 
 /************************************************************************
- *																		*
- *				  														*
- *																		*
+ *                                                                        *
+ *                                                                        *
+ *                                                                        *
  ************************************************************************/
 
-int32 Sql_GetIntData(Sql_t* self, size_t col)
+int32 SqlConnection::GetIntData(size_t col)
 {
     if (self && self->row)
     {
-        if (col < Sql_NumColumns(self))
+        if (col < NumColumns())
         {
             return (self->row[col] ? (int32)atoi(self->row[col]) : 0);
         }
     }
-    ShowFatalError("Sql_GetIntData: SQL_ERROR");
+    ShowFatalError("GetIntData: SQL_ERROR: %s", mysql_error(&self->handle));
     return 0;
 }
 
 /************************************************************************
- *																		*
- *				  														*
- *																		*
+ *                                                                        *
+ *                                                                        *
+ *                                                                        *
  ************************************************************************/
 
-uint32 Sql_GetUIntData(Sql_t* self, size_t col)
+uint32 SqlConnection::GetUIntData(size_t col)
 {
     if (self && self->row)
     {
-        if (col < Sql_NumColumns(self))
+        if (col < NumColumns())
         {
             return (self->row[col] ? (uint32)strtoul(self->row[col], nullptr, 10) : 0);
         }
     }
-    ShowFatalError("Sql_GetUIntData: SQL_ERROR");
+    ShowFatalError("GetUIntData: SQL_ERROR: %s", mysql_error(&self->handle));
     return 0;
 }
 
 /************************************************************************
- *																		*
- *				  														*
- *																		*
+ *                                                                        *
+ *                                                                        *
+ *                                                                        *
  ************************************************************************/
 
-float Sql_GetFloatData(Sql_t* self, size_t col)
+float SqlConnection::GetFloatData(size_t col)
 {
     if (self && self->row)
     {
-        if (col < Sql_NumColumns(self))
+        if (col < NumColumns())
         {
             return (self->row[col] ? (float)atof(self->row[col]) : 0.f);
         }
     }
-    ShowFatalError("Sql_GetFloatData: SQL_ERROR");
+    ShowFatalError("GetFloatData: SQL_ERROR: %s", mysql_error(&self->handle));
     return 0;
 }
 
 /************************************************************************
- *																		*
- *  Frees the result of the query.										*
- *																		*
+ *                                                                        *
+ *  Frees the result of the query.                                        *
+ *                                                                        *
  ************************************************************************/
 
-void Sql_FreeResult(Sql_t* self)
+void SqlConnection::FreeResult()
 {
     if (self && self->result)
     {
@@ -514,103 +502,110 @@ void Sql_FreeResult(Sql_t* self)
 }
 
 /************************************************************************
- *																		*
- *  Shows debug information (last query).								*
- *																		*
+ *                                                                        *
+ *                                                                        *
+ *                                                                        *
  ************************************************************************/
 
-void Sql_ShowDebug_(Sql_t* self, const char* debug_file, const unsigned long debug_line)
-{
-    if (self->buf.length() > 0)
-    {
-        ShowDebug("at %s:%lu - %s", debug_file, debug_line, self->buf.c_str());
-    }
-    else
-    {
-        ShowDebug("at %s:%lu", debug_file, debug_line);
-    }
-}
-
-/************************************************************************
- *																		*
- *  Frees a Sql handle returned by Sql_Malloc.							*
- *																		*
- ************************************************************************/
-
-void Sql_Free(Sql_t* self)
-{
-    if (self)
-    {
-        mysql_close(&self->handle);
-        Sql_FreeResult(self);
-        if (self->keepalive != CTaskMgr::TASK_INVALID)
-        {
-            CTaskMgr::getInstance()->RemoveTask("Sql_P_KeepAliveTimer");
-        }
-        delete self;
-    }
-}
-
-bool Sql_SetAutoCommit(Sql_t* self, bool value)
+bool SqlConnection::SetAutoCommit(bool value)
 {
     uint8 val = (value) ? 1 : 0;
 
     // if( self && mysql_autocommit(&self->handle, val) == 0)
-    if (self && Sql_Query(self, "SET @@autocommit = %u", val) != SQL_ERROR)
+    if (self && Query("SET @@autocommit = %u", val) != SQL_ERROR)
     {
         return true;
     }
 
-    ShowFatalError("Sql_SetAutoCommit: SQL_ERROR");
+    ShowFatalError("SetAutoCommit: SQL_ERROR: %s", mysql_error(&self->handle));
     return false;
 }
 
-bool Sql_GetAutoCommit(Sql_t* self)
+/************************************************************************
+ *                                                                        *
+ *                                                                        *
+ *                                                                        *
+ ************************************************************************/
+
+bool SqlConnection::GetAutoCommit()
 {
     if (self)
     {
-        int32 ret = Sql_Query(self, "SELECT @@autocommit;");
+        int32 ret = Query("SELECT @@autocommit;");
 
-        if (ret != SQL_ERROR && Sql_NumRows(self) > 0 && Sql_NextRow(self) == SQL_SUCCESS)
+        if (ret != SQL_ERROR && NumRows() > 0 && NextRow() == SQL_SUCCESS)
         {
-            return (Sql_GetUIntData(self, 0) == 1);
+            return (GetUIntData(0) == 1);
         }
     }
 
-    ShowFatalError("Sql_GetAutoCommit: SQL_ERROR");
+    ShowFatalError("GetAutoCommit: SQL_ERROR: %s", mysql_error(&self->handle));
     return false;
 }
 
-bool Sql_TransactionStart(Sql_t* self)
+/************************************************************************
+ *                                                                        *
+ *                                                                        *
+ *                                                                        *
+ ************************************************************************/
+
+bool SqlConnection::TransactionStart()
 {
-    if (self && Sql_Query(self, "START TRANSACTION;") != SQL_ERROR)
+    if (self && Query("START TRANSACTION;") != SQL_ERROR)
     {
         return true;
     }
 
-    ShowFatalError("Sql_TransactionStart: SQL_ERROR");
+    ShowFatalError("TransactionStart: SQL_ERROR: %s", mysql_error(&self->handle));
     return false;
 }
 
-bool Sql_TransactionCommit(Sql_t* self)
+/************************************************************************
+ *                                                                        *
+ *                                                                        *
+ *                                                                        *
+ ************************************************************************/
+
+bool SqlConnection::TransactionCommit()
 {
     if (self && mysql_commit(&self->handle) == 0)
     {
         return true;
     }
 
-    ShowFatalError("Sql_TransactionCommit: SQL_ERROR");
+    ShowFatalError("TransactionCommit: SQL_ERROR: %s", mysql_error(&self->handle));
     return false;
 }
 
-bool Sql_TransactionRollback(Sql_t* self)
+/************************************************************************
+ *                                                                        *
+ *                                                                        *
+ *                                                                        *
+ ************************************************************************/
+
+bool SqlConnection::TransactionRollback()
 {
-    // if( self && mysql_rollback(&self->handle) == 0)
-    if (self && Sql_Query(self, "ROLLBACK;") != SQL_ERROR)
+    if (self && Query("ROLLBACK;") != SQL_ERROR)
     {
         return true;
     }
 
-    ShowFatalError("Sql_TransactionRollback: SQL_ERROR");
+    ShowFatalError("TransactionRollback: SQL_ERROR: %s", mysql_error(&self->handle));
     return false;
+}
+
+void SqlConnection::InitPreparedStatements()
+{
+    auto add = [&](std::string const& name, std::string const& query)
+    {
+        auto st = std::make_shared<SqlPreparedStatement>(&self->handle, query);
+        m_PreparedStatements[name] = st;
+    };
+
+    add("GET_CHAR_VAR", "SELECT value FROM char_vars WHERE charid = (?) AND varname = (?) LIMIT 1;");
+}
+
+std::shared_ptr<SqlPreparedStatement> SqlConnection::GetPreparedStatement(std::string const& name)
+{
+    return m_PreparedStatements[name];
 }

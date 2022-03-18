@@ -1,7 +1,5 @@
 -----------------------------------
---
 -- Zone: Lufaise_Meadows (24)
---
 -----------------------------------
 local ID = require("scripts/zones/Lufaise_Meadows/IDs")
 require("scripts/globals/conquest")
@@ -38,9 +36,7 @@ zone_object.onZoneIn = function(player, prevZone)
         player:setPos(-475.825, -20.461, 281.149, 11)
     end
 
-    if player:getCurrentMission(COP) == xi.mission.id.cop.AN_INVITATION_WEST and player:getCharVar("PromathiaStatus") == 0 then
-        cs = 110
-    elseif player:getCurrentMission(COP) == xi.mission.id.cop.CHAINS_AND_BONDS and player:getCharVar("PromathiaStatus") == 0 then
+    if player:getCurrentMission(COP) == xi.mission.id.cop.CHAINS_AND_BONDS and player:getCharVar("PromathiaStatus") == 0 then
         cs = 111
     end
 
@@ -64,11 +60,7 @@ zone_object.onEventUpdate = function(player, csid, option)
 end
 
 zone_object.onEventFinish = function(player, csid, option)
-    if csid == 110 then
-        player:messageSpecial(ID.text.KI_STOLEN, 0, xi.ki.MYSTERIOUS_AMULET)
-        player:delKeyItem(xi.ki.MYSTERIOUS_AMULET)
-        player:setCharVar("PromathiaStatus", 1)
-    elseif csid == 111 and npcUtil.giveItem(player, xi.items.DUCAL_GUARDS_RING) then
+    if csid == 111 and npcUtil.giveItem(player, xi.items.DUCAL_GUARDS_RING) then
         player:setCharVar("PromathiaStatus", 1)
     elseif csid == 116 then
         player:setCharVar("PromathiaStatus", 7)

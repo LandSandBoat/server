@@ -12188,6 +12188,8 @@ INSERT INTO `item_equipment` VALUES (26340,'moonbow_belt',99,0,131074,0,0,0,1024
 INSERT INTO `item_equipment` VALUES (26341,'moonbow_belt_+1',99,0,131074,0,0,0,1024,0,0);
 INSERT INTO `item_equipment` VALUES (26342,'regal_belt',99,0,16384,0,0,0,1024,0,0);
 INSERT INTO `item_equipment` VALUES (26351,'sacro_cord',99,0,1605660,0,0,0,1024,0,0);
+INSERT INTO `item_equipment` VALUES (26356,'skrymir_cord',99,0,4194303,0,0,0,1024,0,0); -- FFXI clopedia BGWiki and JPWiki all in agreement
+INSERT INTO `item_equipment` VALUES (26357,'skrymir_cord_+1',99,0,4194303,0,0,0,1024,0,0); -- FFXI clopedia BGWiki and JPWiki all in agreement
 INSERT INTO `item_equipment` VALUES (26400,'culminus',99,119,1622556,657,1,0,2,0,0);
 INSERT INTO `item_equipment` VALUES (26401,'forfend',99,119,2385,45,1,0,2,0,0);
 INSERT INTO `item_equipment` VALUES (26402,'forfend_+1',99,119,2385,45,1,0,2,0,0);

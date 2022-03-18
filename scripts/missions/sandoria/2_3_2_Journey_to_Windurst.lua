@@ -14,6 +14,8 @@ require('scripts/globals/npc_util')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------
+local giddeusID = require("scripts/zones/Giddeus/IDs")
+-----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_TO_WINDURST)
 
@@ -41,6 +43,7 @@ mission.sections =
             {
                 [42] = function(player, csid, option, npc)
                     player:setMissionStatus(mission.areaId, 6)
+                    player:messageSpecial(giddeusID.text.OFFERED_UP_KEY_ITEM, xi.ki.SHIELD_OFFERING)
                     player:delKeyItem(xi.ki.SHIELD_OFFERING)
                 end,
             },
@@ -54,7 +57,9 @@ mission.sections =
                     local missionStatus = player:getMissionStatus(mission.areaId)
 
                     if missionStatus == 4 then
-                        return mission:progressEvent(238, 1, 1, 1, 1, xi.nation.SANDORIA)
+                        local needsSemihTrust = (not player:hasSpell(940) and not player:findItem(xi.items.CIPHER_OF_SEMIHS_ALTER_EGO)) and 1 or 0
+
+                        return mission:progressEvent(238, 1, 1, 1, 1, xi.nation.SANDORIA, 0, 0, needsSemihTrust)
                     elseif missionStatus == 5 then
                         return mission:event(240)
                     elseif missionStatus == 6 then
@@ -72,6 +77,15 @@ mission.sections =
                 end,
             },
 
+            onEventUpdate =
+            {
+                [42] = function(player, csid, option, npc)
+                    local onPathUntraveled = player:getCurrentMission(xi.mission.log_id.ROV) == xi.mission.id.rov.THE_PATH_UNTRAVELED and 1 or 0
+
+                    player:updateEvent(0, 0, 0, 0, 0, 0, 0, onPathUntraveled)
+                end,
+            },
+
             onEventFinish =
             {
                 [ 42] = function(player, csid, option, npc)
@@ -81,23 +95,54 @@ mission.sections =
                 [238] = function(player, csid, option, npc)
                     player:setMissionStatus(mission.areaId, 5)
                     npcUtil.giveKeyItem(player, xi.ki.SHIELD_OFFERING)
+
+                    if
+                        not player:hasSpell(940) and
+                        not player:findItem(xi.items.CIPHER_OF_SEMIHS_ALTER_EGO)
+                    then
+                        npcUtil.giveItem(player, xi.items.CIPHER_OF_SEMIHS_ALTER_EGO)
+                    end
                 end,
             },
         },
 
         [xi.zone.WINDURST_WOODS] =
         {
+            ['Catalia'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:getMissionStatus(mission.areaId) >= 3 then
+                        return mission:progressEvent(452)
+                    end
+                end,
+            },
+
+            ['Erpolant'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:getMissionStatus(mission.areaId) >= 3 then
+                        return mission:progressEvent(454)
+                    end
+                end,
+            },
+
+            ['Forine'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:getMissionStatus(mission.areaId) >= 3 then
+                        return mission:progressEvent(453)
+                    end
+                end,
+            },
+
             ['Mourices'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, {{ xi.items.PARANA_SHIELD, 2 }}) then
-                        local missionStatus = player:getMissionStatus(mission.areaId)
-
-                        if missionStatus == 5 then
-                            return mission:progressEvent(455) -- Must deliver shield to Yagudo
-                        elseif missionStatus == 6 then
-                            return mission:progressEvent(457) -- Has delivered shield
-                        end
+                    if
+                        npcUtil.tradeHasExactly(trade, {{ xi.items.PARANA_SHIELD, 2 }}) and
+                        player:getMissionStatus(mission.areaId) == 6
+                    then
+                        return mission:progressEvent(457) -- Has delivered shield
                     end
                 end,
 
@@ -105,7 +150,7 @@ mission.sections =
                     local missionStatus = player:getMissionStatus(mission.areaId)
 
                     if missionStatus >= 3 and missionStatus <= 5 then
-                        return mission:progressEvent(449)
+                        return mission:progressEvent(451)
                     elseif missionStatus == 6 then
                         return mission:progressEvent(456)
                     end

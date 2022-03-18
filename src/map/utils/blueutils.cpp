@@ -327,9 +327,9 @@ namespace blueutils
                                 "WHERE charid = %u;";
 
             char spells[sizeof(PChar->m_SetBlueSpells) * 2 + 1];
-            Sql_EscapeStringLen(SqlHandle, spells, (const char*)PChar->m_SetBlueSpells, sizeof(PChar->m_SetBlueSpells));
+            sql->EscapeStringLen(spells, (const char*)PChar->m_SetBlueSpells, sizeof(PChar->m_SetBlueSpells));
 
-            Sql_Query(SqlHandle, Query, spells, PChar->id);
+            sql->Query(Query, spells, PChar->id);
         }
     }
 
@@ -340,13 +340,13 @@ namespace blueutils
             const char* Query = "SELECT set_blue_spells FROM "
                                 "chars WHERE charid = %u;";
 
-            int32 ret = Sql_Query(SqlHandle, Query, PChar->id);
+            int32 ret = sql->Query(Query, PChar->id);
 
-            if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
             {
                 size_t length      = 0;
                 char*  blue_spells = nullptr;
-                Sql_GetData(SqlHandle, 0, &blue_spells, &length);
+                sql->GetData(0, &blue_spells, &length);
                 memcpy(PChar->m_SetBlueSpells, blue_spells, (length > sizeof(PChar->m_SetBlueSpells) ? sizeof(PChar->m_SetBlueSpells) : length));
             }
             for (unsigned char& m_SetBlueSpell : PChar->m_SetBlueSpells)

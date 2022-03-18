@@ -70,6 +70,12 @@ public:
     CStatusEffect* GetStatusEffect(EFFECT StatusID);
     CStatusEffect* GetStatusEffect(EFFECT StatusID, uint32 SubID);
 
+    uint8 GetStatusEffectCountInIDRange(EFFECT start, EFFECT end);
+    EFFECT GetNewestStatusEffectInIDRange(EFFECT start, EFFECT end);
+    void  RemoveOldestStatusEffectInIDRange(EFFECT start, EFFECT end);
+    void  RemoveNewestStatusEffectInIDRange(EFFECT start, EFFECT end);
+    void  RemoveAllStatusEffectsInIDRange(EFFECT start, EFFECT end);
+
     void UpdateStatusIcons(); // пересчитываем иконки эффектов
     void CheckEffectsExpiry(time_point tick);
     void TickEffects(time_point tick);
@@ -87,9 +93,16 @@ public:
     bool HasCorsairEffect(uint32 charid);
     void Fold(uint32 charid);
 
-    uint8 GetActiveManeuvers();
+    uint8 GetActiveManeuverCount();
     void  RemoveOldestManeuver();
     void  RemoveAllManeuvers();
+
+    uint8 GetActiveRuneCount();
+    EFFECT GetHighestRuneEffect();
+    EFFECT GetNewestRuneEffect();
+    void  RemoveOldestRune();
+    void  RemoveNewestRune();
+    void  RemoveAllRunes();
 
     void WakeUp(); // remove sleep effects
     bool IsAsleep();

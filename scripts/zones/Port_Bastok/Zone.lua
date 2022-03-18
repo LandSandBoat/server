@@ -1,7 +1,5 @@
 -----------------------------------
---
 -- Zone: Port_Bastok (236)
---
 -----------------------------------
 local ID = require("scripts/zones/Port_Bastok/IDs")
 require("scripts/globals/conquest")
@@ -12,8 +10,9 @@ require("scripts/globals/zone")
 local zone_object = {}
 
 zone_object.onInitialize = function(zone)
-    zone:registerRegion(1, -112, -3, -17, -96, 3, -3)--event COP
-    zone:registerRegion(2, 53.5, 5, -165.3, 66.5, 6, -72)--drawbridge area
+    zone:registerRegion(1, -112, -3, -17, -96, 3, -3)     -- event COP
+    zone:registerRegion(2, 53.5, 5, -165.3, 66.5, 6, -72) -- drawbridge area
+    xi.conquest.toggleRegionalNPCs(zone)
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)
@@ -22,18 +21,6 @@ end
 
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
-
-    if xi.settings.ENABLE_ROV == 1 and player:getCurrentMission(ROV) == xi.mission.id.rov.RHAPSODIES_OF_VANADIEL and player:getMainLvl()>=3 then
-        cs = 30035
-    end
-
-    if
-        player:getCurrentMission(ROV) == xi.mission.id.rov.FATES_CALL and
-        (player:getRank(player:getNation()) > 5 or
-        (player:getCurrentMission(player:getNation()) == xi.mission.id.nation.SHADOW_LORD and player:getMissionStatus(player:getNation()) >= 4))
-    then
-        cs = 30036
-    end
 
     -- FIRST LOGIN (START CS)
     if player:getPlaytime(false) == 0 then
@@ -61,7 +48,7 @@ end
 
 zone_object.onRegionEnter = function(player, region)
     local regionID =region:GetRegionID()
-    -- printf("regionID: %u", regionID)
+
     if (regionID == 1 and player:getCurrentMission(COP) == xi.mission.id.cop.THE_CALL_OF_THE_WYRMKING and player:getCharVar("PromathiaStatus") == 0) then
         player:startEvent(305)
     end
@@ -89,12 +76,6 @@ zone_object.onEventFinish = function(player, csid, option)
         player:setCharVar("COP_optional_CS_Anoki", 0)
         player:setCharVar("COP_optional_CS_Despachaire", 0)
         player:setCharVar("PromathiaStatus", 1)
-    elseif csid == 30035 then
-        player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.RHAPSODIES_OF_VANADIEL)
-        player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.RESONACE)
-    elseif csid == 30036 then
-        player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.FATES_CALL)
-        player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.WHAT_LIES_BEYOND)
     end
 end
 

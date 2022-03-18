@@ -28,8 +28,10 @@
 
 #include <list>
 #include <map>
+#include <unordered_map>
 
 #include "battlefield_handler.h"
+#include "campaign_handler.h"
 #include "region.h"
 #include "vana_time.h"
 
@@ -451,6 +453,7 @@ enum ZONEMISC
     MISC_AH       = 0x0200, // Ability to use the auction house
     MISC_YELL     = 0x0400, // Send and receive /yell commands
     MISC_TRUST    = 0x0800, // Ability to summon Trust NPC
+    MISC_CAMPAIGN = 0x1000, // Campaign zones
 };
 
 /************************************************************************
@@ -538,14 +541,24 @@ public:
     WEATHER        GetWeather();
     uint32         GetWeatherChangeTime() const;
     const int8*    GetName();
-    uint8          GetSoloBattleMusic() const;
-    uint8          GetPartyBattleMusic() const;
-    uint8          GetBackgroundMusicDay() const;
-    uint8          GetBackgroundMusicNight() const;
     zoneLine_t*    GetZoneLine(uint32 zoneLineID);
+
+    uint8 GetSoloBattleMusic() const;
+    uint8 GetPartyBattleMusic() const;
+    uint8 GetBackgroundMusicDay() const;
+    uint8 GetBackgroundMusicNight() const;
+
+    void SetSoloBattleMusic(uint8 music);
+    void SetPartyBattleMusic(uint8 music);
+    void SetBackgroundMusicDay(uint8 music);
+    void SetBackgroundMusicNight(uint8 music);
+
+    uint32 GetLocalVar(const char* var);
+    void SetLocalVar(const char* var, uint32 val);
 
     virtual CCharEntity* GetCharByName(int8* name); // finds the player if exists in zone
     virtual CCharEntity* GetCharByID(uint32 id);
+
     // Gets an entity - ignores instances (use CBaseEntity->GetEntity if possible)
     virtual CBaseEntity* GetEntity(uint16 targid, uint8 filter = -1); // получаем указатель на любую сущность в зоне
 
@@ -604,6 +617,7 @@ public:
     virtual ~CZone();
 
     CBattlefieldHandler* m_BattlefieldHandler; // BCNM Instances in this zone
+    CCampaignHandler*    m_CampaignHandler;    // WOTG campaign information for this zone
 
     CNavMesh* m_navMesh; // zones navmesh for finding paths
 
@@ -625,6 +639,8 @@ private:
     uint16 m_miscMask; // битовое поле, описывающее возможности использования в зоне определенных умений
 
     zoneMusic_t m_zoneMusic; // информация о мелодиях, используемых в зоне
+
+    std::unordered_map<std::string, uint32> m_LocalVars;
 
     regionList_t   m_regionList;   // список активных областей зоны
     zoneLineList_t m_zoneLineList; // список всех доступных zonelines для зоны

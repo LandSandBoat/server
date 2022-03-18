@@ -31,6 +31,8 @@ entity.onEventFinish = function(player, csid, option)
         if not player:hasKeyItem(xi.ki.DELKFUTT_KEY) then
             player:confirmTrade()
             npcUtil.giveKeyItem(player, xi.ki.DELKFUTT_KEY)
+            -- Different message here: You receive <keyitem>!
+            -- Trading does not consume Key
         end
     end
 end

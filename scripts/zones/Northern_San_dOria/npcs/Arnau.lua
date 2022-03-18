@@ -16,6 +16,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(51) --COP event
     else
         player:startEvent(20)
+        -- CS 520 default while RoV M1-3 active?
     end
 
 end

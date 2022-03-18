@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -58,6 +58,7 @@
 #include "../ai/states/weaponskill_state.h"
 #include "../alliance.h"
 #include "../battlefield.h"
+#include "../campaign_system.h"
 #include "../conquest_system.h"
 #include "../daily_system.h"
 #include "../entities/automatonentity.h"
@@ -84,6 +85,7 @@
 #include "../utils/charutils.h"
 #include "../utils/instanceutils.h"
 #include "../utils/itemutils.h"
+#include "../utils/moduleutils.h"
 #include "../utils/zoneutils.h"
 #include "../vana_time.h"
 #include "../weapon_skill.h"
@@ -96,25 +98,17 @@ namespace luautils
     std::unordered_map<std::string, bool> contentEnabledMap;
 
     std::unique_ptr<Filewatcher>  filewatcher;
-    std::mutex                    reloadListBottleneck;
-    std::map<std::string, uint64> toReloadList;
-    std::vector<std::string>      filteredList;
-    void                          SafeApplyFunc_ReloadList(std::function<void(std::map<std::string, uint64>&)> func)
-    {
-        std::lock_guard bottleneck(reloadListBottleneck);
-        func(toReloadList);
-    }
 
     /************************************************************************
      *                                                                       *
-     *  Инициализация lua, пользовательских классов и глобальных функций     *
+     *  Initialization of Lua user classes and global functions             *
      *                                                                       *
      ************************************************************************/
 
     int32 init()
     {
         TracyZoneScoped;
-        ShowStatus("luautils::init:lua initializing...");
+        ShowStatus("luautils::init:lua initializing");
 
         lua = sol::state();
         lua.open_libraries();
@@ -242,6 +236,10 @@ namespace luautils
         // Handle settings
         contentRestrictionEnabled = GetSettingsVariable("RESTRICT_CONTENT") != 0;
 
+        moduleutils::LoadLuaModules();
+
+        filewatcher = std::make_unique<Filewatcher>("scripts");
+
         TracyReportLuaMemory(lua.lua_state());
 
         return 0;
@@ -290,53 +288,24 @@ namespace luautils
         return 0;
     }
 
-    void EnableFilewatcher()
-    {
-        // clang-format off
-        filewatcher = std::make_unique<Filewatcher>("scripts",
-            [](const std::filesystem::path& path)
-            {
-                if (path.extension() == ".lua")
-                {
-                    TracyZoneScoped;
-                    TracyZoneString(path.generic_string());
-
-                    auto real_path          = path.generic_string();
-                    auto modified           = std::filesystem::last_write_time(real_path).time_since_epoch().count();
-                    auto modified_timestamp = static_cast<uint64>(modified);
-                    SafeApplyFunc_ReloadList([&](std::map<std::string, uint64>& list) {
-                        if (list.find(real_path) == list.end())
-                        {
-                            // No entry, make one
-                            list[real_path] = modified_timestamp;
-                        }
-                        else
-                        {
-                            auto last_modified = list.at(real_path);
-                            if (last_modified < modified_timestamp)
-                            {
-                                list[real_path] = modified_timestamp;
-                                filteredList.emplace_back(real_path);
-                            }
-                        }
-                    });
-                }
-            });
-        // clang-format on
-    }
-
     void ReloadFilewatchList()
     {
-        SafeApplyFunc_ReloadList([&](std::map<std::string, uint64>& list) {
-            TracyZoneScoped;
-            for (auto& path_string : filteredList)
-            {
-                CacheLuaObjectFromFile(path_string, true);
-            }
+        std::set<std::string> filenames; // For de-duping
 
-            // Erase list
-            filteredList.clear();
-        });
+        std::filesystem::path path;
+        while (filewatcher->modifiedQueue.try_dequeue(path))
+        {
+            if (path.extension() == ".lua")
+            {
+                std::string filename = path.relative_path().generic_string();
+                filenames.insert(filename);
+            }
+        }
+
+        for (auto const& filename : filenames)
+        {
+            CacheLuaObjectFromFile(filename, true);
+        }
     }
 
     std::vector<std::string> GetQuestAndMissionFilenamesList()
@@ -1465,11 +1434,11 @@ namespace luautils
             // Get all magian table columns to build lua keys
             const char*              ColumnQuery = "SHOW COLUMNS FROM `magian`;";
             std::vector<std::string> magianColumns;
-            if (Sql_Query(SqlHandle, ColumnQuery) == SQL_SUCCESS && Sql_NumRows(SqlHandle) != 0)
+            if (sql->Query(ColumnQuery) == SQL_SUCCESS && sql->NumRows() != 0)
             {
-                while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+                while (sql->NextRow() == SQL_SUCCESS)
                 {
-                    magianColumns.push_back((const char*)Sql_GetData(SqlHandle, 0));
+                    magianColumns.push_back((const char*)sql->GetData(0));
                 }
             }
             else
@@ -1484,11 +1453,11 @@ namespace luautils
             {
                 int32 trial = va[0].as<int32>();
                 int32 field{ 0 };
-                if (Sql_Query(SqlHandle, Query, trial) != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+                if (sql->Query(Query, trial) != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
                 {
                     for (auto column : magianColumns)
                     {
-                        table[column] = (int32)Sql_GetIntData(SqlHandle, field++);
+                        table[column] = (int32)sql->GetIntData(field++);
                     }
                 }
             }
@@ -1499,14 +1468,14 @@ namespace luautils
                 // one inner table each trial { trial# = { column = value, ... } }
                 for (auto trial : trials)
                 {
-                    int32 ret = Sql_Query(SqlHandle, Query, trial);
-                    if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+                    int32 ret = sql->Query(Query, trial);
+                    if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
                     {
                         auto  inner_table = table.create_named(trial);
                         int32 field{ 0 };
                         for (auto column : magianColumns)
                         {
-                            inner_table[column] = (int32)Sql_GetIntData(SqlHandle, field++);
+                            inner_table[column] = (int32)sql->GetIntData(field++);
                         }
                     }
                 }
@@ -1533,14 +1502,14 @@ namespace luautils
         TracyZoneScoped;
 
         const char* Query = "SELECT `trialId` from `magian` WHERE `previousTrial` = %u;";
-        int32       ret   = Sql_Query(SqlHandle, Query, parentTrial);
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) > 0)
+        int32       ret   = sql->Query(Query, parentTrial);
+        if (ret != SQL_ERROR && sql->NumRows() > 0)
         {
             auto  table = lua.create_table();
             int32 field{ 0 };
-            while (Sql_NextRow(SqlHandle) == 0)
+            while (sql->NextRow() == 0)
             {
-                int32 childTrial = Sql_GetIntData(SqlHandle, 0);
+                int32 childTrial = sql->GetIntData(0);
                 table[++field]   = childTrial;
             }
 
@@ -3718,7 +3687,7 @@ namespace luautils
     void ClearVarFromAll(std::string const& varName)
     {
         TracyZoneScoped;
-        Sql_Query(SqlHandle, "DELETE FROM char_vars WHERE varname = '%s';", varName);
+        sql->Query("DELETE FROM char_vars WHERE varname = '%s';", varName);
     }
 
     void Terminate()
@@ -4024,11 +3993,11 @@ namespace luautils
 
         int32 value = 0;
 
-        int32 ret = Sql_Query(SqlHandle, "SELECT value FROM server_variables WHERE name = '%s' LIMIT 1;", varName);
+        int32 ret = sql->Query("SELECT value FROM server_variables WHERE name = '%s' LIMIT 1;", varName);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
         {
-            value = (int32)Sql_GetIntData(SqlHandle, 0);
+            value = (int32)sql->GetIntData(0);
         }
 
         return value;
@@ -4046,10 +4015,10 @@ namespace luautils
 
         if (value == 0)
         {
-            Sql_Query(SqlHandle, "DELETE FROM server_variables WHERE name = '%s' LIMIT 1;", name);
+            sql->Query("DELETE FROM server_variables WHERE name = '%s' LIMIT 1;", name);
             return;
         }
-        Sql_Query(SqlHandle, "INSERT INTO server_variables VALUES ('%s', %i) ON DUPLICATE KEY UPDATE value = %i;", name, value, value);
+        sql->Query("INSERT INTO server_variables VALUES ('%s', %i) ON DUPLICATE KEY UPDATE value = %i;", name, value, value);
     }
 
     int32 OnTransportEvent(CCharEntity* PChar, uint32 TransportID)
@@ -4270,10 +4239,10 @@ namespace luautils
         if (PMob != nullptr)
         {
             int32 r   = 0;
-            int32 ret = Sql_Query(SqlHandle, "SELECT count(mobid) FROM `nm_spawn_points` where mobid=%u", mobid);
-            if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS && Sql_GetUIntData(SqlHandle, 0) > 0)
+            int32 ret = sql->Query("SELECT count(mobid) FROM `nm_spawn_points` where mobid=%u", mobid);
+            if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS && sql->GetUIntData(0) > 0)
             {
-                r = xirand::GetRandomNumber(Sql_GetUIntData(SqlHandle, 0));
+                r = xirand::GetRandomNumber(sql->GetUIntData(0));
             }
             else
             {
@@ -4281,13 +4250,13 @@ namespace luautils
                 return;
             }
 
-            ret = Sql_Query(SqlHandle, "SELECT pos_x, pos_y, pos_z FROM `nm_spawn_points` WHERE mobid=%u AND pos=%i", mobid, r);
-            if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            ret = sql->Query("SELECT pos_x, pos_y, pos_z FROM `nm_spawn_points` WHERE mobid=%u AND pos=%i", mobid, r);
+            if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
             {
                 PMob->m_SpawnPoint.rotation = xirand::GetRandomNumber(256);
-                PMob->m_SpawnPoint.x        = Sql_GetFloatData(SqlHandle, 0);
-                PMob->m_SpawnPoint.y        = Sql_GetFloatData(SqlHandle, 1);
-                PMob->m_SpawnPoint.z        = Sql_GetFloatData(SqlHandle, 2);
+                PMob->m_SpawnPoint.x        = sql->GetFloatData(0);
+                PMob->m_SpawnPoint.y        = sql->GetFloatData(1);
+                PMob->m_SpawnPoint.z        = sql->GetFloatData(2);
                 // ShowDebug(CL_RED"UpdateNMSpawnPoint: After %i - %f, %f, %f, %i", r,
                 // PMob->m_SpawnPoint.x,PMob->m_SpawnPoint.y,PMob->m_SpawnPoint.z,PMob->m_SpawnPoint.rotation);
             }
@@ -4457,6 +4426,26 @@ namespace luautils
         return nearPos;
     }
 
+    void OnPlayerDeath(CCharEntity* PChar)
+    {
+        TracyZoneScoped;
+
+        auto onPlayerDeath = lua["xi"]["player"]["onPlayerDeath"];
+        if (!onPlayerDeath.valid())
+        {
+            ShowWarning("luautils::onPlayerDeath");
+            return;
+        }
+
+        auto result = onPlayerDeath(CLuaBaseEntity(PChar));
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("luautils::onPlayerDeath: %s", err.what());
+            return;
+        }
+    }
+
     void OnPlayerLevelUp(CCharEntity* PChar)
     {
         TracyZoneScoped;
@@ -4493,6 +4482,46 @@ namespace luautils
         {
             sol::error err = result;
             ShowError("luautils::onPlayerLevelDown: %s", err.what());
+            return;
+        }
+    }
+
+    void OnPlayerEmote(CCharEntity* PChar, Emote EmoteID)
+    {
+        TracyZoneScoped;
+
+        auto onPlayerEmote = lua["xi"]["player"]["onPlayerEmote"];
+        if (!onPlayerEmote.valid())
+        {
+            ShowWarning("luautils::onPlayerEmote");
+            return;
+        }
+
+        auto result = onPlayerEmote(CLuaBaseEntity(PChar), static_cast<uint8>(EmoteID));
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("luautils::onPlayerEmote: %s", err.what());
+            return;
+        }
+    }
+
+    void OnPlayerVolunteer(CCharEntity* PChar, std::string text)
+    {
+        TracyZoneScoped;
+
+        auto onPlayerVolunteer = lua["xi"]["player"]["onPlayerVolunteer"];
+        if (!onPlayerVolunteer.valid())
+        {
+            ShowWarning("luautils::onPlayerVolunteer");
+            return;
+        }
+
+        auto result = onPlayerVolunteer(CLuaBaseEntity(PChar), text);
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("luautils::onPlayerVolunteer: %s", err.what());
             return;
         }
     }
@@ -4577,10 +4606,10 @@ namespace luautils
         TracyZoneScoped;
 
         uint16 effectId = 0;
-        int32  ret      = Sql_Query(SqlHandle, "SELECT effectId FROM despoil_effects WHERE itemId = %u", itemId);
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        int32  ret      = sql->Query("SELECT effectId FROM despoil_effects WHERE itemId = %u", itemId);
+        if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
         {
-            effectId = (uint16)Sql_GetUIntData(SqlHandle, 0);
+            effectId = (uint16)sql->GetUIntData(0);
         }
 
         return effectId;
@@ -4634,45 +4663,4 @@ namespace luautils
         CCharEntity* player = dynamic_cast<CCharEntity*>(PLuaBaseEntity->GetBaseEntity());
         return daily::SelectItem(player, dial);
     }
-
-    void OnPlayerEmote(CCharEntity* PChar, Emote EmoteID)
-    {
-        TracyZoneScoped;
-
-        auto onPlayerEmote = lua["xi"]["player"]["onPlayerEmote"];
-        if (!onPlayerEmote.valid())
-        {
-            ShowWarning("luautils::onPlayerEmote");
-            return;
-        }
-
-        auto result = onPlayerEmote(CLuaBaseEntity(PChar), static_cast<uint8>(EmoteID));
-        if (!result.valid())
-        {
-            sol::error err = result;
-            ShowError("luautils::onPlayerEmote: %s", err.what());
-            return;
-        }
-    }
-
-    void OnPlayerVolunteer(CCharEntity* PChar, std::string text)
-    {
-        TracyZoneScoped;
-
-        auto onPlayerVolunteer = lua["xi"]["player"]["onPlayerVolunteer"];
-        if (!onPlayerVolunteer.valid())
-        {
-            ShowWarning("luautils::onPlayerVolunteer");
-            return;
-        }
-
-        auto result = onPlayerVolunteer(CLuaBaseEntity(PChar), text);
-        if (!result.valid())
-        {
-            sol::error err = result;
-            ShowError("luautils::onPlayerVolunteer: %s", err.what());
-            return;
-        }
-    }
-
 }; // namespace luautils

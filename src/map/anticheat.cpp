@@ -71,20 +71,20 @@ namespace anticheat
     CheatAction GetCheatPunitiveAction(CheatID cheatid, char* warningmsg, size_t warningsize)
     {
         const char* fmtQuery = "SELECT action_bitmask, warning_message FROM cheat_types WHERE cheatid = %u";
-        int32       ret      = Sql_Query(SqlHandle, fmtQuery, static_cast<uint32>(cheatid));
+        int32       ret      = sql->Query(fmtQuery, static_cast<uint32>(cheatid));
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
         {
             if (warningmsg != nullptr)
             {
                 memset(warningmsg, 0, warningsize);
-                char* warnptr = (char*)Sql_GetData(SqlHandle, 1);
+                char* warnptr = (char*)sql->GetData(1);
                 if (warnptr != nullptr)
                 {
                     strncpy(warningmsg, warnptr, warningsize - 1);
                 }
             }
-            return (CheatAction)Sql_GetUIntData(SqlHandle, 0);
+            return (CheatAction)sql->GetUIntData(0);
         }
         return CHEAT_ACTION_NOTHING;
     }
@@ -102,7 +102,7 @@ namespace anticheat
             cellid = 1;
         }
         const char* fmtQuery = "INSERT INTO char_vars SET charid = %u, varname = 'inJail', value = %i ON DUPLICATE KEY UPDATE value = %i;";
-        Sql_Query(SqlHandle, fmtQuery, PChar->id, cellid, cellid);
+        sql->Query(fmtQuery, PChar->id, cellid, cellid);
         PChar->loc.p.x         = (float)g_jailCells[cellid - 1][0];
         PChar->loc.p.y         = (float)g_jailCells[cellid - 1][1];
         PChar->loc.p.z         = (float)g_jailCells[cellid - 1][2];
@@ -134,7 +134,7 @@ namespace anticheat
         {
             // Log intgo cheat_incidents table
             const char* fmtQuery = "INSERT INTO cheat_incidents SET charid = %u, cheatid = %u, cheatarg = %u, description= '%s';";
-            Sql_Query(SqlHandle, fmtQuery, PChar->id, static_cast<uint32>(cheatid), cheatarg, description != nullptr ? description : "");
+            sql->Query(fmtQuery, PChar->id, static_cast<uint32>(cheatid), cheatarg, description != nullptr ? description : "");
         }
         if (action & CHEAT_ACTION_WARN)
         {

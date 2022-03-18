@@ -11,13 +11,8 @@ entity.onTrade = function(player,npc,trade)
 end
 
 entity.onTrigger = function(player,npc)
-    if
-        (player:getCurrentMission(ROV) == xi.mission.id.rov.THE_BEGINNING and player:getCharVar("RhapsodiesStatus") == 1) or
-        player:getCurrentMission(ROV) >= xi.mission.id.rov.FLAMES_OF_PRAYER
-    then
+    if player:getCurrentMission(ROV) >= xi.mission.id.rov.FLAMES_OF_PRAYER then
         player:startEvent(179)
-    else
-        player:startEvent(180)
     end
 end
 

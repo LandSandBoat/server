@@ -95,7 +95,7 @@ enum MERIT_CATEGORY
     MCATEGORY_RUN_2 = 0x0D80,
 
     MCATEGORY_START = 0x0040,
-    MCATEGORY_COUNT = 0x0D80,
+    MCATEGORY_COUNT = 0x0DC0,
 };
 
 /************************************************************************
@@ -511,6 +511,13 @@ enum MERIT_TYPE
     MERIT_ENLIGHTENMENT = MCATEGORY_SCH_2 + 0x08,
     MERIT_STORMSURGE    = MCATEGORY_SCH_2 + 0x0A,
 
+    // unknown 3
+    // MERIT_UNKNOWN1    = MCATEGORY_UNK_0 + 0x00,
+    // MERIT_UNKNOWN2    = MCATEGORY_UNK_1 + 0x00,
+    // MERIT_UNKNOWN3    = MCATEGORY_UNK_2 + 0x00,
+    // MERIT_UNKNOWN4    = MCATEGORY_UNK_3 + 0x00,
+    // MERIT_UNKNOWN5    = MCATEGORY_UNK_4 + 0x00,
+
     // GEO 2
     MERIT_MENDING_HALATION     = MCATEGORY_GEO_2 + 0x00,
     MERIT_RADIAL_ARCANA        = MCATEGORY_GEO_2 + 0x02,
@@ -524,7 +531,7 @@ enum MERIT_TYPE
     MERIT_SLEIGHT_OF_SWORD = MCATEGORY_RUN_2 + 0x06,
 };
 
-#define MERITS_COUNT 305 // 5 полных пакетов по 61 элементу
+#define MERITS_COUNT 305 // 5 full packages of 61 elements
 
 /************************************************************************
  *                                                                       *
@@ -538,7 +545,7 @@ struct Merit_t
     {
         struct
         {
-            uint16 id;    // id мерита
+            uint16 id;    // merit id
             uint8  next;  // required merit points for next upgrade
             uint8  count; // number of upgrades
         };

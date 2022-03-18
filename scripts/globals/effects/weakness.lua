@@ -14,7 +14,7 @@ effect_object.onEffectGain = function(target, effect)
     -- 100% Slow -- FIXME: Weakness should probably be its own source of slow
     target:addMod(xi.mod.HASTE_MAGIC, -10000)
 
-    if effect:getPower() == 2 then
+    if effect:getPower() > 1 then
         -- handle double weakness
         target:addMod(xi.mod.RACC, -999)
         target:addMod(xi.mod.MATT, -999)
@@ -30,7 +30,7 @@ effect_object.onEffectLose = function(target, effect)
     target:delMod(xi.mod.MPP, -75)
     target:delMod(xi.mod.HASTE_MAGIC, -10000)
 
-    if (effect:getPower() == 2) then
+    if (effect:getPower() > 1) then
         -- handle double weakness
         target:delMod(xi.mod.RACC, -999)
         target:delMod(xi.mod.MATT, -999)

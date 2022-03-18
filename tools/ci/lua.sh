@@ -64,6 +64,7 @@ global_objects=(
     KeyItemAction
     LambdaAction
     Message
+    NoAction
     Sequence
     Container
     Event

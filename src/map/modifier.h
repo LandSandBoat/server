@@ -26,6 +26,8 @@
 
 enum class Mod
 {
+    // IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN scripts/globals/status.lua ASWELL!
+
     NONE = 0, // Essential, but does nothing :)
     //  NAME                  = ID, // Comment
     DEF        = 1, // Target's Defense
@@ -187,6 +189,11 @@ enum class Mod
     ANTIHQ_ALCHEMY   = 150, // Alchemy Success Rate %
     ANTIHQ_COOK      = 151, // Cooking Success Rate %
 
+    // Fishing gear modifiers
+    PENGUIN_RING_EFFECT   = 152, // +2 on fishing arrow delay / fish movement for mini - game
+    ALBATROSS_RING_EFFECT = 153, // adds 30 seconds to mini - game time
+    PELICAN_RING_EFFECT   = 154, // adds extra skillup roll for fishing
+
     // Damage - 10000 base, 375 = 3.75%
     DMG         = 160, // Damage Taken %
     DMGPHYS     = 161, // Physical Damage Taken %
@@ -347,7 +354,7 @@ enum class Mod
     PERFECT_DODGE     = 883, // Increases Perfect Dodge duration in seconds
     TRIPLE_ATTACK     = 302, // Percent chance
     TREASURE_HUNTER   = 303, // Percent chance
-    SNEAK_ATK_DEX     = 874, // % DEX boost to Sneak Attack (if gear mod, needs to be equipped on hit)
+    SNEAK_ATK_DEX     = 830, // % DEX boost to Sneak Attack (if gear mod, needs to be equipped on hit)
     TRICK_ATK_AGI     = 520, // % AGI boost to Trick Attack (if gear mod, needs to be equipped on hit)
     MUG_EFFECT        = 835, // Mug effect as multiplier
     ACC_COLLAB_EFFECT = 884, // Increases amount of enmity transferred for Accomplice/Collaborator
@@ -582,8 +589,27 @@ enum class Mod
     CONSERVE_TP = 944, // Conserve TP trait, random chance between 10 and 200 TP
 
     // Rune Fencer
-
-    INQUARTATA = 963, // increases parry rate by a flat %.
+    INQUARTATA                  = 963,  // Increases parry rate by a flat %.
+    ENHANCES_BATTUTA            = 1004, // Used by RUN merit point cat 2 to add +N% bonus damage to parry spikes during Battuta effect
+    ENHANCES_ELEMENTAL_SFORZO   = 1005, // Bonus duration
+    ENHANCES_SLEIGHT_OF_SWORD   = 1006, // Used by RUN merit point cat 2 to add +N Subtle Blow to Swordplay
+    ENHANCES_INSPIRATION        = 1007, // Used by RUN merit point cat 2 to add +N Fast Cast to Vallation/Valiance
+    SWORDPLAY                   = 1008, // Adds bonus starting ticks to Swordplay
+    LIEMENT                     = 1009, // Adds bonus duration as +N seconds
+    VALIANCE_VALLATION_DURATION = 1010, // Adds bonus duration as +N seconds
+    PFLUG                       = 1011, // Adds flat additional all-resist rate in +N%
+    VIVACIOUS_PULSE_POTENCY     = 1012, // Adds final HP bonus +N% to calculation of Vivacious Pulse
+    AUGMENTS_VIVACIOUS_PULSE    = 1013, // Adds random erase/-na to Vivacious Pulse
+    RAYKE_DURATION              = 1014, // Adds bonus duration as +N seconds
+    ODYLLIC_SUBTERFUGE_DURATION = 1015, // Adds bonus duration as +N seconds
+    SWIPE                       = 1016, // Adds bonus damage to the Swipe/Lunge magic damage calculation
+    LIEMENT_DURATION            = 1017, // Adds bonus duration as +N seconds
+    GAMBIT_DURATION             = 1018, // Adds bonus duration as +N seconds
+    EMBOLDEN_DURATION           = 1019, // Adds bonus duration as +N seconds
+    LIEMENT_EXTENDS_TO_AREA     = 1020, // Epeolatry's (RUN Ergon weapon) special effect, makes Liement AoE to party instead of self target only.
+    INSPIRATION_FAST_CAST       = 1021, // Inspiration Fast Cast, additive with Fast Cast with a combined cap beyond 80%
+    PARRY_SPIKES                = 1022, // Battuta parry spikes rate
+    PARRY_SPIKES_DMG            = 1023, // Battuta parry spikes damage
 
     // Stores the amount of elemental affinity (elemental staves mostly) - damage, acc, and perpetuation is all handled separately
     FIRE_AFFINITY_DMG    = 347, // They're stored separately due to Magian stuff - they can grant different levels of
@@ -745,7 +771,7 @@ enum class Mod
     AUGMENTS_CONVERT          = 525, // Convert HP to MP Ratio Multiplier. Value = MP multiplier rate.
     AUGMENTS_SA               = 526, // Adds Critical Attack Bonus to Sneak Attack, percentage based.
     AUGMENTS_TA               = 527, // Adds Critical Attack Bonus to Trick Attack, percentage based.
-    AUGMENTS_FEINT            = 873, // Feint will give another -10 Evasion per merit level
+    AUGMENTS_FEINT            = 502, // Feint will give another -10 Evasion per merit level
     AUGMENTS_ASSASSINS_CHARGE = 886, // Gives Assassin's Charge +1% Critical Hit Rate per merit level
     AUGMENTS_AMBUSH           = 887, // Gives +1% Triple Attack per merit level when Ambush conditions are met
     AUGMENTS_AURA_STEAL       = 889, // 20% chance of 2 effects to be dispelled or stolen per merit level
@@ -838,9 +864,23 @@ enum class Mod
     SUPERIOR_LEVEL  = 997, // SU0..5
     ONE_HOUR_RECAST = 996, // Decreases the recast time of one-hour abilities by n minutes.
 
+    // IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN scripts/globals/status.lua ASWELL!
+
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.
-    // SPARE = 1004,
+    //
+    // SPARE IDs:
+    // 53
+    // 74 to 79
+    // 138 to 143
+    // 155 to 159
+    // 192 to 223
+    // 239
+    // 261 to 287
+    // 888
+    // 936
+    //
+    // SPARE = 1024, and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it
