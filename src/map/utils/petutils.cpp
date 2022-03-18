@@ -171,7 +171,7 @@ namespace petutils
                 FROM pet_list, mob_pools, mob_resistances, mob_family_system \
                 WHERE pet_list.poolid = mob_pools.poolid AND mob_resistances.resist_id = mob_pools.resist_id AND mob_pools.familyid = mob_family_system.familyID";
 
-        if (Sql_Query(SqlHandle, Query) != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (sql::Query(Query) != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
         {
             while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
             {
@@ -1292,7 +1292,7 @@ namespace petutils
                 WHERE pet_name.id = char_pet.wyvernid AND \
                 char_pet.charid = %u";
 
-            if (Sql_Query(SqlHandle, Query, PMaster->id) != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+            if (sql::Query(Query, PMaster->id) != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
             {
                 while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
                 {
@@ -1318,7 +1318,7 @@ namespace petutils
             FROM pet_name, char_pet\
             WHERE pet_name.id = char_pet.adventuringfellowid";
 
-            if ( Sql_Query(SqlHandle, Query) != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+            if ( sql::Query(Query) != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
             {
                 while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
                 {
@@ -1342,7 +1342,7 @@ namespace petutils
                 FROM char_pet\
                 char_pet.charid = %u";
 
-            if (Sql_Query(SqlHandle, Query, PMaster->id) != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+            if (sql::Query(Query, PMaster->id) != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
             {
                 while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
                 {
@@ -1360,7 +1360,7 @@ namespace petutils
                             FROM pet_name\
                             WHERE pet_name.id = %u OR pet_name.id = %u";
 
-                        if (Sql_Query(SqlHandle, Query, chocoboname1, chocoboname2) != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+                        if (sql::Query(Query, chocoboname1, chocoboname2) != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
                         {
                             while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
                             {

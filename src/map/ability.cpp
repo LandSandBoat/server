@@ -350,7 +350,7 @@ namespace ability
                             "WHERE job < %u AND abilityId < %u "
                             "ORDER BY job, level ASC";
 
-        int32 ret = Sql_Query(SqlHandle, Query, MAX_JOBTYPE, MAX_ABILITY_ID);
+        int32 ret = sql::Query(Query, MAX_JOBTYPE, MAX_ABILITY_ID);
 
         if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
         {
@@ -400,7 +400,7 @@ namespace ability
 
         const char* Query2 = "SELECT recastId, job, level, maxCharges, chargeTime, meritModId FROM abilities_charges ORDER BY job, level ASC;";
 
-        ret = Sql_Query(SqlHandle, Query2);
+        ret = sql::Query(Query2);
 
         if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
         {

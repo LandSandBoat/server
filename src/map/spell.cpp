@@ -428,7 +428,7 @@ namespace spell
                              AOE, base, element, zonemisc, multiplier, message, magicBurstMessage, CE, VE, requirements, content_tag, spell_range \
                              FROM spell_list;";
 
-        int32 ret = Sql_Query(SqlHandle, Query);
+        int32 ret = sql::Query(Query);
 
         if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
         {
@@ -544,7 +544,7 @@ namespace spell
                                 blue_spell_list.secondary_sc, spell_list.content_tag \
                              FROM blue_spell_list JOIN spell_list on blue_spell_list.spellid = spell_list.spellid;";
 
-        ret = Sql_Query(SqlHandle, blueQuery);
+        ret = sql::Query(blueQuery);
 
         if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
         {
@@ -595,7 +595,7 @@ namespace spell
             }
         }
 
-        ret = Sql_Query(SqlHandle, "SELECT spellId, meritId, content_tag FROM spell_list INNER JOIN merits ON spell_list.name = merits.name;");
+        ret = sql::Query("SELECT spellId, meritId, content_tag FROM spell_list INNER JOIN merits ON spell_list.name = merits.name;");
 
         if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
         {

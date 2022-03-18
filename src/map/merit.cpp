@@ -218,7 +218,7 @@ void CMeritPoints::LoadMeritPoints(uint32 charid)
         merits[i].next  = upgrade[merits[i].upgradeid][merits[i].count];
     }
 
-    if (Sql_Query(SqlHandle, "SELECT meritid, upgrades FROM char_merit WHERE charid = %u", charid) != SQL_ERROR)
+    if (sql::Query("SELECT meritid, upgrades FROM char_merit WHERE charid = %u", charid) != SQL_ERROR)
     {
         for (uint64 j = 0; j < Sql_NumRows(SqlHandle); j++)
         {
@@ -251,12 +251,12 @@ void CMeritPoints::SaveMeritPoints(uint32 charid)
     {
         if (merit.count > 0)
         {
-            Sql_Query(SqlHandle, "INSERT INTO char_merit (charid, meritid, upgrades) VALUES(%u, %u, %u) ON DUPLICATE KEY UPDATE upgrades = %u", charid,
+            sql::Query("INSERT INTO char_merit (charid, meritid, upgrades) VALUES(%u, %u, %u) ON DUPLICATE KEY UPDATE upgrades = %u", charid,
                       merit.id, merit.count, merit.count);
         }
         else
         {
-            Sql_Query(SqlHandle, "DELETE FROM char_merit WHERE charid = %u AND meritid = %u", charid, merit.id);
+            sql::Query("DELETE FROM char_merit WHERE charid = %u AND meritid = %u", charid, merit.id);
         }
     }
 }
@@ -520,7 +520,7 @@ namespace meritNameSpace
 
     void LoadMeritsList()
     {
-        int32 ret = Sql_Query(SqlHandle, "SELECT m.meritid, m.value, m.jobs, m.upgrade, m.upgradeid, m.catagoryid, sl.spellid FROM merits m LEFT JOIN \
+        int32 ret = sql::Query("SELECT m.meritid, m.value, m.jobs, m.upgrade, m.upgradeid, m.catagoryid, sl.spellid FROM merits m LEFT JOIN \
             spell_list sl ON m.name = sl.name ORDER BY m.meritid ASC LIMIT %u",
                               MERITS_COUNT);
 
@@ -568,7 +568,7 @@ namespace meritNameSpace
 
             groupOffset[catIndex] = index - catMeritIndex; // add the last offset manually since loop finishes before hand.
 
-            /* ret = Sql_Query(SqlHandle, "SELECT meritid, spellid FROM merits INNER JOIN spell_list ON merits.name = spell_list.name");
+            /* ret = sql::Query("SELECT meritid, spellid FROM merits INNER JOIN spell_list ON merits.name = spell_list.name");
 
             if (ret != SQL_ERROR)
             {

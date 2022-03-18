@@ -101,7 +101,7 @@ void CInstance::LoadInstance()
                                "WHERE instanceid = %u "
                                "LIMIT 1";
 
-    if (Sql_Query(SqlHandle, Query, m_instanceid) != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+    if (sql::Query(Query, m_instanceid) != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
     {
         m_instanceName.insert(0, (const char*)Sql_GetData(SqlHandle, 0));
 

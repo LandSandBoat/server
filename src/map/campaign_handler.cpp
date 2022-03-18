@@ -30,7 +30,7 @@ void CCampaignHandler::LoadCampaignZone(CZone* PZone)
     static const char* query = "SELECT id, zoneid, isbattle, nation, heroism, influence_sandoria, influence_bastok, influence_windurst, influence_beastman, "
                                "current_fortifications, current_resources, max_fortifications, max_resources FROM campaign_map WHERE zoneid = %u";
 
-    if (Sql_Query(SqlHandle, query, PZone->GetID()) != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+    if (sql::Query(query, PZone->GetID()) != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
     {
         m_zoneCampaignId        = (uint8)Sql_GetUIntData(SqlHandle, 0);
         m_zoneId                = (uint8)Sql_GetUIntData(SqlHandle, 1);
@@ -133,7 +133,7 @@ void CCampaignHandler::SetBattleStatus(uint8 status)
     auto current = std::min(std::max((int32)status, 0), 1);
 
     std::string query = "UPDATE `campaign_map` SET `isbattle` = %d WHERE `zoneid` = %d;";
-    int         ret   = Sql_Query(SqlHandle, query.c_str(), current, m_PZone->GetID());
+    int         ret   = sql::Query(query.c_str(), current, m_PZone->GetID());
     if (ret == SQL_ERROR)
     {
         ShowError("Unable to set campaign battle status.\n");
@@ -146,7 +146,7 @@ void CCampaignHandler::SetZoneControl(uint8 nation)
 {
     uint8       nationid = ((uint8)nation);
     std::string query    = "UPDATE `campaign_map` SET `nation` = %d WHERE `zoneid` = %d;";
-    int         ret      = Sql_Query(SqlHandle, query.c_str(), nationid, m_PZone->GetID());
+    int         ret      = sql::Query(query.c_str(), nationid, m_PZone->GetID());
     if (ret == SQL_ERROR)
     {
         ShowError("Unable to set campaign zone control.\n");
@@ -160,7 +160,7 @@ void CCampaignHandler::SetHeroism(int16 amount)
     auto current = std::min(std::max((int32)amount, 0), 200);
 
     std::string query = "UPDATE `campaign_map` SET `heroism` = %d WHERE `zoneid` = %d;";
-    int         ret   = Sql_Query(SqlHandle, query.c_str(), current, m_PZone->GetID());
+    int         ret   = sql::Query(query.c_str(), current, m_PZone->GetID());
     if (ret == SQL_ERROR)
     {
         ShowError("Unable to set campaign region control.\n");
@@ -174,7 +174,7 @@ void CCampaignHandler::SetFortification(int16 amount)
     auto current = std::min(std::max((int32)amount, 0), (int32)m_maxFortifications);
 
     std::string query = "UPDATE `campaign_map` SET `current_fortifications` = %d WHERE `zoneid` = %d;";
-    int         ret   = Sql_Query(SqlHandle, query.c_str(), current, m_PZone->GetID());
+    int         ret   = sql::Query(query.c_str(), current, m_PZone->GetID());
     if (ret == SQL_ERROR)
     {
         ShowError("Unable to update campaign fortifications.\n");
@@ -188,7 +188,7 @@ void CCampaignHandler::SetResource(int16 amount)
     auto current = std::min(std::max((int32)amount, 0), (int32)m_maxResources);
 
     std::string query = "UPDATE `campaign_map` SET `current_resources` = %d WHERE `zoneid` = %d;";
-    int         ret   = Sql_Query(SqlHandle, query.c_str(), current, m_PZone->GetID());
+    int         ret   = sql::Query(query.c_str(), current, m_PZone->GetID());
     if (ret == SQL_ERROR)
     {
         ShowError("Unable to update campaign resources.\n");
@@ -202,7 +202,7 @@ void CCampaignHandler::SetMaxFortification(int16 amount)
     auto max = std::min(std::max((int32)amount, 0), 1023);
 
     std::string query = "UPDATE `campaign_map` SET `max_fortifications` = %d WHERE `zoneid` = %d;";
-    int         ret   = Sql_Query(SqlHandle, query.c_str(), max, m_PZone->GetID());
+    int         ret   = sql::Query(query.c_str(), max, m_PZone->GetID());
     if (ret == SQL_ERROR)
     {
         ShowError("Unable to update max campaign fortifications.\n");
@@ -216,7 +216,7 @@ void CCampaignHandler::SetMaxResource(int16 amount)
     auto max = std::min(std::max((int32)amount, 0), 1023);
 
     std::string query = "UPDATE `campaign_map` SET `max_resources` = %d WHERE `zoneid` = %d;";
-    int         ret   = Sql_Query(SqlHandle, query.c_str(), max, m_PZone->GetID());
+    int         ret   = sql::Query(query.c_str(), max, m_PZone->GetID());
     if (ret == SQL_ERROR)
     {
         ShowError("Unable to update max campaign resources.\n");
@@ -250,7 +250,7 @@ void CCampaignHandler::SetInfluence(CampaignArmy army, int16 amount)
     }
 
     std::string query = "UPDATE `campaign_map` SET influence_%s = %d WHERE `zoneid` = %d;";
-    int         ret   = Sql_Query(SqlHandle, query.c_str(), type, current, m_PZone->GetID());
+    int         ret   = sql::Query(query.c_str(), type, current, m_PZone->GetID());
     if (ret == SQL_ERROR)
     {
         ShowError("Unable to update influence.\n");

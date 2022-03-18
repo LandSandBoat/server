@@ -120,7 +120,7 @@ namespace trustutils
                  FROM spell_list, mob_pools \
                  WHERE spell_list.spellid >= 896 AND mob_pools.poolid = (spell_list.spellid+5000) ORDER BY spell_list.spellid";
 
-        if (Sql_Query(SqlHandle, Query) != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (sql::Query(Query) != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
         {
             while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
             {
@@ -189,7 +189,7 @@ namespace trustutils
                 AND mob_pools.familyid = mob_family_system.familyID \
                 ORDER BY spell_list.spellid";
 
-        auto ret = Sql_Query(SqlHandle, Query, TrustID);
+        auto ret = sql::Query(Query, TrustID);
 
         if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
         {

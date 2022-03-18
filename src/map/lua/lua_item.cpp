@@ -112,7 +112,7 @@ auto CLuaItem::getMatchingTrials() -> sol::table
         augs[i][1]        = augmentVal;
     }
 
-    int32 ret = Sql_Query(SqlHandle, Query, PItem->getID(),
+    int32 ret = sql::Query(Query, PItem->getID(),
                           augs[0][0], augs[1][0], augs[2][0], augs[3][0],
                           augs[0][1], augs[1][1], augs[2][1], augs[3][1]);
 

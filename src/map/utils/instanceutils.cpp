@@ -56,7 +56,7 @@ namespace instanceutils
 
         char address[INET_ADDRSTRLEN];
         inet_ntop(AF_INET, &map_ip, address, INET_ADDRSTRLEN);
-        int32 ret = Sql_Query(SqlHandle, query, map_ip.s_addr, address, map_port);
+        int32 ret = sql::Query(query, map_ip.s_addr, address, map_port);
 
         if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
         {

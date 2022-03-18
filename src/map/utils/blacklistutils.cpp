@@ -31,7 +31,7 @@ namespace blacklistutils
     bool IsBlacklisted(uint32 ownerId, uint32 targetId)
     {
         const char* sql = "SELECT * FROM char_blacklist WHERE charid_owner = %u AND charid_target = %u;";
-        int32       ret = Sql_Query(SqlHandle, sql, ownerId, targetId);
+        int32       ret = sql::Query(sql, ownerId, targetId);
 
         return (ret != SQL_ERROR && Sql_NumRows(SqlHandle) == 1);
     }
@@ -44,7 +44,7 @@ namespace blacklistutils
         }
 
         const char* sql = "INSERT INTO char_blacklist (charid_owner, charid_target) VALUES (%u, %u);";
-        return (Sql_Query(SqlHandle, sql, ownerId, targetId) != SQL_ERROR && Sql_AffectedRows(SqlHandle) == 1);
+        return (sql::Query(sql, ownerId, targetId) != SQL_ERROR && Sql_AffectedRows(SqlHandle) == 1);
     }
 
     bool DeleteBlacklisted(uint32 ownerId, uint32 targetId)
@@ -55,7 +55,7 @@ namespace blacklistutils
         }
 
         const char* sql = "DELETE FROM char_blacklist WHERE charid_owner = %u AND charid_target = %u;";
-        return (Sql_Query(SqlHandle, sql, ownerId, targetId) != SQL_ERROR && Sql_AffectedRows(SqlHandle) == 1);
+        return (sql::Query(sql, ownerId, targetId) != SQL_ERROR && Sql_AffectedRows(SqlHandle) == 1);
     }
 
     void SendBlacklist(CCharEntity* PChar)
@@ -64,7 +64,7 @@ namespace blacklistutils
 
         // Obtain this users blacklist info..
         const char* sql = "SELECT c.charid, c.charname FROM char_blacklist AS b INNER JOIN chars AS c ON b.charid_target = c.charid WHERE charid_owner = %u;";
-        if (Sql_Query(SqlHandle, sql, PChar->id) == SQL_ERROR || Sql_NumRows(SqlHandle) == 0)
+        if (sql::Query(sql, PChar->id) == SQL_ERROR || Sql_NumRows(SqlHandle) == 0)
         {
             PChar->pushPacket(new CStopDownloadingPacket(PChar, blacklist));
             return;

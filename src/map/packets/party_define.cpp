@@ -46,7 +46,7 @@ CPartyDefinePacket::CPartyDefinePacket(CParty* PParty, bool loadTrust)
 
         uint8 i = 0;
 
-        int ret = Sql_Query(SqlHandle, msg, allianceid, PParty->GetPartyID(), PARTY_SECOND | PARTY_THIRD);
+        int ret = sql::Query(msg, allianceid, PParty->GetPartyID(), PARTY_SECOND | PARTY_THIRD);
 
         if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) > 0)
         {

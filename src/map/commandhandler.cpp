@@ -130,7 +130,7 @@ int32 CCommandHandler::call(sol::state& lua, CCharEntity* PChar, const int8* com
             Sql_EscapeString(SqlHandle, escaped_full_string.data(), (char*)commandline);
 
             const char* fmtQuery = "INSERT into audit_gm (date_time,gm_name,command,full_string) VALUES(current_timestamp(),'%s','%s','%s')";
-            if (Sql_Query(SqlHandle, fmtQuery, escaped_name, escaped_gm_cmd.data(), escaped_full_string.data()) == SQL_ERROR)
+            if (sql::Query(fmtQuery, escaped_name, escaped_gm_cmd.data(), escaped_full_string.data()) == SQL_ERROR)
             {
                 ShowError("cmdhandler::call: Failed to log GM command.");
             }

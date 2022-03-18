@@ -276,7 +276,7 @@ namespace zoneutils
 
         char address[INET_ADDRSTRLEN];
         inet_ntop(AF_INET, &map_ip, address, INET_ADDRSTRLEN);
-        int32 ret = Sql_Query(SqlHandle, Query, map_ip.s_addr, address, map_port);
+        int32 ret = sql::Query(Query, map_ip.s_addr, address, map_port);
 
         if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
         {
@@ -368,7 +368,7 @@ namespace zoneutils
 
         char address[INET_ADDRSTRLEN];
         inet_ntop(AF_INET, &map_ip, address, INET_ADDRSTRLEN);
-        int32 ret = Sql_Query(SqlHandle, Query, map_ip.s_addr, address, map_port);
+        int32 ret = sql::Query(Query, map_ip.s_addr, address, map_port);
 
         if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
         {
@@ -562,7 +562,7 @@ namespace zoneutils
         WHERE IF(%d <> 0, '%s' = zoneip AND %d = zoneport, TRUE) \
         AND mob_groups.zoneid = ((mobid >> 12) & 0xFFF);";
 
-        ret = Sql_Query(SqlHandle, PetQuery, map_ip.s_addr, address, map_port);
+        ret = sql::Query(PetQuery, map_ip.s_addr, address, map_port);
 
         if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
         {
@@ -614,7 +614,7 @@ namespace zoneutils
         static const char* Query = "SELECT zonetype FROM zone_settings "
                                    "WHERE zoneid = %u LIMIT 1";
 
-        if (Sql_Query(SqlHandle, Query, ZoneID) != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        if (sql::Query(Query, ZoneID) != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
         {
             if (static_cast<ZONE_TYPE>(Sql_GetUIntData(SqlHandle, 0)) == ZONE_TYPE::DUNGEON_INSTANCED)
             {
@@ -648,7 +648,7 @@ namespace zoneutils
 
         char address[INET_ADDRSTRLEN];
         inet_ntop(AF_INET, &map_ip, address, INET_ADDRSTRLEN);
-        int ret = Sql_Query(SqlHandle, query, map_ip.s_addr, address, map_port);
+        int ret = sql::Query(query, map_ip.s_addr, address, map_port);
 
         if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
         {
@@ -1067,7 +1067,7 @@ namespace zoneutils
         uint64      ipp   = 0;
         const char* query = "SELECT zoneip, zoneport FROM zone_settings WHERE zoneid = %u;";
 
-        int ret = Sql_Query(SqlHandle, query, zoneID);
+        int ret = sql::Query(query, zoneID);
 
         if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
         {

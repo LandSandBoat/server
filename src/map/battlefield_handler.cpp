@@ -108,7 +108,7 @@ uint8 CBattlefieldHandler::LoadBattlefield(CCharEntity* PChar, uint16 battlefiel
                             FROM bcnm_info i\
                             WHERE bcnmId = %u";
 
-        auto ret = Sql_Query(SqlHandle, fmtQuery, battlefieldID);
+        auto ret = sql::Query(fmtQuery, battlefieldID);
 
         if (ret == SQL_ERROR || Sql_NumRows(SqlHandle) == 0 || Sql_NextRow(SqlHandle) != SQL_SUCCESS)
         {
@@ -282,7 +282,7 @@ bool CBattlefieldHandler::ReachedMaxCapacity(int battlefieldId) const
     if (battlefieldId != -1)
     {
         std::string query("SELECT battlefieldNumber FROM bcnm_battlefield WHERE bcnmId = %i;");
-        auto        ret = Sql_Query(SqlHandle, query.c_str(), battlefieldId);
+        auto        ret = sql::Query(query.c_str(), battlefieldId);
         if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
         {
             while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)

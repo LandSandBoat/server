@@ -40,7 +40,7 @@ namespace puppetutils
                             "char_pet LEFT JOIN pet_name ON automatonid = id "
                             "WHERE charid = %u;";
 
-        int32 ret = Sql_Query(SqlHandle, Query, PChar->id);
+        int32 ret = sql::Query(Query, PChar->id);
 
         if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
         {
@@ -153,7 +153,7 @@ namespace puppetutils
             memcpy(equippedAttachments, &PChar->PAutomaton->m_Equip, sizeof(equippedAttachments));
             Sql_EscapeStringLen(SqlHandle, equippedAttachmentsEscaped, equippedAttachments, sizeof(equippedAttachments));
 
-            Sql_Query(SqlHandle, Query, unlockedAttachmentsEscaped, equippedAttachmentsEscaped, PChar->id);
+            sql::Query(Query, unlockedAttachmentsEscaped, equippedAttachmentsEscaped, PChar->id);
         }
         else
         {
@@ -166,7 +166,7 @@ namespace puppetutils
             memcpy(unlockedAttachments, &PChar->m_unlockedAttachments, sizeof(unlockedAttachments));
             Sql_EscapeStringLen(SqlHandle, unlockedAttachmentsEscaped, unlockedAttachments, sizeof(unlockedAttachments));
 
-            Sql_Query(SqlHandle, Query, unlockedAttachmentsEscaped, PChar->id);
+            sql::Query(Query, unlockedAttachmentsEscaped, PChar->id);
         }
         // TODO: PUP only: save equipped automaton items
     }

@@ -43,7 +43,6 @@ private:
     CInstance*              instance;
     CZone*                  zone;
     CCharEntity*            requester;
-    Sql_t*                  SqlInstanceHandle;
 };
 
 #endif

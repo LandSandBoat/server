@@ -55,7 +55,7 @@ namespace mobSpellList
                             WHERE spell_list_id < %u \
                             ORDER BY min_level ASC;";
 
-        int32 ret = Sql_Query(SqlHandle, Query, MAX_MOBSPELLLIST_ID);
+        int32 ret = sql::Query(Query, MAX_MOBSPELLLIST_ID);
 
         if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
         {

@@ -359,7 +359,7 @@ namespace itemutils
                             "LEFT JOIN item_puppet AS p USING (itemId) "
                             "WHERE itemId < %u;";
 
-        int32 ret = Sql_Query(SqlHandle, Query, MAX_ITEMID);
+        int32 ret = sql::Query(Query, MAX_ITEMID);
 
         if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
         {
@@ -488,7 +488,7 @@ namespace itemutils
             }
         }
 
-        ret = Sql_Query(SqlHandle, "SELECT itemId, modId, value, latentId, latentParam FROM item_latents WHERE itemId IN (SELECT itemId FROM item_basic LEFT "
+        ret = sql::Query("SELECT itemId, modId, value, latentId, latentParam FROM item_latents WHERE itemId IN (SELECT itemId FROM item_basic LEFT "
                                    "JOIN item_equipment USING (itemId))");
 
         if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
@@ -517,7 +517,7 @@ namespace itemutils
 
     void LoadDropList()
     {
-        int32 ret = Sql_Query(SqlHandle, "SELECT dropId, itemId, dropType, itemRate, groupId, groupRate FROM mob_droplist WHERE dropid < %u;", MAX_DROPID);
+        int32 ret = sql::Query("SELECT dropId, itemId, dropType, itemRate, groupId, groupRate FROM mob_droplist WHERE dropid < %u;", MAX_DROPID);
 
         if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
         {

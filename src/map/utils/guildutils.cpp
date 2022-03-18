@@ -60,7 +60,7 @@ namespace guildutils
     void Initialize()
     {
         const char* fmtQuery = "SELECT DISTINCT id, points_name FROM guilds ORDER BY id ASC;";
-        if (Sql_Query(SqlHandle, fmtQuery) != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (sql::Query(fmtQuery) != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
         {
             g_PGuildList.reserve((const unsigned int)Sql_NumRows(SqlHandle));
 
@@ -73,7 +73,7 @@ namespace guildutils
 
         fmtQuery = "SELECT DISTINCT guildid FROM guild_shops ORDER BY guildid ASC LIMIT 256;";
 
-        if (Sql_Query(SqlHandle, fmtQuery) != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (sql::Query(fmtQuery) != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
         {
             g_PGuildShopList.reserve((const unsigned int)Sql_NumRows(SqlHandle));
 
@@ -89,7 +89,7 @@ namespace guildutils
 					WHERE guildid = %u \
                     LIMIT %u";
 
-            int32 ret = Sql_Query(SqlHandle, fmtQuery, PGuildShop->GetID(), MAX_CONTAINER_SIZE);
+            int32 ret = sql::Query(fmtQuery, PGuildShop->GetID(), MAX_CONTAINER_SIZE);
 
             if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
             {
@@ -150,7 +150,7 @@ namespace guildutils
 
         const char* query = "SELECT value FROM server_variables WHERE name = '[GUILD]pattern_update';";
 
-        int  ret    = Sql_Query(SqlHandle, query);
+        int  ret    = sql::Query(query);
         bool update = false;
 
         if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) == 1 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
@@ -167,13 +167,13 @@ namespace guildutils
         if (update)
         {
             // write the new pattern and update time to prevent other servers from updating the pattern
-            Sql_Query(SqlHandle, "REPLACE INTO server_variables (name,value) VALUES('[GUILD]pattern_update', %u), ('[GUILD]pattern', %u);",
+            sql::Query("REPLACE INTO server_variables (name,value) VALUES('[GUILD]pattern_update', %u), ('[GUILD]pattern', %u);",
                       CVanaTime::getInstance()->getJstYearDay(), pattern);
-            Sql_Query(SqlHandle, "DELETE FROM char_vars WHERE varname = '[GUILD]daily_points';");
+            sql::Query("DELETE FROM char_vars WHERE varname = '[GUILD]daily_points';");
         }
 
         // load the pattern in case it was set by another server (and this server did not set it)
-        Sql_Query(SqlHandle, "SELECT value FROM server_variables WHERE name = '[GUILD]pattern';");
+        sql::Query("SELECT value FROM server_variables WHERE name = '[GUILD]pattern';");
         if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) == 1 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
         {
             pattern = Sql_GetUIntData(SqlHandle, 0);

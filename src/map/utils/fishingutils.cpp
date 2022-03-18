@@ -184,7 +184,7 @@ namespace fishingutils
                                 "INNER JOIN fishing_fish AS fish USING (fishid) "
                                 "WHERE zone.zoneid = %u AND rod.rodid = %u AND lure.lureid = %u AND lure.luck = 0";
 
-            int32 ret = Sql_Query(SqlHandle, Query, PChar->getZone(), RodID, LureID);
+            int32 ret = sql::Query(Query, PChar->getZone(), RodID, LureID);
 
             if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
             {
@@ -252,7 +252,7 @@ namespace fishingutils
                                 "WHERE zone.zoneid = %u AND rod.rodid = %u AND lure.lureid = %u AND lure.luck != 0 "
                                 "ORDER BY luck";
 
-            int32 ret = Sql_Query(SqlHandle, Query, PChar->getZone(), RodID, LureID);
+            int32 ret = sql::Query(Query, PChar->getZone(), RodID, LureID);
 
             if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
             {

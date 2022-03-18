@@ -80,7 +80,7 @@ namespace synthutils
             AND Ingredient8 = %u \
         LIMIT 1";
 
-        int32 ret = Sql_Query(SqlHandle, fmtQuery, PChar->CraftContainer->getItemID(0), PChar->CraftContainer->getItemID(0),
+        int32 ret = sql::Query(fmtQuery, PChar->CraftContainer->getItemID(0), PChar->CraftContainer->getItemID(0),
                               PChar->CraftContainer->getItemID(1), PChar->CraftContainer->getItemID(2), PChar->CraftContainer->getItemID(3),
                               PChar->CraftContainer->getItemID(4), PChar->CraftContainer->getItemID(5), PChar->CraftContainer->getItemID(6),
                               PChar->CraftContainer->getItemID(7), PChar->CraftContainer->getItemID(8));
@@ -940,7 +940,7 @@ namespace synthutils
 
                     char fmtQuery[] = "UPDATE char_inventory SET signature = '%s' WHERE charid = %u AND location = 0 AND slot = %u;\0";
 
-                    Sql_Query(SqlHandle, fmtQuery, signature_esc, PChar->id, invSlotID);
+                    sql::Query(fmtQuery, signature_esc, PChar->id, invSlotID);
                 }
                 PChar->pushPacket(new CInventoryItemPacket(PItem, LOC_INVENTORY, invSlotID));
             }

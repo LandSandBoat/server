@@ -33,7 +33,7 @@ void CJobPoints::LoadJobPoints()
 {
     memset(m_jobPoints, 0, sizeof(m_jobPoints));
     if (
-        Sql_Query(SqlHandle, "SELECT charid, jobid, capacity_points, job_points, job_points_spent, "
+        sql::Query("SELECT charid, jobid, capacity_points, job_points, job_points_spent, "
                              "jptype0, jptype1, jptype2, jptype3, jptype4, jptype5, jptype6, jptype7, jptype8, jptype9 "
                              "FROM char_job_points WHERE charid = %u ORDER BY jobid ASC",
                   m_PChar->id) != SQL_ERROR)
@@ -111,7 +111,7 @@ void CJobPoints::RaiseJobPoint(JOBPOINT_TYPE jpType)
         job->totalJpSpent += cost;
         jobPoint->value++;
 
-        Sql_Query(SqlHandle, "UPDATE char_job_points SET jptype%u='%u', job_points='%u', job_points_spent='%u' WHERE charid='%u' AND jobid='%u'",
+        sql::Query("UPDATE char_job_points SET jptype%u='%u', job_points='%u', job_points_spent='%u' WHERE charid='%u' AND jobid='%u'",
                   JobPointTypeIndex(jobPoint->id), jobPoint->value, job->currentJp, job->totalJpSpent, m_PChar->id, job->jobId);
 
         jobpointutils::RefreshGiftMods(m_PChar);
@@ -128,7 +128,7 @@ void CJobPoints::SetJobPoints(int16 amount)
     uint8 currentJob = static_cast<uint8>(m_PChar->GetMJob());
     amount           = std::clamp<int16>(amount, 0, 500);
 
-    Sql_Query(SqlHandle, "INSERT INTO char_job_points SET charid='%u', jobid='%u', job_points='%u' ON DUPLICATE KEY UPDATE job_points='%u'",
+    sql::Query("INSERT INTO char_job_points SET charid='%u', jobid='%u', job_points='%u' ON DUPLICATE KEY UPDATE job_points='%u'",
               m_PChar->id, currentJob, amount, amount);
 
     LoadJobPoints();
@@ -187,7 +187,7 @@ void CJobPoints::SetCapacityPoints(uint16 amount)
     amount                                 = std::clamp<int16>(amount, 0, 30000);
     m_jobPoints[currentJob].capacityPoints = amount;
 
-    Sql_Query(SqlHandle, "INSERT INTO char_job_points SET charid='%u', jobid='%u', capacity_points='%u' ON DUPLICATE KEY UPDATE capacity_points='%u'",
+    sql::Query("INSERT INTO char_job_points SET charid='%u', jobid='%u', capacity_points='%u' ON DUPLICATE KEY UPDATE capacity_points='%u'",
               m_PChar->id, currentJob, amount, amount);
 }
 
@@ -207,7 +207,7 @@ namespace jobpointutils
 
     void LoadGifts()
     {
-        if (Sql_Query(SqlHandle, "SELECT jobid, jp_needed, modid, value FROM job_point_gifts ORDER BY jp_needed ASC") != SQL_ERROR)
+        if (sql::Query("SELECT jobid, jp_needed, modid, value FROM job_point_gifts ORDER BY jp_needed ASC") != SQL_ERROR)
         {
             while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
             {

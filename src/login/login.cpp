@@ -56,7 +56,6 @@ login_config_t login_config; // main settings
 version_info_t version_info;
 maint_config_t maint_config;
 
-Sql_t*      SqlHandle = nullptr;
 std::thread messageThread;
 std::thread consoleInputThread;
 
@@ -120,7 +119,7 @@ int32 do_init(int32 argc, char** argv)
                            `char_inventory`, `char_jobs`,`char_look`,`char_stats`, `char_vars`, `char_bazaar_msg`, \
                            `char_skills`, `char_titles`, `char_effects`, `char_exp`;";
 
-    if (Sql_Query(SqlHandle, fmtQuery) == SQL_ERROR)
+    if (sql::Query(fmtQuery) == SQL_ERROR)
     {
         ShowError("do_init: Impossible to optimise tables");
     }

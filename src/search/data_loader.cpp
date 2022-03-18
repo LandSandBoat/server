@@ -62,7 +62,7 @@ std::vector<ahHistory*> CDataLoader::GetAHItemHystory(uint16 ItemID, bool stack)
                            "ORDER BY sell_date DESC "
                            "LIMIT 10";
 
-    int32 ret = Sql_Query(SqlHandle, fmtQuery, ItemID, stack);
+    int32 ret = sql::Query(fmtQuery, ItemID, stack);
 
     if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
     {
@@ -104,7 +104,7 @@ std::vector<ahItem*> CDataLoader::GetAHItemsToCategory(uint8 AHCategoryID, int8*
                            "GROUP BY item_basic.itemid "
                            "%s";
 
-    int32 ret = Sql_Query(SqlHandle, fmtQuery, AHCategoryID, OrderByString);
+    int32 ret = sql::Query(fmtQuery, AHCategoryID, OrderByString);
 
     if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
     {
@@ -139,7 +139,7 @@ uint32 CDataLoader::GetPlayersCount(const search_req& sr)
     uint8 jobid = sr.jobid;
     if (jobid > 0 && jobid < 21)
     {
-        if (Sql_Query(SqlHandle, "SELECT COUNT(*) FROM accounts_sessions LEFT JOIN char_stats USING (charid) WHERE mjob = %u", jobid) != SQL_ERROR &&
+        if (sql::Query("SELECT COUNT(*) FROM accounts_sessions LEFT JOIN char_stats USING (charid) WHERE mjob = %u", jobid) != SQL_ERROR &&
             Sql_NumRows(SqlHandle) != 0)
         {
             if (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
@@ -150,7 +150,7 @@ uint32 CDataLoader::GetPlayersCount(const search_req& sr)
     }
     else
     {
-        if (Sql_Query(SqlHandle, "SELECT COUNT(*) FROM accounts_sessions") != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (sql::Query("SELECT COUNT(*) FROM accounts_sessions") != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
         {
             if (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
             {
@@ -214,7 +214,7 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
     fmtQuery.append(filterQry);
     fmtQuery.append(" ORDER BY charname ASC");
 
-    int32 ret = Sql_Query(SqlHandle, fmtQuery.c_str());
+    int32 ret = sql::Query(fmtQuery.c_str());
 
     if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
     {
@@ -417,7 +417,7 @@ std::list<SearchEntity*> CDataLoader::GetPartyList(uint16 PartyID, uint16 Allian
         "ORDER BY charname ASC "
         "LIMIT 18";
 
-    int32 ret = Sql_Query(SqlHandle, Query, (!AllianceID ? PartyID : AllianceID), (!PartyID ? AllianceID : PartyID));
+    int32 ret = sql::Query(Query, (!AllianceID ? PartyID : AllianceID), (!PartyID ? AllianceID : PartyID));
 
     if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
     {
@@ -506,7 +506,7 @@ std::list<SearchEntity*> CDataLoader::GetLinkshellList(uint32 LinkshellID)
                            "ORDER BY charname ASC "
                            "LIMIT 18";
 
-    int32 ret = Sql_Query(SqlHandle, fmtQuery, LinkshellID, LinkshellID);
+    int32 ret = sql::Query(fmtQuery, LinkshellID, LinkshellID);
 
     if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
     {
@@ -573,7 +573,7 @@ std::string CDataLoader::GetSearchComment(uint32 playerId)
 {
     std::string query = "SELECT seacom_message FROM accounts_sessions WHERE charid = %u";
 
-    int32 ret = Sql_Query(SqlHandle, query.c_str(), playerId);
+    int32 ret = sql::Query(query.c_str(), playerId);
     if (ret != SQL_SUCCESS || Sql_NumRows(SqlHandle) == 0 || Sql_NextRow(SqlHandle) != SQL_SUCCESS)
     {
         return std::string();
@@ -584,13 +584,12 @@ std::string CDataLoader::GetSearchComment(uint32 playerId)
 
 void CDataLoader::ExpireAHItems()
 {
-    Sql_t* sqlH2 = Sql_Malloc();
     Sql_Connect(sqlH2, search_config.mysql_login.c_str(), search_config.mysql_password.c_str(), search_config.mysql_host.c_str(), search_config.mysql_port,
                 search_config.mysql_database.c_str());
 
     std::string qStr            = "SELECT T0.id,T0.itemid,T1.stacksize, T0.stack, T0.seller FROM auction_house T0 INNER JOIN item_basic T1 ON \
                             T0.itemid = T1.itemid WHERE datediff(now(),from_unixtime(date)) >=%u AND buyer_name IS NULL;";
-    int32       ret             = Sql_Query(SqlHandle, qStr.c_str(), search_config.expire_days);
+    int32       ret             = sql::Query(qStr.c_str(), search_config.expire_days);
     int64       expiredAuctions = Sql_NumRows(SqlHandle);
     if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
     {
@@ -619,5 +618,4 @@ void CDataLoader::ExpireAHItems()
         //  ShowMessage(CL_RED"SQL ERROR: %s", SQL_ERROR);
     }
     ShowMessage("Sent %u expired auction house items back to sellers", expiredAuctions);
-    Sql_Free(sqlH2);
 }

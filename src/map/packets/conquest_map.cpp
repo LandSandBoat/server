@@ -39,7 +39,7 @@ CConquestPacket::CConquestPacket(CCharEntity* PChar)
                          sandoria_influence, bastok_influence, windurst_influence, \
                          beastmen_influence FROM conquest_system;";
 
-    int32 ret = Sql_Query(SqlHandle, Query);
+    int32 ret = sql::Query(Query);
 
     uint8 sandoria_regions = 0;
     uint8 bastok_regions   = 0;

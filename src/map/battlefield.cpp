@@ -671,7 +671,7 @@ void CBattlefield::Cleanup()
     if (m_Attacked && m_Status == BATTLEFIELD_STATUS_WON)
     {
         const char* query        = "SELECT fastestTime FROM bcnm_info WHERE bcnmId = %u AND zoneId = %u";
-        auto        ret          = Sql_Query(SqlHandle, query, this->GetID(), this->GetZoneID());
+        auto        ret          = sql::Query(query, this->GetID(), this->GetZoneID());
         bool        updateRecord = true;
         if (ret != SQL_ERROR && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
         {
@@ -683,7 +683,7 @@ void CBattlefield::Cleanup()
             query          = "UPDATE bcnm_info SET fastestName = '%s', fastestTime = %u, fastestPartySize = %u WHERE bcnmId = %u AND zoneid = %u";
             auto timeThing = std::chrono::duration_cast<std::chrono::seconds>(m_Record.time).count();
 
-            Sql_Query(SqlHandle, query, m_Record.name.c_str(), timeThing, m_Record.partySize, this->GetID(), GetZoneID());
+            sql::Query(query, m_Record.name.c_str(), timeThing, m_Record.partySize, this->GetID(), GetZoneID());
         }
     }
 }
@@ -695,7 +695,7 @@ bool CBattlefield::LoadMobs()
                             FROM bcnm_battlefield \
                             WHERE bcnmId = %u AND battlefieldNumber = %u";
 
-    auto ret = Sql_Query(SqlHandle, fmtQuery, this->GetID(), this->GetArea());
+    auto ret = sql::Query(fmtQuery, this->GetID(), this->GetArea());
 
     if (ret == SQL_ERROR || Sql_NumRows(SqlHandle) == 0)
     {
@@ -728,7 +728,7 @@ bool CBattlefield::SpawnLoot(CBaseEntity* PEntity)
     if (!PEntity)
     {
         const auto* fmtQuery = "SELECT npcId FROM bcnm_treasure_chests WHERE bcnmId = %u AND battlefieldNumber = %u;";
-        auto        ret      = Sql_Query(SqlHandle, fmtQuery, this->GetID(), this->GetArea());
+        auto        ret      = sql::Query(fmtQuery, this->GetID(), this->GetArea());
 
         if (ret == SQL_ERROR || Sql_NumRows(SqlHandle) == 0)
         {

@@ -59,7 +59,7 @@ namespace traits
                              WHERE traitid < %u \
 							 ORDER BY job, traitid ASC, rank DESC";
 
-        int32 ret = Sql_Query(SqlHandle, Query, MAX_TRAIT_ID);
+        int32 ret = sql::Query(Query, MAX_TRAIT_ID);
 
         if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
         {
@@ -91,7 +91,7 @@ namespace traits
                              WHERE traitid < %u \
 							 ORDER BY trait_category ASC, trait_points_needed DESC";
 
-        ret = Sql_Query(SqlHandle, Query, MAX_TRAIT_ID);
+        ret = sql::Query(Query, MAX_TRAIT_ID);
 
         if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
         {

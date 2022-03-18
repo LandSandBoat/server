@@ -1680,7 +1680,7 @@ void CCharEntity::OnItemFinish(CItemState& state, action_t& action)
                             "SET extra = '%s' "
                             "WHERE charid = %u AND location = %u AND slot = %u;";
 
-        Sql_Query(SqlHandle, Query, extra, this->id, PItem->getLocationID(), PItem->getSlotID());
+        sql::Query(Query, extra, this->id, PItem->getLocationID(), PItem->getSlotID());
 
         if (PItem->getCurrentCharges() != 0)
         {
@@ -1839,7 +1839,7 @@ int32 CCharEntity::GetTimeCreated()
 {
     const char* fmtQuery = "SELECT UNIX_TIMESTAMP(timecreated) FROM chars WHERE charid = %u;";
 
-    int32 ret = Sql_Query(SqlHandle, fmtQuery, id);
+    int32 ret = sql::Query(fmtQuery, id);
 
     if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
     {

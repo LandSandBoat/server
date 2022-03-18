@@ -66,7 +66,7 @@ namespace conquest
 
         std::string Query = "SELECT sandoria_influence, bastok_influence, windurst_influence, beastmen_influence FROM conquest_system WHERE region_id = %d;";
 
-        int ret = Sql_Query(SqlHandle, Query.c_str(), static_cast<uint8>(region));
+        int ret = sql::Query(Query.c_str(), static_cast<uint8>(region));
 
         if (ret == SQL_ERROR || Sql_NextRow(SqlHandle) != SQL_SUCCESS)
         {
@@ -274,7 +274,7 @@ namespace conquest
         const char* Query    = "SELECT sandoria_influence, bastok_influence, windurst_influence, beastmen_influence \
                              FROM conquest_system WHERE region_id = %d;";
 
-        int32 ret = Sql_Query(SqlHandle, Query, static_cast<uint8>(regionid));
+        int32 ret = sql::Query(Query, static_cast<uint8>(regionid));
 
         if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
         {
@@ -374,7 +374,7 @@ namespace conquest
                             IF(windurst_influence > bastok_influence AND windurst_influence > sandoria_influence AND \
                             windurst_influence > beastmen_influence, 2, 3)));";
 
-        Sql_Query(SqlHandle, Query);
+        sql::Query(Query);
 
         // update conquest overseers
         for (uint8 i = 0; i <= 18; i++)
@@ -469,7 +469,7 @@ namespace conquest
         uint8       windurst = 0;
         const char* Query    = "SELECT region_control, COUNT(*) FROM conquest_system WHERE region_control < 3 GROUP BY region_control;";
 
-        int32 ret = Sql_Query(SqlHandle, Query);
+        int32 ret = sql::Query(Query);
 
         if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
         {
@@ -496,7 +496,7 @@ namespace conquest
 
         Query = "SELECT region_control_prev, COUNT(*) FROM conquest_system WHERE region_control_prev < 3 GROUP BY region_control_prev;";
 
-        ret = Sql_Query(SqlHandle, Query);
+        ret = sql::Query(Query);
 
         if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
         {
@@ -566,7 +566,7 @@ namespace conquest
         uint8       windurst = 0;
         const char* Query    = "SELECT region_control, COUNT(*) FROM conquest_system WHERE region_control < 3 GROUP BY region_control;";
 
-        int32 ret = Sql_Query(SqlHandle, Query);
+        int32 ret = sql::Query(Query);
 
         if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
         {
@@ -593,7 +593,7 @@ namespace conquest
 
         Query = "SELECT region_control_prev, COUNT(*) FROM conquest_system WHERE region_control_prev < 3 GROUP BY region_control_prev;";
 
-        ret = Sql_Query(SqlHandle, Query);
+        ret = sql::Query(Query);
 
         if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
         {
@@ -641,7 +641,7 @@ namespace conquest
     {
         const char* Query = "SELECT region_control FROM conquest_system WHERE region_id = %d";
 
-        int32 ret = Sql_Query(SqlHandle, Query, static_cast<uint8>(RegionID));
+        int32 ret = sql::Query(Query, static_cast<uint8>(RegionID));
 
         if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
         {

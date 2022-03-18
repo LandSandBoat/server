@@ -76,9 +76,6 @@ extern login_config_t login_config;
 extern version_info_t version_info;
 extern maint_config_t maint_config;
 
-extern Sql_t* SqlHandle;
-//////////////////////////////////////////////////////////
-
 /*======================================================
  * Login-Server Version Screen [venom]
  *------------------------------------------------------*/

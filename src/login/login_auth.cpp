@@ -110,7 +110,7 @@ int32 login_parse(int32 fd)
                 const char* fmtQuery = "SELECT accounts.id,accounts.status \
                                     FROM accounts \
                                     WHERE accounts.login = '%s' AND accounts.password = PASSWORD('%s')";
-                int32       ret      = Sql_Query(SqlHandle, fmtQuery, escaped_name, escaped_pass);
+                int32       ret      = sql::Query(fmtQuery, escaped_name, escaped_pass);
                 if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
                 {
                     ret = Sql_NextRow(SqlHandle);
@@ -132,12 +132,12 @@ int32 login_parse(int32 fd)
                         //  return 0;
                         //}
                         fmtQuery = "UPDATE accounts SET accounts.timelastmodify = NULL WHERE accounts.id = %d";
-                        Sql_Query(SqlHandle, fmtQuery, sd->accid);
+                        sql::Query(fmtQuery, sd->accid);
                         fmtQuery = "SELECT charid, server_addr, server_port \
                                 FROM accounts_sessions JOIN accounts \
                                 ON accounts_sessions.accid = accounts.id \
                                 WHERE accounts.id = %d;";
-                        ret      = Sql_Query(SqlHandle, fmtQuery, sd->accid);
+                        ret      = sql::Query(fmtQuery, sd->accid);
                         if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) == 1)
                         {
                             while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
@@ -226,7 +226,7 @@ int32 login_parse(int32 fd)
                 }
 
                 // looking for same login
-                if (Sql_Query(SqlHandle, "SELECT accounts.id FROM accounts WHERE accounts.login = '%s'", escaped_name) == SQL_ERROR)
+                if (sql::Query("SELECT accounts.id FROM accounts WHERE accounts.login = '%s'", escaped_name) == SQL_ERROR)
                 {
                     session[fd]->wdata.resize(1);
                     ref<uint8>(session[fd]->wdata.data(), 0) = LOGIN_ERROR_CREATE;
@@ -241,7 +241,7 @@ int32 login_parse(int32 fd)
 
                     uint32 accid = 0;
 
-                    if (Sql_Query(SqlHandle, fmtQuery) != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+                    if (sql::Query(fmtQuery) != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
                     {
                         Sql_NextRow(SqlHandle);
 
@@ -269,7 +269,7 @@ int32 login_parse(int32 fd)
                     fmtQuery = "INSERT INTO accounts(id,login,password,timecreate,timelastmodify,status,priv)\
                                        VALUES(%d,'%s',PASSWORD('%s'),'%s',NULL,%d,%d);";
 
-                    if (Sql_Query(SqlHandle, fmtQuery, accid, escaped_name, escaped_pass, strtimecreate, ACCST_NORMAL, ACCPRIV_USER) == SQL_ERROR)
+                    if (sql::Query(fmtQuery, accid, escaped_name, escaped_pass, strtimecreate, ACCST_NORMAL, ACCPRIV_USER) == SQL_ERROR)
                     {
                         session[fd]->wdata.resize(1);
                         ref<uint8>(session[fd]->wdata.data(), 0) = LOGIN_ERROR_CREATE;
@@ -295,7 +295,7 @@ int32 login_parse(int32 fd)
                 const char* fmtQuery = "SELECT accounts.id,accounts.status \
                                     FROM accounts \
                                     WHERE accounts.login = '%s' AND accounts.password = PASSWORD('%s')";
-                int32       ret      = Sql_Query(SqlHandle, fmtQuery, escaped_name, escaped_pass);
+                int32       ret      = sql::Query(fmtQuery, escaped_name, escaped_pass);
                 if (ret == SQL_ERROR || Sql_NumRows(SqlHandle) == 0)
                 {
                     session[fd]->wdata.resize(1);
@@ -347,10 +347,10 @@ int32 login_parse(int32 fd)
                     Sql_EscapeString(SqlHandle, escaped_updated_password, updated_password.c_str());
 
                     fmtQuery = "UPDATE accounts SET accounts.timelastmodify = NULL WHERE accounts.id = %d";
-                    Sql_Query(SqlHandle, fmtQuery, sd->accid);
+                    sql::Query(fmtQuery, sd->accid);
 
                     fmtQuery = "UPDATE accounts SET accounts.password = PASSWORD('%s') WHERE accounts.id = %d";
-                    ret      = Sql_Query(SqlHandle, fmtQuery, escaped_updated_password, sd->accid);
+                    ret      = sql::Query(fmtQuery, escaped_updated_password, sd->accid);
                     if (ret == SQL_ERROR)
                     {
                         session[fd]->wdata.resize(1);

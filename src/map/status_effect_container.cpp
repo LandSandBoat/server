@@ -1517,7 +1517,7 @@ void CStatusEffectContainer::LoadStatusEffects()
                         "FROM char_effects "
                         "WHERE charid = %u;";
 
-    int32 ret = Sql_Query(SqlHandle, Query, m_POwner->id);
+    int32 ret = sql::Query(Query, m_POwner->id);
 
     std::vector<CStatusEffect*> PEffectList;
 
@@ -1579,7 +1579,7 @@ void CStatusEffectContainer::SaveStatusEffects(bool logout)
 {
     XI_DEBUG_BREAK_IF(m_POwner->objtype != TYPE_PC);
 
-    Sql_Query(SqlHandle, "DELETE FROM char_effects WHERE charid = %u", m_POwner->id);
+    sql::Query("DELETE FROM char_effects WHERE charid = %u", m_POwner->id);
 
     for (CStatusEffect* PStatusEffect : m_StatusEffectSet)
     {
@@ -1638,7 +1638,7 @@ void CStatusEffectContainer::SaveStatusEffects(bool logout)
                     }
                 }
             }
-            Sql_Query(SqlHandle, Query, m_POwner->id, PStatusEffect->GetStatusID(), PStatusEffect->GetIcon(), PStatusEffect->GetPower(), tick, duration,
+            sql::Query(Query, m_POwner->id, PStatusEffect->GetStatusID(), PStatusEffect->GetIcon(), PStatusEffect->GetPower(), tick, duration,
                       PStatusEffect->GetSubID(), PStatusEffect->GetSubPower(), PStatusEffect->GetTier(), PStatusEffect->GetFlag(),
                       std::chrono::duration_cast<std::chrono::seconds>(PStatusEffect->GetStartTime().time_since_epoch()).count());
         }

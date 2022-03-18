@@ -49,7 +49,7 @@ CCurrencyPacket2::CCurrencyPacket2(CCharEntity* PChar)
                          silver_aman_voucher \
                          FROM char_points WHERE charid = % d ";
 
-                                        int ret = Sql_Query(SqlHandle, query, PChar->id);
+                                        int ret = sql::Query(query, PChar->id);
     if (ret != SQL_ERROR && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
     {
         ref<uint32>(0x04) = Sql_GetUIntData(SqlHandle, 0); // bayld

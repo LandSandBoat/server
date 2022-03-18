@@ -1434,7 +1434,7 @@ namespace luautils
             // Get all magian table columns to build lua keys
             const char*              ColumnQuery = "SHOW COLUMNS FROM `magian`;";
             std::vector<std::string> magianColumns;
-            if (Sql_Query(SqlHandle, ColumnQuery) == SQL_SUCCESS && Sql_NumRows(SqlHandle) != 0)
+            if (sql::Query(ColumnQuery) == SQL_SUCCESS && Sql_NumRows(SqlHandle) != 0)
             {
                 while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
                 {
@@ -1453,7 +1453,7 @@ namespace luautils
             {
                 int32 trial = va[0].as<int32>();
                 int32 field{ 0 };
-                if (Sql_Query(SqlHandle, Query, trial) != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+                if (sql::Query(Query, trial) != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
                 {
                     for (auto column : magianColumns)
                     {
@@ -1468,7 +1468,7 @@ namespace luautils
                 // one inner table each trial { trial# = { column = value, ... } }
                 for (auto trial : trials)
                 {
-                    int32 ret = Sql_Query(SqlHandle, Query, trial);
+                    int32 ret = sql::Query(Query, trial);
                     if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
                     {
                         auto  inner_table = table.create_named(trial);
@@ -1502,7 +1502,7 @@ namespace luautils
         TracyZoneScoped;
 
         const char* Query = "SELECT `trialId` from `magian` WHERE `previousTrial` = %u;";
-        int32       ret   = Sql_Query(SqlHandle, Query, parentTrial);
+        int32       ret   = sql::Query(Query, parentTrial);
         if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) > 0)
         {
             auto  table = lua.create_table();
@@ -3687,7 +3687,7 @@ namespace luautils
     void ClearVarFromAll(std::string const& varName)
     {
         TracyZoneScoped;
-        Sql_Query(SqlHandle, "DELETE FROM char_vars WHERE varname = '%s';", varName);
+        sql::Query("DELETE FROM char_vars WHERE varname = '%s';", varName);
     }
 
     void Terminate()
@@ -3993,7 +3993,7 @@ namespace luautils
 
         int32 value = 0;
 
-        int32 ret = Sql_Query(SqlHandle, "SELECT value FROM server_variables WHERE name = '%s' LIMIT 1;", varName);
+        int32 ret = sql::Query("SELECT value FROM server_variables WHERE name = '%s' LIMIT 1;", varName);
 
         if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
         {
@@ -4015,10 +4015,10 @@ namespace luautils
 
         if (value == 0)
         {
-            Sql_Query(SqlHandle, "DELETE FROM server_variables WHERE name = '%s' LIMIT 1;", name);
+            sql::Query("DELETE FROM server_variables WHERE name = '%s' LIMIT 1;", name);
             return;
         }
-        Sql_Query(SqlHandle, "INSERT INTO server_variables VALUES ('%s', %i) ON DUPLICATE KEY UPDATE value = %i;", name, value, value);
+        sql::Query("INSERT INTO server_variables VALUES ('%s', %i) ON DUPLICATE KEY UPDATE value = %i;", name, value, value);
     }
 
     int32 OnTransportEvent(CCharEntity* PChar, uint32 TransportID)
@@ -4239,7 +4239,7 @@ namespace luautils
         if (PMob != nullptr)
         {
             int32 r   = 0;
-            int32 ret = Sql_Query(SqlHandle, "SELECT count(mobid) FROM `nm_spawn_points` where mobid=%u", mobid);
+            int32 ret = sql::Query("SELECT count(mobid) FROM `nm_spawn_points` where mobid=%u", mobid);
             if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS && Sql_GetUIntData(SqlHandle, 0) > 0)
             {
                 r = xirand::GetRandomNumber(Sql_GetUIntData(SqlHandle, 0));
@@ -4250,7 +4250,7 @@ namespace luautils
                 return;
             }
 
-            ret = Sql_Query(SqlHandle, "SELECT pos_x, pos_y, pos_z FROM `nm_spawn_points` WHERE mobid=%u AND pos=%i", mobid, r);
+            ret = sql::Query("SELECT pos_x, pos_y, pos_z FROM `nm_spawn_points` WHERE mobid=%u AND pos=%i", mobid, r);
             if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
             {
                 PMob->m_SpawnPoint.rotation = xirand::GetRandomNumber(256);
@@ -4606,7 +4606,7 @@ namespace luautils
         TracyZoneScoped;
 
         uint16 effectId = 0;
-        int32  ret      = Sql_Query(SqlHandle, "SELECT effectId FROM despoil_effects WHERE itemId = %u", itemId);
+        int32  ret      = sql::Query("SELECT effectId FROM despoil_effects WHERE itemId = %u", itemId);
         if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
         {
             effectId = (uint16)Sql_GetUIntData(SqlHandle, 0);

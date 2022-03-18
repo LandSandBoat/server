@@ -83,7 +83,7 @@ namespace message
 
                 if (!PChar)
                 {
-                    Sql_Query(SqlHandle, "DELETE FROM accounts_sessions WHERE charid = %d;", ref<uint32>((uint8*)extra.data(), 0));
+                    sql::Query("DELETE FROM accounts_sessions WHERE charid = %d;", ref<uint32>((uint8*)extra.data(), 0));
                 }
                 else
                 {
@@ -260,14 +260,14 @@ namespace message
                     else
                     {
                         // both party leaders?
-                        int ret = Sql_Query(SqlHandle, "SELECT * FROM accounts_parties WHERE partyid <> 0 AND \
+                        int ret = sql::Query("SELECT * FROM accounts_parties WHERE partyid <> 0 AND \
                                                     ((charid = %u OR charid = %u) AND partyflag & %u);",
                                             inviterId, inviteeId, PARTY_LEADER);
                         if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) == 2)
                         {
                             if (PInviter->PParty->m_PAlliance)
                             {
-                                ret = Sql_Query(SqlHandle, "SELECT * FROM accounts_parties WHERE allianceid <> 0 AND \
+                                ret = sql::Query("SELECT * FROM accounts_parties WHERE allianceid <> 0 AND \
                                                         allianceid = (SELECT allianceid FROM accounts_parties where \
                                                         charid = %u) GROUP BY partyid;",
                                                 inviterId);
@@ -296,7 +296,7 @@ namespace message
                             }
                             if (PInviter->PParty && PInviter->PParty->GetLeader() == PInviter)
                             {
-                                ret = Sql_Query(SqlHandle, "SELECT * FROM accounts_parties WHERE partyid <> 0 AND \
+                                ret = sql::Query("SELECT * FROM accounts_parties WHERE partyid <> 0 AND \
                                                        															charid = %u;",
                                                 inviteeId);
                                 if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) == 0)
@@ -484,7 +484,7 @@ namespace message
                             {
                                 // If entity not spawned, go to default location as listed in database
                                 const char* query = "SELECT pos_x, pos_y, pos_z FROM mob_spawn_points WHERE mobid = %u;";
-                                auto        fetch = Sql_Query(SqlHandle, query, Entity->id);
+                                auto        fetch = sql::Query(query, Entity->id);
 
                                 if (fetch != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
                                 {
@@ -624,7 +624,7 @@ namespace message
         // if no ip/port were supplied, set to 1 (0 is not valid for an identity)
         if (map_ip.s_addr == 0 && map_port == 0)
         {
-            int ret = Sql_Query(SqlHandle, "SELECT zoneip, zoneport FROM zone_settings GROUP BY zoneip, zoneport ORDER BY COUNT(*) DESC;");
+            int ret = sql::Query("SELECT zoneip, zoneport FROM zone_settings GROUP BY zoneip, zoneport ORDER BY COUNT(*) DESC;");
             if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) > 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
             {
                 inet_pton(AF_INET, (const char*)Sql_GetData(SqlHandle, 0), &ipp);

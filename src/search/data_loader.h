@@ -92,9 +92,6 @@ public:
     std::string              GetSearchComment(uint32 playerId);
     std::vector<ahItem*>     GetAHItemsToCategory(uint8 AHCategoryID, int8* OrderByString);
     void                     ExpireAHItems();
-
-private:
-    Sql_t* SqlHandle;
 };
 
 #endif

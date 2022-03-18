@@ -123,7 +123,7 @@ int32 lobbydata_parse(int32 fd)
                 CharList[8] = 0x20;
 
                 const char* pfmtQuery = "SELECT content_ids FROM accounts WHERE id = %u;";
-                int32       ret       = Sql_Query(SqlHandle, pfmtQuery, sd->accid);
+                int32       ret       = sql::Query(pfmtQuery, sd->accid);
                 if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
                 {
                     CharList[28] = Sql_GetUIntData(SqlHandle, 0);
@@ -146,7 +146,7 @@ int32 lobbydata_parse(int32 fd)
                             WHERE accid = %i \
                         LIMIT %u;";
 
-                ret = Sql_Query(SqlHandle, pfmtQuery, sd->accid, CharList[28]);
+                ret = sql::Query(pfmtQuery, sd->accid, CharList[28]);
                 if (ret == SQL_ERROR)
                 {
                     do_close_lobbydata(sd, fd);
@@ -301,7 +301,7 @@ int32 lobbydata_parse(int32 fd)
                 uint16      PrevZone = 0;
                 uint16      gmlevel  = 0;
 
-                if (Sql_Query(SqlHandle, fmtQuery, charid, sd->accid) != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+                if (sql::Query(fmtQuery, charid, sd->accid) != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
                 {
                     Sql_NextRow(SqlHandle);
 
@@ -325,7 +325,7 @@ int32 lobbydata_parse(int32 fd)
                     {
                         if (PrevZone == 0)
                         {
-                            Sql_Query(SqlHandle, "UPDATE chars SET pos_prevzone = %d WHERE charid = %u;", ZoneID, charid);
+                            sql::Query("UPDATE chars SET pos_prevzone = %d WHERE charid = %u;", ZoneID, charid);
                         }
 
                         ref<uint32>(ReservePacket, (0x40)) = sd->servip;                      // search-server ip
@@ -334,7 +334,7 @@ int32 lobbydata_parse(int32 fd)
                         memcpy(MainReservePacket, ReservePacket, ref<uint8>(ReservePacket, 0));
 
                         // If the session was not processed by the game server, then it must be deleted.
-                        Sql_Query(SqlHandle, "DELETE FROM accounts_sessions WHERE accid = %u and client_port = 0", sd->accid);
+                        sql::Query("DELETE FROM accounts_sessions WHERE accid = %u and client_port = 0", sd->accid);
 
                         char session_key[sizeof(key3) * 2 + 1];
                         bin2hex(session_key, key3, sizeof(key3));
@@ -342,7 +342,7 @@ int32 lobbydata_parse(int32 fd)
                         fmtQuery = "INSERT INTO accounts_sessions(accid,charid,session_key,server_addr,server_port,client_addr, version_mismatch) "
                                    "VALUES(%u,%u,x'%s',%u,%u,%u,%u)";
 
-                        if (Sql_Query(SqlHandle, fmtQuery, sd->accid, charid, session_key, ZoneIP, ZonePort, sd->client_addr,
+                        if (sql::Query(fmtQuery, sd->accid, charid, session_key, ZoneIP, ZonePort, sd->client_addr,
                                       (uint8)session[sd->login_lobbyview_fd]->ver_mismatch) == SQL_ERROR)
                         {
                             // Send error message to the client.
@@ -354,7 +354,7 @@ int32 lobbydata_parse(int32 fd)
                         }
 
                         fmtQuery = "UPDATE char_stats SET zoning = 2 WHERE charid = %u";
-                        Sql_Query(SqlHandle, fmtQuery, charid);
+                        sql::Query(fmtQuery, charid);
                     }
                     else
                     {
@@ -406,7 +406,7 @@ int32 lobbydata_parse(int32 fd)
                     fmtQuery = "INSERT INTO account_ip_record(login_time,accid,charid,client_ip)\
                             VALUES ('%s', %u, %u, '%s');";
 
-                    if (Sql_Query(SqlHandle, fmtQuery, timeAndDate, sd->accid, charid, ip2str(sd->client_addr)) == SQL_ERROR)
+                    if (sql::Query(fmtQuery, timeAndDate, sd->accid, charid, ip2str(sd->client_addr)) == SQL_ERROR)
                     {
                         ShowError("lobbyview_parse: Could not write info to account_ip_record.");
                     }
@@ -543,7 +543,7 @@ int32 lobbyview_parse(int32 fd)
                 else
                 {
                     const char* pfmtQuery = "SELECT expansions,features FROM accounts WHERE id = %u;";
-                    int32       ret       = Sql_Query(SqlHandle, pfmtQuery, sd->accid);
+                    int32       ret       = sql::Query(pfmtQuery, sd->accid);
                     if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
                     {
                         LOBBY_026_RESERVEPACKET(ReservePacket);
@@ -593,7 +593,7 @@ int32 lobbyview_parse(int32 fd)
                 // value from the `chars` table. The mysql server will handle the rest.
 
                 const char* pfmtQuery = "DELETE FROM chars WHERE charid = %i AND accid = %i";
-                Sql_Query(SqlHandle, pfmtQuery, CharID, sd->accid);
+                sql::Query(pfmtQuery, CharID, sd->accid);
 
                 break;
             }
@@ -712,7 +712,7 @@ int32 lobbyview_parse(int32 fd)
 
                     char escapedCharName[16 * 2 + 1];
                     Sql_EscapeString(SqlHandle, escapedCharName, CharName);
-                    if (Sql_Query(SqlHandle, fmtQuery, escapedCharName) == SQL_ERROR)
+                    if (sql::Query(fmtQuery, escapedCharName) == SQL_ERROR)
                     {
                         do_close_lobbyview(sd, fd);
                         return -1;
@@ -813,7 +813,7 @@ int32 lobby_createchar(login_session_data_t* loginsd, int8* buf)
 
     const char* fmtQuery = "SELECT max(charid) FROM chars";
 
-    if (Sql_Query(SqlHandle, fmtQuery) == SQL_ERROR)
+    if (sql::Query(fmtQuery) == SQL_ERROR)
     {
         return -1;
     }
@@ -840,7 +840,7 @@ int32 lobby_createchar_save(uint32 accid, uint32 charid, char_mini* createchar)
 {
     const char* Query = "INSERT INTO chars(charid,accid,charname,pos_zone,nation) VALUES(%u,%u,'%s',%u,%u);";
 
-    if (Sql_Query(SqlHandle, Query, charid, accid, createchar->m_name, createchar->m_zone, createchar->m_nation) == SQL_ERROR)
+    if (sql::Query(Query, charid, accid, createchar->m_name, createchar->m_zone, createchar->m_nation) == SQL_ERROR)
     {
         ShowDebug("lobby_ccsave: char<%s>, accid: %u, charid: %u", createchar->m_name, accid, charid);
         return -1;
@@ -848,7 +848,7 @@ int32 lobby_createchar_save(uint32 accid, uint32 charid, char_mini* createchar)
 
     Query = "INSERT INTO char_look(charid,face,race,size) VALUES(%u,%u,%u,%u);";
 
-    if (Sql_Query(SqlHandle, Query, charid, createchar->m_look.face, createchar->m_look.race, createchar->m_look.size) == SQL_ERROR)
+    if (sql::Query(Query, charid, createchar->m_look.face, createchar->m_look.race, createchar->m_look.size) == SQL_ERROR)
     {
         ShowDebug("lobby_cLook: char<%s>, charid: %u", createchar->m_name, charid);
 
@@ -857,7 +857,7 @@ int32 lobby_createchar_save(uint32 accid, uint32 charid, char_mini* createchar)
 
     Query = "INSERT INTO char_stats(charid,mjob) VALUES(%u,%u);";
 
-    if (Sql_Query(SqlHandle, Query, charid, createchar->m_mjob) == SQL_ERROR)
+    if (sql::Query(Query, charid, createchar->m_mjob) == SQL_ERROR)
     {
         ShowDebug("lobby_cStats: charid: %u", charid);
 
@@ -868,55 +868,55 @@ int32 lobby_createchar_save(uint32 accid, uint32 charid, char_mini* createchar)
 
     Query = "INSERT INTO char_exp(charid) VALUES(%u) \
             ON DUPLICATE KEY UPDATE charid = charid;";
-    if (Sql_Query(SqlHandle, Query, charid, createchar->m_mjob) == SQL_ERROR)
+    if (sql::Query(Query, charid, createchar->m_mjob) == SQL_ERROR)
     {
         return -1;
     }
 
     Query = "INSERT INTO char_jobs(charid) VALUES(%u) \
             ON DUPLICATE KEY UPDATE charid = charid;";
-    if (Sql_Query(SqlHandle, Query, charid, createchar->m_mjob) == SQL_ERROR)
+    if (sql::Query(Query, charid, createchar->m_mjob) == SQL_ERROR)
     {
         return -1;
     }
 
     Query = "INSERT INTO char_points(charid) VALUES(%u) \
             ON DUPLICATE KEY UPDATE charid = charid;";
-    if (Sql_Query(SqlHandle, Query, charid, createchar->m_mjob) == SQL_ERROR)
+    if (sql::Query(Query, charid, createchar->m_mjob) == SQL_ERROR)
     {
         return -1;
     }
 
     Query = "INSERT INTO char_unlocks(charid) VALUES(%u) \
             ON DUPLICATE KEY UPDATE charid = charid;";
-    if (Sql_Query(SqlHandle, Query, charid, createchar->m_mjob) == SQL_ERROR)
+    if (sql::Query(Query, charid, createchar->m_mjob) == SQL_ERROR)
     {
         return -1;
     }
 
     Query = "INSERT INTO char_profile(charid) VALUES(%u) \
             ON DUPLICATE KEY UPDATE charid = charid;";
-    if (Sql_Query(SqlHandle, Query, charid, createchar->m_mjob) == SQL_ERROR)
+    if (sql::Query(Query, charid, createchar->m_mjob) == SQL_ERROR)
     {
         return -1;
     }
 
     Query = "INSERT INTO char_storage(charid) VALUES(%u) \
             ON DUPLICATE KEY UPDATE charid = charid;";
-    if (Sql_Query(SqlHandle, Query, charid, createchar->m_mjob) == SQL_ERROR)
+    if (sql::Query(Query, charid, createchar->m_mjob) == SQL_ERROR)
     {
         return -1;
     }
 
     // hot fix
     Query = "DELETE FROM char_inventory WHERE charid = %u";
-    if (Sql_Query(SqlHandle, Query, charid) == SQL_ERROR)
+    if (sql::Query(Query, charid) == SQL_ERROR)
     {
         return -1;
     }
 
     Query = "INSERT INTO char_inventory(charid) VALUES(%u);";
-    if (Sql_Query(SqlHandle, Query, charid, createchar->m_mjob) == SQL_ERROR)
+    if (sql::Query(Query, charid, createchar->m_mjob) == SQL_ERROR)
     {
         return -1;
     }

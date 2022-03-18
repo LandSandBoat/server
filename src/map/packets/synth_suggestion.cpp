@@ -80,7 +80,7 @@ CSynthSuggestionPacket::CSynthSuggestionPacket(uint16 skillID, uint16 skillLevel
     //      craft level of the "main" craft against the craft level of
     //      each craft one at a time to ensure we are only getting
     //      recipes intended for the craft we are seeking to improve?
-    int32 ret = Sql_Query(SqlHandle, fmtQuery, craftname, craftname, skillLevel + 5, skillLevel + 10);
+    int32 ret = sql::Query(fmtQuery, craftname, craftname, skillLevel + 5, skillLevel + 10);
 
     if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
     {

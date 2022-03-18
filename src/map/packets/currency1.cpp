@@ -49,7 +49,7 @@ CCurrencyPacket1::CCurrencyPacket1(CCharEntity* PChar)
                         earth_crystals, lightning_crystals, water_crystals, light_crystals, dark_crystals, deeds \
                         FROM char_points WHERE charid = %d";
 
-    int ret = Sql_Query(SqlHandle, query, PChar->id);
+    int ret = sql::Query(query, PChar->id);
     if (ret != SQL_ERROR && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
     {
         ref<uint32>(0x04) = Sql_GetIntData(SqlHandle, 0); // sandoria_cp

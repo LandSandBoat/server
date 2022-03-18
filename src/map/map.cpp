@@ -83,8 +83,6 @@ const char* MAP_CONF_FILENAME = nullptr;
 int8* g_PBuff   = nullptr; // Global packet clipboard
 int8* PTempBuff = nullptr; // Temporary packet clipboard
 
-thread_local Sql_t* SqlHandle = nullptr;
-
 int32  map_fd          = 0; // main socket
 uint32 map_amntplayers = 0; // map amnt unique players
 
@@ -142,7 +140,7 @@ map_session_data_t* mapsession_createsession(uint32 ip, uint16 port)
 
     const char* fmtQuery = "SELECT charid FROM accounts_sessions WHERE inet_ntoa(client_addr) = '%s' LIMIT 1;";
 
-    int32 ret = Sql_Query(SqlHandle, fmtQuery, ip2str(map_session_data->client_addr));
+    int32 ret = sql::Query(fmtQuery, ip2str(map_session_data->client_addr));
 
     if (ret == SQL_ERROR || Sql_NumRows(SqlHandle) == 0)
     {
@@ -209,7 +207,7 @@ int32 do_init(int32 argc, char** argv)
     Sql_Keepalive(SqlHandle, "MapKeepalive");
 
     // We clear the session table at server start (temporary solution)
-    Sql_Query(SqlHandle, "DELETE FROM accounts_sessions WHERE IF(%u = 0 AND %u = 0, true, server_addr = %u AND server_port = %u);", map_ip.s_addr, map_port,
+    sql::Query("DELETE FROM accounts_sessions WHERE IF(%u = 0 AND %u = 0, true, server_addr = %u AND server_port = %u);", map_ip.s_addr, map_port,
               map_ip.s_addr, map_port);
 
     ShowStatus("do_init: zlib is reading");
@@ -520,7 +518,7 @@ int32 recv_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
 
             const char* fmtQuery = "SELECT charid FROM chars WHERE charid = %u LIMIT 1;";
 
-            int32 ret = Sql_Query(SqlHandle, fmtQuery, CharID);
+            int32 ret = sql::Query(fmtQuery, CharID);
 
             if (ret == SQL_ERROR || Sql_NumRows(SqlHandle) == 0 || Sql_NextRow(SqlHandle) != SQL_SUCCESS)
             {
@@ -530,7 +528,7 @@ int32 recv_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
 
             fmtQuery = "SELECT session_key FROM accounts_sessions WHERE charid = %u LIMIT 1;";
 
-            ret = Sql_Query(SqlHandle, fmtQuery, CharID);
+            ret = sql::Query(fmtQuery, CharID);
 
             if (ret == SQL_ERROR || Sql_NumRows(SqlHandle) == 0 || Sql_NextRow(SqlHandle) != SQL_SUCCESS)
             {
@@ -831,7 +829,7 @@ int32 map_close_session(time_point tick, map_session_data_t* map_session_data)
         // clear accounts_sessions if character is logging out (not when zoning)
         if (map_session_data->shuttingDown == 1)
         {
-            Sql_Query(SqlHandle, "DELETE FROM accounts_sessions WHERE charid = %u", map_session_data->PChar->id);
+            sql::Query("DELETE FROM accounts_sessions WHERE charid = %u", map_session_data->PChar->id);
         }
 
         uint64 port64 = map_session_data->client_port;
@@ -922,7 +920,7 @@ int32 map_cleanup(time_point tick, CTaskMgr::CTask* PTask)
                     else
                     {
                         map_session_data->PChar->StatusEffectContainer->SaveStatusEffects(true);
-                        Sql_Query(SqlHandle, "DELETE FROM accounts_sessions WHERE charid = %u;", map_session_data->PChar->id);
+                        sql::Query("DELETE FROM accounts_sessions WHERE charid = %u;", map_session_data->PChar->id);
 
                         delete[] map_session_data->server_packet_data;
                         delete map_session_data->PChar;
@@ -938,7 +936,7 @@ int32 map_cleanup(time_point tick, CTaskMgr::CTask* PTask)
                     ShowWarning("map_cleanup: WHITHOUT CHAR timed out, session closed");
 
                     const char* Query = "DELETE FROM accounts_sessions WHERE client_addr = %u AND client_port = %u";
-                    Sql_Query(SqlHandle, Query, map_session_data->client_addr, map_session_data->client_port);
+                    sql::Query(Query, map_session_data->client_addr, map_session_data->client_port);
 
                     delete[] map_session_data->server_packet_data;
                     map_session_list.erase(it++);

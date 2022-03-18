@@ -58,7 +58,7 @@ void CGuild::updateGuildPointsPattern(uint8 pattern)
 
         std::string query = "SELECT itemid, points, max_points FROM guild_item_points WHERE "
                             "guildid = %u AND pattern = %u AND rank = %u";
-        int ret = Sql_Query(SqlHandle, query.c_str(), m_id, pattern, m_GPItemsRank[i]);
+        int ret = sql::Query(query.c_str(), m_id, pattern, m_GPItemsRank[i]);
 
         if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) > 0)
         {
@@ -98,7 +98,7 @@ std::pair<uint8, int16> CGuild::addGuildPoints(CCharEntity* PChar, CItem* PItem)
 
                     charutils::AddPoints(PChar, pointsName.c_str(), points);
 
-                    Sql_Query(SqlHandle, "REPLACE INTO char_vars VALUES (%d, '[GUILD]daily_points', %u);", PChar->id, curPoints + points);
+                    sql::Query("REPLACE INTO char_vars VALUES (%d, '[GUILD]daily_points', %u);", PChar->id, curPoints + points);
 
                     return {
                         std::clamp<uint8>(quantity, 0, std::numeric_limits<uint8>::max()), points

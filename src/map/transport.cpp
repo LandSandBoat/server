@@ -132,7 +132,7 @@ void CTransportHandler::InitializeTransport()
 
     char address[INET_ADDRSTRLEN];
     inet_ntop(AF_INET, &map_ip, address, INET_ADDRSTRLEN);
-    int32 ret = Sql_Query(SqlHandle, fmtQuery, map_ip.s_addr, address, map_port);
+    int32 ret = sql::Query(fmtQuery, map_ip.s_addr, address, map_port);
 
     if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
     {
@@ -191,7 +191,7 @@ void CTransportHandler::InitializeTransport()
                 zone_settings ON zone = zoneid WHERE \
                 IF(%d <> 0, '%s' = zoneip AND %d = zoneport, TRUE)";
 
-    ret = Sql_Query(SqlHandle, fmtQuery, map_ip.s_addr, address, map_port);
+    ret = sql::Query(fmtQuery, map_ip.s_addr, address, map_port);
 
     if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
     {

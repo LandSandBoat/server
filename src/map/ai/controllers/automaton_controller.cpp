@@ -1630,7 +1630,7 @@ namespace automaton
     {
         const char* Query = "SELECT spellid, skilllevel, heads, enfeeble, immunity, removes FROM automaton_spells;";
 
-        int32 ret = Sql_Query(SqlHandle, Query);
+        int32 ret = sql::Query(Query);
 
         if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
         {
@@ -1696,7 +1696,7 @@ namespace automaton
     {
         const char* Query = "SELECT abilityid, abilityname, reqframe, skilllevel FROM automaton_abilities;";
 
-        int32 ret = Sql_Query(SqlHandle, Query);
+        int32 ret = sql::Query(Query);
 
         if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
         {

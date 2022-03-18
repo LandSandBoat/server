@@ -54,7 +54,7 @@ namespace gardenutils
 {
     void LoadResultList()
     {
-        int32 ret = Sql_Query(SqlHandle, "SELECT resultId, seed, element1, element2, result, min_quantity, max_quantity, weight FROM gardening_results");
+        int32 ret = sql::Query("SELECT resultId, seed, element1, element2, result, min_quantity, max_quantity, weight FROM gardening_results");
 
         if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
         {
@@ -117,7 +117,7 @@ namespace gardenutils
                         char extra[sizeof(PItem->m_extra) * 2 + 1];
                         Sql_EscapeStringLen(SqlHandle, extra, (const char*)PItem->m_extra, sizeof(PItem->m_extra));
                         const char* Query = "UPDATE char_inventory SET extra = '%s' WHERE charid = %u AND location = %u AND slot = %u";
-                        Sql_Query(SqlHandle, Query, extra, PChar->id, containerID, slotID);
+                        sql::Query(Query, extra, PChar->id, containerID, slotID);
 
                         if (sendPacket)
                         {

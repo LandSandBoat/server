@@ -149,7 +149,7 @@ void CParty::DisbandParty(bool playerInitiated)
                 sync->SetStartTime(server_clock::now());
                 sync->SetDuration(30000);
             }
-            Sql_Query(SqlHandle, "DELETE FROM accounts_parties WHERE charid = %u;", PChar->id);
+            sql::Query("DELETE FROM accounts_parties WHERE charid = %u;", PChar->id);
         }
 
         // make sure chat server isn't notified of a disband if this came from the chat server already
@@ -310,7 +310,7 @@ void CParty::RemoveMember(CBattleEntity* PEntity)
                     PChar->pushPacket(new CCharUpdatePacket(PChar));
                     PChar->PParty = nullptr;
 
-                    Sql_Query(SqlHandle, "DELETE FROM accounts_parties WHERE charid = %u;", PChar->id);
+                    sql::Query("DELETE FROM accounts_parties WHERE charid = %u;", PChar->id);
 
                     uint8 data[4]{};
                     ref<uint32>(data, 0) = m_PartyID;
@@ -443,7 +443,7 @@ void CParty::RemovePartyLeader(CBattleEntity* PEntity)
 {
     XI_DEBUG_BREAK_IF(members.empty());
 
-    int ret = Sql_Query(SqlHandle, "SELECT charname FROM accounts_sessions JOIN chars ON accounts_sessions.charid = chars.charid \
+    int ret = sql::Query("SELECT charname FROM accounts_sessions JOIN chars ON accounts_sessions.charid = chars.charid \
                                     JOIN accounts_parties ON accounts_parties.charid = chars.charid WHERE partyid = %u AND NOT partyflag & %d \
                                     ORDER BY timestamp ASC LIMIT 1;",
                         m_PartyID, PARTY_LEADER);
@@ -465,7 +465,7 @@ void CParty::RemovePartyLeader(CBattleEntity* PEntity)
 std::vector<CParty::partyInfo_t> CParty::GetPartyInfo() const
 {
     std::vector<CParty::partyInfo_t> memberinfo;
-    int ret = Sql_Query(SqlHandle, "SELECT chars.charid, partyid, allianceid, charname, partyflag, pos_zone, pos_prevzone FROM accounts_parties \
+    int ret = sql::Query("SELECT chars.charid, partyid, allianceid, charname, partyflag, pos_zone, pos_prevzone FROM accounts_parties \
                                     LEFT JOIN chars ON accounts_parties.charid = chars.charid WHERE \
                                     (allianceid <> 0 AND allianceid = %d) OR partyid = %d ORDER BY partyflag & %u, timestamp;",
                         m_PAlliance ? m_PAlliance->m_AllianceID : 0, m_PartyID, PARTY_SECOND | PARTY_THIRD);
@@ -518,7 +518,7 @@ void CParty::AddMember(CBattleEntity* PEntity)
             allianceid = m_PAlliance->m_AllianceID;
         }
 
-        Sql_Query(SqlHandle, "INSERT INTO accounts_parties (charid, partyid, allianceid, partyflag) VALUES (%u, %u, %u, %u);", PChar->id, m_PartyID, allianceid,
+        sql::Query("INSERT INTO accounts_parties (charid, partyid, allianceid, partyflag) VALUES (%u, %u, %u, %u);", PChar->id, m_PartyID, allianceid,
                   GetMemberFlags(PChar));
         uint8 data[4]{};
         ref<uint32>(data, 0) = m_PartyID;
@@ -575,7 +575,7 @@ void CParty::AddMember(uint32 id)
                 Flags = PARTY_THIRD;
             }
         }
-        Sql_Query(SqlHandle, "INSERT INTO accounts_parties (charid, partyid, allianceid, partyflag) VALUES (%u, %u, %u, %u);", id, m_PartyID, allianceid,
+        sql::Query("INSERT INTO accounts_parties (charid, partyid, allianceid, partyflag) VALUES (%u, %u, %u, %u);", id, m_PartyID, allianceid,
                   Flags);
         uint8 data[8]{};
         ref<uint32>(data, 0) = m_PartyID;
@@ -949,10 +949,10 @@ void CParty::SetLeader(const char* MemberName)
             return;
         }
 
-        Sql_Query(SqlHandle, "UPDATE accounts_parties SET partyflag = partyflag & ~%d WHERE partyid = %u AND partyflag & %d", ALLIANCE_LEADER | PARTY_LEADER,
+        sql::Query("UPDATE accounts_parties SET partyflag = partyflag & ~%d WHERE partyid = %u AND partyflag & %d", ALLIANCE_LEADER | PARTY_LEADER,
                   m_PartyID, PARTY_LEADER);
-        Sql_Query(SqlHandle, "UPDATE accounts_parties SET partyid = %u WHERE partyid = %u", newId, m_PartyID);
-        Sql_Query(SqlHandle, "UPDATE accounts_parties SET allianceid = %u WHERE allianceid = %u", newId, m_PartyID);
+        sql::Query("UPDATE accounts_parties SET partyid = %u WHERE partyid = %u", newId, m_PartyID);
+        sql::Query("UPDATE accounts_parties SET allianceid = %u WHERE allianceid = %u", newId, m_PartyID);
 
         m_PLeader = GetMemberByName((const int8*)MemberName);
         if (this->m_PAlliance && this->m_PAlliance->m_AllianceID == m_PartyID)
@@ -961,7 +961,7 @@ void CParty::SetLeader(const char* MemberName)
         }
 
         m_PartyID = newId;
-        Sql_Query(SqlHandle, "UPDATE accounts_parties SET partyflag = partyflag | IF(allianceid = partyid, %d, %d) WHERE charid = %u",
+        sql::Query("UPDATE accounts_parties SET partyflag = partyflag | IF(allianceid = partyid, %d, %d) WHERE charid = %u",
                   ALLIANCE_LEADER | PARTY_LEADER, PARTY_LEADER, newId);
 
         // Passing leader dismisses trusts
@@ -1037,9 +1037,9 @@ void CParty::SetSyncTarget(int8* MemberName, uint16 message)
                         member->loc.zone->PushPacket(member, CHAR_INRANGE, new CCharSyncPacket(member));
                     }
                 }
-                Sql_Query(SqlHandle, "UPDATE accounts_parties SET partyflag = partyflag & ~%d WHERE partyid = %u AND partyflag & %d", PARTY_SYNC, m_PartyID,
+                sql::Query("UPDATE accounts_parties SET partyflag = partyflag & ~%d WHERE partyid = %u AND partyflag & %d", PARTY_SYNC, m_PartyID,
                           PARTY_SYNC);
-                Sql_Query(SqlHandle, "UPDATE accounts_parties SET partyflag = partyflag | %d WHERE partyid = %u AND charid = '%u';", PARTY_SYNC, m_PartyID,
+                sql::Query("UPDATE accounts_parties SET partyflag = partyflag | %d WHERE partyid = %u AND charid = '%u';", PARTY_SYNC, m_PartyID,
                           PChar->id);
             }
         }
@@ -1070,7 +1070,7 @@ void CParty::SetSyncTarget(int8* MemberName, uint16 message)
                 }
             }
             m_PSyncTarget = nullptr;
-            Sql_Query(SqlHandle, "UPDATE accounts_parties SET partyflag = partyflag & ~%d WHERE partyid = %u AND partyflag & %d", PARTY_SYNC, m_PartyID,
+            sql::Query("UPDATE accounts_parties SET partyflag = partyflag & ~%d WHERE partyid = %u AND partyflag & %d", PARTY_SYNC, m_PartyID,
                       PARTY_SYNC);
         }
     }
@@ -1086,10 +1086,10 @@ void CParty::SetQuarterMaster(const char* MemberName)
 {
     CBattleEntity* PEntity = MemberName ? GetMemberByName((const int8*)MemberName) : nullptr;
     m_PQuaterMaster        = PEntity;
-    Sql_Query(SqlHandle, "UPDATE accounts_parties SET partyflag = partyflag & ~%d WHERE partyid = %u AND partyflag & %d", PARTY_QM, m_PartyID, PARTY_QM);
+    sql::Query("UPDATE accounts_parties SET partyflag = partyflag & ~%d WHERE partyid = %u AND partyflag & %d", PARTY_QM, m_PartyID, PARTY_QM);
     if (MemberName != nullptr)
     {
-        Sql_Query(SqlHandle, "UPDATE accounts_parties JOIN chars ON accounts_parties.charid = chars.charid \
+        sql::Query("UPDATE accounts_parties JOIN chars ON accounts_parties.charid = chars.charid \
                               SET partyflag = partyflag | %d WHERE partyid = %u AND charname = '%s';",
                   PARTY_QM, m_PartyID, MemberName);
     }

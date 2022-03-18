@@ -1040,7 +1040,7 @@ Usage:
         // load family mods
         const char QueryFamilyMods[] = "SELECT familyid, modid, value, is_mob_mod FROM mob_family_mods;";
 
-        int32 ret = Sql_Query(SqlHandle, QueryFamilyMods);
+        int32 ret = sql::Query(QueryFamilyMods);
 
         if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
         {
@@ -1066,7 +1066,7 @@ Usage:
         // load pool mods
         const char QueryPoolMods[] = "SELECT poolid, modid, value, is_mob_mod FROM mob_pool_mods;";
 
-        ret = Sql_Query(SqlHandle, QueryPoolMods);
+        ret = sql::Query(QueryPoolMods);
 
         if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
         {
@@ -1095,7 +1095,7 @@ Usage:
         // load spawn mods
         const char QuerySpawnMods[] = "SELECT mobid, modid, value, is_mob_mod FROM mob_spawn_mods;";
 
-        ret = Sql_Query(SqlHandle, QuerySpawnMods);
+        ret = sql::Query(QuerySpawnMods);
 
         if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
         {
@@ -1254,7 +1254,7 @@ Usage:
         INNER JOIN mob_family_system ON mob_pools.familyid = mob_family_system.familyID \
         WHERE mob_groups.groupid = %u AND mob_groups.zoneid = %u";
 
-        int32 ret = Sql_Query(SqlHandle, Query, groupid, zoneID);
+        int32 ret = sql::Query(Query, groupid, zoneID);
 
         CMobEntity* PMob = nullptr;
 

@@ -24,7 +24,7 @@
 CMenuUnityPacket::CMenuUnityPacket(CCharEntity* PChar)
 {
     const char* Query = "SELECT leader, members_current, points_current, members_prev, points_prev FROM unity_system;";
-    int32       ret   = Sql_Query(SqlHandle, Query);
+    int32       ret   = sql::Query(Query);
 
     std::pair<int32, double> unity_current[11];
     std::pair<int32, double> unity_previous[11];

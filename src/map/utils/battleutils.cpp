@@ -108,7 +108,7 @@ namespace battleutils
                             ORDER BY level \
                             LIMIT 100";
 
-        int32 ret = Sql_Query(SqlHandle, fmtQuery);
+        int32 ret = sql::Query(fmtQuery);
 
         if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
         {
@@ -125,7 +125,7 @@ namespace battleutils
                 FROM skill_ranks \
                 LIMIT 64";
 
-        ret = Sql_Query(SqlHandle, fmtQuery);
+        ret = sql::Query(fmtQuery);
 
         if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
         {
@@ -153,7 +153,7 @@ namespace battleutils
                                "WHERE weaponskillid < %u "
                                "ORDER BY type, skilllevel ASC";
 
-        int32 ret = Sql_Query(SqlHandle, fmtQuery, MAX_WEAPONSKILL_ID);
+        int32 ret = sql::Query(fmtQuery, MAX_WEAPONSKILL_ID);
 
         if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
         {
@@ -199,7 +199,7 @@ namespace battleutils
         mob_valid_targets, mob_skill_flag, mob_skill_param, knockback, primary_sc, secondary_sc, tertiary_sc \
         FROM mob_skills;";
 
-        int32 ret = Sql_Query(SqlHandle, specialQuery);
+        int32 ret = sql::Query(specialQuery);
 
         if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
         {
@@ -230,7 +230,7 @@ namespace battleutils
         const char* fmtQuery = "SELECT skill_list_id, mob_skill_id \
         FROM mob_skill_lists;";
 
-        ret = Sql_Query(SqlHandle, fmtQuery);
+        ret = sql::Query(fmtQuery);
 
         if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
         {
@@ -251,7 +251,7 @@ namespace battleutils
                            FROM skillchain_damage_modifiers \
                            ORDER BY chain_level, chain_count";
 
-        int32 ret = Sql_Query(SqlHandle, fmtQuery);
+        int32 ret = sql::Query(fmtQuery);
 
         if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
         {

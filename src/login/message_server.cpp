@@ -30,8 +30,6 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 zmq::context_t                 zContext;
 std::unique_ptr<zmq::socket_t> zSocket;
 
-Sql_t* ChatSqlHandle = nullptr;
-
 moodycamel::ConcurrentQueue<chat_message_t> outgoing_queue;
 
 void queue_message(uint64 ipp, MSGSERVTYPE type, zmq::message_t* extra, zmq::message_t* packet)

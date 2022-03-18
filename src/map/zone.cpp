@@ -303,7 +303,7 @@ void CZone::LoadZoneLines()
     TracyZoneScoped;
     static const char fmtQuery[] = "SELECT zoneline, tozone, tox, toy, toz, rotation FROM zonelines WHERE fromzone = %u";
 
-    int32 ret = Sql_Query(SqlHandle, fmtQuery, m_zoneID);
+    int32 ret = sql::Query(fmtQuery, m_zoneID);
 
     if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
     {
@@ -342,7 +342,7 @@ void CZone::LoadZoneWeather()
     TracyZoneScoped;
     static const char* Query = "SELECT weather FROM zone_weather WHERE zone = %u;";
 
-    int32 ret = Sql_Query(SqlHandle, Query, m_zoneID);
+    int32 ret = sql::Query(Query, m_zoneID);
     if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
     {
         Sql_NextRow(SqlHandle);
@@ -391,7 +391,7 @@ void CZone::LoadZoneSettings()
                                "WHERE zoneid = %u "
                                "LIMIT 1";
 
-    if (Sql_Query(SqlHandle, Query, m_zoneID) != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+    if (sql::Query(Query, m_zoneID) != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
     {
         m_zoneName.insert(0, (const char*)Sql_GetData(SqlHandle, 0));
 
