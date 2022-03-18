@@ -32,7 +32,11 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
 
     if xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.str_wsc = 0.6 params.int_wsc = 0.6
-        params.atk100 = 3; params.atk200 = 3; params.atk300 = 3 -- http://wiki.ffo.jp/html/15893.html
+        params.ignoresDef = true
+        params.ignored100 = 0.25
+        params.ignored200 = 0.25
+        params.ignored300 = 0.25
+        params.atk100 = 2.25; params.atk200 = 2.25; params.atk300 = 2.25 -- http://wiki.ffo.jp/html/15893.html
     end
 
     -- Apply Aftermath
