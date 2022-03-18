@@ -53,6 +53,10 @@ entity.onMobDespawn = function(mob)
         UpdateNMSpawnPoint(ID.mob.FAFNIR)
         GetMobByID(ID.mob.FAFNIR):setRespawnTime(75600 + math.random(0, 6) * 1800) -- 21 - 24 hours with half hour windows
     end
+    -- Respawn the ???
+    if xi.settings.LandKingSystem_HQ == 2 or xi.settings.LandKingSystem_NQ == 2 then
+        GetNPCByID(ID.npc.FAFNIR_QM):updateNPCHideTime(xi.settings.FORCE_SPAWN_QM_RESET_TIME)
+    end
 end
 
 return entity
