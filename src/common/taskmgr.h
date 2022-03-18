@@ -22,7 +22,7 @@
 #ifndef _TASK_MGR_H
 #define _TASK_MGR_H
 
-#include "../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include <any>
 #include <functional>

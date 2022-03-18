@@ -112,17 +112,17 @@ auto CLuaItem::getMatchingTrials() -> sol::table
         augs[i][1]        = augmentVal;
     }
 
-    int32 ret = Sql_Query(SqlHandle, Query, PItem->getID(),
+    int32 ret = sql->Query(Query, PItem->getID(),
                           augs[0][0], augs[1][0], augs[2][0], augs[3][0],
                           augs[0][1], augs[1][1], augs[2][1], augs[3][1]);
 
     sol::table table = luautils::lua.create_table();
-    if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+    if (ret != SQL_ERROR && sql->NumRows() != 0)
     {
         int32 trialCount = 0;
-        while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        while (sql->NextRow() == SQL_SUCCESS)
         {
-            auto id             = static_cast<int32>(Sql_GetIntData(SqlHandle, 0));
+            auto id             = static_cast<int32>(sql->GetIntData(0));
             table[++trialCount] = id;
         }
     }

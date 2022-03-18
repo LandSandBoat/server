@@ -276,20 +276,20 @@ namespace zoneutils
 
         char address[INET_ADDRSTRLEN];
         inet_ntop(AF_INET, &map_ip, address, INET_ADDRSTRLEN);
-        int32 ret = Sql_Query(SqlHandle, Query, map_ip.s_addr, address, map_port);
+        int32 ret = sql->Query(Query, map_ip.s_addr, address, map_port);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (ret != SQL_ERROR && sql->NumRows() != 0)
         {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql->NextRow() == SQL_SUCCESS)
             {
-                const char* contentTag = (const char*)Sql_GetData(SqlHandle, 16);
+                const char* contentTag = (const char*)sql->GetData(16);
 
                 if (!luautils::IsContentEnabled(contentTag))
                 {
                     continue;
                 }
 
-                uint32 NpcID  = Sql_GetUIntData(SqlHandle, 0);
+                uint32 NpcID  = sql->GetUIntData(0);
                 uint16 ZoneID = (NpcID - 0x1000000) >> 12;
 
                 if (GetZone(ZoneID)->GetType() != ZONE_TYPE::DUNGEON_INSTANCED)
@@ -298,30 +298,30 @@ namespace zoneutils
                     PNpc->targid     = NpcID & 0xFFF;
                     PNpc->id         = NpcID;
 
-                    PNpc->name.insert(0, (const char*)Sql_GetData(SqlHandle, 1));
+                    PNpc->name.insert(0, (const char*)sql->GetData(1));
 
-                    PNpc->loc.p.rotation = (uint8)Sql_GetIntData(SqlHandle, 2);
-                    PNpc->loc.p.x        = Sql_GetFloatData(SqlHandle, 3);
-                    PNpc->loc.p.y        = Sql_GetFloatData(SqlHandle, 4);
-                    PNpc->loc.p.z        = Sql_GetFloatData(SqlHandle, 5);
-                    PNpc->loc.p.moving   = (uint16)Sql_GetUIntData(SqlHandle, 6);
+                    PNpc->loc.p.rotation = (uint8)sql->GetIntData(2);
+                    PNpc->loc.p.x        = sql->GetFloatData(3);
+                    PNpc->loc.p.y        = sql->GetFloatData(4);
+                    PNpc->loc.p.z        = sql->GetFloatData(5);
+                    PNpc->loc.p.moving   = (uint16)sql->GetUIntData(6);
 
-                    PNpc->m_TargID = (uint32)Sql_GetUIntData(SqlHandle, 6) >> 16; // вполне вероятно
+                    PNpc->m_TargID = (uint32)sql->GetUIntData(6) >> 16; // вполне вероятно
 
-                    PNpc->speed    = (uint8)Sql_GetIntData(SqlHandle, 7); // Overwrites baseentity.cpp's defined speed
-                    PNpc->speedsub = (uint8)Sql_GetIntData(SqlHandle, 8); // Overwrites baseentity.cpp's defined speedsub
+                    PNpc->speed    = (uint8)sql->GetIntData(7); // Overwrites baseentity.cpp's defined speed
+                    PNpc->speedsub = (uint8)sql->GetIntData(8); // Overwrites baseentity.cpp's defined speedsub
 
-                    PNpc->animation    = (uint8)Sql_GetIntData(SqlHandle, 9);
-                    PNpc->animationsub = (uint8)Sql_GetIntData(SqlHandle, 10);
+                    PNpc->animation    = (uint8)sql->GetIntData(9);
+                    PNpc->animationsub = (uint8)sql->GetIntData(10);
 
-                    PNpc->namevis = (uint8)Sql_GetIntData(SqlHandle, 11);
-                    PNpc->status  = static_cast<STATUS_TYPE>(Sql_GetIntData(SqlHandle, 12));
-                    PNpc->m_flags = (uint32)Sql_GetUIntData(SqlHandle, 13);
+                    PNpc->namevis = (uint8)sql->GetIntData(11);
+                    PNpc->status  = static_cast<STATUS_TYPE>(sql->GetIntData(12));
+                    PNpc->m_flags = (uint32)sql->GetUIntData(13);
 
-                    PNpc->name_prefix = (uint8)Sql_GetIntData(SqlHandle, 15);
-                    PNpc->widescan    = (uint8)Sql_GetIntData(SqlHandle, 17);
+                    PNpc->name_prefix = (uint8)sql->GetIntData(15);
+                    PNpc->widescan    = (uint8)sql->GetIntData(17);
 
-                    memcpy(&PNpc->look, Sql_GetData(SqlHandle, 14), 20);
+                    memcpy(&PNpc->look, sql->GetData(14), 20);
 
                     GetZone(ZoneID)->InsertNPC(PNpc);
 
@@ -368,59 +368,59 @@ namespace zoneutils
 
         char address[INET_ADDRSTRLEN];
         inet_ntop(AF_INET, &map_ip, address, INET_ADDRSTRLEN);
-        int32 ret = Sql_Query(SqlHandle, Query, map_ip.s_addr, address, map_port);
+        int32 ret = sql->Query(Query, map_ip.s_addr, address, map_port);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (ret != SQL_ERROR && sql->NumRows() != 0)
         {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql->NextRow() == SQL_SUCCESS)
             {
-                uint16    ZoneID   = (uint16)Sql_GetUIntData(SqlHandle, 0);
+                uint16    ZoneID   = (uint16)sql->GetUIntData(0);
                 ZONE_TYPE zoneType = GetZone(ZoneID)->GetType();
 
                 if (zoneType != ZONE_TYPE::DUNGEON_INSTANCED)
                 {
                     CMobEntity* PMob = new CMobEntity;
 
-                    PMob->name.insert(0, (const char*)Sql_GetData(SqlHandle, 1));
-                    PMob->id = (uint32)Sql_GetUIntData(SqlHandle, 2);
+                    PMob->name.insert(0, (const char*)sql->GetData(1));
+                    PMob->id = (uint32)sql->GetUIntData(2);
 
                     PMob->targid = (uint16)PMob->id & 0x0FFF;
 
-                    PMob->m_SpawnPoint.rotation = (uint8)Sql_GetIntData(SqlHandle, 3);
-                    PMob->m_SpawnPoint.x        = Sql_GetFloatData(SqlHandle, 4);
-                    PMob->m_SpawnPoint.y        = Sql_GetFloatData(SqlHandle, 5);
-                    PMob->m_SpawnPoint.z        = Sql_GetFloatData(SqlHandle, 6);
+                    PMob->m_SpawnPoint.rotation = (uint8)sql->GetIntData(3);
+                    PMob->m_SpawnPoint.x        = sql->GetFloatData(4);
+                    PMob->m_SpawnPoint.y        = sql->GetFloatData(5);
+                    PMob->m_SpawnPoint.z        = sql->GetFloatData(6);
 
-                    PMob->m_RespawnTime = Sql_GetUIntData(SqlHandle, 7) * 1000;
-                    PMob->m_SpawnType   = (SPAWNTYPE)Sql_GetUIntData(SqlHandle, 8);
-                    PMob->m_DropID      = Sql_GetUIntData(SqlHandle, 9);
+                    PMob->m_RespawnTime = sql->GetUIntData(7) * 1000;
+                    PMob->m_SpawnType   = (SPAWNTYPE)sql->GetUIntData(8);
+                    PMob->m_DropID      = sql->GetUIntData(9);
 
-                    PMob->HPmodifier = (uint32)Sql_GetIntData(SqlHandle, 10);
-                    PMob->MPmodifier = (uint32)Sql_GetIntData(SqlHandle, 11);
+                    PMob->HPmodifier = (uint32)sql->GetIntData(10);
+                    PMob->MPmodifier = (uint32)sql->GetIntData(11);
 
-                    PMob->m_minLevel = (uint8)Sql_GetIntData(SqlHandle, 12);
-                    PMob->m_maxLevel = (uint8)Sql_GetIntData(SqlHandle, 13);
+                    PMob->m_minLevel = (uint8)sql->GetIntData(12);
+                    PMob->m_maxLevel = (uint8)sql->GetIntData(13);
 
-                    memcpy(&PMob->look, Sql_GetData(SqlHandle, 14), 23);
+                    memcpy(&PMob->look, sql->GetData(14), 23);
 
-                    PMob->SetMJob(Sql_GetIntData(SqlHandle, 15));
-                    PMob->SetSJob(Sql_GetIntData(SqlHandle, 16));
+                    PMob->SetMJob(sql->GetIntData(15));
+                    PMob->SetSJob(sql->GetIntData(16));
 
                     ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setMaxHit(1);
-                    ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setSkillType(Sql_GetIntData(SqlHandle, 17));
-                    PMob->m_dmgMult = Sql_GetUIntData(SqlHandle, 18);
-                    ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setDelay((Sql_GetIntData(SqlHandle, 19) * 1000) / 60);
-                    ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setBaseDelay((Sql_GetIntData(SqlHandle, 19) * 1000) / 60);
+                    ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setSkillType(sql->GetIntData(17));
+                    PMob->m_dmgMult = sql->GetUIntData(18);
+                    ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setDelay((sql->GetIntData(19) * 1000) / 60);
+                    ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setBaseDelay((sql->GetIntData(19) * 1000) / 60);
 
-                    PMob->m_Behaviour = (uint16)Sql_GetIntData(SqlHandle, 20);
-                    PMob->m_Link      = (uint8)Sql_GetIntData(SqlHandle, 21);
-                    PMob->m_Type      = (uint8)Sql_GetIntData(SqlHandle, 22);
-                    PMob->m_Immunity  = (IMMUNITY)Sql_GetIntData(SqlHandle, 23);
-                    PMob->m_EcoSystem = (ECOSYSTEM)Sql_GetIntData(SqlHandle, 24);
-                    PMob->m_ModelSize = (uint8)Sql_GetIntData(SqlHandle, 25);
+                    PMob->m_Behaviour = (uint16)sql->GetIntData(20);
+                    PMob->m_Link      = (uint8)sql->GetIntData(21);
+                    PMob->m_Type      = (uint8)sql->GetIntData(22);
+                    PMob->m_Immunity  = (IMMUNITY)sql->GetIntData(23);
+                    PMob->m_EcoSystem = (ECOSYSTEM)sql->GetIntData(24);
+                    PMob->m_ModelSize = (uint8)sql->GetIntData(25);
 
-                    PMob->speed    = (uint8)Sql_GetIntData(SqlHandle, 26);
-                    PMob->speedsub = (uint8)Sql_GetIntData(SqlHandle, 26);
+                    PMob->speed    = (uint8)sql->GetIntData(26);
+                    PMob->speedsub = (uint8)sql->GetIntData(26);
 
                     /*if(PMob->speed != 0)
                 {
@@ -429,45 +429,45 @@ namespace zoneutils
                 PMob->speedsub += map_config.speed_mod;
                 }*/
 
-                    PMob->strRank = (uint8)Sql_GetIntData(SqlHandle, 27);
-                    PMob->dexRank = (uint8)Sql_GetIntData(SqlHandle, 28);
-                    PMob->vitRank = (uint8)Sql_GetIntData(SqlHandle, 29);
-                    PMob->agiRank = (uint8)Sql_GetIntData(SqlHandle, 30);
-                    PMob->intRank = (uint8)Sql_GetIntData(SqlHandle, 31);
-                    PMob->mndRank = (uint8)Sql_GetIntData(SqlHandle, 32);
-                    PMob->chrRank = (uint8)Sql_GetIntData(SqlHandle, 33);
-                    PMob->evaRank = (uint8)Sql_GetIntData(SqlHandle, 34);
-                    PMob->defRank = (uint8)Sql_GetIntData(SqlHandle, 35);
-                    PMob->attRank = (uint8)Sql_GetIntData(SqlHandle, 36);
-                    PMob->accRank = (uint8)Sql_GetIntData(SqlHandle, 37);
+                    PMob->strRank = (uint8)sql->GetIntData(27);
+                    PMob->dexRank = (uint8)sql->GetIntData(28);
+                    PMob->vitRank = (uint8)sql->GetIntData(29);
+                    PMob->agiRank = (uint8)sql->GetIntData(30);
+                    PMob->intRank = (uint8)sql->GetIntData(31);
+                    PMob->mndRank = (uint8)sql->GetIntData(32);
+                    PMob->chrRank = (uint8)sql->GetIntData(33);
+                    PMob->evaRank = (uint8)sql->GetIntData(34);
+                    PMob->defRank = (uint8)sql->GetIntData(35);
+                    PMob->attRank = (uint8)sql->GetIntData(36);
+                    PMob->accRank = (uint8)sql->GetIntData(37);
 
-                    PMob->setModifier(Mod::SLASH_SDT, (uint16)(Sql_GetFloatData(SqlHandle, 38) * 1000));
-                    PMob->setModifier(Mod::PIERCE_SDT, (uint16)(Sql_GetFloatData(SqlHandle, 39) * 1000));
-                    PMob->setModifier(Mod::HTH_SDT, (uint16)(Sql_GetFloatData(SqlHandle, 40) * 1000));
-                    PMob->setModifier(Mod::IMPACT_SDT, (uint16)(Sql_GetFloatData(SqlHandle, 41) * 1000));
+                    PMob->setModifier(Mod::SLASH_SDT, (uint16)(sql->GetFloatData(38) * 1000));
+                    PMob->setModifier(Mod::PIERCE_SDT, (uint16)(sql->GetFloatData(39) * 1000));
+                    PMob->setModifier(Mod::HTH_SDT, (uint16)(sql->GetFloatData(40) * 1000));
+                    PMob->setModifier(Mod::IMPACT_SDT, (uint16)(sql->GetFloatData(41) * 1000));
 
-                    PMob->setModifier(Mod::FIRE_SDT, (int16)Sql_GetFloatData(SqlHandle, 42));    // Modifier 54, base 10000 stored as signed integer. Positives signify less damage.
-                    PMob->setModifier(Mod::ICE_SDT, (int16)Sql_GetFloatData(SqlHandle, 43));     // Modifier 55, base 10000 stored as signed integer. Positives signify less damage.
-                    PMob->setModifier(Mod::WIND_SDT, (int16)Sql_GetFloatData(SqlHandle, 44));    // Modifier 56, base 10000 stored as signed integer. Positives signify less damage.
-                    PMob->setModifier(Mod::EARTH_SDT, (int16)Sql_GetFloatData(SqlHandle, 45));   // Modifier 57, base 10000 stored as signed integer. Positives signify less damage.
-                    PMob->setModifier(Mod::THUNDER_SDT, (int16)Sql_GetFloatData(SqlHandle, 46)); // Modifier 58, base 10000 stored as signed integer. Positives signify less damage.
-                    PMob->setModifier(Mod::WATER_SDT, (int16)Sql_GetFloatData(SqlHandle, 47));   // Modifier 59, base 10000 stored as signed integer. Positives signify less damage.
-                    PMob->setModifier(Mod::LIGHT_SDT, (int16)Sql_GetFloatData(SqlHandle, 48));   // Modifier 60, base 10000 stored as signed integer. Positives signify less damage.
-                    PMob->setModifier(Mod::DARK_SDT, (int16)Sql_GetFloatData(SqlHandle, 49));    // Modifier 61, base 10000 stored as signed integer. Positives signify less damage.
+                    PMob->setModifier(Mod::FIRE_SDT, (int16)sql->GetFloatData(42));    // Modifier 54, base 10000 stored as signed integer. Positives signify less damage.
+                    PMob->setModifier(Mod::ICE_SDT, (int16)sql->GetFloatData(43));     // Modifier 55, base 10000 stored as signed integer. Positives signify less damage.
+                    PMob->setModifier(Mod::WIND_SDT, (int16)sql->GetFloatData(44));    // Modifier 56, base 10000 stored as signed integer. Positives signify less damage.
+                    PMob->setModifier(Mod::EARTH_SDT, (int16)sql->GetFloatData(45));   // Modifier 57, base 10000 stored as signed integer. Positives signify less damage.
+                    PMob->setModifier(Mod::THUNDER_SDT, (int16)sql->GetFloatData(46)); // Modifier 58, base 10000 stored as signed integer. Positives signify less damage.
+                    PMob->setModifier(Mod::WATER_SDT, (int16)sql->GetFloatData(47));   // Modifier 59, base 10000 stored as signed integer. Positives signify less damage.
+                    PMob->setModifier(Mod::LIGHT_SDT, (int16)sql->GetFloatData(48));   // Modifier 60, base 10000 stored as signed integer. Positives signify less damage.
+                    PMob->setModifier(Mod::DARK_SDT, (int16)sql->GetFloatData(49));    // Modifier 61, base 10000 stored as signed integer. Positives signify less damage.
 
-                    PMob->setModifier(Mod::FIRE_RES, (int16)(Sql_GetIntData(SqlHandle, 50)));    // These are stored as signed integers which
-                    PMob->setModifier(Mod::ICE_RES, (int16)(Sql_GetIntData(SqlHandle, 51)));     // is directly the modifier starting value.
-                    PMob->setModifier(Mod::WIND_RES, (int16)(Sql_GetIntData(SqlHandle, 52)));    // Positives signify increased resist chance.
-                    PMob->setModifier(Mod::EARTH_RES, (int16)(Sql_GetIntData(SqlHandle, 53)));
-                    PMob->setModifier(Mod::THUNDER_RES, (int16)(Sql_GetIntData(SqlHandle, 54)));
-                    PMob->setModifier(Mod::WATER_RES, (int16)(Sql_GetIntData(SqlHandle, 55)));
-                    PMob->setModifier(Mod::LIGHT_RES, (int16)(Sql_GetIntData(SqlHandle, 56)));
-                    PMob->setModifier(Mod::DARK_RES, (int16)(Sql_GetIntData(SqlHandle, 57)));
+                    PMob->setModifier(Mod::FIRE_RES, (int16)(sql->GetIntData(50)));    // These are stored as signed integers which
+                    PMob->setModifier(Mod::ICE_RES, (int16)(sql->GetIntData(51)));     // is directly the modifier starting value.
+                    PMob->setModifier(Mod::WIND_RES, (int16)(sql->GetIntData(52)));    // Positives signify increased resist chance.
+                    PMob->setModifier(Mod::EARTH_RES, (int16)(sql->GetIntData(53)));
+                    PMob->setModifier(Mod::THUNDER_RES, (int16)(sql->GetIntData(54)));
+                    PMob->setModifier(Mod::WATER_RES, (int16)(sql->GetIntData(55)));
+                    PMob->setModifier(Mod::LIGHT_RES, (int16)(sql->GetIntData(56)));
+                    PMob->setModifier(Mod::DARK_RES, (int16)(sql->GetIntData(57)));
 
-                    PMob->m_Element     = (uint8)Sql_GetIntData(SqlHandle, 58);
-                    PMob->m_Family      = (uint16)Sql_GetIntData(SqlHandle, 59);
-                    PMob->m_name_prefix = (uint8)Sql_GetIntData(SqlHandle, 60);
-                    PMob->m_flags       = (uint32)Sql_GetIntData(SqlHandle, 61);
+                    PMob->m_Element     = (uint8)sql->GetIntData(58);
+                    PMob->m_Family      = (uint16)sql->GetIntData(59);
+                    PMob->m_name_prefix = (uint8)sql->GetIntData(60);
+                    PMob->m_flags       = (uint32)sql->GetIntData(61);
 
                     // Cap Level if Necessary (Don't Cap NMs)
                     if (normalLevelRangeMin > 0 && !(PMob->m_Type & MOBTYPE_NOTORIOUS) && PMob->m_minLevel > normalLevelRangeMin)
@@ -483,7 +483,7 @@ namespace zoneutils
                     // Special sub animation for Mob (yovra, jailer of love, phuabo)
                     // yovra 1: en hauteur, 2: en bas, 3: en haut
                     // phuabo 1: sous l'eau, 2: sort de l'eau, 3: rentre dans l'eau
-                    PMob->animationsub = (uint32)Sql_GetIntData(SqlHandle, 62);
+                    PMob->animationsub = (uint32)sql->GetIntData(62);
 
                     if (PMob->animationsub != 0)
                     {
@@ -491,27 +491,27 @@ namespace zoneutils
                     }
 
                     // Setup HP / MP Stat Percentage Boost
-                    PMob->HPscale = Sql_GetFloatData(SqlHandle, 63);
-                    PMob->MPscale = Sql_GetFloatData(SqlHandle, 64);
+                    PMob->HPscale = sql->GetFloatData(63);
+                    PMob->MPscale = sql->GetFloatData(64);
 
                     // Check if we should be looking up scripts for this mob
-                    PMob->m_HasSpellScript = (uint8)Sql_GetIntData(SqlHandle, 65);
+                    PMob->m_HasSpellScript = (uint8)sql->GetIntData(65);
 
-                    PMob->m_SpellListContainer = mobSpellList::GetMobSpellList(Sql_GetIntData(SqlHandle, 66));
+                    PMob->m_SpellListContainer = mobSpellList::GetMobSpellList(sql->GetIntData(66));
 
-                    PMob->m_Pool = Sql_GetUIntData(SqlHandle, 67);
+                    PMob->m_Pool = sql->GetUIntData(67);
 
-                    PMob->allegiance = static_cast<ALLEGIANCE_TYPE>(Sql_GetUIntData(SqlHandle, 68));
-                    PMob->namevis    = Sql_GetUIntData(SqlHandle, 69);
-                    PMob->m_Aggro    = Sql_GetUIntData(SqlHandle, 70);
+                    PMob->allegiance = static_cast<ALLEGIANCE_TYPE>(sql->GetUIntData(68));
+                    PMob->namevis    = sql->GetUIntData(69);
+                    PMob->m_Aggro    = sql->GetUIntData(70);
 
-                    PMob->m_roamFlags    = (uint16)Sql_GetUIntData(SqlHandle, 71);
-                    PMob->m_MobSkillList = Sql_GetUIntData(SqlHandle, 72);
+                    PMob->m_roamFlags    = (uint16)sql->GetUIntData(71);
+                    PMob->m_MobSkillList = sql->GetUIntData(72);
 
-                    PMob->m_TrueDetection = Sql_GetUIntData(SqlHandle, 73);
-                    PMob->m_Detects       = Sql_GetUIntData(SqlHandle, 74);
+                    PMob->m_TrueDetection = sql->GetUIntData(73);
+                    PMob->m_Detects       = sql->GetUIntData(74);
 
-                    PMob->setMobMod(MOBMOD_CHARMABLE, Sql_GetUIntData(SqlHandle, 75));
+                    PMob->setMobMod(MOBMOD_CHARMABLE, sql->GetUIntData(75));
 
                     // Overwrite base family charmables depending on mob type. Disallowed mobs which should be charmable
                     // can be set in mob_spawn_mods or in their onInitialize
@@ -562,15 +562,15 @@ namespace zoneutils
         WHERE IF(%d <> 0, '%s' = zoneip AND %d = zoneport, TRUE) \
         AND mob_groups.zoneid = ((mobid >> 12) & 0xFFF);";
 
-        ret = Sql_Query(SqlHandle, PetQuery, map_ip.s_addr, address, map_port);
+        ret = sql->Query(PetQuery, map_ip.s_addr, address, map_port);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (ret != SQL_ERROR && sql->NumRows() != 0)
         {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql->NextRow() == SQL_SUCCESS)
             {
-                uint16 ZoneID   = (uint16)Sql_GetUIntData(SqlHandle, 0);
-                uint32 masterid = (uint32)Sql_GetUIntData(SqlHandle, 1);
-                uint32 petid    = masterid + (uint32)Sql_GetUIntData(SqlHandle, 2);
+                uint16 ZoneID   = (uint16)sql->GetUIntData(0);
+                uint32 masterid = (uint32)sql->GetUIntData(1);
+                uint32 petid    = masterid + (uint32)sql->GetUIntData(2);
 
                 CMobEntity* PMaster = (CMobEntity*)GetZone(ZoneID)->GetEntity(masterid & 0x0FFF, TYPE_MOB);
                 CMobEntity* PPet    = (CMobEntity*)GetZone(ZoneID)->GetEntity(petid & 0x0FFF, TYPE_MOB);
@@ -614,9 +614,9 @@ namespace zoneutils
         static const char* Query = "SELECT zonetype FROM zone_settings "
                                    "WHERE zoneid = %u LIMIT 1";
 
-        if (Sql_Query(SqlHandle, Query, ZoneID) != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        if (sql->Query(Query, ZoneID) != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
         {
-            if (static_cast<ZONE_TYPE>(Sql_GetUIntData(SqlHandle, 0)) == ZONE_TYPE::DUNGEON_INSTANCED)
+            if (static_cast<ZONE_TYPE>(sql->GetUIntData(0)) == ZONE_TYPE::DUNGEON_INSTANCED)
             {
                 return new CZoneInstance((ZONEID)ZoneID, GetCurrentRegion(ZoneID), GetCurrentContinent(ZoneID));
             }
@@ -648,13 +648,13 @@ namespace zoneutils
 
         char address[INET_ADDRSTRLEN];
         inet_ntop(AF_INET, &map_ip, address, INET_ADDRSTRLEN);
-        int ret = Sql_Query(SqlHandle, query, map_ip.s_addr, address, map_port);
+        int ret = sql->Query(query, map_ip.s_addr, address, map_port);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (ret != SQL_ERROR && sql->NumRows() != 0)
         {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql->NextRow() == SQL_SUCCESS)
             {
-                zones.push_back(Sql_GetUIntData(SqlHandle, 0));
+                zones.push_back(sql->GetUIntData(0));
             }
         }
         else
@@ -1067,12 +1067,12 @@ namespace zoneutils
         uint64      ipp   = 0;
         const char* query = "SELECT zoneip, zoneport FROM zone_settings WHERE zoneid = %u;";
 
-        int ret = Sql_Query(SqlHandle, query, zoneID);
+        int ret = sql->Query(query, zoneID);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
         {
-            inet_pton(AF_INET, (const char*)Sql_GetData(SqlHandle, 0), &ipp);
-            uint64 port = Sql_GetUIntData(SqlHandle, 1);
+            inet_pton(AF_INET, (const char*)sql->GetData(0), &ipp);
+            uint64 port = sql->GetUIntData(1);
             ipp |= (port << 32);
         }
         else

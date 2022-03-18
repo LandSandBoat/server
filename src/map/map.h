@@ -187,8 +187,6 @@ extern int32        map_fd;
 
 static constexpr float server_tick_rate = 2.5f;
 
-extern thread_local Sql_t* SqlHandle;
-
 typedef std::map<uint64, map_session_data_t*> map_session_list_t;
 extern map_session_list_t                     map_session_list;
 
@@ -197,6 +195,8 @@ extern uint16  map_port;
 
 extern inline map_session_data_t* mapsession_getbyipp(uint64 ipp);
 extern inline map_session_data_t* mapsession_createsession(uint32 ip, uint16 port);
+
+extern std::unique_ptr<SqlConnection> sql;
 
 //=======================================================================
 
