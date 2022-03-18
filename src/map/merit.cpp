@@ -143,9 +143,8 @@ static const MeritCategoryInfo_t meritCatInfo[] = {
     { 4, 10, 7 },   // MCATEGORY_PUP_2       catNumber 48
     { 4, 10, 7 },   // MCATEGORY_DNC_2       catNumber 49
     { 6, 10, 7 },   // MCATEGORY_SHC_2       catNumber 50
-    { 0, 0, 8 },    // MCATEGORY_UNK_3       catNumber 51
-    { 4, 10, 7 },   // MCATEGORY_GEO_2       catNumber 52
-    { 4, 10, 7 },   // MCATEGORY_RUN_2       catNumber 53
+    { 4, 10, 7 },   // MCATEGORY_GEO_2       catNumber 51
+    { 4, 10, 7 },   // MCATEGORY_RUN_2       catNumber 52
 };
 
 #define GetMeritCategory(merit) (((merit) >> 6) - 1)  // получаем категорию из merit
@@ -200,9 +199,9 @@ void CMeritPoints::LoadMeritPoints(uint32 charid)
 
     for (uint16 i = 0; i < MERITS_COUNT; ++i)
     {
-        if ((catNumber <= maxCatCount && i == meritNameSpace::groupOffset[catNumber]) || (catNumber > 27 && catNumber < 31) || catNumber == 51) // Increment category number if known (or known unknown)
+        if ((catNumber <= maxCatCount && i == meritNameSpace::groupOffset[catNumber]) || (catNumber > 27 && catNumber < 31)) // Increment category number if known (or known unknown)
         {
-            if ((catNumber > 27 && catNumber < 31) || catNumber == 51) // 28-30 are UNK, 51 is UNK.
+            if (catNumber > 27 && catNumber < 31) // 28-30 are UNK.
             {
                 Categories[catNumber] = &merits[163]; // point these to valid merits to prevent crash
             }
