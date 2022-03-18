@@ -6,7 +6,7 @@ require("modules/module_utils")
 local m = Module:new("test_npcs_in_gm_home")
 m:setEnabled(true)
 
--- TODO: Fix the order modules are loaded, onInitialize has already been called by now...
+-- TODO: Fix the order modules are loaded, onInitialize is not usable by the time we call this
 -- m:addOverride("xi.zones.GM_Home.Zone.onInitialize", function(zone)
 --     super(zone)
 -- end)

@@ -310,6 +310,8 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
     }
 
     return CLuaBaseEntity(PEntity);
+}
+
 /************************************************************************
  *  Function: SetSoloBattleMusic(253)
  *  Purpose : Set Solo Battle music for zone

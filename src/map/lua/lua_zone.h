@@ -62,6 +62,7 @@ public:
     auto getPartyBattleMusic();
     auto getBackgroundMusicDay();
     auto getBackgroundMusicNight();
+
     void setSoloBattleMusic(uint8 musicId);
     void setPartyBattleMusic(uint8 musicId);
     void setBackgroundMusicDay(uint8 musicId);

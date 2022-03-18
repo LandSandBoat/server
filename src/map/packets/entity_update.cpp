@@ -275,7 +275,7 @@ CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type
             if (updatemask & UPDATE_NAME)
             {
                 // depending on size of name, this can be 0x20, 0x22, or 0x24
-                this->size = 0x24;
+                this->setSize(0x48);
                 memcpy(data + (0x34), PEntity->GetName(), std::min<size_t>(PEntity->name.size(), PacketNameLength));
             }
         }
