@@ -4,30 +4,20 @@
 -- Involved in Mission: Save the Children
 -- !pos 148 0 139 231
 -----------------------------------
-require("scripts/globals/missions")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if (player:getCurrentMission(COP) == xi.mission.id.cop.THE_ROAD_FORKS and player:getCharVar("EMERALD_WATERS_Status") == 2) then
-        player:startEvent(51) --COP event
-    else
-        player:startEvent(20)
-        -- CS 520 default while RoV M1-3 active?
-    end
-
+    player:startEvent(20)
+    -- CS 520 default while RoV M1-3 active?
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 51) then
-        player:setCharVar("EMERALD_WATERS_Status", 3)
-    end
 end
 
 return entity

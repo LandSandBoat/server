@@ -17,6 +17,15 @@ effect_object.onEffectGain = function(target, effect)
         target:ChangeMusic(4, 84)
         target:setAnimation(xi.anim.MOUNT)
     end
+
+    -- For PM3-3 The Road Forks.  This value will be checked periodically, and break
+    -- the Mimeo Jewel should a player be mounted, zone, or disconnect.
+    if
+        target:getZoneID() == xi.zone.ATTOHWA_CHASM and
+        target:hasKeyItem(xi.ki.MIMEO_JEWEL)
+    then
+        target:setLocalVar('Mission[6][325]Timer', 0)
+    end
 end
 
 effect_object.onEffectTick = function(target, effect)

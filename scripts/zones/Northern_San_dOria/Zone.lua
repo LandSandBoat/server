@@ -36,9 +36,6 @@ zone_object.onZoneIn = function(player, prevZone)
     -- RDM AF3 CS
     elseif player:getCharVar("peaceForTheSpiritCS") == 5 and player:getFreeSlotsCount() >= 1 then
         cs = 49
-    elseif player:getCurrentMission(COP) == xi.mission.id.cop.THE_ROAD_FORKS and player:getCharVar("EMERALD_WATERS_Status") == 1 then --EMERALD_WATERS-- COP 3-3A: San d'Oria Route
-        player:setCharVar("EMERALD_WATERS_Status", 2)
-        cs = 14
     end
 
     -- MOG HOUSE EXIT

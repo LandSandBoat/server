@@ -19,12 +19,6 @@ end
 
 entity.onTrigger = function(player, npc)
     if
-        player:getCurrentMission(COP) == xi.mission.id.cop.THE_ROAD_FORKS and
-        player:getCharVar("MEMORIES_OF_A_MAIDEN_Status") == 5
-    then
-        player:startEvent(874) -- COP event
-
-    elseif
         player:hasKeyItem(xi.ki.NEW_MODEL_HAT) and
         not utils.mask.getBit(player:getCharVar("QuestHatInHand_var"), 1)
     then
@@ -44,11 +38,6 @@ entity.onEventFinish = function(player, csid, option)
     if csid == 59 then
         player:setCharVar("QuestHatInHand_var", utils.mask.setBit(player:getCharVar("QuestHatInHand_var"), 1, true))
         player:addCharVar("QuestHatInHand_count", 1)
-
-    -- COP Misson 3-3B "Memories of a Maiden"
-    elseif csid == 874 then
-        player:setCharVar("MEMORIES_OF_A_MAIDEN_Status", 6)
-        npcUtil.giveKeyItem(player, xi.ki.CRACKED_MIMEO_MIRROR)
     end
 end
 
