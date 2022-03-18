@@ -65,19 +65,19 @@ namespace instanceutils
                 InstanceData_t data;
 
                 // Main data
-                data.id            = static_cast<uint16>(Sql_GetIntData(SqlHandle, 0));
+                data.id            = static_cast<uint16>(sql::GetIntData(0));
                 data.instance_name = reinterpret_cast<const char*>(sql::GetData(1));
-                data.instance_zone = static_cast<uint16>(Sql_GetIntData(SqlHandle, 2));
-                data.entrance_zone = static_cast<uint16>(Sql_GetIntData(SqlHandle, 3));
-                data.time_limit    = static_cast<uint16>(Sql_GetIntData(SqlHandle, 4));
-                data.start_x       = static_cast<float>(Sql_GetFloatData(SqlHandle, 5));
-                data.start_y       = static_cast<float>(Sql_GetFloatData(SqlHandle, 6));
-                data.start_z       = static_cast<float>(Sql_GetFloatData(SqlHandle, 7));
-                data.start_rot     = static_cast<uint16>(Sql_GetIntData(SqlHandle, 8));
-                data.music_day     = static_cast<uint16>(Sql_GetIntData(SqlHandle, 9));
-                data.music_night   = static_cast<uint16>(Sql_GetIntData(SqlHandle, 10));
-                data.battlesolo    = static_cast<uint16>(Sql_GetIntData(SqlHandle, 11));
-                data.battlemulti   = static_cast<uint16>(Sql_GetIntData(SqlHandle, 12));
+                data.instance_zone = static_cast<uint16>(sql::GetIntData(2));
+                data.entrance_zone = static_cast<uint16>(sql::GetIntData(3));
+                data.time_limit    = static_cast<uint16>(sql::GetIntData(4));
+                data.start_x       = static_cast<float>(sql::GetFloatData(5));
+                data.start_y       = static_cast<float>(sql::GetFloatData(6));
+                data.start_z       = static_cast<float>(sql::GetFloatData(7));
+                data.start_rot     = static_cast<uint16>(sql::GetIntData(8));
+                data.music_day     = static_cast<uint16>(sql::GetIntData(9));
+                data.music_night   = static_cast<uint16>(sql::GetIntData(10));
+                data.battlesolo    = static_cast<uint16>(sql::GetIntData(11));
+                data.battlemulti   = static_cast<uint16>(sql::GetIntData(12));
 
                 // Meta data
                 data.instance_zone_name = reinterpret_cast<const char*>(zoneutils::GetZone(data.instance_zone)->GetName());

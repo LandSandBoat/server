@@ -100,8 +100,8 @@ int32 login_parse(int32 fd)
             return -1;
         }
 
-        Sql_EscapeString(SqlHandle, escaped_name, name.c_str());
-        Sql_EscapeString(SqlHandle, escaped_pass, password.c_str());
+        sql::EscapeString(escaped_name, name.c_str());
+        sql::EscapeString(escaped_pass, password.c_str());
 
         switch (code)
         {
@@ -122,7 +122,7 @@ int32 login_parse(int32 fd)
                     {
                         // fmtQuery = "SELECT * FROM accounts_sessions WHERE accid = %d AND client_port <> 0";
 
-                        // int32 ret = Sql_Query(SqlHandle,fmtQuery,sd->accid);
+                        // int32 ret = sql::Query(fmtQuery,sd->accid);
 
                         // if( ret != SQL_ERROR && sql::NumRows() != 0 )
                         //{
@@ -344,7 +344,7 @@ int32 login_parse(int32 fd)
                     char*       buff2 = &session[fd]->rdata[0];
                     std::string updated_password(buff2, buff2 + 16);
                     char        escaped_updated_password[16 * 2 + 1];
-                    Sql_EscapeString(SqlHandle, escaped_updated_password, updated_password.c_str());
+                    sql::EscapeString(escaped_updated_password, updated_password.c_str());
 
                     fmtQuery = "UPDATE accounts SET accounts.timelastmodify = NULL WHERE accounts.id = %d";
                     sql::Query(fmtQuery, sd->accid);
@@ -388,7 +388,7 @@ int32 login_parse(int32 fd)
 
 int32 do_close_login(login_session_data_t* loginsd, int32 fd)
 {
-    ShowInfo("login_parse: %s shutdown socket...", ip2str(loginsd->client_addr));
+    ShowInfo("login_parse: %s shutdown socket", ip2str(loginsd->client_addr));
     erase_loginsd(fd);
     do_close_tcp(fd);
     return 0;

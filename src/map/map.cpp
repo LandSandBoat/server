@@ -159,7 +159,7 @@ map_session_data_t* mapsession_createsession(uint32 ip, uint16 port)
 int32 do_init(int32 argc, char** argv)
 {
     TracyZoneScoped;
-    ShowStatus("do_init: begin server initialization...");
+    ShowStatus("do_init: begin server initialization");
     map_ip.s_addr = 0;
 
     for (int i = 1; i < argc; i++)
@@ -196,15 +196,13 @@ int32 do_init(int32 argc, char** argv)
 
     luautils::init();
     PacketParserInitialize();
-    SqlHandle = Sql_Malloc();
 
     ShowStatus("do_init: sqlhandle is allocating");
-    if (Sql_Connect(SqlHandle, map_config.mysql_login.c_str(), map_config.mysql_password.c_str(), map_config.mysql_host.c_str(), map_config.mysql_port,
+    if (sql::Connect(map_config.mysql_login.c_str(), map_config.mysql_password.c_str(), map_config.mysql_host.c_str(), map_config.mysql_port,
                     map_config.mysql_database.c_str()) == SQL_ERROR)
     {
         do_final(EXIT_FAILURE);
     }
-    Sql_Keepalive(SqlHandle, "MapKeepalive");
 
     // We clear the session table at server start (temporary solution)
     sql::Query("DELETE FROM accounts_sessions WHERE IF(%u = 0 AND %u = 0, true, server_addr = %u AND server_port = %u);", map_ip.s_addr, map_port,
@@ -273,7 +271,7 @@ int32 do_init(int32 argc, char** argv)
 
     PacketGuard::Init();
 
-    ShowStatus("The map-server is ready to work...");
+    ShowStatus("The map-server is ready to work!");
     ShowMessage("=======================================================================");
     return 0;
 }
@@ -307,9 +305,6 @@ void do_final(int code)
 
     CTaskMgr::delInstance();
     CVanaTime::delInstance();
-
-    Sql_Free(SqlHandle);
-    SqlHandle = nullptr;
 
     timer_final();
     socket_final();

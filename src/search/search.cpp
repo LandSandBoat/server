@@ -757,7 +757,7 @@ search_req _HandleSearchRequest(CTCPRequestPacket& PTCPRequest)
 
         if ((EntryType != SEARCH_FRIEND) && (EntryType != SEARCH_LINKSHELL) && (EntryType != SEARCH_COMMENT) && (EntryType != SEARCH_FLAGS2))
         {
-            if ((bitOffset + 3) >= workloadBits) // so 0000000 at the end does not get interpretet as name entry ...
+            if ((bitOffset + 3) >= workloadBits) // so 0000000 at the end does not get interpret as name entry
             {
                 bitOffset = workloadBits;
                 break;

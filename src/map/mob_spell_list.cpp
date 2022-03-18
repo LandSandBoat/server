@@ -61,11 +61,11 @@ namespace mobSpellList
         {
             while (sql::NextRow() == SQL_SUCCESS)
             {
-                SpellID spellId = (SpellID)Sql_GetIntData(SqlHandle, 1);
-                uint16  minLvl  = (uint16)Sql_GetIntData(SqlHandle, 2);
-                uint16  maxLvl  = (uint16)Sql_GetIntData(SqlHandle, 3);
+                SpellID spellId = (SpellID)sql::GetIntData(1);
+                uint16  minLvl  = (uint16)sql::GetIntData(2);
+                uint16  maxLvl  = (uint16)sql::GetIntData(3);
 
-                uint16 pos = Sql_GetIntData(SqlHandle, 0);
+                uint16 pos = sql::GetIntData(0);
                 if (!PMobSpellList[pos])
                 {
                     PMobSpellList[pos] = new CMobSpellList();

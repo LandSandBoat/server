@@ -287,10 +287,11 @@ void CAlliance::setMainParty(CParty* aLeader)
 
 void CAlliance::assignAllianceLeader(const char* name)
 {
-    int ret = Sql_Query(SqlHandle,
-                        "SELECT chars.charid from accounts_sessions JOIN chars USING (charid) JOIN accounts_parties USING (charid) "
-                        "WHERE charname = '%s' AND allianceid = %d AND partyflag & %d;",
-                        name, m_AllianceID, PARTY_LEADER);
+    int ret = sql::Query(
+        "SELECT chars.charid from accounts_sessions JOIN chars USING (charid) JOIN accounts_parties USING (charid) "
+        "WHERE charname = '%s' AND allianceid = %d AND partyflag & %d;",
+        name, m_AllianceID, PARTY_LEADER);
+
     if (ret != SQL_ERROR && sql::NumRows() > 0 && sql::NextRow() == SQL_SUCCESS)
     {
         int charid = sql::GetUIntData(0);

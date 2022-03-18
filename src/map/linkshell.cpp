@@ -91,7 +91,7 @@ void CLinkshell::setName(int8* name)
 void CLinkshell::setMessage(const int8* message, const int8* poster)
 {
     char sqlMessage[256];
-    Sql_EscapeString(SqlHandle, sqlMessage, (const char*)message);
+    sql::EscapeString(sqlMessage, (const char*)message);
     sql::Query("UPDATE linkshells SET poster = '%s', message = '%s', messagetime = %u WHERE linkshellid = %d;", poster, sqlMessage,
               static_cast<uint32>(time(nullptr)), m_id);
 
@@ -201,7 +201,7 @@ void CLinkshell::ChangeMemberRank(int8* MemberName, uint8 toSack)
                     delete PItemLinkshell;
                     PItemLinkshell = newShellItem;
                     char extra[sizeof(PItemLinkshell->m_extra) * 2 + 1];
-                    Sql_EscapeStringLen(SqlHandle, extra, (const char*)PItemLinkshell->m_extra, sizeof(PItemLinkshell->m_extra));
+                    sql::EscapeStringLen(extra, (const char*)PItemLinkshell->m_extra, sizeof(PItemLinkshell->m_extra));
 
                     PMember->getStorage(LocationID)->InsertItem(PItemLinkshell, SlotID);
                     const char* Query = "UPDATE char_inventory SET itemid = %u, extra = '%s' WHERE charid = %u AND location = %u AND slot = %u LIMIT 1";
@@ -291,7 +291,7 @@ void CLinkshell::RemoveMemberByName(int8* MemberName, uint8 kickerRank, bool bre
                             {
                                 newPItemLinkshell->SetLSType(LSTYPE_BROKEN);
                                 char extra[sizeof(newPItemLinkshell->m_extra) * 2 + 1];
-                                Sql_EscapeStringLen(SqlHandle, extra, (const char*)newPItemLinkshell->m_extra, sizeof(newPItemLinkshell->m_extra));
+                                sql::EscapeStringLen(extra, (const char*)newPItemLinkshell->m_extra, sizeof(newPItemLinkshell->m_extra));
                                 const char* Query = "UPDATE char_inventory SET extra = '%s' WHERE charid = %u AND location = %u AND slot = %u LIMIT 1";
                                 sql::Query(Query, extra, PMember->id, LocationID, SlotID);
                                 PMember->pushPacket(new CInventoryItemPacket(newPItemLinkshell, LocationID, SlotID));
@@ -406,7 +406,7 @@ namespace linkshell
         {
             auto PLinkshell = std::make_unique<CLinkshell>(sql::GetUIntData(0));
 
-            PLinkshell->setColor(Sql_GetIntData(SqlHandle, 1));
+            PLinkshell->setColor(sql::GetIntData(1));
             int8 EncodedName[16];
             EncodeStringLinkshell(sql::GetData(2), EncodedName);
             PLinkshell->setName(EncodedName);
@@ -518,7 +518,7 @@ namespace linkshell
             if (sql::Query("INSERT INTO linkshells (name, color, postrights) VALUES ('%s', %u, %u)", name, color,
                           static_cast<uint8>(LSTYPE_PEARLSACK)) != SQL_ERROR)
             {
-                return LoadLinkshell((uint32)Sql_LastInsertId(SqlHandle))->getID();
+                return LoadLinkshell((uint32)sql::LastInsertId())->getID();
             }
         }
         return 0;

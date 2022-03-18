@@ -33,14 +33,14 @@ CMenuUnityPacket::CMenuUnityPacket(CCharEntity* PChar)
     {
         while (sql::NextRow() == SQL_SUCCESS)
         {
-            int unity_leader        = Sql_GetIntData(SqlHandle, 0) - 1;
+            int unity_leader        = sql::GetIntData(0) - 1;
 
             if (unity_leader >= 0 && unity_leader < 11)
             {
-                unity_current[unity_leader].first = Sql_GetIntData(SqlHandle, 1);
-                unity_current[unity_leader].second = Sql_GetIntData(SqlHandle, 2);
-                unity_previous[unity_leader].first = Sql_GetIntData(SqlHandle, 3);
-                unity_previous[unity_leader].second = Sql_GetIntData(SqlHandle, 4);
+                unity_current[unity_leader].first = sql::GetIntData(1);
+                unity_current[unity_leader].second = sql::GetIntData(2);
+                unity_previous[unity_leader].first = sql::GetIntData(3);
+                unity_previous[unity_leader].second = sql::GetIntData(4);
             }
         }
     }

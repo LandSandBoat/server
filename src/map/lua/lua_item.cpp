@@ -122,7 +122,7 @@ auto CLuaItem::getMatchingTrials() -> sol::table
         int32 trialCount = 0;
         while (sql::NextRow() == SQL_SUCCESS)
         {
-            auto id             = static_cast<int32>(Sql_GetIntData(SqlHandle, 0));
+            auto id             = static_cast<int32>(sql::GetIntData(0));
             table[++trialCount] = id;
         }
     }

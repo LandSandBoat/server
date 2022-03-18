@@ -321,11 +321,11 @@ void CItemEquipment::SetAugmentMod(uint16 type, uint8 value)
     {
         uint8 multiplier = (uint8)sql::GetUIntData(1);
         Mod   modId      = static_cast<Mod>(sql::GetUIntData(2));
-        int16 modValue   = (int16)Sql_GetIntData(SqlHandle, 3);
+        int16 modValue   = (int16)sql::GetIntData(3);
 
         // type is 0 unless mod is for pets
         uint8      isPet   = (uint8)sql::GetUIntData(4);
-        PetModType petType = static_cast<PetModType>(Sql_GetIntData(SqlHandle, 5));
+        PetModType petType = static_cast<PetModType>(sql::GetIntData(5));
 
         // apply modifier to item. increase modifier power by 'value' (default magnitude 1 for most augments) if multiplier isn't specified
         // otherwise increase modifier power using the multiplier

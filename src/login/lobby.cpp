@@ -177,15 +177,15 @@ int32 lobbydata_parse(int32 fd)
 
                     sql::GetData(1, &strCharName, nullptr);
 
-                    auto gmlevel = Sql_GetIntData(SqlHandle, 36);
+                    auto gmlevel = sql::GetIntData(36);
                     if (maint_config.maint_mode == 0 || gmlevel > 0)
                     {
-                        uint32 CharID = Sql_GetIntData(SqlHandle, 0);
+                        uint32 CharID = sql::GetIntData(0);
 
-                        uint16 zone = (uint16)Sql_GetIntData(SqlHandle, 2);
+                        uint16 zone = (uint16)sql::GetIntData(2);
 
-                        uint8 MainJob    = (uint8)Sql_GetIntData(SqlHandle, 4);
-                        uint8 lvlMainJob = (uint8)Sql_GetIntData(SqlHandle, 13 + MainJob);
+                        uint8 MainJob    = (uint8)sql::GetIntData(4);
+                        uint8 lvlMainJob = (uint8)sql::GetIntData(13 + MainJob);
 
                         // Update the character and user list content ids..
                         ref<uint32>(uList, 16 * (i + 1))    = CharID;
@@ -201,15 +201,15 @@ int32 lobbydata_parse(int32 fd)
                         ref<uint8>(CharList, 46 + 32 + i * 140) = MainJob;
                         ref<uint8>(CharList, 73 + 32 + i * 140) = lvlMainJob;
 
-                        ref<uint8>(CharList, 44 + 32 + i * 140)  = (uint8)Sql_GetIntData(SqlHandle, 5);   // race;
-                        ref<uint8>(CharList, 56 + 32 + i * 140)  = (uint8)Sql_GetIntData(SqlHandle, 6);   // face;
-                        ref<uint16>(CharList, 58 + 32 + i * 140) = (uint16)Sql_GetIntData(SqlHandle, 7);  // head;
-                        ref<uint16>(CharList, 60 + 32 + i * 140) = (uint16)Sql_GetIntData(SqlHandle, 8);  // body;
-                        ref<uint16>(CharList, 62 + 32 + i * 140) = (uint16)Sql_GetIntData(SqlHandle, 9);  // hands;
-                        ref<uint16>(CharList, 64 + 32 + i * 140) = (uint16)Sql_GetIntData(SqlHandle, 10); // legs;
-                        ref<uint16>(CharList, 66 + 32 + i * 140) = (uint16)Sql_GetIntData(SqlHandle, 11); // feet;
-                        ref<uint16>(CharList, 68 + 32 + i * 140) = (uint16)Sql_GetIntData(SqlHandle, 12); // main;
-                        ref<uint16>(CharList, 70 + 32 + i * 140) = (uint16)Sql_GetIntData(SqlHandle, 13); // sub;
+                        ref<uint8>(CharList, 44 + 32 + i * 140)  = (uint8)sql::GetIntData(5);   // race;
+                        ref<uint8>(CharList, 56 + 32 + i * 140)  = (uint8)sql::GetIntData(6);   // face;
+                        ref<uint16>(CharList, 58 + 32 + i * 140) = (uint16)sql::GetIntData(7);  // head;
+                        ref<uint16>(CharList, 60 + 32 + i * 140) = (uint16)sql::GetIntData(8);  // body;
+                        ref<uint16>(CharList, 62 + 32 + i * 140) = (uint16)sql::GetIntData(9);  // hands;
+                        ref<uint16>(CharList, 64 + 32 + i * 140) = (uint16)sql::GetIntData(10); // legs;
+                        ref<uint16>(CharList, 66 + 32 + i * 140) = (uint16)sql::GetIntData(11); // feet;
+                        ref<uint16>(CharList, 68 + 32 + i * 140) = (uint16)sql::GetIntData(12); // main;
+                        ref<uint16>(CharList, 70 + 32 + i * 140) = (uint16)sql::GetIntData(13); // sub;
 
                         ref<uint8>(CharList, 72 + 32 + i * 140)  = (uint8)zone;
                         ref<uint16>(CharList, 78 + 32 + i * 140) = zone;
@@ -711,7 +711,7 @@ int32 lobbyview_parse(int32 fd)
                     }
 
                     char escapedCharName[16 * 2 + 1];
-                    Sql_EscapeString(SqlHandle, escapedCharName, CharName);
+                    sql::EscapeString(escapedCharName, CharName);
                     if (sql::Query(fmtQuery, escapedCharName) == SQL_ERROR)
                     {
                         do_close_lobbyview(sd, fd);

@@ -52,9 +52,9 @@ CCurrencyPacket1::CCurrencyPacket1(CCharEntity* PChar)
     int ret = sql::Query(query, PChar->id);
     if (ret != SQL_ERROR && sql::NextRow() == SQL_SUCCESS)
     {
-        ref<uint32>(0x04) = Sql_GetIntData(SqlHandle, 0); // sandoria_cp
-        ref<uint32>(0x08) = Sql_GetIntData(SqlHandle, 1); // bastok_cp
-        ref<uint32>(0x0C) = Sql_GetIntData(SqlHandle, 2); // windurst_cp
+        ref<uint32>(0x04) = sql::GetIntData(0); // sandoria_cp
+        ref<uint32>(0x08) = sql::GetIntData(1); // bastok_cp
+        ref<uint32>(0x0C) = sql::GetIntData(2); // windurst_cp
 
         ref<uint16>(0x10) = sql::GetUIntData(3);  // beastman_seal
         ref<uint16>(0x12) = sql::GetUIntData(4);  // kindred_seal
@@ -65,17 +65,17 @@ CCurrencyPacket1::CCurrencyPacket1(CCharEntity* PChar)
         ref<uint16>(0x1C) = sql::GetUIntData(9);  // valor_point
         ref<uint16>(0x1E) = sql::GetUIntData(10); // scyld
 
-        ref<uint32>(0x20) = Sql_GetIntData(SqlHandle, 11); // guild_fishing
-        ref<uint32>(0x24) = Sql_GetIntData(SqlHandle, 12); // guild_woodworking
-        ref<uint32>(0x28) = Sql_GetIntData(SqlHandle, 13); // guild_smithing
-        ref<uint32>(0x2C) = Sql_GetIntData(SqlHandle, 14); // guild_goldsmithing
-        ref<uint32>(0x30) = Sql_GetIntData(SqlHandle, 15); // guild_weaving
-        ref<uint32>(0x34) = Sql_GetIntData(SqlHandle, 16); // guild_leathercraft
-        ref<uint32>(0x38) = Sql_GetIntData(SqlHandle, 17); // guild_bonecraft
-        ref<uint32>(0x3C) = Sql_GetIntData(SqlHandle, 18); // guild_alchemy
-        ref<uint32>(0x40) = Sql_GetIntData(SqlHandle, 19); // guild_cooking
+        ref<uint32>(0x20) = sql::GetIntData(11); // guild_fishing
+        ref<uint32>(0x24) = sql::GetIntData(12); // guild_woodworking
+        ref<uint32>(0x28) = sql::GetIntData(13); // guild_smithing
+        ref<uint32>(0x2C) = sql::GetIntData(14); // guild_goldsmithing
+        ref<uint32>(0x30) = sql::GetIntData(15); // guild_weaving
+        ref<uint32>(0x34) = sql::GetIntData(16); // guild_leathercraft
+        ref<uint32>(0x38) = sql::GetIntData(17); // guild_bonecraft
+        ref<uint32>(0x3C) = sql::GetIntData(18); // guild_alchemy
+        ref<uint32>(0x40) = sql::GetIntData(19); // guild_cooking
 
-        ref<uint32>(0x44) = Sql_GetIntData(SqlHandle, 20);  // cinder
+        ref<uint32>(0x44) = sql::GetIntData(20);  // cinder
         ref<uint8>(0x48)  = sql::GetUIntData(21); // fire_fewell
         ref<uint8>(0x49)  = sql::GetUIntData(22); // ice_fewell
         ref<uint8>(0x4A)  = sql::GetUIntData(23); // wind_fewell
@@ -85,45 +85,45 @@ CCurrencyPacket1::CCurrencyPacket1(CCharEntity* PChar)
         ref<uint8>(0x4E)  = sql::GetUIntData(27); // light_fewell
         ref<uint8>(0x4F)  = sql::GetUIntData(28); // dark_fewell
 
-        ref<uint32>(0x50) = Sql_GetIntData(SqlHandle, 29);  // ballista_point
-        ref<uint32>(0x54) = Sql_GetIntData(SqlHandle, 30);  // fellow_point
+        ref<uint32>(0x50) = sql::GetIntData(29);  // ballista_point
+        ref<uint32>(0x54) = sql::GetIntData(30);  // fellow_point
         ref<uint16>(0x58) = sql::GetUIntData(31); // chocobuck_sandoria
         ref<uint16>(0x5A) = sql::GetUIntData(32); // chocobuck_bastok
         ref<uint16>(0x5C) = sql::GetUIntData(33); // chocobuck_windurst
 
-        ref<uint16>(0x5E) = Sql_GetIntData(SqlHandle, 34) == -1 ? 0 : Sql_GetIntData(SqlHandle, 34); // daily_tally
+        ref<uint16>(0x5E) = sql::GetIntData(34) == -1 ? 0 : sql::GetIntData(34); // daily_tally
 
-        ref<uint32>(0x60) = Sql_GetIntData(SqlHandle, 35);  // research_mark
+        ref<uint32>(0x60) = sql::GetIntData(35);  // research_mark
         ref<uint8>(0x64)  = sql::GetUIntData(36); // tunnel_worm
         ref<uint8>(0x65)  = sql::GetUIntData(37); // morion_worm
         ref<uint8>(0x66)  = sql::GetUIntData(38); // phantom_worm
-        ref<uint32>(0x68) = Sql_GetIntData(SqlHandle, 39);  // moblin_marble
+        ref<uint32>(0x68) = sql::GetIntData(39);  // moblin_marble
 
         ref<uint16>(0x6C) = sql::GetUIntData(40); // infamy
         ref<uint16>(0x6E) = sql::GetUIntData(41); // prestige
-        ref<uint32>(0x70) = Sql_GetIntData(SqlHandle, 42);  // legion_point
-        ref<uint32>(0x74) = Sql_GetIntData(SqlHandle, 43);  // spark_of_eminence
-        ref<uint32>(0x78) = Sql_GetIntData(SqlHandle, 44);  // shining_star
+        ref<uint32>(0x70) = sql::GetIntData(42);  // legion_point
+        ref<uint32>(0x74) = sql::GetIntData(43);  // spark_of_eminence
+        ref<uint32>(0x78) = sql::GetIntData(44);  // shining_star
 
-        ref<uint32>(0x7C) = Sql_GetIntData(SqlHandle, 45); // imperial_standing
-        ref<uint32>(0x80) = Sql_GetIntData(SqlHandle, 46); // leujaoam_assault_point
-        ref<uint32>(0x84) = Sql_GetIntData(SqlHandle, 47); // mamool_assault_point
-        ref<uint32>(0x88) = Sql_GetIntData(SqlHandle, 48); // lebros_assault_point
-        ref<uint32>(0x8C) = Sql_GetIntData(SqlHandle, 49); // periqia_assault_point
-        ref<uint32>(0x90) = Sql_GetIntData(SqlHandle, 50); // ilrusi_assault_point
-        ref<uint32>(0x94) = Sql_GetIntData(SqlHandle, 51); // nyzul_isle_assault_point
-        ref<uint32>(0x98) = Sql_GetIntData(SqlHandle, 52); // zeni_point
-        ref<uint32>(0x9C) = Sql_GetIntData(SqlHandle, 53); // jetton
-        ref<uint32>(0xA0) = Sql_GetIntData(SqlHandle, 54); // therion_ichor
+        ref<uint32>(0x7C) = sql::GetIntData(45); // imperial_standing
+        ref<uint32>(0x80) = sql::GetIntData(46); // leujaoam_assault_point
+        ref<uint32>(0x84) = sql::GetIntData(47); // mamool_assault_point
+        ref<uint32>(0x88) = sql::GetIntData(48); // lebros_assault_point
+        ref<uint32>(0x8C) = sql::GetIntData(49); // periqia_assault_point
+        ref<uint32>(0x90) = sql::GetIntData(50); // ilrusi_assault_point
+        ref<uint32>(0x94) = sql::GetIntData(51); // nyzul_isle_assault_point
+        ref<uint32>(0x98) = sql::GetIntData(52); // zeni_point
+        ref<uint32>(0x9C) = sql::GetIntData(53); // jetton
+        ref<uint32>(0xA0) = sql::GetIntData(54); // therion_ichor
 
-        ref<uint32>(0xA4) = Sql_GetIntData(SqlHandle, 55); // allied_notes
+        ref<uint32>(0xA4) = sql::GetIntData(55); // allied_notes
 
         ref<uint16>(0xA8) = sql::GetUIntData(56); // aman_vouchers
         ref<uint16>(0xAA) = sql::GetUIntData(57); // login_points
 
-        ref<uint32>(0xAC) = Sql_GetIntData(SqlHandle, 58);  // cruor
-        ref<uint32>(0xB0) = Sql_GetIntData(SqlHandle, 59);  // resistance_credit
-        ref<uint32>(0xB4) = Sql_GetIntData(SqlHandle, 60);  // dominion_note
+        ref<uint32>(0xAC) = sql::GetIntData(58);  // cruor
+        ref<uint32>(0xB0) = sql::GetIntData(59);  // resistance_credit
+        ref<uint32>(0xB4) = sql::GetIntData(60);  // dominion_note
         ref<uint8>(0xB8)  = sql::GetUIntData(61); // fifth_echelon_trophy
         ref<uint8>(0xB9)  = sql::GetUIntData(62); // fourth_echelon_trophy
         ref<uint8>(0xBA)  = sql::GetUIntData(63); // third_echelon_trophy
@@ -136,9 +136,9 @@ CCurrencyPacket1::CCurrencyPacket1(CCharEntity* PChar)
 
         ref<uint8>(0xBF) = sql::GetUIntData(68); // op_credits
 
-        ref<uint32>(0xC0) = Sql_GetIntData(SqlHandle, 69); // traverser_stones
-        ref<uint32>(0xC4) = Sql_GetIntData(SqlHandle, 70); // voidstones
-        ref<uint32>(0xC8) = Sql_GetIntData(SqlHandle, 71); // kupofried_corundums
+        ref<uint32>(0xC0) = sql::GetIntData(69); // traverser_stones
+        ref<uint32>(0xC4) = sql::GetIntData(70); // voidstones
+        ref<uint32>(0xC8) = sql::GetIntData(71); // kupofried_corundums
 
         ref<uint8>(0xCC) = sql::GetUIntData(72); // pheromone_sacks
 
@@ -154,7 +154,7 @@ CCurrencyPacket1::CCurrencyPacket1(CCharEntity* PChar)
         ref<uint8>(0xD7) = sql::GetUIntData(82); // rems_ch10
 
         ref<uint16>(0xE0) = sql::GetUIntData(83); // reclamation_marks
-        ref<uint32>(0xE4) = Sql_GetIntData(SqlHandle, 84);  // unity_accolades
+        ref<uint32>(0xE4) = sql::GetIntData(84);  // unity_accolades
 
         // Crystal storage
         ref<uint16>(0xE8) = sql::GetUIntData(85); // Fire Crystals

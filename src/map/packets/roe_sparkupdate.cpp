@@ -41,7 +41,7 @@ CRoeSparkUpdatePacket::CRoeSparkUpdatePacket(CCharEntity* PChar)
     int ret = sql::Query(query, PChar->id);
     if (ret != SQL_ERROR && sql::NextRow() == SQL_SUCCESS)
     {
-        ref<uint32>(0x04) = Sql_GetIntData(SqlHandle, 0);
+        ref<uint32>(0x04) = sql::GetIntData(0);
         ref<uint8>(0x08)  = 0; // Deeds
 
         ref<uint8>(0x0A) = 0x00;

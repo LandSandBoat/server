@@ -74,10 +74,10 @@ namespace conquest
         }
 
         int influences[4] = {
-            Sql_GetIntData(SqlHandle, 0),
-            Sql_GetIntData(SqlHandle, 1),
-            Sql_GetIntData(SqlHandle, 2),
-            Sql_GetIntData(SqlHandle, 3),
+            sql::GetIntData(0),
+            sql::GetIntData(1),
+            sql::GetIntData(2),
+            sql::GetIntData(3),
         };
 
         if (influences[nation] == 5000)
@@ -100,10 +100,10 @@ namespace conquest
 
         influences[nation] += lost;
 
-        Sql_Query(SqlHandle,
-                  "UPDATE conquest_system SET sandoria_influence = %d, bastok_influence = %d, "
-                  "windurst_influence = %d, beastmen_influence = %d WHERE region_id = %u;",
-                  influences[0], influences[1], influences[2], influences[3], static_cast<uint8>(region));
+        sql::Query(
+            "UPDATE conquest_system SET sandoria_influence = %d, bastok_influence = %d, "
+            "windurst_influence = %d, beastmen_influence = %d WHERE region_id = %u;",
+            influences[0], influences[1], influences[2], influences[3], static_cast<uint8>(region));
     }
 
     /************************************************************************
@@ -278,10 +278,10 @@ namespace conquest
 
         if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
         {
-            sandoria = Sql_GetIntData(SqlHandle, 0);
-            bastok   = Sql_GetIntData(SqlHandle, 1);
-            windurst = Sql_GetIntData(SqlHandle, 2);
-            beastmen = Sql_GetIntData(SqlHandle, 3);
+            sandoria = sql::GetIntData(0);
+            bastok   = sql::GetIntData(1);
+            windurst = sql::GetIntData(2);
+            beastmen = sql::GetIntData(3);
         }
         return GetInfluenceGraphics(sandoria, bastok, windurst, beastmen);
     }
@@ -475,17 +475,17 @@ namespace conquest
         {
             while (sql::NextRow() == SQL_SUCCESS)
             {
-                if (Sql_GetIntData(SqlHandle, 0) == 0)
+                if (sql::GetIntData(0) == 0)
                 {
-                    sandoria = Sql_GetIntData(SqlHandle, 1);
+                    sandoria = sql::GetIntData(1);
                 }
-                else if (Sql_GetIntData(SqlHandle, 0) == 1)
+                else if (sql::GetIntData(0) == 1)
                 {
-                    bastok = Sql_GetIntData(SqlHandle, 1);
+                    bastok = sql::GetIntData(1);
                 }
-                else if (Sql_GetIntData(SqlHandle, 0) == 2)
+                else if (sql::GetIntData(0) == 2)
                 {
-                    windurst = Sql_GetIntData(SqlHandle, 1);
+                    windurst = sql::GetIntData(1);
                 }
             }
         }
@@ -502,17 +502,17 @@ namespace conquest
         {
             while (sql::NextRow() == SQL_SUCCESS)
             {
-                if (Sql_GetIntData(SqlHandle, 0) == 0)
+                if (sql::GetIntData(0) == 0)
                 {
-                    sandoria_prev = Sql_GetIntData(SqlHandle, 1);
+                    sandoria_prev = sql::GetIntData(1);
                 }
-                else if (Sql_GetIntData(SqlHandle, 0) == 1)
+                else if (sql::GetIntData(0) == 1)
                 {
-                    bastok_prev = Sql_GetIntData(SqlHandle, 1);
+                    bastok_prev = sql::GetIntData(1);
                 }
-                else if (Sql_GetIntData(SqlHandle, 0) == 2)
+                else if (sql::GetIntData(0) == 2)
                 {
-                    windurst_prev = Sql_GetIntData(SqlHandle, 1);
+                    windurst_prev = sql::GetIntData(1);
                 }
             }
         }
@@ -572,17 +572,17 @@ namespace conquest
         {
             while (sql::NextRow() == SQL_SUCCESS)
             {
-                if (Sql_GetIntData(SqlHandle, 0) == 0)
+                if (sql::GetIntData(0) == 0)
                 {
-                    sandoria = Sql_GetIntData(SqlHandle, 1);
+                    sandoria = sql::GetIntData(1);
                 }
-                else if (Sql_GetIntData(SqlHandle, 0) == 1)
+                else if (sql::GetIntData(0) == 1)
                 {
-                    bastok = Sql_GetIntData(SqlHandle, 1);
+                    bastok = sql::GetIntData(1);
                 }
-                else if (Sql_GetIntData(SqlHandle, 0) == 2)
+                else if (sql::GetIntData(0) == 2)
                 {
-                    windurst = Sql_GetIntData(SqlHandle, 1);
+                    windurst = sql::GetIntData(1);
                 }
             }
         }
@@ -599,17 +599,17 @@ namespace conquest
         {
             while (sql::NextRow() == SQL_SUCCESS)
             {
-                if (Sql_GetIntData(SqlHandle, 0) == 0)
+                if (sql::GetIntData(0) == 0)
                 {
-                    sandoria_prev = Sql_GetIntData(SqlHandle, 1);
+                    sandoria_prev = sql::GetIntData(1);
                 }
-                else if (Sql_GetIntData(SqlHandle, 0) == 1)
+                else if (sql::GetIntData(0) == 1)
                 {
-                    bastok_prev = Sql_GetIntData(SqlHandle, 1);
+                    bastok_prev = sql::GetIntData(1);
                 }
-                else if (Sql_GetIntData(SqlHandle, 0) == 2)
+                else if (sql::GetIntData(0) == 2)
                 {
-                    windurst_prev = Sql_GetIntData(SqlHandle, 1);
+                    windurst_prev = sql::GetIntData(1);
                 }
             }
         }
@@ -645,7 +645,7 @@ namespace conquest
 
         if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
         {
-            return Sql_GetIntData(SqlHandle, 0);
+            return sql::GetIntData(0);
         }
         return NATION_NEUTRAL;
     }

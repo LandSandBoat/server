@@ -63,6 +63,8 @@ namespace sql
 /// @return SQL_SUCCESS or SQL_ERROR
 int32 Connect(const char* user, const char* passwd, const char* host, uint16 port, const char* db);
 
+void Disconnect();
+
 /// Retrieves the timeout of the connection.
 ///
 /// @return SQL_SUCCESS or SQL_ERROR
@@ -150,8 +152,6 @@ float  GetFloatData(size_t col);
 
 /// Frees the result of the query.
 void FreeResult();
-
-void Disconnect();
 
 bool GetAutoCommit();
 bool SetAutoCommit(bool value);

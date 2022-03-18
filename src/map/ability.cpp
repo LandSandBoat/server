@@ -226,7 +226,7 @@ uint16 CAbility::getVE() const
 
 /************************************************************************
  *                                                                       *
- *  Получаем/Устанавливаем сообщение способности                         *
+ *  Получаем/Устанавливаем message способности                         *
  *                                                                       *
  ************************************************************************/
 
@@ -364,26 +364,26 @@ namespace ability
                     continue;
                 }
 
-                CAbility* PAbility = new CAbility(Sql_GetIntData(SqlHandle, 0));
+                CAbility* PAbility = new CAbility(sql::GetIntData(0));
 
-                PAbility->setMobSkillID(Sql_GetIntData(SqlHandle, 1));
+                PAbility->setMobSkillID(sql::GetIntData(1));
                 PAbility->setName(sql::GetData(2));
-                PAbility->setJob((JOBTYPE)Sql_GetIntData(SqlHandle, 3));
-                PAbility->setLevel(Sql_GetIntData(SqlHandle, 4));
-                PAbility->setValidTarget(Sql_GetIntData(SqlHandle, 5));
-                PAbility->setRecastTime(Sql_GetIntData(SqlHandle, 6));
-                PAbility->setMessage(Sql_GetIntData(SqlHandle, 7));
+                PAbility->setJob((JOBTYPE)sql::GetIntData(3));
+                PAbility->setLevel(sql::GetIntData(4));
+                PAbility->setValidTarget(sql::GetIntData(5));
+                PAbility->setRecastTime(sql::GetIntData(6));
+                PAbility->setMessage(sql::GetIntData(7));
                 // PAbility->setMessage(Sql_GetIntData(SqlHandle,8));
-                PAbility->setAnimationID(Sql_GetIntData(SqlHandle, 9));
-                PAbility->setAnimationTime(std::chrono::milliseconds(Sql_GetIntData(SqlHandle, 10)));
-                PAbility->setCastTime(std::chrono::milliseconds(Sql_GetIntData(SqlHandle, 11)));
+                PAbility->setAnimationID(sql::GetIntData(9));
+                PAbility->setAnimationTime(std::chrono::milliseconds(sql::GetIntData(10)));
+                PAbility->setCastTime(std::chrono::milliseconds(sql::GetIntData(11)));
                 PAbility->setActionType(static_cast<ACTIONTYPE>(sql::GetUIntData(12)));
-                PAbility->setRange(Sql_GetFloatData(SqlHandle, 13));
-                PAbility->setAOE(Sql_GetIntData(SqlHandle, 14));
-                PAbility->setRecastId(Sql_GetIntData(SqlHandle, 15));
-                PAbility->setCE(Sql_GetIntData(SqlHandle, 16));
-                PAbility->setVE(Sql_GetIntData(SqlHandle, 17));
-                PAbility->setMeritModID(Sql_GetIntData(SqlHandle, 18));
+                PAbility->setRange(sql::GetFloatData(13));
+                PAbility->setAOE(sql::GetIntData(14));
+                PAbility->setRecastId(sql::GetIntData(15));
+                PAbility->setCE(sql::GetIntData(16));
+                PAbility->setVE(sql::GetIntData(17));
+                PAbility->setMeritModID(sql::GetIntData(18));
                 PAbility->setAddType(sql::GetUIntData(19));
 
                 PAbilityList[PAbility->getID()] = PAbility;

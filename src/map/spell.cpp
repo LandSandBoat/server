@@ -438,7 +438,7 @@ namespace spell
                 CSpell* PSpell = nullptr;
                 SpellID id     = (SpellID)sql::GetUIntData(0);
 
-                if ((SPELLGROUP)Sql_GetIntData(SqlHandle, 3) == SPELLGROUP_BLUE)
+                if ((SPELLGROUP)sql::GetIntData(3) == SPELLGROUP_BLUE)
                 {
                     PSpell = new CBlueSpell(id);
                 }
@@ -449,30 +449,30 @@ namespace spell
 
                 PSpell->setName(sql::GetData(1));
                 PSpell->setJob(sql::GetData(2));
-                PSpell->setSpellGroup((SPELLGROUP)Sql_GetIntData(SqlHandle, 3));
-                PSpell->setSpellFamily((SPELLFAMILY)Sql_GetIntData(SqlHandle, 4));
-                PSpell->setValidTarget(Sql_GetIntData(SqlHandle, 5));
-                PSpell->setSkillType(Sql_GetIntData(SqlHandle, 6));
-                PSpell->setCastTime(Sql_GetIntData(SqlHandle, 7));
-                PSpell->setRecastTime(Sql_GetIntData(SqlHandle, 8));
-                PSpell->setAnimationID(Sql_GetIntData(SqlHandle, 9));
-                PSpell->setAnimationTime(Sql_GetIntData(SqlHandle, 10));
-                PSpell->setMPCost(Sql_GetIntData(SqlHandle, 11));
-                PSpell->setAOE(Sql_GetIntData(SqlHandle, 12));
-                PSpell->setBase(Sql_GetIntData(SqlHandle, 13));
-                PSpell->setElement(Sql_GetIntData(SqlHandle, 14));
-                PSpell->setZoneMisc(Sql_GetIntData(SqlHandle, 15));
-                PSpell->setMultiplier((float)Sql_GetIntData(SqlHandle, 16));
-                PSpell->setMessage(Sql_GetIntData(SqlHandle, 17));
-                PSpell->setMagicBurstMessage(Sql_GetIntData(SqlHandle, 18));
-                PSpell->setCE(Sql_GetIntData(SqlHandle, 19));
-                PSpell->setVE(Sql_GetIntData(SqlHandle, 20));
-                PSpell->setRequirements(Sql_GetIntData(SqlHandle, 21));
+                PSpell->setSpellGroup((SPELLGROUP)sql::GetIntData(3));
+                PSpell->setSpellFamily((SPELLFAMILY)sql::GetIntData(4));
+                PSpell->setValidTarget(sql::GetIntData(5));
+                PSpell->setSkillType(sql::GetIntData(6));
+                PSpell->setCastTime(sql::GetIntData(7));
+                PSpell->setRecastTime(sql::GetIntData(8));
+                PSpell->setAnimationID(sql::GetIntData(9));
+                PSpell->setAnimationTime(sql::GetIntData(10));
+                PSpell->setMPCost(sql::GetIntData(11));
+                PSpell->setAOE(sql::GetIntData(12));
+                PSpell->setBase(sql::GetIntData(13));
+                PSpell->setElement(sql::GetIntData(14));
+                PSpell->setZoneMisc(sql::GetIntData(15));
+                PSpell->setMultiplier((float)sql::GetIntData(16));
+                PSpell->setMessage(sql::GetIntData(17));
+                PSpell->setMagicBurstMessage(sql::GetIntData(18));
+                PSpell->setCE(sql::GetIntData(19));
+                PSpell->setVE(sql::GetIntData(20));
+                PSpell->setRequirements(sql::GetIntData(21));
 
                 sql::GetData(22, &contentTag, nullptr);
                 PSpell->setContentTag((int8*)contentTag);
 
-                PSpell->setRange(static_cast<float>(Sql_GetIntData(SqlHandle, 23)) / 10);
+                PSpell->setRange(static_cast<float>(sql::GetIntData(23)) / 10);
 
                 if (PSpell->getAOE())
                 {
@@ -559,7 +559,7 @@ namespace spell
                 }
 
                 // Sanity check the spell ID
-                uint16 spellId = Sql_GetIntData(SqlHandle, 0);
+                uint16 spellId = sql::GetIntData(0);
 
                 if (PSpellList[spellId] == nullptr)
                 {
@@ -567,17 +567,16 @@ namespace spell
                     continue;
                 }
 
-                ((CBlueSpell*)PSpellList[spellId])->setMonsterSkillId(Sql_GetIntData(SqlHandle, 1));
-                ((CBlueSpell*)PSpellList[spellId])->setSetPoints(Sql_GetIntData(SqlHandle, 2));
-                ((CBlueSpell*)PSpellList[spellId])->setTraitCategory(Sql_GetIntData(SqlHandle, 3));
-                ((CBlueSpell*)PSpellList[spellId])->setTraitWeight(Sql_GetIntData(SqlHandle, 4));
-                ((CBlueSpell*)PSpellList[spellId])->setPrimarySkillchain(Sql_GetIntData(SqlHandle, 5));
-                ((CBlueSpell*)PSpellList[spellId])->setSecondarySkillchain(Sql_GetIntData(SqlHandle, 6));
-                PMobSkillToBlueSpell.insert(std::make_pair(Sql_GetIntData(SqlHandle, 1), spellId));
+                ((CBlueSpell*)PSpellList[spellId])->setMonsterSkillId(sql::GetIntData(1));
+                ((CBlueSpell*)PSpellList[spellId])->setSetPoints(sql::GetIntData(2));
+                ((CBlueSpell*)PSpellList[spellId])->setTraitCategory(sql::GetIntData(3));
+                ((CBlueSpell*)PSpellList[spellId])->setTraitWeight(sql::GetIntData(4));
+                ((CBlueSpell*)PSpellList[spellId])->setPrimarySkillchain(sql::GetIntData(5));
+                ((CBlueSpell*)PSpellList[spellId])->setSecondarySkillchain(sql::GetIntData(6));
+                PMobSkillToBlueSpell.insert(std::make_pair(sql::GetIntData(1), spellId));
             }
         }
-        ret = Sql_Query(
-            SqlHandle,
+        ret = sql::Query(
             "SELECT spellId, modId, value FROM blue_spell_mods WHERE spellId IN (SELECT spellId FROM spell_list LEFT JOIN blue_spell_list USING (spellId))");
 
         if (ret != SQL_ERROR && sql::NumRows() != 0)
@@ -586,7 +585,7 @@ namespace spell
             {
                 uint16 spellId = (uint16)sql::GetUIntData(0);
                 Mod    modID   = static_cast<Mod>(sql::GetUIntData(1));
-                int16  value   = (int16)Sql_GetIntData(SqlHandle, 2);
+                int16  value   = (int16)sql::GetIntData(2);
 
                 if (PSpellList[spellId])
                 {

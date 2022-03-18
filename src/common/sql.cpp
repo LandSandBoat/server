@@ -78,6 +78,7 @@ struct s_column_length
 
 int32 Connect(const char* user, const char* passwd, const char* host, uint16 port, const char* db)
 {
+    self = new Sql_t{};
     mysql_init(&self->handle);
     if (self == nullptr)
     {
@@ -104,7 +105,29 @@ int32 Connect(const char* user, const char* passwd, const char* host, uint16 por
     gPort = port;
     gDb = db;
 
+    Keepalive("MainSqlHandle");
+
     return SQL_SUCCESS;
+}
+
+/************************************************************************
+ *                                                                        *
+ *                                                                        *
+ *                                                                        *
+ ************************************************************************/
+
+void Disconnect()
+{
+    if (self)
+    {
+        mysql_close(&self->handle);
+        FreeResult();
+        if (!self->keepaliveTaskName.empty())
+        {
+            CTaskMgr::getInstance()->RemoveTask(self->keepaliveTaskName);
+        }
+        delete self;
+    }
 }
 
 /************************************************************************
@@ -264,7 +287,7 @@ int32 Keepalive(std::string const& keepaliveTaskName)
 
     // establish keepalive
     ping_interval = timeout + offset - reserve;
-    ShowInfo("Adding Keepalive task (%s) for every %i minutes", keepaliveTaskName, ping_interval / 60);
+    ShowInfo("Adding SQL Keepalive task for every %i minutes", ping_interval / 60);
     CTaskMgr::getInstance()->AddTask(keepaliveTaskName, server_clock::now() + std::chrono::seconds(ping_interval), self, CTaskMgr::TASK_INTERVAL,
                                      KeepaliveTimer, std::chrono::seconds(ping_interval));
 
@@ -357,7 +380,7 @@ uint64 AffectedRows()
  *                                                                        *
  ************************************************************************/
 
-uint64 Sql_LastInsertId()
+uint64 LastInsertId()
 {
     if (self)
     {
@@ -550,26 +573,6 @@ void FreeResult()
         self->result  = nullptr;
         self->row     = nullptr;
         self->lengths = nullptr;
-    }
-}
-
-/************************************************************************
- *                                                                        *
- *                                                                        *
- *                                                                        *
- ************************************************************************/
-
-void Disconnect()
-{
-    if (self)
-    {
-        mysql_close(&self->handle);
-        FreeResult();
-        if (!self->keepaliveTaskName.empty())
-        {
-            CTaskMgr::getInstance()->RemoveTask(self->keepaliveTaskName);
-        }
-        delete self;
     }
 }
 

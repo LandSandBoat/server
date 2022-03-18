@@ -42,9 +42,6 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "utils/jailutils.h"
 #include "utils/zoneutils.h"
 
-// Use global SqlHandle
-extern Sql_t* SqlHandle;
-
 namespace message
 {
     zmq::context_t zContext;
@@ -493,9 +490,9 @@ namespace message
                                 {
                                     while (sql::NextRow() == SQL_SUCCESS)
                                     {
-                                        X = (float)Sql_GetFloatData(SqlHandle, 0);
-                                        Y = (float)Sql_GetFloatData(SqlHandle, 1);
-                                        Z = (float)Sql_GetFloatData(SqlHandle, 2);
+                                        X = (float)sql::GetFloatData(0);
+                                        Y = (float)sql::GetFloatData(1);
+                                        Z = (float)sql::GetFloatData(2);
                                     }
                                 }
                             }

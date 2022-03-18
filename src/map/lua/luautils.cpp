@@ -108,7 +108,7 @@ namespace luautils
     int32 init()
     {
         TracyZoneScoped;
-        ShowStatus("luautils::init:lua initializing...");
+        ShowStatus("luautils::init:lua initializing");
 
         lua = sol::state();
         lua.open_libraries();
@@ -1457,7 +1457,7 @@ namespace luautils
                 {
                     for (auto column : magianColumns)
                     {
-                        table[column] = (int32)Sql_GetIntData(SqlHandle, field++);
+                        table[column] = (int32)sql::GetIntData(field++);
                     }
                 }
             }
@@ -1475,7 +1475,7 @@ namespace luautils
                         int32 field{ 0 };
                         for (auto column : magianColumns)
                         {
-                            inner_table[column] = (int32)Sql_GetIntData(SqlHandle, field++);
+                            inner_table[column] = (int32)sql::GetIntData(field++);
                         }
                     }
                 }
@@ -1509,7 +1509,7 @@ namespace luautils
             int32 field{ 0 };
             while (sql::NextRow() == 0)
             {
-                int32 childTrial = Sql_GetIntData(SqlHandle, 0);
+                int32 childTrial = sql::GetIntData(0);
                 table[++field]   = childTrial;
             }
 
@@ -3997,7 +3997,7 @@ namespace luautils
 
         if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
         {
-            value = (int32)Sql_GetIntData(SqlHandle, 0);
+            value = (int32)sql::GetIntData(0);
         }
 
         return value;
@@ -4254,9 +4254,9 @@ namespace luautils
             if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
             {
                 PMob->m_SpawnPoint.rotation = xirand::GetRandomNumber(256);
-                PMob->m_SpawnPoint.x        = Sql_GetFloatData(SqlHandle, 0);
-                PMob->m_SpawnPoint.y        = Sql_GetFloatData(SqlHandle, 1);
-                PMob->m_SpawnPoint.z        = Sql_GetFloatData(SqlHandle, 2);
+                PMob->m_SpawnPoint.x        = sql::GetFloatData(0);
+                PMob->m_SpawnPoint.y        = sql::GetFloatData(1);
+                PMob->m_SpawnPoint.z        = sql::GetFloatData(2);
                 // ShowDebug(CL_RED"UpdateNMSpawnPoint: After %i - %f, %f, %f, %i", r,
                 // PMob->m_SpawnPoint.x,PMob->m_SpawnPoint.y,PMob->m_SpawnPoint.z,PMob->m_SpawnPoint.rotation);
             }

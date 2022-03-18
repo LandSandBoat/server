@@ -691,7 +691,7 @@ namespace roeutils
 
             while (sql::NextRow() == SQL_SUCCESS)
             {
-                int32 new_eval = Sql_GetIntData(SqlHandle, 1);
+                int32 new_eval = sql::GetIntData(1);
 
                 if (new_eval < prev_eval)
                 {
@@ -704,7 +704,7 @@ namespace roeutils
                 }
 
                 prev_eval                                                             = new_eval;
-                roeutils::RoeSystem.unityLeaderRank[Sql_GetIntData(SqlHandle, 0) - 1] = currentRank;
+                roeutils::RoeSystem.unityLeaderRank[sql::GetIntData(0) - 1] = currentRank;
             }
         }
     }

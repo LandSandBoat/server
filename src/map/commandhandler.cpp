@@ -119,15 +119,15 @@ int32 CCommandHandler::call(sol::state& lua, CCharEntity* PChar, const int8* com
         if (map_config.audit_gm_cmd <= permission && map_config.audit_gm_cmd > 0)
         {
             char escaped_name[16 * 2 + 1];
-            Sql_EscapeString(SqlHandle, escaped_name, PChar->name.c_str());
+            sql::EscapeString(escaped_name, PChar->name.c_str());
 
             std::string escaped_gm_cmd;
             escaped_gm_cmd.reserve(cmdname.length() * 2 + 1);
-            Sql_EscapeString(SqlHandle, escaped_gm_cmd.data(), (char*)cmdname.c_str());
+            sql::EscapeString(escaped_gm_cmd.data(), (char*)cmdname.c_str());
 
             std::string escaped_full_string;
             escaped_full_string.reserve(strlen((char*)commandline) * 2 + 1);
-            Sql_EscapeString(SqlHandle, escaped_full_string.data(), (char*)commandline);
+            sql::EscapeString(escaped_full_string.data(), (char*)commandline);
 
             const char* fmtQuery = "INSERT into audit_gm (date_time,gm_name,command,full_string) VALUES(current_timestamp(),'%s','%s','%s')";
             if (sql::Query(fmtQuery, escaped_name, escaped_gm_cmd.data(), escaped_full_string.data()) == SQL_ERROR)

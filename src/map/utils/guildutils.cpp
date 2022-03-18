@@ -66,7 +66,7 @@ namespace guildutils
 
             while (sql::NextRow() == SQL_SUCCESS)
             {
-                g_PGuildList.push_back(new CGuild(Sql_GetIntData(SqlHandle, 0), (const char*)sql::GetData(1)));
+                g_PGuildList.push_back(new CGuild(sql::GetIntData(0), (const char*)sql::GetData(1)));
             }
         }
         XI_DEBUG_BREAK_IF(g_PGuildShopList.size() != 0);
@@ -79,7 +79,7 @@ namespace guildutils
 
             while (sql::NextRow() == SQL_SUCCESS)
             {
-                g_PGuildShopList.push_back(new CItemContainer(Sql_GetIntData(SqlHandle, 0)));
+                g_PGuildShopList.push_back(new CItemContainer(sql::GetIntData(0)));
             }
         }
         for (auto* PGuildShop : g_PGuildShopList)
@@ -97,13 +97,13 @@ namespace guildutils
 
                 while (sql::NextRow() == SQL_SUCCESS)
                 {
-                    CItemShop* PItem = new CItemShop(Sql_GetIntData(SqlHandle, 0));
+                    CItemShop* PItem = new CItemShop(sql::GetIntData(0));
 
-                    PItem->setMinPrice(Sql_GetIntData(SqlHandle, 1));
-                    PItem->setMaxPrice(Sql_GetIntData(SqlHandle, 2));
-                    PItem->setStackSize(Sql_GetIntData(SqlHandle, 3));
-                    PItem->setDailyIncrease(Sql_GetIntData(SqlHandle, 4));
-                    PItem->setInitialQuantity(Sql_GetIntData(SqlHandle, 5));
+                    PItem->setMinPrice(sql::GetIntData(1));
+                    PItem->setMaxPrice(sql::GetIntData(2));
+                    PItem->setStackSize(sql::GetIntData(3));
+                    PItem->setDailyIncrease(sql::GetIntData(4));
+                    PItem->setInitialQuantity(sql::GetIntData(5));
 
                     PItem->setQuantity(PItem->IsDailyIncrease() ? PItem->getInitialQuantity() : 0);
                     PItem->setBasePrice((uint32)(PItem->getMinPrice() + ((float)(PItem->getStackSize() - PItem->getQuantity()) / PItem->getStackSize()) *

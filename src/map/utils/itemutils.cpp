@@ -427,7 +427,7 @@ namespace itemutils
                         ((CItemWeapon*)PItem)->setILvlSkill(sql::GetUIntData(26));
                         ((CItemWeapon*)PItem)->setILvlParry(sql::GetUIntData(27));
                         ((CItemWeapon*)PItem)->setILvlMacc(sql::GetUIntData(28));
-                        ((CItemWeapon*)PItem)->setDelay((Sql_GetIntData(SqlHandle, 29) * 1000) / 60);
+                        ((CItemWeapon*)PItem)->setDelay((sql::GetIntData(29) * 1000) / 60);
                         ((CItemWeapon*)PItem)->setDamage(sql::GetUIntData(30));
                         ((CItemWeapon*)PItem)->setDmgType(static_cast<DAMAGE_TYPE>(sql::GetUIntData(31)));
                         ((CItemWeapon*)PItem)->setMaxHit(sql::GetUIntData(32));
@@ -450,8 +450,8 @@ namespace itemutils
             }
         }
 
-        ret = Sql_Query(SqlHandle,
-                        "SELECT itemId, modId, value FROM item_mods WHERE itemId IN (SELECT itemId FROM item_basic LEFT JOIN item_equipment USING (itemId))");
+        ret = sql::Query(
+            "SELECT itemId, modId, value FROM item_mods WHERE itemId IN (SELECT itemId FROM item_basic LEFT JOIN item_equipment USING (itemId))");
 
         if (ret != SQL_ERROR && sql::NumRows() != 0)
         {
@@ -459,7 +459,7 @@ namespace itemutils
             {
                 uint16 ItemID = (uint16)sql::GetUIntData(0);
                 Mod    modID  = static_cast<Mod>(sql::GetUIntData(1));
-                int16  value  = (int16)Sql_GetIntData(SqlHandle, 2);
+                int16  value  = (int16)sql::GetIntData(2);
 
                 if ((g_pItemList[ItemID] != nullptr) && g_pItemList[ItemID]->isType(ITEM_EQUIPMENT))
                 {
@@ -468,8 +468,7 @@ namespace itemutils
             }
         }
 
-        ret = Sql_Query(
-            SqlHandle,
+        ret = sql::Query(
             "SELECT itemId, modId, value, petType FROM item_mods_pet WHERE itemId IN (SELECT itemId FROM item_basic LEFT JOIN item_equipment USING (itemId))");
 
         if (ret != SQL_ERROR && sql::NumRows() != 0)
@@ -478,8 +477,8 @@ namespace itemutils
             {
                 uint16     ItemID  = (uint16)sql::GetUIntData(0);
                 Mod        modID   = static_cast<Mod>(sql::GetUIntData(1));
-                int16      value   = (int16)Sql_GetIntData(SqlHandle, 2);
-                PetModType petType = static_cast<PetModType>(Sql_GetIntData(SqlHandle, 3));
+                int16      value   = (int16)sql::GetIntData(2);
+                PetModType petType = static_cast<PetModType>(sql::GetIntData(3));
 
                 if ((g_pItemList[ItemID]) && g_pItemList[ItemID]->isType(ITEM_EQUIPMENT))
                 {
@@ -497,9 +496,9 @@ namespace itemutils
             {
                 uint16 ItemID      = (uint16)sql::GetUIntData(0);
                 Mod    modID       = static_cast<Mod>(sql::GetUIntData(1));
-                int16  value       = (int16)Sql_GetIntData(SqlHandle, 2);
-                LATENT latentId    = static_cast<LATENT>(Sql_GetIntData(SqlHandle, 3));
-                uint16 latentParam = (uint16)Sql_GetIntData(SqlHandle, 4);
+                int16  value       = (int16)sql::GetIntData(2);
+                LATENT latentId    = static_cast<LATENT>(sql::GetIntData(3));
+                uint16 latentParam = (uint16)sql::GetIntData(4);
 
                 if ((g_pItemList[ItemID] != nullptr) && g_pItemList[ItemID]->isType(ITEM_EQUIPMENT))
                 {
@@ -532,14 +531,14 @@ namespace itemutils
 
                 DropList_t* dropList = g_pDropList[DropID];
 
-                uint16 ItemID   = (uint16)Sql_GetIntData(SqlHandle, 1);
-                uint8  DropType = (uint8)Sql_GetIntData(SqlHandle, 2);
-                uint16 DropRate = (uint16)Sql_GetIntData(SqlHandle, 3);
+                uint16 ItemID   = (uint16)sql::GetIntData(1);
+                uint8  DropType = (uint8)sql::GetIntData(2);
+                uint16 DropRate = (uint16)sql::GetIntData(3);
 
                 if (DropType == DROP_GROUPED)
                 {
-                    uint8  GroupId   = (uint8)Sql_GetIntData(SqlHandle, 4);
-                    uint16 GroupRate = (uint16)Sql_GetIntData(SqlHandle, 5);
+                    uint8  GroupId   = (uint8)sql::GetIntData(4);
+                    uint16 GroupRate = (uint16)sql::GetIntData(5);
                     while (GroupId >= dropList->Groups.size())
                     {
                         dropList->Groups.emplace_back(GroupRate);

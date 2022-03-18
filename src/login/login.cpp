@@ -107,13 +107,12 @@ int32 do_init(int32 argc, char** argv)
     login_lobbyview_fd = makeListenBind_tcp(login_config.login_view_ip.c_str(), login_config.login_view_port, connect_client_lobbyview);
     ShowStatus("The login-server-lobbyview is ready (Server is listening on the port %u).", login_config.login_view_port);
 
-    SqlHandle = Sql_Malloc();
-    if (Sql_Connect(SqlHandle, login_config.mysql_login.c_str(), login_config.mysql_password.c_str(), login_config.mysql_host.c_str(), login_config.mysql_port,
+    if (sql::Connect(login_config.mysql_login.c_str(), login_config.mysql_password.c_str(), login_config.mysql_host.c_str(), login_config.mysql_port,
                     login_config.mysql_database.c_str()) == SQL_ERROR)
     {
         exit(EXIT_FAILURE);
     }
-    Sql_Keepalive(SqlHandle, "LoginKeepalive");
+    sql::Keepalive("LoginKeepalive");
 
     const char* fmtQuery = "OPTIMIZE TABLE `accounts`,`accounts_banned`, `accounts_sessions`, `chars`,`char_equip`, \
                            `char_inventory`, `char_jobs`,`char_look`,`char_stats`, `char_vars`, `char_bazaar_msg`, \
@@ -124,19 +123,17 @@ int32 do_init(int32 argc, char** argv)
         ShowError("do_init: Impossible to optimise tables");
     }
 
-    ShowStatus("The login-server is ready to work...");
-    messageThread = std::thread(message_server_init);
-
     if (!login_config.account_creation)
     {
         ShowStatus("New account creation is disabled in login_config.");
     }
 
-    bool attached = isatty(0);
+    messageThread = std::thread(message_server_init);
 
+    bool attached = isatty(0);
     if (attached)
     {
-        ShowStatus("Console input thread is ready...");
+        ShowStatus("Console input thread is ready");
         consoleInputThread = std::thread([&]() {
             // ctrl c apparently causes log spam
             auto lastInputTime = server_clock::now();
@@ -221,6 +218,11 @@ int32 do_init(int32 argc, char** argv)
             ShowStatus("Console input thread exiting..\r");
         });
     }
+
+    // Small pause to wait for the console thread to set up
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    ShowStatus("The login-server is ready to work!");
+
     return 0;
 }
 
@@ -235,11 +237,6 @@ void do_final(int code)
     if (consoleInputThread.joinable())
     {
         consoleInputThread.join();
-    }
-    if (SqlHandle)
-    {
-        Sql_Free(SqlHandle);
-        SqlHandle = nullptr;
     }
 
     timer_final();

@@ -31,10 +31,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 CDataLoader::CDataLoader()
 {
-    SqlHandle = Sql_Malloc();
-
     //  ShowStatus("sqlhandle is allocating");
-    if (Sql_Connect(SqlHandle, search_config.mysql_login.c_str(), search_config.mysql_password.c_str(), search_config.mysql_host.c_str(),
+    if (sql::Connect(search_config.mysql_login.c_str(), search_config.mysql_password.c_str(), search_config.mysql_host.c_str(),
                     search_config.mysql_port, search_config.mysql_database.c_str()) == SQL_ERROR)
     {
         ShowError("cant connect");
@@ -43,7 +41,6 @@ CDataLoader::CDataLoader()
 
 CDataLoader::~CDataLoader()
 {
-    Sql_Free(SqlHandle);
 }
 
 /************************************************************************
@@ -112,12 +109,12 @@ std::vector<ahItem*> CDataLoader::GetAHItemsToCategory(uint8 AHCategoryID, int8*
         {
             ahItem* PAHItem = new ahItem;
 
-            PAHItem->ItemID = Sql_GetIntData(SqlHandle, 0);
+            PAHItem->ItemID = sql::GetIntData(0);
 
-            PAHItem->SingleAmount = Sql_GetIntData(SqlHandle, 2);
-            PAHItem->StackAmount = Sql_GetIntData(SqlHandle, 3);
+            PAHItem->SingleAmount = sql::GetIntData(2);
+            PAHItem->StackAmount = sql::GetIntData(3);
 
-            if (Sql_GetIntData(SqlHandle, 1) == 1)
+            if (sql::GetIntData(1) == 1)
             {
                 PAHItem->StackAmount = -1;
             }
@@ -228,15 +225,15 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
             memcpy(PPlayer->name, sql::GetData(2), 15);
 
             PPlayer->id       = (uint32)sql::GetUIntData(0);
-            PPlayer->zone     = (uint16)Sql_GetIntData(SqlHandle, 3);
-            PPlayer->prevzone = (uint16)Sql_GetIntData(SqlHandle, 4);
-            PPlayer->nation   = (uint8)Sql_GetIntData(SqlHandle, 5);
-            PPlayer->mjob     = (uint8)Sql_GetIntData(SqlHandle, 11);
-            PPlayer->sjob     = (uint8)Sql_GetIntData(SqlHandle, 12);
-            PPlayer->mlvl     = (uint8)Sql_GetIntData(SqlHandle, 13);
-            PPlayer->slvl     = (uint8)Sql_GetIntData(SqlHandle, 14);
-            PPlayer->race     = (uint8)Sql_GetIntData(SqlHandle, 9);
-            PPlayer->rank     = (uint8)Sql_GetIntData(SqlHandle, 6 + PPlayer->nation);
+            PPlayer->zone     = (uint16)sql::GetIntData(3);
+            PPlayer->prevzone = (uint16)sql::GetIntData(4);
+            PPlayer->nation   = (uint8)sql::GetIntData(5);
+            PPlayer->mjob     = (uint8)sql::GetIntData(11);
+            PPlayer->sjob     = (uint8)sql::GetIntData(12);
+            PPlayer->mlvl     = (uint8)sql::GetIntData(13);
+            PPlayer->slvl     = (uint8)sql::GetIntData(14);
+            PPlayer->race     = (uint8)sql::GetIntData(9);
+            PPlayer->rank     = (uint8)sql::GetIntData(6 + PPlayer->nation);
 
             PPlayer->zone = (PPlayer->zone == 0 ? PPlayer->prevzone : PPlayer->zone);
             PPlayer->languages = (uint8)sql::GetUIntData(15);
@@ -429,14 +426,14 @@ std::list<SearchEntity*> CDataLoader::GetPartyList(uint16 PartyID, uint16 Allian
             memcpy(PPlayer->name, sql::GetData(2), 15);
 
             PPlayer->id     = (uint32)sql::GetUIntData(0);
-            PPlayer->zone   = (uint16)Sql_GetIntData(SqlHandle, 3);
-            PPlayer->nation = (uint8)Sql_GetIntData(SqlHandle, 4);
-            PPlayer->mjob   = (uint8)Sql_GetIntData(SqlHandle, 10);
-            PPlayer->sjob   = (uint8)Sql_GetIntData(SqlHandle, 11);
-            PPlayer->mlvl   = (uint8)Sql_GetIntData(SqlHandle, 12);
-            PPlayer->slvl   = (uint8)Sql_GetIntData(SqlHandle, 13);
-            PPlayer->race   = (uint8)Sql_GetIntData(SqlHandle, 8);
-            PPlayer->rank   = (uint8)Sql_GetIntData(SqlHandle, 5 + PPlayer->nation);
+            PPlayer->zone   = (uint16)sql::GetIntData(3);
+            PPlayer->nation = (uint8)sql::GetIntData(4);
+            PPlayer->mjob   = (uint8)sql::GetIntData(10);
+            PPlayer->sjob   = (uint8)sql::GetIntData(11);
+            PPlayer->mlvl   = (uint8)sql::GetIntData(12);
+            PPlayer->slvl   = (uint8)sql::GetIntData(13);
+            PPlayer->race   = (uint8)sql::GetIntData(8);
+            PPlayer->rank   = (uint8)sql::GetIntData(5 + PPlayer->nation);
             PPlayer->languages = (uint8)sql::GetUIntData(14);
             PPlayer->mentor = sql::GetUIntData(15) & NFLAG_MENTOR;
             PPlayer->seacom_type = (uint8)sql::GetUIntData(16);
@@ -518,18 +515,18 @@ std::list<SearchEntity*> CDataLoader::GetLinkshellList(uint32 LinkshellID)
             memcpy(PPlayer->name, sql::GetData(2), 15);
 
             PPlayer->id             = (uint32)sql::GetUIntData(0);
-            PPlayer->zone           = (uint16)Sql_GetIntData(SqlHandle, 3);
-            PPlayer->nation         = (uint8)Sql_GetIntData(SqlHandle, 4);
-            PPlayer->mjob           = (uint8)Sql_GetIntData(SqlHandle, 10);
-            PPlayer->sjob           = (uint8)Sql_GetIntData(SqlHandle, 11);
-            PPlayer->mlvl           = (uint8)Sql_GetIntData(SqlHandle, 12);
-            PPlayer->slvl           = (uint8)Sql_GetIntData(SqlHandle, 13);
-            PPlayer->race           = (uint8)Sql_GetIntData(SqlHandle, 8);
-            PPlayer->rank           = (uint8)Sql_GetIntData(SqlHandle, 5 + PPlayer->nation);
-            PPlayer->linkshellid1   = Sql_GetIntData(SqlHandle, 14);
-            PPlayer->linkshellid2   = Sql_GetIntData(SqlHandle, 15);
-            PPlayer->linkshellrank1 = Sql_GetIntData(SqlHandle, 16);
-            PPlayer->linkshellrank2 = Sql_GetIntData(SqlHandle, 17);
+            PPlayer->zone           = (uint16)sql::GetIntData(3);
+            PPlayer->nation         = (uint8)sql::GetIntData(4);
+            PPlayer->mjob           = (uint8)sql::GetIntData(10);
+            PPlayer->sjob           = (uint8)sql::GetIntData(11);
+            PPlayer->mlvl           = (uint8)sql::GetIntData(12);
+            PPlayer->slvl           = (uint8)sql::GetIntData(13);
+            PPlayer->race           = (uint8)sql::GetIntData(8);
+            PPlayer->rank           = (uint8)sql::GetIntData(5 + PPlayer->nation);
+            PPlayer->linkshellid1   = sql::GetIntData(14);
+            PPlayer->linkshellid2   = sql::GetIntData(15);
+            PPlayer->linkshellrank1 = sql::GetIntData(16);
+            PPlayer->linkshellrank2 = sql::GetIntData(17);
 
             uint32 partyid  = (uint32)sql::GetUIntData(1);
             uint32 nameflag = (uint32)sql::GetUIntData(9);
@@ -584,9 +581,6 @@ std::string CDataLoader::GetSearchComment(uint32 playerId)
 
 void CDataLoader::ExpireAHItems()
 {
-    Sql_Connect(sqlH2, search_config.mysql_login.c_str(), search_config.mysql_password.c_str(), search_config.mysql_host.c_str(), search_config.mysql_port,
-                search_config.mysql_database.c_str());
-
     std::string qStr            = "SELECT T0.id,T0.itemid,T1.stacksize, T0.stack, T0.seller FROM auction_house T0 INNER JOIN item_basic T1 ON \
                             T0.itemid = T1.itemid WHERE datediff(now(),from_unixtime(date)) >=%u AND buyer_name IS NULL;";
     int32       ret             = sql::Query(qStr.c_str(), search_config.expire_days);
@@ -601,7 +595,7 @@ void CDataLoader::ExpireAHItems()
             uint8  itemStack = (uint8)sql::GetUIntData(2);
             uint8  ahStack   = (uint8)sql::GetUIntData(3);
             uint32 seller    = (uint32)sql::GetUIntData(4);
-            ret              = Sql_Query(sqlH2,
+            ret              = sql::Query(
                             "INSERT INTO delivery_box (charid, charname, box, itemid, itemsubid, quantity, senderid, sender) VALUES "
                             "(%u, (select charname from chars where charid=%u), 1, %u, 0, %u, 0, 'AH-Jeuno');",
                             seller, seller, itemID, ahStack == 1 ? itemStack : 1);
@@ -609,7 +603,7 @@ void CDataLoader::ExpireAHItems()
             if (ret != SQL_ERROR && sql::NumRows() != 0)
             {
                 // delete the item from the auction house
-                Sql_Query(sqlH2, "DELETE FROM auction_house WHERE id= %u", saleID);
+                sql::Query("DELETE FROM auction_house WHERE id= %u", saleID);
             }
         }
     }

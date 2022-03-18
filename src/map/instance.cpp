@@ -107,9 +107,9 @@ void CInstance::LoadInstance()
 
         m_timeLimit                       = std::chrono::minutes(sql::GetUIntData(1));
         m_entrance                        = sql::GetUIntData(2);
-        m_entryloc.x                      = Sql_GetFloatData(SqlHandle, 3);
-        m_entryloc.y                      = Sql_GetFloatData(SqlHandle, 4);
-        m_entryloc.z                      = Sql_GetFloatData(SqlHandle, 5);
+        m_entryloc.x                      = sql::GetFloatData(3);
+        m_entryloc.y                      = sql::GetFloatData(4);
+        m_entryloc.z                      = sql::GetFloatData(5);
         m_entryloc.rotation               = sql::GetUIntData(6);
         m_zone_music_override.m_songDay   = sql::GetUIntData(7);
         m_zone_music_override.m_songNight = sql::GetUIntData(8);

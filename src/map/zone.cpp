@@ -311,12 +311,12 @@ void CZone::LoadZoneLines()
         {
             zoneLine_t* zl = new zoneLine_t;
 
-            zl->m_zoneLineID     = (uint32)Sql_GetIntData(SqlHandle, 0);
-            zl->m_toZone         = (uint16)Sql_GetIntData(SqlHandle, 1);
-            zl->m_toPos.x        = Sql_GetFloatData(SqlHandle, 2);
-            zl->m_toPos.y        = Sql_GetFloatData(SqlHandle, 3);
-            zl->m_toPos.z        = Sql_GetFloatData(SqlHandle, 4);
-            zl->m_toPos.rotation = (uint8)Sql_GetIntData(SqlHandle, 5);
+            zl->m_zoneLineID     = (uint32)sql::GetIntData(0);
+            zl->m_toZone         = (uint16)sql::GetIntData(1);
+            zl->m_toPos.x        = sql::GetFloatData(2);
+            zl->m_toPos.y        = sql::GetFloatData(3);
+            zl->m_toPos.z        = sql::GetFloatData(4);
+            zl->m_toPos.rotation = (uint8)sql::GetIntData(5);
 
             m_zoneLineList.push_back(zl);
         }
@@ -401,7 +401,7 @@ void CZone::LoadZoneSettings()
         m_zoneMusic.m_songNight = (uint8)sql::GetUIntData(4);           // background music (night)
         m_zoneMusic.m_bSongS    = (uint8)sql::GetUIntData(5);           // solo battle music
         m_zoneMusic.m_bSongM    = (uint8)sql::GetUIntData(6);           // party battle music
-        m_tax                   = (uint16)(Sql_GetFloatData(SqlHandle, 7) * 100); // tax for bazaar
+        m_tax                   = (uint16)(sql::GetFloatData(7) * 100); // tax for bazaar
         m_miscMask              = (uint16)sql::GetUIntData(8);
 
         m_zoneType = static_cast<ZONE_TYPE>(sql::GetUIntData(9));

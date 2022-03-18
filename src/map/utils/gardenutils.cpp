@@ -68,10 +68,10 @@ namespace gardenutils
 
                 GardenResultList_t& resultList = g_pGardenResultMap[uid];
 
-                uint16 ItemID      = (uint16)Sql_GetIntData(SqlHandle, 4);
-                uint8  MinQuantity = (uint8)Sql_GetIntData(SqlHandle, 5);
-                uint8  MaxQuantity = (uint8)Sql_GetIntData(SqlHandle, 6);
-                uint8  Weight      = (uint8)Sql_GetIntData(SqlHandle, 7);
+                uint16 ItemID      = (uint16)sql::GetIntData(4);
+                uint8  MinQuantity = (uint8)sql::GetIntData(5);
+                uint8  MaxQuantity = (uint8)sql::GetIntData(6);
+                uint8  Weight      = (uint8)sql::GetIntData(7);
                 resultList.emplace_back(ItemID, MinQuantity, MaxQuantity, Weight);
             }
         }
@@ -115,7 +115,7 @@ namespace gardenutils
                         PPotItem->clearExamined();
 
                         char extra[sizeof(PItem->m_extra) * 2 + 1];
-                        Sql_EscapeStringLen(SqlHandle, extra, (const char*)PItem->m_extra, sizeof(PItem->m_extra));
+                        sql::EscapeStringLen(extra, (const char*)PItem->m_extra, sizeof(PItem->m_extra));
                         const char* Query = "UPDATE char_inventory SET extra = '%s' WHERE charid = %u AND location = %u AND slot = %u";
                         sql::Query(Query, extra, PChar->id, containerID, slotID);
 

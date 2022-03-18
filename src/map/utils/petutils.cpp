@@ -177,66 +177,66 @@ namespace petutils
             {
                 Pet_t* Pet = new Pet_t();
 
-                Pet->PetID = (uint16)Sql_GetIntData(SqlHandle, 0);
+                Pet->PetID = (uint16)sql::GetIntData(0);
                 Pet->name.insert(0, (const char*)sql::GetData(1));
 
                 memcpy(&Pet->look, sql::GetData(2), 20);
-                Pet->minLevel  = (uint8)Sql_GetIntData(SqlHandle, 3);
-                Pet->maxLevel  = (uint8)Sql_GetIntData(SqlHandle, 4);
+                Pet->minLevel  = (uint8)sql::GetIntData(3);
+                Pet->maxLevel  = (uint8)sql::GetIntData(4);
                 Pet->time      = sql::GetUIntData(5);
                 Pet->size      = sql::GetUIntData(6);
-                Pet->EcoSystem = (ECOSYSTEM)Sql_GetIntData(SqlHandle, 7);
-                Pet->m_Family  = (uint16)Sql_GetIntData(SqlHandle, 8);
-                Pet->mJob      = (uint8)Sql_GetIntData(SqlHandle, 9);
-                Pet->m_Element = (uint8)Sql_GetIntData(SqlHandle, 10);
+                Pet->EcoSystem = (ECOSYSTEM)sql::GetIntData(7);
+                Pet->m_Family  = (uint16)sql::GetIntData(8);
+                Pet->mJob      = (uint8)sql::GetIntData(9);
+                Pet->m_Element = (uint8)sql::GetIntData(10);
 
-                Pet->HPscale = Sql_GetFloatData(SqlHandle, 11);
-                Pet->MPscale = Sql_GetFloatData(SqlHandle, 12);
+                Pet->HPscale = sql::GetFloatData(11);
+                Pet->MPscale = sql::GetFloatData(12);
 
-                Pet->speed = (uint8)Sql_GetIntData(SqlHandle, 13);
+                Pet->speed = (uint8)sql::GetIntData(13);
 
-                Pet->strRank = (uint8)Sql_GetIntData(SqlHandle, 14);
-                Pet->dexRank = (uint8)Sql_GetIntData(SqlHandle, 15);
-                Pet->vitRank = (uint8)Sql_GetIntData(SqlHandle, 16);
-                Pet->agiRank = (uint8)Sql_GetIntData(SqlHandle, 17);
-                Pet->intRank = (uint8)Sql_GetIntData(SqlHandle, 18);
-                Pet->mndRank = (uint8)Sql_GetIntData(SqlHandle, 19);
-                Pet->chrRank = (uint8)Sql_GetIntData(SqlHandle, 20);
-                Pet->defRank = (uint8)Sql_GetIntData(SqlHandle, 21);
-                Pet->attRank = (uint8)Sql_GetIntData(SqlHandle, 22);
-                Pet->accRank = (uint8)Sql_GetIntData(SqlHandle, 23);
-                Pet->evaRank = (uint8)Sql_GetIntData(SqlHandle, 24);
+                Pet->strRank = (uint8)sql::GetIntData(14);
+                Pet->dexRank = (uint8)sql::GetIntData(15);
+                Pet->vitRank = (uint8)sql::GetIntData(16);
+                Pet->agiRank = (uint8)sql::GetIntData(17);
+                Pet->intRank = (uint8)sql::GetIntData(18);
+                Pet->mndRank = (uint8)sql::GetIntData(19);
+                Pet->chrRank = (uint8)sql::GetIntData(20);
+                Pet->defRank = (uint8)sql::GetIntData(21);
+                Pet->attRank = (uint8)sql::GetIntData(22);
+                Pet->accRank = (uint8)sql::GetIntData(23);
+                Pet->evaRank = (uint8)sql::GetIntData(24);
 
-                Pet->hasSpellScript = (bool)Sql_GetIntData(SqlHandle, 25);
+                Pet->hasSpellScript = (bool)sql::GetIntData(25);
 
-                Pet->spellList = (uint8)Sql_GetIntData(SqlHandle, 26);
+                Pet->spellList = (uint8)sql::GetIntData(26);
 
                 // Specific Dmage Taken, as a %
-                Pet->slash_sdt  = (uint16)(Sql_GetFloatData(SqlHandle, 27) * 1000);
-                Pet->pierce_sdt = (uint16)(Sql_GetFloatData(SqlHandle, 28) * 1000);
-                Pet->hth_sdt    = (uint16)(Sql_GetFloatData(SqlHandle, 29) * 1000);
-                Pet->impact_sdt = (uint16)(Sql_GetFloatData(SqlHandle, 30) * 1000);
+                Pet->slash_sdt  = (uint16)(sql::GetFloatData(27) * 1000);
+                Pet->pierce_sdt = (uint16)(sql::GetFloatData(28) * 1000);
+                Pet->hth_sdt    = (uint16)(sql::GetFloatData(29) * 1000);
+                Pet->impact_sdt = (uint16)(sql::GetFloatData(30) * 1000);
 
-                Pet->fire_sdt    = (int16)Sql_GetFloatData(SqlHandle, 31); // Modifier 54, base 10000 stored as signed integer. Positives signify less damage.
-                Pet->ice_sdt     = (int16)Sql_GetFloatData(SqlHandle, 32); // Modifier 55, base 10000 stored as signed integer. Positives signify less damage.
-                Pet->wind_sdt    = (int16)Sql_GetFloatData(SqlHandle, 33); // Modifier 56, base 10000 stored as signed integer. Positives signify less damage.
-                Pet->earth_sdt   = (int16)Sql_GetFloatData(SqlHandle, 34); // Modifier 57, base 10000 stored as signed integer. Positives signify less damage.
-                Pet->thunder_sdt = (int16)Sql_GetFloatData(SqlHandle, 35); // Modifier 58, base 10000 stored as signed integer. Positives signify less damage.
-                Pet->water_sdt   = (int16)Sql_GetFloatData(SqlHandle, 36); // Modifier 59, base 10000 stored as signed integer. Positives signify less damage.
-                Pet->light_sdt   = (int16)Sql_GetFloatData(SqlHandle, 37); // Modifier 60, base 10000 stored as signed integer. Positives signify less damage.
-                Pet->dark_sdt    = (int16)Sql_GetFloatData(SqlHandle, 38); // Modifier 61, base 10000 stored as signed integer. Positives signify less damage.
+                Pet->fire_sdt    = (int16)sql::GetFloatData(31); // Modifier 54, base 10000 stored as signed integer. Positives signify less damage.
+                Pet->ice_sdt     = (int16)sql::GetFloatData(32); // Modifier 55, base 10000 stored as signed integer. Positives signify less damage.
+                Pet->wind_sdt    = (int16)sql::GetFloatData(33); // Modifier 56, base 10000 stored as signed integer. Positives signify less damage.
+                Pet->earth_sdt   = (int16)sql::GetFloatData(34); // Modifier 57, base 10000 stored as signed integer. Positives signify less damage.
+                Pet->thunder_sdt = (int16)sql::GetFloatData(35); // Modifier 58, base 10000 stored as signed integer. Positives signify less damage.
+                Pet->water_sdt   = (int16)sql::GetFloatData(36); // Modifier 59, base 10000 stored as signed integer. Positives signify less damage.
+                Pet->light_sdt   = (int16)sql::GetFloatData(37); // Modifier 60, base 10000 stored as signed integer. Positives signify less damage.
+                Pet->dark_sdt    = (int16)sql::GetFloatData(38); // Modifier 61, base 10000 stored as signed integer. Positives signify less damage.
 
                 // resistances
-                Pet->fire_res    = (int16)Sql_GetIntData(SqlHandle, 39);
-                Pet->ice_res     = (int16)Sql_GetIntData(SqlHandle, 40);
-                Pet->wind_res    = (int16)Sql_GetIntData(SqlHandle, 41);
-                Pet->earth_res   = (int16)Sql_GetIntData(SqlHandle, 42);
-                Pet->thunder_res = (int16)Sql_GetIntData(SqlHandle, 43);
-                Pet->water_res   = (int16)Sql_GetIntData(SqlHandle, 44);
-                Pet->light_res   = (int16)Sql_GetIntData(SqlHandle, 45);
-                Pet->dark_res    = (int16)Sql_GetIntData(SqlHandle, 46);
+                Pet->fire_res    = (int16)sql::GetIntData(39);
+                Pet->ice_res     = (int16)sql::GetIntData(40);
+                Pet->wind_res    = (int16)sql::GetIntData(41);
+                Pet->earth_res   = (int16)sql::GetIntData(42);
+                Pet->thunder_res = (int16)sql::GetIntData(43);
+                Pet->water_res   = (int16)sql::GetIntData(44);
+                Pet->light_res   = (int16)sql::GetIntData(45);
+                Pet->dark_res    = (int16)sql::GetIntData(46);
 
-                Pet->cmbDelay       = (uint16)Sql_GetIntData(SqlHandle, 47);
+                Pet->cmbDelay       = (uint16)sql::GetIntData(47);
                 Pet->name_prefix    = (uint8)sql::GetUIntData(48);
                 Pet->m_MobSkillList = (uint16)sql::GetUIntData(49);
 
@@ -1296,7 +1296,7 @@ namespace petutils
             {
                 while (sql::NextRow() == SQL_SUCCESS)
                 {
-                    uint16 wyvernid = (uint16)Sql_GetIntData(SqlHandle, 1);
+                    uint16 wyvernid = (uint16)sql::GetIntData(1);
 
                     if (wyvernid != 0)
                     {
@@ -1322,7 +1322,7 @@ namespace petutils
             {
                 while (sql::NextRow() == SQL_SUCCESS)
                 {
-                    uint16 adventuringfellowid = (uint16)Sql_GetIntData(SqlHandle, 1);
+                    uint16 adventuringfellowid = (uint16)sql::GetIntData(1);
 
                     if (adventuringfellowid != 0)
                     {
@@ -1346,7 +1346,7 @@ namespace petutils
             {
                 while (sql::NextRow() == SQL_SUCCESS)
                 {
-                    uint32 chocoboid = (uint32)Sql_GetIntData(SqlHandle, 0);
+                    uint32 chocoboid = (uint32)sql::GetIntData(0);
 
                     if (chocoboid != 0)
                     {
