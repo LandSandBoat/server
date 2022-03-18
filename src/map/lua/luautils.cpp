@@ -2475,26 +2475,32 @@ namespace luautils
         return 0;
     }
 
-    std::optional<SpellID> OnMonsterMagicPrepare(CBattleEntity* PCaster, CBattleEntity* PTarget)
+    std::optional<SpellID> OnMobMagicPrepare(CBattleEntity* PCaster, CBattleEntity* PTarget, std::optional<SpellID> startingSpellId)
     {
         TracyZoneScoped;
 
-        if (PCaster == nullptr || PTarget == nullptr)
+        if (PCaster == nullptr)
         {
             return {};
         }
 
-        sol::function onMonsterMagicPrepare = getEntityCachedFunction(PCaster, "onMonsterMagicPrepare");
-        if (!onMonsterMagicPrepare.valid())
+        sol::function onMobMagicPrepare = getEntityCachedFunction(PCaster, "onMobMagicPrepare");
+        if (!onMobMagicPrepare.valid())
         {
             return {};
         }
 
-        auto result = onMonsterMagicPrepare(CLuaBaseEntity(PCaster), CLuaBaseEntity(PTarget));
+        std::optional<CLuaSpell> luaSpell;
+        if (startingSpellId.has_value())
+        {
+            luaSpell = spell::GetSpell(startingSpellId.value());
+        }
+
+        auto result = onMobMagicPrepare(CLuaBaseEntity(PCaster), CLuaBaseEntity(PTarget), luaSpell);
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onMonsterMagicPrepare: %s", err.what());
+            ShowError("luautils::OnMobMagicPrepare: %s", err.what());
             return {};
         }
 

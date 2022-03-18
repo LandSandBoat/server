@@ -494,8 +494,9 @@ namespace zoneutils
                     PMob->HPscale = sql->GetFloatData(63);
                     PMob->MPscale = sql->GetFloatData(64);
 
+                    // TODO: Remove me
                     // Check if we should be looking up scripts for this mob
-                    PMob->m_HasSpellScript = (uint8)sql->GetIntData(65);
+                    //PMob->m_HasSpellScript = (uint8)sql->GetIntData(65);
 
                     PMob->m_SpellListContainer = mobSpellList::GetMobSpellList(sql->GetIntData(66));
 

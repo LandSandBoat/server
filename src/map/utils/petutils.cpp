@@ -887,7 +887,6 @@ namespace petutils
         PPet->m_Element        = petData->m_Element;
         PPet->HPscale          = petData->HPscale;
         PPet->MPscale          = petData->MPscale;
-        PPet->m_HasSpellScript = petData->hasSpellScript;
 
         PPet->allegiance = PMaster->allegiance;
         PMaster->StatusEffectContainer->CopyConfrontationEffect(PPet);

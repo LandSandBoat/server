@@ -18,7 +18,7 @@ entity.onMobInitialize = function(mob)
 end
 
 -- Return the selected spell ID.
-entity.onMonsterMagicPrepare = function(mob, target)
+entity.onMobMagicPrepare = function(mob, target, spellId)
     -- Suzaku uses     Burn, Fire IV, Firaga III, Flare
     -- Let's give -ga3 a higher distribution than the others.
     local rnd = math.random()

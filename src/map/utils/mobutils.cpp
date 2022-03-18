@@ -1348,8 +1348,9 @@ Usage:
                 PMob->HPscale = sql->GetFloatData(59);
                 PMob->MPscale = sql->GetFloatData(60);
 
+                // TODO: Remove me
                 // Check if we should be looking up scripts for this mob
-                PMob->m_HasSpellScript = (uint8)sql->GetIntData(61);
+                //PMob->m_HasSpellScript = (uint8)sql->GetIntData(61);
 
                 PMob->m_SpellListContainer = mobSpellList::GetMobSpellList(sql->GetIntData(62));
 
