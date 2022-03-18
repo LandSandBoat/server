@@ -81,9 +81,9 @@ static uint8 cap[100] = {
 
 struct MeritCategoryInfo_t
 {
-    int8  MeritsInCat; // количество элементов в группе
-    uint8 MaxPoints;   // максимальное количество points, которые можно вложить в группу
-    uint8 UpgradeID;   // индекс группы в массиве upgrade
+    int8  MeritsInCat; // number of elements in a group
+    uint8 MaxPoints;   // the maximum number of points that can be put into a group
+    uint8 UpgradeID;   // group index in upgrade array
 };
 
 static const MeritCategoryInfo_t meritCatInfo[] = {
@@ -143,12 +143,15 @@ static const MeritCategoryInfo_t meritCatInfo[] = {
     { 4, 10, 7 },   // MCATEGORY_PUP_2       catNumber 48
     { 4, 10, 7 },   // MCATEGORY_DNC_2       catNumber 49
     { 6, 10, 7 },   // MCATEGORY_SHC_2       catNumber 50
-    { 4, 10, 7 },   // MCATEGORY_GEO_2       catNumber 51
-    { 4, 10, 7 },   // MCATEGORY_RUN_2       catNumber 52
+
+    { 0, 0, 7 },    // MCATEGORY_UNK_3       catNumber 51
+
+    { 4, 10, 7 },   // MCATEGORY_GEO_2       catNumber 52
+    { 4, 10, 7 },   // MCATEGORY_RUN_2       catNumber 53
 };
 
-#define GetMeritCategory(merit) (((merit) >> 6) - 1)  // получаем категорию из merit
-#define GetMeritID(merit)       (((merit)&0x3F) >> 1) // получаем смещение в категории из merit
+#define GetMeritCategory(merit) (((merit) >> 6) - 1)  // get category from merit
+#define GetMeritID(merit)       (((merit)&0x3F) >> 1) // get the offset in the category from merit
 
 /************************************************************************
  *                                                                       *
@@ -195,13 +198,13 @@ CMeritPoints::CMeritPoints(CCharEntity* PChar)
 void CMeritPoints::LoadMeritPoints(uint32 charid)
 {
     uint8 catNumber = 0;
-    uint8 maxCatCount = 53;
+    uint8 maxCatCount = 54;
 
     for (uint16 i = 0; i < MERITS_COUNT; ++i)
     {
-        if ((catNumber <= maxCatCount && i == meritNameSpace::groupOffset[catNumber]) || (catNumber > 27 && catNumber < 31)) // Increment category number if known (or known unknown)
+        if ((catNumber <= maxCatCount && i == meritNameSpace::groupOffset[catNumber]) || (catNumber > 27 && catNumber < 31) || catNumber == 51) // Increment category number if known (or known unknown)
         {
-            if (catNumber > 27 && catNumber < 31) // 28-30 are UNK.
+            if ((catNumber > 27 && catNumber < 31) || catNumber == 51) // 28-30 and 51 are UNK.
             {
                 Categories[catNumber] = &merits[163]; // point these to valid merits to prevent crash
             }
@@ -351,7 +354,7 @@ bool CMeritPoints::IsMeritExist(MERIT_TYPE merit)
     {
         return false;
     }
-    if ((int16)merit > MCATEGORY_COUNT)
+    if ((int16)merit >= MCATEGORY_COUNT)
     {
         return false;
     }
