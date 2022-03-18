@@ -122,7 +122,7 @@ player_data = [
     'char_spells.sql',
     'char_stats.sql',
     'char_storage.sql',
-    'char_colorama.Style.sql',
+    'char_style.sql',
     'char_unlocks.sql',
     'char_vars.sql',
     'chars.sql',
