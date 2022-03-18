@@ -39,7 +39,7 @@ CConquestPacket::CConquestPacket(CCharEntity* PChar)
                          sandoria_influence, bastok_influence, windurst_influence, \
                          beastmen_influence FROM conquest_system;";
 
-    int32 ret = sql::Query(Query);
+    int32 ret = sql->Query(Query);
 
     uint8 sandoria_regions = 0;
     uint8 bastok_regions   = 0;
@@ -48,13 +48,13 @@ CConquestPacket::CConquestPacket(CCharEntity* PChar)
     uint8 bastok_prev      = 0;
     uint8 windurst_prev    = 0;
 
-    if (ret != SQL_ERROR && sql::NumRows() != 0)
+    if (ret != SQL_ERROR && sql->NumRows() != 0)
     {
-        while (sql::NextRow() == SQL_SUCCESS)
+        while (sql->NextRow() == SQL_SUCCESS)
         {
-            int regionid            = sql::GetIntData(0);
-            int region_control      = sql::GetIntData(1);
-            int region_control_prev = sql::GetIntData(2);
+            int regionid            = sql->GetIntData(0);
+            int region_control      = sql->GetIntData(1);
+            int region_control_prev = sql->GetIntData(2);
 
             if (region_control == 0)
             {
@@ -82,10 +82,10 @@ CConquestPacket::CConquestPacket(CCharEntity* PChar)
                 windurst_prev++;
             }
 
-            int32 san_inf                   = sql::GetIntData(3);
-            int32 bas_inf                   = sql::GetIntData(4);
-            int32 win_inf                   = sql::GetIntData(5);
-            int32 bst_inf                   = sql::GetIntData(6);
+            int32 san_inf                   = sql->GetIntData(3);
+            int32 bas_inf                   = sql->GetIntData(4);
+            int32 win_inf                   = sql->GetIntData(5);
+            int32 bst_inf                   = sql->GetIntData(6);
             ref<uint8>(0x1A + regionid * 4) = conquest::GetInfluenceRanking(san_inf, bas_inf, win_inf, bst_inf);
             ref<uint8>(0x1B + regionid * 4) = conquest::GetInfluenceRanking(san_inf, bas_inf, win_inf);
             ref<uint8>(0x1C + regionid * 4) = conquest::GetInfluenceGraphics(san_inf, bas_inf, win_inf, bst_inf);

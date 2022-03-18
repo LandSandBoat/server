@@ -22,7 +22,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #ifndef _CHARUTILS_H
 #define _CHARUTILS_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "../entities/charentity.h"
 #include "../items/item_equipment.h"

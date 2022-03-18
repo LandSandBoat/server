@@ -100,8 +100,8 @@ int32 login_parse(int32 fd)
             return -1;
         }
 
-        sql::EscapeString(escaped_name, name.c_str());
-        sql::EscapeString(escaped_pass, password.c_str());
+        sql->EscapeString(escaped_name, name.c_str());
+        sql->EscapeString(escaped_pass, password.c_str());
 
         switch (code)
         {
@@ -110,21 +110,21 @@ int32 login_parse(int32 fd)
                 const char* fmtQuery = "SELECT accounts.id,accounts.status \
                                     FROM accounts \
                                     WHERE accounts.login = '%s' AND accounts.password = PASSWORD('%s')";
-                int32       ret      = sql::Query(fmtQuery, escaped_name, escaped_pass);
-                if (ret != SQL_ERROR && sql::NumRows() != 0)
+                int32       ret      = sql->Query(fmtQuery, escaped_name, escaped_pass);
+                if (ret != SQL_ERROR && sql->NumRows() != 0)
                 {
-                    ret = sql::NextRow();
+                    ret = sql->NextRow();
 
-                    sd->accid    = (uint32)sql::GetUIntData(0);
-                    uint8 status = (uint8)sql::GetUIntData(1);
+                    sd->accid    = (uint32)sql->GetUIntData(0);
+                    uint8 status = (uint8)sql->GetUIntData(1);
 
                     if (status & ACCST_NORMAL)
                     {
                         // fmtQuery = "SELECT * FROM accounts_sessions WHERE accid = %d AND client_port <> 0";
 
-                        // int32 ret = sql::Query(fmtQuery,sd->accid);
+                        // int32 ret = sql->Query(fmtQuery,sd->accid);
 
-                        // if( ret != SQL_ERROR && sql::NumRows() != 0 )
+                        // if( ret != SQL_ERROR && sql->NumRows() != 0 )
                         //{
                         //  ref<uint8>(session[fd]->wdata,0) = 0x05; // SESSION has already activated
                         //  WFIFOSET(fd,33);
@@ -132,19 +132,19 @@ int32 login_parse(int32 fd)
                         //  return 0;
                         //}
                         fmtQuery = "UPDATE accounts SET accounts.timelastmodify = NULL WHERE accounts.id = %d";
-                        sql::Query(fmtQuery, sd->accid);
+                        sql->Query(fmtQuery, sd->accid);
                         fmtQuery = "SELECT charid, server_addr, server_port \
                                 FROM accounts_sessions JOIN accounts \
                                 ON accounts_sessions.accid = accounts.id \
                                 WHERE accounts.id = %d;";
-                        ret      = sql::Query(fmtQuery, sd->accid);
-                        if (ret != SQL_ERROR && sql::NumRows() == 1)
+                        ret      = sql->Query(fmtQuery, sd->accid);
+                        if (ret != SQL_ERROR && sql->NumRows() == 1)
                         {
-                            while (sql::NextRow() == SQL_SUCCESS)
+                            while (sql->NextRow() == SQL_SUCCESS)
                             {
-                                uint32 charid = sql::GetUIntData(0);
-                                uint64 ip     = sql::GetUIntData(1);
-                                uint64 port   = sql::GetUIntData(2);
+                                uint32 charid = sql->GetUIntData(0);
+                                uint64 ip     = sql->GetUIntData(1);
+                                uint64 port   = sql->GetUIntData(2);
 
                                 ip |= (port << 32);
 
@@ -226,7 +226,7 @@ int32 login_parse(int32 fd)
                 }
 
                 // looking for same login
-                if (sql::Query("SELECT accounts.id FROM accounts WHERE accounts.login = '%s'", escaped_name) == SQL_ERROR)
+                if (sql->Query("SELECT accounts.id FROM accounts WHERE accounts.login = '%s'", escaped_name) == SQL_ERROR)
                 {
                     session[fd]->wdata.resize(1);
                     ref<uint8>(session[fd]->wdata.data(), 0) = LOGIN_ERROR_CREATE;
@@ -234,18 +234,18 @@ int32 login_parse(int32 fd)
                     return -1;
                 }
 
-                if (sql::NumRows() == 0)
+                if (sql->NumRows() == 0)
                 {
                     // creating new account_id
                     const char* fmtQuery = "SELECT max(accounts.id) FROM accounts;";
 
                     uint32 accid = 0;
 
-                    if (sql::Query(fmtQuery) != SQL_ERROR && sql::NumRows() != 0)
+                    if (sql->Query(fmtQuery) != SQL_ERROR && sql->NumRows() != 0)
                     {
-                        sql::NextRow();
+                        sql->NextRow();
 
-                        accid = sql::GetUIntData(0) + 1;
+                        accid = sql->GetUIntData(0) + 1;
                     }
                     else
                     {
@@ -269,7 +269,7 @@ int32 login_parse(int32 fd)
                     fmtQuery = "INSERT INTO accounts(id,login,password,timecreate,timelastmodify,status,priv)\
                                        VALUES(%d,'%s',PASSWORD('%s'),'%s',NULL,%d,%d);";
 
-                    if (sql::Query(fmtQuery, accid, escaped_name, escaped_pass, strtimecreate, ACCST_NORMAL, ACCPRIV_USER) == SQL_ERROR)
+                    if (sql->Query(fmtQuery, accid, escaped_name, escaped_pass, strtimecreate, ACCST_NORMAL, ACCPRIV_USER) == SQL_ERROR)
                     {
                         session[fd]->wdata.resize(1);
                         ref<uint8>(session[fd]->wdata.data(), 0) = LOGIN_ERROR_CREATE;
@@ -295,8 +295,8 @@ int32 login_parse(int32 fd)
                 const char* fmtQuery = "SELECT accounts.id,accounts.status \
                                     FROM accounts \
                                     WHERE accounts.login = '%s' AND accounts.password = PASSWORD('%s')";
-                int32       ret      = sql::Query(fmtQuery, escaped_name, escaped_pass);
-                if (ret == SQL_ERROR || sql::NumRows() == 0)
+                int32       ret      = sql->Query(fmtQuery, escaped_name, escaped_pass);
+                if (ret == SQL_ERROR || sql->NumRows() == 0)
                 {
                     session[fd]->wdata.resize(1);
                     ref<uint8>(session[fd]->wdata.data(), 0) = LOGIN_ERROR;
@@ -305,10 +305,10 @@ int32 login_parse(int32 fd)
                     return 0;
                 }
 
-                ret = sql::NextRow();
+                ret = sql->NextRow();
 
-                sd->accid    = (uint32)sql::GetUIntData(0);
-                uint8 status = (uint8)sql::GetUIntData(1);
+                sd->accid    = (uint32)sql->GetUIntData(0);
+                uint8 status = (uint8)sql->GetUIntData(1);
 
                 if (status & ACCST_BANNED)
                 {
@@ -344,13 +344,13 @@ int32 login_parse(int32 fd)
                     char*       buff2 = &session[fd]->rdata[0];
                     std::string updated_password(buff2, buff2 + 16);
                     char        escaped_updated_password[16 * 2 + 1];
-                    sql::EscapeString(escaped_updated_password, updated_password.c_str());
+                    sql->EscapeString(escaped_updated_password, updated_password.c_str());
 
                     fmtQuery = "UPDATE accounts SET accounts.timelastmodify = NULL WHERE accounts.id = %d";
-                    sql::Query(fmtQuery, sd->accid);
+                    sql->Query(fmtQuery, sd->accid);
 
                     fmtQuery = "UPDATE accounts SET accounts.password = PASSWORD('%s') WHERE accounts.id = %d";
-                    ret      = sql::Query(fmtQuery, escaped_updated_password, sd->accid);
+                    ret      = sql->Query(fmtQuery, escaped_updated_password, sd->accid);
                     if (ret == SQL_ERROR)
                     {
                         session[fd]->wdata.resize(1);

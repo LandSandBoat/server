@@ -20,8 +20,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 */
 
 #include "common/blowfish.h"
-#include "common/md52.h"
 #include "common/logging.h"
+#include "common/md52.h"
 #include "common/timer.h"
 #include "common/utils.h"
 #include "common/version.h"
@@ -94,6 +94,8 @@ map_session_list_t map_session_list;
 
 std::thread messageThread;
 
+std::unique_ptr<SqlConnection> sql;
+
 /************************************************************************
  *                                                                       *
  *  mapsession_getbyipp                                                  *
@@ -140,9 +142,9 @@ map_session_data_t* mapsession_createsession(uint32 ip, uint16 port)
 
     const char* fmtQuery = "SELECT charid FROM accounts_sessions WHERE inet_ntoa(client_addr) = '%s' LIMIT 1;";
 
-    int32 ret = sql::Query(fmtQuery, ip2str(map_session_data->client_addr));
+    int32 ret = sql->Query(fmtQuery, ip2str(map_session_data->client_addr));
 
-    if (ret == SQL_ERROR || sql::NumRows() == 0)
+    if (ret == SQL_ERROR || sql->NumRows() == 0)
     {
         ShowError("recv_parse: Invalid login attempt from %s", ip2str(map_session_data->client_addr));
         return nullptr;
@@ -197,16 +199,16 @@ int32 do_init(int32 argc, char** argv)
     luautils::init();
     PacketParserInitialize();
 
-    ShowStatus("do_init: sqlhandle is allocating");
-    if (sql::Connect(map_config.mysql_login.c_str(), map_config.mysql_password.c_str(), map_config.mysql_host.c_str(), map_config.mysql_port,
-                    map_config.mysql_database.c_str()) == SQL_ERROR)
-    {
-        do_final(EXIT_FAILURE);
-    }
+    ShowStatus("do_init: connecting to database");
+    sql = std::make_unique<SqlConnection>(map_config.mysql_login.c_str(),
+                                          map_config.mysql_password.c_str(),
+                                          map_config.mysql_host.c_str(),
+                                          map_config.mysql_port,
+                                          map_config.mysql_database.c_str());
 
     // We clear the session table at server start (temporary solution)
-    sql::Query("DELETE FROM accounts_sessions WHERE IF(%u = 0 AND %u = 0, true, server_addr = %u AND server_port = %u);", map_ip.s_addr, map_port,
-              map_ip.s_addr, map_port);
+    sql->Query("DELETE FROM accounts_sessions WHERE IF(%u = 0 AND %u = 0, true, server_addr = %u AND server_port = %u);", map_ip.s_addr, map_port,
+                map_ip.s_addr, map_port);
 
     ShowStatus("do_init: zlib is reading");
     zlib_init();
@@ -427,6 +429,8 @@ int32 do_sockets(fd_set* rfd, duration next)
 
     TracyReportLuaMemory(luautils::lua.lua_state());
 
+    sql->TryPing();
+
     return 0;
 }
 
@@ -515,9 +519,9 @@ int32 recv_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
 
             const char* fmtQuery = "SELECT charid FROM chars WHERE charid = %u LIMIT 1;";
 
-            int32 ret = sql::Query(fmtQuery, CharID);
+            int32 ret = sql->Query(fmtQuery, CharID);
 
-            if (ret == SQL_ERROR || sql::NumRows() == 0 || sql::NextRow() != SQL_SUCCESS)
+            if (ret == SQL_ERROR || sql->NumRows() == 0 || sql->NextRow() != SQL_SUCCESS)
             {
                 ShowError("recv_parse: Cannot load charid %u", CharID);
                 return -1;
@@ -525,16 +529,16 @@ int32 recv_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
 
             fmtQuery = "SELECT session_key FROM accounts_sessions WHERE charid = %u LIMIT 1;";
 
-            ret = sql::Query(fmtQuery, CharID);
+            ret = sql->Query(fmtQuery, CharID);
 
-            if (ret == SQL_ERROR || sql::NumRows() == 0 || sql::NextRow() != SQL_SUCCESS)
+            if (ret == SQL_ERROR || sql->NumRows() == 0 || sql->NextRow() != SQL_SUCCESS)
             {
                 ShowError("recv_parse: Cannot load session_key for charid %u", CharID);
             }
             else
             {
                 char* strSessionKey = nullptr;
-                sql::GetData(0, &strSessionKey, nullptr);
+                sql->GetData(0, &strSessionKey, nullptr);
 
                 memcpy(map_session_data->blowfish.key, strSessionKey, 20);
             }
@@ -708,9 +712,9 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
     CCharEntity*  PChar = map_session_data->PChar;
     CBasicPacket* PSmallPacket;
 
-    uint32        PacketSize  = UINT32_MAX;
-    auto          PacketCount = PChar->getPacketCount();
-    uint8         packets     = 0;
+    uint32 PacketSize  = UINT32_MAX;
+    auto   PacketCount = PChar->getPacketCount();
+    uint8  packets     = 0;
 
 #ifdef LOG_OUTGOING_PACKETS
     PacketGuard::PrintPacketList(PChar);
@@ -826,7 +830,7 @@ int32 map_close_session(time_point tick, map_session_data_t* map_session_data)
         // clear accounts_sessions if character is logging out (not when zoning)
         if (map_session_data->shuttingDown == 1)
         {
-            sql::Query("DELETE FROM accounts_sessions WHERE charid = %u", map_session_data->PChar->id);
+            sql->Query("DELETE FROM accounts_sessions WHERE charid = %u", map_session_data->PChar->id);
         }
 
         uint64 port64 = map_session_data->client_port;
@@ -917,7 +921,7 @@ int32 map_cleanup(time_point tick, CTaskMgr::CTask* PTask)
                     else
                     {
                         map_session_data->PChar->StatusEffectContainer->SaveStatusEffects(true);
-                        sql::Query("DELETE FROM accounts_sessions WHERE charid = %u;", map_session_data->PChar->id);
+                        sql->Query("DELETE FROM accounts_sessions WHERE charid = %u;", map_session_data->PChar->id);
 
                         delete[] map_session_data->server_packet_data;
                         delete map_session_data->PChar;
@@ -933,7 +937,7 @@ int32 map_cleanup(time_point tick, CTaskMgr::CTask* PTask)
                     ShowWarning("map_cleanup: WHITHOUT CHAR timed out, session closed");
 
                     const char* Query = "DELETE FROM accounts_sessions WHERE client_addr = %u AND client_port = %u";
-                    sql::Query(Query, map_session_data->client_addr, map_session_data->client_port);
+                    sql->Query(Query, map_session_data->client_addr, map_session_data->client_port);
 
                     delete[] map_session_data->server_packet_data;
                     map_session_list.erase(it++);
@@ -1569,7 +1573,7 @@ int32 map_garbage_collect(time_point tick, CTaskMgr::CTask* PTask)
     TracyZoneScoped;
 
     ShowInfo("CTaskMgr Active Tasks: %i", CTaskMgr::getInstance()->getTaskList().size());
-    
+
     luautils::garbageCollectStep();
     return 0;
 }
@@ -1585,7 +1589,7 @@ void log_init(int argc, char** argv)
 #endif
 #endif
     bool defaultname = true;
-    bool appendDate {};
+    bool appendDate{};
     for (int i = 1; i < argc; i++)
     {
         if (strcmp(argv[i], "--ip") == 0 && defaultname)
@@ -1605,7 +1609,7 @@ void log_init(int argc, char** argv)
         if (strcmp(argv[i], "--append-date") == 0)
         {
             appendDate = true;
+        }
     }
-}
     logging::InitializeLog("map", logFile, appendDate);
 }

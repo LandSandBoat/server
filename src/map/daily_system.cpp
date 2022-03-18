@@ -58,18 +58,18 @@ namespace daily
 
     void LoadDailyItems()
     {
-        int32  ret = sql::Query("SELECT itemid, aH, flags FROM item_basic WHERE flags & 4 > 0");
+        int32  ret = sql->Query("SELECT itemid, aH, flags FROM item_basic WHERE flags & 4 > 0");
         uint16 itemid;
         uint16 aH;
         uint16 flags;
 
-        if (ret != SQL_ERROR && sql::NumRows() != 0)
+        if (ret != SQL_ERROR && sql->NumRows() != 0)
         {
-            while (sql::NextRow() == SQL_SUCCESS)
+            while (sql->NextRow() == SQL_SUCCESS)
             {
-                itemid = sql::GetUIntData(0);
-                aH     = sql::GetUIntData(1);
-                flags  = sql::GetUIntData(2);
+                itemid = sql->GetUIntData(0);
+                aH     = sql->GetUIntData(1);
+                flags  = sql->GetUIntData(2);
                 specialDialItems.push_back(itemid);
                 switch (aH)
                 {
@@ -161,7 +161,7 @@ namespace daily
                 SET char_points.daily_tally = LEAST(%u, char_points.daily_tally + %u) \
                 WHERE char_points.daily_tally > -1;";
 
-        int32 ret = sql::Query(fmtQuery, dailyTallyLimit, dailyTallyAmount);
+        int32 ret = sql->Query(fmtQuery, dailyTallyLimit, dailyTallyAmount);
 
         if (ret == SQL_ERROR)
         {
@@ -174,7 +174,7 @@ namespace daily
 
         fmtQuery = "DELETE FROM char_vars WHERE varname = 'gobbieBoxUsed';";
 
-        if (sql::Query(fmtQuery, dailyTallyAmount) == SQL_ERROR)
+        if (sql->Query(fmtQuery, dailyTallyAmount) == SQL_ERROR)
         {
             ShowError("Failed to delete daily tally char_vars entries");
         }

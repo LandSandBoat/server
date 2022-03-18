@@ -101,20 +101,20 @@ void CInstance::LoadInstance()
                                "WHERE instanceid = %u "
                                "LIMIT 1";
 
-    if (sql::Query(Query, m_instanceid) != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
+    if (sql->Query(Query, m_instanceid) != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
     {
-        m_instanceName.insert(0, (const char*)sql::GetData(0));
+        m_instanceName.insert(0, (const char*)sql->GetData(0));
 
-        m_timeLimit                       = std::chrono::minutes(sql::GetUIntData(1));
-        m_entrance                        = sql::GetUIntData(2);
-        m_entryloc.x                      = sql::GetFloatData(3);
-        m_entryloc.y                      = sql::GetFloatData(4);
-        m_entryloc.z                      = sql::GetFloatData(5);
-        m_entryloc.rotation               = sql::GetUIntData(6);
-        m_zone_music_override.m_songDay   = sql::GetUIntData(7);
-        m_zone_music_override.m_songNight = sql::GetUIntData(8);
-        m_zone_music_override.m_bSongS    = sql::GetUIntData(9);
-        m_zone_music_override.m_bSongM    = sql::GetUIntData(10);
+        m_timeLimit                       = std::chrono::minutes(sql->GetUIntData(1));
+        m_entrance                        = sql->GetUIntData(2);
+        m_entryloc.x                      = sql->GetFloatData(3);
+        m_entryloc.y                      = sql->GetFloatData(4);
+        m_entryloc.z                      = sql->GetFloatData(5);
+        m_entryloc.rotation               = sql->GetUIntData(6);
+        m_zone_music_override.m_songDay   = sql->GetUIntData(7);
+        m_zone_music_override.m_songNight = sql->GetUIntData(8);
+        m_zone_music_override.m_bSongS    = sql->GetUIntData(9);
+        m_zone_music_override.m_bSongM    = sql->GetUIntData(10);
 
         // Add to Lua cache
         // TODO: This will happen more often than needed, but not so often that it's a performance concern

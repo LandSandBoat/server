@@ -1630,17 +1630,17 @@ namespace automaton
     {
         const char* Query = "SELECT spellid, skilllevel, heads, enfeeble, immunity, removes FROM automaton_spells;";
 
-        int32 ret = sql::Query(Query);
+        int32 ret = sql->Query(Query);
 
-        if (ret != SQL_ERROR && sql::NumRows() != 0)
+        if (ret != SQL_ERROR && sql->NumRows() != 0)
         {
-            while (sql::NextRow() == SQL_SUCCESS)
+            while (sql->NextRow() == SQL_SUCCESS)
             {
-                SpellID        id = (SpellID)sql::GetUIntData(0);
-                AutomatonSpell PSpell{ (uint16)sql::GetUIntData(1), (uint8)sql::GetUIntData(2), (EFFECT)sql::GetUIntData(3),
-                                       (IMMUNITY)sql::GetUIntData(4) };
+                SpellID        id = (SpellID)sql->GetUIntData(0);
+                AutomatonSpell PSpell{ (uint16)sql->GetUIntData(1), (uint8)sql->GetUIntData(2), (EFFECT)sql->GetUIntData(3),
+                                       (IMMUNITY)sql->GetUIntData(4) };
 
-                uint32 removes = sql::GetUIntData(5);
+                uint32 removes = sql->GetUIntData(5);
                 while (removes > 0)
                 {
                     PSpell.removes.push_back((EFFECT)(removes & 0xFF));
@@ -1696,18 +1696,18 @@ namespace automaton
     {
         const char* Query = "SELECT abilityid, abilityname, reqframe, skilllevel FROM automaton_abilities;";
 
-        int32 ret = sql::Query(Query);
+        int32 ret = sql->Query(Query);
 
-        if (ret != SQL_ERROR && sql::NumRows() != 0)
+        if (ret != SQL_ERROR && sql->NumRows() != 0)
         {
-            while (sql::NextRow() == SQL_SUCCESS)
+            while (sql->NextRow() == SQL_SUCCESS)
             {
-                uint16           id = (uint16)sql::GetUIntData(0);
-                AutomatonAbility PAbility{ (uint8)sql::GetUIntData(2), (uint16)sql::GetUIntData(3) };
+                uint16           id = (uint16)sql->GetUIntData(0);
+                AutomatonAbility PAbility{ (uint8)sql->GetUIntData(2), (uint16)sql->GetUIntData(3) };
 
                 autoAbilityList[id] = std::move(PAbility);
 
-                auto filename = fmt::format("./scripts/globals/abilities/pets/automaton/{}.lua", sql::GetData(1));
+                auto filename = fmt::format("./scripts/globals/abilities/pets/automaton/{}.lua", sql->GetData(1));
                 luautils::CacheLuaObjectFromFile(filename);
             }
         }

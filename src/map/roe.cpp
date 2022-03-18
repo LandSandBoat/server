@@ -669,7 +669,7 @@ namespace roeutils
     {
         TracyZoneScoped;
         const char* rankingQuery = "UPDATE unity_system SET members_prev = members_current, points_prev = points_current, members_current = 0, points_current = 0;";
-        sql::Query(rankingQuery);
+        sql->Query(rankingQuery);
 
         roeutils::UpdateUnityRankings();
     }
@@ -678,20 +678,20 @@ namespace roeutils
     {
         TracyZoneScoped;
         const char* memberQuery = "UPDATE unity_system JOIN (SELECT unity_leader, COUNT(*) AS members FROM char_profile GROUP BY unity_leader) TMP ON unity_system.leader = unity_leader SET unity_system.members_current = members;";
-        sql::Query(memberQuery);
+        sql->Query(memberQuery);
 
         const char* unityQuery = "SELECT leader, CASE WHEN members_prev = 0 THEN 0 ELSE FLOOR(points_prev/members_prev) END AS eval FROM unity_system ORDER BY eval DESC;";
-        int32       ret        = sql::Query(unityQuery);
+        int32       ret        = sql->Query(unityQuery);
 
-        if (ret != SQL_ERROR && sql::NumRows() != 0)
+        if (ret != SQL_ERROR && sql->NumRows() != 0)
         {
             uint8 currentRank = 1;
             uint8 rankGap     = 0;
             int32 prev_eval   = 0;
 
-            while (sql::NextRow() == SQL_SUCCESS)
+            while (sql->NextRow() == SQL_SUCCESS)
             {
-                int32 new_eval = sql::GetIntData(1);
+                int32 new_eval = sql->GetIntData(1);
 
                 if (new_eval < prev_eval)
                 {
@@ -704,7 +704,7 @@ namespace roeutils
                 }
 
                 prev_eval                                                             = new_eval;
-                roeutils::RoeSystem.unityLeaderRank[sql::GetIntData(0) - 1] = currentRank;
+                roeutils::RoeSystem.unityLeaderRank[sql->GetIntData(0) - 1] = currentRank;
             }
         }
     }

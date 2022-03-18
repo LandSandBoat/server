@@ -80,9 +80,9 @@ CSynthSuggestionPacket::CSynthSuggestionPacket(uint16 skillID, uint16 skillLevel
     //      craft level of the "main" craft against the craft level of
     //      each craft one at a time to ensure we are only getting
     //      recipes intended for the craft we are seeking to improve?
-    int32 ret = sql::Query(fmtQuery, craftname, craftname, skillLevel + 5, skillLevel + 10);
+    int32 ret = sql->Query(fmtQuery, craftname, craftname, skillLevel + 5, skillLevel + 10);
 
-    if (ret != SQL_ERROR && sql::NumRows() != 0 && sql::NextRow() == SQL_SUCCESS)
+    if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
     {
         std::map<uint16, uint16> ingredients;
         uint16                   subcraftIDs[3] = { 0u, 0u, 0u };
@@ -95,7 +95,7 @@ CSynthSuggestionPacket::CSynthSuggestionPacket(uint16 skillID, uint16 skillLevel
             uint16 this_skill = 0u;
             if (i != skillID && subidx < 3)
             {
-                this_skill = sql::GetUIntData(i);
+                this_skill = sql->GetUIntData(i);
             }
 
             if (this_skill > 0u)
@@ -105,12 +105,12 @@ CSynthSuggestionPacket::CSynthSuggestionPacket(uint16 skillID, uint16 skillLevel
             }
         }
 
-        ref<uint16>(0x04) = sql::GetUIntData(10);
+        ref<uint16>(0x04) = sql->GetUIntData(10);
         ref<uint16>(0x06) = subcraftIDs[0];
         ref<uint16>(0x08) = subcraftIDs[1];
         ref<uint16>(0x0A) = subcraftIDs[2];
-        ref<uint16>(0x0C) = sql::GetUIntData(9);
-        ref<uint16>(0x0E) = sql::GetUIntData(0);
+        ref<uint16>(0x0C) = sql->GetUIntData(9);
+        ref<uint16>(0x0E) = sql->GetUIntData(0);
 
         // So this loop is a little weird. What we store in the db
         //     is a list of 8 individual ingredients which may or
@@ -124,7 +124,7 @@ CSynthSuggestionPacket::CSynthSuggestionPacket(uint16 skillID, uint16 skillLevel
         {
             uint16 this_ingredient = 0;
 
-            this_ingredient = sql::GetUIntData(11 + i);
+            this_ingredient = sql->GetUIntData(11 + i);
             if (this_ingredient != 0)
             {
                 if (ingredients[this_ingredient])

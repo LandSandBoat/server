@@ -108,15 +108,15 @@ namespace battleutils
                             ORDER BY level \
                             LIMIT 100";
 
-        int32 ret = sql::Query(fmtQuery);
+        int32 ret = sql->Query(fmtQuery);
 
-        if (ret != SQL_ERROR && sql::NumRows() != 0)
+        if (ret != SQL_ERROR && sql->NumRows() != 0)
         {
-            for (uint32 x = 0; x < 100 && sql::NextRow() == SQL_SUCCESS; ++x)
+            for (uint32 x = 0; x < 100 && sql->NextRow() == SQL_SUCCESS; ++x)
             {
                 for (uint32 y = 0; y < 14; ++y)
                 {
-                    g_SkillTable[x][y] = (uint16)sql::GetIntData(y);
+                    g_SkillTable[x][y] = (uint16)sql->GetIntData(y);
                 }
             }
         }
@@ -125,17 +125,17 @@ namespace battleutils
                 FROM skill_ranks \
                 LIMIT 64";
 
-        ret = sql::Query(fmtQuery);
+        ret = sql->Query(fmtQuery);
 
-        if (ret != SQL_ERROR && sql::NumRows() != 0)
+        if (ret != SQL_ERROR && sql->NumRows() != 0)
         {
-            for (uint32 x = 0; x < MAX_SKILLTYPE && sql::NextRow() == SQL_SUCCESS; ++x)
+            for (uint32 x = 0; x < MAX_SKILLTYPE && sql->NextRow() == SQL_SUCCESS; ++x)
             {
-                auto SkillID = std::clamp<uint8>(sql::GetIntData(0), 0, MAX_SKILLTYPE - 1);
+                auto SkillID = std::clamp<uint8>(sql->GetIntData(0), 0, MAX_SKILLTYPE - 1);
 
                 for (uint32 y = 1; y < MAX_JOBTYPE; ++y)
                 {
-                    g_SkillRanks[SkillID][y] = std::clamp<uint8>(sql::GetIntData(y), 0, 11);
+                    g_SkillRanks[SkillID][y] = std::clamp<uint8>(sql->GetIntData(y), 0, 11);
                 }
             }
         }
@@ -153,28 +153,28 @@ namespace battleutils
                                "WHERE weaponskillid < %u "
                                "ORDER BY type, skilllevel ASC";
 
-        int32 ret = sql::Query(fmtQuery, MAX_WEAPONSKILL_ID);
+        int32 ret = sql->Query(fmtQuery, MAX_WEAPONSKILL_ID);
 
-        if (ret != SQL_ERROR && sql::NumRows() != 0)
+        if (ret != SQL_ERROR && sql->NumRows() != 0)
         {
-            while (sql::NextRow() == SQL_SUCCESS)
+            while (sql->NextRow() == SQL_SUCCESS)
             {
-                CWeaponSkill* PWeaponSkill = new CWeaponSkill(sql::GetIntData(0));
+                CWeaponSkill* PWeaponSkill = new CWeaponSkill(sql->GetIntData(0));
 
-                PWeaponSkill->setName(sql::GetData(1));
-                PWeaponSkill->setJob(sql::GetData(2));
-                PWeaponSkill->setType(sql::GetIntData(3));
-                PWeaponSkill->setSkillLevel(sql::GetIntData(4));
-                PWeaponSkill->setElement(sql::GetIntData(5));
-                PWeaponSkill->setAnimationId(sql::GetIntData(6));
-                PWeaponSkill->setAnimationTime(std::chrono::milliseconds(sql::GetUIntData(7)));
-                PWeaponSkill->setRange(sql::GetIntData(8));
-                PWeaponSkill->setAoe(sql::GetIntData(9));
-                PWeaponSkill->setPrimarySkillchain(sql::GetIntData(10));
-                PWeaponSkill->setSecondarySkillchain(sql::GetIntData(11));
-                PWeaponSkill->setTertiarySkillchain(sql::GetIntData(12));
-                PWeaponSkill->setMainOnly(sql::GetIntData(13));
-                PWeaponSkill->setUnlockId(sql::GetIntData(14));
+                PWeaponSkill->setName(sql->GetData(1));
+                PWeaponSkill->setJob(sql->GetData(2));
+                PWeaponSkill->setType(sql->GetIntData(3));
+                PWeaponSkill->setSkillLevel(sql->GetIntData(4));
+                PWeaponSkill->setElement(sql->GetIntData(5));
+                PWeaponSkill->setAnimationId(sql->GetIntData(6));
+                PWeaponSkill->setAnimationTime(std::chrono::milliseconds(sql->GetUIntData(7)));
+                PWeaponSkill->setRange(sql->GetIntData(8));
+                PWeaponSkill->setAoe(sql->GetIntData(9));
+                PWeaponSkill->setPrimarySkillchain(sql->GetIntData(10));
+                PWeaponSkill->setSecondarySkillchain(sql->GetIntData(11));
+                PWeaponSkill->setTertiarySkillchain(sql->GetIntData(12));
+                PWeaponSkill->setMainOnly(sql->GetIntData(13));
+                PWeaponSkill->setUnlockId(sql->GetIntData(14));
 
                 g_PWeaponSkillList[PWeaponSkill->getID()] = PWeaponSkill;
                 g_PWeaponSkillsList[PWeaponSkill->getType()].push_back(PWeaponSkill);
@@ -199,26 +199,26 @@ namespace battleutils
         mob_valid_targets, mob_skill_flag, mob_skill_param, knockback, primary_sc, secondary_sc, tertiary_sc \
         FROM mob_skills;";
 
-        int32 ret = sql::Query(specialQuery);
+        int32 ret = sql->Query(specialQuery);
 
-        if (ret != SQL_ERROR && sql::NumRows() != 0)
+        if (ret != SQL_ERROR && sql->NumRows() != 0)
         {
-            while (sql::NextRow() == SQL_SUCCESS)
+            while (sql->NextRow() == SQL_SUCCESS)
             {
-                CMobSkill* PMobSkill = new CMobSkill(sql::GetIntData(0));
-                PMobSkill->setAnimationID(sql::GetIntData(1));
-                PMobSkill->setName(sql::GetData(2));
-                PMobSkill->setAoe(sql::GetIntData(3));
-                PMobSkill->setDistance(sql::GetFloatData(4));
-                PMobSkill->setAnimationTime(sql::GetIntData(5));
-                PMobSkill->setActivationTime(sql::GetIntData(6));
-                PMobSkill->setValidTargets(sql::GetIntData(7));
-                PMobSkill->setFlag(sql::GetIntData(8));
-                PMobSkill->setParam(sql::GetIntData(9));
-                PMobSkill->setKnockback(sql::GetUIntData(10));
-                PMobSkill->setPrimarySkillchain(sql::GetUIntData(11));
-                PMobSkill->setSecondarySkillchain(sql::GetUIntData(12));
-                PMobSkill->setTertiarySkillchain(sql::GetUIntData(13));
+                CMobSkill* PMobSkill = new CMobSkill(sql->GetIntData(0));
+                PMobSkill->setAnimationID(sql->GetIntData(1));
+                PMobSkill->setName(sql->GetData(2));
+                PMobSkill->setAoe(sql->GetIntData(3));
+                PMobSkill->setDistance(sql->GetFloatData(4));
+                PMobSkill->setAnimationTime(sql->GetIntData(5));
+                PMobSkill->setActivationTime(sql->GetIntData(6));
+                PMobSkill->setValidTargets(sql->GetIntData(7));
+                PMobSkill->setFlag(sql->GetIntData(8));
+                PMobSkill->setParam(sql->GetIntData(9));
+                PMobSkill->setKnockback(sql->GetUIntData(10));
+                PMobSkill->setPrimarySkillchain(sql->GetUIntData(11));
+                PMobSkill->setSecondarySkillchain(sql->GetUIntData(12));
+                PMobSkill->setTertiarySkillchain(sql->GetUIntData(13));
                 PMobSkill->setMsg(185); // standard damage message. Scripters will change this.
                 g_PMobSkillList[PMobSkill->getID()] = PMobSkill;
 
@@ -230,15 +230,15 @@ namespace battleutils
         const char* fmtQuery = "SELECT skill_list_id, mob_skill_id \
         FROM mob_skill_lists;";
 
-        ret = sql::Query(fmtQuery);
+        ret = sql->Query(fmtQuery);
 
-        if (ret != SQL_ERROR && sql::NumRows() != 0)
+        if (ret != SQL_ERROR && sql->NumRows() != 0)
         {
-            while (sql::NextRow() == SQL_SUCCESS)
+            while (sql->NextRow() == SQL_SUCCESS)
             {
-                int16 skillListId = sql::GetIntData(0);
+                int16 skillListId = sql->GetIntData(0);
 
-                uint16 skillId = sql::GetIntData(1);
+                uint16 skillId = sql->GetIntData(1);
 
                 g_PMobSkillLists[skillListId].push_back(skillId);
             }
@@ -251,15 +251,15 @@ namespace battleutils
                            FROM skillchain_damage_modifiers \
                            ORDER BY chain_level, chain_count";
 
-        int32 ret = sql::Query(fmtQuery);
+        int32 ret = sql->Query(fmtQuery);
 
-        if (ret != SQL_ERROR && sql::NumRows() != 0)
+        if (ret != SQL_ERROR && sql->NumRows() != 0)
         {
-            for (uint32 x = 0; sql::NextRow() == SQL_SUCCESS; ++x)
+            for (uint32 x = 0; sql->NextRow() == SQL_SUCCESS; ++x)
             {
-                uint16 level                              = (uint16)sql::GetIntData(0);
-                uint16 count                              = (uint16)sql::GetIntData(1);
-                uint16 value                              = (uint16)sql::GetIntData(2);
+                uint16 level                              = (uint16)sql->GetIntData(0);
+                uint16 count                              = (uint16)sql->GetIntData(1);
+                uint16 value                              = (uint16)sql->GetIntData(2);
                 g_SkillChainDamageModifiers[level][count] = value;
             }
         }

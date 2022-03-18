@@ -184,24 +184,24 @@ namespace fishingutils
                                 "INNER JOIN fishing_fish AS fish USING (fishid) "
                                 "WHERE zone.zoneid = %u AND rod.rodid = %u AND lure.lureid = %u AND lure.luck = 0";
 
-            int32 ret = sql::Query(Query, PChar->getZone(), RodID, LureID);
+            int32 ret = sql->Query(Query, PChar->getZone(), RodID, LureID);
 
-            if (ret != SQL_ERROR && sql::NumRows() != 0)
+            if (ret != SQL_ERROR && sql->NumRows() != 0)
             {
                 // array to store fish ids that i can get
-                std::vector<int32> fishIDs((int32)sql::NumRows());
+                std::vector<int32> fishIDs((int32)sql->NumRows());
                 int32              fishCounter       = 0;
                 bool               caughtQuestedFish = false;
 
-                while (sql::NextRow() == SQL_SUCCESS)
+                while (sql->NextRow() == SQL_SUCCESS)
                 {
                     // store fish id
-                    fishIDs[fishCounter] = sql::GetIntData(0);
+                    fishIDs[fishCounter] = sql->GetIntData(0);
 
                     // ловля предметов, необходимых для поисков
 
-                    uint8  logid = (uint8)sql::GetIntData(5);
-                    uint16 quest = (uint16)sql::GetIntData(6);
+                    uint8  logid = (uint8)sql->GetIntData(5);
+                    uint16 quest = (uint16)sql->GetIntData(6);
 
                     if (logid < MAX_QUESTAREA && quest < MAX_QUESTID)
                     {
@@ -210,7 +210,7 @@ namespace fishingutils
 
                         if (complete == 0 && current != 0)
                         {
-                            PFish = new CItemFish(*itemutils::GetItemPointer(sql::GetIntData(0)));
+                            PFish = new CItemFish(*itemutils::GetItemPointer(sql->GetIntData(0)));
 
                             PChar->UContainer->SetType(UCONTAINER_FISHING);
                             PChar->UContainer->SetItem(0, PFish);
@@ -226,7 +226,7 @@ namespace fishingutils
 
                 if (!caughtQuestedFish)
                 {
-                    int32 luckyFish = xirand::GetRandomNumber((int32)sql::NumRows());
+                    int32 luckyFish = xirand::GetRandomNumber((int32)sql->NumRows());
                     PFish           = new CItemFish(*itemutils::GetItemPointer(fishIDs[luckyFish]));
 
                     PChar->UContainer->SetType(UCONTAINER_FISHING);
@@ -252,20 +252,20 @@ namespace fishingutils
                                 "WHERE zone.zoneid = %u AND rod.rodid = %u AND lure.lureid = %u AND lure.luck != 0 "
                                 "ORDER BY luck";
 
-            int32 ret = sql::Query(Query, PChar->getZone(), RodID, LureID);
+            int32 ret = sql->Query(Query, PChar->getZone(), RodID, LureID);
 
-            if (ret != SQL_ERROR && sql::NumRows() != 0)
+            if (ret != SQL_ERROR && sql->NumRows() != 0)
             {
                 int32 FisherLuck    = 0;
                 int32 FishingChance = xirand::GetRandomNumber(1000);
 
-                while (sql::NextRow() == SQL_SUCCESS)
+                while (sql->NextRow() == SQL_SUCCESS)
                 {
-                    FisherLuck += sql::GetIntData(7);
+                    FisherLuck += sql->GetIntData(7);
 
                     if (FishingChance <= FisherLuck)
                     {
-                        PFish = new CItemFish(*itemutils::GetItemPointer(sql::GetIntData(0)));
+                        PFish = new CItemFish(*itemutils::GetItemPointer(sql->GetIntData(0)));
 
                         PChar->UContainer->SetType(UCONTAINER_FISHING);
                         PChar->UContainer->SetItem(0, PFish);

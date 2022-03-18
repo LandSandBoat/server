@@ -14,6 +14,8 @@ set(SOURCES
     mmo.h
     socket.cpp
     socket.h
+    sql_prepared_stmt.cpp
+    sql_prepared_stmt.h
     sql.cpp
     sql.h
     string.h

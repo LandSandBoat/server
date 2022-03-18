@@ -22,15 +22,15 @@
 #ifndef _LOGIN_H
 #define _LOGIN_H
 
-#include "../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include <functional>
 #include <list>
 
-#include "../common/kernel.h"
-#include "../common/mmo.h"
-#include "../common/socket.h"
-#include "../common/sql.h"
+#include "common/kernel.h"
+#include "common/mmo.h"
+#include "common/socket.h"
+#include "common/sql.h"
 
 #include "login_session.h"
 
@@ -75,6 +75,8 @@ struct maint_config_t
 extern login_config_t login_config;
 extern version_info_t version_info;
 extern maint_config_t maint_config;
+
+extern std::unique_ptr<SqlConnection> sql;
 
 /*======================================================
  * Login-Server Version Screen [venom]
