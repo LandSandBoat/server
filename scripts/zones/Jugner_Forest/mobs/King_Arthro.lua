@@ -32,7 +32,7 @@ entity.onAdditionalEffect = function(mob, target, damage)
     end
 end
 
-entity.OnMobMagicPrepare = function(mob, spellId)
+entity.onMobMagicPrepare = function(mob, target, spellId)
     -- Instant cast on spells - Waterga IV, Poisonga II, Drown, and Enwater
     local rnd = math.random()
 

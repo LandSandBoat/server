@@ -28,7 +28,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.OnMobMagicPrepare = function(mob, spellId)
+entity.onMobMagicPrepare = function(mob, target, spellId)
     if mob:getHPP() <= 25 then
         return 244 -- Death
     else

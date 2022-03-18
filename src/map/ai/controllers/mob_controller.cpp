@@ -439,7 +439,7 @@ bool CMobController::TryCastSpell()
     }
 
     // Try to get an override spell from the script (if available)
-    auto possibleOverriddenSpell = luautils::OnMobMagicPrepare(PMob, chosenSpellId);
+    auto possibleOverriddenSpell = luautils::OnMobMagicPrepare(PMob, PTarget, chosenSpellId);
     if (possibleOverriddenSpell.has_value())
     {
         chosenSpellId = possibleOverriddenSpell;

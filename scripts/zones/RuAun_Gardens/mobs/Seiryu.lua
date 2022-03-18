@@ -17,7 +17,7 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
 end
 
-entity.OnMobMagicPrepare = function(mob, spellId)
+entity.onMobMagicPrepare = function(mob, target, spellId)
     if not mob:hasStatusEffect(xi.effect.HUNDRED_FISTS, 0) then
         local rnd = math.random()
         if rnd < 0.5 then

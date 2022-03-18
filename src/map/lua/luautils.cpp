@@ -2475,7 +2475,7 @@ namespace luautils
         return 0;
     }
 
-    std::optional<SpellID> OnMobMagicPrepare(CBattleEntity* PCaster, std::optional<SpellID> startingSpellId)
+    std::optional<SpellID> OnMobMagicPrepare(CBattleEntity* PCaster, CBattleEntity* PTarget, std::optional<SpellID> startingSpellId)
     {
         TracyZoneScoped;
 
@@ -2484,8 +2484,8 @@ namespace luautils
             return {};
         }
 
-        sol::function OnMobMagicPrepare = getEntityCachedFunction(PCaster, "OnMobMagicPrepare");
-        if (!OnMobMagicPrepare.valid())
+        sol::function onMobMagicPrepare = getEntityCachedFunction(PCaster, "onMobMagicPrepare");
+        if (!onMobMagicPrepare.valid())
         {
             return {};
         }
@@ -2496,7 +2496,7 @@ namespace luautils
             luaSpell = spell::GetSpell(startingSpellId.value());
         }
 
-        auto result = OnMobMagicPrepare(CLuaBaseEntity(PCaster), luaSpell);
+        auto result = onMobMagicPrepare(CLuaBaseEntity(PCaster), CLuaBaseEntity(PTarget), luaSpell);
         if (!result.valid())
         {
             sol::error err = result;
