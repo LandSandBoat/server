@@ -210,6 +210,18 @@ end
 xi.player.onPlayerLevelDown = function(player)
 end
 
+xi.player.onPlayerMount = function(player)
+    -- For PM3-3 The Road Forks.  This value will be checked periodically, and break
+    -- the Mimeo Jewel should a player be mounted, zone, or disconnect.
+    if
+        player:getZoneID() == xi.zone.ATTOHWA_CHASM and
+        player:hasKeyItem(xi.ki.MIMEO_JEWEL)
+    then
+        player:messageSpecial(zones[xi.zone.ATTOHWA_CHASM].text.MIMEO_JEWEL_OFFSET + 4, xi.ki.MIMEO_JEWEL)
+        player:delKeyItem(xi.ki.MIMEO_JEWEL)
+    end
+end
+
 xi.player.onPlayerEmote = function(player, emoteId)
     if emoteId == xi.emote.CHEER and player:hasStatusEffect(xi.effect.FULL_SPEED_AHEAD) then
         xi.fsa.onCheer(player)

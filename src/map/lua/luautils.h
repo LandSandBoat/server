@@ -300,6 +300,7 @@ namespace luautils
     void OnPlayerDeath(CCharEntity* PChar);
     void OnPlayerLevelUp(CCharEntity* PChar);
     void OnPlayerLevelDown(CCharEntity* PChar);
+    void OnPlayerMount(CCharEntity* PChar);
     void OnPlayerEmote(CCharEntity* PChar, Emote EmoteID);
     void OnPlayerVolunteer(CCharEntity* PChar, std::string text);
 

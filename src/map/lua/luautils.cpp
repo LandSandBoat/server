@@ -4504,6 +4504,26 @@ namespace luautils
         }
     }
 
+    void OnPlayerMount(CCharEntity* PChar)
+    {
+        TracyZoneScoped;
+
+        auto onPlayerMount = lua["xi"]["player"]["onPlayerMount"];
+        if (!onPlayerMount.valid())
+        {
+            ShowWarning("luautils::onPlayerMount");
+            return;
+        }
+
+        auto result = onPlayerMount(CLuaBaseEntity(PChar));
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("luautils::onPlayerMount: %s", err.what());
+            return;
+        }
+    }
+
     void OnPlayerEmote(CCharEntity* PChar, Emote EmoteID)
     {
         TracyZoneScoped;
