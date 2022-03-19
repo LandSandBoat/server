@@ -3035,6 +3035,11 @@ namespace luautils
             return -1;
         }
 
+        if (PMob->isDynamicEntity)
+        {
+            return -1;
+        }
+
         // TODO: These int8 string need to die.
         std::string zone_name = (const char*)PMob->loc.zone->GetName();
         std::string mob_name  = (const char*)PMob->GetName();
