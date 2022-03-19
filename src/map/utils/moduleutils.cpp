@@ -128,7 +128,7 @@ namespace moduleutils
         {
             if (!override.applied)
             {
-                ShowError("Override not applied: {} ({})", override.overrideName, override.filename);
+                ShowWarning("Override not applied: {} ({})", override.overrideName, override.filename);
             }
         }
     }
