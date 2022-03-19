@@ -16,8 +16,6 @@ entity.onTrigger = function(player, npc)
         player:startEvent(22)
     elseif (player:getCurrentMission(COP) == xi.mission.id.cop.DAWN and player:getCharVar("PromathiaStatus")==3 and player:getCharVar("Promathia_kill_day") < os.time() and player:getCharVar("COP_louverance_story")== 0 ) then
         player:startEvent(757)
-    else
-        player:startEvent(580)
     end
 end
 

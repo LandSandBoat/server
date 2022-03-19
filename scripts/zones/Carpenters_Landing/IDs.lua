@@ -22,6 +22,7 @@ zones[xi.zone.CARPENTERS_LANDING] =
         LOGIN_CAMPAIGN_UNDERWAY    = 7001, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER               = 7002, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         CONQUEST_BASE              = 7056, -- Tallying conquest results...
+        BEGONE_TRESPASSER          = 7251, -- Begone, trespasser! This land belongs to the Knights Mi- This land belongs to Count Teulomme!
         CRYPTONBERRY_FALLEN_TREE   = 7253, -- A tree has fallen here...
         CRYPTONBERRY_EXECUTOR_POP  = 7254, -- You feel a wave of hatred wash over you!
         FISHING_MESSAGE_OFFSET     = 7277, -- You can't fish here.

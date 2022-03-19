@@ -3,6 +3,8 @@
 -- Promathia 3-2
 -----------------------------------
 -- !addmission 6 318
+-- Door: Neptune's Spire : !pos 35 0 -15 245
+-- Ru'Lude Homepoint 1   : !pos -6 3 0.001 243
 -----------------------------------
 require('scripts/globals/interaction/mission')
 require('scripts/globals/keyitems')
@@ -25,21 +27,29 @@ mission.sections =
             return currentMission == mission.missionId
         end,
 
+        [xi.zone.METALWORKS] =
+        {
+            ['Cid'] = mission:progressEvent(861):oncePerZone(),
+        },
+
         [xi.zone.LOWER_JEUNO] =
         {
             ['_6tc'] =
             {
                 onTrigger = function(player, npc)
-                    if mission:getVar(player, 'Status') == 0 then
-                        player:startEvent(86)
-                        return mission:progressEvent(9) -- TODO: Verify this sequence
+                    local missionStatus = mission:getVar(player, 'Status')
+
+                    if missionStatus == 0 then
+                        return mission:progressEvent(86)
+                    elseif missionStatus == 1 then
+                        return mission:progressEvent(9)
                     end
                 end,
             },
 
             onEventFinish =
             {
-                [9] = function(player, csid, option, npc)
+                [86] = function(player, csid, option, npc)
                     mission:setVar(player, 'Status', 1)
                 end,
             },
@@ -51,7 +61,10 @@ mission.sections =
             {
                 [1] = function(player, region)
                     if mission:getVar(player, 'Status') == 1 then
-                        return mission:progressEvent(65, player:getNation())
+                        local pNation = player:getNation()
+                        local hasDefeatedShadowlord = player:hasCompletedMission(pNation, xi.mission.id.nation.SHADOW_LORD)
+
+                        return mission:progressEvent(65, pNation, hasDefeatedShadowlord)
                     end
                 end,
             },

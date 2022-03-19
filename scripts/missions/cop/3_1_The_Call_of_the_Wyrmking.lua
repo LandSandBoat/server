@@ -3,6 +3,8 @@
 -- Promathia 3-1
 -----------------------------------
 -- !addmission 6 258
+-- Port Bastok HP : !pos -126 -6 10 236
+-- Cid            : !pos -12 -12 1 237
 -----------------------------------
 require('scripts/globals/interaction/mission')
 require('scripts/globals/keyitems')
