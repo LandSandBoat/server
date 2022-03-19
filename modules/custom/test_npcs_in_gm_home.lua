@@ -11,7 +11,7 @@ m:addOverride("xi.zones.GM_Home.Zone.onInitialize", function(zone)
     super(zone)
 
     -- Insert NPC into zone
-    local npc = zone:insertDynamicEntity({
+    local horro = zone:insertDynamicEntity({
         objtype = xi.objType.NPC,
         name = "Horro",
         modelId = 2430,
@@ -23,19 +23,18 @@ m:addOverride("xi.zones.GM_Home.Zone.onInitialize", function(zone)
     })
 
     -- Use the mob object however you like
-    utils.unused(npc)
+    -- horro:getID() etc.
+    utils.unused(horro)
 
     -- Build a cache entry for the new NPC
-    -- TODO: The npcs table is nil here, why?
-    xi.zones.GM_Home.npcs = {}
     xi.zones.GM_Home.npcs.Horro = {}
 
     -- Attach regular event handlers to that cache entry
-    xi.zones.GM_Home.npcs.Horro.onTrade = function(player, npcArg, trade)
+    xi.zones.GM_Home.npcs.Horro.onTrade = function(player, npc, trade)
     end
 
-    xi.zones.GM_Home.npcs.Horro.onTrigger = function(player, npcArg)
-        player:PrintToPlayer("Welcome to GM Home!", 0, npcArg:getName())
+    xi.zones.GM_Home.npcs.Horro.onTrigger = function(player, npc)
+        player:PrintToPlayer("Welcome to GM Home!", 0, npc:getName())
     end
 
     xi.zones.GM_Home.npcs.Horro.onEventUpdate = function(player, csid, option)
