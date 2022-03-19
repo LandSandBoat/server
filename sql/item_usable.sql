@@ -2050,7 +2050,7 @@ INSERT INTO `item_usable` VALUES (15175,'revilers_helm',20,1,0,0,100,30,300,0);
 INSERT INTO `item_usable` VALUES (15179,'dream_hat_+1',1,2,0,0,1,30,86400,0);
 INSERT INTO `item_usable` VALUES (15182,'zoolater_hat',1,3,33,0,50,30,1800,0);
 INSERT INTO `item_usable` VALUES (15194,'maats_cap',1,8,79,0,1,30,86400,0);
-INSERT INTO `item_usable` VALUES (15198,'sprout_beret',4,3,0,0,1,30,600,0);
+INSERT INTO `item_usable` VALUES (15198,'sprout_beret',1,3,0,0,1,5,72000,0);
 INSERT INTO `item_usable` VALUES (15199,'guide_beret',4,3,0,0,1,30,1800,0);
 INSERT INTO `item_usable` VALUES (15204,'mandragora_beret',1,1,0,0,1,30,3600,0);
 INSERT INTO `item_usable` VALUES (15211,'reraise_hairpin',1,8,33,0,10,30,60,0);
