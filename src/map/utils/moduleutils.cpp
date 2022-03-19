@@ -102,8 +102,8 @@ namespace moduleutils
                 auto lastElem  = override.nameParts.back();
                 for (auto& part : override.nameParts)
                 {
-                    table = table[part].get_or<sol::table>(sol::nil);
-                    if (table == sol::nil)
+                    table = table[part].get_or<sol::table>(sol::lua_nil);
+                    if (table == sol::lua_nil)
                     {
                         break;
                     }
