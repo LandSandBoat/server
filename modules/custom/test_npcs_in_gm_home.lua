@@ -8,7 +8,12 @@ local m = Module:new("test_npcs_in_gm_home")
 m:setEnabled(true)
 
 m:addOverride("xi.zones.GM_Home.Zone.onInitialize", function(zone)
+    -- Call the zone's original function for onInitialize
     super(zone)
+
+    -----------------------------------
+    -- NOTE: THIS API IS EXPERIMENTAL AND LIKELY TO CHANGE. USE AT YOUR OWN RISK!
+    -----------------------------------
 
     -- Insert NPC into zone
     local horro = zone:insertDynamicEntity({
