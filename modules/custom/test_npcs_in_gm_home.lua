@@ -14,6 +14,7 @@ m:addOverride("xi.zones.GM_Home.Zone.onInitialize", function(zone)
     local horro = zone:insertDynamicEntity({
         objtype = xi.objType.NPC,
         name = "Horro",
+        -- See documentation model_ids.txt, or play around with !costume (remember that the bytes are swapped!)
         modelId = 2430,
         x = 5.000,
         y = 0.000,
@@ -25,6 +26,12 @@ m:addOverride("xi.zones.GM_Home.Zone.onInitialize", function(zone)
     -- Use the mob object however you like
     -- horro:getID() etc.
     utils.unused(horro)
+
+    -- There might not be any NPCs populated for GM_Home,
+    -- (see npc_list.sql) so the npcs table might not exist.
+    -- We're going to make it now.
+    -- This shouldn't be needed for other zones.
+    xi.zones.GM_Home.npcs = xi.zones.GM_Home.npcs or {}
 
     -- Build a cache entry for the new NPC
     xi.zones.GM_Home.npcs.Horro = {}
