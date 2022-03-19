@@ -201,7 +201,7 @@ xi.homepoint.onTrigger = function(player, csid, index)
 --  Added manually because for some reason Homepoint healing stopped working when we moved Lower Jeuno HP #2 near the Auction House
     player:addHP(player:getMaxHP())
     player:addMP(player:getMaxMP())
-    super(player, csid, index)
+--    super(player, csid, index)
 
 end
 

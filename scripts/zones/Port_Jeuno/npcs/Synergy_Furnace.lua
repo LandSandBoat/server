@@ -3,6 +3,8 @@
 --  NPC: Synergy Furnace
 -- !pos  -52 0 -11 246
 -- NOTE (324,0,0,0,0,0); -- Call Beast ability delay -1 IS NOT CODED
+-- All super OP augments (like Haste, dual wield, triple attack, fast cast, etc, have been hard capped at +3% for HQ3
+-- Don't ask me because I won't remember.
 -----------------------------------
 local ID = require("scripts/zones/Port_Jeuno/IDs")
 require("scripts/globals/npc_util")
@@ -585,7 +587,8 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {12946, 3276}) and player:getFreeSlotsCount() >= 1 then
             itemId = 12946
             au0 = 49 -- + 1-3% Haste. Guaranteed.
-            po0 = math.random(0, 2)
+--            po0 = math.random(0, 2)
+            po0 = 0 -- This should cap out at 3% haste
 
             handleAugmentedItemCreation(player, itemId, au0, po0)
 
@@ -720,7 +723,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {13787, 3283}) and player:getFreeSlotsCount() >= 1 then
             itemId = 13787
             au0 = 351 -- + 1-3% Occasionally Quickens Spellcasting. Guaranteed.
-            po0 = math.random(0, 2)
+            po0 = 0
 
             handleAugmentedItemCreation(player, itemId, au0, po0)
 
@@ -728,7 +731,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {13787, 3283}) and player:getFreeSlotsCount() >= 1 then
             itemId = 13787
             au0 = 351 -- + 1-3% Occasionally Quickens Spellcasting. Guaranteed.
-            po0 = math.random(0, 2)
+            po0 = 0
 
             handleRandomAugment(player, itemId, au0, po0)
 
@@ -736,7 +739,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {13788, 3283}) and player:getFreeSlotsCount() >= 1 then
             itemId = 13788
             au0 = 351 -- + 1-4% Occasionally Quickens Spellcasting. Guaranteed.
-            po0 = math.random(0, 3) -- this power will jump to 4% or 5% after HQ3
+            po0 = 0
 
             handleHqItemCreation(player, itemId, au0, po0)
 
@@ -744,7 +747,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {13788, 3283}) and player:getFreeSlotsCount() >= 1 then
             itemId = 13788
             au0 = 351 -- + 1-4% Occasionally Quickens Spellcasting. Guaranteed.
-            po0 = math.random(0, 3)
+            po0 = 0
 
             handleRandomAugment(player, itemId, au0, po0)
 -----------------------------------------------------------------------------------------------
@@ -918,7 +921,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {14076, 3279}) and player:getFreeSlotsCount() >= 1 then
             itemId = 14076
             au0 = 328 -- + 1-3% Crit. Hit Damage. Guaranteed.
-            po0 = math.random(0, 2)
+            po0 = 0
 
             handleAugmentedItemCreation(player, itemId, au0, po0)
 
@@ -926,7 +929,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {14076, 3279}) and player:getFreeSlotsCount() >= 1 then
             itemId = 14076
             au0 = 328 -- + 1-3% Crit. Hit Damage. Guaranteed.
-            po0 = math.random(0, 2)
+            po0 = 0
 
             handleRandomAugment(player, itemId, au0, po0)
 
@@ -934,7 +937,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {14077, 3279}) and player:getFreeSlotsCount() >= 1 then
             itemId = 14077
             au0 = 328 -- + 1-4% Crit. Hit Damage. Guaranteed.
-            po0 = math.random(0, 3)
+            po0 = math.random(0, 1)
 
             handleHqItemCreation(player, itemId, au0, po0)
 
@@ -942,7 +945,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {14077, 3279}) and player:getFreeSlotsCount() >= 1 then
             itemId = 14077
             au0 = 328 -- + 1-4% Crit. Hit Damage. Guaranteed.
-            po0 = math.random(0, 3)
+            po0 = math.random(0, 1)
 
             handleRandomAugment(player, itemId, au0, po0)
 -----------------------------------------------------------------------------------------------
@@ -951,7 +954,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {14308, 3279}) and player:getFreeSlotsCount() >= 1 then
             itemId = 14308
             au0 = 41 -- + 1-3 Crit. Hit Rate. Guaranteed.
-            po0 = math.random(0, 2)
+            po0 = 0
 
             handleAugmentedItemCreation(player, itemId, au0, po0)
 
@@ -959,7 +962,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {14308, 3279}) and player:getFreeSlotsCount() >= 1 then
             itemId = 14308
             au0 = 41 -- + 1-3 Crit. Hit Rate. Guaranteed.
-            po0 = math.random(0, 2)
+            po0 = 0
 
             handleRandomAugment(player, itemId, au0, po0)
 
@@ -967,7 +970,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {14309, 3279}) and player:getFreeSlotsCount() >= 1 then
             itemId = 14309
             au0 = 41 -- + 1-4 Crit. Hit Rate. Guaranteed.
-            po0 = math.random(0, 3)
+            po0 = math.random(0, 1)
 
             handleHqItemCreation(player, itemId, au0, po0)
 
@@ -975,7 +978,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {14309, 3279}) and player:getFreeSlotsCount() >= 1 then
             itemId = 14309
             au0 = 41 -- + 1-4 Crit. Hit Rate. Guaranteed.
-            po0 = math.random(0, 3)
+            po0 = math.random(0, 1)
 
             handleRandomAugment(player, itemId, au0, po0)
 -----------------------------------------------------------------------------------------------
@@ -1017,7 +1020,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {12421, 3280}) and player:getFreeSlotsCount() >= 1 then
             itemId = 12421
             au0 = 140 -- + 1-3 Fast Cast. Guaranteed.
-            po0 = math.random(0, 2)
+            po0 = 0
 
             handleAugmentedItemCreation(player, itemId, au0, po0)
 
@@ -1025,7 +1028,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {12421, 3280}) and player:getFreeSlotsCount() >= 1 then
             itemId = 12421
             au0 = 140 -- + 1-3 Fast Cast. Guaranteed.
-            po0 = math.random(0, 2)
+            po0 = 0
 
             handleRandomAugment(player, itemId, au0, po0)
 
@@ -1033,7 +1036,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {13911, 3280}) and player:getFreeSlotsCount() >= 1 then
             itemId = 13911
             au0 = 140 -- + 1-4 Fast Cast. Guaranteed.
-            po0 = math.random(0, 3)
+            po0 = math.random(0, 1)
 
             handleHqItemCreation(player, itemId, au0, po0)
 
@@ -1041,7 +1044,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {13911, 3280}) and player:getFreeSlotsCount() >= 1 then
             itemId = 13911
             au0 = 140 -- + 1-4 Fast Cast. Guaranteed.
-            po0 = math.random(0, 3)
+            po0 = math.random(0, 1)
 
             handleRandomAugment(player, itemId, au0, po0)
 -----------------------------------------------------------------------------------------------
@@ -1050,7 +1053,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {12549, 3280}) and player:getFreeSlotsCount() >= 1 then
             itemId = 12549
             au0 = 54 -- + 1-3% Physical Damage Taken -. Guaranteed.
-            po0 = math.random(0, 2)
+            po0 = 0
 
             handleAugmentedItemCreation(player, itemId, au0, po0)
 
@@ -1058,7 +1061,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {12549, 3280}) and player:getFreeSlotsCount() >= 1 then
             itemId = 12549
             au0 = 54 -- + 1-3% Physical Damage Taken -. Guaranteed.
-            po0 = math.random(0, 2)
+            po0 = 0
 
             handleRandomAugment(player, itemId, au0, po0)
 
@@ -1066,7 +1069,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {14370, 3280}) and player:getFreeSlotsCount() >= 1 then
             itemId = 14370
             au0 = 54 -- + 1-4% Physical Damage Taken -. Guaranteed.
-            po0 = math.random(0, 3)
+            po0 = math.random(0, 1)
 
             handleHqItemCreation(player, itemId, au0, po0)
 
@@ -1074,7 +1077,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {14370, 3280}) and player:getFreeSlotsCount() >= 1 then
             itemId = 14370
             au0 = 54 -- + 1-4% Physical Damage Taken -. Guaranteed.
-            po0 = math.random(0, 3)
+            po0 = math.random(0, 1)
 
             handleRandomAugment(player, itemId, au0, po0)
 -----------------------------------------------------------------------------------------------
@@ -1116,7 +1119,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {12805, 3280}) and player:getFreeSlotsCount() >= 1 then
             itemId = 12805
             au0 = 55 -- + 1-3 Magic Damage Taken -. Guaranteed.
-            po0 = math.random(0, 2)
+            po0 = 0
 
             handleAugmentedItemCreation(player, itemId, au0, po0)
 
@@ -1124,7 +1127,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {12805, 3280}) and player:getFreeSlotsCount() >= 1 then
             itemId = 12805
             au0 = 55 -- + 1-3 Magic Damage Taken -. Guaranteed.
-            po0 = math.random(0, 2)
+            po0 = 0
 
             handleRandomAugment(player, itemId, au0, po0)
 
@@ -1132,7 +1135,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {14283, 3280}) and player:getFreeSlotsCount() >= 1 then
             itemId = 14283
             au0 = 55 -- + 1-4 Magic Damage Taken -. Guaranteed.
-            po0 = math.random(0, 3)
+            po0 = math.random(0, 1)
 
             handleHqItemCreation(player, itemId, au0, po0)
 
@@ -1140,7 +1143,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {14283, 3280}) and player:getFreeSlotsCount() >= 1 then
             itemId = 14283
             au0 = 55 -- + 1-4 Magic Damage Taken -. Guaranteed.
-            po0 = math.random(0, 3)
+            po0 = math.random(0, 1)
 
             handleRandomAugment(player, itemId, au0, po0)
 -----------------------------------------------------------------------------------------------
@@ -1149,7 +1152,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {12933, 3280}) and player:getFreeSlotsCount() >= 1 then
             itemId = 12933
             au0 = 137 -- + 1-3 Regen. Guaranteed.
-            po0 = math.random(0, 2)
+            po0 = 0
 
             handleAugmentedItemCreation(player, itemId, au0, po0)
 
@@ -1157,7 +1160,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {12933, 3280}) and player:getFreeSlotsCount() >= 1 then
             itemId = 12933
             au0 = 137 -- + 1-3 Regen. Guaranteed.
-            po0 = math.random(0, 2)
+            po0 = 0
 
             handleRandomAugment(player, itemId, au0, po0)
 
@@ -1165,7 +1168,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {14163, 3280}) and player:getFreeSlotsCount() >= 1 then
             itemId = 14163
             au0 = 137 -- + 1-4 Regen. Guaranteed.
-            po0 = math.random(0, 3)
+            po0 = math.random(0, 1)
 
             handleHqItemCreation(player, itemId, au0, po0)
 
@@ -1173,7 +1176,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {14163, 3280}) and player:getFreeSlotsCount() >= 1 then
             itemId = 14163
             au0 = 137 -- + 1-4 Regen. Guaranteed.
-            po0 = math.random(0, 3)
+            po0 = math.random(0, 1)
 
             handleRandomAugment(player, itemId, au0, po0)
 -----------------------------------------------------------------------------------------------
@@ -1248,7 +1251,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {12685, 3281}) and player:getFreeSlotsCount() >= 1 then
             itemId = 12685
             au0 = 49 -- + 1-3% Haste. Guaranteed.
-            po0 = math.random(0, 2)
+            po0 = 0
 
             handleAugmentedItemCreation(player, itemId, au0, po0)
 
@@ -1256,7 +1259,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {12685, 3281}) and player:getFreeSlotsCount() >= 1 then
             itemId = 12685
             au0 = 49 -- + 1-3% Haste. Guaranteed.
-            po0 = math.random(0, 2)
+            po0 = 0
 
             handleRandomAugment(player, itemId, au0, po0)
 
@@ -1264,7 +1267,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {14816, 3281}) and player:getFreeSlotsCount() >= 1 then
             itemId = 14816
             au0 = 49 -- + 1-4% Haste. Guaranteed.
-            po0 = math.random(0, 3)
+            po0 = math.random(0, 1)
 
             handleHqItemCreation(player, itemId, au0, po0)
 
@@ -1272,7 +1275,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {14816, 3281}) and player:getFreeSlotsCount() >= 1 then
             itemId = 14816
             au0 = 49 -- + 1-4% Haste. Guaranteed.
-            po0 = math.random(0, 3)
+            po0 = math.random(0, 1)
 
             handleRandomAugment(player, itemId, au0, po0)
 -----------------------------------------------------------------------------------------------
@@ -1347,7 +1350,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {13934, 3282}) and player:getFreeSlotsCount() >= 1 then
             itemId = 13934
             au0 = 327 -- + 1-3% Weapon Skill Damage. Guaranteed.
-            po0 = math.random(0, 2)
+            po0 = 0
 
             handleAugmentedItemCreation(player, itemId, au0, po0)
 
@@ -1355,7 +1358,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {13934, 3282}) and player:getFreeSlotsCount() >= 1 then
             itemId = 13934
             au0 = 327 -- + 1-3% Weapon Skill Damage. Guaranteed.
-            po0 = math.random(0, 2)
+            po0 = 0
 
             handleRandomAugment(player, itemId, au0, po0)
 
@@ -1363,7 +1366,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {13935, 3282}) and player:getFreeSlotsCount() >= 1 then
             itemId = 13935
             au0 = 327 -- + 1-4% Weapon Skill Damage. Guaranteed.
-            po0 = math.random(0, 3)
+            po0 = math.random(0, 1)
 
             handleHqItemCreation(player, itemId, au0, po0)
 
@@ -1371,7 +1374,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {13935, 3282}) and player:getFreeSlotsCount() >= 1 then
             itemId = 13935
             au0 = 327 -- + 1-4% Weapon Skill Damage. Guaranteed.
-            po0 = math.random(0, 3)
+            po0 = math.random(0, 1)
 
             handleRandomAugment(player, itemId, au0, po0)
 -----------------------------------------------------------------------------------------------
@@ -1396,7 +1399,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {14388, 3282}) and player:getFreeSlotsCount() >= 1 then
             itemId = 14388
             au0 = 49 -- + 1-4% Haste. Guaranteed.
-            po0 = math.random(0, 3)
+            po0 = math.random(0, 2)
 
             handleHqItemCreation(player, itemId, au0, po0)
 
@@ -1404,7 +1407,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {14388, 3282}) and player:getFreeSlotsCount() >= 1 then
             itemId = 14388
             au0 = 49 -- + 1-4% Haste. Guaranteed.
-            po0 = math.random(0, 3)
+            po0 = math.random(0, 2)
 
             handleRandomAugment(player, itemId, au0, po0)
 -----------------------------------------------------------------------------------------------
@@ -1446,7 +1449,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {14303, 3282}) and player:getFreeSlotsCount() >= 1 then
             itemId = 14303
             au0 = 146 -- + 1-3 Dual Weild. Guaranteed.
-            po0 = math.random(0, 2)
+            po0 = 0
 
             handleAugmentedItemCreation(player, itemId, au0, po0)
 
@@ -1454,7 +1457,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {14303, 3282}) and player:getFreeSlotsCount() >= 1 then
             itemId = 14303
             au0 = 146 -- + 1-3 Dual Weild. Guaranteed.
-            po0 = math.random(0, 2)
+            po0 = 0
 
             handleRandomAugment(player, itemId, au0, po0)
 
@@ -1462,7 +1465,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {14304, 3282}) and player:getFreeSlotsCount() >= 1 then
             itemId = 14304
             au0 = 146 -- + 1-4 Dual Weild. Guaranteed.
-            po0 = math.random(0, 3)
+            po0 = math.random(0, 1)
 
             handleHqItemCreation(player, itemId, au0, po0)
 
@@ -1470,7 +1473,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {14304, 3282}) and player:getFreeSlotsCount() >= 1 then
             itemId = 14304
             au0 = 146 -- + 1-4 Dual Weild. Guaranteed.
-            po0 = math.random(0, 3)
+            po0 = math.random(0, 1)
 
             handleRandomAugment(player, itemId, au0, po0)
 -----------------------------------------------------------------------------------------------
@@ -1561,7 +1564,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {14368, 3284}) and player:getFreeSlotsCount() >= 1 then
             itemId = 14368
             au0 = 49 -- + 1-4% Haste. Guaranteed.
-            po0 = math.random(0, 3)
+            po0 = math.random(0, 2)
 
             handleHqItemCreation(player, itemId, au0, po0)
 
@@ -1569,7 +1572,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {14368, 3284}) and player:getFreeSlotsCount() >= 1 then
             itemId = 14368
             au0 = 49 -- + 1-4% Haste. Guaranteed.
-            po0 = math.random(0, 3)
+            po0 = math.random(0, 2)
 
             handleRandomAugment(player, itemId, au0, po0)
 -----------------------------------------------------------------------------------------------
@@ -1611,7 +1614,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {14280, 3284}) and player:getFreeSlotsCount() >= 1 then
             itemId = 14280
             au0 = 140 -- + 1-3 Fast Cast. Guaranteed.
-            po0 = math.random(0, 2)
+            po0 = 0
 
             handleAugmentedItemCreation(player, itemId, au0, po0)
 
@@ -1619,7 +1622,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {14280, 3284}) and player:getFreeSlotsCount() >= 1 then
             itemId = 14280
             au0 = 140 -- + 1-3 Fast Cast. Guaranteed.
-            po0 = math.random(0, 2)
+            po0 = 0
 
             handleRandomAugment(player, itemId, au0, po0)
 
@@ -1627,7 +1630,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {14281, 3284}) and player:getFreeSlotsCount() >= 1 then
             itemId = 14281
             au0 = 140 -- + 1-4 Fast Cast. Guaranteed.
-            po0 = math.random(0, 3)
+            po0 = math.random(0, 1)
 
             handleHqItemCreation(player, itemId, au0, po0)
 
@@ -1635,7 +1638,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {14281, 3284}) and player:getFreeSlotsCount() >= 1 then
             itemId = 14281
             au0 = 140 -- + 1-4 Fast Cast. Guaranteed.
-            po0 = math.random(0, 3)
+            po0 = math.random(0, 1)
 
             handleRandomAugment(player, itemId, au0, po0)
 -----------------------------------------------------------------------------------------------
@@ -1677,7 +1680,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {16115, 3286}) and player:getFreeSlotsCount() >= 1 then
             itemId = 16115
             au0 = 101 -- + 1-3 Pet: Magic Attack Bonus. Guaranteed.
-            po0 = math.random(0, 2)
+            po0 = 0
 
             handleAugmentedItemCreation(player, itemId, au0, po0)
 
@@ -1685,7 +1688,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {16115, 3286}) and player:getFreeSlotsCount() >= 1 then
             itemId = 16115
             au0 = 101 -- + 1-3 Pet: Magic Attack Bonus. Guaranteed.
-            po0 = math.random(0, 2)
+            po0 = 0
 
             handleRandomAugment(player, itemId, au0, po0)
 
@@ -1693,7 +1696,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {16116, 3286}) and player:getFreeSlotsCount() >= 1 then
             itemId = 16116
             au0 = 101 -- + 1-4 Pet: Magic Attack Bonus. Guaranteed.
-            po0 = math.random(0, 3)
+            po0 = math.random(0, 1)
 
             handleHqItemCreation(player, itemId, au0, po0)
 
@@ -1701,7 +1704,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {16116, 3286}) and player:getFreeSlotsCount() >= 1 then
             itemId = 16116
             au0 = 101 -- + 1-4 Pet: Magic Attack Bonus. Guaranteed.
-            po0 = math.random(0, 3)
+            po0 = math.random(0, 1)
 
             handleRandomAugment(player, itemId, au0, po0)
 -----------------------------------------------------------------------------------------------
@@ -1726,7 +1729,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {14576, 3286}) and player:getFreeSlotsCount() >= 1 then
             itemId = 14576
             au0 = 35 -- + 1-4 Magic Accuracy. Guaranteed.
-            po0 = math.random(0, 3)
+            po0 = math.random(0, 2)
 
             handleHqItemCreation(player, itemId, au0, po0)
 
@@ -1734,7 +1737,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {14576, 3286}) and player:getFreeSlotsCount() >= 1 then
             itemId = 14576
             au0 = 35 -- + 1-4 Magic Accuracy. Guaranteed.
-            po0 = math.random(0, 3)
+            po0 = math.random(0, 2)
 
             handleRandomAugment(player, itemId, au0, po0)
 -----------------------------------------------------------------------------------------------
@@ -1743,7 +1746,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {14997, 3286}) and player:getFreeSlotsCount() >= 1 then
             itemId = 14997
             au0 = 133 -- + 1-3 Magic Attack Bonus. Guaranteed.
-            po0 = math.random(0, 2)
+            po0 = 0
 
             handleAugmentedItemCreation(player, itemId, au0, po0)
 
@@ -1751,7 +1754,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {14997, 3286}) and player:getFreeSlotsCount() >= 1 then
             itemId = 14997
             au0 = 133 -- + 1-3 Magic Attack Bonus. Guaranteed.
-            po0 = math.random(0, 2)
+            po0 = 0
 
             handleRandomAugment(player, itemId, au0, po0)
 
@@ -1759,7 +1762,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {14998, 3286}) and player:getFreeSlotsCount() >= 1 then
             itemId = 14998
             au0 = 133 -- + 1-4 Magic Attack Bonus. Guaranteed.
-            po0 = math.random(0, 3)
+            po0 = math.random(0, 1)
 
             handleHqItemCreation(player, itemId, au0, po0)
 
@@ -1767,7 +1770,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {14998, 3286}) and player:getFreeSlotsCount() >= 1 then
             itemId = 14998
             au0 = 133 -- + 1-4 Magic Attack Bonus. Guaranteed.
-            po0 = math.random(0, 3)
+            po0 = math.random(0, 1)
 
             handleRandomAugment(player, itemId, au0, po0)
 -----------------------------------------------------------------------------------------------
@@ -1776,7 +1779,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {15657, 3286}) and player:getFreeSlotsCount() >= 1 then
             itemId = 15657
             au0 = 133 -- + 1-3 Magic Attack Bonus. Guaranteed.
-            po0 = math.random(0, 2)
+            po0 = 0
 
             handleAugmentedItemCreation(player, itemId, au0, po0)
 
@@ -1784,7 +1787,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {15657, 3286}) and player:getFreeSlotsCount() >= 1 then
             itemId = 15657
             au0 = 133 -- + 1-3 Magic Attack Bonus. Guaranteed.
-            po0 = math.random(0, 2)
+            po0 = 0
 
             handleRandomAugment(player, itemId, au0, po0)
 
@@ -1792,7 +1795,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {15658, 3286}) and player:getFreeSlotsCount() >= 1 then
             itemId = 15658
             au0 = 133 -- + 1-4 Magic Attack Bonus. Guaranteed.
-            po0 = math.random(0, 3)
+            po0 = math.random(0, 1)
 
             handleHqItemCreation(player, itemId, au0, po0)
 
@@ -1800,7 +1803,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {15658, 3286}) and player:getFreeSlotsCount() >= 1 then
             itemId = 15658
             au0 = 133 -- + 1-4 Magic Attack Bonus. Guaranteed.
-            po0 = math.random(0, 3)
+            po0 = math.random(0, 1)
 
             handleRandomAugment(player, itemId, au0, po0)
 -----------------------------------------------------------------------------------------------
@@ -1842,7 +1845,8 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {16113, 3285}) and player:getFreeSlotsCount() >= 1 then
             itemId = 16113
             au0 = 138 -- + 1-3 Refresh. Guaranteed.
-            po0 = math.random(0, 2)
+--            po0 = math.random(0, 2)
+            po0 = 0
 
             handleAugmentedItemCreation(player, itemId, au0, po0)
 
@@ -1850,7 +1854,8 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {16113, 3285}) and player:getFreeSlotsCount() >= 1 then
             itemId = 16113
             au0 = 138 -- + 1-3 Refresh. Guaranteed.
-            po0 = math.random(0, 2)
+--            po0 = math.random(0, 2)
+            po0 = 0
 
             handleRandomAugment(player, itemId, au0, po0)
 
@@ -1858,15 +1863,17 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {16114, 3285}) and player:getFreeSlotsCount() >= 1 then
             itemId = 16114
             au0 = 138 -- + 1-4 Refresh. Guaranteed.
-            po0 = math.random(0, 3)
-
+--            po0 = math.random(0, 3)
+            po0 = 0
+			
             handleHqItemCreation(player, itemId, au0, po0)
 
         elseif randomC < 30 and
             npcUtil.tradeHasExactly(trade, {16114, 3285}) and player:getFreeSlotsCount() >= 1 then
             itemId = 16114
             au0 = 138 -- + 1-4 Refresh. Guaranteed.
-            po0 = math.random(0, 3)
+--            po0 = math.random(0, 3)
+            po0 = 0
 
             handleRandomAugment(player, itemId, au0, po0)
 -----------------------------------------------------------------------------------------------
@@ -1875,7 +1882,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {14573, 3285}) and player:getFreeSlotsCount() >= 1 then
             itemId = 14573
             au0 = 144 -- + 1-3 Triple Attack. Guaranteed.
-            po0 = math.random(0, 2)
+            po0 = 0
 
             handleAugmentedItemCreation(player, itemId, au0, po0)
 
@@ -1883,7 +1890,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {14573, 3285}) and player:getFreeSlotsCount() >= 1 then
             itemId = 14573
             au0 = 144 -- + 1-3 Triple Attack. Guaranteed.
-            po0 = math.random(0, 2)
+            po0 = 0
 
             handleRandomAugment(player, itemId, au0, po0)
 
@@ -1891,7 +1898,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {14574, 3285}) and player:getFreeSlotsCount() >= 1 then
             itemId = 14574
             au0 = 144 -- + 1-4 Triple Attack. Guaranteed.
-            po0 = math.random(0, 3)
+            po0 = math.random(0, 1)
 
             handleHqItemCreation(player, itemId, au0, po0)
 
@@ -1899,7 +1906,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {14574, 3285}) and player:getFreeSlotsCount() >= 1 then
             itemId = 14574
             au0 = 144 -- + 1-4 Triple Attack. Guaranteed.
-            po0 = math.random(0, 3)
+            po0 = math.random(0, 1)
 
             handleRandomAugment(player, itemId, au0, po0)
 -----------------------------------------------------------------------------------------------
@@ -1908,7 +1915,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {14995, 3285}) and player:getFreeSlotsCount() >= 1 then
             itemId = 14995
             au0 = 143 -- + 1-3% Double Attack. Guaranteed.
-            po0 = math.random(0, 2)
+            po0 = 0
 
             handleAugmentedItemCreation(player, itemId, au0, po0)
 
@@ -1916,7 +1923,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {14995, 3285}) and player:getFreeSlotsCount() >= 1 then
             itemId = 14995
             au0 = 143 -- + 1-3% Double Attack. Guaranteed.
-            po0 = math.random(0, 2)
+            po0 = 0
 
             handleRandomAugment(player, itemId, au0, po0)
 
@@ -1924,7 +1931,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {14996, 3285}) and player:getFreeSlotsCount() >= 1 then
             itemId = 14996
             au0 = 143 -- + 1-4% Double Attack. Guaranteed.
-            po0 = math.random(0, 3)
+            po0 = math.random(0, 1)
 
             handleHqItemCreation(player, itemId, au0, po0)
 
@@ -1932,7 +1939,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {14996, 3285}) and player:getFreeSlotsCount() >= 1 then
             itemId = 14996
             au0 = 143 -- + 1-4% Double Attack. Guaranteed.
-            po0 = math.random(0, 3)
+            po0 = math.random(0, 1)
 
             handleRandomAugment(player, itemId, au0, po0)
 -----------------------------------------------------------------------------------------------
@@ -2023,7 +2030,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {12562, 3276}) and player:getFreeSlotsCount() >= 1 then
             itemId = 12562
             au0 = 143 -- + 1-3 Double Attack. Guaranteed.
-            po0 = math.random(0, 2)
+            po0 = 0
 
             handleKirinItemCreation(player, itemId, au0, po0)
 
@@ -2031,7 +2038,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {12562, 3276}) and player:getFreeSlotsCount() >= 1 then
             itemId = 12562
             au0 = 143 -- + 1-3 Double Attack. Guaranteed.
-            po0 = math.random(0, 2)
+            po0 = 0
 
             handleRandomAugment(player, itemId, au0, po0)
 -- *Kirin's Osode (Seiryu)*
@@ -2055,7 +2062,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {12562, 3278}) and player:getFreeSlotsCount() >= 1 then
             itemId = 12562
             au0 = 146 -- + 1-3 Dual Weild. Guaranteed.
-            po0 = math.random(0, 2)
+            po0 = 0
 
             handleKirinItemCreation(player, itemId, au0, po0)
 
@@ -2063,7 +2070,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, {12562, 3278}) and player:getFreeSlotsCount() >= 1 then
             itemId = 12562
             au0 = 146 -- + 1-3 Dual Weild. Guaranteed.
-            po0 = math.random(0, 2)
+            po0 = 0
 
             handleRandomAugment(player, itemId, au0, po0)
 -----------------------------------------------------------------------------------------------

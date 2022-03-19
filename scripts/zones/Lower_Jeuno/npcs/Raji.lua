@@ -15,18 +15,18 @@ end
 entity.onTrigger = function(player, npc)
    local stock =
    {
-       3279,  15000,    -- Neptunal tatter
-       3280,  15000,    -- Martial tatter 
-       3281,  15000,    -- Earthen tatter
-       3282,  15000,    -- Dryadic tatter
-	   3283,  15000,    -- Aquarian tatter
-	   3284,  15000,    -- Wyrmal tatter
-	   3285,  25000,    -- Phantasmal tatter
-	   3286,  25000,    -- Hadean tatter
-	   3275,  25000,	 -- Genbu scrap
-	   3276,  25000,	 -- Suzaku scrap
-	   3277,  25000,	 -- Seiryu scrap
-	   3278,  25000,	 -- Byakko scrap
+       3279,  25000,    -- Neptunal tatter
+       3280,  25000,    -- Martial tatter 
+       3281,  25000,    -- Earthen tatter
+       3282,  25000,    -- Dryadic tatter
+	   3283,  25000,    -- Aquarian tatter
+	   3284,  25000,    -- Wyrmal tatter
+	   3285,  35000,    -- Phantasmal tatter
+	   3286,  35000,    -- Hadean tatter
+	   3275,  35000,	 -- Genbu scrap
+	   3276,  35000,	 -- Suzaku scrap
+	   3277,  35000,	 -- Seiryu scrap
+	   3278,  35000,	 -- Byakko scrap
 	
    }
     
