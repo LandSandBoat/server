@@ -31,7 +31,7 @@ m:addOverride("xi.zones.GM_Home.Zone.onInitialize", function(zone)
     xi.zones.GM_Home.npcs.Horro = {}
 
     -- Attach regular event handlers to that cache entry
-    xi.zones.GM_Home.npcs.Horro.onTrade = function(player, npc, trade)
+    xi.zones.GM_Home.npcs.Horro.onTrade = function(player, npcArg, trade)
     end
 
     xi.zones.GM_Home.npcs.Horro.onTrigger = function(player, npcArg)
