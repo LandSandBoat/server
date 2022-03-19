@@ -1381,6 +1381,144 @@ Usage:
         return PMob;
     }
 
+    CMobEntity* InstantiateDynamicMob(uint32 groupid, uint16 groupZoneId, uint16 targetZoneId)
+    {
+        CMobEntity* PMob = new CMobEntity();
+
+        const char* Query = "SELECT zoneid, mob_groups.name, packet_name, \
+        respawntime, spawntype, dropid, mob_groups.HP, mob_groups.MP, minLevel, maxLevel, \
+        modelid, mJob, sJob, cmbSkill, cmbDmgMult, cmbDelay, behavior, links, mobType, immunity, \
+        ecosystemID, mobsize, speed, \
+        STR, DEX, VIT, AGI, `INT`, MND, CHR, EVA, DEF, ATT, ACC, \
+        slash_sdt, pierce_sdt, h2h_sdt, impact_sdt, \
+        fire_sdt, ice_sdt, wind_sdt, earth_sdt, lightning_sdt, water_sdt, light_sdt, dark_sdt, \
+        fire_res, ice_res, wind_res, earth_res, lightning_res, water_res, light_res, dark_res, \
+        Element, mob_pools.familyid, name_prefix, entityFlags, animationsub, \
+        (mob_family_system.HP / 100), (mob_family_system.MP / 100), hasSpellScript, spellList, mob_groups.poolid, \
+        allegiance, namevis, aggro, mob_pools.skill_list_id, mob_pools.true_detection, mob_family_system.detects \
+        FROM mob_groups INNER JOIN mob_pools ON mob_groups.poolid = mob_pools.poolid \
+        INNER JOIN mob_resistances ON mob_pools.resist_id = mob_resistances.resist_id \
+        INNER JOIN mob_family_system ON mob_pools.familyid = mob_family_system.familyID \
+        WHERE mob_groups.groupid = %u AND mob_groups.zoneid = %u";
+
+        int32 ret = sql->Query(Query, groupid, groupZoneId);
+
+        if (ret != SQL_ERROR && sql->NumRows() != 0)
+        {
+            if (sql->NextRow() == SQL_SUCCESS)
+            {
+                PMob->name.insert(0, (const char*)sql->GetData(1));
+                PMob->packetName.insert(0, (const char*)sql->GetData(2));
+
+                PMob->m_RespawnTime = sql->GetUIntData(3) * 1000;
+                PMob->m_SpawnType   = (SPAWNTYPE)sql->GetUIntData(4);
+                PMob->m_DropID      = sql->GetUIntData(5);
+
+                PMob->HPmodifier = (uint32)sql->GetIntData(6);
+                PMob->MPmodifier = (uint32)sql->GetIntData(7);
+
+                PMob->m_minLevel = (uint8)sql->GetIntData(8);
+                PMob->m_maxLevel = (uint8)sql->GetIntData(9);
+
+                memcpy(&PMob->look, sql->GetData(10), 23);
+
+                PMob->SetMJob(sql->GetIntData(11));
+                PMob->SetSJob(sql->GetIntData(12));
+
+                ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setMaxHit(1);
+                ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setSkillType(sql->GetIntData(13));
+                PMob->m_dmgMult = sql->GetUIntData(14);
+                ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setDelay((sql->GetIntData(15) * 1000) / 60);
+                ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setBaseDelay((sql->GetIntData(15) * 1000) / 60);
+
+                PMob->m_Behaviour = (uint16)sql->GetIntData(16);
+                PMob->m_Link      = (uint8)sql->GetIntData(17);
+                PMob->m_Type      = (uint8)sql->GetIntData(18);
+                PMob->m_Immunity  = (IMMUNITY)sql->GetIntData(19);
+                PMob->m_EcoSystem = (ECOSYSTEM)sql->GetIntData(20);
+                PMob->m_ModelSize = (uint8)sql->GetIntData(21);
+
+                PMob->speed    = (uint8)sql->GetIntData(22); // Overwrites baseentity.cpp's defined speed
+                PMob->speedsub = (uint8)sql->GetIntData(22); // Overwrites baseentity.cpp's defined speedsub
+
+                PMob->strRank = (uint8)sql->GetIntData(23);
+                PMob->dexRank = (uint8)sql->GetIntData(24);
+                PMob->vitRank = (uint8)sql->GetIntData(25);
+                PMob->agiRank = (uint8)sql->GetIntData(26);
+                PMob->intRank = (uint8)sql->GetIntData(27);
+                PMob->mndRank = (uint8)sql->GetIntData(28);
+                PMob->chrRank = (uint8)sql->GetIntData(29);
+                PMob->evaRank = (uint8)sql->GetIntData(30);
+                PMob->defRank = (uint8)sql->GetIntData(31);
+                PMob->attRank = (uint8)sql->GetIntData(32);
+                PMob->accRank = (uint8)sql->GetIntData(33);
+
+                PMob->setModifier(Mod::SLASH_SDT, (uint16)(sql->GetFloatData(34) * 1000));
+                PMob->setModifier(Mod::PIERCE_SDT, (uint16)(sql->GetFloatData(35) * 1000));
+                PMob->setModifier(Mod::HTH_SDT, (uint16)(sql->GetFloatData(36) * 1000));
+                PMob->setModifier(Mod::IMPACT_SDT, (uint16)(sql->GetFloatData(37) * 1000));
+
+                PMob->setModifier(Mod::FIRE_SDT, (int16)sql->GetFloatData(38));    // Modifier 54, base 10000 stored as signed integer. Positives signify less damage.
+                PMob->setModifier(Mod::ICE_SDT, (int16)sql->GetFloatData(39));     // Modifier 55, base 10000 stored as signed integer. Positives signify less damage.
+                PMob->setModifier(Mod::WIND_SDT, (int16)sql->GetFloatData(40));    // Modifier 56, base 10000 stored as signed integer. Positives signify less damage.
+                PMob->setModifier(Mod::EARTH_SDT, (int16)sql->GetFloatData(41));   // Modifier 57, base 10000 stored as signed integer. Positives signify less damage.
+                PMob->setModifier(Mod::THUNDER_SDT, (int16)sql->GetFloatData(42)); // Modifier 58, base 10000 stored as signed integer. Positives signify less damage.
+                PMob->setModifier(Mod::WATER_SDT, (int16)sql->GetFloatData(43));   // Modifier 59, base 10000 stored as signed integer. Positives signify less damage.
+                PMob->setModifier(Mod::LIGHT_SDT, (int16)sql->GetFloatData(44));   // Modifier 60, base 10000 stored as signed integer. Positives signify less damage.
+                PMob->setModifier(Mod::DARK_SDT, (int16)sql->GetFloatData(45));    // Modifier 61, base 10000 stored as signed integer. Positives signify less damage.
+
+                PMob->setModifier(Mod::FIRE_RES, (int16)(sql->GetIntData(46)));    // These are stored as signed integers which
+                PMob->setModifier(Mod::ICE_RES, (int16)(sql->GetIntData(47)));     // is directly the modifier starting value.
+                PMob->setModifier(Mod::WIND_RES, (int16)(sql->GetIntData(48)));    // Positives signify increased resist chance.
+                PMob->setModifier(Mod::EARTH_RES, (int16)(sql->GetIntData(49)));
+                PMob->setModifier(Mod::THUNDER_RES, (int16)(sql->GetIntData(50)));
+                PMob->setModifier(Mod::WATER_RES, (int16)(sql->GetIntData(51)));
+                PMob->setModifier(Mod::LIGHT_RES, (int16)(sql->GetIntData(52)));
+                PMob->setModifier(Mod::DARK_RES, (int16)(sql->GetIntData(53)));
+
+                PMob->m_Element     = (uint8)sql->GetIntData(54);
+                PMob->m_Family      = (uint16)sql->GetIntData(55);
+                PMob->m_name_prefix = (uint8)sql->GetIntData(56);
+                PMob->m_flags       = (uint32)sql->GetIntData(57);
+
+                PMob->animationsub = (uint32)sql->GetIntData(58);
+
+                // Setup HP / MP Stat Percentage Boost
+                PMob->HPscale = sql->GetFloatData(59);
+                PMob->MPscale = sql->GetFloatData(60);
+
+                // TODO: Remove me
+                //PMob->m_HasSpellScript = (uint8)sql->GetIntData(61);
+
+                PMob->m_SpellListContainer = mobSpellList::GetMobSpellList(sql->GetIntData(62));
+
+                PMob->m_Pool = sql->GetUIntData(63);
+
+                PMob->allegiance      = static_cast<ALLEGIANCE_TYPE>(sql->GetUIntData(64));
+                PMob->namevis         = sql->GetUIntData(65);
+                PMob->m_Aggro         = sql->GetUIntData(66);
+                PMob->m_MobSkillList  = sql->GetUIntData(67);
+                PMob->m_TrueDetection = sql->GetUIntData(68);
+                PMob->m_Detects       = sql->GetUIntData(69);
+
+                // must be here first to define mobmods
+                mobutils::InitializeMob(PMob, zoneutils::GetZone(targetZoneId));
+
+                zoneutils::GetZone(targetZoneId)->InsertMOB(PMob);
+
+                luautils::OnEntityLoad(PMob);
+
+                luautils::OnMobInitialize(PMob);
+                luautils::ApplyMixins(PMob);
+                luautils::ApplyZoneMixins(PMob);
+
+                PMob->saveModifiers();
+                PMob->saveMobModifiers();
+            }
+        }
+        return PMob;
+    }
+
     void WeaknessTrigger(CBaseEntity* PTarget, WeaknessType level)
     {
         uint16 animationID = 0;
