@@ -706,6 +706,18 @@ std::string escape(std::string const& s)
     return escaped;
 }
 
+std::vector<std::string> split(const std::string& s, char delim)
+{
+    std::stringstream        ss(s);
+    std::string              item;
+    std::vector<std::string> elems;
+    while (std::getline(ss, item, delim))
+    {
+        elems.push_back(item);
+    }
+    return elems;
+}
+
 bool approximatelyEqual(float a, float b)
 {
     constexpr float epsilon = std::numeric_limits<float>::epsilon();

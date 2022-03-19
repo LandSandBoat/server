@@ -2,18 +2,13 @@
 -- Add some test NPCs to GM_HOME (zone 210)
 -----------------------------------
 require("modules/module_utils")
+require("scripts/zones/GM_Home/Zone")
 -----------------------------------
 local m = Module:new("test_npcs_in_gm_home")
 m:setEnabled(true)
 
--- TODO: Fix the order modules are loaded, onInitialize is not usable by the time we call this
--- m:addOverride("xi.zones.GM_Home.Zone.onInitialize", function(zone)
---     super(zone)
--- end)
-
--- Workaround
-if m.enabled then
-    local zone = GetZone(210)
+m:addOverride("xi.zones.GM_Home.Zone.onInitialize", function(zone)
+    super(zone)
 
     -- Insert NPC into zone
     local npc = zone:insertDynamicEntity({
@@ -48,6 +43,6 @@ if m.enabled then
 
     xi.zones.GM_Home.npcs.Horro.onEventFinish = function(player, csid, option)
     end
-end
+end)
 
 return m
