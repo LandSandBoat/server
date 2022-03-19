@@ -16,22 +16,6 @@ local ID = require("scripts/zones/GM_Home/IDs")
 -----------------------------------
 local zone_object = {}
 
--- Name Vis:
--- 1 : I Icon
--- 8 : Hide name
--- 128 : Ghost effect
-
--- Flags:
--- 32 : Call for Help
--- 256 : Hide HP
--- 2046 : Untargettable
--- 65536 : Green/Yellow thing
--- 262,144 : GM Flag
-
--- Name Prefix:
--- 8   : Targettable by spells, client menu (Blue name)
--- 128 : NPC invisible
-
 zone_object.onInitialize = function(zone)
 end
 

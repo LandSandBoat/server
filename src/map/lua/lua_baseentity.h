@@ -271,8 +271,6 @@ public:
     uint8 getAllegiance();
     void  setAllegiance(uint8 allegiance);
 
-    void setUpdatePacketData(uint32 index, uint32 data);
-
     uint8 getCampaignAllegiance();                 // Gets Campaign Allegiance of Entity
     void  setCampaignAllegiance(uint8 allegiance); // Sets Campaign Allegiance of Entity
 

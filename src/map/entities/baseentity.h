@@ -262,8 +262,6 @@ public:
     CBattlefield*                 PBattlefield; // pointer to battlefield (if in one)
     CInstance*                    PInstance;
 
-    std::vector<uint32> updatePacketData;
-
 protected:
     std::map<std::string, uint32> m_localVars;
 };

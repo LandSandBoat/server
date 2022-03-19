@@ -123,9 +123,6 @@ CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type
                 ref<uint8>(0x29)  = static_cast<uint8>(PEntity->allegiance);
                 ref<uint8>(0x2B)  = PEntity->namevis;
 
-                // CLuaBaseEntity(TYPE_NPC | 17639424 | Horro)
-                // GetNPCByID(17639424):setUpdatePacketData(0x20, 0x00)
-
                 // 0x20:
                 // 0:
                 // 1: Can attack, light yellow name
@@ -368,11 +365,5 @@ CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type
             memcpy(data + (0x34), PEntity->GetName(), (PEntity->name.size() > 12 ? 12 : PEntity->name.size()));
         }
         break;
-    }
-
-    if (PEntity->updatePacketData.size())
-    {
-        ref<uint8>(PEntity->updatePacketData[0]) = (uint8)PEntity->updatePacketData[1];
-        PEntity->updatePacketData.clear();
     }
 }
