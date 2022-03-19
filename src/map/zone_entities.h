@@ -69,7 +69,8 @@ public:
 
     EntityList_t GetCharList() const;
     bool         CharListEmpty() const;
-    uint16       GetNewTargID();
+    uint16       GetNewCharTargID();
+    uint16       GetNewDynamicTargID();
 
     EntityList_t m_allyList;
     EntityList_t m_mobList; // список всех MOBs в зоне

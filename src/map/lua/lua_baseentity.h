@@ -270,6 +270,7 @@ public:
     void  setNation(uint8 nation); // Sets Nation of Entity
     uint8 getAllegiance();
     void  setAllegiance(uint8 allegiance);
+
     uint8 getCampaignAllegiance();                 // Gets Campaign Allegiance of Entity
     void  setCampaignAllegiance(uint8 allegiance); // Sets Campaign Allegiance of Entity
 

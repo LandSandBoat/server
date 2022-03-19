@@ -26,8 +26,11 @@
 #include "../entities/npcentity.h"
 #include "../region.h"
 #include "../zone.h"
+#include "../zone_entities.h"
 #include "lua_baseentity.h"
 #include "lua_zone.h"
+#include "../utils/mobutils.h"
+#include "../mob_modifier.h"
 
 CLuaZone::CLuaZone(CZone* PZone)
 : m_pLuaZone(PZone)
@@ -158,6 +161,157 @@ void CLuaZone::reloadNavmesh()
     m_pLuaZone->m_navMesh->reload();
 }
 
+std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
+{
+    CBaseEntity* PEntity = nullptr;
+    if (table.get_or<uint8>("objtype", TYPE_NPC) == TYPE_NPC)
+    {
+        PEntity = new CNpcEntity();
+    }
+    else
+    {
+        PEntity = new CMobEntity();
+    }
+
+    // NOTE: Mob allegiance is the default for NPCs
+    PEntity->allegiance = static_cast<ALLEGIANCE_TYPE>(table.get_or<uint8>("allegiance", ALLEGIANCE_TYPE::MOB));
+
+    uint16 ZoneID = m_pLuaZone->GetID();
+
+    // TODO: Wrap this entity in a unique_ptr that will free this dynamic targ ID
+    //       on despawn/destruction
+    // TODO: The tracking of these IDs is pretty bad also, fix that in zone_entities
+    PEntity->targid = m_pLuaZone->GetZoneEntities()->GetNewDynamicTargID();
+
+    PEntity->id = 0x1000000 + (ZoneID << 12) + PEntity->targid;
+
+    auto name = table.get_or<std::string>("name", "DynamicEntity");
+    PEntity->name.insert(0, name.c_str());
+
+    PEntity->SetModelId(table.get_or<uint16>("modelId", 0));
+
+    PEntity->loc.zone       = m_pLuaZone;
+    PEntity->loc.p.rotation = table.get_or<uint8>("rotation", 0);
+    PEntity->loc.p.x        = table.get_or<float>("x", 0.01);
+    PEntity->loc.p.y        = table.get_or<float>("y", 0.01);
+    PEntity->loc.p.z        = table.get_or<float>("z", 0.01);
+    PEntity->loc.p.moving   = 0;
+
+    PEntity->speed        = 50;
+    PEntity->speedsub     = 50;
+
+    PEntity->animation    = 0;
+    PEntity->animationsub = 0;
+
+    PEntity->updatemask |= UPDATE_ALL_MOB;
+
+    if (auto* PNpc = dynamic_cast<CNpcEntity*>(PEntity))
+    {
+        PNpc->namevis       = table.get_or<uint8>("namevis", 0);
+        PNpc->status        = STATUS_TYPE::NORMAL;
+        PNpc->m_flags       = table.get_or<uint32>("m_flags", 0);
+        PNpc->name_prefix   = table.get_or<uint8>("name_prefix", 32);
+        PNpc->widescan      = 0;
+        PNpc->m_triggerable = table.get_or("triggerable", false);
+
+        m_pLuaZone->InsertNPC(PNpc);
+    }
+    else if (auto* PMob = dynamic_cast<CMobEntity*>(PEntity))
+    {
+        PMob->m_RespawnTime = 1000;
+        PMob->m_SpawnType   = SPAWNTYPE_SCRIPTED;
+        PMob->m_DropID      = 0;
+
+        PMob->m_minLevel = 80;
+        PMob->m_maxLevel = 80;
+
+        PMob->SetMJob(1);
+        PMob->SetSJob(1);
+
+        //((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setMaxHit(1);
+        //((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setSkillType(Sql_GetIntData(SqlHandle, 17));
+        //PMob->m_dmgMult = Sql_GetUIntData(SqlHandle, 18);
+        //((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setDelay((Sql_GetIntData(SqlHandle, 19) * 1000) / 60);
+        //((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setBaseDelay((Sql_GetIntData(SqlHandle, 19) * 1000) / 60);
+
+        PMob->m_Behaviour = BEHAVIOUR_NONE;
+        PMob->m_Link      = 0;
+        PMob->m_Type      = MOBTYPE_NORMAL;
+        PMob->m_Immunity  = 0;
+        PMob->m_EcoSystem = ECOSYSTEM::DRAGON;
+        PMob->m_ModelSize = 0;
+
+        PMob->speed    = 50;
+        PMob->speedsub = 50;
+
+        PMob->strRank = 1;
+        PMob->dexRank = 1;
+        PMob->vitRank = 1;
+        PMob->agiRank = 1;
+        PMob->intRank = 1;
+        PMob->mndRank = 1;
+        PMob->chrRank = 1;
+        PMob->evaRank = 1;
+        PMob->defRank = 1;
+        PMob->attRank = 1;
+        PMob->accRank = 1;
+
+        PMob->m_Element     = 1;
+        PMob->m_Family      = 1;
+        PMob->m_name_prefix = 0;
+        //PMob->m_flags       = 0;
+
+        // Setup HP / MP Stat Percentage Boost
+        PMob->HPscale = 100;
+        PMob->MPscale = 100;
+
+        // Check if we should be looking up scripts for this mob
+        //PMob->m_HasSpellScript = (uint8)Sql_GetIntData(SqlHandle, 65);
+
+        //PMob->m_SpellListContainer = mobSpellList::GetMobSpellList(Sql_GetIntData(SqlHandle, 66));
+
+        //PMob->m_Pool = 1280;
+
+        PMob->allegiance = ALLEGIANCE_TYPE::MOB;
+        //PMob->namevis    = 0;
+        PMob->m_Aggro    = 1;
+
+        PMob->m_roamFlags    = 0;
+        PMob->m_MobSkillList = 0;
+
+        PMob->m_TrueDetection = 1;
+        PMob->m_Detects       = 1;
+
+        PMob->namevis       = table.get_or<uint8>("namevis", 0);
+        PMob->status        = STATUS_TYPE::NORMAL;
+        PMob->m_flags       = table.get_or<uint32>("m_flags", 0);
+        PMob->m_name_prefix = table.get_or<uint8>("name_prefix", 32);
+
+        mobutils::CalculateStats(PMob);
+        mobutils::InitializeMob(PMob, m_pLuaZone);
+
+        PMob->health.modhp = 1000;
+        PMob->health.maxhp = 1000;
+        PMob->health.hp = 1000;
+
+        // never despawn
+        PMob->SetDespawnTime(0s);
+        PMob->setMobMod(MOBMOD_ALLI_HATE, 200);
+        PMob->setMobMod(MOBMOD_NO_DESPAWN, 1);
+        PMob->setMobMod(MOBMOD_IDLE_DESPAWN, 0);
+
+
+        m_pLuaZone->InsertMOB(PMob);
+
+        PMob->m_SpawnPoint = PMob->loc.p;
+        PMob->Spawn();
+
+        // Set spawn point after since ::Spawn() wipes it
+    }
+
+    return CLuaBaseEntity(PEntity);
+}
+
 /************************************************************************
  *  Function: SetSoloBattleMusic(253)
  *  Purpose : Set Solo Battle music for zone
@@ -271,6 +425,7 @@ void CLuaZone::Register()
     SOL_REGISTER("battlefieldsFull", CLuaZone::battlefieldsFull);
     SOL_REGISTER("getWeather", CLuaZone::getWeather);
     SOL_REGISTER("reloadNavmesh", CLuaZone::reloadNavmesh);
+    SOL_REGISTER("insertDynamicEntity", CLuaZone::insertDynamicEntity);
 
     SOL_REGISTER("getSoloBattleMusic", CLuaZone::getSoloBattleMusic);
     SOL_REGISTER("getPartyBattleMusic", CLuaZone::getPartyBattleMusic);

@@ -103,15 +103,33 @@ CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type
     {
         case TYPE_NPC:
         {
+            auto* PNpc = static_cast<CNpcEntity*>(PEntity);
+
             if (updatemask & UPDATE_HP)
             {
-                ref<uint8>(0x1E) = 0x64;
+                // HPP
+                ref<uint8>(0x1E) = 0x64; // 100
                 ref<uint8>(0x1F) = PEntity->animation;
                 ref<uint8>(0x2A) |= PEntity->animationsub;
+
                 ref<uint32>(0x21) = ((CNpcEntity*)PEntity)->m_flags;
                 ref<uint8>(0x27)  = ((CNpcEntity*)PEntity)->name_prefix; // gender and something else
+
+                if (PNpc->IsTriggerable())
+                {
+                    ref<uint8>(0x28) |= 0x40;
+                }
+
                 ref<uint8>(0x29)  = static_cast<uint8>(PEntity->allegiance);
                 ref<uint8>(0x2B)  = PEntity->namevis;
+            }
+
+            // TODO: Unify name logic
+            if (updatemask & UPDATE_NAME)
+            {
+                // depending on size of name, this can be 0x20, 0x22, or 0x24
+                this->setSize(0x48);
+                memcpy(data + (0x34), PEntity->GetName(), std::min<size_t>(PEntity->name.size(), PacketNameLength));
             }
         }
         break;
@@ -119,13 +137,14 @@ CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type
         case TYPE_PET:
         case TYPE_TRUST:
         {
-            CMobEntity* PMob = (CMobEntity*)PEntity;
+            CMobEntity* PMob = static_cast<CMobEntity*>(PEntity);
             {
                 if (updatemask & UPDATE_HP)
                 {
                     ref<uint8>(0x1E) = PMob->GetHPP();
                     ref<uint8>(0x1F) = PEntity->animation;
                     ref<uint8>(0x2A) |= PEntity->animationsub;
+
                     ref<uint32>(0x21) = PMob->m_flags;
                     ref<uint8>(0x25)  = PMob->health.hp > 0 ? 0x08 : 0;
                     ref<uint8>(0x27)  = PMob->m_name_prefix;
