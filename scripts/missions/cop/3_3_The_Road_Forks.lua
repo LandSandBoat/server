@@ -374,6 +374,9 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if player:hasKeyItem(xi.ki.MIMEO_JEWEL) then
+                        local animationNpc = GetNPCByID(npc:getID() + 1)
+
+                        animationNpc:entityAnimationPacket('krtu')
                         return mission:progressEvent(2)
                     end
                 end,
