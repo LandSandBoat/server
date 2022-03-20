@@ -599,6 +599,9 @@ xi.job_utils.rune_fencer.useSwipeLunge = function(player, target, ability, actio
     return cumulativeDamage
 end
 
+-- see http://wiki.ffo.jp/html/1720.html, the effects resisted are against the strong element.
+-- for example, Amnesia is fire based, therefore water runes (Unda) add resist Amnesia.
+-- These effects seem to match the "Resist X" traits that all jobs have, including unused player traits that made it into autotranslate; Resist Curse/Charm
 local function addPflugResistType(type, effect, power)
 
     if type >= xi.effect.IGNIS and type <= xi.effect.TENEBRAE then
@@ -617,7 +620,7 @@ local function addPflugResistType(type, effect, power)
 
         local resistTypes = pflugResistTypes[type]
 
-        for _, resistMod in pairs(resistTypes) do -- store mod in effect, this function is triggered from  event onEffectGain so it adds to the player automatically.
+        for _, resistMod in pairs(resistTypes) do -- store mod in effect, this function is triggered from event onEffectGain so it adds to the player automatically.
             effect:addMod(resistMod, power)
         end
 
