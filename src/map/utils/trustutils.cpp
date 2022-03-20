@@ -270,7 +270,7 @@ namespace trustutils
         g_PTrustIDList.clear();
     }
 
-    void SpawnTrust(CCharEntity* PMaster, uint32 TrustID)
+    CTrustEntity* SpawnTrust(CCharEntity* PMaster, uint32 TrustID)
     {
         if (PMaster->PParty == nullptr)
         {
@@ -295,6 +295,8 @@ namespace trustutils
         PTrust->Spawn();
 
         PMaster->PParty->ReloadParty();
+
+        return PTrust;
     }
 
     CTrustEntity* LoadTrust(CCharEntity* PMaster, uint32 TrustID)
