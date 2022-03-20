@@ -24,7 +24,7 @@ m:addOverride("xi.globals.spells.trust.kuyin_hathdenna.onSpellCast", function(ca
     -----------------------------------
     -- New logic below
     -----------------------------------
-    trust:setModelId(70) -- Cornelia
+    trust:setModelId(3119) -- Trust: Cornelia
     trust:setPacketName("Cornelia")
 
     local boostAmount = math.ceil((30 / 99) * caster:getMainLvl())
@@ -35,6 +35,9 @@ m:addOverride("xi.globals.spells.trust.kuyin_hathdenna.onSpellCast", function(ca
 
     trust:SetAutoAttackEnabled(false)
     trust:setUnkillable(true)
+
+    -- Cache this for later
+    trust:setLocalVar("MASTER_ID", trust:getMaster():getID())
 end)
 
 m:addOverride("xi.globals.spells.trust.kuyin_hathdenna.onMobSpawn", function(mob)
@@ -46,7 +49,11 @@ m:addOverride("xi.globals.spells.trust.kuyin_hathdenna.onMobSpawn", function(mob
 end)
 
 m:addOverride("xi.globals.spells.trust.kuyin_hathdenna.onMobDespawn", function(mob)
-    for _, member in ipairs(mob:getMaster():getParty()) do
+    -- NOTE: Apparently getMaster() returns nil by now, so we're going to get the master's ID that
+    --     : we cached earlier
+    local masterId = mob:getLocalVar("MASTER_ID")
+    local master = GetPlayerByID(masterId)
+    for _, member in ipairs(master:getParty()) do
         if member:isPC() then
             member:PrintToPlayer("Remember: never give up!", 4, "Cornelia") -- 4: MESSAGE_PARTY
         end
