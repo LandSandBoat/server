@@ -1046,6 +1046,8 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
 
                 PChar->PRecastContainer->Add(RECAST_ABILITY, 256, 60);
                 PChar->pushPacket(new CCharRecastPacket(PChar));
+
+                luautils::OnPlayerMount(PChar);
             }
         }
         break;

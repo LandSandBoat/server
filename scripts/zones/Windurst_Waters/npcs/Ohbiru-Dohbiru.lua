@@ -40,9 +40,7 @@ entity.onTrigger = function(player, npc)
     local FlowerProgress = player:getCharVar("FLOWER_PROGRESS")
     local blueRibbonBlues = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.BLUE_RIBBON_BLUES)
 
-    if (player:getCurrentMission(COP) == xi.mission.id.cop.THE_ROAD_FORKS and player:getCharVar("MEMORIES_OF_A_MAIDEN_Status")==2) then
-        player:startEvent(872)
-    elseif ((SayFlowers == QUEST_ACCEPTED or SayFlowers == QUEST_COMPLETED) and FlowerProgress == 1) then
+    if ((SayFlowers == QUEST_ACCEPTED or SayFlowers == QUEST_COMPLETED) and FlowerProgress == 1) then
         if (needToZone) then
             player:startEvent(518)
         elseif (player:getCharVar("FLOWER_PROGRESS") == 2) then
@@ -95,8 +93,6 @@ entity.onEventFinish = function(player, csid, option)
         player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE*4500)
         player:addFame(WINDURST, 50)
         player:tradeComplete()
-    elseif (csid == 872) then
-        player:setCharVar("MEMORIES_OF_A_MAIDEN_Status", 3)
     elseif (csid == 516) then
         if (option < 7) then
             local choice = flowerList[option]

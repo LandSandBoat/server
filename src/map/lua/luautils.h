@@ -192,6 +192,7 @@ namespace luautils
 
     int32 OnGameIn(CCharEntity* PChar, bool zoning);
     int32 OnZoneIn(CCharEntity* PChar);                        // triggers when a player zones into a zone
+    void  OnZoneOut(CCharEntity* PChar);                       // triggers when a player leaves a zone
     void  AfterZoneIn(CBaseEntity* PChar);                     // triggers after a player has finished zoning in
     int32 OnZoneInitialise(uint16 ZoneID);                     // triggers when zone is loaded
     int32 OnRegionEnter(CCharEntity* PChar, CRegion* PRegion); // when player enters a region of a zone
@@ -299,6 +300,7 @@ namespace luautils
     void OnPlayerDeath(CCharEntity* PChar);
     void OnPlayerLevelUp(CCharEntity* PChar);
     void OnPlayerLevelDown(CCharEntity* PChar);
+    void OnPlayerMount(CCharEntity* PChar);
     void OnPlayerEmote(CCharEntity* PChar, Emote EmoteID);
     void OnPlayerVolunteer(CCharEntity* PChar, std::string text);
 

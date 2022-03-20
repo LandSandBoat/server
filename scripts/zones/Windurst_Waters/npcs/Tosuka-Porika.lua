@@ -18,12 +18,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    -- The Road Forks (CoP 3-3)
-    if player:getCurrentMission(COP) == xi.mission.id.cop.THE_ROAD_FORKS and player:getCharVar("MEMORIES_OF_A_MAIDEN_Status") == 10 then
-        player:startEvent(875)
-
     -- Hat in Hand
-    elseif player:hasKeyItem(xi.ki.NEW_MODEL_HAT) and not utils.mask.getBit(player:getCharVar("QuestHatInHand_var"), 5) then
+    if player:hasKeyItem(xi.ki.NEW_MODEL_HAT) and not utils.mask.getBit(player:getCharVar("QuestHatInHand_var"), 5) then
         player:messageSpecial(ID.text.YOU_SHOW_OFF_THE, 0, xi.ki.NEW_MODEL_HAT)
         player:startEvent(55)
 
@@ -45,12 +41,8 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    -- The Road Forks (CoP 3-3)
-    if csid == 875 then
-        player:setCharVar("MEMORIES_OF_A_MAIDEN_Status", 11)
-
     -- Hat in Hand
-    elseif csid == 55 then  -- Show Off Hat
+    if csid == 55 then  -- Show Off Hat
         player:setCharVar("QuestHatInHand_var", utils.mask.setBit(player:getCharVar("QuestHatInHand_var"), 5, true))
         player:addCharVar("QuestHatInHand_count", 1)
     end

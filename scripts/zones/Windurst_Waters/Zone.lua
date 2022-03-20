@@ -27,9 +27,6 @@ zone_object.onZoneIn = function(player, prevZone)
         end
         player:setPos(-40, -5, 80, 64)
         player:setHomePoint()
-    elseif player:getCurrentMission(COP) == xi.mission.id.cop.THE_ROAD_FORKS and player:getCharVar("MEMORIES_OF_A_MAIDEN_Status") == 1 then -- COP MEMORIES_OF_A_MAIDEN--3-3B: Windurst Route
-        player:setCharVar("MEMORIES_OF_A_MAIDEN_Status", 2)
-        cs = 871
     end
 
     -- MOG HOUSE EXIT

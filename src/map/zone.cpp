@@ -1008,6 +1008,8 @@ void CZone::CharZoneOut(CCharEntity* PChar)
         }
     }
 
+    luautils::OnZoneOut(PChar);
+
     if (PChar->m_LevelRestriction != 0)
     {
         if (PChar->PParty)
