@@ -2,7 +2,7 @@
 -- Darkness Named
 -- Promathia 3-5
 -----------------------------------
--- !addmission 6 350
+-- !addmission 6 358
 -- Door: Neptune's Spire : !pos 35 0 -15 245
 -- Monberaux             : !pos -42 0 -2 244
 -----------------------------------
@@ -69,6 +69,9 @@ mission.sections =
                 end,
             },
 
+            -- TODO: Some of Harnek's events duplicate dialogue but with the Neptune's Spire door
+            -- first opening.  Since Tenshodo membership is not required, there may be alternative
+            -- ways to see these messages. (Event 13 is the NPC version, Event 10 is the Door)
             ['Harnek'] =
             {
                 onTrigger = function(player, npc)
@@ -113,7 +116,7 @@ mission.sections =
                     if missionStatus == 0 then
                         return mission:progressEvent(82)
                     elseif missionStatus == 1 then
-                        return mission:event(3):importantEvent()
+                        return mission:event(3):importantOnce()
                     elseif missionStatus == 5 then
                         return mission:progressEvent(75)
                     end

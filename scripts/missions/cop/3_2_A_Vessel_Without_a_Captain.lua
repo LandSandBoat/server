@@ -41,8 +41,18 @@ mission.sections =
 
                     if missionStatus == 0 then
                         return mission:progressEvent(86)
-                    elseif missionStatus == 1 then
-                        return mission:progressEvent(9)
+                    end
+                end,
+            },
+
+            -- TODO: Some of Harnek's events duplicate dialogue but with the Neptune's Spire door
+            -- first opening.  Since Tenshodo membership is not required, there may be alternative
+            -- ways to see these messages. (Event 12 is the NPC version, Event 9 is the Door)
+            ['Harnek'] =
+            {
+                onTrigger = function(player, npc)
+                    if mission:getVar(player, 'Status') == 1 then
+                        return mission:event(12):importantEvent()
                     end
                 end,
             },

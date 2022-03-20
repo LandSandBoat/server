@@ -3,6 +3,7 @@
 -- Promathia 3-4
 -----------------------------------
 -- !addmission 6 350
+-- Cid                   : !pos -12 -12 1 237
 -- Door: Neptune's Spire : !pos 35 0 -15 245
 -----------------------------------
 require('scripts/globals/interaction/mission')
@@ -54,7 +55,6 @@ mission.sections =
             onEventFinish =
             {
                 [22] = function(player, csid, option, npc)
-                    -- Previous implementation called event 10 after this, but retail does not
                     mission:complete(player)
                 end,
 
