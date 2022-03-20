@@ -31,68 +31,68 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include <cstdio>
 #include <cstring>
 
-#include "lua/luautils.h"
+#include "../lua/luautils.h"
 
-#include "ai/ai_container.h"
-#include "ai/states/attack_state.h"
-#include "ai/states/item_state.h"
+#include "../ai/ai_container.h"
+#include "../ai/states/attack_state.h"
+#include "../ai/states/item_state.h"
 
-#include "packets/char_abilities.h"
-#include "packets/char_appearance.h"
-#include "packets/char_equip.h"
-#include "packets/char_health.h"
-#include "packets/char_job_extra.h"
-#include "packets/char_jobs.h"
-#include "packets/char_recast.h"
-#include "packets/char_skills.h"
-#include "packets/char_stats.h"
-#include "packets/char_sync.h"
-#include "packets/char_update.h"
-#include "packets/chat_message.h"
-#include "packets/conquest_map.h"
-#include "packets/delivery_box.h"
-#include "packets/inventory_assign.h"
-#include "packets/inventory_finish.h"
-#include "packets/inventory_item.h"
-#include "packets/inventory_modify.h"
-#include "packets/key_items.h"
-#include "packets/linkshell_equip.h"
-#include "packets/menu_jobpoints.h"
-#include "packets/menu_merit.h"
-#include "packets/message_basic.h"
-#include "packets/message_combat.h"
-#include "packets/message_special.h"
-#include "packets/message_standard.h"
-#include "packets/quest_mission_log.h"
+#include "../packets/char_abilities.h"
+#include "../packets/char_appearance.h"
+#include "../packets/char_equip.h"
+#include "../packets/char_health.h"
+#include "../packets/char_job_extra.h"
+#include "../packets/char_jobs.h"
+#include "../packets/char_recast.h"
+#include "../packets/char_skills.h"
+#include "../packets/char_stats.h"
+#include "../packets/char_sync.h"
+#include "../packets/char_update.h"
+#include "../packets/chat_message.h"
+#include "../packets/conquest_map.h"
+#include "../packets/delivery_box.h"
+#include "../packets/inventory_assign.h"
+#include "../packets/inventory_finish.h"
+#include "../packets/inventory_item.h"
+#include "../packets/inventory_modify.h"
+#include "../packets/key_items.h"
+#include "../packets/linkshell_equip.h"
+#include "../packets/menu_jobpoints.h"
+#include "../packets/menu_merit.h"
+#include "../packets/message_basic.h"
+#include "../packets/message_combat.h"
+#include "../packets/message_special.h"
+#include "../packets/message_standard.h"
+#include "../packets/quest_mission_log.h"
 
-#include "packets/roe_sparkupdate.h"
-#include "packets/server_ip.h"
-#include "packets/timer_bar_util.h"
+#include "../packets/roe_sparkupdate.h"
+#include "../packets/server_ip.h"
+#include "../packets/timer_bar_util.h"
 
-#include "ability.h"
-#include "alliance.h"
-#include "conquest_system.h"
-#include "grades.h"
-#include "item_container.h"
-#include "latent_effect_container.h"
-#include "linkshell.h"
-#include "map.h"
-#include "mob_modifier.h"
-#include "recast_container.h"
-#include "roe.h"
-#include "spell.h"
-#include "status_effect_container.h"
-#include "trait.h"
-#include "treasure_pool.h"
-#include "unitychat.h"
-#include "universal_container.h"
-#include "vana_time.h"
-#include "weapon_skill.h"
+#include "../ability.h"
+#include "../alliance.h"
+#include "../conquest_system.h"
+#include "../grades.h"
+#include "../item_container.h"
+#include "../latent_effect_container.h"
+#include "../linkshell.h"
+#include "../map.h"
+#include "../mob_modifier.h"
+#include "../recast_container.h"
+#include "../roe.h"
+#include "../spell.h"
+#include "../status_effect_container.h"
+#include "../trait.h"
+#include "../treasure_pool.h"
+#include "../unitychat.h"
+#include "../universal_container.h"
+#include "../vana_time.h"
+#include "../weapon_skill.h"
 
-#include "entities/automatonentity.h"
-#include "entities/charentity.h"
-#include "entities/mobentity.h"
-#include "entities/petentity.h"
+#include "../entities/automatonentity.h"
+#include "../entities/charentity.h"
+#include "../entities/mobentity.h"
+#include "../entities/petentity.h"
 
 #include "battleutils.h"
 #include "blueutils.h"
@@ -2212,22 +2212,65 @@ namespace charutils
     void AddItemToRecycleBin(CCharEntity* PChar, uint32 container, uint8 slotID, uint8 quantity)
     {
         CItem* PItem = PChar->getStorage(container)->GetItem(slotID);
+        const char* Query = "UPDATE char_inventory SET location = %u, slot = %u WHERE charid = %u AND location = %u AND slot = %u;";
+        auto* RecycleBin = PChar->getStorage(LOC_RECYCLEBIN);
+        auto* OtherContainer = PChar->getStorage(container);
+
+        // Try and insert
         uint8 NewSlotID = PChar->getStorage(LOC_RECYCLEBIN)->InsertItem(PItem);
         if (NewSlotID != ERROR_SLOTID)
         {
-            const char* Query = "UPDATE char_inventory SET location = %u, slot = %u WHERE charid = %u AND location = %u AND slot = %u;";
-
-            if (Sql_Query(SqlHandle, Query, LOC_RECYCLEBIN, NewSlotID, PChar->id, container, slotID) != SQL_ERROR && Sql_AffectedRows(SqlHandle) != 0)
+            if (sql->Query(Query, LOC_RECYCLEBIN, NewSlotID, PChar->id, container, slotID) != SQL_ERROR && sql->AffectedRows() != 0)
             {
-                PChar->getStorage(container)->InsertItem(nullptr, slotID);
+                // Move successful, delete original item
+                OtherContainer->InsertItem(nullptr, slotID);
 
+                // Send update packets
                 PChar->pushPacket(new CInventoryItemPacket(nullptr, container, slotID));
                 PChar->pushPacket(new CInventoryItemPacket(PItem, LOC_RECYCLEBIN, NewSlotID));
             }
             else
             {
-                PChar->getStorage(LOC_RECYCLEBIN)->InsertItem(nullptr, NewSlotID);
-                PChar->getStorage(container)->InsertItem(PItem, slotID);
+                // Move not successful, put things back how they were
+                RecycleBin->InsertItem(nullptr, NewSlotID);
+                OtherContainer->InsertItem(PItem, slotID);
+            }
+        }
+        else // Bin is full
+        {
+            // Evict recycle bin slot 1
+            RecycleBin->InsertItem(nullptr, 1);
+            sql->Query("DELETE FROM char_inventory WHERE charid = %u AND location = %u AND slot = %u;",
+                PChar->id, LOC_RECYCLEBIN, 1);
+
+            // Move everything around to accomodate
+            for (int i = 2; i <= 10; ++i)
+            {
+                // Update storage
+                CItem* PMovingItem = RecycleBin->GetItem(i);
+                RecycleBin->InsertItem(PMovingItem, i - 1);
+
+                // Update db
+                if (sql->Query(Query, LOC_RECYCLEBIN, i - 1, PChar->id, LOC_RECYCLEBIN, i) == SQL_ERROR || sql->AffectedRows() == 0)
+                {
+                    ShowError("Problem moving Recycle Bin items! (%s - %s)", PChar->GetName(), PItem->getName());
+                }
+            }
+
+            // Move item from original container to recycle bin
+            OtherContainer->InsertItem(nullptr, slotID);
+            RecycleBin->InsertItem(PItem, 10);
+            if (sql->Query(Query, LOC_RECYCLEBIN, 10, PChar->id, container, slotID) == SQL_ERROR || sql->AffectedRows() == 0)
+            {
+                ShowError("Problem moving Recycle Bin items! (%s - %s)", PChar->GetName(), PItem->getName());
+            }
+
+            // Send update packets
+            PChar->pushPacket(new CInventoryItemPacket(nullptr, container, slotID));
+            for (int i = 1; i <= 10; ++i)
+            {
+                CItem* PUpdatedItem = RecycleBin->GetItem(i);
+                PChar->pushPacket(new CInventoryItemPacket(PUpdatedItem, LOC_RECYCLEBIN, i));
             }
         }
         PChar->pushPacket(new CInventoryFinishPacket());
@@ -2237,7 +2280,7 @@ namespace charutils
     {
         CItemContainer* recycleBin = PChar->getStorage(LOC_RECYCLEBIN);
         const char* Query = "DELETE FROM char_inventory WHERE charid = %u AND location = 17;";
-        if (Sql_Query(SqlHandle, Query, PChar->id) != SQL_ERROR)
+        if (sql->Query(Query, PChar->id) != SQL_ERROR)
         {
             recycleBin->Clear();
         }
