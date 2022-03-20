@@ -1137,16 +1137,24 @@ void SmallPacket0x028(map_session_data_t* const PSession, CCharEntity* const PCh
     int32 quantity  = data.ref<uint8>(0x04);
     uint8 container = data.ref<uint8>(0x08);
     uint8 slotID    = data.ref<uint8>(0x09);
-    CItem* PItem    = PChar->getStorage(container)->GetItem(slotID);
+
+    CItem* PItem = PChar->getStorage(container)->GetItem(slotID);
     if (PItem == nullptr)
     {
         return;
     }
-    uint16 ItemID   = PItem->getID();
+
+    uint16 ItemID = PItem->getID();
 
     if (container >= CONTAINER_ID::MAX_CONTAINER_ID)
     {
         ShowExploit("SmallPacket0x028: Invalid container ID passed to packet %u by %s", container, PChar->GetName());
+        return;
+    }
+
+    if (PItem->isSubType(ITEM_LOCKED))
+    {
+        ShowExploit("SmallPacket0x028: Attempt of removal of LOCKED item from slot %u", slotID);
         return;
     }
 
@@ -1165,11 +1173,11 @@ void SmallPacket0x028(map_session_data_t* const PSession, CCharEntity* const PCh
         }
     }
 
-    if (PItem != nullptr && !PItem->isSubType(ITEM_LOCKED))
+    // Break linkshell if the main shell was disposed of.
+    CItemLinkshell* ItemLinkshell = dynamic_cast<CItemLinkshell*>(PItem);
+    if (ItemLinkshell)
     {
-        // Break linkshell if the main shell was disposed of.
-        CItemLinkshell* ItemLinkshell = dynamic_cast<CItemLinkshell*>(PItem);
-        if (ItemLinkshell && ItemLinkshell->GetLSType() == LSTYPE_LINKSHELL)
+        if (ItemLinkshell->GetLSType() == LSTYPE_LINKSHELL)
         {
             uint32      lsid       = ItemLinkshell->GetLSID();
             CLinkshell* PLinkshell = linkshell::GetLinkshell(lsid);
@@ -1180,17 +1188,18 @@ void SmallPacket0x028(map_session_data_t* const PSession, CCharEntity* const PCh
             PLinkshell->BreakLinkshell((int8*)PLinkshell->getName(), false);
             linkshell::UnloadLinkshell(lsid);
         }
+    }
 
-        if (charutils::UpdateItem(PChar, container, slotID, -quantity) != 0)
-        {
-            // Todo: add item NAME to this msg before ID. Problem is it's not a string.
-            ShowNotice("Player %s DROPPING itemID: %u quantity: %u", PChar->GetName(), ItemID, quantity);
-            PChar->pushPacket(new CMessageStandardPacket(nullptr, ItemID, quantity, MsgStd::ThrowAway));
-            PChar->pushPacket(new CInventoryFinishPacket());
-        }
+    // Linkshells (other than Linkpearls and Pearlsacks) and temporary items cannot be stored in the Recycle Bin.
+    // TODO: Are there any special messages here?
+    if (PItem->isType(ITEM_LINKSHELL) || container == CONTAINER_ID::LOC_TEMPITEMS)
+    {
+        charutils::DropItem(PChar, container, slotID, quantity, ItemID);
         return;
     }
-    ShowExploit("SmallPacket0x028: Attempt of removal nullptr or LOCKED item from slot %u", slotID);
+
+    // Otherwise, to the recycle bin!
+    charutils::AddItemToRecycleBin(PChar, container, slotID, quantity);
 }
 
 /************************************************************************
