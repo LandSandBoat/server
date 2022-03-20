@@ -49,13 +49,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if
-        player:getCurrentMission(COP) == xi.mission.id.cop.TENDING_AGED_WOUNDS and
-        player:getCharVar("PromathiaStatus") == 1
-    then
-        player:startEvent(22) --COP event
-
-    elseif player:getCharVar("BeatAroundTheBushin") == 1 then
+    if player:getCharVar("BeatAroundTheBushin") == 1 then
         player:startEvent(155) -- Start Quest "Beat around the Bushin"
 
     elseif player:hasKeyItem(xi.ki.TENSHODO_MEMBERS_CARD) == true then
@@ -70,12 +64,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 22 then
-        player:completeMission(xi.mission.log_id.COP, xi.mission.id.cop.TENDING_AGED_WOUNDS)
-        player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED)
-        player:setCharVar("PromathiaStatus", 0)
-        player:startEvent(10)
-    elseif csid == 155 then
+    if csid == 155 then
         player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEAT_AROUND_THE_BUSHIN)
         player:setCharVar("BeatAroundTheBushin", 2)
     elseif csid == 156 then

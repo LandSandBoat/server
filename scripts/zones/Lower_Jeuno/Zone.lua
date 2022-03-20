@@ -33,14 +33,6 @@ zone_object.onZoneIn = function(player, prevZone)
         -- No need for an 'else' to change it back outside these dates as a re-zone will handle that.
     end
 
-    if
-        player:getCurrentMission(COP) == xi.mission.id.cop.TENDING_AGED_WOUNDS and
-        player:getCharVar("PromathiaStatus") == 0
-    then
-        player:setCharVar("PromathiaStatus", 1)
-        cs = 70
-    end
-
     -- MOG HOUSE EXIT
     if
         player:getXPos() == 0 and
