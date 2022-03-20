@@ -598,3 +598,56 @@ xi.job_utils.rune_fencer.useSwipeLunge = function(player, target, ability, actio
 
     return cumulativeDamage
 end
+
+local function addPflugResistType(type, effect, power)
+
+    if type >= xi.effect.IGNIS and type <= xi.effect.TENEBRAE then
+
+        local pflugResistTypes =
+        {
+            [xi.effect.IGNIS]    = {xi.mod.PARALYZERES, xi.mod.BINDRES},
+            [xi.effect.GELUS]    = {xi.mod.SILENCERES, xi.mod.GRAVITYRES},
+            [xi.effect.FLABRA]   = {xi.mod.PETRIFYRES, xi.mod.SLOWRES},
+            [xi.effect.TELLUS]   = {xi.mod.STUNRES},
+            [xi.effect.SULPOR]   = {xi.mod.POISONRES},
+            [xi.effect.UNDA]     = {xi.mod.AMNESIARES, xi.mod.PLAGUERES},
+            [xi.effect.LUX]      = {xi.mod.SLEEPRES, xi.mod.BLINDRES, xi.mod.CURSERES},
+            [xi.effect.TENEBRAE] = {xi.mod.CHARMRES, xi.mod.LULLABYRES},
+        }
+
+        local resistTypes = pflugResistTypes[type]
+
+        for _, resistMod in pairs(resistTypes) do -- store mod in effect, this function is triggered from  event onEffectGain so it adds to the player automatically.
+            effect:addMod(resistMod, power)
+        end
+
+    end
+end
+
+
+xi.job_utils.rune_fencer.onPflugEffectGain = function(target, effect)
+    local statusEffects = target:getStatusEffects()
+
+    for _, statusEffect in ipairs(statusEffects) do
+        local type = statusEffect:getType()
+        addPflugResistType(type, effect, effect:getPower() + effect:getSubPower())
+    end
+end
+
+xi.job_utils.rune_fencer.onPflugEffectLose = function(target, effect)
+    -- intentionally blank, the effect has a mod list that is deleted after this event is called in CStatusEffectContainer::RemoveStatusEffect
+end
+
+xi.job_utils.rune_fencer.usePflug = function(player, target, ability, action)
+    local highestRune = player:getHighestRuneEffect()
+    local baseStrength = 10
+    local meritBonus =  player:getMerit(xi.merit.MERIT_PFLUG_EFFECT)
+
+    if player:getMainJob() == xi.job.RUN then
+        baseStrength = 15
+    end
+
+    action:speceffect(target:getID(), getSpecEffectElementWard(highestRune))
+
+    player:addStatusEffect(xi.effect.PFLUG, baseStrength, 0, 120, 0, meritBonus)
+end
