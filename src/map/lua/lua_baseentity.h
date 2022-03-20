@@ -252,6 +252,9 @@ public:
     uint8  getRace();
     uint8  getGender();              // Returns the player character's gender
     auto   getName() -> const char*; // Gets Entity Name
+    void   setName(const char* name);
+    auto   getPacketName() -> const char*;
+    void   setPacketName(const char* name);
     void   hideName(bool isHidden);
     bool   checkNameFlags(uint32 flags); // this is check and not get because it tests for a flag, it doesn't return all flags
     uint16 getModelId();
@@ -656,7 +659,7 @@ public:
     void spawnPet(sol::object const& arg0); // Calls Pet
     void despawnPet();                      // Despawns Pet
 
-    void   spawnTrust(uint16 trustId);
+    auto   spawnTrust(uint16 trustId) -> std::optional<CLuaBaseEntity>;
     void   clearTrusts();
     uint32 getTrustID();
     void   trustPartyMessage(uint32 message_id);

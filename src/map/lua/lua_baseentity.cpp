@@ -4333,6 +4333,54 @@ const char* CLuaBaseEntity::getName()
 }
 
 /************************************************************************
+ *  Function: setName()
+ *  Purpose : Sets the name of the entity.
+ *  Example : mob:setName("NewName")
+ *  Note    : This will only apply to entities whose targid's are in a range
+ *          : that will allow their names to be changed: Trusts, Pets,
+ *          : Dynamic Entities etc.
+ ************************************************************************/
+
+void CLuaBaseEntity::setName(const char* name)
+{
+    m_PBaseEntity->name = name;
+    m_PBaseEntity->updatemask |= UPDATE_NAME;
+}
+
+/************************************************************************
+ *  Function: getPacketName()
+ *  Purpose : Returns the string packet name of the character
+ *  Example : mob:getPacketName()
+ ************************************************************************/
+
+const char* CLuaBaseEntity::getPacketName()
+{
+    if (auto* PMob = dynamic_cast<CMobEntity*>(m_PBaseEntity))
+    {
+        return PMob->packetName.c_str();
+    }
+    return "";
+}
+
+/************************************************************************
+ *  Function: setPacketName()
+ *  Purpose : Sets the packet name of the entity.
+ *  Example : mob:getPacketName("NewName")
+ *  Note    : This will only apply to entities whose targid's are in a range
+ *          : that will allow their packet names to be changed: Trusts, Pets,
+ *          : Dynamic Entities etc.
+ ************************************************************************/
+
+void CLuaBaseEntity::setPacketName(const char* name)
+{
+    if (auto* PMob = dynamic_cast<CMobEntity*>(m_PBaseEntity))
+    {
+        PMob->packetName = name;
+        PMob->updatemask |= UPDATE_NAME;
+    }
+}
+
+/************************************************************************
  *  Function: hideName()
  *  Purpose : Hides the name of the entity
  *  Example : mob:hideName()
@@ -11208,11 +11256,11 @@ void CLuaBaseEntity::spawnPet(sol::object const& arg0)
  *  Example : caster:spawnTrust(spell:getID())
  ************************************************************************/
 
-void CLuaBaseEntity::spawnTrust(uint16 trustId)
+std::optional<CLuaBaseEntity> CLuaBaseEntity::spawnTrust(uint16 trustId)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC); // only PCs can spawn trusts
 
-    trustutils::SpawnTrust(static_cast<CCharEntity*>(m_PBaseEntity), trustId);
+    return CLuaBaseEntity(trustutils::SpawnTrust(static_cast<CCharEntity*>(m_PBaseEntity), trustId));
 }
 
 /************************************************************************
@@ -13434,6 +13482,9 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getRace", CLuaBaseEntity::getRace);
     SOL_REGISTER("getGender", CLuaBaseEntity::getGender);
     SOL_REGISTER("getName", CLuaBaseEntity::getName);
+    SOL_REGISTER("setName", CLuaBaseEntity::setName);
+    SOL_REGISTER("getPacketName", CLuaBaseEntity::getPacketName);
+    SOL_REGISTER("setPacketName", CLuaBaseEntity::setPacketName);
     SOL_REGISTER("hideName", CLuaBaseEntity::hideName);
     SOL_REGISTER("checkNameFlags", CLuaBaseEntity::checkNameFlags);
     SOL_REGISTER("getModelId", CLuaBaseEntity::getModelId);
