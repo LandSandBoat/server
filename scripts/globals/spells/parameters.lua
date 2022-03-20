@@ -1,6 +1,6 @@
 xi = xi or {}
-xi.magic_utils = xi.magic_utils or {}
-xi.magic_utils.parameters = xi.magic_utils.parameters or {}
+xi.spells = xi.spells or {}
+xi.spells.parameters = xi.spells.parameters or {}
 -----------------------------------
 
 -- Table with spell parameters. Data taken from JP-Wiki and BG wiki when not available. Preference in that precise orther when a missmatch happens.
@@ -12,7 +12,7 @@ xi.magic_utils.parameters = xi.magic_utils.parameters or {}
 -- Tier 5 spells: https://nw6yx36onohv5j6wmzoba3nllq-ac4c6men2g7xr2a-wiki-ffo-jp.translate.goog/html/3663.html
 -- Tier 6 spells: https://nw6yx36onohv5j6wmzoba3nllq-ac4c6men2g7xr2a-wiki-ffo-jp.translate.goog/html/32808.html
 
-xi.magic_utils.parameters.damageParams =
+xi.spells.parameters.damage =
 {
 -- Single target black magic spells:
 -- Structure:           [spellId] = {  Stat used, vNPC, mNPC,  vPC,   I,   M0,  M50,  M100, M200, M300, M400, M500 },
@@ -159,10 +159,10 @@ xi.magic_utils.parameters.damageParams =
 
 }
 
-xi.magic_utils.parameters.enhancingSong =
+xi.spells.parameters.enhancingSong =
 {
---                                          1  2                    3                       4                       5                         6                     7    8    9   10  11  12
--- Structure:                 [spellId] = {Tier, Main Effect,       subEffect,              Main Modifier,          Merit Effect,             Job-Point Effect,     power Scap Pcap Mult Div SVP},
+--                                          1     2                  3                       4                       5                         6                     7     8    9    10   11  12
+-- Structure:                 [spellId] = { Tier, Main Effect,       subEffect,              Main Modifier,          Merit Effect,             Job-Point Effect,     power Scap Pcap Mult Div SVP },
     -- Ballad
     [xi.magic.spell.MAGES_BALLAD      ] = { 1, xi.effect.BALLAD,    xi.mod.AUGMENT_SONG_STAT, xi.mod.BALLAD_EFFECT,   0,                        0,                    1,   0,   1,   1,  0, true  },
     [xi.magic.spell.MAGES_BALLAD_II   ] = { 2, xi.effect.BALLAD,    xi.mod.AUGMENT_SONG_STAT, xi.mod.BALLAD_EFFECT,   0,                        0,                    2,   0,   2,   1,  0, true  },
