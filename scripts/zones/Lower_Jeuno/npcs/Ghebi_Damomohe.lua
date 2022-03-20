@@ -22,46 +22,19 @@ entity.onTrade = function(player, npc, trade)
     then
         -- Finish Quest: Tenshodo Membership (Invitation)
         player:startEvent(108)
-
-    elseif
-        player:getCurrentMission(COP) == xi.mission.id.cop.DARKNESS_NAMED and
-        not player:hasKeyItem(xi.ki.PSOXJA_PASS) and
-        player:getCharVar("PXPassGetGems") == 1 and
-        (
-            npcUtil.tradeHas(trade, 1692) or
-            npcUtil.tradeHas(trade, 1694) or
-            npcUtil.tradeHas(trade, 1693)
-        )
-    then
-        player:startEvent(52, 500 * xi.settings.GIL_RATE)
     end
 end
 
 entity.onTrigger = function(player, npc)
-    local GetGems = player:getCharVar("PXPassGetGems")
-
     if
         player:getFameLevel(JEUNO) >= 2 and
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.TENSHODO_MEMBERSHIP) == QUEST_AVAILABLE
     then
         -- Start Quest: Tenshodo Membership
         player:startEvent(106, 8)
-
     elseif player:hasKeyItem(xi.ki.TENSHODO_APPLICATION_FORM) then
         -- Finish Quest: Tenshodo Membership
         player:startEvent(107)
-
-    elseif
-        player:getCurrentMission(COP) == xi.mission.id.cop.DARKNESS_NAMED and
-        not player:hasKeyItem(xi.ki.PSOXJA_PASS) and
-        GetGems == 0
-    then
-        -- Mission: Darkness Named
-        player:startEvent(54)
-
-    elseif GetGems == 1 then
-        player:startEvent(53)
-
     else
         player:startEvent(106, 4)
     end
@@ -96,16 +69,6 @@ entity.onEventFinish = function(player, csid, option)
             player:confirmTrade()
             player:delKeyItem(xi.ki.TENSHODO_APPLICATION_FORM)
         end
-
-    elseif csid == 52 then
-        player:confirmTrade()
-        player:addGil(500 * xi.settings.GIL_RATE)
-        player:addKeyItem(xi.ki.PSOXJA_PASS)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.PSOXJA_PASS)
-        player:setCharVar("PXPassGetGems", 0)
-
-    elseif csid == 54 then
-        player:setCharVar("PXPassGetGems", 1)
     end
 end
 
