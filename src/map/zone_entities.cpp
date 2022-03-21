@@ -432,7 +432,7 @@ void CZoneEntities::DecreaseZoneCounter(CCharEntity* PChar)
     ShowDebug("CZone:: %s DecreaseZoneCounter <%u> %s", m_zone->GetName(), m_charList.size(), PChar->GetName());
 }
 
-uint16 CZoneEntities::GetNewTargID()
+uint16 CZoneEntities::GetNewCharTargID()
 {
     uint16 targid = 0x400;
     for (EntityList_t::const_iterator it = m_charList.begin(); it != m_charList.end(); ++it)
@@ -444,6 +444,13 @@ uint16 CZoneEntities::GetNewTargID()
         targid++;
     }
     return targid;
+}
+
+uint16 CZoneEntities::GetNewDynamicTargID()
+{
+    // TODO: Don't use static
+    static uint16 targid = 0x800; // 2048
+    return targid++;
 }
 
 bool CZoneEntities::CharListEmpty() const
@@ -733,7 +740,8 @@ CBaseEntity* CZoneEntities::GetEntity(uint16 targid, uint8 filter)
             }
         }
     }
-    else if (targid < 0x780)
+    // TODO: Combine Trusts and Pets into the same id space
+    else if (targid < 0x780) // 1920
     {
         if (filter & TYPE_PET)
         {
@@ -744,7 +752,7 @@ CBaseEntity* CZoneEntities::GetEntity(uint16 targid, uint8 filter)
             }
         }
     }
-    else if (targid < 0x800)
+    else if (targid < 0x800) // 2048
     {
         if (filter & TYPE_TRUST)
         {
@@ -755,6 +763,30 @@ CBaseEntity* CZoneEntities::GetEntity(uint16 targid, uint8 filter)
             }
         }
     }
+    else if (targid < 0x1000) // 2048 - 4096 are dynamic entities
+    {
+        if (filter & TYPE_NPC)
+        {
+            EntityList_t::const_iterator it = m_npcList.find(targid);
+            if (it != m_npcList.end())
+            {
+                return it->second;
+            }
+        }
+        if (filter & TYPE_MOB)
+        {
+            EntityList_t::const_iterator it = m_mobList.find(targid);
+            if (it != m_mobList.end())
+            {
+                return it->second;
+            }
+        }
+    }
+    else
+    {
+        ShowError("Trying to get entity outside of valid id bounds (%u)", targid);
+    }
+
     return nullptr;
 }
 
@@ -954,7 +986,7 @@ void CZoneEntities::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message
 
                                 if (entity)
                                 {
-                                    if (entity->targid < 0x400)
+                                    if (entity->targid < 0x400 || entity->targid >= 0x800) // TODO: Don't hard code me!
                                     {
                                         if (entity->objtype == TYPE_MOB)
                                         {

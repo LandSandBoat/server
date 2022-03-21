@@ -108,9 +108,9 @@ uint8 CBattlefieldHandler::LoadBattlefield(CCharEntity* PChar, uint16 battlefiel
                             FROM bcnm_info i\
                             WHERE bcnmId = %u";
 
-        auto ret = Sql_Query(SqlHandle, fmtQuery, battlefieldID);
+        auto ret = sql->Query(fmtQuery, battlefieldID);
 
-        if (ret == SQL_ERROR || Sql_NumRows(SqlHandle) == 0 || Sql_NextRow(SqlHandle) != SQL_SUCCESS)
+        if (ret == SQL_ERROR || sql->NumRows() == 0 || sql->NextRow() != SQL_SUCCESS)
         {
             ShowError("Cannot load battlefield : %u ", battlefieldID);
             return BATTLEFIELD_RETURN_CODE_REQS_NOT_MET;
@@ -119,16 +119,16 @@ uint8 CBattlefieldHandler::LoadBattlefield(CCharEntity* PChar, uint16 battlefiel
         {
             auto* PBattlefield = new CBattlefield(battlefieldID, m_PZone, area, PChar);
 
-            auto* name                = Sql_GetData(SqlHandle, 0);
-            auto* recordholder        = Sql_GetData(SqlHandle, 1);
-            auto  recordtime          = std::chrono::seconds(Sql_GetUIntData(SqlHandle, 2));
-            auto  recordPartySize     = Sql_GetUIntData(SqlHandle, 3);
-            auto  timelimit           = std::chrono::seconds(Sql_GetUIntData(SqlHandle, 4));
-            auto  levelcap            = Sql_GetUIntData(SqlHandle, 5);
-            auto  lootid              = Sql_GetUIntData(SqlHandle, 6);
-            auto  maxplayers          = Sql_GetUIntData(SqlHandle, 7);
-            auto  rulemask            = Sql_GetUIntData(SqlHandle, 8);
-            PBattlefield->m_isMission = Sql_GetUIntData(SqlHandle, 9);
+            auto* name                = sql->GetData(0);
+            auto* recordholder        = sql->GetData(1);
+            auto  recordtime          = std::chrono::seconds(sql->GetUIntData(2));
+            auto  recordPartySize     = sql->GetUIntData(3);
+            auto  timelimit           = std::chrono::seconds(sql->GetUIntData(4));
+            auto  levelcap            = sql->GetUIntData(5);
+            auto  lootid              = sql->GetUIntData(6);
+            auto  maxplayers          = sql->GetUIntData(7);
+            auto  rulemask            = sql->GetUIntData(8);
+            PBattlefield->m_isMission = sql->GetUIntData(9);
 
             PBattlefield->SetName((char*)name);
             PBattlefield->SetRecord((char*)recordholder, recordtime, recordPartySize);
@@ -282,12 +282,12 @@ bool CBattlefieldHandler::ReachedMaxCapacity(int battlefieldId) const
     if (battlefieldId != -1)
     {
         std::string query("SELECT battlefieldNumber FROM bcnm_battlefield WHERE bcnmId = %i;");
-        auto        ret = Sql_Query(SqlHandle, query.c_str(), battlefieldId);
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        auto        ret = sql->Query(query.c_str(), battlefieldId);
+        if (ret != SQL_ERROR && sql->NumRows() != 0)
         {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql->NextRow() == SQL_SUCCESS)
             {
-                auto area = Sql_GetUIntData(SqlHandle, 0);
+                auto area = sql->GetUIntData(0);
                 if (m_Battlefields.find(area) == m_Battlefields.end())
                 {
                     return false; // this area hasnt been loaded in for this battlefield

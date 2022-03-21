@@ -53,13 +53,13 @@ struct jobs_t
 
 struct profile_t
 {
-    uint8      nation;     // your nation alligeance
-    uint8      mhflag;     // флаг выхода из MogHouse
-    uint16     title;      // звание
-    uint16     fame[15];   // известность
-    uint8      rank[3];    // рагн в трех государствах
-    uint16     rankpoints; // очки ранга в трех государствах
-    location_t home_point; // точка возрождения персонажа
+    uint8      nation;     // Your Nation Allegiance.
+    uint8      mhflag;     // Flag of exit from MOGHOUSE
+    uint16     title;      // rank
+    uint16     fame[15];   // Fame
+    uint8      rank[3];    // RAGN in three states
+    uint16     rankpoints; // rank glasses in three states
+    location_t home_point; // Renaissance point character
     uint8      campaign_allegiance;
     uint8      unity_leader;
 };
@@ -201,8 +201,8 @@ typedef std::vector<EntityID_t>        BazaarList_t;
 class CCharEntity : public CBattleEntity
 {
 public:
-    jobs_t     jobs;       // доступрые профессии персонажа
-    keyitems_t keys;       // таблица ключевых предметов
+    jobs_t     jobs;       // Available Character professions
+    keyitems_t keys;       // Table key objects
 
     EventPrep* eventPreparation;      // Information about a potential upcoming event
     EventInfo* currentEvent;          // The currently ongoing event playing for the player
@@ -229,14 +229,14 @@ public:
     uint8      equipLoc[18];        // ContainerID where equipment is
     uint16     styleItems[16];      // Item IDs for items that are style locked.
 
-    uint8             m_ZonesList[36];        // список посещенных персонажем зон
-    std::bitset<1024> m_SpellList;            // список изученных заклинаний
-    uint8             m_TitleList[94];        // список заслуженных завний
-    uint8             m_Abilities[62];        // список текущих способностей
-    uint8             m_LearnedAbilities[49]; // learnable abilities (corsair rolls)
-    std::bitset<49>   m_LearnedWeaponskills;  // learnable weaponskills
-    uint8             m_TraitList[16];        // список постянно активных способностей в виде битовой маски
-    uint8             m_PetCommands[32];      // список доступных команд питомцу
+    uint8             m_ZonesList[36];        // List of visited zone character
+    std::bitset<1024> m_SpellList;            // List of studied spells
+    uint8             m_TitleList[94];        // List of honored windows
+    uint8             m_Abilities[62];        // List of current abilities
+    uint8             m_LearnedAbilities[49]; //LearnableAbilities (corsairRolls)
+    std::bitset<49>   m_LearnedWeaponskills;  //LearnableWeaponskills
+    uint8             m_TraitList[16];        // List of advance active abilities in the form of a bit mask
+    uint8             m_PetCommands[32];      // List of available pet commands
     uint8             m_WeaponSkills[32];
     questlog_t        m_questLog[MAX_QUESTAREA];     // список всех квестов
     missionlog_t      m_missionLog[MAX_MISSIONAREA]; // список миссий

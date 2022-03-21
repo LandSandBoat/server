@@ -21,13 +21,33 @@
 
 #include "moduleutils.h"
 
-#include "common/cbasetypes.h"
 #include "../lua/luautils.h"
+#include "common/cbasetypes.h"
+#include "common/utils.h"
 
 #include <filesystem>
+#include <regex>
+#include <string>
+#include <vector>
 
 namespace moduleutils
 {
+    struct Override
+    {
+        std::string              filename;
+        std::string              overrideName;
+        std::vector<std::string> nameParts;
+        sol::object              func;
+        bool                     applied;
+    };
+
+    // Lua-side Module
+    // obj.name = name
+    // obj.overrides = {}
+    // obj.enabled = false
+
+    std::vector<Override> overrides;
+
     void LoadLuaModules()
     {
         sol::state& lua = luautils::lua;
@@ -46,31 +66,69 @@ namespace moduleutils
                 !isHelpersFile)
             {
                 std::string filename  = path.filename().generic_string();
-                std::string pathNoExt = path.replace_extension("").generic_string();
+                std::string relPath   = path.relative_path().generic_string();
+                std::string pathNoExt = path.relative_path().replace_extension("").generic_string();
 
-                // Note: Doing this in C++ resulted in self.overrides not being available to Module:apply()
-                auto result = lua.safe_script(fmt::format(R"(
-                    local m = require("{0}")
-                    if m.enabled then
-                        m:apply()
-                    end
-                    return m
-                )", pathNoExt));
-
-                if (!result.valid())
+                sol::table table = lua.require_file(pathNoExt, relPath);
+                if (table["enabled"])
                 {
-                    sol::error err = result;
-                    ShowError(err.what());
-                }
-                else
-                {
-                    sol::table table = result;
-                    if (table["enabled"])
+                    for (auto& override : table.get<std::vector<sol::table>>("overrides"))
                     {
-                        std::string name = table["name"];
-                        ShowScript(fmt::format("Loaded module: {}", name));
+                        std::string name = override["name"];
+                        sol::object func = override["func"];
+
+                        ShowScript(fmt::format("Preparing override: {}", name));
+
+                        auto parts = split(name, '.');
+                        parts      = std::vector<std::string>(parts.begin() + 1, parts.end());
+
+                        overrides.emplace_back(Override{ filename, name, parts, func, false });
                     }
                 }
+            }
+        }
+    }
+
+    void TryApplyModules()
+    {
+        sol::state& lua = luautils::lua;
+        for (auto& override : overrides)
+        {
+            if (!override.applied)
+            {
+                sol::table table = lua["xi"].get<sol::table>();
+
+                auto lastTable = *(override.nameParts.end() - 2);
+                auto lastElem  = override.nameParts.back();
+                for (auto& part : override.nameParts)
+                {
+                    table = table[part].get_or<sol::table>(sol::lua_nil);
+                    if (table == sol::lua_nil)
+                    {
+                        break;
+                    }
+
+                    // Get parent table of the function at the end of the string
+                    if (part == lastTable)
+                    {
+                        ShowScript(fmt::format("Applying override: {}", override.overrideName));
+
+                        lua["applyOverride"](table, lastElem, override.func);
+
+                        override.applied = true;
+                    }
+                }
+            }
+        }
+    }
+
+    void ReportModuleUsage()
+    {
+        for (auto& override : overrides)
+        {
+            if (!override.applied)
+            {
+                ShowWarning("Override not applied: {} ({})", override.overrideName, override.filename);
             }
         }
     }

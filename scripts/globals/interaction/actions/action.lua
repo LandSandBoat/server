@@ -52,6 +52,13 @@ function Action:replaceDefault()
     return self:setPriority(Action.Priority.ReplaceDefault)
 end
 
+-- Perform the action as a Progress priority, and then default back to event
+function Action:importantEvent()
+    self.priority = Action.Priority.Progress
+    self.secondaryPriority = Action.Priority.Event
+    return self
+end
+
  -- After the first time the action is performed, it will have a lower priority
 function Action:importantOnce()
     self.priority = Action.Priority.Event

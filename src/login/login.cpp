@@ -18,8 +18,8 @@
 
 ===========================================================================
 */
-#include "../common/mmo.h"
 #include "../common/logging.h"
+#include "../common/mmo.h"
 #include "../common/timer.h"
 #include "../common/utils.h"
 #include "../common/version.h"
@@ -56,9 +56,10 @@ login_config_t login_config; // main settings
 version_info_t version_info;
 maint_config_t maint_config;
 
-Sql_t*      SqlHandle = nullptr;
 std::thread messageThread;
 std::thread consoleInputThread;
+
+std::unique_ptr<SqlConnection> sql;
 
 int32 do_init(int32 argc, char** argv)
 {
@@ -108,37 +109,34 @@ int32 do_init(int32 argc, char** argv)
     login_lobbyview_fd = makeListenBind_tcp(login_config.login_view_ip.c_str(), login_config.login_view_port, connect_client_lobbyview);
     ShowStatus("The login-server-lobbyview is ready (Server is listening on the port %u).", login_config.login_view_port);
 
-    SqlHandle = Sql_Malloc();
-    if (Sql_Connect(SqlHandle, login_config.mysql_login.c_str(), login_config.mysql_password.c_str(), login_config.mysql_host.c_str(), login_config.mysql_port,
-                    login_config.mysql_database.c_str()) == SQL_ERROR)
-    {
-        exit(EXIT_FAILURE);
-    }
-    Sql_Keepalive(SqlHandle, "LoginKeepalive");
+    sql = std::make_unique<SqlConnection>(login_config.mysql_login.c_str(),
+                                          login_config.mysql_password.c_str(),
+                                          login_config.mysql_host.c_str(),
+                                          login_config.mysql_port,
+                                          login_config.mysql_database.c_str());
 
     const char* fmtQuery = "OPTIMIZE TABLE `accounts`,`accounts_banned`, `accounts_sessions`, `chars`,`char_equip`, \
                            `char_inventory`, `char_jobs`,`char_look`,`char_stats`, `char_vars`, `char_bazaar_msg`, \
                            `char_skills`, `char_titles`, `char_effects`, `char_exp`;";
 
-    if (Sql_Query(SqlHandle, fmtQuery) == SQL_ERROR)
+    if (sql->Query(fmtQuery) == SQL_ERROR)
     {
         ShowError("do_init: Impossible to optimise tables");
     }
-
-    ShowStatus("The login-server is ready to work...");
-    messageThread = std::thread(message_server_init);
 
     if (!login_config.account_creation)
     {
         ShowStatus("New account creation is disabled in login_config.");
     }
 
-    bool attached = isatty(0);
+    messageThread = std::thread(message_server_init);
 
+    bool attached = isatty(0);
     if (attached)
     {
-        ShowStatus("Console input thread is ready...");
-        consoleInputThread = std::thread([&]() {
+        ShowStatus("Console input thread is ready");
+        consoleInputThread = std::thread([&]()
+                                         {
             // ctrl c apparently causes log spam
             auto lastInputTime = server_clock::now();
             while (consoleThreadRun)
@@ -219,9 +217,13 @@ int32 do_init(int32 argc, char** argv)
                     lastInputTime = server_clock::now();
                 }
             };
-            ShowStatus("Console input thread exiting..\r");
-        });
+            ShowStatus("Console input thread exiting..\r"); });
     }
+
+    // Small pause to wait for the console thread to set up
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    ShowStatus("The login-server is ready to work!");
+
     return 0;
 }
 
@@ -236,11 +238,6 @@ void do_final(int code)
     if (consoleInputThread.joinable())
     {
         consoleInputThread.join();
-    }
-    if (SqlHandle)
-    {
-        Sql_Free(SqlHandle);
-        SqlHandle = nullptr;
     }
 
     timer_final();
@@ -371,6 +368,9 @@ int do_sockets(fd_set* rfd, duration next)
             session[i]->func_send(i);
         }
     }
+
+    sql->TryPing();
+
     return 0;
 }
 
@@ -381,8 +381,8 @@ int parse_console(char* buf)
 
 void login_config_read(const char* key, const char* value)
 {
-    int stdout_with_ansisequence = 0;
-    int msg_silent               = 0; // Specifies how silent the console is.
+    int  stdout_with_ansisequence = 0;
+    int  msg_silent               = 0;                    // Specifies how silent the console is.
     char timestamp_format[20]     = "[%d/%b] [%H:%M:%S]"; // For displaying Timestamps, default value
 
     if (strcmpi(key, "timestamp_format") == 0)
@@ -706,7 +706,7 @@ void login_helpscreen(int32 flag)
 void log_init(int argc, char** argv)
 {
     std::string logFile;
-    bool appendDate {};
+    bool        appendDate{};
 
 #ifdef WIN32
     logFile = "log\\login-server.log";

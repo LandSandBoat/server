@@ -46,6 +46,10 @@ entity.onMobDespawn = function(mob)
             SetServerVariable("[PH]King_Behemoth", kills + 1)
         end
     end
+    -- Respawn the ???
+    if xi.settings.LandKingSystem_HQ == 2 or xi.settings.LandKingSystem_NQ == 2 then
+        GetNPCByID(ID.npc.BEHEMOTH_QM):updateNPCHideTime(xi.settings.FORCE_SPAWN_QM_RESET_TIME)
+    end
 end
 
 return entity

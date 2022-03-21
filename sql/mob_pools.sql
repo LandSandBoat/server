@@ -37,7 +37,7 @@ CREATE TABLE `mob_pools` (
   `flag` int(11) unsigned NOT NULL DEFAULT 0,
   `entityFlags` int(11) unsigned NOT NULL DEFAULT 0,
   `animationsub` tinyint(1) NOT NULL DEFAULT 0,
-  `hasSpellScript` tinyint(1) unsigned NOT NULL DEFAULT 0,
+  `hasSpellScript` tinyint(1) unsigned NOT NULL DEFAULT 0, -- NO LONGER IN USE. DOES NOTHING. TODO: Remove me
   `spellList` smallint(4) NOT NULL DEFAULT 0,
   `namevis` tinyint(4) NOT NULL DEFAULT 1,
   `roamflag` smallint(3) unsigned NOT NULL DEFAULT 0,

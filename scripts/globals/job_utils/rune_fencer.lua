@@ -6,7 +6,7 @@ require("scripts/globals/status")
 require("scripts/globals/msg")
 require("scripts/globals/weaponskills")
 require("scripts/globals/jobpoints")
-require("scripts/globals/magic_utils/spell_damage")
+require("scripts/globals/spells/spell_damage")
 require("scripts/globals/utils")
 -----------------------------------
 xi = xi or {}
@@ -444,16 +444,16 @@ end
 local function getSwipeLungeDamageMultipliers(player, target, element, bonusMacc) -- get these multipliers once and store them
     local multipliers = {}
 
-    multipliers.eleStaffBonus        = xi.magic_utils.spell_damage.calculateEleStaffBonus(player, nil, element)
-    multipliers.magianAffinity       = xi.magic_utils.spell_damage.calculateMagianAffinity(player, nil)         -- presumed but untested
-    multipliers.SDT                  = xi.magic_utils.spell_damage.calculateSDT(player, target, nil, element)
-    multipliers.resist               = xi.magic_utils.spell_damage.calculateResist(player, target,  nil, 0, element, 0, bonusMacc)
-    multipliers.magicBurst           = xi.magic_utils.spell_damage.calculateIfMagicBurst(player, target,  0, element)
-    multipliers.magicBurstBonus      = xi.magic_utils.spell_damage.calculateIfMagicBurstBonus(player, target, nil, 0, element)
-    multipliers.dayAndWeather        = xi.magic_utils.spell_damage.calculateDayAndWeather(player, target, nil, 0, element)
-    multipliers.magicBonusDiff       = xi.magic_utils.spell_damage.calculateMagicBonusDiff(player, target, nil, 0, 0, element)
-    multipliers.TMDA                 = xi.magic_utils.spell_damage.calculateTMDA(player, target, nil)
-    multipliers.nukeAbsorbOrNullify  = xi.magic_utils.spell_damage.calculateNukeAbsorbOrNullify(player, target, nil, element)
+    multipliers.eleStaffBonus        = xi.spells.spell_damage.calculateEleStaffBonus(player, nil, element)
+    multipliers.magianAffinity       = xi.spells.spell_damage.calculateMagianAffinity(player, nil)         -- presumed but untested
+    multipliers.SDT                  = xi.spells.spell_damage.calculateSDT(player, target, nil, element)
+    multipliers.resist               = xi.spells.spell_damage.calculateResist(player, target,  nil, 0, element, 0, bonusMacc)
+    multipliers.magicBurst           = xi.spells.spell_damage.calculateIfMagicBurst(player, target,  0, element)
+    multipliers.magicBurstBonus      = xi.spells.spell_damage.calculateIfMagicBurstBonus(player, target, nil, 0, element)
+    multipliers.dayAndWeather        = xi.spells.spell_damage.calculateDayAndWeather(player, target, nil, 0, element)
+    multipliers.magicBonusDiff       = xi.spells.spell_damage.calculateMagicBonusDiff(player, target, nil, 0, 0, element)
+    multipliers.TMDA                 = xi.spells.spell_damage.calculateTMDA(player, target, nil)
+    multipliers.nukeAbsorbOrNullify  = xi.spells.spell_damage.calculateNukeAbsorbOrNullify(player, target, nil, element)
 
     return multipliers
 end
@@ -597,4 +597,60 @@ xi.job_utils.rune_fencer.useSwipeLunge = function(player, target, ability, actio
     end
 
     return cumulativeDamage
+end
+
+-- see http://wiki.ffo.jp/html/1720.html, the effects resisted are against the strong element.
+-- for example, Amnesia is fire based, therefore water runes (Unda) add resist Amnesia.
+-- These effects seem to match the "Resist X" traits that all jobs have, including unused player traits that made it into autotranslate; Resist Curse/Charm
+local function addPflugResistType(type, effect, power)
+
+    if type >= xi.effect.IGNIS and type <= xi.effect.TENEBRAE then
+
+        local pflugResistTypes =
+        {
+            [xi.effect.IGNIS]    = {xi.mod.PARALYZERES, xi.mod.BINDRES},
+            [xi.effect.GELUS]    = {xi.mod.SILENCERES, xi.mod.GRAVITYRES},
+            [xi.effect.FLABRA]   = {xi.mod.PETRIFYRES, xi.mod.SLOWRES},
+            [xi.effect.TELLUS]   = {xi.mod.STUNRES},
+            [xi.effect.SULPOR]   = {xi.mod.POISONRES},
+            [xi.effect.UNDA]     = {xi.mod.AMNESIARES, xi.mod.PLAGUERES},
+            [xi.effect.LUX]      = {xi.mod.SLEEPRES, xi.mod.BLINDRES, xi.mod.CURSERES},
+            [xi.effect.TENEBRAE] = {xi.mod.CHARMRES},
+        }
+
+        local resistTypes = pflugResistTypes[type]
+
+        for _, resistMod in pairs(resistTypes) do -- store mod in effect, this function is triggered from event onEffectGain so it adds to the player automatically.
+            effect:addMod(resistMod, power)
+        end
+
+    end
+end
+
+
+xi.job_utils.rune_fencer.onPflugEffectGain = function(target, effect)
+    local statusEffects = target:getStatusEffects()
+
+    for _, statusEffect in ipairs(statusEffects) do
+        local type = statusEffect:getType()
+        addPflugResistType(type, effect, effect:getPower() + effect:getSubPower())
+    end
+end
+
+xi.job_utils.rune_fencer.onPflugEffectLose = function(target, effect)
+    -- intentionally blank, the effect has a mod list that is deleted after this event is called in CStatusEffectContainer::RemoveStatusEffect
+end
+
+xi.job_utils.rune_fencer.usePflug = function(player, target, ability, action)
+    local highestRune = player:getHighestRuneEffect()
+    local baseStrength = 10
+    local meritBonus =  player:getMerit(xi.merit.MERIT_PFLUG_EFFECT)
+
+    if player:getMainJob() == xi.job.RUN then
+        baseStrength = 15
+    end
+
+    action:speceffect(target:getID(), getSpecEffectElementWard(highestRune))
+
+    player:addStatusEffect(xi.effect.PFLUG, baseStrength, 0, 120, 0, meritBonus)
 end

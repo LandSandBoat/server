@@ -1674,13 +1674,13 @@ void CCharEntity::OnItemFinish(CItemState& state, action_t& action)
         PItem->setLastUseTime(CVanaTime::getInstance()->getVanaTime());
 
         char extra[sizeof(PItem->m_extra) * 2 + 1];
-        Sql_EscapeStringLen(SqlHandle, extra, (const char*)PItem->m_extra, sizeof(PItem->m_extra));
+        sql->EscapeStringLen(extra, (const char*)PItem->m_extra, sizeof(PItem->m_extra));
 
         const char* Query = "UPDATE char_inventory "
                             "SET extra = '%s' "
                             "WHERE charid = %u AND location = %u AND slot = %u;";
 
-        Sql_Query(SqlHandle, Query, extra, this->id, PItem->getLocationID(), PItem->getSlotID());
+        sql->Query(Query, extra, this->id, PItem->getLocationID(), PItem->getSlotID());
 
         if (PItem->getCurrentCharges() != 0)
         {
@@ -1839,11 +1839,11 @@ int32 CCharEntity::GetTimeCreated()
 {
     const char* fmtQuery = "SELECT UNIX_TIMESTAMP(timecreated) FROM chars WHERE charid = %u;";
 
-    int32 ret = Sql_Query(SqlHandle, fmtQuery, id);
+    int32 ret = sql->Query(fmtQuery, id);
 
-    if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+    if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
     {
-        return Sql_GetIntData(SqlHandle, 0);
+        return sql->GetIntData(0);
     }
 
     return 0;

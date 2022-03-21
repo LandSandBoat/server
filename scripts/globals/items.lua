@@ -266,6 +266,7 @@ xi.items =
     SQUARE_OF_BUGARD_LEATHER        = 1637,
     SEALION_CREST_KEY               = 1658,
     CORAL_CREST_KEY                 = 1659,
+    BRONZE_KEY                      = 1660,
     CATHEDRAL_TAPESTRY              = 1662,
     INGOT_OF_ROYAL_TREASURY_GOLD    = 1682,
     PIECE_OF_ATTOHWA_GINSENG        = 1683,

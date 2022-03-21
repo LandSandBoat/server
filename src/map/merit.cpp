@@ -81,9 +81,9 @@ static uint8 cap[100] = {
 
 struct MeritCategoryInfo_t
 {
-    int8  MeritsInCat; // количество элементов в группе
-    uint8 MaxPoints;   // максимальное количество points, которые можно вложить в группу
-    uint8 UpgradeID;   // индекс группы в массиве upgrade
+    int8  MeritsInCat; // number of elements in a group
+    uint8 MaxPoints;   // the maximum number of points that can be put into a group
+    uint8 UpgradeID;   // group index in upgrade array
 };
 
 static const MeritCategoryInfo_t meritCatInfo[] = {
@@ -143,13 +143,15 @@ static const MeritCategoryInfo_t meritCatInfo[] = {
     { 4, 10, 7 },   // MCATEGORY_PUP_2       catNumber 48
     { 4, 10, 7 },   // MCATEGORY_DNC_2       catNumber 49
     { 6, 10, 7 },   // MCATEGORY_SHC_2       catNumber 50
-    { 0, 0, 8 },    // MCATEGORY_UNK_3       catNumber 51
+
+    { 0, 0, 7 },    // MCATEGORY_UNK_3       catNumber 51
+
     { 4, 10, 7 },   // MCATEGORY_GEO_2       catNumber 52
     { 4, 10, 7 },   // MCATEGORY_RUN_2       catNumber 53
 };
 
-#define GetMeritCategory(merit) (((merit) >> 6) - 1)  // получаем категорию из merit
-#define GetMeritID(merit)       (((merit)&0x3F) >> 1) // получаем смещение в категории из merit
+#define GetMeritCategory(merit) (((merit) >> 6) - 1)  // get category from merit
+#define GetMeritID(merit)       (((merit)&0x3F) >> 1) // get the offset in the category from merit
 
 /************************************************************************
  *                                                                       *
@@ -196,13 +198,13 @@ CMeritPoints::CMeritPoints(CCharEntity* PChar)
 void CMeritPoints::LoadMeritPoints(uint32 charid)
 {
     uint8 catNumber = 0;
-    uint8 maxCatCount = 53;
+    uint8 maxCatCount = 54;
 
     for (uint16 i = 0; i < MERITS_COUNT; ++i)
     {
         if ((catNumber <= maxCatCount && i == meritNameSpace::groupOffset[catNumber]) || (catNumber > 27 && catNumber < 31) || catNumber == 51) // Increment category number if known (or known unknown)
         {
-            if ((catNumber > 27 && catNumber < 31) || catNumber == 51) // 28-30 are UNK, 51 is UNK.
+            if ((catNumber > 27 && catNumber < 31) || catNumber == 51) // 28-30 and 51 are UNK.
             {
                 Categories[catNumber] = &merits[163]; // point these to valid merits to prevent crash
             }
@@ -218,14 +220,14 @@ void CMeritPoints::LoadMeritPoints(uint32 charid)
         merits[i].next  = upgrade[merits[i].upgradeid][merits[i].count];
     }
 
-    if (Sql_Query(SqlHandle, "SELECT meritid, upgrades FROM char_merit WHERE charid = %u", charid) != SQL_ERROR)
+    if (sql->Query("SELECT meritid, upgrades FROM char_merit WHERE charid = %u", charid) != SQL_ERROR)
     {
-        for (uint64 j = 0; j < Sql_NumRows(SqlHandle); j++)
+        for (uint64 j = 0; j < sql->NumRows(); j++)
         {
-            if (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            if (sql->NextRow() == SQL_SUCCESS)
             {
-                uint32 meritID  = Sql_GetUIntData(SqlHandle, 0);
-                uint32 upgrades = Sql_GetUIntData(SqlHandle, 1);
+                uint32 meritID  = sql->GetUIntData(0);
+                uint32 upgrades = sql->GetUIntData(1);
                 for (auto& merit : merits)
                 {
                     if (merit.id == meritID)
@@ -251,12 +253,12 @@ void CMeritPoints::SaveMeritPoints(uint32 charid)
     {
         if (merit.count > 0)
         {
-            Sql_Query(SqlHandle, "INSERT INTO char_merit (charid, meritid, upgrades) VALUES(%u, %u, %u) ON DUPLICATE KEY UPDATE upgrades = %u", charid,
+            sql->Query("INSERT INTO char_merit (charid, meritid, upgrades) VALUES(%u, %u, %u) ON DUPLICATE KEY UPDATE upgrades = %u", charid,
                       merit.id, merit.count, merit.count);
         }
         else
         {
-            Sql_Query(SqlHandle, "DELETE FROM char_merit WHERE charid = %u AND meritid = %u", charid, merit.id);
+            sql->Query("DELETE FROM char_merit WHERE charid = %u AND meritid = %u", charid, merit.id);
         }
     }
 }
@@ -352,7 +354,7 @@ bool CMeritPoints::IsMeritExist(MERIT_TYPE merit)
     {
         return false;
     }
-    if ((int16)merit > MCATEGORY_COUNT)
+    if ((int16)merit >= MCATEGORY_COUNT)
     {
         return false;
     }
@@ -520,11 +522,11 @@ namespace meritNameSpace
 
     void LoadMeritsList()
     {
-        int32 ret = Sql_Query(SqlHandle, "SELECT m.meritid, m.value, m.jobs, m.upgrade, m.upgradeid, m.catagoryid, sl.spellid FROM merits m LEFT JOIN \
+        int32 ret = sql->Query("SELECT m.meritid, m.value, m.jobs, m.upgrade, m.upgradeid, m.catagoryid, sl.spellid FROM merits m LEFT JOIN \
             spell_list sl ON m.name = sl.name ORDER BY m.meritid ASC LIMIT %u",
                               MERITS_COUNT);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != MERITS_COUNT)
+        if (ret != SQL_ERROR && sql->NumRows() != MERITS_COUNT)
         {
             // issue with unknown catagories causing massive confusion
 
@@ -533,18 +535,18 @@ namespace meritNameSpace
             int8   previousCatIndex = 0; // will be set on every loop, used for detecting a catagory change
             int8   catMeritIndex    = 0; // counts number of merits in a catagory
 
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql->NextRow() == SQL_SUCCESS)
             {
                 Merit_t Merit = {}; // creat a new merit template.
 
-                Merit.id        = Sql_GetUIntData(SqlHandle, 0); // set data from db.
-                Merit.value     = Sql_GetUIntData(SqlHandle, 1);
-                Merit.jobs      = Sql_GetUIntData(SqlHandle, 2);
-                Merit.upgrade   = Sql_GetUIntData(SqlHandle, 3);
-                Merit.upgradeid = Sql_GetUIntData(SqlHandle, 4);
-                Merit.catid     = Sql_GetUIntData(SqlHandle, 5);
+                Merit.id        = sql->GetUIntData(0); // set data from db.
+                Merit.value     = sql->GetUIntData(1);
+                Merit.jobs      = sql->GetUIntData(2);
+                Merit.upgrade   = sql->GetUIntData(3);
+                Merit.upgradeid = sql->GetUIntData(4);
+                Merit.catid     = sql->GetUIntData(5);
                 Merit.next      = upgrade[Merit.upgradeid][0];
-                Merit.spellid   = Sql_GetUIntData(SqlHandle, 6);
+                Merit.spellid   = sql->GetUIntData(6);
 
                 GMeritsTemplate[index] = Merit; // add the merit to the array
 
@@ -568,11 +570,11 @@ namespace meritNameSpace
 
             groupOffset[catIndex] = index - catMeritIndex; // add the last offset manually since loop finishes before hand.
 
-            /* ret = Sql_Query(SqlHandle, "SELECT meritid, spellid FROM merits INNER JOIN spell_list ON merits.name = spell_list.name");
+            /* ret = sql->Query("SELECT meritid, spellid FROM merits INNER JOIN spell_list ON merits.name = spell_list.name");
 
             if (ret != SQL_ERROR)
             {
-                        while( Sql_NextRow(SqlHandle) == SQL_SUCCESS )
+                        while( sql->NextRow() == SQL_SUCCESS )
                         {
                     GMeritsTemplate
                         }
