@@ -642,7 +642,7 @@ local function checkReqs(player, npc, bfid, registrant)
         [ 676] = function() return ( player:hasKeyItem(xi.ki.MIASMA_FILTER)                                                                                                ) end, -- ENM: Totentanz
         [ 677] = function() return ( player:hasKeyItem(xi.ki.LETTER_FROM_SHIKAREE_X)                                                                                       ) end, -- Quest: Tango with a Tracker
         [ 678] = function() return ( player:hasKeyItem(xi.ki.LETTER_FROM_SHIKAREE_Y)                                                                                       ) end, -- Quest: Requiem of Sin
-        [ 704] = function() return ( cop == mi.cop.DARKNESS_NAMED and copStat == 2                                                                                         ) end, -- PM3-5: Darkness Named
+        [ 704] = function() return ( cop == mi.cop.DARKNESS_NAMED and player:getCharVar('Mission[6][358]Status') == 4                                                      ) end, -- PM3-5: Darkness Named
         [ 705] = function() return ( player:hasKeyItem(xi.ki.ASTRAL_COVENANT)                                                                                              ) end, -- ENM: Test Your Mite
         [ 706] = function() return ( player:hasKeyItem(xi.ki.VIAL_OF_DREAM_INCENSE)                                                                                        ) end, -- Quest: Waking Dreams
         [ 736] = function() return ( cop == mi.cop.THREE_PATHS and player:getCharVar("COP_Louverance_s_Path") == 5                                                         ) end, -- PM5-3 L3: A Century of Hardship
