@@ -7,14 +7,14 @@ require("scripts/globals/status")
 require("scripts/globals/utils/nyzul")
 -----------------------------------
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.CHECK_AS_NM, 1)
 end
 
-function onMobDeath(mob, player, isKiller, firstCall)
+entity.onMobDeath = function(mob, player, isKiller)
     if firstCall then
-        nyzul.spawnChest(mob, player)
-        nyzul.specifiedGroupKill(mob)
+        xi.nyzul.spawnChest(mob, player)
+        xi.nyzul.specifiedGroupKill(mob)
         local instance = mob:getInstance()
         local chars = instance:getChars()
         for _, entity in ipairs(chars) do

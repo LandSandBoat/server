@@ -7,14 +7,14 @@ mixins = {require("scripts/mixins/families/flan")}
 require("scripts/globals/utils/nyzul")
 -----------------------------------
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.CHECK_AS_NM, 1)
 end
 
-function onMobDeath(mob, player, isKiller, firstCall)
+entity.onMobDeath = function(mob, player, isKiller)
     if firstCall then
-        nyzul.spawnChest(mob, player)
-        nyzul.specifiedGroupKill(mob)
-        nyzul.specifiedEnemyKill(mob)
+        xi.nyzul.spawnChest(mob, player)
+        xi.nyzul.specifiedGroupKill(mob)
+        xi.nyzul.specifiedEnemyKill(mob)
     end
 end

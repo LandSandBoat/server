@@ -8,17 +8,17 @@ require("scripts/globals/additional_effects")
 require("scripts/globals/status")
 -----------------------------------
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
  end
 
-function onAdditionalEffect(mob, player)
-    return effectUtil.mobOnAddEffect(mob, player, 0, effectUtil.mobAdditionalEffect.PETRIFY)
+entity.onAdditionalEffect = function(mob, target, damage)
+    return xi.mob.onAddEffect(mob, player, 0, xi.mob.ae.PETRIFY)
 end
 
-function onMobDeath(mob, player, isKiller, firstCall)
+entity.onMobDeath = function(mob, player, isKiller)
     if firstCall then
-        nyzul.spawnChest(mob, player)
-        nyzul.eliminateAllKill(mob)
+        xi.nyzul.spawnChest(mob, player)
+        xi.nyzul.eliminateAllKill(mob)
     end
 end

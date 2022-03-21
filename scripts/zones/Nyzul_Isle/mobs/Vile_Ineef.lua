@@ -6,13 +6,13 @@
 require("scripts/globals/utils/nyzul")
 -----------------------------------
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.DARKSLEEP)
 end
 
-function onMobDeath(mob, player, isKiller, firstCall)
+entity.onMobDeath = function(mob, player, isKiller)
     if firstCall then
-        nyzul.spawnChest(mob, player)
-        nyzul.enemyLeaderKill(mob)
+        xi.nyzul.spawnChest(mob, player)
+        xi.nyzul.enemyLeaderKill(mob)
     end
 end

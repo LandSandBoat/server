@@ -17,7 +17,7 @@ function onTrigger(player, npc)
     local lampOrder = npc:getLocalVar("[Lamp]order")
     local wait = npc:getLocalVar("[Lamp]Wait") - os.time()
 
-    if OBJECTIVE == nyzul.lampsObjective.REGISTER then -- 1 lamp spawns and everyone must touch
+    if OBJECTIVE == xi.nyzul.lampsObjective.REGISTER then -- 1 lamp spawns and everyone must touch
         if player:getLocalVar("Register") == 0 then
             player:setLocalVar("Register", 1)
             player:messageSpecial(ID.text.LAMP_CERTIFICATION_REGISTERED)
@@ -29,7 +29,7 @@ function onTrigger(player, npc)
         else
             player:messageSpecial(ID.text.LAMP_CERTIFICATION_CODE)
         end
-    elseif OBJECTIVE == nyzul.lampsObjective.ACTIVATE_ALL then
+    elseif OBJECTIVE == xi.nyzul.lampsObjective.ACTIVATE_ALL then
         if npc:AnimationSub() ~= 1 and wait <= 0 then
             player:messageSpecial(ID.text.LAMP_SAME_TIME)
             player:startOptionalCutscene(3, {[0] = 5, cs_option = {1, 2}})
@@ -38,7 +38,7 @@ function onTrigger(player, npc)
         else
             player:messageSpecial(ID.text.LAMP_CANNOT_ACTIVATE)
         end
-    elseif OBJECTIVE == nyzul.lampsObjective.ORDER then
+    elseif OBJECTIVE == xi.nyzul.lampsObjective.ORDER then
         if (bit.band(lampRegister, bit.lshift(1,lampOrder)) == 0) then
             player:messageSpecial(ID.text.LAMP_ORDER)
             player:startOptionalCutscene(3, {[0] = 6, cs_option = {1,2}})
@@ -65,9 +65,9 @@ function onEventFinish(player, csid, option, npc)
     local winCondition = false
 
     if csid == 3 and option == 1 then
-        if OBJECTIVE == nyzul.lampsObjective.ACTIVATE_ALL then
+        if OBJECTIVE == xi.nyzul.lampsObjective.ACTIVATE_ALL then
             npc:AnimationSub(1)
-            npc:timer(ACTIVATE_LAMP_TIME, function(npc) npc:AnimationSub(0) npc:setLocalVar("[Lamp]Wait", os.time() + 30) end)
+            npc:timer(xi.settings.ACTIVATE_LAMP_TIME, function(npc) npc:AnimationSub(0) npc:setLocalVar("[Lamp]Wait", os.time() + 30) end)
             if instance:getEntity(bit.band(ID.npc.RUNIC_LAMP_1, 0xFFF), xi.objType.NPC):AnimationSub() == 1 and
             instance:getEntity(bit.band(ID.npc.RUNIC_LAMP_2, 0xFFF), xi.objType.NPC):AnimationSub() == 1 and
             instance:getEntity(bit.band(ID.npc.RUNIC_LAMP_3, 0xFFF), xi.objType.NPC):AnimationSub() == 1 then
@@ -83,7 +83,7 @@ function onEventFinish(player, csid, option, npc)
             end
         end
     elseif csid == 3 and option == 2 then
-        if OBJECTIVE == nyzul.lampsObjective.ORDER then
+        if OBJECTIVE == xi.nyzul.lampsObjective.ORDER then
             print("registering lamp, register: "..instance:getLocalVar("[Lamps]lampRegister"))
             lampRegister = lampRegister + bit.lshift(1, lampOrder)
             instance:setLocalVar("[Lamps]lampRegister", lampRegister)

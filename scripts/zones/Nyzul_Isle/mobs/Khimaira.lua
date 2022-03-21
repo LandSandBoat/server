@@ -8,7 +8,7 @@ require("scripts/globals/utils/nyzul")
 require("scripts/globals/status")
 -----------------------------------
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:addImmunity(xi.immunity.SLEEP)
     mob:addImmunity(xi.immunity.TERROR)
     mob:setMod(xi.mod.MEVA, 25)
@@ -19,13 +19,13 @@ function onMobSpawn(mob)
     mob:setMobMod(xi.mobMod.ROAM_DISTANCE, 15)
 end
 
-function onMobFight(mob,target)
+entity.onMobFight = function(mob, target)
 end
 
-function onMobDeath(mob, player, isKiller, firstCall)
+entity.onMobDeath = function(mob, player, isKiller)
     if firstCall then
-        nyzul.enemyLeaderKill(mob)
-        nyzul.vigilWeaponDrop(player, mob)
-        nyzul.handleRunicKey(mob)
+        xi.nyzul.enemyLeaderKill(mob)
+        xi.nyzul.vigilWeaponDrop(player, mob)
+        xi.nyzul.handleRunicKey(mob)
     end
 end

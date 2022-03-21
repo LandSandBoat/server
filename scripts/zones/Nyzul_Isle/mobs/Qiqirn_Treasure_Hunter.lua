@@ -6,9 +6,9 @@
 require("scripts/globals/utils/nyzul")
 -----------------------------------
 
-function onMobDeath(mob, player, isKiller, firstCall)
+entity.onMobDeath = function(mob, player, isKiller)
     if firstCall then
-        nyzul.spawnChest(mob, player)
-        nyzul.specifiedGroupKill(mob)
+        xi.nyzul.spawnChest(mob, player)
+        xi.nyzul.specifiedGroupKill(mob)
     end
 end

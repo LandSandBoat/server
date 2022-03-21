@@ -63,7 +63,7 @@ function onEventFinish(player, csid, option, npc)
 
             for _, players in pairs(chars) do
                 local floorProgress = players:getVar("NyzulFloorProgress")
-                if RUNIC_DISK_SAVE == 0 then
+                if xi.settings.RUNIC_DISK_SAVE == 0 then
                     -- only the person who chose floor gets disk recoreded
                     if players:getID() == diskHolder then
                         if (floorProgress + 1) >= startFloor and floorProgress < currentFloor then
@@ -81,7 +81,7 @@ function onEventFinish(player, csid, option, npc)
                     end
                 end
 
-                local tokens = math.max(0, instance:getLocalVar("potential_tokens") - nyzul.get_token_penalty(instance))
+                local tokens = math.max(0, instance:getLocalVar("potential_tokens") - xi.nyzul.get_token_penalty(instance))
 
                 -- Assault initiator gets 10% more tokens
                 if players:getID() == instance:getLocalVar("assaultInitaitor") then
@@ -113,7 +113,7 @@ function onEventFinish(player, csid, option, npc)
             for _, enemy in ipairs(mobs) do
                 DespawnMob(enemy:getID(), instance)
             end
-            if instance:getStage() == nyzul.objective.ACTIVATE_ALL_LAMPS then
+            if instance:getStage() == xi.nyzul.objective.ACTIVATE_ALL_LAMPS then
                 for i = ID.npc.RUNIC_LAMP_1, ID.npc.RUNIC_LAMP_5 do
                     GetNPCByID(i, instance):setStatus(xi.status.DISAPPEAR)
                     GetNPCByID(i, instance):AnimationSub(0)
@@ -127,7 +127,7 @@ function onEventFinish(player, csid, option, npc)
                 instance:setLocalVar("randomPathos", math.random(18, 29))
             end
 
-            nyzul.clearChests(instance)
+            xi.nyzul.clearChests(instance)
             npc:timer(8000, function(npc) npc:AnimationSub(0) npc:setStatus(xi.status.DISAPPEAR) end)
         end
     end

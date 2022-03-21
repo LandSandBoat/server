@@ -7,7 +7,7 @@ require("scripts/globals/status")
 require("scripts/globals/utils/nyzul")
 -----------------------------------
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:addListener("CRITICAL_TAKE", "IMP_CRITICAL_TAKE", function(mob)
         if math.random(100) <= 20 and mob:AnimationSub() == 4 then
             mob:AnimationSub(5)
@@ -21,9 +21,9 @@ function onMobSpawn(mob)
     mob:AnimationSub(4)
 end
 
-function onMobDeath(mob, player, isKiller, firstCall)
+entity.onMobDeath = function(mob, player, isKiller)
     if firstCall then
-        nyzul.spawnChest(mob, player)
-        nyzul.enemyLeaderKill(mob)
+        xi.nyzul.spawnChest(mob, player)
+        xi.nyzul.enemyLeaderKill(mob)
     end
 end

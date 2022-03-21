@@ -6,7 +6,7 @@
 require("scripts/globals/status")
 -----------------------------------
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:setUnkillable(true)
     mob:hideHP(true)
     mob:SetAutoAttackEnabled(false)
@@ -17,5 +17,5 @@ function onMobSpawn(mob)
     mob:setMobMod(xi.mobMod.SOUND_RANGE, 15)
 end
 
-function onMobDeath(mob, player, isKiller, firstCall)
+entity.onMobDeath = function(mob, player, isKiller)
 end

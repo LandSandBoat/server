@@ -8,7 +8,7 @@ require("scripts/globals/utils/nyzul")
 require("scripts/globals/status")
 -----------------------------------
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.DOUBLE_ATTACK, 10)
     mob:setMod(xi.mod.UDMGMAGIC, -90)
     mob:setMod(xi.mod.POISONRES, 100)
@@ -38,7 +38,7 @@ function onMobEngaged(mob)
     handleRegen(mob, mob:AnimationSub())
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local battletime = os.time()
     local headgrow = mob:getLocalVar("headgrow")
     local broken = mob:AnimationSub()
@@ -66,10 +66,10 @@ function onCriticalHit(mob)
 
 end
 
-function onMobDeath(mob, player, isKiller, firstCall)
+entity.onMobDeath = function(mob, player, isKiller)
     if firstCall then
-        nyzul.enemyLeaderKill(mob)
-        nyzul.vigilWeaponDrop(player, mob)
-        nyzul.handleRunicKey(mob)
+        xi.nyzul.enemyLeaderKill(mob)
+        xi.nyzul.vigilWeaponDrop(player, mob)
+        xi.nyzul.handleRunicKey(mob)
     end
 end

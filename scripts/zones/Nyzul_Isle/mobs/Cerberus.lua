@@ -8,7 +8,7 @@ require("scripts/globals/utils/nyzul")
 require("scripts/globals/status")
 -----------------------------------
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.DOUBLE_ATTACK, 20)
     mob:setMod(xi.mod.REGEN, 10) -- validate
     -- mdt already set in mob family mods
@@ -25,7 +25,7 @@ function onMobSpawn(mob)
     mob:setMobMod(xi.mobMod.ROAM_DISTANCE, 15)
 end
 
-function onMobFight(mob,target)
+entity.onMobFight = function(mob, target)
     if mob:getHPP() > 25 then
         mob:setMod(xi.mod.REGAIN, 10)
     else
@@ -33,10 +33,10 @@ function onMobFight(mob,target)
     end
 end
 
-function onMobDeath(mob, player, isKiller, firstCall)
+entity.onMobDeath = function(mob, player, isKiller)
     if firstCall then
-        nyzul.enemyLeaderKill(mob)
-        nyzul.vigilWeaponDrop(player, mob)
-        nyzul.handleRunicKey(mob)
+        xi.nyzul.enemyLeaderKill(mob)
+        xi.nyzul.vigilWeaponDrop(player, mob)
+        xi.nyzul.handleRunicKey(mob)
     end
 end

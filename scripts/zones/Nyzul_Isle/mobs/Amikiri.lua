@@ -7,19 +7,22 @@ require("scripts/globals/utils/nyzul")
 require("scripts/globals/additional_effects")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT,1)
     mob:addImmunity(xi.immunity.SLEEP)
 end
 
-function onAdditionalEffect(mob, player)
-    return effectUtil.mobOnAddEffect(mob, player, damage, effectUtil.mobAdditionalEffect.POISON, {chance = 40, tick = 50, duration = 15})
+entity.onAdditionalEffect = function(mob, target, damage)
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.POISON, {chance = 40, tick = 50, duration = 15})
 end
 
-function onMobDeath(mob, player, isKiller, firstCall)
+entity.onMobDeath = function(mob, player, isKiller)
     if firstCall then
-        nyzul.spawnChest(mob, player)
-        nyzul.eliminateAllKill(mob)
+        xi.nyzul.spawnChest(mob, player)
+        xi.nyzul.eliminateAllKill(mob)
     end
 end
+
+return entity

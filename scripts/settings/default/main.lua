@@ -174,6 +174,12 @@ xi.settings =
     -- Please visit scripts/globals/events/login_campaign.lua for assigning the correct campaign dates.
     ENABLE_LOGIN_CAMPAIGN = 0,
 
+    -- NYZUL ISLE INVESTIGATION
+   RUNIC_DISK_SAVE      = 1,     -- 0 initiator only saves, 1 full party saves
+   ENABLE_VIGIL_DROPS   = 1,     -- 0 no weapons drop from NM's, 1 does
+   ENABLE_NYZUL_CASKETS = 1,     -- 0 no random temp items caskets, 1 enables
+   ACTIVATE_LAMP_TIME   = 10000, -- 10000 default, 90000 retail, seconds lamps stay lit in miliseconds
+
     -- MISC
     RIVERNE_PORTERS              = 120,  -- Time in seconds that Unstable Displacements in Cape Riverne stay open after trading a scale.
     LANTERNS_STAY_LIT            = 1200, -- time in seconds that lanterns in the Den of Rancor stay lit.

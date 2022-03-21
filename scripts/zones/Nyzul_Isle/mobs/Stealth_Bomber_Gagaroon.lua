@@ -8,13 +8,13 @@ require("scripts/globals/status")
 require("scripts/globals/utils/nyzul")
 -----------------------------------
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     local instance = mob:getInstance()
 
     SpawnMob(mob:getID() - 1, instance)
 end
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged= function(mob, target)
     mob:setLocalVar("runTime", math.random(10, 25))
 end
 
@@ -66,7 +66,7 @@ function dropBomb(mob)
     bomb:timer(4500, function(bomb) bomb:setStatus(xi.status.DISAPPEAR) end)
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local instance = mob:getInstance()
     local battletime = mob:getBattleTime()
     local runTime = mob:getLocalVar("runTime")
@@ -87,9 +87,9 @@ function onMobFight(mob, target)
     end
 end
 
-function onMobDeath(mob, player, isKiller, firstCall)
+entity.onMobDeath = function(mob, player, isKiller)
     if firstCall then
-        nyzul.spawnChest(mob, player)
-        nyzul.enemyLeaderKill(mob)
+        xi.nyzul.spawnChest(mob, player)
+        xi.nyzul.enemyLeaderKill(mob)
     end
 end

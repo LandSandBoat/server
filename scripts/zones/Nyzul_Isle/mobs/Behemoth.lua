@@ -8,8 +8,9 @@ mixins = { require("scripts/mixins/nyzul_boss_drops") }
 require("scripts/globals/utils/nyzul")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:addImmunity(xi.immunity.TERROR)
     mob:addImmunity(xi.immunity.SLEEP)
     mob:setMod(xi.mod.MAIN_DMG_RATING, 42)
@@ -18,15 +19,17 @@ function onMobSpawn(mob)
     mob:setMobMod(xi.mobMod.ROAM_DISTANCE, 15)
 end
 
-function onMobEngaged(mob,target)
+entity.onMobEngaged= function(mob, target)
 end
 
-function onMobFight(mob,target)
+entity.onMobFight = function(mob, target)
 end
 
-function onMobDeath(mob, player, isKiller, firstCall)
+entity.onMobDeath = function(mob, player, isKiller)
     if firstCall then
-        nyzul.enemyLeaderKill(mob)
-        nyzul.vigilWeaponDrop(player, mob)
+        xi.nyzul.enemyLeaderKill(mob)
+        xi.nyzul.vigilWeaponDrop(player, mob)
     end
 end
+
+return entity

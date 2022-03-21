@@ -3,16 +3,16 @@
 -----------------------------------
 local ID = require("scripts/zones/Nyzul_Isle/IDs")
 require("scripts/globals/items")
-require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/utils")
-require("scripts/globals/utils/appraisal")
+require("scripts/globals/appraisal")
 require("scripts/globals/zone")
+require("scripts/settings/main")
 -----------------------------------
+xi = xi or {}
+xi.nyzul = xi.nyzul or {}
 
-nyzul = nyzul or {}
-
-nyzul.baseWeapons =
+xi.nyzul.baseWeapons =
 {
     [xi.job.WAR] = xi.items.STURDY_AXE,
     [xi.job.MNK] = xi.items.BURNING_FISTS,
@@ -36,7 +36,7 @@ nyzul.baseWeapons =
 --  [xi.job.SCH] = xi.items.ELDER_STAFF,
 }
 
-nyzul.objective =
+xi.nyzul.objective =
 {
     ELIMINATE_ENEMY_LEADER        = 0,
     ELIMINATE_SPECIFIED_ENEMIES   = 1,
@@ -46,27 +46,27 @@ nyzul.objective =
     FREE_FLOOR                    = 5,
 }
 
-nyzul.lampsObjective =
+xi.nyzul.lampsObjective =
 {
     REGISTER     = 1,
     ACTIVATE_ALL = 2,
     ORDER        = 3,
 }
 
-nyzul.gearObjective =
+xi.nyzul.gearObjective =
 {
     AVOID_AGRO     = 1,
     DO_NOT_DESTROY = 2,
 }
 
-nyzul.penalty =
+xi.nyzul.penalty =
 {
     TIME   = 1,
     TOKENS = 2,
     PATHOS = 3,
 }
 
-nyzul.pathos =
+xi.nyzul.pathos =
 {
     -- Found info: if gaining pathos from failed gear objectives will pick 3 different ways,
     -- 1. token reward reduction, 2. time reduction, 3. random any other effect. Once picked which of
@@ -105,7 +105,7 @@ nyzul.pathos =
     [29] = {effect = xi.effect.CHR_BOOST_II,  power = 30,    ID = 7428},
 }
 
-nyzul.FloorLayout =
+xi.nyzul.FloorLayout =
 {
     [0]  = { -20, -0.5, -380}, -- boss floors 20, 40, 60, 80
     --[?] = {-491, -4.0, -500}, -- boss floor 20 confirmed
@@ -135,7 +135,7 @@ nyzul.FloorLayout =
     --[24] = {-64.5, 0, 60},
 }
 
-nyzul.floorCost =
+xi.nyzul.floorCost =
 {
     [1]  = {level =  1, cost =    0},
     [2]  = {level =  6, cost =  500},
@@ -159,7 +159,7 @@ nyzul.floorCost =
     [20] = {level = 96, cost = 1900},
 }
 
-nyzul.pickMobs =
+xi.nyzul.pickMobs =
 {
     [0] = -- 20th Floor bosses
     {
@@ -212,7 +212,7 @@ nyzul.pickMobs =
     },
 }
 
-nyzul.FloorEntities = -- regular mobs by layout
+xi.nyzul.FloorEntities = -- regular mobs by layout
 {
     [1] = -- Aquans
     {
@@ -301,96 +301,96 @@ nyzul.FloorEntities = -- regular mobs by layout
     },
 }
 
-nyzul.appraisalItems =
+xi.nyzul.appraisalItems =
 {
-        [appraisalUtil.Origin.NYZUL_BAT_EYE] =               xi.items.APPRAISAL_AXE,
-        [appraisalUtil.Origin.NYZUL_SHADOW_EYE] =            xi.items.APPRAISAL_NECKLACE,
-        [appraisalUtil.Origin.NYZUL_BOMB_KING] =             xi.items.APPRAISAL_RING,
-        [appraisalUtil.Origin.NYZUL_JUGGLER_HECATOMB] =      xi.items.APPRAISAL_POLEARM,
-        [appraisalUtil.Origin.NYZUL_SMOTHERING_SCHMIDT] =    xi.items.APPRAISAL_RING,
-        [appraisalUtil.Origin.NYZUL_HELLION] =               xi.items.APPRAISAL_POLEARM,
-        [appraisalUtil.Origin.NYZUL_LEAPING_LIZZY] =         xi.items.APPRAISAL_FOOTWEAR,
-        [appraisalUtil.Origin.NYZUL_TOM_TIT_TAT] =           xi.items.APPRAISAL_DAGGER,
-        [appraisalUtil.Origin.NYZUL_JAGGEDY_EARED_JACK] =    xi.items.APPRAISAL_NECKLACE,
-        [appraisalUtil.Origin.NYZUL_CACTUAR_CANTAUTOR] =     xi.items.APPRAISAL_FOOTWEAR,
-        [appraisalUtil.Origin.NYZUL_GARGANTUA] =             xi.items.APPRAISAL_NECKLACE,
-        [appraisalUtil.Origin.NYZUL_GYRE_CARLIN] =           xi.items.APPRAISAL_BOW,
-        [appraisalUtil.Origin.NYZUL_ASPHYXIATED_AMSEL] =     xi.items.APPRAISAL_RING,
-        [appraisalUtil.Origin.NYZUL_FROSTMANE] =             xi.items.APPRAISAL_SWORD,
-        [appraisalUtil.Origin.NYZUL_PEALLAIDH] =             xi.items.APPRAISAL_GLOVES,
-        [appraisalUtil.Origin.NYZUL_CARNERO] =               xi.items.APPRAISAL_SWORD,
-        [appraisalUtil.Origin.NYZUL_FALCATUS_ARANEI] =       xi.items.APPRAISAL_POLEARM,
-        [appraisalUtil.Origin.NYZUL_EMERGENT_ELM] =          xi.items.APPRAISAL_SWORD,
-        [appraisalUtil.Origin.NYZUL_OLD_TWO_WINGS] =         xi.items.APPRAISAL_CAPE,
-        [appraisalUtil.Origin.NYZUL_AIATAR] =                xi.items.APPRAISAL_BOX,
-        [appraisalUtil.Origin.NYZUL_INTULO] =                xi.items.APPRAISAL_BOX,
-        [appraisalUtil.Origin.NYZUL_ORCTRAP] =               xi.items.APPRAISAL_DAGGER,
-        [appraisalUtil.Origin.NYZUL_VALKURM_EMPEROR] =       xi.items.APPRAISAL_HEADPIECE,
-        [appraisalUtil.Origin.NYZUL_CRUSHED_KRAUSE] =        xi.items.APPRAISAL_RING,
-        [appraisalUtil.Origin.NYZUL_STINGING_SOPHIE] =       xi.items.APPRAISAL_DAGGER,
-        [appraisalUtil.Origin.NYZUL_SERPOPARD_ISHTAR] =      xi.items.APPRAISAL_NECKLACE,
-        [appraisalUtil.Origin.NYZUL_WESTERN_SHADOW] =        xi.items.APPRAISAL_DAGGER,
-        [appraisalUtil.Origin.NYZUL_BLOODTEAR_BALDURF] =     xi.items.APPRAISAL_SHIELD,
-        [appraisalUtil.Origin.NYZUL_ZIZZY_ZILLAH] =          xi.items.APPRAISAL_SWORD,
-        [appraisalUtil.Origin.NYZUL_ELLYLLON] =              xi.items.APPRAISAL_HEADPIECE,
-        [appraisalUtil.Origin.NYZUL_MISCHIEVOUS_MICHOLAS] =  xi.items.APPRAISAL_DAGGER,
-        [appraisalUtil.Origin.NYZUL_LEECH_KING] =            xi.items.APPRAISAL_EARRING,
-        [appraisalUtil.Origin.NYZUL_EASTERN_SHADOW] =        xi.items.APPRAISAL_BOW,
-        [appraisalUtil.Origin.NYZUL_NUNYENUNC] =             xi.items.APPRAISAL_POLEARM,
-        [appraisalUtil.Origin.NYZUL_HELLDIVER] =             xi.items.APPRAISAL_BOW,
-        [appraisalUtil.Origin.NYZUL_TAISAIJIN] =             xi.items.APPRAISAL_HEADPIECE,
-        [appraisalUtil.Origin.NYZUL_FUNGUS_BEETLE] =         xi.items.APPRAISAL_SHIELD,
-        [appraisalUtil.Origin.NYZUL_FRIAR_RUSH] =            xi.items.APPRAISAL_BOX,
-        [appraisalUtil.Origin.NYZUL_PULVERIZED_PFEFFER] =    xi.items.APPRAISAL_RING,
-        [appraisalUtil.Origin.NYZUL_ARGUS] =                 xi.items.APPRAISAL_NECKLACE,
-        [appraisalUtil.Origin.NYZUL_BLOODPOOL_VORAX] =       xi.items.APPRAISAL_NECKLACE,
-        [appraisalUtil.Origin.NYZUL_NIGHTMARE_VASE] =        xi.items.APPRAISAL_DAGGER,
-        [appraisalUtil.Origin.NYZUL_DAGGERCLAW_DRACOS] =     xi.items.APPRAISAL_DAGGER,
-        [appraisalUtil.Origin.NYZUL_NORTHERN_SHADOW] =       xi.items.APPRAISAL_AXE,
-        [appraisalUtil.Origin.NYZUL_FRAELISSA] =            {xi.items.APPRAISAL_CAPE, xi.items.APPRAISAL_BOW},
-        [appraisalUtil.Origin.NYZUL_ROC] =                   xi.items.APPRAISAL_POLEARM,
-        [appraisalUtil.Origin.NYZUL_SABOTENDER_BAILARIN] =   xi.items.APPRAISAL_BOX,
-        [appraisalUtil.Origin.NYZUL_AQUARIUS] =              xi.items.APPRAISAL_AXE,
-        [appraisalUtil.Origin.NYZUL_ENERGETIC_ERUCA] =       xi.items.APPRAISAL_GLOVES,
-        [appraisalUtil.Origin.NYZUL_SPINY_SPIPI] =           xi.items.APPRAISAL_CAPE,
-        [appraisalUtil.Origin.NYZUL_TRICKSTER_KINETIX] =     xi.items.APPRAISAL_AXE,
-        [appraisalUtil.Origin.NYZUL_DROOLING_DAISY] =        xi.items.APPRAISAL_HEADPIECE,
-        [appraisalUtil.Origin.NYZUL_BONNACON] =              xi.items.APPRAISAL_FOOTWEAR,
-        [appraisalUtil.Origin.NYZUL_GOLDEN_BAT] =            xi.items.APPRAISAL_CAPE,
-        [appraisalUtil.Origin.NYZUL_STEELFLEECE_BALDARICH] = xi.items.APPRAISAL_SHIELD,
-        [appraisalUtil.Origin.NYZUL_SABOTENDER_MARIACHI] =   xi.items.APPRAISAL_DAGGER,
-        [appraisalUtil.Origin.NYZUL_UNGUR] =                 xi.items.APPRAISAL_BOW,
-        [appraisalUtil.Origin.NYZUL_SWAMFISK] =              xi.items.APPRAISAL_POLEARM,
-        [appraisalUtil.Origin.NYZUL_BUBURIMBOO] =            xi.items.APPRAISAL_NECKLACE,
-        [appraisalUtil.Origin.NYZUL_KEEPER_OF_HALIDOM] =     xi.items.APPRAISAL_SWORD,
-        [appraisalUtil.Origin.NYZUL_SERKET] =                xi.items.APPRAISAL_RING,
-        [appraisalUtil.Origin.NYZUL_DUNE_WIDOW] =            xi.items.APPRAISAL_NECKLACE,
-        [appraisalUtil.Origin.NYZUL_ODQAN] =                 xi.items.APPRAISAL_BOX,
-        [appraisalUtil.Origin.NYZUL_BURNED_BERGMANN] =       xi.items.APPRAISAL_RING,
-        [appraisalUtil.Origin.NYZUL_TYRANNIC_TUNNOK] =       xi.items.APPRAISAL_AXE,
-        [appraisalUtil.Origin.NYZUL_BLOODSUCKER] =           xi.items.APPRAISAL_RING,
-        [appraisalUtil.Origin.NYZUL_TOTTERING_TOBY] =        xi.items.APPRAISAL_FOOTWEAR,
-        [appraisalUtil.Origin.NYZUL_SOUTHERN_SHADOW] =       xi.items.APPRAISAL_SHIELD,
-        [appraisalUtil.Origin.NYZUL_SHARP_EARED_ROPIPI] =    xi.items.APPRAISAL_HEADPIECE,
-        [appraisalUtil.Origin.NYZUL_PANZER_PERCIVAL] =       xi.items.APPRAISAL_AXE,
-        [appraisalUtil.Origin.NYZUL_VOUIVRE] =               xi.items.APPRAISAL_POLEARM,
-        [appraisalUtil.Origin.NYZUL_JOLLY_GREEN] =           xi.items.APPRAISAL_SASH,
-        [appraisalUtil.Origin.NYZUL_TUMBLING_TRUFFLE] =      xi.items.APPRAISAL_HEADPIECE,
-        [appraisalUtil.Origin.NYZUL_CAPRICIOUS_CASSIE] =     xi.items.APPRAISAL_EARRING,
-        [appraisalUtil.Origin.NYZUL_AMIKIRI] =               xi.items.APPRAISAL_SWORD,
-        [appraisalUtil.Origin.NYZUL_STRAY_MARY] =            xi.items.APPRAISAL_BOX,
-        [appraisalUtil.Origin.NYZUL_SEWER_SYRUP] =           xi.items.APPRAISAL_RING,
-        [appraisalUtil.Origin.NYZUL_UNUT] =                  xi.items.APPRAISAL_BOX,
-        [appraisalUtil.Origin.NYZUL_SIMURGH] =               xi.items.APPRAISAL_FOOTWEAR,
-        [appraisalUtil.Origin.NYZUL_PELICAN] =               xi.items.APPRAISAL_SHIELD,
-        [appraisalUtil.Origin.NYZUL_CARGO_CRAB_COLIN] =      xi.items.APPRAISAL_SWORD,
-        [appraisalUtil.Origin.NYZUL_WOUNDED_WURFEL] =        xi.items.APPRAISAL_RING,
-        [appraisalUtil.Origin.NYZUL_PEG_POWLER] =            xi.items.APPRAISAL_AXE,
-        [appraisalUtil.Origin.NYZUL_JADED_JODY] =            xi.items.APPRAISAL_BOX,
-        [appraisalUtil.Origin.NYZUL_MAIGHDEAN_UAINE] =       xi.items.APPRAISAL_EARRING,
+        [xi.appraisalUtil.Origin.NYZUL_BAT_EYE] =               xi.items.APPRAISAL_AXE,
+        [xi.appraisalUtil.Origin.NYZUL_SHADOW_EYE] =            xi.items.APPRAISAL_NECKLACE,
+        [xi.appraisalUtil.Origin.NYZUL_BOMB_KING] =             xi.items.APPRAISAL_RING,
+        [xi.appraisalUtil.Origin.NYZUL_JUGGLER_HECATOMB] =      xi.items.APPRAISAL_POLEARM,
+        [xi.appraisalUtil.Origin.NYZUL_SMOTHERING_SCHMIDT] =    xi.items.APPRAISAL_RING,
+        [xi.appraisalUtil.Origin.NYZUL_HELLION] =               xi.items.APPRAISAL_POLEARM,
+        [xi.appraisalUtil.Origin.NYZUL_LEAPING_LIZZY] =         xi.items.APPRAISAL_FOOTWEAR,
+        [xi.appraisalUtil.Origin.NYZUL_TOM_TIT_TAT] =           xi.items.APPRAISAL_DAGGER,
+        [xi.appraisalUtil.Origin.NYZUL_JAGGEDY_EARED_JACK] =    xi.items.APPRAISAL_NECKLACE,
+        [xi.appraisalUtil.Origin.NYZUL_CACTUAR_CANTAUTOR] =     xi.items.APPRAISAL_FOOTWEAR,
+        [xi.appraisalUtil.Origin.NYZUL_GARGANTUA] =             xi.items.APPRAISAL_NECKLACE,
+        [xi.appraisalUtil.Origin.NYZUL_GYRE_CARLIN] =           xi.items.APPRAISAL_BOW,
+        [xi.appraisalUtil.Origin.NYZUL_ASPHYXIATED_AMSEL] =     xi.items.APPRAISAL_RING,
+        [xi.appraisalUtil.Origin.NYZUL_FROSTMANE] =             xi.items.APPRAISAL_SWORD,
+        [xi.appraisalUtil.Origin.NYZUL_PEALLAIDH] =             xi.items.APPRAISAL_GLOVES,
+        [xi.appraisalUtil.Origin.NYZUL_CARNERO] =               xi.items.APPRAISAL_SWORD,
+        [xi.appraisalUtil.Origin.NYZUL_FALCATUS_ARANEI] =       xi.items.APPRAISAL_POLEARM,
+        [xi.appraisalUtil.Origin.NYZUL_EMERGENT_ELM] =          xi.items.APPRAISAL_SWORD,
+        [xi.appraisalUtil.Origin.NYZUL_OLD_TWO_WINGS] =         xi.items.APPRAISAL_CAPE,
+        [xi.appraisalUtil.Origin.NYZUL_AIATAR] =                xi.items.APPRAISAL_BOX,
+        [xi.appraisalUtil.Origin.NYZUL_INTULO] =                xi.items.APPRAISAL_BOX,
+        [xi.appraisalUtil.Origin.NYZUL_ORCTRAP] =               xi.items.APPRAISAL_DAGGER,
+        [xi.appraisalUtil.Origin.NYZUL_VALKURM_EMPEROR] =       xi.items.APPRAISAL_HEADPIECE,
+        [xi.appraisalUtil.Origin.NYZUL_CRUSHED_KRAUSE] =        xi.items.APPRAISAL_RING,
+        [xi.appraisalUtil.Origin.NYZUL_STINGING_SOPHIE] =       xi.items.APPRAISAL_DAGGER,
+        [xi.appraisalUtil.Origin.NYZUL_SERPOPARD_ISHTAR] =      xi.items.APPRAISAL_NECKLACE,
+        [xi.appraisalUtil.Origin.NYZUL_WESTERN_SHADOW] =        xi.items.APPRAISAL_DAGGER,
+        [xi.appraisalUtil.Origin.NYZUL_BLOODTEAR_BALDURF] =     xi.items.APPRAISAL_SHIELD,
+        [xi.appraisalUtil.Origin.NYZUL_ZIZZY_ZILLAH] =          xi.items.APPRAISAL_SWORD,
+        [xi.appraisalUtil.Origin.NYZUL_ELLYLLON] =              xi.items.APPRAISAL_HEADPIECE,
+        [xi.appraisalUtil.Origin.NYZUL_MISCHIEVOUS_MICHOLAS] =  xi.items.APPRAISAL_DAGGER,
+        [xi.appraisalUtil.Origin.NYZUL_LEECH_KING] =            xi.items.APPRAISAL_EARRING,
+        [xi.appraisalUtil.Origin.NYZUL_EASTERN_SHADOW] =        xi.items.APPRAISAL_BOW,
+        [xi.appraisalUtil.Origin.NYZUL_NUNYENUNC] =             xi.items.APPRAISAL_POLEARM,
+        [xi.appraisalUtil.Origin.NYZUL_HELLDIVER] =             xi.items.APPRAISAL_BOW,
+        [xi.appraisalUtil.Origin.NYZUL_TAISAIJIN] =             xi.items.APPRAISAL_HEADPIECE,
+        [xi.appraisalUtil.Origin.NYZUL_FUNGUS_BEETLE] =         xi.items.APPRAISAL_SHIELD,
+        [xi.appraisalUtil.Origin.NYZUL_FRIAR_RUSH] =            xi.items.APPRAISAL_BOX,
+        [xi.appraisalUtil.Origin.NYZUL_PULVERIZED_PFEFFER] =    xi.items.APPRAISAL_RING,
+        [xi.appraisalUtil.Origin.NYZUL_ARGUS] =                 xi.items.APPRAISAL_NECKLACE,
+        [xi.appraisalUtil.Origin.NYZUL_BLOODPOOL_VORAX] =       xi.items.APPRAISAL_NECKLACE,
+        [xi.appraisalUtil.Origin.NYZUL_NIGHTMARE_VASE] =        xi.items.APPRAISAL_DAGGER,
+        [xi.appraisalUtil.Origin.NYZUL_DAGGERCLAW_DRACOS] =     xi.items.APPRAISAL_DAGGER,
+        [xi.appraisalUtil.Origin.NYZUL_NORTHERN_SHADOW] =       xi.items.APPRAISAL_AXE,
+        [xi.appraisalUtil.Origin.NYZUL_FRAELISSA] =            {xi.items.APPRAISAL_CAPE, xi.items.APPRAISAL_BOW},
+        [xi.appraisalUtil.Origin.NYZUL_ROC] =                   xi.items.APPRAISAL_POLEARM,
+        [xi.appraisalUtil.Origin.NYZUL_SABOTENDER_BAILARIN] =   xi.items.APPRAISAL_BOX,
+        [xi.appraisalUtil.Origin.NYZUL_AQUARIUS] =              xi.items.APPRAISAL_AXE,
+        [xi.appraisalUtil.Origin.NYZUL_ENERGETIC_ERUCA] =       xi.items.APPRAISAL_GLOVES,
+        [xi.appraisalUtil.Origin.NYZUL_SPINY_SPIPI] =           xi.items.APPRAISAL_CAPE,
+        [xi.appraisalUtil.Origin.NYZUL_TRICKSTER_KINETIX] =     xi.items.APPRAISAL_AXE,
+        [xi.appraisalUtil.Origin.NYZUL_DROOLING_DAISY] =        xi.items.APPRAISAL_HEADPIECE,
+        [xi.appraisalUtil.Origin.NYZUL_BONNACON] =              xi.items.APPRAISAL_FOOTWEAR,
+        [xi.appraisalUtil.Origin.NYZUL_GOLDEN_BAT] =            xi.items.APPRAISAL_CAPE,
+        [xi.appraisalUtil.Origin.NYZUL_STEELFLEECE_BALDARICH] = xi.items.APPRAISAL_SHIELD,
+        [xi.appraisalUtil.Origin.NYZUL_SABOTENDER_MARIACHI] =   xi.items.APPRAISAL_DAGGER,
+        [xi.appraisalUtil.Origin.NYZUL_UNGUR] =                 xi.items.APPRAISAL_BOW,
+        [xi.appraisalUtil.Origin.NYZUL_SWAMFISK] =              xi.items.APPRAISAL_POLEARM,
+        [xi.appraisalUtil.Origin.NYZUL_BUBURIMBOO] =            xi.items.APPRAISAL_NECKLACE,
+        [xi.appraisalUtil.Origin.NYZUL_KEEPER_OF_HALIDOM] =     xi.items.APPRAISAL_SWORD,
+        [xi.appraisalUtil.Origin.NYZUL_SERKET] =                xi.items.APPRAISAL_RING,
+        [xi.appraisalUtil.Origin.NYZUL_DUNE_WIDOW] =            xi.items.APPRAISAL_NECKLACE,
+        [xi.appraisalUtil.Origin.NYZUL_ODQAN] =                 xi.items.APPRAISAL_BOX,
+        [xi.appraisalUtil.Origin.NYZUL_BURNED_BERGMANN] =       xi.items.APPRAISAL_RING,
+        [xi.appraisalUtil.Origin.NYZUL_TYRANNIC_TUNNOK] =       xi.items.APPRAISAL_AXE,
+        [xi.appraisalUtil.Origin.NYZUL_BLOODSUCKER] =           xi.items.APPRAISAL_RING,
+        [xi.appraisalUtil.Origin.NYZUL_TOTTERING_TOBY] =        xi.items.APPRAISAL_FOOTWEAR,
+        [xi.appraisalUtil.Origin.NYZUL_SOUTHERN_SHADOW] =       xi.items.APPRAISAL_SHIELD,
+        [xi.appraisalUtil.Origin.NYZUL_SHARP_EARED_ROPIPI] =    xi.items.APPRAISAL_HEADPIECE,
+        [xi.appraisalUtil.Origin.NYZUL_PANZER_PERCIVAL] =       xi.items.APPRAISAL_AXE,
+        [xi.appraisalUtil.Origin.NYZUL_VOUIVRE] =               xi.items.APPRAISAL_POLEARM,
+        [xi.appraisalUtil.Origin.NYZUL_JOLLY_GREEN] =           xi.items.APPRAISAL_SASH,
+        [xi.appraisalUtil.Origin.NYZUL_TUMBLING_TRUFFLE] =      xi.items.APPRAISAL_HEADPIECE,
+        [xi.appraisalUtil.Origin.NYZUL_CAPRICIOUS_CASSIE] =     xi.items.APPRAISAL_EARRING,
+        [xi.appraisalUtil.Origin.NYZUL_AMIKIRI] =               xi.items.APPRAISAL_SWORD,
+        [xi.appraisalUtil.Origin.NYZUL_STRAY_MARY] =            xi.items.APPRAISAL_BOX,
+        [xi.appraisalUtil.Origin.NYZUL_SEWER_SYRUP] =           xi.items.APPRAISAL_RING,
+        [xi.appraisalUtil.Origin.NYZUL_UNUT] =                  xi.items.APPRAISAL_BOX,
+        [xi.appraisalUtil.Origin.NYZUL_SIMURGH] =               xi.items.APPRAISAL_FOOTWEAR,
+        [xi.appraisalUtil.Origin.NYZUL_PELICAN] =               xi.items.APPRAISAL_SHIELD,
+        [xi.appraisalUtil.Origin.NYZUL_CARGO_CRAB_COLIN] =      xi.items.APPRAISAL_SWORD,
+        [xi.appraisalUtil.Origin.NYZUL_WOUNDED_WURFEL] =        xi.items.APPRAISAL_RING,
+        [xi.appraisalUtil.Origin.NYZUL_PEG_POWLER] =            xi.items.APPRAISAL_AXE,
+        [xi.appraisalUtil.Origin.NYZUL_JADED_JODY] =            xi.items.APPRAISAL_BOX,
+        [xi.appraisalUtil.Origin.NYZUL_MAIGHDEAN_UAINE] =       xi.items.APPRAISAL_EARRING,
 }
 
-function nyzul.handleAppraisalItem(player, npc)
+function xi.nyzul.handleAppraisalItem(player, npc)
     local instance = npc:getInstance()
     local chars = instance:getChars()
 
@@ -405,7 +405,7 @@ function nyzul.handleAppraisalItem(player, npc)
                 mobOffset = 136
             end
 
-            local itemID = nyzul.appraisalItems[mobOffset]
+            local itemID = xi.nyzul.appraisalItems[mobOffset]
 
             if type(itemID) == "table" then
                 local pick = math.random(1, #itemID)
@@ -433,12 +433,12 @@ function nyzul.handleAppraisalItem(player, npc)
     end
 end
 
-function nyzul.tempBoxTrigger(player, npc)
+function xi.nyzul.tempBoxTrigger(player, npc)
     if npc:getLocalVar("itemsPicked") == 0 then
         npc:setLocalVar("itemsPicked", 1)
         npc:entityAnimationPacket("open")
         npc:AnimationSub(13)
-        nyzul.tempBoxPickItems(npc)
+        xi.nyzul.tempBoxPickItems(npc)
     end
 
     player:startEvent(2, {[0] = (npc:getLocalVar("itemID_1") + (npc:getLocalVar("itemAmount_1") * 65536)),
@@ -446,7 +446,7 @@ function nyzul.tempBoxTrigger(player, npc)
     [2] = (npc:getLocalVar("itemID_3") + (npc:getLocalVar("itemAmount_3") * 65536))})
 end
 
-function nyzul.tempBoxPickItems(npc)
+function xi.nyzul.tempBoxPickItems(npc)
     local tempBoxItems =
     {
         [1] = {itemID = xi.items.BOTTLE_OF_BARBARIANS_DRINK, amount = math.random(1,3)},
@@ -501,7 +501,7 @@ function nyzul.tempBoxPickItems(npc)
     end
 end
 
-function nyzul.tempBoxFinish(player, csid, option, npc)
+function xi.nyzul.tempBoxFinish(player, csid, option, npc)
     local ID = require("scripts/zones/"..player:getZoneName().."/IDs")
 
     if csid == 2 then
@@ -540,7 +540,7 @@ function nyzul.tempBoxFinish(player, csid, option, npc)
     end
 end
 
-function nyzul.clearChests(instance)
+function xi.nyzul.clearChests(instance)
     for _, cofferID in ipairs(ID.npc.TREASURE_COFFER) do
         npc = GetNPCByID(cofferID, instance)
         if npc:getStatus() ~= xi.status.DISAPPEAR then
@@ -550,7 +550,7 @@ function nyzul.clearChests(instance)
         end
     end
 
-    if ENABLE_NYZUL_CASKETS == 1 then
+    if xi.settings.ENABLE_NYZUL_CASKETS == 1 then
         for _, casketID in ipairs(ID.npc.TREASURE_CASKET) do
             npc = GetNPCByID(casketID, instance)
             if npc:getStatus() ~= xi.status.DISAPPEAR then
@@ -562,7 +562,7 @@ function nyzul.clearChests(instance)
     end
 end
 
-function nyzul.handleRunicKey(mob)
+function xi.nyzul.handleRunicKey(mob)
     local instance = mob:getInstance()
 
     if instance:getLocalVar("Nyzul_Current_Floor") == 100 then
@@ -572,7 +572,7 @@ function nyzul.handleRunicKey(mob)
         for _, entity in pairs(chars) do
             -- Does players Runic Disk have data saved to a floor of entering or higher
             if entity:getVar("NyzulFloorProgress") + 1 >= startFloor and not entity:hasKeyItem(xi.ki.RUNIC_KEY) then
-                if RUNIC_DISK_SAVE == 0 then -- On early version only initiator of floor got progress saves and key credit
+                if xi.settings.RUNIC_DISK_SAVE == 0 then -- On early version only initiator of floor got progress saves and key credit
                     if entity:getID() == instance:getLocalVar("diskHolder") then
                         if npcUtil.giveKeyItem(entity, xi.ki.RUNIC_KEY) then
                             entity:setVar("NyzulFloorProgress", 0)
@@ -586,20 +586,20 @@ function nyzul.handleRunicKey(mob)
     end
 end
 
-function nyzul.handleProgress(instance, progress)
+function xi.nyzul.handleProgress(instance, progress)
     local chars = instance:getChars()
     local stage = instance:getStage()
     local currectFloor = instance:getLocalVar("Nyzul_Current_Floor")
     local complete = false
 
-    if ((stage == nyzul.objective.FREE_FLOOR or
-            stage == nyzul.objective.ELIMINATE_ENEMY_LEADER or
-            stage == nyzul.objective.ACTIVATE_ALL_LAMPS or
-            stage == nyzul.objective.ELIMINATE_SPECIFIED_ENEMY) and
+    if ((stage == xi.nyzul.objective.FREE_FLOOR or
+            stage == xi.nyzul.objective.ELIMINATE_ENEMY_LEADER or
+            stage == xi.nyzul.objective.ACTIVATE_ALL_LAMPS or
+            stage == xi.nyzul.objective.ELIMINATE_SPECIFIED_ENEMY) and
             progress == 15)
         or
-        ((stage == nyzul.objective.ELIMINATE_ALL_ENEMIES or
-            stage == nyzul.objective.ELIMINATE_SPECIFIED_ENEMIES) and
+        ((stage == xi.nyzul.objective.ELIMINATE_ALL_ENEMIES or
+            stage == xi.nyzul.objective.ELIMINATE_SPECIFIED_ENEMIES) and
             progress >= instance:getLocalVar("Eliminate"))
     then
         instance:setProgress(0)
@@ -613,47 +613,47 @@ function nyzul.handleProgress(instance, progress)
     return complete
 end
 
-function nyzul.enemyLeaderKill(mob)
+function xi.nyzul.enemyLeaderKill(mob)
     local instance = mob:getInstance()
     instance:setProgress(15)
 end
 
-function nyzul.specifiedGroupKill(mob)
+function xi.nyzul.specifiedGroupKill(mob)
     local instance = mob:getInstance()
-    if instance:getStage() == nyzul.objective.ELIMINATE_SPECIFIED_ENEMIES then
+    if instance:getStage() == xi.nyzul.objective.ELIMINATE_SPECIFIED_ENEMIES then
         instance:setProgress(instance:getProgress() + 1)
     end
 end
 
-function nyzul.specifiedEnemySet(mob)
+function xi.nyzul.specifiedEnemySet(mob)
     local instance = mob:getInstance()
-    if instance:getStage() == nyzul.objective.ELIMINATE_SPECIFIED_ENEMY then
+    if instance:getStage() == xi.nyzul.objective.ELIMINATE_SPECIFIED_ENEMY then
         if instance:getLocalVar("Nyzul_Specified_Enemy") == mob:getID() then
             mob:setMobMod(xi.mobMod.CHECK_AS_NM, 1)
         end
     end
 end
 
-function nyzul.specifiedEnemyKill(mob)
+function xi.nyzul.specifiedEnemyKill(mob)
     local instance = mob:getInstance()
-    if instance:getStage() == nyzul.objective.ELIMINATE_SPECIFIED_ENEMY then
+    if instance:getStage() == xi.nyzul.objective.ELIMINATE_SPECIFIED_ENEMY then
         if instance:getLocalVar("Nyzul_Specified_Enemy") == mob:getID() then
             instance:setProgress(15)
             instance:setLocalVar("Nyzul_Specified_Enemy", 0)
         end
-    elseif instance:getStage() == nyzul.objective.ELIMINATE_ALL_ENEMIES then
+    elseif instance:getStage() == xi.nyzul.objective.ELIMINATE_ALL_ENEMIES then
         instance:setProgress(instance:getProgress() + 1)
     end
 end
 
-function nyzul.eliminateAllKill(mob)
+function xi.nyzul.eliminateAllKill(mob)
     local instance = mob:getInstance()
-    if instance:getStage() == nyzul.objective.ELIMINATE_ALL_ENEMIES then
+    if instance:getStage() == xi.nyzul.objective.ELIMINATE_ALL_ENEMIES then
         instance:setProgress(instance:getProgress() + 1)
     end
 end
 
-function nyzul.activateRuneOfTransfer(instance)
+function xi.nyzul.activateRuneOfTransfer(instance)
     for _, runeID in pairs(ID.npc.RUNE_OF_TRANSFER) do
         if GetNPCByID(runeID, instance):getStatus() == xi.status.NORMAL then
             GetNPCByID(runeID, instance):AnimationSub(1)
@@ -662,7 +662,7 @@ function nyzul.activateRuneOfTransfer(instance)
     end
 end
 
-function nyzul.vigilWeaponDrop(player, mob)
+function xi.nyzul.vigilWeaponDrop(player, mob)
     local instance = mob:getInstance()
 
     -- Only floor 100 Bosses to drop 1 random weapon guarenteed and 1 of the disk holders job
@@ -672,26 +672,29 @@ function nyzul.vigilWeaponDrop(player, mob)
         local chars = instance:getChars()
         if diskHolder ~= nil then
             for _, entity in pairs(chars) do
-                if not entity:hasItem(nyzul.baseWeapons[diskHolder:getMainJob()]) then
-                    player:addTreasure(nyzul.baseWeapons[diskHolder:getMainJob()], mob)
+                if not entity:hasItem(xi.nyzul.baseWeapons[diskHolder:getMainJob()]) then
+                    player:addTreasure(xi.nyzul.baseWeapons[diskHolder:getMainJob()], mob)
                     break
                 end
             end
         end
-        player:addTreasure(nyzul.baseWeapons[math.random(1, #nyzul.baseWeapons)], mob)
+        player:addTreasure(xi.nyzul.baseWeapons[math.random(1, #xi.nyzul.baseWeapons)], mob)
     -- Every NM can randomly drop a vigil weapon
-    elseif math.random(100) <= 20 and ENABLE_VIGIL_DROPS == 1 then
-        player:addTreasure(nyzul.baseWeapons[math.random(1, #nyzul.baseWeapons)], mob)
+    elseif math.random(100) <= 20 and xi.settings.ENABLE_VIGIL_DROPS == 1 then
+        player:addTreasure(xi.nyzul.baseWeapons[math.random(1, #xi.nyzul.baseWeapons)], mob)
     end
 end
 
-function nyzul.spawnChest(mob, player)
+function xi.nyzul.spawnChest(mob, player)
     local instance = mob:getInstance()
     local mobID = mob:getID()
 
-    if mobID >= ID.mob[NYZUL_ISLE_INVESTIGATION].BAT_EYE and mobID <= ID.mob[NYZUL_ISLE_INVESTIGATION].TAISAIJIN then
-        
-        nyzul.vigilWeaponDrop(player, mob)
+    if
+        mobID >= ID.mob[xi.assaultUtil.assaultArea.NYZUL_ISLE].BAT_EYE and
+        mobID <= ID.mob[xi.assaultUtil.assaultArea.NYZUL_ISLE].TAISAIJIN
+    then
+
+        xi.nyzul.vigilWeaponDrop(player, mob)
 
         for _, cofferID in ipairs(ID.npc.TREASURE_COFFER) do
             local coffer = GetNPCByID(cofferID, instance)
@@ -704,7 +707,7 @@ function nyzul.spawnChest(mob, player)
                 break
             end
         end
-    elseif mobID < ID.mob[NYZUL_ISLE_INVESTIGATION].ADAMANTOISE and ENABLE_NYZUL_CASKETS == 1 then
+    elseif mobID < ID.mob[xi.assaultUtil.assaultArea.NYZUL_ISLE].ADAMANTOISE and xi.settings.ENABLE_NYZUL_CASKETS == 1 then
         if math.random(100) <= 6 then
             for _, casketID in ipairs(ID.npc.TREASURE_CASKET) do
                 local casket = GetNPCByID(casketID, instance)
@@ -719,19 +722,19 @@ function nyzul.spawnChest(mob, player)
     end
 end
 
-function nyzul.removePathos(instance)
+function xi.nyzul.removePathos(instance)
     if instance:getLocalVar("floorPathos") > 0 then
         for i = 1, 29 do
             if utils.isBitSet(instance:getLocalVar("floorPathos"), i) then
-                local removeMessage = nyzul.pathos[i].ID
+                local removeMessage = xi.nyzul.pathos[i].ID
                 local chars = instance:getChars()
 
                 for _, players in pairs(chars) do
-                    players:delStatusEffectSilent(nyzul.pathos[i].effect)
+                    players:delStatusEffectSilent(xi.nyzul.pathos[i].effect)
                     players:messageSpecial(removeMessage - 1)
                     if players:hasPet() then
                         local pet = players:getPet()
-                        pet:delStatusEffectSilent(nyzul.pathos[i].effect)
+                        pet:delStatusEffectSilent(xi.nyzul.pathos[i].effect)
                     end
                 end
                 instance:setLocalVar("floorPathos",utils.setBit(instance:getLocalVar("floorPathos"), i, 0))
@@ -740,13 +743,13 @@ function nyzul.removePathos(instance)
     end
 end
 
-function nyzul.addFloorPathos(instance)
+function xi.nyzul.addFloorPathos(instance)
     local randomPathos = instance:getLocalVar("randomPathos")
 
     if randomPathos > 0 then
         instance:setLocalVar("floorPathos", utils.setBit(instance:getLocalVar("floorPathos"), randomPathos, 1))
 
-        local pathos = nyzul.pathos[randomPathos]
+        local pathos = xi.nyzul.pathos[randomPathos]
         local chars = instance:getChars()
 
         for _, players in pairs(chars) do
@@ -765,13 +768,13 @@ function nyzul.addFloorPathos(instance)
     end
 end
 
-function nyzul.addPenalty(mob)
+function xi.nyzul.addPenalty(mob)
     local instance = mob:getInstance()
     local pathos = instance:getLocalVar("floorPathos")
     local penalty = instance:getLocalVar("gearPenalty")
     local chars = instance:getChars()
 
-    if penalty == nyzul.penalty.TIME then
+    if penalty == xi.nyzul.penalty.TIME then
         local timeLimit = instance:getTimeLimit() * 60
 
         instance:setTimeLimit(timeLimit - 60)
@@ -779,7 +782,7 @@ function nyzul.addPenalty(mob)
             players:messageSpecial(ID.text.MALFUNCTION)
             players:messageSpecial(ID.text.TIME_LOSS, 1)
         end
-    elseif penalty == nyzul.penalty.TOKENS then
+    elseif penalty == xi.nyzul.penalty.TOKENS then
         local tokenPenalty = instance:getLocalVar("tokenPenalty")
 
         tokenPenalty = tokenPenalty + 1
@@ -794,7 +797,7 @@ function nyzul.addPenalty(mob)
             if not utils.isBitSet(pathos, randomEffect) then
 
                 instance:setLocalVar("floorPathos", utils.setBit(pathos, randomEffect, 1))
-                local pathos = nyzul.pathos[randomEffect]
+                local pathos = xi.nyzul.pathos[randomEffect]
                 local effect = pathos.effect
                 local power = pathos.power
                 for _, players in pairs(chars) do
@@ -823,7 +826,7 @@ function nyzul.addPenalty(mob)
     end
 end
 
-function nyzul.get_token_penalty(instance)
+function xi.nyzul.get_token_penalty(instance)
     local floor_penalities = instance:getLocalVar("tokenPenalty")
     local rate = get_token_rate(instance)
 

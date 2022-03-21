@@ -36,7 +36,7 @@ function onEventFinish(player, csid, option, npc)
     local chars = instance:getChars()
 
     if csid == 94 and option > 0 and option < 21 and instance:getLocalVar("runeHandler") == player:getID() then
-        local floorCost = nyzul.floorCost[option]
+        local floorCost = xi.nyzul.floorCost[option]
         if player:getCurrency("nyzul_isle_assault_point") >= floorCost.cost then
             player:delCurrency("nyzul_isle_assault_point", floorCost.cost)
             instance:setLocalVar("Nyzul_Isle_StartingFloor", floorCost.level)

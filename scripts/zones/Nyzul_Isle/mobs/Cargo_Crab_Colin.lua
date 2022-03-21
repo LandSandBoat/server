@@ -8,21 +8,21 @@ require("scripts/globals/status")
 require("scripts/globals/additional_effects")
 -----------------------------------
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
     mob:addImmunity(xi.immunity.SLEEP)
     mob:addImmunity(xi.immunity.BIND)
     mob:addImmunity(xi.immunity.POISON)
 end
 
-function onAdditionalEffect(mob, player)
+entity.onAdditionalEffect = function(mob, target, damage)
     -- poison tick and duration unverified
-    return effectUtil.mobOnAddEffect(mob, player, damage, effectUtil.mobAdditionalEffect.POISON, {chance = 40, tick = 3, duration = 15})
+    return xi.mob.onAddEffect(mob, player, damage, xi.mob.ae.POISON, {chance = 40, tick = 3, duration = 15})
 end
 
-function onMobDeath(mob, player, isKiller, firstCall)
+entity.onMobDeath = function(mob, player, isKiller)
     if firstCall then
-        nyzul.spawnChest(mob, player)
-        nyzul.eliminateAllKill(mob)
+        xi.nyzul.spawnChest(mob, player)
+        xi.nyzul.eliminateAllKill(mob)
     end
 end

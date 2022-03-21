@@ -6,13 +6,13 @@ mixins = {require("scripts/mixins/families/imp")}
 require("scripts/globals/utils/nyzul")
 -----------------------------------
 
-function onMobSpawn(mob)
-    nyzul.specifiedEnemySet(mob)
+entity.onMobSpawn = function(mob)
+    xi.nyzul.specifiedEnemySet(mob)
 end
 
-function onMobDeath(mob, player, isKiller, firstCall)
+entity.onMobDeath = function(mob, player, isKiller)
     if firstCall then
-        nyzul.spawnChest(mob, player)
-        nyzul.specifiedEnemyKill(mob)
+        xi.nyzul.spawnChest(mob, player)
+        xi.nyzul.specifiedEnemyKill(mob)
     end
 end

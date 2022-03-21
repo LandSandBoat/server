@@ -101,7 +101,7 @@ zones[xi.zone.NYZUL_ISLE] =
 
     mob =
     {
-        [NYZUL_ISLE_INVESTIGATION] =
+        [xi.assaultUtil.assaultArea.NYZUL_ISLE] =
         {
             ARCHAIC_RAMPART1    = 17092629,
             ARCHAIC_RAMPART2    = 17092630,
