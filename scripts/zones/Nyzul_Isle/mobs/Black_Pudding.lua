@@ -1,14 +1,18 @@
 -----------------------------------
+--  MOB: Black Pudding
 -- Area: Nyzul Isle
---  NM:  Bloodtear_Baldurf
 -----------------------------------
-mixins = {require("scripts/mixins/job_special")}
+mixins = {require("scripts/mixins/families/flan")}
 require("scripts/globals/utils/nyzul")
 -----------------------------------
+
+function onMobSpawn(mob)
+    nyzul.specifiedEnemySet(mob)
+end
 
 function onMobDeath(mob, player, isKiller, firstCall)
     if firstCall then
         nyzul.spawnChest(mob, player)
-        nyzul.eliminateAllKill(mob)
+        nyzul.specifiedEnemyKill(mob)
     end
 end

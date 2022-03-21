@@ -1,8 +1,8 @@
 -----------------------------------
+--  MOB: Jaggedy-Eared Jack
 -- Area: Nyzul Isle
---  NM:  Bloodtear_Baldurf
+-- Info: NM
 -----------------------------------
-mixins = {require("scripts/mixins/job_special")}
 require("scripts/globals/utils/nyzul")
 -----------------------------------
 

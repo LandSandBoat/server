@@ -1,14 +1,14 @@
 -----------------------------------
+--  MOB: Quick Draw Sasaroon
 -- Area: Nyzul Isle
---  NM:  Bloodtear_Baldurf
+-- Info: Enemy Leader, Ranger
 -----------------------------------
-mixins = {require("scripts/mixins/job_special")}
 require("scripts/globals/utils/nyzul")
 -----------------------------------
 
 function onMobDeath(mob, player, isKiller, firstCall)
     if firstCall then
         nyzul.spawnChest(mob, player)
-        nyzul.eliminateAllKill(mob)
+        nyzul.enemyLeaderKill(mob)
     end
 end

@@ -1,8 +1,7 @@
 -----------------------------------
+--  MOB: Dahak
 -- Area: Nyzul Isle
---  NM:  Bloodtear_Baldurf
 -----------------------------------
-mixins = {require("scripts/mixins/job_special")}
 require("scripts/globals/utils/nyzul")
 -----------------------------------
 

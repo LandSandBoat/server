@@ -1,14 +1,18 @@
 -----------------------------------
+--  MOB: Ziz
 -- Area: Nyzul Isle
---  NM:  Bloodtear_Baldurf
 -----------------------------------
-mixins = {require("scripts/mixins/job_special")}
 require("scripts/globals/utils/nyzul")
 -----------------------------------
+
+function onMobSpawn(mob)
+    nyzul.specifiedEnemySet(mob)
+    mob:AnimationSub(13)
+end
 
 function onMobDeath(mob, player, isKiller, firstCall)
     if firstCall then
         nyzul.spawnChest(mob, player)
-        nyzul.eliminateAllKill(mob)
+        nyzul.specifiedEnemyKill(mob)
     end
 end

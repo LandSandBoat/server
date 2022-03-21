@@ -1,14 +1,18 @@
 -----------------------------------
+--  MOB: Vile Ineef
 -- Area: Nyzul Isle
---  NM:  Bloodtear_Baldurf
+-- Info: Enemy Leader
 -----------------------------------
-mixins = {require("scripts/mixins/job_special")}
 require("scripts/globals/utils/nyzul")
 -----------------------------------
+
+function onMobInitialize(mob)
+    mob:addImmunity(xi.immunity.DARKSLEEP)
+end
 
 function onMobDeath(mob, player, isKiller, firstCall)
     if firstCall then
         nyzul.spawnChest(mob, player)
-        nyzul.eliminateAllKill(mob)
+        nyzul.enemyLeaderKill(mob)
     end
 end

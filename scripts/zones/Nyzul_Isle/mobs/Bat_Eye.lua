@@ -1,10 +1,15 @@
 -----------------------------------
+--  MOB: Bat Eye
 -- Area: Nyzul Isle
---  NM:  Bloodtear_Baldurf
+-- Info: NM
 -----------------------------------
-mixins = {require("scripts/mixins/job_special")}
+require("scripts/globals/status")
 require("scripts/globals/utils/nyzul")
 -----------------------------------
+
+function onMobSpawn(mob)
+    mob:addMobMod(xi.mobMod.CHECK_AS_NM)
+end
 
 function onMobDeath(mob, player, isKiller, firstCall)
     if firstCall then

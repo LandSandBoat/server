@@ -1,10 +1,14 @@
 -----------------------------------
+--  MOB: Zizzy Zillah
 -- Area: Nyzul Isle
---  NM:  Bloodtear_Baldurf
+-- Info: NM
 -----------------------------------
-mixins = {require("scripts/mixins/job_special")}
 require("scripts/globals/utils/nyzul")
 -----------------------------------
+
+function onMobSpawn(mob)
+    mob:AnimationSub(13)
+end
 
 function onMobDeath(mob, player, isKiller, firstCall)
     if firstCall then
