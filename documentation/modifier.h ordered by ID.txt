@@ -746,6 +746,7 @@ enum class Mod
     INSPIRATION_FAST_CAST        = 1021, // Inspiration Fast Cast, additive with Fast Cast with a combined cap beyond 80%
     PARRY_SPIKES                 = 1022, // Battuta parry spikes rate
     PARRY_SPIKES_DMG             = 1023, // Battuta parry spikes damage
+    SPECIAL_ATTACK_EVASION       = 1024, // Foil "Special Attack" evasion
 
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.
@@ -753,7 +754,7 @@ enum class Mod
     // The following modifier should not ever be set, but %damage modifiers to weaponskills use the next 255 IDs (this modifier + the WSID)
     // For example, +10% damage to Chant du Cygne would be ID 570 + 225 (795)
 
-    // SPARE = 1024,
+    // SPARE = 1025,
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it
