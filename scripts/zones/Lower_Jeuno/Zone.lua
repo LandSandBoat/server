@@ -10,12 +10,53 @@ require("scripts/globals/pathfind")
 require("scripts/settings/main")
 require("scripts/globals/chocobo")
 require("scripts/globals/status")
+require("modules/module_utils")
 -----------------------------------
 local zone_object = {}
 
 zone_object.onInitialize = function(zone)
     zone:registerRegion(1, 23, 0, -43, 44, 7, -39) -- Inside Tenshodo HQ. TODO: Find out if this is used other than in ZM 17 (not anymore). Remove if not.
     xi.chocobo.initZone(zone)
+	
+	local horro = zone:insertDynamicEntity({
+        objtype = xi.objType.NPC,
+        name = "Hunter",
+        -- See documentation model_ids.txt, or play around with !costume (remember that the bytes are swapped!)
+        modelId = 2205,
+        x = 6.712,
+        y = 0.000,
+        z = 14.788,
+        rotation = 130,
+        triggerable = true,
+    })
+
+    -- Use the mob object however you like
+    -- horro:getID() etc.
+    utils.unused(hunter)
+
+    -- There might not be any NPCs populated for Lower_Jeuno,
+    -- (see npc_list.sql) so the npcs table might not exist.
+    -- We're going to make it now.
+    -- This shouldn't be needed for other zones.
+    -- xi.zones.Lower_Jeuno.npcs = xi.zones.Lower_Jeuno.npcs or {}
+
+    -- Build a cache entry for the new NPC
+    xi.zones.Lower_Jeuno.npcs.Hunter = {}
+
+    -- Attach regular event handlers to that cache entry
+    xi.zones.Lower_Jeuno.npcs.Hunter.onTrade = function(player, npc, trade)
+    end
+
+    xi.zones.Lower_Jeuno.npcs.Hunter.onTrigger = function(player, npc)
+        player:PrintToPlayer("Welcome to Lower Jeuno!", 0, npc:getName())
+    end
+
+    xi.zones.Lower_Jeuno.npcs.Hunter.onEventUpdate = function(player, csid, option)
+    end
+
+    xi.zones.Lower_Jeuno.npcs.Hunter.onEventFinish = function(player, csid, option)
+    end
+--end)
 end
 
 zone_object.onZoneIn = function(player, prevZone)
@@ -104,4 +145,4 @@ end
 zone_object.onEventFinish = function(player, csid, option)
 end
 
-return zone_object
+return m, zone_object
