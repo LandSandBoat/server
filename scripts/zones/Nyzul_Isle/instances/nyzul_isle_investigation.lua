@@ -11,6 +11,7 @@ require("scripts/globals/nyzul")
 require("scripts/globals/utils")
 require("scripts/zones/Nyzul_Isle/globals/points")
 -----------------------------------
+local instance_object = {}
 
 function afterInstanceRegister(player)
     local instance = player:getInstance()
@@ -150,6 +151,60 @@ function pickSetPoint(instance)
 
     -- Set Rune of Transfer Menu
     instance:setLocalVar("menuChoice", math.random(1, 20))
+end
+
+
+function lampsActivate(instance)
+    local floorLayout = instance:getLocalVar("Nyzul_Isle_FloorLayout")
+    local lampsObjective = instance:getLocalVar("[Lamps]Objective")
+    local runicLamp_1 = GetNPCByID(ID.npc.RUNIC_LAMP_1, instance)
+    local partySize = instance:getLocalVar("partySize")
+    if partySize > 4 then partySize = 5 elseif partySize < 3 then partySize = 3 end
+    local lampPoints = {}
+
+    for i = 1, #xi.nyzulPoint.LampPoint[floorLayout] do
+        table.insert(lampPoints, i, xi.nyzulPoint.LampPoint[floorLayout][i])
+    end
+
+    -- Lamp Objective: Register
+    if lampsObjective == xi.nyzul.lampsObjective.REGISTER then
+        local spawnPoint = math.random(1, #lampPoints)
+
+        instance:setLocalVar("[Lamp]PartySize", instance:getLocalVar("partySize"))
+        runicLamp_1:setPos(lampPoints[spawnPoint])
+        runicLamp_1:setStatus(xi.status.NORMAL)
+    -- Lamp Objective: Activate All
+    elseif lampsObjective == xi.nyzul.lampsObjective.ACTIVATE_ALL then
+        local runicLamps = math.random(2, partySize - 1)
+        instance:setLocalVar("[Lamp]count", runicLamps)
+        for i = ID.npc.RUNIC_LAMP_1, ID.npc.RUNIC_LAMP_1 + runicLamps do
+            local spawnPoint = math.random(1, #lampPoints)
+
+            GetNPCByID(i, instance):setPos(lampPoints[spawnPoint])
+            GetNPCByID(i, instance):setStatus(xi.status.NORMAL)
+            table.remove(lampPoints, spawnPoint)
+        end
+    -- Lamp Objective: Activate in Order
+    elseif lampsObjective == xi.nyzul.lampsObjective.ORDER then
+        local runicLamps = math.random(2, 4)
+        local lampOrder = {}
+        for j = 1, runicLamps + 1 do
+            table.insert(lampOrder, j)
+        end
+        instance:setLocalVar("[Lamp]count", runicLamps)
+        instance:setLocalVar("[Lamp]lampRegister", 0)
+        for i = ID.npc.RUNIC_LAMP_1, ID.npc.RUNIC_LAMP_1 + runicLamps do
+            local spawnPoint = math.random(1, #lampPoints)
+            local lampRandom = math.random(1, #lampOrder)
+
+            GetNPCByID(i, instance):setPos(lampPoints[spawnPoint])
+            GetNPCByID(i, instance):setStatus(xi.status.NORMAL)
+            GetNPCByID(i, instance):setLocalVar("[Lamp]order", lampOrder[lampRandom])
+
+            table.remove(lampOrder, lampRandom)
+            table.remove(lampPoints, spawnPoint)
+        end
+    end
 end
 
 function pickMobs(instance)
@@ -321,60 +376,7 @@ function pickMobs(instance)
     end
 end
 
-function lampsActivate(instance)
-    local floorLayout = instance:getLocalVar("Nyzul_Isle_FloorLayout")
-    local lampsObjective = instance:getLocalVar("[Lamps]Objective")
-    local runicLamp_1 = GetNPCByID(ID.npc.RUNIC_LAMP_1, instance)
-    local partySize = instance:getLocalVar("partySize")
-    if partySize > 4 then partySize = 5 elseif partySize < 3 then partySize = 3 end
-    local lampPoints = {}
-
-    for i = 1, #xi.nyzulPoint.LampPoint[floorLayout] do
-        table.insert(lampPoints, i, xi.nyzulPoint.LampPoint[floorLayout][i])
-    end
-
-    -- Lamp Objective: Register
-    if lampsObjective == xi.nyzul.lampsObjective.REGISTER then
-        local spawnPoint = math.random(1, #lampPoints)
-
-        instance:setLocalVar("[Lamp]PartySize", instance:getLocalVar("partySize"))
-        runicLamp_1:setPos(lampPoints[spawnPoint])
-        runicLamp_1:setStatus(xi.status.NORMAL)
-    -- Lamp Objective: Activate All
-    elseif lampsObjective == xi.nyzul.lampsObjective.ACTIVATE_ALL then
-        local runicLamps = math.random(2, partySize - 1)
-        instance:setLocalVar("[Lamp]count", runicLamps)
-        for i = ID.npc.RUNIC_LAMP_1, ID.npc.RUNIC_LAMP_1 + runicLamps do
-            local spawnPoint = math.random(1, #lampPoints)
-
-            GetNPCByID(i, instance):setPos(lampPoints[spawnPoint])
-            GetNPCByID(i, instance):setStatus(xi.status.NORMAL)
-            table.remove(lampPoints, spawnPoint)
-        end
-    -- Lamp Objective: Activate in Order
-    elseif lampsObjective == xi.nyzul.lampsObjective.ORDER then
-        local runicLamps = math.random(2, 4)
-        local lampOrder = {}
-        for j = 1, runicLamps + 1 do
-            table.insert(lampOrder, j)
-        end
-        instance:setLocalVar("[Lamp]count", runicLamps)
-        instance:setLocalVar("[Lamp]lampRegister", 0)
-        for i = ID.npc.RUNIC_LAMP_1, ID.npc.RUNIC_LAMP_1 + runicLamps do
-            local spawnPoint = math.random(1, #lampPoints)
-            local lampRandom = math.random(1, #lampOrder)
-
-            GetNPCByID(i, instance):setPos(lampPoints[spawnPoint])
-            GetNPCByID(i, instance):setStatus(xi.status.NORMAL)
-            GetNPCByID(i, instance):setLocalVar("[Lamp]order", lampOrder[lampRandom])
-
-            table.remove(lampOrder, lampRandom)
-            table.remove(lampPoints, spawnPoint)
-        end
-    end
-end
-
-function onEventUpdate(player, csid, option)
+instance_object.onEventUpdate = function(player, csid, option)
     if csid == 95 then
         local instance = player:getInstance()
         if instance:getLocalVar("runeHandler") == player:getID() then
@@ -383,7 +385,7 @@ function onEventUpdate(player, csid, option)
     end
 end
 
-function onEventFinish(player, csid, option, npc)
+instance_object.onEventFinish = function(player, csid, option)
     local instance = player:getInstance()
     local chars = instance:getChars()
 
@@ -400,3 +402,5 @@ function onEventFinish(player, csid, option, npc)
         end
     end
 end
+
+return instance_object
