@@ -6,7 +6,7 @@ require("modules/module_utils")
 require("scripts/globals/homepoint")
 -----------------------------------
 local m = Module:new("homepoint_heal")
-m:setEnabled(true)
+m:setEnabled(false)
 
 m:addOverride("xi.homepoint.onTrigger", function(player, csid, index)
     player:addHP(player:getMaxHP())
