@@ -13,25 +13,25 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-   local stock =
+--[[   local stock =
    {
-       3279,  25000,    -- Neptunal tatter
-       3280,  25000,    -- Martial tatter 
-       3281,  25000,    -- Earthen tatter
-       3282,  25000,    -- Dryadic tatter
-	   3283,  25000,    -- Aquarian tatter
-	   3284,  25000,    -- Wyrmal tatter
-	   3285,  35000,    -- Phantasmal tatter
-	   3286,  35000,    -- Hadean tatter
-	   3275,  35000,	 -- Genbu scrap
-	   3276,  35000,	 -- Suzaku scrap
-	   3277,  35000,	 -- Seiryu scrap
-	   3278,  35000,	 -- Byakko scrap
+       3279,  35000,    -- Neptunal tatter
+       3280,  35000,    -- Martial tatter 
+       3281,  35000,    -- Earthen tatter
+       3282,  35000,    -- Dryadic tatter
+	   3283,  35000,    -- Aquarian tatter
+	   3284,  35000,    -- Wyrmal tatter
+	   3285,  45000,    -- Phantasmal tatter
+	   3286,  45000,    -- Hadean tatter
+	   3275,  45000,	 -- Genbu scrap
+	   3276,  45000,	 -- Suzaku scrap
+	   3277,  45000,	 -- Seiryu scrap
+	   3278,  45000,	 -- Byakko scrap
 	
    }
-    
-	player:PrintToPlayer("Scrappy: for a limited time only, you can buy scraps and tatters from Sccrrraappy!", 0xD)
-    xi.shop.general(player, stock, SANDORIA)
+--]]    
+	player:PrintToPlayer("Scrappy: Scrappy go bye-bye.", 0xD)
+--    xi.shop.general(player, stock, SANDORIA)
 end
 
 entity.onEventUpdate = function(player, csid, option)
