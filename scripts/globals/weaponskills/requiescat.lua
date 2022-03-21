@@ -15,13 +15,20 @@ require("scripts/globals/weaponskills")
 local weaponskill_object = {}
 
 weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
+    -- check to see if player has the unlock charvar for this, if not, do no damage.
+    local hasMeritWsUnlock = player:getCharVar("hasRequiescatUnlock")
+
+    if hasMeritWsUnlock ~= 1 then
+        player:PrintToPlayer("You don't have this WS unlocked.")
+        return
+    end
 
     local params = {}
     params.numHits = 5
 
-    params.ftp100 = 1
-    params.ftp200 = 1
-    params.ftp300 = 1
+    params.ftp100 = 2
+    params.ftp200 = 4
+    params.ftp300 = 6
 
     params.str_wsc = 0.0
     params.dex_wsc = 0.0

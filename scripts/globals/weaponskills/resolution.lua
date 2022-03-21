@@ -20,6 +20,13 @@ require("scripts/globals/weaponskills")
 local weaponskill_object = {}
 
 weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
+    -- check to see if player has the unlock charvar for this, if not, do no damage.
+    local hasMeritWsUnlock = player:getCharVar("hasResolutionUnlock")
+
+    if hasMeritWsUnlock ~= 1 then
+        player:PrintToPlayer("You don't have this WS unlocked.")
+        return
+    end
 
     local params = {}
     params.numHits = 5
@@ -30,6 +37,14 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     params.acc100 = 0.0 params.acc200= 0.0 params.acc300= 0.0
     params.atk100 = 0.85; params.atk200 = 0.85; params.atk300 = 0.85
     params.multiHitfTP = true
+
+    -- check to see if player has the unlock charvar for this, if not, do no damage.
+    local hasMeritWsUnlock = player:getCharVar("hasMeritWsUnlock")
+
+    if hasMeritWsUnlock ~= 1 then
+        player:PrintToPlayer("You don't have this WS unlocked.")
+        return
+    end
 
     if (xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then
         params.ftp100 = 0.71875 params.ftp200 = 1.5 params.ftp300 = 2.25
