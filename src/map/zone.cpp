@@ -303,20 +303,20 @@ void CZone::LoadZoneLines()
     TracyZoneScoped;
     static const char fmtQuery[] = "SELECT zoneline, tozone, tox, toy, toz, rotation FROM zonelines WHERE fromzone = %u";
 
-    int32 ret = Sql_Query(SqlHandle, fmtQuery, m_zoneID);
+    int32 ret = sql->Query(fmtQuery, m_zoneID);
 
-    if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+    if (ret != SQL_ERROR && sql->NumRows() != 0)
     {
-        while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        while (sql->NextRow() == SQL_SUCCESS)
         {
             zoneLine_t* zl = new zoneLine_t;
 
-            zl->m_zoneLineID     = (uint32)Sql_GetIntData(SqlHandle, 0);
-            zl->m_toZone         = (uint16)Sql_GetIntData(SqlHandle, 1);
-            zl->m_toPos.x        = Sql_GetFloatData(SqlHandle, 2);
-            zl->m_toPos.y        = Sql_GetFloatData(SqlHandle, 3);
-            zl->m_toPos.z        = Sql_GetFloatData(SqlHandle, 4);
-            zl->m_toPos.rotation = (uint8)Sql_GetIntData(SqlHandle, 5);
+            zl->m_zoneLineID     = (uint32)sql->GetIntData(0);
+            zl->m_toZone         = (uint16)sql->GetIntData(1);
+            zl->m_toPos.x        = sql->GetFloatData(2);
+            zl->m_toPos.y        = sql->GetFloatData(3);
+            zl->m_toPos.z        = sql->GetFloatData(4);
+            zl->m_toPos.rotation = (uint8)sql->GetIntData(5);
 
             m_zoneLineList.push_back(zl);
         }
@@ -342,11 +342,11 @@ void CZone::LoadZoneWeather()
     TracyZoneScoped;
     static const char* Query = "SELECT weather FROM zone_weather WHERE zone = %u;";
 
-    int32 ret = Sql_Query(SqlHandle, Query, m_zoneID);
-    if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+    int32 ret = sql->Query(Query, m_zoneID);
+    if (ret != SQL_ERROR && sql->NumRows() != 0)
     {
-        Sql_NextRow(SqlHandle);
-        auto* weatherBlob = reinterpret_cast<uint16*>(Sql_GetData(SqlHandle, 0));
+        sql->NextRow();
+        auto* weatherBlob = reinterpret_cast<uint16*>(sql->GetData(0));
         for (uint16 i = 0; i < WEATHER_CYCLE; i++)
         {
             if (weatherBlob[i])
@@ -391,22 +391,22 @@ void CZone::LoadZoneSettings()
                                "WHERE zoneid = %u "
                                "LIMIT 1";
 
-    if (Sql_Query(SqlHandle, Query, m_zoneID) != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+    if (sql->Query(Query, m_zoneID) != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
     {
-        m_zoneName.insert(0, (const char*)Sql_GetData(SqlHandle, 0));
+        m_zoneName.insert(0, (const char*)sql->GetData(0));
 
-        inet_pton(AF_INET, (const char*)Sql_GetData(SqlHandle, 1), &m_zoneIP);
-        m_zonePort              = (uint16)Sql_GetUIntData(SqlHandle, 2);
-        m_zoneMusic.m_songDay   = (uint8)Sql_GetUIntData(SqlHandle, 3);           // background music (day)
-        m_zoneMusic.m_songNight = (uint8)Sql_GetUIntData(SqlHandle, 4);           // background music (night)
-        m_zoneMusic.m_bSongS    = (uint8)Sql_GetUIntData(SqlHandle, 5);           // solo battle music
-        m_zoneMusic.m_bSongM    = (uint8)Sql_GetUIntData(SqlHandle, 6);           // party battle music
-        m_tax                   = (uint16)(Sql_GetFloatData(SqlHandle, 7) * 100); // tax for bazaar
-        m_miscMask              = (uint16)Sql_GetUIntData(SqlHandle, 8);
+        inet_pton(AF_INET, (const char*)sql->GetData(1), &m_zoneIP);
+        m_zonePort              = (uint16)sql->GetUIntData(2);
+        m_zoneMusic.m_songDay   = (uint8)sql->GetUIntData(3);           // background music (day)
+        m_zoneMusic.m_songNight = (uint8)sql->GetUIntData(4);           // background music (night)
+        m_zoneMusic.m_bSongS    = (uint8)sql->GetUIntData(5);           // solo battle music
+        m_zoneMusic.m_bSongM    = (uint8)sql->GetUIntData(6);           // party battle music
+        m_tax                   = (uint16)(sql->GetFloatData(7) * 100); // tax for bazaar
+        m_miscMask              = (uint16)sql->GetUIntData(8);
 
-        m_zoneType = static_cast<ZONE_TYPE>(Sql_GetUIntData(SqlHandle, 9));
+        m_zoneType = static_cast<ZONE_TYPE>(sql->GetUIntData(9));
 
-        if (Sql_GetData(SqlHandle, 10) != nullptr) // сейчас нельзя использовать bcnmid, т.к. они начинаются с нуля
+        if (sql->GetData(10) != nullptr) // сейчас нельзя использовать bcnmid, т.к. они начинаются с нуля
         {
             m_BattlefieldHandler = new CBattlefieldHandler(this);
         }
@@ -672,7 +672,7 @@ void CZone::IncreaseZoneCounter(CCharEntity* PChar)
     XI_DEBUG_BREAK_IF(PChar->loc.zone != nullptr);
     XI_DEBUG_BREAK_IF(PChar->PTreasurePool != nullptr);
 
-    PChar->targid = m_zoneEntities->GetNewTargID();
+    PChar->targid = m_zoneEntities->GetNewCharTargID();
 
     if (PChar->targid >= 0x700)
     {
@@ -1008,6 +1008,8 @@ void CZone::CharZoneOut(CCharEntity* PChar)
         }
     }
 
+    luautils::OnZoneOut(PChar);
+
     if (PChar->m_LevelRestriction != 0)
     {
         if (PChar->PParty)
@@ -1098,6 +1100,12 @@ void CZone::CharZoneOut(CCharEntity* PChar)
     }
 
     charutils::WriteHistory(PChar);
+}
+
+CZoneEntities* CZone::GetZoneEntities()
+{
+    TracyZoneScoped;
+    return m_zoneEntities;
 }
 
 void CZone::CheckRegions(CCharEntity* PChar)

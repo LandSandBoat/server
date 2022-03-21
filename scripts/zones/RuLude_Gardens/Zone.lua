@@ -40,7 +40,6 @@ zone_object.onConquestUpdate = function(zone, updatetype)
 end
 
 zone_object.onRegionEnter = function(player, region)
-
     local regionID = region:GetRegionID()
 
     if regionID == 1 then
@@ -86,11 +85,6 @@ zone_object.onRegionEnter = function(player, region)
                 player:startEvent(10245)
             end
 
-        elseif
-            player:getCurrentMission(COP) == xi.mission.id.cop.A_VESSEL_WITHOUT_A_CAPTAIN and
-            player:getCharVar("PromathiaStatus") == 1
-        then
-            player:startEvent(65, player:getNation())
         elseif
             player:getCurrentMission(COP) == xi.mission.id.cop.A_PLACE_TO_RETURN and
             player:getCharVar("PromathiaStatus") == 0
@@ -152,15 +146,7 @@ zone_object.onEventUpdate = function(player, csid, option)
 end
 
 zone_object.onEventFinish = function(player, csid, option)
-    if csid == 65 then
-        player:setCharVar("PromathiaStatus", 0)
-        player:completeMission(xi.mission.log_id.COP, xi.mission.id.cop.A_VESSEL_WITHOUT_A_CAPTAIN)
-        player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_ROAD_FORKS) -- THE_ROAD_FORKS -- global mission 3.3
-        -- We can't have more than 1 current mission at the time, so we keep The road forks as current mission
-        -- progress are recorded in the following two variables
-        player:setCharVar("MEMORIES_OF_A_MAIDEN_Status", 1) -- MEMORIES_OF_A_MAIDEN--3-3B: Windurst Road
-        player:setCharVar("EMERALD_WATERS_Status", 1) -- EMERALD_WATERS-- 3-3A: San d'Oria Road
-    elseif csid == 10047 then
+    if csid == 10047 then
         player:setCharVar("PromathiaStatus", 0)
         player:completeMission(xi.mission.log_id.COP, xi.mission.id.cop.FOR_WHOM_THE_VERSE_IS_SUNG)
         player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.A_PLACE_TO_RETURN)

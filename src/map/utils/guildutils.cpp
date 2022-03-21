@@ -60,26 +60,26 @@ namespace guildutils
     void Initialize()
     {
         const char* fmtQuery = "SELECT DISTINCT id, points_name FROM guilds ORDER BY id ASC;";
-        if (Sql_Query(SqlHandle, fmtQuery) != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (sql->Query(fmtQuery) != SQL_ERROR && sql->NumRows() != 0)
         {
-            g_PGuildList.reserve((const unsigned int)Sql_NumRows(SqlHandle));
+            g_PGuildList.reserve((const unsigned int)sql->NumRows());
 
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql->NextRow() == SQL_SUCCESS)
             {
-                g_PGuildList.push_back(new CGuild(Sql_GetIntData(SqlHandle, 0), (const char*)Sql_GetData(SqlHandle, 1)));
+                g_PGuildList.push_back(new CGuild(sql->GetIntData(0), (const char*)sql->GetData(1)));
             }
         }
         XI_DEBUG_BREAK_IF(g_PGuildShopList.size() != 0);
 
         fmtQuery = "SELECT DISTINCT guildid FROM guild_shops ORDER BY guildid ASC LIMIT 256;";
 
-        if (Sql_Query(SqlHandle, fmtQuery) != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (sql->Query(fmtQuery) != SQL_ERROR && sql->NumRows() != 0)
         {
-            g_PGuildShopList.reserve((const unsigned int)Sql_NumRows(SqlHandle));
+            g_PGuildShopList.reserve((const unsigned int)sql->NumRows());
 
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql->NextRow() == SQL_SUCCESS)
             {
-                g_PGuildShopList.push_back(new CItemContainer(Sql_GetIntData(SqlHandle, 0)));
+                g_PGuildShopList.push_back(new CItemContainer(sql->GetIntData(0)));
             }
         }
         for (auto* PGuildShop : g_PGuildShopList)
@@ -89,21 +89,21 @@ namespace guildutils
 					WHERE guildid = %u \
                     LIMIT %u";
 
-            int32 ret = Sql_Query(SqlHandle, fmtQuery, PGuildShop->GetID(), MAX_CONTAINER_SIZE);
+            int32 ret = sql->Query(fmtQuery, PGuildShop->GetID(), MAX_CONTAINER_SIZE);
 
-            if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+            if (ret != SQL_ERROR && sql->NumRows() != 0)
             {
-                PGuildShop->SetSize((uint8)Sql_NumRows(SqlHandle));
+                PGuildShop->SetSize((uint8)sql->NumRows());
 
-                while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+                while (sql->NextRow() == SQL_SUCCESS)
                 {
-                    CItemShop* PItem = new CItemShop(Sql_GetIntData(SqlHandle, 0));
+                    CItemShop* PItem = new CItemShop(sql->GetIntData(0));
 
-                    PItem->setMinPrice(Sql_GetIntData(SqlHandle, 1));
-                    PItem->setMaxPrice(Sql_GetIntData(SqlHandle, 2));
-                    PItem->setStackSize(Sql_GetIntData(SqlHandle, 3));
-                    PItem->setDailyIncrease(Sql_GetIntData(SqlHandle, 4));
-                    PItem->setInitialQuantity(Sql_GetIntData(SqlHandle, 5));
+                    PItem->setMinPrice(sql->GetIntData(1));
+                    PItem->setMaxPrice(sql->GetIntData(2));
+                    PItem->setStackSize(sql->GetIntData(3));
+                    PItem->setDailyIncrease(sql->GetIntData(4));
+                    PItem->setInitialQuantity(sql->GetIntData(5));
 
                     PItem->setQuantity(PItem->IsDailyIncrease() ? PItem->getInitialQuantity() : 0);
                     PItem->setBasePrice((uint32)(PItem->getMinPrice() + ((float)(PItem->getStackSize() - PItem->getQuantity()) / PItem->getStackSize()) *
@@ -150,12 +150,12 @@ namespace guildutils
 
         const char* query = "SELECT value FROM server_variables WHERE name = '[GUILD]pattern_update';";
 
-        int  ret    = Sql_Query(SqlHandle, query);
+        int  ret    = sql->Query(query);
         bool update = false;
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) == 1 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        if (ret != SQL_ERROR && sql->NumRows() == 1 && sql->NextRow() == SQL_SUCCESS)
         {
-            if (Sql_GetUIntData(SqlHandle, 0) != CVanaTime::getInstance()->getJstYearDay())
+            if (sql->GetUIntData(0) != CVanaTime::getInstance()->getJstYearDay())
             {
                 update = true;
             }
@@ -167,16 +167,16 @@ namespace guildutils
         if (update)
         {
             // write the new pattern and update time to prevent other servers from updating the pattern
-            Sql_Query(SqlHandle, "REPLACE INTO server_variables (name,value) VALUES('[GUILD]pattern_update', %u), ('[GUILD]pattern', %u);",
+            sql->Query("REPLACE INTO server_variables (name,value) VALUES('[GUILD]pattern_update', %u), ('[GUILD]pattern', %u);",
                       CVanaTime::getInstance()->getJstYearDay(), pattern);
-            Sql_Query(SqlHandle, "DELETE FROM char_vars WHERE varname = '[GUILD]daily_points';");
+            sql->Query("DELETE FROM char_vars WHERE varname = '[GUILD]daily_points';");
         }
 
         // load the pattern in case it was set by another server (and this server did not set it)
-        Sql_Query(SqlHandle, "SELECT value FROM server_variables WHERE name = '[GUILD]pattern';");
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) == 1 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        sql->Query("SELECT value FROM server_variables WHERE name = '[GUILD]pattern';");
+        if (ret != SQL_ERROR && sql->NumRows() == 1 && sql->NextRow() == SQL_SUCCESS)
         {
-            pattern = Sql_GetUIntData(SqlHandle, 0);
+            pattern = sql->GetUIntData(0);
         }
 
         for (auto* PGuild : g_PGuildList)

@@ -19,10 +19,10 @@
 ===========================================================================
 */
 
-#include "../common/md52.h"
-#include "../common/logging.h"
-#include "../common/socket.h"
-#include "../common/utils.h"
+#include "common/md52.h"
+#include "common/logging.h"
+#include "common/socket.h"
+#include "common/utils.h"
 
 #include <cstdio>
 #include <cstdlib>
@@ -123,10 +123,10 @@ int32 lobbydata_parse(int32 fd)
                 CharList[8] = 0x20;
 
                 const char* pfmtQuery = "SELECT content_ids FROM accounts WHERE id = %u;";
-                int32       ret       = Sql_Query(SqlHandle, pfmtQuery, sd->accid);
-                if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+                int32       ret       = sql->Query(pfmtQuery, sd->accid);
+                if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
                 {
-                    CharList[28] = Sql_GetUIntData(SqlHandle, 0);
+                    CharList[28] = sql->GetUIntData(0);
                 }
                 else
                 {
@@ -146,7 +146,7 @@ int32 lobbydata_parse(int32 fd)
                             WHERE accid = %i \
                         LIMIT %u;";
 
-                ret = Sql_Query(SqlHandle, pfmtQuery, sd->accid, CharList[28]);
+                ret = sql->Query(pfmtQuery, sd->accid, CharList[28]);
                 if (ret == SQL_ERROR)
                 {
                     do_close_lobbydata(sd, fd);
@@ -171,21 +171,21 @@ int32 lobbydata_parse(int32 fd)
                 int i = 0;
                 // Read information about a specific character.
                 // Extract all the necessary information about the character from the database.
-                while (Sql_NextRow(SqlHandle) != SQL_NO_DATA)
+                while (sql->NextRow() != SQL_NO_DATA)
                 {
                     char* strCharName = nullptr;
 
-                    Sql_GetData(SqlHandle, 1, &strCharName, nullptr);
+                    sql->GetData(1, &strCharName, nullptr);
 
-                    auto gmlevel = Sql_GetIntData(SqlHandle, 36);
+                    auto gmlevel = sql->GetIntData(36);
                     if (maint_config.maint_mode == 0 || gmlevel > 0)
                     {
-                        uint32 CharID = Sql_GetIntData(SqlHandle, 0);
+                        uint32 CharID = sql->GetIntData(0);
 
-                        uint16 zone = (uint16)Sql_GetIntData(SqlHandle, 2);
+                        uint16 zone = (uint16)sql->GetIntData(2);
 
-                        uint8 MainJob    = (uint8)Sql_GetIntData(SqlHandle, 4);
-                        uint8 lvlMainJob = (uint8)Sql_GetIntData(SqlHandle, 13 + MainJob);
+                        uint8 MainJob    = (uint8)sql->GetIntData(4);
+                        uint8 lvlMainJob = (uint8)sql->GetIntData(13 + MainJob);
 
                         // Update the character and user list content ids..
                         ref<uint32>(uList, 16 * (i + 1))    = CharID;
@@ -201,15 +201,15 @@ int32 lobbydata_parse(int32 fd)
                         ref<uint8>(CharList, 46 + 32 + i * 140) = MainJob;
                         ref<uint8>(CharList, 73 + 32 + i * 140) = lvlMainJob;
 
-                        ref<uint8>(CharList, 44 + 32 + i * 140)  = (uint8)Sql_GetIntData(SqlHandle, 5);   // race;
-                        ref<uint8>(CharList, 56 + 32 + i * 140)  = (uint8)Sql_GetIntData(SqlHandle, 6);   // face;
-                        ref<uint16>(CharList, 58 + 32 + i * 140) = (uint16)Sql_GetIntData(SqlHandle, 7);  // head;
-                        ref<uint16>(CharList, 60 + 32 + i * 140) = (uint16)Sql_GetIntData(SqlHandle, 8);  // body;
-                        ref<uint16>(CharList, 62 + 32 + i * 140) = (uint16)Sql_GetIntData(SqlHandle, 9);  // hands;
-                        ref<uint16>(CharList, 64 + 32 + i * 140) = (uint16)Sql_GetIntData(SqlHandle, 10); // legs;
-                        ref<uint16>(CharList, 66 + 32 + i * 140) = (uint16)Sql_GetIntData(SqlHandle, 11); // feet;
-                        ref<uint16>(CharList, 68 + 32 + i * 140) = (uint16)Sql_GetIntData(SqlHandle, 12); // main;
-                        ref<uint16>(CharList, 70 + 32 + i * 140) = (uint16)Sql_GetIntData(SqlHandle, 13); // sub;
+                        ref<uint8>(CharList, 44 + 32 + i * 140)  = (uint8)sql->GetIntData(5);   // race;
+                        ref<uint8>(CharList, 56 + 32 + i * 140)  = (uint8)sql->GetIntData(6);   // face;
+                        ref<uint16>(CharList, 58 + 32 + i * 140) = (uint16)sql->GetIntData(7);  // head;
+                        ref<uint16>(CharList, 60 + 32 + i * 140) = (uint16)sql->GetIntData(8);  // body;
+                        ref<uint16>(CharList, 62 + 32 + i * 140) = (uint16)sql->GetIntData(9);  // hands;
+                        ref<uint16>(CharList, 64 + 32 + i * 140) = (uint16)sql->GetIntData(10); // legs;
+                        ref<uint16>(CharList, 66 + 32 + i * 140) = (uint16)sql->GetIntData(11); // feet;
+                        ref<uint16>(CharList, 68 + 32 + i * 140) = (uint16)sql->GetIntData(12); // main;
+                        ref<uint16>(CharList, 70 + 32 + i * 140) = (uint16)sql->GetIntData(13); // sub;
 
                         ref<uint8>(CharList, 72 + 32 + i * 140)  = (uint8)zone;
                         ref<uint16>(CharList, 78 + 32 + i * 140) = zone;
@@ -301,13 +301,13 @@ int32 lobbydata_parse(int32 fd)
                 uint16      PrevZone = 0;
                 uint16      gmlevel  = 0;
 
-                if (Sql_Query(SqlHandle, fmtQuery, charid, sd->accid) != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+                if (sql->Query(fmtQuery, charid, sd->accid) != SQL_ERROR && sql->NumRows() != 0)
                 {
-                    Sql_NextRow(SqlHandle);
+                    sql->NextRow();
 
-                    ZoneID   = (uint16)Sql_GetUIntData(SqlHandle, 2);
-                    PrevZone = (uint16)Sql_GetUIntData(SqlHandle, 3);
-                    gmlevel  = (uint16)Sql_GetUIntData(SqlHandle, 4);
+                    ZoneID   = (uint16)sql->GetUIntData(2);
+                    PrevZone = (uint16)sql->GetUIntData(3);
+                    gmlevel  = (uint16)sql->GetUIntData(4);
 
                     // new char only (first login from char create)
                     if (PrevZone == 0)
@@ -315,8 +315,8 @@ int32 lobbydata_parse(int32 fd)
                         key3[16] += 6;
                     }
 
-                    inet_pton(AF_INET, (const char*)Sql_GetData(SqlHandle, 0), &ZoneIP);
-                    ZonePort                           = (uint16)Sql_GetUIntData(SqlHandle, 1);
+                    inet_pton(AF_INET, (const char*)sql->GetData(0), &ZoneIP);
+                    ZonePort                           = (uint16)sql->GetUIntData(1);
                     ref<uint32>(ReservePacket, (0x38)) = ZoneIP;
                     ref<uint16>(ReservePacket, (0x3C)) = ZonePort;
                     ShowInfo("lobbydata_parse: zoneid:(%u),zoneip:(%s),zoneport:(%u) for char:(%u)", ZoneID, ip2str(ntohl(ZoneIP)), ZonePort, charid);
@@ -325,7 +325,7 @@ int32 lobbydata_parse(int32 fd)
                     {
                         if (PrevZone == 0)
                         {
-                            Sql_Query(SqlHandle, "UPDATE chars SET pos_prevzone = %d WHERE charid = %u;", ZoneID, charid);
+                            sql->Query("UPDATE chars SET pos_prevzone = %d WHERE charid = %u;", ZoneID, charid);
                         }
 
                         ref<uint32>(ReservePacket, (0x40)) = sd->servip;                      // search-server ip
@@ -334,7 +334,7 @@ int32 lobbydata_parse(int32 fd)
                         memcpy(MainReservePacket, ReservePacket, ref<uint8>(ReservePacket, 0));
 
                         // If the session was not processed by the game server, then it must be deleted.
-                        Sql_Query(SqlHandle, "DELETE FROM accounts_sessions WHERE accid = %u and client_port = 0", sd->accid);
+                        sql->Query("DELETE FROM accounts_sessions WHERE accid = %u and client_port = 0", sd->accid);
 
                         char session_key[sizeof(key3) * 2 + 1];
                         bin2hex(session_key, key3, sizeof(key3));
@@ -342,7 +342,7 @@ int32 lobbydata_parse(int32 fd)
                         fmtQuery = "INSERT INTO accounts_sessions(accid,charid,session_key,server_addr,server_port,client_addr, version_mismatch) "
                                    "VALUES(%u,%u,x'%s',%u,%u,%u,%u)";
 
-                        if (Sql_Query(SqlHandle, fmtQuery, sd->accid, charid, session_key, ZoneIP, ZonePort, sd->client_addr,
+                        if (sql->Query(fmtQuery, sd->accid, charid, session_key, ZoneIP, ZonePort, sd->client_addr,
                                       (uint8)session[sd->login_lobbyview_fd]->ver_mismatch) == SQL_ERROR)
                         {
                             // Send error message to the client.
@@ -354,7 +354,7 @@ int32 lobbydata_parse(int32 fd)
                         }
 
                         fmtQuery = "UPDATE char_stats SET zoning = 2 WHERE charid = %u";
-                        Sql_Query(SqlHandle, fmtQuery, charid);
+                        sql->Query(fmtQuery, charid);
                     }
                     else
                     {
@@ -406,7 +406,7 @@ int32 lobbydata_parse(int32 fd)
                     fmtQuery = "INSERT INTO account_ip_record(login_time,accid,charid,client_ip)\
                             VALUES ('%s', %u, %u, '%s');";
 
-                    if (Sql_Query(SqlHandle, fmtQuery, timeAndDate, sd->accid, charid, ip2str(sd->client_addr)) == SQL_ERROR)
+                    if (sql->Query(fmtQuery, timeAndDate, sd->accid, charid, ip2str(sd->client_addr)) == SQL_ERROR)
                     {
                         ShowError("lobbyview_parse: Could not write info to account_ip_record.");
                     }
@@ -543,12 +543,12 @@ int32 lobbyview_parse(int32 fd)
                 else
                 {
                     const char* pfmtQuery = "SELECT expansions,features FROM accounts WHERE id = %u;";
-                    int32       ret       = Sql_Query(SqlHandle, pfmtQuery, sd->accid);
-                    if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+                    int32       ret       = sql->Query(pfmtQuery, sd->accid);
+                    if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
                     {
                         LOBBY_026_RESERVEPACKET(ReservePacket);
-                        ref<uint16>(ReservePacket, 32) = Sql_GetUIntData(SqlHandle, 0); // Expansion Bitmask
-                        ref<uint16>(ReservePacket, 36) = Sql_GetUIntData(SqlHandle, 1); // Feature Bitmask
+                        ref<uint16>(ReservePacket, 32) = sql->GetUIntData(0); // Expansion Bitmask
+                        ref<uint16>(ReservePacket, 36) = sql->GetUIntData(1); // Feature Bitmask
                         memcpy(MainReservePacket, ReservePacket, sendsize);
                     }
                     else
@@ -593,7 +593,7 @@ int32 lobbyview_parse(int32 fd)
                 // value from the `chars` table. The mysql server will handle the rest.
 
                 const char* pfmtQuery = "DELETE FROM chars WHERE charid = %i AND accid = %i";
-                Sql_Query(SqlHandle, pfmtQuery, CharID, sd->accid);
+                sql->Query(pfmtQuery, CharID, sd->accid);
 
                 break;
             }
@@ -711,14 +711,14 @@ int32 lobbyview_parse(int32 fd)
                     }
 
                     char escapedCharName[16 * 2 + 1];
-                    Sql_EscapeString(SqlHandle, escapedCharName, CharName);
-                    if (Sql_Query(SqlHandle, fmtQuery, escapedCharName) == SQL_ERROR)
+                    sql->EscapeString(escapedCharName, CharName);
+                    if (sql->Query(fmtQuery, escapedCharName) == SQL_ERROR)
                     {
                         do_close_lobbyview(sd, fd);
                         return -1;
                     }
 
-                    if (Sql_NumRows(SqlHandle) != 0 || invalidName)
+                    if (sql->NumRows() != 0 || invalidName)
                     {
                         if (invalidName)
                         {
@@ -813,18 +813,18 @@ int32 lobby_createchar(login_session_data_t* loginsd, int8* buf)
 
     const char* fmtQuery = "SELECT max(charid) FROM chars";
 
-    if (Sql_Query(SqlHandle, fmtQuery) == SQL_ERROR)
+    if (sql->Query(fmtQuery) == SQL_ERROR)
     {
         return -1;
     }
 
     uint32 CharID = 0;
 
-    if (Sql_NumRows(SqlHandle) != 0)
+    if (sql->NumRows() != 0)
     {
-        Sql_NextRow(SqlHandle);
+        sql->NextRow();
 
-        CharID = (uint32)Sql_GetUIntData(SqlHandle, 0) + 1;
+        CharID = (uint32)sql->GetUIntData(0) + 1;
     }
 
     if (lobby_createchar_save(loginsd->accid, CharID, &createchar) == -1)
@@ -840,7 +840,7 @@ int32 lobby_createchar_save(uint32 accid, uint32 charid, char_mini* createchar)
 {
     const char* Query = "INSERT INTO chars(charid,accid,charname,pos_zone,nation) VALUES(%u,%u,'%s',%u,%u);";
 
-    if (Sql_Query(SqlHandle, Query, charid, accid, createchar->m_name, createchar->m_zone, createchar->m_nation) == SQL_ERROR)
+    if (sql->Query(Query, charid, accid, createchar->m_name, createchar->m_zone, createchar->m_nation) == SQL_ERROR)
     {
         ShowDebug("lobby_ccsave: char<%s>, accid: %u, charid: %u", createchar->m_name, accid, charid);
         return -1;
@@ -848,7 +848,7 @@ int32 lobby_createchar_save(uint32 accid, uint32 charid, char_mini* createchar)
 
     Query = "INSERT INTO char_look(charid,face,race,size) VALUES(%u,%u,%u,%u);";
 
-    if (Sql_Query(SqlHandle, Query, charid, createchar->m_look.face, createchar->m_look.race, createchar->m_look.size) == SQL_ERROR)
+    if (sql->Query(Query, charid, createchar->m_look.face, createchar->m_look.race, createchar->m_look.size) == SQL_ERROR)
     {
         ShowDebug("lobby_cLook: char<%s>, charid: %u", createchar->m_name, charid);
 
@@ -857,7 +857,7 @@ int32 lobby_createchar_save(uint32 accid, uint32 charid, char_mini* createchar)
 
     Query = "INSERT INTO char_stats(charid,mjob) VALUES(%u,%u);";
 
-    if (Sql_Query(SqlHandle, Query, charid, createchar->m_mjob) == SQL_ERROR)
+    if (sql->Query(Query, charid, createchar->m_mjob) == SQL_ERROR)
     {
         ShowDebug("lobby_cStats: charid: %u", charid);
 
@@ -868,55 +868,55 @@ int32 lobby_createchar_save(uint32 accid, uint32 charid, char_mini* createchar)
 
     Query = "INSERT INTO char_exp(charid) VALUES(%u) \
             ON DUPLICATE KEY UPDATE charid = charid;";
-    if (Sql_Query(SqlHandle, Query, charid, createchar->m_mjob) == SQL_ERROR)
+    if (sql->Query(Query, charid, createchar->m_mjob) == SQL_ERROR)
     {
         return -1;
     }
 
     Query = "INSERT INTO char_jobs(charid) VALUES(%u) \
             ON DUPLICATE KEY UPDATE charid = charid;";
-    if (Sql_Query(SqlHandle, Query, charid, createchar->m_mjob) == SQL_ERROR)
+    if (sql->Query(Query, charid, createchar->m_mjob) == SQL_ERROR)
     {
         return -1;
     }
 
     Query = "INSERT INTO char_points(charid) VALUES(%u) \
             ON DUPLICATE KEY UPDATE charid = charid;";
-    if (Sql_Query(SqlHandle, Query, charid, createchar->m_mjob) == SQL_ERROR)
+    if (sql->Query(Query, charid, createchar->m_mjob) == SQL_ERROR)
     {
         return -1;
     }
 
     Query = "INSERT INTO char_unlocks(charid) VALUES(%u) \
             ON DUPLICATE KEY UPDATE charid = charid;";
-    if (Sql_Query(SqlHandle, Query, charid, createchar->m_mjob) == SQL_ERROR)
+    if (sql->Query(Query, charid, createchar->m_mjob) == SQL_ERROR)
     {
         return -1;
     }
 
     Query = "INSERT INTO char_profile(charid) VALUES(%u) \
             ON DUPLICATE KEY UPDATE charid = charid;";
-    if (Sql_Query(SqlHandle, Query, charid, createchar->m_mjob) == SQL_ERROR)
+    if (sql->Query(Query, charid, createchar->m_mjob) == SQL_ERROR)
     {
         return -1;
     }
 
     Query = "INSERT INTO char_storage(charid) VALUES(%u) \
             ON DUPLICATE KEY UPDATE charid = charid;";
-    if (Sql_Query(SqlHandle, Query, charid, createchar->m_mjob) == SQL_ERROR)
+    if (sql->Query(Query, charid, createchar->m_mjob) == SQL_ERROR)
     {
         return -1;
     }
 
     // hot fix
     Query = "DELETE FROM char_inventory WHERE charid = %u";
-    if (Sql_Query(SqlHandle, Query, charid) == SQL_ERROR)
+    if (sql->Query(Query, charid) == SQL_ERROR)
     {
         return -1;
     }
 
     Query = "INSERT INTO char_inventory(charid) VALUES(%u);";
-    if (Sql_Query(SqlHandle, Query, charid, createchar->m_mjob) == SQL_ERROR)
+    if (sql->Query(Query, charid, createchar->m_mjob) == SQL_ERROR)
     {
         return -1;
     }

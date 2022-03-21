@@ -37,13 +37,7 @@ entity.onTrigger = function(player, npc)
     local MEMORIES_OF_A_MAIDEN = player:getCharVar("MEMORIES_OF_A_MAIDEN_Status")
     local LouverancePath = player:getCharVar("COP_Louverance_s_Path")
 
-    if player:getCurrentMission(COP) == xi.mission.id.cop.THE_ROAD_FORKS and MEMORIES_OF_A_MAIDEN == 3 then
-        player:startEvent(469)
-    elseif player:getCurrentMission(COP) == xi.mission.id.cop.THE_ROAD_FORKS and MEMORIES_OF_A_MAIDEN == 6 then
-        player:startEvent(470, 0, 587, 581, 586)
-    elseif player:getCurrentMission(COP) == xi.mission.id.cop.THE_ROAD_FORKS and player:hasKeyItem(xi.ki.MIMEO_FEATHER) then
-        player:startEvent(471)
-    elseif player:getCurrentMission(COP) == xi.mission.id.cop.THE_ROAD_FORKS and MEMORIES_OF_A_MAIDEN == 11 then
+    if player:getCurrentMission(COP) == xi.mission.id.cop.THE_ROAD_FORKS and MEMORIES_OF_A_MAIDEN == 11 then
         player:startEvent(472)
     elseif player:getCurrentMission(COP) == xi.mission.id.cop.THREE_PATHS and LouverancePath == 3 then
         player:startEvent(481)
@@ -76,16 +70,6 @@ end
 entity.onEventFinish = function(player, csid, option)
     if csid == 249 then
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MANDRAGORA_MAD)
-    elseif csid == 469 then
-        player:setCharVar("MEMORIES_OF_A_MAIDEN_Status", 4)
-    elseif csid == 470 then
-        player:setCharVar("MEMORIES_OF_A_MAIDEN_Status", 7)
-        player:delKeyItem(xi.ki.CRACKED_MIMEO_MIRROR)
-    elseif csid == 471 then
-        player:delKeyItem(xi.ki.MIMEO_FEATHER)
-        player:delKeyItem(xi.ki.SECOND_MIMEO_FEATHER)
-        player:delKeyItem(xi.ki.THIRD_MIMEO_FEATHER)
-        player:setCharVar("MEMORIES_OF_A_MAIDEN_Status", 9)
     elseif csid == 472 then
         player:setCharVar("MEMORIES_OF_A_MAIDEN_Status", 12)    --end 3-3B: Windurst Route: "Memories of a Maiden"
     elseif csid == 481 then

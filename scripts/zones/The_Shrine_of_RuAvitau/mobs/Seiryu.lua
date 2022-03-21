@@ -6,7 +6,7 @@ require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
-entity.onMonsterMagicPrepare = function(mob, target)
+entity.onMobMagicPrepare = function(mob, target, spellId)
     if (mob:hasStatusEffect(xi.effect.HUNDRED_FISTS, 0) == false) then
         local rnd = math.random()
         if (rnd < 0.5) then

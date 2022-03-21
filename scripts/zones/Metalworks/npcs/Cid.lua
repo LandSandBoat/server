@@ -125,18 +125,6 @@ entity.onTrigger = function(player, npc)
     elseif copMission == xi.mission.id.cop.THE_ENDURING_TUMULT_OF_WAR and copStatus == 1 then
         player:startEvent(849)
 
-    -- THE CALL OF THE WYRMKING
-    elseif copMission == xi.mission.id.cop.THE_CALL_OF_THE_WYRMKING and copStatus == 1 then
-        player:startEvent(845)
-
-    -- THE ROAD FORKS
-    elseif
-        copMission == xi.mission.id.cop.THE_ROAD_FORKS and
-        player:getCharVar("EMERALD_WATERS_Status") == 7 and
-        player:getCharVar("MEMORIES_OF_A_MAIDEN_Status") == 12
-    then
-        player:startEvent(847)
-
     -- DARK PUPPET
     elseif
         player:getMainJob() == xi.job.DRK and
@@ -155,10 +143,6 @@ entity.onTrigger = function(player, npc)
         player:startEvent(502) -- Reminder dialogue from Cid if you have not spoken to Hilda
     elseif cidsSecret == QUEST_ACCEPTED and hasLetter then
         player:startEvent(509)
-
-    -- DEFAULT DIALOG
-    else
-        player:startEvent(500)
     end
 end
 
@@ -199,20 +183,6 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("PromathiaStatus", 2)
     elseif csid == 856 then
         player:setCharVar("PromathiaStatus", 1)
-    elseif csid == 845 then
-        player:setCharVar("PromathiaStatus", 0)
-        player:completeMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_CALL_OF_THE_WYRMKING)
-        player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.A_VESSEL_WITHOUT_A_CAPTAIN)
-    elseif csid == 847 then
-        -- finishing mission 3.3 and all sub missions
-        player:setCharVar("EMERALD_WATERS_Status", 0)
-        player:setCharVar("MEMORIES_OF_A_MAIDEN_Status", 0)
-        player:completeMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_ROAD_FORKS)
-        player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.DESCENDANTS_OF_A_LINE_LOST)
-        player:completeMission(xi.mission.log_id.COP, xi.mission.id.cop.DESCENDANTS_OF_A_LINE_LOST)
-        player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.COMEDY_OF_ERRORS_ACT_I)
-        player:completeMission(xi.mission.log_id.COP, xi.mission.id.cop.COMEDY_OF_ERRORS_ACT_I)
-        player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.TENDING_AGED_WOUNDS ) -- starting 3.4 COP mission
     elseif csid == 760 then
         player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.DARK_PUPPET)
         player:setCharVar("darkPuppetCS", 1)

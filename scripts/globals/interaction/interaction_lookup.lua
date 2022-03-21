@@ -444,6 +444,10 @@ function InteractionLookup:onZoneIn(player, prevZone, fallbackFn)
     return onHandler(self.data, 'onZoneIn', 1, { player, prevZone }, fallbackFn)
 end
 
+function InteractionLookup:onZoneOut(player, fallbackFn)
+    return onHandler(self.data, 'onZoneOut', 1, { player }, fallbackFn)
+end
+
 function InteractionLookup:onEventFinish(player, csid, option, npc, fallbackFn)
     return onHandler(self.data, 'onEventFinish', csid, { player, csid, option, npc }, fallbackFn)
 end

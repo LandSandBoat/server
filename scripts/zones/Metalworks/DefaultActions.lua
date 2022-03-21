@@ -5,6 +5,7 @@ return {
     ['_6lg']       = { messageSpecial = ID.text.ITS_LOCKED },
     ['Alois']      = { event = 370 },
     ['Ayame']      = { event = 701 },
+    ['Cid']        = { event = 500 },
     ['Franziska']  = { event = 620 },
     ['Grohm']      = { event = 427 }, -- NOTE: 422 commented in previous code, 427 might be specific to > 9 missionStatus for M2-3
     ['Elayne']     = { event = 704 },

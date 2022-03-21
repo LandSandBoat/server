@@ -42,7 +42,6 @@ xi.mission.area =
     [xi.mission.log_id.ROV]         = 'rov',
 }
 
---[[
 xi.mission.status =
 {
     COP =
@@ -57,7 +56,6 @@ xi.mission.status =
         RUBIOUS    = 7,
     },
 }
-]]--
 
 xi.mission.id =
 {

@@ -26,8 +26,11 @@
 #include "../entities/npcentity.h"
 #include "../region.h"
 #include "../zone.h"
+#include "../zone_entities.h"
 #include "lua_baseentity.h"
 #include "lua_zone.h"
+#include "../utils/mobutils.h"
+#include "../mob_modifier.h"
 
 CLuaZone::CLuaZone(CZone* PZone)
 : m_pLuaZone(PZone)
@@ -158,6 +161,69 @@ void CLuaZone::reloadNavmesh()
     m_pLuaZone->m_navMesh->reload();
 }
 
+std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
+{
+    CBaseEntity* PEntity = nullptr;
+    if (table.get_or<uint8>("objtype", TYPE_NPC) == TYPE_NPC)
+    {
+        PEntity = new CNpcEntity();
+    }
+    else
+    {
+        auto groupId = table.get_or<uint32>("groupId", 0);
+        auto groupZoneId = table.get_or<uint32>("groupZoneId", 0);
+
+        PEntity = mobutils::InstantiateDynamicMob(groupId, groupZoneId, m_pLuaZone->GetID());
+    }
+
+    PEntity->isDynamicEntity = true;
+
+    // NOTE: Mob allegiance is the default for NPCs
+    PEntity->allegiance = static_cast<ALLEGIANCE_TYPE>(table.get_or<uint8>("allegiance", ALLEGIANCE_TYPE::MOB));
+
+    uint16 ZoneID = m_pLuaZone->GetID();
+
+    // TODO: Wrap this entity in a unique_ptr that will free this dynamic targ ID
+    //       on despawn/destruction
+    // TODO: The tracking of these IDs is pretty bad also, fix that in zone_entities
+    PEntity->targid = m_pLuaZone->GetZoneEntities()->GetNewDynamicTargID();
+    PEntity->id     = 0x1000000 + (ZoneID << 12) + PEntity->targid;
+
+    PEntity->loc.zone       = m_pLuaZone;
+    PEntity->loc.p.rotation = table.get_or<uint8>("rotation", 0);
+    PEntity->loc.p.x        = table.get_or<float>("x", 0.01);
+    PEntity->loc.p.y        = table.get_or<float>("y", 0.01);
+    PEntity->loc.p.z        = table.get_or<float>("z", 0.01);
+    PEntity->loc.p.moving   = 0;
+
+    PEntity->updatemask |= UPDATE_ALL_MOB;
+
+    if (auto* PNpc = dynamic_cast<CNpcEntity*>(PEntity))
+    {
+        PNpc->namevis       = table.get_or<uint8>("namevis", 0);
+        PNpc->status        = STATUS_TYPE::NORMAL;
+        PNpc->m_flags       = table.get_or<uint32>("m_flags", 0);
+        PNpc->name_prefix   = table.get_or<uint8>("name_prefix", 32);
+        PNpc->widescan      = 0;
+        PNpc->m_triggerable = table.get_or("triggerable", false);
+        PNpc->SetModelId(table.get_or<uint16>("modelId", 0));
+
+        m_pLuaZone->InsertNPC(PNpc);
+    }
+    else if (auto* PMob = dynamic_cast<CMobEntity*>(PEntity))
+    {
+        m_pLuaZone->InsertMOB(PMob);
+    }
+
+    auto maybeName = table.get<std::optional<std::string>>("name");
+    if (maybeName.has_value())
+    {
+        PEntity->name.insert(0, maybeName.value().c_str());
+    }
+
+    return CLuaBaseEntity(PEntity);
+}
+
 /************************************************************************
  *  Function: SetSoloBattleMusic(253)
  *  Purpose : Set Solo Battle music for zone
@@ -271,6 +337,7 @@ void CLuaZone::Register()
     SOL_REGISTER("battlefieldsFull", CLuaZone::battlefieldsFull);
     SOL_REGISTER("getWeather", CLuaZone::getWeather);
     SOL_REGISTER("reloadNavmesh", CLuaZone::reloadNavmesh);
+    SOL_REGISTER("insertDynamicEntity", CLuaZone::insertDynamicEntity);
 
     SOL_REGISTER("getSoloBattleMusic", CLuaZone::getSoloBattleMusic);
     SOL_REGISTER("getPartyBattleMusic", CLuaZone::getPartyBattleMusic);

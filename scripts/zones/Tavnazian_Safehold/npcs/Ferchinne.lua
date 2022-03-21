@@ -31,8 +31,6 @@ entity.onTrigger = function(player, npc)
         elseif flyHigh == QUEST_COMPLETED then
             player:startEvent(244)
         end
-    else
-        player:startEvent(240)
     end
 end
 

@@ -50,12 +50,6 @@ entity.onTrigger = function(player, npc)
     -- COP mission 3-5
     if
         player:getCurrentMission(COP) == xi.mission.id.cop.DARKNESS_NAMED and
-        player:getCharVar("PromathiaStatus") == 0
-    then
-        player:startEvent(82)
-
-    elseif
-        player:getCurrentMission(COP) == xi.mission.id.cop.DARKNESS_NAMED and
         player:getCharVar("PromathiaStatus") == 3
     then
         player:startEvent(75)
@@ -125,10 +119,6 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("COP_Tenzen_s_Path", 3)
         player:addKeyItem(xi.ki.ENVELOPE_FROM_MONBERAUX)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.ENVELOPE_FROM_MONBERAUX)
-    elseif csid == 82 then
-        player:setCharVar("PromathiaStatus", 1)
-        player:delKeyItem(xi.ki.MYSTERIOUS_AMULET_DRAINED)
-        player:messageSpecial(ID.text.LEND_PRISHE_AMULET, xi.ki.MYSTERIOUS_AMULET_PRISHE)
     elseif csid == 75 then
         player:setCharVar("PromathiaStatus", 0)
         player:completeMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED)

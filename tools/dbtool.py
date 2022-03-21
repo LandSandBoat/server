@@ -122,7 +122,7 @@ player_data = [
     'char_spells.sql',
     'char_stats.sql',
     'char_storage.sql',
-    'char_colorama.Style.sql',
+    'char_style.sql',
     'char_unlocks.sql',
     'char_vars.sql',
     'chars.sql',
@@ -351,11 +351,11 @@ def connect():
                 use_pure=True)
         cur = db.cursor()
     except mysql.connector.Error as err:
-        if err.errno == mysql.connector.errorcodeER_ACCESS_DENIED_ERROR:
+        if err.errno == mysql.connector.errorcode.ER_ACCESS_DENIED_ERROR:
             print(colorama.Fore.RED + 'Incorrect mysql_login or mysql_password, update ../conf/map.conf.')
             close()
             return False
-        elif err.errno == mysql.connector.errorcodeER_BAD_DB_ERROR:
+        elif err.errno == mysql.connector.errorcode.ER_BAD_DB_ERROR:
             print(colorama.Fore.RED + 'Database ' + database + ' does not exist.')
             if input('Would you like to create new database: ' + database + '? [y/N] ').lower() == 'y':
                 create_command = '"' + mysql_bin + 'mysqladmin' + exe + '" -h ' + host + ' -P ' + str(port) + ' -u ' + login + ' -p' + password + ' CREATE ' + database
