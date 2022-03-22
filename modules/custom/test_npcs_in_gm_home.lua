@@ -12,10 +12,6 @@ m:addOverride("xi.zones.GM_Home.Zone.onInitialize", function(zone)
     -- Call the zone's original function for onInitialize
     super(zone)
 
-    -----------------------------------
-    -- NOTE: THIS API IS EXPERIMENTAL AND LIKELY TO CHANGE. USE AT YOUR OWN RISK!
-    -----------------------------------
-
     -- Insert NPC into zone
     local horro = zone:insertDynamicEntity({
 
@@ -24,7 +20,9 @@ m:addOverride("xi.zones.GM_Home.Zone.onInitialize", function(zone)
 
         -- The name visible to players
         -- NOTE: Even if you plan on making the name invisible, we're using it internally for lookups
-        --     : So populate it with something unique-ish even if you aren't going to use it
+        --     : So populate it with something unique-ish even if you aren't going to use it.
+        --     : You can then hide the name with entity:hideName(true)
+        -- NOTE: This name CAN include spaces and underscores.
         name = "Horro",
 
         -- You can use regular model ids (See documentation/model_ids.txt, or play around with !costume)
@@ -40,6 +38,9 @@ m:addOverride("xi.zones.GM_Home.Zone.onInitialize", function(zone)
 
         -- Rotation is scaled 0-255, with 0 being East
         rotation = 128,
+
+        -- Overriding widescan is only available to NPCs.
+        widescan = 1,
 
         -- onTrade and onTrigger can be hooked up to your dynamic entity,
         -- just like with regular entities. You can also omit these.

@@ -169,6 +169,7 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
     if (table.get_or<uint8>("objtype", TYPE_NPC) == TYPE_NPC)
     {
         PEntity = new CNpcEntity();
+        PEntity->name = "DefaultName";
     }
     else
     {
@@ -199,7 +200,8 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
     auto name = table.get_or<std::string>("name", "");
     if (name.empty())
     {
-        ShowWarning("Trying to spawn dynamic entity without a name! (%s)", (const char*)m_pLuaZone->GetName());
+        ShowFatalError("Trying to spawn dynamic entity without a name! (%s)", (const char*)m_pLuaZone->GetName());
+        std::exit(-1);
     }
 
     auto lookupName = "DE_" + name;
@@ -216,7 +218,9 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
         PNpc->status        = STATUS_TYPE::NORMAL;
         PNpc->m_flags       = 0;
         PNpc->name_prefix   = 32;
-        PNpc->widescan      = 0;
+
+        // TODO: Does this even work?
+        PNpc->widescan      = table.get_or<uint8>("widescan", 1);
 
         auto onTrade = table["onTrade"].get_or<sol::function>(sol::lua_nil);
         if (onTrade.valid())
