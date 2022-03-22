@@ -69,6 +69,18 @@ namespace moduleutils
                 std::string relPath   = path.relative_path().generic_string();
                 std::string pathNoExt = path.relative_path().replace_extension("").generic_string();
 
+                // Execute the script once in "safe mode" to check it for syntax errors
+                // lua.require_file will crash if it's given a bad script
+                auto res = lua.safe_script_file(relPath);
+                if (!res.valid())
+                {
+                    sol::error err = res;
+                    ShowError("Failed to load module: %s", filename);
+                    ShowError(err.what());
+                    continue;
+                }
+
+                // Run for real
                 sol::table table = lua.require_file(pathNoExt, relPath);
                 if (table["enabled"])
                 {
