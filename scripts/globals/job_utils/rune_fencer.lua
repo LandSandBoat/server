@@ -224,7 +224,7 @@ local function getSwipeLungeElement(type)
     return runeElementEffectMap[type]
 end
 
-local function getAnimationSwipeLunge(weaponSkillType) -- verified via retail action packets exclusively
+local function getAnimationEffusion(weaponSkillType, offset) -- verified via retail action packets exclusively
 
     local weaponAnimationMap =
     {
@@ -233,8 +233,8 @@ local function getAnimationSwipeLunge(weaponSkillType) -- verified via retail ac
         [xi.skill.DAGGER]       = 7,
         [xi.skill.SWORD]        = 5,
         [xi.skill.GREAT_SWORD]  = 10,
-        [xi.skill.AXE]          = 8, -- club/axe share the same animation for Swipe/Lunge
-        [xi.skill.GREAT_AXE]    = 9, -- gaxe/scythe share the animation for Swipe/Lunge
+        [xi.skill.AXE]          = 8, -- club/axe share the same animation
+        [xi.skill.GREAT_AXE]    = 9, -- gaxe/scythe share the animation
         [xi.skill.SCYTHE]       = 9,
         [xi.skill.POLEARM]      = 11,
         [xi.skill.KATANA]       = 12,
@@ -242,49 +242,7 @@ local function getAnimationSwipeLunge(weaponSkillType) -- verified via retail ac
         [xi.skill.CLUB]         = 8,
         [xi.skill.STAFF]        = 14,
     }
-    return weaponAnimationMap[weaponSkillType]
-end
-
-local function getAnimationGambit(weaponSkillType) -- verified via retail action packets exclusively
-
-    local weaponAnimationMap =
-    {
-        [xi.skill.NONE]         = 16,
-        [xi.skill.HAND_TO_HAND] = 16,
-        [xi.skill.DAGGER]       = 17,
-        [xi.skill.SWORD]        = 15,
-        [xi.skill.GREAT_SWORD]  = 20,
-        [xi.skill.AXE]          = 18, -- club/axe share the same animation for Gambit
-        [xi.skill.GREAT_AXE]    = 19, -- gaxe/scythe share the animation for Gambit
-        [xi.skill.SCYTHE]       = 19,
-        [xi.skill.POLEARM]      = 21,
-        [xi.skill.KATANA]       = 22,
-        [xi.skill.GREAT_KATANA] = 23,
-        [xi.skill.CLUB]         = 18,
-        [xi.skill.STAFF]        = 24,
-    }
-    return weaponAnimationMap[weaponSkillType]
-end
-
-local function getAnimationRayke(weaponSkillType) -- verified via retail action packets exclusively
-
-    local weaponAnimationMap =
-    {
-        [xi.skill.NONE]         = 26,
-        [xi.skill.HAND_TO_HAND] = 26,
-        [xi.skill.DAGGER]       = 27,
-        [xi.skill.SWORD]        = 25,
-        [xi.skill.GREAT_SWORD]  = 30,
-        [xi.skill.AXE]          = 28, -- club/axe share the same animation for Rayke
-        [xi.skill.GREAT_AXE]    = 29, -- gaxe/scythe share the animation for Rayke
-        [xi.skill.SCYTHE]       = 29,
-        [xi.skill.POLEARM]      = 31,
-        [xi.skill.KATANA]       = 32,
-        [xi.skill.GREAT_KATANA] = 33,
-        [xi.skill.CLUB]         = 28,
-        [xi.skill.STAFF]        = 34,
-    }
-    return weaponAnimationMap[weaponSkillType]
+    return weaponAnimationMap[weaponSkillType] + offset
 end
 
 local function applyVallationValianceSDTMods(target, SDTTypes, power, effect, duration) -- Vallation/Valiance can apply up to N where N is total rune different elemental resistances, or power*N for singular element, or any combination thereof.
@@ -658,7 +616,7 @@ xi.job_utils.rune_fencer.useSwipeLunge = function(player, target, ability, actio
         return shadowsHit
     end
 
-    action:setAnimation(target:getID(), getAnimationSwipeLunge(weaponSkillType)) -- set animation for currently equipped weapon
+    action:setAnimation(target:getID(), getAnimationEffusion(weaponSkillType, 0)) -- set animation for currently equipped weapon
 
     if cumulativeDamage < 0 or cumulativeDamage == 0 and absorbed then -- TODO: figre out how to set "unknown" bit in message 102
                                                                        -- "unknown" = 4 on message 102 for healed MB
@@ -736,7 +694,7 @@ xi.job_utils.rune_fencer.useGambit = function(player, target, ability, action)
     local gearBonusDuration = player:getMod(xi.mod.GAMBIT_DURATION)
 
     action:speceffect(target:getID(), getSpecEffectElementEffusion(highestRune)) -- set element color for animation.
-    action:setAnimation(target:getID(), getAnimationGambit(weaponSkillType)) -- set animation for currently equipped weapon
+    action:setAnimation(target:getID(), getAnimationEffusion(weaponSkillType, 10)) -- set animation for currently equipped weapon
 
     SDTPower = SDTPower * 100 -- adjust to SDT modifier
 
@@ -765,7 +723,7 @@ xi.job_utils.rune_fencer.useRayke = function(player, target, ability, action)
     local weaponSkillType = player:getWeaponSkillType(xi.slot.MAIN)
 
     action:speceffect(target:getID(), getSpecEffectElementEffusion(highestRune)) -- set element color for animation.
-    action:setAnimation(target:getID(), getAnimationRayke(weaponSkillType)) -- set animation for currently equipped weapon
+    action:setAnimation(target:getID(), getAnimationEffusion(weaponSkillType, 20)) -- set animation for currently equipped weapon
 
     -- TODO: implement
 end
