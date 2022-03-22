@@ -200,8 +200,11 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
     auto name = table.get_or<std::string>("name", "");
     if (name.empty())
     {
-        ShowFatalError("Trying to spawn dynamic entity without a name! (%s)", (const char*)m_pLuaZone->GetName());
-        std::exit(-1);
+        ShowWarning("Trying to spawn dynamic entity without a name! (%s - %s)",
+            PEntity->name.c_str(), (const char*)m_pLuaZone->GetName());
+
+        // If the name hasn't been provided, use "DefaultName" for NPCs, and whatever comes from the mob_pool for Mobs
+        name = PEntity->name;
     }
 
     auto lookupName = "DE_" + name;
@@ -210,7 +213,7 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
     PEntity->packetName = name;
 
     auto typeKey = (PEntity->objtype == TYPE_NPC) ? "npcs" : "mobs";
-    auto& cacheEntry = lua[sol::create_if_nil]["xi"]["zones"][(const char*)m_pLuaZone->GetName()][typeKey][lookupName];
+    auto cacheEntry = lua[sol::create_if_nil]["xi"]["zones"][(const char*)m_pLuaZone->GetName()][typeKey][lookupName];
 
     if (auto* PNpc = dynamic_cast<CNpcEntity*>(PEntity))
     {
