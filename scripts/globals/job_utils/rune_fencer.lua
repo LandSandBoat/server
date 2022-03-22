@@ -216,7 +216,7 @@ local function getAnimationSwipeLunge(weaponSkillType) -- verified via retail ac
         [xi.skill.DAGGER]       = 7,
         [xi.skill.SWORD]        = 5,
         [xi.skill.GREAT_SWORD]  = 10,
-        [xi.skill.AXE]          = 8,
+        [xi.skill.AXE]          = 8, -- club/axe share the same animation for Swipe/Lunge
         [xi.skill.GREAT_AXE]    = 9, -- gaxe/scythe share the animation for Swipe/Lunge
         [xi.skill.SCYTHE]       = 9,
         [xi.skill.POLEARM]      = 11,
@@ -224,6 +224,46 @@ local function getAnimationSwipeLunge(weaponSkillType) -- verified via retail ac
         [xi.skill.GREAT_KATANA] = 13,
         [xi.skill.CLUB]         = 8,
         [xi.skill.STAFF]        = 14,
+    }
+    return weaponAnimationMap[weaponSkillType]
+end
+
+local function getAnimationGambit(weaponSkillType) -- verified via retail action packets exclusively
+
+    local weaponAnimationMap =
+    {
+        [xi.skill.HAND_TO_HAND] = 16,
+        [xi.skill.DAGGER]       = 17,
+        [xi.skill.SWORD]        = 15,
+        [xi.skill.GREAT_SWORD]  = 20,
+        [xi.skill.AXE]          = 18, -- club/axe share the same animation for Gambit
+        [xi.skill.GREAT_AXE]    = 19, -- gaxe/scythe share the animation for Gambit
+        [xi.skill.SCYTHE]       = 19,
+        [xi.skill.POLEARM]      = 21,
+        [xi.skill.KATANA]       = 22,
+        [xi.skill.GREAT_KATANA] = 23,
+        [xi.skill.CLUB]         = 18,
+        [xi.skill.STAFF]        = 24,
+    }
+    return weaponAnimationMap[weaponSkillType]
+end
+
+local function getAnimationRayke(weaponSkillType) -- verified via retail action packets exclusively
+
+    local weaponAnimationMap =
+    {
+        [xi.skill.HAND_TO_HAND] = 26,
+        [xi.skill.DAGGER]       = 27,
+        [xi.skill.SWORD]        = 25,
+        [xi.skill.GREAT_SWORD]  = 30,
+        [xi.skill.AXE]          = 28, -- club/axe share the same animation for Rayke
+        [xi.skill.GREAT_AXE]    = 29, -- gaxe/scythe share the animation for Rayke
+        [xi.skill.SCYTHE]       = 29,
+        [xi.skill.POLEARM]      = 31,
+        [xi.skill.KATANA]       = 32,
+        [xi.skill.GREAT_KATANA] = 33,
+        [xi.skill.CLUB]         = 28,
+        [xi.skill.STAFF]        = 34,
     }
     return weaponAnimationMap[weaponSkillType]
 end
@@ -353,7 +393,7 @@ xi.job_utils.rune_fencer.useVallationValiance = function(player, target, ability
     local inspirationFCBonus = inspirationMerits + inspirationMerits / 10 * player:getMod(xi.mod.ENHANCES_INSPIRATION)  -- 10 FC per merit level, plus 2% per level from AF2 leg aug
     local jobPointBonusDuration = player:getJobPointLevel(xi.jp.VALLATION_DURATION)
 
-    SDTPower = SDTPower + meritBonus
+    SDTPower = (SDTPower + meritBonus) * 100
 
     local SDTTypes = {} -- one SDT type per rune which can be additive
     local i = 0
