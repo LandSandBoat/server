@@ -3,12 +3,15 @@
 -- Rhapsodies of Vana'diel Mission 2-2
 -----------------------------------
 -- !addmission 13 46
+-- Ru'Lude Homepoint 1 : !pos -6 3 0.001 243
 -----------------------------------
 require('scripts/globals/items')
 require('scripts/globals/missions')
 require('scripts/globals/rhapsodies')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
+-----------------------------------
+local ruludeID = require('scripts/zones/RuLude_Gardens/IDs')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.CRASHING_WAVES)
@@ -45,7 +48,8 @@ mission.sections =
                 [1] = function(player, region)
                     if
                         xi.rhapsodies.charactersAvailable(player) and
-                        player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.A_VESSEL_WITHOUT_A_CAPTAIN)
+                        player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.A_VESSEL_WITHOUT_A_CAPTAIN) and
+                        not mission:getVar(player, 'Retrieve') == 1
                     then
                         -- Note: There are 4 parameters that impact the message shown in this state which all appear to revolve
                         -- around Tenzen's knowledge of Prishe, and the status of the mission 'Darkness Named.'  This mission is
@@ -73,7 +77,7 @@ mission.sections =
 
                         return mission:progressEvent(10244, hasProgressed, hasProgressed, isCurrent, 0)
                     elseif mission:getVar(player, 'Status') == 0 then
-                        return mission:event(10245):oncePerZone()
+                        return mission:event(10245)
                     end
                 end,
             },
@@ -82,7 +86,7 @@ mission.sections =
             {
                 [10244] = function(player, csid, option, npc)
                     if player:getFreeSlotsCount() == 0 then
-                        player:messageSpecial(ID.text.MYSTIC_RETRIEVER, xi.items.CIPHER_OF_TENZENS_ALTER_EGO_II)
+                        player:messageSpecial(ruludeID.text.MYSTIC_RETRIEVER, xi.items.CIPHER_OF_TENZENS_ALTER_EGO_II)
                         mission:setVar(player, 'Retrieve', 1)
                     else
                         npcUtil.giveItem(player, xi.items.CIPHER_OF_TENZENS_ALTER_EGO_II)

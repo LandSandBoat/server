@@ -10,6 +10,8 @@ require('scripts/globals/rhapsodies')
 require('scripts/globals/zone')
 require('scripts/globals/interaction/mission')
 -----------------------------------
+local portJeunoID = require("scripts/zones/Port_Jeuno/IDs")
+-----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.CALL_TO_SERVE)
 
@@ -43,7 +45,10 @@ mission.sections =
             onZoneIn =
             {
                 function(player, prevZone)
-                    if xi.rhapsodies.charactersAvailable(player) then
+                    if
+                        xi.rhapsodies.charactersAvailable(player) and
+                        not mission:getVar(player, 'Retrieve') == 1
+                    then
                         -- Note: Working with the assumption that there are four variable parameters for this mission,
                         -- the following observations have been made.  The first parameter *does* have an impact on dialogue;
                         -- however, it was not observed in caps (A 1-value makes Prishe sound at best more vulnerable).  The
@@ -82,7 +87,7 @@ mission.sections =
             {
                 [399] = function(player, csid, option, npc)
                     if player:getFreeSlotsCount() == 0 then
-                        player:messageSpecial(ID.text.MYSTIC_RETRIEVER, xi.items.CIPHER_OF_PRISHES_ALTER_EGO_II)
+                        player:messageSpecial(portJeunoID.text.MYSTIC_RETRIEVER, xi.items.CIPHER_OF_PRISHES_ALTER_EGO_II)
                         mission:setVar(player, 'Retrieve', 1)
                     else
                         npcUtil.giveItem(player, xi.items.CIPHER_OF_PRISHES_ALTER_EGO_II)

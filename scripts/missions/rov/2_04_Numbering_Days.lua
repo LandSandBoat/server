@@ -51,7 +51,7 @@ mission.sections =
                         promathiaMission = promathiaMission + 1
                     end
 
-                    return mission:progressEvent(10221, 0, promathiaMission, 1, 0)
+                    return mission:progressEvent(10221, 0, promathiaMission, 1, 0):setPriority(1005)
                 end,
             },
 
