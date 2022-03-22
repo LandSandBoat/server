@@ -726,8 +726,8 @@ xi.job_utils.rune_fencer.usePflug = function(player, target, ability, action)
     player:addStatusEffect(xi.effect.PFLUG, baseStrength, 0, 120, 0, meritBonus)
 end
 
+-- see https://www.bg-wiki.com/ffxi/Gambit
 xi.job_utils.rune_fencer.useGambit = function(player, target, ability, action)
-
     local highestRune = player:getHighestRuneEffect()
     local weaponSkillType = player:getWeaponSkillType(xi.slot.MAIN)
     local effects = player:getStatusEffects()
