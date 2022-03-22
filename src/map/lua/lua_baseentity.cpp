@@ -289,14 +289,14 @@ void CLuaBaseEntity::messageText(CLuaBaseEntity* PLuaBaseEntity, uint16 messageI
  *          : Can modify the name shown through explicit declaration
  ************************************************************************/
 
-void CLuaBaseEntity::PrintToPlayer(std::string const& message, sol::object messageType, sol::object name)
+void CLuaBaseEntity::PrintToPlayer(std::string const& message, sol::object const& messageTypeObj, sol::object const& nameObj)
 {
-    CHAT_MESSAGE_TYPE int_messageType = (messageType == sol::lua_nil) ? MESSAGE_SYSTEM_1 : messageType.as<CHAT_MESSAGE_TYPE>();
-    const char*       cstr_name       = (name == sol::lua_nil) ? "" : name.as<const char*>();
+    auto messageType = (messageTypeObj == sol::lua_nil) ? MESSAGE_SYSTEM_1 : messageTypeObj.as<CHAT_MESSAGE_TYPE>();
+    auto name        = (nameObj == sol::lua_nil) ? "" : nameObj.as<std::string>();
 
     if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
     {
-        PChar->pushPacket(new CChatMessagePacket(PChar, int_messageType, message, cstr_name));
+        PChar->pushPacket(new CChatMessagePacket(PChar, messageType, message, name));
     }
 }
 
@@ -4326,10 +4326,9 @@ uint8 CLuaBaseEntity::getGender()
  *  Example : player:getName()
  ************************************************************************/
 
-const char* CLuaBaseEntity::getName()
+std::string CLuaBaseEntity::getName()
 {
-    // TODO: Fix C-style cast
-    return (const char*)m_PBaseEntity->GetName();
+    return m_PBaseEntity->name;
 }
 
 /************************************************************************
@@ -4341,7 +4340,7 @@ const char* CLuaBaseEntity::getName()
  *          : Dynamic Entities etc.
  ************************************************************************/
 
-void CLuaBaseEntity::setName(const char* name)
+void CLuaBaseEntity::setName(std::string const& name)
 {
     m_PBaseEntity->name = name;
     m_PBaseEntity->updatemask |= UPDATE_NAME;
@@ -4353,13 +4352,9 @@ void CLuaBaseEntity::setName(const char* name)
  *  Example : mob:getPacketName()
  ************************************************************************/
 
-const char* CLuaBaseEntity::getPacketName()
+std::string CLuaBaseEntity::getPacketName()
 {
-    if (auto* PMob = dynamic_cast<CMobEntity*>(m_PBaseEntity))
-    {
-        return PMob->packetName.c_str();
-    }
-    return "";
+    return m_PBaseEntity->packetName;
 }
 
 /************************************************************************
@@ -4371,13 +4366,10 @@ const char* CLuaBaseEntity::getPacketName()
  *          : Dynamic Entities etc.
  ************************************************************************/
 
-void CLuaBaseEntity::setPacketName(const char* name)
+void CLuaBaseEntity::setPacketName(std::string const& name)
 {
-    if (auto* PMob = dynamic_cast<CMobEntity*>(m_PBaseEntity))
-    {
-        PMob->packetName = name;
-        PMob->updatemask |= UPDATE_NAME;
-    }
+    m_PBaseEntity->packetName = name;
+    m_PBaseEntity->updatemask |= UPDATE_NAME;
 }
 
 /************************************************************************
@@ -14024,6 +14016,7 @@ std::ostream& operator<<(std::ostream& os, const CLuaBaseEntity& entity)
     {
         std::string id   = std::to_string(entity.m_PBaseEntity->id);
         std::string name = entity.m_PBaseEntity->name;
+        std::string packetName = entity.m_PBaseEntity->packetName;
         std::string type = "";
         switch (entity.m_PBaseEntity->objtype)
         {
@@ -14074,7 +14067,8 @@ std::ostream& operator<<(std::ostream& os, const CLuaBaseEntity& entity)
             }
         }
 
-        return os << "CLuaBaseEntity(" << type << " | " << id << " | " << name << ")";
+        std::string ending = (packetName.empty()) ? ")" : " | " + packetName + ")";
+        return os << "CLuaBaseEntity(" << type << " | " << id << " | " << name << ending;
     }
 
     return os << "CLuaBaseEntity(nullptr)";

@@ -51,7 +51,7 @@ public:
     // Messaging System
     void showText(CLuaBaseEntity* mob, uint16 messageID, sol::object const& p0, sol::object const& p1, sol::object const& p2, sol::object const& p3); // Displays Dialog for npc
     void messageText(CLuaBaseEntity* PLuaBaseEntity, uint16 messageID, sol::object const& arg2, sol::object const& arg3);
-    void PrintToPlayer(std::string const& message, sol::object messageType, sol::object name);                               // for sending debugging messages/command confirmations to the player's client
+    void PrintToPlayer(std::string const& message, sol::object const& messageTypeObj, sol::object const& nameObj);                               // for sending debugging messages/command confirmations to the player's client
     void PrintToArea(std::string const& message, sol::object const& arg1, sol::object const& arg2, sol::object const& arg3); // for sending area messages to multiple players at once
     void messageBasic(uint16 messageID, sol::object const& p0, sol::object const& p1, sol::object const& target);            // Sends Basic Message
     void messageName(uint16 messageID, sol::object const& entity, sol::object const& p0, sol::object const& p1,
@@ -251,10 +251,10 @@ public:
     // Player Appearance
     uint8  getRace();
     uint8  getGender();              // Returns the player character's gender
-    auto   getName() -> const char*; // Gets Entity Name
-    void   setName(const char* name);
-    auto   getPacketName() -> const char*;
-    void   setPacketName(const char* name);
+    auto   getName() -> std::string; // Gets Entity Name
+    void   setName(std::string const& name);
+    auto   getPacketName() -> std::string;
+    void   setPacketName(std::string const& name);
     void   hideName(bool isHidden);
     bool   checkNameFlags(uint32 flags); // this is check and not get because it tests for a flag, it doesn't return all flags
     uint16 getModelId();
