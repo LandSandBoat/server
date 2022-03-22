@@ -68,11 +68,11 @@ mission.sections =
                         -- Additional Note: These seem to be progressive bits.  Each previous value must be set for the next parameter
                         -- to cause an impact.
 
-                        local hasCompleted = player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) and 1 or 0
-                        local isCurrent    = (not hasCompleted and player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.DARKNESS_NAMED) and 0 or 1
+                        local hasProgressed = player:getCurrentMission(xi.mission.log_id.COP) >= xi.mission.id.cop.DARKNESS_NAMED and 1 or 0
+                        local isCurrent     = player:getCurrentMission(xi.mission.log_id.COP) <= xi.mission.id.cop.DARKNESS_NAMED and 0 or 1
 
-                        return mission:progressEvent(10244, hasCompleted, hasCompleted, isCurrent, 0)
-                    else
+                        return mission:progressEvent(10244, hasProgressed, hasProgressed, isCurrent, 0)
+                    elseif mission:getVar(player, 'Status') == 0 then
                         return mission:event(10245):oncePerZone()
                     end
                 end,
@@ -88,6 +88,11 @@ mission.sections =
                         npcUtil.giveItem(player, xi.items.CIPHER_OF_TENZENS_ALTER_EGO_II)
                         mission:complete(player)
                     end
+                end,
+
+                [10245] = function(player, csid, option, npc)
+                    -- Unable to proceed message is only displayed once ever.
+                    mission:setVar(player, 'Status', 1)
                 end,
             },
         },
