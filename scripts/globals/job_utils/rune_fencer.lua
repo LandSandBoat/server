@@ -758,3 +758,14 @@ xi.job_utils.rune_fencer.useGambit = function(player, target, ability, action)
 
     player:removeAllRunes()
 end
+
+-- see https://www.bg-wiki.com/ffxi/Rayke
+xi.job_utils.rune_fencer.useRayke = function(player, target, ability, action)
+    local highestRune = player:getHighestRuneEffect()
+    local weaponSkillType = player:getWeaponSkillType(xi.slot.MAIN)
+
+    action:speceffect(target:getID(), getSpecEffectElementEffusion(highestRune)) -- set element color for animation.
+    action:setAnimation(target:getID(), getAnimationRayke(weaponSkillType)) -- set animation for currently equipped weapon
+
+    -- TODO: implement
+end
