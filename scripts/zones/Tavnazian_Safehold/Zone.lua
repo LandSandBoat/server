@@ -26,9 +26,7 @@ zone_object.onZoneIn = function(player, prevZone)
         player:setPos(27.971, -14.068, 43.735, 66)
     end
 
-    if player:getCurrentMission(COP) == xi.mission.id.cop.SHELTERING_DOUBT and player:getCharVar("PromathiaStatus") == 0 then
-        cs = 107
-    elseif player:getCurrentMission(COP) == xi.mission.id.cop.CHAINS_AND_BONDS and player:getCharVar("PromathiaStatus") == 1 then
+    if player:getCurrentMission(COP) == xi.mission.id.cop.CHAINS_AND_BONDS and player:getCharVar("PromathiaStatus") == 1 then
         cs = 114
     end
 
@@ -53,9 +51,7 @@ zone_object.onEventUpdate = function(player, csid, option)
 end
 
 zone_object.onEventFinish = function(player, csid, option)
-    if csid == 107 then
-        player:setCharVar("PromathiaStatus", 1)
-    elseif csid == 112 then
+    if csid == 112 then
         player:setCharVar("PromathiaStatus", 1)
     elseif csid == 114 then
         player:setCharVar("PromathiaStatus", 2)

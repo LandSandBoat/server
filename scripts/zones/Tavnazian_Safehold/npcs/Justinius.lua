@@ -19,11 +19,8 @@ entity.onTrigger = function(player, npc)
     local copCurrentMission = player:getCurrentMission(COP)
     local copMissionStatus = player:getCharVar("PromathiaStatus")
 
-    -- COP 4-1
-    if copCurrentMission == copMissions.SHELTERING_DOUBT and copMissionStatus == 2 then
-        player:startEvent(109)
     -- COP 4-2
-    elseif copCurrentMission == copMissions.THE_SAVAGE then
+    if copCurrentMission == copMissions.THE_SAVAGE then
         if copMissionStatus == 2 then
             player:startEvent(110) -- finish mission
         else
@@ -39,9 +36,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 109 then
-        player:setCharVar("PromathiaStatus", 3)
-    elseif csid == 110 then
+    if csid == 110 then
         player:setCharVar("PromathiaStatus", 0)
         player:completeMission(xi.mission.log_id.COP, copMissions.THE_SAVAGE)
         player:addMission(xi.mission.log_id.COP, copMissions.THE_SECRETS_OF_WORSHIP)
