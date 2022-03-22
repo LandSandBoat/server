@@ -144,6 +144,22 @@ local function getVallationValianceSDTType(type)
     return runeSDTMap[type]
 end
 
+local function getGambitSDTType(type)
+
+    local runeSDTMap =
+    {
+        [xi.effect.IGNIS]    = xi.mod.FIRE_SDT,
+        [xi.effect.GELUS]    = xi.mod.ICE_SDT,
+        [xi.effect.FLABRA]   = xi.mod.WIND_SDT,
+        [xi.effect.TELLUS]   = xi.mod.EARTH_SDT,
+        [xi.effect.SULPOR]   = xi.mod.THUNDER_SDT,
+        [xi.effect.UNDA]     = xi.mod.WATER_SDT,
+        [xi.effect.LUX]      = xi.mod.LIGHT_SDT,
+        [xi.effect.TENEBRAE] = xi.mod.DARK_SDT
+    }
+    return runeSDTMap[type]
+end
+
 local function getBattutaSpikesType(type)
 
     local runeSpikesMap =
@@ -212,6 +228,7 @@ local function getAnimationSwipeLunge(weaponSkillType) -- verified via retail ac
 
     local weaponAnimationMap =
     {
+        [xi.skill.NONE]         = 6,
         [xi.skill.HAND_TO_HAND] = 6,
         [xi.skill.DAGGER]       = 7,
         [xi.skill.SWORD]        = 5,
@@ -232,6 +249,7 @@ local function getAnimationGambit(weaponSkillType) -- verified via retail action
 
     local weaponAnimationMap =
     {
+        [xi.skill.NONE]         = 16,
         [xi.skill.HAND_TO_HAND] = 16,
         [xi.skill.DAGGER]       = 17,
         [xi.skill.SWORD]        = 15,
@@ -252,6 +270,7 @@ local function getAnimationRayke(weaponSkillType) -- verified via retail action 
 
     local weaponAnimationMap =
     {
+        [xi.skill.NONE]         = 26,
         [xi.skill.HAND_TO_HAND] = 26,
         [xi.skill.DAGGER]       = 27,
         [xi.skill.SWORD]        = 25,
@@ -269,6 +288,19 @@ local function getAnimationRayke(weaponSkillType) -- verified via retail action 
 end
 
 local function applyVallationValianceSDTMods(target, SDTTypes, power, effect, duration) -- Vallation/Valiance can apply up to N where N is total rune different elemental resistances, or power*N for singular element, or any combination thereof.
+    local effectAdded = target:addStatusEffect(effect, power, 0, duration)
+
+    if effectAdded then
+        local newEffect = target:getStatusEffect(effect)
+
+        for _, SDT in ipairs(SDTTypes) do
+            target:addMod(SDT, power)
+            newEffect:addMod(SDT, power) -- due to order of events, this only adds mods to the container, not to the owner of the effect.
+        end
+    end
+end
+
+local function applyGambitSDTMods(target, SDTTypes, power, effect, duration) -- Gambit can apply up to N where N is total rune different elemental resistance decreases, or power*N for singular element, or any combination thereof.
     local effectAdded = target:addStatusEffect(effect, power, 0, duration)
 
     if effectAdded then
@@ -667,7 +699,6 @@ local function addPflugResistType(type, effect, power)
     end
 end
 
-
 xi.job_utils.rune_fencer.onPflugEffectGain = function(target, effect)
     local statusEffects = target:getStatusEffects()
 
@@ -693,4 +724,37 @@ xi.job_utils.rune_fencer.usePflug = function(player, target, ability, action)
     action:speceffect(target:getID(), getSpecEffectElementWard(highestRune))
 
     player:addStatusEffect(xi.effect.PFLUG, baseStrength, 0, 120, 0, meritBonus)
+end
+
+xi.job_utils.rune_fencer.useGambit = function(player, target, ability, action)
+
+    local highestRune = player:getHighestRuneEffect()
+    local weaponSkillType = player:getWeaponSkillType(xi.slot.MAIN)
+    local effects = player:getStatusEffects()
+    local SDTPower = -10
+    local jobPointBonusDuration = player:getJobPointLevel(xi.jp.GAMBIT_DURATION)
+    local gearBonusDuration = player:getMod(xi.mod.GAMBIT_DURATION)
+
+    action:speceffect(target:getID(), getSpecEffectElementEffusion(highestRune)) -- set element color for animation.
+    action:setAnimation(target:getID(), getAnimationGambit(weaponSkillType)) -- set animation for currently equipped weapon
+
+    SDTPower = SDTPower * 100 -- adjust to SDT modifier
+
+    local SDTTypes = {} -- one SDT type per rune which can be additive
+    local i = 0
+
+    for _, effect in ipairs(effects) do
+        local type = effect:getType()
+
+        if type >= xi.effect.IGNIS and type <= xi.effect.TENEBRAE then
+            local SDTType = getGambitSDTType(type)
+            SDTTypes[i+1] = SDTType
+            i = i + 1
+        end
+    end
+    local duration = 60 + jobPointBonusDuration + gearBonusDuration
+
+    applyGambitSDTMods(target, SDTTypes, SDTPower, xi.effect.GAMBIT, duration)
+
+    player:removeAllRunes()
 end
