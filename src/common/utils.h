@@ -78,6 +78,7 @@ void        PackSoultrapperName(std::string name, uint8 output[], uint8 size);
 std::string escape(std::string const& s);
 
 std::vector<std::string> split(const std::string& s, char delim);
+look_t stringToLook(std::string str);
 
 // Float tools
 // https://stackoverflow.com/a/253874

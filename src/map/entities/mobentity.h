@@ -247,7 +247,6 @@ public:
 
     uint32   m_flags;       // includes the CFH flag and whether the HP bar should be shown or not (e.g. Yilgeban doesnt)
     uint8    m_name_prefix; // The ding bats VS Ding bats
-    string_t packetName;    // Used for battle allies
 
     CEnmityContainer* PEnmityContainer; // система ненависти монстров
 
