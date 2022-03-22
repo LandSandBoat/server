@@ -38,7 +38,7 @@ function onTrigger(player)
 
         -- You can provide an onMobDeath function if you want: if you don't
         -- add one, an empty one will be inserted for you behind the scenes.
-        onMobDeath = function(mob, player, isKiller)
+        onMobDeath = function(mob, playerArg, isKiller)
             -- Do stuff
         end,
     })
