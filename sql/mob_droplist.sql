@@ -1012,7 +1012,7 @@ INSERT INTO `mob_droplist` VALUES (176,0,0,1000,1450,10); -- lungo-nango_jadeshe
 INSERT INTO `mob_droplist` VALUES (176,2,0,1000,1452,0); -- ordelle_bronzepiece
 INSERT INTO `mob_droplist` VALUES (176,0,0,1000,1452,10);
 INSERT INTO `mob_droplist` VALUES (176,0,0,1000,1453,10); -- montiont_silverpiece
-INSERT INTO `mob_droplist` VALUES (176,2,0,1000,1455,0);-- one_byne_bill
+INSERT INTO `mob_droplist` VALUES (176,2,0,1000,1455,0); -- one_byne_bill
 INSERT INTO `mob_droplist` VALUES (176,0,0,1000,1455,90);
 INSERT INTO `mob_droplist` VALUES (176,0,0,1000,1456,10); -- one_hundred_byne_bill
 INSERT INTO `mob_droplist` VALUES (176,0,0,1000,1470,80); -- sparkling_stone
@@ -17238,7 +17238,7 @@ INSERT INTO `mob_droplist` VALUES (3216,2,0,1000,1449,0); -- Hydra Black Mage (D
 INSERT INTO `mob_droplist` VALUES (3216,2,0,1000,1452,0); -- Ordelle Bronzepiece
 INSERT INTO `mob_droplist` VALUES (3216,2,0,1000,1455,0); -- One Byne Bill
 INSERT INTO `mob_droplist` VALUES (3216,0,0,1000,3360,100); -- Sadist's Fortune Parchment, 10% (normalized)
---INSERT INTO `mob_droplist` VALUES (3216,0,0,1000,3396,50); -- odious_talisman lets not fill inventory before Taquede is added
+-- INSERT INTO `mob_droplist` VALUES (3216,0,0,1000,3396,50); -- odious_talisman lets not fill inventory before Taquede is added
 INSERT INTO `mob_droplist` VALUES (3216,0,0,1000,3493,50); -- forgotten_thought
 INSERT INTO `mob_droplist` VALUES (3216,0,0,1000,11292,10); -- Mirage Jubbah
 INSERT INTO `mob_droplist` VALUES (3216,0,0,1000,11295,10); -- Commodore Frac
