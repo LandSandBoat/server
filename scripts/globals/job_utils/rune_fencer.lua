@@ -376,7 +376,7 @@ xi.job_utils.rune_fencer.useVallationValiance = function(player, target, ability
         return
     end
 
-    local effects = target:getStatusEffects()
+    local runeEffects = target:getAllRuneEffects()
     local SDTPower = 15
     local meritBonus =  player:getMerit(xi.merit.MERIT_VALLATION_EFFECT)
     local inspirationMerits = player:getMerit(xi.merit.MERIT_INSPIRATION)
@@ -388,14 +388,10 @@ xi.job_utils.rune_fencer.useVallationValiance = function(player, target, ability
     local SDTTypes = {} -- one SDT type per rune which can be additive
     local i = 0
 
-    for _, effect in ipairs(effects) do
-        local type = effect:getType()
-
-        if type >= xi.effect.IGNIS and type <= xi.effect.TENEBRAE then
-            local SDTType = getVallationValianceSDTType(type)
-            SDTTypes[i+1] = SDTType
-            i = i + 1
-        end
+    for _, rune in ipairs(runeEffects) do
+        local SDTType = getVallationValianceSDTType(rune)
+        SDTTypes[i+1] = SDTType
+        i = i + 1
     end
 
     if abilityID == xi.jobAbility.VALIANCE then -- apply effects to entire party (including target) (Valiance)
@@ -633,36 +629,30 @@ end
 -- for example, Amnesia is fire based, therefore water runes (Unda) add resist Amnesia.
 -- These effects seem to match the "Resist X" traits that all jobs have, including unused player traits that made it into autotranslate; Resist Curse/Charm
 local function addPflugResistType(type, effect, power)
+    local pflugResistTypes =
+    {
+        [xi.effect.IGNIS]    = {xi.mod.PARALYZERES, xi.mod.BINDRES},
+        [xi.effect.GELUS]    = {xi.mod.SILENCERES, xi.mod.GRAVITYRES},
+        [xi.effect.FLABRA]   = {xi.mod.PETRIFYRES, xi.mod.SLOWRES},
+        [xi.effect.TELLUS]   = {xi.mod.STUNRES},
+        [xi.effect.SULPOR]   = {xi.mod.POISONRES},
+        [xi.effect.UNDA]     = {xi.mod.AMNESIARES, xi.mod.PLAGUERES},
+        [xi.effect.LUX]      = {xi.mod.SLEEPRES, xi.mod.BLINDRES, xi.mod.CURSERES},
+        [xi.effect.TENEBRAE] = {xi.mod.CHARMRES},
+    }
 
-    if type >= xi.effect.IGNIS and type <= xi.effect.TENEBRAE then
+    local resistTypes = pflugResistTypes[type]
 
-        local pflugResistTypes =
-        {
-            [xi.effect.IGNIS]    = {xi.mod.PARALYZERES, xi.mod.BINDRES},
-            [xi.effect.GELUS]    = {xi.mod.SILENCERES, xi.mod.GRAVITYRES},
-            [xi.effect.FLABRA]   = {xi.mod.PETRIFYRES, xi.mod.SLOWRES},
-            [xi.effect.TELLUS]   = {xi.mod.STUNRES},
-            [xi.effect.SULPOR]   = {xi.mod.POISONRES},
-            [xi.effect.UNDA]     = {xi.mod.AMNESIARES, xi.mod.PLAGUERES},
-            [xi.effect.LUX]      = {xi.mod.SLEEPRES, xi.mod.BLINDRES, xi.mod.CURSERES},
-            [xi.effect.TENEBRAE] = {xi.mod.CHARMRES},
-        }
-
-        local resistTypes = pflugResistTypes[type]
-
-        for _, resistMod in pairs(resistTypes) do -- store mod in effect, this function is triggered from event onEffectGain so it adds to the player automatically.
-            effect:addMod(resistMod, power)
-        end
-
+    for _, resistMod in pairs(resistTypes) do -- store mod in effect, this function is triggered from event onEffectGain so it adds to the player automatically.
+        effect:addMod(resistMod, power)
     end
 end
 
 xi.job_utils.rune_fencer.onPflugEffectGain = function(target, effect)
-    local statusEffects = target:getStatusEffects()
+    local runeEffects = target:getAllRuneEffects()
 
-    for _, statusEffect in ipairs(statusEffects) do
-        local type = statusEffect:getType()
-        addPflugResistType(type, effect, effect:getPower() + effect:getSubPower())
+    for _, rune in ipairs(runeEffects) do
+        addPflugResistType(rune, effect, effect:getPower() + effect:getSubPower())
     end
 end
 
@@ -688,7 +678,7 @@ end
 xi.job_utils.rune_fencer.useGambit = function(player, target, ability, action)
     local highestRune = player:getHighestRuneEffect()
     local weaponSkillType = player:getWeaponSkillType(xi.slot.MAIN)
-    local effects = player:getStatusEffects()
+    local runeEffects = player:getAllRuneEffects()
     local SDTPower = -10
     local jobPointBonusDuration = player:getJobPointLevel(xi.jp.GAMBIT_DURATION)
     local gearBonusDuration = player:getMod(xi.mod.GAMBIT_DURATION)
@@ -701,15 +691,12 @@ xi.job_utils.rune_fencer.useGambit = function(player, target, ability, action)
     local SDTTypes = {} -- one SDT type per rune which can be additive
     local i = 0
 
-    for _, effect in ipairs(effects) do
-        local type = effect:getType()
-
-        if type >= xi.effect.IGNIS and type <= xi.effect.TENEBRAE then
-            local SDTType = getGambitSDTType(type)
-            SDTTypes[i+1] = SDTType
-            i = i + 1
-        end
+    for _, rune in ipairs(runeEffects) do
+        local SDTType = getGambitSDTType(rune)
+        SDTTypes[i+1] = SDTType
+        i = i + 1
     end
+
     local duration = 60 + jobPointBonusDuration + gearBonusDuration
 
     applyGambitSDTMods(target, SDTTypes, SDTPower, xi.effect.GAMBIT, duration)

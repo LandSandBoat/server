@@ -1134,6 +1134,11 @@ void CStatusEffectContainer::RemoveAllManeuvers()
     RemoveAllStatusEffectsInIDRange(EFFECT_FIRE_MANEUVER, EFFECT_DARK_MANEUVER);
 }
 
+std::vector<EFFECT> CStatusEffectContainer::GetAllRuneEffects()
+{
+    return GetStatusEffectsInIDRange(EFFECT_IGNIS, EFFECT_TENEBRAE);
+}
+
 uint8 CStatusEffectContainer::GetActiveRuneCount()
 {
     return GetStatusEffectCountInIDRange(EFFECT_IGNIS, EFFECT_TENEBRAE);
@@ -1341,6 +1346,20 @@ void CStatusEffectContainer::UpdateStatusIcons()
     {
         PChar->PParty->EffectsChanged();
     }
+}
+
+std::vector<EFFECT> CStatusEffectContainer::GetStatusEffectsInIDRange(EFFECT start, EFFECT end)
+{
+    std::vector<EFFECT> effectList;
+
+    for (CStatusEffect* PStatusEffect : m_StatusEffectSet)
+    {
+        if (PStatusEffect->GetStatusID() >= start && PStatusEffect->GetStatusID() <= end && !PStatusEffect->deleted)
+        {
+            effectList.push_back(PStatusEffect->GetStatusID());
+        }
+    }
+    return effectList;
 }
 
 uint8 CStatusEffectContainer::GetStatusEffectCountInIDRange(EFFECT start, EFFECT end)
