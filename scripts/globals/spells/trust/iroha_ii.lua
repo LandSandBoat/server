@@ -1,5 +1,6 @@
 -----------------------------------
 -- Trust: Iroha II
+-- Made by Graves
 -----------------------------------
 require("scripts/globals/gambits")
 require("scripts/globals/magic")
@@ -40,11 +41,11 @@ spell_object.onMobSpawn = function(mob)
     mob:addMod(xi.mod.MACC, power)
 	mob:addMod(xi.mod.DEF, power)
 	mob:addMod(xi.mod.MDEF, power)
-	mob:addMod(xi.mod.ATT, power)
-	mob:addMod(xi.mod.ACC, power)
+	mob:addMod(xi.mod.ATT, power*2)
+	mob:addMod(xi.mod.ACC, power*3)
 	mob:addMod(xi.mod.SUBTLE_BLOW, 25)
-	mob:addMod(xi.mod.DOUBLE_ATTACK, 15)
-	mob:addMod(xi.mod.TRIPLE_ATTACK, 5)
+	mob:addMod(xi.mod.DOUBLE_ATTACK, 20)
+	mob:addMod(xi.mod.TRIPLE_ATTACK, 9)
 	mob:addMod(xi.mod.STORETP, 400)
 end
 

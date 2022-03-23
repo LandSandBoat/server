@@ -22,6 +22,7 @@ spell_object.onMobSpawn = function(mob)
 
     mob:addSimpleGambit(ai.t.MELEE, ai.c.NOT_STATUS, xi.effect.HASTE, ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.HASTE)
     mob:addSimpleGambit(ai.t.CASTER, ai.c.NOT_STATUS, xi.effect.REFRESH, ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.REFRESH)
+	mob:addSimpleGambit(ai.t.TANK, ai.c.NOT_STATUS, xi.effect.REFRESH, ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.REFRESH)
     mob:addSimpleGambit(ai.t.RANGED, ai.c.NOT_STATUS, xi.effect.FLURRY, ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.FLURRY)
     mob:addSimpleGambit(ai.t.TOP_ENMITY, ai.c.NOT_STATUS, xi.effect.PHALANX, ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.PHALANX)
 
@@ -34,17 +35,16 @@ spell_object.onMobSpawn = function(mob)
     mob:addSimpleGambit(ai.t.TARGET, ai.c.NOT_STATUS, xi.effect.EVASION_DOWN, ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.DISTRACT, 60)	
 	
 	mob:setTrustTPSkillSettings(ai.tp.ASAP, ai.s.RANDOM)
+	
 	local power = mob:getMainLvl()
     mob:addMod(xi.mod.MATT, power)
-    mob:addMod(xi.mod.MACC, power)
-	mob:addMod(xi.mod.DEF, power)
-	mob:addMod(xi.mod.MDEF, power)
-	mob:addMod(xi.mod.DOUBLE_ATTACK, 50)
-	mob:addMod(xi.mod.TRIPLE_ATTACK, 20)
-	mob:addMod(xi.mod.ENSPELL_DMG, power)
-    mob:addMod(xi.mod.HASTE_MAGIC, power)
-	mob:addMod(xi.mod.ATT, power)
-	mob:addMod(xi.mod.ACC, power)
+    mob:addMod(xi.mod.MACC, power*4)
+	mob:addMod(xi.mod.DEF, power*2)
+	mob:addMod(xi.mod.MDEF, power*2)
+	mob:addMod(xi.mod.ENSPELL_DMG, power/3)
+    mob:addMod(xi.mod.HASTE_MAGIC, power/3)
+	mob:addMod(xi.mod.ATT, power*2)
+	mob:addMod(xi.mod.ACC, power*2)
 	end
 
 spell_object.onMagicCastingCheck = function(caster, target, spell)

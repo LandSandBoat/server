@@ -72,7 +72,7 @@ entity.onTrade = function(player, npc, trade)
 		doneDeal = true
 	elseif (player:getCharVar("[CXI]MythicWsQuestPart2") == 1 and TrueflightWeapon) then
 		player:PrintToPlayer("You have unlocked \"True Flight\"!", 0xD)
-		player:addLearnedWeaponskill(xi.ws_unlock.TRUE_FLIGHT)
+		player:addLearnedWeaponskill(xi.ws_unlock.TRUEFLIGHT)
 		doneDeal = true
 	elseif (player:getCharVar("[CXI]MythicWsQuestPart2") == 1 and TachiRanaWeapon) then
 		player:PrintToPlayer("You have unlocked \"Tachi: Rana\"!", 0xD)

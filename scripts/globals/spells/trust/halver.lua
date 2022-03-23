@@ -1,5 +1,6 @@
 -----------------------------------
 -- Trust: Halver
+-- Made by Graves
 -----------------------------------
 require("scripts/globals/gambits")
 require("scripts/globals/magic")
