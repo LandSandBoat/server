@@ -430,6 +430,7 @@ void SmallPacket0x00C(map_session_data_t* const PSession, CCharEntity* const PCh
                 case PET_TYPE::AUTOMATON:
                 case PET_TYPE::JUG_PET:
                 case PET_TYPE::WYVERN:
+                case PET_TYPE::LUOPAN:
                     petutils::SpawnPet(PChar, PChar->petZoningInfo.petID, true);
                     break;
 

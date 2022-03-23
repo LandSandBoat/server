@@ -47,6 +47,16 @@ CPetEntity::CPetEntity(PET_TYPE petType)
     PAI = std::make_unique<CAIContainer>(this, std::make_unique<CPathFind>(this), std::make_unique<CPetController>(this), std::make_unique<CTargetFind>(this));
 }
 
+uint32 CPetEntity::getEntityFlags() const
+{
+    return m_flags;
+}
+
+void CPetEntity::setEntityFlags(uint32 EntityFlags)
+{
+    m_flags = EntityFlags;
+}
+
 CPetEntity::~CPetEntity() = default;
 
 PET_TYPE CPetEntity::getPetType()
