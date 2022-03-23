@@ -69,9 +69,27 @@ namespace moduleutils
                 std::string relPath   = path.relative_path().generic_string();
                 std::string pathNoExt = path.relative_path().replace_extension("").generic_string();
 
+<<<<<<< HEAD
                 sol::table table = lua.require_file(pathNoExt, relPath);
                 if (table["enabled"])
                 {
+=======
+                // Execute the script once in "safe mode" to check it for syntax errors
+                // lua.require_file will crash if it's given a bad script
+                auto res = lua.safe_script_file(relPath);
+                if (!res.valid())
+                {
+                    sol::error err = res;
+                    ShowError("Failed to load module: %s", filename);
+                    ShowError(err.what());
+                    continue;
+                }
+
+                // Run for real
+                sol::table table = lua.require_file(pathNoExt, relPath);
+                if (table["enabled"])
+                {
+>>>>>>> 0b0d3a5b8eb5a8996dafc01a9c6ae8856964d490
                     for (auto& override : table.get<std::vector<sol::table>>("overrides"))
                     {
                         std::string name = override["name"];
@@ -104,6 +122,7 @@ namespace moduleutils
                 {
                     table = table[part].get_or<sol::table>(sol::lua_nil);
                     if (table == sol::lua_nil)
+<<<<<<< HEAD
                     {
                         break;
                     }
@@ -111,6 +130,15 @@ namespace moduleutils
                     // Get parent table of the function at the end of the string
                     if (part == lastTable)
                     {
+=======
+                    {
+                        break;
+                    }
+
+                    // Get parent table of the function at the end of the string
+                    if (part == lastTable)
+                    {
+>>>>>>> 0b0d3a5b8eb5a8996dafc01a9c6ae8856964d490
                         ShowScript(fmt::format("Applying override: {}", override.overrideName));
 
                         lua["applyOverride"](table, lastElem, override.func);

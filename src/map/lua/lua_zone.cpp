@@ -163,10 +163,19 @@ void CLuaZone::reloadNavmesh()
 
 std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
 {
+<<<<<<< HEAD
+=======
+    auto& lua = luautils::lua;
+
+>>>>>>> 0b0d3a5b8eb5a8996dafc01a9c6ae8856964d490
     CBaseEntity* PEntity = nullptr;
     if (table.get_or<uint8>("objtype", TYPE_NPC) == TYPE_NPC)
     {
         PEntity = new CNpcEntity();
+<<<<<<< HEAD
+=======
+        PEntity->name = "DefaultName";
+>>>>>>> 0b0d3a5b8eb5a8996dafc01a9c6ae8856964d490
     }
     else
     {
@@ -176,8 +185,11 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
         PEntity = mobutils::InstantiateDynamicMob(groupId, groupZoneId, m_pLuaZone->GetID());
     }
 
+<<<<<<< HEAD
     PEntity->isDynamicEntity = true;
 
+=======
+>>>>>>> 0b0d3a5b8eb5a8996dafc01a9c6ae8856964d490
     // NOTE: Mob allegiance is the default for NPCs
     PEntity->allegiance = static_cast<ALLEGIANCE_TYPE>(table.get_or<uint8>("allegiance", ALLEGIANCE_TYPE::MOB));
 
@@ -196,22 +208,64 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
     PEntity->loc.p.z        = table.get_or<float>("z", 0.01);
     PEntity->loc.p.moving   = 0;
 
+<<<<<<< HEAD
     PEntity->updatemask |= UPDATE_ALL_MOB;
+=======
+    auto name = table.get_or<std::string>("name", "");
+    if (name.empty())
+    {
+        ShowWarning("Trying to spawn dynamic entity without a name! (%s - %s)",
+            PEntity->name.c_str(), (const char*)m_pLuaZone->GetName());
+
+        // If the name hasn't been provided, use "DefaultName" for NPCs, and whatever comes from the mob_pool for Mobs
+        name = PEntity->name;
+    }
+
+    auto lookupName = "DE_" + name;
+
+    PEntity->name = lookupName;
+    PEntity->packetName = name;
+
+    auto typeKey = (PEntity->objtype == TYPE_NPC) ? "npcs" : "mobs";
+    auto cacheEntry = lua[sol::create_if_nil]["xi"]["zones"][(const char*)m_pLuaZone->GetName()][typeKey][lookupName];
+>>>>>>> 0b0d3a5b8eb5a8996dafc01a9c6ae8856964d490
 
     if (auto* PNpc = dynamic_cast<CNpcEntity*>(PEntity))
     {
         PNpc->namevis       = table.get_or<uint8>("namevis", 0);
         PNpc->status        = STATUS_TYPE::NORMAL;
+<<<<<<< HEAD
         PNpc->m_flags       = table.get_or<uint32>("m_flags", 0);
         PNpc->name_prefix   = table.get_or<uint8>("name_prefix", 32);
         PNpc->widescan      = 0;
         PNpc->m_triggerable = table.get_or("triggerable", false);
         PNpc->SetModelId(table.get_or<uint16>("modelId", 0));
+=======
+        PNpc->m_flags       = 0;
+        PNpc->name_prefix   = 32;
+
+        // TODO: Does this even work?
+        PNpc->widescan      = table.get_or<uint8>("widescan", 1);
+
+        auto onTrade = table["onTrade"].get_or<sol::function>(sol::lua_nil);
+        if (onTrade.valid())
+        {
+            cacheEntry["onTrade"] = onTrade;
+        }
+
+        auto onTrigger = table["onTrigger"].get_or<sol::function>(sol::lua_nil);
+        if (onTrigger.valid())
+        {
+            PNpc->m_triggerable = true;
+            cacheEntry["onTrigger"] = onTrigger;
+        }
+>>>>>>> 0b0d3a5b8eb5a8996dafc01a9c6ae8856964d490
 
         m_pLuaZone->InsertNPC(PNpc);
     }
     else if (auto* PMob = dynamic_cast<CMobEntity*>(PEntity))
     {
+<<<<<<< HEAD
         m_pLuaZone->InsertMOB(PMob);
     }
 
@@ -220,6 +274,32 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
     {
         PEntity->name.insert(0, maybeName.value().c_str());
     }
+=======
+        auto onMobDeath = table["onMobDeath"].get_or<sol::function>(sol::lua_nil);
+        if (onMobDeath.valid())
+        {
+            cacheEntry["onMobDeath"] = onMobDeath;
+        }
+        else
+        {
+            cacheEntry["onMobDeath"] = [](){}; // Empty func
+        }
+
+        m_pLuaZone->InsertMOB(PMob);
+    }
+
+    if (table["look"].get_type() == sol::type::number)
+    {
+        PEntity->SetModelId(table.get<uint16>("look"));
+    }
+    else if (table["look"].get_type() == sol::type::string)
+    {
+        auto look = stringToLook(table.get<std::string>("look"));
+        std::memcpy(&PEntity->look, &look, sizeof(PEntity->look));
+    }
+
+    PEntity->updatemask |= UPDATE_ALL_MOB;
+>>>>>>> 0b0d3a5b8eb5a8996dafc01a9c6ae8856964d490
 
     return CLuaBaseEntity(PEntity);
 }
