@@ -107,12 +107,7 @@ CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type
 
             if (updatemask & UPDATE_HP)
             {
-<<<<<<< HEAD
-                // HPP
-                ref<uint8>(0x1E) = 0x64; // 100
-=======
                 ref<uint8>(0x1E) = 0x64; // HPP: 100
->>>>>>> 0b0d3a5b8eb5a8996dafc01a9c6ae8856964d490
                 ref<uint8>(0x1F) = PEntity->animation;
                 ref<uint8>(0x2A) |= PEntity->animationsub;
 
@@ -124,21 +119,8 @@ CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type
                     ref<uint8>(0x28) |= 0x40;
                 }
 
-<<<<<<< HEAD
-                ref<uint8>(0x29)  = static_cast<uint8>(PEntity->allegiance);
-                ref<uint8>(0x2B)  = PEntity->namevis;
-=======
                 ref<uint8>(0x29) = static_cast<uint8>(PEntity->allegiance);
                 ref<uint8>(0x2B) = PEntity->namevis;
->>>>>>> 0b0d3a5b8eb5a8996dafc01a9c6ae8856964d490
-            }
-
-            // TODO: Unify name logic
-            if (updatemask & UPDATE_NAME)
-            {
-                // depending on size of name, this can be 0x20, 0x22, or 0x24
-                this->setSize(0x48);
-                memcpy(data + (0x34), PEntity->GetName(), std::min<size_t>(PEntity->name.size(), PacketNameLength));
             }
         }
         break;

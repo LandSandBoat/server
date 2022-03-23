@@ -719,8 +719,6 @@ std::vector<std::string> split(const std::string& s, char delim)
     return elems;
 }
 
-<<<<<<< HEAD
-=======
 look_t stringToLook(std::string str)
 {
     // Remove "0x" if found
@@ -753,7 +751,6 @@ look_t stringToLook(std::string str)
     return out;
 }
 
->>>>>>> 0b0d3a5b8eb5a8996dafc01a9c6ae8856964d490
 bool approximatelyEqual(float a, float b)
 {
     constexpr float epsilon = std::numeric_limits<float>::epsilon();

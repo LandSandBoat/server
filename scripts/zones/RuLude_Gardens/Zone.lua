@@ -44,49 +44,6 @@ zone_object.onRegionEnter = function(player, region)
 
     if regionID == 1 then
         if
-<<<<<<< HEAD
-            player:getCurrentMission(ROV) == xi.mission.id.rov.CRASHING_WAVES and
-            player:getLocalVar("CrashingWavesBlocked") ~= 1
-        then
-            local metPrishe = 0
-            local prisheIsSick = 0
-            local prisheIsHealthy = 0
-            local tenzenSword = 0
-
-            -- TODO: Needs research of when this dialog gets enabled. Have added a condition that makes sense to me.
-            if player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DISTANT_BELIEFS) then
-                metPrishe = 1
-            end
-
-            -- TODO: Needs research of when this dialog gets enabled. Have added a condition that makes sense to me.
-            if player:getCurrentMission(COP) == xi.mission.id.cop.DARKNESS_NAMED then
-                prisheIsSick = 1
-            end
-
-            -- TODO: Needs research of when this dialog gets enabled. Have added a condition that makes sense to me.
-            if player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) then
-                prisheIsSick = 1
-                prisheIsHealthy = 1
-            end
-
-            -- TODO: Needs research of when this dialog gets enabled. Have added a condition that makes sense to me.
-            if player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) then
-                tenzenSword = 1
-            end
-
-            if
-                xi.rhapsodies.charactersAvailable(player) and
-                player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.A_VESSEL_WITHOUT_A_CAPTAIN)
-            then
-                player:startEvent(10244, metPrishe, prisheIsSick, prisheIsHealthy, tenzenSword)
-            else
-                player:setLocalVar("CrashingWavesBlocked", 1)
-                player:startEvent(10245)
-            end
-
-        elseif
-=======
->>>>>>> 0b0d3a5b8eb5a8996dafc01a9c6ae8856964d490
             player:getCurrentMission(COP) == xi.mission.id.cop.A_PLACE_TO_RETURN and
             player:getCharVar("PromathiaStatus") == 0
         then
