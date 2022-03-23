@@ -43,9 +43,8 @@ zone_object.onRegionEnter = function(player, region)
     local regionID = region:GetRegionID()
 
     if regionID == 1 then
-
-        -- CRASHING WAVES
         if
+<<<<<<< HEAD
             player:getCurrentMission(ROV) == xi.mission.id.rov.CRASHING_WAVES and
             player:getLocalVar("CrashingWavesBlocked") ~= 1
         then
@@ -86,6 +85,8 @@ zone_object.onRegionEnter = function(player, region)
             end
 
         elseif
+=======
+>>>>>>> 0b0d3a5b8eb5a8996dafc01a9c6ae8856964d490
             player:getCurrentMission(COP) == xi.mission.id.cop.A_PLACE_TO_RETURN and
             player:getCharVar("PromathiaStatus") == 0
         then
@@ -183,17 +184,6 @@ zone_object.onEventFinish = function(player, csid, option)
         player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH)
         player:setCharVar('ApocalypseNigh', 1)
         player:setCharVar("ApocNighWait", 0)
-
-    -- CRASHING WAVES
-    elseif csid == 10244 then
-        player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.CRASHING_WAVES)
-        player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.CALL_TO_SERVE)
-        if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.MYSTIC_RETRIEVER, xi.items.CIPHER_OF_TENZENS_ALTER_EGO_II)
-        else
-            player:addItem(xi.items.CIPHER_OF_TENZENS_ALTER_EGO_II)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.CIPHER_OF_TENZENS_ALTER_EGO_II)
-        end
     end
 end
 

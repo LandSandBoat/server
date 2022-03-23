@@ -241,12 +241,19 @@ public:
 
     virtual void HandleErrorMessage(std::unique_ptr<CBasicPacket>&){};
 
+    bool IsDynamicEntity() const;
+
     uint32          id;           // global identifier unique on the server
     uint16          targid;       // local identifier unique to the zone
     ENTITYTYPE      objtype;      // тип сущности
     STATUS_TYPE     status;       // статус сущности (разные сущности - разные статусы)
     uint16          m_TargID;     // the targid of the object the entity is looking at
+<<<<<<< HEAD
     string_t        name;         // имя сущности
+=======
+    string_t        name;         // Entity name
+    string_t        packetName;   // Used to override name when being sent to the client
+>>>>>>> 0b0d3a5b8eb5a8996dafc01a9c6ae8856964d490
     look_t          look;         // внешний вид всех сущностей
     look_t          mainlook;     // only used if mob use changeSkin() or player /lockstyle
     location_t      loc;          // местоположение сущности
@@ -258,7 +265,10 @@ public:
     ALLEGIANCE_TYPE allegiance; // what types of targets the entity can fight
     uint8           updatemask; // what to update next server tick to players nearby
 
+<<<<<<< HEAD
     bool isDynamicEntity = false; // For use with insertDynamicEntity()
+=======
+>>>>>>> 0b0d3a5b8eb5a8996dafc01a9c6ae8856964d490
 
     std::unique_ptr<CAIContainer> PAI;          // AI container
     CBattlefield*                 PBattlefield; // pointer to battlefield (if in one)

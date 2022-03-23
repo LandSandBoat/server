@@ -23,6 +23,7 @@
 #include "../common/md52.h"
 #include "../common/logging.h"
 
+#include <charconv>
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
@@ -718,6 +719,41 @@ std::vector<std::string> split(const std::string& s, char delim)
     return elems;
 }
 
+<<<<<<< HEAD
+=======
+look_t stringToLook(std::string str)
+{
+    // Remove "0x" if found
+    if (str[0] == '0' && str[1] == 'x')
+    {
+        str = str.substr(2);
+    }
+
+    // A 16-bit number is represented by *4* string characters
+    // Iterate in groups of 4
+    std::vector<uint16> hex(str.size() / 4, 0);
+    uint16 value;
+    for (std::size_t i = 0; i < str.size() / 4; i++)
+    {
+        auto begin = str.data() + (i * 4);
+        auto end = str.data() + (i * 4) + 4;
+        auto base = 16; // Hex
+        std::from_chars(begin, end, value, base);
+        hex[i] = value;
+    }
+
+    for (auto& entry : hex)
+    {
+        // Swap endian-ness
+        entry = (entry >> 8) | (entry << 8);
+    }
+
+    look_t out;
+    memcpy(&out, hex.data(), sizeof(out));
+    return out;
+}
+
+>>>>>>> 0b0d3a5b8eb5a8996dafc01a9c6ae8856964d490
 bool approximatelyEqual(float a, float b)
 {
     constexpr float epsilon = std::numeric_limits<float>::epsilon();
