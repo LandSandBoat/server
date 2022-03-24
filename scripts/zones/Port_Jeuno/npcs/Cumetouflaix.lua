@@ -49,14 +49,14 @@ local ancientBeastcoin = 1875
 		player:addItem(15965) -- Ethereal Earring
 		player:PrintToPlayer("Cumetouflaix: Great work adventurer, I reward thee with \"Ethereal Earring\"!", 0xD)
 
--- Add Trust: Maximilian as reward
-	elseif (hasCompletedZM and npcUtil.tradeHasExactly(trade, {{ancientBeastcoin, 201}})) then
+-- Add Trust: Ark EV as reward
+	elseif (hasCompletedZM and hasCompletedCoP and hasCompletedTOAU and npcUtil.tradeHasExactly(trade, {{ancientBeastcoin, 200}})) then
 	    player:tradeComplete()
-		player:addItem(10191) -- cipher: Ark Ev
+		player:addItem(10191) -- cipher: Ark EV
 		player:PrintToPlayer("Cumetouflaix: Great work adventurer, I reward thee with \"Cipher: Ark EV\"!", 0xD)
 
--- Add ArkEV as reward
-	elseif (hasCompletedZM and hasCompletedCoP and hasCompletedTOAU and npcUtil.tradeHasExactly(trade, {{ancientBeastcoin, 200}})) then
+-- Add Trust: Maximilian as reward
+	elseif (hasCompletedZM and npcUtil.tradeHasExactly(trade, {{ancientBeastcoin, 201}})) then
 	    player:tradeComplete()
 		player:addItem(10164) -- cipher: Maximilian
 		player:PrintToPlayer("Cumetouflaix: Great work adventurer, I reward thee with \"Cipher: Maximilian\"!", 0xD)
