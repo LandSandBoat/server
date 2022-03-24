@@ -53,13 +53,13 @@ local ancientBeastcoin = 1875
 	elseif (hasCompletedZM and npcUtil.tradeHasExactly(trade, {{ancientBeastcoin, 201}})) then
 	    player:tradeComplete()
 		player:addItem(10191) -- cipher: Ark Ev
-		player:PrintToPlayer("Cumetouflaix: Great work adventurer, I reward thee with \"Cipher: Maximilian\"!", 0xD)
+		player:PrintToPlayer("Cumetouflaix: Great work adventurer, I reward thee with \"Cipher: Ark EV\"!", 0xD)
 
 -- Add ArkEV as reward
 	elseif (hasCompletedZM and hasCompletedCoP and hasCompletedTOAU and npcUtil.tradeHasExactly(trade, {{ancientBeastcoin, 200}})) then
 	    player:tradeComplete()
 		player:addItem(10164) -- cipher: Maximilian
-		player:PrintToPlayer("Cumetouflaix: Great work adventurer, I reward thee with \"Cipher: ArkEV\"!", 0xD)
+		player:PrintToPlayer("Cumetouflaix: Great work adventurer, I reward thee with \"Cipher: Maximilian\"!", 0xD)
 
 -- Start tier 2 rewards 250 - 254 coins --
     elseif (hasCompletedZM and npcUtil.tradeHasExactly(trade, {{ancientBeastcoin, 250}})) then
