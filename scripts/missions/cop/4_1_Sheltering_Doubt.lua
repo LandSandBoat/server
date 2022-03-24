@@ -32,6 +32,24 @@ mission.sections =
 
         [xi.zone.TAVNAZIAN_SAFEHOLD] =
         {
+            ['Arquil'] =
+            {
+                onTrigger = function(player, npc)
+                    if mission:getVar(player, 'Status') == 1 then
+                        return mission:event(292):replaceDefault()
+                    end
+                end,
+            },
+
+            ['Chemioue'] =
+            {
+                onTrigger = function(player, npc)
+                    if mission:getVar(player, 'Status') == 1 then
+                        return mission:event(282):replaceDefault()
+                    end
+                end,
+            },
+
             ['Despachiaire'] =
             {
                 onTrigger = function(player, npc)
@@ -39,6 +57,8 @@ mission.sections =
 
                     if missionStatus == 1 then
                         return mission:progressEvent(108)
+                    else
+                        return mission:event(315):replaceDefault()
                     end
                 end,
             },
@@ -46,8 +66,21 @@ mission.sections =
             ['Justinius'] =
             {
                 onTrigger = function(player, npc)
-                    if mission:getVar(player, 'Status') == 2 then
+                    local missionStatus = mission:getVar(player, 'Status')
+
+                    if missionStatus == 1 then
+                        return mission:event(129):replaceDefault()
+                    elseif mission:getVar(player, 'Status') == 2 then
                         return mission:event(109):importantEvent()
+                    end
+                end,
+            },
+
+            ['Parelbriaux'] =
+            {
+                onTrigger = function(player, npc)
+                    if mission:getVar(player, 'Status') == 1 then
+                        return mission:event(296):replaceDefault()
                     end
                 end,
             },
