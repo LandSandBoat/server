@@ -11,8 +11,7 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
 local hasCompletedCoP = player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DAWN)
 local hasCompletedZM = player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_CELESTIAL_NEXUS)
---local hasCompletedTOAU = player:hasCompletedMission(xi.mission.log_id.TOAU, xi.mission.id.toau.ETERNAL_MERCENARY)
-local hasCompletedTOAU = player:hasCompletedMission(xi.mission.log_id.TOAU, xi.mission.id.toau.PREVALENCE_OF_PIRATES)
+local hasCompletedTOAU = player:hasCompletedMission(xi.mission.log_id.TOAU, xi.mission.id.toau.THE_EMPRESS_CROWNED)
 local ancientBeastcoin = 1875
 
     if player:getFreeSlotsCount() == 0 then
@@ -49,6 +48,18 @@ local ancientBeastcoin = 1875
 	    player:tradeComplete()
 		player:addItem(15965) -- Ethereal Earring
 		player:PrintToPlayer("Cumetouflaix: Great work adventurer, I reward thee with \"Ethereal Earring\"!", 0xD)
+
+-- Add Trust: Maximilian as reward
+	elseif (hasCompletedZM and npcUtil.tradeHasExactly(trade, {{ancientBeastcoin, 201}})) then
+	    player:tradeComplete()
+		player:addItem(10191) -- cipher: Ark Ev
+		player:PrintToPlayer("Cumetouflaix: Great work adventurer, I reward thee with \"Cipher: Maximilian\"!", 0xD)
+
+-- Add ArkEV as reward
+	elseif (hasCompletedZM and hasCompletedCoP and hasCompletedTOAU and npcUtil.tradeHasExactly(trade, {{ancientBeastcoin, 200}})) then
+	    player:tradeComplete()
+		player:addItem(10164) -- cipher: Maximilian
+		player:PrintToPlayer("Cumetouflaix: Great work adventurer, I reward thee with \"Cipher: ArkEV\"!", 0xD)
 
 -- Start tier 2 rewards 250 - 254 coins --
     elseif (hasCompletedZM and npcUtil.tradeHasExactly(trade, {{ancientBeastcoin, 250}})) then
