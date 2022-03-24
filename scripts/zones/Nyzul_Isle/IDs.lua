@@ -103,13 +103,13 @@ zones[xi.zone.NYZUL_ISLE] =
     {
         [xi.assaultUtil.assaultArea.NYZUL_ISLE] =
         {
-            ARCHAIC_RAMPART1    = 17092629,
-            ARCHAIC_RAMPART2    = 17092630,
-            DAHAK               = 17092823,
-            BAT_EYE             = 17092824,
-            TAISAIJIN           = 17092913,
-            ADAMANTOISE         = 17092999,
-            CERBERUS            = 17093004,
+            ARCHAIC_RAMPART1 = 17092629,
+            ARCHAIC_RAMPART2 = 17092630,
+            DAHAK            = 17092823,
+            BAT_EYE          = 17092824,
+            TAISAIJIN        = 17092913,
+            ADAMANTOISE      = 17092999,
+            CERBERUS         = 17093004,
         },
     },
 
@@ -119,14 +119,17 @@ zones[xi.zone.NYZUL_ISLE] =
         {
             17092611, 17092612, 17092614
         },
+
         TREASURE_CASKET =
         {
             17092609, 17092610, 17092613, 17092620
         },
+
         RUNE_OF_TRANSFER =
         {
             17093330, 17093331
         },
+
         RUNIC_LAMP_1        = 17093332,
         RUNIC_LAMP_2        = 17093333,
         RUNIC_LAMP_3        = 17093334,
