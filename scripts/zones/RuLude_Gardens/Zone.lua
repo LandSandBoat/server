@@ -25,10 +25,10 @@ local wsRequirements =
     [ 8] = { "Stardiver",     1519,      10,      1474,    10 }, -- fresh orc liver, infinity core
     [ 9] = { "Blade_Shun",    1469,      10,      1474,    10 }, -- wootz ore, infinity core
     [10] = { "Tachi Shoha",   1470,      10,      1474,    10 }, -- sparkling stone, infinity core
-    [11] = { "Realmrazer",    1517,      10,      1518,    10 }, -- giant frozen head, colossal skull, infinity core
-    [12] = { "Shattersoul",   1521,      10,      1519,    10 }, -- slime juice, fresh orc liver, infinity core
-    [13] = { "Apex Arrow",    1516,      10,      1464,    10 }, -- griffon hide, lancewood log, infinity core
-    [14] = { "Last Stand",    1520,      10,      1466,    10 }, -- goblin grease, relic iron, infinity core
+    [11] = { "Realmrazer",    1517,      10,      1518,    10 }, -- giant frozen head, colossal skull
+    [12] = { "Shattersoul",   1521,      10,      1519,    10 }, -- slime juice, fresh orc liver
+    [13] = { "Apex Arrow",    1516,      10,      1464,    10 }, -- griffon hide, lancewood log
+    [14] = { "Last Stand",    1520,      10,      1466,    10 }, -- goblin grease, relic iron
 }
 
 zone_object.onInitialize = function(zone)

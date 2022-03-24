@@ -93,7 +93,8 @@ zone_object.onInitialize = function(zone)
    	        local randomReward = 0
    	        local reward = 0
    	        local rewardQty = 0
-	        
+	        local huntCounter = 0
+			
             printf("Weekly Hunt: %s Player Title: %s ", weeklyHunt, playerTitle)
 	        
 	        if (weeklyHunt == player:getCharVar("Weekly_Hunt_Completed")) then	
@@ -108,6 +109,12 @@ zone_object.onInitialize = function(zone)
              	player:setCharVar("Weekly_Hunt_Completed", weeklyHunt)
             	player:PrintToPlayer(string.format("Hunter: Congratulations! You've completed this week's hunt. Here's your reward!"), 0xD)
             	npcUtil.giveItem(player, { { reward, rewardQty } })
+			    if not player:getCharVar("Weekly_Hunt_Counter") then
+                    player:setCharVar("Weekly_Hunt_Counter", 1)
+				else
+				    local huntCounter = player:getCharVar("Weekly_Hunt_Counter") + 1
+					player:setCharVar("Weekly_Hunt_Counter", huntCounter)
+				end
 	        elseif weeklyHunt == 453 then -- NIDHOGG_SLAYER
 	        	player:PrintToPlayer(string.format("Hunter: This week's hunt is: Nidhogg!"), 0xD)
                 player:PrintToPlayer(string.format("Hunter: Title required: Nidhogg Slayer"), 0xD)
