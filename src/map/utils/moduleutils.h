@@ -24,7 +24,27 @@
 
 namespace moduleutils
 {
+    // The program has two "states":
+    // - Load-time: As all data is being loaded and init'd
+    // - Run-time: Once the main server tick starts
+    //
+    // There are multiple points where we'd like to override
+    // the functionality of our Lua scripts, but it's hard
+    // to determine when is the correct time to apply everything.
+    //
+    // So instead, we maintain a list of overrides specified by
+    // active modules, and try multiple times during load-time
+    // to apply them - looking for whether or not the cache
+    // entry they want to modify exists.
+    //
+    // When run-time starts, we will be left with a list of
+    // overrides that were either successfully or unsuccessfully
+    // applied, and we can warn the user if there have been any
+    // problems.
+
     void LoadLuaModules();
+    void TryApplyModules();
+    void ReportModuleUsage();
 }; // namespace moduleutils
 
 #endif // _MODULEUTILS_H

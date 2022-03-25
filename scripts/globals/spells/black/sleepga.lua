@@ -30,7 +30,7 @@ spell_object.onSpellCast = function(caster, target, spell)
         -- Todo: get rid of this whole block by handling it in the mob script
         -- this requires a multi target enmity without specifying a target (have to get hate list from mob)
         -- OR by altering onSpellPrecast to have a target param..
-        -- onMonsterMagicPrepare is not a realistic option.
+        -- OnMobMagicPrepare is not a realistic option.
         -- You'd have to script the use of every individual spell in Amnaf's list..
     end
 

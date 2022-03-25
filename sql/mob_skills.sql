@@ -3073,11 +3073,11 @@ INSERT INTO `mob_skills` VALUES (3252,262,'bisection',0,7.0,2000,1500,4,0,0,0,0,
 INSERT INTO `mob_skills` VALUES (3253,263,'leaden_salute',0,15.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (3254,264,'akimbo_shot',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (3255,265,'grisly_horizon',0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (3256,361,'hane_fubuki',1,18.0,2000,1000,4,0,0,0,0,0,0); -- Gessho
-INSERT INTO `mob_skills` VALUES (3257,1299,'shibaraku',0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (3258,363,'shiko_no_mitate',0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (3259,364,'happobarai',0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (3260,354,'rinpyotosha',0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (3256,361,'hane_fubuki',1,18.0,2000,1000,4,0,0,0,1,0,0); -- Gessho
+INSERT INTO `mob_skills` VALUES (3257,1299,'shibaraku',1,7.0,2000,1500,4,0,0,1,14,9,0);
+INSERT INTO `mob_skills` VALUES (3258,363,'shiko_no_mitate',0,7.0,2000,1500,1,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (3259,364,'happobarai',1,7.0,2000,1500,4,0,0,0,5,8,0);
+INSERT INTO `mob_skills` VALUES (3260,354,'rinpyotosha',1,7.0,2000,1500,1,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (3261,335,'bomb_toss',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (3262,334,'goblin_rush',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (3263,1625,'bear_killer',4,7.0,2000,1500,4,0,0,0,0,0,0); -- TODO: Skillchain properties

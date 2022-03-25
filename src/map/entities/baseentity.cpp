@@ -177,3 +177,8 @@ uint16 CBaseEntity::GetModelId() const
 {
     return look.modelid;
 }
+
+bool CBaseEntity::IsDynamicEntity() const
+{
+    return this->targid >= 0x800;
+}

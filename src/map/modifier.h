@@ -610,6 +610,7 @@ enum class Mod
     INSPIRATION_FAST_CAST       = 1021, // Inspiration Fast Cast, additive with Fast Cast with a combined cap beyond 80%
     PARRY_SPIKES                = 1022, // Battuta parry spikes rate
     PARRY_SPIKES_DMG            = 1023, // Battuta parry spikes damage
+    SPECIAL_ATTACK_EVASION      = 1024, // Foil "Special Attack" evasion
 
     // Stores the amount of elemental affinity (elemental staves mostly) - damage, acc, and perpetuation is all handled separately
     FIRE_AFFINITY_DMG    = 347, // They're stored separately due to Magian stuff - they can grant different levels of
@@ -880,7 +881,7 @@ enum class Mod
     // 888
     // 936
     //
-    // SPARE = 1024, and onward
+    // SPARE = 1025, and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

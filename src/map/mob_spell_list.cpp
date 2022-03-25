@@ -55,17 +55,17 @@ namespace mobSpellList
                             WHERE spell_list_id < %u \
                             ORDER BY min_level ASC;";
 
-        int32 ret = Sql_Query(SqlHandle, Query, MAX_MOBSPELLLIST_ID);
+        int32 ret = sql->Query(Query, MAX_MOBSPELLLIST_ID);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (ret != SQL_ERROR && sql->NumRows() != 0)
         {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql->NextRow() == SQL_SUCCESS)
             {
-                SpellID spellId = (SpellID)Sql_GetIntData(SqlHandle, 1);
-                uint16  minLvl  = (uint16)Sql_GetIntData(SqlHandle, 2);
-                uint16  maxLvl  = (uint16)Sql_GetIntData(SqlHandle, 3);
+                SpellID spellId = (SpellID)sql->GetIntData(1);
+                uint16  minLvl  = (uint16)sql->GetIntData(2);
+                uint16  maxLvl  = (uint16)sql->GetIntData(3);
 
-                uint16 pos = Sql_GetIntData(SqlHandle, 0);
+                uint16 pos = sql->GetIntData(0);
                 if (!PMobSpellList[pos])
                 {
                     PMobSpellList[pos] = new CMobSpellList();

@@ -119,6 +119,10 @@ function InteractionGlobal.onZoneIn(player, prevZone, fallbackFn)
     return InteractionGlobal.lookup:onZoneIn(player, prevZone, fallbackFn)
 end
 
+function InteractionGlobal.onZoneOut(player, fallbackFn)
+    return InteractionGlobal.lookup:onZoneOut(player, fallbackFn)
+end
+
 function InteractionGlobal.onRegionEnter(player, region, fallbackFn)
     return InteractionGlobal.lookup:onRegionEnter(player, region, fallbackFn)
 end

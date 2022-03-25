@@ -47,11 +47,6 @@ zone_object.onZoneIn = function(player, prevZone)
 end
 
 zone_object.onRegionEnter = function(player, region)
-    local regionID =region:GetRegionID()
-
-    if (regionID == 1 and player:getCurrentMission(COP) == xi.mission.id.cop.THE_CALL_OF_THE_WYRMKING and player:getCharVar("PromathiaStatus") == 0) then
-        player:startEvent(305)
-    end
 end
 
 zone_object.onRegionLeave = function(player, region)
@@ -69,8 +64,6 @@ zone_object.onEventFinish = function(player, csid, option)
         player:messageSpecial(ID.text.ITEM_OBTAINED, 536)
     elseif (csid == 71) then
         player:setPos(0, 0, 0, 0, 224)
-    elseif (csid == 305) then
-        player:setCharVar("PromathiaStatus", 1)
     elseif (csid == 306) then
         player:setCharVar("COP_optional_CS_chasalvigne", 0)
         player:setCharVar("COP_optional_CS_Anoki", 0)

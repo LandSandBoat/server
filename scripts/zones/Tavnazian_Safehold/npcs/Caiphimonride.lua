@@ -31,7 +31,7 @@ entity.onTrigger = function(player, npc)
         }
     end
 
-    player:showText(npc, ID.text.CAIPHIMONRIDE_SHOP_DIALOG)
+    player:showText(npc, ID.text.CAIPHIMONRIDE_SHOP_DIALOG) -- 10908 with only 3 items available, may change
     xi.shop.general(player, stock)
 end
 

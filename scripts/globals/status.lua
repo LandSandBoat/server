@@ -1234,6 +1234,7 @@ xi.mod =
     INSPIRATION_FAST_CAST       = 1021, -- Inspiration's fast cast, additive with normal fast cast for a cap beyond 80%
     PARRY_SPIKES                = 1022, -- Battuta parry spikes rate
     PARRY_SPIKES_DMG            = 1023, -- Battuta parry spikes damage
+    SPECIAL_ATTACK_EVASION      = 1024, -- Foil "Special Attack" evasion
 
     FIRE_AFFINITY_DMG               = 347,
     ICE_AFFINITY_DMG                = 348,

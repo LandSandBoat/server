@@ -380,7 +380,7 @@ INSERT INTO `abilities` VALUES (371,'valiance',22,50,1,300,113,668,0,2,2000,0,15
 INSERT INTO `abilities` VALUES (373,'liement',22,85,1,180,117,670,373,3,2000,0,15,0.0,0,450,900,0,0,'SOA'); -- check animation
 INSERT INTO `abilities` VALUES (374,'one_for_all',22,95,1,300,118,100,0,301,2000,0,6,0.0,1,160,320,0,0,'SOA');
 -- INSERT INTO `abilities` VALUES (375,'rayke',22,75,4,300,119,0,0,4,2000,0,15,4.0,0,640,1260,0,0,'SOA'); -- check animation
-INSERT INTO `abilities` VALUES (376,'battuta',22,75,1,300,120,100,0,4,2000,0,15,0.0,0,450,900,0,0,'SOA');
+INSERT INTO `abilities` VALUES (376,'battuta',22,75,1,300,120,100,0,4,2000,0,15,0.0,0,450,900,3456,1,'SOA');
 INSERT INTO `abilities` VALUES (377,'widened_compass',21,96,1,3600,130,100,0,276,2000,0,6,0.0,0,1,300,0,0,'SOA');
 INSERT INTO `abilities` VALUES (378,'odyllic_subterfuge',22,96,4,3600,131,0,0,277,2000,0,6,8.0,6,1,318,0,0,'SOA');
 INSERT INTO `abilities` VALUES (379,'ward',22,1,1,0,142,0,0,0,2000,0,6,0.0,0,0,0,0,0,'SOA');

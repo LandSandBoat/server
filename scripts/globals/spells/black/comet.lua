@@ -1,7 +1,7 @@
 -----------------------------------
 -- Spell: Comet
 -----------------------------------
-require("scripts/globals/magic_utils/spell_damage")
+require("scripts/globals/spells/spell_damage")
 -----------------------------------
 local spell_object = {}
 
@@ -11,7 +11,7 @@ end
 
 spell_object.onSpellCast = function(caster, target, spell)
     -- TODO: Code succesive spell use enhancement. Method still undecided.
-    return xi.magic_utils.spell_damage.useDamageSpell(caster, target, spell)
+    return xi.spells.spell_damage.useDamageSpell(caster, target, spell)
 end
 
 return spell_object
