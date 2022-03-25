@@ -11,8 +11,9 @@ require("scripts/globals/utils/nyzul")
 require("scripts/globals/utils")
 require("scripts/zones/Nyzul_Isle/instances/nyzul_isle_investigation")
 -----------------------------------
+local entity = {}
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local instance = npc:getInstance()
 
     if npc:AnimationSub() == 1 then
@@ -28,26 +29,28 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     -- Setup 1st person to activate rune to go up to control the porting to next floor
     local instance = player:getInstance()
 
     if csid == 201 and option ~= 1073741824 and instance:getLocalVar("runeHandler") == 0 then
         local chars = instance:getChars()
         instance:setLocalVar("runeHandler", player:getID())
+
         for _, entity in pairs(chars) do
             if entity:isInEvent() and entity:getID() ~= player:getID() then
                 entity:release()
             end
+
             entity:setLocalVar("Register", 0)
         end
     end
 end
 
-function onEventFinish(player, csid, option, npc)
+entity.onEventFinish = function(player, csid, option, npc)
     local instance = npc:getInstance()
-    local chars = instance:getChars()
-    local mobs = instance:getMobs()
+    local chars    = instance:getChars()
+    local mobs     = instance:getMobs()
 
     if csid == 1 then
         for _, players in ipairs(chars) do
@@ -58,13 +61,14 @@ function onEventFinish(player, csid, option, npc)
         if option == 1 and npc:getLocalVar("runCompleted") == 0 then
             npc:setLocalVar("runCompleted", 1)
             local currentFloor = utils.clamp(get_relative_floor(instance), 1, 100)
-            local startFloor = instance:getLocalVar("Nyzul_Isle_StartingFloor")
-            local diskHolder = instance:getLocalVar("diskHolder")
+            local startFloor   = instance:getLocalVar("Nyzul_Isle_StartingFloor")
+            local diskHolder   = instance:getLocalVar("diskHolder")
 
             for _, players in pairs(chars) do
                 local floorProgress = players:getVar("NyzulFloorProgress")
+
                 if xi.settings.RUNIC_DISK_SAVE == 0 then
-                    -- only the person who chose floor gets disk recoreded
+                    -- Only the person who chose floor gets disk recoreded
                     if players:getID() == diskHolder then
                         if (floorProgress + 1) >= startFloor and floorProgress < currentFloor then
                             players:setVar("NyzulFloorProgress", currentFloor)
@@ -72,7 +76,7 @@ function onEventFinish(player, csid, option, npc)
                         end
                     end
                 else
-                    -- everyone gets to save disk info
+                    -- Everyone gets to save disk info
                     if players:hasKeyItem(xi.ki.RUNIC_DISC) then
                         if (floorProgress + 1) >= startFloor and floorProgress < currentFloor then
                             players:setVar("NyzulFloorProgress", currentFloor)
@@ -102,6 +106,7 @@ function onEventFinish(player, csid, option, npc)
                 players:startCutscene(1)
             end
         end
+
         if option >= 2 then
             local currentFloor = instance:getLocalVar("Nyzul_Current_Floor")
 
@@ -110,18 +115,22 @@ function onEventFinish(player, csid, option, npc)
             else
                 instance:setLocalVar("Nyzul_Current_Floor", currentFloor + 1)
             end
+
             for _, enemy in ipairs(mobs) do
                 DespawnMob(enemy:getID(), instance)
             end
+
             if instance:getStage() == xi.nyzul.objective.ACTIVATE_ALL_LAMPS then
                 for i = ID.npc.RUNIC_LAMP_1, ID.npc.RUNIC_LAMP_5 do
                     GetNPCByID(i, instance):setStatus(xi.status.DISAPPEAR)
                     GetNPCByID(i, instance):AnimationSub(0)
                 end
             end
+
             for _, entity in pairs(chars) do
                 entity:timer(1500, function(player) entity:startCutscene(95) end)
             end
+
             -- left/right Menu
             if option > 2 and math.random(100) >= 50 then
                 instance:setLocalVar("randomPathos", math.random(18, 29))
@@ -132,3 +141,5 @@ function onEventFinish(player, csid, option, npc)
         end
     end
 end
+
+return entity

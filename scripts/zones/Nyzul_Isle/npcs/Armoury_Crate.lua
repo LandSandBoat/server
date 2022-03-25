@@ -7,8 +7,9 @@ local ID = require("scripts/zones/Nyzul_Isle/IDs")
 require("scripts/globals/utils")
 require("scripts/globals/utils/nyzul")
 -----------------------------------
+local entity = {}
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if utils.tableContains(ID.npc.TREASURE_COFFER, npc:getID()) then
         xi.nyzul.handleAppraisalItem(player, npc)
     else
@@ -16,6 +17,8 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventFinish(player, csid, option, npc)
+entity.onEventFinish = function(player, csid, option, npc)
     xi.nyzul.tempBoxFinish(player, csid, option, npc)
 end
+
+return entity

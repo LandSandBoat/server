@@ -7,6 +7,7 @@ require("scripts/globals/utils/nyzul")
 require("scripts/globals/status")
 require("scripts/globals/additional_effects")
 -----------------------------------
+local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
@@ -26,3 +27,5 @@ entity.onMobDeath = function(mob, player, isKiller)
         xi.nyzul.eliminateAllKill(mob)
     end
 end
+
+return entity

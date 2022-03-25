@@ -7,6 +7,7 @@ mixins = { require("scripts/mixins/nyzul_boss_drops") }
 require("scripts/globals/utils/nyzul")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
 entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.DOUBLE_ATTACK, 20)
@@ -40,3 +41,5 @@ entity.onMobDeath = function(mob, player, isKiller)
         xi.nyzul.handleRunicKey(mob)
     end
 end
+
+return entity

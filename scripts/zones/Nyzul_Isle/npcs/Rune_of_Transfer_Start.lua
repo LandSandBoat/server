@@ -11,12 +11,13 @@ require("scripts/globals/settings")
 require("scripts/globals/utils/nyzul")
 require("scripts/zones/Nyzul_Isle/instances/nyzul_isle_investigation")
 -----------------------------------
+local entity = {}
 
-function onTrigger(player, npc)
-    local instance = player:getInstance()
-    local tokens = player:getCurrency("nyzul_isle_assault_point")
-    local prefered = player:getVar("[Nyzul]preferredItems")
-    local floorGroup = math.floor(player:getVar("NyzulFloorProgress")/5)
+entity.onTrigger = function(player, npc)
+    local instance      = player:getInstance()
+    local tokens        = player:getCurrency("nyzul_isle_assault_point")
+    local prefered      = player:getVar("[Nyzul]preferredItems")
+    local floorGroup    = math.floor(player:getVar("NyzulFloorProgress")/5)
     local floorProgress = 0xFFFFFFFC - bit.bxor(bit.lshift(2, floorGroup + 1) - 1, 3)
 
     if not player:hasKeyItem(xi.ki.RUNIC_DISC) then
@@ -24,6 +25,7 @@ function onTrigger(player, npc)
         npcUtil.giveKeyItem(player, xi.ki.RUNIC_DISC)
     elseif instance:getLocalVar("runeHandler") ~= 0 then
         player:messageSpecial(ID.text.IN_OPERATION)
+
         return
     else
         instance:setLocalVar("runeHandler", player:getID())
@@ -31,12 +33,13 @@ function onTrigger(player, npc)
 	end
 end
 
-function onEventFinish(player, csid, option, npc)
+entity.onEventFinish = function(player, csid, option, npc)
     local instance = npc:getInstance()
-    local chars = instance:getChars()
+    local chars    = instance:getChars()
 
     if csid == 94 and option > 0 and option < 21 and instance:getLocalVar("runeHandler") == player:getID() then
         local floorCost = xi.nyzul.floorCost[option]
+
         if player:getCurrency("nyzul_isle_assault_point") >= floorCost.cost then
             player:delCurrency("nyzul_isle_assault_point", floorCost.cost)
             instance:setLocalVar("Nyzul_Isle_StartingFloor", floorCost.level)
@@ -44,11 +47,14 @@ function onEventFinish(player, csid, option, npc)
             instance:setLocalVar("diskHolder", player:getID())
 
             local playerCount = 0
+
             for _, players in pairs(chars) do
                 playerCount = playerCount + 1
+
                 if players:isInEvent() and players:getID() ~= player:getID() then
                     players:release()
                 end
+
                 players:timer(1500, function(player) players:startEvent(95) end)
             end
 
@@ -61,3 +67,5 @@ function onEventFinish(player, csid, option, npc)
         instance:setLocalVar("runeHandler", 0)
     end
 end
+
+return entity

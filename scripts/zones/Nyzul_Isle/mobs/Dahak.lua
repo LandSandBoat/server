@@ -4,6 +4,7 @@
 -----------------------------------
 require("scripts/globals/utils/nyzul")
 -----------------------------------
+local entity = {}
 
 entity.onMobDeath = function(mob, player, isKiller)
     if firstCall then
@@ -11,3 +12,5 @@ entity.onMobDeath = function(mob, player, isKiller)
         xi.nyzul.eliminateAllKill(mob)
     end
 end
+
+return entity
