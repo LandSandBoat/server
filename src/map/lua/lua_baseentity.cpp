@@ -11968,7 +11968,8 @@ auto CLuaBaseEntity::getAllRuneEffects() -> sol::table
 
     auto table = luautils::lua.create_table();
 
-    for(const auto& runeEffect: runeEffectList) {
+    for(const auto& runeEffect: runeEffectList)
+    {
         table.add(runeEffect);
     }
     return table;
