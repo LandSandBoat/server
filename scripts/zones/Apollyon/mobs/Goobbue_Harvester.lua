@@ -2,7 +2,7 @@
 -- Area: Apollyon NE, Floor 1
 --  Mob: Goobbue Harvester
 -----------------------------------
-require("scripts/zones/Apollyon/helpers/apollyon_ne")
+require("scripts/zones/Apollyon/bcnms/ne_apollyon_helper")
 require("scripts/globals/pathfind")
 -----------------------------------
 local entity = {}
