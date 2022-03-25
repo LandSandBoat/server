@@ -34,14 +34,6 @@ zone_object.onZoneIn = function(player, prevZone)
 end
 
 zone_object.onRegionEnter = function(player, region)
-    switch (region:GetRegionID()): caseof
-    {
-        [2] = function (x)
-            if player:getCurrentMission(COP) == xi.mission.id.cop.SLANDEROUS_UTTERINGS and player:getCharVar("PromathiaStatus") == 0 then
-                player:startEvent(112)
-            end
-        end,
-    }
 end
 
 zone_object.onRegionLeave = function(player, region)
@@ -51,9 +43,7 @@ zone_object.onEventUpdate = function(player, csid, option)
 end
 
 zone_object.onEventFinish = function(player, csid, option)
-    if csid == 112 then
-        player:setCharVar("PromathiaStatus", 1)
-    elseif csid == 114 then
+    if csid == 114 then
         player:setCharVar("PromathiaStatus", 2)
     end
 end
