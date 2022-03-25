@@ -1704,7 +1704,7 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
     // No hit, but unlimited shot is up, so don't consume ammo
     else if (!hitOccured && this->StatusEffectContainer->HasStatusEffect(EFFECT_UNLIMITED_SHOT))
     {
-        ammoConsumed = 0;  
+        ammoConsumed = 0;
     }
 
     if (actionTarget.speceffect == SPECEFFECT::HIT && actionTarget.param > 0)
@@ -1733,8 +1733,38 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
     battleutils::ClaimMob(PTarget, this);
     battleutils::RemoveAmmo(this, ammoConsumed);
 
-    // only remove detectables
-    StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DETECTABLE);
+    // Handle Camouflage effects
+    if (this->StatusEffectContainer->HasStatusEffect(EFFECT_CAMOUFLAGE, 0))
+    {
+        int16 retainChance = 40; // Estimate base ~30% chance to keep Camouflage on a ranged attack
+        uint8 rotAllowance = 25; // Allow for some slight variance in direction faced to be "behind" the mob
+
+        retainChance += (1.6 * distance(this->loc.p, PTarget->loc.p)); // Further distance from target = less chance of detection
+
+        if (behind(this->loc.p, PTarget->loc.p, rotAllowance))
+        {
+            // We're behind the mob, so it's guaranteed to stay up.
+            retainChance = 100;
+        }
+
+        if (tpzrand::GetRandomNumber(100) > retainChance)
+        {
+            // Camouflage was up, but is lost, so now all detectable effects must be dropped
+            StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DETECTABLE);
+        }
+        else
+        {
+            // Camouflage up, and retained, but all other effects must be dropped
+            StatusEffectContainer->DelStatusEffect(EFFECT_SNEAK);
+            StatusEffectContainer->DelStatusEffect(EFFECT_INVISIBLE);
+            StatusEffectContainer->DelStatusEffect(EFFECT_DEODORIZE);
+        }
+    }
+    else
+    {
+        // Camouflage not up, so remove all detectable status effects
+        StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DETECTABLE);
+    }
 }
 
 bool CCharEntity::IsMobOwner(CBattleEntity* PBattleTarget)
