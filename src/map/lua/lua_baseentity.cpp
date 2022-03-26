@@ -3233,11 +3233,10 @@ bool CLuaBaseEntity::addItem(sol::variadic_args va)
                     if (augmentsObj.is<sol::table>())
                     {
                         auto augmentsTable = augmentsObj.as<sol::table>();
-                        for (auto& entryPair : augmentsTable)
+                        for (const auto& entryPair : augmentsTable)
                         {
-                            auto   pair   = entryPair.second.as<sol::table>();
-                            uint16 augid  = pair[0];
-                            uint8  augval = pair[1];
+                            uint16 augid  = entryPair.first.as<uint16>();
+                            uint8  augval = entryPair.second.as<uint8>();
                             ((CItemEquipment*)PItem)->PushAugment(augid, augval);
                         }
                     }
