@@ -5985,10 +5985,10 @@ namespace charutils
     {
         auto fmtQuery = "SELECT unix_timestamp(traverser_start) FROM char_unlocks WHERE charid = %u;";
 
-        auto ret = Sql_Query(SqlHandle, fmtQuery, PChar->id);
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        auto ret = sql->Query(fmtQuery, PChar->id);
+        if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
         {
-            return Sql_GetUIntData(SqlHandle, 0);
+            return sql->GetUIntData(0);
         }
 
         return 0;
@@ -5999,17 +5999,17 @@ namespace charutils
     {
         auto fmtQuery = "UPDATE char_unlocks SET traverser_start = unix_timestamp() WHERE charid = %u;";
 
-        Sql_Query(SqlHandle, fmtQuery, PChar->id);
+        sql->Query(fmtQuery, PChar->id);
     }
 
     uint32 getClaimedTraverserStones(CCharEntity* PChar)
     {
         auto fmtQuery = "SELECT traverser_claimed FROM char_unlocks WHERE charid = %u;";
 
-        auto ret = Sql_Query(SqlHandle, fmtQuery, PChar->id);
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        auto ret = sql->Query(fmtQuery, PChar->id);
+        if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
         {
-            return Sql_GetUIntData(SqlHandle, 0);
+            return sql->GetUIntData(0);
         }
 
         return 0;
@@ -6019,14 +6019,14 @@ namespace charutils
     {
         auto fmtQuery = "UPDATE char_unlocks SET traverser_claimed = traverser_claimed + %u WHERE charid = %u;";
 
-        Sql_Query(SqlHandle, fmtQuery, numStones, PChar->id);
+        sql->Query(fmtQuery, numStones, PChar->id);
     }
 
     void setClaimedTraverserStones(CCharEntity* PChar, uint16 stoneTotal)
     {
         auto fmtQuery = "UPDATE char_unlocks SET traverser_claimed = %u WHERE charid = %u;";
 
-        Sql_Query(SqlHandle, fmtQuery, stoneTotal, PChar->id);
+        sql->Query(fmtQuery, stoneTotal, PChar->id);
     }
 
     uint32 getAvailableTraverserStones(CCharEntity* PChar)
@@ -6035,11 +6035,11 @@ namespace charutils
         time_t traverserEpoch = 0;
         uint32 traverserClaimed = 0;
 
-        auto ret = Sql_Query(SqlHandle, fmtQuery, PChar->id);
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        auto ret = sql->Query(fmtQuery, PChar->id);
+        if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
         {
-            traverserEpoch = Sql_GetUIntData(SqlHandle, 0);
-            traverserClaimed = Sql_GetUIntData(SqlHandle, 1);
+            traverserEpoch = sql->GetUIntData(0);
+            traverserClaimed = sql->GetUIntData(1);
         }
 
         // Handle reduction for Celerity Key Items
