@@ -123,7 +123,7 @@ jobs:
         run: |
           make -j $(sysctl -n hw.physicalcpu)
 
-  Style_Checks:
+  Sanity_Checks:
     runs-on: ubuntu-20.04
     steps:
     - uses: actions/checkout@v1
@@ -132,7 +132,8 @@ jobs:
     - name: Install Dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y software-properties-common clang-format cppcheck luajit-5.1-dev luarocks mariadb-server mariadb-client libmariadb-dev-compat
+        sudo apt-get install -y software-properties-common clang-format cppcheck luajit-5.1-dev luarocks mariadb-server mariadb-client libmariadb-dev-compat python3.7
+        pip install pylint
         luarocks install luacheck --local
     - id: changed-files
       name: Get Changed Files
@@ -191,6 +192,23 @@ jobs:
         done
         cat sql_checks.txt
         if [ -s sql_checks.txt ]
+        then
+          exit 1
+        fi
+        exit 0
+    - name: Python Checks
+      if: always()
+      run: |
+        touch python_checks.txt
+        for changed_file in ${{ steps.changed-files.outputs.all }}; do
+          if [[ -f $changed_file ]]; then
+            if [[ $changed_file == *.py ]]; then
+              bash tools/ci/python.sh ${changed_file} >> python_checks.txt || true
+            fi
+          fi
+        done
+        cat python_checks.txt
+        if [ -s python_checks.txt ]
         then
           exit 1
         fi
