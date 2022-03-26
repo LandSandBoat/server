@@ -58,8 +58,6 @@ entity.onTrigger = function(player, npc)
         else
             player:startEvent(585)
         end
-    else
-        player:startEvent(584)
     end
 end
 

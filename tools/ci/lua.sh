@@ -29,6 +29,7 @@ global_objects=(
     Module
     Override
     super
+    applyOverride
 
     common
     zones
@@ -64,6 +65,7 @@ global_objects=(
     KeyItemAction
     LambdaAction
     Message
+    NoAction
     Sequence
     Container
     Event
@@ -310,8 +312,6 @@ global_objects=(
     PERIQIA_ASSAULT_POINT
     ILRUSI_ASSAULT_POINT
     NYZUL_ISLE_ASSAULT_POINT
-
-    doRoyalPalaceArmorCheck
 )
 
 ignores=(

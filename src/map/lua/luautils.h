@@ -116,7 +116,6 @@ namespace luautils
     int32 garbageCollectStep();
     int32 garbageCollectFull();
 
-    void EnableFilewatcher();
     void ReloadFilewatchList();
 
     std::vector<std::string> GetQuestAndMissionFilenamesList();
@@ -154,6 +153,7 @@ namespace luautils
     auto   GetPlayerByID(uint32 pid) -> std::optional<CLuaBaseEntity>;
     auto   GetMagianTrial(sol::variadic_args va) -> sol::table;
     auto   GetMagianTrialsWithParent(int32 parentTrial) -> sol::table;
+
     uint32 JstMidnight();
     uint32 JstWeekday();
     uint32 VanadielTime();          // Gets the current Vanadiel Time in timestamp format (SE epoch in earth seconds)
@@ -192,6 +192,7 @@ namespace luautils
 
     int32 OnGameIn(CCharEntity* PChar, bool zoning);
     int32 OnZoneIn(CCharEntity* PChar);                        // triggers when a player zones into a zone
+    void  OnZoneOut(CCharEntity* PChar);                       // triggers when a player leaves a zone
     void  AfterZoneIn(CBaseEntity* PChar);                     // triggers after a player has finished zoning in
     int32 OnZoneInitialise(uint16 ZoneID);                     // triggers when zone is loaded
     int32 OnRegionEnter(CCharEntity* PChar, CRegion* PRegion); // when player enters a region of a zone
@@ -223,12 +224,12 @@ namespace luautils
     auto  OnItemCheck(CBaseEntity* PTarget, CItem* PItem, ITEMCHECK param = ITEMCHECK::NONE, CBaseEntity* PCaster = nullptr) -> std::tuple<int32, int32, int32>; // check to see if item can be used
     int32 CheckForGearSet(CBaseEntity* PTarget);                                                                                                                 // check for gear sets
 
-    int32 OnMagicCastingCheck(CBaseEntity* PChar, CBaseEntity* PTarget, CSpell* PSpell);                   // triggers when a player attempts to cast a spell
+    int32  OnMagicCastingCheck(CBaseEntity* PChar, CBaseEntity* PTarget, CSpell* PSpell);                   // triggers when a player attempts to cast a spell
     uint32 OnSpellCast(CBattleEntity* PCaster, CBattleEntity* PTarget, CSpell* PSpell);                     // triggered when casting a spell
-    int32 OnSpellPrecast(CBattleEntity* PCaster, CSpell* PSpell);                                          // triggered just before casting a spell
-    auto  OnMonsterMagicPrepare(CBattleEntity* PCaster, CBattleEntity* PTarget) -> std::optional<SpellID>; // triggered when monster wants to use a spell on target
-    int32 OnMagicHit(CBattleEntity* PCaster, CBattleEntity* PTarget, CSpell* PSpell);                      // triggered when spell cast on monster
-    int32 OnWeaponskillHit(CBattleEntity* PMob, CBaseEntity* PAttacker, uint16 PWeaponskill);              // Triggered when Weaponskill strikes monster
+    int32  OnSpellPrecast(CBattleEntity* PCaster, CSpell* PSpell);                                          // triggered just before casting a spell
+    auto   OnMobMagicPrepare(CBattleEntity* PCaster, CBattleEntity* PTarget, std::optional<SpellID> startingSpellId) -> std::optional<SpellID>; // triggered when monster wants to use a spell on target
+    int32  OnMagicHit(CBattleEntity* PCaster, CBattleEntity* PTarget, CSpell* PSpell);                      // triggered when spell cast on monster
+    int32  OnWeaponskillHit(CBattleEntity* PMob, CBaseEntity* PAttacker, uint16 PWeaponskill);              // Triggered when Weaponskill strikes monster
 
     int32 OnMobInitialize(CBaseEntity* PMob); // Used for passive trait
     int32 ApplyMixins(CBaseEntity* PMob);
@@ -296,8 +297,12 @@ namespace luautils
 
     auto NearLocation(sol::table const& table, float radius, float theta) -> sol::table;
 
+    void OnPlayerDeath(CCharEntity* PChar);
     void OnPlayerLevelUp(CCharEntity* PChar);
     void OnPlayerLevelDown(CCharEntity* PChar);
+    void OnPlayerMount(CCharEntity* PChar);
+    void OnPlayerEmote(CCharEntity* PChar, Emote EmoteID);
+    void OnPlayerVolunteer(CCharEntity* PChar, std::string text);
 
     bool OnChocoboDig(CCharEntity* PChar, bool pre);                    // chocobo digging, pre = check
 
@@ -310,9 +315,6 @@ namespace luautils
     void OnFurnitureRemoved(CCharEntity* PChar, CItemFurnishing* itemId);
 
     uint16 SelectDailyItem(CLuaBaseEntity* PLuaBaseEntity, uint8 dial);
-
-    void OnPlayerEmote(CCharEntity* PChar, Emote EmoteID);
-    void OnPlayerVolunteer(CCharEntity* PChar, std::string text);
 }; // namespace luautils
 
-#endif //- _LUAUTILS_H -
+#endif // _LUAUTILS_H -

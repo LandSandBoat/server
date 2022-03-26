@@ -22,8 +22,8 @@
 #ifndef _LOBBY_H
 #define _LOBBY_H
 
-#include "../common/cbasetypes.h"
-#include "../common/mmo.h"
+#include "common/cbasetypes.h"
+#include "common/mmo.h"
 
 #include "login_session.h"
 

@@ -226,7 +226,7 @@ uint16 CAbility::getVE() const
 
 /************************************************************************
  *                                                                       *
- *  Получаем/Устанавливаем сообщение способности                         *
+ *  Получаем/Устанавливаем message способности                         *
  *                                                                       *
  ************************************************************************/
 
@@ -290,6 +290,8 @@ uint16 CAbility::getAoEMsg() const
         case 437:
         case 439:
             return m_message + 1;
+        case 668: // Valiance has a seperate message for party member who gain the effect.
+            return m_message + 1;
 
         default:
             return m_message;
@@ -348,41 +350,41 @@ namespace ability
                             "WHERE job < %u AND abilityId < %u "
                             "ORDER BY job, level ASC";
 
-        int32 ret = Sql_Query(SqlHandle, Query, MAX_JOBTYPE, MAX_ABILITY_ID);
+        int32 ret = sql->Query(Query, MAX_JOBTYPE, MAX_ABILITY_ID);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (ret != SQL_ERROR && sql->NumRows() != 0)
         {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql->NextRow() == SQL_SUCCESS)
             {
                 char* contentTag = nullptr;
-                Sql_GetData(SqlHandle, 20, &contentTag, nullptr);
+                sql->GetData(20, &contentTag, nullptr);
 
                 if (!luautils::IsContentEnabled(contentTag))
                 {
                     continue;
                 }
 
-                CAbility* PAbility = new CAbility(Sql_GetIntData(SqlHandle, 0));
+                CAbility* PAbility = new CAbility(sql->GetIntData(0));
 
-                PAbility->setMobSkillID(Sql_GetIntData(SqlHandle, 1));
-                PAbility->setName(Sql_GetData(SqlHandle, 2));
-                PAbility->setJob((JOBTYPE)Sql_GetIntData(SqlHandle, 3));
-                PAbility->setLevel(Sql_GetIntData(SqlHandle, 4));
-                PAbility->setValidTarget(Sql_GetIntData(SqlHandle, 5));
-                PAbility->setRecastTime(Sql_GetIntData(SqlHandle, 6));
-                PAbility->setMessage(Sql_GetIntData(SqlHandle, 7));
+                PAbility->setMobSkillID(sql->GetIntData(1));
+                PAbility->setName(sql->GetData(2));
+                PAbility->setJob((JOBTYPE)sql->GetIntData(3));
+                PAbility->setLevel(sql->GetIntData(4));
+                PAbility->setValidTarget(sql->GetIntData(5));
+                PAbility->setRecastTime(sql->GetIntData(6));
+                PAbility->setMessage(sql->GetIntData(7));
                 // PAbility->setMessage(Sql_GetIntData(SqlHandle,8));
-                PAbility->setAnimationID(Sql_GetIntData(SqlHandle, 9));
-                PAbility->setAnimationTime(std::chrono::milliseconds(Sql_GetIntData(SqlHandle, 10)));
-                PAbility->setCastTime(std::chrono::milliseconds(Sql_GetIntData(SqlHandle, 11)));
-                PAbility->setActionType(static_cast<ACTIONTYPE>(Sql_GetUIntData(SqlHandle, 12)));
-                PAbility->setRange(Sql_GetFloatData(SqlHandle, 13));
-                PAbility->setAOE(Sql_GetIntData(SqlHandle, 14));
-                PAbility->setRecastId(Sql_GetIntData(SqlHandle, 15));
-                PAbility->setCE(Sql_GetIntData(SqlHandle, 16));
-                PAbility->setVE(Sql_GetIntData(SqlHandle, 17));
-                PAbility->setMeritModID(Sql_GetIntData(SqlHandle, 18));
-                PAbility->setAddType(Sql_GetUIntData(SqlHandle, 19));
+                PAbility->setAnimationID(sql->GetIntData(9));
+                PAbility->setAnimationTime(std::chrono::milliseconds(sql->GetIntData(10)));
+                PAbility->setCastTime(std::chrono::milliseconds(sql->GetIntData(11)));
+                PAbility->setActionType(static_cast<ACTIONTYPE>(sql->GetUIntData(12)));
+                PAbility->setRange(sql->GetFloatData(13));
+                PAbility->setAOE(sql->GetIntData(14));
+                PAbility->setRecastId(sql->GetIntData(15));
+                PAbility->setCE(sql->GetIntData(16));
+                PAbility->setVE(sql->GetIntData(17));
+                PAbility->setMeritModID(sql->GetIntData(18));
+                PAbility->setAddType(sql->GetUIntData(19));
 
                 PAbilityList[PAbility->getID()] = PAbility;
                 PAbilitiesList[PAbility->getJob()].push_back(PAbility);
@@ -398,19 +400,19 @@ namespace ability
 
         const char* Query2 = "SELECT recastId, job, level, maxCharges, chargeTime, meritModId FROM abilities_charges ORDER BY job, level ASC;";
 
-        ret = Sql_Query(SqlHandle, Query2);
+        ret = sql->Query(Query2);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (ret != SQL_ERROR && sql->NumRows() != 0)
         {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql->NextRow() == SQL_SUCCESS)
             {
                 Charge_t* PCharge   = new Charge_t;
-                PCharge->ID         = Sql_GetUIntData(SqlHandle, 0);
-                PCharge->job        = (JOBTYPE)Sql_GetUIntData(SqlHandle, 1);
-                PCharge->level      = Sql_GetUIntData(SqlHandle, 2);
-                PCharge->maxCharges = Sql_GetUIntData(SqlHandle, 3);
-                PCharge->chargeTime = Sql_GetUIntData(SqlHandle, 4);
-                PCharge->merit      = Sql_GetUIntData(SqlHandle, 5);
+                PCharge->ID         = sql->GetUIntData(0);
+                PCharge->job        = (JOBTYPE)sql->GetUIntData(1);
+                PCharge->level      = sql->GetUIntData(2);
+                PCharge->maxCharges = sql->GetUIntData(3);
+                PCharge->chargeTime = sql->GetUIntData(4);
+                PCharge->merit      = sql->GetUIntData(5);
 
                 PChargesList.push_back(PCharge);
             }

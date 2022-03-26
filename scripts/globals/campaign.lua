@@ -2,7 +2,81 @@
 -- Campaign global
 -----------------------------------
 require("scripts/globals/teleports")
+require("scripts/globals/zone")
+require("scripts/globals/status")
 -----------------------------------
+xi = xi or {}
+xi.campaign = {}
+
+xi.campaign.control =
+{
+    Sandoria = 2,
+    Bastok   = 4,
+    Windurst = 6,
+    Beastman = 8,
+}
+
+xi.campaign.union =
+{
+    Adder  = 1,
+    Bison  = 2,
+    Coyote = 3,
+    Dhole  = 4,
+    Eland  = 5,
+}
+
+xi.campaign.army =
+{
+    Sandoria = 0,
+    Bastok   = 1,
+    Windurst = 2,
+    Orcish   = 3,
+    Quadav   = 4,
+    Yagudo   = 5,
+    Kindred  = 6,
+}
+
+xi.campaign.zone =
+{
+    SouthernSandOria     = 80,
+    EastRonfaure         = 81,
+    JugnerForest         = 82,
+    VunkerlInlet         = 83,
+    BatalliaDowns        = 84,
+    LaVaule              = 85,
+    TheEldiemeNecropolis = 175,
+    BastokMarkets        = 87,
+    NorthGustaberg       = 88,
+    Grauberg             = 89,
+    PashhowMarshlands    = 90,
+    RolanberryFields     = 91,
+    Beadeaux             = 92,
+    CrawlersNest         = 171,
+    WindurstWaters       = 94,
+    WestSarutabaruta     = 95,
+    FortKarugoNarugo     = 96,
+    MeriphataudMountains = 97,
+    SauromugueChampaign  = 98,
+    CastleOztroja        = 99,
+    GarlaigeCitadel      = 164,
+    BeaucedineGlacier    = 136,
+    Xarcabard            = 137,
+    CastleZvahlBaileys   = 138,
+    CastleZvahlKeep      = 155,
+    ThroneRoom           = 156,
+}
+
+-----------------------------------------------------------------
+-- Variable for getNationTeleport and getPoint
+-----------------------------------------------------------------
+
+--[[
+ALLIED_NOTES = 11
+MAW = 4
+PAST_SANDORIA = 5
+PAST_BASTOK = 6
+PAST_WINDURST = 7
+]]
 
 -- -------------------------------------------------------------------
 -- getMedalRank()
@@ -177,5 +251,39 @@ function getSigilTimeStamp(player)
     return timeStamp
 end
 
+-----------------------------------
+-- hasMawActivated Action
+-----------------------------------
+
+-- 1st number for hasMawActivated()
+-- 2nd number for player:addNationTeleport()
+
+-- 0    1   Batallia Downs (S) (H-5)
+-- 1    2   Rolanberry Fields (S) (H-6)
+-- 2    4   Sauromugue Champaign (S) (K-9)
+-- 3    8   Jugner Forest (S) (H-11)
+-- 4    16  Pashhow Marshlands (S) (K-8)
+-- 5    32  Meriphataud Mountains (S) (K-6)
+-- 6    64  East Ronfaure (S) (H-5)
+-- 7    128 North Gustaberg (S) (K-7)
+-- 8    256 West Sarutabaruta (S) (H-9)
+--[[
+function hasMawActivated(player, portal)
+    local mawActivated = player:getNationTeleport(MAW)
+    local bit = {}
+
+    for i = 8,0,-1 do
+        local twop = 2^i
+
+        if (mawActivated >= twop) then
+            bit[i]=true mawActivated = mawActivated - twop
+        else
+            bit[i]=false
+        end
+    end
+
+    return bit[portal]
+end
+]]
 -- TODO:
 -- Past nation teleport

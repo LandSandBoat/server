@@ -27,6 +27,7 @@
 #include "../packets/message_basic.h"
 #include <map>
 #include <memory>
+#include <vector>
 
 enum ENTITYTYPE
 {
@@ -240,12 +241,15 @@ public:
 
     virtual void HandleErrorMessage(std::unique_ptr<CBasicPacket>&){};
 
+    bool IsDynamicEntity() const;
+
     uint32          id;           // global identifier unique on the server
     uint16          targid;       // local identifier unique to the zone
     ENTITYTYPE      objtype;      // тип сущности
     STATUS_TYPE     status;       // статус сущности (разные сущности - разные статусы)
-    uint16          m_TargID;     // targid объекта, на который смотрит сущность
-    string_t        name;         // имя сущности
+    uint16          m_TargID;     // the targid of the object the entity is looking at
+    string_t        name;         // Entity name
+    string_t        packetName;   // Used to override name when being sent to the client
     look_t          look;         // внешний вид всех сущностей
     look_t          mainlook;     // only used if mob use changeSkin() or player /lockstyle
     location_t      loc;          // местоположение сущности
@@ -256,6 +260,7 @@ public:
     uint8           namevis;
     ALLEGIANCE_TYPE allegiance; // what types of targets the entity can fight
     uint8           updatemask; // what to update next server tick to players nearby
+
 
     std::unique_ptr<CAIContainer> PAI;          // AI container
     CBattlefield*                 PBattlefield; // pointer to battlefield (if in one)

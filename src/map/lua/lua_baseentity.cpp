@@ -289,14 +289,14 @@ void CLuaBaseEntity::messageText(CLuaBaseEntity* PLuaBaseEntity, uint16 messageI
  *          : Can modify the name shown through explicit declaration
  ************************************************************************/
 
-void CLuaBaseEntity::PrintToPlayer(std::string const& message, sol::object messageType, sol::object name)
+void CLuaBaseEntity::PrintToPlayer(std::string const& message, sol::object const& messageTypeObj, sol::object const& nameObj)
 {
-    CHAT_MESSAGE_TYPE int_messageType = (messageType == sol::lua_nil) ? MESSAGE_SYSTEM_1 : messageType.as<CHAT_MESSAGE_TYPE>();
-    const char*       cstr_name       = (name == sol::lua_nil) ? "" : name.as<const char*>();
+    auto messageType = (messageTypeObj == sol::lua_nil) ? MESSAGE_SYSTEM_1 : messageTypeObj.as<CHAT_MESSAGE_TYPE>();
+    auto name        = (nameObj == sol::lua_nil) ? "" : nameObj.as<std::string>();
 
     if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
     {
-        PChar->pushPacket(new CChatMessagePacket(PChar, int_messageType, message, cstr_name));
+        PChar->pushPacket(new CChatMessagePacket(PChar, messageType, message, name));
     }
 }
 
@@ -521,7 +521,7 @@ void CLuaBaseEntity::addCharVar(std::string const& varName, int32 value)
 
     const char* Query = "INSERT INTO char_vars SET charid = %u, varname = '%s', value = %i ON DUPLICATE KEY UPDATE value = value + %i;";
 
-    Sql_Query(SqlHandle, Query, m_PBaseEntity->id, varName, value, value);
+    sql->Query(Query, m_PBaseEntity->id, varName, value, value);
 }
 
 /************************************************************************
@@ -686,6 +686,9 @@ void CLuaBaseEntity::injectActionPacket(uint16 action, uint16 anim, uint16 spec,
             break;
         case 14:
             actiontype = ACTION_DANCE;
+            break;
+        case 15:
+            actiontype = ACTION_RUN_WARD_EFFUSION;
             break;
     }
 
@@ -1053,7 +1056,7 @@ std::optional<CLuaBaseEntity> CLuaBaseEntity::getEventTarget()
     auto* PChar = (CCharEntity*)m_PBaseEntity;
     if (PChar->currentEvent->targetEntity == nullptr)
     {
-        ShowWarning("EventTarget is empty: %s", m_PBaseEntity->GetName());
+        ShowWarning("EventTarget for event %d is empty: %s", PChar->currentEvent->eventId, m_PBaseEntity->GetName());
         return std::nullopt;
     }
 
@@ -2931,7 +2934,7 @@ void CLuaBaseEntity::setHomePoint()
                             SET home_zone = %u, home_rot = %u, home_x = %.3f, home_y = %.3f, home_z = %.3f \
                             WHERE charid = %u;";
 
-    Sql_Query(SqlHandle, fmtQuery, PChar->profile.home_point.destination, PChar->profile.home_point.p.rotation, PChar->profile.home_point.p.x,
+    sql->Query(fmtQuery, PChar->profile.home_point.destination, PChar->profile.home_point.p.rotation, PChar->profile.home_point.p.x,
               PChar->profile.home_point.p.y, PChar->profile.home_point.p.z, PChar->id);
 }
 
@@ -2948,13 +2951,13 @@ void CLuaBaseEntity::resetPlayer(const char* charName)
 
     // char will not be logged in so get the id manually
     char escapedCharName[16 * 2 + 1];
-    Sql_EscapeString(SqlHandle, escapedCharName, charName);
+    sql->EscapeString(escapedCharName, charName);
     const char* Query = "SELECT charid FROM chars WHERE charname = '%s';";
-    int32 ret = Sql_Query(SqlHandle, Query, escapedCharName);
+    int32 ret = sql->Query(Query, escapedCharName);
 
-    if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+    if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
     {
-        id = (int32)Sql_GetIntData(SqlHandle, 0);
+        id = (int32)sql->GetIntData(0);
     }
 
     // could not get player from database
@@ -2966,7 +2969,7 @@ void CLuaBaseEntity::resetPlayer(const char* charName)
 
     // delete the account session
     Query = "DELETE FROM accounts_sessions WHERE charid = %u;";
-    Sql_Query(SqlHandle, Query, id);
+    sql->Query(Query, id);
 
     // send the player to lower jeuno
     Query = "UPDATE chars "
@@ -2981,7 +2984,7 @@ void CLuaBaseEntity::resetPlayer(const char* charName)
             "moghouse = %u "
             "WHERE charid = %u;";
 
-    Sql_Query(SqlHandle, Query,
+    sql->Query(Query,
               245,     // lower jeuno
               122,     // prev zone
               86,      // rotation
@@ -3039,14 +3042,14 @@ bool CLuaBaseEntity::gotoPlayer(std::string const& playerName)
 
     bool        found    = false;
     const char* fmtQuery = "SELECT charid FROM chars WHERE charname = '%s';";
-    int32       ret      = Sql_Query(SqlHandle, fmtQuery, playerName.c_str());
+    int32       ret      = sql->Query(fmtQuery, playerName.c_str());
 
-    if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+    if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
     {
         char buf[30];
         memset(&buf[0], 0, sizeof(buf));
 
-        ref<uint16>(&buf, 0) = Sql_GetUIntData(SqlHandle, 0); // target char
+        ref<uint16>(&buf, 0) = sql->GetUIntData(0); // target char
         ref<uint16>(&buf, 4) = m_PBaseEntity->id;             // warping to target char, their server will send us a zoning message with their pos
 
         message::send(MSG_SEND_TO_ZONE, &buf[0], sizeof(buf), nullptr);
@@ -3068,14 +3071,14 @@ bool CLuaBaseEntity::bringPlayer(std::string const& playerName)
     bool found = false;
 
     const char* fmtQuery = "SELECT charid FROM chars WHERE charname = '%s';";
-    int32       ret      = Sql_Query(SqlHandle, fmtQuery, playerName.c_str());
+    int32       ret      = sql->Query(fmtQuery, playerName.c_str());
 
-    if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+    if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
     {
         char buf[30];
         memset(&buf[0], 0, sizeof(buf));
 
-        ref<uint16>(&buf, 0)  = Sql_GetUIntData(SqlHandle, 0); // target char
+        ref<uint16>(&buf, 0)  = sql->GetUIntData(0); // target char
         ref<uint16>(&buf, 4)  = 0;                             // wanting to bring target char here so wont give our id
         ref<uint16>(&buf, 8)  = m_PBaseEntity->getZone();
         ref<uint16>(&buf, 10) = static_cast<uint16>(m_PBaseEntity->loc.p.x);
@@ -3499,13 +3502,13 @@ void CLuaBaseEntity::createWornItem(uint16 itemID)
         PItem->m_extra[0] = 1;
 
         char extra[sizeof(PItem->m_extra) * 2 + 1];
-        Sql_EscapeStringLen(SqlHandle, extra, (const char*)PItem->m_extra, sizeof(PItem->m_extra));
+        sql->EscapeStringLen(extra, (const char*)PItem->m_extra, sizeof(PItem->m_extra));
 
         const char* Query = "UPDATE char_inventory "
                             "SET extra = '%s' "
                             "WHERE charid = %u AND location = %u AND slot = %u;";
 
-        Sql_Query(SqlHandle, Query, extra, PChar->id, PItem->getLocationID(), PItem->getSlotID());
+        sql->Query(Query, extra, PChar->id, PItem->getLocationID(), PItem->getSlotID());
     }
 }
 
@@ -3677,17 +3680,17 @@ bool CLuaBaseEntity::breakLinkshell(std::string const& lsname)
 {
     bool found = false;
 
-    int32 ret = Sql_Query(SqlHandle, "SELECT broken, linkshellid FROM linkshells WHERE name = '%s'", lsname.c_str());
-    if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+    int32 ret = sql->Query("SELECT broken, linkshellid FROM linkshells WHERE name = '%s'", lsname.c_str());
+    if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
     {
-        uint8 broken = Sql_GetUIntData(SqlHandle, 0);
+        uint8 broken = sql->GetUIntData(0);
 
         if (broken)
         {
             return true;
         }
 
-        uint32      lsid       = Sql_GetUIntData(SqlHandle, 1);
+        uint32      lsid       = sql->GetUIntData(1);
         CLinkshell* PLinkshell = linkshell::GetLinkshell(lsid);
 
         if (!PLinkshell)
@@ -3720,15 +3723,15 @@ bool CLuaBaseEntity::addLinkpearl(std::string const& lsname, bool equip)
     if (PItemLinkPearl != NULL)
     {
         const char* Query = "SELECT linkshellid, color FROM linkshells WHERE name = '%s' AND broken = 0";
-        int32       ret   = Sql_Query(SqlHandle, Query, lsname);
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        int32       ret   = sql->Query(Query, lsname);
+        if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
         {
             // build linkpearl
             int8 EncodedString[16];
             EncodeStringLinkshell((int8*)lsname.c_str(), EncodedString);
             ((CItem*)PItemLinkPearl)->setSignature(EncodedString);
-            PItemLinkPearl->SetLSID(Sql_GetUIntData(SqlHandle, 0));
-            PItemLinkPearl->SetLSColor(Sql_GetIntData(SqlHandle, 1));
+            PItemLinkPearl->SetLSID(sql->GetUIntData(0));
+            PItemLinkPearl->SetLSColor(sql->GetIntData(1));
             PItemLinkPearl->SetLSType(lstype);
             PItemLinkPearl->setQuantity(1);
             if (charutils::AddItem(PChar, LOC_INVENTORY, PItemLinkPearl) != ERROR_SLOTID)
@@ -4237,13 +4240,13 @@ uint8 CLuaBaseEntity::storeWithPorterMoogle(uint16 slipId, sol::table const& ext
     }
 
     char extra[sizeof(slip->m_extra) * 2 + 1];
-    Sql_EscapeStringLen(SqlHandle, extra, (const char*)slip->m_extra, sizeof(slip->m_extra));
+    sql->EscapeStringLen(extra, (const char*)slip->m_extra, sizeof(slip->m_extra));
 
     const char* Query = "UPDATE char_inventory "
                         "SET extra = '%s' "
                         "WHERE charid = %u AND location = %u AND slot = %u;";
 
-    Sql_Query(SqlHandle, Query, extra, PChar->id, slip->getLocationID(), slip->getSlotID());
+    sql->Query(Query, extra, PChar->id, slip->getLocationID(), slip->getSlotID());
 
     return 0;
 }
@@ -4303,13 +4306,13 @@ void CLuaBaseEntity::retrieveItemFromSlip(uint16 slipId, uint16 itemId, uint16 e
     slip->m_extra[extraId] &= extraData;
 
     char extra[sizeof(slip->m_extra) * 2 + 1];
-    Sql_EscapeStringLen(SqlHandle, extra, (const char*)slip->m_extra, sizeof(slip->m_extra));
+    sql->EscapeStringLen(extra, (const char*)slip->m_extra, sizeof(slip->m_extra));
 
     const char* Query = "UPDATE char_inventory "
                         "SET extra = '%s' "
                         "WHERE charid = %u AND location = %u AND slot = %u;";
 
-    Sql_Query(SqlHandle, Query, extra, PChar->id, slip->getLocationID(), slip->getSlotID());
+    sql->Query(Query, extra, PChar->id, slip->getLocationID(), slip->getSlotID());
 
     auto* item = itemutils::GetItem(itemId);
     item->setQuantity(1);
@@ -4350,10 +4353,50 @@ uint8 CLuaBaseEntity::getGender()
  *  Example : player:getName()
  ************************************************************************/
 
-const char* CLuaBaseEntity::getName()
+std::string CLuaBaseEntity::getName()
 {
-    // TODO: Fix C-style cast
-    return (const char*)m_PBaseEntity->GetName();
+    return m_PBaseEntity->name;
+}
+
+/************************************************************************
+ *  Function: setName()
+ *  Purpose : Sets the name of the entity.
+ *  Example : mob:setName("NewName")
+ *  Note    : This will only apply to entities whose targid's are in a range
+ *          : that will allow their names to be changed: Trusts, Pets,
+ *          : Dynamic Entities etc.
+ ************************************************************************/
+
+void CLuaBaseEntity::setName(std::string const& name)
+{
+    m_PBaseEntity->name = name;
+    m_PBaseEntity->updatemask |= UPDATE_NAME;
+}
+
+/************************************************************************
+ *  Function: getPacketName()
+ *  Purpose : Returns the string packet name of the character
+ *  Example : mob:getPacketName()
+ ************************************************************************/
+
+std::string CLuaBaseEntity::getPacketName()
+{
+    return m_PBaseEntity->packetName;
+}
+
+/************************************************************************
+ *  Function: setPacketName()
+ *  Purpose : Sets the packet name of the entity.
+ *  Example : mob:getPacketName("NewName")
+ *  Note    : This will only apply to entities whose targid's are in a range
+ *          : that will allow their packet names to be changed: Trusts, Pets,
+ *          : Dynamic Entities etc.
+ ************************************************************************/
+
+void CLuaBaseEntity::setPacketName(std::string const& name)
+{
+    m_PBaseEntity->packetName = name;
+    m_PBaseEntity->updatemask |= UPDATE_NAME;
 }
 
 /************************************************************************
@@ -4638,7 +4681,6 @@ uint8 CLuaBaseEntity::getAllegiance()
 void CLuaBaseEntity::setAllegiance(uint8 allegiance)
 {
     m_PBaseEntity->allegiance = static_cast<ALLEGIANCE_TYPE>(allegiance);
-    m_PBaseEntity->updatemask |= UPDATE_HP;
 }
 
 /************************************************************************
@@ -5269,7 +5311,7 @@ void CLuaBaseEntity::setLevelCap(uint8 cap)
     if (PChar->jobs.genkai != cap)
     {
         PChar->jobs.genkai = cap;
-        Sql_Query(SqlHandle, "UPDATE char_jobs SET genkai = %u WHERE charid = %u LIMIT 1", PChar->jobs.genkai, PChar->id);
+        sql->Query("UPDATE char_jobs SET genkai = %u WHERE charid = %u LIMIT 1", PChar->jobs.genkai, PChar->id);
     }
 }
 
@@ -7732,7 +7774,7 @@ void CLuaBaseEntity::capAllSkills()
                             "rank = %u "
                             "ON DUPLICATE KEY UPDATE value = %u, rank = %u;";
 
-        Sql_Query(SqlHandle, Query, PChar->id, i, 5000, PChar->RealSkills.rank[i], 5000, PChar->RealSkills.rank[i]);
+        sql->Query(Query, PChar->id, i, 5000, PChar->RealSkills.rank[i], 5000, PChar->RealSkills.rank[i]);
 
         uint16 maxSkill               = 10 * battleutils::GetMaxSkill(static_cast<SKILLTYPE>(i), PChar->GetMJob(), PChar->GetMLevel());
         PChar->RealSkills.skill[i]    = maxSkill; // set to capped
@@ -8938,7 +8980,7 @@ bool CLuaBaseEntity::isDead()
 /************************************************************************
  *  Function: sendRaise()
  *  Purpose : Updates the m_hasRaise private member with the Raise Level
- *  Example : target:sendRaise(1) -- 2, or 3 for R2, R3
+ *  Example : target:sendRaise(1) -- 2, 3 or 4 for R2, R3, Arise
  *  Notes   : Sending the Raise menu is handled by CDeathState::Update
  ************************************************************************/
 
@@ -8948,13 +8990,17 @@ void CLuaBaseEntity::sendRaise(uint8 raiseLevel)
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    if (raiseLevel == 0 || raiseLevel > 3)
+    if (raiseLevel == 0 || raiseLevel > 4)
     {
         ShowDebug("lua::sendRaise raise value is not valid!");
     }
     else if (PChar->m_hasTractor == 0 && PChar->m_hasRaise == 0)
     {
         PChar->m_hasRaise = raiseLevel;
+        if (raiseLevel == 4)
+        {
+            PChar->m_hasArise = true;
+        }
         PChar->pushPacket(new CRaiseTractorMenuPacket(PChar, TYPE_RAISE));
     }
 }
@@ -10702,6 +10748,23 @@ uint16 CLuaBaseEntity::getILvlMacc()
 }
 
 /************************************************************************
+ *  Function: getILvlSkill()
+ *  Purpose : Returns the Weapon Skill Bonus value of an equipped Main Weapon
+ *  Example : player:getILvlSkill()
+ *  Notes   : Value of m_iLvlSkill (private member of CItemWeapon)
+ ************************************************************************/
+
+uint16 CLuaBaseEntity::getILvlSkill()
+{
+    if (auto* weapon = dynamic_cast<CItemWeapon*>(static_cast<CBattleEntity*>(m_PBaseEntity)->m_Weapons[SLOT_MAIN]))
+    {
+        return weapon->getILvlSkill();
+    }
+
+    return 0;
+}
+
+/************************************************************************
  *  Function: isSpellAoE()
  *  Purpose : Returns true if a specified spell is AoE
  *  Example : if caster:isSpellAoE(spell:getID()) then
@@ -11138,6 +11201,22 @@ int32 CLuaBaseEntity::takeSpellDamage(CLuaBaseEntity* caster, CLuaSpell* spell, 
 }
 
 /************************************************************************
+ *  Function: int32 TakeSwipeLungeDamage()
+ *  Purpose : Applies damage to target from Swipe/Lunge
+ *  Example : target:takeSwipeLungeDamage(caster, spell, finaldmg, attackType, damageType)
+ *  Notes   :
+ ************************************************************************/
+
+int32 CLuaBaseEntity::takeSwipeLungeDamage(CLuaBaseEntity* caster, int32 damage, uint8 atkType, uint8 dmgType)
+{
+    auto*       PChar      = static_cast<CCharEntity*>(caster->m_PBaseEntity);
+    ATTACK_TYPE attackType = static_cast<ATTACK_TYPE>(atkType);
+    DAMAGE_TYPE damageType = static_cast<DAMAGE_TYPE>(dmgType);
+
+    return battleutils::TakeSwipeLungeDamage(static_cast<CBattleEntity*>(m_PBaseEntity), PChar, damage, attackType, damageType);
+}
+
+/************************************************************************
  *  Function: spawnPet()
  *  Purpose : Spawns a pet if a few correct conditions are met
  *  Example : caster:spawnPet(xi.pet.id.CARBUNCLE)
@@ -11206,11 +11285,11 @@ void CLuaBaseEntity::spawnPet(sol::object const& arg0)
  *  Example : caster:spawnTrust(spell:getID())
  ************************************************************************/
 
-void CLuaBaseEntity::spawnTrust(uint16 trustId)
+std::optional<CLuaBaseEntity> CLuaBaseEntity::spawnTrust(uint16 trustId)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC); // only PCs can spawn trusts
 
-    trustutils::SpawnTrust(static_cast<CCharEntity*>(m_PBaseEntity), trustId);
+    return CLuaBaseEntity(trustutils::SpawnTrust(static_cast<CCharEntity*>(m_PBaseEntity), trustId));
 }
 
 /************************************************************************
@@ -11543,11 +11622,11 @@ void CLuaBaseEntity::setPetName(uint8 pType, uint16 value, sol::object const& ar
     {
         if (petType == PET_TYPE::WYVERN)
         {
-            Sql_Query(SqlHandle, "INSERT INTO char_pet SET charid = %u, wyvernid = %u ON DUPLICATE KEY UPDATE wyvernid = %u;", m_PBaseEntity->id, value, value);
+            sql->Query("INSERT INTO char_pet SET charid = %u, wyvernid = %u ON DUPLICATE KEY UPDATE wyvernid = %u;", m_PBaseEntity->id, value, value);
         }
         else if (petType == PET_TYPE::AUTOMATON)
         {
-            Sql_Query(SqlHandle, "INSERT INTO char_pet SET charid = %u, automatonid = %u ON DUPLICATE KEY UPDATE automatonid = %u;", m_PBaseEntity->id, value,
+            sql->Query("INSERT INTO char_pet SET charid = %u, automatonid = %u ON DUPLICATE KEY UPDATE automatonid = %u;", m_PBaseEntity->id, value,
                       value);
             if (static_cast<CCharEntity*>(m_PBaseEntity)->PAutomaton != nullptr)
             {
@@ -11557,7 +11636,7 @@ void CLuaBaseEntity::setPetName(uint8 pType, uint16 value, sol::object const& ar
         /*
         else if (petType == PETTYPE_ADVENTURING_FELLOW)
         {
-            Sql_Query(SqlHandle, "INSERT INTO char_pet SET charid = %u, adventuringfellowid = %u ON DUPLICATE KEY UPDATE adventuringfellowid = %u;",
+            sql->Query("INSERT INTO char_pet SET charid = %u, adventuringfellowid = %u ON DUPLICATE KEY UPDATE adventuringfellowid = %u;",
         m_PBaseEntity->id, value, value);
         }
         */
@@ -11571,7 +11650,7 @@ void CLuaBaseEntity::setPetName(uint8 pType, uint16 value, sol::object const& ar
 
             uint32 value = chocoboname1 + chocoboname2;
 
-            Sql_Query(SqlHandle, "INSERT INTO char_pet SET charid = %u, chocoboid = %u ON DUPLICATE KEY UPDATE chocoboid = %u;", m_PBaseEntity->id, value,
+            sql->Query("INSERT INTO char_pet SET charid = %u, chocoboid = %u ON DUPLICATE KEY UPDATE chocoboid = %u;", m_PBaseEntity->id, value,
                       value);
         }
     }
@@ -11587,7 +11666,7 @@ void CLuaBaseEntity::registerChocobo(uint32 value)
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
     PChar->m_FieldChocobo = value;
-    Sql_Query(SqlHandle, "UPDATE char_pet SET field_chocobo = %u WHERE charid = %u;", value, PChar->id);
+    sql->Query("UPDATE char_pet SET field_chocobo = %u WHERE charid = %u;", value, PChar->id);
 }
 
 /************************************************************************
@@ -11761,11 +11840,11 @@ auto CLuaBaseEntity::getAutomatonName() -> const char*
                         "char_pet LEFT JOIN pet_name ON automatonid = id "
                         "WHERE charid = %u;";
 
-    int32 ret = Sql_Query(SqlHandle, Query, m_PBaseEntity->id);
+    int32 ret = sql->Query(Query, m_PBaseEntity->id);
 
-    if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+    if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
     {
-        return (const char*)Sql_GetData(SqlHandle, 0); // TODO: Fix c-style cast
+        return (const char*)sql->GetData(0); // TODO: Fix c-style cast
     }
 
     return 0; // TODO: Verify this case
@@ -11817,24 +11896,24 @@ bool CLuaBaseEntity::unlockAttachment(uint16 itemID)
 }
 
 /************************************************************************
- *  Function: getActiveManeuvers()
+ *  Function: getActiveManeuverCount()
  *  Purpose : Get the amount of active maneuvers for an automation
- *  Example : if target:getActiveManeuvers() == 3 then
+ *  Example : if target:getActiveManeuverCount() == 3 then
  *  Notes   :
  ************************************************************************/
 
-uint8 CLuaBaseEntity::getActiveManeuvers()
+uint8 CLuaBaseEntity::getActiveManeuverCount()
 {
     auto* PEntity = static_cast<CBattleEntity*>(m_PBaseEntity);
 
-    return PEntity->StatusEffectContainer->GetActiveManeuvers();
+    return PEntity->StatusEffectContainer->GetActiveManeuverCount();
 }
 
 /************************************************************************
  *  Function: removeOldestManeuver()
  *  Purpose : Removes the oldest maneuver in an automation set (FIFO)
  *  Example : target:removeOldestManeuver()
- *  Notes   : Often used if (target:getActiveManeuvers() == 3)
+ *  Notes   : Often used if (target:getActiveManeuverCount() == 3)
  ************************************************************************/
 
 void CLuaBaseEntity::removeOldestManeuver()
@@ -11902,6 +11981,84 @@ void CLuaBaseEntity::reduceBurden(float percentReduction, sol::object const& int
     }
 
     PAutomaton->setBurdenArray(burden);
+}
+
+/************************************************************************
+ *  Function: getActiveRunes()
+ *  Purpose : Returns the number of active runes
+ *  Example : local num = player:getActiveRunes()
+ *  Notes   :
+ ************************************************************************/
+
+uint8 CLuaBaseEntity::getActiveRuneCount()
+{
+    auto* PEntity = static_cast<CBattleEntity*>(m_PBaseEntity);
+    return PEntity->StatusEffectContainer->GetActiveRuneCount();
+}
+
+/************************************************************************
+ *  Function: getHighestRuneEffect()
+ *  Purpose : Returns the effect ID of the strongest Rune Effect
+ *  Example : local highestEffect = player:getHighestRuneEffect()
+ *  Notes   :
+ ************************************************************************/
+
+uint16 CLuaBaseEntity::getHighestRuneEffect()
+{
+    auto* PEntity = static_cast<CBattleEntity*>(m_PBaseEntity);
+    return PEntity->StatusEffectContainer->GetHighestRuneEffect();
+}
+
+/************************************************************************
+ *  Function: getNewestRuneEffect()
+ *  Purpose : Returns the effect ID of the most recent Rune Effect
+ *  Example : local newestEffect = player:getNewestRuneEffect()
+ *  Notes   :
+ ************************************************************************/
+
+uint16 CLuaBaseEntity::getNewestRuneEffect()
+{
+    auto* PEntity = static_cast<CBattleEntity*>(m_PBaseEntity);
+    return PEntity->StatusEffectContainer->GetNewestRuneEffect();
+}
+
+/************************************************************************
+ *  Function: removeOldestRune()
+ *  Purpose : Removes the oldest rune (if available)
+ *  Example : player:removeOldestRune()
+ *  Notes   :
+ ************************************************************************/
+
+void CLuaBaseEntity::removeOldestRune()
+{
+    auto* PEntity = static_cast<CBattleEntity*>(m_PBaseEntity);
+    PEntity->StatusEffectContainer->RemoveOldestRune();
+}
+
+/************************************************************************
+ *  Function: removeNewestRune()
+ *  Purpose : Removes the newest rune (if available)
+ *  Example : player:removeNewestRune()
+ *  Notes   :
+ ************************************************************************/
+
+void CLuaBaseEntity::removeNewestRune()
+{
+    auto* PEntity = static_cast<CBattleEntity*>(m_PBaseEntity);
+    PEntity->StatusEffectContainer->RemoveNewestRune();
+}
+
+/************************************************************************
+ *  Function: removeAllRunes()
+ *  Purpose : Removes all runes (if available)
+ *  Example : player:removeAllRunes()
+ *  Notes   :
+ ************************************************************************/
+
+void CLuaBaseEntity::removeAllRunes()
+{
+    auto* PEntity = static_cast<CBattleEntity*>(m_PBaseEntity);
+    PEntity->StatusEffectContainer->RemoveAllRunes();
 }
 
 /************************************************************************
@@ -13534,6 +13691,9 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getRace", CLuaBaseEntity::getRace);
     SOL_REGISTER("getGender", CLuaBaseEntity::getGender);
     SOL_REGISTER("getName", CLuaBaseEntity::getName);
+    SOL_REGISTER("setName", CLuaBaseEntity::setName);
+    SOL_REGISTER("getPacketName", CLuaBaseEntity::getPacketName);
+    SOL_REGISTER("setPacketName", CLuaBaseEntity::setPacketName);
     SOL_REGISTER("hideName", CLuaBaseEntity::hideName);
     SOL_REGISTER("checkNameFlags", CLuaBaseEntity::checkNameFlags);
     SOL_REGISTER("getModelId", CLuaBaseEntity::getModelId);
@@ -13896,6 +14056,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getRACC", CLuaBaseEntity::getRACC);
     SOL_REGISTER("getRATT", CLuaBaseEntity::getRATT);
     SOL_REGISTER("getILvlMacc", CLuaBaseEntity::getILvlMacc);
+    SOL_REGISTER("getILvlSkill", CLuaBaseEntity::getILvlSkill);
 
     SOL_REGISTER("isSpellAoE", CLuaBaseEntity::isSpellAoE);
 
@@ -13925,6 +14086,7 @@ void CLuaBaseEntity::Register()
 
     SOL_REGISTER("takeWeaponskillDamage", CLuaBaseEntity::takeWeaponskillDamage);
     SOL_REGISTER("takeSpellDamage", CLuaBaseEntity::takeSpellDamage);
+    SOL_REGISTER("takeSwipeLungeDamage", CLuaBaseEntity::takeSwipeLungeDamage);
 
     // Pets and Automations
     SOL_REGISTER("spawnPet", CLuaBaseEntity::spawnPet);
@@ -13962,11 +14124,18 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getAutomatonHead", CLuaBaseEntity::getAutomatonHead);
     SOL_REGISTER("unlockAttachment", CLuaBaseEntity::unlockAttachment);
 
-    SOL_REGISTER("getActiveManeuvers", CLuaBaseEntity::getActiveManeuvers);
+    SOL_REGISTER("getActiveManeuverCount", CLuaBaseEntity::getActiveManeuverCount);
     SOL_REGISTER("removeOldestManeuver", CLuaBaseEntity::removeOldestManeuver);
     SOL_REGISTER("removeAllManeuvers", CLuaBaseEntity::removeAllManeuvers);
     SOL_REGISTER("updateAttachments", CLuaBaseEntity::updateAttachments);
     SOL_REGISTER("reduceBurden", CLuaBaseEntity::reduceBurden);
+
+    SOL_REGISTER("getActiveRuneCount", CLuaBaseEntity::getActiveRuneCount);
+    SOL_REGISTER("getHighestRuneEffect", CLuaBaseEntity::getHighestRuneEffect);
+    SOL_REGISTER("getNewestRuneEffect", CLuaBaseEntity::getNewestRuneEffect);
+    SOL_REGISTER("removeOldestRune", CLuaBaseEntity::removeOldestRune);
+    SOL_REGISTER("removeNewestRune", CLuaBaseEntity::removeNewestRune);
+    SOL_REGISTER("removeAllRunes", CLuaBaseEntity::removeAllRunes);
 
     // Trust related
     SOL_REGISTER("spawnTrust", CLuaBaseEntity::spawnTrust);
@@ -14076,6 +14245,7 @@ std::ostream& operator<<(std::ostream& os, const CLuaBaseEntity& entity)
     {
         std::string id   = std::to_string(entity.m_PBaseEntity->id);
         std::string name = entity.m_PBaseEntity->name;
+        std::string packetName = entity.m_PBaseEntity->packetName;
         std::string type = "";
         switch (entity.m_PBaseEntity->objtype)
         {
@@ -14126,7 +14296,8 @@ std::ostream& operator<<(std::ostream& os, const CLuaBaseEntity& entity)
             }
         }
 
-        return os << "CLuaBaseEntity(" << type << " | " << id << " | " << name << ")";
+        std::string ending = (packetName.empty()) ? ")" : " | " + packetName + ")";
+        return os << "CLuaBaseEntity(" << type << " | " << id << " | " << name << ending;
     }
 
     return os << "CLuaBaseEntity(nullptr)";

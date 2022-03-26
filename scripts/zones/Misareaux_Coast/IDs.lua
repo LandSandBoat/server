@@ -23,6 +23,7 @@ zones[xi.zone.MISAREAUX_COAST] =
         FISHING_MESSAGE_OFFSET   = 7078, -- You can't fish here.
         CONQUEST_BASE            = 7178, -- Tallying conquest results...
         DOOR_CLOSED              = 7354, -- The door is locked tight.
+        SNOWMINT_POINT_LOCKED    = 7357, -- This gate leads to Snowmint Point. However, it seems to be locked...
         LOGGING_IS_POSSIBLE_HERE = 7608, -- Logging is possible here if you have <item>.
         NOTHING_HERE_YET         = 7667, -- There is nothing here yet. Check again in the morning.
         ALREADY_BAITED           = 7668, -- The trap already contains <item>.

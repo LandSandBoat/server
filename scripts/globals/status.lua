@@ -916,6 +916,8 @@ end
 
 xi.mod =
 {
+    -- IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN src/map/modifier.h ASWELL!
+
     NONE                            = 0,
     DEF                             = 1,
     HP                              = 2,
@@ -1215,6 +1217,26 @@ xi.mod =
     SPIKES_DMG                      = 344,
     TP_BONUS                        = 345,
     PERPETUATION_REDUCTION          = 346,
+
+    -- Rune Fencer
+    ENHANCES_BATTUTA            = 1004, -- Used by RUN merit point cat 2 to add +N% bonus damage to parry spikes during Battuta effect
+    ENHANCES_ELEMENTAL_SFORZO   = 1005, -- Bonus duration
+    ENHANCES_SLEIGHT_OF_SWORD   = 1006, -- Used by RUN merit point cat 2 to add +N Subtle Blow to Swordplay
+    ENHANCES_INSPIRATION        = 1007, -- Used by RUN merit point cat 2 to add +N Fast Cast to Vallation/Valiance
+    SWORDPLAY                   = 1008, -- Adds bonus starting ticks to Swordplay
+    LIEMENT                     = 1009, -- Adds bonus duration as +N seconds
+    VALIANCE_VALLATION_DURATION = 1010, -- Adds bonus duration as +N seconds
+    PFLUG                       = 1011, -- Adds flat additional all-resist rate in +N%
+    VIVACIOUS_PULSE_POTENCY     = 1012, -- Adds final HP bonus +N% to calculation of Vivacious Pulse
+    AUGMENTS_VIVACIOUS_PULSE    = 1013, -- Adds random erase/-na to Vivacious Pulse
+    RAYKE_DURATION              = 1014, -- Adds bonus duration as +N seconds
+    SWIPE                       = 1016, -- Adds bonus damage to the Swipe/Lunge magic damage calculation
+    LIEMENT_EXTENDS_TO_AREA     = 1020, -- Epeolatry's (RUN Ergon weapon) special effect, makes Liement AoE to party instead of self target only.
+    INSPIRATION_FAST_CAST       = 1021, -- Inspiration's fast cast, additive with normal fast cast for a cap beyond 80%
+    PARRY_SPIKES                = 1022, -- Battuta parry spikes rate
+    PARRY_SPIKES_DMG            = 1023, -- Battuta parry spikes damage
+    SPECIAL_ATTACK_EVASION      = 1024, -- Foil "Special Attack" evasion
+
     FIRE_AFFINITY_DMG               = 347,
     ICE_AFFINITY_DMG                = 348,
     WIND_AFFINITY_DMG               = 349,
@@ -1398,7 +1420,7 @@ xi.mod =
     RERAISE_II                      = 457, -- Reraise II.
     RERAISE_III                     = 458, -- Reraise III.
 
-    ITEM_ADDEFFECT_TYPE     = 431, -- see procType table in scripts\globals\assitional_effects.lua
+    ITEM_ADDEFFECT_TYPE     = 431, -- see procType table in scripts\globals\additional_effects.lua
     ITEM_SUBEFFECT          = 499, -- Animation ID of Spikes and Additional Effects
     ITEM_ADDEFFECT_DMG      = 500, -- Damage of an items Additional Effect or Spikes
     ITEM_ADDEFFECT_CHANCE   = 501, -- Chance of an items Additional Effect or Spikes
@@ -1451,7 +1473,7 @@ xi.mod =
     DIA_DOT                         = 313, -- Increases the DoT damage of Dia
     SHARPSHOT                       = 314, -- Sharpshot accuracy bonus
     ENH_DRAIN_ASPIR                 = 315, -- % damage boost to Drain and Aspir
-    SNEAK_ATK_DEX                   = 874, -- % DEX boost to Sneak Attack (if gear mod, needs to be equipped on hit)
+    SNEAK_ATK_DEX                   = 830, -- % DEX boost to Sneak Attack (if gear mod, needs to be equipped on hit)
     TRICK_ATK_AGI                   = 520, -- % AGI boost to Trick Attack (if gear mod, needs to be equipped on hit)
     NIN_NUKE_BONUS                  = 522, -- magic attack bonus for NIN nukes
     DAKEN                           = 911, -- Chance to throw shuriken on attack
@@ -1518,7 +1540,7 @@ xi.mod =
     AUGMENTS_CONVERT                = 525, -- Convert HP to MP Ratio Multiplier. Value = MP multiplier rate.
     AUGMENTS_SA                     = 526, -- Adds Critical Attack Bonus to Sneak Attack, percentage based.
     AUGMENTS_TA                     = 527, -- Adds Critical Attack Bonus to Trick Attack, percentage based.
-    AUGMENTS_FEINT                  = 873, -- Feint will give another -10 Evasion per merit level
+    AUGMENTS_FEINT                  = 502, -- Feint will give another -10 Evasion per merit level
     AUGMENTS_ASSASSINS_CHARGE       = 886, -- Gives Assassin's Charge +1% Critical Hit Rate per merit level
     AUGMENTS_AMBUSH                 = 887, -- Gives +1% Triple Attack per merit level when Ambush conditions are met
     AUGMENTS_AURA_STEAL             = 889, -- 20% chance of 2 effects to be dispelled or stolen per merit level
@@ -1555,6 +1577,7 @@ xi.mod =
     -- Per https://www.bg-wiki.com/bg/Weapon_Skill_Damage we need all 3..
     ALL_WSDMG_FIRST_HIT             = 841, -- Generic (all Weaponskills) damage, first hit only.
     WS_NO_DEPLETE                   = 949, -- % chance a Weaponskill depletes no TP.
+    INQUARTATA                      = 963, -- additive % bonus to base parry rate
     WS_STR_BONUS                    = 980, -- % bonus to str_wsc.
     WS_DEX_BONUS                    = 957, -- % bonus to dex_wsc.
     WS_VIT_BONUS                    = 981, -- % bonus to vit_wsc.
@@ -1612,6 +1635,32 @@ xi.mod =
     ONE_HOUR_RECAST = 996, -- Decreases the recast time of one-hour abilities by n minutes.
 
     DREAD_SPIKES_EFFECT = 998,
+
+    PENGUIN_RING_EFFECT   = 152, -- +2 on fishing arrow delay / fish movement for mini - game
+    ALBATROSS_RING_EFFECT = 153, -- adds 30 seconds to mini - game time
+    PELICAN_RING_EFFECT   = 154, -- adds extra skillup roll for fishing
+
+    MAIN_DMG_RANK                = 377, -- adds weapon rank to main weapon http://wiki.bluegartr.com/bg/Weapon_Rank
+    SUB_DMG_RANK                 = 378, -- adds weapon rank to sub weapon
+    RANGED_DMG_RANK              = 379, -- adds weapon rank to ranged weapon
+
+    BLOOD_BOON                   = 913, -- Occasionally cuts down MP cost of Blood Pact abilities. Does not affect abilities that require Astral Flow.
+    EXPERIENCE_RETAINED          = 914, -- Experience points retained upon death (this is a percentage)
+    CAPACITY_BONUS               = 915, -- Capacity point bonus granted
+
+    CONQUEST_BONUS               = 933, -- Conquest points bonus granted (percentage)
+    CONQUEST_REGION_BONUS        = 934, -- Increases the influence points awarded to the player's nation when receiving conquest points
+    CAMPAIGN_BONUS               = 935, -- Increases the evaluation for allied forces by percentage
+
+    CONSERVE_TP                  = 944, -- Conserve TP trait, random chance between 10 and 200 TP
+
+    AUTO_ELEM_CAPACITY           = 987, -- Increases the automaton's elemental capacity for attachments
+    MAX_FINISHING_MOVE_BONUS     = 988, -- Increases the maximum number of finishing moves that may be stored
+
+    TRIPLE_SHOT_RATE             = 999, -- Percent increase to Triple Shot Rate
+    NINJUTSU_DURATION            = 1000,
+
+    -- IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN src/map/modifier.h ASWELL!
 
     -- The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     -- 570 - 825 used by WS DMG mods these are not spares.
@@ -2802,8 +2851,9 @@ xi.mount =
     WIVRE          = 30,
     RED_RAPTOR     = 31,
     IRON_GIANT     = 32,
+    BYAKKO         = 33,
     --
-    MOUNT_MAX      = 33,
+    MOUNT_MAX      = 34,
 }
 
 -----------------------------------

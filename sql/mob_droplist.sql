@@ -2894,16 +2894,17 @@ INSERT INTO `mob_droplist` VALUES (518,0,0,1000,16792,250); -- goshishos_scythe
 INSERT INTO `mob_droplist` VALUES (519,0,0,1000,1449,40);
 INSERT INTO `mob_droplist` VALUES (519,0,0,1000,1455,30);
 INSERT INTO `mob_droplist` VALUES (519,0,0,1000,1456,10);
-INSERT INTO `mob_droplist` VALUES (519,0,0,1000,3358,80);
+INSERT INTO `mob_droplist` VALUES (519,0,0,1000,3358,150);   -- (Count_Raum) shrouded_bijou
 INSERT INTO `mob_droplist` VALUES (519,0,0,1000,4249,1000);
 INSERT INTO `mob_droplist` VALUES (519,0,0,1000,15107,90);
+INSERT INTO `mob_droplist` VALUES (520,0,0,1000,3358,240);   -- (Count_Vine) shrouded_bijou
 INSERT INTO `mob_droplist` VALUES (520,0,0,1000,1449,90);
 INSERT INTO `mob_droplist` VALUES (520,0,0,1000,1450,10);
 INSERT INTO `mob_droplist` VALUES (520,0,0,1000,1452,10);
 INSERT INTO `mob_droplist` VALUES (520,0,0,1000,4249,1000);
 INSERT INTO `mob_droplist` VALUES (520,0,0,1000,15083,180);
 INSERT INTO `mob_droplist` VALUES (521,0,0,1000,1452,10);
-INSERT INTO `mob_droplist` VALUES (521,0,0,1000,3358,10);
+INSERT INTO `mob_droplist` VALUES (521,0,0,1000,3358,240);   -- (Count_Zaebos) shrouded_bijou
 INSERT INTO `mob_droplist` VALUES (521,0,0,1000,4249,1000);
 INSERT INTO `mob_droplist` VALUES (521,0,0,1000,15087,70);
 INSERT INTO `mob_droplist` VALUES (522,0,0,1000,1722,537);
@@ -3730,12 +3731,12 @@ INSERT INTO `mob_droplist` VALUES (713,0,0,1000,1621,80);
 INSERT INTO `mob_droplist` VALUES (714,0,0,1000,1449,90);
 INSERT INTO `mob_droplist` VALUES (714,0,0,1000,1453,10);
 INSERT INTO `mob_droplist` VALUES (714,0,0,1000,1456,30);
-INSERT INTO `mob_droplist` VALUES (714,0,0,1000,3358,10);
+INSERT INTO `mob_droplist` VALUES (714,0,0,1000,3358,240);   -- (Duke_Berith) shrouded_bijou
 INSERT INTO `mob_droplist` VALUES (714,0,0,1000,4249,1000);
 INSERT INTO `mob_droplist` VALUES (714,0,0,1000,15076,160);
 INSERT INTO `mob_droplist` VALUES (715,0,0,1000,1450,10);
 INSERT INTO `mob_droplist` VALUES (715,0,0,1000,1452,10);
-INSERT INTO `mob_droplist` VALUES (715,0,0,1000,3358,10);
+INSERT INTO `mob_droplist` VALUES (715,0,0,1000,3358,240);   -- (Duke_Gomory) shrouded_bijou
 INSERT INTO `mob_droplist` VALUES (715,0,0,1000,4249,1000);
 INSERT INTO `mob_droplist` VALUES (715,0,0,1000,15073,110);
 INSERT INTO `mob_droplist` VALUES (716,0,0,1000,886,202);   -- (Duke_Haborym) demon_skull
@@ -3743,6 +3744,7 @@ INSERT INTO `mob_droplist` VALUES (716,0,0,1000,902,327);   -- demon_horn
 INSERT INTO `mob_droplist` VALUES (716,0,0,1000,4111,10);   -- dark_cluster
 INSERT INTO `mob_droplist` VALUES (716,0,0,1000,4875,298);  -- scroll_of_absorb-dex
 INSERT INTO `mob_droplist` VALUES (716,0,0,1000,16786,317); -- barbarians_scythe
+INSERT INTO `mob_droplist` VALUES (717,0,0,1000,3358,240);   -- (Prince_Seere) shrouded_bijou
 INSERT INTO `mob_droplist` VALUES (717,0,0,1000,1455,90);
 INSERT INTO `mob_droplist` VALUES (717,0,0,1000,4249,1000);
 INSERT INTO `mob_droplist` VALUES (717,0,0,1000,15079,90);
@@ -7591,6 +7593,7 @@ INSERT INTO `mob_droplist` VALUES (1450,0,0,1000,1334,190);
 INSERT INTO `mob_droplist` VALUES (1451,0,0,1000,901,140);
 INSERT INTO `mob_droplist` VALUES (1451,0,0,1000,15223,430);
 INSERT INTO `mob_droplist` VALUES (1451,0,0,1000,18255,140);
+INSERT INTO `mob_droplist` VALUES (1452,0,0,1000,3358,240);   -- (King_Zagan) shrouded_bijou
 INSERT INTO `mob_droplist` VALUES (1452,2,0,1000,1449,0);
 INSERT INTO `mob_droplist` VALUES (1452,2,0,1000,1452,0);
 INSERT INTO `mob_droplist` VALUES (1452,0,0,1000,1452,10);
@@ -8372,6 +8375,7 @@ INSERT INTO `mob_droplist` VALUES (1623,0,0,1000,4755,30);
 INSERT INTO `mob_droplist` VALUES (1623,0,0,1000,4784,50);
 INSERT INTO `mob_droplist` VALUES (1623,0,0,1000,4812,30);
 INSERT INTO `mob_droplist` VALUES (1623,0,0,1000,17232,100);
+INSERT INTO `mob_droplist` VALUES (1624,0,0,1000,3358,240);   -- (Marquis_Orias) shrouded_bijou
 INSERT INTO `mob_droplist` VALUES (1624,0,0,1000,1449,90);
 INSERT INTO `mob_droplist` VALUES (1624,2,0,1000,1449,0);
 INSERT INTO `mob_droplist` VALUES (1624,2,0,1000,1452,0);
@@ -8380,18 +8384,21 @@ INSERT INTO `mob_droplist` VALUES (1624,0,0,1000,4249,1000);
 INSERT INTO `mob_droplist` VALUES (1624,0,0,1000,15110,130);
 INSERT INTO `mob_droplist` VALUES (1625,0,0,1000,1452,10);
 INSERT INTO `mob_droplist` VALUES (1625,0,0,1000,1455,90);
-INSERT INTO `mob_droplist` VALUES (1625,0,0,1000,3358,10);
+INSERT INTO `mob_droplist` VALUES (1625,0,0,1000,3358,240);   -- (Marquis_Cimeries) shrouded_bijou
 INSERT INTO `mob_droplist` VALUES (1625,0,0,1000,4249,1000);
 INSERT INTO `mob_droplist` VALUES (1625,0,0,1000,15097,80);
+INSERT INTO `mob_droplist` VALUES (1626,0,0,1000,3358,240);   -- (Count_Vine) shrouded_bijou
 INSERT INTO `mob_droplist` VALUES (1626,0,0,1000,1452,40);
 INSERT INTO `mob_droplist` VALUES (1626,0,0,1000,4249,1000);
 INSERT INTO `mob_droplist` VALUES (1626,0,0,1000,15126,120);
 INSERT INTO `mob_droplist` VALUES (1627,0,0,1000,2695,1000); -- (Marquis Forneus) bamboo_medicine_basket
 INSERT INTO `mob_droplist` VALUES (1627,0,0,1000,18952,131); -- (Marquis Forneus) faucheuse
 INSERT INTO `mob_droplist` VALUES (1627,0,0,1000,19040,131); -- (Marquis Forneus) shark_strap
+INSERT INTO `mob_droplist` VALUES (1628,0,0,1000,3358,150);   -- (Marquis_Gamygyn) shrouded_bijou
 INSERT INTO `mob_droplist` VALUES (1628,0,0,1000,1449,90);
 INSERT INTO `mob_droplist` VALUES (1628,0,0,1000,4249,1000);
 INSERT INTO `mob_droplist` VALUES (1628,0,0,1000,15114,100);
+INSERT INTO `mob_droplist` VALUES (1629,0,0,1000,3358,240);   -- (Marquis_Nebiros) shrouded_bijou
 INSERT INTO `mob_droplist` VALUES (1629,0,0,1000,1449,90);
 INSERT INTO `mob_droplist` VALUES (1629,2,0,1000,1449,0);
 INSERT INTO `mob_droplist` VALUES (1629,2,0,1000,1452,0);
@@ -8399,9 +8406,11 @@ INSERT INTO `mob_droplist` VALUES (1629,0,0,1000,1453,10);
 INSERT INTO `mob_droplist` VALUES (1629,2,0,1000,1455,0);
 INSERT INTO `mob_droplist` VALUES (1629,0,0,1000,4249,1000);
 INSERT INTO `mob_droplist` VALUES (1629,0,0,1000,15086,130);
+INSERT INTO `mob_droplist` VALUES (1630,0,0,1000,3358,150);   -- (Marquis_Orias) shrouded_bijou
 INSERT INTO `mob_droplist` VALUES (1630,0,0,1000,1449,90);
 INSERT INTO `mob_droplist` VALUES (1630,0,0,1000,4249,1000);
 INSERT INTO `mob_droplist` VALUES (1630,0,0,1000,15075,60);
+INSERT INTO `mob_droplist` VALUES (1631,0,0,1000,3358,240);   -- (Marquis_Sabnak) shrouded_bijou
 INSERT INTO `mob_droplist` VALUES (1631,0,0,1000,1449,90);
 INSERT INTO `mob_droplist` VALUES (1631,2,0,1000,1449,0);
 INSERT INTO `mob_droplist` VALUES (1631,2,0,1000,1452,0);
@@ -10712,6 +10721,7 @@ INSERT INTO `mob_droplist` VALUES (2020,0,0,1000,5374,100);
 INSERT INTO `mob_droplist` VALUES (2020,0,0,1000,5375,100);
 INSERT INTO `mob_droplist` VALUES (2020,0,0,1000,5384,100);
 INSERT INTO `mob_droplist` VALUES (2020,0,0,1000,14555,1000);
+INSERT INTO `mob_droplist` VALUES (2021,0,0,1000,3358,240);   -- (Prince_Seere) shrouded_bijou
 INSERT INTO `mob_droplist` VALUES (2021,0,0,1000,1449,90);
 INSERT INTO `mob_droplist` VALUES (2021,0,0,1000,1456,10);
 INSERT INTO `mob_droplist` VALUES (2021,0,0,1000,4249,1000);
@@ -17117,6 +17127,16 @@ INSERT INTO `mob_droplist` VALUES (3205,0,0,1000,4109,1); -- (Flume Toad) water_
 INSERT INTO `mob_droplist` VALUES (3206,0,0,1000,2151,150); -- (Marid) marid_hide
 INSERT INTO `mob_droplist` VALUES (3206,0,0,1000,2166,5); -- (Marid) lock_of_marid_hair
 INSERT INTO `mob_droplist` VALUES (3207,0,0,1000,3424,1000); -- (Angra Mainyu) fiendish_tome_chapter_21
+INSERT INTO `mob_droplist` VALUES (3208,0,0,1000,18138,150); -- (Sabotender Bailarin) Bailathorn
+INSERT INTO `mob_droplist` VALUES (3208,0,0,1000,18138,150); -- (Sabotender Bailarin) Bailathorn
+INSERT INTO `mob_droplist` VALUES (3208,0,0,1000,18138,0); -- (Sabotender Bailarin) Bailathorn
+INSERT INTO `mob_droplist` VALUES (3208,0,0,1000,916,140); -- (Sabotender Bailarin) Cactaur Needle
+INSERT INTO `mob_droplist` VALUES (3208,0,0,1000,1592,80); -- (Sabotender Bailarin) Cactaur Root
+INSERT INTO `mob_droplist` VALUES (3208,0,0,1000,1236,180); -- (Sabotender Bailarin) Cactaur Stems
+INSERT INTO `mob_droplist` VALUES (3209,0,0,1000,14168,1000); -- (Sabotender Bailarina) Dune Boots
+INSERT INTO `mob_droplist` VALUES (3209,0,0,1000,916,140); -- (Sabotender Bailarin) Cactaur Needle
+INSERT INTO `mob_droplist` VALUES (3209,0,0,1000,1592,80); -- (Sabotender Bailarin) Cactaur Root
+INSERT INTO `mob_droplist` VALUES (3209,0,0,1000,1236,180); -- (Sabotender Bailarin) Cactaur Stems
 
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;

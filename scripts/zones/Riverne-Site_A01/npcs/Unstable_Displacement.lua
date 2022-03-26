@@ -14,7 +14,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:messageSpecial(ID.text.SPACE_SEEMS_DISTORTED)
+    player:messageSpecial(ID.text.A_GLOWING_MIST)
 end
 
 entity.onEventUpdate = function(player, csid, option, extras)

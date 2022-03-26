@@ -38,9 +38,9 @@ local ids =
     MAAT                  = 23,
     OUTPOST               = 24,
     LEADER                = 25,
-    EXITPROMMEA           = 26,
-    EXITPROMHOLLA         = 27,
-    EXITPROMDEM           = 28,
+    EXITPROMHOLLA         = 26,
+    EXITPROMDEM           = 27,
+    EXITPROMMEA           = 28,
     LUFAISE               = 29,
     CHOCO_WINDURST        = 30,
     CHOCO_SANDORIA        = 31,
@@ -170,9 +170,9 @@ xi.teleport.type =
 xi.teleport.runic_portal =
 {
     AZOUPH  = 1,
-    MAMOOL  = 2,
-    HALVUNG = 3,
-    DVUCCA  = 4,
+    DVUCCA  = 2,
+    MAMOOL  = 3,
+    HALVUNG = 4,
     ILRUSI  = 5,
     NYZUL   = 6,
 }

@@ -20,9 +20,7 @@ entity.onTrigger = function(player, npc)
     local lureOfTheWildcat = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.LURE_OF_THE_WILDCAT)
     local wildcatWindurst = player:getCharVar("WildcatWindurst")
 
-    if player:getCurrentMission(COP) == xi.mission.id.cop.THE_ROAD_FORKS and player:getCharVar("MEMORIES_OF_A_MAIDEN_Status") == 4 then
-        player:startEvent(873)
-    elseif lureOfTheWildcat == QUEST_ACCEPTED and not utils.mask.getBit(wildcatWindurst, 14) then
+    if lureOfTheWildcat == QUEST_ACCEPTED and not utils.mask.getBit(wildcatWindurst, 14) then
         player:startEvent(939)
     elseif player:hasKeyItem(xi.ki.NEW_MODEL_HAT) and not utils.mask.getBit(player:getCharVar("QuestHatInHand_var"), 4) then
         player:messageSpecial(ID.text.YOU_SHOW_OFF_THE, 0, xi.ki.NEW_MODEL_HAT)
@@ -55,8 +53,6 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 60 then
         player:setCharVar("QuestHatInHand_var", utils.mask.setBit(player:getCharVar("QuestHatInHand_var"), 4, true))
         player:addCharVar("QuestHatInHand_count", 1)
-    elseif csid == 873 then
-        player:setCharVar("MEMORIES_OF_A_MAIDEN_Status", 5)
     elseif csid == 939 then
         player:setCharVar("WildcatWindurst", utils.mask.setBit(player:getCharVar("WildcatWindurst"), 14, true))
     end

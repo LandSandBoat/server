@@ -11,6 +11,7 @@ zones[xi.zone.PORT_JEUNO] =
     text =
     {
         ITEM_CANNOT_BE_OBTAINED = 6383, -- You cannot obtain the <item>. Come back after sorting your inventory.
+        MYSTIC_RETRIEVER        = 6386, -- You cannot obtain the <item>. Speak with the mystic retriever after sorting your inventory.
         ITEM_OBTAINED           = 6389, -- Obtained: <item>.
         GIL_OBTAINED            = 6390, -- Obtained <number> gil.
         KEYITEM_OBTAINED        = 6392, -- Obtained key item: <keyitem>.

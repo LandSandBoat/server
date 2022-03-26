@@ -92,6 +92,6 @@ def migrate(cur, db):
                     db.commit()
                 except mysql.connector.Error as err:
                     print("Something went wrong: {}".format(err))
-            except:
+            except: # lgtm [py/catch-base-exception]
                 efile.write('[cop_mission_ids] Error reading missions in chars table for charid: ' + str(charid) + '\n')
     db.commit()

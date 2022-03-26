@@ -8,13 +8,9 @@ require("scripts/globals/teleports")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/status")
+require('scripts/missions/cop/helpers')
 -----------------------------------
 local battlefield_object = {}
-
-local function otherLights(player)
-    return (player:hasKeyItem(xi.ki.LIGHT_OF_DEM)   and 1 or 0) +
-           (player:hasKeyItem(xi.ki.LIGHT_OF_HOLLA) and 1 or 0)
-end
 
 battlefield_object.onBattlefieldTick = function(battlefield, tick)
     xi.battlefield.onBattlefieldTick(battlefield, tick)
@@ -29,7 +25,18 @@ end
 battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
     if leavecode == xi.battlefield.leaveCode.WON then
         local _, clearTime, partySize = battlefield:getRecord()
-        local arg8 = 1 + otherLights(player)
+        local arg8 = xi.cop.helpers.numPromyvionCompleted(player, xi.cop.helpers.promyvionCrags.MEA) + 1
+        local copMission = player:getCurrentMission(xi.mission.log_id.COP)
+        local promyvionId = (player:getZoneID() - 17) / 2
+
+        if
+            (copMission == xi.mission.id.cop.BELOW_THE_ARKS or
+            copMission == xi.mission.id.cop.THE_MOTHERCRYSTALS) and
+            not player:hasKeyItem(xi.ki.LIGHT_OF_HOLLA + promyvionId)
+        then
+            player:setLocalVar('newPromy', 1)
+        end
+
         player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 0, battlefield:getLocalVar("[cs]bit"), 0, arg8)
     elseif leavecode == xi.battlefield.leaveCode.LOST then
         player:startEvent(32002)
@@ -40,40 +47,12 @@ battlefield_object.onEventUpdate = function(player, csid, option)
 end
 
 battlefield_object.onEventFinish = function(player, csid, option)
-    if csid == 32001 then
-        local teleportTo = xi.teleport.id.EXITPROMMEA
-        local ki = xi.ki.LIGHT_OF_MEA
-
-        -- first promyvion completed
-        if player:getCurrentMission(COP) == xi.mission.id.cop.BELOW_THE_ARKS then
-            player:completeMission(xi.mission.log_id.COP, xi.mission.id.cop.BELOW_THE_ARKS)
-            player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_MOTHERCRYSTALS)
-            player:setCharVar("cspromy2", 1)
-            player:setCharVar("PromathiaStatus", 0)
-            player:addKeyItem(ki)
-            player:messageSpecial(ID.text.CANT_REMEMBER, ki)
-
-        elseif player:getCurrentMission(COP) == xi.mission.id.cop.THE_MOTHERCRYSTALS and not player:hasKeyItem(ki) then
-
-            -- second promyvion completed
-            if otherLights(player) < 2 then
-                player:setCharVar("cspromy3", 1)
-                player:addKeyItem(ki)
-                player:messageSpecial(ID.text.CANT_REMEMBER, ki)
-
-            -- final promyvion completed
-            else
-                player:completeMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_MOTHERCRYSTALS)
-                player:setCharVar("PromathiaStatus", 0)
-                player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.AN_INVITATION_WEST)
-                player:addKeyItem(ki)
-                player:messageSpecial(ID.text.CANT_REMEMBER, ki)
-                teleportTo = xi.teleport.id.LUFAISE
-            end
-        end
-
+    if
+        player:getCurrentMission(xi.mission.log_id.COP) > xi.mission.id.cop.THE_MOTHERCRYSTALS and
+        not player:getLocalVar('toLufaise') == 1
+    then
         player:addExp(1500)
-        player:addStatusEffectEx(xi.effect.TELEPORT, 0, teleportTo, 0, 1)
+        xi.teleport.to(player, xi.teleport.id.EXITPROMDEM)
     end
 end
 

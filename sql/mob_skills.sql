@@ -3073,11 +3073,11 @@ INSERT INTO `mob_skills` VALUES (3252,262,'bisection',0,7.0,2000,1500,4,0,0,0,0,
 INSERT INTO `mob_skills` VALUES (3253,263,'leaden_salute',0,15.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (3254,264,'akimbo_shot',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (3255,265,'grisly_horizon',0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (3256,361,'hane_fubuki',1,18.0,2000,1000,4,0,0,0,0,0,0); -- Gessho
-INSERT INTO `mob_skills` VALUES (3257,1299,'shibaraku',0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (3258,363,'shiko_no_mitate',0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (3259,364,'happobarai',0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (3260,354,'rinpyotosha',0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (3256,361,'hane_fubuki',1,18.0,2000,1000,4,0,0,0,1,0,0); -- Gessho
+INSERT INTO `mob_skills` VALUES (3257,1299,'shibaraku',1,7.0,2000,1500,4,0,0,1,14,9,0);
+INSERT INTO `mob_skills` VALUES (3258,363,'shiko_no_mitate',0,7.0,2000,1500,1,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (3259,364,'happobarai',1,7.0,2000,1500,4,0,0,0,5,8,0);
+INSERT INTO `mob_skills` VALUES (3260,354,'rinpyotosha',1,7.0,2000,1500,1,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (3261,335,'bomb_toss',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (3262,334,'goblin_rush',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (3263,1625,'bear_killer',4,7.0,2000,1500,4,0,0,0,0,0,0); -- TODO: Skillchain properties
@@ -3304,10 +3304,10 @@ INSERT INTO `mob_skills` VALUES (3473,446,'stellar_burst',0,7.0,2000,1500,4,0,0,
 -- INSERT INTO `mob_skills` VALUES (3484,3228,'hemorrhaze',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (3485,3229,'regulator',0,7.0,2000,0,4,4,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (3486,260,'tongue_lash',0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (3487,429,'sidewinder',0,16.0,2000,1500,4,0,0,0,0,0,0); -- Semih Lafihna, TODO: Cap'd correctly, animation broken when used
--- INSERT INTO `mob_skills` VALUES (3488,428,'arching_arrow',0,16.0,2000,1500,4,0,0,0,0,0,0); -- TODO: Cap'd correctly, animation broken when used
--- INSERT INTO `mob_skills` VALUES (3489,430,'stellar_arrow',1,16.0,2000,1500,4,0,0,0,0,0,0); -- TODO: Cap'd correctly, animation broken when used
--- INSERT INTO `mob_skills` VALUES (3490,431,'lux_arrow',0,16.0,2000,1500,4,0,0,0,0,0,0); -- TODO: Cap'd correctly, animation broken when used
+INSERT INTO `mob_skills` VALUES (3487,2477,'sidewinder',0,16.0,2000,1500,4,0,0,0,5,1,6); -- Semih Lafihna
+INSERT INTO `mob_skills` VALUES (3488,2476,'arching_arrow',0,16.0,2000,1500,4,0,0,0,11,0,0);
+INSERT INTO `mob_skills` VALUES (3489,2478,'stellar_arrow',1,16.0,2000,1500,4,0,0,0,14,9,0);
+INSERT INTO `mob_skills` VALUES (3490,2479,'lux_arrow',0,16.0,2000,1500,4,0,0,0,12,10,0);
 INSERT INTO `mob_skills` VALUES (3491,2029,'grapeshot',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (3492,2030,'pirate_pummel',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (3493,2031,'powder_keg',0,7.0,2000,1500,4,0,0,0,0,0,0);

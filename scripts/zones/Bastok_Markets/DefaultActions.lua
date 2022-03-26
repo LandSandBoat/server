@@ -5,6 +5,7 @@ return {
     ['Biggorf']    = { event = 126 },
     ['Degenhard']  = { event = 255 },
     ['Emrys']      = { event = 115 },
+    ['Matthias']   = { event = 499 },
     ['Pavel']      = { event = 128 },
     ['Shamarhaan'] = { event = 433 },
 }

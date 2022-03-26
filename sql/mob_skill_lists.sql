@@ -3512,7 +3512,11 @@ INSERT INTO `mob_skill_lists` VALUES ('TRUST_Prishe',1028,3236); -- Knuckle Sand
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Iron_Eater',1032,80); -- Shield Break
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Iron_Eater',1032,83); -- Armor Break
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Iron_Eater',1032,88); -- Steel Cyclone
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Gessho',1033,0);
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Gessho',1033,3256); -- hane_fubuki
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Gessho',1033,3257); -- shibaraku
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Gessho',1033,3258); -- shiko_no_mitate
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Gessho',1033,3259); -- happobarai
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Gessho',1033,3260); -- rinpyotosha
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Gadalar',1034,0);
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Rainemard',1035,33); -- Burning Blade
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Rainemard',1035,34); -- Red Lotus Blade

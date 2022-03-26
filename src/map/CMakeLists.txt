@@ -17,6 +17,10 @@ set(SOURCES
     blue_spell.h
     blue_trait.cpp
     blue_trait.h
+    campaign_handler.cpp
+    campaign_handler.h
+    campaign_system.cpp
+    campaign_system.h
     char_recast_container.cpp
     char_recast_container.h
     commandhandler.cpp

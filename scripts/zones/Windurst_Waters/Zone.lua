@@ -1,7 +1,5 @@
 -----------------------------------
---
 -- Zone: Windurst_Waters (238)
---
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Waters/IDs")
 require("scripts/globals/events/harvest_festivals")
@@ -22,18 +20,6 @@ end
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    if xi.settings.ENABLE_ROV == 1 and player:getCurrentMission(ROV) == xi.mission.id.rov.RHAPSODIES_OF_VANADIEL and player:getMainLvl()>=3 then
-        cs = 30035
-    end
-
-    if
-        player:getCurrentMission(ROV) == xi.mission.id.rov.FATES_CALL and
-        (player:getRank(player:getNation()) > 5 or
-        (player:getCurrentMission(player:getNation()) == xi.mission.id.nation.SHADOW_LORD and player:getMissionStatus(player:getNation()) >= 4))
-    then
-        cs = 30036
-    end
-
     -- FIRST LOGIN (START CS)
     if player:getPlaytime(false) == 0 then
         if xi.settings.NEW_CHARACTER_CUTSCENE == 1 then
@@ -41,9 +27,6 @@ zone_object.onZoneIn = function(player, prevZone)
         end
         player:setPos(-40, -5, 80, 64)
         player:setHomePoint()
-    elseif player:getCurrentMission(COP) == xi.mission.id.cop.THE_ROAD_FORKS and player:getCharVar("MEMORIES_OF_A_MAIDEN_Status") == 1 then -- COP MEMORIES_OF_A_MAIDEN--3-3B: Windurst Route
-        player:setCharVar("MEMORIES_OF_A_MAIDEN_Status", 2)
-        cs = 871
     end
 
     -- MOG HOUSE EXIT
@@ -68,12 +51,6 @@ end
 zone_object.onEventFinish = function(player, csid, option)
     if csid == 531 then
         player:messageSpecial(ID.text.ITEM_OBTAINED, 536)
-    elseif csid == 30035 then
-        player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.RHAPSODIES_OF_VANADIEL)
-        player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.RESONACE)
-    elseif csid == 30036 then
-        player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.FATES_CALL)
-        player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.WHAT_LIES_BEYOND)
     end
 end
 

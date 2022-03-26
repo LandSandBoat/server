@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Misareaux Coast
---  NPC: Dilapidated Gate
+--  NPC: Dilapidated Gate (Snowmint Point)
 -- !pos 260 9 -435 25
 -----------------------------------
 local ID = require("scripts/zones/Misareaux_Coast/IDs")
@@ -15,12 +15,8 @@ entity.onTrigger = function(player, npc)
     local cop = player:getCurrentMission(COP)
     local copStat = player:getCharVar("PromathiaStatus")
 
-    -- AN ETERNAL MEMORY (PM2-4)
-    if (cop == xi.mission.id.cop.AN_ETERNAL_MELODY and copStat == 1) then
-        player:startEvent(5)
-
     -- SHELTERING DOUBT (PM4-1)
-    elseif (cop == xi.mission.id.cop.SHELTERING_DOUBT and copStat == 3) then
+    if (cop == xi.mission.id.cop.SHELTERING_DOUBT and copStat == 3) then
         player:startEvent(7)
 
     -- A PLACE TO RETURN (PM6-2)
@@ -43,7 +39,7 @@ entity.onTrigger = function(player, npc)
 
     -- DEFAULT DIALOG
     else
-        player:messageSpecial(ID.text.DOOR_CLOSED)
+        player:messageSpecial(ID.text.SNOWMINT_POINT_LOCKED)
     end
 end
 
@@ -51,12 +47,8 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    -- AN ETERNAL MEMORY (PM2-4)
-    if (csid == 5) then
-        player:setCharVar("PromathiaStatus", 2)
-
     -- SHELTERING DOUBT (PM4-1)
-    elseif (csid == 7) then
+    if (csid == 7) then
         player:setCharVar("PromathiaStatus", 0)
         player:completeMission(xi.mission.log_id.COP, xi.mission.id.cop.SHELTERING_DOUBT)
         player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_SAVAGE)

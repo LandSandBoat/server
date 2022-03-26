@@ -1,7 +1,5 @@
 -----------------------------------
---
 -- Zone: RuLude_Gardens (243)
---
 -----------------------------------
 local ID = require("scripts/zones/RuLude_Gardens/IDs")
 require("scripts/globals/conquest")
@@ -15,7 +13,7 @@ require("scripts/globals/items")
 local zone_object = {}
 
 zone_object.onInitialize = function(zone)
-    zone:registerRegion(1, -4, -2, 40, 4, 3, 50)
+    zone:registerRegion(1, -16, 2, 32, 16, 4, 86) -- Palace entrance. Ends at back exit. Needs retail confirmaton for the back entrance.
 end
 
 zone_object.onZoneIn = function(player, prevZone)
@@ -42,58 +40,10 @@ zone_object.onConquestUpdate = function(zone, updatetype)
 end
 
 zone_object.onRegionEnter = function(player, region)
-
     local regionID = region:GetRegionID()
 
     if regionID == 1 then
-
-        -- CRASHING WAVES
         if
-            player:getCurrentMission(ROV) == xi.mission.id.rov.CRASHING_WAVES and
-            player:getLocalVar("CrashingWavesBlocked") ~= 1
-        then
-            local metPrishe = 0
-            local prisheIsSick = 0
-            local prisheIsHealthy = 0
-            local tenzenSword = 0
-
-            -- TODO: Needs research of when this dialog gets enabled. Have added a condition that makes sense to me.
-            if player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DISTANT_BELIEFS) then
-                metPrishe = 1
-            end
-
-            -- TODO: Needs research of when this dialog gets enabled. Have added a condition that makes sense to me.
-            if player:getCurrentMission(COP) == xi.mission.id.cop.DARKNESS_NAMED then
-                prisheIsSick = 1
-            end
-
-            -- TODO: Needs research of when this dialog gets enabled. Have added a condition that makes sense to me.
-            if player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) then
-                prisheIsSick = 1
-                prisheIsHealthy = 1
-            end
-
-            -- TODO: Needs research of when this dialog gets enabled. Have added a condition that makes sense to me.
-            if player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) then
-                tenzenSword = 1
-            end
-
-            if
-                xi.rhapsodies.charactersAvailable(player) and
-                player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.A_VESSEL_WITHOUT_A_CAPTAIN)
-            then
-                player:startEvent(10244, metPrishe, prisheIsSick, prisheIsHealthy, tenzenSword)
-            else
-                player:setLocalVar("CrashingWavesBlocked", 1)
-                player:startEvent(10245)
-            end
-
-        elseif
-            player:getCurrentMission(COP) == xi.mission.id.cop.A_VESSEL_WITHOUT_A_CAPTAIN and
-            player:getCharVar("PromathiaStatus") == 1
-        then
-            player:startEvent(65, player:getNation())
-        elseif
             player:getCurrentMission(COP) == xi.mission.id.cop.A_PLACE_TO_RETURN and
             player:getCharVar("PromathiaStatus") == 0
         then
@@ -103,13 +53,6 @@ zone_object.onRegionEnter = function(player, region)
             player:getCharVar("PromathiaStatus") == 2
         then
             player:startEvent(10051)
-        elseif
-            player:getCurrentMission(TOAU) == xi.mission.id.toau.EASTERLY_WINDS and
-            player:getCharVar("AhtUrganStatus") == 1
-        then
-            player:startEvent(10094)
-        elseif player:getCurrentMission(TOAU) == xi.mission.id.toau.ALLIED_RUMBLINGS then
-            player:startEvent(10097)
         elseif player:getCurrentMission(COP) == xi.mission.id.cop.DAWN then
             if
                 player:getCharVar("COP_3-taru_story") == 2 and
@@ -161,15 +104,7 @@ zone_object.onEventUpdate = function(player, csid, option)
 end
 
 zone_object.onEventFinish = function(player, csid, option)
-    if csid == 65 then
-        player:setCharVar("PromathiaStatus", 0)
-        player:completeMission(xi.mission.log_id.COP, xi.mission.id.cop.A_VESSEL_WITHOUT_A_CAPTAIN)
-        player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_ROAD_FORKS) -- THE_ROAD_FORKS -- global mission 3.3
-        -- We can't have more than 1 current mission at the time, so we keep The road forks as current mission
-        -- progress are recorded in the following two variables
-        player:setCharVar("MEMORIES_OF_A_MAIDEN_Status", 1) -- MEMORIES_OF_A_MAIDEN--3-3B: Windurst Road
-        player:setCharVar("EMERALD_WATERS_Status", 1) -- EMERALD_WATERS-- 3-3A: San d'Oria Road
-    elseif csid == 10047 then
+    if csid == 10047 then
         player:setCharVar("PromathiaStatus", 0)
         player:completeMission(xi.mission.log_id.COP, xi.mission.id.cop.FOR_WHOM_THE_VERSE_IS_SUNG)
         player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.A_PLACE_TO_RETURN)
@@ -184,27 +119,6 @@ zone_object.onEventFinish = function(player, csid, option)
         player:setCharVar("COP_louverance_story", 0)
         player:setCharVar("COP_tenzen_story", 0)
         player:setCharVar("COP_jabbos_story", 0)
-    elseif csid == 10094 then
-        if option == 1 then
-            if player:getFreeSlotsCount() == 0 then
-                player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 2184)
-            else
-                player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.EASTERLY_WINDS)
-                player:addMission(xi.mission.log_id.TOAU, xi.mission.id.toau.WESTERLY_WINDS)
-                player:setCharVar("AhtUrganStatus", 0)
-                player:addItem(2184, 10)
-                player:messageSpecial(ID.text.ITEM_OBTAINED, 2184)
-            end
-        else
-            player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.EASTERLY_WINDS)
-            player:addMission(xi.mission.log_id.TOAU, xi.mission.id.toau.WESTERLY_WINDS)
-            player:setCharVar("AhtUrganStatus", 0)
-        end
-    elseif csid == 10097 then
-        player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.ALLIED_RUMBLINGS)
-        player:needToZone(true)
-        player:setCharVar("TOAUM40_STARTDAY", VanadielDayOfTheYear())
-        player:addMission(xi.mission.log_id.TOAU, xi.mission.id.toau.UNRAVELING_REASON)
     elseif csid == 142 then
         player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE)
     elseif csid == 143 then
@@ -227,17 +141,6 @@ zone_object.onEventFinish = function(player, csid, option)
         player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH)
         player:setCharVar('ApocalypseNigh', 1)
         player:setCharVar("ApocNighWait", 0)
-
-    -- CRASHING WAVES
-    elseif csid == 10244 then
-        player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.CRASHING_WAVES)
-        player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.CALL_TO_SERVE)
-        if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.MYSTIC_RETRIEVER, xi.items.CIPHER_OF_TENZENS_ALTER_EGO_II)
-        else
-            player:addItem(xi.items.CIPHER_OF_TENZENS_ALTER_EGO_II)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.CIPHER_OF_TENZENS_ALTER_EGO_II)
-        end
     end
 end
 
