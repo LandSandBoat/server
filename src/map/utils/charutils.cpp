@@ -5967,6 +5967,80 @@ namespace charutils
         PChar->pushPacket(timerPacket);
     }
 
+    time_t getTraverserEpoch(CCharEntity* PChar)
+    {
+        auto fmtQuery = "SELECT unix_timestamp(traverser_start) FROM char_unlocks WHERE charid = %u;";
+
+        auto ret = sql->Query(fmtQuery, PChar->id);
+        if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+        {
+            return sql->GetUIntData(0);
+        }
+
+        return 0;
+    }
+
+    // TODO: Perhaps allow for optional argument to support GM Commands
+    void setTraverserEpoch(CCharEntity* PChar)
+    {
+        auto fmtQuery = "UPDATE char_unlocks SET traverser_start = unix_timestamp() WHERE charid = %u;";
+
+        sql->Query(fmtQuery, PChar->id);
+    }
+
+    uint32 getClaimedTraverserStones(CCharEntity* PChar)
+    {
+        auto fmtQuery = "SELECT traverser_claimed FROM char_unlocks WHERE charid = %u;";
+
+        auto ret = sql->Query(fmtQuery, PChar->id);
+        if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+        {
+            return sql->GetUIntData(0);
+        }
+
+        return 0;
+    }
+
+    void addClaimedTraverserStones(CCharEntity* PChar, uint16 numStones)
+    {
+        auto fmtQuery = "UPDATE char_unlocks SET traverser_claimed = traverser_claimed + %u WHERE charid = %u;";
+
+        sql->Query(fmtQuery, numStones, PChar->id);
+    }
+
+    void setClaimedTraverserStones(CCharEntity* PChar, uint16 stoneTotal)
+    {
+        auto fmtQuery = "UPDATE char_unlocks SET traverser_claimed = %u WHERE charid = %u;";
+
+        sql->Query(fmtQuery, stoneTotal, PChar->id);
+    }
+
+    uint32 getAvailableTraverserStones(CCharEntity* PChar)
+    {
+        auto fmtQuery = "SELECT unix_timestamp(traverser_start), traverser_claimed FROM char_unlocks WHERE charid = %u;";
+        time_t traverserEpoch = 0;
+        uint32 traverserClaimed = 0;
+
+        auto ret = sql->Query(fmtQuery, PChar->id);
+        if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+        {
+            traverserEpoch = sql->GetUIntData(0);
+            traverserClaimed = sql->GetUIntData(1);
+        }
+
+        // Handle reduction for Celerity Key Items
+        uint8 stoneWaitHours = 20;
+        for (int keyItem = 1385; keyItem <= 1387; ++keyItem)
+        {
+            if (hasKeyItem(PChar, keyItem))
+            {
+                stoneWaitHours -= 4;
+            }
+        }
+
+        return floor((std::time(nullptr) - traverserEpoch) / (stoneWaitHours * 3600)) - traverserClaimed;
+    }
+
     void ReadHistory(CCharEntity* PChar)
     {
         if (PChar == nullptr)
