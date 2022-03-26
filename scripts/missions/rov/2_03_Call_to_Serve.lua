@@ -47,7 +47,7 @@ mission.sections =
                 function(player, prevZone)
                     if
                         xi.rhapsodies.charactersAvailable(player) and
-                        not mission:getVar(player, 'Retrieve') == 1
+                        mission:getVar(player, 'Retrieve') == 0
                     then
                         -- Note: Working with the assumption that there are four variable parameters for this mission,
                         -- the following observations have been made.  The first parameter *does* have an impact on dialogue;

@@ -49,7 +49,7 @@ mission.sections =
                     if
                         xi.rhapsodies.charactersAvailable(player) and
                         player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.A_VESSEL_WITHOUT_A_CAPTAIN) and
-                        not mission:getVar(player, 'Retrieve') == 1
+                        mission:getVar(player, 'Retrieve') == 0
                     then
                         -- Note: There are 4 parameters that impact the message shown in this state which all appear to revolve
                         -- around Tenzen's knowledge of Prishe, and the status of the mission 'Darkness Named.'  This mission is
