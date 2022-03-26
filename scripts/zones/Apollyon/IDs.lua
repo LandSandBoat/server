@@ -77,7 +77,6 @@ zones[xi.zone.APOLLYON] =
             16933227, -- nw 2>3
             16933228, -- nw 3>4
             16933224, -- nw 4>5
-            16933225, -- nw 5>e
         },
         APOLLYON_SW_PORTAL =
         {

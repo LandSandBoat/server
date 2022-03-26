@@ -210,7 +210,7 @@ function xi.limbus.handleDoors(battlefield, open, door)
     {
         -- NW Apollyon
         [1290] = function()
-            for i = 1, 5 do
+            for i = 1, 4 do
                 GetNPCByID(ID.npc.APOLLYON_NW_PORTAL[i]):setAnimation(animation)
             end
         end,
