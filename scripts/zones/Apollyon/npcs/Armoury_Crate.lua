@@ -995,6 +995,8 @@ entity.onTrigger = function(player, npc)
                             end
                         end
                     end
+
+                -- Floor 4 (Last)
                 else
                     xi.limbus.handleLootRolls(battlefield, loot[bfid][4], nil, npc)
                     battlefield:setLocalVar("cutsceneTimer", 10)

@@ -217,7 +217,7 @@ function xi.limbus.handleDoors(battlefield, open, door)
 
         -- SW Apollyon
         [1291] = function()
-            for i = 1, 4 do
+            for i = 1, 3 do
                 GetNPCByID(ID.npc.APOLLYON_SW_PORTAL[i]):setAnimation(animation)
             end
         end,
@@ -492,33 +492,4 @@ function xi.limbus.spawnRandomCrate(npc, battlefield, var, mask, canMimic)
 
         return
     end
-end
-
--- Table for Elementals
-local elementalMobDayOffset =
-{
-    [0] = { 3, 11, 19 }, -- Fire
-    [1] = { 2, 10, 18 }, -- Earth
-    [2] = { 6, 14, 22 }, -- Water
-    [3] = { 0,  8, 16 }, -- Wind
-    [4] = { 4, 12, 20 }, -- Ice
-    [5] = { 7, 15, 23 }, -- Lightning
-    [6] = { 5, 13, 21 }, -- Light
-    [7] = { 1,  9, 17 }, -- Dark
-}
-
-function xi.limbus.elementalsDead()
-    local ID     = zones[xi.zone.APOLLYON]
-    local table  = elementalMobDayOffset[VanadielDayOfTheWeek()]
-    local result = false
-
-    if
-        GetMobByID(ID.mob.APOLLYON_SW_MOB[4] + table[1]):isDead() and
-        GetMobByID(ID.mob.APOLLYON_SW_MOB[4] + table[2]):isDead() and
-        GetMobByID(ID.mob.APOLLYON_SW_MOB[4] + table[3]):isDead()
-    then
-        result = true
-    end
-
-    return result
 end
