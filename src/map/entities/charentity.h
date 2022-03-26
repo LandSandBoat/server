@@ -234,7 +234,7 @@ public:
     uint8             m_TitleList[94];        // List of honored windows
     uint8             m_Abilities[62];        // List of current abilities
     uint8             m_LearnedAbilities[49]; //LearnableAbilities (corsairRolls)
-    std::bitset<49>   m_LearnedWeaponskills;  //LearnableWeaponskills
+    std::bitset<50>   m_LearnedWeaponskills;  //LearnableWeaponskills
     uint8             m_TraitList[16];        // List of advance active abilities in the form of a bit mask
     uint8             m_PetCommands[32];      // List of available pet commands
     uint8             m_WeaponSkills[32];

@@ -92,6 +92,7 @@ xi.weaponskill =
     SCOURGE             = 57,
     TORCLEAVER          = 59,
     RESOLUTION          = 60,
+    DIMIDIATION         = 61,
 
     -----------------------------------
     -- AXE
@@ -330,4 +331,5 @@ xi.ws_unlock =
     MYRKR               = 46,
     JISHNUS_RADIANCE    = 47,
     WILDFIRE            = 48,
+    DIMIDIATION         = 49,
 }
