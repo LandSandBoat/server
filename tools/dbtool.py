@@ -98,7 +98,7 @@ migrations = [
     currency2,
     languages,
     add_field_chocobo_column,
-    add_new_wardrobe_columns
+    add_new_wardrobe_columns,
     abyssea_unlocks,
 ]
 
