@@ -133,7 +133,7 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y software-properties-common clang-format cppcheck luajit-5.1-dev luarocks mariadb-server mariadb-client libmariadb-dev-compat
-        pip install pylint
+        pip install -r tools/requirements.txt
         luarocks install luacheck --local
     - id: changed-files
       name: Get Changed Files
