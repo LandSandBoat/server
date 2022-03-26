@@ -599,6 +599,12 @@ def settings():
     adjust_imports()
     write_configs()
 
+# TODO: Hook this up to a menu option
+def set_external_ip(ip_str):
+    command = '"' + mysql_bin + 'mysqladmin' + exe + '" -h ' + host + ' -P ' + str(port) + ' -u ' + login + ' -p' + password + \
+        'UPDATE zone_settings SET zoneip = ' + ip_str + ';'
+    os.system(command + log_errors)
+
 def main():
     global mysql_bin, exe
     if fetch_credentials() == False:
