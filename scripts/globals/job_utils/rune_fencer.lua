@@ -144,6 +144,22 @@ local function getVallationValianceSDTType(type)
     return runeSDTMap[type]
 end
 
+local function getGambitSDTType(type)
+
+    local runeSDTMap =
+    {
+        [xi.effect.IGNIS]    = xi.mod.FIRE_SDT,
+        [xi.effect.GELUS]    = xi.mod.ICE_SDT,
+        [xi.effect.FLABRA]   = xi.mod.WIND_SDT,
+        [xi.effect.TELLUS]   = xi.mod.EARTH_SDT,
+        [xi.effect.SULPOR]   = xi.mod.THUNDER_SDT,
+        [xi.effect.UNDA]     = xi.mod.WATER_SDT,
+        [xi.effect.LUX]      = xi.mod.LIGHT_SDT,
+        [xi.effect.TENEBRAE] = xi.mod.DARK_SDT
+    }
+    return runeSDTMap[type]
+end
+
 local function getBattutaSpikesType(type)
 
     local runeSpikesMap =
@@ -208,16 +224,17 @@ local function getSwipeLungeElement(type)
     return runeElementEffectMap[type]
 end
 
-local function getAnimationSwipeLunge(weaponSkillType) -- verified via retail action packets exclusively
+local function getAnimationEffusion(weaponSkillType, offset) -- verified via retail action packets exclusively
 
     local weaponAnimationMap =
     {
+        [xi.skill.NONE]         = 6,
         [xi.skill.HAND_TO_HAND] = 6,
         [xi.skill.DAGGER]       = 7,
         [xi.skill.SWORD]        = 5,
         [xi.skill.GREAT_SWORD]  = 10,
-        [xi.skill.AXE]          = 8,
-        [xi.skill.GREAT_AXE]    = 9, -- gaxe/scythe share the animation for Swipe/Lunge
+        [xi.skill.AXE]          = 8, -- club/axe share the same animation
+        [xi.skill.GREAT_AXE]    = 9, -- gaxe/scythe share the animation
         [xi.skill.SCYTHE]       = 9,
         [xi.skill.POLEARM]      = 11,
         [xi.skill.KATANA]       = 12,
@@ -225,10 +242,23 @@ local function getAnimationSwipeLunge(weaponSkillType) -- verified via retail ac
         [xi.skill.CLUB]         = 8,
         [xi.skill.STAFF]        = 14,
     }
-    return weaponAnimationMap[weaponSkillType]
+    return weaponAnimationMap[weaponSkillType] + offset
 end
 
 local function applyVallationValianceSDTMods(target, SDTTypes, power, effect, duration) -- Vallation/Valiance can apply up to N where N is total rune different elemental resistances, or power*N for singular element, or any combination thereof.
+    local effectAdded = target:addStatusEffect(effect, power, 0, duration)
+
+    if effectAdded then
+        local newEffect = target:getStatusEffect(effect)
+
+        for _, SDT in ipairs(SDTTypes) do
+            target:addMod(SDT, power)
+            newEffect:addMod(SDT, power) -- due to order of events, this only adds mods to the container, not to the owner of the effect.
+        end
+    end
+end
+
+local function applyGambitSDTMods(target, SDTTypes, power, effect, duration) -- Gambit can apply up to N where N is total rune different elemental resistance decreases, or power*N for singular element, or any combination thereof.
     local effectAdded = target:addStatusEffect(effect, power, 0, duration)
 
     if effectAdded then
@@ -346,26 +376,22 @@ xi.job_utils.rune_fencer.useVallationValiance = function(player, target, ability
         return
     end
 
-    local effects = target:getStatusEffects()
+    local runeEffects = target:getAllRuneEffects()
     local SDTPower = 15
     local meritBonus =  player:getMerit(xi.merit.MERIT_VALLATION_EFFECT)
     local inspirationMerits = player:getMerit(xi.merit.MERIT_INSPIRATION)
     local inspirationFCBonus = inspirationMerits + inspirationMerits / 10 * player:getMod(xi.mod.ENHANCES_INSPIRATION)  -- 10 FC per merit level, plus 2% per level from AF2 leg aug
     local jobPointBonusDuration = player:getJobPointLevel(xi.jp.VALLATION_DURATION)
 
-    SDTPower = SDTPower + meritBonus
+    SDTPower = (SDTPower + meritBonus) * 100
 
     local SDTTypes = {} -- one SDT type per rune which can be additive
     local i = 0
 
-    for _, effect in ipairs(effects) do
-        local type = effect:getType()
-
-        if type >= xi.effect.IGNIS and type <= xi.effect.TENEBRAE then
-            local SDTType = getVallationValianceSDTType(type)
-            SDTTypes[i+1] = SDTType
-            i = i + 1
-        end
+    for _, rune in ipairs(runeEffects) do
+        local SDTType = getVallationValianceSDTType(rune)
+        SDTTypes[i+1] = SDTType
+        i = i + 1
     end
 
     if abilityID == xi.jobAbility.VALIANCE then -- apply effects to entire party (including target) (Valiance)
@@ -586,7 +612,7 @@ xi.job_utils.rune_fencer.useSwipeLunge = function(player, target, ability, actio
         return shadowsHit
     end
 
-    action:setAnimation(target:getID(), getAnimationSwipeLunge(weaponSkillType)) -- set animation for currently equipped weapon
+    action:setAnimation(target:getID(), getAnimationEffusion(weaponSkillType, 0)) -- set animation for currently equipped weapon
 
     if cumulativeDamage < 0 or cumulativeDamage == 0 and absorbed then -- TODO: figre out how to set "unknown" bit in message 102
                                                                        -- "unknown" = 4 on message 102 for healed MB
@@ -603,37 +629,30 @@ end
 -- for example, Amnesia is fire based, therefore water runes (Unda) add resist Amnesia.
 -- These effects seem to match the "Resist X" traits that all jobs have, including unused player traits that made it into autotranslate; Resist Curse/Charm
 local function addPflugResistType(type, effect, power)
+    local pflugResistTypes =
+    {
+        [xi.effect.IGNIS]    = {xi.mod.PARALYZERES, xi.mod.BINDRES},
+        [xi.effect.GELUS]    = {xi.mod.SILENCERES, xi.mod.GRAVITYRES},
+        [xi.effect.FLABRA]   = {xi.mod.PETRIFYRES, xi.mod.SLOWRES},
+        [xi.effect.TELLUS]   = {xi.mod.STUNRES},
+        [xi.effect.SULPOR]   = {xi.mod.POISONRES},
+        [xi.effect.UNDA]     = {xi.mod.AMNESIARES, xi.mod.PLAGUERES},
+        [xi.effect.LUX]      = {xi.mod.SLEEPRES, xi.mod.BLINDRES, xi.mod.CURSERES},
+        [xi.effect.TENEBRAE] = {xi.mod.CHARMRES},
+    }
 
-    if type >= xi.effect.IGNIS and type <= xi.effect.TENEBRAE then
+    local resistTypes = pflugResistTypes[type]
 
-        local pflugResistTypes =
-        {
-            [xi.effect.IGNIS]    = {xi.mod.PARALYZERES, xi.mod.BINDRES},
-            [xi.effect.GELUS]    = {xi.mod.SILENCERES, xi.mod.GRAVITYRES},
-            [xi.effect.FLABRA]   = {xi.mod.PETRIFYRES, xi.mod.SLOWRES},
-            [xi.effect.TELLUS]   = {xi.mod.STUNRES},
-            [xi.effect.SULPOR]   = {xi.mod.POISONRES},
-            [xi.effect.UNDA]     = {xi.mod.AMNESIARES, xi.mod.PLAGUERES},
-            [xi.effect.LUX]      = {xi.mod.SLEEPRES, xi.mod.BLINDRES, xi.mod.CURSERES},
-            [xi.effect.TENEBRAE] = {xi.mod.CHARMRES},
-        }
-
-        local resistTypes = pflugResistTypes[type]
-
-        for _, resistMod in pairs(resistTypes) do -- store mod in effect, this function is triggered from event onEffectGain so it adds to the player automatically.
-            effect:addMod(resistMod, power)
-        end
-
+    for _, resistMod in pairs(resistTypes) do -- store mod in effect, this function is triggered from event onEffectGain so it adds to the player automatically.
+        effect:addMod(resistMod, power)
     end
 end
 
-
 xi.job_utils.rune_fencer.onPflugEffectGain = function(target, effect)
-    local statusEffects = target:getStatusEffects()
+    local runeEffects = target:getAllRuneEffects()
 
-    for _, statusEffect in ipairs(statusEffects) do
-        local type = statusEffect:getType()
-        addPflugResistType(type, effect, effect:getPower() + effect:getSubPower())
+    for _, rune in ipairs(runeEffects) do
+        addPflugResistType(rune, effect, effect:getPower() + effect:getSubPower())
     end
 end
 
@@ -653,4 +672,45 @@ xi.job_utils.rune_fencer.usePflug = function(player, target, ability, action)
     action:speceffect(target:getID(), getSpecEffectElementWard(highestRune))
 
     player:addStatusEffect(xi.effect.PFLUG, baseStrength, 0, 120, 0, meritBonus)
+end
+
+-- see https://www.bg-wiki.com/ffxi/Gambit
+xi.job_utils.rune_fencer.useGambit = function(player, target, ability, action)
+    local highestRune = player:getHighestRuneEffect()
+    local weaponSkillType = player:getWeaponSkillType(xi.slot.MAIN)
+    local runeEffects = player:getAllRuneEffects()
+    local SDTPower = -10
+    local jobPointBonusDuration = player:getJobPointLevel(xi.jp.GAMBIT_DURATION)
+    local gearBonusDuration = player:getMod(xi.mod.GAMBIT_DURATION)
+
+    action:speceffect(target:getID(), getSpecEffectElementEffusion(highestRune)) -- set element color for animation.
+    action:setAnimation(target:getID(), getAnimationEffusion(weaponSkillType, 10)) -- set animation for currently equipped weapon
+
+    SDTPower = SDTPower * 100 -- adjust to SDT modifier
+
+    local SDTTypes = {} -- one SDT type per rune which can be additive
+    local i = 0
+
+    for _, rune in ipairs(runeEffects) do
+        local SDTType = getGambitSDTType(rune)
+        SDTTypes[i+1] = SDTType
+        i = i + 1
+    end
+
+    local duration = 60 + jobPointBonusDuration + gearBonusDuration
+
+    applyGambitSDTMods(target, SDTTypes, SDTPower, xi.effect.GAMBIT, duration)
+
+    player:removeAllRunes()
+end
+
+-- see https://www.bg-wiki.com/ffxi/Rayke
+xi.job_utils.rune_fencer.useRayke = function(player, target, ability, action)
+    local highestRune = player:getHighestRuneEffect()
+    local weaponSkillType = player:getWeaponSkillType(xi.slot.MAIN)
+
+    action:speceffect(target:getID(), getSpecEffectElementEffusion(highestRune)) -- set element color for animation.
+    action:setAnimation(target:getID(), getAnimationEffusion(weaponSkillType, 20)) -- set animation for currently equipped weapon
+
+    -- TODO: implement
 end

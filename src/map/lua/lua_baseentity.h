@@ -704,6 +704,7 @@ public:
     void  updateAttachments();
     void  reduceBurden(float percentReduction, sol::object const& intReductionObj);
 
+    auto  getAllRuneEffects() -> sol::table;
     uint8 getActiveRuneCount();
     uint16 getHighestRuneEffect();
     uint16 getNewestRuneEffect();

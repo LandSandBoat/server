@@ -70,6 +70,7 @@ public:
     CStatusEffect* GetStatusEffect(EFFECT StatusID);
     CStatusEffect* GetStatusEffect(EFFECT StatusID, uint32 SubID);
 
+    std::vector<EFFECT> GetStatusEffectsInIDRange(EFFECT start, EFFECT end);
     uint8 GetStatusEffectCountInIDRange(EFFECT start, EFFECT end);
     EFFECT GetNewestStatusEffectInIDRange(EFFECT start, EFFECT end);
     void  RemoveOldestStatusEffectInIDRange(EFFECT start, EFFECT end);
@@ -97,6 +98,7 @@ public:
     void  RemoveOldestManeuver();
     void  RemoveAllManeuvers();
 
+    std::vector<EFFECT> GetAllRuneEffects();
     uint8 GetActiveRuneCount();
     EFFECT GetHighestRuneEffect();
     EFFECT GetNewestRuneEffect();

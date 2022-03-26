@@ -11947,6 +11947,27 @@ void CLuaBaseEntity::reduceBurden(float percentReduction, sol::object const& int
 }
 
 /************************************************************************
+ *  Function: getAllRuneEffects()
+ *  Purpose : Returns a sol::table with all rune effects
+ *  Example : local runeEffects = player:getAllRuneEffects()
+ *  Notes   :
+ ************************************************************************/
+
+auto CLuaBaseEntity::getAllRuneEffects() -> sol::table
+{
+    auto* PEntity = static_cast<CBattleEntity*>(m_PBaseEntity);
+    std::vector<EFFECT> runeEffectList = PEntity->StatusEffectContainer->GetAllRuneEffects();
+
+    auto table = luautils::lua.create_table();
+
+    for(const auto& runeEffect: runeEffectList)
+    {
+        table.add(runeEffect);
+    }
+    return table;
+}
+
+/************************************************************************
  *  Function: getActiveRunes()
  *  Purpose : Returns the number of active runes
  *  Example : local num = player:getActiveRunes()
@@ -14008,6 +14029,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("updateAttachments", CLuaBaseEntity::updateAttachments);
     SOL_REGISTER("reduceBurden", CLuaBaseEntity::reduceBurden);
 
+    SOL_REGISTER("getAllRuneEffects",CLuaBaseEntity::getAllRuneEffects);
     SOL_REGISTER("getActiveRuneCount", CLuaBaseEntity::getActiveRuneCount);
     SOL_REGISTER("getHighestRuneEffect", CLuaBaseEntity::getHighestRuneEffect);
     SOL_REGISTER("getNewestRuneEffect", CLuaBaseEntity::getNewestRuneEffect);
