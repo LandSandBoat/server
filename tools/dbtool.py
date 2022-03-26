@@ -69,6 +69,7 @@ from migrations import currency2
 from migrations import languages
 from migrations import add_field_chocobo_column
 from migrations import add_new_wardrobe_columns
+from migrations import abyssea_unlocks
 
 # Append new migrations to this list and import above
 migrations = [
@@ -98,6 +99,7 @@ migrations = [
     languages,
     add_field_chocobo_column,
     add_new_wardrobe_columns
+    abyssea_unlocks,
 ]
 
 # These are the 'protected' files
