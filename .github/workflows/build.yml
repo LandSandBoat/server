@@ -12,8 +12,8 @@ on:
       - everything
 
 jobs:
-  Linux_2004_Clang11_64bit:
-    runs-on: ubuntu-20.04
+  Linux_Clang11_64bit:
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
       with:
@@ -39,8 +39,8 @@ jobs:
           topaz_game
           topaz_search
   
-  Linux_2004_GCC10_64bit:
-    runs-on: ubuntu-20.04
+  Linux_GCC10_64bit:
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
       with:
@@ -58,8 +58,8 @@ jobs:
       run: |
         make -j $(nproc)
 
-  Windows_2019_32bit:
-    runs-on: windows-2019
+  Windows_32bit:
+    runs-on: windows-latest
     env:
       MSBUILD_PATH: C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\
     steps:
@@ -75,8 +75,8 @@ jobs:
         run: |
           cmake --build .
 
-  Windows_2019_64bit:
-    runs-on: windows-2019
+  Windows_64bit:
+    runs-on: windows-latest
     env:
       MSBUILD_PATH: C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\
     steps:
@@ -100,9 +100,9 @@ jobs:
             topaz_game_64.exe
             topaz_search_64.exe
 
-  MacOS_BigSur_11:
+  MacOS_64bit:
     # https://github.com/actions/virtual-environments/blob/main/images/macos/macos-11-Readme.md
-    runs-on: macos-11
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v1
         with:
@@ -123,8 +123,8 @@ jobs:
         run: |
           make -j $(sysctl -n hw.physicalcpu)
 
-  Style_Checks:
-    runs-on: ubuntu-20.04
+  Sanity_Checks:
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
       with:
@@ -133,6 +133,7 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y software-properties-common clang-format cppcheck luajit-5.1-dev luarocks mariadb-server mariadb-client libmariadb-dev-compat
+        pip install -r tools/requirements.txt
         luarocks install luacheck --local
     - id: changed-files
       name: Get Changed Files
@@ -195,6 +196,23 @@ jobs:
           exit 1
         fi
         exit 0
+    - name: Python Checks
+      if: always()
+      run: |
+        touch python_checks.txt
+        for changed_file in ${{ steps.changed-files.outputs.all }}; do
+          if [[ -f $changed_file ]]; then
+            if [[ $changed_file == *.py ]]; then
+              bash tools/ci/python.sh ${changed_file} >> python_checks.txt || true
+            fi
+          fi
+        done
+        cat python_checks.txt
+        if [ -s python_checks.txt ]
+        then
+          exit 1
+        fi
+        exit 0
     - name: Clang Format (C++ files)
       if: 'false' # Don't run until fixed
       run: |
@@ -217,9 +235,9 @@ jobs:
             exit -1
         fi
 
-  Full_Startup_Checks_Linux_2004:
-    runs-on: ubuntu-20.04
-    needs: Linux_2004_Clang11_64bit
+  Full_Startup_Checks_Linux:
+    runs-on: ubuntu-latest
+    needs: Linux_Clang11_64bit
     services:
       mysql:
         image: mariadb
@@ -240,7 +258,7 @@ jobs:
     - name: Install Dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y software-properties-common cmake mariadb-server-10.3 mariadb-client-10.3 libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev luarocks python3.7
+        sudo apt-get install -y software-properties-common cmake mariadb-server-10.3 mariadb-client-10.3 libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev luarocks
     - name: Verify MySQL connection from container
       run: |
         mysql -h 127.0.0.1 -uroot -proot -e "SHOW DATABASES"
@@ -354,9 +372,9 @@ jobs:
             exit -1
         fi
 
-  MultiInstance_Startup_Checks_Linux_2004:
-    runs-on: ubuntu-20.04
-    needs: Linux_2004_Clang11_64bit
+  MultiInstance_Startup_Checks_Linux:
+    runs-on: ubuntu-latest
+    needs: Linux_Clang11_64bit
     services:
       mysql:
         image: mariadb
@@ -377,7 +395,7 @@ jobs:
     - name: Install Dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y software-properties-common cmake mariadb-server-10.3 mariadb-client-10.3 libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev luarocks python3.7
+        sudo apt-get install -y software-properties-common cmake mariadb-server-10.3 mariadb-client-10.3 libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev luarocks
     - name: Verify MySQL connection from container
       run: |
         mysql -h 127.0.0.1 -uroot -proot -e "SHOW DATABASES"
@@ -453,9 +471,9 @@ jobs:
           exit -1
         fi
 
-  Full_Startup_Checks_Windows_2019:
-    runs-on: windows-2019
-    needs: Windows_2019_64bit
+  Full_Startup_Checks_Windows:
+    runs-on: windows-latest
+    needs: Windows_64bit
     steps:
     - uses: actions/checkout@v1
       with:
