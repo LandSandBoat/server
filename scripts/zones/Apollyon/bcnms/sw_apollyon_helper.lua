@@ -134,14 +134,12 @@ local elementalMobDayOffset =
 }
 
 xi.apollyon_sw.handleMobEngagedFloorFour = function(mob, target, mobElement)
-    local battlefield   = mob:getBattlefield()
-    local targetElement = battlefield:getLocalVar("targetElement")
-    local table         = elementalMobDayOffset[mobElement]
+    local battlefield = mob:getBattlefield()
+    local table       = elementalMobDayOffset[mobElement]
 
     -- No elemental type chosen, so we choose one.
-    if targetElement == 0 then
-        local dayElement = VanadielDayOfTheWeek()
-        battlefield:setLocalVar("targetElement", dayElement + 1)
+    if battlefield:getLocalVar("targetElement") == 0 then
+        battlefield:setLocalVar("targetElement", VanadielDayOfTheWeek() + 1)
     end
 
     -- Agro trio.
@@ -152,7 +150,13 @@ end
 
 xi.apollyon_sw.handleMobDeathFloorFour = function(mob, player, isKiller, noKiller, mobElement)
     if isKiller or noKiller then
-        local battlefield   = mob:getBattlefield()
+        local battlefield = mob:getBattlefield()
+
+        -- Fallback for 1-Hit kills. No elemental type chosen, so we choose one.
+        if battlefield:getLocalVar("targetElement") == 0 then
+            battlefield:setLocalVar("targetElement", VanadielDayOfTheWeek() + 1)
+        end
+
         local targetElement = battlefield:getLocalVar("targetElement") - 1
 
         -- If elemental is of the correct element.
