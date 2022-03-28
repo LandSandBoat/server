@@ -18,7 +18,7 @@ end
 
 spell_object.onMobSpawn = function(mob)
     xi.trust.message(mob, xi.trust.message_offset.SPAWN)
-	mob:addStatusEffectEx(xi.effect.COLURE_ACTIVE, xi.effect.COLURE_ACTIVE, 6, 3, 0, xi.effect.CORSAIRS_ROLL, 250, xi.auraTarget.ALLIES, xi.effectFlag.AURA)
+	mob:addStatusEffectEx(xi.effect.COLURE_ACTIVE, xi.effect.COLURE_ACTIVE, 6, 3, 0, xi.effect.CORSAIRS_ROLL, 200, xi.auraTarget.ALLIES, xi.effectFlag.AURA)
     mob:SetAutoAttackEnabled(false)
 
 end
