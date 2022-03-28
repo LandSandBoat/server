@@ -19,8 +19,7 @@ end
 
 entity.onMobFight = function(mob, target)
     -- local warp = mob:getLocalVar("warp")
-
-    if (mob:getHPP() <= 50 and mob:getLocalVar("perfectdef") == 0) then
+    if mob:getHPP() <= 50 and mob:getLocalVar("perfectdef") == 0 then
         mob:useMobAbility(1183)
 
         local instance = mob:getInstance()

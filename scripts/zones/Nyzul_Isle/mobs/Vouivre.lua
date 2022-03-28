@@ -6,6 +6,8 @@
 require("scripts/globals/utils/nyzul")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
+
 entity.onMobInitialize = function(mob)
     mob:setMod(xi.mod.REGEN, 5)
     mob:setMod(xi.mod.DOUBLE_ATTACK, 40)
@@ -13,9 +15,11 @@ entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.TERROR)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
-    if firstCall then
+entity.onMobDeath = function(mob, player, isKiller, noKiller)
+    if isKiller or noKiller then
         xi.nyzul.spawnChest(mob, player)
         xi.nyzul.eliminateAllKill(mob)
     end
 end
+
+return entity

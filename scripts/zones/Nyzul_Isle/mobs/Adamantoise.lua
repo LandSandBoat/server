@@ -28,8 +28,8 @@ end
 entity.onMobFight = function(mob, target)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
-    if firstCall then
+entity.onMobDeath = function(mob, player, isKiller, noKiller)
+    if isKiller or noKiller then
         xi.nyzul.enemyLeaderKill(mob)
         xi.nyzul.vigilWeaponDrop(player, mob)
     end

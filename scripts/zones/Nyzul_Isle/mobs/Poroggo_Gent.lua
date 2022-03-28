@@ -6,17 +6,19 @@
 require("scripts/globals/status")
 require("scripts/globals/utils/nyzul")
 -----------------------------------
+local entity = {}
 
 entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.CHECK_AS_NM, 1)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
-    if firstCall then
+entity.onMobDeath = function(mob, player, isKiller, noKiller)
+    if isKiller or noKiller then
         xi.nyzul.spawnChest(mob, player)
         xi.nyzul.specifiedGroupKill(mob)
         local instance = mob:getInstance()
-        local chars = instance:getChars()
+        local chars    = instance:getChars()
+
         for _, entity in ipairs(chars) do
             if player:hasStatusEffect(xi.effect.COSTUME) then
                 player:delStatusEffect(xi.effect.COSTUME)
@@ -24,3 +26,5 @@ entity.onMobDeath = function(mob, player, isKiller)
         end
     end
 end
+
+return entity

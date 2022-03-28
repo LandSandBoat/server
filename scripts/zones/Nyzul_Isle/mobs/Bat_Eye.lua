@@ -12,8 +12,8 @@ entity.onMobSpawn = function(mob)
     mob:addMobMod(xi.mobMod.CHECK_AS_NM)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
-    if firstCall then
+entity.onMobDeath = function(mob, player, isKiller, noKiller)
+    if isKiller or noKiller then
         xi.nyzul.spawnChest(mob, player)
         xi.nyzul.eliminateAllKill(mob)
     end

@@ -5,6 +5,7 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
 entity.onMobSpawn = function(mob)
     mob:setUnkillable(true)
@@ -19,3 +20,5 @@ end
 
 entity.onMobDeath = function(mob, player, isKiller)
 end
+
+return entity

@@ -7,6 +7,8 @@ mixins = { require("scripts/mixins/nyzul_boss_drops") }
 require("scripts/globals/utils/nyzul")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
+
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.NO_MP, 1)
 end
@@ -24,9 +26,11 @@ end
 entity.onMobFight = function(mob, target)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
-    if firstCall then
+entity.onMobDeath = function(mob, player, isKiller, noKiller)
+    if isKiller or noKiller then
         xi.nyzul.enemyLeaderKill(mob)
         xi.nyzul.vigilWeaponDrop(player, mob)
     end
 end
+
+return entity

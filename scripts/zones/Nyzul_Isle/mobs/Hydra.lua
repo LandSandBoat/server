@@ -7,6 +7,13 @@ mixins = { require("scripts/mixins/nyzul_boss_drops") }
 require("scripts/globals/utils/nyzul")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
+
+local function handleRegen(mob, broken)
+    local multiplier = (2 - broken) / 2
+    mob:setMod(xi.mod.REGEN, math.floor(100 * multiplier))
+    mob:setMod(xi.mod.REGAIN, math.floor(200 * multiplier))
+end
 
 entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.DOUBLE_ATTACK, 10)
@@ -28,20 +35,14 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.ROAM_DISTANCE, 15)
 end
 
-function handleRegen(mob, broken)
-    local multiplier = (2 - broken) / 2
-    mob:setMod(xi.mod.REGEN, math.floor(100 * multiplier))
-    mob:setMod(xi.mod.REGAIN, math.floor(200 * multiplier))
-end
-
-function onMobEngaged(mob)
+entity.onMobEngaged = function(mob)
     handleRegen(mob, mob:AnimationSub())
 end
 
 entity.onMobFight = function(mob, target)
     local battletime = os.time()
-    local headgrow = mob:getLocalVar("headgrow")
-    local broken = mob:AnimationSub()
+    local headgrow   = mob:getLocalVar("headgrow")
+    local broken     = mob:AnimationSub()
 
     if headgrow < battletime and broken > 0 then
         mob:AnimationSub(broken - 1)
@@ -52,24 +53,25 @@ entity.onMobFight = function(mob, target)
 
 end
 
-function onCriticalHit(mob)
-    local rand = math.random(1, 100)
+entity.onCriticalHit = function(mob)
+    local rand       = math.random(1, 100)
     local battletime = os.time()
-    local headgrow = mob:getLocalVar("headgrow")
-    local broken = mob:AnimationSub()
+    local headgrow   = mob:getLocalVar("headgrow")
+    local broken     = mob:AnimationSub()
 
     if rand <= 15 and broken < 2 then
         mob:AnimationSub(broken + 1)
         mob:setLocalVar("headgrow", os.time() + math.random(120, 240))
         handleRegen(mob, broken + 1)
     end
-
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
-    if firstCall then
+entity.onMobDeath = function(mob, player, isKiller, noKiller)
+    if isKiller or noKiller then
         xi.nyzul.enemyLeaderKill(mob)
         xi.nyzul.vigilWeaponDrop(player, mob)
         xi.nyzul.handleRunicKey(mob)
     end
 end
+
+return entity
