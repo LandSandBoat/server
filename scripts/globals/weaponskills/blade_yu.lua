@@ -21,7 +21,8 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
 
     local params = {}
     params.ftp100 = 2.25 params.ftp200 = 2.25 params.ftp300 = 2.25
-    params.str_wsc = 0.0 params.dex_wsc = 0.5 params.vit_wsc = 0.0 params.agi_wsc = 0.0 params.int_wsc = 0.5 params.mnd_wsc = 0.0 params.chr_wsc = 0.0
+    params.str_wsc = 0.0 params.dex_wsc = 0.28 params.vit_wsc = 0.0 params.agi_wsc = 0.0 params.int_wsc = 0.28 params.mnd_wsc = 0.0 params.chr_wsc = 0.0
+    -- http://wiki.ffo.jp/html/20351.html
     params.ele = xi.magic.ele.WATER
     params.skill = xi.skill.KATANA
     params.includemab = true

@@ -192,6 +192,8 @@ int32 SqlConnection::TryPing()
     {
         ShowInfo("Pinging SQL server to keep connection alive");
 
+        m_LastPing = nowSeconds;
+
         auto startId = mysql_thread_id(&self->handle);
         try
         {
@@ -214,8 +216,6 @@ int32 SqlConnection::TryPing()
         {
             ShowFatalError("mysql_ping failed with unhandled exception");
         }
-
-        m_LastPing = nowSeconds;
     }
 
     return SQL_ERROR;

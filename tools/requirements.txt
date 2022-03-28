@@ -1,5 +1,6 @@
 mysql-connector-python
 gitpython
+pylint
 pyyaml
 colorama
 zmq

@@ -11947,6 +11947,27 @@ void CLuaBaseEntity::reduceBurden(float percentReduction, sol::object const& int
 }
 
 /************************************************************************
+ *  Function: getAllRuneEffects()
+ *  Purpose : Returns a sol::table with all rune effects
+ *  Example : local runeEffects = player:getAllRuneEffects()
+ *  Notes   :
+ ************************************************************************/
+
+auto CLuaBaseEntity::getAllRuneEffects() -> sol::table
+{
+    auto* PEntity = static_cast<CBattleEntity*>(m_PBaseEntity);
+    std::vector<EFFECT> runeEffectList = PEntity->StatusEffectContainer->GetAllRuneEffects();
+
+    auto table = luautils::lua.create_table();
+
+    for(const auto& runeEffect: runeEffectList)
+    {
+        table.add(runeEffect);
+    }
+    return table;
+}
+
+/************************************************************************
  *  Function: getActiveRunes()
  *  Purpose : Returns the number of active runes
  *  Example : local num = player:getActiveRunes()
@@ -13213,6 +13234,103 @@ void CLuaBaseEntity::addDropListModification(uint16 id, uint16 newRate, sol::var
 }
 
 /************************************************************************
+ *  Function: getAvailableTraverserStones()
+ *  Purpose : Returns the number of Traverser Stones available for claim
+ *  Note: Does not yet account for KI reduction
+ ************************************************************************/
+
+uint32 CLuaBaseEntity::getAvailableTraverserStones()
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        return 0;
+    }
+
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+    return charutils::getAvailableTraverserStones(PChar);
+}
+
+/************************************************************************
+ *  Function: getTraverserEpoch()
+ *  Purpose : Returns the number of Traverser Stones claimed by the player
+ ************************************************************************/
+
+time_t CLuaBaseEntity::getTraverserEpoch()
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        return 0;
+    }
+
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+    return charutils::getTraverserEpoch(PChar);
+}
+
+/************************************************************************
+ *  Function: setTraverserEpoch()
+ *  Purpose : Returns the number of Traverser Stones claimed by the player
+ ************************************************************************/
+
+void CLuaBaseEntity::setTraverserEpoch()
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        return;
+    }
+
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+    charutils::setTraverserEpoch(PChar);
+}
+
+/************************************************************************
+ *  Function: getClaimedTraverserStones()
+ *  Purpose : Returns the number of Traverser Stones claimed by the player
+ ************************************************************************/
+
+uint32 CLuaBaseEntity::getClaimedTraverserStones()
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        return 0;
+    }
+
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+    return charutils::getClaimedTraverserStones(PChar);
+}
+
+/************************************************************************
+ *  Function: addClaimedTraverserStones()
+ *  Purpose : Increments number of Traverser Stones claimed by the player
+ ************************************************************************/
+
+void CLuaBaseEntity::addClaimedTraverserStones(uint16 numStones)
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        return;
+    }
+
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+    charutils::addClaimedTraverserStones(PChar, numStones);
+}
+
+/************************************************************************
+ *  Function: setClaimedTraverserStones()
+ *  Purpose : Sets number of Traverser Stones claimed by the player.
+ ************************************************************************/
+
+void CLuaBaseEntity::setClaimedTraverserStones(uint16 totalStones)
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        return;
+    }
+
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+    charutils::setClaimedTraverserStones(PChar, totalStones);
+}
+
+/************************************************************************
  *  Function: getHistory()
  *  Purpose : Gets a single entry of character history statistics
  *  Example : player:getHistory(xi.history.enemiesDefeated) -- Returns the relevant stat
@@ -13911,6 +14029,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("updateAttachments", CLuaBaseEntity::updateAttachments);
     SOL_REGISTER("reduceBurden", CLuaBaseEntity::reduceBurden);
 
+    SOL_REGISTER("getAllRuneEffects",CLuaBaseEntity::getAllRuneEffects);
     SOL_REGISTER("getActiveRuneCount", CLuaBaseEntity::getActiveRuneCount);
     SOL_REGISTER("getHighestRuneEffect", CLuaBaseEntity::getHighestRuneEffect);
     SOL_REGISTER("getNewestRuneEffect", CLuaBaseEntity::getNewestRuneEffect);
@@ -14005,6 +14124,14 @@ void CLuaBaseEntity::Register()
 
     SOL_REGISTER("getPlayerRegionInZone", CLuaBaseEntity::getPlayerRegionInZone);
     SOL_REGISTER("updateToEntireZone", CLuaBaseEntity::updateToEntireZone);
+
+    // Abyssea
+    SOL_REGISTER("getAvailableTraverserStones", CLuaBaseEntity::getAvailableTraverserStones);
+    SOL_REGISTER("getTraverserEpoch", CLuaBaseEntity::getTraverserEpoch);
+    SOL_REGISTER("setTraverserEpoch", CLuaBaseEntity::setTraverserEpoch);
+    SOL_REGISTER("getClaimedTraverserStones", CLuaBaseEntity::getClaimedTraverserStones);
+    SOL_REGISTER("addClaimedTraverserStones", CLuaBaseEntity::addClaimedTraverserStones);
+    SOL_REGISTER("setClaimedTraverserStones", CLuaBaseEntity::setClaimedTraverserStones);
 
     SOL_REGISTER("getHistory", CLuaBaseEntity::getHistory);
 }
