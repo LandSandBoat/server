@@ -47,26 +47,26 @@ zone_object.onInitialize = function(zone)
         onTrade = function(player, npc, trade)
             local pointsCost = 300000
         ----------------------------------------------------------------------
-            local hasAsceticsFury    = xi.weaponskill.ASCETICS_FURY
-            local hasStringingPummel = xi.weaponskill.STRINGING_PUMMEL
-            local hasMandalicStab    = xi.weaponskill.MANDALIC_STAB
-            local hasPyrrhicKleos    = xi.weaponskill.PYRRHIC_KLEOS
-            local hasMordantRime     = xi.weaponskill.MORDANT_RIME
-            local hasKingsJustice    = xi.weaponskill.KINGS_JUSTICE
-            local hasDeathBlossom    = xi.weaponskill.DEATH_BLOSSOM
-            local hasPrimalRend      = xi.weaponskill.PRIMAL_REND
-            local hasTrueFlight      = xi.weaponskill.TRUEFLIGHT
-            local hasBladeKamu       = xi.weaponskill.BLADE_KAMU
-            local hasLeadenSalute    = xi.weaponskill.LEADEN_SALUTE
-            local hasAtonement       = xi.weaponskill.ATONEMENT
-            local hasExpiacion       = xi.weaponskill.EXPIACION
-            local hasInsurgency      = xi.weaponskill.INSURGENCY
-            local hasTachiRana       = xi.weaponskill.TACHI_RANA
-            local hasVidohunir       = xi.weaponskill.VIDOHUNIR
-            local hasDrakesbane      = xi.weaponskill.DRAKESBANE
-            local hasMysticBoon      = xi.weaponskill.MYSTIC_BOON
-            local hasGarlandOfBliss  = xi.weaponskill.GARLAND_OF_BLISS
-            local hasOmniscience     = xi.weaponskill.OMNISCIENCE
+            local hasAsceticsFury    = xi.ws_unlock.ASCETICS_FURY
+            local hasStringingPummel = xi.ws_unlock.STRINGING_PUMMEL
+            local hasMandalicStab    = xi.ws_unlock.MANDALIC_STAB
+            local hasPyrrhicKleos    = xi.ws_unlock.PYRRHIC_KLEOS
+            local hasMordantRime     = xi.ws_unlock.MORDANT_RIME
+            local hasKingsJustice    = xi.ws_unlock.KINGS_JUSTICE
+            local hasDeathBlossom    = xi.ws_unlock.DEATH_BLOSSOM
+            local hasPrimalRend      = xi.ws_unlock.PRIMAL_REND
+            local hasTrueFlight      = xi.ws_unlock.TRUEFLIGHT
+            local hasBladeKamu       = xi.ws_unlock.BLADE_KAMU
+            local hasLeadenSalute    = xi.ws_unlock.LEADEN_SALUTE
+            local hasAtonement       = xi.ws_unlock.ATONEMENT
+            local hasExpiacion       = xi.ws_unlock.EXPIACION
+            local hasInsurgency      = xi.ws_unlock.INSURGENCY
+            local hasTachiRana       = xi.ws_unlock.TACHI_RANA
+            local hasVidohunir       = xi.ws_unlock.VIDOHUNIR
+            local hasDrakesbane      = xi.ws_unlock.DRAKESBANE
+            local hasMysticBoon      = xi.ws_unlock.MYSTIC_BOON
+            local hasGarlandOfBliss  = xi.ws_unlock.GARLAND_OF_BLISS
+            local hasOmniscience     = xi.ws_unlock.OMNISCIENCE
         ----------------------------------------------------------------------
         	if player:getCharVar("PaidForMeritWs") == 1 then
                 -- Shijin Spiral
