@@ -25,7 +25,7 @@ entity.onTrigger = function(player, npc)
             instance:setLocalVar("[Lamp]PartySize", instance:getLocalVar("[Lamp]PartySize") -1)
 
             if instance:getLocalVar("[Lamp]PartySize") == 0 then
-                npc:AnimationSub(1)
+                npc:setAnimationSub(1)
                 instance:setProgress(15)
             end
         else
@@ -34,10 +34,10 @@ entity.onTrigger = function(player, npc)
 
     -- Type 2 in Nyzul.lua global
     elseif OBJECTIVE == xi.nyzul.lampsObjective.ACTIVATE_ALL then
-        if npc:AnimationSub() ~= 1 and wait <= 0 then
+        if npc:getAnimationSub() ~= 1 and wait <= 0 then
             player:messageSpecial(ID.text.LAMP_SAME_TIME)
             player:startOptionalCutscene(3, {[0] = 5, cs_option = {1, 2}})
-        elseif npc:AnimationSub() == 1 then
+        elseif npc:getAnimationSub() == 1 then
             player:messageSpecial(ID.text.LAMP_ACTIVE)
         else
             player:messageSpecial(ID.text.LAMP_CANNOT_ACTIVATE)
@@ -48,7 +48,7 @@ entity.onTrigger = function(player, npc)
         if bit.band(lampRegister, bit.lshift(1,lampOrder)) == 0 then
             player:messageSpecial(ID.text.LAMP_ORDER)
             player:startOptionalCutscene(3, {[0] = 6, cs_option = {1, 2}})
-        elseif npc:AnimationSub() == 3 then
+        elseif npc:getAnimationSub() == 3 then
             player:messageSpecial(ID.text.LAMP_NOT_ALL_ACTIVE)
         elseif instance:getLocalVar("procedureTime") > 0 and instance:getLocalVar("procedureTime") < os.time() then
             player:messageSpecial(ID.text.CONFIRMING_PROCEDURE)
@@ -73,20 +73,20 @@ entity.onEventFinish = function(player, csid, option, npc)
     -- TODO: Change this comment with what is option 1
     if csid == 3 and option == 1 then
         if OBJECTIVE == xi.nyzul.lampsObjective.ACTIVATE_ALL then
-            npc:AnimationSub(1)
-            npc:timer(xi.settings.ACTIVATE_LAMP_TIME, function(lamp) lamp:AnimationSub(0) lamp:setLocalVar("[Lamp]Wait", os.time() + 30) end)
+            npc:setAnimationSub(1)
+            npc:timer(xi.settings.ACTIVATE_LAMP_TIME, function(lamp) lamp:setAnimationSub(0) lamp:setLocalVar("[Lamp]Wait", os.time() + 30) end)
 
             if
-                instance:getEntity(bit.band(ID.npc.RUNIC_LAMP_1, 0xFFF), xi.objType.NPC):AnimationSub() == 1 and
-                instance:getEntity(bit.band(ID.npc.RUNIC_LAMP_2, 0xFFF), xi.objType.NPC):AnimationSub() == 1 and
-                instance:getEntity(bit.band(ID.npc.RUNIC_LAMP_3, 0xFFF), xi.objType.NPC):AnimationSub() == 1
+                instance:getEntity(bit.band(ID.npc.RUNIC_LAMP_1, 0xFFF), xi.objType.NPC):getAnimationSub() == 1 and
+                instance:getEntity(bit.band(ID.npc.RUNIC_LAMP_2, 0xFFF), xi.objType.NPC):getAnimationSub() == 1 and
+                instance:getEntity(bit.band(ID.npc.RUNIC_LAMP_3, 0xFFF), xi.objType.NPC):getAnimationSub() == 1
             then
                 if lampCount == 3 then
                     instance:setProgress(15)
-                elseif instance:getEntity(bit.band(ID.npc.RUNIC_LAMP_4, 0xFFF), xi.objType.NPC):AnimationSub() == 1 then
+                elseif instance:getEntity(bit.band(ID.npc.RUNIC_LAMP_4, 0xFFF), xi.objType.NPC):getAnimationSub() == 1 then
                     if lampCount == 4 then
                         instance:setProgress(15)
-                    elseif instance:getEntity(bit.band(ID.npc.RUNIC_LAMP_5, 0xFFF), xi.objType.NPC):AnimationSub() == 1 then
+                    elseif instance:getEntity(bit.band(ID.npc.RUNIC_LAMP_5, 0xFFF), xi.objType.NPC):getAnimationSub() == 1 then
                         instance:setProgress(15)
                     end
                 end
@@ -110,11 +110,11 @@ entity.onEventFinish = function(player, csid, option, npc)
                     local lampPress = lamp:getLocalVar("[Lamp]press")
                     local setOrder  = lamp:getLocalVar("[Lamp]order")
                     -- print("lamp: "..i.." lampPress: "..lampPress.." setOrder: "..setOrder)
-                    lamp:AnimationSub(1)
+                    lamp:setAnimationSub(1)
 
                     if lampPress ~= setOrder then
                         lamp:timer(10000, function(lampNpc)
-                            lampNpc:AnimationSub(0)
+                            lampNpc:setAnimationSub(0)
                             instance:setLocalVar("[Lamps]lampRegister", 0)
                             instance:setLocalVar("[Lamp]pressCount", 0)
                         end)
@@ -134,11 +134,11 @@ entity.onEventFinish = function(player, csid, option, npc)
                     local lampPress = lamp:getLocalVar("[Lamp]press")
                     local setOrder  = lamp:getLocalVar("[Lamp]order")
                     -- print("lamp: "..i.." lampPress: "..lampPress.." setOrder: "..setOrder)
-                    lamp:AnimationSub(1)
+                    lamp:setAnimationSub(1)
 
                     if lampPress ~= setOrder then
                         lamp:timer(10000, function(lampNpc)
-                            lampNpc:AnimationSub(0)
+                            lampNpc:setAnimationSub(0)
                             instance:setLocalVar("[Lamps]lampRegister", 0)
                             instance:setLocalVar("[Lamp]pressCount", 0)
                         end)
@@ -158,11 +158,11 @@ entity.onEventFinish = function(player, csid, option, npc)
                     local lampPress = lamp:getLocalVar("[Lamp]press")
                     local setOrder  = lamp:getLocalVar("[Lamp]order")
                     -- print("lamp: "..i.." lampPress: "..lampPress.." setOrder: "..setOrder)
-                    lamp:AnimationSub(1)
+                    lamp:setAnimationSub(1)
 
                     if lampPress ~= setOrder then
                         lamp:timer(10000, function(lampNpc)
-                            lampNpc:AnimationSub(0)
+                            lampNpc:setAnimationSub(0)
                             instance:setLocalVar("[Lamps]lampRegister", 0)
                             instance:setLocalVar("[Lamp]pressCount", 0)
                         end)

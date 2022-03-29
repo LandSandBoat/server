@@ -36,16 +36,16 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobEngaged = function(mob)
-    handleRegen(mob, mob:AnimationSub())
+    handleRegen(mob, mob:getAnimationSub())
 end
 
 entity.onMobFight = function(mob, target)
     local battletime = os.time()
     local headgrow   = mob:getLocalVar("headgrow")
-    local broken     = mob:AnimationSub()
+    local broken     = mob:getAnimationSub()
 
     if headgrow < battletime and broken > 0 then
-        mob:AnimationSub(broken - 1)
+        mob:setAnimationSub(broken - 1)
         mob:setLocalVar("headgrow", battletime + 300)
         mob:setTP(3000)
         handleRegen(mob, broken - 1)
@@ -55,10 +55,10 @@ end
 
 entity.onCriticalHit = function(mob)
     local rand       = math.random(1, 100)
-    local broken     = mob:AnimationSub()
+    local broken     = mob:getAnimationSub()
 
     if rand <= 15 and broken < 2 then
-        mob:AnimationSub(broken + 1)
+        mob:setAnimationSub(broken + 1)
         mob:setLocalVar("headgrow", os.time() + math.random(120, 240))
         handleRegen(mob, broken + 1)
     end

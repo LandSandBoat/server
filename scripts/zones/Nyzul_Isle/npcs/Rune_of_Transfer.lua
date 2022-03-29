@@ -16,7 +16,7 @@ local entity = {}
 entity.onTrigger = function(player, npc)
     local instance = npc:getInstance()
 
-    if npc:AnimationSub() == 1 then
+    if npc:getAnimationSub() == 1 then
        if instance:getLocalVar("menuChoice") > 1 then
             -- Normal Menu
             player:startOptionalCutscene(201, {[0] = 7, cs_option = {1, 2}})
@@ -24,7 +24,7 @@ entity.onTrigger = function(player, npc)
             -- Left / Right Menu
             player:startOptionalCutscene(201, {[0] = 27, cs_option = {1, 2}})
         end
-    elseif npc:AnimationSub() == 0 then
+    elseif npc:getAnimationSub() == 0 then
         npc:messageText(npc, ID.text.ELIMINATE_ENEMY_LEADER + instance:getStage(), false)
     end
 end
@@ -123,7 +123,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             if instance:getStage() == xi.nyzul.objective.ACTIVATE_ALL_LAMPS then
                 for i = ID.npc.RUNIC_LAMP_1, ID.npc.RUNIC_LAMP_5 do
                     GetNPCByID(i, instance):setStatus(xi.status.DISAPPEAR)
-                    GetNPCByID(i, instance):AnimationSub(0)
+                    GetNPCByID(i, instance):setAnimationSub(0)
                 end
             end
 
@@ -137,7 +137,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             end
 
             xi.nyzul.clearChests(instance)
-            npc:timer(8000, function(rune) rune:AnimationSub(0) rune:setStatus(xi.status.DISAPPEAR) end)
+            npc:timer(8000, function(rune) rune:setAnimationSub(0) rune:setStatus(xi.status.DISAPPEAR) end)
         end
     end
 end

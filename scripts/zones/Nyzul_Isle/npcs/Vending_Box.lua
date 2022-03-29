@@ -41,16 +41,16 @@ local items =
     [16641] = { item = 5433, cost = 300, slot = 0x8000    }, -- Dusty Elixer -+
 }
 
-local function hasItem(player)
-    local playerHasItem = 0
+local function playerHasTempItem(player)
+    local hasTempItem = 0
 
     for _, itemList in pairs(items) do
         if player:hasItem(itemList.item, xi.inventoryLocation.TEMPITEMS) then
-            playerHasItem = playerHasItem + itemList.slot
+            hasTempItem = hasTempItem + itemList.slot
         end
     end
 
-    return hasItem + 1
+    return hasTempItem + 1
 end
 
 local function giveAllItems(player)
@@ -117,7 +117,7 @@ entity.onTrigger = function(player, npc)
     local preferred = player:getVar("[Nyzul]preferredItems")
 	local tokens    = player:getCurrency("nyzul_isle_assault_point")
 
-    player:startEvent(202, 1, tokens, hasItem(player), preferred, 100, 200, 300)
+    player:startEvent(202, 1, tokens, playerHasTempItem(player), preferred, 100, 200, 300)
 end
 
 entity.onEventUpdate = function(player, csid, option)
@@ -145,7 +145,7 @@ entity.onEventUpdate = function(player, csid, option)
         end
 
         local tokens = player:getCurrency("nyzul_isle_assault_point")
-        player:updateEvent(1, tokens, hasItem(player), player:getVar("[Nyzul]preferredItems"), 100, 200, 300)
+        player:updateEvent(1, tokens, playerHasTempItem(player), player:getVar("[Nyzul]preferredItems"), 100, 200, 300)
     end
 end
 

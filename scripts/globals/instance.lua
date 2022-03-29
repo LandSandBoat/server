@@ -161,7 +161,7 @@ xi.instance.lookup =
         { 7701, { 405, 59, -10, 0, 99, 5, 0 }, { 116, 1 }, { 411, 5 } }, -- Nashmeira's Plea
         -- Waking the Colossus / Divine Interference
         -- Forging a New Myth
-        { 7704, { 405, 51,  -4, 0, 75, 5, 1 }, { 116, 1 }, { 411, 5 } }, -- TODO: Nyzul Isle Investigation
+        { 7704, { 405, 51, -4, 0, 75, 5, 1 }, { 116, 2 }, { 405, 4 } }, -- TODO: Nyzul Isle Investigation
     },
 
     [xi.zone.EVERBLOOM_HOLLOW] =

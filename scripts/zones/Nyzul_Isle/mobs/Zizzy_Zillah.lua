@@ -8,7 +8,7 @@ require("scripts/globals/nyzul")
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    mob:AnimationSub(13)
+    mob:setAnimationSub(13)
 end
 
 entity.onMobDeath = function(mob, player, isKiller, noKiller)

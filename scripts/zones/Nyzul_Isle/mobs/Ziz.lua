@@ -8,7 +8,7 @@ local entity = {}
 
 entity.onMobSpawn = function(mob)
     xi.nyzul.specifiedEnemySet(mob)
-    mob:AnimationSub(13)
+    mob:setAnimationSub(13)
 end
 
 entity.onMobDeath = function(mob, player, isKiller, noKiller)

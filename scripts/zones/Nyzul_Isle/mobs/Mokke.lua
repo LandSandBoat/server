@@ -10,18 +10,18 @@ local entity = {}
 
 entity.onMobSpawn = function(mob)
     mob:addListener("CRITICAL_TAKE", "IMP_CRITICAL_TAKE", function(impMob)
-        if math.random(100) <= 20 and impMob:AnimationSub() == 4 then
-            impMob:AnimationSub(5)
+        if math.random(100) <= 20 and impMob:getAnimationSub() == 4 then
+            impMob:setAnimationSub(5)
             -- Reacquire horn after 5 to 60 seconds
             impMob:timer(math.random(5000, 60000), function(hornLessMob)
                 if hornLessMob:isAlive() then
-                    hornLessMob:AnimationSub(4)
+                    hornLessMob:setAnimationSub(4)
                 end
             end)
         end
     end)
     mob:setMod(xi.mod.MOVE, 64)
-    mob:AnimationSub(4)
+    mob:setAnimationSub(4)
 end
 
 entity.onMobDeath = function(mob, player, isKiller, noKiller)
