@@ -7,7 +7,7 @@
 require("modules/module_utils")
 -----------------------------------
 local m = Module:new("persist_nm_time_of_deaths")
-m:setEnabled(false)
+m:setEnabled(true)
 
 -- NOTE: These names are as they are as filenames.
 -- Example: Behemoth's Dominion => Behemoths_Dominion
@@ -17,6 +17,8 @@ m:setEnabled(false)
 local nms_to_persist =
 {
     { "Behemoths_Dominion", "Behemoth", function() return 75600 + math.random(0, 6) * 1800 end }, -- 21 - 24 hours with half hour windows
+	{ "Dragons_Aery", "Fafnir", function() return 75600 + math.random(0, 6) * 1800 end }, -- 21 - 24 hours with half hour windows
+	{ "Valley_of_Sorrows", "Adamantoise", function() return 75600 + math.random(0, 6) * 1800 end }, -- 21 - 24 hours with half hour windows
 }
 
 -- NOTE: At the time we iterate over these entries, the Lua zone and mob objects won't be ready,
