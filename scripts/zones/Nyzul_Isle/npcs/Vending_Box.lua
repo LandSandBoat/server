@@ -134,7 +134,9 @@ entity.onEventUpdate = function(player, csid, option)
             elseif option == 4378 then
                 option = option + 12263
             end
+
             local items = items[option]
+
             if player:getCurrency("nyzul_isle_assault_point") >= items.cost then
                 player:addTempItem(items.item)
                 player:messageSpecial(ID.text.TEMP_ITEM_OBATINED, items.item)

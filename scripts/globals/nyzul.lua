@@ -873,13 +873,6 @@ function xi.nyzul.addPenalty(mob)
     end
 end
 
-function xi.nyzul.get_token_penalty(instance)
-    local floor_penalities = instance:getLocalVar("tokenPenalty")
-    local rate             = get_token_rate(instance)
-
-    return math.floor(117 * rate) * floor_penalities
-end
-
 function get_token_rate(instance)
     local party_size = instance:getLocalVar("partySize")
     local rate       = 1
@@ -889,6 +882,13 @@ function get_token_rate(instance)
     end
 
     return rate
+end
+
+function xi.nyzul.get_token_penalty(instance)
+    local floor_penalities = instance:getLocalVar("tokenPenalty")
+    local rate             = get_token_rate(instance)
+
+    return math.floor(117 * rate) * floor_penalities
 end
 
 function get_relative_floor(instance)
