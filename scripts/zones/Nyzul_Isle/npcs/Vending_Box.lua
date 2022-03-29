@@ -42,11 +42,11 @@ local items =
 }
 
 local function hasItem(player)
-    local hasItem = 0
+    local playerHasItem = 0
 
     for _, itemList in pairs(items) do
         if player:hasItem(itemList.item, xi.inventoryLocation.TEMPITEMS) then
-            hasItem = hasItem + itemList.slot
+            playerHasItem = playerHasItem + itemList.slot
         end
     end
 
@@ -135,12 +135,12 @@ entity.onEventUpdate = function(player, csid, option)
                 option = option + 12263
             end
 
-            local items = items[option]
+            local vendorItems = items[option]
 
-            if player:getCurrency("nyzul_isle_assault_point") >= items.cost then
-                player:addTempItem(items.item)
-                player:messageSpecial(ID.text.TEMP_ITEM_OBATINED, items.item)
-                player:delCurrency("nyzul_isle_assault_point", items.cost)
+            if player:getCurrency("nyzul_isle_assault_point") >= vendorItems.cost then
+                player:addTempItem(vendorItems.item)
+                player:messageSpecial(ID.text.TEMP_ITEM_OBATINED, vendorItems.item)
+                player:delCurrency("nyzul_isle_assault_point", vendorItems.cost)
             end
         end
 
