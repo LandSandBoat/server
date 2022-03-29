@@ -18,7 +18,7 @@ end
 
 entity.onAdditionalEffect = function(mob, target, damage)
     -- poison tick and duration unverified
-    return xi.mob.onAddEffect(mob, player, damage, xi.mob.ae.POISON, {chance = 40, tick = 3, duration = 15})
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.POISON, {chance = 40, tick = 3, duration = 15})
 end
 
 entity.onMobDeath = function(mob, player, isKiller, noKiller)

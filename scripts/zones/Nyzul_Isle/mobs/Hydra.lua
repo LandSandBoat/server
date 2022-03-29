@@ -55,8 +55,6 @@ end
 
 entity.onCriticalHit = function(mob)
     local rand       = math.random(1, 100)
-    local battletime = os.time()
-    local headgrow   = mob:getLocalVar("headgrow")
     local broken     = mob:AnimationSub()
 
     if rand <= 15 and broken < 2 then

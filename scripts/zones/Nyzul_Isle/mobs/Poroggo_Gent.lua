@@ -19,7 +19,7 @@ entity.onMobDeath = function(mob, player, isKiller, noKiller)
         local instance = mob:getInstance()
         local chars    = instance:getChars()
 
-        for _, entity in ipairs(chars) do
+        for _, entities in ipairs(chars) do
             if player:hasStatusEffect(xi.effect.COSTUME) then
                 player:delStatusEffect(xi.effect.COSTUME)
             end

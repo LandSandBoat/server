@@ -46,19 +46,19 @@ end
 
 local function dropBomb(mob)
     local instance = mob:getInstance()
-    local bomb     = GetMobByID(mob:getID() + 1, instance)
+    local bombMob  = GetMobByID(mob:getID() + 1, instance)
     local target   = mob:getTarget()
     local pos      = mob:getPos()
 
-    bomb:setPos(pos.x, pos.y, pos.z, pos.rot)
-    bomb:setStatus(xi.status.UPDATE)
+    bombMob:setPos(pos.x, pos.y, pos.z, pos.rot)
+    bombMob:setStatus(xi.status.UPDATE)
 
     if target ~= nil then
-        bomb:updateEnmity(target)
-        bomb:timer(1000, function(bomb) bomb:useMobAbility(1838) end)
+        bombMob:updateEnmity(target)
+        bombMob:timer(1000, function(bomb) bomb:useMobAbility(1838) end)
     end
 
-    bomb:timer(4500, function(bomb) bomb:setStatus(xi.status.DISAPPEAR) end)
+    bombMob:timer(4500, function(bomb) bomb:setStatus(xi.status.DISAPPEAR) end)
 end
 
 entity.onMobSpawn = function(mob)

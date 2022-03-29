@@ -9,8 +9,6 @@ require("scripts/globals/nyzul")
 local entity = {}
 
 entity.onMonsterAbilityPrepare = function(mob)
-    local target = mob:getTarget()
-
     if mob:getHPP() > 25 then
         return 0
     elseif math.random(1, 2) == 2 then

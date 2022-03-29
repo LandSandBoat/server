@@ -55,7 +55,7 @@ entity.onEventFinish = function(player, csid, option, npc)
                     players:release()
                 end
 
-                players:timer(1500, function(player) players:startEvent(95) end)
+                players:timer(1500, function(char) char:startEvent(95) end)
             end
 
             instance:setLocalVar("partySize", playerCount)

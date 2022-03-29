@@ -14,7 +14,7 @@ entity.onMobInitialize = function(mob)
  end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, player, 0, xi.mob.ae.PETRIFY)
+    return xi.mob.onAddEffect(mob, target, 0, xi.mob.ae.PETRIFY)
 end
 
 entity.onMobDeath = function(mob, player, isKiller, noKiller)

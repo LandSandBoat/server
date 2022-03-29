@@ -13,7 +13,7 @@ entity.onMobSpawn = function(mob)
     mob:addMobMod(xi.mobMod.ADD_EFFECT, 1)
 end
 
-entit.onAdditionalEffect = function(mob, target, damage)
+entity.onAdditionalEffect = function(mob, target, damage)
     return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.STUN, {chance = 50, duration = math.random(4, 8)})
 end
 

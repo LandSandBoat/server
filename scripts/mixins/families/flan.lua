@@ -25,7 +25,7 @@ g_mixins.families.flan = function(flanMob)
         else
             accumulatedMagical = accumulatedMagical + damage
 
-            if accumulated > mob:getMaxHP() * 0.3 or damage > mob:getMaxHP() * 0.1 then
+            if accumulatedMagical > mob:getMaxHP() * 0.3 or damage > mob:getMaxHP() * 0.1 then
                 mob:AnimationSub(1) -- Smooth head
                 mob:setMod(xi.mod.DMGPHYS, 0)
                 mob:setMod(xi.mod.DMGRANGE, 0)
