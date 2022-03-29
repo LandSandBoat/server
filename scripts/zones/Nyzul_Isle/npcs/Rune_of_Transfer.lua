@@ -37,9 +37,9 @@ entity.onEventUpdate = function(player, csid, option)
         local chars = instance:getChars()
         instance:setLocalVar("runeHandler", player:getID())
 
-        for _, entity in pairs(chars) do
-            if entity:isInEvent() and entity:getID() ~= player:getID() then
-                entity:release()
+        for _, entities in pairs(chars) do
+            if entities:isInEvent() and entities:getID() ~= player:getID() then
+                entities:release()
             end
 
             entity:setLocalVar("Register", 0)
@@ -127,8 +127,8 @@ entity.onEventFinish = function(player, csid, option, npc)
                 end
             end
 
-            for _, entity in pairs(chars) do
-                entity:timer(1500, function(player) entity:startCutscene(95) end)
+            for _, entities in pairs(chars) do
+                entities:timer(1500, function(char) char:startCutscene(95) end)
             end
 
             -- left/right Menu
@@ -137,7 +137,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             end
 
             xi.nyzul.clearChests(instance)
-            npc:timer(8000, function(npc) npc:AnimationSub(0) npc:setStatus(xi.status.DISAPPEAR) end)
+            npc:timer(8000, function(rune) rune:AnimationSub(0) rune:setStatus(xi.status.DISAPPEAR) end)
         end
     end
 end

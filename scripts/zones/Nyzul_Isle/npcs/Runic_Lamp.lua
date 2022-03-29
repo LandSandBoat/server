@@ -12,7 +12,6 @@ local entity = {}
 
 entity.onTrigger = function(player, npc)
     local instance     = npc:getInstance()
-    local chars        = instance:getChars()
     local OBJECTIVE    = instance:getLocalVar("[Lamps]Objective")
     local lampRegister = instance:getLocalVar("[Lamps]lampRegister")
     local lampOrder    = npc:getLocalVar("[Lamp]order")
@@ -75,7 +74,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     if csid == 3 and option == 1 then
         if OBJECTIVE == xi.nyzul.lampsObjective.ACTIVATE_ALL then
             npc:AnimationSub(1)
-            npc:timer(xi.settings.ACTIVATE_LAMP_TIME, function(npc) npc:AnimationSub(0) npc:setLocalVar("[Lamp]Wait", os.time() + 30) end)
+            npc:timer(xi.settings.ACTIVATE_LAMP_TIME, function(lamp) lamp:AnimationSub(0) lamp:setLocalVar("[Lamp]Wait", os.time() + 30) end)
 
             if
                 instance:getEntity(bit.band(ID.npc.RUNIC_LAMP_1, 0xFFF), xi.objType.NPC):AnimationSub() == 1 and
@@ -114,8 +113,8 @@ entity.onEventFinish = function(player, csid, option, npc)
                     lamp:AnimationSub(1)
 
                     if lampPress ~= setOrder then
-                        lamp:timer(10000, function(lamp)
-                            lamp:AnimationSub(0)
+                        lamp:timer(10000, function(lampNpc)
+                            lampNpc:AnimationSub(0)
                             instance:setLocalVar("[Lamps]lampRegister", 0)
                             instance:setLocalVar("[Lamp]pressCount", 0)
                         end)
@@ -138,8 +137,8 @@ entity.onEventFinish = function(player, csid, option, npc)
                     lamp:AnimationSub(1)
 
                     if lampPress ~= setOrder then
-                        lamp:timer(10000, function(lamp)
-                            lamp:AnimationSub(0)
+                        lamp:timer(10000, function(lampNpc)
+                            lampNpc:AnimationSub(0)
                             instance:setLocalVar("[Lamps]lampRegister", 0)
                             instance:setLocalVar("[Lamp]pressCount", 0)
                         end)
@@ -155,15 +154,15 @@ entity.onEventFinish = function(player, csid, option, npc)
                 end
             elseif lampCount == 5 and lampRegister > 61 then
                 for i = ID.npc.RUNIC_LAMP_1, ID.npc.RUNIC_LAMP_5 do
-                    local lamp = instance:getEntity(bit.band(i, 0xFFF), xi.objType.NPC)
+                    local lamp      = instance:getEntity(bit.band(i, 0xFFF), xi.objType.NPC)
                     local lampPress = lamp:getLocalVar("[Lamp]press")
-                    local setOrder = lamp:getLocalVar("[Lamp]order")
+                    local setOrder  = lamp:getLocalVar("[Lamp]order")
                     -- print("lamp: "..i.." lampPress: "..lampPress.." setOrder: "..setOrder)
                     lamp:AnimationSub(1)
 
                     if lampPress ~= setOrder then
-                        lamp:timer(10000, function(lamp)
-                            lamp:AnimationSub(0)
+                        lamp:timer(10000, function(lampNpc)
+                            lampNpc:AnimationSub(0)
                             instance:setLocalVar("[Lamps]lampRegister", 0)
                             instance:setLocalVar("[Lamp]pressCount", 0)
                         end)
@@ -182,7 +181,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             -- Finish.
             if winCondition == true then
                 instance:setLocalVar("procedureTime", os.time() + 6)
-                npc:timer(6000, function(npc)
+                npc:timer(6000, function(npcLamp)
                     instance:setLocalVar("lampsCorrect", 0)
                     instance:setLocalVar("[Lamps]lampRegister", 0)
                     instance:setLocalVar("[Lamp]pressCount", 0)
