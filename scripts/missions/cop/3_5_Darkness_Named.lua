@@ -166,6 +166,21 @@ mission.sections =
             },
         },
     },
+
+    {
+        check = function(player, currentMission, missionStatus, vars)
+            return player:hasCompletedMission(mission.areaId, mission.missionId)
+        end,
+
+        [xi.zone.TAVNAZIAN_SAFEHOLD] =
+        {
+            ['Arquil']       = mission:event(292):replaceDefault(),
+            ['Chemioue']     = mission:event(282):replaceDefault(),
+            ['Despachiaire'] = mission:event(315):replaceDefault(),
+            ['Justinius']    = mission:event(129):replaceDefault(),
+            ['Parelbriaux']  = mission:event(296):replaceDefault(),
+        },
+    },
 }
 
 return mission

@@ -4,6 +4,7 @@
 -----------------------------------
 -- !addmission 6 418
 -- Dilapidated Gate : !pos -259 -30 276 25
+-- Justinius        : !pos 76 -34 68 26
 -----------------------------------
 require('scripts/globals/interaction/mission')
 require('scripts/globals/missions')
@@ -40,9 +41,9 @@ mission.sections =
             onEventFinish =
             {
                 [8] = function(player, csid, option, npc)
-                    if option == 1 then -- TODO: Find out what happens if you decline on retail
+                    if option == 1 then
                         mission:setVar(player, 'Status', 1)
-                        player:setPos(729.749, -20.319, 407.153, 90, 29)
+                        player:setPos(729.749, -20.325, 407.153, 90, 29)
                     end
                 end,
             },

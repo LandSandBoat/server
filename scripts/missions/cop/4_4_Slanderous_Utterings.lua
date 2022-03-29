@@ -27,6 +27,8 @@ mission.sections =
 
         [xi.zone.TAVNAZIAN_SAFEHOLD] =
         {
+            ['Despachiaire'] = mission:event(132):importantEvent(),
+
             onRegionEnter =
             {
                 [2] = function(player, region)

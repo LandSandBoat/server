@@ -32,24 +32,6 @@ mission.sections =
 
         [xi.zone.TAVNAZIAN_SAFEHOLD] =
         {
-            ['Arquil'] =
-            {
-                onTrigger = function(player, npc)
-                    if mission:getVar(player, 'Status') == 1 then
-                        return mission:event(292):replaceDefault()
-                    end
-                end,
-            },
-
-            ['Chemioue'] =
-            {
-                onTrigger = function(player, npc)
-                    if mission:getVar(player, 'Status') == 1 then
-                        return mission:event(282):replaceDefault()
-                    end
-                end,
-            },
-
             ['Despachiaire'] =
             {
                 onTrigger = function(player, npc)
@@ -57,8 +39,6 @@ mission.sections =
 
                     if missionStatus == 1 then
                         return mission:progressEvent(108)
-                    else
-                        return mission:event(315):replaceDefault()
                     end
                 end,
             },
@@ -68,19 +48,10 @@ mission.sections =
                 onTrigger = function(player, npc)
                     local missionStatus = mission:getVar(player, 'Status')
 
-                    if missionStatus == 1 then
-                        return mission:event(129):replaceDefault()
-                    elseif mission:getVar(player, 'Status') == 2 then
+                    if missionStatus == 2 then
                         return mission:event(109):importantEvent()
-                    end
-                end,
-            },
-
-            ['Parelbriaux'] =
-            {
-                onTrigger = function(player, npc)
-                    if mission:getVar(player, 'Status') == 1 then
-                        return mission:event(296):replaceDefault()
+                    elseif missionStatus == 3 then
+                        return mission:event(266):replaceDefault()
                     end
                 end,
             },
@@ -103,6 +74,10 @@ mission.sections =
                 [108] = function(player, csid, option, npc)
                     mission:setVar(player, 'Status', 2)
                 end,
+
+                [109] = function(player, csid, option, npc)
+                    mission:setVar(player, 'Status', 3)
+                end,
             },
         },
 
@@ -111,7 +86,7 @@ mission.sections =
             ['_0p0'] =
             {
                 onTrigger = function(player, npc)
-                    if mission:getVar(player, 'Status') == 2 then
+                    if mission:getVar(player, 'Status') >= 2 then
                         return mission:progressEvent(7)
                     end
                 end,
@@ -123,6 +98,17 @@ mission.sections =
                     mission:complete(player)
                 end,
             },
+        },
+    },
+
+    {
+        check = function(player, currentMission, missionStatus, vars)
+            return player:hasCompletedMission(mission.areaId, mission.missionId)
+        end,
+
+        [xi.zone.TAVNAZIAN_SAFEHOLD] =
+        {
+            ['Justinius'] = mission:event(266):replaceDefault(),
         },
     },
 }
