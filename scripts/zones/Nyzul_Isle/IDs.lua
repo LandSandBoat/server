@@ -2,6 +2,7 @@
 -- Area: Nyzul_Isle
 -----------------------------------
 require("scripts/globals/zone")
+require("scripts/globals/assault")
 require("scripts/globals/missions")
 -----------------------------------
 
@@ -101,6 +102,24 @@ zones[xi.zone.NYZUL_ISLE] =
 
     mob =
     {
+        [58] =
+        {
+            AMNAF_BLU          = 17093132,
+            AMNAF_PSYCHEFLAYER = 17093133,
+            IMPERIAL_GEAR1     = 17093134,
+            IMPERIAL_GEAR2     = 17093135,
+            IMPERIAL_GEAR3     = 17093136,
+            IMPERIAL_GEAR4     = 17093137,
+            NAJA               = 17093142,
+        },
+
+        [59] =
+        {
+            RAZFAHD   = 17093143,
+            ALEXANDER = 17093144,
+            RAUBAHN   = 17093145,
+        },
+
         [xi.assaultUtil.assaultArea.NYZUL_ISLE] =
         {
             ARCHAIC_RAMPART1 = 17092629,
@@ -130,6 +149,7 @@ zones[xi.zone.NYZUL_ISLE] =
             17093330, 17093331
         },
 
+        -- Nyzul Isle Investigation
         RUNIC_LAMP_1        = 17093332,
         RUNIC_LAMP_2        = 17093333,
         RUNIC_LAMP_3        = 17093334,
@@ -139,6 +159,20 @@ zones[xi.zone.NYZUL_ISLE] =
         _259                = 17093361,
         RUNE_TRANSFER_START = 17093429,
         VENDING_BOX         = 17093430,
+
+        -- Other instances
+        WEATHER             = 17093423,
+        QM1                 = 17093472,
+        BLANK1              = 17093473,
+        BLANK2              = 17093474,
+        BLANK3              = 17093475,
+        NASHMEIRA1          = 17093476,
+        NASHMEIRA2          = 17093477,
+        RAZFAHD             = 17093478,
+        CSNPC1              = 17093479,
+        GHATSAD             = 17093480,
+        ALEXANDER           = 17093481,
+        CSNPC2              = 17093482,
     }
 }
 
