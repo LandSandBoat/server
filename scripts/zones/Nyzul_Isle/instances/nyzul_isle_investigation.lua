@@ -13,99 +13,6 @@ require("scripts/zones/Nyzul_Isle/globals/points")
 -----------------------------------
 local instance_object = {}
 
-function afterInstanceRegister(player)
-    local instance = player:getInstance()
-
-    player:messageName(ID.text.COMMENCE, player, player:getCurrentAssault())
-    player:messageName(ID.text.TIME_TO_COMPLETE, player, instance:getTimeLimit())
-
-    player:addTempItem(5348)
-end
-
-function onInstanceCreated(instance)
-    local data = instance:getData()
-
-    data.evenFloorNMs =
-    {
-        [1] = -- floor 1 to 19 NM's
-        {
-            17092824, 17092825, 17092826, 17092827, 17092828, 17092829, 17092830, 17092831, 17092832,
-        },
-
-        [2] = -- floor 21 to 39 NM's
-        {
-            17092842, 17092843, 17092844, 17092845, 17092846, 17092847, 17092848, 17092849, 17092850,
-        },
-
-        [3] = -- floor 41 to 59 NM's
-        {
-            17092860, 17092861, 17092862, 17092863, 17092864, 17092865, 17092866, 17092867, 17092868,
-        },
-
-        [4] = -- floor 61 to 79 NM's
-        {
-            17092878, 17092879, 17092880, 17092881, 17092882, 17092883, 17092884, 17092885, 17092886,
-        },
-
-        [5] = -- floor 81 to 99 NM's
-        {
-            17092896, 17092897, 17092898, 17092899, 17092900, 17092901, 17092902, 17092903, 17092904,
-        },
-    }
-
-    data.oddFloorNMs =
-    {
-        [1] = -- floor 1 to 19 NM's
-        {
-            17092833, 17092834, 17092835, 17092836, 17092837, 17092838, 17092839, 17092840, 17092841,
-        },
-
-        [2] = -- floor 21 to 39 NM's
-        {
-            17092851, 17092852, 17092853, 17092854, 17092855, 17092856, 17092857, 17092858, 17092859,
-        },
-
-        [3] = -- floor 41 to 59 NM's
-        {
-            17092869, 17092870, 17092871, 17092872, 17092873, 17092874, 17092875, 17092876, 17092877,
-        },
-
-        [4] = -- floor 61 to 79 NM's
-        {
-            17092887, 17092888, 17092889, 17092890, 17092891, 17092892, 17092893, 17092894, 17092895,
-        },
-
-        [5] = -- floor 81 to 99 NM's
-        {
-            17092905, 17092906, 17092907, 17092908, 17092909, 17092910, 17092911, 17092912, 17092913,
-        },
-    }
-end
-
-function onInstanceTimeUpdate(instance, elapsed)
-    xi.instance.updateInstanceTime(instance, elapsed, ID.text)
-end
-
-function onInstanceFailure(instance)
-    local chars = instance:getChars()
-
-    for _, players in ipairs(chars) do
-        players:messageSpecial(ID.text.MISSION_FAILED, 10, 10)
-        players:startEvent(1)
-    end
-end
-
-function onInstanceProgressUpdate(instance, progress)
-    if progress > 0 then
-        if xi.nyzul.handleProgress(instance, progress) then
-            xi.nyzul.activateRuneOfTransfer(instance)
-        end
-    end
-end
-
-function onInstanceComplete(instance)
-end
-
 function pickSetPoint(instance)
     local chars        = instance:getChars()
     local currentFloor = instance:getLocalVar("Nyzul_Current_Floor")
@@ -164,7 +71,6 @@ function pickSetPoint(instance)
     -- Set Rune of Transfer Menu
     instance:setLocalVar("menuChoice", math.random(1, 20))
 end
-
 
 function lampsActivate(instance)
     local floorLayout    = instance:getLocalVar("Nyzul_Isle_FloorLayout")
@@ -415,6 +321,107 @@ function pickMobs(instance)
     end
 end
 
+-- Called on the instance once it is created and ready
+instance_object.onInstanceCreated = function(instance)
+    local data = instance:getData()
+
+    data.evenFloorNMs =
+    {
+        [1] = -- floor 1 to 19 NM's
+        {
+            17092824, 17092825, 17092826, 17092827, 17092828, 17092829, 17092830, 17092831, 17092832,
+        },
+
+        [2] = -- floor 21 to 39 NM's
+        {
+            17092842, 17092843, 17092844, 17092845, 17092846, 17092847, 17092848, 17092849, 17092850,
+        },
+
+        [3] = -- floor 41 to 59 NM's
+        {
+            17092860, 17092861, 17092862, 17092863, 17092864, 17092865, 17092866, 17092867, 17092868,
+        },
+
+        [4] = -- floor 61 to 79 NM's
+        {
+            17092878, 17092879, 17092880, 17092881, 17092882, 17092883, 17092884, 17092885, 17092886,
+        },
+
+        [5] = -- floor 81 to 99 NM's
+        {
+            17092896, 17092897, 17092898, 17092899, 17092900, 17092901, 17092902, 17092903, 17092904,
+        },
+    }
+
+    data.oddFloorNMs =
+    {
+        [1] = -- floor 1 to 19 NM's
+        {
+            17092833, 17092834, 17092835, 17092836, 17092837, 17092838, 17092839, 17092840, 17092841,
+        },
+
+        [2] = -- floor 21 to 39 NM's
+        {
+            17092851, 17092852, 17092853, 17092854, 17092855, 17092856, 17092857, 17092858, 17092859,
+        },
+
+        [3] = -- floor 41 to 59 NM's
+        {
+            17092869, 17092870, 17092871, 17092872, 17092873, 17092874, 17092875, 17092876, 17092877,
+        },
+
+        [4] = -- floor 61 to 79 NM's
+        {
+            17092887, 17092888, 17092889, 17092890, 17092891, 17092892, 17092893, 17092894, 17092895,
+        },
+
+        [5] = -- floor 81 to 99 NM's
+        {
+            17092905, 17092906, 17092907, 17092908, 17092909, 17092910, 17092911, 17092912, 17092913,
+        },
+    }
+end
+
+-- When the player zones into the instance
+instance_object.afterInstanceRegister = function(player)
+    local instance = player:getInstance()
+
+    player:messageName(ID.text.COMMENCE, player, player:getCurrentAssault())
+    player:messageName(ID.text.TIME_TO_COMPLETE, player, instance:getTimeLimit())
+
+    player:addTempItem(5348)
+end
+
+-- Instance "tick"
+instance_object.onInstanceTimeUpdate = function(instance, elapsed)
+    xi.instance.updateInstanceTime(instance, elapsed, ID.text)
+end
+
+-- On fail
+instance_object.onInstanceFailure = function(instance)
+    local chars = instance:getChars()
+
+    for _, players in ipairs(chars) do
+        players:messageSpecial(ID.text.MISSION_FAILED, 10, 10)
+        players:startEvent(1)
+    end
+end
+
+-- When something in the instance calls: instance:setProgress(...)
+instance_object.onInstanceProgressUpdate = function(instance, progress)
+    if progress > 0 then
+        if xi.nyzul.handleProgress(instance, progress) then
+            xi.nyzul.activateRuneOfTransfer(instance)
+        end
+    end
+end
+
+-- On win
+instance_object.onInstanceComplete = function(instance)
+end
+
+-- Standard event hooks, these will take priority over everything apart from m_event.Script
+-- Omitting this will fallthrough to the same calls in the Zone.lua
 instance_object.onEventUpdate = function(player, csid, option)
     if csid == 95 then
         local instance = player:getInstance()
