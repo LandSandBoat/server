@@ -826,8 +826,8 @@ xi.nyzul.spawnChest = function(mob, player)
     local mobID    = mob:getID()
 
     if
-        mobID >= ID.mob[xi.assaultUtil.assaultArea.NYZUL_ISLE].BAT_EYE and
-        mobID <= ID.mob[xi.assaultUtil.assaultArea.NYZUL_ISLE].TAISAIJIN
+        mobID >= ID.mob[51].BAT_EYE and
+        mobID <= ID.mob[51].TAISAIJIN
     then
         xi.nyzul.vigilWeaponDrop(player, mob)
 
@@ -844,7 +844,7 @@ xi.nyzul.spawnChest = function(mob, player)
                 break
             end
         end
-    elseif mobID < ID.mob[xi.assaultUtil.assaultArea.NYZUL_ISLE].ADAMANTOISE and xi.settings.ENABLE_NYZUL_CASKETS == 1 then
+    elseif mobID < ID.mob[51].ADAMANTOISE and xi.settings.ENABLE_NYZUL_CASKETS == 1 then
         if math.random(100) <= 6 then
             for _, casketID in ipairs(ID.npc.TREASURE_CASKET) do
                 local casket = GetNPCByID(casketID, instance)

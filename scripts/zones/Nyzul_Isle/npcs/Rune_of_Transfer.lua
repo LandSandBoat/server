@@ -42,7 +42,7 @@ entity.onEventUpdate = function(player, csid, option)
                 entities:release()
             end
 
-            entity:setLocalVar("Register", 0)
+            entities:setLocalVar("Register", 0)
         end
     end
 end

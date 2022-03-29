@@ -36,6 +36,7 @@ local function pickSetPoint(instance)
         end) -- Completes objective for free floor
     else
         instance:setStage(math.random(xi.nyzul.objective.ELIMINATE_ENEMY_LEADER, xi.nyzul.objective.ELIMINATE_ALL_ENEMIES)) -- Randoms floor objective
+
         if math.random(1, 30) <= 5 then
             instance:setLocalVar("gearObjective", math.random(xi.nyzul.gearObjective.AVOID_AGRO, xi.nyzul.gearObjective.DO_NOT_DESTROY))
         end
@@ -168,6 +169,8 @@ local function pickMobs(instance)
             table.insert(spawnPoint, i, pointTable[i])
         end
 
+        printf("#spawnPoint: %s", #spawnPoint)
+
         -- Not "free floors"
         if instance:getStage() ~= xi.nyzul.objective.FREE_FLOOR then
             -- Enemy Leader Objective
@@ -179,8 +182,12 @@ local function pickMobs(instance)
                 end
 
                 local sPoint = math.random(1, #spawnPoint)
+                local SPX    = spawnPoint[sPoint][1]
+                local SPY    = spawnPoint[sPoint][2]
+                local SPZ    = spawnPoint[sPoint][3]
+                local SPRot  = spawnPoint[sPoint][4]
 
-                GetMobByID(floorBoss, instance):setSpawn(spawnPoint[sPoint])
+                GetMobByID(floorBoss, instance):setSpawn(SPX, SPY, SPZ, SPRot)
                 SpawnMob(floorBoss, instance)
                 table.remove(spawnPoint, sPoint)
 
@@ -199,8 +206,12 @@ local function pickMobs(instance)
                     local randomEnemy = math.random(1, #specificEnemies)
                     local enemy       = specificEnemies[randomEnemy]
                     local sPoint      = math.random(1, #spawnPoint)
+                    local SPX         = spawnPoint[sPoint][1]
+                    local SPY         = spawnPoint[sPoint][2]
+                    local SPZ         = spawnPoint[sPoint][3]
+                    local SPRot       = spawnPoint[sPoint][4]
 
-                    GetMobByID(enemy, instance):setSpawn(spawnPoint[sPoint])
+                    GetMobByID(enemy, instance):setSpawn(SPX, SPY, SPZ, SPRot)
                     SpawnMob(enemy, instance)
                     table.remove(spawnPoint, sPoint)
                     table.remove(specificEnemies, randomEnemy)
@@ -213,8 +224,12 @@ local function pickMobs(instance)
             elseif instance:getStage() == xi.nyzul.objective.ELIMINATE_ALL_ENEMIES then
                 if math.random(0, 100) >= 80 then -- 20% chance that Dahank will spawn
                     local sPoint = math.random(1, #spawnPoint)
+                    local SPX    = spawnPoint[sPoint][1]
+                    local SPY    = spawnPoint[sPoint][2]
+                    local SPZ    = spawnPoint[sPoint][3]
+                    local SPRot  = spawnPoint[sPoint][4]
 
-                    GetMobByID(ID.mob[51].DAHAK, instance):setSpawn(spawnPoint[sPoint])
+                    GetMobByID(ID.mob[51].DAHAK, instance):setSpawn(SPX, SPY, SPZ, SPRot)
                     SpawnMob(ID.mob[51].DAHAK, instance)
                     table.remove(spawnPoint, sPoint)
                     instance:setLocalVar("Eliminate", instance:getLocalVar("Eliminate") + 1)
@@ -229,8 +244,13 @@ local function pickMobs(instance)
             -- 1st Rampart: 90% spawn rate
             if math.random(0, 100) >= 90 then
                 local sPoint = math.random(1, #spawnPoint)
+                local SPX    = spawnPoint[sPoint][1]
+                local SPY    = spawnPoint[sPoint][2]
+                local SPZ    = spawnPoint[sPoint][3]
+                local SPRot  = spawnPoint[sPoint][4]
 
-                GetMobByID(ID.mob[51].ARCHAIC_RAMPART1, instance):setSpawn(spawnPoint[sPoint])
+                GetMobByID(ID.mob[51].ARCHAIC_RAMPART1, instance):setSpawn(SPX, SPY, SPZ, SPRot)
+
                 SpawnMob(ID.mob[51].ARCHAIC_RAMPART1, instance)
                 table.remove(spawnPoint, sPoint)
 
@@ -242,8 +262,12 @@ local function pickMobs(instance)
             -- 2nd Rampart: 20% spawn rate
             if math.random(0, 100) >= 20 then
                 local sPoint = math.random(1, #spawnPoint)
+                local SPX    = spawnPoint[sPoint][1]
+                local SPY    = spawnPoint[sPoint][2]
+                local SPZ    = spawnPoint[sPoint][3]
+                local SPRot  = spawnPoint[sPoint][4]
 
-                GetMobByID(ID.mob[51].ARCHAIC_RAMPART2, instance):setSpawn(spawnPoint[sPoint])
+                GetMobByID(ID.mob[51].ARCHAIC_RAMPART2, instance):setSpawn(SPX, SPY, SPZ, SPRot)
                 SpawnMob(ID.mob[51].ARCHAIC_RAMPART2, instance)
                 table.remove(spawnPoint, sPoint)
 
@@ -256,9 +280,13 @@ local function pickMobs(instance)
             if instance:getLocalVar("gearObjective") > 0 then
                 for i = xi.nyzul.FloorEntities[17].start, xi.nyzul.FloorEntities[17].stop do
                     local sPoint = math.random(1, #spawnPoint)
+                    local SPX    = spawnPoint[sPoint][1]
+                    local SPY    = spawnPoint[sPoint][2]
+                    local SPZ    = spawnPoint[sPoint][3]
+                    local SPRot  = spawnPoint[sPoint][4]
 
                     instance:setLocalVar("gearPenalty", math.random(xi.nyzul.penalty.TIME, xi.nyzul.penalty.PATHOS))
-                    GetMobByID(i, instance):setSpawn(spawnPoint[sPoint])
+                    GetMobByID(i, instance):setSpawn(SPX, SPY, SPZ, SPRot)
                     SpawnMob(i, instance)
                     table.remove(spawnPoint, sPoint)
                 end
@@ -274,18 +302,22 @@ local function pickMobs(instance)
                     local sPoint   = math.random(1, #spawnPoint)
                     local randomNM = 0
                     local NM_mob   = 0
+                    local SPX      = spawnPoint[sPoint][1]
+                    local SPY      = spawnPoint[sPoint][2]
+                    local SPZ      = spawnPoint[sPoint][3]
+                    local SPRot    = spawnPoint[sPoint][4]
 
                     if currentFloor % 2 == 0 then
-                        randomNM = math.random(1, xi.nyzul.evenFloorNMs[floorSection])
+                        randomNM = math.random(1, #xi.nyzul.evenFloorNMs[floorSection])
                         NM_mob   = xi.nyzul.evenFloorNMs[floorSection][randomNM]
                         table.remove(xi.nyzul.evenFloorNMs[floorSection], randomNM)
                     else
-                        randomNM = math.random(1, xi.nyzul.oddFloorNMs[floorSection])
+                        randomNM = math.random(1, #xi.nyzul.oddFloorNMs[floorSection])
                         NM_mob   = xi.nyzul.oddFloorNMs[floorSection][randomNM]
                         table.remove(xi.nyzul.oddFloorNMs[floorSection], randomNM)
                     end
 
-                    GetMobByID(NM_mob, instance):setSpawn(spawnPoint[sPoint])
+                    GetMobByID(NM_mob, instance):setSpawn(SPX, SPY, SPZ, SPRot)
                     SpawnMob(NM_mob, instance)
 
                     table.remove(spawnPoint, sPoint)
@@ -311,6 +343,10 @@ local function pickMobs(instance)
                 local randomEnemy = math.random(1, #enemies)
                 local enemy       = enemies[randomEnemy]
                 local sPoint      = math.random(1, #spawnPoint)
+                local SPX         = spawnPoint[sPoint][1]
+                local SPY         = spawnPoint[sPoint][2]
+                local SPZ         = spawnPoint[sPoint][3]
+                local SPRot       = spawnPoint[sPoint][4]
 
                 if instance:getStage() == xi.nyzul.objective.ELIMINATE_ALL_ENEMIES then
                     instance:setLocalVar("Eliminate", instance:getLocalVar("Eliminate") + 1)
@@ -318,7 +354,7 @@ local function pickMobs(instance)
                     instance:setLocalVar("Nyzul_Specified_Enemy", enemy)
                 end
 
-                GetMobByID(enemy, instance):setSpawn(spawnPoint[sPoint])
+                GetMobByID(enemy, instance):setSpawn(SPX, SPY, SPZ, SPRot)
                 SpawnMob(enemy, instance)
                 table.remove(enemies, randomEnemy)
                 table.remove(spawnPoint, sPoint)
@@ -359,7 +395,7 @@ end
 instance_object.afterInstanceRegister = function(player)
     local instance = player:getInstance()
 
-    player:messageName(ID.text.COMMENCE, player, player:getCurrentAssault())
+    player:messageName(ID.text.COMMENCE, player, 51)
     player:messageName(ID.text.TIME_TO_COMPLETE, player, instance:getTimeLimit())
 
     player:addTempItem(5348)
@@ -376,7 +412,7 @@ instance_object.onInstanceFailure = function(instance)
 
     for _, players in ipairs(chars) do
         players:messageSpecial(ID.text.MISSION_FAILED, 10, 10)
-        players:startEvent(1)
+        players:startCutscene(1)
     end
 end
 
