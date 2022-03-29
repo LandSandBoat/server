@@ -14,8 +14,8 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:addImmunity(xi.immunity.SLEEP)
-    mob:addImmunity(xi.immunity.TERROR)
+    -- mob:addImmunity(xi.immunity.SLEEP)
+    -- mob:addImmunity(xi.immunity.TERROR)
     mob:addMod(xi.mod.ATT, 150)
     mob:addMod(xi.mod.DEF, 90)
     mob:setMod(xi.mod.MAIN_DMG_RATING, 33)

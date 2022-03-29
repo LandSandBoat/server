@@ -10,8 +10,8 @@ require("scripts/globals/status")
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    mob:addImmunity(xi.immunity.SLEEP)
-    mob:addImmunity(xi.immunity.TERROR)
+    -- mob:addImmunity(xi.immunity.SLEEP)
+    -- mob:addImmunity(xi.immunity.TERROR)
     mob:setMod(xi.mod.MEVA, 25)
     mob:setMod(xi.mod.MAIN_DMG_RATING, 33)
     mob:setMod(xi.mod.DOUBLE_ATTACK, 15)

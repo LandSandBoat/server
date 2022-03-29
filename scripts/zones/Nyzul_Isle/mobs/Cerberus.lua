@@ -21,8 +21,8 @@ entity.onMobSpawn = function(mob)
     mob:addMod(xi.mod.ATT, 75)
     mob:setMod(xi.mod.DEFP, 48)
     mob:setMod(xi.mod.MAIN_DMG_RATING, 40)
-    mob:addImmunity(xi.immunity.SLEEP)
-    mob:addImmunity(xi.immunity.TERROR)
+    -- mob:addImmunity(xi.immunity.SLEEP)
+    -- mob:addImmunity(xi.immunity.TERROR)
     mob:setMobMod(xi.mobMod.ROAM_DISTANCE, 15)
 end
 

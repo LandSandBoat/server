@@ -8,7 +8,7 @@ require("scripts/globals/nyzul")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:addImmunity(xi.immunity.DARKSLEEP)
+    -- mob:addImmunity(xi.immunity.DARKSLEEP)
 end
 
 entity.onMobDeath = function(mob, player, isKiller, noKiller)
