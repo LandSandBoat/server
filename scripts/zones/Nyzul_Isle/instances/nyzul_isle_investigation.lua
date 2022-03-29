@@ -13,7 +13,7 @@ require("scripts/zones/Nyzul_Isle/globals/points")
 -----------------------------------
 local instance_object = {}
 
-function pickSetPoint(instance)
+local function pickSetPoint(instance)
     local chars        = instance:getChars()
     local currentFloor = instance:getLocalVar("Nyzul_Current_Floor")
 
@@ -28,7 +28,12 @@ function pickSetPoint(instance)
     elseif math.random(1, 30) == 1 and instance:getLocalVar("freeFloor") == 0 then -- 3.33% for a free floor
         instance:setStage(xi.nyzul.objective.FREE_FLOOR)
         instance:setLocalVar("freeFloor", 1)
-        GetNPCByID(ID.npc.RUNE_TRANSFER_START, instance):timer(9000, function(m) local instance = m:getInstance() instance:setProgress(15) end) -- Completes objective for free floor
+
+        GetNPCByID(ID.npc.RUNE_TRANSFER_START, instance):timer(9000,
+        function(m)
+            local currentInstance = m:getInstance()
+            currentInstance:setProgress(15)
+        end) -- Completes objective for free floor
     else
         instance:setStage(math.random(xi.nyzul.objective.ELIMINATE_ENEMY_LEADER, xi.nyzul.objective.ELIMINATE_ALL_ENEMIES)) -- Randoms floor objective
         if math.random(1, 30) <= 5 then
@@ -72,7 +77,7 @@ function pickSetPoint(instance)
     instance:setLocalVar("menuChoice", math.random(1, 20))
 end
 
-function lampsActivate(instance)
+local function lampsActivate(instance)
     local floorLayout    = instance:getLocalVar("Nyzul_Isle_FloorLayout")
     local lampsObjective = instance:getLocalVar("[Lamps]Objective")
     local runicLamp_1    = GetNPCByID(ID.npc.RUNIC_LAMP_1, instance)
@@ -135,7 +140,7 @@ function lampsActivate(instance)
     end
 end
 
-function pickMobs(instance)
+local function pickMobs(instance)
     local data         = instance:getData()
     local currentFloor = instance:getLocalVar("Nyzul_Current_Floor")
     local mobFamily    = math.random(1, 16)
@@ -227,6 +232,7 @@ function pickMobs(instance)
                 GetMobByID(ID.mob[51].ARCHAIC_RAMPART1, instance):setSpawn(spawnPoint[sPoint])
                 SpawnMob(ID.mob[51].ARCHAIC_RAMPART1, instance)
                 table.remove(spawnPoint, sPoint)
+
                 if instance:getStage() == xi.nyzul.objective.ELIMINATE_ALL_ENEMIES then
                     instance:setLocalVar("Eliminate", instance:getLocalVar("Eliminate") + 1)
                 end

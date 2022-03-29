@@ -32,8 +32,8 @@ xi.nyzul.baseWeapons =
     [xi.job.BLU] = xi.items.WIGHTSLAYER,
     [xi.job.COR] = xi.items.QUICKSILVER,
     [xi.job.PUP] = xi.items.INFERNO_CLAWS,
---  [xi.job.DNC] = xi.items.MAIN_GAUCHE,
---  [xi.job.SCH] = xi.items.ELDER_STAFF,
+    [xi.job.DNC] = xi.items.MAIN_GAUCHE,
+    [xi.job.SCH] = xi.items.ELDER_STAFF,
 }
 
 xi.nyzul.objective =
@@ -408,6 +408,56 @@ xi.nyzul.appraisalItems =
         [xi.appraisalUtil.Origin.NYZUL_MAIGHDEAN_UAINE      ] = xi.items.APPRAISAL_EARRING,
 }
 
+-- Local functions
+local function get_relative_floor(instance)
+    local current_floor  = instance:getLocalVar("Nyzul_Current_Floor")
+    local starting_floor = instance:getLocalVar("Nyzul_Isle_StartingFloor")
+
+    if current_floor < starting_floor then
+        return current_floor + 100
+    end
+
+    return current_floor
+end
+
+local function get_traveled_floors(instance)
+    local traveled_floors = 0
+    local relative_floor  = get_relative_floor(instance)
+    local starting_floor  = instance:getLocalVar("Nyzul_Isle_StartingFloor")
+
+    traveled_floors = (relative_floor - starting_floor)
+
+    return traveled_floors
+end
+
+local function calculate_tokens(instance)
+    local relative_floor   = get_relative_floor(instance)
+    local rate             = get_token_rate(instance)
+    local potential_tokens = instance:getLocalVar("potential_tokens")
+    local floor_bonus      = 0
+    local traveled_floors  = get_traveled_floors(instance)
+
+    if relative_floor > 1 then
+        floor_bonus = (10 * math.floor((relative_floor - 1) / 5))
+    end
+
+    potential_tokens = math.floor(potential_tokens + (200 + floor_bonus) * rate)
+
+    return potential_tokens
+end
+
+function get_token_rate(instance)
+    local party_size = instance:getLocalVar("partySize")
+    local rate       = 1
+
+    if party_size > 3 then
+        rate = rate - ((party_size - 3 ) * .1)
+    end
+
+    return rate
+end
+
+-- Global functions
 function xi.nyzul.handleAppraisalItem(player, npc)
     local instance = npc:getInstance()
     local chars    = instance:getChars()
@@ -445,8 +495,8 @@ function xi.nyzul.handleAppraisalItem(player, npc)
             npc:entityAnimationPacket("open")
             npc:setLocalVar("opened", 1)
             npc:untargetable(true)
-            npc:queue(10000, function(npc) npc:entityAnimationPacket("kesu") end)
-            npc:queue(12000, function(npc) npc:setStatus(xi.status.DISAPPEAR) npc:resetLocalVars() npc:AnimationSub(0) end)
+            npc:queue(10000, function(npcvar) npcvar:entityAnimationPacket("kesu") end)
+            npc:queue(12000, function(npcvar) npcvar:setStatus(xi.status.DISAPPEAR) npcvar:resetLocalVars() npcvar:AnimationSub(0) end)
 
             break
         end
@@ -494,10 +544,11 @@ function xi.nyzul.tempBoxPickItems(npc)
         [21] = { itemID = xi.items.DUSTY_ETHER,                amount = math.random(1, 3) },
         [22] = { itemID = xi.items.DUSTY_ELIXIR,               amount = 1                 }
     }
-    local random       = math.random(1,#tempBoxItems)
+
+    local random       = math.random(1, #tempBoxItems)
     local item         = tempBoxItems[random]
-    local item2_random = math.random(1,10) > 4
-    local item3_random = math.random(1,10) > 8
+    local item2_random = math.random(1, 10)
+    local item3_random = math.random(1, 10)
 
     if npc:getLocalVar("itemID_1") == 0 then
         npc:setLocalVar("itemID_1", item.itemID)
@@ -505,17 +556,18 @@ function xi.nyzul.tempBoxPickItems(npc)
         table.remove(tempBoxItems, random)
     end
 
-    if item2_random then
-        random     = math.random(1,#tempBoxItems)
-        local item = tempBoxItems[random]
+    if item2_random > 4 then
+        random = math.random(1, #tempBoxItems)
+        item   = tempBoxItems[random]
 
         npc:setLocalVar("itemID_2", item.itemID)
         npc:setLocalVar("itemAmount_2", item.amount)
         table.remove(tempBoxItems, random)
     end
-    if item2_random and item3_random then
-        random     = math.random(1,#tempBoxItems)
-        local item = tempBoxItems[random]
+
+    if item2_random > 4 and item3_random > 8 then
+        random = math.random(1,#tempBoxItems)
+        item   = tempBoxItems[random]
 
         npc:setLocalVar("itemID_3", item.itemID)
         npc:setLocalVar("itemAmount_3", item.amount)
@@ -556,32 +608,33 @@ function xi.nyzul.tempBoxFinish(player, csid, option, npc)
                 player:messageSpecial(ID.text.ALREADY_HAVE_TEMP_ITEM)
             end
         end
+
         if npc:getLocalVar("itemAmount_1") == 0 and npc:getLocalVar("itemAmount_2") == 0 and npc:getLocalVar("itemAmount_3") == 0 then
-            npc:queue(10000, function(npc) npc:entityAnimationPacket("kesu") end)
-            npc:queue(12000, function(npc) npc:setStatus(xi.status.DISAPPEAR) npc:AnimationSub(0) npc:resetLocalVars() end)
+            npc:queue(10000, function(npcvar) npcvar:entityAnimationPacket("kesu") end)
+            npc:queue(12000, function(npcvar) npcvar:setStatus(xi.status.DISAPPEAR) npcvar:AnimationSub(0) npcvar:resetLocalVars() end)
         end
     end
 end
 
 function xi.nyzul.clearChests(instance)
     for _, cofferID in ipairs(ID.npc.TREASURE_COFFER) do
-        npc = GetNPCByID(cofferID, instance)
+        local coffer = GetNPCByID(cofferID, instance)
 
-        if npc:getStatus() ~= xi.status.DISAPPEAR then
-            npc:setStatus(xi.status.DISAPPEAR)
-            npc:AnimationSub(0)
-            npc:resetLocalVars()
+        if coffer:getStatus() ~= xi.status.DISAPPEAR then
+            coffer:setStatus(xi.status.DISAPPEAR)
+            coffer:AnimationSub(0)
+            coffer:resetLocalVars()
         end
     end
 
     if xi.settings.ENABLE_NYZUL_CASKETS == 1 then
         for _, casketID in ipairs(ID.npc.TREASURE_CASKET) do
-            npc = GetNPCByID(casketID, instance)
+            local casket = GetNPCByID(casketID, instance)
 
-            if npc:getStatus() ~= xi.status.DISAPPEAR then
-                npc:setStatus(xi.status.DISAPPEAR)
-                npc:AnimationSub(0)
-                npc:resetLocalVars()
+            if casket:getStatus() ~= xi.status.DISAPPEAR then
+                casket:setStatus(xi.status.DISAPPEAR)
+                casket:AnimationSub(0)
+                casket:resetLocalVars()
             end
         end
     end
@@ -840,7 +893,7 @@ function xi.nyzul.addPenalty(mob)
 
             if not utils.isBitSet(pathos, randomEffect) then
                 instance:setLocalVar("floorPathos", utils.setBit(pathos, randomEffect, 1))
-                local pathos = xi.nyzul.pathos[randomEffect]
+                pathos = xi.nyzul.pathos[randomEffect]
                 local effect = pathos.effect
                 local power  = pathos.power
 
@@ -873,57 +926,9 @@ function xi.nyzul.addPenalty(mob)
     end
 end
 
-function get_token_rate(instance)
-    local party_size = instance:getLocalVar("partySize")
-    local rate       = 1
-
-    if party_size > 3 then
-        rate = rate - ((party_size - 3 ) * .1)
-    end
-
-    return rate
-end
-
 function xi.nyzul.get_token_penalty(instance)
     local floor_penalities = instance:getLocalVar("tokenPenalty")
     local rate             = get_token_rate(instance)
 
     return math.floor(117 * rate) * floor_penalities
-end
-
-function get_relative_floor(instance)
-    local current_floor  = instance:getLocalVar("Nyzul_Current_Floor")
-    local starting_floor = instance:getLocalVar("Nyzul_Isle_StartingFloor")
-
-    if current_floor < starting_floor then
-        return current_floor + 100
-    end
-
-    return current_floor
-end
-
-function get_traveled_floors(instance)
-    local traveled_floors = 0
-    local relative_floor  = get_relative_floor(instance)
-    local starting_floor  = instance:getLocalVar("Nyzul_Isle_StartingFloor")
-
-    traveled_floors = (relative_floor - starting_floor)
-
-    return traveled_floors
-end
-
-function calculate_tokens(instance)
-    local relative_floor   = get_relative_floor(instance)
-    local rate             = get_token_rate(instance)
-    local potential_tokens = instance:getLocalVar("potential_tokens")
-    local floor_bonus      = 0
-    local traveled_floors  = get_traveled_floors(instance)
-
-    if relative_floor > 1 then
-        floor_bonus = (10 * math.floor((relative_floor - 1) / 5))
-    end
-
-    potential_tokens = math.floor(potential_tokens + (200 + floor_bonus) * rate)
-
-    return potential_tokens
 end
