@@ -8,7 +8,7 @@ local ID = require("scripts/zones/Nyzul_Isle/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/settings")
-require("scripts/globals/utils/nyzul")
+require("scripts/globals/nyzul")
 require("scripts/zones/Nyzul_Isle/instances/nyzul_isle_investigation")
 -----------------------------------
 local entity = {}

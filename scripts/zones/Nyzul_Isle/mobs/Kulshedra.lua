@@ -2,7 +2,7 @@
 --  MOB: Kulshedra
 -- Area: Nyzul Isle
 -----------------------------------
-require("scripts/globals/utils/nyzul")
+require("scripts/globals/nyzul")
 -----------------------------------
 local entity = {}
 

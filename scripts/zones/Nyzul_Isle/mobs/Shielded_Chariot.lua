@@ -4,7 +4,7 @@
 -- Info: Enemy Leader, Uses Mortal Revolution
 -----------------------------------
 mixins = {require("scripts/mixins/families/chariot")}
-require("scripts/globals/utils/nyzul")
+require("scripts/globals/nyzul")
 -----------------------------------
 local entity = {}
 

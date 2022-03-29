@@ -4,7 +4,7 @@
 -- Info: Specified Mob Group
 -----------------------------------
 mixins = {require("scripts/mixins/families/chariot")}
-require("scripts/globals/utils/nyzul")
+require("scripts/globals/nyzul")
 -----------------------------------
 
 entity.onMobDeath = function(mob, player, isKiller)

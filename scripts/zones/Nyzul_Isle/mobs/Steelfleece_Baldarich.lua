@@ -2,7 +2,7 @@
 -- Area: Nyzul Isle
 -- NM: Steelfleece Baldarich
 -----------------------------------
-require("scripts/globals/utils/nyzul")
+require("scripts/globals/nyzul")
 -----------------------------------
 local entity = {}
 

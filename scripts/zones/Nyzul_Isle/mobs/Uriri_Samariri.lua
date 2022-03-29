@@ -4,7 +4,7 @@
 -- Info: Enemy Leader, Spams Water Bomb
 -----------------------------------
 require("scripts/globals/status")
-require("scripts/globals/utils/nyzul")
+require("scripts/globals/nyzul")
 -----------------------------------
 local entity = {}
 

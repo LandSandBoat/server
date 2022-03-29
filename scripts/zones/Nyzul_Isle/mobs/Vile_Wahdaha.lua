@@ -3,7 +3,7 @@
 -- Area: Nyzul Isle
 -- Info: Enemy Leader
 -----------------------------------
-require("scripts/globals/utils/nyzul")
+require("scripts/globals/nyzul")
 -----------------------------------
 local entity = {}
 
