@@ -1015,8 +1015,8 @@ INSERT INTO `mob_droplist` VALUES (176,0,0,1000,1453,10); -- montiont_silverpiec
 INSERT INTO `mob_droplist` VALUES (176,2,0,1000,1455,0); -- one_byne_bill
 INSERT INTO `mob_droplist` VALUES (176,0,0,1000,1455,90);
 INSERT INTO `mob_droplist` VALUES (176,0,0,1000,1456,10); -- one_hundred_byne_bill
-INSERT INTO `mob_droplist` VALUES (176,0,0,1000,1470,80); -- sparkling_stone
-INSERT INTO `mob_droplist` VALUES (176,0,0,1000,1520,80); -- jar_of_goblin_grease
+INSERT INTO `mob_droplist` VALUES (176,0,0,1000,1470,50); -- sparkling_stone
+INSERT INTO `mob_droplist` VALUES (176,0,0,1000,1520,50); -- jar_of_goblin_grease
 INSERT INTO `mob_droplist` VALUES (176,0,0,1000,3357,240); -- leering_bijou
 INSERT INTO `mob_droplist` VALUES (176,0,0,1000,3493,50); -- forgotten_thought
 INSERT INTO `mob_droplist` VALUES (176,0,0,1000,11292,10);
@@ -1606,9 +1606,9 @@ INSERT INTO `mob_droplist` VALUES (260,0,0,1000,16899,140);
 INSERT INTO `mob_droplist` VALUES (261,2,0,1000,1455,0); -- (Quadav lottery NMs, Dynamis Be) one_byne_bill
 INSERT INTO `mob_droplist` VALUES (261,0,0,1000,1455,90);
 INSERT INTO `mob_droplist` VALUES (261,0,0,1000,1456,10); -- one_hundred_byne_bill
-INSERT INTO `mob_droplist` VALUES (261,0,0,1000,1469,80); -- chunk_of_wootz_ore
-INSERT INTO `mob_droplist` VALUES (261,0,0,1000,1470,80); -- sparkling_stone
-INSERT INTO `mob_droplist` VALUES (261,0,0,1000,1521,80); -- vial_of_slime_juice
+INSERT INTO `mob_droplist` VALUES (261,0,0,1000,1469,50); -- chunk_of_wootz_ore
+INSERT INTO `mob_droplist` VALUES (261,0,0,1000,1470,50); -- sparkling_stone
+INSERT INTO `mob_droplist` VALUES (261,0,0,1000,1521,50); -- vial_of_slime_juice
 INSERT INTO `mob_droplist` VALUES (261,0,0,1000,3357,240); -- leering_bijou
 INSERT INTO `mob_droplist` VALUES (261,0,0,1000,3493,50); -- forgotten_thought
 INSERT INTO `mob_droplist` VALUES (261,0,0,1000,11292,10);
@@ -1642,10 +1642,10 @@ INSERT INTO `mob_droplist` VALUES (264,0,0,1000,940,60);
 INSERT INTO `mob_droplist` VALUES (265,2,0,1000,1449,0); -- (Yagudo lottery NMs, Dynamis Be) tukuku_whiteshell
 INSERT INTO `mob_droplist` VALUES (265,0,0,1000,1449,90);
 INSERT INTO `mob_droplist` VALUES (265,0,0,1000,1450,10); -- lungo-nango_jadeshell
-INSERT INTO `mob_droplist` VALUES (265,0,0,1000,1464,80); -- lancewood_log
-INSERT INTO `mob_droplist` VALUES (265,0,0,1000,1466,200); -- pile_of_relic_iron
-INSERT INTO `mob_droplist` VALUES (265,0,0,1000,1470,80); -- sparkling_stone
-INSERT INTO `mob_droplist` VALUES (265,0,0,1000,1518,80); -- colossal_skull
+INSERT INTO `mob_droplist` VALUES (265,0,0,1000,1464,50); -- lancewood_log
+INSERT INTO `mob_droplist` VALUES (265,0,0,1000,1466,150); -- pile_of_relic_iron
+INSERT INTO `mob_droplist` VALUES (265,0,0,1000,1470,50); -- sparkling_stone
+INSERT INTO `mob_droplist` VALUES (265,0,0,1000,1518,50); -- colossal_skull
 INSERT INTO `mob_droplist` VALUES (265,0,0,1000,3357,240); -- leering_bijou
 INSERT INTO `mob_droplist` VALUES (265,0,0,1000,3493,50); -- forgotten_thought
 INSERT INTO `mob_droplist` VALUES (265,0,0,1000,11292,10);
@@ -2779,10 +2779,10 @@ INSERT INTO `mob_droplist` VALUES (492,0,0,1000,5074,80);
 INSERT INTO `mob_droplist` VALUES (493,2,0,1000,1452,0); -- (Orc lottery NMs, Dynamis Be) ordelle_bronzepiece
 INSERT INTO `mob_droplist` VALUES (493,0,0,1000,1452,90);
 INSERT INTO `mob_droplist` VALUES (493,0,0,1000,1453,10); -- montiont_silverpiece
-INSERT INTO `mob_droplist` VALUES (493,0,0,1000,1470,80); -- sparkling_stone
-INSERT INTO `mob_droplist` VALUES (493,0,0,1000,1516,80); -- griffon_hide
-INSERT INTO `mob_droplist` VALUES (493,0,0,1000,1517,80); -- giant_frozen_head
-INSERT INTO `mob_droplist` VALUES (493,0,0,1000,1519,80); -- fresh_orc_liver
+INSERT INTO `mob_droplist` VALUES (493,0,0,1000,1470,50); -- sparkling_stone
+INSERT INTO `mob_droplist` VALUES (493,0,0,1000,1516,50); -- griffon_hide
+INSERT INTO `mob_droplist` VALUES (493,0,0,1000,1517,50); -- giant_frozen_head
+INSERT INTO `mob_droplist` VALUES (493,0,0,1000,1519,50); -- fresh_orc_liver
 INSERT INTO `mob_droplist` VALUES (493,0,0,1000,3357,240); -- leering_bijou
 INSERT INTO `mob_droplist` VALUES (493,0,0,1000,3493,50); -- forgotten_thought
 INSERT INTO `mob_droplist` VALUES (493,0,0,1000,11292,10);
@@ -8568,9 +8568,9 @@ INSERT INTO `mob_droplist` VALUES (1671,0,0,1000,5384,100);
 INSERT INTO `mob_droplist` VALUES (1672,0,0,1000,1450,10); -- (Mildaunegeux NM, Dynamis Beacedine) lungo-nango_jadeshell
 INSERT INTO `mob_droplist` VALUES (1672,0,0,1000,1453,10); -- montiont_silverpiece
 INSERT INTO `mob_droplist` VALUES (1672,0,0,1000,1456,10); -- one_hundred_byne_bill
-INSERT INTO `mob_droplist` VALUES (1672,0,0,1000,1556,330); -- attestation_of_might
-INSERT INTO `mob_droplist` VALUES (1672,0,0,1000,1564,330); -- attestation_of_legerity
-INSERT INTO `mob_droplist` VALUES (1672,0,0,1000,1570,330); -- attestation_of_accuracy
+INSERT INTO `mob_droplist` VALUES (1672,0,0,1000,1556,240); -- attestation_of_might
+INSERT INTO `mob_droplist` VALUES (1672,0,0,1000,1564,240); -- attestation_of_legerity
+INSERT INTO `mob_droplist` VALUES (1672,0,0,1000,1570,240); -- attestation_of_accuracy
 INSERT INTO `mob_droplist` VALUES (1673,0,0,1000,939,390);
 INSERT INTO `mob_droplist` VALUES (1673,0,0,1000,1288,70);
 INSERT INTO `mob_droplist` VALUES (1673,0,0,1000,4754,20);
@@ -10827,9 +10827,9 @@ INSERT INTO `mob_droplist` VALUES (2065,0,0,1000,997,20);
 INSERT INTO `mob_droplist` VALUES (2066,0,0,1000,1450,10); -- (Quiebitiel ,Dynamis Beaucedine) lungo-nango_jadeshell
 INSERT INTO `mob_droplist` VALUES (2066,0,0,1000,1453,10); -- montiont_silverpiece
 INSERT INTO `mob_droplist` VALUES (2066,0,0,1000,1456,10); -- one_hundred_byne_bill
-INSERT INTO `mob_droplist` VALUES (2066,0,0,1000,1557,330); -- attestation_of_celerity
-INSERT INTO `mob_droplist` VALUES (2066,0,0,1000,1566,330); -- attestation_of_sacrifice
-INSERT INTO `mob_droplist` VALUES (2066,0,0,1000,1569,330); -- attestation_of_harmony
+INSERT INTO `mob_droplist` VALUES (2066,0,0,1000,1557,240); -- attestation_of_celerity
+INSERT INTO `mob_droplist` VALUES (2066,0,0,1000,1566,240); -- attestation_of_sacrifice
+INSERT INTO `mob_droplist` VALUES (2066,0,0,1000,1569,240); -- attestation_of_harmony
 INSERT INTO `mob_droplist` VALUES (2067,0,0,1000,624,370);
 INSERT INTO `mob_droplist` VALUES (2067,0,0,1000,4360,360);
 INSERT INTO `mob_droplist` VALUES (2067,0,0,1000,4443,200);
@@ -13267,8 +13267,8 @@ INSERT INTO `mob_droplist` VALUES (2541,0,0,1000,16362,10);
 INSERT INTO `mob_droplist` VALUES (2542,2,0,1000,1449,0); -- (Goblin Vanguard, Dyanmis Beacedine) tukuku_whiteshell
 INSERT INTO `mob_droplist` VALUES (2542,2,0,1000,1452,0); -- ordelle_bronzepiece
 INSERT INTO `mob_droplist` VALUES (2542,2,0,1000,1455,0); -- one_byne_bill
-INSERT INTO `mob_droplist` VALUES (2542,0,0,1000,1470,80); -- sparkling_stone
-INSERT INTO `mob_droplist` VALUES (2542,0,0,1000,1520,80); -- jar_of_goblin_grease
+INSERT INTO `mob_droplist` VALUES (2542,0,0,1000,1470,50); -- sparkling_stone
+INSERT INTO `mob_droplist` VALUES (2542,0,0,1000,1520,50); -- jar_of_goblin_grease
 INSERT INTO `mob_droplist` VALUES (2542,0,0,1000,3493,50); -- forgotten_thought
 INSERT INTO `mob_droplist` VALUES (2542,0,0,1000,11292,10);
 INSERT INTO `mob_droplist` VALUES (2542,0,0,1000,11295,10);
@@ -13381,10 +13381,10 @@ INSERT INTO `mob_droplist` VALUES (2546,0,0,1000,15137,10);
 INSERT INTO `mob_droplist` VALUES (2546,0,0,1000,15146,10);
 INSERT INTO `mob_droplist` VALUES (2546,0,0,1000,16362,10);
 INSERT INTO `mob_droplist` VALUES (2547,2,0,1000,1452,0); -- (Orc Vanguard, Dynamis Beaucedine) ordelle_bronzepiece
-INSERT INTO `mob_droplist` VALUES (2547,0,0,1000,1470,80); -- sparkling_stone
-INSERT INTO `mob_droplist` VALUES (2547,0,0,1000,1516,80); -- griffon_hide
-INSERT INTO `mob_droplist` VALUES (2547,0,0,1000,1517,80); -- giant_frozen_head
-INSERT INTO `mob_droplist` VALUES (2547,0,0,1000,1519,80); -- fresh_orc_liver
+INSERT INTO `mob_droplist` VALUES (2547,0,0,1000,1470,50); -- sparkling_stone
+INSERT INTO `mob_droplist` VALUES (2547,0,0,1000,1516,50); -- griffon_hide
+INSERT INTO `mob_droplist` VALUES (2547,0,0,1000,1517,50); -- giant_frozen_head
+INSERT INTO `mob_droplist` VALUES (2547,0,0,1000,1519,50); -- fresh_orc_liver
 INSERT INTO `mob_droplist` VALUES (2547,0,0,1000,3493,50); -- forgotten_thought
 INSERT INTO `mob_droplist` VALUES (2547,0,0,1000,11292,10);
 INSERT INTO `mob_droplist` VALUES (2547,0,0,1000,11295,10);
@@ -13496,10 +13496,10 @@ INSERT INTO `mob_droplist` VALUES (2551,0,0,1000,15137,10);
 INSERT INTO `mob_droplist` VALUES (2551,0,0,1000,15146,10);
 INSERT INTO `mob_droplist` VALUES (2551,0,0,1000,16362,10);
 INSERT INTO `mob_droplist` VALUES (2552,2,0,1000,1449,0); -- (Yagudo Vanguard, Dynamis Beaucedine) tukuku_whiteshell
-INSERT INTO `mob_droplist` VALUES (2552,0,0,1000,1464,80); -- lancewood_log
-INSERT INTO `mob_droplist` VALUES (2552,0,0,1000,1466,80); -- pile_of_relic_iron
-INSERT INTO `mob_droplist` VALUES (2552,0,0,1000,1470,80); -- sparkling_stone
-INSERT INTO `mob_droplist` VALUES (2552,0,0,1000,1518,80); -- colossal_skull
+INSERT INTO `mob_droplist` VALUES (2552,0,0,1000,1464,50); -- lancewood_log
+INSERT INTO `mob_droplist` VALUES (2552,0,0,1000,1466,50); -- pile_of_relic_iron
+INSERT INTO `mob_droplist` VALUES (2552,0,0,1000,1470,50); -- sparkling_stone
+INSERT INTO `mob_droplist` VALUES (2552,0,0,1000,1518,50); -- colossal_skull
 INSERT INTO `mob_droplist` VALUES (2552,0,0,1000,3493,50); -- forgotten_thought
 INSERT INTO `mob_droplist` VALUES (2552,0,0,1000,11292,10);
 INSERT INTO `mob_droplist` VALUES (2552,0,0,1000,11295,10);
@@ -13612,9 +13612,9 @@ INSERT INTO `mob_droplist` VALUES (2556,0,0,1000,15137,10);
 INSERT INTO `mob_droplist` VALUES (2556,0,0,1000,15146,10);
 INSERT INTO `mob_droplist` VALUES (2556,0,0,1000,16362,10);
 INSERT INTO `mob_droplist` VALUES (2557,2,0,1000,1455,0); -- (Quadav Vanguard, Dynamis Beaucedine) one_byne_bill
-INSERT INTO `mob_droplist` VALUES (2557,0,0,1000,1469,80); -- chunk_of_wootz_ore
-INSERT INTO `mob_droplist` VALUES (2557,0,0,1000,1470,80); -- sparkling_stone
-INSERT INTO `mob_droplist` VALUES (2557,0,0,1000,1521,80); -- vial_of_slime_juice
+INSERT INTO `mob_droplist` VALUES (2557,0,0,1000,1469,50); -- chunk_of_wootz_ore
+INSERT INTO `mob_droplist` VALUES (2557,0,0,1000,1470,50); -- sparkling_stone
+INSERT INTO `mob_droplist` VALUES (2557,0,0,1000,1521,50); -- vial_of_slime_juice
 INSERT INTO `mob_droplist` VALUES (2557,0,0,1000,3493,50); -- forgotten_thought
 INSERT INTO `mob_droplist` VALUES (2557,0,0,1000,11292,10);
 INSERT INTO `mob_droplist` VALUES (2557,0,0,1000,11295,10);
@@ -13793,9 +13793,9 @@ INSERT INTO `mob_droplist` VALUES (2573,0,0,1000,853,140);
 INSERT INTO `mob_droplist` VALUES (2574,0,0,1000,1450,10); -- (Velosareon, Dynamis Beacedine) lungo-nango_jadeshell
 INSERT INTO `mob_droplist` VALUES (2574,0,0,1000,1453,10); -- montiont_silverpiece
 INSERT INTO `mob_droplist` VALUES (2574,0,0,1000,1456,10); -- one_hundred_byne_bill
-INSERT INTO `mob_droplist` VALUES (2574,0,0,1000,1562,330); -- attestation_of_vigor
-INSERT INTO `mob_droplist` VALUES (2574,0,0,1000,1565,330); -- attestation_of_decisiveness
-INSERT INTO `mob_droplist` VALUES (2574,0,0,1000,1568,330); -- attestation_of_transcendence
+INSERT INTO `mob_droplist` VALUES (2574,0,0,1000,1562,240); -- attestation_of_vigor
+INSERT INTO `mob_droplist` VALUES (2574,0,0,1000,1565,240); -- attestation_of_decisiveness
+INSERT INTO `mob_droplist` VALUES (2574,0,0,1000,1568,240); -- attestation_of_transcendence
 INSERT INTO `mob_droplist` VALUES (2575,0,0,1000,2635,1000);
 INSERT INTO `mob_droplist` VALUES (2575,0,0,1000,16175,360);
 INSERT INTO `mob_droplist` VALUES (2575,0,0,1000,16239,490);
@@ -17085,13 +17085,13 @@ INSERT INTO `mob_droplist` VALUES (3209,0,0,1000,916,140); -- (Sabotender Bailar
 INSERT INTO `mob_droplist` VALUES (3209,0,0,1000,1592,80); -- (Sabotender Bailarin) Cactaur Root
 INSERT INTO `mob_droplist` VALUES (3209,0,0,1000,1236,180); -- (Sabotender Bailarin) Cactaur Stems
 INSERT INTO `mob_droplist` VALUES (3210,2,0,1000,1449,0); -- (Hitaume, Dynamis Beaucedine) tukuku_whiteshell
-INSERT INTO `mob_droplist` VALUES (3210,0,0,1000,1449,90);
+INSERT INTO `mob_droplist` VALUES (3210,0,0,1000,1449,100);
 INSERT INTO `mob_droplist` VALUES (3210,0,0,1000,1450,10); -- lungo-nango_jadeshell
 INSERT INTO `mob_droplist` VALUES (3210,2,0,1000,1452,0); -- ordelle_bronzepiece
-INSERT INTO `mob_droplist` VALUES (3210,0,0,1000,1452,90);
+INSERT INTO `mob_droplist` VALUES (3210,0,0,1000,1452,100);
 INSERT INTO `mob_droplist` VALUES (3210,0,0,1000,1453,10); -- montiont_silverpiece
 INSERT INTO `mob_droplist` VALUES (3210,2,0,1000,1455,0); -- one_byne_bill
-INSERT INTO `mob_droplist` VALUES (3210,0,0,1000,1455,90);
+INSERT INTO `mob_droplist` VALUES (3210,0,0,1000,1455,100);
 INSERT INTO `mob_droplist` VALUES (3210,0,0,1000,1456,10); -- one_hundred_byne_bill
 -- INSERT INTO `mob_droplist` VALUES (3210,0,0,1000,3427,1000) -- fiendish_tome_chapter_24, lets not fill inventory befor Arch Angra Mainyu is added
 INSERT INTO `mob_droplist` VALUES (3210,0,0,1000,3493,50); -- forgotten_thought
@@ -17099,7 +17099,7 @@ INSERT INTO `mob_droplist` VALUES (3210,0,0,1000,11292,10);
 INSERT INTO `mob_droplist` VALUES (3210,0,0,1000,11295,10);
 INSERT INTO `mob_droplist` VALUES (3210,0,0,1000,11298,10);
 INSERT INTO `mob_droplist` VALUES (3210,0,0,1000,11307,10);
-INSERT INTO `mob_droplist` VALUES (3210,0,0,1000,11918,500); -- khthonios_gloves
+INSERT INTO `mob_droplist` VALUES (3210,0,0,1000,11918,240); -- khthonios_gloves
 INSERT INTO `mob_droplist` VALUES (3210,0,0,1000,15088,10);
 INSERT INTO `mob_droplist` VALUES (3210,0,0,1000,15089,10);
 INSERT INTO `mob_droplist` VALUES (3210,0,0,1000,15090,10);
@@ -17117,13 +17117,13 @@ INSERT INTO `mob_droplist` VALUES (3210,0,0,1000,15140,10);
 INSERT INTO `mob_droplist` VALUES (3210,0,0,1000,15142,10);
 INSERT INTO `mob_droplist` VALUES (3210,0,0,1000,16360,10);
 INSERT INTO `mob_droplist` VALUES (3211,2,0,1000,1449,0); -- (Cavanneche, Dynamis Beaucedine) tukuku_whiteshell
-INSERT INTO `mob_droplist` VALUES (3211,0,0,1000,1449,90);
+INSERT INTO `mob_droplist` VALUES (3211,0,0,1000,1449,100);
 INSERT INTO `mob_droplist` VALUES (3211,0,0,1000,1450,10); -- lungo-nango_jadeshell
 INSERT INTO `mob_droplist` VALUES (3211,2,0,1000,1452,0); -- ordelle_bronzepiece
-INSERT INTO `mob_droplist` VALUES (3211,0,0,1000,1452,90);
+INSERT INTO `mob_droplist` VALUES (3211,0,0,1000,1452,100);
 INSERT INTO `mob_droplist` VALUES (3211,0,0,1000,1453,10); -- montiont_silverpiece
 INSERT INTO `mob_droplist` VALUES (3211,2,0,1000,1455,0); -- one_byne_bill
-INSERT INTO `mob_droplist` VALUES (3211,0,0,1000,1455,90);
+INSERT INTO `mob_droplist` VALUES (3211,0,0,1000,1455,100);
 INSERT INTO `mob_droplist` VALUES (3211,0,0,1000,1456,10); -- one_hundred_byne_bill
 -- INSERT INTO `mob_droplist` VALUES (3211,0,0,1000,3428,1000) -- fiendish_tome_chapter_25, lets not fill inventory befor Arch Angra Mainyu is added
 INSERT INTO `mob_droplist` VALUES (3211,0,0,1000,3493,50); -- forgotten_thought
@@ -17131,7 +17131,7 @@ INSERT INTO `mob_droplist` VALUES (3211,0,0,1000,11292,10);
 INSERT INTO `mob_droplist` VALUES (3211,0,0,1000,11295,10);
 INSERT INTO `mob_droplist` VALUES (3211,0,0,1000,11298,10);
 INSERT INTO `mob_droplist` VALUES (3211,0,0,1000,11307,10);
-INSERT INTO `mob_droplist` VALUES (3211,0,0,1000,11821,500); -- khthonios_helm
+INSERT INTO `mob_droplist` VALUES (3211,0,0,1000,11821,240); -- khthonios_helm
 INSERT INTO `mob_droplist` VALUES (3211,0,0,1000,15088,10);
 INSERT INTO `mob_droplist` VALUES (3211,0,0,1000,15089,10);
 INSERT INTO `mob_droplist` VALUES (3211,0,0,1000,15090,10);
@@ -17148,13 +17148,13 @@ INSERT INTO `mob_droplist` VALUES (3211,0,0,1000,15123,10);
 INSERT INTO `mob_droplist` VALUES (3211,0,0,1000,15140,10);
 INSERT INTO `mob_droplist` VALUES (3211,0,0,1000,15142,10);
 INSERT INTO `mob_droplist` VALUES (3211,0,0,1000,16360,10);
-INSERT INTO `mob_droplist` VALUES (3212,0,0,1000,1450,20); -- (Arch_Angra_Mainyu, Dynamis Beaucedine) lungo-nango_jadeshell
-INSERT INTO `mob_droplist` VALUES (3212,0,0,1000,1453,20); -- montiont_silverpiece
-INSERT INTO `mob_droplist` VALUES (3212,0,0,1000,1456,20); -- one_hundred_byne_bill
-INSERT INTO `mob_droplist` VALUES (3212,0,0,1000,3493,250); -- forgotten_thought
-INSERT INTO `mob_droplist` VALUES (3212,0,0,1000,11919,500); -- avesta_bangles
-INSERT INTO `mob_droplist` VALUES (3212,0,0,1000,18623,600); -- chtonic_staff
-INSERT INTO `mob_droplist` VALUES (3212,0,0,1000,19763,250); -- oneiros_cluster
+INSERT INTO `mob_droplist` VALUES (3212,0,0,1000,1450,150); -- (Arch_Angra_Mainyu, Dynamis Beaucedine) lungo-nango_jadeshell
+INSERT INTO `mob_droplist` VALUES (3212,0,0,1000,1453,150); -- montiont_silverpiece
+INSERT INTO `mob_droplist` VALUES (3212,0,0,1000,1456,150); -- one_hundred_byne_bill
+INSERT INTO `mob_droplist` VALUES (3212,0,0,1000,3493,240); -- forgotten_thought
+INSERT INTO `mob_droplist` VALUES (3212,0,0,1000,11919,240); -- avesta_bangles
+INSERT INTO `mob_droplist` VALUES (3212,0,0,1000,18623,240); -- chtonic_staff
+INSERT INTO `mob_droplist` VALUES (3212,0,0,1000,19763,240); -- oneiros_cluster
 -- Spliting Dynamis Beaucedine Hydra loot for the drop of odious item
 INSERT INTO `mob_droplist` VALUES (3213,2,0,1000,1449,0); -- Hydra Paladin (Dynamis Beaucedine) - Tukuku Whiteshell
 INSERT INTO `mob_droplist` VALUES (3213,2,0,1000,1452,0); -- Ordelle Bronzepiece
@@ -17365,13 +17365,13 @@ INSERT INTO `mob_droplist` VALUES (3220,0,0,1000,15140,10); -- Monster Gaiters
 INSERT INTO `mob_droplist` VALUES (3220,0,0,1000,15142,10); -- Scout's Socks
 INSERT INTO `mob_droplist` VALUES (3220,0,0,1000,16360,10); -- Etoile TightsINSERT INTO `mob_droplist` VALUES (3208,2,0,1000,1449,0); -- (Taquede, Dynamis Beaucedine) tukuku_whiteshell
 INSERT INTO `mob_droplist` VALUES (3221,2,0,1000,1449,0); -- (Taquede, Dynamis Beaucedine) tukuku_whiteshell
-INSERT INTO `mob_droplist` VALUES (3221,0,0,1000,1449,90);
+INSERT INTO `mob_droplist` VALUES (3221,0,0,1000,1449,100);
 INSERT INTO `mob_droplist` VALUES (3221,0,0,1000,1450,10); -- lungo-nango_jadeshell
 INSERT INTO `mob_droplist` VALUES (3221,2,0,1000,1452,0); -- ordelle_bronzepiece
-INSERT INTO `mob_droplist` VALUES (3221,0,0,1000,1452,90);
+INSERT INTO `mob_droplist` VALUES (3221,0,0,1000,1452,100);
 INSERT INTO `mob_droplist` VALUES (3221,0,0,1000,1453,10); -- montiont_silverpiece
 INSERT INTO `mob_droplist` VALUES (3221,2,0,1000,1455,0); -- one_byne_bill
-INSERT INTO `mob_droplist` VALUES (3221,0,0,1000,1455,90);
+INSERT INTO `mob_droplist` VALUES (3221,0,0,1000,1455,100);
 INSERT INTO `mob_droplist` VALUES (3221,0,0,1000,1456,10); -- one_hundred_byne_bill
 -- INSERT INTO `mob_droplist` VALUES (3221,0,0,1000,3425,1000) -- fiendish_tome_chapter_22, lets not fill inventory befor Arch Angra Mainyu is added
 INSERT INTO `mob_droplist` VALUES (3221,0,0,1000,3493,50); -- forgotten_thought
@@ -17379,7 +17379,7 @@ INSERT INTO `mob_droplist` VALUES (3221,0,0,1000,11292,10);
 INSERT INTO `mob_droplist` VALUES (3221,0,0,1000,11295,10);
 INSERT INTO `mob_droplist` VALUES (3221,0,0,1000,11298,10);
 INSERT INTO `mob_droplist` VALUES (3221,0,0,1000,11307,10);
-INSERT INTO `mob_droplist` VALUES (3221,0,0,1000,11456,500); -- ryuga_sune-ate
+INSERT INTO `mob_droplist` VALUES (3221,0,0,1000,11456,240); -- ryuga_sune-ate
 INSERT INTO `mob_droplist` VALUES (3221,0,0,1000,15088,10);
 INSERT INTO `mob_droplist` VALUES (3221,0,0,1000,15089,10);
 INSERT INTO `mob_droplist` VALUES (3221,0,0,1000,15090,10);
@@ -17397,13 +17397,13 @@ INSERT INTO `mob_droplist` VALUES (3221,0,0,1000,15140,10);
 INSERT INTO `mob_droplist` VALUES (3221,0,0,1000,15142,10);
 INSERT INTO `mob_droplist` VALUES (3221,0,0,1000,16360,10);
 INSERT INTO `mob_droplist` VALUES (3222,2,0,1000,1449,0); -- (Pignonpausard, Dynamis Beaucedine) tukuku_whiteshell
-INSERT INTO `mob_droplist` VALUES (3222,0,0,1000,1449,90);
+INSERT INTO `mob_droplist` VALUES (3222,0,0,1000,1449,100);
 INSERT INTO `mob_droplist` VALUES (3222,0,0,1000,1450,10); -- lungo-nango_jadeshell
 INSERT INTO `mob_droplist` VALUES (3222,2,0,1000,1452,0); -- ordelle_bronzepiece
-INSERT INTO `mob_droplist` VALUES (3222,0,0,1000,1452,90);
+INSERT INTO `mob_droplist` VALUES (3222,0,0,1000,1452,100);
 INSERT INTO `mob_droplist` VALUES (3222,0,0,1000,1453,10); -- montiont_silverpiece
 INSERT INTO `mob_droplist` VALUES (3222,2,0,1000,1455,0); -- one_byne_bill
-INSERT INTO `mob_droplist` VALUES (3222,0,0,1000,1455,90);
+INSERT INTO `mob_droplist` VALUES (3222,0,0,1000,1455,100);
 INSERT INTO `mob_droplist` VALUES (3222,0,0,1000,1456,10); -- one_hundred_byne_bill
 -- INSERT INTO `mob_droplist` VALUES (3222,0,0,1000,3426,1000) -- fiendish_tome_chapter_23, lets not fill inventory befor Arch Angra Mainyu is added
 INSERT INTO `mob_droplist` VALUES (3222,0,0,1000,3493,50); -- forgotten_thought
@@ -17411,7 +17411,7 @@ INSERT INTO `mob_droplist` VALUES (3222,0,0,1000,11292,10);
 INSERT INTO `mob_droplist` VALUES (3222,0,0,1000,11295,10);
 INSERT INTO `mob_droplist` VALUES (3222,0,0,1000,11298,10);
 INSERT INTO `mob_droplist` VALUES (3222,0,0,1000,11307,10);
-INSERT INTO `mob_droplist` VALUES (3222,0,0,1000,11820,500); -- khthonios_mask
+INSERT INTO `mob_droplist` VALUES (3222,0,0,1000,11820,240); -- khthonios_mask
 INSERT INTO `mob_droplist` VALUES (3222,0,0,1000,15088,10);
 INSERT INTO `mob_droplist` VALUES (3222,0,0,1000,15089,10);
 INSERT INTO `mob_droplist` VALUES (3222,0,0,1000,15090,10);
