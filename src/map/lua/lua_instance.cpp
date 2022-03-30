@@ -193,6 +193,11 @@ void CLuaInstance::setLastTimeUpdate(uint32 ms)
     m_PLuaInstance->SetLastTimeUpdate(std::chrono::milliseconds(ms));
 }
 
+void CLuaInstance::setTimeLimit(uint32 seconds)
+{
+    m_PLuaInstance->SetTimeLimit(std::chrono::seconds(seconds));
+}
+
 void CLuaInstance::setProgress(uint32 progress)
 {
     m_PLuaInstance->SetProgress(progress);
@@ -262,6 +267,7 @@ void CLuaInstance::Register()
     SOL_REGISTER("getNpcs", CLuaInstance::getNpcs);
     SOL_REGISTER("getPets", CLuaInstance::getPets);
     SOL_REGISTER("getTimeLimit", CLuaInstance::getTimeLimit);
+    SOL_REGISTER("setTimeLimit", CLuaInstance::setTimeLimit);
     SOL_REGISTER("getEntryPos", CLuaInstance::getEntryPos);
     SOL_REGISTER("getLevelCap", CLuaInstance::getLevelCap);
     SOL_REGISTER("getLastTimeUpdate", CLuaInstance::getLastTimeUpdate);

@@ -10,7 +10,13 @@ require("scripts/globals/nyzul")
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    if utils.tableContains(ID.npc.TREASURE_COFFER, npc:getID()) then
+    local npcID = npc:getID()
+
+    if
+        npcID == 17092611 or
+        npcID == 17092612 or
+        npcID == 17092614
+    then
         xi.nyzul.handleAppraisalItem(player, npc)
     else
         xi.nyzul.tempBoxTrigger(player, npc)

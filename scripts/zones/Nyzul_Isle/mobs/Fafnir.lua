@@ -10,7 +10,7 @@ require("scripts/globals/status")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setMobMod(xi.mobMod.NO_MP, 1)
+    -- mob:setMobMod(xi.mobMod.NO_MP, 1)
 end
 
 entity.onMobSpawn = function(mob)

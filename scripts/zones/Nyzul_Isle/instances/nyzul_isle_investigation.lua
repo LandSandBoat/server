@@ -169,8 +169,6 @@ local function pickMobs(instance)
             table.insert(spawnPoint, i, pointTable[i])
         end
 
-        printf("#spawnPoint: %s", #spawnPoint)
-
         -- Not "free floors"
         if instance:getStage() ~= xi.nyzul.objective.FREE_FLOOR then
             -- Enemy Leader Objective

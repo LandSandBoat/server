@@ -64,6 +64,7 @@ public:
 
     void setLevelCap(uint8 cap);
     void setLastTimeUpdate(uint32 ms);
+    void setTimeLimit(uint32 seconds);
     void setProgress(uint32 progress);
     void setWipeTime(uint32 ms);
     void setStage(uint32 stage);
