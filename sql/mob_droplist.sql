@@ -1013,7 +1013,7 @@ INSERT INTO `mob_droplist` VALUES (176,2,0,1000,1452,0); -- ordelle_bronzepiece
 INSERT INTO `mob_droplist` VALUES (176,0,0,1000,1452,10);
 INSERT INTO `mob_droplist` VALUES (176,0,0,1000,1453,10); -- montiont_silverpiece
 INSERT INTO `mob_droplist` VALUES (176,2,0,1000,1455,0); -- one_byne_bill
-INSERT INTO `mob_droplist` VALUES (176,0,0,1000,1455,90);
+INSERT INTO `mob_droplist` VALUES (176,0,0,1000,1455,100);
 INSERT INTO `mob_droplist` VALUES (176,0,0,1000,1456,10); -- one_hundred_byne_bill
 INSERT INTO `mob_droplist` VALUES (176,0,0,1000,1470,50); -- sparkling_stone
 INSERT INTO `mob_droplist` VALUES (176,0,0,1000,1520,50); -- jar_of_goblin_grease
@@ -1604,7 +1604,7 @@ INSERT INTO `mob_droplist` VALUES (260,0,0,1000,1119,510);
 INSERT INTO `mob_droplist` VALUES (260,0,0,1000,1162,240);
 INSERT INTO `mob_droplist` VALUES (260,0,0,1000,16899,140);
 INSERT INTO `mob_droplist` VALUES (261,2,0,1000,1455,0); -- (Quadav lottery NMs, Dynamis Be) one_byne_bill
-INSERT INTO `mob_droplist` VALUES (261,0,0,1000,1455,90);
+INSERT INTO `mob_droplist` VALUES (261,0,0,1000,1455,100);
 INSERT INTO `mob_droplist` VALUES (261,0,0,1000,1456,10); -- one_hundred_byne_bill
 INSERT INTO `mob_droplist` VALUES (261,0,0,1000,1469,50); -- chunk_of_wootz_ore
 INSERT INTO `mob_droplist` VALUES (261,0,0,1000,1470,50); -- sparkling_stone
@@ -1640,7 +1640,7 @@ INSERT INTO `mob_droplist` VALUES (264,2,0,1000,825,0);
 INSERT INTO `mob_droplist` VALUES (264,0,0,1000,825,380);
 INSERT INTO `mob_droplist` VALUES (264,0,0,1000,940,60);
 INSERT INTO `mob_droplist` VALUES (265,2,0,1000,1449,0); -- (Yagudo lottery NMs, Dynamis Be) tukuku_whiteshell
-INSERT INTO `mob_droplist` VALUES (265,0,0,1000,1449,90);
+INSERT INTO `mob_droplist` VALUES (265,0,0,1000,1449,100);
 INSERT INTO `mob_droplist` VALUES (265,0,0,1000,1450,10); -- lungo-nango_jadeshell
 INSERT INTO `mob_droplist` VALUES (265,0,0,1000,1464,50); -- lancewood_log
 INSERT INTO `mob_droplist` VALUES (265,0,0,1000,1466,150); -- pile_of_relic_iron
@@ -2777,7 +2777,7 @@ INSERT INTO `mob_droplist` VALUES (492,0,0,1000,5072,130);
 INSERT INTO `mob_droplist` VALUES (492,0,0,1000,5073,30);
 INSERT INTO `mob_droplist` VALUES (492,0,0,1000,5074,80);
 INSERT INTO `mob_droplist` VALUES (493,2,0,1000,1452,0); -- (Orc lottery NMs, Dynamis Be) ordelle_bronzepiece
-INSERT INTO `mob_droplist` VALUES (493,0,0,1000,1452,90);
+INSERT INTO `mob_droplist` VALUES (493,0,0,1000,1452,100);
 INSERT INTO `mob_droplist` VALUES (493,0,0,1000,1453,10); -- montiont_silverpiece
 INSERT INTO `mob_droplist` VALUES (493,0,0,1000,1470,50); -- sparkling_stone
 INSERT INTO `mob_droplist` VALUES (493,0,0,1000,1516,50); -- griffon_hide
