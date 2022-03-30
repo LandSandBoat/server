@@ -864,7 +864,7 @@ end
 xi.nyzul.removePathos = function(instance)
     if instance:getLocalVar("floorPathos") > 0 then
         for i = 1, 29 do
-            if utils.isBitSet(instance:getLocalVar("floorPathos"), i) then
+            if utils.mask.getBit(instance:getLocalVar("floorPathos"), i) then
                 local removeMessage = xi.nyzul.pathos[i].ID
                 local chars         = instance:getChars()
 
@@ -878,7 +878,7 @@ xi.nyzul.removePathos = function(instance)
                     end
                 end
 
-                instance:setLocalVar("floorPathos",utils.setBit(instance:getLocalVar("floorPathos"), i, 0))
+                instance:setLocalVar("floorPathos",utils.mask.setBit(instance:getLocalVar("floorPathos"), i, false))
             end
         end
     end
@@ -888,7 +888,7 @@ xi.nyzul.addFloorPathos = function(instance)
     local randomPathos = instance:getLocalVar("randomPathos")
 
     if randomPathos > 0 then
-        instance:setLocalVar("floorPathos", utils.setBit(instance:getLocalVar("floorPathos"), randomPathos, 1))
+        instance:setLocalVar("floorPathos", utils.mask.setBit(instance:getLocalVar("floorPathos"), randomPathos, true))
 
         local pathos = xi.nyzul.pathos[randomPathos]
         local chars  = instance:getChars()
@@ -940,8 +940,8 @@ xi.nyzul.addPenalty = function(mob)
         for i = 1, 17 do
             local randomEffect = math.random(1, 17)
 
-            if not utils.isBitSet(pathos, randomEffect) then
-                instance:setLocalVar("floorPathos", utils.setBit(pathos, randomEffect, 1))
+            if not utils.mask.getBit(pathos, randomEffect) then
+                instance:setLocalVar("floorPathos", utils.mask.setBit(pathos, randomEffect, true))
                 pathos = xi.nyzul.pathos[randomEffect]
                 local effect = pathos.effect
                 local power  = pathos.power

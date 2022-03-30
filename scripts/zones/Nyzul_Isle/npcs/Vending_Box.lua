@@ -98,7 +98,7 @@ local function giveAllPrefered(player)
     }
 
     for section = 1, 26 do
-        if utils.isBitSet(preferred, section) then
+        if utils.mask.getBit(preferred, section) then
             local mask   = selection[section]
             local choice = items[mask].item
 
