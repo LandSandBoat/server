@@ -4436,7 +4436,7 @@ void SmallPacket0x083(map_session_data_t* const PSession, CCharEntity* const PCh
 
     if ((gil != nullptr) && gil->isType(ITEM_CURRENCY))
     {
-        if (gil->getQuantity() > (price * quantity))
+        if (gil->getQuantity() >= (price * quantity))
         {
             uint8 SlotID = charutils::AddItem(PChar, LOC_INVENTORY, itemID, quantity);
 
