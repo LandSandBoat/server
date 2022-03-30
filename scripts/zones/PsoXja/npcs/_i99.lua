@@ -12,9 +12,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if (player:getCurrentMission(COP) == xi.mission.id.cop.THE_ENDURING_TUMULT_OF_WAR and player:getCharVar("PromathiaStatus")==4) then
-        player:startEvent(2)
-    elseif (player:getCurrentMission(COP) == xi.mission.id.cop.DESIRES_OF_EMPTINESS and player:getCharVar("PromathiaStatus")==3) then
+    if (player:getCurrentMission(COP) == xi.mission.id.cop.DESIRES_OF_EMPTINESS and player:getCharVar("PromathiaStatus")==3) then
         player:startEvent(106) -- Start Floor 1, 3
     elseif (player:getCurrentMission(COP) == xi.mission.id.cop.DESIRES_OF_EMPTINESS and player:getCharVar("PromathiaStatus")==5) then
         player:startEvent(109) -- Start Floor 1, 3 or 4
@@ -25,20 +23,13 @@ entity.onTrigger = function(player, npc)
     else
         player:messageSpecial(ID.text.DOOR_LOCKED)
     end
-    return 1
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    -- Retail packet captures have been marked {R}. Please don't change them.
-    if (csid == 2 and option == 1 ) then
-        player:setCharVar("PromathiaStatus", 0)
-        player:completeMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_ENDURING_TUMULT_OF_WAR)
-        player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.DESIRES_OF_EMPTINESS)
-        player:setPos(-14.744, 0.036, -119.736, 1, 22) -- To Floor 1 {R}
-    elseif (csid == 50 and option == 1) then
+    if (csid == 50 and option == 1) then
         player:setPos(-14.744, 0.036, -119.736, 1, 22) -- To Floor 1 {R}
     elseif (csid == 106) then
         if (option == 1) then

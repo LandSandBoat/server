@@ -29,8 +29,6 @@ zone_object.onZoneIn = function(player, prevZone)
         end
         player:setPos(132, -8.5, -13, 179)
         player:setHomePoint()
-    elseif (player:getCurrentMission(COP) == xi.mission.id.cop.THE_ENDURING_TUMULT_OF_WAR and player:getCharVar("PromathiaStatus") == 0) then
-        cs = 306
     end
 
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
@@ -64,11 +62,6 @@ zone_object.onEventFinish = function(player, csid, option)
         player:messageSpecial(ID.text.ITEM_OBTAINED, 536)
     elseif (csid == 71) then
         player:setPos(0, 0, 0, 0, 224)
-    elseif (csid == 306) then
-        player:setCharVar("COP_optional_CS_chasalvigne", 0)
-        player:setCharVar("COP_optional_CS_Anoki", 0)
-        player:setCharVar("COP_optional_CS_Despachaire", 0)
-        player:setCharVar("PromathiaStatus", 1)
     end
 end
 

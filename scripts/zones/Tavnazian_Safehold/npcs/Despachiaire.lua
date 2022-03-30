@@ -19,19 +19,10 @@ end
 
 entity.onTrigger = function(player, npc)
     local copCurrentMission = player:getCurrentMission(COP)
-    local copMissionStatus = player:getCharVar("PromathiaStatus")
     local copMissions = xi.mission.id.cop
 
-    -- COP 4-4 "Slanderous Utterings" is an area approach handled in Tavnazian_Safehold/Zone.lua
-    -- COP 5-1 "Sheltering Doubt" (optional)
-    if
-        copCurrentMission == copMissions.THE_ENDURING_TUMULT_OF_WAR and
-        copMissionStatus == 0 and
-        player:getCharVar("COP_optional_CS_Despachaire") == 0
-    then
-        player:startEvent(117)
     -- COP 5-3 "Three Paths"
-    elseif copCurrentMission == copMissions.THREE_PATHS then
+    if copCurrentMission == copMissions.THREE_PATHS then
         if player:getCharVar("COP_Louverance_s_Path") == 0 then
             player:startEvent(118)
         else
@@ -39,7 +30,7 @@ entity.onTrigger = function(player, npc)
         end
     -- COP Default dialogue change
     elseif player:getCurrentMission(COP) > copMissions.DARKNESS_NAMED then
-        player:startEvent(315) -- "Jeuno offered its help"; TODO: might trigger as early as 5-2?
+        player:startEvent(315) -- "Jeuno offered its help"
     end
 end
 
@@ -47,9 +38,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 117 then
-        player:setCharVar("COP_optional_CS_Despachaire", 1)
-    elseif csid == 118 then
+    if csid == 118 then
         player:setCharVar("COP_Louverance_s_Path", 1)
     end
 end

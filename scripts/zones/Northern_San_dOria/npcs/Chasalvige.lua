@@ -14,9 +14,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if (player:getCurrentMission(COP) == xi.mission.id.cop.THE_ENDURING_TUMULT_OF_WAR and player:getCharVar("COP_optional_CS_chasalvigne") == 0) then
-        player:startEvent(761)
-    elseif (player:getCurrentMission(COP) == xi.mission.id.cop.THREE_PATHS and player:getCharVar("COP_Ulmia_s_Path") == 2) then
+    if (player:getCurrentMission(COP) == xi.mission.id.cop.THREE_PATHS and player:getCharVar("COP_Ulmia_s_Path") == 2) then
         player:startEvent(762)
     else
         player:startEvent(6)
@@ -27,9 +25,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 761) then
-        player:setCharVar("COP_optional_CS_chasalvigne", 1)
-    elseif (csid == 762) then
+    if (csid == 762) then
         player:setCharVar("COP_Ulmia_s_Path", 3)
     end
 end

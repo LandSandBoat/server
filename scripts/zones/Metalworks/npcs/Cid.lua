@@ -121,10 +121,6 @@ entity.onTrigger = function(player, npc)
     elseif copMission == xi.mission.id.cop.DESIRES_OF_EMPTINESS and copStatus > 8 then
         player:startEvent(850)
 
-    -- THE ENDURING TUMULT OF WAR
-    elseif copMission == xi.mission.id.cop.THE_ENDURING_TUMULT_OF_WAR and copStatus == 1 then
-        player:startEvent(849)
-
     -- DARK PUPPET
     elseif
         player:getMainJob() == xi.job.DRK and
@@ -179,8 +175,6 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("PromathiaStatus", 0)
         player:completeMission(xi.mission.log_id.COP, xi.mission.id.cop.DESIRES_OF_EMPTINESS)
         player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.THREE_PATHS)
-    elseif csid == 849 then
-        player:setCharVar("PromathiaStatus", 2)
     elseif csid == 856 then
         player:setCharVar("PromathiaStatus", 1)
     elseif csid == 760 then
