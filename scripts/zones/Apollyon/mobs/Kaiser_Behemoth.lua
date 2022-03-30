@@ -1,8 +1,8 @@
 -----------------------------------
--- Area: Apollyon NW
+-- Area: Apollyon NW, Floor 5
 --  Mob: Kaiser Behemoth
 -----------------------------------
-local ID = require("scripts/zones/Apollyon/IDs")
+require("scripts/zones/Apollyon/bcnms/ne_apollyon_helper")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/pathfind")
@@ -48,9 +48,7 @@ entity.onSpellPrecast = function(mob, spell)
 end
 
 entity.onMobDeath = function(mob, player, isKiller, noKiller)
-    if isKiller or noKiller then
-        GetNPCByID(ID.npc.APOLLYON_NW_CRATE[5]):setStatus(xi.status.NORMAL)
-    end
+    xi.apollyon_nw.handleMobDeathFloorFive(mob, player, isKiller, noKiller)
 end
 
 return entity

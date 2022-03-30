@@ -3,7 +3,7 @@
 --  Mob: Inhumer
 -----------------------------------
 local ID = require("scripts/zones/Apollyon/IDs")
-require("scripts/zones/Apollyon/helpers/apollyon_se")
+require("scripts/zones/Apollyon/bcnms/se_apollyon_helper")
 require("scripts/globals/pathfind")
 -----------------------------------
 local entity = {}

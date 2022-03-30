@@ -2,7 +2,7 @@
 -- Area: Apollyon NE, Floor 3
 --  Mob: Apollyon Cleaner
 -----------------------------------
-require("scripts/zones/Apollyon/helpers/apollyon_ne")
+require("scripts/zones/Apollyon/bcnms/ne_apollyon_helper")
 -----------------------------------
 local entity = {}
 
