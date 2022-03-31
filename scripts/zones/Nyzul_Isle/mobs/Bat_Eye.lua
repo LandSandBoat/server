@@ -9,7 +9,7 @@ require("scripts/globals/nyzul")
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    mob:addMobMod(xi.mobMod.CHECK_AS_NM)
+    mob:addMobMod(xi.mobMod.CHECK_AS_NM, 1)
 end
 
 entity.onMobDeath = function(mob, player, isKiller, noKiller)

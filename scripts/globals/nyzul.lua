@@ -73,36 +73,36 @@ xi.nyzul.pathos =
     -- the 3 chioces for the floor, it will always be that for each occurance.
 
     -- Neg Effects
-    [1]  = { effect = xi.effect.IMPAIRMENT,    power = 0x01,  ID = 7372 }, -- Job Abilities
-    [2]  = { effect = xi.effect.IMPAIRMENT,    power = 0x02,  ID = 7374 }, -- Weapon Skills
-    [3]  = { effect = xi.effect.OMERTA,        power = 0x01,  ID = 7380 }, -- Songs
-    [4]  = { effect = xi.effect.OMERTA,        power = 0x02,  ID = 7378 }, -- Black Magic
-    [5]  = { effect = xi.effect.OMERTA,        power = 0x04,  ID = 7386 }, -- Blue Magic
-    [6]  = { effect = xi.effect.OMERTA,        power = 0x08,  ID = 7382 }, -- Ninjutsu
-    [7]  = { effect = xi.effect.OMERTA,        power = 0x10,  ID = 7384 }, -- Summoning Magic
-    [8]  = { effect = xi.effect.OMERTA,        power = 0x20,  ID = 7376 }, -- White Magic
-    [9]  = { effect = xi.effect.SLOW,          power = 2000,  ID = 7388 }, -- Attack speed reduced, needs retail data
-    [10] = { effect = xi.effect.FAST_CAST,     power = -30,   ID = 7390 }, -- Casting speed reduced
-    [11] = { effect = xi.effect.DEBILITATION,  power = 0x001, ID = 7392 }, -- STR
-    [12] = { effect = xi.effect.DEBILITATION,  power = 0x002, ID = 7394 }, -- DEX
-    [13] = { effect = xi.effect.DEBILITATION,  power = 0x004, ID = 7396 }, -- VIT
-    [14] = { effect = xi.effect.DEBILITATION,  power = 0x008, ID = 7398 }, -- AGI
-    [15] = { effect = xi.effect.DEBILITATION,  power = 0x010, ID = 7400 }, -- INT
-    [16] = { effect = xi.effect.DEBILITATION,  power = 0x020, ID = 7402 }, -- MND
-    [17] = { effect = xi.effect.DEBILITATION,  power = 0x040, ID = 7404 }, -- CHR
+    [1]  = { effect = xi.effect.IMPAIRMENT,    power = 0x01,  textId = ID.text.RESTRICTION_JOB_ABILITIES     }, -- Job Abilities
+    [2]  = { effect = xi.effect.IMPAIRMENT,    power = 0x02,  textId = ID.text.RESTRICTION_WEAPON_SKILLS     }, -- Weapon Skills
+    [3]  = { effect = xi.effect.OMERTA,        power = 0x01,  textId = ID.text.RESTRICTION_SONGS             }, -- Songs
+    [4]  = { effect = xi.effect.OMERTA,        power = 0x02,  textId = ID.text.RESTRICTION_BLACK_MAGIC       }, -- Black Magic
+    [5]  = { effect = xi.effect.OMERTA,        power = 0x04,  textId = ID.text.RESTRICTION_BLUE_MAGIC        }, -- Blue Magic
+    [6]  = { effect = xi.effect.OMERTA,        power = 0x08,  textId = ID.text.RESTRICTION_NINJITSU          }, -- Ninjutsu
+    [7]  = { effect = xi.effect.OMERTA,        power = 0x10,  textId = ID.text.RESTRICTION_SUMMON_MAGIC      }, -- Summoning Magic
+    [8]  = { effect = xi.effect.OMERTA,        power = 0x20,  textId = ID.text.RESTRICTION_WHITE_MAGIC       }, -- White Magic
+    [9]  = { effect = xi.effect.SLOW,          power = 2000,  textId = ID.text.AFFLICTION_ATTACK_SPEED_DOWN  }, -- Attack speed reduced, needs retail data
+    [10] = { effect = xi.effect.FAST_CAST,     power = -30,   textId = ID.text.AFFLICTION_CASTING_SPEED_DOWN }, -- Casting speed reduced
+    [11] = { effect = xi.effect.DEBILITATION,  power = 0x001, textId = ID.text.AFFLICTION_STR_DOWN           }, -- STR
+    [12] = { effect = xi.effect.DEBILITATION,  power = 0x002, textId = ID.text.AFFLICTION_DEX_DOWN           }, -- DEX
+    [13] = { effect = xi.effect.DEBILITATION,  power = 0x004, textId = ID.text.AFFLICTION_VIT_DOWN           }, -- VIT
+    [14] = { effect = xi.effect.DEBILITATION,  power = 0x008, textId = ID.text.AFFLICTION_AGI_DOWN           }, -- AGI
+    [15] = { effect = xi.effect.DEBILITATION,  power = 0x010, textId = ID.text.AFFLICTION_INT_DOWN           }, -- INT
+    [16] = { effect = xi.effect.DEBILITATION,  power = 0x020, textId = ID.text.AFFLICTION_MND_DOWN           }, -- MND
+    [17] = { effect = xi.effect.DEBILITATION,  power = 0x040, textId = ID.text.AFFLICTION_CHR_DOWN           }, -- CHR
     -- Positive Effects
-    [18] = { effect = xi.effect.REGAIN,        power = 5,     ID = 7406 }, -- confirmed 50
-    [19] = { effect = xi.effect.REGEN,         power = 15,    ID = 7408 }, -- confirmed 15
-    [20] = { effect = xi.effect.REFRESH,       power = 1,     ID = 7410 },
-    [21] = { effect = xi.effect.FLURRY,        power = 15,    ID = 7412 },
-    [22] = { effect = xi.effect.CONCENTRATION, power = 30,    ID = 7414 },
-    [23] = { effect = xi.effect.STR_BOOST_II,  power = 30,    ID = 7416 }, -- confirmed 30
-    [24] = { effect = xi.effect.DEX_BOOST_II,  power = 30,    ID = 7418 },
-    [25] = { effect = xi.effect.VIT_BOOST_II,  power = 30,    ID = 7420 },
-    [26] = { effect = xi.effect.AGI_BOOST_II,  power = 30,    ID = 7422 },
-    [27] = { effect = xi.effect.INT_BOOST_II,  power = 30,    ID = 7424 },
-    [28] = { effect = xi.effect.MND_BOOST_II,  power = 30,    ID = 7426 },
-    [29] = { effect = xi.effect.CHR_BOOST_II,  power = 30,    ID = 7428 },
+    [18] = { effect = xi.effect.REGAIN,        power = 5,     textId = ID.text.RECEIVED_REGAIN_EFFECT        }, -- confirmed 50
+    [19] = { effect = xi.effect.REGEN,         power = 15,    textId = ID.text.RECEIVED_REGEN_EFFECT         }, -- confirmed 15
+    [20] = { effect = xi.effect.REFRESH,       power = 1,     textId = ID.text.RECEIVED_REFRESH_EFFECT       },
+    [21] = { effect = xi.effect.FLURRY,        power = 15,    textId = ID.text.RECEIVED_FLURRY_EFFECT        },
+    [22] = { effect = xi.effect.CONCENTRATION, power = 30,    textId = ID.text.RECEIVED_CONCENTRATION_EFFECT },
+    [23] = { effect = xi.effect.STR_BOOST_II,  power = 30,    textId = ID.text.RECEIVED_STR_BOOST            }, -- confirmed 30
+    [24] = { effect = xi.effect.DEX_BOOST_II,  power = 30,    textId = ID.text.RECEIVED_DEX_BOOST            },
+    [25] = { effect = xi.effect.VIT_BOOST_II,  power = 30,    textId = ID.text.RECEIVED_VIT_BOOST            },
+    [26] = { effect = xi.effect.AGI_BOOST_II,  power = 30,    textId = ID.text.RECEIVED_AGI_BOOST            },
+    [27] = { effect = xi.effect.INT_BOOST_II,  power = 30,    textId = ID.text.RECEIVED_INT_BOOST            },
+    [28] = { effect = xi.effect.MND_BOOST_II,  power = 30,    textId = ID.text.RECEIVED_MND_BOOST            },
+    [29] = { effect = xi.effect.CHR_BOOST_II,  power = 30,    textId = ID.text.RECEIVED_CHR_BOOST            },
 }
 
 xi.nyzul.FloorLayout =
@@ -897,7 +897,7 @@ xi.nyzul.addFloorPathos = function(instance)
             players:addStatusEffect(pathos.effect, pathos.power, 0, 0)
             players:getStatusEffect(pathos.effect):unsetFlag(3) -- dispelable + eraseable
             players:getStatusEffect(pathos.effect):setFlag(8388864) -- on zone + no cancel
-            players:messageSpecial(pathos.ID)
+            players:messageSpecial(pathos.textId)
 
             if players:hasPet() then
                 local pet = players:getPet()
@@ -936,6 +936,8 @@ xi.nyzul.addPenalty = function(mob)
             players:messageSpecial(ID.text.MALFUNCTION)
             players:messageSpecial(ID.text.TOKEN_LOSS)
         end
+
+    -- Status effect penalty
     else
         for i = 1, 17 do
             local randomEffect = math.random(1, 17)
@@ -950,8 +952,8 @@ xi.nyzul.addPenalty = function(mob)
                     if effect == xi.effect.IMPAIRMENT or effect == xi.effect.OMERTA or effect == xi.effect.DEBILITATION then
                         if players:hasStatusEffect(effect) then
                             local statusEffect = players:getStatusEffect(effect)
-                            local effectPower = statusEffect:getPower()
-                            power = bit.bor(effectPower, power)
+                            local effectPower  = statusEffect:getPower()
+                            power              = bit.bor(effectPower, power)
                         end
                     end
 
@@ -959,7 +961,7 @@ xi.nyzul.addPenalty = function(mob)
                     players:getStatusEffect(effect):unsetFlag(3) -- dispelable + eraseable
                     players:getStatusEffect(effect):setFlag(8388864) -- on zone + no cancel
                     players:messageSpecial(ID.text.MALFUNCTION)
-                    players:messageSpecial(pathos.ID)
+                    players:messageSpecial(pathos.textId)
 
                     if players:hasPet() then
                         local pet = players:getPet()
