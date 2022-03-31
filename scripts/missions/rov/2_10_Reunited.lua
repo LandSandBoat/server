@@ -37,7 +37,7 @@ mission.sections =
 
                 onTrigger = function(player, npc)
                     if xi.rhapsodies.charactersAvailable(player) then
-                        return mission:event(167, 0, 0, 0, 0, 0, 0, 0, 0, 0):setPriority(1005) 
+                        return mission:event(167, 0, 0, 0, 0, 0, 0, 0, 0, 0):setPriority(1005)
                         -- capture start @36min https://www.youtube.com/watch?v=mbQeJDyDpDk
                     end
                 end,
