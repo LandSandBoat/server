@@ -29,6 +29,7 @@
 //
 //
 
+#include <string>
 #include <vector>
 
 class NodeAABB;
@@ -43,6 +44,8 @@ public:
 class RaycastMesh : public NodeInterface
 {
 public:
+    RaycastMesh(std::string const& filename);
+
     RaycastMesh(unsigned int        vcount,            // The number of vertices in the source triangle mesh
                 const float*        vertices,          // The array of vertex positions in the format x1,y1,z1..x2,y2,z2.. etc.
                 unsigned int        tcount,            // The number of triangles in the source triangle mesh

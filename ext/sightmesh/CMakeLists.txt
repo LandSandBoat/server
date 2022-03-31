@@ -1,6 +1,7 @@
 set(SOURCES
     RaycastMesh.cpp
     RaycastMesh.h
+    tiny_obj_loader.h
     wavefront.cpp
     wavefront.h)
 

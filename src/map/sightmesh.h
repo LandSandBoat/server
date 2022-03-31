@@ -1,11 +1,10 @@
-#pragma once
+﻿#pragma once
 
 #include <memory>
 
 #include "../common/mmo.h"
 
 #include "RaycastMesh.h"
-#include "wavefront.h"
 
 class CSightMesh
 {

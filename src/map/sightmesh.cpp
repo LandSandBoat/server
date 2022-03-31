@@ -1,5 +1,6 @@
-#include "sightmesh.h"
+﻿#include "sightmesh.h"
 
+#include "spdlog/fmt/fmt.h"
 #include "navmesh.h"
 
 CSightMesh::CSightMesh(uint16 id)
@@ -11,13 +12,10 @@ bool CSightMesh::load(std::string const& filename)
 {
     TracyZoneScoped;
 
-    // Load OBJ
-    WavefrontObj obj;
-    obj.loadObj(filename.c_str(), false);
+    // TODO: Read from pre-processed nav files, not from the original obj files
+    m_mesh = std::make_unique<RaycastMesh>(fmt::format("obj/{}.obj", filename));
 
-    // Generate RaycastMesh
-    // TODO: Serialize this object out to a file
-    m_mesh = std::make_unique<RaycastMesh>(obj.mVertexCount, obj.mVertices, obj.mTriCount, (const unsigned int*)obj.mIndices);
+    return true;
 }
 
 bool CSightMesh::raycast(position_t const& start, position_t const& end)

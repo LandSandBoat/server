@@ -1,4 +1,4 @@
-#include "RaycastMesh.h"
+﻿#include "RaycastMesh.h"
 
 // This code snippet allows you to create an axis aligned bounding volume tree for a triangle mesh so that you can do
 // high-speed raycasting.
@@ -35,6 +35,13 @@
 #include <cstring>
 #include <memory>
 #include <vector>
+#include <iostream>
+#include <fstream>
+
+#define TINYOBJLOADER_IMPLEMENTATION
+#include "tiny_obj_loader.h"
+
+#include "wavefront.h"
 
 #pragma warning(disable : 4100)
 
@@ -728,25 +735,53 @@ public:
     unsigned int mLeafTriangleIndex; // if it is a leaf node; then these are the triangle indices.
 };
 
+RaycastMesh::RaycastMesh(std::string const& filename)
+{
+    // Old Style (takes an extremely long time to parse full sized  obj files)
+    //WavefrontObj obj;
+    //obj.loadObj(filename.c_str(), false);
+    //RaycastMesh(obj.mVertexCount, obj.mVertices, obj.mTriCount, (const unsigned int*)obj.mIndices);
+
+    // New style. Fast enough, but crashes
+    tinyobj::attrib_t                attrib;
+    std::vector<tinyobj::shape_t>    shapes; // NOTE: In the way we dump our objs, there is only a single shape
+    std::vector<tinyobj::material_t> materials;
+    std::string                      err;
+    bool                             ret = tinyobj::LoadObj(&attrib, &shapes, &materials, &err, filename.c_str());
+
+    tinyobj::shape_t& shape = shapes[0];
+
+    std::vector<int> vertIndices;
+    for (auto& index : shape.mesh.indices)
+    {
+        vertIndices.emplace_back(index.vertex_index);
+    }
+
+    // RaycastMesh(unsigned int        vcount,            // The number of vertices in the source triangle mesh
+    //             const float*        vertices,          // The array of vertex positions in the format x1,y1,z1..x2,y2,z2.. etc.
+    //             unsigned int        tcount,            // The number of triangles in the source triangle mesh
+    //             const unsigned int* indices,           // The triangle indices in the format of i1,i2,i3 ... i4,i5,i6, ...
+
+    // Pass to original constructor
+    RaycastMesh((unsigned int)attrib.vertices.size(),
+                (const float*)attrib.vertices.data(),
+                (unsigned int)shape.mesh.indices.size() / 3,
+                (const unsigned int*)vertIndices.data());
+}
+
 RaycastMesh::RaycastMesh(unsigned int vcount, const float* vertices, unsigned int tcount, const unsigned int* indices, unsigned int maxDepth, unsigned int minLeafSize, float minAxisSize)
 {
     mRaycastFrame = 0;
 
-    if (maxDepth < 2)
-    {
-        maxDepth = 2;
-    }
+    maxDepth = std::min(std::max(maxDepth, 2U), 15U);
 
-    if (maxDepth > 15)
-    {
-        maxDepth = 15;
-    }
     unsigned int pow2Table[16] = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 65536 };
     mMaxNodeCount              = 0;
     for (unsigned int i = 0; i <= maxDepth; i++)
     {
         mMaxNodeCount += pow2Table[i];
     }
+
     mNodes     = new NodeAABB[mMaxNodeCount];
     mNodeCount = 0;
     mVcount    = vcount;

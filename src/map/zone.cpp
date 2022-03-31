@@ -444,7 +444,7 @@ void CZone::LoadSightMesh()
         m_sightMesh = std::make_unique<CSightMesh>((uint16)GetID());
     }
 
-    if (!m_sightMesh->load(fmt::format("sightmeshes/{}.nav", GetName())))
+    if (!m_sightMesh->load(this->m_zoneName))
     {
         m_sightMesh = nullptr;
     }
