@@ -48,6 +48,7 @@ target_link_libraries(common
     sol2_single
     efsw
     concurrentqueue
+    sightmesh
     project_options
     #PRIVATE
     #project_warnings

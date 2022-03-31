@@ -36,6 +36,7 @@
 #include "vana_time.h"
 
 #include "navmesh.h"
+#include "sightmesh.h"
 #include "packets/weather.h"
 
 enum ZONEID : uint16
@@ -619,7 +620,8 @@ public:
     CBattlefieldHandler* m_BattlefieldHandler; // BCNM Instances in this zone
     CCampaignHandler*    m_CampaignHandler;    // WOTG campaign information for this zone
 
-    CNavMesh* m_navMesh; // zones navmesh for finding paths
+    std::unique_ptr<CNavMesh>   m_navMesh;   // zone's navmesh for finding paths
+    std::unique_ptr<CSightMesh> m_sightMesh; // zone's sightmesh for determining line of sight
 
 private:
     ZONEID         m_zoneID; // ID зоны
@@ -645,10 +647,11 @@ private:
     regionList_t   m_regionList;   // список активных областей зоны
     zoneLineList_t m_zoneLineList; // список всех доступных zonelines для зоны
 
-    void LoadZoneLines();    // список zonelines (можно было бы заменить этот метод методом InsertZoneLine)
-    void LoadZoneWeather();  // погода
-    void LoadZoneSettings(); // настройки зоны
-    void LoadNavMesh();      // Load the zones navmesh. Must exist in scripts/zones/:zone/NavMesh.nav
+    void LoadZoneLines();    // List of zonelines (one could replace this method using insertzoneline)
+    void LoadZoneWeather();
+    void LoadZoneSettings();
+    void LoadNavMesh();      // Load the zone's navmesh. Must exist in navmeshes/{zone name}.nav
+    void LoadSightMesh();    // Load the zone's sightmesh. Must exist in sightmeshes/{zone name}.nav
 
     CTreasurePool* m_TreasurePool; // глобальный TreasuerPool
 

@@ -2463,6 +2463,30 @@ void CLuaBaseEntity::setRotation(uint8 rotation)
 }
 
 /************************************************************************
+ *  Function: canSee()
+ *  Purpose : Uses sight mesh to determine if one entity can see the other.
+ *  Example : if player:canSee(mob) then ... end
+ *  Notes   : Does not take facing angles into account
+ ************************************************************************/
+bool CLuaBaseEntity::canSee(CLuaBaseEntity* PTarget)
+{
+    if (!PTarget)
+    {
+        ShowWarning("Invalid Target");
+        return false;
+    }
+
+    auto* PZone = m_PBaseEntity->loc.zone;
+    if (!PZone->m_sightMesh)
+    {
+        ShowWarning("Zone does not have valid SightMesh");
+        return false;
+    }
+
+    return PZone->m_sightMesh->raycast(m_PBaseEntity->loc.p, PTarget->GetBaseEntity()->loc.p);;
+}
+
+/************************************************************************
  *  Function: setPos()
  *  Purpose : Sends a PC to a new position
  *  Example : player:setPos(x,y,z,rot,zone) -- zone value is optional
@@ -13524,6 +13548,8 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getRotPos", CLuaBaseEntity::getRotPos);
     SOL_REGISTER("setPos", CLuaBaseEntity::setPos);
     SOL_REGISTER("setRotation", CLuaBaseEntity::setRotation);
+
+    SOL_REGISTER("canSee", CLuaBaseEntity::canSee);
 
     SOL_REGISTER("warp", CLuaBaseEntity::warp);
     SOL_REGISTER("teleport", CLuaBaseEntity::teleport);

@@ -182,6 +182,8 @@ public:
     uint8 getRotPos();                 // Get Entity Rot position
     void  setRotation(uint8 rotation); // Set Entity rotation
 
+    bool canSee(CLuaBaseEntity* PTarget);
+
     void setPos(sol::variadic_args va);                                       // Set Entity position (x,y,z,rot) or (x,y,z,rot,zone)
     void warp();                                                              // Returns Character to home point
     void teleport(std::map<std::string, float> pos, sol::object const& arg1); // Set Entity position (without entity despawn/spawn packets)

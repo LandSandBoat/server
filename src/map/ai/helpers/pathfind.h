@@ -113,7 +113,7 @@ public:
 
     // checks if raycast was broken between current point and given
     // returns true if raycast didn't hit any walls
-    bool CanSeePoint(const position_t& point, bool lookOffMesh = true);
+    bool CanSeePoint(const position_t& point);
 
     // returns the final destination of the current path
     const position_t& GetDestination() const;

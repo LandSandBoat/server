@@ -156,18 +156,13 @@ CZone::CZone(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID)
     LoadZoneLines();
     LoadZoneWeather();
     LoadNavMesh();
+    LoadSightMesh();
 }
 
 CZone::~CZone()
 {
     delete m_zoneEntities;
 }
-
-/************************************************************************
- *                                                                       *
- *  Функции доступа к полям класса                                       *
- *                                                                       *
- ************************************************************************/
 
 ZONEID CZone::GetID()
 {
@@ -428,19 +423,30 @@ void CZone::LoadZoneSettings()
 void CZone::LoadNavMesh()
 {
     TracyZoneScoped;
+
     if (m_navMesh == nullptr)
     {
-        m_navMesh = new CNavMesh((uint16)GetID());
+        m_navMesh = std::make_unique<CNavMesh>((uint16)GetID());
     }
 
-    char file[255];
-    memset(file, 0, sizeof(file));
-    snprintf(file, sizeof(file), "navmeshes/%s.nav", GetName());
-
-    if (!m_navMesh->load(file))
+    if (!m_navMesh->load(fmt::format("navmeshes/{}.nav", GetName())))
     {
-        delete m_navMesh;
         m_navMesh = nullptr;
+    }
+}
+
+void CZone::LoadSightMesh()
+{
+    TracyZoneScoped;
+
+    if (m_sightMesh == nullptr)
+    {
+        m_sightMesh = std::make_unique<CSightMesh>((uint16)GetID());
+    }
+
+    if (!m_sightMesh->load(fmt::format("sightmeshes/{}.nav", GetName())))
+    {
+        m_sightMesh = nullptr;
     }
 }
 
