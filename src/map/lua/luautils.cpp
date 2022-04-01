@@ -99,6 +99,8 @@ namespace luautils
 
     std::unique_ptr<Filewatcher>  filewatcher;
 
+    std::unordered_map<uint32, sol::table> customMenuContext;
+
     /************************************************************************
      *                                                                       *
      *  Initialization of Lua user classes and global functions             *
@@ -4708,5 +4710,66 @@ namespace luautils
         TracyZoneScoped;
         CCharEntity* player = dynamic_cast<CCharEntity*>(PLuaBaseEntity->GetBaseEntity());
         return daily::SelectItem(player, dial);
+    }
+
+    std::string SetCustomMenuContext(CCharEntity* PChar, sol::table table)
+    {
+        customMenuContext[PChar->id] = table;
+
+        auto escape = [](std::string s)
+        {
+            return fmt::format("\"{}\"", s);
+        };
+
+        std::string outStr;
+
+        // Title
+        for (auto& entry : table)
+        {
+            // First entry is the title
+            if (outStr.empty())
+            {
+                outStr += escape(entry.second.as<std::string>());
+            }
+            else
+            {
+                outStr += escape(entry.second.as<sol::table>()[1]);
+            }
+        }
+
+        return outStr;
+    }
+
+    bool HasCustomMenuContext(CCharEntity* PChar)
+    {
+        auto context = customMenuContext.find(PChar->id);
+        return context != customMenuContext.end();
+    }
+
+    void HandleCustomMenu(CCharEntity* PChar, std::string selection)
+    {
+        // selection is of the form:
+        // GMTELL(Testo): Question(Test Menu): Result (Option 1)
+
+        std::string cleanedSelection = selection.substr(selection.find("): Result (") + 11);
+        cleanedSelection.pop_back(); // Remove trailing ')'
+
+        auto& context = customMenuContext[PChar->id];
+        for (auto& entry : context)
+        {
+            if (entry.second.get_type() == sol::type::table)
+            {
+                auto& table = entry.second.as<sol::table>();
+                auto  name  = table[1].get<std::string>();
+                auto  func  = table[2].get<sol::function>();
+
+                if (cleanedSelection.compare(name) == 0)
+                {
+                    func(CLuaBaseEntity(PChar));
+                }
+            }
+        }
+
+        customMenuContext.erase(PChar->id);
     }
 }; // namespace luautils
