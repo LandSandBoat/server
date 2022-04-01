@@ -2,7 +2,7 @@
 -- Area: Apollyon SE, Floor 4
 --  Mob: Evil Armory
 -----------------------------------
-require("scripts/zones/Apollyon/helpers/apollyon_se")
+require("scripts/zones/Apollyon/bcnms/se_apollyon_helper")
 -----------------------------------
 local entity = {}
 
