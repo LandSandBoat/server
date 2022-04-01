@@ -4759,9 +4759,9 @@ namespace luautils
         {
             if (entry.second.get_type() == sol::type::table)
             {
-                auto& table = entry.second.as<sol::table>();
-                auto  name  = table[1].get<std::string>();
-                auto  func  = table[2].get<sol::function>();
+                auto table = entry.second.as<sol::table>();
+                auto name  = table[1].get<std::string>();
+                auto func  = table[2].get<sol::function>();
 
                 if (cleanedSelection.compare(name) == 0)
                 {
