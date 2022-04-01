@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Windurst Woods
---  NPC: Parih Vashai
+--  NPC: Perih Vashai
 -- Starts and Finishes Quest: The Fanged One, From Saplings Grow
 -- !pos 117 -3 92 241
 -----------------------------------
@@ -34,12 +34,8 @@ entity.onTrigger = function(player, npc)
     local lvl = player:getMainLvl()
     local job = player:getMainJob()
 
-    -- THREE PATHS
-    if player:getCurrentMission(COP) == xi.mission.id.cop.THREE_PATHS and player:getCharVar("COP_Louverance_s_Path") == 1 then
-        player:startEvent(686)
-
     -- THE FANGED ONE
-    elseif theFangedOne ~= QUEST_COMPLETED then
+    if theFangedOne ~= QUEST_COMPLETED then
         if theFangedOne == QUEST_AVAILABLE and lvl >= xi.settings.ADVANCED_JOB_LEVEL then
             player:startEvent(351)
         elseif theFangedOne == QUEST_ACCEPTED and not player:hasKeyItem(xi.ki.OLD_TIGERS_FANG) then
@@ -73,24 +69,16 @@ entity.onTrigger = function(player, npc)
         player:startEvent(541, 0, 13360) -- start RNG AF3
     elseif unbridledPassionCS > 0 and unbridledPassionCS < 3 then
         player:startEvent(542)-- during RNG AF3
-    elseif unbridledPassionCS >= 3 and unbridledPassionCS < 7 then
+    elseif unbridledPassionCS < 7 then
         player:startEvent(542)-- during RNG AF3
     elseif unbridledPassionCS == 7 then
         player:startEvent(546, 0, 14099) -- complete RNG AF3
-
-    -- STANDARD DIALOG
-    else
-        player:startEvent(338)
     end
 end
 
 entity.onEventFinish = function(player, csid, option)
-    -- THREE PATHS
-    if csid == 686 then
-        player:setCharVar("COP_Louverance_s_Path", 2)
-
     -- THE FANGED ONE
-    elseif csid == 351 then
+    if csid == 351 then
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_FANGED_ONE)
         player:setCharVar("TheFangedOneCS", 1)
     elseif (csid == 357 or csid == 358) and npcUtil.completeQuest(player, WINDURST, xi.quest.id.windurst.THE_FANGED_ONE, {item=13117, title=xi.title.THE_FANGED_ONE, var={"TheFangedOne_Event", "TheFangedOneCS"}}) then

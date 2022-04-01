@@ -645,7 +645,7 @@ local function checkReqs(player, npc, bfid, registrant)
         [ 704] = function() return ( cop == mi.cop.DARKNESS_NAMED and player:getCharVar('Mission[6][358]Status') == 4                                                      ) end, -- PM3-5: Darkness Named
         [ 705] = function() return ( player:hasKeyItem(xi.ki.ASTRAL_COVENANT)                                                                                              ) end, -- ENM: Test Your Mite
         [ 706] = function() return ( player:hasKeyItem(xi.ki.VIAL_OF_DREAM_INCENSE)                                                                                        ) end, -- Quest: Waking Dreams
-        [ 736] = function() return ( cop == mi.cop.THREE_PATHS and player:getCharVar("COP_Louverance_s_Path") == 5                                                         ) end, -- PM5-3 L3: A Century of Hardship
+        [ 736] = function() return ( cop == mi.cop.THREE_PATHS and player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.LOUVERANCE) == 11                  ) end, -- PM5-3 L3: A Century of Hardship
         [ 738] = function() return ( player:hasKeyItem(xi.ki.SHAFT_2716_OPERATING_LEVER)                                                                                   ) end, -- ENM: Bionic Bug
         [ 739] = function() return ( player:hasKeyItem(xi.ki.SHAFT_GATE_OPERATING_DIAL)                                                                                    ) end, -- ENM: Pulling Your Strings
         [ 740] = function() return ( player:hasKeyItem(xi.ki.SHAFT_GATE_OPERATING_DIAL)                                                                                    ) end, -- ENM: Automaton Assault
@@ -838,7 +838,8 @@ local function checkSkip(player, bfid)
         [ 672] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.THREE_PATHS) or (cop == mi.cop.THREE_PATHS and player:getCharVar("COP_Ulmia_s_Path") > 5)           ) end, -- PM5-3 U2: Head Wind
         [ 704] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.DARKNESS_NAMED) or (cop == mi.cop.DARKNESS_NAMED and copStat > 2)                                   ) end, -- PM3-5: Darkness Named
         [ 706] = function() return ( player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WAKING_DREAMS) or player:hasKeyItem(xi.ki.WHISPER_OF_DREAMS)                         ) end, -- Quest: Waking Dreams
-        [ 736] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.THREE_PATHS) or (cop == mi.cop.THREE_PATHS and player:getCharVar("COP_Louverance_s_Path") > 5)      ) end, -- PM5-3 L3: A Century of Hardship
+        [ 736] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.THREE_PATHS) or (cop == mi.cop.THREE_PATHS and
+                                     player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.LOUVERANCE) > 11)                                                                       ) end, -- PM5-3 L3: A Century of Hardship
         [ 768] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.THE_MOTHERCRYSTALS) or player:hasKeyItem(xi.ki.LIGHT_OF_HOLLA)                                      ) end, -- PM1-3: The Mothercrystals
         [ 800] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.THE_MOTHERCRYSTALS) or player:hasKeyItem(xi.ki.LIGHT_OF_DEM)                                        ) end, -- PM1-3: The Mothercrystals
         [ 832] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.THE_MOTHERCRYSTALS) or player:hasKeyItem(xi.ki.LIGHT_OF_MEA)                                        ) end, -- PM1-3: The Mothercrystals

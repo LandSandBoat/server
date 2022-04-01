@@ -73,22 +73,6 @@ entity.onTrigger = function(player, npc)
     elseif copMission == xi.mission.id.cop.ONE_TO_BE_FEARED and copStatus == 0 then
         player:startEvent(856)
 
-    -- THREE PATHS (LOUVERANCE)
-    elseif copMission == xi.mission.id.cop.THREE_PATHS and louverancesPath == 6 then
-        player:startEvent(852)
-    elseif copMission == xi.mission.id.cop.THREE_PATHS and louverancesPath == 9 then
-        if tenzensPath == 11 and ulmiasPath == 8 then
-            threePathArg = 6
-        elseif tenzensPath == 11 then
-            threePathArg = 2
-        elseif ulmiasPath == 8 then
-            threePathArg = 4
-        else
-            threePathArg = 1
-        end
-
-        player:startEvent(853, threePathArg)
-
     -- THREE PATHS (TENZEN)
     elseif copMission == xi.mission.id.cop.THREE_PATHS and tenzensPath == 10 then
         if ulmiasPath == 8 and louverancesPath == 10 then
@@ -157,16 +141,6 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 854 then
         player:setCharVar("COP_Tenzen_s_Path", 11)
         checkThreePaths(player)
-    elseif csid == 853 then
-        player:setCharVar("COP_Louverance_s_Path", 10)
-        if player:getCharVar("COP_Tenzen_s_Path") == 11 and player:getCharVar("COP_Ulmia_s_Path") == 8 then
-            player:addTitle(xi.title.TRUE_COMPANION_OF_LOUVERANCE)
-        else
-            player:addTitle(xi.title.COMPANION_OF_LOUVERANCE)
-        end
-        checkThreePaths(player)
-    elseif csid == 852 then
-        player:setCharVar("COP_Louverance_s_Path", 7)
     elseif csid == 856 then
         player:setCharVar("PromathiaStatus", 1)
     elseif csid == 760 then

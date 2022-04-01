@@ -35,12 +35,9 @@ entity.onTrigger = function(player, npc)
     local blastFromPast = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.BLAST_FROM_THE_PAST)
     local turmoil = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TORAIMARAI_TURMOIL)
     local MEMORIES_OF_A_MAIDEN = player:getCharVar("MEMORIES_OF_A_MAIDEN_Status")
-    local LouverancePath = player:getCharVar("COP_Louverance_s_Path")
 
     if player:getCurrentMission(COP) == xi.mission.id.cop.THE_ROAD_FORKS and MEMORIES_OF_A_MAIDEN == 11 then
         player:startEvent(472)
-    elseif player:getCurrentMission(COP) == xi.mission.id.cop.THREE_PATHS and LouverancePath == 3 then
-        player:startEvent(481)
     elseif player:getCurrentMission(COP) == xi.mission.id.cop.THREE_PATHS and player:getCharVar("COP_Ulmia_s_Path") == 4 then
         player:startEvent(473)
     elseif blastFromPast == QUEST_ACCEPTED then
@@ -72,8 +69,6 @@ entity.onEventFinish = function(player, csid, option)
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MANDRAGORA_MAD)
     elseif csid == 472 then
         player:setCharVar("MEMORIES_OF_A_MAIDEN_Status", 12)    --end 3-3B: Windurst Route: "Memories of a Maiden"
-    elseif csid == 481 then
-        player:setCharVar("COP_Louverance_s_Path", 4)
     elseif csid == 473 then
         player:setCharVar("COP_Ulmia_s_Path", 5)
 

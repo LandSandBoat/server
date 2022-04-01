@@ -18,18 +18,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local copCurrentMission = player:getCurrentMission(COP)
-    local copMissions = xi.mission.id.cop
-
-    -- COP 5-3 "Three Paths"
-    if copCurrentMission == copMissions.THREE_PATHS then
-        if player:getCharVar("COP_Louverance_s_Path") == 0 then
-            player:startEvent(118)
-        else
-            player:startEvent(134)
-        end
     -- COP Default dialogue change
-    elseif player:getCurrentMission(COP) > copMissions.DARKNESS_NAMED then
+    if player:getCurrentMission(COP) > xi.mission.id.cop.DARKNESS_NAMED then
         player:startEvent(315) -- "Jeuno offered its help"
     end
 end
@@ -38,9 +28,6 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 118 then
-        player:setCharVar("COP_Louverance_s_Path", 1)
-    end
 end
 
 -- TODO: cutscenes including Despachiaire for reference
