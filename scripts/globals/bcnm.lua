@@ -655,7 +655,7 @@ local function checkReqs(player, npc, bfid, registrant)
         [ 801] = function() return ( player:hasKeyItem(xi.ki.CENSER_OF_ANTIPATHY)                                                                                          ) end, -- ENM: You Are What You Eat
         [ 832] = function() return ( (cop == mi.cop.BELOW_THE_ARKS) or (cop == mi.cop.THE_MOTHERCRYSTALS and not player:hasKeyItem(xi.ki.LIGHT_OF_MEA))                    ) end, -- PM1-3: The Mothercrystals
         [ 833] = function() return ( player:hasKeyItem(xi.ki.CENSER_OF_ANIMUS)                                                                                             ) end, -- ENM: Playing Host
-        [ 864] = function() return ( cop == mi.cop.DESIRES_OF_EMPTINESS and copStat == 8                                                                                   ) end, -- PM5-2: Desires of Emptiness
+        [ 864] = function() return ( cop == mi.cop.DESIRES_OF_EMPTINESS and player:getCharVar('Mission[6][518]Status') == 2                                                ) end, -- PM5-2: Desires of Emptiness
         [ 865] = function() return ( player:hasKeyItem(xi.ki.CENSER_OF_ACRIMONY)                                                                                           ) end, -- ENM: Pulling the Plug
         [ 896] = function() return ( player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE) == QUEST_ACCEPTED and
                                      player:getCharVar('StormsOfFate') == 2                                                                                                ) end, -- Quest: Storms of Fate
@@ -842,7 +842,8 @@ local function checkSkip(player, bfid)
         [ 768] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.THE_MOTHERCRYSTALS) or player:hasKeyItem(xi.ki.LIGHT_OF_HOLLA)                                      ) end, -- PM1-3: The Mothercrystals
         [ 800] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.THE_MOTHERCRYSTALS) or player:hasKeyItem(xi.ki.LIGHT_OF_DEM)                                        ) end, -- PM1-3: The Mothercrystals
         [ 832] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.THE_MOTHERCRYSTALS) or player:hasKeyItem(xi.ki.LIGHT_OF_MEA)                                        ) end, -- PM1-3: The Mothercrystals
-        [ 864] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.DESIRES_OF_EMPTINESS) or (cop == mi.cop.DESIRES_OF_EMPTINESS and copStat > 8)                       ) end, -- PM5-2: Desires of Emptiness
+        [ 864] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.DESIRES_OF_EMPTINESS) or (cop == mi.cop.DESIRES_OF_EMPTINESS and
+                                     player:getCharVar('Mission[6][518]Status') > 2)                                                                                                              ) end, -- PM5-2: Desires of Emptiness
         [ 896] = function() return ( sofStat == QUEST_COMPLETED or (sofStat == QUEST_ACCEPTED and player:getCharVar("StormsOfFate") > 2)                                                          ) end, -- Quest: Storms of Fate
         [ 960] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.ANCIENT_VOWS)                                                                                       ) end, -- PM2-5: Ancient Vows
         [ 961] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.THE_SAVAGE) or (cop == mi.cop.THE_SAVAGE and player:getCharVar('Mission[6][418]Status') > 1)        ) end, -- PM4-2: The Savage

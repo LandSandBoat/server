@@ -11,7 +11,8 @@ require('scripts/globals/interaction/mission')
 require('scripts/globals/missions')
 require('scripts/globals/zone')
 -----------------------------------
-local psoXjaID = require("scripts/zones/PsoXja/IDs")
+local promyvionVahzlID = require("scripts/zones/Promyvion-Vahzl/IDs")
+local psoXjaID         = require("scripts/zones/PsoXja/IDs")
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.THE_ENDURING_TUMULT_OF_WAR)
@@ -199,9 +200,32 @@ mission.sections =
 
                 [2] = function(player, csid, option, npc)
                     if option == 1 then
-                        mission:complete(player)
                         player:setPos(-14.744, 0.036, -119.736, 1, 22)
                     end
+                end,
+            },
+        },
+
+        [xi.zone.PROMYVION_VAHZL] =
+        {
+            onZoneIn =
+            {
+                function(player, prevZone)
+                    if mission:getVar(player, 'Status') == 0 then
+                        return 50
+                    end
+                end,
+            },
+
+            onEventFinish =
+            {
+                [50] = function(player, csid, option, npc)
+                    player:addKeyItem(xi.ki.MYSTERIOUS_AMULET_DRAINED)
+                    player:addKeyItem(xi.ki.LIGHT_OF_VAHZL)
+                    player:messageSpecial(promyvionVahzlID.text.AMULET_RETURNED, xi.ki.MYSTERIOUS_AMULET)
+                    player:messageSpecial(promyvionVahzlID.text.LIGHT_OF_VAHZL, xi.ki.LIGHT_OF_VAHZL)
+
+                    mission:complete(player)
                 end,
             },
         },

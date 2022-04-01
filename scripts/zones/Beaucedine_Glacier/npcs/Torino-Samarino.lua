@@ -20,8 +20,6 @@ end
 entity.onTrigger = function(player, npc)
     local FoiledAGolem = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CURSES_FOILED_A_GOLEM)
     local tuningOutProgress = player:getCharVar("TuningOut_Progress")
-    local copMission = player:getCurrentMission(COP)
-    local copStatus = player:getCharVar("PromathiaStatus")
 
     -- QUEST: CURSES, FOILED A-GOLEM!?
     if player:hasKeyItem(xi.ki.SHANTOTTOS_EX_SPELL) and FoiledAGolem == QUEST_ACCEPTED then
@@ -50,10 +48,6 @@ entity.onTrigger = function(player, npc)
         player:startEvent(207) -- Ildy meets up with Rhinostery peers
     elseif tuningOutProgress == 8 then
         player:startEvent(208) -- Talks about Ildy being passionate about his work
-
-    -- CoP 5-2: DESIRES OF EMPTINESS
-    elseif copStatus > 8 and copMission == xi.mission.id.cop.DESIRES_OF_EMPTINESS then
-        player:startEvent(211)
 
     -- DEFAULT DIALOG
     else

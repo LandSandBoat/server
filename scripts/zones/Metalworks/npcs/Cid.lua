@@ -117,10 +117,6 @@ entity.onTrigger = function(player, npc)
 
         player:startEvent(855, threePathArg)
 
-    -- DESIRES OF EMPTINESS
-    elseif copMission == xi.mission.id.cop.DESIRES_OF_EMPTINESS and copStatus > 8 then
-        player:startEvent(850)
-
     -- DARK PUPPET
     elseif
         player:getMainJob() == xi.job.DRK and
@@ -171,10 +167,6 @@ entity.onEventFinish = function(player, csid, option)
         checkThreePaths(player)
     elseif csid == 852 then
         player:setCharVar("COP_Louverance_s_Path", 7)
-    elseif csid == 850 then
-        player:setCharVar("PromathiaStatus", 0)
-        player:completeMission(xi.mission.log_id.COP, xi.mission.id.cop.DESIRES_OF_EMPTINESS)
-        player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.THREE_PATHS)
     elseif csid == 856 then
         player:setCharVar("PromathiaStatus", 1)
     elseif csid == 760 then
