@@ -39,8 +39,19 @@ battlefield_object.onBattlefieldEnter = function(player, battlefield)
     player:delKeyItem(xi.ki.RED_CARD)
     player:setCharVar("Cosmo_Cleanse_TIME", os.time())
 
+    -- Set race of first player that enters the battlefield
     if battlefield:getLocalVar("raceF1") == 0 then
-        battlefield:setLocalVar("raceF1", player:getRace())
+        local playerRace = player:getRace()
+
+        -- 1 or 2 = Hume (ID 1); 3 or 4 = Elvaan (ID 2); 5 or 6 = Taru (ID 3)
+        if playerRace <= 6 then
+            playerRace = math.ceil(playerRace / 2)
+        -- 7 = Mithra (ID 4); 8 = Galka (ID 5)
+        else
+            playerRace = playerRace - 3
+        end
+
+        battlefield:setLocalVar("raceF1", playerRace)
     end
 end
 
@@ -54,9 +65,9 @@ battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
 
     if leavecode == xi.battlefield.leaveCode.WON then
         local _, clearTime, partySize = battlefield:getRecord()
-        player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar("[cs]bit"), 0)
+        player:startCutscene(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar("[cs]bit"), 0)
     elseif leavecode == xi.battlefield.leaveCode.LOST then
-        player:startEvent(32002)
+        player:startCutscene(32002)
     end
 end
 

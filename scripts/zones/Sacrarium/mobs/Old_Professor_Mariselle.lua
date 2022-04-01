@@ -9,7 +9,6 @@ require("scripts/globals/missions")
 local entity = {}
 
 entity.onMobFight = function(mob, target)
-
     local OP_Mariselle = mob:getID()
 
     -- Summons a pupil every 30 seconds.
@@ -31,11 +30,9 @@ entity.onMobFight = function(mob, target)
             end
         end
     end
-
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-
     local OP_Mariselle = mob:getID()
 
     for i = OP_Mariselle+1, OP_Mariselle+2 do
@@ -44,15 +41,9 @@ entity.onMobDeath = function(mob, player, isKiller)
             DespawnMob(i)
         end
     end
-
-    if (player:getCurrentMission(COP) == xi.mission.id.cop.THE_SECRETS_OF_WORSHIP and player:getCharVar("PromathiaStatus") == 3 and  player:hasKeyItem(xi.ki.RELIQUIARIUM_KEY)==false) then
-        player:setCharVar("PromathiaStatus", 4)
-    end
-
 end
 
 entity.onMobDespawn = function( mob )
-
     local OP_Mariselle = mob:getID()
 
     for i = OP_Mariselle+1, OP_Mariselle+2 do
@@ -67,7 +58,6 @@ entity.onMobDespawn = function( mob )
     for i = 0, 5 do
         GetNPCByID(ID.npc.QM_MARISELLE_OFFSET + i):setLocalVar("hasProfessorMariselle", (i == nextSpawn) and 1 or 0)
     end
-
 end
 
 return entity

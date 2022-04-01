@@ -31,13 +31,11 @@ zone_object.onInitialize = function(zone)
     zone:registerRegion(29, -403, -4, -523, -396, 4, -516) -- appolyon SW telporter floor 1 to floor 2
     zone:registerRegion(30, -123, -4, -443, -116, 4, -436) -- appolyon SW telporter floor 2 to floor 3
     zone:registerRegion(31, -283, -4, -283, -276, 4, -276) -- appolyon SW telporter floor 3 to floor 4
-    zone:registerRegion(32, -523, -4, -323, -517, 4, -316) -- appolyon SW telporter floor 4 to entrance
 
     zone:registerRegion(33, -403, -4,  76, -396, 4,  83) -- appolyon NW telporter floor 1 to floor 2
     zone:registerRegion(34, -283, -4, 356, -276, 4, 363) -- appolyon NW telporter floor 2 to floor 3
     zone:registerRegion(35, -243, -4, 516, -236, 4, 523) -- appolyon NW telporter floor 3 to floor 4
     zone:registerRegion(36, -523, -4, 636, -516, 4, 643) -- appolyon NW telporter floor 4 to floor 5
-    zone:registerRegion(37, -563, -4, 356, -556, 4, 363) -- appolyon NW telporter floor 5 to entrance
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)
@@ -120,58 +118,47 @@ zone_object.onRegionEnter = function(player,region)
         -- Apollyon: SW Teleporters
         [29] = function()
             if GetNPCByID(ID.npc.APOLLYON_SW_PORTAL[1]):getAnimation() == xi.animation.OPEN_DOOR then
-                player:startEvent(208)
+                player:startOptionalCutscene(208)
             end
         end,
 
         [30] = function()
             if GetNPCByID(ID.npc.APOLLYON_SW_PORTAL[2]):getAnimation() == xi.animation.OPEN_DOOR then
-                player:startEvent(209)
+                player:startOptionalCutscene(209)
             end
         end,
 
         [31] = function()
             if GetNPCByID(ID.npc.APOLLYON_SW_PORTAL[3]):getAnimation() == xi.animation.OPEN_DOOR then
-                player:startEvent(207)
-            end
-        end,
-
-        [32] = function ()
-            if GetNPCByID(ID.npc.APOLLYON_SW_PORTAL[4]):getAnimation() == xi.animation.OPEN_DOOR then
-                player:startEvent(206)
+                player:startOptionalCutscene(207)
             end
         end,
 
         -- Apollyon: NW Teleporters
         [33] = function()
             if GetNPCByID(ID.npc.APOLLYON_NW_PORTAL[1]):getAnimation() == xi.animation.OPEN_DOOR then
-                player:startEvent(205)
+                player:startOptionalCutscene(205)
             end
         end,
 
         [34] = function()
             if GetNPCByID(ID.npc.APOLLYON_NW_PORTAL[2]):getAnimation() == xi.animation.OPEN_DOOR then
-                player:startEvent(203)
+                player:startOptionalCutscene(203)
             end
         end,
 
         [35] = function()
             if GetNPCByID(ID.npc.APOLLYON_NW_PORTAL[3]):getAnimation() == xi.animation.OPEN_DOOR then
-                player:startEvent(201)
+                player:startOptionalCutscene(201)
             end
         end,
 
         [36] = function()
             if GetNPCByID(ID.npc.APOLLYON_NW_PORTAL[4]):getAnimation() == xi.animation.OPEN_DOOR then
-                player:startEvent(200)
+                player:startOptionalCutscene(200)
             end
         end,
 
-        [37] = function ()
-            if GetNPCByID(ID.npc.APOLLYON_NW_PORTAL[5]):getAnimation() == xi.animation.OPEN_DOOR then
-                player:startEvent(202)
-            end
-        end,
     }
 end
 
