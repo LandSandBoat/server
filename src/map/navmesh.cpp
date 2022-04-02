@@ -400,10 +400,10 @@ bool CNavMesh::onSameFloor(const position_t& start, float* spos, const position_
         // Far away, but not too far away.
         // We're going to try and disambiguate any vertical floors.
         dtPolyRef polys[16];
-        int       polyCount;
+        int       polyCount = -1;
         dtStatus status = m_navMeshQuery.queryPolygons(epos, skinnyPolyPickExt, &filter, polys, &polyCount, 16);
 
-        if (dtStatusFailed(status))
+        if (dtStatusFailed(status) || polyCount <= 0)
         {
             ShowNavError("CNavMesh::Bad vertical polygon query (%f, %f, %f) (%u)", epos[0], epos[1], epos[2], m_zoneID);
             outputError(status);
@@ -414,7 +414,7 @@ bool CNavMesh::onSameFloor(const position_t& start, float* spos, const position_
         uint8           verticalLimitTrunc = static_cast<uint8>(verticalLimit);
         float           height;
         std::set<uint8> heights;
-        for (size_t i = 0; i < polyCount; i++)
+        for (int i = 0; i < polyCount; i++)
         {
             status = m_navMeshQuery.getPolyHeight(polys[i], epos, &height);
             if (!dtStatusFailed(status))
