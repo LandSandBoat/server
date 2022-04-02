@@ -5,6 +5,9 @@
 --     : If the target doesn't respond with a correct answer
 --     : within 30 seconds, they will be set to 0hp.
 -----------------------------------
+require("scripts/globals/msg")
+require("scripts/globals/utils")
+-----------------------------------
 
 cmdprops =
 {
@@ -33,7 +36,7 @@ function onTrigger(player)
 
         return
         {
-            string.format("%i + %i = %i", a, b, c),
+            string.format("%2i + %2i = %2i", a, b, c),
             function(playerArg)
                 playerArg:PrintToPlayer("AFK Check passed", xi.msg.channel.NS_SAY)
                 playerArg:setLocalVar("CAPTCHA", 0)
@@ -52,7 +55,7 @@ function onTrigger(player)
 
         return
         {
-            string.format("%i + %i = %i", a, b, c),
+            string.format("%2i + %2i = %2i", a, b, c),
             function(playerArg)
                 playerArg:PrintToPlayer("AFK Check failed", xi.msg.channel.NS_SAY)
                 playerArg:setHP(0)
