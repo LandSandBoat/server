@@ -5432,41 +5432,35 @@ void SmallPacket0x0DB(map_session_data_t* const PSession, CCharEntity* const PCh
 {
     TracyZoneScoped;
 
-    uint8 mode = data.ref<uint8>(0x06);
-    if (mode == 0) // Chat Filters
+    // uint8 mode = data.ref<uint8>(0x06);
+    // uint32 data0 = data.ref<uint32>(0x08); // Name+Config Mask
+
+    uint32 chatFilterFlags = data.ref<uint64>(0x0C);
+    if (PChar->chatFilterFlags != chatFilterFlags)
     {
-        uint8 data0 = data.ref<uint32>(0x08); // Name+Config Mask
-        uint8 data1 = data.ref<uint32>(0x0C); // Chat Filter Mask 0
-        uint8 data2 = data.ref<uint32>(0x10); // Chat Filter Mask 1
-
-        PChar->chatFilterFlags = (data1 << 32) & data2;
-
-        std::ignore = data0;
-        std::ignore = data1;
-        std::ignore = data2;
+        auto ret = sql->Query("UPDATE chars SET chatfilters = %llu WHERE charid = %u;", PChar->chatFilterFlags, PChar->id);
+        if (ret == SQL_SUCCESS)
+        {
+            PChar->chatFilterFlags = chatFilterFlags;
+        }
     }
-    else if (mode == 1) // Preferred Language
+
+    // 0x01 - Japanese
+    // 0x02 - English
+    // 0x04 - German
+    // 0x08 - French
+    // 0x10 - Other
+    uint8 newLanguage = data.ref<uint8>(0x24);
+    if (PChar->search.language != newLanguage)
     {
-        // 0x01 - Japanese
-        // 0x02 - English
-        // 0x04 - German
-        // 0x08 - French
-        // 0x10 - Other
-        uint8 newLanguage = data.ref<uint8>(0x24);
-
         auto ret = sql->Query("UPDATE chars SET languages = %u WHERE charid = %u;", newLanguage, PChar->id);
-
         if (ret == SQL_SUCCESS)
         {
             PChar->search.language = newLanguage;
         }
     }
-    else
-    {
-        // Possibly junk
-    }
 
-    return;
+    PChar->pushPacket(new CMenuConfigPacket(PChar));
 }
 
 /************************************************************************

@@ -364,7 +364,8 @@ namespace charutils
                                "isstylelocked,"                // 27
                                "moghancement,"                 // 28
                                "UNIX_TIMESTAMP(`lastupdate`)," // 29
-                               "languages "                    // 30
+                               "languages,"                    // 30
+                               "chatfilters "                  // 31
                                "FROM chars "
                                "WHERE charid = %u";
 
@@ -449,6 +450,9 @@ namespace charutils
             PChar->SetMoghancement(sql->GetUIntData(28));
             PChar->lastOnline = sql->GetUIntData(29);
             PChar->search.language = (uint8)sql->GetUIntData(30);
+
+            sql->GetStruct(31, &PChar->chatFilterFlags);
+            ShowInfo("chatfilters: %llu", PChar->chatFilterFlags);
         }
 
         LoadSpells(PChar);
@@ -796,6 +800,7 @@ namespace charutils
         PChar->PMeritPoints->SetLimitPoints(limitPoints);
         PChar->PJobPoints = new CJobPoints(PChar);
 
+        // TODO: Roll this into the first query to chars
         fmtQuery = "SELECT "
                    "gmlevel, "    // 0
                    "mentor, "     // 1
