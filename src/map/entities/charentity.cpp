@@ -288,8 +288,6 @@ void CCharEntity::pushPacket(CBasicPacket* packet)
     TracyZoneIString(GetName());
     TracyZoneHex16(packet->getType());
 
-    std::lock_guard<std::mutex> lk(m_PacketListMutex);
-
     // TODO: Iterating the entire queue like this isn't very efficient, but the server
     // can still _easily_ handle it
     // This could easily be accelerated by creating a lookup, building a key out of:
@@ -328,7 +326,6 @@ void CCharEntity::pushPacket(std::unique_ptr<CBasicPacket> packet)
 
 CBasicPacket* CCharEntity::popPacket()
 {
-    std::lock_guard<std::mutex> lk(m_PacketListMutex);
     CBasicPacket*               PPacket = PacketList.front();
     PacketList.pop_front();
     return PPacket;
@@ -336,13 +333,11 @@ CBasicPacket* CCharEntity::popPacket()
 
 PacketList_t CCharEntity::getPacketList()
 {
-    std::lock_guard<std::mutex> lk(m_PacketListMutex);
     return PacketList;
 }
 
 size_t CCharEntity::getPacketCount()
 {
-    std::lock_guard<std::mutex> lk(m_PacketListMutex);
     return PacketList.size();
 }
 
