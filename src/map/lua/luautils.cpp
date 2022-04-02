@@ -4716,6 +4716,12 @@ namespace luautils
     {
         customMenuContext[PChar->id] = table;
 
+        auto onStart = table["onStart"];
+        if (onStart.valid())
+        {
+            onStart(CLuaBaseEntity(PChar));
+        }
+
         auto escape = [](std::string s)
         {
             return fmt::format("\"{}\"", s);
@@ -4724,17 +4730,12 @@ namespace luautils
         std::string outStr;
 
         // Title
-        for (auto& entry : table)
+        outStr += escape(table["title"].get<std::string>());
+
+        // Options
+        for (auto& entry : table["options"].get<sol::table>())
         {
-            // First entry is the title
-            if (outStr.empty())
-            {
-                outStr += escape(entry.second.as<std::string>());
-            }
-            else
-            {
-                outStr += escape(entry.second.as<sol::table>()[1]);
-            }
+            outStr += escape(entry.second.as<sol::table>()[1]);
         }
 
         return outStr;
@@ -4750,24 +4751,43 @@ namespace luautils
     {
         // selection is of the form:
         // GMTELL(Testo): Question(Test Menu): Result (Option 1)
+        // Cancelled:
+        // GMTELL(Testo): Question(Test Menu (Play Effect)): Result (Canceled.)
 
         std::string cleanedSelection = selection.substr(selection.find("): Result (") + 11);
         cleanedSelection.pop_back(); // Remove trailing ')'
 
-        auto& context = customMenuContext[PChar->id];
-        for (auto& entry : context)
+        auto context = customMenuContext[PChar->id];
+        if (strcmp(cleanedSelection.c_str(), "Canceled.") == 0)
         {
-            if (entry.second.get_type() == sol::type::table)
+            auto onCancelled = context["onCancelled"];
+            if (onCancelled.valid())
             {
-                auto table = entry.second.as<sol::table>();
-                auto name  = table[1].get<std::string>();
-                auto func  = table[2].get<sol::function>();
-
-                if (cleanedSelection.compare(name) == 0)
+                onCancelled(CLuaBaseEntity(PChar));
+            }
+        }
+        else
+        {
+            for (auto& entry : context["options"].get<sol::table>())
+            {
+                if (entry.second.get_type() == sol::type::table)
                 {
-                    func(CLuaBaseEntity(PChar));
+                    auto table = entry.second.as<sol::table>();
+                    auto name  = table[1].get<std::string>();
+                    auto func  = table[2].get<sol::function>();
+
+                    if (cleanedSelection.compare(name) == 0)
+                    {
+                        func(CLuaBaseEntity(PChar));
+                    }
                 }
             }
+        }
+
+        auto onEnd = context["onEnd"];
+        if (onEnd.valid())
+        {
+            onEnd(CLuaBaseEntity(PChar));
         }
 
         customMenuContext.erase(PChar->id);
