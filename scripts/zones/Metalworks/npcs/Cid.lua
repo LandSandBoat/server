@@ -73,20 +73,6 @@ entity.onTrigger = function(player, npc)
     elseif copMission == xi.mission.id.cop.ONE_TO_BE_FEARED and copStatus == 0 then
         player:startEvent(856)
 
-    -- THREE PATHS (TENZEN)
-    elseif copMission == xi.mission.id.cop.THREE_PATHS and tenzensPath == 10 then
-        if ulmiasPath == 8 and louverancesPath == 10 then
-            threePathArg = 5
-        elseif louverancesPath == 10 then
-            threePathArg = 3
-        elseif ulmiasPath == 8 then
-            threePathArg = 4
-        else
-            threePathArg = 1
-        end
-
-        player:startEvent(854, threePathArg)
-
     -- THREE PATHS (ULMIA)
     elseif copMission == xi.mission.id.cop.THREE_PATHS and ulmiasPath == 7 then
         if tenzensPath == 11 and louverancesPath == 10 then
@@ -137,9 +123,6 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("Promathia_CID_timer", VanadielDayOfTheYear())
     elseif csid == 855 then
         player:setCharVar("COP_Ulmia_s_Path", 8)
-        checkThreePaths(player)
-    elseif csid == 854 then
-        player:setCharVar("COP_Tenzen_s_Path", 11)
         checkThreePaths(player)
     elseif csid == 856 then
         player:setCharVar("PromathiaStatus", 1)

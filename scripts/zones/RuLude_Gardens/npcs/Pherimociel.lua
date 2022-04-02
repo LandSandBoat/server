@@ -13,12 +13,6 @@ end
 
 entity.onTrigger = function(player, npc)
     if
-        player:getCurrentMission(COP) == xi.mission.id.cop.THREE_PATHS and
-        player:getCharVar("COP_Tenzen_s_Path") == 3
-    then
-        player:startEvent(58)
-
-    elseif
         player:getCurrentMission(COP) == xi.mission.id.cop.FOR_WHOM_THE_VERSE_IS_SUNG and
         player:getCharVar("PromathiaStatus") == 0
     then
@@ -50,9 +44,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 58 then
-        player:setCharVar("COP_Tenzen_s_Path", 4)
-    elseif csid == 10046 or csid == 10049 then
+    if csid == 10046 or csid == 10049 then
         player:setCharVar("PromathiaStatus", 1)
     end
 end

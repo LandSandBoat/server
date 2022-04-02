@@ -10,6 +10,8 @@ require('scripts/globals/titles')
 require('scripts/globals/utils')
 require('scripts/globals/zone')
 -----------------------------------
+local lowerDelkfuttsID = require("scripts/zones/Lower_Delkfutts_Tower/IDs")
+-----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.THREE_PATHS)
 
@@ -214,6 +216,213 @@ mission.sections =
                 [853] = function(player, csid, option, npc)
                     player:setMissionStatus(mission.areaId, 14, xi.mission.status.COP.LOUVERANCE)
                     player:addTitle(xi.title.COMPANION_OF_LOUVERANCE)
+
+                    if isMissionComplete(player) then
+                        mission:complete(player)
+                    end
+                end,
+            },
+        },
+    },
+
+    -- Tenzen's Path
+    {
+        check = function(player, currentMission, missionStatus, vars)
+            return currentMission == mission.missionId and
+                player:getMissionStatus(mission.areaId, xi.mission.status.COP.TENZEN) <= 14
+        end,
+
+        [xi.zone.LA_THEINE_PLATEAU] =
+        {
+            ['qm3'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:getMissionStatus(mission.areaId, xi.mission.status.COP.TENZEN) == 0 then
+                        return mission:event(203):importantEvent()
+                    end
+                end,
+            },
+
+            onEventFinish =
+            {
+                [203] = function(player, csid, option, npc)
+                    player:setMissionStatus(mission.areaId, 2, xi.mission.status.COP.TENZEN)
+                end,
+            },
+        },
+
+        [xi.zone.PSOXJA] =
+        {
+            ['_09g'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:getMissionStatus(mission.areaId, xi.mission.status.COP.TENZEN) == 2 then
+                        return mission:progressEvent(3)
+                    end
+                end,
+            },
+
+            ['_09h'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:getMissionStatus(mission.areaId, xi.mission.status.COP.TENZEN) == 11 then
+                        return mission:progressEvent(5)
+                    end
+                end,
+            },
+
+            onZoneIn =
+            {
+                function(player, prevZone)
+                    if
+                        player:getXPos() == 220 and
+                        player:getMissionStatus(mission.areaId, xi.mission.status.COP.TENZEN) == 9
+                    then
+                        return 4
+                    end
+                end,
+            },
+
+            onEventFinish =
+            {
+                [3] = function(player, csid, option, npc)
+                    player:setMissionStatus(mission.areaId, 3, xi.mission.status.COP.TENZEN)
+                end,
+
+                [4] = function(player, csid, option, npc)
+                    player:setMissionStatus(mission.areaId, 11, xi.mission.status.COP.TENZEN)
+                end,
+
+                [5] = function(player, csid, option, npc)
+                    player:setMissionStatus(mission.areaId, 12, xi.mission.status.COP.TENZEN)
+                end,
+            },
+        },
+
+        [xi.zone.UPPER_JEUNO] =
+        {
+            ['Monberaux'] =
+            {
+                onTrigger = function(player, npc)
+                    local missionStatus = player:getMissionStatus(mission.areaId, xi.mission.status.COP.TENZEN)
+
+                    if missionStatus == 3 then
+                        return mission:progressEvent(74)
+                    elseif missionStatus == 6 then
+                        return mission:event(6):importantEvent()
+                    end
+                end,
+            },
+
+            onEventFinish =
+            {
+                [74] = function(player, csid, option, npc)
+                    npcUtil.giveKeyItem(player, xi.ki.ENVELOPE_FROM_MONBERAUX)
+                    player:setMissionStatus(mission.areaId, 5, xi.mission.status.COP.TENZEN)
+                end,
+            },
+        },
+
+        [xi.zone.RULUDE_GARDENS] =
+        {
+            ['Pherimociel'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:getMissionStatus(mission.areaId, xi.mission.status.COP.TENZEN) == 5 then
+                        return mission:progressEvent(58)
+                    end
+                end,
+            },
+
+            onEventFinish =
+            {
+                [58] = function(player, csid, option, npc)
+                    player:setMissionStatus(mission.areaId, 6, xi.mission.status.COP.TENZEN)
+                end,
+            },
+        },
+
+        [xi.zone.BATALLIA_DOWNS] =
+        {
+            ['qm4'] =
+            {
+                onTrigger = function(player, npc)
+                    if mission:getVar(player, 'Option') == 1 then
+                        npcUtil.giveKeyItem(player, xi.ki.DELKFUTT_RECOGNITION_DEVICE)
+                        mission:setVar(player, 'Option', 0)
+
+                        return mission:noAction()
+                    elseif player:getMissionStatus(mission.areaId, xi.mission.status.COP.TENZEN) == 6 then
+                        return mission:progressEvent(0)
+                    end
+                end,
+            },
+
+            onEventFinish =
+            {
+                [0] = function(player, csid, option, npc)
+                    mission:setVar(player, 'Option', 1)
+                    player:setMissionStatus(mission.areaId, 8, xi.mission.status.COP.TENZEN)
+                end,
+            },
+        },
+
+        [xi.zone.LOWER_DELKFUTTS_TOWER] =
+        {
+            ['_545'] =
+            {
+                onTrigger = function(player, npc)
+                    local missionStatus = player:getMissionStatus(mission.areaId, xi.mission.status.COP.TENZEN)
+
+                    if
+                        missionStatus == 8 and
+                        player:hasKeyItem(xi.ki.DELKFUTT_RECOGNITION_DEVICE)
+                    then
+                        if
+                            mission:getLocalVar(player, 'hasKilled') == 0 and
+                            npcUtil.popFromQM(player, npc, lowerDelkfuttsID.mob.DISASTER_IDOL, { hide = 0 })
+                        then
+                            return mission:messageSpecial(lowerDelkfuttsID.text.SOMETHING_HUGE_BEARING_DOWN)
+                        elseif mission:getLocalVar(player, 'hasKilled') == 1 then
+                            return mission:progressEvent(25)
+                        end
+                    end
+                end,
+            },
+
+            ['Disaster_Idol'] =
+            {
+                onMobDeath = function(mob, player, isKiller, noKiller)
+                    if mission:getLocalVar(player, 'hasKilled') == 0 then
+                        mission:setLocalVar(player, 'hasKilled', 1)
+                    end
+                end,
+            },
+
+            onEventFinish =
+            {
+                [25] = function(player, csid, option, npc)
+                    player:setMissionStatus(mission.areaId, 9, xi.mission.status.COP.TENZEN)
+                end,
+            },
+        },
+
+        [xi.zone.METALWORKS] =
+        {
+            ['Cid'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:getMissionStatus(mission.areaId, xi.mission.status.COP.TENZEN) == 12 then
+                        return mission:progressEvent(854, getCidEventArg(player, xi.mission.status.COP.TENZEN))
+                    end
+                end,
+            },
+
+            onEventFinish =
+            {
+                [854] = function(player, csid, option, npc)
+                    player:setMissionStatus(mission.areaId, 14, xi.mission.status.COP.TENZEN)
+                    player:addTitle(xi.title.TENZENS_ALLY)
 
                     if isMissionComplete(player) then
                         mission:complete(player)
