@@ -5435,7 +5435,7 @@ void SmallPacket0x0DB(map_session_data_t* const PSession, CCharEntity* const PCh
     // uint8 mode = data.ref<uint8>(0x06);
     // uint32 data0 = data.ref<uint32>(0x08); // Name+Config Mask
 
-    uint32 chatFilterFlags = data.ref<uint64>(0x0C);
+    uint64 chatFilterFlags = data.ref<uint64>(0x0C);
     if (PChar->chatFilterFlags != chatFilterFlags)
     {
         auto ret = sql->Query("UPDATE chars SET chatfilters = %llu WHERE charid = %u;", PChar->chatFilterFlags, PChar->id);

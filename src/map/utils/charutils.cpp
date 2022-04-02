@@ -452,7 +452,6 @@ namespace charutils
             PChar->search.language = (uint8)sql->GetUIntData(30);
 
             sql->GetStruct(31, &PChar->chatFilterFlags);
-            ShowInfo("chatfilters: %llu", PChar->chatFilterFlags);
         }
 
         LoadSpells(PChar);
