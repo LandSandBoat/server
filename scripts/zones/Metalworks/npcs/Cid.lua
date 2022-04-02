@@ -15,18 +15,6 @@ require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 
-local function checkThreePaths(player)
-    if
-        player:getCharVar("COP_Tenzen_s_Path") == 11 and
-        player:getCharVar("COP_Ulmia_s_Path") == 8 and
-        player:getCharVar("COP_Louverance_s_Path") == 10
-    then
-        player:completeMission(xi.mission.log_id.COP, xi.mission.id.cop.THREE_PATHS)
-        player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.FOR_WHOM_THE_VERSE_IS_SUNG)
-        player:setCharVar("PromathiaStatus", 0)
-    end
-end
-
 entity.onTrade = function(player, npc, trade)
 end
 
@@ -34,11 +22,7 @@ entity.onTrigger = function(player, npc)
     local cidsSecret = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.CID_S_SECRET)
     local copMission = player:getCurrentMission(COP)
     local copStatus = player:getCharVar("PromathiaStatus")
-    local ulmiasPath = player:getCharVar("COP_Ulmia_s_Path")
-    local tenzensPath = player:getCharVar("COP_Tenzen_s_Path")
-    local louverancesPath = player:getCharVar("COP_Louverance_s_Path")
     local hasLetter = player:hasKeyItem(xi.ki.UNFINISHED_LETTER)
-    local threePathArg = 0
 
     -- DAWN
     if
@@ -72,20 +56,6 @@ entity.onTrigger = function(player, npc)
     -- ONE TO BE FEARED
     elseif copMission == xi.mission.id.cop.ONE_TO_BE_FEARED and copStatus == 0 then
         player:startEvent(856)
-
-    -- THREE PATHS (ULMIA)
-    elseif copMission == xi.mission.id.cop.THREE_PATHS and ulmiasPath == 7 then
-        if tenzensPath == 11 and louverancesPath == 10 then
-            threePathArg = 3
-        elseif louverancesPath == 10 then
-            threePathArg = 1
-        elseif tenzensPath == 11 then
-            threePathArg = 2
-        else
-            threePathArg = 0
-        end
-
-        player:startEvent(855, threePathArg)
 
     -- DARK PUPPET
     elseif
@@ -121,9 +91,6 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 857 then
         player:setCharVar("PromathiaStatus", 2)
         player:setCharVar("Promathia_CID_timer", VanadielDayOfTheYear())
-    elseif csid == 855 then
-        player:setCharVar("COP_Ulmia_s_Path", 8)
-        checkThreePaths(player)
     elseif csid == 856 then
         player:setCharVar("PromathiaStatus", 1)
     elseif csid == 760 then

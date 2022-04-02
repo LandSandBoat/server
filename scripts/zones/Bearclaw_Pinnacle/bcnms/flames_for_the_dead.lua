@@ -3,6 +3,7 @@
 -- Bearclaw Pinnacle mission battlefield
 -----------------------------------
 require("scripts/globals/battlefield")
+require("scripts/globals/titles")
 require("scripts/globals/missions")
 -----------------------------------
 local battlefield_object = {}
@@ -20,7 +21,10 @@ end
 battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
     if leavecode == xi.battlefield.leaveCode.WON then
         local _, clearTime, partySize = battlefield:getRecord()
-        local arg8 = (player:getCurrentMission(COP) ~= xi.mission.id.cop.THREE_PATHS or player:getCharVar("COP_Ulmia_s_Path") ~= 6) and 1 or 0
+        local arg8 = (player:getCurrentMission(COP) ~= xi.mission.id.cop.THREE_PATHS or player:getMissionStatus(mission.areaId, xi.mission.status.ULMIA) ~= 8) and 1 or 0
+
+        player:setLocalVar('battlefieldWin', battlefield:getID())
+
         player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar("[cs]bit"), arg8)
     elseif leavecode == xi.battlefield.leaveCode.LOST then
         player:startEvent(32002)
@@ -32,9 +36,7 @@ end
 
 battlefield_object.onEventFinish = function(player, csid, option)
     if csid == 32001 then
-        if player:getCurrentMission(COP) == xi.mission.id.cop.THREE_PATHS and player:getCharVar("COP_Ulmia_s_Path") == 6 then
-            player:setCharVar("COP_Ulmia_s_Path", 7)
-        end
+        player:addTitle(xi.title.ULMIAS_SOULMATE)
         player:addExp(1000)
     end
 end

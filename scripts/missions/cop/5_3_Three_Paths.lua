@@ -431,6 +431,162 @@ mission.sections =
             },
         },
     },
+
+    -- Ulmia's Path
+    {
+        check = function(player, currentMission, missionStatus, vars)
+            return currentMission == mission.missionId and
+                player:getMissionStatus(mission.areaId, xi.mission.status.COP.ULMIA) <= 14
+        end,
+
+        [xi.zone.SOUTHERN_SAN_DORIA] =
+        {
+            ['Hinaree'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:getMissionStatus(mission.areaId, xi.mission.status.COP.ULMIA) == 0 then
+                        return mission:progressEvent(22)
+                    end
+                end,
+            },
+
+            onEventFinish =
+            {
+                [22] = function(player, csid, option, npc)
+                    player:setMissionStatus(mission.areaId, 2, xi.mission.status.COP.ULMIA)
+                end,
+            },
+        },
+
+        [xi.zone.PORT_SAN_DORIA] =
+        {
+            onZoneIn =
+            {
+                function(player, prevZone)
+                    if player:getMissionStatus(mission.areaId, xi.mission.status.COP.ULMIA) == 2 then
+                        return 4
+                    end
+                end,
+            },
+
+            onEventFinish =
+            {
+                [4] = function(player, csid, option, npc)
+                    player:setMissionStatus(mission.areaId, 3, xi.mission.status.COP.ULMIA)
+                end,
+            },
+        },
+
+        [xi.zone.NORTHERN_SAN_DORIA] =
+        {
+            ['Chasalvige'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:getMissionStatus(mission.areaId, xi.mission.status.COP.ULMIA) == 3 then
+                        return mission:progressEvent(762)
+                    end
+                end,
+            },
+
+            onEventFinish =
+            {
+                [762] = function(player, csid, option, npc)
+                    player:setMissionStatus(mission.areaId, 4, xi.mission.status.COP.ULMIA)
+                end,
+            },
+        },
+
+        [xi.zone.WINDURST_WATERS] =
+        {
+            ['Kerutoto'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:getMissionStatus(mission.areaId, xi.mission.status.COP.ULMIA) == 4 then
+                        return mission:progressEvent(876)
+                    end
+                end,
+            },
+
+            onEventFinish =
+            {
+                [876] = function(player, csid, option, npc)
+                    player:setMissionStatus(mission.areaId, 6, xi.mission.status.COP.ULMIA)
+                end,
+            },
+        },
+
+        [xi.zone.WINDURST_WALLS] =
+        {
+            ['Yoran-Oran'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:getMissionStatus(mission.areaId, xi.mission.status.COP.ULMIA) == 6 then
+                        return mission:progressEvent(473)
+                    end
+                end,
+            },
+
+            onEventFinish =
+            {
+                [473] = function(player, csid, option, npc)
+                    player:setMissionStatus(mission.areaId, 7, xi.mission.status.COP.ULMIA)
+                end,
+            },
+        },
+
+        [xi.zone.BONEYARD_GULLY] =
+        {
+            onEventFinish =
+            {
+                [32001] = function(player, csid, option, npc)
+                    if
+                        player:getLocalVar('battlefieldWin') == 672 and
+                        player:getMissionStatus(mission.areaId, xi.mission.status.COP.ULMIA) == 7
+                    then
+                        player:setMissionStatus(mission.areaId, 8, xi.mission.status.COP.ULMIA)
+                    end
+                end,
+            },
+        },
+
+        [xi.zone.BEARCLAW_PINNACLE] =
+        {
+            onEventFinish =
+            {
+                [32001] = function(player, csid, option, npc)
+                    if
+                        player:getLocalVar('battlefieldWin') == 640 and
+                        player:getMissionStatus(mission.areaId, xi.mission.status.COP.ULMIA) == 8
+                    then
+                        player:setMissionStatus(mission.areaId, 9, xi.mission.status.COP.ULMIA)
+                    end
+                end,
+            },
+        },
+
+        [xi.zone.METALWORKS] =
+        {
+            ['Cid'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:getMissionStatus(mission.areaId, xi.mission.status.COP.ULMIA) == 9 then
+                        return mission:progressEvent(855, getCidEventArg(player, xi.mission.status.COP.ULMIA))
+                    end
+                end,
+            },
+
+            onEventFinish =
+            {
+                [855] = function(player, csid, option, npc)
+                    player:setMissionStatus(mission.areaId, 14, xi.mission.status.COP.ULMIA)
+
+                    if isMissionComplete(player) then
+                        mission:complete(player)
+                    end
+                end,
+            },
+        },
+    },
 }
 
 return mission
