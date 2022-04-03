@@ -51,7 +51,8 @@ ZMQService::ZMQService(zmq::socket_type type)
     }
     catch (zmq::error_t& err)
     {
-        ShowFatalError("Unable to bind zmq socket: %s", err.what());
+        ShowFatalError("Unable to bind/connect zmq socket (%s): %s", address.c_str(), err.what());
+        std::exit(-1);
     }
 
     listen();
