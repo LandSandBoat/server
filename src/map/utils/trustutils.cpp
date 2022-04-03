@@ -156,7 +156,7 @@ namespace trustutils
                 mob_pools.behavior,\
                 mob_pools.skill_list_id,\
                 spell_list.spellid, \
-                mob_family_system.mobsize,\
+                mob_family_system.mobradius,\
                 mob_family_system.ecosystemID,\
                 (mob_family_system.HP / 100), \
                 (mob_family_system.MP / 100), \

@@ -144,7 +144,7 @@ namespace petutils
                 minLevel,\
                 maxLevel,\
                 time,\
-                mobsize,\
+                mobradius,\
                 ecosystemID,\
                 mob_pools.familyid,\
                 mob_pools.mJob,\
