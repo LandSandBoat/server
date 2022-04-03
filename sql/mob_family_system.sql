@@ -23,7 +23,7 @@ CREATE TABLE `mob_family_system` (
   `superFamily` tinytext,
   `ecosystemID` tinyint(2) unsigned NOT NULL DEFAULT 0,
   `ecosystem` tinytext,
-  `mobsize` tinyint(2) unsigned NOT NULL DEFAULT 0,
+  `mobradius` tinyint(2) unsigned NOT NULL DEFAULT 0,
   `speed` tinyint(3) unsigned NOT NULL DEFAULT 40,
   `HP` tinyint(3) unsigned NOT NULL DEFAULT 100,
   `MP` tinyint(3) unsigned NOT NULL DEFAULT 100,

@@ -50,9 +50,9 @@
 CBattleEntity::CBattleEntity()
 {
     m_OwnerID.clean();
-    m_ModelSize = 0;
-    m_mlvl      = 0;
-    m_slvl      = 0;
+    m_ModelRadius = 0;
+    m_mlvl        = 0;
+    m_slvl        = 0;
 
     m_mjob = JOB_WAR;
     m_sjob = JOB_WAR;
@@ -305,7 +305,7 @@ int16 CBattleEntity::GetWeaponDelay(bool tp)
 
 uint8 CBattleEntity::GetMeleeRange() const
 {
-    return m_ModelSize + 3;
+    return m_ModelRadius + 3;
 }
 
 int16 CBattleEntity::GetRangedWeaponDelay(bool tp)
@@ -1548,7 +1548,7 @@ void CBattleEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& ac
 
 bool CBattleEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>& errMsg)
 {
-    return !((distance(loc.p, PTarget->loc.p) - PTarget->m_ModelSize) > GetMeleeRange() || !PAI->GetController()->IsAutoAttackEnabled());
+    return !((distance(loc.p, PTarget->loc.p) - PTarget->m_ModelRadius) > GetMeleeRange() || !PAI->GetController()->IsAutoAttackEnabled());
 }
 
 void CBattleEntity::OnDisengage(CAttackState& s)
