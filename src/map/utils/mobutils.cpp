@@ -1289,12 +1289,12 @@ Usage:
                 ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setDelay((sql->GetIntData(15) * 1000) / 60);
                 ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setBaseDelay((sql->GetIntData(15) * 1000) / 60);
 
-                PMob->m_Behaviour = (uint16)sql->GetIntData(16);
-                PMob->m_Link      = (uint8)sql->GetIntData(17);
-                PMob->m_Type      = (uint8)sql->GetIntData(18);
-                PMob->m_Immunity  = (IMMUNITY)sql->GetIntData(19);
-                PMob->m_EcoSystem = (ECOSYSTEM)sql->GetIntData(20);
-                PMob->m_ModelSize = (uint8)sql->GetIntData(21);
+                PMob->m_Behaviour   = (uint16)sql->GetIntData(16);
+                PMob->m_Link        = (uint8)sql->GetIntData(17);
+                PMob->m_Type        = (uint8)sql->GetIntData(18);
+                PMob->m_Immunity    = (IMMUNITY)sql->GetIntData(19);
+                PMob->m_EcoSystem   = (ECOSYSTEM)sql->GetIntData(20);
+                PMob->m_ModelRadius = (uint8)sql->GetIntData(21);
 
                 PMob->speed    = (uint8)sql->GetIntData(22); // Overwrites baseentity.cpp's defined speed
                 PMob->speedsub = (uint8)sql->GetIntData(22); // Overwrites baseentity.cpp's defined speedsub
@@ -1431,12 +1431,12 @@ Usage:
                 ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setDelay((sql->GetIntData(15) * 1000) / 60);
                 ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setBaseDelay((sql->GetIntData(15) * 1000) / 60);
 
-                PMob->m_Behaviour = (uint16)sql->GetIntData(16);
-                PMob->m_Link      = (uint8)sql->GetIntData(17);
-                PMob->m_Type      = (uint8)sql->GetIntData(18);
-                PMob->m_Immunity  = (IMMUNITY)sql->GetIntData(19);
-                PMob->m_EcoSystem = (ECOSYSTEM)sql->GetIntData(20);
-                PMob->m_ModelSize = (uint8)sql->GetIntData(21);
+                PMob->m_Behaviour   = (uint16)sql->GetIntData(16);
+                PMob->m_Link        = (uint8)sql->GetIntData(17);
+                PMob->m_Type        = (uint8)sql->GetIntData(18);
+                PMob->m_Immunity    = (IMMUNITY)sql->GetIntData(19);
+                PMob->m_EcoSystem   = (ECOSYSTEM)sql->GetIntData(20);
+                PMob->m_ModelRadius = (uint8)sql->GetIntData(21);
 
                 PMob->speed    = (uint8)sql->GetIntData(22); // Overwrites baseentity.cpp's defined speed
                 PMob->speedsub = (uint8)sql->GetIntData(22); // Overwrites baseentity.cpp's defined speedsub

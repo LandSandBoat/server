@@ -121,12 +121,12 @@ CInstance* CInstanceLoader::LoadInstance()
             ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setDelay((sql->GetIntData(18) * 1000) / 60);
             ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setBaseDelay((sql->GetIntData(18) * 1000) / 60);
 
-            PMob->m_Behaviour = (uint16)sql->GetIntData(19);
-            PMob->m_Link      = (uint8)sql->GetIntData(20);
-            PMob->m_Type      = (uint8)sql->GetIntData(21);
-            PMob->m_Immunity  = (IMMUNITY)sql->GetIntData(22);
-            PMob->m_EcoSystem = (ECOSYSTEM)sql->GetIntData(23);
-            PMob->m_ModelSize = (uint8)sql->GetIntData(24);
+            PMob->m_Behaviour   = (uint16)sql->GetIntData(19);
+            PMob->m_Link        = (uint8)sql->GetIntData(20);
+            PMob->m_Type        = (uint8)sql->GetIntData(21);
+            PMob->m_Immunity    = (IMMUNITY)sql->GetIntData(22);
+            PMob->m_EcoSystem   = (ECOSYSTEM)sql->GetIntData(23);
+            PMob->m_ModelRadius = (uint8)sql->GetIntData(24);
 
             PMob->speed    = (uint8)sql->GetIntData(25);
             PMob->speedsub = (uint8)sql->GetIntData(25);

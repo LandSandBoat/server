@@ -68,7 +68,7 @@ struct Pet_t
     uint8 maxLevel; // максимально-возможный уровень
 
     uint8  name_prefix;
-    uint8  size; // размер модели
+    uint8  radius; // Model Radius - affects melee range etc.
     uint16 m_Family;
     uint32 time; // время существования (будет использоваться для задания длительности статус эффекта)
 
@@ -184,7 +184,7 @@ namespace petutils
                 Pet->minLevel  = (uint8)sql->GetIntData(3);
                 Pet->maxLevel  = (uint8)sql->GetIntData(4);
                 Pet->time      = sql->GetUIntData(5);
-                Pet->size      = sql->GetUIntData(6);
+                Pet->radius    = sql->GetUIntData(6);
                 Pet->EcoSystem = (ECOSYSTEM)sql->GetIntData(7);
                 Pet->m_Family  = (uint16)sql->GetIntData(8);
                 Pet->mJob      = (uint8)sql->GetIntData(9);
@@ -1602,9 +1602,9 @@ namespace petutils
         }
 
         FinalizePetStatistics(PMaster, PPet);
-        PPet->status      = STATUS_TYPE::NORMAL;
-        PPet->m_ModelSize = PPetData->size;
-        PPet->m_EcoSystem = PPetData->EcoSystem;
+        PPet->status        = STATUS_TYPE::NORMAL;
+        PPet->m_ModelRadius = PPetData->radius;
+        PPet->m_EcoSystem   = PPetData->EcoSystem;
 
         PMaster->PPet = PPet;
     }

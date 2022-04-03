@@ -50,7 +50,7 @@ struct Trust_t
     ECOSYSTEM EcoSystem;   // ecosystem
 
     uint8  name_prefix;
-    uint8  size; // размер модели
+    uint8  radius; // Model Radius - affects melee range etc.
     uint16 m_Family;
 
     uint16 behaviour;
@@ -217,7 +217,7 @@ namespace trustutils
 
                 std::ignore = (uint16)sql->GetUIntData(14); // SpellID
 
-                trust->size      = sql->GetUIntData(15);
+                trust->radius    = sql->GetUIntData(15);
                 trust->EcoSystem = (ECOSYSTEM)sql->GetIntData(16);
                 trust->HPscale   = sql->GetFloatData(17);
                 trust->MPscale   = sql->GetFloatData(18);
@@ -324,7 +324,7 @@ namespace trustutils
         PTrust->speed            = trustData->speed;
         PTrust->m_TrustID        = trustData->trustID;
         PTrust->status           = STATUS_TYPE::NORMAL;
-        PTrust->m_ModelSize      = trustData->size;
+        PTrust->m_ModelRadius    = trustData->radius;
         PTrust->m_EcoSystem      = trustData->EcoSystem;
         PTrust->m_MovementType   = static_cast<TRUST_MOVEMENT_TYPE>(trustData->behaviour);
 
