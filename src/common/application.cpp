@@ -40,6 +40,8 @@ Application::Application(std::string const& serverName, std::unique_ptr<argparse
     ShowStatus("Begin %s-server initialisation...", serverName);
 
     debug::init();
+
+    gZMQService = std::make_unique<ZMQService>(zmq::socket_type::router);
         
     ShowStatus("The %s-server is ready to work...", serverName);
     ShowStatus("=======================================================================");

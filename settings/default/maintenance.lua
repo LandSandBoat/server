@@ -5,8 +5,8 @@
 xi = xi or {}
 xi.settings = xi.settings or {}
 
-xi.settings.world =
+xi.settings.maintenance =
 {
-    ENABLED = true, -- (bool) Whether or not logging is on
+    MAINT_MODE = false, -- (bool) False: Normal operation. True: only GM characters allowed online & no new character creation
 
 }

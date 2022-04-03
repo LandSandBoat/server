@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2022 LandSandBoat Dev Teams
@@ -24,28 +24,38 @@
 #include <iostream>
 #include <memory>
 #include <string>
+#include <concurrentqueue.h>
 
-#include "application.h"
 #include "logging_service.h"
+#include "mmo.h"
+#include "sql.h"
 
 #include "zmq.hpp"
-// #include "zmq_addon.hpp"
+#include "zmq_addon.hpp"
 
-class ZMQService final : public Singleton<ZMQService>
+struct chat_message_t
+{
+    uint64         dest;
+    MSGSERVTYPE    type;
+    zmq::message_t data;
+    zmq::message_t packet;
+};
+
+class ZMQService
 {
 public:
-    ZMQService()
-    {
-        pContext = std::make_unique<zmq::context_t>();
-        pSocket  = std::make_unique<zmq::socket_t>(*pContext, zmq::socket_type::router);
+    ZMQService(zmq::socket_type type);
+    ~ZMQService();
 
-        pSocket->bind("tcp://127.0.0.1:6666");
-    }
+    void queue(uint64 ipp, MSGSERVTYPE type, zmq::message_t* extra, zmq::message_t* packet);
+    void send(uint64 ipp, MSGSERVTYPE type, zmq::message_t* extra, zmq::message_t* packet);
+    void parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_t* packet, zmq::message_t* from);
+    void listen();
 
-    virtual ~ZMQService()
-    {
-    };
 private:
     std::unique_ptr<zmq::context_t> pContext;
     std::unique_ptr<zmq::socket_t>  pSocket;
+    std::string address;
+    std::unique_ptr<SqlConnection> zmqSql;
+    moodycamel::ConcurrentQueue<chat_message_t> outgoing_queue;
 };

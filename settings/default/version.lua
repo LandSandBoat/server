@@ -8,5 +8,11 @@ xi.settings = xi.settings or {}
 xi.settings.version =
 {
     CLIENT_VER = "30211225_1", -- (string) Expected Client version (wrong version cannot log in)
+
+    -- WE STRONGLY ADVISE AGAINST LOCKING THE SERVER TO OLDER VERSIONS. IT IS A UNIVERSALLY BAD IDEA.
+    -- 0 - disabled (every version allowed)
+    -- 1 - enabled - strict (only exact CLIENT_VER allowed)
+    -- 2 - enabled - greater than or equal  (matching or greater than CLIENT_VER allowed, default)
     VER_LOCK = 2, -- (uint) Version lock scheme
+
 }

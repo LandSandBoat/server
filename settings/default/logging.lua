@@ -7,9 +7,9 @@ xi.settings = xi.settings or {}
 
 xi.settings.logging =
 {
-    ENABLED = true, -- (bool) Whether or not logging is on
-    TIMESTAMP_FORMAT = "[%d/%b] [%H:%M:%S]", -- (string) Timestamp format
+    TIMESTAMP_FORMAT = "[%d/%b][%H:%M:%S]", -- (string) Timestamp format
     ENABLE_STANDARD = true, -- (bool) Enable standard logging messages (ShowStandard(...))
+    ENABLE_STATUS = true, -- (bool) Enable standard logging messages (ShowStandard(...))
     ENABLE_INFO = true, -- (bool) Enable standard logging messages (ShowStandard(...))
     ENABLE_NOTICE = true, -- (bool) Enable standard logging messages (ShowStandard(...))
     ENABLE_WARN = true, -- (bool) Enable standard logging messages (ShowStandard(...))
@@ -21,4 +21,5 @@ xi.settings.logging =
     ENABLE_NAVMESH = true, -- (bool) Enable x logging messages
     ENABLE_ACTION = true, -- (bool) Enable x logging messages
     ENABLE_EXPLOIT = true, -- (bool) Enable x logging messages
+
 }

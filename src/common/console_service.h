@@ -120,6 +120,7 @@ public:
             });
         }
     }
+
     ~ConsoleService()
     {
         m_consoleThreadRun = false;

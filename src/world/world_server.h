@@ -1,6 +1,8 @@
 ﻿#pragma once
 
 #include "common/application.h"
+#include "common/console_service.h"
+#include "common/logging.h"
 
 class WorldServer final : public Application
 {

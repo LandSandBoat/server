@@ -7,7 +7,9 @@ xi.settings = xi.settings or {}
 
 xi.settings.main =
 {
-    SERVER_NAME = "Nameless", -- (string) The name of the server
+    SERVER_NAME = "Nameless", -- (string) The name of the server (not longer than 15 characters)
+
+    -- Content Switches
     ENABLE_COP = true, -- (bool) Enables expansion: Chains of Promathia
     ENABLE_TOAU = true, -- (bool) Enables expansion: Treasure of Aht Urghan
     ENABLE_WOTG = true, -- (bool) Enables expansion: Wings of the Goddess
@@ -17,6 +19,96 @@ xi.settings.main =
     ENABLE_ABYSSEA = true, -- (bool) Enables expansion: Abyssea
     ENABLE_SOA = true, -- (bool) Enables expansion: Seekers of Adoulin
     ENABLE_ROV = true, -- (bool) Enables expansion: Rhapsodies of Vana'diel
-    ENABLE_VOIDWATCH = true, -- (bool) Enables Voidwatch (Not an expansion
-    DAMAGE_MULT = 1.0, -- (float) The multiplier applied to all damage directed towards players
+
+    ENABLE_VOIDWATCH = true, -- (bool) Enables Voidwatch
+    ENABLE_VOIDWALKER = true, -- (bool) Enables Voidwalker
+
+    ENABLE_FIELD_MANUALS = true, -- (bool) Enables Fields of Valor Books
+    ENABLE_GROUNDS_TOMES = true, -- (bool) Enables Grounds of Valor Books
+    ENABLE_SURVIVAL_GUIDE = true, -- (bool) Enables Survival Guides
+
+    REGIME_WAIT = false, -- (bool) Make people wait till 00:00 game time as in retail. If it's false there is no wait time.
+    FOV_REWARD_ALLIANCE = false, -- (bool) Allow Fields of Valor rewards while being a member of an alliance.
+    GOV_REWARD_ALLIANCE = true, -- (bool) Allow Grounds of Valor rewards while being a member of an alliance.
+
+    ENABLE_ROE = true, -- (bool) Enables Records of Eminence
+    ENABLE_ROE_TIMED = true, -- (bool) Enable 4-hour timed records
+    ENABLE_EXCHANGE_LIMIT = true, -- (bool) Enable Maximum limit of sparks spent per Week
+
+    WEEKLY_EXCHANGE_LIMIT = 100000, -- (uint) Maximum amount of sparks/accolades that can be spent per week
+
+    -- Currency Caps (Change at your own risk!)
+    CAP_CURRENCY_ACCOLADES = 99999, -- (uint) Maximum accolades characters may hold at one time
+    CAP_CURRENCY_BALLISTA = 2000, -- (uint) Maximum ballista currency characters may hold at one time
+    CAP_CURRENCY_SPARKS = 99999, -- (uint) Maximum sparks characters may hold at one time
+    CAP_CURRENCY_VALOR = 50000, -- (uint) Maximum valor characters may hold at one time
+
+    -- Magian Trials
+    ENABLE_MAGIAN_TRIALS = true, -- (bool) Enables Magian Trials
+    MAGIAN_TRIALS_MOBKILL_MULTIPLIER = 1.0, -- (float) TODO: Multiplier applied to...
+    MAGIAN_TRIALS_TRADE_MULTIPLIER = 1.0, -- (float) TODO: Multiplier applied to...
+
+    -- Treasure Caskets
+    -- Retail droprate = 0.1 (10%) with no other effects active
+    -- Set to 0 to disable caskets.
+    -- Max is clamped to 1.0 (100%)
+    CASKET_DROP_RATE = 0.1, -- (float) Drop rate for caskets
+
+    -- Character Config
+    INITIAL_LEVEL_CAP = 50, -- (uint) The initial level cap for new players. There seems to be a hardcap of 255.
+    MAX_LEVEL = 99, -- (uint) Level max of the server lowers the attainable cap by disabling Limit Break quests.
+    NORMAL_MOB_MAX_LEVEL_RANGE_MIN = 0, -- (uint) Lower Bound of Max Level Range for Normal Mobs (0 = Uncapped)
+    NORMAL_MOB_MAX_LEVEL_RANGE_MAX = 0, -- (uint) Upper Bound of Max Level Range for Normal Mobs (0 = Uncapped)
+    START_GIL = 10, -- (uint) Amount of gil given to newly created characters.
+    START_INVENTORY = 30, -- (uint) Starting inventory and satchel size. Ignores values < 30. Do not set above 80!
+    NEW_CHARACTER_CUTSCENE = true, -- (bool) Enable opening cutscenes for new characters.
+    SUBJOB_QUEST_LEVEL = 18, -- (uint) Minimum level to accept either subjob quest. Set to 0 to start the game with subjobs unlocked.
+    ADVANCED_JOB_LEVEL = 30, -- (uint) Minimum level to accept advanced job quests. Set to 0 to start the game with advanced jobs.
+    ALL_MAPS = false, -- (bool) Give starting characters all the maps.
+    UNLOCK_OUTPOST_WARPS = false, -- (bool) Give starting characters all outpost warps (not including Tu'Lia and Tavnazia).
+    UNLOCK_OUTPOST_WARPS_SEA_SKY = false, -- (bool) Give starting characters outpost warps for Tu'Lia and Tavnazia.
+
+    -- Rate Modifiers
+    SHOP_PRICE = 1.0, -- (float) Multiplies prices in NPC shops.
+    GIL_RATE = 1.0, -- (float) Multiplies gil earned from quests. Won't always display in game.
+    BAYLD_RATE = 1.0, -- (float) Multiples bayld earned from quests.
+    EXP_RATE = 1.0, -- (float) Multiplies exp from script (except FoV/GoV).
+    BOOK_EXP_RATE = 1.0, -- (float) Multiplies exp from FoV/GoV book pages.
+    TABS_RATE = 1.0, -- (float) Multiplies tabs earned from fov.
+    ROE_EXP_RATE = 1.0, -- (float) Multiplies exp earned from records of eminence.
+    SPARKS_RATE = 1.0, -- (float) Multiplies sparks earned from records of eminence.
+    CURE_POWER = 1.0, -- (float) Multiplies amount healed from Healing Magic
+    ELEMENTAL_POWER = 1.0, -- (float) Multiplies damage dealt by Elemental and non-drain Dark Magic.
+    DIVINE_POWER = 1.0, -- (float) Multiplies damage dealt by Divine Magic.
+    NINJUTSU_POWER = 1.0, -- (float) Multiplies damage dealt by Ninjutsu Magic.
+    BLUE_POWER = 1.0, -- (float) Multiplies damage dealt by Blue Magic.
+    DARK_POWER = 1.0, -- (float) Multiplies amount drained by Dark Magic.
+    ITEM_POWER = 1.0, -- (float) Multiplies the effect of items such as Potions and Ethers.
+
+    WEAPON_SKILL_POWER = 1.0, -- (float) Multiplies damage dealt by Weapon Skills.
+    USE_ADOULIN_WEAPON_SKILL_CHANGES = true, -- (bool) Use Adoulin weapon skill damage calculations.
+
+    -- Trusts
+    ENABLE_TRUST_CASTING = true, -- (bool) Enable the casting of Trust spells
+    ENABLE_TRUST_QUESTS = true, -- (bool) Enable accepting and completion of the various Trust acquisition quests.
+
+    HARVESTING_BREAK_CHANCE = 33, -- (uint) % chance for the sickle to break during harvesting. Set between 0 and 100.
+    EXCAVATION_BREAK_CHANCE = 33, -- (uint) % chance for the pickaxe to break during excavation. Set between 0 and 100.
+    LOGGING_BREAK_CHANCE = 33, -- (uint) % chance for the hatchet to break during logging. Set between 0 and 100.
+    MINING_BREAK_CHANCE = 33, -- (uint) % chance for the pickaxe to break during mining. Set between 0 and 100.
+    HARVESTING_RATE = 50, -- (uint) % chance to recieve an item from haresting. Set between 0 and 100.
+    EXCAVATION_RATE = 50, -- (uint) % chance to recieve an item from excavation. Set between 0 and 100.
+    LOGGING_RATE = 50, -- (uint) % chance to recieve an item from logging. Set between 0 and 100.
+    MINING_RATE = 50, -- (uint) % chance to recieve an item from mining. Set between 0 and 100.
+    DIGGING_RATE = 85, -- (uint) % chance to receive an item from chocbo digging during favorable weather. Set between 0 and 100.
+
+    HEALING_TP_REDUCTION = 100, -- (uint) Reduction in TP for each healing tick.
+
+    -- SE implemented coffer/chest illusion time in order to prevent coffer farming. No-one in the same area can open a chest or coffer for loot (gil, gems & items)
+    -- till a random time between MIN_ILLSION_TIME and MAX_ILLUSION_TIME. During this time players can loot keyitem and item related to quests (AF, maps... etc.)
+    COFFER_MAX_ILLUSION_TIME = 3600, -- (uint) TODO: Commen (1 hour)
+    COFFER_MIN_ILLUSION_TIME = 1800, -- (uint) TODO: Commen (30 minutes)
+    CHEST_MAX_ILLUSION_TIME = 3600, -- (uint) TODO: Commen (1 hour)
+    CHEST_MIN_ILLUSION_TIME = 1800, -- (uint) TODO: Commen (30 minutes)
+
 }

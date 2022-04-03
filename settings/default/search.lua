@@ -8,5 +8,6 @@ xi.settings = xi.settings or {}
 xi.settings.search =
 {
     ENABLED = true, -- (bool) Whether or not logging is on
-    SERVER_PORT = 54002, -- (uint) Search server port
+    PORT = 54002, -- (uint) Search server port
+
 }

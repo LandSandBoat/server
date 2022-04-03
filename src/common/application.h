@@ -25,14 +25,10 @@
 #include <memory>
 #include <string>
 
-#include "common/console_service.h"
-#include "common/logging_service.h"
-#include "common/zmq_service.h"
-
 #include "argparse/argparse.hpp"
-
-// TODO: CTRP Singletons for services?
-// What defines a service?
+#include "console_service.h"
+#include "logging_service.h"
+#include "zmq_service.h"
 
 class Application
 {
@@ -49,6 +45,7 @@ public:
     virtual void Tick();
 
     std::unique_ptr<argparse::ArgumentParser> gArgParser;
+    std::unique_ptr<ZMQService> gZMQService;
     std::unique_ptr<ConsoleService> gConsoleService;
 
     bool m_IsRunning;

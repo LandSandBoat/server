@@ -1,5 +1,6 @@
 ﻿
 #include "world_server.h"
+#include "argparse/argparse.hpp"
 
 int main(int argc, char** argv)
 {
@@ -12,7 +13,7 @@ int main(int argc, char** argv)
     catch (const std::runtime_error& err)
     {
         std::cerr << err.what() << std::endl;
-        std::cerr << argParser;
+        std::cerr << *argParser;
         std::exit(1);
     }
 

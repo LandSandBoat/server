@@ -7,6 +7,7 @@ xi.settings = xi.settings or {}
 
 xi.settings.zmq =
 {
-    SERVER_IP = "127.0.0.1", -- (string) The IP of the machine ZMQ operates on. THIS SHOULD BE YOUR LOCAL MACHINE!
-    SERVER_PORT = 54003, -- (uint) The port ZMQ operates on (inter-process messaging)
+    IP = "127.0.0.1", -- (string) The IP of the machine ZMQ operates on. THIS SHOULD BE YOUR LOCAL MACHINE!
+    PORT = 54003, -- (uint) The port ZMQ operates on (inter-process messaging)
+
 }

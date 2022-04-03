@@ -12,8 +12,8 @@
 #endif
 
 #ifdef WIN32
-#define FD_SETSIZE 1000
-#include <WS2tcpip.h>
+//#define FD_SETSIZE 1000
+#include <ws2tcpip.h>
 #include <winsock2.h>
 typedef long in_addr_t;
 #else
@@ -26,7 +26,7 @@ typedef long in_addr_t;
 
 #include <memory>
 #include <string>
-#include <time.h>
+#include <ctime>
 
 /*
  *

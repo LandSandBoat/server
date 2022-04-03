@@ -19,21 +19,62 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 ===========================================================================
 */
 
-#include <concurrentqueue.h>
-#include <memory>
-#include <queue>
+#include "zmq_service.h"
 
-#include "common/logging.h"
-#include "message_server.h"
+#include "cbasetypes.h"
+#include "logging.h"
+#include "settings_manager.h"
+#include "socket.h"
 
-zmq::context_t                 zContext;
-std::unique_ptr<zmq::socket_t> zSocket;
+ZMQService::ZMQService(zmq::socket_type type)
+{
+    zmqSql = std::make_unique<SqlConnection>(SettingsManager::Get<std::string>(SqlSettings::LOGIN).c_str(),
+                                             SettingsManager::Get<std::string>(SqlSettings::PASSWORD).c_str(),
+                                             SettingsManager::Get<std::string>(SqlSettings::HOST).c_str(),
+                                             SettingsManager::Get<unsigned int>(SqlSettings::PORT),
+                                             SettingsManager::Get<std::string>(SqlSettings::DATABASE).c_str());
 
-moodycamel::ConcurrentQueue<chat_message_t> outgoing_queue;
+    pContext = std::make_unique<zmq::context_t>(1);
+    pSocket  = std::make_unique<zmq::socket_t>(*pContext, type);
 
-std::unique_ptr<SqlConnection> zmqSql;
+    pSocket->set(zmq::sockopt::rcvtimeo, 500);
 
-void queue_message(uint64 ipp, MSGSERVTYPE type, zmq::message_t* extra, zmq::message_t* packet)
+    // TODO: Make this configurable, we don't _have_ to be using tcp here
+    address.append("tcp://");
+    address.append(SettingsManager::Get<std::string>(ZmqSettings::IP));
+    address.append(":");
+    address.append(std::to_string(SettingsManager::Get<unsigned int>(ZmqSettings::PORT)));
+
+    try
+    {
+        pSocket->bind(address);
+    }
+    catch (zmq::error_t& err)
+    {
+        ShowFatalError("Unable to bind zmq socket: %s", err.what());
+    }
+
+    listen();
+}
+
+ZMQService::~ZMQService()
+{
+    if (pSocket)
+    {
+        pSocket->disconnect(address.c_str());
+        pSocket->close();
+        pSocket = nullptr;
+    }
+
+    if (pContext)
+    {
+        pContext->shutdown();
+        pContext->close();
+        pContext = nullptr;
+    }
+}
+
+void ZMQService::queue(uint64 ipp, MSGSERVTYPE type, zmq::message_t* extra, zmq::message_t* packet)
 {
     chat_message_t msg;
     msg.dest = ipp;
@@ -43,7 +84,7 @@ void queue_message(uint64 ipp, MSGSERVTYPE type, zmq::message_t* extra, zmq::mes
     outgoing_queue.enqueue(std::move(msg));
 }
 
-void message_server_send(uint64 ipp, MSGSERVTYPE type, zmq::message_t* extra, zmq::message_t* packet)
+void ZMQService::send(uint64 ipp, MSGSERVTYPE type, zmq::message_t* extra, zmq::message_t* packet)
 {
     try
     {
@@ -52,7 +93,7 @@ void message_server_send(uint64 ipp, MSGSERVTYPE type, zmq::message_t* extra, zm
         msgs[1] = zmq::message_t(&type, sizeof(type));
         msgs[2].copy(*extra);
         msgs[3].copy(*packet);
-        zmq::send_multipart(*zSocket, msgs);
+        zmq::send_multipart(*pSocket, msgs);
     }
     catch (zmq::error_t& e)
     {
@@ -60,7 +101,7 @@ void message_server_send(uint64 ipp, MSGSERVTYPE type, zmq::message_t* extra, zm
     }
 }
 
-void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_t* packet, zmq::message_t* from)
+void ZMQService::parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_t* packet, zmq::message_t* from)
 {
     int     ret = SQL_ERROR;
     in_addr from_ip;
@@ -189,25 +230,25 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
                 ref<uint32>((uint8*)extra->data(), 0) = zmqSql->GetUIntData(2);
             }
 
-            message_server_send(ip, type, extra, packet);
+            send(ip, type, extra, packet);
         }
     }
 }
 
-void message_server_listen()
+void ZMQService::listen()
 {
     while (true)
     {
         std::array<zmq::message_t, 4> msgs;
         try
         {
-            const auto ret = zmq::recv_multipart_n(*zSocket, msgs.data(), msgs.size());
+            const auto ret = zmq::recv_multipart_n(*pSocket, msgs.data(), msgs.size());
             if (!ret)
             {
                 chat_message_t msg;
                 while (outgoing_queue.try_dequeue(msg))
                 {
-                    message_server_send(msg.dest, msg.type, &msg.data, &msg.packet);
+                    send(msg.dest, msg.type, &msg.data, &msg.packet);
                 }
                 continue;
             }
@@ -216,7 +257,7 @@ void message_server_listen()
         {
             // Context was terminated
             // Exit loop
-            if (!zSocket || e.num() == 156384765) // ETERM
+            if (!pSocket || e.num() == 156384765) // ETERM
             {
                 return;
             }
@@ -229,49 +270,8 @@ void message_server_listen()
         // 1: zmq::message_t type;
         // 2: zmq::message_t extra;
         // 3: zmq::message_t packet;
-        message_server_parse((MSGSERVTYPE)ref<uint8>((uint8*)msgs[1].data(), 0), &msgs[2], &msgs[3], &msgs[0]);
+        parse((MSGSERVTYPE)ref<uint8>((uint8*)msgs[1].data(), 0), &msgs[2], &msgs[3], &msgs[0]);
 
         zmqSql->TryPing();
     }
-}
-
-void message_server_init()
-{
-    zmqSql = std::make_unique<SqlConnection>(login_config.mysql_login.c_str(),
-                                             login_config.mysql_password.c_str(),
-                                             login_config.mysql_host.c_str(),
-                                             login_config.mysql_port,
-                                             login_config.mysql_database.c_str());
-
-    zContext = zmq::context_t(1);
-    zSocket  = std::make_unique<zmq::socket_t>(zContext, zmq::socket_type::router);
-
-    zSocket->set(zmq::sockopt::rcvtimeo, 500);
-
-    string_t server = "tcp://";
-    //server.append(login_config.msg_server_ip);
-    //server.append(":");
-    //server.append(std::to_string(login_config.msg_server_port));
-
-    try
-    {
-        zSocket->bind(server.c_str());
-    }
-    catch (zmq::error_t& err)
-    {
-        ShowFatalError("Unable to bind chat socket: %s", err.what());
-    }
-
-    message_server_listen();
-}
-
-void message_server_close()
-{
-    if (zSocket)
-    {
-        zSocket->close();
-        zSocket = nullptr;
-    }
-
-    zContext.close();
 }

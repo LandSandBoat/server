@@ -13,12 +13,12 @@ set(SOURCES
     logging.h
     logging_service.cpp
     logging_service.h
-    message_server.cpp
-    message_server.h
     md52.cpp
     md52.h
     mmo.h
-    settings_impl.h
+    settings_impl.cpp # auto-generated
+    settings_impl.h   # auto-generated
+    settings_manager.cpp
     settings_manager.h
     socket.cpp
     socket.h
@@ -38,6 +38,8 @@ set(SOURCES
     version.h
     zlib.cpp
     zlib.h
+    zmq_service.cpp
+    zmq_service.h
 
     $<$<PLATFORM_ID:Windows>:debug_windows.cpp>
     $<$<PLATFORM_ID:Windows>:WheatyExceptionReport.cpp>

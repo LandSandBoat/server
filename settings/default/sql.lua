@@ -12,4 +12,5 @@ xi.settings.sql =
     LOGIN = "root", -- (string) The Login
     PASSWORD = "root", -- (string) The Password
     DATABASE = "xidb", -- (string) The Database
+
 }

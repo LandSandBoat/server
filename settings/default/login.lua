@@ -7,11 +7,14 @@ xi.settings = xi.settings or {}
 
 xi.settings.login =
 {
-    ENABLED = true, -- (bool) Whether or not logging is on
     DATA_IP = "0.0.0.0", -- (string) Data IP
     DATA_PORT = 54230, -- (uint) Data Port
     VIEW_IP = "0.0.0.0", -- (string) View IP
     VIEW_PORT = 54001, -- (uint) View Port
     AUTH_IP = "0.0.0.0", -- (string) Auth IP
     AUTH_PORT = 54231, -- (uint) Auth Port
+
+    LOG_USER_IP = false, -- (bool) Logging of user IP address to database
+    ACCOUNT_CREATION = true, -- (bool) Allow account creation via the loader
+
 }

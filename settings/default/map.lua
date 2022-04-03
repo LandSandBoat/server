@@ -8,4 +8,5 @@ xi.settings = xi.settings or {}
 xi.settings.map =
 {
     ENABLED = true, -- (bool) Whether or not logging is on
+
 }
