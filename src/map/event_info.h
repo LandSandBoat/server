@@ -28,7 +28,6 @@
 #include <bitset>
 #include <deque>
 #include <map>
-#include <mutex>
 #include <vector>
 
 class CBaseEntity;

@@ -1263,7 +1263,7 @@ bool CMobEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>
                 attack_range = (uint8)skill->getDistance();
             }
         }
-        return !((distance(loc.p, PTarget->loc.p) - PTarget->m_ModelSize) > attack_range || !PAI->GetController()->IsAutoAttackEnabled());
+        return !((distance(loc.p, PTarget->loc.p) - PTarget->m_ModelRadius) > attack_range || !PAI->GetController()->IsAutoAttackEnabled());
     }
     else
     {
