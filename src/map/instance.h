@@ -57,6 +57,7 @@ public:
     void SetLevelCap(uint8 cap);
     void SetEntryLoc(float x, float y, float z, float rot); // Set entry location
     void SetLastTimeUpdate(duration time);                  // Set last time a "Time Remaining:" message was displayed
+    void SetTimeLimit(duration time);                       // Set instance time limit
     void SetProgress(uint32 progress);                      // Set progress through current stage
     void SetStage(uint32 stage);                            // Set current stage (eg. floor #)
     void SetWipeTime(duration time);                        // Set elapsed time when a wipe is detected

@@ -20,6 +20,10 @@ zone_object.onInstanceZoneIn = function(player, instance)
         local entrypos = instance:getEntryPos()
         player:setPos(entrypos.x, entrypos.y, entrypos.z, entrypos.rot)
     end
+
+    player:entityVisualPacket("1pa1")
+    player:entityVisualPacket("1pb1")
+    player:entityVisualPacket("2pb1")
 end
 
 -- NOTE: This is called after onInstanceZoneIn for the fade in cutscene.  onInstanceZoneIn
@@ -41,12 +45,12 @@ end
 
 zone_object.onEventFinish = function(player, csid, option)
     if csid == 1 then
-        player:setPos(0, 0, 0, 0, 72)
+        player:setPos(0, 0, 0, 0, xi.zone.ALZADAAL_UNDERSEA_RUINS)
     end
 end
 
 zone_object.onInstanceLoadFailed = function()
-    return 72
+    return xi.zone.ALZADAAL_UNDERSEA_RUINS
 end
 
 return zone_object

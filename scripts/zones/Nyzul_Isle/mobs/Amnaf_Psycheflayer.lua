@@ -49,7 +49,7 @@ entity.onSpellPrecast = function(mob, spell)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    if (isKiller) then
+    if isKiller then
         mob:showText(mob, ID.text.NOT_POSSIBLE)
     end
 end

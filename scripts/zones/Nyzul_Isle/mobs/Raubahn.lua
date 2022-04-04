@@ -25,8 +25,8 @@ entity.onMobSpawn = function(mob)
 
         local reraises = mobArg:getLocalVar("RERAISES")
 
-        if (reraises < 2) then
-            local target = mobArg:getTarget()
+        if reraises < 2 then
+            local target   = mobArg:getTarget()
             local targetid = 0
 
             if target then targetid = target:getShortID() end
@@ -48,19 +48,29 @@ entity.onMobSpawn = function(mob)
 
             -- AFAICT we lack the damage tracking for his immunity based on accumulated damage type
             -- Therefore, we'll guess based off of tallying player main jobs - which is better than nothing
-            if (reraises == 1) then
+            if reraises == 1 then
                 local ranged = 0
-                local magic = 0
-                local phys = 0
+                local magic  = 0
+                local phys   = 0
 
                 local chars = mobArg:getInstance():getChars()
 
                 for i, v in pairs(chars) do
                     local job = v:getMainJob()
 
-                    if (job == 1 or job == 2 or (job >= 6 and job <= 10) or (job >=12 and job <=14) or (job >= 16 and job <=19 )) then
+                    if
+                        job == 1 or
+                        job == 2 or
+                        (job >= 6 and job <= 10) or
+                        (job >=12 and job <=14) or
+                        (job >= 16 and job <=19)
+                    then
                         phys = phys + 1
-                    elseif ((job >= 3 and job <= 5) or job == 15 or job == 20) then
+                    elseif
+                        (job >= 3 and job <= 5) or
+                        job == 15 or
+                        job == 20
+                    then
                         magic = magic + 1
                     else
                         ranged = ranged + 1
@@ -69,10 +79,10 @@ entity.onMobSpawn = function(mob)
 
                 -- RESIST message only shows for first reraise,
                 -- 2nd reraise should use ID.text.NOW_UNDERSTAND instead
-                if (phys >= magic and phys >= ranged) then
+                if phys >= magic and phys >= ranged then
                     mobArg:showText(mobArg, ID.text.RESIST_MELEE)
                     mobArg:setMod(xi.mod.UDMGPHYS, -10000)
-                elseif (magic >= phys and magic >= ranged) then
+                elseif magic >= phys and magic >= ranged then
                     mobArg:showText(mobArg, ID.text.RESIST_MAGIC)
                     mobArg:addMod(xi.mod.UDMGMAGIC, -10000)
                 else
@@ -92,7 +102,7 @@ end
 
 entity.onMobEngaged = function(mob, target)
     -- localVar because we don't want it to repeat every reraise.
-    if (mob:getLocalVar("started") == 0) then
+    if mob:getLocalVar("started") == 0 then
         mob:showText(mob, ID.text.PRAY)
         mob:setLocalVar("started", 1)
     end
@@ -115,14 +125,14 @@ end
 
 entity.onSpellPrecast = function(mob, spell)
     -- Eyes on Me
-    if (spell == 641) then
+    if spell == 641 then
         mob:showText(mob, ID.text.BEHOLD)
     end
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
     -- If he's out of reraises, display text
-    if (isKiller and mob:getMobMod(xi.mobMod.BEHAVIOR) == 0) then
+    if isKiller and mob:getMobMod(xi.mobMod.BEHAVIOR) == 0 then
         mob:showText(mob, ID.text.MIRACLE)
     end
 end

@@ -165,6 +165,11 @@ duration CInstance::GetTimeLimit()
     return m_timeLimit;
 }
 
+void CInstance::SetTimeLimit(duration time)
+{
+    m_timeLimit = time;
+}
+
 duration CInstance::GetLastTimeUpdate()
 {
     return m_lastTimeUpdate;
