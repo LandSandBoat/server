@@ -3,7 +3,7 @@
 
 -- ONLY 19 ITEMS PER PRICE BRACKET POSSIBLE!!
 
--- Cycles: After 2 months the next items get cycled in. Comment out and uncomment items appropriately.
+-- Cycles: After 1 month the next items need to get cycled in. Comment out and uncomment items appropriately.
 
 local prizes =
 {
@@ -126,46 +126,46 @@ local prizes =
 			-- 26789, -- Shobuhouou Kabuto
 			
 			-- Cycle #4
-			27899, -- Alliance Shirt
-			28185, -- Alliance Pants
-			28324, -- Alliance Boots 
-			26967, -- Cossie Top
-			27293, -- Cossie Bottom
-			26965, -- Ta Moko
-			27291, -- Swimming Togs
-			25713, -- Track Shirt
-			27325, -- Track Pants 
-			25649, -- Gazer's Helmet
-			26519, -- Mandragora Shirt
-			26516, -- Citrullus Shirt
-			25755, -- Crustacean Shirt
-			26524, -- Gil Nabber Shirt
-			26518, -- Jody Shirt
-			25722, -- Jubilee Shirt
-			26545, -- Mithkabob Shirt
-			25758, -- Rhapsody Shirt
-			26517, -- Shadow Lord Shirt
+			-- 27899, -- Alliance Shirt
+			-- 28185, -- Alliance Pants
+			-- 28324, -- Alliance Boots 
+			-- 26967, -- Cossie Top
+			-- 27293, -- Cossie Bottom
+			-- 26965, -- Ta Moko
+			-- 27291, -- Swimming Togs
+			-- 25713, -- Track Shirt
+			-- 27325, -- Track Pants 
+			-- 25649, -- Gazer's Helmet
+			-- 26519, -- Mandragora Shirt
+			-- 26516, -- Citrullus Shirt
+			-- 25755, -- Crustacean Shirt
+			-- 26524, -- Gil Nabber Shirt
+			-- 26518, -- Jody Shirt
+			-- 25722, -- Jubilee Shirt
+			-- 26545, -- Mithkabob Shirt
+			-- 25758, -- Rhapsody Shirt
+			-- 26517, -- Shadow Lord Shirt
             
 			-- Cycle #5
-			-- 26520, -- Akitu Shirt
-			-- 23753, -- Sandogasa
-			-- 23790, -- Adenium Masque
-			-- 23791, -- Adenium Suit
-			-- 27716, -- Green Moogle Masque
-			-- 27867, -- Green Moogle Suit
-			-- 25910, -- Cait Sith Subligar
-			-- 25648, -- Curmudgeon's Helmet
-			-- 26729, -- Corolla
-			-- 25677, -- Arthro's Cap
-			-- 25670, -- Rarab Cap
-			-- 23731, -- Royal Chocobo Beret
-			-- 25672, -- Snoll Masque
-			-- 25604, -- Buffalo Cap
-			-- 26693, -- Morbol Cap
-			-- 10875, -- Snowman Cap
-			-- 26703, -- Lycopodium Masque
-			-- 10446, -- Ahriman Cap
-			-- 27757, -- Bomb Masque
+			26520, -- Akitu Shirt
+			23753, -- Sandogasa
+			23790, -- Adenium Masque
+			23791, -- Adenium Suit
+			27716, -- Green Moogle Masque
+			27867, -- Green Moogle Suit
+			25910, -- Cait Sith Subligar
+			25648, -- Curmudgeon's Helmet
+			26729, -- Corolla
+			25677, -- Arthro's Cap
+			25670, -- Rarab Cap
+			23731, -- Royal Chocobo Beret
+			25672, -- Snoll Masque
+			25604, -- Buffalo Cap
+			26693, -- Morbol Cap
+			10875, -- Snowman Cap
+			26703, -- Lycopodium Masque
+			10446, -- Ahriman Cap
+			27757, -- Bomb Masque
 			
 			-- Cycle #6
 			-- TODO: Add rest of Storage Slip 11
@@ -182,26 +182,26 @@ local prizes =
         {
         -- WEAPON COSTUMES
 		   
-		   -- Cycle #1
-		   -- 20514, -- Aphelion Knuckles
-		   -- 20578, -- Wind Knife
-		   -- 20694, -- Fermion Sword
-		   -- 20665, -- Kam'lanaut's Sword
-		   -- 26412, -- Kam'lanaut's Shield
-		   -- 28661, -- Glinting Shield
-		   -- 21741, -- Demonic Axe
-		   -- 21693, -- Irradiance Blade
-		   -- 21745, -- Dullahan Axe
+		   -- Cycle #1/#5
+		   20514, -- Aphelion Knuckles
+		   20578, -- Wind Knife
+		   20694, -- Fermion Sword
+		   20665, -- Kam'lanaut's Sword
+		   26412, -- Kam'lanaut's Shield
+		   28661, -- Glinting Shield
+		   21741, -- Demonic Axe
+		   21693, -- Irradiance Blade
+		   21745, -- Dullahan Axe
 		   -- 21977, -- Mutsonokami		-- BROKEN
-		   -- 21862, -- Mizukage Naginata
-		   -- 22005, -- Burrower's Wand
-		   -- 22019, -- Jingly Rod
-		   -- 22067, -- Levin
-		   -- 21820, -- Lost Sickle
-		   -- 22283, -- Marvelous Cheer
-		   -- 22124, -- Artemis's Bow
-		   -- 22282, -- Grudge
-		   -- 22153, -- Silver Gun
+		   21862, -- Mizukage Naginata
+		   22005, -- Burrower's Wand
+		   22019, -- Jingly Rod
+		   22067, -- Levin
+		   21820, -- Lost Sickle
+		   22283, -- Marvelous Cheer
+		   22124, -- Artemis's Bow
+		   22282, -- Grudge
+		   22153, -- Silver Gun
 		   
 		   -- Cycle #2
 		   -- 20532, -- Worm Feelers
@@ -247,26 +247,25 @@ local prizes =
 		   -- 18563, -- Ark Scythe
 		   
 		   -- Cycle #4
-		   20571, -- Infiltrator
-		   20569, -- Esikuva
-		   20576, -- Qutrub Knife
-		   21608, -- Onion Sword II
-		   21609, -- Save The Queen II
-		   21636, -- Nihility
-		   20668, -- Firetongue
-		   20666, -- Blizzard Brand
-		   26410, -- Diamond Buckler
-		   10809, -- Moogle Guard
-		   21965, -- Zanmato
-		   21867, -- Sha Wujing's Lance
-		   20933, -- Hotengeki
-		   21086, -- Heartstopper
-		   21095, -- Heartbeater
-		   22039, -- Floral Hagoita
-		   21074, -- Kupo Rod
-		   21153, -- Malice Masher
-		   22089, -- Sophistry
-
+		   -- 20571, -- Infiltrator
+		   -- 20569, -- Esikuva
+		   -- 20576, -- Qutrub Knife
+		   -- 21608, -- Onion Sword II
+		   -- 21609, -- Save The Queen II
+		   -- 21636, -- Nihility
+		   -- 20668, -- Firetongue
+		   -- 20666, -- Blizzard Brand
+		   -- 26410, -- Diamond Buckler
+		   -- 10809, -- Moogle Guard
+		   -- 21965, -- Zanmato
+		   -- 21867, -- Sha Wujing's Lance
+		   -- 20933, -- Hotengeki
+		   -- 21086, -- Heartstopper
+		   -- 21095, -- Heartbeater
+		   -- 22039, -- Floral Hagoita
+		   -- 21074, -- Kupo Rod
+		   -- 21153, -- Malice Masher
+		   -- 22089, -- Sophistry
 
         },
     },
@@ -432,28 +431,43 @@ local prizes =
 			-- 15502, -- Shadow Gorget
 			
 			-- Cycle #4 -- WOTG Nations
-			16149, -- Cobra Cloche
-			14591, -- Cobra Robe
-			15012, -- Cobra Gloves
-			16318, -- Cobra Trews
-			15758, -- Cobra Crackows
-			16148, -- Cobra Cap
-			14590, -- Cobra Harness
-			15011, -- Cobra Mittens
-			16317, -- Cobra Subligar
-			15757, -- Cobra Leggings
-			16147, -- Fourth Haube
-			14589, -- Fourth Brunne
-			15010, -- Fourth Hentzes
-			16316, -- Fourth Schoss
-			15756, -- Fourth Schuhs
+			-- 16149, -- Cobra Cloche
+			-- 14591, -- Cobra Robe
+			-- 15012, -- Cobra Gloves
+			-- 16318, -- Cobra Trews
+			-- 15758, -- Cobra Crackows
+			-- 16148, -- Cobra Cap
+			-- 14590, -- Cobra Harness
+			-- 15011, -- Cobra Mittens
+			-- 16317, -- Cobra Subligar
+			-- 15757, -- Cobra Leggings
+			-- 16147, -- Fourth Haube
+			-- 14589, -- Fourth Brunne
+			-- 15010, -- Fourth Hentzes
+			-- 16316, -- Fourth Schoss
+			-- 15756, -- Fourth Schuhs
 			
 			
-			-- Cycle #5 -- 
-			--
-			
-
-
+			-- Cycle #5 -- TOAU NM drops/Assault gear
+			11496, -- Fenrir's Crown
+			19235, -- Veuglaire
+			16375, -- Surge Subligar
+			17971, -- Tartaglia
+			16062, -- Amir Puggaree
+			14525, -- Amir Korazin
+			14933, -- Amir Kolluks
+			15604, -- Amir Dirs
+			15688, -- Amir Boots 
+			16069, -- Pln. Qalansuwa
+			14530, -- Pln. Khazagand
+			14940, -- Pln. Dastanas
+			15609, -- Pln. Seraweels
+			15695, -- Pln. Crackows 
+			16064, -- Yigit Turban
+			14527, -- Yigit Gomlek
+			14935, -- Yigit Gages
+			15606, -- Yigit Seraweels
+			15690, -- Yigit Crackows
         },
     },
 
@@ -516,23 +530,44 @@ local prizes =
 			-- 17759, -- Koggelmander
 			
 			-- Cycle #4 -- HQ Kings pop items/Carbuncle Prime/WOTG Nations/Naji's/TH+1 hat
-			3340,  -- Sweet Tea (Nidhogg pop)
-			3342,  -- Savory Shank (King Behemoth pop)
-			3344,  -- Red Pondweed (Aspidochelone pop)
-			14931, -- Carbuncle's Cuffs
-			18063, -- Garuda's Sickle
-			17192, -- Ifrit's Bow
-			18109, -- Leviathan's Couse
-			18404, -- Ramuh's Mace
-			17711, -- Shiva's Shotel
-			18021, -- Titan's Baselarde
-			26219, -- Naji's Loop
-			16146, -- Iron Ram Sallet
-			14588, -- Iron Ram Hauberk
-			15009, -- Iron Ram Dastanas
-			16315, -- Iron Ram Hose
-			15755, -- Iron Ram Greaves
-			25679, -- White Rarab Cap +1 (TH+1)
+			-- 3340,  -- Sweet Tea (Nidhogg pop)
+			-- 3342,  -- Savory Shank (King Behemoth pop)
+			-- 3344,  -- Red Pondweed (Aspidochelone pop)
+			-- 14931, -- Carbuncle's Cuffs
+			-- 18063, -- Garuda's Sickle
+			-- 17192, -- Ifrit's Bow
+			-- 18109, -- Leviathan's Couse
+			-- 18404, -- Ramuh's Mace
+			-- 17711, -- Shiva's Shotel
+			-- 18021, -- Titan's Baselarde
+			-- 26219, -- Naji's Loop
+			-- 16146, -- Iron Ram Sallet
+			-- 14588, -- Iron Ram Hauberk
+			-- 15009, -- Iron Ram Dastanas
+			-- 16315, -- Iron Ram Hose
+			-- 15755, -- Iron Ram Greaves
+			-- 25679, -- White Rarab Cap +1 (TH+1)
+			
+			-- Cycle #5 -- WOTG Nations
+			11636, -- R.K. Sigil Ring
+			15844, -- Patronus Ring
+			15966, -- Silver Fox Earring
+			15967, -- Temple Earring
+			15934, -- Crimson Belt
+			19041, -- Rose Strap
+			11545, -- Fourth Mantle
+			16291, -- Shield Collar
+			18734, -- Sturm's Report
+			18735, -- Sonia's Plectrum
+			16292, -- Bull Necklace
+			16258, -- Arrestor Mantle
+			11588, -- Mrc.Mjr. Charm
+			15935, -- Capricornian Rope
+			15936, -- Earthy Belt 
+			16293, -- Cougar Pendant
+			16294, -- Crocodile Collar
+			19042, -- Ariesian Grip
+			
 			
 			---------------------------------------------------------------------------
 			-- Cycle #? -- Limbus gear

@@ -79,7 +79,7 @@ zone_object.onInitialize = function(zone)
                     return
                 elseif npcUtil.tradeHasExactly(trade, {{ 'gil', 30 }}) then
                     player:tradeComplete()
-                    player:PrintToPlayer("Arturo: I require 10 lancewood logs and 10 infinity cores with one mythic weaponskill unlocked!", 0xD)
+                    player:PrintToPlayer("Atori-Tutori: I require 10 lancewood logs and 10 infinity cores with one mythic weaponskill unlocked!", 0xD)
                     player:PrintToPlayer("Unlock one of: AsceticsFury or StringingPummel", 28)
                     return
         
@@ -93,7 +93,7 @@ zone_object.onInitialize = function(zone)
                     return
                 elseif npcUtil.tradeHasExactly(trade, {{ 'gil', 31 }}) then
                     player:tradeComplete()
-                    player:PrintToPlayer("Arturo: I require 10 slime juices and 10 infinity cores with one mythic weaponskill unlocked!", 0xD)
+                    player:PrintToPlayer("Atori-Tutori: I require 10 slime juices and 10 infinity cores with one mythic weaponskill unlocked!", 0xD)
                     player:PrintToPlayer("Unlock one of: MandalicStab, PyrrhicKleos, MordantRime, KingsJustice, DeathBlossom, PrimalRend, TrueFlight, BladeKamu or LeadenSalute", 28)
                     return
         
@@ -107,7 +107,7 @@ zone_object.onInitialize = function(zone)
                     return
                 elseif npcUtil.tradeHasExactly(trade, {{ 'gil', 32 }}) then
                     player:tradeComplete()
-                    player:PrintToPlayer("Arturo: I require 10 colossal skulls and 10 infinity cores with one mythic weaponskill unlocked!", 0xD)
+                    player:PrintToPlayer("Atori-Tutori: I require 10 colossal skulls and 10 infinity cores with one mythic weaponskill unlocked!", 0xD)
                     player:PrintToPlayer("Unlock one of: Atonement, Expiacion, Insurgency, KingsJustice, DeathBlossom, TachiRana or LeadenSalute", 28)
                     return
         
@@ -121,7 +121,7 @@ zone_object.onInitialize = function(zone)
                     return
                 elseif npcUtil.tradeHasExactly(trade, {{ 'gil', 33 }}) then
                     player:tradeComplete()
-                    player:PrintToPlayer("Arturo: I require 10 goblin greases and 10 infinity cores with one mythic weaponskill unlocked!", 0xD)
+                    player:PrintToPlayer("Atori-Tutori: I require 10 goblin greases and 10 infinity cores with one mythic weaponskill unlocked!", 0xD)
                     player:PrintToPlayer("Unlock one of: Atonement, Insurgency or KingsJustice", 28)
                     return
         
@@ -135,7 +135,7 @@ zone_object.onInitialize = function(zone)
                     return
                 elseif npcUtil.tradeHasExactly(trade, {{ 'gil', 34 }}) then
                     player:tradeComplete()
-                    player:PrintToPlayer("Arturo: I require 10 griffon hides and 10 infinity cores with one mythic weaponskill unlocked!", 0xD)
+                    player:PrintToPlayer("Atori-Tutori: I require 10 griffon hides and 10 infinity cores with one mythic weaponskill unlocked!", 0xD)
                     player:PrintToPlayer("Unlock one of: PrimalRend, TrueFlight, Insurgency or KingsJustice", 28)
                     return
         
@@ -149,7 +149,7 @@ zone_object.onInitialize = function(zone)
                     return
                 elseif npcUtil.tradeHasExactly(trade, {{ 'gil', 35 }}) then
                     player:tradeComplete()
-                    player:PrintToPlayer("Arturo: I require 10 giant frozen heads and 10 infinity cores with one mythic weaponskill unlocked!", 0xD)
+                    player:PrintToPlayer("Atori-Tutori: I require 10 giant frozen heads and 10 infinity cores with one mythic weaponskill unlocked!", 0xD)
                     player:PrintToPlayer("Unlock one of: KingsJustice or Insurgency", 28)
                     return
         
@@ -163,7 +163,7 @@ zone_object.onInitialize = function(zone)
                     return
                 elseif npcUtil.tradeHasExactly(trade, {{ 'gil', 36 }}) then
                     player:tradeComplete()
-                    player:PrintToPlayer("Arturo: I require 10 relic irons and 10 infinity cores with one mythic weaponskill unlocked!", 0xD)
+                    player:PrintToPlayer("Atori-Tutori: I require 10 relic irons and 10 infinity cores with one mythic weaponskill unlocked!", 0xD)
                     player:PrintToPlayer("Unlock one of: KingsJustice, Insurgency or PrimalRend", 28)
                     return
         
@@ -177,7 +177,7 @@ zone_object.onInitialize = function(zone)
                     return
                 elseif npcUtil.tradeHasExactly(trade, {{ 'gil', 37 }}) then
                     player:tradeComplete()
-                    player:PrintToPlayer("Arturo: I require 10 slime juices and 10 fresh orc livers with one mythic weaponskill unlocked!", 0xD)
+                    player:PrintToPlayer("Atori-Tutori: I require 10 slime juices and 10 fresh orc livers with one mythic weaponskill unlocked!", 0xD)
                     player:PrintToPlayer("Unlock one of: Drakesbane, TachiRana or KingsJustice", 28)
                     return
         
@@ -191,7 +191,7 @@ zone_object.onInitialize = function(zone)
                     return
                 elseif npcUtil.tradeHasExactly(trade, {{ 'gil', 38 }}) then
                     player:tradeComplete()
-                    player:PrintToPlayer("Arturo: I require 10 wootz ores and 10 infinity cores with one mythic weaponskill unlocked!", 0xD)
+                    player:PrintToPlayer("Atori-Tutori: I require 10 wootz ores and 10 infinity cores with one mythic weaponskill unlocked!", 0xD)
                     player:PrintToPlayer("Unlock: BladeKamu", 28)
                     return
         
@@ -205,7 +205,7 @@ zone_object.onInitialize = function(zone)
                     return
                 elseif npcUtil.tradeHasExactly(trade, {{ 'gil', 39 }}) then
                     player:tradeComplete()
-                    player:PrintToPlayer("Arturo: I require 10 sparkling stones and 10 infinity cores with one mythic weaponskill unlocked!", 0xD)
+                    player:PrintToPlayer("Atori-Tutori: I require 10 sparkling stones and 10 infinity cores with one mythic weaponskill unlocked!", 0xD)
                     player:PrintToPlayer("Unlock: TachiRana", 28)
                     return
         
@@ -220,7 +220,7 @@ zone_object.onInitialize = function(zone)
                     return
                 elseif npcUtil.tradeHasExactly(trade, {{ 'gil', 40 }}) then
                     player:tradeComplete()
-                    player:PrintToPlayer("Arturo: I require 10 giant frozen heads and 10 colossal skulls with one mythic weaponskill unlocked!", 0xD)
+                    player:PrintToPlayer("Atori-Tutori: I require 10 giant frozen heads and 10 colossal skulls with one mythic weaponskill unlocked!", 0xD)
                     player:PrintToPlayer("Unlock one of: MysticBoon, Atonement, Vidohunir, KingsJustice, GarlandOfBliss or Omniscience", 28)
                     return
         
@@ -235,7 +235,7 @@ zone_object.onInitialize = function(zone)
                     return
                 elseif npcUtil.tradeHasExactly(trade, {{ 'gil', 41 }}) then
                     player:tradeComplete()
-                    player:PrintToPlayer("Arturo: I require 10 griffon hides and 10 infinity cores with one mythic weaponskill unlocked!", 0xD)
+                    player:PrintToPlayer("Atori-Tutori: I require 10 griffon hides and 10 infinity cores with one mythic weaponskill unlocked!", 0xD)
                     player:PrintToPlayer("Unlock one of: MysticBoon, Atonement, Vidohunir, KingsJustice, AsceticsFury, MordantRime, Drakesbane, GarlandOfBliss or Omniscience", 28)
                     return
         
@@ -250,7 +250,7 @@ zone_object.onInitialize = function(zone)
                     return
                 elseif npcUtil.tradeHasExactly(trade, {{ 'gil', 42 }}) then
                     player:tradeComplete()
-                    player:PrintToPlayer("Arturo: I require 10 griffon hides and 10 lancewood logs with one mythic weaponskill unlocked!", 0xD)
+                    player:PrintToPlayer("Atori-Tutori: I require 10 griffon hides and 10 lancewood logs with one mythic weaponskill unlocked!", 0xD)
                     player:PrintToPlayer("Unlock: TrueFlight or TachiRana", 28)
                     return
         
@@ -265,7 +265,7 @@ zone_object.onInitialize = function(zone)
                     return
                 elseif npcUtil.tradeHasExactly(trade, {{ 'gil', 43 }}) then
                     player:tradeComplete()
-                    player:PrintToPlayer("Arturo: I require 10 goblin greases and 10 relic irons with one mythic weaponskill unlocked!", 0xD)
+                    player:PrintToPlayer("Atori-Tutori: I require 10 goblin greases and 10 relic irons with one mythic weaponskill unlocked!", 0xD)
                     player:PrintToPlayer("Unlock one of: MandalicStab, LeadenSalute or TrueFlight", 28)
                     return
         
@@ -294,45 +294,45 @@ zone_object.onInitialize = function(zone)
         	        player:tradeComplete()
         		    player:delCurrency("windurst_cp", pointsCost)
         			player:setCharVar("PaidForMeritWs", 1)
-                    player:PrintToPlayer("Arturo: I've deducted your Windurst conquest points and progressed you to the next step.\nTalk to me again for next steps.", 0xD)
+                    player:PrintToPlayer("Atori-Tutori: I've deducted your Windurst conquest points and progressed you to the next step.\nTalk to me again for next steps.", 0xD)
                 elseif (npcUtil.tradeHasExactly(trade, {{ 'gil', 1 }}) and player:getNation() == xi.nation.WINDURST and (nationCp < pointsCost)) then
-                    player:PrintToPlayer("Arturo: You will need more Windurst conquest points before you do that.", 0xD)
+                    player:PrintToPlayer("Atori-Tutori: You will need more Windurst conquest points before you do that.", 0xD)
         
             -- BASTOK
         	elseif (npcUtil.tradeHasExactly(trade, {{ 'gil', 1 }}) and player:getNation() == xi.nation.BASTOK and (nationCp > pointsCost)) then
         		    player:tradeComplete()
         		    player:delCurrency("bastok_cp", pointsCost)
         			player:setCharVar("PaidForMeritWs", 1)
-                    player:PrintToPlayer("Arturo: I've deducted your Bastok conquest points and progressed you to the next step.\nTalk to me again for next steps.", 0xD)
+                    player:PrintToPlayer("Atori-Tutori: I've deducted your Bastok conquest points and progressed you to the next step.\nTalk to me again for next steps.", 0xD)
                 elseif (npcUtil.tradeHasExactly(trade, {{ 'gil', 1 }}) and player:getNation() == xi.nation.BASTOK and (nationCp < pointsCost)) then
-                    player:PrintToPlayer("Arturo: You will need more Bastok conquest points before you do that.", 0xD)
+                    player:PrintToPlayer("Atori-Tutori: You will need more Bastok conquest points before you do that.", 0xD)
         
             -- SANDORIA
         	elseif (npcUtil.tradeHasExactly(trade, {{ 'gil', 1 }}) and player:getNation() == xi.nation.SANDORIA and (nationCp > pointsCost)) then
         			player:tradeComplete()
         		    player:delCurrency("sandoria_cp", pointsCost)
                     player:setCharVar("PaidForMeritWs", 1)
-                    player:PrintToPlayer("Arturo: I've deducted your San d'Oria conquest points and progressed you to the next step.\nTalk to me again for next steps.", 0xD)
+                    player:PrintToPlayer("Atori-Tutori: I've deducted your San d'Oria conquest points and progressed you to the next step.\nTalk to me again for next steps.", 0xD)
                 elseif (npcUtil.tradeHasExactly(trade, {{ 'gil', 1 }}) and player:getNation() == xi.nation.SANDORIA and (nationCp < pointsCost)) then
-                    player:PrintToPlayer("Arturo: You will need more San D'oria conquest points before you do that.", 0xD)
+                    player:PrintToPlayer("Atori-Tutori: You will need more San D'oria conquest points before you do that.", 0xD)
         
             -- player has chosen to use their imperial standing points
         	elseif (npcUtil.tradeHasExactly(trade, {{ 'gil', 2 }}) and (player:getCurrency("imperial_standing") > pointsCost)) then
         			player:tradeComplete()
         		    player:delCurrency("imperial_standing", pointsCost)
                     player:setCharVar("PaidForMeritWs", 1)
-                    player:PrintToPlayer("Arturo: I've deducted your imperial standing points and progressed you to the next step.\nTalk to me again for next steps.", 0xD)
+                    player:PrintToPlayer("Atori-Tutori: I've deducted your imperial standing points and progressed you to the next step.\nTalk to me again for next steps.", 0xD)
                 elseif (npcUtil.tradeHasExactly(trade, {{ 'gil', 2 }}) and (player:getCurrency("imperial_standing") < pointsCost)) then
-                    player:PrintToPlayer("Arturo: You will need more imperial standing before you do that.", 0xD)
+                    player:PrintToPlayer("Atori-Tutori: You will need more imperial standing before you do that.", 0xD)
         
             -- player has chosen to use allied notes
         	elseif (npcUtil.tradeHasExactly(trade, {{ 'gil', 3 }}) and player:getCurrency("allied_notes") > pointsCost) then
         			player:tradeComplete()
         		    player:delCurrency("allied_notes", pointsCost)
                     player:setCharVar("PaidForMeritWs", 1)
-                    player:PrintToPlayer("Arturo: I've deducted your allied notes and progressed you to the next step.\nTalk to me again for next steps.", 0xD)
+                    player:PrintToPlayer("Atori-Tutori: I've deducted your allied notes and progressed you to the next step.\nTalk to me again for next steps.", 0xD)
                 elseif (npcUtil.tradeHasExactly(trade, {{ 'gil', 3 }}) and (player:getCurrency("allied_notes") < pointsCost)) then
-                    player:PrintToPlayer("Arturo: You will need more allied notes before you do that.", 0xD)
+                    player:PrintToPlayer("Atori-Tutori: You will need more allied notes before you do that.", 0xD)
         	end
         		
         end,
@@ -346,18 +346,18 @@ zone_object.onInitialize = function(zone)
         
             -- if we've deducted the player's points, move to phase two (trade items)
         	if player:getCharVar("PaidForMeritWs") == 1 then
-                player:PrintToPlayer(string.format("Arturo: Phase two: Please bring the the requisite items for the aeonic weaponskill you'd like to unlock."), 0xD)
-                player:PrintToPlayer("Arturo: You'll need to have the corresponding mythic weaponskill unlocked first! Check the wiki!", 0xD)
-                player:PrintToPlayer("Arturo: Trade me the fixed amount of gil below, and I'll tell you which upgrade items are necessary...", 0xD)
+                player:PrintToPlayer(string.format("Atori-Tutori: Phase two: Please bring the the requisite items for the aeonic weaponskill you'd like to unlock."), 0xD)
+                player:PrintToPlayer("Atori-Tutori: You'll need to have the corresponding mythic weaponskill unlocked first! Check the wiki!", 0xD)
+                player:PrintToPlayer("Atori-Tutori: Trade me the fixed amount of gil below, and I'll tell you which upgrade items are necessary...", 0xD)
                 player:PrintToPlayer("Shijin Spiral: 30 gil, Exenterator: 31 gil, Requiescat: 32 gil, Resolution: 33 gil, Ruinator: 34 gil, Upheaval: 35 gil", 28)
                 player:PrintToPlayer("Entropy: 36 gil, Stardiver: 37 gil, Blade Shun: 38 gil, Tachi: Shoha: 39 gil, Realmrazer: 40 gil, Shattersoul: 41 gil", 28)
                 player:PrintToPlayer("Apex Arrow: 42 gil, Last Stand: 43 gil", 28)
         		return
         	else
         	    -- standard dialog
-                player:PrintToPlayer("Arturo: Up for a challenge? How about a new weaponskill?", 0xD)
-                player:PrintToPlayer("Arturo: First, you'll need 300,000 conquest points, imperial standing, or allied notes.", 0xD)
-                player:PrintToPlayer("Arturo: You will also need a Mythic Weapon Skill unlocked but we can talk about that later...", 0xD)
+                player:PrintToPlayer("Atori-Tutori: Up for a challenge? How about a new weaponskill?", 0xD)
+                player:PrintToPlayer("Atori-Tutori: First, you'll need 300,000 conquest points, imperial standing, or allied notes.", 0xD)
+                player:PrintToPlayer("Atori-Tutori: You will also need a Mythic Weapon Skill unlocked but we can talk about that later...", 0xD)
         	end
         
             -- find out which nation player belongs to and use those conquest points
@@ -375,10 +375,10 @@ zone_object.onInitialize = function(zone)
         
             -- if player has enough points to spend, print the number of points held, and present the player with the next step.
             if (nationCp < pointsRequired and imperialStanding < pointsRequired and alliedNotes < pointsRequired) then
-                player:PrintToPlayer(string.format("Arturo: Return to me when you have atleast 300,000 conquest points, imperial standing or allied notes.", nationCp, imperialStanding, alliedNotes), 0xD)
+                player:PrintToPlayer(string.format("Atori-Tutori: Return to me when you have atleast 300,000 conquest points, imperial standing or allied notes.", nationCp, imperialStanding, alliedNotes), 0xD)
         	else
-        	    player:PrintToPlayer(string.format("Arturo: You've got %i conquest points, %i imperial standing and %i allied notes.", nationCp, imperialStanding, alliedNotes), 0xD)
-        		player:PrintToPlayer(string.format("Arturo: Trade 1g to use your conquest points, 2g to use your imperial standing, or 3g to use your allied notes."), 0xD)
+        	    player:PrintToPlayer(string.format("Atori-Tutori: You've got %i conquest points, %i imperial standing and %i allied notes.", nationCp, imperialStanding, alliedNotes), 0xD)
+        		player:PrintToPlayer(string.format("Atori-Tutori: Trade 1g to use your conquest points, 2g to use your imperial standing, or 3g to use your allied notes."), 0xD)
         	end		
         end,
     })

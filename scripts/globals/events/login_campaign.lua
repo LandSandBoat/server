@@ -14,9 +14,9 @@ xi.events.loginCampaign = xi.events.loginCampaign or {}
 -- Change vars below to modify settings for current login campaign
 -- NOTE: the year and month values are used in the Moogle's Event!
 local loginCampaignYear = 2022
-local loginCampaignMonth = 3
-local loginCampaignDay = 4
-local loginCampaignDuration = 28 -- Duration is set in Earth days (Average is 23 days)
+local loginCampaignMonth = 4
+local loginCampaignDay = 1
+local loginCampaignDuration = 30 -- Duration is set in Earth days (Average is 23 days)
 
 -- Checks if a Login Campaign is active.
 xi.events.loginCampaign.isCampaignActive = function()
@@ -56,9 +56,9 @@ xi.events.loginCampaign.onGameIn = function(player)
 
     -- Carry last months points if there's any
     if playercMonth ~= loginCampaignMonth or playercYear ~= loginCampaignYear then
-        if loginPoints > 99999 then
-            player:setCurrency("login_points", 99999)
-            player:messageSpecial(ID.text.CARRIED_OVER_POINTS, 0, 99999)
+        if loginPoints > 1500 then
+            player:setCurrency("login_points", 1500)
+            player:messageSpecial(ID.text.CARRIED_OVER_POINTS, 0, 1500)
         elseif loginPoints ~= 0 then
             player:messageSpecial(ID.text.CARRIED_OVER_POINTS, 0, loginPoints)
         end

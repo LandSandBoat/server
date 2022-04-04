@@ -38,14 +38,6 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     params.atk100 = 0.85; params.atk200 = 0.85; params.atk300 = 0.85
     params.multiHitfTP = true
 
-    -- check to see if player has the unlock charvar for this, if not, do no damage.
-    local hasMeritWsUnlock = player:getCharVar("hasMeritWsUnlock")
-
-    if hasMeritWsUnlock ~= 1 then
-        player:PrintToPlayer("You don't have this WS unlocked.")
-        return
-    end
-
     if (xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then
         params.ftp100 = 0.71875 params.ftp200 = 1.5 params.ftp300 = 2.25
         params.str_wsc = 0.7 + (player:getMerit(xi.merit.RESOLUTION) * 0.03)
