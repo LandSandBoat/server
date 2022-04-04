@@ -29,7 +29,6 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include <bitset>
 #include <deque>
 #include <map>
-#include <mutex>
 #include <unordered_map>
 
 #include "battleentity.h"
@@ -496,8 +495,6 @@ private:
     bool m_reloadParty;
 
     PacketList_t PacketList; // the list of packets to be sent to the character during the next network cycle
-
-    std::mutex m_PacketListMutex;
 };
 
 #endif

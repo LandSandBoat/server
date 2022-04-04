@@ -4447,7 +4447,7 @@ void SmallPacket0x083(map_session_data_t* const PSession, CCharEntity* const PCh
 
     if ((gil != nullptr) && gil->isType(ITEM_CURRENCY))
     {
-        if (gil->getQuantity() > (price * quantity))
+        if (gil->getQuantity() >= (price * quantity))
         {
             uint8 SlotID = charutils::AddItem(PChar, LOC_INVENTORY, itemID, quantity);
 
@@ -5038,16 +5038,27 @@ void SmallPacket0x0B5(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x0B6(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
+
     if (jailutils::InPrison(PChar))
     {
         PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, 316));
         return;
     }
+
     string_t RecipientName = string_t((const char*)data[6], 15);
+
+    if (strcmp(RecipientName.c_str(), "_CUSTOM_MENU") == 0 &&
+        luautils::HasCustomMenuContext(PChar))
+    {
+        std::string selection((const char*)data[21]);
+        luautils::HandleCustomMenu(PChar, selection);
+        return;
+    }
 
     int8 packetData[64];
     strncpy((char*)packetData + 4, RecipientName.c_str(), RecipientName.length() + 1);
     ref<uint32>(packetData, 0) = PChar->id;
+
     message::send(MSG_CHAT_TELL, packetData, RecipientName.length() + 5, new CChatMessagePacket(PChar, MESSAGE_TELL, (const char*)data[21]));
 
     if (map_config.audit_chat == 1 && map_config.audit_tell == 1)
