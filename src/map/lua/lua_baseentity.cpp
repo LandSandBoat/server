@@ -12255,9 +12255,9 @@ uint32 CLuaBaseEntity::getMobFlags()
 
 /************************************************************************
  *  Function: setPetFlags()
- *  Purpose : Manually set Pet flags
+ *  Purpose : Manually set Pets entityflags
  *  Example : player:setPetFlags(flags)
- *  Notes   :
+ *  Notes   : This overwirtes the whole flag (use at your own risk!)
  ************************************************************************/
 
 void CLuaBaseEntity::setPetFlags(uint32 flags)
@@ -12276,7 +12276,7 @@ void CLuaBaseEntity::setPetFlags(uint32 flags)
 
 /************************************************************************
  *  Function: getPetFlags()
- *  Purpose : Get Mob flags
+ *  Purpose : Gets a pets entityflags
  *  Example : player:getPetFlags()
  *  Notes   :
  ************************************************************************/

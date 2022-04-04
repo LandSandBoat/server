@@ -76,12 +76,11 @@ xi.job_utils.geomancer.spawnLuopan = function(player, target, modelID, tickEffec
     -- on top of a base model ID in core.
     luopan:setModelId(modelID)
 
-    -- Size is effected by EntityFlags
+    -- Size is effected by EntityFlags (Note this is a bad way to do this and will be changed once entity flags are refactored)
     player:setPetFlags(luopanSize)
 
     -- Set HP loss over time
     luopan:addMod(xi.mod.REGEN_DOWN, luopan:getMainLvl() / 4)
-    printf("\nluopan hp tick: %i", luopan:getMainLvl() / 4)
 
     -- Innate Damage Taken -50%
     luopan:addMod(xi.mod.DMG, -5000)
