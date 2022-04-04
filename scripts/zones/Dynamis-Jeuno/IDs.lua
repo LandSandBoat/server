@@ -60,6 +60,127 @@ zones[xi.zone.DYNAMIS_JEUNO] =
                 {mob = 17547458, eye = dynamis.eye.GREEN},
             },
         },
+        -- https://www.dropbox.com/s/p3zpuq93bs2vw90/Dynamis%20Jeuno%20IDs%20Groups%20Mechanics.zip?dl=0
+        REFILL_MOB_GROUP =
+        {
+            {mob = {17547304, 17547305}}, -- WAR or THF
+            {mob = 17547306}, -- RNG
+            {mob = {17547307, 17547308}}, -- PLD or WHM
+            {mob = 17547309}, -- THF
+            {mob = 17547310}, -- RDM
+            {mob = {17547383, 17547384}}, -- SAM or NIN
+            {mob = {17547385, 17547386}}, -- WHM or BRD
+            {mob = {17547375, 17547376}}, -- MNK or DRK
+            {mob = 17547379}, -- WAR
+            {mob = 17547380}, -- WHM
+            {mob = {17547270, 17547271}}, -- BLM or RDM
+            {mob = 17547272}, -- BST
+            {mob = 17547371}, -- PLD
+            {mob = {17547372, 17547373}}, -- BLM or SMN
+            {mob = {17547367, 17547368}}, -- SAM or NIN
+            {mob = 17547369}, -- BST
+            {mob = {17547363, 17547364}}, -- WAR or PLD
+            {mob = 17547365}, -- BST
+            {mob = {17547360, 17547362}}, -- THF or RNG
+            {mob = 17547361}, -- DRK
+            {mob = 17547357}, -- WAR
+            {mob = {17547358, 17547359}}, -- BLM or BRD
+            {mob = 17547350}, -- MNK
+            {mob = {17547351, 17547352}}, -- WHM or DRK
+            {mob = {17547353, 17547354}}, -- PLD or NIN
+            {mob = 17547346}, -- RNG
+            {mob = {17547347, 17547348}}, -- RNG or BST
+            {mob = 17547343}, -- MNK
+            {mob = {17547344, 17547345}}, -- RDM or BRD
+            {mob = {17547339, 17547340}}, -- THF or RNG
+            {mob = 17547341}, -- BST
+            {mob = {17547334, 17547336}}, -- WHM or RDM
+            {mob = 17547335}, -- BLM
+            {mob = {17547330, 17547331}}, -- SAM or BRD
+            {mob = {17547325, 17547326}}, -- THF or BRD
+            {mob = {17547332, 17547327}}, -- DRG or SMN
+            {mob = {17547319, 17547321}}, -- WHM or RDM
+            {mob = 17547320}, -- BLM
+            {mob = {17547314, 17547315, 17547316}}, -- WAR or MNK or SAM
+            {mob = 17547317}, -- SMN
+            {mob = {17547285, 17547288}}, -- RNG or SAM
+            {mob = 17547286}, -- SMN
+            {mob = {17547289, 17547290}}, -- PLD or NIN
+            {mob = 17547274}, -- DRK
+            {mob = {17547275, 17547276}}, -- PLD or NIN
+            {mob = 17547278}, -- MNK
+            {mob = {17547279, 17547280}}, -- WHM or BRD
+            {mob = {17547292, 17547293}}, -- PLD or NIN
+            {mob = {17547281, 17547282}}, -- DRK or DRG
+            {mob = 17547284}, -- RDM
+            {mob = {17547398, 17547400}}, -- WAR or THF
+            {mob = 17547399}, -- MNK
+            {mob = 17547401}, -- WHM
+            {mob = {17547403, 17547404}}, -- WAR or MNK
+            {mob = 17547405}, -- THF
+            {mob = 17547406}, -- BLM
+            {mob = {17547408, 17547409}}, -- WAR or MNK
+            {mob = {17547414, 17547415}}, -- WAR or MNK
+            {mob = {17547416, 17547417}}, -- WHM or BLM
+            {mob = {17547418, 17547419}}, -- RDM or THF
+            {mob = 17547410}, -- THF
+            {mob = {17547411, 17547412, 17547413}}, -- RDM or WHM or BLM
+            {mob = 17547425}, -- DRK
+            {mob = {17547426, 17547428}}, -- DRG or BST
+            {mob = 17547430}, -- BRD
+            {mob = 17547431}, -- SAM
+            {mob = 17547432}, -- PLD
+            {mob = 17547433}, -- BRD
+            {mob = 17547436}, -- SMN
+            {mob = {17547435, 17547434}}, -- SAM or DRK
+            {mob = {17547441, 17547442}}, -- DRK or SAM
+            {mob = 17547443}, -- SMN
+            {mob = 17547445}, -- BRD
+            {mob = 17547446}, -- SAM
+            {mob = 17547447}, -- PLD
+            {mob = 17547448}, -- BRD
+            {mob = 17547449}, -- DRK
+            {mob = {17547450, 17547452}}, -- BST or DRG
+            {mob = 17547459}, -- RNG
+            {mob = 17547460}, -- NIN
+            {mob = 17547461}, -- RNG
+            {mob = 17547462}, -- NIN
+            {mob = 17547463}, -- RNG
+            {mob = 17547464}, -- NIN
+            {mob = 17547465}, -- RNG
+            {mob = 17547466}, -- NIN
+            {mob = {17547469, 17547470, 17547471}}, -- WAR or MNK or THF
+            {mob = {17547475, 17547476, 17547477}}, -- WHM or BLM or RDM
+            {mob = {17547481, 17547482, 17547483}}, -- PLD or DRK or BST
+            {mob = 17547489}, -- RNG
+            {mob = 17547491}, -- NIN
+            {mob = {17547377, 17547381, 17547387, 17547378, 17547382, 17547388}}, -- Buffrix Eargone or Humnox Drumbelly
+            {mob = {17547298, 17547299, 17547300}}, -- Smeltix Thickhide or Jabkix Pigeonpecs or Wasabix Callusdigit
+            {mob = {17547322, 17547337}}, -- Morgmox Moldnoggin
+            {mob = {17547324, 17547329}}, -- Sparkpox Sweatbrow
+            {mob = {17547394, 17547395, 17547396}}, -- Ticktox Beadeyes or Lurklox Dhalmelneck or Trailblix Goatmug
+            {mob = {17547355, 17547356}}, -- Elixmix Hooknose or Bandrix Rockjaw
+            {mob = {17547402, 17547407}}, -- Kikklix Longslegs
+            {mob = {17547424, 17547440}}, -- Karashix Swollenskull
+        },
+        HERMITRIX_TOOTHROT_PH      = {[17547310] = 17547311}, -- Vanguard_Enchanter
+        GABBLOX_MAGPIETONGUE_PH    = {[17547275] = 17547277}, -- Vanguard_Armorer
+        TUFFIX_LOGLIMBS_PH         = {[17547289] = 17547291}, -- Vanguard_Armorer
+        CLOKTIX_LONGNAIL_PH        = {[17547292] = 17547294}, -- Vanguard_Armorer
+        WYRMWIX_SNAKESPECS_PH      = {[17547321] = 17547312}, -- Vanguard_Enchanter
+        RUTRIX_HAMGAMS_PH          = {[17547452] = 17547454}, -- Vanguard_Dragontamer
+        MORTILOX_WARTPAWS_PH       = {[17547443] = 17547438}, -- Vanguard_Necromancer
+        SLYSTIX_MEGAPEEPERS_PH     = {[17547491] = 17547492}, -- Vanguard_Hitman
+        PROWLOX_BARRELBELLY_PH     = {[17547489] = 17547490}, -- Vanguard_Ambusher
+        SCRUFFIX_SHAGGYCHEST_PH    = {[17547481] = 17547485}, -- Vanguard_Armorer
+        TYMEXOX_NINEFINGERS_PH     = {[17547482] = 17547486}, -- Vanguard_Tinkerer
+        BLAZOX_BONEYBOD_PH         = {[17547483] = 17547487}, -- Vanguard_Pathfinder
+        ANVILIX_SOOTWRISTS_PH      = {[17547469] = 17547472}, -- Vanguard_Smithy
+        BOOTRIX_JAGGEDELBOW_PH     = {[17547470] = 17547473}, -- Vanguard_Pitfighter
+        MOBPIX_MUCOUSMOUTH_PH      = {[17547471] = 17547474}, -- Vanguard_Welldigger
+        DISTILIX_STICKYTOES_PH     = {[17547475] = 17547478}, -- Vanguard_Alchemist
+        EREMIX_SNOTTYNOSTRIL_PH    = {[17547476] = 17547479}, -- Vanguard_Shaman
+        JABBROX_GRANNYGUISE_PH     = {[17547477] = 17547480}, -- Vanguard_Enchanter
     },
     npc =
     {

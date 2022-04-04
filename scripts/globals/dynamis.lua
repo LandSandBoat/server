@@ -392,6 +392,7 @@ dynamis.zoneOnInitialize = function(zone)
     local ID = zones[zoneId]
     local TE = ID.mob.TIME_EXTENSION
     local RF = ID.mob.REFILL_STATUE
+    local RFMG = ID.mob.REFILL_MOB_GROUP
 
     -- spawn one of each grouped TEs
     if TE then
@@ -418,6 +419,21 @@ dynamis.zoneOnInitialize = function(zone)
             local spawnId = group[math.random(#group)]
             DisallowRespawn(spawnId, false)
             SpawnMob(spawnId)
+        end
+    end
+
+    -- spawn one of each grouped mob
+    if RFMG then
+        for _, y in pairs(RFMG) do
+            local group = {}
+            if type(y.mob) == "number" then
+                group = {y.mob}
+            elseif type(y.mob) == "table" then
+                group = {unpack(y.mob)}
+            end
+            local mobGId = group[math.random(#group)]
+            DisallowRespawn(mobGId, false)
+            SpawnMob(mobGId)
         end
     end
 end
@@ -645,6 +661,56 @@ dynamis.refillStatueOnDeath = function(mob, player, isKiller)
         end
     else
         printf("[dynamis.refillStatueOnDeath] called on mob %i in zone %i that does not have a REFILL_STATUE table in its IDs.", mobId, zoneId)
+    end
+end
+
+dynamis.refillMobGroupOnDeath = function(mob, player, isKiller, mobSpawnTime)
+    local mobId = mob:getID()
+    local zoneId = mob:getZoneID()
+    local ID = zones[zoneId]
+    local RFMG = ID.mob.REFILL_MOB_GROUP
+
+    if RFMG then
+        local found = false
+        local group = {}
+
+        -- find this monster group
+        for _, g in pairs(RFMG) do
+            group = {}
+
+            if type(g.mob) == "number" then
+                group = {g.mob}
+            elseif type(g.mob) == "table" then
+                group = {unpack(g.mob)}
+            end
+
+            for _, m in pairs(group) do
+                if m == mobId then
+                    found = true
+                    break
+                end
+            end
+
+            if found then
+                break
+            end
+        end
+
+        if found then
+            if isKiller then
+                -- spawn a new mob in this group
+                local nextId = group[math.random(#group)]
+                if nextId ~= mobId then
+                    DisallowRespawn(mobId, true)
+                    DisallowRespawn(nextId, false)
+                end
+                GetMobByID(nextId):setRespawnTime(mobSpawnTime)
+            end
+        else
+            printf("[dynamis.refillMobGroupOnDeath] called in zone %i on mob %i that does not appear in a refill mob group.", zoneId, mobId)
+        end
+    else
+        printf("[dynamis.refillMobGroupOnDeath] called on mob %i in zone %i that does not have a REGILL_MOB_GROUP table in its IDs.", mobId, zoneId)
     end
 end
 
