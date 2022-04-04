@@ -55,12 +55,7 @@ xi.job_utils.geomancer.spawnLuopan = function(player, target, modelID, tickEffec
     end
 
     local luopan = player:getPet()
-    local luopanSize = 2
     local targetPos = target:getPos()
-
-    if player:hasStatusEffect(xi.effect.WIDENED_COMPASS) then
-        luopanSize = 4
-    end
 
     -- Set the luopans pos to the same as the targets pos.
     luopan:setPos(targetPos.x, targetPos.y, targetPos.z, 0)
@@ -75,9 +70,6 @@ xi.job_utils.geomancer.spawnLuopan = function(player, target, modelID, tickEffec
     -- TODO: This is should be the element of the spell being cast added as an offset
     -- on top of a base model ID in core.
     luopan:setModelId(modelID)
-
-    -- Size is effected by EntityFlags (Note this is a bad way to do this and will be changed once entity flags are refactored)
-    player:setPetFlags(luopanSize)
 
     -- Set HP loss over time
     luopan:addMod(xi.mod.REGEN_DOWN, luopan:getMainLvl() / 4)

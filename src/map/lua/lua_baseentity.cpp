@@ -12254,48 +12254,6 @@ uint32 CLuaBaseEntity::getMobFlags()
 }
 
 /************************************************************************
- *  Function: setPetFlags()
- *  Purpose : Manually set Pets entityflags
- *  Example : player:setPetFlags(flags)
- *  Notes   : This overwirtes the whole flag (use at your own risk!)
- ************************************************************************/
-
-void CLuaBaseEntity::setPetFlags(uint32 flags)
-{
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-
-    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
-    auto* PPet = static_cast<CPetEntity*>(PChar->PPet);
-
-    if (PPet != nullptr)
-    {
-        PPet->setEntityFlags(flags);
-        PPet->updatemask |= UPDATE_HP;
-    }
-}
-
-/************************************************************************
- *  Function: getPetFlags()
- *  Purpose : Gets a pets entityflags
- *  Example : player:getPetFlags()
- *  Notes   :
- ************************************************************************/
-uint32 CLuaBaseEntity::getPetFlags()
-{
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-
-    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
-    auto* PPet = static_cast<CPetEntity*>(PChar->PPet);
-
-    if (PPet != nullptr)
-    {
-        return PPet->getEntityFlags();
-    }
-
-    return 0;
-}
-
-/************************************************************************
  *  Function: spawn()
  *  Purpose : Forces a mob to spawn with optional Despawn/Respawn values
  *  Example : mob:spawn(60,3600); mob:spawn()
@@ -14072,8 +14030,6 @@ void CLuaBaseEntity::Register()
     // Pets and Automations
     SOL_REGISTER("spawnPet", CLuaBaseEntity::spawnPet);
     SOL_REGISTER("despawnPet", CLuaBaseEntity::despawnPet);
-    SOL_REGISTER("setPetFlags", CLuaBaseEntity::setPetFlags);
-    SOL_REGISTER("getPetFlags", CLuaBaseEntity::getPetFlags);
 
     SOL_REGISTER("isJugPet", CLuaBaseEntity::isJugPet);
     SOL_REGISTER("hasValidJugPetItem", CLuaBaseEntity::hasValidJugPetItem);

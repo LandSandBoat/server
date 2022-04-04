@@ -660,8 +660,6 @@ public:
     // Pets and Automations
     void spawnPet(sol::object const& arg0); // Calls Pet
     void despawnPet();                      // Despawns Pet
-    void setPetFlags(uint32 flags);
-    uint32 getPetFlags();
 
     auto   spawnTrust(uint16 trustId) -> std::optional<CLuaBaseEntity>;
     void   clearTrusts();

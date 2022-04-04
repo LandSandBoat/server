@@ -50,9 +50,6 @@ public:
     CPetEntity(PET_TYPE petType); // конструктор
     ~CPetEntity();               // деструктор
 
-    uint32 getEntityFlags() const;             // Returns the current value in m_flags
-    void   setEntityFlags(uint32 EntityFlags); // Change the current value in m_flags
-
     PET_TYPE    getPetType();
     bool        isBstPet();
     uint8       m_Element;
