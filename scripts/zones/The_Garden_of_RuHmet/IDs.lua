@@ -10,21 +10,21 @@ zones[xi.zone.THE_GARDEN_OF_RUHMET] =
 {
     text =
     {
-        ITEM_CANNOT_BE_OBTAINED = 6383, -- You cannot obtain the <item>. Come back after sorting your inventory.
-        ITEM_OBTAINED           = 6389, -- Obtained: <item>.
-        GIL_OBTAINED            = 6390, -- Obtained <number> gil.
-        KEYITEM_OBTAINED        = 6392, -- Obtained key item: <keyitem>.
-        CARRIED_OVER_POINTS     = 7000, -- You have carried over <number> login point[/s].
-        LOGIN_CAMPAIGN_UNDERWAY = 7001, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
-        LOGIN_NUMBER            = 7002, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
-        CONQUEST_BASE           = 7446, -- Tallying conquest results...
-        NO_NEED_INVESTIGATE     = 7625, -- There is no need to investigate further.
-        PORTAL_SEALED           = 7654, -- The portal is firmly sealed by a mysterious energy.
-        UNKNOWN_PRESENCE        = 7762, -- You sense some unknown presence...
-        NONE_HOSTILE            = 7763, -- You sense some unknown presence, but it does not seem hostile.
-        MENACING_CREATURES      = 7764, -- Menacing creatures appear out of nowhere!
-        SHEER_ANIMOSITY         = 7765, -- <name> is enveloped in sheer animosity!
-        HOMEPOINT_SET           = 7770, -- Home point set!
+        ITEM_CANNOT_BE_OBTAINED = 6384, -- You cannot obtain the <item>. Come back after sorting your inventory.
+        ITEM_OBTAINED           = 6390, -- Obtained: <item>.
+        GIL_OBTAINED            = 6391, -- Obtained <number> gil.
+        KEYITEM_OBTAINED        = 6393, -- Obtained key item: <keyitem>.
+        CARRIED_OVER_POINTS     = 7001, -- You have carried over <number> login point[/s].
+        LOGIN_CAMPAIGN_UNDERWAY = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
+        LOGIN_NUMBER            = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
+        CONQUEST_BASE           = 7447, -- Tallying conquest results...
+        NO_NEED_INVESTIGATE     = 7626, -- There is no need to investigate further.
+        PORTAL_SEALED           = 7655, -- The portal is firmly sealed by a mysterious energy.
+        UNKNOWN_PRESENCE        = 7763, -- You sense some unknown presence...
+        NONE_HOSTILE            = 7764, -- You sense some unknown presence, but it does not seem hostile.
+        MENACING_CREATURES      = 7765, -- Menacing creatures appear out of nowhere!
+        SHEER_ANIMOSITY         = 7766, -- <name> is enveloped in sheer animosity!
+        HOMEPOINT_SET           = 7771, -- Home point set!
     },
     mob =
     {
