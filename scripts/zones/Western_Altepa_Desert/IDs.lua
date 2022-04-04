@@ -77,19 +77,19 @@ zones[xi.zone.WESTERN_ALTEPA_DESERT] =
     },
     npc =
     {
-        CASKET_BASE       = 17289722,
-        ALTEPA_GATE       = 17289746,
-        PEDDLESTOX        = 17289771,
+        CASKET_BASE       = 17289723,
+        ALTEPA_GATE       = 17289747,
+        PEDDLESTOX        = 17289772,
         BEASTMEN_TREASURE =
         {
-            17289774, -- qm3
-            17289775, -- qm4
-            17289776, -- qm5
-            17289777, -- qm6
-            17289778, -- qm7
-            17289779, -- qm8
-            17289780, -- qm9
-            17289781, -- qm10
+            17289775, -- qm3
+            17289776, -- qm4
+            17289777, -- qm5
+            17289778, -- qm6
+            17289779, -- qm7
+            17289780, -- qm8
+            17289781, -- qm9
+            17289782, -- qm10
         },
     },
 }
