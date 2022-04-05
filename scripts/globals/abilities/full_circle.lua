@@ -22,13 +22,24 @@ ability_object.onUseAbility = function(player, target, ability)
     local luopan        = player:getPet()
     local hpp_remaining = luopan:getHPP()
     local mp_cost       = luopan:getLocalVar("MP_COST")
-    local fcMerit       = player:getMerit(xi.merit.FULL_CIRCLE_EFFECT)
-    local mp_returned   = ((0.5 + (fcMerit /100)) *mp_cost) *hpp_remaining / 100
-    local crMerit       = player:getMerit(xi.merit.CURATIVE_RECANTATION)
+    local fc_merit      = player:getMerit(xi.merit.FULL_CIRCLE_EFFECT)
+    local cr_merit      = player:getMerit(xi.merit.CURATIVE_RECANTATION)
+    local fc_mod        = player:getMod(xi.mod.FULL_CIRCLE)
+    local cr_mod        = player:getMod(xi.mod.CURATIVE_RECANTATION)
+    local mp_multiplier = 0.5 + (fc_merit / 10) + (fc_mod / 10)
+    local hp_multiplier = 0.5 + (0.7 * cr_merit) + (cr_mod / 10)
+    local mp_returned   = 0
+    local hp_returned   = 0
 
-    if crMerit > 0 then
-       player:restoreHP((1.2 *(mp_cost *crMerit) *(hpp_remaining /100)))
+    -- calculate final mp value
+    mp_returned = math.floor((mp_multiplier * mp_cost) * (hpp_remaining / 100))
+
+    if cr_merit > 0 then
+        -- calculate final hp value
+        hp_returned = math.floor((hp_multiplier * mp_cost) * (hpp_remaining /100))
+        player:restoreHP(hp_returned)
     end
+
     player:restoreMP(mp_returned)
     target:despawnPet()
 end
