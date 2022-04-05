@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -1126,7 +1126,9 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_regions)
 
     for (EntityList_t::const_iterator it = m_petList.begin(); it != m_petList.end(); ++it)
     {
-        if (auto* PPet = dynamic_cast<CPetEntity*>(it->second))
+        // TODO: This static cast includes Battlefield Allies. Allies shouldn't be handled here in
+        //     : this way, but we need to do this to keep allies working (for now).
+        if (auto* PPet = static_cast<CPetEntity*>(it->second))
         {
             PPet->PRecastContainer->Check();
             PPet->StatusEffectContainer->CheckEffectsExpiry(tick);
@@ -1144,7 +1146,9 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_regions)
     EntityList_t::const_iterator pit = m_petList.begin();
     while (pit != m_petList.end())
     {
-        if (auto* PPet = dynamic_cast<CPetEntity*>(pit->second))
+        // TODO: This static cast includes Battlefield Allies. Allies shouldn't be handled here in
+        //     : this way, but we need to do this to keep allies working (for now).
+        if (auto* PPet = static_cast<CPetEntity*>(pit->second))
         {
             if (PPet->status == STATUS_TYPE::DISAPPEAR)
             {
