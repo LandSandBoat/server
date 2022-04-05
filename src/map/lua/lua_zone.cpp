@@ -188,7 +188,12 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
     //       on despawn/destruction
     // TODO: The tracking of these IDs is pretty bad also, fix that in zone_entities
     PEntity->targid = m_pLuaZone->GetZoneEntities()->GetNewDynamicTargID();
-    PEntity->id     = 0x1000000 + (ZoneID << 12) + PEntity->targid;
+    if (PEntity->targid >= 0x900)
+    {
+        ShowError("CLuaZone::insertDynamicEntity : targid is high (03hX), update packets will be ignored", PEntity->targid);
+    }
+
+    PEntity->id = 0x1000000 + (ZoneID << 12) + PEntity->targid;
 
     PEntity->loc.zone       = m_pLuaZone;
     PEntity->loc.p.rotation = table.get_or<uint8>("rotation", 0);

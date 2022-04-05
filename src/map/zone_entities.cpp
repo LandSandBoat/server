@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -56,9 +56,10 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "utils/zoneutils.h"
 
 CZoneEntities::CZoneEntities(CZone* zone)
+: m_zone(zone)
+, m_Transport(nullptr)
+, m_DynamicTargIDCount(0)
 {
-    m_zone      = zone;
-    m_Transport = nullptr;
 }
 
 CZoneEntities::~CZoneEntities() = default;
@@ -434,6 +435,7 @@ void CZoneEntities::DecreaseZoneCounter(CCharEntity* PChar)
 
 uint16 CZoneEntities::GetNewCharTargID()
 {
+    // NOTE: 0x0D (char_update) entity updates are valid for 1024 to 1791
     uint16 targid = 0x400;
     for (EntityList_t::const_iterator it = m_charList.begin(); it != m_charList.end(); ++it)
     {
@@ -448,9 +450,11 @@ uint16 CZoneEntities::GetNewCharTargID()
 
 uint16 CZoneEntities::GetNewDynamicTargID()
 {
-    // TODO: Don't use static
-    static uint16 targid = 0x800; // 2048
-    return targid++;
+    // NOTE: 0x0E (entity_update) entity updates are valid for 0 to 1023 and 1792 to 2303
+    // TODO: As in GetNewCharTargID, we should be searching in the valid range for IDs
+    //     : that aren't used yet, and releasing them when we're done.
+    uint16 offset = m_DynamicTargIDCount++;
+    return 0x800 + offset;
 }
 
 bool CZoneEntities::CharListEmpty() const
