@@ -2425,8 +2425,7 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        // TODO: This shouldn't be global, attach to xi.gear_sets or similar
-        auto checkForGearSet = lua["checkForGearSet"];
+        auto checkForGearSet = lua["xi"]["gear_sets"]["checkForGearSet"];
         if (!checkForGearSet.valid())
         {
             return 56;

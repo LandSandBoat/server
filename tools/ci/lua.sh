@@ -70,8 +70,6 @@ global_objects=(
     Container
     Event
 
-    checkForGearSet
-
     removeSleepEffects
 
     SANDORIA
