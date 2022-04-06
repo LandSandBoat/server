@@ -882,7 +882,7 @@ enum class Mod
     // 888
     // 936
     //
-    // SPARE = 1025, and onward
+    // SPARE = 1026, and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it
