@@ -3062,8 +3062,7 @@ namespace luautils
         CCharEntity* PChar = dynamic_cast<CCharEntity*>(PKiller);
         if (PChar && PMob->objtype == TYPE_MOB)
         {
-            // TODO: Don't save this globally
-            auto onMobDeathEx = lua["onMobDeathEx"];
+            auto onMobDeathEx = lua["xi"]["mob"]["onMobDeathEx"];
             if (!onMobDeathEx.valid())
             {
                 return -1;
