@@ -1,5 +1,5 @@
 -----------------------------------
--- Unlocking a Myth (All Jobs)
+-- Unlocking a Myth (Most Jobs)
 -- Zalsuhm
 -- !pos -33 6 -117
 -----------------------------------
@@ -10,22 +10,23 @@ require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/weaponskillids")
--- require("scripts/globals/utils/nyzul")
+require("scripts/globals/nyzul")
 -----------------------------------
 
 quest = quest or {}
 quest.unlockingMyth = quest.unlockingMyth or {}
 
+-- There are several "Unlocking a Myth" quests. 1 per job, except GEO and RUN.
+-- Possible TODO: This was not made with GEO and RUN in mind. Clamp may be needed.
 function quest.unlockingMyth.getQuestId(mainJobId)
-
     return (UNLOCKING_A_MYTH_WARRIOR - 1 + mainJobId)
-
 end
 
 function quest.unlockingMyth.onTrade(player, npc, trade)
     for jobID, wepId in pairs(nyzul.baseWeapons) do
         if npcUtil.tradeHasExactly(trade, wepId) then
             local unlockingAMyth = player:getQuestStatus(JEUNO, quest.unlockingMyth.getQuestId(jobID))
+
             if unlockingAMyth == QUEST_ACCEPTED then
                 local wsPoints = trade:getItem(0):getWeaponskillPoints()
 
@@ -48,9 +49,9 @@ function quest.unlockingMyth.onTrade(player, npc, trade)
 end
 
 function quest.unlockingMyth.onTrigger(player, npc)
-    local mainJobId = player:getMainJob()
-    local unlockingAMyth = player:getQuestStatus(JEUNO, quest.unlockingMyth.getQuestId(mainJobId))
-    local nyzulWeaponMain = xi.nyzul.isBaseWeapon(player:getEquipID(xi.slot.MAIN))
+    local mainJobId         = player:getMainJob()
+    local unlockingAMyth    = player:getQuestStatus(JEUNO, quest.unlockingMyth.getQuestId(mainJobId))
+    local nyzulWeaponMain   = xi.nyzul.isBaseWeapon(player:getEquipID(xi.slot.MAIN))
     local nyzulWeaponRanged = xi.nyzul.isBaseWeapon(player:getEquipID(xi.slot.RANGED))
 
     if unlockingAMyth == QUEST_AVAILABLE then
@@ -76,11 +77,12 @@ end
 
 function quest.unlockingMyth.onEventFinish(player, csid, option)
     local questId = quest.unlockingMyth.getQuestId(option)
+
     if csid == 10086 then
         if option == 53 then
             player:setVar("Quest[3][102]Prog", 1)
             player:needToZone(true)
-        elseif option <= xi.job.SCH then
+        elseif option <= xi.job.SCH then -- Possible TODO: check comment at the top about GEO and RUN.
             player:addQuest(JEUNO, questId)
         end
     elseif csid == 10088 and option <= xi.job.SCH then
