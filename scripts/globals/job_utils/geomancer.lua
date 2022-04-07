@@ -5,6 +5,7 @@ require("scripts/settings/main")
 require("scripts/globals/ability")
 require("scripts/globals/status")
 require("scripts/globals/msg")
+require("scripts/globals/pets")
 require("scripts/globals/weaponskills")
 require("scripts/globals/jobpoints")
 -----------------------------------
@@ -13,8 +14,15 @@ xi.job_utils = xi.job_utils or {}
 xi.job_utils.geomancer = xi.job_utils.geomancer or {}
 -----------------------------------
 
+xi.job_utils.geomancer.geoOnAbilityCheck = function(player, target, ability)
+    if player:getPetID() == xi.pet.id.LUOPAN then
+        return 0,0
+    end
+    return xi.msg.basic.REQUIRE_LUOPAN, 0
+end
+
 xi.job_utils.geomancer.geoOnMagicCastingCheck = function(caster, target, spell)
-    if caster:getPet() ~= nil then
+    if caster:getPetID() == xi.pet.id.LUOPAN then
         return xi.msg.basic.LUOPAN_ALREADY_PLACED
     elseif not caster:canUseMisc(xi.zoneMisc.PET) then
         return xi.msg.basic.CANT_BE_USED_IN_AREA
@@ -40,9 +48,17 @@ end
 -- TODO: After elements are aligned in the codebase, this should become:
 -- xi.job_utils.geomancer.spawnLuopan = function(player, target, spell, tickEffect, tickPower, targetType)
 xi.job_utils.geomancer.spawnLuopan = function(player, target, modelID, tickEffect, tickPower, targetType, spell)
+    if target then
+        xi.pet.spawnPet(player, xi.pet.id.LUOPAN)
+    else
+        return
+    end
 
-    xi.pet.spawnPet(player, xi.pet.id.LUOPAN)
     local luopan = player:getPet()
+    local targetPos = target:getPos()
+
+    -- Set the luopans pos to the same as the targets pos.
+    luopan:setPos(targetPos.x, targetPos.y, targetPos.z, 0)
 
     -- Attach effect
     xi.job_utils.geomancer.addAura(luopan, 0, tickEffect, tickPower, targetType)
@@ -52,7 +68,7 @@ xi.job_utils.geomancer.spawnLuopan = function(player, target, modelID, tickEffec
 
     -- Change the luopans appearance to match the effect
     -- TODO: This is should be the element of the spell being cast added as an offset
-    --       on top of a base model ID in core.
+    -- on top of a base model ID in core.
     luopan:setModelId(modelID)
 
     -- Set HP loss over time
