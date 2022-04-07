@@ -36,6 +36,10 @@ xi.spells.spell_enhancing.calculateEnhancingPower = function(caster, target, spe
             power = power + (tier * 2)
         end
 
+    -- Refresh
+    elseif spellEffect == xi.effect.REFRESH then
+        power = power + caster:getMod(xi.mod.ENHANCES_REFRESH)
+
     -- Regen
     elseif spellEffect == xi.effect.REGEN then
         power = math.ceil(power * (1 + caster:getMod(xi.mod.REGEN_MULTIPLIER) / 100)) -- Bonus HP from Gear.
@@ -106,28 +110,42 @@ end
 
 -- Main function for Enhancing Spells.
 xi.spells.spell_enhancing.useEnhancingSpell = function(caster, target, spell)
-    local spellId     = spell:getID()
-    local spellGroup  = spell:getSpellGroup()
+    local spellId    = spell:getID()
+    local spellGroup = spell:getSpellGroup()
 
     -- Get Variables from Parameters Table.
-    local tier        = enhancingTable[spellId][1]
-    local magicSkill  = enhancingTable[spellId][2]
-    local spellEffect = enhancingTable[spellId][3]
+    local tier            = enhancingTable[spellId][1]
+    local magicSkill      = enhancingTable[spellId][2]
+    local spellEffect     = enhancingTable[spellId][3]
+    local alwaysOverwrite = enhancingTable[spellId][8]
+
+    -- Handle exceptions here, before calculating anything.
+    if spellEffect == xi.effect.REFRESH then
+        if target:hasStatusEffect(xi.effect.SUBLIMATION_ACTIVATED) or target:hasStatusEffect(xi.effect.SUBLIMATION_COMPLETE) then
+            spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
+            return 0
+        end
+    end
 
     -- Calculate Spell Pottency and Duration.
-    local power       = xi.spells.spell_enhancing.calculateEnhancingPower(caster, target, spell, spellId, spellGroup, tier, spellEffect)
-    local duration    = xi.spells.spell_enhancing.calculateEnhancingDuration(caster, target, spell, spellId, spellGroup, spellEffect, magicSkill)
+    local power    = xi.spells.spell_enhancing.calculateEnhancingPower(caster, target, spell, spellId, spellGroup, tier, spellEffect)
+    local duration = xi.spells.spell_enhancing.calculateEnhancingDuration(caster, target, spell, spellId, spellGroup, spellEffect, magicSkill)
 
     -- Handle Status Effects.
     if caster:hasStatusEffect(xi.effect.EMBOLDEN) and magicSkill == xi.skill.ENHANCING_MAGIC then
         caster:delStatusEffect(xi.effect.EMBOLDEN)
     end
 
-    -- Change message when higher effect already in place.
-    if target:addStatusEffect(spellEffect, power, 0, duration, 0, 0, tier) then
-        spell:setMsg(xi.msg.basic.MAGIC_GAIN_EFFECT)
+    -- Change message when higher effect already in place. Handle "Always overwrite" cases.
+    if alwaysOverwrite then
+        target:delStatusEffect(spellEffect)
+        target:addStatusEffect(spellEffect, power, 0, duration)
     else
-        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- No effect.
+        if target:addStatusEffect(spellEffect, power, 0, duration, 0, 0, tier) then
+            spell:setMsg(xi.msg.basic.MAGIC_GAIN_EFFECT)
+        else
+            spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- No effect.
+        end
     end
 
     return spellEffect

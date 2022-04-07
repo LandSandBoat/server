@@ -1,5 +1,5 @@
 -----------------------------------
--- Spell: Refresh
+-- Spell: Refresh III
 -- Gradually restores target party member's MP
 -----------------------------------
 require("scripts/globals/spells/spell_enhancing")
