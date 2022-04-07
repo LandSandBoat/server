@@ -180,6 +180,24 @@ xi.spells.parameters.enhancingSpell =
     [xi.magic.spell.BARTHUNDRA   ] = { 2, xi.skill.ENHANCING_MAGIC, xi.effect.BARTHUNDER,  1,    0,  480, true,  true  },
     [xi.magic.spell.BARWATERA    ] = { 2, xi.skill.ENHANCING_MAGIC, xi.effect.BARWATER,    1,    0,  480, true,  true  },
 
+    -- Bar-Element
+    [xi.magic.spell.BARAMNESIA   ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.BARAMNESIA,  1,    1,  480, true,  true  },
+    [xi.magic.spell.BARBLIND     ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.BARBLIND,    1,    1,  480, true,  true  },
+    [xi.magic.spell.BARPARALYZE  ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.BARPARALYZE, 1,    1,  480, true,  true  },
+    [xi.magic.spell.BARPETRIFY   ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.BARPETRIFY,  1,    1,  480, true,  true  },
+    [xi.magic.spell.BARPOISON    ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.BARPOISON,   1,    1,  480, true,  true  },
+    [xi.magic.spell.BARSILENCE   ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.BARSILENCE,  1,    1,  480, true,  true  },
+    [xi.magic.spell.BARSLEEP     ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.BARSLEEP,    1,    1,  480, true,  true  },
+    [xi.magic.spell.BARVIRUS     ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.BARVIRUS,    1,    1,  480, true,  true  },
+    [xi.magic.spell.BARAMNESRA   ] = { 2, xi.skill.ENHANCING_MAGIC, xi.effect.BARAMNESIA,  1,    1,  480, true,  true  },
+    [xi.magic.spell.BARBLINDRA   ] = { 2, xi.skill.ENHANCING_MAGIC, xi.effect.BARBLIND,    1,    1,  480, true,  true  },
+    [xi.magic.spell.BARPARALYZRA ] = { 2, xi.skill.ENHANCING_MAGIC, xi.effect.BARPARALYZE, 1,    1,  480, true,  true  },
+    [xi.magic.spell.BARPETRA     ] = { 2, xi.skill.ENHANCING_MAGIC, xi.effect.BARPETRIFY,  1,    1,  480, true,  true  },
+    [xi.magic.spell.BARPOISONRA  ] = { 2, xi.skill.ENHANCING_MAGIC, xi.effect.BARPOISON,   1,    1,  480, true,  true  },
+    [xi.magic.spell.BARSILENCERA ] = { 2, xi.skill.ENHANCING_MAGIC, xi.effect.BARSILENCE,  1,    1,  480, true,  true  },
+    [xi.magic.spell.BARSLEEPRA   ] = { 2, xi.skill.ENHANCING_MAGIC, xi.effect.BARSLEEP,    1,    1,  480, true,  true  },
+    [xi.magic.spell.BARVIRA      ] = { 2, xi.skill.ENHANCING_MAGIC, xi.effect.BARVIRUS,    1,    1,  480, true,  true  },
+
     -- Protect/Protectra
     [xi.magic.spell.PROTECT      ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.PROTECT,     7,   20, 1800, false, false },
     [xi.magic.spell.PROTECT_II   ] = { 2, xi.skill.ENHANCING_MAGIC, xi.effect.PROTECT,    27,   50, 1800, false, false },

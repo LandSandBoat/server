@@ -44,6 +44,13 @@ xi.spells.spell_enhancing.calculateEnhancingPower = function(caster, target, spe
         end
 
         power = utils.clamp(power, 40, 150) -- Max is 150 and min is 40 at skill 0.
+
+    -- Bar-Status
+    elseif
+        spellEffect == xi.effect.BARAMNESIA or spellEffect == xi.effect.BARBLIND or spellEffect == xi.effect.BARPARALYZE or spellEffect == xi.effect.BARPETRIFY or
+        spellEffect == xi.effect.BARPOISON or spellEffect == xi.effect.BARSILENCE or spellEffect == xi.effect.BARSLEEP or spellEffect == xi.effect.BARVIRUS
+    then
+        power = power + skillLevel / 50 -- This is WRONG. SO SO WRONG.
     end
 
     --------------------
@@ -63,6 +70,13 @@ xi.spells.spell_enhancing.calculateEnhancingPower = function(caster, target, spe
         spellEffect == xi.effect.BARSTONE or spellEffect == xi.effect.BARTHUNDER or spellEffect == xi.effect.BARWATER
     then
         power = power + caster:getMerit(xi.merit.BAR_SPELL_EFFECT) + caster:getMod(xi.mod.BARSPELL_AMOUNT) + caster:getJobPointLevel(xi.jp.BAR_SPELL_EFFECT) * 2
+
+    -- Bar-Element
+    elseif
+        spellEffect == xi.effect.BARAMNESIA or spellEffect == xi.effect.BARBLIND or spellEffect == xi.effect.BARPARALYZE or spellEffect == xi.effect.BARPETRIFY or
+        spellEffect == xi.effect.BARPOISON or spellEffect == xi.effect.BARSILENCE or spellEffect == xi.effect.BARSLEEP or spellEffect == xi.effect.BARVIRUS
+    then
+        power = power + caster:getMerit(xi.merit.BAR_SPELL_EFFECT) + caster:getMod(xi.mod.BARSPELL_MDEF_BONUS)
 
     -- Protect/Protectra
     elseif spellEffect == xi.effect.PROTECT then
@@ -174,7 +188,7 @@ xi.spells.spell_enhancing.useEnhancingSpell = function(caster, target, spell)
     ------------------------------------------------------------
     -- Handle exceptions here, before calculating anything.
     ------------------------------------------------------------
-    -- Bar-Element (They use addStatusEffect argument 6)
+    -- Bar-Element (They use addStatusEffect argument 6. Bar-Status current implementation doesn't.)
     if
         spellEffect == xi.effect.BARAERO or spellEffect == xi.effect.BARBLIZZARD or spellEffect == xi.effect.BARFIRE or
         spellEffect == xi.effect.BARSTONE or spellEffect == xi.effect.BARTHUNDER or spellEffect == xi.effect.BARWATER
