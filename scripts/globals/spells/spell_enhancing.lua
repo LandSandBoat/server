@@ -1,0 +1,134 @@
+-----------------------------------
+-- Enhancing Spell Utilities
+-----------------------------------
+require("scripts/globals/spells/parameters")
+require("scripts/globals/spell_data")
+require("scripts/globals/jobpoints")
+require("scripts/globals/status")
+require("scripts/globals/utils")
+require("scripts/globals/msg")
+-----------------------------------
+xi = xi or {}
+xi.spells = xi.spells or {}
+xi.spells.spell_enhancing = xi.spells.spell_enhancing or {}
+-----------------------------------
+-- File structure:
+-- 2 Basic Functions called by the main function.
+
+-- Table variables.
+local enhancingTable = xi.spells.parameters.enhancingSpell
+
+-- Enhancing Spell Potency function. (1/2)
+xi.spells.spell_enhancing.calculateEnhancingPower = function(caster, target, spell, spellId, spellGroup, tier, spellEffect)
+    local power = enhancingTable[spellId][5]
+
+    -- Enboden effect. Applied before other bonuses.
+    -- TODO: Job points further enhances Embolden bonus.
+    if target:hasStatusEffect(xi.effect.EMBOLDEN) and spellGroup == xi.magic.spellGroup.WHITE then
+        power = power * 1.5
+    end
+
+    -- Spell specific modifiers for potency.
+
+    -- Protect/Protectra
+    if spellEffect == xi.effect.PROTECT then
+        if target:getMod(xi.mod.ENHANCES_PROT_SHELL_RCVD) > 0 then
+            power = power + (tier * 2)
+        end
+
+    -- Regen
+    elseif spellEffect == xi.effect.REGEN then
+        power = math.ceil(power * (1 + caster:getMod(xi.mod.REGEN_MULTIPLIER) / 100)) -- Bonus HP from Gear.
+        power = power + caster:getMerit(xi.merit.REGEN_EFFECT) -- Bonus HP from Merits.
+        power = power + caster:getMod(xi.mod.LIGHT_ARTS_REGEN) -- Bonus HP from Light Arts.
+        power = power + caster:getMod(xi.mod.REGEN_BONUS)      -- Bonus HP from Job Point Gift.
+
+    -- Shell/Shellra
+    elseif xi.effect.SHELL then
+        if target:getMod(xi.mod.ENHANCES_PROT_SHELL_RCVD) > 0 then
+            power = power + (tier * 39)
+        end
+    end
+
+    -- Finish
+    return power
+end
+
+-- Enhancing Spell Duration function. (2/2)
+xi.spells.spell_enhancing.calculateEnhancingDuration = function(caster, target, spell, spellId, spellGroup, spellEffect, magicSkill)
+    local spellLevel   = enhancingTable[spellId][4]
+    local duration     = enhancingTable[spellId][6]
+    local useComposure = enhancingTable[spellId][7]
+    local targetLevel  = target:getMainLvl()
+
+    if magicSkill == xi.skill.ENHANCING_MAGIC then
+        -- Embolden (Doesnt affect spikes and other Black magic enhancements)
+        if target:hasStatusEffect(xi.effect.EMBOLDEN) and spellGroup == xi.magic.spellGroup.WHITE then
+            duration = duration / 2
+        end
+
+        -- Gear mods
+        duration = duration + duration * caster:getMod(xi.mod.ENH_MAGIC_DURATION) / 100
+
+        -- RDM Merits and Job Points. Applicable to all enhancing spells.
+        -- Prior to multipliers, according to bg-wiki.
+        if caster:getJob() == xi.job.RDM then
+            duration = duration + caster:getMerit(xi.merit.ENHANCING_MAGIC_DURATION) + caster:getJobPointLevel(xi.jp.ENHANCING_DURATION)
+        end
+
+        -- Spell specific modifiers for duration.
+        if spellEffect == xi.effect.REGEN then
+            duration = duration + caster:getMod(xi.mod.REGEN_DURATION)
+            duration = duration + caster:getJobPointLevel(xi.jp.REGEN_DURATION) * 3
+        end
+
+        -- Composure
+        if useComposure and caster:hasStatusEffect(xi.effect.COMPOSURE) and caster:getID() == target:getID() then
+            duration = duration * 3
+        end
+
+        -- Perpetuance (Doesnt affect spikes and other Black magic enhancements)
+        if caster:hasStatusEffect(xi.effect.PERPETUANCE) and spellGroup == xi.magic.spellGroup.WHITE then
+            duration  = duration * 2
+        end
+    elseif magicSkill == xi.skill.NINJUTSU then
+        -- Do stuff
+    end
+
+    -- Level penalty to duration.
+    if targetLevel < spellLevel then
+        duration = duration * targetLevel / spellLevel
+    end
+
+    -- Finish
+    return duration
+end
+
+-- Main function for Enhancing Spells.
+xi.spells.spell_enhancing.useEnhancingSpell = function(caster, target, spell)
+    local spellId     = spell:getID()
+    local spellGroup  = spell:getSpellGroup()
+
+    -- Get Variables from Parameters Table.
+    local tier        = enhancingTable[spellId][1]
+    local magicSkill  = enhancingTable[spellId][2]
+    local spellEffect = enhancingTable[spellId][3]
+
+    -- Calculate Spell Pottency and Duration.
+    local power       = xi.spells.spell_enhancing.calculateEnhancingPower(caster, target, spell, spellId, spellGroup, tier, spellEffect)
+    local duration    = xi.spells.spell_enhancing.calculateEnhancingDuration(caster, target, spell, spellId, spellGroup, spellEffect, magicSkill)
+
+    -- Handle Status Effects.
+    if caster:hasStatusEffect(xi.effect.EMBOLDEN) and magicSkill == xi.skill.ENHANCING_MAGIC then
+        caster:delStatusEffect(xi.effect.EMBOLDEN)
+    end
+
+    -- Change message when higher effect already in place.
+    if target:addStatusEffect(spellEffect, power, 0, duration, 0, 0, tier) then
+        spell:setMsg(xi.msg.basic.MAGIC_GAIN_EFFECT)
+    else
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- No effect.
+    end
+
+    return spellEffect
+end

@@ -1,5 +1,6 @@
 -----------------------------------
--- Spell: Protectra IV
+-- Spell: Regen V
+-- Gradually restores target's HP.
 -----------------------------------
 require("scripts/globals/spells/spell_enhancing")
 -----------------------------------
