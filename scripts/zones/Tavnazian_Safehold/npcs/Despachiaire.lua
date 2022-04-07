@@ -18,10 +18,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    -- COP Default dialogue change
-    if player:getCurrentMission(COP) > xi.mission.id.cop.DARKNESS_NAMED then
-        player:startEvent(315) -- "Jeuno offered its help"
-    end
 end
 
 entity.onEventUpdate = function(player, csid, option)

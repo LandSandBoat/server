@@ -21,7 +21,7 @@ end
 battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
     if leavecode == xi.battlefield.leaveCode.WON then
         local _, clearTime, partySize = battlefield:getRecord()
-        local arg8 = (player:getCurrentMission(COP) ~= xi.mission.id.cop.THREE_PATHS or player:getMissionStatus(mission.areaId, xi.mission.status.ULMIA) ~= 8) and 1 or 0
+        local arg8 = (player:getCurrentMission(COP) ~= xi.mission.id.cop.THREE_PATHS or player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.ULMIA) ~= 8) and 1 or 0
 
         player:setLocalVar('battlefieldWin', battlefield:getID())
 
@@ -36,7 +36,7 @@ end
 
 battlefield_object.onEventFinish = function(player, csid, option)
     if csid == 32001 then
-        player:addTitle(xi.title.ULMIAS_SOULMATE)
+        player:addTitle(xi.title.TRUE_COMPANION_OF_LOUVERANCE)
         player:addExp(1000)
     end
 end

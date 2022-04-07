@@ -630,12 +630,13 @@ local function checkReqs(player, npc, bfid, registrant)
         [ 608] = function() return ( player:hasKeyItem(xi.ki.TUNING_FORK_OF_WATER)                                                                                         ) end, -- Quest: Trial by Water
         [ 609] = function() return ( mjob == xi.job.SMN and mlvl >= 20                                                                                                     ) end, -- Quest: Trial-size Trial by Water
         [ 611] = function() return ( asa == mi.asa.SUGAR_COATED_DIRECTIVE and player:hasKeyItem(xi.ki.DOMINAS_CERULEAN_SEAL)                                               ) end, -- ASA4: Sugar-coated Directive
-        [ 640] = function() return ( cop == mi.cop.THREE_PATHS and player:getMissionStatus(mission.areaId, xi.mission.status.ULMIA) == 8                                   ) end, -- PM5-3 U3: Flames for the Dead
+        [ 640] = function() return ( cop == mi.cop.THREE_PATHS and player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.ULMIA) == 8 and
+                                     npc:getXPos() > -721 and npc:getXPos() < 719                                                                                          ) end, -- PM5-3 U3: Flames for the Dead
         [ 641] = function() return ( player:hasKeyItem(xi.ki.ZEPHYR_FAN)                                                                                                   ) end, -- ENM: Follow the White Rabbit
         [ 642] = function() return ( player:hasKeyItem(xi.ki.ZEPHYR_FAN)                                                                                                   ) end, -- ENM: When Hell Freezes Over
         [ 643] = function() return ( player:hasKeyItem(xi.ki.ZEPHYR_FAN)                                                                                                   ) end, -- ENM: Brothers
         [ 644] = function() return ( player:hasKeyItem(xi.ki.ZEPHYR_FAN)                                                                                                   ) end, -- ENM: Holy Cow
-        [ 672] = function() return ( cop == mi.cop.THREE_PATHS and player:getMissionStatus(mission.areaId, xi.mission.status.ULMIA) == 7                                   ) end, -- PM5-3 U2: Head Wind
+        [ 672] = function() return ( cop == mi.cop.THREE_PATHS and player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.ULMIA) == 7                        ) end, -- PM5-3 U2: Head Wind
         [ 673] = function() return ( player:hasKeyItem(xi.ki.MIASMA_FILTER)                                                                                                ) end, -- ENM: Like the Wind
         [ 674] = function() return ( player:hasKeyItem(xi.ki.MIASMA_FILTER)                                                                                                ) end, -- ENM: Sheep in Antlion's Clothing
         [ 675] = function() return ( player:hasKeyItem(xi.ki.MIASMA_FILTER)                                                                                                ) end, -- ENM: Shell We Dance?
@@ -645,7 +646,7 @@ local function checkReqs(player, npc, bfid, registrant)
         [ 704] = function() return ( cop == mi.cop.DARKNESS_NAMED and player:getCharVar('Mission[6][358]Status') == 4                                                      ) end, -- PM3-5: Darkness Named
         [ 705] = function() return ( player:hasKeyItem(xi.ki.ASTRAL_COVENANT)                                                                                              ) end, -- ENM: Test Your Mite
         [ 706] = function() return ( player:hasKeyItem(xi.ki.VIAL_OF_DREAM_INCENSE)                                                                                        ) end, -- Quest: Waking Dreams
-        [ 736] = function() return ( cop == mi.cop.THREE_PATHS and player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.LOUVERANCE) == 11                  ) end, -- PM5-3 L3: A Century of Hardship
+        [ 736] = function() return ( cop == mi.cop.THREE_PATHS and player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.LOUVERANCE) == 8                   ) end, -- PM5-3 L3: A Century of Hardship
         [ 738] = function() return ( player:hasKeyItem(xi.ki.SHAFT_2716_OPERATING_LEVER)                                                                                   ) end, -- ENM: Bionic Bug
         [ 739] = function() return ( player:hasKeyItem(xi.ki.SHAFT_GATE_OPERATING_DIAL)                                                                                    ) end, -- ENM: Pulling Your Strings
         [ 740] = function() return ( player:hasKeyItem(xi.ki.SHAFT_GATE_OPERATING_DIAL)                                                                                    ) end, -- ENM: Automaton Assault
@@ -703,6 +704,7 @@ local function checkReqs(player, npc, bfid, registrant)
     -- requirements to enter a battlefield already registered by a party member
     local enterReqs =
     {
+        [ 640] = function() return ( npc:getXPos() > -721 and npc:getXPos() < 719                                                                          ) end, -- PM5-3 U3: Flames for the Dead
         [ 641] = function() return ( player:hasKeyItem(xi.ki.ZEPHYR_FAN)                                                                                   ) end, -- ENM: Follow the White Rabbit
         [ 642] = function() return ( player:hasKeyItem(xi.ki.ZEPHYR_FAN)                                                                                   ) end, -- ENM: When Hell Freezes Over
         [ 643] = function() return ( player:hasKeyItem(xi.ki.ZEPHYR_FAN)                                                                                   ) end, -- ENM: Brothers
@@ -835,13 +837,13 @@ local function checkSkip(player, bfid)
         [ 576] = function() return ( player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRIAL_BY_EARTH) or player:hasKeyItem(xi.ki.WHISPER_OF_TREMORS)                           ) end, -- Quest: Trial by Earth
         [ 608] = function() return ( player:hasCompletedQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WATER) or player:hasKeyItem(xi.ki.WHISPER_OF_TIDES)                         ) end, -- Quest: Trial by Water
         [ 640] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.THREE_PATHS) or
-                                     (cop == mi.cop.THREE_PATHS and player:getMissionStatus(mission.areaId, xi.mission.status.ULMIA) > 8)                                                         ) end, -- PM5-3 U3: Flames for the Dead
+                                     (cop == mi.cop.THREE_PATHS and player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.ULMIA) > 8)                                              ) end, -- PM5-3 U3: Flames for the Dead
         [ 672] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.THREE_PATHS) or
-                                     (cop == mi.cop.THREE_PATHS and player:getMissionStatus(mission.areaId, xi.mission.status.ULMIA) > 7)                                                         ) end, -- PM5-3 U2: Head Wind
+                                     (cop == mi.cop.THREE_PATHS and player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.ULMIA) > 7)                                              ) end, -- PM5-3 U2: Head Wind
         [ 704] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.DARKNESS_NAMED) or (cop == mi.cop.DARKNESS_NAMED and copStat > 2)                                   ) end, -- PM3-5: Darkness Named
         [ 706] = function() return ( player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WAKING_DREAMS) or player:hasKeyItem(xi.ki.WHISPER_OF_DREAMS)                         ) end, -- Quest: Waking Dreams
         [ 736] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.THREE_PATHS) or (cop == mi.cop.THREE_PATHS and
-                                     player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.LOUVERANCE) > 11)                                                                       ) end, -- PM5-3 L3: A Century of Hardship
+                                     player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.LOUVERANCE) > 8)                                                                        ) end, -- PM5-3 L3: A Century of Hardship
         [ 768] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.THE_MOTHERCRYSTALS) or player:hasKeyItem(xi.ki.LIGHT_OF_HOLLA)                                      ) end, -- PM1-3: The Mothercrystals
         [ 800] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.THE_MOTHERCRYSTALS) or player:hasKeyItem(xi.ki.LIGHT_OF_DEM)                                        ) end, -- PM1-3: The Mothercrystals
         [ 832] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.THE_MOTHERCRYSTALS) or player:hasKeyItem(xi.ki.LIGHT_OF_MEA)                                        ) end, -- PM1-3: The Mothercrystals

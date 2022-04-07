@@ -36,6 +36,7 @@ zones[xi.zone.BIBIKI_BAY] =
         FISHING_MESSAGE_OFFSET  = 7272, -- You can't fish here.
         DIG_THROW_AWAY          = 7285, -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
         FIND_NOTHING            = 7287, -- You dig and you dig, but find nothing.
+        CLUNK_CLUNK_WHIRL_WHIZZ = 7377, -- <Clunk-clunk>... <Whirl-whizz>...!
         NO_BILLET               = 7489, -- You were refused passage for failing to present <item>!
         HAVE_BILLET             = 7494, -- You cannot buy morrre than one <item>. Use the one you have now to ride the next ship.
         LEFT_BILLET             = 7499, -- You use your <item>. (<number> trip[/s] remaining)

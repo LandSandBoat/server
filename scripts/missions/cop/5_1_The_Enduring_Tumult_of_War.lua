@@ -3,9 +3,11 @@
 -- Promathia 5-1
 -----------------------------------
 -- !addmission 6 448
--- Despachiaire :
--- Chasalvige   :
--- Anoki        :
+-- Despachiaire : !pos 108 -40 -83 26
+-- Chasalvige   : !pos 96.432 -0.520 134.046 231
+-- Anoki        : !pos -22.397 -8.199 30.463 232
+-- Cid          : !pos -12 -12 1 237
+-- Iron Grate   : !pos -340 -93 156.7 111
 -----------------------------------
 require('scripts/globals/interaction/mission')
 require('scripts/globals/missions')
@@ -61,6 +63,8 @@ mission.sections =
                         not mission:isVarBitsSet(player, 'Option', 1)
                     then
                         return mission:event(761):importantEvent()
+                    else
+                        return mission:event(764):replaceDefault()
                     end
                 end,
             },
@@ -124,8 +128,12 @@ mission.sections =
             ['Cid'] =
             {
                 onTrigger = function(player, npc)
-                    if mission:getVar(player, 'Status') == 1 then
+                    local missionStatus = mission:getVar(player, 'Status')
+
+                    if missionStatus == 1 then
                         return mission:progressEvent(849)
+                    elseif missionStatus > 1 then
+                        return mission:event(863):importantEvent()
                     end
                 end,
             },
@@ -150,12 +158,13 @@ mission.sections =
                         not GetMobByID(psoXjaID.mob.NUNYUNUWI):isSpawned()
                     then
                         SpawnMob(psoXjaID.mob.NUNYUNUWI):updateClaim(player)
-                        return mission:messageSpecial(psoXjaID.text.TRAP_ACTIVATES)
+                        player:messageName(psoXjaID.text.TRAP_ACTIVATES, player)
+                        return mission:noAction()
                     elseif missionStatus == 4 then
                         if player:getZPos() < 318 then
-                            return mission:event(69)
+                            return mission:progressEvent(69)
                         else
-                            return mission:event(70)
+                            return mission:progressEvent(70)
                         end
                     end
                 end,
@@ -211,7 +220,7 @@ mission.sections =
             onZoneIn =
             {
                 function(player, prevZone)
-                    if mission:getVar(player, 'Status') == 0 then
+                    if mission:getVar(player, 'Status') == 4 then
                         return 50
                     end
                 end,

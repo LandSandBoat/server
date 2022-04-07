@@ -174,11 +174,27 @@ mission.sections =
 
         [xi.zone.TAVNAZIAN_SAFEHOLD] =
         {
-            ['Arquil']       = mission:event(292):replaceDefault(),
             ['Chemioue']     = mission:event(282):replaceDefault(),
-            ['Despachiaire'] = mission:event(315):replaceDefault(),
             ['Justinius']    = mission:event(129):replaceDefault(),
             ['Parelbriaux']  = mission:event(296):replaceDefault(),
+
+            ['Arquil'] =
+            {
+                onTrigger = function(player, npc)
+                    if not player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.SLANDEROUS_UTTERINGS) then
+                        return mission:event(292):replaceDefault()
+                    end
+                end,
+            },
+
+            ['Despachiaire'] =
+            {
+                onTrigger = function(player, npc)
+                    if not player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.SLANDEROUS_UTTERINGS) then
+                        return mission:event(315):replaceDefault()
+                    end
+                end,
+            },
         },
     },
 }

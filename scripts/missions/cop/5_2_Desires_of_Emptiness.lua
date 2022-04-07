@@ -3,6 +3,11 @@
 -- Promathia 5-2
 -----------------------------------
 -- !addmission 6 518
+-- Stone Door    : !pos -380 46.074 330.5 9
+-- _0mc (Flux 1) : !pos 180 -2.5 -60 22
+-- _0md (Flux 2) : !pos 420 -2.5 140 22
+-- _0m0 (Flux 3) : !pos -340 -2.5 140 22
+-- Cid           : !pos -12 -12 1 237
 -----------------------------------
 require('scripts/globals/interaction/mission')
 require('scripts/globals/missions')
@@ -35,7 +40,8 @@ local function setPromyvionVahzlPos(player, csid, option, npc)
 end
 
 -- 'Option' variable bitfield
--- TODO: Verify that NM kill data persists on zone and time, and on defeating a different NM
+-- NM kill data persists on logout on retail.  This may not be the case if the player
+-- leaves the zone, but that logic is not implemented at this time.
 
 --   .----------------------- Ponderer CS Viewed
 --   |   .------------------- Solicitor CS Viewed
@@ -155,7 +161,7 @@ mission.sections =
 
         [xi.zone.PSOXJA] =
         {
-            ['_i99'] = -- TODO: Add 112 to hasCompletedMission section as well
+            ['_i99'] =
             {
                 onTrigger = function(player, npc)
                     local eventOffset = bit.rshift(mission:getVar(player, 'Option'), 3)
@@ -183,7 +189,11 @@ mission.sections =
             {
                 function(player, prevZone)
                     if mission:getVar(player, 'Status') == 1 then
-                        return 20
+                        if bit.rshift(mission:getVar(player, 'Option'), 3) == 7 then
+                            return 20
+                        else
+                            return 21
+                        end
                     end
                 end,
             },
@@ -194,8 +204,15 @@ mission.sections =
                     mission:setVar(player, 'Status', 2)
                 end,
 
+                [21] = function(player, csid, option, npc)
+                    player:setPos(-140.011, 0, -53.990, 192, 22)
+                end,
+
                 [32001] = function(player, csid, option, npc)
-                    if player:getLocalVar('battlefieldWin') == 864 then
+                    if
+                        player:getLocalVar('battlefieldWin') == 864 and
+                        mission:getVar(player, 'Status') == 2
+                    then
                         mission:setVar(player, 'Status', 3)
                     end
                 end,
@@ -272,6 +289,17 @@ mission.sections =
                     mission:complete(player)
                 end,
             },
+        },
+    },
+
+    {
+        check = function(player, currentMission, missionStatus, vars)
+            return player:hasCompletedMission(mission.areaId, mission.missionId)
+        end,
+
+        [xi.zone.PSOXJA] =
+        {
+            ['_i99'] = mission:event(112),
         },
     },
 }

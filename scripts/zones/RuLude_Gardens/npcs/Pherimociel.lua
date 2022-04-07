@@ -25,7 +25,7 @@ entity.onTrigger = function(player, npc)
         local Hrandom = math.random()
 
         if Hrandom < 0.2 then
-            player:startEvent(27)
+            player:startEvent(27) -- Observed while Three Paths is active
         elseif Hrandom < 0.6 then
             player:startEvent(28)
         else

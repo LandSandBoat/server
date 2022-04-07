@@ -35,19 +35,17 @@ entity.onTrigger = function(player, npc)
     local job = player:getMainJob()
 
     -- THE FANGED ONE
-    if theFangedOne ~= QUEST_COMPLETED then
-        if theFangedOne == QUEST_AVAILABLE and lvl >= xi.settings.ADVANCED_JOB_LEVEL then
-            player:startEvent(351)
-        elseif theFangedOne == QUEST_ACCEPTED and not player:hasKeyItem(xi.ki.OLD_TIGERS_FANG) then
-            player:startEvent(352)
-        elseif player:hasKeyItem(xi.ki.OLD_TIGERS_FANG) and theFangedOneCS ~= 1 then
-            player:startEvent(357)
-        elseif theFangedOneCS == 1 then
-            player:startEvent(358)
-        end
+    if theFangedOne == QUEST_AVAILABLE and lvl >= xi.settings.ADVANCED_JOB_LEVEL then
+        player:startEvent(351)
+    elseif theFangedOne == QUEST_ACCEPTED and not player:hasKeyItem(xi.ki.OLD_TIGERS_FANG) then
+        player:startEvent(352)
+    elseif player:hasKeyItem(xi.ki.OLD_TIGERS_FANG) and theFangedOneCS ~= 1 then
+        player:startEvent(357)
+    elseif theFangedOneCS == 1 then
+        player:startEvent(358)
 
     -- SIN HUNTING
-    elseif sinHunting == QUEST_AVAILABLE and job == xi.job.RNG and lvl >= xi.settings.AF1_QUEST_LEVEL and sinHuntingCS == 0 then
+    elseif sinHunting == QUEST_AVAILABLE and job == xi.job.RNG and lvl >= xi.settings.AF1_QUEST_LEVEL then
         player:startEvent(523) -- start RNG AF1
     elseif sinHuntingCS > 0 and sinHuntingCS < 5 then
         player:startEvent(524) -- during quest RNG AF1
@@ -55,7 +53,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(527) -- complete quest RNG AF1
 
     -- FIRE AND BRIMSTONE
-    elseif sinHunting == QUEST_COMPLETED and job == xi.job.RNG and lvl >= xi.settings.AF2_QUEST_LEVEL and fireAndBrimstone == QUEST_AVAILABLE and fireAndBrimstoneCS == 0 then
+    elseif sinHunting == QUEST_COMPLETED and job == xi.job.RNG and lvl >= xi.settings.AF2_QUEST_LEVEL and fireAndBrimstone == QUEST_AVAILABLE then
         player:startEvent(531) -- start RNG AF2
     elseif fireAndBrimstoneCS > 0 and fireAndBrimstoneCS < 4 then
         player:startEvent(532) -- during RNG AF2
@@ -65,7 +63,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(536, 0, 13360, 1113) -- during second part RNG AF2
 
     -- UNBRIDLED PASSION
-    elseif fireAndBrimstone == QUEST_COMPLETED and job == xi.job.RNG and lvl >= xi.settings.AF3_QUEST_LEVEL and unbridledPassion == QUEST_AVAILABLE and unbridledPassion == 0 then
+    elseif fireAndBrimstone == QUEST_COMPLETED and job == xi.job.RNG and lvl >= xi.settings.AF3_QUEST_LEVEL and unbridledPassion == QUEST_AVAILABLE then
         player:startEvent(541, 0, 13360) -- start RNG AF3
     elseif unbridledPassionCS > 0 and unbridledPassionCS < 3 then
         player:startEvent(542)-- during RNG AF3
