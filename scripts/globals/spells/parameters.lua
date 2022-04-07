@@ -163,41 +163,58 @@ xi.spells.parameters.enhancingSpell =
 --                                     1     2           3            4            5           6              7          8
 -- Structure:            [spellId] = { Tier, Main_Skill, Main_Effect, Spell_Level, Base_Power, Base_Duration, Composure, Always_Overwrite },
 
+    -- Aquaveil
+    [xi.magic.spell.AQUAVEIL     ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.AQUAVEIL,    1,    1,  600, true,  true  },
+
+    -- Bar-Element
+    [xi.magic.spell.BARAERO      ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.BARAERO,     1,    0,  480, true,  true  },
+    [xi.magic.spell.BARBLIZZARD  ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.BARBLIZZARD, 1,    0,  480, true,  true  },
+    [xi.magic.spell.BARFIRE      ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.BARFIRE,     1,    0,  480, true,  true  },
+    [xi.magic.spell.BARSTONE     ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.BARSTONE,    1,    0,  480, true,  true  },
+    [xi.magic.spell.BARTHUNDER   ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.BARTHUNDER,  1,    0,  480, true,  true  },
+    [xi.magic.spell.BARWATER     ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.BARWATER,    1,    0,  480, true,  true  },
+    [xi.magic.spell.BARAERA      ] = { 2, xi.skill.ENHANCING_MAGIC, xi.effect.BARAERO,     1,    0,  480, true,  true  },
+    [xi.magic.spell.BARBLIZZARA  ] = { 2, xi.skill.ENHANCING_MAGIC, xi.effect.BARBLIZZARD, 1,    0,  480, true,  true  },
+    [xi.magic.spell.BARFIRA      ] = { 2, xi.skill.ENHANCING_MAGIC, xi.effect.BARFIRE,     1,    0,  480, true,  true  },
+    [xi.magic.spell.BARSTONRA    ] = { 2, xi.skill.ENHANCING_MAGIC, xi.effect.BARSTONE,    1,    0,  480, true,  true  },
+    [xi.magic.spell.BARTHUNDRA   ] = { 2, xi.skill.ENHANCING_MAGIC, xi.effect.BARTHUNDER,  1,    0,  480, true,  true  },
+    [xi.magic.spell.BARWATERA    ] = { 2, xi.skill.ENHANCING_MAGIC, xi.effect.BARWATER,    1,    0,  480, true,  true  },
+
     -- Protect/Protectra
-    [xi.magic.spell.PROTECT      ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.PROTECT,  7,   20, 1800, false, false },
-    [xi.magic.spell.PROTECT_II   ] = { 2, xi.skill.ENHANCING_MAGIC, xi.effect.PROTECT, 27,   50, 1800, false, false },
-    [xi.magic.spell.PROTECT_III  ] = { 3, xi.skill.ENHANCING_MAGIC, xi.effect.PROTECT, 47,   90, 1800, false, false },
-    [xi.magic.spell.PROTECT_IV   ] = { 4, xi.skill.ENHANCING_MAGIC, xi.effect.PROTECT, 63,  140, 1800, false, false },
-    [xi.magic.spell.PROTECT_V    ] = { 5, xi.skill.ENHANCING_MAGIC, xi.effect.PROTECT, 76,  220, 1800, false, false },
-    [xi.magic.spell.PROTECTRA    ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.PROTECT,  7,   20, 1800, false, false },
-    [xi.magic.spell.PROTECTRA_II ] = { 2, xi.skill.ENHANCING_MAGIC, xi.effect.PROTECT, 27,   50, 1800, false, false },
-    [xi.magic.spell.PROTECTRA_III] = { 3, xi.skill.ENHANCING_MAGIC, xi.effect.PROTECT, 47,   90, 1800, false, false },
-    [xi.magic.spell.PROTECTRA_IV ] = { 4, xi.skill.ENHANCING_MAGIC, xi.effect.PROTECT, 63,  140, 1800, false, false },
-    [xi.magic.spell.PROTECTRA_V  ] = { 5, xi.skill.ENHANCING_MAGIC, xi.effect.PROTECT, 75,  220, 1800, false, false },
+    [xi.magic.spell.PROTECT      ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.PROTECT,     7,   20, 1800, false, false },
+    [xi.magic.spell.PROTECT_II   ] = { 2, xi.skill.ENHANCING_MAGIC, xi.effect.PROTECT,    27,   50, 1800, false, false },
+    [xi.magic.spell.PROTECT_III  ] = { 3, xi.skill.ENHANCING_MAGIC, xi.effect.PROTECT,    47,   90, 1800, false, false },
+    [xi.magic.spell.PROTECT_IV   ] = { 4, xi.skill.ENHANCING_MAGIC, xi.effect.PROTECT,    63,  140, 1800, false, false },
+    [xi.magic.spell.PROTECT_V    ] = { 5, xi.skill.ENHANCING_MAGIC, xi.effect.PROTECT,    76,  220, 1800, false, false },
+    [xi.magic.spell.PROTECTRA    ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.PROTECT,     7,   20, 1800, false, false },
+    [xi.magic.spell.PROTECTRA_II ] = { 2, xi.skill.ENHANCING_MAGIC, xi.effect.PROTECT,    27,   50, 1800, false, false },
+    [xi.magic.spell.PROTECTRA_III] = { 3, xi.skill.ENHANCING_MAGIC, xi.effect.PROTECT,    47,   90, 1800, false, false },
+    [xi.magic.spell.PROTECTRA_IV ] = { 4, xi.skill.ENHANCING_MAGIC, xi.effect.PROTECT,    63,  140, 1800, false, false },
+    [xi.magic.spell.PROTECTRA_V  ] = { 5, xi.skill.ENHANCING_MAGIC, xi.effect.PROTECT,    75,  220, 1800, false, false },
 
     -- Refresh
-    [xi.magic.spell.REFRESH      ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.REFRESH, 41,    3,  150, true,  true  },
-    [xi.magic.spell.REFRESH_II   ] = { 2, xi.skill.ENHANCING_MAGIC, xi.effect.REFRESH, 82,    6,  150, true,  true  },
-    [xi.magic.spell.REFRESH_III  ] = { 3, xi.skill.ENHANCING_MAGIC, xi.effect.REFRESH, 99,    9,  150, true,  true  },
+    [xi.magic.spell.REFRESH      ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.REFRESH,    41,    3,  150, true,  true  },
+    [xi.magic.spell.REFRESH_II   ] = { 2, xi.skill.ENHANCING_MAGIC, xi.effect.REFRESH,    82,    6,  150, true,  true  },
+    [xi.magic.spell.REFRESH_III  ] = { 3, xi.skill.ENHANCING_MAGIC, xi.effect.REFRESH,    99,    9,  150, true,  true  },
 
     -- Regen
-    [xi.magic.spell.REGEN        ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.REGEN,   21,    5,   75, true,  false },
-    [xi.magic.spell.REGEN_II     ] = { 2, xi.skill.ENHANCING_MAGIC, xi.effect.REGEN,   44,   12,   60, true,  false },
-    [xi.magic.spell.REGEN_III    ] = { 3, xi.skill.ENHANCING_MAGIC, xi.effect.REGEN,   66,   20,   60, true,  false },
-    [xi.magic.spell.REGEN_IV     ] = { 4, xi.skill.ENHANCING_MAGIC, xi.effect.REGEN,   86,   30,   60, true,  false },
-    [xi.magic.spell.REGEN_V      ] = { 5, xi.skill.ENHANCING_MAGIC, xi.effect.REGEN,   99,   40,   60, true,  false },
+    [xi.magic.spell.REGEN        ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.REGEN,      21,    5,   75, true,  false },
+    [xi.magic.spell.REGEN_II     ] = { 2, xi.skill.ENHANCING_MAGIC, xi.effect.REGEN,      44,   12,   60, true,  false },
+    [xi.magic.spell.REGEN_III    ] = { 3, xi.skill.ENHANCING_MAGIC, xi.effect.REGEN,      66,   20,   60, true,  false },
+    [xi.magic.spell.REGEN_IV     ] = { 4, xi.skill.ENHANCING_MAGIC, xi.effect.REGEN,      86,   30,   60, true,  false },
+    [xi.magic.spell.REGEN_V      ] = { 5, xi.skill.ENHANCING_MAGIC, xi.effect.REGEN,      99,   40,   60, true,  false },
 
     -- Shell/Shellra
-    [xi.magic.spell.SHELL        ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.SHELL,   18, 1055, 1800, false, false },
-    [xi.magic.spell.SHELL_II     ] = { 2, xi.skill.ENHANCING_MAGIC, xi.effect.SHELL,   37, 1641, 1800, false, false },
-    [xi.magic.spell.SHELL_III    ] = { 3, xi.skill.ENHANCING_MAGIC, xi.effect.SHELL,   57, 2188, 1800, false, false },
-    [xi.magic.spell.SHELL_IV     ] = { 4, xi.skill.ENHANCING_MAGIC, xi.effect.SHELL,   68, 2617, 1800, false, false },
-    [xi.magic.spell.SHELL_V      ] = { 5, xi.skill.ENHANCING_MAGIC, xi.effect.SHELL,   76, 2930, 1800, false, false },
-    [xi.magic.spell.SHELLRA      ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.SHELL,   18, 1055, 1800, false, false },
-    [xi.magic.spell.SHELLRA_II   ] = { 2, xi.skill.ENHANCING_MAGIC, xi.effect.SHELL,   37, 1641, 1800, false, false },
-    [xi.magic.spell.SHELLRA_III  ] = { 3, xi.skill.ENHANCING_MAGIC, xi.effect.SHELL,   57, 2188, 1800, false, false },
-    [xi.magic.spell.SHELLRA_IV   ] = { 4, xi.skill.ENHANCING_MAGIC, xi.effect.SHELL,   68, 2617, 1800, false, false },
-    [xi.magic.spell.SHELLRA_V    ] = { 5, xi.skill.ENHANCING_MAGIC, xi.effect.SHELL,   75, 2930, 1800, false, false },
+    [xi.magic.spell.SHELL        ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.SHELL,      18, 1055, 1800, false, false },
+    [xi.magic.spell.SHELL_II     ] = { 2, xi.skill.ENHANCING_MAGIC, xi.effect.SHELL,      37, 1641, 1800, false, false },
+    [xi.magic.spell.SHELL_III    ] = { 3, xi.skill.ENHANCING_MAGIC, xi.effect.SHELL,      57, 2188, 1800, false, false },
+    [xi.magic.spell.SHELL_IV     ] = { 4, xi.skill.ENHANCING_MAGIC, xi.effect.SHELL,      68, 2617, 1800, false, false },
+    [xi.magic.spell.SHELL_V      ] = { 5, xi.skill.ENHANCING_MAGIC, xi.effect.SHELL,      76, 2930, 1800, false, false },
+    [xi.magic.spell.SHELLRA      ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.SHELL,      18, 1055, 1800, false, false },
+    [xi.magic.spell.SHELLRA_II   ] = { 2, xi.skill.ENHANCING_MAGIC, xi.effect.SHELL,      37, 1641, 1800, false, false },
+    [xi.magic.spell.SHELLRA_III  ] = { 3, xi.skill.ENHANCING_MAGIC, xi.effect.SHELL,      57, 2188, 1800, false, false },
+    [xi.magic.spell.SHELLRA_IV   ] = { 4, xi.skill.ENHANCING_MAGIC, xi.effect.SHELL,      68, 2617, 1800, false, false },
+    [xi.magic.spell.SHELLRA_V    ] = { 5, xi.skill.ENHANCING_MAGIC, xi.effect.SHELL,      75, 2930, 1800, false, false },
 
 }
 

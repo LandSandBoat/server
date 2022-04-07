@@ -20,18 +20,52 @@ local enhancingTable = xi.spells.parameters.enhancingSpell
 
 -- Enhancing Spell Potency function. (1/2)
 xi.spells.spell_enhancing.calculateEnhancingPower = function(caster, target, spell, spellId, spellGroup, tier, spellEffect)
-    local power = enhancingTable[spellId][5]
+    local power      = enhancingTable[spellId][5]
+    local skillLevel = caster:getSkillLevel(spellEffect)
 
-    -- Enboden effect. Applied before other bonuses.
-    -- TODO: Job points further enhances Embolden bonus.
-    if target:hasStatusEffect(xi.effect.EMBOLDEN) and spellGroup == xi.magic.spellGroup.WHITE then
-        power = power * 1.5
+    ------------------------------------------------------------
+    -- Spell specific equations for potency. (Skill and MND)
+    ------------------------------------------------------------
+    -- Aquaveil
+    if spellEffect == xi.effect.AQUAVEIL then
+        if skillLevel >= 200 then -- Cutoff point is estimated. https://www.bg-wiki.com/bg/Aquaveil
+            power = power + 1
+        end
+
+    -- Bar-Element
+    elseif
+        spellEffect == xi.effect.BARAERO or spellEffect == xi.effect.BARBLIZZARD or spellEffect == xi.effect.BARFIRE or
+        spellEffect == xi.effect.BARSTONE or spellEffect == xi.effect.BARTHUNDER or spellEffect == xi.effect.BARWATER
+    then
+        if skillLevel > 300 then
+            power = 25 + math.floor(skillLevel / 4) -- 150 at 500
+        else
+            power = 40 + math.floor(skillLevel / 5) -- 100 at 300
+        end
+
+        power = utils.clamp(power, 40, 150) -- Max is 150 and min is 40 at skill 0.
     end
 
+    --------------------
+    -- Enboden effect.
+    --------------------
+    --  Applied before other bonuses. TODO: Job points further enhances Embolden bonus.
+    if target:hasStatusEffect(xi.effect.EMBOLDEN) and spellGroup == xi.magic.spellGroup.WHITE then
+        power = math.floor(power * 1.5)
+    end
+
+    ----------------------------------------
     -- Spell specific modifiers for potency.
+    ----------------------------------------
+    -- Bar-Element
+    if
+        spellEffect == xi.effect.BARAERO or spellEffect == xi.effect.BARBLIZZARD or spellEffect == xi.effect.BARFIRE or
+        spellEffect == xi.effect.BARSTONE or spellEffect == xi.effect.BARTHUNDER or spellEffect == xi.effect.BARWATER
+    then
+        power = power + caster:getMerit(xi.merit.BAR_SPELL_EFFECT) + caster:getMod(xi.mod.BARSPELL_AMOUNT) + caster:getJobPointLevel(xi.jp.BAR_SPELL_EFFECT) * 2
 
     -- Protect/Protectra
-    if spellEffect == xi.effect.PROTECT then
+    elseif spellEffect == xi.effect.PROTECT then
         if target:getMod(xi.mod.ENHANCES_PROT_SHELL_RCVD) > 0 then
             power = power + (tier * 2)
         end
@@ -54,7 +88,9 @@ xi.spells.spell_enhancing.calculateEnhancingPower = function(caster, target, spe
         end
     end
 
+    ----------
     -- Finish
+    ----------
     return power
 end
 
@@ -66,26 +102,37 @@ xi.spells.spell_enhancing.calculateEnhancingDuration = function(caster, target, 
     local targetLevel  = target:getMainLvl()
 
     if magicSkill == xi.skill.ENHANCING_MAGIC then
-        -- Embolden (Doesnt affect spikes and other Black magic enhancements)
+        --------------------
+        -- Embolden
+        --------------------
         if target:hasStatusEffect(xi.effect.EMBOLDEN) and spellGroup == xi.magic.spellGroup.WHITE then
             duration = duration / 2
         end
 
+        --------------------
         -- Gear mods
+        --------------------
         duration = duration + duration * caster:getMod(xi.mod.ENH_MAGIC_DURATION) / 100
 
-        -- RDM Merits and Job Points. Applicable to all enhancing spells.
-        -- Prior to multipliers, according to bg-wiki.
+        ------------------------------
+        -- Merits and Job Points. (Applicable to all enhancing spells. Prior to multipliers, according to bg-wiki.)
+        ------------------------------
         if caster:getJob() == xi.job.RDM then
             duration = duration + caster:getMerit(xi.merit.ENHANCING_MAGIC_DURATION) + caster:getJobPointLevel(xi.jp.ENHANCING_DURATION)
         end
 
+        --------------------------------------------------
         -- Spell specific modifiers for duration.
+        --------------------------------------------------
+        -- Regen
         if spellEffect == xi.effect.REGEN then
             duration = duration + caster:getMod(xi.mod.REGEN_DURATION)
             duration = duration + caster:getJobPointLevel(xi.jp.REGEN_DURATION) * 3
         end
 
+        --------------------
+        -- Status Effects
+        --------------------
         -- Composure
         if useComposure and caster:hasStatusEffect(xi.effect.COMPOSURE) and caster:getID() == target:getID() then
             duration = duration * 3
@@ -95,16 +142,21 @@ xi.spells.spell_enhancing.calculateEnhancingDuration = function(caster, target, 
         if caster:hasStatusEffect(xi.effect.PERPETUANCE) and spellGroup == xi.magic.spellGroup.WHITE then
             duration  = duration * 2
         end
+
     elseif magicSkill == xi.skill.NINJUTSU then
         -- Do stuff
     end
 
+    ------------------------------
     -- Level penalty to duration.
+    ------------------------------
     if targetLevel < spellLevel then
         duration = duration * targetLevel / spellLevel
     end
 
+    ----------
     -- Finish
+    ----------
     return duration
 end
 
@@ -112,36 +164,52 @@ end
 xi.spells.spell_enhancing.useEnhancingSpell = function(caster, target, spell)
     local spellId    = spell:getID()
     local spellGroup = spell:getSpellGroup()
-
+    local MDB        = 0
     -- Get Variables from Parameters Table.
     local tier            = enhancingTable[spellId][1]
     local magicSkill      = enhancingTable[spellId][2]
     local spellEffect     = enhancingTable[spellId][3]
     local alwaysOverwrite = enhancingTable[spellId][8]
 
+    ------------------------------------------------------------
     -- Handle exceptions here, before calculating anything.
-    if spellEffect == xi.effect.REFRESH then
+    ------------------------------------------------------------
+    -- Bar-Element (They use addStatusEffect argument 6)
+    if
+        spellEffect == xi.effect.BARAERO or spellEffect == xi.effect.BARBLIZZARD or spellEffect == xi.effect.BARFIRE or
+        spellEffect == xi.effect.BARSTONE or spellEffect == xi.effect.BARTHUNDER or spellEffect == xi.effect.BARWATER
+    then
+        MDB = caster:getMerit(xi.merit.BAR_SPELL_EFFECT) + caster:getMod(xi.mod.BARSPELL_MDEF_BONUS)
+
+    -- Refresh
+    elseif spellEffect == xi.effect.REFRESH then
         if target:hasStatusEffect(xi.effect.SUBLIMATION_ACTIVATED) or target:hasStatusEffect(xi.effect.SUBLIMATION_COMPLETE) then
             spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
             return 0
         end
     end
 
+    --------------------------------------------------
     -- Calculate Spell Pottency and Duration.
+    --------------------------------------------------
     local power    = xi.spells.spell_enhancing.calculateEnhancingPower(caster, target, spell, spellId, spellGroup, tier, spellEffect)
     local duration = xi.spells.spell_enhancing.calculateEnhancingDuration(caster, target, spell, spellId, spellGroup, spellEffect, magicSkill)
 
+    ------------------------------
     -- Handle Status Effects.
+    ------------------------------
     if caster:hasStatusEffect(xi.effect.EMBOLDEN) and magicSkill == xi.skill.ENHANCING_MAGIC then
         caster:delStatusEffect(xi.effect.EMBOLDEN)
     end
 
-    -- Change message when higher effect already in place. Handle "Always overwrite" cases.
+    ------------------------------------------------------------
+    -- Change message when higher effect or "Always overwrite".
+    ------------------------------------------------------------
     if alwaysOverwrite then
         target:delStatusEffect(spellEffect)
-        target:addStatusEffect(spellEffect, power, 0, duration)
+        target:addStatusEffect(spellEffect, power, 0, duration, 0, MDB, tier)
     else
-        if target:addStatusEffect(spellEffect, power, 0, duration, 0, 0, tier) then
+        if target:addStatusEffect(spellEffect, power, 0, duration, 0, MDB, tier) then
             spell:setMsg(xi.msg.basic.MAGIC_GAIN_EFFECT)
         else
             spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- No effect.
