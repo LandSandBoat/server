@@ -19,13 +19,6 @@ end
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    if
-        player:getCurrentMission(COP) == xi.mission.id.cop.FOR_WHOM_THE_VERSE_IS_SUNG and
-        player:getCharVar("PromathiaStatus") == 2
-    then
-        cs = 10047
-    end
-
     -- MOG HOUSE EXIT
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         local position = math.random(1, 5) + 45
@@ -104,11 +97,7 @@ zone_object.onEventUpdate = function(player, csid, option)
 end
 
 zone_object.onEventFinish = function(player, csid, option)
-    if csid == 10047 then
-        player:setCharVar("PromathiaStatus", 0)
-        player:completeMission(xi.mission.log_id.COP, xi.mission.id.cop.FOR_WHOM_THE_VERSE_IS_SUNG)
-        player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.A_PLACE_TO_RETURN)
-    elseif csid == 10048 then
+    if csid == 10048 then
         player:setCharVar("PromathiaStatus", 1)
     elseif csid == 10051 then
         player:setCharVar("PromathiaStatus", 3)
