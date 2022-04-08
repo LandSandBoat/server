@@ -1,7 +1,5 @@
 -----------------------------------
---
 -- Zone: PsoXja (9)
---
 -----------------------------------
 local ID = require("scripts/zones/PsoXja/IDs")
 require("scripts/globals/conquest")
@@ -30,14 +28,8 @@ end
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
+    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(-29.956, -1.903, 212.521, 188)
-    end
-
-    if (player:getXPos() == -300 and player:getCurrentMission(COP) == xi.mission.id.cop.THE_ENDURING_TUMULT_OF_WAR and player:getCharVar("PromathiaStatus") == 2) then
-        cs = 1 -- COP event
-    elseif (player:getXPos() == 220 and player:getCurrentMission(COP) == xi.mission.id.cop.THREE_PATHS and player:getCharVar("COP_Tenzen_s_Path") == 8) then
-        cs = 4
     end
 
     return cs
@@ -82,11 +74,7 @@ zone_object.onEventUpdate = function(player, csid, option)
 end
 
 zone_object.onEventFinish = function(player, csid, option)
-    if (csid == 1) then
-        player:setCharVar("PromathiaStatus", 3)
-    elseif (csid == 4) then
-        player:setCharVar("COP_Tenzen_s_Path", 9)
-    elseif (csid == 20 and option == 1) then
+    if (csid == 20 and option == 1) then
         player:setPos(-20, -60.250, -60, 63, 111)
     elseif (csid == 21 and option == 1) then
         player:setPos(260, -0.25, -20, 254, 111)

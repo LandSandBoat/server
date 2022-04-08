@@ -65,6 +65,18 @@ mission.sections =
             },
         },
     },
+
+    {
+        check = function(player, currentMission, missionStatus, vars)
+            return player:hasCompletedMission(mission.areaId, mission.missionId)
+        end,
+
+        [xi.zone.TAVNAZIAN_SAFEHOLD] =
+        {
+            ['Arquil']       = mission:event(293):replaceDefault(),
+            ['Despachiaire'] = mission:event(317):replaceDefault(),
+        },
+    },
 }
 
 return mission
