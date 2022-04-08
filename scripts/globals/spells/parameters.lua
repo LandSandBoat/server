@@ -254,7 +254,24 @@ xi.spells.parameters.enhancingSpell =
     [xi.magic.spell.SHELLRA_III  ] = { 3, xi.skill.ENHANCING_MAGIC, xi.effect.SHELL,      57, 2188, 1800, false, false },
     [xi.magic.spell.SHELLRA_IV   ] = { 4, xi.skill.ENHANCING_MAGIC, xi.effect.SHELL,      68, 2617, 1800, false, false },
     [xi.magic.spell.SHELLRA_V    ] = { 5, xi.skill.ENHANCING_MAGIC, xi.effect.SHELL,      75, 2930, 1800, false, false },
+}
 
+xi.spells.parameters.teleportSpell =
+{
+-- Structure:       [spellId] = { Teleport, Key_Item, unknown_parameter, campaign },
+    [xi.magic.spell.ESCAPE        ] = { xi.teleport.id.ESCAPE,  0,                                4, false },
+    [xi.magic.spell.RECALL_JUGNER ] = { xi.teleport.id.JUGNER,  xi.ki.JUGNER_GATE_CRYSTAL,      4.7, false },
+    [xi.magic.spell.RECALL_MERIPH ] = { xi.teleport.id.MERIPH,  xi.ki.MERIPHATAUD_GATE_CRYSTAL, 4.7, false },
+    [xi.magic.spell.RECALL_PASHH  ] = { xi.teleport.id.PASHH,   xi.ki.PASHHOW_GATE_CRYSTAL,     4.7, false },
+    [xi.magic.spell.RETRACE       ] = { xi.teleport.id.RETRACE, 0,                                4, true  },
+    [xi.magic.spell.TELEPORT_ALTEP] = { xi.teleport.id.ALTEP,   xi.ki.ALTEPA_GATE_CRYSTAL,      4.7, false },
+    [xi.magic.spell.TELEPORT_DEM  ] = { xi.teleport.id.DEM,     xi.ki.DEM_GATE_CRYSTAL,         4.7, false },
+    [xi.magic.spell.TELEPORT_HOLLA] = { xi.teleport.id.HOLLA,   xi.ki.HOLLA_GATE_CRYSTAL,       4.7, false },
+    [xi.magic.spell.TELEPORT_MEA  ] = { xi.teleport.id.MEA,     xi.ki.MEA_GATE_CRYSTAL,         4.7, false },
+    [xi.magic.spell.TELEPORT_VAHZL] = { xi.teleport.id.VAHZL,   xi.ki.VAHZL_GATE_CRYSTAL,       4.7, false },
+    [xi.magic.spell.TELEPORT_YHOAT] = { xi.teleport.id.YHOAT,   xi.ki.YHOATOR_GATE_CRYSTAL,     4.7, false },
+    [xi.magic.spell.WARP          ] = { xi.teleport.id.WARP,    0,                                4, false },
+    [xi.magic.spell.WARP_II       ] = { xi.teleport.id.WARP,    0,                              3.4, false },
 }
 
 xi.spells.parameters.enhancingSong =

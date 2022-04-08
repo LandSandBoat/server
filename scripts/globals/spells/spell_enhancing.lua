@@ -33,10 +33,7 @@ xi.spells.spell_enhancing.calculateEnhancingPower = function(caster, target, spe
         end
 
     -- Bar-Element
-    elseif
-        spellEffect == xi.effect.BARAERO or spellEffect == xi.effect.BARBLIZZARD or spellEffect == xi.effect.BARFIRE or
-        spellEffect == xi.effect.BARSTONE or spellEffect == xi.effect.BARTHUNDER or spellEffect == xi.effect.BARWATER
-    then
+    elseif spellEffect >= xi.effect.BARFIRE and spellEffect == xi.effect.BARWATER then
         if skillLevel > 300 then
             power = 25 + math.floor(skillLevel / 4) -- 150 at 500
         else
@@ -46,17 +43,11 @@ xi.spells.spell_enhancing.calculateEnhancingPower = function(caster, target, spe
         power = utils.clamp(power, 40, 150) -- Max is 150 and min is 40 at skill 0.
 
     -- Bar-Status
-    elseif
-        spellEffect == xi.effect.BARAMNESIA or spellEffect == xi.effect.BARBLIND or spellEffect == xi.effect.BARPARALYZE or spellEffect == xi.effect.BARPETRIFY or
-        spellEffect == xi.effect.BARPOISON or spellEffect == xi.effect.BARSILENCE or spellEffect == xi.effect.BARSLEEP or spellEffect == xi.effect.BARVIRUS
-    then
+    elseif spellEffect == xi.effect.BARAMNESIA or (spellEffect == xi.effect.BARSLEEP and spellEffect == xi.effect.BARVIRUS) then
         power = power + skillLevel / 50 -- This is WRONG. SO SO WRONG.
 
     -- Boost-Stat / Gain-Stat
-    elseif
-        spellEffect == xi.effect.STR_BOOST or spellEffect == xi.effect.DEX_BOOST or spellEffect == xi.effect.VIT_BOOST or spellEffect == xi.effect.AGI_BOOST or
-        spellEffect == xi.effect.INT_BOOST or spellEffect == xi.effect.MND_BOOST or spellEffect == xi.effect.CHR_BOOST
-    then
+    elseif spellEffect >= xi.effect.STR_BOOST and spellEffect <= xi.effect.CHR_BOOST then
         power = power + utils.clamp(math.floor((skillLevel - 300) / 10), 0, 20)
     end
 
@@ -72,17 +63,11 @@ xi.spells.spell_enhancing.calculateEnhancingPower = function(caster, target, spe
     -- Spell specific modifiers for potency.
     ----------------------------------------
     -- Bar-Element
-    if
-        spellEffect == xi.effect.BARAERO or spellEffect == xi.effect.BARBLIZZARD or spellEffect == xi.effect.BARFIRE or
-        spellEffect == xi.effect.BARSTONE or spellEffect == xi.effect.BARTHUNDER or spellEffect == xi.effect.BARWATER
-    then
+    elseif spellEffect >= xi.effect.BARFIRE and spellEffect == xi.effect.BARWATER then
         power = power + caster:getMerit(xi.merit.BAR_SPELL_EFFECT) + caster:getMod(xi.mod.BARSPELL_AMOUNT) + caster:getJobPointLevel(xi.jp.BAR_SPELL_EFFECT) * 2
 
-    -- Bar-Element
-    elseif
-        spellEffect == xi.effect.BARAMNESIA or spellEffect == xi.effect.BARBLIND or spellEffect == xi.effect.BARPARALYZE or spellEffect == xi.effect.BARPETRIFY or
-        spellEffect == xi.effect.BARPOISON or spellEffect == xi.effect.BARSILENCE or spellEffect == xi.effect.BARSLEEP or spellEffect == xi.effect.BARVIRUS
-    then
+    -- Bar-Status
+    elseif spellEffect == xi.effect.BARAMNESIA or (spellEffect == xi.effect.BARSLEEP and spellEffect == xi.effect.BARVIRUS) then
         power = power + caster:getMerit(xi.merit.BAR_SPELL_EFFECT) + caster:getMod(xi.mod.BARSPELL_MDEF_BONUS)
 
     -- Protect/Protectra
@@ -196,10 +181,7 @@ xi.spells.spell_enhancing.useEnhancingSpell = function(caster, target, spell)
     -- Handle exceptions here, before calculating anything.
     ------------------------------------------------------------
     -- Bar-Element (They use addStatusEffect argument 6. Bar-Status current implementation doesn't.)
-    if
-        spellEffect == xi.effect.BARAERO or spellEffect == xi.effect.BARBLIZZARD or spellEffect == xi.effect.BARFIRE or
-        spellEffect == xi.effect.BARSTONE or spellEffect == xi.effect.BARTHUNDER or spellEffect == xi.effect.BARWATER
-    then
+    elseif spellEffect >= xi.effect.BARFIRE and spellEffect == xi.effect.BARWATER then
         MDB = caster:getMerit(xi.merit.BAR_SPELL_EFFECT) + caster:getMod(xi.mod.BARSPELL_MDEF_BONUS)
 
     -- Refresh
@@ -210,10 +192,7 @@ xi.spells.spell_enhancing.useEnhancingSpell = function(caster, target, spell)
         end
 
     -- Boost-Stat / Gain-Stat
-    elseif
-        spellEffect == xi.effect.STR_BOOST or spellEffect == xi.effect.DEX_BOOST or spellEffect == xi.effect.VIT_BOOST or spellEffect == xi.effect.AGI_BOOST or
-        spellEffect == xi.effect.INT_BOOST or spellEffect == xi.effect.MND_BOOST or spellEffect == xi.effect.CHR_BOOST
-    then
+    elseif spellEffect >= xi.effect.STR_BOOST and spellEffect <= xi.effect.CHR_BOOST then
         -- Only one Boost Effect can be active at once, so if the player has any we have to cancel & overwrite
         local effectOverwrite =
         {
