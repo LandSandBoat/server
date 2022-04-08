@@ -9,13 +9,11 @@ local ID = require("scripts/zones/Sacrarium/IDs")
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-
-    if (player:getZPos() < 50) then
+    if player:getZPos() < 50 then
         npc:openDoor()
     else
         player:messageSpecial(ID.text.CANNOT_OPEN_SIDE)
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)

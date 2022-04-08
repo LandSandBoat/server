@@ -99,6 +99,8 @@ namespace luautils
 
     std::unique_ptr<Filewatcher>  filewatcher;
 
+    std::unordered_map<uint32, sol::table> customMenuContext;
+
     /************************************************************************
      *                                                                       *
      *  Initialization of Lua user classes and global functions             *
@@ -2423,8 +2425,7 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        // TODO: This shouldn't be global, attach to xi.gear_sets or similar
-        auto checkForGearSet = lua["checkForGearSet"];
+        auto checkForGearSet = lua["xi"]["gear_sets"]["checkForGearSet"];
         if (!checkForGearSet.valid())
         {
             return 56;
@@ -3060,8 +3061,7 @@ namespace luautils
         CCharEntity* PChar = dynamic_cast<CCharEntity*>(PKiller);
         if (PChar && PMob->objtype == TYPE_MOB)
         {
-            // TODO: Don't save this globally
-            auto onMobDeathEx = lua["onMobDeathEx"];
+            auto onMobDeathEx = lua["xi"]["mob"]["onMobDeathEx"];
             if (!onMobDeathEx.valid())
             {
                 return -1;
@@ -4708,5 +4708,86 @@ namespace luautils
         TracyZoneScoped;
         CCharEntity* player = dynamic_cast<CCharEntity*>(PLuaBaseEntity->GetBaseEntity());
         return daily::SelectItem(player, dial);
+    }
+
+    std::string SetCustomMenuContext(CCharEntity* PChar, sol::table table)
+    {
+        customMenuContext[PChar->id] = table;
+
+        auto onStart = table["onStart"];
+        if (onStart.valid())
+        {
+            onStart(CLuaBaseEntity(PChar));
+        }
+
+        auto escape = [](std::string s)
+        {
+            return fmt::format("\"{}\"", s);
+        };
+
+        std::string outStr;
+
+        // Title
+        outStr += escape(table["title"].get<std::string>());
+
+        // Options
+        for (auto& entry : table["options"].get<sol::table>())
+        {
+            outStr += escape(entry.second.as<sol::table>()[1]);
+        }
+
+        return outStr;
+    }
+
+    bool HasCustomMenuContext(CCharEntity* PChar)
+    {
+        auto context = customMenuContext.find(PChar->id);
+        return context != customMenuContext.end();
+    }
+
+    void HandleCustomMenu(CCharEntity* PChar, std::string selection)
+    {
+        // selection is of the form:
+        // GMTELL(Testo): Question(Test Menu): Result (Option 1)
+        // Cancelled:
+        // GMTELL(Testo): Question(Test Menu (Play Effect)): Result (Canceled.)
+
+        std::string cleanedSelection = selection.substr(selection.find("): Result (") + 11);
+        cleanedSelection.pop_back(); // Remove trailing ')'
+
+        auto context = customMenuContext[PChar->id];
+        if (strcmp(cleanedSelection.c_str(), "Canceled.") == 0)
+        {
+            auto onCancelled = context["onCancelled"];
+            if (onCancelled.valid())
+            {
+                onCancelled(CLuaBaseEntity(PChar));
+            }
+        }
+        else
+        {
+            for (auto& entry : context["options"].get<sol::table>())
+            {
+                if (entry.second.get_type() == sol::type::table)
+                {
+                    auto table = entry.second.as<sol::table>();
+                    auto name  = table[1].get<std::string>();
+                    auto func  = table[2].get<sol::function>();
+
+                    if (cleanedSelection.compare(name) == 0)
+                    {
+                        func(CLuaBaseEntity(PChar));
+                    }
+                }
+            }
+        }
+
+        auto onEnd = context["onEnd"];
+        if (onEnd.valid())
+        {
+            onEnd(CLuaBaseEntity(PChar));
+        }
+
+        customMenuContext.erase(PChar->id);
     }
 }; // namespace luautils

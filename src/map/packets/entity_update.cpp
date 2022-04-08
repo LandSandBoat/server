@@ -61,7 +61,7 @@ CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type
             {
                 //ref<uint8>(0x28) = 0x45;
             }
-            if (PEntity->look.size == MODEL_EQUIPED || PEntity->look.size == MODEL_CHOCOBO)
+            if (PEntity->look.size == MODEL_EQUIPPED || PEntity->look.size == MODEL_CHOCOBO)
             {
                 updatemask = 0x57;
             }
@@ -99,6 +99,7 @@ CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type
         ref<uint8>(0x20) = static_cast<uint8>(PEntity->status);
     }
 
+    // General flags and data
     switch (PEntity->objtype)
     {
         case TYPE_NPC:
@@ -169,9 +170,10 @@ CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type
         // ref<uint8>(0x2A) = 0x08;
         // ref<uint8>(0x25) = 0x0f;
         // ref<uint8>(0x27) = 0x28;
-        ref<uint8>(0x28) = 0x45;
+        ref<uint8>(0x28) = 0x45; // This allows trusts to be despawned
     }
 
+    // Send look data
     switch (PEntity->look.size)
     {
         case MODEL_STANDARD:
@@ -182,7 +184,7 @@ CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type
             ref<uint32>(0x30) = ::ref<uint32>(&PEntity->look, 0);
         }
         break;
-        case MODEL_EQUIPED:
+        case MODEL_EQUIPPED:
         case MODEL_CHOCOBO:
         {
             std::memcpy(data + 0x30, &PEntity->look, sizeof(PEntity->look));
@@ -194,14 +196,38 @@ CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type
         {
             this->setSize(0x48);
             ref<uint16>(0x30) = PEntity->look.size;
+            memcpy(data + (0x34), PEntity->GetName(), (PEntity->name.size() > 12 ? 12 : PEntity->name.size()));
         }
         break;
     }
 
-    if (updatemask & UPDATE_HP || updatemask & UPDATE_NAME)
+    // NOTE: It is possible to send custom names to all NPCs and Mobs (static and dynamic)
+    // in order to rename them, but this is not retail behaviour in all cases.
+
+    // Send name data
+    if (updatemask & UPDATE_NAME)
     {
-        auto nameOffset = (PEntity->look.size == MODEL_EQUIPED) ? 0x44 : 0x34;
-        auto name       = (PEntity->packetName.empty()) ? PEntity->name : PEntity->packetName;
-        std::memcpy(data + nameOffset, name.c_str(), std::min<size_t>(name.size(), PacketNameLength));
+        this->setSize(0x48);
+
+        bool isNPC      = PEntity->objtype == TYPE_NPC;
+        auto name       = PEntity->name;
+        auto nameOffset = (PEntity->look.size == MODEL_EQUIPPED) ? 0x44 : 0x34;
+
+        if ((!isNPC && !PEntity->packetName.empty()) ||
+            PEntity->IsDynamicEntity())
+        {
+            name = PEntity->packetName;
+        }
+
+        auto maxLength = std::min<size_t>(name.size(), PacketNameLength);
+
+        if (PEntity->look.size == MODEL_DOOR ||
+            PEntity->look.size == MODEL_ELEVATOR ||
+            PEntity->look.size == MODEL_SHIP)
+        {
+            maxLength = 12;
+        }
+
+        std::memcpy(data + nameOffset, name.c_str(), maxLength);
     }
 }

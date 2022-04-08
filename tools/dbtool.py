@@ -69,6 +69,7 @@ from migrations import currency2
 from migrations import languages
 from migrations import add_field_chocobo_column
 from migrations import add_new_wardrobe_columns
+from migrations import abyssea_unlocks
 
 # Append new migrations to this list and import above
 migrations = [
@@ -97,7 +98,8 @@ migrations = [
     currency2,
     languages,
     add_field_chocobo_column,
-    add_new_wardrobe_columns
+    add_new_wardrobe_columns,
+    abyssea_unlocks,
 ]
 
 # These are the 'protected' files
@@ -596,6 +598,12 @@ def settings():
         adjust_auto_update_client()
     adjust_imports()
     write_configs()
+
+# TODO: Hook this up to a menu option
+def set_external_ip(ip_str):
+    command = '"' + mysql_bin + 'mysqladmin' + exe + '" -h ' + host + ' -P ' + str(port) + ' -u ' + login + ' -p' + password + \
+        'UPDATE zone_settings SET zoneip = ' + ip_str + ';'
+    os.system(command + log_errors)
 
 def main():
     global mysql_bin, exe

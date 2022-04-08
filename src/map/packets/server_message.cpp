@@ -34,24 +34,23 @@ CServerMessagePacket::CServerMessagePacket(const string_t& message, int8 languag
     ref<uint8>(0x06)  = 1;
     ref<uint8>(0x07)  = language;
     ref<uint32>(0x08) = (uint32)(timestamp == 0 ? time(nullptr) : timestamp);
-    ref<uint32>(0x0C) = 0; // Message Length.. (Total)
-    ref<uint32>(0x10) = 0; // Message Offset..
-    ref<uint32>(0x14) = 0; // Message Length..
+    ref<uint32>(0x0C) = 0; // Message Length (Total)
+    ref<uint32>(0x10) = 0; // Message Offset
+    ref<uint32>(0x14) = 0; // Message Length
 
-    // Ensure we have a message and the requested offset is not outside of the bounds..
+    // Ensure we have a message and the requested offset is not outside of the bounds
     if (message.length() > (size_t)0 && message.length() > (size_t)message_offset)
     {
-        auto msgLength = message.length();
+        auto msgLength = ((message.length() + 4 - 1) / 4) * 4;
         auto sndLength = (msgLength - message_offset) > 236 ? 236 : (msgLength - message_offset);
 
-        ref<uint32>(0x0C) = (uint32)message.length(); // Message Length.. (Total)
-        ref<uint32>(0x10) = message_offset;           // Message Offset..
-        ref<uint32>(0x14) = (uint32)sndLength;        // Message Length..
-
-        memcpy((data + (0x18)), message.c_str() + message_offset, sndLength);
+        ref<uint32>(0x0C) = (uint32)msgLength; // Message Length (Total)
+        ref<uint32>(0x10) = message_offset;    // Message Offset
+        ref<uint32>(0x14) = (uint32)sndLength; // Message Length
 
         auto textSize = (uint8)(sndLength + sndLength % 2);
-        // TODO: Verify the below math
         this->setSize(((((0x14 + textSize) + 4) >> 1) & 0xFE) * 2);
+
+        std::memcpy(data + 0x18, message.c_str() + message_offset, sndLength);
     }
 }
