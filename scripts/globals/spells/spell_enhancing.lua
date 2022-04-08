@@ -51,6 +51,13 @@ xi.spells.spell_enhancing.calculateEnhancingPower = function(caster, target, spe
         spellEffect == xi.effect.BARPOISON or spellEffect == xi.effect.BARSILENCE or spellEffect == xi.effect.BARSLEEP or spellEffect == xi.effect.BARVIRUS
     then
         power = power + skillLevel / 50 -- This is WRONG. SO SO WRONG.
+
+    -- Boost-Stat / Gain-Stat
+    elseif
+        spellEffect == xi.effect.STR_BOOST or spellEffect == xi.effect.DEX_BOOST or spellEffect == xi.effect.VIT_BOOST or spellEffect == xi.effect.AGI_BOOST or
+        spellEffect == xi.effect.INT_BOOST or spellEffect == xi.effect.MND_BOOST or spellEffect == xi.effect.CHR_BOOST
+    then
+        power = power + utils.clamp(math.floor((skillLevel - 300) / 10), 0, 20)
     end
 
     --------------------
@@ -200,6 +207,29 @@ xi.spells.spell_enhancing.useEnhancingSpell = function(caster, target, spell)
         if target:hasStatusEffect(xi.effect.SUBLIMATION_ACTIVATED) or target:hasStatusEffect(xi.effect.SUBLIMATION_COMPLETE) then
             spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
             return 0
+        end
+
+    -- Boost-Stat / Gain-Stat
+    elseif
+        spellEffect == xi.effect.STR_BOOST or spellEffect == xi.effect.DEX_BOOST or spellEffect == xi.effect.VIT_BOOST or spellEffect == xi.effect.AGI_BOOST or
+        spellEffect == xi.effect.INT_BOOST or spellEffect == xi.effect.MND_BOOST or spellEffect == xi.effect.CHR_BOOST
+    then
+        -- Only one Boost Effect can be active at once, so if the player has any we have to cancel & overwrite
+        local effectOverwrite =
+        {
+            xi.effect.STR_BOOST,
+            xi.effect.DEX_BOOST,
+            xi.effect.VIT_BOOST,
+            xi.effect.AGI_BOOST,
+            xi.effect.INT_BOOST,
+            xi.effect.MND_BOOST,
+            xi.effect.CHR_BOOST
+        }
+
+        for i, effectValue in ipairs(effectOverwrite) do
+            if target:hasStatusEffect(effectValue) then
+                target:delStatusEffect(effectValue)
+            end
         end
     end
 

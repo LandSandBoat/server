@@ -198,7 +198,28 @@ xi.spells.parameters.enhancingSpell =
     [xi.magic.spell.BARSLEEPRA   ] = { 2, xi.skill.ENHANCING_MAGIC, xi.effect.BARSLEEP,    1,    1,  480, true,  true  },
     [xi.magic.spell.BARVIRA      ] = { 2, xi.skill.ENHANCING_MAGIC, xi.effect.BARVIRUS,    1,    1,  480, true,  true  },
 
-    -- Protect/Protectra
+    -- Blink
+    [xi.magic.spell.BLINK        ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.BLINK,       1,    2,  300, true,  false },
+
+    -- Boost-Stat
+    [xi.magic.spell.BOOST_STR    ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.STR_BOOST,   1,    5,  300, true,  false },
+    [xi.magic.spell.BOOST_DEX    ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.DEX_BOOST,   1,    5,  300, true,  false },
+    [xi.magic.spell.BOOST_VIT    ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.VIT_BOOST,   1,    5,  300, true,  false },
+    [xi.magic.spell.BOOST_AGI    ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.AGI_BOOST,   1,    5,  300, true,  false },
+    [xi.magic.spell.BOOST_INT    ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.INT_BOOST,   1,    5,  300, true,  false },
+    [xi.magic.spell.BOOST_MND    ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.MND_BOOST,   1,    5,  300, true,  false },
+    [xi.magic.spell.BOOST_CHR    ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.CHR_BOOST,   1,    5,  300, true,  false },
+
+    -- Gain-Stat
+    [xi.magic.spell.GAIN_STR     ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.STR_BOOST,   1,    5,  300, true,  false },
+    [xi.magic.spell.GAIN_DEX     ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.DEX_BOOST,   1,    5,  300, true,  false },
+    [xi.magic.spell.GAIN_VIT     ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.VIT_BOOST,   1,    5,  300, true,  false },
+    [xi.magic.spell.GAIN_AGI     ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.AGI_BOOST,   1,    5,  300, true,  false },
+    [xi.magic.spell.GAIN_INT     ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.INT_BOOST,   1,    5,  300, true,  false },
+    [xi.magic.spell.GAIN_MND     ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.MND_BOOST,   1,    5,  300, true,  false },
+    [xi.magic.spell.GAIN_CHR     ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.CHR_BOOST,   1,    5,  300, true,  false },
+
+    -- Protect / Protectra
     [xi.magic.spell.PROTECT      ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.PROTECT,     7,   20, 1800, false, false },
     [xi.magic.spell.PROTECT_II   ] = { 2, xi.skill.ENHANCING_MAGIC, xi.effect.PROTECT,    27,   50, 1800, false, false },
     [xi.magic.spell.PROTECT_III  ] = { 3, xi.skill.ENHANCING_MAGIC, xi.effect.PROTECT,    47,   90, 1800, false, false },
@@ -222,7 +243,7 @@ xi.spells.parameters.enhancingSpell =
     [xi.magic.spell.REGEN_IV     ] = { 4, xi.skill.ENHANCING_MAGIC, xi.effect.REGEN,      86,   30,   60, true,  false },
     [xi.magic.spell.REGEN_V      ] = { 5, xi.skill.ENHANCING_MAGIC, xi.effect.REGEN,      99,   40,   60, true,  false },
 
-    -- Shell/Shellra
+    -- Shell / Shellra
     [xi.magic.spell.SHELL        ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.SHELL,      18, 1055, 1800, false, false },
     [xi.magic.spell.SHELL_II     ] = { 2, xi.skill.ENHANCING_MAGIC, xi.effect.SHELL,      37, 1641, 1800, false, false },
     [xi.magic.spell.SHELL_III    ] = { 3, xi.skill.ENHANCING_MAGIC, xi.effect.SHELL,      57, 2188, 1800, false, false },
