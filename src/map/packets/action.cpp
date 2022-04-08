@@ -66,7 +66,7 @@ CActionPacket::CActionPacket(action_t& action)
         break;
         case ACTION_WEAPONSKILL_FINISH:
         {
-            packBitsBE(data, action.actionid, 86, 10);
+            packBitsBE(data, action.actionid, 86, 16);
         }
         break;
         case ACTION_JOBABILITY_START:

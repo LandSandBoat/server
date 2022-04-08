@@ -1217,6 +1217,9 @@ xi.mod =
     TP_BONUS                        = 345,
     PERPETUATION_REDUCTION          = 346,
 
+    -- Geomancer
+    FULL_CIRCLE                     = 1025, -- Increases the initial multiplier on MP returned via Full Circle
+
     -- Rune Fencer
     ENHANCES_BATTUTA            = 1004, -- Used by RUN merit point cat 2 to add +N% bonus damage to parry spikes during Battuta effect
     ENHANCES_ELEMENTAL_SFORZO   = 1005, -- Bonus duration
@@ -1229,7 +1232,11 @@ xi.mod =
     VIVACIOUS_PULSE_POTENCY     = 1012, -- Adds final HP bonus +N% to calculation of Vivacious Pulse
     AUGMENTS_VIVACIOUS_PULSE    = 1013, -- Adds random erase/-na to Vivacious Pulse
     RAYKE_DURATION              = 1014, -- Adds bonus duration as +N seconds
+    ODYLLIC_SUBTERFUGE_DURATION = 1015, -- Adds bonus duration as +N seconds
     SWIPE                       = 1016, -- Adds bonus damage to the Swipe/Lunge magic damage calculation
+    LIEMENT_DURATION            = 1017, -- Adds bonus duration as +N seconds
+    GAMBIT_DURATION             = 1018, -- Adds bonus duration as +N seconds
+    EMBOLDEN_DURATION           = 1019, -- Adds bonus duration as +N seconds
     LIEMENT_EXTENDS_TO_AREA     = 1020, -- Epeolatry's (RUN Ergon weapon) special effect, makes Liement AoE to party instead of self target only.
     INSPIRATION_FAST_CAST       = 1021, -- Inspiration's fast cast, additive with normal fast cast for a cap beyond 80%
     PARRY_SPIKES                = 1022, -- Battuta parry spikes rate

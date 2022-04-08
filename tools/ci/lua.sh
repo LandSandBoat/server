@@ -69,9 +69,6 @@ global_objects=(
     Sequence
     Container
     Event
-    onMobDeathEx
-
-    checkForGearSet
 
     removeSleepEffects
 

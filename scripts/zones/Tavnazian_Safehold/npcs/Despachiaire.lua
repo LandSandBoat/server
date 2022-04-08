@@ -22,12 +22,9 @@ entity.onTrigger = function(player, npc)
     local copMissionStatus = player:getCharVar("PromathiaStatus")
     local copMissions = xi.mission.id.cop
 
-    -- COP 4-1 "Sheltering Doubt"
-    if copCurrentMission == copMissions.SHELTERING_DOUBT and copMissionStatus == 1 then
-        player:startEvent(108)
     -- COP 4-4 "Slanderous Utterings" is an area approach handled in Tavnazian_Safehold/Zone.lua
     -- COP 5-1 "Sheltering Doubt" (optional)
-    elseif
+    if
         copCurrentMission == copMissions.THE_ENDURING_TUMULT_OF_WAR and
         copMissionStatus == 0 and
         player:getCharVar("COP_optional_CS_Despachaire") == 0
@@ -50,9 +47,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 108 then
-        player:setCharVar("PromathiaStatus", 2)
-    elseif csid == 117 then
+    if csid == 117 then
         player:setCharVar("COP_optional_CS_Despachaire", 1)
     elseif csid == 118 then
         player:setCharVar("COP_Louverance_s_Path", 1)

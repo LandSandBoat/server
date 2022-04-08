@@ -111,4 +111,6 @@ add_definitions(-DSOL_ALL_SAFETIES_ON=1 -DSOL_NO_CHECK_NUMBER_PRECISION=1)
 add_subdirectory(ext)
 
 include(ClangTidy)
+include(Fuzzing)
+
 add_subdirectory(src)

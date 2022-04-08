@@ -13,9 +13,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if (player:getCurrentMission(COP) == xi.mission.id.cop.THE_SECRETS_OF_WORSHIP and player:getCharVar("PromathiaStatus") == 0) then
-        player:startEvent(111)
-    elseif (player:getCurrentMission(COP) == xi.mission.id.cop.CHAINS_AND_BONDS and player:getCharVar("PromathiaStatus")==4) then
+    if (player:getCurrentMission(COP) == xi.mission.id.cop.CHAINS_AND_BONDS and player:getCharVar("PromathiaStatus")==4) then
         player:startEvent(115)
     elseif (player:getCurrentMission(COP) == xi.mission.id.cop.DAWN and player:getCharVar("PromathiaStatus")==5) then
         player:startEvent(543)
@@ -26,9 +24,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 111 then
-        player:setCharVar("PromathiaStatus", 1)
-    elseif (csid == 115) then
+    if (csid == 115) then
         player:setCharVar("PromathiaStatus", 0)
         player:completeMission(xi.mission.log_id.COP, xi.mission.id.cop.CHAINS_AND_BONDS)
         player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.FLAMES_IN_THE_DARKNESS)

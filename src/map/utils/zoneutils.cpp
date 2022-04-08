@@ -245,15 +245,17 @@ namespace zoneutils
     }
     /************************************************************************
      *                                                                       *
-     *  Загружаем список NPC в указанную зону                                *
+     *  Uploading a list of NPCs to the specified zone                       *
      *                                                                       *
      ************************************************************************/
 
     void LoadNPCList()
     {
         const char* Query = "SELECT \
-          npcid,\
-          npc_list.name,\
+          content_tag, \
+          npcid, \
+          npc_list.name, \
+          npc_list.polutils_name, \
           pos_rot,\
           pos_x,\
           pos_y,\
@@ -268,7 +270,6 @@ namespace zoneutils
           entityFlags,\
           look,\
           name_prefix, \
-          content_tag, \
           widescan \
         FROM npc_list INNER JOIN zone_settings \
         ON (npcid & 0xFFF000) >> 12 = zone_settings.zoneid \
@@ -282,14 +283,13 @@ namespace zoneutils
         {
             while (sql->NextRow() == SQL_SUCCESS)
             {
-                const char* contentTag = (const char*)sql->GetData(16);
-
+                const char* contentTag = (const char*)sql->GetData(0);
                 if (!luautils::IsContentEnabled(contentTag))
                 {
                     continue;
                 }
 
-                uint32 NpcID  = sql->GetUIntData(0);
+                uint32 NpcID  = sql->GetUIntData(1);
                 uint16 ZoneID = (NpcID - 0x1000000) >> 12;
 
                 if (GetZone(ZoneID)->GetType() != ZONE_TYPE::DUNGEON_INSTANCED)
@@ -298,30 +298,31 @@ namespace zoneutils
                     PNpc->targid     = NpcID & 0xFFF;
                     PNpc->id         = NpcID;
 
-                    PNpc->name.insert(0, (const char*)sql->GetData(1));
+                    PNpc->name.insert(0, (const char*)sql->GetData(2)); // Internal name
+                    PNpc->packetName.insert(0, (const char*)sql->GetData(3)); // Name sent to the client (when applicable)
 
-                    PNpc->loc.p.rotation = (uint8)sql->GetIntData(2);
-                    PNpc->loc.p.x        = sql->GetFloatData(3);
-                    PNpc->loc.p.y        = sql->GetFloatData(4);
-                    PNpc->loc.p.z        = sql->GetFloatData(5);
-                    PNpc->loc.p.moving   = (uint16)sql->GetUIntData(6);
+                    PNpc->loc.p.rotation = (uint8)sql->GetIntData(4);
+                    PNpc->loc.p.x        = sql->GetFloatData(5);
+                    PNpc->loc.p.y        = sql->GetFloatData(6);
+                    PNpc->loc.p.z        = sql->GetFloatData(7);
+                    PNpc->loc.p.moving   = (uint16)sql->GetUIntData(8);
 
-                    PNpc->m_TargID = (uint32)sql->GetUIntData(6) >> 16; // вполне вероятно
+                    PNpc->m_TargID = (uint32)sql->GetUIntData(8) >> 16;
 
-                    PNpc->speed    = (uint8)sql->GetIntData(7); // Overwrites baseentity.cpp's defined speed
-                    PNpc->speedsub = (uint8)sql->GetIntData(8); // Overwrites baseentity.cpp's defined speedsub
+                    PNpc->speed    = (uint8)sql->GetIntData(9); // Overwrites baseentity.cpp's defined speed
+                    PNpc->speedsub = (uint8)sql->GetIntData(10); // Overwrites baseentity.cpp's defined speedsub
 
-                    PNpc->animation    = (uint8)sql->GetIntData(9);
-                    PNpc->animationsub = (uint8)sql->GetIntData(10);
+                    PNpc->animation    = (uint8)sql->GetIntData(11);
+                    PNpc->animationsub = (uint8)sql->GetIntData(12);
 
-                    PNpc->namevis = (uint8)sql->GetIntData(11);
-                    PNpc->status  = static_cast<STATUS_TYPE>(sql->GetIntData(12));
-                    PNpc->m_flags = (uint32)sql->GetUIntData(13);
+                    PNpc->namevis = (uint8)sql->GetIntData(13);
+                    PNpc->status  = static_cast<STATUS_TYPE>(sql->GetIntData(14));
+                    PNpc->m_flags = (uint32)sql->GetUIntData(15);
 
-                    PNpc->name_prefix = (uint8)sql->GetIntData(15);
-                    PNpc->widescan    = (uint8)sql->GetIntData(17);
+                    std::memcpy(&PNpc->look, sql->GetData(16), 20);
 
-                    memcpy(&PNpc->look, sql->GetData(14), 20);
+                    PNpc->name_prefix = (uint8)sql->GetIntData(17);
+                    PNpc->widescan    = (uint8)sql->GetIntData(18);
 
                     GetZone(ZoneID)->InsertNPC(PNpc);
 
@@ -337,7 +338,7 @@ namespace zoneutils
 
     /************************************************************************
      *                                                                       *
-     *  Загружаем список монстров в указанную зону                           *
+     *  Uploading a list of MOBs to the specified zone                       *
      *                                                                       *
      ************************************************************************/
 
@@ -349,7 +350,7 @@ namespace zoneutils
         const char* Query = "SELECT mob_groups.zoneid, mobname, mobid, pos_rot, pos_x, pos_y, pos_z, \
             respawntime, spawntype, dropid, mob_groups.HP, mob_groups.MP, minLevel, maxLevel, \
             modelid, mJob, sJob, cmbSkill, cmbDmgMult, cmbDelay, behavior, links, mobType, immunity, \
-            ecosystemID, mobsize, speed, \
+            ecosystemID, mobradius, speed, \
             STR, DEX, VIT, AGI, `INT`, MND, CHR, EVA, DEF, ATT, ACC, \
             slash_sdt, pierce_sdt, h2h_sdt, impact_sdt, \
             fire_sdt, ice_sdt, wind_sdt, earth_sdt, lightning_sdt, water_sdt, light_sdt, dark_sdt, \
@@ -412,12 +413,12 @@ namespace zoneutils
                     ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setDelay((sql->GetIntData(19) * 1000) / 60);
                     ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setBaseDelay((sql->GetIntData(19) * 1000) / 60);
 
-                    PMob->m_Behaviour = (uint16)sql->GetIntData(20);
-                    PMob->m_Link      = (uint8)sql->GetIntData(21);
-                    PMob->m_Type      = (uint8)sql->GetIntData(22);
-                    PMob->m_Immunity  = (IMMUNITY)sql->GetIntData(23);
-                    PMob->m_EcoSystem = (ECOSYSTEM)sql->GetIntData(24);
-                    PMob->m_ModelSize = (uint8)sql->GetIntData(25);
+                    PMob->m_Behaviour   = (uint16)sql->GetIntData(20);
+                    PMob->m_Link        = (uint8)sql->GetIntData(21);
+                    PMob->m_Type        = (uint8)sql->GetIntData(22);
+                    PMob->m_Immunity    = (IMMUNITY)sql->GetIntData(23);
+                    PMob->m_EcoSystem   = (ECOSYSTEM)sql->GetIntData(24);
+                    PMob->m_ModelRadius = (uint8)sql->GetIntData(25);
 
                     PMob->speed    = (uint8)sql->GetIntData(26);
                     PMob->speedsub = (uint8)sql->GetIntData(26);

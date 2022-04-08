@@ -1,24 +1,17 @@
 -----------------------------------
--- Area: Apollyon SW
+-- Area: Apollyon SW, Floor 4
 --  Mob: Earth Elemental
 -----------------------------------
-local ID = require("scripts/zones/Apollyon/IDs")
-require("scripts/globals/limbus")
+require("scripts/zones/Apollyon/bcnms/ne_apollyon_helper")
 -----------------------------------
 local entity = {}
 
 entity.onMobEngaged = function(mob, target)
-    GetMobByID(ID.mob.APOLLYON_SW_MOB[4] + 2):updateEnmity(target)
-    GetMobByID(ID.mob.APOLLYON_SW_MOB[4] + 10):updateEnmity(target)
-    GetMobByID(ID.mob.APOLLYON_SW_MOB[4] + 18):updateEnmity(target)
+    xi.apollyon_sw.handleMobEngagedFloorFour(mob, target, 1)
 end
 
 entity.onMobDeath = function(mob, player, isKiller, noKiller)
-    if isKiller or noKiller then
-        if xi.limbus.elementalsDead() then
-            GetNPCByID(ID.npc.APOLLYON_SW_CRATE[4]):setStatus(xi.status.NORMAL)
-        end
-    end
+    xi.apollyon_sw.handleMobDeathFloorFour(mob, player, isKiller, noKiller, 1)
 end
 
 return entity

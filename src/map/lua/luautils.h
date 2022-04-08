@@ -315,6 +315,10 @@ namespace luautils
     void OnFurnitureRemoved(CCharEntity* PChar, CItemFurnishing* itemId);
 
     uint16 SelectDailyItem(CLuaBaseEntity* PLuaBaseEntity, uint8 dial);
+
+    auto SetCustomMenuContext(CCharEntity* PChar, sol::table table) -> std::string;
+    bool HasCustomMenuContext(CCharEntity* PChar);
+    void HandleCustomMenu(CCharEntity* PChar, std::string selection);
 }; // namespace luautils
 
 #endif // _LUAUTILS_H -

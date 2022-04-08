@@ -367,6 +367,7 @@ bool CBattlefield::InsertEntity(CBaseEntity* PEntity, bool enter, BATTLEFIELDMOB
     {
         PEntity->PBattlefield = this;
     }
+
     // mob, initiator or ally
     if (entity && !entity->StatusEffectContainer->GetStatusEffect(EFFECT_BATTLEFIELD))
     {

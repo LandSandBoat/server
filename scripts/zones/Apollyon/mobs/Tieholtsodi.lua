@@ -2,7 +2,7 @@
 -- Area: Apollyon SE, Floor 2
 --  Mob: Tieholtsodi
 -----------------------------------
-require("scripts/zones/Apollyon/helpers/apollyon_se")
+require("scripts/zones/Apollyon/bcnms/se_apollyon_helper")
 require("scripts/globals/pathfind")
 mixins = {require("scripts/mixins/job_special")}
 -----------------------------------

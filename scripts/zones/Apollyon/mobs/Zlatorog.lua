@@ -1,8 +1,8 @@
 -----------------------------------
--- Area: Apollyon NW
+-- Area: Apollyon NW, Floor 2
 --  Mob: Zlatorog
 -----------------------------------
-local ID = require("scripts/zones/Apollyon/IDs")
+require("scripts/zones/Apollyon/bcnms/nw_apollyon_helper")
 require("scripts/globals/pathfind")
 mixins = {require("scripts/mixins/job_special")}
 -----------------------------------
@@ -36,13 +36,7 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, isKiller, noKiller)
-    if isKiller or noKiller then
-        local mobX = mob:getXPos()
-        local mobY = mob:getYPos()
-        local mobZ = mob:getZPos()
-        GetNPCByID(ID.npc.APOLLYON_NW_CRATE[2][1]):setPos(mobX, mobY, mobZ)
-        GetNPCByID(ID.npc.APOLLYON_NW_CRATE[2][1]):setStatus(xi.status.NORMAL)
-    end
+    xi.apollyon_nw.handleMobDeathFloorTwoChest(mob, player, isKiller, noKiller)
 end
 
 return entity
