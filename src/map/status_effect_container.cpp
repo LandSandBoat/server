@@ -1144,7 +1144,7 @@ uint8 CStatusEffectContainer::GetActiveRuneCount()
 
 EFFECT CStatusEffectContainer::GetHighestRuneEffect()
 {
-    std::unordered_map<EFFECT,uint8> runeEffects;
+    std::unordered_map<EFFECT, uint8> runeEffects;
 
     for (CStatusEffect* PStatusEffect : m_StatusEffectSet)
     {
@@ -1162,7 +1162,7 @@ EFFECT CStatusEffectContainer::GetHighestRuneEffect()
     }
 
     EFFECT highestRune = EFFECT_NONE;
-    int highestRuneValue;
+    uint8 highestRuneValue = 0;
 
     for (auto iter = runeEffects.begin(); iter != runeEffects.end(); ++iter)
     {

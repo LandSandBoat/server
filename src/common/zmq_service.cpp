@@ -28,11 +28,42 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 ZMQService::ZMQService(zmq::socket_type type)
 {
+    running = true;
+    zmqThread = std::thread(&ZMQService::_init, this, type);
+}
+
+ZMQService::~ZMQService()
+{
+    running = false;
+    if (zmqThread.joinable())
+    {
+        zmqThread.join();
+    }
+}
+
+void ZMQService::send(uint64 ipp, MSGSERVTYPE type, zmq::message_t* extra, zmq::message_t* packet)
+{
+    chat_message_t msg;
+    msg.dest = ipp;
+    msg.type = type;
+    msg.data.copy(*extra);
+    msg.packet.copy(*packet);
+    outgoing_queue.enqueue(std::move(msg));
+}
+
+auto ZMQService::recv() -> std::vector<chat_message_t>
+{   std::vector<chat_message_t> vec(32);
+    incoming_queue.try_dequeue_bulk(vec.begin(), 32);
+    return vec;
+}
+
+void ZMQService::_init(zmq::socket_type type)
+{
     zmqSql = std::make_unique<SqlConnection>(SettingsManager::Get<std::string>(SqlSettings::LOGIN).c_str(),
-                                             SettingsManager::Get<std::string>(SqlSettings::PASSWORD).c_str(),
-                                             SettingsManager::Get<std::string>(SqlSettings::HOST).c_str(),
-                                             SettingsManager::Get<unsigned int>(SqlSettings::PORT),
-                                             SettingsManager::Get<std::string>(SqlSettings::DATABASE).c_str());
+                                            SettingsManager::Get<std::string>(SqlSettings::PASSWORD).c_str(),
+                                            SettingsManager::Get<std::string>(SqlSettings::HOST).c_str(),
+                                            SettingsManager::Get<unsigned int>(SqlSettings::PORT),
+                                            SettingsManager::Get<std::string>(SqlSettings::DATABASE).c_str());
 
     pContext = std::make_unique<zmq::context_t>(1);
     pSocket  = std::make_unique<zmq::socket_t>(*pContext, type);
@@ -55,10 +86,10 @@ ZMQService::ZMQService(zmq::socket_type type)
         std::exit(-1);
     }
 
-    listen();
+    _listen();
 }
 
-ZMQService::~ZMQService()
+void ZMQService::_destroy()
 {
     if (pSocket)
     {
@@ -75,17 +106,7 @@ ZMQService::~ZMQService()
     }
 }
 
-void ZMQService::queue(uint64 ipp, MSGSERVTYPE type, zmq::message_t* extra, zmq::message_t* packet)
-{
-    chat_message_t msg;
-    msg.dest = ipp;
-    msg.type = type;
-    msg.data.copy(*extra);
-    msg.packet.copy(*packet);
-    outgoing_queue.enqueue(std::move(msg));
-}
-
-void ZMQService::send(uint64 ipp, MSGSERVTYPE type, zmq::message_t* extra, zmq::message_t* packet)
+void ZMQService::_send(uint64 ipp, MSGSERVTYPE type, zmq::message_t* extra, zmq::message_t* packet)
 {
     try
     {
@@ -102,7 +123,7 @@ void ZMQService::send(uint64 ipp, MSGSERVTYPE type, zmq::message_t* extra, zmq::
     }
 }
 
-void ZMQService::parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_t* packet, zmq::message_t* from)
+void ZMQService::_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_t* packet, zmq::message_t* from)
 {
     int     ret = SQL_ERROR;
     in_addr from_ip;
@@ -236,23 +257,26 @@ void ZMQService::parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_t* 
     }
 }
 
-void ZMQService::listen()
+void ZMQService::_listen()
 {
-    while (true)
+    while (running)
     {
         std::array<zmq::message_t, 4> msgs;
         try
         {
+            chat_message_t msg;
+
             const auto ret = zmq::recv_multipart_n(*pSocket, msgs.data(), msgs.size());
             if (!ret)
             {
-                chat_message_t msg;
                 while (outgoing_queue.try_dequeue(msg))
                 {
                     send(msg.dest, msg.type, &msg.data, &msg.packet);
                 }
                 continue;
             }
+
+            incoming_queue.enqueue(std::move(msg));
         }
         catch (zmq::error_t& e)
         {
@@ -271,8 +295,10 @@ void ZMQService::listen()
         // 1: zmq::message_t type;
         // 2: zmq::message_t extra;
         // 3: zmq::message_t packet;
-        parse((MSGSERVTYPE)ref<uint8>((uint8*)msgs[1].data(), 0), &msgs[2], &msgs[3], &msgs[0]);
+        _parse((MSGSERVTYPE)ref<uint8>((uint8*)msgs[1].data(), 0), &msgs[2], &msgs[3], &msgs[0]);
 
         zmqSql->TryPing();
     }
+
+    _destroy();
 }

@@ -24,6 +24,7 @@
 #include <iostream>
 #include <memory>
 #include <string>
+#include <thread>
 #include <concurrentqueue.h>
 
 #include "logging_service.h"
@@ -47,15 +48,26 @@ public:
     ZMQService(zmq::socket_type type);
     ~ZMQService();
 
-    void queue(uint64 ipp, MSGSERVTYPE type, zmq::message_t* extra, zmq::message_t* packet);
     void send(uint64 ipp, MSGSERVTYPE type, zmq::message_t* extra, zmq::message_t* packet);
-    void parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_t* packet, zmq::message_t* from);
-    void listen();
+    auto recv() -> std::vector<chat_message_t>;
 
 private:
+    // For use by the internal thread only
+    void _init(zmq::socket_type type);
+    void _destroy();
+    void _send(uint64 ipp, MSGSERVTYPE type, zmq::message_t* extra, zmq::message_t* packet);
+    void _parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_t* packet, zmq::message_t* from);
+    void _listen();
+
+    std::thread zmqThread;
+    std::atomic<bool> running;
+
     std::unique_ptr<zmq::context_t> pContext;
     std::unique_ptr<zmq::socket_t>  pSocket;
     std::string address;
+
     std::unique_ptr<SqlConnection> zmqSql;
+
+    moodycamel::ConcurrentQueue<chat_message_t> incoming_queue;
     moodycamel::ConcurrentQueue<chat_message_t> outgoing_queue;
 };

@@ -14,7 +14,6 @@ include(Platform)
 include(StandardProjectSettings)
 include(CompilerWarnings)
 include(Sanitizers)
-include(Tracy)
 include(Valgrind)
 
 if(WIN32)

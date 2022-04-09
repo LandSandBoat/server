@@ -148,7 +148,7 @@ add_executable(xi_zone
     ${SOURCES}
     ${resource})
 
-target_include_directories(topaz_game PUBLIC ${module_include_dirs})
+target_include_directories(xi_zone PUBLIC ${module_include_dirs})
 
 if(WIN32)
     set_target_properties(xi_zone PROPERTIES OUTPUT_NAME xi_zone)
