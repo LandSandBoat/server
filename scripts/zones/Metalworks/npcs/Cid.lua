@@ -53,10 +53,6 @@ entity.onTrigger = function(player, npc)
     elseif copMission == xi.mission.id.cop.FIRE_IN_THE_EYES_OF_MEN and copStatus == 1 then
         player:startEvent(857)
 
-    -- ONE TO BE FEARED
-    elseif copMission == xi.mission.id.cop.ONE_TO_BE_FEARED and copStatus == 0 then
-        player:startEvent(856)
-
     -- DARK PUPPET
     elseif
         player:getMainJob() == xi.job.DRK and
@@ -91,8 +87,6 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 857 then
         player:setCharVar("PromathiaStatus", 2)
         player:setCharVar("Promathia_CID_timer", VanadielDayOfTheYear())
-    elseif csid == 856 then
-        player:setCharVar("PromathiaStatus", 1)
     elseif csid == 760 then
         player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.DARK_PUPPET)
         player:setCharVar("darkPuppetCS", 1)

@@ -19,8 +19,6 @@ entity.onTrigger = function(player, npc)
         player:startEvent(16)
     elseif player:getCurrentMission(COP) == xi.mission.id.cop.CALM_BEFORE_THE_STORM and player:hasKeyItem(xi.ki.LETTERS_FROM_ULMIA_AND_PRISHE) then
         player:startEvent(17)
-    else
-        player:startEvent(20)
     end
 end
 

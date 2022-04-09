@@ -16,7 +16,7 @@ entity.onTrigger = function(player, npc)
     --     player:startEvent(27) -- Observed while Three Paths is active
     -- else
     --     player:startEvent(29)
-    -- end        
+    -- end
 end
 
 entity.onEventUpdate = function(player, csid, option)
