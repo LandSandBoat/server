@@ -79,6 +79,7 @@ void CAlliance::dissolveAlliance(bool playerInitiated)
                         SET allianceid = 0, partyflag = partyflag & ~%d \
                         WHERE allianceid = %u AND IF(%u = 0 AND %u = 0, true, server_addr = %u AND server_port = %u);",
                   ALLIANCE_LEADER | PARTY_SECOND | PARTY_THIRD, m_AllianceID, map_ip.s_addr, map_port, map_ip.s_addr, map_port);
+
         // first kick out the third party if it exsists
         CParty* party = nullptr;
         if (this->partyList.size() == 3)
@@ -96,21 +97,45 @@ void CAlliance::dissolveAlliance(bool playerInitiated)
             party->ReloadParty();
         }
 
-        party = this->partyList.at(0);
+        // kick out the first party
+        if (this->partyList.size() == 1)
+        {
+            party = this->partyList.at(0);
+            party->m_PAlliance = nullptr;
+            party->ReloadParty();
+        }
+
         this->partyList.clear();
-
-        party->m_PAlliance = nullptr;
-
-        party->ReloadParty();
 
         delete this;
     }
 }
 
-uint32 CAlliance::partyCount() const
+bool CAlliance::hasOnlyOneParty() const
 {
-    int ret = sql->Query("SELECT * FROM accounts_parties WHERE allianceid = %d GROUP BY partyid;", m_AllianceID, PARTY_SECOND | PARTY_THIRD);
+    if (partyList.size() != 1)
+    {
+        return false;
+    }
 
+    // Load party count to make sure that there is only one party in the alliance across all servers
+    return loadPartyCount() == 1;
+}
+
+bool CAlliance::isFull() const
+{
+    if (partyList.size() == 3)
+    {
+        return true;
+    }
+
+    // Load party count to make sure that that all parties are accounted for across all servers
+    return loadPartyCount() == 3;
+}
+
+uint32 CAlliance::loadPartyCount() const
+{
+    int ret = sql->Query("SELECT * FROM accounts_parties WHERE allianceid = %u GROUP BY partyid;", m_AllianceID, PARTY_SECOND | PARTY_THIRD);
     if (ret != SQL_ERROR)
     {
         return (uint32)sql->NumRows();
