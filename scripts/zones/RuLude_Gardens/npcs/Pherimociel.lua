@@ -12,24 +12,19 @@ end
 
 entity.onTrigger = function(player, npc)
     if
-        player:getCurrentMission(COP) == xi.mission.id.cop.A_PLACE_TO_RETURN and
-        player:getCharVar("PromathiaStatus") == 1
-    then
-        local Hrandom = math.random()
-
-        if Hrandom < 0.2 then
-            player:startEvent(27) -- Observed while Three Paths is active
-        elseif Hrandom < 0.6 then
-            player:startEvent(28)
-        else
-            player:startEvent(29)
-        end
-
-    elseif
         player:getCurrentMission(COP) == xi.mission.id.cop.MORE_QUESTIONS_THAN_ANSWERS and
         player:getCharVar("PromathiaStatus") == 0
     then
         player:startEvent(10049)
+    else
+        -- Removed pending confirmation
+        -- local Hrandom = math.random()
+
+        -- if Hrandom < 0.2 then
+        --     player:startEvent(27) -- Observed while Three Paths is active
+        -- else
+        --     player:startEvent(29)
+        -- end        
     end
 end
 

@@ -37,11 +37,6 @@ zone_object.onRegionEnter = function(player, region)
 
     if regionID == 1 then
         if
-            player:getCurrentMission(COP) == xi.mission.id.cop.A_PLACE_TO_RETURN and
-            player:getCharVar("PromathiaStatus") == 0
-        then
-            player:startEvent(10048)
-        elseif
             player:getCurrentMission(COP) == xi.mission.id.cop.FLAMES_IN_THE_DARKNESS and
             player:getCharVar("PromathiaStatus") == 2
         then
@@ -97,9 +92,7 @@ zone_object.onEventUpdate = function(player, csid, option)
 end
 
 zone_object.onEventFinish = function(player, csid, option)
-    if csid == 10048 then
-        player:setCharVar("PromathiaStatus", 1)
-    elseif csid == 10051 then
+    if csid == 10051 then
         player:setCharVar("PromathiaStatus", 3)
     elseif csid == 122 then
         player:setCharVar("PromathiaStatus", 4)
