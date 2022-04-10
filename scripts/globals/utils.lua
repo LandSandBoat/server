@@ -447,11 +447,11 @@ end
 -- https://gist.github.com/jdev6/1e7ff30671edf88d03d4
 function utils.randomEntryIdx(t)
     local keys = {}
-    local values = {}
-    for key, value in pairs(t) do
+
+    for key, _ in pairs(t) do
         keys[#keys+1] = key
-        values[#values+1] = value
     end
+
     local index = keys[math.random(1, #keys)]
     return index, t[index]
 end

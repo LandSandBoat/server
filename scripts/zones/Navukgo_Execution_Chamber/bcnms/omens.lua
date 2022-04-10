@@ -20,7 +20,7 @@ end
 battlefield_object.onBattlefieldEnter = function(player, battlefield)
     -- local mobOffset = (battlefield:getArea() - 1) * 7  -- Offset to spawn correct mob depending on battlefieldNumber
     local track_var = 'entered_'.. player:getName()
-    if not (battlefield:getLocalVar(track_var) == 1) then
+    if battlefield:getLocalVar(track_var) ~= 1 then
         battlefield:setLocalVar(track_var, 1)
         battlefield:setLocalVar('num_entrants', battlefield:getLocalVar('num_entrants') + 1)
     end
