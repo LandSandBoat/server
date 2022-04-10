@@ -47,7 +47,7 @@ mission.sections =
             {
                 function(player, prevZone)
                     if mission:getVar(player, 'Status') == 2 then
-                        return mission:progressEvent(10047)
+                        return 10047
                     end
                 end,
             },
