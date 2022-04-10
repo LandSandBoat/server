@@ -5,4 +5,5 @@ return {
     ['Chawo_Shipeynyo'] = { event = 329 },
     ['Keo-Koruo']       = { event = 88 },
     ['Pakke-Pokke']     = { event = 89 },
+    ['Shantotto']       = { event = 164 },
 }
