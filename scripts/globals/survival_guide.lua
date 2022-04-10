@@ -52,7 +52,7 @@ local function teleportMenuUpdate(player, option)
 
         local index = bit.rshift(bit.band(option, 0xFF0000), 16)
 
-        if not (choice == optionMap.TELEPORT_MENU) then
+        if choice ~= optionMap.TELEPORT_MENU then
             if choice == optionMap.ADD_FAVORITE then
                 local temp = 0
                 for x = 1, 9 do
@@ -151,7 +151,7 @@ xi.survivalGuide.onEventFinish = function(player, eventId, option)
             local guide = survival.survivalGuides[selectedMenuId]
             local currentZoneId = player:getZoneID()
 
-            if guide and not (guide.zoneId == currentZoneId) then
+            if guide and guide.zoneId ~= currentZoneId then
                 local teleportCostGil = SURVIVAL_GUIDE_TELEPORT_COST_GIL
                 local teleportCostTabs = SURVIVAL_GUIDE_TELEPORT_COST_TABS
 
