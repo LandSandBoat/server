@@ -120,7 +120,7 @@ end
 
 local function hasRequiredMats(trade, headFrameKey)
     for _, v in ipairs(headAndFrameItems[headFrameKey]) do
-        if not trade:getItemQty(v) == 1 then
+        if trade:getItemQty(v) ~= 1 then
             return false
         end
     end
