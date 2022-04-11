@@ -17,14 +17,17 @@ end
 entity.onTrigger = function(player, npc)
     local notes = player:getCurrency("allied_notes")
     local freelances = 99 -- Faking it for now
-    local unknown = 12 -- Faking it for now
+    local ciphers = 0
+    -- 0 for not displaying ciphers
+    -- 4 for Valaneiral (New Year's & Summer Alter Ego Extravaganzas)
+    -- 8 for Adelheid (Spring & Autumn Alter Ego Extravaganzas)
+    -- 12 to display both
     local medalRank = getMedalRank(player)
     local bonusEffects = 0 -- 1 = regen, 2 = refresh, 4 = meal duration, 8 = exp loss reduction, 15 = all
     local timeStamp = 0 -- getSigilTimeStamp(player)
+    local allegiance = player:getCampaignAllegiance()
 
-    -- todo if Throne control is active
-
-    -- if medal_rank > 25 and nation controls Throne_Room_S then
+    -- if ( medal_rank > 25 and nation controls Throne_Room_S ) then
         -- medal_rank = 32
         -- this decides if allied ring is in the Allied Notes item list.
     -- end
@@ -32,7 +35,7 @@ entity.onTrigger = function(player, npc)
     if medalRank == 0 then
         player:startEvent(14)
     else
-        player:startEvent(13, 0, notes, freelances, unknown, medalRank, bonusEffects, timeStamp, 0)
+        player:startEvent(13, allegiance, notes, freelances, ciphers, medalRank, bonusEffects, timeStamp, 0)
     end
 
 end
@@ -40,7 +43,7 @@ end
 entity.onEventUpdate = function(player, csid, option)
     local canEquip = 2 -- Faking it for now.
     -- 0 = Wrong job, 1 = wrong level, 2 = Everything is in order, 3 or greater = menu exits...
-    if csid == 13 and option >= 2 and option <= 2050 then
+    if csid == 13 and option >= 2 and option <= 2306 then
         -- local itemid = getWindurstNotesItem(option)
         player:updateEvent(0, 0, 0, 0, 0, 0, 0, canEquip) -- canEquip(player, itemid))  <- works for sanction NPC, wtf?
     end
@@ -57,8 +60,11 @@ entity.onEventFinish = function(player, csid, option)
     if csid == 13 then
         -- Note: the event itself already verifies the player has enough AN, so no check needed here.
         if option >= 2 and option <= 2050 then -- player bought item
-        -- currently only "ribbons" rank coded.
-            local item, price = getWindurstNotesItem(option)
+            local item, price, adj = getWindurstNotesItem(option)
+            --if player is allied with Windurst, they get adjusted price on most items
+            if player:getCampaignAllegiance() == 3 and adj ~= nil then
+                price = adj
+            end
             if player:getFreeSlotsCount() >= 1 then
                 player:delCurrency("allied_notes", price)
                 player:addItem(item)

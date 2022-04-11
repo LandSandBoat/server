@@ -271,6 +271,7 @@ xi.items =
     CLEAN_SNAP_ROD                  = 1668,
     INGOT_OF_ROYAL_TREASURY_GOLD    = 1682,
     PIECE_OF_ATTOHWA_GINSENG        = 1683,
+    GOLD_KEY                        = 1684,
     SOILED_LETTER                   = 1686,
     HIPPOGRYPH_TAILFEATHER          = 1690,
     CARMINE_CHIP                    = 1692,

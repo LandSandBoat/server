@@ -191,7 +191,7 @@ namespace luautils
     int32 OnTOTDChange(uint16 ZoneID, uint8 TOTD);
 
     int32 OnGameIn(CCharEntity* PChar, bool zoning);
-    int32 OnZoneIn(CCharEntity* PChar);                        // triggers when a player zones into a zone
+    void  OnZoneIn(CCharEntity* PChar);                        // triggers when a player zones into a zone
     void  OnZoneOut(CCharEntity* PChar);                       // triggers when a player leaves a zone
     void  AfterZoneIn(CBaseEntity* PChar);                     // triggers after a player has finished zoning in
     int32 OnZoneInitialise(uint16 ZoneID);                     // triggers when zone is loaded

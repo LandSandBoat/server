@@ -139,7 +139,7 @@ function AvatarPhysicalMove(avatar, target, skill, numberofhits, accmod, dmgmod,
     -- https://www.bg-wiki.com/bg/PDIF#Level_Correction_Function_.28cRatio.29
     local zoneId = avatar:getZone():getID()
 
-    local shouldApplyLevelCorrection = (zoneId < 256) and not (zoneId == 183)
+    local shouldApplyLevelCorrection = (zoneId < 256) and zoneId ~= 183
 
     -- https://forum.square-enix.com/ffxi/threads/45365?p=534537#post534537
     -- https://www.bg-wiki.com/bg/Hit_Rate

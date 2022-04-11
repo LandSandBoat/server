@@ -48,13 +48,15 @@ public:
     void    removeParty(CParty* party);
     void    delParty(CParty* party);
     void    dissolveAlliance(bool playerInitiated = true);
-    uint32  partyCount(void) const;
     void    assignAllianceLeader(const char* name);
+    bool    hasOnlyOneParty() const;
+    bool    isFull() const;
 
-    std::vector<CParty*> partyList; // list of parties in alliance
+    std::vector<CParty*> partyList; // list of parties in alliance on this server
 
 private:
     CParty* aLeader; // alliance lead party
+    uint32 loadPartyCount() const;
 };
 
 #endif

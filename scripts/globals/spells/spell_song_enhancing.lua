@@ -80,12 +80,12 @@ xi.spells.spell_song_enhancing.calculateEnhancingPower = function(caster, target
     power = math.floor(power + instrumentBoost * multiplier)
 
     -- Additional Potency from Merits.
-    if not meritEffect == 0 then
+    if meritEffect ~= 0 then
         power = math.floor(power + caster:getMerit(meritEffect))
     end
 
     -- Additional Potency from Job Points.
-    if not jpEffect == 0 then
+    if jpEffect ~= 0 then
         power = math.floor(power + caster:getJobPointLevel(jpEffect))
     end
 

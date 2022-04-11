@@ -222,6 +222,7 @@ int32 CBattleEntity::GetMaxMP() const
 
 uint8 CBattleEntity::GetSpeed()
 {
+    // Note: retail treats mounted speed as double what it actually is! 40 is in fact retail accurate!
     int16 startingSpeed = isMounted() ? 40 + map_config.mount_speed_mod : speed;
     // Mod::MOVE (169)
     // Mod::MOUNT_MOVE (972)
