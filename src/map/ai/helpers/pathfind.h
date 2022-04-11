@@ -118,6 +118,12 @@ public:
     // returns the final destination of the current path
     const position_t& GetDestination() const;
 
+    // If careful pathing is set, the owner will continually be "snapped" back
+    // onto a valid poly every time FollowPath() is called.
+    // THIS IS 4-5x MORE EXPENSIVE THAN A REGULAR CALL TO FollowPath()!
+    // YOU HAVE BEEN WARNED!
+    void SetCarefulPathing(bool careful);
+
 private:
     // find a valid path using polys
     bool FindPath(const position_t& start, const position_t& end);
@@ -148,6 +154,8 @@ private:
 
     float m_distanceMoved;
     float m_maxDistance;
+
+    bool m_carefulPathing;
 };
 
 #endif

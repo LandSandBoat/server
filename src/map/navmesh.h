@@ -87,6 +87,7 @@ public:
 
     bool validPosition(const position_t& position);
 
+    // Like validPosition(), but will also set the given position to the valid position that it finds.
     void snapToValidPosition(position_t& position);
 
 private:
