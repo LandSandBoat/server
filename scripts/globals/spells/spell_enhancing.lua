@@ -63,7 +63,7 @@ xi.spells.spell_enhancing.calculateEnhancingPower = function(caster, target, spe
     -- Spell specific modifiers for potency.
     ----------------------------------------
     -- Bar-Element
-    elseif spellEffect >= xi.effect.BARFIRE and spellEffect == xi.effect.BARWATER then
+    if spellEffect >= xi.effect.BARFIRE and spellEffect == xi.effect.BARWATER then
         power = power + caster:getMerit(xi.merit.BAR_SPELL_EFFECT) + caster:getMod(xi.mod.BARSPELL_AMOUNT) + caster:getJobPointLevel(xi.jp.BAR_SPELL_EFFECT) * 2
 
     -- Bar-Status

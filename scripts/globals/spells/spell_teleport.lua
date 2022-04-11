@@ -17,10 +17,10 @@ local teleportTable = xi.spells.parameters.teleportSpell
 
 -- Check for "Retrace" Spell.
 xi.spells.spell_teleport.checkTeleportSpell = function(caster, target, spell)
-    if not target:getCampaignAllegiance() > 0 then
-        return 48
-    else
+    if target:getCampaignAllegiance() > 0 then
         return 0
+    else
+        return 48
     end
 end
 
