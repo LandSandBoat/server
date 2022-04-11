@@ -181,7 +181,7 @@ xi.spells.spell_enhancing.useEnhancingSpell = function(caster, target, spell)
     -- Handle exceptions here, before calculating anything.
     ------------------------------------------------------------
     -- Bar-Element (They use addStatusEffect argument 6. Bar-Status current implementation doesn't.)
-    elseif spellEffect >= xi.effect.BARFIRE and spellEffect == xi.effect.BARWATER then
+    if spellEffect >= xi.effect.BARFIRE and spellEffect == xi.effect.BARWATER then
         MDB = caster:getMerit(xi.merit.BAR_SPELL_EFFECT) + caster:getMod(xi.mod.BARSPELL_MDEF_BONUS)
 
     -- Refresh

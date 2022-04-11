@@ -288,7 +288,7 @@ xi.spells.spell_damage.calculateResist = function(caster, target, spell, skillTy
     end
 
     -- Get dStat Magic Accuracy. NOTE: Ninjutsu does not get this bonus/penalty.
-    if not skillType == xi.skill.NINJUTSU then
+    if skillType ~= xi.skill.NINJUTSU then
         if statDiff > 10 then
             magicAcc = magicAcc + 10 + (statDiff - 10) / 2
         else
