@@ -5683,16 +5683,16 @@ namespace battleutils
         }
     }
 
-    bool DrawIn(CBattleEntity* PEntity, CMobEntity* PMob, float offset)
+    bool DrawIn(CBattleEntity* PTarget, CMobEntity* PMob, float offset)
     {
         position_t& pos        = PMob->loc.p;
         position_t  nearEntity = nearPosition(pos, offset, (float)0);
 
-        // validate the drawin position before continuing
-        if (!PMob->PAI->PathFind->ValidPosition(pos))
-        {
-            return false;
-        }
+        // Snap nearEntity to a guaranteed valid position
+        PMob->loc.zone->m_navMesh->snapToValidPosition(nearEntity);
+
+        // Move the target a little higher, just in case
+        nearEntity.y -= 1.0f;
 
         bool  success        = false;
         float drawInDistance = (float)(PMob->getMobMod(MOBMOD_DRAW_IN) > 1 ? PMob->getMobMod(MOBMOD_DRAW_IN) : PMob->GetMeleeRange() * 2);
@@ -5702,7 +5702,8 @@ namespace battleutils
             return false;
         }
 
-        std::function<void(CBattleEntity*)> drawInFunc = [PMob, drawInDistance, &nearEntity, &success](CBattleEntity* PMember) {
+        std::function<void(CBattleEntity*)> drawInFunc = [PMob, drawInDistance, &nearEntity, &success](CBattleEntity* PMember)
+        {
             float pDistance = distance(PMob->loc.p, PMember->loc.p);
 
             if (PMob->loc.zone == PMember->loc.zone && pDistance > drawInDistance && PMember->status != STATUS_TYPE::CUTSCENE_ONLY)
@@ -5717,13 +5718,12 @@ namespace battleutils
                 {
                     // draw in!
                     PMember->loc.p.x = nearEntity.x;
-                    // move a little higher to prevent getting stuck
-                    PMember->loc.p.y = nearEntity.y - 0.5f;
+                    PMember->loc.p.y = nearEntity.y;
                     PMember->loc.p.z = nearEntity.z;
 
                     if (PMember->objtype == TYPE_PC)
                     {
-                        CCharEntity* PChar = (CCharEntity*)PMember;
+                        CCharEntity* PChar = static_cast<CCharEntity*>(PMember);
                         PChar->pushPacket(new CPositionPacket(PChar));
                     }
                     else
@@ -5741,12 +5741,12 @@ namespace battleutils
         // check if i should draw-in party/alliance
         if (PMob->getMobMod(MOBMOD_DRAW_IN) > 1)
         {
-            PEntity->ForAlliance(drawInFunc);
+            PTarget->ForAlliance(drawInFunc);
         }
         // no party present or draw-in is set to target only
         else
         {
-            drawInFunc(PEntity);
+            drawInFunc(PTarget);
         }
 
         if (success)
