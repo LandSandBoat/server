@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -219,13 +219,6 @@ bool CMobController::CanDetectTarget(CBattleEntity* PTarget, bool forceSight)
 {
     TracyZoneScoped;
     if (PTarget->isDead() || PTarget->isMounted())
-    {
-        return false;
-    }
-
-    float verticalDistance = abs(PMob->loc.p.y - PTarget->loc.p.y);
-
-    if (verticalDistance > 8)
     {
         return false;
     }

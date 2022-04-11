@@ -1,7 +1,5 @@
 -----------------------------------
---
 -- Zone: Beaucedine_Glacier (111)
---
 -----------------------------------
 local ID = require("scripts/zones/Beaucedine_Glacier/IDs")
 require("scripts/quests/i_can_hear_a_rainbow")
@@ -30,10 +28,7 @@ zone_object.onZoneIn = function(player, prevZone)
         player:setPos(-247.911, -82.165, 260.207, 248)
     end
 
-    if player:getCurrentMission(COP) == xi.mission.id.cop.DESIRES_OF_EMPTINESS and player:getCharVar("PromathiaStatus") ==
-        9 then
-        cs = 206
-    elseif quests.rainbow.onZoneIn(player) then
+    if quests.rainbow.onZoneIn(player) then
         cs = 114
     end
 
@@ -50,15 +45,10 @@ end
 zone_object.onEventUpdate = function(player, csid, option)
     if csid == 114 then
         quests.rainbow.onEventUpdate(player)
-    elseif csid == 206 then
-        player:updateEvent(0, xi.ki.MYSTERIOUS_AMULET)
     end
 end
 
 zone_object.onEventFinish = function(player, csid, option)
-    if csid == 206 then
-        player:setCharVar("PromathiaStatus", 10)
-    end
 end
 
 zone_object.onZoneWeatherChange = function(weather)

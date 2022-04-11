@@ -5,6 +5,9 @@
 require("scripts/globals/status")
 -----------------------------------
 
+xi = xi or {}
+xi.gear_sets = xi.gear_sets or {}
+
 local matchtype = {
     any            = 0,
     earring_weapon = 1,
@@ -329,7 +332,7 @@ end
 -----------------------------------
 -- Checks for gear sets present on a player
 -----------------------------------
-function checkForGearSet(player)
+xi.gear_sets.checkForGearSet = function(player)
     -- print("---Removed existing gear set mods!---\n")
     player:clearGearSetMods()
 

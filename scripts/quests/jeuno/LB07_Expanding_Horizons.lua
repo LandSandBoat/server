@@ -38,7 +38,7 @@ quest.sections =
             ['Nomad_Moogle'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:progressEvent(10045, 0, 1, 2, 0)
+                    return quest:progressEvent(10045, 0, 1, 2, 0) -- Confirmed.
                 end,
             },
 

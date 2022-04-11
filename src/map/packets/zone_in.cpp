@@ -179,7 +179,7 @@ CZoneInPacket::CZoneInPacket(CCharEntity* PChar, int16 csid)
         // ref<uint8>(data,(0x1F)) = 4;                             // предположительно animation
         // ref<uint8>(data,(0x20)) = 2;
 
-        ref<uint16>(0x40) = PChar->getZone();
+        ref<uint16>(0x40) = PChar->currentEvent->textTable == -1 ? PChar->getZone() : PChar->currentEvent->textTable;
         ref<uint16>(0x62) = PChar->getZone();
         ref<uint16>(0x64) = csid;
     }

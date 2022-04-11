@@ -22916,7 +22916,7 @@ INSERT INTO `item_mods` VALUES (18357,953,60);  -- Additional effect Status Dura
 INSERT INTO `item_mods` VALUES (18359,431,1);   -- Boreas Cesti (Additional effect: Wind Damage)
 INSERT INTO `item_mods` VALUES (18359,499,3);   -- Additional effect animation (subEffect)
 INSERT INTO `item_mods` VALUES (18359,500,15);  -- Additional effect damage
-INSERT INTO `item_mods` VALUES (18359,501,5);   -- Additional effect Chance 5%
+INSERT INTO `item_mods` VALUES (18359,501,100); -- Additional effect Chance 100%
 INSERT INTO `item_mods` VALUES (18359,950,3);   -- Additional effect element Wind (xi.magic.element)
 INSERT INTO `item_mods` VALUES (18360,13,7);
 INSERT INTO `item_mods` VALUES (18360,826,2);

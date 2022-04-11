@@ -291,6 +291,12 @@ void CLuaBaseEntity::messageText(CLuaBaseEntity* PLuaBaseEntity, uint16 messageI
 
 void CLuaBaseEntity::PrintToPlayer(std::string const& message, sol::object const& messageTypeObj, sol::object const& nameObj)
 {
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowError("Function called on non-PC entity (%s)", m_PBaseEntity->name.c_str());
+        return;
+    }
+
     auto messageType = (messageTypeObj == sol::lua_nil) ? MESSAGE_SYSTEM_1 : messageTypeObj.as<CHAT_MESSAGE_TYPE>();
     auto name        = (nameObj == sol::lua_nil) ? "" : nameObj.as<std::string>();
 
@@ -309,7 +315,11 @@ void CLuaBaseEntity::PrintToPlayer(std::string const& message, sol::object const
 
 void CLuaBaseEntity::PrintToArea(std::string const& message, sol::object const& arg1, sol::object const& arg2, sol::object const& arg3)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowError("Function called on non-PC entity (%s)", m_PBaseEntity->name.c_str());
+        return;
+    }
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
@@ -352,9 +362,16 @@ void CLuaBaseEntity::PrintToArea(std::string const& message, sol::object const& 
 
 void CLuaBaseEntity::messageBasic(uint16 messageID, sol::object const& p0, sol::object const& p1, sol::object const& target)
 {
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowError("Function called on non-PC entity (%s)", m_PBaseEntity->name.c_str());
+        return;
+    }
+
     uint32 param0  = (p0 != sol::lua_nil) ? p0.as<uint32>() : 0;
     uint32 param1  = (p1 != sol::lua_nil) ? p1.as<uint32>() : 0;
-    auto*  PTarget = (target != sol::lua_nil) ? target.as<CLuaBaseEntity*>()->m_PBaseEntity : m_PBaseEntity;
+
+    auto* PTarget = (target != sol::lua_nil) ? target.as<CLuaBaseEntity*>()->m_PBaseEntity : m_PBaseEntity;
 
     if (m_PBaseEntity->objtype == TYPE_PC)
     {
@@ -426,7 +443,11 @@ void CLuaBaseEntity::messagePublic(uint16 messageID, CLuaBaseEntity const* PEnti
 
 void CLuaBaseEntity::messageSpecial(uint16 messageID, sol::variadic_args va)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowError("Function called on non-PC entity (%s)", m_PBaseEntity->name.c_str());
+        return;
+    }
 
     uint32 param0   = va.get_type(0) == sol::type::number ? va.get<uint32>(0) : 0;
     uint32 param1   = va.get_type(1) == sol::type::number ? va.get<uint32>(1) : 0;
@@ -446,7 +467,11 @@ void CLuaBaseEntity::messageSpecial(uint16 messageID, sol::variadic_args va)
 
 void CLuaBaseEntity::messageSystem(uint16 messageID, sol::object const& p0, sol::object const& p1)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowError("Function called on non-PC entity (%s)", m_PBaseEntity->name.c_str());
+        return;
+    }
 
     uint32 param0 = (p0 != sol::lua_nil) ? p0.as<uint32>() : 0;
     uint32 param1 = (p1 != sol::lua_nil) ? p1.as<uint32>() : 0;
@@ -462,7 +487,11 @@ void CLuaBaseEntity::messageSystem(uint16 messageID, sol::object const& p0, sol:
  ************************************************************************/
 void CLuaBaseEntity::messageCombat(sol::object const& speaker, int32 p0, int32 p1, int16 message)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowError("Function called on non-PC entity (%s)", m_PBaseEntity->name.c_str());
+        return;
+    }
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
@@ -478,6 +507,16 @@ void CLuaBaseEntity::messageCombat(sol::object const& speaker, int32 p0, int32 p
     }
 
     PChar->pushPacket(new CMessageCombatPacket(PSpeaker, PChar, p0, p1, message));
+}
+
+void CLuaBaseEntity::customMenu(sol::object const& obj)
+{
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+        PChar && obj.get_type() == sol::type::table)
+    {
+        auto menuString = luautils::SetCustomMenuContext(PChar, obj.as<sol::table>());
+        PChar->pushPacket(new CChatMessagePacket(PChar, MESSAGE_GMPROMPT, menuString.c_str(), "_CUSTOM_MENU"));
+    }
 }
 
 /************************************************************************
@@ -12154,7 +12193,7 @@ uint8 CLuaBaseEntity::getModelSize()
 {
     auto* PEntity = static_cast<CBattleEntity*>(m_PBaseEntity);
 
-    return PEntity->m_ModelSize;
+    return PEntity->m_ModelRadius;
 }
 
 /************************************************************************
@@ -13411,6 +13450,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("messageSpecial", CLuaBaseEntity::messageSpecial);
     SOL_REGISTER("messageSystem", CLuaBaseEntity::messageSystem);
     SOL_REGISTER("messageCombat", CLuaBaseEntity::messageCombat);
+    SOL_REGISTER("customMenu", CLuaBaseEntity::customMenu);
 
     // Variables
     SOL_REGISTER("getCharVar", CLuaBaseEntity::getCharVar);

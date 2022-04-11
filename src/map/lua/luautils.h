@@ -191,7 +191,7 @@ namespace luautils
     int32 OnTOTDChange(uint16 ZoneID, uint8 TOTD);
 
     int32 OnGameIn(CCharEntity* PChar, bool zoning);
-    int32 OnZoneIn(CCharEntity* PChar);                        // triggers when a player zones into a zone
+    void  OnZoneIn(CCharEntity* PChar);                        // triggers when a player zones into a zone
     void  OnZoneOut(CCharEntity* PChar);                       // triggers when a player leaves a zone
     void  AfterZoneIn(CBaseEntity* PChar);                     // triggers after a player has finished zoning in
     int32 OnZoneInitialise(uint16 ZoneID);                     // triggers when zone is loaded
@@ -315,6 +315,10 @@ namespace luautils
     void OnFurnitureRemoved(CCharEntity* PChar, CItemFurnishing* itemId);
 
     uint16 SelectDailyItem(CLuaBaseEntity* PLuaBaseEntity, uint8 dial);
+
+    auto SetCustomMenuContext(CCharEntity* PChar, sol::table table) -> std::string;
+    bool HasCustomMenuContext(CCharEntity* PChar);
+    void HandleCustomMenu(CCharEntity* PChar, std::string selection);
 }; // namespace luautils
 
 #endif // _LUAUTILS_H -

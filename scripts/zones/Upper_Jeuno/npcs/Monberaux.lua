@@ -47,26 +47,7 @@ entity.onTrigger = function(player, npc)
     local TheLostCardien = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_LOST_CARDIAN)
     local CooksPride = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COOK_S_PRIDE)
 
-    -- COP mission 3-5
     if
-        player:getCurrentMission(COP) == xi.mission.id.cop.DARKNESS_NAMED and
-        player:getCharVar("PromathiaStatus") == 3
-    then
-        player:startEvent(75)
-
-    elseif
-        player:getCurrentMission(COP) == xi.mission.id.cop.THREE_PATHS and
-        player:getCharVar("COP_Tenzen_s_Path") == 2
-    then
-        player:startEvent(74)
-
-    elseif
-        player:getCurrentMission(COP) == xi.mission.id.cop.THREE_PATHS and
-        player:getCharVar("COP_Tenzen_s_Path") == 4
-    then
-        player:startEvent(6)
-
-    elseif
         CooksPride == QUEST_COMPLETED and
         TheLostCardien == QUEST_AVAILABLE and
         player:getCharVar("theLostCardianVar") == 2
@@ -113,17 +94,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 6 then
-        player:setCharVar("COP_Tenzen_s_Path", 5)
-    elseif csid == 74 then
-        player:setCharVar("COP_Tenzen_s_Path", 3)
-        player:addKeyItem(xi.ki.ENVELOPE_FROM_MONBERAUX)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.ENVELOPE_FROM_MONBERAUX)
-    elseif csid == 75 then
-        player:setCharVar("PromathiaStatus", 0)
-        player:completeMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED)
-        player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.SHELTERING_DOUBT)
-    elseif csid == 91 then
+    if csid == 91 then
         player:addCharVar("saveTheClockTowerVar", 1)
         player:addCharVar("saveTheClockTowerNPCz1", 4)
     elseif

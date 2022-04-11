@@ -89,6 +89,7 @@ public:
 
 private:
     void outputError(uint32 status);
+    bool onSameFloor(const position_t& start, float* spos, const position_t& end, float* epos, dtQueryFilter& filter);
 
     std::string                filename;
     uint16                     m_zoneID;

@@ -1,7 +1,5 @@
 -----------------------------------
---
 -- Zone: Misareaux_Coast (25)
---
 -----------------------------------
 require("scripts/globals/conquest")
 require("scripts/globals/helm")

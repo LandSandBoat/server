@@ -90,7 +90,8 @@ mission.sections =
 
     {
         check = function(player, currentMission, missionStatus, vars)
-            return player:hasCompletedMission(mission.areaId, mission.missionId)
+            return player:hasCompletedMission(mission.areaId, mission.missionId) and
+                not player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED)
         end,
 
         [xi.zone.TAVNAZIAN_SAFEHOLD] =

@@ -120,7 +120,7 @@ end
 
 local function hasRequiredMats(trade, headFrameKey)
     for _, v in ipairs(headAndFrameItems[headFrameKey]) do
-        if not trade:getItemQty(v) == 1 then
+        if trade:getItemQty(v) ~= 1 then
             return false
         end
     end
@@ -192,7 +192,7 @@ entity.onTrade = function(player, npc, trade)
                 elseif trade:getItemQty(xi.items.BLACK_PUPPET_TURBAN) == 1 and not player:hasAttachment(xi.items.SPIRITREAVER_HEAD) then
                     local range = getWaitRange(xi.items.BLACK_PUPPET_TURBAN, trade)
 
-                    play_event902(player, 12, math.random(range[1], range[2]))
+                    play_event902(player, 13, math.random(range[1], range[2]))
                 end
             end
         end
