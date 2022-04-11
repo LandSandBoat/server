@@ -133,7 +133,7 @@ private:
 
     void FinishedPath();
 
-    CBaseEntity*            m_PTarget;
+    CBaseEntity*            m_POwner;
     std::vector<position_t> m_points;
     std::vector<position_t> m_turnPoints;
     position_t              m_originalPoint;
