@@ -130,7 +130,9 @@ bool CPathFind::PathInRange(const position_t& point, float range, uint8 pathFlag
         Clear();
     }
     m_distanceFromPoint = range;
-    return PathTo(point, pathFlags, false);
+    bool result = PathTo(point, pathFlags, false);
+    PrunePathWithin(range);
+    return result;
 }
 
 bool CPathFind::PathAround(const position_t& point, float distanceFromPoint, uint8 pathFlags)
@@ -145,7 +147,7 @@ bool CPathFind::PathAround(const position_t& point, float distanceFromPoint, uin
 
     // save for sliding logic
     m_originalPoint     = point;
-    m_distanceFromPoint = 1;
+    m_distanceFromPoint = distanceFromPoint;
 
     // Don't clear path so
     // original point / distance are kept
@@ -205,49 +207,25 @@ void CPathFind::LimitDistance(float maxLength)
     m_maxDistance = maxLength;
 }
 
-void CPathFind::StopWithin(float within)
+void CPathFind::PrunePathWithin(float within)
 {
     TracyZoneScoped;
-    if (!IsFollowingPath())
-    {
-        return;
-    }
-    // TODO: cut up path
 
-    position_t& lastPoint       = m_points.back();
+    if (!IsFollowingPath())
+        return;
+
+    position_t* targetPoint     = &m_points.back();
     position_t* secondLastPoint = nullptr;
 
-    if (m_points.size() == 1)
+    while (m_points.size() > 1)
     {
-        secondLastPoint = &m_POwner->loc.p;
-    }
-    else
-    {
-        secondLastPoint = &m_points[m_points.size() - 2];
-    }
+        secondLastPoint = &m_points.end()[-2];
 
-    float distanceTo = distance(lastPoint, *secondLastPoint);
-
-    if (distanceTo > within)
-    {
-        // reduce last point to stop within the given number
-        float radians = atanf((secondLastPoint->z - lastPoint.z) / (secondLastPoint->x - lastPoint.x)) * (float)(M_PI / 180.0f);
-
-        lastPoint.x -= cosf(radians) * within;
-        lastPoint.z -= sinf(radians) * within;
-    }
-    else
-    {
-        // i'm already there, stop moving
-        if (m_points.size() == 1)
+        if (distance(*targetPoint, *secondLastPoint) > within)
         {
-            Clear();
+            break;
         }
-        else
-        {
-            // remove last point, it'll make me too close
-            m_points.pop_back();
-        }
+        m_points.erase(m_points.end() - 2);
     }
 }
 
