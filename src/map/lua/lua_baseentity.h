@@ -135,6 +135,7 @@ public:
     // int32 WarpTo(lua_Stat* L);           // warp to the given point -- These don't exist, breaking them just in case someone uncomments
     // int32 RoamAround(lua_Stat* L);       // pick a random point to walk to
     // int32 LimitDistance(lua_Stat* L);    // limits the current path distance to given max distance
+    void setCarefulPathing(bool careful);
 
     void openDoor(sol::object const& seconds);
     void closeDoor(sol::object const& seconds);
