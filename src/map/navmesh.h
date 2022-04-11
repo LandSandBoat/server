@@ -87,6 +87,8 @@ public:
 
     bool validPosition(const position_t& position);
 
+    void snapToValidPosition(position_t& position);
+
 private:
     void outputError(uint32 status);
     bool onSameFloor(const position_t& start, float* spos, const position_t& end, float* epos, dtQueryFilter& filter);
