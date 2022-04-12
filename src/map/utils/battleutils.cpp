@@ -438,7 +438,7 @@ namespace battleutils
         return g_PMobSkillLists[ListID];
     }
 
-    int32 CalculateEnspellDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, uint8 Tier, uint8 element)
+    int32 CalculateEnspellDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, uint8 Tier, uint8 element, double runeDPS, double runeBonus)
     {
         int32 damage = 0;
 
@@ -506,6 +506,44 @@ namespace battleutils
             }
 
             damage += PAttacker->getMod(Mod::ENSPELL_DMG_BONUS);
+        }
+        else if (Tier == 4) // Rune Enhancement
+        {
+            //see https://www.ffxiah.com/forum/topic/56613/rune-enhancement-damage-formula-testing/ for data and comments
+            runeDPS = std::fmin(21, runeDPS); // max DPS currently known is 21.
+
+            double min = 0.0;
+            double max = 0.0;
+
+            if (runeBonus == 1)
+            {
+                min = std::floor(runeDPS * 0.97);
+                max = std::floor(runeDPS * 1.30);
+            }
+            else if (runeBonus == 2)
+            {
+                min = std::floor(runeDPS * 1.40);
+                max = std::floor(runeDPS * 1.70);
+            }
+            else if (runeBonus == 3)
+            {
+                min = std::floor(runeDPS * 1.90);
+                max = std::floor(runeDPS * 2.20);
+            }
+
+            if (max == 0.0)
+            {
+                damage = 0.0;
+            }
+            else
+            {
+                // see https://bugs.llvm.org/show_bug.cgi?id=18767#c1 ; essentially, [min, max] range on this RNG call excludes the max
+                // so we must add +1 to our max to achieve the range we want
+                max = max + 1;
+
+                // TODO: verify gaussian vs linear distribution for RNG from retail
+                damage = (int32)xirand::GetRandomNumber<double>(min, max);
+            }
         }
 
         // matching day 10% bonus, matching weather 10% or 25% for double weather
@@ -990,9 +1028,9 @@ namespace battleutils
             }
         }
 
-        // Enspell overwrites weapon effects
-        if (PAttacker->getMod(Mod::ENSPELL) > 0 &&
-            (PAttacker->getMod(Mod::ENSPELL_CHANCE) == 0 || PAttacker->getMod(Mod::ENSPELL_CHANCE) > xirand::GetRandomNumber(100)))
+        if (PAttacker->getMod(Mod::ENSPELL) > 0 && // Enspell overwrites weapon effects
+           (PAttacker->getMod(Mod::ENSPELL_CHANCE) == 0 || PAttacker->getMod(Mod::ENSPELL_CHANCE) > xirand::GetRandomNumber(100)) ||
+            PAttacker->StatusEffectContainer->GetActiveRuneCount() > 0) // Rune Enhancement means we deal enspell damage
         {
             static SUBEFFECT enspell_subeffects[8] = {
                 SUBEFFECT_FIRE_DAMAGE,
@@ -1027,11 +1065,66 @@ namespace battleutils
                     PChar->updatemask |= UPDATE_HP;
                 }
             }
+            else if(PAttacker->StatusEffectContainer->GetActiveRuneCount() > 0) //Rune Enhancement enspell damage, takes priority over all but blood weapon.
+            {
+                double dps = 0.0;
+                CItemWeapon* PWeapon = static_cast<CItemWeapon*>(static_cast<CCharEntity*>(PAttacker)->getEquip(SLOT_MAIN));
+
+                if (PWeapon == nullptr) //h2h, though base DPS is so low it will never hit non-zero enspell damage numbers with current rune count and modifiers.
+                {
+                   dps = 3.0 / 240.0;
+                }
+                else
+                {
+                    dps = PWeapon->getDPS();
+                }
+
+                if (PAttacker->m_dualWield)
+                {
+                    dps /= 2; // DPS is divided evenly between hands derived from mainhand only
+                }
+
+                EFFECT highestRuneEffect = PAttacker->StatusEffectContainer->GetHighestRuneEffect();
+                EFFECT newestRuneEffect  = PAttacker->StatusEffectContainer->GetNewestRuneEffect();
+                int highestRuneCount     = PAttacker->StatusEffectContainer->GetEffectsCount(highestRuneEffect);
+
+                DAMAGE_TYPE damageType   = DAMAGE_TYPE::NONE;
+                int runeBonus = 1;
+                int element = 0;
+
+                if (highestRuneCount == 1) // only have unique or one rune, set element to newest.
+                {
+                    element = GetRuneEnhancementElement(newestRuneEffect);
+                    Action->additionalEffect = enspell_subeffects[newestRuneEffect - EFFECT_IGNIS];
+                    damageType = GetRuneEnhancementDamageType(newestRuneEffect);
+                }
+                else // set element to strongest rune
+                {
+                    element = GetRuneEnhancementElement(highestRuneEffect);
+                    Action->additionalEffect = enspell_subeffects[highestRuneEffect - EFFECT_IGNIS];
+                    damageType = GetRuneEnhancementDamageType(highestRuneEffect);
+                    runeBonus = highestRuneCount;
+                }
+
+                Action->addEffectParam = CalculateEnspellDamage(PAttacker, PDefender, 4, element, dps, runeBonus);
+
+                if (Action->addEffectParam < 0)
+                {
+                    Action->addEffectParam   = -Action->addEffectParam;
+                    Action->addEffectMessage = 384;
+                }
+                else
+                {
+                    Action->addEffectMessage = 229;
+                }
+
+                PDefender->takeDamage(Action->addEffectParam, PAttacker, ATTACK_TYPE::MAGICAL, damageType);
+            }
             else if (enspell == ENSPELL_AUSPICE && isFirstSwing)
             {
                 Action->additionalEffect = SUBEFFECT_LIGHT_DAMAGE;
-                Action->addEffectMessage = 163;
-                Action->addEffectParam   = CalculateEnspellDamage(PAttacker, PDefender, 2, 7);
+                Action->addEffectMessage = 229;
+                Action->addEffectParam   = CalculateEnspellDamage(PAttacker, PDefender, 2, 7, 0, 0);
 
                 if (Action->addEffectParam < 0)
                 {
@@ -1047,18 +1140,18 @@ namespace battleutils
                 {
                     // Enlight II and Endark II currently not implemented; may vary
                     Action->additionalEffect = enspell_subeffects[enspell - 9];
-                    Action->addEffectParam   = CalculateEnspellDamage(PAttacker, PDefender, 2, enspell - 8);
+                    Action->addEffectParam   = CalculateEnspellDamage(PAttacker, PDefender, 2, enspell - 8, 0, 0);
                 }
                 else if (enspell <= ENSPELL_I_DARK) // Tier I elemental enspell
                 {
                     Action->additionalEffect = enspell_subeffects[enspell - 1];
                     if (enspell >= ENSPELL_I_LIGHT) // Enlight or Endark
                     {
-                        Action->addEffectParam = CalculateEnspellDamage(PAttacker, PDefender, 3, enspell);
+                        Action->addEffectParam = CalculateEnspellDamage(PAttacker, PDefender, 3, enspell, 0, 0);
                     }
                     else
                     {
-                        Action->addEffectParam = CalculateEnspellDamage(PAttacker, PDefender, 1, enspell);
+                        Action->addEffectParam = CalculateEnspellDamage(PAttacker, PDefender, 1, enspell, 0, 0);
                     }
                 }
 
@@ -1071,7 +1164,7 @@ namespace battleutils
                     }
                     else
                     {
-                        Action->addEffectMessage = 163;
+                        Action->addEffectMessage = 229;
                     }
 
                     PDefender->takeDamage(Action->addEffectParam, PAttacker, ATTACK_TYPE::MAGICAL, GetEnspellDamageType((ENSPELL)enspell));
@@ -1813,54 +1906,47 @@ namespace battleutils
         if ((PWeapon != nullptr && PWeapon->getID() != 0 && PWeapon->getID() != 65535 && PWeapon->getSkillType() != SKILL_HAND_TO_HAND) &&
             PDefender->PAI->IsEngaged())
         {
-            JOBTYPE job = PDefender->GetMJob();
+            // http://wiki.ffxiclopedia.org/wiki/Talk:Parrying_Skill
+            // {(Parry Skill x .125) + ([Player Agi - Enemy Dex] x .125)} x Diff
 
-            if (job == JOB_NIN || job == JOB_SAM || job == JOB_THF || job == JOB_BST || job == JOB_DRG || job == JOB_PLD || job == JOB_WAR || job == JOB_BRD ||
-                job == JOB_DRK || job == JOB_RDM || job == JOB_COR || job == JOB_DNC || job == JOB_PUP || job == JOB_RUN || job == JOB_BLU || job == JOB_MNK ||
-                job == JOB_GEO || job == JOB_SCH)
+            float skill = (float)(PDefender->GetSkill(SKILL_PARRY) + PDefender->getMod(Mod::PARRY) + PWeapon->getILvlParry());
+
+            float diff = 1.0f + (((float)PDefender->GetMLevel() - PAttacker->GetMLevel()) / 15.0f);
+
+            if (PWeapon->isTwoHanded())
             {
-                // http://wiki.ffxiclopedia.org/wiki/Talk:Parrying_Skill
-                // {(Parry Skill x .125) + ([Player Agi - Enemy Dex] x .125)} x Diff
-
-                float skill = (float)(PDefender->GetSkill(SKILL_PARRY) + PDefender->getMod(Mod::PARRY) + PWeapon->getILvlParry());
-
-                float diff = 1.0f + (((float)PDefender->GetMLevel() - PAttacker->GetMLevel()) / 15.0f);
-
-                if (PWeapon->isTwoHanded())
-                {
-                    // two handed weapons get a bonus
-                    diff += 0.1f;
-                }
-
-                if (diff < 0.4f)
-                {
-                    diff = 0.4f;
-                }
-                if (diff > 1.4f)
-                {
-                    diff = 1.4f;
-                }
-
-                float dex = PAttacker->DEX();
-                float agi = PDefender->AGI();
-
-                auto parryRate = std::clamp<uint8>((uint8)((skill * 0.1f + (agi - dex) * 0.125f + 10.0f) * diff), 5, 25);
-
-                // Issekigan grants parry rate bonus. From best available data, if you already capped out at 25% parry it grants another 25% bonus for ~50%
-                // parry rate
-                if ((PDefender->objtype == TYPE_PC || PDefender->objtype == TYPE_TRUST)
-                    && PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_ISSEKIGAN))
-                {
-                    int16 issekiganBonus = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_ISSEKIGAN)->GetPower();
-                    parryRate += issekiganBonus;
-                }
-
-                // Inquartata grants a flat parry rate bonus.
-                int16 inquartataBonus = PDefender->getMod(Mod::INQUARTATA);
-                parryRate += inquartataBonus;
-
-                return parryRate;
+                // two handed weapons get a bonus
+                diff += 0.1f;
             }
+
+            if (diff < 0.4f)
+            {
+                diff = 0.4f;
+            }
+            if (diff > 1.4f)
+            {
+                diff = 1.4f;
+            }
+
+            float dex = PAttacker->DEX();
+            float agi = PDefender->AGI();
+
+            auto parryRate = std::clamp<uint8>((uint8)((skill * 0.1f + (agi - dex) * 0.125f + 10.0f) * diff), 5, 25);
+
+            // Issekigan grants parry rate bonus. From best available data, if you already capped out at 25% parry it grants another 25% bonus for ~50%
+            // parry rate
+            if ((PDefender->objtype == TYPE_PC || PDefender->objtype == TYPE_TRUST)
+                && PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_ISSEKIGAN))
+            {
+                int16 issekiganBonus = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_ISSEKIGAN)->GetPower();
+                parryRate += issekiganBonus;
+            }
+
+            // Inquartata grants a flat parry rate bonus.
+            int16 inquartataBonus = PDefender->getMod(Mod::INQUARTATA);
+            parryRate += inquartataBonus;
+
+            return parryRate;
         }
 
         return 0;
@@ -6589,6 +6675,56 @@ namespace battleutils
                 return DAMAGE_TYPE::DARK;
             default:
                 return DAMAGE_TYPE::NONE;
+        }
+    }
+
+    DAMAGE_TYPE GetRuneEnhancementDamageType(EFFECT runeEffect)
+    {
+        switch (runeEffect)
+        {
+            case EFFECT_IGNIS:
+                return DAMAGE_TYPE::FIRE;
+            case EFFECT_GELUS:
+                return DAMAGE_TYPE::ICE;
+            case EFFECT_FLABRA:
+                return DAMAGE_TYPE::WIND;
+            case EFFECT_TELLUS:
+                return DAMAGE_TYPE::EARTH;
+            case EFFECT_SULPOR:
+                return DAMAGE_TYPE::LIGHTNING;
+            case EFFECT_UNDA:
+                return DAMAGE_TYPE::WATER;
+            case EFFECT_LUX:
+                return DAMAGE_TYPE::LIGHT;
+            case EFFECT_TENEBRAE:
+                return DAMAGE_TYPE::DARK;
+            default:
+                return DAMAGE_TYPE::NONE;
+        }
+    }
+
+    ELEMENT GetRuneEnhancementElement(EFFECT runeEffect)
+    {
+        switch (runeEffect)
+        {
+            case EFFECT_IGNIS:
+                return ELEMENT_FIRE;
+            case EFFECT_GELUS:
+                return ELEMENT_ICE;
+            case EFFECT_FLABRA:
+                return ELEMENT_WIND;
+            case EFFECT_TELLUS:
+                return ELEMENT_EARTH;
+            case EFFECT_SULPOR:
+                return ELEMENT_THUNDER;
+            case EFFECT_UNDA:
+                return ELEMENT_WATER;
+            case EFFECT_LUX:
+                return ELEMENT_LIGHT;
+            case EFFECT_TENEBRAE:
+                return ELEMENT_DARK;
+            default:
+                return ELEMENT_NONE;
         }
     }
 
