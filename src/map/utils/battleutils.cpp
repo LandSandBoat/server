@@ -438,7 +438,7 @@ namespace battleutils
         return g_PMobSkillLists[ListID];
     }
 
-    int32 CalculateEnspellDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, uint8 Tier, uint8 element, double runeDPS, double runeBonus)
+    int32 CalculateEnspellDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, uint8 Tier, uint8 element)
     {
         int32 damage = 0;
 
@@ -510,10 +510,30 @@ namespace battleutils
         else if (Tier == 4) // Rune Enhancement
         {
             //see https://www.ffxiah.com/forum/topic/56613/rune-enhancement-damage-formula-testing/ for data and comments
+            double runeDPS = 0.0;
+            CItemWeapon* PWeapon = static_cast<CItemWeapon*>(static_cast<CCharEntity*>(PAttacker)->getEquip(SLOT_MAIN));
+
+            if (PWeapon == nullptr) //h2h, though base DPS is so low it will never hit non-zero enspell damage numbers with current rune count and modifiers.
+            {
+               runeDPS = 3.0 / 240.0;
+            }
+            else
+            {
+                runeDPS = PWeapon->getDPS();
+            }
+
+            if (PAttacker->m_dualWield)
+            {
+                runeDPS /= 2; // DPS is divided evenly between hands derived from mainhand only
+            }
+
             runeDPS = std::fmin(21, runeDPS); // max DPS currently known is 21.
 
             double min = 0.0;
             double max = 0.0;
+
+            EFFECT highestRuneEffect = PAttacker->StatusEffectContainer->GetHighestRuneEffect();
+            int runeBonus = PAttacker->StatusEffectContainer->GetEffectsCount(highestRuneEffect);
 
             if (runeBonus == 1)
             {
@@ -1067,29 +1087,11 @@ namespace battleutils
             }
             else if(PAttacker->StatusEffectContainer->GetActiveRuneCount() > 0) //Rune Enhancement enspell damage, takes priority over all but blood weapon.
             {
-                double dps = 0.0;
-                CItemWeapon* PWeapon = static_cast<CItemWeapon*>(static_cast<CCharEntity*>(PAttacker)->getEquip(SLOT_MAIN));
-
-                if (PWeapon == nullptr) //h2h, though base DPS is so low it will never hit non-zero enspell damage numbers with current rune count and modifiers.
-                {
-                   dps = 3.0 / 240.0;
-                }
-                else
-                {
-                    dps = PWeapon->getDPS();
-                }
-
-                if (PAttacker->m_dualWield)
-                {
-                    dps /= 2; // DPS is divided evenly between hands derived from mainhand only
-                }
-
                 EFFECT highestRuneEffect = PAttacker->StatusEffectContainer->GetHighestRuneEffect();
                 EFFECT newestRuneEffect  = PAttacker->StatusEffectContainer->GetNewestRuneEffect();
                 int highestRuneCount     = PAttacker->StatusEffectContainer->GetEffectsCount(highestRuneEffect);
 
                 DAMAGE_TYPE damageType   = DAMAGE_TYPE::NONE;
-                int runeBonus = 1;
                 int element = 0;
 
                 if (highestRuneCount == 1) // only have unique or one rune, set element to newest.
@@ -1103,10 +1105,9 @@ namespace battleutils
                     element = GetRuneEnhancementElement(highestRuneEffect);
                     Action->additionalEffect = enspell_subeffects[highestRuneEffect - EFFECT_IGNIS];
                     damageType = GetRuneEnhancementDamageType(highestRuneEffect);
-                    runeBonus = highestRuneCount;
                 }
 
-                Action->addEffectParam = CalculateEnspellDamage(PAttacker, PDefender, 4, element, dps, runeBonus);
+                Action->addEffectParam = CalculateEnspellDamage(PAttacker, PDefender, 4, element);
 
                 if (Action->addEffectParam < 0)
                 {
@@ -1124,7 +1125,7 @@ namespace battleutils
             {
                 Action->additionalEffect = SUBEFFECT_LIGHT_DAMAGE;
                 Action->addEffectMessage = 229;
-                Action->addEffectParam   = CalculateEnspellDamage(PAttacker, PDefender, 2, 7, 0, 0);
+                Action->addEffectParam   = CalculateEnspellDamage(PAttacker, PDefender, 2, 7);
 
                 if (Action->addEffectParam < 0)
                 {
@@ -1140,18 +1141,18 @@ namespace battleutils
                 {
                     // Enlight II and Endark II currently not implemented; may vary
                     Action->additionalEffect = enspell_subeffects[enspell - 9];
-                    Action->addEffectParam   = CalculateEnspellDamage(PAttacker, PDefender, 2, enspell - 8, 0, 0);
+                    Action->addEffectParam   = CalculateEnspellDamage(PAttacker, PDefender, 2, enspell - 8);
                 }
                 else if (enspell <= ENSPELL_I_DARK) // Tier I elemental enspell
                 {
                     Action->additionalEffect = enspell_subeffects[enspell - 1];
                     if (enspell >= ENSPELL_I_LIGHT) // Enlight or Endark
                     {
-                        Action->addEffectParam = CalculateEnspellDamage(PAttacker, PDefender, 3, enspell, 0, 0);
+                        Action->addEffectParam = CalculateEnspellDamage(PAttacker, PDefender, 3, enspell);
                     }
                     else
                     {
-                        Action->addEffectParam = CalculateEnspellDamage(PAttacker, PDefender, 1, enspell, 0, 0);
+                        Action->addEffectParam = CalculateEnspellDamage(PAttacker, PDefender, 1, enspell);
                     }
                 }
 
