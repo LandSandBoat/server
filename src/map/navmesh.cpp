@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -31,6 +31,7 @@
 #include <set>
 
 constexpr int8  CNavMesh::ERROR_NEARESTPOLY;
+constexpr float smallPolyPickExt[3]  = {  0.5f,  1.0f,  0.5f };
 constexpr float polyPickExt[3]       = {  5.0f, 10.0f,  5.0f };
 constexpr float skinnyPolyPickExt[3] = { 0.01f, 10.0f, 0.01f };
 constexpr float verticalLimit        = 5.0f;
@@ -383,7 +384,7 @@ bool CNavMesh::validPosition(const position_t& position)
 
     dtPolyRef startRef;
 
-    dtStatus status = m_navMeshQuery.findNearestPoly(spos, polyPickExt, &filter, &startRef, snearest);
+    dtStatus status = m_navMeshQuery.findNearestPoly(spos, smallPolyPickExt, &filter, &startRef, snearest);
 
     if (dtStatusFailed(status))
     {
