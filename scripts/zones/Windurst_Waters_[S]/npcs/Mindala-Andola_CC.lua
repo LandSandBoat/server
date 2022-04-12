@@ -22,9 +22,9 @@ entity.onTrigger = function(player, npc)
     -- 4 for Valaneiral (New Year's & Summer Alter Ego Extravaganzas)
     -- 8 for Adelheid (Spring & Autumn Alter Ego Extravaganzas)
     -- 12 to display both
-    local medalRank = getMedalRank(player)
+    local medalRank = xi.campaign.getMedalRank(player)
     local bonusEffects = 0 -- 1 = regen, 2 = refresh, 4 = meal duration, 8 = exp loss reduction, 15 = all
-    local timeStamp = 0 -- getSigilTimeStamp(player)
+    local timeStamp = 0 -- xi.campaign.getSigilTimeStamp(player)
     local allegiance = player:getCampaignAllegiance()
 
     -- if ( medal_rank > 25 and nation controls Throne_Room_S ) then
@@ -56,11 +56,11 @@ local optionList =
 }
 
 entity.onEventFinish = function(player, csid, option)
-    local medalRank = getMedalRank(player)
+    local medalRank = xi.campaign.getMedalRank(player)
     if csid == 13 then
         -- Note: the event itself already verifies the player has enough AN, so no check needed here.
         if option >= 2 and option <= 2050 then -- player bought item
-            local item, price, adj = getWindurstNotesItem(option)
+            local item, price, adj = xi.campaign.getWindurstNotesItem(option)
             --if player is allied with Windurst, they get adjusted price on most items
             if player:getCampaignAllegiance() == 3 and adj ~= nil then
                 price = adj
