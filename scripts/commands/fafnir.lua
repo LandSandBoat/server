@@ -6,25 +6,13 @@
 
 cmdprops =
 {
-<<<<<<< HEAD
-    permission = 3,
-=======
     permission = 5,
->>>>>>> 0b0d3a5b8eb5a8996dafc01a9c6ae8856964d490
     parameters = ""
 }
 
 function onTrigger(player)
     local zone = player:getZone()
 
-<<<<<<< HEAD
-    -- Fafnir's entry in mob_groups:
-    -- INSERT INTO `mob_groups` VALUES (5,1280,154,'Fafnir',0,128,805,70000,0,90,90,0);
-    --                       groupId ---^       ^--- groupZoneId
-
-    local mob = zone:insertDynamicEntity({
-        objtype = xi.objType.MOB,
-=======
     local mob = zone:insertDynamicEntity({
         -- NPC or MOB
         objtype = xi.objType.MOB,
@@ -37,17 +25,10 @@ function onTrigger(player)
         name = "Fafnir",
 
         -- Set the position using in-game x, y and z
->>>>>>> 0b0d3a5b8eb5a8996dafc01a9c6ae8856964d490
         x = player:getXPos(),
         y = player:getYPos(),
         z = player:getZPos(),
         rotation = player:getRotPos(),
-<<<<<<< HEAD
-        groupId = 5,
-        groupZoneId = 154,
-    })
-
-=======
 
         -- Fafnir's entry in mob_groups:
         -- INSERT INTO `mob_groups` VALUES (5,1280,154,'Fafnir',0,128,805,70000,0,90,90,0);
@@ -63,22 +44,10 @@ function onTrigger(player)
     })
 
     -- Use the mob object as you normally would
->>>>>>> 0b0d3a5b8eb5a8996dafc01a9c6ae8856964d490
     mob:setSpawn(player:getXPos(), player:getYPos(), player:getZPos(), player:getRotPos())
 
     mob:setDropID(0) -- No loot!
 
-<<<<<<< HEAD
-    -- Dynamic mobs skip the regular bindings for onMobDeath, so if you want to
-    -- add logic to their deaths, you need to use a listener:
-    mob:addListener("DEATH", "DYNAMIC_FAFNIR_DEATH", function(mobArg)
-        mobArg:removeListener("DYNAMIC_FAFNIR_DEATH")
-
-        -- Do stuff here
-    end)
-
-=======
->>>>>>> 0b0d3a5b8eb5a8996dafc01a9c6ae8856964d490
     mob:spawn()
 
     player:PrintToPlayer(string.format("Spawning Fafnir (Lv: %i, HP: %i)\n%s", mob:getMainLvl(), mob:getMaxHP(), mob))

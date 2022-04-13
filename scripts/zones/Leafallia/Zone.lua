@@ -12,19 +12,12 @@ end
 
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
-    local duration = 30 + player:getMod(xi.mod.PERFECT_DODGE)
-    player:addStatusEffect(xi.effect.PERFECT_DODGE, 1, 0, duration)
-	player:setLevelCap(60)
 
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
         player:setPos(-1, 0, 0, 151)
     end
-    
-	if (player:isDead()) then
-        player:sendRaise(3)
-	end
-    
-	return cs
+
+    return cs
 end
 
 zone_object.onRegionEnter = function(player, region)

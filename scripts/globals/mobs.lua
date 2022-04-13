@@ -67,7 +67,7 @@ xi.mob.phOnDespawn = function(ph, phList, chance, cooldown, immediate)
     if nmId ~= nil then
         local nm = GetMobByID(nmId)
         if nm ~= nil then
-            local pop = GetServerVariable(string.format("[POP]%s %i", nm:getName(), nmId))
+            local pop = nm:getLocalVar("pop")
 
             chance = math.ceil(chance * 10) -- chance / 1000.
             if os.time() > pop and not lotteryPrimed(phList) and math.random(1000) <= chance then
@@ -83,7 +83,7 @@ xi.mob.phOnDespawn = function(ph, phList, chance, cooldown, immediate)
                     DisallowRespawn(nmId, true)
                     DisallowRespawn(phId, false)
                     GetMobByID(phId):setRespawnTime(GetMobRespawnTime(phId))
-                    SetServerVariable(string.format("[POP]%s %i", nm:getName(), nmId), os.time() + cooldown)
+                    m:setLocalVar("pop", os.time() + cooldown)
                     m:removeListener("DESPAWN_" .. nmId)
                 end)
 

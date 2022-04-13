@@ -131,7 +131,7 @@ local function CharCreate(player)
     player:setCharVar("TutorialProgress", 1) -- Has not started tutorial
     player:setCharVar("EinherjarIntro", 1) -- Has not seen Einherjar intro
     player:setNewPlayer(true) -- apply new player flag
-	player:addLinkpearl("CatsEyeXI", true)								   
+    player:addLinkpearl("CatsEyeXI", true)								   
 end
 
 -----------------------------------
@@ -227,6 +227,10 @@ xi.player.onPlayerEmote = function(player, emoteId)
     if emoteId == xi.emote.CHEER and player:hasStatusEffect(xi.effect.FULL_SPEED_AHEAD) then
         xi.fsa.onCheer(player)
     end
+end
+
+xi.player.onPlayerVolunteer = function(player, text)
+    --print(string.format("(%s) /volunteer %s", player:getName(), text))
 end
 
 return xi.player

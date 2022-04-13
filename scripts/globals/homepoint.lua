@@ -44,8 +44,7 @@ local HPs =
     [ 33] = {group = 4, fee = 1, dest = {       32,      -1,     -44,   0, 244}}, -- Upper Jeuno #2
     [ 34] = {group = 4, fee = 1, dest = {      -52,       1,      16,   0, 244}}, -- Upper Jeuno #3
     [ 35] = {group = 4, fee = 1, dest = {      -99,       0,    -183,   0, 245}}, -- Lower Jeuno #1
---    [ 36] = {group = 4, fee = 1, dest = {       18,      -1,      54,   0, 245}}, -- Lower Jeuno #2
-    [ 36] = {group = 4, fee = 1, dest = {      7.8,      -8,     8.6,  85, 245}}, -- Lower Jeuno #2
+    [ 36] = {group = 4, fee = 1, dest = {       18,      -1,      54,   0, 245}}, -- Lower Jeuno #2
     [ 37] = {group = 4, fee = 1, dest = {       37,       0,       9,   0, 246}}, -- Port Jeuno #1
     [ 38] = {group = 4, fee = 1, dest = {     -155,      -1,      -4,   0, 246}}, -- Port Jeuno #2
     [ 39] = {group = 0, fee = 1, dest = {       78,     -13,     -94,   0, 250}}, -- Kazham #1
@@ -197,11 +196,6 @@ xi.homepoint.onTrigger = function(player, csid, index)
     player:setLocalVar("originIndex", index)
     local G1, G2, G3, G4 = unpack(player:getTeleportTable(travelType))
     player:startEvent(csid, 1, G1, G2, G3, G4, player:getGil(), 4095, params)
-
---  Added manually because for some reason Homepoint healing stopped working when we moved Lower Jeuno HP #2 near the Auction House
-    player:addHP(player:getMaxHP())
-    player:addMP(player:getMaxMP())
---    super(player, csid, index)
 
 end
 
