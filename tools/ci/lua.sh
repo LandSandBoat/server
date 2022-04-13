@@ -153,10 +153,6 @@ global_objects=(
 
     onBattlefieldHandlerInitialise
 
-    porterMoogleTrade
-    porterEventUpdate
-    porterEventFinish
-
     dynamis
 
     doAutoPhysicalWeaponskill
