@@ -7,7 +7,7 @@ def check_preconditions(cur):
     return
 
 def needs_to_run(cur):
-    # Ensure timecreated column exists in chars
+    # Ensure chatfilters column exists in chars
     cur.execute("SHOW COLUMNS FROM chars LIKE 'chatfilters'")
     if not cur.fetchone():
         return True
