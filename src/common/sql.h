@@ -164,15 +164,6 @@ public:
     /// @return SQL_SUCCESS or SQL_ERROR
     int32 GetData(size_t col, char** out_buf, size_t* out_len);
 
-    template <typename T>
-    void GetStruct(size_t col, T* out_struct)
-    {
-        std::size_t length = 0;
-        char* buffer;
-        GetData(col, &buffer, &length);
-        std::memcpy(out_struct, buffer, (length > sizeof(T) ? sizeof(T) : length));
-    }
-
     int8*  GetData(size_t col);
     int32  GetIntData(size_t col);
     uint32 GetUIntData(size_t col);
