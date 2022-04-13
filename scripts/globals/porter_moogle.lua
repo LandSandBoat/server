@@ -59,7 +59,7 @@ local function isStorableOn(slipId, itemId)
         end
     end
 
-    printf('Item %s is not storable on %s', itemId, slipId)
+    -- printf('Item %s is not storable on %s', itemId, slipId)
     return false
 end
 
