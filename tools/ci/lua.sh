@@ -181,9 +181,6 @@ global_objects=(
     error
     onTrigger
 
-    CheckMaps
-    CheckMapsUpdate
-
     getDynamisMapList
 
     SetExplorerMoogles
