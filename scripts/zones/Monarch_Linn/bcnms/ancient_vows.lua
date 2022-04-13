@@ -21,7 +21,8 @@ end
 battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
     if leavecode == xi.battlefield.leaveCode.WON then
         local _, clearTime, partySize = battlefield:getRecord()
-        local arg8 = (player:getCurrentMission(COP) ~= xi.mission.id.cop.ANCIENT_VOWS or player:getCharVar("PromathiaStatus") ~= 2) and 1 or 0
+        local arg8 = (player:getCurrentMission(COP) ~= xi.mission.id.cop.ANCIENT_VOWS or
+                      xi.mission.getVar(player, xi.mission.log_id.COP, xi.mission.id.cop.ANCIENT_VOWS, 'Status') ~= 2) and 1 or 0
 
         if player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.ANCIENT_VOWS then
             player:setLocalVar("battlefieldWin", battlefield:getID())

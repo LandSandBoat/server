@@ -22,6 +22,7 @@ zones[xi.zone.LOWER_DELKFUTTS_TOWER] =
         LOGIN_CAMPAIGN_UNDERWAY          = 7191,  -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER                     = 7192,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         FISHING_MESSAGE_OFFSET           = 7246,  -- You can't fish here.
+        SOMETHING_HUGE_BEARING_DOWN      = 7494,  -- Something huge is bearing down upon you!
         PLAYER_OBTAINS_ITEM              = 8629,  -- <name> obtains <item>!
         UNABLE_TO_OBTAIN_ITEM            = 8630,  -- You were unable to obtain the item.
         PLAYER_OBTAINS_TEMP_ITEM         = 8631,  -- <name> obtains the temporary item: <item>!

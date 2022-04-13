@@ -842,7 +842,8 @@ namespace charutils
         PChar->health.hp = zoneutils::IsResidentialArea(PChar) ? PChar->GetMaxHP() : HP;
         PChar->health.mp = zoneutils::IsResidentialArea(PChar) ? PChar->GetMaxMP() : MP;
         PChar->UpdateHealth();
-        PChar->currentEvent->eventId = luautils::OnZoneIn(PChar);
+
+        luautils::OnZoneIn(PChar);
         luautils::OnGameIn(PChar, zoning == 1);
     }
 
@@ -5626,7 +5627,7 @@ namespace charutils
 
         // Attempt to disband party if the last trust was just released
         // NOTE: Trusts are not counted as party members, so the current member count will be 1
-        if (PChar->PParty && PChar->PParty->members.size() == 1 && PChar->PTrusts.empty())
+        if (PChar->PParty && PChar->PParty->HasOnlyOneMember() && PChar->PTrusts.empty())
         {
             // Looks good so far, check OTHER processes to see if we should disband
             if (PChar->PParty->GetMemberCountAcrossAllProcesses() == 1)

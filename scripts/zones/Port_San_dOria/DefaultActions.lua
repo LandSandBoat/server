@@ -2,6 +2,7 @@ local ID = require("scripts/zones/Port_San_dOria/IDs")
 
 return {
     ['Altiret']      = { event = 559 },
+    ['Anoki']        = { event = 519 },
     ['Answald']      = { event = 584 },
     ['Antreneau']    = { messageSpecial = ID.text.ANTRENEAU_READY_TO_EAT },
     ['Artinien']     = { event = 588 },

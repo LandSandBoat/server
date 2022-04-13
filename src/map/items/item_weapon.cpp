@@ -27,7 +27,7 @@
 
 /************************************************************************
  *                                                                       *
- *                                                                       *
+ * Weapon item type constructor                                          *
  *                                                                       *
  ************************************************************************/
 
@@ -47,12 +47,19 @@ CItemWeapon::CItemWeapon(uint16 id)
     m_delay          = 8000;
     m_baseDelay      = 8000; // this should only be needed for mobs (specifically mnks)
     m_maxHit         = 0;
+    m_DPS            = 0.0;
     m_ranged         = false;
     m_twoHanded      = false;
     m_wsunlockpoints = 0;
 }
 
 CItemWeapon::~CItemWeapon() = default;
+
+/************************************************************************
+ *                                                                       *
+ *   reset weapon delay to base delay                                    *
+ *                                                                       *
+ ************************************************************************/
 
 void CItemWeapon::resetDelay()
 {
@@ -69,10 +76,22 @@ bool CItemWeapon::isRanged() const
     return m_ranged;
 }
 
+/************************************************************************
+ *                                                                       *
+ *   returns true if weapon is throwing item                             *
+ *                                                                       *
+ ************************************************************************/
+
 bool CItemWeapon::isThrowing() const
 {
     return isRanged() && getSkillType() == SKILL_THROWING;
 }
+
+/************************************************************************
+ *                                                                       *
+ *   returns true if weapon is a shuriken                                *
+ *                                                                       *
+ ************************************************************************/
 
 bool CItemWeapon::isShuriken() const
 {
@@ -81,7 +100,7 @@ bool CItemWeapon::isShuriken() const
 
 /************************************************************************
  *                                                                       *
- *  Двуручное оружие                                                     *
+ * get weapon handedness                                                 *
  *                                                                       *
  ************************************************************************/
 
@@ -117,13 +136,29 @@ bool CItemWeapon::isUnlockable() const
     return (m_wsunlockpoints > 0);
 }
 
+
+/************************************************************************
+ *                                                                       *
+ * returns true if weapon is unlocked                                    *
+ *                                                                       *
+ ************************************************************************/
+
 bool CItemWeapon::isUnlocked()
 {
     return isUnlockable() && getCurrentUnlockPoints() == m_wsunlockpoints;
 }
 
+
+/************************************************************************
+ *                                                                       *
+ *  Add weaponskill points                                               *
+ *  return true if the add of WS points resulted in an unlock            *
+ *                                                                       *
+ ************************************************************************/
+
 bool CItemWeapon::addWsPoints(uint16 points)
 {
+    // If we're going to add more total WS points than the cap, set it to the cap
     if (getCurrentUnlockPoints() + points >= m_wsunlockpoints)
     {
         setCurrentUnlockPoints(m_wsunlockpoints);
@@ -138,7 +173,7 @@ bool CItemWeapon::addWsPoints(uint16 points)
 
 /************************************************************************
  *                                                                       *
- *   Устанавливаем тип оружия и флаг isTwoHanded                         *
+ *   Set weapon skill type and isTwoHanded                               *
  *                                                                       *
  ************************************************************************/
 
@@ -163,16 +198,22 @@ void CItemWeapon::setSkillType(uint8 skillType)
     m_skillType = skillType;
 }
 
+/************************************************************************
+ *                                                                      *
+ * Get weapon skill type                                                *
+ *                                                                      *
+ ************************************************************************/
+
 uint8 CItemWeapon::getSkillType() const
 {
     return m_skillType;
 }
 
 /************************************************************************
- *                                                                       *
- *   Set/get sub skillType.  Used for guns vs crossbows and other		*
- *	exclusives									                        *
- *                                                                       *
+ *                                                                      *
+ *   Set sub skillType.  Used for guns vs crossbows and other           *
+ *	exclusives                                                          *
+ *                                                                      *
  ************************************************************************/
 
 void CItemWeapon::setSubSkillType(uint8 subSkillType)
@@ -180,35 +221,78 @@ void CItemWeapon::setSubSkillType(uint8 subSkillType)
     m_subSkillType = subSkillType;
 }
 
+/************************************************************************
+ *                                                                      *
+ * set ilvl (Weapon type) Skill +                                       *
+ *                                                                      *
+ ************************************************************************/
+
 void CItemWeapon::setILvlSkill(uint16 skill)
 {
     m_iLvlSkill = skill;
 }
+
+/************************************************************************
+ *                                                                      *
+ * Get ilvl Parry Skill +                                               *
+ *                                                                      *
+ ************************************************************************/
 
 void CItemWeapon::setILvlParry(uint16 parry)
 {
     m_iLvlParry = parry;
 }
 
+/************************************************************************
+ *                                                                      *
+ * Set ilvl Magic Accuracy Skill+                                       *
+ *                                                                      *
+ ************************************************************************/
+
 void CItemWeapon::setILvlMacc(uint16 macc)
 {
     m_iLvlMacc = macc;
 }
+
+
+/************************************************************************
+ *                                                                      *
+ * Get sub Skill Type, e.g. Gun vs Crossbow                              *
+ *                                                                      *
+ ************************************************************************/
 
 uint8 CItemWeapon::getSubSkillType() const
 {
     return m_subSkillType;
 }
 
+/************************************************************************
+ *                                                                      *
+ * Get ilvl (Weapon type) Skill +                                       *
+ *                                                                      *
+ ************************************************************************/
+
 uint16 CItemWeapon::getILvlSkill() const
 {
     return m_iLvlSkill;
 }
 
+/************************************************************************
+ *                                                                      *
+ * Get ilvl Parry Skill +                                               *
+ *                                                                      *
+ ************************************************************************/
+
 uint16 CItemWeapon::getILvlParry() const
 {
     return m_iLvlParry;
 }
+
+/************************************************************************
+ *                                                                      *
+ * Get ilvl Magic Accuracy Skill+                                       *
+ *                                                                      *
+ ************************************************************************/
 
 uint16 CItemWeapon::getILvlMacc() const
 {
@@ -216,11 +300,11 @@ uint16 CItemWeapon::getILvlMacc() const
 }
 
 /************************************************************************
- *																		*
- *  Устанавливаем время задержки оружия. Сразу переводим значение в млс.	*
- *  Все математические операции происходят с целыми числами, именно по	*
- *  этому порядок действий очень важен, чтобы не потерять часть данных.	*
- *																		*
+ *                                                                      *
+ * Set the weapon delay time. Value in milliseconds.                    *
+ * All math operations are performed with integers which is why         *
+ * the order of operations is important                                 *
+ *                                                                      *
  ************************************************************************/
 
 void CItemWeapon::setDelay(uint16 delay)
@@ -228,17 +312,25 @@ void CItemWeapon::setDelay(uint16 delay)
     m_delay = delay;
 }
 
+/************************************************************************
+ *                                                                      *
+ * Get the weapon delay time. Value in milliseconds.                    *
+ * All math operations are performed with integers which is why         *
+ * the order of operations is important                                 *
+ *                                                                      *
+ ************************************************************************/
+
 int16 CItemWeapon::getDelay() const
 {
     return m_delay;
 }
 
 /************************************************************************
- *																		*
- *  Set/get the un-adjusted delay of the weapon							*
- *  This is to fix delay adjustments of mobs and is not intended for		*
- *  use outside of zoneutils/mobutils									*
- *																		*
+ *                                                                      *
+ *  Set the un-adjusted delay of the weapon                             *
+ *  This is to fix delay adjustments of mobs and is not intended for    *
+ *  use outside of zoneutils/mobutils                                   *
+ *                                                                      *
  ************************************************************************/
 
 void CItemWeapon::setBaseDelay(uint16 delay)
@@ -246,20 +338,35 @@ void CItemWeapon::setBaseDelay(uint16 delay)
     m_baseDelay = delay;
 }
 
+/************************************************************************
+ *                                                                       *
+ * get un-adjusted base delay of weapon.                                 *
+ *                                                                       *
+ * Not intended for use outside of zoneutils/mobutils                    *
+ *                                                                       *
+ ************************************************************************/
+
 int16 CItemWeapon::getBaseDelay() const
 {
     return m_baseDelay;
 }
+
 /************************************************************************
  *                                                                       *
- *  get unlock points	                                                *
+ *  get total unlock points needed to unlock WS                          *
  *                                                                       *
  ************************************************************************/
 
-uint16 CItemWeapon::getUnlockPoints() const
+uint16 CItemWeapon::getTotalUnlockPointsNeeded() const
 {
     return m_wsunlockpoints;
 }
+
+/************************************************************************
+ *                                                                       *
+ *  get current amount of unlock points                                  *
+ *                                                                       *
+ ************************************************************************/
 
 uint16 CItemWeapon::getCurrentUnlockPoints()
 {
@@ -268,7 +375,7 @@ uint16 CItemWeapon::getCurrentUnlockPoints()
 
 /************************************************************************
  *                                                                       *
- *                                                                       *
+ * set weapon damage                                                     *
  *                                                                       *
  ************************************************************************/
 
@@ -277,6 +384,12 @@ void CItemWeapon::setDamage(uint16 damage)
     m_damage = damage;
 }
 
+/************************************************************************
+ *                                                                       *
+ * get weapon damage                                                     *
+ *                                                                       *
+ ************************************************************************/
+
 uint16 CItemWeapon::getDamage() const
 {
     return m_damage;
@@ -284,7 +397,7 @@ uint16 CItemWeapon::getDamage() const
 
 /************************************************************************
  *                                                                       *
- *                                                                       *
+ * set weapon damage type                                                *
  *                                                                       *
  ************************************************************************/
 
@@ -293,6 +406,12 @@ void CItemWeapon::setDmgType(DAMAGE_TYPE dmgType)
     m_dmgType = dmgType;
 }
 
+/************************************************************************
+ *                                                                       *
+ * get weapon damage type                                                *
+ *                                                                       *
+ ************************************************************************/
+
 DAMAGE_TYPE CItemWeapon::getDmgType()
 {
     return m_dmgType;
@@ -300,7 +419,7 @@ DAMAGE_TYPE CItemWeapon::getDmgType()
 
 /************************************************************************
  *                                                                       *
- *  Дополнительный урон от оружия (fire, water и т.д.)                   *
+ * set additional effect (fire, water, etc)                              *
  *                                                                       *
  ************************************************************************/
 
@@ -309,6 +428,12 @@ void CItemWeapon::setAdditionalEffect(uint8 effect)
     m_effect = effect;
 }
 
+/************************************************************************
+ *                                                                       *
+ * get weapon additional effect                                          *
+ *                                                                       *
+ ************************************************************************/
+
 uint8 CItemWeapon::getAdditionalEffect() const
 {
     return m_effect;
@@ -316,14 +441,20 @@ uint8 CItemWeapon::getAdditionalEffect() const
 
 /************************************************************************
  *                                                                       *
- *  set unlockable points of weapon	    		                        *
+ *  set total needed unlock points of weapon                             *
  *                                                                       *
  ************************************************************************/
 
-void CItemWeapon::setUnlockablePoints(uint16 points)
+void CItemWeapon::setTotalUnlockPointsNeeded(uint16 points)
 {
     m_wsunlockpoints = points;
 }
+
+/************************************************************************
+ *                                                                       *
+ *  set current unlock points                                            *
+ *                                                                       *
+ ************************************************************************/
 
 void CItemWeapon::setCurrentUnlockPoints(uint16 points)
 {
@@ -332,7 +463,7 @@ void CItemWeapon::setCurrentUnlockPoints(uint16 points)
 
 /************************************************************************
  *                                                                       *
- *  Максимально возможное количество ударов оружием                      *
+ *  set max hit count of weapon (cap of 8 hits)                          *
  *                                                                       *
  ************************************************************************/
 
@@ -343,7 +474,7 @@ void CItemWeapon::setMaxHit(uint8 hit)
 
 /************************************************************************
  *                                                                       *
- *  Рассчет количества ударов                                            *
+ *  get max hit count of weapon                                          *
  *                                                                       *
  ************************************************************************/
 
@@ -352,10 +483,28 @@ uint8 CItemWeapon::getHitCount() const
     return battleutils::getHitCount(m_maxHit);
 }
 
+/************************************************************************
+ *                                                                       *
+ *  set DPS of weapon                                                    *
+ *                                                                       *
+ ************************************************************************/
+
+void CItemWeapon::setDPS(double dps)
+{
+    m_DPS = dps;
+}
+
+/************************************************************************
+ *                                                                       *
+ *  get DPS of weapon                                                    *
+ *                                                                       *
+ ************************************************************************/
+
+double CItemWeapon::getDPS() const
+{
+    return m_DPS;
+}
+
 // Blunt = MOD_HANDTOHAND, MOD_CLUB, MOD_STAFF
 // Slashing = MOD_AXE, MOD_GREATAXE, MOD_GREATSWORD, MOD_SWORD, MOD_SCYTHE, MOD_KATANA, MOD_GREATKATANA
 // Piercing = MOD_DAGGER, MOD_POLEARM, MOD_ARCHERY, MOD_MARKSMANSHIP
-
-// Hand-to-Hand est un type de Blunt, qui est pourquoi MNK est efficace contre les Undead (Corse et Skeleton).
-// Je ne sais pas ce que vous entendez par Impact et Range? MOD_THROWING pourrait aller dans aucun d'eux parce qu'il ya différents types d'armes.
-// Par exemple, Boomerangs sont Blunt, Chakrams sont Slashing, et Shurikens sont Piercing.

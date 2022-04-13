@@ -2,6 +2,7 @@
 -- Area: Apollyon NW, Floor 2
 --  Mob: Mountain Buffalo
 -----------------------------------
+local ID = require("scripts/zones/Apollyon/IDs")
 require("scripts/zones/Apollyon/bcnms/nw_apollyon_helper")
 require("scripts/globals/pathfind")
 -----------------------------------

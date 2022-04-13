@@ -15,7 +15,7 @@ xi = xi or {}
 xi.mob = xi.mob or {}
 
 -- onMobDeathEx is called from the core
-function onMobDeathEx(mob, player, isKiller, isWeaponSkillKill)
+xi.mob.onMobDeathEx = function(mob, player, isKiller, isWeaponSkillKill)
     -- Things that happen only to the person who landed killing blow
     if isKiller then
         -- DRK quest - Blade Of Darkness

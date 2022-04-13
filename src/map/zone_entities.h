@@ -86,6 +86,8 @@ private:
     CZone*       m_zone;
     CBaseEntity* m_Transport; // указатель на транспорт в зоне
     time_point   m_EffectCheckTime{ server_clock::now() };
+
+    uint16 m_DynamicTargIDCount;
 };
 
 #endif

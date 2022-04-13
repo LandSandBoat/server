@@ -1217,6 +1217,9 @@ xi.mod =
     TP_BONUS                        = 345,
     PERPETUATION_REDUCTION          = 346,
 
+    -- Geomancer
+    FULL_CIRCLE                     = 1025, -- Increases the initial multiplier on MP returned via Full Circle
+
     -- Rune Fencer
     ENHANCES_BATTUTA            = 1004, -- Used by RUN merit point cat 2 to add +N% bonus damage to parry spikes during Battuta effect
     ENHANCES_ELEMENTAL_SFORZO   = 1005, -- Bonus duration

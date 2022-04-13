@@ -256,6 +256,8 @@ namespace battleutils
     int32      GetScaledItemModifier(CBattleEntity*, CItemEquipment*, Mod);
     DAMAGE_TYPE GetSpikesDamageType(SUBEFFECT spikesType);
     DAMAGE_TYPE GetEnspellDamageType(ENSPELL enspellType);
+    DAMAGE_TYPE GetRuneEnhancementDamageType(EFFECT runeEffect);
+    ELEMENT     GetRuneEnhancementElement(EFFECT runeEffect);
 
     CBattleEntity* GetCoverAbilityUser(CBattleEntity* PCoverAbilityTarget, CBattleEntity* PMob);
     bool           IsMagicCovered(CCharEntity* PCoverAbilityUser);

@@ -576,6 +576,7 @@ enum class Mod
     RADIAL_ARCANA        = 969,
     CURATIVE_RECANTATION = 970,
     PRIMEVAL_ZEAL        = 971,
+    FULL_CIRCLE          = 1025, // Increases the initial multiplier on MP returned via Full Circle
 
     ENSPELL           = 341, // stores the type of enspell active (0 if nothing)
     ENSPELL_DMG       = 343, // stores the base damage of the enspell before reductions
@@ -881,7 +882,7 @@ enum class Mod
     // 888
     // 936
     //
-    // SPARE = 1025, and onward
+    // SPARE = 1026, and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

@@ -69,9 +69,6 @@ global_objects=(
     Sequence
     Container
     Event
-    onMobDeathEx
-
-    checkForGearSet
 
     removeSleepEffects
 
@@ -267,12 +264,6 @@ global_objects=(
 
     MOBSKILL_MAGICAL
     MOBSKILL_PHYSICAL
-
-    getMedalRank
-    getBastokNotesItem
-    getSandOriaNotesItem
-    getWindurstNotesItem
-    getSigilTimeStamp
 
     TPMOD_NONE
     TPMOD_CHANCE
