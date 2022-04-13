@@ -53,11 +53,11 @@ SqlConnection::SqlConnection(const char* user, const char* passwd, const char* h
         ShowFatalError("%s", mysql_error(&self->handle));
     }
 
-    m_User = user;
+    m_User   = user;
     m_Passwd = passwd;
-    m_Host = host;
-    m_Port = port;
-    m_Db = db;
+    m_Host   = host;
+    m_Port   = port;
+    m_Db     = db;
 
     InitPreparedStatements();
 
@@ -157,9 +157,9 @@ int32 SqlConnection::SetEncoding(const char* encoding)
 
 void SqlConnection::SetupKeepalive()
 {
-    auto now = std::chrono::system_clock::now().time_since_epoch();
+    auto now        = std::chrono::system_clock::now().time_since_epoch();
     auto nowSeconds = std::chrono::duration_cast<std::chrono::seconds>(now).count();
-    m_LastPing = nowSeconds;
+    m_LastPing      = nowSeconds;
 
     // set a default value first
     uint32 timeout = 7200; // 2 hours
@@ -173,7 +173,7 @@ void SqlConnection::SetupKeepalive()
     }
 
     // 30-second reserve
-    uint8 reserve = 30;
+    uint8 reserve  = 30;
     m_PingInterval = timeout + reserve;
 }
 
@@ -185,7 +185,7 @@ void SqlConnection::SetupKeepalive()
 
 int32 SqlConnection::TryPing()
 {
-    auto now = std::chrono::system_clock::now().time_since_epoch();
+    auto now        = std::chrono::system_clock::now().time_since_epoch();
     auto nowSeconds = std::chrono::duration_cast<std::chrono::seconds>(now).count();
 
     if (m_LastPing + m_PingInterval <= nowSeconds)
@@ -471,6 +471,25 @@ uint32 SqlConnection::GetUIntData(size_t col)
  *                                                                        *
  ************************************************************************/
 
+uint64 SqlConnection::GetUInt64Data(size_t col)
+{
+    if (self && self->row)
+    {
+        if (col < NumColumns())
+        {
+            return (self->row[col] ? (uint64)strtoull(self->row[col], NULL, 10) : 0);
+        }
+    }
+    ShowFatalError("GetFloatGetUInt64DataData: SQL_ERROR: %s", mysql_error(&self->handle));
+    return 0;
+}
+
+/************************************************************************
+ *                                                                        *
+ *                                                                        *
+ *                                                                        *
+ ************************************************************************/
+
 float SqlConnection::GetFloatData(size_t col)
 {
     if (self && self->row)
@@ -598,7 +617,7 @@ void SqlConnection::InitPreparedStatements()
 {
     auto add = [&](std::string const& name, std::string const& query)
     {
-        auto st = std::make_shared<SqlPreparedStatement>(&self->handle, query);
+        auto st                    = std::make_shared<SqlPreparedStatement>(&self->handle, query);
         m_PreparedStatements[name] = st;
     };
 

@@ -364,7 +364,8 @@ namespace charutils
                                "isstylelocked,"                // 27
                                "moghancement,"                 // 28
                                "UNIX_TIMESTAMP(`lastupdate`)," // 29
-                               "languages "                    // 30
+                               "languages,"                    // 30
+                               "chatfilters "                  // 31
                                "FROM chars "
                                "WHERE charid = %u";
 
@@ -449,6 +450,7 @@ namespace charutils
             PChar->SetMoghancement(sql->GetUIntData(28));
             PChar->lastOnline = sql->GetUIntData(29);
             PChar->search.language = (uint8)sql->GetUIntData(30);
+            PChar->chatFilterFlags = sql->GetUInt64Data(31);
         }
 
         LoadSpells(PChar);
@@ -796,6 +798,7 @@ namespace charutils
         PChar->PMeritPoints->SetLimitPoints(limitPoints);
         PChar->PJobPoints = new CJobPoints(PChar);
 
+        // TODO: Roll this into the first query to chars
         fmtQuery = "SELECT "
                    "gmlevel, "    // 0
                    "mentor, "     // 1
@@ -4863,6 +4866,32 @@ namespace charutils
         const char* Query = "UPDATE %s SET %s %u WHERE charid = %u;";
 
         sql->Query(Query, "chars", "nnameflags =", PChar->menuConfigFlags.flags, PChar->id);
+    }
+
+    /************************************************************************
+    *                                                                       *
+    *  Save the char's chat filter flags                                    *
+    *                                                                       *
+    ************************************************************************/
+
+    void SaveChatFilterFlags(CCharEntity* PChar)
+    {
+        const char* Query = "UPDATE chars SET chatfilters = %llu WHERE charid = %u;";
+
+        sql->Query(Query, PChar->chatFilterFlags, PChar->id);
+    }
+
+    /************************************************************************
+    *                                                                       *
+    *  Save the char's language preference                                  *
+    *                                                                       *
+    ************************************************************************/
+
+    void SaveLanguages(CCharEntity* PChar)
+    {
+        const char* Query = "UPDATE chars SET languages = %u WHERE charid = %u;";
+
+        sql->Query(Query, PChar->search.language, PChar->id);
     }
 
     /************************************************************************
