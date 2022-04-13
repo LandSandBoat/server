@@ -1,5 +1,5 @@
 -----------------------------------
--- Spell: Invisible
+-- Spell: Hastega II
 -----------------------------------
 require("scripts/globals/spells/spell_enhancing")
 -----------------------------------

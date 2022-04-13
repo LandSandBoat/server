@@ -1,6 +1,5 @@
 -----------------------------------
 -- Spell: Aquaveil
--- Reduces chance of having a spell interrupted.
 -----------------------------------
 require("scripts/globals/spells/spell_enhancing")
 -----------------------------------

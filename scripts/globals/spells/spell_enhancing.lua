@@ -33,7 +33,7 @@ xi.spells.spell_enhancing.calculateEnhancingPower = function(caster, target, spe
         end
 
     -- Bar-Element
-    elseif spellEffect >= xi.effect.BARFIRE and spellEffect == xi.effect.BARWATER then
+    elseif spellEffect >= xi.effect.BARFIRE and spellEffect <= xi.effect.BARWATER then
         if skillLevel > 300 then
             power = 25 + math.floor(skillLevel / 4) -- 150 at 500
         else
@@ -43,12 +43,16 @@ xi.spells.spell_enhancing.calculateEnhancingPower = function(caster, target, spe
         power = utils.clamp(power, 40, 150) -- Max is 150 and min is 40 at skill 0.
 
     -- Bar-Status
-    elseif spellEffect == xi.effect.BARAMNESIA or (spellEffect == xi.effect.BARSLEEP and spellEffect == xi.effect.BARVIRUS) then
+    elseif spellEffect == xi.effect.BARAMNESIA or (spellEffect >= xi.effect.BARSLEEP and spellEffect <= xi.effect.BARVIRUS) then
         power = power + skillLevel / 50 -- This is WRONG. SO SO WRONG.
 
     -- Boost-Stat / Gain-Stat
     elseif spellEffect >= xi.effect.STR_BOOST and spellEffect <= xi.effect.CHR_BOOST then
         power = power + utils.clamp(math.floor((skillLevel - 300) / 10), 0, 20)
+
+    -- Embrava
+    elseif spellEffect == xi.effect.EMBRAVA then
+        power = math.min(skillLevel, 500)
     end
 
     --------------------
@@ -63,11 +67,11 @@ xi.spells.spell_enhancing.calculateEnhancingPower = function(caster, target, spe
     -- Spell specific modifiers for potency.
     ----------------------------------------
     -- Bar-Element
-    if spellEffect >= xi.effect.BARFIRE and spellEffect == xi.effect.BARWATER then
+    if spellEffect >= xi.effect.BARFIRE and spellEffect <= xi.effect.BARWATER then
         power = power + caster:getMerit(xi.merit.BAR_SPELL_EFFECT) + caster:getMod(xi.mod.BARSPELL_AMOUNT) + caster:getJobPointLevel(xi.jp.BAR_SPELL_EFFECT) * 2
 
     -- Bar-Status
-    elseif spellEffect == xi.effect.BARAMNESIA or (spellEffect == xi.effect.BARSLEEP and spellEffect == xi.effect.BARVIRUS) then
+    elseif spellEffect == xi.effect.BARAMNESIA or (spellEffect >= xi.effect.BARSLEEP and spellEffect <= xi.effect.BARVIRUS) then
         power = power + caster:getMerit(xi.merit.BAR_SPELL_EFFECT) + caster:getMod(xi.mod.BARSPELL_MDEF_BONUS)
 
     -- Protect/Protectra
@@ -107,6 +111,11 @@ xi.spells.spell_enhancing.calculateEnhancingDuration = function(caster, target, 
     local useComposure = enhancingTable[spellId][7]
     local targetLevel  = target:getMainLvl()
 
+    -- Deodorize, Invisible and Sneak have a random factor to base duration.
+    if spellEffect == xi.effect.DEODORIZE or spellEffect == xi.effect.INVISIBLE or spellEffect == xi.effect.SNEAK then
+        duration = duration + 60 * math.random(0, 2)
+    end
+
     if magicSkill == xi.skill.ENHANCING_MAGIC then
         --------------------
         -- Embolden
@@ -134,6 +143,14 @@ xi.spells.spell_enhancing.calculateEnhancingDuration = function(caster, target, 
         if spellEffect == xi.effect.REGEN then
             duration = duration + caster:getMod(xi.mod.REGEN_DURATION)
             duration = duration + caster:getJobPointLevel(xi.jp.REGEN_DURATION) * 3
+
+        -- Invisible
+        elseif spellEffect == xi.effect.INVISIBLE then
+            duration = duration + target:getMod(xi.mod.INVISIBLE_DURATION)
+
+        -- Sneak
+        elseif spellEffect == xi.effect.SNEAK then
+            duration = duration + target:getMod(xi.mod.SNEAK_DURATION)
         end
 
         --------------------
@@ -171,6 +188,7 @@ xi.spells.spell_enhancing.useEnhancingSpell = function(caster, target, spell)
     local spellId    = spell:getID()
     local spellGroup = spell:getSpellGroup()
     local MDB        = 0
+    local paramThree = 0
     -- Get Variables from Parameters Table.
     local tier            = enhancingTable[spellId][1]
     local magicSkill      = enhancingTable[spellId][2]
@@ -178,11 +196,23 @@ xi.spells.spell_enhancing.useEnhancingSpell = function(caster, target, spell)
     local alwaysOverwrite = enhancingTable[spellId][8]
 
     ------------------------------------------------------------
-    -- Handle exceptions here, before calculating anything.
+    -- Handle exceptions and weird behaviour here, before calculating anything.
     ------------------------------------------------------------
     -- Bar-Element (They use addStatusEffect argument 6. Bar-Status current implementation doesn't.)
-    if spellEffect >= xi.effect.BARFIRE and spellEffect == xi.effect.BARWATER then
+    if spellEffect >= xi.effect.BARFIRE and spellEffect <= xi.effect.BARWATER then
         MDB = caster:getMerit(xi.merit.BAR_SPELL_EFFECT) + caster:getMod(xi.mod.BARSPELL_MDEF_BONUS)
+
+    -- Deodorize, Invisible, Sneak
+    elseif spellEffect == xi.effect.DEODORIZE or spellEffect == xi.effect.INVISIBLE or spellEffect == xi.effect.SNEAK then
+        paramThree = 10
+
+    -- Embrava
+    elseif spellEffect == xi.effect.EMBRAVA then
+        -- If Tabula Rasa wears before spell goes off, no Embrava for you!
+        if not caster:hasStatusEffect(xi.effect.TABULA_RASA) then
+            spell:setMsg(xi.msg.basic.MAGIC_CANNOT_CAST)
+            return 0
+        end
 
     -- Refresh
     elseif spellEffect == xi.effect.REFRESH then
@@ -230,9 +260,9 @@ xi.spells.spell_enhancing.useEnhancingSpell = function(caster, target, spell)
     ------------------------------------------------------------
     if alwaysOverwrite then
         target:delStatusEffect(spellEffect)
-        target:addStatusEffect(spellEffect, power, 0, duration, 0, MDB, tier)
+        target:addStatusEffect(spellEffect, power, paramThree, duration, 0, MDB, tier)
     else
-        if target:addStatusEffect(spellEffect, power, 0, duration, 0, MDB, tier) then
+        if target:addStatusEffect(spellEffect, power, paramThree, duration, 0, MDB, tier) then
             spell:setMsg(xi.msg.basic.MAGIC_GAIN_EFFECT)
         else
             spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- No effect.

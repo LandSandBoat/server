@@ -219,6 +219,20 @@ xi.spells.parameters.enhancingSpell =
     [xi.magic.spell.GAIN_MND     ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.MND_BOOST,   1,    5,  300, true,  false },
     [xi.magic.spell.GAIN_CHR     ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.CHR_BOOST,   1,    5,  300, true,  false },
 
+    -- Deodorize / Invisible / Sneak
+    [xi.magic.spell.DEODORIZE    ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.DEODORIZE,   0,   15,  420, true,  false },
+    [xi.magic.spell.INVISIBLE    ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.INVISIBLE,   0,   20,  420, true,  false },
+    [xi.magic.spell.SNEAK        ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.SNEAK,       0,   20,  420, true,  false },
+
+    -- Embrava
+    [xi.magic.spell.EMBRAVA      ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.EMBRAVA,     0,    5,   90, true,  true  },
+
+    -- Haste
+    [xi.magic.spell.HASTE        ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.HASTE,    1465,   48,  180, true,  false },
+    [xi.magic.spell.HASTE_II     ] = { 2, xi.skill.ENHANCING_MAGIC, xi.effect.HASTE,    2998,   96,  180, true,  false },
+    [xi.magic.spell.HASTEGA      ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.HASTE,    1494,   48,  180, false, false },
+    -- [xi.magic.spell.HASTEGA_II   ] = { 2, xi.skill.ENHANCING_MAGIC, xi.effect.HASTE,    2998,   99,  180, false, false },
+
     -- Protect / Protectra
     [xi.magic.spell.PROTECT      ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.PROTECT,     7,   20, 1800, false, false },
     [xi.magic.spell.PROTECT_II   ] = { 2, xi.skill.ENHANCING_MAGIC, xi.effect.PROTECT,    27,   50, 1800, false, false },
