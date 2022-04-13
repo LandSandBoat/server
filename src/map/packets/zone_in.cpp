@@ -218,7 +218,14 @@ CZoneInPacket::CZoneInPacket(CCharEntity* PChar, int16 csid)
     ref<uint32>(0xE8) = PChar->GetMaxHP();
     ref<uint32>(0xEC) = PChar->GetMaxMP();
 
-    // ref<uint8>(0xF4) = 0x18; // Replace with menuConfigFlags
+    // MenuConfig (F4-F7) -- see CMenuConfigPacket
+    ref<uint8>(0xF4) = 0x18 | PChar->menuConfigFlags.byte1 | (PChar->nameflags.flags & FLAG_INVITE ? NFLAG_INVITE : 0);
+    ref<uint8>(0xF5) = PChar->menuConfigFlags.byte2 | (PChar->m_hasAutoTarget ? 0 : NFLAG_AUTOTARGET >> 8);
+    ref<uint8>(0xF6) = PChar->menuConfigFlags.byte3;
+    ref<uint8>(0xF7) = PChar->menuConfigFlags.byte4;
+
+    // ChatFilterFlags (F8-FF)
+    ref<uint64>(0xF8) = PChar->chatFilterFlags;
 
     ref<uint8>(0x100) = 0x01; // observed: RoZ = 3, CoP = 5, ToAU = 9, WoTG = 11, SoA/original areas = 1
 }

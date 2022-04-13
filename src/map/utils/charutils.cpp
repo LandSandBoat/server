@@ -450,8 +450,7 @@ namespace charutils
             PChar->SetMoghancement(sql->GetUIntData(28));
             PChar->lastOnline = sql->GetUIntData(29);
             PChar->search.language = (uint8)sql->GetUIntData(30);
-
-            sql->GetStruct(31, &PChar->chatFilterFlags);
+            PChar->chatFilterFlags = sql->GetUInt64Data(31);
         }
 
         LoadSpells(PChar);
@@ -4866,6 +4865,32 @@ namespace charutils
         const char* Query = "UPDATE %s SET %s %u WHERE charid = %u;";
 
         sql->Query(Query, "chars", "nnameflags =", PChar->menuConfigFlags.flags, PChar->id);
+    }
+
+    /************************************************************************
+    *                                                                       *
+    *  Save the char's chat filter flags                                    *
+    *                                                                       *
+    ************************************************************************/
+
+    void SaveChatFilterFlags(CCharEntity* PChar)
+    {
+        const char* Query = "UPDATE chars SET chatfilters = %llu WHERE charid = %u;";
+
+        sql->Query(Query, PChar->chatFilterFlags, PChar->id);
+    }
+
+    /************************************************************************
+    *                                                                       *
+    *  Save the char's language preference                                  *
+    *                                                                       *
+    ************************************************************************/
+
+    void SaveLanguages(CCharEntity* PChar)
+    {
+        const char* Query = "UPDATE chars SET languages = %u WHERE charid = %u;";
+
+        sql->Query(Query, PChar->search.language, PChar->id);
     }
 
     /************************************************************************

@@ -5432,35 +5432,36 @@ void SmallPacket0x0DB(map_session_data_t* const PSession, CCharEntity* const PCh
 {
     TracyZoneScoped;
 
-    // uint8 mode = data.ref<uint8>(0x06);
-    // uint32 data0 = data.ref<uint32>(0x08); // Name+Config Mask
+    auto oldMenuConfigFlags = PChar->menuConfigFlags.flags;
+    auto oldChatFilterFlags = PChar->chatFilterFlags;
+    auto oldLanguages = PChar->search.language;
 
-    uint64 chatFilterFlags = data.ref<uint64>(0x0C);
-    if (PChar->chatFilterFlags != chatFilterFlags)
+    // Extract the system filter bits and update MenuConfig
+    const uint8 systemFilterMask = (NFLAG_SYSTEM_FILTER_H | NFLAG_SYSTEM_FILTER_L) >> 8;
+    PChar->menuConfigFlags.byte2 &= ~systemFilterMask;
+    PChar->menuConfigFlags.byte2 |= data.ref<uint8>(0x09) & systemFilterMask;
+
+    PChar->chatFilterFlags = data.ref<uint64>(0x0C);
+
+    PChar->search.language = data.ref<uint8>(0x24);
+
+    if (oldMenuConfigFlags != PChar->menuConfigFlags.flags)
     {
-        auto ret = sql->Query("UPDATE chars SET chatfilters = %llu WHERE charid = %u;", PChar->chatFilterFlags, PChar->id);
-        if (ret == SQL_SUCCESS)
-        {
-            PChar->chatFilterFlags = chatFilterFlags;
-        }
+        charutils::SaveMenuConfigFlags(PChar);
     }
 
-    // 0x01 - Japanese
-    // 0x02 - English
-    // 0x04 - German
-    // 0x08 - French
-    // 0x10 - Other
-    uint8 newLanguage = data.ref<uint8>(0x24);
-    if (PChar->search.language != newLanguage)
+    if (oldChatFilterFlags != PChar->chatFilterFlags)
     {
-        auto ret = sql->Query("UPDATE chars SET languages = %u WHERE charid = %u;", newLanguage, PChar->id);
-        if (ret == SQL_SUCCESS)
-        {
-            PChar->search.language = newLanguage;
-        }
+        charutils::SaveChatFilterFlags(PChar);
+    }
+
+    if (oldLanguages != PChar->search.language)
+    {
+        charutils::SaveLanguages(PChar);
     }
 
     PChar->pushPacket(new CMenuConfigPacket(PChar));
+    return;
 }
 
 /************************************************************************
