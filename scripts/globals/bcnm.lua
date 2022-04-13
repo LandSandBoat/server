@@ -1,23 +1,24 @@
-
+-----------------------------------
+-- BCNM Functions
+-----------------------------------
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/zone")
 require("scripts/globals/msg")
-
 -----------------------------------
+xi = xi or {}
+xi.bcnm = xi.bcnm or {}
+
 -- battlefields by zone
 -- captured from client 2020-10-24
------------------------------------
-
+local battlefields = {
 --[[
     [zoneId] = {
         {bit, battlefieldIdInDatabase, requiredItemToTrade}
     },
 --]]
-
-local battlefields = {
     [xi.zone.BEARCLAW_PINNACLE] =
     {
         { 0,  640,    0},   -- Flames of the Dead (PM5-3 U3)
@@ -940,7 +941,7 @@ end
 -- onTrade Action
 -----------------------------------
 
-function TradeBCNM(player, npc, trade, onUpdate)
+xi.bcnm.onTrade = function(player, npc, trade, onUpdate)
     -- validate trade
     local itemId
     if not trade then
@@ -981,7 +982,7 @@ end
 -- onTrigger Action
 -----------------------------------
 
-function EventTriggerBCNM(player, npc)
+xi.bcnm.onTrigger = function(player, npc)
     -- player is in battlefield and clicks to leave
     if player:getBattlefield() then
         player:startEvent(32003)
@@ -1021,7 +1022,7 @@ end
 -- onEventUpdate
 -----------------------------------
 
-function EventUpdateBCNM(player, csid, option, extras)
+xi.bcnm.onEventUpdate = function(player, csid, option, extras)
     -- player:PrintToPlayer(string.format("EventUpdateBCNM csid=%i option=%i extras=%i", csid, option, extras))
 
     -- requesting a battlefield
@@ -1133,7 +1134,7 @@ end
 -- onEventFinish Action
 -----------------------------------
 
-function EventFinishBCNM(player, csid, option)
+xi.bcnm.onEventFinish = function(player, csid, option)
     -- player:PrintToPlayer(string.format("EventFinishBCNM csid=%i option=%i", csid, option))
     player:setLocalVar("[battlefield]area", 0)
     if player:hasStatusEffect(xi.effect.BATTLEFIELD) then

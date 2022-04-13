@@ -146,11 +146,6 @@ global_objects=(
     QUEST_LOGS
     MISSION_LOGS
 
-    TradeBCNM
-    EventTriggerBCNM
-    EventUpdateBCNM
-    EventFinishBCNM
-
     onBattlefieldHandlerInitialise
 
     dynamis
