@@ -57,36 +57,36 @@ zones[xi.zone.DYNAMIS_XARCABARD] =
         REFILL_STATUE =
         {
             {
-                {mob = 17330230, eye = dynamis.eye.RED  }, -- Adamantking_Effigy
-                {mob = 17330231, eye = dynamis.eye.GREEN},
+                {mob = 17330230, eye = xi.dynamis.eye.RED  }, -- Adamantking_Effigy
+                {mob = 17330231, eye = xi.dynamis.eye.GREEN},
             },
             {
-                {mob = 17330240, eye = dynamis.eye.RED  }, -- Adamantking_Effigy
-                {mob = 17330241, eye = dynamis.eye.BLUE },
+                {mob = 17330240, eye = xi.dynamis.eye.RED  }, -- Adamantking_Effigy
+                {mob = 17330241, eye = xi.dynamis.eye.BLUE },
             },
             {
-                {mob = 17330248, eye = dynamis.eye.RED  }, -- Serjeant_Tombstone
-                {mob = 17330249, eye = dynamis.eye.GREEN},
+                {mob = 17330248, eye = xi.dynamis.eye.RED  }, -- Serjeant_Tombstone
+                {mob = 17330249, eye = xi.dynamis.eye.GREEN},
             },
             {
-                {mob = 17330256, eye = dynamis.eye.RED  }, -- Serjeant_Tombstone
-                {mob = 17330257, eye = dynamis.eye.BLUE },
+                {mob = 17330256, eye = xi.dynamis.eye.RED  }, -- Serjeant_Tombstone
+                {mob = 17330257, eye = xi.dynamis.eye.BLUE },
             },
             {
-                {mob = 17330273, eye = dynamis.eye.RED  }, -- Avatar_Icon
-                {mob = 17330274, eye = dynamis.eye.GREEN},
+                {mob = 17330273, eye = xi.dynamis.eye.RED  }, -- Avatar_Icon
+                {mob = 17330274, eye = xi.dynamis.eye.GREEN},
             },
             {
-                {mob = 17330285, eye = dynamis.eye.RED  }, -- Avatar_Icon
-                {mob = 17330286, eye = dynamis.eye.BLUE },
+                {mob = 17330285, eye = xi.dynamis.eye.RED  }, -- Avatar_Icon
+                {mob = 17330286, eye = xi.dynamis.eye.BLUE },
             },
             {
-                {mob = 17330471, eye = dynamis.eye.RED  }, -- Goblin_Replica
-                {mob = 17330472, eye = dynamis.eye.GREEN},
+                {mob = 17330471, eye = xi.dynamis.eye.RED  }, -- Goblin_Replica
+                {mob = 17330472, eye = xi.dynamis.eye.GREEN},
             },
             {
-                {mob = 17330483, eye = dynamis.eye.RED  }, -- Goblin_Replica
-                {mob = 17330484, eye = dynamis.eye.BLUE },
+                {mob = 17330483, eye = xi.dynamis.eye.RED  }, -- Goblin_Replica
+                {mob = 17330484, eye = xi.dynamis.eye.BLUE },
             },
         },
         DYNAMIS_LORD         = 17330177,
