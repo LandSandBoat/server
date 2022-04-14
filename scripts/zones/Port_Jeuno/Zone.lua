@@ -33,7 +33,7 @@ zone_object.onInitialize = function(zone)
         end,
     })
 
-    utils.unused(horro)
+    utils.unused(sansa)
 end
 
 zone_object.onZoneIn = function(player, prevZone)

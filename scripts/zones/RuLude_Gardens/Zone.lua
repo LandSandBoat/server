@@ -382,6 +382,8 @@ zone_object.onInitialize = function(zone)
         	end		
         end,
     })
+	
+	utils.unused(atoritutori)
 end
 
 zone_object.onZoneIn = function(player, prevZone)
