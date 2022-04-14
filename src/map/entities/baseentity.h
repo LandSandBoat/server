@@ -215,6 +215,7 @@ public:
     virtual void        Spawn();
     virtual void        FadeOut();
     virtual const int8* GetName();       // имя сущности
+    virtual const int8* GetPacketName();
     uint16              getZone() const; // текущая зона
     float               GetXPos() const; // позиция по координате X
     float               GetYPos() const; // позиция по координате Y
@@ -261,6 +262,7 @@ public:
     ALLEGIANCE_TYPE allegiance; // what types of targets the entity can fight
     uint8           updatemask; // what to update next server tick to players nearby
 
+    bool isRenamed; // tracks if the entity's name has been overidden. Defaults to false.
 
     std::unique_ptr<CAIContainer> PAI;          // AI container
     CBattlefield*                 PBattlefield; // pointer to battlefield (if in one)

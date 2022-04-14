@@ -209,11 +209,11 @@ CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type
     {
         this->setSize(0x48);
 
-        bool isNPC      = PEntity->objtype == TYPE_NPC;
         auto name       = PEntity->name;
         auto nameOffset = (PEntity->look.size == MODEL_EQUIPPED) ? 0x44 : 0x34;
 
-        if ((!isNPC && !PEntity->packetName.empty()) ||
+        if (PEntity->isRenamed ||
+            PEntity->objtype == TYPE_TRUST ||
             PEntity->IsDynamicEntity())
         {
             name = PEntity->packetName;

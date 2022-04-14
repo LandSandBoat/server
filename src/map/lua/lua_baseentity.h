@@ -255,9 +255,8 @@ public:
     uint8  getRace();
     uint8  getGender();              // Returns the player character's gender
     auto   getName() -> std::string; // Gets Entity Name
-    void   setName(std::string const& name);
     auto   getPacketName() -> std::string;
-    void   setPacketName(std::string const& name);
+    void   renameEntity(std::string const& newName);
     void   hideName(bool isHidden);
     bool   checkNameFlags(uint32 flags); // this is check and not get because it tests for a flag, it doesn't return all flags
     uint16 getModelId();
