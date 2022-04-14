@@ -42,44 +42,44 @@ zones[xi.zone.DYNAMIS_TAVNAZIA] =
         REFILL_STATUE =
         {
             {
-                {mob = 16949269, eye = dynamis.eye.RED  }, -- Adamantking_Effigy
-                {mob = 16949270, eye = dynamis.eye.BLUE },
-                {mob = 16949271, eye = dynamis.eye.GREEN},
+                {mob = 16949269, eye = xi.dynamis.eye.RED  }, -- Adamantking_Effigy
+                {mob = 16949270, eye = xi.dynamis.eye.BLUE },
+                {mob = 16949271, eye = xi.dynamis.eye.GREEN},
             },
             {
-                {mob = 16949289, eye = dynamis.eye.RED  }, -- Serjeant_Tombstone
-                {mob = 16949290, eye = dynamis.eye.BLUE },
-                {mob = 16949291, eye = dynamis.eye.GREEN},
+                {mob = 16949289, eye = xi.dynamis.eye.RED  }, -- Serjeant_Tombstone
+                {mob = 16949290, eye = xi.dynamis.eye.BLUE },
+                {mob = 16949291, eye = xi.dynamis.eye.GREEN},
             },
             {
-                {mob = 16949303, eye = dynamis.eye.RED  }, -- Manifest_Icon
-                {mob = 16949304, eye = dynamis.eye.BLUE },
-                {mob = 16949305, eye = dynamis.eye.GREEN},
+                {mob = 16949303, eye = xi.dynamis.eye.RED  }, -- Manifest_Icon
+                {mob = 16949304, eye = xi.dynamis.eye.BLUE },
+                {mob = 16949305, eye = xi.dynamis.eye.GREEN},
             },
             {
-                {mob = 16949322, eye = dynamis.eye.RED  }, -- Goblin_Replica
-                {mob = 16949323, eye = dynamis.eye.BLUE },
-                {mob = 16949324, eye = dynamis.eye.GREEN},
+                {mob = 16949322, eye = xi.dynamis.eye.RED  }, -- Goblin_Replica
+                {mob = 16949323, eye = xi.dynamis.eye.BLUE },
+                {mob = 16949324, eye = xi.dynamis.eye.GREEN},
             },
             {
-                {mob = 16949356, eye = dynamis.eye.RED  }, -- Goblin_Replica
-                {mob = 16949357, eye = dynamis.eye.BLUE },
-                {mob = 16949358, eye = dynamis.eye.GREEN},
+                {mob = 16949356, eye = xi.dynamis.eye.RED  }, -- Goblin_Replica
+                {mob = 16949357, eye = xi.dynamis.eye.BLUE },
+                {mob = 16949358, eye = xi.dynamis.eye.GREEN},
             },
             {
-                {mob = 16949362, eye = dynamis.eye.RED  }, -- Manifest_Icon
-                {mob = 16949363, eye = dynamis.eye.BLUE },
-                {mob = 16949364, eye = dynamis.eye.GREEN},
+                {mob = 16949362, eye = xi.dynamis.eye.RED  }, -- Manifest_Icon
+                {mob = 16949363, eye = xi.dynamis.eye.BLUE },
+                {mob = 16949364, eye = xi.dynamis.eye.GREEN},
             },
             {
-                {mob = 16949369, eye = dynamis.eye.RED  }, -- Adamantking_Effigy
-                {mob = 16949370, eye = dynamis.eye.BLUE },
-                {mob = 16949371, eye = dynamis.eye.GREEN},
+                {mob = 16949369, eye = xi.dynamis.eye.RED  }, -- Adamantking_Effigy
+                {mob = 16949370, eye = xi.dynamis.eye.BLUE },
+                {mob = 16949371, eye = xi.dynamis.eye.GREEN},
             },
             {
-                {mob = 16949376, eye = dynamis.eye.RED  }, -- Serjeant_Tombstone
-                {mob = 16949377, eye = dynamis.eye.BLUE },
-                {mob = 16949378, eye = dynamis.eye.GREEN},
+                {mob = 16949376, eye = xi.dynamis.eye.RED  }, -- Serjeant_Tombstone
+                {mob = 16949377, eye = xi.dynamis.eye.BLUE },
+                {mob = 16949378, eye = xi.dynamis.eye.GREEN},
             },
         },
     },

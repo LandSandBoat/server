@@ -41,38 +41,38 @@ zones[xi.zone.DYNAMIS_WINDURST] =
         REFILL_STATUE =
         {
             {
-                {mob = 17543268, eye = dynamis.eye.RED  }, -- Avatar_Icon
-                {mob = 17543269, eye = dynamis.eye.BLUE },
+                {mob = 17543268, eye = xi.dynamis.eye.RED  }, -- Avatar_Icon
+                {mob = 17543269, eye = xi.dynamis.eye.BLUE },
             },
             {
-                {mob = 17543305, eye = dynamis.eye.RED  }, -- Avatar_Icon
-                {mob = 17543306, eye = dynamis.eye.GREEN},
+                {mob = 17543305, eye = xi.dynamis.eye.RED  }, -- Avatar_Icon
+                {mob = 17543306, eye = xi.dynamis.eye.GREEN},
             },
             {
-                {mob = 17543353, eye = dynamis.eye.RED  }, -- Avatar_Icon
-                {mob = 17543354, eye = dynamis.eye.BLUE },
+                {mob = 17543353, eye = xi.dynamis.eye.RED  }, -- Avatar_Icon
+                {mob = 17543354, eye = xi.dynamis.eye.BLUE },
             },
             {
-                {mob = 17543362, eye = dynamis.eye.RED  }, -- Avatar_Icon
-                {mob = 17543363, eye = dynamis.eye.GREEN},
+                {mob = 17543362, eye = xi.dynamis.eye.RED  }, -- Avatar_Icon
+                {mob = 17543363, eye = xi.dynamis.eye.GREEN},
             },
             {
-                {mob = 17543392, eye = dynamis.eye.RED  }, -- Avatar_Icon
-                {mob = 17543393, eye = dynamis.eye.GREEN},
+                {mob = 17543392, eye = xi.dynamis.eye.RED  }, -- Avatar_Icon
+                {mob = 17543393, eye = xi.dynamis.eye.GREEN},
             },
             {
-                {mob = 17543409, eye = dynamis.eye.RED  }, -- Avatar_Icon
-                {mob = 17543410, eye = dynamis.eye.BLUE },
+                {mob = 17543409, eye = xi.dynamis.eye.RED  }, -- Avatar_Icon
+                {mob = 17543410, eye = xi.dynamis.eye.BLUE },
             },
             {
-                {mob = 17543419, eye = dynamis.eye.RED  }, -- Avatar_Icon
-                {mob = 17543420, eye = dynamis.eye.BLUE },
-                {mob = 17543421, eye = dynamis.eye.GREEN},
+                {mob = 17543419, eye = xi.dynamis.eye.RED  }, -- Avatar_Icon
+                {mob = 17543420, eye = xi.dynamis.eye.BLUE },
+                {mob = 17543421, eye = xi.dynamis.eye.GREEN},
             },
             {
-                {mob = 17543461, eye = dynamis.eye.RED  }, -- Avatar_Icon
-                {mob = 17543462, eye = dynamis.eye.BLUE },
-                {mob = 17543463, eye = dynamis.eye.GREEN},
+                {mob = 17543461, eye = xi.dynamis.eye.RED  }, -- Avatar_Icon
+                {mob = 17543462, eye = xi.dynamis.eye.BLUE },
+                {mob = 17543463, eye = xi.dynamis.eye.GREEN},
             },
         },
     },
