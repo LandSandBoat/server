@@ -148,8 +148,6 @@ global_objects=(
 
     onBattlefieldHandlerInitialise
 
-    dynamis
-
     doAutoPhysicalWeaponskill
     doAutoRangedWeaponskill
     doPhysicalWeaponskill
@@ -180,8 +178,6 @@ global_objects=(
     cmdprops
     error
     onTrigger
-
-    getDynamisMapList
 
     SetExplorerMoogles
 

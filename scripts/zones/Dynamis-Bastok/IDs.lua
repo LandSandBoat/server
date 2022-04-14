@@ -41,45 +41,45 @@ zones[xi.zone.DYNAMIS_BASTOK] =
         REFILL_STATUE =
         {
             {
-                {mob = 17539118, eye = dynamis.eye.RED  }, -- Adamantking_Effigy
-                {mob = 17539119, eye = dynamis.eye.BLUE },
-                {mob = 17539120, eye = dynamis.eye.GREEN},
+                {mob = 17539118, eye = xi.dynamis.eye.RED  }, -- Adamantking_Effigy
+                {mob = 17539119, eye = xi.dynamis.eye.BLUE },
+                {mob = 17539120, eye = xi.dynamis.eye.GREEN},
             },
             {
-                {mob = 17539161, eye = dynamis.eye.RED  }, -- Adamantking_Effigy
-                {mob = 17539162, eye = dynamis.eye.BLUE },
-                {mob = 17539163, eye = dynamis.eye.GREEN},
+                {mob = 17539161, eye = xi.dynamis.eye.RED  }, -- Adamantking_Effigy
+                {mob = 17539162, eye = xi.dynamis.eye.BLUE },
+                {mob = 17539163, eye = xi.dynamis.eye.GREEN},
             },
             {
-                {mob = 17539171, eye = dynamis.eye.RED  }, -- Adamantking_Effigy
-                {mob = 17539172, eye = dynamis.eye.BLUE },
-                {mob = 17539173, eye = dynamis.eye.GREEN},
+                {mob = 17539171, eye = xi.dynamis.eye.RED  }, -- Adamantking_Effigy
+                {mob = 17539172, eye = xi.dynamis.eye.BLUE },
+                {mob = 17539173, eye = xi.dynamis.eye.GREEN},
             },
             {
-                {mob = 17539227, eye = dynamis.eye.RED  }, -- Adamantking_Effigy
-                {mob = 17539228, eye = dynamis.eye.BLUE },
-                {mob = 17539229, eye = dynamis.eye.GREEN},
+                {mob = 17539227, eye = xi.dynamis.eye.RED  }, -- Adamantking_Effigy
+                {mob = 17539228, eye = xi.dynamis.eye.BLUE },
+                {mob = 17539229, eye = xi.dynamis.eye.GREEN},
             },
             {
-                {mob = 17539234, eye = dynamis.eye.RED  }, -- Adamantking_Effigy
-                {mob = 17539235, eye = dynamis.eye.BLUE },
-                {mob = 17539236, eye = dynamis.eye.GREEN},
+                {mob = 17539234, eye = xi.dynamis.eye.RED  }, -- Adamantking_Effigy
+                {mob = 17539235, eye = xi.dynamis.eye.BLUE },
+                {mob = 17539236, eye = xi.dynamis.eye.GREEN},
             },
             {
-                {mob = 17539266, eye = dynamis.eye.RED  }, -- Adamantking_Effigy
-                {mob = 17539267, eye = dynamis.eye.BLUE },
+                {mob = 17539266, eye = xi.dynamis.eye.RED  }, -- Adamantking_Effigy
+                {mob = 17539267, eye = xi.dynamis.eye.BLUE },
             },
             {
-                {mob = 17539274, eye = dynamis.eye.RED  }, -- Adamantking_Effigy
-                {mob = 17539275, eye = dynamis.eye.GREEN},
+                {mob = 17539274, eye = xi.dynamis.eye.RED  }, -- Adamantking_Effigy
+                {mob = 17539275, eye = xi.dynamis.eye.GREEN},
             },
             {
-                {mob = 17539286, eye = dynamis.eye.RED  }, -- Adamantking_Effigy
-                {mob = 17539287, eye = dynamis.eye.BLUE },
+                {mob = 17539286, eye = xi.dynamis.eye.RED  }, -- Adamantking_Effigy
+                {mob = 17539287, eye = xi.dynamis.eye.BLUE },
             },
             {
-                {mob = 17539293, eye = dynamis.eye.RED  }, -- Adamantking_Effigy
-                {mob = 17539294, eye = dynamis.eye.GREEN},
+                {mob = 17539293, eye = xi.dynamis.eye.RED  }, -- Adamantking_Effigy
+                {mob = 17539294, eye = xi.dynamis.eye.GREEN},
             },
         },
     },

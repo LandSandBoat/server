@@ -396,7 +396,7 @@ xi.job_utils.rune_fencer.useVallationValiance = function(player, target, ability
 
     if abilityID == xi.jobAbility.VALIANCE then -- apply effects to entire party (including target) (Valiance)
         local party = player:getParty()
-        local duration = 120 + jobPointBonusDuration
+        local duration = 180 + jobPointBonusDuration
 
         for _, member in pairs(party) do
             if not member:hasStatusEffect(xi.effect.VALLATION) then -- Valiance has no effect if Vallation is up
@@ -413,7 +413,7 @@ xi.job_utils.rune_fencer.useVallationValiance = function(player, target, ability
 
         end
     else -- apply effects to target (Vallation)
-        local duration = 180 + jobPointBonusDuration
+        local duration = 120 + jobPointBonusDuration
 
         target:delStatusEffectSilent(xi.effect.VALIANCE) -- Vallation overwrites Valiance
         applyVallationValianceSDTMods(target, SDTTypes, SDTPower, xi.effect.VALLATION, duration)

@@ -102,185 +102,132 @@ local demiluneKeyItems =
 xi.abyssea.mob =
 {
     -- Attohwa Chasm
-    [17658287] = {['Atma'] = {                                                  }, ['Normal'] = { xi.ki.SHRIVELED_HECTEYES_STALK        }},
-    [17658269] = {['Atma'] = { xi.ki.ATMA_OF_THE_GLUTINOUS_OOZE                 }, ['Normal'] = {                                       }},
-    [17658262] = {['Atma'] = {                                                  }, ['Normal'] = { xi.ki.BULBOUS_CRAWLER_COCOON          }},
-    [17658266] = {['Atma'] = {                                                  }, ['Normal'] = { xi.ki.WRITHING_GHOST_FINGER           }},
-    [17658288] = {['Atma'] = {                                                  }, ['Normal'] = { xi.ki.RUSTED_HOUND_COLLAR             }},
-    [17658264] = {['Atma'] = {                                                  }, ['Normal'] = { xi.ki.BLOTCHED_DOOMED_TONGUE          }},
-    [17658261] = {['Atma'] = {                                                  }, ['Normal'] = { xi.ki.VENOMOUS_WAMOURA_FEELER         }},
-    [17658277] = {['Atma'] = { xi.ki.ATMA_OF_THE_CLAWED_BUTTERFLY               }, ['Normal'] = {                                       }},
-    [17658281] = {['Atma'] = { xi.ki.ATMA_OF_THE_CLAWED_BUTTERFLY               }, ['Normal'] = {                                       }},
-    [17658285] = {['Atma'] = { xi.ki.ATMA_OF_THE_CLAWED_BUTTERFLY               }, ['Normal'] = {                                       }},
-    [17658268] = {['Atma'] = { xi.ki.ATMA_OF_THE_GOLDEN_CLAW                    }, ['Normal'] = {                                       }},
-    [17658265] = {['Atma'] = {                                                  }, ['Normal'] = { xi.ki.CRACKED_SKELETON_CLAVICLE       }},
-    [17658270] = {['Atma'] = { xi.ki.ATMA_OF_THE_LIGHTNING_BEAST                }, ['Normal'] = {                                       }},
-    [17658273] = {['Atma'] = {                                                  }, ['Normal'] = { xi.ki.JADE_ABYSSITE_OF_SOJOURN        }},
-    [17658271] = {['Atma'] = { xi.ki.ATMA_OF_THE_NOXIOUS_BLOOM                  }, ['Normal'] = {                                       }},
-    [17658263] = {['Atma'] = {                                                  }, ['Normal'] = { xi.ki.MUCID_WORM_SEGMENT              }},
-    [17658274] = {['Atma'] = { xi.ki.ATMA_OF_THE_SMOLDERING_SKY                 }, ['Normal'] = {                                       }},
-    [17658278] = {['Atma'] = { xi.ki.ATMA_OF_THE_SMOLDERING_SKY                 }, ['Normal'] = {                                       }},
-    [17658282] = {['Atma'] = { xi.ki.ATMA_OF_THE_SMOLDERING_SKY                 }, ['Normal'] = {                                       }},
-    [17658267] = {['Atma'] = {                                                  }, ['Normal'] = { xi.ki.HOLLOW_DRAGON_EYE               }},
-    [17658275] = {['Atma'] = { xi.ki.ATMA_OF_UNDYING                            }, ['Normal'] = {                                       }},
-    [17658279] = {['Atma'] = { xi.ki.ATMA_OF_UNDYING                            }, ['Normal'] = {                                       }},
-    [17658283] = {['Atma'] = { xi.ki.ATMA_OF_UNDYING                            }, ['Normal'] = {                                       }},
-    [17658286] = {['Atma'] = {                                                  }, ['Normal'] = { xi.ki.DISTENDED_CHIGOE_ABDOMEN        }},
-    [17658276] = {['Atma'] = {                                                  }, ['Normal'] = { xi.ki.JADE_ABYSSITE_OF_MERIT          }},
-    [17658280] = {['Atma'] = {                                                  }, ['Normal'] = { xi.ki.JADE_ABYSSITE_OF_MERIT          }},
-    [17658284] = {['Atma'] = {                                                  }, ['Normal'] = { xi.ki.JADE_ABYSSITE_OF_MERIT          }},
-    [17658272] = {['Atma'] = {                                                  }, ['Normal'] = { xi.ki.JADE_ABYSSITE_OF_EXPERTISE      }},
-    [17658292] = {['Atma'] = { xi.ki.ATMA_OF_THE_IMPREGNABLE_TOWER              }, ['Normal'] = {                                       }},
+    ['Amun']          = { ['Atma'] = {                                     }, ['Normal'] = { xi.ki.SHRIVELED_HECTEYES_STALK   } },
+    ['Berstuk']       = { ['Atma'] = { xi.ki.ATMA_OF_THE_GLUTINOUS_OOZE    }, ['Normal'] = {                                  } },
+    ['Blazing_Eruca'] = { ['Atma'] = {                                     }, ['Normal'] = { xi.ki.BULBOUS_CRAWLER_COCOON     } },
+    ['Drekavac']      = { ['Atma'] = {                                     }, ['Normal'] = { xi.ki.WRITHING_GHOST_FINGER      } },
+    ['Gieremund']     = { ['Atma'] = {                                     }, ['Normal'] = { xi.ki.RUSTED_HOUND_COLLAR        } },
+    ['Gaizkin']       = { ['Atma'] = {                                     }, ['Normal'] = { xi.ki.BLOTCHED_DOOMED_TONGUE     } },
+    ['Granite_Borer'] = { ['Atma'] = {                                     }, ['Normal'] = { xi.ki.VENOMOUS_WAMOURA_FEELER    } },
+    ['Itzpapalotl']   = { ['Atma'] = { xi.ki.ATMA_OF_THE_CLAWED_BUTTERFLY  }, ['Normal'] = {                                  } },
+    ['Kampe']         = { ['Atma'] = { xi.ki.ATMA_OF_THE_GOLDEN_CLAW       }, ['Normal'] = {                                  } },
+    ['Kharon']        = { ['Atma'] = {                                     }, ['Normal'] = { xi.ki.CRACKED_SKELETON_CLAVICLE  } },
+    ['Maahes']        = { ['Atma'] = { xi.ki.ATMA_OF_THE_LIGHTNING_BEAST   }, ['Normal'] = {                                  } },
+    ['Mielikki']      = { ['Atma'] = {                                     }, ['Normal'] = { xi.ki.JADE_ABYSSITE_OF_SOJOURN   } },
+    ['Nightshade']    = { ['Atma'] = { xi.ki.ATMA_OF_THE_NOXIOUS_BLOOM     }, ['Normal'] = {                                  } },
+    ['Pallid_Percy']  = { ['Atma'] = {                                     }, ['Normal'] = { xi.ki.MUCID_WORM_SEGMENT         } },
+    ['Smok']          = { ['Atma'] = { xi.ki.ATMA_OF_THE_SMOLDERING_SKY    }, ['Normal'] = {                                  } },
+    ['Svarbhanu']     = { ['Atma'] = {                                     }, ['Normal'] = { xi.ki.HOLLOW_DRAGON_EYE          } },
+    ['Titlacauan']    = { ['Atma'] = { xi.ki.ATMA_OF_UNDYING               }, ['Normal'] = {                                  } },
+    ['Tunga']         = { ['Atma'] = {                                     }, ['Normal'] = { xi.ki.DISTENDED_CHIGOE_ABDOMEN   } },
+    ['Ulhuadshi']     = { ['Atma'] = {                                     }, ['Normal'] = { xi.ki.JADE_ABYSSITE_OF_MERIT     } },
+    ['Wherwetrice']   = { ['Atma'] = {                                     }, ['Normal'] = { xi.ki.JADE_ABYSSITE_OF_EXPERTISE } },
+    ['Yaanei']        = { ['Atma'] = { xi.ki.ATMA_OF_THE_IMPREGNABLE_TOWER }, ['Normal'] = {                                  } },
 
     -- Konschtat Highlands
-    [16838751] = {['Atma'] = {                                                  }, ['Normal'] = { xi.ki.FRAGRANT_TREANT_PETAL           }},
-    [16838855] = {['Atma'] = { xi.ki.ATMA_OF_THRASHING_TENDRILS                 }, ['Normal'] = { xi.ki.FETID_RAFFLESIA_STALK           }},
-    [16838946] = {['Atma'] = {                                                  }, ['Normal'] = { xi.ki.DECAYING_MORBOL_TOOTH           }},
-    [16838913] = {['Atma'] = { xi.ki.ATMA_OF_VICISSITUDE                        }, ['Normal'] = { xi.ki.TURBID_SLIME_OIL                }},
-    [16838872] = {['Atma'] = { xi.ki.ATMA_OF_THE_NOXIOUS_FANG                   }, ['Normal'] = { xi.ki.VENOMOUS_PEISTE_CLAW            }},
-    [16839070] = {['Atma'] = { xi.ki.ATMA_OF_THE_NOXIOUS_FANG                   }, ['Normal'] = { xi.ki.VENOMOUS_PEISTE_CLAW            }},
-    [16839073] = {['Atma'] = { xi.ki.ATMA_OF_THE_NOXIOUS_FANG                   }, ['Normal'] = { xi.ki.VENOMOUS_PEISTE_CLAW            }},
-    [16839067] = {['Atma'] = {                                                  }, ['Normal'] = { xi.ki.TWISTED_TONBERRY_CROWN          }},
-    [16838979] = {['Atma'] = { xi.ki.ATMA_OF_GALES                              }, ['Normal'] = { xi.ki.TATTERED_HIPPOGRYPH_WING        }},
-    [16838871] = {['Atma'] = {                                                  }, ['Normal'] = { xi.ki.CRACKED_WIVRE_HORN              }},
-    [16838993] = {['Atma'] = {                                                  }, ['Normal'] = { xi.ki.MUCID_AHRIMAN_EYEBALL           }},
-    [16839006] = {['Atma'] = { xi.ki.ATMA_OF_STORMBREATH                        }, ['Normal'] = {                                       }},
-    [16839068] = {['Atma'] = { xi.ki.ATMA_OF_CLOAK_AND_DAGGER                   }, ['Normal'] = {                                       }},
-    [16839071] = {['Atma'] = { xi.ki.ATMA_OF_CLOAK_AND_DAGGER                   }, ['Normal'] = {                                       }},
-    [16839074] = {['Atma'] = { xi.ki.ATMA_OF_CLOAK_AND_DAGGER                   }, ['Normal'] = {                                       }},
-    [16839007] = {['Atma'] = { xi.ki.ATMA_OF_THE_VORACIOUS_VIOLET               }, ['Normal'] = {                                       }},
-    [16839069] = {['Atma'] = { xi.ki.ATMA_OF_THE_VORACIOUS_VIOLET               }, ['Normal'] = {                                       }},
-    [16839072] = {['Atma'] = { xi.ki.ATMA_OF_THE_VORACIOUS_VIOLET               }, ['Normal'] = {                                       }},
-    [16839033] = {['Atma'] = { xi.ki.AZURE_ABYSSITE_OF_THE_REAPER               }, ['Normal'] = {                                       }},
-    [16838820] = {['Atma'] = { xi.ki.ATMA_OF_THE_DRIFTER                        }, ['Normal'] = {                                       }},
-    [16838674] = {['Atma'] = { xi.ki.AZURE_ABYSSITE_OF_LENITY                   }, ['Normal'] = {                                       }},
-    [16838675] = {['Atma'] = { xi.ki.AZURE_ABYSSITE_OF_LENITY                   }, ['Normal'] = {                                       }},
-    [16838676] = {['Atma'] = { xi.ki.AZURE_ABYSSITE_OF_LENITY                   }, ['Normal'] = {                                       }},
-    [16838677] = {['Atma'] = { xi.ki.AZURE_ABYSSITE_OF_LENITY                   }, ['Normal'] = {                                       }},
-    [16838678] = {['Atma'] = { xi.ki.AZURE_ABYSSITE_OF_LENITY                   }, ['Normal'] = {                                       }},
-    [16838668] = {['Atma'] = { xi.ki.ATMA_OF_THE_STORMBIRD                      }, ['Normal'] = {                                       }},
+    ['Gangly_Gean']        = { ['Atma'] = {                                    }, ['Normal'] = { xi.ki.FRAGRANT_TREANT_PETAL    } },
+    ['Raskovnik']          = { ['Atma'] = { xi.ki.ATMA_OF_THRASHING_TENDRILS   }, ['Normal'] = { xi.ki.FETID_RAFFLESIA_STALK    } },
+    ['Clingy_Clare']       = { ['Atma'] = {                                    }, ['Normal'] = { xi.ki.DECAYING_MORBOL_TOOTH    } },
+    ['Fistule']            = { ['Atma'] = { xi.ki.ATMA_OF_VICISSITUDE          }, ['Normal'] = { xi.ki.TURBID_SLIME_OIL         } },
+    ['Kukulkan']           = { ['Atma'] = { xi.ki.ATMA_OF_THE_NOXIOUS_FANG     }, ['Normal'] = { xi.ki.VENOMOUS_PEISTE_CLAW     } },
+    ['Tonberry_Lieje']     = { ['Atma'] = {                                    }, ['Normal'] = { xi.ki.TWISTED_TONBERRY_CROWN   } },
+    ['Alkonost']           = { ['Atma'] = { xi.ki.ATMA_OF_GALES                }, ['Normal'] = { xi.ki.TATTERED_HIPPOGRYPH_WING } },
+    ['Keratyrannos']       = { ['Atma'] = {                                    }, ['Normal'] = { xi.ki.CRACKED_WIVRE_HORN       } },
+    ['Arimaspi']           = { ['Atma'] = {                                    }, ['Normal'] = { xi.ki.MUCID_AHRIMAN_EYEBALL    } },
+    ['Balaur']             = { ['Atma'] = { xi.ki.ATMA_OF_STORMBREATH          }, ['Normal'] = {                                } },
+    ['Bloodeye_Vileberry'] = { ['Atma'] = { xi.ki.ATMA_OF_CLOAK_AND_DAGGER     }, ['Normal'] = {                                } },
+    ['Eccentric_Eve']      = { ['Atma'] = { xi.ki.ATMA_OF_THE_VORACIOUS_VIOLET }, ['Normal'] = {                                } },
+    ['Fear_Gorta']         = { ['Atma'] = { xi.ki.AZURE_ABYSSITE_OF_THE_REAPER }, ['Normal'] = {                                } },
+    ['Khalamari']          = { ['Atma'] = { xi.ki.ATMA_OF_THE_DRIFTER          }, ['Normal'] = {                                } },
+    ['Pavan']              = { ['Atma'] = { xi.ki.AZURE_ABYSSITE_OF_LENITY     }, ['Normal'] = {                                } },
+    ['Turul']              = { ['Atma'] = { xi.ki.ATMA_OF_THE_STORMBIRD        }, ['Normal'] = {                                } },
 
     --La Thiene Plateau
-    [17318435] = {['Atma'] = {                                                                      }, ['Normal'] = { xi.ki.MARBLED_MUTTON_CHOP        }},
-    [17318436] = {['Atma'] = { xi.ki.ATMA_OF_THE_SAVAGE_TIGER                                       }, ['Normal'] = { xi.ki.BLOODIED_SABER_TOOTH       }},
-    [17318446] = {['Atma'] = { xi.ki.ATMA_OF_THE_STOUT_ARM                                          }, ['Normal'] = { xi.ki.BLOOD_SMEARED_GIGAS_HELM   }},
-    [17318456] = {['Atma'] = { xi.ki.ATMA_OF_THE_STOUT_ARM                                          }, ['Normal'] = { xi.ki.BLOOD_SMEARED_GIGAS_HELM   }},
-    [17318459] = {['Atma'] = { xi.ki.ATMA_OF_THE_STOUT_ARM                                          }, ['Normal'] = { xi.ki.BLOOD_SMEARED_GIGAS_HELM   }},
-    [17318440] = {['Atma'] = {                                                                      }, ['Normal'] = { xi.ki.PELLUCID_FLY_EYE           }},
-    [17318441] = {['Atma'] = {                                                                      }, ['Normal'] = { xi.ki.SHIMMERING_PIXIE_PINION    }},
-    [17318438] = {['Atma'] = {                                                                      }, ['Normal'] = { xi.ki.WARPED_GIGAS_ARMBAND       }},
-    [17318439] = {['Atma'] = {                                                                      }, ['Normal'] = { xi.ki.SEVERED_GIGAS_COLLAR       }},
-    [17318437] = {['Atma'] = {                                                                      }, ['Normal'] = { xi.ki.DENTED_GIGAS_SHIELD        }},
-    [17318447] = {['Atma'] = { xi.ki.ATMA_OF_ALLURE                                                 }, ['Normal'] = { xi.ki.GLITTERING_PIXIE_CHOKER    }},
-    [17318457] = {['Atma'] = { xi.ki.ATMA_OF_ALLURE                                                 }, ['Normal'] = { xi.ki.GLITTERING_PIXIE_CHOKER    }},
-    [17318460] = {['Atma'] = { xi.ki.ATMA_OF_ALLURE                                                 }, ['Normal'] = { xi.ki.GLITTERING_PIXIE_CHOKER    }},
-    [17318451] = {['Atma'] = { xi.ki.SCARLET_ABYSSITE_OF_PERSPICACITY                               }, ['Normal'] = {                                  }},
-    [17318434] = {['Atma'] = { xi.ki.ATMA_OF_THE_EBON_HOOF                                          }, ['Normal'] = {                                  }},
-    [17318448] = {['Atma'] = { xi.ki.ATMA_OF_THE_LION                                               }, ['Normal'] = {                                  }},
-    [17318458] = {['Atma'] = { xi.ki.ATMA_OF_THE_LION                                               }, ['Normal'] = {                                  }},
-    [17318461] = {['Atma'] = { xi.ki.ATMA_OF_THE_LION                                               }, ['Normal'] = {                                  }},
-    [17317898] = {['Atma'] = { xi.ki.ATMA_OF_THE_TWIN_CLAW                                          }, ['Normal'] = {                                  }},
-    [17318445] = {['Atma'] = { xi.ki.ATMA_OF_THE_BAYING_MOON                                        }, ['Normal'] = {                                  }},
-    [17318449] = {['Atma'] = { xi.ki.SCARLET_ABYSSITE_OF_LENITY                                     }, ['Normal'] = {                                  }},
-    [17318450] = {['Atma'] = { xi.ki.ATMA_OF_TREMORS                                                }, ['Normal'] = {                                  }},
-    [17318455] = {['Atma'] = { xi.ki.ATMA_OF_THE_HEAVENS, xi.ki.SCARLET_ABYSSITE_OF_SOJOURN         }, ['Normal'] = {                                  }},
+    ['Trudging_Thomas']     = { ['Atma'] = {                                                              }, ['Normal'] = { xi.ki.MARBLED_MUTTON_CHOP      } },
+    ['Megantereon']         = { ['Atma'] = { xi.ki.ATMA_OF_THE_SAVAGE_TIGER                               }, ['Normal'] = { xi.ki.BLOODIED_SABER_TOOTH     } },
+    ['Briareus']            = { ['Atma'] = { xi.ki.ATMA_OF_THE_STOUT_ARM                                  }, ['Normal'] = { xi.ki.BLOOD_SMEARED_GIGAS_HELM } },
+    ['La_Theine_Liege']     = { ['Atma'] = {                                                              }, ['Normal'] = { xi.ki.PELLUCID_FLY_EYE         } },
+    ['Baba_Yaga']           = { ['Atma'] = {                                                              }, ['Normal'] = { xi.ki.SHIMMERING_PIXIE_PINION  } },
+    ['Pantagruel']          = { ['Atma'] = {                                                              }, ['Normal'] = { xi.ki.WARPED_GIGAS_ARMBAND     } },
+    ['Grandgousier']        = { ['Atma'] = {                                                              }, ['Normal'] = { xi.ki.SEVERED_GIGAS_COLLAR     } },
+    ['Adamastor']           = { ['Atma'] = {                                                              }, ['Normal'] = { xi.ki.DENTED_GIGAS_SHIELD      } },
+    ['Carabosse']           = { ['Atma'] = { xi.ki.ATMA_OF_ALLURE                                         }, ['Normal'] = { xi.ki.GLITTERING_PIXIE_CHOKER  } },
+    ['Chasmic_Hornet']      = { ['Atma'] = { xi.ki.SCARLET_ABYSSITE_OF_PERSPICACITY                       }, ['Normal'] = {                                } },
+    ['Dozing_Dorian']       = { ['Atma'] = { xi.ki.ATMA_OF_THE_EBON_HOOF                                  }, ['Normal'] = {                                } },
+    ['Hadhayosh']           = { ['Atma'] = { xi.ki.ATMA_OF_THE_LION                                       }, ['Normal'] = {                                } },
+    ['Karkinos']            = { ['Atma'] = { xi.ki.ATMA_OF_THE_TWIN_CLAW                                  }, ['Normal'] = {                                } },
+    ['Lugarhoo']            = { ['Atma'] = { xi.ki.ATMA_OF_THE_BAYING_MOON                                }, ['Normal'] = {                                } },
+    ['Mangy-tailed_Marvin'] = { ['Atma'] = { xi.ki.SCARLET_ABYSSITE_OF_LENITY                             }, ['Normal'] = {                                } },
+    ['Megamaw_Mikey']       = { ['Atma'] = { xi.ki.ATMA_OF_TREMORS                                        }, ['Normal'] = {                                } },
+    ['Ovni']                = { ['Atma'] = { xi.ki.ATMA_OF_THE_HEAVENS, xi.ki.SCARLET_ABYSSITE_OF_SOJOURN }, ['Normal'] = {                                } },
 
     -- Misareaux Coast
-    [17662494] = {['Atma'] = {                                              }, ['Normal']= { xi.ki.BLAZING_CLUSTER_SOUL                  }},
-    [17662477] = {['Atma'] = { xi.ki.ATMA_OF_THE_STRANGLING_WIND            }, ['Normal']= {                                             }},
-    [17662482] = {['Atma'] = { xi.ki.ATMA_OF_THE_STRANGLING_WIND            }, ['Normal']= {                                             }},
-    [17662487] = {['Atma'] = { xi.ki.ATMA_OF_THE_STRANGLING_WIND            }, ['Normal']= {                                             }},
-    [17662492] = {['Atma'] = {                                              }, ['Normal']= { xi.ki.BLOODIED_BAT_FUR                      }},
-    [17662471] = {['Atma'] = { xi.ki.ATMA_OF_THE_WINGED_ENIGMA              }, ['Normal']= {                                             }},
-    [17662468] = {['Atma'] = {                                              }, ['Normal']= { xi.ki.GLISTENING_OROBON_LIVER               }},
-    [17662476] = {['Atma'] = { xi.ki.ATMA_OF_THE_DEEP_DEVOURER              }, ['Normal']= {                                             }},
-    [17662481] = {['Atma'] = { xi.ki.ATMA_OF_THE_DEEP_DEVOURER              }, ['Normal']= {                                             }},
-    [17662486] = {['Atma'] = { xi.ki.ATMA_OF_THE_DEEP_DEVOURER              }, ['Normal']= {                                             }},
-    [17662495] = {['Atma'] = {                                              }, ['Normal']= { xi.ki.SAPPHIRE_ABYSSITE_OF_FURTHERANCE      }},
-    [17662466] = {['Atma'] = {                                              }, ['Normal']= { xi.ki.JAGGED_APKALLU_BEAK                   }},
-    [17662491] = {['Atma'] = {                                              }, ['Normal']= { xi.ki.MOLTED_PEISTE_SKIN                    }},
-    [17662493] = {['Atma'] = {                                              }, ['Normal']= { xi.ki.DOFFED_POROGGO_HAT                    }},
-    [17662469] = {['Atma'] = {                                              }, ['Normal']= { xi.ki.SCALDING_IRONCLAD_SPIKE               }},
-    [17662479] = {['Atma'] = { xi.ki.ATMA_OF_THE_RAZED_RUIN                 }, ['Normal']= {                                             }},
-    [17662480] = {['Atma'] = { xi.ki.ATMA_OF_THE_RAZED_RUIN                 }, ['Normal']= {                                             }},
-    [17662484] = {['Atma'] = { xi.ki.ATMA_OF_THE_RAZED_RUIN                 }, ['Normal']= {                                             }},
-    [17662485] = {['Atma'] = { xi.ki.ATMA_OF_THE_RAZED_RUIN                 }, ['Normal']= {                                             }},
-    [17662489] = {['Atma'] = { xi.ki.ATMA_OF_THE_RAZED_RUIN                 }, ['Normal']= {                                             }},
-    [17662490] = {['Atma'] = { xi.ki.ATMA_OF_THE_RAZED_RUIN                 }, ['Normal']= {                                             }},
-    [17662472] = {['Atma'] = { xi.ki.ATMA_OF_THE_CRADLE                     }, ['Normal']= {                                             }},
-    [17662497] = {['Atma'] = { xi.ki.ATMA_OF_THE_MOUNTED_CHAMPION           }, ['Normal']= {                                             }},
-    [17662467] = {['Atma'] = {                                              }, ['Normal']= { xi.ki.CLIPPED_BIRD_WING                     }},
-    [17662464] = {['Atma'] = {                                              }, ['Normal']= { xi.ki.BLOODSTAINED_BUGARD_FANG              }},
-    [17662470] = {['Atma'] = { xi.ki.ATMA_OF_THE_RAPID_REPTILIAN            }, ['Normal']= {                                             }},
-    [17662473] = {['Atma'] = { xi.ki.ATMA_OF_THE_UNTOUCHED                  }, ['Normal']= {                                             }},
-    [17662475] = {['Atma'] = {                                              }, ['Normal']= { xi.ki.SAPPHIRE_ABYSSITE_OF_FORTUNE          }},
-    [17662465] = {['Atma'] = {                                              }, ['Normal']= { xi.ki.GNARLED_LIZARD_NAIL                   }},
-    [17662478] = {['Atma'] = { xi.ki.ATMA_OF_THE_GNARLED_HORN               }, ['Normal']= {                                             }},
-    [17662483] = {['Atma'] = { xi.ki.ATMA_OF_THE_GNARLED_HORN               }, ['Normal']= {                                             }},
-    [17662488] = {['Atma'] = { xi.ki.ATMA_OF_THE_GNARLED_HORN               }, ['Normal']= {                                             }},
-    [17662474] = {['Atma'] = {                                              }, ['Normal']= { xi.ki.SAPPHIRE_ABYSSITE_OF_LENITY           }},
+    ['Abyssic_Cluster']     = { ['Atma'] = {                                    }, ['Normal'] = { xi.ki.BLAZING_CLUSTER_SOUL             } },
+    ['Amhuluk']             = { ['Atma'] = { xi.ki.ATMA_OF_THE_STRANGLING_WIND  }, ['Normal'] = {                                        } },
+    ['Asanbosam']           = { ['Atma'] = {                                    }, ['Normal'] = { xi.ki.BLOODIED_BAT_FUR                 } },
+    ['Avalerion']           = { ['Atma'] = { xi.ki.ATMA_OF_THE_WINGED_ENIGMA    }, ['Normal'] = {                                        } },
+    ['Cep-Kamuy']           = { ['Atma'] = {                                    }, ['Normal'] = { xi.ki.GLISTENING_OROBON_LIVER          } },
+    ['Cirein-croin']        = { ['Atma'] = { xi.ki.ATMA_OF_THE_DEEP_DEVOURER    }, ['Normal'] = {                                        } },
+    ['Flame_Skimmer']       = { ['Atma'] = {                                    }, ['Normal'] = { xi.ki.SAPPHIRE_ABYSSITE_OF_FURTHERANCE } },
+    ['Funereal_Apkallu']    = { ['Atma'] = {                                    }, ['Normal'] = { xi.ki.JAGGED_APKALLU_BEAK              } },
+    ['Gukumatz']            = { ['Atma'] = {                                    }, ['Normal'] = { xi.ki.MOLTED_PEISTE_SKIN               } },
+    ['Heqet']               = { ['Atma'] = {                                    }, ['Normal'] = { xi.ki.DOFFED_POROGGO_HAT               } },
+    ['Ironclad_Observer']   = { ['Atma'] = {                                    }, ['Normal'] = { xi.ki.SCALDING_IRONCLAD_SPIKE          } },
+    ['Ironclad_Pulverizer'] = { ['Atma'] = { xi.ki.ATMA_OF_THE_RAZED_RUIN       }, ['Normal'] = {                                        } },
+    ['Karkatakam']          = { ['Atma'] = { xi.ki.ATMA_OF_THE_CRADLE           }, ['Normal'] = {                                        } },
+    ['Kutharei']            = { ['Atma'] = { xi.ki.ATMA_OF_THE_MOUNTED_CHAMPION }, ['Normal'] = {                                        } },
+    ['Manohra']             = { ['Atma'] = {                                    }, ['Normal'] = { xi.ki.CLIPPED_BIRD_WING                } },
+    ['Minax_Bugard']        = { ['Atma'] = {                                    }, ['Normal'] = { xi.ki.BLOODSTAINED_BUGARD_FANG         } },
+    ['Nehebkau']            = { ['Atma'] = { xi.ki.ATMA_OF_THE_RAPID_REPTILIAN  }, ['Normal'] = {                                        } },
+    ['Nonno']               = { ['Atma'] = { xi.ki.ATMA_OF_THE_UNTOUCHED        }, ['Normal'] = {                                        } },
+    ['Npfundlwa']           = { ['Atma'] = {                                    }, ['Normal'] = { xi.ki.SAPPHIRE_ABYSSITE_OF_FORTUNE     } },
+    ['Sirrush']             = { ['Atma'] = {                                    }, ['Normal'] = { xi.ki.GNARLED_LIZARD_NAIL              } },
+    ['Sobek']               = { ['Atma'] = { xi.ki.ATMA_OF_THE_GNARLED_HORN     }, ['Normal'] = {                                        } },
+    ['Tuskertrap']          = { ['Atma'] = {                                    }, ['Normal'] = { xi.ki.SAPPHIRE_ABYSSITE_OF_LENITY      } },
 
     -- Tahrongi Canyon
-    [16961936] = {['Atma'] = { xi.ki.ATMA_OF_CALAMITY                                                   }, ['Normal'] = { xi.ki.STICKY_GNAT_WING                 }},
-    [16961919] = {['Atma'] = {                                                                          }, ['Normal'] = { xi.ki.VEINOUS_HECTEYES_EYELID          }},
-    [16961921] = {['Atma'] = {                                                                          }, ['Normal'] = { xi.ki.TORN_BAT_WING                    }},
-    [16961923] = {['Atma'] = {                                                                          }, ['Normal'] = { xi.ki.GORY_SCORPION_CLAW               }},
-    [16961934] = {['Atma'] = { xi.ki.ATMA_OF_THE_ADAMANTINE                                             }, ['Normal'] = { xi.ki.MOSSY_ADAMANTOISE_SHELL          }},
-    [16961925] = {['Atma'] = {                                                                          }, ['Normal'] = { xi.ki.FAT_LINED_COCKATRICE_SKIN        }},
-    [16961935] = {['Atma'] = {                                                                          }, ['Normal'] = { xi.ki.SODDEN_SANDWORM_HUSK             }},
-    [16961927] = {['Atma'] = {                                                                          }, ['Normal'] = { xi.ki.LUXURIANT_MANTICORE_MANE         }},
-    [16961929] = {['Atma'] = { xi.ki.ATMA_OF_THE_HARVESTER                                              }, ['Normal'] = { xi.ki.OVERGROWN_MANDRAGORA_FLOWER      }},
-    [16961946] = {['Atma'] = { xi.ki.ATMA_OF_THE_HARVESTER                                              }, ['Normal'] = { xi.ki.OVERGROWN_MANDRAGORA_FLOWER      }},
-    [16961949] = {['Atma'] = { xi.ki.ATMA_OF_THE_HARVESTER                                              }, ['Normal'] = { xi.ki.OVERGROWN_MANDRAGORA_FLOWER      }},
-    [16961930] = {['Atma'] = { xi.ki.ATMA_OF_DUNES                                                      }, ['Normal'] = { xi.ki.CHIPPED_SANDWORM_TOOTH           }},
-    [16961947] = {['Atma'] = { xi.ki.ATMA_OF_DUNES                                                      }, ['Normal'] = { xi.ki.CHIPPED_SANDWORM_TOOTH           }},
-    [16961950] = {['Atma'] = { xi.ki.ATMA_OF_DUNES                                                      }, ['Normal'] = { xi.ki.CHIPPED_SANDWORM_TOOTH           }},
-    [16961904] = {['Atma'] = { xi.ki.VIRIDIAN_ABYSSITE_OF_MERIT                                         }, ['Normal'] = {                                        }},
-    [16961905] = {['Atma'] = { xi.ki.VIRIDIAN_ABYSSITE_OF_MERIT                                         }, ['Normal'] = {                                        }},
-    [16961906] = {['Atma'] = { xi.ki.VIRIDIAN_ABYSSITE_OF_MERIT                                         }, ['Normal'] = {                                        }},
-    [16961907] = {['Atma'] = { xi.ki.VIRIDIAN_ABYSSITE_OF_MERIT                                         }, ['Normal'] = {                                        }},
-    [16961908] = {['Atma'] = { xi.ki.VIRIDIAN_ABYSSITE_OF_MERIT                                         }, ['Normal'] = {                                        }},
-    [16961932] = {['Atma'] = { xi.ki.VIRIDIAN_ABYSSITE_OF_DESTINY, xi.ki.ATMA_OF_THE_CLAW               }, ['Normal'] = {                                        }},
-    [16961945] = {['Atma'] = { xi.ki.ATMA_OF_THE_COSMOS                                                 }, ['Normal'] = {                                        }},
-    [16961931] = {['Atma'] = { xi.ki.ATMA_OF_THE_STRONGHOLD                                             }, ['Normal'] = {                                        }},
-    [16961948] = {['Atma'] = { xi.ki.ATMA_OF_THE_STRONGHOLD                                             }, ['Normal'] = {                                        }},
-    [16961951] = {['Atma'] = { xi.ki.ATMA_OF_THE_STRONGHOLD                                             }, ['Normal'] = {                                        }},
-    [16961938] = {['Atma'] = { xi.ki.VIRIDIAN_ABYSSITE_OF_DESTINY                                       }, ['Normal'] = {                                        }},
-    [16961933] = {['Atma'] = { xi.ki.ATMA_OF_BALEFUL_BONES, xi.ki.VIRIDIAN_ABYSSITE_OF_MERIT            }, ['Normal'] = {                                        }},
-    [16961939] = {['Atma'] = { xi.ki.ATMA_OF_THE_IMPALER                                                }, ['Normal'] = {                                        }},
-    [16961937] = {['Atma'] = { xi.ki.VIRIDIAN_ABYSSITE_OF_AVARICE                                       }, ['Normal'] = {                                        }},
+    ['Adze']            = { ['Atma'] = { xi.ki.ATMA_OF_CALAMITY                                        }, ['Normal'] = { xi.ki.STICKY_GNAT_WING            } },
+    ['Ophanim']         = { ['Atma'] = {                                                               }, ['Normal'] = { xi.ki.VEINOUS_HECTEYES_EYELID     } },
+    ['Treble_Noctules'] = { ['Atma'] = {                                                               }, ['Normal'] = { xi.ki.TORN_BAT_WING               } },
+    ['Hedetet']         = { ['Atma'] = {                                                               }, ['Normal'] = { xi.ki.GORY_SCORPION_CLAW          } },
+    ['Chukwa']          = { ['Atma'] = { xi.ki.ATMA_OF_THE_ADAMANTINE                                  }, ['Normal'] = { xi.ki.MOSSY_ADAMANTOISE_SHELL     } },
+    ['Alectryon']       = { ['Atma'] = {                                                               }, ['Normal'] = { xi.ki.FAT_LINED_COCKATRICE_SKIN   } },
+    ['Minhocao']        = { ['Atma'] = {                                                               }, ['Normal'] = { xi.ki.SODDEN_SANDWORM_HUSK        } },
+    ['Muscaliet']       = { ['Atma'] = {                                                               }, ['Normal'] = { xi.ki.LUXURIANT_MANTICORE_MANE    } },
+    ['Chloris']         = { ['Atma'] = { xi.ki.ATMA_OF_THE_HARVESTER                                   }, ['Normal'] = { xi.ki.OVERGROWN_MANDRAGORA_FLOWER } },
+    ['Glavoid']         = { ['Atma'] = { xi.ki.ATMA_OF_DUNES                                           }, ['Normal'] = { xi.ki.CHIPPED_SANDWORM_TOOTH      } },
+    ['Bhumi']           = { ['Atma'] = { xi.ki.VIRIDIAN_ABYSSITE_OF_MERIT                              }, ['Normal'] = {                                   } },
+    ['Cuelebre']        = { ['Atma'] = { xi.ki.VIRIDIAN_ABYSSITE_OF_DESTINY, xi.ki.ATMA_OF_THE_CLAW    }, ['Normal'] = {                                   } },
+    ['Iratham']         = { ['Atma'] = { xi.ki.ATMA_OF_THE_COSMOS                                      }, ['Normal'] = {                                   } },
+    ['Lacovie']         = { ['Atma'] = { xi.ki.ATMA_OF_THE_STRONGHOLD                                  }, ['Normal'] = {                                   } },
+    ['Manananggal']     = { ['Atma'] = { xi.ki.VIRIDIAN_ABYSSITE_OF_DESTINY                            }, ['Normal'] = {                                   } },
+    ['Mictlantecuhtli'] = { ['Atma'] = { xi.ki.ATMA_OF_BALEFUL_BONES, xi.ki.VIRIDIAN_ABYSSITE_OF_MERIT }, ['Normal'] = {                                   } },
+    ['Myrmecoleon']     = { ['Atma'] = { xi.ki.ATMA_OF_THE_IMPALER                                     }, ['Normal'] = {                                   } },
+    ['Quetzalli']       = { ['Atma'] = { xi.ki.VIRIDIAN_ABYSSITE_OF_AVARICE                            }, ['Normal'] = {                                   } },
 
     -- Vunkerl Inlet
-    [17666496] = {['Atma'] = {                                                  }, ['Normal'] = { xi.ki.CRIMSON_ABYSSITE_OF_ACUMEN          }},
-    [17666516] = {['Atma'] = {                                                  }, ['Normal'] = { xi.ki.MALODOROUS_MARID_FUR                }},
-    [17666499] = {['Atma'] = { xi.ki.ATMA_OF_THE_SANGUINE_SCYTHE                }, ['Normal'] = {                                           }},
-    [17666503] = {['Atma'] = { xi.ki.ATMA_OF_THE_SANGUINE_SCYTHE                }, ['Normal'] = {                                           }},
-    [17666507] = {['Atma'] = { xi.ki.ATMA_OF_THE_SANGUINE_SCYTHE                }, ['Normal'] = {                                           }},
-    [17666495] = {['Atma'] = { xi.ki.ATMA_OF_THE_MURKY_MIASMA                   }, ['Normal'] = {                                           }},
-    [17666515] = {['Atma'] = {                                                  }, ['Normal'] = { xi.ki.CHIPPED_IMPS_OLIFANT                }},
-    [17666501] = {['Atma'] = { xi.ki.ATMA_OF_THE_MINIKIN_MONSTROSITY            }, ['Normal'] = {                                           }},
-    [17666505] = {['Atma'] = { xi.ki.ATMA_OF_THE_MINIKIN_MONSTROSITY            }, ['Normal'] = {                                           }},
-    [17666509] = {['Atma'] = { xi.ki.ATMA_OF_THE_MINIKIN_MONSTROSITY            }, ['Normal'] = {                                           }},
-    [17666490] = {['Atma'] = {                                                  }, ['Normal'] = { xi.ki.DECAYED_DVERGR_TOOTH                }},
-    [17666517] = {['Atma'] = { xi.ki.ATMA_OF_THE_AVARICIOUS_APE                 }, ['Normal'] = {                                           }},
-    [17666514] = {['Atma'] = {                                                  }, ['Normal'] = { xi.ki.SHIMMERING_PUGIL_SCALE              }},
-    [17666518] = {['Atma'] = {                                                  }, ['Normal'] = { xi.ki.CRIMSON_ABYSSITE_OF_DESTINY         }},
-    [17666489] = {['Atma'] = {                                                  }, ['Normal'] = { xi.ki.GLOSSY_SEA_MONK_SUCKER              }},
-    [17666491] = {['Atma'] = {                                                  }, ['Normal'] = { xi.ki.PULSATING_SOULFLAYER_BEARD          }},
-    [17666502] = {['Atma'] = { xi.ki.ATMA_OF_THE_BLINDING_HORN                  }, ['Normal'] = {                                           }},
-    [17666506] = {['Atma'] = { xi.ki.ATMA_OF_THE_BLINDING_HORN                  }, ['Normal'] = {                                           }},
-    [17666510] = {['Atma'] = { xi.ki.ATMA_OF_THE_BLINDING_HORN                  }, ['Normal'] = {                                           }},
-    [17666487] = {['Atma'] = {                                                  }, ['Normal'] = { xi.ki.INGROWN_TAURUS_NAIL                 }},
-    [17666513] = {['Atma'] = {                                                  }, ['Normal'] = { xi.ki.IMBRUED_VAMPYR_FANG                 }},
-    [17666497] = {['Atma'] = {                                                  }, ['Normal'] = { xi.ki.CRIMSON_ABYSSITE_OF_CONFLUENCE      }},
-    [17666488] = {['Atma'] = {                                                  }, ['Normal'] = { xi.ki.OSSIFIED_GARGOUILLE_HAND            }},
-    [17666492] = {['Atma'] = {                                                  }, ['Normal'] = { xi.ki.WARPED_SMILODON_CHOKER              }},
-    [17666493] = {['Atma'] = { xi.ki.ATMA_OF_THE_APPARITIONS                    }, ['Normal'] = {                                           }},
-    [17666500] = {['Atma'] = { xi.ki.ATMA_OF_THE_TUSKED_TERROR                  }, ['Normal'] = {                                           }},
-    [17666504] = {['Atma'] = { xi.ki.ATMA_OF_THE_TUSKED_TERROR                  }, ['Normal'] = {                                           }},
-    [17666508] = {['Atma'] = { xi.ki.ATMA_OF_THE_TUSKED_TERROR                  }, ['Normal'] = {                                           }},
-    [17666511] = {['Atma'] = { xi.ki.ATMA_OF_THE_WOULD_BE_KING                  }, ['Normal'] = {                                           }},
-    [17666494] = {['Atma'] = { xi.ki.ATMA_OF_THE_SHIMMERING_SHELL               }, ['Normal'] = {                                           }},
+    ['Armillaria']             = { ['Atma'] = {                                       }, ['Normal'] = { xi.ki.CRIMSON_ABYSSITE_OF_ACUMEN     } },
+    ['Ayravata']               = { ['Atma'] = {                                       }, ['Normal'] = { xi.ki.MALODOROUS_MARID_FUR           } },
+    ['Bukhis']                 = { ['Atma'] = { xi.ki.ATMA_OF_THE_SANGUINE_SCYTHE     }, ['Normal'] = {                                      } },
+    ['Chhir_Batti']            = { ['Atma'] = { xi.ki.ATMA_OF_THE_MURKY_MIASMA        }, ['Normal'] = {                                      } },
+    ['Div-e_Sepid']            = { ['Atma'] = {                                       }, ['Normal'] = { xi.ki.CHIPPED_IMPS_OLIFANT           } },
+    ['Durinn']                 = { ['Atma'] = { xi.ki.ATMA_OF_THE_MINIKIN_MONSTROSITY }, ['Normal'] = {                                      } },
+    ['Dvalinn']                = { ['Atma'] = {                                       }, ['Normal'] = { xi.ki.DECAYED_DVERGR_TOOTH           } },
+    ['Hanuman']                = { ['Atma'] = { xi.ki.ATMA_OF_THE_AVARICIOUS_APE      }, ['Normal'] = {                                      } },
+    ['Hrosshvalur']            = { ['Atma'] = {                                       }, ['Normal'] = { xi.ki.SHIMMERING_PUGIL_SCALE         } },
+    ['Iktomi']                 = { ['Atma'] = {                                       }, ['Normal'] = { xi.ki.CRIMSON_ABYSSITE_OF_DESTINY    } },
+    ['Iku-Turso']              = { ['Atma'] = {                                       }, ['Normal'] = { xi.ki.GLOSSY_SEA_MONK_SUCKER         } },
+    ['Kadraeth_the_Hatespawn'] = { ['Atma'] = {                                       }, ['Normal'] = { xi.ki.PULSATING_SOULFLAYER_BEARD     } },
+    ['Karkadann']              = { ['Atma'] = { xi.ki.ATMA_OF_THE_BLINDING_HORN       }, ['Normal'] = {                                      } },
+    ['Khalkotaur']             = { ['Atma'] = {                                       }, ['Normal'] = { xi.ki.INGROWN_TAURUS_NAIL            } },
+    ['Lord_Varney']            = { ['Atma'] = {                                       }, ['Normal'] = { xi.ki.IMBRUED_VAMPYR_FANG            } },
+    ['Pascerpot']              = { ['Atma'] = {                                       }, ['Normal'] = { xi.ki.CRIMSON_ABYSSITE_OF_CONFLUENCE } },
+    ['Quasimodo']              = { ['Atma'] = {                                       }, ['Normal'] = { xi.ki.OSSIFIED_GARGOUILLE_HAND       } },
+    ['Rakshas']                = { ['Atma'] = {                                       }, ['Normal'] = { xi.ki.WARPED_SMILODON_CHOKER         } },
+    ['Seps']                   = { ['Atma'] = { xi.ki.ATMA_OF_THE_APPARITIONS         }, ['Normal'] = {                                      } },
+    ['Sedna']                  = { ['Atma'] = { xi.ki.ATMA_OF_THE_TUSKED_TERROR       }, ['Normal'] = {                                      } },
+    ['Sippoy']                 = { ['Atma'] = { xi.ki.ATMA_OF_THE_WOULD_BE_KING       }, ['Normal'] = {                                      } },
+    ['Xan']                    = { ['Atma'] = { xi.ki.ATMA_OF_THE_SHIMMERING_SHELL    }, ['Normal'] = {                                      } },
 }
 
 xi.abyssea.triggerType =
@@ -468,7 +415,7 @@ local blueWeakness =
     },
 }
 
--- [ZoneID] = {Required Trades Event, Has Key Items Event, Missing Key Item Event}
+-- [ZoneID] = { Required Trades Event, Has Key Items Event, Missing Key Item Event }
 local popEvents =
 {
     [xi.zone.ABYSSEA_KONSCHTAT]        = { 1010, 1020, 1021 },
@@ -491,8 +438,8 @@ local popEvents =
 xi.abyssea.getTraverserCap = function(player)
     local stones = 3
 
-    for ki = xi.ki.VIRIDIAN_ABYSSITE_OF_AVARICE, xi.ki.VERMILLION_ABYSSITE_OF_AVARICE do
-        if player:hasKeyItem(ki) then
+    for keyItem = xi.ki.VIRIDIAN_ABYSSITE_OF_AVARICE, xi.ki.VERMILLION_ABYSSITE_OF_AVARICE do
+        if player:hasKeyItem(keyItem) then
             stones = stones + 1
         end
     end
@@ -505,8 +452,8 @@ end
 xi.abyssea.getHeldTraverserStones = function(player)
     local stones = 0
 
-    for ki = xi.ki.TRAVERSER_STONE1, xi.ki.TRAVERSER_STONE6 do
-        if player:hasKeyItem(ki) then
+    for keyItem = xi.ki.TRAVERSER_STONE1, xi.ki.TRAVERSER_STONE6 do
+        if player:hasKeyItem(keyItem) then
             stones = stones + 1
         end
     end
@@ -518,11 +465,11 @@ end
 xi.abyssea.spendTravStones = function(player, spentstones)
     local numRemoved = 0
 
-    for ki = xi.ki.TRAVERSER_STONE6, xi.ki.TRAVERSER_STONE1 do
+    for keyItem = xi.ki.TRAVERSER_STONE6, xi.ki.TRAVERSER_STONE1 do
         if numRemoved == spentstones then
             break
-        elseif player:hasKeyItem(ki) then
-            player:delKeyItem(ki)
+        elseif player:hasKeyItem(keyItem) then
+            player:delKeyItem(keyItem)
             numRemoved = numRemoved + 1
         end
     end
@@ -544,7 +491,6 @@ end
 xi.abyssea.canGiveNMKI = function(mob, dropChance)
     local redProcValue = mob:getLocalVar("[AbysseaRedProc]")
 
-    math.randomseed(os.time())
     if math.random(1, 100) <= dropChance or redProcValue == 1 then
         return true
     end
@@ -553,8 +499,8 @@ xi.abyssea.canGiveNMKI = function(mob, dropChance)
 end
 
 xi.abyssea.giveNMDrops = function(mob, player, ID)
-    local atmaDrops = xi.abyssea.mob[mob:getID()]['Atma']
-    local normalDrops = xi.abyssea.mob[mob:getID()]['Normal']
+    local atmaDrops = xi.abyssea.mob[mob:getName()]['Atma']
+    local normalDrops = xi.abyssea.mob[mob:getName()]['Normal']
     local playerClaimed = GetPlayerByID(mob:getLocalVar("[ClaimedBy]"))
 
     for k, v in pairs(normalDrops) do
