@@ -16,7 +16,7 @@ end
 -- More testing is required (such as determining accuracy of the target used for testing)
 spell_object.onSpellCast = function(caster, target, spell)
 
-    if target:addStatusEffect(xi.effect.FOIL, 0, 0, 300) then -- power set to 0 because true mechanics are unknown as of now. The primary use of Foil is for enmity anyway.
+    if target:addStatusEffect(xi.effect.FOIL, 0, 0, 30) then -- power set to 0 because true mechanics are unknown as of now. The primary use of Foil is for enmity anyway.
         spell:setMsg(xi.msg.basic.MAGIC_GAIN_EFFECT)
     else
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
