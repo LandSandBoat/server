@@ -1,8 +1,8 @@
 -----------------------------------
--- Area: Apollyon NW
+-- Area: Apollyon NW, Floor 4
 --  Mob: Cynoprosopi
 -----------------------------------
-local ID = require("scripts/zones/Apollyon/IDs")
+require("scripts/zones/Apollyon/bcnms/nw_apollyon_helper")
 require("scripts/globals/pathfind")
 -----------------------------------
 local entity = {}
@@ -30,13 +30,7 @@ entity.onMobRoam = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, isKiller, noKiller)
-    if isKiller or noKiller then
-        local mobX = mob:getXPos()
-        local mobY = mob:getYPos()
-        local mobZ = mob:getZPos()
-        GetNPCByID(ID.npc.APOLLYON_NW_CRATE[4][1]):setPos(mobX, mobY, mobZ)
-        GetNPCByID(ID.npc.APOLLYON_NW_CRATE[4][1]):setStatus(xi.status.NORMAL)
-    end
+    xi.apollyon_nw.handleMobDeathFloorFourChest(mob, player, isKiller, noKiller)
 end
 
 return entity

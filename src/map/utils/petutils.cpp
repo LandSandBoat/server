@@ -68,7 +68,7 @@ struct Pet_t
     uint8 maxLevel; // максимально-возможный уровень
 
     uint8  name_prefix;
-    uint8  size; // размер модели
+    uint8  radius; // Model Radius - affects melee range etc.
     uint16 m_Family;
     uint32 time; // время существования (будет использоваться для задания длительности статус эффекта)
 
@@ -144,7 +144,7 @@ namespace petutils
                 minLevel,\
                 maxLevel,\
                 time,\
-                mobsize,\
+                mobradius,\
                 ecosystemID,\
                 mob_pools.familyid,\
                 mob_pools.mJob,\
@@ -184,7 +184,7 @@ namespace petutils
                 Pet->minLevel  = (uint8)sql->GetIntData(3);
                 Pet->maxLevel  = (uint8)sql->GetIntData(4);
                 Pet->time      = sql->GetUIntData(5);
-                Pet->size      = sql->GetUIntData(6);
+                Pet->radius    = sql->GetUIntData(6);
                 Pet->EcoSystem = (ECOSYSTEM)sql->GetIntData(7);
                 Pet->m_Family  = (uint16)sql->GetIntData(8);
                 Pet->mJob      = (uint8)sql->GetIntData(9);
@@ -1596,15 +1596,18 @@ namespace petutils
             PPet->SetMLevel(PMaster->GetMLevel());
             PPet->health.maxhp = (uint32)floor((250 * PPet->GetMLevel()) / 15);
             PPet->health.hp    = PPet->health.maxhp;
-
+            // This sets the correct visual size for the luopan as pets currently
+            // do not make use of the entity flags in the database
+            // TODO: make pets use entity flags
+            PPet->m_flags      = 0x0000008B;
             // Just sit, do nothing
             PPet->speed = 0;
         }
 
         FinalizePetStatistics(PMaster, PPet);
-        PPet->status      = STATUS_TYPE::NORMAL;
-        PPet->m_ModelSize = PPetData->size;
-        PPet->m_EcoSystem = PPetData->EcoSystem;
+        PPet->status        = STATUS_TYPE::NORMAL;
+        PPet->m_ModelRadius = PPetData->radius;
+        PPet->m_EcoSystem   = PPetData->EcoSystem;
 
         PMaster->PPet = PPet;
     }

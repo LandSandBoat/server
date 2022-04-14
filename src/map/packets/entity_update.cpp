@@ -196,6 +196,7 @@ CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type
         {
             this->setSize(0x48);
             ref<uint16>(0x30) = PEntity->look.size;
+            memcpy(data + (0x34), PEntity->GetName(), (PEntity->name.size() > 12 ? 12 : PEntity->name.size()));
         }
         break;
     }

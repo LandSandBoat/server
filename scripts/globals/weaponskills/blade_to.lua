@@ -29,8 +29,9 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     params.ele = xi.magic.ele.ICE
     params.skill = xi.skill.KATANA
 
-    if (xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then
+    if xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.str_wsc = 0.4 params.int_wsc = 0.4
+        params.ftp200 = 1.5 params.ftp300 = 2.5 -- http://wiki.ffo.jp/html/719.html
     end
 
     local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)

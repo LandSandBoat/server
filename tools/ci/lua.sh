@@ -69,9 +69,6 @@ global_objects=(
     Sequence
     Container
     Event
-    onMobDeathEx
-
-    checkForGearSet
 
     removeSleepEffects
 
@@ -149,16 +146,7 @@ global_objects=(
     QUEST_LOGS
     MISSION_LOGS
 
-    TradeBCNM
-    EventTriggerBCNM
-    EventUpdateBCNM
-    EventFinishBCNM
-
     onBattlefieldHandlerInitialise
-
-    porterMoogleTrade
-    porterEventUpdate
-    porterEventFinish
 
     dynamis
 
@@ -192,9 +180,6 @@ global_objects=(
     cmdprops
     error
     onTrigger
-
-    CheckMaps
-    CheckMapsUpdate
 
     getDynamisMapList
 
@@ -267,12 +252,6 @@ global_objects=(
 
     MOBSKILL_MAGICAL
     MOBSKILL_PHYSICAL
-
-    getMedalRank
-    getBastokNotesItem
-    getSandOriaNotesItem
-    getWindurstNotesItem
-    getSigilTimeStamp
 
     TPMOD_NONE
     TPMOD_CHANCE

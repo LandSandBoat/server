@@ -24,8 +24,6 @@ zone_object.onZoneIn = function(player,prevZone)
         end
         player:setPos(-104, -8, -128, 227)
         player:setHomePoint()
-    elseif (player:getCurrentMission(COP) == xi.mission.id.cop.THREE_PATHS and player:getCharVar("COP_Ulmia_s_Path") == 1) then
-        cs = 4
     end
 
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
@@ -63,8 +61,6 @@ zone_object.onEventFinish = function(player, csid, option)
         player:messageSpecial(ID.text.ITEM_OBTAINED, 536)
     elseif (csid == 700) then
         player:setPos(0, 0, 0, 0, 223)
-    elseif (csid == 4) then
-        player:setCharVar("COP_Ulmia_s_Path",2)
     end
 end
 

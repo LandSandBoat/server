@@ -697,10 +697,10 @@ public:
     time_point charmTime; // to hold the time entity is charmed
     bool       isCharmed; // is the battle entity charmed?
 
-    uint8           m_ModelSize;  // размер модели сущности, для расчета дальности физической атаки
-    ECOSYSTEM       m_EcoSystem;  // эко-система сущности
-    CItemEquipment* m_Weapons[4]; // четыре основных ячейки, используемыж для хранения оружия (только оружия)
-    bool            m_dualWield;  // True/false depending on if the entity is using two weapons
+    uint8           m_ModelRadius; // The radius of the entity model, for calculating the range of a physical attack
+    ECOSYSTEM       m_EcoSystem;   // Entity eco system
+    CItemEquipment* m_Weapons[4];  // Four main slots used to store weapons (weapons only)
+    bool            m_dualWield;   // True/false depending on if the entity is using two weapons
     DEATH_TYPE      m_DeathType;
 
     TraitList_t TraitList; // список постянно активных способностей в виде указателей

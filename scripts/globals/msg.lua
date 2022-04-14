@@ -239,6 +239,7 @@ xi.msg.basic =
     ADD_EFFECT_HP_DRAIN    = 161, -- Additional effect: <number> HP drained from <target>.
     ADD_EFFECT_MP_DRAIN    = 162, -- Additional effect: <number> MP drained from <target>.
     ADD_EFFECT_DMG         = 163, -- Additional effect: <number> points of damage.
+    ADD_EFFECT_DMG_2       = 229, -- Additional effect: The <target> takes <number> additional points of damage.
     ADD_EFFECT_STATUS_2    = 164, -- Additional effect: <Status Effect>. (Duplicate?)
     ADD_EFFECT_TP_DRAIN    = 165, -- Additional effect: <number> TP drained from <target>.
     ADD_EFFECT_SELFBUFF    = 166, -- Additional effect: <player> gains the effect of <Status Effect>.

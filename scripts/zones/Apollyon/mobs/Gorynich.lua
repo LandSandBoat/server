@@ -1,9 +1,9 @@
 -----------------------------------
--- Area: Apollyon NW
+-- Area: Apollyon NW, Floor 4
 --  Mob: Gorynich
 -----------------------------------
 local ID = require("scripts/zones/Apollyon/IDs")
-require("scripts/globals/limbus")
+require("scripts/zones/Apollyon/bcnms/nw_apollyon_helper")
 require("scripts/globals/pathfind")
 -----------------------------------
 local entity = {}
@@ -48,15 +48,7 @@ entity.onMobRoam = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, isKiller, noKiller)
-    if isKiller or noKiller then
-        local mobID       = mob:getID()
-        local battlefield = mob:getBattlefield()
-        local randomF4    = battlefield:getLocalVar("randomF4")
-
-        if mobID == randomF4 then
-            xi.limbus.handleDoors(battlefield, true, ID.npc.APOLLYON_NW_PORTAL[4])
-        end
-    end
+    xi.apollyon_nw.handleMobDeathFloorFourPortal(mob, player, isKiller, noKiller)
 end
 
 return entity

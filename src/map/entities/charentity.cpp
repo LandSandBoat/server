@@ -234,6 +234,8 @@ CCharEntity::CCharEntity()
 
     m_Substate = CHAR_SUBSTATE::SUBSTATE_NONE;
 
+    chatFilterFlags = 0;
+
     PAI = std::make_unique<CAIContainer>(this, nullptr, std::make_unique<CPlayerController>(this), std::make_unique<CTargetFind>(this));
 }
 
@@ -288,8 +290,6 @@ void CCharEntity::pushPacket(CBasicPacket* packet)
     TracyZoneIString(GetName());
     TracyZoneHex16(packet->getType());
 
-    std::lock_guard<std::mutex> lk(m_PacketListMutex);
-
     // TODO: Iterating the entire queue like this isn't very efficient, but the server
     // can still _easily_ handle it
     // This could easily be accelerated by creating a lookup, building a key out of:
@@ -328,7 +328,6 @@ void CCharEntity::pushPacket(std::unique_ptr<CBasicPacket> packet)
 
 CBasicPacket* CCharEntity::popPacket()
 {
-    std::lock_guard<std::mutex> lk(m_PacketListMutex);
     CBasicPacket*               PPacket = PacketList.front();
     PacketList.pop_front();
     return PPacket;
@@ -336,13 +335,11 @@ CBasicPacket* CCharEntity::popPacket()
 
 PacketList_t CCharEntity::getPacketList()
 {
-    std::lock_guard<std::mutex> lk(m_PacketListMutex);
     return PacketList;
 }
 
 size_t CCharEntity::getPacketCount()
 {
-    std::lock_guard<std::mutex> lk(m_PacketListMutex);
     return PacketList.size();
 }
 
@@ -761,7 +758,7 @@ bool CCharEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket
         errMsg = std::make_unique<CMessageBasicPacket>(this, PTarget, 0, 0, MSGBASIC_UNABLE_TO_SEE_TARG);
         return false;
     }
-    else if ((dist - PTarget->m_ModelSize) > GetMeleeRange())
+    else if ((dist - PTarget->m_ModelRadius) > GetMeleeRange())
     {
         errMsg = std::make_unique<CMessageBasicPacket>(this, PTarget, 0, 0, MSGBASIC_TARG_OUT_OF_RANGE);
         return false;
@@ -863,7 +860,7 @@ void CCharEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& acti
     PLatentEffectContainer->CheckLatentsTP();
 
     SLOTTYPE damslot = SLOT_MAIN;
-    if (distance(loc.p, PBattleTarget->loc.p) - PBattleTarget->m_ModelSize <= PWeaponSkill->getRange())
+    if (distance(loc.p, PBattleTarget->loc.p) - PBattleTarget->m_ModelRadius <= PWeaponSkill->getRange())
     {
         if (PWeaponSkill->getID() >= 192 && PWeaponSkill->getID() <= 221)
         {

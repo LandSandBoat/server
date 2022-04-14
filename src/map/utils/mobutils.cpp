@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -1241,7 +1241,7 @@ Usage:
         const char* Query = "SELECT zoneid, mob_groups.name, packet_name, \
         respawntime, spawntype, dropid, mob_groups.HP, mob_groups.MP, minLevel, maxLevel, \
         modelid, mJob, sJob, cmbSkill, cmbDmgMult, cmbDelay, behavior, links, mobType, immunity, \
-        ecosystemID, mobsize, speed, \
+        ecosystemID, mobradius, speed, \
         STR, DEX, VIT, AGI, `INT`, MND, CHR, EVA, DEF, ATT, ACC, \
         slash_sdt, pierce_sdt, h2h_sdt, impact_sdt, \
         fire_sdt, ice_sdt, wind_sdt, earth_sdt, lightning_sdt, water_sdt, light_sdt, dark_sdt, \
@@ -1289,12 +1289,12 @@ Usage:
                 ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setDelay((sql->GetIntData(15) * 1000) / 60);
                 ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setBaseDelay((sql->GetIntData(15) * 1000) / 60);
 
-                PMob->m_Behaviour = (uint16)sql->GetIntData(16);
-                PMob->m_Link      = (uint8)sql->GetIntData(17);
-                PMob->m_Type      = (uint8)sql->GetIntData(18);
-                PMob->m_Immunity  = (IMMUNITY)sql->GetIntData(19);
-                PMob->m_EcoSystem = (ECOSYSTEM)sql->GetIntData(20);
-                PMob->m_ModelSize = (uint8)sql->GetIntData(21);
+                PMob->m_Behaviour   = (uint16)sql->GetIntData(16);
+                PMob->m_Link        = (uint8)sql->GetIntData(17);
+                PMob->m_Type        = (uint8)sql->GetIntData(18);
+                PMob->m_Immunity    = (IMMUNITY)sql->GetIntData(19);
+                PMob->m_EcoSystem   = (ECOSYSTEM)sql->GetIntData(20);
+                PMob->m_ModelRadius = (uint8)sql->GetIntData(21);
 
                 PMob->speed    = (uint8)sql->GetIntData(22); // Overwrites baseentity.cpp's defined speed
                 PMob->speedsub = (uint8)sql->GetIntData(22); // Overwrites baseentity.cpp's defined speedsub
@@ -1366,6 +1366,9 @@ Usage:
                 // must be here first to define mobmods
                 mobutils::InitializeMob(PMob, zoneutils::GetZone(zoneID));
 
+                // TODO: This shouldn't go into the pet list, it appears to only
+                //     : do this because that was the only way to have temporary
+                //     : entities at the time.
                 zoneutils::GetZone(zoneID)->InsertPET(PMob);
 
                 luautils::OnEntityLoad(PMob);
@@ -1388,7 +1391,7 @@ Usage:
         const char* Query = "SELECT zoneid, mob_groups.name, packet_name, \
         respawntime, spawntype, dropid, mob_groups.HP, mob_groups.MP, minLevel, maxLevel, \
         modelid, mJob, sJob, cmbSkill, cmbDmgMult, cmbDelay, behavior, links, mobType, immunity, \
-        ecosystemID, mobsize, speed, \
+        ecosystemID, mobradius, speed, \
         STR, DEX, VIT, AGI, `INT`, MND, CHR, EVA, DEF, ATT, ACC, \
         slash_sdt, pierce_sdt, h2h_sdt, impact_sdt, \
         fire_sdt, ice_sdt, wind_sdt, earth_sdt, lightning_sdt, water_sdt, light_sdt, dark_sdt, \
@@ -1431,12 +1434,12 @@ Usage:
                 ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setDelay((sql->GetIntData(15) * 1000) / 60);
                 ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setBaseDelay((sql->GetIntData(15) * 1000) / 60);
 
-                PMob->m_Behaviour = (uint16)sql->GetIntData(16);
-                PMob->m_Link      = (uint8)sql->GetIntData(17);
-                PMob->m_Type      = (uint8)sql->GetIntData(18);
-                PMob->m_Immunity  = (IMMUNITY)sql->GetIntData(19);
-                PMob->m_EcoSystem = (ECOSYSTEM)sql->GetIntData(20);
-                PMob->m_ModelSize = (uint8)sql->GetIntData(21);
+                PMob->m_Behaviour   = (uint16)sql->GetIntData(16);
+                PMob->m_Link        = (uint8)sql->GetIntData(17);
+                PMob->m_Type        = (uint8)sql->GetIntData(18);
+                PMob->m_Immunity    = (IMMUNITY)sql->GetIntData(19);
+                PMob->m_EcoSystem   = (ECOSYSTEM)sql->GetIntData(20);
+                PMob->m_ModelRadius = (uint8)sql->GetIntData(21);
 
                 PMob->speed    = (uint8)sql->GetIntData(22); // Overwrites baseentity.cpp's defined speed
                 PMob->speedsub = (uint8)sql->GetIntData(22); // Overwrites baseentity.cpp's defined speedsub

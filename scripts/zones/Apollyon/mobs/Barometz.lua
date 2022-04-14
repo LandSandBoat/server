@@ -2,7 +2,7 @@
 -- Area: Apollyon NE, Floor 1
 --  Mob: Barometz
 -----------------------------------
-require("scripts/zones/Apollyon/helpers/apollyon_ne")
+require("scripts/zones/Apollyon/bcnms/ne_apollyon_helper")
 -----------------------------------
 local entity = {}
 

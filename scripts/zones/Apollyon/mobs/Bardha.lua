@@ -1,9 +1,9 @@
 -----------------------------------
--- Area: Apollyon NW
+-- Area: Apollyon NW, Floor 1
 --  Mob: Bardha
 -----------------------------------
 local ID = require("scripts/zones/Apollyon/IDs")
-require("scripts/globals/limbus")
+require("scripts/zones/Apollyon/bcnms/nw_apollyon_helper")
 require("scripts/globals/pathfind")
 -----------------------------------
 local entity = {}
@@ -37,16 +37,7 @@ entity.onMobRoam = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, isKiller, noKiller)
-    if isKiller or noKiller then
-        local mobID       = mob:getID()
-        local battlefield = mob:getBattlefield()
-        local randomF1    = battlefield:getLocalVar("randomF1")
-
-        if mobID == randomF1 then
-            battlefield:setLocalVar("randomF2", ID.mob.APOLLYON_NW_MOB[2] + math.random(1, 7))
-            xi.limbus.handleDoors(battlefield, true, ID.npc.APOLLYON_NW_PORTAL[1])
-        end
-    end
+    xi.apollyon_nw.handleMobDeathFloorOnePortal(mob, player, isKiller, noKiller)
 end
 
 return entity

@@ -29,7 +29,6 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include <bitset>
 #include <deque>
 #include <map>
-#include <mutex>
 #include <unordered_map>
 
 #include "battleentity.h"
@@ -214,8 +213,9 @@ public:
 
     skills_t   RealSkills; // структура всех реальных умений персонажа, с точностью до 0.1 и не ограниченных уровнем
 
-    nameflags_t nameflags;           // флаги перед именем персонажа
+    nameflags_t nameflags;           // Flags in front of the character's name
     nameflags_t menuConfigFlags;     // These flags are used for MenuConfig packets. Some nameflags values are duplicated.
+    uint64      chatFilterFlags;     // Chat filter flags, raw object bytes from incoming packet
     uint32      lastOnline{ 0 };     // UTC Unix Timestamp of the last time char zoned or logged out
     bool        isNewPlayer() const; // Checks if new player bit is unset.
 
@@ -236,7 +236,7 @@ public:
     uint8             m_TitleList[94];        // List of honored windows
     uint8             m_Abilities[62];        // List of current abilities
     uint8             m_LearnedAbilities[49]; //LearnableAbilities (corsairRolls)
-    std::bitset<49>   m_LearnedWeaponskills;  //LearnableWeaponskills
+    std::bitset<50>   m_LearnedWeaponskills;  //LearnableWeaponskills
     uint8             m_TraitList[16];        // List of advance active abilities in the form of a bit mask
     uint8             m_PetCommands[32];      // List of available pet commands
     uint8             m_WeaponSkills[32];
@@ -498,8 +498,6 @@ private:
     bool m_reloadParty;
 
     PacketList_t PacketList; // the list of packets to be sent to the character during the next network cycle
-
-    std::mutex m_PacketListMutex;
 };
 
 #endif

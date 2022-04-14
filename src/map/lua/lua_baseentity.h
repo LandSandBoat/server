@@ -63,6 +63,8 @@ public:
     void messageSystem(uint16 messageID, sol::object const& p0, sol::object const& p1); // Sends System Message
     void messageCombat(sol::object const& speaker, int32 p0, int32 p1, int16 message);  // Sends Combat Message
 
+    void customMenu(sol::object const& obj);
+
     // Variables
     int32  getCharVar(std::string const& varName);              // Returns a character variable
     void   setCharVar(std::string const& varname, int32 value); // Sets a character variable
@@ -706,6 +708,7 @@ public:
     void  updateAttachments();
     void  reduceBurden(float percentReduction, sol::object const& intReductionObj);
 
+    auto  getAllRuneEffects() -> sol::table;
     uint8 getActiveRuneCount();
     uint16 getHighestRuneEffect();
     uint16 getNewestRuneEffect();

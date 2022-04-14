@@ -166,7 +166,7 @@ xi.player.onGameIn = function(player, firstLogin, zoning)
     end
 
     -- apply mods from gearsets (scripts/globals/gear_sets.lua)
-    checkForGearSet(player)
+    xi.gear_sets.checkForGearSet(player)
 
     -- god mode
     if player:getCharVar("GodMode") == 1 then

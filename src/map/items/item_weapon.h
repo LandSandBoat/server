@@ -44,7 +44,8 @@ public:
     DAMAGE_TYPE getDmgType();
     uint8       getAdditionalEffect() const;
     uint8       getHitCount() const;
-    uint16      getUnlockPoints() const;
+    double      getDPS() const;
+    uint16      getTotalUnlockPointsNeeded() const;
     uint16      getCurrentUnlockPoints();
     void        resetDelay();
     bool        addWsPoints(uint16 points);
@@ -68,7 +69,8 @@ public:
     void setDmgType(DAMAGE_TYPE dmgType);
     void setAdditionalEffect(uint8 effect);
     void setMaxHit(uint8 hit);
-    void setUnlockablePoints(uint16 points);
+    void setDPS(double dps);
+    void setTotalUnlockPointsNeeded(uint16 points);
     void setCurrentUnlockPoints(uint16 points);
 
 private:
@@ -83,6 +85,7 @@ private:
     DAMAGE_TYPE m_dmgType;
     uint8       m_effect;
     uint8       m_maxHit;
+    double      m_DPS;
 
     uint16 m_wsunlockpoints;
 
