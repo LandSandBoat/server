@@ -13,11 +13,10 @@ require('scripts/globals/titles')
 
 local quest = Quest:new(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_GOLDSTRUCK_GIGAS)
 
-quest.reward = { }
+quest.reward = {}
 
 quest.sections =
 {
-
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
