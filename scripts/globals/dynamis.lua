@@ -457,7 +457,6 @@ xi.dynamis.zoneOnInitialize = function(zone)
 
     for _, mob in pairs(zone:getMobs()) do
         mob:setCarefulPathing(true)
-
     end
 end
 
@@ -738,7 +737,6 @@ xi.dynamis.refillMobGroupOnDeath = function(mob, player, isKiller, mobSpawnTime)
 end
 
 xi.dynamis.qmOnTrade = function(player, npc, trade)
-
     local npcId = npc:getID()
     local zoneId = npc:getZoneID()
     local ID = zones[zoneId]
