@@ -12,7 +12,7 @@ require("scripts/globals/dynamis")
 local entity = {}
 
 entity.onMobDeath = function(mob, player, isKiller)
-    dynamis.refillMobGroupOnDeath(mob, player, isKiller, 600) -- 10 min
+    xi.dynamis.refillMobGroupOnDeath(mob, player, isKiller, 600) -- 10 min
 end
 
 return entity
