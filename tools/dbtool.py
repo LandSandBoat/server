@@ -72,6 +72,7 @@ from migrations import add_field_chocobo_column
 from migrations import add_new_wardrobe_columns
 from migrations import abyssea_unlocks
 from migrations import add_char_chatfilters
+from migrations import abyssea_conflux
 
 # Append new migrations to this list and import above
 migrations = [
@@ -103,6 +104,7 @@ migrations = [
     add_new_wardrobe_columns,
     abyssea_unlocks,
     add_char_chatfilters,
+    abyssea_conflux,
 ]
 
 # These are the 'protected' files
