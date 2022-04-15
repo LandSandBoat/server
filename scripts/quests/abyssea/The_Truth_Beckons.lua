@@ -50,7 +50,6 @@ quest.sections =
             },
         },
 
-
         [xi.zone.ABYSSEA_KONSCHTAT] =
         {
             onZoneIn = { handleOnZoneIn },

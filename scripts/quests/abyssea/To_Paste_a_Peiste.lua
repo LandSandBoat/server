@@ -17,7 +17,6 @@ quest.reward = { }
 
 quest.sections =
 {
-
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
