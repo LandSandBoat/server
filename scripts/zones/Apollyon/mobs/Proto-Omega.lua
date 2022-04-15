@@ -15,7 +15,7 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setMobMod(xi.mobMod.SUPERLINK, mob:getShortID())
+    mob:setMobMod(xi.mobMod.SUPERLINK, mob:getTargID())
     mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.NO_TURN))
     mob:setMod(xi.mod.UDMGPHYS, -7500)
     mob:setMod(xi.mod.UDMGRANGE, -7500)

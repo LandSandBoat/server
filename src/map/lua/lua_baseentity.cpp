@@ -1280,13 +1280,13 @@ uint32 CLuaBaseEntity::getID()
 }
 
 /************************************************************************
- *  Function: getShortID()
+ *  Function: getTargID()
  *  Purpose : Gets the ID of a Target
- *  Example : mob:getShortID(); pet:getShortID()
- *  Notes   : To Do: Should be renamed to getTargID
+ *  Example : mob:getTargID(); pet:getTargID()
+ *  Notes   :
  ************************************************************************/
 
-uint16 CLuaBaseEntity::getShortID()
+uint16 CLuaBaseEntity::getTargID()
 {
     return m_PBaseEntity->targid;
 }
@@ -4387,21 +4387,6 @@ std::string CLuaBaseEntity::getName()
 }
 
 /************************************************************************
- *  Function: setName()
- *  Purpose : Sets the name of the entity.
- *  Example : mob:setName("NewName")
- *  Note    : This will only apply to entities whose targid's are in a range
- *          : that will allow their names to be changed: Trusts, Pets,
- *          : Dynamic Entities etc.
- ************************************************************************/
-
-void CLuaBaseEntity::setName(std::string const& name)
-{
-    m_PBaseEntity->name = name;
-    m_PBaseEntity->updatemask |= UPDATE_NAME;
-}
-
-/************************************************************************
  *  Function: getPacketName()
  *  Purpose : Returns the string packet name of the character
  *  Example : mob:getPacketName()
@@ -4413,18 +4398,27 @@ std::string CLuaBaseEntity::getPacketName()
 }
 
 /************************************************************************
- *  Function: setPacketName()
- *  Purpose : Sets the packet name of the entity.
- *  Example : mob:getPacketName("NewName")
- *  Note    : This will only apply to entities whose targid's are in a range
- *          : that will allow their packet names to be changed: Trusts, Pets,
- *          : Dynamic Entities etc.
+ *  Function: renameEntity()
+ *  Purpose : Overrides the visible name of the entity.
+ *  Example : mob:renameEntity("NewName")
+ *  Note    : This will set the packet name of the entity to a name of
+ *          : your choosing.
  ************************************************************************/
 
-void CLuaBaseEntity::setPacketName(std::string const& name)
+void CLuaBaseEntity::renameEntity(std::string const& newName)
 {
-    m_PBaseEntity->packetName = name;
-    m_PBaseEntity->updatemask |= UPDATE_NAME;
+    if (m_PBaseEntity->objtype == TYPE_PC)
+    {
+        ShowWarning("Renaming player character entities isn't supported.");
+        return;
+    }
+
+    auto oldName = m_PBaseEntity->packetName.empty() ? "<empty>" : m_PBaseEntity->packetName;
+    m_PBaseEntity->packetName = newName;
+    m_PBaseEntity->updatemask |= UPDATE_NAME | UPDATE_HP;
+    m_PBaseEntity->isRenamed = true;
+
+    ShowInfo("Renaming %s: %s -> %s", m_PBaseEntity->name, oldName, newName);
 }
 
 /************************************************************************
@@ -12283,7 +12277,7 @@ uint32 CLuaBaseEntity::getMobFlags()
 *  Function: setNpcFlags()
 *  Purpose : Manually set NPC Entity Flags
 *  Example : npc:setNpcFlags(1)
-*  Notes   : 
+*  Notes   :
 ************************************************************************/
 
 void CLuaBaseEntity::setNpcFlags(uint32 flags)
@@ -13598,7 +13592,7 @@ void CLuaBaseEntity::Register()
 
     // Object Identification
     SOL_REGISTER("getID", CLuaBaseEntity::getID);
-    SOL_REGISTER("getShortID", CLuaBaseEntity::getShortID);
+    SOL_REGISTER("getTargID", CLuaBaseEntity::getTargID);
     SOL_REGISTER("getCursorTarget", CLuaBaseEntity::getCursorTarget);
 
     SOL_REGISTER("getObjType", CLuaBaseEntity::getObjType);
@@ -13741,9 +13735,8 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getRace", CLuaBaseEntity::getRace);
     SOL_REGISTER("getGender", CLuaBaseEntity::getGender);
     SOL_REGISTER("getName", CLuaBaseEntity::getName);
-    SOL_REGISTER("setName", CLuaBaseEntity::setName);
     SOL_REGISTER("getPacketName", CLuaBaseEntity::getPacketName);
-    SOL_REGISTER("setPacketName", CLuaBaseEntity::setPacketName);
+    SOL_REGISTER("renameEntity", CLuaBaseEntity::renameEntity);
     SOL_REGISTER("hideName", CLuaBaseEntity::hideName);
     SOL_REGISTER("checkNameFlags", CLuaBaseEntity::checkNameFlags);
     SOL_REGISTER("getModelId", CLuaBaseEntity::getModelId);
