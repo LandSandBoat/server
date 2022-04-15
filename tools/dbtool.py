@@ -6,6 +6,7 @@ import re
 import time
 import fileinput
 import shutil
+import importlib
 
 # Pre-flight sanity checks
 def preflight_exit():
@@ -42,69 +43,17 @@ except Exception as e:
     print(e)
     preflight_exit()
 
-# Migrations
-from migrations import spell_blobs_to_spell_table
-from migrations import unnamed_flags
-from migrations import char_unlock_table_columns
-from migrations import HP_masks_to_blobs
-from migrations import crystal_storage
-from migrations import broken_linkshells
-from migrations import spell_family_column
-from migrations import mission_blob_extra
-from migrations import cop_mission_ids
-from migrations import add_daily_tally_column
-from migrations import add_timecreated_column
-from migrations import extend_mission_log
-from migrations import eminence_blob
-from migrations import char_timestamp
-from migrations import currency_columns
-from migrations import add_instance_zone_column
-from migrations import convert_tables_to_innodb
-from migrations import char_points_weekly_unity
-from migrations import char_profile_unity_leader
-from migrations import convert_mission_status
-from migrations import convert_zilart_status
-from migrations import add_job_master_column_chars
-from migrations import currency2
-from migrations import languages
-from migrations import add_field_chocobo_column
-from migrations import add_new_wardrobe_columns
-from migrations import abyssea_unlocks
-from migrations import add_char_chatfilters
-from migrations import abyssea_conflux
+def populate_migrations():
+    migration_list = []
+    for file in os.scandir("migrations"):
+        if file.name.endswith(".py") and file.name != "utils.py":
+            name = file.name.replace(".py", "")
+            module = importlib.import_module("migrations." + name)
+            migration_list.append(module)
+    return migration_list
 
-# Append new migrations to this list and import above
-migrations = [
-    unnamed_flags,
-    spell_blobs_to_spell_table,
-    char_unlock_table_columns,
-    HP_masks_to_blobs,
-    crystal_storage,
-    broken_linkshells,
-    spell_family_column,
-    extend_mission_log,
-    mission_blob_extra,
-    cop_mission_ids,
-    add_daily_tally_column,
-    add_timecreated_column,
-    eminence_blob,
-    char_timestamp,
-    currency_columns,
-    add_instance_zone_column,
-    convert_tables_to_innodb,
-    char_points_weekly_unity,
-    char_profile_unity_leader,
-    convert_mission_status,
-    convert_zilart_status,
-    add_job_master_column_chars,
-    currency2,
-    languages,
-    add_field_chocobo_column,
-    add_new_wardrobe_columns,
-    abyssea_unlocks,
-    add_char_chatfilters,
-    abyssea_conflux,
-]
+# Migrations are automatically scraped from the migrations folder
+migrations = populate_migrations()
 
 # These are the 'protected' files
 player_data = [
