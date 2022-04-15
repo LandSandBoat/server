@@ -15,7 +15,10 @@ xi.pyxis.light.giveLight = function(npc, player)
     local lightValue = npc:getLocalVar("LIGHT_VALUE")
 
     for p, member in ipairs(alliance) do
-        if member:getZoneID() == player:getZoneID() and member:isPC() then
+        if
+            member:getZoneID() == player:getZoneID() and
+            member:isPC()
+        then
             xi.abyssea.addPlayerLights(member, light, lightValue)
         end
     end

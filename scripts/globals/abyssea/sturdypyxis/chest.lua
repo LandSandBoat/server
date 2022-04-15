@@ -28,16 +28,16 @@ xi.pyxis.chestType =
 
 xi.pyxis.chestDropType =
 {
-    TEMPORARY_ITEM  = 1,
-    ITEM            = 2,
-    POPITEM         = 3,
-    AUGMENTED_ITEM  = 4,
-    KEY_ITEM        = 5,
-    LIGHT           = 6,
-    RESTORE         = 7,
-    CRUOR           = 8,
-    TIME            = 9,
-    EXP             = 10,
+    TEMPORARY_ITEM      = 1,
+    ITEM                = 2,
+    POPITEM             = 3,
+    AUGMENTED_ITEM      = 4,
+    KEY_ITEM            = 5,
+    LIGHT               = 6,
+    RESTORE             = 7,
+    CRUOR               = 8,
+    TIME                = 9,
+    EXP                 = 10,
     NUMEROUS_TEMPITEMS  = 11
 }
 
@@ -99,6 +99,7 @@ xi.pyxis.removeChest = function(player, npc, addcruor, delay)
         player:addCurrency("cruor", amount)
         player:messageSpecial(ID.text.CRUOR_OBTAINED, amount, 0, 0, 0)
     end
+
     npc:untargetable(true)
     npc:timer(delay * 1000, function(npcArg)
         npcArg:setAnimationSub(16)
@@ -144,6 +145,7 @@ end
 xi.pyxis.openChest = function(player, npc)
     local ID       = zones[player:getZoneID()]
     local dropType = npc:getLocalVar("DROPTYPE")
+
     npc:setAnimationSub(13)
 
     switch(dropType) : caseof

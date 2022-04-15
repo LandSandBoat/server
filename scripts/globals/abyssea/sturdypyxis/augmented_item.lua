@@ -12,15 +12,68 @@ xi.pyxis.augItem = {}
 ---------------------------------
 local augdrops =
 {
-    [xi.zone.ABYSSEA_KONSCHTAT  ] = { 14644, 12324, 16128 }, -- ABYSSEA_KONSCHTAT
-    [xi.zone.ABYSSEA_TAHRONGI   ] = { 12420, 13464, 16265 }, -- ABYSSEA_TAHRONGI
-    [xi.zone.ABYSSEA_LA_THEINE  ] = { 13087, 13925, 13212 }, -- ABYSSEA_LA_THEINE
-    [xi.zone.ABYSSEA_ATTOHWA    ] = { 19309, 11932, 11880 }, -- ABYSSEA_ATTOHWA
-    [xi.zone.ABYSSEA_MISAREAUX  ] = { 11424, 18963, 11684 }, -- ABYSSEA_MISAREAUX
-    [xi.zone.ABYSSEA_VUNKERL    ] = { 13450, 11878, 11428 }, -- ABYSSEA_VUNKERL
-    [xi.zone.ABYSSEA_ALTEPA     ] = { 17664, 19310, 19267 }, -- ABYSSEA_ALTEPA
-    [xi.zone.ABYSSEA_ULEGUERAND ] = { 18964, 18774, 18875 }, -- ABYSSEA_ULEGUERAND
-    [xi.zone.ABYSSEA_GRAUBERG   ] = { 16660, 16485, 16971 }, -- ABYSSEA_GRAUBERG
+    [xi.zone.ABYSSEA_KONSCHTAT] =
+    {
+        xi.items.DARK_RING,
+        xi.items.TOWER_SHIELD,
+        xi.items.WIVRE_HAIRPIN,
+    },
+
+    [xi.zone.ABYSSEA_TAHRONGI] =
+    {
+        xi.items.ADAMAN_BARBUTA,
+        xi.items.DEMONS_RING,
+        xi.items.WIVRE_GORGET,
+    },
+
+    [xi.zone.ABYSSEA_LA_THEINE] =
+    {
+        xi.items.JEWELED_COLLAR,
+        xi.items.RASETSU_JINPACHI,
+        xi.items.TARUTARU_SASH,
+    },
+
+    [xi.zone.ABYSSEA_ATTOHWA] =
+    {
+        xi.items.GLEAMING_SPEAR,
+        xi.items.LORE_SLOPS,
+        xi.items.VERSA_MUFFLERS,
+    },
+
+    [xi.zone.ABYSSEA_MISAREAUX] =
+    {
+        xi.items.GULES_LEGGINGS,
+        xi.items.GLEAMING_ZAGHNAL,
+        xi.items.LIGHT_EARRING,
+    },
+
+    [xi.zone.ABYSSEA_VUNKERL] =
+    {
+        xi.items.DIAMOND_RING,
+        xi.items.GULES_MITTENS,
+        xi.items.LORE_SABOTS,
+    },
+
+    [xi.zone.ABYSSEA_ALTEPA] =
+    {
+        xi.items.FIRMAMENT,
+        xi.items.GUISARME,
+        xi.items.RIBAULDEQUIN,
+    },
+
+    [xi.zone.ABYSSEA_ULEGUERAND] =
+    {
+        xi.items.DIRE_SCYTHE,
+        xi.items.SAVATE_FISTS,
+        xi.items.VODUN_MACE,
+    },
+
+    [xi.zone.ABYSSEA_GRAUBERG] =
+    {
+        xi.items.DOOM_TABAR,
+        xi.items.YATAGHAN,
+        xi.items.YUKITSUGU,
+    },
 }
 
 
@@ -30,33 +83,357 @@ local augdrops =
 ---------------------------------------------------------------------------------------------
 local augs =
 {
-    [14644] = {augments = {{aug=42,  min=1, max=3 }, {aug=56,  min=1, max=6 }, {aug=33,  min=2, max=4 }, {aug=53,  min=1, max=5 }, {aug=55,  min=1, max=6 }, {aug=54,  min=1, max=6 }                                                                                                        }}, -- Dark Ring
-    [12324] = {augments = {{aug=1,   min=2, max=17}, {aug=180, min=1, max=4 }, {aug=181, min=1, max=5 }, {aug=188, min=1, max=5 }, {aug=153, min=1, max=2 }, {aug=39,  min=1, max=2 }                                                                                                        }}, -- Tower Shield
-    [16128] = {augments = {{aug=771, min=1, max=10}, {aug=773, min=1, max=10}, {aug=769, min=1, max=10}, {aug=775, min=1, max=10}, {aug=9,   min=10,max=16}, {aug=138, min=1, max=1 }                                                                                                        }}, -- Wivre Hairpin
-    [12420] = {augments = {{aug=774, min=1, max=9 }, {aug=137, min=1, max=3 }, {aug=188, min=1, max=5 }, {aug=53,  min=1, max=3 }, {aug=329, min=2, max=5 }, {aug=137, min=1, max=1 }, {aug=1,   min=1, max=16}                                                                              }}, -- Adaman Barbuta
-    [13464] = {augments = {{aug=791, min=7, max=9 }, {aug=185, min=1, max=3 }, {aug=179, min=1, max=3 }, {aug=183, min=1, max=3 }, {aug=516, min=1, max=3 }, {aug=335, min=1, max=3 }, {aug=133, min=1, max=3 }                                                                              }}, -- Demon's Ring
-    [16265] = {augments = {{aug=1,   min=3, max=5 }, {aug=9,   min=2, max=5 }, {aug=513, min=1, max=3 }, {aug=195, min=2, max=5 }, {aug=772, min=3, max=4 }, {aug=41,  min=1, max=2 }                                                                                                        }}, -- Wivre Gorget
-    [13087] = {augments = {{aug=1,   min=1, max=15}, {aug=9,   min=1, max=15}, {aug=518, min=1, max=4 }, {aug=517, min=1, max=4 }, {aug=516, min=1, max=4 }, {aug=51,  min=1, max=3 }, {aug=52,  min=1, max=3 }, {aug=140, min=1, max=3 }, {aug=141, min=1, max=3 }                          }}, -- Jeweled Collar
-    [13925] = {augments = {{aug=768, min=1, max=4 }, {aug=182, min=1, max=5 }, {aug=183, min=2, max=4 }, {aug=198, min=1, max=5 }, {aug=31,  min=1, max=10}                                                                                                                                  }}, -- Rasetsu Jinpachi
-    [13212] = {augments = {{aug=1,   min=1, max=15}, {aug=516, min=1, max=5 }, {aug=517, min=1, max=5 }, {aug=518, min=1, max=5 }, {aug=148, min=1, max=3 }, {aug=147, min=1, max=1 }                                                                                                        }}, -- Tarutaru Sash
-    [19309] = {augments = {{aug=768, min=1, max=10}, {aug=772, min=1, max=10}, {aug=771, min=5, max=10}, {aug=1,   min=5, max=18}, {aug=514, min=1, max=5 }, {aug=187, min=3, max=5 }, {aug=23,  min=3, max=5 }, {aug=286, min=1, max=2 }, {aug=326, min=1, max=10}, {aug=327, min=1, max=5 }}}, -- Gleaming Spear
-    [11932] = {augments = {{aug=774, min=1, max=10}, {aug=518, min=1, max=3 }, {aug=51,  min=1, max=3 }, {aug=323, min=1, max=6 }, {aug=289, min=1, max=5 }                                                                                                                                  }}, -- Lore Slops
-    [11880] = {augments = {{aug=771, min=1, max=9 }, {aug=1,   min=1, max=15}, {aug=187, min=1, max=5 }, {aug=514, min=1, max=5 }, {aug=286, min=1, max=5 }, {aug=54,  min=1, max=1 }                                                                                                        }}, -- Versa Mufflers
-    [11424] = {augments = {{aug=770, min=1, max=6 }, {aug=512, min=1, max=3 }, {aug=40,  min=1, max=3 }, {aug=145, min=1, max=3 }, {aug=195, min=1, max=5 }, {aug=116, min=1, max=3 }                                                                                                        }}, -- Gules Leggings
-    [18963] = {augments = {{aug=775, min=1, max=10}, {aug=1,   min=1, max=20}, {aug=9,   min=1, max=20}, {aug=293, min=1, max=5 }, {aug=23,  min=1, max=10}                                                                                                                                  }}, -- Gleaming Zaghnal
-    [11684] = {augments = {{aug=185, min=1, max=3 }, {aug=179, min=1, max=3 }, {aug=177, min=1, max=3 }, {aug=515, min=1, max=2 }, {aug=41,  min=1, max=1 }, {aug=184, min=1, max=3 }                                                                                                        }}, -- Light Earring
-    [13450] = {augments = {{aug=769, min=1, max=5 }, {aug=180, min=1, max=3 }, {aug=516, min=1, max=3 }, {aug=517, min=1, max=3 }, {aug=53,  min=1, max=5 }                                                                                                                                  }}, -- Diamond Ring
-    [11878] = {augments = {{aug=515, min=1, max=4 }, {aug=184, min=1, max=4 }, {aug=211, min=1, max=2 }, {aug=195, min=1, max=4 }, {aug=98,  min=1, max=4 }                                                                                                                                  }}, -- Gules Mittens
-    [11428] = {augments = {{aug=1,   min=3, max=7 }, {aug=51,  min=1, max=3 }, {aug=52,  min=3, max=4 }, {aug=53,  min=2, max=10}, {aug=141, min=2, max=5 }                                                                                                                                  }}, -- Lore Sabots
-    [17664] = {augments = {{aug=787, min=1, max=7 }, {aug=184, min=1, max=5 }, {aug=517, min=2, max=8 }, {aug=45,  min=2, max=9 }, {aug=1033,min=1, max=8 }                                                                                                                                  }}, -- Firmament
-    [19310] = {augments = {{aug=788, min=2, max=7 }, {aug=177, min=2, max=6 }, {aug=29,  min=2, max=3 }, {aug=512, min=2, max=7 }, {aug=45,  min=6, max=15}, {aug=1052,min=2, max=8 }                                                                                                        }}, -- Guisarme
-    [19267] = {augments = {{aug=784, min=2, max=7 }, {aug=178, min=2, max=6 }, {aug=25,  min=2, max=3 }, {aug=39,  min=2, max=7 }, {aug=45,  min=6, max=15}, {aug=1078,min=2, max=8 }                                                                                                        }}, -- Ribauldequin
-    [18964] = {augments = {{aug=770, min=4, max=5 }, {aug=787, min=3, max=8 }, {aug=184, min=3, max=5 }, {aug=23,  min=1, max=3 }, {aug=198, min=2, max=7 }, {aug=512, min=3, max=3 }, {aug=45,  min=3, max=19}, {aug=1048,min=2, max=8 }                                                    }}, -- Dire Scythe
-    [18774] = {augments = {{aug=786, min=1, max=7 }, {aug=181, min=1, max=6 }, {aug=41,  min=1, max=4 }, {aug=45,  min=2, max=5 }, {aug=1024,min=2, max=6 }                                                                                                                                  }}, -- Savate Fists
-    [18875] = {augments = {{aug=789, min=3, max=7 }, {aug=182, min=3, max=6 }, {aug=512, min=3, max=8 }, {aug=45,  min=5, max=10}, {aug=1065,min=2, max=4 }, {aug=1064,min=2, max=4 }                                                                                                        }}, -- Vodun Mace
-    [16660] = {augments = {{aug=786, min=2, max=5 }, {aug=187, min=1, max=6 }, {aug=512, min=3, max=8 }, {aug=45,  min=3, max=8 }, {aug=1040,min=2, max=4 }                                                                                                                                  }}, -- Doom Tabar
-    [16485] = {augments = {{aug=787, min=2, max=8 }, {aug=184, min=1, max=5 }, {aug=25,  min=1, max=3 }, {aug=23,  min=1, max=2 }, {aug=45,  min=1, max=8 }, {aug=1028,min=2, max=4 }                                                                                                        }}, -- Yataghan
-    [16971] = {augments = {{aug=788, min=2, max=5 }, {aug=177, min=3, max=6 }, {aug=1080,min=1, max=3 }, {aug=45,  min=5, max=8 }, {aug=1060,min=2, max=4 }                                                                                                                                  }}, -- Yukitsugu
+    [xi.items.DARK_RING] =
+    {
+        augments =
+        {
+            { aug = 42, min = 1, max = 3 },
+            { aug = 56, min = 1, max = 6 },
+            { aug = 33, min = 2, max = 4 },
+            { aug = 53, min = 1, max = 5 },
+            { aug = 55, min = 1, max = 6 },
+            { aug = 54, min = 1, max = 6 },
+        },
+    },
+
+    [xi.items.TOWER_SHIELD] =
+    {
+        augments =
+        {
+            { aug = 1,   min = 2, max = 17 },
+            { aug = 180, min = 1, max = 4  },
+            { aug = 181, min = 1, max = 5  },
+            { aug = 188, min = 1, max = 5  },
+            { aug = 153, min = 1, max = 2  },
+            { aug = 39,  min = 1, max = 2  },
+        },
+    },
+
+    [xi.items.WIVRE_HAIRPIN] =
+    {
+        augments =
+        {
+            { aug = 771, min = 1,  max = 10 },
+            { aug = 773, min = 1,  max = 10 },
+            { aug = 769, min = 1,  max = 10 },
+            { aug = 775, min = 1,  max = 10 },
+            { aug = 9,   min = 10, max = 16 },
+            { aug = 138, min = 1,  max = 1  },
+        },
+    },
+
+    [xi.items.ADAMAN_BARBUTA] =
+    {
+        augments =
+        {
+            { aug = 774, min = 1, max = 9  },
+            { aug = 137, min = 1, max = 3  },
+            { aug = 188, min = 1, max = 5  },
+            { aug = 53,  min = 1, max = 3  },
+            { aug = 329, min = 2, max = 5  },
+            { aug = 137, min = 1, max = 1  },
+            { aug = 1,   min = 1, max = 16 },
+        },
+    },
+
+    [xi.items.DEMONS_RING] =
+    {
+        augments =
+        {
+            { aug = 791, min = 7, max = 9 },
+            { aug = 185, min = 1, max = 3 },
+            { aug = 179, min = 1, max = 3 },
+            { aug = 183, min = 1, max = 3 },
+            { aug = 516, min = 1, max = 3 },
+            { aug = 335, min = 1, max = 3 },
+            { aug = 133, min = 1, max = 3 },
+        },
+    },
+
+    [xi.items.WIVRE_GORGET] =
+    {
+        augments =
+        {
+            { aug = 1,   min = 3, max = 5 },
+            { aug = 9,   min = 2, max = 5 },
+            { aug = 513, min = 1, max = 3 },
+            { aug = 195, min = 2, max = 5 },
+            { aug = 772, min = 3, max = 4 },
+            { aug = 41,  min = 1, max = 2 },
+        },
+    },
+
+    [xi.items.JEWELED_COLLAR] =
+    {
+        augments =
+        {
+            { aug = 1,   min = 1, max = 15 },
+            { aug = 9,   min = 1, max = 15 },
+            { aug = 518, min = 1, max = 4  },
+            { aug = 517, min = 1, max = 4  },
+            { aug = 516, min = 1, max = 4  },
+            { aug = 51,  min = 1, max = 3  },
+            { aug = 52,  min = 1, max = 3  },
+            { aug = 140, min = 1, max = 3  },
+            { aug = 141, min = 1, max = 3  },
+        },
+    },
+
+    [xi.items.RASETSU_JINPACHI] =
+    {
+        augments =
+        {
+            { aug = 768, min = 1, max = 4  },
+            { aug = 182, min = 1, max = 5  },
+            { aug = 183, min = 2, max = 4  },
+            { aug = 198, min = 1, max = 5  },
+            { aug = 31,  min = 1, max = 10 },
+        },
+    },
+
+    [xi.items.TARUTARU_SASH] =
+    {
+        augments =
+        {
+            {aug = 1,   min = 1, max = 15 },
+            {aug = 516, min = 1, max = 5  },
+            {aug = 517, min = 1, max = 5  },
+            {aug = 518, min = 1, max = 5  },
+            {aug = 148, min = 1, max = 3  },
+            {aug = 147, min = 1, max = 1  },
+        },
+    },
+
+    [xi.items.GLEAMING_SPEAR] =
+    {
+        augments =
+        {
+            { aug = 768, min = 1, max = 10 },
+            { aug = 772, min = 1, max = 10 },
+            { aug = 771, min = 5, max = 10 },
+            { aug = 1,   min = 5, max = 18 },
+            { aug = 514, min = 1, max = 5  },
+            { aug = 187, min = 3, max = 5  },
+            { aug = 23,  min = 3, max = 5  },
+            { aug = 286, min = 1, max = 2  },
+            { aug = 326, min = 1, max = 10 },
+            { aug = 327, min = 1, max = 5  },
+        },
+    },
+
+    [xi.items.LORE_SLOPS] =
+    {
+        augments =
+        {
+            { aug = 774, min = 1, max = 10 },
+            { aug = 518, min = 1, max = 3  },
+            { aug = 51,  min = 1, max = 3  },
+            { aug = 323, min = 1, max = 6  },
+            { aug = 289, min = 1, max = 5  },
+        },
+    },
+
+    [xi.items.VERSA_MUFFLERS] =
+    {
+        augments =
+        {
+            { aug = 771, min = 1, max = 9  },
+            { aug = 1,   min = 1, max = 15 },
+            { aug = 187, min = 1, max = 5  },
+            { aug = 514, min = 1, max = 5  },
+            { aug = 286, min = 1, max = 5  },
+            { aug = 54,  min = 1, max = 1  },
+        },
+    },
+
+    [xi.items.GULES_LEGGINGS] =
+    {
+        augments =
+        {
+            { aug = 770, min = 1, max = 6 },
+            { aug = 512, min = 1, max = 3 },
+            { aug = 40,  min = 1, max = 3 },
+            { aug = 145, min = 1, max = 3 },
+            { aug = 195, min = 1, max = 5 },
+            { aug = 116, min = 1, max = 3 },
+        },
+    },
+
+    [xi.items.GLEAMING_ZAGHNAL] =
+    {
+        augments =
+        {
+            { aug = 775, min = 1, max = 10 },
+            { aug = 1,   min = 1, max = 20 },
+            { aug = 9,   min = 1, max = 20 },
+            { aug = 293, min = 1, max = 5  },
+            { aug = 23,  min = 1, max = 10 },
+        },
+    },
+
+    [xi.items.LIGHT_EARRING] =
+    {
+        augments =
+        {
+            { aug = 185, min = 1, max = 3 },
+            { aug = 179, min = 1, max = 3 },
+            { aug = 177, min = 1, max = 3 },
+            { aug = 515, min = 1, max = 2 },
+            { aug = 41,  min = 1, max = 1 },
+            { aug = 184, min = 1, max = 3 },
+        },
+    },
+
+    [xi.items.DIAMOND_RING] =
+    {
+        augments =
+        {
+            { aug = 769, min = 1, max = 5 },
+            { aug = 180, min = 1, max = 3 },
+            { aug = 516, min = 1, max = 3 },
+            { aug = 517, min = 1, max = 3 },
+            { aug = 53,  min = 1, max = 5 },
+        },
+    },
+
+    [xi.items.GULES_MITTENS] =
+    {
+        augments =
+        {
+            { aug = 515, min = 1, max = 4 },
+            { aug = 184, min = 1, max = 4 },
+            { aug = 211, min = 1, max = 2 },
+            { aug = 195, min = 1, max = 4 },
+            { aug = 98,  min = 1, max = 4 },
+        },
+    },
+
+    [xi.items.LORE_SABOTS] =
+    {
+        augments =
+        {
+            { aug = 1,   min = 3, max = 7  },
+            { aug = 51,  min = 1, max = 3  },
+            { aug = 52,  min = 3, max = 4  },
+            { aug = 53,  min = 2, max = 10 },
+            { aug = 141, min = 2, max = 5  },
+        },
+    },
+
+    [xi.items.FIRMAMENT] =
+    {
+        augments =
+        {
+            { aug = 787,  min = 1, max = 7 },
+            { aug = 184,  min = 1, max = 5 },
+            { aug = 517,  min = 2, max = 8 },
+            { aug = 45,   min = 2, max = 9 },
+            { aug = 1033, min = 1, max = 8 },
+        },
+    },
+
+    [xi.items.GUISARME] =
+    {
+        augments =
+        {
+            { aug = 788,  min = 2, max = 7  },
+            { aug = 177,  min = 2, max = 6  },
+            { aug = 29,   min = 2, max = 3  },
+            { aug = 512,  min = 2, max = 7  },
+            { aug = 45,   min = 6, max = 15 },
+            { aug = 1052, min = 2, max = 8  },
+        },
+    },
+
+    [xi.items.RIBAULDEQUIN] =
+    {
+        augments =
+        {
+            { aug = 784,  min = 2, max = 7  },
+            { aug = 178,  min = 2, max = 6  },
+            { aug = 25,   min = 2, max = 3  },
+            { aug = 39,   min = 2, max = 7  },
+            { aug = 45,   min = 6, max = 15 },
+            { aug = 1078, min = 2, max = 8  },
+        },
+    },
+
+    [xi.items.DIRE_SCYTHE] =
+    {
+        augments =
+        {
+            { aug = 770,  min = 4, max = 5  },
+            { aug = 787,  min = 3, max = 8  },
+            { aug = 184,  min = 3, max = 5  },
+            { aug = 23,   min = 1, max = 3  },
+            { aug = 198,  min = 2, max = 7  },
+            { aug = 512,  min = 3, max = 3  },
+            { aug = 45,   min = 3, max = 19 },
+            { aug = 1048, min = 2, max = 8  },
+        },
+    },
+
+    [xi.items.SAVATE_FISTS] =
+    {
+        augments =
+        {
+            { aug = 786,  min = 1, max = 7 },
+            { aug = 181,  min = 1, max = 6 },
+            { aug = 41,   min = 1, max = 4 },
+            { aug = 45,   min = 2, max = 5 },
+            { aug = 1024, min = 2, max = 6 },
+        },
+    },
+
+    [xi.items.VODUN_MACE] =
+    {
+        augments =
+        {
+            { aug = 789,  min = 3, max = 7  },
+            { aug = 182,  min = 3, max = 6  },
+            { aug = 512,  min = 3, max = 8  },
+            { aug = 45,   min = 5, max = 10 },
+            { aug = 1065, min = 2, max = 4  },
+            { aug = 1064, min = 2, max = 4  },
+        },
+    },
+
+    [xi.items.DOOM_TABAR] =
+    {
+        augments =
+        {
+            { aug = 786,  min = 2, max = 5 },
+            { aug = 187,  min = 1, max = 6 },
+            { aug = 512,  min = 3, max = 8 },
+            { aug = 45,   min = 3, max = 8 },
+            { aug = 1040, min = 2, max = 4 },
+        },
+    },
+
+    [xi.items.YATAGHAN] =
+    {
+        augments =
+        {
+            { aug = 787,  min = 2, max = 8 },
+            { aug = 184,  min = 1, max = 5 },
+            { aug = 25,   min = 1, max = 3 },
+            { aug = 23,   min = 1, max = 2 },
+            { aug = 45,   min = 1, max = 8 },
+            { aug = 1028, min = 2, max = 4 },
+        },
+    },
+
+    [xi.items.YUKITSUGU] =
+    {
+        augments =
+        {
+            {aug = 788,  min = 2, max = 5 },
+            {aug = 177,  min = 3, max = 6 },
+            {aug = 1080, min = 1, max = 3 },
+            {aug = 45,   min = 5, max = 8 },
+            {aug = 1060, min = 2, max = 4 },
+        },
+    },
 }
 
 -------------------------------------------------------------------------------
@@ -68,33 +445,33 @@ local augs =
 -------------------------------------------------------------------------------
 local augTierDeduction =
 {
-    [14644] = {3,3,3,2,0}, -- Dark Ring
-    [12324] = {5,2,2,0,0}, -- Tower Shield
-    [16128] = {3,3,3,2,0}, -- Wivre Hairpin
-    [12420] = {6,6,6,4,0}, -- Adaman Barbuta
-    [13464] = {4,4,4,3,0}, -- Demon's Ring
-    [16265] = {3,3,3,0,0}, -- Wivre Gorget
-    [13087] = {7,7,3,2,0}, -- Jeweled Collar
-    [13925] = {2,2,2,0,0}, -- Rasetsu Jinpachi
-    [13212] = {5,5,3,2,0}, -- Tarutaru Sash
-    [19309] = {6,5,4,3,0}, -- Gleaming Spear
-    [11932] = {3,3,2,0,0}, -- Lore Slops
-    [11880] = {2,2,2,0,0}, -- Versa Mufflers
-    [11424] = {4,4,3,0,0}, -- Gules Leggings
-    [18963] = {4,4,2,0,0}, -- Gleaming Zaghnal
-    [11684] = {3,3,3,0,0}, -- Light Earring
-    [13450] = {4,4,2,0,0}, -- Diamond Ring
-    [11878] = {3,3,2,0,0}, -- Gules Mittens
-    [11428] = {2,2,2,1,0}, -- Lore Sabots
-    [17664] = {4,4,3,2,0}, -- Firmament
-    [19310] = {4,4,3,2,0}, -- Guisarme
-    [19267] = {4,4,3,2,0}, -- Ribauldequin
-    [18964] = {6,6,4,2,0}, -- Dire Scythe
-    [18774] = {3,3,2,0,0}, -- Savate Fists
-    [18875] = {4,4,3,2,0}, -- Vodun Mace
-    [16660] = {3,3,2,0,0}, -- Doom Tabar
-    [16485] = {4,4,3,2,0}, -- Yataghan
-    [16971] = {3,3,2,0,0}, -- Yukitsugu
+    [xi.items.DARK_RING       ] = { 3, 3, 3, 2, 0 },
+    [xi.items.TOWER_SHIELD    ] = { 5, 2, 2, 0, 0 },
+    [xi.items.WIVRE_HAIRPIN   ] = { 3, 3, 3, 2, 0 },
+    [xi.items.ADAMAN_BARBUTA  ] = { 6, 6, 6, 4, 0 },
+    [xi.items.DEMONS_RING     ] = { 4, 4, 4, 3, 0 },
+    [xi.items.WIVRE_GORGET    ] = { 3, 3, 3, 0, 0 },
+    [xi.items.JEWELED_COLLAR  ] = { 7, 7, 3, 2, 0 },
+    [xi.items.RASETSU_JINPACHI] = { 2, 2, 2, 0, 0 },
+    [xi.items.TARUTARU_SASH   ] = { 5, 5, 3, 2, 0 },
+    [xi.items.GLEAMING_SPEAR  ] = { 6, 5, 4, 3, 0 },
+    [xi.items.LORE_SLOPS      ] = { 3, 3, 2, 0, 0 },
+    [xi.items.VERSA_MUFFLERS  ] = { 2, 2, 2, 0, 0 },
+    [xi.items.GULES_LEGGINGS  ] = { 4, 4, 3, 0, 0 },
+    [xi.items.GLEAMING_ZAGHNAL] = { 4, 4, 2, 0, 0 },
+    [xi.items.LIGHT_EARRING   ] = { 3, 3, 3, 0, 0 },
+    [xi.items.DIAMOND_RING    ] = { 4, 4, 2, 0, 0 },
+    [xi.items.GULES_MITTENS   ] = { 3, 3, 2, 0, 0 },
+    [xi.items.LORE_SABOTS     ] = { 2, 2, 2, 1, 0 },
+    [xi.items.FIRMAMENT       ] = { 4, 4, 3, 2, 0 },
+    [xi.items.GUISARME        ] = { 4, 4, 3, 2, 0 },
+    [xi.items.RIBAULDEQUIN    ] = { 4, 4, 3, 2, 0 },
+    [xi.items.DIRE_SCYTHE     ] = { 6, 6, 4, 2, 0 },
+    [xi.items.SAVATE_FISTS    ] = { 3, 3, 2, 0, 0 },
+    [xi.items.VODUN_MACE      ] = { 4, 4, 3, 2, 0 },
+    [xi.items.DOOM_TABAR      ] = { 3, 3, 2, 0, 0 },
+    [xi.items.YATAGHAN        ] = { 4, 4, 3, 2, 0 },
+    [xi.items.YUKITSUGU       ] = { 3, 3, 2, 0, 0 },
 }
 
 local function GetAugItemID(npc, slot)

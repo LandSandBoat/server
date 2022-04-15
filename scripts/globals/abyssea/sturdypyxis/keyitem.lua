@@ -16,7 +16,8 @@ xi.pyxis.ki = {}
 ---------------------------------
 local drops =
 {
-    [xi.zone.ABYSSEA_KONSCHTAT]  = {
+    [xi.zone.ABYSSEA_KONSCHTAT]  =
+    {
         xi.ki.FRAGRANT_TREANT_PETAL,
         xi.ki.FETID_RAFFLESIA_STALK,
         xi.ki.DECAYING_MORBOL_TOOTH,
@@ -24,21 +25,75 @@ local drops =
         xi.ki.VENOMOUS_PEISTE_CLAW,
         xi.ki.TATTERED_HIPPOGRYPH_WING,
         xi.ki.CRACKED_WIVRE_HORN,
-        xi.ki.MUCID_AHRIMAN_EYEBALL
+        xi.ki.MUCID_AHRIMAN_EYEBALL,
     },
-    [xi.zone.ABYSSEA_TAHRONGI   ] = {1476,1471,1477,1470,1472,1473,1474,1475,1469,1468},
-    [xi.zone.ABYSSEA_LA_THEINE  ] = {1478,1479,1480,1485,1486,1483,1484,1482,1481},
-    [xi.zone.ABYSSEA_ATTOHWA    ] = {1489,1490,1488,1491,1492,1494},
-    [xi.zone.ABYSSEA_MISAREAUX  ] = {1502,1504,1499,1501,1505,1500},
-    [xi.zone.ABYSSEA_VUNKERL    ] = {1509,1508,1510,1514,1511},
-    [xi.zone.ABYSSEA_ALTEPA     ] = {0,0,0},
-    [xi.zone.ABYSSEA_ULEGUERAND ] = {0,0,0},
-    [xi.zone.ABYSSEA_GRAUBERG   ] = {0,0,0},
+
+    [xi.zone.ABYSSEA_TAHRONGI] =
+    {
+        xi.ki.OVERGROWN_MANDRAGORA_FLOWER,
+        xi.ki.MOSSY_ADAMANTOISE_SHELL,
+        xi.ki.CHIPPED_SANDWORM_TOOTH,
+        xi.ki.GORY_SCORPION_CLAW,
+        xi.ki.FAT_LINED_COCKATRICE_SKIN,
+        xi.ki.SODDEN_SANDWORM_HUSK,
+        xi.ki.LUXURIANT_MANTICORE_MANE,
+        xi.ki.STICKY_GNAT_WING,
+        xi.ki.TORN_BAT_WING,
+        xi.ki.VEINOUS_HECTEYES_EYELID,
+    },
+
+    [xi.zone.ABYSSEA_LA_THEINE] =
+    {
+        xi.ki.MARBLED_MUTTON_CHOP,
+        xi.ki.BLOODIED_SABER_TOOTH,
+        xi.ki.BLOOD_SMEARED_GIGAS_HELM,
+        xi.ki.PELLUCID_FLY_EYE,
+        xi.ki.SHIMMERING_PIXIE_PINION,
+        xi.ki.WARPED_GIGAS_ARMBAND,
+        xi.ki.SEVERED_GIGAS_COLLAR,
+        xi.ki.DENTED_GIGAS_SHIELD,
+        xi.ki.GLITTERING_PIXIE_CHOKER,
+    },
+
+    [xi.zone.ABYSSEA_ATTOHWA] =
+    {
+        xi.ki.BULBOUS_CRAWLER_COCOON,
+        xi.ki.DISTENDED_CHIGOE_ABDOMEN,
+        xi.ki.VENOMOUS_WAMOURA_FEELER,
+        xi.ki.MUCID_WORM_SEGMENT,
+        xi.ki.SHRIVELED_HECTEYES_STALK,
+        xi.ki.CRACKED_SKELETON_CLAVICLE,
+    },
+
+    [xi.zone.ABYSSEA_MISAREAUX] =
+    {
+        xi.ki.CLIPPED_BIRD_WING,
+        xi.ki.GLISTENING_OROBON_LIVER,
+        xi.ki.GNARLED_LIZARD_NAIL,
+        xi.ki.JAGGED_APKALLU_BEAK,
+        xi.ki.DOFFED_POROGGO_HAT,
+        xi.ki.MOLTED_PEISTE_SKIN,
+    },
+
+    [xi.zone.ABYSSEA_VUNKERL] =
+    {
+        xi.ki.OSSIFIED_GARGOUILLE_HAND,
+        xi.ki.INGROWN_TAURUS_NAIL,
+        xi.ki.IMBRUED_VAMPYR_FANG,
+        xi.ki.PULSATING_SOULFLAYER_BEARD,
+        xi.ki.GLOSSY_SEA_MONK_SUCKER,
+    },
+
+    -- TODO: Populate KI Values for these Zones
+    [xi.zone.ABYSSEA_ALTEPA]     = {0, 0, 0},
+    [xi.zone.ABYSSEA_ULEGUERAND] = {0, 0, 0},
+    [xi.zone.ABYSSEA_GRAUBERG]   = {0, 0, 0},
 }
 
 xi.pyxis.ki.setKeyItems = function(npc)
     local zoneId = npc:getZoneID()
     local ki = drops[zoneId][math.random(1, #drops[zoneId])]
+
     npc:setLocalVar("KI", ki)
 end
 

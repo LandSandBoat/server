@@ -75,28 +75,33 @@ xi.pyxis.goldChest.unlock = function(player, csid, option, npc)
 
                     local hints = {}
                     if digit == 0 then
-                        hints = {
-                            [1] = { min= digit        , mid= digit + 1     , max = digit + 2  }
+                        hints =
+                        {
+                            [1] = { min = digit,     mid = digit + 1, max = digit + 2 },
                         }
                     elseif digit == 1 then
-                        hints = {
-                            [1] = { min= digit        , mid= digit + 1     , max = digit + 2  },
-                            [2] = { min= digit - 1    , mid= digit         , max = digit + 1  }
+                        hints =
+                        {
+                            [1] = { min = digit,     mid = digit + 1, max = digit + 2 },
+                            [2] = { min = digit - 1, mid = digit,     max = digit + 1 },
                         }
                     elseif digit == 8 then
-                        hints = {
-                            [1] = { min= digit - 1    , mid= digit         , max = digit + 1  },
-                            [2] = { min= digit - 2    , mid= digit - 1     , max = digit      }
+                        hints =
+                        {
+                            [1] = { min = digit - 1, mid = digit,     max = digit + 1 },
+                            [2] = { min = digit - 2, mid = digit - 1, max = digit     },
                         }
                     elseif digit == 9 then
-                        hints = {
-                            [1] = { min= digit -2     , mid= digit - 1     , max = digit      }
+                        hints =
+                        {
+                            [1] = { min = digit - 2, mid = digit - 1, max = digit     },
                         }
                     else
-                        hints = {
-                            [1] = { min= digit - 2    , mid= digit - 1     , max = digit     },
-                            [2] = { min= digit - 1    , mid= digit         , max = digit + 1 },
-                            [3] = { min= digit        , mid= digit + 1     , max = digit + 2 }
+                        hints =
+                        {
+                            [1] = { min = digit - 2, mid = digit - 1, max = digit     },
+                            [2] = { min = digit - 1, mid = digit,     max = digit + 1 },
+                            [3] = { min = digit,     mid = digit + 1, max = digit + 2 },
                         }
                     end
 

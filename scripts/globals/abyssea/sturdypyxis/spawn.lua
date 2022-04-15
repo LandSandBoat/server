@@ -22,86 +22,107 @@ xi.pyxis.spawn.chestLightValues =
         [xi.abyssea.lightType.AZURE] = 8,
         [xi.abyssea.lightType.AMBER] = 8
     },
+
     [2] = {
         [xi.abyssea.lightType.PEARL] = 10,
         [xi.abyssea.lightType.RUBY ] = 16,
         [xi.abyssea.lightType.AZURE] = 16,
         [xi.abyssea.lightType.AMBER] = 16
     },
+
     [3] = {
-        [xi.abyssea.lightType.PEARL] = 15,
-        [xi.abyssea.lightType.RUBY ] = 32,
-        [xi.abyssea.lightType.AZURE] = 32,
-        [xi.abyssea.lightType.AMBER] = 32,
-        [xi.abyssea.lightType.GOLDEN] = 5,
+        [xi.abyssea.lightType.PEARL]   = 15,
+        [xi.abyssea.lightType.RUBY ]   = 32,
+        [xi.abyssea.lightType.AZURE]   = 32,
+        [xi.abyssea.lightType.AMBER]   = 32,
+        [xi.abyssea.lightType.GOLDEN]  = 5,
         [xi.abyssea.lightType.SILVERY] = 5,
-        [xi.abyssea.lightType.EBON] = 1,
+        [xi.abyssea.lightType.EBON]    = 1,
     },
+
     [4] = {
-        [xi.abyssea.lightType.RUBY ] = 64,
-        [xi.abyssea.lightType.AZURE] = 64,
-        [xi.abyssea.lightType.GOLDEN] = 10,
+        [xi.abyssea.lightType.RUBY ]   = 64,
+        [xi.abyssea.lightType.AZURE]   = 64,
+        [xi.abyssea.lightType.GOLDEN]  = 10,
         [xi.abyssea.lightType.SILVERY] = 10,
-        [xi.abyssea.lightType.EBON] = 2,
+        [xi.abyssea.lightType.EBON]    = 2,
     },
+
     [5] = {
-        [xi.abyssea.lightType.GOLDEN] = 15,
+        [xi.abyssea.lightType.GOLDEN]  = 15,
         [xi.abyssea.lightType.SILVERY] = 15,
-        [xi.abyssea.lightType.EBON] = 3,
+        [xi.abyssea.lightType.EBON]    = 3,
     }
 }
 
 xi.pyxis.spawn.goldCofferSize = {
-    BIG_CHEST = 1159,
+    BIG_CHEST    = 1159,
     LITTLE_CHEST = 1155,
 }
 
 xi.pyxis.spawn.chestMessageByChestType = {
-    [xi.pyxis.chestType.BLUE] = {
-        [xi.pyxis.chestDropType.TEMPORARY_ITEM  ] = {
-            [1] = { messageId = 42, maxItem = 3 }
+    [xi.pyxis.chestType.BLUE] =
+    {
+        [xi.pyxis.chestDropType.TEMPORARY_ITEM] =
+        {
+            [1] = { messageId = 42, maxItem = 3 },
         },
-        [xi.pyxis.chestDropType.RESTORE         ] = {
-            [1] = { messageId = 1 },
-            [2] = { messageId = 4 },
-            [3] = { messageId = 7 },
+
+        [xi.pyxis.chestDropType.RESTORE] =
+        {
+            [1] = { messageId =  1 },
+            [2] = { messageId =  4 },
+            [3] = { messageId =  7 },
             [4] = { messageId = 10 },
-            [5] = { messageId = 13 }
+            [5] = { messageId = 13 },
         },
-        [xi.pyxis.chestDropType.CRUOR           ] = {
-            [1] = { messageId = 2 },
-            [2] = { messageId = 5 },
-            [3] = { messageId = 8 },
+
+        [xi.pyxis.chestDropType.CRUOR] =
+        {
+            [1] = { messageId =  2 },
+            [2] = { messageId =  5 },
+            [3] = { messageId =  8 },
             [4] = { messageId = 11 },
-            [5] = { messageId = 15 }
+            [5] = { messageId = 15 },
         },
-        [xi.pyxis.chestDropType.TIME            ] = {
-            [1] = { messageId = 17 }
+
+        [xi.pyxis.chestDropType.TIME] =
+        {
+            [1] = { messageId = 17 },
         },
-        [xi.pyxis.chestDropType.EXP             ] = {
-            [1] = { messageId = 3 },
-            [2] = { messageId = 6 },
-            [3] = { messageId = 9 },
+
+        [xi.pyxis.chestDropType.EXP] =
+        {
+            [1] = { messageId =  3 },
+            [2] = { messageId =  6 },
+            [3] = { messageId =  9 },
             [4] = { messageId = 12 },
-            [5] = { messageId = 16 }
+            [5] = { messageId = 16 },
         },
-        [xi.pyxis.chestDropType.NUMEROUS_TEMPITEMS  ] = {
+
+        [xi.pyxis.chestDropType.NUMEROUS_TEMPITEMS] =
+        {
             [1] = { messageId = 14 }
         },
     },
-    [xi.pyxis.chestType.GOLD] = {
-        [xi.pyxis.spawn.goldCofferSize.BIG_CHEST] = {
-            [xi.pyxis.chestDropType.TEMPORARY_ITEM ]  = { message = 42, maxItem = 3 },
-            [xi.pyxis.chestDropType.ITEM           ]  = { message = 43, maxItem = 4 },
+
+    [xi.pyxis.chestType.GOLD] =
+    {
+        [xi.pyxis.spawn.goldCofferSize.BIG_CHEST] =
+        {
+            [xi.pyxis.chestDropType.TEMPORARY_ITEM]  = { message = 42, maxItem = 3 },
+            [xi.pyxis.chestDropType.ITEM          ]  = { message = 43, maxItem = 4 },
             [xi.pyxis.chestDropType.POPITEM       ]  = { message = 43, maxItem = 2 },
-            [xi.pyxis.chestDropType.AUGMENTED_ITEM ]  = { message = 44, maxItem = 2 },
-            [xi.pyxis.chestDropType.KEY_ITEM       ]  = { message = 45, maxItem = 1 }
+            [xi.pyxis.chestDropType.AUGMENTED_ITEM]  = { message = 44, maxItem = 2 },
+            [xi.pyxis.chestDropType.KEY_ITEM      ]  = { message = 45, maxItem = 1 },
         },
-        [xi.pyxis.spawn.goldCofferSize.LITTLE_CHEST] = {
-            [xi.pyxis.chestDropType.TEMPORARY_ITEM ]  = { message = 42, maxItem = 3 },
-            [xi.pyxis.chestDropType.ITEM           ]  = { message = 43, maxItem = 4 },
+
+        [xi.pyxis.spawn.goldCofferSize.LITTLE_CHEST] =
+        {
+            [xi.pyxis.chestDropType.TEMPORARY_ITEM]  = { message = 42, maxItem = 3 },
+            [xi.pyxis.chestDropType.ITEM          ]  = { message = 43, maxItem = 4 },
             [xi.pyxis.chestDropType.POPITEM       ]  = { message = 43, maxItem = 2 },
-            [xi.pyxis.chestDropType.AUGMENTED_ITEM ]  = { message = 44, maxItem = 2 }
+            [xi.pyxis.chestDropType.AUGMENTED_ITEM]  = { message = 44, maxItem = 2 },
         }
     }
 }
@@ -202,14 +223,16 @@ end
 
 local function GetBlueChestInfos(player, lightValues)
     -- Lowers the required amount of correct guesses for blue pyxides by 1
-    local abyssitesAmountCorrect = {
+    local abyssitesAmountCorrect =
+    {
         xi.ki.EMERALD_ABYSSITE_OF_ACUMEN,
         xi.ki.CRIMSON_ABYSSITE_OF_ACUMEN,
         xi.ki.IVORY_ABYSSITE_OF_ACUMEN
     }
 
     -- The bearer will experience greater fortune with blue pyxides in Abyssea.
-    local abyssitesExperiences = {
+    local abyssitesExperiences =
+    {
         xi.ki.IVORY_ABYSSITE_OF_KISMET,
         xi.ki.SCARLET_ABYSSITE_OF_KISMET,
         xi.ki.VERMILLION_ABYSSITE_OF_KISMET
@@ -224,17 +247,11 @@ local function GetBlueChestInfos(player, lightValues)
     }
 
     local blueabyssitebonus = 0
-
     local playerAzureLight = lightValues[xi.abyssea.lightType.AZURE]
-
     local chestModel = 965
-
     local chestSize = 3
-
     local chestType = xi.pyxis.chestType.BLUE
-
     local amountCorrectAnswerNeeded = math.random(2, 6)
-
     local chestTier = 1
 
     for i, abyssite in pairs(abyssitesAmountCorrect) do
@@ -276,6 +293,7 @@ local function GetBlueChestInfos(player, lightValues)
     local dropType = tmpTable[math.random(1, #tmpTable)]
 
     local drop = xi.pyxis.spawn.chestMessageByChestType[chestType][dropType][1]
+
     if #xi.pyxis.spawn.chestMessageByChestType[chestType][dropType] > 1 then
         drop = xi.pyxis.spawn.chestMessageByChestType[chestType][dropType][chestTier]
     end
@@ -299,32 +317,28 @@ local function GetBlueChestInfos(player, lightValues)
 end
 
 local function GetRedChestInfos(player, lightValues)
-
     -- The bearer will experience greater fortune with blue pyxides in Abyssea.
-    local abyssitesExperiences = {
+    local abyssitesExperiences =
+    {
         xi.ki.AZURE_ABYSSITE_OF_PROSPERITY,
         xi.ki.JADE_ABYSSITE_OF_PROSPERITY,
-        xi.ki.IVORY_ABYSSITE_OF_PROSPERITY
+        xi.ki.IVORY_ABYSSITE_OF_PROSPERITY,
     }
 
-    local dataRubyTiers = {
+    local dataRubyTiers =
+    {
         [1] = { min = 0  , max = 63  },
         [2] = { min = 64 , max = 127 },
         [3] = { min = 128, max = 191 },
         [4] = { min = 192, max = 223 },
-        [5] = { min = 224, max = 255 }
+        [5] = { min = 224, max = 255 },
     }
 
     local chestModel = 968
-
     local dropType = xi.pyxis.chestDropType.LIGHT
-
     local chestSize = 3
-
     local playerRubyLight = lightValues[xi.abyssea.lightType.RUBY]
-
     local redabyssitebonus = 0
-
     local chestTier = 1
 
     for i, abyssite in pairs(abyssitesExperiences) do
@@ -347,10 +361,12 @@ local function GetRedChestInfos(player, lightValues)
 
     local lightAvailable = {}
     local nb = 1
+
     for key, value in pairs(xi.pyxis.spawn.chestLightValues[chestTier]) do
         lightAvailable[nb] = key
         nb = nb + 1
     end
+
     local randLight = math.random(1, #lightAvailable)
     local light = lightAvailable[randLight]
     local message = xi.pyxis.spawn.lightsMessage[light][chestTier]
@@ -360,10 +376,11 @@ local function GetRedChestInfos(player, lightValues)
 end
 
 local function GetGoldChestInfos(player, lightValues)
-    local abyssites = {
+    local abyssites =
+    {
         xi.ki.VIRIDIAN_ABYSSITE_OF_DESTINY,
         xi.ki.CRIMSON_ABYSSITE_OF_DESTINY,
-        xi.ki.IVORY_ABYSSITE_OF_DESTINY
+        xi.ki.IVORY_ABYSSITE_OF_DESTINY,
     }
 
     local dataAmberTiers = {
@@ -371,21 +388,15 @@ local function GetGoldChestInfos(player, lightValues)
         [2] = { min = 64 , max = 127, maxUnlockNumber = 35 },
         [3] = { min = 128, max = 191, maxUnlockNumber = 46 },
         [4] = { min = 192, max = 223, maxUnlockNumber = 68 },
-        [5] = { min = 224, max = 255, maxUnlockNumber = 90 }
+        [5] = { min = 224, max = 255, maxUnlockNumber = 90 },
     }
 
     local playerAmberLight = lightValues[xi.abyssea.lightType.AMBER]
-
     local chestSize = xi.pyxis.spawn.goldCofferSize.LITTLE_CHEST
-
     local chestType = xi.pyxis.chestType.GOLD
-
     local maxUnlockNumber = 35
-
     local chestTier = 1
-
     local amberabyssitebonus = 0
-
     local chestModel = 969
 
     for i, abyssite in pairs(abyssites) do
@@ -413,9 +424,7 @@ local function GetGoldChestInfos(player, lightValues)
     end
 
     local droptype = math.random(1, #xi.pyxis.spawn.chestMessageByChestType[chestType][chestSize])
-
     local drop = xi.pyxis.spawn.chestMessageByChestType[chestType][chestSize][droptype]
-
     local nbItem = 1
 
     for i = 2, drop.maxItem do

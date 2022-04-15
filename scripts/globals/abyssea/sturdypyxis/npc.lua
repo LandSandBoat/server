@@ -68,7 +68,6 @@ xi.pyxis.npc.contentMessage =
 
 local function GetEvents(chestTier)
     local lockedEvent = 2003 + chestTier
-
     local unlockedEvent = lockedEvent + 64
 
     return lockedEvent, unlockedEvent
@@ -172,15 +171,19 @@ xi.pyxis.npc.onPyxisEventUpdate = function(player, csid, option, input)
             [xi.pyxis.chestDropType.TEMPORARY_ITEM] = function() -- temps
                 xi.pyxis.tempItem.updateEvent(player, npc)
             end,
+
             [xi.pyxis.chestDropType.ITEM] = function() -- basic items
                 xi.pyxis.item.updateEvent(player, npc)
             end,
+
             [xi.pyxis.chestDropType.POPITEM] = function() -- pop items
                 xi.pyxis.popitem.updateEvent(player, npc)
             end,
+
             [xi.pyxis.chestDropType.AUGMENTED_ITEM] = function() -- aug items
                 xi.pyxis.augItem.updateEvent(player, npc)
             end,
+
             [xi.pyxis.chestDropType.KEY_ITEM] = function() -- ki's
                 xi.pyxis.ki.updateEvent(player, npc)
             end,
@@ -214,9 +217,11 @@ xi.pyxis.npc.onPyxisEventFinish = function(player, csid, option, npc)
             [xi.pyxis.chestType.BLUE] = function()
                 xi.pyxis.blueChest.unlock(player, csid, option, npc)
             end,
+
             [xi.pyxis.chestType.RED] = function()
                 xi.pyxis.redChest.unlock(player, csid, option, npc)
             end,
+
             [xi.pyxis.chestType.GOLD] = function()
                 xi.pyxis.goldChest.unlock(player, csid, option, npc)
             end,
@@ -231,15 +236,19 @@ xi.pyxis.npc.onPyxisEventFinish = function(player, csid, option, npc)
                 [xi.pyxis.chestDropType.TEMPORARY_ITEM] = function() -- Temp item
                     xi.pyxis.tempItem.giveTemporaryItem(player, npc, option)
                 end,
+
                 [xi.pyxis.chestDropType.ITEM] = function() -- Item
                     xi.pyxis.item.giveItem(player, npc, option)
                 end,
+
                 [xi.pyxis.chestDropType.POPITEM] = function() -- Item
                     xi.pyxis.popitem.givePopItem(player, npc, option)
                 end,
+
                 [xi.pyxis.chestDropType.AUGMENTED_ITEM] = function() -- AugmentedItem
                     xi.pyxis.augItem.giveAugItem(player, npc, option)
                 end,
+
                 [xi.pyxis.chestDropType.KEY_ITEM] = function() -- KI
                     xi.pyxis.ki.giveKeyItem(player, npc)
                 end,

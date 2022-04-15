@@ -66,6 +66,7 @@ xi.pyxis.restore.giveRestore = function(npc, player)
                 end
             end
         end,
+
         [5] = function()
             player:restoreFromChest(npc, 1)
 

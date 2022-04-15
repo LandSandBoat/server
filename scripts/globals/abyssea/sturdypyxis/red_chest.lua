@@ -26,14 +26,17 @@ local lockwear = {
 
 local function GetLockwearMessage(npc)
     local lockwearmessage  = npc:getLocalVar("LOCKWEARMESSAGE")
-    if (lockwearmessage == 0 or lockwearmessage == nil) then
+
+    if lockwearmessage == 0 or lockwearmessage == nil then
         lockwearmessage = math.random(1, 4)
     end
+
     return lockwearmessage
 end
 
 local function SetLockwearAdd(npc, lockwearmessage)
     local lockwearmax = lockwear[lockwearmessage]
+
     npc:setLocalVar("LOCKWEARADD", math.random(0, lockwearmax))
 end
 
@@ -65,9 +68,11 @@ end
 
 xi.pyxis.redChest.unlock = function(player, csid, option, npc)
     local lockedchoice     = bit.lshift(1, option)
+
     if lockedchoice == 1 then
         return
     end
+
     local ID               = zones[player:getZoneID()]
     local currentAttempts  = npc:getLocalVar("CURRENT_ATTEMPTS")
     local attemptsallowed  = 5
