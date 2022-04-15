@@ -39,7 +39,7 @@ CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type
     this->setSize(0x58);
 
     ref<uint32>(0x04) = PEntity->id;
-    ref<uint16>(0x08) = PEntity->targid;
+    ref<uint16>(0x08) = PEntity->targid; // 0x0E entity updates are valid for 0 to 1023 and 1792 to 2303
     ref<uint8>(0x0A)  = updatemask;
 
     switch (type)
