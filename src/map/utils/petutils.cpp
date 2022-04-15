@@ -1596,7 +1596,10 @@ namespace petutils
             PPet->SetMLevel(PMaster->GetMLevel());
             PPet->health.maxhp = (uint32)floor((250 * PPet->GetMLevel()) / 15);
             PPet->health.hp    = PPet->health.maxhp;
-
+            // This sets the correct visual size for the luopan as pets currently
+            // do not make use of the entity flags in the database
+            // TODO: make pets use entity flags
+            PPet->m_flags      = 0x0000008B;
             // Just sit, do nothing
             PPet->speed = 0;
         }

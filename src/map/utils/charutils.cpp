@@ -364,7 +364,8 @@ namespace charutils
                                "isstylelocked,"                // 27
                                "moghancement,"                 // 28
                                "UNIX_TIMESTAMP(`lastupdate`)," // 29
-                               "languages "                    // 30
+                               "languages,"                    // 30
+                               "chatfilters "                  // 31
                                "FROM chars "
                                "WHERE charid = %u";
 
@@ -449,6 +450,7 @@ namespace charutils
             PChar->SetMoghancement(sql->GetUIntData(28));
             PChar->lastOnline = sql->GetUIntData(29);
             PChar->search.language = (uint8)sql->GetUIntData(30);
+            PChar->chatFilterFlags = sql->GetUInt64Data(31);
         }
 
         LoadSpells(PChar);
@@ -763,7 +765,7 @@ namespace charutils
         }
 
         fmtQuery = "SELECT outpost_sandy, outpost_bastok, outpost_windy, runic_portal, maw, "
-                   "campaign_sandy, campaign_bastok, campaign_windy, homepoints, survivals "
+                   "campaign_sandy, campaign_bastok, campaign_windy, homepoints, survivals, abyssea_conflux "
                    "FROM char_unlocks "
                    "WHERE charid = %u;";
 
@@ -789,6 +791,11 @@ namespace charutils
             buf    = nullptr;
             sql->GetData(9, &buf, &length);
             memcpy(&PChar->teleport.survival, buf, (length > sizeof(PChar->teleport.survival) ? sizeof(PChar->teleport.survival) : length));
+
+            length = 0;
+            buf    = nullptr;
+            sql->GetData(10, &buf, &length);
+            memcpy(&PChar->teleport.abysseaConflux, buf, (length > sizeof(PChar->teleport.abysseaConflux) ? sizeof(PChar->teleport.abysseaConflux) : length));
         }
 
         PChar->PMeritPoints = new CMeritPoints(PChar);
@@ -796,6 +803,7 @@ namespace charutils
         PChar->PMeritPoints->SetLimitPoints(limitPoints);
         PChar->PJobPoints = new CJobPoints(PChar);
 
+        // TODO: Roll this into the first query to chars
         fmtQuery = "SELECT "
                    "gmlevel, "    // 0
                    "mentor, "     // 1
@@ -842,7 +850,8 @@ namespace charutils
         PChar->health.hp = zoneutils::IsResidentialArea(PChar) ? PChar->GetMaxHP() : HP;
         PChar->health.mp = zoneutils::IsResidentialArea(PChar) ? PChar->GetMaxMP() : MP;
         PChar->UpdateHealth();
-        PChar->currentEvent->eventId = luautils::OnZoneIn(PChar);
+
+        luautils::OnZoneIn(PChar);
         luautils::OnGameIn(PChar, zoning == 1);
     }
 
@@ -4865,6 +4874,32 @@ namespace charutils
     }
 
     /************************************************************************
+    *                                                                       *
+    *  Save the char's chat filter flags                                    *
+    *                                                                       *
+    ************************************************************************/
+
+    void SaveChatFilterFlags(CCharEntity* PChar)
+    {
+        const char* Query = "UPDATE chars SET chatfilters = %llu WHERE charid = %u;";
+
+        sql->Query(Query, PChar->chatFilterFlags, PChar->id);
+    }
+
+    /************************************************************************
+    *                                                                       *
+    *  Save the char's language preference                                  *
+    *                                                                       *
+    ************************************************************************/
+
+    void SaveLanguages(CCharEntity* PChar)
+    {
+        const char* Query = "UPDATE chars SET languages = %u WHERE charid = %u;";
+
+        sql->Query(Query, PChar->search.language, PChar->id);
+    }
+
+    /************************************************************************
      *                                                                       *
      *  Saves character nation changes                                       *
      *                                                                       *
@@ -5173,6 +5208,14 @@ namespace charutils
                 sql->Query(query, buf, PChar->id);
                 return;
             }
+            case TELEPORT_TYPE::ABYSSEA_CONFLUX:
+            {
+                char buf[sizeof(PChar->teleport.abysseaConflux) * 2 + 1];
+                sql->EscapeStringLen(buf, (const char*)&PChar->teleport.abysseaConflux, sizeof(PChar->teleport.abysseaConflux));
+                const char* query = "UPDATE char_unlocks SET abyssea_conflux = '%s' WHERE charid = %u;";
+                sql->Query(query, buf, PChar->id);
+                return;
+            }
             default:
                 ShowError("charutils:SaveTeleport : Unknown type parameter.");
                 return;
@@ -5185,7 +5228,7 @@ namespace charutils
     float AddExpBonus(CCharEntity* PChar, float exp)
     {
         int32 bonus = 0;
-        if (PChar->StatusEffectContainer->GetStatusEffect(EFFECT_DEDICATION))
+        if (PChar->StatusEffectContainer->GetStatusEffect(EFFECT_DEDICATION) && PChar->loc.zone->GetRegionID() != REGION_TYPE::ABYSSEA)
         {
             CStatusEffect* dedication = PChar->StatusEffectContainer->GetStatusEffect(EFFECT_DEDICATION);
             int16          percentage = dedication->GetPower();
@@ -5626,7 +5669,7 @@ namespace charutils
 
         // Attempt to disband party if the last trust was just released
         // NOTE: Trusts are not counted as party members, so the current member count will be 1
-        if (PChar->PParty && PChar->PParty->members.size() == 1 && PChar->PTrusts.empty())
+        if (PChar->PParty && PChar->PParty->HasOnlyOneMember() && PChar->PTrusts.empty())
         {
             // Looks good so far, check OTHER processes to see if we should disband
             if (PChar->PParty->GetMemberCountAcrossAllProcesses() == 1)

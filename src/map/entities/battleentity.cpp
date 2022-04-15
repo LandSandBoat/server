@@ -88,6 +88,8 @@ CBattleEntity::CBattleEntity()
     m_Immunity   = 0;
     isCharmed    = false;
     m_unkillable = false;
+
+    m_DeathType = DEATH_TYPE::NONE;
 }
 
 CBattleEntity::~CBattleEntity() = default;
@@ -222,6 +224,7 @@ int32 CBattleEntity::GetMaxMP() const
 
 uint8 CBattleEntity::GetSpeed()
 {
+    // Note: retail treats mounted speed as double what it actually is! 40 is in fact retail accurate!
     int16 startingSpeed = isMounted() ? 40 + map_config.mount_speed_mod : speed;
     // Mod::MOVE (169)
     // Mod::MOUNT_MOVE (972)
@@ -876,6 +879,16 @@ void CBattleEntity::SetSLevel(uint8 slvl)
     {
         sql->Query("UPDATE char_stats SET slvl = %u WHERE charid = %u LIMIT 1;", m_slvl, this->id);
     }
+}
+
+void CBattleEntity::SetDeathType(uint8 type)
+{
+    m_DeathType = static_cast<DEATH_TYPE>(type);
+}
+
+uint8 CBattleEntity::GetDeathType()
+{
+    return static_cast<uint8>(m_DeathType);
 }
 
 /************************************************************************

@@ -1653,7 +1653,7 @@ namespace luautils
      *                                                                       *
      ************************************************************************/
 
-    int32 OnZoneIn(CCharEntity* PChar)
+    void OnZoneIn(CCharEntity* PChar)
     {
         TracyZoneScoped;
 
@@ -1667,10 +1667,20 @@ namespace luautils
         {
             sol::error err = result;
             ShowError("luautils::onZoneIn: %s", err.what());
-            return -1;
+            return;
         }
 
-        return result.get_type() == sol::type::number ? result : -1;
+        if (result.get_type() == sol::type::table)
+        {
+            auto resultTable = result.get<sol::table>();
+
+            PChar->currentEvent->eventId   = resultTable.get_or(1, -1);
+            PChar->currentEvent->textTable = resultTable.get_or(2, -1);
+        }
+        else if (result.get_type() == sol::type::number)
+        {
+            PChar->currentEvent->eventId = result.get<int32>();
+        }
     }
 
     void AfterZoneIn(CBaseEntity* PChar)
@@ -2425,8 +2435,7 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        // TODO: This shouldn't be global, attach to xi.gear_sets or similar
-        auto checkForGearSet = lua["checkForGearSet"];
+        auto checkForGearSet = lua["xi"]["gear_sets"]["checkForGearSet"];
         if (!checkForGearSet.valid())
         {
             return 56;
@@ -3062,8 +3071,7 @@ namespace luautils
         CCharEntity* PChar = dynamic_cast<CCharEntity*>(PKiller);
         if (PChar && PMob->objtype == TYPE_MOB)
         {
-            // TODO: Don't save this globally
-            auto onMobDeathEx = lua["onMobDeathEx"];
+            auto onMobDeathEx = lua["xi"]["mob"]["onMobDeathEx"];
             if (!onMobDeathEx.valid())
             {
                 return -1;

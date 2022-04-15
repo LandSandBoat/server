@@ -27,7 +27,6 @@ xi.spells.spell_song_enhancing.calculateEnhancingPower = function(caster, target
     local potencyCap  = enhancingTable[spellId][9]
     local multiplier  = enhancingTable[spellId][10]
     local divisor     = enhancingTable[spellId][11]
-
     local singingLvl  = caster:getSkillLevel(xi.skill.SINGING) + caster:getWeaponSkillLevel(xi.slot.RANGED)
 
     -- Get Potency bonuses from Singing Skill and Instrument Skill. TODO: Investigate JP-Wiki. Most of this makes no sense.
@@ -64,11 +63,11 @@ xi.spells.spell_song_enhancing.calculateEnhancingPower = function(caster, target
                     power = power + 1
                 end
             -- NOTE: Aubade, Capriccio, Gavotte, Madrigal, March, Minne, Minuet, Operetta, Pastoral, Prelude, Round.
-            elseif not divisor == 0 then
+            elseif divisor > 0 then
                 power = math.floor(power + (singingLvl - skillCap) / divisor)
             end
         end
-        -- NOTE: Ballad, Hymnus, Mazurka have constant base power.
+        -- NOTE: Ballad, Hymnus, Mazurka power doesn't scale with skill.
     end
 
     -- Apply Cap to power. (Applied before Merits, Job-Points and Status-Effects)
@@ -80,12 +79,12 @@ xi.spells.spell_song_enhancing.calculateEnhancingPower = function(caster, target
     power = math.floor(power + instrumentBoost * multiplier)
 
     -- Additional Potency from Merits.
-    if not meritEffect == 0 then
+    if meritEffect ~= 0 then
         power = math.floor(power + caster:getMerit(meritEffect))
     end
 
     -- Additional Potency from Job Points.
-    if not jpEffect == 0 then
+    if jpEffect ~= 0 then
         power = math.floor(power + caster:getJobPointLevel(jpEffect))
     end
 

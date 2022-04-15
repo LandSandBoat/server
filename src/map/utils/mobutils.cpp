@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -1366,6 +1366,9 @@ Usage:
                 // must be here first to define mobmods
                 mobutils::InitializeMob(PMob, zoneutils::GetZone(zoneID));
 
+                // TODO: This shouldn't go into the pet list, it appears to only
+                //     : do this because that was the only way to have temporary
+                //     : entities at the time.
                 zoneutils::GetZone(zoneID)->InsertPET(PMob);
 
                 luautils::OnEntityLoad(PMob);

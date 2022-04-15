@@ -105,7 +105,7 @@ entity.onEventUpdate = function(player, csid, option)
 
         -- main menu (param1 = dynamis map bitmask, param2 = gil)
         elseif (option == 11) then
-            player:updateEvent(getDynamisMapList(player), player:getGil())
+            player:updateEvent(xi.dynamis.getDynamisMapList(player), player:getGil())
 
         -- maps
         elseif (maps[option] ~= nil) then
@@ -117,7 +117,7 @@ entity.onEventUpdate = function(player, csid, option)
                 player:addKeyItem(option)
                 player:messageSpecial(ID.text.KEYITEM_OBTAINED, option)
             end
-            player:updateEvent(getDynamisMapList(player), player:getGil())
+            player:updateEvent(xi.dynamis.getDynamisMapList(player), player:getGil())
 
         end
     end

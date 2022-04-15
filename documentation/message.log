@@ -226,7 +226,7 @@
 226 - The <player> uses .. .. TP drained from <target>.
 227 - The <player> casts (NULL). .. HP drained from <target>.
 228 - The <player> casts (NULL). .. MP drained from <target>.
-229 - Additional effect: <target> takes 0 additional points of damage.
+229 - Additional effect: <target> takes <number> additional points of damage.
 230 - The <player> casts (NULL). <target> gains the effect of stun.
 231 - The <player> uses .. .. of <target>'s effects disappear!
 232 - <target> is drawn in!

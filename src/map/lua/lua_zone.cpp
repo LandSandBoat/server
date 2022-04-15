@@ -117,6 +117,13 @@ sol::table CLuaZone::getNPCs()
     return table;
 }
 
+sol::table CLuaZone::getMobs()
+{
+    auto table = luautils::lua.create_table();
+    m_pLuaZone->ForEachMob([&table](CMobEntity* PMob) { table.add(CLuaBaseEntity(PMob)); });
+    return table;
+}
+
 ZONEID CLuaZone::getID()
 {
     return m_pLuaZone->GetID();
@@ -188,7 +195,12 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
     //       on despawn/destruction
     // TODO: The tracking of these IDs is pretty bad also, fix that in zone_entities
     PEntity->targid = m_pLuaZone->GetZoneEntities()->GetNewDynamicTargID();
-    PEntity->id     = 0x1000000 + (ZoneID << 12) + PEntity->targid;
+    if (PEntity->targid >= 0x900)
+    {
+        ShowError("CLuaZone::insertDynamicEntity : targid is high (03hX), update packets will be ignored", PEntity->targid);
+    }
+
+    PEntity->id = 0x1000000 + (ZoneID << 12) + PEntity->targid;
 
     PEntity->loc.zone       = m_pLuaZone;
     PEntity->loc.p.rotation = table.get_or<uint8>("rotation", 0);
@@ -211,6 +223,8 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
 
     PEntity->name = lookupName;
     PEntity->packetName = name;
+
+    PEntity->isRenamed = true;
 
     auto typeKey = (PEntity->objtype == TYPE_NPC) ? "npcs" : "mobs";
     auto cacheEntry = lua[sol::create_if_nil]["xi"]["zones"][(const char*)m_pLuaZone->GetName()][typeKey][lookupName];
@@ -375,6 +389,7 @@ void CLuaZone::Register()
     SOL_REGISTER("levelRestriction", CLuaZone::levelRestriction);
     SOL_REGISTER("getPlayers", CLuaZone::getPlayers);
     SOL_REGISTER("getNPCs", CLuaZone::getNPCs);
+    SOL_REGISTER("getMobs", CLuaZone::getMobs);
     SOL_REGISTER("getID", CLuaZone::getID);
     SOL_REGISTER("getName", CLuaZone::getName);
     SOL_REGISTER("getRegionID", CLuaZone::getRegionID);

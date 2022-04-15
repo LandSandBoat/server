@@ -47,6 +47,7 @@ public:
     sol::object levelRestriction();
     auto        getPlayers() -> sol::table;
     auto        getNPCs() -> sol::table;
+    auto        getMobs() -> sol::table;
     ZONEID      getID();
     std::string getName();
     REGION_TYPE getRegionID();

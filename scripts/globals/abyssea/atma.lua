@@ -1,19 +1,15 @@
 -----------------------------------
---
--- xi.effect.ATMA
---
--- Also used for Voidwatch Atmacite (it is a single effect in the client).
+-- Abyssea Atma Global
 -----------------------------------
+require("scripts/globals/abyssea")
 require("scripts/globals/keyitems")
 require("scripts/globals/status")
+require("scripts/globals/utils")
 -----------------------------------
-
 xi = xi or {}
 xi.atma = xi.atma or {}
 
-local ATMA_OFFSET = xi.ki.ATMA_OF_THE_LION - 1
-
-local atmaMods =
+xi.atma.atmaMods =
 {
     -- GROUP 1
     [xi.ki.ATMA_OF_THE_LION]                   = {xi.mod.TRIPLE_ATTACK, 7, xi.mod.DMGPHYS, -1000, xi.mod.THUNDERATT, 30},
@@ -118,69 +114,213 @@ local atmaMods =
     [xi.ki.ATMA_OF_THE_APOCALYPSE]             = {xi.mod.TRIPLE_ATTACK, 15, xi.mod.RERAISE_III, 1, xi.mod.QUICK_MAGIC, 10},
 
     -- GROUP 2
-    [xi.ki.ATMA_OF_THE_HEIR]                   = {},
-    [xi.ki.ATMA_OF_THE_HERO]                   = {},
-    [xi.ki.ATMA_OF_THE_FULL_MOON]              = {},
-    [xi.ki.ATMA_OF_ILLUSIONS]                  = {},
-    [xi.ki.ATMA_OF_THE_BANISHER]               = {},
-    [xi.ki.ATMA_OF_THE_SELLSWORD]              = {},
-    [xi.ki.ATMA_OF_A_FUTURE_FABULOUS]          = {},
-    [xi.ki.ATMA_OF_CAMARADERIE]                = {},
-    [xi.ki.ATMA_OF_THE_TRUTHSEEKER]            = {},
-    [xi.ki.ATMA_OF_THE_AZURE_SKY]              = {},
-    [xi.ki.ATMA_OF_ECHOES]                     = {},
-    [xi.ki.ATMA_OF_DREAD]                      = {},
-    [xi.ki.ATMA_OF_AMBITION]                   = {},
-    [xi.ki.ATMA_OF_THE_BEAST_KING]             = {},
-    [xi.ki.ATMA_OF_THE_KIRIN]                  = {},
-    [xi.ki.ATMA_OF_HELLS_GUARDIAN]             = {},
-    [xi.ki.ATMA_OF_LUMINOUS_WINGS]             = {},
-    [xi.ki.ATMA_OF_THE_DRAGON_RIDER]           = {},
-    [xi.ki.ATMA_OF_THE_IMPENETRABLE]           = {},
-    [xi.ki.ATMA_OF_ALPHA_AND_OMEGA]            = {},
-    [xi.ki.ATMA_OF_THE_ULTIMATE]               = {},
-    [xi.ki.ATMA_OF_THE_HYBRID_BEAST]           = {},
-    [xi.ki.ATMA_OF_THE_DARK_DEPTHS]            = {},
-    [xi.ki.ATMA_OF_THE_ZENITH]                 = {},
-    [xi.ki.ATMA_OF_PERFECT_ATTENDANCE]         = {},
-    [xi.ki.ATMA_OF_THE_RESCUER]                = {},
-    [xi.ki.ATMA_OF_NIGHTMARES]                 = {},
-    [xi.ki.ATMA_OF_THE_EINHERJAR]              = {},
-    [xi.ki.ATMA_OF_THE_ILLUMINATOR]            = {},
-    [xi.ki.ATMA_OF_THE_BUSHIN]                 = {},
-    [xi.ki.ATMA_OF_THE_ACE_ANGLER]             = {},
-    [xi.ki.ATMA_OF_THE_MASTER_CRAFTER]         = {},
-    [xi.ki.ATMA_OF_INGENUITY]                  = {},
-    [xi.ki.ATMA_OF_THE_GRIFFONS_CLAW]          = {},
-    [xi.ki.ATMA_OF_THE_FETCHING_FOOTPAD]       = {},
-    [xi.ki.ATMA_OF_UNDYING_LOYALTY]            = {},
-    [xi.ki.ATMA_OF_THE_ROYAL_LINEAGE]          = {},
-    [xi.ki.ATMA_OF_THE_SHATTERING_STAR]        = {},
-    [xi.ki.ATMA_OF_THE_COBRA_COMMANDER]        = {},
-    [xi.ki.ATMA_OF_ROARING_LAUGHTER]           = {},
-    [xi.ki.ATMA_OF_THE_DARK_BLADE]             = {},
-    [xi.ki.ATMA_OF_THE_DUCAL_GUARD]            = {},
-    [xi.ki.ATMA_OF_HARMONY]                    = {},
-    [xi.ki.ATMA_OF_REVELATIONS]                = {},
-    [xi.ki.ATMA_OF_THE_SAVIOR]                 = {},
+    [xi.ki.ATMA_OF_THE_HEIR]                   = { xi.mod.MPP, 5, xi.mod.REGAIN, 5, xi.mod.LIGHTACC, 20 },
+    [xi.ki.ATMA_OF_THE_HERO]                   = { xi.mod.STR, 10, xi.mod.CRIT_DMG_INCREASE, 15, xi.mod.REGEN, 5 },
+    [xi.ki.ATMA_OF_THE_FULL_MOON]              = { xi.mod.INT, 10, xi.mod.MATT, 10, xi.mod.REFRESH, 5 },
+    [xi.ki.ATMA_OF_ILLUSIONS]                  = { xi.mod.MND, 10, xi.mod.MAG_BURST_BONUS, 10, xi.mod.DAY_NUKE_BONUS, 10 },
+    [xi.ki.ATMA_OF_THE_BANISHER]               = { },
+    [xi.ki.ATMA_OF_THE_SELLSWORD]              = { },
+    [xi.ki.ATMA_OF_A_FUTURE_FABULOUS]          = { },
+    [xi.ki.ATMA_OF_CAMARADERIE]                = { },
+    [xi.ki.ATMA_OF_THE_TRUTHSEEKER]            = { },
+    [xi.ki.ATMA_OF_THE_AZURE_SKY]              = { },
+    [xi.ki.ATMA_OF_ECHOES]                     = { },
+    [xi.ki.ATMA_OF_DREAD]                      = { },
+    [xi.ki.ATMA_OF_AMBITION]                   = { },
+    [xi.ki.ATMA_OF_THE_BEAST_KING]             = { },
+    [xi.ki.ATMA_OF_THE_KIRIN]                  = { },
+    [xi.ki.ATMA_OF_HELLS_GUARDIAN]             = { },
+    [xi.ki.ATMA_OF_LUMINOUS_WINGS]             = { },
+    [xi.ki.ATMA_OF_THE_DRAGON_RIDER]           = { },
+    [xi.ki.ATMA_OF_THE_IMPENETRABLE]           = { },
+    [xi.ki.ATMA_OF_ALPHA_AND_OMEGA]            = { },
+    [xi.ki.ATMA_OF_THE_ULTIMATE]               = { },
+    [xi.ki.ATMA_OF_THE_HYBRID_BEAST]           = { },
+    [xi.ki.ATMA_OF_THE_DARK_DEPTHS]            = { },
+    [xi.ki.ATMA_OF_THE_ZENITH]                 = { },
+    [xi.ki.ATMA_OF_PERFECT_ATTENDANCE]         = { },
+    [xi.ki.ATMA_OF_THE_RESCUER]                = { },
+    [xi.ki.ATMA_OF_NIGHTMARES]                 = { },
+    [xi.ki.ATMA_OF_THE_EINHERJAR]              = { },
+    [xi.ki.ATMA_OF_THE_ILLUMINATOR]            = { },
+    [xi.ki.ATMA_OF_THE_BUSHIN]                 = { },
+    [xi.ki.ATMA_OF_THE_ACE_ANGLER]             = { },
+    [xi.ki.ATMA_OF_THE_MASTER_CRAFTER]         = { },
+    [xi.ki.ATMA_OF_INGENUITY]                  = { },
+    [xi.ki.ATMA_OF_THE_GRIFFONS_CLAW]          = { },
+    [xi.ki.ATMA_OF_THE_FETCHING_FOOTPAD]       = { },
+    [xi.ki.ATMA_OF_UNDYING_LOYALTY]            = { },
+    [xi.ki.ATMA_OF_THE_ROYAL_LINEAGE]          = { },
+    [xi.ki.ATMA_OF_THE_SHATTERING_STAR]        = { },
+    [xi.ki.ATMA_OF_THE_COBRA_COMMANDER]        = { },
+    [xi.ki.ATMA_OF_ROARING_LAUGHTER]           = { },
+    [xi.ki.ATMA_OF_THE_DARK_BLADE]             = { },
+    [xi.ki.ATMA_OF_THE_DUCAL_GUARD]            = { },
+    [xi.ki.ATMA_OF_HARMONY]                    = { },
+    [xi.ki.ATMA_OF_REVELATIONS]                = { },
+    [xi.ki.ATMA_OF_THE_SAVIOR]                 = { },
 }
 
-xi.atma.onEffectGain = function(target, effect)
-    local atma = ATMA_OFFSET + effect:getPower()
-    local mods = atmaMods[atma]
-    if mods ~= nil then
-        for i = 1, #mods, 2 do
-            target:addMod(i, i + 1)
+-- Group 1 Atma consists of 4 parameter values, followed by 2 parameter values for
+-- Group 2.  Calculate these separately just in case there's future additions or changes.
+-- There is minimal impact to efficiency, as we only iterate over each individual
+-- key item once.  Depending on opinion, this could easily be combined into one loop
+-- in the future; however, we would need to check for the offset to modify parameter
+-- number in the array.  See: onTrigger function for handling in a single loop
+local function getAtmaMask(player)
+	local atmaMask = { 0, 0, 0, 0, 0, 0 }
+
+    local atmaCount = xi.ki.ATMA_OF_THE_APOCALYPSE - xi.ki.ATMA_OF_THE_LION
+	local atmaBase = xi.ki.ATMA_OF_THE_LION - 1
+	for i = 1, atmaCount + 1 do
+		if player:hasKeyItem(atmaBase + i) then
+			local parameterNum = math.floor((i + 32) / 32)
+            local atmaOffset = bit.lshift(1, (i - 1) % 32)
+
+            atmaMask[parameterNum] = atmaMask[parameterNum] + atmaOffset
+		end
+	end
+
+    atmaCount = xi.ki.ATMA_OF_THE_SAVIOR - xi.ki.ATMA_OF_THE_HEIR
+	atmaBase = xi.ki.ATMA_OF_THE_HEIR - 1
+	for i = 1, atmaCount + 1 do
+		if player:hasKeyItem(atmaBase + i) then
+			local parameterNum = math.floor((i + 32) / 32) + 4
+            local atmaOffset = bit.lshift(1, (i - 1) % 32)
+
+            atmaMask[parameterNum] = atmaMask[parameterNum] + atmaOffset
+		end
+	end
+
+	return atmaMask
+end
+
+local function getFreeAtmaSlot(player)
+    local lunarAbyssiteCount = xi.abyssea.getAbyssiteTotal(player, xi.abyssea.abyssiteType.LUNAR)
+
+    for atmaSlot = 1, lunarAbyssiteCount do
+        if not player:hasStatusEffect(xi.effect.ATMA, atmaSlot) then
+            return atmaSlot
         end
+    end
+
+    return 0
+end
+
+local function hasDuplicateAtmaEffect(player, atmaValue)
+    for atmaSlot = 1, 3 do
+        local atmaEffect = player:getStatusEffect(xi.effect.ATMA, atmaSlot)
+
+        if atmaEffect and atmaEffect:getPower() == atmaValue then
+            return true
+        end
+    end
+
+    return false
+end
+
+local function delAtma(player, selectedAtma)
+	if player:hasStatusEffect(xi.effect.ATMA, selectedAtma) then
+		player:delStatusEffect(xi.effect.ATMA, selectedAtma)
     end
 end
 
+local function addAtma(player, selectedAtma)
+	local atmaBase = xi.ki.ATMA_OF_THE_LION - 1
+	local atmaValue = atmaBase + selectedAtma
+    local availableAtmaSlot = getFreeAtmaSlot(player)
+
+	if
+        availableAtmaSlot > 0 and
+        not hasDuplicateAtmaEffect(player, atmaValue)
+    then
+		player:addStatusEffectEx(xi.effect.ATMA, xi.effect.ATMA, atmaValue, 0, 0, availableAtmaSlot)
+
+		local atmaEffect = player:getStatusEffect(xi.effect.ATMA, availableAtmaSlot)
+		atmaEffect:setFlag(xi.effectFlag.ON_ZONE)
+		atmaEffect:setFlag(xi.effectFlag.INFLUENCE)
+	end
+end
+
+xi.atma.onEffectGain = function(target, effect)
+	local atma = effect:getPower()
+	local mods = xi.atma.atmaMods[atma]
+	if mods ~= nil then
+		for i = 1, #mods, 2 do
+			target:addMod(mods[i], mods[i + 1])
+		end
+	end
+end
+
+xi.atma.onEffectTick = function(target, effect)
+	if not xi.abyssea.isInAbysseaZone(target) then
+		target:delStatusEffect(effect)
+	end
+end
+
 xi.atma.onEffectLose = function(target, effect)
-    local atma = ATMA_OFFSET + effect:getPower()
-    local mods = atmaMods[atma]
-    if mods ~= nil then
-        for i = 1, #mods, 2 do
-            target:delMod(i, i + 1)
+	local atma = effect:getPower()
+	local mods = xi.atma.atmaMods[atma]
+
+	if mods ~= nil then
+		for i = 1, #mods, 2 do
+			target:delMod(mods[i], mods[i + 1])
+		end
+	end
+end
+
+xi.atma.onTrigger = function(player,npc)
+    local atmaMask   = getAtmaMask(player)
+    local activeAtma = { 0, 0, 0 }
+	local menuParams = 0x1000000
+
+    local shiftVal = 0
+    for atmaSlot = 1, 3 do
+        if player:hasStatusEffect(xi.effect.ATMA, atmaSlot) then
+            activeAtma[atmaSlot] = player:getStatusEffect(xi.effect.ATMA, atmaSlot):getPower()
+
+            -- Remove active Atmas from their appropriate bitfield
+	        if activeAtma[atmaSlot] ~= 0 then
+                local groupOffset = activeAtma[atmaSlot] >= xi.ki.ATMA_OF_THE_HEIR and xi.ki.ATMA_OF_THE_HEIR or xi.ki.ATMA_OF_THE_LION
+                local parameterNum = math.floor((activeAtma[atmaSlot] - groupOffset + 1 + 32) / 32)
+
+                if groupOffset >= xi.ki.ATMA_OF_THE_HEIR then
+                    parameterNum = parameterNum + 4
+                end
+
+		        menuParams = menuParams + bit.lshift(activeAtma[atmaSlot] - groupOffset + 1, shiftVal * 8)
+		        atmaMask[parameterNum] = atmaMask[parameterNum] - bit.lshift(1, (activeAtma[atmaSlot] - groupOffset) % 32)
+                shiftVal = shiftVal + 1
+	        end
+
+            -- Set Bits for Active Atma Count (Two different bytes!)
+            if atmaSlot == 1 then
+                menuParams = menuParams + 0x1000000
+            else
+                menuParams = menuParams + 0x10000000
+            end
         end
     end
+
+	if getFreeAtmaSlot(player) == 0 then
+		atmaMask[1] = 0
+	end
+
+	player:startEvent(2003, 7548, menuParams, atmaMask[1], atmaMask[2], atmaMask[3], atmaMask[4], atmaMask[5], atmaMask[6])
+end
+
+xi.atma.onEventUpdate = function(player,csid,option)
+	player:updateEvent(0,0)
+end
+
+xi.atma.onEventFinish = function(player,csid,option)
+	if option < 0x40000000 then
+		if option % 0x10000 == 1 then
+			local selection = (option - 1) / 0x10000
+			addAtma(player, selection)
+		else
+			local selection = (option - 2) / 0x10000
+			delAtma(player, selection)
+		end
+	end
 end

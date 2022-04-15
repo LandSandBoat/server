@@ -21,16 +21,141 @@
 
 #include "commandhandler.h"
 
+#include "../common/utils.h"
 #include "entities/charentity.h"
-#include "spdlog/fmt/fmt.h"
-#include "lua/luautils.h"
 #include "lua/lua_baseentity.h"
+#include "lua/luautils.h"
+#include "spdlog/fmt/fmt.h"
 
+#include <cmath>
+#include <iostream>
 #include <sstream>
+#include <string>
+#include <variant>
+#include <vector>
+
+// NOTE: Auto-translate blocks are dealt with as a string of bytes
+using CommandArg = std::variant<bool, int, double, std::string>;
+
+// The below section is a proposed rewrite of commandhandler.
+// It can automatically deduce the types of strings that are passed to it.
+//
+// Test strings:
+// bools: true True false False TRUE FALSE
+// ints: 0 1 0x01 0xFF
+// floats: 1.2 .1 1.4f
+// strings: naked_string \"a string\" \'a string\' \"embedded \'string 1\'\" \'embedded \"string 2\"\'
+//
+// The issue with this, is that there is no easy way to interpret the entire string as one long string
+// without surrounding it with quotes. If this can be nicely handled then the below code is ready
+// to go!
+
+/*
+CommandArg deduceArgType(std::string& str)
+{
+    // Look for auto-translate byte blocks
+    if (str.length() == 6 &&
+        str.front() == -3 &&
+        str.back() == -3)
+    {
+        // Return as-is, no need to further checks or transformations
+        return str;
+    }
+
+    try
+    {
+        float d = std::stof(str);
+        float intpart;
+        if (std::modf(d, &intpart) == 0.0)
+        {
+            return static_cast<int>(intpart);
+        }
+        else
+        {
+            // float
+            return d;
+        }
+    }
+    catch (std::exception&)
+    {
+        // Must be a string of some kind
+    }
+
+    // bools
+    std::string lower = "";
+    for (auto& ch : str)
+    {
+        lower += std::tolower(ch);
+    }
+
+    if (lower == "true") { return true; }
+    if (lower == "false") { return false; }
+
+    // string
+    return str;
+}
+
+std::vector<CommandArg> splitToArgs(std::string const& input)
+{
+    std::string str = trim(input);
+
+    std::vector<CommandArg> args;
+    char currentClosure = '\0';
+    std::string buffer = "";
+    for (auto ch : str)
+    {
+        // Open "" string
+        if (currentClosure == '\0' && ch == '\"')
+        {
+            currentClosure = '\"';
+        }
+        // Open '' string
+        else if (currentClosure == '\0' && ch == '\'')
+        {
+            currentClosure = '\'';
+        }
+        // Close "" string
+        else if (currentClosure == '\"' && ch == '\"')
+        {
+            currentClosure = '\0';
+        }
+        // Close '' string
+        else if (currentClosure == '\'' && ch == '\'')
+        {
+            currentClosure = '\0';
+        }
+        // Encountered unescaped space, submit buffer
+        else if (ch == ' ' && currentClosure == '\0')
+        {
+            args.emplace_back(deduceArgType(buffer));
+            buffer = "";
+        }
+        // Add to buffer
+        else
+        {
+            buffer += ch;
+        }
+    }
+
+    // Reached the end, try to submit the end of the buffer
+    args.emplace_back(deduceArgType(buffer));
+
+    return args;
+}
+*/
 
 int32 CCommandHandler::call(sol::state& lua, CCharEntity* PChar, const int8* commandline)
 {
-    auto top = lua_gettop(lua.lua_state());
+    // On the way out of this function, clear the globals it leaves behind
+    ScopeGuard guard([&]()
+    {
+        lua.set("onTrigger", sol::lua_nil);
+        lua.set("cmdprops", sol::lua_nil);
+    });
+
+    // Before we begin, make sure these globals are cleared (just in case!)
+    lua.set("onTrigger", sol::lua_nil);
+    lua.set("cmdprops", sol::lua_nil);
 
     std::istringstream clstream((char*)commandline);
     std::string        cmdname;
@@ -40,78 +165,49 @@ int32 CCommandHandler::call(sol::state& lua, CCharEntity* PChar, const int8* com
     if (!PChar)
     {
         ShowError("cmdhandler::call: nullptr character attempted to use command");
-
-        lua_settop(lua.lua_state(), top);
         return -1;
     }
 
     if (cmdname.empty())
     {
         ShowError("cmdhandler::call: function name was empty");
-
-        lua_settop(lua.lua_state(), top);
         return -1;
     }
 
-    // Nil out any existing global instances of onTrigger before anything else!
-    lua.set("onTrigger", sol::lua_nil);
-
-    auto filename = fmt::format("./scripts/commands/{}.lua", cmdname.c_str());
-    auto result   = lua.script_file(filename);
-    if (!result.valid())
+    auto filename   = fmt::format("./scripts/commands/{}.lua", cmdname.c_str());
+    auto loadResult = lua.safe_script_file(filename);
+    if (!loadResult.valid())
     {
-        sol::error err = result;
-        ShowError("cmdhandler::call: (%s): %s", cmdname.c_str(),err.what());
-
-        lua_settop(lua.lua_state(), top);
+        sol::error err = loadResult;
+        ShowError("cmdhandler::call: (%s): %s", cmdname.c_str(), err.what());
         return -1;
     }
 
     if (!lua["cmdprops"].valid())
     {
         ShowError("cmdhandler::call: (%s): Undefined 'cmdprops' table", cmdname.c_str());
-
-        lua_settop(lua.lua_state(), top);
         return -1;
     }
 
     if (!lua["cmdprops"]["permission"].valid())
     {
         ShowError("cmdhandler::call: (%s): Invalid or no permission field set in cmdprops", cmdname.c_str());
-
-        // Delete the cmdprops table..
-        lua_pushnil(lua.lua_state());
-        lua_setglobal(lua.lua_state(), "cmdprops");
-
-        lua_settop(lua.lua_state(), top);
         return -1;
     }
 
     if (!lua["cmdprops"]["parameters"].valid())
     {
         ShowError("cmdhandler::call: (%s): Invalid or no parameters field set in cmdprops", cmdname.c_str());
-
-        // Delete the cmdprops table..
-        lua_pushnil(lua.lua_state());
-        lua_setglobal(lua.lua_state(), "cmdprops");
-
-        lua_settop(lua.lua_state(), top);
         return -1;
     }
 
-    int8 permission = lua["cmdprops"]["permission"];
+    int8        permission = lua["cmdprops"]["permission"];
     std::string parameters = lua["cmdprops"]["parameters"];
 
-    // Ensure this user can use this command..
+    // Ensure this user can use this command
     if (permission > PChar->m_GMlevel)
     {
         ShowWarning("cmdhandler::call: Character %s attempting to use higher permission command %s", PChar->name.c_str(), cmdname.c_str());
-
-        // Delete the cmdprops table..
-        lua_pushnil(lua.lua_state());
-        lua_setglobal(lua.lua_state(), "cmdprops");
-
-        lua_settop(lua.lua_state(), top);
         return -1;
     }
     else
@@ -137,32 +233,22 @@ int32 CCommandHandler::call(sol::state& lua, CCharEntity* PChar, const int8* com
         }
     }
 
-    // Ensure the onTrigger function exists for this command..
+    // Ensure the onTrigger function exists for this command
     auto onTrigger = lua.get<sol::function>("onTrigger");
     if (!onTrigger.valid())
     {
         ShowError("cmdhandler::call: (%s) missing onTrigger function", cmdname.c_str());
-
-        // Delete the cmdprops table..
-        lua_pushnil(lua.lua_state());
-        lua_setglobal(lua.lua_state(), "cmdprops");
-
-        lua_settop(lua.lua_state(), top);
         return -1;
     }
 
-    sol::stack::push(lua.lua_state(), onTrigger);
+    std::vector<CommandArg> args;
 
-    // Push the calling character
-    sol::stack::push<CLuaBaseEntity>(lua.lua_state(), CLuaBaseEntity(PChar));
-    int32 cntparam = 1;
+    // Prepare parameters
+    std::string param;
+    std::string cmdparameters(parameters);
+    auto        parameter = cmdparameters.cbegin();
 
-    // Prepare parameters..
-    std::string                 param;
-    std::string                 cmdparameters(parameters);
-    std::string::const_iterator parameter = cmdparameters.cbegin();
-
-    // Parse and push parameters based on symbol string..
+    // Parse and push parameters based on symbol string
     while (parameter != cmdparameters.cend() && !clstream.eof())
     {
         clstream >> param;
@@ -170,8 +256,7 @@ int32 CCommandHandler::call(sol::state& lua, CCharEntity* PChar, const int8* com
         switch (*parameter)
         {
             case 'b':
-                sol::stack::push<std::string>(lua.lua_state(), (const char*)commandline);
-                ++cntparam;
+                args.emplace_back(std::string((const char*)commandline));
                 break;
 
             case 's':
@@ -183,22 +268,18 @@ int32 CCommandHandler::call(sol::state& lua, CCharEntity* PChar, const int8* com
                         clstream >> param;
                         str += " " + param;
                     }
-                    sol::stack::push<std::string>(lua.lua_state(), str);
-                    ++cntparam;
+                    args.emplace_back(str);
                     break;
                 }
-                sol::stack::push<std::string>(lua.lua_state(), param);
-                ++cntparam;
+                args.emplace_back(param);
                 break;
 
             case 'i':
-                sol::stack::push<int>(lua.lua_state(), atoi(param.c_str()));
-                ++cntparam;
+                args.emplace_back(atoi(param.c_str()));
                 break;
 
             case 'd':
-                sol::stack::push<float>(lua.lua_state(), atof(param.c_str()));
-                ++cntparam;
+                args.emplace_back(atof(param.c_str()));
                 break;
 
             default:
@@ -209,25 +290,14 @@ int32 CCommandHandler::call(sol::state& lua, CCharEntity* PChar, const int8* com
         ++parameter;
     }
 
-    // Call the function..
-    int32 status = lua_pcall(lua.lua_state(), cntparam, 0, 0);
-    if (status)
+    // Call the function
+    auto result = onTrigger(CLuaBaseEntity(PChar), sol::as_args(args));
+    if (!result.valid())
     {
-        ShowError("cmdhandler::call: (%s) error: %s", cmdname.c_str(), lua_tostring(lua.lua_state(), -1));
-        lua_pop(lua.lua_state(), -1);
-
-        // Delete the cmdprops table..
-        lua_pushnil(lua.lua_state());
-        lua_setglobal(lua.lua_state(), "cmdprops");
-
-        lua_settop(lua.lua_state(), top);
+        sol::error err = result;
+        ShowError("cmdhandler::call: (%s) error: %s", cmdname.c_str(), err.what());
         return -1;
     }
 
-    // Delete the cmdprops table..
-    lua_pushnil(lua.lua_state());
-    lua_setglobal(lua.lua_state(), "cmdprops");
-
-    lua_settop(lua.lua_state(), top);
     return 0;
 }

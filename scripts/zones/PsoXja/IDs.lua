@@ -24,6 +24,7 @@ zones[xi.zone.PSOXJA] =
         ARCH_GLOW_BLUE          = 7242, -- The arch above the door is glowing blue...
         ARCH_GLOW_GREEN         = 7243, -- The arch above the door is glowing green...
         CANNOT_OPEN_SIDE        = 7246, -- The door cannot be opened from this side.
+        TRAP_ACTIVATES          = 7248, -- <name> examines the door. A trap connected to it has been activated!
         TRAP_FAILS              = 7249, -- <name> examines the door. The trap connected to it fails to activate.
         DISCOVER_DISARM_FAIL    = 7250, -- <name> discovers a trap connected to the door, but fails to disarm it!
         DISCOVER_DISARM_SUCCESS = 7251, -- <name> discovers a trap connected to the door and succeeds in disarming it!

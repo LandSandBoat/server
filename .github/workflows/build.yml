@@ -132,7 +132,7 @@ jobs:
     - name: Install Dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y software-properties-common clang-format cppcheck luajit-5.1-dev luarocks mariadb-server mariadb-client libmariadb-dev-compat
+        sudo apt-get install -y software-properties-common clang-format cppcheck luajit-5.1-dev luarocks mariadb-server-10.3 mariadb-client libmariadb-dev-compat
         pip install -r tools/requirements.txt
         luarocks install luacheck --local
     - id: changed-files

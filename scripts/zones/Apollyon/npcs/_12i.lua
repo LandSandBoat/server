@@ -14,7 +14,7 @@ entity.onTrade = function(player, npc, trade)
         player:hasKeyItem(xi.ki.BLACK_CARD)
     then
         player:setCharVar("ApollyonEntrance", 1)
-        TradeBCNM(player, npc, trade)
+        xi.bcnm.onTrade(player, npc, trade)
     else
         player:messageSpecial(ID.text.NO_KEY)
     end
@@ -26,14 +26,14 @@ entity.onTrigger = function(player, npc)
         player:hasKeyItem(xi.ki.BLACK_CARD)
     then
         player:setCharVar("ApollyonEntrance", 1)
-        EventTriggerBCNM(player, npc)
+        xi.bcnm.onTrigger(player, npc)
     else
         player:messageSpecial(ID.text.NO_KEY)
     end
 end
 
 entity.onEventUpdate = function(player, csid, option, extras)
-    if EventUpdateBCNM(player, csid, option, extras) then
+    if xi.bcnm.onEventUpdate(player, csid, option, extras) then
         local alliance = player:getAlliance()
 
         for _, member in pairs(alliance) do
@@ -49,7 +49,7 @@ entity.onEventUpdate = function(player, csid, option, extras)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if not EventFinishBCNM(player, csid, option) then
+    if not xi.bcnm.onEventFinish(player, csid, option) then
         player:setCharVar("ApollyonEntrance", 0)
     end
 end

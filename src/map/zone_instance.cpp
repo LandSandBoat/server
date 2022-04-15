@@ -209,7 +209,7 @@ void CZoneInstance::IncreaseZoneCounter(CCharEntity* PChar)
 
         if (PChar->targid >= 0x700)
         {
-            ShowError("CZone::InsertChar : targid is high (03hX)", PChar->targid);
+            ShowError("CZone::InsertChar : targid is high (03hX), update packets will be ignored", PChar->targid);
             return;
         }
 
