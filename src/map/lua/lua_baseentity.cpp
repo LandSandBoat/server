@@ -4407,9 +4407,9 @@ std::string CLuaBaseEntity::getPacketName()
 
 void CLuaBaseEntity::renameEntity(std::string const& newName)
 {
-    auto oldName = m_PBaseEntity->packetName;
+    auto oldName = m_PBaseEntity->packetName.empty() ? "<empty>" : m_PBaseEntity->packetName;
     m_PBaseEntity->packetName = newName;
-    m_PBaseEntity->updatemask |= UPDATE_NAME;
+    m_PBaseEntity->updatemask |= UPDATE_NAME | UPDATE_HP;
     m_PBaseEntity->isRenamed = true;
 
     ShowInfo("Renaming %s: %s -> %s", m_PBaseEntity->name, oldName, newName);

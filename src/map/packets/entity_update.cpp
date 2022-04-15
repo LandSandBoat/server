@@ -201,8 +201,13 @@ CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type
         break;
     }
 
-    // NOTE: It is possible to send custom names to all NPCs and Mobs (static and dynamic)
-    // in order to rename them, but this is not retail behaviour in all cases.
+    // If the entity has been renamed, we have to re-send the name during every update.
+    // Otherwise it will revert to it's default name (if applicable).
+    if (PEntity->isRenamed)
+    {
+        updatemask       |= UPDATE_NAME;
+        ref<uint8>(0x0A) |= updatemask;
+    }
 
     // Send name data
     if (updatemask & UPDATE_NAME)
@@ -211,6 +216,13 @@ CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type
 
         auto name       = PEntity->name;
         auto nameOffset = (PEntity->look.size == MODEL_EQUIPPED) ? 0x44 : 0x34;
+
+        // Mobs and NPC's targid's live in the range 0-1023
+        if (PEntity->targid < 1024 && PEntity->isRenamed)
+        {
+            ref<uint16>(0x34) = 0x01;
+            nameOffset        = 0x35;
+        }
 
         if (PEntity->isRenamed ||
             PEntity->objtype == TYPE_TRUST ||
@@ -229,5 +241,10 @@ CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type
         }
 
         std::memcpy(data + nameOffset, name.c_str(), maxLength);
+
+        // Make sure the rest of the packet is empty (or garbage might appear)
+        auto start = data + nameOffset + maxLength;
+        auto size = static_cast<std::size_t>(this->getSize());
+        std::memset(start, 0U, size);
     }
 }
