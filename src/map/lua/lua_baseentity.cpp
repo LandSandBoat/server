@@ -2689,6 +2689,11 @@ void CLuaBaseEntity::addTeleport(uint8 teleType, uint32 bitval, sol::object cons
         ShowError("Lua::addTeleport : Attempt to add Abyssea Conflux with invalid setval or set variable.\n");
         return;
     }
+    else if (type == TELEPORT_TYPE::ABYSSEA_CONFLUX && (setval == sol::lua_nil || set >= MAX_ABYSSEAZONES))
+    {
+        ShowError("Lua::addTeleport : Attempt to add Abyssea Conflux with invalid setval or set variable.\n");
+        return;
+    }
 
     switch (type)
     {

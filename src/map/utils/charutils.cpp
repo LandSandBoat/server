@@ -794,7 +794,7 @@ namespace charutils
 
             length = 0;
             buf    = nullptr;
-            Sql_GetData(SqlHandle, 10, &buf, &length);
+            sql->GetData(10, &buf, &length);
             memcpy(&PChar->teleport.abysseaConflux, buf, (length > sizeof(PChar->teleport.abysseaConflux) ? sizeof(PChar->teleport.abysseaConflux) : length));
         }
 
@@ -5211,9 +5211,9 @@ namespace charutils
             case TELEPORT_TYPE::ABYSSEA_CONFLUX:
             {
                 char buf[sizeof(PChar->teleport.abysseaConflux) * 2 + 1];
-                Sql_EscapeStringLen(SqlHandle, buf, (const char*)&PChar->teleport.abysseaConflux, sizeof(PChar->teleport.abysseaConflux));
+                sql->EscapeStringLen(buf, (const char*)&PChar->teleport.abysseaConflux, sizeof(PChar->teleport.abysseaConflux));
                 const char* query = "UPDATE char_unlocks SET abyssea_conflux = '%s' WHERE charid = %u;";
-                Sql_Query(SqlHandle, query, buf, PChar->id);
+                sql->Query(query, buf, PChar->id);
                 return;
             }
             default:
