@@ -7,23 +7,19 @@ require("scripts/globals/bcnm")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    TradeBCNM(player, npc, trade)
+    xi.bcnm.onTrade(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if EventTriggerBCNM(player, npc) then
-        return 1
-    end
+    xi.bcnm.onTrigger(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option, extras)
-    EventUpdateBCNM(player, csid, option, extras)
+    xi.bcnm.onEventUpdate(player, csid, option, extras)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if EventFinishBCNM(player, csid, option) then
-        return
-    end
+    xi.bcnm.onEventFinish(player, csid, option)
 end
 
 return entity

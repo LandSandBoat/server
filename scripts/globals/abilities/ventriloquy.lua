@@ -28,9 +28,9 @@ ability_object.onUseAbility = function(player, target, ability)
         local enmitylist = target:getEnmityList()
         local playerfound, petfound = false, false
         for k, v in pairs(enmitylist) do
-            if v.entity:getShortID() == player:getShortID() then
+            if v.entity:getTargID() == player:getTargID() then
                 playerfound = true
-            elseif v.entity:getShortID() == pet:getShortID() then
+            elseif v.entity:getTargID() == pet:getTargID() then
                 petfound = true
             end
         end
@@ -45,7 +45,7 @@ ability_object.onUseAbility = function(player, target, ability)
 
             local playerEnmityBonus = 1
             local petEnmityBonus = 1
-            if target:getTarget():getShortID() == player:getShortID() or ((playerCE + playerVE) >= (petCE + petVE) and target:getTarget():getShortID() ~= pet:getShortID()) then
+            if target:getTarget():getTargID() == player:getTargID() or ((playerCE + playerVE) >= (petCE + petVE) and target:getTarget():getTargID() ~= pet:getTargID()) then
                 playerEnmityBonus = playerEnmityBonus + bonus
                 petEnmityBonus = petEnmityBonus - bonus
             else

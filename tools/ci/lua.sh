@@ -146,18 +146,7 @@ global_objects=(
     QUEST_LOGS
     MISSION_LOGS
 
-    TradeBCNM
-    EventTriggerBCNM
-    EventUpdateBCNM
-    EventFinishBCNM
-
     onBattlefieldHandlerInitialise
-
-    porterMoogleTrade
-    porterEventUpdate
-    porterEventFinish
-
-    dynamis
 
     doAutoPhysicalWeaponskill
     doAutoRangedWeaponskill
@@ -189,11 +178,6 @@ global_objects=(
     cmdprops
     error
     onTrigger
-
-    CheckMaps
-    CheckMapsUpdate
-
-    getDynamisMapList
 
     SetExplorerMoogles
 
@@ -264,12 +248,6 @@ global_objects=(
 
     MOBSKILL_MAGICAL
     MOBSKILL_PHYSICAL
-
-    getMedalRank
-    getBastokNotesItem
-    getSandOriaNotesItem
-    getWindurstNotesItem
-    getSigilTimeStamp
 
     TPMOD_NONE
     TPMOD_CHANCE

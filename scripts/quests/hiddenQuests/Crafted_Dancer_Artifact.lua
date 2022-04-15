@@ -20,9 +20,9 @@ local quest = HiddenQuest:new("DncArtifact")
 
 local dncArtifactOptions =
 {
-    [1] = { xi.items.DANCERS_TIARA,     { xi.items.SQUARE_OF_IMPERIAL_SILK_CLOTH, xi.items.SQUARE_OF_WOLF_FELT,     xi.items.SQUARE_OF_SILVER_BROCADE }, },
-    [2] = { xi.items.DANCERS_BANGLES,   { xi.items.SQUARE_OF_KARAKUL_CLOTH,       xi.items.SQUARE_OF_RAINBOW_CLOTH, xi.items.SQUARE_OF_RAINBOW_VELVET }, },
-    [3] = { xi.items.DANCERS_TOE_SHOES, { xi.items.SQUARE_OF_WAMOURA_CLOTH,       xi.items.SQUARE_OF_MOBLINWEAVE,   xi.items.SQUARE_OF_GOLD_BROCADE   }, },
+    [1] = { xi.items.DANCERS_TIARA_F,     { xi.items.SQUARE_OF_IMPERIAL_SILK_CLOTH, xi.items.SQUARE_OF_WOLF_FELT,     xi.items.SQUARE_OF_SILVER_BROCADE }, },
+    [2] = { xi.items.DANCERS_BANGLES_F,   { xi.items.SQUARE_OF_KARAKUL_CLOTH,       xi.items.SQUARE_OF_RAINBOW_CLOTH, xi.items.SQUARE_OF_RAINBOW_VELVET }, },
+    [3] = { xi.items.DANCERS_TOE_SHOES_F, { xi.items.SQUARE_OF_WAMOURA_CLOTH,       xi.items.SQUARE_OF_MOBLINWEAVE,   xi.items.SQUARE_OF_GOLD_BROCADE   }, },
 }
 
 quest.sections =
@@ -159,9 +159,9 @@ quest.sections =
 
     {
         check = function(player, questVars, vars)
-            return player:findItem(xi.items.DANCERS_TIARA) and
-                player:findItem(xi.items.DANCERS_BANGLES) and
-                player:findItem(xi.items.DANCERS_TOE_SHOES) and
+            return player:findItem(xi.items.DANCERS_TIARA_F - player:getGender()) and
+                player:findItem(xi.items.DANCERS_BANGLES_F - player:getGender()) and
+                player:findItem(xi.items.DANCERS_TOE_SHOES_F - player:getGender()) and
                 player:getMainJob() == xi.job.DNC
         end,
 

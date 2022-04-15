@@ -174,6 +174,8 @@ namespace charutils
     void SaveMentorFlag(CCharEntity* PChar);                   // saves the char's mentor flag
     void SaveJobMasterDisplay(CCharEntity* PChar);             // Saves the char's job master display status
     void SaveMenuConfigFlags(CCharEntity* PChar);              // saves the char's unnamed flags
+    void SaveChatFilterFlags(CCharEntity* PChar);              // saves the char's chat filters
+    void SaveLanguages(CCharEntity* PChar);                    // saves the char's language preference
     void SaveCharNation(CCharEntity* PChar);                   // Save the character's nation of allegiance.
     void SaveCampaignAllegiance(CCharEntity* PChar);           // Save the character's campaign allegiance.
     void SaveCharMoghancement(CCharEntity* PChar);             // Save the character's current moghancement

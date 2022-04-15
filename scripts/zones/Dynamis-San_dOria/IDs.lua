@@ -41,30 +41,30 @@ zones[xi.zone.DYNAMIS_SAN_DORIA] =
         REFILL_STATUE =
         {
             {
-                {mob = 17535003, eye = dynamis.eye.RED  }, -- Serjeant_Tombstone
-                {mob = 17535004, eye = dynamis.eye.BLUE },
-                {mob = 17535005, eye = dynamis.eye.GREEN},
+                {mob = 17535003, eye = xi.dynamis.eye.RED  }, -- Serjeant_Tombstone
+                {mob = 17535004, eye = xi.dynamis.eye.BLUE },
+                {mob = 17535005, eye = xi.dynamis.eye.GREEN},
             },
             {
-                {mob = 17535113, eye = dynamis.eye.RED  }, -- Serjeant_Tombstone
-                {mob = 17535114, eye = dynamis.eye.BLUE },
-                {mob = 17535115, eye = dynamis.eye.GREEN},
+                {mob = 17535113, eye = xi.dynamis.eye.RED  }, -- Serjeant_Tombstone
+                {mob = 17535114, eye = xi.dynamis.eye.BLUE },
+                {mob = 17535115, eye = xi.dynamis.eye.GREEN},
             },
             {
-                {mob = 17535154, eye = dynamis.eye.RED  }, -- Serjeant_Tombstone
-                {mob = 17535155, eye = dynamis.eye.GREEN},
+                {mob = 17535154, eye = xi.dynamis.eye.RED  }, -- Serjeant_Tombstone
+                {mob = 17535155, eye = xi.dynamis.eye.GREEN},
             },
             {
-                {mob = 17535166, eye = dynamis.eye.RED  }, -- Serjeant_Tombstone
-                {mob = 17535167, eye = dynamis.eye.BLUE },
+                {mob = 17535166, eye = xi.dynamis.eye.RED  }, -- Serjeant_Tombstone
+                {mob = 17535167, eye = xi.dynamis.eye.BLUE },
             },
             {
-                {mob = 17535193, eye = dynamis.eye.RED  }, -- Serjeant_Tombstone
-                {mob = 17535194, eye = dynamis.eye.GREEN},
+                {mob = 17535193, eye = xi.dynamis.eye.RED  }, -- Serjeant_Tombstone
+                {mob = 17535194, eye = xi.dynamis.eye.GREEN},
             },
             {
-                {mob = 17535205, eye = dynamis.eye.RED  }, -- Serjeant_Tombstone
-                {mob = 17535206, eye = dynamis.eye.BLUE },
+                {mob = 17535205, eye = xi.dynamis.eye.RED  }, -- Serjeant_Tombstone
+                {mob = 17535206, eye = xi.dynamis.eye.BLUE },
             },
         },
     },

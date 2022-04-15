@@ -40,24 +40,24 @@ zones[xi.zone.DYNAMIS_JEUNO] =
         REFILL_STATUE =
         {
             {
-                {mob = 17547295, eye = dynamis.eye.RED  }, -- Goblin_Replica
-                {mob = 17547296, eye = dynamis.eye.BLUE },
-                {mob = 17547297, eye = dynamis.eye.GREEN},
+                {mob = 17547295, eye = xi.dynamis.eye.RED  }, -- Goblin_Replica
+                {mob = 17547296, eye = xi.dynamis.eye.BLUE },
+                {mob = 17547297, eye = xi.dynamis.eye.GREEN},
             },
             {
-                {mob = 17547391, eye = dynamis.eye.RED  }, -- Goblin_Replica
-                {mob = 17547392, eye = dynamis.eye.BLUE },
-                {mob = 17547393, eye = dynamis.eye.GREEN},
+                {mob = 17547391, eye = xi.dynamis.eye.RED  }, -- Goblin_Replica
+                {mob = 17547392, eye = xi.dynamis.eye.BLUE },
+                {mob = 17547393, eye = xi.dynamis.eye.GREEN},
             },
             {
-                {mob = 17547421, eye = dynamis.eye.RED  }, -- Goblin_Replica
-                {mob = 17547422, eye = dynamis.eye.BLUE },
-                {mob = 17547423, eye = dynamis.eye.GREEN},
+                {mob = 17547421, eye = xi.dynamis.eye.RED  }, -- Goblin_Replica
+                {mob = 17547422, eye = xi.dynamis.eye.BLUE },
+                {mob = 17547423, eye = xi.dynamis.eye.GREEN},
             },
             {
-                {mob = 17547456, eye = dynamis.eye.RED  }, -- Goblin_Replica
-                {mob = 17547457, eye = dynamis.eye.BLUE },
-                {mob = 17547458, eye = dynamis.eye.GREEN},
+                {mob = 17547456, eye = xi.dynamis.eye.RED  }, -- Goblin_Replica
+                {mob = 17547457, eye = xi.dynamis.eye.BLUE },
+                {mob = 17547458, eye = xi.dynamis.eye.GREEN},
             },
         },
     },

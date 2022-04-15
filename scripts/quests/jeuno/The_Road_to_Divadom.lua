@@ -82,7 +82,7 @@ quest.sections =
             onEventFinish =
             {
                 [10170] = function(player, csid, option, npc)
-                    local tightsItemID = 15660 - player:getGender()
+                    local tightsItemID = xi.items.DANCERS_TIGHTS_F - player:getGender()
 
                     if npcUtil.giveItem(player, tightsItemID) then
                         quest:complete(player)

@@ -53,11 +53,11 @@ SqlConnection::SqlConnection(const char* user, const char* passwd, const char* h
         ShowFatalError("%s", mysql_error(&self->handle));
     }
 
-    m_User = user;
+    m_User   = user;
     m_Passwd = passwd;
-    m_Host = host;
-    m_Port = port;
-    m_Db = db;
+    m_Host   = host;
+    m_Port   = port;
+    m_Db     = db;
 
     InitPreparedStatements();
 
@@ -157,9 +157,9 @@ int32 SqlConnection::SetEncoding(const char* encoding)
 
 void SqlConnection::SetupKeepalive()
 {
-    auto now = std::chrono::system_clock::now().time_since_epoch();
+    auto now        = std::chrono::system_clock::now().time_since_epoch();
     auto nowSeconds = std::chrono::duration_cast<std::chrono::seconds>(now).count();
-    m_LastPing = nowSeconds;
+    m_LastPing      = nowSeconds;
 
     // set a default value first
     uint32 timeout = 7200; // 2 hours
@@ -173,7 +173,7 @@ void SqlConnection::SetupKeepalive()
     }
 
     // 30-second reserve
-    uint8 reserve = 30;
+    uint8 reserve  = 30;
     m_PingInterval = timeout + reserve;
 }
 
@@ -185,7 +185,7 @@ void SqlConnection::SetupKeepalive()
 
 int32 SqlConnection::TryPing()
 {
-    auto now = std::chrono::system_clock::now().time_since_epoch();
+    auto now        = std::chrono::system_clock::now().time_since_epoch();
     auto nowSeconds = std::chrono::duration_cast<std::chrono::seconds>(now).count();
 
     if (m_LastPing + m_PingInterval <= nowSeconds)
@@ -366,6 +366,7 @@ int32 SqlConnection::NextRow()
             return SQL_NO_DATA;
         }
     }
+    ShowFatalError("Query: %s", self->buf);
     ShowFatalError("NextRow: SQL_ERROR: %s", mysql_error(&self->handle));
     return SQL_ERROR;
 }
@@ -404,6 +405,7 @@ int32 SqlConnection::GetData(size_t col, char** out_buf, size_t* out_len)
         }
         return SQL_SUCCESS;
     }
+    ShowFatalError("Query: %s", self->buf);
     ShowFatalError("GetData: SQL_ERROR: %s", mysql_error(&self->handle));
     return SQL_ERROR;
 }
@@ -423,6 +425,7 @@ int8* SqlConnection::GetData(size_t col)
             return (int8*)self->row[col];
         }
     }
+    ShowFatalError("Query: %s", self->buf);
     ShowFatalError("GetData: SQL_ERROR: %s", mysql_error(&self->handle));
     return nullptr;
 }
@@ -442,6 +445,7 @@ int32 SqlConnection::GetIntData(size_t col)
             return (self->row[col] ? (int32)atoi(self->row[col]) : 0);
         }
     }
+    ShowFatalError("Query: %s", self->buf);
     ShowFatalError("GetIntData: SQL_ERROR: %s", mysql_error(&self->handle));
     return 0;
 }
@@ -461,7 +465,28 @@ uint32 SqlConnection::GetUIntData(size_t col)
             return (self->row[col] ? (uint32)strtoul(self->row[col], nullptr, 10) : 0);
         }
     }
+    ShowFatalError("Query: %s", self->buf);
     ShowFatalError("GetUIntData: SQL_ERROR: %s", mysql_error(&self->handle));
+    return 0;
+}
+
+/************************************************************************
+ *                                                                        *
+ *                                                                        *
+ *                                                                        *
+ ************************************************************************/
+
+uint64 SqlConnection::GetUInt64Data(size_t col)
+{
+    if (self && self->row)
+    {
+        if (col < NumColumns())
+        {
+            return (self->row[col] ? (uint64)strtoull(self->row[col], NULL, 10) : 0);
+        }
+    }
+    ShowFatalError("Query: %s", self->buf);
+    ShowFatalError("GetFloatGetUInt64DataData: SQL_ERROR: %s", mysql_error(&self->handle));
     return 0;
 }
 
@@ -480,6 +505,7 @@ float SqlConnection::GetFloatData(size_t col)
             return (self->row[col] ? (float)atof(self->row[col]) : 0.f);
         }
     }
+    ShowFatalError("Query: %s", self->buf);
     ShowFatalError("GetFloatData: SQL_ERROR: %s", mysql_error(&self->handle));
     return 0;
 }
@@ -517,6 +543,7 @@ bool SqlConnection::SetAutoCommit(bool value)
         return true;
     }
 
+    ShowFatalError("Query: %s", self->buf);
     ShowFatalError("SetAutoCommit: SQL_ERROR: %s", mysql_error(&self->handle));
     return false;
 }
@@ -539,6 +566,7 @@ bool SqlConnection::GetAutoCommit()
         }
     }
 
+    ShowFatalError("Query: %s", self->buf);
     ShowFatalError("GetAutoCommit: SQL_ERROR: %s", mysql_error(&self->handle));
     return false;
 }
@@ -556,6 +584,7 @@ bool SqlConnection::TransactionStart()
         return true;
     }
 
+    ShowFatalError("Query: %s", self->buf);
     ShowFatalError("TransactionStart: SQL_ERROR: %s", mysql_error(&self->handle));
     return false;
 }
@@ -573,6 +602,7 @@ bool SqlConnection::TransactionCommit()
         return true;
     }
 
+    ShowFatalError("Query: %s", self->buf);
     ShowFatalError("TransactionCommit: SQL_ERROR: %s", mysql_error(&self->handle));
     return false;
 }
@@ -590,6 +620,7 @@ bool SqlConnection::TransactionRollback()
         return true;
     }
 
+    ShowFatalError("Query: %s", self->buf);
     ShowFatalError("TransactionRollback: SQL_ERROR: %s", mysql_error(&self->handle));
     return false;
 }
@@ -598,7 +629,7 @@ void SqlConnection::InitPreparedStatements()
 {
     auto add = [&](std::string const& name, std::string const& query)
     {
-        auto st = std::make_shared<SqlPreparedStatement>(&self->handle, query);
+        auto st                    = std::make_shared<SqlPreparedStatement>(&self->handle, query);
         m_PreparedStatements[name] = st;
     };
 
