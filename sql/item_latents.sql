@@ -2967,6 +2967,11 @@ INSERT INTO `item_latents` VALUES (18771,23,1,16,5);     -- ATT +1~4,party size 
 INSERT INTO `item_latents` VALUES (18771,23,1,16,6);     -- ATT +1~4,party size 3+. Effect strengthens with more members
 
 -- -------------------------------------------------------
+-- Oneiros Grip
+-- -------------------------------------------------------
+INSERT INTO `item_latents` VALUES (18811,369,1,4,750);  -- Refresh MP <= 75%
+
+-- -------------------------------------------------------
 -- Perdu Wand
 -- -------------------------------------------------------
 INSERT INTO `item_latents` VALUES (18850,23,14,6,1000);  -- Attack+14 while TP <100%
