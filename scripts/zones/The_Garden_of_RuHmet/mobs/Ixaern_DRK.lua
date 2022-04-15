@@ -22,7 +22,7 @@ entity.onMobInitialize = function(IxAernDrkMob)
             local target = mob:getTarget()
             local targetid = 0
             if target then
-                targetid = target:getShortID()
+                targetid = target:getTargID()
             end
             mob:setMobMod(xi.mobMod.NO_DROPS, 1)
             mob:timer(9000, function(mobArg)

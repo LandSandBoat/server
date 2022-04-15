@@ -39,7 +39,7 @@ CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type
     this->setSize(0x58);
 
     ref<uint32>(0x04) = PEntity->id;
-    ref<uint16>(0x08) = PEntity->targid;
+    ref<uint16>(0x08) = PEntity->targid; // 0x0E entity updates are valid for 0 to 1023 and 1792 to 2303
     ref<uint8>(0x0A)  = updatemask;
 
     switch (type)
@@ -201,19 +201,31 @@ CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type
         break;
     }
 
-    // NOTE: It is possible to send custom names to all NPCs and Mobs (static and dynamic)
-    // in order to rename them, but this is not retail behaviour in all cases.
+    // If the entity has been renamed, we have to re-send the name during every update.
+    // Otherwise it will revert to it's default name (if applicable).
+    if (PEntity->isRenamed)
+    {
+        updatemask       |= UPDATE_NAME;
+        ref<uint8>(0x0A) |= updatemask;
+    }
 
     // Send name data
     if (updatemask & UPDATE_NAME)
     {
         this->setSize(0x48);
 
-        bool isNPC      = PEntity->objtype == TYPE_NPC;
         auto name       = PEntity->name;
         auto nameOffset = (PEntity->look.size == MODEL_EQUIPPED) ? 0x44 : 0x34;
 
-        if ((!isNPC && !PEntity->packetName.empty()) ||
+        // Mobs and NPC's targid's live in the range 0-1023
+        if (PEntity->targid < 1024 && PEntity->isRenamed)
+        {
+            ref<uint16>(0x34) = 0x01;
+            nameOffset        = 0x35;
+        }
+
+        if (PEntity->isRenamed ||
+            PEntity->objtype == TYPE_TRUST ||
             PEntity->IsDynamicEntity())
         {
             name = PEntity->packetName;
@@ -229,5 +241,10 @@ CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type
         }
 
         std::memcpy(data + nameOffset, name.c_str(), maxLength);
+
+        // Make sure the rest of the packet is empty (or garbage might appear)
+        auto start = data + nameOffset + maxLength;
+        auto size = static_cast<std::size_t>(this->getSize());
+        std::memset(start, 0U, size);
     }
 }
