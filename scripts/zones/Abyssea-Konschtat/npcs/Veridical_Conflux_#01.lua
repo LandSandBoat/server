@@ -1,9 +1,9 @@
 -----------------------------------
 -- Area: Abyssea-Konschtat
---  NPC: Veridical Conflux #05
+--  NPC: Veridical Conflux #01
 -- Aybssea Teleport NPC
 -----------------------------------
-require("scripts/globals/conflux")
+require("scripts/globals/abyssea/conflux")
 -----------------------------------
 local entity = {}
 
