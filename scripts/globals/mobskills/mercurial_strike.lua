@@ -16,7 +16,7 @@
 -- 1111 = 2hr Meikyo Shisui
 -----------------------------------
 require("scripts/settings/main")
-require("scripts/globals/monstertpmoves")
+require("scripts/globals/mobskills")
 require("scripts/globals/status")
 require("scripts/globals/utils")
 -----------------------------------
