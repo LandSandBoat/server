@@ -1280,13 +1280,13 @@ uint32 CLuaBaseEntity::getID()
 }
 
 /************************************************************************
- *  Function: getShortID()
+ *  Function: getTargID()
  *  Purpose : Gets the ID of a Target
- *  Example : mob:getShortID(); pet:getShortID()
- *  Notes   : To Do: Should be renamed to getTargID
+ *  Example : mob:getTargID(); pet:getTargID()
+ *  Notes   :
  ************************************************************************/
 
-uint16 CLuaBaseEntity::getShortID()
+uint16 CLuaBaseEntity::getTargID()
 {
     return m_PBaseEntity->targid;
 }
@@ -12271,7 +12271,7 @@ uint32 CLuaBaseEntity::getMobFlags()
 *  Function: setNpcFlags()
 *  Purpose : Manually set NPC Entity Flags
 *  Example : npc:setNpcFlags(1)
-*  Notes   : 
+*  Notes   :
 ************************************************************************/
 
 void CLuaBaseEntity::setNpcFlags(uint32 flags)
@@ -13586,7 +13586,7 @@ void CLuaBaseEntity::Register()
 
     // Object Identification
     SOL_REGISTER("getID", CLuaBaseEntity::getID);
-    SOL_REGISTER("getShortID", CLuaBaseEntity::getShortID);
+    SOL_REGISTER("getTargID", CLuaBaseEntity::getTargID);
     SOL_REGISTER("getCursorTarget", CLuaBaseEntity::getCursorTarget);
 
     SOL_REGISTER("getObjType", CLuaBaseEntity::getObjType);
