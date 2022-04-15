@@ -159,7 +159,7 @@ CCharPacket::CCharPacket(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask
 
             if (updatemask & UPDATE_NAME)
             {
-                std::string name = PChar->isRenamed ? (const char*)PChar->GetPacketName() : (const char*)PChar->GetName();
+                std::string name = (const char*)PChar->GetName();
                 memcpy(data + (0x5A), name.c_str(), name.size());
             }
         }

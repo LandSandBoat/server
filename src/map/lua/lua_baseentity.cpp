@@ -4402,11 +4402,17 @@ std::string CLuaBaseEntity::getPacketName()
  *  Purpose : Overrides the visible name of the entity.
  *  Example : mob:renameEntity("NewName")
  *  Note    : This will set the packet name of the entity to a name of
- *          : your choosing. This will not work for players.
+ *          : your choosing.
  ************************************************************************/
 
 void CLuaBaseEntity::renameEntity(std::string const& newName)
 {
+    if (m_PBaseEntity->objtype == TYPE_PC)
+    {
+        ShowWarning("Renaming player character entities isn't supported.");
+        return;
+    }
+
     auto oldName = m_PBaseEntity->packetName.empty() ? "<empty>" : m_PBaseEntity->packetName;
     m_PBaseEntity->packetName = newName;
     m_PBaseEntity->updatemask |= UPDATE_NAME | UPDATE_HP;
