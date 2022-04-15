@@ -735,6 +735,12 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
     // uint32 ID = data.ref<uint32>(0x04);
     uint16 TargID = data.ref<uint16>(0x08);
     uint8  action = data.ref<uint8>(0x0A);
+    position_t actionOffset =
+    {
+        data.ref<float>(0x10),
+        data.ref<float>(0x14),
+        data.ref<float>(0x18)
+    };
 
     switch (action)
     {
@@ -788,6 +794,25 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
         {
             auto spellID = static_cast<SpellID>(data.ref<uint16>(0x0C));
             PChar->PAI->Cast(TargID, spellID);
+
+            // target offset used only for luopan placement as of now
+            if (spellID >= SpellID::Geo_Regen && spellID <= SpellID::Geo_Gravity)
+            {
+                // Need to set the target position plus offset for positioning correctly
+                auto* PTarget = dynamic_cast<CBattleEntity*>(PChar->GetEntity(TargID));
+                position_t offsetPos = PChar->loc.p;
+
+                if (PTarget != nullptr)
+                {
+                    offsetPos =
+                    {
+                        PTarget->GetXPos() + actionOffset.x,
+                        PTarget->GetYPos() + actionOffset.y,
+                        PTarget->GetZPos() + actionOffset.z
+                    };
+                }
+                PChar->m_ActionOffsetPos = offsetPos;
+            }
         }
         break;
         case 0x04: // disengage

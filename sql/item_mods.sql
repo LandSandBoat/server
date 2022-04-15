@@ -27084,6 +27084,8 @@ INSERT INTO `item_mods` VALUES (21371,25,5);
 INSERT INTO `item_mods` VALUES (21371,73,3);
 INSERT INTO `item_mods` VALUES (21371,302,2);
 INSERT INTO `item_mods` VALUES (21371,384,900);
+INSERT INTO `item_mods` VALUES (21372,1027,18);    -- Dunna: Handbell Skill+18
+INSERT INTO `item_mods` VALUES (21372,961,5);      -- Dunna: Geomancy +5
 INSERT INTO `item_mods` VALUES (21373,5,15);
 INSERT INTO `item_mods` VALUES (21373,163,-200);
 INSERT INTO `item_mods` VALUES (21374,27,2);
@@ -27158,7 +27160,11 @@ INSERT INTO `item_mods` VALUES (21428,23,10);
 INSERT INTO `item_mods` VALUES (21428,25,10);
 INSERT INTO `item_mods` VALUES (21429,30,5);
 INSERT INTO `item_mods` VALUES (21429,114,5);
-INSERT INTO `item_mods` VALUES (21460,5,5);
+INSERT INTO `item_mods` VALUES (21460,5,5);        -- Matre bell:  Geomancy +5
+INSERT INTO `item_mods` VALUES (21461,5,30);       -- Filiae Bell: MP+30
+INSERT INTO `item_mods` VALUES (21461,1027,15);    -- Filiae Bell: Handbell Skill+15
+INSERT INTO `item_mods` VALUES (21462,961,3);      -- Eminent bell: Geomancy +3
+INSERT INTO `item_mods` VALUES (21463,961,5);      -- Nepote bell: Geomancy +5
 INSERT INTO `item_mods` VALUES (21479,24,15);
 INSERT INTO `item_mods` VALUES (21479,26,5);
 INSERT INTO `item_mods` VALUES (21479,305,15);
@@ -33793,11 +33799,11 @@ INSERT INTO `item_mods` VALUES (25532,487,7);     -- Argute Stole +1: Magic burs
 INSERT INTO `item_mods` VALUES (25533,30,30);     -- Argute Stole +2: Magic Accuracy+30
 INSERT INTO `item_mods` VALUES (25533,487,10);    -- Argute Stole +2: Magic burst damage +10
 INSERT INTO `item_mods` VALUES (25537,30,20);     -- Bagua Charm: Magic Accuracy+20
--- INSERT INTO `item_mods` VALUES (25537,,5);     -- Bagua Charm: Geomancy +5
+INSERT INTO `item_mods` VALUES (25537,961,5);     -- Bagua Charm: Geomancy +5
 INSERT INTO `item_mods` VALUES (25538,30,25);     -- Bagua Charm +1: Magic Accuracy+25
--- INSERT INTO `item_mods` VALUES (25538,,6);     -- Bagua Charm +1: Geomancy +6
+INSERT INTO `item_mods` VALUES (25538,961,6);     -- Bagua Charm +1: Geomancy +6
 INSERT INTO `item_mods` VALUES (25539,30,30);     -- Bagua Charm +2: Magic Accuracy+30
--- INSERT INTO `item_mods` VALUES (25539,,7);     -- Bagua Charm +2: Geomancy +7
+INSERT INTO `item_mods` VALUES (25539,961,7);     -- Bagua Charm +2: Geomancy +7
 INSERT INTO `item_mods` VALUES (25543,27,5);      -- Futhark Torque: Enmity+5
 INSERT INTO `item_mods` VALUES (25543,31,20);     -- Futhark Torque: Magic Evasion+20
 INSERT INTO `item_mods` VALUES (25544,27,7);      -- Futhark Torque +1: Enmity+7
