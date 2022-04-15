@@ -765,7 +765,7 @@ namespace charutils
         }
 
         fmtQuery = "SELECT outpost_sandy, outpost_bastok, outpost_windy, runic_portal, maw, "
-                   "campaign_sandy, campaign_bastok, campaign_windy, homepoints, survivals "
+                   "campaign_sandy, campaign_bastok, campaign_windy, homepoints, survivals, abyssea_conflux "
                    "FROM char_unlocks "
                    "WHERE charid = %u;";
 
@@ -791,6 +791,11 @@ namespace charutils
             buf    = nullptr;
             sql->GetData(9, &buf, &length);
             memcpy(&PChar->teleport.survival, buf, (length > sizeof(PChar->teleport.survival) ? sizeof(PChar->teleport.survival) : length));
+
+            length = 0;
+            buf    = nullptr;
+            sql->GetData(10, &buf, &length);
+            memcpy(&PChar->teleport.abysseaConflux, buf, (length > sizeof(PChar->teleport.abysseaConflux) ? sizeof(PChar->teleport.abysseaConflux) : length));
         }
 
         PChar->PMeritPoints = new CMeritPoints(PChar);
@@ -5203,6 +5208,14 @@ namespace charutils
                 sql->Query(query, buf, PChar->id);
                 return;
             }
+            case TELEPORT_TYPE::ABYSSEA_CONFLUX:
+            {
+                char buf[sizeof(PChar->teleport.abysseaConflux) * 2 + 1];
+                sql->EscapeStringLen(buf, (const char*)&PChar->teleport.abysseaConflux, sizeof(PChar->teleport.abysseaConflux));
+                const char* query = "UPDATE char_unlocks SET abyssea_conflux = '%s' WHERE charid = %u;";
+                sql->Query(query, buf, PChar->id);
+                return;
+            }
             default:
                 ShowError("charutils:SaveTeleport : Unknown type parameter.");
                 return;
@@ -5215,7 +5228,7 @@ namespace charutils
     float AddExpBonus(CCharEntity* PChar, float exp)
     {
         int32 bonus = 0;
-        if (PChar->StatusEffectContainer->GetStatusEffect(EFFECT_DEDICATION))
+        if (PChar->StatusEffectContainer->GetStatusEffect(EFFECT_DEDICATION) && PChar->loc.zone->GetRegionID() != REGION_TYPE::ABYSSEA)
         {
             CStatusEffect* dedication = PChar->StatusEffectContainer->GetStatusEffect(EFFECT_DEDICATION);
             int16          percentage = dedication->GetPower();
