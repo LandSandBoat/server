@@ -1251,7 +1251,7 @@ bool CParty::IsFull() const
 uint32 CParty::LoadPartySize() const
 {
     int ret = sql->Query("SELECT COUNT(*) FROM accounts_parties WHERE partyid = %d;", m_PartyID);
-    if (ret != SQL_ERROR)
+    if (ret != SQL_ERROR && sql->NextRow() == SQL_SUCCESS)
     {
         return sql->GetUIntData(0);
     }

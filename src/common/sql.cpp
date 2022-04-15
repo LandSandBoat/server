@@ -366,6 +366,7 @@ int32 SqlConnection::NextRow()
             return SQL_NO_DATA;
         }
     }
+    ShowFatalError("Query: %s", self->buf);
     ShowFatalError("NextRow: SQL_ERROR: %s", mysql_error(&self->handle));
     return SQL_ERROR;
 }
@@ -404,6 +405,7 @@ int32 SqlConnection::GetData(size_t col, char** out_buf, size_t* out_len)
         }
         return SQL_SUCCESS;
     }
+    ShowFatalError("Query: %s", self->buf);
     ShowFatalError("GetData: SQL_ERROR: %s", mysql_error(&self->handle));
     return SQL_ERROR;
 }
@@ -423,6 +425,7 @@ int8* SqlConnection::GetData(size_t col)
             return (int8*)self->row[col];
         }
     }
+    ShowFatalError("Query: %s", self->buf);
     ShowFatalError("GetData: SQL_ERROR: %s", mysql_error(&self->handle));
     return nullptr;
 }
@@ -442,6 +445,7 @@ int32 SqlConnection::GetIntData(size_t col)
             return (self->row[col] ? (int32)atoi(self->row[col]) : 0);
         }
     }
+    ShowFatalError("Query: %s", self->buf);
     ShowFatalError("GetIntData: SQL_ERROR: %s", mysql_error(&self->handle));
     return 0;
 }
@@ -461,6 +465,7 @@ uint32 SqlConnection::GetUIntData(size_t col)
             return (self->row[col] ? (uint32)strtoul(self->row[col], nullptr, 10) : 0);
         }
     }
+    ShowFatalError("Query: %s", self->buf);
     ShowFatalError("GetUIntData: SQL_ERROR: %s", mysql_error(&self->handle));
     return 0;
 }
@@ -480,6 +485,7 @@ uint64 SqlConnection::GetUInt64Data(size_t col)
             return (self->row[col] ? (uint64)strtoull(self->row[col], NULL, 10) : 0);
         }
     }
+    ShowFatalError("Query: %s", self->buf);
     ShowFatalError("GetFloatGetUInt64DataData: SQL_ERROR: %s", mysql_error(&self->handle));
     return 0;
 }
@@ -499,6 +505,7 @@ float SqlConnection::GetFloatData(size_t col)
             return (self->row[col] ? (float)atof(self->row[col]) : 0.f);
         }
     }
+    ShowFatalError("Query: %s", self->buf);
     ShowFatalError("GetFloatData: SQL_ERROR: %s", mysql_error(&self->handle));
     return 0;
 }
@@ -536,6 +543,7 @@ bool SqlConnection::SetAutoCommit(bool value)
         return true;
     }
 
+    ShowFatalError("Query: %s", self->buf);
     ShowFatalError("SetAutoCommit: SQL_ERROR: %s", mysql_error(&self->handle));
     return false;
 }
@@ -558,6 +566,7 @@ bool SqlConnection::GetAutoCommit()
         }
     }
 
+    ShowFatalError("Query: %s", self->buf);
     ShowFatalError("GetAutoCommit: SQL_ERROR: %s", mysql_error(&self->handle));
     return false;
 }
@@ -575,6 +584,7 @@ bool SqlConnection::TransactionStart()
         return true;
     }
 
+    ShowFatalError("Query: %s", self->buf);
     ShowFatalError("TransactionStart: SQL_ERROR: %s", mysql_error(&self->handle));
     return false;
 }
@@ -592,6 +602,7 @@ bool SqlConnection::TransactionCommit()
         return true;
     }
 
+    ShowFatalError("Query: %s", self->buf);
     ShowFatalError("TransactionCommit: SQL_ERROR: %s", mysql_error(&self->handle));
     return false;
 }
@@ -609,6 +620,7 @@ bool SqlConnection::TransactionRollback()
         return true;
     }
 
+    ShowFatalError("Query: %s", self->buf);
     ShowFatalError("TransactionRollback: SQL_ERROR: %s", mysql_error(&self->handle));
     return false;
 }

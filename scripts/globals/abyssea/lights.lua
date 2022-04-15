@@ -6,7 +6,7 @@ require("scripts/globals/status")
 require("scripts/globals/zone")
 -----------------------------------
 xi = xi or {}
-xi.abysseaLights = xi.abysseaLights or {}
+xi.abyssea = xi.abyssea or {}
 
 -- if the amount is 100 or 50 it is a special number and is randomised as per retail
 local lightInfo =
@@ -520,19 +520,19 @@ local lightInfo =
 
 local lightTypes =
 {
-    [xi.abyssea.deathType.PHYSICAL]    = {light = xi.abyssea.lightType.PEARL, lightType = "pearl"}, -- pearl
-    [xi.abyssea.deathType.MAGICAL]     = {light = xi.abyssea.lightType.AZURE, lightType = "azure"}, -- Azure
-    [xi.abyssea.deathType.WS_PHYSICAL] = {light = xi.abyssea.lightType.RUBY,  lightType = "ruby" }, -- Ruby
-    [xi.abyssea.deathType.WS_MAGICAL]  = {light = xi.abyssea.lightType.AMBER, lightType = "amber"}, -- Amber
+    [xi.abyssea.deathType.PHYSICAL]    = { light = xi.abyssea.lightType.PEARL, lightType = "pearl" }, -- pearl
+    [xi.abyssea.deathType.MAGICAL]     = { light = xi.abyssea.lightType.AZURE, lightType = "azure" }, -- Azure
+    [xi.abyssea.deathType.WS_PHYSICAL] = { light = xi.abyssea.lightType.RUBY,  lightType = "ruby"  }, -- Ruby
+    [xi.abyssea.deathType.WS_MAGICAL]  = { light = xi.abyssea.lightType.AMBER, lightType = "amber" }, -- Amber
 }
 
-xi.abysseaLights.RemoveDeathListeners = function(mob)
+xi.abyssea.RemoveDeathListeners = function(mob)
     mob:removeListener("ABYSSEA_PHYSICAL_DEATH_CHECK")
     mob:removeListener("ABYSSEA_MAGIC_DEATH_CHECK")
     mob:removeListener("ABYSSEA_DEATH_LIGHTS_CHECK")
 end
 
-xi.abysseaLights.AddDeathListeners = function(mob)
+xi.abyssea.AddDeathListeners = function(mob)
 	mob:addListener("MAGIC_TAKE", "ABYSSEA_MAGIC_DEATH_CHECK", function(target, caster, spell)
         if target:getHP() <= 0 and target:getDeathType() == xi.abyssea.deathType.NONE then
 			target:setDeathType(xi.abyssea.deathType.MAGICAL)
@@ -540,6 +540,7 @@ xi.abysseaLights.AddDeathListeners = function(mob)
     end)
 
     mob:addListener("WEAPONSKILL_TAKE", "ABYSSEA_WS_DEATH_CHECK", function(target, user, wsid)
+        -- TODO: Make this human-readable, and break out from the listener
         local magicalWS =
         {
             19,20,30,33,34,36,37,47,50,51,58,74,76,97,98,107,113,114,130,
@@ -565,15 +566,15 @@ xi.abysseaLights.AddDeathListeners = function(mob)
 		if deathType == xi.abyssea.deathType.NONE then
 			deathType = xi.abyssea.deathType.PHYSICAL
 		end
-        xi.abysseaLights.DropLights(player, mobArg:getName(), deathType, mobArg)
+        xi.abyssea.lights.DropLights(player, mobArg:getName(), deathType, mobArg)
 
-		xi.abysseaLights.RemoveDeathListeners(mobArg)
+		xi.abyssea.lights.RemoveDeathListeners(mobArg)
     end)
 end
 
 
 
-xi.abysseaLights.DropLights = function(killer, mobName, killType, mob)
+xi.abyssea.DropLights = function(killer, mobName, killType, mob)
     if killer then
         if not killer:isPC() and killer:getAllegiance() == 1 then
            local master = killer:getMaster()
@@ -613,11 +614,13 @@ xi.abysseaLights.DropLights = function(killer, mobName, killType, mob)
     dropLight = lightTypes[killType].light
 
     if dropLight == xi.abyssea.lightType.PEARL then
-        if mobName == "Ab_xzomit" or
+        if
+            mobName == "Ab_xzomit" or
             mobName == "Gneiss_Leech" or
             mobName == "Highland_Treant" or
             mobName == "Irate_Sheep" or
-            mobName == "Luison" then
+            mobName == "Luison"
+        then
             if xi.settings.ABYSSEA_LIGHTS_DROP_RATE > 0 then
                 dropRate = 2
             end
@@ -629,11 +632,13 @@ xi.abysseaLights.DropLights = function(killer, mobName, killType, mob)
     end
 
     if dropLight == xi.abyssea.lightType.AZURE then
-        if mobName == "Cluckatrice" or
+        if
+            mobName == "Cluckatrice" or
             mobName == "Pachypodium" or
             mobName == "Gully_Clionid" or
             mobName == "Amuckatrice" or
-            mobName == "Camelopardalis" then
+            mobName == "Camelopardalis"
+        then
             if xi.settings.ABYSSEA_LIGHTS_DROP_RATE > 0 then
                 dropRate = 100
             end

@@ -117,6 +117,13 @@ sol::table CLuaZone::getNPCs()
     return table;
 }
 
+sol::table CLuaZone::getMobs()
+{
+    auto table = luautils::lua.create_table();
+    m_pLuaZone->ForEachMob([&table](CMobEntity* PMob) { table.add(CLuaBaseEntity(PMob)); });
+    return table;
+}
+
 ZONEID CLuaZone::getID()
 {
     return m_pLuaZone->GetID();
@@ -380,6 +387,7 @@ void CLuaZone::Register()
     SOL_REGISTER("levelRestriction", CLuaZone::levelRestriction);
     SOL_REGISTER("getPlayers", CLuaZone::getPlayers);
     SOL_REGISTER("getNPCs", CLuaZone::getNPCs);
+    SOL_REGISTER("getMobs", CLuaZone::getMobs);
     SOL_REGISTER("getID", CLuaZone::getID);
     SOL_REGISTER("getName", CLuaZone::getName);
     SOL_REGISTER("getRegionID", CLuaZone::getRegionID);

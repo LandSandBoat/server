@@ -1764,6 +1764,21 @@ void CLuaBaseEntity::wait(sol::object const& milliseconds)
 }
 
 /************************************************************************
+ *  Function: setCarefulPathing(...)
+ *  Purpose : Enables or disables careful pathing for an entity.
+ *  Example : mob:setCarefulPathing(true)
+ *  Notes   : !!! THIS IS VERY EXPENSIVE !!!. Only use this as a last resort!
+ ************************************************************************/
+
+void CLuaBaseEntity::setCarefulPathing(bool careful)
+{
+    if (m_PBaseEntity->PAI->PathFind)
+    {
+        m_PBaseEntity->PAI->PathFind->SetCarefulPathing(careful);
+    }
+}
+
+/************************************************************************
  *  Function: openDoor()
  *  Purpose : Opens a door for 7 seconds; different time can be specified
  *  Example : npc:openDoor(30) -- Open for 30 sec; npc:openDoor() -- 7 sec
@@ -12294,9 +12309,8 @@ uint32 CLuaBaseEntity::getMobFlags()
 /************************************************************************
 *  Function: setNpcFlags()
 *  Purpose : Manually set NPC Entity Flags
-*  Example : mob:setMobSize(1)
-*  Notes   : only works if mobs model supports it, can also set flags
-*  Notes   : mainly used with onMobSpawn in mob script
+*  Example : npc:setNpcFlags(1)
+*  Notes   : 
 ************************************************************************/
 
 void CLuaBaseEntity::setNpcFlags(uint32 flags)
@@ -13639,6 +13653,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("continuePath", CLuaBaseEntity::continuePath);
     SOL_REGISTER("checkDistance", CLuaBaseEntity::checkDistance);
     SOL_REGISTER("wait", CLuaBaseEntity::wait);
+    SOL_REGISTER("setCarefulPathing", CLuaBaseEntity::setCarefulPathing);
 
     SOL_REGISTER("openDoor", CLuaBaseEntity::openDoor);
     SOL_REGISTER("closeDoor", CLuaBaseEntity::closeDoor);
