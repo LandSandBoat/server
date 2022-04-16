@@ -1,5 +1,5 @@
 -----------------------------------
--- Area: Abyssea - Grauberg
+-- Zone: Abyssea - La-Theine
 --  NPC: Atma Fabricant
 -----------------------------------
 require("scripts/globals/abyssea/atma_fabricant")
