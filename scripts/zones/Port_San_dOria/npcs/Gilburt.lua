@@ -1,7 +1,8 @@
 -----------------------------------
--- Area: Port Windurst
---  NPC: Fabricius
+-- Area: Port San d'Oria
+--  NPC: Gilburt
 -- Type: Abyssea Service NPC
+-- !pos 8.27 -4 -65 232
 -----------------------------------
 require("scripts/globals/abyssea")
 ----------------------------------
