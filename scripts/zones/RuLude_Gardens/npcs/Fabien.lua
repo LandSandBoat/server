@@ -1,7 +1,8 @@
 -----------------------------------
--- Area: Port Windurst
---  NPC: Fabricius
+-- Area: Ru'Lude Gardens
+--  NPC: Fabien
 -- Type: Abyssea Service NPC
+-- !pos 2.3 0 -65 243
 -----------------------------------
 require("scripts/globals/abyssea")
 ----------------------------------
