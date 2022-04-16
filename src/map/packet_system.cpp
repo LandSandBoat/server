@@ -798,20 +798,21 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
             // target offset used only for luopan placement as of now
             if (spellID >= SpellID::Geo_Regen && spellID <= SpellID::Geo_Gravity)
             {
+                // reset the action offset position to prevent other spells from using previous position data
+                PChar->m_ActionOffsetPos = {0, 0, 0};
+
                 // Need to set the target position plus offset for positioning correctly
                 auto* PTarget = dynamic_cast<CBattleEntity*>(PChar->GetEntity(TargID));
-                position_t offsetPos = PChar->loc.p;
 
                 if (PTarget != nullptr)
                 {
-                    offsetPos =
+                    PChar->m_ActionOffsetPos =
                     {
-                        PTarget->GetXPos() + actionOffset.x,
-                        PTarget->GetYPos() + actionOffset.y,
-                        PTarget->GetZPos() + actionOffset.z
+                        PTarget->loc.p.x + actionOffset.x,
+                        PTarget->loc.p.y + actionOffset.y,
+                        PTarget->loc.p.z + actionOffset.z
                     };
                 }
-                PChar->m_ActionOffsetPos = offsetPos;
             }
         }
         break;
