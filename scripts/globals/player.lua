@@ -1,5 +1,6 @@
 require("scripts/globals/gear_sets")
 require("scripts/globals/keyitems")
+require("scripts/globals/quests")
 require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/teleports")
@@ -162,6 +163,14 @@ xi.player.onGameIn = function(player, firstLogin, zoning)
         player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_JOURNEY_BEGINS) == QUEST_AVAILABLE
     then
         player:addQuest(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_JOURNEY_BEGINS)
+    end
+
+    -- This is for migration safety only, and should be removed at a later date
+    if
+        player:hasCompletedQuest(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_JOURNEY_BEGINS) and
+        player:getTraverserEpoch() == 0
+    then
+        player:setTraverserEpoch()
     end
 
     -- apply mods from gearsets (scripts/globals/gear_sets.lua)

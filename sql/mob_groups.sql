@@ -9103,9 +9103,9 @@ INSERT INTO `mob_groups` VALUES (21,4721,130,'Aellos_Handmaiden',0,128,0,0,9999,
 -- ------------------------------------------------------------
 
 -- fished
-INSERT INTO `mob_groups` VALUES (1,3543,132,'Sentinel_Crab',0,128,2198,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (2,2798,132,'Nahn',0,128,1772,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (3,2196,132,'Karkinos',0,128,1426,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (1,3543,132,'Sentinel_Crab',0,128,2198,0,0,75,90,0);
+INSERT INTO `mob_groups` VALUES (2,2798,132,'Nahn',0,128,1772,0,0,85,85,0);
+INSERT INTO `mob_groups` VALUES (3,2196,132,'Karkinos',0,128,1426,0,0,85,85,0);
 
 INSERT INTO `mob_groups` VALUES (4,4216,132,'Veld_Clionid',0,128,2570,0,999,74,75,0);
 INSERT INTO `mob_groups` VALUES (5,1244,132,'Ephemeral_Clionid',0,128,782,0,999,79,83,0);
@@ -9153,7 +9153,7 @@ INSERT INTO `mob_groups` VALUES (46,699,132,'Chasmic_Hornet',0,128,457,0,0,85,85
 INSERT INTO `mob_groups` VALUES (47,3134,132,'Piasa',0,128,1998,0,0,85,85,0);
 INSERT INTO `mob_groups` VALUES (48,2204,132,'Keesha_Poppo',0,128,1429,0,0,85,85,0);
 INSERT INTO `mob_groups` VALUES (49,2104,132,'Irrlicht',0,128,1379,0,0,85,85,0);
-INSERT INTO `mob_groups` VALUES (50,3080,132,'Ovni',0,128,1970,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (50,3080,132,'Ovni',0,128,1970,0,0,85,85,0);
 INSERT INTO `mob_groups` VALUES (51,3798,132,'Sturdy_Pyxis',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (52,76,132,'Akash',0,128,9,0,0,79,80,0);
 INSERT INTO `mob_groups` VALUES (53,6708,132,'Gigadaphnia',0,128,978,0,999,79,80,0);
