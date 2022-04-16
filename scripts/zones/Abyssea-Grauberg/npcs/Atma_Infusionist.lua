@@ -6,20 +6,20 @@ require('scripts/globals/abyssea/atma')
 -----------------------------------
 local entity = {}
 
-entity.onTrade = function(player,npc,trade)
+entity.onTrade = function(player, npc, trade)
 	xi.atma.onTrade(player, npc, trade)
 end
 
-entity.onTrigger = function(player,npc)
-	xi.atma.onTrigger(player,npc)
+entity.onTrigger = function(player, npc)
+	xi.atma.onTrigger(player, npc)
 end
 
-entity.onEventUpdate = function(player,csid,option)
-	xi.atma.onEventUpdate(player,csid,option)
+entity.onEventUpdate = function(player, csid, option, npc)
+	xi.atma.onEventUpdate(player, csid, option)
 end
 
-entity.onEventFinish = function(player,csid,option)
-	xi.atma.onEventFinish(player,csid,option)
+entity.onEventFinish = function(player, csid, option, npc)
+	xi.atma.onEventFinish(player, csid, option)
 end
 
 return entity
