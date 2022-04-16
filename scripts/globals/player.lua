@@ -165,6 +165,14 @@ xi.player.onGameIn = function(player, firstLogin, zoning)
         player:addQuest(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_JOURNEY_BEGINS)
     end
 
+    -- This is for migration safety only, and should be removed at a later date
+    if
+        player:hasCompletedQuest(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_JOURNEY_BEGINS) and
+        player:getTraverserEpoch() == 0
+    then
+        player:setTraverserEpoch()
+    end
+
     -- apply mods from gearsets (scripts/globals/gear_sets.lua)
     xi.gear_sets.checkForGearSet(player)
 

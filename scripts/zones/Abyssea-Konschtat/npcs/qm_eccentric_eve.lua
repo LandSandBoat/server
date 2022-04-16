@@ -4,7 +4,8 @@
 -- Spawns Eccentric Eve
 -- !pos 230.413 32.278 280.677 15
 -----------------------------------
-require("scripts/globals/abyssea")
+require('scripts/globals/abyssea')
+require('scripts/globals/keyitems')
 -----------------------------------
 local entity = {}
 

@@ -6,7 +6,8 @@
 -- !pos -40.000 68.692 575.000 15
 -- !pos -25.000 68.792 560.000 15
 -----------------------------------
-require("scripts/globals/abyssea")
+require('scripts/globals/abyssea')
+require('scripts/globals/keyitems')
 -----------------------------------
 local entity = {}
 
