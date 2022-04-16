@@ -28,6 +28,20 @@ m:setEnabled(true)
 xi = xi or {}
 xi.dynamis = xi.dynamis or {}
 
+-- TODO: Port the following cpp functions:
+-- GetDynaTimeRemaining (Easy port to LUA)
+-- checkHourglassValid (Easy port to LUA)
+-- prepareDynamisEntry (Potentially port to LUA)
+-- pingDynamis (Unlikely to port to LUA, uses RPC Sync)
+-- registerHourglass (Potentially port to LUA)
+-- verifyHoldsValidHourglass
+-- updateHourglassExpireTime 
+-- DynamisGetExpiryTimepoint
+-- DynamisGetToken (SQL Hook Requires C++)
+-- DynamisGetExpiryTimepoint (SQL Hook Requires C++)
+-- CallRPCAsync
+-- Look over statueOnEngaged
+
 --------------------------------------------
 --        Global Dynamis Variables        --
 --------------------------------------------
@@ -484,7 +498,7 @@ xi.dynamis.eyesEra =
 }
 
 xi.dynamis.entryNpcOnTrade = function(player, npc, trade, message_not_reached_level, message_another_group, message_cannot_enter)
-    local zoneID = player:getZoneID()
+    local playerZoneID = player:getZoneID()
     if entryInfoEra[zoneID].enabled == false then return end -- If zone is not enabled, return.
     if (player:getLocalVar(entryInfoEra[zoneID].dynamis_has_enteredVar) == 0) then -- Check if player has entered the Dynamis before.
     if (entryInfoEra[zoneID].reqs == false) then return end end -- Check if player meets all requirements or is a GM.
@@ -517,6 +531,21 @@ xi.dynamis.entryNpcOnTrade = function(player, npc, trade, message_not_reached_le
         else
             player:PrintToPlayer("The Perpetual Hourglass' time has run out.", 29)
         end
+    end
+end
+
+dynamis.entryNpcOnTrigger = function(player, npc, message_default)
+    local playerZoneID = player:getZoneID()
+    if dynamis.entryInfo[playerZoneID].enabled == false then
+        player:messageSpecial(message_default)
+        return
+    end
+    if dynamis.entryInfo[playerZoneID].csSand ~= nil and player:getCharVar("HasSeenXarcabardDynamisCS") == 1 and player:hasKeyItem(tpz.ki.VIAL_OF_SHROUDED_SAND) == false then
+        player:startEvent(dynamis.entryInfo[playerZoneID].csSand)
+    elseif dynamis.entryInfo[playerZoneID].csWin ~= nil and player:hasKeyItem(dynamis.entryInfo[playerZoneID].winKI) and player:getCharVar(dynamis.entryInfo[playerZoneID].hasSeenWinCSVar) == 0 then
+        player:startEvent(dynamis.entryInfo[playerZoneID].csWin)
+    else
+        player:messageSpecial(message_default)
     end
 end
 
@@ -647,9 +676,7 @@ m:addOverride("xi.dynamis.zoneOnZoneIn", function(player, prevZone)
     return -1
 end)
 
-
-
-dynamis.spawnWave = function(mobList, waveNumber)
+xi.dynamis.spawnWave = function(mobList, waveNumber)
     local zoneId = zone:getID()
     local iStart = 4096*4096+(4096*mobList.zoneID)
     local i = iStart
@@ -669,7 +696,7 @@ dynamis.spawnWave = function(mobList, waveNumber)
 
 end
 
-dynamis.statueOnSpawn = function(mob, eyes) -- Used to spawn mobs off of a single parent
+xi.dynamis.statueOnSpawn = function(mob, eyes) -- Used to spawn mobs off of a single parent
     mob:setLocalVar("dynaReadyToSpawnChildren", 1)
     if mob:getFamily() >= 92 and mob:getFamily() <= 95 then
         mob:setLocalVar("eyeColor", eyes)
@@ -679,7 +706,7 @@ dynamis.statueOnSpawn = function(mob, eyes) -- Used to spawn mobs off of a singl
     end
 end
 
-dynamis.statueOnEngaged = function(mob, target, mobList, randomChildrenList)
+xi.dynamis.statueOnEngaged = function(mob, target, mobList, randomChildrenList)
     local zoneId = mob:getZoneID()
     if mob:getFamily() >= 92 and mob:getFamily() <= 95 then
         local eyes = mob:getLocalVar("eyeColor")
@@ -691,7 +718,9 @@ dynamis.statueOnEngaged = function(mob, target, mobList, randomChildrenList)
 
     local mobID = mob:getID()
     local specificChildrenList = nil
-    if mobID ~= nil then
+    local randomChildrenCount = nil
+    if mobList[mobID] ~= nil then
+        randomChildrenCount = mobList[mobID].randomChildrenCount
         specificChildrenList = mobList[mobID].specificChildren
     end
 
@@ -706,6 +735,56 @@ dynamis.statueOnEngaged = function(mob, target, mobList, randomChildrenList)
             if forceLink == true then child:updateEnmity(target) end
         end
         i = i + 1
+    end
+    i = 1
+    if dynamis.dynaInfo[zoneId].specifiedChildren == true then
+        while randomChildrenList[randomChildrenCount] ~= nil and randomChildrenCount ~= nil and randomChildrenCount > 0 do
+            local originalRoll = math.random(1,#randomChildrenList[randomChildrenCount])
+            local roll = originalRoll
+            while GetMobByID(randomChildrenList[randomChildrenCount][roll]):isSpawned() == true and roll ~= nil do
+                roll = roll + 1
+                if roll > #randomChildrenList[randomChildrenCount] then roll = 1 end
+                if roll == originalRoll then roll = nil end
+            end
+            if roll ~= nil then
+                local child = GetMobByID(randomChildrenList[randomChildrenCount][roll])
+                local home = child:getSpawnPos()
+                local randomSpawn = false
+                if home.x == 1 and home.y == 1 and home.z == 1 then
+                    child:setSpawn(mob:getXPos()+math.random()*6-3, mob:getYPos()-0.3, mob:getZPos()+math.random()*6-3, mob:getRotPos())
+                    randomSpawn = true
+                end
+                SpawnMob(randomChildrenList[randomChildrenCount][roll]):updateEnmity(target)
+                if randomSpawn == true then child:setLocalVar("clearSpawnPosOnDeath", 1) end
+            else
+                break
+            end
+            randomChildrenCount = randomChildrenCount - 1
+        end
+    else
+        while randomChildrenList ~= nil and randomChildrenCount ~= nil and randomChildrenCount > 0 do
+            local originalRoll = math.random(1,#randomChildrenList)
+            local roll = originalRoll
+            while GetMobByID(randomChildrenList[roll]):isSpawned() == true and roll ~= nil do
+                roll = roll + 1
+                if roll > #randomChildrenList then roll = 1 end
+                if roll == originalRoll then roll = nil end
+            end
+            if roll ~= nil then
+                local child = GetMobByID(randomChildrenList[roll])
+                local home = child:getSpawnPos()
+                local randomSpawn = false
+                if home.x == 1 and home.y == 1 and home.z == 1 then
+                    child:setSpawn(mob:getXPos()+math.random()*6-3, mob:getYPos()-0.3, mob:getZPos()+math.random()*6-3, mob:getRotPos())
+                    randomSpawn = true
+                end
+                SpawnMob(randomChildrenList[roll]):updateEnmity(target)
+                if randomSpawn == true then child:setLocalVar("clearSpawnPosOnDeath", 1) end
+            else
+                break
+            end
+            randomChildrenCount = randomChildrenCount - 1
+        end
     end
 end
 
@@ -723,6 +802,26 @@ xi.dynamis.onStatueSkillFinished = function(mob, skill)
     if skill:getID() == 1124 or skill:getID() == 1125 then
         mob:setUnkillable(false)
         mob:setHP(0)
+    end
+end
+
+xi.dynamis.mobOnRoamAction = function(mob)
+    local zoneId = mob:getZoneID()
+    if dynamis.dynaInfo[zoneId].updatedRoam == true then
+        local home = mob:getSpawnPos()
+        local location = mob:getPos()
+        if location.x == home.x and location.y == home.y and location.z == home.z and location.rot == home.rot then
+            mob:setPos(location.x, location.y, location.z, home.rot)
+        else
+            mob:pathTo(home.x, home.y, home.z)
+        end
+    else
+        local home = mob:getSpawnPos()
+        local location = mob:getPos()
+        mob:pathTo(home.x, home.y, home.z)
+        if location.x == home.x and location.y == home.y and location.z == home.z and location.rot ~= home.rot then
+            mob:setPos(location.x, location.y, location.z, home.rot)
+        end
     end
 end
 
@@ -821,25 +920,21 @@ m:addOverride("xi.dynamis.qmOnTrigger", function(player, npc)
     end
 end)
 
-dynamis.sjQMOnTrigger = function(player, npc)
+xi.dynamis.sjQMOnTrigger = function(player, npc)
     local zoneId = npc:getZoneID()
 
     if dynamis.dynaInfoEra[zoneId].sjRestriction == true then
         for _, member in pairs(player:getAlliance()) do
-            if member:getZoneID() == player:getZoneID() then
-                if member:hasStatusEffect(xi.effect.SJ_RESTRICTION) then
-                    if member:hasStatusEffect(xi.effect.RERAISE) then -- Check for reraise and store values.
-                        member:setLocalVar("had_reraise", 1)
-                        member:setLocalVar("reraise_power", member:getStatusEffect(xi.effect.RERAISE):getPower())
-                        member:setLocalVar("reraise_duration", member:getStatusEffect(xi.effect.RERAISE):getDuration())
-                    end
-                    member:delStatusEffect(xi.effect.SJ_RESTRICTION)
-                    player:setCharVar("SJUnlockTime", os.time() + 14400) -- Set Immune to reobtaining SJ_Restriction for 4 hours.
-                    if member:getLocalVar("had_reraise") == 1 then -- Reapply previous reraise if lost.
-                        if not member:hasStatusEffect(xi.effect.RERAISE) then
-                            member:addStatusEffect(xi.effect.RERAISE, member:getLocalVar("reraise_power"), 0, member:getLocalVar("reraise_duration"))
-                        end
-                    end
+            if member:getZoneID() == player:getZoneID() and member:hasStatusEffect(xi.effect.SJ_RESTRICTION) == true then
+                if member:hasStatusEffect(xi.effect.RERAISE) then -- Check for reraise and store values.
+                    member:setLocalVar("had_reraise", 1)
+                    member:setLocalVar("reraise_power", member:getStatusEffect(xi.effect.RERAISE):getPower())
+                    member:setLocalVar("reraise_duration", member:getStatusEffect(xi.effect.RERAISE):getDuration())
+                end
+                member:delStatusEffect(xi.effect.SJ_RESTRICTION)
+                player:setCharVar("SJUnlockTime", os.time() + 14400) -- Set Immune to reobtaining SJ_Restriction for 4 hours.
+                if member:getLocalVar("had_reraise") == 1 and member:hasStatusEffect(xi.effect.RERAISE) == false then -- Reapply previous reraise if lost.
+                        member:addStatusEffect(xi.effect.RERAISE, member:getLocalVar("reraise_power"), 0, member:getLocalVar("reraise_duration"))
                 end
             end
         end
