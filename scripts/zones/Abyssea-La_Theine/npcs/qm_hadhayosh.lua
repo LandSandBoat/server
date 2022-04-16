@@ -4,7 +4,8 @@
 -- Spawns Hadhayosh
 -- !pos 434 24 41 132
 -----------------------------------
-require("scripts/globals/abyssea")
+require('scripts/globals/abyssea')
+require('scripts/globals/keyitems')
 -----------------------------------
 local entity = {}
 

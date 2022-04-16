@@ -4,7 +4,8 @@
 -- Spawns Briareus
 -- !pos -179 7 259 132
 -----------------------------------
-require("scripts/globals/abyssea")
+require('scripts/globals/abyssea')
+require('scripts/globals/keyitems')
 -----------------------------------
 local entity = {}
 

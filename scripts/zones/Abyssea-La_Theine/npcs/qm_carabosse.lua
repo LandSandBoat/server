@@ -4,7 +4,8 @@
 -- Spawns Carabosse
 -- !pos 11 17 148 132
 -----------------------------------
-require("scripts/globals/abyssea")
+require('scripts/globals/abyssea')
+require('scripts/globals/keyitems')
 -----------------------------------
 local entity = {}
 

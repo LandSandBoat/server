@@ -4,17 +4,18 @@
 -- Spawns La Theine Liege
 -- !pos 80 15 199 132
 -----------------------------------
-require("scripts/globals/abyssea")
+require('scripts/globals/abyssea')
+require('scripts/globals/items')
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     local ID = zones[player:getZoneID()]
-    xi.abyssea.qmOnTrade(player, npc, trade, ID.mob.LA_THEINE_LIEGE, { 2897 })
+    xi.abyssea.qmOnTrade(player, npc, trade, ID.mob.LA_THEINE_LIEGE, { xi.items.TRANSPARENT_INSECT_WING })
 end
 
 entity.onTrigger = function(player, npc)
-    xi.abyssea.qmOnTrigger(player, npc, 0, 0, { 2897 })
+    xi.abyssea.qmOnTrigger(player, npc, 0, 0, { xi.items.TRANSPARENT_INSECT_WING })
 end
 
 entity.onEventUpdate = function(player, csid, option)
