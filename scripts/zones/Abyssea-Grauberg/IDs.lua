@@ -110,6 +110,7 @@ zones[xi.zone.ABYSSEA_GRAUBERG] =
             17818224,
             17818225,
         },
+        STURDY_PYXIS_BASE = 17818119,
     },
 }
 
