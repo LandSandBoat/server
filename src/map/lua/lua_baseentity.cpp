@@ -10384,9 +10384,9 @@ bool CLuaBaseEntity::delLatent(uint16 condID, uint16 conditionValue, uint16 mID,
 }
 
 /************************************************************************
- *  Function: getEquipedItemsMaxModValue()
+ *  Function: getEquippedItemsMaxModValue()
  *  Purpose : Returns the highest integer value of a specified Mod on all equiped items
- *  Example : local maxValue = player:getEquipedItemsMaxModValue(xi.mod.GEOMANCY_BONUS)
+ *  Example : local maxValue = player:getEquippedItemsMaxModValue(xi.mod.GEOMANCY_BONUS)
  *  Notes   :
  ************************************************************************/
 
