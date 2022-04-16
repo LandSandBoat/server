@@ -15,7 +15,7 @@ require("scripts/globals/utils")
 require("scripts/globals/zone")
 require("scripts/globals/msg")
 require("scripts/globals/pathfind")
-require("scripts/module_utils")
+require("modules/module_utils")
 --------------------------------------------
 --       Module Affected Scripts          --
 --------------------------------------------
@@ -25,8 +25,8 @@ require("scripts/globals/dynamis")
 local m = Module:new("wings_75_cap_dynamis")
 m:setEnabled(true)
 
-xi = xi or {}
-xi.dynamis = xi.dynamis or {}
+-- xi = xi or {}
+-- xi.dynamis = xi.dynamis or {}
 
 -- TODO: Port the following cpp functions:
 -- GetDynaTimeRemaining (Easy port to LUA)
@@ -531,21 +531,6 @@ xi.dynamis.entryNpcOnTrade = function(player, npc, trade, message_not_reached_le
         else
             player:PrintToPlayer("The Perpetual Hourglass' time has run out.", 29)
         end
-    end
-end
-
-dynamis.entryNpcOnTrigger = function(player, npc, message_default)
-    local playerZoneID = player:getZoneID()
-    if dynamis.entryInfo[playerZoneID].enabled == false then
-        player:messageSpecial(message_default)
-        return
-    end
-    if dynamis.entryInfo[playerZoneID].csSand ~= nil and player:getCharVar("HasSeenXarcabardDynamisCS") == 1 and player:hasKeyItem(tpz.ki.VIAL_OF_SHROUDED_SAND) == false then
-        player:startEvent(dynamis.entryInfo[playerZoneID].csSand)
-    elseif dynamis.entryInfo[playerZoneID].csWin ~= nil and player:hasKeyItem(dynamis.entryInfo[playerZoneID].winKI) and player:getCharVar(dynamis.entryInfo[playerZoneID].hasSeenWinCSVar) == 0 then
-        player:startEvent(dynamis.entryInfo[playerZoneID].csWin)
-    else
-        player:messageSpecial(message_default)
     end
 end
 
@@ -1105,3 +1090,5 @@ m:addOverride("xi.dynamis.refillStatueOnSpawn", function(mob) end)
 m:addOverride("xi.dynamis.refillStatueOnSDeath", function(mob, player, isKiller) end)
 m:addOverride("xi.dynamis.qmOnTrade", function(player, npc, trade) end) -- Not used...  Era Dynamis does not have QM pops.
 m:addOverride("xi.dynamis.getExtensions", function(player) end)
+
+return m
