@@ -34,7 +34,7 @@ xi.dynamis = xi.dynamis or {}
 -- prepareDynamisEntry (Potentially port to LUA)
 -- pingDynamis (Unlikely to port to LUA, uses RPC Sync)
 -- registerHourglass (Potentially port to LUA)
--- verifyHoldsValidHourglass
+-- verifyHoldsValidHourglass (Potentially port to LUA)
 -- updateHourglassExpireTime 
 -- DynamisGetExpiryTimepoint
 -- DynamisGetToken (SQL Hook Requires C++)
@@ -706,8 +706,7 @@ xi.dynamis.statueOnSpawn = function(mob, eyes) -- Used to spawn mobs off of a si
     end
 end
 
-xi.dynamis.statueOnEngaged = function(mob, target, mobList, randomChildrenList)
-    local zoneId = mob:getZoneID()
+xi.dynamis.statueOnEngaged = function(mob, target, mobList)
     if mob:getFamily() >= 92 and mob:getFamily() <= 95 then
         local eyes = mob:getLocalVar("eyeColor")
         mob:AnimationSub(eyes)
@@ -718,9 +717,7 @@ xi.dynamis.statueOnEngaged = function(mob, target, mobList, randomChildrenList)
 
     local mobID = mob:getID()
     local specificChildrenList = nil
-    local randomChildrenCount = nil
     if mobList[mobID] ~= nil then
-        randomChildrenCount = mobList[mobID].randomChildrenCount
         specificChildrenList = mobList[mobID].specificChildren
     end
 
@@ -735,56 +732,6 @@ xi.dynamis.statueOnEngaged = function(mob, target, mobList, randomChildrenList)
             if forceLink == true then child:updateEnmity(target) end
         end
         i = i + 1
-    end
-    i = 1
-    if dynamis.dynaInfo[zoneId].specifiedChildren == true then
-        while randomChildrenList[randomChildrenCount] ~= nil and randomChildrenCount ~= nil and randomChildrenCount > 0 do
-            local originalRoll = math.random(1,#randomChildrenList[randomChildrenCount])
-            local roll = originalRoll
-            while GetMobByID(randomChildrenList[randomChildrenCount][roll]):isSpawned() == true and roll ~= nil do
-                roll = roll + 1
-                if roll > #randomChildrenList[randomChildrenCount] then roll = 1 end
-                if roll == originalRoll then roll = nil end
-            end
-            if roll ~= nil then
-                local child = GetMobByID(randomChildrenList[randomChildrenCount][roll])
-                local home = child:getSpawnPos()
-                local randomSpawn = false
-                if home.x == 1 and home.y == 1 and home.z == 1 then
-                    child:setSpawn(mob:getXPos()+math.random()*6-3, mob:getYPos()-0.3, mob:getZPos()+math.random()*6-3, mob:getRotPos())
-                    randomSpawn = true
-                end
-                SpawnMob(randomChildrenList[randomChildrenCount][roll]):updateEnmity(target)
-                if randomSpawn == true then child:setLocalVar("clearSpawnPosOnDeath", 1) end
-            else
-                break
-            end
-            randomChildrenCount = randomChildrenCount - 1
-        end
-    else
-        while randomChildrenList ~= nil and randomChildrenCount ~= nil and randomChildrenCount > 0 do
-            local originalRoll = math.random(1,#randomChildrenList)
-            local roll = originalRoll
-            while GetMobByID(randomChildrenList[roll]):isSpawned() == true and roll ~= nil do
-                roll = roll + 1
-                if roll > #randomChildrenList then roll = 1 end
-                if roll == originalRoll then roll = nil end
-            end
-            if roll ~= nil then
-                local child = GetMobByID(randomChildrenList[roll])
-                local home = child:getSpawnPos()
-                local randomSpawn = false
-                if home.x == 1 and home.y == 1 and home.z == 1 then
-                    child:setSpawn(mob:getXPos()+math.random()*6-3, mob:getYPos()-0.3, mob:getZPos()+math.random()*6-3, mob:getRotPos())
-                    randomSpawn = true
-                end
-                SpawnMob(randomChildrenList[roll]):updateEnmity(target)
-                if randomSpawn == true then child:setLocalVar("clearSpawnPosOnDeath", 1) end
-            else
-                break
-            end
-            randomChildrenCount = randomChildrenCount - 1
-        end
     end
 end
 
