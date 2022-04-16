@@ -50,7 +50,6 @@ zones[xi.zone.PORT_JEUNO] =
         CHEST_IS_EMPTY          = 8665, -- The chest is empty.
         KINDLIX_SHOP_DIALOG     = 8684, -- Our fam'ly peddle sky flowers. You want have nice scenery? Send fireworks sky high! It's great feeling. Bwee hee hee.
         PYROPOX_SHOP_DIALOG     = 8688, -- Bwee hee. I get fireworks from all 'round globe. Kindlix never sell more than me.
-        OBTAINED_NUM_KEYITEMS   = 8466, -- Obtained key item: <number> <keyitem>!
     },
     mob =
     {

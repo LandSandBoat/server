@@ -68,8 +68,6 @@ zones[xi.zone.RULUDE_GARDENS] =
         LEARNED_SECRET_TECHNIQUE         = 15095, -- You learned the secret technique of the bushin!
         COMMON_SENSE_SURVIVAL            = 15721, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
         TEAR_IN_FABRIC_OF_SPACE          = 15904, -- There appears to be a tear in the fabric of space...
-        OBTAINED_NUM_KEYITEMS            = 14868, -- Obtained key item: <number> <keyitem>!
-        NOT_ACQUAINTED                   = 14870, -- I'm sorry, but I don't believe we're acquainted. Please leave me be.
     },
     mob =
     {
