@@ -37,6 +37,7 @@ zones[xi.zone.PORT_SAN_DORIA] =
         PICKPOCKET_MARQUIE             = 7634, -- A pickpocket? Things sure have gotten rough around here. You watch yourself.
         PICKPOCKET_CRILDE              = 7636, -- She went down this corridor! Get that rapscallion, quick!
         PICKPOCKET_EAUGOUINT           = 7638, -- Hey, that pickpocket just ran that way! Get after her, quick!
+        PICKPOCKET_CORIBALGEANT        = 7644, -- I'd like to just to take a moogle and-- Ah, pardon me, I was lost in thought. No, I haven't seen anyone suspicious.
         PICKPOCKET_PARCARIN            = 7807, -- Long live King Destin! Huh? Pickpockets? Can't you see I'm in the middle of something here?
         PICKPOCKET_SOLGIERTE           = 7810, -- Confound them! Give me a sword and... Eh? A pickpocket? Do I look like I hang out with that sort?
         FFR_PORTAURE                   = 7837, -- What's this? A magic shop? Hmm...I could use a new line of work, and magic just might be the ticket!
@@ -73,9 +74,8 @@ zones[xi.zone.PORT_SAN_DORIA] =
         PATOLLE_OPEN_DIALOG            = 8305, -- Hey, [mister/miss]! How about some specialty goods from Kuzotz?
         BONMAURIEUT_OPEN_DIALOG        = 8306, -- My shipment is in! Would you like to see what has just arrived from the Elshimo Uplands?
         FFR_LOOKS_CURIOUSLY_BASE       = 8443, -- Answald looks over curiously for a moment.
-        OBTAINED_NUM_KEYITEMS          = 11536, -- Obtained key item: <number> <keyitem>!
-        NOT_ACQUAINTED                 = 11538, -- I'm sorry, but I don't believe we're acquainted. Please leave me be.
-        PICKPOCKET_CORIBALGEANT        = 7643, -- I'd like to just to take a moogle and-- Ah, pardon me, I was lost in thought. No, I haven't seen anyone suspicious.
+        OBTAINED_NUM_KEYITEMS          = 11537, -- Obtained key item: <number> <keyitem>!
+        NOT_ACQUAINTED                 = 11539, -- I'm sorry, but I don't believe we're acquainted. Please leave me be.
     },
     mob =
     {
