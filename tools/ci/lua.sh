@@ -71,7 +71,6 @@ global_objects=(
 
     removeSleepEffects
 
-    ZILART
     TOAU
     WOTG
     COP
@@ -108,7 +107,6 @@ global_objects=(
     OTHER_AREAS_LOG
     TAVNAZIA
     OUTLANDS
-    ZILART
     COP
     TOAU
     AHT_URHGAN
@@ -120,19 +118,9 @@ global_objects=(
     AMK
     ASA
     ABYSSEA
-    ABYSSEA_KONSCHTAT
-    ABYSSEA_TAHRONGI
-    ABYSSEA_LATHEINE
-    ABYSSEA_MISAREAUX
-    ABYSSEA_VUNKERL
-    ABYSSEA_ATTOHWA
-    ABYSSEA_ALTEPA
-    ABYSSEA_GRAUBERG
-    ABYSSEA_ULEGUERAND
     SOA
     ADOULIN
     COALITION
-    ROV
     QUEST_LOGS
     MISSION_LOGS
 
