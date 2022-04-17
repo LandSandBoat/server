@@ -29,7 +29,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-                player:getFameLevel(BASTOK) >= 2
+                player:getFameLevel(xi.quest.fame_area.BASTOK) >= 2
         end,
 
         [xi.zone.BASTOK_MINES] =

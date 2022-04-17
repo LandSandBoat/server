@@ -21,7 +21,7 @@ end
 entity.onTrigger = function(player, npc)
     local FearofFlying = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.FEAR_OF_FLYING)
     -- csid 173 ?
-    if (FearofFlying == QUEST_AVAILABLE and    player:getFameLevel(BASTOK) >=3) then
+    if (FearofFlying == QUEST_AVAILABLE and    player:getFameLevel(xi.quest.fame_area.BASTOK) >=3) then
         player:startEvent(170) -- Quest Start Dialogue
     elseif (FearofFlying == QUEST_COMPLETED) then
         player:startEvent(172) -- Dialogue after Completion
@@ -49,7 +49,7 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 13113)
             player:setTitle(xi.title.AIRSHIP_DENOUNCER)
             player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.FEAR_OF_FLYING)
-            player:addFame(BASTOK, 30)
+            player:addFame(xi.quest.fame_area.BASTOK, 30)
         end
     end
 end

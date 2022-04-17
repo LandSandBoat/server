@@ -24,7 +24,7 @@ quest.sections =
     -- Section: Quest available
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and player:getFameLevel(BASTOK) >= 4
+            return status == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.BASTOK) >= 4
         end,
 
         [xi.zone.METALWORKS] =

@@ -5658,7 +5658,7 @@ void CLuaBaseEntity::addFame(sol::object const& areaObj, uint16 fame)
 /************************************************************************
  *  Function: setFame()
  *  Purpose : Sets the fame level for a player to a specified amount
- *  Example : player:setFame(BASTOK, 1500)
+ *  Example : player:setFame(xi.quest.fame_area.BASTOK, 1500)
  *  Notes   :
  ************************************************************************/
 

@@ -15,10 +15,10 @@ entity.onTrigger = function(player, npc)
 
     -- Bastok Missions.
     local BastokMissions = 0xFFFFFFFE
-    if (player:hasCompletedMission (BASTOK, xi.mission.id.bastok.FETICHISM)) then
+    if (player:hasCompletedMission(xi.mission.log_id.BASTOK, xi.mission.id.bastok.FETICHISM)) then
         BastokMissions = BastokMissions - 2 -- Fetichism.
     end
-    if (player:hasCompletedMission (BASTOK, xi.mission.id.bastok.TO_THE_FORSAKEN_MINES)) then
+    if (player:hasCompletedMission(xi.mission.log_id.BASTOK, xi.mission.id.bastok.TO_THE_FORSAKEN_MINES)) then
         BastokMissions = BastokMissions - 4 -- To the Forsaken Mines.
     end
 

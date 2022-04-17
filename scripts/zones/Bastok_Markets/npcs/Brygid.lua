@@ -139,7 +139,7 @@ entity.onEventFinish = function(player, csid, option)
             player:addTitle(xi.title.BRYGID_APPROVED)
             player:addItem(12720)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 12720)
-            player:addFame(BASTOK, 30)
+            player:addFame(xi.quest.fame_area.BASTOK, 30)
             player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BRYGID_THE_STYLIST)
         end
 
@@ -157,7 +157,7 @@ entity.onEventFinish = function(player, csid, option)
         player:addTitle(xi.title.BASTOKS_SECOND_BEST_DRESSED)
         player:addItem(14400+wantsSubligar)
         player:messageSpecial(ID.text.ITEM_OBTAINED, 14400+wantsSubligar)
-        player:addFame(BASTOK, 30)
+        player:addFame(xi.quest.fame_area.BASTOK, 30)
         player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BRYGID_THE_STYLIST_RETURNS)
     end
 end

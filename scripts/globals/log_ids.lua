@@ -2,14 +2,14 @@
 --  Area/Content Identifiers
 -----------------------------------
 
-SANDORIA =
+local SANDORIA =
 {
     ['full_name'] = "San d' Oria",
     ['mission_log']= 0,
     ['quest_log']= 0,
     ['fame_area']= 0
 }
-BASTOK =
+local BASTOK =
 {
     ['full_name'] = "Bastok",
     ['mission_log']= 1,

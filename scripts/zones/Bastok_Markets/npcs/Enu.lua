@@ -46,7 +46,7 @@ entity.onEventFinish = function(player, csid, option)
         player:tradeComplete( )
         player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.WISH_UPON_A_STAR)
         player:setCharVar("WishUponAStar_Status", 0)
-        player:addFame(BASTOK, 50)
+        player:addFame(xi.quest.fame_area.BASTOK, 50)
         player:addItem(1236, 4) -- Reward for quest completion: Cactus Stems x 4
         player:messageSpecial(ID.text.ITEM_OBTAINED, 1236)
     end

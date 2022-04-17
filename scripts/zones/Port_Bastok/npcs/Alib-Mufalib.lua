@@ -85,7 +85,7 @@ entity.onEventFinish = function(player, csid, option)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.BLUE_SENTINEL_BADGE)
     elseif (csid == 360) then
         player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LURE_OF_THE_WILDCAT)
-        player:addFame(BASTOK, 150)
+        player:addFame(xi.quest.fame_area.BASTOK, 150)
         player:setCharVar("WildcatBastok", 0)
         player:delKeyItem(xi.ki.BLUE_SENTINEL_BADGE)
         player:addKeyItem(xi.ki.BLUE_INVITATION_CARD)

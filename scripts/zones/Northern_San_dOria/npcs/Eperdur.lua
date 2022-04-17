@@ -59,7 +59,7 @@ entity.onEventFinish = function(player, csid, option)
             player:delKeyItem(xi.ki.LETTER_FROM_VIRNAGE)
             player:addItem(4731)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 4731) -- Scroll of Teleport-Dem
-            player:addFame(BASTOK, 30)
+            player:addFame(xi.quest.fame_area.BASTOK, 30)
             player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.ALTANA_S_SORROW)
         end
     elseif csid == 680 then

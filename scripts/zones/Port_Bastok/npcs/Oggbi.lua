@@ -48,7 +48,7 @@ entity.onEventFinish = function(player, csid, option)
             player:addItem(17478)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 17478) -- Beat Cesti
             player:needToZone(true)
-            player:addFame(BASTOK, 20)
+            player:addFame(xi.quest.fame_area.BASTOK, 20)
             player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.GHOSTS_OF_THE_PAST)
         end
     elseif (csid == 233) then
@@ -61,7 +61,7 @@ entity.onEventFinish = function(player, csid, option)
             player:delKeyItem(xi.ki.SAN_DORIAN_MARTIAL_ARTS_SCROLL)
             player:addItem(14090)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 14090) -- Temple Gaiters
-            player:addFame(BASTOK, 40)
+            player:addFame(xi.quest.fame_area.BASTOK, 40)
             player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_FIRST_MEETING)
         end
     end

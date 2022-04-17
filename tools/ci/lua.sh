@@ -71,7 +71,6 @@ global_objects=(
 
     removeSleepEffects
 
-    BASTOK
     WINDURST
     ZILART
     TOAU
@@ -92,7 +91,6 @@ global_objects=(
     GetMissionLogInfo
     GetQuestLogInfo
 
-    BASTOK
     WINDURST
     JEUNO
     OTHER_AREAS
@@ -103,7 +101,6 @@ global_objects=(
     ADOULIN
     COALITION
 
-    BASTOK
     WINDURST
     JEUNO
     SELBINA
