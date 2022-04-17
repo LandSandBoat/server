@@ -15,7 +15,7 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    -- if (player:hasKeyItem(xi.ki.MARK_OF_SEED) and player:getCurrentMission(ACP) == xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_II) then
+    -- if (player:hasKeyItem(xi.ki.MARK_OF_SEED) and player:getCurrentMission(xi.mission.log_id.ACP) == xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_II) then
     --     player:startEvent(5)
     -- else xi.bcnm.onTrigger(player, npc)
     -- Temp disabled pending fixes for the BCNM mobs.

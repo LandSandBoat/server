@@ -75,9 +75,6 @@ global_objects=(
     COP
     ASSAULT
     CAMPAIGN
-    ACP
-    AMK
-    ASA
     SOA
 
     QUEST_AVAILABLE
@@ -107,9 +104,6 @@ global_objects=(
     WOTG
     CRYSTAL_WAR
     CAMPAIGN
-    ACP
-    AMK
-    ASA
     ABYSSEA
     SOA
     ADOULIN

@@ -16,7 +16,7 @@ xi.amk.helpers.helmTrade = function(player, helmType, broke)
     local regionId = player:getCurrentRegion()
 
     if
-        player:getCurrentMission(AMK) == xi.mission.id.amk.WELCOME_TO_MY_DECREPIT_DOMICILE and
+        player:getCurrentMission(xi.mission.log_id.AMK) == xi.mission.id.amk.WELCOME_TO_MY_DECREPIT_DOMICILE and
         broke ~= 1
     then
         if

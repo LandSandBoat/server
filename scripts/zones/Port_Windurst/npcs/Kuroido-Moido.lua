@@ -47,7 +47,7 @@ entity.onTrigger = function(player, npc)
         else
             player:startEvent(286, 0, 937) -- Post Making Amens! dialogue (before Wonder Wands)
         end
-    elseif (player:getCurrentMission(ASA) == xi.mission.id.asa.THAT_WHICH_CURDLES_BLOOD) then
+    elseif (player:getCurrentMission(xi.mission.log_id.ASA) == xi.mission.id.asa.THAT_WHICH_CURDLES_BLOOD) then
         local item = 0
         local asaStatus = player:getCharVar("ASA_Status")
 
