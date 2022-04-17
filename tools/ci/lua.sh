@@ -36,7 +36,6 @@ global_objects=(
     quests
     utils
     npcUtil
-    item_utils
 
     mixins
     g_mixins

@@ -1,9 +1,13 @@
+-----------------------------------
+-- Item Utils (Used by Skill Books)
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
+-----------------------------------
+xi = xi or {}
+xi.item_utils = {}
 
-item_utils = {}
-
-function item_utils.skillBookCheck(target, skillID)
+xi.item_utils.skillBookCheck = function(target, skillID)
     local skill = skillID
     local mainCap = target:getMaxSkillLevel(target:getMainLvl(), target:getMainJob(), skill) or 0
     local subCap = target:getMaxSkillLevel(target:getSubLvl(), target:getSubJob(), skill) or 0
@@ -34,6 +38,6 @@ function item_utils.skillBookCheck(target, skillID)
     return 0
 end
 
-function item_utils.skillBookUse(target, skillID)
+xi.item_utils.skillBookUse = function(target, skillID)
     target:trySkillUp(skillID, target:getMainLvl(), true, true)
 end
