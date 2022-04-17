@@ -113,7 +113,12 @@ set(SOURCES
     zone_instance.cpp
     zone_instance.h
     zone.cpp
-    zone.h)
+    zone.h
+
+    # Testing for modules
+    ${CMAKE_SOURCE_DIR}/modules/custom/cpp/custom_module_1.cpp
+    ${CMAKE_SOURCE_DIR}/modules/custom/cpp/custom_module_2.cpp
+    )
 
 add_subdirectory(ai)
 add_subdirectory(entities)

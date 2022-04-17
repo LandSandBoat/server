@@ -29,9 +29,33 @@
 #include <regex>
 #include <string>
 #include <vector>
+#include <iostream>
+
+namespace
+{
+    // static storage, init and access
+    std::vector<std::unique_ptr<CPPModule>>& cppModules()
+    {
+        static std::vector<std::unique_ptr<CPPModule>> cppModules{};
+        return cppModules;
+    }
+}
 
 namespace moduleutils
 {
+    void _RegisterCPPModule(std::unique_ptr<CPPModule>&& module)
+    {
+        cppModules().emplace_back(std::move(module));
+    }
+
+    void OnInit()
+    {
+        for (auto& module : cppModules())
+        {
+            module->OnInit();
+        }
+    }
+
     struct Override
     {
         std::string              filename;
@@ -101,7 +125,7 @@ namespace moduleutils
         }
     }
 
-    void TryApplyModules()
+    void TryApplyLuaModules()
     {
         sol::state& lua = luautils::lua;
         for (auto& override : overrides)
@@ -134,7 +158,7 @@ namespace moduleutils
         }
     }
 
-    void ReportModuleUsage()
+    void ReportLuaModuleUsage()
     {
         for (auto& override : overrides)
         {

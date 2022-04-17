@@ -22,8 +22,39 @@
 #ifndef _MODULEUTILS_H
 #define _MODULEUTILS_H
 
+#include <memory>
+
+class CPPModule
+{
+public:
+    // TODO: Handle virtual destructor properly
+    virtual void OnInit(){};
+    virtual void OnTick(){};
+    virtual void OnCharZoneIn(){};
+    virtual void OnCharZoneOut(){};
+};
+
+// TODO: I don't really like this
+// https://stackoverflow.com/questions/41367674/c-cpp-files-as-modules
+// TODO: Replace this with CMake in-file lists and voodoo
+#define REGISTER_CPP_MODULE(className) \
+  static std::nullptr_t e = ([] () { moduleutils::RegisterCPPModule<className>(); return nullptr; }) ();
+
 namespace moduleutils
 {
+    // Internal
+    // TODO: Hide this
+    void _RegisterCPPModule(std::unique_ptr<CPPModule>&& module);
+
+    template <typename T>
+    static void RegisterCPPModule()
+    {
+        _RegisterCPPModule(std::make_unique<T>());
+    }
+
+    // Hooks for calling modules
+    void OnInit();
+
     // The program has two "states":
     // - Load-time: As all data is being loaded and init'd
     // - Run-time: Once the main server tick starts
@@ -43,8 +74,8 @@ namespace moduleutils
     // problems.
 
     void LoadLuaModules();
-    void TryApplyModules();
-    void ReportModuleUsage();
+    void TryApplyLuaModules();
+    void ReportLuaModuleUsage();
 }; // namespace moduleutils
 
 #endif // _MODULEUTILS_H
