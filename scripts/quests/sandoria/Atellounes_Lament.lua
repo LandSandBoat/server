@@ -26,7 +26,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-                player:getFameLevel(SANDORIA) >= 2 and
+                player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 2 and
                 player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.SEEING_SPOTS) == QUEST_COMPLETED
         end,
 

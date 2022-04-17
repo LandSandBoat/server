@@ -26,7 +26,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(679) -- Finish quest "Altana's Sorrow"
     elseif ActingInGoodFaith == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.GANTINEUXS_LETTER) then
         player:startEvent(680) -- Finish quest "Acting in Good Faith"
-    elseif HealingTheLand == QUEST_AVAILABLE and player:getFameLevel(SANDORIA) >= 4 and player:getMainLvl() >= 10 then
+    elseif HealingTheLand == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 4 and player:getMainLvl() >= 10 then
         player:startEvent(681) -- Start quest "Healing the Land"
     elseif HealingTheLand == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.SEAL_OF_BANISHING) then
         player:startEvent(682) -- During quest "Healing the Land"
@@ -85,7 +85,7 @@ entity.onEventFinish = function(player, csid, option)
             player:addItem(4730)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 4730) -- Scroll of Teleport-Holla
             player:needToZone(true)
-            player:addFame(SANDORIA, 30)
+            player:addFame(xi.quest.fame_area.SANDORIA, 30)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.HEALING_THE_LAND)
         end
     elseif csid == 685 and option == 0 then
@@ -97,7 +97,7 @@ entity.onEventFinish = function(player, csid, option)
             player:delKeyItem(xi.ki.FEIYIN_MAGIC_TOME)
             player:addItem(4747)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 4747) -- Scroll of Teleport-Vahzl
-            player:addFame(SANDORIA, 30)
+            player:addFame(xi.quest.fame_area.SANDORIA, 30)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SORCERY_OF_THE_NORTH)
         end
     end

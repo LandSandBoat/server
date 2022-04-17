@@ -69,7 +69,7 @@ entity.onTrigger = function(player, npc)
     local anExplorersFootsteps = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.AN_EXPLORER_S_FOOTSTEPS)
 
     -- AN EXPLORER'S FOOTSTEPS
-    if anExplorersFootsteps == QUEST_AVAILABLE and math.floor((player:getFameLevel(SANDORIA) + player:getFameLevel(BASTOK)) / 2) >= 1 then
+    if anExplorersFootsteps == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.SELBINA_RABAO) >= 1 then
         player:startEvent(40)
     elseif anExplorersFootsteps == QUEST_ACCEPTED then
         if not player:hasItem(xi.items.CLAY_TABLET) and not player:hasItem(xi.items.LUMP_OF_SELBINA_CLAY) then

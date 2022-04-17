@@ -27,7 +27,7 @@ entity.onTrigger = function(player, npc)
             }
 
             player:showText(npc, ID.text.DEGUERENDARS_OPEN_DIALOG)
-            xi.shop.general(player, stock, SANDORIA)
+            xi.shop.general(player, stock, xi.quest.fame_area.SANDORIA)
         end
     else
         player:showText(npc, ID.text.DEGUERENDARS_COP_NOT_COMPLETED)

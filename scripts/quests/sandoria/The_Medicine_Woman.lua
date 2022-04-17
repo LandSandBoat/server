@@ -32,7 +32,7 @@ quest.sections =
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
                 player:hasCompletedQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_TRADER_IN_THE_FOREST) and
-                player:getFameLevel(SANDORIA) >= 3
+                player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 3
         end,
 
         [xi.zone.NORTHERN_SAN_DORIA] =

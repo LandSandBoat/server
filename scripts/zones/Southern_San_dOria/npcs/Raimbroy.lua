@@ -27,7 +27,7 @@ entity.onTrigger = function(player, npc)
     local theSweetestThings = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_SWEETEST_THINGS)
 
     -- "The Sweetest Things" Quest Dialogs
-    if (player:getFameLevel(SANDORIA) >= 2 and theSweetestThings == QUEST_AVAILABLE) then
+    if (player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 2 and theSweetestThings == QUEST_AVAILABLE) then
         local theSweetestThingsVar = player:getCharVar("theSweetestThings")
         if (theSweetestThingsVar == 1) then
             player:startEvent(533)
@@ -65,10 +65,10 @@ entity.onEventFinish = function(player, csid, option)
         player:addTitle(xi.title.APIARIST)
         player:addGil(xi.settings.GIL_RATE*400)
         if (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_SWEETEST_THINGS) == QUEST_ACCEPTED) then
-            player:addFame(SANDORIA, 30)
+            player:addFame(xi.quest.fame_area.SANDORIA, 30)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_SWEETEST_THINGS)
         else
-            player:addFame(SANDORIA, 5)
+            player:addFame(xi.quest.fame_area.SANDORIA, 5)
         end
     end
 end

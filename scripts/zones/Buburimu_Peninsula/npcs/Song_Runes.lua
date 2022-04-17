@@ -48,7 +48,7 @@ entity.onEventFinish = function(player, csid, option)
         player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_OLD_MONUMENT)
         player:addTitle(xi.title.RESEARCHER_OF_CLASSICS)
         player:addFame(BASTOK, 10)
-        player:addFame(SANDORIA, 10)
+        player:addFame(xi.quest.fame_area.SANDORIA, 10)
         player:addFame(WINDURST, 10)
     end
 end

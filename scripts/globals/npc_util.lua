@@ -492,7 +492,7 @@ end
     Otherwise, return true.
 
     Example of usage with params (all params are optional):
-        npcUtil.completeQuest(player, SANDORIA, xi.quest.id.sandoria.ROSEL_THE_ARMORER, {
+        npcUtil.completeQuest(player, xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.ROSEL_THE_ARMORER, {
             item = { {640, 2}, 641 },   -- see npcUtil.giveItem for formats
             itemParams = {              -- see npcUtil.giveItem for formats
                 fromTrade = true,
@@ -530,6 +530,8 @@ function npcUtil.completeQuest(player, area, quest, params)
     if params["fame"] == nil then
         params["fame"] = 30
     end
+
+    -- TODO: Map fameArea in non-global table, or explicitly define
     if params["fameArea"] ~= nil and params["fameArea"]["fame_area"] ~= nil and type(params["fame"]) == "number" then
         player:addFame(params["fameArea"], params["fame"])
     elseif (type(area) == "number" or area["fame_area"] ~= nil) and type(params["fame"]) == "number" then
@@ -593,7 +595,7 @@ end
     Otherwise, return true.
 
     Example of usage with params (all params are optional):
-        npcUtil.completeMission(player, SANDORIA, xi.quest.id.sandoria.ROSEL_THE_ARMORER, {
+        npcUtil.completeMission(player, xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.ROSEL_THE_ARMORER, {
             item = { {640, 2}, 641 },   -- see npcUtil.giveItem for formats
             itemParams = {              -- see npcUtil.giveItem for formats
                 fromTrade = true,
