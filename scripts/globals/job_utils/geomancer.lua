@@ -107,7 +107,6 @@ local indiData =
     [xi.magic.spell.INDI_GRAVITY]    = {visualEffect = indiVisualEffect.wind.enemies,    effect = xi.effect.GEO_WEIGHT,              targetType = xi.auraTarget.ENEMIES},
 }
 
-
 local potencyData =
 {
     [xi.effect.GEO_REGEN]               = {divisor =  20.00, minPotency = 1.0, maxPotency = 30.0, geoModMultiplier = 2.0},
@@ -152,7 +151,6 @@ end
 xi.job_utils.geomancer.indiOnMagicCastingCheck = function(caster, target, spell)
     if target:hasStatusEffect(xi.effect.COLURE_ACTIVE) then
         local effect = target:getStatusEffect(xi.effect.COLURE_ACTIVE)
-        caster:PrintToPlayer(string.format("aura effect: (%i)", indiData[spell:getID()].effect), 15)
         if effect:getSubType() == indiData[spell:getID()].effect then
             return xi.msg.basic.EFFECT_ALREADY_ACTIVE
         end
@@ -181,8 +179,6 @@ local function getEffectPotency(player, effect)
     if  player:getEquipID(xi.slot.RANGED) == 0 or player:getWeaponSkillType(xi.slot.RANGED) ~= xi.skill.HANDBELL then
         handbellSkill = 0
     end
-
-    player:PrintToPlayer(string.format("Skill: (%i), Geomancy Mod: (%i)",geoSkill + handbellSkill, geomancyMod), 15)
 
     local combinedSkillLevel = utils.clamp(handbellSkill + geoSkill, 0, 900)
     local divisor            = potencyData[effect].divisor
@@ -221,7 +217,7 @@ xi.job_utils.geomancer.doIndiSpell = function(caster, target, spell)
     local duration = 180 -- TODO: add mod for duration
 
     target:addStatusEffectEx(xi.effect.COLURE_ACTIVE, xi.effect.COLURE_ACTIVE, visualEffect, 3, duration, effect, potency, targetType, xi.effectFlag.AURA)
-    caster:PrintToPlayer(string.format("Potency: (%f)", potency), 15)
+
     return effect
 end
 
@@ -240,8 +236,6 @@ xi.job_utils.geomancer.spawnLuopan = function(player, target, spell)
     local potency    = getEffectPotency(player, effect)
     local targetType = geoData[spellID].targetType
 
-    player:PrintToPlayer(string.format("Potency: (%i)", potency), 15)
-
     -- Attach effect
     xi.job_utils.geomancer.addAura(luopan, 0, effect, potency, targetType)
 
@@ -249,8 +243,6 @@ xi.job_utils.geomancer.spawnLuopan = function(player, target, spell)
     luopan:setLocalVar("MP_COST", spell:getMPCost())
 
     -- Change the luopans appearance to match the effect
-    -- TODO: This is should be the element of the spell being cast added as an offset
-    -- on top of a base model ID in core.
     luopan:setModelId(modelID)
 
     -- Set HP loss over time
