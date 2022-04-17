@@ -97,8 +97,6 @@ global_objects=(
     COALITION
 
     JEUNO
-    MHAURA
-    KAZHAM
     NORG
     OTHER_AREAS_LOG
     TAVNAZIA

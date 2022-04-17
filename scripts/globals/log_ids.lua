@@ -2,6 +2,7 @@
 --  Area/Content Identifiers
 -----------------------------------
 
+--[[ Commented until refactor
 SANDORIA =
 {
     ['full_name'] = "San d' Oria",
@@ -249,6 +250,7 @@ MISSION_LOGS = {
     [12] = "SOA",
     [13] = "ROV",
 }
+]]
 
 local function GetQMLogInfo(cmdParamText, logNameTable)
     -- Returns the table from this file after validating

@@ -44,7 +44,7 @@ entity.onEventFinish = function(player, csid, option)
         player:confirmTrade()
         npcUtil.completeQuest(player, OTHER_AREAS_LOG, xi.quest.id.otherAreas.THE_SAND_CHARM, {
             ki = xi.ki.MAP_OF_BOSTAUNIEUX_OUBLIETTE,
-            fame_area = MHAURA,
+            fameArea = xi.quest.fame_area.WINDURST,
             var = "theSandCharmVar"
         })
         player:setCharVar("SmallDialogByBlandine", 1)

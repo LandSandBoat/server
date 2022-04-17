@@ -31,7 +31,7 @@ entity.onTrigger = function(player, npc)
     if (gulliblesTravelsStatus == QUEST_ACCEPTED) then
         local magriffonGilRequest = player:getCharVar("MAGRIFFON_GIL_REQUEST")
         player:startEvent(145, 0, magriffonGilRequest)
-    elseif (gulliblesTravelsStatus == QUEST_AVAILABLE and player:getFameLevel(KAZHAM) >= 6) then
+    elseif (gulliblesTravelsStatus == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.WINDURST) >= 6) then
         local gil = math.random(10, 30) * 1000
         player:setCharVar("MAGRIFFON_GIL_REQUEST", gil)
         player:startEvent(144, 0, gil)
@@ -42,7 +42,7 @@ entity.onTrigger = function(player, npc)
     elseif (evenmoreTravelsStatus == QUEST_ACCEPTED and player:getCharVar("EVEN_MORE_GULLIBLES_PROGRESS") == 2) then
         player:startEvent(152, 0, 1144, 256)
     elseif (gulliblesTravelsStatus == QUEST_COMPLETED) then
-        if (evenmoreTravelsStatus == QUEST_AVAILABLE and player:getFameLevel(KAZHAM) >= 7 and player:needToZone() == false) then
+        if (evenmoreTravelsStatus == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.WINDURST) >= 7 and player:needToZone() == false) then
         player:startEvent(148, 0, 256, 0, 0, 35000)
         else
             player:startEvent(147)
@@ -64,7 +64,7 @@ entity.onEventFinish = function(player, csid, option)
         player:confirmTrade()
         player:delGil(player:getCharVar("MAGRIFFON_GIL_REQUEST"))
         player:setCharVar("MAGRIFFON_GIL_REQUEST", 0)
-        player:addFame(KAZHAM, 30)
+        player:addFame(xi.quest.fame_area.WINDURST, 30)
         player:setTitle(xi.title.GULLIBLES_TRAVELS)
         player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.GULLIBLES_TRAVELS)
         player:needToZone(true)
@@ -79,7 +79,7 @@ entity.onEventFinish = function(player, csid, option)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TREASURE_MAP)
     elseif (csid == 152) then
         player:setCharVar("EVEN_MORE_GULLIBLES_PROGRESS", 0)
-        player:addFame(KAZHAM, 30)
+        player:addFame(xi.quest.fame_area.WINDURST, 30)
         player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.EVEN_MORE_GULLIBLES_TRAVELS)
     end
 end

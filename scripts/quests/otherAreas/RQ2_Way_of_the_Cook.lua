@@ -21,7 +21,7 @@ local totalHoursLeft = 0
 quest.reward =
 {
     fame  = 120,
-    fameArea = MHAURA,
+    fameArea = xi.quest.fame_area.WINDURST,
     title = xi.title.ONE_STAR_PURVEYOR,
 }
 

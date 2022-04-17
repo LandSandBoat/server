@@ -22,7 +22,7 @@ local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.HIS_
 quest.reward =
 {
     fame    = 120,
-    fameArea = MHAURA,
+    fameArea = xi.quest.fame_area.WINDURST,
     gil     = 2000,
     keyItem = xi.ki.MAP_OF_THE_TORAIMARAI_CANAL,
 }
