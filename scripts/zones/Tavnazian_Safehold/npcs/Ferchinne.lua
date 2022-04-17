@@ -40,7 +40,7 @@ end
 entity.onEventFinish = function(player, csid, option)
     if csid == 241 then
         player:addQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.FLY_HIGH)
-    elseif csid == 243 and npcUtil.completeQuest(player, OTHER_AREAS_LOG, xi.quest.id.otherAreas.FLY_HIGH, { item = xi.items.MISTMELT }) then -- Mistmelt
+    elseif csid == 243 and npcUtil.completeQuest(player, xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.FLY_HIGH, { item = xi.items.MISTMELT }) then -- Mistmelt
         player:confirmTrade()
     elseif csid == 245 and npcUtil.giveItem(player, xi.items.MISTMELT) then -- Mistmelt
         player:confirmTrade()

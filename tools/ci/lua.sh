@@ -83,9 +83,7 @@ global_objects=(
 
     JEUNO
     NORG
-    OTHER_AREAS_LOG
     OUTLANDS
-    ASSAULT
 
     onBattlefieldHandlerInitialise
 
