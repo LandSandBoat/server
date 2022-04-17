@@ -210,7 +210,7 @@ entity.onEventFinish = function(player, csid, option)
         player:delGil(1000)
         player:messageSpecial(ID.text.PAY_DIVINATION) -- You pay 1000 gil for the divination.
     elseif csid == 707 then
-        npcUtil.completeQuest(player, AHT_URHGAN, xi.quest.id.ahtUrhgan.BEGINNINGS, {item=17717})
+        npcUtil.completeQuest(player, xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.BEGINNINGS, {item=17717})
 
     -- OMENS
     elseif csid == 710 and beginnings == QUEST_COMPLETED then

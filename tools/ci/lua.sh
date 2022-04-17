@@ -79,24 +79,13 @@ global_objects=(
     GetQuestLogInfo
 
     JEUNO
-    OTHER_AREAS
     OUTLANDS
-    AHT_URHGAN
-    CRYSTAL_WAR
-    ABYSSEA
-    COALITION
 
     JEUNO
     NORG
     OTHER_AREAS_LOG
-    TAVNAZIA
     OUTLANDS
-    AHT_URHGAN
     ASSAULT
-    CRYSTAL_WAR
-    CAMPAIGN
-    ABYSSEA
-    COALITION
 
     onBattlefieldHandlerInitialise
 
