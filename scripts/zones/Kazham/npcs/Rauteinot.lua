@@ -58,7 +58,7 @@ entity.onEventFinish = function(player, csid, option)
             player:delKeyItem(xi.ki.SUBLIME_STATUE_OF_THE_GODDESS)
             player:addItem(4728)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 4728)
-            player:addFame(WINDURST, 30)
+            player:addFame(xi.quest.fame_area.WINDURST, 30)
             player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.MISSIONARY_MAN)
         end
     end

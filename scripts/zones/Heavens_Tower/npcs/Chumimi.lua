@@ -114,7 +114,7 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 17423) -- Casting Wand
             player:needToZone(true)
             player:setCharVar("theThreeMagiSupport", 0)
-            player:addFame(WINDURST, 20)
+            player:addFame(xi.quest.fame_area.WINDURST, 20)
             player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_THREE_MAGI)
         end
     elseif csid == 270 then
@@ -130,7 +130,7 @@ entity.onEventFinish = function(player, csid, option)
             player:delKeyItem(xi.ki.FOE_FINDER_MK_I)
             player:addItem(14092)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 14092) -- wizards sabots
-            player:addFame(WINDURST, 40)
+            player:addFame(xi.quest.fame_area.WINDURST, 40)
             player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.RECOLLECTIONS)
         end
     elseif csid == 276 then

@@ -21,7 +21,7 @@ entity.onTrigger = function(player, npc)
     local makingAmends = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_AMENDS) --First quest in series
     local makingAmens = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_AMENS) --Second quest in series
     local wonderWands = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDER_WANDS) --Third and final quest in series
-    local pfame = player:getFameLevel(WINDURST)
+    local pfame = player:getFameLevel(xi.quest.fame_area.WINDURST)
     local needToZone = player:needToZone()
     local brokenWand = player:hasKeyItem(xi.ki.BROKEN_WAND)
 
@@ -79,7 +79,7 @@ entity.onEventFinish = function(player, csid, option)
         player:addTitle(xi.title.HAKKURU_RINKURUS_BENEFACTOR)
         player:addGil(xi.settings.GIL_RATE*6000)
         player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE*6000)
-        player:addFame(WINDURST, 150)
+        player:addFame(xi.quest.fame_area.WINDURST, 150)
         player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_AMENS)
     end
 end

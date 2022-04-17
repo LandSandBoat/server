@@ -27,7 +27,7 @@ quest.sections =
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
                 player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CHASING_TALES) and
-                player:getFameLevel(WINDURST) >= 4 and
+                player:getFameLevel(xi.quest.fame_area.WINDURST) >= 4 and
                 not quest:getMustZone(player)
         end,
 

@@ -16,7 +16,7 @@ local BASTOK =
     ['quest_log']= 1,
     ['fame_area']= 1
 }
-WINDURST =
+local WINDURST =
 {
     ['full_name'] = "Windurst",
     ['mission_log']= 2,

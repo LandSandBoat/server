@@ -89,7 +89,7 @@ entity.onTrigger = function(player, npc)
 
     -- ROCK RACKETEER (Mihgo's Amigo follow-up)
     elseif mihgosAmigo == QUEST_COMPLETED and rockRacketeer == QUEST_AVAILABLE and
-        player:getFameLevel(WINDURST) >= 3
+        player:getFameLevel(xi.quest.fame_area.WINDURST) >= 3
     then
         if player:needToZone() then
             player:startEvent(89) -- complete

@@ -72,7 +72,7 @@ entity.onEventFinish = function(player, csid, option)
     if csid == 10000 and option == 3002 then
         player:tradeComplete()
         player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.FLOWER_CHILD)
-        player:addFame(WINDURST, 120)
+        player:addFame(xi.quest.fame_area.WINDURST, 120)
         player:setMoghouseFlag(4)
         player:messageSpecial(ID.text.MOGHOUSE_EXIT)
     elseif csid == 10000 and option == 1 then

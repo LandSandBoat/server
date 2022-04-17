@@ -28,7 +28,7 @@ entity.onTrigger = function(player, npc)
             1650,  6500,   --Kopparnickel Ore
             5165,   736    --Movalpolos Water
         }
-        xi.shop.general(player, stock, WINDURST)
+        xi.shop.general(player, stock, xi.quest.fame_area.WINDURST)
 
     end
 

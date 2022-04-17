@@ -70,7 +70,7 @@ entity.onEventFinish = function(player, csid, option)
             player:delKeyItem(xi.ki.GANTINEUXS_LETTER)
             player:addItem(4732)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 4732) -- Scroll of Teleport-Mea
-            player:addFame(WINDURST, 30)
+            player:addFame(xi.quest.fame_area.WINDURST, 30)
             player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ACTING_IN_GOOD_FAITH)
         end
     elseif csid == 681 and option == 0 then

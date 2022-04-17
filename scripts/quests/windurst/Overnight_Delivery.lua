@@ -28,7 +28,7 @@ quest.sections =
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
                 player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.FOOD_FOR_THOUGHT) and
-                player:getFameLevel(WINDURST) >= 2 and
+                player:getFameLevel(xi.quest.fame_area.WINDURST) >= 2 and
                 player:getLocalVar('Quest[2][14]mustZone') == 0
         end,
 
@@ -217,7 +217,7 @@ quest.sections =
             ['Ohbiru-Dohbiru'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getFameLevel(WINDURST) < 6 then
+                    if player:getFameLevel(xi.quest.fame_area.WINDURST) < 6 then
                         return quest:event(351):replaceDefault()
                     end
                 end,

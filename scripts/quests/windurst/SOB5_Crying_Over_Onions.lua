@@ -15,7 +15,7 @@ local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CRYING_OV
 quest.reward =
 {
     fame     = 120,
-    fameArea = WINDURST,
+    fameArea = xi.quest.fame_area.WINDURST,
 }
 
 quest.sections =
@@ -35,7 +35,7 @@ quest.sections =
                     if quest:getVar(player, 'Reward') == 1 then
                         if
                             player:getMainLvl() >= 5 and
-                            player:getFameLevel(WINDURST) >= 5 and
+                            player:getFameLevel(xi.quest.fame_area.WINDURST) >= 5 and
                             not quest:getMustZone(player)
                         then
                             return quest:progressEvent(496) -- Quest starting event.

@@ -32,7 +32,7 @@ quest.sections =
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
                 player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WATER_WAY_TO_GO) and
-                player:getFameLevel(WINDURST) >= 5 and
+                player:getFameLevel(xi.quest.fame_area.WINDURST) >= 5 and
                 not quest:getMustZone(player)
         end,
 

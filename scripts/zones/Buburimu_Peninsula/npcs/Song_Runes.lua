@@ -49,7 +49,7 @@ entity.onEventFinish = function(player, csid, option)
         player:addTitle(xi.title.RESEARCHER_OF_CLASSICS)
         player:addFame(xi.quest.fame_area.BASTOK, 10)
         player:addFame(xi.quest.fame_area.SANDORIA, 10)
-        player:addFame(WINDURST, 10)
+        player:addFame(xi.quest.fame_area.WINDURST, 10)
     end
 end
 

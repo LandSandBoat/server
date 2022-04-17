@@ -71,7 +71,6 @@ global_objects=(
 
     removeSleepEffects
 
-    WINDURST
     ZILART
     TOAU
     WOTG
@@ -91,7 +90,6 @@ global_objects=(
     GetMissionLogInfo
     GetQuestLogInfo
 
-    WINDURST
     JEUNO
     OTHER_AREAS
     OUTLANDS
@@ -101,7 +99,6 @@ global_objects=(
     ADOULIN
     COALITION
 
-    WINDURST
     JEUNO
     SELBINA
     MHAURA

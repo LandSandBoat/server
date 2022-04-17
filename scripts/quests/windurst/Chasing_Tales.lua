@@ -31,7 +31,7 @@ quest.sections =
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
                 player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.EARLY_BIRD_CATCHES_THE_BOOKWORM) and
-                player:getFameLevel(WINDURST) >= 3 and
+                player:getFameLevel(xi.quest.fame_area.WINDURST) >= 3 and
                 not quest:getMustZone(player)
         end,
 
