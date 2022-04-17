@@ -71,7 +71,7 @@ entity.onTrigger = function(player, npc)
     -- Tuning In
     if tuningIn == QUEST_AVAILABLE
         and player:getFameLevel(xi.quest.fame_area.WINDURST) >= 4
-        and (player:getCurrentMission(COP) >= xi.mission.id.cop.DISTANT_BELIEFS or player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_LAST_VERSE))
+        and (player:getCurrentMission(xi.mission.log_id.COP) >= xi.mission.id.cop.DISTANT_BELIEFS or player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_LAST_VERSE))
     then
         player:startEvent(884, 0, 1696, 1697, 1698) -- Magicked Steel Ingot, Spruce Lumber, Extra-fine File
 

@@ -71,8 +71,6 @@ global_objects=(
 
     removeSleepEffects
 
-    WOTG
-    COP
     ASSAULT
     CAMPAIGN
     SOA
@@ -98,10 +96,8 @@ global_objects=(
     OTHER_AREAS_LOG
     TAVNAZIA
     OUTLANDS
-    COP
     AHT_URHGAN
     ASSAULT
-    WOTG
     CRYSTAL_WAR
     CAMPAIGN
     ABYSSEA

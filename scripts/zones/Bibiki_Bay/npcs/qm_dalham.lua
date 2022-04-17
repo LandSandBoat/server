@@ -12,7 +12,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local cop = player:getCurrentMission(COP)
+    local cop = player:getCurrentMission(xi.mission.log_id.COP)
 
     if (cop == xi.mission.id.cop.CALM_BEFORE_THE_STORM and not GetMobByID(ID.mob.DALHAM):isSpawned() and player:getCharVar("COP_Dalham_KILL") == 0) then
         SpawnMob(ID.mob.DALHAM):updateClaim(player)

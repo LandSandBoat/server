@@ -14,7 +14,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getCurrentMission(COP) >= xi.mission.id.cop.THE_SAVAGE then
+    if player:getCurrentMission(xi.mission.log_id.COP) >= xi.mission.id.cop.THE_SAVAGE then
         if GetRegionOwner(xi.region.TAVNAZIANARCH) ~= xi.nation.WINDURST then
             player:showText(npc, ID.text.ALIZABE_CLOSED_DIALOG)
         else

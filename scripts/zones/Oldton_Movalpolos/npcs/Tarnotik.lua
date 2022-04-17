@@ -10,7 +10,7 @@ require("scripts/globals/npc_util")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if player:getCurrentMission(COP) >= xi.mission.id.cop.THREE_PATHS and npcUtil.tradeHas(trade, 1725) then
+    if player:getCurrentMission(xi.mission.log_id.COP) >= xi.mission.id.cop.THREE_PATHS and npcUtil.tradeHas(trade, 1725) then
         player:startEvent(32)
     end
 end

@@ -13,7 +13,7 @@ end
 
 entity.onTrigger = function(player, npc)
     if
-        player:getCurrentMission(COP) == xi.mission.id.cop.FIRE_IN_THE_EYES_OF_MEN and
+        player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.FIRE_IN_THE_EYES_OF_MEN and
         player:getCharVar("PromathiaStatus") == 0
     then
         player:startEvent(4)

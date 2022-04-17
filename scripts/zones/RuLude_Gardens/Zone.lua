@@ -37,11 +37,11 @@ zone_object.onRegionEnter = function(player, region)
 
     if regionID == 1 then
         if
-            player:getCurrentMission(COP) == xi.mission.id.cop.FLAMES_IN_THE_DARKNESS and
+            player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.FLAMES_IN_THE_DARKNESS and
             player:getCharVar("PromathiaStatus") == 2
         then
             player:startEvent(10051)
-        elseif player:getCurrentMission(COP) == xi.mission.id.cop.DAWN then
+        elseif player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.DAWN then
             if
                 player:getCharVar("COP_3-taru_story") == 2 and
                 player:getCharVar("COP_shikarees_story") == 1 and
