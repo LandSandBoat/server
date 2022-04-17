@@ -688,7 +688,7 @@ namespace luautils
             ShowInfo("[FileWatcher] %s -> %s", filename, out_str);
         }
 
-        moduleutils::TryApplyModules();
+        moduleutils::TryApplyLuaModules();
     }
 
     sol::table GetCacheEntryFromFilename(std::string filename)

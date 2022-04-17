@@ -278,7 +278,9 @@ int32 do_init(int32 argc, char** argv)
 
     PacketGuard::Init();
 
-    moduleutils::ReportModuleUsage();
+    moduleutils::OnInit();
+
+    moduleutils::ReportLuaModuleUsage();
 
     ShowStatus("The map-server is ready to work!");
     ShowMessage("=======================================================================");
