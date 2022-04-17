@@ -21,7 +21,7 @@ end
 entity.onTrigger = function(player, npc)
     local ForgetTheAntidote = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DONT_FORGET_THE_ANTIDOTE)
 
-    if (ForgetTheAntidote == QUEST_AVAILABLE and player:getFameLevel(RABAO) >= 4) then
+    if (ForgetTheAntidote == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.SELBINA_RABAO) >= 4) then
         player:startEvent(2, 0, 1209)
     elseif (ForgetTheAntidote == QUEST_ACCEPTED) then
         player:startEvent(3, 0, 1209)
@@ -46,12 +46,12 @@ entity.onEventFinish = function(player, csid, option)
         player:addItem(16974) -- Dotanuki
         player:messageSpecial(ID.text.ITEM_OBTAINED, 16974)
         player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DONT_FORGET_THE_ANTIDOTE)
-        player:addFame(RABAO, 60)
+        player:addFame(xi.quest.fame_area.SELBINA_RABAO, 60)
     elseif (csid == 4) then --Subsequent completions
         player:tradeComplete()
         player:addGil(xi.settings.GIL_RATE*1800)
         player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE*1800)
-        player:addFame(RABAO, 30)
+        player:addFame(xi.quest.fame_area.SELBINA_RABAO, 30)
     end
 
 end

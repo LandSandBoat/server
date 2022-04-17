@@ -97,9 +97,7 @@ global_objects=(
     COALITION
 
     JEUNO
-    SELBINA
     MHAURA
-    RABAO
     KAZHAM
     NORG
     OTHER_AREAS_LOG

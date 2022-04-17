@@ -31,7 +31,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             -- TODO: Fame requirement needs verification
-            return status == QUEST_AVAILABLE and player:getFameLevel(SELBINA) >= 1
+            return status == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.SELBINA_RABAO) >= 1
         end,
 
         [xi.zone.SELBINA] =
