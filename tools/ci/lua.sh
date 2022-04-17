@@ -71,7 +71,6 @@ global_objects=(
 
     removeSleepEffects
 
-    SANDORIA
     BASTOK
     WINDURST
     ZILART
@@ -93,7 +92,6 @@ global_objects=(
     GetMissionLogInfo
     GetQuestLogInfo
 
-    SANDORIA
     BASTOK
     WINDURST
     JEUNO
@@ -105,7 +103,6 @@ global_objects=(
     ADOULIN
     COALITION
 
-    SANDORIA
     BASTOK
     WINDURST
     JEUNO
