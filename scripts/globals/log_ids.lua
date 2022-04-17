@@ -219,8 +219,9 @@ ROV =
     ['full_name'] = "Rhapsodies of Vana'diel",
     ['mission_log']= 13
 }
+]]
 
-QUEST_LOGS = {
+local QUEST_LOGS = {
     [0] = "SANDORIA",
     [1] = "BASTOK",
     [2] = "WINDURST",
@@ -234,7 +235,7 @@ QUEST_LOGS = {
     [10] = "COALITION",
 }
 
-MISSION_LOGS = {
+local MISSION_LOGS = {
     [0] = "SANDORIA",
     [1] = "BASTOK",
     [2] = "WINDURST",
@@ -250,7 +251,6 @@ MISSION_LOGS = {
     [12] = "SOA",
     [13] = "ROV",
 }
-]]
 
 local function GetQMLogInfo(cmdParamText, logNameTable)
     -- Returns the table from this file after validating

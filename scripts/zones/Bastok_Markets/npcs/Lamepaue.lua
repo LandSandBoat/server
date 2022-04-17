@@ -116,7 +116,7 @@ entity.onTrigger = function(player, npc)
     -- Seekers of Adoulin
     local SeekersOfAdoulin = 0xFFFFFFFE
 -- *Need the correct csid
---    if (player:hasCompletedMission (SOA, xi.mission.id.soa.RUMORS_FROM_THE_WEST)) then
+--    if (player:hasCompletedMission (xi.mission.log_id.SOA, xi.mission.id.soa.RUMORS_FROM_THE_WEST)) then
 --        SeekersOfAdoulin = SeekersOfAdoulin - 2 -- Rumors from the West
 --    end
 

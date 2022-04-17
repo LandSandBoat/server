@@ -71,10 +71,6 @@ global_objects=(
 
     removeSleepEffects
 
-    ASSAULT
-    CAMPAIGN
-    SOA
-
     QUEST_AVAILABLE
     QUEST_ACCEPTED
     QUEST_COMPLETED
@@ -88,7 +84,6 @@ global_objects=(
     AHT_URHGAN
     CRYSTAL_WAR
     ABYSSEA
-    ADOULIN
     COALITION
 
     JEUNO
@@ -101,11 +96,7 @@ global_objects=(
     CRYSTAL_WAR
     CAMPAIGN
     ABYSSEA
-    SOA
-    ADOULIN
     COALITION
-    QUEST_LOGS
-    MISSION_LOGS
 
     onBattlefieldHandlerInitialise
 

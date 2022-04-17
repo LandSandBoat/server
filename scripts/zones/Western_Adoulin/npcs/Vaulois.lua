@@ -18,7 +18,7 @@ entity.onTrigger = function(player, npc)
     if ((Transporting == QUEST_ACCEPTED) and (player:getCharVar("Transporting_Status") >= 2)) then
         -- Finishing Quest: 'Transporting'
         player:startEvent(2591)
-    elseif ((Transporting == QUEST_AVAILABLE) and (player:getFameLevel(ADOULIN) >= 2)) then
+    elseif ((Transporting == QUEST_AVAILABLE) and (player:getFameLevel(xi.quest.fame_area.ADOULIN) >= 2)) then
         -- Starts Quest: 'Transporting'
         player:startEvent(2590)
     else
@@ -40,7 +40,7 @@ entity.onEventFinish = function(player, csid, option)
         player:addExp(1000 * xi.settings.EXP_RATE)
         player:addCurrency('bayld', 300 * xi.settings.BAYLD_RATE)
         player:messageSpecial(ID.text.BAYLD_OBTAINED, 300 * xi.settings.BAYLD_RATE)
-        player:addFame(ADOULIN)
+        player:addFame(xi.quest.fame_area.ADOULIN)
     end
 end
 

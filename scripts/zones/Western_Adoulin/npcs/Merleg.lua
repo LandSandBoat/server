@@ -52,7 +52,7 @@ entity.onEventFinish = function(player, csid, option)
         player:messageSpecial(ID.text.BAYLD_OBTAINED, 200 * xi.settings.BAYLD_RATE)
         player:addKeyItem(xi.ki.FAIL_BADGE)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.FAIL_BADGE)
-        player:addFame(ADOULIN)
+        player:addFame(xi.quest.fame_area.ADOULIN)
     end
 end
 

@@ -48,7 +48,7 @@ entity.onEventFinish = function(player, csid, option)
         player:addCurrency('bayld', 300 * xi.settings.BAYLD_RATE)
         player:messageSpecial(ID.text.BAYLD_OBTAINED, 300 * xi.settings.BAYLD_RATE)
         player:delKeyItem(xi.ki.EXTRAVAGANT_HARPOON)
-        player:addFame(ADOULIN)
+        player:addFame(xi.quest.fame_area.ADOULIN)
     end
 end
 
