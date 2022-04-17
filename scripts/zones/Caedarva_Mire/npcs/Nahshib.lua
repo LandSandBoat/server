@@ -17,7 +17,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local toauMission = player:getCurrentMission(TOAU)
+    local toauMission = player:getCurrentMission(xi.mission.log_id.TOAU)
     local beginnings = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.BEGINNINGS)
 
     -- BEGINNINGS

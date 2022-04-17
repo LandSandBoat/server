@@ -12,7 +12,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getCurrentMission(ROV) >= xi.mission.id.rov.SET_FREE then
+    if player:getCurrentMission(xi.mission.log_id.ROV) >= xi.mission.id.rov.SET_FREE then
         player:startEvent(65)
     end
 end

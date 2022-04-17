@@ -57,7 +57,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(69) -- closing cutscene
 
     -- BEGINNINGS
-    elseif anEmptyVessel == QUEST_COMPLETED and beginnings == QUEST_AVAILABLE and player:getCurrentMission(TOAU) > xi.mission.id.toau.IMMORTAL_SENTRIES
+    elseif anEmptyVessel == QUEST_COMPLETED and beginnings == QUEST_AVAILABLE and player:getCurrentMission(xi.mission.log_id.TOAU) > xi.mission.id.toau.IMMORTAL_SENTRIES
             and currentJob == xi.job.BLU and player:getMainLvl() >= xi.settings.AF1_QUEST_LEVEL then
         if divinationReady then
             if waoudNeedToZone == 1 then

@@ -71,7 +71,6 @@ global_objects=(
 
     removeSleepEffects
 
-    TOAU
     WOTG
     COP
     ASSAULT
@@ -80,7 +79,6 @@ global_objects=(
     AMK
     ASA
     SOA
-    ROV
 
     QUEST_AVAILABLE
     QUEST_ACCEPTED
@@ -108,7 +106,6 @@ global_objects=(
     TAVNAZIA
     OUTLANDS
     COP
-    TOAU
     AHT_URHGAN
     ASSAULT
     WOTG

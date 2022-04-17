@@ -11,7 +11,7 @@ entity.onTrade = function(player,npc,trade)
 end
 
 entity.onTrigger = function(player,npc)
-    if player:getCurrentMission(ROV) >= xi.mission.id.rov.FLAMES_OF_PRAYER then
+    if player:getCurrentMission(xi.mission.log_id.ROV) >= xi.mission.id.rov.FLAMES_OF_PRAYER then
         player:startEvent(179)
     end
 end

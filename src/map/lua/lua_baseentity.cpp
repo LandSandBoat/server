@@ -6083,7 +6083,7 @@ void CLuaBaseEntity::delMission(uint8 missionLogID, uint16 missionID)
 /************************************************************************
  *  Function: getCurrentMission()
  *  Purpose : Returns the integer associated with the player's current mission
- *  Example : player:getCurrentMission(TOAU)
+ *  Example : player:getCurrentMission(xi.mission.log_id.TOAU)
  *  Notes   : Specify the area to pass a Lua table object
  ************************************************************************/
 
