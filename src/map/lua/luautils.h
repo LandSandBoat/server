@@ -195,6 +195,7 @@ namespace luautils
     void  OnZoneOut(CCharEntity* PChar);                       // triggers when a player leaves a zone
     void  AfterZoneIn(CBaseEntity* PChar);                     // triggers after a player has finished zoning in
     int32 OnZoneInitialise(uint16 ZoneID);                     // triggers when zone is loaded
+    void  OnZoneTick(CZone* PZone);                            // triggers when the zone is ticked
     int32 OnRegionEnter(CCharEntity* PChar, CRegion* PRegion); // when player enters a region of a zone
     int32 OnRegionLeave(CCharEntity* PChar, CRegion* Pregion); // when player leaves a region of a zone
     int32 OnTransportEvent(CCharEntity* PChar, uint32 TransportID);

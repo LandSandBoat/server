@@ -1619,6 +1619,30 @@ namespace luautils
         return 0;
     }
 
+    void OnZoneTick(CZone* PZone)
+    {
+        TracyZoneScoped;
+
+        auto name = (const char*)PZone->GetName();
+
+        auto filename = fmt::format("./scripts/zones/{}/Zone.lua", name);
+
+        CacheLuaObjectFromFile(filename);
+
+        auto onZoneTick = lua["xi"]["zones"][name]["Zone"]["onZoneTick"];
+        if (!onZoneTick.valid())
+        {
+            return;
+        }
+
+        auto result = onZoneTick(CLuaZone(PZone));
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("luautils::onZoneTick: %s", err.what());
+        }
+    }
+
     /************************************************************************
      *                                                                       *
      *  Выполняем скрипт при входе персонажа в зону                          *
