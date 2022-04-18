@@ -15,19 +15,10 @@ local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local anEmptyVessel = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.AN_EMPTY_VESSEL)
-    local anEmptyVesselProgress = player:getCharVar("AnEmptyVesselProgress")
-    local StoneID = player:getCharVar("EmptyVesselStone")
-
-    -- AN EMPTY VESSEL (dangruf stone, valkurm sunsand, or siren's tear)
-    if anEmptyVessel == QUEST_ACCEPTED and anEmptyVesselProgress == 3 and trade:hasItemQty(StoneID, 1) and trade:getItemCount() == 1 then
-        player:startEvent(67, StoneID) -- get the stone to Aydeewa
-    end
 end
 
 entity.onTrigger = function(player, npc)
     local anEmptyVessel = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.AN_EMPTY_VESSEL)
-    local anEmptyVesselProgress = player:getCharVar("AnEmptyVesselProgress")
     local divinationReady = vanaDay() > player:getCharVar("LastDivinationDay")
     local beginnings = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.BEGINNINGS)
     local omens = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.OMENS)
@@ -36,28 +27,8 @@ entity.onTrigger = function(player, npc)
     local currentJob = player:getMainJob()
     local waoudNeedToZone = player:getLocalVar("WaoudNeedToZone")
 
-    -- AN EMPTY VESSEL
-    if anEmptyVessel == QUEST_AVAILABLE and anEmptyVesselProgress <= 1 and player:getMainLvl() >= xi.settings.ADVANCED_JOB_LEVEL then
-        if divinationReady then
-            player:startEvent(60, player:getGil()) -- you must answer these 10 questions
-        else
-            player:startEvent(63) -- you failed, and must wait a gameday to try again
-        end
-    elseif anEmptyVesselProgress == 2 then
-        if divinationReady and waoudNeedToZone == 0 then
-            player:startEvent(65) -- gives you a clue about the stone he wants (specific conditions)
-        else -- Have not zoned, or have not waited, or both.
-            player:startEvent(64) -- you have succeeded, but you need to wait a gameday and zone
-        end
-    elseif anEmptyVesselProgress == 3 then
-        player:startEvent(66) -- reminds you about the item he wants
-    elseif anEmptyVesselProgress == 4 then
-        player:startEvent(68) -- reminds you to bring the item to Aydeewa
-    elseif anEmptyVessel == QUEST_COMPLETED and beginnings == QUEST_AVAILABLE and player:getCharVar("BluAFBeginnings_Waoud") == 0 then
-        player:startEvent(69) -- closing cutscene
-
     -- BEGINNINGS
-    elseif anEmptyVessel == QUEST_COMPLETED and beginnings == QUEST_AVAILABLE and player:getCurrentMission(xi.mission.log_id.TOAU) > xi.mission.id.toau.IMMORTAL_SENTRIES
+    if anEmptyVessel == QUEST_COMPLETED and beginnings == QUEST_AVAILABLE and player:getCurrentMission(TOAU) > xi.mission.id.toau.IMMORTAL_SENTRIES
             and currentJob == xi.job.BLU and player:getMainLvl() >= xi.settings.AF1_QUEST_LEVEL then
         if divinationReady then
             if waoudNeedToZone == 1 then
@@ -128,46 +99,10 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option)
-    -- AN EMPTY VESSEL
-    if csid == 60 then
-        local success = player:getLocalVar("SuccessfullyAnswered")
-
-        -- record correct answers
-        if option < 40 then
-            local correctAnswers = {2, 6, 9, 12, 13, 18, 21, 24, 26, 30}
-            for k, v in pairs(correctAnswers) do
-                if (v == option) then
-                    player:setLocalVar("SuccessfullyAnswered", success + 1)
-                    break
-                end
-            end
-
-        -- determine results
-        elseif option == 40 then
-            if     success <  2 then player:updateEvent(player:getGil(), 0, 0, 0, 0, 0, 0, 10) -- Springserpent
-            elseif success <  4 then player:updateEvent(player:getGil(), 0, 0, 0, 0, 0, 0, 20) -- Stoneserpent
-            elseif success <  6 then player:updateEvent(player:getGil(), 0, 0, 0, 0, 0, 0, 30) -- Galeserpent
-            elseif success <  8 then player:updateEvent(player:getGil(), 0, 0, 0, 0, 0, 0, 40) -- Flameserpent
-            elseif success < 10 then player:updateEvent(player:getGil(), 0, 0, 0, 0, 0, 0, 60) -- Skyserpent
-            else
-                local rand = math.random(1, 3)
-                switch (rand): caseof {
-                    [1] = function (x) player:setCharVar("EmptyVesselStone", 576) end, -- (576) Siren's Tear (576)
-                    [2] = function (x) player:setCharVar("EmptyVesselStone", 503) end, -- (502) Valkurm Sunsand (502)
-                    [3] = function (x) player:setCharVar("EmptyVesselStone", 553) end  -- (553) Dangruf Stone (553)
-                }
-                player:setLocalVar("SuccessfullyAnswered", 0)
-                player:updateEvent(player:getGil(), 0, 0, 0, 0, 0, rand, 70) -- all 5 serpents / success!
-            end
-        end
-    elseif csid == 65 and option == 2 then
-        player:setCharVar("AnEmptyVesselProgress", 3)
-
     -- BEGINNINGS
-    elseif csid == 78 and option == 40 then
+    if csid == 78 and option == 40 then
         local serpent = math.random(1, 5) * 10
         player:updateEvent(player:getGil(), 0, 0, 0, 0, 0, 0, serpent)
-
     end
 end
 
@@ -176,31 +111,8 @@ entity.onEventFinish = function(player, csid, option)
     local omensProgress = player:getCharVar("OmensProgress")
     local transformationsProgress = player:getCharVar("TransformationsProgress")
 
-    -- AN EMPTY VESSEL
-    if csid == 60 then
-        player:setLocalVar("SuccessfullyAnswered", 0)
-        if option == 0 then
-            player:setCharVar("AnEmptyVesselProgress", 1)
-        elseif option == 50 then
-            player:setLocalVar("waoudNeedToZone", 1)
-            player:setCharVar("LastDivinationDay", vanaDay())
-            player:setCharVar("AnEmptyVesselProgress", 2)
-            player:addQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.AN_EMPTY_VESSEL)
-        elseif player:getGil() >= 1000 then
-            player:setCharVar("LastDivinationDay", vanaDay())
-            player:setCharVar("AnEmptyVesselProgress", 1)
-            player:delGil(1000)
-            player:messageSpecial(ID.text.PAY_DIVINATION) -- You pay 1000 gil for the divination.
-        end
-    elseif csid == 67 then -- Turn in stone, go to Aydeewa
-        player:setCharVar("AnEmptyVesselProgress", 4)
-    elseif csid == 69 and option == 1 then
-        player:setLocalVar("waoudNeedToZone", 1)
-        player:setCharVar("LastDivinationDay", vanaDay())
-        player:setCharVar("BluAFBeginnings_Waoud", 1)
-
     -- BEGINNINGS
-    elseif csid == 78 and option == 1 and player:getGil() >= 1000 then
+    if csid == 78 and option == 1 and player:getGil() >= 1000 then
         player:setCharVar("LastDivinationDay", vanaDay())
         player:delGil(1000)
         player:messageSpecial(ID.text.PAY_DIVINATION) -- You pay 1000 gil for the divination.
