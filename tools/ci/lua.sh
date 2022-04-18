@@ -82,7 +82,6 @@ global_objects=(
     OUTLANDS
 
     JEUNO
-    NORG
     OUTLANDS
 
     onBattlefieldHandlerInitialise

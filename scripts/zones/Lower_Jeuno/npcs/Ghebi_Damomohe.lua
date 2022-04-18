@@ -52,7 +52,7 @@ entity.onEventFinish = function(player, csid, option)
             4467,    3, -- Garlic Cracker
         }
 
-        xi.shop.general(player, stock, NORG)
+        xi.shop.general(player, stock, xi.quest.fame_area.NORG)
 
     elseif csid == 106 and option == 2 then
         player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.TENSHODO_MEMBERSHIP)

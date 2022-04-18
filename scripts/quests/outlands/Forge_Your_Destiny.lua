@@ -27,7 +27,7 @@ local quest = Quest:new(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.FORGE_YOU
 quest.reward =
 {
     fame = 30,
-    fameArea = NORG,
+    fameArea = xi.quest.fame_area.NORG,
     item = xi.items.MUMEITO,
     title = xi.title.BUSHIDO_BLADE,
 }

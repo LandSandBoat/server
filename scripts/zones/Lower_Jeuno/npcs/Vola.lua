@@ -29,7 +29,7 @@ entity.onTrigger = function(player, npc)
     local BeatAroundTheBushin = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEAT_AROUND_THE_BUSHIN)
 
     if
-        player:getFameLevel(NORG) >= 3 and
+        player:getFameLevel(xi.quest.fame_area.NORG) >= 3 and
         FistfulOfFury == QUEST_AVAILABLE and
         player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.SILENCE_OF_THE_RAMS) == QUEST_COMPLETED
     then
@@ -42,7 +42,7 @@ entity.onTrigger = function(player, npc)
         BeatAroundTheBushin == QUEST_AVAILABLE and
         player:getMainJob() == xi.job.MNK and
         player:getMainLvl() >= 71 and
-        player:getFameLevel(NORG) >= 6
+        player:getFameLevel(xi.quest.fame_area.NORG) >= 6
     then
         player:startEvent(160) -- Start Quest "Beat Around the Bushin"
 
@@ -68,7 +68,7 @@ entity.onEventFinish = function(player, csid, option)
             player:addTitle(xi.title.BROWN_BELT)
             player:addItem(13202)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 13202)
-            player:addFame(NORG, 125)
+            player:addFame(xi.quest.fame_area.NORG, 125)
             player:tradeComplete()
             player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.FISTFUL_OF_FURY)
         end

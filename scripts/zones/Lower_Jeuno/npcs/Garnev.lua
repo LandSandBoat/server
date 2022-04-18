@@ -26,7 +26,7 @@ entity.onTrigger = function(player, npc)
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_CLOCK_MOST_DELICATE) == QUEST_ACCEPTED and
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.DEAL_WITH_TENSHODO) == QUEST_AVAILABLE
     then
-        if player:getFameLevel(NORG) >= 2 then
+        if player:getFameLevel(xi.quest.fame_area.NORG) >= 2 then
             player:startEvent(167) -- Start quest
         else
             player:startEvent(168) -- dialog without correct tenshodo/norg fame

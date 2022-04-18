@@ -16,7 +16,7 @@ end
 entity.onTrigger = function(player, npc)
     local anUndyingPledge = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.AN_UNDYING_PLEDGE)
 
-    if anUndyingPledge == QUEST_AVAILABLE and player:getFameLevel(NORG) >= 4 then
+    if anUndyingPledge == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.NORG) >= 4 then
         player:startEvent(225) -- Start quest
     elseif anUndyingPledge == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.CALIGINOUS_BLADE) then
         player:startEvent(227) -- Quest Finish
@@ -42,7 +42,7 @@ entity.onEventFinish = function(player, csid, option)
         csid == 227 and
         npcUtil.completeQuest(player, OUTLANDS, xi.quest.id.outlands.AN_UNDYING_PLEDGE, {
             item = 12375,
-            fameArea = NORG,
+            fameArea = xi.quest.fame_area.NORG,
             fame = 50,
             var = "anUndyingPledgeCS",
         })

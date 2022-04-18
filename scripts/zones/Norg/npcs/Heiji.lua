@@ -41,7 +41,7 @@ entity.onTrigger = function(player, npc)
 
     local ShiningSubligar = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.LIKE_A_SHINING_SUBLIGAR)
 
-    if (ShiningSubligar == QUEST_AVAILABLE and player:getFameLevel(NORG) >= 3) then
+    if (ShiningSubligar == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.NORG) >= 3) then
         player:startEvent(123) -- Start Like a Shining Subligar
     elseif (ShiningSubligar == QUEST_ACCEPTED) then
         player:startEvent(124, player:getCharVar("shiningSubligar_nb")) -- Update player on number of subligar turned in
@@ -64,7 +64,7 @@ entity.onEventFinish = function(player, csid, option)
         player:addItem(4955) -- Scroll of Kurayami: Ichi
         player:messageSpecial(ID.text.ITEM_OBTAINED, 4955) -- Scroll of Kurayami: Ichi
         player:setCharVar("shiningSubligar_nb", 0)
-        player:addFame(NORG, 100)
+        player:addFame(xi.quest.fame_area.NORG, 100)
         player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.LIKE_A_SHINING_SUBLIGAR)
     end
 

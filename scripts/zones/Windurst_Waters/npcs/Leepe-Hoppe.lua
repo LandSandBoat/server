@@ -87,7 +87,7 @@ entity.onTrigger = function(player, npc)
         player:getFameLevel(xi.quest.fame_area.WINDURST) >= 6 and
         player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 6 and
         player:getFameLevel(xi.quest.fame_area.BASTOK) >= 6 and
-        player:getFameLevel(NORG) >= 4) then -- Fenrir flag event
+        player:getFameLevel(xi.quest.fame_area.NORG) >= 4) then -- Fenrir flag event
 
         player:startEvent(842, 0, 1125)
     elseif (moonlitPath == QUEST_ACCEPTED) then

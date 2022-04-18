@@ -22,7 +22,7 @@ local quest = Quest:new(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.A_THIEF_I
 quest.reward =
 {
     fame = 60,
-    fameArea = NORG,
+    fameArea = xi.quest.fame_area.NORG,
     item = xi.items.MYOCHIN_KABUTO,
     title = xi.title.PARAGON_OF_SAMURAI_EXCELLENCE,
 }
