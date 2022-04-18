@@ -29,6 +29,9 @@ end
 battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
     if leavecode == xi.battlefield.leaveCode.WON then
         local _, clearTime, partySize = battlefield:getRecord()
+
+        player:setLocalVar('battlefieldWin', battlefield:getID())
+
         player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar("[cs]bit"), 0)
     elseif leavecode == xi.battlefield.leaveCode.LOST then
         player:startEvent(32002)
@@ -39,8 +42,6 @@ battlefield_object.onEventUpdate = function(player, csid, option)
 end
 
 battlefield_object.onEventFinish = function(player, csid, option)
-    if csid == 32001 and player:getCharVar("OmensProgress") == 1 then
-        player:setCharVar("OmensProgress", 2)
-    end
 end
+
 return battlefield_object

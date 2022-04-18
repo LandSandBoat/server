@@ -668,8 +668,8 @@ xi.quest.id =
         OLDUUM                          = 2, -- + Converted
         GOT_IT_ALL                      = 3, -- + Converted
         GET_THE_PICTURE                 = 4,
-        AN_EMPTY_VESSEL                 = 5, -- +
-        LUCK_OF_THE_DRAW                = 6, -- ± Converted
+        AN_EMPTY_VESSEL                 = 5, -- + Converted
+        LUCK_OF_THE_DRAW                = 6, -- + Converted
         NO_STRINGS_ATTACHED             = 7, -- +
         FINDING_FAULTS                  = 8,
         GIVE_PEACE_A_CHANCE             = 9, -- + Converted
@@ -684,9 +684,9 @@ xi.quest.id =
         TOTOROONS_TREASURE_HUNT         = 18,
         WHAT_FRIENDS_ARE_FOR            = 19, -- + Converted
         ROCK_BOTTOM                     = 20, -- + Converted
-        BEGINNINGS                      = 21, -- +
-        OMENS                           = 22, -- +
-        TRANSFORMATIONS                 = 23, -- +
+        BEGINNINGS                      = 21, -- + Converted
+        OMENS                           = 22, -- + Converted
+        TRANSFORMATIONS                 = 23, -- + Converted
         EQUIPPED_FOR_ALL_OCCASIONS      = 24, -- + Converted
         NAVIGATING_THE_UNFRIENDLY_SEAS  = 25, -- +
         AGAINST_ALL_ODDS                = 26,
@@ -1265,10 +1265,10 @@ xi.quest.setLocalVar = function(player, areaId, questId, name, value)
     return player:setLocalVar(getVarPrefix(areaId, questId) .. name, value)
 end
 
-xi.quest.getMustZone = function(player, areaId, questId, name)
+xi.quest.getMustZone = function(player, areaId, questId)
     return player:getLocalVar(getVarPrefix(areaId, questId) .. "mustZone") == 1 and true or false
 end
 
-xi.quest.setMustZone = function(player, areaId, questId, name, value)
+xi.quest.setMustZone = function(player, areaId, questId)
     player:setLocalVar(getVarPrefix(areaId, questId) .. "mustZone", 1)
 end
