@@ -37,7 +37,7 @@ entity.onEventFinish = function(player, csid, option)
         player:unlockJob(xi.job.BRD) -- Bard
         player:messageSpecial(ID.text.UNLOCK_BARD)  --You can now become a bard!
         player:setCharVar("PathOfTheBard_Event", 0)
-        player:addFame(JEUNO, 30)
+        player:addFame(xi.quest.fame_area.JEUNO, 30)
         player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PATH_OF_THE_BARD)
     end
 end

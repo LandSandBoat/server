@@ -90,7 +90,7 @@ entity.onEventFinish = function(player, csid, option)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.WHITE_SENTINEL_BADGE)
     elseif csid == 10091 then
         player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.LURE_OF_THE_WILDCAT)
-        player:addFame(JEUNO, 150)
+        player:addFame(xi.quest.fame_area.JEUNO, 150)
         player:setCharVar("WildcatJeuno", 0)
         player:delKeyItem(xi.ki.WHITE_SENTINEL_BADGE)
         player:addKeyItem(xi.ki.WHITE_INVITATION_CARD)

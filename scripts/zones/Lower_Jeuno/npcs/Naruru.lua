@@ -93,7 +93,7 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 3000)
             player:addItem(13446)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 13446) -- Mythril Ring
-            player:addFame(JEUNO, 30)
+            player:addFame(xi.quest.fame_area.JEUNO, 30)
             player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COOK_S_PRIDE)
         end
 

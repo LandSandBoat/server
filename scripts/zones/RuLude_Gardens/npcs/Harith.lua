@@ -76,10 +76,10 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("harithreward", 0)
 
         if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.EMPTY_MEMORIES) == QUEST_ACCEPTED then
-            player:addFame(JEUNO, 30)
+            player:addFame(xi.quest.fame_area.JEUNO, 30)
             player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.EMPTY_MEMORIES)
         else
-            player:addFame(JEUNO, 5)
+            player:addFame(xi.quest.fame_area.JEUNO, 5)
         end
     end
 end

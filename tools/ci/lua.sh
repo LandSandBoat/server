@@ -78,10 +78,6 @@ global_objects=(
     GetMissionLogInfo
     GetQuestLogInfo
 
-    JEUNO
-
-    JEUNO
-
     onBattlefieldHandlerInitialise
 
     doAutoPhysicalWeaponskill

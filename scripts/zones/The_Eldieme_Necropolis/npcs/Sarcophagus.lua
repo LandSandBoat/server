@@ -73,7 +73,7 @@ entity.onEventFinish = function(player, csid, option)
         npcUtil.giveKeyItem(player, xi.ki.STAR_RING1)
 
     -- A NEW DAWN
-    elseif csid == 45 and npcUtil.completeQuest(player, JEUNO, xi.quest.id.jeuno.A_NEW_DAWN, {item = 14222, title = xi.title.PARAGON_OF_BEASTMASTER_EXCELLENCE}) then
+    elseif csid == 45 and npcUtil.completeQuest(player, xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_NEW_DAWN, {item = 14222, title = xi.title.PARAGON_OF_BEASTMASTER_EXCELLENCE}) then
         player:setCharVar("ANewDawn_Event", 6)
         player:delKeyItem(xi.ki.TAMERS_WHISTLE)
     end

@@ -48,7 +48,7 @@ entity.onTrigger = function(player, npc)
 
     if
         player:getMainLvl() >= 10 and
-        player:getFameLevel(JEUNO) >= 3
+        player:getFameLevel(xi.quest.fame_area.JEUNO) >= 3
     then
         if rseGear < 15 then
             if questStatus == QUEST_AVAILABLE then
@@ -83,7 +83,7 @@ entity.onEventFinish = function(player, csid, option)
     then
         if npcUtil.giveItem(player, rse_map[player:getRace()][option]) then
             if questStatus == QUEST_ACCEPTED then
-                player:addFame(JEUNO, 30)
+                player:addFame(xi.quest.fame_area.JEUNO, 30)
                 player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_GOBLIN_TAILOR)
             end
 

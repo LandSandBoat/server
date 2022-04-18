@@ -19,7 +19,7 @@ local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.NEW_WORLDS_AWAI
 quest.reward =
 {
     fame = 50,
-    fameArea = JEUNO,
+    fameArea = xi.quest.fame_area.JEUNO,
 }
 
 quest.sections =
