@@ -117,7 +117,7 @@ entity.onEventFinish = function(player, csid, option)
         else
             player:addItem(14098)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 14098) -- Choral Slippers
-            player:addFame(JEUNO, 30)
+            player:addFame(xi.quest.fame_area.JEUNO, 30)
             player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_REQUIEM)
         end
     end

@@ -59,7 +59,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(16)
 
     -- THE RUMOR
-    elseif theRumor == QUEST_AVAILABLE and player:getFameLevel(SANDORIA) >= 3 and player:getMainLvl() >= 10 then
+    elseif theRumor == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 3 and player:getMainLvl() >= 10 then
         player:startEvent(13)
     elseif theRumor == QUEST_ACCEPTED then
         player:startEvent(11)
@@ -75,7 +75,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:setCharVar("TheHolyCrest_Event", 2)
     elseif csid == 7 then
         player:setCharVar("theHolyCrestCheck", 1)
-    elseif csid == 12 and npcUtil.completeQuest(player, SANDORIA, xi.quest.id.sandoria.THE_RUMOR, {item = 4853}) then
+    elseif csid == 12 and npcUtil.completeQuest(player, xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_RUMOR, {item = 4853}) then
         player:confirmTrade()
     elseif csid == 13 and option == 1 then
         player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_RUMOR)

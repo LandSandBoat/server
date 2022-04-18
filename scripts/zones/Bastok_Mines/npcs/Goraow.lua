@@ -34,7 +34,7 @@ entity.onTrigger = function(player, npc)
 
     elseif
         player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.VENGEFUL_WRATH) == QUEST_AVAILABLE and
-        player:getFameLevel(BASTOK) >= 3
+        player:getFameLevel(xi.quest.fame_area.BASTOK) >= 3
     then
         player:startEvent(106)
 
@@ -53,9 +53,9 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 107 then
         if player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.VENGEFUL_WRATH) == QUEST_ACCEPTED then
             player:addTitle(xi.title.AVENGER)
-            player:addFame(BASTOK, 120)
+            player:addFame(xi.quest.fame_area.BASTOK, 120)
         else
-            player:addFame(BASTOK, 8)
+            player:addFame(xi.quest.fame_area.BASTOK, 8)
         end
 
         player:tradeComplete()

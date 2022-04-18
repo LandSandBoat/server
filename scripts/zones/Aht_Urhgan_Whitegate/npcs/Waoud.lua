@@ -57,7 +57,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(69) -- closing cutscene
 
     -- BEGINNINGS
-    elseif anEmptyVessel == QUEST_COMPLETED and beginnings == QUEST_AVAILABLE and player:getCurrentMission(TOAU) > xi.mission.id.toau.IMMORTAL_SENTRIES
+    elseif anEmptyVessel == QUEST_COMPLETED and beginnings == QUEST_AVAILABLE and player:getCurrentMission(xi.mission.log_id.TOAU) > xi.mission.id.toau.IMMORTAL_SENTRIES
             and currentJob == xi.job.BLU and player:getMainLvl() >= xi.settings.AF1_QUEST_LEVEL then
         if divinationReady then
             if waoudNeedToZone == 1 then
@@ -210,7 +210,7 @@ entity.onEventFinish = function(player, csid, option)
         player:delGil(1000)
         player:messageSpecial(ID.text.PAY_DIVINATION) -- You pay 1000 gil for the divination.
     elseif csid == 707 then
-        npcUtil.completeQuest(player, AHT_URHGAN, xi.quest.id.ahtUrhgan.BEGINNINGS, {item=17717})
+        npcUtil.completeQuest(player, xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.BEGINNINGS, {item=17717})
 
     -- OMENS
     elseif csid == 710 and beginnings == QUEST_COMPLETED then

@@ -40,6 +40,8 @@ mission.sections =
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =
         {
+            -- NOTE: Check Naja after zoning
+
             onRegionEnter =
             {
                 [3] = function(player, region)

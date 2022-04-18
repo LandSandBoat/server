@@ -46,10 +46,10 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 109 then
         if MineSweep == 1 then
             player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.MINESWEEPER)
-            player:addFame(BASTOK, 75)
+            player:addFame(xi.quest.fame_area.BASTOK, 75)
             player:addTitle(xi.title.ZERUHN_SWEEPER)
         else
-            player:addFame(BASTOK, 8)
+            player:addFame(xi.quest.fame_area.BASTOK, 8)
         end
         player:addGil(xi.settings.GIL_RATE * 150)
         player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 150)

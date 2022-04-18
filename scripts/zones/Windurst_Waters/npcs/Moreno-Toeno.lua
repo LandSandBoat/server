@@ -64,9 +64,9 @@ entity.onEventFinish = function(player, csid, option)
         player:tradeComplete()
         if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TEACHER_S_PET) == QUEST_ACCEPTED then
             player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TEACHER_S_PET)
-            player:addFame(WINDURST, 75)
+            player:addFame(xi.quest.fame_area.WINDURST, 75)
         else
-            player:addFame(WINDURST, 8)
+            player:addFame(xi.quest.fame_area.WINDURST, 8)
         end
     end
 end

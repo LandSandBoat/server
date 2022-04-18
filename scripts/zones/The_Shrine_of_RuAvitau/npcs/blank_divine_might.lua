@@ -15,7 +15,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local CurrentZM = player:getCurrentMission(ZILART)
+    local CurrentZM = player:getCurrentMission(xi.mission.log_id.ZILART)
     local ZMProgress = player:getMissionStatus(xi.mission.log_id.ZILART)
     local DMStatus = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT)
     local DMRepeat = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT_REPEAT)

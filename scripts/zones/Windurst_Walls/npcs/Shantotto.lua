@@ -113,14 +113,14 @@ entity.onTrigger = function(player, npc)
         end
 
         -- Curses, Foiled...Again!?
-    elseif (foiledAgain == QUEST_COMPLETED and CFA2 == QUEST_AVAILABLE and player:getFameLevel(WINDURST) >= 2 and
+    elseif (foiledAgain == QUEST_COMPLETED and CFA2 == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.WINDURST) >= 2 and
         player:getMainLvl() >= 5 and CFAtimer == 1) then
         player:startEvent(180, 0, 0, 0, 0, 928, 880, 17316, 940) -- Quest Start
     elseif (CFA2 == QUEST_ACCEPTED) then
         player:startEvent(181, 0, 0, 0, 0, 0, 0, 17316, 940) -- Reminder dialog
 
         -- Curses, Foiled A-Golem!?
-    elseif (CFA2 == QUEST_COMPLETED and FoiledAGolem == QUEST_AVAILABLE and player:getFameLevel(WINDURST) >= 4 and
+    elseif (CFA2 == QUEST_COMPLETED and FoiledAGolem == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.WINDURST) >= 4 and
         player:getMainLvl() >= 10) then
         player:startEvent(340) -- quest start
     elseif (golemdelivery == 1) then
@@ -159,7 +159,7 @@ entity.onEventFinish = function(player, csid, option)
             player:tradeComplete()
             player:setCharVar("CursesFoiledAgainDay", VanadielDayOfTheYear())
             player:setCharVar("CursesFoiledAgainYear", VanadielYear())
-            player:addFame(WINDURST, 80)
+            player:addFame(xi.quest.fame_area.WINDURST, 80)
             player:addItem(17081)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 17081)
             player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CURSES_FOILED_AGAIN_1)
@@ -190,7 +190,7 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 17116)
             player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CURSES_FOILED_AGAIN_2)
             player:needToZone(true)
-            player:addFame(WINDURST, 90)
+            player:addFame(xi.quest.fame_area.WINDURST, 90)
         end
 
     elseif (csid == 340) then
@@ -209,7 +209,7 @@ entity.onEventFinish = function(player, csid, option)
             player:addItem(4870)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 4870)
             player:setTitle(xi.title.DOCTOR_SHANTOTTOS_FLAVOR_OF_THE_MONTH)
-            player:addFame(WINDURST, 120)
+            player:addFame(xi.quest.fame_area.WINDURST, 120)
         end
     elseif (csid == 409) then
         player:setCharVar("ClassReunionProgress", 4)

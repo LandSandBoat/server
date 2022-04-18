@@ -38,7 +38,7 @@ end
 entity.onEventFinish = function(player, csid, option)
     if csid == 26 then
         player:addQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_FUMBLING_FRIAR)
-    elseif csid == 28 and npcUtil.completeQuest(player, CRYSTAL_WAR, xi.quest.id.crystalWar.THE_FUMBLING_FRIAR, {item = 4688}) then
+    elseif csid == 28 and npcUtil.completeQuest(player, xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_FUMBLING_FRIAR, {item = 4688}) then
         player:delKeyItem(xi.ki.ORNATE_PACKAGE)
     end
 end

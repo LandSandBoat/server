@@ -113,7 +113,7 @@ entity.onEventFinish = function(player, csid, option)
         player:confirmTrade()
     elseif csid == 529 then
         local itemInProgress = player:getCharVar("NAME_OF_SCIENCE_target")
-        if npcUtil.completeQuest(player, OTHER_AREAS_LOG, xi.quest.id.otherAreas.IN_THE_NAME_OF_SCIENCE, {item=itemInProgress, var={"NAME_OF_SCIENCE_target"}}) then
+        if npcUtil.completeQuest(player, xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.IN_THE_NAME_OF_SCIENCE, {item=itemInProgress, var={"NAME_OF_SCIENCE_target"}}) then
             player:confirmTrade()
         end
     end

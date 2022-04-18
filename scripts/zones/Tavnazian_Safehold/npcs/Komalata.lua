@@ -21,7 +21,7 @@ entity.onTrigger = function(player, npc)
         4509,  10, -- Distilled Water
     }
 
-    if player:getCurrentMission(COP) >= xi.mission.id.cop.SHELTERING_DOUBT then
+    if player:getCurrentMission(xi.mission.log_id.COP) >= xi.mission.id.cop.SHELTERING_DOUBT then
         stock =
         {
             625,   88, -- Apple Vinegar

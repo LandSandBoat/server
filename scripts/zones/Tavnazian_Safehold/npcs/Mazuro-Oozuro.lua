@@ -23,7 +23,7 @@ entity.onTrigger = function(player, npc)
         4915, 217000,    -- Scroll of Frazzle II
     }
 
-    if player:getCurrentMission(COP) >= xi.mission.id.cop.SHELTERING_DOUBT then
+    if player:getCurrentMission(xi.mission.log_id.COP) >= xi.mission.id.cop.SHELTERING_DOUBT then
         stock =
         {
             17005,   108,    -- Lufaise Fly

@@ -34,7 +34,7 @@ entity.onTrigger = function(player, npc)
     local cdate             = player:getCharVar("AllInTheCards_date")
 
     if
-        player:getFameLevel(JEUNO) >= 3 and
+        player:getFameLevel(xi.quest.fame_area.JEUNO) >= 3 and
         CollectTarutCards == QUEST_AVAILABLE
     then
         player:startEvent(28) -- Start quest "Collect Tarut Cards" with option
@@ -73,7 +73,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(197) -- Finish quest "Rubbish Day"
 
     elseif
-        player:getFameLevel(JEUNO) >= 4 and
+        player:getFameLevel(xi.quest.fame_area.JEUNO) >= 4 and
         CollectTarutCards == QUEST_COMPLETED and
         AllInTheCards == QUEST_AVAILABLE
     then
@@ -134,7 +134,7 @@ entity.onEventFinish = function(player, csid, option)
 
     elseif csid == 200 then
         player:addTitle(xi.title.CARD_COLLECTOR)
-        player:addFame(JEUNO, 30)
+        player:addFame(xi.quest.fame_area.JEUNO, 30)
         player:tradeComplete()
         player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COLLECT_TARUT_CARDS)
 
@@ -176,7 +176,7 @@ entity.onEventFinish = function(player, csid, option)
         player:setLocalVar("Cardstemp", 1)
 
     elseif csid == 10114 then
-        if npcUtil.completeQuest(player, JEUNO, xi.quest.id.jeuno.ALL_IN_THE_CARDS, {
+        if npcUtil.completeQuest(player, xi.quest.log_id.JEUNO, xi.quest.id.jeuno.ALL_IN_THE_CARDS, {
             gil = 600,
             title = xi.title.CARD_COLLECTOR,
             var = {"AllInTheCards_date"}
@@ -185,7 +185,7 @@ entity.onEventFinish = function(player, csid, option)
         end
 
     elseif csid == 197 then
-        npcUtil.completeQuest(player, JEUNO, xi.quest.id.jeuno.RUBBISH_DAY, {
+        npcUtil.completeQuest(player, xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RUBBISH_DAY, {
             gil = 6000,
             item = xi.items.CHAIN_CHOKER,
             var = {"RubbishDayVar"}

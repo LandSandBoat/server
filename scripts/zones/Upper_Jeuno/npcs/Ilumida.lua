@@ -68,7 +68,7 @@ entity.onEventFinish = function(player, csid, option)
             -- TODO: Actually add Gil?
             player:addItem(4882)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 4882)
-            player:addFame(JEUNO, 30)
+            player:addFame(xi.quest.fame_area.JEUNO, 30)
             player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SEARCHING_FOR_THE_RIGHT_WORDS)
             player:setCharVar("SearchingForRightWords_postcs", -2)
         end

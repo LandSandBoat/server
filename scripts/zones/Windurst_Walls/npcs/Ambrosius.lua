@@ -71,39 +71,39 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 52 then
         player:tradeComplete()
         player:addGil(xi.settings.GIL_RATE * 50)
-        player:addFame(WINDURST, 80)
+        player:addFame(xi.quest.fame_area.WINDURST, 80)
         player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
     elseif csid == 53 then
         player:tradeComplete()
         player:addGil(xi.settings.GIL_RATE * 150)
-        player:addFame(WINDURST, 80)
+        player:addFame(xi.quest.fame_area.WINDURST, 80)
         player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
     elseif csid == 54 then
         player:tradeComplete()
         player:addGil(xi.settings.GIL_RATE * 250)
-        player:addFame(WINDURST, 80)
+        player:addFame(xi.quest.fame_area.WINDURST, 80)
         player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
     elseif csid == 55 then
         player:tradeComplete()
         player:addGil(xi.settings.GIL_RATE * 500)
-        player:addFame(WINDURST, 80)
+        player:addFame(xi.quest.fame_area.WINDURST, 80)
         player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
     elseif csid == 57 then
         player:tradeComplete()
         player:addGil(xi.settings.GIL_RATE * 50)
-        player:addFame(WINDURST, 5)
+        player:addFame(xi.quest.fame_area.WINDURST, 5)
     elseif csid == 58 then
         player:tradeComplete()
         player:addGil(xi.settings.GIL_RATE * 150)
-        player:addFame(WINDURST, 15)
+        player:addFame(xi.quest.fame_area.WINDURST, 15)
     elseif csid == 59 then
         player:tradeComplete()
         player:addGil(xi.settings.GIL_RATE * 250)
-        player:addFame(WINDURST, 25)
+        player:addFame(xi.quest.fame_area.WINDURST, 25)
     elseif csid == 60 then
         player:tradeComplete()
         player:addGil(xi.settings.GIL_RATE * 500)
-        player:addFame(WINDURST, 50)
+        player:addFame(xi.quest.fame_area.WINDURST, 50)
     end
 end
 

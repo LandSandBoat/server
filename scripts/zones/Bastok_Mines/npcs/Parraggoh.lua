@@ -52,7 +52,7 @@ entity.onEventFinish = function(player, csid, option)
             player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BEAUTY_AND_THE_GALKA)
             player:setCharVar("BeautyAndTheGalkaDenied", 0)
             player:delKeyItem(xi.ki.PALBOROUGH_MINES_LOGS)
-            player:addFame(BASTOK, 75)
+            player:addFame(xi.quest.fame_area.BASTOK, 75)
             player:addItem(16465)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 16465)
         else

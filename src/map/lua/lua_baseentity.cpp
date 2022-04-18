@@ -5600,7 +5600,7 @@ uint16 CLuaBaseEntity::getFame(sol::object const& areaObj)
 /************************************************************************
  *  Function: addFame()
  *  Purpose : Adds a specified amount of fame to the player's balance
- *  Example : player:addFame(WINDURST, 30)
+ *  Example : player:addFame(xi.quest.fame_area.WINDURST, 30)
  *  Notes   :
  ************************************************************************/
 
@@ -5658,7 +5658,7 @@ void CLuaBaseEntity::addFame(sol::object const& areaObj, uint16 fame)
 /************************************************************************
  *  Function: setFame()
  *  Purpose : Sets the fame level for a player to a specified amount
- *  Example : player:setFame(BASTOK, 1500)
+ *  Example : player:setFame(xi.quest.fame_area.BASTOK, 1500)
  *  Notes   :
  ************************************************************************/
 
@@ -6083,7 +6083,7 @@ void CLuaBaseEntity::delMission(uint8 missionLogID, uint16 missionID)
 /************************************************************************
  *  Function: getCurrentMission()
  *  Purpose : Returns the integer associated with the player's current mission
- *  Example : player:getCurrentMission(TOAU)
+ *  Example : player:getCurrentMission(xi.mission.log_id.TOAU)
  *  Notes   : Specify the area to pass a Lua table object
  ************************************************************************/
 

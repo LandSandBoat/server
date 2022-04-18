@@ -25,7 +25,6 @@ global_objects=(
     ai
     os
 
-    _G
     Module
     Override
     super
@@ -71,79 +70,9 @@ global_objects=(
 
     removeSleepEffects
 
-    SANDORIA
-    BASTOK
-    WINDURST
-    ZILART
-    TOAU
-    WOTG
-    COP
-    ASSAULT
-    CAMPAIGN
-    ACP
-    AMK
-    ASA
-    SOA
-    ROV
-
     QUEST_AVAILABLE
     QUEST_ACCEPTED
     QUEST_COMPLETED
-
-    GetMissionLogInfo
-    GetQuestLogInfo
-
-    SANDORIA
-    BASTOK
-    WINDURST
-    JEUNO
-    OTHER_AREAS
-    OUTLANDS
-    AHT_URHGAN
-    CRYSTAL_WAR
-    ABYSSEA
-    ADOULIN
-    COALITION
-
-    SANDORIA
-    BASTOK
-    WINDURST
-    JEUNO
-    SELBINA
-    MHAURA
-    RABAO
-    KAZHAM
-    NORG
-    OTHER_AREAS_LOG
-    TAVNAZIA
-    OUTLANDS
-    ZILART
-    COP
-    TOAU
-    AHT_URHGAN
-    ASSAULT
-    WOTG
-    CRYSTAL_WAR
-    CAMPAIGN
-    ACP
-    AMK
-    ASA
-    ABYSSEA
-    ABYSSEA_KONSCHTAT
-    ABYSSEA_TAHRONGI
-    ABYSSEA_LATHEINE
-    ABYSSEA_MISAREAUX
-    ABYSSEA_VUNKERL
-    ABYSSEA_ATTOHWA
-    ABYSSEA_ALTEPA
-    ABYSSEA_GRAUBERG
-    ABYSSEA_ULEGUERAND
-    SOA
-    ADOULIN
-    COALITION
-    ROV
-    QUEST_LOGS
-    MISSION_LOGS
 
     onBattlefieldHandlerInitialise
 

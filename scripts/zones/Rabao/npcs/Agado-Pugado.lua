@@ -34,7 +34,7 @@ entity.onTrigger = function(player, npc)
         end
     -----------------------------------
     -- Trial by Wind
-    elseif ((TrialByWind == QUEST_AVAILABLE and player:getFameLevel(RABAO) >= 5) or (TrialByWind == QUEST_COMPLETED and os.time() > player:getCharVar("TrialByWind_date"))) then
+    elseif ((TrialByWind == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.SELBINA_RABAO) >= 5) or (TrialByWind == QUEST_COMPLETED and os.time() > player:getCharVar("TrialByWind_date"))) then
         player:startEvent(66, 0, 331) -- Start and restart quest "Trial by Wind"
     elseif (TrialByWind == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.TUNING_FORK_OF_WIND) == false and WhisperOfGales == false) then
         player:startEvent(107, 0, 331) -- Defeat against Avatar : Need new Fork
@@ -94,7 +94,7 @@ entity.onEventFinish = function(player, csid, option)
             player:addTitle(xi.title.HEIR_OF_THE_GREAT_WIND)
             player:delKeyItem(xi.ki.WHISPER_OF_GALES) --Whisper of Gales, as a trade for the above rewards
             player:setCharVar("TrialByWind_date", getMidnight())
-            player:addFame(RABAO, 30)
+            player:addFame(xi.quest.fame_area.SELBINA_RABAO, 30)
             player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WIND)
         end
     elseif (csid == 86 or csid == 87) then

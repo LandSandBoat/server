@@ -150,7 +150,7 @@ entity.onEventFinish = function(player, csid, option)
     if csid == 714 and omensProgress == 3 then
         player:setCharVar("OmensProgress", 4)
     elseif csid == 716 and omensProgress == 5 then
-        npcUtil.completeQuest(player, AHT_URHGAN, xi.quest.id.ahtUrhgan.OMENS, {
+        npcUtil.completeQuest(player, xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.OMENS, {
             item = 15684,
             title = xi.title.IMMORTAL_LION,
             var = { "OmensProgress" }

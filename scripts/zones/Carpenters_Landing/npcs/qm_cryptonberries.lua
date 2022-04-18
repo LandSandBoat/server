@@ -13,7 +13,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local cop = player:getCurrentMission(COP)
+    local cop = player:getCurrentMission(xi.mission.log_id.COP)
     local k1 = player:getCharVar("Cryptonberry_Assassins-1_KILL")
     local k2 = player:getCharVar("Cryptonberry_Assassins-2_KILL")
     local k3 = player:getCharVar("Cryptonberry_Assassins-3_KILL")

@@ -18,7 +18,7 @@ end
 entity.onTrigger = function(player, npc)
 
     local TheMissingPiece = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_MISSING_PIECE)
-    local Fame = player:getFameLevel(RABAO)
+    local Fame = player:getFameLevel(xi.quest.fame_area.SELBINA_RABAO)
 
     if (TheMissingPiece == QUEST_AVAILABLE and Fame >= 4) then -- start quest
         player:startEvent(6)

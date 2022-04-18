@@ -44,7 +44,7 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("envelopedInDarkness_timer", os.time() + 30) -- Set timer
         player:messageSpecial(ID.text.YOU_BURY_THE, xi.ki.OLD_BOOTS, xi.ki.CRAWLER_BLOOD)
     elseif csid == 5 then
-        npcUtil.completeQuest(player, SANDORIA, xi.quest.id.sandoria.ENVELOPED_IN_DARKNESS, {
+        npcUtil.completeQuest(player, xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.ENVELOPED_IN_DARKNESS, {
             item = 14093, -- Warlock's Boots
             fame = 40,
             var = {"envelopedInDarkness_timer", "needs_crawler_blood"}

@@ -68,7 +68,7 @@ entity.onEventFinish = function(player, csid, option)
         player:unlockJob(xi.job.NIN)
         player:messageSpecial(ID.text.UNLOCK_NINJA)
         player:setCharVar("AyameAndKaede_Event", 0)
-        player:addFame(BASTOK, 30)
+        player:addFame(xi.quest.fame_area.BASTOK, 30)
         player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.AYAME_AND_KAEDE)
     elseif csid == 262 then
         player:setCharVar("twentyInPirateYearsCS", 3)

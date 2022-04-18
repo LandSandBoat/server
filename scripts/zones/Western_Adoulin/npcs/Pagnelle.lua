@@ -89,7 +89,7 @@ entity.onEventFinish = function(player, csid, option)
         player:completeQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.RAPTOR_RAPTURE)
         player:addCurrency('bayld', 1000 * xi.settings.BAYLD_RATE)
         player:messageSpecial(ID.text.BAYLD_OBTAINED, 1000 * xi.settings.BAYLD_RATE)
-        player:addFame(ADOULIN)
+        player:addFame(xi.quest.fame_area.ADOULIN)
         player:needToZone(true)
     end
 end

@@ -57,7 +57,7 @@ entity.onEventFinish = function(player, csid, option)
         end
     elseif csid == 603 then
         npcUtil.completeQuest(
-            player, SANDORIA, xi.quest.id.sandoria.FLYERS_FOR_REGINE,
+            player, xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.FLYERS_FOR_REGINE,
             {
                 gil = 440,
                 title = xi.title.ADVERTISING_EXECUTIVE,

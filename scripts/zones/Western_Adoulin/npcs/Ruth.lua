@@ -16,7 +16,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local APBIF = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.A_PIONEERS_BEST_IMAGINARY_FRIEND)
-    local SOA_Mission = player:getCurrentMission(SOA)
+    local SOA_Mission = player:getCurrentMission(xi.mission.log_id.SOA)
 
     if (SOA_Mission >= xi.mission.id.soa.LIFE_ON_THE_FRONTIER) then
         if ((APBIF == QUEST_ACCEPTED) and (not player:hasStatusEffect(xi.effect.IONIS))) then

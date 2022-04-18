@@ -81,7 +81,7 @@ entity.onTrigger = function(player, npc)
     local mLvl = player:getMainLvl()
     local IronBox = player:hasKeyItem(xi.ki.SEALED_IRON_BOX)
 
-    if Vault == QUEST_AVAILABLE and player:getFameLevel(NORG) >= 3 and mLvl >= 5 then
+    if Vault == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.NORG) >= 3 and mLvl >= 5 then
         player:startEvent(36, xi.ki.SEALED_IRON_BOX) -- Start quest
     elseif Vault == QUEST_ACCEPTED then
         if (IronBox == true) then
@@ -109,7 +109,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:delKeyItem(xi.ki.SEALED_IRON_BOX)
             player:addItem(4961) -- Scroll of Tonko: Ichi
             player:messageSpecial(ID.text.ITEM_OBTAINED, 4961)
-            player:addFame(NORG, 50)
+            player:addFame(xi.quest.fame_area.NORG, 50)
             player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.ITS_NOT_YOUR_VAULT)
         end
     end

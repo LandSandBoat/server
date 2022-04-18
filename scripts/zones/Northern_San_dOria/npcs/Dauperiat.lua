@@ -33,7 +33,7 @@ entity.onTrigger = function(player, npc)
     -- "Blackmail" quest status
     local blackMail = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.BLACKMAIL)
     local envelope = player:hasKeyItem(xi.ki.SUSPICIOUS_ENVELOPE)
-    local sanFame = player:getFameLevel(SANDORIA)
+    local sanFame = player:getFameLevel(xi.quest.fame_area.SANDORIA)
     local homeRank = player:getRank(player:getNation())
     local questState = player:getCharVar("BlackMailQuest")
 
@@ -78,10 +78,10 @@ entity.onEventFinish = function(player, csid, option)
         player:addGil(xi.settings.GIL_RATE * 900)
         player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 900)
         if (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.BLACKMAIL) == QUEST_ACCEPTED) then
-            player:addFame(SANDORIA, 30)
+            player:addFame(xi.quest.fame_area.SANDORIA, 30)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.BLACKMAIL)
         else
-            player:addFame(SANDORIA, 5)
+            player:addFame(xi.quest.fame_area.SANDORIA, 5)
         end
     elseif (csid == 40 and option == 1) then
         player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.BLACKMAIL)

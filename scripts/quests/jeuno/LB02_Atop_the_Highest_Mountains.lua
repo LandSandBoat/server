@@ -24,7 +24,7 @@ local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.ATOP_THE_HIGHES
 quest.reward =
 {
     fame = 40,
-    fameArea = JEUNO,
+    fameArea = xi.quest.fame_area.JEUNO,
     title = xi.title.SUMMIT_BREAKER,
 }
 
