@@ -44,12 +44,6 @@ entity.onTrigger = function(player,npc)
         if ringParam > 0 or standardParam > 0 then
             player:startEvent(3155, standardParam, ringParam, 0, 0, 0, 0, 0, 0, 0)
         end
-
-    -- TRANSFORMATIONS
-    elseif player:getCharVar("TransformationsProgress") == 1 then
-        player:startEvent(722)
-    else
-        player:messageSpecial(ID.text.GATE_IS_FIRMLY_CLOSED)
     end
 end
 
@@ -79,10 +73,6 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("TOAU_RINGRECV", 0)
     elseif csid == 3155 and option == 6 then
         npcUtil.giveItem(player, xi.items.IMPERIAL_STANDARD)
-    elseif csid == 722 then
-        player:addQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.TRANSFORMATIONS)
-        player:setCharVar("TransformationsProgress", 2)
-        player:setCharVar("[BLUAF]Remaining", 7) -- Player can now craft BLU armor
     end
 end
 
