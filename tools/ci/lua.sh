@@ -25,7 +25,6 @@ global_objects=(
     ai
     os
 
-    _G
     Module
     Override
     super
@@ -74,9 +73,6 @@ global_objects=(
     QUEST_AVAILABLE
     QUEST_ACCEPTED
     QUEST_COMPLETED
-
-    GetMissionLogInfo
-    GetQuestLogInfo
 
     onBattlefieldHandlerInitialise
 

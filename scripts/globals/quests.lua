@@ -1,4 +1,3 @@
-require("scripts/globals/log_ids")
 require("scripts/globals/zone")
 
 xi = xi or {}

@@ -2,8 +2,9 @@
 -- func: delquest <logID> <questID> <player>
 -- desc: Deletes the given quest from the GM or target player.
 -----------------------------------
-
 require("scripts/globals/quests")
+local logIdHelpers = require('scripts/globals/log_ids')
+-----------------------------------
 
 cmdprops =
 {
@@ -19,7 +20,7 @@ end
 function onTrigger(player, logId, questId, target)
 
     -- validate logId
-    local questLog = GetQuestLogInfo(logId)
+    local questLog = logIdHelpers.getQuestLogInfo(logId)
     if (questLog == nil) then
         error(player, "Invalid logID.")
         return
