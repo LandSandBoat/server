@@ -18,7 +18,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local anEmptyVessel = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.AN_EMPTY_VESSEL)
     local divinationReady = vanaDay() > player:getCharVar("LastDivinationDay")
     local beginnings = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.BEGINNINGS)
     local omens = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.OMENS)
@@ -27,32 +26,8 @@ entity.onTrigger = function(player, npc)
     local currentJob = player:getMainJob()
     local waoudNeedToZone = player:getLocalVar("WaoudNeedToZone")
 
-    -- BEGINNINGS
-    if anEmptyVessel == QUEST_COMPLETED and beginnings == QUEST_AVAILABLE and player:getCurrentMission(TOAU) > xi.mission.id.toau.IMMORTAL_SENTRIES
-            and currentJob == xi.job.BLU and player:getMainLvl() >= xi.settings.AF1_QUEST_LEVEL then
-        if divinationReady then
-            if waoudNeedToZone == 1 then
-                player:startEvent(78, player:getGil()) -- dummy questions, costs you 1000 gil
-            else
-                player:startEvent(705) -- start Beginnings
-            end
-        else
-            player:startEvent(63)
-        end
-    elseif beginnings == QUEST_ACCEPTED then
-        local brand1 = player:hasKeyItem(xi.ki.BRAND_OF_THE_SPRINGSERPENT)
-        local brand2 = player:hasKeyItem(xi.ki.BRAND_OF_THE_GALESERPENT)
-        local brand3 = player:hasKeyItem(xi.ki.BRAND_OF_THE_FLAMESERPENT)
-        local brand4 = player:hasKeyItem(xi.ki.BRAND_OF_THE_SKYSERPENT)
-        local brand5 = player:hasKeyItem(xi.ki.BRAND_OF_THE_STONESERPENT)
-        if brand1 and brand2 and brand3 and brand4 and brand5 then
-            player:startEvent(707) -- reward immortal's scimitar
-        else
-            player:startEvent(706, player:getGil()) -- clue about the five staging points, costs you 1000 gil
-        end
-
     -- OMENS
-    elseif beginnings == QUEST_COMPLETED and omens == QUEST_AVAILABLE and currentJob == xi.job.BLU and player:getMainLvl() >= xi.settings.AF2_QUEST_LEVEL then
+    if beginnings == QUEST_COMPLETED and omens == QUEST_AVAILABLE and currentJob == xi.job.BLU and player:getMainLvl() >= xi.settings.AF2_QUEST_LEVEL then
         if divinationReady then
             if waoudNeedToZone == 1 then
                 player:startEvent(78, player:getGil()) -- dummy questions, costs you 1000 gil
@@ -86,24 +61,10 @@ entity.onTrigger = function(player, npc)
         end
     elseif transformations == QUEST_ACCEPTED then
         player:startEvent(723, player:getGil()) -- clue about possible route to take, costs you 1000 gil
-    -- DEFAULT DIALOG
-    elseif anEmptyVessel == QUEST_COMPLETED then
-        if divinationReady then
-            player:startEvent(78, player:getGil()) -- dummy questions, costs you 1000 gil
-        else
-            player:startEvent(63)
-        end
-    else
-        player:startEvent(61)
     end
 end
 
 entity.onEventUpdate = function(player, csid, option)
-    -- BEGINNINGS
-    if csid == 78 and option == 40 then
-        local serpent = math.random(1, 5) * 10
-        player:updateEvent(player:getGil(), 0, 0, 0, 0, 0, 0, serpent)
-    end
 end
 
 entity.onEventFinish = function(player, csid, option)
@@ -111,21 +72,8 @@ entity.onEventFinish = function(player, csid, option)
     local omensProgress = player:getCharVar("OmensProgress")
     local transformationsProgress = player:getCharVar("TransformationsProgress")
 
-    -- BEGINNINGS
-    if csid == 78 and option == 1 and player:getGil() >= 1000 then
-        player:setCharVar("LastDivinationDay", vanaDay())
-        player:delGil(1000)
-        player:messageSpecial(ID.text.PAY_DIVINATION) -- You pay 1000 gil for the divination.
-    elseif csid == 705 and option == 1 then
-        player:addQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.BEGINNINGS)
-    elseif csid == 706 and option == 1 and player:getGil() >= 1000 then
-        player:delGil(1000)
-        player:messageSpecial(ID.text.PAY_DIVINATION) -- You pay 1000 gil for the divination.
-    elseif csid == 707 then
-        npcUtil.completeQuest(player, xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.BEGINNINGS, {item=17717})
-
     -- OMENS
-    elseif csid == 710 and beginnings == QUEST_COMPLETED then
+    if csid == 710 and beginnings == QUEST_COMPLETED then
         player:addQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.OMENS)
         player:setCharVar("OmensProgress", 1)
     elseif csid == 711 and option == 1 and omensProgress == 1 and player:getGil() >= 1000 then

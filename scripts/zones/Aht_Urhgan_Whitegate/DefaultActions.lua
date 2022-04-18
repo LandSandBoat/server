@@ -5,4 +5,5 @@ return {
     ['Nadee_Periyaha'] = { event = 90 },
     ['Maudaal']        = { event = 240 },
     ['Rodin-Comidin']  = { event = 665 },
+    ['Waoud']          = { event = 61 },
 }
