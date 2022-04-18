@@ -40,7 +40,7 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("anUndyingPledgeCS", 1)
     elseif
         csid == 227 and
-        npcUtil.completeQuest(player, OUTLANDS, xi.quest.id.outlands.AN_UNDYING_PLEDGE, {
+        npcUtil.completeQuest(player, xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.AN_UNDYING_PLEDGE, {
             item = 12375,
             fameArea = xi.quest.fame_area.NORG,
             fame = 50,

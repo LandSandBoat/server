@@ -79,10 +79,8 @@ global_objects=(
     GetQuestLogInfo
 
     JEUNO
-    OUTLANDS
 
     JEUNO
-    OUTLANDS
 
     onBattlefieldHandlerInitialise
 
