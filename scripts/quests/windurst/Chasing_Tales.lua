@@ -21,6 +21,7 @@ local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CHASING_T
 quest.reward =
 {
     fame = 120,
+    fameArea = xi.quest.fame_area.WINDURST,
     gil = 2800,
     title = xi.title.SAVIOR_OF_KNOWLEDGE,
 }

@@ -17,9 +17,10 @@ local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.CANDLE_MAKING)
 
 quest.reward =
 {
-    fame    = 30,
-    keyItem = xi.ki.HOLY_CANDLE,
-    title   = xi.title.BELIEVER_OF_ALTANA,
+    fame     = 30,
+    fameArea = xi.quest.fame_area.JEUNO,
+    keyItem  = xi.ki.HOLY_CANDLE,
+    title    = xi.title.BELIEVER_OF_ALTANA,
 }
 
 quest.sections =

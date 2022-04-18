@@ -17,6 +17,7 @@ local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.BLACK_TIG
 quest.reward =
 {
     fame = 30,
+    fameArea = xi.quest.fame_area.SANDORIA,
     item = xi.items.TIGER_STOLE,
     itemParams = { fromTrade = true },
     title = xi.title.CAT_SKINNER,

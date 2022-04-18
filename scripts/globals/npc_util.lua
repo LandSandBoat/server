@@ -417,7 +417,7 @@ end
                 fromTrade = true,
             },
             ki = xi.ki.ZERUHN_REPORT,           -- see npcUtil.giveKeyItem for formats
-            fameArea = xi.quest.fame_area.NORG, -- only needed if the logId table passed as 2nd param doesn't have the fame_area you want
+            fameArea = xi.quest.fame_area.NORG, -- Required for Fame to be applied
             fame = 120,                         -- fame defaults to 30 if not set
             bayld = 500,
             gil = 200,
@@ -498,7 +498,7 @@ end
                 fromTrade = true,
             },
             ki = xi.ki.ZERUHN_REPORT,           -- see npcUtil.giveKeyItem for formats
-            fameArea = xi.quest.fame_area.NORG, -- only needed if the logId table passed as 2nd param doesn't have the fame_area you want
+            fameArea = xi.quest.fame_area.NORG, -- Required for Fame to be applied
             fame = 120,                         -- fame defaults to 30 if not set
             bayld = 500,
             gil = 200,
@@ -527,15 +527,14 @@ function npcUtil.completeQuest(player, area, quest, params)
         npcUtil.giveKeyItem(player, params["keyItem"])
     end
 
-    if params["fame"] == nil then
-        params["fame"] = 30
-    end
+    -- Note: fameArea is a required numeric parameter in order for fame to be applied.  Fame areas
+    -- are not a one to one mapping of log ids, and it should not be used as a fallback.
+    if params["fameArea"] ~= nil and type(params["fameArea"]) == "number" then
+        if params["fame"] == nil then
+            params["fame"] = 30
+        end
 
-    -- TODO: Map fameArea in non-global table, or explicitly define
-    if params["fameArea"] ~= nil and params["fameArea"]["fame_area"] ~= nil and type(params["fame"]) == "number" then
         player:addFame(params["fameArea"], params["fame"])
-    elseif (type(area) == "number" or area["fame_area"] ~= nil) and type(params["fame"]) == "number" then
-        player:addFame(area, params["fame"])
     end
 
     if params["gil"] ~= nil and type(params["gil"]) == "number" then

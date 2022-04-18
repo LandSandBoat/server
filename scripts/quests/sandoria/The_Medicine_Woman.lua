@@ -21,9 +21,10 @@ local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_MEDIC
 
 quest.reward =
 {
-    fame  = 30,
-    gil   = 2100,
-    title = xi.title.TRAVELING_MEDICINE_MAN,
+    fame     = 30,
+    fameArea = xi.quest.fame_area.SANDORIA,
+    gil      = 2100,
+    title    = xi.title.TRAVELING_MEDICINE_MAN,
 }
 
 quest.sections =

@@ -20,6 +20,7 @@ local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SOULS_IN_
 quest.reward =
 {
     fame = 30,
+    fameArea = xi.quest.fame_area.SANDORIA,
 }
 
 quest.sections =

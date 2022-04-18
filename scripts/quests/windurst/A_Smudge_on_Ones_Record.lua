@@ -17,6 +17,7 @@ quest.reward =
 {
     xp = 2000,
     fame = 120,
+    fameArea = xi.quest.fame_area.WINDURST,
     gil = 5000,
     keyItem = xi.ki.MAP_OF_FEIYIN,
 }

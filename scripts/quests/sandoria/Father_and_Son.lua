@@ -20,6 +20,7 @@ local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.FATHER_AN
 quest.reward =
 {
     fame = 30,
+    fameArea = xi.quest.fame_area.SANDORIA,
     item = xi.items.WILLOW_FISHING_ROD,
     title = xi.title.LOST_CHILD_OFFICER,
 }

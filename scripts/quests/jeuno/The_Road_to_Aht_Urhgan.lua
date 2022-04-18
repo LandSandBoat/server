@@ -19,6 +19,7 @@ local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_ROAD_TO_AHT
 quest.reward =
 {
     fame = 30,
+    fameArea = xi.quest.fame_area.JEUNO,
 }
 
 local beginnerList =

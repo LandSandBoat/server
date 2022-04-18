@@ -23,6 +23,7 @@ local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.BLUE_RIBB
 quest.reward =
 {
     fame  = 140,
+    fameArea = xi.quest.fame_area.WINDURST,
     title = xi.title.GHOSTIE_BUSTER,
 }
 
