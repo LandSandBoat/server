@@ -55,6 +55,8 @@ quest.sections =
             {
                 [710] = function(player, csid, option, npc)
                     quest:begin(player)
+
+                    xi.quest.setVar(player, xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.BEGINNINGS, 'Timer', VanadielUniqueDay() + 1)
                 end,
             },
         },
@@ -110,7 +112,7 @@ quest.sections =
                         player:delGil(1000)
                         player:messageSpecial(whitegateID.text.PAY_DIVINATION)
 
-                        xi.quest.setVar(player, xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.BEGINNINGS, 'Timer', VanadielUniqueDay() + 1)
+                        xi.quest.setVar(player, xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.AN_EMPTY_VESSEL, 'Timer', VanadielUniqueDay() + 1)
                     end
                 end,
 
@@ -127,7 +129,7 @@ quest.sections =
                         player:delGil(1000)
                         player:messageSpecial(whitegateID.text.PAY_DIVINATION)
 
-                        xi.quest.setVar(player, xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.BEGINNINGS, 'Timer', VanadielUniqueDay() + 1)
+                        xi.quest.setVar(player, xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.AN_EMPTY_VESSEL, 'Timer', VanadielUniqueDay() + 1)
                     end
                 end,
 
@@ -139,8 +141,8 @@ quest.sections =
                     if quest:complete(player) then
                         player:delKeyItem(xi.ki.SEALED_IMMORTAL_ENVELOPE)
 
-                        xi.quest.setVar(player, xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.BEGINNINGS, 'Timer', VanadielUniqueDay() + 1)
-                        xi.quest.setMustZone(player, xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.OMENS)
+                        xi.quest.setVar(player, xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.AN_EMPTY_VESSEL, 'Timer', VanadielUniqueDay() + 1)
+                        xi.quest.setMustZone(player, xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.TRANSFORMATIONS)
                     end
                 end,
             },

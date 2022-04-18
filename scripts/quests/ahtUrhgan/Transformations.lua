@@ -2,8 +2,9 @@
 -- Transformations
 -----------------------------------
 -- Log ID: 6, Quest ID: 23
--- Waoud            : !pos 65 -6 -78 50
--- Alzadaal (Blank) : !pos 529.704 0 649.682 72
+-- Waoud              : !pos 65 -6 -78 50
+-- Imperial Whitegate : !pos 152 -2 0 50
+-- Alzadaal (Blank)   : !pos -529.704 0 649.682 72
 -----------------------------------
 require('scripts/globals/interaction/quest')
 require('scripts/globals/items')
@@ -75,7 +76,7 @@ quest.sections =
                         player:messageSpecial(whitegateID.text.PAY_DIVINATION)
 
                         quest:setVar(player, 'Prog', 1)
-                        xi.quest.setVar(player, xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.BEGINNINGS, 'Timer', VanadielUniqueDay() + 1)
+                        xi.quest.setVar(player, xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.AN_EMPTY_VESSEL, 'Timer', VanadielUniqueDay() + 1)
                     end
                 end,
 
@@ -87,7 +88,7 @@ quest.sections =
                         player:delGil(1000)
                         player:messageSpecial(whitegateID.text.PAY_DIVINATION)
 
-                        xi.quest.setVar(player, xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.BEGINNINGS, 'Timer', VanadielUniqueDay() + 1)
+                        xi.quest.setVar(player, xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.AN_EMPTY_VESSEL, 'Timer', VanadielUniqueDay() + 1)
                     end
                 end,
 
@@ -140,7 +141,10 @@ quest.sections =
                 onTrigger = function(player, npc)
                     local questProgress = quest:getVar(player, 'Prog')
 
-                    if questProgress == 1 then
+                    if
+                        questProgress == 1 and
+                        not GetMobByID(alzadaalID.mob.NEPIONIC_SOULFLAYER):isSpawned()
+                    then
                         return quest:progressEvent(4)
                     elseif questProgress == 2 then
                         return quest:progressEvent(5)
@@ -148,10 +152,19 @@ quest.sections =
                 end,
             },
 
+            ['Nepionic_Soulflayer'] =
+            {
+                onMobDeath = function(mob, player, isKiller, noKiller)
+                    if quest:getVar(player, 'Prog') == 1 then
+                        quest:setVar(player, 'Prog', 2)
+                    end
+                end,
+            },
+
             onEventFinish =
             {
                 [4] = function(player, csid, option, npc)
-                    npcUtil.popFromQM(player, npc, alzadaalID.mob.NEPIONIC_SOULFLAYER, { hide = 1 })
+                    npcUtil.popFromQM(player, npc, alzadaalID.mob.NEPIONIC_SOULFLAYER, { hide = 0 })
                 end,
 
                 [5] = function(player, csid, option, npc)

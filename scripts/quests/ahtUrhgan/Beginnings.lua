@@ -54,7 +54,8 @@ quest.sections =
                 player:hasCompletedMission(xi.mission.log_id.TOAU, xi.mission.id.toau.IMMORTAL_SENTRIES) and
                 player:hasCompletedQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.AN_EMPTY_VESSEL) and
                 player:getMainJob() == xi.job.BLU and
-                player:getMainLvl() >= xi.settings.AF1_QUEST_LEVEL
+                player:getMainLvl() >= xi.settings.AF1_QUEST_LEVEL and
+                xi.quest.getVar(player, xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.AN_EMPTY_VESSEL, 'completeEvent') == 0
         end,
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =
@@ -78,6 +79,8 @@ quest.sections =
                 [705] = function(player, csid, option, npc)
                     if option == 1 then
                         quest:begin(player)
+
+                        xi.quest.setVar(player, xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.BEGINNINGS, 'Timer', VanadielUniqueDay() + 1)
                     end
                 end,
             },
@@ -100,7 +103,7 @@ quest.sections =
                     if hasRequiredBrands(player) then
                         return quest:progressEvent(707)
                     elseif lastDivination <= VanadielUniqueDay() then
-                        return quest:progressEvent(706)
+                        return quest:progressEvent(706, player:getGil())
                     end
                 end,
             },
@@ -172,7 +175,7 @@ quest.sections =
 
         [xi.zone.CAEDARVA_MIRE] =
         {
-            ['Nashib'] =
+            ['Nahshib'] =
             {
                 onTrigger = function(player, npc)
                     if not player:hasKeyItem(xi.ki.BRAND_OF_THE_GALESERPENT) then

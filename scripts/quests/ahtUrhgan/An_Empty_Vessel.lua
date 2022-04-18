@@ -11,7 +11,6 @@ require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/settings/main')
 -----------------------------------
-local aydeewaID   = require("scripts/zones/Aydeewa_Subterrane/IDs")
 local whitegateID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
 -----------------------------------
 
@@ -91,7 +90,10 @@ quest.sections =
                         quest:begin(player)
                         quest:setMustZone(player)
                         quest:setVar(player, 'Timer', VanadielUniqueDay() + 1)
-                    elseif player:getGil() >= 1000 then
+                    elseif
+                        option == 1 and
+                        player:getGil() >= 1000
+                    then
                         quest:setMustZone(player)
                         quest:setVar(player, 'Timer', VanadielUniqueDay() + 1)
 
@@ -181,9 +183,10 @@ quest.sections =
                 [3] = function(player, csid, option, npc)
                     if option == 13 then
                         if quest:complete(player) then
+                            -- Note: Messages for receiving the below items are handled by the event.
                             player:unlockJob(xi.job.BLU)
                             player:addKeyItem(xi.ki.MARK_OF_ZAHAK)
-                            player:messageSpecial(aydeewaID.text.NOW_BECOME_BLUE_MAGE, xi.ki.MARK_OF_ZAHAK)
+                            player:addKeyItem(xi.ki.JOB_GESTURE_BLUE_MAGE)
 
                             quest:setVar(player, 'completeEvent', 1)
                         end
@@ -237,10 +240,12 @@ quest.sections =
             onEventFinish =
             {
                 [69] = function(player, csid, option, npc)
-                    quest:setVar(player, 'completeEvent', 0)
+                    if option == 1 then
+                        quest:setVar(player, 'completeEvent', 0)
 
-                    quest:setVar(player, 'Timer', VanadielUniqueDay() + 1)
-                    xi.quest.setMustZone(player, xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.BEGINNINGS)
+                        quest:setVar(player, 'Timer', VanadielUniqueDay() + 1)
+                        xi.quest.setMustZone(player, xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.BEGINNINGS)
+                    end
                 end,
 
                 [78] = function(player, csid, option, npc)
