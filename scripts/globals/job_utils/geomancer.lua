@@ -174,7 +174,7 @@ local function getEffectPotency(player, effect)
     -- Anything over that is unneeded and adds nothing
     local geoSkill      = player:getSkillLevel(xi.skill.GEOMANCY)
     local handbellSkill = player:getSkillLevel(xi.skill.HANDBELL)
-    local geomancyMod   = player:getEquippedItemsMaxModValue(xi.mod.GEOMANCY_BONUS) --getMod(xi.mod.GEOMANCY_BONUS)
+    local geomancyMod   = player:getMaxGearMod(xi.mod.GEOMANCY_BONUS) --getMod(xi.mod.GEOMANCY_BONUS)
 
     if  player:getEquipID(xi.slot.RANGED) == 0 or player:getWeaponSkillType(xi.slot.RANGED) ~= xi.skill.HANDBELL then
         handbellSkill = 0

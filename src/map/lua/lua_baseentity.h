@@ -598,7 +598,7 @@ public:
     int16 getMod(uint16 modID);              // Retrieves Modifier Value
     void  setMod(uint16 modID, int16 value); // Sets Modifier Value
     void  delMod(uint16 modID, int16 value); // Subtracts Modifier Value
-    int16 getEquippedItemsMaxModValue(Mod modId);
+    int16 getMaxGearMod(Mod modId);
 
     void addLatent(uint16 condID, uint16 conditionValue, uint16 mID, int16 modValue); // Adds a latent effect
     bool delLatent(uint16 condID, uint16 conditionValue, uint16 mID, int16 modValue); // Removes a latent effect
