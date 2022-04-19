@@ -19,8 +19,8 @@ local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CURSES_FO
 quest.reward =
 {
     fame     = 10,
-    fameArea = WINDURST,
-    item    = xi.items.BRASS_ROD,
+    fameArea = xi.quest.fame_area.WINDURST,
+    item = xi.items.BRASS_ROD,
 }
 
 quest.sections =
@@ -70,7 +70,7 @@ quest.sections =
                     if npcUtil.tradeHasExactly(trade, items) then
                         return quest:progressEvent(173, 0, 0, 0, 0, 0, 0, xi.items.BONE_CHIP, xi.items.BOMB_ASH)
                     else
-                        return quest:event(172) -- Reminder text.
+                        return quest:event(172, 0, 0, 0, 0, 0, 0, xi.items.BONE_CHIP, xi.items.BOMB_ASH) -- Reminder text.
                     end
                 end,
             },
