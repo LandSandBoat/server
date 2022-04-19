@@ -1,16 +1,21 @@
 ﻿/*
 ===========================================================================
+
   Copyright (c) 2010-2015 Darkstar Dev Teams
+
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
   (at your option) any later version.
+
   This program is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details.
+
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
+
 ===========================================================================
 */
 
@@ -34,7 +39,7 @@ CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type
     this->setSize(0x58);
 
     ref<uint32>(0x04) = PEntity->id;
-    ref<uint16>(0x08) = PEntity->targid;
+    ref<uint16>(0x08) = PEntity->targid; // 0x0E entity updates are valid for 0 to 1023 and 1792 to 2303
     ref<uint8>(0x0A)  = updatemask;
 
     switch (type)
@@ -54,7 +59,7 @@ CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type
             }
             if (PEntity->objtype == TYPE_TRUST)
             {
-                // ref<uint8>(0x28) = 0x45;
+                //ref<uint8>(0x28) = 0x45;
             }
             if (PEntity->look.size == MODEL_EQUIPPED || PEntity->look.size == MODEL_CHOCOBO)
             {
@@ -94,6 +99,7 @@ CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type
         ref<uint8>(0x20) = static_cast<uint8>(PEntity->status);
     }
 
+    // General flags and data
     switch (PEntity->objtype)
     {
         case TYPE_NPC:
@@ -102,8 +108,7 @@ CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type
 
             if (updatemask & UPDATE_HP)
             {
-                // HPP
-                ref<uint8>(0x1E) = 0x64; // 100
+                ref<uint8>(0x1E) = 0x64; // HPP: 100
                 ref<uint8>(0x1F) = PEntity->animation;
                 ref<uint8>(0x2A) |= PEntity->animationsub;
 
@@ -190,6 +195,7 @@ CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type
         ref<uint8>(0x28) = 0x45; // This allows trusts to be despawned
     }
 
+    // Send look data
     switch (PEntity->look.size)
     {
         case MODEL_STANDARD:
@@ -215,5 +221,34 @@ CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type
             memcpy(data + (0x34), PEntity->GetName(), (PEntity->name.size() > 12 ? 12 : PEntity->name.size()));
         }
         break;
+    }
+
+    // If the entity has been renamed, we have to re-send the name during every update.
+    // Otherwise it will revert to it's default name (if applicable).
+    if (PEntity->isRenamed)
+    {
+        updatemask |= UPDATE_NAME;
+        ref<uint8>(0x0A) |= updatemask;
+
+        this->setSize(0x48);
+
+        auto name       = PEntity->packetName;
+        auto nameOffset = (PEntity->look.size == MODEL_EQUIPPED) ? 0x44 : 0x34;
+        auto maxLength  = std::min<size_t>(name.size(), PacketNameLength);
+
+        // Mobs and NPC's targid's live in the range 0-1023
+        if (PEntity->targid < 1024)
+        {
+            ref<uint16>(0x34) = 0x01;
+            nameOffset        = 0x35;
+        }
+
+        // Make sure to zero-out the existing name area of the packet
+        auto start = data + nameOffset;
+        auto size  = static_cast<std::size_t>(this->getSize());
+        std::memset(start, 0U, size);
+
+        // Copy in name
+        std::memcpy(data + nameOffset, name.c_str(), maxLength);
     }
 }
