@@ -52,10 +52,10 @@ public:
     virtual void OnInit() = 0;
 
     // Optional
-    virtual void OnZoneTick(){};
+    virtual void OnZoneTick(CZone* PZone){};
     virtual void OnTimeServerTick(){};
-    virtual void OnCharZoneIn(){};
-    virtual void OnCharZoneOut(){};
+    virtual void OnCharZoneIn(CCharEntity* PChar){};
+    virtual void OnCharZoneOut(CCharEntity* PChar){};
 
     template <typename T>
     static T* Register()
@@ -64,7 +64,7 @@ public:
     };
 
 protected:
-    sol::state_view                 lua;
+    sol::state&                     lua;
     std::unique_ptr<SqlConnection>& sql;
 };
 
@@ -73,14 +73,14 @@ protected:
 
 namespace moduleutils
 {
-    void RegisterCPPModule(std::shared_ptr<CPPModule> ptr);
+    void RegisterCPPModule(CPPModule* ptr);
 
     // Hooks for calling modules
     void OnInit();
-    void OnZoneTick();
+    void OnZoneTick(CZone* PZone);
     void OnTimeServerTick();
-    void OnCharZoneIn();
-    void OnCharZoneOut();
+    void OnCharZoneIn(CCharEntity* PChar);
+    void OnCharZoneOut(CCharEntity* PChar);
 
     // The program has two "states":
     // - Load-time: As all data is being loaded and init'd

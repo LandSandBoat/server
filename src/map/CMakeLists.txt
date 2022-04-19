@@ -114,10 +114,7 @@ set(SOURCES
     zone_instance.h
     zone.cpp
     zone.h
-
-    # Testing for modules
-    ${CMAKE_SOURCE_DIR}/modules/custom/cpp/custom_module.cpp
-    )
+)
 
 add_subdirectory(ai)
 add_subdirectory(entities)
@@ -132,9 +129,25 @@ else()
     set(resource "${CMAKE_SOURCE_DIR}/res/gameserver.rc")
 endif()
 
+# Search for module directories
+set(module_include_dirs "")
+file(GLOB_RECURSE module_dirs LIST_DIRECTORIES true
+    RELATIVE ${CMAKE_SOURCE_DIR}/modules "${CMAKE_SOURCE_DIR}/modules/*")
+foreach(dir ${module_dirs})
+    if (IS_DIRECTORY "${CMAKE_SOURCE_DIR}/modules/${dir}" AND ${dir} MATCHES "cpp")
+        file(GLOB_RECURSE module_files
+            "${CMAKE_SOURCE_DIR}/modules/${dir}/*.cpp"
+            "${CMAKE_SOURCE_DIR}/modules/${dir}/*.h")
+        list(APPEND module_include_dirs "${CMAKE_SOURCE_DIR}/modules/${dir}")
+        list(APPEND SOURCES ${module_files})
+    endif()
+endforeach()
+
 add_executable(topaz_game
     ${SOURCES}
     ${resource})
+
+target_include_directories(topaz_game PUBLIC ${module_include_dirs})
 
 if(WIN32)
     set_target_properties(topaz_game PROPERTIES OUTPUT_NAME topaz_game${spacer}${platform_suffix})
