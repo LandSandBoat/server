@@ -22,38 +22,65 @@
 #ifndef _MODULEUTILS_H
 #define _MODULEUTILS_H
 
+#include "../../common/logging.h"
+#include "../lua/luautils.h"
+
 #include <memory>
+
+extern std::unique_ptr<SqlConnection> sql;
+
+// Forward declare
+class CPPModule;
+namespace moduleutils
+{
+    void RegisterCPPModule(CPPModule* ptr);
+}
 
 class CPPModule
 {
 public:
-    // TODO: Handle virtual destructor properly
-    virtual void OnInit(){};
-    virtual void OnTick(){};
+    CPPModule()
+    : lua(luautils::lua)
+    , sql(::sql)
+    {
+        moduleutils::RegisterCPPModule(this);
+    }
+
+    virtual ~CPPModule(){};
+
+    // Required
+    virtual void OnInit() = 0;
+
+    // Optional
+    virtual void OnZoneTick(){};
+    virtual void OnTimeServerTick(){};
     virtual void OnCharZoneIn(){};
     virtual void OnCharZoneOut(){};
+
+    template <typename T>
+    static T* Register()
+    {
+        return new T();
+    };
+
+protected:
+    sol::state_view                 lua;
+    std::unique_ptr<SqlConnection>& sql;
 };
 
-// TODO: I don't really like this
-// https://stackoverflow.com/questions/41367674/c-cpp-files-as-modules
-// TODO: Replace this with CMake in-file lists and voodoo
 #define REGISTER_CPP_MODULE(className) \
-  static std::nullptr_t e = ([] () { moduleutils::RegisterCPPModule<className>(); return nullptr; }) ();
+    static CPPModule* classNamePtr = className::Register<className>();
 
 namespace moduleutils
 {
-    // Internal
-    // TODO: Hide this
-    void _RegisterCPPModule(std::unique_ptr<CPPModule>&& module);
-
-    template <typename T>
-    static void RegisterCPPModule()
-    {
-        _RegisterCPPModule(std::make_unique<T>());
-    }
+    void RegisterCPPModule(std::shared_ptr<CPPModule> ptr);
 
     // Hooks for calling modules
     void OnInit();
+    void OnZoneTick();
+    void OnTimeServerTick();
+    void OnCharZoneIn();
+    void OnCharZoneOut();
 
     // The program has two "states":
     // - Load-time: As all data is being loaded and init'd

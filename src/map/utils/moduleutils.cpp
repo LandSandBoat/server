@@ -34,25 +34,58 @@
 namespace
 {
     // static storage, init and access
-    std::vector<std::unique_ptr<CPPModule>>& cppModules()
+    std::vector<CPPModule*>& cppModules()
     {
-        static std::vector<std::unique_ptr<CPPModule>> cppModules{};
+        static std::vector<CPPModule*> cppModules{};
         return cppModules;
     }
 }
 
 namespace moduleutils
 {
-    void _RegisterCPPModule(std::unique_ptr<CPPModule>&& module)
+    void RegisterCPPModule(CPPModule* ptr)
     {
-        cppModules().emplace_back(std::move(module));
+        cppModules().emplace_back(ptr);
     }
 
+    // Hooks for calling modules
     void OnInit()
     {
-        for (auto& module : cppModules())
+        for (auto* module : cppModules())
         {
             module->OnInit();
+        }
+    }
+
+    void OnZoneTick()
+    {
+        for (auto* module : cppModules())
+        {
+            module->OnZoneTick();
+        }
+    }
+
+    void OnTimeServerTick()
+    {
+        for (auto* module : cppModules())
+        {
+            module->OnTimeServerTick();
+        }
+    }
+
+    void OnCharZoneIn()
+    {
+        for (auto* module : cppModules())
+        {
+            module->OnCharZoneIn();
+        }
+    }
+
+    void OnCharZoneOut()
+    {
+        for (auto* module : cppModules())
+        {
+            module->OnCharZoneOut();
         }
     }
 

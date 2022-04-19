@@ -116,8 +116,7 @@ set(SOURCES
     zone.h
 
     # Testing for modules
-    ${CMAKE_SOURCE_DIR}/modules/custom/cpp/custom_module_1.cpp
-    ${CMAKE_SOURCE_DIR}/modules/custom/cpp/custom_module_2.cpp
+    ${CMAKE_SOURCE_DIR}/modules/custom/cpp/custom_module.cpp
     )
 
 add_subdirectory(ai)
