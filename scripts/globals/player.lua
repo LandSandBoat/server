@@ -68,6 +68,14 @@ local function CharCreate(player)
     -- add nation-specific map
     player:addKeyItem(nationInfo.map)
 
+    -- add job-emote Key items
+    player:addKeyItem(xi.ki.JOB_GESTURE_WARRIOR)
+    player:addKeyItem(xi.ki.JOB_GESTURE_MONK)
+    player:addKeyItem(xi.ki.JOB_GESTURE_WHITE_MAGE)
+    player:addKeyItem(xi.ki.JOB_GESTURE_BLACK_MAGE)
+    player:addKeyItem(xi.ki.JOB_GESTURE_RED_MAGE)
+    player:addKeyItem(xi.ki.JOB_GESTURE_THIEF)
+
     -- add nation- and race-specific ring
     if nation == raceInfo.homeNation and not player:hasItem(nationInfo.ring) then
         player:addItem(nationInfo.ring)
