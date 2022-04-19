@@ -10,13 +10,13 @@ require("scripts/globals/msg")
 -----------------------------------
 xi = xi or {}
 xi.spells = xi.spells or {}
-xi.spells.spell_teleport = xi.spells.spell_teleport or {}
+xi.spells.spell_enhancing_teleport = xi.spells.spell_enhancing_teleport or {}
 -----------------------------------
 -- Table variables.
 local teleportTable = xi.spells.parameters.teleportSpell
 
 -- Check for "Retrace" Spell.
-xi.spells.spell_teleport.checkTeleportSpell = function(caster, target, spell)
+xi.spells.spell_enhancing_teleport.checkTeleportSpell = function(caster, target, spell)
     if target:getCampaignAllegiance() > 0 then
         return 0
     else
@@ -25,7 +25,7 @@ xi.spells.spell_teleport.checkTeleportSpell = function(caster, target, spell)
 end
 
 -- Main function for Teleport / Warp / etc... Spells.
-xi.spells.spell_teleport.useTeleportSpell = function(caster, target, spell)
+xi.spells.spell_enhancing_teleport.useTeleportSpell = function(caster, target, spell)
     local spellId    = spell:getID()
     local teleportId = teleportTable[spellId][1]
     local keyItem    = teleportTable[spellId][2]

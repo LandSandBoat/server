@@ -10,7 +10,7 @@ require("scripts/globals/msg")
 -----------------------------------
 xi = xi or {}
 xi.spells = xi.spells or {}
-xi.spells.spell_song_enhancing = xi.spells.spell_song_enhancing or {}
+xi.spells.spell_enhancing_song = xi.spells.spell_enhancing_song or {}
 -----------------------------------
 -- File structure:
 -- 2 Basic Functions called by the main function.
@@ -19,7 +19,7 @@ xi.spells.spell_song_enhancing = xi.spells.spell_song_enhancing or {}
 local enhancingTable  = xi.spells.parameters.enhancingSong
 
 -- Enhancing Song Potency function. (1/2)
-xi.spells.spell_song_enhancing.calculateEnhancingPower = function(caster, target, spell, spellId, tier, songEffect, instrumentBoost, soulVoicePower)
+xi.spells.spell_enhancing_song.calculateEnhancingPower = function(caster, target, spell, spellId, tier, songEffect, instrumentBoost, soulVoicePower)
     local power       = enhancingTable[spellId][7] -- The variable we want to calculate.
     local meritEffect = enhancingTable[spellId][5]
     local jpEffect    = enhancingTable[spellId][6]
@@ -108,7 +108,7 @@ xi.spells.spell_song_enhancing.calculateEnhancingPower = function(caster, target
 end
 
 -- Enhancing Song Duration function. (2/2)
-xi.spells.spell_song_enhancing.calculateEnhancingDuration = function(caster, target, spell, instrumentBoost, soulVoicePower)
+xi.spells.spell_enhancing_song.calculateEnhancingDuration = function(caster, target, spell, instrumentBoost, soulVoicePower)
     local duration = 120 -- The variable we want to calculate.
 
     -- Additional duration from "Song Bonus" (from instruments) and "Duration Bonus" Modifier
@@ -146,7 +146,7 @@ xi.spells.spell_song_enhancing.calculateEnhancingDuration = function(caster, tar
 end
 
 -- Main function for Enhancing Songs.
-xi.spells.spell_song_enhancing.useEnhancingSong = function(caster, target, spell)
+xi.spells.spell_enhancing_song.useEnhancingSong = function(caster, target, spell)
     local spellId         = spell:getID()
     local paramFour       = 0
 
@@ -158,8 +158,8 @@ xi.spells.spell_song_enhancing.useEnhancingSong = function(caster, target, spell
     local soulVoicePower  = enhancingTable[spellId][12]
 
     -- Calculate Song Pottency, Duration and SubEffect.
-    local power    = xi.spells.spell_song_enhancing.calculateEnhancingPower(caster, target, spell, spellId, tier, songEffect, instrumentBoost, soulVoicePower)
-    local duration = xi.spells.spell_song_enhancing.calculateEnhancingDuration(caster, target, spell, instrumentBoost, soulVoicePower)
+    local power    = xi.spells.spell_enhancing_song.calculateEnhancingPower(caster, target, spell, spellId, tier, songEffect, instrumentBoost, soulVoicePower)
+    local duration = xi.spells.spell_enhancing_song.calculateEnhancingDuration(caster, target, spell, instrumentBoost, soulVoicePower)
 
     -- Handle subEffect
     if songEffect == xi.effect.CAROL then
