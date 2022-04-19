@@ -53,6 +53,41 @@ xi.spells.spell_enhancing.calculateEnhancingPower = function(caster, target, spe
     -- Embrava
     elseif spellEffect == xi.effect.EMBRAVA then
         power = math.min(skillLevel, 500)
+
+    -- En-Spells (Info from from BG-Wiki)
+    elseif
+        (spellEffect >= xi.effect.ENFIRE and spellEffect <= xi.effect.ENWATER) or
+        (spellEffect >= xi.effect.ENFIRE_II and spellEffect <= xi.effect.ENWATER_II)
+    then
+        if skillLevel > 500 then
+            power = math.floor(3 * (skillLevel + 50) / 25)
+        elseif skillLevel > 400 then
+            power = math.floor((skillLevel + 20) / 8)
+        elseif skillLevel > 150 then
+            power = math.floor(skillLevel / 20) + 5
+        else
+            power = math.max(math.floor(math.sqrt(skillLevel)) - 1, 0)
+        end
+
+    -- Phalanx
+    elseif spellEffect == xi.effect.PHALANX then
+        if skillLevel > 300 then -- Phalanx I and II over 300 skill
+            power = utils.clamp(math.floor((skillLevel - 300.5) / 28.5) + 28, 28, 35)
+        else
+            if spellId == xi.magic.spell.PHALANX then -- Phalanx
+                power = utils.clamp(math.floor(skillLevel / 10) - 2, 0, 35)
+            else -- Phalanx II
+                power = utils.clamp(math.floor(skillLevel / 25) + 16, 16, 35)
+            end
+        end
+
+    -- Blaze Spikes (Info from from BG-Wiki)
+    elseif spellEffect == xi.effect.BLAZE_SPIKES then
+        power = utils.clamp(math.floor(math.floor((caster:getStat(xi.mod.INT) + 50) / 12) * (1 + caster:getMod(xi.mod.MATT) / 100)), 1, 25)
+
+    -- Ice Spikes, Shock Spikes (Info from from BG-Wiki)
+    elseif spellEffect == xi.effect.ICE_SPIKES or spellEffect == xi.effect.SHOCK_SPIKES then
+        power = utils.clamp(math.floor(math.floor((caster:getStat(xi.mod.INT) + 50) / 20) * (1 + caster:getMod(xi.mod.MATT) / 100)), 1, 15)
     end
 
     --------------------
