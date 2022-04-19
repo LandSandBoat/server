@@ -210,15 +210,6 @@ xi.spells.parameters.enhancingSpell =
     [xi.magic.spell.BOOST_MND    ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.MND_BOOST,      1,    5,  300, true,  false },
     [xi.magic.spell.BOOST_CHR    ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.CHR_BOOST,      1,    5,  300, true,  false },
 
-    -- Gain-Stat
-    [xi.magic.spell.GAIN_STR     ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.STR_BOOST,      1,    5,  300, true,  false },
-    [xi.magic.spell.GAIN_DEX     ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.DEX_BOOST,      1,    5,  300, true,  false },
-    [xi.magic.spell.GAIN_VIT     ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.VIT_BOOST,      1,    5,  300, true,  false },
-    [xi.magic.spell.GAIN_AGI     ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.AGI_BOOST,      1,    5,  300, true,  false },
-    [xi.magic.spell.GAIN_INT     ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.INT_BOOST,      1,    5,  300, true,  false },
-    [xi.magic.spell.GAIN_MND     ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.MND_BOOST,      1,    5,  300, true,  false },
-    [xi.magic.spell.GAIN_CHR     ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.CHR_BOOST,      1,    5,  300, true,  false },
-
     -- Deodorize / Invisible / Sneak
     [xi.magic.spell.DEODORIZE    ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.DEODORIZE,     15,    0,  420, true,  false },
     [xi.magic.spell.INVISIBLE    ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.INVISIBLE,     20,    0,  420, true,  false },
@@ -242,6 +233,18 @@ xi.spells.parameters.enhancingSpell =
     [xi.magic.spell.ENTHUNDER_II ] = { 2, xi.skill.ENHANCING_MAGIC, xi.effect.ENTHUNDER_II,  50,    0,  180, true,  false },
     [xi.magic.spell.ENWATER_II   ] = { 2, xi.skill.ENHANCING_MAGIC, xi.effect.ENWATER_II,    60,    0,  180, true,  false },
 
+    -- Flurry
+    [xi.magic.spell.FLURRY       ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.FLURRY,        48,   15,  180, true,  false },
+    [xi.magic.spell.FLURRY_II    ] = { 2, xi.skill.ENHANCING_MAGIC, xi.effect.FLURRY_II,     96,   30,  180, true,  false },
+
+    -- Gain-Stat
+    [xi.magic.spell.GAIN_STR     ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.STR_BOOST,      1,    5,  300, true,  false },
+    [xi.magic.spell.GAIN_DEX     ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.DEX_BOOST,      1,    5,  300, true,  false },
+    [xi.magic.spell.GAIN_VIT     ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.VIT_BOOST,      1,    5,  300, true,  false },
+    [xi.magic.spell.GAIN_AGI     ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.AGI_BOOST,      1,    5,  300, true,  false },
+    [xi.magic.spell.GAIN_INT     ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.INT_BOOST,      1,    5,  300, true,  false },
+    [xi.magic.spell.GAIN_MND     ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.MND_BOOST,      1,    5,  300, true,  false },
+    [xi.magic.spell.GAIN_CHR     ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.CHR_BOOST,      1,    5,  300, true,  false },
 
     -- Haste
     [xi.magic.spell.HASTE        ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.HASTE,         48, 1465,  180, true,  false },
@@ -294,6 +297,19 @@ xi.spells.parameters.enhancingSpell =
     [xi.magic.spell.ICE_SPIKES   ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.ICE_SPIKES,     1,    0,  180, true,  false },
     [xi.magic.spell.SHOCK_SPIKES ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.SHOCK_SPIKES,   1,    0,  180, true,  false },
 
+    -- -storm
+    [xi.magic.spell.AURORASTORM  ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.AURORASTORM,   48,    2,  180, true,  true  },
+    [xi.magic.spell.FIRESTORM    ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.FIRESTORM,     44,    2,  180, true,  true  },
+    [xi.magic.spell.HAILSTORM    ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.HAILSTORM,     45,    2,  180, true,  true  },
+    [xi.magic.spell.RAINSTORM    ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.RAINSTORM,     42,    2,  180, true,  true  },
+    [xi.magic.spell.SANDSTORM    ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.SANDSTORM,     41,    2,  180, true,  true  },
+    [xi.magic.spell.THUNDERSTORM ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.THUNDERSTORM,  46,    2,  180, true,  true  },
+    [xi.magic.spell.VOIDSTORM    ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.VOIDSTORM,     47,    2,  180, true,  true  },
+    [xi.magic.spell.WINDSTORM    ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.WINDSTORM,     43,    2,  180, true,  true  },
+
+    -- Temper
+    [xi.magic.spell.TEMPER       ] = { 1, xi.skill.ENHANCING_MAGIC, xi.effect.MULTI_STRIKES, 95,    5,  180, true,  false },
+    -- [xi.magic.spell.TEMPER_II    ] = { 2, xi.skill.ENHANCING_MAGIC, 0                      , 99,    5,  180, true,  false },
 }
 
 xi.spells.parameters.enhancingSong =

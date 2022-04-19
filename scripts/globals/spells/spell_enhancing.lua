@@ -88,6 +88,12 @@ xi.spells.spell_enhancing.calculateEnhancingPower = function(caster, target, spe
     -- Ice Spikes, Shock Spikes (Info from from BG-Wiki)
     elseif spellEffect == xi.effect.ICE_SPIKES or spellEffect == xi.effect.SHOCK_SPIKES then
         power = utils.clamp(math.floor(math.floor((caster:getStat(xi.mod.INT) + 50) / 20) * (1 + caster:getMod(xi.mod.MATT) / 100)), 1, 15)
+
+    -- Temper
+    elseif spellEffect == xi.effect.MULTI_STRIKES then
+        if skillLevel >= 360 then
+            power = math.floor((skillLevel - 300) / 10)
+        end
     end
 
     --------------------
@@ -127,10 +133,14 @@ xi.spells.spell_enhancing.calculateEnhancingPower = function(caster, target, spe
         power = power + caster:getMod(xi.mod.REGEN_BONUS)      -- Bonus HP from Job Point Gift.
 
     -- Shell/Shellra
-    elseif xi.effect.SHELL then
+    elseif spellEffect == xi.effect.SHELL then
         if target:getMod(xi.mod.ENHANCES_PROT_SHELL_RCVD) > 0 then
             power = power + (tier * 39)
         end
+
+    -- -storm
+    elseif spellEffect >= xi.effect.FIRESTORM and spellEffect <= xi.effect.VOIDSTORM then
+        power = power + caster:getMerit(xi.merit.STORMSURGE) + caster:getMod(xi.mod.STORMSURGE_EFFECT)
     end
 
     ----------
@@ -268,6 +278,27 @@ xi.spells.spell_enhancing.useEnhancingSpell = function(caster, target, spell)
             xi.effect.INT_BOOST,
             xi.effect.MND_BOOST,
             xi.effect.CHR_BOOST
+        }
+
+        for i, effectValue in ipairs(effectOverwrite) do
+            if target:hasStatusEffect(effectValue) then
+                target:delStatusEffect(effectValue)
+            end
+        end
+
+    -- Boost-Stat / Gain-Stat
+    elseif spellEffect >= xi.effect.FIRESTORM and spellEffect <= xi.effect.VOIDSTORM then
+        -- Only one Boost Effect can be active at once, so if the player has any we have to cancel & overwrite
+        local effectOverwrite =
+        {
+            xi.effect.FIRESTORM,
+            xi.effect.SANDSTORM,
+            xi.effect.RAINSTORM,
+            xi.effect.WINDSTORM,
+            xi.effect.HAILSTORM,
+            xi.effect.THUNDERSTORM,
+            xi.effect.AURORASTORM,
+            xi.effect.VOIDSTORM
         }
 
         for i, effectValue in ipairs(effectOverwrite) do
