@@ -123,6 +123,14 @@ CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type
                 ref<uint8>(0x29) = static_cast<uint8>(PEntity->allegiance);
                 ref<uint8>(0x2B) = PEntity->namevis;
             }
+
+            // TODO: Unify name logic
+            if (updatemask & UPDATE_NAME)
+            {
+                // depending on size of name, this can be 0x20, 0x22, or 0x24
+                this->setSize(0x48);
+                memcpy(data + (0x34), PEntity->GetName(), std::min<size_t>(PEntity->name.size(), PacketNameLength));
+            }
         }
         break;
         case TYPE_MOB:
@@ -130,28 +138,42 @@ CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type
         case TYPE_TRUST:
         {
             CMobEntity* PMob = static_cast<CMobEntity*>(PEntity);
-            {
-                if (updatemask & UPDATE_HP)
-                {
-                    ref<uint8>(0x1E) = PMob->GetHPP();
-                    ref<uint8>(0x1F) = PEntity->animation;
-                    ref<uint8>(0x2A) |= PEntity->animationsub;
 
-                    ref<uint32>(0x21) = PMob->m_flags;
-                    ref<uint8>(0x25)  = PMob->health.hp > 0 ? 0x08 : 0;
-                    ref<uint8>(0x27)  = PMob->m_name_prefix;
-                    if (PMob->PMaster != nullptr && PMob->PMaster->objtype == TYPE_PC)
-                    {
-                        ref<uint8>(0x27) |= 0x08;
-                    }
-                    ref<uint8>(0x28) |= (PMob->StatusEffectContainer->HasStatusEffect(EFFECT_TERROR) ? 0x10 : 0x00);
-                    ref<uint8>(0x28) |= PMob->health.hp > 0 && PMob->animation == ANIMATION_DEATH ? 0x08 : 0;
-                    ref<uint8>(0x29) = static_cast<uint8>(PEntity->allegiance);
-                    ref<uint8>(0x2B) = PEntity->namevis;
-                }
-                if (updatemask & UPDATE_STATUS)
+            if (updatemask & UPDATE_HP)
+            {
+                ref<uint8>(0x1E) = PMob->GetHPP();
+                ref<uint8>(0x1F) = PEntity->animation;
+                ref<uint8>(0x2A) |= PEntity->animationsub;
+
+                ref<uint32>(0x21) = PMob->m_flags;
+                ref<uint8>(0x25)  = PMob->health.hp > 0 ? 0x08 : 0;
+                ref<uint8>(0x27)  = PMob->m_name_prefix;
+                if (PMob->PMaster != nullptr && PMob->PMaster->objtype == TYPE_PC)
                 {
-                    ref<uint32>(0x2C) = PMob->m_OwnerID.id;
+                    ref<uint8>(0x27) |= 0x08;
+                }
+                ref<uint8>(0x28) |= (PMob->StatusEffectContainer->HasStatusEffect(EFFECT_TERROR) ? 0x10 : 0x00);
+                ref<uint8>(0x28) |= PMob->health.hp > 0 && PMob->animation == ANIMATION_DEATH ? 0x08 : 0;
+                ref<uint8>(0x29) = static_cast<uint8>(PEntity->allegiance);
+                ref<uint8>(0x2B) = PEntity->namevis;
+            }
+
+            if (updatemask & UPDATE_STATUS)
+            {
+                ref<uint32>(0x2C) = PMob->m_OwnerID.id;
+            }
+
+            if (updatemask & UPDATE_NAME)
+            {
+                // depending on size of name, this can be 0x20, 0x22, or 0x24
+                this->setSize(0x48);
+                if (PMob->packetName.empty())
+                {
+                    memcpy(data + (0x34), PEntity->GetName(), std::min<size_t>(PEntity->name.size(), PacketNameLength));
+                }
+                else
+                {
+                    memcpy(data + (0x34), PMob->packetName.c_str(), std::min<size_t>(PMob->packetName.size(), PacketNameLength));
                 }
             }
         }
@@ -180,14 +202,14 @@ CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type
         case MODEL_UNK_5:
         case MODEL_AUTOMATON:
         {
-            this->setSize(0x48);
             ref<uint32>(0x30) = ::ref<uint32>(&PEntity->look, 0);
         }
         break;
         case MODEL_EQUIPPED:
         case MODEL_CHOCOBO:
         {
-            std::memcpy(data + 0x30, &PEntity->look, sizeof(PEntity->look));
+            this->setSize(0x48);
+            memcpy(data + (0x30), &(PEntity->look), 20);
         }
         break;
         case MODEL_DOOR:
@@ -205,46 +227,28 @@ CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type
     // Otherwise it will revert to it's default name (if applicable).
     if (PEntity->isRenamed)
     {
-        updatemask       |= UPDATE_NAME;
+        updatemask |= UPDATE_NAME;
         ref<uint8>(0x0A) |= updatemask;
-    }
 
-    // Send name data
-    if (updatemask & UPDATE_NAME)
-    {
         this->setSize(0x48);
 
-        auto name       = PEntity->name;
+        auto name       = PEntity->packetName;
         auto nameOffset = (PEntity->look.size == MODEL_EQUIPPED) ? 0x44 : 0x34;
+        auto maxLength  = std::min<size_t>(name.size(), PacketNameLength);
 
         // Mobs and NPC's targid's live in the range 0-1023
-        if (PEntity->targid < 1024 && PEntity->isRenamed)
+        if (PEntity->targid < 1024)
         {
             ref<uint16>(0x34) = 0x01;
             nameOffset        = 0x35;
         }
 
-        if (PEntity->isRenamed ||
-            PEntity->objtype == TYPE_TRUST ||
-            PEntity->IsDynamicEntity())
-        {
-            name = PEntity->packetName;
-        }
-
-        auto maxLength = std::min<size_t>(name.size(), PacketNameLength);
-
-        if (PEntity->look.size == MODEL_DOOR ||
-            PEntity->look.size == MODEL_ELEVATOR ||
-            PEntity->look.size == MODEL_SHIP)
-        {
-            maxLength = 12;
-        }
-
-        std::memcpy(data + nameOffset, name.c_str(), maxLength);
-
-        // Make sure the rest of the packet is empty (or garbage might appear)
-        auto start = data + nameOffset + maxLength;
-        auto size = static_cast<std::size_t>(this->getSize());
+        // Make sure to zero-out the existing name area of the packet
+        auto start = data + nameOffset;
+        auto size  = static_cast<std::size_t>(this->getSize());
         std::memset(start, 0U, size);
+
+        // Copy in name
+        std::memcpy(data + nameOffset, name.c_str(), maxLength);
     }
 }
