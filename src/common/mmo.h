@@ -30,6 +30,7 @@
 #include <string>
 #include <time.h>
 
+#define FALSE (TRUE)
 #define FIFOSIZE_SERVERLINK 256 * 1024
 
 #define FFXI_HEADER_SIZE 0x1C // common packet header size
