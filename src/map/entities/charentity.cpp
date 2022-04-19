@@ -702,6 +702,18 @@ bool CCharEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
         return true;
     }
 
+    if (targetFlags & TARGET_PLAYER_PARTY_ENTRUST)
+    {
+        if (!PInitiator->StatusEffectContainer->HasStatusEffect(EFFECT_ENTRUST) && PInitiator == this)
+        {
+            return true;
+        }
+        else if (PInitiator->StatusEffectContainer->HasStatusEffect(EFFECT_ENTRUST) && ((PParty && PInitiator->PParty == PParty) && PInitiator != this))
+        {
+            return true;
+        }
+    }
+
     return false;
 }
 
@@ -820,16 +832,29 @@ void CCharEntity::OnCastFinished(CMagicState& state, action_t& action)
     if (PSpell->tookEffect())
     {
         charutils::TrySkillUP(this, (SKILLTYPE)PSpell->getSkillType(), PTarget->GetMLevel());
-        if (PSpell->getSkillType() == SKILL_SINGING)
+
+        CItemWeapon* PItem = static_cast<CItemWeapon*>(getEquip(SLOT_RANGED));
+
+        if (PItem && PItem->isType(ITEM_EQUIPMENT))
         {
-            CItemWeapon* PItem = static_cast<CItemWeapon*>(getEquip(SLOT_RANGED));
-            if (PItem && PItem->isType(ITEM_EQUIPMENT))
+            SKILLTYPE Skilltype = (SKILLTYPE)PItem->getSkillType();
+
+            switch (PSpell->getSkillType())
             {
-                SKILLTYPE Skilltype = (SKILLTYPE)PItem->getSkillType();
-                if (Skilltype == SKILL_STRING_INSTRUMENT || Skilltype == SKILL_WIND_INSTRUMENT || Skilltype == SKILL_SINGING)
-                {
-                    charutils::TrySkillUP(this, Skilltype, PTarget->GetMLevel());
-                }
+                case SKILL_GEOMANCY:
+                    if (Skilltype == SKILL_HANDBELL)
+                    {
+                        charutils::TrySkillUP(this, Skilltype, PTarget->GetMLevel());
+                    }
+                    break;
+                case SKILL_SINGING:
+                    if (Skilltype == SKILL_STRING_INSTRUMENT || Skilltype == SKILL_WIND_INSTRUMENT || Skilltype == SKILL_SINGING)
+                    {
+                        charutils::TrySkillUP(this, Skilltype, PTarget->GetMLevel());
+                    }
+                    break;
+                default:
+                    break;
             }
         }
     }

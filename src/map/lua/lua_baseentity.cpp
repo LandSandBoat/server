@@ -10404,6 +10404,35 @@ bool CLuaBaseEntity::delLatent(uint16 condID, uint16 conditionValue, uint16 mID,
 }
 
 /************************************************************************
+ *  Function: getMaxGearMod()
+ *  Purpose : Returns the highest integer value of a specified Mod on all equiped items
+ *  Example : local maxValue = player:getMaxGearMod(xi.mod.GEOMANCY_BONUS)
+ *  Notes   :
+ ************************************************************************/
+
+int16 CLuaBaseEntity::getMaxGearMod(Mod modId)
+{
+    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    CCharEntity* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+    uint16 maxModValue = 0;
+
+    for (uint8 i = 0; i < SLOT_BACK; ++i)
+    {
+        auto* PItem = dynamic_cast<CItemEquipment*>(PChar->getEquip((SLOTTYPE)i));
+        if (PItem && (PItem->isType(ITEM_EQUIPMENT) || PItem->isType(ITEM_WEAPON)))
+        {
+            uint16 modValue = PItem->getModifier(modId);
+            if (modValue > maxModValue)
+            {
+                maxModValue = modValue;
+            }
+        }
+    }
+    return maxModValue;
+}
+
+/************************************************************************
  *  Function: fold()
  *  Purpose : Removes the most recent Phantom Roll or Bust effect
  *  Example : target:fold()
@@ -14096,6 +14125,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getMod", CLuaBaseEntity::getMod);
     SOL_REGISTER("setMod", CLuaBaseEntity::setMod);
     SOL_REGISTER("delMod", CLuaBaseEntity::delMod);
+    SOL_REGISTER("getMaxGearMod", CLuaBaseEntity::getMaxGearMod);
 
     SOL_REGISTER("addLatent", CLuaBaseEntity::addLatent);
     SOL_REGISTER("delLatent", CLuaBaseEntity::delLatent);
