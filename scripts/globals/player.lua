@@ -1,5 +1,6 @@
 require("scripts/globals/gear_sets")
 require("scripts/globals/keyitems")
+require("scripts/globals/quests")
 require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/teleports")
@@ -66,6 +67,14 @@ local function CharCreate(player)
 
     -- add nation-specific map
     player:addKeyItem(nationInfo.map)
+
+    -- add job-emote Key items
+    player:addKeyItem(xi.ki.JOB_GESTURE_WARRIOR)
+    player:addKeyItem(xi.ki.JOB_GESTURE_MONK)
+    player:addKeyItem(xi.ki.JOB_GESTURE_WHITE_MAGE)
+    player:addKeyItem(xi.ki.JOB_GESTURE_BLACK_MAGE)
+    player:addKeyItem(xi.ki.JOB_GESTURE_RED_MAGE)
+    player:addKeyItem(xi.ki.JOB_GESTURE_THIEF)
 
     -- add nation- and race-specific ring
     if nation == raceInfo.homeNation and not player:hasItem(nationInfo.ring) then
@@ -149,6 +158,27 @@ xi.player.onGameIn = function(player, firstLogin, zoning)
         end
     else
         -- things checked ONLY during zone in go here
+		if player:getLocalVar("[WasInAbyssea]") == 1 then
+			--abyssea time logged
+			player:setCharVar("lastEnteredAbyssea", os.time() + 14400)
+			player:setCharVar("[WasInAbyssea]", 0)
+		end
+    end
+
+    -- Abyssea starting quest should be flagged when expansion is active
+    if
+        xi.settings.ENABLE_ABYSSEA == 1 and
+        player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_JOURNEY_BEGINS) == QUEST_AVAILABLE
+    then
+        player:addQuest(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_JOURNEY_BEGINS)
+    end
+
+    -- This is for migration safety only, and should be removed at a later date
+    if
+        player:hasCompletedQuest(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_JOURNEY_BEGINS) and
+        player:getTraverserEpoch() == 0
+    then
+        player:setTraverserEpoch()
     end
 
     -- apply mods from gearsets (scripts/globals/gear_sets.lua)

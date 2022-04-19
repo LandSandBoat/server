@@ -31,7 +31,7 @@ end
 entity.onTrigger = function(player, npc)
     local hatInHand = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.HAT_IN_HAND)
     local aFeatherInOnesCap = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_FEATHER_IN_ONE_S_CAP)
-    local pfame = player:getFameLevel(WINDURST)
+    local pfame = player:getFameLevel(xi.quest.fame_area.WINDURST)
 
     if hatInHand == QUEST_AVAILABLE then
         player:startEvent(48) -- Quest Offered
@@ -92,7 +92,7 @@ entity.onEventFinish = function(player, csid, option)
         npcUtil.giveKeyItem(player, xi.ki.NEW_MODEL_HAT)
     elseif csid == 52 and option >= 1 then
         local rewardTier = player:getLocalVar("hatRewardTier")
-        local rewards = {fame = 75, var = {"QuestHatInHand_var", "QuestHatInHand_count"}}
+        local rewards = {fame = 75, fameArea = xi.quest.fame_area.WINDURST, var = {"QuestHatInHand_var", "QuestHatInHand_count"}}
 
         if rewardTier == 5 then
             rewards.gil = 500
@@ -108,7 +108,7 @@ entity.onEventFinish = function(player, csid, option)
             rewards.gil = 300
         end
 
-        if npcUtil.completeQuest(player, WINDURST, xi.quest.id.windurst.HAT_IN_HAND, rewards) then
+        if npcUtil.completeQuest(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.HAT_IN_HAND, rewards) then
             player:delKeyItem(xi.ki.NEW_MODEL_HAT)
             player:needToZone(true)
         end
@@ -120,9 +120,9 @@ entity.onEventFinish = function(player, csid, option)
         end
     elseif csid == 79 then
         if aFeatherInOnesCap == QUEST_ACCEPTED then
-            npcUtil.completeQuest(player, WINDURST, xi.quest.id.windurst.A_FEATHER_IN_ONE_S_CAP, {fame = 75})
+            npcUtil.completeQuest(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_FEATHER_IN_ONE_S_CAP, {fame = 75, fameArea = xi.quest.fame_area.WINDURST})
         else
-            player:addFame(WINDURST, 8)
+            player:addFame(xi.quest.fame_area.WINDURST, 8)
             player:setCharVar("QuestFeatherInOnesCap_var", 0)
         end
         player:addGil(xi.settings.GIL_RATE * 1500)

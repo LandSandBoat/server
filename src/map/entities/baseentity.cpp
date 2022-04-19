@@ -29,6 +29,7 @@
 
 CBaseEntity::CBaseEntity()
 : status(STATUS_TYPE::DISAPPEAR)
+, isRenamed(false)
 {
     id       = 0;
     targid   = 0;
@@ -81,6 +82,11 @@ void CBaseEntity::FadeOut()
 const int8* CBaseEntity::GetName()
 {
     return (const int8*)name.c_str();
+}
+
+const int8* CBaseEntity::GetPacketName()
+{
+    return (const int8*)packetName.c_str();
 }
 
 uint16 CBaseEntity::getZone() const

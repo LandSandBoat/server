@@ -48,7 +48,7 @@ entity.onEventFinish = function(player, csid, option)
         end
 
         if reward ~= 0 then
-            if npcUtil.completeQuest(player, JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH, {
+            if npcUtil.completeQuest(player, xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH, {
                 item = reward,
                 var = {"ApocalypseNigh", "Apoc_Nigh_Reward", "Apoc_Nigh_RewardCS1"}
             }) then

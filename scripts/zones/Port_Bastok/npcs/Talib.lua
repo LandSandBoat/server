@@ -62,10 +62,10 @@ entity.onEventFinish = function(player, csid, option)
         local ShadyBusiness = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.SHADY_BUSINESS)
 
         if ShadyBusiness == QUEST_ACCEPTED then
-            player:addFame(NORG, 100)
+            player:addFame(xi.quest.fame_area.NORG, 100)
             player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.SHADY_BUSINESS)
         else
-            player:addFame(NORG, 80)
+            player:addFame(xi.quest.fame_area.NORG, 80)
         end
 
         player:tradeComplete()

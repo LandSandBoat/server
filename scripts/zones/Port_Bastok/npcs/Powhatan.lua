@@ -31,7 +31,7 @@ entity.onTrigger = function(player, npc)
                 player:startEvent(53)
             end
         end
-    elseif (GuestofHauteur ~= QUEST_COMPLETED and WelcometoBastok == QUEST_COMPLETED and player:getFameLevel(BASTOK) >= 3 and player:getMainLvl() >= 31) then
+    elseif (GuestofHauteur ~= QUEST_COMPLETED and WelcometoBastok == QUEST_COMPLETED and player:getFameLevel(xi.quest.fame_area.BASTOK) >= 3 and player:getMainLvl() >= 31) then
         local gohStatus = player:getCharVar("GuestofHauteur_Event")
 
         if (GuestofHauteur == QUEST_AVAILABLE) then
@@ -64,7 +64,7 @@ entity.onEventFinish = function(player, csid, option)
             player:addItem(16565)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 16565) -- Spatha
             player:setCharVar("WelcomeToBastok_Event", 0)
-            player:addFame(BASTOK, 80)
+            player:addFame(xi.quest.fame_area.BASTOK, 80)
             player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.WELCOME_TO_BASTOK)
         end
     elseif (csid == 55 and option == 0) then
@@ -78,7 +78,7 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 12300) -- Targe
             player:delKeyItem(xi.ki.LETTER_FROM_DOMIEN)
             player:setCharVar("GuestofHauteur_Event", 0)
-            player:addFame(BASTOK, 80)
+            player:addFame(xi.quest.fame_area.BASTOK, 80)
             player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.GUEST_OF_HAUTEUR)
         end
     end

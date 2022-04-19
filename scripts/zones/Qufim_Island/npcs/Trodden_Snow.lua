@@ -15,7 +15,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     -- Trade Enfeebling Kit
-    if player:getCurrentMission(ASA) == xi.mission.id.asa.THAT_WHICH_CURDLES_BLOOD then
+    if player:getCurrentMission(xi.mission.log_id.ASA) == xi.mission.id.asa.THAT_WHICH_CURDLES_BLOOD then
         local item = 0
         local asaStatus = player:getCharVar("ASA_Status")
 
@@ -34,7 +34,7 @@ end
 
 entity.onTrigger = function(player, npc)
     --ASA 4 CS: Triggers With At Least 3 Counterseals.
-    if player:getCurrentMission(ASA) == xi.mission.id.asa.SUGAR_COATED_DIRECTIVE then
+    if player:getCurrentMission(xi.mission.log_id.ASA) == xi.mission.id.asa.SUGAR_COATED_DIRECTIVE then
         local completedSeals =
             (player:hasKeyItem(xi.ki.AMBER_COUNTERSEAL)    and 1 or 0) +
             (player:hasKeyItem(xi.ki.AZURE_COUNTERSEAL)    and 1 or 0) +

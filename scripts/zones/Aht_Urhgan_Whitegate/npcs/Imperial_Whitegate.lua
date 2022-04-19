@@ -21,10 +21,10 @@ end
 entity.onTrigger = function(player,npc)
     local noWeapons = player:getEquipID(xi.slot.MAIN) == 0 and player:getEquipID(xi.slot.SUB) == 0
 
-    if player:getCurrentMission(TOAU) == xi.mission.id.toau.IMPERIAL_CORONATION and
+    if player:getCurrentMission(xi.mission.log_id.TOAU) == xi.mission.id.toau.IMPERIAL_CORONATION and
         whitegateShared.doRoyalPalaceArmorCheck(player) and noWeapons then
         player:startEvent(3140, xi.besieged.getMercenaryRank(player), player:getTitle(), 0, 0, 0, 0, 0, 0, 0)
-    elseif player:getCurrentMission(TOAU) >= xi.mission.id.toau.IMPERIAL_CORONATION and
+    elseif player:getCurrentMission(xi.mission.log_id.TOAU) >= xi.mission.id.toau.IMPERIAL_CORONATION and
         whitegateShared.doRoyalPalaceArmorCheck(player) and noWeapons then
         local ring = player:getCharVar("TOAU_RINGTIME")
         local standard = player:hasItem(129)
@@ -44,12 +44,6 @@ entity.onTrigger = function(player,npc)
         if ringParam > 0 or standardParam > 0 then
             player:startEvent(3155, standardParam, ringParam, 0, 0, 0, 0, 0, 0, 0)
         end
-
-    -- TRANSFORMATIONS
-    elseif player:getCharVar("TransformationsProgress") == 1 then
-        player:startEvent(722)
-    else
-        player:messageSpecial(ID.text.GATE_IS_FIRMLY_CLOSED)
     end
 end
 
@@ -79,10 +73,6 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("TOAU_RINGRECV", 0)
     elseif csid == 3155 and option == 6 then
         npcUtil.giveItem(player, xi.items.IMPERIAL_STANDARD)
-    elseif csid == 722 then
-        player:addQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.TRANSFORMATIONS)
-        player:setCharVar("TransformationsProgress", 2)
-        player:setCharVar("[BLUAF]Remaining", 7) -- Player can now craft BLU armor
     end
 end
 

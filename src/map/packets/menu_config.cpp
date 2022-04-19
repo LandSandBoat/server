@@ -38,17 +38,19 @@ CMenuConfigPacket::CMenuConfigPacket(CCharEntity* PChar)
     ref<uint8>(0x06) = PChar->menuConfigFlags.byte3;
     ref<uint8>(0x07) = PChar->menuConfigFlags.byte4;
 
+    ref<uint64>(0x08) = PChar->chatFilterFlags;
+
     ref<uint8>(0x12) = 0x02; // Have seen this as 0x01 on retail
     ref<uint8>(0x14) = 0x02;
 }
 
-// активные поля data[0x07]
+// Active fields data[0x07]
 //
 // 0 - cancel new adventurer status
 // 1 - enable mentor, cancel new
 // 2 - cancel new
 // 3 - disable, cancel new
-// 4 - нет активных
+// 4 - No active
 // 5 - enable mentor status
-// 6 - нет активных
+// 6 - No active
 // 7 - disable mentor status

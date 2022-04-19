@@ -64,7 +64,7 @@ entity.onTrigger = function(player, npc)
     end
 
     if
-        player:getCurrentMission(ASA) == xi.mission.id.asa.THAT_WHICH_CURDLES_BLOOD and
+        player:getCurrentMission(xi.mission.log_id.ASA) == xi.mission.id.asa.THAT_WHICH_CURDLES_BLOOD and
         guildMember == 150995375 and
         canRankUp >= 3
     then

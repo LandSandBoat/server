@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -31,6 +31,7 @@
 #include <set>
 
 constexpr int8  CNavMesh::ERROR_NEARESTPOLY;
+constexpr float smallPolyPickExt[3]  = {  0.5f,  1.0f,  0.5f };
 constexpr float polyPickExt[3]       = {  5.0f, 10.0f,  5.0f };
 constexpr float skinnyPolyPickExt[3] = { 0.01f, 10.0f, 0.01f };
 constexpr float verticalLimit        = 5.0f;
@@ -187,27 +188,35 @@ void CNavMesh::outputError(uint32 status)
 {
     if (status & DT_WRONG_MAGIC)
     {
-        ShowNavError("Detour wrong magic");
+        ShowNavError("Detour: Input data is not recognized.");
     }
     else if (status & DT_WRONG_VERSION)
     {
-        ShowNavError("Detour wrong version");
+        ShowNavError("Detour: Input data is in wrong version.");
     }
     else if (status & DT_OUT_OF_MEMORY)
     {
-        ShowNavError("Detour out of memory");
+        ShowNavError("Detour: Operation ran out of memory.");
     }
     else if (status & DT_INVALID_PARAM)
     {
-        ShowNavError("Detour invalid param");
+        ShowNavError("Detour: An input parameter was invalid.");
+    }
+    else if (status & DT_BUFFER_TOO_SMALL)
+    {
+        ShowNavError("Detour: Result buffer for the query was too small to store all results.");
     }
     else if (status & DT_OUT_OF_NODES)
     {
-        ShowNavError("Detour out of nodes");
+        ShowNavError("Detour: Query ran out of nodes during search.");
     }
     else if (status & DT_PARTIAL_RESULT)
     {
-        ShowNavError("Detour partial result");
+        ShowNavError("Detour: Query did not reach the end location, returning best guess.");
+    }
+    else if (status & DT_ALREADY_OCCUPIED)
+    {
+        ShowNavError("Detour: A tile has already been assigned to the given x,y coordinate");
     }
 }
 
@@ -375,7 +384,7 @@ bool CNavMesh::validPosition(const position_t& position)
 
     dtPolyRef startRef;
 
-    dtStatus status = m_navMeshQuery.findNearestPoly(spos, polyPickExt, &filter, &startRef, snearest);
+    dtStatus status = m_navMeshQuery.findNearestPoly(spos, smallPolyPickExt, &filter, &startRef, snearest);
 
     if (dtStatusFailed(status))
     {
@@ -383,6 +392,38 @@ bool CNavMesh::validPosition(const position_t& position)
     }
 
     return m_navMesh->isValidPolyRef(startRef);
+}
+
+void CNavMesh::snapToValidPosition(position_t& position)
+{
+    TracyZoneScoped;
+    float spos[3];
+    CNavMesh::ToDetourPos(&position, spos);
+
+    float snearest[3];
+
+    dtQueryFilter filter;
+    filter.setIncludeFlags(0xffff);
+    filter.setExcludeFlags(0);
+
+    dtPolyRef startRef;
+
+    dtStatus status = m_navMeshQuery.findNearestPoly(spos, polyPickExt, &filter, &startRef, snearest);
+
+    if (dtStatusFailed(status))
+    {
+        ShowNavError("CNavMesh::Failed to find nearby valid poly (%f, %f, %f) (%u)", spos[0], spos[1], spos[2], m_zoneID);
+        outputError(status);
+        return;
+    }
+
+    if (m_navMesh->isValidPolyRef(startRef))
+    {
+        CNavMesh::ToFFXIPos(snearest);
+        position.x = snearest[0];
+        position.y = snearest[1];
+        position.z = snearest[2];
+    }
 }
 
 bool CNavMesh::onSameFloor(const position_t& start, float* spos, const position_t& end, float* epos, dtQueryFilter& filter)

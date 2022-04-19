@@ -55,9 +55,9 @@ entity.onEventFinish = function(player, csid, option)
 
         if (SomethingFishy == QUEST_ACCEPTED) then
             player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.SOMETHING_FISHY)
-            player:addFame(WINDURST, 60)
+            player:addFame(xi.quest.fame_area.WINDURST, 60)
         else
-            player:addFame(WINDURST, 10)
+            player:addFame(xi.quest.fame_area.WINDURST, 10)
         end
 
         player:tradeComplete()

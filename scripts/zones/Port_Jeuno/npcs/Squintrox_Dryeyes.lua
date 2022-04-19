@@ -17,7 +17,7 @@ entity.onTrade = function(player, npc, trade)
     local sLux = trade:hasItemQty(2740, 1)
     local sLuna = trade:hasItemQty(2741, 1)
     local sAstrum = trade:hasItemQty(2742, 1)
-    local ACPm = player:getCurrentMission(ACP)
+    local ACPm = player:getCurrentMission(xi.mission.log_id.ACP)
     local CrimsonKey = player:hasKeyItem(xi.ki.CRIMSON_KEY)
     local LastCrimson = player:getCharVar("LastCrimsonKey") -- When last Crimson key was obtained
 
@@ -77,7 +77,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    local ACPm = player:getCurrentMission(ACP)
+    local ACPm = player:getCurrentMission(xi.mission.log_id.ACP)
     local salad = player:hasKeyItem(xi.ki.BOWL_OF_BLAND_GOBLIN_SALAD)
     local juice = player:hasKeyItem(xi.ki.JUG_OF_GREASY_GOBLIN_JUICE)
     local grub = player:hasKeyItem(xi.ki.CHUNK_OF_SMOKED_GOBLIN_GRUB)

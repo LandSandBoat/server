@@ -78,6 +78,8 @@ void        PackSoultrapperName(std::string name, uint8 output[], uint8 size);
 std::string escape(std::string const& s);
 
 std::vector<std::string> split(const std::string& s, char delim);
+// https://stackoverflow.com/questions/313970/how-to-convert-an-instance-of-stdstring-to-lower-case
+std::string trim(const std::string& str, const std::string& whitespace = " \t");
 look_t stringToLook(std::string str);
 
 // Float tools
@@ -88,5 +90,22 @@ bool definitelyGreaterThan(float a, float b);
 bool definitelyLessThan(float a, float b);
 
 void crash();
+
+class ScopeGuard
+{
+public:
+    ScopeGuard(std::function<void()> func)
+    : func(func)
+    {
+    }
+
+    ~ScopeGuard()
+    {
+        func();
+    }
+
+private:
+    std::function<void()> func;
+};
 
 #endif

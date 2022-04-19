@@ -93,7 +93,7 @@ xi.spells.spell_enhancing_ninjutsu.useEnhancingNinjutsu = function(caster, targe
         paramThree = enhancingTable[spellId][3] - 2
 
         if targetEffect == nil or targetEffect:getPower() <= paramThree then
-            target:addStatusEffectEx(xi.effect.COPY_IMAGE, subpower, paramThree, duration, 900, 0, power) -- Not a mistake.
+            target:addStatusEffectEx(xi.effect.COPY_IMAGE, subPower, paramThree, duration, 900, 0, power) -- Not a mistake.
             spell:setMsg(xi.msg.basic.MAGIC_GAIN_EFFECT)
         else
             spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)

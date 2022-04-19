@@ -5,7 +5,7 @@
 -- !zone 240
 -----------------------------------
 local ID = require("scripts/zones/Port_Windurst/IDs")
-require("scripts/globals/porter_moogle_util")
+require("scripts/globals/porter_moogle")
 -----------------------------------
 local entity = {}
 
@@ -19,7 +19,7 @@ local e =
 }
 
 entity.onTrade = function(player, npc, trade)
-    porterMoogleTrade(player, trade, e)
+    xi.porter_moogle.onTrade(player, trade, e)
 end
 
 entity.onTrigger = function(player, npc)
@@ -28,11 +28,11 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option)
-    porterEventUpdate(player, csid, option, e.RETRIEVE_EVENT_ID)
+    xi.porter_moogle.onEventUpdate(player, csid, option, e.RETRIEVE_EVENT_ID)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    porterEventFinish(player, csid, option, e.TALK_EVENT_ID)
+    xi.porter_moogle.onEventFinish(player, csid, option, e.TALK_EVENT_ID)
 end
 
 return entity

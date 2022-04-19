@@ -38,7 +38,7 @@ end
 
 battlefield_object.onEventFinish = function(player, csid, option)
     if csid == 32001 and option ~= 0 and player:hasKeyItem(xi.ki.DRAGON_CURSE_REMEDY) then
-        npcUtil.completeQuest(player, SANDORIA, xi.quest.id.sandoria.THE_HOLY_CREST, {
+        npcUtil.completeQuest(player, xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_HOLY_CREST, {
             title = xi.title.HEIR_TO_THE_HOLY_CREST,
             var = "TheHolyCrest_Event",
         })

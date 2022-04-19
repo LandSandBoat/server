@@ -23,7 +23,7 @@ end
 entity.onTrigger = function(player, npc)
 
     local TrialSizeWater = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_SIZE_TRIAL_BY_WATER)
-    if (player:getMainLvl() >= 20 and player:getMainJob() == xi.job.SMN and TrialSizeWater == QUEST_AVAILABLE and player:getFameLevel(NORG) >= 2) then --Requires player to be Summoner at least lvl 20
+    if (player:getMainLvl() >= 20 and player:getMainJob() == xi.job.SMN and TrialSizeWater == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.NORG) >= 2) then --Requires player to be Summoner at least lvl 20
         player:startEvent(199, 0, 1549, 2, 20)     --mini tuning fork of water, zone, level
     elseif (TrialSizeWater == QUEST_ACCEPTED) then
         local WaterFork = player:hasItem(1549)

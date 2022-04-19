@@ -20,7 +20,7 @@ local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SHATTERING_STAR
 quest.reward =
 {
     fame = 80,
-    fameArea = JEUNO,
+    fameArea = xi.quest.fame_area.JEUNO,
     title = xi.title.STAR_BREAKER,
 }
 

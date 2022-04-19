@@ -83,7 +83,7 @@ PAST_WINDURST = 7
 -- Returns the numerical Campaign Medal of the player.
 -- -------------------------------------------------------------------
 
-function getMedalRank(player)
+xi.campaign.getMedalRank = function(player)
     local rank = 0
     local medals =
     {
@@ -106,7 +106,7 @@ end
 -- ListName_AN_price[optionID] = cost -- ItemName
 -- -------------------------------------------------------------------
 
-function getSandOriaNotesItem(i)
+xi.campaign.getSandOriaNotesItem = function(i)
     local SandOria_AN =
     {
         [2] = {id = 15754, price = 980}, -- Sprinter's Shoes
@@ -151,7 +151,7 @@ function getSandOriaNotesItem(i)
     return item.id, item.price, item.adj
 end
 
-function getBastokNotesItem(i)
+xi.campaign.getBastokNotesItem = function(i)
     local Bastok_AN =
     {
         [2] = {id = 15754, price = 980}, -- Sprinter's Shoes
@@ -196,7 +196,7 @@ function getBastokNotesItem(i)
     return item.id, item.price, item.adj
 end
 
-function getWindurstNotesItem(i)
+xi.campaign.getWindurstNotesItem = function(i)
     local Windurst_AN =
     {
         [2] = {id = 15754, price = 980}, -- Sprinter's Shoes
@@ -251,7 +251,7 @@ end
 -- effect will last until, NOT the actual status effect duration.
 -- -------------------------------------------------------------------
 
-function getSigilTimeStamp(player)
+xi.campaign.getSigilTimeStamp = function(player)
     local timeStamp = 0 -- zero'd till math is done.
 
     -- TODO: calculate time stamp for menu display of when it wears off

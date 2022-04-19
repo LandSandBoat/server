@@ -2921,8 +2921,9 @@ INSERT INTO `item_mods` VALUES (10972,10,5);
 INSERT INTO `item_mods` VALUES (10973,1,8);
 INSERT INTO `item_mods` VALUES (10973,30,5);
 INSERT INTO `item_mods` VALUES (10973,233,1);
-INSERT INTO `item_mods` VALUES (10974,1,9);
-INSERT INTO `item_mods` VALUES (10974,31,5);
+INSERT INTO `item_mods` VALUES (10974,1,9); -- Mujin Mantle - DEF +9
+INSERT INTO `item_mods` VALUES (10974,31,5); -- Magic Evasion +5
+-- INSERT INTO `item_mods` VALUES (10974,?,-1); -- Todo - Ninjutsu recast delay -1
 INSERT INTO `item_mods` VALUES (10975,1,17); -- ARCHON CAPE, DEF:17 Occasionally annuls severe physical damage taken Dark weather:Accuracy+13 Attack+13
 -- INSERT INTO `item_mods` VALUES (10975,OCCASIONALLY ANNULS SEVERE PHYSICAL DMG TAKEN,1);
 INSERT INTO `item_mods` VALUES (10976,1,7);
@@ -3114,10 +3115,10 @@ INSERT INTO `item_mods` VALUES (11029,27,4);
 INSERT INTO `item_mods` VALUES (11029,22,17); -- DARK_RES
 INSERT INTO `item_mods` VALUES (11030,2,15);
 INSERT INTO `item_mods` VALUES (11030,375,5);
-INSERT INTO `item_mods` VALUES (11031,24,3);
-INSERT INTO `item_mods` VALUES (11031,27,-2);
-INSERT INTO `item_mods` VALUES (11032,29,2);
-INSERT INTO `item_mods` VALUES (11032,289,4);
+INSERT INTO `item_mods` VALUES (11031,24,3); -- Oneiros pearl - Range Attack +3
+INSERT INTO `item_mods` VALUES (11031,27,-2); -- Enmity -2
+INSERT INTO `item_mods` VALUES (11032,29,2); -- Mujin stud - Magic Def +2
+INSERT INTO `item_mods` VALUES (11032,289,4); -- "Subtle Blow" +4
 INSERT INTO `item_mods` VALUES (11033,80,3);
 INSERT INTO `item_mods` VALUES (11033,289,-10);
 INSERT INTO `item_mods` VALUES (11034,25,3);
@@ -5953,6 +5954,7 @@ INSERT INTO `item_mods` VALUES (11819,1,27);      -- oneiros_coif DEF:+27
 INSERT INTO `item_mods` VALUES (11819,8,4);       -- STR+4
 INSERT INTO `item_mods` VALUES (11819,24,11);     -- Ranged Attack+11
 INSERT INTO `item_mods` VALUES (11819,27,3);      -- Enmity+3
+-- INSERT INTO `item_mods` VALUES (11819,?,?);      -- Todo Reduces Snapshot effect
 INSERT INTO `item_mods` VALUES (11820,1,24);
 INSERT INTO `item_mods` VALUES (11820,7,30);
 INSERT INTO `item_mods` VALUES (11820,23,14);
@@ -23841,7 +23843,7 @@ INSERT INTO `item_mods` VALUES (18808,27,-2);
 INSERT INTO `item_mods` VALUES (18809,13,3);
 INSERT INTO `item_mods` VALUES (18809,27,-3);
 INSERT INTO `item_mods` VALUES (18810,431,1);
-INSERT INTO `item_mods` VALUES (18811,370,1);
+INSERT INTO `item_mods` VALUES (18811,370,1); -- Oneiros Grip - Regen effect
 INSERT INTO `item_mods` VALUES (18812,16,10); -- ICE_RES
 INSERT INTO `item_mods` VALUES (18814,2,40);      -- Salubrious Grip: HP+40
 INSERT INTO `item_mods` VALUES (18815,289,-5);    -- Arbuda Grip: "Subtle Blow"-5
@@ -24465,8 +24467,8 @@ INSERT INTO `item_mods` VALUES (19139,25,5);
 INSERT INTO `item_mods` VALUES (19140,8,8);
 INSERT INTO `item_mods` VALUES (19140,11,8);
 INSERT INTO `item_mods` VALUES (19140,431,1);
-INSERT INTO `item_mods` VALUES (19141,11,6);
-INSERT INTO `item_mods` VALUES (19141,421,5);
+INSERT INTO `item_mods` VALUES (19141,11,6); -- Oneiros Knife - AGI +6
+INSERT INTO `item_mods` VALUES (19141,421,10); -- Increase Crit Hit Damage +10% https://www.bg-wiki.com/ffxi/Oneiros%20Knife
 INSERT INTO `item_mods` VALUES (19142,22,20); -- DARK_RES
 INSERT INTO `item_mods` VALUES (19142,241,2);
 INSERT INTO `item_mods` VALUES (19142,242,2);
@@ -25146,8 +25148,8 @@ INSERT INTO `item_mods` VALUES (19760,23,2);  -- Anger Bomblet -- 2 Att
 INSERT INTO `item_mods` VALUES (19760,68,-2); -- -2 Eva
 INSERT INTO `item_mods` VALUES (19760,288,1); -- 1 Double Attack
 INSERT INTO `item_mods` VALUES (19761,168,10);    -- Impatiens: Spell interruption rate down 10%
-INSERT INTO `item_mods` VALUES (19762,84,2);
-INSERT INTO `item_mods` VALUES (19762,909,2);     -- Occ. quickens spellcasting +2%
+INSERT INTO `item_mods` VALUES (19762,84,2); -- Oneiros tanthlum - Axe skill +2
+INSERT INTO `item_mods` VALUES (19762,438,6); -- "Madrigal" Attack +6
 INSERT INTO `item_mods` VALUES (19763,23,-7);  -- Oneiros Cluster -- -7 Att
 INSERT INTO `item_mods` VALUES (19763,384,100); -- 1% Gear Haste
 INSERT INTO `item_mods` VALUES (19764,9,4);
@@ -27084,6 +27086,8 @@ INSERT INTO `item_mods` VALUES (21371,25,5);
 INSERT INTO `item_mods` VALUES (21371,73,3);
 INSERT INTO `item_mods` VALUES (21371,302,2);
 INSERT INTO `item_mods` VALUES (21371,384,900);
+INSERT INTO `item_mods` VALUES (21372,1027,18);    -- Dunna: Handbell Skill+18
+INSERT INTO `item_mods` VALUES (21372,961,5);      -- Dunna: Geomancy +5
 INSERT INTO `item_mods` VALUES (21373,5,15);
 INSERT INTO `item_mods` VALUES (21373,163,-200);
 INSERT INTO `item_mods` VALUES (21374,27,2);
@@ -27158,7 +27162,11 @@ INSERT INTO `item_mods` VALUES (21428,23,10);
 INSERT INTO `item_mods` VALUES (21428,25,10);
 INSERT INTO `item_mods` VALUES (21429,30,5);
 INSERT INTO `item_mods` VALUES (21429,114,5);
-INSERT INTO `item_mods` VALUES (21460,5,5);
+INSERT INTO `item_mods` VALUES (21460,5,5);        -- Matre bell:  Geomancy +5
+INSERT INTO `item_mods` VALUES (21461,5,30);       -- Filiae Bell: MP+30
+INSERT INTO `item_mods` VALUES (21461,1027,15);    -- Filiae Bell: Handbell Skill+15
+INSERT INTO `item_mods` VALUES (21462,961,3);      -- Eminent bell: Geomancy +3
+INSERT INTO `item_mods` VALUES (21463,961,5);      -- Nepote bell: Geomancy +5
 INSERT INTO `item_mods` VALUES (21479,24,15);
 INSERT INTO `item_mods` VALUES (21479,26,5);
 INSERT INTO `item_mods` VALUES (21479,305,15);
@@ -33793,11 +33801,11 @@ INSERT INTO `item_mods` VALUES (25532,487,7);     -- Argute Stole +1: Magic burs
 INSERT INTO `item_mods` VALUES (25533,30,30);     -- Argute Stole +2: Magic Accuracy+30
 INSERT INTO `item_mods` VALUES (25533,487,10);    -- Argute Stole +2: Magic burst damage +10
 INSERT INTO `item_mods` VALUES (25537,30,20);     -- Bagua Charm: Magic Accuracy+20
--- INSERT INTO `item_mods` VALUES (25537,,5);     -- Bagua Charm: Geomancy +5
+INSERT INTO `item_mods` VALUES (25537,961,5);     -- Bagua Charm: Geomancy +5
 INSERT INTO `item_mods` VALUES (25538,30,25);     -- Bagua Charm +1: Magic Accuracy+25
--- INSERT INTO `item_mods` VALUES (25538,,6);     -- Bagua Charm +1: Geomancy +6
+INSERT INTO `item_mods` VALUES (25538,961,6);     -- Bagua Charm +1: Geomancy +6
 INSERT INTO `item_mods` VALUES (25539,30,30);     -- Bagua Charm +2: Magic Accuracy+30
--- INSERT INTO `item_mods` VALUES (25539,,7);     -- Bagua Charm +2: Geomancy +7
+INSERT INTO `item_mods` VALUES (25539,961,7);     -- Bagua Charm +2: Geomancy +7
 INSERT INTO `item_mods` VALUES (25543,27,5);      -- Futhark Torque: Enmity+5
 INSERT INTO `item_mods` VALUES (25543,31,20);     -- Futhark Torque: Magic Evasion+20
 INSERT INTO `item_mods` VALUES (25544,27,7);      -- Futhark Torque +1: Enmity+7

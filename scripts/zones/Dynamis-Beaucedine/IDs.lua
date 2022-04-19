@@ -40,36 +40,36 @@ zones[xi.zone.DYNAMIS_BEAUCEDINE] =
         REFILL_STATUE =
         {
             {
-                {mob = 17326203, eye = dynamis.eye.RED  }, -- Adamantking_Effigy
-                {mob = 17326204, eye = dynamis.eye.BLUE },
+                {mob = 17326203, eye = xi.dynamis.eye.RED  }, -- Adamantking_Effigy
+                {mob = 17326204, eye = xi.dynamis.eye.BLUE },
             },
             {
-                {mob = 17326205, eye = dynamis.eye.RED  }, -- Adamantking_Effigy
-                {mob = 17326206, eye = dynamis.eye.GREEN},
+                {mob = 17326205, eye = xi.dynamis.eye.RED  }, -- Adamantking_Effigy
+                {mob = 17326206, eye = xi.dynamis.eye.GREEN},
             },
             {
-                {mob = 17326275, eye = dynamis.eye.RED  }, -- Serjeant_Tombstone
-                {mob = 17326276, eye = dynamis.eye.BLUE },
+                {mob = 17326275, eye = xi.dynamis.eye.RED  }, -- Serjeant_Tombstone
+                {mob = 17326276, eye = xi.dynamis.eye.BLUE },
             },
             {
-                {mob = 17326277, eye = dynamis.eye.RED  }, -- Serjeant_Tombstone
-                {mob = 17326278, eye = dynamis.eye.GREEN},
+                {mob = 17326277, eye = xi.dynamis.eye.RED  }, -- Serjeant_Tombstone
+                {mob = 17326278, eye = xi.dynamis.eye.GREEN},
             },
             {
-                {mob = 17326349, eye = dynamis.eye.RED  }, -- Avatar_Icon
-                {mob = 17326350, eye = dynamis.eye.BLUE },
+                {mob = 17326349, eye = xi.dynamis.eye.RED  }, -- Avatar_Icon
+                {mob = 17326350, eye = xi.dynamis.eye.BLUE },
             },
             {
-                {mob = 17326351, eye = dynamis.eye.RED  }, -- Avatar_Icon
-                {mob = 17326352, eye = dynamis.eye.GREEN},
+                {mob = 17326351, eye = xi.dynamis.eye.RED  }, -- Avatar_Icon
+                {mob = 17326352, eye = xi.dynamis.eye.GREEN},
             },
             {
-                {mob = 17326464, eye = dynamis.eye.RED  }, -- Goblin_Replica
-                {mob = 17326465, eye = dynamis.eye.BLUE },
+                {mob = 17326464, eye = xi.dynamis.eye.RED  }, -- Goblin_Replica
+                {mob = 17326465, eye = xi.dynamis.eye.BLUE },
             },
             {
-                {mob = 17326466, eye = dynamis.eye.RED  }, -- Goblin_Replica
-                {mob = 17326467, eye = dynamis.eye.GREEN},
+                {mob = 17326466, eye = xi.dynamis.eye.RED  }, -- Goblin_Replica
+                {mob = 17326467, eye = xi.dynamis.eye.GREEN},
             },
         },
         MOLTENOX_STUBTHUMBS_PH      = {[17326372] = 17326374}, -- Vanguard_Smithy

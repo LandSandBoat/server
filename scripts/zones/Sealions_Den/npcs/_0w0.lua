@@ -11,13 +11,13 @@ local ID = require("scripts/zones/Sealions_Den/IDs")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    TradeBCNM(player, npc, trade)
+    xi.bcnm.onTrade(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if EventTriggerBCNM(player, npc) then
+    if xi.bcnm.onTrigger(player, npc) then
         return
-    elseif player:getCurrentMission(COP) > xi.mission.id.cop.THE_WARRIOR_S_PATH then
+    elseif player:getCurrentMission(xi.mission.log_id.COP) > xi.mission.id.cop.THE_WARRIOR_S_PATH then
         player:startEvent(12)
     else
         player:messageSpecial(ID.text.IRON_GATE_LOCKED)
@@ -25,11 +25,11 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option, extras)
-    EventUpdateBCNM(player, csid, option, extras)
+    xi.bcnm.onEventUpdate(player, csid, option, extras)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if EventFinishBCNM(player, csid, option) then
+    if xi.bcnm.onEventFinish(player, csid, option) then
         return
     end
 

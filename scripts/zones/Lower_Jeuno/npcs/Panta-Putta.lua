@@ -21,7 +21,7 @@ entity.onTrigger = function(player, npc)
     local TheKindCardian    = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_KIND_CARDIAN)
 
     if
-        player:getFameLevel(JEUNO) >= 4 and
+        player:getFameLevel(xi.quest.fame_area.JEUNO) >= 4 and
         TheWonderMagicSet == QUEST_AVAILABLE
     then
         player:startEvent(77) -- Start quest "The wonder magic set"
@@ -79,7 +79,7 @@ entity.onEventFinish = function(player, csid, option)
             player:delKeyItem(xi.ki.WONDER_MAGIC_SET)
             player:addItem(13328)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 13328)
-            player:addFame(JEUNO, 30)
+            player:addFame(xi.quest.fame_area.JEUNO, 30)
             player:needToZone(true)
             player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_WONDER_MAGIC_SET)
         end
@@ -94,7 +94,7 @@ entity.onEventFinish = function(player, csid, option)
             player:setCharVar("theKindCardianVar", 0)
             player:addItem(13596)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 13596) -- Green Cape
-            player:addFame(JEUNO, 30)
+            player:addFame(xi.quest.fame_area.JEUNO, 30)
             player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_KIND_CARDIAN)
         end
     end

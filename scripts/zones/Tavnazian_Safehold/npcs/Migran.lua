@@ -19,7 +19,7 @@ entity.onTrigger = function(player, npc)
         12985, 1625, -- Holly Clogs
     }
 
-    if player:getCurrentMission(COP) >= xi.mission.id.cop.SHELTERING_DOUBT then
+    if player:getCurrentMission(xi.mission.log_id.COP) >= xi.mission.id.cop.SHELTERING_DOUBT then
         stock =
         {
             14317, 101055,  -- Barone Cosciales

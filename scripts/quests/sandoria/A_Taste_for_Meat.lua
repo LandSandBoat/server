@@ -17,6 +17,7 @@ local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_TASTE_F
 quest.reward =
 {
     fame = 30,
+    fameArea = xi.quest.fame_area.SANDORIA,
     gil = 150,
     title = xi.title.RABBITER,
 }

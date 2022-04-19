@@ -1,23 +1,24 @@
-
+-----------------------------------
+-- BCNM Functions
+-----------------------------------
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/zone")
 require("scripts/globals/msg")
-
 -----------------------------------
+xi = xi or {}
+xi.bcnm = xi.bcnm or {}
+
 -- battlefields by zone
 -- captured from client 2020-10-24
------------------------------------
-
+local battlefields = {
 --[[
     [zoneId] = {
         {bit, battlefieldIdInDatabase, requiredItemToTrade}
     },
 --]]
-
-local battlefields = {
     [xi.zone.BEARCLAW_PINNACLE] =
     {
         { 0,  640,    0},   -- Flames of the Dead (PM5-3 U3)
@@ -538,14 +539,14 @@ local function checkReqs(player, npc, bfid, registrant)
     local mjob    = player:getMainJob()
     local mlvl    = player:getMainLvl()
     local nat     = player:getCurrentMission(player:getNation())
-    local sandy   = player:getCurrentMission(SANDORIA)
-    local basty   = player:getCurrentMission(BASTOK)
-    local windy   = player:getCurrentMission(WINDURST)
-    local roz     = player:getCurrentMission(ZILART)
-    local cop     = player:getCurrentMission(COP)
-    local toau    = player:getCurrentMission(TOAU)
+    local sandy   = player:getCurrentMission(xi.mission.log_id.SANDORIA)
+    local basty   = player:getCurrentMission(xi.mission.log_id.BASTOK)
+    local windy   = player:getCurrentMission(xi.mission.log_id.WINDURST)
+    local roz     = player:getCurrentMission(xi.mission.log_id.ZILART)
+    local cop     = player:getCurrentMission(xi.mission.log_id.COP)
+    local toau    = player:getCurrentMission(xi.mission.log_id.TOAU)
     local wotg    = player:getCurrentMission(xi.mission.log_id.WOTG)
-    local asa     = player:getCurrentMission(ASA)
+    local asa     = player:getCurrentMission(xi.mission.log_id.ASA)
     local natStat  = player:getMissionStatus(player:getNation())
     local rozStat  = player:getMissionStatus(xi.mission.log_id.ZILART)
     local copStat  = player:getCharVar("PromathiaStatus")
@@ -677,7 +678,7 @@ local function checkReqs(player, npc, bfid, registrant)
         [1091] = function() return ( mjob == xi.job.COR and mlvl >= 66                                                                                                     ) end, -- Quest: Breaking the Bonds of Fate (COR LB5)
         [1092] = function() return ( toau == mi.toau.LEGACY_OF_THE_LOST                                                                                                    ) end, -- TOAU35: Legacy of the Lost
         [1122] = function() return ( player:getQuestStatus(xi.quest.log_id.AHT_URHGAN,xi.quest.id.ahtUrhgan.OMENS) == QUEST_ACCEPTED and
-                                     player:getCharVar('OmensProgress') == 1                                                                                               ) end, -- Quest: Omens (BLU AF Quest 2)
+                                     xi.quest.getVar(player, xi.quest.log_id.AHT_URHGAN,xi.quest.id.ahtUrhgan.OMENS, 'Prog') == 0                                          ) end, -- Quest: Omens (BLU AF Quest 2)
         [1123] = function() return ( mjob == xi.job.PUP and mlvl >= 66                                                                                                     ) end, -- Quest: Achieving True Power (PUP LB5)
         [1124] = function() return ( toau == mi.toau.SHIELD_OF_DIPLOMACY and toauStat == 2                                                                                 ) end, -- TOAU22: Shield of Diplomacy
         [1154] = function() return ( mjob == xi.job.BLU and mlvl >= 66                                                                                                     ) end, -- Quest: The Beast Within (BLU LB5)
@@ -767,12 +768,12 @@ end
 local function checkSkip(player, bfid)
     local mi        = xi.mission.id
     local nat       = player:getCurrentMission(player:getNation())
-    local sandy     = player:getCurrentMission(SANDORIA)
-    local basty     = player:getCurrentMission(BASTOK)
-    local windy     = player:getCurrentMission(WINDURST)
+    local sandy     = player:getCurrentMission(xi.mission.log_id.SANDORIA)
+    local basty     = player:getCurrentMission(xi.mission.log_id.BASTOK)
+    local windy     = player:getCurrentMission(xi.mission.log_id.WINDURST)
     -- local roz       = player:getCurrentMission(ZILART)
-    local cop       = player:getCurrentMission(COP)
-    -- local toau      = player:getCurrentMission(TOAU)
+    local cop       = player:getCurrentMission(xi.mission.log_id.COP)
+    -- local toau      = player:getCurrentMission(xi.mission.log_id.TOAU)
     -- local wotg      = player:getCurrentMission(xi.mission.log_id.WOTG)
     -- local asa       = player:getCurrentMission(ASA)
     local natStat   = player:getMissionStatus(player:getNation())
@@ -940,7 +941,7 @@ end
 -- onTrade Action
 -----------------------------------
 
-function TradeBCNM(player, npc, trade, onUpdate)
+xi.bcnm.onTrade = function(player, npc, trade, onUpdate)
     -- validate trade
     local itemId
     if not trade then
@@ -981,7 +982,7 @@ end
 -- onTrigger Action
 -----------------------------------
 
-function EventTriggerBCNM(player, npc)
+xi.bcnm.onTrigger = function(player, npc)
     -- player is in battlefield and clicks to leave
     if player:getBattlefield() then
         player:startEvent(32003)
@@ -1021,7 +1022,7 @@ end
 -- onEventUpdate
 -----------------------------------
 
-function EventUpdateBCNM(player, csid, option, extras)
+xi.bcnm.onEventUpdate = function(player, csid, option, extras)
     -- player:PrintToPlayer(string.format("EventUpdateBCNM csid=%i option=%i extras=%i", csid, option, extras))
 
     -- requesting a battlefield
@@ -1133,7 +1134,7 @@ end
 -- onEventFinish Action
 -----------------------------------
 
-function EventFinishBCNM(player, csid, option)
+xi.bcnm.onEventFinish = function(player, csid, option)
     -- player:PrintToPlayer(string.format("EventFinishBCNM csid=%i option=%i", csid, option))
     player:setLocalVar("[battlefield]area", 0)
     if player:hasStatusEffect(xi.effect.BATTLEFIELD) then

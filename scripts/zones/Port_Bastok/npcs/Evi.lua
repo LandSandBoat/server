@@ -19,7 +19,7 @@ entity.onTrigger = function(player, npc)
 
     if (PastPerfect == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.TATTERED_MISSION_ORDERS)) then
         player:startEvent(131)
-    elseif (player:getFameLevel(BASTOK) >= 2 and player:getCharVar("PastPerfectVar") == 2) then
+    elseif (player:getFameLevel(xi.quest.fame_area.BASTOK) >= 2 and player:getCharVar("PastPerfectVar") == 2) then
         player:startEvent(130)
     elseif (PastPerfect == QUEST_AVAILABLE) then
         player:startEvent(104)
@@ -48,7 +48,7 @@ entity.onEventFinish = function(player, csid, option)
                 player:delKeyItem(xi.ki.TATTERED_MISSION_ORDERS)
                 player:setCharVar("PastPerfectVar", 0)
                 player:messageSpecial(ID.text.ITEM_OBTAINED, 12560)
-                player:addFame(BASTOK, 110)
+                player:addFame(xi.quest.fame_area.BASTOK, 110)
                 player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.PAST_PERFECT)
             end
         end

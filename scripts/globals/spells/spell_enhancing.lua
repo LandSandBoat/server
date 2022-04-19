@@ -111,7 +111,7 @@ xi.spells.spell_enhancing.calculateEnhancingFinalPower = function(caster, target
     --------------------
     --  Applied before other bonuses. TODO: Job points further enhances Embolden bonus.
     if target:hasStatusEffect(xi.effect.EMBOLDEN) and spellGroup == xi.magic.spellGroup.WHITE then
-        finalPower = math.floor(power * 1.5)
+        finalPower = math.floor(finalPower * 1.5)
     end
 
     ----------------------------------------
@@ -186,7 +186,7 @@ xi.spells.spell_enhancing.calculateEnhancingDuration = function(caster, target, 
     ------------------------------
     -- Merits and Job Points. (Applicable to all enhancing spells. Prior to multipliers, according to bg-wiki.)
     ------------------------------
-    if caster:getJob() == xi.job.RDM then
+    if caster:getMainJob() == xi.job.RDM then
         duration = duration + caster:getMerit(xi.merit.ENHANCING_MAGIC_DURATION) + caster:getJobPointLevel(xi.jp.ENHANCING_DURATION)
     end
 

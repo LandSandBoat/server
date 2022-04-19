@@ -24,7 +24,7 @@ entity.onTrigger = function(player, npc)
     local Wayward_Waypoints = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.WAYWARD_WAYPOINTS)
     Wayward_Waypoints = (Wayward_Waypoints == QUEST_ACCEPTED) and (player:getCharVar("WW_Need_Shipilolo") > 0)
     local ACSP = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.A_CERTAIN_SUBSTITUTE_PATROLMAN)
-    local SOA_Mission = player:getCurrentMission(SOA)
+    local SOA_Mission = player:getCurrentMission(xi.mission.log_id.SOA)
 
     if (SOA_Mission >= xi.mission.id.soa.LIFE_ON_THE_FRONTIER) then
         if ((TOMATH == QUEST_ACCEPTED) and player:hasKeyItem(xi.ki.BROKEN_HARPOON)) then

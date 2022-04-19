@@ -29,7 +29,7 @@ zone_object.onZoneIn = function(player, prevZone)
         SpawnMob(ID.mob.MISER_MURPHY) -- RDM AF
     end
 
-    if (player:getCurrentMission(ACP) == xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_I) then
+    if (player:getCurrentMission(xi.mission.log_id.ACP) == xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_I) then
         cs = 29
     elseif (prevZone == xi.zone.QUBIA_ARENA and player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_FIRST_MEETING) == QUEST_ACCEPTED and not player:hasKeyItem(xi.ki.LETTER_FROM_DALZAKK)) then
         cs = 16 -- MNK AF

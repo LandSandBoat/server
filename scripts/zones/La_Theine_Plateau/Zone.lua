@@ -57,7 +57,7 @@ end
 
 zone_object.onEventFinish = function(player, csid, option)
     if csid == 122 then
-        npcUtil.completeQuest(player, BASTOK, xi.quest.id.bastok.DARK_PUPPET, {item=14096, fame=40, var="darkPuppetCS"}) -- Chaos Sollerets
+        npcUtil.completeQuest(player, xi.quest.log_id.BASTOK, xi.quest.id.bastok.DARK_PUPPET, {item=14096, fame=40, var="darkPuppetCS"}) -- Chaos Sollerets
     end
 end
 

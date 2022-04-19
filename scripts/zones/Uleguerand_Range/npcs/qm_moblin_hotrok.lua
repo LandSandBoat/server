@@ -57,7 +57,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 10 and npcUtil.completeQuest(player, SANDORIA, xi.quest.id.sandoria.OVER_THE_HILLS_AND_FAR_AWAY, {gil = 2000, xp = 2000, ki = xi.ki.MAP_OF_THE_ULEGUERAND_RANGE}) then
+    if csid == 10 and npcUtil.completeQuest(player, xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.OVER_THE_HILLS_AND_FAR_AWAY, {gil = 2000, xp = 2000, ki = xi.ki.MAP_OF_THE_ULEGUERAND_RANGE}) then
         player:confirmTrade()
     end
 end

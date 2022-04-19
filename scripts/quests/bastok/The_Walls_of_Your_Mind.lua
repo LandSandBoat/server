@@ -20,6 +20,7 @@ local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_WALLS_OF_
 quest.reward =
 {
     fame = 30,
+    fameArea = xi.quest.fame_area.BASTOK,
 }
 
 quest.sections =

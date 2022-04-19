@@ -8,7 +8,7 @@ mixins = {require("scripts/mixins/job_special")}
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    mob:setMobMod(xi.mobMod.SUPERLINK, mob:getShortID())
+    mob:setMobMod(xi.mobMod.SUPERLINK, mob:getTargID())
 end
 
 entity.onMobEngaged = function(mob, target)
@@ -18,9 +18,9 @@ entity.onMobEngaged = function(mob, target)
         battlefield:setLocalVar("startTime", battlefield:getRemainingTime())
     end
 
-    SpawnMob(ID.mob.APOLLYON_CS_MOB[1] + 1):setMobMod(xi.mobMod.SUPERLINK, mob:getShortID())
-    SpawnMob(ID.mob.APOLLYON_CS_MOB[1] + 2):setMobMod(xi.mobMod.SUPERLINK, mob:getShortID())
-    SpawnMob(ID.mob.APOLLYON_CS_MOB[1] + 3):setMobMod(xi.mobMod.SUPERLINK, mob:getShortID())
+    SpawnMob(ID.mob.APOLLYON_CS_MOB[1] + 1):setMobMod(xi.mobMod.SUPERLINK, mob:getTargID())
+    SpawnMob(ID.mob.APOLLYON_CS_MOB[1] + 2):setMobMod(xi.mobMod.SUPERLINK, mob:getTargID())
+    SpawnMob(ID.mob.APOLLYON_CS_MOB[1] + 3):setMobMod(xi.mobMod.SUPERLINK, mob:getTargID())
     mob:setLocalVar("wave", 1)
 end
 
@@ -44,15 +44,15 @@ entity.onMobFight = function(mob, target)
             mob:setLocalVar("wave", 2)
             GetMobByID(ID.mob.APOLLYON_CS_MOB[1] + 4):setSpawn(mobX, mobY, mobZ)
             GetMobByID(ID.mob.APOLLYON_CS_MOB[1] + 4):setPos(mobX, mobY, mobZ)
-            SpawnMob(ID.mob.APOLLYON_CS_MOB[1] + 4):setMobMod(xi.mobMod.SUPERLINK, mob:getShortID())
+            SpawnMob(ID.mob.APOLLYON_CS_MOB[1] + 4):setMobMod(xi.mobMod.SUPERLINK, mob:getTargID())
 
             GetMobByID(ID.mob.APOLLYON_CS_MOB[1] + 5):setSpawn(mobX, mobY, mobZ)
             GetMobByID(ID.mob.APOLLYON_CS_MOB[1] + 5):setPos(mobX, mobY, mobZ)
-            SpawnMob(ID.mob.APOLLYON_CS_MOB[1] + 5):setMobMod(xi.mobMod.SUPERLINK, mob:getShortID())
+            SpawnMob(ID.mob.APOLLYON_CS_MOB[1] + 5):setMobMod(xi.mobMod.SUPERLINK, mob:getTargID())
 
             GetMobByID(ID.mob.APOLLYON_CS_MOB[1] + 6):setSpawn(mobX, mobY, mobZ)
             GetMobByID(ID.mob.APOLLYON_CS_MOB[1] + 6):setPos(mobX, mobY, mobZ)
-            SpawnMob(ID.mob.APOLLYON_CS_MOB[1] + 6):setMobMod(xi.mobMod.SUPERLINK, mob:getShortID())
+            SpawnMob(ID.mob.APOLLYON_CS_MOB[1] + 6):setMobMod(xi.mobMod.SUPERLINK, mob:getTargID())
 
         elseif
             GetMobByID(ID.mob.APOLLYON_CS_MOB[1] + 4):isDead() and
@@ -63,15 +63,15 @@ entity.onMobFight = function(mob, target)
             mob:setLocalVar("wave", 1)
             GetMobByID(ID.mob.APOLLYON_CS_MOB[1] + 1):setSpawn(mobX, mobY, mobZ)
             GetMobByID(ID.mob.APOLLYON_CS_MOB[1] + 1):setPos(mobX, mobY, mobZ)
-            SpawnMob(ID.mob.APOLLYON_CS_MOB[1] + 1):setMobMod(xi.mobMod.SUPERLINK, mob:getShortID())
+            SpawnMob(ID.mob.APOLLYON_CS_MOB[1] + 1):setMobMod(xi.mobMod.SUPERLINK, mob:getTargID())
 
             GetMobByID(ID.mob.APOLLYON_CS_MOB[1] + 2):setSpawn(mobX, mobY, mobZ)
             GetMobByID(ID.mob.APOLLYON_CS_MOB[1] + 2):setPos(mobX, mobY, mobZ)
-            SpawnMob(ID.mob.APOLLYON_CS_MOB[1] + 2):setMobMod(xi.mobMod.SUPERLINK, mob:getShortID())
+            SpawnMob(ID.mob.APOLLYON_CS_MOB[1] + 2):setMobMod(xi.mobMod.SUPERLINK, mob:getTargID())
 
             GetMobByID(ID.mob.APOLLYON_CS_MOB[1] + 3):setSpawn(mobX, mobY, mobZ)
             GetMobByID(ID.mob.APOLLYON_CS_MOB[1] + 3):setPos(mobX, mobY, mobZ)
-            SpawnMob(ID.mob.APOLLYON_CS_MOB[1] + 3):setMobMod(xi.mobMod.SUPERLINK, mob:getShortID())
+            SpawnMob(ID.mob.APOLLYON_CS_MOB[1] + 3):setMobMod(xi.mobMod.SUPERLINK, mob:getTargID())
         end
 
         if remainingTime <= startTime * 0.66 then

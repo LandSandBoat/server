@@ -30,7 +30,7 @@ entity.onTrigger = function(player, npc)
     elseif (ClassReunion == 1 and ClassReunionProgress == 5 and player:hasItem(1171) == false) then
         player:startEvent(712, 0, 1171, 0, 0, 0, 0, 0, 0) -- lost the ice pendulum need another one
     -----------------------------------
-    elseif ((TrialByIce == QUEST_AVAILABLE and player:getFameLevel(SANDORIA) >= 6) or (TrialByIce == QUEST_COMPLETED and os.time() > player:getCharVar("TrialByIce_date"))) then
+    elseif ((TrialByIce == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 6) or (TrialByIce == QUEST_COMPLETED and os.time() > player:getCharVar("TrialByIce_date"))) then
         player:startEvent(706, 0, xi.ki.TUNING_FORK_OF_ICE) -- Start and restart quest "Trial by ice"
     elseif (TrialByIce == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.TUNING_FORK_OF_ICE) == false and WhisperOfFrost == false) then
         player:startEvent(718, 0, xi.ki.TUNING_FORK_OF_ICE) -- Defeat against Shiva : Need new Fork
@@ -92,7 +92,7 @@ entity.onEventFinish = function(player, csid, option)
             player:addTitle(xi.title.HEIR_OF_THE_GREAT_ICE)
             player:delKeyItem(xi.ki.WHISPER_OF_FROST) --Whisper of Frost, as a trade for the above rewards
             player:setCharVar("TrialByIce_date", getMidnight())
-            player:addFame(SANDORIA, 30)
+            player:addFame(xi.quest.fame_area.SANDORIA, 30)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TRIAL_BY_ICE)
         end
     elseif (csid == 713 or csid == 712) then

@@ -29,7 +29,7 @@ entity.onMobSpawn = function(mob)
             local target = mobArg:getTarget()
             local targetid = 0
 
-            if target then targetid = target:getShortID() end
+            if target then targetid = target:getTargID() end
 
             mobArg:timer(12000, function(mobTimerArg)
                 mobTimerArg:setHP(mobTimerArg:getMaxHP())

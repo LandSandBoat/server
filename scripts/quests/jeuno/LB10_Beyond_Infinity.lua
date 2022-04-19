@@ -20,7 +20,7 @@ local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEYOND_INFINITY
 quest.reward =
 {
     fame = 50,
-    fameArea = JEUNO,
+    fameArea = xi.quest.fame_area.JEUNO,
     title = xi.title.BUSHIN_ASPIRANT,
 }
 

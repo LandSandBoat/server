@@ -14,7 +14,7 @@ end
 
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
-    local heartwingsAndTheKindhearted = player:getCurrentMission(SOA) == xi.mission.id.soa.HEARTWINGS_AND_THE_KINDHEARTED
+    local heartwingsAndTheKindhearted = player:getCurrentMission(xi.mission.log_id.SOA) == xi.mission.id.soa.HEARTWINGS_AND_THE_KINDHEARTED
 
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
         player:setPos(-142, 4, -18, 4)

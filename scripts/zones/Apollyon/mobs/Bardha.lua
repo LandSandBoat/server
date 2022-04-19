@@ -2,6 +2,7 @@
 -- Area: Apollyon NW, Floor 1
 --  Mob: Bardha
 -----------------------------------
+local ID = require("scripts/zones/Apollyon/IDs")
 require("scripts/zones/Apollyon/bcnms/nw_apollyon_helper")
 require("scripts/globals/pathfind")
 -----------------------------------

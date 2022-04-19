@@ -18,7 +18,7 @@ end
 entity.onTrigger = function(player, npc)
     local TheStarsOfIfrit = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_STARS_OF_IFRIT)
 
-    if (player:getFameLevel(BASTOK) >= 3 and TheStarsOfIfrit == QUEST_AVAILABLE and player:hasKeyItem(xi.ki.AIRSHIP_PASS) == true) then
+    if (player:getFameLevel(xi.quest.fame_area.BASTOK) >= 3 and TheStarsOfIfrit == QUEST_AVAILABLE and player:hasKeyItem(xi.ki.AIRSHIP_PASS) == true) then
         player:startEvent(180)
     elseif (TheStarsOfIfrit == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.CARRIER_PIGEON_LETTER) == true) then
         player:startEvent(181)
@@ -36,7 +36,7 @@ entity.onEventFinish = function(player, csid, option)
     elseif (csid == 181) then
         player:addGil(xi.settings.GIL_RATE * 2100)
         player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 2100)
-        player:addFame(BASTOK, 100)
+        player:addFame(xi.quest.fame_area.BASTOK, 100)
         player:addTitle(xi.title.STAR_OF_IFRIT)
         player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_STARS_OF_IFRIT)
     end

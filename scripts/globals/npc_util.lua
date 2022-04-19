@@ -416,9 +416,9 @@ end
             itemParams = {              -- see npcUtil.giveItem for formats
                 fromTrade = true,
             },
-            ki = xi.ki.ZERUHN_REPORT,   -- see npcUtil.giveKeyItem for formats
-            fameArea = NORG,            -- only needed if the logId table passed as 2nd param doesn't have the fame_area you want
-            fame = 120,                 -- fame defaults to 30 if not set
+            ki = xi.ki.ZERUHN_REPORT,           -- see npcUtil.giveKeyItem for formats
+            fameArea = xi.quest.fame_area.NORG, -- Required for Fame to be applied
+            fame = 120,                         -- fame defaults to 30 if not set
             bayld = 500,
             gil = 200,
             xp = 1000,
@@ -492,14 +492,14 @@ end
     Otherwise, return true.
 
     Example of usage with params (all params are optional):
-        npcUtil.completeQuest(player, SANDORIA, xi.quest.id.sandoria.ROSEL_THE_ARMORER, {
+        npcUtil.completeQuest(player, xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.ROSEL_THE_ARMORER, {
             item = { {640, 2}, 641 },   -- see npcUtil.giveItem for formats
             itemParams = {              -- see npcUtil.giveItem for formats
                 fromTrade = true,
             },
-            ki = xi.ki.ZERUHN_REPORT,   -- see npcUtil.giveKeyItem for formats
-            fameArea = NORG,            -- only needed if the logId table passed as 2nd param doesn't have the fame_area you want
-            fame = 120,                 -- fame defaults to 30 if not set
+            ki = xi.ki.ZERUHN_REPORT,           -- see npcUtil.giveKeyItem for formats
+            fameArea = xi.quest.fame_area.NORG, -- Required for Fame to be applied
+            fame = 120,                         -- fame defaults to 30 if not set
             bayld = 500,
             gil = 200,
             xp = 1000,
@@ -527,13 +527,14 @@ function npcUtil.completeQuest(player, area, quest, params)
         npcUtil.giveKeyItem(player, params["keyItem"])
     end
 
-    if params["fame"] == nil then
-        params["fame"] = 30
-    end
-    if params["fameArea"] ~= nil and params["fameArea"]["fame_area"] ~= nil and type(params["fame"]) == "number" then
+    -- Note: fameArea is a required numeric parameter in order for fame to be applied.  Fame areas
+    -- are not a one to one mapping of log ids, and it should not be used as a fallback.
+    if params["fameArea"] ~= nil and type(params["fameArea"]) == "number" then
+        if params["fame"] == nil then
+            params["fame"] = 30
+        end
+
         player:addFame(params["fameArea"], params["fame"])
-    elseif (type(area) == "number" or area["fame_area"] ~= nil) and type(params["fame"]) == "number" then
-        player:addFame(area, params["fame"])
     end
 
     if params["gil"] ~= nil and type(params["gil"]) == "number" then
@@ -593,7 +594,7 @@ end
     Otherwise, return true.
 
     Example of usage with params (all params are optional):
-        npcUtil.completeMission(player, SANDORIA, xi.quest.id.sandoria.ROSEL_THE_ARMORER, {
+        npcUtil.completeMission(player, xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.ROSEL_THE_ARMORER, {
             item = { {640, 2}, 641 },   -- see npcUtil.giveItem for formats
             itemParams = {              -- see npcUtil.giveItem for formats
                 fromTrade = true,

@@ -735,6 +735,12 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
     // uint32 ID = data.ref<uint32>(0x04);
     uint16 TargID = data.ref<uint16>(0x08);
     uint8  action = data.ref<uint8>(0x0A);
+    position_t actionOffset =
+    {
+        data.ref<float>(0x10),
+        data.ref<float>(0x14),
+        data.ref<float>(0x18)
+    };
 
     switch (action)
     {
@@ -788,6 +794,26 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
         {
             auto spellID = static_cast<SpellID>(data.ref<uint16>(0x0C));
             PChar->PAI->Cast(TargID, spellID);
+
+            // target offset used only for luopan placement as of now
+            if (spellID >= SpellID::Geo_Regen && spellID <= SpellID::Geo_Gravity)
+            {
+                // reset the action offset position to prevent other spells from using previous position data
+                PChar->m_ActionOffsetPos = {0, 0, 0};
+
+                // Need to set the target position plus offset for positioning correctly
+                auto* PTarget = dynamic_cast<CBattleEntity*>(PChar->GetEntity(TargID));
+
+                if (PTarget != nullptr)
+                {
+                    PChar->m_ActionOffsetPos =
+                    {
+                        PTarget->loc.p.x + actionOffset.x,
+                        PTarget->loc.p.y + actionOffset.y,
+                        PTarget->loc.p.z + actionOffset.z
+                    };
+                }
+            }
         }
         break;
         case 0x04: // disengage
@@ -5425,27 +5451,43 @@ void SmallPacket0x0D3(map_session_data_t* const PSession, CCharEntity* const PCh
 
 /************************************************************************
  *                                                                       *
- *  Set Preferred Language                                               *
+ *  Set Chat Filters / Preferred Language                                *
  *                                                                       *
  ************************************************************************/
 
 void SmallPacket0x0DB(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
-    uint8 newLanguage = data.ref<uint8>(0x24);
 
-    if (newLanguage == PChar->search.language)
+    auto oldMenuConfigFlags = PChar->menuConfigFlags.flags;
+    auto oldChatFilterFlags = PChar->chatFilterFlags;
+    auto oldLanguages = PChar->search.language;
+
+    // Extract the system filter bits and update MenuConfig
+    const uint8 systemFilterMask = (NFLAG_SYSTEM_FILTER_H | NFLAG_SYSTEM_FILTER_L) >> 8;
+    PChar->menuConfigFlags.byte2 &= ~systemFilterMask;
+    PChar->menuConfigFlags.byte2 |= data.ref<uint8>(0x09) & systemFilterMask;
+
+    PChar->chatFilterFlags = data.ref<uint64>(0x0C);
+
+    PChar->search.language = data.ref<uint8>(0x24);
+
+    if (oldMenuConfigFlags != PChar->menuConfigFlags.flags)
     {
-        return;
+        charutils::SaveMenuConfigFlags(PChar);
     }
 
-    auto ret = sql->Query("UPDATE chars SET languages = %u WHERE charid = %u;", newLanguage, PChar->id);
-
-    if (ret == SQL_SUCCESS)
+    if (oldChatFilterFlags != PChar->chatFilterFlags)
     {
-        PChar->search.language = newLanguage;
+        charutils::SaveChatFilterFlags(PChar);
     }
 
+    if (oldLanguages != PChar->search.language)
+    {
+        charutils::SaveLanguages(PChar);
+    }
+
+    PChar->pushPacket(new CMenuConfigPacket(PChar));
     return;
 }
 

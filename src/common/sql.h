@@ -167,6 +167,7 @@ public:
     int8*  GetData(size_t col);
     int32  GetIntData(size_t col);
     uint32 GetUIntData(size_t col);
+    uint64 GetUInt64Data(size_t col);
     float  GetFloatData(size_t col);
 
     /// Frees the result of the query.

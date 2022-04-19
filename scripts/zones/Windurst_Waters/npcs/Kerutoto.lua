@@ -71,7 +71,7 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.DIABOLOS_UNLOCKED, 0, 0, 0)
         end
 
-        if npcUtil.completeQuest(player, WINDURST, xi.quest.id.windurst.WAKING_DREAMS, reward) then
+        if npcUtil.completeQuest(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.WAKING_DREAMS, reward) then
             player:delKeyItem(xi.ki.WHISPER_OF_DREAMS)
             player:setCharVar("Darkness_Named_date", getMidnight())
         end
