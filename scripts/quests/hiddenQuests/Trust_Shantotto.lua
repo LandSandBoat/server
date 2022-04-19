@@ -10,7 +10,7 @@ require('scripts/globals/interaction/hidden_quest')
 -----------------------------------
 local windurstWallsID = require('scripts/zones/Windurst_Walls/IDs')
 -----------------------------------
-local quest = HiddenQuest:new("TrustSemih")
+local quest = HiddenQuest:new("TrustShantotto")
 
 local TrustMemory = function(player)
     local memories = 0
