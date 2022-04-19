@@ -50,6 +50,434 @@ local dynamis_rentry_hours = 71
 local dynamis_win_aoe = false
 local dynamis_staging_time = 15 -- Extra time added at registration of dynamis in minutes. Wings gave 15 minutes by default.
 
+local dynaIDLookup = -- Used to check for different IDs based on zoneID. Replaces the need to overwrite IDs.lua for each zone.
+{
+    --------------------------------------------
+    --             Starting Zones             --
+    --------------------------------------------
+    -- [zone] = -- zoneID for array lookup
+    -- {
+    --     text = -- text for table lookup
+    --     {
+    --         INFORMATION_RECORDED = , -- The time and destination for your foray into Dynamis has been recorded on your <itemID>.
+    --         ANOTHER_GROUP = , -- Another group of player characters is currently occupying Dynamis - ≺Multiple Choice (Parameter 0)≻[Dummy/San d'Oria/Bastok/Windurst/Jeuno/Beaucedine/Xarcabard/Valkurm/Buburimu/Qufim/Tavnazia].≺Prompt≻
+    --         UNABLE_TO_CONNECT = , -- Unable to connect.≺Prompt≻
+    --         CONNECTING_WITH_THE_SERVER = , -- Connecting with server. Please wait.≺Possible Special Code: 00≻
+    --     },
+    --     mob = -- mob for table lookup
+    --     {
+
+    --     },
+    --     npc = -- npc for table lookup
+    --     {
+
+    --     }
+    -- },
+    [xi.zone.BASTOK_MINES] = -- zoneID for array lookup
+    {
+        text = -- text for table lookup
+        {
+            INFORMATION_RECORDED = 11734, -- The time and destination for your foray into Dynamis has been recorded on your <itemID>.
+            ANOTHER_GROUP = 11733, -- Another group of player characters is currently occupying Dynamis - ≺Multiple Choice (Parameter 0)≻[Dummy/San d'Oria/Bastok/Windurst/Jeuno/Beaucedine/Xarcabard/Valkurm/Buburimu/Qufim/Tavnazia].≺Prompt≻
+            UNABLE_TO_CONNECT = 11731, -- Unable to connect.≺Prompt≻
+            CONNECTING_WITH_THE_SERVER = 11730, -- Connecting with server. Please wait.≺Possible Special Code: 00≻
+        },
+        mob = -- mob for table lookup
+        {
+
+        },
+        npc = -- npc for table lookup
+        {
+
+        }
+    },
+    [xi.zone.BEAUCEDINE_GLACIER] = -- zoneID for array lookup
+    {
+        text = -- text for table lookup
+        {
+            INFORMATION_RECORDED = 7878, -- The time and destination for your foray into Dynamis has been recorded on your <itemID>.
+            ANOTHER_GROUP = 7877, -- Another group of player characters is currently occupying Dynamis - ≺Multiple Choice (Parameter 0)≻[Dummy/San d'Oria/Bastok/Windurst/Jeuno/Beaucedine/Xarcabard/Valkurm/Buburimu/Qufim/Tavnazia].≺Prompt≻
+            UNABLE_TO_CONNECT = 7876, -- Unable to connect.≺Prompt≻
+            CONNECTING_WITH_THE_SERVER = 7874, -- Connecting with server. Please wait.≺Possible Special Code: 00≻
+        },
+        mob = -- mob for table lookup
+        {
+
+        },
+        npc = -- npc for table lookup
+        {
+
+        }
+    },
+    [xi.zone.BUBURIMU_PENINSULA] = -- zoneID for array lookup
+    {
+        text = -- text for table lookup
+        {
+            INFORMATION_RECORDED = 7903, -- The time and destination for your foray into Dynamis has been recorded on your <itemID>.
+            ANOTHER_GROUP = 7902, -- Another group of player characters is currently occupying Dynamis - ≺Multiple Choice (Parameter 0)≻[Dummy/San d'Oria/Bastok/Windurst/Jeuno/Beaucedine/Xarcabard/Valkurm/Buburimu/Qufim/Tavnazia].≺Prompt≻
+            UNABLE_TO_CONNECT = 7900, -- Unable to connect.≺Prompt≻
+            CONNECTING_WITH_THE_SERVER = 7899, -- Connecting with server. Please wait.≺Possible Special Code: 00≻
+        },
+        mob = -- mob for table lookup
+        {
+
+        },
+        npc = -- npc for table lookup
+        {
+
+        }
+    },
+    [xi.zone.QUFIM_ISLAND] = -- zoneID for array lookup
+    {
+        text = -- text for table lookup
+        {
+            INFORMATION_RECORDED = 7861, -- The time and destination for your foray into Dynamis has been recorded on your <itemID>.
+            ANOTHER_GROUP = 7860, -- Another group of player characters is currently occupying Dynamis - ≺Multiple Choice (Parameter 0)≻[Dummy/San d'Oria/Bastok/Windurst/Jeuno/Beaucedine/Xarcabard/Valkurm/Buburimu/Qufim/Tavnazia].≺Prompt≻
+            UNABLE_TO_CONNECT = 7858, -- Unable to connect.≺Prompt≻
+            CONNECTING_WITH_THE_SERVER = 7867, -- Connecting with server. Please wait.≺Possible Special Code: 00≻
+        },
+        mob = -- mob for table lookup
+        {
+
+        },
+        npc = -- npc for table lookup
+        {
+
+        }
+    },
+    [xi.zone.RULUDE_GARDENS] = -- zoneID for array lookup
+    {
+        text = -- text for table lookup
+        {
+            INFORMATION_RECORDED = 11232, -- The time and destination for your foray into Dynamis has been recorded on your <itemID>.
+            ANOTHER_GROUP = 11231, -- Another group of player characters is currently occupying Dynamis - ≺Multiple Choice (Parameter 0)≻[Dummy/San d'Oria/Bastok/Windurst/Jeuno/Beaucedine/Xarcabard/Valkurm/Buburimu/Qufim/Tavnazia].≺Prompt≻
+            UNABLE_TO_CONNECT = 11229, -- Unable to connect.≺Prompt≻
+            CONNECTING_WITH_THE_SERVER = 11228, -- Connecting with server. Please wait.≺Possible Special Code: 00≻
+        },
+        mob = -- mob for table lookup
+        {
+
+        },
+        npc = -- npc for table lookup
+        {
+
+        }
+    },
+    [xi.zone.SOUTHERN_SAN_DORIA] = -- zoneID for array lookup
+    {
+        text = -- text for table lookup
+        {
+            INFORMATION_RECORDED = 7423, -- The time and destination for your foray into Dynamis has been recorded on your <itemID>.
+            ANOTHER_GROUP = 7422, -- Another group of player characters is currently occupying Dynamis - ≺Multiple Choice (Parameter 0)≻[Dummy/San d'Oria/Bastok/Windurst/Jeuno/Beaucedine/Xarcabard/Valkurm/Buburimu/Qufim/Tavnazia].≺Prompt≻
+            UNABLE_TO_CONNECT = 7420, -- Unable to connect.≺Prompt≻
+            CONNECTING_WITH_THE_SERVER = 7419, -- Connecting with server. Please wait.≺Possible Special Code: 00≻
+        },
+        mob = -- mob for table lookup
+        {
+
+        },
+        npc = -- npc for table lookup
+        {
+
+        }
+    },
+    [xi.zone.TAVNAZIAN_SAFEHOLD] = -- zoneID for array lookup
+    {
+        text = -- text for table lookup
+        {
+            INFORMATION_RECORDED = 11832, -- The time and destination for your foray into Dynamis has been recorded on your <itemID>.
+            ANOTHER_GROUP = 11831, -- Another group of player characters is currently occupying Dynamis - ≺Multiple Choice (Parameter 0)≻[Dummy/San d'Oria/Bastok/Windurst/Jeuno/Beaucedine/Xarcabard/Valkurm/Buburimu/Qufim/Tavnazia].≺Prompt≻
+            UNABLE_TO_CONNECT = 11829, -- Unable to connect.≺Prompt≻
+            CONNECTING_WITH_THE_SERVER = 11828, -- Connecting with server. Please wait.≺Possible Special Code: 00≻
+        },
+        mob = -- mob for table lookup
+        {
+
+        },
+        npc = -- npc for table lookup
+        {
+
+        }
+    },
+    [xi.zone.VALKURM_DUNES] = -- zoneID for array lookup
+    {
+        text = -- text for table lookup
+        {
+            INFORMATION_RECORDED = 7877, -- The time and destination for your foray into Dynamis has been recorded on your <itemID>.
+            ANOTHER_GROUP = 7876, -- Another group of player characters is currently occupying Dynamis - ≺Multiple Choice (Parameter 0)≻[Dummy/San d'Oria/Bastok/Windurst/Jeuno/Beaucedine/Xarcabard/Valkurm/Buburimu/Qufim/Tavnazia].≺Prompt≻
+            UNABLE_TO_CONNECT = 7874, -- Unable to connect.≺Prompt≻
+            CONNECTING_WITH_THE_SERVER = 7873, -- Connecting with server. Please wait.≺Possible Special Code: 00≻
+        },
+        mob = -- mob for table lookup
+        {
+
+        },
+        npc = -- npc for table lookup
+        {
+
+        }
+    },
+    [xi.zone.WINDURST_WALLS] = -- zoneID for array lookup
+    {
+        text = -- text for table lookup
+        {
+            INFORMATION_RECORDED = 9092, -- The time and destination for your foray into Dynamis has been recorded on your <itemID>.
+            ANOTHER_GROUP = 9091, -- Another group of player characters is currently occupying Dynamis - ≺Multiple Choice (Parameter 0)≻[Dummy/San d'Oria/Bastok/Windurst/Jeuno/Beaucedine/Xarcabard/Valkurm/Buburimu/Qufim/Tavnazia].≺Prompt≻
+            UNABLE_TO_CONNECT = 9089, -- Unable to connect.≺Prompt≻
+            CONNECTING_WITH_THE_SERVER = 9088, -- Connecting with server. Please wait.≺Possible Special Code: 00≻
+        },
+        mob = -- mob for table lookup
+        {
+
+        },
+        npc = -- npc for table lookup
+        {
+
+        }
+    },
+    [xi.zone.XARCABARD] = -- zoneID for array lookup
+    {
+        text = -- text for table lookup
+        {
+            INFORMATION_RECORDED = 7858, -- The time and destination for your foray into Dynamis has been recorded on your <itemID>.
+            ANOTHER_GROUP = 7857, -- Another group of player characters is currently occupying Dynamis - ≺Multiple Choice (Parameter 0)≻[Dummy/San d'Oria/Bastok/Windurst/Jeuno/Beaucedine/Xarcabard/Valkurm/Buburimu/Qufim/Tavnazia].≺Prompt≻
+            UNABLE_TO_CONNECT = 7855, -- Unable to connect.≺Prompt≻
+            CONNECTING_WITH_THE_SERVER = 7854, -- Connecting with server. Please wait.≺Possible Special Code: 00≻
+        },
+        mob = -- mob for table lookup
+        {
+
+        },
+        npc = -- npc for table lookup
+        {
+
+        }
+    },
+    --------------------------------------------
+    --              Dynamis Zones             --
+    --------------------------------------------
+    -- [zone] = -- zoneID for array lookup
+    -- {
+    --     text = -- text for table lookup
+    --     {
+    --         INFORMATION_RECORDED = 7903, -- The time and destination for your foray into Dynamis has been recorded on your <itemID>.
+    --         ANOTHER_GROUP = 7902, -- Another group of player characters is currently occupying Dynamis - ≺Multiple Choice (Parameter 0)≻[Dummy/San d'Oria/Bastok/Windurst/Jeuno/Beaucedine/Xarcabard/Valkurm/Buburimu/Qufim/Tavnazia].≺Prompt≻
+    --         UNABLE_TO_CONNECT = 7900, -- Unable to connect.≺Prompt≻
+    --         CONNECTING_WITH_THE_SERVER = 7899, -- Connecting with server. Please wait.≺Possible Special Code: 00≻
+    --     },
+    --     mob = -- mob for table lookup
+    --     {
+    --          Megaboss = , -- Zone's megaboss ID used to stop movement.
+    --     },
+    --     npc = -- npc for table lookup
+    --     {
+
+    --     }
+    -- },
+    [xi.zone.DYNAMIS_BASTOK] = -- zoneID for array lookup
+    {
+        text = -- text for table lookup
+        {
+            NO_LONGER_HAVE_CLEARANCE = 7061,
+        },
+        mob = -- mob for table lookup
+        {
+
+        },
+        npc = -- npc for table lookup
+        {
+
+        }
+    },
+    [xi.zone.DYNAMIS_BEAUCEDINE] = -- zoneID for array lookup
+    {
+        text = -- text for table lookup
+        {
+            NO_LONGER_HAVE_CLEARANCE = 7161,
+        },
+        mob = -- mob for table lookup
+        {
+            
+        },
+        npc = -- npc for table lookup
+        {
+
+        }
+    },
+    [xi.zone.DYNAMIS_BUBURIMU] = -- zoneID for array lookup
+    {
+        text = -- text for table lookup
+        {
+            NO_LONGER_HAVE_CLEARANCE = 7320,
+        },
+        mob = -- mob for table lookup
+        {
+            Gosspix_Blabberlips = 16941097,
+            Shamblix_Rottenheart = 16941082,
+            Woodnix_Shrillwhistle = 16941066,
+            Elvaansticker_Bxafraff = 16941116,
+            Flamecaller_Zoeqdoq = 16941115,
+            Hamfist_Gukhbuk = 16941133,
+            Lyncean_Juwgneg = 16941134,
+            GiBhe_Fleshfeaster = 16941152,
+            QuPho_Bloodspiller = 16941151,
+            TeZha_Ironclad = 16941170,
+            VaRhu_Bodysnatcher = 16941169,
+            Baa_Dava_The_Bibliopage = 16941206,
+            Doo_Peku_The_Fleetfoot = 16941205,
+            Koo_Rahi_The_Levinblade = 16941189,
+            Ree_Nata_The_Melomanic = 16941188,
+            Aitvaras = 16941367,
+            Alklha = 16941366,
+            Barong = 16941365,
+            Basilic = 16941667,
+            Jurik = 16941668,
+            Koschei = 16941672,
+            Stihi = 16941364,
+            Stollenwurm = 16941671,
+            Tarasca = 16941669,
+            Vishap = 16941673,
+            Dragons_Wyvern_1 = 16941701,
+            Dragons_Wyvern_2 = 16941702,
+            Dragons_Wyvern_3 = 16941703,
+            Dragons_Wyvern_4 = 16941704,
+            Dragons_Wyvern_5 = 16941705,
+            Megaboss = 16941057 -- Zone's megaboss ID used to stop movement.
+        },
+        npc = -- npc for table lookup
+        {
+
+        }
+    },
+    [xi.zone.DYNAMIS_JEUNO] = -- zoneID for array lookup
+    {
+        text = -- text for table lookup
+        {
+            NO_LONGER_HAVE_CLEARANCE = 7061,
+        },
+        mob = -- mob for table lookup
+        {
+
+        },
+        npc = -- npc for table lookup
+        {
+
+        }
+    },
+    [xi.zone.DYNAMIS_QUFIM] = -- zoneID for array lookup
+    {
+        text = -- text for table lookup
+        {
+            NO_LONGER_HAVE_CLEARANCE = 7320,
+        },
+        mob = -- mob for table lookup
+        {
+            Scolopendra = 16945287,
+            Stringes = 16945320,
+            Suttung = 16945381,
+            Fire_elemental = 16945641,
+            Ice_elemental  = 16945635,
+            Air_elemental = 16945633,
+            Earth_elemental = 16945636,
+            Thunder_elemental = 16945632,
+            Water_elemental = 16945629,
+            Light_elemental = 16945634,
+            Dark_elemental = 16945642,
+            Megaboss = 16945153 -- Zone's megaboss ID used to stop movement.
+        },
+        npc = -- npc for table lookup
+        {
+
+        }
+    },
+    [xi.zone.DYNAMIS_SAN_DORIA] = -- zoneID for array lookup
+    {
+        text = -- text for table lookup
+        {
+            NO_LONGER_HAVE_CLEARANCE = 7061,
+        },
+        mob = -- mob for table lookup
+        {
+
+        },
+        npc = -- npc for table lookup
+        {
+
+        }
+    },
+    [xi.zone.DYNAMIS_TAVNAZIA] = -- zoneID for array lookup
+    {
+        text = -- text for table lookup
+        {
+            NO_LONGER_HAVE_CLEARANCE = 7320,
+        },
+        mob = -- mob for table lookup
+        {
+
+        },
+        npc = -- npc for table lookup
+        {
+
+        }
+    },
+    [xi.zone.DYNAMIS_VALKURM] = -- zoneID for array lookup
+    {
+        text = -- text for table lookup
+        {
+            NO_LONGER_HAVE_CLEARANCE = 7320,
+        },
+        mob = -- mob for table lookup
+        {
+            Nightmare_Fly_1 = 16937012,
+            Nightmare_Fly_2 = 16937013,
+            Nightmare_Fly_3 = 16937013,
+            Nantina = 16937077,
+            Stcemqestcint = 16937051,
+            Fairy_Ring = 16937100,
+            Dragontrap_1 = 16937576,
+            Dragontrap_2 = 16937577,
+            Dragontrap_3 = 16937578,
+            Nightmare_Morbol_1 = 16937634,
+            Nightmare_Morbol_2 = 16937635,
+            Megaboss = 16936961 -- Zone's megaboss ID used to stop movement.
+        },
+        npc = -- npc for table lookup
+        {
+
+        }
+    },
+    [xi.zone.DYNAMIS_WINDURST] = -- zoneID for array lookup
+    {
+        text = -- text for table lookup
+        {
+            NO_LONGER_HAVE_CLEARANCE = 7061,
+        },
+        mob = -- mob for table lookup
+        {
+
+        },
+        npc = -- npc for table lookup
+        {
+
+        }
+    },
+    [xi.zone.DYNAMIS_XARCABARD] = -- zoneID for array lookup
+    {
+        text = -- text for table lookup
+        {
+            NO_LONGER_HAVE_CLEARANCE = 7161,
+        },
+        mob = -- mob for table lookup
+        {
+
+        },
+        npc = -- npc for table lookup
+        {
+
+        }
+    }
+}
+
 local entryInfoEra =
 {
         --[[
@@ -622,7 +1050,7 @@ xi.dynamis.onNewDynamis = function(player)
             else mob:setSpawn(1,1,1,0) end -- If no position set to an invalid position.
             if mob:getFamily() >= 92 and mob:getFamily() <= 95 then -- If statue family.
                 mob:addRoamFlag(256) -- scripted pathing only
-            elseif mob:getID() == zones[zone].npc.Megaboss then -- If zone megaboss (only applicable for northlands and dreamlands)
+            elseif mob:getID() == dynaIDLookup[mob:getZoneID()].npc.Megaboss then -- If zone megaboss (only applicable for northlands and dreamlands)
                 mob:addRoamFlag(256) -- scripted pathing only
             else -- Just covers nightmare mobs as everything else should be a statue or megaboss.
                 mob:addMobMod(xi.mobMod.ROAM_DISTANCE, 5) -- Limit roam distance to 5'
@@ -746,7 +1174,7 @@ xi.dynamis.registerDynamis = function(player)
         local dynamisToken = player:GetServerVariable(string.format("[DYNA]Token_%s", dynaInfoEra[player:getZoneID()].dynaZone))
         local hourglassInitial = string.format("%s : %s", dynaInfoEra[player:getZoneID()].dynaNameShort, dynamisToken)
         player:addItem({id=dynamis_perpetual, signature=hourglassInitial}) -- Add a perpetual hourglass with token signature.
-        player:messageSpecial(zones[player:getZoneID()].text.INFORMATION_RECORDED, dynamis_perpetual)
+        player:messageSpecial(dynaIDLookup[player:getZoneID()].text.INFORMATION_RECORDED, dynamis_perpetual)
         player:messageSpecial(zones[player:getZoneID()].text.ITEM_OBTAINED, dynamis_perpetual)
     end
 end
@@ -778,7 +1206,7 @@ end
 
 xi.dynamis.ejectPlayer = function(player)
     if player:getCurrentRegion() == xi.region.DYNAMIS then
-        player:timer(1000, function(player) player:messageSpecial(zones[player:getZoneID()].text.NO_LONGER_HAVE_CLEARANCE, 0, 30) end) -- Wait 1 second, send no clearance message.
+        player:timer(1000, function(player) player:messageSpecial(dynaIDLookup[player:getZoneID()].text.NO_LONGER_HAVE_CLEARANCE, 0, 30) end) -- Wait 1 second, send no clearance message.
         player:setCharVar(string.format("[DYNA]PlayerRegistered_%s", dynaInfoEra[player:getZoneID()].dynaZone), 0) -- Reset player's registered status.
         player:setCharVar(string.format("[DYNA]PlayerZoneToken_%s", dynaInfoEra[player:getZoneID()].dynaZone), 0) -- Reset player's token.
         player:setCharVar(string.format("[DYNA]EjectPlayer_%s", zone:getID()), -1) -- Reset player's eject timer.
@@ -872,13 +1300,13 @@ xi.dynamis.entryNpcOnTrade = function(player, npc, trade)
     if (entryInfoEra[zoneID].reqs == false) then return end end -- Check if player meets all requirements or is a GM.
 
 
-    local dynamis_time_remaining = (npc:GetServerVariable(string.format("[DYNA]Timepoint_%s", entryInfoEra[zoneID].enterPos[5])) - os.time())
+    local dynamis_time_remaining = GetZone(entryInfoEra[zoneID].enterPos[5]):getDynaTimeRemaining(GetZone(entryInfoEra[zoneID].enterPos[5])) -- Get time remaining of Dynamis
     local dynamis_has_entered = player:getCharVar(entryInfoEra[zoneID].dynamis_has_enteredVar)
     local dynamis_last_reservation = (os.time() / 3600) - player:getCharVar("DynaReservationStart") -- Return Time of Last Reservation in Hours
 
     if npcUtil.tradeHas(trade, dynamis_timeless, true, false) then -- Check for timeless hourglass to trade for perpetual hourglass to start instance
         if dynamis_time_remaining > 0 then -- Check if another group is present.
-            player:messageSpecial(zones[player:getZoneID()].text.ANOTHER_GROUP, entryInfoEra[zoneID].csBit)
+            player:messageSpecial(dynaIDLookup[player:getZoneID()].text.ANOTHER_GROUP, entryInfoEra[zoneID].csBit)
         elseif player:getGMLevel() > 1 then -- If no other group, if GM bypass lockout and start new dynamis.
             player:starCutscene(entryInfoEra[zoneID].csRegisterGlass, entryInfoEra[zoneID].csBit, dynamis_has_entered == 1 and 0 or 1, dynamis_reservation_cancel, dynamis_reentry_days, entryInfoEra[zoneID].maxCapacity, xi.ki.VIAL_OF_SHROUDED_SAND, dynamis_timeless,dynamis_perpetual)
         elseif dynamis_last_reservation < dynamis_rentry_hours then -- Still in lockout period.
@@ -909,7 +1337,7 @@ xi.dynamis.entryNpcOnTrade = function(player, npc, trade)
             end
         else
             if dynamis_time_remaining > 0 then
-                player:messageSpecial(zones[player:getZoneID()].text.ANOTHER_GROUP, entryInfoEra[zoneID].csBit) -- There is another group in dynamis.
+                player:messageSpecial(dynaIDLookup[player:getZoneID()].text.ANOTHER_GROUP, entryInfoEra[zoneID].csBit) -- There is another group in dynamis.
             else
                 player:PrintToPlayer("The Perpetual Hourglass' time has run out.", 29) -- Something is invalid, fail to time has run out.
             end
@@ -940,7 +1368,7 @@ xi.dynamis.entryNpcOnEventUpdate = function(player, csid, option)
             xi.dynamis.registerDynamis(player) -- Trigger the generation of a token, timepoint, and start spawning wave 1.
         else
             player:release() -- Failed to complete CS.
-            player:messageSpecial(zones[player:getZoneID()].text.UNABLE_TO_CONNECT)
+            player:messageSpecial(dynaIDLookup[player:getZoneID()].text.UNABLE_TO_CONNECT)
         end
     end
 end
@@ -953,7 +1381,7 @@ m:addOverride("xi.dynamis.entryNpcOnEventFinish", function(player, csid, option)
             local entryPos = entryInfoEra[zoneID].enterPos
             if entryPos == nil then return end -- If entryPos isn't there, don't teleport.
             player:setCharVar(entryInfoEra[zoneID].dynamis_has_enteredVar, 1) -- Mark the player as having entered at least once.
-            player:messageSpecial(zones[player:getZoneID()].text.CONNECTING_WITH_THE_SERVER) -- Just to mimic what we have previously had.
+            player:messageSpecial(dynaIDLookup[player:getZoneID()].text.CONNECTING_WITH_THE_SERVER) -- Just to mimic what we have previously had.
             player:timer(3000, function (player) player:setPos(entryPos[1], entryPos[2], entryPos[3], entryPos[4], entryPos[5]) end) -- Do the teleport.
         end
     elseif csid == entryInfoEra[zoneID].csSand then -- Give Shrouded Sand KI
