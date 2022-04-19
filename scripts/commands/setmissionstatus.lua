@@ -2,8 +2,9 @@
 -- func: setmissionstatus {Player} {value} {LogID} {index}
 -- desc: Sets missionStatus for the given LogID and target Player
 -----------------------------------
-
 require("scripts/globals/missions")
+local logIdHelpers = require('scripts/globals/log_ids')
+-----------------------------------
 
 cmdprops =
 {
@@ -27,9 +28,9 @@ function onTrigger(player, target, value, logId, statusIndex)
 
     -- validate logId
     local logName
-    local logInfo = GetMissionLogInfo(logId)
+    local logInfo = logIdHelpers.getMissionLogInfo(logId)
     if logInfo == nil then
-        logInfo = GetMissionLogInfo(player:getNation())
+        logInfo = logIdHelpers.getMissionLogInfo(player:getNation())
     end
     logName = logInfo.full_name
     logId = logInfo.mission_log

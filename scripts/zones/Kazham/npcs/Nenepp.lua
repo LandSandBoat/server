@@ -82,7 +82,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         local FreeSlots = player:getFreeSlotsCount()
         if FreeSlots >= 4 then
             player:tradeComplete()
-            player:addFame(KAZHAM, 75)
+            player:addFame(xi.quest.fame_area.WINDURST, 75)
             player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_OPO_OPO_AND_I)
             player:addItem(13870)   -- opo opo crown
             player:messageSpecial(ID.text.ITEM_OBTAINED, 13870)

@@ -17,7 +17,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local ACSP = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.A_CERTAIN_SUBSTITUTE_PATROLMAN)
-    local SOA_Mission = player:getCurrentMission(SOA)
+    local SOA_Mission = player:getCurrentMission(xi.mission.log_id.SOA)
 
     if (SOA_Mission >= xi.mission.id.soa.LIFE_ON_THE_FRONTIER) then
         if (ACSP == QUEST_ACCEPTED) then
@@ -63,7 +63,7 @@ entity.onEventFinish = function(player, csid, option)
         player:addCurrency('bayld', 500 * xi.settings.BAYLD_RATE)
         player:messageSpecial(ID.text.BAYLD_OBTAINED, 500 * xi.settings.BAYLD_RATE)
         player:delKeyItem(xi.ki.WESTERN_ADOULIN_PATROL_ROUTE)
-        player:addFame(ADOULIN)
+        player:addFame(xi.quest.fame_area.ADOULIN)
         player:setCharVar("ACSP_NPCs_Visited", 0)
     end
 end

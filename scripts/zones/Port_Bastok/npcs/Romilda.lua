@@ -30,7 +30,7 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    local pFame = player:getFameLevel(BASTOK)
+    local pFame = player:getFameLevel(xi.quest.fame_area.BASTOK)
     local ForevertoHold = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.FOREVER_TO_HOLD)
     local TilldeathdousPart = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TILL_DEATH_DO_US_PART)
 
@@ -53,7 +53,7 @@ entity.onEventFinish = function(player, csid, option)
         player:addTitle(xi.title.QIJIS_RIVAL)
         player:addGil(xi.settings.GIL_RATE * 2000)
         player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 2000)
-        player:addFame(BASTOK, 160)
+        player:addFame(xi.quest.fame_area.BASTOK, 160)
         player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TILL_DEATH_DO_US_PART)
     end
 

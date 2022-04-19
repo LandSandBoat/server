@@ -17,7 +17,7 @@ end
 
 entity.onTrigger = function(player, npc)
     if
-        player:getCurrentMission(ASA) == xi.mission.id.asa.SUGAR_COATED_DIRECTIVE and
+        player:getCurrentMission(xi.mission.log_id.ASA) == xi.mission.id.asa.SUGAR_COATED_DIRECTIVE and
         player:getCharVar("ASA4_Scarlet") == 1
     then
         player:startEvent(2)

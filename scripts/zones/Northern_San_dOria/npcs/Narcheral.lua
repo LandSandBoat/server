@@ -59,7 +59,7 @@ entity.onEventFinish = function(player, csid, option)
             player:addItem(17422)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 17422) -- Blessed Hammer
             player:tradeComplete()
-            player:addFame(SANDORIA, 20)
+            player:addFame(xi.quest.fame_area.SANDORIA, 20)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.MESSENGER_FROM_BEYOND)
         end
     elseif csid == 691 then
@@ -69,7 +69,7 @@ entity.onEventFinish = function(player, csid, option)
             player:addItem(14091)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 14091) -- Healer's Duckbills
             player:tradeComplete()
-            player:addFame(SANDORIA, 40)
+            player:addFame(xi.quest.fame_area.SANDORIA, 40)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.PRELUDE_OF_BLACK_AND_WHITE)
         end
     elseif csid == 692 then
@@ -81,7 +81,7 @@ entity.onEventFinish = function(player, csid, option)
             player:addItem(12640)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 12640) -- Healer's Briault
             player:tradeComplete()
-            player:addFame(SANDORIA, 60)
+            player:addFame(xi.quest.fame_area.SANDORIA, 60)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.PIEUJE_S_DECISION)
         end
     end

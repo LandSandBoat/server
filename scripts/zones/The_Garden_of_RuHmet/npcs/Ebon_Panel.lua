@@ -21,9 +21,9 @@ entity.onTrigger = function(player, npc)
     local Race = player:getRace()
     local xPos = npc:getXPos()
 
-    if (player:getCurrentMission(COP) == xi.mission.id.cop.WHEN_ANGELS_FALL  and player:getCharVar("PromathiaStatus") == 1) then
+    if (player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.WHEN_ANGELS_FALL  and player:getCharVar("PromathiaStatus") == 1) then
         player:startEvent(202)
-    elseif (player:getCurrentMission(COP) == xi.mission.id.cop.WHEN_ANGELS_FALL  and player:getCharVar("PromathiaStatus") == 2) then
+    elseif (player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.WHEN_ANGELS_FALL  and player:getCharVar("PromathiaStatus") == 2) then
         if (xPos > 99 and xPos < 101) then -- Mithra Tower
             if ( Race==xi.race.MITHRA ) then
                 player:startEvent(124)

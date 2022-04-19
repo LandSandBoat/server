@@ -42,13 +42,13 @@ end
 entity.onEventFinish = function(player, csid, option)
     if csid == 107 then
         if player:hasKeyItem(xi.ki.MAP_OF_GRAUBERG) then
-            npcUtil.completeQuest(player, CRYSTAL_WAR, xi.quest.id.crystalWar.LOST_IN_TRANSLOCATION, {
+            npcUtil.completeQuest(player, xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.LOST_IN_TRANSLOCATION, {
                 gil = 2000,
                 xp = 2000,
                 var = "lostInTranslocationCS"
             })
         else
-            npcUtil.completeQuest(player, CRYSTAL_WAR, xi.quest.id.crystalWar.LOST_IN_TRANSLOCATION, {
+            npcUtil.completeQuest(player, xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.LOST_IN_TRANSLOCATION, {
                 ki = xi.ki.MAP_OF_GRAUBERG,
                 var = "lostInTranslocationCS"
             })

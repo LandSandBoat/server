@@ -1545,6 +1545,8 @@ void CStatusEffectContainer::LoadStatusEffects()
         {
             auto flags    = (uint32)sql->GetUIntData(8);
             auto duration = (uint32)sql->GetUIntData(4);
+            auto effectID = (EFFECT)sql->GetUIntData(0);
+
             if (flags & EFFECTFLAG_OFFLINE_TICK)
             {
                 auto timestamp = (uint32)sql->GetUIntData(9);
@@ -1554,6 +1556,12 @@ void CStatusEffectContainer::LoadStatusEffects()
                                                                                         std::chrono::seconds(duration) - server_clock::now())
                                    .count();
                 }
+                else if (effectID == EFFECT::EFFECT_VISITANT)
+                {
+                    // Visitant effect expired while offline, but there's other logic to handle.
+                    // Set duration to 1 so that it expires after zoning in, and the player is ejected.
+                    duration = 1;
+                }
                 else
                 {
                     // Effect expired while offline
@@ -1561,7 +1569,7 @@ void CStatusEffectContainer::LoadStatusEffects()
                 }
             }
             CStatusEffect* PStatusEffect =
-                new CStatusEffect((EFFECT)sql->GetUIntData(0), (uint16)sql->GetUIntData(1), (uint16)sql->GetUIntData(2),
+                new CStatusEffect(effectID, (uint16)sql->GetUIntData(1), (uint16)sql->GetUIntData(2),
                                   (uint32)sql->GetUIntData(3), duration, (uint16)sql->GetUIntData(5), (uint16)sql->GetUIntData(6),
                                   (uint16)sql->GetUIntData(7), flags);
 

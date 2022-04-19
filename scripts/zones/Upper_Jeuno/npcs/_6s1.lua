@@ -20,7 +20,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local status = player:getCharVar("PromathiaStatus")
-    local mission = player:getCurrentMission(COP)
+    local mission = player:getCurrentMission(xi.mission.log_id.COP)
 
     if
         mission == xi.mission.id.cop.FLAMES_IN_THE_DARKNESS and

@@ -94,7 +94,7 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 2100)
             player:setCharVar("SaveMySon_Event", 2)
             player:needToZone(true)
-            player:addFame(JEUNO, 30)
+            player:addFame(xi.quest.fame_area.JEUNO, 30)
             player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SAVE_MY_SON)
         else
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 13110)

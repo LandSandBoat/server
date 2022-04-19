@@ -27,7 +27,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(485)
     elseif amazinScorpio == QUEST_ACCEPTED then
         player:startEvent(482, 0, 0, 1017)
-    elseif amazinScorpio == QUEST_AVAILABLE and player:getFameLevel(WINDURST) >= 2 then
+    elseif amazinScorpio == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.WINDURST) >= 2 then
         player:startEvent(481, 0, 0, 1017)
     else
         player:startEvent(421)
@@ -40,7 +40,7 @@ end
 entity.onEventFinish = function(player, csid, option)
     if csid == 481 then
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_AMAZIN_SCORPIO)
-    elseif csid == 484 and npcUtil.completeQuest(player, WINDURST, xi.quest.id.windurst.THE_AMAZIN_SCORPIO, {fame=80, title=xi.title.GREAT_GRAPPLER_SCORPIO, gil=1500}) then
+    elseif csid == 484 and npcUtil.completeQuest(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_AMAZIN_SCORPIO, {fame=80, title=xi.title.GREAT_GRAPPLER_SCORPIO, gil=1500}) then
         player:confirmTrade()
     elseif csid == 735 then
         player:setCharVar("WildcatWindurst", utils.mask.setBit(player:getCharVar("WildcatWindurst"), 0, true))

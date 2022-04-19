@@ -26,7 +26,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(752)
     elseif (player:hasKeyItem(xi.ki.DARKSTEEL_FORMULA)) then
         player:startEvent(754)
-    elseif (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_DARKSMITH) == QUEST_AVAILABLE and player:getFameLevel(BASTOK) >= 3) then
+    elseif (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_DARKSMITH) == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.BASTOK) >= 3) then
         player:startEvent(565)
     else
         local Message = math.random(0, 1)
@@ -53,10 +53,10 @@ entity.onEventFinish = function(player, csid, option)
         player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 8000)
 
         if (TheDarksmith == QUEST_ACCEPTED) then
-            player:addFame(BASTOK, 30)
+            player:addFame(xi.quest.fame_area.BASTOK, 30)
             player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_DARKSMITH)
         else
-            player:addFame(BASTOK, 5)
+            player:addFame(xi.quest.fame_area.BASTOK, 5)
         end
     elseif (csid == 752) then
         player:setCharVar("darkLegacyCS", 2)

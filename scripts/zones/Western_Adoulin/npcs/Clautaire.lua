@@ -25,7 +25,7 @@ entity.onTrigger = function(player, npc)
             -- Dialgoue during Quest: 'F.A.I.L.ure Is Not an Option'
             player:startEvent(77)
         end
-    elseif ((FINAO == QUEST_AVAILABLE) and (player:getFameLevel(ADOULIN) >= 4) and player:hasKeyItem(xi.ki.FAIL_BADGE)) then
+    elseif ((FINAO == QUEST_AVAILABLE) and (player:getFameLevel(xi.quest.fame_area.ADOULIN) >= 4) and player:hasKeyItem(xi.ki.FAIL_BADGE)) then
         -- Starting Quest: 'F.A.I.L.ure Is Not an Option'
         player:startEvent(78)
     else
@@ -48,7 +48,7 @@ entity.onEventFinish = function(player, csid, option)
         player:addExp(1000 * xi.settings.EXP_RATE)
         player:addCurrency('bayld', 500 * xi.settings.BAYLD_RATE)
         player:messageSpecial(ID.text.BAYLD_OBTAINED, 500 * xi.settings.BAYLD_RATE)
-        player:addFame(ADOULIN)
+        player:addFame(xi.quest.fame_area.ADOULIN)
     end
 end
 

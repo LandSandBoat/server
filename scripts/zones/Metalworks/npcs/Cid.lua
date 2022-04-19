@@ -20,7 +20,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local cidsSecret = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.CID_S_SECRET)
-    local copMission = player:getCurrentMission(COP)
+    local copMission = player:getCurrentMission(xi.mission.log_id.COP)
     local copStatus = player:getCharVar("PromathiaStatus")
     local hasLetter = player:hasKeyItem(xi.ki.UNFINISHED_LETTER)
 
@@ -63,7 +63,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(760)
 
     --Begin Cid's Secret
-    elseif (player:getFameLevel(BASTOK) >= 4 and cidsSecret == QUEST_AVAILABLE) then
+    elseif (player:getFameLevel(xi.quest.fame_area.BASTOK) >= 4 and cidsSecret == QUEST_AVAILABLE) then
         player:startEvent(507)
     elseif cidsSecret == QUEST_ACCEPTED and not hasLetter and player:getCharVar("CidsSecret_Event") == 1 then
         player:startEvent(508) -- After talking to Hilda, Cid gives information on the item she needs
@@ -98,7 +98,7 @@ entity.onEventFinish = function(player, csid, option)
             player:setCharVar("CidsSecret_Event", 0)
             player:addItem(13570)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 13570) -- Ram Mantle
-            player:addFame(BASTOK, 30)
+            player:addFame(xi.quest.fame_area.BASTOK, 30)
             player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.CID_S_SECRET)
         else
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 13570)

@@ -18,7 +18,7 @@ end
 entity.onTrigger = function(player, npc)
     local currentAssault = player:getCurrentAssault()
 
-    if player:getCurrentMission(TOAU) <= xi.mission.id.toau.IMMORTAL_SENTRIES or player:getMainLvl() <= 49 then
+    if player:getCurrentMission(xi.mission.log_id.TOAU) <= xi.mission.id.toau.IMMORTAL_SENTRIES or player:getMainLvl() <= 49 then
         player:startEvent(270)
     elseif currentAssault ~= 0 and player:getCharVar("assaultEntered") ~= 0 then
         if player:getCharVar("AssaultComplete") == 1 then
@@ -47,8 +47,8 @@ entity.onTrigger = function(player, npc)
             end
         end
     elseif
-        player:getCurrentMission(TOAU) > xi.mission.id.toau.PRESIDENT_SALAHEEM or
-        (player:getCurrentMission(TOAU) == xi.mission.id.toau.PRESIDENT_SALAHEEM and
+        player:getCurrentMission(xi.mission.log_id.TOAU) > xi.mission.id.toau.PRESIDENT_SALAHEEM or
+        (player:getCurrentMission(xi.mission.log_id.TOAU) == xi.mission.id.toau.PRESIDENT_SALAHEEM and
         player:getVar("ToAU3Progress") >= 1)
     then
         local currentTime = os.time()

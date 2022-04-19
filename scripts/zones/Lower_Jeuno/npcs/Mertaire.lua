@@ -90,7 +90,7 @@ entity.onEventFinish = function(player, csid, option)
         player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 2100)
         player:tradeComplete()
         player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_MINSTREL_IN_DESPAIR)
-        player:addFame(JEUNO, 30)
+        player:addFame(xi.quest.fame_area.JEUNO, 30)
 
         -- Placing this here allows the player to get additional poetic
         -- parchments should they drop them until this quest is complete

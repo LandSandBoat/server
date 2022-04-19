@@ -52,7 +52,7 @@ entity.onEventFinish = function(player, csid, option)
         else
             player:addItem(13465)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 13465)
-            player:addFame(SANDORIA, 30)
+            player:addFame(xi.quest.fame_area.SANDORIA, 30)
             player:addTitle(xi.title.THE_BENEVOLENT_ONE)
             player:setCharVar("sermonQuestVar", 0)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_VICASQUE_S_SERMON )

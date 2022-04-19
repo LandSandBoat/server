@@ -45,7 +45,7 @@ xi.ally =
             for i, player in pairs(players) do
                 local battleTarget = player:getTarget()
                 if battleTarget ~= nil then
-                    assistTarget = battleTarget:getShortID()
+                    assistTarget = battleTarget:getTargID()
                     break
                 end
             end
@@ -75,7 +75,7 @@ xi.ally =
         end
 
         for _, ally in ipairs(allies) do
-            ally:engage(target:getShortID())
+            ally:engage(target:getTargID())
         end
     end
 }

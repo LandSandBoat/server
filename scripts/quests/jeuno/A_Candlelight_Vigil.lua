@@ -17,9 +17,10 @@ local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_CANDLELIGHT_V
 
 quest.reward =
 {
-    fame  = 30,
-    item  = xi.items.FLOWER_NECKLACE,
-    title = xi.title.ACTIVIST_FOR_KINDNESS,
+    fame     = 30,
+    fameArea = xi.quest.fame_area.JEUNO,
+    item     = xi.items.FLOWER_NECKLACE,
+    title    = xi.title.ACTIVIST_FOR_KINDNESS,
 }
 
 quest.sections =
@@ -27,7 +28,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-                player:getFameLevel(JEUNO) >= 4
+                player:getFameLevel(xi.quest.fame_area.JEUNO) >= 4
         end,
 
         [xi.zone.UPPER_JEUNO] =

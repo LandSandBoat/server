@@ -18,7 +18,7 @@ entity.onTrigger = function(player, npc)
 
     if
         AltanaSorrow == QUEST_AVAILABLE and
-        player:getFameLevel(BASTOK) >= 4 and
+        player:getFameLevel(xi.quest.fame_area.BASTOK) >= 4 and
         player:getMainLvl() >= 10
     then
         player:startEvent(141) -- Start quest "Altana's Sorrow"

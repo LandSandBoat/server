@@ -87,7 +87,7 @@ entity.onEventFinish = function(player, csid, option)
 
         player:addGil(gil * xi.settings.GIL_RATE)
         player:messageSpecial(ID.text.GIL_OBTAINED, gil * xi.settings.GIL_RATE)
-        player:addFame(BASTOK, fame)
+        player:addFame(xi.quest.fame_area.BASTOK, fame)
         player:addTitle(xi.title.MOMMYS_HELPER)
         player:needToZone(true)
     end

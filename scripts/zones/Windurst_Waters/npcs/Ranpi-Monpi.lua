@@ -43,7 +43,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(557)                             -- new dialog before finish of quest
 
     -- A Crisis in the Making
-    elseif (crisisstatus == QUEST_AVAILABLE and player:getFameLevel(WINDURST) >= 2 and player:needToZone() == false) then -- A Crisis in the Making + ITEM: Quest Offer
+    elseif (crisisstatus == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.WINDURST) >= 2 and player:needToZone() == false) then -- A Crisis in the Making + ITEM: Quest Offer
         player:startEvent(258, 0, 625)
     elseif (crisisstatus == QUEST_ACCEPTED) then
         local prog = player:getCharVar("QuestCrisisMaking_var")
@@ -92,7 +92,7 @@ entity.onEventFinish = function(player, csid, option)
         player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE*400)
         player:setCharVar("QuestCrisisMaking_var", 0)
         player:delKeyItem(xi.ki.OFF_OFFERING)
-        player:addFame(WINDURST, 75)
+        player:addFame(xi.quest.fame_area.WINDURST, 75)
         player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_CRISIS_IN_THE_MAKING)
         player:needToZone(true)
     elseif (csid == 268) then -- A Crisis in the Making: Repeatable Quest Finish
@@ -100,7 +100,7 @@ entity.onEventFinish = function(player, csid, option)
         player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE*400)
         player:setCharVar("QuestCrisisMaking_var", 0)
         player:delKeyItem(xi.ki.OFF_OFFERING)
-        player:addFame(WINDURST, 8)
+        player:addFame(xi.quest.fame_area.WINDURST, 8)
         player:needToZone(true)
 
     -- In a Stew

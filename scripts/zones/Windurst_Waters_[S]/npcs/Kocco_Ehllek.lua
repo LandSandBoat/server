@@ -40,7 +40,7 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("RedeemingRocksProg", 0)
         player:setCharVar("RedeemingDay", VanadielDayOfTheYear())
     elseif csid == 111 then -- Finish "Redeeming Rocks" quest
-        npcUtil.completeQuest(player, CRYSTAL_WAR, xi.quest.id.crystalWar.REDEEMING_ROCKS, {
+        npcUtil.completeQuest(player, xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.REDEEMING_ROCKS, {
             item = 15998,
             var = {"RedeemingDay"}
         })

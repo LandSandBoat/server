@@ -104,7 +104,7 @@ public:
 
     // Object Identification
     uint32 getID();
-    uint16 getShortID();
+    uint16 getTargID();
     auto   getCursorTarget() -> std::optional<CLuaBaseEntity>; // Returns the ID any object under players in game cursor.
 
     uint8 getObjType();
@@ -190,7 +190,7 @@ public:
     void teleport(std::map<std::string, float> pos, sol::object const& arg1); // Set Entity position (without entity despawn/spawn packets)
 
     void   addTeleport(uint8 teleType, uint32 bitval, sol::object const& setval); // Add new teleport means to char unlocks
-    uint32 getTeleport(uint8 type);                                               // Get unlocked teleport means
+    uint32 getTeleport(uint8 type, sol::object const& abysseaRegionObj);          // Get unlocked teleport means
     auto   getTeleportTable(uint8 type) -> sol::table;
     bool   hasTeleport(uint8 tType, uint8 bit, sol::object const& arg2); // Has access to specific teleport
     void   setTeleportMenu(uint16 type, sol::table const& favs);         // Set favorites or menu layout preferences for homepoints or survival guides
@@ -255,9 +255,8 @@ public:
     uint8  getRace();
     uint8  getGender();              // Returns the player character's gender
     auto   getName() -> std::string; // Gets Entity Name
-    void   setName(std::string const& name);
     auto   getPacketName() -> std::string;
-    void   setPacketName(std::string const& name);
+    void   renameEntity(std::string const& newName);
     void   hideName(bool isHidden);
     bool   checkNameFlags(uint32 flags); // this is check and not get because it tests for a flag, it doesn't return all flags
     uint16 getModelId();
@@ -510,7 +509,7 @@ public:
     // int32 isInAssault(lua_Stat*); // If player is in a Instanced Assault Dungeon returns true --- Not Implemented
 
     uint16 getConfrontationEffect();
-    uint16 copyConfrontationEffect(uint16 targetID); // copy confrontation effect, param = targetEntity:getShortID()
+    uint16 copyConfrontationEffect(uint16 targetID); // copy confrontation effect, param = targetEntity:getTargID()
 
     // Battlefields
     auto  getBattlefield() -> std::optional<CLuaBattlefield>;                                             // returns CBattlefield* or nullptr if not available

@@ -193,7 +193,7 @@ xi.effect =
     CHARM_II                 = 17,
     GRADUAL_PETRIFICATION    = 18,
     SLEEP_II                 = 19,
-    CURSE_II                 = 20,
+    CURSE_II                 = 20, -- Zombie
     ADDLE                    = 21,
     INTIMIDATE               = 22,
     KAUSTRA                  = 23,
@@ -888,6 +888,7 @@ xi.effectFlag =
     INFLUENCE       = 0x1000000,
     OFFLINE_TICK    = 0x2000000,
     AURA            = 0x4000000,
+    HIDE_TIMER      = 0x8000000,
 }
 
 -----------------------------------

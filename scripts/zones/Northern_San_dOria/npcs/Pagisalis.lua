@@ -31,7 +31,7 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    local sanFame = player:getFameLevel(SANDORIA)
+    local sanFame = player:getFameLevel(xi.quest.fame_area.SANDORIA)
     local undyingFlames = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.UNDYING_FLAMES)
     if player:hasKeyItem(xi.ki.OLD_POCKET_WATCH) then
         player:startEvent(48)
@@ -64,7 +64,7 @@ entity.onEventFinish = function(player, csid, option)
             player:addTitle(xi.title.FAITH_LIKE_A_CANDLE)
             player:addItem(13211)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 13211) -- Friars Rope
-            player:addFame(SANDORIA, 30)
+            player:addFame(xi.quest.fame_area.SANDORIA, 30)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.UNDYING_FLAMES)
         end
     elseif csid == 37 then

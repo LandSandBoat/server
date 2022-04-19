@@ -54,22 +54,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local omensProgress = player:getCharVar("OmensProgress")
-    local omens = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.OMENS)
     local transformations = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.TRANSFORMATIONS)
 
-    -- OMENS
-    if omens == QUEST_ACCEPTED then
-        if omensProgress == 3 then
-            player:startEvent(714) -- Tells Master location
-        elseif omensProgress == 4 then
-            player:startEvent(715) -- Reminder of master location
-        elseif omensProgress == 5 then
-            player:startEvent(716) -- Master spoken to
-        end
-
     -- CRAFTING OTHER 3 BLUE MAGE ARMOR PIECES
-    elseif transformations >= QUEST_ACCEPTED then
+    if transformations >= QUEST_ACCEPTED then
         local remainingBLUAF = player:getCharVar("[BLUAF]Remaining") -- Bitmask of AF the player has NOT crafted
         local totalCraftedPieces = 3 - utils.mask.countBits(remainingBLUAF, 3)
         local currentTask = player:getCharVar("[BLUAF]Current")
@@ -103,11 +91,6 @@ entity.onTrigger = function(player, npc)
         elseif totalCraftedPieces == 3 then
             player:startEvent(753) -- Dialogue after crafting all BLU AF
         end
-
-    elseif omens == QUEST_COMPLETED then
-        player:startEvent(718)
-    else
-        player:startEvent(770) -- Default dialogue
     end
 end
 
@@ -139,26 +122,13 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    local omensProgress = player:getCharVar("OmensProgress")
-
     local remainingBLUAF = player:getCharVar("[BLUAF]Remaining") -- Bitmask of AF the player has NOT crafted
     local totalCraftedPieces = 3 - utils.mask.countBits(remainingBLUAF, 3)
     local currentTask = player:getCharVar("[BLUAF]Current")
     local AFoffset = 8 * totalCraftedPieces
 
-    -- OMENS
-    if csid == 714 and omensProgress == 3 then
-        player:setCharVar("OmensProgress", 4)
-    elseif csid == 716 and omensProgress == 5 then
-        npcUtil.completeQuest(player, AHT_URHGAN, xi.quest.id.ahtUrhgan.OMENS, {
-            item = 15684,
-            title = xi.title.IMMORTAL_LION,
-            var = { "OmensProgress" }
-        })
-        player:delKeyItem(xi.ki.SEALED_IMMORTAL_ENVELOPE)
-
     -- BLU AF CRAFTING
-    elseif csid == 732 + AFoffset then
+    if csid == 732 + AFoffset then
         player:setCharVar("[BLUAF]CraftingStage", 1)
         player:confirmTrade()
     elseif csid == 734 + AFoffset then
@@ -184,4 +154,5 @@ entity.onEventFinish = function(player, csid, option)
         end
     end
 end
+
 return entity

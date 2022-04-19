@@ -28,7 +28,7 @@ m:addOverride(string.format("xi.globals.spells.trust.%s.onSpellCast", trustToRep
     -- New logic below
     -----------------------------------
     trust:setModelId(3119) -- Trust: Cornelia
-    trust:setPacketName("Cornelia")
+    trust:renameEntity("Cornelia")
 
     local boostAmount = math.ceil((30 / 99) * caster:getMainLvl())
     trust:addStatusEffectEx(xi.effect.GEO_HASTE, xi.effect.GEO_HASTE, 6, 3, 0, xi.effect.GEO_HASTE, boostAmount, xi.auraTarget.ALLIES, xi.effectFlag.AURA)

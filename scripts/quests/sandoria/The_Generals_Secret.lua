@@ -6,8 +6,8 @@
 -----------------------------------
 require('scripts/globals/interaction/quest')
 require('scripts/globals/items')
-require('scripts/globals/log_ids')
 require('scripts/globals/npc_util')
+require('scripts/globals/quests')
 require('scripts/globals/zone')
 -----------------------------------
 
@@ -16,6 +16,7 @@ local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_GENER
 quest.reward =
 {
     fame = 30,
+    fameArea = xi.quest.fame_area.SANDORIA,
     item = xi.items.LYNX_BAGHNAKHS,
 }
 
@@ -23,7 +24,7 @@ quest.sections =
 {
     {
         check = function(player, status)
-            return status == QUEST_AVAILABLE and player:getFameLevel(SANDORIA) > 1
+            return status == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.SANDORIA) > 1
         end,
 
         [xi.zone.CHATEAU_DORAGUILLE] =

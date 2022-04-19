@@ -18,12 +18,12 @@ entity.onTrigger = function(player, npc)
     --player:setCharVar("PromathiaStatus", 3)
 
     if
-        player:getCurrentMission(COP) == xi.mission.id.cop.WHEN_ANGELS_FALL and
+        player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.WHEN_ANGELS_FALL and
         player:getCharVar("PromathiaStatus") == 3
     then
         player:startEvent(203)
     elseif
-        player:getCurrentMission(COP) == xi.mission.id.cop.WHEN_ANGELS_FALL and
+        player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.WHEN_ANGELS_FALL and
         player:getCharVar("PromathiaStatus") == 5
     then
         player:startEvent(205)

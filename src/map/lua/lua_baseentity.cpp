@@ -1280,13 +1280,13 @@ uint32 CLuaBaseEntity::getID()
 }
 
 /************************************************************************
- *  Function: getShortID()
+ *  Function: getTargID()
  *  Purpose : Gets the ID of a Target
- *  Example : mob:getShortID(); pet:getShortID()
- *  Notes   : To Do: Should be renamed to getTargID
+ *  Example : mob:getTargID(); pet:getTargID()
+ *  Notes   :
  ************************************************************************/
 
-uint16 CLuaBaseEntity::getShortID()
+uint16 CLuaBaseEntity::getTargID()
 {
     return m_PBaseEntity->targid;
 }
@@ -2668,7 +2668,10 @@ void CLuaBaseEntity::teleport(std::map<std::string, float> pos, sol::object cons
 
 void CLuaBaseEntity::addTeleport(uint8 teleType, uint32 bitval, sol::object const& setval)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        return;
+    }
 
     CCharEntity* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
@@ -2679,6 +2682,11 @@ void CLuaBaseEntity::addTeleport(uint8 teleType, uint32 bitval, sol::object cons
     if ((type == TELEPORT_TYPE::HOMEPOINT || type == TELEPORT_TYPE::SURVIVAL) && ((setval == sol::lua_nil) || set > 3))
     {
         ShowError("Lua::addteleport : Attempt to index array out-of-bounds or parameter is nil.");
+    }
+    else if (type == TELEPORT_TYPE::ABYSSEA_CONFLUX && (setval == sol::lua_nil || set >= MAX_ABYSSEAZONES))
+    {
+        ShowError("Lua::addTeleport : Attempt to add Abyssea Conflux with invalid setval or set variable.\n");
+        return;
     }
 
     switch (type)
@@ -2713,10 +2721,14 @@ void CLuaBaseEntity::addTeleport(uint8 teleType, uint32 bitval, sol::object cons
         case TELEPORT_TYPE::SURVIVAL:
             PChar->teleport.survival.access[set] |= bit;
             break;
+        case TELEPORT_TYPE::ABYSSEA_CONFLUX:
+            PChar->teleport.abysseaConflux[set] |= bit;
+            break;
         default:
             ShowError("LuaBaseEntity::addTeleport : Parameter 1 out of bounds.");
             return;
     }
+
     charutils::SaveTeleport(PChar, type);
 }
 
@@ -2727,12 +2739,15 @@ void CLuaBaseEntity::addTeleport(uint8 teleType, uint32 bitval, sol::object cons
  *  Notes   :
  ************************************************************************/
 
-uint32 CLuaBaseEntity::getTeleport(uint8 type)
+uint32 CLuaBaseEntity::getTeleport(uint8 type, sol::object const& abysseaRegionObj)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        return 0;
+    }
 
     TELEPORT_TYPE tele_type = static_cast<TELEPORT_TYPE>(type);
-    CCharEntity*  PChar     = (CCharEntity*)m_PBaseEntity;
+    CCharEntity*  PChar     = static_cast<CCharEntity*>(m_PBaseEntity);
 
     switch (tele_type)
     {
@@ -2760,6 +2775,17 @@ uint32 CLuaBaseEntity::getTeleport(uint8 type)
         case TELEPORT_TYPE::CAMPAIGN_WINDY:
             return PChar->teleport.campaignWindy;
             break;
+        case TELEPORT_TYPE::ABYSSEA_CONFLUX:
+        {
+            uint8 abysseaRegion = abysseaRegionObj.is<uint8>() ? abysseaRegionObj.as<uint8>() : MAX_ABYSSEAZONES;
+
+            if (abysseaRegion >= MAX_ABYSSEAZONES)
+            {
+                return 0;
+            }
+
+            return PChar->teleport.abysseaConflux[abysseaRegion];
+        }
         default:
             ShowError("LuaBaseEntity::getteleport : Parameter 1 out of bounds.");
     }
@@ -4387,21 +4413,6 @@ std::string CLuaBaseEntity::getName()
 }
 
 /************************************************************************
- *  Function: setName()
- *  Purpose : Sets the name of the entity.
- *  Example : mob:setName("NewName")
- *  Note    : This will only apply to entities whose targid's are in a range
- *          : that will allow their names to be changed: Trusts, Pets,
- *          : Dynamic Entities etc.
- ************************************************************************/
-
-void CLuaBaseEntity::setName(std::string const& name)
-{
-    m_PBaseEntity->name = name;
-    m_PBaseEntity->updatemask |= UPDATE_NAME;
-}
-
-/************************************************************************
  *  Function: getPacketName()
  *  Purpose : Returns the string packet name of the character
  *  Example : mob:getPacketName()
@@ -4413,18 +4424,27 @@ std::string CLuaBaseEntity::getPacketName()
 }
 
 /************************************************************************
- *  Function: setPacketName()
- *  Purpose : Sets the packet name of the entity.
- *  Example : mob:getPacketName("NewName")
- *  Note    : This will only apply to entities whose targid's are in a range
- *          : that will allow their packet names to be changed: Trusts, Pets,
- *          : Dynamic Entities etc.
+ *  Function: renameEntity()
+ *  Purpose : Overrides the visible name of the entity.
+ *  Example : mob:renameEntity("NewName")
+ *  Note    : This will set the packet name of the entity to a name of
+ *          : your choosing.
  ************************************************************************/
 
-void CLuaBaseEntity::setPacketName(std::string const& name)
+void CLuaBaseEntity::renameEntity(std::string const& newName)
 {
-    m_PBaseEntity->packetName = name;
-    m_PBaseEntity->updatemask |= UPDATE_NAME;
+    if (m_PBaseEntity->objtype == TYPE_PC)
+    {
+        ShowWarning("Renaming player character entities isn't supported.");
+        return;
+    }
+
+    auto oldName = m_PBaseEntity->packetName.empty() ? "<empty>" : m_PBaseEntity->packetName;
+    m_PBaseEntity->packetName = newName;
+    m_PBaseEntity->updatemask |= UPDATE_NAME | UPDATE_HP;
+    m_PBaseEntity->isRenamed = true;
+
+    ShowInfo("Renaming %s: %s -> %s", m_PBaseEntity->name, oldName, newName);
 }
 
 /************************************************************************
@@ -5580,7 +5600,7 @@ uint16 CLuaBaseEntity::getFame(sol::object const& areaObj)
 /************************************************************************
  *  Function: addFame()
  *  Purpose : Adds a specified amount of fame to the player's balance
- *  Example : player:addFame(WINDURST, 30)
+ *  Example : player:addFame(xi.quest.fame_area.WINDURST, 30)
  *  Notes   :
  ************************************************************************/
 
@@ -5638,7 +5658,7 @@ void CLuaBaseEntity::addFame(sol::object const& areaObj, uint16 fame)
 /************************************************************************
  *  Function: setFame()
  *  Purpose : Sets the fame level for a player to a specified amount
- *  Example : player:setFame(BASTOK, 1500)
+ *  Example : player:setFame(xi.quest.fame_area.BASTOK, 1500)
  *  Notes   :
  ************************************************************************/
 
@@ -6063,7 +6083,7 @@ void CLuaBaseEntity::delMission(uint8 missionLogID, uint16 missionID)
 /************************************************************************
  *  Function: getCurrentMission()
  *  Purpose : Returns the integer associated with the player's current mission
- *  Example : player:getCurrentMission(TOAU)
+ *  Example : player:getCurrentMission(xi.mission.log_id.TOAU)
  *  Notes   : Specify the area to pass a Lua table object
  ************************************************************************/
 
@@ -12283,7 +12303,7 @@ uint32 CLuaBaseEntity::getMobFlags()
 *  Function: setNpcFlags()
 *  Purpose : Manually set NPC Entity Flags
 *  Example : npc:setNpcFlags(1)
-*  Notes   : 
+*  Notes   :
 ************************************************************************/
 
 void CLuaBaseEntity::setNpcFlags(uint32 flags)
@@ -13598,7 +13618,7 @@ void CLuaBaseEntity::Register()
 
     // Object Identification
     SOL_REGISTER("getID", CLuaBaseEntity::getID);
-    SOL_REGISTER("getShortID", CLuaBaseEntity::getShortID);
+    SOL_REGISTER("getTargID", CLuaBaseEntity::getTargID);
     SOL_REGISTER("getCursorTarget", CLuaBaseEntity::getCursorTarget);
 
     SOL_REGISTER("getObjType", CLuaBaseEntity::getObjType);
@@ -13741,9 +13761,8 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getRace", CLuaBaseEntity::getRace);
     SOL_REGISTER("getGender", CLuaBaseEntity::getGender);
     SOL_REGISTER("getName", CLuaBaseEntity::getName);
-    SOL_REGISTER("setName", CLuaBaseEntity::setName);
     SOL_REGISTER("getPacketName", CLuaBaseEntity::getPacketName);
-    SOL_REGISTER("setPacketName", CLuaBaseEntity::setPacketName);
+    SOL_REGISTER("renameEntity", CLuaBaseEntity::renameEntity);
     SOL_REGISTER("hideName", CLuaBaseEntity::hideName);
     SOL_REGISTER("checkNameFlags", CLuaBaseEntity::checkNameFlags);
     SOL_REGISTER("getModelId", CLuaBaseEntity::getModelId);

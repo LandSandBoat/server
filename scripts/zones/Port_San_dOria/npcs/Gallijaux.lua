@@ -27,13 +27,13 @@ entity.onTrade = function(player, npc, trade)
     if (MoatCarp + ForestCarp > 0 and MoatCarp + ForestCarp == count) then
         if (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_RIVALRY) == QUEST_ACCEPTED and totalFish >= 10000) then -- ultimate reward
             player:tradeComplete()
-            player:addFame(SANDORIA, 30)
+            player:addFame(xi.quest.fame_area.SANDORIA, 30)
             player:addGil((xi.settings.GIL_RATE * 10 * MoatCarp) + (xi.settings.GIL_RATE * 15 * ForestCarp))
             player:messageSpecial(ID.text.GIL_OBTAINED, MoatCarp*10 + ForestCarp*15)
             player:startEvent(303)
         elseif (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_RIVALRY) >= QUEST_ACCEPTED) then -- regular turn-ins. Still allowed after completion of the quest.
             player:tradeComplete()
-            player:addFame(SANDORIA, 30)
+            player:addFame(xi.quest.fame_area.SANDORIA, 30)
             player:addGil((xi.settings.GIL_RATE * 10 * MoatCarp) + (xi.settings.GIL_RATE * 15 * ForestCarp))
             player:setCharVar("theCompetitionFishCountVar", totalFish)
             player:startEvent(301)

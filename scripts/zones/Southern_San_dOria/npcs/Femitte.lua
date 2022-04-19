@@ -22,7 +22,7 @@ entity.onTrigger = function(player, npc)
 
     if (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatSandy, 3)) then
         player:startEvent(807)
-    elseif (player:getFameLevel(SANDORIA) >= 4 and DistantLoyalties == 0) then
+    elseif (player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 4 and DistantLoyalties == 0) then
         player:startEvent(663)
     elseif (DistantLoyalties == 1 and DistantLoyaltiesProgress == 1) then
         player:startEvent(664)

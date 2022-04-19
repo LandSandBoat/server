@@ -40,7 +40,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(5088)
 
     -- STANDARD DIALOGS
-    elseif (player:getCurrentMission(SOA) >= xi.mission.id.soa.LIFE_ON_THE_FRONTIER) then
+    elseif (player:getCurrentMission(xi.mission.log_id.SOA) >= xi.mission.id.soa.LIFE_ON_THE_FRONTIER) then
         player:startEvent(588) -- Standard dialogue
     else
         player:startEvent(531) -- Dialogue prior to joining colonization effort

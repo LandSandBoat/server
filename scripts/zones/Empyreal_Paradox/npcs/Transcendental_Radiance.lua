@@ -20,7 +20,7 @@ entity.onTrigger = function(player, npc)
     -- player:setCharVar("PromathiaStatus",3)
 
     if
-        player:getCurrentMission(COP) == xi.mission.id.cop.DAWN and
+        player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.DAWN and
         player:getCharVar("PromathiaStatus") == 1
     then
         player:startEvent(2)

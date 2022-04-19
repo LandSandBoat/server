@@ -41,7 +41,7 @@ entity.onEventFinish = function(player, csid, option)
         local reward = 13960 + questJob
 
         if
-            npcUtil.completeQuest(player, JEUNO, quest, {
+            npcUtil.completeQuest(player, xi.quest.log_id.JEUNO, quest, {
                 item = reward,
                 var = {"BorghertzCS", "BorghertzAlreadyActiveWithJob"},
             })

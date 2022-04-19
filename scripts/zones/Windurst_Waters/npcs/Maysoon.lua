@@ -40,7 +40,7 @@ entity.onEventFinish = function(player, csid, option)
         player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.HOIST_THE_JELLY_ROGER)
         player:addKeyItem(xi.ki.SUPER_SOUP_POT)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SUPER_SOUP_POT)
-        player:addFame(WINDURST, 30)
+        player:addFame(xi.quest.fame_area.WINDURST, 30)
         player:tradeComplete()
     end
 end
