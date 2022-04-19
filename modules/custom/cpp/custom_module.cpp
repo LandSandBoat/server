@@ -5,11 +5,14 @@ class CustomCPPModule : public CPPModule
     // Required
     void OnInit() override
     {
+        TracyZoneScoped;
         // Called at the end of on_init
 
-        // "lua" and "sql" are available inside this class
+        // Regular logging is available
+        //ShowInfo("Hello from CustomCPPModule!");
 
-        lua["print"]("Hello!");
+        // "lua" and "sql" are available inside this class
+        //lua["print"]("Hello from CustomCPPModule's Lua!");
 
         // Register custom bindings
         /*
@@ -31,31 +34,33 @@ class CustomCPPModule : public CPPModule
             // Do stuff
         }
         */
-
-       sql->NextRow();
     }
 
     // Optional
-    void OnZoneTick() override
+    void OnZoneTick(CZone* PZone) override
     {
+        TracyZoneScoped;
         // Called every 400ms, once for each zone
     }
 
     // Optional
     void OnTimeServerTick() override
     {
+        TracyZoneScoped;
         // Called every 2400ms
     }
 
     // Optional
-    void OnCharZoneIn() override
+    void OnCharZoneIn(CCharEntity* PChar) override
     {
+        TracyZoneScoped;
         // Called after a character has zoning in
     }
 
     // Optional
-    void OnCharZoneOut() override
+    void OnCharZoneOut(CCharEntity* PChar) override
     {
+        TracyZoneScoped;
         // Called when a character is about to zone out
     }
 };

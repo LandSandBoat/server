@@ -51,6 +51,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "utils/battlefieldutils.h"
 #include "utils/battleutils.h"
 #include "utils/charutils.h"
+#include "utils/moduleutils.h"
 #include "utils/petutils.h"
 #include "utils/synthutils.h"
 #include "utils/zoneutils.h"
@@ -1249,6 +1250,8 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_regions)
     {
         m_EffectCheckTime = m_EffectCheckTime + 3s > tick ? m_EffectCheckTime + 3s : tick + 3s;
     }
+
+    moduleutils::OnZoneTick(m_zone);
 }
 
 CZone* CZoneEntities::GetZone()
