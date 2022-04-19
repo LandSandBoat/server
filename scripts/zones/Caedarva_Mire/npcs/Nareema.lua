@@ -17,19 +17,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local toauMission = player:getCurrentMission(TOAU)
-    local beginnings = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.BEGINNINGS)
-
-    -- BEGINNINGS
-    if (beginnings == QUEST_ACCEPTED) then
-        if (not player:hasKeyItem(xi.ki.BRAND_OF_THE_STONESERPENT)) then
-            player:startEvent(12) -- brands you
-        else
-            player:startEvent(13) -- blue muddies the purest waters
-        end
+    local toauMission = player:getCurrentMission(xi.mission.log_id.TOAU)
 
     -- ASSAULT
-    elseif (toauMission >= xi.mission.id.toau.PRESIDENT_SALAHEEM) then
+    if (toauMission >= xi.mission.id.toau.PRESIDENT_SALAHEEM) then
         local IPpoint = player:getCurrency("imperial_standing")
         if (player:hasKeyItem(xi.ki.LEUJAOAM_ASSAULT_ORDERS) and player:hasKeyItem(xi.ki.ASSAULT_ARMBAND) == false) then
             player:startEvent(149, 50, IPpoint)
@@ -48,13 +39,8 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    -- BEGINNINGS
-    if (csid == 12) then
-        player:addKeyItem(xi.ki.BRAND_OF_THE_STONESERPENT)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.BRAND_OF_THE_STONESERPENT)
-
     -- ASSAULT
-    elseif (csid == 149 and option == 1) then
+    if (csid == 149 and option == 1) then
         player:delCurrency("imperial_standing", 50)
         player:addKeyItem(xi.ki.ASSAULT_ARMBAND)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.ASSAULT_ARMBAND)

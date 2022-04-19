@@ -21,7 +21,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local pFame = player:getFameLevel(BASTOK)
+    local pFame = player:getFameLevel(xi.quest.fame_area.BASTOK)
     local FatherFigure = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.FATHER_FIGURE)
     local TheReturn = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_RETURN_OF_THE_ADVENTURER)
 
@@ -46,7 +46,7 @@ entity.onEventFinish = function(player, csid, option)
             player:addTitle(xi.title.KULATZ_BRIDGE_COMPANION)
             player:addItem(12498)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 12498)
-            player:addFame(BASTOK, 80)
+            player:addFame(xi.quest.fame_area.BASTOK, 80)
             player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_RETURN_OF_THE_ADVENTURER)
         else
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 12498)

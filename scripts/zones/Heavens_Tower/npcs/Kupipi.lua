@@ -76,7 +76,7 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 437 then
         player:delKeyItem(xi.ki.GREEN_INSTITUTE_CARD)
         player:messageSpecial(ID.text.KEYITEM_LOST, xi.ki.GREEN_INSTITUTE_CARD)
-        npcUtil.completeQuest(player, WINDURST, xi.quest.id.windurst.TRUST_WINDURST, {
+        npcUtil.completeQuest(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.TRUST_WINDURST, {
             ki = xi.ki.WINDURST_TRUST_PERMIT,
             title = xi.title.THE_TRUSTWORTHY,
             var = "WindurstFirstTrust" })
@@ -86,7 +86,7 @@ entity.onEventFinish = function(player, csid, option)
         player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, 898)
         player:delKeyItem(xi.ki.GREEN_INSTITUTE_CARD)
         player:messageSpecial(ID.text.KEYITEM_LOST, xi.ki.GREEN_INSTITUTE_CARD)
-        npcUtil.completeQuest(player, WINDURST, xi.quest.id.windurst.TRUST_WINDURST, {
+        npcUtil.completeQuest(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.TRUST_WINDURST, {
             ki = xi.ki.WINDURST_TRUST_PERMIT })
     end
 end

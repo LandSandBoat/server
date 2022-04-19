@@ -27,7 +27,7 @@ zone_object.onZoneIn = function(player, prevZone)
 
     -- BORN OF HER NIGHTMARES
     if
-        player:getCurrentMission(ACP) == xi.mission.id.acp.BORN_OF_HER_NIGHTMARES and
+        player:getCurrentMission(xi.mission.log_id.ACP) == xi.mission.id.acp.BORN_OF_HER_NIGHTMARES and
         prevZone == xi.zone.QUFIM_ISLAND
     then
         cs = 34

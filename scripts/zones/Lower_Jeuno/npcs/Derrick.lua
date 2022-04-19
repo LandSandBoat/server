@@ -114,7 +114,7 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("saveTheClockTowerNPCz1", 0)
         player:setCharVar("saveTheClockTowerNPCz2", 0)
         player:addTitle(xi.title.CLOCK_TOWER_PRESERVATIONIST)
-        player:addFame(JEUNO, 30)
+        player:addFame(xi.quest.fame_area.JEUNO, 30)
         player:tradeComplete()
         player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SAVE_THE_CLOCK_TOWER)
     end

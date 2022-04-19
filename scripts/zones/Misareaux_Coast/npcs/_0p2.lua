@@ -13,7 +13,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local copCurrentMission = player:getCurrentMission(COP)
+    local copCurrentMission = player:getCurrentMission(xi.mission.log_id.COP)
     local copMissions = xi.mission.id.cop
     local copMissionStatus = player:getCharVar("PromathiaStatus")
 

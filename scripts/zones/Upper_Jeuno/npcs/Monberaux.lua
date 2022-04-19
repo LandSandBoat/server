@@ -48,18 +48,6 @@ entity.onTrigger = function(player, npc)
     local CooksPride = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COOK_S_PRIDE)
 
     if
-        player:getCurrentMission(COP) == xi.mission.id.cop.THREE_PATHS and
-        player:getCharVar("COP_Tenzen_s_Path") == 2
-    then
-        player:startEvent(74)
-
-    elseif
-        player:getCurrentMission(COP) == xi.mission.id.cop.THREE_PATHS and
-        player:getCharVar("COP_Tenzen_s_Path") == 4
-    then
-        player:startEvent(6)
-
-    elseif
         CooksPride == QUEST_COMPLETED and
         TheLostCardien == QUEST_AVAILABLE and
         player:getCharVar("theLostCardianVar") == 2
@@ -106,13 +94,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 6 then
-        player:setCharVar("COP_Tenzen_s_Path", 5)
-    elseif csid == 74 then
-        player:setCharVar("COP_Tenzen_s_Path", 3)
-        player:addKeyItem(xi.ki.ENVELOPE_FROM_MONBERAUX)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.ENVELOPE_FROM_MONBERAUX)
-    elseif csid == 91 then
+    if csid == 91 then
         player:addCharVar("saveTheClockTowerVar", 1)
         player:addCharVar("saveTheClockTowerNPCz1", 4)
     elseif
@@ -125,7 +107,7 @@ entity.onEventFinish = function(player, csid, option)
         player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE*2100)
         player:addKeyItem(xi.ki.TWO_OF_SWORDS)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TWO_OF_SWORDS) -- Two of Swords (Key Item)
-        player:addFame(JEUNO, 30)
+        player:addFame(xi.quest.fame_area.JEUNO, 30)
         player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_LOST_CARDIAN)
         player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_KIND_CARDIAN) -- Start next quest "THE_KING_CARDIAN"
     elseif csid == 33 and option == 1 then

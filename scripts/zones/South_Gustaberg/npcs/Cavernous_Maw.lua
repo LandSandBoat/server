@@ -19,7 +19,7 @@ entity.onTrigger = function(player, npc)
         if
             player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.DAWN_OF_DEATH) == QUEST_ACCEPTED and
             player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_BEAKED_BLUSTERER) == QUEST_AVAILABLE and
-            xi.abyssea.getTravStonesTotal(player) >= 1
+            xi.abyssea.getHeldTraverserStones(player) >= 1
         then
             player:startEvent(0)
         else

@@ -26,7 +26,7 @@ quest.sections = {
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE
-                and player:getQuestStatus(JEUNO, BLIGHTED_GLOOM) == QUEST_COMPLETED
+                and player:getQuestStatus(xi.quest.log_id.JEUNO, BLIGHTED_GLOOM) == QUEST_COMPLETED
                 and player:getFellowValue("bond") >= 65
         end,
 

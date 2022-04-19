@@ -19,6 +19,7 @@ local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_ROAD_TO_AHT
 quest.reward =
 {
     fame = 30,
+    fameArea = xi.quest.fame_area.JEUNO,
 }
 
 local beginnerList =
@@ -96,6 +97,7 @@ local function handleSelectionEventFinish(player, csid, option, npc)
     then
         if quest:complete(player) then
             npcUtil.giveKeyItem(player, xi.ki.BOARDING_PERMIT)
+            npcUtil.completeMission(player, xi.mission.log_id.ROV, xi.mission.id.rov.INESCAPABLE_BINDS, { nextMission = xi.mission.id.rov.DESERT_WINDS, })
         end
     -- Let me think about it.
     elseif option == 2 then

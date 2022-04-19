@@ -40,7 +40,7 @@ entity.onEventFinish = function(player, csid, option)
         player:addQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.EVIL_AT_THE_INLET)
         npcUtil.giveKeyItem(player, xi.ki.EVIL_WARDING_SEAL)
     elseif csid == 109 then
-        npcUtil.completeQuest(player, CRYSTAL_WAR, xi.quest.id.crystalWar.EVIL_AT_THE_INLET, {item = 4687})
+        npcUtil.completeQuest(player, xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.EVIL_AT_THE_INLET, {item = 4687})
     end
 end
 

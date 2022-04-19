@@ -30,7 +30,7 @@ entity.onTrigger = function(player, npc)
     if
         teachersPet == QUEST_COMPLETED and
         makingTheGrade == QUEST_AVAILABLE and
-        player:getFameLevel(WINDURST) >= 3 and
+        player:getFameLevel(xi.quest.fame_area.WINDURST) >= 3 and
         letSleepingDogsLie ~= QUEST_ACCEPTED
     then
         player:startEvent(442)
@@ -74,9 +74,10 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("QuestMakingTheGrade_prog", 1)
     elseif
         csid == 458 and
-        npcUtil.completeQuest(player, WINDURST, xi.quest.id.windurst.MAKING_THE_GRADE, {
+        npcUtil.completeQuest(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_THE_GRADE, {
             item = 4855,
             fame = 75,
+            fameArea = xi.quest.fame_area.WINDURST,
             var = "QuestMakingTheGrade_prog",
         })
     then

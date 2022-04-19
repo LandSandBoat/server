@@ -30,7 +30,7 @@ entity.onTrigger = function(player, npc)
 
     elseif
         Rivals == QUEST_AVAILABLE and
-        player:getFameLevel(BASTOK) >= 3
+        player:getFameLevel(xi.quest.fame_area.BASTOK) >= 3
     then
         player:startEvent(93)
 
@@ -55,7 +55,7 @@ entity.onEventFinish = function(player, csid, option)
             player:addTitle(xi.title.CONTEST_RIGGER)
             player:addItem(13571)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 13571)
-            player:addFame(BASTOK, 30)
+            player:addFame(xi.quest.fame_area.BASTOK, 30)
             player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.RIVALS)
         end
     end

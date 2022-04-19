@@ -38,7 +38,7 @@ end
 entity.onEventFinish = function(player, csid, option)
     if csid == 105 then
         player:addQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.REQUIEM_FOR_THE_DEPARTED)
-    elseif csid == 107 and npcUtil.completeQuest(player, CRYSTAL_WAR, xi.quest.id.crystalWar.REQUIEM_FOR_THE_DEPARTED, {item = 4689}) then
+    elseif csid == 107 and npcUtil.completeQuest(player, xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.REQUIEM_FOR_THE_DEPARTED, {item = 4689}) then
         player:delKeyItem(xi.ki.SHEAF_OF_HANDMADE_INCENSE)
     end
 end

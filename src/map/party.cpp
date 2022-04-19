@@ -174,6 +174,14 @@ void CParty::AssignPartyRole(int8* MemberName, uint8 role)
 {
     XI_DEBUG_BREAK_IF(m_PartyType != PARTY_PCS);
 
+    // Make sure that the the character is actually a part of this party
+    int ret = sql->Query("SELECT chars.charid FROM chars \
+                          JOIN accounts_parties ON accounts_parties.charid = chars.charid WHERE charname = '%s' AND partyid = %u;", MemberName, m_PartyID);
+    if (ret == SQL_ERROR || sql->NumRows() == 0)
+    {
+        return;
+    }
+
     switch (role)
     {
         case 0:
@@ -837,6 +845,7 @@ void CParty::ReloadPartyMembers(CCharEntity* PChar)
     int alliance = 0;
 
     auto  info = GetPartyInfo();
+    RefreshFlags(info);
     uint8 j    = 0;
     for (auto&& memberinfo : info)
     {
@@ -1215,6 +1224,38 @@ void CParty::RefreshSync()
 void CParty::SetPartyNumber(uint8 number)
 {
     m_PartyNumber = number;
+}
+
+bool CParty::HasOnlyOneMember() const
+{
+    if (members.size() != 1)
+    {
+        return false;
+    }
+
+    // Load party size to make sure that there is only one member in the party across all servers
+    return LoadPartySize() == 1;
+}
+
+bool CParty::IsFull() const
+{
+    if (members.size() > 5)
+    {
+        return true;
+    }
+
+    // Load party size to make sure that that all members are accounted for across all servers
+    return LoadPartySize() > 5;
+}
+
+uint32 CParty::LoadPartySize() const
+{
+    int ret = sql->Query("SELECT COUNT(*) FROM accounts_parties WHERE partyid = %d;", m_PartyID);
+    if (ret != SQL_ERROR && sql->NextRow() == SQL_SUCCESS)
+    {
+        return sql->GetUIntData(0);
+    }
+    return 0;
 }
 
 uint32 CParty::GetTimeLastMemberJoined()

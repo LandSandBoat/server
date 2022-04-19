@@ -23,6 +23,7 @@ local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.LAKESIDE_MINUET
 quest.reward =
 {
     fame = 30,
+    fameArea = xi.quest.fame_area.JEUNO,
     title = xi.title.TROUPE_BRILIOTH_DANCER,
 }
 

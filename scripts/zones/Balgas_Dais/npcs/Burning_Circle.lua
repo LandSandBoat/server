@@ -4,32 +4,24 @@
 -- Balga's Dais Burning Circle
 -- !pos 299 -123 345 146
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/bcnm")
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if TradeBCNM(player, npc, trade) then
-        return
-    end
+    xi.bcnm.onTrade(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if EventTriggerBCNM(player, npc) then
-        return
-    end
+    xi.bcnm.onTrigger(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option)
-    local res = EventUpdateBCNM(player, csid, option)
-    return res
+    xi.bcnm.onEventUpdate(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if EventFinishBCNM(player, csid, option) then
-        return
-    end
+    xi.bcnm.onEventFinish(player, csid, option)
 end
 
 return entity

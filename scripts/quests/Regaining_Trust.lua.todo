@@ -37,7 +37,7 @@ quest.sections = {
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE
-                and player:getQuestStatus(OTHER_AREAS_LOG, PICTURE_PERFECT) == QUEST_COMPLETED
+                and player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, PICTURE_PERFECT) == QUEST_COMPLETED
                 and player:getFellowValue("level") >= 51
                 and player:getFellowValue("bond") >= 55
         end,

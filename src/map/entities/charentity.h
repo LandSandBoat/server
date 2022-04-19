@@ -34,10 +34,11 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "battleentity.h"
 #include "petentity.h"
 
-#define MAX_QUESTAREA   11
-#define MAX_QUESTID     256
-#define MAX_MISSIONAREA 15
-#define MAX_MISSIONID   851
+#define MAX_QUESTAREA    11
+#define MAX_QUESTID      256
+#define MAX_MISSIONAREA  15
+#define MAX_MISSIONID    851
+#define MAX_ABYSSEAZONES 9
 
 class CItemWeapon;
 class CTrustEntity;
@@ -93,6 +94,7 @@ struct Teleport_t
     uint32      campaignWindy;
     Telepoint_t homepoint;
     Telepoint_t survival;
+    uint8       abysseaConflux[MAX_ABYSSEAZONES];
 };
 
 struct PetInfo_t
@@ -211,8 +213,9 @@ public:
 
     skills_t   RealSkills; // структура всех реальных умений персонажа, с точностью до 0.1 и не ограниченных уровнем
 
-    nameflags_t nameflags;           // флаги перед именем персонажа
+    nameflags_t nameflags;           // Flags in front of the character's name
     nameflags_t menuConfigFlags;     // These flags are used for MenuConfig packets. Some nameflags values are duplicated.
+    uint64      chatFilterFlags;     // Chat filter flags, raw object bytes from incoming packet
     uint32      lastOnline{ 0 };     // UTC Unix Timestamp of the last time char zoned or logged out
     bool        isNewPlayer() const; // Checks if new player bit is unset.
 
@@ -356,7 +359,8 @@ public:
     uint8      m_weaknessLvl;    // tracks if the player was previously weakend
     bool       m_hasArise;       // checks if the white magic spell arise was cast on the player and a re-raise effect should be applied
     uint8      m_hasAutoTarget;  // возможность использования AutoTarget функции
-    position_t m_StartActionPos; // позиция начала действия (использование предмета, начало стрельбы, позиция tractor)
+    position_t m_StartActionPos; // action start position (item use, shooting start, tractor position)
+    position_t m_ActionOffsetPos; // action offset position from the action packet(currently only used for repositioning of luopans)
 
     location_t m_previousLocation;
 

@@ -30,7 +30,7 @@ entity.onTrigger = function(player, npc)
                 trapDoor:openDoor(6)
             end
 
-            if player:getCurrentMission(WINDURST) == xi.mission.id.windurst.TO_EACH_HIS_OWN_RIGHT and player:getMissionStatus(player:getNation()) == 3 then
+            if player:getCurrentMission(xi.mission.log_id.WINDURST) == xi.mission.id.windurst.TO_EACH_HIS_OWN_RIGHT and player:getMissionStatus(player:getNation()) == 3 then
                 player:startEvent(43)
             end
         end

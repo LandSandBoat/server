@@ -22,11 +22,11 @@ battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
     if leavecode == xi.battlefield.leaveCode.WON then
         local _, clearTime, partySize = battlefield:getRecord()
 
-        if player:getCurrentMission(ZILART) == xi.mission.id.zilart.THROUGH_THE_QUICKSAND_CAVES then
+        if player:getCurrentMission(xi.mission.log_id.ZILART) == xi.mission.id.zilart.THROUGH_THE_QUICKSAND_CAVES then
             player:setLocalVar("battlefieldWin", battlefield:getID())
         end
 
-        local arg8 = (player:getCurrentMission(ZILART) ~= xi.mission.id.zilart.THROUGH_THE_QUICKSAND_CAVES) and 1 or 0
+        local arg8 = (player:getCurrentMission(xi.mission.log_id.ZILART) ~= xi.mission.id.zilart.THROUGH_THE_QUICKSAND_CAVES) and 1 or 0
         player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar("[cs]bit"), arg8)
     elseif leavecode == xi.battlefield.leaveCode.LOST then
         player:startEvent(32002)

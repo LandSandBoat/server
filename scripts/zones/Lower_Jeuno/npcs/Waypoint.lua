@@ -14,7 +14,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local adoulinAccess = player:getCurrentMission(SOA) > xi.mission.id.soa.ONWARD_TO_ADOULIN
+    local adoulinAccess = player:getCurrentMission(xi.mission.log_id.SOA) > xi.mission.id.soa.ONWARD_TO_ADOULIN
     if adoulinAccess then
         player:startEvent(10121)
     else

@@ -193,7 +193,7 @@ xi.effect =
     CHARM_II                 = 17,
     GRADUAL_PETRIFICATION    = 18,
     SLEEP_II                 = 19,
-    CURSE_II                 = 20,
+    CURSE_II                 = 20, -- Zombie
     ADDLE                    = 21,
     INTIMIDATE               = 22,
     KAUSTRA                  = 23,
@@ -888,6 +888,7 @@ xi.effectFlag =
     INFLUENCE       = 0x1000000,
     OFFLINE_TICK    = 0x2000000,
     AURA            = 0x4000000,
+    HIDE_TIMER      = 0x8000000,
 }
 
 -----------------------------------
@@ -1033,6 +1034,8 @@ xi.mod =
     STRING                          = 120,
     WIND                            = 121,
     BLUE                            = 122,
+    GEOMANCY_SKILL                  = 1026,
+    HANDBELL_SKILL                  = 1027,
     CHAKRA_MULT                     = 123, -- Chakra multiplier increase
     CHAKRA_REMOVAL                  = 124, -- Extra statuses removed by Chakra
     SUPPRESS_OVERLOAD               = 125, -- Kenkonken "Suppresses Overload" mod. Unclear how this works exactly. Requires testing on retail.
@@ -1216,6 +1219,9 @@ xi.mod =
     SPIKES_DMG                      = 344,
     TP_BONUS                        = 345,
     PERPETUATION_REDUCTION          = 346,
+
+    -- Geomancer
+    FULL_CIRCLE                     = 1025, -- Increases the initial multiplier on MP returned via Full Circle
 
     -- Rune Fencer
     ENHANCES_BATTUTA            = 1004, -- Used by RUN merit point cat 2 to add +N% bonus damage to parry spikes during Battuta effect
@@ -1619,7 +1625,7 @@ xi.mod =
     DEFENDER_DURATION               = 956, -- Defender Duration
     CARDINAL_CHANT                  = 959,
     INDI_DURATION                   = 960,
-    GEOMANCY                        = 961,
+    GEOMANCY_BONUS                  = 961, -- Used to increase potency of "Geomancy +" items (only the highest value is counted)
     WIDENED_COMPASS                 = 962,
     MENDING_HALATION                = 968,
     RADIAL_ARCANA                   = 969,
@@ -2572,7 +2578,7 @@ xi.skill =
     BLUE_MAGIC = 43,
     GEOMANCY = 44,
     HANDBELL = 45,
-    -- 45~47 unused
+    -- 46~47 unused
 
     -- Crafting Skills
     FISHING      = 48,

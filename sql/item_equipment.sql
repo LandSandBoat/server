@@ -10480,7 +10480,7 @@ INSERT INTO `item_equipment` VALUES (21368,'bestas_bane',99,119,299040,27,0,0,4,
 INSERT INTO `item_equipment` VALUES (21369,'moggie_goodie_bag',1,0,4194303,0,0,0,8,0,0);
 INSERT INTO `item_equipment` VALUES (21370,'gobbie_goodie_bag',1,0,4194303,0,0,0,8,0,0);
 INSERT INTO `item_equipment` VALUES (21371,'ginsen',99,0,2473971,0,0,0,8,0,0);
-INSERT INTO `item_equipment` VALUES (21372,'dunna',99,0,1048576,0,0,0,4,0,0);
+INSERT INTO `item_equipment` VALUES (21372,'dunna',99,0,1048576,121,0,0,4,0,0);
 INSERT INTO `item_equipment` VALUES (21373,'sihirik',99,0,30639,0,0,0,8,0,0);
 INSERT INTO `item_equipment` VALUES (21374,'paeapua',99,0,2385,0,0,0,8,0,0);
 INSERT INTO `item_equipment` VALUES (21375,'magneto',99,117,131072,0,0,0,4,0,0);

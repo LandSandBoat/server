@@ -153,18 +153,20 @@ enum class Mod
     PARRY             = 110, // Parry Skill
 
     // Magic Skills
-    DIVINE    = 111, // Divine Magic Skill
-    HEALING   = 112, // Healing Magic Skill
-    ENHANCE   = 113, // Enhancing Magic Skill
-    ENFEEBLE  = 114, // Enfeebling Magic Skill
-    ELEM      = 115, // Elemental Magic Skill
-    DARK      = 116, // Dark Magic Skill
-    SUMMONING = 117, // Summoning Magic Skill
-    NINJUTSU  = 118, // Ninjutsu Magic Skill
-    SINGING   = 119, // Singing Magic Skill
-    STRING    = 120, // String Magic Skill
-    WIND      = 121, // Wind Magic Skill
-    BLUE      = 122, // Blue Magic Skill
+    DIVINE    = 111,  // Divine Magic Skill
+    HEALING   = 112,  // Healing Magic Skill
+    ENHANCE   = 113,  // Enhancing Magic Skill
+    ENFEEBLE  = 114,  // Enfeebling Magic Skill
+    ELEM      = 115,  // Elemental Magic Skill
+    DARK      = 116,  // Dark Magic Skill
+    SUMMONING = 117,  // Summoning Magic Skill
+    NINJUTSU  = 118,  // Ninjutsu Magic Skill
+    SINGING   = 119,  // Singing Magic Skill
+    STRING    = 120,  // String Magic Skill
+    WIND      = 121,  // Wind Magic Skill
+    BLUE      = 122,  // Blue Magic Skill
+    GEOMANCY  = 1026, // Geomancy Magic Skill
+    HANDBELL  = 1027, // Handbell Magic SKill
 
     // Synthesis Skills
     FISH      = 127, // Fishing Skill
@@ -570,12 +572,13 @@ enum class Mod
     // Geo
     CARDINAL_CHANT       = 959,
     INDI_DURATION        = 960,
-    GEOMANCY             = 961,
+    GEOMANCY_BONUS       = 961, // Used to increase potency of "Geomancy +" items (only the highest value is counted)
     WIDENED_COMPASS      = 962,
     MENDING_HALATION     = 968,
     RADIAL_ARCANA        = 969,
     CURATIVE_RECANTATION = 970,
     PRIMEVAL_ZEAL        = 971,
+    FULL_CIRCLE          = 1025, // Increases the initial multiplier on MP returned via Full Circle
 
     ENSPELL           = 341, // stores the type of enspell active (0 if nothing)
     ENSPELL_DMG       = 343, // stores the base damage of the enspell before reductions
@@ -881,7 +884,7 @@ enum class Mod
     // 888
     // 936
     //
-    // SPARE = 1025, and onward
+    // SPARE = 1028, and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it
@@ -922,7 +925,8 @@ enum class PetModType
     Harlequin  = 4,
     Valoredge  = 5,
     Sharpshot  = 6,
-    Stormwaker = 7
+    Stormwaker = 7,
+    Luopan     = 8
 };
 
 class CPetModifier : public CModifier

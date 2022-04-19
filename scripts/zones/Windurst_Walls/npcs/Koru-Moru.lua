@@ -62,7 +62,7 @@ entity.onTrigger = function(player, npc)
     local CarbuncleDebacle = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CARBUNCLE_DEBACLE)
     local CarbuncleDebacleProgress = player:getCharVar("CarbuncleDebacleProgress")
 
-    if blastFromPast == QUEST_AVAILABLE and qStarStruck == QUEST_COMPLETED and player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CLASS_REUNION) ~= QUEST_ACCEPTED and player:getFameLevel(WINDURST) >= 3 and player:needToZone() == false then
+    if blastFromPast == QUEST_AVAILABLE and qStarStruck == QUEST_COMPLETED and player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CLASS_REUNION) ~= QUEST_ACCEPTED and player:getFameLevel(xi.quest.fame_area.WINDURST) >= 3 and player:needToZone() == false then
         player:startEvent(214)
     elseif blastFromPast == QUEST_ACCEPTED and blastProg >= 2 then
         player:startEvent(215)
@@ -141,7 +141,7 @@ entity.onEventFinish = function(player, csid, option)
         player:messageSpecial(ID.text.ITEM_OBTAINED, 12502)
         player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.STAR_STRUCK)
         player:needToZone(true)
-        player:addFame(WINDURST, 20)
+        player:addFame(xi.quest.fame_area.WINDURST, 20)
     elseif csid == 199 then
         player:tradeComplete()
         player:messageSpecial(ID.text.GIL_OBTAINED, 50)
@@ -157,7 +157,7 @@ entity.onEventFinish = function(player, csid, option)
         player:addItem(17030)
         player:messageSpecial(ID.text.ITEM_OBTAINED, 17030)
         player:addTitle(xi.title.FOSSILIZED_SEA_FARER)
-        player:addFame(WINDURST, 30)
+        player:addFame(xi.quest.fame_area.WINDURST, 30)
         player:needToZone(true)
     elseif csid == 404 then
         if player:getFreeSlotsCount() ~= 0 then
@@ -166,7 +166,7 @@ entity.onEventFinish = function(player, csid, option)
             player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_PUPPET_MASTER)
             player:setCharVar("ThePuppetMasterProgress", 0)
             player:needToZone(true)
-            player:addFame(WINDURST, 20)
+            player:addFame(xi.quest.fame_area.WINDURST, 20)
         else
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 17532)
         end
@@ -185,7 +185,7 @@ entity.onEventFinish = function(player, csid, option)
             player:setCharVar("ClassReunion_TalkedToFurakku", 0)
             player:setCharVar("ClassReunion_TalkedToFupepe", 0)
             player:needToZone(true)
-            player:addFame(WINDURST, 40)
+            player:addFame(xi.quest.fame_area.WINDURST, 40)
         else
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 14228)
         end
@@ -201,7 +201,7 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 12520)
             player:addTitle(xi.title.PARAGON_OF_SUMMONER_EXCELLENCE)
             player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CARBUNCLE_DEBACLE)
-            player:addFame(WINDURST, 60)
+            player:addFame(xi.quest.fame_area.WINDURST, 60)
             player:setCharVar("CarbuncleDebacleProgress", 0)
             player:needToZone(true)
         else

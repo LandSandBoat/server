@@ -28,7 +28,7 @@ effect_object.onEffectTick = function(target, effect)
     local limit = math.floor((target:getBaseHP() + target:getMod(xi.mod.HP) + target:getMerit(xi.merit.MAX_HP)) / 2) +
         target:getMerit(xi.merit.MAX_SUBLIMATION) * 10 + target:getJobPointLevel(xi.jp.SUBLIMATION_EFFECT) * 3
 
-    if not (target:getHPP() < 51 ) then
+    if target:getHPP() >= 51 then
         if (target:hasStatusEffect(xi.effect.STONESKIN)) then
             local skin = target:getMod(xi.mod.STONESKIN)
             if (skin >= dmg) then --absorb all damage

@@ -84,7 +84,7 @@ entity.onTrigger = function(player, npc)
             -- Reminder for Quest: 'Hunger Strikes'
             player:startEvent(2531)
         end
-    elseif ((player:getFame(ADOULIN) >= 2) and (not player:needToZone()) and (vanaDay() > player:getCharVar("Westerly_Breeze_Wait"))) then
+    elseif ((player:getFameLevel(xi.quest.fame_area.ADOULIN) >= 2) and (not player:needToZone()) and (vanaDay() > player:getCharVar("Westerly_Breeze_Wait"))) then
         if (TS ~= QUEST_COMPLETED) then
             if (TS == QUEST_AVAILABLE) then
                 -- Starts Quest: 'The Starving'
@@ -93,7 +93,7 @@ entity.onTrigger = function(player, npc)
                 -- Reminder for Quest: 'The Starving'
                 player:startEvent(3006)
             end
-        elseif ((AMQTR ~= QUEST_COMPLETED) and (player:getFame(ADOULIN) >= 3)) then
+        elseif ((AMQTR ~= QUEST_COMPLETED) and (player:getFameLevel(xi.quest.fame_area.ADOULIN) >= 3)) then
             if (AMQTR == QUEST_AVAILABLE) then
                 -- Starts Quest: 'Always More Quoth the Ravenous'
                 player:startEvent(3010)
@@ -124,7 +124,7 @@ entity.onEventFinish = function(player, csid, option)
         player:addExp(1000 * xi.settings.EXP_RATE)
         player:addCurrency('bayld', 500 * xi.settings.BAYLD_RATE)
         player:messageSpecial(ID.text.BAYLD_OBTAINED, 500 * xi.settings.BAYLD_RATE)
-        player:addFame(ADOULIN)
+        player:addFame(xi.quest.fame_area.ADOULIN)
         player:setCharVar("Westerly_Breeze_Wait", vanaDay())
         player:needToZone(true)
 
@@ -146,7 +146,7 @@ entity.onEventFinish = function(player, csid, option)
         player:addExp(1500 * xi.settings.EXP_RATE)
         player:addCurrency('bayld', 1000 * xi.settings.BAYLD_RATE)
         player:messageSpecial(ID.text.BAYLD_OBTAINED, 1000 * xi.settings.BAYLD_RATE)
-        player:addFame(ADOULIN)
+        player:addFame(xi.quest.fame_area.ADOULIN)
         player:setCharVar("Westerly_Breeze_Wait", 0)
     elseif ((csid == 2533) or (csid == 3008) or (csid == 3014)) then
         -- Consuming wrong food item given to him during his quests

@@ -86,6 +86,9 @@ public:
     void SetSyncTarget(int8* MemberName, uint16 message); // устанавливаем цель синхронизации уровней3
     void RefreshSync();
     void SetPartyNumber(uint8 number);
+    bool HasOnlyOneMember() const;
+    bool IsFull() const;
+    uint32 LoadPartySize() const;
 
     uint32 GetTimeLastMemberJoined();
     bool   HasTrusts();

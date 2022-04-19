@@ -22,6 +22,10 @@ public:
     // @param min
     // @param max
     // @returns result
+    //
+    // Do note that max is subtracted by one as per an inconsistency in the standard, see
+    // https://bugs.llvm.org/show_bug.cgi?id=18767#c1
+    // this change results in both real and integer templates having the same min/max range
     template <typename T>
     static inline typename std::enable_if<std::is_integral<T>::value, T>::type GetRandomNumber(T min, T max)
     {
@@ -48,6 +52,10 @@ public:
     // @param min
     // @param max
     // @returns result
+    //
+    // Do note that max is subtracted by one as per an inconsistency in the standard, see
+    // https://bugs.llvm.org/show_bug.cgi?id=18767#c1
+    // this change results in both real and integer templates having the same min/max range
     template <typename T>
     static inline T GetRandomNumber(T max)
     {

@@ -35,7 +35,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if (csid == 8) then
-        if (npcUtil.completeQuest(player, JEUNO, xi.quest.id.jeuno.PAINFUL_MEMORY, {item=16766})) then
+        if (npcUtil.completeQuest(player, xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PAINFUL_MEMORY, {item=16766})) then
             player:delKeyItem(xi.ki.MERTAIRES_BRACELET)
             player:setCharVar("TrosKilled", 0)
             player:setCharVar("Tros_Timer", 0)

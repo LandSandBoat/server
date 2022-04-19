@@ -74,7 +74,7 @@ entity.onTrigger = function(player, npc)
     local evokersRing = player:hasItem(14625)
     local questday = player:getCharVar("MamaMia_date")
 
-    if mamaMia == QUEST_AVAILABLE and player:getFameLevel(NORG) >= 4 and moonlitPath == QUEST_COMPLETED then
+    if mamaMia == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.NORG) >= 4 and moonlitPath == QUEST_COMPLETED then
         player:startEvent(191) -- Start Quest "Mama Mia"
 
     elseif mamaMia == QUEST_ACCEPTED then
@@ -123,7 +123,7 @@ entity.onEventFinish = function(player, csid, option)
         else
             player:addItem(14625) -- Evokers Ring
             player:messageSpecial(ID.text.ITEM_OBTAINED, 14625) -- Evokers Ring
-            player:addFame(NORG, 30) --idk how much fame the quest adds, just left at 30 which the levi quest gave.
+            player:addFame(xi.quest.fame_area.NORG, 30) --idk how much fame the quest adds, just left at 30 which the levi quest gave.
             player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.MAMA_MIA)
             player:setCharVar("tradesMamaMia", 0)
         end

@@ -25,7 +25,7 @@ local quest = Quest:new(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.YOMI_OKUR
 quest.reward =
 {
     fame = 40,
-    fameArea = NORG,
+    fameArea = xi.quest.fame_area.NORG,
     item = xi.items.MYOCHIN_SUNE_ATE,
 }
 

@@ -84,7 +84,7 @@ entity.onTrigger = function(player, npc)
 
     -- quest is available to player, nobody is currently on it, and the hour is right
     elseif
-        player:getFameLevel(JEUNO) >= 1 and
+        player:getFameLevel(xi.quest.fame_area.JEUNO) >= 1 and
         playerOnQuestId == 0 and
         (hour >= 18 or hour < 1)
     then
@@ -141,7 +141,7 @@ entity.onEventFinish = function(player, csid, option)
                 params.ki = xi.ki.LAMP_LIGHTERS_MEMBERSHIP_CARD
             end
         end
-        npcUtil.completeQuest(player, JEUNO, xi.quest.id.jeuno.COMMUNITY_SERVICE, params)
+        npcUtil.completeQuest(player, xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COMMUNITY_SERVICE, params)
 
     elseif csid == 118 and option == 1 then
         -- player drops membership card

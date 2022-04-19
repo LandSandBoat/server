@@ -57,7 +57,7 @@ entity.onEventFinish = function(player, csid, option)
             player:addItem(16798)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 16798) -- Raven Scythe
             player:setCharVar("darkLegacyCS", 0)
-            player:addFame(BASTOK, 20)
+            player:addFame(xi.quest.fame_area.BASTOK, 20)
             player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.DARK_LEGACY)
         end
     elseif (csid == 933) then

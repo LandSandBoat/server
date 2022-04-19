@@ -42,7 +42,7 @@ CStatusEffectPacket::CStatusEffectPacket(CCharEntity* PChar)
             ref<uint16>(0x08 + (i * 0x02)) = PEffect->GetIcon();
             // this value overflows, but the client expects the overflowed timestamp and corrects it
             ref<uint32>(0x48 + (i * 0x04)) =
-                PEffect->GetDuration() == 0
+                PEffect->GetDuration() == 0 || (PEffect->GetFlag() & EFFECTFLAG_HIDE_TIMER)
                     ? 0x7FFFFFFF
                     : (((PEffect->GetDuration() -
                          (uint32)std::chrono::duration_cast<std::chrono::milliseconds>(server_clock::now() - PEffect->GetStartTime()).count()) /

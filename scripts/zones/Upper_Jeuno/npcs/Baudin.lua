@@ -97,7 +97,7 @@ entity.onEventFinish = function(player, csid, option)
             player:addItem(17041)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 17041)
             player:tradeComplete()
-            player:addFame(JEUNO, 30)
+            player:addFame(xi.quest.fame_area.JEUNO, 30)
             player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SAVE_MY_SISTER)
         end
     end

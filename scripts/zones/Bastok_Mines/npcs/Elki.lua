@@ -31,7 +31,7 @@ entity.onTrigger = function(player, npc)
     elseif
         Hearts == QUEST_COMPLETED and
         Elevenths == QUEST_AVAILABLE and
-        player:getFameLevel(BASTOK) >=2 and
+        player:getFameLevel(xi.quest.fame_area.BASTOK) >=2 and
         player:needToZone() == false
     then
         player:startEvent(43)
@@ -64,7 +64,7 @@ entity.onEventFinish = function(player, csid, option)
             player:addItem(12840)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 12840)
             player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.HEARTS_OF_MYTHRIL)
-            player:addFame(BASTOK, 80)
+            player:addFame(xi.quest.fame_area.BASTOK, 80)
             player:setCharVar("HeartsOfMythril", 0)
             player:needToZone(true)
         end

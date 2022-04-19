@@ -1395,7 +1395,14 @@ namespace petutils
 
         PPet->loc = PMaster->loc;
 
-        if (petType != PET_TYPE::LUOPAN)
+        if (petType == PET_TYPE::LUOPAN)
+        {
+            // spawn the luopan at the targets position with offsets from the action packet
+            // this is calculated in the action packet to avoid incorrect placement after casting
+            // m_ActionOffsetPos is a combination of targets pos + action offset pos
+            PPet->loc.p = dynamic_cast<CCharEntity*>(PMaster)->m_ActionOffsetPos;
+        }
+        else
         {
             // spawn me randomly around master
             PPet->loc.p = nearPosition(PMaster->loc.p, CPetController::PetRoamDistance, (float)M_PI);
@@ -1596,7 +1603,10 @@ namespace petutils
             PPet->SetMLevel(PMaster->GetMLevel());
             PPet->health.maxhp = (uint32)floor((250 * PPet->GetMLevel()) / 15);
             PPet->health.hp    = PPet->health.maxhp;
-
+            // This sets the correct visual size for the luopan as pets currently
+            // do not make use of the entity flags in the database
+            // TODO: make pets use entity flags
+            PPet->m_flags      = 0x0000008B;
             // Just sit, do nothing
             PPet->speed = 0;
         }
@@ -1704,6 +1714,10 @@ namespace petutils
                 {
                     return true;
                 }
+            }
+            if (petmod == PetModType::Luopan && PPetEntity->getPetType() == PET_TYPE::LUOPAN)
+            {
+                return true;
             }
         }
         else

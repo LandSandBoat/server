@@ -33,7 +33,7 @@ quest.sections =
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
                 player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SIGNED_IN_BLOOD) == QUEST_COMPLETED and
-                player:getFameLevel(SANDORIA) >= 4 and
+                player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 4 and
                 not player:needToZone()
         end,
 

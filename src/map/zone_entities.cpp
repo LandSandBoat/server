@@ -1103,6 +1103,8 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_regions)
     TracyZoneScoped;
     TracyZoneIString(m_zone->GetName());
 
+    luautils::OnZoneTick(this->m_zone);
+
     for (EntityList_t::const_iterator it = m_mobList.begin(); it != m_mobList.end(); ++it)
     {
         CMobEntity* PMob = (CMobEntity*)it->second;

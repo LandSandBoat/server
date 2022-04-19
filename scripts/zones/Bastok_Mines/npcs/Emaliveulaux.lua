@@ -16,7 +16,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getCurrentMission(COP) >= xi.mission.id.cop.THE_SAVAGE then
+    if player:getCurrentMission(xi.mission.log_id.COP) >= xi.mission.id.cop.THE_SAVAGE then
         if GetRegionOwner(xi.region.TAVNAZIANARCH) ~= xi.nation.BASTOK then
             player:showText(npc, ID.text.EMALIVEULAUX_CLOSED_DIALOG)
         else
@@ -30,7 +30,7 @@ entity.onTrigger = function(player, npc)
             }
 
             player:showText(npc, ID.text.EMALIVEULAUX_OPEN_DIALOG)
-            xi.shop.general(player, stock, BASTOK)
+            xi.shop.general(player, stock, xi.quest.fame_area.BASTOK)
         end
     else
         player:showText(npc, ID.text.EMALIVEULAUX_COP_NOT_COMPLETED)

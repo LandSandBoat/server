@@ -71,7 +71,7 @@ entity.onEventFinish = function(player, csid, option)
             player:delKeyItem(xi.ki.ORCISH_DRIED_FOOD)
             player:addItem(16829)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 16829) -- Fencing Degen
-            player:addFame(SANDORIA, 30)
+            player:addFame(xi.quest.fame_area.SANDORIA, 30)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_CRIMSON_TRIAL)
         end
     elseif (csid == 64) then

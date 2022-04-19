@@ -16,7 +16,7 @@ end
 entity.onTrigger = function(player, npc)
     local cCollector = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_CURSE_COLLECTOR)
 
-    if cCollector == QUEST_AVAILABLE and player:getFameLevel(BASTOK) >=4 then
+    if cCollector == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.BASTOK) >=4 then
         player:startEvent(251) -- Quest Start Dialogue
     elseif cCollector == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.CURSEPAPER) and player:getCharVar("cCollectSilence") == 1 and player:getCharVar("cCollectCurse") == 1 then
         player:startEvent(252) -- Quest Completion Dialogue
@@ -32,7 +32,7 @@ entity.onEventFinish = function(player, csid, option)
     if csid == 251 then
         player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_CURSE_COLLECTOR)
         npcUtil.giveKeyItem(player, xi.ki.CURSEPAPER)
-    elseif csid == 252 and npcUtil.completeQuest(player, BASTOK, xi.quest.id.bastok.THE_CURSE_COLLECTOR, {item = 16387, var = {"cCollectSilence", "cCollectCurse"}}) then
+    elseif csid == 252 and npcUtil.completeQuest(player, xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_CURSE_COLLECTOR, {item = 16387, var = {"cCollectSilence", "cCollectCurse"}}) then
         player:delKeyItem(xi.ki.CURSEPAPER)
     end
 end

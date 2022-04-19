@@ -16,11 +16,11 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if (player:getCurrentMission(TOAU) == xi.mission.id.toau.IMPERIAL_CORONATION) then
+    if (player:getCurrentMission(xi.mission.log_id.TOAU) == xi.mission.id.toau.IMPERIAL_CORONATION) then
         player:startEvent(3150, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-    elseif (player:getCurrentMission(TOAU) == xi.mission.id.toau.THE_EMPRESS_CROWNED) then
+    elseif (player:getCurrentMission(xi.mission.log_id.TOAU) == xi.mission.id.toau.THE_EMPRESS_CROWNED) then
         player:startEvent(3144, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-    elseif (player:getCurrentMission(TOAU) == xi.mission.id.toau.ETERNAL_MERCENARY) then
+    elseif (player:getCurrentMission(xi.mission.log_id.TOAU) == xi.mission.id.toau.ETERNAL_MERCENARY) then
         player:startEvent(3154, 0, 0, 0, 0, 0, 0, 0, 0, 0)
     else
         player:startEvent(3003, 1, 0, 0, 0, 0, 0, 0, 1, 0) -- go back to work

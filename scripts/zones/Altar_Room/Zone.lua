@@ -58,7 +58,7 @@ zone_object.onEventFinish = function(player, csid, option)
         player:setCharVar("moral", 5)
     elseif csid == 51 then
         player:setCharVar("moralrebuy", 1)
-        npcUtil.completeQuest(player, OTHER_AREAS_LOG, xi.quest.id.otherAreas.A_MORAL_MANIFEST, {
+        npcUtil.completeQuest(player, xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.A_MORAL_MANIFEST, {
             item = 748,
             var = "moral"
         })

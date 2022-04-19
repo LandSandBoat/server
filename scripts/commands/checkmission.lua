@@ -2,8 +2,9 @@
 -- func: checkmission <Log ID> <Player>
 -- desc: Prints current MissionID for the given LogID and target Player to the in game chatlog
 -----------------------------------
-
 require("scripts/globals/missions")
+local logIdHelpers = require('scripts/globals/log_ids')
+-----------------------------------
 
 cmdprops =
 {
@@ -20,7 +21,7 @@ function onTrigger(player, logId, target)
 
     -- validate logId
     local logName
-    local logInfo = GetMissionLogInfo(logId)
+    local logInfo = logIdHelpers.getMissionLogInfo(logId)
     if (logInfo == nil) then
         error(player, "Invalid logID.")
         return

@@ -13,7 +13,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local TooManyChefs = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TOO_MANY_CHEFS)
-    local pFame = player:getFameLevel(BASTOK)
+    local pFame = player:getFameLevel(xi.quest.fame_area.BASTOK)
 
     if (TooManyChefs == QUEST_AVAILABLE and pFame >= 5) then
         player:startEvent(946) -- Start Quest "Too Many Chefs"

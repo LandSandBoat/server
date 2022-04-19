@@ -50,7 +50,7 @@ entity.onTrade = function(player, npc, trade)
     local numBronze = trade:getItemQty(2184)
     local numMythril = trade:getItemQty(2186)
     local numGold = trade:getItemQty(2187)
-    if player:getCurrentMission(TOAU) >= xi.mission.id.toau.PRESIDENT_SALAHEEM then
+    if player:getCurrentMission(xi.mission.log_id.TOAU) >= xi.mission.id.toau.PRESIDENT_SALAHEEM then
         if numBronze > 0 and numMythril == 0 and numGold == 0 then
             if xi.moghouse.addMogLockerExpiryTime(player, numBronze) then
                 -- remove bronze
@@ -92,7 +92,7 @@ entity.onTrigger = function(player, npc)
     -- if < mission 2 then
     --      player:startEvent(600)
     -- else
-    if player:getCurrentMission(TOAU) >= xi.mission.id.toau.PRESIDENT_SALAHEEM then
+    if player:getCurrentMission(xi.mission.log_id.TOAU) >= xi.mission.id.toau.PRESIDENT_SALAHEEM then
         local accessType = xi.moghouse.getMogLockerAccessType(player)
         local mogLockerExpiryTimestamp = xi.moghouse.getMogLockerExpiryTimestamp(player)
 

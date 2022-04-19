@@ -430,6 +430,7 @@ void SmallPacket0x00C(map_session_data_t* const PSession, CCharEntity* const PCh
                 case PET_TYPE::AUTOMATON:
                 case PET_TYPE::JUG_PET:
                 case PET_TYPE::WYVERN:
+                case PET_TYPE::LUOPAN:
                     petutils::SpawnPet(PChar, PChar->petZoningInfo.petID, true);
                     break;
 
@@ -476,9 +477,9 @@ void SmallPacket0x00D(map_session_data_t* const PSession, CCharEntity* const PCh
             {
                 if (PChar->PParty->GetLeader() == PChar)
                 {
-                    if (PChar->PParty->members.size() == 1)
+                    if (PChar->PParty->HasOnlyOneMember())
                     {
-                        if (PChar->PParty->m_PAlliance->partyList.size() == 1)
+                        if (PChar->PParty->m_PAlliance->hasOnlyOneParty())
                         {
                             PChar->PParty->m_PAlliance->dissolveAlliance();
                         }
@@ -734,6 +735,12 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
     // uint32 ID = data.ref<uint32>(0x04);
     uint16 TargID = data.ref<uint16>(0x08);
     uint8  action = data.ref<uint8>(0x0A);
+    position_t actionOffset =
+    {
+        data.ref<float>(0x10),
+        data.ref<float>(0x14),
+        data.ref<float>(0x18)
+    };
 
     switch (action)
     {
@@ -787,6 +794,26 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
         {
             auto spellID = static_cast<SpellID>(data.ref<uint16>(0x0C));
             PChar->PAI->Cast(TargID, spellID);
+
+            // target offset used only for luopan placement as of now
+            if (spellID >= SpellID::Geo_Regen && spellID <= SpellID::Geo_Gravity)
+            {
+                // reset the action offset position to prevent other spells from using previous position data
+                PChar->m_ActionOffsetPos = {0, 0, 0};
+
+                // Need to set the target position plus offset for positioning correctly
+                auto* PTarget = dynamic_cast<CBattleEntity*>(PChar->GetEntity(TargID));
+
+                if (PTarget != nullptr)
+                {
+                    PChar->m_ActionOffsetPos =
+                    {
+                        PTarget->loc.p.x + actionOffset.x,
+                        PTarget->loc.p.y + actionOffset.y,
+                        PTarget->loc.p.z + actionOffset.z
+                    };
+                }
+            }
         }
         break;
         case 0x04: // disengage
@@ -3785,7 +3812,7 @@ void SmallPacket0x06E(map_session_data_t* const PSession, CCharEntity* const PCh
         case 0: // party - must by party leader or solo
             if (PChar->PParty == nullptr || PChar->PParty->GetLeader() == PChar)
             {
-                if (PChar->PParty && PChar->PParty->members.size() > 5)
+                if (PChar->PParty && PChar->PParty->IsFull())
                 {
                     PChar->pushPacket(new CMessageStandardPacket(PChar, 0, 0, MsgStd::CannotInvite));
                     break;
@@ -3865,7 +3892,7 @@ void SmallPacket0x06E(map_session_data_t* const PSession, CCharEntity* const PCh
         case 5: // alliance - must be unallied party leader or alliance leader of a non-full alliance
             if (PChar->PParty && PChar->PParty->GetLeader() == PChar &&
                 (PChar->PParty->m_PAlliance == nullptr ||
-                 (PChar->PParty->m_PAlliance->getMainParty() == PChar->PParty && PChar->PParty->m_PAlliance->partyCount() < 3)))
+                 (PChar->PParty->m_PAlliance->getMainParty() == PChar->PParty && !PChar->PParty->m_PAlliance->isFull())))
             {
                 CCharEntity* PInvitee = nullptr;
                 if (targid != 0)
@@ -3953,10 +3980,10 @@ void SmallPacket0x06F(map_session_data_t* const PSession, CCharEntity* const PCh
         {
             case 0: // party - anyone may remove themself from party regardless of leadership or alliance
                 if (PChar->PParty->m_PAlliance &&
-                    PChar->PParty->members.size() == 1) // single member alliance parties must be removed from alliance before disband
+                    PChar->PParty->HasOnlyOneMember()) // single member alliance parties must be removed from alliance before disband
                 {
                     ShowDebug("%s party size is one", PChar->GetName());
-                    if (PChar->PParty->m_PAlliance->partyCount() == 1) // if there is only 1 party then dissolve alliance
+                    if (PChar->PParty->m_PAlliance->hasOnlyOneParty()) // if there is only 1 party then dissolve alliance
                     {
                         ShowDebug("%s alliance size is one party", PChar->GetName());
                         PChar->PParty->m_PAlliance->dissolveAlliance();
@@ -3978,7 +4005,7 @@ void SmallPacket0x06F(map_session_data_t* const PSession, CCharEntity* const PCh
                 if (PChar->PParty->m_PAlliance && PChar->PParty->GetLeader() == PChar)
                 {
                     ShowDebug("%s is leader of a party in an alliance", PChar->GetName());
-                    if (PChar->PParty->m_PAlliance->partyCount() == 1) // if there is only 1 party then dissolve alliance
+                    if (PChar->PParty->m_PAlliance->hasOnlyOneParty()) // if there is only 1 party then dissolve alliance
                     {
                         ShowDebug("One party in alliance, %s wants to dissolve the alliance", PChar->GetName());
                         PChar->PParty->m_PAlliance->dissolveAlliance();
@@ -4059,9 +4086,9 @@ void SmallPacket0x071(map_session_data_t* const PSession, CCharEntity* const PCh
                     if (PVictim == PChar) // using kick on yourself, let's borrow the logic from /pcmd leave to prevent alliance crash
                     {
                         if (PChar->PParty->m_PAlliance &&
-                            PChar->PParty->members.size() == 1) // single member alliance parties must be removed from alliance before disband
+                            PChar->PParty->HasOnlyOneMember()) // single member alliance parties must be removed from alliance before disband
                         {
-                            if (PChar->PParty->m_PAlliance->partyCount() == 1) // if there is only 1 party then dissolve alliance
+                            if (PChar->PParty->m_PAlliance->hasOnlyOneParty()) // if there is only 1 party then dissolve alliance
                             {
                                 ShowDebug("One party in alliance, %s wants to dissolve the alliance", PChar->GetName());
                                 PChar->PParty->m_PAlliance->dissolveAlliance();
@@ -4144,7 +4171,7 @@ void SmallPacket0x071(map_session_data_t* const PSession, CCharEntity* const PCh
                         // if using kick on yourself, or alliance leader using kick on another party leader - remove the party
                         if (PVictim == PChar || (PChar->PParty->m_PAlliance->getMainParty() == PChar->PParty && PVictim->PParty->GetLeader() == PVictim))
                         {
-                            if (PVictim->PParty->m_PAlliance->partyCount() == 1) // if there is only 1 party then dissolve alliance
+                            if (PVictim->PParty->m_PAlliance->hasOnlyOneParty()) // if there is only 1 party then dissolve alliance
                             {
                                 ShowDebug("One party in alliance, %s wants to dissolve the alliance", PChar->GetName());
                                 PVictim->PParty->m_PAlliance->dissolveAlliance();
@@ -4229,7 +4256,7 @@ void SmallPacket0x074(map_session_data_t* const PSession, CCharEntity* const PCh
                 if (PInviter->PParty->m_PAlliance)
                 {
                     // break if alliance is full or the inviter is not the leader
-                    if (PInviter->PParty->m_PAlliance->partyCount() == 3 || PInviter->PParty->m_PAlliance->getMainParty() != PInviter->PParty)
+                    if (PInviter->PParty->m_PAlliance->isFull() || PInviter->PParty->m_PAlliance->getMainParty() != PInviter->PParty)
                     {
                         ShowDebug("Alliance is full, invite to %s cancelled", PChar->GetName());
                         PChar->pushPacket(new CMessageStandardPacket(PChar, 0, 0, MsgStd::CannotBeProcessed));
@@ -4275,7 +4302,7 @@ void SmallPacket0x074(map_session_data_t* const PSession, CCharEntity* const PCh
                 }
                 if (PInviter->PParty->GetLeader() == PInviter)
                 {
-                    if (PInviter->PParty->members.size() > 5)
+                    if (PInviter->PParty->IsFull())
                     { // someone else accepted invitation
                         // PInviter->pushPacket(new CMessageStandardPacket(PInviter, 0, 0, 14)); Don't think retail sends error packet to inviter on full pt
                         ShowDebug("Someone else accepted party invite, %s cannot be added to party", PChar->GetName());
@@ -5424,27 +5451,43 @@ void SmallPacket0x0D3(map_session_data_t* const PSession, CCharEntity* const PCh
 
 /************************************************************************
  *                                                                       *
- *  Set Preferred Language                                               *
+ *  Set Chat Filters / Preferred Language                                *
  *                                                                       *
  ************************************************************************/
 
 void SmallPacket0x0DB(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
-    uint8 newLanguage = data.ref<uint8>(0x24);
 
-    if (newLanguage == PChar->search.language)
+    auto oldMenuConfigFlags = PChar->menuConfigFlags.flags;
+    auto oldChatFilterFlags = PChar->chatFilterFlags;
+    auto oldLanguages = PChar->search.language;
+
+    // Extract the system filter bits and update MenuConfig
+    const uint8 systemFilterMask = (NFLAG_SYSTEM_FILTER_H | NFLAG_SYSTEM_FILTER_L) >> 8;
+    PChar->menuConfigFlags.byte2 &= ~systemFilterMask;
+    PChar->menuConfigFlags.byte2 |= data.ref<uint8>(0x09) & systemFilterMask;
+
+    PChar->chatFilterFlags = data.ref<uint64>(0x0C);
+
+    PChar->search.language = data.ref<uint8>(0x24);
+
+    if (oldMenuConfigFlags != PChar->menuConfigFlags.flags)
     {
-        return;
+        charutils::SaveMenuConfigFlags(PChar);
     }
 
-    auto ret = sql->Query("UPDATE chars SET languages = %u WHERE charid = %u;", newLanguage, PChar->id);
-
-    if (ret == SQL_SUCCESS)
+    if (oldChatFilterFlags != PChar->chatFilterFlags)
     {
-        PChar->search.language = newLanguage;
+        charutils::SaveChatFilterFlags(PChar);
     }
 
+    if (oldLanguages != PChar->search.language)
+    {
+        charutils::SaveLanguages(PChar);
+    }
+
+    PChar->pushPacket(new CMenuConfigPacket(PChar));
     return;
 }
 

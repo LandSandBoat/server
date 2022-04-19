@@ -66,7 +66,7 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("TheWaywardAutomationProgress", 1)
         player:addQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.THE_WAYWARD_AUTOMATION)
     elseif csid == 776 then
-        npcUtil.completeQuest(player, AHT_URHGAN, xi.quest.id.ahtUrhgan.THE_WAYWARD_AUTOMATION, {item=xi.items.TURBO_ANIMATOR, var="TheWaywardAutomationProgress"})
+        npcUtil.completeQuest(player, xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.THE_WAYWARD_AUTOMATION, {item=xi.items.TURBO_ANIMATOR, var="TheWaywardAutomationProgress"})
     elseif csid == 778 then
         player:setCharVar("OperationTeatimeProgress", 1)
         player:addQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.OPERATION_TEATIME)

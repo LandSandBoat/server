@@ -67,6 +67,27 @@ zones[xi.zone.ABYSSEA_LA_THEINE] =
     },
     mob =
     {
+        DOZING_DORIAN           = 17318434,
+        TRUDGING_THOMAS         = 17318435,
+        MEGANTEREON             = 17318436,
+        ADAMASTOR               = 17318437,
+        PANTAGRUEL              = 17318438,
+        GRANDGOUSIER            = 17318439,
+        LA_THEINE_LIEGE         = 17318440,
+        BABA_YAGA               = 17318441,
+        NGURUVILU               = 17318442,
+        POROGGO_DOM_JUAN        = 17318443,
+        TOPPLING_TUBER          = 17318444,
+        LUGARHOO                = 17318445,
+        BRIAREUS_1              = 17318446,
+        CARABOSSE_1             = 17318447,
+        HADHAYOSH_1             = 17318448,
+        BRIAREUS_2              = 17318456,
+        CARABOSSE_2             = 17318457,
+        HADHAYOSH_2             = 17318458,
+        BRIAREUS_3              = 17318459,
+        CARABOSSE_3             = 17318460,
+        HADHAYOSH_3             = 17318461,
     },
     npc =
     {
@@ -96,6 +117,7 @@ zones[xi.zone.ABYSSEA_LA_THEINE] =
             --  [17318492] = {'qm20',     {},                                                                {xi.ki.PELLUCID_FLY_EYE, xi.ki.SHIMMERING_PIXIE_PINION}, 17318460}, -- Carabosse
             --  [17318493] = {'qm21',     {}, {xi.ki.MARBLED_MUTTON_CHOP, xi.ki.BLOODIED_SABER_TOOTH, xi.ki.GLITTERING_PIXIE_CHOKER, xi.ki.BLOOD_SMEARED_GIGAS_HELM}, 17318461}, -- Hadhayosh
         },
+        STURDY_PYXIS_BASE = 17318509,
     },
 }
 

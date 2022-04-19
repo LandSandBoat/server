@@ -112,7 +112,7 @@ entity.onEventFinish = function(player, csid, option)
             player:setCharVar("theTalekeeperTruth_timer", 0)
             player:setCharVar("DeidoggWait1DayForAF3", VanadielDayOfTheYear())
             player:needToZone(true)
-            player:addFame(BASTOK, 40)
+            player:addFame(xi.quest.fame_area.BASTOK, 40)
             player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_TALEKEEPER_S_TRUTH)
         end
     elseif csid == 172 then
