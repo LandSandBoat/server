@@ -56,10 +56,11 @@ xi.spells.spell_enhancing.calculateEnhancingBasePower = function(caster, target,
     elseif spellEffect == xi.effect.EMBRAVA then
         basePower = math.min(skillLevel, 500)
 
-    -- En-Spells (Info from from BG-Wiki)
+    -- En-Spells (Info from from BG-Wiki) and Auspice
     elseif
         (spellEffect >= xi.effect.ENFIRE and spellEffect <= xi.effect.ENWATER) or
-        (spellEffect >= xi.effect.ENFIRE_II and spellEffect <= xi.effect.ENWATER_II)
+        (spellEffect >= xi.effect.ENFIRE_II and spellEffect <= xi.effect.ENWATER_II) or
+        spellEffect >= xi.effect.AUSPICE
     then
         if skillLevel > 500 then
             basePower = math.floor(3 * (skillLevel + 50) / 25)

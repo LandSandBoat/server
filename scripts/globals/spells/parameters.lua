@@ -166,6 +166,9 @@ xi.spells.parameters.enhancingSpell =
     -- Aquaveil
     [xi.magic.spell.AQUAVEIL     ] = { 1, xi.effect.AQUAVEIL,       1,    1,  600, true,  true  },
 
+    -- Auspice
+    [xi.magic.spell.AUSPICE      ] = { 1, xi.effect.AUSPICE,       55,    0,  180, true,  false },
+
     -- Bar-Element
     [xi.magic.spell.BARAERO      ] = { 1, xi.effect.BARAERO,        1,    0,  480, true,  true  },
     [xi.magic.spell.BARBLIZZARD  ] = { 1, xi.effect.BARBLIZZARD,    1,    0,  480, true,  true  },
@@ -210,6 +213,9 @@ xi.spells.parameters.enhancingSpell =
     [xi.magic.spell.BOOST_MND    ] = { 1, xi.effect.MND_BOOST,      1,    5,  300, true,  false },
     [xi.magic.spell.BOOST_CHR    ] = { 1, xi.effect.CHR_BOOST,      1,    5,  300, true,  false },
 
+    -- Crusade
+    [xi.magic.spell.CRUSADE      ] = { 1, xi.effect.ENMITY_BOOST,  88,   30,  300, true,  false },
+
     -- Deodorize / Invisible / Sneak
     [xi.magic.spell.DEODORIZE    ] = { 1, xi.effect.DEODORIZE,     15,    0,  420, true,  false },
     [xi.magic.spell.INVISIBLE    ] = { 1, xi.effect.INVISIBLE,     20,    0,  420, true,  false },
@@ -235,6 +241,9 @@ xi.spells.parameters.enhancingSpell =
     -- Flurry
     [xi.magic.spell.FLURRY       ] = { 1, xi.effect.FLURRY,        48,   15,  180, true,  false },
     [xi.magic.spell.FLURRY_II    ] = { 2, xi.effect.FLURRY_II,     96,   30,  180, true,  false },
+
+    -- Foil
+    [xi.magic.spell.FOIL         ] = { 1, xi.effect.FOIL,          58,    0,   30, true,  false },
 
     -- Gain-Stat
     [xi.magic.spell.GAIN_STR     ] = { 1, xi.effect.STR_BOOST,      1,    5,  300, true,  false },
