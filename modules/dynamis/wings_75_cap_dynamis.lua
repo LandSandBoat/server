@@ -15,6 +15,16 @@ require("scripts/globals/utils")
 require("scripts/globals/zone")
 require("scripts/globals/msg")
 require("scripts/globals/pathfind")
+require("scripts/zones/Dynamis-Bastok/dynamis_mobs.lua")
+require("scripts/zones/Dynamis-Beaucedine/dynamis_mobs.lua")
+require("scripts/zones/Dynamis-Buburimu/dynamis_mobs.lua")
+require("scripts/zones/Dynamis-Jeuno/dynamis_mobs.lua")
+require("scripts/zones/Dynamis-Qufim/dynamis_mobs.lua")
+require("scripts/zones/Dynamis-San_dOria/dynamis_mobs.lua")
+require("scripts/zones/Dynamis-Tavnazia/dynamis_mobs.lua")
+require("scripts/zones/Dynamis-Valkurm/dynamis_mobs.lua")
+require("scripts/zones/Dynamis-Windurst/dynamis_mobs.lua")
+require("scripts/zones/Dynamis-Xarcabard/dynamis_mobs.lua")
 require("modules/module_utils")
 --------------------------------------------
 --       Module Affected Scripts          --
@@ -70,7 +80,7 @@ local entryInfoEra =
         winVar = "DynaSandoria_Win",
         dynamis_has_enteredVar = "DynaSandoria_dynamis_has_entered",
         hasSeenWinCSVar = "DynaSandoria_HasSeenWinCS",
-        zoneFileName = "Dynamis-San_dOria",
+        zoneName = xi.zone.DYNAMIS_SAN_DORIA,
         winKI = xi.ki.HYDRA_CORPS_COMMAND_SCEPTER,
         enterPos = {161.838, -2.000, 161.673, 93, 185},
         reqs = function(player)
@@ -91,7 +101,7 @@ local entryInfoEra =
         winVar = "DynaBastok_Win",
         dynamis_has_enteredVar = "DynaBastok_dynamis_has_entered",
         hasSeenWinCSVar = "DynaBastok_HasSeenWinCS",
-        zoneFileName = "Dynamis-Bastok",
+        zoneName = xi.zone.DYNAMIS_BASTOK,
         winKI = xi.ki.HYDRA_CORPS_EYEGLASS,
         enterPos = {116.482, 0.994, -72.121, 128, 186},
         reqs = function(player)
@@ -112,7 +122,7 @@ local entryInfoEra =
         winVar = "DynaWindurst_Win",
         dynamis_has_enteredVar = "DynaWindurst_dynamis_has_entered",
         hasSeenWinCSVar = "DynaWindurst_HasSeenWinCS",
-        zoneFileName = "Dynamis-Windurst",
+        zoneName = xi.zone.WINDURST_WALLS,
         winKI = xi.ki.HYDRA_CORPS_LANTERN,
         enterPos = {-221.988, 1.000, -120.184, 0, 187},
         reqs = function(player)
@@ -133,7 +143,7 @@ local entryInfoEra =
         winVar = "DynaJeuno_Win",
         dynamis_has_enteredVar = "DynaJeuno_dynamis_has_entered",
         hasSeenWinCSVar = "DynaJeuno_HasSeenWinCS",
-        zoneFileName = "Dynamis-Jeuno",
+        zoneName = xi.zone.DYNAMIS_JEUNO,
         winKI = xi.ki.HYDRA_CORPS_TACTICAL_MAP,
         enterPos = {48.930, 10.002, -71.032, 195, 188},
         reqs = function(player)
@@ -153,7 +163,7 @@ local entryInfoEra =
         winVar = "DynaBeaucedine_Win",
         dynamis_has_enteredVar = "DynaBeaucedine_dynamis_has_entered",
         hasSeenWinCSVar = "DynaBeaucedine_HasSeenWinCS",
-        zoneFileName = "Dynamis-Beaucedine",
+        zoneName = xi.zone.DYNAMIS_BEAUCEDINE,
         winKI = xi.ki.HYDRA_CORPS_INSIGNIA,
         enterPos = {-284.751, -39.923, -422.948, 235, 134},
         reqs = function(player)
@@ -176,7 +186,7 @@ local entryInfoEra =
         winVar = "DynaXarcabard_Win",
         dynamis_has_enteredVar = "DynaXarcabard_dynamis_has_entered",
         hasSeenWinCSVar = "DynaXarcabard_HasSeenWinCS",
-        zoneFileName = "Dynamis-Xarcabard",
+        zoneName = xi.zone.DYNAMIS_XARCABARD,
         winKI = xi.ki.HYDRA_CORPS_BATTLE_STANDARD,
         enterPos = {569.312, -0.098, -270.158, 90, 135},
         reqs = function(player)
@@ -197,7 +207,7 @@ local entryInfoEra =
         winVar = "DynaValkurm_Win",
         dynamis_has_enteredVar = "DynaValkurm_dynamis_has_entered",
         hasSeenWinCSVar = "DynaValkurm_HasSeenWinCS",
-        zoneFileName = "Dynamis-Valkurm",
+        zoneName = xi.zone.DYNAMIS_VALKURM,
         winKI = xi.ki.DYNAMIS_VALKURM_SLIVER,
         enterPos = {100, -8, 131, 47, 39},
         reqs = function(player)
@@ -219,7 +229,7 @@ local entryInfoEra =
         winVar = "DynaBuburimu_Win",
         dynamis_has_enteredVar = "DynaBuburimu_dynamis_has_entered",
         hasSeenWinCSVar = "DynaBuburimu_HasSeenWinCS",
-        zoneFileName = "Dynamis-Buburimu",
+        zoneName = xi.zone.DYNAMIS_BUBURIMU,
         winKI = xi.ki.DYNAMIS_BUBURIMU_SLIVER,
         enterPos = {155, -1, -169, 170, 40},
         reqs = function(player)
@@ -241,7 +251,7 @@ local entryInfoEra =
         winVar = "DynaQufim_Win",
         dynamis_has_enteredVar = "DynaQufim_dynamis_has_entered",
         hasSeenWinCSVar = "DynaQufim_HasSeenWinCS",
-        zoneFileName = "Dynamis-Qufim",
+        zoneName = xi.zone.DYNAMIS_QUFIM,
         winKI = xi.ki.DYNAMIS_QUFIM_SLIVER,
         enterPos = {-19, -17, 104, 253, 41},
         reqs = function(player)
@@ -263,7 +273,7 @@ local entryInfoEra =
         winVar = "DynaTavnazia_Win",
         dynamis_has_enteredVar = "DynaTavnazia_dynamis_has_entered",
         hasSeenWinCSVar = "DynaQufim_HasSeenWinCS",
-        zoneFileName = "Dynamis-Tavnazia",
+        zoneName = xi.zone.DYNAMIS_TAVNAZIA,
         winKI = xi.ki.DYNAMIS_TAVNAZIA_SLIVER,
         enterPos = {0.1, -7, -21, 190, 42},
         reqs = function(player)
@@ -577,10 +587,8 @@ end
 --------------------------------------------
 
 xi.dynamis.onNewDynamis = function(player)
-    local zoneSelection = player:getZoneID()
     player:SetServerVariable(string.format("[DYNA]ValidOnTick_%s", dynaInfoEra[player:getZoneID()].dynaZone), true)
-    require(string.format("scripts/zones/%s/dynamis_mobs", dynaInfoEra[zoneSelection].zoneFileName)) -- Dynamically load dependency.
-
+    local zone = entryInfoEra[player:getZoneID()].zoneName
     local iStart = 4096*4096+(4096*zone) -- Gets starting ID based on zoneID.
     local i = iStart -- Sets original index.
     local iEnd = iStart + 1023 -- Sets end of scope.
