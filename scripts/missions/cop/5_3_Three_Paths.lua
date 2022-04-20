@@ -274,7 +274,7 @@ mission.sections =
             onEventFinish =
             {
                 [852] = function(player, csid, option, npc)
-                    mission:setLocalVar('cidOption', 0)
+                    mission:setLocalVar(player, 'cidOption', 0)
                     player:setMissionStatus(mission.areaId, 11, xi.mission.status.COP.LOUVERANCE)
                 end,
 
