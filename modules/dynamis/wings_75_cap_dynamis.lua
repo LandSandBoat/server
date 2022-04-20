@@ -1759,7 +1759,8 @@ xi.dynamis.setMobStats = function(mob)
             [373] = xi.jsa.EES_GOBLIN,  -- Goblin_Armored
         }
 
-        --mob:setMaxHPP(132)
+        mob:setMobMod(xi.mobMod.HP_SCALE, 132)
+        mob:setHP(mob:getMaxHP())
         --mob:setMobType(MOBTYPE_NORMAL)
         mob:setMobLevel(math.random(78,80))
         mob:setTrueDetection(true)
@@ -1862,7 +1863,8 @@ xi.dynamis.setNMStats = function(mob)
     local job = mob:getMainJob()
 
     --mob:setMobType(MOBTYPE_NOTORIOUS)
-    --mob:setMaxHPP(132)
+    mob:setMobMod(xi.mobMod.HP_SCALE, 132)
+    mob:setHP(mob:getMaxHP())
     mob:setMobLevel(math.random(80,82))
     mob:setMod(xi.mod.STR, -15)
     mob:setMod(xi.mod.VIT, -5)
