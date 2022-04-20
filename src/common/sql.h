@@ -181,6 +181,7 @@ public:
     bool TransactionRollback();
 
     std::shared_ptr<SqlPreparedStatement> GetPreparedStatement(std::string const& name);
+    int32 RunPreparedStatement(std::string const& stmtName, uint32 id, std::string varname);
 private:
     Sql_t*      self;
     const char* m_User;

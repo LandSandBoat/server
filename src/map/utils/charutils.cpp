@@ -5868,29 +5868,21 @@ namespace charutils
 
     int32 GetCharVar(CCharEntity* PChar, const char* var)
     {
+        TracyZoneScoped;
+
         if (PChar == nullptr)
         {
             ShowError("GetCharVar was requested for a nullptr PChar");
             return 0;
         }
 
-        const char* fmtQuery = "SELECT value FROM char_vars WHERE charid = %u AND varname = '%s' LIMIT 1;";
-
-        int32 ret = sql->Query(fmtQuery, PChar->id, var);
-
-        if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
-        {
-            return sql->GetIntData(0);
-        }
-
-        // auto stmt = sql->GetPreparedStatement("GET_CHAR_VAR");
-        // stmt->Execute(PChar->id, var);
-
-        return 0;
+        return sql->RunPreparedStatement("GET_CHAR_VAR", PChar->id, var);
     }
 
     void SetCharVar(CCharEntity* PChar, const char* var, int32 value)
     {
+        TracyZoneScoped;
+
         if (PChar == nullptr)
         {
             ShowError("SetCharVar was requested for a nullptr PChar");

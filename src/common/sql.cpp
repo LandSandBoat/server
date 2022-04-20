@@ -640,3 +640,9 @@ std::shared_ptr<SqlPreparedStatement> SqlConnection::GetPreparedStatement(std::s
 {
     return m_PreparedStatements[name];
 }
+
+int32 SqlConnection::RunPreparedStatement(std::string const& stmtName, uint32 id, std::string varname)
+{
+    auto stmt = GetPreparedStatement(stmtName);
+    return stmt->Execute(&self->handle, id, varname);
+}
