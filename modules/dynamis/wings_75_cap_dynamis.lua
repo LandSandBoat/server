@@ -958,7 +958,7 @@ xi.dynamis.eyesEra =
 
 m:addOverride("xi.dynamis.zoneOnInitialize", function(zone) 
     super(zone)
-    -- xi.dynamis.onZoneInitializeOverride(zone) -- Needs to be enabled for overrides to work.
+    xi.dynamis.onZoneInitializeOverride(zone) -- Needs to be enabled for overrides to work.
 end)
 
 xi.dynamis.onZoneInitializeOverride = function (zone)
@@ -972,83 +972,87 @@ xi.dynamis.onZoneInitializeOverride = function (zone)
                 i = i + 23  -- If yes then skip ahead 23 IDs. This covers the gap of NPCs in every Dynamis zone.
             end
             mob = GetMobByID(i)
-            mobName = mob:getName()
-            zoneName = mob:getZoneID()
-            if not mob:isSpawned() then -- If I am spawned I cause problems :sadgebox:
-                if string.sub(mobName, 1, 8) == "Vanguard" and zone:getLocalVar(string.format("[DYNA]Mob_Module_Applied_%s", mobName)) ~= 1 then -- Check if its a vanguard and if the lua has been applied.
-                    -- To add additional dynamis functions to new mob functions copy the below, change onMobRoamAction to whatever new function, and change the proposed function.
-                    xi["zones"][zoneName]["mobs"][mobName]["onMobRoamAction"] = xi.dynamis.mobOnRoamAction(mob) -- Run mobOnRoamAction
-                    xi["zones"][zoneName]["mobs"][mobName]["onMobRoam"] = xi.dynamis.mobOnRoam(mob) -- Run mobOnRoam
-                    xi["zones"][zoneName]["mobs"][mobName]["onMobSpawn"] = xi.dynamis.setMobStats(mob) -- Run setMobStats
-                    m:addOverride(xi["zones"][zoneName]["mobs"][mobName]["onMobDeath"], function(mob, player, isKiller)
-                        xi.dynamis.mobOnDeath(mob, mobList[zoneID],dynaInfoEra[zoneID].text.DYNAMIS_TIME_EXTEND)
-                    end)
-                    if string.format("xi.zones.%s.mobs.%s.onMobDespawn", zoneName, mobName) ~= nil then
-                        m:addOverride(xi["zones"][zoneName]["mobs"][mobName]["onMobDespawn"], function(mob)
-                        end)
-                    end
-                    zone:setLocalVar(string.format("[DYNA]Mob_Module_Applied_%s", mobName), 1)
-                elseif string.sub(mobName, 1, 5) == "Hydra" and zone:getLocalVar(string.format("[DYNA]Mob_Module_Applied_%s", mobName)) ~= 1 then -- Check if its a hydra and if the lua has been applied.
-                    -- To add additional dynamis functions to new mob functions copy the below, change onMobRoamAction to whatever new function, and change the proposed function.
-                    xi["zones"][zoneName]["mobs"][mobName]["onMobRoamAction"] = xi.dynamis.mobOnRoamAction(mob) -- Run mobOnRoamAction
-                    xi["zones"][zoneName]["mobs"][mobName]["onMobRoam"] = xi.dynamis.mobOnRoam(mob) -- Run mobOnRoam
-                    xi["zones"][zoneName]["mobs"][mobName]["onMobSpawn"] = xi.dynamis.setMobStats(mob) -- Run setMobStats
-                    m:addOverride(xi["zones"][zoneName]["mobs"][mobName]["onMobDeath"], function(mob, player, isKiller)
-                        xi.dynamis.mobOnDeath(mob, mobList[zoneID],dynaInfoEra[zoneID].text.DYNAMIS_TIME_EXTEND)
-                    end)
-                    print("Hydra")
-                    zone:setLocalVar(string.format("[DYNA]Mob_Module_Applied_%s", mobName), 1)
-                elseif string.sub(mobName, 1, 8) == "Kindred_" and zone:getLocalVar(string.format("[DYNA]Mob_Module_Applied_%s", mobName)) ~= 1 then -- Check if its a kindred and if the lua has been applied.
-                    -- To add additional dynamis functions to new mob functions copy the below, change onMobRoamAction to whatever new function, and change the proposed function.
-                    xi["zones"][zoneName]["mobs"][mobName]["onMobRoamAction"] = xi.dynamis.mobOnRoamAction(mob) -- Run mobOnRoamAction
-                    xi["zones"][zoneName]["mobs"][mobName]["onMobRoam"] = xi.dynamis.mobOnRoam(mob) -- Run mobOnRoam
-                    xi["zones"][zoneName]["mobs"][mobName]["onMobSpawn"] = xi.dynamis.setMobStats(mob) -- Run setMobStats
-                    m:addOverride(xi["zones"][zoneName]["mobs"][mobName]["onMobDeath"], function(mob, player, isKiller)
-                        xi.dynamis.mobOnDeath(mob, mobList[zoneID],dynaInfoEra[zoneID].text.DYNAMIS_TIME_EXTEND)
-                    end)
-                    if string.format("xi.zones.%s.mobs.%s.onMobDespawn", zoneName, mobName) ~= nil then
-                        m:addOverride(xi["zones"][zoneName]["mobs"][mobName]["onMobDespawn"], function(mob)
-                        end)
-                    end
-                    zone:setLocalVar(string.format("[DYNA]Mob_Module_Applied_%s", mobName), 1)
-                elseif string.sub(mobName, 1, 8) == "Nightmar" and zone:getLocalVar(string.format("[DYNA]Mob_Module_Applied_%s", mobName)) ~= 1 then -- Check if its a nightmare and if the lua has been applied.
-                    -- To add additional dynamis functions to new mob functions copy the below, change onMobSpawn to whatever new function, and change the proposed function.
-                    xi["zones"][zoneName]["mobs"][mobName]["onMobSpawn"] = xi.dynamis.onNightmareSpawn(mob) -- Run onNightmareSpawn
-                    xi["zones"][zoneName]["mobs"][mobName]["onMobEngaged"] = xi.dynamis.statueOnEngaged(mob, target, mobList) -- Run onNightmareEngaged
-                    m:addOverride(xi["zones"][zoneName]["mobs"][mobName]["onMobDeath"], function(mob, player, isKiller)
-                        xi.dynamis.mobOnDeath(mob, mobList[zoneID],dynaInfoEra[zoneID].text.DYNAMIS_TIME_EXTEND)
-                    end)
-                    zone:setLocalVar(string.format("[DYNA]Mob_Module_Applied_%s", mobName), 1)
-                elseif (mob:getFamily() == 334 or mob:getFamily() == 337 or mob:getFamily() == 360 or mob:getFamily() == 358) and  zone:getLocalVar(string.format("[DYNA]Mob_Module_Applied_%s", mobName)) ~= 1 then -- Check to see if it is a Beastmen/Kindred NM.
-                    xi["zones"][zoneName]["mobs"][mobName]["onMobRoamAction"] = xi.dynamis.mobOnRoamAction(mob) -- Run mobOnRoamAction
-                    xi["zones"][zoneName]["mobs"][mobName]["onMobRoam"] = xi.dynamis.mobOnRoam(mob) -- Run mobOnRoam
-                    xi["zones"][zoneName]["mobs"][mobName]["onMobSpawn"] = xi.dynamis.setNMStats(mob) -- Run setNMStats
-                    m:addOverride(xi["zones"][zoneName]["mobs"][mobName]["onMobDeath"], function(mob, player, isKiller)
-                        xi.dynamis.mobOnDeath(mob, mobList[zoneID],dynaInfoEra[zoneID].text.DYNAMIS_TIME_EXTEND)
-                    end)
-                    zone:setLocalVar(string.format("[DYNA]Mob_Module_Applied_%s", mobName), 1)
-                elseif (mob:getFamily() >= 92 and mob:getFamily() <= 95) then
-                    xi.dynamis.statueOverride(mob)
-                else
-                    xi.dynamis.mobBossOverride(mob)
-                end
-                if i == iEnd then
-                    local zoneName = zone:getName()
-                    -- To add additional dynamis functions to new zone functions copy the below, change onZoneTick to whatever new function, and change the proposed function.
-                    xi["zones"][zoneName]["Zone"]["onZoneTick"] = xi.dynamis.handleDynamis(zone) -- Run handleDynamis
-                    xi.dynamis.cleanupDynamis(zone)
-                end
+            -- xi.dynamis.onMobOverride(mob) -- Needs to be enabled to cause mob lua overrides.
+            if i == iEnd then
+                local zoneName = zone:getName()
+                -- To add additional dynamis functions to new zone functions copy the below, change onZoneTick to whatever new function, and change the proposed function.
+                xi["zones"][zoneName]["Zone"]["onZoneTick"] = xi.dynamis.handleDynamis(zone) -- Run handleDynamis
+                xi.dynamis.cleanupDynamis(zone)
             end
             i = i + 1
         end
     end
 end
 
-xi.dynamis.statueOverride = function(mob) -- Used to sort straggerlers which do not fit the above.
+xi.dynamis.onMobOverride = function(mob)
+    local mobName = mob:getName()
+    local zoneName = mob:getZoneID()
+    if not mob:isSpawned() then -- If I am spawned I cause problems :sadgebox:
+        if string.sub(mobName, 1, 8) == "Vanguard" and zone:getLocalVar(string.format("[DYNA]Mob_Module_Applied_%s", mobName)) ~= 1 then -- Check if its a vanguard and if the lua has been applied.
+            -- To add additional dynamis functions to new mob functions copy the below, change onMobRoamAction to whatever new function, and change the proposed function.
+            xi["zones"][zoneName]["mobs"][mobName]["onMobRoamAction"] = xi.dynamis.mobOnRoamAction(mob) -- Run mobOnRoamAction
+            xi["zones"][zoneName]["mobs"][mobName]["onMobRoam"] = xi.dynamis.mobOnRoam(mob) -- Run mobOnRoam
+            xi["zones"][zoneName]["mobs"][mobName]["onMobSpawn"] = xi.dynamis.setMobStats(mob) -- Run setMobStats
+            m:addOverride(xi["zones"][zoneName]["mobs"][mobName]["onMobDeath"], function(mob, player, isKiller)
+                xi.dynamis.mobOnDeath(mob, mobList[zoneID],dynaInfoEra[zoneID].text.DYNAMIS_TIME_EXTEND)
+            end)
+            if string.format("xi.zones.%s.mobs.%s.onMobDespawn", zoneName, mobName) ~= nil then
+                m:addOverride(xi["zones"][zoneName]["mobs"][mobName]["onMobDespawn"], function(mob)
+                end)
+            end
+            zone:setLocalVar(string.format("[DYNA]Mob_Module_Applied_%s", mobName), 1)
+        elseif string.sub(mobName, 1, 5) == "Hydra" and zone:getLocalVar(string.format("[DYNA]Mob_Module_Applied_%s", mobName)) ~= 1 then -- Check if its a hydra and if the lua has been applied.
+            -- To add additional dynamis functions to new mob functions copy the below, change onMobRoamAction to whatever new function, and change the proposed function.
+            xi["zones"][zoneName]["mobs"][mobName]["onMobRoamAction"] = xi.dynamis.mobOnRoamAction(mob) -- Run mobOnRoamAction
+            xi["zones"][zoneName]["mobs"][mobName]["onMobRoam"] = xi.dynamis.mobOnRoam(mob) -- Run mobOnRoam
+            xi["zones"][zoneName]["mobs"][mobName]["onMobSpawn"] = xi.dynamis.setMobStats(mob) -- Run setMobStats
+            m:addOverride(xi["zones"][zoneName]["mobs"][mobName]["onMobDeath"], function(mob, player, isKiller)
+                xi.dynamis.mobOnDeath(mob, mobList[zoneID],dynaInfoEra[zoneID].text.DYNAMIS_TIME_EXTEND)
+            end)
+            print("Hydra")
+            zone:setLocalVar(string.format("[DYNA]Mob_Module_Applied_%s", mobName), 1)
+        elseif string.sub(mobName, 1, 8) == "Kindred_" and zone:getLocalVar(string.format("[DYNA]Mob_Module_Applied_%s", mobName)) ~= 1 then -- Check if its a kindred and if the lua has been applied.
+            -- To add additional dynamis functions to new mob functions copy the below, change onMobRoamAction to whatever new function, and change the proposed function.
+            xi["zones"][zoneName]["mobs"][mobName]["onMobRoamAction"] = xi.dynamis.mobOnRoamAction(mob) -- Run mobOnRoamAction
+            xi["zones"][zoneName]["mobs"][mobName]["onMobRoam"] = xi.dynamis.mobOnRoam(mob) -- Run mobOnRoam
+            xi["zones"][zoneName]["mobs"][mobName]["onMobSpawn"] = xi.dynamis.setMobStats(mob) -- Run setMobStats
+            m:addOverride(xi["zones"][zoneName]["mobs"][mobName]["onMobDeath"], function(mob, player, isKiller)
+                xi.dynamis.mobOnDeath(mob, mobList[zoneID],dynaInfoEra[zoneID].text.DYNAMIS_TIME_EXTEND)
+            end)
+            if string.format("xi.zones.%s.mobs.%s.onMobDespawn", zoneName, mobName) ~= nil then
+                m:addOverride(xi["zones"][zoneName]["mobs"][mobName]["onMobDespawn"], function(mob)
+                end)
+            end
+            zone:setLocalVar(string.format("[DYNA]Mob_Module_Applied_%s", mobName), 1)
+        elseif string.sub(mobName, 1, 8) == "Nightmar" and zone:getLocalVar(string.format("[DYNA]Mob_Module_Applied_%s", mobName)) ~= 1 then -- Check if its a nightmare and if the lua has been applied.
+            -- To add additional dynamis functions to new mob functions copy the below, change onMobSpawn to whatever new function, and change the proposed function.
+            xi["zones"][zoneName]["mobs"][mobName]["onMobSpawn"] = xi.dynamis.onNightmareSpawn(mob) -- Run onNightmareSpawn
+            xi["zones"][zoneName]["mobs"][mobName]["onMobEngaged"] = xi.dynamis.statueOnEngaged(mob, target, mobList) -- Run onNightmareEngaged
+            m:addOverride(xi["zones"][zoneName]["mobs"][mobName]["onMobDeath"], function(mob, player, isKiller)
+                xi.dynamis.mobOnDeath(mob, mobList[zoneID],dynaInfoEra[zoneID].text.DYNAMIS_TIME_EXTEND)
+            end)
+            zone:setLocalVar(string.format("[DYNA]Mob_Module_Applied_%s", mobName), 1)
+        elseif (mob:getFamily() == 334 or mob:getFamily() == 337 or mob:getFamily() == 360 or mob:getFamily() == 358) and  zone:getLocalVar(string.format("[DYNA]Mob_Module_Applied_%s", mobName)) ~= 1 then -- Check to see if it is a Beastmen/Kindred NM.
+            xi["zones"][zoneName]["mobs"][mobName]["onMobRoamAction"] = xi.dynamis.mobOnRoamAction(mob) -- Run mobOnRoamAction
+            xi["zones"][zoneName]["mobs"][mobName]["onMobRoam"] = xi.dynamis.mobOnRoam(mob) -- Run mobOnRoam
+            xi["zones"][zoneName]["mobs"][mobName]["onMobSpawn"] = xi.dynamis.setNMStats(mob) -- Run setNMStats
+            m:addOverride(xi["zones"][zoneName]["mobs"][mobName]["onMobDeath"], function(mob, player, isKiller)
+                xi.dynamis.mobOnDeath(mob, mobList[zoneID],dynaInfoEra[zoneID].text.DYNAMIS_TIME_EXTEND)
+            end)
+            zone:setLocalVar(string.format("[DYNA]Mob_Module_Applied_%s", mobName), 1)
+        elseif (mob:getFamily() >= 92 and mob:getFamily() <= 95) then -- I am a statue.
+            xi.dynamis.statueOverride(mob) -- Run statueoverride function
+        else
+            xi.dynamis.nonStandardMobOverride(mob) -- Treat as non-standard mob. Things like non-statue megabosses.
+        end
+    end
+end
+
+xi.dynamis.onstatueOverride = function(mob) -- Used to sort straggerlers which do not fit the above.
 
 end
 
-xi.dynamis.mobBossOverride = function(mob) -- Used to sort straggerlers which do not fit the above.
+xi.dynamis.onNonStandardMobOverride = function(mob) -- Used to sort straggerlers which do not fit the above.
 
 end
 
