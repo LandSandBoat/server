@@ -1621,6 +1621,36 @@ namespace luautils
 
     /************************************************************************
      *                                                                       *
+     *  Called on ZoneServer Zone Tick (every 400ms)                         *
+     *                                                                       *
+     ************************************************************************/
+
+    void OnZoneTick(CZone* PZone)
+    {
+        TracyZoneScoped;
+
+        auto name = (const char*)PZone->GetName();
+
+        auto filename = fmt::format("./scripts/zones/{}/Zone.lua", name);
+
+        CacheLuaObjectFromFile(filename);
+
+        auto onZoneTick = lua["xi"]["zones"][name]["Zone"]["onZoneTick"];
+        if (!onZoneTick.valid())
+        {
+            return;
+        }
+
+        auto result = onZoneTick(CLuaZone(PZone));
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("luautils::onZoneTick: %s", err.what());
+        }
+    }
+
+    /************************************************************************
+     *                                                                       *
      *  Выполняем скрипт при входе персонажа в зону                          *
      *                                                                       *
      ************************************************************************/
@@ -4122,6 +4152,32 @@ namespace luautils
         }
 
         return 0;
+    }
+
+    /************************************************************************
+     *                                                                       *
+     *  Called on TimeServer Tick (every 2400ms)                             *
+     *                                                                       *
+     ************************************************************************/
+
+    void OnTimeServerTick()
+    {
+        TracyZoneScoped;
+
+        auto onTimeServerTick = lua["xi"]["server"]["onTimeServerTick"];
+        if (!onTimeServerTick.valid())
+        {
+            ShowWarning("luautils::onTimeServerTick");
+            return;
+        }
+
+        auto result = onTimeServerTick();
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("luautils::onTimeServerTick: %s", err.what());
+            return;
+        }
     }
 
     /********************************************************************

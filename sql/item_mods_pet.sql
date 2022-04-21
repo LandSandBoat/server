@@ -221,6 +221,7 @@ INSERT INTO `item_mods_pet` VALUES (21167,28,120,1);    -- Avatar: "Magic Atk. B
 INSERT INTO `item_mods_pet` VALUES (21167,27,10,1);     -- Avatar: Enmity+10
 INSERT INTO `item_mods_pet` VALUES (21183,28,108,1);    -- Eminent Pole Avatar: "Magic Atk. Bonus"+108
 INSERT INTO `item_mods_pet` VALUES (21361,28,6,0);      -- Esper Stone +1 Pet: "Magic Atk. Bonus"+6
+INSERT INTO `item_mods_pet` VALUES (21372,160,-500,8);  -- Luopan: Damage taken -5%
 INSERT INTO `item_mods_pet` VALUES (21430,25,10,0);     -- Pet Acc
 INSERT INTO `item_mods_pet` VALUES (21430,26,10,0);     -- Pet Range Acc
 INSERT INTO `item_mods_pet` VALUES (21430,30,10,0);     -- Pet Magic Acc

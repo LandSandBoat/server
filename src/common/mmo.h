@@ -186,8 +186,10 @@ struct skills_t
             uint16 archery, marksmanship, throwing, guarding, evasion, shield, parrying, divine, healing;
             // SkillID 34-43
             uint16 enhancing, enfeebling, elemental, dark, summoning, ninjutsu, singing, string, wind, blue;
-            // SkillID 44-47
-            uint16 reserved2[4];
+            // SkillID 45-46
+            uint16 geomancy, handbell;
+            // SkillID 46-47
+            uint16 reserved2[2];
             // SkillID 48-54
             uint16 fishing, woodworking, smithing, goldsmithing, clothcraft, leathercraft, bonecraft;
             // SkillID 55-58

@@ -566,9 +566,9 @@ xi.abyssea.AddDeathListeners = function(mob)
 		if deathType == xi.abyssea.deathType.NONE then
 			deathType = xi.abyssea.deathType.PHYSICAL
 		end
-        xi.abyssea.lights.DropLights(player, mobArg:getName(), deathType, mobArg)
+        xi.abyssea.DropLights(player, mobArg:getName(), deathType, mobArg)
 
-		xi.abyssea.lights.RemoveDeathListeners(mobArg)
+		xi.abyssea.RemoveDeathListeners(mobArg)
     end)
 end
 

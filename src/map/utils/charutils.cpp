@@ -2840,6 +2840,14 @@ namespace charutils
                     skillBonus += PChar->getMod(Mod::DARK_ARTS_SKILL);
                 }
             }
+            else if (i == 44)
+            {
+                skillBonus += PChar->getMod(Mod::GEOMANCY);
+            }
+            else if (i == 45)
+            {
+                skillBonus += PChar->getMod(Mod::HANDBELL);
+            }
             else if (i >= 22 && i <= 24)
             {
                 if (PChar->PAutomaton)

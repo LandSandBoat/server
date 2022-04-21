@@ -359,7 +359,8 @@ public:
     uint8      m_weaknessLvl;    // tracks if the player was previously weakend
     bool       m_hasArise;       // checks if the white magic spell arise was cast on the player and a re-raise effect should be applied
     uint8      m_hasAutoTarget;  // возможность использования AutoTarget функции
-    position_t m_StartActionPos; // позиция начала действия (использование предмета, начало стрельбы, позиция tractor)
+    position_t m_StartActionPos; // action start position (item use, shooting start, tractor position)
+    position_t m_ActionOffsetPos; // action offset position from the action packet(currently only used for repositioning of luopans)
 
     location_t m_previousLocation;
 
