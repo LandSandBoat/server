@@ -287,6 +287,11 @@ local dynaIDLookup = -- Used to check for different IDs based on zoneID. Replace
         npc = -- npc for table lookup
         {
             [17539314] = 17539314
+        },
+        index =
+        {
+            mobLast = 17539312,
+            npcFirst = 17539314
         }
     },
     [xi.zone.DYNAMIS_BEAUCEDINE] = -- zoneID for array lookup
@@ -302,6 +307,11 @@ local dynaIDLookup = -- Used to check for different IDs based on zoneID. Replace
         npc = -- npc for table lookup
         {
             [17326792] = 17326792
+        },
+        index =
+        {
+            mobLast = 17326790,
+            npcFirst = 17326792
         }
     },
     [xi.zone.DYNAMIS_BUBURIMU] = -- zoneID for array lookup
@@ -347,6 +357,11 @@ local dynaIDLookup = -- Used to check for different IDs based on zoneID. Replace
         npc = -- npc for table lookup
         {
             [16941668] = 16941668
+        },
+        index =
+        {
+            mobLast = 16941666,
+            npcFirst = 16941668
         }
     },
     [xi.zone.DYNAMIS_JEUNO] = -- zoneID for array lookup
@@ -362,6 +377,11 @@ local dynaIDLookup = -- Used to check for different IDs based on zoneID. Replace
         npc = -- npc for table lookup
         {
             [17547501] = 17547501
+        },
+        index =
+        {
+            mobLast = 17547499,
+            npcFirst = 17547501
         }
     },
     [xi.zone.DYNAMIS_QUFIM] = -- zoneID for array lookup
@@ -388,6 +408,11 @@ local dynaIDLookup = -- Used to check for different IDs based on zoneID. Replace
         npc = -- npc for table lookup
         {
             [16945630] = 16945630
+        },
+        index =
+        {
+            mobLast = 16945628,
+            npcFirst = 16945630
         }
     },
     [xi.zone.DYNAMIS_SAN_DORIA] = -- zoneID for array lookup
@@ -403,6 +428,11 @@ local dynaIDLookup = -- Used to check for different IDs based on zoneID. Replace
         npc = -- npc for table lookup
         {
             [17535215] = 17535215
+        },
+        index =
+        {
+            mobLast = 17535213,
+            npcFirst = 17535215
         }
     },
     [xi.zone.DYNAMIS_TAVNAZIA] = -- zoneID for array lookup
@@ -418,6 +448,11 @@ local dynaIDLookup = -- Used to check for different IDs based on zoneID. Replace
         npc = -- npc for table lookup
         {
             [16949388] = 16949388
+        },
+        index =
+        {
+            mobLast = 16949386,
+            npcFirst = 16949388
         }
     },
     [xi.zone.DYNAMIS_VALKURM] = -- zoneID for array lookup
@@ -444,6 +479,11 @@ local dynaIDLookup = -- Used to check for different IDs based on zoneID. Replace
         npc = -- npc for table lookup
         {
             [16937577] = 16937577
+        },
+        index =
+        {
+            mobLast = 16937575,
+            npcFirst = 16937577
         }
     },
     [xi.zone.DYNAMIS_WINDURST] = -- zoneID for array lookup
@@ -459,6 +499,11 @@ local dynaIDLookup = -- Used to check for different IDs based on zoneID. Replace
         npc = -- npc for table lookup
         {
             [17543471] = 17543471
+        },
+        index =
+        {
+            mobLast = 17543469,
+            npcFirst = 17543471
         }
     },
     [xi.zone.DYNAMIS_XARCABARD] = -- zoneID for array lookup
@@ -474,6 +519,11 @@ local dynaIDLookup = -- Used to check for different IDs based on zoneID. Replace
         npc = -- npc for table lookup
         {
             [17330772] = 17330772
+        },
+        index =
+        {
+            mobLast = 17330770,
+            npcFirst = 17330772
         }
     }
 }
@@ -956,95 +1006,100 @@ xi.dynamis.eyesEra =
 --  Start Each Zone First / Spawn Mobs    --
 --------------------------------------------
 
-m:addOverride("xi.dynamis.zoneOnInitialize", function(zone) 
-    super(zone)
-    xi.dynamis.onZoneInitializeOverride(zone) -- Needs to be enabled for overrides to work.
-end)
-
-xi.dynamis.onZoneInitializeOverride = function (zone)
-    if zone ~= nil then
-        local iStart = 4096*4096+(4096*zone:getID()) -- Gets starting ID based on zoneID.
-        local i = iStart + 1 -- Sets original index.
-        local iEnd = iStart + 1023 -- Sets end of scope.
-
-        while i <= iEnd do
-            if dynaIDLookup[zone:getID()].npc[i] == i then -- Check if NPC is in the NPC array.
-                i = i + 23  -- If yes then skip ahead 23 IDs. This covers the gap of NPCs in every Dynamis zone.
-            end
-            mob = GetMobByID(i)
-            -- xi.dynamis.onMobOverride(mob) -- Needs to be enabled to cause mob lua overrides.
-            if i == iEnd then
-                local zoneName = zone:getName()
-                -- To add additional dynamis functions to new zone functions copy the below, change onZoneTick to whatever new function, and change the proposed function.
-                xi.dynamis.cleanupDynamis(zone)
-                xi["zones"][zoneName]["Zone"]["onZoneTick"] = xi.dynamis.handleDynamis(zone)-- Run handleDynamis
-            end
-            i = i + 1
-        end
-    end
-end
-
 xi.dynamis.onMobOverride = function(mob)
     local mobName = mob:getName()
     local zoneName = mob:getZoneID()
-    if not mob:isSpawned() then -- If I am spawned I cause problems :sadgebox:
-        if string.sub(mobName, 1, 8) == "Vanguard" and zone:getLocalVar(string.format("[DYNA]Mob_Module_Applied_%s", mobName)) ~= 1 then -- Check if its a vanguard and if the lua has been applied.
-            -- To add additional dynamis functions to new mob functions copy the below, change onMobRoamAction to whatever new function, and change the proposed function.
-            xi["zones"][zoneName]["mobs"][mobName]["onMobRoamAction"] = xi.dynamis.mobOnRoamAction(mob) -- Run mobOnRoamAction
-            xi["zones"][zoneName]["mobs"][mobName]["onMobRoam"] = xi.dynamis.mobOnRoam(mob) -- Run mobOnRoam
-            xi["zones"][zoneName]["mobs"][mobName]["onMobSpawn"] = xi.dynamis.setMobStats(mob) -- Run setMobStats
-            m:addOverride(xi["zones"][zoneName]["mobs"][mobName]["onMobDeath"], function(mob, player, isKiller)
-                xi.dynamis.mobOnDeath(mob, mobList[zoneID],dynaInfoEra[zoneID].text.DYNAMIS_TIME_EXTEND)
-            end)
-            if string.format("xi.zones.%s.mobs.%s.onMobDespawn", zoneName, mobName) ~= nil then
-                m:addOverride(xi["zones"][zoneName]["mobs"][mobName]["onMobDespawn"], function(mob)
-                end)
-            end
-            zone:setLocalVar(string.format("[DYNA]Mob_Module_Applied_%s", mobName), 1)
-        elseif string.sub(mobName, 1, 5) == "Hydra" and zone:getLocalVar(string.format("[DYNA]Mob_Module_Applied_%s", mobName)) ~= 1 then -- Check if its a hydra and if the lua has been applied.
-            -- To add additional dynamis functions to new mob functions copy the below, change onMobRoamAction to whatever new function, and change the proposed function.
-            xi["zones"][zoneName]["mobs"][mobName]["onMobRoamAction"] = xi.dynamis.mobOnRoamAction(mob) -- Run mobOnRoamAction
-            xi["zones"][zoneName]["mobs"][mobName]["onMobRoam"] = xi.dynamis.mobOnRoam(mob) -- Run mobOnRoam
-            xi["zones"][zoneName]["mobs"][mobName]["onMobSpawn"] = xi.dynamis.setMobStats(mob) -- Run setMobStats
-            m:addOverride(xi["zones"][zoneName]["mobs"][mobName]["onMobDeath"], function(mob, player, isKiller)
-                xi.dynamis.mobOnDeath(mob, mobList[zoneID],dynaInfoEra[zoneID].text.DYNAMIS_TIME_EXTEND)
-            end)
-            print("Hydra")
-            zone:setLocalVar(string.format("[DYNA]Mob_Module_Applied_%s", mobName), 1)
-        elseif string.sub(mobName, 1, 8) == "Kindred_" and zone:getLocalVar(string.format("[DYNA]Mob_Module_Applied_%s", mobName)) ~= 1 then -- Check if its a kindred and if the lua has been applied.
-            -- To add additional dynamis functions to new mob functions copy the below, change onMobRoamAction to whatever new function, and change the proposed function.
-            xi["zones"][zoneName]["mobs"][mobName]["onMobRoamAction"] = xi.dynamis.mobOnRoamAction(mob) -- Run mobOnRoamAction
-            xi["zones"][zoneName]["mobs"][mobName]["onMobRoam"] = xi.dynamis.mobOnRoam(mob) -- Run mobOnRoam
-            xi["zones"][zoneName]["mobs"][mobName]["onMobSpawn"] = xi.dynamis.setMobStats(mob) -- Run setMobStats
-            m:addOverride(xi["zones"][zoneName]["mobs"][mobName]["onMobDeath"], function(mob, player, isKiller)
-                xi.dynamis.mobOnDeath(mob, mobList[zoneID],dynaInfoEra[zoneID].text.DYNAMIS_TIME_EXTEND)
-            end)
-            if string.format("xi.zones.%s.mobs.%s.onMobDespawn", zoneName, mobName) ~= nil then
-                m:addOverride(xi["zones"][zoneName]["mobs"][mobName]["onMobDespawn"], function(mob)
-                end)
-            end
-            zone:setLocalVar(string.format("[DYNA]Mob_Module_Applied_%s", mobName), 1)
-        elseif string.sub(mobName, 1, 8) == "Nightmar" and zone:getLocalVar(string.format("[DYNA]Mob_Module_Applied_%s", mobName)) ~= 1 then -- Check if its a nightmare and if the lua has been applied.
-            -- To add additional dynamis functions to new mob functions copy the below, change onMobSpawn to whatever new function, and change the proposed function.
-            xi["zones"][zoneName]["mobs"][mobName]["onMobSpawn"] = xi.dynamis.onNightmareSpawn(mob) -- Run onNightmareSpawn
-            xi["zones"][zoneName]["mobs"][mobName]["onMobEngaged"] = xi.dynamis.statueOnEngaged(mob, target, mobList) -- Run onNightmareEngaged
-            m:addOverride(xi["zones"][zoneName]["mobs"][mobName]["onMobDeath"], function(mob, player, isKiller)
-                xi.dynamis.mobOnDeath(mob, mobList[zoneID],dynaInfoEra[zoneID].text.DYNAMIS_TIME_EXTEND)
-            end)
-            zone:setLocalVar(string.format("[DYNA]Mob_Module_Applied_%s", mobName), 1)
-        elseif (mob:getFamily() == 334 or mob:getFamily() == 337 or mob:getFamily() == 360 or mob:getFamily() == 358) and  zone:getLocalVar(string.format("[DYNA]Mob_Module_Applied_%s", mobName)) ~= 1 then -- Check to see if it is a Beastmen/Kindred NM.
-            xi["zones"][zoneName]["mobs"][mobName]["onMobRoamAction"] = xi.dynamis.mobOnRoamAction(mob) -- Run mobOnRoamAction
-            xi["zones"][zoneName]["mobs"][mobName]["onMobRoam"] = xi.dynamis.mobOnRoam(mob) -- Run mobOnRoam
-            xi["zones"][zoneName]["mobs"][mobName]["onMobSpawn"] = xi.dynamis.setNMStats(mob) -- Run setNMStats
-            m:addOverride(xi["zones"][zoneName]["mobs"][mobName]["onMobDeath"], function(mob, player, isKiller)
-                xi.dynamis.mobOnDeath(mob, mobList[zoneID],dynaInfoEra[zoneID].text.DYNAMIS_TIME_EXTEND)
-            end)
-            zone:setLocalVar(string.format("[DYNA]Mob_Module_Applied_%s", mobName), 1)
-        elseif (mob:getFamily() >= 92 and mob:getFamily() <= 95) then -- I am a statue.
-            xi.dynamis.statueOverride(mob) -- Run statueoverride function
-        else
-            xi.dynamis.nonStandardMobOverride(mob) -- Treat as non-standard mob. Things like non-statue megabosses.
+    local zone = mob:getZone()
+    if string.sub(mobName, 1, 8) == "Vanguard" and zone:getLocalVar(string.format("[DYNA]Mob_Module_Applied_%s", mobName)) ~= 1 then -- Check if its a vanguard and if the lua has been applied.
+        -- To add additional dynamis functions to new mob functions copy the below, change onMobRoamAction to whatever new function, and change the proposed function. (Keeping for Testing Purposes)
+        -- xi["zones"][zoneName]["mobs"][mobName]["onMobRoamAction"] = xi.dynamis.mobOnRoamAction(mob) -- Run mobOnRoamAction
+        -- xi["zones"][zoneName]["mobs"][mobName]["onMobRoam"] = xi.dynamis.mobOnRoam(mob) -- Run mobOnRoam
+        -- xi["zones"][zoneName]["mobs"][mobName]["onMobSpawn"] = xi.dynamis.setMobStats(mob) -- Run setMobStats
+        onMobRoamAction = function(mob, playerArg, isKiller)
+            xi.dynamis.mobOnRoamAction(mob)
         end
+        onMobRoam = function(mob)
+            xi.dynamis.mobOnRoam(mob)
+        end
+        m:addOverride(string.format("xi.zones.%s.mobs.%s.onMobSpawn", zoneName, mobName), function(mob, player, isKiller)
+            xi.dynamis.setMobStats(mob)
+        end)
+        m:addOverride(string.format("xi.zones.%s.mobs.%s.onMobDeath", zoneName, mobName), function(mob, player, isKiller)
+            xi.dynamis.mobOnDeath(mob, mobList[zoneID],dynaInfoEra[zoneID].text.DYNAMIS_TIME_EXTEND)
+        end)
+        if string.format("xi.zones.%s.mobs.%s.onMobDespawn", zoneName, mobName) ~= nil then
+            m:addOverride(string.format("xi.zones.%s.mobs.%s.onMobDespawn", zoneName, mobName), function(mob)
+            end)
+        end
+        zone:setLocalVar(string.format("[DYNA]Mob_Module_Applied_%s", mobName), 1)
+    elseif string.sub(mobName, 1, 5) == "Hydra" and zone:getLocalVar(string.format("[DYNA]Mob_Module_Applied_%s", mobName)) ~= 1 then -- Check if its a hydra and if the lua has been applied.
+        onMobRoamAction = function(mob, playerArg, isKiller)
+            xi.dynamis.mobOnRoamAction(mob)
+        end
+        onMobRoam = function(mob)
+            xi.dynamis.mobOnRoam(mob)
+        end
+        m:addOverride(string.format("xi.zones.%s.mobs.%s.onMobSpawn", zoneName, mobName), function(mob, player, isKiller)
+            xi.dynamis.setMobStats(mob)
+        end)
+        m:addOverride(string.format("xi.zones.%s.mobs.%s.onMobDeath", zoneName, mobName), function(mob, player, isKiller)
+            xi.dynamis.mobOnDeath(mob, mobList[zoneID],dynaInfoEra[zoneID].text.DYNAMIS_TIME_EXTEND)
+        end)
+        zone:setLocalVar(string.format("[DYNA]Mob_Module_Applied_%s", mobName), 1)
+    elseif string.sub(mobName, 1, 8) == "Kindred_" and zone:getLocalVar(string.format("[DYNA]Mob_Module_Applied_%s", mobName)) ~= 1 then -- Check if its a kindred and if the lua has been applied.
+        onMobRoamAction = function(mob, playerArg, isKiller)
+            xi.dynamis.mobOnRoamAction(mob)
+        end
+        onMobRoam = function(mob)
+            xi.dynamis.mobOnRoam(mob)
+        end
+        onMobSpawn = function(mob)
+            xi.dynamis.setMobStats(mob)
+        end
+        m:addOverride(string.format("xi.zones.%s.mobs.%s.onMobSpawn", zoneName, mobName), function(mob, player, isKiller)
+            xi.dynamis.setMobStats(mob)
+        end)
+        m:addOverride(string.format("xi.zones.%s.mobs.%s.onMobDeath", zoneName, mobName), function(mob, player, isKiller)
+            xi.dynamis.mobOnDeath(mob, mobList[zoneID],dynaInfoEra[zoneID].text.DYNAMIS_TIME_EXTEND)
+        end)
+        if string.format("xi.zones.%s.mobs.%s.onMobDespawn", zoneName, mobName) ~= nil then
+            m:addOverride(string.format("xi.zones.%s.mobs.%s.onMobDespawn", zoneName, mobName), function(mob)
+            end)
+        end
+        zone:setLocalVar(string.format("[DYNA]Mob_Module_Applied_%s", mobName), 1)
+    elseif string.sub(mobName, 1, 8) == "Nightmar" and zone:getLocalVar(string.format("[DYNA]Mob_Module_Applied_%s", mobName)) ~= 1 then -- Check if its a nightmare and if the lua has been applied.
+        onMobRoamAction = function(mob, playerArg, isKiller)
+            xi.dynamis.mobOnRoamAction(mob)
+        end
+        
+        m:addOverride(string.format("xi.zones.%s.mobs.%s.onMobSpawn", zoneName, mobName), function(mob, player, isKiller)
+            xi.dynamis.setMobStats(mob)
+        end)
+        onMobEngaged = function(mob)
+            xi.dynamis.statueOnEngaged(mob, target, mobList)
+        end
+        m:addOverride(string.format("xi.zones.%s.mobs.%s.onMobDeath", zoneName, mobName), function(mob, player, isKiller)
+            xi.dynamis.mobOnDeath(mob, mobList[zoneID],dynaInfoEra[zoneID].text.DYNAMIS_TIME_EXTEND)
+        end)
+        zone:setLocalVar(string.format("[DYNA]Mob_Module_Applied_%s", mobName), 1)
+    elseif (mob:getFamily() == 334 or mob:getFamily() == 337 or mob:getFamily() == 360 or mob:getFamily() == 358) and  zone:getLocalVar(string.format("[DYNA]Mob_Module_Applied_%s", mobName)) ~= 1 then -- Check to see if it is a Beastmen/Kindred NM.
+        onMobRoamAction = function(mob, playerArg, isKiller)
+            xi.dynamis.mobOnRoamAction(mob)
+        end
+        onMobRoam = function(mob)
+            xi.dynamis.mobOnRoam(mob)
+        end
+        m:addOverride(string.format("xi.zones.%s.mobs.%s.onMobSpawn", zoneName, mobName), function(mob, player, isKiller)
+            xi.dynamis.setNMStats(mob)
+        end)
+        m:addOverride(string.format("xi.zones.%s.mobs.%s.onMobDeath", zoneName, mobName), function(mob, player, isKiller)
+            xi.dynamis.mobOnDeath(mob, mobList[zoneID],dynaInfoEra[zoneID].text.DYNAMIS_TIME_EXTEND)
+        end)
+        zone:setLocalVar(string.format("[DYNA]Mob_Module_Applied_%s", mobName), 1)
+    elseif (mob:getFamily() >= 92 and mob:getFamily() <= 95) then -- I am a statue.
+        xi.dynamis.onstatueOverride(mob) -- Run statueoverride function
+    else
+        xi.dynamis.onNonStandardMobOverride(mob) -- Treat as non-standard mob. Things like non-statue megabosses.
     end
 end
 
@@ -1060,12 +1115,12 @@ end
 --      onZoneTick Dynamis Functions      --
 --------------------------------------------
 xi.dynamis.handleDynamis = function(zone)
+    print(zone:getName())
     if zone ~= nil then
         if GetServerVariable(string.format("[DYNA]ValidOnTick_%s", zone:getID())) == 1 then -- Check if dynamis should be active. This is to save resources when the zone is not in use.
             local zoneToken = GetServerVariable(string.format("[DYNA]Token_%s", zone:getID()))
             local zoneExpireTime = GetServerVariable(string.format("[DYNA]Timepoint_%s", zone:getID()))
             local playersInZone = zone:getPlayers()
-            local playersLeftZone = zone:getLocalVar(string.format("[DYNA]_%s", zone:getID()))
 
             for _, player in pairs(playersInZone) do
                 xi.dynamis.verifyHoldsValidHourglass(player, zoneToken, zoneExpireTime)
@@ -1128,7 +1183,7 @@ xi.dynamis.onNewDynamis = function(player)
     while i <= iEnd do
 
         if dynaIDLookup[zone:getID()].npc[i] == i then -- Check if NPC is in the NPC array.
-            i = i + 23  -- If yes then skip ahead 23 IDs. This covers the gap of NPCs in every Dynamis zone.
+            break
         end
             
         entity = GetMobByID(i) -- Gets the Mob from its ID.
@@ -1206,8 +1261,6 @@ xi.dynamis.getDynaTimeRemaining = function(zone)
 end
 
 xi.dynamis.cleanupDynamis = function(zone)
-    xi.dynamis.ejectAllPlayers(zone) -- Remove Players (This is precautionary but not necessary.)
-    print("Zone: " .. zone:getName())
     SetServerVariable(string.format("[DYNA]RegisteredPlayers_%s", zone:getID()), 0)
     SetServerVariable(string.format("[DYNA]Token_%s", zone:getID()), 0)
     SetServerVariable(string.format("[DYNA]Timepoint_%s", zone:getID()), 0)
@@ -1217,34 +1270,46 @@ xi.dynamis.cleanupDynamis = function(zone)
     SetServerVariable(string.format("[DYNA]Given1MinuteWarning_%s", zone:getID()), 0)
     SetServerVariable(string.format("[DYNA]ExpireRoutine_%s", zone:getID()), 0)
     SetServerVariable(string.format("[DYNA]ValidOnTick_%s", zone:getID()), 0)
+    if zone:getLocalVar("Dynamis_Initial_Mob_Override") ~= nil then
+        xi.dynamis.ejectAllPlayers(zone) -- Remove Players (This is precautionary but not necessary.)
+    end
     
     -- Cleanup Zone
     local iStart = 4096*4096+(4096*zone:getID()) -- Grab start of ID range
-    local i = iStart -- Set first ID
+    local i = iStart + 1 -- Set first ID
     local iEnd = iStart + 1023 -- Find end of ID range.
     local entity = nil
     
     while i <= iEnd do -- While IDs are valid do the following.
 
-        if dynaIDLookup[zone:getID()].npc[i] == i then -- Check if NPC is in the NPC array.
-            i = i + 23  -- If yes then skip ahead 23 IDs. This covers the gap of NPCs in every Dynamis zone.
+        if i <= dynaIDLookup[zone:getID()].index.mobLast then
+            entity = GetMobByID(i)
+        elseif i >= (dynaIDLookup[zone:getID()].index.npcFirst + 3) and i <= (dynaIDLookup[zone:getID()].index.npcFirst + 25) then
+            entity = GetNPCByID(i)
         end
-
-        entity = GetMobByID(i) -- Gets the Mob from its ID.
 
         if entity ~= nil then
             if entity:isMob() then -- Double check if it is a mob.
                 if entity:isSpawned() then
+                    DisallowRespawn(i, true)
                     DespawnMob(i) -- Despawn if true.
+                    if zone:getLocalVar("Dynamis_Initial_Mob_Override") ~= i then -- Stop this from overriding mob luas except for first time.
+                        zone:setLocalVar("Dynamis_Initial_Mob_Override", i)
+                        xi.dynamis.onMobOverride(GetMobByID(i))
+                    end
                 end
-                if GetNPCByID(dynaInfoEra[zone:getID()].winQM):getStatus() == xi.status.NORMAL then
-                    GetNPCByID(dynaInfoEra[zone:getID()].winQM):setStatus(xi.status.DISAPPEAR)
+                if dynaInfoEra[zone:getID()].winQM ~= nil then
+                    if GetNPCByID(dynaInfoEra[zone:getID()].winQM):getStatus() == xi.status.NORMAL then
+                        GetNPCByID(dynaInfoEra[zone:getID()].winQM):setStatus(xi.status.DISAPPEAR)
+                    end
                 end
                 if dynaInfoEra[zone:getID()].sjRestrictionNPC ~= nil then
                     if GetNPCByID(dynaInfoEra[zone:getID()].sjRestrictionNPC):getStatus() == xi.status.NORMAL then
                         GetNPCByID(dynaInfoEra[zone:getID()].sjRestrictionNPC):setStatus(xi.status.DISAPPEAR)
                     end
                 end
+            elseif entity:isNPC() then
+                entity:setStatus(xi.status.DISAPPEAR)
             end
         end
         i = i + 1 -- Increment by 1 ID.

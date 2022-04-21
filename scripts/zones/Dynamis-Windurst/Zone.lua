@@ -11,6 +11,9 @@ zone_object.onInitialize = function(zone)
     xi.dynamis.zoneOnInitialize(zone)
 end
 
+zone_object.onZoneTick = function(zone)
+end
+
 zone_object.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
 end
