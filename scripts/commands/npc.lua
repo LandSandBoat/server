@@ -16,7 +16,7 @@ function onTrigger(player, npc)
     local npc = zone:insertDynamicEntity({
         -- NPC or MOB
         objtype = xi.objType.NPC,
-        
+
         -- The name visible to players
         -- NOTE: Even if you plan on making the name invisible, we're using it internally for lookups
         --     : So populate it with something unique-ish even if you aren't going to use it.
