@@ -30,7 +30,7 @@ entity.onTrigger = function(player, npc)
     if
         player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.FALLEN_COMRADES) == 0 and
         player:getMainLvl(player) >= 12 and
-        player:getFameLevel(BASTOK) >= 2
+        player:getFameLevel(xi.quest.fame_area.BASTOK) >= 2
     then
         player:startEvent(90)
 
@@ -49,11 +49,11 @@ entity.onEventFinish = function(player, csid, option)
         player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.FALLEN_COMRADES)
     elseif csid == 91 then
         player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.FALLEN_COMRADES)
-        player:addFame(BASTOK, 120)
+        player:addFame(xi.quest.fame_area.BASTOK, 120)
         player:addGil(xi.settings.GIL_RATE * 550)
         player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 550)
     elseif csid == 92 then
-        player:addFame(BASTOK, 8)
+        player:addFame(xi.quest.fame_area.BASTOK, 8)
         player:addGil(xi.settings.GIL_RATE * 550)
         player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 550)
     end

@@ -13,13 +13,13 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     -- Trade Seedspall's Lux, Luna, Astrum
-    if player:getCurrentMission(ACP) == xi.mission.id.acp.THE_ECHO_AWAKENS and npcUtil.tradeHas(trade, {2740, 2741, 2742}) then
+    if player:getCurrentMission(xi.mission.log_id.ACP) == xi.mission.id.acp.THE_ECHO_AWAKENS and npcUtil.tradeHas(trade, {2740, 2741, 2742}) then
         player:startEvent(31)
     end
 end
 
 entity.onTrigger = function(player, npc)
-    local missionACP = player:getCurrentMission(ACP)
+    local missionACP = player:getCurrentMission(xi.mission.log_id.ACP)
     local SR = player:hasKeyItem(xi.ki.SEEDSPALL_ROSEUM)
     local SC = player:hasKeyItem(xi.ki.SEEDSPALL_CAERULUM)
     local SV = player:hasKeyItem(xi.ki.SEEDSPALL_VIRIDIS)

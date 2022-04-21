@@ -31,7 +31,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(10023, 0, 1172, 0, 0, 0, 0, 0, 0) -- "lost the pendulum?"
     -----------------------------------
     -- Trial by Lightning
-    elseif ((TrialByLightning == QUEST_AVAILABLE and player:getFameLevel(WINDURST) >= 6) or (TrialByLightning == QUEST_COMPLETED and os.time() > player:getCharVar("TrialByLightning_date"))) then
+    elseif ((TrialByLightning == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.WINDURST) >= 6) or (TrialByLightning == QUEST_COMPLETED and os.time() > player:getCharVar("TrialByLightning_date"))) then
         player:startEvent(10016, 0, xi.ki.TUNING_FORK_OF_LIGHTNING) -- Start and restart quest "Trial by Lightning"
     elseif (TrialByLightning == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.TUNING_FORK_OF_LIGHTNING) == false and WhisperOfStorms == false) then
         player:startEvent(10024, 0, xi.ki.TUNING_FORK_OF_LIGHTNING) -- Defeat against Ramuh : Need new Fork
@@ -93,7 +93,7 @@ entity.onEventFinish = function(player, csid, option)
             player:addTitle(xi.title.HEIR_OF_THE_GREAT_LIGHTNING)
             player:delKeyItem(xi.ki.WHISPER_OF_STORMS) --Whisper of Storms, as a trade for the above rewards
             player:setCharVar("TrialByLightning_date", getMidnight())
-            player:addFame(MHAURA, 30)
+            player:addFame(xi.quest.fame_area.WINDURST, 30)
             player:completeQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TRIAL_BY_LIGHTNING)
         end
     elseif (csid == 10022 or csid == 10023) then

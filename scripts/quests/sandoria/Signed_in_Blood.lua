@@ -26,7 +26,7 @@ quest.sections =
     -- She wants you to retrieve a Cathedral Tapestry.
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and player:getFameLevel(SANDORIA) >= 3
+            return status == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 3
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA] =

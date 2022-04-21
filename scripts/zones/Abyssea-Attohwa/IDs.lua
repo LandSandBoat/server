@@ -100,6 +100,7 @@ zones[xi.zone.ABYSSEA_ATTOHWA] =
             --  [17658374] = {'qm24',     {},                                                              { xi.ki.MUCID_WORM_SEGMENT, xi.ki.SHRIVELED_HECTEYES_STALK}, 17658284}, -- Ulhuadshi
             --  [17658375] = {'qm25',     {},                           { xi.ki.VENOMOUS_WAMOURA_FEELER, xi.ki.BULBOUS_CRAWLER_COCOON, xi.ki.DISTENDED_CHIGOE_ABDOMEN}, 17658285}, -- Itzpapalotl
         },
+        STURDY_PYXIS_BASE = 17658390,
     },
 }
 

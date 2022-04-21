@@ -1,4 +1,3 @@
-require("scripts/globals/log_ids")
 require("scripts/globals/zone")
 
 xi = xi or {}
@@ -48,6 +47,29 @@ xi.quest.area =
     [xi.quest.log_id.COALITION]   = 'coalition',
 }
 
+-- NOTE: Duplicated areas should not be used here.  For example,
+-- Mhaura and Kazham fame use WINDURST fame area.  This table
+-- follows mapping of CLuaBaseEntity::addFame()
+xi.quest.fame_area =
+{
+    SANDORIA           =  0,
+    BASTOK             =  1,
+    WINDURST           =  2, -- Mhaura, Kazham
+    JEUNO              =  3,
+    SELBINA_RABAO      =  4,
+    NORG               =  5,
+    ABYSSEA_KONSCHTAT  =  6,
+    ABYSSEA_TAHRONGI   =  7,
+    ABYSSEA_LATHEINE   =  8,
+    ABYSSEA_MISAREAUX  =  9,
+    ABYSSEA_VUNKERL    = 10,
+    ABYSSEA_ATTOHWA    = 11,
+    ABYSSEA_ALTEPA     = 12,
+    ABYSSEA_GRAUBERG   = 13,
+    ABYSSEA_ULEGUERAND = 14,
+    ADOULIN            = 15,
+}
+
 xi.quest.id =
 {
     -----------------------------------
@@ -62,8 +84,8 @@ xi.quest.id =
         FATHER_AND_SON                  = 4,  -- + Converted
         THE_SEAMSTRESS                  = 5,  -- + Converted
         THE_DISMAYED_CUSTOMER           = 6,  -- + Converted
-        THE_TRADER_IN_THE_FOREST        = 7,  -- +
-        THE_SWEETEST_THINGS             = 8,  -- +
+        THE_TRADER_IN_THE_FOREST        = 7,  -- + Converted
+        THE_SWEETEST_THINGS             = 8,  -- + Converted
         THE_VICASQUE_S_SERMON           = 9,  -- +
         A_SQUIRE_S_TEST                 = 10, -- +
         GRAVE_CONCERNS                  = 11, -- ±
@@ -646,8 +668,8 @@ xi.quest.id =
         OLDUUM                          = 2, -- + Converted
         GOT_IT_ALL                      = 3, -- + Converted
         GET_THE_PICTURE                 = 4,
-        AN_EMPTY_VESSEL                 = 5, -- +
-        LUCK_OF_THE_DRAW                = 6, -- ± Converted
+        AN_EMPTY_VESSEL                 = 5, -- + Converted
+        LUCK_OF_THE_DRAW                = 6, -- + Converted
         NO_STRINGS_ATTACHED             = 7, -- +
         FINDING_FAULTS                  = 8,
         GIVE_PEACE_A_CHANCE             = 9, -- + Converted
@@ -662,9 +684,9 @@ xi.quest.id =
         TOTOROONS_TREASURE_HUNT         = 18,
         WHAT_FRIENDS_ARE_FOR            = 19, -- + Converted
         ROCK_BOTTOM                     = 20, -- + Converted
-        BEGINNINGS                      = 21, -- +
-        OMENS                           = 22, -- +
-        TRANSFORMATIONS                 = 23, -- +
+        BEGINNINGS                      = 21, -- + Converted
+        OMENS                           = 22, -- + Converted
+        TRANSFORMATIONS                 = 23, -- + Converted
         EQUIPPED_FOR_ALL_OCCASIONS      = 24, -- + Converted
         NAVIGATING_THE_UNFRIENDLY_SEAS  = 25, -- +
         AGAINST_ALL_ODDS                = 26,
@@ -1243,10 +1265,10 @@ xi.quest.setLocalVar = function(player, areaId, questId, name, value)
     return player:setLocalVar(getVarPrefix(areaId, questId) .. name, value)
 end
 
-xi.quest.getMustZone = function(player, areaId, questId, name)
+xi.quest.getMustZone = function(player, areaId, questId)
     return player:getLocalVar(getVarPrefix(areaId, questId) .. "mustZone") == 1 and true or false
 end
 
-xi.quest.setMustZone = function(player, areaId, questId, name, value)
+xi.quest.setMustZone = function(player, areaId, questId)
     player:setLocalVar(getVarPrefix(areaId, questId) .. "mustZone", 1)
 end

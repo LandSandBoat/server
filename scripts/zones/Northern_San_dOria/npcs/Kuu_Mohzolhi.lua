@@ -74,7 +74,7 @@ entity.onEventFinish = function(player, csid, option)
     if csid == 605 and option == 1002 then
         player:tradeComplete()
         player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GROWING_FLOWERS)
-        player:addFame(SANDORIA, 120)
+        player:addFame(xi.quest.fame_area.SANDORIA, 120)
         player:setMoghouseFlag(1)
         player:messageSpecial(ID.text.MOGHOUSE_EXIT)
     elseif csid == 605 and option == 1 then

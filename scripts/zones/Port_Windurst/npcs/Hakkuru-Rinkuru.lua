@@ -36,7 +36,7 @@ entity.onTrigger = function(player, npc)
     local MakingAmens = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_AMENS) --Second quest in series
     local WonderWands = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDER_WANDS) --Third and final quest in series
     local needToZone = player:needToZone()
-    local pFame = player:getFameLevel(WINDURST)
+    local pFame = player:getFameLevel(xi.quest.fame_area.WINDURST)
 
 -- Begin Making Amends Section
     if (MakingAmends == QUEST_AVAILABLE and pFame >= 2) then
@@ -67,7 +67,7 @@ entity.onEventFinish = function(player, csid, option)
     elseif (csid == 277) then
             player:addGil(xi.settings.GIL_RATE*1500)
             player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_AMENDS)
-            player:addFame(WINDURST, 75)
+            player:addFame(xi.quest.fame_area.WINDURST, 75)
             player:addTitle(xi.title.QUICK_FIXER)
             player:needToZone(true)
             player:tradeComplete()
@@ -124,7 +124,7 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.GIL_OBTAINED, 4800)
             player:addItem(12750) -- New Moon Armlets
             player:messageSpecial(ID.text.ITEM_OBTAINED, 12750) -- New Moon Armlets
-            player:addFame(WINDURST, 150)
+            player:addFame(xi.quest.fame_area.WINDURST, 150)
             player:addTitle(xi.title.DOCTOR_SHANTOTTOS_GUINEA_PIG)
             player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDER_WANDS)
         end

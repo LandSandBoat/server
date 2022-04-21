@@ -24,14 +24,14 @@ entity.onTrigger = function(player, npc)
     local LoversInTheDusk = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LOVERS_IN_THE_DUSK)
 
     if (LoveAndIce == QUEST_AVAILABLE and SirensTear == QUEST_COMPLETED) then
-        if (player:getFameLevel(BASTOK) >= 5 and player:seenKeyItem(xi.ki.CARRIER_PIGEON_LETTER) == true) then
+        if (player:getFameLevel(xi.quest.fame_area.BASTOK) >= 5 and player:seenKeyItem(xi.ki.CARRIER_PIGEON_LETTER) == true) then
             player:startEvent(185)
         else
             player:startEvent(187)
         end
     elseif (LoveAndIce == QUEST_ACCEPTED and LoveAndIceProgress == 1) then
         player:startEvent(186)
-    elseif (player:getFameLevel(BASTOK) >= 7 and ATestOfTrueLove == QUEST_AVAILABLE and LoveAndIce == QUEST_COMPLETED and player:needToZone() == false) then
+    elseif (player:getFameLevel(xi.quest.fame_area.BASTOK) >= 7 and ATestOfTrueLove == QUEST_AVAILABLE and LoveAndIce == QUEST_COMPLETED and player:needToZone() == false) then
         player:startEvent(270)
     elseif (ATestOfTrueLove == QUEST_ACCEPTED and ATestOfTrueLoveProgress < 3) then
         player:startEvent(271)
@@ -67,7 +67,7 @@ entity.onEventFinish = function(player, csid, option)
             player:addTitle(xi.title.SORROW_DROWNER)
             player:addItem(17356)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 17356) -- Lamia Harp
-            player:addFame(BASTOK, 120)
+            player:addFame(xi.quest.fame_area.BASTOK, 120)
             player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LOVE_AND_ICE)
         end
     elseif (csid == 270) then
@@ -78,7 +78,7 @@ entity.onEventFinish = function(player, csid, option)
     elseif (csid == 274) then
         player:setCharVar("ATestOfTrueLoveProgress", 0)
         player:needToZone(true)
-        player:addFame(BASTOK, 120)
+        player:addFame(xi.quest.fame_area.BASTOK, 120)
         player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.A_TEST_OF_TRUE_LOVE)
     elseif (csid == 275) then
         player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LOVERS_IN_THE_DUSK)

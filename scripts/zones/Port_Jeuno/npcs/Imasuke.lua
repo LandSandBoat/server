@@ -45,7 +45,7 @@ entity.onTrigger = function(player, npc)
     -- THE ANTIQUE COLLECTOR
     elseif
         theAntiqueCollector == QUEST_AVAILABLE and
-        player:getFameLevel(JEUNO) >= 3
+        player:getFameLevel(xi.quest.fame_area.JEUNO) >= 3
     then
         player:startEvent(13) -- Start quest
 
@@ -75,7 +75,7 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.GIL_OBTAINED, 2000 * xi.settings.GIL_RATE)
             player:addExp(2000 * xi.settings.EXP_RATE)
         end
-        player:addFame(JEUNO, 30)
+        player:addFame(xi.quest.fame_area.JEUNO, 30)
         player:tradeComplete()
         player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_ANTIQUE_COLLECTOR)
 

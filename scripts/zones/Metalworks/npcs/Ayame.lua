@@ -54,7 +54,7 @@ entity.onEventFinish = function(player, csid, option)
             player:addTitle(xi.title.PARAGON_OF_MONK_EXCELLENCE)
             player:addItem(14215)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 14215) -- Temple Hose
-            player:addFame(BASTOK, 60)
+            player:addFame(xi.quest.fame_area.BASTOK, 60)
             player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRUE_STRENGTH)
         end
     elseif (csid == 935) then

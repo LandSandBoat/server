@@ -16,7 +16,7 @@ entity.onTrigger = function(player, npc)
     if player:getNation() ~= xi.nation.WINDURST then
         player:startEvent(103) -- for other nation
     else
-        local currentMission = player:getCurrentMission(WINDURST)
+        local currentMission = player:getCurrentMission(xi.mission.log_id.WINDURST)
 
         if currentMission ~= xi.mission.id.windurst.NONE then
             player:startEvent(109)

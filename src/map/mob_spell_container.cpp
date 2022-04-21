@@ -119,7 +119,8 @@ std::optional<SpellID> CMobSpellContainer::GetAvailable(SpellID spellId)
                     spell->getSkillType() == SKILL_NINJUTSU ||
                     spell->getSkillType() == SKILL_SINGING ||
                     spell->getSkillType() == SKILL_WIND_INSTRUMENT ||
-                    spell->getSkillType() == SKILL_STRING_INSTRUMENT;
+                    spell->getSkillType() == SKILL_STRING_INSTRUMENT||
+                    spell->getSkillType() == SKILL_GEOMANCY;
     bool isNotInRecast = !m_PMob->PRecastContainer->Has(RECAST_MAGIC, static_cast<uint16>(spellId));
 
     return (isNotInRecast && enoughMP) ? std::optional<SpellID>(spellId) : std::nullopt;
@@ -139,7 +140,8 @@ std::optional<SpellID> CMobSpellContainer::GetBestAvailable(SPELLFAMILY family)
                             spell->getSkillType() == SKILL_NINJUTSU ||
                             spell->getSkillType() == SKILL_SINGING ||
                             spell->getSkillType() == SKILL_WIND_INSTRUMENT ||
-                            spell->getSkillType() == SKILL_STRING_INSTRUMENT;
+                            spell->getSkillType() == SKILL_STRING_INSTRUMENT ||
+                            spell->getSkillType() == SKILL_GEOMANCY;
             bool isNotInRecast = !m_PMob->PRecastContainer->Has(RECAST_MAGIC, static_cast<uint16>(id));
             if (sameFamily && enoughMP && isNotInRecast)
             {

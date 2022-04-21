@@ -33,7 +33,7 @@ end
 entity.onTrigger = function(player, npc)
 
     local MeanMachine = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.MEAN_MACHINE)
-    local Fame = player:getFameLevel(BASTOK)
+    local Fame = player:getFameLevel(xi.quest.fame_area.BASTOK)
 
     if MeanMachine == QUEST_AVAILABLE and Fame >= 2 then
         player:startEvent(556)
@@ -54,7 +54,7 @@ entity.onEventFinish = function(player, csid, option)
         player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.MEAN_MACHINE)
     elseif csid == 557 then
         player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.MEAN_MACHINE)
-        player:addFame(BASTOK, 120)
+        player:addFame(xi.quest.fame_area.BASTOK, 120)
         player:tradeComplete()
         player:addItem(4869)
         player:messageSpecial(ID.text.ITEM_OBTAINED, 4869)

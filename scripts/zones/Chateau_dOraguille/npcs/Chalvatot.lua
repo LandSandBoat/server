@@ -49,7 +49,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(561)
 
     -- HER MAJESTY'S GARDEN
-    elseif (herMajestysGarden == QUEST_AVAILABLE and player:getFameLevel(SANDORIA) >= 4) then
+    elseif (herMajestysGarden == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 4) then
         player:startEvent(84)
     elseif (herMajestysGarden == QUEST_ACCEPTED) then
         player:startEvent(82)
@@ -93,7 +93,7 @@ entity.onEventFinish = function(player, csid, option)
         player:tradeComplete()
         player:addKeyItem(xi.ki.MAP_OF_THE_NORTHLANDS_AREA)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MAP_OF_THE_NORTHLANDS_AREA)
-        player:addFame(SANDORIA, 30)
+        player:addFame(xi.quest.fame_area.SANDORIA, 30)
         player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.HER_MAJESTY_S_GARDEN)
     end
 end

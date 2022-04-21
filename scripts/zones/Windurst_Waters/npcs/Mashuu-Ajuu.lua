@@ -81,11 +81,11 @@ entity.onEventFinish = function(player, csid, option)
         player:needToZone(true)
         if (player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.REAP_WHAT_YOU_SOW) == QUEST_ACCEPTED) then
             player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.REAP_WHAT_YOU_SOW)
-            player:addFame(WINDURST, 75)
+            player:addFame(xi.quest.fame_area.WINDURST, 75)
             player:addItem(131)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 131)
         elseif (player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.REAP_WHAT_YOU_SOW) == QUEST_COMPLETED) then
-            player:addFame(WINDURST, 8)
+            player:addFame(xi.quest.fame_area.WINDURST, 8)
             player:setCharVar("QuestReapSow_var", 0)
         end
     elseif (csid == 477) then                                -- REAP WHAT YOU SOW + GIL + Stationary Set: Quest Turn In: Deathball turned in
@@ -94,11 +94,11 @@ entity.onEventFinish = function(player, csid, option)
         player:needToZone(true)
         if (player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.REAP_WHAT_YOU_SOW) == QUEST_ACCEPTED) then
             player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.REAP_WHAT_YOU_SOW)
-            player:addFame(WINDURST, 75)
+            player:addFame(xi.quest.fame_area.WINDURST, 75)
             player:addItem(131)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 131)
         elseif (player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.REAP_WHAT_YOU_SOW) == QUEST_COMPLETED) then
-            player:addFame(WINDURST, 8)
+            player:addFame(xi.quest.fame_area.WINDURST, 8)
             player:setCharVar("QuestReapSow_var", 0)
         end
     elseif (csid == 479 and option == 3) then                 -- REAP WHAT YOU SOW + HERB SEEDS: REPEATABLE QUEST START - ACCEPTED

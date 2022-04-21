@@ -26,7 +26,7 @@ zone_object.onZoneIn = function(player, prevZone)
         player:setPos(-4, -26, 134, 87)
     end
 
-    if player:getCurrentMission(COP) == xi.mission.id.cop.CHAINS_AND_BONDS and player:getCharVar("PromathiaStatus") == 1 then
+    if player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.CHAINS_AND_BONDS and player:getCharVar("PromathiaStatus") == 1 then
         cs = 114
     end
 

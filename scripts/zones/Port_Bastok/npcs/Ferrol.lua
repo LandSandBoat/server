@@ -23,7 +23,7 @@ entity.onTrigger = function(player, npc)
 
     local TrialSizeEarth = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRIAL_SIZE_TRIAL_BY_EARTH)
 
-    if (player:getMainLvl() >= 20 and player:getMainJob() == xi.job.SMN and TrialSizeEarth == QUEST_AVAILABLE and player:getFameLevel(BASTOK) >= 2) then -- Requires player to be Summoner at least lvl 20
+    if (player:getMainLvl() >= 20 and player:getMainJob() == xi.job.SMN and TrialSizeEarth == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.BASTOK) >= 2) then -- Requires player to be Summoner at least lvl 20
         player:startEvent(297, 0, 1547, 1, 20)     --mini tuning fork, zone, level
     elseif (TrialSizeEarth == QUEST_ACCEPTED) then
         local EarthFork = player:hasItem(1547)

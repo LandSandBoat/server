@@ -97,6 +97,7 @@ zones[xi.zone.ABYSSEA_ULEGUERAND] =
             --  [17813969] = {'qm21',               {},                                {xi.ki.BEGRIMED_DRAGON_HIDE}, 17813920}, -- Isgebind
             --  [17813970] = {'qm22',               {},                              {xi.ki.DECAYING_DIREMITE_FANG}, 17813921}, -- Resheph
         },
+        STURDY_PYXIS_BASE = 17813987,
     },
 }
 

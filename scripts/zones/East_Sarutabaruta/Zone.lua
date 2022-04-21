@@ -29,7 +29,7 @@ zone_object.onZoneIn = function(player, prevZone)
 
     if quests.rainbow.onZoneIn(player) then
         cs = 50;
-    elseif (player:getCurrentMission(ASA) == xi.mission.id.asa.BURGEONING_DREAD and prevZone == xi.zone.WINDURST_WOODS and
+    elseif (player:getCurrentMission(xi.mission.log_id.ASA) == xi.mission.id.asa.BURGEONING_DREAD and prevZone == xi.zone.WINDURST_WOODS and
         player:hasStatusEffect(xi.effect.MOUNTED) == false) then
         cs = 71
     end

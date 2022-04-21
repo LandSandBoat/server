@@ -9,7 +9,7 @@ xi = xi or {}
 xi.geomagneticFount = xi.geomagneticFount or {}
 
 xi.geomagneticFount.checkFount = function(player, npc)
-    local theGeomagnetron = player:getCurrentMission(SOA) == xi.mission.id.soa.THE_GEOMAGNETRON
+    local theGeomagnetron = player:getCurrentMission(xi.mission.log_id.SOA) == xi.mission.id.soa.THE_GEOMAGNETRON
     local charged = player:getCharVar("SOA") == 1
 
     if theGeomagnetron and charged then

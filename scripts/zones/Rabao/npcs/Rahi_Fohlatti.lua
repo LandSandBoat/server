@@ -21,7 +21,7 @@ end
 entity.onTrigger = function(player, npc)
     local TrialSizeWind = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_SIZE_TRIAL_BY_WIND)
 
-    if (player:getMainLvl() >= 20 and player:getMainJob() == xi.job.SMN and TrialSizeWind == QUEST_AVAILABLE and player:getFameLevel(RABAO) >= 2) then --Requires player to be Summoner at least lvl 20
+    if (player:getMainLvl() >= 20 and player:getMainJob() == xi.job.SMN and TrialSizeWind == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.SELBINA_RABAO) >= 2) then --Requires player to be Summoner at least lvl 20
         player:startEvent(108, 0, 1546, 3, 20)     --mini tuning fork, zone, level
     elseif (TrialSizeWind == QUEST_ACCEPTED) then
         local WindFork = player:hasItem(1546)

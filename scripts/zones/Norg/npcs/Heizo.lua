@@ -40,7 +40,7 @@ entity.onTrigger = function(player, npc)
 
     local ShiningLeggings = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.LIKE_A_SHINING_LEGGINGS)
 
-    if (ShiningLeggings == QUEST_AVAILABLE and  player:getFameLevel(NORG) >= 3) then
+    if (ShiningLeggings == QUEST_AVAILABLE and  player:getFameLevel(xi.quest.fame_area.NORG) >= 3) then
         player:startEvent(127) -- Start Like Shining Leggings
     elseif (ShiningLeggings == QUEST_ACCEPTED) then
         player:startEvent(128, player:getCharVar("shiningSubligar_nb")) -- Update player on number of Leggings turned in
@@ -61,7 +61,7 @@ entity.onEventFinish = function(player, csid, option)
         player:tradeComplete()
         player:addItem(4958) -- Scroll of Dokumori: Ichi
         player:messageSpecial(ID.text.ITEM_OBTAINED, 4958) -- Scroll of Dokumori: Ichi
-        player:addFame(NORG, 100)
+        player:addFame(xi.quest.fame_area.NORG, 100)
         player:addTitle(xi.title.LOOKS_GOOD_IN_LEGGINGS)
         player:setCharVar("shiningLeggings_nb", 0)
         player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.LIKE_A_SHINING_LEGGINGS)

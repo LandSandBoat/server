@@ -79,7 +79,7 @@ entity.onEventFinish = function(player, csid, option)
     if csid == 351 then
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_FANGED_ONE)
         player:setCharVar("TheFangedOneCS", 1)
-    elseif (csid == 357 or csid == 358) and npcUtil.completeQuest(player, WINDURST, xi.quest.id.windurst.THE_FANGED_ONE, {item=13117, title=xi.title.THE_FANGED_ONE, var={"TheFangedOne_Event", "TheFangedOneCS"}}) then
+    elseif (csid == 357 or csid == 358) and npcUtil.completeQuest(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_FANGED_ONE, {item=13117, title=xi.title.THE_FANGED_ONE, var={"TheFangedOne_Event", "TheFangedOneCS"}}) then
         player:delKeyItem(xi.ki.OLD_TIGERS_FANG)
         player:unlockJob(xi.job.RNG)
         player:messageSpecial(ID.text.PERIH_VASHAI_DIALOG)
@@ -89,7 +89,7 @@ entity.onEventFinish = function(player, csid, option)
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.SIN_HUNTING)
         npcUtil.giveKeyItem(player, xi.ki.CHIEFTAINNESSS_TWINSTONE_EARRING)
         player:setCharVar("sinHunting", 1)
-    elseif csid == 527 and npcUtil.completeQuest(player, WINDURST, xi.quest.id.windurst.SIN_HUNTING, {item=17188, var="sinHunting"}) then -- complete quest RNG AF1
+    elseif csid == 527 and npcUtil.completeQuest(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.SIN_HUNTING, {item=17188, var="sinHunting"}) then -- complete quest RNG AF1
         player:delKeyItem(xi.ki.CHIEFTAINNESSS_TWINSTONE_EARRING)
         player:delKeyItem(xi.ki.PERCHONDS_ENVELOPE)
 
@@ -99,14 +99,14 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("fireAndBrimstone", 1)
     elseif csid == 535 then -- start second part RNG AF2
         player:setCharVar("fireAndBrimstone", 5)
-    elseif csid == 537 and npcUtil.completeQuest(player, WINDURST, xi.quest.id.windurst.FIRE_AND_BRIMSTONE, {item=12518, var="fireAndBrimstone"}) then -- complete quest RNG AF2
+    elseif csid == 537 and npcUtil.completeQuest(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.FIRE_AND_BRIMSTONE, {item=12518, var="fireAndBrimstone"}) then -- complete quest RNG AF2
         player:confirmTrade()
 
     -- UNBRIDLED PASSION
     elseif csid == 541 then -- start RNG AF3
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.UNBRIDLED_PASSION)
         player:setCharVar("unbridledPassion", 1)
-    elseif csid == 546 and npcUtil.completeQuest(player, WINDURST, xi.quest.id.windurst.UNBRIDLED_PASSION, {item=14099, var="unbridledPassion"}) then -- complete quest RNG AF3
+    elseif csid == 546 and npcUtil.completeQuest(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.UNBRIDLED_PASSION, {item=14099, var="unbridledPassion"}) then -- complete quest RNG AF3
         player:delKeyItem(xi.ki.KOHS_LETTER)
 
     end

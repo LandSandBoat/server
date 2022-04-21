@@ -52,7 +52,7 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 12500)
         else
             player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_WISDOM_OF_ELDERS)
-            player:addFame(BASTOK, 120)
+            player:addFame(xi.quest.fame_area.BASTOK, 120)
             player:addItem(12500)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 12500)
         end

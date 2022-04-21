@@ -68,7 +68,7 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 17772) -- Zushio
             player:needToZone()
             player:setCharVar("twentyInPirateYearsCS", 0)
-            player:addFame(NORG, 30)
+            player:addFame(xi.quest.fame_area.NORG, 30)
             player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TWENTY_IN_PIRATE_YEARS)
         end
     elseif (csid == 135) then

@@ -27,7 +27,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.A_POTTER_S_PREFERENCE) == QUEST_AVAILABLE and player:getFameLevel(WINDURST) > 5 then
+    if player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.A_POTTER_S_PREFERENCE) == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.WINDURST) > 5 then
         player:startEvent(111, 569) -- start quest A Potter's Preference
     elseif player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.A_POTTER_S_PREFERENCE) == QUEST_ACCEPTED then
         player:startEvent(114, 569) -- get me dish_of_gusgen_clay  as soon as you can
@@ -51,7 +51,7 @@ entity.onEventFinish = function(player, csid, option)
         player:addQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.A_POTTER_S_PREFERENCE)
     elseif csid == 113 then --quest completed
         player:confirmTrade()
-        player:addFame(WINDURST, 120)
+        player:addFame(xi.quest.fame_area.WINDURST, 120)
         player:addGil(xi.settings.GIL_RATE * 2160)
         player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 2160)
         player:setCharVar("QuestAPotterPrefeRepeat_var", 0)

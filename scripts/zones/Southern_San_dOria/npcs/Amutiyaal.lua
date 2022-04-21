@@ -46,7 +46,7 @@ Chateau d'Oraguille (East to West)
 --]]
 
 entity.onTrade = function(player, npc, trade)
-    if (trade:getGil() == 300 and trade:getItemCount() == 1 and player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_COMPLETED and player:getCurrentMission(TOAU) > xi.mission.id.toau.IMMORTAL_SENTRIES) then
+    if (trade:getGil() == 300 and trade:getItemCount() == 1 and player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_COMPLETED and player:getCurrentMission(xi.mission.log_id.TOAU) > xi.mission.id.toau.IMMORTAL_SENTRIES) then
         -- Needs a check for at least traded an invitation card to Naja Salaheem
         player:startEvent(881)
     end
@@ -69,7 +69,7 @@ entity.onTrigger = function(player, npc)
                 player:startEvent(814)
             end
         end
-    elseif (player:getCurrentMission(TOAU) >= xi.mission.id.toau.PRESIDENT_SALAHEEM) then
+    elseif (player:getCurrentMission(xi.mission.log_id.TOAU) >= xi.mission.id.toau.PRESIDENT_SALAHEEM) then
         player:startEvent(880)
     else
         player:startEvent(816)
@@ -87,7 +87,7 @@ entity.onEventFinish = function(player, csid, option)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.RED_SENTINEL_BADGE)
     elseif (csid == 815) then
         player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.LURE_OF_THE_WILDCAT)
-        player:addFame(SANDORIA, 150)
+        player:addFame(xi.quest.fame_area.SANDORIA, 150)
         player:setCharVar("WildcatSandy", 0)
         player:delKeyItem(xi.ki.RED_SENTINEL_BADGE)
         player:addKeyItem(xi.ki.RED_INVITATION_CARD)

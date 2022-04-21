@@ -35,7 +35,7 @@ entity.onTrigger = function(player, npc)
     local SearchingForTheRightWords = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SEARCHING_FOR_THE_RIGHT_WORDS)
     local RubbishDay                = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RUBBISH_DAY)
     local NeverToReturn             = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.NEVER_TO_RETURN)
-    local JFame                     = player:getFameLevel(JEUNO)
+    local JFame                     = player:getFameLevel(xi.quest.fame_area.JEUNO)
     local SearchingForWords_prereq  = player:getCharVar("QuestSearchRightWords_prereq")
 
     if
@@ -97,7 +97,7 @@ entity.onEventFinish = function(player, csid, option)
 
     elseif csid == 196 then
         player:addTitle(xi.title.FORTUNE_TELLER_IN_TRAINING)
-        player:addFame(JEUNO, 30)
+        player:addFame(xi.quest.fame_area.JEUNO, 30)
         player:tradeComplete()
         player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.YOUR_CRYSTAL_BALL)
 
@@ -118,7 +118,7 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 1200)
             player:addItem(13477)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 13477)
-            player:addFame(JEUNO, 30)
+            player:addFame(xi.quest.fame_area.JEUNO, 30)
             player:tradeComplete()
             player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.NEVER_TO_RETURN)
         end
