@@ -1,10 +1,9 @@
 -----------------------------------
--- Add some test NPCs to GM_HOME (zone 210)
+-- Add some npcs for testers in starter cities.
 -----------------------------------
 require("modules/module_utils")
-require("scripts/zones/GM_Home/Zone")
 -----------------------------------
-local m = Module:new("test_npcs_in_gm_home")
+local m = Module:new("wings_alpha_test_npcs")
 m:setEnabled(true)
 
 m:addOverride("xi.zones.Bastok_Mines.Zone.onInitialize", function(zone)
