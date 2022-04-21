@@ -11,8 +11,8 @@ message(STATUS "TRACY_ENABLE: ${TRACY_ENABLE}")
 
 if(TRACY_ENABLE)
     # Download dev libs
-    set(TRACY_LINK https://github.com/wolfpld/tracy/archive/v0.8.tar.gz)
-    if(NOT EXISTS ${CMAKE_SOURCE_DIR}/ext/tracy/tracy-0.8/TracyClient.cpp)
+    set(TRACY_LINK https://github.com/wolfpld/tracy/archive/v0.8.1.tar.gz)
+    if(NOT EXISTS ${CMAKE_SOURCE_DIR}/ext/tracy/tracy-0.8.1/TracyClient.cpp)
         message(STATUS "Downloading Tracy development library")
         file(MAKE_DIRECTORY ${CMAKE_SOURCE_DIR}/tracy)
         file(DOWNLOAD
@@ -25,14 +25,14 @@ if(TRACY_ENABLE)
     endif()
 
     add_library(tracy_client ${CMAKE_SOURCE_DIR}/ext/tracy/tracy-0.8/TracyClient.cpp)
-    target_include_directories(tracy_client PUBLIC ${CMAKE_SOURCE_DIR}/ext/tracy/tracy-0.8/)
-    target_compile_definitions(tracy_client PUBLIC TRACY_ENABLE TRACY_ON_DEMAND TRACY_NO_EXIT TRACY_NO_BROADCAST)
+    target_include_directories(tracy_client PUBLIC ${CMAKE_SOURCE_DIR}/ext/tracy/tracy-0.8.1/)
+    target_compile_definitions(tracy_client PUBLIC TRACY_ENABLE TRACY_ON_DEMAND TRACY_NO_EXIT TRACY_NO_BROADCAST TRACY_TIMER_QPC)
 
     # Download client
     if(NOT EXISTS ${CMAKE_SOURCE_DIR}/Tracy.exe)
     message(STATUS "Downloading Tracy client")
     file(DOWNLOAD
-        https://github.com/wolfpld/tracy/releases/download/v0.8/Tracy-0.8.7z
+        https://github.com/wolfpld/tracy/releases/download/v0.8/Tracy-0.8.1.7z
         ${CMAKE_SOURCE_DIR}/tracy.tar.gz
         TIMEOUT 60)
         execute_process(COMMAND "${CMAKE_COMMAND}" -E
