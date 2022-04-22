@@ -54,9 +54,9 @@ m:addOverride("xi.zones.Bastok_Mines.Zone.onInitialize", function(zone)
             -- NOTE: We have to use getPacketName, because the regular name is modified and being used
             --     : for internal lookups
             if player:getCharVar(string.format("[Alpha]Talked_to_%s", npc:getName())) ~= 1 then
-                player:PrintToPlayer("Welcome to the WingsXI 3.0 Alpha Stress Test!", 0,npc:getPacketName())
-                player:PrintToPlayer("To help you get on your way with testing I will be able to set your level to 99, SAM/WAR, and equipement.", 0,npc:getPacketName())
-                player:PrintToPlayer("Just talk to me again to start the process.", 0, npc:getPacketName())
+                player:PrintToPlayer(" Welcome to the WingsXI 3.0 Alpha Stress Test!", 0,npc:getPacketName())
+                player:PrintToPlayer(" To help you get on your way with testing I will be able to set your level to 99, SAM/WAR, and equipement.", 0,npc:getPacketName())
+                player:PrintToPlayer(" Just talk to me again to start the process.", 0, npc:getPacketName())
                 player:setCharVar(string.format("[ALPHA]Talked_to_%s", npc:getName()), 1)
             elseif player:getCharVar(string.format("[Alpha]Talked_to_%s", npc:getName())) == 1 then
                 local equipmentList =
@@ -121,7 +121,7 @@ m:addOverride("xi.zones.Bastok_Mines.Zone.onInitialize", function(zone)
                 player:setLevel(99)
                 player:setsLevel(player:getMainLvl()/2)
                 player:capAllSkills()
-                player:unkillable(true)
+                player:setUnkillable(true)
 
                 for i = 1, #ValidSpells do
                     if i == #ValidSpells then
@@ -184,9 +184,9 @@ m:addOverride("xi.zones.Bastok_Mines.Zone.onInitialize", function(zone)
             -- NOTE: We have to use getPacketName, because the regular name is modified and being used
             --     : for internal lookups
             if player:getCharVar(string.format("[Alpha]Talked_to_%s", npc:getName())) ~= 1 then
-                player:PrintToPlayer("Welcome to the WingsXI 3.0 Alpha Stress Test!", 0,npc:getPacketName())
-                player:PrintToPlayer("To help you get on your way with testing I will be able to set your level to 99, SCH/RDM, and equipement.", 0,npc:getPacketName())
-                player:PrintToPlayer("Just talk to me again to start the process.", 0, npc:getPacketName())
+                player:PrintToPlayer(" Welcome to the WingsXI 3.0 Alpha Stress Test!", 0,npc:getPacketName())
+                player:PrintToPlayer(" To help you get on your way with testing I will be able to set your level to 99, SCH/RDM, and equipement.", 0,npc:getPacketName())
+                player:PrintToPlayer(" Just talk to me again to start the process.", 0, npc:getPacketName())
                 player:setCharVar(string.format("[ALPHA]Talked_to_%s", npc:getName()), 1)
             elseif player:getCharVar(string.format("[Alpha]Talked_to_%s", npc:getName())) == 1 then
                 local equipmentList =
@@ -251,7 +251,7 @@ m:addOverride("xi.zones.Bastok_Mines.Zone.onInitialize", function(zone)
                 player:setLevel(99)
                 player:setsLevel(player:getMainLvl()/2)
                 player:capAllSkills()
-                player:unkillable(true)
+                player:setUnkillable(true)
 
                 for i = 1, #ValidSpells do
                     if i == #ValidSpells then
@@ -313,20 +313,20 @@ m:addOverride("xi.zones.Bastok_Mines.Zone.onInitialize", function(zone)
         onTrigger = function(player, npc)
             -- NOTE: We have to use getPacketName, because the regular name is modified and being used
             --     : for internal lookups
-            player:PrintToPlayer("Welcome to the WingsXI 3.0 Alpha Stress Test!", 0,npc:getPacketName())
-            player:PrintToPlayer("My name is Lilith and my job is to help testers learn about what we are trying to do.", 0,npc:getPacketName())
-            player:PrintToPlayer("Testers are free to do whatever they want, but please follow directions given in server messages for objectives.", 0, npc:getPacketName())
-            player:PrintToPlayer("Here are some useful commands to help you in testing:", 0, npc:getPacketName())
-            player:PrintToPlayer("!zone (auto-translate zone name) will allow you to go between different zones easily.", 0, npc:getPacketName())
-            player:PrintToPlayer("!changejob (Job Abv) (Level) changes your main job and level.", 0, npc:getPacketName())
-            player:PrintToPlayer("!changesjob (Job Abv) (Level) will change your subjob. Please remember SJ level is MJ/2.", 0, npc:getPacketName())
-            player:PrintToPlayer("!additem (itemID) {qty} allows you to add an item to your inventory.", 0, npc:getPacketName())
-            player:PrintToPlayer("!setgil (amount) will set your gil to that amount.", 0, npc:getPacketName())
-            player:PrintToPlayer("!release will allow you to get out of cutscenes you do not want to watch.", 0, npc:getPacketName())
-            player:PrintToPlayer("!speed (1-200) will increase or decrease your speed. Default speed is 40, Flee is 100.", 0, npc:getPacketName())
-            player:PrintToPlayer("!togglegm will turn on your GM flag.", 0, npc:getPacketName())
-            player:PrintToPlayer("If you change jobs, use !capallskills.", 0, npc:getPacketName())
-            player:PrintToPlayer("You can also use !goto (player) to go to your friends.", 0, npc:getPacketName())
+            player:PrintToPlayer(" Welcome to the WingsXI 3.0 Alpha Stress Test!", 0,npc:getPacketName())
+            player:PrintToPlayer(" My name is Lilith and my job is to help testers learn about what we are trying to do.", 0,npc:getPacketName())
+            player:PrintToPlayer(" Testers are free to do whatever they want, but please follow directions given in server messages for objectives.", 0, npc:getPacketName())
+            player:PrintToPlayer(" Here are some useful commands to help you in testing:", 0, npc:getPacketName())
+            player:PrintToPlayer(" !zone (auto-translate zone name) will allow you to go between different zones easily.", 0, npc:getPacketName())
+            player:PrintToPlayer(" !changejob (Job Abv) (Level) changes your main job and level.", 0, npc:getPacketName())
+            player:PrintToPlayer(" !changesjob (Job Abv) (Level) will change your subjob. Please remember SJ level is MJ/2.", 0, npc:getPacketName())
+            player:PrintToPlayer(" !additem (itemID) {qty} allows you to add an item to your inventory.", 0, npc:getPacketName())
+            player:PrintToPlayer(" !setgil (amount) will set your gil to that amount.", 0, npc:getPacketName())
+            player:PrintToPlayer(" !release will allow you to get out of cutscenes you do not want to watch.", 0, npc:getPacketName())
+            player:PrintToPlayer(" !speed (1-200) will increase or decrease your speed. Default speed is 40, Flee is 100.", 0, npc:getPacketName())
+            player:PrintToPlayer(" !togglegm will turn on your GM flag.", 0, npc:getPacketName())
+            player:PrintToPlayer(" If you change jobs, use !capallskills.", 0, npc:getPacketName())
+            player:PrintToPlayer(" If you change jobs, use !ca go to your friends.", 0, npc:getPacketName())
         end,
     })
 
@@ -389,9 +389,9 @@ m:addOverride("xi.zones.Port_Windurst.Zone.onInitialize", function(zone)
             -- NOTE: We have to use getPacketName, because the regular name is modified and being used
             --     : for internal lookups
             if player:getCharVar(string.format("[Alpha]Talked_to_%s", npc:getName())) ~= 1 then
-                player:PrintToPlayer("Welcome to the WingsXI 3.0 Alpha Stress Test!", 0,npc:getPacketName())
-                player:PrintToPlayer("To help you get on your way with testing I will be able to set your level to 99, SAM/WAR, and equipement.", 0,npc:getPacketName())
-                player:PrintToPlayer("Just talk to me again to start the process.", 0, npc:getPacketName())
+                player:PrintToPlayer(" Welcome to the WingsXI 3.0 Alpha Stress Test!", 0,npc:getPacketName())
+                player:PrintToPlayer(" To help you get on your way with testing I will be able to set your level to 99, SAM/WAR, and equipement.", 0,npc:getPacketName())
+                player:PrintToPlayer(" Just talk to me again to start the process.", 0, npc:getPacketName())
                 player:setCharVar(string.format("[ALPHA]Talked_to_%s", npc:getName()), 1)
             elseif player:getCharVar(string.format("[Alpha]Talked_to_%s", npc:getName())) == 1 then
                 local equipmentList =
@@ -456,7 +456,7 @@ m:addOverride("xi.zones.Port_Windurst.Zone.onInitialize", function(zone)
                 player:setLevel(99)
                 player:setsLevel(player:getMainLvl()/2)
                 player:capAllSkills()
-                player:unkillable(true)
+                player:setUnkillable(true)
 
                 for i = 1, #ValidSpells do
                     if i == #ValidSpells then
@@ -519,9 +519,9 @@ m:addOverride("xi.zones.Port_Windurst.Zone.onInitialize", function(zone)
             -- NOTE: We have to use getPacketName, because the regular name is modified and being used
             --     : for internal lookups
             if player:getCharVar(string.format("[Alpha]Talked_to_%s", npc:getName())) ~= 1 then
-                player:PrintToPlayer("Welcome to the WingsXI 3.0 Alpha Stress Test!", 0,npc:getPacketName())
-                player:PrintToPlayer("To help you get on your way with testing I will be able to set your level to 99, SCH/RDM, and equipement.", 0,npc:getPacketName())
-                player:PrintToPlayer("Just talk to me again to start the process.", 0, npc:getPacketName())
+                player:PrintToPlayer(" Welcome to the WingsXI 3.0 Alpha Stress Test!", 0,npc:getPacketName())
+                player:PrintToPlayer(" To help you get on your way with testing I will be able to set your level to 99, SCH/RDM, and equipement.", 0,npc:getPacketName())
+                player:PrintToPlayer(" Just talk to me again to start the process.", 0, npc:getPacketName())
                 player:setCharVar(string.format("[ALPHA]Talked_to_%s", npc:getName()), 1)
             elseif player:getCharVar(string.format("[Alpha]Talked_to_%s", npc:getName())) == 1 then
                 local equipmentList =
@@ -586,7 +586,7 @@ m:addOverride("xi.zones.Port_Windurst.Zone.onInitialize", function(zone)
                 player:setLevel(99)
                 player:setsLevel(player:getMainLvl()/2)
                 player:capAllSkills()
-                player:unkillable(true)
+                player:setUnkillable(true)
 
                 for i = 1, #ValidSpells do
                     if i == #ValidSpells then
@@ -648,20 +648,20 @@ m:addOverride("xi.zones.Port_Windurst.Zone.onInitialize", function(zone)
         onTrigger = function(player, npc)
             -- NOTE: We have to use getPacketName, because the regular name is modified and being used
             --     : for internal lookups
-            player:PrintToPlayer("Welcome to the WingsXI 3.0 Alpha Stress Test!", 0,npc:getPacketName())
-            player:PrintToPlayer("My name is Lilith and my job is to help testers learn about what we are trying to do.", 0,npc:getPacketName())
-            player:PrintToPlayer("Testers are free to do whatever they want, but please follow directions given in server messages for objectives.", 0, npc:getPacketName())
-            player:PrintToPlayer("Here are some useful commands to help you in testing:", 0, npc:getPacketName())
-            player:PrintToPlayer("!zone (auto-translate zone name) will allow you to go between different zones easily.", 0, npc:getPacketName())
-            player:PrintToPlayer("!changejob (Job Abv) (Level) changes your main job and level.", 0, npc:getPacketName())
-            player:PrintToPlayer("!changesjob (Job Abv) (Level) will change your subjob. Please remember SJ level is MJ/2.", 0, npc:getPacketName())
-            player:PrintToPlayer("!additem (itemID) {qty} allows you to add an item to your inventory.", 0, npc:getPacketName())
-            player:PrintToPlayer("!setgil (amount) will set your gil to that amount.", 0, npc:getPacketName())
-            player:PrintToPlayer("!release will allow you to get out of cutscenes you do not want to watch.", 0, npc:getPacketName())
-            player:PrintToPlayer("!speed (1-200) will increase or decrease your speed. Default speed is 40, Flee is 100.", 0, npc:getPacketName())
-            player:PrintToPlayer("!togglegm will turn on your GM flag.", 0, npc:getPacketName())
-            player:PrintToPlayer("If you change jobs, use !capallskills.", 0, npc:getPacketName())
-            player:PrintToPlayer("You can also use !goto (player) to go to your friends.", 0, npc:getPacketName())
+            player:PrintToPlayer(" Welcome to the WingsXI 3.0 Alpha Stress Test!", 0,npc:getPacketName())
+            player:PrintToPlayer(" My name is Lilith and my job is to help testers learn about what we are trying to do.", 0,npc:getPacketName())
+            player:PrintToPlayer(" Testers are free to do whatever they want, but please follow directions given in server messages for objectives.", 0, npc:getPacketName())
+            player:PrintToPlayer(" Here are some useful commands to help you in testing:", 0, npc:getPacketName())
+            player:PrintToPlayer(" !zone (auto-translate zone name) will allow you to go between different zones easily.", 0, npc:getPacketName())
+            player:PrintToPlayer(" !changejob (Job Abv) (Level) changes your main job and level.", 0, npc:getPacketName())
+            player:PrintToPlayer(" !changesjob (Job Abv) (Level) will change your subjob. Please remember SJ level is MJ/2.", 0, npc:getPacketName())
+            player:PrintToPlayer(" !additem (itemID) {qty} allows you to add an item to your inventory.", 0, npc:getPacketName())
+            player:PrintToPlayer(" !setgil (amount) will set your gil to that amount.", 0, npc:getPacketName())
+            player:PrintToPlayer(" !release will allow you to get out of cutscenes you do not want to watch.", 0, npc:getPacketName())
+            player:PrintToPlayer(" !speed (1-200) will increase or decrease your speed. Default speed is 40, Flee is 100.", 0, npc:getPacketName())
+            player:PrintToPlayer(" !togglegm will turn on your GM flag.", 0, npc:getPacketName())
+            player:PrintToPlayer(" If you change jobs, use !capallskills.", 0, npc:getPacketName())
+            player:PrintToPlayer(" If you change jobs, use !ca go to your friends.", 0, npc:getPacketName())
         end,
     })
 
@@ -724,9 +724,9 @@ m:addOverride("xi.zones.Northern_San_dOria.Zone.onInitialize", function(zone)
             -- NOTE: We have to use getPacketName, because the regular name is modified and being used
             --     : for internal lookups
             if player:getCharVar(string.format("[Alpha]Talked_to_%s", npc:getName())) ~= 1 then
-                player:PrintToPlayer("Welcome to the WingsXI 3.0 Alpha Stress Test!", 0,npc:getPacketName())
-                player:PrintToPlayer("To help you get on your way with testing I will be able to set your level to 99, SAM/WAR, and equipement.", 0,npc:getPacketName())
-                player:PrintToPlayer("Just talk to me again to start the process.", 0, npc:getPacketName())
+                player:PrintToPlayer(" Welcome to the WingsXI 3.0 Alpha Stress Test!", 0,npc:getPacketName())
+                player:PrintToPlayer(" To help you get on your way with testing I will be able to set your level to 99, SAM/WAR, and equipement.", 0,npc:getPacketName())
+                player:PrintToPlayer(" Just talk to me again to start the process.", 0, npc:getPacketName())
                 player:setCharVar(string.format("[ALPHA]Talked_to_%s", npc:getName()), 1)
             elseif player:getCharVar(string.format("[Alpha]Talked_to_%s", npc:getName())) == 1 then
                 local equipmentList =
@@ -791,7 +791,7 @@ m:addOverride("xi.zones.Northern_San_dOria.Zone.onInitialize", function(zone)
                 player:setLevel(99)
                 player:setsLevel(player:getMainLvl()/2)
                 player:capAllSkills()
-                player:unkillable(true)
+                player:setUnkillable(true)
 
                 for i = 1, #ValidSpells do
                     if i == #ValidSpells then
@@ -854,9 +854,9 @@ m:addOverride("xi.zones.Northern_San_dOria.Zone.onInitialize", function(zone)
             -- NOTE: We have to use getPacketName, because the regular name is modified and being used
             --     : for internal lookups
             if player:getCharVar(string.format("[Alpha]Talked_to_%s", npc:getName())) ~= 1 then
-                player:PrintToPlayer("Welcome to the WingsXI 3.0 Alpha Stress Test!", 0,npc:getPacketName())
-                player:PrintToPlayer("To help you get on your way with testing I will be able to set your level to 99, SCH/RDM, and equipement.", 0,npc:getPacketName())
-                player:PrintToPlayer("Just talk to me again to start the process.", 0, npc:getPacketName())
+                player:PrintToPlayer(" Welcome to the WingsXI 3.0 Alpha Stress Test!", 0,npc:getPacketName())
+                player:PrintToPlayer(" To help you get on your way with testing I will be able to set your level to 99, SCH/RDM, and equipement.", 0,npc:getPacketName())
+                player:PrintToPlayer(" Just talk to me again to start the process.", 0, npc:getPacketName())
                 player:setCharVar(string.format("[ALPHA]Talked_to_%s", npc:getName()), 1)
             elseif player:getCharVar(string.format("[Alpha]Talked_to_%s", npc:getName())) == 1 then
                 local equipmentList =
@@ -921,7 +921,7 @@ m:addOverride("xi.zones.Northern_San_dOria.Zone.onInitialize", function(zone)
                 player:setLevel(99)
                 player:setsLevel(player:getMainLvl()/2)
                 player:capAllSkills()
-                player:unkillable(true)
+                player:setUnkillable(true)
 
                 for i = 1, #ValidSpells do
                     if i == #ValidSpells then
@@ -983,20 +983,20 @@ m:addOverride("xi.zones.Northern_San_dOria.Zone.onInitialize", function(zone)
         onTrigger = function(player, npc)
             -- NOTE: We have to use getPacketName, because the regular name is modified and being used
             --     : for internal lookups
-            player:PrintToPlayer("Welcome to the WingsXI 3.0 Alpha Stress Test!", 0,npc:getPacketName())
-            player:PrintToPlayer("My name is Lilith and my job is to help testers learn about what we are trying to do.", 0,npc:getPacketName())
-            player:PrintToPlayer("Testers are free to do whatever they want, but please follow directions given in server messages for objectives.", 0, npc:getPacketName())
-            player:PrintToPlayer("Here are some useful commands to help you in testing:", 0, npc:getPacketName())
-            player:PrintToPlayer("!zone (auto-translate zone name) will allow you to go between different zones easily.", 0, npc:getPacketName())
-            player:PrintToPlayer("!changejob (Job Abv) (Level) changes your main job and level.", 0, npc:getPacketName())
-            player:PrintToPlayer("!changesjob (Job Abv) (Level) will change your subjob. Please remember SJ level is MJ/2.", 0, npc:getPacketName())
-            player:PrintToPlayer("!additem (itemID) {qty} allows you to add an item to your inventory.", 0, npc:getPacketName())
-            player:PrintToPlayer("!setgil (amount) will set your gil to that amount.", 0, npc:getPacketName())
-            player:PrintToPlayer("!release will allow you to get out of cutscenes you do not want to watch.", 0, npc:getPacketName())
-            player:PrintToPlayer("!speed (1-200) will increase or decrease your speed. Default speed is 40, Flee is 100.", 0, npc:getPacketName())
-            player:PrintToPlayer("!togglegm will turn on your GM flag.", 0, npc:getPacketName())
-            player:PrintToPlayer("If you change jobs, use !capallskills.", 0, npc:getPacketName())
-            player:PrintToPlayer("You can also use !goto (player) to go to your friends.", 0, npc:getPacketName())
+            player:PrintToPlayer(" Welcome to the WingsXI 3.0 Alpha Stress Test!", 0,npc:getPacketName())
+            player:PrintToPlayer(" My name is Lilith and my job is to help testers learn about what we are trying to do.", 0,npc:getPacketName())
+            player:PrintToPlayer(" Testers are free to do whatever they want, but please follow directions given in server messages for objectives.", 0, npc:getPacketName())
+            player:PrintToPlayer(" Here are some useful commands to help you in testing:", 0, npc:getPacketName())
+            player:PrintToPlayer(" !zone (auto-translate zone name) will allow you to go between different zones easily.", 0, npc:getPacketName())
+            player:PrintToPlayer(" !changejob (Job Abv) (Level) changes your main job and level.", 0, npc:getPacketName())
+            player:PrintToPlayer(" !changesjob (Job Abv) (Level) will change your subjob. Please remember SJ level is MJ/2.", 0, npc:getPacketName())
+            player:PrintToPlayer(" !additem (itemID) {qty} allows you to add an item to your inventory.", 0, npc:getPacketName())
+            player:PrintToPlayer(" !setgil (amount) will set your gil to that amount.", 0, npc:getPacketName())
+            player:PrintToPlayer(" !release will allow you to get out of cutscenes you do not want to watch.", 0, npc:getPacketName())
+            player:PrintToPlayer(" !speed (1-200) will increase or decrease your speed. Default speed is 40, Flee is 100.", 0, npc:getPacketName())
+            player:PrintToPlayer(" !togglegm will turn on your GM flag.", 0, npc:getPacketName())
+            player:PrintToPlayer(" If you change jobs, use !capallskills.", 0, npc:getPacketName())
+            player:PrintToPlayer(" If you change jobs, use !ca go to your friends.", 0, npc:getPacketName())
         end,
     })
 
