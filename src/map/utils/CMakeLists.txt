@@ -40,6 +40,11 @@ set(SOURCES
 
 add_library(utils STATIC ${SOURCES})
 
+if(TRACY_ENABLE)
+    target_link_libraries(utils PUBLIC tracy_client)
+endif(TRACY_ENABLE)
+
+
 target_link_libraries(utils
     PUBLIC
     common

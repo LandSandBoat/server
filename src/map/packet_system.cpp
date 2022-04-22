@@ -5186,6 +5186,7 @@ void SmallPacket0x0BE(map_session_data_t* const PSession, CCharEntity* const PCh
 
 void SmallPacket0x0BF(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     if (PChar->m_moghouseID)
     {
         JOBPOINT_TYPE jpType = static_cast<JOBPOINT_TYPE>(data.ref<uint16>(0x04));
@@ -5207,6 +5208,7 @@ void SmallPacket0x0BF(map_session_data_t* const PSession, CCharEntity* const PCh
 
 void SmallPacket0x0C0(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     if (charutils::hasKeyItem(PChar, 2544))
     {
         // Only send Job Points Packet if the player has unlocked them
@@ -5253,10 +5255,11 @@ void SmallPacket0x0C3(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x0C4(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
-    uint8           SlotID         = data.ref<uint8>(0x06);
-    uint8           LocationID     = data.ref<uint8>(0x07);
-    uint8           action         = data.ref<uint8>(0x08);
-    uint8           lsNum          = data.ref<uint8>(0x1B);
+    uint8 SlotID     = data.ref<uint8>(0x06);
+    uint8 LocationID = data.ref<uint8>(0x07);
+    uint8 action     = data.ref<uint8>(0x08);
+    uint8 lsNum      = data.ref<uint8>(0x1B);
+
     CItemLinkshell* PItemLinkshell = (CItemLinkshell*)PChar->getStorage(LocationID)->GetItem(SlotID);
 
     if (PItemLinkshell != nullptr && PItemLinkshell->isType(ITEM_LINKSHELL))
@@ -5428,12 +5431,15 @@ void SmallPacket0x0CB(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x0D2(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
-    PChar->ForAlliance([PChar](CBattleEntity* PPartyMember) {
+    // clang-format off
+    PChar->ForAlliance([PChar](CBattleEntity* PPartyMember)
+    {
         if (PPartyMember->getZone() == PChar->getZone() && ((CCharEntity*)PPartyMember)->m_moghouseID == PChar->m_moghouseID)
         {
             PChar->pushPacket(new CPartyMapPacket((CCharEntity*)PPartyMember));
         }
     });
+    // clang-format on
 }
 
 /************************************************************************
@@ -5488,7 +5494,6 @@ void SmallPacket0x0DB(map_session_data_t* const PSession, CCharEntity* const PCh
     }
 
     PChar->pushPacket(new CMenuConfigPacket(PChar));
-    return;
 }
 
 /************************************************************************
