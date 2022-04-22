@@ -1262,3 +1262,8 @@ EntityList_t CZoneEntities::GetCharList() const
 {
     return m_charList;
 }
+
+EntityList_t CZoneEntities::GetMobList() const
+{
+    return m_mobList;
+}

@@ -1102,6 +1102,11 @@ void CZone::CharZoneOut(CCharEntity* PChar)
     charutils::WriteHistory(PChar);
 }
 
+bool CZone::IsZoneActive() const
+{
+    return ZoneTimer != nullptr;
+}
+
 CZoneEntities* CZone::GetZoneEntities()
 {
     TracyZoneScoped;
