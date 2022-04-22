@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -856,6 +856,17 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
                 ShowExploit("SmallPacket0x009: Player %s trying to use a Job Ability from invalid state", PChar->GetName());
                 return;
             }
+
+            // Don't allow BST to use ready before level 25
+            if (PChar->PPet != nullptr && (!charutils::hasAbility(PChar, ABILITY_READY) || !PChar->PPet->PAI->IsEngaged()))
+            {
+                if (JobAbilityID >= ABILITY_FOOT_KICK && JobAbilityID <= ABILITY_PENTAPECK) // Is this a BST ability?
+                {
+                    PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, MSGBASIC_UNABLE_TO_USE_JA2));
+                    return;
+                }
+            }
+
             PChar->PAI->Ability(TargID, JobAbilityID);
         }
         break;
