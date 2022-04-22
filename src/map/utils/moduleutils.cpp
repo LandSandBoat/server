@@ -29,9 +29,71 @@
 #include <regex>
 #include <string>
 #include <vector>
+#include <iostream>
+
+namespace
+{
+    // static storage, init and access
+    std::vector<CPPModule*>& cppModules()
+    {
+        static std::vector<CPPModule*> cppModules{};
+        return cppModules;
+    }
+}
 
 namespace moduleutils
 {
+    void RegisterCPPModule(CPPModule* ptr)
+    {
+        cppModules().emplace_back(ptr);
+    }
+
+    // Hooks for calling modules
+    void OnInit()
+    {
+        TracyZoneScoped;
+        for (auto* module : cppModules())
+        {
+            module->OnInit();
+        }
+    }
+
+    void OnZoneTick(CZone* PZone)
+    {
+        TracyZoneScoped;
+        for (auto* module : cppModules())
+        {
+            module->OnZoneTick(PZone);
+        }
+    }
+
+    void OnTimeServerTick()
+    {
+        TracyZoneScoped;
+        for (auto* module : cppModules())
+        {
+            module->OnTimeServerTick();
+        }
+    }
+
+    void OnCharZoneIn(CCharEntity* PChar)
+    {
+        TracyZoneScoped;
+        for (auto* module : cppModules())
+        {
+            module->OnCharZoneIn(PChar);
+        }
+    }
+
+    void OnCharZoneOut(CCharEntity* PChar)
+    {
+        TracyZoneScoped;
+        for (auto* module : cppModules())
+        {
+            module->OnCharZoneOut(PChar);
+        }
+    }
+
     struct Override
     {
         std::string              filename;
@@ -101,7 +163,7 @@ namespace moduleutils
         }
     }
 
-    void TryApplyModules()
+    void TryApplyLuaModules()
     {
         sol::state& lua = luautils::lua;
         for (auto& override : overrides)
@@ -134,7 +196,7 @@ namespace moduleutils
         }
     }
 
-    void ReportModuleUsage()
+    void ReportLuaModuleUsage()
     {
         for (auto& override : overrides)
         {

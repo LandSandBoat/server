@@ -69,6 +69,7 @@
 #include "utils/charutils.h"
 #include "utils/itemutils.h"
 #include "utils/mobutils.h"
+#include "utils/moduleutils.h"
 #include "utils/petutils.h"
 #include "utils/zoneutils.h"
 
@@ -994,6 +995,8 @@ void CZone::CharZoneIn(CCharEntity* PChar)
     PChar->PLatentEffectContainer->CheckLatentsZone();
 
     charutils::ReadHistory(PChar);
+
+    moduleutils::OnCharZoneIn(PChar);
 }
 
 void CZone::CharZoneOut(CCharEntity* PChar)
@@ -1008,6 +1011,7 @@ void CZone::CharZoneOut(CCharEntity* PChar)
         }
     }
 
+    moduleutils::OnCharZoneOut(PChar);
     luautils::OnZoneOut(PChar);
 
     if (PChar->m_LevelRestriction != 0)
