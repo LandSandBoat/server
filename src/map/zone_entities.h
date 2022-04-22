@@ -68,6 +68,7 @@ public:
     CZone* GetZone();
 
     EntityList_t GetCharList() const;
+    EntityList_t GetMobList() const;
     bool         CharListEmpty() const;
     uint16       GetNewCharTargID();
     uint16       GetNewDynamicTargID();

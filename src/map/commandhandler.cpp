@@ -146,6 +146,8 @@ std::vector<CommandArg> splitToArgs(std::string const& input)
 
 int32 CCommandHandler::call(sol::state& lua, CCharEntity* PChar, const int8* commandline)
 {
+    TracyZoneScoped;
+
     // On the way out of this function, clear the globals it leaves behind
     ScopeGuard guard([&]()
     {
