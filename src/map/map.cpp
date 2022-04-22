@@ -47,6 +47,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "time_server.h"
 #include "transport.h"
 #include "vana_time.h"
+#include "zone.h"
+#include "zone_entities.h"
 
 #include "ai/controllers/automaton_controller.h"
 #include "daily_system.h"
@@ -96,6 +98,8 @@ map_session_list_t map_session_list;
 std::thread messageThread;
 
 std::unique_ptr<SqlConnection> sql;
+
+extern std::map<uint16, CZone*> g_PZoneList; // Global array of pointers for zones
 
 /************************************************************************
  *                                                                       *
@@ -342,6 +346,27 @@ void set_server_type()
     SOCKET_TYPE = socket_type::UDP;
 }
 
+void ReportTracyStats()
+{
+    TracyReportLuaMemory(luautils::lua.lua_state());
+    std::size_t activeZoneCount = 0;
+    std::size_t playerCount = 0;
+    std::size_t mobCount = 0;
+    for (auto& [id, PZone] : g_PZoneList)
+    {
+        if (PZone->IsZoneActive())
+        {
+            activeZoneCount += 1;
+            playerCount += PZone->GetZoneEntities()->GetCharList().size();
+            mobCount += PZone->GetZoneEntities()->GetMobList().size();
+        }
+    }
+    TracyReportGraphNumber("Active Zones (Process)", static_cast<std::int64_t>(activeZoneCount));
+    TracyReportGraphNumber("Connected Players (Process)", static_cast<std::int64_t>(playerCount));
+    TracyReportGraphNumber("Active Mobs (Process)", static_cast<std::int64_t>(mobCount));
+    TracyReportGraphNumber("Task Manager Tasks", static_cast<std::int64_t>(CTaskMgr::getInstance()->getTaskList().size()));
+}
+
 /************************************************************************
  *                                                                       *
  *  do_sockets                                                           *
@@ -350,6 +375,8 @@ void set_server_type()
 
 int32 do_sockets(fd_set* rfd, duration next)
 {
+    TracyZoneScoped;
+
     message::handle_incoming();
 
     struct timeval timeout;
@@ -430,7 +457,7 @@ int32 do_sockets(fd_set* rfd, duration next)
         }
     }
 
-    TracyReportLuaMemory(luautils::lua.lua_state());
+    ReportTracyStats();
 
     sql->TryPing();
 
