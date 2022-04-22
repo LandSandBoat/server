@@ -54,7 +54,7 @@ m:addOverride("xi.zones.Bastok_Mines.Zone.onInitialize", function(zone)
             -- NOTE: We have to use getPacketName, because the regular name is modified and being used
             --     : for internal lookups
             if player:getCharVar(string.format("[Alpha]Talked_to_%s", npc:getName())) ~= 1 then
-                player:PrintToPlayer("  Welcome to the WingsXI 3.0 Alpha Stress Test!", 0,npc:getPacketName())
+                player:PrintToPlayer(" Welcome to the WingsXI 3.0 Alpha Stress Test!", 0,npc:getPacketName())
                 player:PrintToPlayer(" To help you get on your way with testing I will be able to set your level to 99, SAM/WAR, and equipement.", 0,npc:getPacketName())
                 player:PrintToPlayer(" Just talk to me again to start the process.", 0, npc:getPacketName())
                 player:setCharVar(string.format("[ALPHA]Talked_to_%s", npc:getName()), 1)
@@ -139,7 +139,7 @@ m:addOverride("xi.zones.Bastok_Mines.Zone.onInitialize", function(zone)
             -- NOTE: We have to use getPacketName, because the regular name is modified and being used
             --     : for internal lookups
             if player:getCharVar(string.format("[Alpha]Talked_to_%s", npc:getName())) ~= 1 then
-                player:PrintToPlayer("  Welcome to the WingsXI 3.0 Alpha Stress Test!", 0,npc:getPacketName())
+                player:PrintToPlayer(" Welcome to the WingsXI 3.0 Alpha Stress Test!", 0,npc:getPacketName())
                 player:PrintToPlayer(" To help you get on your way with testing I will be able to set your level to 99, SCH/RDM, and equipement.", 0,npc:getPacketName())
                 player:PrintToPlayer(" Just talk to me again to start the process.", 0, npc:getPacketName())
                 player:setCharVar(string.format("[ALPHA]Talked_to_%s", npc:getName()), 1)
@@ -300,7 +300,7 @@ m:addOverride("xi.zones.Port_Windurst.Zone.onInitialize", function(zone)
             -- NOTE: We have to use getPacketName, because the regular name is modified and being used
             --     : for internal lookups
             if player:getCharVar(string.format("[Alpha]Talked_to_%s", npc:getName())) ~= 1 then
-                player:PrintToPlayer("  Welcome to the WingsXI 3.0 Alpha Stress Test!", 0,npc:getPacketName())
+                player:PrintToPlayer(" Welcome to the WingsXI 3.0 Alpha Stress Test!", 0,npc:getPacketName())
                 player:PrintToPlayer(" To help you get on your way with testing I will be able to set your level to 99, SAM/WAR, and equipement.", 0,npc:getPacketName())
                 player:PrintToPlayer(" Just talk to me again to start the process.", 0, npc:getPacketName())
                 player:setCharVar(string.format("[ALPHA]Talked_to_%s", npc:getName()), 1)
@@ -385,7 +385,7 @@ m:addOverride("xi.zones.Port_Windurst.Zone.onInitialize", function(zone)
             -- NOTE: We have to use getPacketName, because the regular name is modified and being used
             --     : for internal lookups
             if player:getCharVar(string.format("[Alpha]Talked_to_%s", npc:getName())) ~= 1 then
-                player:PrintToPlayer("  Welcome to the WingsXI 3.0 Alpha Stress Test!", 0,npc:getPacketName())
+                player:PrintToPlayer(" Welcome to the WingsXI 3.0 Alpha Stress Test!", 0,npc:getPacketName())
                 player:PrintToPlayer(" To help you get on your way with testing I will be able to set your level to 99, SCH/RDM, and equipement.", 0,npc:getPacketName())
                 player:PrintToPlayer(" Just talk to me again to start the process.", 0, npc:getPacketName())
                 player:setCharVar(string.format("[ALPHA]Talked_to_%s", npc:getName()), 1)
@@ -546,7 +546,7 @@ m:addOverride("xi.zones.Northern_San_dOria.Zone.onInitialize", function(zone)
             -- NOTE: We have to use getPacketName, because the regular name is modified and being used
             --     : for internal lookups
             if player:getCharVar(string.format("[Alpha]Talked_to_%s", npc:getName())) ~= 1 then
-                player:PrintToPlayer("  Welcome to the WingsXI 3.0 Alpha Stress Test!", 0,npc:getPacketName())
+                player:PrintToPlayer(" Welcome to the WingsXI 3.0 Alpha Stress Test!", 0,npc:getPacketName())
                 player:PrintToPlayer(" To help you get on your way with testing I will be able to set your level to 99, SAM/WAR, and equipement.", 0,npc:getPacketName())
                 player:PrintToPlayer(" Just talk to me again to start the process.", 0, npc:getPacketName())
                 player:setCharVar(string.format("[ALPHA]Talked_to_%s", npc:getName()), 1)
@@ -631,7 +631,7 @@ m:addOverride("xi.zones.Northern_San_dOria.Zone.onInitialize", function(zone)
             -- NOTE: We have to use getPacketName, because the regular name is modified and being used
             --     : for internal lookups
             if player:getCharVar(string.format("[Alpha]Talked_to_%s", npc:getName())) ~= 1 then
-                player:PrintToPlayer("  Welcome to the WingsXI 3.0 Alpha Stress Test!", 0,npc:getPacketName())
+                player:PrintToPlayer(" Welcome to the WingsXI 3.0 Alpha Stress Test!", 0,npc:getPacketName())
                 player:PrintToPlayer(" To help you get on your way with testing I will be able to set your level to 99, SCH/RDM, and equipement.", 0,npc:getPacketName())
                 player:PrintToPlayer(" Just talk to me again to start the process.", 0, npc:getPacketName())
                 player:setCharVar(string.format("[ALPHA]Talked_to_%s", npc:getName()), 1)
