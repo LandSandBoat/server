@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -730,7 +730,6 @@ void SmallPacket0x017(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
-    TracyZoneCString("Player Action");
 
     // uint32 ID = data.ref<uint32>(0x04);
     uint16 TargID = data.ref<uint16>(0x08);
@@ -741,6 +740,60 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
         data.ref<float>(0x14),
         data.ref<float>(0x18)
     };
+
+    constexpr auto actionToStr = [](uint8 actionIn)
+    {
+        switch (actionIn)
+        {
+            case 0x00:
+                return "Trigger";
+            case 0x02:
+                return "Attack";
+            case 0x03:
+                return "Spellcast";
+            case 0x04:
+                return "Disengage";
+            case 0x05:
+                return "Call for Help";
+            case 0x07:
+                return "Weaponskill";
+            case 0x09:
+                return "Job Ability";
+            case 0x0B:
+                return "Homepoint";
+            case 0x0C:
+                return "Assist";
+            case 0x0D:
+                return "Raise";
+            case 0x0E:
+                return "Fishing";
+            case 0x0F:
+                return "Change Target";
+            case 0x10:
+                return "Ranged Attack";
+            case 0x11:
+                return "Chocobo Digging";
+            case 0x12:
+                return "Dismount";
+            case 0x13:
+                return "Tractor Menu";
+            case 0x14:
+                return "Complete Character Update";
+            case 0x15:
+                return "Ballista - Quarry";
+            case 0x16:
+                return "Ballista - Sprint";
+            case 0x17:
+                return "Ballista - Scout";
+            case 0x18:
+                return "Blockaid";
+            case 0x1A:
+                return "Mounts";
+            default:
+                return "Unknown";
+        }
+    };
+    TracyZoneString(fmt::format("Player Action: {}: {} -> targid: {}", PChar->GetName(), actionToStr(action), TargID));
 
     switch (action)
     {
@@ -851,9 +904,10 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
         {
             uint16 JobAbilityID = data.ref<uint16>(0x0C);
             uint8 currentAnimation = PChar->animation;
+
             if (currentAnimation != ANIMATION_NONE && currentAnimation != ANIMATION_ATTACK)
             {
-                ShowExploit("SmallPacket0x009: Player %s trying to use a Job Ability from invalid state", PChar->GetName());
+                ShowExploit("SmallPacket0x01A: Player %s trying to use a Job Ability from invalid state", PChar->GetName());
                 return;
             }
 
@@ -1009,6 +1063,7 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
         break;
         case 0x15: // ballista - quarry
         case 0x16: // ballista - sprint
+        case 0x17: // ballista - scout
             break;
         case 0x18: // blockaid
         {
