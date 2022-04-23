@@ -674,7 +674,15 @@ namespace luautils
         {
             if (part == parts.back())
             {
-                table[sol::override_value][part] = file_result;
+                // if this isn't checked, you will re-load the same thing many times
+                // this generally isn't a problem unless you have applied on override
+                // from a module already, in this situation, the override gets overwritten.
+                bool not_cached_already = !table[part].valid();
+
+                if (not_cached_already)
+                {
+                    table[sol::override_value][part] = file_result;
+                }
             }
             else
             {
