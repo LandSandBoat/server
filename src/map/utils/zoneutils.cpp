@@ -40,14 +40,14 @@
 #include "mobutils.h"
 #include "zoneutils.h"
 
-std::map<uint16, CZone*> g_PZoneList; // глобальный массив указателей на игровые зоны
-CNpcEntity*              g_PTrigger;  // триггер для запуска событий
+std::map<uint16, CZone*> g_PZoneList; // Global array of pointers for zones
+CNpcEntity*              g_PTrigger;  // trigger to start events
 
 namespace zoneutils
 {
     /************************************************************************
      *                                                                       *
-     *  Реакция зон на смену времени суток                                   *
+     *  Reaction zones to change the time of day                             *
      *                                                                       *
      ************************************************************************/
 

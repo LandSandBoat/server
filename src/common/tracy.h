@@ -19,12 +19,12 @@
 
 inline std::string Hex8ToString(uint8 hex)
 {
-    return fmt::format("0x{:2X}", hex);
+    return fmt::format("0x{:02X}", hex);
 }
 
 inline std::string Hex16ToString(uint16 hex)
 {
-    return fmt::format("0x{:4X}", hex);
+    return fmt::format("0x{:04X}", hex);
 }
 
 #define TracyZoneHex8(num)                                                                                                                                     \

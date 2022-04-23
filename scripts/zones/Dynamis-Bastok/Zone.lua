@@ -11,15 +11,15 @@ zone_object.onInitialize = function(zone)
     xi.dynamis.zoneOnInitialize(zone)
 end
 
-zone_object.OnZoneTick = function(zone)
-end
-
 zone_object.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
 end
 
 zone_object.onZoneIn = function(player, prevZone)
     return xi.dynamis.zoneOnZoneIn(player, prevZone)
+end
+
+zone_object.onZoneTick = function(zone)
 end
 
 zone_object.onRegionEnter = function(player, region)

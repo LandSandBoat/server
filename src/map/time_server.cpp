@@ -32,6 +32,7 @@
 #include "transport.h"
 #include "utils/guildutils.h"
 #include "utils/instanceutils.h"
+#include "utils/moduleutils.h"
 #include "utils/zoneutils.h"
 #include "vana_time.h"
 
@@ -164,6 +165,8 @@ int32 time_server(time_point tick, CTaskMgr::CTask* PTask)
     luautils::OnTimeServerTick();
 
     luautils::ReloadFilewatchList();
+
+    moduleutils::OnTimeServerTick();
 
     TracyFrameMark;
     return 0;
