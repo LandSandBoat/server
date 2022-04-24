@@ -12,6 +12,10 @@ set(SOURCES
 
 add_library(ai_helpers STATIC ${SOURCES})
 
+if(TRACY_ENABLE)
+    target_link_libraries(ai_helpers PUBLIC tracy_client)
+endif(TRACY_ENABLE)
+
 target_link_libraries(ai_helpers
     PUBLIC
     common
