@@ -28,6 +28,20 @@ local dynamisZones =
     {xi.zone.DYNAMIS_XARCABARD, "Dynamis-Xarcabard"}
 }
 
+local startingZones =
+{
+    {xi.zone.BASTOK_MINES, "Bastok_Mines"},
+    {xi.zone.BEAUCEDINE_GLACIER, "Beaucedine_Glacier"},
+    {xi.zone.BUBURIMU_PENINSULA, "Buburimu_Peninsula"},
+    {xi.zone.RULUDE_GARDENS, "RuLude_Gardens"},
+    {xi.zone.QUFIM_ISLAND, "Qufim_Island"},
+    {xi.zone.SOUTHERN_SAN_DORIA, "Southern_San_dOria"},
+    {xi.zone.TAVNAZIAN_SAFEHOLD, "Tavnazian_Safehold"},
+    {xi.zone.VALKURM_DUNES, "Valkurm_Dunes"},
+    {xi.zone.WINDURST_WALLS, "Windurst_Walls"},
+    {xi.zone.XARCABARD, "Xarcabard"}
+}
+
 for _, zoneID in pairs(dynamisZones) do
     --super(GetZone(zoneID[1])) -- Returns can't index zone is nil value
     m:addOverride(string.format("xi.zones.%s.Zone.onInitialize", zoneID[2]),
@@ -36,9 +50,24 @@ for _, zoneID in pairs(dynamisZones) do
     end)
     m:addOverride(string.format("xi.zones.%s.Zone.onZoneTick", zoneID[2]),
     function(zone)
-        super(zone)
         xi.dynamis.handleDynamis(zone)
     end)
 end
+
+-- for _, zoneID in pairs(startIngZones) do
+--     if entryInfoEra[zoneID].csBit >= 7 then
+--         m:addOverride(string.format("xi.zones.%s.npcs.Hieroglyphics.onTrade", zoneID[2]),
+--         function(player, npc, trade)
+--             super(npc)
+--             xi.dynamis.entryNpcOnTrade(player, npc, trade)
+--         end)
+--     else
+--         m:addOverride(string.format("xi.zones.%s.npcs.Trail_Markings.onTrade", zoneID[2]),
+--         function(player, npc, trade)
+--             super(npc)
+--             xi.dynamis.entryNpcOnTrade(player, npc, trade)
+--         end)
+--     end
+-- end
 
 return m

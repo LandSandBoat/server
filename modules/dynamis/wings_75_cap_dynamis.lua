@@ -1115,8 +1115,8 @@ end
 --      onZoneTick Dynamis Functions      --
 --------------------------------------------
 xi.dynamis.handleDynamis = function(zone)
-    print(zone:getName())
     if zone ~= nil then
+        print(os.time())
         if GetServerVariable(string.format("[DYNA]ValidOnTick_%s", zone:getID())) == 1 then -- Check if dynamis should be active. This is to save resources when the zone is not in use.
             local zoneToken = GetServerVariable(string.format("[DYNA]Token_%s", zone:getID()))
             local zoneExpireTime = GetServerVariable(string.format("[DYNA]Timepoint_%s", zone:getID()))
