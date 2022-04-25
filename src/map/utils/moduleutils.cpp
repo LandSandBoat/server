@@ -202,7 +202,7 @@ namespace moduleutils
         {
             if (!override.applied)
             {
-                ShowWarning("Override not applied: {} ({})", override.overrideName, override.filename);
+                ShowWarning(fmt::format("Override not applied: {} ({})", override.overrideName, override.filename));
             }
         }
     }
