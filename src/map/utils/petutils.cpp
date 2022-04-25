@@ -1462,6 +1462,15 @@ namespace petutils
             {
                 ((CItemWeapon*)PPet->m_Weapons[SLOT_MAIN])->setDelay((uint16)(floor(1000.0 * (280.0f / 60.0f))));
             }
+  
+            if (PetID == PETID_CARBUNCLE)
+            {
+                if (PPet->GetMLevel() >= 25)
+                {
+                    PPet->setModifier(Mod::REGEN, 1);
+                }
+            }
+
 
             // In a 2014 update SE updated Avatar base damage
             // Based on testing this value appears to be Level now instead of Level * 0.74f
