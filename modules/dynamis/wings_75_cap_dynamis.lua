@@ -1002,114 +1002,6 @@ xi.dynamis.eyesEra =
     GREEN   = 3,
 }
 
---------------------------------------------
---  Start Each Zone First / Spawn Mobs    --
---------------------------------------------
-
-xi.dynamis.onMobOverride = function(mob)
-    local mobName = mob:getName()
-    local zoneName = mob:getZoneID()
-    local zone = mob:getZone()
-    if string.sub(mobName, 1, 8) == "Vanguard" and zone:getLocalVar(string.format("[DYNA]Mob_Module_Applied_%s", mobName)) ~= 1 then -- Check if its a vanguard and if the lua has been applied.
-        -- To add additional dynamis functions to new mob functions copy the below, change onMobRoamAction to whatever new function, and change the proposed function. (Keeping for Testing Purposes)
-        -- xi["zones"][zoneName]["mobs"][mobName]["onMobRoamAction"] = xi.dynamis.mobOnRoamAction(mob) -- Run mobOnRoamAction
-        -- xi["zones"][zoneName]["mobs"][mobName]["onMobRoam"] = xi.dynamis.mobOnRoam(mob) -- Run mobOnRoam
-        -- xi["zones"][zoneName]["mobs"][mobName]["onMobSpawn"] = xi.dynamis.setMobStats(mob) -- Run setMobStats
-        onMobRoamAction = function(mob, playerArg, isKiller)
-            xi.dynamis.mobOnRoamAction(mob)
-        end
-        onMobRoam = function(mob)
-            xi.dynamis.mobOnRoam(mob)
-        end
-        m:addOverride(string.format("xi.zones.%s.mobs.%s.onMobSpawn", zoneName, mobName), function(mob, player, isKiller)
-            xi.dynamis.setMobStats(mob)
-        end)
-        m:addOverride(string.format("xi.zones.%s.mobs.%s.onMobDeath", zoneName, mobName), function(mob, player, isKiller)
-            xi.dynamis.mobOnDeath(mob, mobList[zoneID],dynaInfoEra[zoneID].text.DYNAMIS_TIME_EXTEND)
-        end)
-        if string.format("xi.zones.%s.mobs.%s.onMobDespawn", zoneName, mobName) ~= nil then
-            m:addOverride(string.format("xi.zones.%s.mobs.%s.onMobDespawn", zoneName, mobName), function(mob)
-            end)
-        end
-        zone:setLocalVar(string.format("[DYNA]Mob_Module_Applied_%s", mobName), 1)
-    elseif string.sub(mobName, 1, 5) == "Hydra" and zone:getLocalVar(string.format("[DYNA]Mob_Module_Applied_%s", mobName)) ~= 1 then -- Check if its a hydra and if the lua has been applied.
-        onMobRoamAction = function(mob, playerArg, isKiller)
-            xi.dynamis.mobOnRoamAction(mob)
-        end
-        onMobRoam = function(mob)
-            xi.dynamis.mobOnRoam(mob)
-        end
-        m:addOverride(string.format("xi.zones.%s.mobs.%s.onMobSpawn", zoneName, mobName), function(mob, player, isKiller)
-            xi.dynamis.setMobStats(mob)
-        end)
-        m:addOverride(string.format("xi.zones.%s.mobs.%s.onMobDeath", zoneName, mobName), function(mob, player, isKiller)
-            xi.dynamis.mobOnDeath(mob, mobList[zoneID],dynaInfoEra[zoneID].text.DYNAMIS_TIME_EXTEND)
-        end)
-        zone:setLocalVar(string.format("[DYNA]Mob_Module_Applied_%s", mobName), 1)
-    elseif string.sub(mobName, 1, 8) == "Kindred_" and zone:getLocalVar(string.format("[DYNA]Mob_Module_Applied_%s", mobName)) ~= 1 then -- Check if its a kindred and if the lua has been applied.
-        onMobRoamAction = function(mob, playerArg, isKiller)
-            xi.dynamis.mobOnRoamAction(mob)
-        end
-        onMobRoam = function(mob)
-            xi.dynamis.mobOnRoam(mob)
-        end
-        onMobSpawn = function(mob)
-            xi.dynamis.setMobStats(mob)
-        end
-        m:addOverride(string.format("xi.zones.%s.mobs.%s.onMobSpawn", zoneName, mobName), function(mob, player, isKiller)
-            xi.dynamis.setMobStats(mob)
-        end)
-        m:addOverride(string.format("xi.zones.%s.mobs.%s.onMobDeath", zoneName, mobName), function(mob, player, isKiller)
-            xi.dynamis.mobOnDeath(mob, mobList[zoneID],dynaInfoEra[zoneID].text.DYNAMIS_TIME_EXTEND)
-        end)
-        if string.format("xi.zones.%s.mobs.%s.onMobDespawn", zoneName, mobName) ~= nil then
-            m:addOverride(string.format("xi.zones.%s.mobs.%s.onMobDespawn", zoneName, mobName), function(mob)
-            end)
-        end
-        zone:setLocalVar(string.format("[DYNA]Mob_Module_Applied_%s", mobName), 1)
-    elseif string.sub(mobName, 1, 8) == "Nightmar" and zone:getLocalVar(string.format("[DYNA]Mob_Module_Applied_%s", mobName)) ~= 1 then -- Check if its a nightmare and if the lua has been applied.
-        onMobRoamAction = function(mob, playerArg, isKiller)
-            xi.dynamis.mobOnRoamAction(mob)
-        end
-        
-        m:addOverride(string.format("xi.zones.%s.mobs.%s.onMobSpawn", zoneName, mobName), function(mob, player, isKiller)
-            xi.dynamis.setMobStats(mob)
-        end)
-        onMobEngaged = function(mob)
-            xi.dynamis.statueOnEngaged(mob, target, mobList)
-        end
-        m:addOverride(string.format("xi.zones.%s.mobs.%s.onMobDeath", zoneName, mobName), function(mob, player, isKiller)
-            xi.dynamis.mobOnDeath(mob, mobList[zoneID],dynaInfoEra[zoneID].text.DYNAMIS_TIME_EXTEND)
-        end)
-        zone:setLocalVar(string.format("[DYNA]Mob_Module_Applied_%s", mobName), 1)
-    elseif (mob:getFamily() == 334 or mob:getFamily() == 337 or mob:getFamily() == 360 or mob:getFamily() == 358) and  zone:getLocalVar(string.format("[DYNA]Mob_Module_Applied_%s", mobName)) ~= 1 then -- Check to see if it is a Beastmen/Kindred NM.
-        onMobRoamAction = function(mob, playerArg, isKiller)
-            xi.dynamis.mobOnRoamAction(mob)
-        end
-        onMobRoam = function(mob)
-            xi.dynamis.mobOnRoam(mob)
-        end
-        m:addOverride(string.format("xi.zones.%s.mobs.%s.onMobSpawn", zoneName, mobName), function(mob, player, isKiller)
-            xi.dynamis.setNMStats(mob)
-        end)
-        m:addOverride(string.format("xi.zones.%s.mobs.%s.onMobDeath", zoneName, mobName), function(mob, player, isKiller)
-            xi.dynamis.mobOnDeath(mob, mobList[zoneID],dynaInfoEra[zoneID].text.DYNAMIS_TIME_EXTEND)
-        end)
-        zone:setLocalVar(string.format("[DYNA]Mob_Module_Applied_%s", mobName), 1)
-    elseif (mob:getFamily() >= 92 and mob:getFamily() <= 95) then -- I am a statue.
-        xi.dynamis.onstatueOverride(mob) -- Run statueoverride function
-    else
-        xi.dynamis.onNonStandardMobOverride(mob) -- Treat as non-standard mob. Things like non-statue megabosses.
-    end
-end
-
-xi.dynamis.onstatueOverride = function(mob) -- Used to sort straggerlers which do not fit the above.
-
-end
-
-xi.dynamis.onNonStandardMobOverride = function(mob) -- Used to sort straggerlers which do not fit the above.
-
-end
 
 --------------------------------------------
 --      onZoneTick Dynamis Functions      --
@@ -1196,11 +1088,13 @@ xi.dynamis.onNewDynamis = function(player)
                 mob:setSpawn(mobList[zone][i].pos[1],mobList[zone][i].pos[2],mobList[zone][i].pos[3],mobList[zone][i].pos[4]) -- Set spawn position for mob.
                 if mobList[zone][i].waves ~= nil and mobList[zone][i].waves[1] ~= nil then -- Start spawning 1st wave. If Dreamlands handle setting SJ Restriction NPC.
                     SpawnMob(i)
-                    GetNPCByID(dynaInfoEra[zone].winQM):setStatus(xi.status.DISAPPEAR) -- Make sure winQM is set as disappear.
+                    GetNPCByID(dynaInfoEra[zone].winQM):setStatus(xi.status.INVISIBLE) -- We are setting to Invisible to retain ID info.
+                    GetNPCByID(dynaInfoEra[zone].winQM):untargetable(true)
                     if dynaInfoEra[zone].csBit > 7 and dynaInfoEra[zone].sjRestrictionNPC ~= nil then -- Are we in dreamlands and there is a SJ Restriction NPC?
-                        if GetNPCByID(dynaInfoEra[zone].sjRestrictionNPC):getStatus() == xi.status.DISAPPEAR then
+                        if GetNPCByID(dynaInfoEra[zone].sjRestrictionNPC):getStatus() == xi.status.INVISIBLE then
                             GetNPCByID(dynaInfoEra[zone].sjRestrictionNPC):setPos(dynamis.dynaInfoEra[zone].sjRestrictionLocation[math.random(1, dynamis.dynaInfoEra[zone].sjRestrictionNPCNumber)]) -- Pick a location for SJ NPC
                             GetNPCByID(dynaInfoEra[zone].sjRestrictionNPC):setStatus(xi.status.NORMAL) -- Make the NPC visible.
+                            GetNPCByID(dynaInfoEra[zone].sjRestrictionNPC):untargetable(false)
                         end
                     end
                 end -- Spawn mob if it is wave 1.
@@ -1293,23 +1187,22 @@ xi.dynamis.cleanupDynamis = function(zone)
                 if entity:isSpawned() then
                     DisallowRespawn(i, true)
                     DespawnMob(i) -- Despawn if true.
-                    if zone:getLocalVar("Dynamis_Initial_Mob_Override") ~= i then -- Stop this from overriding mob luas except for first time.
-                        zone:setLocalVar("Dynamis_Initial_Mob_Override", i)
-                        xi.dynamis.onMobOverride(GetMobByID(i))
-                    end
                 end
                 if dynaInfoEra[zone:getID()].winQM ~= nil then
-                    if GetNPCByID(dynaInfoEra[zone:getID()].winQM):getStatus() == xi.status.NORMAL then
-                        GetNPCByID(dynaInfoEra[zone:getID()].winQM):setStatus(xi.status.DISAPPEAR)
+                    if GetNPCByID(dynaInfoEra[zone:getID()].winQM):getStatus() == xi.status.NORMAL then -- We are setting to Invisible to retain ID info.
+                        GetNPCByID(dynaInfoEra[zone:getID()].winQM):setStatus(xi.status.INVISIBLE)
+                        GetNPCByID(dynaInfoEra[zone:getID()].winQM):untargetable(true)
                     end
                 end
                 if dynaInfoEra[zone:getID()].sjRestrictionNPC ~= nil then
-                    if GetNPCByID(dynaInfoEra[zone:getID()].sjRestrictionNPC):getStatus() == xi.status.NORMAL then
-                        GetNPCByID(dynaInfoEra[zone:getID()].sjRestrictionNPC):setStatus(xi.status.DISAPPEAR)
+                    if GetNPCByID(dynaInfoEra[zone:getID()].sjRestrictionNPC):getStatus() == xi.status.NORMAL then -- We are setting to Invisible to retain ID info.
+                        GetNPCByID(dynaInfoEra[zone:getID()].sjRestrictionNPC):setStatus(xi.status.INVISIBLE)
+                        GetNPCByID(dynaInfoEra[zone:getID()].sjRestrictionNPC):untargetable(true)
                     end
                 end
             elseif entity:isNPC() then
-                entity:setStatus(xi.status.DISAPPEAR)
+                entity:setStatus(xi.status.INVISIBLE)
+                entity:untargetable(true)
             end
         end
         i = i + 1 -- Increment by 1 ID.
@@ -1453,7 +1346,7 @@ xi.dynamis.verifyTradeHourglass = function(player, trade)
 end
 
 --------------------------------------------
---       Dynamis Entry NPC Functions      --
+--          Dynamis NPC Functions         --
 --------------------------------------------
 
 xi.dynamis.entryNpcOnTrade = function(player, npc, trade)
@@ -1554,6 +1447,52 @@ m:addOverride("xi.dynamis.entryNpcOnEventFinish", function(player, csid, option)
     end
 end)
 
+xi.dynamis.sjQMOnTrigger = function(player, npc)
+    local zoneId = npc:getZoneID()
+
+    if dynamis.dynaInfoEra[zoneId].sjRestriction == true then -- Check to see if SJ Restriction exists
+        zone = npc:getZone()
+        local playersInZone = zone:getPlayers()
+        for _, player in pairs(playersInZone) do
+            if player:getZoneID() == player:getZoneID() and player:hasStatusEffect(xi.effect.SJ_RESTRICTION) == true then -- Does player have SJ restriction?
+                if player:hasStatusEffect(xi.effect.RERAISE) then -- Check for reraise and store values.
+                    player:setLocalVar("had_reraise", 1)
+                    player:setLocalVar("reraise_power", player:getStatusEffect(xi.effect.RERAISE):getPower())
+                    player:setLocalVar("reraise_duration", player:getStatusEffect(xi.effect.RERAISE):getDuration())
+                end
+                player:delStatusEffect(xi.effect.SJ_RESTRICTION) -- Remove SJ restriction
+                player:setCharVar(string.format("[DYNA]SJUnlock_%s", player:getZoneID()), os.time() + 14400) -- Set Immune to reobtaining SJ_Restriction for 4 hours.
+                if player:getLocalVar("had_reraise") == 1 and player:hasStatusEffect(xi.effect.RERAISE) == false then -- Reapply previous reraise if lost.
+                        player:addStatusEffect(xi.effect.RERAISE, player:getLocalVar("reraise_power"), 0, player:getLocalVar("reraise_duration"))
+                end
+            end
+        end
+    end
+end
+
+m:addOverride("xi.dynamis.qmOnTrigger", function(player, npc) -- Override standard qmOnTrigger()
+    local zoneId = npc:getZoneID()
+    if dynamis_win_aoe == true then -- Used to bypass normal KI mechanic which was causing issues on Topaz.
+        local currTime = os.time()
+        if npc:getLocalVar("lastActivation") + 5 > currTime then return end
+        npc:setLocalVar("lastActivation", currTime)
+        
+        local nearbyPlayers = npc:getPlayersInRange(50)
+        if nearbyPlayers == nil then return end -- If no players, ignore.
+        local ID = zones[zoneId]
+        
+        for _,v in ipairs(nearbyPlayers) do -- Loop to do KI hand-outs
+            if v:hasKeyItem(dynaInfoEra[zoneId].winKI) == false then
+                v:addKeyItem(dynaInfoEra[zoneId].winKI)
+                v:messageSpecial(ID.text.KEYITEM_OBTAINED, dynaInfoEra[zoneId].winKI)
+            end
+        end
+    else -- Normal QM behavior
+        player:addKeyItem(dynaInfoEra[zoneId].winKI)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, dynaInfoEra[zoneId].winKI)
+    end
+end)
+
 --------------------------------------------
 --      Dynamis Player/Zone Functions     --
 --------------------------------------------
@@ -1590,92 +1529,8 @@ m:addOverride("xi.dynamis.zoneOnZoneIn", function(player, prevZone)
 end)
 
 --------------------------------------------
---         Dynamis Mob Functions          --
+--        Dynamis Mob Pathing/Roam        --
 --------------------------------------------
-
-xi.dynamis.spawnWave = function(mobList, waveNumber)
-    local zoneId = zone:getID()
-    local iStart = 4096*4096+(4096*mobList.zoneID) -- Start of index.
-    local i = iStart -- Curent index.
-    local iEnd = iStart + 1023 -- End of index.
-
-    while i <= iEnd do -- While index is less than or equal to the final index.
-        if mobList[i].waves ~= nil and mobList[i].waves[waveNumber] ~= nil and GetMobByID(i):isSpawned() == false then SpawnMob(i) end -- If mob for this wave is not spawned, then spawn.
-        i = i + 1 -- Increment up.
-    end
-
-end
-
-xi.dynamis.statueOnSpawn = function(mob, eyes) -- Used to spawn mobs off of a single parent
-    mob:setLocalVar("dynaReadyToSpawnChildren", 1) -- Marks mob available for spawning.
-    if mob:getFamily() >= 92 and mob:getFamily() <= 95 then -- If statue
-        mob:setLocalVar("eyeColor", eyes) -- Set Eyes if need be
-        if eyes >= 2 then -- If HP or MP restore statue
-            mob:setUnkillable(true) -- Set Unkillable as we will use skills then kill.
-        end
-    end
-end
-
-xi.dynamis.statueOnEngaged = function(mob, target, mobList)
-    if mob:getFamily() >= 92 and mob:getFamily() <= 95 then -- If statue
-        local eyes = mob:getLocalVar("eyeColor") -- Do we have eyes?
-        mob:AnimationSub(eyes) -- Make the eyes glow
-    end
-
-    if mob:getLocalVar("dynaReadyToSpawnChildren") == 0 then return end -- If I can't spawn children return.
-    mob:setLocalVar("dynaReadyToSpawnChildren", 0) -- Reset var.
-
-    local mobID = mob:getID()
-    specificChildrenList = mobList[mobID].specificChildren -- Look at my specific children list.
-    local forceLink = false -- Make all my children link.
-    local i = 1 -- Current index.
-    while specificChildrenList ~= nil and specificChildrenList[i] ~= nil do -- As long as children list exists.
-        if type(specificChildrenList[i]) == "boolean" then forceLink = specificChildrenList[i] -- Check if forcelink is true
-        else
-            local child = GetMobByID(specificChildrenList[i]) -- Get Mob from Child ID
-            if mobList[specificChildrenList[i]].pos == nil then child:setSpawn(mob:getXPos()+math.random()*6-3, mob:getYPos()-0.3, mob:getZPos()+math.random()*6-3, mob:getRotPos()) end -- Find a random spot around parent.
-            SpawnMob(specificChildrenList[i]) -- Spawn child.
-            if forceLink == true then child:updateEnmity(target) end -- If forcelink was true then make child aggro whatever parent has enmity on.
-        end
-        i = i + 1 -- Increment up.
-    end
-end
-
-xi.dynamis.statueOnFight = function(mob, target)
-    if mob:getHP() == 1 then -- If my HP = 1
-        if mob:AnimationSub() == 2 then -- I am an HP statue
-            mob:useMobAbility(1124) -- Use Recover HP
-        elseif mob:AnimationSub() == 3 then -- I am an MP statue
-            mob:useMobAbility(1125) -- Use Recover MP
-        end
-    end
-end
-
-xi.dynamis.onStatueSkillFinished = function(mob, skill)
-    if skill:getID() == 1124 or skill:getID() == 1125 then -- If I used one of the restore skills.
-        mob:setUnkillable(false) -- Make me killable
-        mob:setHP(0) -- Kill me
-    end
-end
-
-xi.dynamis.onNightmareSpawn = function (mob)
-    xi.dynamis.statueOnSpawn(mob, 0)
-    xi.dynamis.setMobStats(mob)
-end
-
-m:addOverride("xi.dynamis.megaBossOnDeath", function(mob, player, isKiller) 
-    local zone = mob:getZoneID()
-    local ID = zones[zone]
-    if mob:getLocalVar("GaveTimeExtension") ~= 1 then -- Ensure we don't give more than 1 time extension.
-        xi.dynamis.mobOnDeath(mob, mobList[zone], dynaInfoEra[mob:getZoneID()].text.DYNAMIS_TIME_EXTEND) -- Process time extension and wave spawning
-        mob:setLocalVar("GaveTimeExtension", 1)
-    end
-    local winQM = GetNPCByID(dynaInfoEra[ID].winQM) -- Set winQM
-    local pos = mob:getPos()
-    winQM:setPos(pos.x,pos.y,pos.z,pos.rot) -- Set winQM to death pos
-    winQM:setStatus(xi.status.NORMAL) -- Make visible
-    player:addTitle(dynaInfoEra[ID].winTitle) -- Give player the title
-end)
 
 xi.dynamis.mobOnRoamAction = function(mob) -- Handle statue pathing.
     if mob ~= nil then
@@ -1698,92 +1553,11 @@ xi.dynamis.mobOnRoamAction = function(mob) -- Handle statue pathing.
     end
 end
 
-xi.dynamis.mobOnDeath = function (mob, mobList, msg)
-    if mob:getLocalVar("dynamisMobOnDeathTriggered") == 1 then return end
-    mob:setLocalVar("dynamisMobOnDeathTriggered", 1) -- onDeath lua happens once per party member that killed the mob, but we want this to only run once per mob
-
-    local mobID = mob:getID()
-    if mobID ~= nil and mobList[mobID].timeExtension ~= nil then mob:addTimeToDynamis(mob:getZone(), mobList[mobID].timeExtension, msg) end
-    if mob:getLocalVar("clearSpawnPosOnDeath") == 1 then mob:setSpawn(1,1,1,0) end
-
-    local i = 2
-    local j = 1
-    local mobFound = false
-    while mobList.waveDefeatRequirements[i] ~= nil and mobFound == false do
-        while mobList.waveDefeatRequirements[i][j] ~= nil do
-            if mobList.waveDefeatRequirements[i][j] == mobID then
-                mobFound = true
-                i = i - 1
-                break
-            end
-            j = j + 1
-        end
-        j = 1
-        i = i + 1
-    end
-
-    if mobFound == true then
-        -- print(string.format("mob's defeat is a requirement for wave number %u",i))
-        mob:setLocalVar("dynaIsDefeatedForWaveReq", 1)
-        local allReqsMet = true
-        while mobList.waveDefeatRequirements[i][j] ~= nil do
-            if GetMobByID(mobList.waveDefeatRequirements[i][j]):getLocalVar("dynaIsDefeatedForWaveReq") == 0 then
-                allReqsMet = false
-                break
-            end
-            j = j + 1
-        end
-        if allReqsMet == true then dynamis.spawnWave(mobList, i) end
-    end
-end
-
 xi.dynamis.mobOnRoam = function(mob) end
 
-m:addOverride("xi.dynamis.qmOnTrigger", function(player, npc) -- Override standard qmOnTrigger()
-    local zoneId = npc:getZoneID()
-    if dynamis_win_aoe == true then -- Used to bypass normal KI mechanic which was causing issues on Topaz.
-        local currTime = os.time()
-        if npc:getLocalVar("lastActivation") + 5 > currTime then return end
-        npc:setLocalVar("lastActivation", currTime)
-        
-        local nearbyPlayers = npc:getPlayersInRange(50)
-        if nearbyPlayers == nil then return end -- If no players, ignore.
-        local ID = zones[zoneId]
-        
-        for _,v in ipairs(nearbyPlayers) do -- Loop to do KI hand-outs
-            if v:hasKeyItem(dynaInfoEra[zoneId].winKI) == false then
-                v:addKeyItem(dynaInfoEra[zoneId].winKI)
-                v:messageSpecial(ID.text.KEYITEM_OBTAINED, dynaInfoEra[zoneId].winKI)
-            end
-        end
-    else -- Normal QM behavior
-        player:addKeyItem(dynaInfoEra[zoneId].winKI)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, dynaInfoEra[zoneId].winKI)
-    end
-end)
-
-xi.dynamis.sjQMOnTrigger = function(player, npc)
-    local zoneId = npc:getZoneID()
-
-    if dynamis.dynaInfoEra[zoneId].sjRestriction == true then -- Check to see if SJ Restriction exists
-        zone = npc:getZone()
-        local playersInZone = zone:getPlayers()
-        for _, player in pairs(playersInZone) do
-            if player:getZoneID() == player:getZoneID() and player:hasStatusEffect(xi.effect.SJ_RESTRICTION) == true then -- Does player have SJ restriction?
-                if player:hasStatusEffect(xi.effect.RERAISE) then -- Check for reraise and store values.
-                    player:setLocalVar("had_reraise", 1)
-                    player:setLocalVar("reraise_power", player:getStatusEffect(xi.effect.RERAISE):getPower())
-                    player:setLocalVar("reraise_duration", player:getStatusEffect(xi.effect.RERAISE):getDuration())
-                end
-                player:delStatusEffect(xi.effect.SJ_RESTRICTION) -- Remove SJ restriction
-                player:setCharVar(string.format("[DYNA]SJUnlock_%s", player:getZoneID()), os.time() + 14400) -- Set Immune to reobtaining SJ_Restriction for 4 hours.
-                if player:getLocalVar("had_reraise") == 1 and player:hasStatusEffect(xi.effect.RERAISE) == false then -- Reapply previous reraise if lost.
-                        player:addStatusEffect(xi.effect.RERAISE, player:getLocalVar("reraise_power"), 0, player:getLocalVar("reraise_duration"))
-                end
-            end
-        end
-    end
-end
+--------------------------------------------
+--            Dynamis Mob Stats           --
+--------------------------------------------
 
 xi.dynamis.setMobStats = function(mob)
     if mob ~= nil then
@@ -2004,5 +1778,103 @@ m:addOverride("xi.dynamis.refillStatueOnSpawn", function(mob) end)
 m:addOverride("xi.dynamis.refillStatueOnSDeath", function(mob, player, isKiller) end)
 m:addOverride("xi.dynamis.qmOnTrade", function(player, npc, trade) end) -- Not used...  Era Dynamis does not have QM pops.
 m:addOverride("xi.dynamis.getExtensions", function(player) end)
+
+--------------------------------------------
+--          Dynamis Mob Spawning          --
+--------------------------------------------
+
+xi.dynamis.spawnWave = function(mobList, waveNumber)
+end
+
+xi.dynamis.statueOnSpawn = function(mob, eyes, mobList) -- Used to spawn mobs off of a single parent
+    mob:setLocalVar("dynaReadyToSpawnChildren", 1) -- Marks mob available for spawning.
+    mob:setLocalVar("Index", mobList[zone])
+    if mob:getFamily() >= 92 and mob:getFamily() <= 95 then -- If statue
+        mob:setLocalVar("eyeColor", eyes) -- Set Eyes if need be
+        if eyes >= 2 then -- If HP or MP restore statue
+            mob:setUnkillable(true) -- Set Unkillable as we will use skills then kill.
+        end
+    end
+end
+
+xi.dynamis.statueOnEngaged = function(mob, target, mobList)
+end
+
+xi.dynamis.statueOnFight = function(mob, target)
+    if mob:getHP() == 1 then -- If my HP = 1
+        if mob:AnimationSub() == 2 then -- I am an HP statue
+            mob:useMobAbility(1124) -- Use Recover HP
+        elseif mob:AnimationSub() == 3 then -- I am an MP statue
+            mob:useMobAbility(1125) -- Use Recover MP
+        end
+    end
+end
+
+xi.dynamis.onStatueSkillFinished = function(mob, skill)
+    if skill:getID() == 1124 or skill:getID() == 1125 then -- If I used one of the restore skills.
+        mob:setUnkillable(false) -- Make me killable
+        mob:setHP(0) -- Kill me
+    end
+end
+
+xi.dynamis.onNightmareSpawn = function (mob)
+end
+
+--------------------------------------------
+--            Dynamis Mob Death           --
+--------------------------------------------
+
+xi.dynamis.mobOnDeath = function (mob, mobList, msg)
+    if mob:getLocalVar("dynamisMobOnDeathTriggered") == 1 then return end
+    mob:setLocalVar("dynamisMobOnDeathTriggered", 1) -- onDeath lua happens once per party member that killed the mob, but we want this to only run once per mob
+
+    local mobID = mob:getID()
+    if mobID ~= nil and mobList[mobID].timeExtension ~= nil then mob:addTimeToDynamis(mob:getZone(), mobList[mobID].timeExtension, msg) end
+    if mob:getLocalVar("clearSpawnPosOnDeath") == 1 then mob:setSpawn(1,1,1,0) end
+
+    local i = 2
+    local j = 1
+    local mobFound = false
+    while mobList.waveDefeatRequirements[i] ~= nil and mobFound == false do
+        while mobList.waveDefeatRequirements[i][j] ~= nil do
+            if mobList.waveDefeatRequirements[i][j] == mobID then
+                mobFound = true
+                i = i - 1
+                break
+            end
+            j = j + 1
+        end
+        j = 1
+        i = i + 1
+    end
+
+    if mobFound == true then
+        -- print(string.format("mob's defeat is a requirement for wave number %u",i))
+        mob:setLocalVar("dynaIsDefeatedForWaveReq", 1)
+        local allReqsMet = true
+        while mobList.waveDefeatRequirements[i][j] ~= nil do
+            if GetMobByID(mobList.waveDefeatRequirements[i][j]):getLocalVar("dynaIsDefeatedForWaveReq") == 0 then
+                allReqsMet = false
+                break
+            end
+            j = j + 1
+        end
+        if allReqsMet == true then dynamis.spawnWave(mobList, i) end
+    end
+end
+
+m:addOverride("xi.dynamis.megaBossOnDeath", function(mob, player, isKiller) 
+    local zone = mob:getZoneID()
+    local ID = zones[zone]
+    if mob:getLocalVar("GaveTimeExtension") ~= 1 then -- Ensure we don't give more than 1 time extension.
+        xi.dynamis.mobOnDeath(mob, mobList[zone], dynaInfoEra[mob:getZoneID()].text.DYNAMIS_TIME_EXTEND) -- Process time extension and wave spawning
+        mob:setLocalVar("GaveTimeExtension", 1)
+    end
+    local winQM = GetNPCByID(dynaInfoEra[ID].winQM) -- Set winQM
+    local pos = mob:getPos()
+    winQM:setPos(pos.x,pos.y,pos.z,pos.rot) -- Set winQM to death pos
+    winQM:setStatus(xi.status.NORMAL) -- Make visible
+    player:addTitle(dynaInfoEra[ID].winTitle) -- Give player the title
+end)
 
 return m
