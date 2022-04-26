@@ -218,7 +218,7 @@ namespace mobutils
      *                                                                       *
      ************************************************************************/
 
-    void CalculateStats(CMobEntity* PMob)
+    void CalculateMobStats(CMobEntity* PMob, bool recover)
     {
         // remove all to keep mods in sync
         PMob->StatusEffectContainer->KillAllStatusEffect();
@@ -231,151 +231,153 @@ namespace mobutils
         uint8     mLvl     = PMob->GetMLevel();
         ZONE_TYPE zoneType = PMob->loc.zone->GetType();
 
-        if (PMob->HPmodifier == 0)
+        if (recover == true)
         {
-            float hpScale = PMob->HPscale;
-
-            if (PMob->getMobMod(MOBMOD_HP_SCALE) != 0)
+            if (PMob->HPmodifier == 0)
             {
-                hpScale = (float)PMob->getMobMod(MOBMOD_HP_SCALE) / 100.0f;
-            }
+                float hpScale = PMob->HPscale;
 
-            float growth    = 1.06f;
-            float petGrowth = 0.75f;
-            float base      = 18.0f;
+                if (PMob->getMobMod(MOBMOD_HP_SCALE) != 0)
+                {
+                    hpScale = (float)PMob->getMobMod(MOBMOD_HP_SCALE) / 100.0f;
+                }
 
-            // give hp boost every 10 levels after 25
-            // special boosts at 25 and 50
-            if (mLvl > 75)
-            {
-                growth    = 1.28f;
-                petGrowth = 1.03f;
-            }
-            else if (mLvl > 65)
-            {
-                growth    = 1.27f;
-                petGrowth = 1.02f;
-            }
-            else if (mLvl > 55)
-            {
-                growth    = 1.25f;
-                petGrowth = 0.99f;
-            }
-            else if (mLvl > 50)
-            {
-                growth    = 1.21f;
-                petGrowth = 0.96f;
-            }
-            else if (mLvl > 45)
-            {
-                growth    = 1.17f;
-                petGrowth = 0.95f;
-            }
-            else if (mLvl > 35)
-            {
-                growth    = 1.14f;
-                petGrowth = 0.92f;
-            }
-            else if (mLvl > 25)
-            {
-                growth    = 1.1f;
-                petGrowth = 0.82f;
-            }
+                float growth    = 1.06f;
+                float petGrowth = 0.75f;
+                float base      = 18.0f;
 
-            // pets have lower health
-            if (PMob->PMaster != nullptr)
-            {
-                growth = petGrowth;
-            }
+                // give hp boost every 10 levels after 25
+                // special boosts at 25 and 50
+                if (mLvl > 75)
+                {
+                    growth    = 1.28f;
+                    petGrowth = 1.03f;
+                }
+                else if (mLvl > 65)
+                {
+                    growth    = 1.27f;
+                    petGrowth = 1.02f;
+                }
+                else if (mLvl > 55)
+                {
+                    growth    = 1.25f;
+                    petGrowth = 0.99f;
+                }
+                else if (mLvl > 50)
+                {
+                    growth    = 1.21f;
+                    petGrowth = 0.96f;
+                }
+                else if (mLvl > 45)
+                {
+                    growth    = 1.17f;
+                    petGrowth = 0.95f;
+                }
+                else if (mLvl > 35)
+                {
+                    growth    = 1.14f;
+                    petGrowth = 0.92f;
+                }
+                else if (mLvl > 25)
+                {
+                    growth    = 1.1f;
+                    petGrowth = 0.82f;
+                }
 
-            PMob->health.maxhp = (int16)(base * pow(mLvl, growth) * hpScale);
-        }
-        else
-        {
-            PMob->health.maxhp = PMob->HPmodifier;
-        }
+                // pets have lower health
+                if (PMob->PMaster != nullptr)
+                {
+                    growth = petGrowth;
+                }
 
-        if (isNM)
-        {
-            PMob->health.maxhp = (int32)(PMob->health.maxhp * map_config.nm_hp_multiplier);
-        }
-        else
-        {
-            PMob->health.maxhp = (int32)(PMob->health.maxhp * map_config.mob_hp_multiplier);
-        }
-
-        bool hasMp = false;
-
-        switch (mJob)
-        {
-            case JOB_PLD:
-            case JOB_WHM:
-            case JOB_BLM:
-            case JOB_RDM:
-            case JOB_DRK:
-            case JOB_BLU:
-            case JOB_SCH:
-            case JOB_SMN:
-                hasMp = true;
-                break;
-            default:
-                break;
-        }
-
-        switch (sJob)
-        {
-            case JOB_PLD:
-            case JOB_WHM:
-            case JOB_BLM:
-            case JOB_RDM:
-            case JOB_DRK:
-            case JOB_BLU:
-            case JOB_SCH:
-            case JOB_SMN:
-                hasMp = true;
-                break;
-            default:
-                break;
-        }
-
-        if (PMob->getMobMod(MOBMOD_MP_BASE))
-        {
-            hasMp = true;
-        }
-
-        if (hasMp)
-        {
-            float scale = PMob->MPscale;
-
-            if (PMob->getMobMod(MOBMOD_MP_BASE))
-            {
-                scale = (float)PMob->getMobMod(MOBMOD_MP_BASE) / 100.0f;
-            }
-
-            if (PMob->MPmodifier == 0)
-            {
-                PMob->health.maxmp = (int16)(18.2 * pow(mLvl, 1.1075) * scale) + 10;
+                PMob->health.maxhp = (int16)(base * pow(mLvl, growth) * hpScale);
             }
             else
             {
-                PMob->health.maxmp = PMob->MPmodifier;
+                PMob->health.maxhp = PMob->HPmodifier;
             }
 
             if (isNM)
             {
-                PMob->health.maxmp = (int32)(PMob->health.maxmp * map_config.nm_mp_multiplier);
+                PMob->health.maxhp = (int32)(PMob->health.maxhp * map_config.nm_hp_multiplier);
             }
             else
             {
-                PMob->health.maxmp = (int32)(PMob->health.maxmp * map_config.mob_mp_multiplier);
+                PMob->health.maxhp = (int32)(PMob->health.maxhp * map_config.mob_hp_multiplier);
             }
+
+            bool hasMp = false;
+
+            switch (mJob)
+            {
+                case JOB_PLD:
+                case JOB_WHM:
+                case JOB_BLM:
+                case JOB_RDM:
+                case JOB_DRK:
+                case JOB_BLU:
+                case JOB_SCH:
+                case JOB_SMN:
+                    hasMp = true;
+                    break;
+                default:
+                    break;
+            }
+
+            switch (sJob)
+            {
+                case JOB_PLD:
+                case JOB_WHM:
+                case JOB_BLM:
+                case JOB_RDM:
+                case JOB_DRK:
+                case JOB_BLU:
+                case JOB_SCH:
+                case JOB_SMN:
+                    hasMp = true;
+                    break;
+                default:
+                    break;
+            }
+
+            if (PMob->getMobMod(MOBMOD_MP_BASE))
+            {
+                hasMp = true;
+            }
+
+            if (hasMp)
+            {
+                float scale = PMob->MPscale;
+
+                if (PMob->getMobMod(MOBMOD_MP_BASE))
+                {
+                    scale = (float)PMob->getMobMod(MOBMOD_MP_BASE) / 100.0f;
+                }
+
+                if (PMob->MPmodifier == 0)
+                {
+                    PMob->health.maxmp = (int16)(18.2 * pow(mLvl, 1.1075) * scale) + 10;
+                }
+                else
+                {
+                    PMob->health.maxmp = PMob->MPmodifier;
+                }
+
+                if (isNM)
+                {
+                    PMob->health.maxmp = (int32)(PMob->health.maxmp * map_config.nm_mp_multiplier);
+                }
+                else
+                {
+                    PMob->health.maxmp = (int32)(PMob->health.maxmp * map_config.mob_mp_multiplier);
+                }
+            }
+
+            PMob->UpdateHealth();
+            PMob->health.tp = 0;
+            PMob->health.hp = PMob->GetMaxHP();
+            PMob->health.mp = PMob->GetMaxMP();
         }
-
-        PMob->UpdateHealth();
-
-        PMob->health.tp = 0;
-        PMob->health.hp = PMob->GetMaxHP();
-        PMob->health.mp = PMob->GetMaxMP();
 
         ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setDamage(GetWeaponDamage(PMob));
 
@@ -584,17 +586,17 @@ namespace mobutils
         // Check for possible miss-setups
         if (PMob->getMobMod(MOBMOD_SPECIAL_SKILL) != 0 && PMob->getMobMod(MOBMOD_SPECIAL_COOL) == 0)
         {
-            ShowError("Mobutils::CalculateStats Mob (%s, %d) with special skill but no cool down set!", PMob->GetName(), PMob->id);
+            ShowError("Mobutils::CalculateMobStats Mob (%s, %d) with special skill but no cool down set!", PMob->GetName(), PMob->id);
         }
 
         if (PMob->SpellContainer->HasSpells() && PMob->getMobMod(MOBMOD_MAGIC_COOL) == 0)
         {
-            ShowError("Mobutils::CalculateStats Mob (%s, %d) with magic but no cool down set!", PMob->GetName(), PMob->id);
+            ShowError("Mobutils::CalculateMobStats Mob (%s, %d) with magic but no cool down set!", PMob->GetName(), PMob->id);
         }
 
         if (PMob->m_Detects == 0)
         {
-            ShowError("Mobutils::CalculateStats Mob (%s, %d, %d) has no detection methods!", PMob->GetName(), PMob->id, PMob->m_Family);
+            ShowError("Mobutils::CalculateMobStats Mob (%s, %d, %d) has no detection methods!", PMob->GetName(), PMob->id, PMob->m_Family);
         }
     }
 
@@ -944,7 +946,7 @@ namespace mobutils
         // make sure mob has mp to cast spells
         if (PMob->health.maxmp == 0 && PMob->SpellContainer != nullptr && PMob->SpellContainer->HasMPSpells())
         {
-            ShowError("mobutils::CalculateStats Mob (%u) has no mp for casting spells!", PMob->id);
+            ShowError("mobutils::GetAvailableSpells Mob (%u) has no mp for casting spells!", PMob->id);
         }
     }
 
