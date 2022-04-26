@@ -371,7 +371,7 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
             {
                 continue;
             }
-            if (visibleResults < 20)
+            if (visibleResults < 40)
             {
                 PlayersList.push_back(PPlayer);
                 visibleResults++;
@@ -408,7 +408,7 @@ std::list<SearchEntity*> CDataLoader::GetPartyList(uint16 PartyID, uint16 Allian
         "LEFT JOIN char_profile USING(charid) "
         "WHERE IF (allianceid <> 0, allianceid IN (SELECT allianceid FROM accounts_parties WHERE charid = %u) , partyid = %u) "
         "ORDER BY charname ASC "
-        "LIMIT 18";
+        "LIMIT 64";
 
     int32 ret = sql->Query(Query, (!AllianceID ? PartyID : AllianceID), (!PartyID ? AllianceID : PartyID));
 
