@@ -840,7 +840,7 @@ namespace petutils
             PPet->Spawn();
             if (PMaster->objtype == TYPE_PC)
             {
-                // Todo: DO auto's get job traits?
+                // automaton gets theirs by attachment only
                 if (PPet->getPetType() != PET_TYPE::AUTOMATON)
                 {
                     battleutils::AddTraits(PPet, traits::GetTraits(PPet->GetMJob()), PPet->GetMLevel());
