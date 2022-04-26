@@ -9715,7 +9715,9 @@ void CLuaBaseEntity::updateEnmityFromCure(CLuaBaseEntity* PEntity, int32 amount)
 {
     XI_DEBUG_BREAK_IF(amount < 0);
 
-    auto* PCurer = [&]() -> CBattleEntity* {
+    // clang-format off
+    auto* PCurer = [&]() -> CBattleEntity*
+    {
         if (m_PBaseEntity->objtype == TYPE_PC || m_PBaseEntity->objtype == TYPE_TRUST)
         {
             return static_cast<CBattleEntity*>(m_PBaseEntity);
@@ -9730,6 +9732,7 @@ void CLuaBaseEntity::updateEnmityFromCure(CLuaBaseEntity* PEntity, int32 amount)
         }
         return nullptr;
     }();
+    // clang-format on
 
     if (PEntity != nullptr && PCurer)
     {
@@ -9819,23 +9822,38 @@ sol::table CLuaBaseEntity::getNotorietyList()
     return table;
 }
 
+/************************************************************************
+ *  Function: setClaimable(...)
+ *  Purpose : sets m_IsClaimable for a mob
+ *  Example : mob:setClaimable(false)
+ *  Notes   :
+ ************************************************************************/
+
 void CLuaBaseEntity::setClaimable(bool claimable)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB);
     if (auto* PMob = dynamic_cast<CMobEntity*>(m_PBaseEntity))
     {
         PMob->m_IsClaimable = claimable;
+        return;
     }
+    ShowError("lua::setClaimable called on invalid entity");
 }
+
+/************************************************************************
+ *  Function: getClaimable(...)
+ *  Purpose : Returns whether or not a mob is claimable
+ *  Example : local claimable = mob:getClaimable()
+ *  Notes   : Defaults to true, as in the CMobEntity constructor
+ ************************************************************************/
 
 bool CLuaBaseEntity::getClaimable()
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB);
     if (auto* PMob = dynamic_cast<CMobEntity*>(m_PBaseEntity))
     {
         return PMob->m_IsClaimable;
     }
-    return false;
+    ShowError("lua::getClaimable called on invalid entity");
+    return true;
 }
 
 /************************************************************************
