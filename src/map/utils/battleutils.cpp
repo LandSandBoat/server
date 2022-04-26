@@ -5003,8 +5003,13 @@ namespace battleutils
     void ClaimMob(CBattleEntity* PDefender, CBattleEntity* PAttacker, bool passing)
     {
         TracyZoneScoped;
-        if (PDefender->objtype == TYPE_MOB)
+        if (auto* mob = dynamic_cast<CMobEntity*>(PDefender))
         {
+            if (!mob->m_IsClaimable)
+            {
+                return;
+            }
+
             CBattleEntity* original = PAttacker;
             if (PAttacker->objtype != TYPE_PC)
             {
@@ -5018,7 +5023,6 @@ namespace battleutils
                 }
             }
             CBattleEntity* battleTarget = original->GetBattleTarget();
-            CMobEntity*    mob          = static_cast<CMobEntity*>(PDefender);
             if (!passing)
             {
                 mob->PEnmityContainer->UpdateEnmity(original, 0, 0, true, true);

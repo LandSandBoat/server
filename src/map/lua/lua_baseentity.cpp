@@ -9819,6 +9819,25 @@ sol::table CLuaBaseEntity::getNotorietyList()
     return table;
 }
 
+void CLuaBaseEntity::setClaimable(bool claimable)
+{
+    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB);
+    if (auto* PMob = dynamic_cast<CMobEntity*>(m_PBaseEntity))
+    {
+        PMob->m_IsClaimable = claimable;
+    }
+}
+
+bool CLuaBaseEntity::getClaimable()
+{
+    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB);
+    if (auto* PMob = dynamic_cast<CMobEntity*>(m_PBaseEntity))
+    {
+        return PMob->m_IsClaimable;
+    }
+    return false;
+}
+
 /************************************************************************
  *  Function: addStatusEffect(effect, power, tick, duration)
  *  Purpose : Adds a specified Status Effect to the Entity
@@ -14100,6 +14119,8 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("updateClaim", CLuaBaseEntity::updateClaim);
     SOL_REGISTER("hasEnmity", CLuaBaseEntity::hasEnmity);
     SOL_REGISTER("getNotorietyList", CLuaBaseEntity::getNotorietyList);
+    SOL_REGISTER("setClaimable", CLuaBaseEntity::setClaimable);
+    SOL_REGISTER("getClaimable", CLuaBaseEntity::getClaimable);
 
     // Status Effects
     SOL_REGISTER("addStatusEffect", CLuaBaseEntity::addStatusEffect);
