@@ -536,7 +536,7 @@ INSERT INTO `status_effects` VALUES (509,'odyllic_subterfuge',32,0,0,0,0,0,0,0,0
 INSERT INTO `status_effects` VALUES (510,'ergon_might',32,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (511,'reive_mark',524320,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (512,'ionis',16777216,0,0,0,0,0,0,0,0);
-INSERT INTO `status_effects` VALUES (513,'bolstered',32,0,0,0,0,0,0,0,0);
+INSERT INTO `status_effects` VALUES (513,'bolster',32,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (515,'lasting_emanation',32,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (516,'ecliptic_attrition',32,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (517,'collimated_fervor',32,0,0,0,0,0,0,0,0);
