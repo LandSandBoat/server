@@ -30,6 +30,10 @@ set(SOURCES
 
 add_library(ai_states STATIC ${SOURCES})
 
+if(TRACY_ENABLE)
+    target_link_libraries(ai_states PUBLIC tracy_client)
+endif(TRACY_ENABLE)
+
 target_link_libraries(ai_states
     PUBLIC
     common

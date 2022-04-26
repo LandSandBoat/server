@@ -6,8 +6,11 @@ add_subdirectory(controllers)
 add_subdirectory(helpers)
 add_subdirectory(states)
 
-add_library(ai STATIC
-    ${SOURCES})
+add_library(ai STATIC ${SOURCES})
+
+if(TRACY_ENABLE)
+    target_link_libraries(ai PUBLIC tracy_client)
+endif(TRACY_ENABLE)
 
 target_link_libraries(ai
     PUBLIC

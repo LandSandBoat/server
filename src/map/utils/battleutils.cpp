@@ -5003,7 +5003,7 @@ namespace battleutils
     void ClaimMob(CBattleEntity* PDefender, CBattleEntity* PAttacker, bool passing)
     {
         TracyZoneScoped;
-        if (PDefender->objtype == TYPE_MOB)
+        if (auto* mob = dynamic_cast<CMobEntity*>(PDefender))
         {
             CBattleEntity* original = PAttacker;
             if (PAttacker->objtype != TYPE_PC)
@@ -5018,11 +5018,16 @@ namespace battleutils
                 }
             }
             CBattleEntity* battleTarget = original->GetBattleTarget();
-            CMobEntity*    mob          = static_cast<CMobEntity*>(PDefender);
             if (!passing)
             {
                 mob->PEnmityContainer->UpdateEnmity(original, 0, 0, true, true);
             }
+
+            if (!mob->m_IsClaimable)
+            {
+                return;
+            }
+
             if (PAttacker)
             {
                 CCharEntity* attacker = static_cast<CCharEntity*>(PAttacker);
@@ -6097,12 +6102,15 @@ namespace battleutils
 
         bool found = false;
 
-        PMaster->ForAlliance([&PTarget, &found](CBattleEntity* PChar) {
+        // clang-format off
+        PMaster->ForAlliance([&PTarget, &found](CBattleEntity* PChar)
+        {
             if (PChar->id == PTarget->m_OwnerID.id)
             {
                 found = true;
             }
         });
+        // clang-format on
 
         return found;
     }
