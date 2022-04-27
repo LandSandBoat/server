@@ -40,7 +40,7 @@ mission.sections =
                     return mission:progressEvent(169, { [0] = param0, [1] = param1, text_table = 0 })
                 end,
             },
-            
+
             onEventFinish =
             {
                 [169] = function(player, csid, option, npc)

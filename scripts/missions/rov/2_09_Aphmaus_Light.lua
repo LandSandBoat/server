@@ -34,12 +34,13 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        xi.rhapsodies.charactersAvailable(player) and
                         player:getCurrentMission(xi.mission.log_id.TOAU) >= xi.mission.id.toau.ROYAL_PUPPETEER
                     then
-                        -- TODO: Mask Documentation
+                        -- NOTE: The first 4 parameters for this event change the available dialogue.  This remains all zeroes
+                        -- until the player has progressed at least past TOAU21.  No changes are implemented at this time until
+                        -- viable captures are obtained.
 
-                        return mission:progressEvent(166, 0, 0, 0, 0)
+                        return mission:progressEvent(166, { text_table = 0 })
                     else
                         return mission:messageSpecial(whitegateID.text.UNABLE_TO_PROGRESS_ROV)
                     end
