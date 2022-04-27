@@ -7,10 +7,15 @@
 cmdprops =
 {
     permission = 5,
-    parameters = "sii"
+    parameters = "siii"
 }
 
-function onTrigger(player, MobName, GroupID, ZoneID)
+function error(player, msg)
+    player:PrintToPlayer(msg)
+    player:PrintToPlayer("!dynamicmob <Mob name> {GroupID} {ZoneID} {DropID}")
+end
+
+function onTrigger(player, MobName, GroupID, ZoneID, DropID)
     local zone = player:getZone()
     local mob = zone:insertDynamicEntity({
         -- NPC or MOB
@@ -41,11 +46,29 @@ function onTrigger(player, MobName, GroupID, ZoneID)
             -- Do stuff
         end,
     })
+		        -- validate mob info
+        if MobName == nil then
+            error(player, "You must provide a mob name.")
+            return
+        end
+        if GroupID == nil then
+            error(player, "Invalid GroupID")
+            return
+        end
+        if ZoneID == nil then
+            error(player, "invalid ZoneID")
+            return
+		end
+		if DropID == nil then
+			error(player, "no DropID set, use 0 for no drops")
+			return
+		end
+
 
     -- Use the mob object as you normally would
     mob:setSpawn(player:getXPos(), player:getYPos(), player:getZPos(), player:getRotPos())
 
-    mob:setDropID(0) -- No loot!
+    mob:setDropID(DropID) -- No loot!
 
     mob:spawn()
 
