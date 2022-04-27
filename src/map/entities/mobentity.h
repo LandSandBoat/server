@@ -252,6 +252,8 @@ public:
 
     CMobSpellContainer* SpellContainer;   // retrieves spells for the mob
 
+    bool m_IsClaimable;
+
     static constexpr float sound_range{ 8.f };
     static constexpr float sight_range{ 15.f };
 
