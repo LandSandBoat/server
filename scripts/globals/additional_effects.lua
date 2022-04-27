@@ -256,15 +256,17 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
         end
 --ONLY FOR BRIGANDISH BLADE
     elseif addType == procType.REMOVE_UNKILLABLE then
-		local BBID   = require('scripts/zones/VELUGANNON_PALACE/IDs')
+        local velids   = require('scripts/zones/VELUGANNON_PALACE/IDs')
+        local brigandish_blade = velids.mob.BRIGANDISH_BLADE
         if
-			GetMobByID(BBID.mob.BRIGANDISH_BLADE)
+            defender:GetId() == GetMobByID(brigandish_blade)
         then
             defender:setUnkillable(false)
         else
             return 0, 0, 0 -- Not Brigandish Blade
         end
     end
+
     --[[
     if msgID == nil then
         print("Additional effect has a nil msgID !!")
