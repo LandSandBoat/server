@@ -20329,6 +20329,9 @@ INSERT INTO `item_mods` VALUES (16660,11,3);
 INSERT INTO `item_mods` VALUES (16662,9,4);
 INSERT INTO `item_mods` VALUES (16662,11,4);
 INSERT INTO `item_mods` VALUES (16669,23,5);
+INSERT INTO item_mods VALUES (16672,431,2);  -- Additional effect type: DEBUFF (PARALYSIS)
+INSERT INTO item_mods VALUES (16672,499,11); -- Additional effect animation (subEffect) xi.subEffect.PARALYSIS
+INSERT INTO item_mods VALUES (16672,501,10); -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (16673,8,1);
 INSERT INTO `item_mods` VALUES (16673,9,1);
 INSERT INTO `item_mods` VALUES (16675,16,-10);
