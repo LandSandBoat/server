@@ -68,7 +68,7 @@ function onTrigger(player, MobName, GroupID, ZoneID, DropID)
     -- Use the mob object as you normally would
     mob:setSpawn(player:getXPos(), player:getYPos(), player:getZPos(), player:getRotPos())
 
-    mob:setDropID(DropID) -- No loot!
+    mob:setDropID(DropID)
 
     mob:spawn()
 
