@@ -28,6 +28,10 @@ set(SOURCES
 
 add_library(lua_bindings STATIC ${SOURCES})
 
+if(TRACY_ENABLE)
+    target_link_libraries(lua_bindings PUBLIC tracy_client)
+endif(TRACY_ENABLE)
+
 target_link_libraries(lua_bindings
     PUBLIC
     common

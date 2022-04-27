@@ -18,6 +18,10 @@ set(SOURCES
 
 add_library(entities STATIC ${SOURCES})
 
+if(TRACY_ENABLE)
+    target_link_libraries(entities PUBLIC tracy_client)
+endif(TRACY_ENABLE)
+
 target_link_libraries(entities
     PUBLIC
     common

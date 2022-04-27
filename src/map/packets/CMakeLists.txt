@@ -245,6 +245,10 @@ set(SOURCES
 
 add_library(packets STATIC ${SOURCES})
 
+if(TRACY_ENABLE)
+    target_link_libraries(packets PUBLIC tracy_client)
+endif(TRACY_ENABLE)
+
 target_link_libraries(packets
     PUBLIC
     common
