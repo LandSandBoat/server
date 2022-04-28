@@ -46,7 +46,7 @@ function onTrigger(player, MobName, GroupID, ZoneID, DropID)
             -- Do stuff
         end,
     })
-		        -- validate mob info
+        -- validate mob info
         if MobName == nil then
             error(player, "You must provide a mob name.")
             return
@@ -58,11 +58,11 @@ function onTrigger(player, MobName, GroupID, ZoneID, DropID)
         if ZoneID == nil then
             error(player, "invalid ZoneID")
             return
-		end
-		if DropID == nil then
-			error(player, "no DropID set, use 0 for no drops")
-			return
-		end
+        end
+        if DropID == nil then
+        error(player, "no DropID set, use 0 for no drops")
+        ... return
+        end
 
 
     -- Use the mob object as you normally would
