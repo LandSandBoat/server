@@ -40,7 +40,20 @@ entity.onTrade = function(player, npc, trade)
     local count = trade:getItemCount()
 
     if (player:hasKeyItem(xi.ki.VIAL_OF_SHROUDED_SAND)) then
-
+        if npcUtil.tradeHasExactly(trade, 1453) then
+	    	player:tradeComplete()
+            player:addItem(1452,100)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, 1452) -- Give 100 Ordelle bronzepiece
+        elseif npcUtil.tradeHasExactly(trade, 1456) then
+            player:tradeComplete()
+            player:addItem(1455,100)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, 1455) -- Give 100 One byne bill
+	    elseif npcUtil.tradeHasExactly(trade, 1450) then
+            player:tradeComplete()
+            player:addItem(1449,100)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, 1449) -- Give 100 Tukuku whiteshell
+	    end	
+		
         -- buy prismatic hourglass
         if (gil == xi.settings.PRISMATIC_HOURGLASS_COST and count == 1 and not player:hasKeyItem(xi.ki.PRISMATIC_HOURGLASS)) then
             player:startEvent(54)

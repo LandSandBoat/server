@@ -35,7 +35,7 @@ local wsRequirements =
     [14] = { "Last Stand",    1520,      10,      1466,    10 }, -- goblin grease, relic iron
 }
 
- local atoritutori = zone:insertDynamicEntity({
+local atoritutori = zone:insertDynamicEntity({
     objtype = xi.objType.NPC,
     name = "Atori-Tutori",
     look = 3106,
@@ -624,41 +624,61 @@ m:addOverride("xi.zones.Aht_Urhgan_Whitegate.Zone.onInitialize", function(zone)
     super(zone)
 	
     local mnejing = zone:insertDynamicEntity({  -- sell pup attachments
-        objtype = xi.objType.NPC,
-        name = "Mnejing",
-        look = 3030,
-        x = -63.022,
-        y = -6.000,
-        z = -48.491,
-        rotation = 70,
-        widescan = 1,
+    objtype  = xi.objType.NPC,
+    name     = "Mnejing",
+    look     = 3030,
+    x        = -63.022,
+    y        = -6.000,
+    z        = -48.491,
+    rotation = 70,
+    widescan = 1,
 
-        onTrade = function(player, npc, trade)
-        end,
+    onTrade = function(player, npc, trade)
+        if player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.OPERATION_TEATIME) == QUEST_COMPLETED then
+            if npcUtil.tradeHasExactly(trade, {786, 2289, 2152, 754, 2186, 2186}) then
+                player:tradeComplete()
+                player:addItem(15686)
+                player:messageSpecial( ID.text.ITEM_OBTAINED, 15686) -- Give Pup. Babouches
+            elseif npcUtil.tradeHasExactly(trade, {821, 2289, 2152, 754, 2186}) then
+                player:tradeComplete()
+                player:addItem(14930)
+                player:messageSpecial(ID.text.ITEM_OBTAINED, 14930) -- Give Pup. Dastanas
+            elseif npcUtil.tradeHasExactly(trade, {786, 2289, 1636, 1699, 2187}) then
+                player:tradeComplete()
+                player:addItem(14523)
+                player:messageSpecial(ID.text.ITEM_OBTAINED, 14523) -- Give Pup. Tobe
+            end
+        end
+    end,
 
-        onTrigger = function(player, npc)
-		    local stock =
-            {
-		        9885,  82992,    -- Magniplug
-		        9887,  82992,    -- Arcanoclutch
-		        9071,  88920,    -- Resister II
-		        9044,  88920,    -- Auto-Repair Kit III
-		        9073,  88920,    -- Arcanic Cell II
-		        9045,  88920,    -- Mana Tank III
-		        2414, 185250,    -- Steam Jacket
-		        2413, 185250,    -- Coiler
-		        2347, 222300,    -- Reactive Shield
-		        2348, 222300,    -- Tranquilizer
-		        2349, 222300,    -- Turbo Charger
-		        2350, 222300,    -- Schurzen
-		        2351, 222300,    -- Dynamo 
-		        2352, 222300,    -- Condenser
-		        2353, 222300,    -- Optic Fiber
-		        2354, 222300,    -- Economizer
-            }
-            player:PrintToPlayer("Buy now to make your puppet stronger", 0, npc:getPacketName())
-			xi.shop.general(player, stock)
-        end,
+    onTrigger = function(player, npc)
+        local stock =
+        {
+            9885,  82992,    -- Magniplug
+            9887,  82992,    -- Arcanoclutch
+            9071,  88920,    -- Resister II
+            9044,  88920,    -- Auto-Repair Kit III
+            9073,  88920,    -- Arcanic Cell II
+            9045,  88920,    -- Mana Tank III
+            2414, 185250,    -- Steam Jacket
+            2413, 185250,    -- Coiler
+            2347, 222300,    -- Reactive Shield
+            2348, 222300,    -- Tranquilizer
+            2349, 222300,    -- Turbo Charger
+            2350, 222300,    -- Schurzen
+            2351, 222300,    -- Dynamo 
+            2352, 222300,    -- Condenser
+            2353, 222300,    -- Optic Fiber
+            2354, 222300,    -- Economizer
+        }
+
+        player:PrintToPlayer("Welcome to the puppetmaster attachment shop!", 0, npc:getPacketName())
+        xi.shop.general(player, stock)
+
+        if player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.OPERATION_TEATIME) == QUEST_COMPLETED then
+            player:PrintToPlayer("If you're looking for artifact gear, just trade me the corresponding materials for each item!", 0, npc:getPacketName())
+        end
+    end,
     })
 
     utils.unused(mnejing)
@@ -772,6 +792,8 @@ m:addOverride("xi.zones.Southern_San_dOria.Zone.onInitialize", function(zone)
             local storedCrystals = player:getCharVar("CrystalCruncher")
             local eligibleCrystals = math.floor(storedCrystals / 3 )
             
+			player:PrintToPlayer("Hello, I'll convert any crystals at a ratio of 3:1. If you trade any other items")
+			
             if storedCrystals > 2 then
                 player:PrintToPlayer(string.format("You can receive up to %s crystals with your current balance of %s crystals.", eligibleCrystals, storedCrystals))
                 
@@ -905,6 +927,8 @@ m:addOverride("xi.zones.Northern_San_dOria.Zone.onInitialize", function(zone)
             local storedCrystals = player:getCharVar("CrystalCruncher")
             local eligibleCrystals = math.floor(storedCrystals / 3 )
             
+			player:PrintToPlayer("Hello, I'll convert any crystals at a ratio of 3:1. If you trade any other items")
+
             if storedCrystals > 2 then
                 player:PrintToPlayer(string.format("You can receive up to %s crystals with your current balance of %s crystals.", eligibleCrystals, storedCrystals))
                 
@@ -1038,6 +1062,8 @@ m:addOverride("xi.zones.Bastok_Mines.Zone.onInitialize", function(zone)
             local storedCrystals = player:getCharVar("CrystalCruncher")
             local eligibleCrystals = math.floor(storedCrystals / 3 )
             
+			player:PrintToPlayer("Hello, I'll convert any crystals at a ratio of 3:1. If you trade any other items")
+
             if storedCrystals > 2 then
                 player:PrintToPlayer(string.format("You can receive up to %s crystals with your current balance of %s crystals.", eligibleCrystals, storedCrystals))
                 
@@ -1171,6 +1197,8 @@ m:addOverride("xi.zones.Bastok_Markets.Zone.onInitialize", function(zone)
             local storedCrystals = player:getCharVar("CrystalCruncher")
             local eligibleCrystals = math.floor(storedCrystals / 3 )
             
+			player:PrintToPlayer("Hello, I'll convert any crystals at a ratio of 3:1. If you trade any other items")
+
             if storedCrystals > 2 then
                 player:PrintToPlayer(string.format("You can receive up to %s crystals with your current balance of %s crystals.", eligibleCrystals, storedCrystals))
                 
@@ -1304,6 +1332,8 @@ m:addOverride("xi.zones.Windurst_Waters.Zone.onInitialize", function(zone)
             local storedCrystals = player:getCharVar("CrystalCruncher")
             local eligibleCrystals = math.floor(storedCrystals / 3 )
             
+			player:PrintToPlayer("Hello, I'll convert any crystals at a ratio of 3:1. If you trade any other items")
+
             if storedCrystals > 2 then
                 player:PrintToPlayer(string.format("You can receive up to %s crystals with your current balance of %s crystals.", eligibleCrystals, storedCrystals))
                 
@@ -1437,6 +1467,8 @@ m:addOverride("xi.zones.Windurst_Woods.Zone.onInitialize", function(zone)
             local storedCrystals = player:getCharVar("CrystalCruncher")
             local eligibleCrystals = math.floor(storedCrystals / 3 )
             
+			player:PrintToPlayer("Hello, I'll convert any crystals at a ratio of 3:1. If you trade any other items")
+
             if storedCrystals > 2 then
                 player:PrintToPlayer(string.format("You can receive up to %s crystals with your current balance of %s crystals.", eligibleCrystals, storedCrystals))
                 
