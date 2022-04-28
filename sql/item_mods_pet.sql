@@ -278,6 +278,7 @@ INSERT INTO `item_mods_pet` VALUES (23057,25,31,3);     -- Foire Taj +2 Automato
 INSERT INTO `item_mods_pet` VALUES (23057,369,1,3);     -- Automaton: Refresh +1
 INSERT INTO `item_mods_pet` VALUES (23057,370,3,3);     -- Automaton: Regen +3
 INSERT INTO `item_mods_pet` VALUES (23057,384,600,3);   -- Automaton: Haste +6%
+INSERT INTO `item_mods_pet` VALUES (23083,2,500,8);     -- Bagua galero +2 : Luopan HP +500
 INSERT INTO `item_mods_pet` VALUES (23120,370,10,2);    -- Vishap Mail +2 Wyvern: "Regen"+10
 INSERT INTO `item_mods_pet` VALUES (23121,25,35,1);     -- Convoker's Doublet +2 Avatar: Accuracy+35
 INSERT INTO `item_mods_pet` VALUES (23121,30,35,1);     -- Magic Accuracy+35
@@ -287,13 +288,16 @@ INSERT INTO `item_mods_pet` VALUES (23124,5,165,3);     -- Automaton: MP +165
 INSERT INTO `item_mods_pet` VALUES (23124,384,400,3);   -- Automaton: Haste +4%
 INSERT INTO `item_mods_pet` VALUES (23191,25,32,3);     -- Foire Dastanas +2 Automaton: Accuracy +32
 INSERT INTO `item_mods_pet` VALUES (23191,384,500,3);   -- Automaton: Haste +5%
+INSERT INTO `item_mods_pet` VALUES (23195,160,-1200,8);  -- Geomancy mitaines +2 Luopan: Damage taken -12%
 INSERT INTO `item_mods_pet` VALUES (23325,28,20,3);     -- Foire Babouches +2 Automaton: Magic Attack Bonus +20
 INSERT INTO `item_mods_pet` VALUES (23325,30,40,3);     -- Automaton: Magic Accuracy +40
 INSERT INTO `item_mods_pet` VALUES (23325,384,400,3);   -- Automaton: Haste +4%
+INSERT INTO `item_mods_pet` VALUES (23351,370,4,8);     -- Bagua Sandals +2: Luopan: "Regen"+4
 INSERT INTO `item_mods_pet` VALUES (23392,25,41,3);     -- Foire Taj +3 Automaton: Accuracy +41
 INSERT INTO `item_mods_pet` VALUES (23392,369,2,3);     -- Automaton: Refresh +2
 INSERT INTO `item_mods_pet` VALUES (23392,370,6,3);     -- Automaton: Regen +6
 INSERT INTO `item_mods_pet` VALUES (23392,384,700,3);   -- Automaton: Haste +7%
+INSERT INTO `item_mods_pet` VALUES (23418,2,600,8);     -- Bagua galero +3 : Luopan HP +600
 INSERT INTO `item_mods_pet` VALUES (23455,370,15,2);    -- Vishap Mail +3 Wyvern: "Regen"+15
 INSERT INTO `item_mods_pet` VALUES (23254,3,25,2);      -- Vishap Brais +2 Wyvern: HP+25%
 INSERT INTO `item_mods_pet` VALUES (23258,5,75,3);      -- Foire Churidars +2 Automaton: MP+75
@@ -308,6 +312,7 @@ INSERT INTO `item_mods_pet` VALUES (23459,5,220,3);     -- Automaton: MP +220
 INSERT INTO `item_mods_pet` VALUES (23459,384,500,3);   -- Automaton: Haste +5%
 INSERT INTO `item_mods_pet` VALUES (23526,25,42,3);     -- Foire Dastanas +3 Automaton: Accuracy +42
 INSERT INTO `item_mods_pet` VALUES (23526,384,500,3);   -- Automaton: Haste +5%
+INSERT INTO `item_mods_pet` VALUES (23530,160,-1300,8);  -- Geomancy mitaines +3 Luopan: Damage taken -13%
 INSERT INTO `item_mods_pet` VALUES (23589,3,27,2);      -- Vishap Brais Wyvern: HP+27%
 INSERT INTO `item_mods_pet` VALUES (23593,5,75,3);      -- Foire Churidars +3 Automaton: MP+75
 INSERT INTO `item_mods_pet` VALUES (23593,160,-600,3);    -- Automaton: Damage taken -6%
@@ -325,7 +330,7 @@ INSERT INTO `item_mods_pet` VALUES (23680,25,36,1);     -- Glyphic Pigaches +3: 
 INSERT INTO `item_mods_pet` VALUES (23680,562,13,1);    -- Glyphic Pigaches +3: Avatar: Magic critical hit rate +13%
 INSERT INTO `item_mods_pet` VALUES (23683,28,57,3);     -- Pitre Babouches +3: Automaton: "Magic Atk. Bonus"+57
 INSERT INTO `item_mods_pet` VALUES (23683,30,43,3);     -- Pitre Babouches +3: Automaton: Magic Accuracy+43
--- INSERT INTO `item_mods_pet` VALUES (23686,370,5,?);  -- Bagua Sandals +3: Luopan: "Regen"+5
+INSERT INTO `item_mods_pet` VALUES (23686,370,5,8);     -- Bagua Sandals +3: Luopan: "Regen"+5
 INSERT INTO `item_mods_pet` VALUES (23761,25,50,0);     -- Nyame Helm: Pet: Accuracy+50
 INSERT INTO `item_mods_pet` VALUES (23761,26,50,0);     -- Nyame Helm: Pet: Ranged Accuracy+50
 INSERT INTO `item_mods_pet` VALUES (23761,30,50,0);     -- Nyame Helm: Pet: Magic Accuracy+50
@@ -456,6 +461,8 @@ INSERT INTO `item_mods_pet` VALUES (27362,28,15,3);     -- Pitre Babouches Autom
 INSERT INTO `item_mods_pet` VALUES (27362,30,12,3);     -- Automaton: Magic Accuracy +12
 INSERT INTO `item_mods_pet` VALUES (27363,28,18,3);     -- Pitre Babouches Automaton: Magic Attack Bonus +18
 INSERT INTO `item_mods_pet` VALUES (27363,30,15,3);     -- Automaton: Magic Accuracy +15
+INSERT INTO `item_mods_pet` VALUES (27368,370,2,8);     -- Bagua Sandals: Luopan: "Regen"+2
+INSERT INTO `item_mods_pet` VALUES (27369,370,3,8);     -- Bagua Sandals +1: Luopan: "Regen"+3
 INSERT INTO `item_mods_pet` VALUES (27439,30,17,1);     -- Beck. Pigaches Avatar: Magic Accuracy+17
 INSERT INTO `item_mods_pet` VALUES (27440,30,27,1);     -- Beck. Pigaches +1 Avatar: Magic Accuracy+27
 INSERT INTO `item_mods_pet` VALUES (27445,12,17,3);     -- Karagoz Scarpe Automaton: INT +17
@@ -484,6 +491,8 @@ INSERT INTO `item_mods_pet` VALUES (27957,27,5,1);      -- Con. Bracers Avatar: 
 INSERT INTO `item_mods_pet` VALUES (27960,384,300,3);   -- Foire Dastanas Automaton: Haste +3%
 INSERT INTO `item_mods_pet` VALUES (27978,27,5,1);      -- Con. Bracers +1 Avatar: Enmity+5
 INSERT INTO `item_mods_pet` VALUES (27981,384,400,3);   -- Foire Dastanas +1 Automaton: Haste +4%
+INSERT INTO `item_mods_pet` VALUES (27985,160,-1100,8);  -- Geomancy mitaines +1 Luopan: Damage taken -11%
+INSERT INTO `item_mods_pet` VALUES (28066,160,-1000,8);  -- Geomancy mitaines Luopan: Damage taken -10%
 INSERT INTO `item_mods_pet` VALUES (28025,25,20,0);     -- Regimen Mittens Pet: Accuracy+20
 INSERT INTO `item_mods_pet` VALUES (28025,26,20,0);     -- Pet: Ranged Accuracy+20
 INSERT INTO `item_mods_pet` VALUES (28025,30,20,0);     -- Pet: Magic Accuracy+20
