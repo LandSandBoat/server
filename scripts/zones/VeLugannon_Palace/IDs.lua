@@ -34,6 +34,7 @@ zones[xi.zone.VELUGANNON_PALACE] =
     {
         MIMIC            = 17502567,
         BRIGANDISH_BLADE = 17502568,
+        STEAM_CLEANER    = 17502569,
     },
     npc =
     {
