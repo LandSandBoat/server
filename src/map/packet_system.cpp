@@ -730,7 +730,6 @@ void SmallPacket0x017(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
-    TracyZoneCString("Player Action");
 
     // uint32 ID = data.ref<uint32>(0x04);
     uint16 TargID = data.ref<uint16>(0x08);
@@ -741,6 +740,61 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
         data.ref<float>(0x14),
         data.ref<float>(0x18)
     };
+
+    constexpr auto actionToStr = [](uint8 actionIn)
+    {
+        switch (actionIn)
+        {
+            case 0x00:
+                return "Trigger";
+            case 0x02:
+                return "Attack";
+            case 0x03:
+                return "Spellcast";
+            case 0x04:
+                return "Disengage";
+            case 0x05:
+                return "Call for Help";
+            case 0x07:
+                return "Weaponskill";
+            case 0x09:
+                return "Job Ability";
+            case 0x0B:
+                return "Homepoint";
+            case 0x0C:
+                return "Assist";
+            case 0x0D:
+                return "Raise";
+            case 0x0E:
+                return "Fishing";
+            case 0x0F:
+                return "Change Target";
+            case 0x10:
+                return "Ranged Attack";
+            case 0x11:
+                return "Chocobo Digging";
+            case 0x12:
+                return "Dismount";
+            case 0x13:
+                return "Tractor Menu";
+            case 0x14:
+                return "Complete Character Update";
+            case 0x15:
+                return "Ballista - Quarry";
+            case 0x16:
+                return "Ballista - Sprint";
+            case 0x17:
+                return "Ballista - Scout";
+            case 0x18:
+                return "Blockaid";
+            case 0x1A:
+                return "Mounts";
+            default:
+                return "Unknown";
+        }
+    };
+    auto actionStr = actionToStr(action);
+    TracyZoneString(fmt::format("Player Action: {}: {} -> targid: {}", PChar->GetName(), actionStr, TargID));
 
     switch (action)
     {
@@ -851,11 +905,23 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
         {
             uint16 JobAbilityID = data.ref<uint16>(0x0C);
             uint8 currentAnimation = PChar->animation;
+
             if (currentAnimation != ANIMATION_NONE && currentAnimation != ANIMATION_ATTACK)
             {
-                ShowExploit("SmallPacket0x009: Player %s trying to use a Job Ability from invalid state", PChar->GetName());
+                ShowExploit("SmallPacket0x01A: Player %s trying to use a Job Ability from invalid state", PChar->GetName());
                 return;
             }
+
+            // Don't allow BST to use ready before level 25
+            if (PChar->PPet != nullptr && (!charutils::hasAbility(PChar, ABILITY_READY) || !PChar->PPet->PAI->IsEngaged()))
+            {
+                if (JobAbilityID >= ABILITY_FOOT_KICK && JobAbilityID <= ABILITY_PENTAPECK) // Is this a BST ability?
+                {
+                    PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, MSGBASIC_UNABLE_TO_USE_JA2));
+                    return;
+                }
+            }
+
             PChar->PAI->Ability(TargID, JobAbilityID);
         }
         break;
@@ -998,6 +1064,7 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
         break;
         case 0x15: // ballista - quarry
         case 0x16: // ballista - sprint
+        case 0x17: // ballista - scout
             break;
         case 0x18: // blockaid
         {
@@ -1080,12 +1147,12 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
         break;
         default:
         {
-            ShowWarning("CLIENT PERFORMING UNHANDLED ACTION %02hX", action);
+            ShowWarning(fmt::format("CLIENT {} PERFORMING UNHANDLED ACTION {} (0x{:02X})", PChar->GetName(), actionStr, action));
             return;
         }
         break;
     }
-    ShowAction("CLIENT %s PERFORMING ACTION %02hX", PChar->GetName(), action);
+    ShowAction(fmt::format("CLIENT {} PERFORMING ACTION {} (0x{:02X})", PChar->GetName(), actionStr, action));
 }
 
 /************************************************************************
@@ -5186,6 +5253,7 @@ void SmallPacket0x0BE(map_session_data_t* const PSession, CCharEntity* const PCh
 
 void SmallPacket0x0BF(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     if (PChar->m_moghouseID)
     {
         JOBPOINT_TYPE jpType = static_cast<JOBPOINT_TYPE>(data.ref<uint16>(0x04));
@@ -5207,6 +5275,7 @@ void SmallPacket0x0BF(map_session_data_t* const PSession, CCharEntity* const PCh
 
 void SmallPacket0x0C0(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
+    TracyZoneScoped;
     if (charutils::hasKeyItem(PChar, 2544))
     {
         // Only send Job Points Packet if the player has unlocked them
@@ -5253,10 +5322,11 @@ void SmallPacket0x0C3(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x0C4(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
-    uint8           SlotID         = data.ref<uint8>(0x06);
-    uint8           LocationID     = data.ref<uint8>(0x07);
-    uint8           action         = data.ref<uint8>(0x08);
-    uint8           lsNum          = data.ref<uint8>(0x1B);
+    uint8 SlotID     = data.ref<uint8>(0x06);
+    uint8 LocationID = data.ref<uint8>(0x07);
+    uint8 action     = data.ref<uint8>(0x08);
+    uint8 lsNum      = data.ref<uint8>(0x1B);
+
     CItemLinkshell* PItemLinkshell = (CItemLinkshell*)PChar->getStorage(LocationID)->GetItem(SlotID);
 
     if (PItemLinkshell != nullptr && PItemLinkshell->isType(ITEM_LINKSHELL))
@@ -5428,12 +5498,15 @@ void SmallPacket0x0CB(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x0D2(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
-    PChar->ForAlliance([PChar](CBattleEntity* PPartyMember) {
+    // clang-format off
+    PChar->ForAlliance([PChar](CBattleEntity* PPartyMember)
+    {
         if (PPartyMember->getZone() == PChar->getZone() && ((CCharEntity*)PPartyMember)->m_moghouseID == PChar->m_moghouseID)
         {
             PChar->pushPacket(new CPartyMapPacket((CCharEntity*)PPartyMember));
         }
     });
+    // clang-format on
 }
 
 /************************************************************************
@@ -5488,7 +5561,6 @@ void SmallPacket0x0DB(map_session_data_t* const PSession, CCharEntity* const PCh
     }
 
     PChar->pushPacket(new CMenuConfigPacket(PChar));
-    return;
 }
 
 /************************************************************************

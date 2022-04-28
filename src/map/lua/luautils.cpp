@@ -688,7 +688,7 @@ namespace luautils
             ShowInfo("[FileWatcher] %s -> %s", filename, out_str);
         }
 
-        moduleutils::TryApplyModules();
+        moduleutils::TryApplyLuaModules();
     }
 
     sol::table GetCacheEntryFromFilename(std::string filename)
@@ -1633,9 +1633,7 @@ namespace luautils
 
         auto filename = fmt::format("./scripts/zones/{}/Zone.lua", name);
 
-        CacheLuaObjectFromFile(filename);
-
-        auto onZoneTick = lua["xi"]["zones"][name]["Zone"]["onZoneTick"];
+        auto onZoneTick = GetCacheEntryFromFilename(filename)["onZoneTick"];
         if (!onZoneTick.valid())
         {
             return;
@@ -1651,7 +1649,7 @@ namespace luautils
 
     /************************************************************************
      *                                                                       *
-     *  Выполняем скрипт при входе персонажа в зону                          *
+     *  We perform the script at the entrance of the character to the server *
      *                                                                       *
      ************************************************************************/
 
@@ -1679,7 +1677,7 @@ namespace luautils
 
     /************************************************************************
      *                                                                       *
-     *  Выполняем скрипт при входе персонажа в зону                          *
+     *  We perform the script at the entrance of the character to the zone   *
      *                                                                       *
      ************************************************************************/
 

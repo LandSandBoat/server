@@ -7,6 +7,12 @@ require("scripts/globals/utils")
 -- Global, for use in C++
 function applyOverride(base_table, name, func)
     local old = base_table[name]
+
+    if old == nil then
+        print("Inserting empty function to override for: " .. name)
+        old = function() end -- Insert empty function
+    end
+
     local thisenv = getfenv(old)
 
     local env = { super = old }
