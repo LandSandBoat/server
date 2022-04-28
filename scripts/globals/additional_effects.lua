@@ -120,7 +120,8 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
         ABSORB_STATUS = 10,
         SELF_BUFF = 11,
         DEATH = 12,
-    }
+		REMOVE_UNKILLABLE = 13, --Solely for Buccaneer's Knife with Brigandish Blade
+	}
 
     -- If we're not going to proc, lets not execute all those checks!
     if chance < math.random(100) then
@@ -253,7 +254,19 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
             msgParam = xi.effect.KO
             defender:setHP(0)
         end
-    end
+
+    --ONLY FOR BRIGANDISH BLADE
+    elseif addType == procType.REMOVE_UNKILLABLE then
+        local VelID = require('scripts/zones/VELUGANNON_PALACE/IDs')
+        if
+            defender:getID() == VelID.mob.BRIGANDISH_BLADE
+
+        then
+            defender:setUnkillable(false)
+        else
+            return 0, 0, 0 -- Not Brigandish Blade
+		end
+	end
 
     --[[
     if msgID == nil then
