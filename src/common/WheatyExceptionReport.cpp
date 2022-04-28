@@ -148,10 +148,43 @@ const char* GetMemoryUsageString()
 LONG WINAPI WheatyExceptionReport::WheatyUnhandledExceptionFilter(
     PEXCEPTION_POINTERS pExceptionInfo)
 {
+    // https://www.freelists.org/post/luajit/FirstChance-Exception-in-luajit,1
+    // https://love2d.org/forums/viewtopic.php?t=84336
+    switch (pExceptionInfo->ExceptionRecord->ExceptionCode)
+    {
+       // LuaJIT throws and handles exceptions as part of its regular runtime.
+       // We should ignore these. By using Sol, there is no scenario where we want a Lua error to be fatal.
+       // The LuaJIT exception codes are all built by OR-ing 0xE24C4A00 with the relevant Lua error codes:
+       // https://github.com/LuaJIT/LuaJIT/blob/4deb5a1588ed53c0c578a343519b5ede59f3d928/src/lj_err.c#L250-L256
+       // https://github.com/LuaJIT/LuaJIT/blob/20f556e53190ab9a735b932f5d868d45ec536a70/src/lua.h#L42-L48
+        case 0xE24C4A00: // LUA_OK (0)
+            [[fallthrough]];
+        case 0xE24C4A01: // LUA_YIELD (1)
+            [[fallthrough]];
+        case 0xE24C4A02: // LUA_ERRRUN (2)
+            [[fallthrough]];
+        case 0xE24C4A03: // LUA_ERRSYNTAX (3)
+            [[fallthrough]];
+        case 0xE24C4A04: // LUA_ERRMEM (4)
+            [[fallthrough]];
+        case 0xE24C4A05: // LUA_ERRERR (5)
+            return EXCEPTION_CONTINUE_SEARCH;
+
+        // Exceptions thrown internally (like is possible in AI state transitions) should also be ignored
+        case 0xE06D7363: // Internal application exception code
+            return EXCEPTION_CONTINUE_SEARCH;
+
+        default:
+            break;
+    }
+
     std::unique_lock<std::mutex> guard(alreadyCrashedLock);
+
     // Handle only 1 exception in the whole process lifetime
     if (alreadyCrashed)
+    {
         return EXCEPTION_EXECUTE_HANDLER;
+    }
 
     alreadyCrashed = true;
 
