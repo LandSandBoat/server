@@ -140,6 +140,7 @@ foreach(dir ${module_dirs})
             "${CMAKE_SOURCE_DIR}/modules/${dir}/*.h")
         list(APPEND module_include_dirs "${CMAKE_SOURCE_DIR}/modules/${dir}")
         list(APPEND SOURCES ${module_files})
+        message(STATUS "Adding module files to build: ${module_files}")
     endif()
 endforeach()
 

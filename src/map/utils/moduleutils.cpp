@@ -144,11 +144,11 @@ namespace moduleutils
 
                 // Run for real
                 sol::table table = lua.require_file(pathNoExt, relPath);
-                if (table["enabled"])
+                if (table.get_or("enabled", false))
                 {
-                    auto moduleName = table.get<std::string>("name");
+                    auto moduleName = table.get_or("name", std::string());
                     ShowScript(fmt::format("=== Module: {} ===", moduleName));
-                    for (auto& override : table.get<std::vector<sol::table>>("overrides"))
+                    for (auto& override : table.get_or("overrides", std::vector<sol::table>()))
                     {
                         std::string name = override["name"];
                         sol::object func = override["func"];

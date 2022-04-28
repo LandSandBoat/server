@@ -173,7 +173,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "packets/zone_visited.h"
 
 uint8 PacketSize[512];
-void (*PacketParser[512])(map_session_data_t* const, CCharEntity* const, CBasicPacket);
+std::function<void(map_session_data_t* const, CCharEntity* const, CBasicPacket)> PacketParser[512];
 
 /************************************************************************
  *                                                                       *
