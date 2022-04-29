@@ -564,11 +564,12 @@ namespace itemutils
                 {
                     uint8  GroupId   = (uint8)sql->GetIntData(4);
                     uint16 GroupRate = (uint16)sql->GetIntData(5);
-                    while (GroupId >= dropList->Groups.size())
+                    while (GroupId > dropList->Groups.size())
                     {
                         dropList->Groups.emplace_back(GroupRate);
                     }
-                    dropList->Groups[GroupId].Items.emplace_back(DropType, ItemID, DropRate);
+                    dropList->Groups[GroupId - 1].GroupRate = GroupRate; // a bit redundant but it prevents any ordering issues.
+                    dropList->Groups[GroupId - 1].Items.emplace_back(DropType, ItemID, DropRate);
                 }
                 else
                 {

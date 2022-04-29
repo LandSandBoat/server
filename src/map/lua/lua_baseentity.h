@@ -572,6 +572,8 @@ public:
     void  updateClaim(sol::object const& entity); // Adds Enmity to player for specified mob and claims
     bool  hasEnmity();                            // Does the player have any enmity at all from any source
     auto  getNotorietyList() -> sol::table;       // Returns a table with all of the entities on a chars notoriety list
+    void  setClaimable(bool claimable);
+    bool  getClaimable();
 
     // Status Effects
     bool   addStatusEffect(sol::variadic_args va);
