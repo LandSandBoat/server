@@ -3134,30 +3134,65 @@ namespace charutils
     bool hasKeyItem(CCharEntity* PChar, uint16 KeyItemID)
     {
         auto table = KeyItemID / 512;
+
+        if (table >= MAX_KEYS_TABLE)
+        {
+            ShowWarning("Attempt to check for keyItem out of range (%d)!", KeyItemID);
+            return false;
+        }
+
         return PChar->keys.tables[table].keyList[KeyItemID % 512];
     }
 
     bool seenKeyItem(CCharEntity* PChar, uint16 KeyItemID)
     {
         auto table = KeyItemID / 512;
+
+        if (table >= MAX_KEYS_TABLE)
+        {
+            ShowWarning("Attempt to see for keyItem out of range (%d)!", KeyItemID);
+            return false;
+        }
+
         return PChar->keys.tables[table].seenList[KeyItemID % 512];
     }
 
     void unseenKeyItem(CCharEntity* PChar, uint16 KeyItemID)
     {
-        auto table                                          = KeyItemID / 512;
+        auto table = KeyItemID / 512;
+
+        if (table >= MAX_KEYS_TABLE)
+        {
+            ShowWarning("Attempt to unsee for keyItem out of range (%d)!", KeyItemID);
+            return;
+        }
+
         PChar->keys.tables[table].seenList[KeyItemID % 512] = false;
     }
 
     void addKeyItem(CCharEntity* PChar, uint16 KeyItemID)
     {
-        auto table                                         = KeyItemID / 512;
+        auto table = KeyItemID / 512;
+
+        if (table >= MAX_KEYS_TABLE)
+        {
+            ShowWarning("Attempt to add for keyItem out of range (%d)!", KeyItemID);
+            return;
+        }
+
         PChar->keys.tables[table].keyList[KeyItemID % 512] = true;
     }
 
     void delKeyItem(CCharEntity* PChar, uint16 KeyItemID)
     {
-        auto table                                         = KeyItemID / 512;
+        auto table = KeyItemID / 512;
+
+        if (table >= MAX_KEYS_TABLE)
+        {
+            ShowWarning("Attempt to delete keyItem out of range (%d)!", KeyItemID);
+            return;
+        }
+
         PChar->keys.tables[table].keyList[KeyItemID % 512] = false;
     }
 
