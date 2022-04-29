@@ -1222,6 +1222,8 @@ xi.mod =
 
     -- Geomancer
     FULL_CIRCLE                     = 1025, -- Increases the initial multiplier on MP returned via Full Circle
+    BOLSTER_EFFECT                  = 1028, -- Adds bonus duration as +N seconds
+    LIFE_CYCLE_EFFECT               = 1029, -- Adds bonus HP% returned to the luopan when using Life Cycle
 
     -- Rune Fencer
     ENHANCES_BATTUTA            = 1004, -- Used by RUN merit point cat 2 to add +N% bonus damage to parry spikes during Battuta effect
