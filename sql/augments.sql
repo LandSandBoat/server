@@ -371,8 +371,8 @@ INSERT INTO `augments` VALUES (296,0,119,1,0,0); -- Singing skill+1
 INSERT INTO `augments` VALUES (297,0,120,1,0,0); -- String instrument skill+1
 INSERT INTO `augments` VALUES (298,0,121,1,0,0); -- Wind instrument skill+1
 INSERT INTO `augments` VALUES (299,0,122,1,0,0); -- Blue Magic skill+1
-INSERT INTO `augments` VALUES (300,0,0,0,0,0); -- Geomancy Skill+1
-INSERT INTO `augments` VALUES (301,0,0,0,0,0); -- Handbell Skill+1
+INSERT INTO `augments` VALUES (300,0,1026,1,0,0); -- Geomancy Skill+1
+INSERT INTO `augments` VALUES (301,0,1027,1,0,0); -- Handbell Skill+1
 
 -- 302 to 319 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
 INSERT INTO `augments` VALUES (302,0,0,0,0,0);
@@ -1578,7 +1578,7 @@ INSERT INTO `augments` VALUES (1296,0,0,0,0,0); -- Enhances Wild Card effect
 INSERT INTO `augments` VALUES (1297,0,0,0,0,0); -- Enhances Overdrive effect
 INSERT INTO `augments` VALUES (1298,0,0,0,0,0); -- Enhances Trance effect
 INSERT INTO `augments` VALUES (1299,0,0,0,0,0); -- Enhances Tablua Rasa effect
-INSERT INTO `augments` VALUES (1300,0,0,0,0,0); -- Enhances Bolster effect
+INSERT INTO `augments` VALUES (1300,0,1028,1,0,0); -- Enhances Bolster effect
 INSERT INTO `augments` VALUES (1301,0,0,0,0,0); -- Enhances Elemental Sforzo effect
 
  -- 1302 to 1327 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
@@ -1730,10 +1730,10 @@ INSERT INTO `augments` VALUES (1444,0,0,0,0,0); -- Enh. "Tranquility" and "Equan
 INSERT INTO `augments` VALUES (1445,0,0,0,0,0); -- Enhances Stormsurge effect
 INSERT INTO `augments` VALUES (1446,0,0,0,0,0); -- 1446 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
 INSERT INTO `augments` VALUES (1447,0,0,0,0,0); -- 1447 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
-INSERT INTO `augments` VALUES (1448,0,0,0,0,0); -- Enhances "Mending Halation" effect
-INSERT INTO `augments` VALUES (1449,0,0,0,0,0); -- Enhances "Radial Arcana" effect
-INSERT INTO `augments` VALUES (1450,0,0,0,0,0); -- Enhances "Curative Recantation" effect
-INSERT INTO `augments` VALUES (1451,0,0,0,0,0); -- Enhances "Primeval Zeal" effect
+INSERT INTO `augments` VALUES (1448,0,967,1,0,0); -- Enhances "Mending Halation" effect
+INSERT INTO `augments` VALUES (1449,0,968,1,0,0); -- Enhances "Radial Arcana" effect
+INSERT INTO `augments` VALUES (1450,0,970,1,0,0); -- Enhances "Curative Recantation" effect
+INSERT INTO `augments` VALUES (1451,0,971,1,0,0); -- Enhances "Primeval Zeal" effect
 INSERT INTO `augments` VALUES (1452,0,0,0,0,0); -- 1452 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
 INSERT INTO `augments` VALUES (1453,0,0,0,0,0); -- 1453 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
 INSERT INTO `augments` VALUES (1454,0,0,0,0,0); -- Enhances "Battuta" effect

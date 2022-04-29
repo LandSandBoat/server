@@ -173,7 +173,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "packets/zone_visited.h"
 
 uint8 PacketSize[512];
-void (*PacketParser[512])(map_session_data_t* const, CCharEntity* const, CBasicPacket);
+std::function<void(map_session_data_t* const, CCharEntity* const, CBasicPacket)> PacketParser[512];
 
 /************************************************************************
  *                                                                       *
@@ -315,12 +315,15 @@ void SmallPacket0x00A(map_session_data_t* const PSession, CCharEntity* const PCh
         }
         PChar->status = STATUS_TYPE::NORMAL;
     }
-    else
+    else if (PChar->loc.zone != nullptr)
     {
-        if (PChar->loc.zone != nullptr)
-        {
-            ShowWarning("Client cannot receive packet or key is invalid: %s", PChar->GetName());
-        }
+        ShowWarning("Client cannot receive packet or key is invalid: %s, Zone: %s (%i)",
+            PChar->GetName(), PChar->loc.zone->GetName(), PChar->loc.zone->GetID());
+
+        // Write a sane location for them
+        auto newZone = PChar->loc.prevzone ? PChar->loc.prevzone : ZONE_VALKURM_DUNES;
+        PChar->loc.destination = newZone;
+        sql->Query("UPDATE chars SET pos_zone = %u WHERE charid = %u", newZone, PChar->id);
     }
 
     charutils::SaveCharPosition(PChar);

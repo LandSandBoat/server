@@ -56,7 +56,7 @@ uint16 GetMogHouseID(CCharEntity* PChar)
         case REGION_TYPE::JEUNO:
             return 0x0100;
         default:
-            ShowWarning("Default case reached for GetMogHouseID by %s", PChar->GetName());
+            ShowWarning("Default case reached for GetMogHouseID by %s (%u)", PChar->GetName(), PChar->getZone());
             return 0x0100;
     }
 }

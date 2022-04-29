@@ -148,18 +148,62 @@ xi.job_utils.geomancer.geoOnAbilityCheck = function(player, target, ability)
     if player:getPetID() == xi.pet.id.LUOPAN then
         return 0,0
     end
+    if ability == xi.jobAbility.LIFE_CYCLE then
+        if player:getHP() <= 2 then
+            return xi.msg.basic.UNABLE_TO_USE_JA
+        end
+    end
     return xi.msg.basic.REQUIRE_LUOPAN, 0
 end
 
 -----------------------------------
 -- Ability Use Functions
 -----------------------------------
+xi.job_utils.geomancer.fullCircle = function(player, target, ability)
+    local luopan        = player:getPet()
+    local hpp_remaining = luopan:getHPP()
+    local mp_cost       = luopan:getLocalVar("MP_COST")
+    local fc_merit      = player:getMerit(xi.merit.FULL_CIRCLE_EFFECT)
+    local cr_merit      = player:getMerit(xi.merit.CURATIVE_RECANTATION)
+    local fc_mod        = player:getMod(xi.mod.FULL_CIRCLE)
+    local cr_mod        = player:getMod(xi.mod.CURATIVE_RECANTATION)
+    local mp_multiplier = 0.5 + (fc_merit / 10) + (fc_mod / 10)
+    local hp_multiplier = 0.5 + (0.7 * cr_merit) + (cr_mod / 10)
+    local mp_returned   = 0
+    local hp_returned   = 0
+
+    -- calculate final mp value
+    mp_returned = math.floor((mp_multiplier * mp_cost) * (hpp_remaining / 100))
+
+    if cr_merit > 0 then
+        -- calculate final hp value
+        hp_returned = math.floor((hp_multiplier * mp_cost) * (hpp_remaining /100))
+        player:restoreHP(hp_returned)
+    end
+
+    player:restoreMP(mp_returned)
+    target:despawnPet()
+end
 xi.job_utils.geomancer.blazeOfGlory = function(player, target, ability)
     player:addStatusEffect(xi.effect.BLAZE_OF_GLORY, 0, 3, 60)
 end
 
 xi.job_utils.geomancer.bolster = function(player, target, ability)
-    player:addStatusEffect(xi.effect.BOLSTER, 0, 3, 240)
+    local bonusTime = player:getMod(xi.mod.BOLSTER_EFFECT)
+    player:addStatusEffect(xi.effect.BOLSTER, 0, 3, 240 + bonusTime)
+end
+
+xi.job_utils.geomancer.lifeCycle = function(player, target, ability, hp)
+    local hpAmount    = math.floor(0.25 * player:getHP())
+    local hpTransfer = hpAmount
+
+    if player:getMod(xi.mod.LIFE_CYCLE_EFFECT) > 0 then
+        hpTransfer = hpAmount * (player:getMod(xi.mod.LIFE_CYCLE_EFFECT) / 10)
+    end
+
+    target:restoreHP(hpTransfer)
+    player:delHP(hpAmount)
+    return hpTransfer
 end
 
 -----------------------------------
@@ -237,7 +281,7 @@ xi.job_utils.geomancer.doIndiSpell = function(caster, target, spell)
     local potency      = getEffectPotency(caster, effect)
     local targetType   = indiData[spellID].targetType
     local visualEffect = indiData[spellID].visualEffect
-    local duration = 180 -- TODO: add mod for duration
+    local duration = 180 + caster:getMod(xi.mod.INDI_DURATION)
 
     -- set a local var to adjust potency values after an ability has worn off
     target:setLocalVar("INDI_POTENCY", potency)
