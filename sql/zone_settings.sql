@@ -271,7 +271,7 @@ INSERT INTO `zone_settings` VALUES (228,2,'127.0.0.1',54230,'Ship_bound_for_Mhau
 INSERT INTO `zone_settings` VALUES (229,0,'127.0.0.1',0,'229',0,0,0,0,0,0.00,0);
 INSERT INTO `zone_settings` VALUES (230,1,'127.0.0.1',54230,'Southern_San_dOria',107,107,107,107,0,0.00,1608);
 INSERT INTO `zone_settings` VALUES (231,1,'127.0.0.1',54230,'Northern_San_dOria',107,107,107,107,0,0.00,1096);
-INSERT INTO `zone_settings` VALUES (232,1,'127.0.0.1',54230,'Port_San_dOria',107,107,107,107,0,0.00,1,608);
+INSERT INTO `zone_settings` VALUES (232,1,'127.0.0.1',54230,'Port_San_dOria',107,107,107,107,0,0.00,1608);
 INSERT INTO `zone_settings` VALUES (233,1,'127.0.0.1',54230,'Chateau_dOraguille',156,156,156,156,0,0.00,1032);
 INSERT INTO `zone_settings` VALUES (234,1,'127.0.0.1',54230,'Bastok_Mines',152,152,152,152,0,0.00,584);
 INSERT INTO `zone_settings` VALUES (235,1,'127.0.0.1',54230,'Bastok_Markets',152,152,152,152,0,0.00,584);
