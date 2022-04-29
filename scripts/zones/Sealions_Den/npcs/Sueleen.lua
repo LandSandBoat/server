@@ -15,8 +15,6 @@ end
 entity.onTrigger = function(player, npc)
     if player:getCurrentMission(xi.mission.log_id.COP) > xi.mission.id.cop.THE_WARRIOR_S_PATH then
         player:startEvent(12)
-    elseif player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.FLAMES_IN_THE_DARKNESS and player:getCharVar("PromathiaStatus") == 1 then
-        player:startEvent(16)
     elseif player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.CALM_BEFORE_THE_STORM and player:hasKeyItem(xi.ki.LETTERS_FROM_ULMIA_AND_PRISHE) then
         player:startEvent(17)
     end
@@ -28,8 +26,6 @@ end
 entity.onEventFinish = function(player, csid, option)
     if csid == 12 and option == 1 then
         xi.teleport.to(player, xi.teleport.id.SEA)
-    elseif csid == 16 then
-        player:setCharVar("PromathiaStatus", 2)
     elseif csid == 17 then
         player:completeMission(xi.mission.log_id.COP, xi.mission.id.cop.CALM_BEFORE_THE_STORM)
         player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_WARRIOR_S_PATH)
