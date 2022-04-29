@@ -1685,10 +1685,11 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        auto name = PChar->m_moghouseID ? "Residential_Area" : (const char*)zoneutils::GetZone(PChar->loc.destination)->GetName();
+        auto name     = PChar->m_moghouseID ? "Residential_Area" : (const char*)zoneutils::GetZone(PChar->loc.destination)->GetName();
+        auto filename = fmt::format("./scripts/zones/{}/Zone.lua", name);
 
         auto onZoneInFramework = lua["xi"]["globals"]["interaction"]["interaction_global"]["onZoneIn"];
-        auto onZoneIn = lua["xi"]["zones"][name]["Zone"]["onZoneIn"];
+        auto onZoneIn = GetCacheEntryFromFilename(filename)["onZoneIn"];
 
         auto result = onZoneInFramework(CLuaBaseEntity(PChar), PChar->loc.prevzone, onZoneIn);
         if (!result.valid())
@@ -1715,10 +1716,11 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        auto name = (const char*)PChar->loc.zone->GetName();
+        auto name     = (const char*)PChar->loc.zone->GetName();
+        auto filename = fmt::format("./scripts/zones/{}/Zone.lua", name);
 
         auto afterZoneInFramework = lua["xi"]["globals"]["interaction"]["interaction_global"]["afterZoneIn"];
-        auto afterZoneIn = lua["xi"]["zones"][name]["Zone"]["afterZoneIn"];
+        auto afterZoneIn = GetCacheEntryFromFilename(filename)["afterZoneIn"];
 
         auto result = afterZoneInFramework(CLuaBaseEntity(PChar), afterZoneIn);
         if (!result.valid())
@@ -1732,10 +1734,11 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        auto name = (const char*)PChar->loc.zone->GetName();
+        auto name     = (const char*)PChar->loc.zone->GetName();
+        auto filename = fmt::format("./scripts/zones/{}/Zone.lua", name);
 
         auto onZoneOutFramework = lua["xi"]["globals"]["interaction"]["interaction_global"]["onZoneOut"];
-        auto onZoneOut          = lua["xi"]["zones"][name]["Zone"]["onZoneOut"];
+        auto onZoneOut          = GetCacheEntryFromFilename(filename)["onZoneOut"];
 
         auto result = onZoneOutFramework(CLuaBaseEntity(PChar), onZoneOut);
         if (!result.valid())
@@ -1748,7 +1751,7 @@ namespace luautils
 
     /************************************************************************
      *                                                                       *
-     *  Персонаж входит в активный регион                                    *
+     *  The character has entered the active region                          *
      *                                                                       *
      ************************************************************************/
 
@@ -1801,7 +1804,7 @@ namespace luautils
 
     /************************************************************************
      *                                                                       *
-     *  Персонаж покидает активный регион                                    *
+     *  The character has left the active region                             *
      *                                                                       *
      ************************************************************************/
 
