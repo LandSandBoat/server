@@ -1002,61 +1002,67 @@ xi.dynamis.eyesEra =
     GREEN   = 3,
 }
 
-
 --------------------------------------------
 --      onZoneTick Dynamis Functions      --
 --------------------------------------------
 xi.dynamis.handleDynamis = function(zone)
-    if zone ~= nil then
-        print(os.time())
-        if GetServerVariable(string.format("[DYNA]ValidOnTick_%s", zone:getID())) == 1 then -- Check if dynamis should be active. This is to save resources when the zone is not in use.
-            local zoneToken = GetServerVariable(string.format("[DYNA]Token_%s", zone:getID()))
-            local zoneExpireTime = GetServerVariable(string.format("[DYNA]Timepoint_%s", zone:getID()))
-            local playersInZone = zone:getPlayers()
+    if GetServerVariable(string.format("[DYNA]ValidOnTick_%s", zone:getID())) == 1 then -- Check if dynamis should be active. This is to save resources when the zone is not in use.
+        local zoneToken = GetServerVariable(string.format("[DYNA]Token_%s", zone:getID()))
+        local zoneExpireTime = GetServerVariable(string.format("[DYNA]Timepoint_%s", zone:getID()))
+        local playersInZone = zone:getPlayers()
+        local zoneID = zone:getID()
 
-            for _, player in pairs(playersInZone) do
-                xi.dynamis.verifyHoldsValidHourglass(player, zoneToken, zoneExpireTime)
+        for _, player in pairs(playersInZone) do
+            xi.dynamis.verifyHoldsValidHourglass(player, zoneToken, zoneExpireTime)
 
-                if os.time() >= player:getCharVar(string.format("[DYNA]EjectPlayer_%s", zone:getID())) then
-                    xi.dynamis.ejectPlayer(player)
-                end
+            if os.time() >= player:getCharVar(string.format("[DYNA]EjectPlayer_%s", zone:getID())) then
+                xi.dynamis.ejectPlayer(player)
             end
+        end
 
-            if (GetServerVariable(string.format("[DYNA]Given10MinuteWarning_%s", zone:getID())) == 0) and (xi.dynamis.getDynaTimeRemaining(zone) < 660) then -- If now is < 11 minutes give warning.
-                xi.dynamis.dynamisTimeWarning(zone) -- Send time warning.
-                SetServerVariable(string.format("[DYNA]Given10MinuteWarning_%s", zone:getID()), 1) -- Sets to true to not give another warning.
-            end
-
-            if (GetServerVariable(string.format("[DYNA]Given3MinuteWarning_%s", zone:getID())) == 0) and (xi.dynamis.getDynaTimeRemaining(zone) < 240) then -- If now is < 4 minutes give warning.
-                xi.dynamis.dynamisTimeWarning(zone) -- Send time warning.
-                SetServerVariable(string.format("[DYNA]Given3MinuteWarning_%s", zone:getID()), 1) -- Sets to true to not give another warning.
-            end
-
-            if (GetServerVariable(string.format("[DYNA]Given1MinuteWarning_%s", zone:getID())) == 0) and (xi.dynamis.getDynaTimeRemaining(zone) < 120) then -- If now is < 4 minutes give warning.
-                xi.dynamis.dynamisTimeWarning(zone) -- Send time warning.
-                SetServerVariable(string.format("[DYNA]Given1MinuteWarning_%s", zone:getID()), 1) -- Sets to true to not give another warning.
-            end
-
-            if (GetServerVariable(string.format("[DYNA]ExpireRoutine_%s", zone:getID())) == 0) and (xi.dynamis.getDynaTimeRemaining(zone) < 0) then -- If now is < 0 minutes remove players and flag cleanup.
-                xi.dynamis.ejectAllPlayers(zone) -- Eject players from the zone.
-                SetServerVariable(string.format("[DYNA]ExpireRoutine_%s", zone:getID()), os.time() + 30) -- Flags zone to start cleanup.
-            end
-
-            if GetServerVariable(string.format("[DYNA]ExpireRoutine_%s", zone:getID())) ~= 0 then -- Zone should start cleanup.
-                if GetServerVariable(string.format("[DYNA]ExpireRoutine_%s", zone:getID())) <= os.time() then -- Checks to see if 30s passed between start and now.
-                    xi.dynamis.cleanupDynamis(zone) -- Runs cleanup function.
-                end
-            end
-
-            if playersInZone == nil then
-                zone:setLocalVar(string.format("[DYNA]NoPlayersInZone_%s", zone:getID()), os.time + (60 * 15)) -- Give 15 minutes for zone to repopulate.
+        for waveNumber = 2, 10 do
+            if mobList[zoneID].waveDefeatRequirements[waveNumber] == true and zone:getLocalVar(string.format("Wave_%i_Spawned", waveNumber)) ~= 1 then
+                xi.dynamis.spawnWave(zone, waveNumber)
+                waveNumber = waveNumber + 1
             else
-                zone:setLocalVar(string.format("[DYNA]NoPlayersInZone_%s", zone:getID()), os.time + (60 * 60 * 5)) -- Ignore for 5 hours or until zone empties.
+                waveNumber = waveNumber + 1
             end
+        end
 
-            if GetServerVariable(string.format("[DYNA]NoPlayersInZone_%s", zone:getID())) <= os.time() then
-                xi.dynamis.cleanupDynamis(zone)
+        if (GetServerVariable(string.format("[DYNA]Given10MinuteWarning_%s", zone:getID())) == 0) and (xi.dynamis.getDynaTimeRemaining(zone) < 660) then -- If now is < 11 minutes give warning.
+            xi.dynamis.dynamisTimeWarning(zone) -- Send time warning.
+            SetServerVariable(string.format("[DYNA]Given10MinuteWarning_%s", zone:getID()), 1) -- Sets to true to not give another warning.
+        end
+
+        if (GetServerVariable(string.format("[DYNA]Given3MinuteWarning_%s", zone:getID())) == 0) and (xi.dynamis.getDynaTimeRemaining(zone) < 240) then -- If now is < 4 minutes give warning.
+            xi.dynamis.dynamisTimeWarning(zone) -- Send time warning.
+            SetServerVariable(string.format("[DYNA]Given3MinuteWarning_%s", zone:getID()), 1) -- Sets to true to not give another warning.
+        end
+
+        if (GetServerVariable(string.format("[DYNA]Given1MinuteWarning_%s", zone:getID())) == 0) and (xi.dynamis.getDynaTimeRemaining(zone) < 120) then -- If now is < 4 minutes give warning.
+            xi.dynamis.dynamisTimeWarning(zone) -- Send time warning.
+            SetServerVariable(string.format("[DYNA]Given1MinuteWarning_%s", zone:getID()), 1) -- Sets to true to not give another warning.
+        end
+
+        if (GetServerVariable(string.format("[DYNA]ExpireRoutine_%s", zone:getID())) == 0) and (xi.dynamis.getDynaTimeRemaining(zone) < 0) then -- If now is < 0 minutes remove players and flag cleanup.
+            xi.dynamis.ejectAllPlayers(zone) -- Eject players from the zone.
+            SetServerVariable(string.format("[DYNA]ExpireRoutine_%s", zone:getID()), os.time() + 30) -- Flags zone to start cleanup.
+        end
+
+        if GetServerVariable(string.format("[DYNA]ExpireRoutine_%s", zone:getID())) ~= 0 then -- Zone should start cleanup.
+            if GetServerVariable(string.format("[DYNA]ExpireRoutine_%s", zone:getID())) <= os.time() then -- Checks to see if 30s passed between start and now.
+                xi.dynamis.cleanupDynamis(zone) -- Runs cleanup function.
             end
+        end
+
+        if playersInZone == nil then
+            zone:setLocalVar(string.format("[DYNA]NoPlayersInZone_%s", zone:getID()), os.time + (60 * 15)) -- Give 15 minutes for zone to repopulate.
+        else
+            zone:setLocalVar(string.format("[DYNA]NoPlayersInZone_%s", zone:getID()), os.time + (60 * 60 * 5)) -- Ignore for 5 hours or until zone empties.
+        end
+
+        if GetServerVariable(string.format("[DYNA]NoPlayersInZone_%s", zone:getID())) <= os.time() then
+            xi.dynamis.cleanupDynamis(zone)
         end
     end
 end
@@ -1067,51 +1073,8 @@ end
 
 xi.dynamis.onNewDynamis = function(player)
     SetServerVariable(string.format("[DYNA]ValidOnTick_%s", dynaInfoEra[player:getZoneID()].dynaZone), 1)
-    local zone = entryInfoEra[player:getZoneID()].zoneName
-    local iStart = 4096*4096+(4096*zone) -- Gets starting ID based on zoneID.
-    local i = iStart -- Sets original index.
-    local iEnd = iStart + 1023 -- Sets end of scope.
-    
-    while i <= iEnd do
-
-        if dynaIDLookup[zone:getID()].npc[i] == i then -- Check if NPC is in the NPC array.
-            break
-        end
-            
-        entity = GetMobByID(i) -- Gets the Mob from its ID.
-        
-        if entity:isMob() then -- Check if it is a mob.
-            local mob = GetMobByID(i) -- Get mob entity by the ID
-            mob:resetLocalVars() -- Clear localvars just in case.
-            mob:setTP(0) -- Clear tp just in case.
-            if mobList[zone][i].pos ~= nil then -- If mob has a valid position.
-                mob:setSpawn(mobList[zone][i].pos[1],mobList[zone][i].pos[2],mobList[zone][i].pos[3],mobList[zone][i].pos[4]) -- Set spawn position for mob.
-                if mobList[zone][i].waves ~= nil and mobList[zone][i].waves[1] ~= nil then -- Start spawning 1st wave. If Dreamlands handle setting SJ Restriction NPC.
-                    SpawnMob(i)
-                    GetNPCByID(dynaInfoEra[zone].winQM):setStatus(xi.status.INVISIBLE) -- We are setting to Invisible to retain ID info.
-                    GetNPCByID(dynaInfoEra[zone].winQM):untargetable(true)
-                    if dynaInfoEra[zone].csBit > 7 and dynaInfoEra[zone].sjRestrictionNPC ~= nil then -- Are we in dreamlands and there is a SJ Restriction NPC?
-                        if GetNPCByID(dynaInfoEra[zone].sjRestrictionNPC):getStatus() == xi.status.INVISIBLE then
-                            GetNPCByID(dynaInfoEra[zone].sjRestrictionNPC):setPos(dynamis.dynaInfoEra[zone].sjRestrictionLocation[math.random(1, dynamis.dynaInfoEra[zone].sjRestrictionNPCNumber)]) -- Pick a location for SJ NPC
-                            GetNPCByID(dynaInfoEra[zone].sjRestrictionNPC):setStatus(xi.status.NORMAL) -- Make the NPC visible.
-                            GetNPCByID(dynaInfoEra[zone].sjRestrictionNPC):untargetable(false)
-                        end
-                    end
-                end -- Spawn mob if it is wave 1.
-            else mob:setSpawn(1,1,1,0) end -- If no position set to an invalid position.
-            if mob:getFamily() >= 92 and mob:getFamily() <= 95 then -- If statue family.
-                mob:addRoamFlag(256) -- scripted pathing only
-            elseif mob:getID() == dynaIDLookup[mob:getZoneID()].npc.Megaboss then -- If zone megaboss (only applicable for northlands and dreamlands)
-                mob:addRoamFlag(256) -- scripted pathing only
-            else -- Just covers nightmare mobs as everything else should be a statue or megaboss.
-                mob:addMobMod(xi.mobMod.ROAM_DISTANCE, 5) -- Limit roam distance to 5'
-                mob:addMobMod(xi.mobMod.ROAM_COOL, 5)
-                mob:addMobMod(xi.mobMod.ROAM_RATE, 3)
-                mob:addRoamFlag(0) -- Roam Freely
-            end
-        end
-        i = i + 1
-    end
+    local zone = GetZone(entryInfoEra[player:getZoneID()].zoneName)
+    xi.dynamis.spawnWave(zone, 1) -- Spawn Wave 1
 end
 
 --------------------------------------------
@@ -1783,41 +1746,698 @@ m:addOverride("xi.dynamis.getExtensions", function(player) end)
 --          Dynamis Mob Spawning          --
 --------------------------------------------
 
-xi.dynamis.spawnWave = function(mobList, waveNumber)
+xi.dynamis.spawnWave = function(zone, waveNumber)
+    zoneID = zone:getID()
+    tableLookup = string.format(".wave%i", waveNumber)
+    for _, index in pairs(mobList[zoneID].tableLookup) do
+        mobIndex = mobList[zoneID].tableLookup[index]
+        mobType = mobList[zoneID][mobIndex].info[1]
+        if mobType == "NM" then -- NMs
+            xi.dynamis.nmDynamicSpawn(mobIndex, nil, true, zoneID)
+        elseif mobType ~= nil then -- Nightmare Mobs and Statues
+            xi.dynamis.nonStandardDynamicSpawn(mobIndex, nil, true, zoneID)
+        end
+        index = index + 1
+    end
+    zone:setLocalVar(string.format("Wave_%i_Spawned", waveNumber), 1)
 end
 
-xi.dynamis.statueOnSpawn = function(mob, eyes, mobList) -- Used to spawn mobs off of a single parent
-    mob:setLocalVar("dynaReadyToSpawnChildren", 1) -- Marks mob available for spawning.
-    mob:setLocalVar("Index", mobList[zone])
-    if mob:getFamily() >= 92 and mob:getFamily() <= 95 then -- If statue
-        mob:setLocalVar("eyeColor", eyes) -- Set Eyes if need be
-        if eyes >= 2 then -- If HP or MP restore statue
-            mob:setUnkillable(true) -- Set Unkillable as we will use skills then kill.
+xi.dynamis.parentOnEngaged = function(mob, target, mobList)
+    local zoneID = mob:getZoneID()
+    local oMobIndex = mob:getLocalVar("MobIndex")
+    local oMob = GetMobByID(mob:getID())
+    local forceLink = mobList[zoneID][oMobIndex].NMChildren[1]
+    for _, index in pairs(mobList[zoneID][oMobIndex].NMChildren) do
+        if mobList[zoneID][oMobIndex].NMChildren[index] == true or mobList[zoneID][oMobIndex].NMChildren[index] == false then
+            index = index + 1
+        else
+            local mobIndex = mobList[zoneID][oMobIndex].NMChildren[index]
+            local mobType = mobList[zoneID][mobIndex].info[1]
+            if mobType == "NM" then -- NMs
+                xi.dynamis.nmDynamicSpawn(mobIndex, oMobIndex, forceLink, zoneID, target, oMob)
+                index = index + 1
+            elseif mobType ~= nil then -- Nightmare Mobs and Statues
+                xi.dynamis.nonStandardDynamicSpawn(mobIndex, oMobIndex, forceLink, zoneID, target, oMob)
+                index = index + 1
+            end
+        end
+    end
+    xi.dynamis.normalDynamicSpawn(mob, oMobIndex) -- Normies have their own loop, so they don't need one here.
+end
+
+xi.dynamis.normalDynamicSpawn = function(mob, oMobIndex)
+    local mobFamily = mob:getFamily()
+    local mobID = mob:getID()
+    local mobZoneID = mob:getZoneID()
+    local oMob = GetMobByID(mobID)
+    local zone = GetZone(mobZoneID)
+    local nameObj = nil
+    local mobSpec =
+    {
+        -- NOTE: To use default SpellList and SkillList set to nil.
+        -- [Parent's Family]
+        --{
+            -- [ZoneID] -- If applicable
+            --{
+                -- [JobID] = {Name, groupId, groupZoneId, Droplist, SpellList, SkillList},
+            --},
+            -- [ZoneID] -- If applicable
+            --{
+                -- [FloorVar]
+                -- {
+                    -- [JobID] = {Name, groupId, groupZoneId, Droplist, SpellList, SkillList},
+                -- },
+            --},
+            -- [JobID] = {Name, groupId, groupZoneId, Droplist, SpellList, SkillList},
+        --},
+        [4] = -- Vanguard Eye
+        {
+            [xi.zone.DYNAMIS_BEAUCEDINE] = -- Spawn Hydras (Done)
+            {
+                [1]  = {"48574152" ,159, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- HWAR
+                [2]  = {"484d4e4b", 163, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- HMNK
+                [3]  = {"4857484d", 161, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- HWHM
+                [4]  = {"48424c4d", 164, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- HBLM
+                [5]  = {"4852444d", 162, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- HRDM
+                [6]  = {"48544846", 160, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- HTHF
+                [7]  = {"48504c44", 166, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- HPLD
+                [8]  = {"4844524b", 167, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- HDRK
+                [9]  = {"48425354", 168, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- HBST
+                [10] = {"48425244", 170, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- HBRD
+                [11] = {"48524e47", 171, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- HRNG
+                [12] = {"4853414d", 172, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- HSAM
+                [13] = {"484e494e", 173, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- HNIN
+                [14] = {"48445247", 174, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- HDRG
+                [15] = {"48534d4e", 176, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- HSMN
+            },
+            [xi.zone.DYNAMIS_XARCABARD] = -- Spawn Kindred (Done)
+            {
+                [1]  = {"4b574152", 32, 135, 0, nil, nil, MOBTYPE_NORMAL}, -- KWAR
+                [2]  = {"4b4d4e4b", 33, 135, 0, nil, nil, MOBTYPE_NORMAL}, -- KMNK
+                [3]  = {"4b57484d", 29, 135, 0, nil, nil, MOBTYPE_NORMAL}, -- KWHM
+                [4]  = {"4b424c4d", 30, 135, 0, nil, nil, MOBTYPE_NORMAL}, -- KBLM
+                [5]  = {"4b52444d", 31, 135, 0, nil, nil, MOBTYPE_NORMAL}, -- KRDM
+                [6]  = {"4b544846", 34, 135, 0, nil, nil, MOBTYPE_NORMAL}, -- KTHF
+                [7]  = {"4b504c44", 15, 135, 0, nil, nil, MOBTYPE_NORMAL}, -- KPLD
+                [8]  = {"4b44524b", 16, 135, 0, nil, nil, MOBTYPE_NORMAL}, -- KDRK
+                [9]  = {"4b425354", 17, 135, 0, nil, nil, MOBTYPE_NORMAL}, -- KBST
+                [10] = {"4b425244", 20, 135, 0, nil, nil, MOBTYPE_NORMAL}, -- KBRD
+                [11] = {"4b524e47", 19, 135, 0, nil, nil, MOBTYPE_NORMAL}, -- KRNG
+                [12] = {"4b53414d", 22, 135, 0, nil, nil, MOBTYPE_NORMAL}, -- KSAM
+                [13] = {"4b4e494e", 23, 135, 0, nil, nil, MOBTYPE_NORMAL}, -- KNIN
+                [14] = {"4b445247", 27, 135, 0, nil, nil, MOBTYPE_NORMAL}, -- KDRG
+                [15] = {"4b534d4e", 24, 135, 0, nil, nil, MOBTYPE_NORMAL}, -- KSMN
+            },
+            [xi.zone.DYNAMIS_TAVNAZIA] = -- Spawn Kindred and Hydra
+            {
+                [2] = -- Floor 2 Spawn Hydras (Done)
+                {
+                    [1]  = {"48574152" ,159, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- HWAR
+                    [2]  = {"484d4e4b", 163, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- HMNK
+                    [3]  = {"4857484d", 161, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- HWHM
+                    [4]  = {"48424c4d", 164, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- HBLM
+                    [5]  = {"4852444d", 162, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- HRDM
+                    [6]  = {"48544846", 160, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- HTHF
+                    [7]  = {"48504c44", 166, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- HPLD
+                    [8]  = {"4844524b", 167, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- HDRK
+                    [9]  = {"48425354", 168, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- HBST
+                    [10] = {"48425244", 170, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- HBRD
+                    [11] = {"48524e47", 171, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- HRNG
+                    [12] = {"4853414d", 172, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- HSAM
+                    [13] = {"484e494e", 173, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- HNIN
+                    [14] = {"48445247", 174, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- HDRG
+                    [15] = {"48534d4e", 176, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- HSMN
+                },
+                [3] = -- Floor 3 Spawn Kindred (Done)
+                {
+                    [1]  = {"4b574152", 32, 135, 0, nil, nil, MOBTYPE_NORMAL}, -- KWAR
+                    [2]  = {"4b4d4e4b", 33, 135, 0, nil, nil, MOBTYPE_NORMAL}, -- KMNK
+                    [3]  = {"4b57484d", 29, 135, 0, nil, nil, MOBTYPE_NORMAL}, -- KWHM
+                    [4]  = {"4b424c4d", 30, 135, 0, nil, nil, MOBTYPE_NORMAL}, -- KBLM
+                    [5]  = {"4b52444d", 31, 135, 0, nil, nil, MOBTYPE_NORMAL}, -- KRDM
+                    [6]  = {"4b544846", 34, 135, 0, nil, nil, MOBTYPE_NORMAL}, -- KTHF
+                    [7]  = {"4b504c44", 15, 135, 0, nil, nil, MOBTYPE_NORMAL}, -- KPLD
+                    [8]  = {"4b44524b", 16, 135, 0, nil, nil, MOBTYPE_NORMAL}, -- KDRK
+                    [9]  = {"4b425354", 17, 135, 0, nil, nil, MOBTYPE_NORMAL}, -- KBST
+                    [10] = {"4b425244", 20, 135, 0, nil, nil, MOBTYPE_NORMAL}, -- KBRD
+                    [11] = {"4b524e47", 19, 135, 0, nil, nil, MOBTYPE_NORMAL}, -- KRNG
+                    [12] = {"4b53414d", 22, 135, 0, nil, nil, MOBTYPE_NORMAL}, -- KSAM
+                    [13] = {"4b4e494e", 23, 135, 0, nil, nil, MOBTYPE_NORMAL}, -- KNIN
+                    [14] = {"4b445247", 27, 135, 0, nil, nil, MOBTYPE_NORMAL}, -- KDRG
+                    [15] = {"4b534d4e", 24, 135, 0, nil, nil, MOBTYPE_NORMAL}, -- KSMN
+                },
+            },
+        },
+        [92] = -- Goblin Replica
+        {
+            [1]  = {"48574152" ,159, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- GWAR
+            [2]  = {"484d4e4b", 163, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- GMNK
+            [3]  = {"4857484d", 161, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- GWHM
+            [4]  = {"48424c4d", 164, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- GBLM
+            [5]  = {"4852444d", 162, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- GRDM
+            [6]  = {"48544846", 160, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- GTHF
+            [7]  = {"48504c44", 166, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- GPLD
+            [8]  = {"4844524b", 167, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- GDRK
+            [9]  = {"48425354", 168, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- GBST
+            [10] = {"48425244", 170, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- GBRD
+            [11] = {"48524e47", 171, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- GRNG
+            [12] = {"4853414d", 172, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- GSAM
+            [13] = {"484e494e", 173, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- GNIN
+            [14] = {"48445247", 174, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- GDRG
+            [15] = {"48534d4e", 176, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- GSMN
+        },
+        [93] = -- Orc Statue
+        {
+            [1]  = {"48574152" ,159, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- OWAR
+            [2]  = {"484d4e4b", 163, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- OMNK
+            [3]  = {"4857484d", 161, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- OWHM
+            [4]  = {"48424c4d", 164, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- OBLM
+            [5]  = {"4852444d", 162, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- ORDM
+            [6]  = {"48544846", 160, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- OTHF
+            [7]  = {"48504c44", 166, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- OPLD
+            [8]  = {"4844524b", 167, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- ODRK
+            [9]  = {"48425354", 168, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- OBST
+            [10] = {"48425244", 170, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- OBRD
+            [11] = {"48524e47", 171, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- ORNG
+            [12] = {"4853414d", 172, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- OSAM
+            [13] = {"484e494e", 173, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- ONIN
+            [14] = {"48445247", 174, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- ODRG
+            [15] = {"48534d4e", 176, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- OSMN
+        },
+        [94] = -- Quadav Statue (Done)
+        {
+            [1]  = {"51574152" ,19, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- QWAR
+            [2]  = {"514d4e4b", 25, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- QMNK
+            [3]  = {"5157484d", 29, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- QWHM
+            [4]  = {"51424c4d", 42, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- QBLM
+            [5]  = {"5152444d", 20, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- QRDM
+            [6]  = {"51544846", 33, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- QTHF
+            [7]  = {"51504c44", 30, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- QPLD
+            [8]  = {"5144524b", 38, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- QDRK
+            [9]  = {"51425354", 21, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- QBST
+            [10] = {"51425244", 23, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- QBRD
+            [11] = {"51524e47", 34, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- QRNG
+            [12] = {"5153414d", 31, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- QSAM
+            [13] = {"514e494e", 32, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- QNIN
+            [14] = {"51445247", 26, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- QDRG
+            [15] = {"51534d4e", 35, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- QSMN
+        },
+        [95] = -- Yagudo Statue
+        {
+            [1]  = {"48574152" ,159, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- YWAR
+            [2]  = {"484d4e4b", 163, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- YMNK
+            [3]  = {"4857484d", 161, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- YWHM
+            [4]  = {"48424c4d", 164, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- YBLM
+            [5]  = {"4852444d", 162, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- YRDM
+            [6]  = {"48544846", 160, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- YTHF
+            [7]  = {"48504c44", 166, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- YPLD
+            [8]  = {"4844524b", 167, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- YDRK
+            [9]  = {"48425354", 168, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- YBST
+            [10] = {"48425244", 170, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- YBRD
+            [11] = {"48524e47", 171, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- YRNG
+            [12] = {"4853414d", 172, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- YSAM
+            [13] = {"484e494e", 173, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- YNIN
+            [14] = {"48445247", 174, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- YDRG
+            [15] = {"48534d4e", 176, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- YSMN
+        }
+    }
+
+    for _, job in pairs(mobList[mobZoneID][oMobIndex].mobchildren) do
+        local indexJob = 1
+        local indexEndJob = mobList[mobZoneID][oMobIndex].mobchildren[job]
+        while (indexEndJob ~= nil and indexJob <= indexEndJob) do
+            if oMob:getFamily() == 4 then
+                if oMob:getLocalVar("Floor") == 2 or oMob:getLocalVar("Floor") == 3 then
+                    nameObj = mobSpec[mobFamily][mobZoneID][oMob:getLocalVar("Floor")]
+                else
+                    nameObj = mobSpec[mobFamily][mobZoneID]
+                end
+            else
+                nameObj = mobSpec[mobFamily]
+            end
+            local mob = zone:insertDynamicEntity({
+                objtype = xi.objType.MOB,
+                name = nameObj[job][1],
+                x = oMob:getXPos()+math.random()*6-3,
+                y = oMob:getYPos()-0.3,
+                z = oMob:getXPos()+math.random()*6-3,
+                rotation = oMob:getRotPos(),
+                groupId = nameObj[job][2],
+                groupZoneId = nameObj[job][3],
+                onMobSpawn = function(mob) xi.dynamis.setMobStats(mob) end,
+                onMobFight = function(mob) xi.dynamis.mobOnFight(mob) end,
+                onMobRoam = function(mob) xi.dynamis.mobOnRoam(mob) end,
+                onMobRoamAction = function(mob) xi.dynamis.mobOnRoamAction(mob) end,
+                onMobDeath = function(mob, playerArg, isKiller)
+                    xi.dynamis.mobOnDeath(mob, mobList[mob:getZoneID()], zones[mob:getZoneID()].text.DYNAMIS_TIME_EXTEND)
+                end,
+            })
+            mob:setSpawn(oMob:getXPos()+math.random()*6-3, oMob:getYPos()-0.3, oMob:getzPos()+math.random()*6-3, oMob:getRotPos())
+            mob:setDropID(nameObj[job][4])
+            if nameObj[5] ~= nil then -- If SpellList ~= nil set SpellList
+                mob:setSpellList(nameObj[5])
+            end
+            if nameObj[6] ~= nil then -- If SkillList ~= nil set SkillList
+                mob:setMobMod(xi.mobMod.SKILL_LIST, nameObj[6])
+            end
+            mob:setLocalVar("Parent", oMob)
+            mob:spawn()
+            indexJob = indexJob + 1 -- Increment to the next mob of the same job.
+        end
+        job = job + 1 -- Increment to the next job.
+    end
+end
+
+xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID, target, oMob)
+    local mobMobType = mobList[zoneID][mobIndex].info[1]
+    local mobName = mobList[zoneID][mobIndex].info[2]
+    local xPos = mobList[zoneID][mobIndex].pos[1]
+    local yPos = mobList[zoneID][mobIndex].pos[2]
+    local zPos = mobList[zoneID][mobIndex].pos[3]
+    local rPos = mobList[zoneID][mobIndex].pos[4]
+    local spawnLookUp =
+    {
+        ["Statue"] =
+        {
+            ["Vanguard Eye"] = {"56457965" , 130, 134, 0, nil, nil, MOBTYPE_NOTORIOUS}, -- Vanguard Eye (VEye)
+            ["Goblin Statue"] = {"4753746174" , 130, 134, 0, nil, nil, MOBTYPE_NOTORIOUS}, -- Goblin Statue (GStat)
+            ["Goblin Replica"] = {"475253746174" , 130, 134, 0, nil, nil, MOBTYPE_NOTORIOUS}, -- Goblin Statue (GRStat)
+            ["Serjeant Tombstone"] = {"4f53746174" , 130, 134, 0, nil, nil, MOBTYPE_NOTORIOUS}, -- Orc Statue (OStat)
+            ["Warchief Tombstone"] = {"4f5753746174" , 130, 134, 0, nil, nil, MOBTYPE_NOTORIOUS}, -- Orc Statue (OWStat)
+            ["Adamantking Effigy"] = {"5153746174" , 130, 134, 0, nil, nil, MOBTYPE_NOTORIOUS}, -- Quadav Statue (QStat)
+            ["Avatar Idol"] = {"5953746174" , 130, 134, 0, nil, nil, MOBTYPE_NOTORIOUS}, -- Yagudo Statue (YStat)
+            ["Manifest Icon"] = {"594d53746174" , 130, 134, 0, nil, nil, MOBTYPE_NOTORIOUS}, -- Yagudo Statue (YMStat)
+        },
+        ["Nightmare"] =
+        {
+            ["Nightmare Bunny"] = {"594d53746174" , 130, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- Yagudo Statue (YMStat)
+            ["Nightmare Cockatrice"] = {"594d53746174" , 130, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- Yagudo Statue (YMStat)
+            ["Nightmare Crab"] = {"594d53746174" , 130, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- Yagudo Statue (YMStat)
+            ["Nightmare Dhalmel"] = {"594d53746174" , 130, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- Yagudo Statue (YMStat)
+            ["Nightmare Eft"] = {"594d53746174" , 130, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- Yagudo Statue (YMStat)
+            ["Nightmare Mandragora"] = {"594d53746174" , 130, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- Yagudo Statue (YMStat)
+            ["Nightmare Raven"] = {"594d53746174" , 130, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- Yagudo Statue (YMStat)
+            ["Nightmare Scorpion"] = {"594d53746174" , 130, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- Yagudo Statue (YMStat)
+            ["Nightmare Urganite"] = {"594d53746174" , 130, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- Yagudo Statue (YMStat)
+            ["Nightmare Cluster"] = {"594d53746174" , 130, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- Yagudo Statue (YMStat)
+            ["Nightmare Hornet"] = {"594d53746174" , 130, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- Yagudo Statue (YMStat)
+            ["Nightmare Leech"] = {"594d53746174" , 130, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- Yagudo Statue (YMStat)
+            ["Nightmare Makara"] = {"594d53746174" , 130, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- Yagudo Statue (YMStat)
+            ["Nightmare Taurus"] = {"594d53746174" , 130, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- Yagudo Statue (YMStat)
+            ["Nightmare Antlion"] = {"594d53746174" , 130, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- Yagudo Statue (YMStat)
+            ["Nightmare Bugard"] = {"594d53746174" , 130, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- Yagudo Statue (YMStat)
+            ["Nightmare Worm"] = {"594d53746174" , 130, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- Yagudo Statue (YMStat)
+            ["Nightmare Hippogryph"] = {"594d53746174" , 130, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- Yagudo Statue (YMStat)
+            ["Nightmare Manticore"] = {"594d53746174" , 130, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- Yagudo Statue (YMStat)
+            ["Nightmare Sabotender"] = {"594d53746174" , 130, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- Yagudo Statue (YMStat)
+            ["Nightmare Sheep"] = {"594d53746174" , 130, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- Yagudo Statue (YMStat)
+            ["Nightmare Fly"] = {"594d53746174" , 130, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- Yagudo Statue (YMStat)
+        },
+    }
+    if spawnLookUp[mobMobType][mobName][7] == MOBTYPE_NOTORIOUS then
+        local mob = zone:insertDynamicEntity({
+            objtype = xi.objType.MOB,
+            name = spawnLookUp[mobMobType][mobName][1],
+            x = xPos,
+            y = yPos,
+            z = zPos,
+            rotation = rPos,
+            groupId = spawnLookUp[mobMobType][mobName][2],
+            groupZoneId = spawnLookUp[mobMobType][mobName][3],
+            onMobSpawn = function(mob) xi.dynamis.setNMStats(mob) end,
+            onMobEngaged = function(mob) xi.dynamis.parentOnEngaged(mob, target) end,
+            onMobFight = function(mob) xi.dynamis.mobOnFight(mob) end,
+            onMobRoam = function(mob) xi.dynamis.mobOnRoam(mob) end,
+            onMobRoamAction = function(mob) xi.dynamis.mobOnRoamAction(mob) end,
+            onMobDeath = function(mob, playerArg, isKiller)
+                xi.dynamis.mobOnDeath(mob, mobList[zoneID], zones[zoneID].text.DYNAMIS_TIME_EXTEND)
+            end,
+        })
+        mob:setSpawn(xPos, yPos, zPos, rPos)
+        mob:setDropID(spawnLookUp[mobMobType][mobName][4])
+        if spawnLookUp[mobMobType][mobName][5] ~= nil then -- If SpellList ~= nil set SpellList
+            mob:setSpellList(spawnLookUp[mobMobType][mobName][5])
+        end
+        if spawnLookUp[mobMobType][mobName][6] ~= nil then -- If SkillList ~= nil set SkillList
+            mob:setMobMod(xi.mobMod.SKILL_LIST, spawnLookUp[mobMobType][mobName][6])
+        end
+        if oMob ~= nil then
+            mob:setLocalVar("Parent", oMob)
+        end
+        mob:setLocalVar("MobIndex", mobIndex)
+        mob:spawn()
+        if forceLink == true then
+            mob:updateEnmity(target)
+        end
+    else
+        local mob = zone:insertDynamicEntity({
+            objtype = xi.objType.MOB,
+            name = spawnLookUp[mobMobType][mobName][1],
+            x = xPos,
+            y = yPos,
+            z = zPos,
+            rotation = rPos,
+            groupId = spawnLookUp[mobMobType][mobName][2],
+            groupZoneId = spawnLookUp[mobMobType][mobName][3],
+            onMobSpawn = function(mob) xi.dynamis.setMobStats(mob) end,
+            onMobEngaged = function(mob) xi.dynamis.parentOnEngaged(mob, target) end,
+            onMobFight = function(mob) xi.dynamis.mobOnFight(mob) end,
+            onMobRoam = function(mob) xi.dynamis.mobOnRoam(mob) end,
+            onMobRoamAction = function(mob) xi.dynamis.mobOnRoamAction(mob) end,
+            onMobDeath = function(mob, playerArg, isKiller)
+                xi.dynamis.mobOnDeath(mob, mobList[zoneID], zones[zoneID].text.DYNAMIS_TIME_EXTEND)
+            end,
+        })
+        mob:setSpawn(xPos, yPos, zPos, rPos)
+        mob:setDropID(spawnLookUp[mobMobType][mobName][4])
+        if spawnLookUp[mobMobType][mobName][5] ~= nil then -- If SpellList ~= nil set SpellList
+            mob:setSpellList(spawnLookUp[mobMobType][mobName][5])
+        end
+        if spawnLookUp[mobMobType][mobName][6] ~= nil then -- If SkillList ~= nil set SkillList
+            mob:setMobMod(xi.mobMod.SKILL_LIST, spawnLookUp[mobMobType][mobName][6])
+        end
+        if oMobIndex ~= nil then
+            mob:setLocalVar("Parent", oMobIndex)
+        end
+        mob:setLocalVar("MobIndex", mobIndex)
+        mob:spawn()
+        if forceLink == true then
+            mob:updateEnmity(target)
         end
     end
 end
 
-xi.dynamis.statueOnEngaged = function(mob, target, mobList)
-end
-
-xi.dynamis.statueOnFight = function(mob, target)
-    if mob:getHP() == 1 then -- If my HP = 1
-        if mob:AnimationSub() == 2 then -- I am an HP statue
-            mob:useMobAbility(1124) -- Use Recover HP
-        elseif mob:AnimationSub() == 3 then -- I am an MP statue
-            mob:useMobAbility(1125) -- Use Recover MP
-        end
+xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, target, oMob) 
+    local xPos = nil
+    local yPos = nil
+    local zPos = nil
+    local rPos = nil
+    if mobList[zoneID][mobIndex].pos[1] == nil then
+        xPos = oMob:getXPos()
+        yPos = oMob:getYPos()
+        zPos = oMob:getZPos()
+        rPos = oMob:getRotPos()
+    else
+        xPos = mobList[zoneID][mobIndex].pos[1]
+        yPos = mobList[zoneID][mobIndex].pos[2]
+        zPos = mobList[zoneID][mobIndex].pos[3]
+        rPos = mobList[zoneID][mobIndex].pos[4]
     end
+    local mobName = mobList[zoneID][mobIndex].info[2]
+    local mobFamily = mobList[zoneID][mobIndex].info[3]
+    local mainJob = mobList[zoneID][mobIndex].info[4]
+    local nameLookup =
+    {
+        ["Goblin"] =
+        {
+
+        },
+        ["Orc"] =
+        {
+            -- Dynamis - Beaucedine
+            ["Cobraclaw Buchzvotch"] = {}, -- SouF
+            ["Deathcaller Bidfbid"] = {}, -- SouF
+            ["Drakefeast Wubmfub"] = {}, -- SouF
+            ["Elvaanlopper Grokdok"] = {}, -- SouF
+            ["Galkarider Retzpratz"] = {}, -- SouF
+            ["Heavymail Djidzbad"] = {}, -- SouF
+            ["Humegutter Adzjbadj"] = {}, -- SouF
+            ["Jeunoraider Gepkzip"] = {}, -- SouF
+            ["Lockbuster Zapdjipp"] = {}, -- SouF
+            ["Mithraslaver Debhabob"] = {}, -- SouF
+            ["Skinmask Ugghfogg"] = {}, -- SouF
+            ["Spinalsucker Galflmall"] = {}, -- SouF
+            ["Taruroaster Biggsjig"] = {}, -- SouF
+            ["Ultrasonic Zeknajak"] = {}, -- SouF
+            ["Wraithdancer Gidbnod"] = {}, -- SouF
+            -- Dynamis Buburimu
+            ["Elvaansticker Bxafraff"] = {}, -- SouF
+            ["Flamecaller Zoeqdoq"] = {}, -- SouF
+            ["Hamfist Gukhbuk"] = {}, -- SouF
+            ["Lyncean Juwgneg"] = {}, -- SouF
+            -- Dynamis - San d'Oria
+            ["Wyrmgnasher Bjakdek"] = {}, -- WyrB
+            ["Reapertongue Gadgquok"] = {}, -- ReaG
+            ["Voidstreaker Butchnotch"] = {}, -- VoiB
+            ["Battlechoir Gitchfotch"] = {}, -- BatG
+            ["Soulsender Fugbrag"] = {}, -- SouF
+        },
+        ["Quadav"] =
+        {
+            -- Dynamis - Beaucedine
+            ["Cobraclaw Buchzvotch"] = {}, -- SouF
+            ["Deathcaller Bidfbid"] = {}, -- SouF
+            ["Drakefeast Wubmfub"] = {}, -- SouF
+            ["Elvaanlopper Grokdok"] = {}, -- SouF
+            ["Galkarider Retzpratz"] = {}, -- SouF
+            ["Heavymail Djidzbad"] = {}, -- SouF
+            ["Humegutter Adzjbadj"] = {}, -- SouF
+            ["Jeunoraider Gepkzip"] = {}, -- SouF
+            ["Lockbuster Zapdjipp"] = {}, -- SouF
+            ["Mithraslaver Debhabob"] = {}, -- SouF
+            ["Skinmask Ugghfogg"] = {}, -- SouF
+            ["Spinalsucker Galflmall"] = {}, -- SouF
+            ["Taruroaster Biggsjig"] = {}, -- SouF
+            ["Ultrasonic Zeknajak"] = {}, -- SouF
+            ["Wraithdancer Gidbnod"] = {}, -- SouF
+            -- Dynamis Buburimu
+            ["Elvaansticker Bxafraff"] = {}, -- SouF
+            ["Flamecaller Zoeqdoq"] = {}, -- SouF
+            ["Hamfist Gukhbuk"] = {}, -- SouF
+            ["Lyncean Juwgneg"] = {}, -- SouF
+            -- Dynamis - San d'Oria
+            ["Wyrmgnasher Bjakdek"] = {}, -- WyrB
+            ["Reapertongue Gadgquok"] = {}, -- ReaG
+            ["Voidstreaker Butchnotch"] = {}, -- VoiB
+            ["Battlechoir Gitchfotch"] = {}, -- BatG
+            ["Soulsender Fugbrag"] = {}, -- SouF
+        },
+        ['Yagudo'] =
+        {
+
+        },
+        ["Kindred"] =
+        {
+
+        },
+        ["Hydra"] =
+        {
+
+        },
+    }
 end
 
-xi.dynamis.onStatueSkillFinished = function(mob, skill)
-    if skill:getID() == 1124 or skill:getID() == 1125 then -- If I used one of the restore skills.
-        mob:setUnkillable(false) -- Make me killable
-        mob:setHP(0) -- Kill me
+xi.dynamis.spawnDynamicBSTPet =function(target, mob) 
+    local mobFamily = mob:getFamily()
+    local isNM = mob:isMobType(MOBTYPE_NOTORIOUS)
+    local oMob = GetMobByID(mob:getID())
+    local mobName = mob:getName()
+    local petList =
+    {
+        -- Note: To set default SpellList and SkillList use nil.
+        -- [Parent's Family]
+        --{
+            -- [false] = {Name, groupId, groupZoneId, Droplist, SpellList, SkillList}, -- Non-NM Pet
+            -- [true] -- Is an NM
+            -- {
+                -- [ParentName] = {Name, groupId, groupZoneId, Droplist, SpellList, SkillList}, -- NM Pet
+            -- },
+        --},
+        [327] = -- Goblin Family
+        {
+            [false] = {"56536c696d65" , 130, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- Normal Goblin BST (VSlime)
+            [true] = -- Goblin NM
+            {
+                ["Routsix_Rubbertendon"] = {"56536c696d65" , 130, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- NM Goblin BST (VSlime)
+                ["Blazax_Boneybad"] = {"56536c696d65" , 130, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- NM Goblin BST (VSlime)
+                ["Rutrix_Hamgams"] = {"56536c696d65" , 130, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- NM Goblin BST (VSlime)
+                ["Trailblix_Goatmug"] = {"56536c696d65" , 130, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- NM Goblin BST (VSlime)
+                ["Woodnix_Shrillwistle"] = {"5753536c696d65" , 7, 40, 0, nil, nil, MOBTYPE_NORMAL}, -- NM Goblin BST (WSSlime)
+            }
+        },
+        [334] = -- Orc Family
+        {
+            [false] = {"56486563", 77, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- Normal Orc BST (VHec)
+            [true] = -- Orc NM
+            {
+                ["Mithraslaver_Debhabob"] = {"56486563", 77, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- NM Orc BST (VHec)
+            },
+        },
+        [337] = -- Quadav Family
+        {
+            [false] = {"5653636f", 22, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- Normal Quadav BST (VSco)
+            [true] = -- Quadav NM
+            {
+                ["SoGho_Adderhandler"] = {"5653636f", 22, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- NM Quadav BST (VSco)
+                ["BeEbo_Tortoisedriver"] = {"5653636f", 22, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- NM Quadav BST (VSco)
+            },
+        },
+
+        [358] = -- Kindred Family
+        {
+            [false] = {"4b566f75", 100, 135, 0, nil, nil, MOBTYPE_NORMAL}, -- Normal Kindred BST (KVou)
+            [true] = -- NM Kindred
+            {
+                ["Marquis_Andras"] = {"41566f75", 55, 135, 0, nil, nil, MOBTYPE_NORMAL}, -- NM Kindred BST (AVou)
+            }
+        },
+        [359] = -- Hydra Family
+        {
+            [false] = {"48486f75", 169, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- Normal Hydra BST (HHou)
+            [true] = -- Hydra NM
+            {
+                ["Dagourmarche"] = {"44486f75", 169, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- NM Hydra BST (DHou)
+            },
+        },
+        [360] = -- Yagudo Family
+        {
+            [false] = {"5643726f", 100, 135, 0, nil, nil, MOBTYPE_NORMAL}, -- Normal Yagudo BST (VCro)
+            [true] = -- Yagudo NM
+            {
+                ["Soo_Jopo_the_Fiendking"] = {"5643726f", 100, 135, 0, nil, nil, MOBTYPE_NORMAL}, -- NM Yagudo BST (VCro)
+            }
+        },
+    }
+    if isNM == true then
+        nameObj = petList[mobFamily][true][mobName]
+    else
+        nameObj = petList[mobFamily][false]
     end
+    local mob = zone:insertDynamicEntity({
+        objtype = xi.objType.MOB,
+        name = nameObj[1],
+        x = oMob:getXPos()+math.random()*6-3,
+        y = oMob:getYPos()-0.3,
+        z = oMob:getXPos()+math.random()*6-3,
+        rotation = oMob:getRotPos(),
+        groupId = nameObj[2],
+        groupZoneId = nameObj[3],
+        onMobSpawn = function(mob) xi.dynamis.setMobStats(mob) end,
+        onMobRoam = function(mob) xi.dynamis.mobOnRoam(mob) end,
+        onMobFight = function(mob) xi.dynamis.mobOnFight(mob) end,
+        onMobRoamAction = function(mob) xi.dynamis.mobOnRoamAction(mob) end,
+        onMobDeath = function(mob, playerArg, isKiller)
+            xi.dynamis.mobOnDeath(mob, mobList[mob:getZoneID()], zones[mob:getZoneID()].text.DYNAMIS_TIME_EXTEND)
+        end,
+    })
+    mob:setSpawn(oMob:getXPos()+math.random()*6-3, oMob:getYPos()-0.3, oMob:getZPos()+math.random()*6-3, oMob:getRotPos())
+    mob:setDropID(nameObj[4])
+    if nameObj[5] ~= nil then -- If SpellList ~= nil set SpellList
+        mob:setSpellList(nameObj[5])
+    end
+    if nameObj[6] ~= nil then -- If SkillList ~= nil set SkillList
+        mob:setMobMod(xi.mobMod.SKILL_LIST, nameObj[6])
+    end
+    oMob:setLocalVar("PetID", mob:getID())
+    mob:setLocalVar("PetMasterID", oMob:getID())
+    mob:spawn()
+    mob:updateEnmity(target)
 end
 
-xi.dynamis.onNightmareSpawn = function (mob)
+xi.dynamis.spawnDynamicDRGPet =function(target, mob) 
+    local mobFamily = mob:getFamily()
+    local isNM = mob:isMobType(MOBTYPE_NOTORIOUS)
+    local oMob = GetMobByID(mob:getID())
+    local mobName = mob:getName()
+    local petList =
+    {
+        -- Note: To set default SpellList and SkillList use nil.
+        -- [Parent's Family]
+        --{
+            -- [false] = {Name, groupId, groupZoneId, Droplist, SpellList, SkillList}, -- Non-NM Pet
+            -- [true] -- Is an NM
+            -- {
+                -- [ParentName] = {Name, groupId, groupZoneId, Droplist, SpellList, SkillList}, -- NM Pet
+            -- },
+        --},
+        [327] = -- Goblin Family
+        {
+            [false] = {"56536c696d65" , 130, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- Normal Goblin BST (VSlime)
+            [true] = -- Goblin NM
+            {
+                ["Routsix_Rubbertendon"] = {"56536c696d65" , 130, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- NM Goblin BST (VSlime)
+                ["Blazax_Boneybad"] = {"56536c696d65" , 130, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- NM Goblin BST (VSlime)
+                ["Rutrix_Hamgams"] = {"56536c696d65" , 130, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- NM Goblin BST (VSlime)
+                ["Trailblix_Goatmug"] = {"56536c696d65" , 130, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- NM Goblin BST (VSlime)
+                ["Woodnix_Shrillwistle"] = {"5753536c696d65" , 7, 40, 0, nil, nil, MOBTYPE_NORMAL}, -- NM Goblin BST (WSSlime)
+            }
+        },
+        [334] = -- Orc Family
+        {
+            [false] = {"56486563", 77, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- Normal Orc BST (VHec)
+            [true] = -- Orc NM
+            {
+                ["Mithraslaver_Debhabob"] = {"56486563", 77, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- NM Orc BST (VHec)
+            },
+        },
+        [337] = -- Quadav Family
+        {
+            [false] = {"5653636f", 22, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- Normal Quadav BST (VSco)
+            [true] = -- Quadav NM
+            {
+                ["SoGho_Adderhandler"] = {"5653636f", 22, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- NM Quadav BST (VSco)
+                ["BeEbo_Tortoisedriver"] = {"5653636f", 22, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- NM Quadav BST (VSco)
+            },
+        },
+
+        [358] = -- Kindred Family
+        {
+            [false] = {"4b566f75", 100, 135, 0, nil, nil, MOBTYPE_NORMAL}, -- Normal Kindred BST (KVou)
+            [true] = -- NM Kindred
+            {
+                ["Marquis_Andras"] = {"41566f75", 55, 135, 0, nil, nil, MOBTYPE_NORMAL}, -- NM Kindred BST (AVou)
+            }
+        },
+        [359] = -- Hydra Family
+        {
+            [false] = {"48486f75", 169, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- Normal Hydra BST (HHou)
+            [true] = -- Hydra NM
+            {
+                ["Dagourmarche"] = {"44486f75", 169, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- NM Hydra BST (DHou)
+            },
+        },
+        [360] = -- Yagudo Family
+        {
+            [false] = {"5643726f", 100, 135, 0, nil, nil, MOBTYPE_NORMAL}, -- Normal Yagudo BST (VCro)
+            [true] = -- Yagudo NM
+            {
+                ["Soo_Jopo_the_Fiendking"] = {"5643726f", 100, 135, 0, nil, nil, MOBTYPE_NORMAL}, -- NM Yagudo BST (VCro)
+            }
+        },
+    }
+    if isNM == true then
+        nameObj = petList[mobFamily][true][mobName]
+    else
+        nameObj = petList[mobFamily][false]
+    end
+    local mob = zone:insertDynamicEntity({
+        objtype = xi.objType.MOB,
+        name = nameObj[1],
+        x = oMob:getXPos()+math.random()*6-3,
+        y = oMob:getYPos()-0.3,
+        z = oMob:getXPos()+math.random()*6-3,
+        rotation = oMob:getRotPos(),
+        groupId = nameObj[2],
+        groupZoneId = nameObj[3],
+        onMobSpawn = function(mob) xi.dynamis.setMobStats(mob) end,
+        onMobRoam = function(mob) xi.dynamis.mobOnRoam(mob) end,
+        onMobRoamAction = function(mob) xi.dynamis.mobOnRoamAction(mob) end,
+        onMobDeath = function(mob, playerArg, isKiller)
+            xi.dynamis.mobOnDeath(mob, mobList[mob:getZoneID()], zones[mob:getZoneID()].text.DYNAMIS_TIME_EXTEND)
+        end,
+    })
+    mob:setSpawn(oMob:getXPos()+math.random()*6-3, oMob:getYPos()-0.3, oMob:getZPos()+math.random()*6-3, oMob:getRotPos())
+    mob:setDropID(nameObj[4])
+    if nameObj[5] ~= nil then -- If SpellList ~= nil set SpellList
+        mob:setSpellList(nameObj[5])
+    end
+    if nameObj[6] ~= nil then -- If SkillList ~= nil set SkillList
+        mob:setMobMod(xi.mobMod.SKILL_LIST, nameObj[6])
+    end
+    oMob:setLocalVar("PetID", mob:getID())
+    mob:setLocalVar("PetMasterID", oMob:getID())
+    mob:spawn()
+    mob:updateEnmity(target)
 end
 
 --------------------------------------------
@@ -1876,5 +2496,37 @@ m:addOverride("xi.dynamis.megaBossOnDeath", function(mob, player, isKiller)
     winQM:setStatus(xi.status.NORMAL) -- Make visible
     player:addTitle(dynaInfoEra[ID].winTitle) -- Give player the title
 end)
+
+--------------------------------------------
+--        Dynamis Statue Functions        --
+--------------------------------------------
+
+xi.dynamis.statueOnFight = function(mob, target)
+    if mob:getHP() == 1 then -- If my HP = 1
+        if mob:AnimationSub() == 2 then -- I am an HP statue
+            mob:useMobAbility(1124) -- Use Recover HP
+        elseif mob:AnimationSub() == 3 then -- I am an MP statue
+            mob:useMobAbility(1125) -- Use Recover MP
+        end
+    end
+end
+
+xi.dynamis.onStatueSkillFinished = function(mob, skill)
+    if skill:getID() == 1124 or skill:getID() == 1125 then -- If I used one of the restore skills.
+        mob:setUnkillable(false) -- Make me killable
+        mob:setHP(0) -- Kill me
+    end
+end
+
+xi.dynamis.statueOnSpawn = function(mob, eyes, mobList) -- Used to spawn mobs off of a single parent
+    mob:setLocalVar("dynaReadyToSpawnChildren", 1) -- Marks mob available for spawning.
+    mob:setLocalVar("Index", mobList[zone])
+    if mob:getFamily() >= 92 and mob:getFamily() <= 95 then -- If statue
+        mob:setLocalVar("eyeColor", eyes) -- Set Eyes if need be
+        if eyes >= 2 then -- If HP or MP restore statue
+            mob:setUnkillable(true) -- Set Unkillable as we will use skills then kill.
+        end
+    end
+end
 
 return m
