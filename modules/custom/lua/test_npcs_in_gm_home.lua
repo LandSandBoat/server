@@ -5,7 +5,6 @@ require("modules/module_utils")
 require("scripts/zones/GM_Home/Zone")
 -----------------------------------
 local m = Module:new("test_npcs_in_gm_home")
-m:setEnabled(false)
 
 m:addOverride("xi.zones.GM_Home.Zone.onInitialize", function(zone)
 

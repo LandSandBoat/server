@@ -7,7 +7,6 @@ require("scripts/globals/msg")
 require("scripts/globals/utils")
 -----------------------------------
 local m = Module:new("mission_wardrobe_unlocks")
-m:setEnabled(false)
 
 local unlocks =
 {

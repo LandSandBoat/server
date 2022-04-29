@@ -1,5 +1,6 @@
 # This file is for marking which modules you wish to load.
 #
+# - This file is tracked in git, but ignores changes: git update-index --assume-unchanged FILE_NAME
 # - You can list files and folders you wish to load as modules.
 # - One entry per line.
 # - Empty lines and comments are ignored.
