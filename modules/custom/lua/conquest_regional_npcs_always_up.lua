@@ -5,7 +5,6 @@ require("modules/module_utils")
 require("scripts/globals/conquest")
 -----------------------------------
 local m = Module:new("conquest_regional_npcs_always_up")
-m:setEnabled(false)
 
 m:addOverride("xi.conquest.toggleRegionalNPCs", function(zone)
     local id = zone:getID()

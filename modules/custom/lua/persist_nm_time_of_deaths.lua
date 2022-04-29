@@ -7,7 +7,6 @@
 require("modules/module_utils")
 -----------------------------------
 local m = Module:new("persist_nm_time_of_deaths")
-m:setEnabled(false)
 
 -- NOTE: These names are as they are as filenames.
 -- Example: Behemoth's Dominion => Behemoths_Dominion
