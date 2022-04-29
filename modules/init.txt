@@ -36,3 +36,4 @@
 # Live example:
 
 custom/lua/test_npcs_in_gm_home.lua
+example/cpp/example_cpp_module.cpp

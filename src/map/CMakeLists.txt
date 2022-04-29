@@ -131,16 +131,18 @@ endif()
 
 # Search for module directories
 set(module_include_dirs "")
-file(GLOB_RECURSE module_dirs LIST_DIRECTORIES true
-    RELATIVE ${CMAKE_SOURCE_DIR}/modules "${CMAKE_SOURCE_DIR}/modules/*")
-foreach(dir ${module_dirs})
-    if (IS_DIRECTORY "${CMAKE_SOURCE_DIR}/modules/${dir}" AND ${dir} MATCHES "cpp")
+file(STRINGS ${CMAKE_SOURCE_DIR}/modules/init.txt INIT_FILE_ENTRIES REGEX "^[^#\n].*")
+foreach(entry ${INIT_FILE_ENTRIES})
+    if (IS_DIRECTORY "${CMAKE_SOURCE_DIR}/modules/${entry}")
         file(GLOB_RECURSE module_files
-            "${CMAKE_SOURCE_DIR}/modules/${dir}/*.cpp"
-            "${CMAKE_SOURCE_DIR}/modules/${dir}/*.h")
-        list(APPEND module_include_dirs "${CMAKE_SOURCE_DIR}/modules/${dir}")
+            "${CMAKE_SOURCE_DIR}/modules/${entry}/*.cpp"
+            "${CMAKE_SOURCE_DIR}/modules/${entry}/*.h")
+        list(APPEND module_include_dirs "${CMAKE_SOURCE_DIR}/modules/${entry}")
         list(APPEND SOURCES ${module_files})
         message(STATUS "Adding module files to build: ${module_files}")
+    elseif (${entry} MATCHES "\.cpp")
+        list(APPEND SOURCES "${CMAKE_SOURCE_DIR}/modules/${entry}")
+        message(STATUS "Adding module files to build: ${CMAKE_SOURCE_DIR}/modules/${entry}")
     endif()
 endforeach()
 
