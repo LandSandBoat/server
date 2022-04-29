@@ -1,6 +1,6 @@
 #include "../src/map/utils/moduleutils.h"
 
-class CustomCPPModule : public CPPModule
+class ExampleCPPModule : public CPPModule
 {
     // Required
     void OnInit() override
@@ -9,10 +9,10 @@ class CustomCPPModule : public CPPModule
         // Called at the end of on_init
 
         // Regular logging is available
-        //ShowInfo("Hello from CustomCPPModule!");
+        //ShowInfo("Hello from ExampleCPPModule!");
 
         // "lua" and "sql" are available inside this class
-        //lua["print"]("Hello from CustomCPPModule's Lua!");
+        //lua["print"]("Hello from ExampleCPPModule's Lua!");
 
         // Register custom bindings
         /*
@@ -65,4 +65,4 @@ class CustomCPPModule : public CPPModule
     }
 };
 
-REGISTER_CPP_MODULE(CustomCPPModule);
+REGISTER_CPP_MODULE(ExampleCPPModule);
