@@ -129,10 +129,7 @@ namespace moduleutils
             {
                 std::string filename  = path.filename().generic_string();
                 std::string relPath   = path.relative_path().generic_string();
-                std::string pathNoExt = path.relative_path().replace_extension("").generic_string();
 
-                // Execute the script once in "safe mode" to check it for syntax errors
-                // lua.require_file will crash if it's given a bad script
                 auto res = lua.safe_script_file(relPath);
                 if (!res.valid())
                 {
@@ -142,13 +139,12 @@ namespace moduleutils
                     continue;
                 }
 
-                // Run for real
-                sol::table table = lua.require_file(pathNoExt, relPath);
-                if (table["enabled"])
+                sol::table table = res;
+                if (table.get_or("enabled", false))
                 {
-                    auto moduleName = table.get<std::string>("name");
+                    auto moduleName = table.get_or("name", std::string());
                     ShowScript(fmt::format("=== Module: {} ===", moduleName));
-                    for (auto& override : table.get<std::vector<sol::table>>("overrides"))
+                    for (auto& override : table.get_or("overrides", std::vector<sol::table>()))
                     {
                         std::string name = override["name"];
                         sol::object func = override["func"];
@@ -156,7 +152,7 @@ namespace moduleutils
                         ShowScript(fmt::format("Preparing override: {}", name));
 
                         auto parts = split(name, '.');
-                        parts      = std::vector<std::string>(parts.begin() + 1, parts.end());
+                        parts      = std::vector<std::string>(parts.begin(), parts.end());
 
                         overrides.emplace_back(Override{ filename, name, parts, func, false });
                     }
@@ -172,10 +168,11 @@ namespace moduleutils
         {
             if (!override.applied)
             {
-                sol::table table = lua["xi"].get<sol::table>();
-
-                auto lastTable = *(override.nameParts.end() - 2);
+                auto firstElem  = override.nameParts.front();
+                auto lastTable = override.nameParts.size() < 2 ? firstElem : *(override.nameParts.end() - 2);
                 auto lastElem  = override.nameParts.back();
+
+                sol::table table = lua["_G"];
                 for (auto& part : override.nameParts)
                 {
                     table = table[part].get_or<sol::table>(sol::lua_nil);
@@ -184,7 +181,6 @@ namespace moduleutils
                         break;
                     }
 
-                    // Get parent table of the function at the end of the string
                     if (part == lastTable)
                     {
                         ShowScript(fmt::format("Applying override: {}", override.overrideName));
@@ -192,6 +188,8 @@ namespace moduleutils
                         lua["applyOverride"](table, lastElem, override.func);
 
                         override.applied = true;
+
+                        break;
                     }
                 }
             }
