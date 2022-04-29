@@ -75,7 +75,6 @@ mission.sections =
             },
 
             ['Despachiaire']     = mission:event(318),
-            ['Ironclad_Gorilla'] = mission:event(306),
             ['Justinius']        = mission:event(135),
 
             onZoneIn =

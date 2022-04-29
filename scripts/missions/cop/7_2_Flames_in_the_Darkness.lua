@@ -8,6 +8,7 @@
 -----------------------------------
 require('scripts/globals/interaction/mission')
 require('scripts/globals/missions')
+require('scripts/globals/titles')
 require('scripts/globals/utils')
 require('scripts/globals/zone')
 -----------------------------------
@@ -16,6 +17,7 @@ local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.FLAMES_IN_T
 
 mission.reward =
 {
+    title = xi.title.ESHANTARLS_COMRADE_IN_ARMS,
     nextMission = { xi.mission.log_id.COP, xi.mission.id.cop.FIRE_IN_THE_EYES_OF_MEN },
 }
 
