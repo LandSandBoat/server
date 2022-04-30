@@ -62,6 +62,7 @@ int    sock_arr_len = 0;
 /// @return Fd or -1
 int sock2fd(SOCKET s)
 {
+    TracyZoneScoped;
     int fd;
 
     // search for the socket
@@ -83,6 +84,7 @@ int sock2fd(SOCKET s)
 /// @return New fd or -1
 int sock2newfd(SOCKET s)
 {
+    TracyZoneScoped;
     int fd;
 
     // find an empty position
@@ -104,6 +106,7 @@ int sock2newfd(SOCKET s)
 
 int sAccept(int fd, struct sockaddr* addr, int* addrlen)
 {
+    TracyZoneScoped;
     SOCKET s;
 
     // accept connection
@@ -115,6 +118,7 @@ int sAccept(int fd, struct sockaddr* addr, int* addrlen)
 
 int sClose(int fd)
 {
+    TracyZoneScoped;
     int ret     = closesocket(fd2sock(fd));
     fd2sock(fd) = INVALID_SOCKET;
     return ret;
@@ -122,6 +126,7 @@ int sClose(int fd)
 
 int sSocket(int af, int type, int protocol)
 {
+    TracyZoneScoped;
     SOCKET s;
 
     // create socket
@@ -154,6 +159,7 @@ time_t stall_time = 60;
 
 int32 makeConnection(uint32 ip, uint16 port, int32 type)
 {
+    TracyZoneScoped;
     struct sockaddr_in remote_address;
     int32              fd;
     int32              result;
@@ -220,6 +226,7 @@ int32 makeConnection(uint32 ip, uint16 port, int32 type)
 
 void do_close(int32 fd)
 {
+    TracyZoneScoped;
     sFD_CLR(fd, &readfds);    // this needs to be done before closing the socket
     sShutdown(fd, SHUT_RDWR); // Disallow further reads/writes
     sClose(fd);               // We don't really care if these closing functions return an error, we are just shutting down and not reusing this socket.
@@ -227,6 +234,7 @@ void do_close(int32 fd)
 
 bool _vsocket_init()
 {
+    TracyZoneScoped;
 #ifdef WIN32
     { // Start up windows networking
         WSADATA wsaData;
@@ -361,6 +369,7 @@ static int connect_check_(uint32 ip);
 /// @see connect_check_()
 static int connect_check(uint32 ip)
 {
+    TracyZoneScoped;
     int result = connect_check_(ip);
     if (access_debug)
     {
@@ -374,6 +383,7 @@ static int connect_check(uint32 ip)
 ///  1 or 2 : Connection Accepted
 static int connect_check_(uint32 ip)
 {
+    TracyZoneScoped;
     ConnectHistory* hist = connect_history[ip & 0xFFFF];
     size_t          i;
     int             is_allowip = 0;
@@ -496,6 +506,7 @@ static int connect_check_(uint32 ip)
 /// Deletes old connection history records.
 static int connect_check_clear(time_point tick, CTaskMgr::CTask* PTask)
 {
+    TracyZoneScoped;
     int             i;
     int             clear = 0;
     int             list  = 0;
@@ -536,6 +547,7 @@ static int connect_check_clear(time_point tick, CTaskMgr::CTask* PTask)
 /// Returns 1 is successful, 0 otherwise.
 int access_ipmask(const char* str, AccessControl* acc)
 {
+    TracyZoneScoped;
     uint32       ip;
     uint32       mask;
     unsigned int a[4];
@@ -594,6 +606,7 @@ int access_ipmask(const char* str, AccessControl* acc)
 //////////////////////////////
 int recv_to_fifo(int fd)
 {
+    TracyZoneScoped;
     int len;
 
     if (!session_isActive(fd))
@@ -628,6 +641,7 @@ int recv_to_fifo(int fd)
 
 int send_from_fifo(int fd)
 {
+    TracyZoneScoped;
     int len;
 
     if (!session_isValid(fd))
@@ -692,15 +706,18 @@ std::array<std::unique_ptr<socket_data>, FD_SETSIZE> session;
 
 bool session_isValid(int fd)
 {
+    TracyZoneScoped;
     return (fd > 0 && fd < FD_SETSIZE && session[fd] != nullptr);
 }
 bool session_isActive(int fd)
 {
+    TracyZoneScoped;
     return (session_isValid(fd) && !session[fd]->flag.eof);
 }
 
 int32 makeConnection_tcp(uint32 ip, uint16 port)
 {
+    TracyZoneScoped;
     int fd = makeConnection(ip, port, SOCK_STREAM);
     if (fd > 0)
     {
@@ -714,6 +731,7 @@ int32 makeConnection_tcp(uint32 ip, uint16 port)
  *--------------------------------------*/
 int connect_client(int listen_fd, sockaddr_in& client_address)
 {
+    TracyZoneScoped;
     int fd;
     // struct sockaddr_in client_address;
     socklen_t len;
@@ -765,6 +783,7 @@ int connect_client(int listen_fd, sockaddr_in& client_address)
 
 int32 makeListenBind_tcp(const char* ip, uint16 port, RecvFunc connect_client)
 {
+    TracyZoneScoped;
     struct sockaddr_in server_address;
     int                fd;
     int                result;
@@ -825,6 +844,7 @@ int32 makeListenBind_tcp(const char* ip, uint16 port, RecvFunc connect_client)
 
 int32 RFIFOSKIP(int32 fd, size_t len)
 {
+    TracyZoneScoped;
     struct socket_data* s;
 
     if (!session_isActive(fd))
@@ -846,6 +866,7 @@ int32 RFIFOSKIP(int32 fd, size_t len)
 
 void do_close_tcp(int32 fd)
 {
+    TracyZoneScoped;
     flush_fifo(fd);
     do_close(fd);
     if (session[fd])
@@ -856,6 +877,7 @@ void do_close_tcp(int32 fd)
 
 int socket_config_read(const char* cfgName)
 {
+    TracyZoneScoped;
     char  line[1024];
     char  w1[1024];
     char  w2[1024];
@@ -956,6 +978,7 @@ int socket_config_read(const char* cfgName)
 
 void socket_init_tcp()
 {
+    TracyZoneScoped;
     if (!_vsocket_init())
     {
         return;
@@ -977,6 +1000,7 @@ void socket_init_tcp()
 
 void socket_final_tcp()
 {
+    TracyZoneScoped;
     if (!_vsocket_final())
     {
         return;
@@ -1009,6 +1033,7 @@ void socket_final_tcp()
 
 void flush_fifo(int32 fd)
 {
+    TracyZoneScoped;
     if (session[fd] != nullptr)
     {
         session[fd]->func_send(fd);
@@ -1017,8 +1042,8 @@ void flush_fifo(int32 fd)
 
 void flush_fifos()
 {
-    int i;
-    for (i = 1; i < fd_max; i++)
+    TracyZoneScoped;
+    for (int i = 1; i < fd_max; i++)
     {
         flush_fifo(i);
     }
@@ -1026,11 +1051,13 @@ void flush_fifos()
 
 void set_defaultparse(ParseFunc defaultparse)
 {
+    TracyZoneScoped;
     default_func_parse = defaultparse;
 }
 
 void set_eof(int32 fd)
 {
+    TracyZoneScoped;
     if (session_isActive(fd))
     {
         session[fd]->flag.eof = 1;
@@ -1039,6 +1066,7 @@ void set_eof(int32 fd)
 
 int create_session(int fd, RecvFunc func_recv, SendFunc func_send, ParseFunc func_parse)
 {
+    TracyZoneScoped;
     session[fd] = std::make_unique<socket_data>();
     session[fd]->rdata.reserve(RFIFO_SIZE);
     session[fd]->wdata.reserve(WFIFO_SIZE);
@@ -1052,6 +1080,7 @@ int create_session(int fd, RecvFunc func_recv, SendFunc func_send, ParseFunc fun
 
 int delete_session(int fd)
 {
+    TracyZoneScoped;
     if (fd <= 0 || fd >= FD_SETSIZE)
     {
         return -1;
@@ -1064,6 +1093,7 @@ int delete_session(int fd)
  *--------------------------------------*/
 void set_nonblocking(int fd, unsigned long yes)
 {
+    TracyZoneScoped;
     // FIONBIO Use with a nonzero argp parameter to enable the nonblocking mode of socket s.
     // The argp parameter is zero if nonblocking is to be disabled.
     if (sIoctl(fd, FIONBIO, &yes) != 0)
@@ -1079,6 +1109,7 @@ void set_nonblocking(int fd, unsigned long yes)
  */
 int32 makeBind_udp(uint32 ip, uint16 port)
 {
+    TracyZoneScoped;
     struct sockaddr_in server_address;
     int                fd;
     int                result;
@@ -1125,6 +1156,7 @@ int32 makeBind_udp(uint32 ip, uint16 port)
 
 void socket_init_udp()
 {
+    TracyZoneScoped;
     if (!_vsocket_init())
     {
         return;
@@ -1135,11 +1167,13 @@ void socket_init_udp()
 
 void do_close_udp(int32 fd)
 {
+    TracyZoneScoped;
     do_close(fd);
 }
 
 void socket_final_udp()
 {
+    TracyZoneScoped;
     if (!_vsocket_final())
     {
         return;
@@ -1149,16 +1183,19 @@ void socket_final_udp()
 
 int32 recvudp(int32 fd, void* buff, size_t nbytes, int32 flags, struct sockaddr* from, socklen_t* addrlen)
 {
+    TracyZoneScoped;
     return sRecvfrom(fd, (char*)buff, (int)nbytes, flags, from, addrlen);
 }
 
 int32 sendudp(int32 fd, void* buff, size_t nbytes, int32 flags, const struct sockaddr* from, socklen_t addrlen)
 {
+    TracyZoneScoped;
     return sSendto(fd, (const char*)buff, (int)nbytes, flags, from, addrlen);
 }
 
 void socket_init()
 {
+    TracyZoneScoped;
     switch (SOCKET_TYPE)
     {
         case socket_type::TCP:
@@ -1174,6 +1211,7 @@ void socket_init()
 
 void socket_final()
 {
+    TracyZoneScoped;
     switch (SOCKET_TYPE)
     {
         case socket_type::TCP:

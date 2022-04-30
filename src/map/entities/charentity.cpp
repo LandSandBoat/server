@@ -86,6 +86,7 @@
 
 CCharEntity::CCharEntity()
 {
+    TracyZoneScoped;
     objtype     = TYPE_PC;
     m_EcoSystem = ECOSYSTEM::HUMANOID;
 
@@ -241,6 +242,7 @@ CCharEntity::CCharEntity()
 
 CCharEntity::~CCharEntity()
 {
+    TracyZoneScoped;
     clearPacketList();
 
     if (PTreasurePool != nullptr)
@@ -676,6 +678,7 @@ void CCharEntity::delTrait(CTrait* PTrait)
 
 bool CCharEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
 {
+    TracyZoneScoped;
     if (StatusEffectContainer->GetConfrontationEffect() != PInitiator->StatusEffectContainer->GetConfrontationEffect())
     {
         return false;
@@ -719,12 +722,14 @@ bool CCharEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
 
 bool CCharEntity::CanUseSpell(CSpell* PSpell)
 {
+    TracyZoneScoped;
     return charutils::hasSpell(this, static_cast<uint16>(PSpell->getID())) && CBattleEntity::CanUseSpell(PSpell) &&
            !PRecastContainer->Has(RECAST_MAGIC, static_cast<uint16>(PSpell->getID()));
 }
 
 void CCharEntity::OnChangeTarget(CBattleEntity* PNewTarget)
 {
+    TracyZoneScoped;
     battleutils::RelinquishClaim(this);
     pushPacket(new CLockOnPacket(this, PNewTarget));
     PLatentEffectContainer->CheckLatentsTargetChange();
@@ -732,6 +737,7 @@ void CCharEntity::OnChangeTarget(CBattleEntity* PNewTarget)
 
 void CCharEntity::OnEngage(CAttackState& state)
 {
+    TracyZoneScoped;
     CBattleEntity::OnEngage(state);
     PLatentEffectContainer->CheckLatentsTargetChange();
     this->m_charHistory.battlesFought++;
@@ -739,6 +745,7 @@ void CCharEntity::OnEngage(CAttackState& state)
 
 void CCharEntity::OnDisengage(CAttackState& state)
 {
+    TracyZoneScoped;
     battleutils::RelinquishClaim(this);
     CBattleEntity::OnDisengage(state);
     if (state.HasErrorMsg())
@@ -750,6 +757,7 @@ void CCharEntity::OnDisengage(CAttackState& state)
 
 bool CCharEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>& errMsg)
 {
+    TracyZoneScoped;
     float dist = distance(loc.p, PTarget->loc.p);
 
     if (!IsMobOwner(PTarget))
@@ -780,6 +788,7 @@ bool CCharEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket
 
 bool CCharEntity::OnAttack(CAttackState& state, action_t& action)
 {
+    TracyZoneScoped;
     auto* controller{ static_cast<CPlayerController*>(PAI->GetController()) };
     controller->setLastAttackTime(server_clock::now());
     auto ret = CBattleEntity::OnAttack(state, action);
@@ -791,6 +800,7 @@ bool CCharEntity::OnAttack(CAttackState& state, action_t& action)
 
 void CCharEntity::OnCastFinished(CMagicState& state, action_t& action)
 {
+    TracyZoneScoped;
     CBattleEntity::OnCastFinished(state, action);
 
     auto* PSpell  = state.GetSpell();
@@ -862,6 +872,7 @@ void CCharEntity::OnCastFinished(CMagicState& state, action_t& action)
 
 void CCharEntity::OnCastInterrupted(CMagicState& state, action_t& action, MSGBASIC_ID msg)
 {
+    TracyZoneScoped;
     CBattleEntity::OnCastInterrupted(state, action, msg);
 
     auto* message = state.GetErrorMsg();
@@ -874,6 +885,7 @@ void CCharEntity::OnCastInterrupted(CMagicState& state, action_t& action, MSGBAS
 
 void CCharEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& action)
 {
+    TracyZoneScoped;
     CBattleEntity::OnWeaponSkillFinished(state, action);
 
     auto* PWeaponSkill  = state.GetSkill();
@@ -1010,6 +1022,7 @@ void CCharEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& acti
 
 void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
 {
+    TracyZoneScoped;
     auto* PAbility = state.GetAbility();
     if (this->PRecastContainer->HasRecast(RECAST_ABILITY, PAbility->getRecastId(), PAbility->getRecastTime()))
     {
@@ -1286,6 +1299,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
 
 void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
 {
+    TracyZoneScoped;
     auto* PTarget = static_cast<CBattleEntity*>(state.GetTarget());
 
     int32 damage      = 0;
@@ -1520,6 +1534,7 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
 
 bool CCharEntity::IsMobOwner(CBattleEntity* PBattleTarget)
 {
+    TracyZoneScoped;
     XI_DEBUG_BREAK_IF(PBattleTarget == nullptr);
 
     if (PBattleTarget->m_OwnerID.id == 0 || PBattleTarget->m_OwnerID.id == this->id || PBattleTarget->objtype == TYPE_PC)
@@ -1541,6 +1556,7 @@ bool CCharEntity::IsMobOwner(CBattleEntity* PBattleTarget)
 
 void CCharEntity::HandleErrorMessage(std::unique_ptr<CBasicPacket>& msg)
 {
+    TracyZoneScoped;
     if (msg && !isCharmed)
     {
         pushPacket(msg.release());
@@ -1549,11 +1565,13 @@ void CCharEntity::HandleErrorMessage(std::unique_ptr<CBasicPacket>& msg)
 
 void CCharEntity::OnDeathTimer()
 {
+    TracyZoneScoped;
     charutils::HomePoint(this);
 }
 
 void CCharEntity::OnRaise()
 {
+    TracyZoneScoped;
     // TODO: Moghancement Experience needs to be factored in here somewhere.
     if (m_hasRaise > 0)
     {
@@ -1659,6 +1677,7 @@ void CCharEntity::OnRaise()
 
 void CCharEntity::OnItemFinish(CItemState& state, action_t& action)
 {
+    TracyZoneScoped;
     auto* PTarget = static_cast<CBattleEntity*>(state.GetTarget());
     auto* PItem   = static_cast<CItemUsable*>(state.GetItem());
 
@@ -1720,6 +1739,7 @@ void CCharEntity::OnItemFinish(CItemState& state, action_t& action)
 
 CBattleEntity* CCharEntity::IsValidTarget(uint16 targid, uint16 validTargetFlags, std::unique_ptr<CBasicPacket>& errMsg)
 {
+    TracyZoneScoped;
     auto* PTarget = CBattleEntity::IsValidTarget(targid, validTargetFlags, errMsg);
     if (PTarget)
     {
@@ -1755,6 +1775,7 @@ CBattleEntity* CCharEntity::IsValidTarget(uint16 targid, uint16 validTargetFlags
 
 void CCharEntity::Die()
 {
+    TracyZoneScoped;
     if (PLastAttacker)
     {
         loc.zone->PushPacket(this, CHAR_INRANGE_SELF, new CMessageBasicPacket(PLastAttacker, this, 0, 0, MSGBASIC_PLAYER_DEFEATED_BY));
@@ -1784,6 +1805,7 @@ void CCharEntity::Die()
 
 void CCharEntity::Die(duration _duration)
 {
+    TracyZoneScoped;
     this->ClearTrusts();
 
     if (StatusEffectContainer->HasStatusEffect(EFFECT_WEAKNESS))
@@ -1834,6 +1856,7 @@ void CCharEntity::Die(duration _duration)
 
 void CCharEntity::Raise()
 {
+    TracyZoneScoped;
     PAI->Internal_Raise();
     SetDeathTimestamp(0);
 }
@@ -1859,6 +1882,7 @@ int32 CCharEntity::GetTimeRemainingUntilDeathHomepoint() const
 
 int32 CCharEntity::GetTimeCreated()
 {
+    TracyZoneScoped;
     const char* fmtQuery = "SELECT UNIX_TIMESTAMP(timecreated) FROM chars WHERE charid = %u;";
 
     int32 ret = sql->Query(fmtQuery, id);
@@ -1878,6 +1902,7 @@ bool CCharEntity::hasMoghancement(uint16 moghancementID) const
 
 void CCharEntity::UpdateMoghancement()
 {
+    TracyZoneScoped;
     // Add up all of the installed furniture auras
     std::array<uint16, 8> elements = { 0 };
     for (auto containerID : { LOC_MOGSAFE, LOC_MOGSAFE2 })
@@ -1991,6 +2016,7 @@ void CCharEntity::UpdateMoghancement()
 
 void CCharEntity::SetMoghancement(uint16 moghancementID)
 {
+    TracyZoneScoped;
     m_moghancementID = moghancementID;
 
     // Apply the moghancement
@@ -2204,6 +2230,7 @@ void CCharEntity::SetMoghancement(uint16 moghancementID)
 
 void CCharEntity::TrackArrowUsageForScavenge(CItemWeapon* PAmmo)
 {
+    TracyZoneScoped;
     // Check if local has been set yet
     if (this->GetLocalVar("ArrowsUsed") == 0)
     {
@@ -2232,6 +2259,7 @@ void CCharEntity::TrackArrowUsageForScavenge(CItemWeapon* PAmmo)
 
 bool CCharEntity::OnAttackError(CAttackState& state)
 {
+    TracyZoneScoped;
     auto* controller{ static_cast<CPlayerController*>(PAI->GetController()) };
     if (controller->getLastErrMsgTime() + std::chrono::milliseconds(this->GetWeaponDelay(false)) < PAI->getTick())
     {
@@ -2269,6 +2297,7 @@ void CCharEntity::queueEvent(EventInfo* eventToQueue)
 
 void CCharEntity::tryStartNextEvent()
 {
+    TracyZoneScoped;
     if (isInEvent() || eventQueue.empty())
         return;
 
@@ -2316,6 +2345,7 @@ void CCharEntity::tryStartNextEvent()
 
 void CCharEntity::skipEvent()
 {
+    TracyZoneScoped;
     if (!m_Locked && !isInEvent() && (!currentEvent->cutsceneOptions.empty() || currentEvent->interruptText != 0))
     {
         pushPacket(new CMessageSystemPacket(0, 0, 117));
@@ -2333,6 +2363,7 @@ void CCharEntity::skipEvent()
 
 void CCharEntity::setLocked(bool locked)
 {
+    TracyZoneScoped;
     m_Locked = locked;
     if (locked)
     {

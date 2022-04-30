@@ -49,6 +49,7 @@
 
 CBattleEntity::CBattleEntity()
 {
+    TracyZoneScoped;
     m_OwnerID.clean();
     m_ModelRadius = 0;
     m_mlvl        = 0;
@@ -157,6 +158,7 @@ bool CBattleEntity::isSitting()
 
 void CBattleEntity::UpdateHealth()
 {
+    TracyZoneScoped;
     int32 dif = (getMod(Mod::CONVMPTOHP) - getMod(Mod::CONVHPTOMP));
 
     health.modmp = std::max(0, ((health.maxmp) * (100 + getMod(Mod::MPP)) / 100) +
@@ -262,6 +264,7 @@ bool CBattleEntity::Rest(float rate)
 
 int16 CBattleEntity::GetWeaponDelay(bool tp)
 {
+    TracyZoneScoped;
     if (StatusEffectContainer->HasStatusEffect(EFFECT_HUNDRED_FISTS) && !tp)
     {
         return 1700;
@@ -353,6 +356,7 @@ int16 CBattleEntity::GetAmmoDelay()
 
 uint16 CBattleEntity::GetMainWeaponDmg()
 {
+    TracyZoneScoped;
     if (auto* weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_MAIN]))
     {
         if ((weapon->getReqLvl() > GetMLevel()) && objtype == TYPE_PC)
@@ -373,6 +377,7 @@ uint16 CBattleEntity::GetMainWeaponDmg()
 
 uint16 CBattleEntity::GetSubWeaponDmg()
 {
+    TracyZoneScoped;
     if (auto* weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_SUB]))
     {
         if ((weapon->getReqLvl() > GetMLevel()) && objtype == TYPE_PC)
@@ -393,6 +398,7 @@ uint16 CBattleEntity::GetSubWeaponDmg()
 
 uint16 CBattleEntity::GetRangedWeaponDmg()
 {
+    TracyZoneScoped;
     uint16 dmg = 0;
     if (auto* weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_RANGED]))
     {
@@ -554,6 +560,7 @@ int32 CBattleEntity::addMP(int32 mp)
 int32 CBattleEntity::takeDamage(int32 amount, CBattleEntity* attacker /* = nullptr*/, ATTACK_TYPE attackType /* = ATTACK_NONE*/,
                                 DAMAGE_TYPE damageType /* = DAMAGE_NONE*/)
 {
+    TracyZoneScoped;
     PLastAttacker                             = attacker;
     this->BattleHistory.lastHitTaken_atkType  = attackType;
     std::optional<CLuaBaseEntity> optAttacker = attacker ? std::optional<CLuaBaseEntity>(CLuaBaseEntity(attacker)) : std::nullopt;
@@ -618,6 +625,7 @@ uint16 CBattleEntity::CHR()
 
 uint16 CBattleEntity::ATT()
 {
+    TracyZoneScoped;
     // TODO: consider which weapon!
     int32 ATT    = 8 + m_modStat[Mod::ATT];
     auto* weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_MAIN]);
@@ -672,6 +680,7 @@ uint16 CBattleEntity::RATT(uint8 skill, uint16 bonusSkill)
 
 uint16 CBattleEntity::RACC(uint8 skill, uint16 bonusSkill)
 {
+    TracyZoneScoped;
     auto* PWeakness = StatusEffectContainer->GetStatusEffect(EFFECT_WEAKNESS);
     if (PWeakness && PWeakness->GetPower() >= 2)
     {
@@ -691,6 +700,7 @@ uint16 CBattleEntity::RACC(uint8 skill, uint16 bonusSkill)
 
 uint16 CBattleEntity::ACC(uint8 attackNumber, uint8 offsetAccuracy)
 {
+    TracyZoneScoped;
     if (this->objtype & TYPE_PC)
     {
         uint8  skill     = 0;
@@ -835,6 +845,7 @@ void CBattleEntity::SetSJob(uint8 sjob)
 
 void CBattleEntity::SetMLevel(uint8 mlvl)
 {
+    TracyZoneScoped;
     m_modStat[Mod::DEF] -= m_mlvl + std::clamp(m_mlvl - 50, 0, 10);
     m_mlvl = (mlvl == 0 ? 1 : mlvl);
     m_modStat[Mod::DEF] += m_mlvl + std::clamp(m_mlvl - 50, 0, 10);
@@ -847,6 +858,7 @@ void CBattleEntity::SetMLevel(uint8 mlvl)
 
 void CBattleEntity::SetSLevel(uint8 slvl)
 {
+    TracyZoneScoped;
     if (!map_config.include_mob_sj && (this->objtype == TYPE_MOB && this->objtype != TYPE_PET))
     {
         // Technically, we shouldn't be assuming mobs even have a ratio they must adhere to.
@@ -910,6 +922,7 @@ void CBattleEntity::addModifier(Mod type, int16 amount)
 
 void CBattleEntity::addModifiers(std::vector<CModifier>* modList)
 {
+    TracyZoneScoped;
     for (auto modifier : *modList)
     {
         m_modStat[modifier.getModID()] += modifier.getModAmount();
@@ -918,6 +931,7 @@ void CBattleEntity::addModifiers(std::vector<CModifier>* modList)
 
 void CBattleEntity::addEquipModifiers(std::vector<CModifier>* modList, uint8 itemLevel, uint8 slotid)
 {
+    TracyZoneScoped;
     if (GetMLevel() >= itemLevel)
     {
         for (auto& i : *modList)
@@ -1015,6 +1029,7 @@ void CBattleEntity::setModifier(Mod type, int16 amount)
 
 void CBattleEntity::setModifiers(std::vector<CModifier>* modList)
 {
+    TracyZoneScoped;
     for (auto& i : *modList)
     {
         m_modStat[i.getModID()] = i.getModAmount();
@@ -1050,6 +1065,7 @@ void CBattleEntity::restoreModifiers()
 
 void CBattleEntity::delModifiers(std::vector<CModifier>* modList)
 {
+    TracyZoneScoped;
     for (auto& i : *modList)
     {
         m_modStat[i.getModID()] -= i.getModAmount();
@@ -1058,6 +1074,7 @@ void CBattleEntity::delModifiers(std::vector<CModifier>* modList)
 
 void CBattleEntity::delEquipModifiers(std::vector<CModifier>* modList, uint8 itemLevel, uint8 slotid)
 {
+    TracyZoneScoped;
     if (GetMLevel() >= itemLevel)
     {
         for (auto& i : *modList)
@@ -1144,11 +1161,13 @@ void CBattleEntity::delEquipModifiers(std::vector<CModifier>* modList, uint8 ite
 
 int16 CBattleEntity::getMod(Mod modID)
 {
+    TracyZoneScoped;
     return m_modStat[modID];
 }
 
 void CBattleEntity::addPetModifier(Mod type, PetModType petmod, int16 amount)
 {
+    TracyZoneScoped;
     m_petMod[petmod][type] += amount;
 
     if (PPet && petutils::CheckPetModType(PPet, petmod))
@@ -1160,6 +1179,7 @@ void CBattleEntity::addPetModifier(Mod type, PetModType petmod, int16 amount)
 
 void CBattleEntity::setPetModifier(Mod type, PetModType petmod, int16 amount)
 {
+    TracyZoneScoped;
     m_petMod[petmod][type] = amount;
 
     if (PPet && petutils::CheckPetModType(PPet, petmod))
@@ -1171,6 +1191,7 @@ void CBattleEntity::setPetModifier(Mod type, PetModType petmod, int16 amount)
 
 void CBattleEntity::delPetModifier(Mod type, PetModType petmod, int16 amount)
 {
+    TracyZoneScoped;
     m_petMod[petmod][type] -= amount;
 
     if (PPet && petutils::CheckPetModType(PPet, petmod))
@@ -1182,6 +1203,7 @@ void CBattleEntity::delPetModifier(Mod type, PetModType petmod, int16 amount)
 
 void CBattleEntity::addPetModifiers(std::vector<CPetModifier>* modList)
 {
+    TracyZoneScoped;
     for (auto modifier : *modList)
     {
         addPetModifier(modifier.getModID(), modifier.getPetModType(), modifier.getModAmount());
@@ -1190,6 +1212,7 @@ void CBattleEntity::addPetModifiers(std::vector<CPetModifier>* modList)
 
 void CBattleEntity::delPetModifiers(std::vector<CPetModifier>* modList)
 {
+    TracyZoneScoped;
     for (auto modifier : *modList)
     {
         delPetModifier(modifier.getModID(), modifier.getPetModType(), modifier.getModAmount());
@@ -1198,6 +1221,7 @@ void CBattleEntity::delPetModifiers(std::vector<CPetModifier>* modList)
 
 void CBattleEntity::applyPetModifiers(CPetEntity* PPet)
 {
+    TracyZoneScoped;
     for (const auto& modtype : m_petMod)
     {
         if (petutils::CheckPetModType(PPet, modtype.first))
@@ -1213,6 +1237,7 @@ void CBattleEntity::applyPetModifiers(CPetEntity* PPet)
 
 void CBattleEntity::removePetModifiers(CPetEntity* PPet)
 {
+    TracyZoneScoped;
     for (const auto& modtype : m_petMod)
     {
         if (petutils::CheckPetModType(PPet, modtype.first))
@@ -1234,6 +1259,7 @@ void CBattleEntity::removePetModifiers(CPetEntity* PPet)
 
 uint16 CBattleEntity::GetSkill(uint16 SkillID)
 {
+    TracyZoneScoped;
     if (SkillID < MAX_SKILLTYPE)
     {
         return WorkingSkills.skill[SkillID] & 0x7FFF;
@@ -1243,18 +1269,21 @@ uint16 CBattleEntity::GetSkill(uint16 SkillID)
 
 void CBattleEntity::addTrait(CTrait* PTrait)
 {
+    TracyZoneScoped;
     TraitList.push_back(PTrait);
     addModifier(PTrait->getMod(), PTrait->getValue());
 }
 
 void CBattleEntity::delTrait(CTrait* PTrait)
 {
+    TracyZoneScoped;
     delModifier(PTrait->getMod(), PTrait->getValue());
     TraitList.erase(std::remove(TraitList.begin(), TraitList.end(), PTrait), TraitList.end());
 }
 
 bool CBattleEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
 {
+    TracyZoneScoped;
     if (targetFlags & TARGET_ENEMY)
     {
         if (!isDead())
@@ -1289,11 +1318,13 @@ bool CBattleEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
 
 bool CBattleEntity::CanUseSpell(CSpell* PSpell)
 {
+    TracyZoneScoped;
     return spell::CanUseSpell(this, PSpell);
 }
 
 void CBattleEntity::Spawn()
 {
+    TracyZoneScoped;
     animation = ANIMATION_NONE;
     HideName(false);
     CBaseEntity::Spawn();
@@ -1302,6 +1333,7 @@ void CBattleEntity::Spawn()
 
 void CBattleEntity::Die()
 {
+    TracyZoneScoped;
     if (CBaseEntity* PKiller = GetEntity(m_OwnerID.targid))
     {
         static_cast<CBattleEntity*>(PKiller)->ForAlliance([this](CBattleEntity* PMember) {
@@ -1322,10 +1354,12 @@ void CBattleEntity::Die()
 
 void CBattleEntity::OnDeathTimer()
 {
+    TracyZoneScoped;
 }
 
 void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
 {
+    TracyZoneScoped;
     auto*          PSpell          = state.GetSpell();
     auto*          PActionTarget   = static_cast<CBattleEntity*>(state.GetTarget());
     CBattleEntity* POriginalTarget = PActionTarget;
@@ -1531,6 +1565,7 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
 
 void CBattleEntity::OnCastInterrupted(CMagicState& state, action_t& action, MSGBASIC_ID msg)
 {
+    TracyZoneScoped;
     CSpell* PSpell = state.GetSpell();
     if (PSpell)
     {
@@ -1552,6 +1587,7 @@ void CBattleEntity::OnCastInterrupted(CMagicState& state, action_t& action, MSGB
 
 void CBattleEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& action)
 {
+    TracyZoneScoped;
     auto* PWeaponskill = state.GetSkill();
 
     action.id         = id;
@@ -1561,11 +1597,13 @@ void CBattleEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& ac
 
 bool CBattleEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>& errMsg)
 {
+    TracyZoneScoped;
     return !((distance(loc.p, PTarget->loc.p) - PTarget->m_ModelRadius) > GetMeleeRange() || !PAI->GetController()->IsAutoAttackEnabled());
 }
 
 void CBattleEntity::OnDisengage(CAttackState& s)
 {
+    TracyZoneScoped;
     m_battleTarget = 0;
     if (animation == ANIMATION_ATTACK)
     {
@@ -1586,6 +1624,7 @@ CBattleEntity* CBattleEntity::GetBattleTarget()
 
 bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
 {
+    TracyZoneScoped;
     auto* PTarget = static_cast<CBattleEntity*>(state.GetTarget());
 
     if (PTarget->objtype == TYPE_PC)
@@ -1893,12 +1932,14 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
 
 CBattleEntity* CBattleEntity::IsValidTarget(uint16 targid, uint16 validTargetFlags, std::unique_ptr<CBasicPacket>& errMsg)
 {
+    TracyZoneScoped;
     auto* PTarget = PAI->TargetFind->getValidTarget(targid, validTargetFlags);
     return PTarget;
 }
 
 void CBattleEntity::OnEngage(CAttackState& state)
 {
+    TracyZoneScoped;
     animation = ANIMATION_ATTACK;
     updatemask |= UPDATE_HP;
     PAI->EventHandler.triggerListener("ENGAGE", CLuaBaseEntity(this), CLuaBaseEntity(state.GetTarget()));
@@ -1914,6 +1955,7 @@ void CBattleEntity::TryHitInterrupt(CBattleEntity* PAttacker)
 
 void CBattleEntity::OnDespawn(CDespawnState& /*unused*/)
 {
+    TracyZoneScoped;
     FadeOut();
     //#event despawn
     PAI->EventHandler.triggerListener("DESPAWN", CLuaBaseEntity(this));
@@ -1932,10 +1974,12 @@ duration CBattleEntity::GetBattleTime()
 
 void CBattleEntity::Tick(time_point /*unused*/)
 {
+    TracyZoneScoped;
 }
 
 void CBattleEntity::PostTick()
 {
+    TracyZoneScoped;
     if (health.hp == 0 && PAI->IsSpawned() && !PAI->IsCurrentState<CDeathState>() && !PAI->IsCurrentState<CRaiseState>() &&
         !PAI->IsCurrentState<CDespawnState>())
     {
