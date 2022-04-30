@@ -24,7 +24,7 @@ local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.CALM_BEFORE
 
 mission.reward =
 {
-    nextMission = { xi.mission.log_id.COP, xi.mission.id.cop.THE_WARRIOR_S_PATH },
+    nextMission = { xi.mission.log_id.COP, xi.mission.id.cop.THE_WARRIORS_PATH },
 }
 
 local function setMissionStatusBit(player, statusBit)

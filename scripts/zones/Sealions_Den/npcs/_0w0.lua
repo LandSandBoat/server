@@ -17,7 +17,7 @@ end
 entity.onTrigger = function(player, npc)
     if xi.bcnm.onTrigger(player, npc) then
         return
-    elseif player:getCurrentMission(xi.mission.log_id.COP) > xi.mission.id.cop.THE_WARRIOR_S_PATH then
+    elseif player:getCurrentMission(xi.mission.log_id.COP) > xi.mission.id.cop.THE_WARRIORS_PATH then
         player:startEvent(12)
     end
 end

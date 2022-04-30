@@ -13,10 +13,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getCurrentMission(xi.mission.log_id.COP) > xi.mission.id.cop.THE_WARRIOR_S_PATH then
+    if player:getCurrentMission(xi.mission.log_id.COP) > xi.mission.id.cop.THE_WARRIORS_PATH then
         player:startEvent(12)
-    elseif player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.CALM_BEFORE_THE_STORM and player:hasKeyItem(xi.ki.LETTERS_FROM_ULMIA_AND_PRISHE) then
-        player:startEvent(17)
     end
 end
 
@@ -26,13 +24,6 @@ end
 entity.onEventFinish = function(player, csid, option)
     if csid == 12 and option == 1 then
         xi.teleport.to(player, xi.teleport.id.SEA)
-    elseif csid == 17 then
-        player:completeMission(xi.mission.log_id.COP, xi.mission.id.cop.CALM_BEFORE_THE_STORM)
-        player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_WARRIOR_S_PATH)
-        player:setCharVar("PromathiaStatus", 0)
-        player:setCharVar("COP_Dalham_KILL", 0)
-        player:setCharVar("COP_Boggelmann_KILL", 0)
-        player:setCharVar("Cryptonberry_Executor_KILL", 0)
     end
 end
 
