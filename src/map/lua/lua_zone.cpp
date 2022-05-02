@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -256,6 +256,26 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
     }
     else if (auto* PMob = dynamic_cast<CMobEntity*>(PEntity))
     {
+        auto onMobSpawn = table["onMobSpawn"].get_or<sol::function>(sol::lua_nil);
+        if (onMobSpawn.valid())
+        {
+            cacheEntry["onMobSpawn"] = onMobSpawn;
+        }
+        else
+        {
+            cacheEntry["onMobSpawn"] = []() {}; // Empty func
+        }
+
+        auto onMobFight = table["onMobFight"].get_or<sol::function>(sol::lua_nil);
+        if (onMobFight.valid())
+        {
+            cacheEntry["onMobFight"] = onMobFight;
+        }
+        else
+        {
+            cacheEntry["onMobFight"] = []() {}; // Empty func
+        }
+
         auto onMobDeath = table["onMobDeath"].get_or<sol::function>(sol::lua_nil);
         if (onMobDeath.valid())
         {
