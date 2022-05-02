@@ -42,10 +42,13 @@ void CNotorietyContainer::add(CBattleEntity* entity)
 void CNotorietyContainer::remove(CBattleEntity* entity)
 {
     TracyZoneScoped;
-    auto entity_itr = m_Lookup.find(entity);
-    if (entity_itr != m_Lookup.end())
+    if (entity)
     {
-        m_Lookup.erase(*entity_itr);
+        auto entity_itr = m_Lookup.find(entity);
+        if (entity_itr != m_Lookup.end())
+        {
+            m_Lookup.erase(*entity_itr);
+        }
     }
 }
 
