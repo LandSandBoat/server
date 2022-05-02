@@ -1,7 +1,7 @@
 -- This file is called by login_campaign.lua and require()'s no file, it should not be require()'d by any
 -- other lua scripts, which should instead require() login_campaign.lua directly.
 
--- ONLY 19 ITEMS PER PRICE BRACKET POSSIBLE!!
+-- ONLY 19 ITEMS PER PRICE BRACKET POSSIBLE!! (20 will overwrite the ingame back button.)
 
 -- Cycles: After 1 month the next items need to get cycled in. Comment out and uncomment items appropriately.
 
@@ -62,26 +62,26 @@ local prizes =
         {
         -- COSTUMES
 			
-			-- Cycle #1
-			-- 10429, -- Moogle Masque
-			-- 10250, -- Moogle Suit
-			-- 27765, -- Chocobo Masque
-			-- 27911, -- Chocobo Suit
-			-- 26798, -- Behemoth Masque
-			-- 26954, -- Behemoth Suit
-			-- 27715, -- Goblin Masque
-			-- 27866, -- Goblin Suit
-			-- 26705, -- Mandragora Masque
-			-- 27854, -- Mandragora Suit
-			-- 26956, -- Poroggo Coat
-			-- 25711, -- Botulus Suit
-			-- 25632, -- Carbie Cap
-			-- 10384, -- Cumulus Masque
-			-- 27859, -- Kengyu Happi 
+			-- Cycle #1/#6
+			10429, -- Moogle Masque
+			10250, -- Moogle Suit
+			27765, -- Chocobo Masque
+			27911, -- Chocobo Suit
+			26798, -- Behemoth Masque
+			26954, -- Behemoth Suit
+			27715, -- Goblin Masque
+			27866, -- Goblin Suit
+			26705, -- Mandragora Masque
+			27854, -- Mandragora Suit
+			26956, -- Poroggo Coat
+			25711, -- Botulus Suit
+			25632, -- Carbie Cap
+			10384, -- Cumulus Masque
+			27859, -- Kengyu Happi 
 			-- 28149, -- Kengyu Hanmomohiki 	-- BROKEN
 			-- 27860, -- Shokujo Happi 			-- BROKEN
 			-- 28150, -- Shokujo Hanmomohiki	-- BROKEN
-			-- 26889, -- Heart Apron
+			26889, -- Heart Apron
 			
 			-- Cycle #2
             -- 25606, -- Agent Hood
@@ -147,27 +147,27 @@ local prizes =
 			-- 26517, -- Shadow Lord Shirt
             
 			-- Cycle #5
-			26520, -- Akitu Shirt
-			23753, -- Sandogasa
-			23790, -- Adenium Masque
-			23791, -- Adenium Suit
-			27716, -- Green Moogle Masque
-			27867, -- Green Moogle Suit
-			25910, -- Cait Sith Subligar
-			25648, -- Curmudgeon's Helmet
-			26729, -- Corolla
-			25677, -- Arthro's Cap
-			25670, -- Rarab Cap
-			23731, -- Royal Chocobo Beret
-			25672, -- Snoll Masque
-			25604, -- Buffalo Cap
-			26693, -- Morbol Cap
-			10875, -- Snowman Cap
-			26703, -- Lycopodium Masque
-			10446, -- Ahriman Cap
-			27757, -- Bomb Masque
+			-- 26520, -- Akitu Shirt
+			-- 23753, -- Sandogasa
+			-- 23790, -- Adenium Masque
+			-- 23791, -- Adenium Suit
+			-- 27716, -- Green Moogle Masque
+			-- 27867, -- Green Moogle Suit
+			-- 25910, -- Cait Sith Subligar
+			-- 25648, -- Curmudgeon's Helmet
+			-- 26729, -- Corolla
+			-- 25677, -- Arthro's Cap
+			-- 25670, -- Rarab Cap
+			-- 23731, -- Royal Chocobo Beret
+			-- 25672, -- Snoll Masque
+			-- 25604, -- Buffalo Cap
+			-- 26693, -- Morbol Cap
+			-- 10875, -- Snowman Cap
+			-- 26703, -- Lycopodium Masque
+			-- 10446, -- Ahriman Cap
+			-- 27757, -- Bomb Masque
 			
-			-- Cycle #6
+			-- Cycle #?
 			-- TODO: Add rest of Storage Slip 11
 			-- 25638, -- Pachypodium Masque
 			-- 25586, -- Kakai Cap
@@ -183,46 +183,46 @@ local prizes =
         -- WEAPON COSTUMES
 		   
 		   -- Cycle #1/#5
-		   20514, -- Aphelion Knuckles
-		   20578, -- Wind Knife
-		   20694, -- Fermion Sword
-		   20665, -- Kam'lanaut's Sword
-		   26412, -- Kam'lanaut's Shield
-		   28661, -- Glinting Shield
-		   21741, -- Demonic Axe
-		   21693, -- Irradiance Blade
-		   21745, -- Dullahan Axe
+		   -- 20514, -- Aphelion Knuckles
+		   -- 20578, -- Wind Knife
+		   -- 20694, -- Fermion Sword
+		   -- 20665, -- Kam'lanaut's Sword
+		   -- 26412, -- Kam'lanaut's Shield
+		   -- 28661, -- Glinting Shield
+		   -- 21741, -- Demonic Axe
+		   -- 21693, -- Irradiance Blade
+		   -- 21745, -- Dullahan Axe
 		   -- 21977, -- Mutsonokami		-- BROKEN
-		   21862, -- Mizukage Naginata
-		   22005, -- Burrower's Wand
-		   22019, -- Jingly Rod
-		   22067, -- Levin
-		   21820, -- Lost Sickle
-		   22283, -- Marvelous Cheer
-		   22124, -- Artemis's Bow
-		   22282, -- Grudge
-		   22153, -- Silver Gun
+		   -- 21862, -- Mizukage Naginata
+		   -- 22005, -- Burrower's Wand
+		   -- 22019, -- Jingly Rod
+		   -- 22067, -- Levin
+		   -- 21820, -- Lost Sickle
+		   -- 22283, -- Marvelous Cheer
+		   -- 22124, -- Artemis's Bow
+		   -- 22282, -- Grudge
+		   -- 22153, -- Silver Gun
 		   
-		   -- Cycle #2
-		   -- 20532, -- Worm Feelers
-		   -- 20577, -- Chicken Knife II
-		   -- 20713, -- Excalipoor
-		   -- 28652, -- Hatchling Shield
-		   -- 27631, -- Cait Sith Guard
-		   -- 27625, -- Morbol Shield
-		   -- 28655, -- Slime Shield
-		   -- 21770, -- Helgoland
-		   -- 21658, -- Brave Blade II
-		   -- 18441, -- Shinai
-		   -- 21967, -- Melon Slicer
-		   -- 21863, -- Tzee Xicu's Blade
-		   -- 18102, -- Pitchfork
-		   -- 22017, -- Seika Uchiwa
-		   -- 21107, -- Kyuka Uchiwa
-		   -- 18864, -- Dream Bell +1
-		   -- 22072, -- Lamia Staff
-		   -- 22069, -- Hapy Staff
-		   -- 20909, -- Hoe
+		   -- Cycle #2/#6
+		   20532, -- Worm Feelers
+		   20577, -- Chicken Knife II
+		   20713, -- Excalipoor
+		   28652, -- Hatchling Shield
+		   27631, -- Cait Sith Guard
+		   27625, -- Morbol Shield
+		   28655, -- Slime Shield
+		   21770, -- Helgoland
+		   21658, -- Brave Blade II
+		   18441, -- Shinai
+		   21967, -- Melon Slicer
+		   21863, -- Tzee Xicu's Blade
+		   18102, -- Pitchfork
+		   22017, -- Seika Uchiwa
+		   21107, -- Kyuka Uchiwa
+		   18864, -- Dream Bell +1
+		   22072, -- Lamia Staff
+		   22069, -- Hapy Staff
+		   20909, -- Hoe
 
 		   
 		   -- Cycle #3
@@ -447,33 +447,58 @@ local prizes =
 			-- 16316, -- Fourth Schoss
 			-- 15756, -- Fourth Schuhs
 			
-			
 			-- Cycle #5 -- TOAU NM drops/Assault gear
-			11496, -- Fenrir's Crown
-			19235, -- Veuglaire
-			16375, -- Surge Subligar
-			17971, -- Tartaglia
-			16062, -- Amir Puggaree
-			14525, -- Amir Korazin
-			14933, -- Amir Kolluks
-			15604, -- Amir Dirs
-			15688, -- Amir Boots 
-			16069, -- Pln. Qalansuwa
-			14530, -- Pln. Khazagand
-			14940, -- Pln. Dastanas
-			15609, -- Pln. Seraweels
-			15695, -- Pln. Crackows 
-			16064, -- Yigit Turban
-			14527, -- Yigit Gomlek
-			14935, -- Yigit Gages
-			15606, -- Yigit Seraweels
-			15690, -- Yigit Crackows
+			-- 11496, -- Fenrir's Crown
+			-- 19235, -- Veuglaire
+			-- 16375, -- Surge Subligar
+			-- 17971, -- Tartaglia
+			-- 16062, -- Amir Puggaree
+			-- 14525, -- Amir Korazin
+			-- 14933, -- Amir Kolluks
+			-- 15604, -- Amir Dirs
+			-- 15688, -- Amir Boots 
+			-- 16069, -- Pln. Qalansuwa
+			-- 14530, -- Pln. Khazagand
+			-- 14940, -- Pln. Dastanas
+			-- 15609, -- Pln. Seraweels
+			-- 15695, -- Pln. Crackows 
+			-- 16064, -- Yigit Turban
+			-- 14527, -- Yigit Gomlek
+			-- 14935, -- Yigit Gages
+			-- 15606, -- Yigit Seraweels
+			-- 15690, -- Yigit Crackows
+			
+			-- Cycle #6 -- Apollyon AF+1 items
+			1931, -- Argyro Rivet (WAR)
+			1933, -- Ancient Brass (MNK)
+			1935, -- Benedict Yarn (WHM)
+			1937, -- Diabolic Yarn (BLM)
+			1939, -- Cardinal Cloth (RDM)
+			1941, -- Light Filament (THF)
+			1943, -- White Rivet (PLD)
+			1945, -- Black Rivet (DRK)
+			1947, -- Fetid Lanolin (BST)
+			1949, -- Brown Doeskin (BRD)
+			1951, -- Charcoal Cotton (RNG)
+			1953, -- Kurogane (SAM)
+			1955, -- Ebony Lacquer (NIN)
+			1957, -- Blue Rivet (DRG)
+			1959, -- Astral Leather (SMN)
+			2657, -- Flameshun Cloth (BLU)
+			2659, -- Canvas Toile (COR)
+			2661, -- Corduroy Cloth (PUP)
+			2715, -- Gold Stud (DNC)
+			2717, -- Electrum Stud (SCH)
+			
+			-- Cycle #? -- Treasure Casket gear
+			
+			-- Cycle #? -- CoP subligars
         },
     },
 
     [29] =
     {
-        ["price"] = 3000,
+        ["price"] = 1500,
         ["items"] =
         {
         -- GAMECHANGERS
@@ -549,25 +574,50 @@ local prizes =
 			-- 25679, -- White Rarab Cap +1 (TH+1)
 			
 			-- Cycle #5 -- WOTG Nations
-			11636, -- R.K. Sigil Ring
-			15844, -- Patronus Ring
-			15966, -- Silver Fox Earring
-			15967, -- Temple Earring
-			15934, -- Crimson Belt
-			19041, -- Rose Strap
-			11545, -- Fourth Mantle
-			16291, -- Shield Collar
-			18734, -- Sturm's Report
-			18735, -- Sonia's Plectrum
-			16292, -- Bull Necklace
-			16258, -- Arrestor Mantle
-			11588, -- Mrc.Mjr. Charm
-			15935, -- Capricornian Rope
-			15936, -- Earthy Belt 
-			16293, -- Cougar Pendant
-			16294, -- Crocodile Collar
-			19042, -- Ariesian Grip
+			-- 11636, -- R.K. Sigil Ring
+			-- 15844, -- Patronus Ring
+			-- 15966, -- Silver Fox Earring
+			-- 15967, -- Temple Earring
+			-- 15934, -- Crimson Belt
+			-- 19041, -- Rose Strap
+			-- 11545, -- Fourth Mantle
+			-- 16291, -- Shield Collar
+			-- 18734, -- Sturm's Report
+			-- 18735, -- Sonia's Plectrum
+			-- 16292, -- Bull Necklace
+			-- 16258, -- Arrestor Mantle
+			-- 11588, -- Mrc.Mjr. Charm
+			-- 15935, -- Capricornian Rope
+			-- 15936, -- Earthy Belt 
+			-- 16293, -- Cougar Pendant
+			-- 16294, -- Crocodile Collar
+			-- 19042, -- Ariesian Grip
 			
+			-- Cycle #6 -- Temenos AF+1 items (Change point cost to 1500 for this cycle only!)
+			1930, -- Ecarlate Cloth (WAR)
+			1932, -- Utopian Gold Thread (MNK)
+			1934, -- Benedict Silk (WHM)
+			1936, -- Diabolic Silk (BLM)
+			1938, -- Ruby Silk Thread (RDM)
+			1940, -- Supple Skin (THF)
+			1942, -- Snowy Cermet (PLD)
+			1944, -- Dark Orichalcum (DRK)
+			1946, -- Smalt Leather (BST)
+			1948, -- Coiled Yarn (BRD)
+			1950, -- Chameleon Yarn (RNG)
+			1952, -- Scarlet Odoshi (SAM)
+			1954, -- Plaited Cord (NIN)
+			1956, -- Cobalt Mythril Sheet (DRG)
+			1958, -- Glittering Yarn (SMN)
+			2656, -- Luminian Thread (BLU)
+			2658, -- Silkworm Thread (COR)
+			2660, -- Pantin Wire (PUP)
+			2714, -- Filet Lace (DNC)
+			2716, -- Brilliantine (SCH)
+			
+			-- Cycle #? -- MMM gear
+			
+			-- Cycle #? -- KSNM Latent Weapons
 			
 			---------------------------------------------------------------------------
 			-- Cycle #? -- Limbus gear

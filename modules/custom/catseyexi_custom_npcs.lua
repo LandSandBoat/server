@@ -792,7 +792,7 @@ m:addOverride("xi.zones.Southern_San_dOria.Zone.onInitialize", function(zone)
             local storedCrystals = player:getCharVar("CrystalCruncher")
             local eligibleCrystals = math.floor(storedCrystals / 3 )
             
-			player:PrintToPlayer("Hello, I'll convert any crystals at a ratio of 3:1. If you trade any other items")
+			player:PrintToPlayer("Crystal Crunch: I convert crystals ONLY at a ratio of 3 to 1. If you trade me anything else, it will be lost.", 0xD)
 			
             if storedCrystals > 2 then
                 player:PrintToPlayer(string.format("You can receive up to %s crystals with your current balance of %s crystals.", eligibleCrystals, storedCrystals))
@@ -927,7 +927,7 @@ m:addOverride("xi.zones.Northern_San_dOria.Zone.onInitialize", function(zone)
             local storedCrystals = player:getCharVar("CrystalCruncher")
             local eligibleCrystals = math.floor(storedCrystals / 3 )
             
-			player:PrintToPlayer("Hello, I'll convert any crystals at a ratio of 3:1. If you trade any other items")
+			player:PrintToPlayer("Crystal Crunch: I convert crystals ONLY at a ratio of 3 to 1. If you trade me anything else, it will be lost.", 0xD)
 
             if storedCrystals > 2 then
                 player:PrintToPlayer(string.format("You can receive up to %s crystals with your current balance of %s crystals.", eligibleCrystals, storedCrystals))
@@ -1062,7 +1062,7 @@ m:addOverride("xi.zones.Bastok_Mines.Zone.onInitialize", function(zone)
             local storedCrystals = player:getCharVar("CrystalCruncher")
             local eligibleCrystals = math.floor(storedCrystals / 3 )
             
-			player:PrintToPlayer("Hello, I'll convert any crystals at a ratio of 3:1. If you trade any other items")
+			player:PrintToPlayer("Crystal Crunch: I convert crystals ONLY at a ratio of 3 to 1. If you trade me anything else, it will be lost.", 0xD)
 
             if storedCrystals > 2 then
                 player:PrintToPlayer(string.format("You can receive up to %s crystals with your current balance of %s crystals.", eligibleCrystals, storedCrystals))
@@ -1197,7 +1197,7 @@ m:addOverride("xi.zones.Bastok_Markets.Zone.onInitialize", function(zone)
             local storedCrystals = player:getCharVar("CrystalCruncher")
             local eligibleCrystals = math.floor(storedCrystals / 3 )
             
-			player:PrintToPlayer("Hello, I'll convert any crystals at a ratio of 3:1. If you trade any other items")
+			player:PrintToPlayer("Crystal Crunch: I convert crystals ONLY at a ratio of 3 to 1. If you trade me anything else, it will be lost.", 0xD)
 
             if storedCrystals > 2 then
                 player:PrintToPlayer(string.format("You can receive up to %s crystals with your current balance of %s crystals.", eligibleCrystals, storedCrystals))
@@ -1332,7 +1332,7 @@ m:addOverride("xi.zones.Windurst_Waters.Zone.onInitialize", function(zone)
             local storedCrystals = player:getCharVar("CrystalCruncher")
             local eligibleCrystals = math.floor(storedCrystals / 3 )
             
-			player:PrintToPlayer("Hello, I'll convert any crystals at a ratio of 3:1. If you trade any other items")
+			player:PrintToPlayer("Crystal Crunch: I convert crystals ONLY at a ratio of 3 to 1. If you trade me anything else, it will be lost.", 0xD)
 
             if storedCrystals > 2 then
                 player:PrintToPlayer(string.format("You can receive up to %s crystals with your current balance of %s crystals.", eligibleCrystals, storedCrystals))
@@ -1467,7 +1467,7 @@ m:addOverride("xi.zones.Windurst_Woods.Zone.onInitialize", function(zone)
             local storedCrystals = player:getCharVar("CrystalCruncher")
             local eligibleCrystals = math.floor(storedCrystals / 3 )
             
-			player:PrintToPlayer("Hello, I'll convert any crystals at a ratio of 3:1. If you trade any other items")
+			player:PrintToPlayer("Crystal Crunch: I convert crystals ONLY at a ratio of 3 to 1. If you trade me anything else, it will be lost.", 0xD)
 
             if storedCrystals > 2 then
                 player:PrintToPlayer(string.format("You can receive up to %s crystals with your current balance of %s crystals.", eligibleCrystals, storedCrystals))
