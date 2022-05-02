@@ -31,6 +31,38 @@
 #include <cstdlib>
 #include <cstring>
 #include <string>
+#include <thread>
+
+#include <concurrentqueue.h>
+
+moodycamel::ConcurrentQueue<std::function<void(SqlConnection*)>> asyncQueue;
+std::atomic<bool> asyncRunning;
+std::unique_ptr<std::thread> asyncThread;
+
+void AsyncThreadBody(const char* user, const char* passwd, const char* host, uint16 port, const char* db)
+{
+    SqlConnection con(user, passwd, host, port, db);
+    while (asyncRunning)
+    {
+        con.HandleAsync();
+    }
+}
+
+void SqlConnection::Async(std::function<void(SqlConnection*)>&& func)
+{
+    TracyZoneScoped;
+    asyncQueue.enqueue(std::move(func));
+}
+
+void SqlConnection::HandleAsync()
+{
+    TracyZoneScoped;
+    std::function<void(SqlConnection*)> func;
+    while (asyncQueue.try_dequeue(func))
+    {
+        func(this);
+    }
+}
 
 SqlConnection::SqlConnection(const char* user, const char* passwd, const char* host, uint16 port, const char* db)
 {
@@ -63,6 +95,13 @@ SqlConnection::SqlConnection(const char* user, const char* passwd, const char* h
     InitPreparedStatements();
 
     SetupKeepalive();
+
+    if (!asyncThread)
+    {
+        asyncRunning = true;
+        asyncThread = std::make_unique<std::thread>(
+            AsyncThreadBody, m_User, m_Passwd, m_Host, m_Port, m_Db);
+    }
 }
 
 /************************************************************************
@@ -74,6 +113,7 @@ SqlConnection::SqlConnection(const char* user, const char* passwd, const char* h
 SqlConnection::~SqlConnection()
 {
     TracyZoneScoped;
+    asyncRunning = false;
     if (self)
     {
         mysql_close(&self->handle);
