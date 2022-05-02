@@ -28,7 +28,7 @@ CREATE TABLE `zone_settings` (
   `battlemulti` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `restriction` tinyint(2) unsigned NOT NULL DEFAULT '0',
   `tax` float(5,2) unsigned NOT NULL DEFAULT '0.00',
-  `misc` smallint(5) unsigned NOT NULL DEFAULT '0',
+  `misc` smallint(5) unsigned NOT NULL DEFAULT '0', -- ZONEMISC in zone.h
   PRIMARY KEY (`zoneid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=20 PACK_KEYS=1 CHECKSUM=1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -249,7 +249,7 @@ INSERT INTO `zone_settings` VALUES (206,4,'127.0.0.1',54230,'QuBia_Arena',0,0,12
 INSERT INTO `zone_settings` VALUES (207,4,'127.0.0.1',54230,'Cloister_of_Flames',0,0,0,0,0,0.00,2201);
 INSERT INTO `zone_settings` VALUES (208,3,'127.0.0.1',54230,'Quicksand_Caves',0,0,115,192,0,0.00,2201);
 INSERT INTO `zone_settings` VALUES (209,4,'127.0.0.1',54230,'Cloister_of_Tremors',0,0,0,0,0,0.00,2201);
-INSERT INTO `zone_settings` VALUES (210,0,'127.0.0.1',54230,'GM_Home',0,0,0,0,0,0.00,0); -- NPC debug zone, where GMs idle on retail.
+INSERT INTO `zone_settings` VALUES (210,0,'127.0.0.1',54230,'GM_Home',0,0,0,0,0,0.00,4095); -- NPC debug zone, where GMs idle on retail.
 INSERT INTO `zone_settings` VALUES (211,4,'127.0.0.1',54230,'Cloister_of_Tides',0,0,0,0,0,0.00,2201);
 INSERT INTO `zone_settings` VALUES (212,3,'127.0.0.1',54230,'Gustav_Tunnel',0,0,115,192,0,0.00,2201);
 INSERT INTO `zone_settings` VALUES (213,3,'127.0.0.1',54230,'Labyrinth_of_Onzozo',0,0,115,192,0,0.00,2201);

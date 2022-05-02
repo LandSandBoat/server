@@ -36,7 +36,14 @@ if(TRACY_ENABLE)
 
     add_library(tracy_client ${CMAKE_SOURCE_DIR}/ext/tracy/tracy-0.8.1/TracyClient.cpp)
     target_include_directories(tracy_client PUBLIC ${CMAKE_SOURCE_DIR}/ext/tracy/tracy-0.8.1/)
-    target_compile_definitions(tracy_client PUBLIC TRACY_ENABLE TRACY_ON_DEMAND TRACY_NO_EXIT TRACY_NO_BROADCAST TRACY_TIMER_QPC)
+    target_compile_definitions(tracy_client
+        PUBLIC
+            TRACY_ENABLE
+            TRACY_ON_DEMAND
+            TRACY_NO_EXIT
+            TRACY_NO_BROADCAST
+            TRACY_NO_SYSTEM_TRACING
+            TRACY_TIMER_QPC)
 
     if(MSVC AND CMAKE_SIZEOF_VOID_P EQUAL 4)
         set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /LARGEADDRESSAWARE")
