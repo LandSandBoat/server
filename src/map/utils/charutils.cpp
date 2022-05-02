@@ -5940,15 +5940,24 @@ namespace charutils
             return;
         }
 
+        // clang-format off
+        auto id = PChar->id;
         if (value == 0)
         {
-            sql->Query("DELETE FROM char_vars WHERE charid = %u AND varname = '%s' LIMIT 1;", PChar->id, var);
+            sql->Async([=](SqlConnection* sql)
+            {
+                sql->Query("DELETE FROM char_vars WHERE charid = %u AND varname = '%s' LIMIT 1;", id, var);
+            });
         }
         else
         {
             const char* fmtQuery = "INSERT INTO char_vars SET charid = %u, varname = '%s', value = %i ON DUPLICATE KEY UPDATE value = %i;";
-            sql->Query(fmtQuery, PChar->id, var, value, value);
+            sql->Async([=](SqlConnection* sql)
+            {
+                sql->Query(fmtQuery, id, var, value, value);
+            });
         }
+        // clang-format on
     }
 
     void ClearCharVarsWithPrefix(CCharEntity* PChar, std::string prefix)
