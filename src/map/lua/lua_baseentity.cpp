@@ -6618,6 +6618,13 @@ void CLuaBaseEntity::addKeyItem(uint16 keyItemID)
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
     uint8 table = keyItemID >> 9;
 
+    if (table >= MAX_KEYS_TABLE)
+    {
+        // Bail out if an invalid keyitem is being added
+        ShowWarning("CLuaBaseEntity::addKeyItem - Attempting to add invalid key item: %d", keyItemID);
+        return;
+    }
+
     charutils::addKeyItem(PChar, keyItemID);
     PChar->pushPacket(new CKeyItemsPacket(PChar, static_cast<KEYS_TABLE>(table)));
 
@@ -6655,9 +6662,17 @@ void CLuaBaseEntity::delKeyItem(uint16 keyItemID)
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+    uint8 table = keyItemID >> 9;
+
+    if (table >= MAX_KEYS_TABLE)
+    {
+        // Bail out if an invalid keyitem is being added
+        ShowWarning("CLuaBaseEntity::delKeyItem - Attempting to delete invalid key item: %d", keyItemID);
+        return;
+    }
 
     charutils::delKeyItem(PChar, keyItemID);
-    PChar->pushPacket(new CKeyItemsPacket(PChar, static_cast<KEYS_TABLE>(keyItemID >> 9)));
+    PChar->pushPacket(new CKeyItemsPacket(PChar, static_cast<KEYS_TABLE>(table)));
 
     charutils::SaveKeyItems(PChar);
 }
@@ -6688,9 +6703,17 @@ void CLuaBaseEntity::unseenKeyItem(uint16 keyItemID)
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+    uint8 table = keyItemID >> 9;
+
+    if (table >= MAX_KEYS_TABLE)
+    {
+        // Bail out if an invalid keyitem is being added
+        ShowWarning("CLuaBaseEntity::unseenKeyItem - Attempting to unsee invalid key item: %d", keyItemID);
+        return;
+    }
 
     charutils::unseenKeyItem(PChar, keyItemID);
-    PChar->pushPacket(new CKeyItemsPacket(PChar, static_cast<KEYS_TABLE>(keyItemID >> 9)));
+    PChar->pushPacket(new CKeyItemsPacket(PChar, static_cast<KEYS_TABLE>(table)));
 
     charutils::SaveKeyItems(PChar);
 }

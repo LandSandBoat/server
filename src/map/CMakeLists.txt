@@ -133,6 +133,9 @@ endif()
 set(module_include_dirs "")
 file(STRINGS ${CMAKE_SOURCE_DIR}/modules/init.txt INIT_FILE_ENTRIES REGEX "^[^#\n].*")
 foreach(entry ${INIT_FILE_ENTRIES})
+    if (${entry} STREQUAL "")
+        continue()
+    endif()
     if (IS_DIRECTORY "${CMAKE_SOURCE_DIR}/modules/${entry}")
         file(GLOB_RECURSE module_files
             "${CMAKE_SOURCE_DIR}/modules/${entry}/*.cpp"

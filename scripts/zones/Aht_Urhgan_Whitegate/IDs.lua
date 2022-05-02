@@ -20,6 +20,7 @@ zones[xi.zone.AHT_URHGAN_WHITEGATE] =
         CARRIED_OVER_POINTS           = 838,   -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY       = 839,   -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER                  = 840,   -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
+        UNABLE_TO_PROGRESS_ROV        = 884,   -- You are unable to make further progress in Rhapsodies of Vana'diel due to an event occurring in the [Chains of Promathia/Treasures of Aht Urhgan/Wings of the Goddess/Seekers of Adoulin/Rise of the Zilart] missions.
         FISHING_MESSAGE_OFFSET        = 891,   -- You can't fish here.
         MOG_LOCKER_OFFSET             = 1235,  -- Your Mog Locker lease is valid until <timestamp>, kupo.
         HOMEPOINT_SET                 = 1376,  -- Home point set!

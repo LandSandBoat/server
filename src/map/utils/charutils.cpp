@@ -3134,30 +3134,65 @@ namespace charutils
     bool hasKeyItem(CCharEntity* PChar, uint16 KeyItemID)
     {
         auto table = KeyItemID / 512;
+
+        if (table >= MAX_KEYS_TABLE)
+        {
+            ShowWarning("Attempt to check for keyItem out of range (%d)!", KeyItemID);
+            return false;
+        }
+
         return PChar->keys.tables[table].keyList[KeyItemID % 512];
     }
 
     bool seenKeyItem(CCharEntity* PChar, uint16 KeyItemID)
     {
         auto table = KeyItemID / 512;
+
+        if (table >= MAX_KEYS_TABLE)
+        {
+            ShowWarning("Attempt to see for keyItem out of range (%d)!", KeyItemID);
+            return false;
+        }
+
         return PChar->keys.tables[table].seenList[KeyItemID % 512];
     }
 
     void unseenKeyItem(CCharEntity* PChar, uint16 KeyItemID)
     {
-        auto table                                          = KeyItemID / 512;
+        auto table = KeyItemID / 512;
+
+        if (table >= MAX_KEYS_TABLE)
+        {
+            ShowWarning("Attempt to unsee for keyItem out of range (%d)!", KeyItemID);
+            return;
+        }
+
         PChar->keys.tables[table].seenList[KeyItemID % 512] = false;
     }
 
     void addKeyItem(CCharEntity* PChar, uint16 KeyItemID)
     {
-        auto table                                         = KeyItemID / 512;
+        auto table = KeyItemID / 512;
+
+        if (table >= MAX_KEYS_TABLE)
+        {
+            ShowWarning("Attempt to add for keyItem out of range (%d)!", KeyItemID);
+            return;
+        }
+
         PChar->keys.tables[table].keyList[KeyItemID % 512] = true;
     }
 
     void delKeyItem(CCharEntity* PChar, uint16 KeyItemID)
     {
-        auto table                                         = KeyItemID / 512;
+        auto table = KeyItemID / 512;
+
+        if (table >= MAX_KEYS_TABLE)
+        {
+            ShowWarning("Attempt to delete keyItem out of range (%d)!", KeyItemID);
+            return;
+        }
+
         PChar->keys.tables[table].keyList[KeyItemID % 512] = false;
     }
 
@@ -5869,6 +5904,8 @@ namespace charutils
     int32 GetCharVar(CCharEntity* PChar, const char* var)
     {
         TracyZoneScoped;
+        TracyZoneString(PChar->name);
+        TracyZoneCString(var);
 
         if (PChar == nullptr)
         {
@@ -5894,6 +5931,8 @@ namespace charutils
     void SetCharVar(CCharEntity* PChar, const char* var, int32 value)
     {
         TracyZoneScoped;
+        TracyZoneString(PChar->name);
+        TracyZoneString(fmt::format("{} -> {}", var, value));
         
         if (PChar == nullptr)
         {
@@ -5901,15 +5940,24 @@ namespace charutils
             return;
         }
 
+        // clang-format off
+        auto id = PChar->id;
         if (value == 0)
         {
-            sql->Query("DELETE FROM char_vars WHERE charid = %u AND varname = '%s' LIMIT 1;", PChar->id, var);
+            sql->Async([=](SqlConnection* sql)
+            {
+                sql->Query("DELETE FROM char_vars WHERE charid = %u AND varname = '%s' LIMIT 1;", id, var);
+            });
         }
         else
         {
             const char* fmtQuery = "INSERT INTO char_vars SET charid = %u, varname = '%s', value = %i ON DUPLICATE KEY UPDATE value = %i;";
-            sql->Query(fmtQuery, PChar->id, var, value, value);
+            sql->Async([=](SqlConnection* sql)
+            {
+                sql->Query(fmtQuery, id, var, value, value);
+            });
         }
+        // clang-format on
     }
 
     void ClearCharVarsWithPrefix(CCharEntity* PChar, std::string prefix)

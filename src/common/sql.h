@@ -181,6 +181,10 @@ public:
     bool TransactionRollback();
 
     std::shared_ptr<SqlPreparedStatement> GetPreparedStatement(std::string const& name);
+
+    void Async(std::function<void(SqlConnection*)>&& func);
+    void HandleAsync();
+
 private:
     Sql_t*      self;
     const char* m_User;
