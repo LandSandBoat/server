@@ -5901,11 +5901,11 @@ namespace charutils
         return false;
     }
 
-    int32 GetCharVar(CCharEntity* PChar, const char* var)
+    int32 GetCharVar(CCharEntity* PChar, std::string const& var)
     {
         TracyZoneScoped;
         TracyZoneString(PChar->name);
-        TracyZoneCString(var);
+        TracyZoneString(var);
 
         if (PChar == nullptr)
         {
@@ -5915,7 +5915,7 @@ namespace charutils
 
         const char* fmtQuery = "SELECT value FROM char_vars WHERE charid = %u AND varname = '%s' LIMIT 1;";
 
-        int32 ret = sql->Query(fmtQuery, PChar->id, var);
+        int32 ret = sql->Query(fmtQuery, PChar->id, var.c_str());
 
         if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
         {
@@ -5928,7 +5928,7 @@ namespace charutils
         return 0;
     }
 
-    void SetCharVar(CCharEntity* PChar, const char* var, int32 value)
+    void SetCharVar(CCharEntity* PChar, std::string const& var, int32 value)
     {
         TracyZoneScoped;
         TracyZoneString(PChar->name);
@@ -5940,24 +5940,18 @@ namespace charutils
             return;
         }
 
-        // clang-format off
-        auto id = PChar->id;
         if (value == 0)
         {
-            sql->Async([=](SqlConnection* sql)
-            {
-                sql->Query("DELETE FROM char_vars WHERE charid = %u AND varname = '%s' LIMIT 1;", id, var);
-            });
+            auto query = fmt::sprintf("DELETE FROM char_vars WHERE charid = %u AND varname = '%s' LIMIT 1;",
+                PChar->id, var);
+            sql->Async(std::move(query));
         }
         else
         {
-            const char* fmtQuery = "INSERT INTO char_vars SET charid = %u, varname = '%s', value = %i ON DUPLICATE KEY UPDATE value = %i;";
-            sql->Async([=](SqlConnection* sql)
-            {
-                sql->Query(fmtQuery, id, var, value, value);
-            });
+            auto query = fmt::sprintf("INSERT INTO char_vars SET charid = %u, varname = '%s', value = %i ON DUPLICATE KEY UPDATE value = %i;",
+                PChar->id, var.c_str(), value, value);
+            sql->Async(std::move(query));
         }
-        // clang-format on
     }
 
     void ClearCharVarsWithPrefix(CCharEntity* PChar, std::string prefix)

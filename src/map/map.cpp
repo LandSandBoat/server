@@ -211,14 +211,9 @@ int32 do_init(int32 argc, char** argv)
                                           map_config.mysql_port,
                                           map_config.mysql_database.c_str());
 
-    // clang-format off
-    sql->Async([&](SqlConnection* sql)
-    {
-        // We clear the session table at server start (temporary solution)
-        sql->Query("DELETE FROM accounts_sessions WHERE IF(%u = 0 AND %u = 0, true, server_addr = %u AND server_port = %u);", map_ip.s_addr, map_port,
-                    map_ip.s_addr, map_port);
-    });
-    // clang-format on
+    auto query = fmt::sprintf("DELETE FROM accounts_sessions WHERE IF(%u = 0 AND %u = 0, true, server_addr = %u AND server_port = %u);",
+        map_ip.s_addr, map_port, map_ip.s_addr, map_port);
+    sql->Async(std::move(query));
 
     ShowStatus("do_init: zlib is reading");
     zlib_init();
