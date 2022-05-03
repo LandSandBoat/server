@@ -54,12 +54,21 @@ void SqlConnection::Async(std::function<void(SqlConnection*)>&& func)
     asyncQueue.enqueue(std::move(func));
 }
 
-void SqlConnection::HandleAsync()
+void SqlConnection::Async(std::string&& query)
 {
     TracyZoneScoped;
+    Async([query = std::move(query)](SqlConnection* sql)
+    {
+        sql->Query(query.c_str());
+    });
+}
+
+void SqlConnection::HandleAsync()
+{
     std::function<void(SqlConnection*)> func;
     while (asyncQueue.try_dequeue(func))
     {
+        TracyZoneScoped;
         func(this);
     }
 }

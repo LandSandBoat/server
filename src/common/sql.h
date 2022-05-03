@@ -182,7 +182,12 @@ public:
 
     std::shared_ptr<SqlPreparedStatement> GetPreparedStatement(std::string const& name);
 
+    // NOTE: You need to be very careful of the lifetime you pass into these std::functions.
+    //     : You should capture by value and be very careful of capturing pointers.
+    //     : `const char*` is a pointer! If you need to pass that in, construct a std::string
+    //     : and capture that by value!
     void Async(std::function<void(SqlConnection*)>&& func);
+    void Async(std::string&& query);
     void HandleAsync();
 
 private:
