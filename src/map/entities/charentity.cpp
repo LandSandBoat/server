@@ -320,7 +320,9 @@ void CCharEntity::pushPacket(CBasicPacket* packet)
     }
 
     // Nothing to dedupe? Just put the packet in the queue
-    PacketList.push_back(packet);
+    packet->timestamp = hires_clock::now().time_since_epoch().count();
+    packetCounts[packet->getType()]++;
+    PacketList.emplace_back(packet);
 }
 
 void CCharEntity::pushPacket(std::unique_ptr<CBasicPacket> packet)
@@ -330,7 +332,7 @@ void CCharEntity::pushPacket(std::unique_ptr<CBasicPacket> packet)
 
 CBasicPacket* CCharEntity::popPacket()
 {
-    CBasicPacket*               PPacket = PacketList.front();
+    CBasicPacket* PPacket = PacketList.front();
     PacketList.pop_front();
     return PPacket;
 }
@@ -351,6 +353,26 @@ void CCharEntity::erasePackets(uint8 num)
     {
         delete popPacket();
     }
+}
+
+void CCharEntity::cullPacketsOlderThan(std::chrono::seconds sec)
+{
+    using namespace std::chrono;
+    auto now = hires_clock::now().time_since_epoch().count();
+    std::size_t cullCount = 0;
+    while (!PacketList.empty() &&
+        (now - PacketList.front()->timestamp) >= duration_cast<nanoseconds>(sec).count())
+    {
+        erasePackets(1);
+        cullCount++;
+    }
+#ifdef TRACY_ENABLE
+    if (cullCount)
+    {
+        ShowWarning(fmt::format("Culled {} packets older than 5s from {}'s PacketList.",
+            cullCount, name));
+    }
+#endif // TRACY_ENABLE
 }
 
 bool CCharEntity::isNewPlayer() const

@@ -311,6 +311,10 @@ public:
     PacketList_t  getPacketList();                           // returns a COPY of packet list
     size_t        getPacketCount();
     void          erasePackets(uint8 num); // erase num elements from front of packet list
+    void          cullPacketsOlderThan(std::chrono::seconds sec);
+
+    std::unordered_map<uint16, std::size_t> packetCounts;
+
     virtual void  HandleErrorMessage(std::unique_ptr<CBasicPacket>&) override;
 
     CLinkshell*    PLinkshell1; // linkshell, в которой общается персонаж

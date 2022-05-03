@@ -59,6 +59,9 @@ protected:
     bool    owner;
 
 public:
+
+    long long timestamp;
+
     CBasicPacket()
     : data(new uint8[PACKET_SIZE])
     , type(ref<uint8>(0))

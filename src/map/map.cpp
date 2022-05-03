@@ -32,6 +32,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include <cstdlib>
 #include <cstring>
 #include <thread>
+#include <queue>
 
 #include "ability.h"
 #include "job_points.h"
@@ -721,7 +722,7 @@ int32 parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*
 
 /************************************************************************
  *                                                                       *
- *  main function is building big packet                                 *
+ *  main function for building big packet                                *
  *                                                                       *
  ************************************************************************/
 
@@ -741,12 +742,18 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
     ref<uint32>(buff, 8) = (uint32)time(nullptr);
 
     // build a large package, consisting of several small packets
-    CCharEntity*  PChar = map_session_data->PChar;
-    CBasicPacket* PSmallPacket;
+    CCharEntity* PChar = map_session_data->PChar;
+    PChar->cullPacketsOlderThan(5s);
 
-    uint32 PacketSize  = UINT32_MAX;
-    auto   PacketCount = PChar->getPacketCount();
-    uint8  packets     = 0;
+    // NOTE: This is a local copy of PChar's packet list
+    auto packetList = PChar->getPacketList();
+
+    CBasicPacket* PSmallPacket;
+    uint32        PacketSize  = UINT32_MAX;
+    auto          PacketCount = PChar->getPacketCount();
+    uint8         packets     = 0;
+
+    auto StartingPacketCount = PacketCount;
 
 #ifdef LOG_OUTGOING_PACKETS
     PacketGuard::PrintPacketList(PChar);
@@ -756,9 +763,8 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
     {
         do
         {
-            *buffsize               = FFXI_HEADER_SIZE;
-            PacketList_t packetList = PChar->getPacketList();
-            packets                 = 0;
+            *buffsize = FFXI_HEADER_SIZE;
+            packets   = 0;
 
             while (!packetList.empty() && *buffsize + packetList.front()->getSize() < map_config.buffer_size && packets < PacketCount)
             {
@@ -841,6 +847,44 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
     // decrease the size of BuffMaxSize in 4 byte increments until it is removed (manually)
 
     *buffsize = PacketSize + FFXI_HEADER_SIZE;
+
+#ifdef TRACY_ENABLE
+    auto packetsLeft = PChar->getPacketCount();
+    if (packetsLeft > 10)
+    {
+        ShowWarning(fmt::format("Sent {} out of {} packets to {}, backlog: {}.",
+            StartingPacketCount - packetsLeft, StartingPacketCount, PChar->name, packetsLeft));
+
+        std::unordered_map<uint16, std::size_t> backedupPacketCounts;
+        for (auto& packet : packetList)
+        {
+            backedupPacketCounts[packet->getType()]++;
+        }
+
+        auto compare = [](std::pair<uint16, std::size_t> a, std::pair<uint16, std::size_t> b) { return a.second < b.second; };
+        std::priority_queue<std::pair<uint16, std::size_t>, std::vector<std::pair<uint16, std::size_t>>, decltype(compare)> pq(compare);
+        for (auto [type, count] : backedupPacketCounts)
+        {
+            pq.push({ type, count });
+        }
+
+        std::size_t counter = 0;
+        //std::size_t tableWidth = 20;
+        std::string tableString = "\nMost frequent backed up packets:\n";
+        //tableString += fmt::format("|{0:-^{1}}|\n", "", tableWidth);
+        while (!pq.empty() && counter < 5)
+        {
+            counter++;
+            auto entry = pq.top();
+            pq.pop();
+            auto statStr = fmt::format("0x{:03X}: {:3}", entry.first, entry.second);
+            tableString += statStr.c_str();
+            //tableString += fmt::format("|{0: ^{1}|\n", statStr, tableWidth);
+        }
+        //tableString += fmt::format("|{0:-^{1}}|\n", "", tableWidth);
+        //ShowWarning(tableString.c_str());
+    }
+#endif // TRACY_ENABLE
 
     return 0;
 }

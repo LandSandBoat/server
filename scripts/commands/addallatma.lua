@@ -49,7 +49,7 @@ function onTrigger(player, target)
         end
     end
 
-    -- add maps
+    -- add atma ki's
     for _, v in ipairs( keyIds ) do
         targ:addKeyItem(v)
     end

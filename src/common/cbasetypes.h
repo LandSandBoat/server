@@ -61,6 +61,7 @@ using uint64 = std::uint64_t;
 
 using namespace std::literals::chrono_literals;
 using server_clock = std::chrono::system_clock;
+using hires_clock  = std::chrono::high_resolution_clock;
 using time_point   = server_clock::time_point;
 using duration     = server_clock::duration;
 
