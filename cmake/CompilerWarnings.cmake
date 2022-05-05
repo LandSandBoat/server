@@ -49,7 +49,6 @@ function(set_project_warnings project_name)
       -Wnon-virtual-dtor     # warn the user if a class with virtual functions has a non-virtual destructor. This helps
                              # catch hard to track down memory errors
       -Wunused-function      # warn on unused functions
-      -Wunused-private-field # warn on unused private fields
       -Wunused-variable      # warn on unused variables
       -Woverloaded-virtual   # warn if you overload (not override) a virtual function
       -Wnull-dereference     # warn if a null dereference is detected
@@ -59,6 +58,9 @@ function(set_project_warnings project_name)
       -Wno-unused-parameter           # warn on unused function parameters
       -Wno-missing-field-initializers
       -Wno-sign-compare
+
+      # TODO: This is good, but it's Clang only
+      # -Wunused-private-field # warn on unused private fields
 
       # TODO: -pedantic          # warn if non-standard C++ is used
       # TODO: -pedantic-errors   # Error on language extensions

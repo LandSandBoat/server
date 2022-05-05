@@ -187,6 +187,8 @@ target_include_directories(topaz_game
         ${module_include_dirs}
 )
 
+target_precompile_headers(topaz_game PUBLIC pch.h)
+
 if(TRACY_ENABLE)
     target_link_libraries(topaz_game PUBLIC tracy_client)
 endif(TRACY_ENABLE)

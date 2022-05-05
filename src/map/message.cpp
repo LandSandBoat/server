@@ -590,8 +590,7 @@ namespace message
 
     void listen()
     {
-        TracyZoneScoped;
-
+        TracySetThreadName("ZMQ Thread");
         while (true)
         {
             if (!zSocket)
@@ -604,10 +603,12 @@ namespace message
                 chat_message_t message;
                 if (!zSocket->recv(message.type, zmq::recv_flags::none))
                 {
+                    TracyZoneScoped;
                     send_queue();
                     continue;
                 }
 
+                TracyZoneScoped;
                 int more = zSocket->get(zmq::sockopt::rcvmore);
                 if (more)
                 {
