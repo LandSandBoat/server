@@ -17,7 +17,7 @@ set(SOURCES
     detour/DetourStatus.h)
 
 add_library(detour STATIC ${SOURCES})
-target_include_directories(detour PUBLIC SYSTEM
+target_include_directories(detour SYSTEM PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${CMAKE_CURRENT_SOURCE_DIR}/detour
 )

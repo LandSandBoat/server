@@ -12,12 +12,12 @@ file(GLOB_RECURSE ALL_EXT_SOURCE_FILES ext/*.cpp ext/*.h ext/*.hpp)
 file(GLOB_RECURSE ALL_SOURCE_FILES src/*.cpp src/*.h src/*.hpp)
 
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+include(Cache)
 include(CPM)
 include(Platform)
 include(StandardProjectSettings)
 include(CompilerWarnings)
 include(Sanitizers)
-include(ClangFormat)
 include(Tracy)
 include(Valgrind)
 

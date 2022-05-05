@@ -36,15 +36,17 @@ if(TRACY_ENABLE)
                     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/)
     endif()
 
-    # This trips up our project warnings :(
-    message(STATUS "Modifying ${PROFILER_FILE}")
-    file(READ "${PROFILER_FILE}" FILE_CONTENTS)
-    string(REPLACE "        return 0;  // unreacheble branch" "" FILE_CONTENTS "${FILE_CONTENTS}")
-    string(REPLACE "        return 0;  // unreachable branch" "" FILE_CONTENTS "${FILE_CONTENTS}")
-    file(WRITE "${PROFILER_FILE}" "${FILE_CONTENTS}")
+    # This trips up our project warnings on MSVC :(
+    if(MSVC)
+        message(STATUS "Modifying ${PROFILER_FILE}")
+        file(READ "${PROFILER_FILE}" FILE_CONTENTS)
+        string(REPLACE "        return 0;  // unreacheble branch" "" FILE_CONTENTS "${FILE_CONTENTS}")
+        string(REPLACE "        return 0;  // unreachable branch" "" FILE_CONTENTS "${FILE_CONTENTS}")
+        file(WRITE "${PROFILER_FILE}" "${FILE_CONTENTS}")
+    endif(MSVC)
 
     add_library(tracy_client STATIC ${CLIENT_FILE})
-    target_include_directories(tracy_client PUBLIC SYSTEM ${CMAKE_SOURCE_DIR}/ext/tracy/tracy-0.8.1/)
+    target_include_directories(tracy_client SYSTEM PUBLIC ${CMAKE_SOURCE_DIR}/ext/tracy/tracy-0.8.1/)
     target_compile_definitions(tracy_client
         PUBLIC
             TRACY_ENABLE

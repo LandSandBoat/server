@@ -37,6 +37,6 @@ target_sources(sol2_single INTERFACE ${SOL2_SINGLE_HEADER_SOURCES})
 set_target_properties(sol2_single
     PROPERTIES
     EXPORT_NAME sol2::sol2_single)
-target_include_directories(sol2_single INTERFACE SYSTEM
+target_include_directories(sol2_single SYSTEM INTERFACE
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
     $<INSTALL_INTERFACE:sol/single/include>)
