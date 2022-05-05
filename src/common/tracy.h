@@ -8,17 +8,18 @@
 #include "spdlog/fmt/bundled/core.h"
 #include "spdlog/fmt/bundled/format.h"
 
-#define TracyFrameMark         FrameMark
-#define TracyZoneScoped        ZoneScoped
-#define TracyZoneScopedN(n)    ZoneScopedN(n)
-#define TracyNamed(name)       ZoneNamed(name, true)
-#define TracyZoneText(n, l)    ZoneText(n, l)
-#define TracyZoneScopedC(c)    ZoneScopedC(c)
-#define TracyZoneString(str)   ZoneText(str.c_str(), str.size())
-#define TracyZoneCString(cstr) ZoneText(cstr, std::strlen(cstr))
-#define TracyZoneIString(istr) TracyZoneCString(reinterpret_cast<const char*>(istr))
-#define TracyLuaRegister(lua)  tracy::LuaRegister(lua)
-#define TracyMessageStr(str)   TracyMessage(str.c_str(), str.size())
+#define TracyFrameMark          FrameMark
+#define TracyZoneScoped         ZoneScoped
+#define TracyZoneScopedN(n)     ZoneScopedN(n)
+#define TracyNamed(name)        ZoneNamed(name, true)
+#define TracyZoneText(n, l)     ZoneText(n, l)
+#define TracyZoneScopedC(c)     ZoneScopedC(c)
+#define TracyZoneString(str)    ZoneText(str.c_str(), str.size())
+#define TracyZoneCString(cstr)  ZoneText(cstr, std::strlen(cstr))
+#define TracyZoneIString(istr)  TracyZoneCString(reinterpret_cast<const char*>(istr))
+#define TracyLuaRegister(lua)   tracy::LuaRegister(lua)
+#define TracyMessageStr(str)    TracyMessage(str.c_str(), str.size())
+#define TracySetThreadName(str) tracy::SetThreadName(str);
 
 inline std::string Hex8ToString(uint8 hex)
 {
@@ -71,6 +72,7 @@ inline std::string Hex16ToString(uint16 hex)
 #define TracyReportGraphPercent(name, num)
 #define TracyLuaRegister(lua)
 #define TracyMessageStr(str)
+#define TracySetThreadName(str)
 #endif
 
 #endif // _TRACY_H

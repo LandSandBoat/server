@@ -28,7 +28,10 @@ CPMAddPackage(
 set(EXTERNAL_LIBS
     mariadbclient
     spdlog_header_only
+    recast
+    detour
     sol2_single
     efsw
     concurrentqueue
-    PARENT_SCOPE)
+    PARENT_SCOPE
+)

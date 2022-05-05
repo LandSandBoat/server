@@ -238,6 +238,8 @@ void message_server_listen()
 
 void message_server_init()
 {
+    TracySetThreadName("Message Server (ZMQ)");
+
     zmqSql = std::make_unique<SqlConnection>(login_config.mysql_login.c_str(),
                                              login_config.mysql_password.c_str(),
                                              login_config.mysql_host.c_str(),

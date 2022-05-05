@@ -41,6 +41,7 @@ std::unique_ptr<std::thread> asyncThread;
 
 void AsyncThreadBody(const char* user, const char* passwd, const char* host, uint16 port, const char* db)
 {
+    TracySetThreadName("Async DB Thread");
     SqlConnection con(user, passwd, host, port, db);
     while (asyncRunning)
     {
@@ -57,10 +58,18 @@ void SqlConnection::Async(std::function<void(SqlConnection*)>&& func)
 void SqlConnection::Async(std::string&& query)
 {
     TracyZoneScoped;
+    TracyZoneString(query);
+    // clang-format off
     Async([query = std::move(query)](SqlConnection* sql)
     {
-        sql->Query(query.c_str());
+        if (sql->Query(query.c_str()) == SQL_ERROR)
+        {
+            ShowSQL("DB error - %s (%i)",
+                mysql_error(&sql->self->handle), mysql_errno(&sql->self->handle));
+            ShowSQL("SQL: %s", query.c_str());
+        }
     });
+    // clang-format on
 }
 
 void SqlConnection::HandleAsync()
