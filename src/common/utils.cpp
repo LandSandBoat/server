@@ -792,6 +792,7 @@ bool definitelyLessThan(float a, float b)
 
 void crash()
 {
+    int* volatile ptr = 0;
     // cppcheck-suppress nullPointer
-    *((unsigned int*)0) = 0xDEAD;
+    *ptr = 0xDEAD;
 }

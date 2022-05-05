@@ -47,6 +47,9 @@ enum ENTITYUPDATE
  */
 class CBasicPacket
 {
+protected:
+    uint8*  data;
+
 // Mark these members as private, so that they can't be set without using their
 // specialised setters.
 private:
@@ -54,7 +57,6 @@ private:
     uint8& size;
 
 protected:
-    uint8*  data;
     uint16& code;
     bool    owner;
 

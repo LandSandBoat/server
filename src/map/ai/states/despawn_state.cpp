@@ -28,7 +28,6 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 CDespawnState::CDespawnState(CBaseEntity* _PEntity, duration spawnTime)
 : CState(_PEntity, _PEntity->targid)
-, m_spawnTime(spawnTime)
 {
     if (_PEntity->status != STATUS_TYPE::DISAPPEAR && !(static_cast<CMobEntity*>(_PEntity)->m_Behaviour & BEHAVIOUR_NO_DESPAWN))
     {

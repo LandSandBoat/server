@@ -1276,7 +1276,7 @@ bool CAutomatonController::TryEnhance()
     }
 
     // clang-format off
-    PAutomaton->StatusEffectContainer->ForEachEffect([&protect, &shell, &haste, &stoneskin, &phalanx](CStatusEffect* PStatus)
+    PAutomaton->StatusEffectContainer->ForEachEffect([&protect, &shell, &haste](CStatusEffect* PStatus)
     {
         if (PStatus->GetDuration() > 0)
         {
@@ -1638,9 +1638,16 @@ namespace automaton
         {
             while (sql->NextRow() == SQL_SUCCESS)
             {
-                SpellID        id = (SpellID)sql->GetUIntData(0);
-                AutomatonSpell PSpell{ (uint16)sql->GetUIntData(1), (uint8)sql->GetUIntData(2), (EFFECT)sql->GetUIntData(3),
-                                       (IMMUNITY)sql->GetUIntData(4) };
+                SpellID id = (SpellID)sql->GetUIntData(0);
+
+                AutomatonSpell PSpell
+                {
+                    (uint16)sql->GetUIntData(1),
+                    (uint8)sql->GetUIntData(2),
+                    (EFFECT)sql->GetUIntData(3),
+                    (IMMUNITY)sql->GetUIntData(4),
+                    {} // Will handle in a moment
+                };
 
                 uint32 removes = sql->GetUIntData(5);
                 while (removes > 0)

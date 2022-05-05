@@ -683,9 +683,8 @@ int32 parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*
             {
                 // NOTE:
                 // CBasicPacket is incredibly light when constructed from a pointer like we're doing here.
-                // It is just a bag of offsets to the data in SmallPD_ptr, so its safe to construct and
-                // move it into the PacketParser call to keep the linter quiet
-                PacketParser[SmallPD_Type](map_session_data, PChar, std::move(CBasicPacket(reinterpret_cast<uint8*>(SmallPD_ptr))));
+                // It is just a bag of offsets to the data in SmallPD_ptr so its safe to construct.
+                PacketParser[SmallPD_Type](map_session_data, PChar, CBasicPacket(reinterpret_cast<uint8*>(SmallPD_ptr)));
             }
         }
         else

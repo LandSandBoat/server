@@ -46,28 +46,30 @@ function(set_project_warnings project_name)
   set(CLANG_WARNINGS
       -Wall
       -Wextra                # reasonable and standard
-      -Wshadow               # warn the user if a variable declaration shadows one from a parent context
       -Wnon-virtual-dtor     # warn the user if a class with virtual functions has a non-virtual destructor. This helps
                              # catch hard to track down memory errors
       -Wunused-function      # warn on unused functions
-      -Wunused-macros        # warn on unused macros
       -Wunused-private-field # warn on unused private fields
-      -Wunused-template      # warn on unused templates
       -Wunused-variable      # warn on unused variables
       -Woverloaded-virtual   # warn if you overload (not override) a virtual function
-      -pedantic              # warn if non-standard C++ is used
-      -pedantic-errors       # Error on language extensions
       -Wnull-dereference     # warn if a null dereference is detected
-      -Wdouble-promotion     # warn if float is implicit promoted to double
       -Wformat=2             # warn on security issues around functions that format output (ie printf)
 
       # TODO: Remove this exception
-      -Wno-unused-parameter # warn on unused function parameters
+      -Wno-unused-parameter           # warn on unused function parameters
+      -Wno-missing-field-initializers
+      -Wno-sign-compare
 
-      # TODO: -Wconversion      # warn on type conversions that may lose data
-      # TODO: -Wcast-align      # warn for potential performance problem casts
-      # TODO: -Wold-style-cast  # warn for c-style casts
-      # TODO: -Wsign-conversion # warn on sign conversions
+      # TODO: -pedantic          # warn if non-standard C++ is used
+      # TODO: -pedantic-errors   # Error on language extensions
+      # TODO: -Wconversion       # warn on type conversions that may lose data
+      # TODO: -Wcast-align       # warn for potential performance problem casts
+      # TODO: -Wdouble-promotion # warn if float is implicit promoted to double
+      # TODO: -Wold-style-cast   # warn for c-style casts
+      # TODO: -Wshadow           # warn the user if a variable declaration shadows one from a parent context
+      # TODO: -Wsign-conversion  # warn on sign conversions
+      # TODO: -Wunused-template  # warn on unused templates
+      # TODO: -Wunused-macros    # warn on unused macros
   )
 
   set(GCC_WARNINGS

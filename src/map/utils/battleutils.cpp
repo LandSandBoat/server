@@ -1048,8 +1048,8 @@ namespace battleutils
             }
         }
 
-        if (PAttacker->getMod(Mod::ENSPELL) > 0 && // Enspell overwrites weapon effects
-           (PAttacker->getMod(Mod::ENSPELL_CHANCE) == 0 || PAttacker->getMod(Mod::ENSPELL_CHANCE) > xirand::GetRandomNumber(100)) ||
+        if ((PAttacker->getMod(Mod::ENSPELL) > 0 && // Enspell overwrites weapon effects
+           (PAttacker->getMod(Mod::ENSPELL_CHANCE) == 0 || PAttacker->getMod(Mod::ENSPELL_CHANCE) > xirand::GetRandomNumber(100))) ||
             PAttacker->StatusEffectContainer->GetActiveRuneCount() > 0) // Rune Enhancement means we deal enspell damage
         {
             static SUBEFFECT enspell_subeffects[8] = {

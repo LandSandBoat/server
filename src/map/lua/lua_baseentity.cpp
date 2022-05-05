@@ -2183,7 +2183,7 @@ int16 CLuaBaseEntity::getWorldAngle(sol::variadic_args va)
         float posY = va.get_type(1) == sol::type::number ? va.get<float>(1) : 0.0f;
         float posZ = va.get_type(2) == sol::type::number ? va.get<float>(2) : 0.0f;
 
-        position_t point{ posX, posY, posZ };
+        position_t point{ posX, posY, posZ, false, 0 };
 
         angle = worldAngle(m_PBaseEntity->loc.p, point);
     }
