@@ -1,12 +1,14 @@
+add_subdirectory(packets)
+
 set(SOURCES
+    ${COMMON_SOURCES}
+    ${PACKET_SOURCES}
     data_loader.cpp
     data_loader.h
     search.cpp
     search.h
     tcp_request.cpp
     tcp_request.h)
-
-add_subdirectory(packets)
 
 if(UNIX)
     set(resource "")
@@ -26,18 +28,22 @@ target_compile_definitions(
     topaz_search
     PUBLIC
     -DDEBUGLOGSEARCH
-    -DDEFINE_OWN_MAIN
 )
 
 target_compile_definitions(topaz_search PUBLIC DEFINE_OWN_MAIN)
 
 target_link_libraries(topaz_search
     PUBLIC
-    common
-    search_packets
-    project_options
+        ${EXTERNAL_LIBS}
+        project_options
     PRIVATE
-    project_warnings
+        project_warnings
+)
+
+target_include_directories(topaz_search
+    PUBLIC
+        ${CMAKE_SOURCE_DIR}/src
+        ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
 set_target_output_directory(topaz_search)

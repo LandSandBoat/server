@@ -24,3 +24,11 @@ CPMAddPackage(
     GITHUB_REPOSITORY cameron314/concurrentqueue
     GIT_TAG v1.0.3
 )
+
+set(EXTERNAL_LIBS
+    mariadbclient
+    spdlog_header_only
+    sol2_single
+    efsw
+    concurrentqueue
+    PARENT_SCOPE)

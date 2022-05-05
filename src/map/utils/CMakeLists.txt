@@ -1,57 +1,41 @@
-set(SOURCES
-    attackutils.cpp
-    attackutils.h
-    battlefieldutils.cpp
-    battlefieldutils.h
-    battleutils.cpp
-    battleutils.h
-    blacklistutils.cpp
-    blacklistutils.h
-    blueutils.cpp
-    blueutils.h
-    charutils.cpp
-    charutils.h
-    fishingutils.cpp
-    fishingutils.h
-    gardenutils.cpp
-    gardenutils.h
-    guildutils.cpp
-    guildutils.h
-    instanceutils.cpp
-    instanceutils.h
-    itemutils.cpp
-    itemutils.h
-    jailutils.cpp
-    jailutils.h
-    mobutils.cpp
-    mobutils.h
-    moduleutils.cpp
-    moduleutils.h
-    petutils.cpp
-    petutils.h
-    puppetutils.cpp
-    puppetutils.h
-    synthutils.cpp
-    synthutils.h
-    trustutils.cpp
-    trustutils.h
-    zoneutils.cpp
-    zoneutils.h)
-
-add_library(utils STATIC ${SOURCES})
-
-if(TRACY_ENABLE)
-    target_link_libraries(utils PUBLIC tracy_client)
-endif(TRACY_ENABLE)
-
-target_link_libraries(utils
-    PUBLIC
-    common
-    ai
-    entities
-    items
-    lua_bindings
-    packets
-    project_options
-    #project_warnings
+set(UTIL_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/attackutils.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/attackutils.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/battlefieldutils.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/battlefieldutils.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/battleutils.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/battleutils.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/blacklistutils.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/blacklistutils.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/blueutils.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/blueutils.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/charutils.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/charutils.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/fishingutils.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/fishingutils.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/gardenutils.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/gardenutils.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/guildutils.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/guildutils.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/instanceutils.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/instanceutils.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/itemutils.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/itemutils.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/jailutils.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/jailutils.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/mobutils.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/mobutils.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/moduleutils.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/moduleutils.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/petutils.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/petutils.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/puppetutils.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/puppetutils.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/synthutils.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/synthutils.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/trustutils.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/trustutils.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/zoneutils.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/zoneutils.h
+    PARENT_SCOPE
 )
