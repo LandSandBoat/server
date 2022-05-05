@@ -6303,13 +6303,14 @@ namespace charutils
     // Return Ranged Weapon Item Level; If ranged slot exists use that, else use Ammo
     uint8 getRangedItemLevel(CCharEntity* PChar)
     {
-        CItemEquipment* PItem = nullptr;
-
-        if (PItem == PChar->getEquip((SLOTTYPE)SLOTTYPE::SLOT_RANGED))
+        CItemEquipment* PItem = PChar->getEquip((SLOTTYPE)SLOTTYPE::SLOT_RANGED);
+        if (PItem)
         {
             return PItem->getILvl();
         }
-        else if (PItem == PChar->getEquip((SLOTTYPE)SLOTTYPE::SLOT_AMMO))
+
+        PItem = PChar->getEquip((SLOTTYPE)SLOTTYPE::SLOT_AMMO);
+        if (PItem)
         {
             return PItem->getILvl();
         }

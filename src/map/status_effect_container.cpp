@@ -1060,8 +1060,7 @@ bool CStatusEffectContainer::ApplyCorsairEffect(CStatusEffect* PStatusEffect, ui
         AddStatusEffect(PStatusEffect);
         return true;
     }
-
-    return false;
+    // return false;
 }
 
 bool CStatusEffectContainer::HasCorsairEffect(uint32 charid)
@@ -1164,7 +1163,7 @@ EFFECT CStatusEffectContainer::GetHighestRuneEffect()
     }
 
     EFFECT highestRune = EFFECT_NONE;
-    int highestRuneValue;
+    int highestRuneValue = 0;
 
     for (auto iter = runeEffects.begin(); iter != runeEffects.end(); ++iter)
     {

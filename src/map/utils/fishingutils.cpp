@@ -84,7 +84,7 @@ namespace fishingutils
         PChar->pushPacket(new CChatMessagePacket(PChar, CHAT_MESSAGE_TYPE::MESSAGE_SYSTEM_1, "Fishing is currently disabled"));
         PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::FISHING));
         return;
-
+        /*
         if (PChar->animation != ANIMATION_NONE)
         {
             PChar->pushPacket(new CMessageSystemPacket(0, 0, 142));
@@ -130,6 +130,7 @@ namespace fishingutils
 
         PChar->pushPacket(new CCharUpdatePacket(PChar));
         PChar->pushPacket(new CCharSyncPacket(PChar));
+        */
     }
 
     /************************************************************************
@@ -387,7 +388,7 @@ namespace fishingutils
         // Unlikely anyone can get here legit, since we already disabled "startFishing"
         PChar->animation = ANIMATION_FISHING_STOP;
         return;
-
+        /*
         uint16 MessageOffset = GetMessageOffset(PChar->getZone());
 
         switch (action)
@@ -495,6 +496,7 @@ namespace fishingutils
 
         PChar->pushPacket(new CCharUpdatePacket(PChar));
         PChar->pushPacket(new CCharSyncPacket(PChar));
+        */
     }
 
 } // namespace fishingutils

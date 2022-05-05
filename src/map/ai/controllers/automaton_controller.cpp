@@ -20,17 +20,17 @@
 */
 
 #include "automaton_controller.h"
-#include "../../../common/utils.h"
-#include "../../enmity_container.h"
-#include "../../entities/trustentity.h"
-#include "../../lua/luautils.h"
-#include "../../mobskill.h"
-#include "../../recast_container.h"
-#include "../../status_effect_container.h"
-#include "../../utils/battleutils.h"
-#include "../../utils/itemutils.h"
-#include "../../utils/petutils.h"
-#include "../../utils/puppetutils.h"
+#include "common/utils.h"
+#include "enmity_container.h"
+#include "entities/trustentity.h"
+#include "lua/luautils.h"
+#include "mobskill.h"
+#include "recast_container.h"
+#include "status_effect_container.h"
+#include "utils/battleutils.h"
+#include "utils/itemutils.h"
+#include "utils/petutils.h"
+#include "utils/puppetutils.h"
 #include "../ai_container.h"
 #include "../states/ability_state.h"
 #include "../states/magic_state.h"
@@ -1155,13 +1155,6 @@ bool CAutomatonController::TryEnhance()
         return Cast(PAutomaton->targid, SpellID::Dread_Spikes);
     }
 
-    EnmityList_t* enmityList;
-    auto*         PMob = dynamic_cast<CMobEntity*>(PTarget);
-    if (PMob)
-    {
-        enmityList = PMob->PEnmityContainer->GetEnmityList();
-    }
-
     uint16 highestEnmity = 0;
 
     CBattleEntity* PRegenTarget     = nullptr;
@@ -1183,10 +1176,11 @@ bool CAutomatonController::TryEnhance()
 
     if (distance(PAutomaton->loc.p, PAutomaton->PMaster->loc.p) < 20)
     {
-        if (PMob)
+        if (auto* PMob = dynamic_cast<CMobEntity*>(PTarget))
         {
-            auto enmity_obj = enmityList->find(PAutomaton->PMaster->id);
-            if (enmity_obj != enmityList->end())
+            auto enmityList = PMob->PEnmityContainer->GetEnmityList();
+            if (auto enmity_obj = enmityList->find(PAutomaton->PMaster->id);
+                enmity_obj != enmityList->end())
             {
                 isEngaged = true;
                 if (highestEnmity < enmity_obj->second.CE + enmity_obj->second.VE)
@@ -1195,10 +1189,10 @@ bool CAutomatonController::TryEnhance()
                     PRegenTarget  = PAutomaton->PMaster;
                 }
             }
-        }
-        else
-        {
-            isEngaged = true; // Assume everyone is engaged if the target isn't a mob
+            else
+            {
+                isEngaged = true; // Assume everyone is engaged if the target isn't a mob
+            }
         }
 
         PAutomaton->PMaster->StatusEffectContainer->ForEachEffect(
@@ -1270,8 +1264,9 @@ bool CAutomatonController::TryEnhance()
     stoneskin = false;
     phalanx   = false;
 
-    if (PMob)
+    if (auto* PMob = dynamic_cast<CMobEntity*>(PTarget))
     {
+        auto enmityList = PMob->PEnmityContainer->GetEnmityList();
         auto enmity_obj = enmityList->find(PAutomaton->id);
         if (enmity_obj != enmityList->end() && highestEnmity < enmity_obj->second.CE + enmity_obj->second.VE)
         {
@@ -1280,7 +1275,9 @@ bool CAutomatonController::TryEnhance()
         }
     }
 
-    PAutomaton->StatusEffectContainer->ForEachEffect([&protect, &shell, &haste, &stoneskin, &phalanx](CStatusEffect* PStatus) {
+    // clang-format off
+    PAutomaton->StatusEffectContainer->ForEachEffect([&protect, &shell, &haste, &stoneskin, &phalanx](CStatusEffect* PStatus)
+    {
         if (PStatus->GetDuration() > 0)
         {
             if (PStatus->GetStatusID() == EFFECT_PROTECT)
@@ -1299,6 +1296,7 @@ bool CAutomatonController::TryEnhance()
             }
         }
     });
+    // clang-format on
 
     if (!PProtectTarget && !protect)
     {
@@ -1330,8 +1328,9 @@ bool CAutomatonController::TryEnhance()
 
                 isEngaged = false;
 
-                if (PMob)
+                if (auto* PMob = dynamic_cast<CMobEntity*>(PTarget))
                 {
+                    auto enmityList = PMob->PEnmityContainer->GetEnmityList();
                     auto enmity_obj = enmityList->find(PMember->id);
                     if (enmity_obj != enmityList->end())
                     {
@@ -1348,7 +1347,9 @@ bool CAutomatonController::TryEnhance()
                     isEngaged = true; // Assume everyone is engaged if the target isn't a mob
                 }
 
-                PMember->StatusEffectContainer->ForEachEffect([&protect, &protectcount, &shell, &shellcount, &haste](CStatusEffect* PStatus) {
+                // clang-format off
+                PMember->StatusEffectContainer->ForEachEffect([&protect, &protectcount, &shell, &shellcount, &haste](CStatusEffect* PStatus)
+                {
                     if (PStatus->GetDuration() > 0)
                     {
                         if (PStatus->GetStatusID() == EFFECT_PROTECT)
@@ -1369,6 +1370,7 @@ bool CAutomatonController::TryEnhance()
                         }
                     }
                 });
+                // clang-format on
 
                 if (isEngaged)
                 {

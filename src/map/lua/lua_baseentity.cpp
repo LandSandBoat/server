@@ -2890,9 +2890,7 @@ bool CLuaBaseEntity::hasTeleport(uint8 tType, uint8 bit, sol::object const& arg2
             ShowError("LuaBaseEntity::hasTeleport : Parameter 1 out of bounds.");
             return false;
     }
-
-    XI_DEBUG_BREAK_IF(true); // We should never get here
-    return false;
+    // return false;
 }
 
 /************************************************************************
