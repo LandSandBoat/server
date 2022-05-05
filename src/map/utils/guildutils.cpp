@@ -173,7 +173,7 @@ namespace guildutils
         }
 
         // load the pattern in case it was set by another server (and this server did not set it)
-        sql->Query("SELECT value FROM server_variables WHERE name = '[GUILD]pattern';");
+        ret = sql->Query("SELECT value FROM server_variables WHERE name = '[GUILD]pattern';");
         if (ret != SQL_ERROR && sql->NumRows() == 1 && sql->NextRow() == SQL_SUCCESS)
         {
             pattern = sql->GetUIntData(0);

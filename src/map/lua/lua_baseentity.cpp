@@ -8297,12 +8297,13 @@ sol::table CLuaBaseEntity::getParty()
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    CParty* party = static_cast<CBattleEntity*>(m_PBaseEntity)->PParty;
-
+    // clang-format off
     auto table = luautils::lua.create_table();
-    ((CBattleEntity*)m_PBaseEntity)->ForParty([&table](CBattleEntity* member) {
+    ((CBattleEntity*)m_PBaseEntity)->ForParty([&table](CBattleEntity* member)
+    {
         table.add(CLuaBaseEntity(member));
     });
+    // clang-format on
 
     return table;
 }
@@ -8318,12 +8319,13 @@ sol::table CLuaBaseEntity::getPartyWithTrusts()
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    CParty* party = static_cast<CCharEntity*>(m_PBaseEntity)->PParty;
-
+    // clang-format off
     auto table = luautils::lua.create_table();
-    ((CCharEntity*)m_PBaseEntity)->ForPartyWithTrusts([&table](CBattleEntity* member) {
+    ((CCharEntity*)m_PBaseEntity)->ForPartyWithTrusts([&table](CBattleEntity* member)
+    {
         table.add(CLuaBaseEntity(member));
     });
+    // clang-format on
 
     return table;
 }
@@ -10188,7 +10190,6 @@ bool CLuaBaseEntity::delStatusEffect(uint16 StatusID, sol::object const& SubID)
 
     bool result = false;
 
-    bool hasEffect       = false;
     auto effect_StatusID = static_cast<EFFECT>(StatusID);
 
     if (SubID != sol::lua_nil)

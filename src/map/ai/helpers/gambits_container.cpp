@@ -402,7 +402,7 @@ namespace gambits
 
                     if (action.select == G_SELECT::HIGHEST_WALTZ)
                     {
-                        bool canWaltz = false;
+                        // bool canWaltz = false;
                         auto currentTP = POwner->health.tp;
 
                         ABILITY wlist[5] =
@@ -417,7 +417,7 @@ namespace gambits
                         for (ABILITY const& waltz : wlist)
                         {
                             auto waltzLevel  = ability::GetAbility(waltz)->getLevel();
-                            auto abilityName = ability::GetAbility(waltz)->getName();
+                            // auto abilityName = ability::GetAbility(waltz)->getName();
                             uint16 tpCost    = 0;
 
                             if (mLevel >= waltzLevel)
@@ -819,7 +819,7 @@ namespace gambits
             }
             else // Mobskill
             {
-                CMobSkill* PMobSkill = battleutils::GetMobSkill(chosen_skill->skill_id);
+                // CMobSkill* PMobSkill = battleutils::GetMobSkill(chosen_skill->skill_id);
                 if (chosen_skill->valid_targets == TARGET_SELF || chosen_skill->valid_targets == TARGET_PLAYER_PARTY)
                 {
                     target = POwner;

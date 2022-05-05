@@ -519,7 +519,7 @@ void EncodeStringLinkshell(int8* signature, int8* target)
         {
             tempChar = signature[currChar] - 'a' + 1;
         }
-        packBitsLE(encodedSignature, tempChar, 6 * currChar, 6);
+        packBitsLE(encodedSignature, tempChar, static_cast<uint32>(6 * currChar), 6);
         chars++;
     }
     leftover = (chars * 6) % 8;
@@ -540,7 +540,7 @@ void DecodeStringLinkshell(int8* signature, int8* target)
     for (std::size_t currChar = 0; currChar < length; ++currChar)
     {
         uint8 tempChar = '\0';
-        tempChar       = (uint8)unpackBitsLE((uint8*)signature, currChar * 6, 6);
+        tempChar       = (uint8)unpackBitsLE((uint8*)signature, static_cast<uint32>(currChar * 6), 6);
         if (tempChar >= 1 && tempChar <= 26)
         {
             tempChar = 'a' - 1 + tempChar;
@@ -596,7 +596,7 @@ int8* EncodeStringSignature(int8* signature, int8* target)
         {
             tempChar = signature[currChar] - 'a' + 37;
         }
-        packBitsLE(encodedSignature, tempChar, 6 * currChar, 6);
+        packBitsLE(encodedSignature, tempChar, static_cast<uint32>(6 * currChar), 6);
         chars++;
     }
     // leftover = (chars * 6) % 8;

@@ -997,10 +997,23 @@ void TaskManagerThread()
 
 int32 ah_cleanup(time_point tick, CTaskMgr::CTask* PTask)
 {
-    // ShowMessage(CL_YELLOW"[TASK] ah_cleanup tick..");
-
     CDataLoader data;
     data.ExpireAHItems();
 
     return 0;
+}
+
+void do_final(int code)
+{
+    timer_final();
+    socket_final();
+
+    logging::ShutDown();
+
+    exit(code);
+}
+
+void do_abort()
+{
+    do_final(EXIT_FAILURE);
 }

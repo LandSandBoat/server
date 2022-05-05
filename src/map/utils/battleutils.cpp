@@ -307,7 +307,7 @@ namespace battleutils
     {
         // The skill_caps table is 0-indexed, so our maximum level should one lower
         // than the size of the array.
-        std::size_t maxLevel = g_SkillTable.size() - 1;
+        auto maxLevel = static_cast<uint8>(g_SkillTable.size() - 1);
 
         if (level > maxLevel)
         {
@@ -319,7 +319,7 @@ namespace battleutils
 
     uint16 GetMaxSkill(uint8 rank, uint8 level)
     {
-        std::size_t maxLevel = g_SkillTable.size() - 1;
+        auto maxLevel = static_cast<uint8>(g_SkillTable.size() - 1);
 
         if (level > maxLevel)
         {
