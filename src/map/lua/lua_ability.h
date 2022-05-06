@@ -22,7 +22,7 @@
 #ifndef _LUAABILITY_H
 #define _LUAABILITY_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 #include "luautils.h"
 
 class CAbility;

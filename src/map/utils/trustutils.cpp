@@ -1,7 +1,7 @@
 ﻿#include "trustutils.h"
 
-#include "../../common/timer.h"
-#include "../../common/utils.h"
+#include "common/timer.h"
+#include "common/utils.h"
 
 #include <algorithm>
 #include <cmath>

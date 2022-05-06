@@ -21,7 +21,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "lua_item.h"
 
-#include "../../common/logging.h"
+#include "common/logging.h"
 #include "../items/item.h"
 #include "../items/item_equipment.h"
 #include "../items/item_general.h"
@@ -300,7 +300,7 @@ bool CLuaItem::isInstalled()
     return PFurnishing->isInstalled();
 }
 
-void CLuaItem::setSoulPlateData(std::string name, uint16 mobFamily, uint8 zeni, uint16 skillIndex, uint8 fp)
+void CLuaItem::setSoulPlateData(std::string const& name, uint16 mobFamily, uint8 zeni, uint16 skillIndex, uint8 fp)
 {
     m_PLuaItem->setSoulPlateData(name, mobFamily, zeni, skillIndex, fp);
 }

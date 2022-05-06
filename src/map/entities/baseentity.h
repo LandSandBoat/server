@@ -22,8 +22,8 @@
 #ifndef _BASEENTITY_H
 #define _BASEENTITY_H
 
-#include "../../common/cbasetypes.h"
-#include "../../common/mmo.h"
+#include "common/cbasetypes.h"
+#include "common/mmo.h"
 #include "../packets/message_basic.h"
 #include <map>
 #include <memory>

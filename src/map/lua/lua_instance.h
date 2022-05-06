@@ -22,7 +22,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #ifndef _LUAINSTANCE_H
 #define _LUAINSTANCE_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 #include "luautils.h"
 
 class CLuaBaseEntity;
@@ -60,14 +60,14 @@ public:
     uint32 getWipeTime();
     auto   getEntity(uint16 targid, sol::object const& filterObj) -> std::optional<CLuaBaseEntity>;
     uint32 getStage();
-    auto   getLocalVar(std::string name) -> uint64_t;
+    auto   getLocalVar(std::string const& name) -> uint64_t;
 
     void setLevelCap(uint8 cap);
     void setLastTimeUpdate(uint32 ms);
     void setProgress(uint32 progress);
     void setWipeTime(uint32 ms);
     void setStage(uint32 stage);
-    void setLocalVar(std::string name, uint64_t value);
+    void setLocalVar(std::string const& name, uint64_t value);
 
     void fail();
     bool failed();

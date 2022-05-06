@@ -31,10 +31,10 @@
 #include "lua_zone.h"
 #include "luautils.h"
 
-#include "../../common/kernel.h"
-#include "../../common/logging.h"
-#include "../../common/timer.h"
-#include "../../common/utils.h"
+#include "common/kernel.h"
+#include "common/logging.h"
+#include "common/timer.h"
+#include "common/utils.h"
 
 #include "../ability.h"
 #include "../alliance.h"
@@ -9173,7 +9173,7 @@ void CLuaBaseEntity::countdown(sol::object const& secondsObj,
  *  Example : player:enableEntities({ 17207972, 17207973})
  *  Notes   : Default is all off, so sending the ID enables the special entity
  ************************************************************************/
-void CLuaBaseEntity::enableEntities(std::vector<uint32> data)
+void CLuaBaseEntity::enableEntities(std::vector<uint32> const& data)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
@@ -9368,7 +9368,7 @@ void CLuaBaseEntity::resetRecasts()
  *  Notes   : Function along with statements must be passed in L3
  ************************************************************************/
 
-void CLuaBaseEntity::addListener(std::string eventName, std::string identifier, sol::function func)
+void CLuaBaseEntity::addListener(std::string const& eventName, std::string const& identifier, sol::function func)
 {
     m_PBaseEntity->PAI->EventHandler.addListener(eventName, func, identifier);
 }
@@ -9380,7 +9380,7 @@ void CLuaBaseEntity::addListener(std::string eventName, std::string identifier, 
  *  Notes   : Used heavily in Pup Ability scripts
  ************************************************************************/
 
-void CLuaBaseEntity::removeListener(std::string identifier)
+void CLuaBaseEntity::removeListener(std::string const& identifier)
 {
     m_PBaseEntity->PAI->EventHandler.removeListener(identifier);
 }
@@ -9393,7 +9393,7 @@ void CLuaBaseEntity::removeListener(std::string identifier)
  *  Notes   : Manually triggered through Aern scripts for some reason
  ************************************************************************/
 
-void CLuaBaseEntity::triggerListener(std::string eventName, sol::variadic_args args)
+void CLuaBaseEntity::triggerListener(std::string const& eventName, sol::variadic_args args)
 {
     m_PBaseEntity->PAI->EventHandler.triggerListener(eventName, sol::as_args(args));
 }

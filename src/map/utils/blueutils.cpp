@@ -19,7 +19,7 @@
 ===========================================================================
 */
 
-#include "../../common/utils.h"
+#include "common/utils.h"
 
 #include "../packets/char_job_extra.h"
 #include "../packets/char_spells.h"

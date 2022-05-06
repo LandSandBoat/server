@@ -24,8 +24,8 @@
 
 #include <unordered_map>
 
-#include "../../common/cbasetypes.h"
-#include "../../common/mmo.h"
+#include "common/cbasetypes.h"
+#include "common/mmo.h"
 
 #include "../entities/mobentity.h"
 #include "../modifier.h"

@@ -19,12 +19,12 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 ===========================================================================
 */
 
-#include "../common/blowfish.h"
-#include "../common/md52.h"
-#include "../common/mmo.h"
-#include "../common/logging.h"
-#include "../common/socket.h"
-#include "../common/utils.h"
+#include "common/blowfish.h"
+#include "common/md52.h"
+#include "common/mmo.h"
+#include "common/logging.h"
+#include "common/socket.h"
+#include "common/utils.h"
 
 #ifdef WIN32
 #include <winsock2.h>

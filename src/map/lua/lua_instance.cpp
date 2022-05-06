@@ -19,8 +19,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 ===========================================================================
 */
 
-#include "../../common/logging.h"
-#include "../../common/timer.h"
+#include "common/logging.h"
+#include "common/timer.h"
 
 #include "lua_instance.h"
 
@@ -178,7 +178,7 @@ uint32 CLuaInstance::getStage()
     return m_PLuaInstance->GetStage();
 }
 
-uint64_t CLuaInstance::getLocalVar(std::string name)
+uint64_t CLuaInstance::getLocalVar(std::string const& name)
 {
     return m_PLuaInstance->GetLocalVar(name);
 }
@@ -208,7 +208,7 @@ void CLuaInstance::setStage(uint32 stage)
     m_PLuaInstance->SetStage(stage);
 }
 
-void CLuaInstance::setLocalVar(std::string name, uint64_t value)
+void CLuaInstance::setLocalVar(std::string const& name, uint64_t value)
 {
     m_PLuaInstance->SetLocalVar(name, value);
 }

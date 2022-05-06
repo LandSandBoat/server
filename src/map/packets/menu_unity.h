@@ -17,7 +17,7 @@
 #ifndef _CMENUUNITYPACKET_H
 #define _CMENUUNITYPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 

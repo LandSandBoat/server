@@ -22,7 +22,7 @@
 #ifndef _CITEMFISH_H
 #define _CITEMFISH_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "item.h"
 

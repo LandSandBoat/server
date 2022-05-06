@@ -22,8 +22,8 @@
 #ifndef _BLUEUTILS_H
 #define _BLUEUTILS_H
 
-#include "../../common/cbasetypes.h"
-#include "../../common/mmo.h"
+#include "common/cbasetypes.h"
+#include "common/mmo.h"
 
 #include "../entities/charentity.h"
 #include "../entities/mobentity.h"

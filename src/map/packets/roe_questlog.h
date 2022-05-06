@@ -22,7 +22,7 @@
 #ifndef _CROEQUESTLOGPACKET_H
 #define _CROEQUESTLOGPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 

@@ -20,7 +20,7 @@
 */
 
 #include "attackutils.h"
-#include "../../common/utils.h"
+#include "common/utils.h"
 #include "../attack.h"
 #include "../items/item_weapon.h"
 #include "../status_effect_container.h"

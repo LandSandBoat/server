@@ -22,7 +22,7 @@
 #ifndef _CSYNTHANIMATIONPACKET_H
 #define _CSYNTHANIMATIONPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 

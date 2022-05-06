@@ -22,8 +22,8 @@
 #ifndef _CITEM_H
 #define _CITEM_H
 
-#include "../../common/cbasetypes.h"
-#include "../../common/mmo.h"
+#include "common/cbasetypes.h"
+#include "common/mmo.h"
 
 // основной тип предмета m_type
 
@@ -125,7 +125,7 @@ public:
     virtual void        setSignature(int8* signature);
 
     bool isSoultrapper() const;
-    void setSoulPlateData(std::string name, uint16 mobFamily, uint8 zeni, uint16 skillIndex, uint8 fp);
+    void setSoulPlateData(std::string const& name, uint16 mobFamily, uint8 zeni, uint16 skillIndex, uint8 fp);
     auto getSoulPlateData() -> std::tuple<std::string, uint16, uint8, uint16, uint8>;
 
     bool isMannequin() const;

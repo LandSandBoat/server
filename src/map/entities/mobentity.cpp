@@ -21,8 +21,8 @@
 
 #include "mobentity.h"
 
-#include "../../common/timer.h"
-#include "../../common/utils.h"
+#include "common/timer.h"
+#include "common/utils.h"
 #include "../ai/ai_container.h"
 #include "../ai/controllers/mob_controller.h"
 #include "../ai/helpers/pathfind.h"

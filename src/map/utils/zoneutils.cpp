@@ -19,9 +19,9 @@
 ===========================================================================
 */
 
-#include "../../common/logging.h"
+#include "common/logging.h"
 
-#include "../../common/timer.h"
+#include "common/timer.h"
 #include <cstring>
 
 #include "../ai/ai_container.h"

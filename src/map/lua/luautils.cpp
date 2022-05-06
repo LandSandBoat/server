@@ -19,10 +19,10 @@
 ===========================================================================
 */
 
-#include "../../common/filewatcher.h"
-#include "../../common/logging.h"
-#include "../../common/utils.h"
-#include "../../common/version.h"
+#include "common/filewatcher.h"
+#include "common/logging.h"
+#include "common/utils.h"
+#include "common/version.h"
 
 #include <array>
 #include <filesystem>
@@ -1389,7 +1389,7 @@ namespace luautils
      *                                                                       *
      ************************************************************************/
 
-    std::optional<CLuaBaseEntity> GetPlayerByName(std::string name)
+    std::optional<CLuaBaseEntity> GetPlayerByName(std::string const& name)
     {
         TracyZoneScoped;
 

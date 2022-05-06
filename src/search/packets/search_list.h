@@ -22,7 +22,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #ifndef _CSEARCHLISTPACKET_H_
 #define _CSEARCHLISTPACKET_H_
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 enum SEARCHTYPE
 {

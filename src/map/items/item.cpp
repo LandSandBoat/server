@@ -21,7 +21,7 @@
 
 #include <cstring>
 
-#include "../../common/utils.h"
+#include "common/utils.h"
 #include "item.h"
 
 /************************************************************************
@@ -380,7 +380,7 @@ bool CItem::isSoultrapper() const
     return m_id == 18721 || m_id == 18724;
 }
 
-void CItem::setSoulPlateData(std::string name, uint16 mobFamily, uint8 zeni, uint16 skillIndex, uint8 fp)
+void CItem::setSoulPlateData(std::string const& name, uint16 mobFamily, uint8 zeni, uint16 skillIndex, uint8 fp)
 {
     PackSoultrapperName(name, m_extra, static_cast<uint8>(name.size()));
 

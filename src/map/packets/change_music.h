@@ -22,7 +22,7 @@
 #ifndef _CCHANGEMUSICPACKET_H
 #define _CCHANGEMUSICPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 

@@ -22,7 +22,7 @@
 #ifndef _CCHARMOUNTSPACKET_H
 #define _CCHARMOUNTSPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 

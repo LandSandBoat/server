@@ -20,7 +20,7 @@
 */
 
 #include "automatonentity.h"
-#include "../../common/utils.h"
+#include "common/utils.h"
 #include "../ai/ai_container.h"
 #include "../ai/controllers/automaton_controller.h"
 #include "../ai/states/magic_state.h"

@@ -22,8 +22,8 @@
 #ifndef _CEVENTSTRINGPACKET_H
 #define _CEVENTSTRINGPACKET_H
 
-#include "../../common/cbasetypes.h"
-#include "../../common/mmo.h"
+#include "common/cbasetypes.h"
+#include "common/mmo.h"
 #include "../event_info.h"
 
 #include <string>

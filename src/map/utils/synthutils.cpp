@@ -19,9 +19,9 @@
 ===========================================================================
 */
 
-#include "../../common/logging.h"
-#include "../../common/socket.h"
-#include "../../common/utils.h"
+#include "common/logging.h"
+#include "common/socket.h"
+#include "common/utils.h"
 
 #include <cmath>
 #include <cstring>

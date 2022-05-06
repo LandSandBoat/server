@@ -22,8 +22,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #ifndef _BASICPACKET_H
 #define _BASICPACKET_H
 
-#include "../../common/cbasetypes.h"
-#include "../../common/socket.h"
+#include "common/cbasetypes.h"
+#include "common/socket.h"
 
 #include <stdio.h>
 #include <string.h>

@@ -3,7 +3,7 @@
 #define _SEARCH_COMMENT_PACKET_H_
 
 #include <string>
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 class SearchCommentPacket
 {
