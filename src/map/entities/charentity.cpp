@@ -129,7 +129,7 @@ CCharEntity::CCharEntity()
     memset(&jobs, 0, sizeof(jobs));
     keys = {};
     memset(&equip, 0, sizeof(equip));
-    memset(&equiploc, 0, sizeof(equiploc));
+    memset(&equipLoc, 0, sizeof(equipLoc));
     memset(&RealSkills, 0, sizeof(RealSkills));
     memset(&expChain, 0, sizeof(expChain));
     memset(&capacityChain, 0, sizeof(capacityChain));
