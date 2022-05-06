@@ -54,22 +54,22 @@ inline std::string Hex16ToString(uint16 hex)
 #else // Empty stubs for regular builds
 #define TracyFrameMark
 #define TracyZoneScoped
-#define TracyZoneScopedN(n)
-#define TracyNamed(var, name)
-#define TracyZoneText(n, l)
-#define TracyZoneScopedC(c)
-#define TracyZoneString(str)
-#define TracyZoneCString(cstr)
-#define TracyZoneIString(istr)
-#define TracyZoneHex8(num)
-#define TracyZoneHex16(num)
-#define TracyReportLuaMemory(L)
-#define TracyReportGraphNumber(name, num)
-#define TracyReportGraphBytes(name, num)
-#define TracyReportGraphPercent(name, num)
-#define TracyLuaRegister(lua)
-#define TracyMessageStr(str)
-#define TracySetThreadName(str)
+#define TracyZoneScopedN(n)                std::ignore = n
+#define TracyNamed(var, name)              std::ignore = var; std::ignore = name
+#define TracyZoneText(n, l)                std::ignore = n; std::ignore = l
+#define TracyZoneScopedC(c)                std::ignore = c
+#define TracyZoneString(str)               std::ignore = str
+#define TracyZoneCString(cstr)             std::ignore = cstr
+#define TracyZoneIString(istr)             std::ignore = istr
+#define TracyZoneHex8(num)                 std::ignore = num
+#define TracyZoneHex16(num)                std::ignore = num
+#define TracyReportLuaMemory(L)            std::ignore = L
+#define TracyReportGraphNumber(name, num)  std::ignore = name; std::ignore = num
+#define TracyReportGraphBytes(name, num)   std::ignore = name; std::ignore = num
+#define TracyReportGraphPercent(name, num) std::ignore = name; std::ignore = num
+#define TracyLuaRegister(lua)              std::ignore = lua
+#define TracyMessageStr(str)               std::ignore = str
+#define TracySetThreadName(str)            std::ignore = str
 #endif
 
 #endif // _TRACY_H

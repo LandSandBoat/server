@@ -224,8 +224,8 @@ CZoneInPacket::CZoneInPacket(CCharEntity* PChar, int16 csid)
     ref<uint32>(0xEC) = PChar->GetMaxMP();
 
     // MenuConfig (F4-F7) -- see CMenuConfigPacket
-    ref<uint8>(0xF4) = 0x18 | PChar->menuConfigFlags.byte1 | (PChar->nameflags.flags & (uint8)FLAG_INVITE ? (uint8)NFLAG_INVITE : 0);
-    ref<uint8>(0xF5) = PChar->menuConfigFlags.byte2 | (PChar->m_hasAutoTarget ? 0 : (uint8)NFLAG_AUTOTARGET >> 8);
+    ref<uint8>(0xF4) = 0x18 | PChar->menuConfigFlags.byte1 | (PChar->nameflags.flags & static_cast<uint32>(FLAG_INVITE) ? static_cast<uint32>(NFLAG_INVITE) : 0);
+    ref<uint8>(0xF5) = PChar->menuConfigFlags.byte2 | (PChar->m_hasAutoTarget ? 0 : NFLAG_AUTOTARGET >> 8);
     ref<uint8>(0xF6) = PChar->menuConfigFlags.byte3;
     ref<uint8>(0xF7) = PChar->menuConfigFlags.byte4;
 

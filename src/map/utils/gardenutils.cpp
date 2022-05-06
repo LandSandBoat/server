@@ -277,11 +277,11 @@ namespace gardenutils
 
         strength += (int16)((100 - strength) * (PItem->getStrength() / 32.0f));
 
-        int resultElement = PItem->getCommonCrystalFeed();
-        if (PItem->isTree())
-        {
-            resultElement += PItem->getExtraCrystalFeed() << 4;
-        }
+        // int resultElement = PItem->getCommonCrystalFeed();
+        // if (PItem->isTree())
+        // {
+        //     resultElement += PItem->getExtraCrystalFeed() << 4;
+        // }
 
         uint32 resultUid = (PItem->getPlant() << 8) + (PItem->getCommonCrystalFeed() << 4) + PItem->getExtraCrystalFeed();
 

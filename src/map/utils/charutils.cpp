@@ -5371,7 +5371,7 @@ namespace charutils
             perpReduction += dayReduction;
         }
 
-        // TODO: #793 Whats the deal with the +1 to weather result here?
+        // TODO: Whats the deal with the +1 to weather result here?
         if (weather == weatherStrong[petElementIdx] || weather == weatherStrong[petElementIdx] + 1)
         {
             perpReduction += weatherReduction;

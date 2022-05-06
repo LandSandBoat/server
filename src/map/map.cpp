@@ -131,7 +131,7 @@ map_session_data_t* mapsession_getbyipp(uint64 ipp)
 map_session_data_t* mapsession_createsession(uint32 ip, uint16 port)
 {
     TracyZoneScoped;
-    map_session_data_t* map_session_data = new map_session_data_t;
+    map_session_data_t* map_session_data = new map_session_data_t{};
 
     map_session_data->server_packet_data = new int8[map_config.buffer_size + 20];
 
@@ -612,7 +612,6 @@ int32 recv_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
 
         return 0;
     }
-    return -1;
 }
 
 /************************************************************************

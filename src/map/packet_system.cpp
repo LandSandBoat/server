@@ -3827,11 +3827,11 @@ void SmallPacket0x064(map_session_data_t* const PSession, CCharEntity* const PCh
         return;
     }
 
-    // memcpy(&PChar->keys.tables[KeyTable].seenList, data[0x08], 0x40);
-    // TODO: verify this works?
-    for (int i = 0; i < 0x40; i++)
+    // Write 64 bytes to PChar->keys.tables[KeyTable].seenList (512 bits)
+    // std::memcpy(&PChar->keys.tables[KeyTable].seenList, data[0x08], 0x40);
+    for (int i = 0; i < 0x40; ++i)
     {
-        PChar->keys.tables[KeyTable].seenList[i] = data[0x08 + i];
+        PChar->keys.tables[KeyTable].seenList.set(i, data[0x08 + i]);
     }
 
     charutils::SaveKeyItems(PChar);

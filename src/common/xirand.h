@@ -23,6 +23,7 @@
 #ifndef _XIRAND_H_
 #define _XIRAND_H_
 
+#include <array>
 #include <random>
 
 class xirand

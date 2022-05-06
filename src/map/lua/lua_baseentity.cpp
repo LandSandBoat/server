@@ -665,7 +665,7 @@ void CLuaBaseEntity::injectPacket(std::string const& filename)
         }
 
         fseek(File, 0, SEEK_SET);
-        if (fread(*PPacket, 1, size * 2, File) != size * 2)
+        if (fread(*PPacket, 1, size * 2, File) != (size * 2U))
         {
             ShowError("CLuaBaseEntity::injectPacket : Did not read entire packet");
             fclose(File);
