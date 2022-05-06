@@ -27,7 +27,7 @@ CPMAddPackage(
 
 set(EXTERNAL_LIBS
     mariadbclient
-    spdlog_header_only
+    spdlog
     recast
     detour
     sol2_single

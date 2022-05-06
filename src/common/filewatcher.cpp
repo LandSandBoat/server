@@ -7,8 +7,6 @@
 #include <string>
 #include <memory>
 
-#include "efsw/efsw.hpp"
-
 Filewatcher::Filewatcher(std::string const& path)
 #ifdef USE_GENERIC_FILEWATCHER
 : fileWatcher(std::make_unique<efsw::FileWatcher>(true))
