@@ -1,3 +1,4 @@
+add_subdirectory(concurrentqueue)
 add_subdirectory(detour)
 # add_subdirectory(lua) # Handled globally 
 # add_subdirectory(mysql) # Handled globally
@@ -19,13 +20,8 @@ CPMAddPackage(
         "EFSW_INSTALL OFF"
 )
 
-CPMAddPackage(
-    NAME concurrentqueue
-    GITHUB_REPOSITORY cameron314/concurrentqueue
-    GIT_TAG v1.0.3
-)
-
 set(EXTERNAL_LIBS
+    concurrentqueue
     mariadbclient
     spdlog
     recast
