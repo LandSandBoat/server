@@ -554,7 +554,7 @@ void TCPComm(SOCKET socket)
 
 void HandleGroupListRequest(CTCPRequestPacket& PTCPRequest)
 {
-    uint8* data = (uint8*)PTCPRequest.GetData();
+    uint8* data = PTCPRequest.GetData();
 
     uint16 partyid      = ref<uint16>(data, 0x10);
     uint16 allianceid   = ref<uint16>(data, 0x14);
@@ -599,7 +599,7 @@ void HandleGroupListRequest(CTCPRequestPacket& PTCPRequest)
 
 void HandleSearchComment(CTCPRequestPacket& PTCPRequest)
 {
-    uint8* data = (uint8*)PTCPRequest.GetData();
+    uint8* data = PTCPRequest.GetData();
     uint32 playerId = ref<uint32>(data, 0x10);
 
     CDataLoader PDataLoader;
@@ -634,7 +634,7 @@ void HandleSearchRequest(CTCPRequestPacket& PTCPRequest)
 
 void HandleAuctionHouseRequest(CTCPRequestPacket& PTCPRequest)
 {
-    uint8* data    = (uint8*)PTCPRequest.GetData();
+    uint8* data    = PTCPRequest.GetData();
     uint8  AHCatID = ref<uint8>(data, 0x16);
 
     // 2 - level
@@ -655,12 +655,16 @@ void HandleAuctionHouseRequest(CTCPRequestPacket& PTCPRequest)
         {
             case 2:
                 OrderByString.append(" item_equipment.level DESC,");
+                break;
             case 5:
                 OrderByString.append(" item_weapon.dmg DESC,");
+                break;
             case 6:
                 OrderByString.append(" item_weapon.delay DESC,");
+                break;
             case 9:
                 OrderByString.append(" item_basic.sortname,");
+                break;
         }
     }
 
@@ -689,7 +693,7 @@ void HandleAuctionHouseRequest(CTCPRequestPacket& PTCPRequest)
 
 void HandleAuctionHouseHistory(CTCPRequestPacket& PTCPRequest)
 {
-    uint8* data   = (uint8*)PTCPRequest.GetData();
+    uint8* data   = PTCPRequest.GetData();
     uint16 ItemID = ref<uint16>(data, 0x12);
     uint8  stack  = ref<uint8>(data, 0x15);
 
@@ -734,7 +738,7 @@ search_req _HandleSearchRequest(CTCPRequestPacket& PTCPRequest)
 
     uint32 flags = 0;
 
-    uint8* data = (uint8*)PTCPRequest.GetData();
+    uint8* data = PTCPRequest.GetData();
     uint8  size = ref<uint8>(data, 0x10);
 
     uint16 workloadBits = size * 8;

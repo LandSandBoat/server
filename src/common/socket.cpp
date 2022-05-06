@@ -571,10 +571,10 @@ int access_ipmask(const char* str, AccessControl* acc)
         { // invalid bit mask
             return 0;
         }
-        ip = (uint32)(a[0] | (a[1] << 8) | (a[2] << 16) | (a[3] << 24));
+        ip = (a[0] | (a[1] << 8) | (a[2] << 16) | (a[3] << 24));
         if (n == 8)
         { // standard mask
-            mask = (uint32)(a[0] | (a[1] << 8) | (a[2] << 16) | (a[3] << 24));
+            mask = (a[0] | (a[1] << 8) | (a[2] << 16) | (a[3] << 24));
         }
         else if (n == 5)
         { // bit mask
@@ -616,7 +616,7 @@ int recv_to_fifo(int fd)
 
     auto prev_length = session[fd]->rdata.size();
     session[fd]->rdata.resize(prev_length + 0x7FF);
-    len = sRecv(fd, (char*)session[fd]->rdata.data() + prev_length, (int)(session[fd]->rdata.capacity() - prev_length), 0);
+    len = sRecv(fd, session[fd]->rdata.data() + prev_length, (int)(session[fd]->rdata.capacity() - prev_length), 0);
 
     if (len == SOCKET_ERROR)
     { // An exception has occured

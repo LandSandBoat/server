@@ -35,6 +35,7 @@ class CItemState : public CState
 public:
     CItemState(CCharEntity* PEntity, uint16 targid, uint8 loc, uint8 slotid);
     void UpdateTarget(CBaseEntity* target) override;
+    void UpdateTarget(uint16 targid) override;
     bool Update(time_point tick) override;
     void Cleanup(time_point tick) override;
     bool CanChangeState() override;

@@ -178,7 +178,7 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
 
             uint64  port = zmqSql->GetUIntData(1);
             in_addr target;
-            target.s_addr = (unsigned long)ip;
+            target.s_addr = ip;
 
             char target_address[INET_ADDRSTRLEN];
             inet_ntop(AF_INET, &target, target_address, INET_ADDRSTRLEN);

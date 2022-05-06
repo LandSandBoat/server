@@ -132,7 +132,6 @@ map_session_data_t* mapsession_createsession(uint32 ip, uint16 port)
 {
     TracyZoneScoped;
     map_session_data_t* map_session_data = new map_session_data_t;
-    memset(map_session_data, 0, sizeof(map_session_data_t));
 
     map_session_data->server_packet_data = new int8[map_config.buffer_size + 20];
 
@@ -385,8 +384,8 @@ int32 do_sockets(fd_set* rfd, duration next)
     int32          ret;
     memcpy(rfd, &readfds, sizeof(*rfd));
 
-    timeout.tv_sec  = (long)std::chrono::duration_cast<std::chrono::seconds>(next).count();
-    timeout.tv_usec = (long)std::chrono::duration_cast<std::chrono::microseconds>(next - std::chrono::duration_cast<std::chrono::seconds>(next)).count();
+    timeout.tv_sec  = std::chrono::duration_cast<std::chrono::seconds>(next).count();
+    timeout.tv_usec = std::chrono::duration_cast<std::chrono::microseconds>(next - std::chrono::duration_cast<std::chrono::seconds>(next)).count();
 
     ret = sSelect(fd_max, rfd, nullptr, nullptr, &timeout);
 
@@ -1184,7 +1183,7 @@ int32 map_config_read(const int8* cfgName)
         ptr++;
         *ptr = '\0';
 
-        int  stdout_with_ansisequence = 0;
+        //int  stdout_with_ansisequence = 0; // unused
         int  msg_silent               = 0;                    // Specifies how silent the console is.
         char timestamp_format[20]     = "[%d/%b] [%H:%M:%S]"; // For displaying Timestamps, default value
 
@@ -1192,10 +1191,12 @@ int32 map_config_read(const int8* cfgName)
         {
             strncpy(timestamp_format, w2, 20);
         }
+/*      // unused
         else if (strcmpi(w1, "stdout_with_ansisequence") == 0)
         {
             stdout_with_ansisequence = config_switch(w2);
         }
+*/
         else if (strcmpi(w1, "console_silent") == 0)
         {
             ShowInfo("Console Silent Setting: %d", atoi(w2));

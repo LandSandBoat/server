@@ -91,7 +91,7 @@ const int8* CBaseEntity::GetPacketName()
 
 uint16 CBaseEntity::getZone() const
 {
-    return loc.zone != nullptr ? loc.zone->GetID() : loc.destination;
+    return loc.zone != nullptr ? (uint16)loc.zone->GetID() : (uint16)loc.destination;
 }
 
 float CBaseEntity::GetXPos() const

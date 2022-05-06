@@ -160,7 +160,7 @@ namespace message
                             {
                                 CBasicPacket* newPacket = new CBasicPacket();
                                 memcpy(*newPacket, packet.data(), std::min<size_t>(packet.size(), PACKET_SIZE));
-                                ((CParty*)i)->PushPacket(ref<uint32>((uint8*)extra.data(), 4), 0, newPacket);
+                                i->PushPacket(ref<uint32>((uint8*)extra.data(), 4), 0, newPacket);
                             }
                         }
                         else
@@ -413,7 +413,7 @@ namespace message
                     if (targetLS && (kickerRank == LSTYPE_LINKSHELL || (kickerRank == LSTYPE_PEARLSACK && targetLS->GetLSType() == LSTYPE_LINKPEARL)))
                     {
                         PChar->PLinkshell1->RemoveMemberByName((int8*)extra.data() + 4,
-                                                               (targetLS->GetLSType() == LSTYPE_LINKSHELL ? LSTYPE_PEARLSACK : kickerRank));
+                                                               (targetLS->GetLSType() == (uint8)LSTYPE_LINKSHELL ? (uint8)LSTYPE_PEARLSACK : kickerRank));
                     }
                 }
                 else if (PChar && PChar->PLinkshell2 && PChar->PLinkshell2->getID() == ref<uint32>((uint8*)extra.data(), 24))
@@ -520,9 +520,9 @@ namespace message
                                 {
                                     while (sql->NextRow() == SQL_SUCCESS)
                                     {
-                                        X = (float)sql->GetFloatData(0);
-                                        Y = (float)sql->GetFloatData(1);
-                                        Z = (float)sql->GetFloatData(2);
+                                        X = sql->GetFloatData(0);
+                                        Y = sql->GetFloatData(1);
+                                        Z = sql->GetFloatData(2);
                                     }
                                 }
                             }
