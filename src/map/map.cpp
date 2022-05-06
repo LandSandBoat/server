@@ -133,7 +133,6 @@ map_session_data_t* mapsession_createsession(uint32 ip, uint16 port)
     TracyZoneScoped;
 
     map_session_data_t* map_session_data = new map_session_data_t();
-    *map_session_data = {};
 
     map_session_data->server_packet_data = new int8[map_config.buffer_size + 20];
 

@@ -46,7 +46,7 @@ CItem::CItem(uint16 id)
 , m_slotID(-1)
 , m_locationID(-1)
 {
-    *m_extra = {0};
+    std::memset(m_extra, 0, sizeof(m_extra));
 }
 
 CItem::~CItem() = default;
