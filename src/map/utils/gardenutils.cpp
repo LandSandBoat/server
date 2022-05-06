@@ -142,20 +142,28 @@ namespace gardenutils
         {
             case FLOWERPOT_PLANT_HERB_SEEDS:
                 elements[FLOWERPOT_ELEMENT_WIND] += 10;
+                break;
             case FLOWERPOT_PLANT_GRAIN_SEEDS:
                 elements[FLOWERPOT_ELEMENT_FIRE] += 10;
+                break;
             case FLOWERPOT_PLANT_VEGETABLE_SEEDS:
                 elements[FLOWERPOT_ELEMENT_EARTH] += 10;
+                break;
             case FLOWERPOT_PLANT_FRUIT_SEEDS:
                 elements[FLOWERPOT_ELEMENT_WATER] += 10;
+                break;
             case FLOWERPOT_PLANT_CACTUS_STEMS:
                 elements[FLOWERPOT_ELEMENT_LIGHT] += 10;
+                break;
             case FLOWERPOT_PLANT_TREE_CUTTINGS:
                 elements[FLOWERPOT_ELEMENT_ICE] += 10;
+                break;
             case FLOWERPOT_PLANT_TREE_SAPLINGS:
                 elements[FLOWERPOT_ELEMENT_DARK] += 10;
+                break;
             case FLOWERPOT_PLANT_WILDGRASS_SEEDS:
                 elements[FLOWERPOT_ELEMENT_LIGHTNING] += 10;
+                break;
             default:
                 elements[FLOWERPOT_ELEMENT_NONE] += 10;
         }
@@ -163,7 +171,7 @@ namespace gardenutils
         if (map_config.garden_day_matters)
         {
             uint32 vanaDate   = PItem->getPlantTimestamp();
-            uint32 dayElement = (uint32)((vanaDate % VTIME_WEEK) / VTIME_DAY) + 1;
+            uint32 dayElement = ((vanaDate % VTIME_WEEK) / VTIME_DAY) + 1;
             elements[dayElement] += 10;
         }
 
@@ -173,16 +181,22 @@ namespace gardenutils
             {
                 case 216: // Porcelain Flowerpot
                     elements[FLOWERPOT_ELEMENT_WIND] += 10;
+                    break;
                 case 217: // Brass Flowerpot
                     elements[FLOWERPOT_ELEMENT_FIRE] += 10;
+                    break;
                 case 218: // Earthen Flowerpot
                     elements[FLOWERPOT_ELEMENT_EARTH] += 10;
+                    break;
                 case 219: // Ceramic Flowerpot
                     elements[FLOWERPOT_ELEMENT_WATER] += 10;
+                    break;
                 case 220: // Wooden Flowerpot
                     elements[FLOWERPOT_ELEMENT_LIGHT] += 10;
+                    break;
                 case 221: // Arcane Flowerpot
                     elements[FLOWERPOT_ELEMENT_DARK] += 10;
+                    break;
                 default:
                     break;
             }

@@ -97,6 +97,14 @@ void CAttackState::ResetAttackTimer()
     m_attackTime = std::chrono::milliseconds(m_PEntity->GetWeaponDelay(false));
 }
 
+void CAttackState::UpdateTarget(CBaseEntity* target)
+{
+    if (target != nullptr)
+    {
+        CAttackState::UpdateTarget(target->targid);
+    }
+}
+
 void CAttackState::UpdateTarget(uint16 targid)
 {
     m_errorMsg.reset();

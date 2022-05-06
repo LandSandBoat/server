@@ -726,6 +726,7 @@ bool CAutomatonController::TryEnfeeble(const CurrentManeuvers& maneuvers)
             {
                 castPriority.push_back(SpellID::Dispel);
             }
+            break;
         }
         default:
         {
@@ -832,8 +833,8 @@ bool CAutomatonController::TryEnfeeble(const CurrentManeuvers& maneuvers)
             {
                 defaultPriority.push_back(SpellID::Addle);
             }
+            break;
         }
-        break;
         case HEAD_SPIRITREAVER:
         {
             if (PAutomaton->GetMPP() <= 75 && PTarget->health.mp > 0) // MPP <= 75 -> Aspir
@@ -936,8 +937,8 @@ bool CAutomatonController::TryEnfeeble(const CurrentManeuvers& maneuvers)
                     defaultPriority.push_back(SpellID::Addle);
                 }
             }
+            break;
         }
-        break;
         case HEAD_SOULSOOTHER:
         {
             if (maneuvers.earth)
@@ -1039,6 +1040,7 @@ bool CAutomatonController::TryEnfeeble(const CurrentManeuvers& maneuvers)
             {
                 defaultPriority.push_back(SpellID::Addle);
             }
+            break;
         }
     }
 

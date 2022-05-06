@@ -321,7 +321,7 @@ namespace gambits
                         auto spell_id = POwner->SpellContainer->GetAvailable(static_cast<SpellID>(action.select_arg));
                         if (spell_id.has_value())
                         {
-                            controller->Cast(target->targid, static_cast<SpellID>(spell_id.value()));
+                            controller->Cast(target->targid, spell_id.value());
                         }
                     }
                     else if (action.select == G_SELECT::HIGHEST)
@@ -329,7 +329,7 @@ namespace gambits
                         auto spell_id = POwner->SpellContainer->GetBestAvailable(static_cast<SPELLFAMILY>(action.select_arg));
                         if (spell_id.has_value())
                         {
-                            controller->Cast(target->targid, static_cast<SpellID>(spell_id.value()));
+                            controller->Cast(target->targid, spell_id.value());
                         }
                     }
                     else if (action.select == G_SELECT::LOWEST)
@@ -346,7 +346,7 @@ namespace gambits
                         auto spell_id = POwner->SpellContainer->GetBestAgainstTargetWeakness(target);
                         if (spell_id.has_value())
                         {
-                            controller->Cast(target->targid, static_cast<SpellID>(spell_id.value()));
+                            controller->Cast(target->targid, spell_id.value());
                         }
                     }
                     else if (action.select == G_SELECT::RANDOM)
@@ -354,7 +354,7 @@ namespace gambits
                         auto spell_id = POwner->SpellContainer->GetSpell();
                         if (spell_id.has_value())
                         {
-                            controller->Cast(target->targid, static_cast<SpellID>(spell_id.value()));
+                            controller->Cast(target->targid, spell_id.value());
                         }
                     }
                     else if (action.select == G_SELECT::MB_ELEMENT)
@@ -391,7 +391,7 @@ namespace gambits
 
                         if (spell_id.has_value())
                         {
-                            controller->Cast(target->targid, static_cast<SpellID>(spell_id.value()));
+                            controller->Cast(target->targid, spell_id.value());
                         }
                     }
                 }
@@ -585,8 +585,8 @@ namespace gambits
             case G_CONDITION::NO_SAMBA:
             {
                 bool noSamba = true;
-                if (trigger_target->StatusEffectContainer->HasStatusEffect(static_cast<EFFECT>(EFFECT_DRAIN_SAMBA)) ||
-                    trigger_target->StatusEffectContainer->HasStatusEffect(static_cast<EFFECT>(EFFECT_HASTE_SAMBA)))
+                if (trigger_target->StatusEffectContainer->HasStatusEffect(EFFECT_DRAIN_SAMBA) ||
+                    trigger_target->StatusEffectContainer->HasStatusEffect(EFFECT_HASTE_SAMBA))
                 {
                     noSamba = false;
                 }

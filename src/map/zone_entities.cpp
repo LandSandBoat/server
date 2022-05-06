@@ -964,6 +964,7 @@ void CZoneEntities::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message
                 {
                     ((CCharEntity*)PEntity)->pushPacket(new CBasicPacket(*packet));
                 }
+                break;
             }
             case CHAR_INRANGE:
             {
@@ -1035,8 +1036,8 @@ void CZoneEntities::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message
                         }
                     }
                 }
+                break;
             }
-            break;
             case CHAR_INSHOUT:
             {
                 TracyZoneCString("CHAR_INSHOUT");
@@ -1052,8 +1053,8 @@ void CZoneEntities::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message
                         }
                     }
                 }
+                break;
             }
-            break;
             case CHAR_INZONE:
             {
                 TracyZoneCString("CHAR_INZONE");
@@ -1069,8 +1070,8 @@ void CZoneEntities::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message
                         }
                     }
                 }
+                break;
             }
-            break;
         }
     }
     delete packet;

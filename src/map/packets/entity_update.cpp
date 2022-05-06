@@ -245,7 +245,7 @@ CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type
 
         // Make sure to zero-out the existing name area of the packet
         auto start = data + nameOffset;
-        auto size  = static_cast<std::size_t>(this->getSize());
+        auto size  = this->getSize();
         std::memset(start, 0U, size);
 
         // Copy in name

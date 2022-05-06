@@ -12,7 +12,7 @@ SqlPreparedStatement::SqlPreparedStatement(MYSQL* handle, std::string const& que
         std::exit(-1);
     }
 
-    auto res = mysql_stmt_prepare(m_Statement, query.c_str(), static_cast<unsigned long>(query.size()));
+    auto res = mysql_stmt_prepare(m_Statement, query.c_str(), query.size());
     if (res != 0)
     {
         ShowError("mysql_stmt_prepare: %s", mysql_stmt_error(m_Statement));
