@@ -25,29 +25,38 @@
 #include <algorithm>
 #include <any>
 #include <array>
+#include <atomic>
 #include <bitset>
 #include <cassert>
 #include <cctype>
+#include <cerrno>
 #include <cfloat>
 #include <charconv>
 #include <chrono>
 #include <cinttypes>
 #include <climits>
 #include <cmath>
+#include <condition_variable>
+#include <csignal>
+#include <cstdarg>
 #include <cstddef>
 #include <cstdint>
 #include <cstdio>
 #include <cstdlib>
-#include <cstdarg>
 #include <cstring>
 #include <ctime>
 #include <deque>
+#include <exception>
 #include <filesystem>
 #include <fstream>
 #include <functional>
+#include <initializer_list>
 #include <iostream>
+#include <iterator>
+#include <limits>
 #include <list>
 #include <memory>
+#include <mutex>
 #include <numeric>
 #include <optional>
 #include <queue>
@@ -55,21 +64,41 @@
 #include <set>
 #include <sstream>
 #include <stack>
+#include <stdexcept>
 #include <string>
+#include <string_view>
 #include <thread>
 #include <tuple>
+#include <type_traits>
+#include <typeindex>
+#include <typeinfo>
 #include <unordered_map>
+#include <unordered_set>
 #include <utility>
 #include <variant>
 #include <vector>
 
-#include <concurrentqueue.h>
-
+#include "common/cbasetypes.h"
+#include "common/kernel.h"
 #include "common/logging.h"
 #include "common/mmo.h"
+#include "common/socket.h"
 #include "common/sql.h"
+#include "common/taskmgr.h"
 #include "common/timer.h"
 #include "common/tracy.h"
+#include "common/utils.h"
 #include "common/xirand.h"
+
+#include <concurrentqueue.h>
+
+#include <spdlog/spdlog.h>
+#include <spdlog/common.h>
+
+#include <spdlog/fmt/fmt.h>
+#include <spdlog/fmt/bundled/core.h>
+#include <spdlog/fmt/bundled/format.h>
+#include <spdlog/fmt/bundled/printf.h>
+#include <spdlog/fmt/bundled/chrono.h>
 
 #endif // #define _PCH_H

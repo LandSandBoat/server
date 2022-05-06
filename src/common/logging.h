@@ -30,7 +30,6 @@
 #define SPDLOG_ACTIVE_LEVEL SPDLOG_LEVEL_TRACE
 
 #define SPDLOG_NO_THREAD_ID
-#define SPDLOG_NO_ATOMIC_LEVELS
 
 #include "spdlog/spdlog.h"
 
