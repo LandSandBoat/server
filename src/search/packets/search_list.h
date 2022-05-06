@@ -57,7 +57,6 @@ public:
     uint16 GetSize() const;
 
 private:
-    uint8  m_count;
     uint32 m_offset;
     uint8  m_data[1024];
 };

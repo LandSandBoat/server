@@ -37,7 +37,6 @@ public:
     uint16 GetSize() const;
 
 private:
-    uint32 m_partyid;
     uint32 m_offset;
 
     uint8 m_data[1024];
