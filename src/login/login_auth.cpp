@@ -115,7 +115,7 @@ int32 login_parse(int32 fd)
                 {
                     ret = sql->NextRow();
 
-                    sd->accid    = (uint32)sql->GetUIntData(0);
+                    sd->accid    = sql->GetUIntData(0);
                     uint8 status = (uint8)sql->GetUIntData(1);
 
                     if (status & ACCST_NORMAL)
@@ -307,7 +307,7 @@ int32 login_parse(int32 fd)
 
                 ret = sql->NextRow();
 
-                sd->accid    = (uint32)sql->GetUIntData(0);
+                sd->accid    = sql->GetUIntData(0);
                 uint8 status = (uint8)sql->GetUIntData(1);
 
                 if (status & ACCST_BANNED)

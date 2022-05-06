@@ -65,7 +65,7 @@ uint32 CLuaItem::getQuantity()
 
 uint32 CLuaItem::getBasePrice()
 {
-    return static_cast<CItem*>(m_PLuaItem)->getBasePrice();
+    return m_PLuaItem->getBasePrice();
 }
 
 uint8 CLuaItem::getLocationID()
@@ -122,7 +122,7 @@ auto CLuaItem::getMatchingTrials() -> sol::table
         int32 trialCount = 0;
         while (sql->NextRow() == SQL_SUCCESS)
         {
-            auto id             = static_cast<int32>(sql->GetIntData(0));
+            auto id             = sql->GetIntData(0);
             table[++trialCount] = id;
         }
     }

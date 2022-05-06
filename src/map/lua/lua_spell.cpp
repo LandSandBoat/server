@@ -123,7 +123,7 @@ uint16 CLuaSpell::getID()
 
 uint16 CLuaSpell::getMPCost()
 {
-    return static_cast<uint16>(m_PLuaSpell->getMPCost());
+    return m_PLuaSpell->getMPCost();
 }
 
 uint8 CLuaSpell::getSkillType()

@@ -789,7 +789,7 @@ void CBattlefield::ForEachPlayer(const std::function<void(CCharEntity*)>& func)
 {
     for (auto player : m_EnteredPlayers)
     {
-        func(static_cast<CCharEntity*>(GetZone()->GetCharByID(player)));
+        func(GetZone()->GetCharByID(player));
     }
 }
 

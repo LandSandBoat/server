@@ -297,9 +297,9 @@ size_t SqlConnection::EscapeStringLen(char* out_to, const char* from, size_t fro
     TracyZoneScoped;
     if (self)
     {
-        return (size_t)mysql_real_escape_string(&self->handle, out_to, from, (uint32)from_len);
+        return mysql_real_escape_string(&self->handle, out_to, from, (uint32)from_len);
     }
-    return (size_t)mysql_escape_string(out_to, from, (uint32)from_len);
+    return mysql_escape_string(out_to, from, (uint32)from_len);
 }
 
 /************************************************************************
@@ -394,7 +394,7 @@ uint32 SqlConnection::NumColumns()
     TracyZoneScoped;
     if (self && self->result)
     {
-        return (uint32)mysql_num_fields(self->result);
+        return mysql_num_fields(self->result);
     }
     return 0;
 }
@@ -410,7 +410,7 @@ uint64 SqlConnection::NumRows()
     TracyZoneScoped;
     if (self && self->result)
     {
-        return (uint64)mysql_num_rows(self->result);
+        return mysql_num_rows(self->result);
     }
     return 0;
 }
@@ -462,7 +462,7 @@ int32 SqlConnection::GetData(size_t col, char** out_buf, size_t* out_len)
             }
             if (out_len)
             {
-                *out_len = (size_t)self->lengths[col];
+                *out_len = self->lengths[col];
             }
         }
         else // out of range - ignore
@@ -517,7 +517,7 @@ int32 SqlConnection::GetIntData(size_t col)
     {
         if (col < NumColumns())
         {
-            return (self->row[col] ? (int32)atoi(self->row[col]) : 0);
+            return (self->row[col] ? atoi(self->row[col]) : 0);
         }
     }
     ShowFatalError("Query: %s", self->buf);

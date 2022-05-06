@@ -434,7 +434,7 @@ namespace trustutils
                    (grade::GetHPScale(grade, scaleOver30Column) * mainLevelOver30) + (grade::GetHPScale(grade, scaleOver60Column) * mainLevelOver60To75) +
                    (grade::GetHPScale(grade, scaleOver75Column) * mainLevelOver75);
 
-        grade = grade = grade::GetJobGrade(mJob, 0);
+        grade = grade::GetJobGrade(mJob, 0);
 
         jobStat = grade::GetHPScale(grade, baseValueColumn) + (grade::GetHPScale(grade, scaleTo60Column) * mainLevelUpTo60) +
                   (grade::GetHPScale(grade, scaleOver30Column) * mainLevelOver30) + (grade::GetHPScale(grade, scaleOver60Column) * mainLevelOver60To75) +

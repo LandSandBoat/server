@@ -283,7 +283,7 @@ void CPathFind::StepTo(const position_t& pos, bool run)
         speed /= 2;
     }
 
-    float stepDistance = ((float)speed / 10) / 2;
+    float stepDistance = (speed / 10) / 2;
     float distanceTo   = distance(m_POwner->loc.p, pos);
 
     // face point mob is moving towards

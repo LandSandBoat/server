@@ -307,7 +307,7 @@ namespace zoneutils
                     PNpc->loc.p.z        = sql->GetFloatData(7);
                     PNpc->loc.p.moving   = (uint16)sql->GetUIntData(8);
 
-                    PNpc->m_TargID = (uint32)sql->GetUIntData(8) >> 16;
+                    PNpc->m_TargID = sql->GetUIntData(8) >> 16;
 
                     PNpc->speed    = (uint8)sql->GetIntData(9); // Overwrites baseentity.cpp's defined speed
                     PNpc->speedsub = (uint8)sql->GetIntData(10); // Overwrites baseentity.cpp's defined speedsub
@@ -317,7 +317,7 @@ namespace zoneutils
 
                     PNpc->namevis = (uint8)sql->GetIntData(13);
                     PNpc->status  = static_cast<STATUS_TYPE>(sql->GetIntData(14));
-                    PNpc->m_flags = (uint32)sql->GetUIntData(15);
+                    PNpc->m_flags = sql->GetUIntData(15);
 
                     std::memcpy(&PNpc->look, sql->GetData(16), 20);
 
@@ -383,7 +383,7 @@ namespace zoneutils
                     CMobEntity* PMob = new CMobEntity;
 
                     PMob->name.insert(0, (const char*)sql->GetData(1));
-                    PMob->id = (uint32)sql->GetUIntData(2);
+                    PMob->id = sql->GetUIntData(2);
 
                     PMob->targid = (uint16)PMob->id & 0x0FFF;
 
@@ -564,8 +564,8 @@ namespace zoneutils
             while (sql->NextRow() == SQL_SUCCESS)
             {
                 uint16 ZoneID   = (uint16)sql->GetUIntData(0);
-                uint32 masterid = (uint32)sql->GetUIntData(1);
-                uint32 petid    = masterid + (uint32)sql->GetUIntData(2);
+                uint32 masterid = sql->GetUIntData(1);
+                uint32 petid    = masterid + sql->GetUIntData(2);
 
                 CMobEntity* PMaster = (CMobEntity*)GetZone(ZoneID)->GetEntity(masterid & 0x0FFF, TYPE_MOB);
                 CMobEntity* PPet    = (CMobEntity*)GetZone(ZoneID)->GetEntity(petid & 0x0FFF, TYPE_MOB);

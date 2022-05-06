@@ -91,7 +91,7 @@ CMessageStandardPacket::CMessageStandardPacket(uint32 param0, uint32 param1, uin
 
     snprintf((char*)data + (0x0D), 100, "Para0 %d Para1 %d Para2 %d Para3 %d", param0, param1, param2, param3);
 
-    this->setSize(this->getSize() + (strlen((char*)data + (0x0D)) >> 1) & 0xFE);
+    this->setSize((this->getSize() + (strlen((char*)data + (0x0D)) >> 1)) & 0xFE);
 }
 
 // Only used with MsgStd::DiceRoll (/random)

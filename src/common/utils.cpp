@@ -55,7 +55,7 @@ int32 checksum(unsigned char* buf, uint32 buflen, char checkhash[16])
 {
     unsigned char hash[16];
 
-    md5((unsigned char*)buf, hash, buflen);
+    md5(buf, hash, buflen);
 
     if (memcmp(hash, checkhash, 16) == 0)
     {
@@ -247,7 +247,7 @@ int32 hasBit(uint16 value, const uint8* BitArray, uint32 size)
         ShowError("hasBit: value (%u) is out of range", value);
         return 0;
     }
-    return (int32)(BitArray[value >> 3] & (1 << (value % 8)));
+    return (BitArray[value >> 3] & (1 << (value % 8)));
 }
 
 int32 addBit(uint16 value, uint8* BitArray, uint32 size)
@@ -292,7 +292,7 @@ uint32 packBitsBE(uint8* target, uint64 value, int32 byteOffset, int32 bitOffset
 
     if ((lengthInBit + bitOffset) <= 8) // write shifted value to target
     {
-        uint8* dataPointer = (uint8*)&target[byteOffset];
+        uint8* dataPointer = &target[byteOffset];
 
         uint8 bitmaskUC = (uint8)bitmask;
         uint8 valueUC   = (uint8)value;
@@ -353,7 +353,7 @@ uint64 unpackBitsBE(uint8* target, int32 byteOffset, int32 bitOffset, uint8 leng
 
     if ((lengthInBit + bitOffset) <= 8)
     {
-        uint8* dataPointer = (uint8*)&target[byteOffset];
+        uint8* dataPointer = &target[byteOffset];
 
         retVal = ((*dataPointer) & (uint8)bitmask) >> bitOffset;
     }
@@ -373,7 +373,7 @@ uint64 unpackBitsBE(uint8* target, int32 byteOffset, int32 bitOffset, uint8 leng
     {
         uint64* dataPointer = (uint64*)&target[byteOffset];
 
-        retVal = ((*dataPointer) & (uint64)bitmask) >> bitOffset;
+        retVal = ((*dataPointer) & bitmask) >> bitOffset;
     }
     else
     {
@@ -528,7 +528,7 @@ void EncodeStringLinkshell(int8* signature, int8* target)
     packBitsLE(encodedSignature, 0xFF, 6 * chars, leftover);
 
     // TODO: -Wno-sizeof-pointer-memaccess - sizeof references source not destination
-    strncpy((char*)target, (const char*)encodedSignature, sizeof encodedSignature);
+    strncpy((char*)target, (const char*)encodedSignature, sizeof target);
 }
 
 void DecodeStringLinkshell(int8* signature, int8* target)
@@ -570,7 +570,7 @@ void DecodeStringLinkshell(int8* signature, int8* target)
         }
     }
     // TODO: -Wno-sizeof-pointer-memaccess - sizeof references source not destination
-    strncpy((char*)target, (const char*)decodedSignature, sizeof decodedSignature);
+    strncpy((char*)target, (const char*)decodedSignature, sizeof target);
 }
 
 int8* EncodeStringSignature(int8* signature, int8* target)
@@ -605,7 +605,7 @@ int8* EncodeStringSignature(int8* signature, int8* target)
     // packBitsLE(encodedSignature,0xFF,6*chars, leftover);
 
     // TODO: -Wno-sizeof-pointer-memaccess - sizeof references source not destination
-    return (int8*)strncpy((char*)target, (const char*)encodedSignature, sizeof encodedSignature);
+    return (int8*)strncpy((char*)target, (const char*)encodedSignature, sizeof target);
 }
 
 void DecodeStringSignature(int8* signature, int8* target)
@@ -630,7 +630,7 @@ void DecodeStringSignature(int8* signature, int8* target)
         decodedSignature[currChar] = tempChar;
     }
     // TODO: -Wno-sizeof-pointer-memaccess - sizeof references source not destination
-    strncpy((char*)target, (const char*)decodedSignature, sizeof decodedSignature);
+    strncpy((char*)target, (const char*)decodedSignature, sizeof target);
 }
 
 // Take a regular string of 8-bit wide chars and packs it down into an
