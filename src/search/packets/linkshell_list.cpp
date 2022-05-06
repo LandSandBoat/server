@@ -32,10 +32,9 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "linkshell_list.h"
 
 CLinkshellListPacket::CLinkshellListPacket(uint32 linkshellid, uint32 Total)
+: m_linkshellid(linkshellid)
+, m_offset(192)
 {
-    m_linkshellid = linkshellid;
-    m_offset      = 192;
-
     memset(m_data, 0, sizeof(m_data));
 
     ref<uint8>(m_data, (0x0A)) = 0x80;

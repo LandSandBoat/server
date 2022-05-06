@@ -530,7 +530,7 @@ int32 CLuaBaseEntity::getCharVar(std::string const& varName)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
     auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
-    return charutils::GetCharVar(PChar, varName.c_str());
+    return charutils::GetCharVar(PChar, varName);
 }
 
 /************************************************************************
@@ -544,7 +544,7 @@ void CLuaBaseEntity::setCharVar(std::string const& varName, int32 value)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
     auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
-    return charutils::SetCharVar(PChar, varName.c_str(), value);
+    return charutils::SetCharVar(PChar, varName, value);
 }
 
 /************************************************************************
@@ -1846,6 +1846,8 @@ void CLuaBaseEntity::setElevator(uint8 id, uint32 lowerDoor, uint32 upperDoor, u
     elevator.UpperDoor          = static_cast<CNpcEntity*>(zoneutils::GetEntity(upperDoor, TYPE_NPC));
     elevator.Elevator           = static_cast<CNpcEntity*>(zoneutils::GetEntity(elevatorId, TYPE_NPC));
     elevator.animationsReversed = reversed;
+    elevator.state              = STATE_ELEVATOR_BOTTOM;
+    elevator.lastTrigger        = 0;
 
     if (!elevator.Elevator || !elevator.LowerDoor || !elevator.UpperDoor)
     {
@@ -1888,6 +1890,7 @@ void CLuaBaseEntity::addPeriodicTrigger(uint8 id, uint16 period, uint16 minOffse
     trigger.period       = period;
     trigger.minuteOffset = minOffset;
     trigger.npc          = dynamic_cast<CNpcEntity*>(zoneutils::GetEntity(m_PBaseEntity->id, TYPE_NPC));
+    trigger.lastTrigger  = 0;
 
     if (!trigger.npc)
     {

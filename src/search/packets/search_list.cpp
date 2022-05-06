@@ -30,10 +30,9 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "search_list.h"
 
 CSearchListPacket::CSearchListPacket(uint32 Total)
+: m_count(0)
+, m_offset(192)
 {
-    m_count  = 0;
-    m_offset = 192;
-
     memset(m_data, 0, sizeof(m_data));
 
     ref<uint8>(m_data, (0x0A)) = 0x80;

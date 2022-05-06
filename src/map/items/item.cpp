@@ -31,25 +31,22 @@
  ************************************************************************/
 
 CItem::CItem(uint16 id)
+: m_id(id)
+, m_subid(0)
+, m_type(0)
+, m_subtype(0)
+, m_reserve(0)
+, m_quantity(0)
+, m_stackSize(0)
+, m_BasePrice(0)
+, m_CharPrice(0)
+, m_ahCat(0)
+, m_flag(0)
+, m_sent(false)
+, m_slotID(-1)
+, m_locationID(-1)
 {
-    m_id = id;
-
-    m_subid     = 0;
-    m_type      = 0;
-    m_subtype   = 0;
-    m_reserve   = 0;
-    m_quantity  = 0;
-    m_stackSize = 0;
-    m_BasePrice = 0;
-    m_CharPrice = 0;
-    m_ahCat     = 0;
-    m_flag      = 0;
-    m_sent      = false;
-
-    m_slotID     = -1;
-    m_locationID = -1;
-
-    memset(m_extra, 0, sizeof m_extra);
+    *m_extra = {0};
 }
 
 CItem::~CItem() = default;

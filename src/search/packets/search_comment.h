@@ -9,7 +9,7 @@ class SearchCommentPacket
 {
 public:
 
-    SearchCommentPacket(uint32 playerId, std::string comment);
+    SearchCommentPacket(uint32 playerId, std::string const& comment);
 
     uint8* GetData();
     uint16 GetSize();
