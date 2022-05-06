@@ -2863,34 +2863,43 @@ bool CLuaBaseEntity::hasTeleport(uint8 tType, uint8 bit, sol::object const& arg2
     switch (type)
     {
         case TELEPORT_TYPE::OUTPOST_SANDY:
+        {
             return PChar->teleport.outpostSandy & (1 << bit);
-            break;
+        }
         case TELEPORT_TYPE::OUTPOST_BASTOK:
+        {
             return PChar->teleport.outpostBastok & (1 << bit);
-            break;
+        }
         case TELEPORT_TYPE::OUTPOST_WINDY:
+        {
             return PChar->teleport.outpostWindy & (1 << bit);
-            break;
+        }
         case TELEPORT_TYPE::RUNIC_PORTAL:
+        {
             return PChar->teleport.runicPortal & (1 << bit);
-            break;
+        }
         case TELEPORT_TYPE::PAST_MAW:
+        {
             return PChar->teleport.pastMaw & (1 << bit);
-            break;
-        case TELEPORT_TYPE::CAMPAIGN_SANDY:
+        }
+         case TELEPORT_TYPE::CAMPAIGN_SANDY:
+         {
             return PChar->teleport.campaignSandy & (1 << bit);
-            break;
+         }
         case TELEPORT_TYPE::CAMPAIGN_BASTOK:
+        {
             return PChar->teleport.campaignBastok & (1 << bit);
-            break;
+        }
         case TELEPORT_TYPE::CAMPAIGN_WINDY:
+        {
             return PChar->teleport.campaignWindy & (1 << bit);
-            break;
+        }
         default:
+        {
             ShowError("LuaBaseEntity::hasTeleport : Parameter 1 out of bounds.");
             return false;
+        }
     }
-    // return false;
 }
 
 /************************************************************************

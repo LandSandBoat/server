@@ -1213,7 +1213,7 @@ void SmallPacket0x01E(map_session_data_t* const PSession, CCharEntity* const PCh
     std::vector<char> chars;
     std::for_each(data[HEADER_LENGTH], data[HEADER_LENGTH] + (data.getSize() - HEADER_LENGTH), [&](char ch)
     {
-        if ((ch >= 0 && ch < 128) && ch != '\0') // isascii && nonnull
+        if (isascii(ch) && ch != '\0') // isascii && nonnull
         {
             chars.emplace_back(ch);
         }

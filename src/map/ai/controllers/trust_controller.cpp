@@ -488,11 +488,11 @@ uint8 CTrustController::GetPartyPosition()
     TracyZoneScoped;
 
     auto& trustList = static_cast<CCharEntity*>(POwner->PMaster)->PTrusts;
-    for (uint8 i = 0; i < trustList.size(); ++i)
+    for (std::size_t i = 0; i < trustList.size(); ++i)
     {
         if (trustList.at(i)->id == POwner->id)
         {
-            return i;
+            return static_cast<uint8>(i);
         }
     }
     return 0;
