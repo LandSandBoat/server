@@ -31,6 +31,25 @@ local garlaigeID = require('scripts/zones/Garlaige_Citadel/IDs')
 
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.IN_DEFIANT_CHALLENGE)
 
+-- Key Item removals
+local function cleanKIMold(player)
+    player:delKeyItem(xi.ki.EXORAY_MOLD_CRUMB1)
+    player:delKeyItem(xi.ki.EXORAY_MOLD_CRUMB2)
+    player:delKeyItem(xi.ki.EXORAY_MOLD_CRUMB3)
+end
+
+local function cleanKICoal(player)
+    player:delKeyItem(xi.ki.BOMB_COAL_FRAGMENT1)
+    player:delKeyItem(xi.ki.BOMB_COAL_FRAGMENT2)
+    player:delKeyItem(xi.ki.BOMB_COAL_FRAGMENT3)
+end
+
+local function cleanKIPapyrus(player)
+    player:delKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED1)
+    player:delKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED2)
+    player:delKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED3)
+end
+
 -- NOTE: This is handled in such an unconventional manner just so the text appears in the same order as in retail.
 local function handleExorayMold(player)
     if
@@ -39,9 +58,7 @@ local function handleExorayMold(player)
         player:hasKeyItem(xi.ki.EXORAY_MOLD_CRUMB3)
     then
         if player:getFreeSlotsCount() > 0 then
-            player:delKeyItem(xi.ki.EXORAY_MOLD_CRUMB1)
-            player:delKeyItem(xi.ki.EXORAY_MOLD_CRUMB2)
-            player:delKeyItem(xi.ki.EXORAY_MOLD_CRUMB3)
+            cleanKIMold(player)
             player:messageSpecial(crawlersID.text.COMBINE_INTO_A_CLUMP, xi.ki.EXORAY_MOLD_CRUMB1)
             npcUtil.giveItem(player, xi.items.CLUMP_OF_EXORAY_MOLD)
         else
@@ -57,9 +74,7 @@ local function handleBombCoal(player)
         player:hasKeyItem(xi.ki.BOMB_COAL_FRAGMENT3)
     then
         if player:getFreeSlotsCount() > 0 then
-            player:delKeyItem(xi.ki.BOMB_COAL_FRAGMENT1)
-            player:delKeyItem(xi.ki.BOMB_COAL_FRAGMENT2)
-            player:delKeyItem(xi.ki.BOMB_COAL_FRAGMENT3)
+            cleanKICoal(player)
             player:messageSpecial(garlaigeID.text.COMBINE_INTO_A_CHUNK, xi.ki.BOMB_COAL_FRAGMENT1)
             npcUtil.giveItem(player, xi.items.CHUNK_OF_BOMB_COAL)
         else
@@ -75,9 +90,7 @@ local function handleAncientPapyrus(player)
         player:hasKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED3)
     then
         if player:getFreeSlotsCount() > 0 then
-            player:delKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED1)
-            player:delKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED2)
-            player:delKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED3)
+            cleanKIPapyrus(player)
             player:messageSpecial(eldiemeID.text.PUT_TOGUETHER_TO_COMPLETE, xi.ki.ANCIENT_PAPYRUS_SHRED1)
             npcUtil.giveItem(player, xi.items.PIECE_OF_ANCIENT_PAPYRUS)
         else
@@ -149,6 +162,9 @@ quest.sections =
             {
                 [81] = function(player, csid, option, npc)
                     if quest:complete(player) then
+                        cleanKIMold(player)
+                        cleanKICoal(player)
+                        cleanKIPapyrus(player)
                         player:confirmTrade()
                         player:setLevelCap(55)
                         -- Leaving this here for historic purposes. Unneeded. The event now returns this message on its own.
