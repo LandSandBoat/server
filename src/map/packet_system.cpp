@@ -2971,8 +2971,8 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
                 }
                 PChar->pushPacket(new CAuctionHousePacket(action, PItem, quantity, price));
             }
-            break;
         }
+        break;
         case 0x05:
         {
             uint32 curTick = gettick();
@@ -3007,8 +3007,8 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
                 PChar->pushPacket(new CAuctionHousePacket(action, 246, 0, 0)); // try again in a little while msg
                 break;
             }
-            break;
         }
+        [[fallthrough]];
         case 0x0A:
         {
             auto totalItemsOnAh = PChar->m_ah_history.size();
@@ -3017,8 +3017,8 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
             {
                 PChar->pushPacket(new CAuctionHousePacket(0x0C, (uint8)slot, PChar));
             }
-            break;
         }
+        break;
         case 0x0B:
         {
             CItem* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(slot);
@@ -3089,8 +3089,8 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
                 PChar->pushPacket(new CAuctionHousePacket(action, 1, 0, 0));                 // Merchandise put up on auction msg
                 PChar->pushPacket(new CAuctionHousePacket(0x0C, (uint8)ah_listings, PChar)); // Inform history of slot
             }
-            break;
         }
+        break;
         case 0x0E:
         {
             itemid = data.ref<uint16>(0x0C);
@@ -3141,8 +3141,8 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
                 }
                 PChar->pushPacket(new CAuctionHousePacket(action, 0xC5, itemid, price));
             }
-            break;
         }
+        break;
         case 0x0C: // Removing item from AH
         {
             if (slotid < PChar->m_ah_history.size())
@@ -3183,13 +3183,13 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
             }
             // Let client know something went wrong
             PChar->pushPacket(new CAuctionHousePacket(action, 0xE5, PChar, slotid, true)); // Inventory full, unable to remove msg
-            break;
         }
+        break;
         case 0x0D:
         {
             PChar->pushPacket(new CAuctionHousePacket(action, slotid, PChar));
-            break;
         }
+        break;
     }
 }
 

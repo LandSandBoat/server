@@ -179,7 +179,6 @@ target_link_libraries(topaz_game
         project_warnings
 )
 
-
 target_include_directories(topaz_game
     PUBLIC
         ${CMAKE_SOURCE_DIR}/src
