@@ -169,9 +169,14 @@ static void sig_proc(int sn)
         case SIGFPE:
             dump_backtrace();
             do_abort();
+#ifdef _WIN32
+#ifdef _DEBUG
             // Pass the signal to the system's default handler
             compat_signal(sn, SIG_DFL);
             raise(sn);
+#endif // _DEBUG
+#endif // _WIN32
+
             break;
 #ifndef _WIN32
         case SIGXFSZ:
@@ -270,6 +275,10 @@ int main(int argc, char** argv)
     }
 
     do_final(EXIT_SUCCESS);
+#ifdef _WIN32
+#ifdef _DEBUG
     return 0;
+#endif // _WIN32
+#endif // _DEBUG
 }
-#endif
+#endif // DEFINE_OWN_MAIN
