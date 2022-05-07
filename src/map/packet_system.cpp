@@ -3829,9 +3829,17 @@ void SmallPacket0x064(map_session_data_t* const PSession, CCharEntity* const PCh
 
     // Write 64 bytes to PChar->keys.tables[KeyTable].seenList (512 bits)
     // std::memcpy(&PChar->keys.tables[KeyTable].seenList, data[0x08], 0x40);
-    for (int i = 0; i < 0x40; ++i)
+    for (int i = 0; i < 0x40; i++)
     {
-        PChar->keys.tables[KeyTable].seenList.set(i, data[0x08 + i]);
+        // copy each bit of byte into std::bit location
+        PChar->keys.tables[KeyTable].seenList.set(i * 8,     *data[0x08 + i] & 0x01);
+        PChar->keys.tables[KeyTable].seenList.set(i * 8 + 1, *data[0x08 + i] & 0x02);
+        PChar->keys.tables[KeyTable].seenList.set(i * 8 + 2, *data[0x08 + i] & 0x04);
+        PChar->keys.tables[KeyTable].seenList.set(i * 8 + 3, *data[0x08 + i] & 0x08);
+        PChar->keys.tables[KeyTable].seenList.set(i * 8 + 4, *data[0x08 + i] & 0x10);
+        PChar->keys.tables[KeyTable].seenList.set(i * 8 + 5, *data[0x08 + i] & 0x20);
+        PChar->keys.tables[KeyTable].seenList.set(i * 8 + 6, *data[0x08 + i] & 0x40);
+        PChar->keys.tables[KeyTable].seenList.set(i * 8 + 7, *data[0x08 + i] & 0x80);
     }
 
     charutils::SaveKeyItems(PChar);
