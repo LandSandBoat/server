@@ -25,7 +25,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 1 then
-        npcUtil.giveKeyItem(xi.ki.JUGNER_GATE_CRYSTAL)
+        npcUtil.giveKeyItem(player, xi.ki.JUGNER_GATE_CRYSTAL)
     end
 end
 
