@@ -1279,9 +1279,9 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_regions)
                 charTargIdIter = charTargIds.begin();
             }
 
-            if (pc && pc->nextComputeTime < tick)
+            if (pc && pc->requestedInfoSync)
             {
-                pc->nextComputeTime = tick + 1s;
+                pc->requestedInfoSync = false;
                 SpawnPCs(pc);
             }
         }

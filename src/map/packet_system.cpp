@@ -653,6 +653,7 @@ void SmallPacket0x015(map_session_data_t* const PSession, CCharEntity* const PCh
 
         if (isUpdate)
         {
+            PChar->requestedInfoSync = true;
             PChar->loc.zone->SpawnNPCs(PChar);
         }
 
@@ -1057,6 +1058,7 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
             }
             else
             {
+                PChar->requestedInfoSync = true;
                 PChar->loc.zone->SpawnNPCs(PChar);
                 PChar->loc.zone->SpawnMOBs(PChar);
                 PChar->loc.zone->SpawnTRUSTs(PChar);
