@@ -12,12 +12,12 @@ file(GLOB_RECURSE ALL_EXT_SOURCE_FILES ext/*.cpp ext/*.h ext/*.hpp)
 file(GLOB_RECURSE ALL_SOURCE_FILES src/*.cpp src/*.h src/*.hpp)
 
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+include(Cache)
 include(CPM)
 include(Platform)
 include(StandardProjectSettings)
 include(CompilerWarnings)
 include(Sanitizers)
-include(ClangFormat)
 include(Tracy)
 include(Valgrind)
 
@@ -97,10 +97,6 @@ target_compile_features(project_options INTERFACE cxx_std_17)
 # Link this 'library' to use the warnings specified in CompilerWarnings.cmake
 add_library(project_warnings INTERFACE)
 set_project_warnings(project_warnings)
-
-# Link this 'library' to disable all warnings
-add_library(no_warnings INTERFACE)
-set_no_warnings(no_warnings)
 
 # Globally define SOL_ALL_SAFETIES_ON so sol can be included anywhere
 # If SOL_NO_CHECK_NUMBER_PRECISION is defined, turns off number precision and integer

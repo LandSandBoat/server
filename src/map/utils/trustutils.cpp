@@ -1,7 +1,7 @@
 ﻿#include "trustutils.h"
 
-#include "../../common/timer.h"
-#include "../../common/utils.h"
+#include "common/timer.h"
+#include "common/utils.h"
 
 #include <algorithm>
 #include <cmath>
@@ -412,7 +412,7 @@ namespace trustutils
         int32 scaleOver60Column = 3;
         int32 scaleOver75Column = 4;
         int32 scaleOver60       = 2;
-        int32 scaleOver75       = 3;
+        // int32 scaleOver75       = 3;
 
         uint8 grade;
 
@@ -434,7 +434,7 @@ namespace trustutils
                    (grade::GetHPScale(grade, scaleOver30Column) * mainLevelOver30) + (grade::GetHPScale(grade, scaleOver60Column) * mainLevelOver60To75) +
                    (grade::GetHPScale(grade, scaleOver75Column) * mainLevelOver75);
 
-        grade = grade = grade::GetJobGrade(mJob, 0);
+        grade = grade::GetJobGrade(mJob, 0);
 
         jobStat = grade::GetHPScale(grade, baseValueColumn) + (grade::GetHPScale(grade, scaleTo60Column) * mainLevelUpTo60) +
                   (grade::GetHPScale(grade, scaleOver30Column) * mainLevelOver30) + (grade::GetHPScale(grade, scaleOver60Column) * mainLevelOver60To75) +

@@ -965,6 +965,7 @@ void CZoneEntities::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message
                     ((CCharEntity*)PEntity)->pushPacket(new CBasicPacket(*packet));
                 }
             }
+            [[fallthrough]];
             case CHAR_INRANGE:
             {
                 TracyZoneCString("CHAR_INRANGE");

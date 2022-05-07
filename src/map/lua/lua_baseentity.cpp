@@ -31,10 +31,10 @@
 #include "lua_zone.h"
 #include "luautils.h"
 
-#include "../../common/kernel.h"
-#include "../../common/logging.h"
-#include "../../common/timer.h"
-#include "../../common/utils.h"
+#include "common/kernel.h"
+#include "common/logging.h"
+#include "common/timer.h"
+#include "common/utils.h"
 
 #include "../ability.h"
 #include "../alliance.h"
@@ -530,7 +530,7 @@ int32 CLuaBaseEntity::getCharVar(std::string const& varName)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
     auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
-    return charutils::GetCharVar(PChar, varName.c_str());
+    return charutils::GetCharVar(PChar, varName);
 }
 
 /************************************************************************
@@ -544,7 +544,7 @@ void CLuaBaseEntity::setCharVar(std::string const& varName, int32 value)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
     auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
-    return charutils::SetCharVar(PChar, varName.c_str(), value);
+    return charutils::SetCharVar(PChar, varName, value);
 }
 
 /************************************************************************
@@ -665,7 +665,7 @@ void CLuaBaseEntity::injectPacket(std::string const& filename)
         }
 
         fseek(File, 0, SEEK_SET);
-        if (fread(*PPacket, 1, size * 2, File) != size * 2)
+        if (fread(*PPacket, 1, size * 2, File) != (size * 2U))
         {
             ShowError("CLuaBaseEntity::injectPacket : Did not read entire packet");
             fclose(File);
@@ -1846,6 +1846,8 @@ void CLuaBaseEntity::setElevator(uint8 id, uint32 lowerDoor, uint32 upperDoor, u
     elevator.UpperDoor          = static_cast<CNpcEntity*>(zoneutils::GetEntity(upperDoor, TYPE_NPC));
     elevator.Elevator           = static_cast<CNpcEntity*>(zoneutils::GetEntity(elevatorId, TYPE_NPC));
     elevator.animationsReversed = reversed;
+    elevator.state              = STATE_ELEVATOR_BOTTOM;
+    elevator.lastTrigger        = 0;
 
     if (!elevator.Elevator || !elevator.LowerDoor || !elevator.UpperDoor)
     {
@@ -1888,6 +1890,7 @@ void CLuaBaseEntity::addPeriodicTrigger(uint8 id, uint16 period, uint16 minOffse
     trigger.period       = period;
     trigger.minuteOffset = minOffset;
     trigger.npc          = dynamic_cast<CNpcEntity*>(zoneutils::GetEntity(m_PBaseEntity->id, TYPE_NPC));
+    trigger.lastTrigger  = 0;
 
     if (!trigger.npc)
     {
@@ -2183,7 +2186,7 @@ int16 CLuaBaseEntity::getWorldAngle(sol::variadic_args va)
         float posY = va.get_type(1) == sol::type::number ? va.get<float>(1) : 0.0f;
         float posZ = va.get_type(2) == sol::type::number ? va.get<float>(2) : 0.0f;
 
-        position_t point{ posX, posY, posZ };
+        position_t point{ posX, posY, posZ, false, 0 };
 
         angle = worldAngle(m_PBaseEntity->loc.p, point);
     }
@@ -2863,36 +2866,43 @@ bool CLuaBaseEntity::hasTeleport(uint8 tType, uint8 bit, sol::object const& arg2
     switch (type)
     {
         case TELEPORT_TYPE::OUTPOST_SANDY:
+        {
             return PChar->teleport.outpostSandy & (1 << bit);
-            break;
+        }
         case TELEPORT_TYPE::OUTPOST_BASTOK:
+        {
             return PChar->teleport.outpostBastok & (1 << bit);
-            break;
+        }
         case TELEPORT_TYPE::OUTPOST_WINDY:
+        {
             return PChar->teleport.outpostWindy & (1 << bit);
-            break;
+        }
         case TELEPORT_TYPE::RUNIC_PORTAL:
+        {
             return PChar->teleport.runicPortal & (1 << bit);
-            break;
+        }
         case TELEPORT_TYPE::PAST_MAW:
+        {
             return PChar->teleport.pastMaw & (1 << bit);
-            break;
-        case TELEPORT_TYPE::CAMPAIGN_SANDY:
+        }
+         case TELEPORT_TYPE::CAMPAIGN_SANDY:
+         {
             return PChar->teleport.campaignSandy & (1 << bit);
-            break;
+         }
         case TELEPORT_TYPE::CAMPAIGN_BASTOK:
+        {
             return PChar->teleport.campaignBastok & (1 << bit);
-            break;
+        }
         case TELEPORT_TYPE::CAMPAIGN_WINDY:
+        {
             return PChar->teleport.campaignWindy & (1 << bit);
-            break;
+        }
         default:
+        {
             ShowError("LuaBaseEntity::hasTeleport : Parameter 1 out of bounds.");
             return false;
+        }
     }
-
-    XI_DEBUG_BREAK_IF(true); // We should never get here
-    return false;
 }
 
 /************************************************************************
@@ -3010,7 +3020,7 @@ void CLuaBaseEntity::resetPlayer(const char* charName)
 
     if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
     {
-        id = (int32)sql->GetIntData(0);
+        id = sql->GetIntData(0);
     }
 
     // could not get player from database
@@ -3222,7 +3232,7 @@ bool CLuaBaseEntity::hasItem(uint16 itemID, sol::object const& location)
         uint8 locationID = LOC_INVENTORY;
 
         locationID = location.as<uint8>();
-        locationID = (locationID < CONTAINER_ID::MAX_CONTAINER_ID ? locationID : LOC_INVENTORY);
+        locationID = (locationID < CONTAINER_ID::MAX_CONTAINER_ID ? locationID : (uint8)LOC_INVENTORY);
 
         return PChar->getStorage(locationID)->SearchItem(itemID) != ERROR_SLOTID;
     }
@@ -3621,7 +3631,7 @@ std::optional<CLuaItem> CLuaBaseEntity::findItem(uint16 itemID, sol::object cons
         uint8 locationID = LOC_INVENTORY;
 
         locationID = location.as<uint8>();
-        locationID = (locationID < CONTAINER_ID::MAX_CONTAINER_ID ? locationID : LOC_INVENTORY);
+        locationID = (locationID < CONTAINER_ID::MAX_CONTAINER_ID ? locationID : (uint8)LOC_INVENTORY);
 
         if (auto slot = PChar->getStorage(locationID)->SearchItem(itemID); slot != ERROR_SLOTID)
         {
@@ -3998,7 +4008,7 @@ void CLuaBaseEntity::equipItem(uint16 itemID, sol::object const& container)
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    uint8           containerID = (container != sol::lua_nil) ? container.as<uint8>() : LOC_INVENTORY;
+    uint8           containerID = (container != sol::lua_nil) ? container.as<uint8>() : (uint8)LOC_INVENTORY;
     uint8           SLOT        = PChar->getStorage(containerID)->SearchItem(itemID);
     CItemEquipment* PItem;
 
@@ -6347,8 +6357,8 @@ bool CLuaBaseEntity::setEminenceProgress(uint16 recordID, uint32 progress, sol::
     bool progressNotify{ true };
     if (uint32 threshold = roeutils::RoeSystem.NotifyThresholds[recordID]; threshold > 1)
     {
-        uint32 prevStep = static_cast<uint32>(roeutils::GetEminenceRecordProgress(PChar, recordID) / threshold);
-        uint32 nextStep = static_cast<uint32>(progress / threshold);
+        uint32 prevStep = roeutils::GetEminenceRecordProgress(PChar, recordID) / threshold;
+        uint32 nextStep = progress / threshold;
         progressNotify  = nextStep > prevStep;
     }
 
@@ -8297,12 +8307,13 @@ sol::table CLuaBaseEntity::getParty()
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    CParty* party = static_cast<CBattleEntity*>(m_PBaseEntity)->PParty;
-
+    // clang-format off
     auto table = luautils::lua.create_table();
-    ((CBattleEntity*)m_PBaseEntity)->ForParty([&table](CBattleEntity* member) {
+    ((CBattleEntity*)m_PBaseEntity)->ForParty([&table](CBattleEntity* member)
+    {
         table.add(CLuaBaseEntity(member));
     });
+    // clang-format on
 
     return table;
 }
@@ -8318,12 +8329,13 @@ sol::table CLuaBaseEntity::getPartyWithTrusts()
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    CParty* party = static_cast<CCharEntity*>(m_PBaseEntity)->PParty;
-
+    // clang-format off
     auto table = luautils::lua.create_table();
-    ((CCharEntity*)m_PBaseEntity)->ForPartyWithTrusts([&table](CBattleEntity* member) {
+    ((CCharEntity*)m_PBaseEntity)->ForPartyWithTrusts([&table](CBattleEntity* member)
+    {
         table.add(CLuaBaseEntity(member));
     });
+    // clang-format on
 
     return table;
 }
@@ -9164,7 +9176,7 @@ void CLuaBaseEntity::countdown(sol::object const& secondsObj,
  *  Example : player:enableEntities({ 17207972, 17207973})
  *  Notes   : Default is all off, so sending the ID enables the special entity
  ************************************************************************/
-void CLuaBaseEntity::enableEntities(std::vector<uint32> data)
+void CLuaBaseEntity::enableEntities(std::vector<uint32> const& data)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
@@ -9359,7 +9371,7 @@ void CLuaBaseEntity::resetRecasts()
  *  Notes   : Function along with statements must be passed in L3
  ************************************************************************/
 
-void CLuaBaseEntity::addListener(std::string eventName, std::string identifier, sol::function func)
+void CLuaBaseEntity::addListener(std::string const& eventName, std::string const& identifier, sol::function func)
 {
     m_PBaseEntity->PAI->EventHandler.addListener(eventName, func, identifier);
 }
@@ -9371,7 +9383,7 @@ void CLuaBaseEntity::addListener(std::string eventName, std::string identifier, 
  *  Notes   : Used heavily in Pup Ability scripts
  ************************************************************************/
 
-void CLuaBaseEntity::removeListener(std::string identifier)
+void CLuaBaseEntity::removeListener(std::string const& identifier)
 {
     m_PBaseEntity->PAI->EventHandler.removeListener(identifier);
 }
@@ -9384,7 +9396,7 @@ void CLuaBaseEntity::removeListener(std::string identifier)
  *  Notes   : Manually triggered through Aern scripts for some reason
  ************************************************************************/
 
-void CLuaBaseEntity::triggerListener(std::string eventName, sol::variadic_args args)
+void CLuaBaseEntity::triggerListener(std::string const& eventName, sol::variadic_args args)
 {
     m_PBaseEntity->PAI->EventHandler.triggerListener(eventName, sol::as_args(args));
 }
@@ -10188,7 +10200,6 @@ bool CLuaBaseEntity::delStatusEffect(uint16 StatusID, sol::object const& SubID)
 
     bool result = false;
 
-    bool hasEffect       = false;
     auto effect_StatusID = static_cast<EFFECT>(StatusID);
 
     if (SubID != sol::lua_nil)
@@ -10305,7 +10316,7 @@ int32 CLuaBaseEntity::dispelStatusEffect(sol::object const& flagObj)
         return 0;
     }
 
-    uint32 flag = flagObj.is<uint32>() ? flagObj.as<uint32>() : EFFECTFLAG_DISPELABLE;
+    uint32 flag = flagObj.is<uint32>() ? flagObj.as<uint32>() : (uint32)EFFECTFLAG_DISPELABLE;
 
     return PBattleEntity->StatusEffectContainer->DispelStatusEffect(static_cast<EFFECTFLAG>(flag));
 }
@@ -10327,7 +10338,7 @@ uint8 CLuaBaseEntity::dispelAllStatusEffect(sol::object const& flagObj)
         return 0;
     }
 
-    uint32 flag = flagObj.is<uint32>() ? flagObj.as<uint32>() : EFFECTFLAG_DISPELABLE;
+    uint32 flag = flagObj.is<uint32>() ? flagObj.as<uint32>() : (uint32)EFFECTFLAG_DISPELABLE;
 
     return PBattleEntity->StatusEffectContainer->DispelAllStatusEffect(static_cast<EFFECTFLAG>(flag));
 }
@@ -10355,7 +10366,7 @@ uint16 CLuaBaseEntity::stealStatusEffect(CLuaBaseEntity* PTargetEntity, sol::obj
         return 0;
     }
 
-    uint32 flag = flagObj.is<uint32>() ? flagObj.as<uint32>() : EFFECTFLAG_DISPELABLE;
+    uint32 flag = flagObj.is<uint32>() ? flagObj.as<uint32>() : (uint32)EFFECTFLAG_DISPELABLE;
 
     if (CStatusEffect* PStatusEffect = PTargetBattleEntity->StatusEffectContainer->StealStatusEffect(static_cast<EFFECTFLAG>(flag)))
     {
@@ -10479,7 +10490,7 @@ int16 CLuaBaseEntity::getMaxGearMod(Mod modId)
 
     for (uint8 i = 0; i < SLOT_BACK; ++i)
     {
-        auto* PItem = dynamic_cast<CItemEquipment*>(PChar->getEquip((SLOTTYPE)i));
+        auto* PItem = PChar->getEquip((SLOTTYPE)i);
         if (PItem && (PItem->isType(ITEM_EQUIPMENT) || PItem->isType(ITEM_WEAPON)))
         {
             uint16 modValue = PItem->getModifier(modId);
@@ -11783,7 +11794,7 @@ void CLuaBaseEntity::setPetName(uint8 pType, uint16 value, sol::object const& ar
         if (petType == PET_TYPE::CHOCOBO)
         {
             uint32 chocoboname1 = value & 0x0000FFFF;
-            uint32 chocoboname2 = static_cast<uint32>(arg2.as<uint32>() << 16);
+            uint32 chocoboname2 = arg2.as<uint32>() << 16;
 
             uint32 value = chocoboname1 + chocoboname2;
 
@@ -13232,7 +13243,7 @@ void CLuaBaseEntity::restoreFromChest(CLuaBaseEntity* PLuaBaseEntity, uint32 res
                     animationID  = 772;
                     break;
                 case 2:
-                    messageParam = addedHP;
+                    messageParam = addedMP;
                     messageID    = 588;
                     animationID  = 773;
                     break;
@@ -13245,8 +13256,8 @@ void CLuaBaseEntity::restoreFromChest(CLuaBaseEntity* PLuaBaseEntity, uint32 res
             list.ActionTargetID    = PChar->id;
             actionTarget_t& target = list.getNewActionTarget();
             target.animation       = animationID;
-            target.messageID       = 0;
-            target.param           = 0;
+            target.messageID       = messageID;
+            target.param           = messageParam;
             PTarget->loc.zone->PushPacket(PTarget, CHAR_INRANGE, new CActionPacket(Action));
         }
     }

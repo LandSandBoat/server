@@ -7,6 +7,7 @@
 #include "WheatyExceptionReport.h"
 
 #include <algorithm>
+#include <array>
 #include <string>
 
 #include "cbasetypes.h"
@@ -240,7 +241,7 @@ LONG WINAPI WheatyExceptionReport::WheatyUnhandledExceptionFilter(
         {
             additionalStream.Type = CommentStreamA;
             additionalStream.Buffer = reinterpret_cast<PVOID>(pExceptionInfo->ExceptionRecord->ExceptionInformation[0]);
-            additionalStream.BufferSize = strlen(reinterpret_cast<char const*>(pExceptionInfo->ExceptionRecord->ExceptionInformation[0])) + 1;
+            additionalStream.BufferSize = static_cast<ULONG>(strlen(reinterpret_cast<char const*>(pExceptionInfo->ExceptionRecord->ExceptionInformation[0])) + 1);
 
             additionalStreamInfo.UserStreamArray = &additionalStream;
             additionalStreamInfo.UserStreamCount = 1;
@@ -537,7 +538,7 @@ void WheatyExceptionReport::PrintSystemInfo()
     MemoryStatus.dwLength = sizeof (MEMORYSTATUS);
     ::GlobalMemoryStatus(&MemoryStatus);
     TCHAR sString[1024];
-    if (_GetProcessorName(sString, std::size(sString)))
+    if (_GetProcessorName(sString, static_cast<DWORD>(std::size(sString))))
     {
         Log(_T("Processor: %s"), sString);
         Log(_T("Number Of Threads: %d"), SystemInfo.dwNumberOfProcessors);
@@ -548,7 +549,7 @@ void WheatyExceptionReport::PrintSystemInfo()
             SystemInfo.dwNumberOfProcessors);
     }
 
-    if (_GetWindowsVersion(sString, std::size(sString)))
+    if (_GetWindowsVersion(sString, static_cast<DWORD>(std::size(sString))))
         Log(_T("OS: %s"), sString);
     else
         Log(_T("OS: <unknown>"));

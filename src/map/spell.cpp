@@ -434,7 +434,6 @@ namespace spell
         {
             while (sql->NextRow() == SQL_SUCCESS)
             {
-                char*   contentTag;
                 CSpell* PSpell = nullptr;
                 SpellID id     = (SpellID)sql->GetUIntData(0);
 
@@ -469,7 +468,7 @@ namespace spell
                 PSpell->setVE(sql->GetIntData(20));
                 PSpell->setRequirements(sql->GetIntData(21));
 
-                sql->GetData(22, &contentTag, nullptr);
+                char* contentTag = (char*)sql->GetData(22);
                 PSpell->setContentTag((int8*)contentTag);
 
                 PSpell->setRange(static_cast<float>(sql->GetIntData(23)) / 10);
@@ -550,9 +549,7 @@ namespace spell
         {
             while (sql->NextRow() == SQL_SUCCESS)
             {
-                char* contentTag;
-                sql->GetData(7, &contentTag, nullptr);
-
+                char* contentTag = (char*)sql->GetData(7);
                 if (!luautils::IsContentEnabled(contentTag))
                 {
                     continue;
@@ -600,9 +597,7 @@ namespace spell
         {
             while (sql->NextRow() == SQL_SUCCESS)
             {
-                char* contentTag;
-                sql->GetData(2, &contentTag, nullptr);
-
+                char* contentTag = (char*)sql->GetData(2);
                 if (!luautils::IsContentEnabled(contentTag))
                 {
                     continue;

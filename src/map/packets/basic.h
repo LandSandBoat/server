@@ -22,8 +22,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #ifndef _BASICPACKET_H
 #define _BASICPACKET_H
 
-#include "../../common/cbasetypes.h"
-#include "../../common/socket.h"
+#include "common/cbasetypes.h"
+#include "common/socket.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -47,6 +47,9 @@ enum ENTITYUPDATE
  */
 class CBasicPacket
 {
+protected:
+    uint8*  data;
+
 // Mark these members as private, so that they can't be set without using their
 // specialised setters.
 private:
@@ -54,7 +57,6 @@ private:
     uint8& size;
 
 protected:
-    uint8*  data;
     uint16& code;
     bool    owner;
 

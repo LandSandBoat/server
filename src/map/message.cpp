@@ -70,30 +70,6 @@ namespace message
         }
     }
 
-    const char* MsgServTypeToString(MSGSERVTYPE& type)
-    {
-        switch(type)
-        {
-            case MSG_LOGIN: return "MSG_LOGIN";
-            case MSG_CHAT_TELL: return "MSG_CHAT_TELL";
-            case MSG_CHAT_PARTY: return "MSG_CHAT_PARTY";
-            case MSG_CHAT_LINKSHELL: return "MSG_CHAT_LINKSHELL";
-            case MSG_CHAT_UNITY: return "MSG_CHAT_UNITY";
-            case MSG_CHAT_YELL: return "MSG_CHAT_YELL";
-            case MSG_CHAT_SERVMES: return "MSG_CHAT_SERVMES";
-            case MSG_PT_INVITE: return "MSG_PT_INVITE";
-            case MSG_PT_INV_RES: return "MSG_PT_INV_RES";
-            case MSG_PT_RELOAD: return "MSG_PT_RELOAD";
-            case MSG_PT_DISBAND: return "MSG_PT_DISBAND";
-            case MSG_DIRECT: return "MSG_DIRECT";
-            case MSG_LINKSHELL_RANK_CHANGE: return "MSG_LINKSHELL_RANK_CHANGE";
-            case MSG_LINKSHELL_REMOVE: return "MSG_LINKSHELL_REMOVE";
-            case MSG_SEND_TO_ZONE: return "MSG_SEND_TO_ZONE";
-            case MSG_SEND_TO_ENTITY: return "MSG_SEND_TO_ENTITY";
-        }
-        return "UNKNOWN";
-    }
-
     void parse(chat_message_t& message)
     {
         TracyZoneScoped;
@@ -102,9 +78,11 @@ namespace message
         auto& extra  = message.data;
         auto& packet = message.packet;
 
-        TracyZoneCString(MsgServTypeToString(type));
+        TracyZoneCString(msgTypeToStr(type));
 
-        ShowDebug("Message: Received message %d from message server", static_cast<uint8>(type));
+        ShowDebug("Message: Received message %s (%d) from message server",
+            msgTypeToStr(type), static_cast<uint8>(type));
+
         switch (type)
         {
             case MSG_LOGIN:
@@ -160,7 +138,7 @@ namespace message
                             {
                                 CBasicPacket* newPacket = new CBasicPacket();
                                 memcpy(*newPacket, packet.data(), std::min<size_t>(packet.size(), PACKET_SIZE));
-                                ((CParty*)i)->PushPacket(ref<uint32>((uint8*)extra.data(), 4), 0, newPacket);
+                                i->PushPacket(ref<uint32>((uint8*)extra.data(), 4), 0, newPacket);
                             }
                         }
                         else
@@ -413,7 +391,7 @@ namespace message
                     if (targetLS && (kickerRank == LSTYPE_LINKSHELL || (kickerRank == LSTYPE_PEARLSACK && targetLS->GetLSType() == LSTYPE_LINKPEARL)))
                     {
                         PChar->PLinkshell1->RemoveMemberByName((int8*)extra.data() + 4,
-                                                               (targetLS->GetLSType() == LSTYPE_LINKSHELL ? LSTYPE_PEARLSACK : kickerRank));
+                                                               (targetLS->GetLSType() == (uint8)LSTYPE_LINKSHELL ? (uint8)LSTYPE_PEARLSACK : kickerRank));
                     }
                 }
                 else if (PChar && PChar->PLinkshell2 && PChar->PLinkshell2->getID() == ref<uint32>((uint8*)extra.data(), 24))
@@ -520,9 +498,9 @@ namespace message
                                 {
                                     while (sql->NextRow() == SQL_SUCCESS)
                                     {
-                                        X = (float)sql->GetFloatData(0);
-                                        Y = (float)sql->GetFloatData(1);
-                                        Z = (float)sql->GetFloatData(2);
+                                        X = sql->GetFloatData(0);
+                                        Y = sql->GetFloatData(1);
+                                        Z = sql->GetFloatData(2);
                                     }
                                 }
                             }
@@ -590,8 +568,7 @@ namespace message
 
     void listen()
     {
-        TracyZoneScoped;
-
+        TracySetThreadName("ZMQ Thread");
         while (true)
         {
             if (!zSocket)
@@ -604,10 +581,12 @@ namespace message
                 chat_message_t message;
                 if (!zSocket->recv(message.type, zmq::recv_flags::none))
                 {
+                    TracyZoneScoped;
                     send_queue();
                     continue;
                 }
 
+                TracyZoneScoped;
                 int more = zSocket->get(zmq::sockopt::rcvmore);
                 if (more)
                 {

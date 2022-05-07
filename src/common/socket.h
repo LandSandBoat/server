@@ -12,7 +12,7 @@
 #endif
 
 #ifdef WIN32
-#define FD_SETSIZE 1000
+//#define FD_SETSIZE 1000
 #include <WS2tcpip.h>
 #include <winsock2.h>
 typedef long in_addr_t;
@@ -287,8 +287,7 @@ void set_nonblocking(int fd, unsigned long yes);
  *		UDP LEVEL
  *
  */
-extern int32 listen_fd;
-int32        makeBind_udp(uint32 ip, uint16 port);
+int32 makeBind_udp(uint32 ip, uint16 port);
 
 void socket_init_udp(void);
 void do_close_udp(int32 fd);

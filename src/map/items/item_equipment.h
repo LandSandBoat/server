@@ -22,7 +22,7 @@
 #ifndef _CITEMEQUIPMENT_H
 #define _CITEMEQUIPMENT_H
 
-#include "../../common/utils.h"
+#include "common/utils.h"
 
 #include <vector>
 

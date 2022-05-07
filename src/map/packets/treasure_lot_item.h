@@ -22,7 +22,7 @@
 #ifndef _CTREASURELOTITEMPACKET_H
 #define _CTREASURELOTITEMPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 

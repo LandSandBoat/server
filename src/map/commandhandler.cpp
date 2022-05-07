@@ -21,11 +21,10 @@
 
 #include "commandhandler.h"
 
-#include "../common/utils.h"
+#include "common/utils.h"
 #include "entities/charentity.h"
 #include "lua/lua_baseentity.h"
 #include "lua/luautils.h"
-#include "spdlog/fmt/fmt.h"
 
 #include <cmath>
 #include <iostream>

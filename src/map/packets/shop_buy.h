@@ -22,7 +22,7 @@
 #ifndef _CSHOPBUYPACKET_H
 #define _CSHOPBUYPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 

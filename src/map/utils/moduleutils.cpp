@@ -131,6 +131,7 @@ namespace moduleutils
         }
 
         // Expand out folders
+        std::vector<std::string> expandedList;
         for (auto const& entry : list)
         {
             if (std::filesystem::is_directory(entry))
@@ -138,13 +139,13 @@ namespace moduleutils
                 for (auto const& innerEntry : std::filesystem::recursive_directory_iterator(entry))
                 {
                     auto path = innerEntry.path().relative_path();
-                    list.emplace_back(path.generic_string());
+                    expandedList.emplace_back(path.generic_string());
                 }
             }
         }
 
         // Load each module file that isn't the helpers.lua file or a directory
-        for (auto const& entry : list)
+        for (auto const& entry : expandedList)
         {
             auto path          = std::filesystem::path(entry).relative_path();
             bool isHelpersFile = path.filename() == "module_utils.lua";

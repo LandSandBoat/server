@@ -22,7 +22,7 @@
 #ifndef _CQUESTMISSIONLOGPACKET_H
 #define _CQUESTMISSIONLOGPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 #include <unordered_map>
 
 #include "basic.h"

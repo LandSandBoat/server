@@ -22,10 +22,10 @@
 #ifndef _CITEM_H
 #define _CITEM_H
 
-#include "../../common/cbasetypes.h"
-#include "../../common/mmo.h"
+#include "common/cbasetypes.h"
+#include "common/mmo.h"
 
-// основной тип предмета m_type
+// The main type of item m_type
 
 enum ITEM_TYPE
 {
@@ -40,7 +40,7 @@ enum ITEM_TYPE
     ITEM_LINKSHELL  = 0x80
 };
 
-// дополнительный тип предмета m_subtype
+// Additional type of object m_subtype
 
 enum ITEM_SUBTYPE
 {
@@ -51,7 +51,7 @@ enum ITEM_SUBTYPE
     ITEM_UNLOCKED  = 0xFE
 };
 
-// флаги предметов
+// Flags of objects
 
 enum ITEM_FLAG
 {
@@ -125,7 +125,7 @@ public:
     virtual void        setSignature(int8* signature);
 
     bool isSoultrapper() const;
-    void setSoulPlateData(std::string name, uint16 mobFamily, uint8 zeni, uint16 skillIndex, uint8 fp);
+    void setSoulPlateData(std::string const& name, uint16 mobFamily, uint8 zeni, uint16 skillIndex, uint8 fp);
     auto getSoulPlateData() -> std::tuple<std::string, uint16, uint8, uint16, uint8>;
 
     bool isMannequin() const;
@@ -141,16 +141,16 @@ private:
     uint16 m_subid;
     uint8  m_type;
     uint8  m_subtype;
-    uint32 m_quantity;  // текущее количество предметов
-    uint32 m_reserve;   // зарезервированное количество предметов
-    uint32 m_stackSize; // максимальное количество предметов
+    uint32 m_quantity; // Current number of items
+    uint32 m_reserve;
+    uint32 m_stackSize; // The maximum number of items
     uint32 m_BasePrice;
-    uint32 m_CharPrice; // стоимость предмета в bazaar
-    uint8  m_ahCat;     // категоряи предмета на укционе
+    uint32 m_CharPrice; // The cost of the subject in Bazaar
+    uint8  m_ahCat;     // auction category
     uint16 m_flag;
 
-    uint8 m_slotID;     // ячейка предмета в хранилище
-    uint8 m_locationID; // номер хранилища предмета
+    uint8 m_slotID;     // Cell of the object in the storage
+    uint8 m_locationID; // storage number
 
     bool m_sent;
 

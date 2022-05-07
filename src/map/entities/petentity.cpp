@@ -21,7 +21,7 @@
 
 #include <cstring>
 
-#include "../../common/utils.h"
+#include "common/utils.h"
 #include "../ai/ai_container.h"
 #include "../ai/controllers/pet_controller.h"
 #include "../ai/helpers/pathfind.h"
