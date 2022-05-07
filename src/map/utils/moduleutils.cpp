@@ -131,7 +131,7 @@ namespace moduleutils
         }
 
         // Expand out folders
-        std::vector<std::string> expandedList;
+        std::vector<std::string> expandedList = list;
         for (auto const& entry : list)
         {
             if (std::filesystem::is_directory(entry))
