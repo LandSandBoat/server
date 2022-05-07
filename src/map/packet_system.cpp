@@ -192,7 +192,7 @@ void PrintPacket(CBasicPacket data)
         // TODO: -Wno-format-overflow - writing between 4 and 53 bytes into destination of 50
         // TODO: FIXME
         // cppcheck-suppress sprintfOverlappingData
-        snprintf(message, sizeof(message), "%s %02hhx", message, *((uint8*)data[(const int)y]));
+        snprintf(message, sizeof(message), "%s %02hhx", message, *((uint8*)data[(int)y]));
         if (((y + 1) % 16) == 0)
         {
             message[48] = '\n';
@@ -296,7 +296,7 @@ void SmallPacket0x00A(map_session_data_t* const PSession, CCharEntity* const PCh
         if (sql->NextRow() == SQL_SUCCESS)
         {
             // Update the character's death timestamp based off of how long they were previously dead
-            uint32 secondsSinceDeath = (uint32)sql->GetUIntData(0);
+            uint32 secondsSinceDeath = sql->GetUIntData(0);
             if (PChar->health.hp == 0)
             {
                 PChar->SetDeathTimestamp((uint32)time(nullptr) - secondsSinceDeath);
@@ -321,7 +321,7 @@ void SmallPacket0x00A(map_session_data_t* const PSession, CCharEntity* const PCh
             PChar->GetName(), PChar->loc.zone->GetName(), PChar->loc.zone->GetID());
 
         // Write a sane location for them
-        auto newZone = PChar->loc.prevzone ? PChar->loc.prevzone : ZONE_VALKURM_DUNES;
+        auto newZone = PChar->loc.prevzone ? PChar->loc.prevzone : (uint8)ZONE_VALKURM_DUNES;
         PChar->loc.destination = newZone;
         sql->Query("UPDATE chars SET pos_zone = %u WHERE charid = %u", newZone, PChar->id);
     }
@@ -1213,7 +1213,7 @@ void SmallPacket0x01E(map_session_data_t* const PSession, CCharEntity* const PCh
     std::vector<char> chars;
     std::for_each(data[HEADER_LENGTH], data[HEADER_LENGTH] + (data.getSize() - HEADER_LENGTH), [&](char ch)
     {
-        if ((ch >= 0 && ch < 128) && ch != '\0') // isascii && nonnull
+        if (isascii(ch) && ch != '\0')
         {
             chars.emplace_back(ch);
         }
@@ -2994,7 +2994,7 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
                     {
                         AuctionHistory_t ah;
                         ah.itemid = (uint16)sql->GetIntData(0);
-                        ah.price  = (uint32)sql->GetUIntData(1);
+                        ah.price  = sql->GetUIntData(1);
                         ah.stack  = (uint8)sql->GetIntData(2);
                         ah.status = 0;
                         PChar->m_ah_history.push_back(ah);
@@ -3008,6 +3008,7 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
                 break;
             }
         }
+        [[fallthrough]];
         case 0x0A:
         {
             auto totalItemsOnAh = PChar->m_ah_history.size();
@@ -3343,6 +3344,7 @@ void SmallPacket0x053(map_session_data_t* const PSession, CCharEntity* const PCh
                 case SLOT_RANGED:
                 case SLOT_AMMO:
                     charutils::UpdateWeaponStyle(PChar, equipSlotId, (CItemWeapon*)PChar->getEquip((SLOTTYPE)equipSlotId));
+                    break;
                 case SLOT_HEAD:
                 case SLOT_BODY:
                 case SLOT_HANDS:
@@ -3825,7 +3827,20 @@ void SmallPacket0x064(map_session_data_t* const PSession, CCharEntity* const PCh
         return;
     }
 
-    memcpy(&PChar->keys.tables[KeyTable].seenList, data[0x08], 0x40);
+    // Write 64 bytes to PChar->keys.tables[KeyTable].seenList (512 bits)
+    // std::memcpy(&PChar->keys.tables[KeyTable].seenList, data[0x08], 0x40);
+    for (int i = 0; i < 0x40; i++)
+    {
+        // copy each bit of byte into std::bit location
+        PChar->keys.tables[KeyTable].seenList.set(i * 8,     *data[0x08 + i] & 0x01);
+        PChar->keys.tables[KeyTable].seenList.set(i * 8 + 1, *data[0x08 + i] & 0x02);
+        PChar->keys.tables[KeyTable].seenList.set(i * 8 + 2, *data[0x08 + i] & 0x04);
+        PChar->keys.tables[KeyTable].seenList.set(i * 8 + 3, *data[0x08 + i] & 0x08);
+        PChar->keys.tables[KeyTable].seenList.set(i * 8 + 4, *data[0x08 + i] & 0x10);
+        PChar->keys.tables[KeyTable].seenList.set(i * 8 + 5, *data[0x08 + i] & 0x20);
+        PChar->keys.tables[KeyTable].seenList.set(i * 8 + 6, *data[0x08 + i] & 0x40);
+        PChar->keys.tables[KeyTable].seenList.set(i * 8 + 7, *data[0x08 + i] & 0x80);
+    }
 
     charutils::SaveKeyItems(PChar);
 }
@@ -6975,7 +6990,7 @@ void SmallPacket0x105(map_session_data_t* const PSession, CCharEntity* const PCh
 
     uint32 charid = data.ref<uint32>(0x04);
 
-    CCharEntity* PTarget = charid != 0 ? (CCharEntity*)PChar->loc.zone->GetCharByID(charid) : (CCharEntity*)PChar->GetEntity(PChar->m_TargID, TYPE_PC);
+    CCharEntity* PTarget = charid != 0 ? PChar->loc.zone->GetCharByID(charid) : (CCharEntity*)PChar->GetEntity(PChar->m_TargID, TYPE_PC);
 
     if (PTarget != nullptr && PTarget->id == charid && (PTarget->nameflags.flags & FLAG_BAZAAR))
     {
@@ -7382,7 +7397,7 @@ void SmallPacket0x113(map_session_data_t* const PSession, CCharEntity* const PCh
         chairId = ANIMATION_SITCHAIR_0;
     }
 
-    PChar->animation = PChar->animation == chairId ? ANIMATION_NONE : chairId;
+    PChar->animation = PChar->animation == chairId ? (uint8)ANIMATION_NONE : chairId;
     PChar->updatemask |= UPDATE_HP;
 }
 

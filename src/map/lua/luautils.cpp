@@ -19,10 +19,10 @@
 ===========================================================================
 */
 
-#include "../../common/filewatcher.h"
-#include "../../common/logging.h"
-#include "../../common/utils.h"
-#include "../../common/version.h"
+#include "common/filewatcher.h"
+#include "common/logging.h"
+#include "common/utils.h"
+#include "common/version.h"
 
 #include <array>
 #include <filesystem>
@@ -415,8 +415,11 @@ namespace luautils
                 });
                 return outStr + " }";
             }
+            default:
+            {
+                return "UNKNOWN";
+            }
         }
-        return "UNKNOWN";
     }
 
     void print(sol::variadic_args va)
@@ -424,7 +427,7 @@ namespace luautils
         TracyZoneScoped;
 
         std::string outString;
-        for (int i = 0; i < va.size(); ++i)
+        for (std::size_t i = 0; i < va.size(); ++i)
         {
             auto entry = luaToString(va[i]);
             // TODO: Use fmt::join if we ever update fmt
@@ -1272,16 +1275,19 @@ namespace luautils
                 {
                     return true;
                 }
+                break;
             case 1: // Waning (decending)
                 if (phase >= 95 && phase <= 100)
                 {
                     return true;
                 }
+                break;
             case 2: // Waxing (increasing)
                 if (phase >= 90 && phase <= 100)
                 {
                     return true;
                 }
+                break;
         }
 
         return false;
@@ -1383,7 +1389,7 @@ namespace luautils
      *                                                                       *
      ************************************************************************/
 
-    std::optional<CLuaBaseEntity> GetPlayerByName(std::string name)
+    std::optional<CLuaBaseEntity> GetPlayerByName(std::string const& name)
     {
         TracyZoneScoped;
 
@@ -1462,7 +1468,7 @@ namespace luautils
                 {
                     for (auto column : magianColumns)
                     {
-                        table[column] = (int32)sql->GetIntData(field++);
+                        table[column] = sql->GetIntData(field++);
                     }
                 }
             }
@@ -1480,7 +1486,7 @@ namespace luautils
                         int32 field{ 0 };
                         for (auto column : magianColumns)
                         {
-                            inner_table[column] = (int32)sql->GetIntData(field++);
+                            inner_table[column] = sql->GetIntData(field++);
                         }
                     }
                 }
@@ -3413,7 +3419,7 @@ namespace luautils
 
         if (criticalHit)
         {
-            luautils::OnCriticalHit((CBattleEntity*)PMob, (CBattleEntity*)PChar);
+            luautils::OnCriticalHit((CBattleEntity*)PMob, PChar);
         }
 
         return std::make_tuple(dmg, tpHitsLanded, extraHitsLanded);
@@ -3445,7 +3451,7 @@ namespace luautils
         uint16 retVal = result.get_type(0) == sol::type::number ? result.get<uint16>(0) : 0;
         if (retVal > 0)
         {
-            return static_cast<uint16>(retVal);
+            return retVal;
         }
 
         return 0;
@@ -3665,7 +3671,7 @@ namespace luautils
         auto result1 = result.get_type(1) == sol::type::number ? result.get<int32>(1) : 0;
         if (result1 != 0)
         {
-            *PMsgTarget = (CBaseEntity*)PTarget;
+            *PMsgTarget = PTarget;
         }
 
         return result0 ? result0 : 0; // Default to no Message
@@ -3762,13 +3768,17 @@ namespace luautils
     void Terminate()
     {
         TracyZoneScoped;
-        zoneutils::ForEachZone([](CZone* PZone) {
-            PZone->ForEachChar([](CCharEntity* PChar) {
+        // clang-format off
+        zoneutils::ForEachZone([](CZone* PZone)
+        {
+            PZone->ForEachChar([](CCharEntity* PChar)
+            {
                 charutils::SaveCharPosition(PChar);
                 charutils::SaveCharStats(PChar);
                 charutils::SaveCharExp(PChar, PChar->GetMJob());
             });
         });
+        // clang-format on
         exit(1);
     }
 
@@ -4066,7 +4076,7 @@ namespace luautils
 
         if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
         {
-            value = (int32)sql->GetIntData(0);
+            value = sql->GetIntData(0);
         }
 
         return value;

@@ -75,7 +75,7 @@ jobs:
         run: |
           cmake --build .
 
-  Windows_64bit:
+  Windows_64bit_Debug:
     runs-on: windows-latest
     env:
       MSBUILD_PATH: C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\
@@ -86,7 +86,7 @@ jobs:
       - name: Configure CMake
         shell: cmd
         run: |
-          cmake -A x64 .
+          cmake -A x64 -DCMAKE_BUILD_TYPE=Debug .
       - name: Build
         shell: cmd
         run: |
@@ -99,6 +99,23 @@ jobs:
             topaz_connect_64.exe
             topaz_game_64.exe
             topaz_search_64.exe
+
+  Windows_64bit_Release_Tracy:
+    runs-on: windows-latest
+    env:
+      MSBUILD_PATH: C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+      - name: Configure CMake
+        shell: cmd
+        run: |
+          cmake -A x64 -DCMAKE_BUILD_TYPE=Release -DTRACY=ON .
+      - name: Build
+        shell: cmd
+        run: |
+          cmake --build .
 
   MacOS_64bit:
     # https://github.com/actions/virtual-environments/blob/main/images/macos/macos-11-Readme.md
@@ -473,7 +490,7 @@ jobs:
 
   Full_Startup_Checks_Windows:
     runs-on: windows-latest
-    needs: Windows_64bit
+    needs: Windows_64bit_Debug
     steps:
     - uses: actions/checkout@v1
       with:

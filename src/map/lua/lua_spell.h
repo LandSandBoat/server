@@ -22,7 +22,7 @@
 #ifndef _LUASPELL_H
 #define _LUASPELL_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 #include "luautils.h"
 
 class CSpell;

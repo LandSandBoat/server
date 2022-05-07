@@ -90,7 +90,7 @@ namespace gambits
         G_CONDITION condition;
         uint32      condition_arg = 0;
 
-        bool parseInput(std::string key, uint32 value)
+        bool parseInput(std::string const& key, uint32 value)
         {
             if (key.compare("target") == 0)
             {
@@ -119,7 +119,7 @@ namespace gambits
         G_SELECT   select;
         uint32     select_arg = 0;
 
-        bool parseInput(std::string key, uint32 value)
+        bool parseInput(std::string const& key, uint32 value)
         {
             if (key.compare("reaction") == 0)
             {

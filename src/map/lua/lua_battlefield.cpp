@@ -19,8 +19,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 ===========================================================================
 */
 
-#include "../../common/logging.h"
-#include "../../common/timer.h"
+#include "common/logging.h"
+#include "common/timer.h"
 
 #include "../battlefield.h"
 #include "../entities/charentity.h"
@@ -138,7 +138,7 @@ std::tuple<std::string, uint32, uint32> CLuaBattlefield::getRecord()
 
     auto   name = record.name;
     uint32 time = std::chrono::duration_cast<std::chrono::seconds>(record.time).count();
-    uint32 size = record.partySize;
+    uint32 size = static_cast<uint32>(record.partySize);
 
     return std::make_tuple(name, time, size);
 }
@@ -148,7 +148,7 @@ uint8 CLuaBattlefield::getStatus()
     return m_PLuaBattlefield->GetStatus();
 }
 
-uint64_t CLuaBattlefield::getLocalVar(std::string name)
+uint64_t CLuaBattlefield::getLocalVar(std::string const& name)
 {
     return m_PLuaBattlefield->GetLocalVar(name);
 }
@@ -165,7 +165,7 @@ std::pair<uint32, std::string> CLuaBattlefield::getInitiator()
     return std::make_pair(initiator.id, initiator.name);
 }
 
-void CLuaBattlefield::setLocalVar(std::string name, uint64_t value)
+void CLuaBattlefield::setLocalVar(std::string const& name, uint64_t value)
 {
     m_PLuaBattlefield->SetLocalVar(name, value);
 }
@@ -185,7 +185,7 @@ void CLuaBattlefield::setWipeTime(uint32 seconds)
     m_PLuaBattlefield->SetWipeTime(get_server_start_time() + std::chrono::seconds(seconds));
 }
 
-void CLuaBattlefield::setRecord(std::string name, uint32 seconds)
+void CLuaBattlefield::setRecord(std::string const& name, uint32 seconds)
 {
     m_PLuaBattlefield->SetRecord(name, std::chrono::seconds(seconds), m_PLuaBattlefield->GetPlayerCount());
 }

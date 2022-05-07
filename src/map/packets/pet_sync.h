@@ -22,7 +22,7 @@
 #ifndef _CPETSYNCPACKET_H
 #define _CPETSYNCPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 

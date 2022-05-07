@@ -1,7 +1,7 @@
 ﻿#ifndef _CINDEPENDENTANIMATIONPACKET_H
 #define _CINDEPENDENTANIMATIONPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 

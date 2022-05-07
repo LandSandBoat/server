@@ -22,7 +22,7 @@
 #ifndef _CPARTYSEARCHPACKET_H
 #define _CPARTYSEARCHPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 

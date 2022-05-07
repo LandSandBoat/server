@@ -22,7 +22,7 @@
 #ifndef _CWORLDPASSPACKET_H
 #define _CWORLDPASSPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 

@@ -7,15 +7,13 @@
 #include <string>
 #include <memory>
 
-#include "efsw/efsw.hpp"
-
 Filewatcher::Filewatcher(std::string const& path)
-: basePath(path)
 #ifdef USE_GENERIC_FILEWATCHER
-, fileWatcher(std::make_unique<efsw::FileWatcher>(true))
+: fileWatcher(std::make_unique<efsw::FileWatcher>(true))
 #else
-, fileWatcher(std::make_unique<efsw::FileWatcher>(false))
+: fileWatcher(std::make_unique<efsw::FileWatcher>(false))
 #endif
+, basePath(path)
 {
     fileWatcher->addWatch(path, this, true);
     fileWatcher->watch();

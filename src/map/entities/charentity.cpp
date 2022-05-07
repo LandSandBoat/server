@@ -19,9 +19,9 @@
 ===========================================================================
 */
 
-#include "../../common/logging.h"
-#include "../../common/timer.h"
-#include "../../common/utils.h"
+#include "common/logging.h"
+#include "common/timer.h"
+#include "common/utils.h"
 
 #include <cstring>
 
@@ -127,8 +127,7 @@ CCharEntity::CCharEntity()
     m_RecycleBin = std::make_unique<CItemContainer>(LOC_RECYCLEBIN);
 
     memset(&jobs, 0, sizeof(jobs));
-    // TODO: -Wno-class-memaccess - clearing an object on non-trivial type use assignment or value-init
-    memset(&keys, 0, sizeof(keys));
+    keys = {};
     memset(&equip, 0, sizeof(equip));
     memset(&equipLoc, 0, sizeof(equipLoc));
     memset(&RealSkills, 0, sizeof(RealSkills));
@@ -137,8 +136,7 @@ CCharEntity::CCharEntity()
     memset(&nameflags, 0, sizeof(nameflags));
     memset(&menuConfigFlags, 0, sizeof(menuConfigFlags));
 
-    // TODO: -Wno-class-memaccess - clearing an object on non-trivial type use assignment or value-init
-    memset(&m_SpellList, 0, sizeof(m_SpellList));
+    m_SpellList = {};
     memset(&m_LearnedAbilities, 0, sizeof(m_LearnedAbilities));
     memset(&m_TitleList, 0, sizeof(m_TitleList));
     memset(&m_ZonesList, 0, sizeof(m_ZonesList));
@@ -299,8 +297,8 @@ void CCharEntity::pushPacket(CBasicPacket* packet)
     // and storing the position in the queue of that entry
     for (auto&& entry : PacketList)
     {
-        if (packet->getType() == 0x0E && entry->getType() == 0x0E || // Entity Update (CEntityUpdatePacket)
-            packet->getType() == 0x0D && entry->getType() == 0x0D)   // Char Packet (CCharPacket)
+        if ((packet->getType() == 0x0E && entry->getType() == 0x0E) || // Entity Update (CEntityUpdatePacket)
+            (packet->getType() == 0x0D && entry->getType() == 0x0D))   // Char Packet (CCharPacket)
         {
             bool sameMainId     = packet->ref<uint32>(0x04) == entry->ref<uint32>(0x04);
             bool sameTargId     = packet->ref<uint16>(0x08) == entry->ref<uint16>(0x08);
@@ -445,7 +443,7 @@ CItemContainer* CCharEntity::getStorage(uint8 LocationID)
 
 int8 CCharEntity::getShieldSize()
 {
-    CItemEquipment* PItem = (CItemEquipment*)(getEquip(SLOT_SUB));
+    CItemEquipment* PItem = getEquip(SLOT_SUB);
 
     if (PItem == nullptr)
     {
@@ -793,7 +791,7 @@ bool CCharEntity::OnAttack(CAttackState& state, action_t& action)
     controller->setLastAttackTime(server_clock::now());
     auto ret = CBattleEntity::OnAttack(state, action);
 
-    auto* PTarget = static_cast<CBattleEntity*>(state.GetTarget());
+    // auto* PTarget = static_cast<CBattleEntity*>(state.GetTarget());
 
     return ret;
 }
@@ -1544,7 +1542,7 @@ bool CCharEntity::IsMobOwner(CBattleEntity* PBattleTarget)
 
     bool found = false;
 
-    static_cast<CCharEntity*>(this)->ForAlliance([&PBattleTarget, &found](CBattleEntity* PEntity) {
+    ForAlliance([&PBattleTarget, &found](CBattleEntity* PEntity) {
         if (PEntity->id == PBattleTarget->m_OwnerID.id)
         {
             found = true;
@@ -1679,7 +1677,7 @@ void CCharEntity::OnItemFinish(CItemState& state, action_t& action)
 {
     TracyZoneScoped;
     auto* PTarget = static_cast<CBattleEntity*>(state.GetTarget());
-    auto* PItem   = static_cast<CItemUsable*>(state.GetItem());
+    auto* PItem   = state.GetItem();
 
     //#TODO: I'm sure this is supposed to be in the action packet... (animation, message)
     if (PItem->getAoE())
@@ -1750,7 +1748,7 @@ CBattleEntity* CCharEntity::IsValidTarget(uint16 targid, uint16 validTargetFlags
             // Interaction was blocked
             static_cast<CCharEntity*>(PTarget)->pushPacket(new CMessageSystemPacket(0, 0, 226));
         }
-        else if (static_cast<CCharEntity*>(this)->IsMobOwner(PTarget))
+        else if (IsMobOwner(PTarget))
         {
             if (PTarget->isAlive() || (validTargetFlags & TARGET_PLAYER_DEAD) != 0)
             {

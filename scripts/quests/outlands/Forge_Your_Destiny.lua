@@ -239,7 +239,10 @@ quest.sections =
             ['qm2'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.HATCHET) then
+                    if
+                        npcUtil.tradeHasExactly(trade, xi.items.HATCHET) and
+                        player:hasItem(xi.items.SACRED_SPRIG)
+                    then
                         if
                             GetMobByID(zitahID.mob.GUARDIAN_TREANT):isSpawned() or
                             npc:getLocalVar('treantNextPopAllowedTime') > os.time()
@@ -269,7 +272,7 @@ quest.sections =
                     then
                         quest:setVar(player, 'Prog', 2)
                         player:confirmTrade()
-                        return quest:messageSpecial(zitahID.text.STRANGE_FORCE_VANISHED, xi.items.SACRED_SPRIG)
+                        return quest:messageSpecial(zitahID.text.STRANGE_FORCE_VANISHED, xi.items.SACRED_BRANCH)
                     end
                 end,
 

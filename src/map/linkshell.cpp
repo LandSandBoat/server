@@ -173,7 +173,7 @@ void CLinkshell::ChangeMemberRank(int8* MemberName, uint8 toSack)
         {
             if (strcmp((const char*)MemberName, (const char*)member->GetName()) == 0)
             {
-                CCharEntity* PMember = (CCharEntity*)member;
+                CCharEntity* PMember = member;
 
                 SLOTTYPE slot = SLOT_LINK1;
                 int      lsID = 1;
@@ -247,7 +247,7 @@ void CLinkshell::RemoveMemberByName(int8* MemberName, uint8 kickerRank, bool bre
     {
         if (strcmp((const char*)MemberName, (const char*)member->GetName()) == 0)
         {
-            CCharEntity* PMember = (CCharEntity*)member;
+            CCharEntity* PMember = member;
 
             CItemLinkshell* PItemLinkshell = (CItemLinkshell*)PMember->getEquip(SLOT_LINK1);
             SLOTTYPE        slot           = SLOT_LINK1;

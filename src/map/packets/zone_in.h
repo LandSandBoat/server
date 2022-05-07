@@ -22,7 +22,7 @@
 #ifndef _CZONEINPACKET_H_
 #define _CZONEINPACKET_H_
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 

@@ -131,8 +131,8 @@ map_session_data_t* mapsession_getbyipp(uint64 ipp)
 map_session_data_t* mapsession_createsession(uint32 ip, uint16 port)
 {
     TracyZoneScoped;
-    map_session_data_t* map_session_data = new map_session_data_t;
-    memset(map_session_data, 0, sizeof(map_session_data_t));
+
+    map_session_data_t* map_session_data = new map_session_data_t();
 
     map_session_data->server_packet_data = new int8[map_config.buffer_size + 20];
 
@@ -211,14 +211,9 @@ int32 do_init(int32 argc, char** argv)
                                           map_config.mysql_port,
                                           map_config.mysql_database.c_str());
 
-    // clang-format off
-    sql->Async([&](SqlConnection* sql)
-    {
-        // We clear the session table at server start (temporary solution)
-        sql->Query("DELETE FROM accounts_sessions WHERE IF(%u = 0 AND %u = 0, true, server_addr = %u AND server_port = %u);", map_ip.s_addr, map_port,
-                    map_ip.s_addr, map_port);
-    });
-    // clang-format on
+    auto query = fmt::sprintf("DELETE FROM accounts_sessions WHERE IF(%u = 0 AND %u = 0, true, server_addr = %u AND server_port = %u);",
+        map_ip.s_addr, map_port, map_ip.s_addr, map_port);
+    sql->Async(std::move(query));
 
     ShowStatus("do_init: zlib is reading");
     zlib_init();
@@ -390,8 +385,8 @@ int32 do_sockets(fd_set* rfd, duration next)
     int32          ret;
     memcpy(rfd, &readfds, sizeof(*rfd));
 
-    timeout.tv_sec  = (long)std::chrono::duration_cast<std::chrono::seconds>(next).count();
-    timeout.tv_usec = (long)std::chrono::duration_cast<std::chrono::microseconds>(next - std::chrono::duration_cast<std::chrono::seconds>(next)).count();
+    timeout.tv_sec  = std::chrono::duration_cast<std::chrono::seconds>(next).count();
+    timeout.tv_usec = std::chrono::duration_cast<std::chrono::microseconds>(next - std::chrono::duration_cast<std::chrono::seconds>(next)).count();
 
     ret = sSelect(fd_max, rfd, nullptr, nullptr, &timeout);
 
@@ -618,7 +613,6 @@ int32 recv_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
 
         return 0;
     }
-    return -1;
 }
 
 /************************************************************************
@@ -688,9 +682,8 @@ int32 parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*
             {
                 // NOTE:
                 // CBasicPacket is incredibly light when constructed from a pointer like we're doing here.
-                // It is just a bag of offsets to the data in SmallPD_ptr, so its safe to construct and
-                // move it into the PacketParser call to keep the linter quiet
-                PacketParser[SmallPD_Type](map_session_data, PChar, std::move(CBasicPacket(reinterpret_cast<uint8*>(SmallPD_ptr))));
+                // It is just a bag of offsets to the data in SmallPD_ptr so its safe to construct.
+                PacketParser[SmallPD_Type](map_session_data, PChar, CBasicPacket(reinterpret_cast<uint8*>(SmallPD_ptr)));
             }
         }
         else
@@ -1190,7 +1183,7 @@ int32 map_config_read(const int8* cfgName)
         ptr++;
         *ptr = '\0';
 
-        int  stdout_with_ansisequence = 0;
+        //int  stdout_with_ansisequence = 0; // unused
         int  msg_silent               = 0;                    // Specifies how silent the console is.
         char timestamp_format[20]     = "[%d/%b] [%H:%M:%S]"; // For displaying Timestamps, default value
 
@@ -1198,10 +1191,12 @@ int32 map_config_read(const int8* cfgName)
         {
             strncpy(timestamp_format, w2, 20);
         }
+/*      // unused
         else if (strcmpi(w1, "stdout_with_ansisequence") == 0)
         {
             stdout_with_ansisequence = config_switch(w2);
         }
+*/
         else if (strcmpi(w1, "console_silent") == 0)
         {
             ShowInfo("Console Silent Setting: %d", atoi(w2));

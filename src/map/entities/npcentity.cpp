@@ -19,7 +19,7 @@
 ===========================================================================
 */
 
-#include "../../common/taskmgr.h"
+#include "common/taskmgr.h"
 
 #include "../ai/ai_container.h"
 #include "../utils/zoneutils.h"

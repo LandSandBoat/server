@@ -22,7 +22,7 @@
 #ifndef _CENTITYUPDATEPACKET_H
 #define _CENTITYUPDATEPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 

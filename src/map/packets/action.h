@@ -22,7 +22,7 @@
 #ifndef _CACTIONPACKET_H
 #define _CACTIONPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 #include "basic.h"
 
 #include "../entities/battleentity.h"

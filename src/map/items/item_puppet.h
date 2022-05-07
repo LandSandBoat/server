@@ -22,7 +22,7 @@
 #ifndef _CITEMPUPPET_H
 #define _CITEMPUPPET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "item.h"
 

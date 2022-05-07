@@ -22,8 +22,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #ifndef _CHARENTITY_H
 #define _CHARENTITY_H
 
-#include "../../common/cbasetypes.h"
-#include "../../common/mmo.h"
+#include "common/cbasetypes.h"
+#include "common/mmo.h"
 #include "../event_info.h"
 
 #include <bitset>
@@ -460,15 +460,16 @@ public:
     virtual void           OnCastInterrupted(CMagicState&, action_t&, MSGBASIC_ID msg) override;
     virtual void           OnWeaponSkillFinished(CWeaponSkillState&, action_t&) override;
     virtual void           OnAbility(CAbilityState&, action_t&) override;
-    virtual void           OnRangedAttack(CRangeState&, action_t&);
+    virtual void           OnRangedAttack(CRangeState&, action_t&) override;
     virtual void           OnDeathTimer() override;
     virtual void           OnRaise() override;
+
     virtual void           OnItemFinish(CItemState&, action_t&);
 
     bool m_Locked; // Is the player locked in a cutscene
 
-    CCharEntity();  // constructor
-    ~CCharEntity(); // destructor
+    CCharEntity();
+    ~CCharEntity();
 
 protected:
     bool IsMobOwner(CBattleEntity* PTarget);

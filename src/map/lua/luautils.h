@@ -24,8 +24,8 @@
 
 #include <optional>
 
-#include "../../common/cbasetypes.h"
-#include "../../common/taskmgr.h"
+#include "common/cbasetypes.h"
+#include "common/taskmgr.h"
 
 #include "lua.hpp"
 
@@ -153,7 +153,7 @@ namespace luautils
 
     auto   SpawnMob(uint32 mobid, sol::object const& arg2, sol::object const& arg3) -> std::optional<CLuaBaseEntity>; // Spawn Mob By Mob Id - NMs, BCNM...
     void   DespawnMob(uint32 mobid, sol::object const& arg2);                                                           // Despawn (Fade Out) Mob By Id
-    auto   GetPlayerByName(std::string name) -> std::optional<CLuaBaseEntity>;
+    auto   GetPlayerByName(std::string const& name) -> std::optional<CLuaBaseEntity>;
     auto   GetPlayerByID(uint32 pid) -> std::optional<CLuaBaseEntity>;
     auto   GetMagianTrial(sol::variadic_args va) -> sol::table;
     auto   GetMagianTrialsWithParent(int32 parentTrial) -> sol::table;
@@ -278,7 +278,7 @@ namespace luautils
     int32 OnUseAbility(CBattleEntity* PUser, CBattleEntity* PTarget, CAbility* PAbility, action_t* action);                                                                                     // triggers when job ability is used
 
     auto GetCachedInstanceScript(uint16 instanceId) -> sol::table;
-    
+
     int32 OnInstanceZoneIn(CCharEntity* PChar, CInstance* PInstance);            // triggered on zone in to instance
     void  AfterInstanceRegister(CBaseEntity* PChar);                             // triggers after a character is registered and zoned into an instance (the first time)
     int32 OnInstanceLoadFailed(CZone* PZone);                                    // triggers when an instance load is failed (ie. instance no longer exists)

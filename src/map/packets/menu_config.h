@@ -22,7 +22,7 @@
 #ifndef _CMENUCONFIGPACKET_H
 #define _CMENUCONFIGPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 

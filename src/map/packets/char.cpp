@@ -19,7 +19,7 @@
 ===========================================================================
 */
 
-#include "../../common/socket.h"
+#include "common/socket.h"
 
 #include <cstring>
 
@@ -37,6 +37,11 @@ CCharPacket::CCharPacket(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask
     ref<uint32>(0x04) = PChar->id;
     ref<uint16>(0x08) = PChar->targid; // 0x0D entity updates are valid for 1024 to 1791
 
+    if (type == ENTITY_SPAWN)
+    {
+        updatemask = 0x1F; // override mask to spawn mask
+    }
+
     switch (type)
     {
         case ENTITY_DESPAWN:
@@ -45,7 +50,6 @@ CCharPacket::CCharPacket(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask
         }
         break;
         case ENTITY_SPAWN:
-            updatemask = 0x1F;
         case ENTITY_UPDATE:
         {
             ref<uint8>(0x0A) = updatemask;

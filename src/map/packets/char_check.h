@@ -22,7 +22,7 @@
 #ifndef _CCHECKPACKET_H
 #define _CCHECKPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 
