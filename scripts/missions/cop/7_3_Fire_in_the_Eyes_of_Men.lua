@@ -3,6 +3,7 @@
 -- Promathia 7-3
 -----------------------------------
 -- !addmission 6 728
+-- Cid : !pos -12 -12 1 237
 -----------------------------------
 require('scripts/globals/interaction/mission')
 require('scripts/globals/missions')
@@ -40,7 +41,7 @@ mission.sections =
             onEventFinish =
             {
                 [4] = function(player, csid, option, npc)
-                    mission:setVar(player, 'Status', 1) -- Verify Location on end: -87.410 180 499.929 127 13
+                    mission:setVar(player, 'Status', 1)
                 end,
             },
         },
@@ -56,7 +57,7 @@ mission.sections =
                         if waitTimer == 0 then
                             return mission:progressEvent(857)
                         elseif waitTimer <= VanadielUniqueDay() then
-                            return mission:progressEvent(890) -- Check params 0,1,2,3, and 8 (first 4 0, last was 1)
+                            return mission:progressEvent(890)
                         else
                             return mission:event(858):importantEvent()
                         end

@@ -8,6 +8,7 @@
 require('scripts/globals/interaction/mission')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
+require("scripts/globals/teleports")
 require('scripts/globals/titles')
 require('scripts/globals/utils')
 require('scripts/globals/zone')
@@ -22,6 +23,21 @@ mission.reward =
     title = xi.title.SEEKER_OF_THE_LIGHT,
     nextMission = { xi.mission.log_id.COP, xi.mission.id.cop.GARDEN_OF_ANTIQUITY },
 }
+
+local stolenKeyTable =
+{
+    [1] = xi.ki.LIGHT_OF_VAHZL,
+    [2] = xi.ki.LIGHT_OF_MEA,
+    [3] = xi.ki.LIGHT_OF_HOLLA,
+    [4] = xi.ki.LIGHT_OF_DEM,
+    [5] = xi.ki.LIGHT_OF_ALTAIEU,
+}
+
+local function getStolenKeyItem(player)
+    local raceId = player:getRace() <= xi.race.MITHRA and math.ceil(player:getRace() / 2) or 5
+
+    return stolenKeyTable[raceId]
+end
 
 mission.sections =
 {
@@ -90,7 +106,9 @@ mission.sections =
             {
                 function(player, prevZone)
                     if mission:getVar(player, 'Status') == 3 then
-                        return 1 -- Event Options 1 and 2 come for update requests, no observed responses
+                        -- NOTE: Event Options 1 and 2 come for update requests, no observed responses
+                        -- this may be related to RotZ progress, since Kam'Lanaut shows up as ???
+                        return 1
                     end
                 end,
             },
@@ -98,22 +116,18 @@ mission.sections =
             onEventFinish =
             {
                 [1] = function(player, csid, option, npc)
-                    -- Nag'molada steals one random light
-                    local copCragLights =
-                    {
-                        xi.ki.LIGHT_OF_HOLLA,
-                        xi.ki.LIGHT_OF_DEM,
-                        xi.ki.LIGHT_OF_MEA,
-                    }
-
-                    local stolenLight = math.random(#copCragLights)
+                    local stolenLight = getStolenKeyItem(player)
 
                     player:delKeyItem(xi.ki.MYSTERIOUS_AMULET_DRAINED)
-                    player:delKeyItem(copCragLights[stolenLight])
-
                     player:messageSpecial(altaieuID.text.AMULET_SHATTERED, xi.ki.MYSTERIOUS_AMULET)
-                    player:messageSpecial(altaieuID.text.LIGHT_STOLEN, copCragLights[stolenLight])
-                    npcUtil.giveKeyItem(player, xi.ki.LIGHT_OF_ALTAIEU)
+
+                    if stolenLight ~= xi.ki.LIGHT_OF_ALTAIEU then
+                        player:delKeyItem(stolenLight)
+                        player:messageSpecial(altaieuID.text.LIGHT_STOLEN, stolenLight)
+                        npcUtil.giveKeyItem(player, xi.ki.LIGHT_OF_ALTAIEU)
+                    else
+                        player:messageSpecial(altaieuID.text.OBTAIN_BUT_STOLEN, stolenLight)
+                    end
 
                     mission:complete(player)
                     mission:setVar(player, 'Option', 1)
@@ -124,21 +138,30 @@ mission.sections =
 
     {
         check = function(player, currentMission, missionStatus, vars)
-            return player:hasCompletedMission(mission.areaId, mission.missionId) and
-                mission:getVar(player, 'Option') == 1
+            return player:hasCompletedMission(mission.areaId, mission.missionId)
         end,
 
         [xi.zone.SEALIONS_DEN] =
         {
+            ['Sueleen'] = mission:event(12),
+
             onZoneIn =
             {
                 function(player, prevZone)
-                    return 18
+                    if mission:getVar(player, 'Option') == 1 then
+                        return 18
+                    end
                 end,
             },
 
             onEventFinish =
             {
+                [12] = function(player, csid, option, npc)
+                    if option == 1 then
+                        xi.teleport.to(player, xi.teleport.id.SEA)
+                    end
+                end,
+
                 [18] = function(player, csid, option, npc)
                     mission:setVar(player, 'Option', 0)
                 end,

@@ -30,13 +30,13 @@ mission.reward =
 local function setMissionStatusBit(player, statusBit)
     local missionStatus = player:getMissionStatus(mission.areaId, xi.mission.status.COP.CID)
 
-    player:setMissionStatus(mission.areaId, utils.setBit(missionStatus, statusBit), xi.mission.status.COP.CID)
+    player:setMissionStatus(mission.areaId, utils.mask.setBit(missionStatus, statusBit, true), xi.mission.status.COP.CID)
 end
 
 local function getMissionStatusBit(player, statusBit)
     local missionStatus = player:getMissionStatus(mission.areaId, xi.mission.status.COP.CID)
 
-    return utils.getBit(missionStatus, statusBit)
+    return utils.mask.getBit(missionStatus, statusBit)
 end
 
 local function isCarpentersNmSpawned()
@@ -77,7 +77,7 @@ mission.sections =
             {
                 onMobDeath = function(mob, player, isKiller, noKiller)
                     if mission:getLocalVar(player, 'nmBibiki') == 0 then
-                        mission:setVar(player, 'nmBibiki', 1)
+                        mission:setLocalVar(player, 'nmBibiki', 1)
                     end
                 end,
             },
@@ -98,7 +98,7 @@ mission.sections =
                     if not getMissionStatusBit(player, 1) then
                         local nmProgress = mission:getLocalVar(player, 'carpentersNm')
 
-                        if nmProgress == 16 then
+                        if nmProgress == 15 then
                             return mission:progressEvent(37)
                         elseif not isCarpentersNmSpawned() then
                             local executor = GetMobByID(carpentersID.mob.CRYPTONBERRY_EXECUTOR)
@@ -119,7 +119,7 @@ mission.sections =
                     local nmProgress = mission:getLocalVar(player, 'carpentersNm')
                     local nmOffset = mob:getID() - carpentersID.mob.CRYPTONBERRY_EXECUTOR
 
-                    mission:setLocalVar(player, 'carpentersNm', utils.setBit(nmProgress, nmOffset))
+                    mission:setLocalVar(player, 'carpentersNm', utils.mask.setBit(nmProgress, nmOffset, true))
                 end,
             },
 
@@ -129,8 +129,7 @@ mission.sections =
                     local nmProgress = mission:getLocalVar(player, 'carpentersNm')
                     local nmOffset = mob:getID() - carpentersID.mob.CRYPTONBERRY_EXECUTOR
 
-                    mission:setLocalVar(player, 'carpentersNm', utils.setBit(nmProgress, nmOffset))
-
+                    mission:setLocalVar(player, 'carpentersNm', utils.mask.setBit(nmProgress, nmOffset, true))
                     mob:messageText(mob, carpentersID.text.CRYPTONBERRY_EXECUTOR_DIE)
                 end,
             },
@@ -164,7 +163,7 @@ mission.sections =
             {
                 onMobDeath = function(mob, player, isKiller, noKiller)
                     if mission:getLocalVar(player, 'nmMisareaux') == 0 then
-                        mission:setVar(player, 'nmMisareaux', 1)
+                        mission:setLocalVar(player, 'nmMisareaux', 1)
                     end
                 end,
             },
@@ -185,7 +184,7 @@ mission.sections =
                 onTrigger = function(player, npc)
                     if player:getMissionStatus(mission.areaId, xi.mission.status.COP.CID) == 7 then
                         if not player:hasKeyItem(xi.ki.LETTERS_FROM_ULMIA_AND_PRISHE) then
-                            return mission:progressEvent(892) -- Check params, first 4 were 0'd
+                            return mission:progressEvent(892)
                         else
                             return mission:progressEvent(895):oncePerZone()
                         end
