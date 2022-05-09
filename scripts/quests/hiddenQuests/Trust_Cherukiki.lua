@@ -32,7 +32,7 @@ quest.sections =
             (
                 -- Between these missions
                 (player:getCurrentMission(xi.mission.log_id.COP) > xi.mission.id.cop.CHAINS_AND_BONDS and
-                player:getCurrentMission(xi.mission.log_id.COP) < xi.mission.id.cop.THE_WARRIOR_S_PATH)
+                player:getCurrentMission(xi.mission.log_id.COP) < xi.mission.id.cop.THE_WARRIORS_PATH)
                 or
                 -- On Dawn, but past "the boss"
                 (player:getCurrentMission(xi.mission.log_id.COP) > xi.mission.id.cop.DAWN and

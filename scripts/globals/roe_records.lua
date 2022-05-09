@@ -1796,7 +1796,7 @@ function getRoeRecords(triggers)
 
       [1399] = { -- Chains of Promathia Chapter 7
           trigger = triggers.missionComplete,
-          reqs = { missionComplete = {xi.mission.log_id.COP, xi.mission.id.cop.THE_WARRIOR_S_PATH} },
+          reqs = { missionComplete = {xi.mission.log_id.COP, xi.mission.id.cop.THE_WARRIORS_PATH} },
           flags = set{"retro"},
           reward = { sparks = 300, xp = 500 },
       },
