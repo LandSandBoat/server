@@ -130,7 +130,7 @@ mission.sections =
 
         [xi.zone.NORTHERN_SAN_DORIA] =
         {
-            ['Helaku'] = mission:messageSpecial(northSandoriaID.text.THE_EMISSARY_PLACEHOLDER),
+            ['Helaku'] = mission:messageText(northSandoriaID.text.THE_EMISSARY_PLACEHOLDER),
         },
 
         [xi.zone.PORT_WINDURST] =
