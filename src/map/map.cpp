@@ -105,6 +105,7 @@ namespace
 {
     uint32 MAX_BUFFER_SIZE             = 2500U;
     uint32 MAX_PACKETS_PER_COMPRESSION = 32;
+    uint32 MAX_PACKET_BACKLOG_SIZE     = 120;
 }
 
 /************************************************************************
@@ -766,16 +767,14 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
     {
         do
         {
-            *buffsize               = FFXI_HEADER_SIZE;
-            PacketList_t packetList = PChar->getPacketList();
-            packets                 = 0;
+            *buffsize                = FFXI_HEADER_SIZE;
+            PacketList_t packetList  = PChar->getPacketList();
+            packets                  = 0;
 
             while (!packetList.empty() && *buffsize + packetList.front()->getSize() < MAX_BUFFER_SIZE && packets < PacketCount)
             {
                 PSmallPacket = packetList.front();
                 packetList.pop_front();
-
-                // ShowInfo("> Outgoing packet: Type: 0x%X, Size: (%d / 0x%X)", PSmallPacket->getType(), PSmallPacket->getSize(), PSmallPacket->getSize());
 
                 PSmallPacket->setSequence(map_session_data->server_packet_id);
                 memcpy(buff + *buffsize, *PSmallPacket, PSmallPacket->getSize());
@@ -851,6 +850,13 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
     // decrease the size of BuffMaxSize in 4 byte increments until it is removed (manually)
 
     *buffsize = PacketSize + FFXI_HEADER_SIZE;
+
+    auto remainingPackets = PChar->getPacketList().size();
+    if (remainingPackets > MAX_PACKET_BACKLOG_SIZE)
+    {
+        ShowWarning(fmt::format("Packet backlog for char {} in {} is {}! Limit is: {}",
+            PChar->name, PChar->loc.zone->GetName(), remainingPackets, MAX_PACKET_BACKLOG_SIZE));
+    }
 
     return 0;
 }
