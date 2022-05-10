@@ -1158,21 +1158,6 @@ void CZone::CheckRegions(CCharEntity* PChar)
     PChar->m_InsideRegionID = RegionID;
 }
 
-void CZone::ResetLocalVars()
-{
-    m_localVars.clear();
-}
-
-uint32 CZone::GetLocalVar(const char* var)
-{
-    return m_localVars[var];
-}
-
-void CZone::SetLocalVar(const char* var, uint32 val)
-{
-    m_localVars[var] = val;
-}
-
 //====================================1=======================
 
 /*

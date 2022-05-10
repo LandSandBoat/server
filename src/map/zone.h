@@ -608,10 +608,6 @@ public:
     virtual void ZoneServer(time_point tick, bool check_regions);
     void         CheckRegions(CCharEntity* PChar);
 
-    void   ResetLocalVars();
-    uint32 GetLocalVar(const char* var);
-    void   SetLocalVar(const char* var, uint32 val);
-
     virtual void ForEachChar(std::function<void(CCharEntity*)> func);
     virtual void ForEachCharInstance(CBaseEntity* PEntity, std::function<void(CCharEntity*)> func);
     virtual void ForEachMob(std::function<void(CMobEntity*)> func);

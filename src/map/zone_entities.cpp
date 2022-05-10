@@ -66,9 +66,6 @@ namespace
     const int CHARACTER_SYNC_DISTANCE_SWAP_THRESHOLD     = 30;
     const int CHARACTER_SYNC_PARTY_SIGNIFICANCE          = 100000;
     const int CHARACTER_SYNC_ALLI_SIGNIFICANCE           = 10000;
-    const int CHARACTER_SYNC_CONFLICT_ENEMY_SIGNIFICANCE = 9000;
-
-    const int PERSIST_CHECK_CHARACTERS = 20;
 }
 
 typedef std::pair<float, CCharEntity*> CharScorePair;
@@ -507,6 +504,7 @@ void CZoneEntities::DespawnPC(CCharEntity* PChar)
         {
             PCurrentChar->SpawnPCList.erase(PC);
             PCurrentChar->updateCharPacket(PChar, ENTITY_DESPAWN, 0);
+        }
     }
 }
 
@@ -672,11 +670,6 @@ float getSignificanceScore(CCharEntity* originChar, CCharEntity* targetChar)
         }
     }
 
-    if (originChar->isInConflict() && targetChar->isInConflict() && originChar->allegiance != targetChar->allegiance)
-    {
-        return CHARACTER_SYNC_CONFLICT_ENEMY_SIGNIFICANCE;
-    }
-
     return 0;
 }
 
@@ -687,44 +680,18 @@ void CZoneEntities::SpawnPCs(CCharEntity* PChar)
     // Provide bonus score to characters targeted by spawned mobs or other conflict players, if in conflict
     std::unordered_map<uint32, float> scoreBonus = std::unordered_map<uint32, float>();
 
-    bool isInConflict = PChar->isInConflict();
-    if (isInConflict)
+    for (auto mobEntry : PChar->SpawnMOBList)
     {
-        for (auto&& pcEntry : m_charList)
+        CState* state = mobEntry.second->PAI->GetCurrentState();
+        if (!state)
         {
-            if (!pcEntry.second->isInConflict())
-            {
-                continue;
-            }
-
-            CState* state = pcEntry.second->PAI->GetCurrentState();
-            if (!state)
-            {
-                continue;
-            }
-
-            CBaseEntity* target = state->GetTarget();
-            if (target && target->objtype == TYPE_PC && target->id != PChar->id)
-            {
-                scoreBonus[target->id] += CHARACTER_SYNC_DISTANCE_SWAP_THRESHOLD;
-            }
+            continue;
         }
-    }
-    else
-    {
-        for (auto mobEntry : PChar->SpawnMOBList)
-        {
-            CState* state = mobEntry.second->PAI->GetCurrentState();
-            if (!state)
-            {
-                continue;
-            }
 
-            CBaseEntity* target = state->GetTarget();
-            if (target && target->objtype == TYPE_PC && target->id != PChar->id)
-            {
-                scoreBonus[target->id] += CHARACTER_SYNC_DISTANCE_SWAP_THRESHOLD;
-            }
+        CBaseEntity* target = state->GetTarget();
+        if (target && target->objtype == TYPE_PC && target->id != PChar->id)
+        {
+            scoreBonus[target->id] += CHARACTER_SYNC_DISTANCE_SWAP_THRESHOLD;
         }
     }
 
@@ -738,9 +705,7 @@ void CZoneEntities::SpawnPCs(CCharEntity* PChar)
 
         // Despawn character if it's a hidden GM, is in a different mog house, or if player is in a conflict while other is not, or too far up/down
         if (pc->m_isGMHidden
-            || PChar->m_moghouseID != pc->m_moghouseID
-            || (isInConflict && !pc->isInConflict())
-            || !isWithinVerticalDistance(PChar, pc))
+            || PChar->m_moghouseID != pc->m_moghouseID)
         {
             toRemove.push_back(pc);
             continue;
@@ -792,9 +757,7 @@ void CZoneEntities::SpawnPCs(CCharEntity* PChar)
         if (PCurrentChar != nullptr && PChar != PCurrentChar && PChar->SpawnPCList.find(PCurrentChar->id) == PChar->SpawnPCList.end())
         {
             if (PCurrentChar->m_isGMHidden
-                || PChar->m_moghouseID != PCurrentChar->m_moghouseID
-                || (isInConflict && !PCurrentChar->isInConflict())
-                || !isWithinVerticalDistance(PChar, PCurrentChar))
+                || PChar->m_moghouseID != PCurrentChar->m_moghouseID)
             {
                 continue;
             }
@@ -1149,7 +1112,7 @@ void CZoneEntities::UpdateCharPacket(CCharEntity* PChar, ENTITYUPDATE type, uint
         return;
     }
 
-    for (ShuffleCharList_t::const_iterator it = m_charShuffleList.begin(); it != m_charShuffleList.end(); ++it)
+    for (EntityList_t::const_iterator it = m_charList.begin(); it != m_charList.end(); ++it)
     {
         CCharEntity* PCurrentChar = (CCharEntity*)it->second;
 
@@ -1167,7 +1130,7 @@ void CZoneEntities::UpdateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, 
 {
     TracyZoneScoped;
 
-    for (ShuffleCharList_t::const_iterator it = m_charShuffleList.begin(); it != m_charShuffleList.end(); ++it)
+    for (EntityList_t::const_iterator it = m_charList.begin(); it != m_charList.end(); ++it)
     {
         CCharEntity* PCurrentChar = (CCharEntity*)it->second;
 

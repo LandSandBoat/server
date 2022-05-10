@@ -290,39 +290,6 @@ void CCharEntity::pushPacket(CBasicPacket* packet)
     TracyZoneIString(GetName());
     TracyZoneHex16(packet->getType());
 
-    // TODO: Iterating the entire queue like this isn't very efficient, but the server
-    // can still _easily_ handle it
-    // This could easily be accelerated by creating a lookup, building a key out of:
-    // - packetId + mainId + targId + updateMask
-    // and storing the position in the queue of that entry
-    for (auto&& entry : PacketList)
-    {
-        if ((packet->getType() == 0x0E && entry->getType() == 0x0E) || // Entity Update (CEntityUpdatePacket)
-            (packet->getType() == 0x0D && entry->getType() == 0x0D))   // Char Packet (CCharPacket)
-        {
-            bool sameMainId     = packet->ref<uint32>(0x04) == entry->ref<uint32>(0x04);
-            bool sameTargId     = packet->ref<uint16>(0x08) == entry->ref<uint16>(0x08);
-            bool sameUpdateMask = packet->ref<uint8>(0x0A)  == entry->ref<uint8>(0x0A);
-            if (sameMainId && sameTargId && sameUpdateMask)
-            {
-                // Put the newer packet in the place of the one already in the queue
-                std::swap(entry, packet);
-
-                // Get rid of the original packet
-                delete packet;
-
-                // Bail out and don't add anything new to the queue
-                return;
-            }
-        }
-    }
-
-    // Nothing to dedupe? Just put the packet in the queue
-    PacketList.push_back(packet);
-}
-
-void CCharEntity::pushPacket(CBasicPacket* packet)
-{
     if (packet->getType() == 0x5B)
     {
         if (PendingPositionPacket)
@@ -340,6 +307,11 @@ void CCharEntity::pushPacket(CBasicPacket* packet)
     {
         PacketList.push_back(packet);
     }
+}
+
+void CCharEntity::pushPacket(std::unique_ptr<CBasicPacket> packet)
+{
+    pushPacket(packet.release());
 }
 
 void CCharEntity::updateCharPacket(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask)
