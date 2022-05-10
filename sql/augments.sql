@@ -1730,8 +1730,8 @@ INSERT INTO `augments` VALUES (1444,0,0,0,0,0); -- Enh. "Tranquility" and "Equan
 INSERT INTO `augments` VALUES (1445,0,0,0,0,0); -- Enhances Stormsurge effect
 INSERT INTO `augments` VALUES (1446,0,0,0,0,0); -- 1446 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
 INSERT INTO `augments` VALUES (1447,0,0,0,0,0); -- 1447 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
-INSERT INTO `augments` VALUES (1448,0,967,1,0,0); -- Enhances "Mending Halation" effect
-INSERT INTO `augments` VALUES (1449,0,968,1,0,0); -- Enhances "Radial Arcana" effect
+INSERT INTO `augments` VALUES (1448,0,968,1,0,0); -- Enhances "Mending Halation" effect
+INSERT INTO `augments` VALUES (1449,0,969,1,0,0); -- Enhances "Radial Arcana" effect
 INSERT INTO `augments` VALUES (1450,0,970,1,0,0); -- Enhances "Curative Recantation" effect
 INSERT INTO `augments` VALUES (1451,0,971,1,0,0); -- Enhances "Primeval Zeal" effect
 INSERT INTO `augments` VALUES (1452,0,0,0,0,0); -- 1452 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.

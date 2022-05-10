@@ -6257,6 +6257,11 @@ namespace battleutils
                 fastCast += ((CCharEntity*)PEntity)->PMeritPoints->GetMeritValue(MERIT_CURE_CAST_TIME, (CCharEntity*)PEntity);
             }
         }
+        else if (PSpell->getSkillType() == SKILLTYPE::SKILL_GEOMANCY && PEntity->objtype == TYPE_PC)
+        {
+            auto* PChar = static_cast<CCharEntity*>(PEntity);
+            fastCast += PChar->PJobPoints->GetJobPointValue(JP_WIDENED_COMPASS_EFFECT);
+        }
 
         fastCast                  = std::clamp<int16>(fastCast, -100, 80);
         int16 uncappedFastCast    = std::clamp<int16>(PEntity->getMod(Mod::UFASTCAST), -100, 100);
