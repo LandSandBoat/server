@@ -101,6 +101,12 @@ std::unique_ptr<SqlConnection> sql;
 
 extern std::map<uint16, CZone*> g_PZoneList; // Global array of pointers for zones
 
+namespace
+{
+    uint32 MAX_BUFFER_SIZE             = 2500U;
+    uint32 MAX_PACKETS_PER_COMPRESSION = 32;
+}
+
 /************************************************************************
  *                                                                       *
  *  mapsession_getbyipp                                                  *
@@ -134,7 +140,7 @@ map_session_data_t* mapsession_createsession(uint32 ip, uint16 port)
 
     map_session_data_t* map_session_data = new map_session_data_t();
 
-    map_session_data->server_packet_data = new int8[map_config.buffer_size + 20];
+    map_session_data->server_packet_data = new int8[MAX_BUFFER_SIZE + 20];
 
     map_session_data->last_update = time(nullptr);
     map_session_data->client_addr = ip;
@@ -273,8 +279,8 @@ int32 do_init(int32 argc, char** argv)
     CTaskMgr::getInstance()->AddTask("map_cleanup", server_clock::now(), nullptr, CTaskMgr::TASK_INTERVAL, map_cleanup, 5s);
     CTaskMgr::getInstance()->AddTask("garbage_collect", server_clock::now(), nullptr, CTaskMgr::TASK_INTERVAL, map_garbage_collect, 15min);
 
-    g_PBuff   = new int8[map_config.buffer_size + 20];
-    PTempBuff = new int8[map_config.buffer_size + 20];
+    g_PBuff   = new int8[MAX_BUFFER_SIZE + 20];
+    PTempBuff = new int8[MAX_BUFFER_SIZE + 20];
 
     PacketGuard::Init();
 
@@ -407,7 +413,7 @@ int32 do_sockets(fd_set* rfd, duration next)
         struct sockaddr_in from;
         socklen_t          fromlen = sizeof(from);
 
-        int32 ret = recvudp(map_fd, g_PBuff, map_config.buffer_size, 0, (struct sockaddr*)&from, &fromlen);
+        int32 ret = recvudp(map_fd, g_PBuff, MAX_BUFFER_SIZE, 0, (struct sockaddr*)&from, &fromlen);
         if (ret != -1)
         {
             // find player char
@@ -602,14 +608,20 @@ int32 recv_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
         // reading data size
         uint32 PacketDataSize = ref<uint32>(buff, *buffsize - sizeof(int32) - 16);
         // creating buffer for decompress data
-        auto PacketDataBuff = std::make_unique<int8[]>(map_config.buffer_size);
+        auto PacketDataBuff = std::make_unique<int8[]>(MAX_BUFFER_SIZE);
         // it's decompressing data and getting new size
-        PacketDataSize = zlib_decompress(buff + FFXI_HEADER_SIZE, PacketDataSize, PacketDataBuff.get(), map_config.buffer_size);
+        PacketDataSize = zlib_decompress(buff + FFXI_HEADER_SIZE, PacketDataSize, PacketDataBuff.get(), MAX_BUFFER_SIZE);
 
-        // it's making result buff
-        // don't need memcpy header
-        memcpy(buff + FFXI_HEADER_SIZE, PacketDataBuff.get(), PacketDataSize);
-        *buffsize = FFXI_HEADER_SIZE + PacketDataSize;
+        // Not sure why zlib_decompress is defined to return a uint32 when it returns -1 in situations.
+        if (static_cast<int32>(PacketDataSize) != -1)
+        {
+            // it's making result buff
+            // don't need memcpy header
+            memcpy(buff + FFXI_HEADER_SIZE, PacketDataBuff.get(), PacketDataSize);
+            *buffsize = FFXI_HEADER_SIZE + PacketDataSize;
+
+            return 0;
+        }
 
         return 0;
     }
@@ -743,7 +755,7 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
     CBasicPacket* PSmallPacket;
 
     uint32 PacketSize  = UINT32_MAX;
-    auto   PacketCount = PChar->getPacketCount();
+    size_t PacketCount = std::clamp<size_t>(PChar->getPacketCount(), 0, MAX_PACKETS_PER_COMPRESSION);
     uint8  packets     = 0;
 
 #ifdef LOG_OUTGOING_PACKETS
@@ -758,7 +770,7 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
             PacketList_t packetList = PChar->getPacketList();
             packets                 = 0;
 
-            while (!packetList.empty() && *buffsize + packetList.front()->getSize() < map_config.buffer_size && packets < PacketCount)
+            while (!packetList.empty() && *buffsize + packetList.front()->getSize() < MAX_BUFFER_SIZE && packets < PacketCount)
             {
                 PSmallPacket = packetList.front();
                 packetList.pop_front();
@@ -773,11 +785,11 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
                 packets++;
             }
 
-            PacketCount /= 2;
+            PacketCount -= PacketCount / 3;
 
             // Compress the data without regard to the header
             // The returned size is 8 times the real data
-            PacketSize = zlib_compress(buff + FFXI_HEADER_SIZE, (uint32)(*buffsize - FFXI_HEADER_SIZE), PTempBuff, map_config.buffer_size);
+            PacketSize = zlib_compress(buff + FFXI_HEADER_SIZE, (uint32)(*buffsize - FFXI_HEADER_SIZE), PTempBuff, MAX_BUFFER_SIZE);
 
             // handle compression error
             if (PacketSize == static_cast<uint32>(-1))
@@ -814,7 +826,7 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
     memcpy(PTempBuff + PacketSize, hash, 16);
     PacketSize += 16;
 
-    if (PacketSize > map_config.buffer_size + 20)
+    if (PacketSize > MAX_BUFFER_SIZE + 20)
     {
         ShowFatalError("Memory manager: PTempBuff is overflowed (%u)", PacketSize);
     }
@@ -1045,7 +1057,6 @@ int32 map_config_default()
     map_config.mysql_database              = "xidb";
     map_config.mysql_port                  = 3306;
     map_config.server_message              = "";
-    map_config.buffer_size                 = 1800;
     map_config.ah_base_fee_single          = 1;
     map_config.ah_base_fee_stacks          = 4;
     map_config.ah_tax_rate_single          = 1.0;
@@ -1206,10 +1217,6 @@ int32 map_config_read(const int8* cfgName)
         else if (strcmpi(w1, "map_port") == 0)
         {
             map_config.usMapPort = (atoi(w2));
-        }
-        else if (strcmp(w1, "buff_maxsize") == 0)
-        {
-            map_config.buffer_size = atoi(w2);
         }
         else if (strcmp(w1, "max_time_lastupdate") == 0)
         {
