@@ -753,6 +753,8 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
 
     // build a large package, consisting of several small packets
     CCharEntity*  PChar = map_session_data->PChar;
+    TracyZoneString(PChar->name);
+
     CBasicPacket* PSmallPacket;
 
     uint32 PacketSize  = UINT32_MAX;
@@ -818,6 +820,7 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
         }
     } while (PacketSize == static_cast<uint32>(-1));
     PChar->erasePackets(packets);
+    TracyZoneString(fmt::format("Sending {} packets", packets));
 
     // Record data size excluding header
     uint8 hash[16];
@@ -852,6 +855,7 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
     *buffsize = PacketSize + FFXI_HEADER_SIZE;
 
     auto remainingPackets = PChar->getPacketList().size();
+    TracyZoneString(fmt::format("{} packets remaining", remainingPackets));
     if (remainingPackets > MAX_PACKET_BACKLOG_SIZE)
     {
         ShowWarning(fmt::format("Packet backlog for char {} in {} is {}! Limit is: {}",

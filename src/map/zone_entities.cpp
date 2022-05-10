@@ -178,7 +178,7 @@ void CZoneEntities::InsertPET(CBaseEntity* PPet)
             if (distance(PPet->loc.p, PCurrentChar->loc.p) < 50)
             {
                 PCurrentChar->SpawnPETList[PPet->id] = PPet;
-                PCurrentChar->pushPacket(new CEntityUpdatePacket(PPet, ENTITY_SPAWN, UPDATE_ALL_MOB));
+                PCurrentChar->updateEntityPacket(PPet, ENTITY_SPAWN, UPDATE_ALL_MOB);
             }
         }
         return;
@@ -221,7 +221,7 @@ void CZoneEntities::InsertTRUST(CBaseEntity* PTrust)
                 {
                     PCurrentChar->SpawnTRUSTList[PTrust->id] = PTrust;
                 }
-                PCurrentChar->pushPacket(new CEntityUpdatePacket(PTrust, ENTITY_SPAWN, UPDATE_ALL_MOB));
+                PCurrentChar->updateEntityPacket(PTrust, ENTITY_SPAWN, UPDATE_ALL_MOB);
             }
         }
         return;
@@ -410,7 +410,7 @@ void CZoneEntities::DecreaseZoneCounter(CCharEntity* PChar)
                 if (PET != PCurrentChar->SpawnPETList.end())
                 {
                     PCurrentChar->SpawnPETList.erase(PET);
-                    PCurrentChar->pushPacket(new CEntityUpdatePacket(PChar->PPet, ENTITY_DESPAWN, UPDATE_NONE));
+                    PCurrentChar->updateEntityPacket(PChar->PPet, ENTITY_DESPAWN, UPDATE_NONE);
                 }
             }
             PChar->PPet = nullptr;
@@ -424,7 +424,7 @@ void CZoneEntities::DecreaseZoneCounter(CCharEntity* PChar)
         {
             // inform other players of the pets removal
             CCharEntity* PCurrentChar = (CCharEntity*)it->second;
-            PCurrentChar->pushPacket(new CEntityUpdatePacket(trust, ENTITY_DESPAWN, UPDATE_NONE));
+            PCurrentChar->updateEntityPacket(trust, ENTITY_DESPAWN, UPDATE_NONE);
         }
     }
     PChar->ClearTrusts();
@@ -503,7 +503,7 @@ void CZoneEntities::DespawnPC(CCharEntity* PChar)
         if (PC != PCurrentChar->SpawnPCList.end())
         {
             PCurrentChar->SpawnPCList.erase(PC);
-            PCurrentChar->updateCharPacket(PChar, ENTITY_DESPAWN, 0);
+            PCurrentChar->updateCharPacket(PChar, ENTITY_DESPAWN, UPDATE_NONE);
         }
     }
 }
@@ -523,7 +523,7 @@ void CZoneEntities::SpawnMOBs(CCharEntity* PChar)
             if (MOB == PChar->SpawnMOBList.end() || PChar->SpawnMOBList.key_comp()(PCurrentMob->id, MOB->first))
             {
                 PChar->SpawnMOBList.insert(MOB, SpawnIDList_t::value_type(PCurrentMob->id, PCurrentMob));
-                PChar->pushPacket(new CEntityUpdatePacket(PCurrentMob, ENTITY_SPAWN, UPDATE_ALL_MOB));
+                PChar->updateEntityPacket(PCurrentMob, ENTITY_SPAWN, UPDATE_ALL_MOB);
             }
 
             if (PChar->isDead() || PChar->nameflags.flags & FLAG_GM || PCurrentMob->PMaster)
@@ -549,7 +549,7 @@ void CZoneEntities::SpawnMOBs(CCharEntity* PChar)
             if (MOB != PChar->SpawnMOBList.end() && !(PChar->SpawnMOBList.key_comp()(PCurrentMob->id, MOB->first)))
             {
                 PChar->SpawnMOBList.erase(MOB);
-                PChar->pushPacket(new CEntityUpdatePacket(PCurrentMob, ENTITY_DESPAWN, UPDATE_NONE));
+                PChar->updateEntityPacket(PCurrentMob, ENTITY_DESPAWN, UPDATE_NONE);
             }
         }
     }
@@ -568,7 +568,7 @@ void CZoneEntities::SpawnPETs(CCharEntity* PChar)
             if (PET == PChar->SpawnPETList.end() || PChar->SpawnPETList.key_comp()(PCurrentPet->id, PET->first))
             {
                 PChar->SpawnPETList.insert(PET, SpawnIDList_t::value_type(PCurrentPet->id, PCurrentPet));
-                PChar->pushPacket(new CEntityUpdatePacket(PCurrentPet, ENTITY_SPAWN, UPDATE_ALL_MOB));
+                PChar->updateEntityPacket(PCurrentPet, ENTITY_SPAWN, UPDATE_ALL_MOB);
             }
         }
         else
@@ -576,7 +576,7 @@ void CZoneEntities::SpawnPETs(CCharEntity* PChar)
             if (PET != PChar->SpawnPETList.end() && !(PChar->SpawnPETList.key_comp()(PCurrentPet->id, PET->first)))
             {
                 PChar->SpawnPETList.erase(PET);
-                PChar->pushPacket(new CEntityUpdatePacket(PCurrentPet, ENTITY_DESPAWN, UPDATE_NONE));
+                PChar->updateEntityPacket(PCurrentPet, ENTITY_DESPAWN, UPDATE_NONE);
             }
         }
     }
@@ -599,7 +599,7 @@ void CZoneEntities::SpawnNPCs(CCharEntity* PChar)
                     if (NPC == PChar->SpawnNPCList.end() || PChar->SpawnNPCList.key_comp()(PCurrentNpc->id, NPC->first))
                     {
                         PChar->SpawnNPCList.insert(NPC, SpawnIDList_t::value_type(PCurrentNpc->id, PCurrentNpc));
-                        PChar->pushPacket(new CEntityUpdatePacket(PCurrentNpc, ENTITY_SPAWN, UPDATE_ALL_MOB));
+                        PChar->updateEntityPacket(PCurrentNpc, ENTITY_SPAWN, UPDATE_ALL_MOB);
                     }
                 }
                 else
@@ -607,7 +607,7 @@ void CZoneEntities::SpawnNPCs(CCharEntity* PChar)
                     if (NPC != PChar->SpawnNPCList.end() && !(PChar->SpawnNPCList.key_comp()(PCurrentNpc->id, NPC->first)))
                     {
                         PChar->SpawnNPCList.erase(NPC);
-                        PChar->pushPacket(new CEntityUpdatePacket(PCurrentNpc, ENTITY_DESPAWN, UPDATE_NONE));
+                        PChar->updateEntityPacket(PCurrentNpc, ENTITY_DESPAWN, UPDATE_NONE);
                     }
                 }
             }
@@ -630,7 +630,7 @@ void CZoneEntities::SpawnTRUSTs(CCharEntity* PChar)
                 if (SpawnTrustItr == PChar->SpawnTRUSTList.end() || PChar->SpawnTRUSTList.key_comp()(PCurrentTrust->id, SpawnTrustItr->first))
                 {
                     PChar->SpawnTRUSTList.insert(SpawnTrustItr, SpawnIDList_t::value_type(PCurrentTrust->id, PCurrentTrust));
-                    PChar->pushPacket(new CEntityUpdatePacket(PCurrentTrust, ENTITY_SPAWN, UPDATE_ALL_MOB));
+                    PChar->updateEntityPacket(PCurrentTrust, ENTITY_SPAWN, UPDATE_ALL_MOB);
                     if (PMaster)
                     {
                         PChar->pushPacket(new CTrustSyncPacket(PMaster, PCurrentTrust));
@@ -642,7 +642,7 @@ void CZoneEntities::SpawnTRUSTs(CCharEntity* PChar)
                 if (SpawnTrustItr != PChar->SpawnTRUSTList.end() && !(PChar->SpawnTRUSTList.key_comp()(PCurrentTrust->id, SpawnTrustItr->first)))
                 {
                     PChar->SpawnTRUSTList.erase(SpawnTrustItr);
-                    PChar->pushPacket(new CEntityUpdatePacket(PCurrentTrust, ENTITY_DESPAWN, UPDATE_NONE));
+                    PChar->updateEntityPacket(PCurrentTrust, ENTITY_DESPAWN, UPDATE_NONE);
                 }
             }
         }
@@ -743,7 +743,7 @@ void CZoneEntities::SpawnPCs(CCharEntity* PChar)
 
     for (auto removeChar : toRemove)
     {
-        PChar->updateCharPacket(removeChar, ENTITY_DESPAWN, 0);
+        PChar->updateCharPacket(removeChar, ENTITY_DESPAWN, UPDATE_NONE);
         PChar->SpawnPCList.erase(removeChar->id);
     }
 
@@ -825,7 +825,7 @@ void CZoneEntities::SpawnPCs(CCharEntity* PChar)
                 {
                     CCharEntity* spawnedChar = spawnedCharacters.top().second;
                     PChar->SpawnPCList.erase(spawnedChar->id);
-                    PChar->updateCharPacket(spawnedChar, ENTITY_DESPAWN, 0);
+                    PChar->updateCharPacket(spawnedChar, ENTITY_DESPAWN, UPDATE_NONE);
                     spawnedCharacters.pop();
                     swapCount++;
                 }
@@ -857,7 +857,7 @@ void CZoneEntities::SpawnMoogle(CCharEntity* PChar)
         if (PCurrentNpc->loc.p.z == 1.5 && PCurrentNpc->look.face == 0x52)
         {
             PCurrentNpc->status = STATUS_TYPE::NORMAL;
-            PChar->pushPacket(new CEntityUpdatePacket(PCurrentNpc, ENTITY_SPAWN, UPDATE_ALL_MOB));
+            PChar->updateEntityPacket(PCurrentNpc, ENTITY_SPAWN, UPDATE_ALL_MOB);
             PCurrentNpc->status = STATUS_TYPE::DISAPPEAR;
             return;
         }
@@ -869,7 +869,7 @@ void CZoneEntities::SpawnTransport(CCharEntity* PChar)
     TracyZoneScoped;
     if (m_Transport != nullptr)
     {
-        PChar->pushPacket(new CEntityUpdatePacket(m_Transport, ENTITY_SPAWN, UPDATE_ALL_MOB));
+        PChar->updateEntityPacket(m_Transport, ENTITY_SPAWN, UPDATE_ALL_MOB);
         return;
     }
 }
