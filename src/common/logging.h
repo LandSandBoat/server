@@ -70,23 +70,25 @@ namespace logging
 // Legacy support
 // TODO: Remove/replace these
 
+#define MESSAGE_BASE(logLevel, spdlogLevel, __VA_ARGS__) { auto _msgStr = fmt::sprintf(__VA_ARGS__); TracyMessageStr(_msgStr); spdlogLevel(spdlog::get(logLevel), _msgStr); }
+
 // Generic
-#define ShowStandard(...)   SPDLOG_LOGGER_INFO(spdlog::get("standard"), fmt::sprintf(__VA_ARGS__))
-#define ShowInfo(...)       SPDLOG_LOGGER_INFO(spdlog::get("info"), fmt::sprintf(__VA_ARGS__))
-#define ShowMessage(...)    SPDLOG_LOGGER_INFO(spdlog::get("message"), fmt::sprintf(__VA_ARGS__))
-#define ShowStatus(...)     SPDLOG_LOGGER_INFO(spdlog::get("status"), fmt::sprintf(__VA_ARGS__))
-#define ShowNotice(...)     SPDLOG_LOGGER_WARN(spdlog::get("notice"), fmt::sprintf(__VA_ARGS__))
-#define ShowWarning(...)    SPDLOG_LOGGER_WARN(spdlog::get("warning"), fmt::sprintf(__VA_ARGS__))
-#define ShowDebug(...)      SPDLOG_LOGGER_DEBUG(spdlog::get("debug"), fmt::sprintf(__VA_ARGS__))
-#define ShowError(...)      SPDLOG_LOGGER_ERROR(spdlog::get("error"), fmt::sprintf(__VA_ARGS__))
-#define ShowFatalError(...) SPDLOG_LOGGER_CRITICAL(spdlog::get("fatalerror"), fmt::sprintf(__VA_ARGS__))
+#define ShowStandard(...)   MESSAGE_BASE("standard", SPDLOG_LOGGER_INFO, __VA_ARGS__)
+#define ShowInfo(...)       MESSAGE_BASE("info", SPDLOG_LOGGER_INFO, __VA_ARGS__)
+#define ShowMessage(...)    MESSAGE_BASE("message", SPDLOG_LOGGER_INFO, __VA_ARGS__)
+#define ShowStatus(...)     MESSAGE_BASE("status", SPDLOG_LOGGER_INFO, __VA_ARGS__)
+#define ShowNotice(...)     MESSAGE_BASE("notice", SPDLOG_LOGGER_WARN, __VA_ARGS__)
+#define ShowWarning(...)    MESSAGE_BASE("warning", SPDLOG_LOGGER_WARN, __VA_ARGS__)
+#define ShowDebug(...)      MESSAGE_BASE("debug", SPDLOG_LOGGER_DEBUG, __VA_ARGS__)
+#define ShowError(...)      MESSAGE_BASE("error", SPDLOG_LOGGER_ERROR, __VA_ARGS__)
+#define ShowFatalError(...) MESSAGE_BASE("fatalerror", SPDLOG_LOGGER_CRITICAL, __VA_ARGS__)
 
 // Specific
-#define ShowSQL(...)        SPDLOG_LOGGER_INFO(spdlog::get("sql"), fmt::sprintf(__VA_ARGS__))
-#define ShowScript(...)     SPDLOG_LOGGER_INFO(spdlog::get("lua"), fmt::sprintf(__VA_ARGS__))
-#define ShowAction(...)     SPDLOG_LOGGER_INFO(spdlog::get("action"), fmt::sprintf(__VA_ARGS__))
-#define ShowExploit(...)    SPDLOG_LOGGER_WARN(spdlog::get("exploit"), fmt::sprintf(__VA_ARGS__))
-#define ShowNavError(...)   SPDLOG_LOGGER_ERROR(spdlog::get("navmesh"), fmt::sprintf(__VA_ARGS__))
-#define ShowStacktrace(...) SPDLOG_LOGGER_CRITICAL(spdlog::get("stacktrace"), fmt::sprintf(__VA_ARGS__))
+#define ShowSQL(...)        MESSAGE_BASE("sql", SPDLOG_LOGGER_INFO, __VA_ARGS__)
+#define ShowScript(...)     MESSAGE_BASE("lua", SPDLOG_LOGGER_INFO, __VA_ARGS__)
+#define ShowAction(...)     MESSAGE_BASE("action", SPDLOG_LOGGER_INFO, __VA_ARGS__)
+#define ShowExploit(...)    MESSAGE_BASE("exploit", SPDLOG_LOGGER_WARN, __VA_ARGS__)
+#define ShowNavError(...)   MESSAGE_BASE("navmesh", SPDLOG_LOGGER_ERROR, __VA_ARGS__)
+#define ShowStacktrace(...) MESSAGE_BASE("stacktrace", SPDLOG_LOGGER_CRITICAL, __VA_ARGS__)
 
 #endif // _LOGGING_H
