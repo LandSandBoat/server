@@ -827,6 +827,19 @@ void CZone::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message_type, C
     m_zoneEntities->PushPacket(PEntity, message_type, packet);
 }
 
+void CZone::UpdateCharPacket(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask)
+{
+    TracyZoneScoped
+    m_zoneEntities->UpdateCharPacket(PChar, type, updatemask);
+}
+
+void CZone::UpdateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 updatemask, bool alwaysInclude)
+{
+    TracyZoneScoped
+    m_zoneEntities->UpdateEntityPacket(PEntity, type, updatemask, alwaysInclude);
+}
+
+
 /************************************************************************
  *                                                                       *
  *  Wide Scan                                                            *
@@ -1143,6 +1156,21 @@ void CZone::CheckRegions(CCharEntity* PChar)
         }
     }
     PChar->m_InsideRegionID = RegionID;
+}
+
+void CZone::ResetLocalVars()
+{
+    m_localVars.clear();
+}
+
+uint32 CZone::GetLocalVar(const char* var)
+{
+    return m_localVars[var];
+}
+
+void CZone::SetLocalVar(const char* var, uint32 val)
+{
+    m_localVars[var] = val;
 }
 
 //====================================1=======================

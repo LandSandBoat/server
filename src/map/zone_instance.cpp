@@ -330,6 +330,43 @@ void CZoneInstance::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message
     }
 }
 
+
+void CZoneInstance::UpdateCharPacket(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask)
+{
+    if (PChar)
+    {
+        if (PChar->PInstance)
+        {
+            PChar->PInstance->UpdateCharPacket(PChar, type, updatemask);
+        }
+    }
+    else
+    {
+        for (auto const& instance : instanceList)
+        {
+            instance->UpdateCharPacket(PChar, type, updatemask);
+        }
+    }
+}
+
+void CZoneInstance::UpdateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 updatemask, bool alwaysInclude)
+{
+    if (PEntity)
+    {
+        if (PEntity->PInstance)
+        {
+            PEntity->PInstance->UpdateEntityPacket(PEntity, type, updatemask, alwaysInclude);
+        }
+    }
+    else
+    {
+        for (auto const& instance : instanceList)
+        {
+            instance->UpdateEntityPacket(PEntity, type, updatemask, alwaysInclude);
+        }
+    }
+}
+
 void CZoneInstance::WideScan(CCharEntity* PChar, uint16 radius)
 {
     TracyZoneScoped;
