@@ -232,6 +232,11 @@ xi.trust.onTradeCipher = function(player, trade, csid, rovCs, arkAngelCs)
 end
 
 xi.trust.canCast = function(caster, spell, not_allowed_trust_ids)
+    -- GMs can do what they want
+    if caster:getGMLevel() > 0 and caster:checkNameFlags(0x04000000) then
+        return 0
+    end
+
     -- Trusts must be enabled in settings
     if xi.settings.ENABLE_TRUST_CASTING == 0 then
         return xi.msg.basic.TRUST_NO_CAST_TRUST

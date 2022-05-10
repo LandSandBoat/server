@@ -6331,7 +6331,7 @@ namespace charutils
             return false;
         }
 
-        if (entity->targid < 0x400)
+        if (entity->targid < 0x400 || entity->targid >= 0x800)
         {
             if (entity->objtype == TYPE_MOB)
             {
@@ -6346,13 +6346,13 @@ namespace charutils
         {
             spawnlist = &PChar->SpawnPCList;
         }
-        else if (entity->targid < 0x800)
+        else if (entity->targid < 0x780)
         {
             spawnlist = &PChar->SpawnPETList;
         }
-        else if (entity->targid < 0x1000)
+        else if (entity->targid < 0x800)
         {
-            spawnlist = &PChar->SpawnMOBList;
+            spawnlist = &PChar->SpawnTRUSTList;
         }
         else
         {

@@ -839,7 +839,6 @@ void CZone::UpdateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 up
     m_zoneEntities->UpdateEntityPacket(PEntity, type, updatemask, alwaysInclude);
 }
 
-
 /************************************************************************
  *                                                                       *
  *  Wide Scan                                                            *
