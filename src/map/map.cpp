@@ -105,7 +105,7 @@ namespace
 {
     uint32 MAX_BUFFER_SIZE             = 2500U;
     uint32 MAX_PACKETS_PER_COMPRESSION = 32U;
-    uint32 MAX_PACKET_BACKLOG_SIZE     = MAX_PACKETS_PER_COMPRESSION * 5U; // If we hit this number, things are going very very badly.
+    uint32 MAX_PACKET_BACKLOG_SIZE     = MAX_PACKETS_PER_COMPRESSION * 6U; // If we hit this number, things are going very very badly.
 
     uint32 TotalPacketsToSendPerTick  = 0U;
     uint32 TotalPacketsSentPerTick    = 0U;
