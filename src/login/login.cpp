@@ -474,7 +474,7 @@ void login_config_read(const char* key, const char* value)
     }
     else
     {
-        ShowWarning("Unknown setting '%s' with value '%s' in  login file", key, value);
+        ShowWarning("Unknown setting '%s' with value '%s' in login file. Has this setting been removed?", key, value);
     }
 }
 
@@ -496,7 +496,7 @@ void version_info_read(const char* key, const char* value)
     }
     else
     {
-        ShowWarning("Unknown setting '%s' with value '%s' in  version info file", key, value);
+        ShowWarning("Unknown setting '%s' with value '%s' in version info file. Has this setting been removed?", key, value);
     }
 }
 
@@ -556,7 +556,7 @@ void maint_config_read(const char* key, const char* value)
     }
     else
     {
-        ShowWarning("Unknown setting '%s' with value '%s' in  maint info file", key, value);
+        ShowWarning("Unknown setting '%s' with value '%s' in maint info file. Has this setting been removed?", key, value);
     }
 }
 
