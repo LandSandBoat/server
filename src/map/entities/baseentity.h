@@ -29,7 +29,7 @@
 #include <memory>
 #include <vector>
 
-enum ENTITYTYPE
+enum ENTITYTYPE : uint8
 {
     TYPE_NONE   = 0x00,
     TYPE_PC     = 0x01,
@@ -53,7 +53,7 @@ enum class STATUS_TYPE : uint8
     SHUTDOWN      = 20,
 };
 
-enum ANIMATIONTYPE
+enum ANIMATIONTYPE : uint8
 {
     ANIMATION_NONE    = 0,
     ANIMATION_ATTACK  = 1,
@@ -98,7 +98,7 @@ enum ANIMATIONTYPE
     // ANIMATION_TRUST              = 90 // This is the animation for a trust NPC spawning in.
 };
 
-enum MOUNTTYPE
+enum MOUNTTYPE : uint8
 {
     MOUNT_CHOCOBO        = 0,
     MOUNT_QUEST_RAPTOR   = 1,
@@ -147,7 +147,7 @@ enum class ALLEGIANCE_TYPE : uint8
     GRIFFONS  = 6,
 };
 
-enum UPDATETYPE
+enum UPDATETYPE : uint8
 {
     UPDATE_NONE     = 0x00,
     UPDATE_POS      = 0x01,
@@ -161,19 +161,24 @@ enum UPDATETYPE
     UPDATE_DESPAWN  = 0x20,
 };
 
-enum ENTITYFLAGS
+enum ENTITYFLAGS : uint16
 {
-    FLAG_NONE          = 0x000,
-    FLAG_INFO_ICON     = 0x001, // (I) Icon next to name
-    FLAG_LARGE_MODEL   = 0x002,
-    FLAG_HIDE_NAME     = 0x008,
-    FLAG_CALL_FOR_HELP = 0x020,
-    FLAG_HIDE_MODEL    = 0x080,
-    FLAG_HIDE_HP       = 0x100,
-    FLAG_UNTARGETABLE  = 0x800,
+    FLAG_NONE           = 0x000,
+    FLAG_INFO_ICON      = 0x001, // (I) Icon next to name
+
+    // TODO: Flags 0x002, 0x004 and 0x008 do different things for different entities.
+    //     : It isn't one-size-fits-all, and different combinations may do different things.
+    //     : It'll need to researched more.
+    // FLAG_ALT_APPEARANCE = 0x002,
+
+    FLAG_HIDE_NAME      = 0x008,
+    FLAG_CALL_FOR_HELP  = 0x020,
+    FLAG_HIDE_MODEL     = 0x080,
+    FLAG_HIDE_HP        = 0x100,
+    FLAG_UNTARGETABLE   = 0x800,
 };
 
-enum NAMEVIS
+enum NAMEVIS : uint8
 {
     VIS_NONE        = 0x00,
     VIS_ICON        = 0x01,
