@@ -21,6 +21,7 @@
 
 #include "common/socket.h"
 #include "common/utils.h"
+#include "common/timer.h"
 
 #include <cstring>
 
@@ -40,19 +41,6 @@ CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type
 
     ref<uint32>(0x04) = PEntity->id;
     updateWith(PEntity, type, updatemask);
-}
-
-uint32 getCurrentTimeMs()
-{
-#ifdef WIN32
-    SYSTEMTIME oSystemTime;
-    GetSystemTime(&oSystemTime);
-    return oSystemTime.wMilliseconds;
-#else
-    timeval tv;
-    gettimeofday(&tv, 0);
-    return tv.tv_usec;
-#endif
 }
 
 void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 updatemask)
