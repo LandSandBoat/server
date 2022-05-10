@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -536,7 +536,6 @@ int32 recv_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
     size_t size           = *buffsize;
     int32  checksumResult = -1;
 
-#ifdef WIN32
     try
     {
         checksumResult = checksum((uint8*)(buff + FFXI_HEADER_SIZE), (uint32)(size - (FFXI_HEADER_SIZE + 16)), (char*)(buff + size - 16));
@@ -546,9 +545,6 @@ int32 recv_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
         ShowError("Possible crash attempt from: %s", ip2str(map_session_data->client_addr));
         return -1;
     }
-#else
-    checksumResult = checksum((uint8*)(buff + FFXI_HEADER_SIZE), size - (FFXI_HEADER_SIZE + 16), (char*)(buff + size - 16));
-#endif
 
     if (checksumResult == 0)
     {
