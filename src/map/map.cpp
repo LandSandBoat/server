@@ -104,12 +104,12 @@ extern std::map<uint16, CZone*> g_PZoneList; // Global array of pointers for zon
 namespace
 {
     uint32 MAX_BUFFER_SIZE             = 2500U;
-    uint32 MAX_PACKETS_PER_COMPRESSION = 32;
-    uint32 MAX_PACKET_BACKLOG_SIZE     = 120;
+    uint32 MAX_PACKETS_PER_COMPRESSION = 32U;
+    uint32 MAX_PACKET_BACKLOG_SIZE     = MAX_PACKETS_PER_COMPRESSION * 5U; // If we hit this number, things are going very very badly.
 
-    uint32 TotalPacketsToSendPerTick  = 0;
-    uint32 TotalPacketsSentPerTick    = 0;
-    uint32 TotalPacketsDelayedPerTick = 0;
+    uint32 TotalPacketsToSendPerTick  = 0U;
+    uint32 TotalPacketsSentPerTick    = 0U;
+    uint32 TotalPacketsDelayedPerTick = 0U;
 }
 
 /************************************************************************
