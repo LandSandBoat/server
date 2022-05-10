@@ -253,12 +253,12 @@ void CMeritPoints::SaveMeritPoints(uint32 charid)
     {
         if (merit.count > 0)
         {
-            sql->Query("INSERT INTO char_merit (charid, meritid, upgrades) VALUES(%u, %u, %u) ON DUPLICATE KEY UPDATE upgrades = %u", charid,
+            sql->Async("INSERT INTO char_merit (charid, meritid, upgrades) VALUES(%u, %u, %u) ON DUPLICATE KEY UPDATE upgrades = %u", charid,
                       merit.id, merit.count, merit.count);
         }
         else
         {
-            sql->Query("DELETE FROM char_merit WHERE charid = %u AND meritid = %u", charid, merit.id);
+            sql->Async("DELETE FROM char_merit WHERE charid = %u AND meritid = %u", charid, merit.id);
         }
     }
 }

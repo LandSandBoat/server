@@ -940,7 +940,7 @@ namespace synthutils
 
                     char fmtQuery[] = "UPDATE char_inventory SET signature = '%s' WHERE charid = %u AND location = 0 AND slot = %u;\0";
 
-                    sql->Query(fmtQuery, signature_esc, PChar->id, invSlotID);
+                    sql->Async(fmtQuery, signature_esc, PChar->id, invSlotID);
                 }
                 PChar->pushPacket(new CInventoryItemPacket(PItem, LOC_INVENTORY, invSlotID));
             }

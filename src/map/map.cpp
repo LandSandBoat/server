@@ -896,7 +896,7 @@ int32 map_close_session(time_point tick, map_session_data_t* map_session_data)
         // clear accounts_sessions if character is logging out (not when zoning)
         if (map_session_data->shuttingDown == 1)
         {
-            sql->Query("DELETE FROM accounts_sessions WHERE charid = %u", map_session_data->PChar->id);
+            sql->Async("DELETE FROM accounts_sessions WHERE charid = %u", map_session_data->PChar->id);
         }
 
         uint64 port64 = map_session_data->client_port;
@@ -987,7 +987,7 @@ int32 map_cleanup(time_point tick, CTaskMgr::CTask* PTask)
                     else
                     {
                         map_session_data->PChar->StatusEffectContainer->SaveStatusEffects(true);
-                        sql->Query("DELETE FROM accounts_sessions WHERE charid = %u;", map_session_data->PChar->id);
+                        sql->Async("DELETE FROM accounts_sessions WHERE charid = %u;", map_session_data->PChar->id);
 
                         delete[] map_session_data->server_packet_data;
                         delete map_session_data->PChar;
@@ -1003,7 +1003,7 @@ int32 map_cleanup(time_point tick, CTaskMgr::CTask* PTask)
                     ShowWarning("map_cleanup: WHITHOUT CHAR timed out, session closed");
 
                     const char* Query = "DELETE FROM accounts_sessions WHERE client_addr = %u AND client_port = %u";
-                    sql->Query(Query, map_session_data->client_addr, map_session_data->client_port);
+                    sql->Async(Query, map_session_data->client_addr, map_session_data->client_port);
 
                     delete[] map_session_data->server_packet_data;
                     map_session_list.erase(it++);

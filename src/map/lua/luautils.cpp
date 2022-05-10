@@ -4094,10 +4094,10 @@ namespace luautils
 
         if (value == 0)
         {
-            sql->Query("DELETE FROM server_variables WHERE name = '%s' LIMIT 1;", name);
+            sql->Async("DELETE FROM server_variables WHERE name = '%s' LIMIT 1;", name);
             return;
         }
-        sql->Query("INSERT INTO server_variables VALUES ('%s', %i) ON DUPLICATE KEY UPDATE value = %i;", name, value, value);
+        sql->Async("INSERT INTO server_variables VALUES ('%s', %i) ON DUPLICATE KEY UPDATE value = %i;", name, value, value);
     }
 
     int32 OnTransportEvent(CCharEntity* PChar, uint32 TransportID)

@@ -111,7 +111,7 @@ void CJobPoints::RaiseJobPoint(JOBPOINT_TYPE jpType)
         job->totalJpSpent += cost;
         jobPoint->value++;
 
-        sql->Query("UPDATE char_job_points SET jptype%u='%u', job_points='%u', job_points_spent='%u' WHERE charid='%u' AND jobid='%u'",
+        sql->Async("UPDATE char_job_points SET jptype%u='%u', job_points='%u', job_points_spent='%u' WHERE charid='%u' AND jobid='%u'",
                   JobPointTypeIndex(jobPoint->id), jobPoint->value, job->currentJp, job->totalJpSpent, m_PChar->id, job->jobId);
 
         jobpointutils::RefreshGiftMods(m_PChar);
@@ -128,7 +128,7 @@ void CJobPoints::SetJobPoints(int16 amount)
     uint8 currentJob = static_cast<uint8>(m_PChar->GetMJob());
     amount           = std::clamp<int16>(amount, 0, 500);
 
-    sql->Query("INSERT INTO char_job_points SET charid='%u', jobid='%u', job_points='%u' ON DUPLICATE KEY UPDATE job_points='%u'",
+    sql->Async("INSERT INTO char_job_points SET charid='%u', jobid='%u', job_points='%u' ON DUPLICATE KEY UPDATE job_points='%u'",
               m_PChar->id, currentJob, amount, amount);
 
     LoadJobPoints();
@@ -187,7 +187,7 @@ void CJobPoints::SetCapacityPoints(uint16 amount)
     amount                                 = std::clamp<int16>(amount, 0, 30000);
     m_jobPoints[currentJob].capacityPoints = amount;
 
-    sql->Query("INSERT INTO char_job_points SET charid='%u', jobid='%u', capacity_points='%u' ON DUPLICATE KEY UPDATE capacity_points='%u'",
+    sql->Async("INSERT INTO char_job_points SET charid='%u', jobid='%u', capacity_points='%u' ON DUPLICATE KEY UPDATE capacity_points='%u'",
               m_PChar->id, currentJob, amount, amount);
 }
 

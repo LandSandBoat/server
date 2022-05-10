@@ -1309,33 +1309,6 @@ namespace petutils
                 }
             }
         }
-        /*
-        else if (PetID==PETID_ADVENTURING_FELLOW)
-        {
-            petType = PETTYPE_ADVENTURING_FELLOW;
-
-            const char* Query =
-            "SELECT\
-            pet_name.name,\
-            char_pet.adventuringfellowid\
-            FROM pet_name, char_pet\
-            WHERE pet_name.id = char_pet.adventuringfellowid";
-
-            if ( sql->Query(Query) != SQL_ERROR && sql->NumRows() != 0)
-            {
-                while (sql->NextRow() == SQL_SUCCESS)
-                {
-                    uint16 adventuringfellowid = (uint16)sql->GetIntData(1);
-
-                    if (adventuringfellowid != 0)
-                    {
-                        PPetData->name.clear();
-                        PPetData->name.insert(0, sql->GetData(0));
-                    }
-                }
-            }
-        }
-        */
         else if (PetID == PETID_CHOCOBO)
         {
             petType = PET_TYPE::CHOCOBO;

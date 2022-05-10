@@ -100,7 +100,7 @@ namespace conquest
 
         influences[nation] += lost;
 
-        sql->Query(
+        sql->Async(
             "UPDATE conquest_system SET sandoria_influence = %d, bastok_influence = %d, "
             "windurst_influence = %d, beastmen_influence = %d WHERE region_id = %u;",
             influences[0], influences[1], influences[2], influences[3], static_cast<uint8>(region));
@@ -374,7 +374,7 @@ namespace conquest
                             IF(windurst_influence > bastok_influence AND windurst_influence > sandoria_influence AND \
                             windurst_influence > beastmen_influence, 2, 3)));";
 
-        sql->Query(Query);
+        sql->Async(Query);
 
         // update conquest overseers
         for (uint8 i = 0; i <= 18; i++)
@@ -382,17 +382,21 @@ namespace conquest
             luautils::SetRegionalConquestOverseers(i);
         }
 
-        zoneutils::ForEachZone([](CZone* PZone) {
+        // clang-format off
+        zoneutils::ForEachZone([](CZone* PZone)
+        {
             // only find chars for zones that have had conquest updated
             if (PZone->GetRegionID() <= REGION_TYPE::TAVNAZIA)
             {
                 luautils::OnConquestUpdate(PZone, Conquest_Tally_End);
-                PZone->ForEachChar([](CCharEntity* PChar) {
+                PZone->ForEachChar([](CCharEntity* PChar)
+                {
                     PChar->pushPacket(new CConquestPacket(PChar));
                     PChar->PLatentEffectContainer->CheckLatentsZone();
                 });
             }
         });
+        // clang-format on
 
         ShowDebug("Conquest Weekly Update is finished");
     }
