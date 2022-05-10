@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -106,6 +106,10 @@ namespace
     uint32 MAX_BUFFER_SIZE             = 2500U;
     uint32 MAX_PACKETS_PER_COMPRESSION = 32;
     uint32 MAX_PACKET_BACKLOG_SIZE     = 120;
+
+    uint32 TotalPacketsToSendPerTick  = 0;
+    uint32 TotalPacketsSentPerTick    = 0;
+    uint32 TotalPacketsDelayedPerTick = 0;
 }
 
 /************************************************************************
@@ -358,9 +362,11 @@ void set_server_type()
 void ReportTracyStats()
 {
     TracyReportLuaMemory(luautils::lua.lua_state());
+
     std::size_t activeZoneCount = 0;
     std::size_t playerCount = 0;
     std::size_t mobCount = 0;
+
     for (auto& [id, PZone] : g_PZoneList)
     {
         if (PZone->IsZoneActive())
@@ -370,10 +376,19 @@ void ReportTracyStats()
             mobCount += PZone->GetZoneEntities()->GetMobList().size();
         }
     }
+
     TracyReportGraphNumber("Active Zones (Process)", static_cast<std::int64_t>(activeZoneCount));
     TracyReportGraphNumber("Connected Players (Process)", static_cast<std::int64_t>(playerCount));
     TracyReportGraphNumber("Active Mobs (Process)", static_cast<std::int64_t>(mobCount));
     TracyReportGraphNumber("Task Manager Tasks", static_cast<std::int64_t>(CTaskMgr::getInstance()->getTaskList().size()));
+
+    TracyReportGraphNumber("Total Packets To Send Per Tick", static_cast<std::int64_t>(TotalPacketsToSendPerTick));
+    TracyReportGraphNumber("Total Packets Sent Per Tick", static_cast<std::int64_t>(TotalPacketsSentPerTick));
+    TracyReportGraphNumber("Total Packets Delayed Per Tick", static_cast<std::int64_t>(TotalPacketsDelayedPerTick));
+
+    TotalPacketsToSendPerTick = 0;
+    TotalPacketsSentPerTick = 0;
+    TotalPacketsDelayedPerTick = 0;
 }
 
 /************************************************************************
@@ -596,7 +611,6 @@ int32 recv_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
     else
     {
         // char packets
-
         if (map_decipher_packet(buff, *buffsize, from, map_session_data) == -1)
         {
             *buffsize = 0;
@@ -757,6 +771,8 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
     size_t PacketCount = std::clamp<size_t>(PChar->getPacketCount(), 0, MAX_PACKETS_PER_COMPRESSION);
     uint8  packets     = 0;
 
+    TotalPacketsToSendPerTick += static_cast<uint32>(PChar->getPacketCount());
+
 #ifdef LOG_OUTGOING_PACKETS
     PacketGuard::PrintPacketList(PChar);
 #endif
@@ -816,6 +832,7 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
         }
     } while (PacketSize == static_cast<uint32>(-1));
     PChar->erasePackets(packets);
+    TotalPacketsSentPerTick += packets;
     TracyZoneString(fmt::format("Sending {} packets", packets));
 
     // Record data size excluding header
@@ -851,6 +868,7 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
     *buffsize = PacketSize + FFXI_HEADER_SIZE;
 
     auto remainingPackets = PChar->getPacketList().size();
+    TotalPacketsDelayedPerTick += static_cast<uint32>(remainingPackets);
     TracyZoneString(fmt::format("{} packets remaining", remainingPackets));
     if (remainingPackets > MAX_PACKET_BACKLOG_SIZE)
     {
