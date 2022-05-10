@@ -6321,4 +6321,44 @@ namespace charutils
 
         return 0;
     }
+
+    bool hasEntitySpawned(CCharEntity* PChar, CBaseEntity* entity)
+    {
+        SpawnIDList_t* spawnlist = nullptr;
+
+        if (!entity)
+        {
+            return false;
+        }
+
+        if (entity->targid < 0x400)
+        {
+            if (entity->objtype == TYPE_MOB)
+            {
+                spawnlist = &PChar->SpawnMOBList;
+            }
+            else if (entity->objtype == TYPE_NPC)
+            {
+                spawnlist = &PChar->SpawnNPCList;
+            }
+        }
+        else if (entity->targid < 0x700)
+        {
+            spawnlist = &PChar->SpawnPCList;
+        }
+        else if (entity->targid < 0x800)
+        {
+            spawnlist = &PChar->SpawnPETList;
+        }
+        else if (entity->targid < 0x1000)
+        {
+            spawnlist = &PChar->SpawnMOBList;
+        }
+        else
+        {
+            return false;
+        }
+
+        return spawnlist->find(entity->id) != spawnlist->end();
+    }
 }; // namespace charutils
