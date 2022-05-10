@@ -57,14 +57,17 @@ void CTrustEntity::PostTick()
     // NOTE: This is purposefully calling CBattleEntity's impl.
     // TODO: Calling a grand-parent's impl. of an overrideden function is bad
     CBattleEntity::PostTick();
-    if (loc.zone && updatemask && status != STATUS_TYPE::DISAPPEAR)
+    std::chrono::steady_clock::time_point now = std::chrono::steady_clock::now();
+    if (loc.zone && updatemask && status != STATUS_TYPE::DISAPPEAR && now > m_nextUpdateTimer)
     {
-        loc.zone->PushPacket(this, CHAR_INRANGE, new CEntityUpdatePacket(this, ENTITY_UPDATE, updatemask));
+        m_nextUpdateTimer = now + 250ms;
+        loc.zone->UpdateEntityPacket(this, ENTITY_UPDATE, updatemask);
 
         if (PMaster && PMaster->PParty && updatemask & UPDATE_HP)
         {
             PMaster->ForParty([this](auto PMember) { static_cast<CCharEntity*>(PMember)->pushPacket(new CCharHealthPacket(this)); });
         }
+
         updatemask = 0;
     }
 }

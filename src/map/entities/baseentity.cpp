@@ -54,6 +54,8 @@ CBaseEntity::CBaseEntity()
     PAI          = nullptr;
     PBattlefield = nullptr;
     PInstance    = nullptr;
+
+    m_nextUpdateTimer = std::chrono::steady_clock::now();
 }
 
 CBaseEntity::~CBaseEntity()
@@ -128,6 +130,19 @@ void CBaseEntity::HideName(bool hide)
     updatemask |= UPDATE_HP;
 }
 
+void CBaseEntity::GhostPhase(bool ghost)
+{
+    if (ghost)
+    {
+        namevis |= VIS_GHOST_PHASE;
+    }
+    else
+    {
+        namevis &= ~VIS_GHOST_PHASE;
+    }
+    updatemask |= UPDATE_HP;
+}
+
 bool CBaseEntity::IsNameHidden() const
 {
     return namevis & FLAG_HIDE_NAME;
@@ -157,6 +172,11 @@ CBaseEntity* CBaseEntity::GetEntity(uint16 targid, uint8 filter) const
     {
         return loc.zone->GetEntity(targid, filter);
     }
+}
+
+void CBaseEntity::SendZoneUpdate()
+{
+    loc.zone->UpdateEntityPacket(this, ENTITY_SPAWN, UPDATE_ALL_MOB, true);
 }
 
 void CBaseEntity::ResetLocalVars()

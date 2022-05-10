@@ -158,16 +158,27 @@ enum UPDATETYPE
     UPDATE_LOOK     = 0x10,
     UPDATE_ALL_MOB  = 0x0F,
     UPDATE_ALL_CHAR = 0x1F,
+    UPDATE_DESPAWN  = 0x20,
 };
 
 enum ENTITYFLAGS
 {
     FLAG_NONE          = 0x000,
     FLAG_INFO_ICON     = 0x001, // (I) Icon next to name
+    FLAG_LARGE_MODEL   = 0x002,
     FLAG_HIDE_NAME     = 0x008,
     FLAG_CALL_FOR_HELP = 0x020,
+    FLAG_HIDE_MODEL    = 0x080,
     FLAG_HIDE_HP       = 0x100,
     FLAG_UNTARGETABLE  = 0x800,
+};
+
+enum NAMEVIS
+{
+    VIS_NONE        = 0x00,
+    VIS_ICON        = 0x01,
+    VIS_HIDE_NAME   = 0x08,
+    VIS_GHOST_PHASE = 0x80,
 };
 
 // TODO:it is possible to make this structure part of the class, instead of the current ID and Targid, but without the Clean method
@@ -212,21 +223,26 @@ public:
     CBaseEntity();
     virtual ~CBaseEntity();
 
-    virtual void        Spawn();
-    virtual void        FadeOut();
+    virtual void Spawn();
+    virtual void FadeOut();
+
     virtual const int8* GetName();       // Internal name of entity
     virtual const int8* GetPacketName(); // Name of entity sent to the client
-    uint16              getZone() const; // Current zone
-    float               GetXPos() const; // Position of co-ordinate X
-    float               GetYPos() const; // Position of co-ordinate Y
-    float               GetZPos() const; // Position of co-ordinate Z
-    uint8               GetRotPos() const;
-    void                HideName(bool hide);  // hide / show name
-    bool                IsNameHidden() const; // checks if name is hidden
-    bool                IsTargetable() const; // checks if entity is targetable
-    virtual bool        isWideScannable();    // checks if the entity should show up on wide scan
+
+    uint16 getZone() const; // Current zone
+    float  GetXPos() const; // Position of co-ordinate X
+    float  GetYPos() const; // Position of co-ordinate Y
+    float  GetZPos() const; // Position of co-ordinate Z
+    uint8  GetRotPos() const;
+
+    void         HideName(bool hide);    // hide / show name
+    void         GhostPhase(bool ghost); // makes mob semi transparent
+    bool         IsNameHidden() const;   // checks if name is hidden
+    bool         IsTargetable() const;   // checks if entity is targetable
+    virtual bool isWideScannable();      // checks if the entity should show up on wide scan
 
     CBaseEntity* GetEntity(uint16 targid, uint8 filter = -1) const;
+    void SendZoneUpdate();
 
     void   ResetLocalVars();
     uint32 GetLocalVar(const char* var);
@@ -267,6 +283,8 @@ public:
     std::unique_ptr<CAIContainer> PAI;          // AI container
     CBattlefield*                 PBattlefield; // pointer to battlefield (if in one)
     CInstance*                    PInstance;
+
+    std::chrono::steady_clock::time_point m_nextUpdateTimer; // next time the entity should push an update packet
 
 protected:
     std::map<std::string, uint32> m_localVars;
