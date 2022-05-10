@@ -39,14 +39,41 @@ CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type
     this->setSize(0x58);
 
     ref<uint32>(0x04) = PEntity->id;
+    updateWith(PEntity, type, updatemask);
+}
+
+uint32 getCurrentTimeMs()
+{
+#ifdef WIN32
+    SYSTEMTIME oSystemTime;
+    GetSystemTime(&oSystemTime);
+    return oSystemTime.wMilliseconds;
+#else
+    timeval tv;
+    gettimeofday(&tv, 0);
+    return tv.tv_usec;
+#endif
+}
+
+void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 updatemask)
+{
+    uint32 currentId = ref<uint32>(0x04);
+    if (currentId != PEntity->id)
+    {
+        // Should only be able to update packets about the same character.
+        ShowError("Unable to update entity update packet for %d with data from %d", currentId, PEntity->id);
+        return;
+    }
+
     ref<uint16>(0x08) = PEntity->targid; // 0x0E entity updates are valid for 0 to 1023 and 1792 to 2303
-    ref<uint8>(0x0A)  = updatemask;
+    ref<uint8>(0x0A) |= updatemask;
 
     switch (type)
     {
         case ENTITY_DESPAWN:
         {
-            ref<uint8>(0x0A) = 0x20;
+            ref<uint8>(0x1F) = 0x02; // despawn animation
+            ref<uint8>(0x0A) = 0x30;
             updatemask       = UPDATE_ALL_MOB;
         }
         break;
@@ -56,10 +83,6 @@ CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type
             if (PEntity->objtype == TYPE_PET)
             {
                 ref<uint8>(0x28) = 0x04;
-            }
-            if (PEntity->objtype == TYPE_TRUST)
-            {
-                //ref<uint8>(0x28) = 0x45;
             }
             if (PEntity->look.size == MODEL_EQUIPPED || PEntity->look.size == MODEL_CHOCOBO)
             {
