@@ -219,8 +219,8 @@ def write_configs():
 def fetch_module_files():
     with open('../modules/init.txt', 'r') as file:
         for line in file.readlines():
-            line = "../modules/" + line
             if not line.startswith('#') and line.strip() and not line in ['\n', '\r\n']:
+                line = "../modules/" + line.strip()
                 if pathlib.Path(line).is_dir():
                     for filename in pathlib.Path(line).glob('**/*.sql'):
                         import_files.append(str(filename).replace('\\', '/'))
