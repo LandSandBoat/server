@@ -12,6 +12,26 @@ local zone_object = {}
 
 zone_object.onInitialize = function(zone)
     xi.chocobo.initZone(zone)
+	
+	local sansa = zone:insertDynamicEntity({
+        objtype = xi.objType.NPC,
+        name = "Sansa",
+        look = "0x010006027710652000300B400350006000700000",
+        x = -4.261,
+        y = 0.000,
+        z = -10.631,
+        rotation = 192,
+        widescan = 1,
+
+        onTrade = function(player, npc, trade)
+        end,
+
+        onTrigger = function(player, npc)
+		    player:PrintToPlayer(string.format("Sansa: Your future segway to augmented AF +1 gear!"), 0xD)
+        end,
+    })
+
+    utils.unused(sansa)
 end
 
 zone_object.onZoneIn = function(player, prevZone)

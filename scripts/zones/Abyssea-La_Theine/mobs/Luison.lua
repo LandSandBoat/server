@@ -7,6 +7,8 @@ mixins = { require("scripts/mixins/families/gnole") }
 local entity = {}
 
 entity.onMobDeath = function(mob, player, isKiller)
-end
+	  player:addCurrency('cruor', 250)
+	  player:PrintToPlayer("You obtain 250 Cruor!", 0xD)
+    end
 
 return entity

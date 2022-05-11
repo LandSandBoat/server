@@ -13,10 +13,10 @@ xi.events.loginCampaign = xi.events.loginCampaign or {}
 
 -- Change vars below to modify settings for current login campaign
 -- NOTE: the year and month values are used in the Moogle's Event!
-local loginCampaignYear = 2021
-local loginCampaignMonth = 8
-local loginCampaignDay = 25
-local loginCampaignDuration = 23 -- Duration is set in Earth days (Average is 23 days)
+local loginCampaignYear = 2022
+local loginCampaignMonth = 5
+local loginCampaignDay = 1
+local loginCampaignDuration = 31 -- Duration is set in Earth days (Average is 23 days)
 
 -- Checks if a Login Campaign is active.
 xi.events.loginCampaign.isCampaignActive = function()
@@ -84,8 +84,8 @@ xi.events.loginCampaign.onGameIn = function(player)
             player:addCurrency("login_points", 500)
             player:messageSpecial(ID.text.LOGIN_NUMBER, 0, loginCount, 500, player:getCurrency("login_points"))
         else
-            player:addCurrency("login_points", 100)
-            player:messageSpecial(ID.text.LOGIN_NUMBER, 0, loginCount, 100, player:getCurrency("login_points"))
+            player:addCurrency("login_points", 200)
+            player:messageSpecial(ID.text.LOGIN_NUMBER, 0, loginCount, 200, player:getCurrency("login_points"))
         end
         player:setCharVar("LoginCampaignLoginNumber", loginCount)
     end

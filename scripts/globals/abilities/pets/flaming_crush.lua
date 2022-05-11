@@ -29,6 +29,7 @@ ability_object.onPetAbility = function(target, pet, skill)
     --add on bonuses (staff/day/weather/jas/mab/etc all go in this function)
     damage.dmg = xi.mobskills.mobAddBonuses(pet, target, damage.dmg, 1)
     totaldamage = AvatarFinalAdjustments(damage.dmg, pet, skill, target, xi.attackType.PHYSICAL, xi.damageType.FIRE, numhits)
+	totaldamage = math.floor(totaldamage * xi.settings.AVATAR_DAMAGE_MOD)
     target:takeDamage(totaldamage, pet, xi.attackType.PHYSICAL, xi.damageType.FIRE)
     target:updateEnmityFromDamage(pet, totaldamage)
 

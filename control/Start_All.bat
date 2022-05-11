@@ -1,0 +1,9 @@
+@echo off
+start 54230_Start_Cities.bat
+start 54331_Start_Dungeons.bat
+start 54332_Start_Fields.bat
+start 54333_Start_Battlefields.bat
+start 54334_Start_Dynamis.bat
+start 54335_Start_Nogo.bat
+start Start_Connect.bat
+start Start_Search.bat

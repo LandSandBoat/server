@@ -3553,7 +3553,10 @@ INSERT INTO `mob_skill_lists` VALUES ('TRUST_Semih_Lafihna',1055,3487); -- Sidew
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Semih_Lafihna',1055,3488); -- Arching Arrow (Semih Lafihna)
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Semih_Lafihna',1055,3489); -- Lux Arrow
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Semih_Lafihna',1055,3490); -- Stellar Arrow
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Elivira',1056,0);
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Elivira',1056,216); -- Coronach (Elivira)
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Elivira',1056,212); -- Slug Shot (Elivira)
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Elivira',1056,214); -- Heavy Shot (Elivira)
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Elivira',1056,209); -- Split Shot (Elivira)
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Noillurie',1057,0);
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lhu_Mhakaracca',1058,0);
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Ferreous_Coffin',1059,0);
@@ -3615,7 +3618,7 @@ INSERT INTO `mob_skill_lists` VALUES ('TRUST_AAHM',1107,41);        -- Swift Bla
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_AAHM',1107,103);       -- Cross Reaver
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_AAHM',1107,225);       -- Chant du Cygne
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_AAEV',1108,40);        -- Vorpal Blade
-INSERT INTO `mob_skill_lists` VALUES ('TRUST_AAEV',1108,225);       -- Chant du Cygne
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_AAEV',1108,3713);      -- Chant du Cygne
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_AAEV',1108,933);       -- Dominion Slash
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_AAEV',1108,3710);      -- Arrogance Incarnate
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_AAMR',1109,69);        -- Rampage

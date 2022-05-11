@@ -441,6 +441,7 @@
     "Lua.hint.setType": true,
     "Lua.runtime.version": "LuaJIT",
     "Lua.workspace.preloadFileSize": 10000,
+    "editor.renderWhitespace": "all"
     "editor.renderWhitespace": "all",
     "files.associations": {
         "algorithm": "cpp",

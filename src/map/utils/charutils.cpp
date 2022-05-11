@@ -3696,19 +3696,19 @@ namespace charutils
                                 exp *= 1.00f;
                                 break;
                             case 2:
-                                exp *= 0.75f;
+                                exp *= 0.90f;
                                 break;
                             case 3:
-                                exp *= 0.55f;
+                                exp *= 0.80f;
                                 break;
                             case 4:
-                                exp *= 0.45f;
+                                exp *= 0.70f;
                                 break;
                             case 5:
-                                exp *= 0.39f;
+                                exp *= 0.60f;
                                 break;
                             case 6:
-                                exp *= 0.35f;
+                                exp *= 0.50f;
                                 break;
                             default:
                                 exp *= (1.8f / pcinzone);
@@ -3724,19 +3724,19 @@ namespace charutils
                                 exp *= 1.00f;
                                 break;
                             case 2:
-                                exp *= 0.75f;
+                                exp *= 0.90f;
                                 break;
                             case 3:
-                                exp *= 0.55f;
+                                exp *= 0.80f;
                                 break;
                             case 4:
-                                exp *= 0.45f;
+                                exp *= 0.70f;
                                 break;
                             case 5:
-                                exp *= 0.39f;
+                                exp *= 0.60f;
                                 break;
                             case 6:
-                                exp *= 0.35f;
+                                exp *= 0.50f;
                                 break;
                             default:
                                 exp *= (1.8f / pcinzone);
@@ -3751,19 +3751,19 @@ namespace charutils
                                 exp *= 1.00f;
                                 break;
                             case 2:
-                                exp *= 0.60f;
+                                exp *= 0.80f;
                                 break;
                             case 3:
-                                exp *= 0.45f;
+                                exp *= 0.65f;
                                 break;
                             case 4:
-                                exp *= 0.40f;
+                                exp *= 0.50f;
                                 break;
                             case 5:
-                                exp *= 0.37f;
+                                exp *= 0.45f;
                                 break;
                             case 6:
-                                exp *= 0.35f;
+                                exp *= 0.40f;
                                 break;
                             default:
                                 exp *= (1.8f / pcinzone);
@@ -3802,22 +3802,22 @@ namespace charutils
                                     exp *= 1.0f;
                                     break;
                                 case 1:
-                                    exp *= 1.2f;
+                                    exp *= 1.05f;
                                     break;
                                 case 2:
-                                    exp *= 1.25f;
+                                    exp *= 1.10f;
                                     break;
                                 case 3:
-                                    exp *= 1.3f;
+                                    exp *= 1.15f;
                                     break;
                                 case 4:
-                                    exp *= 1.4f;
+                                    exp *= 1.20f;
                                     break;
                                 case 5:
-                                    exp *= 1.5f;
+                                    exp *= 1.25f;
                                     break;
                                 default:
-                                    exp *= 1.55f;
+                                    exp *= 1.30f;
                                     break;
                             }
                         }

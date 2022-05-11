@@ -37,7 +37,7 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     xi.aftermath.addStatusEffect(player, tp, xi.slot.RANGED, xi.aftermath.type.MYTHIC)
 
     local damage, criticalHit, tpHits, extraHits = doMagicWeaponskill(player, target, wsID, params, tp, action, primary)
-
+	damage = damage * 5
     return tpHits, extraHits, criticalHit, damage
 end
 

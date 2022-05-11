@@ -21,6 +21,9 @@ entity.onMobSpawn = function(mob)
     mob:setLocalVar("[rage]timer", 3600) -- 60 minutes
 end
 
+entity.onMobEngaged = function(mob, target)
+end
+
 entity.onMobDeath = function(mob, player, isKiller)
     player:addTitle(xi.title.FAFNIR_SLAYER)
 end
