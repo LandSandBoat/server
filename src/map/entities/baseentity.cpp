@@ -28,15 +28,16 @@
 #include "baseentity.h"
 
 CBaseEntity::CBaseEntity()
-: status(STATUS_TYPE::DISAPPEAR)
+: objtype(ENTITYTYPE::TYPE_NONE)
+, status(STATUS_TYPE::DISAPPEAR)
 , isRenamed(false)
 {
     id       = 0;
     targid   = 0;
-    objtype  = ENTITYTYPE::TYPE_NONE;
     m_TargID = 0;
     memset(&look, 0, sizeof(look));
     memset(&mainlook, 0, sizeof(mainlook));
+
     // False positive: any reasonable compiler is IEEE754-1985 compatible
     // portability: Using memset() on struct which contains a floating point number.
     // This is not portable because memset() sets each byte of a block of memory to a specific value and
@@ -44,6 +45,7 @@ CBaseEntity::CBaseEntity()
     // implementation setting all bits to zero results in the value 0.0. [memsetClassFloat]
     // cppcheck-suppress memsetClassFloat
     memset(&loc, 0, sizeof(loc));
+
     animation    = ANIMATION_NONE;
     animationsub = 0;
     speed        = 50 + map_config.speed_mod; // It is downright dumb to init every entity at PLAYER speed, but until speed is reworked this hack stays.
@@ -54,6 +56,8 @@ CBaseEntity::CBaseEntity()
     PAI          = nullptr;
     PBattlefield = nullptr;
     PInstance    = nullptr;
+
+    m_nextUpdateTimer = std::chrono::steady_clock::now();
 }
 
 CBaseEntity::~CBaseEntity()
@@ -128,6 +132,19 @@ void CBaseEntity::HideName(bool hide)
     updatemask |= UPDATE_HP;
 }
 
+void CBaseEntity::GhostPhase(bool ghost)
+{
+    if (ghost)
+    {
+        namevis |= VIS_GHOST_PHASE;
+    }
+    else
+    {
+        namevis &= ~VIS_GHOST_PHASE;
+    }
+    updatemask |= UPDATE_HP;
+}
+
 bool CBaseEntity::IsNameHidden() const
 {
     return namevis & FLAG_HIDE_NAME;
@@ -157,6 +174,11 @@ CBaseEntity* CBaseEntity::GetEntity(uint16 targid, uint8 filter) const
     {
         return loc.zone->GetEntity(targid, filter);
     }
+}
+
+void CBaseEntity::SendZoneUpdate()
+{
+    loc.zone->UpdateEntityPacket(this, ENTITY_SPAWN, UPDATE_ALL_MOB, true);
 }
 
 void CBaseEntity::ResetLocalVars()

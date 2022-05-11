@@ -56,8 +56,6 @@ enum SKILLUP_STYLE
 
 struct map_config_t
 {
-    uint32 buffer_size; // max size of recv buffer -> default 1800 bytes
-
     uint16 usMapPort; // port of map server      -> xxxxx
     uint32 uiMapIp;   // ip of map server        -> INADDR_ANY
 

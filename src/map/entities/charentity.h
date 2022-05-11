@@ -25,6 +25,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "common/cbasetypes.h"
 #include "common/mmo.h"
 #include "../event_info.h"
+#include "../packets/char.h"
+#include "../packets/entity_update.h"
 
 #include <bitset>
 #include <deque>
@@ -202,6 +204,8 @@ typedef std::vector<EntityID_t>        BazaarList_t;
 class CCharEntity : public CBattleEntity
 {
 public:
+    uint32     accid; // Account ID associated with the character.
+
     jobs_t     jobs;       // Available Character professions
     keyitems_t keys;       // Table key objects
 
@@ -303,15 +307,17 @@ public:
 
     uint8 GetGender(); // узнаем пол персонажа
 
-    void          clearPacketList();                         // отчистка PacketList
-    void          pushPacket(CBasicPacket*);                 // добавление копии пакета в PacketList
-    void          pushPacket(std::unique_ptr<CBasicPacket>); // push packet to packet list
-    bool          isPacketListEmpty();                       // проверка размера PacketList
-    CBasicPacket* popPacket();                               // получение первого пакета из PacketList
-    PacketList_t  getPacketList();                           // returns a COPY of packet list
-    size_t        getPacketCount();
-    void          erasePackets(uint8 num); // erase num elements from front of packet list
-    virtual void  HandleErrorMessage(std::unique_ptr<CBasicPacket>&) override;
+    void          clearPacketList();                                                             // отчистка PacketList
+    void          pushPacket(CBasicPacket*);                                                     // добавление копии пакета в PacketList
+    void          pushPacket(std::unique_ptr<CBasicPacket>);                                     // push packet to packet list
+    void          updateCharPacket(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask);     // Push or update a char packet
+    void          updateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 updatemask); // Push or update an entity update packet
+    bool          isPacketListEmpty();                                                           // проверка размера PacketList
+    CBasicPacket* popPacket();                                                                   // получение первого пакета из PacketList
+    PacketList_t  getPacketList();                                                               // returns a COPY of packet list
+    size_t        getPacketCount();                                                              //
+    void          erasePackets(uint8 num);                                                       // erase num elements from front of packet list
+    virtual void  HandleErrorMessage(std::unique_ptr<CBasicPacket>&) override;                   //
 
     CLinkshell*    PLinkshell1; // linkshell, в которой общается персонаж
     CLinkshell*    PLinkshell2; // linkshell 2
@@ -408,6 +414,10 @@ public:
 
     CItemEquipment* getEquip(SLOTTYPE slot);
 
+    CBasicPacket* PendingPositionPacket = nullptr;
+
+    bool requestedInfoSync = false;
+
     void ReloadPartyInc();
     void ReloadPartyDec();
     bool ReloadParty() const;
@@ -499,7 +509,9 @@ private:
     bool m_isBlockingAid;
     bool m_reloadParty;
 
-    PacketList_t PacketList; // the list of packets to be sent to the character during the next network cycle
+    PacketList_t PacketList;                                               // the list of packets to be sent to the character during the next network cycle
+    std::unordered_map<uint32, CCharPacket*> PendingCharPackets;           // Keep track of which char packets are queued up for this char, such that they can be updated
+    std::unordered_map<uint32, CEntityUpdatePacket*> PendingEntityPackets; // Keep track of which entity update packets are queued up for this char, such that they can be updated
 };
 
 #endif

@@ -290,35 +290,23 @@ void CCharEntity::pushPacket(CBasicPacket* packet)
     TracyZoneIString(GetName());
     TracyZoneHex16(packet->getType());
 
-    // TODO: Iterating the entire queue like this isn't very efficient, but the server
-    // can still _easily_ handle it
-    // This could easily be accelerated by creating a lookup, building a key out of:
-    // - packetId + mainId + targId + updateMask
-    // and storing the position in the queue of that entry
-    for (auto&& entry : PacketList)
+    if (packet->getType() == 0x5B)
     {
-        if ((packet->getType() == 0x0E && entry->getType() == 0x0E) || // Entity Update (CEntityUpdatePacket)
-            (packet->getType() == 0x0D && entry->getType() == 0x0D))   // Char Packet (CCharPacket)
+        if (PendingPositionPacket)
         {
-            bool sameMainId     = packet->ref<uint32>(0x04) == entry->ref<uint32>(0x04);
-            bool sameTargId     = packet->ref<uint16>(0x08) == entry->ref<uint16>(0x08);
-            bool sameUpdateMask = packet->ref<uint8>(0x0A)  == entry->ref<uint8>(0x0A);
-            if (sameMainId && sameTargId && sameUpdateMask)
-            {
-                // Put the newer packet in the place of the one already in the queue
-                std::swap(entry, packet);
-
-                // Get rid of the original packet
-                delete packet;
-
-                // Bail out and don't add anything new to the queue
-                return;
-            }
+            PendingPositionPacket->copy(packet);
+            delete packet;
+        }
+        else
+        {
+            PendingPositionPacket = packet;
+            PacketList.push_back(packet);
         }
     }
-
-    // Nothing to dedupe? Just put the packet in the queue
-    PacketList.push_back(packet);
+    else
+    {
+        PacketList.push_back(packet);
+    }
 }
 
 void CCharEntity::pushPacket(std::unique_ptr<CBasicPacket> packet)
@@ -326,9 +314,60 @@ void CCharEntity::pushPacket(std::unique_ptr<CBasicPacket> packet)
     pushPacket(packet.release());
 }
 
+void CCharEntity::updateCharPacket(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask)
+{
+    auto existing = PendingCharPackets.find(PChar->id);
+    if (existing == PendingCharPackets.end())
+    {
+        // No existing packet update for the given char, so we push new packet
+        CCharPacket* packet = new CCharPacket(PChar, type, updatemask);
+        PacketList.push_back(packet);
+        PendingCharPackets.emplace(PChar->id, packet);
+    }
+    else
+    {
+        // Found existing packet update for the given char, so we update it instead of pushing new
+        existing->second->updateWith(PChar, type, updatemask);
+    }
+}
+
+void CCharEntity::updateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 updatemask)
+{
+    auto existing = PendingEntityPackets.find(PEntity->id);
+    if (existing == PendingEntityPackets.end())
+    {
+        // No existing packet update for the given entity, so we push new packet
+        CEntityUpdatePacket* packet = new CEntityUpdatePacket(PEntity, type, updatemask);
+        PacketList.push_back(packet);
+        PendingEntityPackets.emplace(PEntity->id, packet);
+    }
+    else
+    {
+        // Found existing packet update for the given entity, so we update it instead of pushing new
+        existing->second->updateWith(PEntity, type, updatemask);
+    }
+}
+
 CBasicPacket* CCharEntity::popPacket()
 {
-    CBasicPacket*               PPacket = PacketList.front();
+    CBasicPacket* PPacket = PacketList.front();
+
+    // Clean up pending maps
+    switch (PPacket->getType())
+    {
+    case 0x0D: // Char update
+        PendingCharPackets.erase(PPacket->ref<uint32>(0x04));
+        break;
+    case 0x0E: // Entity update
+        PendingEntityPackets.erase(PPacket->ref<uint32>(0x04));
+        break;
+    case 0x5B: // Position update
+        PendingPositionPacket = nullptr;
+        break;
+    default:
+        break;
+    }
+
     PacketList.pop_front();
     return PPacket;
 }
@@ -609,18 +648,21 @@ void CCharEntity::Tick(time_point tick)
 void CCharEntity::PostTick()
 {
     TracyZoneScoped;
+
     CBattleEntity::PostTick();
+
     if (m_EquipSwap)
     {
-        pushPacket(new CCharAppearancePacket(this));
-
         updatemask |= UPDATE_HP;
         m_EquipSwap = false;
+        pushPacket(new CCharAppearancePacket(this));
     }
+
     if (ReloadParty())
     {
         charutils::ReloadParty(this);
     }
+
     if (m_EffectsChanged)
     {
         pushPacket(new CCharUpdatePacket(this));
@@ -634,24 +676,31 @@ void CCharEntity::PostTick()
         }
         m_EffectsChanged = false;
     }
-    if (updatemask)
+
+    std::chrono::steady_clock::time_point now = std::chrono::steady_clock::now();
+
+    if (updatemask && now > m_nextUpdateTimer)
     {
+        m_nextUpdateTimer = now + 250ms;
+
         if (loc.zone && !m_isGMHidden)
         {
-            loc.zone->PushPacket(this, CHAR_INRANGE, new CCharPacket(this, ENTITY_UPDATE, updatemask));
+            loc.zone->UpdateCharPacket(this, ENTITY_UPDATE, updatemask);
         }
+
         if (isCharmed)
         {
-            pushPacket(new CCharPacket(this, ENTITY_UPDATE, updatemask));
+            updateCharPacket(this, ENTITY_UPDATE, updatemask);
         }
+
         if (updatemask & UPDATE_HP)
         {
-            ForAlliance([&](auto PEntity) {
-                if (PEntity->objtype == TYPE_PC)
-                {
-                    static_cast<CCharEntity*>(PEntity)->pushPacket(new CCharHealthPacket(this));
-                }
+            // clang-format off
+            ForAlliance([&](auto PEntity)
+            {
+                static_cast<CCharEntity*>(PEntity)->pushPacket(new CCharHealthPacket(this));
             });
+            // clang-format on
         }
         // Do not send an update packet when only the position has change
         if (updatemask ^ UPDATE_POS)
@@ -1719,7 +1768,7 @@ void CCharEntity::OnItemFinish(CItemState& state, action_t& action)
                             "SET extra = '%s' "
                             "WHERE charid = %u AND location = %u AND slot = %u;";
 
-        sql->Query(Query, extra, this->id, PItem->getLocationID(), PItem->getSlotID());
+        sql->Async(Query, extra, this->id, PItem->getLocationID(), PItem->getSlotID());
 
         if (PItem->getCurrentCharges() != 0)
         {

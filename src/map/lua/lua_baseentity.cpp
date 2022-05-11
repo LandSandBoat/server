@@ -188,7 +188,7 @@ void CLuaBaseEntity::showText(CLuaBaseEntity* mob, uint16 messageID, sol::object
         PBaseEntity->m_TargID       = m_PBaseEntity->targid;
         PBaseEntity->loc.p.rotation = worldAngle(PBaseEntity->loc.p, m_PBaseEntity->loc.p);
 
-        PBaseEntity->loc.zone->PushPacket(PBaseEntity, CHAR_INRANGE, new CEntityUpdatePacket(PBaseEntity, ENTITY_UPDATE, UPDATE_POS));
+        PBaseEntity->loc.zone->UpdateEntityPacket(PBaseEntity, ENTITY_UPDATE, UPDATE_POS);
     }
 
     uint32 param0 = (p0 != sol::lua_nil) ? p0.as<uint32>() : 0;
@@ -560,7 +560,7 @@ void CLuaBaseEntity::addCharVar(std::string const& varName, int32 value)
 
     const char* Query = "INSERT INTO char_vars SET charid = %u, varname = '%s', value = %i ON DUPLICATE KEY UPDATE value = value + %i;";
 
-    sql->Query(Query, m_PBaseEntity->id, varName, value, value);
+    sql->Async(Query, m_PBaseEntity->id, varName, value, value);
 }
 
 /************************************************************************
@@ -1545,7 +1545,7 @@ void CLuaBaseEntity::lookAt(sol::object const& arg0, sol::object const& arg1, so
 void CLuaBaseEntity::clearTargID()
 {
     m_PBaseEntity->m_TargID = 0;
-    m_PBaseEntity->loc.zone->PushPacket(m_PBaseEntity, CHAR_INRANGE, new CEntityUpdatePacket(m_PBaseEntity, ENTITY_UPDATE, UPDATE_POS));
+    m_PBaseEntity->loc.zone->UpdateEntityPacket(m_PBaseEntity, ENTITY_UPDATE, UPDATE_POS);
 }
 
 /************************************************************************
@@ -1793,11 +1793,11 @@ void CLuaBaseEntity::openDoor(sol::object const& seconds)
         uint32 OpenTime = (seconds != sol::lua_nil) ? seconds.as<uint32>() * 1000 : 7000;
 
         m_PBaseEntity->animation = ANIMATION_OPEN_DOOR;
-        m_PBaseEntity->loc.zone->PushPacket(m_PBaseEntity, CHAR_INRANGE, new CEntityUpdatePacket(m_PBaseEntity, ENTITY_UPDATE, UPDATE_COMBAT));
+        m_PBaseEntity->loc.zone->UpdateEntityPacket(m_PBaseEntity, ENTITY_UPDATE, UPDATE_COMBAT);
 
         m_PBaseEntity->PAI->QueueAction(queueAction_t(std::chrono::milliseconds(OpenTime), false, [](CBaseEntity* PNpc) {
             PNpc->animation = ANIMATION_CLOSE_DOOR;
-            PNpc->loc.zone->PushPacket(PNpc, CHAR_INRANGE, new CEntityUpdatePacket(PNpc, ENTITY_UPDATE, UPDATE_COMBAT));
+            PNpc->loc.zone->UpdateEntityPacket(PNpc, ENTITY_UPDATE, UPDATE_COMBAT);
         }));
     }
 }
@@ -1817,11 +1817,11 @@ void CLuaBaseEntity::closeDoor(sol::object const& seconds)
     {
         uint32 CloseTime         = (seconds != sol::lua_nil) ? seconds.as<uint32>() * 1000 : 7000;
         m_PBaseEntity->animation = ANIMATION_CLOSE_DOOR;
-        m_PBaseEntity->loc.zone->PushPacket(m_PBaseEntity, CHAR_INRANGE, new CEntityUpdatePacket(m_PBaseEntity, ENTITY_UPDATE, UPDATE_COMBAT));
+        m_PBaseEntity->loc.zone->UpdateEntityPacket(m_PBaseEntity, ENTITY_UPDATE, UPDATE_COMBAT);
 
         m_PBaseEntity->PAI->QueueAction(queueAction_t(std::chrono::milliseconds(CloseTime), false, [](CBaseEntity* PNpc) {
             PNpc->animation = ANIMATION_OPEN_DOOR;
-            PNpc->loc.zone->PushPacket(PNpc, CHAR_INRANGE, new CEntityUpdatePacket(PNpc, ENTITY_UPDATE, UPDATE_COMBAT));
+            PNpc->loc.zone->UpdateEntityPacket(PNpc, ENTITY_UPDATE, UPDATE_COMBAT);
         }));
     }
 }
@@ -1915,11 +1915,11 @@ void CLuaBaseEntity::showNPC(sol::object const& seconds)
     uint32 showTime = (seconds != sol::lua_nil) ? seconds.as<uint32>() * 1000 : 15000;
 
     m_PBaseEntity->status = STATUS_TYPE::NORMAL;
-    m_PBaseEntity->loc.zone->PushPacket(m_PBaseEntity, CHAR_INRANGE, new CEntityUpdatePacket(m_PBaseEntity, ENTITY_UPDATE, UPDATE_COMBAT));
+    m_PBaseEntity->loc.zone->UpdateEntityPacket(m_PBaseEntity, ENTITY_UPDATE, UPDATE_COMBAT);
 
     m_PBaseEntity->PAI->QueueAction(queueAction_t(std::chrono::milliseconds(showTime), false, [](CBaseEntity* PNpc) {
         PNpc->status = STATUS_TYPE::DISAPPEAR;
-        PNpc->loc.zone->PushPacket(PNpc, CHAR_INRANGE, new CEntityUpdatePacket(PNpc, ENTITY_DESPAWN, UPDATE_NONE));
+        PNpc->loc.zone->UpdateEntityPacket(PNpc, ENTITY_DESPAWN, UPDATE_NONE);
     }));
 }
 
@@ -1939,11 +1939,11 @@ void CLuaBaseEntity::hideNPC(sol::object const& seconds)
         uint32 hideTime = (seconds != sol::lua_nil) ? seconds.as<uint32>() * 1000 : 15000;
 
         m_PBaseEntity->status = STATUS_TYPE::DISAPPEAR;
-        m_PBaseEntity->loc.zone->PushPacket(m_PBaseEntity, CHAR_INRANGE, new CEntityUpdatePacket(m_PBaseEntity, ENTITY_DESPAWN, UPDATE_NONE));
+        m_PBaseEntity->loc.zone->UpdateEntityPacket(m_PBaseEntity, ENTITY_DESPAWN, UPDATE_NONE);
 
         m_PBaseEntity->PAI->QueueAction(queueAction_t(std::chrono::milliseconds(hideTime), false, [](CBaseEntity* PNpc) {
             PNpc->status = STATUS_TYPE::NORMAL;
-            PNpc->loc.zone->PushPacket(PNpc, CHAR_INRANGE, new CEntityUpdatePacket(PNpc, ENTITY_UPDATE, UPDATE_COMBAT));
+            PNpc->loc.zone->UpdateEntityPacket(PNpc, ENTITY_UPDATE, UPDATE_COMBAT);
         }));
     }
 }
@@ -1965,7 +1965,7 @@ void CLuaBaseEntity::updateNPCHideTime(sol::object const& seconds)
 
         m_PBaseEntity->PAI->QueueAction(queueAction_t(std::chrono::milliseconds(hideTime), false, [](CBaseEntity* PNpc) {
             PNpc->status = STATUS_TYPE::NORMAL;
-            PNpc->loc.zone->PushPacket(PNpc, CHAR_INRANGE, new CEntityUpdatePacket(PNpc, ENTITY_UPDATE, UPDATE_COMBAT));
+            PNpc->loc.zone->UpdateEntityPacket(PNpc, ENTITY_UPDATE, UPDATE_COMBAT);
         }));
     }
 }
@@ -2420,7 +2420,7 @@ void CLuaBaseEntity::updateToEntireZone(uint8 statusID, uint8 animation, sol::ob
         PNpc->name[8]                  = 8;
     }
 
-    PNpc->loc.zone->PushPacket(nullptr, CHAR_INZONE, new CEntityUpdatePacket(PNpc, ENTITY_UPDATE, UPDATE_COMBAT));
+    PNpc->loc.zone->UpdateEntityPacket(PNpc, ENTITY_UPDATE, UPDATE_COMBAT);
 }
 /************************************************************************
  *  Function: getPos()
@@ -2997,7 +2997,7 @@ void CLuaBaseEntity::setHomePoint()
                             SET home_zone = %u, home_rot = %u, home_x = %.3f, home_y = %.3f, home_z = %.3f \
                             WHERE charid = %u;";
 
-    sql->Query(fmtQuery, PChar->profile.home_point.destination, PChar->profile.home_point.p.rotation, PChar->profile.home_point.p.x,
+    sql->Async(fmtQuery, PChar->profile.home_point.destination, PChar->profile.home_point.p.rotation, PChar->profile.home_point.p.x,
               PChar->profile.home_point.p.y, PChar->profile.home_point.p.z, PChar->id);
 }
 
@@ -3032,7 +3032,7 @@ void CLuaBaseEntity::resetPlayer(const char* charName)
 
     // delete the account session
     Query = "DELETE FROM accounts_sessions WHERE charid = %u;";
-    sql->Query(Query, id);
+    sql->Async(Query, id);
 
     // send the player to lower jeuno
     Query = "UPDATE chars "
@@ -3047,7 +3047,7 @@ void CLuaBaseEntity::resetPlayer(const char* charName)
             "moghouse = %u "
             "WHERE charid = %u;";
 
-    sql->Query(Query,
+    sql->Async(Query,
               245,     // lower jeuno
               122,     // prev zone
               86,      // rotation
@@ -3571,7 +3571,7 @@ void CLuaBaseEntity::createWornItem(uint16 itemID)
                             "SET extra = '%s' "
                             "WHERE charid = %u AND location = %u AND slot = %u;";
 
-        sql->Query(Query, extra, PChar->id, PItem->getLocationID(), PItem->getSlotID());
+        sql->Async(Query, extra, PChar->id, PItem->getLocationID(), PItem->getSlotID());
     }
 }
 
@@ -4309,7 +4309,7 @@ uint8 CLuaBaseEntity::storeWithPorterMoogle(uint16 slipId, sol::table const& ext
                         "SET extra = '%s' "
                         "WHERE charid = %u AND location = %u AND slot = %u;";
 
-    sql->Query(Query, extra, PChar->id, slip->getLocationID(), slip->getSlotID());
+    sql->Async(Query, extra, PChar->id, slip->getLocationID(), slip->getSlotID());
 
     return 0;
 }
@@ -4375,7 +4375,7 @@ void CLuaBaseEntity::retrieveItemFromSlip(uint16 slipId, uint16 itemId, uint16 e
                         "SET extra = '%s' "
                         "WHERE charid = %u AND location = %u AND slot = %u;";
 
-    sql->Query(Query, extra, PChar->id, slip->getLocationID(), slip->getSlotID());
+    sql->Async(Query, extra, PChar->id, slip->getLocationID(), slip->getSlotID());
 
     auto* item = itemutils::GetItem(itemId);
     item->setQuantity(1);
@@ -4683,7 +4683,7 @@ void CLuaBaseEntity::setAnimationSub(uint8 animationsub)
         }
         else
         {
-            m_PBaseEntity->loc.zone->PushPacket(m_PBaseEntity, CHAR_INRANGE, new CEntityUpdatePacket(m_PBaseEntity, ENTITY_UPDATE, UPDATE_COMBAT));
+            m_PBaseEntity->loc.zone->UpdateEntityPacket(m_PBaseEntity, ENTITY_UPDATE, UPDATE_COMBAT);
         }
     }
 }
@@ -4915,11 +4915,11 @@ void CLuaBaseEntity::setGMHidden(bool isHidden)
     {
         if (PChar->m_isGMHidden)
         {
-            PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE, new CCharPacket(PChar, ENTITY_DESPAWN, 0));
+            PChar->loc.zone->UpdateCharPacket(PChar, ENTITY_DESPAWN, UPDATE_NONE);
         }
         else
         {
-            PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE, new CCharPacket(PChar, ENTITY_SPAWN, 0));
+            PChar->loc.zone->UpdateCharPacket(PChar, ENTITY_SPAWN, UPDATE_NONE);
         }
     }
 }
@@ -4998,7 +4998,7 @@ void CLuaBaseEntity::setSpeed(uint8 speedVal)
         }
         else
         {
-            m_PBaseEntity->loc.zone->PushPacket(m_PBaseEntity, CHAR_INRANGE, new CEntityUpdatePacket(m_PBaseEntity, ENTITY_UPDATE, UPDATE_POS));
+            m_PBaseEntity->loc.zone->UpdateEntityPacket(m_PBaseEntity, ENTITY_UPDATE, UPDATE_POS);
         }
     }
 }
@@ -5369,7 +5369,7 @@ void CLuaBaseEntity::setLevelCap(uint8 cap)
     if (PChar->jobs.genkai != cap)
     {
         PChar->jobs.genkai = cap;
-        sql->Query("UPDATE char_jobs SET genkai = %u WHERE charid = %u LIMIT 1", PChar->jobs.genkai, PChar->id);
+        sql->Async("UPDATE char_jobs SET genkai = %u WHERE charid = %u LIMIT 1", PChar->jobs.genkai, PChar->id);
     }
 }
 
@@ -7855,7 +7855,7 @@ void CLuaBaseEntity::capAllSkills()
                             "rank = %u "
                             "ON DUPLICATE KEY UPDATE value = %u, rank = %u;";
 
-        sql->Query(Query, PChar->id, i, 5000, PChar->RealSkills.rank[i], 5000, PChar->RealSkills.rank[i]);
+        sql->Async(Query, PChar->id, i, 5000, PChar->RealSkills.rank[i], 5000, PChar->RealSkills.rank[i]);
 
         uint16 maxSkill               = 10 * battleutils::GetMaxSkill(static_cast<SKILLTYPE>(i), PChar->GetMJob(), PChar->GetMLevel());
         PChar->RealSkills.skill[i]    = maxSkill; // set to capped
@@ -11770,24 +11770,17 @@ void CLuaBaseEntity::setPetName(uint8 pType, uint16 value, sol::object const& ar
     {
         if (petType == PET_TYPE::WYVERN)
         {
-            sql->Query("INSERT INTO char_pet SET charid = %u, wyvernid = %u ON DUPLICATE KEY UPDATE wyvernid = %u;", m_PBaseEntity->id, value, value);
+            sql->Async("INSERT INTO char_pet SET charid = %u, wyvernid = %u ON DUPLICATE KEY UPDATE wyvernid = %u;", m_PBaseEntity->id, value, value);
         }
         else if (petType == PET_TYPE::AUTOMATON)
         {
-            sql->Query("INSERT INTO char_pet SET charid = %u, automatonid = %u ON DUPLICATE KEY UPDATE automatonid = %u;", m_PBaseEntity->id, value,
+            sql->Async("INSERT INTO char_pet SET charid = %u, automatonid = %u ON DUPLICATE KEY UPDATE automatonid = %u;", m_PBaseEntity->id, value,
                       value);
             if (static_cast<CCharEntity*>(m_PBaseEntity)->PAutomaton != nullptr)
             {
                 puppetutils::LoadAutomaton(static_cast<CCharEntity*>(m_PBaseEntity));
             }
         }
-        /*
-        else if (petType == PETTYPE_ADVENTURING_FELLOW)
-        {
-            sql->Query("INSERT INTO char_pet SET charid = %u, adventuringfellowid = %u ON DUPLICATE KEY UPDATE adventuringfellowid = %u;",
-        m_PBaseEntity->id, value, value);
-        }
-        */
     }
     else if (arg2.is<int>())
     {
@@ -11798,7 +11791,7 @@ void CLuaBaseEntity::setPetName(uint8 pType, uint16 value, sol::object const& ar
 
             uint32 value = chocoboname1 + chocoboname2;
 
-            sql->Query("INSERT INTO char_pet SET charid = %u, chocoboid = %u ON DUPLICATE KEY UPDATE chocoboid = %u;", m_PBaseEntity->id, value,
+            sql->Async("INSERT INTO char_pet SET charid = %u, chocoboid = %u ON DUPLICATE KEY UPDATE chocoboid = %u;", m_PBaseEntity->id, value,
                       value);
         }
     }
@@ -11814,7 +11807,7 @@ void CLuaBaseEntity::registerChocobo(uint32 value)
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
     PChar->m_FieldChocobo = value;
-    sql->Query("UPDATE char_pet SET field_chocobo = %u WHERE charid = %u;", value, PChar->id);
+    sql->Async("UPDATE char_pet SET field_chocobo = %u WHERE charid = %u;", value, PChar->id);
 }
 
 /************************************************************************

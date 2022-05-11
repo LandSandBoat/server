@@ -333,6 +333,7 @@ int32 SqlConnection::QueryStr(const char* query)
     FreeResult();
     self->buf.clear();
 
+    TracyZoneNamed(mysql_real_query_);
     self->buf += query;
     if (mysql_real_query(&self->handle, self->buf.c_str(), (unsigned int)self->buf.length()))
     {
@@ -340,6 +341,7 @@ int32 SqlConnection::QueryStr(const char* query)
         return SQL_ERROR;
     }
 
+    TracyZoneNamed(mysql_store_result_);
     self->result = mysql_store_result(&self->handle);
     if (mysql_errno(&self->handle) != 0)
     {

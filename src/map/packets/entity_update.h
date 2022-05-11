@@ -44,6 +44,7 @@ class CEntityUpdatePacket : public CBasicPacket
 {
 public:
     CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 updatemask);
+    void updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 updatemask);
 };
 
 #endif

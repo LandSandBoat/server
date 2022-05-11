@@ -416,7 +416,7 @@ void search_config_read(const int8* file)
         }
         else
         {
-            ShowWarning("Unknown setting '%s' in file %s", w1, file);
+            ShowWarning("Unknown setting '%s' in file %s. Has this setting been removed?", w1, file);
         }
     }
     fclose(fp);

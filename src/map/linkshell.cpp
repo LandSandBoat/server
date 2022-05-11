@@ -74,7 +74,7 @@ void CLinkshell::setColor(uint16 color)
 void CLinkshell::setPostRights(uint8 postrights)
 {
     m_postRights = postrights;
-    sql->Query("UPDATE linkshells SET postrights = %u WHERE linkshellid = %d;", postrights, m_id);
+    sql->Async("UPDATE linkshells SET postrights = %u WHERE linkshellid = %d;", postrights, m_id);
 }
 
 const int8* CLinkshell::getName()
@@ -92,7 +92,7 @@ void CLinkshell::setMessage(const int8* message, const int8* poster)
 {
     char sqlMessage[256];
     sql->EscapeString(sqlMessage, (const char*)message);
-    sql->Query("UPDATE linkshells SET poster = '%s', message = '%s', messagetime = %u WHERE linkshellid = %d;", poster, sqlMessage,
+    sql->Async("UPDATE linkshells SET poster = '%s', message = '%s', messagetime = %u WHERE linkshellid = %d;", poster, sqlMessage,
               static_cast<uint32>(time(nullptr)), m_id);
 
     int8 packetData[8]{};
@@ -116,12 +116,12 @@ void CLinkshell::AddMember(CCharEntity* PChar, int8 type, uint8 lsNum)
     members.push_back(PChar);
     if (lsNum == 1)
     {
-        sql->Query("UPDATE accounts_sessions SET linkshellid1 = %u , linkshellrank1 = %u WHERE charid = %u", this->getID(), type, PChar->id);
+        sql->Async("UPDATE accounts_sessions SET linkshellid1 = %u , linkshellrank1 = %u WHERE charid = %u", this->getID(), type, PChar->id);
         PChar->PLinkshell1 = this;
     }
     else
     {
-        sql->Query("UPDATE accounts_sessions SET linkshellid2 = %u , linkshellrank2 = %u WHERE charid = %u", this->getID(), type, PChar->id);
+        sql->Async("UPDATE accounts_sessions SET linkshellid2 = %u , linkshellrank2 = %u WHERE charid = %u", this->getID(), type, PChar->id);
         PChar->PLinkshell2 = this;
     }
 }
@@ -140,12 +140,12 @@ bool CLinkshell::DelMember(CCharEntity* PChar)
         {
             if (PChar->PLinkshell1 == this)
             {
-                sql->Query("UPDATE accounts_sessions SET linkshellid1 = 0 , linkshellrank1 = 0 WHERE charid = %u", PChar->id);
+                sql->Async("UPDATE accounts_sessions SET linkshellid1 = 0 , linkshellrank1 = 0 WHERE charid = %u", PChar->id);
                 PChar->PLinkshell1 = nullptr;
             }
             else if (PChar->PLinkshell2 == this)
             {
-                sql->Query("UPDATE accounts_sessions SET linkshellid2 = 0 , linkshellrank2 = 0 WHERE charid = %u", PChar->id);
+                sql->Async("UPDATE accounts_sessions SET linkshellid2 = 0 , linkshellrank2 = 0 WHERE charid = %u", PChar->id);
                 PChar->PLinkshell2 = nullptr;
             }
             members.erase(members.begin() + i);
@@ -205,15 +205,15 @@ void CLinkshell::ChangeMemberRank(int8* MemberName, uint8 toSack)
 
                     PMember->getStorage(LocationID)->InsertItem(PItemLinkshell, SlotID);
                     const char* Query = "UPDATE char_inventory SET itemid = %u, extra = '%s' WHERE charid = %u AND location = %u AND slot = %u LIMIT 1";
-                    sql->Query(Query, PItemLinkshell->getID(), extra, PMember->id, LocationID, SlotID);
+                    sql->Async(Query, PItemLinkshell->getID(), extra, PMember->id, LocationID, SlotID);
                     if (lsID == 1)
                     {
-                        sql->Query("UPDATE accounts_sessions SET linkshellid1 = %u , linkshellrank1 = %u WHERE charid = %u", m_id,
+                        sql->Async("UPDATE accounts_sessions SET linkshellid1 = %u , linkshellrank1 = %u WHERE charid = %u", m_id,
                                   static_cast<uint8>(PItemLinkshell->GetLSType()), PMember->id);
                     }
                     else if (lsID == 2)
                     {
-                        sql->Query("UPDATE accounts_sessions SET linkshellid2 = %u , linkshellrank2 = %u WHERE charid = %u", m_id,
+                        sql->Async("UPDATE accounts_sessions SET linkshellid2 = %u , linkshellrank2 = %u WHERE charid = %u", m_id,
                                   static_cast<uint8>(PItemLinkshell->GetLSType()), PMember->id);
                     }
 
@@ -338,7 +338,7 @@ void CLinkshell::BreakLinkshell(int8* lsname, bool gm)
         RemoveMemberByName((int8*)members.at(0)->GetName(), LSTYPE_LINKSHELL, true);
     }
     // set the linkshell as broken
-    sql->Query("UPDATE linkshells SET broken = 1 WHERE linkshellid = %u LIMIT 1", lsid);
+    sql->Async("UPDATE linkshells SET broken = 1 WHERE linkshellid = %u LIMIT 1", lsid);
 }
 
 /************************************************************************

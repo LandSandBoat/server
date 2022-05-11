@@ -852,7 +852,7 @@ void CBattleEntity::SetMLevel(uint8 mlvl)
 
     if (this->objtype & TYPE_PC)
     {
-        sql->Query("UPDATE char_stats SET mlvl = %u WHERE charid = %u LIMIT 1;", m_mlvl, this->id);
+        sql->Async("UPDATE char_stats SET mlvl = %u WHERE charid = %u LIMIT 1;", m_mlvl, this->id);
     }
 }
 
@@ -889,7 +889,7 @@ void CBattleEntity::SetSLevel(uint8 slvl)
 
     if (this->objtype & TYPE_PC)
     {
-        sql->Query("UPDATE char_stats SET slvl = %u WHERE charid = %u LIMIT 1;", m_slvl, this->id);
+        sql->Async("UPDATE char_stats SET slvl = %u WHERE charid = %u LIMIT 1;", m_slvl, this->id);
     }
 }
 
@@ -1638,6 +1638,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
         loc.zone->PushPacket(this, CHAR_INRANGE_SELF, new CMessageBasicPacket(this, PTarget, 0, 0, MSGBASIC_IS_PARALYZED));
         return false;
     }
+
     if (battleutils::IsIntimidated(this, PTarget))
     {
         loc.zone->PushPacket(this, CHAR_INRANGE_SELF, new CMessageBasicPacket(this, PTarget, 0, 0, MSGBASIC_IS_INTIMIDATED));
