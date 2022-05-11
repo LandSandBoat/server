@@ -1,51 +1,9 @@
 -----------------------------------
 -- Trust: Rainemard
 -----------------------------------
-require("scripts/globals/gambits")
-require("scripts/globals/magic")
-require("scripts/globals/status")
 require("scripts/globals/trust")
-require("scripts/globals/utils")
-require("scripts/globals/weaponskillids")
-require("scripts/globals/zone")
-
 -----------------------------------
 local spell_object = {}
-
-spell_object.onMobSpawn = function(mob)
-
-    mob:addSimpleGambit(ai.t.SELF, ai.c.NOT_STATUS, xi.effect.COMPOSURE, ai.r.JA, ai.s.SPECIFIC, xi.ja.COMPOSURE)
-	
-	mob:addSimpleGambit(ai.t.SELF, ai.c.MPP_LT, 5, ai.r.JA, ai.s.SPECIFIC, xi.ja.CONVERT)
-
-    mob:addSimpleGambit(ai.t.PARTY, ai.c.HPP_LT, 50, ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.CURE)
-
-    mob:addSimpleGambit(ai.t.MELEE, ai.c.NOT_STATUS, xi.effect.HASTE, ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.HASTE)
-    mob:addSimpleGambit(ai.t.CASTER, ai.c.NOT_STATUS, xi.effect.REFRESH, ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.REFRESH)
-	mob:addSimpleGambit(ai.t.TANK, ai.c.NOT_STATUS, xi.effect.REFRESH, ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.REFRESH)
-    mob:addSimpleGambit(ai.t.RANGED, ai.c.NOT_STATUS, xi.effect.FLURRY, ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.FLURRY)
-    mob:addSimpleGambit(ai.t.TOP_ENMITY, ai.c.NOT_STATUS, xi.effect.PHALANX, ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.PHALANX)
-
-    mob:addSimpleGambit(ai.t.TARGET, ai.c.STATUS_FLAG, xi.effectFlag.DISPELABLE, ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.DISPEL)
-	
-	mob:addSimpleGambit(ai.t.SELF, ai.c.NOT_STATUS, xi.effect.ENBLIZZARD, ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.ENBLIZZARD, 60)
-   	
-	mob:addSimpleGambit(ai.t.TARGET, ai.c.NOT_STATUS, xi.effect.DIA, ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.DIA, 60)
-    mob:addSimpleGambit(ai.t.TARGET, ai.c.NOT_STATUS, xi.effect.SLOW, ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.SLOW, 60)
-    mob:addSimpleGambit(ai.t.TARGET, ai.c.NOT_STATUS, xi.effect.EVASION_DOWN, ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.DISTRACT, 60)	
-	
-	mob:setTrustTPSkillSettings(ai.tp.ASAP, ai.s.RANDOM)
-	
-	local power = mob:getMainLvl()
-    mob:addMod(xi.mod.MATT, power)
-    mob:addMod(xi.mod.MACC, power*4)
-	mob:addMod(xi.mod.DEF, power*2)
-	mob:addMod(xi.mod.MDEF, power*2)
-	mob:addMod(xi.mod.ENSPELL_DMG, power/3)
-    mob:addMod(xi.mod.HASTE_MAGIC, power/3)
-	mob:addMod(xi.mod.ATT, power*2)
-	mob:addMod(xi.mod.ACC, power*2)
-	end
 
 spell_object.onMagicCastingCheck = function(caster, target, spell)
     return xi.trust.canCast(caster, spell)
@@ -53,6 +11,38 @@ end
 
 spell_object.onSpellCast = function(caster, target, spell)
     return xi.trust.spawn(caster, spell)
+end
+
+spell_object.onMobSpawn = function(mob)
+    xi.trust.teamworkMessage(mob, {
+        [xi.magic.spell.CURILLA] = xi.trust.message_offset.TEAMWORK_1,
+    })
+
+    -- TODO: Selection based on enemy weakness
+    mob:addSimpleGambit(ai.t.SELF, ai.c.NOT_STATUS, xi.effect.ENFIRE, ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.ENFIRE)
+
+    mob:addSimpleGambit(ai.t.TARGET, ai.c.NOT_STATUS, xi.effect.EVASION_DOWN, ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.DISTRACT, 60)
+
+    mob:addSimpleGambit(ai.t.SELF, ai.c.NOT_STATUS, xi.effect.PHALANX, ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.PHALANX)
+    mob:addSimpleGambit(ai.t.SELF, ai.c.NOT_STATUS, xi.effect.HASTE, ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.HASTE)
+    mob:addSimpleGambit(ai.t.SELF, ai.c.NOT_STATUS, xi.effect.REFRESH, ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.REFRESH)
+
+    -- If Curilla is present, will cast Haste/Phalanx/Refresh on her.
+    mob:addSimpleGambit(ai.t.CURILLA, ai.c.NOT_STATUS, xi.effect.HASTE, ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.HASTE)
+    mob:addSimpleGambit(ai.t.CURILLA, ai.c.NOT_STATUS, xi.effect.PHALANX, ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.PHALANX_II)
+    mob:addSimpleGambit(ai.t.CURILLA, ai.c.NOT_STATUS, xi.effect.REFRESH, ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.REFRESH)
+
+    -- NOTE: Do these late, to try and avoid clashing with healers casting -ra's
+    mob:addSimpleGambit(ai.t.SELF, ai.c.NOT_STATUS, xi.effect.PROTECT, ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.PROTECT)
+    mob:addSimpleGambit(ai.t.SELF, ai.c.NOT_STATUS, xi.effect.SHELL, ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.SHELL)
+end
+
+spell_object.onMobDespawn = function(mob)
+    xi.trust.message(mob, xi.trust.message_offset.DESPAWN)
+end
+
+spell_object.onMobDeath = function(mob)
+    xi.trust.message(mob, xi.trust.message_offset.DEATH)
 end
 
 return spell_object

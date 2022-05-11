@@ -1,0 +1,103 @@
+ src/map/ai/helpers/targetfind.cpp | 10 ++++++++++
+ src/map/entities/charentity.cpp   |  5 +++++
+ src/map/utils/battleutils.cpp     | 10 ++++++++++
+ src/map/zone.cpp                  | 14 ++++++++++++--
+ 4 files changed, 37 insertions(+), 2 deletions(-)
+
+diff --git a/src/map/ai/helpers/targetfind.cpp b/src/map/ai/helpers/targetfind.cpp
+index a67975756a..3b39d2a8a7 100644
+--- a/src/map/ai/helpers/targetfind.cpp
++++ b/src/map/ai/helpers/targetfind.cpp
+@@ -31,6 +31,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
+ #include "../../packets/action.h"
+ #include "../../status_effect_container.h"
+ #include "../../utils/zoneutils.h"
++#include "../../treasure_pool.h"
+ #include <cmath>
+ 
+ #include "../../packets/action.h"
+@@ -359,6 +360,15 @@ bool CTargetFind::isMobOwner(CBattleEntity* PTarget)
+         return true;
+     }
+ 
++    if (m_PBattleEntity->objtype == TYPE_PC)
++    {
++        CCharEntity* PChar = static_cast<CCharEntity*>(m_PBattleEntity);
++        if (PChar->PTreasurePool != nullptr && PChar->PTreasurePool->GetPoolType() == TREASUREPOOL_ZONE)
++        {
++            return true;
++        }
++    }
++
+     bool found = false;
+ 
+     m_PBattleEntity->ForAlliance([&found, &PTarget](CBattleEntity* PMember) {
+diff --git a/src/map/entities/charentity.cpp b/src/map/entities/charentity.cpp
+index 503b826fc8..f0d1a7dcb8 100644
+--- a/src/map/entities/charentity.cpp
++++ b/src/map/entities/charentity.cpp
+@@ -1542,6 +1542,11 @@ bool CCharEntity::IsMobOwner(CBattleEntity* PBattleTarget)
+         return true;
+     }
+ 
++    if (PTreasurePool != nullptr && PTreasurePool->GetPoolType() == TREASUREPOOL_ZONE)
++    {
++        return true;
++    }
++
+     bool found = false;
+ 
+     static_cast<CCharEntity*>(this)->ForAlliance([&PBattleTarget, &found](CBattleEntity* PEntity) {
+diff --git a/src/map/utils/battleutils.cpp b/src/map/utils/battleutils.cpp
+index a30b0a0a4d..f0db63cce0 100644
+--- a/src/map/utils/battleutils.cpp
++++ b/src/map/utils/battleutils.cpp
+@@ -74,6 +74,7 @@
+ #include "battleutils.h"
+ #include "charutils.h"
+ #include "zoneutils.h"
++#include "../treasure_pool.h"
+ 
+ /************************************************************************
+ *   lists used in battleutils                                           *
+@@ -6100,6 +6101,15 @@ namespace battleutils
+             return true;
+         }
+ 
++        if (PEntity->objtype == TYPE_PC)
++        {
++            CCharEntity* PChar = static_cast<CCharEntity*>(PEntity);
++            if (PChar->PTreasurePool != nullptr && PChar->PTreasurePool->GetPoolType() == TREASUREPOOL_ZONE)
++            {
++                return true;
++            }
++        }
++
+         bool found = false;
+ 
+         // clang-format off
+diff --git a/src/map/zone.cpp b/src/map/zone.cpp
+index e1cf5490f8..fb63560979 100644
+--- a/src/map/zone.cpp
++++ b/src/map/zone.cpp
+@@ -974,8 +974,18 @@ void CZone::CharZoneIn(CCharEntity* PChar)
+     }
+     else
+     {
+-        PChar->PTreasurePool = new CTreasurePool(TREASUREPOOL_SOLO);
+-        PChar->PTreasurePool->AddMember(PChar);
++//        PChar->PTreasurePool = new CTreasurePool(TREASUREPOOL_SOLO);
++//        PChar->PTreasurePool->AddMember(PChar);
++        if (m_TreasurePool != nullptr)
++        {
++            PChar->PTreasurePool = m_TreasurePool;
++            PChar->PTreasurePool->AddMember(PChar);
++        }
++        else
++        {
++            PChar->PTreasurePool = new CTreasurePool(TREASUREPOOL_SOLO);
++            PChar->PTreasurePool->AddMember(PChar);
++        }
+     }
+ 
+     if (m_zoneType != ZONE_TYPE::DUNGEON_INSTANCED)

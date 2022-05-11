@@ -37,3 +37,7 @@
 # Live example:
 
 custom/lua/test_npcs_in_gm_home.lua
+custom/lua/catseyexi_custom_npcs.lua
+custom/lua/domain_invasion.lua
+custom/lua/trusts.lua
+custom/lua/homepoint_heal.lua

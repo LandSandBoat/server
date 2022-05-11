@@ -6,7 +6,6 @@ require("scripts/globals/shop")
 require("scripts/zones/Aht_Urhgan_Whitegate/Zone")
 -----------------------------------
 local m = Module:new("catseyexi_custom_npcs")
-m:setEnabled(true)
 
 ---------------------------------------------
 --           RU'LUDE GARDENS               --

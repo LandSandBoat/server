@@ -2,8 +2,6 @@
 -- Trust: Elivira
 -----------------------------------
 require("scripts/globals/trust")
-require("scripts/globals/ability")
-require("scripts/globals/gambits")
 -----------------------------------
 local spell_object = {}
 
@@ -17,17 +15,6 @@ end
 
 spell_object.onMobSpawn = function(mob)
     xi.trust.message(mob, xi.trust.message_offset.SPAWN)
-	
-		mob:addSimpleGambit(ai.t.PARTY, ai.c.NOT_STATUS, xi.effect.EVOKERS_ROLL, ai.r.JA, ai.s.SPECIFIC, xi.ja.EVOKERS_ROLL)  -- Refresh
-		mob:addSimpleGambit(ai.t.PARTY, ai.c.NOT_STATUS, xi.effect.WARLOCKS_ROLL, ai.r.JA, ai.s.SPECIFIC, xi.ja.WARLOCKS_ROLL) -- Magic Accuracy
-
-    mob:addSimpleGambit(ai.t.TARGET, ai.c.ALWAYS, 0, ai.r.RATTACK, 0, 0, 10)
-
-    -- Notable: Uses a balance of melee and ranged attacks.
-    -- TODO: Observe his WS behaviour on retail
-    mob:setTrustTPSkillSettings(ai.tp.ASAP, ai.s.RANDOM)
-    local power = mob:getMainLvl()
-    mob:addMod(xi.mod.WSACC, power*3)
 end
 
 spell_object.onMobDespawn = function(mob)
