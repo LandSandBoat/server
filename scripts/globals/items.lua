@@ -1679,6 +1679,7 @@ xi.items =
     BEETLE_RING                     = 13457,
     DEMONS_RING                     = 13464,
     BRASS_RING                      = 13465,
+    ASTRAL_RING                     = 13548,
     PURPLE_RIBBON                   = 13569,
     RAPTOR_MANTLE                   = 13593,
     ENHANCING_MANTLE                = 13624,

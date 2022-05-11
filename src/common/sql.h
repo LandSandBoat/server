@@ -170,6 +170,8 @@ public:
     uint64 GetUInt64Data(size_t col);
     float  GetFloatData(size_t col);
 
+    std::string GetStringData(size_t col);
+
     /// Frees the result of the query.
     void FreeResult();
 
