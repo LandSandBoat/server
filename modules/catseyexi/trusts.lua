@@ -11,7 +11,7 @@ require("scripts/globals/zone")
 local m = Module:new("trusts")
 
     -- All trusts rework ygnas, aaev, elivira, halver, rainemard, zeid_ii, gessho, maximilian, semih_lafihna, 
-	-- maat, leonoyne, mayakov, volker, uka_totlihn, naja_salaheem, nanaa_mihgo, matsui-p
+	-- maat, leonoyne, mayakov, volker, uka_totlihn, naja_salaheem, nanaa_mihgo, qultada, kupofried, matsui-p
 	
 m:addOverride("xi.globals.spells.trust.ygnas.onSpellCast", function(caster, target, spell)
 
@@ -493,6 +493,28 @@ m:addOverride("xi.globals.spells.trust.nanaa_mihgo.onSpellCast", function(caster
 	trust:addMod(xi.mod.TREASURE_HUNTER, 2)	
 end)
 
+m:addOverride("xi.globals.spells.trust.qultada.onSpellCast", function(caster, target, spell)
+
+    local trust = caster:spawnTrust(spell:getID())
+
+    trust:addSimpleGambit(ai.t.PARTY, ai.c.NOT_STATUS, xi.effect.SAMURAI_ROLL, ai.r.JA, ai.s.SPECIFIC, xi.ja.SAMURAI_ROLL)
+    trust:addSimpleGambit(ai.t.PARTY, ai.c.NOT_STATUS, xi.effect.FIGHTERS_ROLL, ai.r.JA, ai.s.SPECIFIC, xi.ja.FIGHTERS_ROLL)
+    trust:addSimpleGambit(ai.t.TARGET, ai.c.ALWAYS, 0, ai.r.RATTACK, 0, 0, 10)
+
+    trust:setTrustTPSkillSettings(ai.tp.OPENER, ai.s.RANDOM)
+
+    local power = trust:getMainLvl() / 3
+    trust:addMod(xi.mod.MACC, power)
+end)
+
+m:addOverride("xi.globals.spells.trust.kupofried.onSpellCast", function(caster, target, spell)
+
+    local trust = caster:spawnTrust(spell:getID())
+
+	trust:addStatusEffectEx(xi.effect.COLURE_ACTIVE, xi.effect.COLURE_ACTIVE, 6, 3, 0, xi.effect.CORSAIRS_ROLL, 150, xi.auraTarget.ALLIES, xi.effectFlag.AURA)
+    trust:SetAutoAttackEnabled(false)
+end)
+
 local trustToReplaceName = "moogle"
 
 m:addOverride(string.format("xi.globals.spells.trust.%s.onSpellCast", trustToReplaceName), function(caster, target, spell)
@@ -503,7 +525,7 @@ m:addOverride(string.format("xi.globals.spells.trust.%s.onSpellCast", trustToRep
     local trust = caster:spawnTrust(spell:getID())
 
     trust:setModelId(3121) -- Trust: Matsui-P
-    trust:setPacketName("Matsui-P")
+    trust:renameEntity("Matsui-P")
 
     trust:addSimpleGambit(ai.t.SELF, ai.c.NOT_STATUS, xi.effect.COPY_IMAGE, ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.UTSUSEMI)
 
@@ -512,7 +534,7 @@ m:addOverride(string.format("xi.globals.spells.trust.%s.onSpellCast", trustToRep
 	
     trust:addSimpleGambit(ai.t.TARGET, ai.c.MB_AVAILABLE, 0, ai.r.MA, ai.s.MB_ELEMENT, xi.magic.spellFamily.NONE) 
 	
-    trust:addSimpleGambit(ai.t.TARGET, ai.c.NOT_SC_AVAILABLE, 0, ai.r.MA, ai.s.BEST_AGAINST_TARGET, 0, 60)
+    trust:addSimpleGambit(ai.t.TARGET, ai.c.NOT_SC_AVAILABLE, 0, ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.NONE, 45)
 	
     trust:addSimpleGambit(ai.t.TARGET, ai.c.READYING_WS, 0, ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.STUN)
 
@@ -534,8 +556,7 @@ m:addOverride(string.format("xi.globals.spells.trust.%s.onSpellCast", trustToRep
 	trust:addMod(xi.mod.ATT, power)
 	trust:addMod(xi.mod.ACC, power*4)
 	trust:addMod(xi.mod.DOUBLE_ATTACK, 25)	
-    trust:addMod(xi.mod.MP, 150)
-    trust:setLocalVar("MASTER_ID", trust:getMaster():getID())	
+    trust:addMod(xi.mod.CONVHPTOMP, 50)	
 end)
 
 m:addOverride(string.format("xi.globals.spells.trust.%s.onMobSpawn", trustToReplaceName), function(mob)
