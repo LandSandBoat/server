@@ -1,8 +1,5 @@
 -----------------------------------
---
 -- Zone: Western Adoulin
--- !zone 256
---
 -----------------------------------
 local ID = require("scripts/zones/Western_Adoulin/IDs")
 require("scripts/globals/quests")
