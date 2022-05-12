@@ -46,6 +46,7 @@ void AsyncThreadBody(const char* user, const char* passwd, const char* host, uin
     while (asyncRunning)
     {
         con.HandleAsync();
+        std::this_thread::sleep_for(200ms); // TODO: This is bad and ugly. Replace with something better.
     }
 }
 
