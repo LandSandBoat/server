@@ -31,6 +31,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../../packets/action.h"
 #include "../../status_effect_container.h"
 #include "../../utils/zoneutils.h"
+#include "../../treasure_pool.h"
 #include <cmath>
 
 #include "../../packets/action.h"
@@ -357,6 +358,15 @@ bool CTargetFind::isMobOwner(CBattleEntity* PTarget)
     if (PTarget->m_OwnerID.id == 0 || PTarget->m_OwnerID.id == m_PBattleEntity->id)
     {
         return true;
+    }
+
+    if (m_PBattleEntity->objtype == TYPE_PC)
+    {
+        CCharEntity* PChar = static_cast<CCharEntity*>(m_PBattleEntity);
+        if (PChar->PTreasurePool != nullptr && PChar->PTreasurePool->GetPoolType() == TREASUREPOOL_ZONE)
+        {
+            return true;
+        }
     }
 
     bool found = false;
