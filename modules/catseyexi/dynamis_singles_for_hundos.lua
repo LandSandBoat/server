@@ -1,9 +1,38 @@
 -----------------------------------
 -- CatsEyeXI Custom NPCs
 -----------------------------------
+require("scripts/globals/keyitems")
+require("scripts/settings/main")
+require("scripts/globals/dynamis")
+
 local m = Module:new("dynamis_singles_for_hundos")
 
 m:addOverride("xi.zones.Castle_Oztroja.npcs.Antiqix.onTrade", function(player, npc, trade)
+    local ID = require("scripts/zones/Castle_Oztroja/IDs")
+    local TIMELESS_HOURGLASS = 4236
+    local currency = {1452, 1453, 1454}
+    local shop = {
+         5, 1295, -- Twincoon
+         6, 1466, -- Relic Iron
+         7, 1520, -- Goblin Grease
+         8, 1516, -- Griffon Hide
+        23, 1459, -- Griffon Leather
+        25, 883,  -- Behemoth Horn
+        28, 1458, -- Mammoth Tusk
+    }
+    local maps = {
+        [xi.ki.MAP_OF_DYNAMIS_SAN_DORIA]   = 10000,
+        [xi.ki.MAP_OF_DYNAMIS_BASTOK]     = 10000,
+        [xi.ki.MAP_OF_DYNAMIS_WINDURST]   = 10000,
+        [xi.ki.MAP_OF_DYNAMIS_JEUNO]      = 10000,
+        [xi.ki.MAP_OF_DYNAMIS_BEAUCEDINE] = 15000,
+        [xi.ki.MAP_OF_DYNAMIS_XARCABARD]  = 20000,
+        [xi.ki.MAP_OF_DYNAMIS_VALKURM]    = 10000,
+        [xi.ki.MAP_OF_DYNAMIS_BUBURIMU]   = 10000,
+        [xi.ki.MAP_OF_DYNAMIS_QUFIM]      = 10000,
+        [xi.ki.MAP_OF_DYNAMIS_TAVNAZIA]   = 20000,
+    }
+
     local gil = trade:getGil()
     local count = trade:getItemCount()
 
@@ -57,6 +86,31 @@ m:addOverride("xi.zones.Castle_Oztroja.npcs.Antiqix.onTrade", function(player, n
 end)
 
 m:addOverride("xi.zones.Beadeaux.npcs.Haggleblix.onTrade", function(player, npc, trade)
+    local ID = require("scripts/zones/Beadeaux/IDs")
+    local TIMELESS_HOURGLASS = 4236
+    local currency = {1452, 1453, 1454}
+    local shop = {
+         5, 1295, -- Twincoon
+         6, 1466, -- Relic Iron
+         7, 1520, -- Goblin Grease
+         8, 1516, -- Griffon Hide
+        23, 1459, -- Griffon Leather
+        25, 883,  -- Behemoth Horn
+        28, 1458, -- Mammoth Tusk
+    }
+    local maps = {
+        [xi.ki.MAP_OF_DYNAMIS_SAN_DORIA]   = 10000,
+        [xi.ki.MAP_OF_DYNAMIS_BASTOK]     = 10000,
+        [xi.ki.MAP_OF_DYNAMIS_WINDURST]   = 10000,
+        [xi.ki.MAP_OF_DYNAMIS_JEUNO]      = 10000,
+        [xi.ki.MAP_OF_DYNAMIS_BEAUCEDINE] = 15000,
+        [xi.ki.MAP_OF_DYNAMIS_XARCABARD]  = 20000,
+        [xi.ki.MAP_OF_DYNAMIS_VALKURM]    = 10000,
+        [xi.ki.MAP_OF_DYNAMIS_BUBURIMU]   = 10000,
+        [xi.ki.MAP_OF_DYNAMIS_QUFIM]      = 10000,
+        [xi.ki.MAP_OF_DYNAMIS_TAVNAZIA]   = 20000,
+    }
+
     local gil = trade:getGil()
     local count = trade:getItemCount()
 
@@ -110,6 +164,31 @@ m:addOverride("xi.zones.Beadeaux.npcs.Haggleblix.onTrade", function(player, npc,
 end)
 
 m:addOverride("xi.zones.Davoi.npcs.Lootblox.onTrade", function(player, npc, trade)
+    local ID = require("scripts/zones/Davoi/IDs")
+    local TIMELESS_HOURGLASS = 4236
+    local currency = {1452, 1453, 1454}
+    local shop = {
+         5, 1295, -- Twincoon
+         6, 1466, -- Relic Iron
+         7, 1520, -- Goblin Grease
+         8, 1516, -- Griffon Hide
+        23, 1459, -- Griffon Leather
+        25, 883,  -- Behemoth Horn
+        28, 1458, -- Mammoth Tusk
+    }
+    local maps = {
+        [xi.ki.MAP_OF_DYNAMIS_SAN_DORIA]   = 10000,
+        [xi.ki.MAP_OF_DYNAMIS_BASTOK]     = 10000,
+        [xi.ki.MAP_OF_DYNAMIS_WINDURST]   = 10000,
+        [xi.ki.MAP_OF_DYNAMIS_JEUNO]      = 10000,
+        [xi.ki.MAP_OF_DYNAMIS_BEAUCEDINE] = 15000,
+        [xi.ki.MAP_OF_DYNAMIS_XARCABARD]  = 20000,
+        [xi.ki.MAP_OF_DYNAMIS_VALKURM]    = 10000,
+        [xi.ki.MAP_OF_DYNAMIS_BUBURIMU]   = 10000,
+        [xi.ki.MAP_OF_DYNAMIS_QUFIM]      = 10000,
+        [xi.ki.MAP_OF_DYNAMIS_TAVNAZIA]   = 20000,
+    }
+
     local gil = trade:getGil()
     local count = trade:getItemCount()
 
