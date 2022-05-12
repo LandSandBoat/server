@@ -56,3 +56,4 @@ catseyexi/salvage_gear.lua
 catseyexi/trusts.lua
 catseyexi/login_notifications.lua
 catseyexi/cop_trusts.lua
+catseyexi/guild_shops_always_open.lua
