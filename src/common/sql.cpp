@@ -56,14 +56,16 @@ void SqlConnection::Async(std::function<void(SqlConnection*)>&& func)
     asyncQueue.enqueue(std::move(func));
 }
 
-void SqlConnection::Async(std::string&& query)
+void SqlConnection::Async(std::string const& query)
 {
     TracyZoneScoped;
     TracyZoneString(query);
+
     // clang-format off
-    Async([query = std::move(query)](SqlConnection* sql)
+    Async([query](SqlConnection* sql)
     {
-        if (sql->Query(query.c_str()) == SQL_ERROR)
+        // Executed on worker thread with a copy of query
+        if (sql->QueryStr(query.c_str()) == SQL_ERROR)
         {
             ShowFatalError("Asyc Query Error");
         }
@@ -334,22 +336,26 @@ int32 SqlConnection::QueryStr(const char* query)
     FreeResult();
     self->buf.clear();
 
-    TracyZoneNamed(mysql_real_query_);
-    self->buf += query;
-    if (mysql_real_query(&self->handle, self->buf.c_str(), (unsigned int)self->buf.length()))
     {
-        ShowSQL("Query: %s", self->buf);
-        ShowSQL("mysql_real_query: SQL_ERROR: %s (%u)", mysql_error(&self->handle), mysql_errno(&self->handle));
-        return SQL_ERROR;
+        TracyZoneNamed(mysql_real_query_);
+        self->buf += query;
+        if (mysql_real_query(&self->handle, self->buf.c_str(), (unsigned int)self->buf.length()))
+        {
+            ShowSQL("Query: %s", self->buf);
+            ShowSQL("mysql_real_query: SQL_ERROR: %s (%u)", mysql_error(&self->handle), mysql_errno(&self->handle));
+            return SQL_ERROR;
+        }
     }
 
-    TracyZoneNamed(mysql_store_result_);
-    self->result = mysql_store_result(&self->handle);
-    if (mysql_errno(&self->handle) != 0)
     {
-        ShowSQL("Query: %s", self->buf);
-        ShowSQL("mysql_store_result: SQL_ERROR: %s (%u)", mysql_error(&self->handle), mysql_errno(&self->handle));
-        return SQL_ERROR;
+        TracyZoneNamed(mysql_store_result_);
+        self->result = mysql_store_result(&self->handle);
+        if (mysql_errno(&self->handle) != 0)
+        {
+            ShowSQL("Query: %s", self->buf);
+            ShowSQL("mysql_store_result: SQL_ERROR: %s (%u)", mysql_error(&self->handle), mysql_errno(&self->handle));
+            return SQL_ERROR;
+        }
     }
 
     return SQL_SUCCESS;
