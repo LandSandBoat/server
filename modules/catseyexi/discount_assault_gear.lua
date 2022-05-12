@@ -1,8 +1,9 @@
 -----------------------------------
 -- CatsEyeXI Custom NPCs
 -----------------------------------
+local m = Module:new("discount_assault_gear")
 
-m:addOverride("xi.zones.Aht_Urhgan_Whitegate.npcs.Bhoy_Yhupplo.onEventFinish" = function(player, csid, option)
+m:addOverride("xi.zones.Aht_Urhgan_Whitegate.npcs.Bhoy_Yhupplo.onEventFinish", function(player, csid, option)
     if csid == 277 then
         local selectiontype = bit.band(option, 0xF)
         if selectiontype == 1 and npcUtil.giveKeyItem(player, xi.ki.ILRUSI_ASSAULT_ORDERS) then
@@ -21,7 +22,7 @@ m:addOverride("xi.zones.Aht_Urhgan_Whitegate.npcs.Bhoy_Yhupplo.onEventFinish" = 
     end
 end)
 
-m:addOverride("xi.zones.Aht_Urhgan_Whitegate.npcs.Isdebaaq.onEventFinish" = function(player, csid, option)
+m:addOverride("xi.zones.Aht_Urhgan_Whitegate.npcs.Isdebaaq.onEventFinish", function(player, csid, option)
     if (csid == 274) then
         local selectiontype = bit.band(option, 0xF)
         if selectiontype == 1 and npcUtil.giveKeyItem(player, xi.ki.MAMOOL_JA_ASSAULT_ORDERS) then
@@ -40,7 +41,7 @@ m:addOverride("xi.zones.Aht_Urhgan_Whitegate.npcs.Isdebaaq.onEventFinish" = func
     end
 end)
 
-m:addOverride("xi.zones.Aht_Urhgan_Whitegate.npcs.Lageegee.onEventFinish" = function(player, csid, option)
+m:addOverride("xi.zones.Aht_Urhgan_Whitegate.npcs.Lageegee.onEventFinish", function(player, csid, option)
     if csid == 276 then
         local selectiontype = bit.band(option, 0xF)
         if selectiontype == 1 and npcUtil.giveKeyItem(player, xi.ki.PERIQIA_ASSAULT_ORDERS) then
@@ -59,7 +60,7 @@ m:addOverride("xi.zones.Aht_Urhgan_Whitegate.npcs.Lageegee.onEventFinish" = func
     end
 end)
 
-m:addOverride("xi.zones.Aht_Urhgan_Whitegate.npcs.Yahsra.onEventFinish" = function(player, csid, option)
+m:addOverride("xi.zones.Aht_Urhgan_Whitegate.npcs.Yahsra.onEventFinish", function(player, csid, option)
     if csid == 273 then
         local selectiontype = bit.band(option, 0xF)
         if selectiontype == 1 and npcUtil.giveKeyItem(player, xi.ki.LEUJAOAM_ASSAULT_ORDERS) then
@@ -78,7 +79,7 @@ m:addOverride("xi.zones.Aht_Urhgan_Whitegate.npcs.Yahsra.onEventFinish" = functi
     end
 end)
 
-m:addOverride("xi.zones.Aht_Urhgan_Whitegate.npcs.Famad.onEventFinish" = function(player, csid, option)
+m:addOverride("xi.zones.Aht_Urhgan_Whitegate.npcs.Famad.onEventFinish", function(player, csid, option)
     if csid == 275 then
         local selectiontype = bit.band(option, 0xF)
         if selectiontype == 1 and npcUtil.giveKeyItem(player, xi.ki.LEBROS_ASSAULT_ORDERS) then
@@ -96,3 +97,5 @@ m:addOverride("xi.zones.Aht_Urhgan_Whitegate.npcs.Famad.onEventFinish" = functio
         end
     end
 end)
+
+return m 

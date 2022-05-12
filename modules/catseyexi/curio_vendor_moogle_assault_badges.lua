@@ -1,8 +1,9 @@
 -----------------------------------
 -- CatsEyeXI Custom NPCs
 -----------------------------------
+local m = Module:new("curio_vendor_moogle_assault_badges")
 
-m:addOverride("xi.zones.Port_San_dOria.npcs.Curio_Vendor_Moogle.onTrigger" = function(player, npc)
+m:addOverride("xi.zones.Port_San_dOria.npcs.Curio_Vendor_Moogle.onTrigger", function(player, npc)
     if (player:hasCompletedMission(xi.mission.log_id.TOAU, xi.mission.id.toau.CONFESSIONS_OF_ROYALTY) and not player:hasKeyItem(xi.keyItem.PSC_WILDCAT_BADGE)) then
 	    player:addKeyItem(xi.keyItem.PSC_WILDCAT_BADGE)
 		player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.keyItem.PSC_WILDCAT_BADGE)
@@ -40,7 +41,7 @@ m:addOverride("xi.zones.Port_San_dOria.npcs.Curio_Vendor_Moogle.onTrigger" = fun
         player:startEvent(9601)
 end)
 
-m:addOverride("xi.zones.Port_Bastok.npcs.Curio_Vendor_Moogle.onTrigger" = function(player, npc)
+m:addOverride("xi.zones.Port_Bastok.npcs.Curio_Vendor_Moogle.onTrigger",  function(player, npc)
     if (player:hasCompletedMission(xi.mission.log_id.TOAU, xi.mission.id.toau.CONFESSIONS_OF_ROYALTY) and not player:hasKeyItem(xi.keyItem.PSC_WILDCAT_BADGE)) then
 	    player:addKeyItem(xi.keyItem.PSC_WILDCAT_BADGE)
 		player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.keyItem.PSC_WILDCAT_BADGE)
@@ -78,7 +79,7 @@ m:addOverride("xi.zones.Port_Bastok.npcs.Curio_Vendor_Moogle.onTrigger" = functi
         player:startEvent(9601)
 end)
 
-m:addOverride("xi.zones.Port_Windurst.npcs.Curio_Vendor_Moogle.onTrigger" = function(player, npc)
+m:addOverride("xi.zones.Port_Windurst.npcs.Curio_Vendor_Moogle.onTrigger", function(player, npc)
     if (player:hasCompletedMission(xi.mission.log_id.TOAU, xi.mission.id.toau.CONFESSIONS_OF_ROYALTY) and not player:hasKeyItem(xi.keyItem.PSC_WILDCAT_BADGE)) then
 	    player:addKeyItem(xi.keyItem.PSC_WILDCAT_BADGE)
 		player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.keyItem.PSC_WILDCAT_BADGE)
@@ -115,3 +116,5 @@ m:addOverride("xi.zones.Port_Windurst.npcs.Curio_Vendor_Moogle.onTrigger" = func
 	end	
         player:startEvent(9601)
 end)
+
+return m 

@@ -1,6 +1,9 @@
 -----------------------------------
 -- CatsEyeXI Custom NPCs
 -----------------------------------
+require("modules/module_utils")
+
+local m = Module:new("crafting_relics")
 
 m:addOverride("xi.zones.Lower_Jeuno.npcs.Momiji.onTrade", function(player, npc, trade)
     local tradeHasSpharai =  npcUtil.tradeHasExactly(trade, xi.items.SPHARAI)
@@ -31,11 +34,9 @@ m:addOverride("xi.zones.Lower_Jeuno.npcs.Momiji.onTrade", function(player, npc, 
         player:PrintToPlayer("Momiji: What?! I don't want this, go away!!", 0xD)
         return
     end
-    
 end)
 
-
-m:addOverride("xi.zones.Lower_Jeuno.npcs.Momiji.onTrigger" = function(player, npc)
+m:addOverride("xi.zones.Lower_Jeuno.npcs.Momiji.onTrigger", function(player, npc)
     local playerName = player:getName()
     local woodworkingLevel = player:getCharSkillLevel(xi.skill.WOODWORKING)
     local smithingLevel = player:getCharSkillLevel(xi.skill.SMITHING)
@@ -158,3 +159,5 @@ m:addOverride("xi.zones.Lower_Jeuno.npcs.Momiji.onTrigger" = function(player, np
     player:PrintToPlayer("Woodworking - Spharai ", 0xD)
     return
 end)
+
+return m

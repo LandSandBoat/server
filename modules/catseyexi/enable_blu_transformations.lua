@@ -1,8 +1,9 @@
 -----------------------------------
 -- CatsEyeXI Custom NPCs
 -----------------------------------
+local m = Module:new("enable_blu_transformations")
 
-m:addOverride("xi.zones.Alzadaal_Undersea_Ruins.npcs.blank_transformations.onTrigger" = function(player, npc)
+m:addOverride("xi.zones.Alzadaal_Undersea_Ruins.npcs.blank_transformations.onTrigger", function(player, npc)
     local transformationsProgress = player:getCharVar("TransformationsProgress")
     -- TRANSFORMATIONS
     if transformationsProgress == 4 then
@@ -15,3 +16,5 @@ m:addOverride("xi.zones.Alzadaal_Undersea_Ruins.npcs.blank_transformations.onTri
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     end
 end)
+
+return m 

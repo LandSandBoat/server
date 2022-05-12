@@ -1,8 +1,9 @@
 -----------------------------------
 -- CatsEyeXI Custom NPCs
 -----------------------------------
+local m = Module:new("salvage_gear")
 
-m:addOverride("xi.zones.Aht_Urhgan_Whitegate.npcs.Ghanraam.onTrade" = function(player, npc, trade)
+m:addOverride("xi.zones.Aht_Urhgan_Whitegate.npcs.Ghanraam.onTrade", function(player, npc, trade)
     local orichalcumIngots = npcUtil.tradeHas(trade, {{ 747, 6 }})
     local wootzIngots = npcUtil.tradeHas(trade, {{ 686, 6 }})
     local bloodwoodLumber = npcUtil.tradeHas(trade, {{ 730, 6 }})
@@ -182,3 +183,5 @@ m:addOverride("xi.zones.Aht_Urhgan_Whitegate.npcs.Ghanraam.onTrade" = function(p
     end
 
 end)
+
+return m 

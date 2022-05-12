@@ -1,8 +1,9 @@
 -----------------------------------
 -- CatsEyeXI Custom NPCs
 -----------------------------------
+local m = Module:new("mythic_weapon")
 
-m:addOverride("xi.zones.Nashmau.npcs.Paparoon.onTrade" = function(player, npc, trade)
+m:addOverride("xi.zones.Nashmau.npcs.Paparoon.onTrade", function(player, npc, trade)
     local alexandrite = 2488
 	local catsEye = 3443
 	local alexCount = trade:getItemCount()
@@ -38,7 +39,7 @@ m:addOverride("xi.zones.Nashmau.npcs.Paparoon.onTrade" = function(player, npc, t
     end
 end)
 
-m:addOverride("xi.zones.Nashmau.npcs.Paparoon.onTrigger" = function(player, npc)
+m:addOverride("xi.zones.Nashmau.npcs.Paparoon.onTrigger", function(player, npc)
     local storedAlex = player:getCharVar("Paparoon_AlexStored")
 	local hasCaptain = (player:hasKeyItem(xi.ki.CAPTAIN_WILDCAT_BADGE) == true)
 	local catsEye = 3443
@@ -58,7 +59,7 @@ m:addOverride("xi.zones.Nashmau.npcs.Paparoon.onTrigger" = function(player, npc)
 	end
 end)
 
-m:addOverride("xi.zones.Caedarva_Mire.npcs.Seaprinces_Tombstone.onTrade" = function(player, npc, trade)
+m:addOverride("xi.zones.Caedarva_Mire.npcs.Seaprinces_Tombstone.onTrade", function(player, npc, trade)
     local tinninsFang = npcUtil.tradeHas(trade, 2609)
 	local sarameyasHide = npcUtil.tradeHas(trade, 2619)
 	local tygersTail = npcUtil.tradeHas(trade, 2629)
@@ -157,7 +158,7 @@ m:addOverride("xi.zones.Caedarva_Mire.npcs.Seaprinces_Tombstone.onTrade" = funct
 	end	
 end)
 
-m:addOverride("xi.zones.Caedarva_Mire.npcs.Seaprinces_Tombstone.onEventFinish" = function(player, csid, option)
+m:addOverride("xi.zones.Caedarva_Mire.npcs.Seaprinces_Tombstone.onEventFinish", function(player, csid, option)
 	if csid == 25 then
 	    if player:getCharVar("MythicReward") == 18991 then
          	player:setCharVar("PendingMythic", 0)
@@ -262,3 +263,5 @@ m:addOverride("xi.zones.Caedarva_Mire.npcs.Seaprinces_Tombstone.onEventFinish" =
         end
 	end
 end)
+
+return m 

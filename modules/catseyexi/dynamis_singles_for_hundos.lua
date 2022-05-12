@@ -1,6 +1,7 @@
 -----------------------------------
 -- CatsEyeXI Custom NPCs
 -----------------------------------
+local m = Module:new("dynamis_singles_for_hundos")
 
 m:addOverride("xi.zones.Castle_Oztroja.npcs.Antiqix.onTrade", function(player, npc, trade)
     local gil = trade:getGil()
@@ -160,3 +161,5 @@ m:addOverride("xi.zones.Davoi.npcs.Lootblox.onTrade", function(player, npc, trad
         end
     end
 end)
+
+return m 

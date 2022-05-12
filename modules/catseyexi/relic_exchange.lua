@@ -1,8 +1,9 @@
 -----------------------------------
 -- CatsEyeXI Custom NPCs
 -----------------------------------
+local m = Module:new("relic_exchange")
 
-m:addOverride("xi.zones.Beaucedine_Glacier.npcs.relic.onTrade" = function(player, npc, trade)
+m:addOverride("xi.zones.Beaucedine_Glacier.npcs.relic.onTrade", function(player, npc, trade)
     if (player:getCharVar("RELIC_IN_PROGRESS") == xi.items.VALHALLA and npcUtil.tradeHas(trade, {xi.items.RANPERRE_GOLDPIECE, xi.items.INTRICATE_FRAGMENT, xi.items.SHARD_OF_NECROPSYCHE, xi.items.VALHALLA})) then -- currency, shard, necropsyche, stage 4
         player:startEvent(139, xi.items.RAGNAROK)
     end
@@ -48,13 +49,13 @@ m:addOverride("xi.zones.Beaucedine_Glacier.npcs.relic.onTrade" = function(player
     end
 end)
 
-m:addOverride("xi.zones.Beaucedine_Glacier.npcs.relic.onTrigger" = function(player, npc)
+m:addOverride("xi.zones.Beaucedine_Glacier.npcs.relic.onTrigger", function(player, npc)
     player:PrintToPlayer("???: Hail to you hardened traveler,", 0xD)
     player:PrintToPlayer("???: Do you desire to switch your ally? Trade your relic back to me together with 10,000,000 gil", 0xD)
 	player:PrintToPlayer("???: and I'll exchange it for my soul. Let me return to the battlefield!", 0xD)
 end)
 
-m:addOverride("xi.zones.Carpenters_Landing.npcs.relic.onTrade" = function(player, npc, trade)
+m:addOverride("xi.zones.Carpenters_Landing.npcs.relic.onTrade", function(player, npc, trade)
     if (player:getCharVar("RELIC_IN_PROGRESS") == xi.items.VALHALLA and npcUtil.tradeHas(trade, {xi.items.RANPERRE_GOLDPIECE, xi.items.INTRICATE_FRAGMENT, xi.items.SHARD_OF_NECROPSYCHE, xi.items.VALHALLA})) then -- currency, shard, necropsyche, stage 4
         player:startEvent(139, xi.items.RAGNAROK)
     end
@@ -100,13 +101,13 @@ m:addOverride("xi.zones.Carpenters_Landing.npcs.relic.onTrade" = function(player
     end
 end)
 
-m:addOverride("xi.zones.Carpenters_Landing.npcs.relic.onTrigger" = function(player, npc)
+m:addOverride("xi.zones.Carpenters_Landing.npcs.relic.onTrigger", function(player, npc)
     player:PrintToPlayer("???: Hail to you hardened traveler,", 0xD)
     player:PrintToPlayer("???: Do you desire to switch your ally? Trade your relic back to me together with 10,000,000 gil", 0xD)
 	player:PrintToPlayer("???: and I'll exchange it for my soul. Let me return to the battlefield!", 0xD)
 end)
 
-m:addOverride("xi.zones.Castle_Oztroja.npcs.relic.onTrade" = function(player, npc, trade)
+m:addOverride("xi.zones.Castle_Oztroja.npcs.relic.onTrade", function(player, npc, trade)
     if (player:getCharVar("RELIC_IN_PROGRESS") == xi.items.CAESTUS and npcUtil.tradeHas(trade, {xi.items.TEN_THOUSAND_BYNE_BILL, xi.items.MYSTIC_FRAGMENT, xi.items.SHARD_OF_NECROPSYCHE, xi.items.CAESTUS})) then -- currency, shard, necropsyche, stage 4
         player:startEvent(59, xi.items.SPHARAI)
     end
@@ -152,13 +153,13 @@ m:addOverride("xi.zones.Castle_Oztroja.npcs.relic.onTrade" = function(player, np
     end
 end)
 
-m:addOverride("xi.zones.Castle_Oztroja.npcs.relic.onTrigger" = function(player, npc)
+m:addOverride("xi.zones.Castle_Oztroja.npcs.relic.onTrigger", function(player, npc)
     player:PrintToPlayer("???: Hail to you hardened traveler,", 0xD)
     player:PrintToPlayer("???: Do you desire to switch your ally? Trade your relic back to me together with 10,000,000 gil", 0xD)
 	player:PrintToPlayer("???: and I'll exchange it for my soul. Let me return to the battlefield!", 0xD)
 end)
 
-m:addOverride("xi.zones.Dragons_Aery.npcs.relic.onTrade" = function(player, npc, trade)
+m:addOverride("xi.zones.Dragons_Aery.npcs.relic.onTrade", function(player, npc, trade)
     if (player:getCharVar("RELIC_IN_PROGRESS") == xi.items.CALIBURN and npcUtil.tradeHas(trade, {xi.items.RANPERRE_GOLDPIECE, xi.items.HOLY_FRAGMENT, xi.items.SHARD_OF_NECROPSYCHE, xi.items.CALIBURN})) then -- currency, shard, necropsyche, stage 4
         player:startEvent(3, xi.items.EXCALIBUR)
 	end
@@ -205,13 +206,13 @@ m:addOverride("xi.zones.Dragons_Aery.npcs.relic.onTrade" = function(player, npc,
 
 end)
 
-m:addOverride("xi.zones.Dragons_Aery.npcs.relic.onTrigger" = function(player, npc)
+m:addOverride("xi.zones.Dragons_Aery.npcs.relic.onTrigger", function(player, npc)
     player:PrintToPlayer("???: Hail to you hardened traveler,", 0xD)
     player:PrintToPlayer("???: Do you desire to switch your ally? Trade your relic back to me together with 10,000,000 gil", 0xD)
 	player:PrintToPlayer("???: and I'll exchange it for my soul. Let me return to the battlefield!", 0xD)
 end)
 
-m:addOverride("xi.zones.Horlais_Peak.npcs.relic.onTrade" = function(player, npc, trade)
+m:addOverride("xi.zones.Horlais_Peak.npcs.relic.onTrade", function(player, npc, trade)
     if (player:getCharVar("RELIC_IN_PROGRESS") == xi.items.TOTSUKANOTSURUGI and npcUtil.tradeHas(trade, {xi.items.RANPERRE_GOLDPIECE, xi.items.DIVINE_FRAGMENT, xi.items.SHARD_OF_NECROPSYCHE, xi.items.TOTSUKANOTSURUGI})) then -- currency, shard, necropsyche, stage 4
         player:startEvent(13, xi.items.AMANOMURAKUMO)
     end
@@ -257,13 +258,13 @@ m:addOverride("xi.zones.Horlais_Peak.npcs.relic.onTrade" = function(player, npc,
     end
 end)
 
-m:addOverride("xi.zones.Horlais_Peak.npcs.relic.onTrigger" = function(player, npc)
+m:addOverride("xi.zones.Horlais_Peak.npcs.relic.onTrigger", function(player, npc)
     player:PrintToPlayer("???: Hail to you hardened traveler,", 0xD)
     player:PrintToPlayer("???: Do you desire to switch your ally? Trade your relic back to me together with 10,000,000 gil", 0xD)
 	player:PrintToPlayer("???: and I'll exchange it for my soul. Let me return to the battlefield!", 0xD)
 end)
 
-m:addOverride("xi.zones.Ifrits_Cauldron.npcs.relic.onTrade" = function(player, npc, trade)
+m:addOverride("xi.zones.Ifrits_Cauldron.npcs.relic.onTrade", function(player, npc, trade)
     if
         player:getCharVar("RELIC_IN_PROGRESS") == xi.items.THYRUS and
         npcUtil.tradeHas(trade, {xi.items.RIMILALA_STRIPESHELL, xi.items.CELESTIAL_FRAGMENT, xi.items.SHARD_OF_NECROPSYCHE, xi.items.THYRUS}) -- currency, shard, necropsyche, stage 4
@@ -312,13 +313,13 @@ m:addOverride("xi.zones.Ifrits_Cauldron.npcs.relic.onTrade" = function(player, n
     end
 end)
 
-m:addOverride("xi.zones.Ifrits_Cauldron.npcs.relic.onTrigger" = function(player, npc)
+m:addOverride("xi.zones.Ifrits_Cauldron.npcs.relic.onTrigger", function(player, npc)
     player:PrintToPlayer("???: Hail to you hardened traveler,", 0xD)
     player:PrintToPlayer("???: Do you desire to switch your ally? Trade your relic back to me together with 10,000,000 gil", 0xD)
 	player:PrintToPlayer("???: and I'll exchange it for my soul. Let me return to the battlefield!", 0xD)
 end)
 
-m:addOverride("xi.zones.Metalworks.npcs.relic.onTrade" = function(player, npc, trade)
+m:addOverride("xi.zones.Metalworks.npcs.relic.onTrade", function(player, npc, trade)
     if (player:getCharVar("RELIC_IN_PROGRESS") == xi.items.FERDINAND and npcUtil.tradeHas(trade, {xi.items.TEN_THOUSAND_BYNE_BILL, xi.items.ETHEREAL_FRAGMENT, xi.items.SHARD_OF_NECROPSYCHE, xi.items.FERDINAND})) then -- currency, shard, necropsyche, stage 4
         player:startEvent(843, xi.items.ANNIHILATOR)
     end
@@ -364,13 +365,13 @@ m:addOverride("xi.zones.Metalworks.npcs.relic.onTrade" = function(player, npc, t
     end
 end)
 
-m:addOverride("xi.zones.Metalworks.npcs.relic.onTrigger" = function(player, npc)
+m:addOverride("xi.zones.Metalworks.npcs.relic.onTrigger", function(player, npc)
     player:PrintToPlayer("???: Hail to you hardened traveler,", 0xD)
     player:PrintToPlayer("???: Do you desire to switch your ally? Trade your relic back to me together with 10,000,000 gil", 0xD)
 	player:PrintToPlayer("???: and I'll exchange it for my soul. Let me return to the battlefield!", 0xD)
 end)
 
-m:addOverride("xi.zones.North_Gustaberg.npcs.relic.onTrade" = function(player, npc, trade)
+m:addOverride("xi.zones.North_Gustaberg.npcs.relic.onTrade", function(player, npc, trade)
     if player:getCharVar("RELIC_IN_PROGRESS") == xi.items.BEC_DE_FAUCON and npcUtil.tradeHas(trade, {xi.items.RIMILALA_STRIPESHELL, xi.items.TENEBROUS_FRAGMENT, xi.items.SHARD_OF_NECROPSYCHE, xi.items.BEC_DE_FAUCON}) then -- currency, shard, necropsyche, stage 4
         player:startEvent(254, xi.items.APOCALYPSE)
     end
@@ -416,13 +417,13 @@ m:addOverride("xi.zones.North_Gustaberg.npcs.relic.onTrade" = function(player, n
     end
 end)
 
-m:addOverride("xi.zones.North_Gustaberg.npcs.relic.onTrigger" = function(player, npc)
+m:addOverride("xi.zones.North_Gustaberg.npcs.relic.onTrigger", function(player, npc)
     player:PrintToPlayer("???: Hail to you hardened traveler,", 0xD)
     player:PrintToPlayer("???: Do you desire to switch your ally? Trade your relic back to me together with 10,000,000 gil", 0xD)
 	player:PrintToPlayer("???: and I'll exchange it for my soul. Let me return to the battlefield!", 0xD)
 end)
 
-m:addOverride("xi.zones.RuAun_Gardens.npcs.relic.onTrade" = function(player, npc, trade)
+m:addOverride("xi.zones.RuAun_Gardens.npcs.relic.onTrade", function(player, npc, trade)
     if
         player:getCharVar("RELIC_IN_PROGRESS") == xi.items.GAE_ASSAIL and
         npcUtil.tradeHasExactly(trade, {xi.items.RIMILALA_STRIPESHELL, xi.items.STELLAR_FRAGMENT, xi.items.SHARD_OF_NECROPSYCHE, xi.items.GAE_ASSAIL})
@@ -471,13 +472,13 @@ m:addOverride("xi.zones.RuAun_Gardens.npcs.relic.onTrade" = function(player, npc
     end
 end)
 
-m:addOverride("xi.zones.RuAun_Gardens.npcs.relic.onTrigger" = function(player, npc)
+m:addOverride("xi.zones.RuAun_Gardens.npcs.relic.onTrigger", function(player, npc)
     player:PrintToPlayer("???: Hail to you hardened traveler,", 0xD)
     player:PrintToPlayer("???: Do you desire to switch your ally? Trade your relic back to me together with 10,000,000 gil", 0xD)
 	player:PrintToPlayer("???: and I'll exchange it for my soul. Let me return to the battlefield!", 0xD)
 end)
 
-m:addOverride("xi.zones.RuLude_Gardens.npcs.relic.onTrade" = function(player, npc, trade)
+m:addOverride("xi.zones.RuLude_Gardens.npcs.relic.onTrade", function(player, npc, trade)
     if
         player:getCharVar("RELIC_IN_PROGRESS") == xi.items.ABADDON_KILLER and
         npcUtil.tradeHas(trade, {xi.items.TEN_THOUSAND_BYNE_BILL, xi.items.SERAPHIC_FRAGMENT, xi.items.SHARD_OF_NECROPSYCHE, xi.items.ABADDON_KILLER})
@@ -526,13 +527,13 @@ m:addOverride("xi.zones.RuLude_Gardens.npcs.relic.onTrade" = function(player, np
     end
 end)
 
-m:addOverride("xi.zones.RuLude_Gardens.npcs.relic.onTrigger" = function(player, npc)
+m:addOverride("xi.zones.RuLude_Gardens.npcs.relic.onTrigger", function(player, npc)
     player:PrintToPlayer("???: Hail to you hardened traveler,", 0xD)
     player:PrintToPlayer("???: Do you desire to switch your ally? Trade your relic back to me together with 10,000,000 gil", 0xD)
 	player:PrintToPlayer("???: and I'll exchange it for my soul. Let me return to the battlefield!", 0xD)
 end)
 
-m:addOverride("xi.zones.Sea_Serpent_Grotto.npcs.relic.onTrade" = function(player, npc, trade)
+m:addOverride("xi.zones.Sea_Serpent_Grotto.npcs.relic.onTrade", function(player, npc, trade)
     if player:getCharVar("RELIC_IN_PROGRESS") == xi.items.YOSHIMITSU and npcUtil.tradeHas(trade, {xi.items.TEN_THOUSAND_BYNE_BILL, xi.items.DEMONIAC_FRAGMENT, xi.items.SHARD_OF_NECROPSYCHE, xi.items.YOSHIMITSU}) then -- currency, shard, necropsyche, stage 4
         player:startEvent(11, xi.items.KIKOKU)
     end
@@ -578,13 +579,13 @@ m:addOverride("xi.zones.Sea_Serpent_Grotto.npcs.relic.onTrade" = function(player
     end
 end)
 
-m:addOverride("xi.zones.Sea_Serpent_Grotto.npcs.relic.onTrigger" = function(player, npc)
+m:addOverride("xi.zones.Sea_Serpent_Grotto.npcs.relic.onTrigger", function(player, npc)
     player:PrintToPlayer("???: Hail to you hardened traveler,", 0xD)
     player:PrintToPlayer("???: Do you desire to switch your ally? Trade your relic back to me together with 10,000,000 gil", 0xD)
 	player:PrintToPlayer("???: and I'll exchange it for my soul. Let me return to the battlefield!", 0xD)
 end)
 
-m:addOverride("xi.zones.Cape_Terrigan.npcs.relic.onTrade" = function(player, npc, trade)
+m:addOverride("xi.zones.Cape_Terrigan.npcs.relic.onTrade", function(player, npc, trade)
     if (player:getCharVar("RELIC_IN_PROGRESS") == xi.items.FUTATOKOROTO and npcUtil.tradeHas(trade, {xi.items.RANPERRE_GOLDPIECE, xi.items.SNARLED_FRAGMENT, xi.items.SHARD_OF_NECROPSYCHE, xi.items.FUTATOKOROTO})) then -- currency, shard, necropsyche, stage 4
         player:startEvent(18, xi.items.YOICHINOYUMI)
     end
@@ -630,13 +631,13 @@ m:addOverride("xi.zones.Cape_Terrigan.npcs.relic.onTrade" = function(player, npc
     end
 end)
 
-m:addOverride("xi.zones.Cape_Terrigan.npcs.relic.onTrigger" = function(player, npc)
+m:addOverride("xi.zones.Cape_Terrigan.npcs.relic.onTrigger", function(player, npc)
     player:PrintToPlayer("???: Hail to you hardened traveler,", 0xD)
     player:PrintToPlayer("???: Do you desire to switch your ally? Trade your relic back to me together with 10,000,000 gil", 0xD)
 	player:PrintToPlayer("???: and I'll exchange it for my soul. Let me return to the battlefield!", 0xD)
 end)
 
-m:addOverride("xi.zones.Valley_of_Sorrows.npcs.relic.onTrade" = function(player, npc, trade)
+m:addOverride("xi.zones.Valley_of_Sorrows.npcs.relic.onTrade", function(player, npc, trade)
     if (player:getCharVar("RELIC_IN_PROGRESS") == xi.items.MILLENNIUM_HORN and npcUtil.tradeHas(trade, {xi.items.RIMILALA_STRIPESHELL, xi.items.MYSTERIAL_FRAGMENT, xi.items.SHARD_OF_NECROPSYCHE, xi.items.MILLENNIUM_HORN})) then -- currency, shard, necropsyche, stage 4
         player:startEvent(15, xi.items.GJALLARHORN)
     end
@@ -682,23 +683,23 @@ m:addOverride("xi.zones.Valley_of_Sorrows.npcs.relic.onTrade" = function(player,
     end
 end)
 
-m:addOverride("xi.zones.Valley_of_Sorrows.npcs.relic.onTrigger" = function(player, npc)
+m:addOverride("xi.zones.Valley_of_Sorrows.npcs.relic.onTrigger", function(player, npc)
     player:PrintToPlayer("???: Hail to you hardened traveler,", 0xD)
     player:PrintToPlayer("???: Do you desire to switch your ally? Trade your relic back to me together with 10,000,000 gil", 0xD)
 	player:PrintToPlayer("???: and I'll exchange it for my soul. Let me return to the battlefield!", 0xD)
 end)
 
-m:addOverride("xi.zones.Western_Altepa_Desert.npcs.relic.onTrade" = function(player, npc, trade)
+m:addOverride("xi.zones.Western_Altepa_Desert.npcs.relic.onTrade", function(player, npc, trade)
 
 end)
 
-m:addOverride("xi.zones.Western_Altepa_Desert.npcs.relic.onTrigger" = function(player, npc)
+m:addOverride("xi.zones.Western_Altepa_Desert.npcs.relic.onTrigger", function(player, npc)
     player:PrintToPlayer("???: Hail to you hardened traveler,", 0xD)
     player:PrintToPlayer("???: Do you desire to switch your ally? Trade your relic back to me together with 10,000,000 gil", 0xD)
 	player:PrintToPlayer("???: and I'll exchange it for my soul. Let me return to the battlefield!", 0xD)
 end)
 
-m:addOverride("xi.zones.The_Sanctuary_of_ZiTah.npcs.relic.onTrade" = function(player, npc, trade)
+m:addOverride("xi.zones.The_Sanctuary_of_ZiTah.npcs.relic.onTrade", function(player, npc, trade)
     local currentRelic = player:getCharVar("RELIC_IN_PROGRESS")
 
     -- Mandau
@@ -757,8 +758,10 @@ m:addOverride("xi.zones.The_Sanctuary_of_ZiTah.npcs.relic.onTrade" = function(pl
     end
 end)
 
-m:addOverride("xi.zones.The_Sanctuary_of_ZiTah.npcs.relic.onTrigger" = function(player, npc)
+m:addOverride("xi.zones.The_Sanctuary_of_ZiTah.npcs.relic.onTrigger", function(player, npc)
     player:PrintToPlayer("???: Hail to you hardened traveler,", 0xD)
     player:PrintToPlayer("???: Do you desire to switch your ally? Trade your relic back to me together with 10,000,000 gil", 0xD)
 	player:PrintToPlayer("???: and I'll exchange it for my soul. Let me return to the battlefield!", 0xD)
 end)
+
+return m 

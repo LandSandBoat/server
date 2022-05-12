@@ -1,8 +1,9 @@
 -----------------------------------
 -- CatsEyeXI Custom NPCs
 -----------------------------------
+local m = Module:new("kupo_shield")
 
-m:addOverride("xi.zones.Bastok_Markets.npcs.Nudara.hasKeyItem" = function(player)
+m:addOverride("xi.zones.Bastok_Markets.npcs.Nudara.hasKeyItem", function(player)
     if (player:hasKeyItem(xi.keyItem.WAY_OF_THE_ALCHEMIST) or
         player:hasKeyItem(xi.keyItem.WAY_OF_THE_BLACKSMITH) or
         player:hasKeyItem(xi.keyItem.WAY_OF_THE_BONEWORKER) or
@@ -18,7 +19,7 @@ m:addOverride("xi.zones.Bastok_Markets.npcs.Nudara.hasKeyItem" = function(player
 	return false
 end)
 
-m:addOverride("xi.zones.Bastok_Markets.npcs.Nudara.announceOptions" = function(player)
+m:addOverride("xi.zones.Bastok_Markets.npcs.Nudara.announceOptions", function(player)
     if (player:hasKeyItem(xi.keyItem.WAY_OF_THE_ALCHEMIST)) then
         player:PrintToPlayer(
             "Trade me a [Cursed Mail] or a [Saida Ring] for a special shield.")
@@ -46,7 +47,7 @@ m:addOverride("xi.zones.Bastok_Markets.npcs.Nudara.announceOptions" = function(p
     end
 end)
 
-m:addOverride("xi.zones.Bastok_Markets.npcs.Nudara.validateAndTradeItem" = function(player, trade)
+m:addOverride("xi.zones.Bastok_Markets.npcs.Nudara.validateAndTradeItem", function(player, trade)
     local validtrade = false
     if (player:getCharVar("KupoShield") ~= 1) then
         if (player:hasKeyItem(xi.keyItem.WAY_OF_THE_ALCHEMIST) and
@@ -86,16 +87,18 @@ m:addOverride("xi.zones.Bastok_Markets.npcs.Nudara.validateAndTradeItem" = funct
     end
 end)
 
-m:addOverride("xi.zones.Bastok_Markets.npcs.Nudara.onTrade" = function(player, npc, trade)
+m:addOverride("xi.zones.Bastok_Markets.npcs.Nudara.onTrade", function(player, npc, trade)
     if(trade:getItemCount() >0) then
         validateAndTradeItem(player, trade)
     end
 end)
 
-m:addOverride("xi.zones.Bastok_Markets.npcs.Nudara.onTrigger" = function(player, npc)
+m:addOverride("xi.zones.Bastok_Markets.npcs.Nudara.onTrigger", function(player, npc)
     if (hasKeyItem(player) == true) then
         announceOptions(player)
     else
         player:startEvent(118)
     end
 end)
+
+return m 

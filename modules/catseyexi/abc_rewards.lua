@@ -1,10 +1,10 @@
 -----------------------------------
 -- CatsEyeXI Custom NPCs
 -----------------------------------
+require("modules/module_utils")
+local m = Module:new("abc_rewards")
 
 m:addOverride("xi.zones.Port_Jeuno.npcs.Cumetouflaix.onTrade", function(player, npc, trade)
-    local ID = require("scripts/zones/Port_Jeuno/IDs")
-
     local hasCompletedCoP = player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DAWN)
     local hasCompletedZM = player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_CELESTIAL_NEXUS)
     local hasCompletedTOAU = player:hasCompletedMission(xi.mission.log_id.TOAU, xi.mission.id.toau.THE_EMPRESS_CROWNED)
@@ -116,3 +116,5 @@ m:addOverride("xi.zones.Port_Jeuno.npcs.Cumetouflaix.onTrade", function(player, 
 	end
 	
 end)
+
+return m 

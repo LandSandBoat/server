@@ -1,8 +1,9 @@
------------------------------------
+---------------------------------
 -- CatsEyeXI Custom NPCs
 -----------------------------------
+local m = Module:new("mythic_weaponskills")
 
-m:addOverride("xi.zones.Aht_Urhgan_Whitegate.npcs.Ahaadah.onTrade" = function(player, npc, trade)
+m:addOverride("xi.zones.Aht_Urhgan_Whitegate.npcs.Ahaadah.onTrade", function(player, npc, trade)
 	local gil = trade:getGil()
     local count = trade:getItemCount()
 	local tradeMerits = player:getMeritCount()
@@ -34,7 +35,7 @@ m:addOverride("xi.zones.Aht_Urhgan_Whitegate.npcs.Ahaadah.onTrade" = function(pl
 	end
 end)
 
-m:addOverride("xi.zones.Aht_Urhgan_Whitegate.npcs.Ahaadah.onTrigger" = function(player, npc)
+m:addOverride("xi.zones.Aht_Urhgan_Whitegate.npcs.Ahaadah.onTrigger", function(player, npc)
 	-- check to see if player has successfully completed any of the Trial Weapon quests
 	local BladeKuStatus = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.BUGI_SODEN)
 	local SavageBladeStatus = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.OLD_WOUNDS)
@@ -77,7 +78,7 @@ m:addOverride("xi.zones.Aht_Urhgan_Whitegate.npcs.Ahaadah.onTrigger" = function(
 	end
 end)
 
-m:addOverride("xi.zones.RuLude_Gardens.npcs.Falreze.onTrade" = function(player, npc, trade)
+m:addOverride("xi.zones.RuLude_Gardens.npcs.Falreze.onTrade", function(player, npc, trade)
 	local KingsJusticeWeapon = npcUtil.tradeHas(trade, 20865)
 	local AsceticsFuryWeapon = npcUtil.tradeHas(trade, 27882)
 	local MysticBoonWeapon = npcUtil.tradeHas(trade, 21119)
@@ -208,7 +209,7 @@ m:addOverride("xi.zones.RuLude_Gardens.npcs.Falreze.onTrade" = function(player, 
 	end
 end)
 
-m:addOverride("xi.zones.RuLude_Gardens.npcs.Falreze.onTrigger" = function(player, npc)
+m:addOverride("xi.zones.RuLude_Gardens.npcs.Falreze.onTrigger", function(player, npc)
 	if (player:hasKeyItem(xi.ki.HYDRA_CORPS_COMMAND_SCEPTER) and player:hasKeyItem(xi.ki.HYDRA_CORPS_EYEGLASS) and
 		player:hasKeyItem(xi.ki.HYDRA_CORPS_LANTERN) and player:hasKeyItem(xi.ki.HYDRA_CORPS_TACTICAL_MAP) and 
 		player:getCharVar("[CXI]MythicWsQuestPart1") == 1) then 
@@ -223,3 +224,5 @@ m:addOverride("xi.zones.RuLude_Gardens.npcs.Falreze.onTrigger" = function(player
 		player:startEvent(121)
 	end
 end)
+
+return m 
