@@ -14,7 +14,7 @@ require("scripts/globals/msg")
 local ability_object = {}
 
 ability_object.onAbilityCheck = function(player, target, ability)
-    return xi.job_utils.geomancer.geoOnAbilityCheck(player, target, ability)
+    return xi.job_utils.geomancer.geoOnLifeCycleAbilityCheck(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)

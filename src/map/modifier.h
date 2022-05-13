@@ -570,17 +570,18 @@ enum class Mod
     GRIMOIRE_SPELLCASTING    = 489, // "Grimoire: Reduces spellcasting time" bonus
 
     // Geo
-    CARDINAL_CHANT       = 959,
-    INDI_DURATION        = 960,
-    GEOMANCY_BONUS       = 961, // Used to increase potency of "Geomancy +" items (only the highest value is counted)
-    WIDENED_COMPASS      = 962,
-    MENDING_HALATION     = 968,
-    RADIAL_ARCANA        = 969,
-    CURATIVE_RECANTATION = 970,
-    PRIMEVAL_ZEAL        = 971,
-    FULL_CIRCLE          = 1025, // Increases the initial multiplier on MP returned via Full Circle
-    BOLSTER_EFFECT       = 1028, // Adds bonus duration as +N seconds
-    LIFE_CYCLE_EFFECT    = 1029, // Adds bonus HP% returned to the luopan when using Life Cycle
+    CARDINAL_CHANT          = 959,
+    INDI_DURATION           = 960,
+    GEOMANCY_BONUS          = 961, // Used to increase potency of "Geomancy +" items (only the highest value is counted)
+    WIDENED_COMPASS         = 962,
+    MENDING_HALATION        = 968, // This mod should never exceed 1 as the multiplier is the merit, this is basicaly just a bool mod
+    RADIAL_ARCANA           = 969,
+    CURATIVE_RECANTATION    = 970,
+    PRIMEVAL_ZEAL           = 971,
+    FULL_CIRCLE             = 1025, // Increases the initial multiplier on MP returned via Full Circle
+    BOLSTER_EFFECT          = 1028, // Adds bonus duration as +N seconds
+    LIFE_CYCLE_EFFECT       = 1029, // Adds bonus HP% returned to the luopan when using Life Cycle
+    AURA_SIZE               = 1030, // Used to extend aura size, the formula is 6.25 + (PEntity->getMod(Mod::AURA_SIZE) / 100) so adding 100 will make this 7.25
 
     ENSPELL           = 341, // stores the type of enspell active (0 if nothing)
     ENSPELL_DMG       = 343, // stores the base damage of the enspell before reductions
@@ -886,7 +887,7 @@ enum class Mod
     // 888
     // 936
     //
-    // SPARE = 1030, and onward
+    // SPARE = 1031, and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

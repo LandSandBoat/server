@@ -759,6 +759,7 @@ xi.items =
     CRESCENT_FISH                   = 4473,
     THREE_EYED_FISH                 = 4478,
     DRAGON_HEART                    = 4486,
+    BOWL_OF_WISDOM_SOUP             = 4592,
     CUP_OF_WINDURSTIAN_TEA          = 4493,
     CHUNK_OF_GOBLIN_CHOCOLATE       = 4495,
     CRYSTAL_BASS                    = 4528,

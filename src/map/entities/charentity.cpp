@@ -754,11 +754,12 @@ bool CCharEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
 
     if (targetFlags & TARGET_PLAYER_PARTY_ENTRUST)
     {
+        // Can cast on self and others in party but potency gets no bonuses from equipment mods if entrust is active
         if (!PInitiator->StatusEffectContainer->HasStatusEffect(EFFECT_ENTRUST) && PInitiator == this)
         {
             return true;
         }
-        else if (PInitiator->StatusEffectContainer->HasStatusEffect(EFFECT_ENTRUST) && ((PParty && PInitiator->PParty == PParty) && PInitiator != this))
+        else if (PInitiator->StatusEffectContainer->HasStatusEffect(EFFECT_ENTRUST) && ((PParty && PInitiator->PParty == PParty) || PInitiator == this))
         {
             return true;
         }
@@ -1226,6 +1227,17 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
                     }
 
                     addMP((int32)-mpCost);
+
+                    if (PAbility->getValidTarget() == TARGET_SELF)
+                    {
+                        PPetTarget = PPet->targid;
+                    }
+                }
+                else if (PAbility->getID() >= ABILITY_CONCENTRIC_PULSE && PAbility->getID() <= ABILITY_RADIAL_ARCANA)
+                {
+                    // use the animation id to get the pet version of this ability
+                    PAbility->setID(PAbility->getAnimationID());
+                    action.actionid = PAbility->getAnimationID();
 
                     if (PAbility->getValidTarget() == TARGET_SELF)
                     {

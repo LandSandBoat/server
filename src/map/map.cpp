@@ -399,8 +399,6 @@ void ReportTracyStats()
 
 int32 do_sockets(fd_set* rfd, duration next)
 {
-    TracyZoneScoped;
-
     message::handle_incoming();
 
     struct timeval timeout;
