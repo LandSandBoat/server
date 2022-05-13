@@ -117,7 +117,7 @@ namespace gardenutils
                         char extra[sizeof(PItem->m_extra) * 2 + 1];
                         sql->EscapeStringLen(extra, (const char*)PItem->m_extra, sizeof(PItem->m_extra));
                         const char* Query = "UPDATE char_inventory SET extra = '%s' WHERE charid = %u AND location = %u AND slot = %u";
-                        sql->Async(Query, extra, PChar->id, containerID, slotID);
+                        sql->Query(Query, extra, PChar->id, containerID, slotID);
 
                         if (sendPacket)
                         {
