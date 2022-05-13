@@ -22,7 +22,7 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y software-properties-common cmake libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev
-    - name: Cache build
+    - name: Cache 'build' folder
       uses: actions/cache@v3
       with:
         path: build
@@ -31,7 +31,7 @@ jobs:
       run: |
         export CC=/usr/bin/clang-11
         export CXX=/usr/bin/clang++-11
-        mkdir build
+        mkdir -p build
         cmake -S . -B build
     - name: Build
       run: |
@@ -55,7 +55,7 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y software-properties-common cmake libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev
-    - name: Cache build
+    - name: Cache 'build' folder
       uses: actions/cache@v3
       with:
         path: build
@@ -64,7 +64,7 @@ jobs:
       run: |
         export CC=/usr/bin/gcc-10
         export CXX=/usr/bin/g++-10
-        mkdir build
+        mkdir -p build
         CFLAGS=-m64 CXXFLAGS=-m64 LDFLAGS=-m64 cmake -S . -B build
     - name: Build
       run: |
@@ -78,7 +78,7 @@ jobs:
       - uses: actions/checkout@v1
         with:
           fetch-depth: 1
-      - name: Cache build
+      - name: Cache 'build' folder
         uses: actions/cache@v3
         with:
           path: build
@@ -86,7 +86,7 @@ jobs:
       - name: Configure CMake
         shell: cmd
         run: |
-          mkdir build
+          mkdir -p build
           cmake -S . -B build -A Win32
       - name: Build
         shell: cmd
@@ -101,7 +101,7 @@ jobs:
       - uses: actions/checkout@v1
         with:
           fetch-depth: 1
-      - name: Cache build
+      - name: Cache 'build' folder
         uses: actions/cache@v3
         with:
           path: build
@@ -109,7 +109,7 @@ jobs:
       - name: Configure CMake
         shell: cmd
         run: |
-          mkdir build
+          mkdir -p build
           cmake -S . -B build -A x64 -DCMAKE_BUILD_TYPE=Debug
       - name: Build
         shell: cmd
@@ -132,7 +132,7 @@ jobs:
       - uses: actions/checkout@v1
         with:
           fetch-depth: 1
-      - name: Cache build
+      - name: Cache 'build' folder
         uses: actions/cache@v3
         with:
           path: build
@@ -140,7 +140,7 @@ jobs:
       - name: Configure CMake
         shell: cmd
         run: |
-          mkdir build
+          mkdir -p build
           cmake -S . -B build -A x64 -DCMAKE_BUILD_TYPE=Release -DTRACY=ON
       - name: Build
         shell: cmd
@@ -163,14 +163,14 @@ jobs:
           cd LuaJIT
           sudo make install MACOSX_DEPLOYMENT_TARGET=$(sw_vers -productVersion) -j $(sysctl -n hw.physicalcpu)
           sudo ln -sf luajit-2.1.0-beta3 /usr/local/bin/luajit
-      - name: Cache build
+      - name: Cache 'build' folder
         uses: actions/cache@v3
         with:
           path: build
           key: ${{ runner.os }}-osx
       - name: Configure CMake
         run: |
-          mkdir build
+          mkdir -p build
           cmake -S . -B build
       - name: Build
         run: |
