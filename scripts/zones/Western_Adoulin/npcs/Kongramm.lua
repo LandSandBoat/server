@@ -7,7 +7,6 @@
 -- !pos 61 32 138 256
 -----------------------------------
 require("scripts/globals/missions")
-require("scripts/globals/quests")
 require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
@@ -27,12 +26,6 @@ entity.onTrigger = function(player, npc)
             -- Reminds player of hint for SOA Mission: 'A Curse From the Past'
             player:startEvent(149)
         end
-    elseif
-        player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.TRANSPORTING) == QUEST_ACCEPTED and
-        player:getCharVar("Transporting_Status") < 1
-    then
-        -- Progresses Quest: 'Transporting'
-        player:startEvent(2592)
     end
 end
 
@@ -43,9 +36,6 @@ entity.onEventFinish = function(player, csid, option)
     if csid == 148 then
         -- Gave hint for SOA Mission: 'A Curse From the Past'
         player:setCharVar("SOA_ACFTP_Kongramm", 1)
-    elseif csid == 2592 then
-        -- Progresses Quest: 'Transporting'
-        player:setCharVar("Transporting_Status", 1)
     end
 end
 
