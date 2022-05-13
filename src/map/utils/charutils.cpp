@@ -6490,4 +6490,17 @@ namespace charutils
 
         return spawnlist->find(entity->id) != spawnlist->end();
     }
+
+    uint32 getCharIdFromName(std::string const& name)
+    {
+        TracyZoneScoped;
+
+        auto ret = sql->Query("SELECT charid FROM chars WHERE charname = %s LIMIT 1", name.c_str());
+        if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+        {
+            return sql->GetUIntData(0);
+        }
+        return 0;
+    }
+
 }; // namespace charutils
