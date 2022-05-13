@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -74,7 +74,9 @@ void        EncodeStringLinkshell(int8* signature, int8* target);
 void        DecodeStringLinkshell(int8* signature, int8* target);
 int8*       EncodeStringSignature(int8* signature, int8* target);
 void        DecodeStringSignature(int8* signature, int8* target);
-void        PackSoultrapperName(std::string name, uint8 output[], uint8 size);
+void        PackSoultrapperName(std::string name, uint8 output[]);
+std::string UnpackSoultrapperName(uint8 input[]);
+
 std::string escape(std::string const& s);
 
 std::vector<std::string> split(const std::string& s, char delim);
