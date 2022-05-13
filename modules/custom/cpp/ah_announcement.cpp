@@ -115,14 +115,8 @@ class AHAnnouncementModule : public CPPModule
                                         name[0] = std::toupper(name[0]);
 
                                         // Send message to seller!
-                                        std::array<uint8, 4> packetData{};
-                                        ref<uint32>(packetData.data(), 0) = sellerId;
-                                        message::send(MSG_DIRECT, packetData.data(), packetData.size(),
-                                            new CChatMessagePacket(
-                                                PChar,
-                                                MESSAGE_SYSTEM_3,
-                                                fmt::format("Your '{}' has sold to {} for {} gil!", name, PChar->name, price).c_str(),
-                                                "Auction House"));
+                                        message::send(sellerId, new CChatMessagePacket(PChar, MESSAGE_SYSTEM_3,
+                                            fmt::format("Your '{}' has sold to {} for {} gil!", name, PChar->name, price).c_str(), ""));
                                     }
                                 }
                                 return;

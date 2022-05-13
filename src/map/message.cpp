@@ -91,7 +91,7 @@ namespace message
 
                 if (!PChar)
                 {
-                    sql->Async("DELETE FROM accounts_sessions WHERE charid = %d;", ref<uint32>((uint8*)extra.data(), 0));
+                    sql->Query("DELETE FROM accounts_sessions WHERE charid = %d;", ref<uint32>((uint8*)extra.data(), 0));
                 }
                 else
                 {
@@ -692,5 +692,21 @@ namespace message
         }
 
         outgoing_queue.enqueue(msg);
+    }
+
+    void send(uint32 playerId, CBasicPacket* packet)
+    {
+        TracyZoneScoped;
+
+        std::array<uint8, 4> packetData{};
+        ref<uint32>(packetData.data(), 0) = playerId;
+        message::send(MSG_DIRECT, packetData.data(), packetData.size(), packet);
+    }
+
+    void send(std::string const& playerName, CBasicPacket* packet)
+    {
+        TracyZoneScoped;
+
+        send(charutils::getCharIdFromName(playerName), packet);
     }
 }; // namespace message

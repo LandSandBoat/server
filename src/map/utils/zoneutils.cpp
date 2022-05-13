@@ -475,8 +475,8 @@ namespace zoneutils
                     }
 
                     // Special sub animation for Mob (yovra, jailer of love, phuabo)
-                    // yovra 1: en hauteur, 2: en bas, 3: en haut
-                    // phuabo 1: sous l'eau, 2: sort de l'eau, 3: rentre dans l'eau
+                    // yovra 1: On top/in the sky, 2: , 3: On top/in the sky
+                    // phuabo 1: Underwater, 2: Out of the water, 3: Goes back underwater
                     PMob->animationsub = (uint32)sql->GetIntData(62);
 
                     if (PMob->animationsub != 0)

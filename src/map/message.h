@@ -70,6 +70,8 @@ namespace message
     void init(const char* chatIp, uint16 chatPort);
     void handle_incoming();
     void send(MSGSERVTYPE type, void* data, size_t datalen, CBasicPacket* packet);
+    void send(uint32 playerId, CBasicPacket* packet);
+    void send(std::string const& playerName, CBasicPacket* packet);
     void close();
 
     // For use on the zmq thread

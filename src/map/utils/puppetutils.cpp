@@ -153,7 +153,7 @@ namespace puppetutils
             memcpy(equippedAttachments, &PChar->PAutomaton->m_Equip, sizeof(equippedAttachments));
             sql->EscapeStringLen(equippedAttachmentsEscaped, equippedAttachments, sizeof(equippedAttachments));
 
-            sql->Async(Query, unlockedAttachmentsEscaped, equippedAttachmentsEscaped, PChar->id);
+            sql->Query(Query, unlockedAttachmentsEscaped, equippedAttachmentsEscaped, PChar->id);
         }
         else
         {
@@ -166,7 +166,7 @@ namespace puppetutils
             memcpy(unlockedAttachments, &PChar->m_unlockedAttachments, sizeof(unlockedAttachments));
             sql->EscapeStringLen(unlockedAttachmentsEscaped, unlockedAttachments, sizeof(unlockedAttachments));
 
-            sql->Async(Query, unlockedAttachmentsEscaped, PChar->id);
+            sql->Query(Query, unlockedAttachmentsEscaped, PChar->id);
         }
         // TODO: PUP only: save equipped automaton items
     }

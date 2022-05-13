@@ -102,7 +102,7 @@ namespace anticheat
             cellid = 1;
         }
         const char* fmtQuery = "INSERT INTO char_vars SET charid = %u, varname = 'inJail', value = %i ON DUPLICATE KEY UPDATE value = %i;";
-        sql->Async(fmtQuery, PChar->id, cellid, cellid);
+        sql->Query(fmtQuery, PChar->id, cellid, cellid);
         PChar->loc.p.x         = (float)g_jailCells[cellid - 1][0];
         PChar->loc.p.y         = (float)g_jailCells[cellid - 1][1];
         PChar->loc.p.z         = (float)g_jailCells[cellid - 1][2];
@@ -134,7 +134,7 @@ namespace anticheat
         {
             // Log intgo cheat_incidents table
             const char* fmtQuery = "INSERT INTO cheat_incidents SET charid = %u, cheatid = %u, cheatarg = %u, description= '%s';";
-            sql->Async(fmtQuery, PChar->id, static_cast<uint32>(cheatid), cheatarg, description != nullptr ? description : "");
+            sql->Query(fmtQuery, PChar->id, static_cast<uint32>(cheatid), cheatarg, description != nullptr ? description : "");
         }
         if (action & CHEAT_ACTION_WARN)
         {

@@ -52,7 +52,7 @@ CAlliance::CAlliance(CBattleEntity* PEntity)
 
     addParty(PEntity->PParty);
     this->aLeader = PEntity->PParty;
-    sql->Async("UPDATE accounts_parties SET partyflag = partyflag | %d WHERE partyid = %u AND partyflag & %d;", ALLIANCE_LEADER, m_AllianceID,
+    sql->Query("UPDATE accounts_parties SET partyflag = partyflag | %d WHERE partyid = %u AND partyflag & %d;", ALLIANCE_LEADER, m_AllianceID,
               PARTY_LEADER);
 }
 
@@ -75,7 +75,7 @@ void CAlliance::dissolveAlliance(bool playerInitiated)
     }
     else
     {
-        sql->Async("UPDATE accounts_parties JOIN accounts_sessions USING (charid) \
+        sql->Query("UPDATE accounts_parties JOIN accounts_sessions USING (charid) \
                         SET allianceid = 0, partyflag = partyflag & ~%d \
                         WHERE allianceid = %u AND IF(%u = 0 AND %u = 0, true, server_addr = %u AND server_port = %u);",
                   ALLIANCE_LEADER | PARTY_SECOND | PARTY_THIRD, m_AllianceID, map_ip.s_addr, map_port, map_ip.s_addr, map_port);
@@ -166,7 +166,7 @@ void CAlliance::removeParty(CParty* party)
 
     delParty(party);
 
-    sql->Async("UPDATE accounts_parties SET allianceid = 0, partyflag = partyflag & ~%d WHERE partyid = %u;",
+    sql->Query("UPDATE accounts_parties SET allianceid = 0, partyflag = partyflag & ~%d WHERE partyid = %u;",
               ALLIANCE_LEADER | PARTY_SECOND | PARTY_THIRD, party->GetPartyID());
     uint8 data[4]{};
     ref<uint32>(data, 0) = m_AllianceID;
@@ -251,7 +251,7 @@ void CAlliance::addParty(CParty* party)
         charutils::SaveCharStats(PChar);
         PChar->m_charHistory.joinedAlliances++;
     }
-    sql->Async("UPDATE accounts_parties SET allianceid = %u, partyflag = partyflag | %d WHERE partyid = %u;", m_AllianceID, newparty,
+    sql->Query("UPDATE accounts_parties SET allianceid = %u, partyflag = partyflag | %d WHERE partyid = %u;", m_AllianceID, newparty,
               party->GetPartyID());
     party->SetPartyNumber(newparty);
 
@@ -279,7 +279,7 @@ void CAlliance::addParty(uint32 partyid) const
             }
         }
     }
-    sql->Async("UPDATE accounts_parties SET allianceid = %u, partyflag = partyflag | %d WHERE partyid = %u;", m_AllianceID, newparty, partyid);
+    sql->Query("UPDATE accounts_parties SET allianceid = %u, partyflag = partyflag | %d WHERE partyid = %u;", m_AllianceID, newparty, partyid);
     uint8 data[8]{};
     ref<uint32>(data, 0) = m_AllianceID;
     ref<uint32>(data, 4) = partyid;
@@ -321,9 +321,9 @@ void CAlliance::assignAllianceLeader(const char* name)
     {
         int charid = sql->GetUIntData(0);
 
-        sql->Async("UPDATE accounts_parties SET partyflag = partyflag & ~%d WHERE allianceid = %u AND partyflag & %d", ALLIANCE_LEADER, m_AllianceID,
+        sql->Query("UPDATE accounts_parties SET partyflag = partyflag & ~%d WHERE allianceid = %u AND partyflag & %d", ALLIANCE_LEADER, m_AllianceID,
                   ALLIANCE_LEADER);
-        sql->Async("UPDATE accounts_parties SET allianceid = %u WHERE allianceid = %u;", charid, m_AllianceID);
+        sql->Query("UPDATE accounts_parties SET allianceid = %u WHERE allianceid = %u;", charid, m_AllianceID);
         m_AllianceID = charid;
 
         // in case leader's on another server
@@ -338,6 +338,6 @@ void CAlliance::assignAllianceLeader(const char* name)
             }
         }
 
-        sql->Async("UPDATE accounts_parties SET partyflag = partyflag | %d WHERE charid = %u", ALLIANCE_LEADER, charid);
+        sql->Query("UPDATE accounts_parties SET partyflag = partyflag | %d WHERE charid = %u", ALLIANCE_LEADER, charid);
     }
 }

@@ -276,21 +276,23 @@ void CTrustController::Declump(CCharEntity* PMaster, CBattleEntity* PTarget)
     uint8 currentPartyPos = GetPartyPosition();
     for (auto* POtherTrust : PMaster->PTrusts)
     {
-        if (POtherTrust != POwner && !POtherTrust->PAI->PathFind->IsFollowingPath() && distance(POtherTrust->loc.p, POwner->loc.p) < 1.2f)
+        if (POtherTrust != POwner && !POtherTrust->PAI->PathFind->IsFollowingPath() && distance(POtherTrust->loc.p, POwner->loc.p) < 1.5f)
         {
-            auto       diff_angle = worldAngle(POwner->loc.p, PTarget->loc.p) + 64;
-            auto       amount     = (currentPartyPos % 2) ? 1.0f : -1.0f;
-            position_t new_pos    = {
-                POwner->loc.p.x - (cosf(rotationToRadian(diff_angle)) * amount),
+            auto diffAngle  = worldAngle(POwner->loc.p, PTarget->loc.p) + 64;
+            auto moveAmount = xirand::GetRandomNumber(0.0f, 1.5f) * ((currentPartyPos % 2) ? 1.0f : -1.0f);
+
+            position_t newPos =
+            {
+                POwner->loc.p.x - (cosf(rotationToRadian(diffAngle)) * moveAmount),
                 PTarget->loc.p.y,
-                POwner->loc.p.z + (sinf(rotationToRadian(diff_angle)) * amount),
+                POwner->loc.p.z + (sinf(rotationToRadian(diffAngle)) * moveAmount),
                 0,
                 0,
             };
 
-            if (POwner->PAI->PathFind->ValidPosition(new_pos))
+            if (POwner->PAI->PathFind->ValidPosition(newPos))
             {
-                POwner->PAI->PathFind->PathTo(new_pos, PATHFLAG_RUN | PATHFLAG_WALLHACK);
+                POwner->PAI->PathFind->PathTo(newPos, PATHFLAG_RUN | PATHFLAG_WALLHACK);
             }
             break;
         }
