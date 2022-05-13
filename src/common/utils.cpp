@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -751,16 +751,22 @@ std::string escape(std::string const& s)
     return escaped;
 }
 
-std::vector<std::string> split(const std::string& s, char delim)
+std::vector<std::string> split(std::string const& s, std::string const& delimiter)
 {
-    std::stringstream        ss(s);
-    std::string              item;
-    std::vector<std::string> elems;
-    while (std::getline(ss, item, delim))
+    std::size_t pos_start = 0;
+    std::size_t pos_end, delim_len = delimiter.length();
+    std::string token;
+    std::vector<std::string> res;
+
+    while ((pos_end = s.find(delimiter, pos_start)) != std::string::npos)
     {
-        elems.push_back(item);
+        token = s.substr(pos_start, pos_end - pos_start);
+        pos_start = pos_end + delim_len;
+        res.push_back(token);
     }
-    return elems;
+
+    res.push_back(s.substr(pos_start));
+    return res;
 }
 
 // https://stackoverflow.com/questions/313970/how-to-convert-an-instance-of-stdstring-to-lower-case

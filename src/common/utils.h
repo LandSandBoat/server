@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -63,6 +63,7 @@ uint32 packBitsBE(uint8* target, uint64 value, int32 byteOffset, int32 bitOffset
 uint32 packBitsBE(uint8* target, uint64 value, int32 bitOffset, uint8 lengthInBit);
 uint64 unpackBitsBE(uint8* target, int32 byteOffset, int32 bitOffset, uint8 lengthInBit);
 uint64 unpackBitsBE(uint8* target, int32 bitOffset, uint8 lengthInBit);
+
 //(un)pack functions for Little Endian(LE) targets
 uint32 packBitsLE(uint8* target, uint64 value, int32 byteOffset, int32 bitOffset, uint8 lengthInBit);
 uint32 packBitsLE(uint8* target, uint64 value, int32 bitOffset, uint8 lengthInBit);
@@ -79,8 +80,7 @@ std::string UnpackSoultrapperName(uint8 input[]);
 
 std::string escape(std::string const& s);
 
-std::vector<std::string> split(const std::string& s, char delim);
-// https://stackoverflow.com/questions/313970/how-to-convert-an-instance-of-stdstring-to-lower-case
+std::vector<std::string> split(std::string const& s, std::string const& delimiter);
 std::string trim(const std::string& str, const std::string& whitespace = " \t");
 look_t stringToLook(std::string str);
 

@@ -178,7 +178,7 @@ namespace moduleutils
 
                         ShowScript(fmt::format("Preparing override: {}", name));
 
-                        auto parts = split(name, '.');
+                        auto parts = split(name, ".");
                         overrides.emplace_back(Override{ filename, name, parts, func, false });
                     }
                 }
