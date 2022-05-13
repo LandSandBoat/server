@@ -26,7 +26,7 @@ m:addOverride("xi.zones.Misareaux_Coast.npcs._0p0.onTrigger", function(player, n
 	player:messageSpecial(ID.text.SNOWMINT_POINT_LOCKED)
 end)
 
-m:addOverride("xi.zones.Tavnazian_Safehold.npcs.Cushion.onTrigger", function(player, npc)
+m:addOverride("xi.zones.Aht_Urhgan_Whitegate.npcs.Cushion.onTrigger", function(player, npc)
     if player:getCurrentMission(TOAU) >= xi.mission.id.toau.PASSING_GLORY then
         player:addSpell(918) -- Gessho
         player:PrintToPlayer("Unlocked Trust: Gessho")
