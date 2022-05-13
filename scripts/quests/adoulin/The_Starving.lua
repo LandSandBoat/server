@@ -1,7 +1,7 @@
 -----------------------------------
--- Hunger Strikes
+-- The Starving
 -----------------------------------
--- !addquest 9 76
+-- !addquest 9 84
 -- Westerly Breeze : !pos 62 32 123 256
 -----------------------------------
 require('scripts/globals/items')
@@ -10,7 +10,7 @@ require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.HUNGER_STRIKES)
+local quest = Quest:new(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.THE_STARVING)
 
 quest.reward =
 {
@@ -23,16 +23,17 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE
+            return status == QUEST_AVAILABLE and
+                quest:getVar(player, 'Timer') <= VanadielUniqueDay()
         end,
 
         [xi.zone.WESTERN_ADOULIN] =
         {
-            ['Westerly_Breeze'] = quest:progressEvent(2530),
+            ['Westerly_Breeze'] = quest:progressEvent(3005),
 
             onEventFinish =
             {
-                [2530] = function(player, csid, option, npc)
+                [3005] = function(player, csid, option, npc)
                     quest:begin(player)
                 end,
             },
@@ -47,8 +48,8 @@ quest.sections =
         ['Westerly_Breeze'] =
         {
             onTrade = function(player, npc, trade)
-                if npcUtil.tradeHasExactly(trade, xi.items.BOWL_OF_WISDOM_SOUP) then
-                    return quest:progressEvent(2532)
+                if npcUtil.tradeHasExactly(trade, xi.items.BOTTLE_OF_GOBLIN_DRINK) then
+                    return quest:progressEvent(3007)
                 elseif
                     trade:getItemCount() == 1 and
                     trade:getGil() == 0
@@ -56,29 +57,29 @@ quest.sections =
                     local itemObj = trade:getItem(0)
                     local auctionCategory = itemObj:getAHCat()
 
-                    if
-                        auctionCategory >= 52 and
-                        auctionCategory <= 57
-                    then
-                        return quest:event(2533)
+                    if auctionCategory == 58 then
+                        return quest:event(3008)
+                    else
+                        return quest:event(3006)
                     end
+                else
+                    return quest:event(3006)
                 end
             end,
 
-            onTrigger = quest:event(2531),
+            onTrigger = quest:event(3006),
         },
 
         onEventFinish =
         {
-            [2532] = function(player, csid, option, npc)
-                if quest:complete(player) then
-                    player:confirmTrade()
-
-                    xi.quest.setVar(player, xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.THE_STARVING, 'Timer', VanadielUniqueDay() + 1)
+            [3007] = function(player, csid, option, npc)
+                if mission:complete(player) then
+                    xi.quest.setMustZone(player, xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.ALWAYS_MORE_QUOTH_THE_RAVENOUS)
+                    xi.quest.setVar(player, xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.ALWAYS_MORE_QUOTH_THE_RAVENOUS, 'Timer', VanadielUniqueDay() + 1)
                 end
             end,
 
-            [2533] = function(player, csid, option, npc)
+            [3008] = function(player, csid, option, npc)
                 player:confirmTrade()
             end,
         },
