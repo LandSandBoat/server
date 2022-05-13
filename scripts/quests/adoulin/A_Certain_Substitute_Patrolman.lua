@@ -82,68 +82,71 @@ quest.sections =
             return status == QUEST_ACCEPTED
         end,
 
-        ['Rising_Solstice'] =
+        [xi.zone.WESTERN_ADOULIN] =
         {
-            onTrigger = function(player, npc)
-                if quest:getVar(player, 'Prog') == 7 then
-                    return quest:progressEvent(2552)
-                else
-                    return quest:event(2551)
-                end
-            end,
-        },
+            ['Rising_Solstice'] =
+            {
+                onTrigger = function(player, npc)
+                    if quest:getVar(player, 'Prog') == 7 then
+                        return quest:progressEvent(2552)
+                    else
+                        return quest:event(2551)
+                    end
+                end,
+            },
 
-        ['Zaoso'] =
-        {
-            onTrigger = patrolOnTrigger,
-        },
+            ['Zaoso'] =
+            {
+                onTrigger = patrolOnTrigger,
+            },
 
-        ['Clemmar'] =
-        {
-            onTrigger = patrolOnTrigger,
-        },
+            ['Clemmar'] =
+            {
+                onTrigger = patrolOnTrigger,
+            },
 
-        ['Kongramm'] =
-        {
-            onTrigger = patrolOnTrigger,
-        },
+            ['Kongramm'] =
+            {
+                onTrigger = patrolOnTrigger,
+            },
 
-        ['Virsaint'] =
-        {
-            onTrigger = patrolOnTrigger,
-        },
+            ['Virsaint'] =
+            {
+                onTrigger = patrolOnTrigger,
+            },
 
-        ['Shipilolo'] =
-        {
-            onTrigger = patrolOnTrigger,
-        },
+            ['Shipilolo'] =
+            {
+                onTrigger = patrolOnTrigger,
+            },
 
-        ['Dangueubert'] =
-        {
-            onTrigger = patrolOnTrigger,
-        },
+            ['Dangueubert'] =
+            {
+                onTrigger = patrolOnTrigger,
+            },
 
-        ['Nylene'] =
-        {
-            onTrigger = patrolOnTrigger,
-        },
+            ['Nylene'] =
+            {
+                onTrigger = patrolOnTrigger,
+            },
 
-        onEventFinish =
-        {
-            [2552] = function(player, csid, option, npc)
-                if quest:complete(player) then
-                    player:delKeyItem(xi.ki.WESTERN_ADOULIN_PATROL_ROUTE)
-                    player:messageSpecial(westernAdoulinID.text.KEYITEM_LOST, xi.ki.WESTERN_ADOULIN_PATROL_ROUTE)
-                end
-            end,
+            onEventFinish =
+            {
+                [2552] = function(player, csid, option, npc)
+                    if quest:complete(player) then
+                        player:delKeyItem(xi.ki.WESTERN_ADOULIN_PATROL_ROUTE)
+                        player:messageSpecial(westernAdoulinID.text.KEYITEM_LOST, xi.ki.WESTERN_ADOULIN_PATROL_ROUTE)
+                    end
+                end,
 
-            [2553] = patrolOnEventFinish,
-            [2554] = patrolOnEventFinish,
-            [2555] = patrolOnEventFinish,
-            [2556] = patrolOnEventFinish,
-            [2557] = patrolOnEventFinish,
-            [2558] = patrolOnEventFinish,
-            [2559] = patrolOnEventFinish,
+                [2553] = patrolOnEventFinish,
+                [2554] = patrolOnEventFinish,
+                [2555] = patrolOnEventFinish,
+                [2556] = patrolOnEventFinish,
+                [2557] = patrolOnEventFinish,
+                [2558] = patrolOnEventFinish,
+                [2559] = patrolOnEventFinish,
+            },
         },
     },
 }
