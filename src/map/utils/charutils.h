@@ -241,6 +241,8 @@ namespace charutils
     uint8 getRangedItemLevel(CCharEntity* PChar);
 
     bool hasEntitySpawned(CCharEntity* PChar, CBaseEntity* entity);
+
+    uint32 getCharIdFromName(std::string const& name);
 }; // namespace charutils
 
 #endif // _CHARUTILS_H

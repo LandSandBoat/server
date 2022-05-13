@@ -329,7 +329,7 @@ namespace blueutils
             char spells[sizeof(PChar->m_SetBlueSpells) * 2 + 1];
             sql->EscapeStringLen(spells, (const char*)PChar->m_SetBlueSpells, sizeof(PChar->m_SetBlueSpells));
 
-            sql->Async(Query, spells, PChar->id);
+            sql->Query(Query, spells, PChar->id);
         }
     }
 

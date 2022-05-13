@@ -149,7 +149,7 @@ void CParty::DisbandParty(bool playerInitiated)
                 sync->SetStartTime(server_clock::now());
                 sync->SetDuration(30000);
             }
-            sql->Async("DELETE FROM accounts_parties WHERE charid = %u;", PChar->id);
+            sql->Query("DELETE FROM accounts_parties WHERE charid = %u;", PChar->id);
         }
 
         // make sure chat server isn't notified of a disband if this came from the chat server already
@@ -318,7 +318,7 @@ void CParty::RemoveMember(CBattleEntity* PEntity)
                     PChar->pushPacket(new CCharUpdatePacket(PChar));
                     PChar->PParty = nullptr;
 
-                    sql->Async("DELETE FROM accounts_parties WHERE charid = %u;", PChar->id);
+                    sql->Query("DELETE FROM accounts_parties WHERE charid = %u;", PChar->id);
 
                     uint8 data[4]{};
                     ref<uint32>(data, 0) = m_PartyID;
@@ -526,7 +526,7 @@ void CParty::AddMember(CBattleEntity* PEntity)
             allianceid = m_PAlliance->m_AllianceID;
         }
 
-        sql->Async("INSERT INTO accounts_parties (charid, partyid, allianceid, partyflag) VALUES (%u, %u, %u, %u);", PChar->id, m_PartyID, allianceid,
+        sql->Query("INSERT INTO accounts_parties (charid, partyid, allianceid, partyflag) VALUES (%u, %u, %u, %u);", PChar->id, m_PartyID, allianceid,
                   GetMemberFlags(PChar));
         uint8 data[4]{};
         ref<uint32>(data, 0) = m_PartyID;
@@ -583,7 +583,7 @@ void CParty::AddMember(uint32 id)
                 Flags = PARTY_THIRD;
             }
         }
-        sql->Async("INSERT INTO accounts_parties (charid, partyid, allianceid, partyflag) VALUES (%u, %u, %u, %u);", id, m_PartyID, allianceid,
+        sql->Query("INSERT INTO accounts_parties (charid, partyid, allianceid, partyflag) VALUES (%u, %u, %u, %u);", id, m_PartyID, allianceid,
                   Flags);
         uint8 data[8]{};
         ref<uint32>(data, 0) = m_PartyID;
@@ -1079,7 +1079,7 @@ void CParty::SetSyncTarget(int8* MemberName, uint16 message)
                 }
             }
             m_PSyncTarget = nullptr;
-            sql->Async("UPDATE accounts_parties SET partyflag = partyflag & ~%d WHERE partyid = %u AND partyflag & %d", PARTY_SYNC, m_PartyID,
+            sql->Query("UPDATE accounts_parties SET partyflag = partyflag & ~%d WHERE partyid = %u AND partyflag & %d", PARTY_SYNC, m_PartyID,
                       PARTY_SYNC);
         }
     }
@@ -1095,10 +1095,10 @@ void CParty::SetQuarterMaster(const char* MemberName)
 {
     CBattleEntity* PEntity = MemberName ? GetMemberByName((const int8*)MemberName) : nullptr;
     m_PQuaterMaster        = PEntity;
-    sql->Async("UPDATE accounts_parties SET partyflag = partyflag & ~%d WHERE partyid = %u AND partyflag & %d", PARTY_QM, m_PartyID, PARTY_QM);
+    sql->Query("UPDATE accounts_parties SET partyflag = partyflag & ~%d WHERE partyid = %u AND partyflag & %d", PARTY_QM, m_PartyID, PARTY_QM);
     if (MemberName != nullptr)
     {
-        sql->Async("UPDATE accounts_parties JOIN chars ON accounts_parties.charid = chars.charid \
+        sql->Query("UPDATE accounts_parties JOIN chars ON accounts_parties.charid = chars.charid \
                               SET partyflag = partyflag | %d WHERE partyid = %u AND charname = '%s';",
                   PARTY_QM, m_PartyID, MemberName);
     }
