@@ -693,4 +693,20 @@ namespace message
 
         outgoing_queue.enqueue(msg);
     }
+
+    void send(uint32 playerId, CBasicPacket* packet)
+    {
+        TracyZoneScoped;
+
+        std::array<uint8, 4> packetData{};
+        ref<uint32>(packetData.data(), 0) = playerId;
+        message::send(MSG_DIRECT, packetData.data(), packetData.size(), packet);
+    }
+
+    void send(std::string const& playerName, CBasicPacket* packet)
+    {
+        TracyZoneScoped;
+
+        send(charutils::getCharIdFromName(playerName), packet);
+    }
 }; // namespace message

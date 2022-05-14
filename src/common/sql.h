@@ -170,6 +170,8 @@ public:
     uint64 GetUInt64Data(size_t col);
     float  GetFloatData(size_t col);
 
+    std::string GetStringData(size_t col);
+
     /// Frees the result of the query.
     void FreeResult();
 
@@ -187,7 +189,7 @@ public:
     //     : `const char*` is a pointer! If you need to pass that in, construct a std::string
     //     : and capture that by value!
     void Async(std::function<void(SqlConnection*)>&& func);
-    void Async(std::string&& query);
+    void Async(std::string const& query);
 
     template <typename... Args>
     void Async(const char* query, Args... args)
@@ -197,7 +199,7 @@ public:
         auto queryStr = fmt::sprintf(query, args...);
         TracyZoneString(queryStr);
 
-        return Async(std::move(queryStr));
+        Async(queryStr);
     }
 
     void HandleAsync();

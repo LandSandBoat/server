@@ -111,6 +111,15 @@ public:
     CBasicPacket& operator=(const CBasicPacket& other) = delete;
     CBasicPacket& operator=(CBasicPacket&& other) = delete;
 
+    /// <summary>
+    /// Copies the given packet data.
+    /// </summary>
+    /// <param name="other"></param>
+    void copy(CBasicPacket* other)
+    {
+        memcpy(data, other->data, PACKET_SIZE);
+    }
+
     /* Getters for the header */
 
     uint16 getType()

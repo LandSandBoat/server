@@ -596,6 +596,9 @@ public:
     virtual void TOTDChange(TIMETYPE TOTD); // обработка реакции мира на смену времени суток
     virtual void PushPacket(CBaseEntity*, GLOBAL_MESSAGE_TYPE, CBasicPacket*); // отправляем глобальный пакет в пределах зоны
 
+    virtual void UpdateCharPacket(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask);
+    virtual void UpdateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 updatemask, bool alwaysInclude = false);
+
     bool IsZoneActive() const;
     CZoneEntities* GetZoneEntities();
 
@@ -621,6 +624,8 @@ public:
 
     CNavMesh* m_navMesh; // zones navmesh for finding paths
 
+    time_point m_LoadedAt; // time zone was loaded
+
 private:
     ZONEID         m_zoneID; // ID зоны
     ZONE_TYPE      m_zoneType;
@@ -633,6 +638,7 @@ private:
 
     WEATHER        m_Weather;           // текущая погода
     uint32         m_WeatherChangeTime; // время начала текущей погоды
+
     CZoneEntities* m_zoneEntities;
 
     uint16 m_tax; // налог в bazaar
@@ -659,6 +665,8 @@ protected:
     void createZoneTimer();
     void CharZoneIn(CCharEntity* PChar);
     void CharZoneOut(CCharEntity* PChar);
+
+    std::unordered_map<std::string, uint32> m_localVars;
 };
 
 #endif

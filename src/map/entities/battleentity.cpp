@@ -1638,6 +1638,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
         loc.zone->PushPacket(this, CHAR_INRANGE_SELF, new CMessageBasicPacket(this, PTarget, 0, 0, MSGBASIC_IS_PARALYZED));
         return false;
     }
+
     if (battleutils::IsIntimidated(this, PTarget))
     {
         loc.zone->PushPacket(this, CHAR_INRANGE_SELF, new CMessageBasicPacket(this, PTarget, 0, 0, MSGBASIC_IS_INTIMIDATED));

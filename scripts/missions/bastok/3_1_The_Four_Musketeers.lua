@@ -16,11 +16,6 @@ require('scripts/settings/main')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------
-local bastokMarketsID = require('scripts/zones/Bastok_Markets/IDs')
-local bastokMinesID   = require('scripts/zones/Bastok_Mines/IDs')
-local metalworksID    = require('scripts/zones/Metalworks/IDs')
-local portBastokID    = require('scripts/zones/Port_Bastok/IDs')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_FOUR_MUSKETEERS)
 
@@ -84,16 +79,25 @@ mission.sections =
 
         [xi.zone.BASTOK_MARKETS] =
         {
-            ['Cleades'] = mission:messageSpecial(bastokMarketsID.text.ORIGINAL_MISSION_OFFSET + 27),
+            ['Cleades'] = mission:progressEvent(1002),
         },
 
         [xi.zone.BASTOK_MINES] =
         {
-            ['Rashid'] = mission:messageSpecial(bastokMinesID.text.ORIGINAL_MISSION_OFFSET + 27),
+            ['Rashid'] = mission:progressEvent(1002),
         },
 
         [xi.zone.METALWORKS] =
         {
+            ['Ayame'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:getMissionStatus(mission.areaId) > 0 then
+                        return mission:event(718)
+                    end
+                end,
+            },
+
             ['Iron_Eater'] =
             {
                 onTrigger = function(player, npc)
@@ -101,19 +105,19 @@ mission.sections =
 
                     if missionStatus == 0 then
                         return mission:progressEvent(715)
-                    elseif missionStatus == 1 then
-                        return mission:progressEvent(716)
+                    else
+                        return mission:event(716)
                     end
                 end,
             },
 
-            ['Malduc'] = mission:messageSpecial(metalworksID.text.ORIGINAL_MISSION_OFFSET + 27),
+            ['Malduc'] = mission:progressEvent(1002),
 
             ['Naji'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getMissionStatus(mission.areaId) == 1 then
-                        return mission:progressEvent(717)
+                    if player:getMissionStatus(mission.areaId) > 0 then
+                        return mission:event(717)
                     end
                 end,
             },
@@ -198,7 +202,7 @@ mission.sections =
 
         [xi.zone.PORT_BASTOK] =
         {
-            ['Argus'] = mission:messageSpecial(portBastokID.text.ORIGINAL_MISSION_OFFSET + 27),
+            ['Argus'] = mission:progressEvent(1002),
         },
     },
 }

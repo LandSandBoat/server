@@ -33,26 +33,6 @@ entity.onTrigger = function(player, npc)
     then
         player:startEvent(897)
 
-    -- CALM BEFORE THE STORM
-    elseif
-        copMission == xi.mission.id.cop.CALM_BEFORE_THE_STORM and
-        not player:hasKeyItem(xi.ki.LETTERS_FROM_ULMIA_AND_PRISHE) and
-        player:getCharVar("COP_Dalham_KILL") == 2 and
-        player:getCharVar("COP_Boggelmann_KILL") == 2 and
-        player:getCharVar("Cryptonberry_Executor_KILL") == 2
-    then
-        player:startEvent(892)
-
-    -- FIRE IN THE EYES OF MEN
-    elseif
-        copMission == xi.mission.id.cop.FIRE_IN_THE_EYES_OF_MEN and
-        copStatus == 2 and
-        player:getCharVar("Promathia_CID_timer") ~= VanadielDayOfTheYear()
-    then
-        player:startEvent(890)
-    elseif copMission == xi.mission.id.cop.FIRE_IN_THE_EYES_OF_MEN and copStatus == 1 then
-        player:startEvent(857)
-
     -- DARK PUPPET
     elseif
         player:getMainJob() == xi.job.DRK and
@@ -77,16 +57,6 @@ end
 entity.onEventFinish = function(player, csid, option)
     if csid == 897 then
         player:setCharVar("COP_tenzen_story", 1)
-    elseif csid == 892 then
-        npcUtil.giveKeyItem(player, xi.ki.LETTERS_FROM_ULMIA_AND_PRISHE)
-    elseif csid == 890 then
-        player:setCharVar("PromathiaStatus", 0)
-        player:setCharVar("Promathia_CID_timer", 0)
-        player:completeMission(xi.mission.log_id.COP, xi.mission.id.cop.FIRE_IN_THE_EYES_OF_MEN)
-        player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.CALM_BEFORE_THE_STORM)
-    elseif csid == 857 then
-        player:setCharVar("PromathiaStatus", 2)
-        player:setCharVar("Promathia_CID_timer", VanadielDayOfTheYear())
     elseif csid == 760 then
         player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.DARK_PUPPET)
         player:setCharVar("darkPuppetCS", 1)

@@ -124,6 +124,17 @@ mission.sections =
             },
         },
     },
+
+    {
+        check = function(player, currentMission, missionStatus, vars)
+            return player:hasCompletedMission(mission.areaId, mission.missionId)
+        end,
+
+        [xi.zone.TAVNAZIAN_SAFEHOLD] =
+        {
+            ['Ironclad_Gorilla'] = mission:event(306):replaceDefault(),
+        },
+    },
 }
 
 return mission

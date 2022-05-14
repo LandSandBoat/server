@@ -4,20 +4,20 @@ xi = xi or {}
 
 local MaxAreas =
 {
-    -- temenos
-    {Max = 8, Zones = {37}},
+    -- Temenos
+    { Max = 8, Zones = {37} },
 
-    -- apollyon
-    {Max = 6, Zones = {38}},
+    -- Apollyon
+    { Max = 6, Zones = {38} },
 
-    -- dynamis
-    {Max = 1, Zones = {39, 40, 41, 42, 134, 135, 185, 186, 187, 188,
-                                29, 140}}, -- riverneb, ghelsba
+    -- Dynamis
+    { Max = 1, Zones = {39, 40, 41, 42, 134, 135, 185, 186, 187, 188, 29, 140} }, -- riverneb, ghelsba
 }
 
 function onBattlefieldHandlerInitialise(zone)
-    local id = zone:getID()
+    local id      = zone:getID()
     local default = 3
+
     for _, battlefield in pairs(MaxAreas) do
         for _, zoneid in pairs(battlefield.Zones) do
             if id == zoneid then
@@ -25,10 +25,9 @@ function onBattlefieldHandlerInitialise(zone)
              end
         end
     end
+
     return default
 end
-
-
 
 xi.battlefield = {}
 
@@ -52,20 +51,22 @@ xi.battlefield.returnCode =
 
 xi.battlefield.leaveCode =
 {
-    EXIT = 1,
-    WON = 2,
+    EXIT   = 1,
+    WON    = 2,
     WARPDC = 3,
-    LOST = 4
+    LOST   = 4
 }
 
 function xi.battlefield.onBattlefieldTick(battlefield, timeinside)
     local killedallmobs = true
-    local mobs = battlefield:getMobs(true, false)
-    local status = battlefield:getStatus()
-    local leavecode = -1
-    local players = battlefield:getPlayers()
+    local leavecode     = -1
+    local canLeave      = 0
+
+    local mobs          = battlefield:getMobs(true, false)
+    local status        = battlefield:getStatus()
+    local players       = battlefield:getPlayers()
     local cutsceneTimer = battlefield:getLocalVar("cutsceneTimer")
-    local phaseChange = battlefield:getLocalVar("phaseChange")
+    local phaseChange   = battlefield:getLocalVar("phaseChange")
 
     if status == xi.battlefield.status.LOST then
         leavecode = 4
@@ -74,9 +75,11 @@ function xi.battlefield.onBattlefieldTick(battlefield, timeinside)
     end
 
     if leavecode ~= -1 then
+        -- Artificially inflate the time we remain inside the battlefield.
         battlefield:setLocalVar("cutsceneTimer", cutsceneTimer + 1)
 
-        local canLeave = battlefield:getLocalVar("loot") == 0
+        canLeave = battlefield:getLocalVar("loot") == 0
+
         if status == xi.battlefield.status.WON and not canLeave then
             if battlefield:getLocalVar("lootSpawned") == 0 and battlefield:spawnLoot() then
                 canLeave = false
@@ -84,24 +87,34 @@ function xi.battlefield.onBattlefieldTick(battlefield, timeinside)
                 canLeave = true
             end
         end
-        if canLeave and cutsceneTimer >= 15 then
-            battlefield:cleanup(true)
-        end
     end
 
+    -- Check that players haven't all died or that their dead time is over.
+    xi.battlefield.HandleWipe(battlefield, players)
+
+    -- Cleanup battlefield.
+    if
+        not xi.battlefield.SendTimePrompts(battlefield, players) or -- If we cant send anymore time prompts, they are out of time.
+        (canLeave and cutsceneTimer >= 15)                          -- Players won and artificial time inflation is over.
+    then
+        battlefield:cleanup(true)
+    elseif status == xi.battlefield.status.LOST then -- Players lost.
+        for _, player in pairs(players) do
+            player:messageSpecial(zones[player:getZoneID()].text.PARTY_MEMBERS_HAVE_FALLEN)
+        end
+
+        battlefield:cleanup(true)
+    end
+
+    -- Check if theres at least 1 mob alive.
     for _, mob in pairs(mobs) do
         if mob:isAlive() then
             killedallmobs = false
             break
         end
     end
-    xi.battlefield.HandleWipe(battlefield, players)
 
-    -- if we cant send anymore time prompts theyre out of time
-    if not xi.battlefield.SendTimePrompts(battlefield, players) then
-        battlefield:cleanup(true)
-    end
-
+    -- Set win status.
     if killedallmobs and phaseChange == 0 then
         battlefield:setStatus(xi.battlefield.status.WON)
     end
@@ -111,8 +124,8 @@ end
 function xi.battlefield.SendTimePrompts(battlefield, players)
     -- local tick = battlefield:getTimeInside()
     -- local status = battlefield:getStatus()
-    local remainingTime = battlefield:getRemainingTime()
-    local message = 0
+    local remainingTime  = battlefield:getRemainingTime()
+    local message        = 0
     local lastTimeUpdate = battlefield:getLastTimeUpdate()
 
     players = players or battlefield:getPlayers()
@@ -133,6 +146,7 @@ function xi.battlefield.SendTimePrompts(battlefield, players)
         for i, player in pairs(players) do
             player:messageBasic(xi.msg.basic.TIME_LEFT, remainingTime)
         end
+
         battlefield:setLastTimeUpdate(message)
     end
 
@@ -140,29 +154,38 @@ function xi.battlefield.SendTimePrompts(battlefield, players)
 end
 
 function xi.battlefield.HandleWipe(battlefield, players)
-    local rekt = true
+    local rekt     = true
     local wipeTime = battlefield:getWipeTime()
-    local elapsed = battlefield:getTimeInside()
+    local elapsed  = battlefield:getTimeInside()
 
     players = players or battlefield:getPlayers()
 
-    -- pure stolen from instance.lua
+    -- If party has not yet wiped.
     if wipeTime <= 0 then
+        -- Check if party has wiped.
         for _, player in pairs(players) do
             if player:getHP() ~= 0 then
                 rekt = false
                 break
             end
         end
+
+        -- Party has wiped. Save and send time remaining before being booted.
         if rekt then
             for _, player in pairs(players) do
-                -- v:messageSpecial(ID, 3)
+                player:messageSpecial(zones[player:getZoneID()].text.THE_PARTY_WILL_BE_REMOVED, 0, 0, 0, 3)
             end
+
             battlefield:setWipeTime(elapsed)
         end
+
+    -- Party has already wiped.
     else
-        if (elapsed - wipeTime) > 180 then
+        -- Time is over.
+        if (elapsed - wipeTime) > 180 then -- It will take aproximately 20 extra seconds to actually get kicked, but we have already lost.
             battlefield:setStatus(xi.battlefield.status.LOST)
+
+        -- Check for comeback.
         else
             for _, player in pairs(players) do
                 if player:getHP() ~= 0 then
@@ -171,17 +194,12 @@ function xi.battlefield.HandleWipe(battlefield, players)
                     break
                 end
             end
-
-            if rekt then
-                battlefield:setStatus(xi.battlefield.status.LOST)
-            end
         end
     end
 end
 
 
 function xi.battlefield.onBattlefieldStatusChange(battlefield, players, status)
-
 end
 
 function xi.battlefield.HandleLootRolls(battlefield, lootTable, players, npc)
@@ -190,33 +208,44 @@ function xi.battlefield.HandleLootRolls(battlefield, lootTable, players, npc)
         if npc then
             npc:setAnimation(90)
         end
+
         for i = 1, #lootTable, 1 do
             local lootGroup = lootTable[i]
+
             if lootGroup then
                 local max = 0
+
                 for _, entry in pairs(lootGroup) do
                     max = max + entry.droprate
                 end
+
                 local roll = math.random(max)
+
                 for _, entry in pairs(lootGroup) do
                     max = max - entry.droprate
+
                     if roll > max then
                         if entry.itemid ~= 0 then
                             if entry.itemid == 65535 then
                                 local gil = entry.amount/#players
+
                                 for j = 1, #players, 1 do
                                     players[j]:addGil(gil)
                                     players[j]:messageSpecial(zones[players[1]:getZoneID()].text.GIL_OBTAINED, gil)
                                 end
+
                                 break
                             end
+
                             players[1]:addTreasure(entry.itemid, npc)
                         end
+
                         break
                     end
                 end
             end
         end
+
         battlefield:setLocalVar("cutsceneTimer", 10)
         battlefield:setLocalVar("lootSeen", 1)
     end

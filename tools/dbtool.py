@@ -7,6 +7,7 @@ import time
 import fileinput
 import shutil
 import importlib
+import pathlib
 
 # Pre-flight sanity checks
 def preflight_exit():
@@ -215,6 +216,18 @@ def write_configs():
         dump = [{'mysql_bin' : mysql_bin}, {'auto_backup' : auto_backup}, {'auto_update_client' : auto_update_client}]
         yaml.dump(dump, file)
 
+def fetch_module_files():
+    with open('../modules/init.txt', 'r') as file:
+        for line in file.readlines():
+            if not line.startswith('#') and line.strip() and not line in ['\n', '\r\n']:
+                line = "../modules/" + line.strip()
+                if pathlib.Path(line).is_dir():
+                    for filename in pathlib.Path(line).glob('**/*.sql'):
+                        import_files.append(str(filename).replace('\\', '/'))
+                else:
+                    if line.endswith(".sql"):
+                        import_files.append(str(line).replace('\\', '/'))
+
 def fetch_files(express=False):
     import_files.clear()
     if express:
@@ -246,7 +259,8 @@ def fetch_files(express=False):
     try:
         import_files.append(import_files.pop(import_files.index('triggers.sql')))
     except: # lgtm [py/catch-base-exception]
-        return
+        pass
+    fetch_module_files()
 
 def write_version(silent=False):
     success = False
@@ -280,6 +294,11 @@ def write_version(silent=False):
 
 def import_file(file):
     print('Importing ' + file + '...')
+    query = 'SET autocommit=0; SET unique_checks=0; SET foreign_key_checks=0; source ../sql/{}; SET unique_checks=1; SET foreign_key_checks=1; COMMIT;'.format(file)
+
+    if 'modules' in file:
+        query = 'SET autocommit=0; SET unique_checks=0; SET foreign_key_checks=0; source {}; SET unique_checks=1; SET foreign_key_checks=1; COMMIT;'.format(file)
+
     result = subprocess.run([
         '{}mysql{}'.format(mysql_bin, exe),
         '-h', host,
@@ -287,7 +306,7 @@ def import_file(file):
         '-u', login,
         '-p{}'.format(password),
         database,
-        '-e', 'SET autocommit=0; SET unique_checks=0; SET foreign_key_checks=0; source ../sql/{}; SET unique_checks=1; SET foreign_key_checks=1; COMMIT;'.format(file)],
+        '-e', query],
         capture_output=True, text=True)
 
     for line in result.stderr.splitlines():
