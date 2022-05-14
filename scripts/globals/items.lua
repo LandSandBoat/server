@@ -707,6 +707,7 @@ xi.items =
     VALKYRIES_TEAR                  = 3856,
     VALKYRIES_WING                  = 3867,
     VALKYRIES_SOUL                  = 3868,
+    MARBLE_NUGGET                   = 3921,
     VELKK_NECKLACE                  = 3928,
     VELKK_MASK                      = 3929,
     TWITHERYM_WING                  = 3930,
