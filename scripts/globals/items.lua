@@ -711,6 +711,7 @@ xi.items =
     VELKK_NECKLACE                  = 3928,
     VELKK_MASK                      = 3929,
     TWITHERYM_WING                  = 3930,
+    TWITHERYM_SCALE                 = 3931,
     UMBRIL_OOZE                     = 3935,
     MICROCOSMIC_ORB                 = 4062,
     MACROCOSMIC_ORB                 = 4063,
