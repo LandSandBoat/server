@@ -105,7 +105,7 @@ class AHAnnouncementModule : public CPPModule
                                     {
                                         // Sanitize name
                                         std::string name = (const char*)PItem->getName();
-                                        auto parts = split(name, '_');
+                                        auto parts = split(name, "_");
                                         name = "";
                                         name += std::accumulate(std::begin(parts), std::end(parts), std::string(),
                                         [](std::string& ss, std::string& s)
