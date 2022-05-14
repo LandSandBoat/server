@@ -77,7 +77,7 @@ uint16 CItemContainer::GetBuff() const
 uint8 CItemContainer::AddBuff(int8 buff)
 {
     m_buff += buff;
-    return SetSize(std::min<uint8>((uint8)m_buff, 80)); // Limit in 80 cells for character
+    return SetSize(std::clamp<uint8>((uint8)m_buff, 0, 80)); // Limit in 0-80 cells for character
 }
 
 /************************************************************************

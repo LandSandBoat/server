@@ -22,7 +22,7 @@
 #ifndef _CFURNITUREINTERACTPACKET_H
 #define _CFURNITUREINTERACTPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 

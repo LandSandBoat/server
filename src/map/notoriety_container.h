@@ -40,9 +40,8 @@ public:
     bool hasEnmity();
 
 private:
-    using BattleEntitySet = std::set<CBattleEntity*>;
-    CBattleEntity*  m_POwner;
-    BattleEntitySet m_Lookup;
+    CBattleEntity*           m_POwner;
+    std::set<CBattleEntity*> m_Lookup;
 };
 
 #endif // _NOTORIETYCONTAINER_H

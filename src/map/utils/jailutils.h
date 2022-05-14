@@ -22,7 +22,7 @@
 #ifndef _JAILUTILS_H
 #define _JAILUTILS_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 /*
 TODO: Add functions that can:

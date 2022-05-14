@@ -20,10 +20,14 @@
 */
 
 #include "navmesh.h"
-#include "../../ext/detour/detour/DetourCommon.h"
-#include "../../ext/detour/detour/DetourNavMeshQuery.h"
-#include "../common/utils.h"
-#include "../common/xirand.h"
+
+#include <detour/DetourCommon.h>
+#include <detour/DetourNavMesh.h>
+#include <detour/DetourNavMeshQuery.h>
+
+#include "common/utils.h"
+#include "common/xirand.h"
+
 #include <cfloat>
 #include <cstring>
 #include <fstream>

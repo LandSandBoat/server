@@ -19,9 +19,9 @@
 ===========================================================================
 */
 
-#include "../../common/logging.h"
-#include "../../common/timer.h"
-#include "../../common/utils.h"
+#include "common/logging.h"
+#include "common/timer.h"
+#include "common/utils.h"
 
 #include <cstring>
 
@@ -86,6 +86,7 @@
 
 CCharEntity::CCharEntity()
 {
+    TracyZoneScoped;
     objtype     = TYPE_PC;
     m_EcoSystem = ECOSYSTEM::HUMANOID;
 
@@ -126,8 +127,7 @@ CCharEntity::CCharEntity()
     m_RecycleBin = std::make_unique<CItemContainer>(LOC_RECYCLEBIN);
 
     memset(&jobs, 0, sizeof(jobs));
-    // TODO: -Wno-class-memaccess - clearing an object on non-trivial type use assignment or value-init
-    memset(&keys, 0, sizeof(keys));
+    keys = {};
     memset(&equip, 0, sizeof(equip));
     memset(&equipLoc, 0, sizeof(equipLoc));
     memset(&RealSkills, 0, sizeof(RealSkills));
@@ -136,8 +136,7 @@ CCharEntity::CCharEntity()
     memset(&nameflags, 0, sizeof(nameflags));
     memset(&menuConfigFlags, 0, sizeof(menuConfigFlags));
 
-    // TODO: -Wno-class-memaccess - clearing an object on non-trivial type use assignment or value-init
-    memset(&m_SpellList, 0, sizeof(m_SpellList));
+    m_SpellList = {};
     memset(&m_LearnedAbilities, 0, sizeof(m_LearnedAbilities));
     memset(&m_TitleList, 0, sizeof(m_TitleList));
     memset(&m_ZonesList, 0, sizeof(m_ZonesList));
@@ -241,6 +240,7 @@ CCharEntity::CCharEntity()
 
 CCharEntity::~CCharEntity()
 {
+    TracyZoneScoped;
     clearPacketList();
 
     if (PTreasurePool != nullptr)
@@ -290,35 +290,23 @@ void CCharEntity::pushPacket(CBasicPacket* packet)
     TracyZoneIString(GetName());
     TracyZoneHex16(packet->getType());
 
-    // TODO: Iterating the entire queue like this isn't very efficient, but the server
-    // can still _easily_ handle it
-    // This could easily be accelerated by creating a lookup, building a key out of:
-    // - packetId + mainId + targId + updateMask
-    // and storing the position in the queue of that entry
-    for (auto&& entry : PacketList)
+    if (packet->getType() == 0x5B)
     {
-        if (packet->getType() == 0x0E && entry->getType() == 0x0E || // Entity Update (CEntityUpdatePacket)
-            packet->getType() == 0x0D && entry->getType() == 0x0D)   // Char Packet (CCharPacket)
+        if (PendingPositionPacket)
         {
-            bool sameMainId     = packet->ref<uint32>(0x04) == entry->ref<uint32>(0x04);
-            bool sameTargId     = packet->ref<uint16>(0x08) == entry->ref<uint16>(0x08);
-            bool sameUpdateMask = packet->ref<uint8>(0x0A)  == entry->ref<uint8>(0x0A);
-            if (sameMainId && sameTargId && sameUpdateMask)
-            {
-                // Put the newer packet in the place of the one already in the queue
-                std::swap(entry, packet);
-
-                // Get rid of the original packet
-                delete packet;
-
-                // Bail out and don't add anything new to the queue
-                return;
-            }
+            PendingPositionPacket->copy(packet);
+            delete packet;
+        }
+        else
+        {
+            PendingPositionPacket = packet;
+            PacketList.push_back(packet);
         }
     }
-
-    // Nothing to dedupe? Just put the packet in the queue
-    PacketList.push_back(packet);
+    else
+    {
+        PacketList.push_back(packet);
+    }
 }
 
 void CCharEntity::pushPacket(std::unique_ptr<CBasicPacket> packet)
@@ -326,9 +314,60 @@ void CCharEntity::pushPacket(std::unique_ptr<CBasicPacket> packet)
     pushPacket(packet.release());
 }
 
+void CCharEntity::updateCharPacket(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask)
+{
+    auto existing = PendingCharPackets.find(PChar->id);
+    if (existing == PendingCharPackets.end())
+    {
+        // No existing packet update for the given char, so we push new packet
+        CCharPacket* packet = new CCharPacket(PChar, type, updatemask);
+        PacketList.push_back(packet);
+        PendingCharPackets.emplace(PChar->id, packet);
+    }
+    else
+    {
+        // Found existing packet update for the given char, so we update it instead of pushing new
+        existing->second->updateWith(PChar, type, updatemask);
+    }
+}
+
+void CCharEntity::updateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 updatemask)
+{
+    auto existing = PendingEntityPackets.find(PEntity->id);
+    if (existing == PendingEntityPackets.end())
+    {
+        // No existing packet update for the given entity, so we push new packet
+        CEntityUpdatePacket* packet = new CEntityUpdatePacket(PEntity, type, updatemask);
+        PacketList.push_back(packet);
+        PendingEntityPackets.emplace(PEntity->id, packet);
+    }
+    else
+    {
+        // Found existing packet update for the given entity, so we update it instead of pushing new
+        existing->second->updateWith(PEntity, type, updatemask);
+    }
+}
+
 CBasicPacket* CCharEntity::popPacket()
 {
-    CBasicPacket*               PPacket = PacketList.front();
+    CBasicPacket* PPacket = PacketList.front();
+
+    // Clean up pending maps
+    switch (PPacket->getType())
+    {
+    case 0x0D: // Char update
+        PendingCharPackets.erase(PPacket->ref<uint32>(0x04));
+        break;
+    case 0x0E: // Entity update
+        PendingEntityPackets.erase(PPacket->ref<uint32>(0x04));
+        break;
+    case 0x5B: // Position update
+        PendingPositionPacket = nullptr;
+        break;
+    default:
+        break;
+    }
+
     PacketList.pop_front();
     return PPacket;
 }
@@ -443,7 +482,7 @@ CItemContainer* CCharEntity::getStorage(uint8 LocationID)
 
 int8 CCharEntity::getShieldSize()
 {
-    CItemEquipment* PItem = (CItemEquipment*)(getEquip(SLOT_SUB));
+    CItemEquipment* PItem = getEquip(SLOT_SUB);
 
     if (PItem == nullptr)
     {
@@ -609,18 +648,21 @@ void CCharEntity::Tick(time_point tick)
 void CCharEntity::PostTick()
 {
     TracyZoneScoped;
+
     CBattleEntity::PostTick();
+
     if (m_EquipSwap)
     {
-        pushPacket(new CCharAppearancePacket(this));
-
         updatemask |= UPDATE_HP;
         m_EquipSwap = false;
+        pushPacket(new CCharAppearancePacket(this));
     }
+
     if (ReloadParty())
     {
         charutils::ReloadParty(this);
     }
+
     if (m_EffectsChanged)
     {
         pushPacket(new CCharUpdatePacket(this));
@@ -634,24 +676,31 @@ void CCharEntity::PostTick()
         }
         m_EffectsChanged = false;
     }
-    if (updatemask)
+
+    std::chrono::steady_clock::time_point now = std::chrono::steady_clock::now();
+
+    if (updatemask && now > m_nextUpdateTimer)
     {
+        m_nextUpdateTimer = now + 250ms;
+
         if (loc.zone && !m_isGMHidden)
         {
-            loc.zone->PushPacket(this, CHAR_INRANGE, new CCharPacket(this, ENTITY_UPDATE, updatemask));
+            loc.zone->UpdateCharPacket(this, ENTITY_UPDATE, updatemask);
         }
+
         if (isCharmed)
         {
-            pushPacket(new CCharPacket(this, ENTITY_UPDATE, updatemask));
+            updateCharPacket(this, ENTITY_UPDATE, updatemask);
         }
+
         if (updatemask & UPDATE_HP)
         {
-            ForAlliance([&](auto PEntity) {
-                if (PEntity->objtype == TYPE_PC)
-                {
-                    static_cast<CCharEntity*>(PEntity)->pushPacket(new CCharHealthPacket(this));
-                }
+            // clang-format off
+            ForAlliance([&](auto PEntity)
+            {
+                static_cast<CCharEntity*>(PEntity)->pushPacket(new CCharHealthPacket(this));
             });
+            // clang-format on
         }
         // Do not send an update packet when only the position has change
         if (updatemask ^ UPDATE_POS)
@@ -676,6 +725,7 @@ void CCharEntity::delTrait(CTrait* PTrait)
 
 bool CCharEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
 {
+    TracyZoneScoped;
     if (StatusEffectContainer->GetConfrontationEffect() != PInitiator->StatusEffectContainer->GetConfrontationEffect())
     {
         return false;
@@ -704,11 +754,12 @@ bool CCharEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
 
     if (targetFlags & TARGET_PLAYER_PARTY_ENTRUST)
     {
+        // Can cast on self and others in party but potency gets no bonuses from equipment mods if entrust is active
         if (!PInitiator->StatusEffectContainer->HasStatusEffect(EFFECT_ENTRUST) && PInitiator == this)
         {
             return true;
         }
-        else if (PInitiator->StatusEffectContainer->HasStatusEffect(EFFECT_ENTRUST) && ((PParty && PInitiator->PParty == PParty) && PInitiator != this))
+        else if (PInitiator->StatusEffectContainer->HasStatusEffect(EFFECT_ENTRUST) && ((PParty && PInitiator->PParty == PParty) || PInitiator == this))
         {
             return true;
         }
@@ -719,12 +770,14 @@ bool CCharEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
 
 bool CCharEntity::CanUseSpell(CSpell* PSpell)
 {
+    TracyZoneScoped;
     return charutils::hasSpell(this, static_cast<uint16>(PSpell->getID())) && CBattleEntity::CanUseSpell(PSpell) &&
            !PRecastContainer->Has(RECAST_MAGIC, static_cast<uint16>(PSpell->getID()));
 }
 
 void CCharEntity::OnChangeTarget(CBattleEntity* PNewTarget)
 {
+    TracyZoneScoped;
     battleutils::RelinquishClaim(this);
     pushPacket(new CLockOnPacket(this, PNewTarget));
     PLatentEffectContainer->CheckLatentsTargetChange();
@@ -732,6 +785,7 @@ void CCharEntity::OnChangeTarget(CBattleEntity* PNewTarget)
 
 void CCharEntity::OnEngage(CAttackState& state)
 {
+    TracyZoneScoped;
     CBattleEntity::OnEngage(state);
     PLatentEffectContainer->CheckLatentsTargetChange();
     this->m_charHistory.battlesFought++;
@@ -739,6 +793,7 @@ void CCharEntity::OnEngage(CAttackState& state)
 
 void CCharEntity::OnDisengage(CAttackState& state)
 {
+    TracyZoneScoped;
     battleutils::RelinquishClaim(this);
     CBattleEntity::OnDisengage(state);
     if (state.HasErrorMsg())
@@ -750,6 +805,7 @@ void CCharEntity::OnDisengage(CAttackState& state)
 
 bool CCharEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>& errMsg)
 {
+    TracyZoneScoped;
     float dist = distance(loc.p, PTarget->loc.p);
 
     if (!IsMobOwner(PTarget))
@@ -780,17 +836,19 @@ bool CCharEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket
 
 bool CCharEntity::OnAttack(CAttackState& state, action_t& action)
 {
+    TracyZoneScoped;
     auto* controller{ static_cast<CPlayerController*>(PAI->GetController()) };
     controller->setLastAttackTime(server_clock::now());
     auto ret = CBattleEntity::OnAttack(state, action);
 
-    auto* PTarget = static_cast<CBattleEntity*>(state.GetTarget());
+    // auto* PTarget = static_cast<CBattleEntity*>(state.GetTarget());
 
     return ret;
 }
 
 void CCharEntity::OnCastFinished(CMagicState& state, action_t& action)
 {
+    TracyZoneScoped;
     CBattleEntity::OnCastFinished(state, action);
 
     auto* PSpell  = state.GetSpell();
@@ -862,6 +920,7 @@ void CCharEntity::OnCastFinished(CMagicState& state, action_t& action)
 
 void CCharEntity::OnCastInterrupted(CMagicState& state, action_t& action, MSGBASIC_ID msg)
 {
+    TracyZoneScoped;
     CBattleEntity::OnCastInterrupted(state, action, msg);
 
     auto* message = state.GetErrorMsg();
@@ -874,6 +933,7 @@ void CCharEntity::OnCastInterrupted(CMagicState& state, action_t& action, MSGBAS
 
 void CCharEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& action)
 {
+    TracyZoneScoped;
     CBattleEntity::OnWeaponSkillFinished(state, action);
 
     auto* PWeaponSkill  = state.GetSkill();
@@ -1010,6 +1070,7 @@ void CCharEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& acti
 
 void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
 {
+    TracyZoneScoped;
     auto* PAbility = state.GetAbility();
     if (this->PRecastContainer->HasRecast(RECAST_ABILITY, PAbility->getRecastId(), PAbility->getRecastTime()))
     {
@@ -1172,6 +1233,17 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
                         PPetTarget = PPet->targid;
                     }
                 }
+                else if (PAbility->getID() >= ABILITY_CONCENTRIC_PULSE && PAbility->getID() <= ABILITY_RADIAL_ARCANA)
+                {
+                    // use the animation id to get the pet version of this ability
+                    PAbility->setID(PAbility->getAnimationID());
+                    action.actionid = PAbility->getAnimationID();
+
+                    if (PAbility->getValidTarget() == TARGET_SELF)
+                    {
+                        PPetTarget = PPet->targid;
+                    }
+                }
                 else
                 {
                     auto* PMobSkill = battleutils::GetMobSkill(PAbility->getMobSkillID());
@@ -1286,6 +1358,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
 
 void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
 {
+    TracyZoneScoped;
     auto* PTarget = static_cast<CBattleEntity*>(state.GetTarget());
 
     int32 damage      = 0;
@@ -1520,6 +1593,7 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
 
 bool CCharEntity::IsMobOwner(CBattleEntity* PBattleTarget)
 {
+    TracyZoneScoped;
     XI_DEBUG_BREAK_IF(PBattleTarget == nullptr);
 
     if (PBattleTarget->m_OwnerID.id == 0 || PBattleTarget->m_OwnerID.id == this->id || PBattleTarget->objtype == TYPE_PC)
@@ -1529,7 +1603,7 @@ bool CCharEntity::IsMobOwner(CBattleEntity* PBattleTarget)
 
     bool found = false;
 
-    static_cast<CCharEntity*>(this)->ForAlliance([&PBattleTarget, &found](CBattleEntity* PEntity) {
+    ForAlliance([&PBattleTarget, &found](CBattleEntity* PEntity) {
         if (PEntity->id == PBattleTarget->m_OwnerID.id)
         {
             found = true;
@@ -1541,6 +1615,7 @@ bool CCharEntity::IsMobOwner(CBattleEntity* PBattleTarget)
 
 void CCharEntity::HandleErrorMessage(std::unique_ptr<CBasicPacket>& msg)
 {
+    TracyZoneScoped;
     if (msg && !isCharmed)
     {
         pushPacket(msg.release());
@@ -1549,11 +1624,13 @@ void CCharEntity::HandleErrorMessage(std::unique_ptr<CBasicPacket>& msg)
 
 void CCharEntity::OnDeathTimer()
 {
+    TracyZoneScoped;
     charutils::HomePoint(this);
 }
 
 void CCharEntity::OnRaise()
 {
+    TracyZoneScoped;
     // TODO: Moghancement Experience needs to be factored in here somewhere.
     if (m_hasRaise > 0)
     {
@@ -1659,8 +1736,9 @@ void CCharEntity::OnRaise()
 
 void CCharEntity::OnItemFinish(CItemState& state, action_t& action)
 {
+    TracyZoneScoped;
     auto* PTarget = static_cast<CBattleEntity*>(state.GetTarget());
-    auto* PItem   = static_cast<CItemUsable*>(state.GetItem());
+    auto* PItem   = state.GetItem();
 
     //#TODO: I'm sure this is supposed to be in the action packet... (animation, message)
     if (PItem->getAoE())
@@ -1720,6 +1798,7 @@ void CCharEntity::OnItemFinish(CItemState& state, action_t& action)
 
 CBattleEntity* CCharEntity::IsValidTarget(uint16 targid, uint16 validTargetFlags, std::unique_ptr<CBasicPacket>& errMsg)
 {
+    TracyZoneScoped;
     auto* PTarget = CBattleEntity::IsValidTarget(targid, validTargetFlags, errMsg);
     if (PTarget)
     {
@@ -1730,7 +1809,7 @@ CBattleEntity* CCharEntity::IsValidTarget(uint16 targid, uint16 validTargetFlags
             // Interaction was blocked
             static_cast<CCharEntity*>(PTarget)->pushPacket(new CMessageSystemPacket(0, 0, 226));
         }
-        else if (static_cast<CCharEntity*>(this)->IsMobOwner(PTarget))
+        else if (IsMobOwner(PTarget))
         {
             if (PTarget->isAlive() || (validTargetFlags & TARGET_PLAYER_DEAD) != 0)
             {
@@ -1755,6 +1834,7 @@ CBattleEntity* CCharEntity::IsValidTarget(uint16 targid, uint16 validTargetFlags
 
 void CCharEntity::Die()
 {
+    TracyZoneScoped;
     if (PLastAttacker)
     {
         loc.zone->PushPacket(this, CHAR_INRANGE_SELF, new CMessageBasicPacket(PLastAttacker, this, 0, 0, MSGBASIC_PLAYER_DEFEATED_BY));
@@ -1784,6 +1864,7 @@ void CCharEntity::Die()
 
 void CCharEntity::Die(duration _duration)
 {
+    TracyZoneScoped;
     this->ClearTrusts();
 
     if (StatusEffectContainer->HasStatusEffect(EFFECT_WEAKNESS))
@@ -1834,6 +1915,7 @@ void CCharEntity::Die(duration _duration)
 
 void CCharEntity::Raise()
 {
+    TracyZoneScoped;
     PAI->Internal_Raise();
     SetDeathTimestamp(0);
 }
@@ -1859,6 +1941,7 @@ int32 CCharEntity::GetTimeRemainingUntilDeathHomepoint() const
 
 int32 CCharEntity::GetTimeCreated()
 {
+    TracyZoneScoped;
     const char* fmtQuery = "SELECT UNIX_TIMESTAMP(timecreated) FROM chars WHERE charid = %u;";
 
     int32 ret = sql->Query(fmtQuery, id);
@@ -1878,6 +1961,7 @@ bool CCharEntity::hasMoghancement(uint16 moghancementID) const
 
 void CCharEntity::UpdateMoghancement()
 {
+    TracyZoneScoped;
     // Add up all of the installed furniture auras
     std::array<uint16, 8> elements = { 0 };
     for (auto containerID : { LOC_MOGSAFE, LOC_MOGSAFE2 })
@@ -1991,6 +2075,7 @@ void CCharEntity::UpdateMoghancement()
 
 void CCharEntity::SetMoghancement(uint16 moghancementID)
 {
+    TracyZoneScoped;
     m_moghancementID = moghancementID;
 
     // Apply the moghancement
@@ -2204,6 +2289,7 @@ void CCharEntity::SetMoghancement(uint16 moghancementID)
 
 void CCharEntity::TrackArrowUsageForScavenge(CItemWeapon* PAmmo)
 {
+    TracyZoneScoped;
     // Check if local has been set yet
     if (this->GetLocalVar("ArrowsUsed") == 0)
     {
@@ -2232,6 +2318,7 @@ void CCharEntity::TrackArrowUsageForScavenge(CItemWeapon* PAmmo)
 
 bool CCharEntity::OnAttackError(CAttackState& state)
 {
+    TracyZoneScoped;
     auto* controller{ static_cast<CPlayerController*>(PAI->GetController()) };
     if (controller->getLastErrMsgTime() + std::chrono::milliseconds(this->GetWeaponDelay(false)) < PAI->getTick())
     {
@@ -2269,6 +2356,7 @@ void CCharEntity::queueEvent(EventInfo* eventToQueue)
 
 void CCharEntity::tryStartNextEvent()
 {
+    TracyZoneScoped;
     if (isInEvent() || eventQueue.empty())
         return;
 
@@ -2316,6 +2404,7 @@ void CCharEntity::tryStartNextEvent()
 
 void CCharEntity::skipEvent()
 {
+    TracyZoneScoped;
     if (!m_Locked && !isInEvent() && (!currentEvent->cutsceneOptions.empty() || currentEvent->interruptText != 0))
     {
         pushPacket(new CMessageSystemPacket(0, 0, 117));
@@ -2333,6 +2422,7 @@ void CCharEntity::skipEvent()
 
 void CCharEntity::setLocked(bool locked)
 {
+    TracyZoneScoped;
     m_Locked = locked;
     if (locked)
     {

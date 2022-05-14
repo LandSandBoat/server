@@ -1,4 +1,5 @@
 set(SOURCES
+    ${COMMON_SOURCES}
     account.cpp
     account.h
     lobby.cpp
@@ -10,7 +11,8 @@ set(SOURCES
     login.cpp
     login.h
     message_server.cpp
-    message_server.h)
+    message_server.h
+)
 
 if(UNIX)
     set(resource "")
@@ -33,10 +35,16 @@ target_compile_definitions(
 
 target_link_libraries(topaz_connect
     PUBLIC
-    common
-    project_options
+        ${EXTERNAL_LIBS}
+        project_options
     PRIVATE
-    project_warnings
+        project_warnings
+)
+
+target_include_directories(topaz_connect
+    PUBLIC
+        ${CMAKE_SOURCE_DIR}/src
+        ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
 set_target_output_directory(topaz_connect)

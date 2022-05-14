@@ -141,3 +141,16 @@ time_point get_server_start_time()
 {
     return start_time;
 }
+
+uint32 getCurrentTimeMs()
+{
+#ifdef WIN32
+    SYSTEMTIME oSystemTime;
+    GetSystemTime(&oSystemTime);
+    return oSystemTime.wMilliseconds;
+#else
+    timeval tv;
+    gettimeofday(&tv, 0);
+    return tv.tv_usec;
+#endif
+}

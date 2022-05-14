@@ -31,9 +31,61 @@
 #include <cstdlib>
 #include <cstring>
 #include <string>
+#include <thread>
+
+#include <concurrentqueue.h>
+
+moodycamel::ConcurrentQueue<std::function<void(SqlConnection*)>> asyncQueue;
+std::atomic<bool> asyncRunning;
+std::unique_ptr<std::thread> asyncThread;
+
+void AsyncThreadBody(const char* user, const char* passwd, const char* host, uint16 port, const char* db)
+{
+    TracySetThreadName("Async DB Thread");
+    SqlConnection con(user, passwd, host, port, db);
+    while (asyncRunning)
+    {
+        con.HandleAsync();
+        std::this_thread::sleep_for(200ms); // TODO: This is bad and ugly. Replace with something better.
+    }
+}
+
+void SqlConnection::Async(std::function<void(SqlConnection*)>&& func)
+{
+    TracyZoneScoped;
+    asyncQueue.enqueue(std::move(func));
+}
+
+void SqlConnection::Async(std::string const& query)
+{
+    TracyZoneScoped;
+    TracyZoneString(query);
+
+    // clang-format off
+    Async([query](SqlConnection* sql)
+    {
+        // Executed on worker thread with a copy of query
+        if (sql->QueryStr(query.c_str()) == SQL_ERROR)
+        {
+            ShowFatalError("Asyc Query Error");
+        }
+    });
+    // clang-format on
+}
+
+void SqlConnection::HandleAsync()
+{
+    std::function<void(SqlConnection*)> func;
+    while (asyncQueue.try_dequeue(func))
+    {
+        TracyZoneScoped;
+        func(this);
+    }
+}
 
 SqlConnection::SqlConnection(const char* user, const char* passwd, const char* host, uint16 port, const char* db)
 {
+    TracyZoneScoped;
     self = new Sql_t{};
     mysql_init(&self->handle);
     if (self == nullptr)
@@ -62,6 +114,13 @@ SqlConnection::SqlConnection(const char* user, const char* passwd, const char* h
     InitPreparedStatements();
 
     SetupKeepalive();
+
+    if (!asyncThread)
+    {
+        asyncRunning = true;
+        asyncThread = std::make_unique<std::thread>(
+            AsyncThreadBody, m_User, m_Passwd, m_Host, m_Port, m_Db);
+    }
 }
 
 /************************************************************************
@@ -72,6 +131,8 @@ SqlConnection::SqlConnection(const char* user, const char* passwd, const char* h
 
 SqlConnection::~SqlConnection()
 {
+    TracyZoneScoped;
+    asyncRunning = false;
     if (self)
     {
         mysql_close(&self->handle);
@@ -88,6 +149,7 @@ SqlConnection::~SqlConnection()
 
 int32 SqlConnection::GetTimeout(uint32* out_timeout)
 {
+    TracyZoneScoped;
     if (out_timeout && SQL_SUCCESS == Query("SHOW VARIABLES LIKE 'wait_timeout'"))
     {
         char*  data;
@@ -100,6 +162,8 @@ int32 SqlConnection::GetTimeout(uint32* out_timeout)
         }
         FreeResult();
     }
+    ShowFatalError("Query: %s", self->buf);
+    ShowFatalError("GetTimeout: SQL_ERROR: %s (%u)", mysql_error(&self->handle), mysql_errno(&self->handle));
     return SQL_ERROR;
 }
 
@@ -112,6 +176,7 @@ int32 SqlConnection::GetTimeout(uint32* out_timeout)
 
 int32 SqlConnection::GetColumnNames(const char* table, char* out_buf, size_t buf_len, char sep)
 {
+    TracyZoneScoped;
     char*  data;
     size_t len;
     size_t off = 0;
@@ -148,6 +213,7 @@ int32 SqlConnection::GetColumnNames(const char* table, char* out_buf, size_t buf
 
 int32 SqlConnection::SetEncoding(const char* encoding)
 {
+    TracyZoneScoped;
     if (mysql_set_character_set(&self->handle, encoding) == 0)
     {
         return SQL_SUCCESS;
@@ -157,6 +223,7 @@ int32 SqlConnection::SetEncoding(const char* encoding)
 
 void SqlConnection::SetupKeepalive()
 {
+    TracyZoneScoped;
     auto now        = std::chrono::system_clock::now().time_since_epoch();
     auto nowSeconds = std::chrono::duration_cast<std::chrono::seconds>(now).count();
     m_LastPing      = nowSeconds;
@@ -185,6 +252,7 @@ void SqlConnection::SetupKeepalive()
 
 int32 SqlConnection::TryPing()
 {
+    TracyZoneScoped;
     auto now        = std::chrono::system_clock::now().time_since_epoch();
     auto nowSeconds = std::chrono::duration_cast<std::chrono::seconds>(now).count();
 
@@ -229,11 +297,12 @@ int32 SqlConnection::TryPing()
 
 size_t SqlConnection::EscapeStringLen(char* out_to, const char* from, size_t from_len)
 {
+    TracyZoneScoped;
     if (self)
     {
-        return (size_t)mysql_real_escape_string(&self->handle, out_to, from, (uint32)from_len);
+        return mysql_real_escape_string(&self->handle, out_to, from, (uint32)from_len);
     }
-    return (size_t)mysql_escape_string(out_to, from, (uint32)from_len);
+    return mysql_escape_string(out_to, from, (uint32)from_len);
 }
 
 /************************************************************************
@@ -244,6 +313,7 @@ size_t SqlConnection::EscapeStringLen(char* out_to, const char* from, size_t fro
 
 size_t SqlConnection::EscapeString(char* out_to, const char* from)
 {
+    TracyZoneScoped;
     return EscapeStringLen(out_to, from, strlen(from));
 }
 
@@ -266,18 +336,26 @@ int32 SqlConnection::QueryStr(const char* query)
     FreeResult();
     self->buf.clear();
 
-    self->buf += query;
-    if (mysql_real_query(&self->handle, self->buf.c_str(), (unsigned int)self->buf.length()))
     {
-        ShowSQL("DB error - %sSQL: %s", mysql_error(&self->handle), query);
-        return SQL_ERROR;
+        TracyZoneNamed(mysql_real_query_);
+        self->buf += query;
+        if (mysql_real_query(&self->handle, self->buf.c_str(), (unsigned int)self->buf.length()))
+        {
+            ShowSQL("Query: %s", self->buf);
+            ShowSQL("mysql_real_query: SQL_ERROR: %s (%u)", mysql_error(&self->handle), mysql_errno(&self->handle));
+            return SQL_ERROR;
+        }
     }
 
-    self->result = mysql_store_result(&self->handle);
-    if (mysql_errno(&self->handle) != 0)
     {
-        ShowSQL("DB error - %sSQL: %s", mysql_error(&self->handle), query);
-        return SQL_ERROR;
+        TracyZoneNamed(mysql_store_result_);
+        self->result = mysql_store_result(&self->handle);
+        if (mysql_errno(&self->handle) != 0)
+        {
+            ShowSQL("Query: %s", self->buf);
+            ShowSQL("mysql_store_result: SQL_ERROR: %s (%u)", mysql_error(&self->handle), mysql_errno(&self->handle));
+            return SQL_ERROR;
+        }
     }
 
     return SQL_SUCCESS;
@@ -291,6 +369,7 @@ int32 SqlConnection::QueryStr(const char* query)
 
 uint64 SqlConnection::AffectedRows()
 {
+    TracyZoneScoped;
     if (self)
     {
         return (uint64)mysql_affected_rows(&self->handle);
@@ -307,6 +386,7 @@ uint64 SqlConnection::AffectedRows()
 
 uint64 SqlConnection::LastInsertId()
 {
+    TracyZoneScoped;
     if (self)
     {
         return (uint64)mysql_insert_id(&self->handle);
@@ -322,9 +402,10 @@ uint64 SqlConnection::LastInsertId()
 
 uint32 SqlConnection::NumColumns()
 {
+    TracyZoneScoped;
     if (self && self->result)
     {
-        return (uint32)mysql_num_fields(self->result);
+        return mysql_num_fields(self->result);
     }
     return 0;
 }
@@ -337,9 +418,10 @@ uint32 SqlConnection::NumColumns()
 
 uint64 SqlConnection::NumRows()
 {
+    TracyZoneScoped;
     if (self && self->result)
     {
-        return (uint64)mysql_num_rows(self->result);
+        return mysql_num_rows(self->result);
     }
     return 0;
 }
@@ -352,6 +434,7 @@ uint64 SqlConnection::NumRows()
 
 int32 SqlConnection::NextRow()
 {
+    TracyZoneScoped;
     if (self && self->result)
     {
         self->row = mysql_fetch_row(self->result);
@@ -367,7 +450,7 @@ int32 SqlConnection::NextRow()
         }
     }
     ShowFatalError("Query: %s", self->buf);
-    ShowFatalError("NextRow: SQL_ERROR: %s", mysql_error(&self->handle));
+    ShowFatalError("NextRow: SQL_ERROR: %s (%u)", mysql_error(&self->handle), mysql_errno(&self->handle));
     return SQL_ERROR;
 }
 
@@ -379,6 +462,7 @@ int32 SqlConnection::NextRow()
 
 int32 SqlConnection::GetData(size_t col, char** out_buf, size_t* out_len)
 {
+    TracyZoneScoped;
     if (self && self->row)
     {
         if (col < NumColumns())
@@ -389,7 +473,7 @@ int32 SqlConnection::GetData(size_t col, char** out_buf, size_t* out_len)
             }
             if (out_len)
             {
-                *out_len = (size_t)self->lengths[col];
+                *out_len = self->lengths[col];
             }
         }
         else // out of range - ignore
@@ -406,7 +490,7 @@ int32 SqlConnection::GetData(size_t col, char** out_buf, size_t* out_len)
         return SQL_SUCCESS;
     }
     ShowFatalError("Query: %s", self->buf);
-    ShowFatalError("GetData: SQL_ERROR: %s", mysql_error(&self->handle));
+    ShowFatalError("GetData: SQL_ERROR: %s (%u)", mysql_error(&self->handle), mysql_errno(&self->handle));
     return SQL_ERROR;
 }
 
@@ -418,6 +502,7 @@ int32 SqlConnection::GetData(size_t col, char** out_buf, size_t* out_len)
 
 int8* SqlConnection::GetData(size_t col)
 {
+    TracyZoneScoped;
     if (self && self->row)
     {
         if (col < NumColumns())
@@ -426,7 +511,7 @@ int8* SqlConnection::GetData(size_t col)
         }
     }
     ShowFatalError("Query: %s", self->buf);
-    ShowFatalError("GetData: SQL_ERROR: %s", mysql_error(&self->handle));
+    ShowFatalError("GetData: SQL_ERROR: %s (%u)", mysql_error(&self->handle), mysql_errno(&self->handle));
     return nullptr;
 }
 
@@ -438,15 +523,16 @@ int8* SqlConnection::GetData(size_t col)
 
 int32 SqlConnection::GetIntData(size_t col)
 {
+    TracyZoneScoped;
     if (self && self->row)
     {
         if (col < NumColumns())
         {
-            return (self->row[col] ? (int32)atoi(self->row[col]) : 0);
+            return (self->row[col] ? atoi(self->row[col]) : 0);
         }
     }
     ShowFatalError("Query: %s", self->buf);
-    ShowFatalError("GetIntData: SQL_ERROR: %s", mysql_error(&self->handle));
+    ShowFatalError("GetIntData: SQL_ERROR: %s (%u)", mysql_error(&self->handle), mysql_errno(&self->handle));
     return 0;
 }
 
@@ -458,6 +544,7 @@ int32 SqlConnection::GetIntData(size_t col)
 
 uint32 SqlConnection::GetUIntData(size_t col)
 {
+    TracyZoneScoped;
     if (self && self->row)
     {
         if (col < NumColumns())
@@ -466,7 +553,7 @@ uint32 SqlConnection::GetUIntData(size_t col)
         }
     }
     ShowFatalError("Query: %s", self->buf);
-    ShowFatalError("GetUIntData: SQL_ERROR: %s", mysql_error(&self->handle));
+    ShowFatalError("GetUIntData: SQL_ERROR: %s (%u)", mysql_error(&self->handle), mysql_errno(&self->handle));
     return 0;
 }
 
@@ -478,6 +565,7 @@ uint32 SqlConnection::GetUIntData(size_t col)
 
 uint64 SqlConnection::GetUInt64Data(size_t col)
 {
+    TracyZoneScoped;
     if (self && self->row)
     {
         if (col < NumColumns())
@@ -486,7 +574,7 @@ uint64 SqlConnection::GetUInt64Data(size_t col)
         }
     }
     ShowFatalError("Query: %s", self->buf);
-    ShowFatalError("GetFloatGetUInt64DataData: SQL_ERROR: %s", mysql_error(&self->handle));
+    ShowFatalError("GetUInt64Data: SQL_ERROR: %s (%u)", mysql_error(&self->handle), mysql_errno(&self->handle));
     return 0;
 }
 
@@ -498,6 +586,7 @@ uint64 SqlConnection::GetUInt64Data(size_t col)
 
 float SqlConnection::GetFloatData(size_t col)
 {
+    TracyZoneScoped;
     if (self && self->row)
     {
         if (col < NumColumns())
@@ -506,8 +595,29 @@ float SqlConnection::GetFloatData(size_t col)
         }
     }
     ShowFatalError("Query: %s", self->buf);
-    ShowFatalError("GetFloatData: SQL_ERROR: %s", mysql_error(&self->handle));
+    ShowFatalError("GetFloatData: SQL_ERROR: %s (%u)", mysql_error(&self->handle), mysql_errno(&self->handle));
     return 0;
+}
+
+/************************************************************************
+ *                                                                        *
+ *                                                                        *
+ *                                                                        *
+ ************************************************************************/
+
+std::string SqlConnection::GetStringData(size_t col)
+{
+    TracyZoneScoped;
+    if (self && self->row)
+    {
+        if (col < NumColumns())
+        {
+            return std::string(self->row[col] ? (const char*)self->row[col] : "");
+        }
+    }
+    ShowFatalError("Query: %s", self->buf);
+    ShowFatalError("GetStringData: SQL_ERROR: %s (%u)", mysql_error(&self->handle), mysql_errno(&self->handle));
+    return "";
 }
 
 /************************************************************************
@@ -518,6 +628,7 @@ float SqlConnection::GetFloatData(size_t col)
 
 void SqlConnection::FreeResult()
 {
+    TracyZoneScoped;
     if (self && self->result)
     {
         mysql_free_result(self->result);
@@ -535,6 +646,7 @@ void SqlConnection::FreeResult()
 
 bool SqlConnection::SetAutoCommit(bool value)
 {
+    TracyZoneScoped;
     uint8 val = (value) ? 1 : 0;
 
     // if( self && mysql_autocommit(&self->handle, val) == 0)
@@ -544,7 +656,7 @@ bool SqlConnection::SetAutoCommit(bool value)
     }
 
     ShowFatalError("Query: %s", self->buf);
-    ShowFatalError("SetAutoCommit: SQL_ERROR: %s", mysql_error(&self->handle));
+    ShowFatalError("SetAutoCommit: SQL_ERROR: %s (%u)", mysql_error(&self->handle), mysql_errno(&self->handle));
     return false;
 }
 
@@ -556,6 +668,7 @@ bool SqlConnection::SetAutoCommit(bool value)
 
 bool SqlConnection::GetAutoCommit()
 {
+    TracyZoneScoped;
     if (self)
     {
         int32 ret = Query("SELECT @@autocommit;");
@@ -567,7 +680,7 @@ bool SqlConnection::GetAutoCommit()
     }
 
     ShowFatalError("Query: %s", self->buf);
-    ShowFatalError("GetAutoCommit: SQL_ERROR: %s", mysql_error(&self->handle));
+    ShowFatalError("GetAutoCommit: SQL_ERROR: %s (%u)", mysql_error(&self->handle), mysql_errno(&self->handle));
     return false;
 }
 
@@ -579,13 +692,14 @@ bool SqlConnection::GetAutoCommit()
 
 bool SqlConnection::TransactionStart()
 {
+    TracyZoneScoped;
     if (self && Query("START TRANSACTION;") != SQL_ERROR)
     {
         return true;
     }
 
     ShowFatalError("Query: %s", self->buf);
-    ShowFatalError("TransactionStart: SQL_ERROR: %s", mysql_error(&self->handle));
+    ShowFatalError("TransactionStart: SQL_ERROR: %s (%u)", mysql_error(&self->handle), mysql_errno(&self->handle));
     return false;
 }
 
@@ -597,13 +711,14 @@ bool SqlConnection::TransactionStart()
 
 bool SqlConnection::TransactionCommit()
 {
+    TracyZoneScoped;
     if (self && mysql_commit(&self->handle) == 0)
     {
         return true;
     }
 
     ShowFatalError("Query: %s", self->buf);
-    ShowFatalError("TransactionCommit: SQL_ERROR: %s", mysql_error(&self->handle));
+    ShowFatalError("TransactionCommit: SQL_ERROR: %s (%u)", mysql_error(&self->handle), mysql_errno(&self->handle));
     return false;
 }
 
@@ -615,18 +730,20 @@ bool SqlConnection::TransactionCommit()
 
 bool SqlConnection::TransactionRollback()
 {
+    TracyZoneScoped;
     if (self && Query("ROLLBACK;") != SQL_ERROR)
     {
         return true;
     }
 
     ShowFatalError("Query: %s", self->buf);
-    ShowFatalError("TransactionRollback: SQL_ERROR: %s", mysql_error(&self->handle));
+    ShowFatalError("TransactionRollback: SQL_ERROR: %s (%u)", mysql_error(&self->handle), mysql_errno(&self->handle));
     return false;
 }
 
 void SqlConnection::InitPreparedStatements()
 {
+    TracyZoneScoped;
     auto add = [&](std::string const& name, std::string const& query)
     {
         auto st                    = std::make_shared<SqlPreparedStatement>(&self->handle, query);
@@ -638,5 +755,6 @@ void SqlConnection::InitPreparedStatements()
 
 std::shared_ptr<SqlPreparedStatement> SqlConnection::GetPreparedStatement(std::string const& name)
 {
+    TracyZoneScoped;
     return m_PreparedStatements[name];
 }

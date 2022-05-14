@@ -22,7 +22,7 @@
 #ifndef _CBAZAARPURCHASEPACKET_H
 #define _CBAZAARPURCHASEPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 

@@ -16,13 +16,20 @@ require("scripts/globals/zone")
 local zone_object = {}
 
 zone_object.onInitialize = function(zone)
-    -- Regions 1-6 are for the Afflictor System (RegionID, X, Radius, Z)
-    zone:registerRegion(1, -163, 10, -137, 0, 0, 0)
-    zone:registerRegion(2, -209, 10, -131, 0, 0, 0)
-    zone:registerRegion(3, -140, 10,   20, 0, 0, 0)
-    zone:registerRegion(4,  261, 10,  140, 0, 0, 0)
-    zone:registerRegion(5,  340, 10,  100, 0, 0, 0)
-    zone:registerRegion(6,  380, 10,   60, 0, 0, 0)
+    -- The Afflictor System (RegionID, X, Radius, Z) for curse
+    zone:registerRegion( 1, -163, 15, -137, 0, 0, 0) -- The Afflictor, Map 1, G-10
+    zone:registerRegion( 2, -209, 15, -131, 0, 0, 0) -- The Afflictor, Map 1, F-10
+    zone:registerRegion( 3, -140, 15,   20, 0, 0, 0) -- The Afflictor, Map 2, G-8
+    zone:registerRegion( 4,  261, 15,  140, 0, 0, 0) -- The Afflictor, Map 2, L-6
+    zone:registerRegion( 5,  340, 15,  100, 0, 0, 0) -- The Afflictor, Map 2, M-7, north-west
+    zone:registerRegion( 6,  380, 15,   60, 0, 0, 0) -- The Afflictor, Map 2, M-7, south-east
+    -- The Afflictor Warning Message
+    zone:registerRegion( 7, -163, 30, -137, 0, 0, 0) -- The Afflictor, Map 1, G-10
+    zone:registerRegion( 8, -209, 30, -131, 0, 0, 0) -- The Afflictor, Map 1, F-10
+    zone:registerRegion( 9, -140, 30,   20, 0, 0, 0) -- The Afflictor, Map 2, G-8
+    zone:registerRegion(10,  261, 30,  140, 0, 0, 0) -- The Afflictor, Map 2, L-6
+    zone:registerRegion(11,  340, 30,  100, 0, 0, 0) -- The Afflictor, Map 2, M-7, north-west
+    zone:registerRegion(12,  380, 30,   60, 0, 0, 0) -- The Afflictor, Map 2, M-7, south-east
 
     xi.treasure.initZone(zone)
 end
@@ -50,17 +57,68 @@ zone_object.onConquestUpdate = function(zone, updatetype)
 end
 
 zone_object.onRegionEnter = function(player, region)
-    if region:GetRegionID() <= 6 then
-        if not player:hasStatusEffect(xi.effect.CURSE_I) and not player:hasStatusEffect(xi.effect.SILENCE) then
-            player:addStatusEffect(xi.effect.CURSE_I, 50, 0, 300)
-            if player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_CURSE_COLLECTOR) == QUEST_ACCEPTED and player:getCharVar("cCollectCurse") == 0 then
-                player:setCharVar("cCollectCurse", 1)
+    local regionID = region:GetRegionID()
+    local yPos     = player:getYPos()
+    local time     = os.time()
+
+    -- TODO:
+    -- Packet not implemented correctly. This should be able to have the npc use an animation onto the player itself but current cannot.
+    -- 0x0C target ID 0x12 target index with packet updated to allow target such as:
+    -- npc:entityAnimationPacket("main")
+
+    -- Afflictors Region of effect
+    if
+        regionID == 1 or
+        regionID == 2 or
+        ((regionID == 3 or regionID == 5 or regionID == 6) and yPos > 20) or
+        (regionID == 4 and yPos > 35)
+    then
+        if not player:hasStatusEffect(xi.effect.CURSE_I) then
+            if not player:hasStatusEffect(xi.effect.SILENCE) then
+                GetNPCByID(ID.npc.AFFLICTOR_BASE + (region:GetRegionID() -1)):entityAnimationPacket("main", player)
+                player:setLocalVar("inRegion", time + 11) -- Start timer. We set it here to prevent double message.
+                player:addStatusEffect(xi.effect.CURSE_I, 75, 0, 120)
+                player:messageSpecial(ID.text.FEEL_NUMB)
+
+                -- TODO: Convert to interaction
+                if player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_CURSE_COLLECTOR) == QUEST_ACCEPTED and player:getCharVar("cCollectCurse") == 0 then
+                    player:setCharVar("cCollectCurse", 1)
+                end
+            elseif player:getLocalVar("inRegion1") <= time then
+                player:messageSpecial(ID.text.LIGHT_HEADED)
+                player:setLocalVar("inRegion1", time + 11) -- Display message and set timer.
             end
+        elseif player:hasStatusEffect(xi.effect.CURSE_I) and player:getLocalVar("inRegion") <= time then
+            player:messageSpecial(ID.text.TOO_HEAVY)
+            player:setLocalVar("inRegion", time + 11) -- Display message and set timer.
+        end
+
+    -- Afflictor warning message
+    elseif
+        regionID == 7 or
+        regionID == 8 or
+        ((regionID == 9 or regionID == 11 or regionID == 12) and yPos > 20) or
+        (regionID == 10 and yPos > 35)
+    then
+        if player:getLocalVar("inRegion2") <= time then
+            player:messageSpecial(ID.text.FEEL_COLD)
+            player:setLocalVar("inRegion2", time + 11) -- Display message and set timer.
         end
     end
 end
 
 zone_object.onRegionLeave = function(player, region)
+    local regionID = region:GetRegionID()
+    local yPos      = player:getYPos()
+
+    if
+        regionID == 7 or
+        regionID == 8 or
+        ((regionID == 9 or regionID == 11 or regionID == 12) and yPos > 20) or
+        (regionID == 10 and yPos > 35)
+    then
+        player:messageSpecial(ID.text.NORMAL_AGAIN)
+    end
 end
 
 zone_object.onZoneWeatherChange = function(weather)

@@ -6,7 +6,6 @@ require("scripts/globals/msg")
 require("scripts/globals/utils")
 -----------------------------------
 local m = Module:new("claim_shield")
-m:setEnabled(false)
 
 local claimshieldTime = 7500
 

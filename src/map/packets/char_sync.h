@@ -22,7 +22,7 @@
 #ifndef _CCHARSYNCPACKET_H
 #define _CCHARSYNCPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 

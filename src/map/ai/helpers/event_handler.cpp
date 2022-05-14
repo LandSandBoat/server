@@ -23,6 +23,9 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 void CAIEventHandler::addListener(const std::string& eventname, sol::function lua_func, const std::string& identifier)
 {
+    TracyZoneScoped;
+    TracyZoneString(eventname);
+    TracyZoneString(identifier);
     // Remove entries with same identifier (if they exist)
     eventListeners[eventname]
         .erase(std::remove_if(eventListeners[eventname].begin(), eventListeners[eventname].end(),
@@ -37,6 +40,8 @@ void CAIEventHandler::addListener(const std::string& eventname, sol::function lu
 
 void CAIEventHandler::removeListener(std::string const& identifier)
 {
+    TracyZoneScoped;
+    TracyZoneString(identifier);
     for (auto&& eventListener : eventListeners)
     {
         auto remove = [&identifier](const ai_event_t& event)

@@ -11,11 +11,12 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     if npcUtil.tradeHas(trade, 2574) and npcUtil.popFromQM(player, npc, ID.mob.ARMED_GEARS) then -- Trade Ferrite
         player:confirmTrade()
+        player:messageSpecial(ID.text.DRAWS_NEAR)
     end
 end
 
 entity.onTrigger = function(player, npc)
-    player:messageSpecial(ID.text.NOTHING_HAPPENS)
+    player:messageSpecial(ID.text.GLITTERING_FRAGMENTS)
 end
 
 return entity

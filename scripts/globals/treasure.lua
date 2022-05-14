@@ -36,7 +36,7 @@ local thiefKeyInfo =
     [keyType.LIVING_KEY  ] = { xi.items.LIVING_KEY,          0.15 },
 }
 
-local treasureInfo =
+xi.treasure.treasureInfo =
 {
     [xi.treasure.type.CHEST] =
     {
@@ -1273,7 +1273,7 @@ local function doMove(npc, x, y, z)
 end
 
 local function moveChest(npc, zoneId, chestType, mimicSpawned)
-    local points = treasureInfo[chestType].zone[zoneId].points
+    local points = xi.treasure.treasureInfo[chestType].zone[zoneId].points
     local point = points[math.random(#points)]
     if not mimicSpawned then
         npc:hideNPC(5)
@@ -1373,7 +1373,7 @@ xi.treasure.onTrade = function(player, npc, trade, chestType)
     local zoneId = player:getZoneID()
     local ID = zones[zoneId]
     local msgBase = ID.text.CHEST_UNLOCKED
-    local info = treasureInfo[chestType].zone[zoneId]
+    local info = xi.treasure.treasureInfo[chestType].zone[zoneId]
     local mJob = player:getMainJob()
     local activeHands = player:getCharVar("BorghertzAlreadyActiveWithJob")
     local illusionCooldown  = npc:getLocalVar("illusionCooldown")
@@ -1524,7 +1524,7 @@ end
 xi.treasure.onTrigger = function(player, chestType)
     local zoneId = player:getZoneID()
     local msgBase = zones[zoneId].text.CHEST_UNLOCKED
-    local info = treasureInfo[chestType].zone[zoneId]
+    local info = xi.treasure.treasureInfo[chestType].zone[zoneId]
 
     player:messageSpecial(msgBase + 7, info.key)
 end

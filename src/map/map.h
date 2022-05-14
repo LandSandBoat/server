@@ -56,8 +56,6 @@ enum SKILLUP_STYLE
 
 struct map_config_t
 {
-    uint32 buffer_size; // max size of recv buffer -> default 1800 bytes
-
     uint16 usMapPort; // port of map server      -> xxxxx
     uint32 uiMapIp;   // ip of map server        -> INADDR_ANY
 
@@ -164,21 +162,16 @@ struct map_config_t
 
 struct map_session_data_t
 {
-    uint32     client_addr;
-    uint16     client_port;
-    uint16     client_packet_id;   // id последнего пакета, пришедшего от клиента
-    uint16     server_packet_id;   // id последнего пакета, отправленного сервером
-    int8*      server_packet_data; // указатель на собранный пакет, который был ранее отправлен клиенту
-    size_t     server_packet_size; // размер пакета, который был ранее отправлен клиенту
-    time_t     last_update;        // time of last packet recv
-    blowfish_t blowfish;           // unique decypher keys
-    CCharEntity* PChar;            // game char
-    uint8        shuttingDown;     // prevents double session closing
-
-    map_session_data_t()
-    {
-        shuttingDown = 0;
-    }
+    uint32       client_addr        = 0;
+    uint16       client_port        = 0;
+    uint16       client_packet_id   = 0;        // id of the last packet that came from the client
+    uint16       server_packet_id   = 0;        // id of the last packet sent by the server
+    int8*        server_packet_data = nullptr;  // a pointer to the packet, which was previously sent to the client
+    size_t       server_packet_size = 0;        // the size of the packet that was previously sent to the client
+    time_t       last_update        = 0;        // time of last packet recv
+    blowfish_t   blowfish           = {};       // unique decypher keys
+    CCharEntity* PChar              = nullptr;  // game char
+    uint8        shuttingDown       = 0;        // prevents double session closing
 };
 
 extern map_config_t map_config;

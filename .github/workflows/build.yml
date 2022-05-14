@@ -22,14 +22,20 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y software-properties-common cmake libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev
+    - name: Cache 'build' folder
+      uses: actions/cache@v3
+      with:
+        path: build
+        key: ${{ runner.os }}-clang
     - name: Configure CMake
       run: |
         export CC=/usr/bin/clang-11
         export CXX=/usr/bin/clang++-11
-        cmake .
+        mkdir -p build
+        cmake -S . -B build
     - name: Build
       run: |
-        make -j $(nproc)
+        cmake --build build -j4
     - name: Archive Executables
       uses: actions/upload-artifact@v2
       with:
@@ -49,14 +55,20 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y software-properties-common cmake libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev
+    - name: Cache 'build' folder
+      uses: actions/cache@v3
+      with:
+        path: build
+        key: ${{ runner.os }}-gcc
     - name: Configure CMake
       run: |
         export CC=/usr/bin/gcc-10
         export CXX=/usr/bin/g++-10
-        CFLAGS=-m64 CXXFLAGS=-m64 LDFLAGS=-m64 cmake .
+        mkdir -p build
+        CFLAGS=-m64 CXXFLAGS=-m64 LDFLAGS=-m64 cmake -S . -B build
     - name: Build
       run: |
-        make -j $(nproc)
+        cmake --build build -j4
 
   Windows_32bit:
     runs-on: windows-latest
@@ -66,16 +78,22 @@ jobs:
       - uses: actions/checkout@v1
         with:
           fetch-depth: 1
+      - name: Cache 'build' folder
+        uses: actions/cache@v3
+        with:
+          path: build
+          key: ${{ runner.os }}-msvc32
       - name: Configure CMake
         shell: cmd
         run: |
-          cmake -A Win32 .
+          mkdir -p build
+          cmake -S . -B build -A Win32
       - name: Build
         shell: cmd
         run: |
-          cmake --build .
+          cmake --build build -j4
 
-  Windows_64bit:
+  Windows_64bit_Debug:
     runs-on: windows-latest
     env:
       MSBUILD_PATH: C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\
@@ -83,14 +101,20 @@ jobs:
       - uses: actions/checkout@v1
         with:
           fetch-depth: 1
+      - name: Cache 'build' folder
+        uses: actions/cache@v3
+        with:
+          path: build
+          key: ${{ runner.os }}-msvc64d
       - name: Configure CMake
         shell: cmd
         run: |
-          cmake -A x64 .
+          mkdir -p build
+          cmake -S . -B build -A x64 -DCMAKE_BUILD_TYPE=Debug
       - name: Build
         shell: cmd
         run: |
-          cmake --build .
+          cmake --build build -j4
       - name: Archive Executables
         uses: actions/upload-artifact@v2
         with:
@@ -99,6 +123,29 @@ jobs:
             topaz_connect_64.exe
             topaz_game_64.exe
             topaz_search_64.exe
+
+  Windows_64bit_Release_Tracy:
+    runs-on: windows-latest
+    env:
+      MSBUILD_PATH: C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+      - name: Cache 'build' folder
+        uses: actions/cache@v3
+        with:
+          path: build
+          key: ${{ runner.os }}-msvc64-t
+      - name: Configure CMake
+        shell: cmd
+        run: |
+          mkdir -p build
+          cmake -S . -B build -A x64 -DCMAKE_BUILD_TYPE=Release -DTRACY=ON
+      - name: Build
+        shell: cmd
+        run: |
+          cmake --build build -j4
 
   MacOS_64bit:
     # https://github.com/actions/virtual-environments/blob/main/images/macos/macos-11-Readme.md
@@ -116,12 +163,18 @@ jobs:
           cd LuaJIT
           sudo make install MACOSX_DEPLOYMENT_TARGET=$(sw_vers -productVersion) -j $(sysctl -n hw.physicalcpu)
           sudo ln -sf luajit-2.1.0-beta3 /usr/local/bin/luajit
+      - name: Cache 'build' folder
+        uses: actions/cache@v3
+        with:
+          path: build
+          key: ${{ runner.os }}-osx
       - name: Configure CMake
         run: |
-          cmake .
+          mkdir -p build
+          cmake -S . -B build
       - name: Build
         run: |
-          make -j $(sysctl -n hw.physicalcpu)
+          cmake --build build -j4
 
   Sanity_Checks:
     runs-on: ubuntu-latest
@@ -473,7 +526,7 @@ jobs:
 
   Full_Startup_Checks_Windows:
     runs-on: windows-latest
-    needs: Windows_64bit
+    needs: Windows_64bit_Debug
     steps:
     - uses: actions/checkout@v1
       with:

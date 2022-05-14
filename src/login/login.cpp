@@ -266,8 +266,8 @@ int do_sockets(fd_set* rfd, duration next)
     int            i;
 
     // can timeout until the next tick
-    timeout.tv_sec  = (long)std::chrono::duration_cast<std::chrono::seconds>(next).count();
-    timeout.tv_usec = (long)std::chrono::duration_cast<std::chrono::microseconds>(next - std::chrono::duration_cast<std::chrono::seconds>(next)).count();
+    timeout.tv_sec  = std::chrono::duration_cast<std::chrono::seconds>(next).count();
+    timeout.tv_usec = std::chrono::duration_cast<std::chrono::microseconds>(next - std::chrono::duration_cast<std::chrono::seconds>(next)).count();
 
     memcpy(rfd, &readfds, sizeof(*rfd));
     ret = sSelect(fd_max, rfd, nullptr, nullptr, &timeout);
@@ -381,23 +381,25 @@ int parse_console(char* buf)
 
 void login_config_read(const char* key, const char* value)
 {
-    int  stdout_with_ansisequence = 0;
-    int  msg_silent               = 0;                    // Specifies how silent the console is.
+    //int  stdout_with_ansisequence = 0; // unused
+    //int  msg_silent               = 0; // unused        // Specifies how silent the console is.
     char timestamp_format[20]     = "[%d/%b] [%H:%M:%S]"; // For displaying Timestamps, default value
 
     if (strcmpi(key, "timestamp_format") == 0)
     {
         strncpy(timestamp_format, value, 19);
     }
-    else if (strcmpi(key, "stdout_with_ansisequence") == 0)
+/*    else if (strcmpi(key, "stdout_with_ansisequence") == 0) // unused
     {
         stdout_with_ansisequence = config_switch(value);
     }
-    else if (strcmpi(key, "console_silent") == 0)
+*/
+/*    else if (strcmpi(key, "console_silent") == 0) // unused
     {
         ShowInfo("Console Silent Setting: %d", atoi(value));
         msg_silent = atoi(value);
     }
+*/
     else if (strcmp(key, "login_data_ip") == 0)
     {
         login_config.login_data_ip = std::string(value);
@@ -472,7 +474,7 @@ void login_config_read(const char* key, const char* value)
     }
     else
     {
-        ShowWarning("Unknown setting '%s' with value '%s' in  login file", key, value);
+        ShowWarning("Unknown setting '%s' with value '%s' in login file. Has this setting been removed?", key, value);
     }
 }
 
@@ -494,7 +496,7 @@ void version_info_read(const char* key, const char* value)
     }
     else
     {
-        ShowWarning("Unknown setting '%s' with value '%s' in  version info file", key, value);
+        ShowWarning("Unknown setting '%s' with value '%s' in version info file. Has this setting been removed?", key, value);
     }
 }
 
@@ -554,7 +556,7 @@ void maint_config_read(const char* key, const char* value)
     }
     else
     {
-        ShowWarning("Unknown setting '%s' with value '%s' in  maint info file", key, value);
+        ShowWarning("Unknown setting '%s' with value '%s' in maint info file. Has this setting been removed?", key, value);
     }
 }
 

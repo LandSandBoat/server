@@ -55,7 +55,7 @@ int32 checksum(unsigned char* buf, uint32 buflen, char checkhash[16])
 {
     unsigned char hash[16];
 
-    md5((unsigned char*)buf, hash, buflen);
+    md5(buf, hash, buflen);
 
     if (memcmp(hash, checkhash, 16) == 0)
     {
@@ -247,7 +247,7 @@ int32 hasBit(uint16 value, const uint8* BitArray, uint32 size)
         ShowError("hasBit: value (%u) is out of range", value);
         return 0;
     }
-    return (int32)(BitArray[value >> 3] & (1 << (value % 8)));
+    return (BitArray[value >> 3] & (1 << (value % 8)));
 }
 
 int32 addBit(uint16 value, uint8* BitArray, uint32 size)
@@ -292,7 +292,7 @@ uint32 packBitsBE(uint8* target, uint64 value, int32 byteOffset, int32 bitOffset
 
     if ((lengthInBit + bitOffset) <= 8) // write shifted value to target
     {
-        uint8* dataPointer = (uint8*)&target[byteOffset];
+        uint8* dataPointer = &target[byteOffset];
 
         uint8 bitmaskUC = (uint8)bitmask;
         uint8 valueUC   = (uint8)value;
@@ -353,7 +353,7 @@ uint64 unpackBitsBE(uint8* target, int32 byteOffset, int32 bitOffset, uint8 leng
 
     if ((lengthInBit + bitOffset) <= 8)
     {
-        uint8* dataPointer = (uint8*)&target[byteOffset];
+        uint8* dataPointer = &target[byteOffset];
 
         retVal = ((*dataPointer) & (uint8)bitmask) >> bitOffset;
     }
@@ -373,7 +373,7 @@ uint64 unpackBitsBE(uint8* target, int32 byteOffset, int32 bitOffset, uint8 leng
     {
         uint64* dataPointer = (uint64*)&target[byteOffset];
 
-        retVal = ((*dataPointer) & (uint64)bitmask) >> bitOffset;
+        retVal = ((*dataPointer) & bitmask) >> bitOffset;
     }
     else
     {
@@ -519,7 +519,7 @@ void EncodeStringLinkshell(int8* signature, int8* target)
         {
             tempChar = signature[currChar] - 'a' + 1;
         }
-        packBitsLE(encodedSignature, tempChar, 6 * currChar, 6);
+        packBitsLE(encodedSignature, tempChar, static_cast<uint32>(6 * currChar), 6);
         chars++;
     }
     leftover = (chars * 6) % 8;
@@ -528,7 +528,7 @@ void EncodeStringLinkshell(int8* signature, int8* target)
     packBitsLE(encodedSignature, 0xFF, 6 * chars, leftover);
 
     // TODO: -Wno-sizeof-pointer-memaccess - sizeof references source not destination
-    strncpy((char*)target, (const char*)encodedSignature, sizeof encodedSignature);
+    strncpy((char*)target, (const char*)encodedSignature, sizeof target);
 }
 
 void DecodeStringLinkshell(int8* signature, int8* target)
@@ -540,7 +540,7 @@ void DecodeStringLinkshell(int8* signature, int8* target)
     for (std::size_t currChar = 0; currChar < length; ++currChar)
     {
         uint8 tempChar = '\0';
-        tempChar       = (uint8)unpackBitsLE((uint8*)signature, currChar * 6, 6);
+        tempChar       = (uint8)unpackBitsLE((uint8*)signature, static_cast<uint32>(currChar * 6), 6);
         if (tempChar >= 1 && tempChar <= 26)
         {
             tempChar = 'a' - 1 + tempChar;
@@ -570,7 +570,7 @@ void DecodeStringLinkshell(int8* signature, int8* target)
         }
     }
     // TODO: -Wno-sizeof-pointer-memaccess - sizeof references source not destination
-    strncpy((char*)target, (const char*)decodedSignature, sizeof decodedSignature);
+    strncpy((char*)target, (const char*)decodedSignature, sizeof target);
 }
 
 int8* EncodeStringSignature(int8* signature, int8* target)
@@ -596,7 +596,7 @@ int8* EncodeStringSignature(int8* signature, int8* target)
         {
             tempChar = signature[currChar] - 'a' + 37;
         }
-        packBitsLE(encodedSignature, tempChar, 6 * currChar, 6);
+        packBitsLE(encodedSignature, tempChar, static_cast<uint32>(6 * currChar), 6);
         chars++;
     }
     // leftover = (chars * 6) % 8;
@@ -605,7 +605,7 @@ int8* EncodeStringSignature(int8* signature, int8* target)
     // packBitsLE(encodedSignature,0xFF,6*chars, leftover);
 
     // TODO: -Wno-sizeof-pointer-memaccess - sizeof references source not destination
-    return (int8*)strncpy((char*)target, (const char*)encodedSignature, sizeof encodedSignature);
+    return (int8*)strncpy((char*)target, (const char*)encodedSignature, sizeof target);
 }
 
 void DecodeStringSignature(int8* signature, int8* target)
@@ -630,12 +630,12 @@ void DecodeStringSignature(int8* signature, int8* target)
         decodedSignature[currChar] = tempChar;
     }
     // TODO: -Wno-sizeof-pointer-memaccess - sizeof references source not destination
-    strncpy((char*)target, (const char*)decodedSignature, sizeof decodedSignature);
+    strncpy((char*)target, (const char*)decodedSignature, sizeof target);
 }
 
 // Take a regular string of 8-bit wide chars and packs it down into an
 // array of 7-bit wide chars.
-void PackSoultrapperName(std::string name, uint8 output[], uint8 size)
+void PackSoultrapperName(std::string name, uint8 output[])
 {
     // Before anything else, sanitize the name string
     // If contains underscore character
@@ -657,7 +657,7 @@ void PackSoultrapperName(std::string name, uint8 output[], uint8 size)
     uint8 shift   = 1;
     uint8 loops   = 0;
     uint8 total   = (uint8)name.length();
-    uint8 maxSize = std::max((uint8)20, size);
+    uint8 maxSize = 13; // capped at 13 based on examples like GoblinBountyH
 
     // Pack and shift 8-bit to 7-bit
     for (uint8 i = 0; i <= maxSize; ++i)
@@ -691,6 +691,50 @@ void PackSoultrapperName(std::string name, uint8 output[], uint8 size)
     }
 }
 
+std::string UnpackSoultrapperName(uint8 input[])
+{
+    uint8 current = 0;
+    uint8 remainder = 0;
+    uint8 shift = 1;
+    uint8 maxSize = 13; // capped at 13 based on examples like GoblinBountyH
+    std::string output = "";
+
+     // Unpack and shift 7-bit to 8-bit
+    for (uint8 i = 0; i <= maxSize; ++i)
+    {
+        current = input[i];
+        uint8 tempLeft = current;
+        uint8 tempRight = current;
+
+        for (int j = 0; j < shift; ++j)
+        {
+            tempLeft = tempLeft >> 1;
+        }
+
+        // uint8 orvalue = tempLeft | remainder;
+        output = output + (char)(tempLeft | remainder);
+
+        remainder = tempRight << (7 - shift);
+        if (remainder & 128)
+        {
+            remainder = remainder ^ 128;
+        }
+
+        if (shift == 7)
+        {
+            output = output + char(remainder);
+            remainder = 0;
+            shift = 1;
+        }
+        else
+        {
+            shift++;
+        }
+    }
+
+    return output;
+}
+
 std::string escape(std::string const& s)
 {
     std::size_t n = s.length();
@@ -707,16 +751,22 @@ std::string escape(std::string const& s)
     return escaped;
 }
 
-std::vector<std::string> split(const std::string& s, char delim)
+std::vector<std::string> split(std::string const& s, std::string const& delimiter)
 {
-    std::stringstream        ss(s);
-    std::string              item;
-    std::vector<std::string> elems;
-    while (std::getline(ss, item, delim))
+    std::size_t pos_start = 0;
+    std::size_t pos_end, delim_len = delimiter.length();
+    std::string token;
+    std::vector<std::string> res;
+
+    while ((pos_end = s.find(delimiter, pos_start)) != std::string::npos)
     {
-        elems.push_back(item);
+        token = s.substr(pos_start, pos_end - pos_start);
+        pos_start = pos_end + delim_len;
+        res.push_back(token);
     }
-    return elems;
+
+    res.push_back(s.substr(pos_start));
+    return res;
 }
 
 // https://stackoverflow.com/questions/313970/how-to-convert-an-instance-of-stdstring-to-lower-case
@@ -792,6 +842,7 @@ bool definitelyLessThan(float a, float b)
 
 void crash()
 {
+    int* volatile ptr = 0;
     // cppcheck-suppress nullPointer
-    *((unsigned int*)0) = 0xDEAD;
+    *ptr = 0xDEAD;
 }

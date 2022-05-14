@@ -492,7 +492,7 @@ int32 lobbyview_parse(int32 fd)
                 int32         sendsize = 0x28;
                 unsigned char MainReservePacket[0x28];
 
-                string_t client_ver_data((char*)(buff + 0x74), 6); // Full length is 10 but we drop last 4
+                string_t client_ver_data((buff + 0x74), 6); // Full length is 10 but we drop last 4
                 client_ver_data = client_ver_data + "xx_x";        // And then we replace those last 4..
 
                 string_t expected_version(version_info.client_ver, 0, 6); // Same deal here!
@@ -824,7 +824,7 @@ int32 lobby_createchar(login_session_data_t* loginsd, int8* buf)
     {
         sql->NextRow();
 
-        CharID = (uint32)sql->GetUIntData(0) + 1;
+        CharID = sql->GetUIntData(0) + 1;
     }
 
     if (lobby_createchar_save(loginsd->accid, CharID, &createchar) == -1)

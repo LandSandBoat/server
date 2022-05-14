@@ -22,7 +22,7 @@
 #ifndef _CLUABASEENTITY_H
 #define _CLUABASEENTITY_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 #include "luautils.h"
 
 class CBaseEntity;
@@ -79,7 +79,7 @@ public:
     void injectPacket(std::string const& filename); // Send the character a packet kept in a file
     void injectActionPacket(uint16 action, uint16 anim, uint16 spec, uint16 react, uint16 message);
     void entityVisualPacket(std::string const& command, sol::object const& entity);
-    void entityAnimationPacket(const char* command);
+    void entityAnimationPacket(const char* command, sol::object const& target);
 
     void       StartEventHelper(int32 EventID, sol::variadic_args va, EVENT_TYPE eventType);
     EventInfo* ParseEvent(int32 EventID, sol::variadic_args va, EventPrep* eventPreparation, EVENT_TYPE eventType);
@@ -530,7 +530,7 @@ public:
     void countdown(sol::object const& secondsObj,
                    sol::object const& bar1NameObj, sol::object const& bar1ValObj,
                    sol::object const& bar2NameObj, sol::object const& bar2ValObj);
-    void enableEntities(std::vector<uint32> data);
+    void enableEntities(std::vector<uint32> const& data);
     void independentAnimation(CLuaBaseEntity* PTarget, uint16 animId, uint8 mode);
 
     void engage(uint16 requestedTarget);
@@ -543,9 +543,9 @@ public:
     void resetRecast(uint8 rType, uint16 recastID); // Reset one recast ID
     void resetRecasts();                            // Reset recasts for the caller
 
-    void addListener(std::string eventName, std::string identifier, sol::function func);
-    void removeListener(std::string identifier);
-    void triggerListener(std::string eventName, sol::variadic_args args);
+    void addListener(std::string const& eventName, std::string const& identifier, sol::function func);
+    void removeListener(std::string const& identifier);
+    void triggerListener(std::string const& eventName, sol::variadic_args args);
 
     auto getEntity(uint16 targetID) -> std::optional<CLuaBaseEntity>;
     bool canChangeState();

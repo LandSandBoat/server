@@ -138,9 +138,14 @@ void CItemState::UpdateTarget(CBaseEntity* target)
 {
     if (target != nullptr)
     {
-        CState::UpdateTarget(target);
-        CState::SetTarget(target->targid);
+        UpdateTarget(target->targid);
     }
+}
+
+void CItemState::UpdateTarget(uint16 targid)
+{
+    CState::UpdateTarget(targid);
+    CState::SetTarget(targid);
 
     // Special case for Soultrapper usage:
     // Valid to use on mobs that are:
@@ -184,7 +189,7 @@ bool CItemState::Update(time_point tick)
     {
         if (m_PEntity->objtype == TYPE_PC)
         {
-            CCharEntity* PChar = static_cast<CCharEntity*>(m_PEntity);
+            CCharEntity* PChar = m_PEntity;
             PChar->m_charHistory.itemsUsed++;
         }
         m_PEntity->PAI->EventHandler.triggerListener("ITEM_STATE_EXIT", CLuaBaseEntity(m_PEntity), CLuaItem(m_PItem));

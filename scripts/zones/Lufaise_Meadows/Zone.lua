@@ -36,10 +36,6 @@ zone_object.onZoneIn = function(player, prevZone)
         player:setPos(458, 6, -4, 82)
     end
 
-    if player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.CHAINS_AND_BONDS and player:getCharVar("PromathiaStatus") == 0 then
-        cs = 111
-    end
-
     return cs
 end
 
@@ -54,15 +50,10 @@ zone_object.onRegionLeave = function(player, region)
 end
 
 zone_object.onEventUpdate = function(player, csid, option)
-    if csid == 111 then
-        player:updateEvent(0, xi.items.DUCAL_GUARDS_RING)
-    end
 end
 
 zone_object.onEventFinish = function(player, csid, option)
-    if csid == 111 and npcUtil.giveItem(player, xi.items.DUCAL_GUARDS_RING) then
-        player:setCharVar("PromathiaStatus", 1)
-    elseif csid == 116 then
+    if csid == 116 then
         player:setCharVar("PromathiaStatus", 7)
         player:addTitle(xi.title.BANISHER_OF_EMPTINESS)
     end

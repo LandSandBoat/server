@@ -26,10 +26,6 @@ zone_object.onZoneIn = function(player, prevZone)
         player:setPos(-4, -26, 134, 87)
     end
 
-    if player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.CHAINS_AND_BONDS and player:getCharVar("PromathiaStatus") == 1 then
-        cs = 114
-    end
-
     return cs
 end
 
@@ -43,9 +39,6 @@ zone_object.onEventUpdate = function(player, csid, option)
 end
 
 zone_object.onEventFinish = function(player, csid, option)
-    if csid == 114 then
-        player:setCharVar("PromathiaStatus", 2)
-    end
 end
 
 return zone_object
