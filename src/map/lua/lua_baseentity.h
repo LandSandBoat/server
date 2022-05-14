@@ -79,7 +79,7 @@ public:
     void injectPacket(std::string const& filename); // Send the character a packet kept in a file
     void injectActionPacket(uint16 action, uint16 anim, uint16 spec, uint16 react, uint16 message);
     void entityVisualPacket(std::string const& command, sol::object const& entity);
-    void entityAnimationPacket(const char* command);
+    void entityAnimationPacket(const char* command, sol::object const& target);
 
     void       StartEventHelper(int32 EventID, sol::variadic_args va, EVENT_TYPE eventType);
     EventInfo* ParseEvent(int32 EventID, sol::variadic_args va, EventPrep* eventPreparation, EVENT_TYPE eventType);

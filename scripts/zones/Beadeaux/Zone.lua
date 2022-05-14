@@ -75,13 +75,13 @@ zone_object.onRegionEnter = function(player, region)
     then
         if not player:hasStatusEffect(xi.effect.CURSE_I) then
             if not player:hasStatusEffect(xi.effect.SILENCE) then
-                -- TODO: Add animation
+                GetNPCByID(ID.npc.AFFLICTOR_BASE + (region:GetRegionID() -1)):entityAnimationPacket("main", player)
                 player:setLocalVar("inRegion", time + 11) -- Start timer. We set it here to prevent double message.
                 player:addStatusEffect(xi.effect.CURSE_I, 75, 0, 120)
                 player:messageSpecial(ID.text.FEEL_NUMB)
 
                 -- TODO: Convert to interaction
-                if player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_CURSE_COLLECTOR) == xi.quest.status.ACCEPTED and player:getCharVar("cCollectCurse") == 0 then
+                if player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_CURSE_COLLECTOR) == QUEST_ACCEPTED and player:getCharVar("cCollectCurse") == 0 then
                     player:setCharVar("cCollectCurse", 1)
                 end
             elseif player:getLocalVar("inRegion1") <= time then
