@@ -1,7 +1,5 @@
 -----------------------------------
---
 -- Zone: Foret de Hennetiel
---
 -----------------------------------
 local ID = require("scripts/zones/Foret_de_Hennetiel/IDs")
 -----------------------------------
