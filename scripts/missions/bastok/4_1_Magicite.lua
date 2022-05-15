@@ -71,9 +71,9 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if xi.mission.getMissionRankPoints(player, xi.mission.id.bastok.MAGICITE) then
-                        return mission:progressEvent(0)
+                        return mission:event(0)
                     else
-                        return mission:progressEvent(4)
+                        return mission:event(4)
                     end
                 end,
             },
@@ -103,7 +103,7 @@ mission.sections =
                     if player:getMissionStatus(mission.areaId) == 0 then
                         return mission:progressEvent(128)
                     else
-                        return mission:progressEvent(138, 1)
+                        return mission:event(138, 1)
                     end
                 end,
             },
@@ -112,9 +112,9 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if player:getMissionStatus(mission.areaId) == 0 then
-                        return mission:progressEvent(132)
+                        return mission:event(132)
                     else
-                        return mission:progressEvent(135)
+                        return mission:event(135)
                     end
                 end,
             },
@@ -176,7 +176,7 @@ mission.sections =
                             return mission:progressEvent(60)
                         end
                     else
-                        return mission:progressEvent(138, 1)
+                        return mission:event(138, 1)
                     end
                 end,
             },
@@ -184,7 +184,7 @@ mission.sections =
             ['Goggehn'] =
             {
                 onTrigger = function(player, npc)
-                    return mission:progressEvent(135)
+                    return mission:event(135)
                 end,
             },
 
@@ -213,9 +213,9 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if magiciteCounter(player) == 0 then
-                        return mission:progressEvent(161)
+                        return mission:event(161)
                     else
-                        return mission:progressEvent(183)
+                        return mission:event(183)
                     end
                 end,
             },
@@ -227,13 +227,13 @@ mission.sections =
                         if mission:getVar(player, 'Option') == 1 then
                             return mission:progressEvent(184)
                         else
-                            return mission:progressEvent(80)
+                            return mission:event(80)
                         end
                     else
                         if mission:getVar(player, 'Option') == 2 then
-                            return mission:progressEvent(81)
+                            return mission:event(81)
                         else
-                            return mission:progressEvent(79)
+                            return mission:event(79)
                         end
                     end
                 end,
@@ -392,7 +392,7 @@ mission.sections =
             ['Aldo'] =
             {
                 onTrigger = function(player, npc)
-                    return mission:progressEvent(183)
+                    return mission:event(183)
                 end,
             },
         },
