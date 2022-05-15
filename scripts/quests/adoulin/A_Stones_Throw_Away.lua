@@ -10,13 +10,14 @@ require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')
 -----------------------------------
+local morimarID = require('scripts/zones/Morimar_Basalt_Fields/IDs')
+-----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.A_STONES_THROW_AWAY)
 
 quest.reward =
 {
     fameArea = xi.quest.fame_area.ADOULIN,
-    keyItem  = xi.ki.DEMOLISHING,
     bayld    = 500,
 }
 
@@ -67,7 +68,10 @@ quest.sections =
             onEventFinish =
             {
                 [2573] = function(player, csid, option, npc)
+                    player:messageSpecial(morimarID.text.YOU_HAVE_LEARNED, xi.ki.DEMOLISHING)
+
                     if quest:complete(player) then
+                        player:addKeyItem(xi.ki.DEMOLISHING)
                         player:confirmTrade()
                     end
                 end,
