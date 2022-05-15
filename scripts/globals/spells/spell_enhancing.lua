@@ -28,6 +28,9 @@ xi.spells.spell_enhancing.calculateEnhancingBasePower = function(caster, target,
     ------------------------------------------------------------
     -- Spell specific equations for potency. (Skill and stat)
     ------------------------------------------------------------
+
+    -- TODO: Find a way to replace big if/else chain and still make it look good.
+
     -- Aquaveil
     if spellEffect == xi.effect.AQUAVEIL then
         if skillLevel >= 200 then -- Cutoff point is estimated. https://www.bg-wiki.com/bg/Aquaveil
@@ -117,6 +120,9 @@ xi.spells.spell_enhancing.calculateEnhancingFinalPower = function(caster, target
     ----------------------------------------
     -- Spell specific modifiers for potency.
     ----------------------------------------
+
+    -- TODO: Find a way to replace big if/else chain and still make it look good.
+
     -- Bar-Element
     if spellEffect >= xi.effect.BARFIRE and spellEffect <= xi.effect.BARWATER then
         finalPower = finalPower + caster:getMerit(xi.merit.BAR_SPELL_EFFECT) + caster:getMod(xi.mod.BARSPELL_AMOUNT) + caster:getJobPointLevel(xi.jp.BAR_SPELL_EFFECT) * 2
@@ -153,9 +159,6 @@ xi.spells.spell_enhancing.calculateEnhancingFinalPower = function(caster, target
         finalPower = finalPower + caster:getMerit(xi.merit.STORMSURGE) + caster:getMod(xi.mod.STORMSURGE_EFFECT)
     end
 
-    ----------
-    -- Finish
-    ----------
     return finalPower
 end
 
@@ -227,9 +230,6 @@ xi.spells.spell_enhancing.calculateEnhancingDuration = function(caster, target, 
         duration = duration * targetLevel / spellLevel
     end
 
-    ----------
-    -- Finish
-    ----------
     return duration
 end
 
@@ -247,6 +247,9 @@ xi.spells.spell_enhancing.useEnhancingSpell = function(caster, target, spell)
     ------------------------------------------------------------
     -- Handle exceptions and weird behaviour here, before calculating anything.
     ------------------------------------------------------------
+
+    -- TODO: Find a way to replace big if/else chain and still make it look good.
+
     -- Bar-Element (They use addStatusEffect argument 6. Bar-Status current implementation doesn't.)
     if spellEffect >= xi.effect.BARFIRE and spellEffect <= xi.effect.BARWATER then
         MDB = caster:getMerit(xi.merit.BAR_SPELL_EFFECT) + caster:getMod(xi.mod.BARSPELL_MDEF_BONUS)
