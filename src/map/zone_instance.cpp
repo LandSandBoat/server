@@ -230,6 +230,9 @@ void CZoneInstance::IncreaseZoneCounter(CCharEntity* PChar)
     }
     else
     {
+        ShowWarning(fmt::format("Failed to place {} in {} ({}). Placing them in that zone's instance exit area.",
+            PChar->name, this->GetName(), this->GetID()).c_str());
+
         // instance no longer exists: put them outside (at exit)
         PChar->loc.prevzone = GetID();
 

@@ -17,11 +17,7 @@ require('scripts/settings/main')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------
-local bastokMarketsID = require('scripts/zones/Bastok_Markets/IDs')
-local bastokMinesID   = require('scripts/zones/Bastok_Mines/IDs')
 local gusgenID        = require('scripts/zones/Gusgen_Mines/IDs')
-local metalworksID    = require('scripts/zones/Metalworks/IDs')
-local portBastokID    = require('scripts/zones/Port_Bastok/IDs')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.BASTOK, xi.mission.id.bastok.TO_THE_FORSAKEN_MINES)
@@ -105,7 +101,7 @@ mission.sections =
             ['Cleades'] =
             {
                 onTrade = handleMissionTrade,
-                onTrigger = mission:messageSpecial(bastokMarketsID.text.ORIGINAL_MISSION_OFFSET + 30),
+                onTrigger = mission:progressEvent(1002),
             },
 
             onEventFinish =
@@ -121,7 +117,7 @@ mission.sections =
             ['Rashid'] =
             {
                 onTrade = handleMissionTrade,
-                onTrigger = mission:messageSpecial(bastokMinesID.text.ORIGINAL_MISSION_OFFSET + 30),
+                onTrigger = mission:progressEvent(1002),
             },
 
             onEventFinish =
@@ -137,7 +133,6 @@ mission.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        player:checkDistance(npc) <= 1.6 and
                         npcUtil.tradeHasExactly(trade, xi.items.SLICE_OF_HARE_MEAT) and
                         not player:findItem(xi.items.GLOCOLITE) and
                         npcUtil.popFromQM(player, npc, gusgenID.mob.BLIND_MOBY, { hide = 180 })
@@ -158,7 +153,7 @@ mission.sections =
             ['Malduc'] =
             {
                 onTrade = handleMissionTrade,
-                onTrigger = mission:messageSpecial(metalworksID.text.ORIGINAL_MISSION_OFFSET + 30),
+                onTrigger = mission:progressEvent(1002),
             },
 
             onEventFinish =
@@ -173,7 +168,7 @@ mission.sections =
             ['Argus'] =
             {
                 onTrade = handleMissionTrade,
-                onTrigger = mission:messageSpecial(portBastokID.text.ORIGINAL_MISSION_OFFSET + 30),
+                onTrigger = mission:progressEvent(1002),
             },
 
             onEventFinish =

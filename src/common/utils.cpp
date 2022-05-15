@@ -635,7 +635,7 @@ void DecodeStringSignature(int8* signature, int8* target)
 
 // Take a regular string of 8-bit wide chars and packs it down into an
 // array of 7-bit wide chars.
-void PackSoultrapperName(std::string name, uint8 output[], uint8 size)
+void PackSoultrapperName(std::string name, uint8 output[])
 {
     // Before anything else, sanitize the name string
     // If contains underscore character
@@ -657,7 +657,7 @@ void PackSoultrapperName(std::string name, uint8 output[], uint8 size)
     uint8 shift   = 1;
     uint8 loops   = 0;
     uint8 total   = (uint8)name.length();
-    uint8 maxSize = std::max((uint8)20, size);
+    uint8 maxSize = 13; // capped at 13 based on examples like GoblinBountyH
 
     // Pack and shift 8-bit to 7-bit
     for (uint8 i = 0; i <= maxSize; ++i)
@@ -691,6 +691,50 @@ void PackSoultrapperName(std::string name, uint8 output[], uint8 size)
     }
 }
 
+std::string UnpackSoultrapperName(uint8 input[])
+{
+    uint8 current = 0;
+    uint8 remainder = 0;
+    uint8 shift = 1;
+    uint8 maxSize = 13; // capped at 13 based on examples like GoblinBountyH
+    std::string output = "";
+
+     // Unpack and shift 7-bit to 8-bit
+    for (uint8 i = 0; i <= maxSize; ++i)
+    {
+        current = input[i];
+        uint8 tempLeft = current;
+        uint8 tempRight = current;
+
+        for (int j = 0; j < shift; ++j)
+        {
+            tempLeft = tempLeft >> 1;
+        }
+
+        // uint8 orvalue = tempLeft | remainder;
+        output = output + (char)(tempLeft | remainder);
+
+        remainder = tempRight << (7 - shift);
+        if (remainder & 128)
+        {
+            remainder = remainder ^ 128;
+        }
+
+        if (shift == 7)
+        {
+            output = output + char(remainder);
+            remainder = 0;
+            shift = 1;
+        }
+        else
+        {
+            shift++;
+        }
+    }
+
+    return output;
+}
+
 std::string escape(std::string const& s)
 {
     std::size_t n = s.length();
@@ -707,16 +751,22 @@ std::string escape(std::string const& s)
     return escaped;
 }
 
-std::vector<std::string> split(const std::string& s, char delim)
+std::vector<std::string> split(std::string const& s, std::string const& delimiter)
 {
-    std::stringstream        ss(s);
-    std::string              item;
-    std::vector<std::string> elems;
-    while (std::getline(ss, item, delim))
+    std::size_t pos_start = 0;
+    std::size_t pos_end, delim_len = delimiter.length();
+    std::string token;
+    std::vector<std::string> res;
+
+    while ((pos_end = s.find(delimiter, pos_start)) != std::string::npos)
     {
-        elems.push_back(item);
+        token = s.substr(pos_start, pos_end - pos_start);
+        pos_start = pos_end + delim_len;
+        res.push_back(token);
     }
-    return elems;
+
+    res.push_back(s.substr(pos_start));
+    return res;
 }
 
 // https://stackoverflow.com/questions/313970/how-to-convert-an-instance-of-stdstring-to-lower-case
