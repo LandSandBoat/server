@@ -379,7 +379,7 @@ bool CItem::isSoultrapper() const
 
 void CItem::setSoulPlateData(std::string const& name, uint16 mobFamily, uint8 zeni, uint16 skillIndex, uint8 fp)
 {
-    PackSoultrapperName(name, m_extra, static_cast<uint8>(name.size()));
+    PackSoultrapperName(name, m_extra);
 
     // Hack: Artificially chop off extremely long names, so we can pack the mobFamily info into m_extra
     m_extra[17] = (mobFamily & 0xFF00) >> 8;
