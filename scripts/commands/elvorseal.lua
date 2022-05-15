@@ -6,10 +6,10 @@
 cmdprops =
 {
     permission = 1,
-    parameters = "is"
+    parameters = ""
 }
 
 function onTrigger(player)
-    player:PrintToPlayer("Evlorseal applied")
+    player:PrintToPlayer("Elvorseal has been applied")
     player:addStatusEffect(xi.effect.ELVORSEAL, 1, 0, 0)
 end
