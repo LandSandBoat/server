@@ -229,6 +229,7 @@ xi.items =
     CHUNK_OF_BOMB_COAL              = 1090,
     LUMP_OF_CHANDELIER_COAL         = 1091,
     REGAL_DIE                       = 1092,
+    DAVOI_STORAGE_KEY               = 1103,
     SULFUR                          = 1108,
     ORCISH_MAIL_SCALES              = 1112,
     SKELETON_KEY                    = 1115,
