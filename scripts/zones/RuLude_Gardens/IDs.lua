@@ -34,6 +34,7 @@ zones[xi.zone.RULUDE_GARDENS] =
         OBTAIN_SCYLDS                    = 6896,  -- You obtain <number> [scyld/scylds]! Current balance: <number> [scyld/scylds].
         HUNT_CANCELED                    = 6900,  -- Hunt canceled.
         RESTRICTED                       = 10107, -- It reads, Restricted Area.
+        THE_CONSULATE_IS_AWAY            = 10109, -- The consulate is away.
         SOVEREIGN_WITHOUT_AN_APPOINTMENT = 10180, -- Nobody sees the sovereign without an appointment!
         ITEM_DELIVERY_DIALOG             = 10271, -- Now offering quick and easy delivery of packages to homes everywhere!
         HOMEPOINT_SET                    = 10284, -- Home point set!
