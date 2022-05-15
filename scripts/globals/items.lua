@@ -928,6 +928,7 @@ xi.items =
     STORMWAKER_FRAME                = 8227,
     RAAZ_TUSK                       = 8709,
     COPPER_AMAN_VOUCHER             = 8711,
+    SQUARE_OF_ANCESTRAL_CLOTH       = 8751,
     MOBLIN_OIL                      = 8801,
     CLUMP_OF_BEE_POLLEN             = 9082,
     MANDRAGORA_DEWDROP              = 9083,
