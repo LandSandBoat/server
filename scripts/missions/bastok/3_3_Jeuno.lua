@@ -18,18 +18,14 @@ require('scripts/settings/main')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------
-local bastokMarketsID = require('scripts/zones/Bastok_Markets/IDs')
-local bastokMinesID   = require('scripts/zones/Bastok_Mines/IDs')
 local lowerDelkfuttID = require('scripts/zones/Lower_Delkfutts_Tower/IDs')
-local metalworksID    = require('scripts/zones/Metalworks/IDs')
-local portBastokID    = require('scripts/zones/Port_Bastok/IDs')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.BASTOK, xi.mission.id.bastok.JEUNO)
 
 mission.reward =
 {
-    gil = 5000,
+    gil  = 5000,
     rank = 4,
 }
 
@@ -88,12 +84,12 @@ mission.sections =
 
         [xi.zone.BASTOK_MARKETS] =
         {
-            ['Cleades'] = mission:messageSpecial(bastokMarketsID.text.ORIGINAL_MISSION_OFFSET + 35),
+            ['Cleades'] = mission:progressEvent(1002),
         },
 
         [xi.zone.BASTOK_MINES] =
         {
-            ['Rashid'] = mission:messageSpecial(bastokMinesID.text.ORIGINAL_MISSION_OFFSET + 35),
+            ['Rashid'] = mission:progressEvent(1002),
         },
 
         [xi.zone.METALWORKS] =
@@ -102,12 +98,12 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if player:getMissionStatus(mission.areaId) == 0 then
-                        return mission:progressEvent(322)
+                        return mission:progressEvent(322) -- NOTE: Trust Bastok, annoyingly, takes priority in retail, so priority should be lower. On the other hand, this is a mandatory step.
                     end
                 end,
             },
 
-            ['Malduc'] = mission:messageSpecial(metalworksID.text.ORIGINAL_MISSION_OFFSET + 35),
+            ['Malduc'] = mission:progressEvent(1002),
 
             onEventFinish =
             {
@@ -120,7 +116,7 @@ mission.sections =
 
         [xi.zone.PORT_BASTOK] =
         {
-            ['Argus'] = mission:messageSpecial(portBastokID.text.ORIGINAL_MISSION_OFFSET + 35),
+            ['Argus'] = mission:progressEvent(1002),
         },
 
         [xi.zone.RULUDE_GARDENS] =
@@ -128,7 +124,7 @@ mission.sections =
             ['_6r2'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getMissionStatus(mission.areaId) == 4 then
+                    if player:getMissionStatus(mission.areaId) == 3 then
                         return mission:progressEvent(38)
                     end
                 end,
@@ -142,9 +138,9 @@ mission.sections =
                     if missionStatus == 1 then
                         return mission:progressEvent(41)
                     elseif missionStatus == 2 then
-                        return mission:progressEvent(66)
+                        return mission:event(66)
                     elseif missionStatus == 3 then
-                        return mission:progressEvent(139)
+                        return mission:event(139)
                     end
                 end,
             },
@@ -159,10 +155,6 @@ mission.sections =
                     player:setMissionStatus(mission.areaId, 2)
                     player:delKeyItem(xi.ki.LETTER_TO_THE_AMBASSADOR)
                 end,
-
-                [139] = function(player, csid, option, npc)
-                    player:setMissionStatus(mission.areaId, 4)
-                end,
             },
         },
 
@@ -171,7 +163,7 @@ mission.sections =
             ['_542'] =
             {
                 onTrade = function(player, npc, trade)
-                    -- TODO: As of the April 2009 update, trading the key to any Cermet Door or the elevator will turn
+                    -- As of the April 2009 update, trading the key to any Cermet Door or the elevator will turn
                     -- the key into a key item, allowing the player to drop the inventory key for space.
                     if
                         player:getMissionStatus(mission.areaId) == 2 and
