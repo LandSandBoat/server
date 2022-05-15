@@ -1686,10 +1686,10 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
             // attack hit, try to be absorbed by shadow unless it is a SATA attack round
             if (!(attackRound.GetSATAOccured()) && battleutils::IsAbsorbByShadow(PTarget))
             {
-                actionTarget.messageID = 0;
+                actionTarget.messageID = MSGBASIC_SHADOW_ABSORB;
+                actionTarget.param = 1;
                 actionTarget.reaction  = REACTION::EVADE;
                 attack.SetEvaded(true);
-                PTarget->loc.zone->PushPacket(PTarget, CHAR_INRANGE_SELF, new CMessageBasicPacket(PTarget, PTarget, 0, 1, 31));
             }
             else if (attack.IsParried())
             {
@@ -1718,6 +1718,9 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                     {
                         actionTarget.spikesParam   = 0;
                         actionTarget.spikesMessage = 14;
+
+                        actionTarget.messageID = MSGBASIC_COUNTER_ABS_BY_SHADOW;
+                        actionTarget.param = 1;
                     }
                     else
                     {
@@ -1868,7 +1871,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
             battleutils::HandleAfflatusMiseryAccuracyBonus(this);
         }
 
-        if (actionTarget.reaction != REACTION::HIT && actionTarget.reaction != REACTION::BLOCK && actionTarget.reaction != REACTION::GUARD)
+        if (actionTarget.reaction != REACTION::HIT && actionTarget.reaction != REACTION::BLOCK && actionTarget.reaction != REACTION::GUARD && actionTarget.messageID != MSGBASIC_SHADOW_ABSORB)
         {
             actionTarget.param = 0;
         }
