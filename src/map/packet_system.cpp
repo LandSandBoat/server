@@ -891,9 +891,9 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
 
             if (auto* PMob = dynamic_cast<CMobEntity*>(PChar->GetBattleTarget()))
             {
-                if (!PMob->CalledForHelp() && PMob->PEnmityContainer->HasID(PChar->id))
+                if (!PMob->GetCallForHelpFlag() && PMob->PEnmityContainer->HasID(PChar->id) && !PMob->m_CallForHelpBlocked)
                 {
-                    PMob->CallForHelp(true);
+                    PMob->SetCallForHelpFlag(true);
                     PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CMessageBasicPacket(PChar, PChar, 0, 0, 19));
                     return;
                 }

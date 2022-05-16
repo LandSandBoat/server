@@ -35,7 +35,7 @@
 #include <list>
 #include <map>
 
-#include "commandhandler.h"
+#include "command_handler.h"
 #include "zone.h"
 
 enum SKILLUP_STYLE
