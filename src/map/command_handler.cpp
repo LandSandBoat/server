@@ -19,7 +19,7 @@
 ===========================================================================
 */
 
-#include "commandhandler.h"
+#include "command_handler.h"
 
 #include "common/utils.h"
 #include "entities/charentity.h"
@@ -219,30 +219,25 @@ int32 CCommandHandler::call(sol::state& lua, CCharEntity* PChar, const int8* com
     {
         if (map_config.audit_gm_cmd <= permission && map_config.audit_gm_cmd > 0)
         {
-            // clang-format off
             std::string name       = PChar->name;
             std::string cmdlinestr = (const char*)commandline;
-            sql->Async([=](SqlConnection* sql)
+
+            char escaped_name[16 * 2 + 1];
+            sql->EscapeString(escaped_name, name.c_str());
+
+            std::string escaped_gm_cmd;
+            escaped_gm_cmd.reserve(cmdname.length() * 2 + 1);
+            sql->EscapeString(escaped_gm_cmd.data(), (char*)cmdname.c_str());
+
+            std::string escaped_full_string;
+            escaped_full_string.reserve(strlen((char*)commandline) * 2 + 1);
+            sql->EscapeString(escaped_full_string.data(), (char*)cmdlinestr.c_str());
+
+            const char* fmtQuery = "INSERT into audit_gm (date_time,gm_name,command,full_string) VALUES(current_timestamp(),'%s','%s','%s')";
+            if (sql->Query(fmtQuery, escaped_name, escaped_gm_cmd.data(), escaped_full_string.data()) == SQL_ERROR)
             {
-                TracyZoneScoped;
-                char escaped_name[16 * 2 + 1];
-                sql->EscapeString(escaped_name, name.c_str());
-
-                std::string escaped_gm_cmd;
-                escaped_gm_cmd.reserve(cmdname.length() * 2 + 1);
-                sql->EscapeString(escaped_gm_cmd.data(), (char*)cmdname.c_str());
-
-                std::string escaped_full_string;
-                escaped_full_string.reserve(strlen((char*)commandline) * 2 + 1);
-                sql->EscapeString(escaped_full_string.data(), (char*)cmdlinestr.c_str());
-
-                const char* fmtQuery = "INSERT into audit_gm (date_time,gm_name,command,full_string) VALUES(current_timestamp(),'%s','%s','%s')";
-                if (sql->Query(fmtQuery, escaped_name, escaped_gm_cmd.data(), escaped_full_string.data()) == SQL_ERROR)
-                {
-                    ShowError("cmdhandler::call: Failed to log GM command.");
-                }
-            });
-            // clang-format on
+                ShowError("cmdhandler::call: Failed to log GM command.");
+            }
         }
     }
 
