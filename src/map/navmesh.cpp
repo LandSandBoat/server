@@ -227,6 +227,12 @@ void CNavMesh::outputError(uint32 status)
 std::vector<position_t> CNavMesh::findPath(const position_t& start, const position_t& end)
 {
     TracyZoneScoped;
+
+    if (!m_navMesh)
+    {
+        return {};
+    }
+
     std::vector<position_t> ret;
     dtStatus                status;
 
@@ -323,6 +329,12 @@ std::vector<position_t> CNavMesh::findPath(const position_t& start, const positi
 std::pair<int16, position_t> CNavMesh::findRandomPosition(const position_t& start, float maxRadius)
 {
     TracyZoneScoped;
+
+    if (!m_navMesh)
+    {
+        return {};
+    }
+
     dtStatus status;
 
     float spos[3];
@@ -370,6 +382,11 @@ std::pair<int16, position_t> CNavMesh::findRandomPosition(const position_t& star
 
 bool CNavMesh::inWater(const position_t& point)
 {
+    if (!m_navMesh)
+    {
+        return false;
+    }
+
     // TODO:
     return false;
 }
@@ -377,6 +394,12 @@ bool CNavMesh::inWater(const position_t& point)
 bool CNavMesh::validPosition(const position_t& position)
 {
     TracyZoneScoped;
+
+    if (!m_navMesh)
+    {
+        return true;
+    }
+
     float spos[3];
     CNavMesh::ToDetourPos(&position, spos);
 
@@ -401,6 +424,12 @@ bool CNavMesh::validPosition(const position_t& position)
 void CNavMesh::snapToValidPosition(position_t& position)
 {
     TracyZoneScoped;
+
+    if (!m_navMesh)
+    {
+        return;
+    }
+
     float spos[3];
     CNavMesh::ToDetourPos(&position, spos);
 
@@ -494,6 +523,11 @@ bool CNavMesh::raycast(const position_t& start, const position_t& end, bool look
     TracyZoneScoped;
 
     if (start.x == end.x && start.y == end.y && start.z == end.z)
+    {
+        return true;
+    }
+
+    if (!m_navMesh)
     {
         return true;
     }
