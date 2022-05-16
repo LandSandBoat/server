@@ -145,8 +145,8 @@ public:
     void  saveMobModifiers();                      // save current state of modifiers
     void  restoreMobModifiers();                   // restore to saved state
 
-    void CallForHelp(bool call);
-    bool CalledForHelp() const;
+    void SetCallForHelpFlag(bool call);
+    bool GetCallForHelpFlag() const;
     void HideHP(bool hide);
     bool IsHPHidden() const;
     void Untargetable(bool untargetable);
@@ -251,6 +251,8 @@ public:
     uint8 m_unk0; // possibly campaign related (entity x24)
     uint8 m_unk1; // (entity_update x25)
     uint8 m_unk2; // (entity_update x26)
+
+    bool m_CallForHelpBlocked;
 
     CEnmityContainer* PEnmityContainer; // система ненависти монстров
 

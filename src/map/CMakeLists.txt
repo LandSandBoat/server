@@ -37,8 +37,8 @@ set(SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/campaign_system.h
     ${CMAKE_CURRENT_SOURCE_DIR}/char_recast_container.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/char_recast_container.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/commandhandler.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/commandhandler.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/command_handler.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/command_handler.h
     ${CMAKE_CURRENT_SOURCE_DIR}/conquest_system.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/conquest_system.h
     ${CMAKE_CURRENT_SOURCE_DIR}/daily_system.cpp
