@@ -140,7 +140,12 @@ jobs:
       - name: Enable Modules
         shell: cmd
         run: |
-          "custom`nera`nrenamer`n" > modules/init.txt
+          python3 << EOF
+          with open("modules/init.txt", "w") as f:
+              f.write("custom\n")
+              f.write("era\n")
+              f.write("renamer\n")
+          EOF
       - name: Configure CMake
         shell: cmd
         run: |
