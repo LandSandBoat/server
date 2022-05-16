@@ -5068,7 +5068,9 @@ namespace battleutils
                             {
                                 highestClaim = static_cast<CTrustEntity*>(highestClaim)->PMaster;
                             }
-                            PAttacker->ForAlliance([&](CBattleEntity* PMember) {
+                            // clang-format off
+                            PAttacker->ForAlliance([&](CBattleEntity* PMember)
+                            {
                                 if (!highestClaim || highestClaim == PMember || highestClaim == PMember->PPet)
                                 { // someone in your alliance is top of hate list, claim for your alliance
                                     mob->m_OwnerID.id     = PAttacker->id;
@@ -5080,6 +5082,7 @@ namespace battleutils
                                     }
                                 }
                             });
+                            // clang-format on
                         }
                     }
                 }
@@ -5107,13 +5110,16 @@ namespace battleutils
             {
                 uint8 pcinzone = 0;
                 uint8 maxLevel = 0;
-                PAttacker->ForAlliance([&pcinzone, &maxLevel, &mob](CBattleEntity* PMember) {
+                // clang-format off
+                PAttacker->ForAlliance([&pcinzone, &maxLevel, &mob](CBattleEntity* PMember)
+                {
                     if (PMember->getZone() == mob->getZone() && distance(PMember->loc.p, mob->loc.p) < 100)
                     {
                         maxLevel = std::max(maxLevel, PMember->GetMLevel());
                         pcinzone++;
                     }
                 });
+                // clang-format on
                 mob->m_HiPartySize = std::max(pcinzone, mob->m_HiPartySize);
                 mob->m_HiPCLvl     = std::max(maxLevel, mob->m_HiPCLvl);
             }
@@ -5126,7 +5132,9 @@ namespace battleutils
         if (mob && mob->isAlive() && mob->m_OwnerID.id == PChar->id)
         { // if we currently own a mob
             bool found = false;
-            static_cast<CBattleEntity*>(PChar)->ForAlliance([&PChar, &mob, &found](CBattleEntity* PMember) {
+            // clang-format off
+            static_cast<CBattleEntity*>(PChar)->ForAlliance([&PChar, &mob, &found](CBattleEntity* PMember)
+            {
                 CCharEntity* member = static_cast<CCharEntity*>(PMember);
                 if (member != PChar && !found && member->getZone() == PChar->getZone() && member->isAlive() &&
                     (!member->PClaimedMob || member->PClaimedMob == mob))
@@ -5135,6 +5143,7 @@ namespace battleutils
                     battleutils::ClaimMob(mob, PMember, true);
                 }
             });
+            // clang-format on
             if (!found)
             { // if mob didn't pass to someone else, unclaim it
                 static_cast<CMobController*>(mob->PAI->GetController())->TapDeclaimTime();
