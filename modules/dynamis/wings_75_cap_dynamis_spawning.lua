@@ -1283,7 +1283,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         onMobRoam = function(mob) xi.dynamis.mobOnRoam(mob) end
         onMobRoamAction = function(mob) xi.dynamis.mobOnRoamAction(mob) end
         onMobMagicPrepare = function(mob, target) 
-            local rnd = math.random()
+            local rnd = math.random(0, 1000)
             -- Dynamis Lord has a small chance to choose death
             if rnd <= 0.05 then
                 return 367 -- Death
@@ -1322,6 +1322,180 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
             end
             zone:setLocalVar("MainDynaLord", mob:getID())
         end
+    elseif mobName == ("Fairy Ring" or "Nantina" or "Dragontrap" or "Alklha" or "Stihi" or "Basilic" or "Jurik" or "Barong" or 
+                       "Tarasca" or "Stollenwurm" or "Koschei" or "Aitvaras" or "Vishap") then -- Dynamis Zone NMs No Auto Attack
+        mobVar =  nmInfoLookup[mobFamily][mobName][7]
+        mobNameFound = nmInfoLookup[mobName][1]
+        groupIdFound = nmInfoLookup[mobName][2]
+        groupZoneFound = nmInfoLookup[mobName][3]
+        onMobSpawn = function(mob) xi.dynamis.setMegaBossStats(mob) 
+            local zone = mob:getZone()
+            zone:setLocalVar(mobVar, mob:getID())
+            xi.dynamis.setNMStats(mob)
+            mob:addMod(xi.mod.REGAIN, 1250)
+            mob:SetAutoAttackEnabled(false)
+        end
+        onMobEngaged = function(mob) xi.dynamis.parentOnEngaged(mob, target) end
+        onMobFight = function(mob) xi.dynamis.mobOnFight(mob) end
+        onMobRoam = function(mob) xi.dynamis.mobOnRoam(mob) end
+        onMobRoamAction = function(mob) xi.dynamis.mobOnRoamAction(mob) end
+        onMobMagicPrepare = function(mob, target) end
+        onMobWeaponSkillPrepare = function(mob, target) end
+        onMobWeaponSkill = function( target, mob, skill) end
+        onMobDeath = function(mob, player, isKiller) xi.dynamis.megaBossOnDeath(mob, player, mobVar) end
+    elseif mobName == ("Scolopendra" or "Suttung" or "Stringes" or "Fire Elemental" or "Water Elemental" or "Ice Elemental" or "Lightning Elemental" or 
+                       "Earth Elemental" or "Air Elemental" or "Light Elemental" or "Dark Elemental" or "Vanguard Dragon") then -- Dynamis Zone NMs with Auto Attack
+        mobVar =  nmInfoLookup[mobFamily][mobName][7]
+        mobNameFound = nmInfoLookup[mobName][1]
+        groupIdFound = nmInfoLookup[mobName][2]
+        groupZoneFound = nmInfoLookup[mobName][3]
+        onMobSpawn = function(mob) 
+            local zone = mob:getZone()
+            zone:setLocalVar(mobVar, mob:getID())
+            xi.dynamis.setNMStats(mob)
+        end
+        onMobEngaged = function(mob) xi.dynamis.parentOnEngaged(mob, target) end
+        onMobFight = function(mob) xi.dynamis.mobOnFight(mob) end
+        onMobRoam = function(mob) xi.dynamis.mobOnRoam(mob) end
+        onMobRoamAction = function(mob) xi.dynamis.mobOnRoamAction(mob) end
+        onMobMagicPrepare = function(mob, target) end
+        onMobWeaponSkillPrepare = function(mob, target) end
+        onMobWeaponSkill = function( target, mob, skill) end
+        onMobDeath = function(mob, player, isKiller) xi.dynamis.megaBossOnDeath(mob, player, mobVar) end
+    elseif mobName == "Ying" then
+        mobVar =  nmInfoLookup[mobFamily][mobName][7]
+        mobNameFound = nmInfoLookup[mobName][1]
+        groupIdFound = nmInfoLookup[mobName][2]
+        groupZoneFound = nmInfoLookup[mobName][3]
+        onMobSpawn = function(mob) 
+            local zone = mob:getZone()
+            local dynaLord = GetMobByID(zone:getLocalVar("MainDynaLord"))
+            xi.dynamis.setNMStats(mob)
+            if dynaLord:getLocalVar("magImmune") < 2 then -- both dragons have not been killed initially
+                dynaLord:setMod(xi.mod.UDMGMAGIC, -100)
+                dynaLord:setMod(xi.mod.UDMGBREATH, -100)
+                dynaLord:setLocalVar("magImmune", 0)
+                mob:setSpawn(-364, -35.661, 17.254) -- Reset Ying's spawn point to initial spot.
+            else
+                mob:setSpawn(-414.282, -44, 20.427) -- Spawned by DL, reset to DL's spawn point.
+            end
+        end
+        onMobEngaged = function(mob) end
+        onMobFight = function(mob, target) 
+            local zone = mob:getZone()
+            local yang = GetMobByID(zone:getLocalVar("Yang"))
+            local yangToD = mob:getLocalVar("yangToD")
+            -- Repop Yang every 30 seconds if Ying is up and Yang is not.
+            if not yang:isSpawned() and os.time() > yangToD + 30 then
+                yang:setSpawn(mob:getXPos(), mob:getYPos(), mob:getZPos())
+                yang:spawn()
+                yang:updateEnmity(target)
+            end
+        end
+        onMobRoam = function(mob) xi.dynamis.mobOnRoam(mob) end
+        onMobRoamAction = function(mob) xi.dynamis.mobOnRoamAction(mob) end
+        onMobMagicPrepare = function(mob, target) end
+        onMobWeaponSkillPrepare = function(mob, target) end
+        onMobWeaponSkill = function( target, mob, skill) end
+        onMobDeath = function(mob, player, isKiller) 
+            local zone = mob:getZone()
+            local yang = GetMobByID(zone:getLocalVar("Yang"))
+            local dynaLord = GetMobByID(zone:getLocalVar("MainDynaLord"))
+            local dialogYing = 7289
+            if isKiller then
+                if yang:isAlive() == true then
+                    mob:showText(mob, dialogYing)
+                else
+                    mob:showText(mob, dialogYing + 2)
+                end
+            end
+
+            yang:setLocalVar("yingToD", os.time())
+            if dynaLord:getLocalVar("magImmune") == 0 then
+                dynaLord:setMod(xi.mod.UDMGMAGIC, 0)
+                dynaLord:setMod(xi.mod.UDMGBREATH, 0)
+                if dynaLord:getLocalVar("physImmune") == 1 then -- other dragon is also dead
+                    dynaLord:setLocalVar("physImmune", 2)
+                    dynaLord:setLocalVar("magImmune", 2)
+                else
+                    dynaLord:setLocalVar("magImmune", 1)
+                end
+            end
+        end
+    elseif mobName == "Yang" then
+        mobVar =  nmInfoLookup[mobFamily][mobName][7]
+        mobNameFound = nmInfoLookup[mobName][1]
+        groupIdFound = nmInfoLookup[mobName][2]
+        groupZoneFound = nmInfoLookup[mobName][3]
+        onMobSpawn = function(mob) 
+            local zone = mob:getZone()
+            local dynaLord = GetMobByID(zone:getLocalVar("MainDynaLord"))
+            xi.dynamis.setNMStats(mob)
+            if dynaLord:getLocalVar("magImmune") < 2 then -- both dragons have not been killed initially
+                dynaLord:setMod(xi.mod.UDMGMAGIC, -100)
+                dynaLord:setMod(xi.mod.UDMGBREATH, -100)
+                dynaLord:setLocalVar("magImmune", 0)
+                mob:setSpawn(-364, -35.661, 17.254) -- Reset Ying's spawn point to initial spot.
+            else
+                mob:setSpawn(-414.282, -44, 20.427) -- Spawned by DL, reset to DL's spawn point.
+            end
+        end
+        onMobEngaged = function(mob) end
+        onMobFight = function(mob, target) 
+            local zone = mob:getZone()
+            local ying = GetMobByID(zone:getLocalVar("Ying"))
+            local yingToD = mob:getLocalVar("yingToD")
+            -- Repop ying every 30 seconds if Ying is up and ying is not.
+            if not ying:isSpawned() and os.time() > yingToD + 30 then
+                ying:setSpawn(mob:getXPos(), mob:getYPos(), mob:getZPos())
+                ying:spawn()
+                ying:updateEnmity(target)
+            end
+        end
+        onMobRoam = function(mob) xi.dynamis.mobOnRoam(mob) end
+        onMobRoamAction = function(mob) xi.dynamis.mobOnRoamAction(mob) end
+        onMobMagicPrepare = function(mob, target) end
+        onMobWeaponSkillPrepare = function(mob, target) end
+        onMobWeaponSkill = function( target, mob, skill) end
+        onMobDeath = function(mob, player, isKiller) 
+            local zone = mob:getZone()
+            local ying = GetMobByID(zone:getLocalVar("Ying"))
+            local dynaLord = GetMobByID(zone:getLocalVar("MainDynaLord"))
+            local dialogYing = 7290
+            if isKiller then
+                if ying:isAlive() == true then
+                    mob:showText(mob, dialogYing)
+                else
+                    mob:showText(mob, dialogYing + 2)
+                end
+            end
+
+            ying:setLocalVar("yingToD", os.time())
+            if dynaLord:getLocalVar("physImmune") == 0 then
+                dynaLord:setMod(xi.mod.UDMGMAGIC, 0)
+                dynaLord:setMod(xi.mod.UDMGBREATH, 0)
+                if dynaLord:getLocalVar("magImmune") == 1 then -- other dragon is also dead
+                    dynaLord:setLocalVar("physImmune", 2)
+                    dynaLord:setLocalVar("magImmune", 2)
+                else
+                    dynaLord:setLocalVar("physImmune", 1)
+                end
+            end
+        end
+    elseif string.sub(mobName, 1, 9) == "Animated " then -- Animated Weapons
+        mobVar =  nmInfoLookup[mobFamily][mobName][7]
+        mobNameFound = nmInfoLookup[mobName][1]
+        groupIdFound = nmInfoLookup[mobName][2]
+        groupZoneFound = nmInfoLookup[mobName][3]
+        onMobSpawn = function(mob) xi.dynamis.setMegaBossStats(mob) end
+        onMobEngaged = function(mob) xi.dynamis.parentOnEngaged(mob, target) end
+        onMobFight = function(mob) xi.dynamis.mobOnFight(mob) end
+        onMobRoam = function(mob) xi.dynamis.mobOnRoam(mob) end
+        onMobRoamAction = function(mob) xi.dynamis.mobOnRoamAction(mob) end
+        onMobMagicPrepare = function(mob, target) end
+        onMobWeaponSkillPrepare = function(mob, target) end
+        onMobWeaponSkill = function( target, mob, skill) end
+        onMobDeath = function(mob, player, isKiller) xi.dynamis.megaBossOnDeath(mob, player, mobVar) end
     end
     local mob = zone:insertDynamicEntity({
         objtype = xi.objType.MOB,
