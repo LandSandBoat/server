@@ -277,7 +277,8 @@ void SmallPacket0x00A(map_session_data_t* const PSession, CCharEntity* const PCh
         if (destination >= MAX_ZONEID)
         {
             ShowWarning("packet_system::SmallPacket0x00A player tried to enter zone out of range: %d", destination);
-            PChar->loc.destination = destination = ZONE_RESIDENTIAL_AREA;
+            ShowWarning("packet_system::SmallPacket0x00A dumping player `%s` to a valid zone!", PChar->GetName());
+            PChar->loc.destination = destination = (uint16)ZONE_SELBINA;
         }
 
         zoneutils::GetZone(destination)->IncreaseZoneCounter(PChar);
@@ -317,13 +318,16 @@ void SmallPacket0x00A(map_session_data_t* const PSession, CCharEntity* const PCh
     }
     else if (PChar->loc.zone != nullptr)
     {
+        // TODO: this should only happen ONCE, instead of spamming the log dozens of times..
         ShowWarning("Client cannot receive packet or key is invalid: %s, Zone: %s (%i)",
             PChar->GetName(), PChar->loc.zone->GetName(), PChar->loc.zone->GetID());
 
         // Write a sane location for them
-        auto newZone = PChar->loc.prevzone ? PChar->loc.prevzone : (uint8)ZONE_VALKURM_DUNES;
-        PChar->loc.destination = newZone;
-        sql->Async("UPDATE chars SET pos_zone = %u WHERE charid = %u", newZone, PChar->id);
+        // TODO: work out how to drop player in moghouse that exits them to the zone they were in before this happened, like we used to.
+        ShowWarning("packet_system::SmallPacket0x00A dumping player `%s` to a valid zone!", PChar->GetName());
+        auto prevZone = PChar->loc.prevzone ? PChar->loc.prevzone : (uint16)ZONE_VALKURM_DUNES;
+        PChar->loc.destination = prevZone;
+        sql->Async("UPDATE chars SET pos_zone = %u WHERE charid = %u", prevZone, PChar->id);
     }
 
     charutils::SaveCharPosition(PChar);
@@ -887,9 +891,9 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
 
             if (auto* PMob = dynamic_cast<CMobEntity*>(PChar->GetBattleTarget()))
             {
-                if (!PMob->CalledForHelp() && PMob->PEnmityContainer->HasID(PChar->id))
+                if (!PMob->GetCallForHelpFlag() && PMob->PEnmityContainer->HasID(PChar->id) && !PMob->m_CallForHelpBlocked)
                 {
-                    PMob->CallForHelp(true);
+                    PMob->SetCallForHelpFlag(true);
                     PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CMessageBasicPacket(PChar, PChar, 0, 0, 19));
                     return;
                 }

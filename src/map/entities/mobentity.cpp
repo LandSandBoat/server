@@ -70,6 +70,8 @@ CMobEntity::CMobEntity()
     m_unk1 = 8;
     m_unk2 = 0;
 
+    m_CallForHelpBlocked = false;
+
     allegiance = ALLEGIANCE_TYPE::MOB;
 
     // default to normal roaming
@@ -437,7 +439,7 @@ bool CMobEntity::IsHPHidden() const
     return m_flags & FLAG_HIDE_HP;
 }
 
-void CMobEntity::CallForHelp(bool call)
+void CMobEntity::SetCallForHelpFlag(bool call)
 {
     if (call)
     {
@@ -451,7 +453,7 @@ void CMobEntity::CallForHelp(bool call)
     updatemask |= UPDATE_COMBAT;
 }
 
-bool CMobEntity::CalledForHelp() const
+bool CMobEntity::GetCallForHelpFlag() const
 {
     return m_flags & FLAG_CALL_FOR_HELP;
 }
@@ -546,7 +548,7 @@ void CMobEntity::Spawn()
     m_ItemStolen   = false;
     m_DropItemTime = 1000;
     animationsub   = (uint8)getMobMod(MOBMOD_SPAWN_ANIMATIONSUB);
-    CallForHelp(false);
+    SetCallForHelpFlag(false);
 
     PEnmityContainer->Clear();
 
@@ -813,7 +815,7 @@ void CMobEntity::DistributeRewards()
         // NOTE: this is called for all alliance / party members!
         luautils::OnMobDeath(this, PChar);
 
-        if (!CalledForHelp())
+        if (!GetCallForHelpFlag())
         {
             blueutils::TryLearningSpells(PChar, this);
             m_UsedSkillIds.clear();

@@ -733,7 +733,7 @@ void CZoneEntities::SpawnPCs(CCharEntity* PChar)
             {
                 spawnedCharacters.emplace(std::make_pair(totalScore, pc));
             }
-            else if (spawnedCharacters.top().first < totalScore)
+            else if (!spawnedCharacters.empty() && spawnedCharacters.top().first < totalScore)
             {
                 spawnedCharacters.emplace(std::make_pair(totalScore, pc));
                 spawnedCharacters.pop();
@@ -776,7 +776,8 @@ void CZoneEntities::SpawnPCs(CCharEntity* PChar)
             auto bonus       = bonusIter == scoreBonus.end() ? 0 : bonusIter->second;
             float totalScore = significanceScore + bonus - charDistance;
 
-            if (PChar->SpawnPCList.size() < CHARACTER_SYNC_LIMIT_MAX || totalScore > spawnedCharacters.top().first)
+            if (PChar->SpawnPCList.size() < CHARACTER_SYNC_LIMIT_MAX ||
+                (!spawnedCharacters.empty() && totalScore > spawnedCharacters.top().first))
             {
                 // Is nearby and should be considered as a candidate to be spawned
                 candidateCharacters.push(std::make_pair(totalScore, PCurrentChar));
