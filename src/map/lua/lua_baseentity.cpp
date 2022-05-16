@@ -4702,6 +4702,72 @@ void CLuaBaseEntity::setAnimationSub(uint8 animationsub)
 }
 
 /************************************************************************
+ *  Function: getCallForHelpFlag()
+ *  Purpose : Find out if CFH has been called on a mob.
+ *  Example : mob:getCallForHelpFlag()
+ *  Notes   :
+ ************************************************************************/
+
+bool CLuaBaseEntity::getCallForHelpFlag() const
+{
+    if (auto* PMob = dynamic_cast<CMobEntity*>(m_PBaseEntity))
+    {
+        return PMob->GetCallForHelpFlag();
+    }
+    ShowWarning("getCallForHelpFlag called on invalid entity.");
+    return false;
+}
+
+/************************************************************************
+ *  Function: setCallForHelpFlag(cfh)
+ *  Purpose : Force-set the CFH flag on a mob.
+ *  Example : mob:setCallForHelpFlag(true)
+ *  Notes   :
+ ************************************************************************/
+
+void CLuaBaseEntity::setCallForHelpFlag(bool cfh)
+{
+    if (auto* PMob = dynamic_cast<CMobEntity*>(m_PBaseEntity))
+    {
+        PMob->SetCallForHelpFlag(cfh);
+    }
+    ShowWarning("setCallForHelpFlag called on invalid entity.");
+}
+
+/************************************************************************
+ *  Function: getCallForHelpBlocked()
+ *  Purpose : Find out if the CFH flag has been blocked for a mob.
+ *  Example : mob:getCallForHelpBlocked()
+ *  Notes   :
+ ************************************************************************/
+
+bool CLuaBaseEntity::getCallForHelpBlocked() const
+{
+    if (auto* PMob = dynamic_cast<CMobEntity*>(m_PBaseEntity))
+    {
+        return PMob->m_CallForHelpBlocked;
+    }
+    ShowWarning("getCallForHelpBlocked called on invalid entity.");
+    return false;
+}
+
+/************************************************************************
+ *  Function: setCallForHelpBlocked(blocked)
+ *  Purpose : Block or unblock the m_CallForHelpBlocked flag for a mob.
+ *  Example : mob:setCallForHelpBlocked(true)
+ *  Notes   :
+ ************************************************************************/
+
+void CLuaBaseEntity::setCallForHelpBlocked(bool blocked)
+{
+    if (auto* PMob = dynamic_cast<CMobEntity*>(m_PBaseEntity))
+    {
+        PMob->m_CallForHelpBlocked = blocked;
+    }
+    ShowWarning("setCallForHelpBlocked called on invalid entity.");
+}
+
+/************************************************************************
  *  Function: getNation()
  *  Purpose : Returns the integer value of the player's nation
  *  Example : player:getNation()
@@ -13882,6 +13948,10 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("setAnimation", CLuaBaseEntity::setAnimation);
     SOL_REGISTER("getAnimationSub", CLuaBaseEntity::getAnimationSub);
     SOL_REGISTER("setAnimationSub", CLuaBaseEntity::setAnimationSub);
+    SOL_REGISTER("getCallForHelpFlag", CLuaBaseEntity::getCallForHelpFlag);
+    SOL_REGISTER("setCallForHelpFlag", CLuaBaseEntity::setCallForHelpFlag);
+    SOL_REGISTER("getCallForHelpBlocked", CLuaBaseEntity::getCallForHelpBlocked);
+    SOL_REGISTER("setCallForHelpBlocked", CLuaBaseEntity::setCallForHelpBlocked);
 
     // Player Status
     SOL_REGISTER("getNation", CLuaBaseEntity::getNation);
