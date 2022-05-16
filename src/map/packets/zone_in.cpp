@@ -37,6 +37,7 @@
 
 uint16 GetMogHouseID(CCharEntity* PChar)
 {
+    // TODO: verify wtf is going on with this function. either these aren't supposed to be zone IDs or somehow Jeuno's mog is western adoulin!
     switch (zoneutils::GetCurrentRegion(PChar->getZone()))
     {
         case REGION_TYPE::WEST_AHT_URHGAN:
