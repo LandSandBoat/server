@@ -54,15 +54,16 @@ m:addOverride("xi.zones.Escha_RuAun.Zone.onZoneTick", function(zone)
             end,    
 
             onMobFight = function(mob, target)
-                if mob:getHPP() < 10 then
+--[[                if mob:getHPP() < 10 then
                     local players = mob:getZone():getPlayers()
-					
-					for i, participant in pairs(players) do
-					    if participant:hasEnmity() then
+                    printf("players: %s", players)
+                    
+                    for i, participant in pairs(players) do
+                        if participant:hasEnmity() then
                             participant:setLocalVar("[Domain]Participant", 1)
-						end	
+                        end    
                     end
-                end
+                end  ]]--
             end,
 
             onMobDeath = function(mob, player, isKiller, noKiller)
@@ -78,19 +79,18 @@ m:addOverride("xi.zones.Escha_RuAun.Zone.onZoneTick", function(zone)
                 player:PrintToArea("{Apururu} Would you please go and see if she's alrightaru?", xi.msg.channel.SYSTEM_3, xi.msg.area.SYSTEM)
 
                 -- Reward escha beads
-                if player:getLocalVar("[Domain]Participant") == 1 and player:hasStatusEffect(xi.effect.ELVORSEAL) then
-                    player:setLocalVar("[Domain]Participant", 0)
-                    player:addCurrency("escha_beads", beadsRewarded)
-                    player:PrintToPlayer(string.format("You've earned %s escha beads for your efforts in battle.", beadsRewarded), xi.msg.channel.SYSTEM_3)
-                else
-                    player:PrintToPlayer("You have not contributed enough to claim a reward.", xi.msg.channel.SYSTEM_3)
-
-				-- Debug
-                    printf("Player Elvorseal Active: %s", player:hasStatusEffect(xi.effect.ELVORSEAL))
-    				printf("Player Participated?: %s", player:getLocalVar("[Domain]Participant"))
+                local beadsRewarded = math.random(850, 1250)
+				local players = mob:getZone():getPlayers()
+                
+                for i, participant in pairs(players) do
+                    if participant:hasStatusEffect(xi.effect.ELVORSEAL) then
+                        participant:delStatusEffect(xi.effect.ELVORSEAL)
+                        participant:addCurrency("escha_beads", beadsRewarded)
+                        participant:PrintToPlayer(string.format("You've earned %s escha beads for your efforts in battle.", beadsRewarded), xi.msg.channel.SYSTEM_3)
+                    else
+                        participant:PrintToPlayer("You have not contributed enough to claim a reward.", xi.msg.channel.SYSTEM_3)
+                    end
                 end
-
-                player:delStatusEffect(xi.effect.ELVORSEAL)
 
             end,
         })
@@ -155,22 +155,23 @@ m:addOverride("xi.zones.Reisenjima_Henge.Zone.onZoneTick", function(zone)
             end,    
 
             onMobFight = function(mob, target)
-                if mob:getHPP() < 10 then
+--[[                if mob:getHPP() < 10 then
                     local players = mob:getZone():getPlayers()
-					
-					for i, participant in pairs(players) do
-					    if participant:hasEnmity() then
+                    printf("players: %s", players)
+                    
+                    for i, participant in pairs(players) do
+                        if participant:hasEnmity() then
                             participant:setLocalVar("[Domain]Participant", 1)
-						end	
+                        end    
                     end
-                end
+                end  ]]--
             end,
 
             onMobDeath = function(mob, player, isKiller, noKiller)                
                 -- Roll for HQ version and handle next mob pop.
                 local hqChance = math.random(1, 100)
                 
-				if hqChance <= 15 then
+                if hqChance <= 15 then
                     SetServerVariable("[Domain]NM", 3) -- HQ: Bahamut Pop
                     player:PrintToArea("{Apururu} Ohsie-nosey! We just received a report from our scouts that Bahamut has entered the airspace in Provenance!", xi.msg.channel.SYSTEM_3, xi.msg.area.SYSTEM)
                     player:PrintToArea("{Apururu} Rally the troops, we can't let him get away!", xi.msg.channel.SYSTEM_3, xi.msg.area.SYSTEM)
@@ -182,23 +183,20 @@ m:addOverride("xi.zones.Reisenjima_Henge.Zone.onZoneTick", function(zone)
 
                 SetServerVariable("[Domain]NMToD", os.time())
                 SetServerVariable("[Domain]NMSpawned", 0)
-				
+                
                 -- Reward escha beads
                 local beadsRewarded = math.random(850, 1250)
-				
-                if player:getLocalVar("[Domain]Participant") == 1 and player:hasStatusEffect(xi.effect.ELVORSEAL) then
-                    player:setLocalVar("[Domain]Participant", 0)
-                    player:addCurrency("escha_beads", beadsRewarded)
-                    player:PrintToPlayer(string.format("You've earned %s escha beads for your efforts in battle.", beadsRewarded), xi.msg.channel.SYSTEM_3)
-                else
-                    player:PrintToPlayer("You have not contributed enough to claim a reward.", xi.msg.channel.SYSTEM_3)
-
-				-- Debug
-                    printf("Player Elvorseal Active: %s", player:hasStatusEffect(xi.effect.ELVORSEAL))
-    				printf("Player Participated?: %s", player:getLocalVar("[Domain]Participant"))
-                end    
-
-                player:delStatusEffect(xi.effect.ELVORSEAL)
+				local players = mob:getZone():getPlayers()
+                
+                for i, participant in pairs(players) do
+                    if participant:hasStatusEffect(xi.effect.ELVORSEAL) then
+                        participant:delStatusEffect(xi.effect.ELVORSEAL)
+                        participant:addCurrency("escha_beads", beadsRewarded)
+                        participant:PrintToPlayer(string.format("You've earned %s escha beads for your efforts in battle.", beadsRewarded), xi.msg.channel.SYSTEM_3)
+                    else
+                        participant:PrintToPlayer("You have not contributed enough to claim a reward.", xi.msg.channel.SYSTEM_3)
+                    end
+                end
 
             end,
         })
@@ -245,7 +243,7 @@ end)
 -- NM 3
 m:addOverride("xi.zones.Provenance.Zone.onZoneTick", function(zone)
     super(zone)
-	
+    
     --------------------
     -- NM 3 (Regular)
     --------------------
@@ -272,18 +270,10 @@ m:addOverride("xi.zones.Provenance.Zone.onZoneTick", function(zone)
             end,
 
             onMobFight = function(mob, target)
-                if mob:getHPP() < 10 then
-                    local players = mob:getZone():getPlayers()
-					
-					for i, participant in pairs(players) do
-					    if participant:hasEnmity() then
-                            participant:setLocalVar("[Domain]Participant", 1)
-						end	
-                    end
-                end
             end,
 
-            onMobDeath = function(mob, player, isKiller, noKiller)                
+            onMobDeath = function(mob, player, isKiller, noKiller)     
+				
                 -- Variable control
                 SetServerVariable("[Domain]NMToD", os.time()) -- Set NM ToD
                 SetServerVariable("[Domain]NM", 0)            -- Set NM to be spawned next
@@ -295,21 +285,17 @@ m:addOverride("xi.zones.Provenance.Zone.onZoneTick", function(zone)
 
                 -- Reward escha beads
                 local beadsRewarded = math.random(850, 1250)
-				
-                if player:getLocalVar("[Domain]Participant") == 1 and player:hasStatusEffect(xi.effect.ELVORSEAL) then
-                    player:setLocalVar("[Domain]Participant", 0)
-                    player:addCurrency("escha_beads", beadsRewarded)
-                    player:PrintToPlayer(string.format("You've earned %s escha beads for your efforts in battle.", beadsRewarded), xi.msg.channel.SYSTEM_3)
-                else
-                    player:PrintToPlayer("You have not contributed enough to claim a reward.", xi.msg.channel.SYSTEM_3)
-
-				-- Debug
-                    printf("Player Elvorseal Active: %s", player:hasStatusEffect(xi.effect.ELVORSEAL))
-    				printf("Player Participated?: %s", player:getLocalVar("[Domain]Participant"))
+				local players = mob:getZone():getPlayers()
+                
+                for i, participant in pairs(players) do
+                    if participant:hasStatusEffect(xi.effect.ELVORSEAL) then
+                        participant:delStatusEffect(xi.effect.ELVORSEAL)
+                        participant:addCurrency("escha_beads", beadsRewarded)
+                        participant:PrintToPlayer(string.format("You've earned %s escha beads for your efforts in battle.", beadsRewarded), xi.msg.channel.SYSTEM_3)
+                    else
+                        participant:PrintToPlayer("You have not contributed enough to claim a reward.", xi.msg.channel.SYSTEM_3)
+                    end
                 end
-
-                player:delStatusEffect(xi.effect.ELVORSEAL)
-
             end,
         })
     
@@ -375,32 +361,32 @@ m:addOverride("xi.zones.Provenance.Zone.onZoneTick", function(zone)
     
             groupId = 17,
             groupZoneId = 29,
-			
+            
             onMobSpawn = function(mob)
-			    SetServerVariable("[Domain]NMSpawned", 1)
-			    SetServerVariable("[Domain]PushMessage", 1)
+                SetServerVariable("[Domain]NMSpawned", 1)
+                SetServerVariable("[Domain]PushMessage", 1)
 
                 -- Debug
                 printf("Bahamut is Spawned")
-			end,
+            end,
 
             onMobFight = function(mob, target)
                 if mob:getHPP() < 10 then
                     local players = mob:getZone():getPlayers()
-					
-					for i, participant in pairs(players) do
-					    if participant:hasEnmity() then
+                    
+                    for i, participant in pairs(players) do
+                        if participant:hasEnmity() then
                             participant:setLocalVar("[Domain]Participant", 1)
-						end	
+                        end    
                     end
                 end
             end,
-			
+            
             onMobDeath = function(mob, player, isKiller, noKiller)
                 -- Variable control
-			    SetServerVariable("[Domain]NMToD", os.time()) -- Set NM ToD
-    		    SetServerVariable("[Domain]NM", 0)            -- Set NM to be spawned next
-				SetServerVariable("[Domain]NMSpawned", 0)     -- Set NM spawned flag (To not spawn infinite NMs)
+                SetServerVariable("[Domain]NMToD", os.time()) -- Set NM ToD
+                SetServerVariable("[Domain]NM", 0)            -- Set NM to be spawned next
+                SetServerVariable("[Domain]NMSpawned", 0)     -- Set NM spawned flag (To not spawn infinite NMs)
 
 
                 -- Server-wide message
@@ -408,22 +394,18 @@ m:addOverride("xi.zones.Provenance.Zone.onZoneTick", function(zone)
                 player:PrintToArea("{Apururu} Would you please go and see if she's alrightaru?", xi.msg.channel.SYSTEM_3, xi.msg.area.SYSTEM)
 
                 -- Reward escha beads
-                local beadsRewarded = math.random(1500, 2500)
+                local beadsRewarded = math.random(850, 1250)
+				local players = mob:getZone():getPlayers()
                 
-				-- Debug
-                printf("Player Elvorseal Active: %s", player:hasStatusEffect(xi.effect.ELVORSEAL))
-				printf("Player Participated?: %s", player:getLocalVar("[Domain]Participant"))
-				
-                if player:getLocalVar("[Domain]Participant") == 1 and player:hasStatusEffect(xi.effect.ELVORSEAL) then
-                    player:setLocalVar("[Domain]Participant", 0)
-                    player:addCurrency("escha_beads", beadsRewarded)
-                    player:PrintToPlayer(string.format("You've earned %s escha beads for your efforts in battle.", beadsRewarded), xi.msg.channel.SYSTEM_3)
-                else
-                    player:PrintToPlayer("You have not contributed enough to claim a reward.", xi.msg.channel.SYSTEM_3)
+                for i, participant in pairs(players) do
+                    if participant:hasStatusEffect(xi.effect.ELVORSEAL) then
+                        participant:delStatusEffect(xi.effect.ELVORSEAL)
+                        participant:addCurrency("escha_beads", beadsRewarded)
+                        participant:PrintToPlayer(string.format("You've earned %s escha beads for your efforts in battle.", beadsRewarded), xi.msg.channel.SYSTEM_3)
+                    else
+                        participant:PrintToPlayer("You have not contributed enough to claim a reward.", xi.msg.channel.SYSTEM_3)
+                    end
                 end
-
-                player:delStatusEffect(xi.effect.ELVORSEAL)
-
             end,
         })
   
@@ -433,7 +415,7 @@ m:addOverride("xi.zones.Provenance.Zone.onZoneTick", function(zone)
         mob:spawn()
 
         --  Set MobMods
-		mob:addMod(xi.mod.HUMANOID_KILLER, 7)
+        mob:addMod(xi.mod.HUMANOID_KILLER, 7)
         mob:addMod(xi.mod.MAIN_DMG_RATING, 50)
         mob:addMod(xi.mod.STR, 20)
         mob:addMod(xi.mod.VIT, 10)
@@ -464,7 +446,7 @@ m:addOverride("xi.zones.Provenance.Zone.onZoneTick", function(zone)
         mob:setMobMod(xi.mobMod.SKILL_LIST, 277)
         mob:setMobMod(xi.mobMod.SPELL_LIST, 24)
     end
-	    
+        
 end)
 
 --------------------
@@ -475,7 +457,7 @@ m:addOverride("xi.zones.Misareaux_Coast.npcs.Undulating_Confluence.onEventFinish
     if csid == 14 and option == 1 then
         npcUtil.giveItem(player, xi.items.SCROLL_OF_INSTANT_WARP) -- scroll_of_instant_warp
         player:setPos(-0.037, -43.676, -260.951, 187, 289)
-		player:addStatusEffect(xi.effect.ELVORSEAL, 1, 0, 0)
+        player:addStatusEffect(xi.effect.ELVORSEAL, 1, 0, 0)
         player:PrintToArea("{Apururu} Looks like our forces-warses are gathering for domain invasion! Hurry-worry and join them!", xi.msg.channel.SYSTEM_3, xi.msg.area.SYSTEM)
     end
 end)
@@ -498,7 +480,7 @@ m:addOverride("xi.zones.Qufim_Island.npcs.Undulating_Confluence.onEventFinish", 
     if csid == 65 and option == 1 then
         npcUtil.giveItem(player, xi.items.SCROLL_OF_INSTANT_WARP) -- scroll_of_instant_warp
         player:setPos(-576.140, -228.000, 503.928, 120, 222)
-		player:addStatusEffect(xi.effect.ELVORSEAL, 1, 0, 0)
+        player:addStatusEffect(xi.effect.ELVORSEAL, 1, 0, 0)
         player:PrintToArea("{Apururu} Looks like our forces-warses are gathering for domain invasion! Hurry-worry and join them!", xi.msg.channel.SYSTEM_3, xi.msg.area.SYSTEM)
     end
 end)
@@ -530,7 +512,7 @@ m:addOverride("xi.zones.La_Theine_Plateau.npcs.Dimensional_Portal.onTrigger", fu
                 function(playerArg)
                     npcUtil.giveItem(player, xi.items.SCROLL_OF_INSTANT_WARP) -- scroll_of_instant_warp
                     player:setAnimation(101)
-		            player:addStatusEffect(xi.effect.ELVORSEAL, 1, 0, 0)
+                    player:addStatusEffect(xi.effect.ELVORSEAL, 1, 0, 0)
                     player:setPos(-23.00, 5.50, 0.00, 0, 292) -- To Reisenjima
                 end,
             },
@@ -575,8 +557,8 @@ m:addOverride("xi.zones.Konschtat_Highlands.npcs.Dimensional_Portal.onTrigger", 
                 function(playerArg)
                     npcUtil.giveItem(player, xi.items.SCROLL_OF_INSTANT_WARP) -- scroll_of_instant_warp
                     player:setAnimation(101)
-		            player:addStatusEffect(xi.effect.ELVORSEAL, 1, 0, 0)
-		            player:setPos(-23.00, 5.50, 0.00, 0, 292) -- To Reisenjima
+                    player:addStatusEffect(xi.effect.ELVORSEAL, 1, 0, 0)
+                    player:setPos(-23.00, 5.50, 0.00, 0, 292) -- To Reisenjima
                 end,
             },
         },
@@ -620,7 +602,7 @@ m:addOverride("xi.zones.Tahrongi_Canyon.npcs.Dimensional_Portal.onTrigger", func
                 function(playerArg)
                     npcUtil.giveItem(player, xi.items.SCROLL_OF_INSTANT_WARP) -- scroll_of_instant_warp
                     player:setAnimation(101)
-		            player:addStatusEffect(xi.effect.ELVORSEAL, 1, 0, 0)
+                    player:addStatusEffect(xi.effect.ELVORSEAL, 1, 0, 0)
                     player:setPos(-23.00, 5.50, 0.00, 0, 292) -- To Reisenjima
                 end,
             },
@@ -661,6 +643,7 @@ m:addOverride("xi.zones.Escha_RuAun.Zone.onInitialize", function(zone)
     local beam1 = zone:insertDynamicEntity({
         objtype = xi.objType.NPC,
         name = " ",
+		flag = 2056,
         look = 2472,
         x = -10.909,
         y = -43.600,
@@ -671,6 +654,7 @@ m:addOverride("xi.zones.Escha_RuAun.Zone.onInitialize", function(zone)
     local beam2 = zone:insertDynamicEntity({
         objtype = xi.objType.NPC,
         name = " ",
+		flag = 2056,
         look = 2472,
         x = -14.616,
         y = -43.600,
@@ -681,6 +665,7 @@ m:addOverride("xi.zones.Escha_RuAun.Zone.onInitialize", function(zone)
     local beam3 = zone:insertDynamicEntity({
         objtype = xi.objType.NPC,
         name = " ",
+		flag = 2056,
         look = 2472,
         x = -18.180,
         y = -43.600,
@@ -691,6 +676,7 @@ m:addOverride("xi.zones.Escha_RuAun.Zone.onInitialize", function(zone)
     local beam4 = zone:insertDynamicEntity({
         objtype = xi.objType.NPC,
         name = " ",
+		flag = 2056,
         look = 2472,
         x = 14.2821,
         y = -43.600,
@@ -701,6 +687,7 @@ m:addOverride("xi.zones.Escha_RuAun.Zone.onInitialize", function(zone)
     local beam5 = zone:insertDynamicEntity({
         objtype = xi.objType.NPC,
         name = " ",
+		flag = 2056,
         look = 2472,
         x = 17.416,
         y = -43.600,
@@ -711,6 +698,7 @@ m:addOverride("xi.zones.Escha_RuAun.Zone.onInitialize", function(zone)
     local beam6 = zone:insertDynamicEntity({
         objtype = xi.objType.NPC,
         name = " ",
+		flag = 2056,
         look = 2472,
         x = 20.832,
         y = -43.600,
@@ -721,6 +709,7 @@ m:addOverride("xi.zones.Escha_RuAun.Zone.onInitialize", function(zone)
     local beam7 = zone:insertDynamicEntity({
         objtype = xi.objType.NPC,
         name = " ",
+		flag = 2056,
         look = 2472,
         x = 8.912,
         y = -44.0130,
@@ -731,6 +720,7 @@ m:addOverride("xi.zones.Escha_RuAun.Zone.onInitialize", function(zone)
     local beam8 = zone:insertDynamicEntity({
         objtype = xi.objType.NPC,
         name = " ",
+		flag = 2056,
         look = 2472,
         x = 5.442,
         y = -44.013,
@@ -741,6 +731,7 @@ m:addOverride("xi.zones.Escha_RuAun.Zone.onInitialize", function(zone)
     local beam9 = zone:insertDynamicEntity({
         objtype = xi.objType.NPC,
         name = " ",
+		flag = 2056,
         look = 2472,
         x = 0.652,
         y = -44.013,
@@ -751,6 +742,7 @@ m:addOverride("xi.zones.Escha_RuAun.Zone.onInitialize", function(zone)
     local beam10 = zone:insertDynamicEntity({
         objtype = xi.objType.NPC,
         name = " ",
+		flag = 2056,
         look = 2472,
         x = -4.160,
         y = -44.013,
@@ -761,6 +753,7 @@ m:addOverride("xi.zones.Escha_RuAun.Zone.onInitialize", function(zone)
     local beam11 = zone:insertDynamicEntity({
         objtype = xi.objType.NPC,
         name = " ",
+		flag = 2056,
         look = 2472,
         x = -8.615,
         y = -44.013,
@@ -771,6 +764,7 @@ m:addOverride("xi.zones.Escha_RuAun.Zone.onInitialize", function(zone)
     local beam12 = zone:insertDynamicEntity({
         objtype = xi.objType.NPC,
         name = " ",
+		flag = 2056,
         look = 2472,
         x = -0.113,
         y = -40.00,

@@ -1,0 +1,14 @@
+UPDATE weapon_skills SET skilllevel = "230" WHERE `name` = "apex_arrow";
+UPDATE weapon_skills SET skilllevel = "230" WHERE `name` = "blade_shun";
+UPDATE weapon_skills SET skilllevel = "230" WHERE `name` = "entropy";
+UPDATE weapon_skills SET skilllevel = "230" WHERE `name` = "exenterator";
+UPDATE weapon_skills SET skilllevel = "230" WHERE `name` = "last_stand";
+UPDATE weapon_skills SET skilllevel = "230" WHERE `name` = "realmrazer";
+UPDATE weapon_skills SET skilllevel = "230" WHERE `name` = "requiescat";
+UPDATE weapon_skills SET skilllevel = "230" WHERE `name` = "resolution";
+UPDATE weapon_skills SET skilllevel = "230" WHERE `name` = "ruinator";
+UPDATE weapon_skills SET skilllevel = "230" WHERE `name` = "shattersoul";
+UPDATE weapon_skills SET skilllevel = "230" WHERE `name` = "shijin_spiral";
+UPDATE weapon_skills SET skilllevel = "230" WHERE `name` = "stardiver";
+UPDATE weapon_skills SET skilllevel = "230" WHERE `name` = "tachi_shoha";
+UPDATE weapon_skills SET skilllevel = "230" WHERE `name` = "upheaval";
