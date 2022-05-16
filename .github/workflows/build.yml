@@ -124,7 +124,7 @@ jobs:
             topaz_game_64.exe
             topaz_search_64.exe
 
-  Windows_64bit_Release_Tracy:
+  Windows_64bit_Release_Tracy_Modules:
     runs-on: windows-latest
     env:
       MSBUILD_PATH: C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\
@@ -137,6 +137,10 @@ jobs:
         with:
           path: build
           key: ${{ runner.os }}-msvc64-t
+      - name: Enable Modules
+        shell: cmd
+        run: |
+          "custom`nera`nrenamer`n" > modules/init.txt
       - name: Configure CMake
         shell: cmd
         run: |
