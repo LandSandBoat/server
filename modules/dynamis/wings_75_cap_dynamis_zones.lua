@@ -12,7 +12,7 @@ require("modules/module_utils")
 --------------------------------------------
 
 local m = Module:new("wings_75_cap_dynamis_zones")
-m:setEnabled(true)
+m:setEnabled(false)
 
 local dynamisZones =
 {

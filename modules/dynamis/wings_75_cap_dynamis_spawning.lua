@@ -35,7 +35,7 @@ require("scripts/globals/dynamis")
 --------------------------------------------
 
 local m = Module:new("wings_75_cap_dynamis_spawning")
-m:setEnabled(true)
+m:setEnabled(false)
 
 xi = xi or {}
 xi.dynamis = xi.dynamis or {}
