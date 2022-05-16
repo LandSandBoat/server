@@ -1392,10 +1392,9 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_regions)
         }
     }
 
-    EntityList_t::const_iterator trustit = m_trustList.begin();
-    while (trustit != m_trustList.end())
+    for (EntityList_t::const_iterator it = m_trustList.begin(); it != m_trustList.end(); ++it)
     {
-        if (CTrustEntity* PTrust = dynamic_cast<CTrustEntity*>(trustit->second))
+        if (CTrustEntity* PTrust = dynamic_cast<CTrustEntity*>(it->second))
         {
             PTrust->PRecastContainer->Check();
             PTrust->StatusEffectContainer->CheckEffectsExpiry(tick);
@@ -1405,6 +1404,16 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_regions)
                 PTrust->StatusEffectContainer->TickEffects(tick);
             }
             PTrust->PAI->Tick(tick);
+        }
+    }
+
+    // TODO: It is cheap to iterate the trust list again, we're only acting on disappearing trusts,
+    //       but it's wasteful. Fix me!
+    EntityList_t::const_iterator trustit = m_trustList.begin();
+    while (trustit != m_trustList.end())
+    {
+        if (auto* PTrust = dynamic_cast<CTrustEntity*>(trustit->second))
+        {
             if (PTrust->status == STATUS_TYPE::DISAPPEAR)
             {
                 for (auto PMobIt : m_mobList)
@@ -1430,10 +1439,6 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_regions)
             {
                 ++trustit;
             }
-        }
-        else
-        {
-            ++trustit;
         }
     }
 
