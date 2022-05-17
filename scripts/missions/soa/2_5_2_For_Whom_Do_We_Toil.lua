@@ -136,35 +136,11 @@ mission.sections =
                     -- TODO: This is a guess, check this
                     if mission:complete(player) then
                         npcUtil.giveKeyItem(player, xi.ki.NOTE_DETAILING_SEDITIOUS_PLANS)
-                        return 0
                     end
                 end,
             },
         },
     },
-
-    -- Click the gate one more time for the KI
-    {
-        check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId and missionStatus == 3
-        end,
-
-
-        [xi.zone.RALA_WATERWAYS] =
-        {
-            ['Sluice_Gate_6'] =
-            {
-                onTrigger = function(player, npc)
-                    -- TODO: This is a guess, check this
-                    if mission:complete(player) then
-                        npcUtil.giveKeyItem(player, xi.ki.NOTE_DETAILING_SEDITIOUS_PLANS)
-                        return 0
-                    end
-                end,
-            },
-        },
-    },
-
 }
 
 return mission
