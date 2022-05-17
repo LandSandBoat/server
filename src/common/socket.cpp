@@ -55,6 +55,8 @@ typedef int socklen_t;
 SOCKET sock_arr[FD_SETSIZE];
 int    sock_arr_len = 0;
 
+std::array<std::unique_ptr<socket_data>, FD_SETSIZE> session;
+
 /// Returns the first fd associated with the socket.
 /// Returns -1 if the socket is not found.
 ///
