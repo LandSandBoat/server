@@ -150,20 +150,18 @@ int32 do_init(int32 argc, char** argv)
                 value = "enabled - greater than or equal";
                 break;
         }
-        ShowStatus("Version lock mode: %i - %s", version_info.ver_lock, value);
+        fmt::printf("Version lock mode: %i - %s\n", version_info.ver_lock, value);
     });
 
     gConsoleService->RegisterCommand(
-    "verlock", "Cycle between maintenance modes.",
+    "maint_mode", "Cycle between maintenance modes.",
     [&]() -> void
     {
         maint_config.maint_mode = (++maint_config.maint_mode % 2);
         config_write(MAINT_CONF_FILENAME, "maint", maint_config_write);
-
-        ShowStatus("Maintenance mode changed to %i\r", maint_config.maint_mode);
+        fmt::printf("Maintenance mode changed to %i\n", maint_config.maint_mode);
     });
     // clang-format on
-
 
     ShowStatus("The login-server is ready to work!");
     ShowMessage("=======================================================================");

@@ -119,7 +119,7 @@ public:
                             }
                         }
                     }
-                    std::this_thread::sleep_for(100ms); // TODO: Do this better
+                    std::this_thread::sleep_for(250ms); // TODO: Do this better
                 };
                 ShowStatus("Console input thread exiting...");
             });
@@ -134,6 +134,7 @@ public:
     }
 
     // NOTE: If you capture things in this function, make sure they're protected (locked or atomic)!
+    // NOTE: If you're going to print, use fmt::print, rather than ShowInfo etc.
     void RegisterCommand(std::string const& name, std::string const& description, std::function<void()> func)
     {
         std::lock_guard lock(m_consoleInputBottleneck);
