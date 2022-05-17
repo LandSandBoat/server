@@ -332,7 +332,7 @@ m:addOverride("xi.zones.Provenance.Zone.onZoneTick", function(zone)
         mob:addStatusEffect(xi.effect.REGEN, 30, 3, 0)
         mob:addStatusEffect(xi.effect.ENTHUNDER_II, 100, 0, 0)
         mob:addStatusEffect(xi.effect.REFRESH, 50, 3, 0)
-        mob:setMobMod(xi.mobMod.SKILL_LIST, 277)
+        mob:setMobMod(xi.mobMod.SKILL_LIST, 313)
         mob:setMobMod(xi.mobMod.SPELL_LIST, 24)
     end
 
@@ -443,8 +443,8 @@ m:addOverride("xi.zones.Provenance.Zone.onZoneTick", function(zone)
         mob:addStatusEffect(xi.effect.REGEN, 30, 3, 0)
         mob:addStatusEffect(xi.effect.ENTHUNDER_II, 100, 0, 0)
         mob:addStatusEffect(xi.effect.REFRESH, 50, 3, 0)
-        mob:setMobMod(xi.mobMod.SKILL_LIST, 277)
-        mob:setMobMod(xi.mobMod.SPELL_LIST, 24)
+        mob:setMobMod(xi.mobMod.SKILL_LIST, 726)
+        mob:setMobMod(xi.mobMod.SPELL_LIST, 144)
     end
         
 end)
