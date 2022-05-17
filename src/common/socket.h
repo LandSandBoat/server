@@ -12,7 +12,7 @@
 #endif
 
 #ifdef WIN32
-//#define FD_SETSIZE 1000
+#define FD_SETSIZE 4096
 #include <winsock2.h>
 #include <ws2tcpip.h>
 typedef long in_addr_t;
