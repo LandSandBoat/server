@@ -168,7 +168,7 @@ int32 makeConnection(uint32 ip, uint16 port, int32 type)
 
     if (fd == -1)
     {
-        ShowError("make_connection: socket creation failed (code %d)!", sErrno);
+        ShowError("make_connection: socket creation failed (port %d, code %d)!", port, sErrno);
         return -1;
     }
     if (fd == 0)
@@ -203,7 +203,7 @@ int32 makeConnection(uint32 ip, uint16 port, int32 type)
     result = sConnect(fd, (struct sockaddr*)(&remote_address), sizeof(struct sockaddr_in));
     if (result == SOCKET_ERROR)
     {
-        ShowError("make_connection: connect failed (socket #%d, code %d)!", fd, sErrno);
+        ShowError("make_connection: connect failed (socket #%d, port %d, code %d)!", fd, port, sErrno);
         do_close(fd);
         return -1;
     }
@@ -318,13 +318,9 @@ uint16 ntows(uint16 netshort)
  *
  */
 
-#ifndef MINICORE
 int        ip_rules = 1;
 static int connect_check(uint32 ip);
-#endif
 
-//////////////////////////////
-#ifndef MINICORE
 //////////////////////////////
 // IP rules and connection limits
 
@@ -601,8 +597,7 @@ int access_ipmask(const char* str, AccessControl* acc)
     acc->mask = mask;
     return 1;
 }
-//////////////////////////////
-#endif
+
 //////////////////////////////
 int recv_to_fifo(int fd)
 {
@@ -702,7 +697,7 @@ int null_parse(int fd)
 
 ParseFunc default_func_parse = null_parse;
 
-std::array<std::unique_ptr<socket_data>, FD_SETSIZE> session;
+std::array<std::unique_ptr<socket_data>, FD_SETSIZE> sessions;
 
 bool session_isValid(int fd)
 {
@@ -761,13 +756,11 @@ int connect_client(int listen_fd, sockaddr_in& client_address)
     // setsocketopts(fd);
     // set_nonblocking(fd, 1);
 
-#ifndef MINICORE
     if (ip_rules && !connect_check(ntohl(client_address.sin_addr.s_addr)))
     {
         do_close(fd);
         return -1;
     }
-#endif
 
     if (fd_max <= fd)
     {
@@ -792,7 +785,7 @@ int32 makeListenBind_tcp(const char* ip, uint16 port, RecvFunc connect_client)
 
     if (fd == -1)
     {
-        ShowError("make_listen_bind: socket creation failed (code %d)!", sErrno);
+        ShowError("make_listen_bind: socket creation failed (port %d, code %d)!", port, sErrno);
         do_final(EXIT_FAILURE);
     }
     if (fd == 0)
@@ -819,13 +812,13 @@ int32 makeListenBind_tcp(const char* ip, uint16 port, RecvFunc connect_client)
     result = sBind(fd, (struct sockaddr*)&server_address, sizeof(server_address));
     if (result == SOCKET_ERROR)
     {
-        ShowError("make_listen_bind: bind failed (socket #%d, code %d)!", fd, sErrno);
+        ShowError("make_listen_bind: bind failed (socket #%d, port %d, code %d)!", fd, port, sErrno);
         do_final(EXIT_FAILURE);
     }
     result = sListen(fd, 5);
     if (result == SOCKET_ERROR)
     {
-        ShowError("make_listen_bind: listen failed (socket #%d, code %d)!", fd, sErrno);
+        ShowError("make_listen_bind: listen failed (socket #%d, port %d, code %d)!", fd, port, sErrno);
         do_final(EXIT_FAILURE);
     }
 
@@ -904,7 +897,6 @@ int socket_config_read(const char* cfgName)
         if (!strcmpi(w1, "stall_time"))
         {
             stall_time = atoi(w2);
-#ifndef MINICORE
         }
         else if (!strcmpi(w1, "enable_ip_rules"))
         {
@@ -964,7 +956,6 @@ int socket_config_read(const char* cfgName)
         else if (!strcmpi(w1, "debug"))
         {
             access_debug = config_switch(w2);
-#endif
         }
         else if (!strcmpi(w1, "import"))
         {
@@ -990,12 +981,9 @@ void socket_init_tcp()
     // should hold enough buffer (it is a vacuum so to speak) as it is never flushed. [Skotlex]
     create_session(0, null_recv, null_send, null_parse);
 
-#ifndef MINICORE
     // Delete old connection history every 5 minutes
     memset(connect_history, 0, sizeof(connect_history));
     CTaskMgr::getInstance()->AddTask("connect_check_clear", server_clock::now() + 1s, NULL, CTaskMgr::TASK_INTERVAL, connect_check_clear, 5min);
-
-#endif
 }
 
 void socket_final_tcp()
@@ -1005,12 +993,11 @@ void socket_final_tcp()
     {
         return;
     }
-    int i;
-#ifndef MINICORE
+
     ConnectHistory* hist;
     ConnectHistory* next_hist;
 
-    for (i = 0; i < 0x10000; ++i)
+    for (int i = 0; i < 0x10000; ++i)
     {
         hist = connect_history[i];
         while (hist)
@@ -1020,9 +1007,8 @@ void socket_final_tcp()
             hist = next_hist;
         }
     }
-#endif
 
-    for (i = 1; i < fd_max; i++)
+    for (int i = 1; i < fd_max; i++)
     {
         if (session[i])
         {
@@ -1118,7 +1104,7 @@ int32 makeBind_udp(uint32 ip, uint16 port)
 
     if (fd == -1)
     {
-        ShowError("make_listen_bind: socket creation failed (code %d)!", sErrno);
+        ShowError("make_listen_bind: socket creation failed (port %d, code %d)!", port, sErrno);
         do_final(EXIT_FAILURE);
     }
     if (fd == 0)
@@ -1142,7 +1128,7 @@ int32 makeBind_udp(uint32 ip, uint16 port)
     result = sBind(fd, (struct sockaddr*)&server_address, sizeof(server_address));
     if (result == SOCKET_ERROR)
     {
-        ShowError("make_listen_bind: bind failed (socket #%d, code %d)!", fd, sErrno);
+        ShowError("make_listen_bind: bind failed (socket #%d, port %d, code %d)!", fd, port, sErrno);
         do_final(EXIT_FAILURE);
     }
 
