@@ -53,6 +53,9 @@ char** arg_v   = nullptr;
 char* SERVER_NAME = nullptr;
 char  SERVER_TYPE = XI_SERVER_NONE;
 
+// This must be manually created
+std::unique_ptr<ConsoleService> gConsoleService;
+
 // Copyright (c) Athena Dev Teams
 // Added by Gabuzomeu
 //
@@ -263,6 +266,7 @@ int main(int argc, char** argv)
     socket_init();
 
     do_init(argc, argv);
+
     fd_set rfd;
     { // Main runtime cycle
         duration next;
@@ -273,6 +277,8 @@ int main(int argc, char** argv)
             do_sockets(&rfd, next);
         }
     }
+
+    gConsoleService = nullptr;
 
     do_final(EXIT_SUCCESS);
 #ifdef _WIN32

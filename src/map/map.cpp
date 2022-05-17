@@ -295,6 +295,9 @@ int32 do_init(int32 argc, char** argv)
 
     ShowStatus("The map-server is ready to work!");
     ShowMessage("=======================================================================");
+
+    gConsoleService = std::make_unique<ConsoleService>();
+
     return 0;
 }
 
@@ -483,17 +486,6 @@ int32 do_sockets(fd_set* rfd, duration next)
 
     sql->TryPing();
 
-    return 0;
-}
-
-/************************************************************************
- *                                                                       *
- *  parse_console                                                        *
- *                                                                       *
- ************************************************************************/
-
-int32 parse_console(int8* buf)
-{
     return 0;
 }
 
