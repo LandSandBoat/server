@@ -1361,7 +1361,7 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_regions)
 
     // TODO: It is cheap to iterate the pets list again, we're only acting on disappearing pets,
     //       but it's wasteful. Fix me!
-    EntityList_t::const_iterator pit = m_petList.begin();
+    EntityList_t::iterator pit = m_petList.begin();
     while (pit != m_petList.end())
     {
         // TODO: This static cast includes Battlefield Allies. Allies shouldn't be handled here in
@@ -1378,6 +1378,7 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_regions)
                 if (PPet->getPetType() != PET_TYPE::AUTOMATON || !PPet->PMaster)
                 {
                     delete pit->second;
+                    pit->second = nullptr;
                 }
                 m_petList.erase(pit++);
             }
@@ -1409,17 +1410,20 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_regions)
 
     // TODO: It is cheap to iterate the trust list again, we're only acting on disappearing trusts,
     //       but it's wasteful. Fix me!
-    EntityList_t::const_iterator trustit = m_trustList.begin();
+    EntityList_t::iterator trustit = m_trustList.begin();
     while (trustit != m_trustList.end())
     {
         if (auto* PTrust = dynamic_cast<CTrustEntity*>(trustit->second))
         {
             if (PTrust->status == STATUS_TYPE::DISAPPEAR)
             {
-                for (auto PMobIt : m_mobList)
+                for (auto& list : { m_mobList, m_trustList }) // Remove from Mobs and Trusts
                 {
-                    CMobEntity* PCurrentMob = (CMobEntity*)PMobIt.second;
-                    PCurrentMob->PEnmityContainer->Clear(PTrust->id);
+                    for (auto& itr : list)
+                    {
+                        CMobEntity* PCurrentMob = static_cast<CMobEntity*>(itr.second); // Force cast to CMobEntity*
+                        PCurrentMob->PEnmityContainer->Clear(PTrust->id);
+                    }
                 }
 
                 for (EntityList_t::const_iterator it = m_charList.begin(); it != m_charList.end(); ++it)
@@ -1433,6 +1437,7 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_regions)
                 }
 
                 delete trustit->second;
+                trustit->second = nullptr;
                 m_trustList.erase(trustit++);
             }
             else
