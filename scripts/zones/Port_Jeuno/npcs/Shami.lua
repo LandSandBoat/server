@@ -91,22 +91,15 @@ entity.onTrade = function(player, npc, trade)
     -- Trading Seals/Crests
     local sealOption = getSealTradeOption(trade)
     if sealOption ~= nil then
+        local eventParams = { 321, 0, 0, 0, 0, 0 }
         local storedSeals = player:getSeals(sealOption)
         local itemCount = trade:getItemCount()
 
-        if sealOption == 0 then
-            player:startEvent(321, (storedSeals + itemCount) * 65536)
-        elseif sealOption == 1 then
-            player:startEvent(321, 0, (storedSeals + itemCount) * 65536)
-        elseif sealOption == 2 then
-            player:startEvent(321, 0, 0, (storedSeals + itemCount) * 65536)
-        elseif sealOption == 3 then
-            player:startEvent(321, 0, 0, 0, (storedSeals + itemCount) * 65536)
-        else
-            player:startEvent(321, 0, 0, 0, 0, (storedSeals + itemCount) * 65536)
-        end
+        eventParams[sealOption + 2] = bit.lshift(storedSeals + itemCount, 16)
+        player:startEvent(unpack(eventParams))
         player:addSeals(itemCount, sealOption)
         player:confirmTrade()
+        return
     end
 
     -- Trading Orbs

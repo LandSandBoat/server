@@ -39,7 +39,7 @@ std::set<CBattleEntity*>::iterator CNotorietyContainer::end()
 void CNotorietyContainer::add(CBattleEntity* entity)
 {
     TracyZoneScoped;
-    if (entity)
+    if (m_POwner && entity && entity->allegiance != m_POwner->allegiance)
     {
         m_Lookup.insert(entity);
     }
@@ -48,7 +48,7 @@ void CNotorietyContainer::add(CBattleEntity* entity)
 void CNotorietyContainer::remove(CBattleEntity* entity)
 {
     TracyZoneScoped;
-    if (entity)
+    if (m_POwner && entity)
     {
         auto entity_itr = m_Lookup.find(entity);
         if (entity_itr != m_Lookup.end())
