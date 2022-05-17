@@ -1042,21 +1042,6 @@ void map_helpscreen(int32 flag)
 
 /************************************************************************
  *                                                                       *
- *  Map-Server Version Screen [venom]                                    *
- *                                                                       *
- ************************************************************************/
-
-void map_versionscreen(int32 flag)
-{
-    ShowInfo("Server version %d%02d_%d (%s)", XI_MAJOR_VERSION, XI_MINOR_VERSION, XI_REVISION, XI_RELEASE_FLAG ? "stable" : "unstable");
-    if (flag)
-    {
-        exit(EXIT_FAILURE);
-    }
-}
-
-/************************************************************************
- *                                                                       *
  *  map_config_default                                                   *
  *                                                                       *
  ************************************************************************/

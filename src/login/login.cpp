@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2016 Darkstar Dev Teams
@@ -598,7 +598,6 @@ int32 config_write(const char* fileName, const char* config, const std::function
 
 void login_versionscreen(int32 flag)
 {
-    ShowInfo("Server version %d.%02d.%02d", XI_MAJOR_VERSION, XI_MINOR_VERSION, XI_REVISION);
     ShowInfo("Repository:\thttps://github.com/LandSandBoat/server");
     ShowInfo("Website:\thttps://landsandboat.github.io/server/");
     if (flag)

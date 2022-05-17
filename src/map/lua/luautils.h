@@ -295,7 +295,6 @@ namespace luautils
     void   UpdateNMSpawnPoint(uint32 mobid);                       // Update the spawn point of an NM
     void   SetDropRate(uint16 dropid, uint16 itemid, uint16 rate); // Set drop rate of a mob SetDropRate(dropid,itemid,newrate)
     int32  UpdateServerMessage();                                  // update server message, first modify in conf and update
-    auto   GetServerVersion() -> sol::table;
 
     int32 OnAdditionalEffect(CBattleEntity* PAttacker, CBattleEntity* PDefender, actionTarget_t* Action, int32 damage);                                      // for mobs with additional effects
     int32 OnSpikesDamage(CBattleEntity* PDefender, CBattleEntity* PAttacker, actionTarget_t* Action, int32 damage);                                          // for mobs with spikes
