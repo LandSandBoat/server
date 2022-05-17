@@ -19,8 +19,8 @@
 ===========================================================================
 */
 
-#include "../common/logging.h"
-#include "../common/socket.h"
+#include "common/logging.h"
+#include "common/socket.h"
 
 #include "account.h"
 #include "login.h"
@@ -48,7 +48,7 @@ int32 connect_client_login(int32 listenfd)
     if ((fd = connect_client(listenfd, client_address)) != -1)
     {
         create_session(fd, recv_to_fifo, send_from_fifo, login_parse);
-        session[fd]->client_addr = ntohl(client_address.sin_addr.s_addr);
+        sessions[fd]->client_addr = ntohl(client_address.sin_addr.s_addr);
         return fd;
     }
     return -1;
@@ -56,20 +56,20 @@ int32 connect_client_login(int32 listenfd)
 
 int32 login_parse(int32 fd)
 {
-    login_session_data_t* sd = (login_session_data_t*)session[fd]->session_data;
+    login_session_data_t* sd = (login_session_data_t*)sessions[fd]->session_data;
 
     // check if sd will not defined
     if (sd == nullptr)
     {
-        session[fd]->session_data = new login_session_data_t{};
-        sd                        = (login_session_data_t*)session[fd]->session_data;
+        sessions[fd]->session_data = new login_session_data_t{};
+        sd                        = (login_session_data_t*)sessions[fd]->session_data;
         sd->serviced              = 0;
         login_sd_list.push_back(sd);
-        sd->client_addr = session[fd]->client_addr;
+        sd->client_addr = sessions[fd]->client_addr;
         sd->login_fd    = fd;
     }
 
-    if (session[fd]->flag.eof)
+    if (sessions[fd]->flag.eof)
     {
         do_close_login(sd, fd);
         return 0;
@@ -77,9 +77,9 @@ int32 login_parse(int32 fd)
 
     // all auth packets have one structure:
     // [login][passwords][code] => summary assign 33 bytes
-    if (session[fd]->rdata.size() == 33)
+    if (sessions[fd]->rdata.size() == 33)
     {
-        char* buff = &session[fd]->rdata[0];
+        char* buff = &sessions[fd]->rdata[0];
         int8  code = ref<uint8>(buff, 32);
 
         std::string name(buff, buff + 16);
@@ -94,8 +94,8 @@ int32 login_parse(int32 fd)
         if (check_string(name, 16) && check_string(password, 16))
         {
             ShowWarning("login_parse: %s send unreadable data", ip2str(sd->client_addr));
-            session[fd]->wdata.resize(1);
-            ref<uint8>(session[fd]->wdata.data(), 0) = LOGIN_ERROR;
+            sessions[fd]->wdata.resize(1);
+            ref<uint8>(sessions[fd]->wdata.data(), 0) = LOGIN_ERROR;
             do_close_login(sd, fd);
             return -1;
         }
@@ -126,7 +126,7 @@ int32 login_parse(int32 fd)
 
                         // if( ret != SQL_ERROR && sql->NumRows() != 0 )
                         //{
-                        //  ref<uint8>(session[fd]->wdata,0) = 0x05; // SESSION has already activated
+                        //  ref<uint8>(sessions[fd]->wdata,0) = 0x05; // SESSION has already activated
                         //  WFIFOSET(fd,33);
                         //  do_close_login(sd,fd);
                         //  return 0;
@@ -155,18 +155,18 @@ int32 login_parse(int32 fd)
                                 queue_message(ip, MSG_LOGIN, &chardata, &empty);
                             }
                         }
-                        memset(&session[fd]->wdata[0], 0, 33);
-                        session[fd]->wdata.resize(33);
-                        ref<uint8>(session[fd]->wdata.data(), 0)  = LOGIN_SUCCESS;
-                        ref<uint32>(session[fd]->wdata.data(), 1) = sd->accid;
+                        memset(&sessions[fd]->wdata[0], 0, 33);
+                        sessions[fd]->wdata.resize(33);
+                        ref<uint8>(sessions[fd]->wdata.data(), 0)  = LOGIN_SUCCESS;
+                        ref<uint32>(sessions[fd]->wdata.data(), 1) = sd->accid;
                         flush_fifo(fd);
                         do_close_tcp(fd);
                     }
                     else if (status & ACCST_BANNED)
                     {
-                        memset(&session[fd]->wdata[0], 0, 33);
-                        session[fd]->wdata.resize(33);
-                        //  ref<uint8>(session[fd]->wdata,0) = LOGIN_SUCCESS;
+                        memset(&sessions[fd]->wdata[0], 0, 33);
+                        sessions[fd]->wdata.resize(33);
+                        //  ref<uint8>(sessions[fd]->wdata,0) = LOGIN_SUCCESS;
                         do_close_login(sd, fd);
                     }
 
@@ -206,8 +206,8 @@ int32 login_parse(int32 fd)
                     return 0;
                 }
 
-                session[fd]->wdata.resize(1);
-                ref<uint8>(session[fd]->wdata.data(), 0) = LOGIN_ERROR;
+                sessions[fd]->wdata.resize(1);
+                ref<uint8>(sessions[fd]->wdata.data(), 0) = LOGIN_ERROR;
                 ShowWarning("login_parse: unexisting user <%s> tried to connect", escaped_name);
                 do_close_login(sd, fd);
             }
@@ -219,8 +219,8 @@ int32 login_parse(int32 fd)
                 {
                     ShowWarning("login_parse: New account attempt <%s> but is disabled in config.",
                                 escaped_name);
-                    session[fd]->wdata.resize(1);
-                    ref<uint8>(session[fd]->wdata.data(), 0) = LOGIN_ERROR_CREATE_DISABLED;
+                    sessions[fd]->wdata.resize(1);
+                    ref<uint8>(sessions[fd]->wdata.data(), 0) = LOGIN_ERROR_CREATE_DISABLED;
                     do_close_login(sd, fd);
                     return -1;
                 }
@@ -228,8 +228,8 @@ int32 login_parse(int32 fd)
                 // looking for same login
                 if (sql->Query("SELECT accounts.id FROM accounts WHERE accounts.login = '%s'", escaped_name) == SQL_ERROR)
                 {
-                    session[fd]->wdata.resize(1);
-                    ref<uint8>(session[fd]->wdata.data(), 0) = LOGIN_ERROR_CREATE;
+                    sessions[fd]->wdata.resize(1);
+                    ref<uint8>(sessions[fd]->wdata.data(), 0) = LOGIN_ERROR_CREATE;
                     do_close_login(sd, fd);
                     return -1;
                 }
@@ -249,8 +249,8 @@ int32 login_parse(int32 fd)
                     }
                     else
                     {
-                        session[fd]->wdata.resize(1);
-                        ref<uint8>(session[fd]->wdata.data(), 0) = LOGIN_ERROR_CREATE;
+                        sessions[fd]->wdata.resize(1);
+                        ref<uint8>(sessions[fd]->wdata.data(), 0) = LOGIN_ERROR_CREATE;
                         do_close_login(sd, fd);
                         return -1;
                     }
@@ -271,22 +271,22 @@ int32 login_parse(int32 fd)
 
                     if (sql->Query(fmtQuery, accid, escaped_name, escaped_pass, strtimecreate, ACCST_NORMAL, ACCPRIV_USER) == SQL_ERROR)
                     {
-                        session[fd]->wdata.resize(1);
-                        ref<uint8>(session[fd]->wdata.data(), 0) = LOGIN_ERROR_CREATE;
+                        sessions[fd]->wdata.resize(1);
+                        ref<uint8>(sessions[fd]->wdata.data(), 0) = LOGIN_ERROR_CREATE;
                         do_close_login(sd, fd);
                         return -1;
                     }
 
                     ShowStatus("login_parse: account<%s> was created", escaped_name);
-                    session[fd]->wdata.resize(1);
-                    ref<uint8>(session[fd]->wdata.data(), 0) = LOGIN_SUCCESS_CREATE;
+                    sessions[fd]->wdata.resize(1);
+                    ref<uint8>(sessions[fd]->wdata.data(), 0) = LOGIN_SUCCESS_CREATE;
                     do_close_login(sd, fd);
                 }
                 else
                 {
                     ShowWarning("login_parse: account<%s> already exists", escaped_name);
-                    session[fd]->wdata.resize(1);
-                    ref<uint8>(session[fd]->wdata.data(), 0) = LOGIN_ERROR_CREATE_TAKEN;
+                    sessions[fd]->wdata.resize(1);
+                    ref<uint8>(sessions[fd]->wdata.data(), 0) = LOGIN_ERROR_CREATE_TAKEN;
                     do_close_login(sd, fd);
                 }
                 break;
@@ -298,8 +298,8 @@ int32 login_parse(int32 fd)
                 int32       ret      = sql->Query(fmtQuery, escaped_name, escaped_pass);
                 if (ret == SQL_ERROR || sql->NumRows() == 0)
                 {
-                    session[fd]->wdata.resize(1);
-                    ref<uint8>(session[fd]->wdata.data(), 0) = LOGIN_ERROR;
+                    sessions[fd]->wdata.resize(1);
+                    ref<uint8>(sessions[fd]->wdata.data(), 0) = LOGIN_ERROR;
                     ShowWarning("login_parse: user <%s> could not be found using the provided information. Aborting.", escaped_name);
                     do_close_login(sd, fd);
                     return 0;
@@ -312,8 +312,8 @@ int32 login_parse(int32 fd)
 
                 if (status & ACCST_BANNED)
                 {
-                    session[fd]->wdata.resize(1);
-                    ref<uint8>(session[fd]->wdata.data(), 0) = LOGIN_ERROR_CHANGE_PASSWORD;
+                    sessions[fd]->wdata.resize(1);
+                    ref<uint8>(sessions[fd]->wdata.data(), 0) = LOGIN_ERROR_CHANGE_PASSWORD;
                     ShowInfo("login_parse: banned user <%s> detected. Aborting.", escaped_name);
                     do_close_login(sd, fd);
                     return 0;
@@ -322,26 +322,26 @@ int32 login_parse(int32 fd)
                 if (status & ACCST_NORMAL)
                 {
                     // Account info verified. Now request the new password.
-                    session[fd]->wdata.resize(1);
-                    ref<uint8>(session[fd]->wdata.data(), 0) = LOGIN_REQUEST_NEW_PASSWORD;
+                    sessions[fd]->wdata.resize(1);
+                    ref<uint8>(sessions[fd]->wdata.data(), 0) = LOGIN_REQUEST_NEW_PASSWORD;
                     flush_fifo(fd);
-                    session[fd]->rdata.resize(0); // Clear read buffer
-                    session[fd]->func_recv(fd);
+                    sessions[fd]->rdata.resize(0); // Clear read buffer
+                    sessions[fd]->func_recv(fd);
 
                     // Packet expects a single password parameter no longer than
                     // 16 bytes.
-                    size_t size = session[fd]->rdata.size();
+                    size_t size = sessions[fd]->rdata.size();
                     if (size == 0 || size > 16)
                     {
-                        session[fd]->wdata.resize(1);
-                        ref<uint8>(session[fd]->wdata.data(), 0) = LOGIN_ERROR_CHANGE_PASSWORD;
+                        sessions[fd]->wdata.resize(1);
+                        ref<uint8>(sessions[fd]->wdata.data(), 0) = LOGIN_ERROR_CHANGE_PASSWORD;
                         ShowWarning("login_parse: Invalid packet size (%d). Could not update password for user <%s>.", size,
                                     escaped_name);
                         do_close_login(sd, fd);
                         return 0;
                     }
 
-                    char*       buff2 = &session[fd]->rdata[0];
+                    char*       buff2 = &sessions[fd]->rdata[0];
                     std::string updated_password(buff2, buff2 + 16);
                     char        escaped_updated_password[16 * 2 + 1];
                     sql->EscapeString(escaped_updated_password, updated_password.c_str());
@@ -353,17 +353,17 @@ int32 login_parse(int32 fd)
                     ret      = sql->Query(fmtQuery, escaped_updated_password, sd->accid);
                     if (ret == SQL_ERROR)
                     {
-                        session[fd]->wdata.resize(1);
-                        ref<uint8>(session[fd]->wdata.data(), 0) = LOGIN_ERROR_CHANGE_PASSWORD;
+                        sessions[fd]->wdata.resize(1);
+                        ref<uint8>(sessions[fd]->wdata.data(), 0) = LOGIN_ERROR_CHANGE_PASSWORD;
                         ShowWarning("login_parse: Error trying to update password in database for user <%s>.", escaped_name);
                         do_close_login(sd, fd);
                         return 0;
                     }
 
-                    memset(&session[fd]->wdata[0], 0, 33);
-                    session[fd]->wdata.resize(33);
-                    ref<uint8>(session[fd]->wdata.data(), 0)  = LOGIN_SUCCESS_CHANGE_PASSWORD;
-                    ref<uint32>(session[fd]->wdata.data(), 1) = sd->accid;
+                    memset(&sessions[fd]->wdata[0], 0, 33);
+                    sessions[fd]->wdata.resize(33);
+                    ref<uint8>(sessions[fd]->wdata.data(), 0)  = LOGIN_SUCCESS_CHANGE_PASSWORD;
+                    ref<uint32>(sessions[fd]->wdata.data(), 1) = sd->accid;
                     flush_fifo(fd);
                     do_close_tcp(fd);
 
@@ -373,7 +373,7 @@ int32 login_parse(int32 fd)
             }
             break;
             default:
-                ShowWarning("login_parse: undefined code:[%d], ip sender:<%s>", code, ip2str(session[fd]->client_addr));
+                ShowWarning("login_parse: undefined code:[%d], ip sender:<%s>", code, ip2str(sessions[fd]->client_addr));
                 do_close_login(sd, fd);
                 break;
         };

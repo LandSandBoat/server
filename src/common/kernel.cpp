@@ -19,11 +19,11 @@
 ===========================================================================
 */
 
-#include "../common/kernel.h"
-#include "../common/socket.h"
-#include "../common/taskmgr.h"
-#include "../common/timer.h"
-#include "../common/version.h"
+#include "common/kernel.h"
+#include "common/socket.h"
+#include "common/taskmgr.h"
+#include "common/timer.h"
+#include "common/version.h"
 
 #include "debug.h"
 #include "logging.h"
@@ -52,6 +52,8 @@ char** arg_v   = nullptr;
 
 char* SERVER_NAME = nullptr;
 char  SERVER_TYPE = XI_SERVER_NONE;
+
+std::array<std::unique_ptr<socket_data>, FD_SETSIZE> sessions;
 
 // This must be manually created
 std::unique_ptr<ConsoleService> gConsoleService;

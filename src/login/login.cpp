@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2016 Darkstar Dev Teams
@@ -20,6 +20,7 @@
 */
 #include "common/logging.h"
 #include "common/mmo.h"
+#include "common/socket.h"
 #include "common/timer.h"
 #include "common/utils.h"
 #include "common/version.h"
@@ -134,7 +135,7 @@ int32 do_init(int32 argc, char** argv)
     [&]() -> void
     {
         // handle wrap around from 2->3 as 0
-        auto temp             = (++version_info.ver_lock) % 3;
+        auto temp             = (version_info.ver_lock + 1) % 3;
         version_info.ver_lock = temp;
 
         const char* value = "";
@@ -157,7 +158,7 @@ int32 do_init(int32 argc, char** argv)
     "maint_mode", "Cycle between maintenance modes.",
     [&]() -> void
     {
-        maint_config.maint_mode = (++maint_config.maint_mode % 2);
+        maint_config.maint_mode = (maint_config.maint_mode + 1) % 2;
         config_write(MAINT_CONF_FILENAME, "maint", maint_config_write);
         fmt::printf("Maintenance mode changed to %i\n", maint_config.maint_mode);
     });
@@ -199,15 +200,13 @@ void set_server_type()
 int do_sockets(fd_set* rfd, duration next)
 {
     struct timeval timeout;
-    int            ret;
-    int            i;
 
     // can timeout until the next tick
     timeout.tv_sec  = std::chrono::duration_cast<std::chrono::seconds>(next).count();
     timeout.tv_usec = std::chrono::duration_cast<std::chrono::microseconds>(next - std::chrono::duration_cast<std::chrono::seconds>(next)).count();
 
     memcpy(rfd, &readfds, sizeof(*rfd));
-    ret = sSelect(fd_max, rfd, nullptr, nullptr, &timeout);
+    int ret = sSelect(fd_max, rfd, nullptr, nullptr, &timeout);
 
     if (ret == SOCKET_ERROR)
     {
@@ -221,88 +220,68 @@ int do_sockets(fd_set* rfd, duration next)
 
     last_tick = time(nullptr);
 
-#if defined(WIN32)
+#if defined(WIN32_FD_INTERNALS) && defined(WIN32)
     // on windows, enumerating all members of the fd_set is way faster if we access the internals
-    for (i = 0; i < (int)rfd->fd_count; ++i)
+    for (int i = 0; i < (int)rfd->fd_count; ++i)
     {
         int fd = sock2fd(rfd->fd_array[i]);
-        if (session[fd])
+#ifdef _DEBUG
+        ShowDebug(fmt::format("select fd: {}", i).c_str());
+#endif // _DEBUG
+        if (sessions[fd])
         {
-            session[fd]->func_recv(fd);
+            sessions[fd]->func_recv(fd);
 
             if (fd != login_fd && fd != login_lobbydata_fd && fd != login_lobbyview_fd)
             {
-                session[fd]->func_parse(fd);
+                sessions[fd]->func_parse(fd);
 
-                if (!session[fd])
+                if (!sessions[fd])
+                {
                     continue;
+                }
 
-                //              RFIFOFLUSH(fd);
+                // RFIFOFLUSH(fd);
             }
         }
     }
 #else
     // otherwise assume that the fd_set is a bit-array and enumerate it in a standard way
-    for (i = 1; ret && i < fd_max; ++i)
+    for (int fd = 1; ret && fd < fd_max; ++fd)
     {
-        if (sFD_ISSET(i, rfd) && session[i])
+        if (sFD_ISSET(fd, rfd) && sessions[fd])
         {
-            session[i]->func_recv(i);
+            sessions[fd]->func_recv(fd);
 
-            if (session[i])
+            if (sessions[fd])
             {
-                if (i != login_fd && i != login_lobbydata_fd && i != login_lobbyview_fd)
+                if (fd != login_fd && fd != login_lobbydata_fd && fd != login_lobbyview_fd)
                 {
-                    session[i]->func_parse(i);
+                    sessions[fd]->func_parse(fd);
 
-                    if (!session[i])
+                    if (!sessions[fd])
                     {
                         continue;
                     }
 
-                    //                          RFIFOFLUSH(fd);
+                    // RFIFOFLUSH(fd);
                 }
                 --ret;
             }
         }
     }
-#endif
+#endif // defined(WIN32_FD_INTERNALS) && defined(WIN32)
 
-    /*
-        // parse input data on each socket
-    for(i = 1; i < fd_max; i++)
+    for (int fd = 1; fd < fd_max; fd++)
     {
-        if(!session[i])
-            continue;
-
-        if (session[i]->rdata_tick && DIFF_TICK(last_tick, session[i]->rdata_tick) > stall_time) {
-            ShowInfo("Session #%d timed out", i);
-            set_eof(i);
-        }
-
-        session[i]->func_parse(i);
-
-        if(!session[i])
-            continue;
-
-        // after parse, check client's RFIFO size to know if there is an invalid packet (too big and not parsed)
-        if (session[i]->rdata_size == RFIFO_SIZE && session[i]->max_rdata == RFIFO_SIZE) {
-            set_eof(i);
-            continue;
-        }
-        RFIFOFLUSH(i);
-    }*/
-
-    for (i = 1; i < fd_max; i++)
-    {
-        if (!session[i])
+        if (!sessions[fd])
         {
             continue;
         }
 
-        if (!session[i]->wdata.empty())
+        if (!sessions[fd]->wdata.empty())
         {
-            session[i]->func_send(i);
+            sessions[fd]->func_send(fd);
         }
     }
 
@@ -598,7 +577,6 @@ int32 config_write(const char* fileName, const char* config, const std::function
 
 void login_versionscreen(int32 flag)
 {
-    ShowInfo("Server version %d.%02d.%02d", XI_MAJOR_VERSION, XI_MINOR_VERSION, XI_REVISION);
     ShowInfo("Repository:\thttps://github.com/LandSandBoat/server");
     ShowInfo("Website:\thttps://landsandboat.github.io/server/");
     if (flag)
