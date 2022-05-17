@@ -67,7 +67,7 @@ m:addOverride("xi.zones.Escha_RuAun.Zone.onZoneTick", function(zone)
             end,
 
             onMobDeath = function(mob, player, isKiller, noKiller)
-                local beadsRewarded = math.random(850, 1250)
+                local beadsRewarded = math.random(425, 625)
                 
                 -- Variable control
                 SetServerVariable("[Domain]NMToD", os.time())
@@ -79,7 +79,7 @@ m:addOverride("xi.zones.Escha_RuAun.Zone.onZoneTick", function(zone)
                 player:PrintToArea("{Apururu} Would you please go and see if she's alrightaru?", xi.msg.channel.SYSTEM_3, xi.msg.area.SYSTEM)
 
                 -- Reward escha beads
-                local beadsRewarded = math.random(850, 1250)
+                local beadsRewarded = math.random(425, 625)
 				local players = mob:getZone():getPlayers()
                 
                 for i, participant in pairs(players) do
@@ -100,7 +100,7 @@ m:addOverride("xi.zones.Escha_RuAun.Zone.onZoneTick", function(zone)
         mob:spawn()
 
         -- Set MobMods 
-        mob:setMobLevel(85)
+        mob:setMobLevel(82)
         mob:addMod(xi.mod.STR, 20)
         mob:addMod(xi.mod.VIT, 10)
         mob:addMod(xi.mod.INT, 30)
@@ -108,7 +108,7 @@ m:addOverride("xi.zones.Escha_RuAun.Zone.onZoneTick", function(zone)
         mob:addMod(xi.mod.CHR, 10)
         mob:addMod(xi.mod.AGI, 10)
         mob:addMod(xi.mod.DEX, 20)
-        mob:addMod(xi.mod.DEFP, 75)
+        mob:addMod(xi.mod.DEFP, 15)
         mob:addMod(xi.mod.RATTP, 75)
         mob:addMod(xi.mod.ACC, 100)
         mob:setMod(xi.mod.SILENCERES, 50)
@@ -185,7 +185,7 @@ m:addOverride("xi.zones.Reisenjima_Henge.Zone.onZoneTick", function(zone)
                 SetServerVariable("[Domain]NMSpawned", 0)
                 
                 -- Reward escha beads
-                local beadsRewarded = math.random(850, 1250)
+                local beadsRewarded = math.random(425, 625)
 				local players = mob:getZone():getPlayers()
                 
                 for i, participant in pairs(players) do
@@ -206,7 +206,7 @@ m:addOverride("xi.zones.Reisenjima_Henge.Zone.onZoneTick", function(zone)
         mob:spawn()
 
         -- Set MobMods 
-        mob:setMobLevel(85)
+        mob:setMobLevel(82)
         mob:addMod(xi.mod.MAIN_DMG_RATING, 50)
         mob:addMod(xi.mod.STR, 20)
         mob:addMod(xi.mod.VIT, 10)
@@ -215,7 +215,7 @@ m:addOverride("xi.zones.Reisenjima_Henge.Zone.onZoneTick", function(zone)
         mob:addMod(xi.mod.CHR, 10)
         mob:addMod(xi.mod.AGI, 10)
         mob:addMod(xi.mod.DEX, 20)
-        mob:addMod(xi.mod.DEFP, 75)
+        mob:addMod(xi.mod.DEFP, 25)
         mob:addMod(xi.mod.RATTP, 75)
         mob:addMod(xi.mod.ACC, 100)
         mob:setMod(xi.mod.MATT, 150)
@@ -284,7 +284,7 @@ m:addOverride("xi.zones.Provenance.Zone.onZoneTick", function(zone)
                 player:PrintToArea("{Apururu} Would you please go and see if she's alrightaru?", xi.msg.channel.SYSTEM_3, xi.msg.area.SYSTEM)
 
                 -- Reward escha beads
-                local beadsRewarded = math.random(850, 1250)
+                local beadsRewarded = math.random(425, 625)
 				local players = mob:getZone():getPlayers()
                 
                 for i, participant in pairs(players) do
@@ -304,7 +304,7 @@ m:addOverride("xi.zones.Provenance.Zone.onZoneTick", function(zone)
         mob:spawn()
 
         -- Set MobMods 
-        mob:setMobLevel(85)
+        mob:setMobLevel(82)
         mob:addMod(xi.mod.MAIN_DMG_RATING, 50)
         mob:addMod(xi.mod.STR, 20)
         mob:addMod(xi.mod.VIT, 10)
@@ -313,7 +313,7 @@ m:addOverride("xi.zones.Provenance.Zone.onZoneTick", function(zone)
         mob:addMod(xi.mod.CHR, 10)
         mob:addMod(xi.mod.AGI, 10)
         mob:addMod(xi.mod.DEX, 20)
-        mob:addMod(xi.mod.DEFP, 100)
+        mob:addMod(xi.mod.DEFP, 30)
         mob:addMod(xi.mod.RATTP, 100)
         mob:addMod(xi.mod.ACC, 100)
         mob:setMod(xi.mod.MATT, 380)
@@ -329,7 +329,7 @@ m:addOverride("xi.zones.Provenance.Zone.onZoneTick", function(zone)
         mob:setMod(xi.mod.FASTCAST, 10)
         mob:setMod(xi.mod.DOUBLE_ATTACK, 20)
         mob:addStatusEffect(xi.effect.SHOCK_SPIKES, 50, 0, 0)
---        mob:addStatusEffect(xi.effect.REGEN, 30, 3, 0)
+        mob:addStatusEffect(xi.effect.REGEN, 30, 3, 0)
         mob:addStatusEffect(xi.effect.ENTHUNDER_II, 100, 0, 0)
         mob:addStatusEffect(xi.effect.REFRESH, 50, 3, 0)
         mob:setMobMod(xi.mobMod.SKILL_LIST, 277)
@@ -424,7 +424,7 @@ m:addOverride("xi.zones.Provenance.Zone.onZoneTick", function(zone)
         mob:addMod(xi.mod.CHR, 10)
         mob:addMod(xi.mod.AGI, 10)
         mob:addMod(xi.mod.DEX, 20)
-        mob:addMod(xi.mod.DEFP, 100)
+        mob:addMod(xi.mod.DEFP, 35)
         mob:addMod(xi.mod.RATTP, 100)
         mob:addMod(xi.mod.ACC, 100)
         mob:setMod(xi.mod.MATT, 380)
@@ -774,5 +774,23 @@ m:addOverride("xi.zones.Escha_RuAun.Zone.onInitialize", function(zone)
 end)
 
 -- End Decorations
+
+-- Elvorseal food (Pearlscale 5714)
+m:addOverride("xi.globals.items.pearlscale.onItemCheck", function(target)
+    if target:hasStatusEffect(xi.effect.ELVORSEAL) then
+        result = xi.msg.basic.IS_FULL
+    end
+    return result
+end)
+
+m:addOverride("xi.globals.items.pearlscale.onItemUse", function(target)
+    target:addStatusEffect(xi.effect.ELVORSEAL, 1, 0, 3600)
+end)
+
+m:addOverride("xi.globals.items.pearlscale.onEffectGain", function(target)
+end)
+
+m:addOverride("xi.globals.items.pearlscale.onEffectLose", function(target)
+end)
 
 return m

@@ -23,13 +23,13 @@ UPDATE zone_settings SET misc = '2520' WHERE name = 'Dynamis-Windurst';
 UPDATE zone_settings SET misc = '2520' WHERE name = 'Dynamis-Jeuno';
 
 -- Amphisbaena -- Skill_List_ID 817
-REPLACE INTO `mob_groups` (`groupid`, `poolid`, `zoneid`, `name`, `respawntime`, `spawntype`, `dropid`, `HP`, `MP`, `minLevel`, `maxLevel`, `allegiance`) VALUES (43, 1872, 132, 'Hadhayosh', 0, 128, 1268, 40000, 9999, 150, 150, 0);
+REPLACE INTO `mob_groups` (`groupid`, `poolid`, `zoneid`, `name`, `respawntime`, `spawntype`, `dropid`, `HP`, `MP`, `minLevel`, `maxLevel`, `allegiance`) VALUES (43, 1872, 132, 'Hadhayosh', 0, 128, 1268, 20000, 9999, 150, 150, 0);
 
 -- Tortuga Use Skill_List_ID 277 Spell_list_ID 24
-REPLACE INTO `mob_groups` (`groupid`, `poolid`, `zoneid`, `name`, `respawntime`, `spawntype`, `dropid`, `HP`, `MP`, `minLevel`, `maxLevel`, `allegiance`) VALUES (79, 5695, 289, 'Genbu-Escha', 0, 128, 0, 45000, 25000, 150, 150, 0);
+REPLACE INTO `mob_groups` (`groupid`, `poolid`, `zoneid`, `name`, `respawntime`, `spawntype`, `dropid`, `HP`, `MP`, `minLevel`, `maxLevel`, `allegiance`) VALUES (79, 5695, 289, 'Genbu-Escha', 0, 128, 0, 22500, 25000, 150, 150, 0);
 
 -- Battosai Use Skill_List_ID 313
-REPLACE INTO `mob_groups` (`groupid`, `poolid`, `zoneid`, `name`, `respawntime`, `spawntype`, `dropid`, `HP`, `MP`, `minLevel`, `maxLevel`, `allegiance`) VALUES (54, 2018, 73, 'Hydra', 0, 128, 0, 50000, 25000, 150, 150, 0);
+REPLACE INTO `mob_groups` (`groupid`, `poolid`, `zoneid`, `name`, `respawntime`, `spawntype`, `dropid`, `HP`, `MP`, `minLevel`, `maxLevel`, `allegiance`) VALUES (54, 2018, 73, 'Hydra', 0, 128, 0, 25000, 25000, 150, 150, 0);
 
 -- Bahamut
-REPLACE INTO mob_groups (groupid, poolid, zoneid, name, respawntime, spawntype, dropid, HP, MP, minLevel, maxLevel, allegiance) VALUES (17, 325, 29, 'Bahamut', 0, 128, 0, 90000, 15000, 100, 100, 0);
+REPLACE INTO mob_groups (groupid, poolid, zoneid, name, respawntime, spawntype, dropid, HP, MP, minLevel, maxLevel, allegiance) VALUES (17, 325, 29, 'Bahamut', 0, 128, 0, 35000, 15000, 100, 100, 0);

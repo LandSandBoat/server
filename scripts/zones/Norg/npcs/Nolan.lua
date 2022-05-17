@@ -9,12 +9,13 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     -- Set item cost here.
-    local itemCostMenuOne   =  15000
-    local itemCostMenuTwo   =  35000
-    local itemCostMenuThree =  50000
-    local itemCostMenuFour  = 100000
-    local itemCostMenuFive  = 100000
-    local itemCostMenuSix   = 100000
+    local itemCostMenuOne   =    250
+	local itemCostMenuTwo   =   7500
+    local itemCostMenuThree =  15000
+    local itemCostMenuFour  =  25000
+    local itemCostMenuFive  =  50000
+    local itemCostMenuSix   =  50000
+    local itemCostMenuSeven =  50000
 
     -- Player beads balance.
     local beadsBalance = player:getCurrency("escha_beads")
@@ -31,6 +32,43 @@ entity.onTrade = function(player, npc, trade)
     if
         npcUtil.tradeHasExactly(trade, {{ 'gil', 1 }}) and
         beadsBalance >= itemCostMenuOne
+    then            
+        local menu =
+        {
+            title = "Consumables:",
+
+            onStart = function(playerArg)
+                -- NOTE: This could be used to lock the player in place
+                -- playerArg:PrintToPlayer("Test Menu Opening", xi.msg.channel.NS_SAY)
+            end,
+
+            options =
+            {
+                {
+                    "Pearlscale (grants Elvorseal)",
+                    function(playerArg)
+                        player:setCurrency("escha_beads", beadsBalance - itemCostMenuOne)
+                        playerArg:addItem(5714)
+                        playerArg:messageSpecial(ID.text.ITEM_OBTAINED, 5714)
+                        playerArg:PrintToPlayer("Nolan: Pleasure doing business with you!", xi.msg.channel.NS_SAY)
+                    end,
+                },
+            },
+
+            onCancelled = function(playerArg)
+            end,
+            
+            onEnd = function(playerArg)
+                playerArg:PrintToPlayer("Thank you for your purchase! Keep up the good fight!", xi.msg.channel.NS_SAY)
+            end,
+        }
+
+        player:customMenu(menu)    
+
+	-- Menu 2
+    elseif
+        npcUtil.tradeHasExactly(trade, {{ 'gil', 2 }}) and
+        beadsBalance >= itemCostMenuTwo
     then            
         local menu =
         {
@@ -81,10 +119,10 @@ entity.onTrade = function(player, npc, trade)
         
         player:customMenu(menu)
 
-    -- Menu 2
+    -- Menu 3
     elseif
-        npcUtil.tradeHasExactly(trade, {{ 'gil', 2 }}) and
-        beadsBalance >= itemCostMenuTwo
+        npcUtil.tradeHasExactly(trade, {{ 'gil', 3 }}) and
+        beadsBalance >= itemCostMenuThree
     then
         local menu =
         {
@@ -181,10 +219,10 @@ entity.onTrade = function(player, npc, trade)
 
         player:customMenu(menu)
 
-    -- Menu 3
+    -- Menu 4
     elseif
-        npcUtil.tradeHasExactly(trade, {{ 'gil', 3 }}) and
-        beadsBalance >= itemCostMenuThree
+        npcUtil.tradeHasExactly(trade, {{ 'gil', 4 }}) and
+        beadsBalance >= itemCostMenuFour
     then        
         local menu =
         {
@@ -227,10 +265,10 @@ entity.onTrade = function(player, npc, trade)
 
         player:customMenu(menu)
  
-    -- Menu 4
+    -- Menu 5
     elseif 
-        npcUtil.tradeHasExactly(trade, {{ 'gil', 4 }}) and
-        beadsBalance >= itemCostMenuFour
+        npcUtil.tradeHasExactly(trade, {{ 'gil', 5 }}) and
+        beadsBalance >= itemCostMenuFive
     then
         local menu =
         {
@@ -291,10 +329,10 @@ entity.onTrade = function(player, npc, trade)
 
         player:customMenu(menu)
 
-    -- Menu 5            
+    -- Menu 6            
     elseif
-        npcUtil.tradeHasExactly(trade, {{ 'gil', 5 }}) and
-        beadsBalance >= itemCostMenuFive
+        npcUtil.tradeHasExactly(trade, {{ 'gil', 6 }}) and
+        beadsBalance >= itemCostMenuSix
     then
         local menu =
         {
@@ -355,10 +393,10 @@ entity.onTrade = function(player, npc, trade)
 
         player:customMenu(menu)         
 
-    -- Menu 6            
+    -- Menu 7            
     elseif
-        npcUtil.tradeHasExactly(trade, {{ 'gil', 6 }}) and
-        beadsBalance >= itemCostMenuSix
+        npcUtil.tradeHasExactly(trade, {{ 'gil', 7 }}) and
+        beadsBalance >= itemCostMenuSeven
     then
         local menu =
         {
@@ -402,9 +440,9 @@ entity.onTrigger = function(player, npc)
 
     player:PrintToPlayer("Greetings adventurer! I'll be happy to exchange your escha beads for various equipment and unlocks.", 0xD)
     player:PrintToPlayer("Trade me the requested gil amount and I will present you with the corresponding menu!", 0xD)
-    player:PrintToPlayer("1. Basic items (15,000), 2. Equipment (35,000), 3. Equipment +1 (50,000)", 28)
-    player:PrintToPlayer("4. Weaponskills (page. 1), 5. Weaponskills (page 2), 6. Weaponskills (page 3)", 28)
-    player:PrintToPlayer("All weaponskills cost 100,000 escha beads!", 28)
+    player:PrintToPlayer("1. Consumables (250), 2. Basic items (7,500), 3. Equipment (15,000), 4. Equipment +1 (25,000)", 28)
+    player:PrintToPlayer("5. Weaponskills (page. 1), 6. Weaponskills (page 2), 7. Weaponskills (page 3)", 28)
+    player:PrintToPlayer("All weaponskills cost 50,000 escha beads!", 28)
     player:PrintToPlayer(string.format("You have %s escha beads available to spend. Choose wisely.", beadsBalance), 0xD)
 end
 
