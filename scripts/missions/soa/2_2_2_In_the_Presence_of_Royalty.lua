@@ -17,6 +17,7 @@ local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.IN_THE_PRES
 mission.reward =
 {
     keyItem     = xi.ki.ROSULATIAS_POME,
+    title       = xi.title.QUEENS_CONFIDANTE,
     nextMission = { xi.mission.log_id.SOA, xi.mission.id.soa.THE_TWIN_WORLD_TREES },
 }
 
