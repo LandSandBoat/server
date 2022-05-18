@@ -295,6 +295,9 @@ int32 do_init(int32 argc, char** argv)
 
     ShowStatus("The map-server is ready to work!");
     ShowMessage("=======================================================================");
+
+    gConsoleService = std::make_unique<ConsoleService>();
+
     return 0;
 }
 
@@ -483,17 +486,6 @@ int32 do_sockets(fd_set* rfd, duration next)
 
     sql->TryPing();
 
-    return 0;
-}
-
-/************************************************************************
- *                                                                       *
- *  parse_console                                                        *
- *                                                                       *
- ************************************************************************/
-
-int32 parse_console(int8* buf)
-{
     return 0;
 }
 
@@ -1042,21 +1034,6 @@ void map_helpscreen(int32 flag)
     ShowMessage("  --map-config <file>      Load map-server configuration from <file>");
     ShowMessage("  --version, --v, -v, /v   Displays the server's version");
     ShowMessage("");
-    if (flag)
-    {
-        exit(EXIT_FAILURE);
-    }
-}
-
-/************************************************************************
- *                                                                       *
- *  Map-Server Version Screen [venom]                                    *
- *                                                                       *
- ************************************************************************/
-
-void map_versionscreen(int32 flag)
-{
-    ShowInfo("Server version %d%02d_%d (%s)", XI_MAJOR_VERSION, XI_MINOR_VERSION, XI_REVISION, XI_RELEASE_FLAG ? "stable" : "unstable");
     if (flag)
     {
         exit(EXIT_FAILURE);

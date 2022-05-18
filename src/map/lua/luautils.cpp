@@ -175,7 +175,6 @@ namespace luautils
         lua.set_function("ClearVarFromAll", &luautils::ClearVarFromAll);
         lua.set_function("SendEntityVisualPacket", &luautils::SendEntityVisualPacket);
         lua.set_function("UpdateServerMessage", &luautils::UpdateServerMessage);
-        lua.set_function("GetServerVersion", &luautils::GetServerVersion);
         lua.set_function("GetMobRespawnTime", &luautils::GetMobRespawnTime);
         lua.set_function("DisallowRespawn", &luautils::DisallowRespawn);
         lua.set_function("UpdateNMSpawnPoint", &luautils::UpdateNMSpawnPoint);
@@ -4499,16 +4498,6 @@ namespace luautils
         }
 
         return 0;
-    }
-
-    sol::table GetServerVersion()
-    {
-        sol::table version = lua.create_table();
-        version["branch"]  = XI_RELEASE_FLAG;
-        version["major"]   = XI_MAJOR_VERSION;
-        version["minor"]   = XI_MINOR_VERSION;
-        version["rev"]     = XI_REVISION;
-        return version;
     }
 
     sol::table NearLocation(sol::table const& table, float radius, float theta)
