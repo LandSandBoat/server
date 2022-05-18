@@ -51,7 +51,7 @@ END
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDI_ICON1               ICON                    "..\\icons\\worldserver.ico"
+IDI_ICON1               ICON                    "..\\res\\worldserver.ico"
 #endif    // English (United States) resources
 /////////////////////////////////////////////////////////////////////////////
 
