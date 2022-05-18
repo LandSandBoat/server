@@ -3,15 +3,10 @@
 import io
 import platform
 import subprocess
-import sys
 import time
 
 def main():
-    arch = "x86"
-    if len(sys.argv) > 1 and sys.argv[1] == "x64" and platform.system() == "Windows":
-        arch = "x64"
-
-    print("Running exe startup checks...({}/{})".format(platform.system(), arch))
+    print("Running exe startup checks...({})".format(platform.system()))
 
     p0 = subprocess.Popen(["xi_connect","--log","connect-server.log"], stdout=subprocess.PIPE)
     p1 = subprocess.Popen(["xi_search","--log","search-server.log"], stdout=subprocess.PIPE)
