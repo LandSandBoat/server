@@ -41,9 +41,9 @@ jobs:
       with:
         name: linux_executables
         path: |
-          topaz_connect
-          topaz_game
-          topaz_search
+          xi_connect
+          xi_game
+          xi_search
   
   Linux_GCC10_64bit:
     runs-on: ubuntu-latest
@@ -120,9 +120,9 @@ jobs:
         with:
           name: windows_executables
           path: |
-            topaz_connect_64.exe
-            topaz_game_64.exe
-            topaz_search_64.exe
+            xi_connect.exe
+            xi_game.exe
+            xi_search.exe
 
   Windows_64bit_Release_Tracy_Modules:
     runs-on: windows-latest
@@ -345,15 +345,15 @@ jobs:
         retry_on: timeout
         shell: bash
         command: |
-          chmod +x topaz_connect
-          chmod +x topaz_game
-          chmod +x topaz_search
+          chmod +x xi_connect
+          chmod +x xi_game
+          chmod +x xi_search
           ls -l
 
           printf "\nStart server processes\n"
-          screen -d -m -S topaz_connect ./topaz_connect --log login-server.log
-          screen -d -m -S topaz_search ./topaz_search --log search-server.log
-          screen -d -m -S topaz_game ./topaz_game --log map-server.log
+          screen -d -m -S xi_connect ./xi_connect --log login-server.log
+          screen -d -m -S xi_search ./xi_search --log search-server.log
+          screen -d -m -S xi_game ./xi_game --log map-server.log
           
           printf "\nWaiting 90s for servers to fully start up\n"
           sleep 90s
@@ -481,16 +481,16 @@ jobs:
       env:
         MYSQL_HOST: mysql
       run: |
-        chmod +x topaz_connect
-        chmod +x topaz_game
-        chmod +x topaz_search
+        chmod +x xi_connect
+        chmod +x xi_game
+        chmod +x xi_search
         ls -l
 
         printf "\nStart server processes\n"
-        screen -d -m -S topaz_connect ./topaz_connect --log login-server.log
-        screen -d -m -S topaz_search ./topaz_search --log search-server.log
-        screen -d -m -S topaz_game ./topaz_game --log map-server-0.log --port 54230
-        screen -d -m -S topaz_game ./topaz_game --log map-server-1.log --port 54231
+        screen -d -m -S xi_connect ./xi_connect --log login-server.log
+        screen -d -m -S xi_search ./xi_search --log search-server.log
+        screen -d -m -S xi_game ./xi_game --log map-server-0.log --port 54230
+        screen -d -m -S xi_game ./xi_game --log map-server-1.log --port 54231
         sleep 2m
         killall screen
     - name: Check for errors and warnings

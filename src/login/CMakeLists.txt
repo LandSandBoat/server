@@ -20,20 +20,20 @@ else()
     set(resource "${CMAKE_SOURCE_DIR}/res/connectserver.rc")
 endif()
 
-add_executable(topaz_connect ${SOURCES} ${resource})
+add_executable(xi_connect ${SOURCES} ${resource})
 
 if(WIN32)
-    set_target_properties(topaz_connect PROPERTIES OUTPUT_NAME topaz_connect${spacer}${platform_suffix})
+    set_target_properties(xi_connect PROPERTIES OUTPUT_NAME xi_connect${spacer}${platform_suffix})
 endif()
 
 target_compile_definitions(
-    topaz_connect
+    xi_connect
     PUBLIC
     -DdsTCPSERV
     -DDEBUGLOGLOGIN
 )
 
-target_link_libraries(topaz_connect
+target_link_libraries(xi_connect
     PUBLIC
         ${EXTERNAL_LIBS}
         project_options
@@ -41,10 +41,10 @@ target_link_libraries(topaz_connect
         project_warnings
 )
 
-target_include_directories(topaz_connect
+target_include_directories(xi_connect
     PUBLIC
         ${CMAKE_SOURCE_DIR}/src
         ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
-set_target_output_directory(topaz_connect)
+set_target_output_directory(xi_connect)
