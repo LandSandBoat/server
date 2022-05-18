@@ -26,3 +26,7 @@ else()
 endif()
 
 set(libpath "lib${platform_suffix}")
+
+if(WIN32)
+    set(CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH OFF)
+endif()
