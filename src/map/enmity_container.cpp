@@ -67,7 +67,7 @@ void CEnmityContainer::Clear(uint32 EntityID)
             if (const auto& maybeEntityObj = m_EnmityList.find(listEntry.first); maybeEntityObj != m_EnmityList.end())
             {
                 auto entry = maybeEntityObj->second;
-                if (entry.PEnmityOwner && entry.PEnmityOwner->PNotorietyContainer && m_EnmityHolder)
+                if (entry.PEnmityOwner && m_EnmityHolder)
                 {
                     entry.PEnmityOwner->PNotorietyContainer->remove(m_EnmityHolder);
                 }
@@ -81,7 +81,7 @@ void CEnmityContainer::Clear(uint32 EntityID)
         if (const auto& maybeEntityObj = m_EnmityList.find(EntityID); maybeEntityObj != m_EnmityList.end())
         {
             auto entry = maybeEntityObj->second;
-            if (entry.PEnmityOwner && entry.PEnmityOwner->PNotorietyContainer && m_EnmityHolder)
+            if (entry.PEnmityOwner && m_EnmityHolder)
             {
                 entry.PEnmityOwner->PNotorietyContainer->remove(m_EnmityHolder);
             }

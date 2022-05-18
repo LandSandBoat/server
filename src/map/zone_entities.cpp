@@ -733,7 +733,7 @@ void CZoneEntities::SpawnPCs(CCharEntity* PChar)
             {
                 spawnedCharacters.emplace(std::make_pair(totalScore, pc));
             }
-            else if (spawnedCharacters.top().first < totalScore)
+            else if (!spawnedCharacters.empty() && spawnedCharacters.top().first < totalScore)
             {
                 spawnedCharacters.emplace(std::make_pair(totalScore, pc));
                 spawnedCharacters.pop();
@@ -776,7 +776,8 @@ void CZoneEntities::SpawnPCs(CCharEntity* PChar)
             auto bonus       = bonusIter == scoreBonus.end() ? 0 : bonusIter->second;
             float totalScore = significanceScore + bonus - charDistance;
 
-            if (PChar->SpawnPCList.size() < CHARACTER_SYNC_LIMIT_MAX || totalScore > spawnedCharacters.top().first)
+            if (PChar->SpawnPCList.size() < CHARACTER_SYNC_LIMIT_MAX ||
+                (!spawnedCharacters.empty() && totalScore > spawnedCharacters.top().first))
             {
                 // Is nearby and should be considered as a candidate to be spawned
                 candidateCharacters.push(std::make_pair(totalScore, PCurrentChar));
@@ -1360,7 +1361,7 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_regions)
 
     // TODO: It is cheap to iterate the pets list again, we're only acting on disappearing pets,
     //       but it's wasteful. Fix me!
-    EntityList_t::const_iterator pit = m_petList.begin();
+    EntityList_t::iterator pit = m_petList.begin();
     while (pit != m_petList.end())
     {
         // TODO: This static cast includes Battlefield Allies. Allies shouldn't be handled here in
@@ -1377,6 +1378,7 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_regions)
                 if (PPet->getPetType() != PET_TYPE::AUTOMATON || !PPet->PMaster)
                 {
                     delete pit->second;
+                    pit->second = nullptr;
                 }
                 m_petList.erase(pit++);
             }
@@ -1391,10 +1393,9 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_regions)
         }
     }
 
-    EntityList_t::const_iterator trustit = m_trustList.begin();
-    while (trustit != m_trustList.end())
+    for (EntityList_t::const_iterator it = m_trustList.begin(); it != m_trustList.end(); ++it)
     {
-        if (CTrustEntity* PTrust = dynamic_cast<CTrustEntity*>(trustit->second))
+        if (CTrustEntity* PTrust = dynamic_cast<CTrustEntity*>(it->second))
         {
             PTrust->PRecastContainer->Check();
             PTrust->StatusEffectContainer->CheckEffectsExpiry(tick);
@@ -1404,12 +1405,25 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_regions)
                 PTrust->StatusEffectContainer->TickEffects(tick);
             }
             PTrust->PAI->Tick(tick);
+        }
+    }
+
+    // TODO: It is cheap to iterate the trust list again, we're only acting on disappearing trusts,
+    //       but it's wasteful. Fix me!
+    EntityList_t::iterator trustit = m_trustList.begin();
+    while (trustit != m_trustList.end())
+    {
+        if (auto* PTrust = dynamic_cast<CTrustEntity*>(trustit->second))
+        {
             if (PTrust->status == STATUS_TYPE::DISAPPEAR)
             {
-                for (auto PMobIt : m_mobList)
+                for (auto& list : { m_mobList, m_trustList }) // Remove from Mobs and Trusts
                 {
-                    CMobEntity* PCurrentMob = (CMobEntity*)PMobIt.second;
-                    PCurrentMob->PEnmityContainer->Clear(PTrust->id);
+                    for (auto& itr : list)
+                    {
+                        CMobEntity* PCurrentMob = static_cast<CMobEntity*>(itr.second); // Force cast to CMobEntity*
+                        PCurrentMob->PEnmityContainer->Clear(PTrust->id);
+                    }
                 }
 
                 for (EntityList_t::const_iterator it = m_charList.begin(); it != m_charList.end(); ++it)
@@ -1423,16 +1437,13 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_regions)
                 }
 
                 delete trustit->second;
+                trustit->second = nullptr;
                 m_trustList.erase(trustit++);
             }
             else
             {
                 ++trustit;
             }
-        }
-        else
-        {
-            ++trustit;
         }
     }
 

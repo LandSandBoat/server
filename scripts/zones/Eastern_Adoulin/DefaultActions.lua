@@ -5,5 +5,6 @@ return {
     ['Fostaig']        = { event = 513 },
     ['Ndah_Tolohjin']  = { event = 512 },
     ['Nhili_Uvolep']   = { event = 545 },
+    ['Oscairn']        = { event = 525 },
     ['Ploh_Trishbahk'] = { event = 563 },
 }

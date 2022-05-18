@@ -1,7 +1,10 @@
 set(COMMON_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/application.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/application.h
     ${CMAKE_CURRENT_SOURCE_DIR}/blowfish.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/blowfish.h
     ${CMAKE_CURRENT_SOURCE_DIR}/cbasetypes.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/console_service.h
     ${CMAKE_CURRENT_SOURCE_DIR}/debug.h
     ${CMAKE_CURRENT_SOURCE_DIR}/filewatcher.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/filewatcher.h

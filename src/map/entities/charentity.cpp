@@ -1558,9 +1558,9 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
     else if (shadowsTaken > 0)
     {
         // shadows took damage
-        actionTarget.messageID = 0;
+        actionTarget.messageID = MSGBASIC_SHADOW_ABSORB;
         actionTarget.reaction  = REACTION::EVADE;
-        PTarget->loc.zone->PushPacket(PTarget, CHAR_INRANGE_SELF, new CMessageBasicPacket(PTarget, PTarget, 0, shadowsTaken, MSGBASIC_SHADOW_ABSORB));
+        actionTarget.param = shadowsTaken;
     }
 
     if (actionTarget.speceffect == SPECEFFECT::HIT && actionTarget.param > 0)

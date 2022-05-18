@@ -23,6 +23,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "common/blowfish.h"
 #include "common/cbasetypes.h"
+#include "common/console_service.h"
 #include "common/md52.h"
 #include "common/mmo.h"
 #include "common/logging.h"
@@ -103,6 +104,8 @@ void search_config_read_from_env();
 void login_config_default();
 void login_config_read(const int8* file); // We only need the search server port defined here
 void login_config_read_from_env();
+
+extern std::unique_ptr<ConsoleService> gConsoleService;
 
 /************************************************************************
  *                                                                       *
@@ -269,9 +272,18 @@ int32 main(int32 argc, char** argv)
         CTaskMgr::getInstance()->AddTask("ah_cleanup", server_clock::now(), nullptr, CTaskMgr::TASK_INTERVAL, ah_cleanup,
                                          std::chrono::seconds(search_config.expire_interval));
     }
-    //  ShowMessage(CL_CYAN"[TASKMGR] Starting task manager thread..");
 
     std::thread(TaskManagerThread).detach();
+
+    // clang-format off
+    gConsoleService = std::make_unique<ConsoleService>();
+    gConsoleService->RegisterCommand(
+    "ah_cleanup", fmt::format("AH task to return items older than {} days.", search_config.expire_days),
+    [&]() -> void
+    {
+        ah_cleanup(server_clock::now(), nullptr);
+    });
+    // clang-format on
 
     while (true)
     {
@@ -290,6 +302,8 @@ int32 main(int32 argc, char** argv)
         std::thread(TCPComm, ClientSocket).detach();
     }
     // TODO: The code below this line will never be reached.
+
+    gConsoleService = nullptr;
 
     // shutdown the connection since we're done
 #ifdef WIN32

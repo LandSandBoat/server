@@ -20,7 +20,6 @@ local quest = Quest:new(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.IM_ON_A_BOA
 quest.reward =
 {
     fameArea = xi.quest.fame_area.ADOULIN,
-    keyItem  = xi.ki.WATERCRAFTING,
     bayld    = 500,
 }
 
@@ -121,8 +120,11 @@ quest.sections =
                 end,
 
                 [2563] = function(player, csid, option, npc)
+                    player:messageSpecial(foretID.text.YOU_HAVE_LEARNED, xi.ki.WATERCRAFTING)
+
                     if quest:complete(player) then
                         player:delKeyItem(xi.ki.WATERCRAFT)
+                        player:addKeyItem(xi.ki.WATERCRAFTING)
                     end
                 end,
 

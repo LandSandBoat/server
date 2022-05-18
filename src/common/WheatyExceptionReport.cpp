@@ -251,7 +251,6 @@ LONG WINAPI WheatyExceptionReport::WheatyUnhandledExceptionFilter(
             m_hDumpFile, MiniDumpWithIndirectlyReferencedMemory, &info, &additionalStreamInfo, nullptr);
 
         CloseHandle(m_hDumpFile);
-
     }
 
     if (m_hReportFile)
@@ -663,7 +662,7 @@ PEXCEPTION_POINTERS pExceptionInfo)
         // Initialize DbgHelp
         if (!SymInitialize(GetCurrentProcess(), nullptr, TRUE))
         {
-            Log(_T("CRITICAL ERROR. Couldn't initialize the symbol handler for process.Error [%s]."),
+            Log(_T("CRITICAL ERROR. Couldn't initialize the symbol handler for process. Error: %s."),
                 ErrorMessage(GetLastError()));
         }
 

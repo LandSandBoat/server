@@ -41,9 +41,9 @@ int32 connect_client_lobbydata(int32 listenfd)
     if ((fd = connect_client(listenfd, client_address)) != -1)
     {
         create_session(fd, recv_to_fifo, send_from_fifo, lobbydata_parse);
-        session[fd]->wdata.resize(5);
-        session[fd]->client_addr = ntohl(client_address.sin_addr.s_addr);
-        session[fd]->wdata[0]    = 0x01;
+        sessions[fd]->wdata.resize(5);
+        sessions[fd]->client_addr = ntohl(client_address.sin_addr.s_addr);
+        sessions[fd]->wdata[0]    = 0x01;
         return fd;
     }
     return -1;
@@ -51,13 +51,13 @@ int32 connect_client_lobbydata(int32 listenfd)
 
 int32 lobbydata_parse(int32 fd)
 {
-    login_session_data_t* sd = (login_session_data_t*)session[fd]->session_data;
+    login_session_data_t* sd = (login_session_data_t*)sessions[fd]->session_data;
 
     if (sd == nullptr)
     {
-        if (RFIFOREST(fd) >= 5 && ref<uint8>(session[fd]->rdata.data(), 0) == 0xA1)
+        if (RFIFOREST(fd) >= 5 && ref<uint8>(sessions[fd]->rdata.data(), 0) == 0xA1)
         {
-            char* buff = &session[fd]->rdata[0];
+            char* buff = &sessions[fd]->rdata[0];
 
             uint32 accid = ref<uint32>(buff, 1);
 
@@ -69,7 +69,7 @@ int32 lobbydata_parse(int32 fd)
             }
 
             sd->login_lobbydata_fd    = fd;
-            session[fd]->session_data = sd;
+            sessions[fd]->session_data = sd;
             return 0;
         }
 
@@ -80,7 +80,7 @@ int32 lobbydata_parse(int32 fd)
         }
     }
 
-    if (session[fd]->flag.eof)
+    if (sessions[fd]->flag.eof)
     {
         do_close_lobbydata(sd, fd);
         return 0;
@@ -88,10 +88,10 @@ int32 lobbydata_parse(int32 fd)
 
     if (RFIFOREST(fd) >= 1)
     {
-        char* buff = &session[fd]->rdata[0];
+        char* buff = &sessions[fd]->rdata[0];
         if (ref<uint8>(buff, 0) == 0x0d)
         {
-            ShowDebug("Posible Crash Attempt from IP: <%s>", ip2str(session[fd]->client_addr));
+            ShowDebug("Posible Crash Attempt from IP: <%s>", ip2str(sessions[fd]->client_addr));
         }
         ShowDebug("lobbydata_parse:Incoming Packet: <%x> from ip:<%s>", ref<uint8>(buff, 0), ip2str(sd->client_addr));
 
@@ -102,7 +102,7 @@ int32 lobbydata_parse(int32 fd)
             {
                 if (RFIFOREST(fd) < 9)
                 {
-                    ShowError("lobbydata_parse: <%s> sent less then 9 bytes", ip2str(session[fd]->client_addr));
+                    ShowError("lobbydata_parse: <%s> sent less then 9 bytes", ip2str(sessions[fd]->client_addr));
                     do_close_lobbydata(sd, fd);
                     return -1;
                 }
@@ -234,21 +234,21 @@ int32 lobbydata_parse(int32 fd)
                     md5(ReservePacketEmptyList, Hash, SendBuffSize);
 
                     memcpy(ReservePacketEmptyList + 12, Hash, sizeof(Hash));
-                    session[sd->login_lobbyview_fd]->wdata.assign((const char*)ReservePacketEmptyList, SendBuffSize);
+                    sessions[sd->login_lobbyview_fd]->wdata.assign((const char*)ReservePacketEmptyList, SendBuffSize);
 
-                    RFIFOSKIP(sd->login_lobbyview_fd, session[sd->login_lobbyview_fd]->rdata.size());
+                    RFIFOSKIP(sd->login_lobbyview_fd, sessions[sd->login_lobbyview_fd]->rdata.size());
                     RFIFOFLUSH(sd->login_lobbyview_fd);
                     ShowWarning("lobbydata_parse: char:(%i) login during maintenance mode (0xA2). Sending error to client.", sd->accid);
                     // TODO: consider logging failed attempts during maintenance
                     return -1;
                 }
 
-                if (session[sd->login_lobbyview_fd] != nullptr)
+                if (sessions[sd->login_lobbyview_fd] != nullptr)
                 {
                     // write into lobbydata
                     uList[1] = 0x10;
-                    session[fd]->wdata.assign(uList, 0x148);
-                    RFIFOSKIP(fd, session[fd]->rdata.size());
+                    sessions[fd]->wdata.assign(uList, 0x148);
+                    RFIFOSKIP(fd, sessions[fd]->rdata.size());
                     RFIFOFLUSH(fd);
                     ////////////////////////////////////////
 
@@ -257,8 +257,8 @@ int32 lobbydata_parse(int32 fd)
 
                     memcpy(CharList + 12, hash, 16);
                     // write into lobbyview
-                    session[sd->login_lobbyview_fd]->wdata.assign((const char*)CharList, 2272);
-                    RFIFOSKIP(sd->login_lobbyview_fd, session[sd->login_lobbyview_fd]->rdata.size());
+                    sessions[sd->login_lobbyview_fd]->wdata.assign((const char*)CharList, 2272);
+                    RFIFOSKIP(sd->login_lobbyview_fd, sessions[sd->login_lobbyview_fd]->rdata.size());
                     RFIFOFLUSH(sd->login_lobbyview_fd);
                 }
                 else // Cleanup
@@ -280,17 +280,17 @@ int32 lobbydata_parse(int32 fd)
                 key3[16] -= 2;
                 uint8 MainReservePacket[0x48];
 
-                RFIFOSKIP(fd, session[fd]->rdata.size());
+                RFIFOSKIP(fd, sessions[fd]->rdata.size());
                 RFIFOFLUSH(fd);
 
-                if (session[sd->login_lobbyview_fd] == nullptr)
+                if (sessions[sd->login_lobbyview_fd] == nullptr)
                 {
                     ShowWarning("lobbydata_parse: char:(%i) login data corrupt (0xA2). Disconnecting client.", sd->accid);
                     do_close_lobbydata(sd, fd);
                     return -1;
                 }
 
-                uint32 charid = ref<uint32>(session[sd->login_lobbyview_fd]->rdata.data(), 28);
+                uint32 charid = ref<uint32>(sessions[sd->login_lobbyview_fd]->rdata.data(), 28);
 
                 const char* fmtQuery = "SELECT zoneip, zoneport, zoneid, pos_prevzone, gmlevel \
                                         FROM zone_settings, chars \
@@ -343,7 +343,7 @@ int32 lobbydata_parse(int32 fd)
                                    "VALUES(%u,%u,x'%s',%u,%u,%u,%u)";
 
                         if (sql->Query(fmtQuery, sd->accid, charid, session_key, ZoneIP, ZonePort, sd->client_addr,
-                                      (uint8)session[sd->login_lobbyview_fd]->ver_mismatch) == SQL_ERROR)
+                                      (uint8)sessions[sd->login_lobbyview_fd]->ver_mismatch) == SQL_ERROR)
                         {
                             // Send error message to the client.
                             LOBBBY_ERROR_MESSAGE(ReservePacketError);
@@ -380,9 +380,9 @@ int32 lobbydata_parse(int32 fd)
                 md5(MainReservePacket, Hash, SendBuffSize);
 
                 memcpy(MainReservePacket + 12, Hash, sizeof(Hash));
-                session[sd->login_lobbyview_fd]->wdata.assign((const char*)MainReservePacket, SendBuffSize);
+                sessions[sd->login_lobbyview_fd]->wdata.assign((const char*)MainReservePacket, SendBuffSize);
 
-                RFIFOSKIP(sd->login_lobbyview_fd, session[sd->login_lobbyview_fd]->rdata.size());
+                RFIFOSKIP(sd->login_lobbyview_fd, sessions[sd->login_lobbyview_fd]->rdata.size());
                 RFIFOFLUSH(sd->login_lobbyview_fd);
 
                 if (SendBuffSize == 0x24)
@@ -440,7 +440,7 @@ int32 do_close_lobbydata(login_session_data_t* loginsd, int32 fd)
         return 0;
     }
 
-    ShowInfo("lobbydata_parse: %s shutdown the socket", ip2str(session[fd]->client_addr));
+    ShowInfo("lobbydata_parse: %s shutdown the socket", ip2str(sessions[fd]->client_addr));
     do_close_tcp(fd);
     return 0;
 }
@@ -452,7 +452,7 @@ int32 connect_client_lobbyview(int32 listenfd)
     if ((fd = connect_client(listenfd, client_address)) != -1)
     {
         create_session(fd, recv_to_fifo, send_from_fifo, lobbyview_parse);
-        session[fd]->client_addr = ntohl(client_address.sin_addr.s_addr);
+        sessions[fd]->client_addr = ntohl(client_address.sin_addr.s_addr);
         return fd;
     }
     return -1;
@@ -460,21 +460,21 @@ int32 connect_client_lobbyview(int32 listenfd)
 
 int32 lobbyview_parse(int32 fd)
 {
-    login_session_data_t* sd = (login_session_data_t*)session[fd]->session_data;
+    login_session_data_t* sd = (login_session_data_t*)sessions[fd]->session_data;
 
     if (sd == nullptr)
     {
-        sd = find_loginsd_byip(session[fd]->client_addr);
+        sd = find_loginsd_byip(sessions[fd]->client_addr);
         if (sd == nullptr)
         {
             do_close_tcp(fd);
             return -1;
         }
-        session[fd]->session_data = sd;
+        sessions[fd]->session_data = sd;
         sd->login_lobbyview_fd    = fd;
     }
 
-    if (session[fd]->flag.eof)
+    if (sessions[fd]->flag.eof)
     {
         do_close_lobbyview(sd, fd);
         return 0;
@@ -482,7 +482,7 @@ int32 lobbyview_parse(int32 fd)
 
     if (RFIFOREST(fd) >= 9)
     {
-        char* buff = &session[fd]->rdata[0];
+        char* buff = &sessions[fd]->rdata[0];
         ShowDebug("lobbyview_parse:Incoming Packet: <%x> from ip:<%s>", ref<uint8>(buff, 8), ip2str(sd->client_addr));
         uint8 code = ref<uint8>(buff, 8);
         switch (code)
@@ -563,16 +563,16 @@ int32 lobbyview_parse(int32 fd)
                 md5(MainReservePacket, Hash, sendsize);
                 memcpy(MainReservePacket + 12, Hash, 16);
                 // Finalize the packet.
-                session[fd]->wdata.assign((const char*)MainReservePacket, sendsize);
-                session[fd]->ver_mismatch = ver_mismatch;
-                RFIFOSKIP(fd, session[fd]->rdata.size());
+                sessions[fd]->wdata.assign((const char*)MainReservePacket, sendsize);
+                sessions[fd]->ver_mismatch = ver_mismatch;
+                RFIFOSKIP(fd, sessions[fd]->rdata.size());
                 RFIFOFLUSH(fd);
             }
             break;
             case 0x14:
             {
                 // delete char
-                uint32 CharID = ref<uint32>(session[fd]->rdata.data(), 0x20);
+                uint32 CharID = ref<uint32>(sessions[fd]->rdata.data(), 0x20);
 
                 ShowInfo("lobbyview_parse: attempt to delete char:<%d> from ip:<%s>", CharID,
                          ip2str(sd->client_addr));
@@ -585,8 +585,8 @@ int32 lobbyview_parse(int32 fd)
                 md5(ReservePacket, hash, sendsize);
                 memcpy(ReservePacket + 12, hash, 16);
 
-                session[fd]->wdata.assign((const char*)ReservePacket, sendsize);
-                RFIFOSKIP(fd, session[fd]->rdata.size());
+                sessions[fd]->wdata.assign((const char*)ReservePacket, sendsize);
+                RFIFOSKIP(fd, sessions[fd]->rdata.size());
                 RFIFOFLUSH(fd);
 
                 // Perform character deletion from the database. It is sufficient to remove the
@@ -599,20 +599,20 @@ int32 lobbyview_parse(int32 fd)
             }
             case 0x1F:
             {
-                if (session[sd->login_lobbydata_fd] == nullptr)
+                if (sessions[sd->login_lobbydata_fd] == nullptr)
                 {
                     ShowInfo("0x1F nullptr: fd %i lobbydata fd %i lobbyview fd %i . Closing session.", fd, sd->login_lobbydata_fd, sd->login_lobbyview_fd);
                     uint32 val = 1337;
-                    if (sd->login_lobbydata_fd - 1 >= 0 && session[sd->login_lobbydata_fd - 1] != nullptr)
+                    if (sd->login_lobbydata_fd - 1 >= 0 && sessions[sd->login_lobbydata_fd - 1] != nullptr)
                     {
-                        val = session[sd->login_lobbydata_fd - 1]->client_addr;
+                        val = sessions[sd->login_lobbydata_fd - 1]->client_addr;
                     }
                     ShowInfo("Details: %s ip %i and lobbydata-1 fd ip is %i", sd->login, sd->client_addr, val);
                     do_close_tcp(fd);
                     return -1;
                 }
-                session[sd->login_lobbydata_fd]->wdata.resize(5);
-                ref<uint8>(session[sd->login_lobbydata_fd]->wdata.data(), 0) = 0x01;
+                sessions[sd->login_lobbydata_fd]->wdata.resize(5);
+                ref<uint8>(sessions[sd->login_lobbydata_fd]->wdata.data(), 0) = 0x01;
             }
             break;
             case 0x24:
@@ -626,41 +626,41 @@ int32 lobbyview_parse(int32 fd)
 
                 memcpy(ReservePacket + 12, Hash, 16);
                 uint8 SendBuffSize = 64;
-                session[fd]->wdata.append((const char*)ReservePacket, SendBuffSize);
-                RFIFOSKIP(fd, session[fd]->rdata.size());
+                sessions[fd]->wdata.append((const char*)ReservePacket, SendBuffSize);
+                RFIFOSKIP(fd, sessions[fd]->rdata.size());
                 RFIFOFLUSH(fd);
             }
             break;
             case 0x07:
             {
-                if (session[sd->login_lobbydata_fd] == nullptr)
+                if (sessions[sd->login_lobbydata_fd] == nullptr)
                 {
                     ShowInfo("0x07 nullptr: fd %i lobbydata fd %i lobbyview fd %i . Closing session.", fd, sd->login_lobbydata_fd, sd->login_lobbyview_fd);
                     uint32 val = 1337;
-                    if (sd->login_lobbydata_fd - 1 >= 0 && session[sd->login_lobbydata_fd - 1] != nullptr)
+                    if (sd->login_lobbydata_fd - 1 >= 0 && sessions[sd->login_lobbydata_fd - 1] != nullptr)
                     {
-                        val = session[sd->login_lobbydata_fd - 1]->client_addr;
+                        val = sessions[sd->login_lobbydata_fd - 1]->client_addr;
                     }
                     ShowInfo("Details: %s ip %i and lobbydata-1 fd ip is %i", sd->login, sd->client_addr, val);
                     do_close_tcp(fd);
                     return -1;
                 }
 
-                session[sd->login_lobbydata_fd]->wdata.resize(5);
-                ref<uint8>(session[sd->login_lobbydata_fd]->wdata.data(), 0) = 0x02;
+                sessions[sd->login_lobbydata_fd]->wdata.resize(5);
+                ref<uint8>(sessions[sd->login_lobbydata_fd]->wdata.data(), 0) = 0x02;
             }
             break;
             case 0x21:
             {
                 // creating new char
-                if (lobby_createchar(sd, (int8*)session[fd]->rdata.data()) == -1)
+                if (lobby_createchar(sd, (int8*)sessions[fd]->rdata.data()) == -1)
                 {
                     do_close_lobbyview(sd, fd);
                     return -1;
                 }
                 // char lobbydata_code[] = { 0x15, 0x07 };
-                //              session[sd->login_lobbydata_fd]->wdata[0]  = 0x15;
-                //              session[sd->login_lobbydata_fd]->wdata[1]  = 0x07;
+                //              sessions[sd->login_lobbydata_fd]->wdata[0]  = 0x15;
+                //              sessions[sd->login_lobbydata_fd]->wdata[1]  = 0x07;
                 //              WFIFOSET(sd->login_lobbydata_fd,2);
                 ShowStatus("lobbyview_parse: char <%s> was successfully created", sd->charname);
                 /////////////////////////
@@ -672,8 +672,8 @@ int32 lobbyview_parse(int32 fd)
                 md5((unsigned char*)(ReservePacket), hash, sendsize);
 
                 memcpy(ReservePacket + 12, hash, sizeof(hash));
-                session[fd]->wdata.assign((const char*)ReservePacket, sendsize);
-                RFIFOSKIP(fd, session[fd]->rdata.size());
+                sessions[fd]->wdata.assign((const char*)ReservePacket, sendsize);
+                RFIFOSKIP(fd, sessions[fd]->rdata.size());
                 RFIFOFLUSH(fd);
             }
             break;
@@ -694,7 +694,7 @@ int32 lobbyview_parse(int32 fd)
                     // creating new char
                     char CharName[16];
                     memset(CharName, 0, sizeof(CharName));
-                    memcpy(CharName, session[fd]->rdata.data() + 32, sizeof(CharName) - 1);
+                    memcpy(CharName, sessions[fd]->rdata.data() + 32, sizeof(CharName) - 1);
 
                     // find assigns
                     const char* fmtQuery = "SELECT charname FROM chars WHERE charname LIKE '%s'";
@@ -749,8 +749,8 @@ int32 lobbyview_parse(int32 fd)
 
                 md5(MainReservePacket, hash, sendsize);
                 memcpy(MainReservePacket + 12, hash, 16);
-                session[fd]->wdata.assign((const char*)MainReservePacket, sendsize);
-                RFIFOSKIP(fd, session[fd]->rdata.size());
+                sessions[fd]->wdata.assign((const char*)MainReservePacket, sendsize);
+                RFIFOSKIP(fd, sessions[fd]->rdata.size());
                 RFIFOFLUSH(fd);
             }
             break;
