@@ -3,6 +3,14 @@ set(SOURCES
     main.cpp
     world_server.h)
 
+# Temporarily remove clashing old code
+# TODO: Remove this block
+list(REMOVE_ITEM SOURCES
+    ${CMAKE_SOURCE_DIR}/src/common/kernel.cpp
+    ${CMAKE_SOURCE_DIR}/src/common/kernel.h
+    ${CMAKE_SOURCE_DIR}/src/common/socket.cpp
+    ${CMAKE_SOURCE_DIR}/src/common/socket.h)
+
 if(UNIX)
     set(resource "")
 else()
