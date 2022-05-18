@@ -133,7 +133,7 @@ set(SOURCES
 if(UNIX)
     set(resource "")
 else()
-    set(resource "${CMAKE_SOURCE_DIR}/res/gameserver.rc")
+    set(resource "${CMAKE_SOURCE_DIR}/res/mapserver.rc")
 endif()
 
 # Search for module directories
