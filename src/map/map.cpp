@@ -268,7 +268,7 @@ int32 do_init(int32 argc, char** argv)
     ShowStatus("do_init: loading zones");
     zoneutils::LoadZoneList();
 
-    fishingutils::LoadFishingMessages();
+    fishingutils::InitializeFishingSystem();
     instanceutils::LoadInstanceList();
 
     ShowStatus("do_init: server is binding with port %u", map_port == 0 ? map_config.usMapPort : map_port);

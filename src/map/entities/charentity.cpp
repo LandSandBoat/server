@@ -236,6 +236,12 @@ CCharEntity::CCharEntity()
     chatFilterFlags = 0;
 
     PAI = std::make_unique<CAIContainer>(this, nullptr, std::make_unique<CPlayerController>(this), std::make_unique<CTargetFind>(this));
+
+    hookedFish   = nullptr;
+    lastCastTime = 0;
+    nextFishTime = 0;
+    fishingToken = 0;
+    hookDelay    = 13;
 }
 
 CCharEntity::~CCharEntity()

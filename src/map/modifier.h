@@ -871,6 +871,10 @@ enum class Mod
     SUPERIOR_LEVEL  = 997, // SU0..5
     ONE_HOUR_RECAST = 996, // Decreases the recast time of one-hour abilities by n minutes.
 
+    PENGUIN_RING_EFFECT   = 1031, // +2 on fishing arrow delay / fish movement for mini - game
+    ALBATROSS_RING_EFFECT = 1032, // adds 30 seconds to mini - game time
+    PELICAN_RING_EFFECT   = 1033, // adds extra skillup roll for fishing
+
     // IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN scripts/globals/status.lua ASWELL!
 
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
@@ -887,7 +891,7 @@ enum class Mod
     // 888
     // 936
     //
-    // SPARE = 1031, and onward
+    // SPARE = 1034, and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it
