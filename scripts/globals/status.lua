@@ -1672,10 +1672,6 @@ xi.mod =
     TRIPLE_SHOT_RATE             = 999, -- Percent increase to Triple Shot Rate
     NINJUTSU_DURATION            = 1000,
 
-    PENGUIN_RING_EFFECT   = 1031, -- +2 on fishing arrow delay / fish movement for mini - game
-    ALBATROSS_RING_EFFECT = 1032, -- adds 30 seconds to mini - game time
-    PELICAN_RING_EFFECT   = 1033, -- adds extra skillup roll for fishing
-
     -- IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN src/map/modifier.h ASWELL!
 
     -- The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.

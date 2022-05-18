@@ -1086,6 +1086,8 @@ int32 map_config_default()
     map_config.craft_modern_system         = 1;
     map_config.craft_common_cap            = 700;
     map_config.craft_specialization_points = 400;
+    map_config.fishing_enable              = 0;
+    map_config.fishing_skill_multiplier    = 1.0f;
     map_config.mob_tp_multiplier           = 1.0f;
     map_config.player_tp_multiplier        = 1.0f;
     map_config.nm_hp_multiplier            = 1.0f;
@@ -1440,6 +1442,14 @@ int32 map_config_read(const int8* cfgName)
         else if (strcmp(w1, "craft_specialization_points") == 0)
         {
             map_config.craft_specialization_points = atoi(w2);
+        }
+        else if (strcmp(w1, "fishing_enable") == 0)
+        {
+            map_config.fishing_enable = atof(w2);
+        }
+        else if (strcmp(w1, "fishing_skill_multiplier") == 0)
+        {
+            map_config.fishing_skill_multiplier = (float)atof(w2);
         }
         else if (strcmp(w1, "garden_day_matters") == 0)
         {

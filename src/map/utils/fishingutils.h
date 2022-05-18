@@ -765,7 +765,6 @@ namespace fishingutils
     bool SendHookResponse(CCharEntity* PChar, fishresponse_t* response, bool cancelOnMobLoadFaibait);
 
     // Skillup
-    static double NormalDist(double x, double mean, double standard_dev);
     void FishingSkillup(CCharEntity* PChar, uint8 catchLevel, uint8 successType);
 
     // Fishing

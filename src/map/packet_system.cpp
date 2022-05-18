@@ -3858,7 +3858,14 @@ void SmallPacket0x064(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x066(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
-    fishingutils::HandleFishingAction(PChar, data);
+    if (map_config.fishing_enable == 1)
+    {
+        fishingutils::HandleFishingAction(PChar, data);
+    }
+    else
+    {
+        return;
+    }
 }
 
 /************************************************************************
@@ -7287,14 +7294,13 @@ void SmallPacket0x10F(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x110(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
-    // TODO: Add config to enable/disable fishing.
-    if (PChar->animation != ANIMATION_FISHING_START)
+    if (map_config.fishing_enable == 1)
     {
-        return;
+        fishingutils::HandleFishingAction(PChar, data);
     }
     else
     {
-        fishingutils::HandleFishingAction(PChar, data);
+        return;
     }
 }
 
