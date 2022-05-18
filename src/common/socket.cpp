@@ -783,14 +783,17 @@ int32 makeListenBind_tcp(const char* ip, uint16 port, RecvFunc connect_client)
     if (fd == -1)
     {
         ShowError("make_listen_bind: socket creation failed (port %d, code %d)!", port, sErrno);
+        ShowError("Is another process using this port?");
         do_final(EXIT_FAILURE);
     }
+
     if (fd == 0)
     { // reserved
         ShowError("make_listen_bind: Socket #0 is reserved - Please report this!!!");
         sClose(fd);
         return -1;
     }
+
     if (fd >= FD_SETSIZE)
     { // socket number too big
         ShowError("make_listen_bind: New socket #%d is greater than can we handle! Increase the value of FD_SETSIZE (currently %d) for your OS to fix this!",
