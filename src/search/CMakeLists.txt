@@ -21,7 +21,7 @@ add_executable(xi_search
     ${resource})
 
 if(WIN32)
-    set_target_properties(xi_search PROPERTIES OUTPUT_NAME xi_search${spacer}${platform_suffix})
+    set_target_properties(xi_search PROPERTIES OUTPUT_NAME xi_search)
 endif()
 
 target_compile_definitions(

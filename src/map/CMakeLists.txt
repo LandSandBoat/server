@@ -161,7 +161,7 @@ add_executable(xi_game
     ${resource})
 
 if(WIN32)
-    set_target_properties(xi_game PROPERTIES OUTPUT_NAME xi_game${spacer}${platform_suffix})
+    set_target_properties(xi_game PROPERTIES OUTPUT_NAME xi_game)
 endif()
 
 target_compile_definitions(

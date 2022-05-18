@@ -23,7 +23,7 @@ endif()
 add_executable(xi_connect ${SOURCES} ${resource})
 
 if(WIN32)
-    set_target_properties(xi_connect PROPERTIES OUTPUT_NAME xi_connect${spacer}${platform_suffix})
+    set_target_properties(xi_connect PROPERTIES OUTPUT_NAME xi_connect)
 endif()
 
 target_compile_definitions(
