@@ -79,15 +79,15 @@ User=$XI_USER
 Group=$XI_USER
 WorkingDirectory=$PPWD
 # For multiple map servers:
-# - Make a copy of this file for each server. Rename appropriately, e.g. xi_game-cities.service
+# - Make a copy of this file for each server. Rename appropriately, e.g. xi_map-cities.service
 # - Uncomment line in update.sh 'echo IP=\$IP > ip.txt'.
 # - Change the zone ports in zone_settings table. A custom.sql file is useful for this, see update.sh.
 # - Run update.sh and change your server IP. Manually type the IP even if you're not changing it.
-# - Remove the line below, 'ExecStart=$PPWD/xi_game'.
+# - Remove the line below, 'ExecStart=$PPWD/xi_map'.
 # - Uncomment and edit the 2 lines below with the appropriate port and log location for each zone server.
 #EnvironmentFile=$PPWD/ip.txt
-#ExecStart=$PPWD/xi_game --ip \$IP --port 54230 --log $PPWD/log/map_server.log
-ExecStart=$PPWD/xi_game
+#ExecStart=$PPWD/xi_map --ip \$IP --port 54230 --log $PPWD/log/map_server.log
+ExecStart=$PPWD/xi_map
 
 [Install]
 WantedBy=xi.service
@@ -141,11 +141,11 @@ usermod -aG $XI_USER $SUDO_USER
 chown -R $XI_USER:$XI_USER $PPWD
 chmod -R g=u $PPWD 2>/dev/null
 echo "$SYSTEMD_xi" > /etc/systemd/system/xi.service
-echo "$SYSTEMD_GAME" > /etc/systemd/system/xi_game.service
+echo "$SYSTEMD_GAME" > /etc/systemd/system/xi_map.service
 echo "$SYSTEMD_CONNECT" > /etc/systemd/system/xi_connect.service
 echo "$SYSTEMD_SEARCH" > /etc/systemd/system/xi_search.service
 chmod 755 /etc/systemd/system/xi*
 systemctl daemon-reload
-systemctl enable xi_game xi_connect xi_search
+systemctl enable xi_map xi_connect xi_search
 echo "Services installed!"
 echo "Start with 'systemctl start xi', enable start on boot with 'systemctl enable xi'."

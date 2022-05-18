@@ -16,6 +16,8 @@ TestResults
 
 # Build results
 build/
+lbuild/
+out/
 [Dd]ebug/
 [Rr]elease/
 x64/
@@ -131,7 +133,7 @@ UpgradeLog*.XML
 
 # Generated executables
 /xi_connect
-/xi_game
+/xi_map
 /xi_search
 /xi_world
 

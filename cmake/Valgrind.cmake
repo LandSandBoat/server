@@ -11,24 +11,24 @@ if(ENABLE_VALGRIND)
   endif()
 
   add_custom_target(
-    valgrind_memcheck_xi_game
+    valgrind_memcheck_xi_map
     COMMAND ${VALGRIND_COMMAND} --tool=memcheck --leak-check=full --show-reachable=yes
           --undef-value-errors=yes --track-origins=no --child-silent-after-fork=no
           --trace-children=no
-          --log-file=${CMAKE_SOURCE_DIR}/xi_game.memcheck.log
-          ./xi_game
-    COMMENT "Writing memcheck log to: ${CMAKE_SOURCE_DIR}/xi_game.memcheck.log"
-    DEPENDS xi_game
+          --log-file=${CMAKE_SOURCE_DIR}/xi_map.memcheck.log
+          ./xi_map
+    COMMENT "Writing memcheck log to: ${CMAKE_SOURCE_DIR}/xi_map.memcheck.log"
+    DEPENDS xi_map
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
   )
 
   add_custom_target(
-          valgrind_callgrind_xi_game
+          valgrind_callgrind_xi_map
           COMMAND ${VALGRIND_COMMAND} --tool=callgrind
-          --log-file=${CMAKE_SOURCE_DIR}/xi_game.callgrind.log
-          ./xi_game
-          COMMENT "Writing callgrind log to: ${CMAKE_SOURCE_DIR}/xi_game.callgrind.log"
-          DEPENDS xi_game
+          --log-file=${CMAKE_SOURCE_DIR}/xi_map.callgrind.log
+          ./xi_map
+          COMMENT "Writing callgrind log to: ${CMAKE_SOURCE_DIR}/xi_map.callgrind.log"
+          DEPENDS xi_map
           WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
   )
 endif(ENABLE_VALGRIND)

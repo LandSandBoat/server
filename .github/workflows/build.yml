@@ -42,9 +42,9 @@ jobs:
         name: linux_executables
         path: |
           xi_connect
-          xi_game
+          xi_map
           xi_search
-  
+
   Linux_GCC10_64bit:
     runs-on: ubuntu-latest
     steps:
@@ -121,10 +121,10 @@ jobs:
           name: windows_executables
           path: |
             xi_connect.exe
-            xi_game.exe
+            xi_map.exe
             xi_search.exe
 
-  Windows_64bit_Release_Tracy_Modules:
+  Windows_64bit_Release_Tracy_Modules_World:
     runs-on: windows-latest
     env:
       MSBUILD_PATH: C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\
@@ -150,7 +150,7 @@ jobs:
         shell: cmd
         run: |
           mkdir -p build
-          cmake -S . -B build -A x64 -DCMAKE_BUILD_TYPE=Release -DTRACY=ON
+          cmake -S . -B build -A x64 -DCMAKE_BUILD_TYPE=Release -DTRACY=ON -DBUILD_WORLD=ON
       - name: Build
         shell: cmd
         run: |
@@ -346,18 +346,18 @@ jobs:
         shell: bash
         command: |
           chmod +x xi_connect
-          chmod +x xi_game
+          chmod +x xi_map
           chmod +x xi_search
           ls -l
 
           printf "\nStart server processes\n"
           screen -d -m -S xi_connect ./xi_connect --log login-server.log
           screen -d -m -S xi_search ./xi_search --log search-server.log
-          screen -d -m -S xi_game ./xi_game --log map-server.log
-          
+          screen -d -m -S xi_map ./xi_map --log map-server.log
+
           printf "\nWaiting 90s for servers to fully start up\n"
           sleep 90s
-          
+
           printf "\nPopulating database\n"
           mysql xidb -h 127.0.0.1 -uroot -proot << EOF
           -- Clean out anything already there (just in case)
@@ -401,7 +401,7 @@ jobs:
           time.sleep(30)
           hxi_client.logout()
           EOF
-          
+
           killall screen
     - name: Check for errors and warnings
       if: ${{ success() || failure() }}
@@ -482,15 +482,15 @@ jobs:
         MYSQL_HOST: mysql
       run: |
         chmod +x xi_connect
-        chmod +x xi_game
+        chmod +x xi_map
         chmod +x xi_search
         ls -l
 
         printf "\nStart server processes\n"
         screen -d -m -S xi_connect ./xi_connect --log login-server.log
         screen -d -m -S xi_search ./xi_search --log search-server.log
-        screen -d -m -S xi_game ./xi_game --log map-server-0.log --port 54230
-        screen -d -m -S xi_game ./xi_game --log map-server-1.log --port 54231
+        screen -d -m -S xi_map ./xi_map --log map-server-0.log --port 54230
+        screen -d -m -S xi_map ./xi_map --log map-server-1.log --port 54231
         sleep 2m
         killall screen
     - name: Check for errors and warnings

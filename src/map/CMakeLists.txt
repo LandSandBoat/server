@@ -156,22 +156,22 @@ foreach(entry ${INIT_FILE_ENTRIES})
     endif()
 endforeach()
 
-add_executable(xi_game
+add_executable(xi_map
     ${SOURCES}
     ${resource})
 
 if(WIN32)
-    set_target_properties(xi_game PROPERTIES OUTPUT_NAME xi_game)
+    set_target_properties(xi_map PROPERTIES OUTPUT_NAME xi_map)
 endif()
 
 target_compile_definitions(
-    xi_game
+    xi_map
     PUBLIC
     -DdsUDPSERV
     -DDEBUGLOGMAP
 )
 
-target_link_libraries(xi_game
+target_link_libraries(xi_map
     PUBLIC
         ${EXTERNAL_LIBS}
         project_options
@@ -179,18 +179,18 @@ target_link_libraries(xi_game
         project_warnings
 )
 
-target_include_directories(xi_game
+target_include_directories(xi_map
     PUBLIC
         ${CMAKE_SOURCE_DIR}/src
         ${CMAKE_CURRENT_SOURCE_DIR}
         ${module_include_dirs}
 )
 
-target_precompile_headers(xi_game PUBLIC pch.h)
+target_precompile_headers(xi_map PUBLIC pch.h)
 
 if(TRACY_ENABLE)
-    target_link_libraries(xi_game PUBLIC tracy_client)
+    target_link_libraries(xi_map PUBLIC tracy_client)
 endif(TRACY_ENABLE)
 
-set_target_output_directory(xi_game)
-set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT xi_game)
+set_target_output_directory(xi_map)
+set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT xi_map)

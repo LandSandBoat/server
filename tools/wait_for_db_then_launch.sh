@@ -14,5 +14,5 @@ echo "starting xi_search"
 nohup ./xi_search &
 
 sleep 5
-echo "starting xi_game"
-./xi_game
+echo "starting xi_map"
+./xi_map
