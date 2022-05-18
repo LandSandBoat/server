@@ -30,8 +30,8 @@
 
 Application::Application(std::string const& serverName, std::unique_ptr<argparse::ArgumentParser>&& pArgParser)
 : m_ServerName(serverName)
-, gArgParser(std::move(pArgParser))
 , m_IsRunning(true)
+, gArgParser(std::move(pArgParser))
 {
 #ifdef _WIN32
     SetConsoleTitleA(fmt::format("{}-server", serverName).c_str());

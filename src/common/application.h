@@ -42,10 +42,10 @@ public:
     virtual bool IsRunning();
     virtual void Tick();
 
+protected:
+    std::string m_ServerName;
+    bool        m_IsRunning;
+
     std::unique_ptr<argparse::ArgumentParser> gArgParser;
     std::unique_ptr<ConsoleService>           gConsoleService;
-
-protected:
-    bool        m_IsRunning;
-    std::string m_ServerName;
 };
