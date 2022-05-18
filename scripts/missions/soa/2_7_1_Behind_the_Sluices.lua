@@ -8,13 +8,12 @@
 -- Antiquated_Sluice_Gate  : !pos -529.361 -7.000 59.988 258
 -- WATERWAY_FACILITY_CRANK : !addkeyitem 2450
 -----------------------------------
+require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/utils')
 require('scripts/globals/zone')
-require('scripts/settings/main')
 -----------------------------------
-local ID = require('scripts/zones/Western_Adoulin/IDs')
+local ralaID = require('scripts/zones/Rala_Waterways/IDs')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.BEHIND_THE_SLUICES)
@@ -36,6 +35,8 @@ mission.sections =
 
         [xi.zone.RALA_WATERWAYS] =
         {
+            ['Sluice_Gate_6'] = mission:messageSpecial(ralaID.text.PERHAPS_THE_WISEST, xi.ki.WATERWAY_FACILITY_CRANK),
+
             ['Storage_Container'] =
             {
                 onTrigger = function(player, npc)
@@ -58,7 +59,7 @@ mission.sections =
             ['Sluice_Gate_6'] =
             {
                 onTrigger = function(player, npc)
-                    return mission:progressEvent(359)
+                    return mission:progressEvent(359, 258, 102)
                 end,
             },
 
@@ -75,8 +76,7 @@ mission.sections =
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId and
-                   player:hasKeyItem(xi.ki.WATERWAY_FACILITY_CRANK) and
-                   missionStatus == 1
+                   player:hasKeyItem(xi.ki.WATERWAY_FACILITY_CRANK)
         end,
 
         [xi.zone.RALA_WATERWAYS] =
@@ -123,6 +123,17 @@ mission.sections =
                     mission:complete(player)
                 end,
             },
+        },
+    },
+
+    {
+        check = function(player, currentMission, missionStatus, vars)
+            return player:hasCompletedMission(mission.areaId, mission.missionId)
+        end,
+
+        [xi.zone.RALA_WATERWAYS] =
+        {
+            ['Sluice_Gate_6'] = mission:event(361):replaceDefault(),
         },
     },
 }
