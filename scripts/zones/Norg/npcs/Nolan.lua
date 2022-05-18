@@ -26,6 +26,24 @@ entity.onTrade = function(player, npc, trade)
         return
     end
 
+    -- Set up for weaponskill unlocks from Atori-Tutori (Ru'Lude Gardens)
+    if player:getCharVar("PaidForMeritWs") == 2 then shijinSpiralAvailable = 1
+	elseif player:getCharVar("PaidForMeritWs") == 3 then exenteratorAvailable = 1
+	elseif player:getCharVar("PaidForMeritWs") == 4 then requiescatAvailable = 1
+	elseif player:getCharVar("PaidForMeritWs") == 5 then resolutionAvailable = 1
+	elseif player:getCharVar("PaidForMeritWs") == 6 then ruinatorAvailable = 1
+	elseif player:getCharVar("PaidForMeritWs") == 7 then upheavalAvailable = 1
+	elseif player:getCharVar("PaidForMeritWs") == 8 then entropyAvailable = 1
+	elseif player:getCharVar("PaidForMeritWs") == 9 then stardiverAvailable = 1
+	elseif player:getCharVar("PaidForMeritWs") == 10 then bladeShunAvailable = 1
+	elseif player:getCharVar("PaidForMeritWs") == 11 then tachiShohaAvailable = 1
+	elseif player:getCharVar("PaidForMeritWs") == 12 then realmrazerAvailable = 1
+	elseif player:getCharVar("PaidForMeritWs") == 13 then shattersoulAvailable = 1
+	elseif player:getCharVar("PaidForMeritWs") == 14 then apexArrowAvailable = 1
+	elseif player:getCharVar("PaidForMeritWs") == 15 then lastStandAvailable = 1
+	end
+	
+    -- Print Beads balance
     player:PrintToPlayer(string.format("You have %s escha beads available to spend. Choose wisely.", beadsBalance), 0xD)
 
     -- Menu 1
@@ -59,7 +77,7 @@ entity.onTrade = function(player, npc, trade)
             end,
             
             onEnd = function(playerArg)
-                playerArg:PrintToPlayer("Thank you for your purchase! Keep up the good fight!", xi.msg.channel.NS_SAY)
+                playerArg:PrintToPlayer("Nolan: See you again!", xi.msg.channel.NS_SAY)
             end,
         }
 
@@ -84,7 +102,7 @@ entity.onTrade = function(player, npc, trade)
                 {
                     "Teleport ring: Holla",
                     function(playerArg)
-                        player:setCurrency("escha_beads", beadsBalance - itemCostMenuOne)
+                        player:setCurrency("escha_beads", beadsBalance - itemCostMenuTwo)
                         player:addItem(14661)
                         playerArg:PrintToPlayer("Here's your Craftmaster's ring. Thanks for being a loyal player, we appreciate you!", xi.msg.channel.NS_SAY)
                     end,
@@ -92,7 +110,7 @@ entity.onTrade = function(player, npc, trade)
                 {
                     "Teleport ring: Mea",
                     function(playerArg)                         
-                        playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuOne)
+                        playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuTwo)
                         playerArg:addItem(14663)
                         playerArg:messageSpecial(ID.text.ITEM_OBTAINED, 14663)
                         playerArg:PrintToPlayer("Nolan: Pleasure doing business with you!", xi.msg.channel.NS_SAY)
@@ -101,7 +119,7 @@ entity.onTrade = function(player, npc, trade)
                 {
                     "Teleport ring: Dem",
                     function(playerArg)     
-                        playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuOne)
+                        playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuTwo)
                         playerArg:addItem(14662)
                         playerArg:messageSpecial(ID.text.ITEM_OBTAINED, 14662)
                         playerArg:PrintToPlayer("Nolan: Pleasure doing business with you!", xi.msg.channel.NS_SAY)
@@ -113,7 +131,7 @@ entity.onTrade = function(player, npc, trade)
             end,
             
             onEnd = function(playerArg)
-                playerArg:PrintToPlayer("Thank you for your purchase! Keep up the good fight!", xi.msg.channel.NS_SAY)
+                playerArg:PrintToPlayer("Nolan: See you again!", xi.msg.channel.NS_SAY)
             end,
         }
         
@@ -138,7 +156,7 @@ entity.onTrade = function(player, npc, trade)
                 {
                     "Emico mantle",
                     function(playerArg)
-                        playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuTwo)
+                        playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuThree)
                         playerArg:addItem(27597)
                         playerArg:messageSpecial(ID.text.ITEM_OBTAINED, 27597)
                         playerArg:PrintToPlayer("Nolan: Pleasure doing business with you!", xi.msg.channel.NS_SAY)
@@ -147,7 +165,7 @@ entity.onTrade = function(player, npc, trade)
                 {
                     "Crested torque",
                     function(playerArg)                         
-                        playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuTwo)
+                        playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuThree)
                         playerArg:addItem(28349)
                         playerArg:messageSpecial(ID.text.ITEM_OBTAINED, 28349)
                         playerArg:PrintToPlayer("Nolan: Pleasure doing business with you!", xi.msg.channel.NS_SAY)
@@ -156,7 +174,7 @@ entity.onTrade = function(player, npc, trade)
                 {
                     "Setae ring",
                     function(playerArg)     
-                        playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuTwo)
+                        playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuThree)
                         playerArg:addItem(28529)
                         playerArg:messageSpecial(ID.text.ITEM_OBTAINED, 28529)
                         playerArg:PrintToPlayer("Nolan: Pleasure doing business with you!", xi.msg.channel.NS_SAY)
@@ -165,7 +183,7 @@ entity.onTrade = function(player, npc, trade)
                 {
                     "Megasco earring",
                     function(playerArg)     
-                        playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuTwo)
+                        playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuThree)
                         playerArg:addItem(28488)
                         playerArg:messageSpecial(ID.text.ITEM_OBTAINED, 28488)
                         playerArg:PrintToPlayer("Nolan: Pleasure doing business with you!", xi.msg.channel.NS_SAY)
@@ -174,7 +192,7 @@ entity.onTrade = function(player, npc, trade)
                 {
                     "Salire belt",
                     function(playerArg)     
-                        playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuTwo)
+                        playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuThree)
                         playerArg:addItem(28425)
                         playerArg:messageSpecial(ID.text.ITEM_OBTAINED, 28425)
                         playerArg:PrintToPlayer("Nolan: Pleasure doing business with you!", xi.msg.channel.NS_SAY)
@@ -183,7 +201,7 @@ entity.onTrade = function(player, npc, trade)
                 {
                     "Charitoni Sling",
                     function(playerArg)     
-                        playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuTwo)
+                        playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuThree)
                         playerArg:addItem(21347)
                         playerArg:messageSpecial(ID.text.ITEM_OBTAINED, 21347)
                         playerArg:PrintToPlayer("Nolan: Pleasure doing business with you!", xi.msg.channel.NS_SAY)
@@ -192,7 +210,7 @@ entity.onTrade = function(player, npc, trade)
                 {
                     "Dew silk cape",
                     function(playerArg)     
-                        playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuTwo)
+                        playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuThree)
                         playerArg:addItem(27598)
                         playerArg:messageSpecial(ID.text.ITEM_OBTAINED, 27598)
                         playerArg:PrintToPlayer("Nolan: Pleasure doing business with you!", xi.msg.channel.NS_SAY)
@@ -201,7 +219,7 @@ entity.onTrade = function(player, npc, trade)
                 {
                     "Adsilio boots",
                     function(playerArg)     
-                        playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuTwo)
+                        playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuThree)
                         playerArg:addItem(28271)
                         playerArg:messageSpecial(ID.text.ITEM_OBTAINED, 28271)
                         playerArg:PrintToPlayer("Nolan: Pleasure doing business with you!", xi.msg.channel.NS_SAY)
@@ -213,7 +231,7 @@ entity.onTrade = function(player, npc, trade)
             end,
 
             onEnd = function(playerArg)
-                playerArg:PrintToPlayer("Thank you for your purchase! Keep up the good fight!", xi.msg.channel.NS_SAY)
+                playerArg:PrintToPlayer("Nolan: See you again!", xi.msg.channel.NS_SAY)
             end,
         }
 
@@ -238,7 +256,7 @@ entity.onTrade = function(player, npc, trade)
                 {
                     "Dew Silk Cape +1",
                     function(playerArg)
-                        playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuThree)
+                        playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuFour)
                         playerArg:addItem(27599)
                         playerArg:messageSpecial(ID.text.ITEM_OBTAINED, 27599)
                         playerArg:PrintToPlayer("Nolan: Pleasure doing business with you!", xi.msg.channel.NS_SAY)
@@ -247,7 +265,7 @@ entity.onTrade = function(player, npc, trade)
                 {
                     "Adsilio Boots +1",
                     function(playerArg)                         
-                        playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuThree)
+                        playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuFour)
                         playerArg:addItem(28272)
                         playerArg:messageSpecial(ID.text.ITEM_OBTAINED, 28272)
                         playerArg:PrintToPlayer("Nolan: Pleasure doing business with you!", xi.msg.channel.NS_SAY)
@@ -259,7 +277,7 @@ entity.onTrade = function(player, npc, trade)
             end,
 
             onEnd = function(playerArg)
-                playerArg:PrintToPlayer("Thank you for your purchase! Keep up the good fight!", xi.msg.channel.NS_SAY)
+                playerArg:PrintToPlayer("Nolan: See you again!", xi.msg.channel.NS_SAY)
             end,
         }
 
@@ -283,38 +301,74 @@ entity.onTrade = function(player, npc, trade)
             {
                 {
                     "Apex Arrow (Bow)",
-                    function(playerArg)                         
-                        playerArg:PrintToPlayer("Option 1 of sub-menu 3 selected.", xi.msg.channel.NS_SAY)
+                    function(playerArg)
+                        if apexArrowAvailable == 1 then				
+						    playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuFive)
+                            playerArg:setCharVar("hasApexArrowUnlock", 1)
+							playerArg:PrintToPlayer("Congratulations! You have unlocked \"Apex Arrow\"!")
+						else
+						    playerArg:PrintToPlayer("Nolan: Whoa, buddy! You still have some work to do before we can discuss this.", xi.msg.channel.NS_SAY)
+						end
                     end,
                 },
                 {
                     "Blade: Shun (Katana)",
                     function(playerArg)                         
-                        playerArg:PrintToPlayer("Option 2 of sub-menu 3 selected.", xi.msg.channel.NS_SAY)
+                        if bladeShunAvailable == 1 then				
+						    playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuFive)
+                            playerArg:setCharVar("hasBladeShunUnlock", 1)
+							playerArg:PrintToPlayer("Congratulations! You have unlocked \"Blade: Shun\"!")
+						else
+						    playerArg:PrintToPlayer("Nolan: Whoa, buddy! You still have some work to do before we can discuss this.", xi.msg.channel.NS_SAY)
+						end
                     end,
                 },
                 {
                     "Entropy (Scythe)",
                     function(playerArg)     
-                        playerArg:PrintToPlayer("Option 3 of sub-menu 3 selected.", xi.msg.channel.NS_SAY)
+                        if entropyAvailable == 1 then				
+						    playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuFive)
+                            playerArg:setCharVar("hasEntropyUnlock", 1)
+							playerArg:PrintToPlayer("Congratulations! You have unlocked \"Entropy\"!")
+						else
+						    playerArg:PrintToPlayer("Nolan: Whoa, buddy! You still have some work to do before we can discuss this.", xi.msg.channel.NS_SAY)
+						end
                     end,
                 },
                 {
                     "Exenterator (Dagger)",
                     function(playerArg)                         
-                        playerArg:PrintToPlayer("Option 1 of sub-menu 3 selected.", xi.msg.channel.NS_SAY)
+                        if exenteratorAvailable == 1 then				
+						    playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuFive)
+                            playerArg:setCharVar("hasExenteratorUnlock", 1)
+							playerArg:PrintToPlayer("Congratulations! You have unlocked \"Exenterator\"!")
+						else
+						    playerArg:PrintToPlayer("Nolan: Whoa, buddy! You still have some work to do before we can discuss this.", xi.msg.channel.NS_SAY)
+						end
                     end,
                 },
                 {
                     "Last Stand (Gun)",
                     function(playerArg)                         
-                        playerArg:PrintToPlayer("Option 1 of sub-menu 3 selected.", xi.msg.channel.NS_SAY)
+                        if lastStandAvailable == 1 then				
+						    playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuFive)
+                            playerArg:setCharVar("hasLastStandUnlock", 1)
+							playerArg:PrintToPlayer("Congratulations! You have unlocked \"Last Stand\"!")
+						else
+						    playerArg:PrintToPlayer("Nolan: Whoa, buddy! You still have some work to do before we can discuss this.", xi.msg.channel.NS_SAY)
+						end
                     end,
                 },
                 {
                     "Realmrazer (Club)",
                     function(playerArg)                         
-                        playerArg:PrintToPlayer("Option 1 of sub-menu 3 selected.", xi.msg.channel.NS_SAY)
+                        if realmrazerAvailable == 1 then				
+						    playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuFive)
+                            playerArg:setCharVar("hasRealmrazerUnlock", 1)
+							playerArg:PrintToPlayer("Congratulations! You have unlocked \"Realmrazer\"!")
+						else
+						    playerArg:PrintToPlayer("Nolan: Whoa, buddy! You still have some work to do before we can discuss this.", xi.msg.channel.NS_SAY)
+						end
                     end,
                 },
             },
@@ -323,7 +377,7 @@ entity.onTrade = function(player, npc, trade)
             end,
 
             onEnd = function(playerArg)
-                playerArg:PrintToPlayer("Thank you for your purchase! Keep up the good fight!", xi.msg.channel.NS_SAY)
+                playerArg:PrintToPlayer("Nolan: See you again!", xi.msg.channel.NS_SAY)
             end,
         }
 
@@ -348,37 +402,73 @@ entity.onTrade = function(player, npc, trade)
                 {
                     "Requiescat (Sword)",
                     function(playerArg)                         
-                        playerArgFive:PrintToPlayer("Option 1 of sub-menu 3 selected.", xi.msg.channel.NS_SAY)
+                        if requiescatAvailable == 1 then				
+						    playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuSix)
+                            playerArg:setCharVar("hasRequiescatUnlock", 1)
+							playerArg:PrintToPlayer("Congratulations! You have unlocked \"Requiescat\"!")
+						else
+						    playerArg:PrintToPlayer("Nolan: Whoa, buddy! You still have some work to do before we can discuss this.", xi.msg.channel.NS_SAY)
+						end
                     end,
                 },
                 {
                     "Resolution (Great Sword)",
                     function(playerArg)                         
-                        playerArgFive:PrintToPlayer("Option 1 of sub-menu 3 selected.", xi.msg.channel.NS_SAY)
+                        if resolutionAvailable == 1 then				
+						    playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuSix)
+                            playerArg:setCharVar("hasResolutionUnlock", 1)
+							playerArg:PrintToPlayer("Congratulations! You have unlocked \"Resolution\"!")
+						else
+						    playerArg:PrintToPlayer("Nolan: Whoa, buddy! You still have some work to do before we can discuss this.", xi.msg.channel.NS_SAY)
+						end
                     end,
                 },
                 {
                     "Ruinator (Axe)",
                     function(playerArg)                         
-                        playerArgFive:PrintToPlayer("Option 1 of sub-menu 3 selected.", xi.msg.channel.NS_SAY)
+                        if ruinatorAvailable == 1 then				
+						    playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuSix)
+                            playerArg:setCharVar("hasRuinatorUnlock", 1)
+							playerArg:PrintToPlayer("Congratulations! You have unlocked \"Ruinator\"!")
+						else
+						    playerArg:PrintToPlayer("Nolan: Whoa, buddy! You still have some work to do before we can discuss this.", xi.msg.channel.NS_SAY)
+						end
                     end,
                 },
                 {
                     "Shattersoul (Staff)",
                     function(playerArg)                         
-                        playerArgFive:PrintToPlayer("Option 1 of sub-menu 3 selected.", xi.msg.channel.NS_SAY)
+                        if shattersoulAvailable == 1 then				
+						    playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuSix)
+                            playerArg:setCharVar("hasShattersoulUnlock", 1)
+							playerArg:PrintToPlayer("Congratulations! You have unlocked \"Shattersoul\"!")
+						else
+						    playerArg:PrintToPlayer("Nolan: Whoa, buddy! You still have some work to do before we can discuss this.", xi.msg.channel.NS_SAY)
+						end
                     end,
                 },
                 {
                     "Shijin Spiral: (H2H)",
                     function(playerArg)                         
-                        playerArgFive:PrintToPlayer("Option 1 of sub-menu 3 selected.", xi.msg.channel.NS_SAY)
+                        if shijinSpiralAvailable == 1 then				
+						    playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuSix)
+                            playerArg:setCharVar("hasShijinSpiralUnlock", 1)
+							playerArg:PrintToPlayer("Congratulations! You have unlocked \"Shijin Spiral\"!")
+						else
+						    playerArg:PrintToPlayer("Nolan: Whoa, buddy! You still have some work to do before we can discuss this.", xi.msg.channel.NS_SAY)
+						end
                     end,
                 },
                 {
                     "Stardiver (Polearm)",
                     function(playerArg)                         
-                        playerArgFive:PrintToPlayer("Option 1 of sub-menu 3 selected.", xi.msg.channel.NS_SAY)
+                        if stardiverAvailable == 1 then				
+						    playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuSix)
+                            playerArg:setCharVar("hasStardiverUnlock", 1)
+							playerArg:PrintToPlayer("Congratulations! You have unlocked \"Stardiver\"!")
+						else
+						    playerArg:PrintToPlayer("Nolan: Whoa, buddy! You still have some work to do before we can discuss this.", xi.msg.channel.NS_SAY)
+						end
                     end,
                 },
             },
@@ -387,7 +477,7 @@ entity.onTrade = function(player, npc, trade)
             end,
 
             onEnd = function(playerArg)
-                playerArg:PrintToPlayer("Thank you for your purchase! Keep up the good fight!", xi.msg.channel.NS_SAY)
+                playerArg:PrintToPlayer("Nolan: See you again!", xi.msg.channel.NS_SAY)
             end,
         }
 
@@ -412,13 +502,25 @@ entity.onTrade = function(player, npc, trade)
                 {
                     "Tachi: Shoha (Great Katana)",
                     function(playerArg)                         
-                        playerArg:PrintToPlayer("Option 1 of sub-menu 3 selected.", xi.msg.channel.NS_SAY)
+                        if tachiShohaAvailable == 1 then				
+						    playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuSeven)
+                            playerArg:setCharVar("hasTachiShohaUnlock", 1)
+							playerArg:PrintToPlayer("Congratulations! You have unlocked \"Tachi: Shoha\"!")
+						else
+						    playerArg:PrintToPlayer("Nolan: Whoa, buddy! You still have some work to do before we can discuss this.", xi.msg.channel.NS_SAY)
+						end
                     end,
                 },
                 {
                     "Upheaval (Great Axe)",
                     function(playerArg)                         
-                        playerArg:PrintToPlayer("Option 2 of sub-menu 3 selected.", xi.msg.channel.NS_SAY)
+                        if upheavalAvailable == 1 then				
+						    playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuSeven)
+                            playerArg:setCharVar("hasUpheavalUnlock", 1)
+							playerArg:PrintToPlayer("Congratulations! You have unlocked \"Upheaval\"!")
+						else
+						    playerArg:PrintToPlayer("Nolan: Whoa, buddy! You still have some work to do before we can discuss this.", xi.msg.channel.NS_SAY)
+						end
                     end,
                 },
             },
@@ -427,7 +529,7 @@ entity.onTrade = function(player, npc, trade)
             end,
 
             onEnd = function(playerArg)
-                playerArg:PrintToPlayer("Thank you for your purchase! Keep up the good fight!", xi.msg.channel.NS_SAY)
+                playerArg:PrintToPlayer("Nolan: See you again!", xi.msg.channel.NS_SAY)
             end,
         }
 

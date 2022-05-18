@@ -32,4 +32,4 @@ REPLACE INTO `mob_groups` (`groupid`, `poolid`, `zoneid`, `name`, `respawntime`,
 REPLACE INTO `mob_groups` (`groupid`, `poolid`, `zoneid`, `name`, `respawntime`, `spawntype`, `dropid`, `HP`, `MP`, `minLevel`, `maxLevel`, `allegiance`) VALUES (54, 2018, 73, 'Hydra', 0, 128, 0, 25000, 25000, 150, 150, 0);
 
 -- Bahamut
-REPLACE INTO mob_groups (groupid, poolid, zoneid, name, respawntime, spawntype, dropid, HP, MP, minLevel, maxLevel, allegiance) VALUES (17, 325, 29, 'Bahamut', 0, 128, 0, 35000, 15000, 100, 100, 0);
+REPLACE INTO mob_groups (groupid, poolid, zoneid, name, respawntime, spawntype, dropid, HP, MP, minLevel, maxLevel, allegiance) VALUES (17, 325, 29, 'Bahamut', 0, 128, 0, 40000, 15000, 100, 100, 0);

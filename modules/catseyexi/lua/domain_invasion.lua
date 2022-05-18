@@ -80,7 +80,7 @@ m:addOverride("xi.zones.Escha_RuAun.Zone.onZoneTick", function(zone)
 
                 -- Reward escha beads
                 local beadsRewarded = math.random(425, 625)
-				local players = mob:getZone():getPlayers()
+                local players = mob:getZone():getPlayers()
                 
                 for i, participant in pairs(players) do
                     if participant:hasStatusEffect(xi.effect.ELVORSEAL) then
@@ -186,7 +186,7 @@ m:addOverride("xi.zones.Reisenjima_Henge.Zone.onZoneTick", function(zone)
                 
                 -- Reward escha beads
                 local beadsRewarded = math.random(425, 625)
-				local players = mob:getZone():getPlayers()
+                local players = mob:getZone():getPlayers()
                 
                 for i, participant in pairs(players) do
                     if participant:hasStatusEffect(xi.effect.ELVORSEAL) then
@@ -273,7 +273,7 @@ m:addOverride("xi.zones.Provenance.Zone.onZoneTick", function(zone)
             end,
 
             onMobDeath = function(mob, player, isKiller, noKiller)     
-				
+                
                 -- Variable control
                 SetServerVariable("[Domain]NMToD", os.time()) -- Set NM ToD
                 SetServerVariable("[Domain]NM", 0)            -- Set NM to be spawned next
@@ -285,7 +285,7 @@ m:addOverride("xi.zones.Provenance.Zone.onZoneTick", function(zone)
 
                 -- Reward escha beads
                 local beadsRewarded = math.random(425, 625)
-				local players = mob:getZone():getPlayers()
+                local players = mob:getZone():getPlayers()
                 
                 for i, participant in pairs(players) do
                     if participant:hasStatusEffect(xi.effect.ELVORSEAL) then
@@ -304,7 +304,7 @@ m:addOverride("xi.zones.Provenance.Zone.onZoneTick", function(zone)
         mob:spawn()
 
         -- Set MobMods 
-        mob:setMobLevel(82)
+        mob:setMobLevel(78)
         mob:addMod(xi.mod.MAIN_DMG_RATING, 50)
         mob:addMod(xi.mod.STR, 20)
         mob:addMod(xi.mod.VIT, 10)
@@ -328,10 +328,10 @@ m:addOverride("xi.zones.Provenance.Zone.onZoneTick", function(zone)
         mob:setMod(xi.mod.LULLABYRES, 10000)
         mob:setMod(xi.mod.FASTCAST, 10)
         mob:setMod(xi.mod.DOUBLE_ATTACK, 20)
-        mob:addStatusEffect(xi.effect.SHOCK_SPIKES, 50, 0, 0)
-        mob:addStatusEffect(xi.effect.REGEN, 30, 3, 0)
-        mob:addStatusEffect(xi.effect.ENTHUNDER_II, 100, 0, 0)
-        mob:addStatusEffect(xi.effect.REFRESH, 50, 3, 0)
+        mob:addStatusEffect(xi.effect.SHOCK_SPIKES, 10, 0, 0)
+--        mob:addStatusEffect(xi.effect.REGEN, 30, 3, 0)
+        mob:addStatusEffect(xi.effect.ENTHUNDER_II, 10, 0, 0)
+--        mob:addStatusEffect(xi.effect.REFRESH, 1, 3, 0)
         mob:setMobMod(xi.mobMod.SKILL_LIST, 313)
         mob:setMobMod(xi.mobMod.SPELL_LIST, 24)
     end
@@ -371,6 +371,31 @@ m:addOverride("xi.zones.Provenance.Zone.onZoneTick", function(zone)
             end,
 
             onMobFight = function(mob, target)
+
+                local lifePercent = mob:getHPP()
+				
+                if lifePercent < 70 and mob:getLocalVar("MegaFlareUsed") == 0 then
+                    mob:useMobAbility(1551)
+                    mob:setLocalVar("MegaFlareUsed", 1)
+                end
+                
+				if lifePercent < 45 and mob:getLocalVar("MegaFlareUsed") == 1 then
+                    mob:useMobAbility(1551)
+                    mob:setLocalVar("MegaFlareUsed", 2)
+                end
+                
+				if lifePercent < 25 and mob:getLocalVar("GigaFlareUsed") == 0 then
+                    mob:useMobAbility(1552)
+                    mob:setLocalVar("GigaFlareUsed", 1)
+                end
+                
+				if lifePercent < 5 and mob:getLocalVar("GigaFlareUsed") == 1 then
+                    mob:useMobAbility(1552)
+                    mob:setMod(xi.mod.TRIPLE_ATTACK, 20)
+                    mob:setLocalVar("GigaFlareUsed", 2)
+                end            
+            
+            
                 if mob:getHPP() < 10 then
                     local players = mob:getZone():getPlayers()
                     
@@ -395,7 +420,7 @@ m:addOverride("xi.zones.Provenance.Zone.onZoneTick", function(zone)
 
                 -- Reward escha beads
                 local beadsRewarded = math.random(850, 1250)
-				local players = mob:getZone():getPlayers()
+                local players = mob:getZone():getPlayers()
                 
                 for i, participant in pairs(players) do
                     if participant:hasStatusEffect(xi.effect.ELVORSEAL) then
@@ -409,14 +434,15 @@ m:addOverride("xi.zones.Provenance.Zone.onZoneTick", function(zone)
             end,
         })
   
-        mob:setMobLevel(90)  
         mob:setSpawn(-580, -228, 540, 65)
         mob:setDropID(0) -- No loot!
         mob:spawn()
 
         --  Set MobMods
-        mob:addMod(xi.mod.HUMANOID_KILLER, 7)
+--        mob:addMod(xi.mod.HUMANOID_KILLER, 7)
         mob:addMod(xi.mod.MAIN_DMG_RATING, 50)
+        mob:setMobLevel(87)
+		mob:addMod(xi.mod.MDEF, 60)
         mob:addMod(xi.mod.STR, 20)
         mob:addMod(xi.mod.VIT, 10)
         mob:addMod(xi.mod.INT, 25)
@@ -424,11 +450,11 @@ m:addOverride("xi.zones.Provenance.Zone.onZoneTick", function(zone)
         mob:addMod(xi.mod.CHR, 10)
         mob:addMod(xi.mod.AGI, 10)
         mob:addMod(xi.mod.DEX, 20)
-        mob:addMod(xi.mod.DEFP, 35)
-        mob:addMod(xi.mod.RATTP, 100)
+        mob:addMod(xi.mod.DEFP, 50)
+        mob:addMod(xi.mod.RATTP, 35)
         mob:addMod(xi.mod.ACC, 100)
         mob:setMod(xi.mod.MATT, 380)
-        mob:setMod(xi.mod.MACC, 900)
+        mob:setMod(xi.mod.MACC, 400)
         mob:setMod(xi.mod.SILENCERES, 100)
         mob:setMod(xi.mod.STUNRES, 50)
         mob:setMod(xi.mod.BINDRES, 100)
@@ -439,10 +465,10 @@ m:addOverride("xi.zones.Provenance.Zone.onZoneTick", function(zone)
         mob:setMod(xi.mod.LULLABYRES, 10000)
         mob:setMod(xi.mod.FASTCAST, 10)
         mob:setMod(xi.mod.DOUBLE_ATTACK, 20)
-        mob:addStatusEffect(xi.effect.SHOCK_SPIKES, 50, 0, 0)
-        mob:addStatusEffect(xi.effect.REGEN, 30, 3, 0)
-        mob:addStatusEffect(xi.effect.ENTHUNDER_II, 100, 0, 0)
-        mob:addStatusEffect(xi.effect.REFRESH, 50, 3, 0)
+        mob:addStatusEffect(xi.effect.SHOCK_SPIKES, 10, 0, 0)
+        mob:addStatusEffect(xi.effect.REGEN, 10, 3, 0)
+        mob:addStatusEffect(xi.effect.ENTHUNDER_II, 10, 0, 0)
+--        mob:addStatusEffect(xi.effect.REFRESH, 50, 3, 0)
         mob:setMobMod(xi.mobMod.SKILL_LIST, 726)
         mob:setMobMod(xi.mobMod.SPELL_LIST, 144)
     end
@@ -643,7 +669,7 @@ m:addOverride("xi.zones.Escha_RuAun.Zone.onInitialize", function(zone)
     local beam1 = zone:insertDynamicEntity({
         objtype = xi.objType.NPC,
         name = " ",
-		flag = 2056,
+        flag = 2056,
         look = 2472,
         x = -10.909,
         y = -43.600,
@@ -654,7 +680,7 @@ m:addOverride("xi.zones.Escha_RuAun.Zone.onInitialize", function(zone)
     local beam2 = zone:insertDynamicEntity({
         objtype = xi.objType.NPC,
         name = " ",
-		flag = 2056,
+        flag = 2056,
         look = 2472,
         x = -14.616,
         y = -43.600,
@@ -665,7 +691,7 @@ m:addOverride("xi.zones.Escha_RuAun.Zone.onInitialize", function(zone)
     local beam3 = zone:insertDynamicEntity({
         objtype = xi.objType.NPC,
         name = " ",
-		flag = 2056,
+        flag = 2056,
         look = 2472,
         x = -18.180,
         y = -43.600,
@@ -676,7 +702,7 @@ m:addOverride("xi.zones.Escha_RuAun.Zone.onInitialize", function(zone)
     local beam4 = zone:insertDynamicEntity({
         objtype = xi.objType.NPC,
         name = " ",
-		flag = 2056,
+        flag = 2056,
         look = 2472,
         x = 14.2821,
         y = -43.600,
@@ -687,7 +713,7 @@ m:addOverride("xi.zones.Escha_RuAun.Zone.onInitialize", function(zone)
     local beam5 = zone:insertDynamicEntity({
         objtype = xi.objType.NPC,
         name = " ",
-		flag = 2056,
+        flag = 2056,
         look = 2472,
         x = 17.416,
         y = -43.600,
@@ -698,7 +724,7 @@ m:addOverride("xi.zones.Escha_RuAun.Zone.onInitialize", function(zone)
     local beam6 = zone:insertDynamicEntity({
         objtype = xi.objType.NPC,
         name = " ",
-		flag = 2056,
+        flag = 2056,
         look = 2472,
         x = 20.832,
         y = -43.600,
@@ -709,7 +735,7 @@ m:addOverride("xi.zones.Escha_RuAun.Zone.onInitialize", function(zone)
     local beam7 = zone:insertDynamicEntity({
         objtype = xi.objType.NPC,
         name = " ",
-		flag = 2056,
+        flag = 2056,
         look = 2472,
         x = 8.912,
         y = -44.0130,
@@ -720,7 +746,7 @@ m:addOverride("xi.zones.Escha_RuAun.Zone.onInitialize", function(zone)
     local beam8 = zone:insertDynamicEntity({
         objtype = xi.objType.NPC,
         name = " ",
-		flag = 2056,
+        flag = 2056,
         look = 2472,
         x = 5.442,
         y = -44.013,
@@ -731,7 +757,7 @@ m:addOverride("xi.zones.Escha_RuAun.Zone.onInitialize", function(zone)
     local beam9 = zone:insertDynamicEntity({
         objtype = xi.objType.NPC,
         name = " ",
-		flag = 2056,
+        flag = 2056,
         look = 2472,
         x = 0.652,
         y = -44.013,
@@ -742,7 +768,7 @@ m:addOverride("xi.zones.Escha_RuAun.Zone.onInitialize", function(zone)
     local beam10 = zone:insertDynamicEntity({
         objtype = xi.objType.NPC,
         name = " ",
-		flag = 2056,
+        flag = 2056,
         look = 2472,
         x = -4.160,
         y = -44.013,
@@ -753,7 +779,7 @@ m:addOverride("xi.zones.Escha_RuAun.Zone.onInitialize", function(zone)
     local beam11 = zone:insertDynamicEntity({
         objtype = xi.objType.NPC,
         name = " ",
-		flag = 2056,
+        flag = 2056,
         look = 2472,
         x = -8.615,
         y = -44.013,
@@ -764,7 +790,7 @@ m:addOverride("xi.zones.Escha_RuAun.Zone.onInitialize", function(zone)
     local beam12 = zone:insertDynamicEntity({
         objtype = xi.objType.NPC,
         name = " ",
-		flag = 2056,
+        flag = 2056,
         look = 2472,
         x = -0.113,
         y = -40.00,
