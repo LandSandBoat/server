@@ -37,10 +37,12 @@ zones[xi.zone.BIBIKI_BAY] =
         DIG_THROW_AWAY          = 7285, -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
         FIND_NOTHING            = 7287, -- You dig and you dig, but find nothing.
         CLUNK_CLUNK_WHIRL_WHIZZ = 7377, -- <Clunk-clunk>... <Whirl-whizz>...!
+        YOU_ARE_NOT_ALONE       = 7447, -- You are not alone!
         NO_BILLET               = 7489, -- You were refused passage for failing to present <item>!
         HAVE_BILLET             = 7494, -- You cannot buy morrre than one <item>. Use the one you have now to ride the next ship.
         LEFT_BILLET             = 7499, -- You use your <item>. (<number> trip[/s] remaining)
         END_BILLET              = 7500, -- You use up your <item>.
+        NOTHING_LEFT_INTEREST   = 7617, -- There is nothing left of interest here.
         COMMON_SENSE_SURVIVAL   = 8645, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
         NEWS_BILLET             = 8668, -- <item> has been [added to your list of favorites/removed from your list of favorites].
     },

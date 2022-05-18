@@ -214,8 +214,8 @@ namespace charutils
     void  HomePoint(CCharEntity* PChar);
     bool  AddWeaponSkillPoints(CCharEntity*, SLOTTYPE, int);
 
-    int32 GetCharVar(CCharEntity* PChar, const char* var);
-    void  SetCharVar(CCharEntity* PChar, const char* var, int32 value);
+    int32 GetCharVar(CCharEntity* PChar, std::string const& var);
+    void  SetCharVar(CCharEntity* PChar, std::string const& var, int32 value);
     void ClearCharVarsWithPrefix(CCharEntity* PChar, std::string prefix);
 
     uint16 getWideScanRange(JOBTYPE job, uint8 level);
@@ -239,6 +239,10 @@ namespace charutils
     uint8 getItemLevelDifference(CCharEntity* PChar);
     uint8 getMainhandItemLevel(CCharEntity* PChar);
     uint8 getRangedItemLevel(CCharEntity* PChar);
+
+    bool hasEntitySpawned(CCharEntity* PChar, CBaseEntity* entity);
+
+    uint32 getCharIdFromName(std::string const& name);
 }; // namespace charutils
 
 #endif // _CHARUTILS_H

@@ -23,13 +23,12 @@
 #include "tracy.h"
 
 #include "spdlog/common.h"
+
 #include "spdlog/async.h"
 #include "spdlog/pattern_formatter.h"
 #include "spdlog/sinks/basic_file_sink.h"
 #include "spdlog/sinks/stdout_color_sinks.h"
 #include "spdlog/sinks/daily_file_sink.h"
-#include "spdlog/fmt/fmt.h"
-#include "spdlog/fmt/bundled/printf.h"
 
 namespace logging
 {

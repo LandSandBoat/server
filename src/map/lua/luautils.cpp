@@ -19,10 +19,10 @@
 ===========================================================================
 */
 
-#include "../../common/filewatcher.h"
-#include "../../common/logging.h"
-#include "../../common/utils.h"
-#include "../../common/version.h"
+#include "common/filewatcher.h"
+#include "common/logging.h"
+#include "common/utils.h"
+#include "common/version.h"
 
 #include <array>
 #include <filesystem>
@@ -113,6 +113,7 @@ namespace luautils
         ShowStatus("luautils::init:lua initializing");
 
         lua = sol::state();
+        TracyLuaRegister(lua.lua_state());
         lua.open_libraries();
 
         // Globally require bit library
@@ -174,7 +175,6 @@ namespace luautils
         lua.set_function("ClearVarFromAll", &luautils::ClearVarFromAll);
         lua.set_function("SendEntityVisualPacket", &luautils::SendEntityVisualPacket);
         lua.set_function("UpdateServerMessage", &luautils::UpdateServerMessage);
-        lua.set_function("GetServerVersion", &luautils::GetServerVersion);
         lua.set_function("GetMobRespawnTime", &luautils::GetMobRespawnTime);
         lua.set_function("DisallowRespawn", &luautils::DisallowRespawn);
         lua.set_function("UpdateNMSpawnPoint", &luautils::UpdateNMSpawnPoint);
@@ -414,8 +414,11 @@ namespace luautils
                 });
                 return outStr + " }";
             }
+            default:
+            {
+                return "UNKNOWN";
+            }
         }
-        return "UNKNOWN";
     }
 
     void print(sol::variadic_args va)
@@ -423,7 +426,7 @@ namespace luautils
         TracyZoneScoped;
 
         std::string outString;
-        for (int i = 0; i < va.size(); ++i)
+        for (std::size_t i = 0; i < va.size(); ++i)
         {
             auto entry = luaToString(va[i]);
             // TODO: Use fmt::join if we ever update fmt
@@ -1271,16 +1274,19 @@ namespace luautils
                 {
                     return true;
                 }
+                break;
             case 1: // Waning (decending)
                 if (phase >= 95 && phase <= 100)
                 {
                     return true;
                 }
+                break;
             case 2: // Waxing (increasing)
                 if (phase >= 90 && phase <= 100)
                 {
                     return true;
                 }
+                break;
         }
 
         return false;
@@ -1382,7 +1388,7 @@ namespace luautils
      *                                                                       *
      ************************************************************************/
 
-    std::optional<CLuaBaseEntity> GetPlayerByName(std::string name)
+    std::optional<CLuaBaseEntity> GetPlayerByName(std::string const& name)
     {
         TracyZoneScoped;
 
@@ -1461,7 +1467,7 @@ namespace luautils
                 {
                     for (auto column : magianColumns)
                     {
-                        table[column] = (int32)sql->GetIntData(field++);
+                        table[column] = sql->GetIntData(field++);
                     }
                 }
             }
@@ -1479,7 +1485,7 @@ namespace luautils
                         int32 field{ 0 };
                         for (auto column : magianColumns)
                         {
-                            inner_table[column] = (int32)sql->GetIntData(field++);
+                            inner_table[column] = sql->GetIntData(field++);
                         }
                     }
                 }
@@ -1544,6 +1550,7 @@ namespace luautils
     uint8 GetSettingsVariable(const char* variable)
     {
         TracyZoneScoped;
+        TracyZoneCString(variable);
         return lua["xi"]["settings"][variable].valid() ? lua["xi"]["settings"][variable].get<uint8>() : 0;
     }
 
@@ -1685,10 +1692,11 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        auto name = PChar->m_moghouseID ? "Residential_Area" : (const char*)zoneutils::GetZone(PChar->loc.destination)->GetName();
+        auto name     = PChar->m_moghouseID ? "Residential_Area" : (const char*)zoneutils::GetZone(PChar->loc.destination)->GetName();
+        auto filename = fmt::format("./scripts/zones/{}/Zone.lua", name);
 
         auto onZoneInFramework = lua["xi"]["globals"]["interaction"]["interaction_global"]["onZoneIn"];
-        auto onZoneIn = lua["xi"]["zones"][name]["Zone"]["onZoneIn"];
+        auto onZoneIn = GetCacheEntryFromFilename(filename)["onZoneIn"];
 
         auto result = onZoneInFramework(CLuaBaseEntity(PChar), PChar->loc.prevzone, onZoneIn);
         if (!result.valid())
@@ -1715,10 +1723,11 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        auto name = (const char*)PChar->loc.zone->GetName();
+        auto name     = (const char*)PChar->loc.zone->GetName();
+        auto filename = fmt::format("./scripts/zones/{}/Zone.lua", name);
 
         auto afterZoneInFramework = lua["xi"]["globals"]["interaction"]["interaction_global"]["afterZoneIn"];
-        auto afterZoneIn = lua["xi"]["zones"][name]["Zone"]["afterZoneIn"];
+        auto afterZoneIn = GetCacheEntryFromFilename(filename)["afterZoneIn"];
 
         auto result = afterZoneInFramework(CLuaBaseEntity(PChar), afterZoneIn);
         if (!result.valid())
@@ -1732,10 +1741,11 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        auto name = (const char*)PChar->loc.zone->GetName();
+        auto name     = (const char*)PChar->loc.zone->GetName();
+        auto filename = fmt::format("./scripts/zones/{}/Zone.lua", name);
 
         auto onZoneOutFramework = lua["xi"]["globals"]["interaction"]["interaction_global"]["onZoneOut"];
-        auto onZoneOut          = lua["xi"]["zones"][name]["Zone"]["onZoneOut"];
+        auto onZoneOut          = GetCacheEntryFromFilename(filename)["onZoneOut"];
 
         auto result = onZoneOutFramework(CLuaBaseEntity(PChar), onZoneOut);
         if (!result.valid())
@@ -1748,7 +1758,7 @@ namespace luautils
 
     /************************************************************************
      *                                                                       *
-     *  Персонаж входит в активный регион                                    *
+     *  The character has entered the active region                          *
      *                                                                       *
      ************************************************************************/
 
@@ -1801,7 +1811,7 @@ namespace luautils
 
     /************************************************************************
      *                                                                       *
-     *  Персонаж покидает активный регион                                    *
+     *  The character has left the active region                             *
      *                                                                       *
      ************************************************************************/
 
@@ -3408,7 +3418,7 @@ namespace luautils
 
         if (criticalHit)
         {
-            luautils::OnCriticalHit((CBattleEntity*)PMob, (CBattleEntity*)PChar);
+            luautils::OnCriticalHit((CBattleEntity*)PMob, PChar);
         }
 
         return std::make_tuple(dmg, tpHitsLanded, extraHitsLanded);
@@ -3440,7 +3450,7 @@ namespace luautils
         uint16 retVal = result.get_type(0) == sol::type::number ? result.get<uint16>(0) : 0;
         if (retVal > 0)
         {
-            return static_cast<uint16>(retVal);
+            return retVal;
         }
 
         return 0;
@@ -3660,7 +3670,7 @@ namespace luautils
         auto result1 = result.get_type(1) == sol::type::number ? result.get<int32>(1) : 0;
         if (result1 != 0)
         {
-            *PMsgTarget = (CBaseEntity*)PTarget;
+            *PMsgTarget = PTarget;
         }
 
         return result0 ? result0 : 0; // Default to no Message
@@ -3757,13 +3767,17 @@ namespace luautils
     void Terminate()
     {
         TracyZoneScoped;
-        zoneutils::ForEachZone([](CZone* PZone) {
-            PZone->ForEachChar([](CCharEntity* PChar) {
+        // clang-format off
+        zoneutils::ForEachZone([](CZone* PZone)
+        {
+            PZone->ForEachChar([](CCharEntity* PChar)
+            {
                 charutils::SaveCharPosition(PChar);
                 charutils::SaveCharStats(PChar);
                 charutils::SaveCharExp(PChar, PChar->GetMJob());
             });
         });
+        // clang-format on
         exit(1);
     }
 
@@ -4061,7 +4075,7 @@ namespace luautils
 
         if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
         {
-            value = (int32)sql->GetIntData(0);
+            value = sql->GetIntData(0);
         }
 
         return value;
@@ -4484,16 +4498,6 @@ namespace luautils
         }
 
         return 0;
-    }
-
-    sol::table GetServerVersion()
-    {
-        sol::table version = lua.create_table();
-        version["branch"]  = XI_RELEASE_FLAG;
-        version["major"]   = XI_MAJOR_VERSION;
-        version["minor"]   = XI_MINOR_VERSION;
-        version["rev"]     = XI_REVISION;
-        return version;
     }
 
     sol::table NearLocation(sol::table const& table, float radius, float theta)

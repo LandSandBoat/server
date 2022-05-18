@@ -600,7 +600,7 @@ namespace charutils
 
         if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
         {
-            PChar->jobs.unlocked = (uint32)sql->GetUIntData(0);
+            PChar->jobs.unlocked = sql->GetUIntData(0);
             PChar->jobs.genkai   = (uint8)sql->GetUIntData(1);
 
             PChar->jobs.job[JOB_WAR] = (uint8)sql->GetIntData(2);
@@ -671,7 +671,7 @@ namespace charutils
 
         if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
         {
-            PChar->nameflags.flags = (uint32)sql->GetUIntData(0);
+            PChar->nameflags.flags = sql->GetUIntData(0);
 
             PChar->SetMJob(sql->GetUIntData(1));
             PChar->SetSJob(sql->GetUIntData(2));
@@ -819,7 +819,7 @@ namespace charutils
             PChar->m_GMlevel             = (uint8)sql->GetUIntData(0);
             PChar->m_mentorUnlocked      = sql->GetUIntData(1) > 0;
             PChar->m_jobMasterDisplay    = sql->GetUIntData(2) > 0;
-            PChar->menuConfigFlags.flags = (uint32)sql->GetUIntData(3);
+            PChar->menuConfigFlags.flags = sql->GetUIntData(3);
         }
 
         ret = sql->Query("SELECT field_chocobo FROM char_pet WHERE charid = %u;", PChar->id);
@@ -828,7 +828,7 @@ namespace charutils
             sql->NumRows() != 0 &&
             sql->NextRow() == SQL_SUCCESS)
         {
-            PChar->m_FieldChocobo = static_cast<uint32>(sql->GetUIntData(0));
+            PChar->m_FieldChocobo = sql->GetUIntData(0);
         }
 
         charutils::LoadInventory(PChar);
@@ -983,7 +983,7 @@ namespace charutils
                 // now find each item in the container
                 for (uint8 y = 0; y < MAX_CONTAINER_SIZE; ++y)
                 {
-                    CItem* PItem = (CItem*)PItemContainer->GetItem(y);
+                    CItem* PItem = PItemContainer->GetItem(y);
 
                     // check if the item is valid and can have an augment applied to it
                     if (PItem != nullptr && ((PItem->isType(ITEM_EQUIPMENT) || PItem->isType(ITEM_WEAPON)) && !PItem->isSubType(ITEM_CHARGED)))
@@ -1790,7 +1790,7 @@ namespace charutils
 
     void RemoveSub(CCharEntity* PChar)
     {
-        CItemEquipment* PItem = (CItemEquipment*)PChar->getEquip(SLOT_SUB);
+        CItemEquipment* PItem = PChar->getEquip(SLOT_SUB);
 
         if (PItem != nullptr && PItem->isType(ITEM_EQUIPMENT))
         {
@@ -1896,7 +1896,7 @@ namespace charutils
                             case SKILL_GREAT_KATANA:
                             case SKILL_STAFF:
                             {
-                                CItemEquipment* armor = (CItemEquipment*)PChar->getEquip(SLOT_SUB);
+                                CItemEquipment* armor = PChar->getEquip(SLOT_SUB);
                                 if ((armor != nullptr) && armor->isType(ITEM_EQUIPMENT))
                                 {
                                     if (armor->isType(ITEM_WEAPON))
@@ -1959,6 +1959,7 @@ namespace charutils
                                 {
                                     UnequipItem(PChar, SLOT_MAIN, false);
                                 }
+                                break;
                             }
                             case SKILL_DAGGER:
                             case SKILL_SWORD:
@@ -2149,7 +2150,7 @@ namespace charutils
                 }
                 else
                 {
-                    switch (((CItemWeapon*)PItem)->getSkillType())
+                    switch (PItem->getSkillType())
                     {
                         case SKILL_HAND_TO_HAND:
                             PChar->mainlook.sub = appearanceModel + 0x1000;
@@ -2366,8 +2367,8 @@ namespace charutils
                         }
                     }
 
-                    PChar->addEquipModifiers(&PItem->modList, ((CItemEquipment*)PItem)->getReqLvl(), equipSlotID);
-                    PChar->PLatentEffectContainer->AddLatentEffects(PItem->latentList, ((CItemEquipment*)PItem)->getReqLvl(), equipSlotID);
+                    PChar->addEquipModifiers(&PItem->modList, PItem->getReqLvl(), equipSlotID);
+                    PChar->PLatentEffectContainer->AddLatentEffects(PItem->latentList, PItem->getReqLvl(), equipSlotID);
                     PChar->PLatentEffectContainer->CheckLatentsEquip(equipSlotID);
                     PChar->addPetModifiers(&PItem->petModList);
 
@@ -2541,7 +2542,7 @@ namespace charutils
 
         // add in melee ws
         PItem                       = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_MAIN));
-        uint8       skill           = PItem ? PItem->getSkillType() : SKILL_HAND_TO_HAND;
+        uint8       skill           = PItem ? PItem->getSkillType() : (uint8)SKILL_HAND_TO_HAND;
         const auto& WeaponSkillList = battleutils::GetWeaponSkills(skill);
         for (auto&& PSkill : WeaponSkillList)
         {
@@ -2941,8 +2942,10 @@ namespace charutils
 
     void TrySkillUP(CCharEntity* PChar, SKILLTYPE SkillID, uint8 lvl, bool forceSkillUp, bool useSubSkill)
     {
+        TracyZoneScoped;
+
         // This usually happens after a crash
-        XI_DEBUG_BREAK_IF(SkillID >= MAX_SKILLTYPE); // выход за пределы допустимых умений
+        XI_DEBUG_BREAK_IF((unsigned int)SkillID >= MAX_SKILLTYPE); // выход за пределы допустимых умений
 
         if (((PChar->WorkingSkills.rank[SkillID] != 0) && !(PChar->WorkingSkills.skill[SkillID] & 0x8000)) || useSubSkill)
         {
@@ -3127,37 +3130,72 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Методы для работы с ключевыми предметами                             *
+     *  Methods for working with key items                                   *
      *                                                                       *
      ************************************************************************/
 
     bool hasKeyItem(CCharEntity* PChar, uint16 KeyItemID)
     {
         auto table = KeyItemID / 512;
+
+        if (table >= MAX_KEYS_TABLE)
+        {
+            ShowWarning("Attempt to check for keyItem out of range (%d)!", KeyItemID);
+            return false;
+        }
+
         return PChar->keys.tables[table].keyList[KeyItemID % 512];
     }
 
     bool seenKeyItem(CCharEntity* PChar, uint16 KeyItemID)
     {
         auto table = KeyItemID / 512;
+
+        if (table >= MAX_KEYS_TABLE)
+        {
+            ShowWarning("Attempt to see for keyItem out of range (%d)!", KeyItemID);
+            return false;
+        }
+
         return PChar->keys.tables[table].seenList[KeyItemID % 512];
     }
 
     void unseenKeyItem(CCharEntity* PChar, uint16 KeyItemID)
     {
-        auto table                                          = KeyItemID / 512;
+        auto table = KeyItemID / 512;
+
+        if (table >= MAX_KEYS_TABLE)
+        {
+            ShowWarning("Attempt to unsee for keyItem out of range (%d)!", KeyItemID);
+            return;
+        }
+
         PChar->keys.tables[table].seenList[KeyItemID % 512] = false;
     }
 
     void addKeyItem(CCharEntity* PChar, uint16 KeyItemID)
     {
-        auto table                                         = KeyItemID / 512;
+        auto table = KeyItemID / 512;
+
+        if (table >= MAX_KEYS_TABLE)
+        {
+            ShowWarning("Attempt to add for keyItem out of range (%d)!", KeyItemID);
+            return;
+        }
+
         PChar->keys.tables[table].keyList[KeyItemID % 512] = true;
     }
 
     void delKeyItem(CCharEntity* PChar, uint16 KeyItemID)
     {
-        auto table                                         = KeyItemID / 512;
+        auto table = KeyItemID / 512;
+
+        if (table >= MAX_KEYS_TABLE)
+        {
+            ShowWarning("Attempt to delete keyItem out of range (%d)!", KeyItemID);
+            return;
+        }
+
         PChar->keys.tables[table].keyList[KeyItemID % 512] = false;
     }
 
@@ -3236,7 +3274,7 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Методы для работы со званиями                                        *
+     *  Methods for working with titles                                      *
      *                                                                       *
      ************************************************************************/
 
@@ -3370,6 +3408,8 @@ namespace charutils
 
     void LoadExpTable()
     {
+        TracyZoneScoped;
+
         const char* fmtQuery = "SELECT r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13,r14,r15,r16,r17,r18,r19,r20 "
                                "FROM exp_table "
                                "ORDER BY level ASC "
@@ -3488,6 +3528,8 @@ namespace charutils
 
     void DistributeGil(CCharEntity* PChar, CMobEntity* PMob)
     {
+        TracyZoneScoped;
+
         // work out the amount of gil to give (guessed; replace with testing)
         uint32 gil    = PMob->GetRandomGil();
         uint32 gBonus = 0;
@@ -3541,6 +3583,8 @@ namespace charutils
 
     void DistributeItem(CCharEntity* PChar, CBaseEntity* PEntity, uint16 itemid, uint16 droprate)
     {
+        TracyZoneScoped;
+
         uint8 tries    = 0;
         uint8 maxTries = 1;
         uint8 bonus    = 0;
@@ -3570,6 +3614,8 @@ namespace charutils
 
     void DistributeExperiencePoints(CCharEntity* PChar, CMobEntity* PMob)
     {
+        TracyZoneScoped;
+
         uint8       pcinzone = 0;
         uint8       minlevel = 0;
         uint8       maxlevel = PChar->GetMLevel();
@@ -3619,7 +3665,9 @@ namespace charutils
         PMob->m_HiPartySize = pcinzone;
         PMob->m_HiPCLvl     = maxlevel;
 
-        PChar->ForAlliance([&PMob, &region, &minlevel, &maxlevel, &pcinzone](CBattleEntity* PPartyMember) {
+        // clang-format off
+        PChar->ForAlliance([&PMob, &region, &maxlevel, &pcinzone](CBattleEntity* PPartyMember)
+        {
             CCharEntity* PMember = dynamic_cast<CCharEntity*>(PPartyMember);
             if (!PMember || PMember->isDead())
             {
@@ -4019,6 +4067,7 @@ namespace charutils
                 }
             }
         });
+        // clang-format on
     }
 
     /************************************************************************
@@ -4029,6 +4078,8 @@ namespace charutils
 
     void DistributeCapacityPoints(CCharEntity* PChar, CMobEntity* PMob)
     {
+        TracyZoneScoped;
+
         // TODO: Capacity Points cannot be gained in Abyssea or Reives.  In addition, Gates areas,
         //       Ra'Kaznar, Escha, and Reisenjima reduce party penalty for capacity points earned.
         ZONEID zone     = PChar->loc.zone->GetID();
@@ -4098,6 +4149,8 @@ namespace charutils
 
     uint16 AddCapacityBonus(CCharEntity* PChar, uint16 capacityPoints)
     {
+        TracyZoneScoped;
+
         float rawBonus = 0;
 
         // Mod::CAPACITY_BONUS is currently used for JP Gifts, and can easily be used elsewhere
@@ -4142,6 +4195,8 @@ namespace charutils
 
     void AddCapacityPoints(CCharEntity* PChar, CBaseEntity* PMob, uint32 capacityPoints, int16 levelDiff, bool isCapacityChain)
     {
+        TracyZoneScoped;
+
         if (PChar->isDead())
         {
             return;
@@ -4149,7 +4204,7 @@ namespace charutils
 
         capacityPoints = (uint32)(capacityPoints * map_config.exp_rate);
 
-        uint16 currentCapacity = PChar->PJobPoints->GetCapacityPoints();
+        // uint16 currentCapacity = PChar->PJobPoints->GetCapacityPoints();
 
         if (capacityPoints > 0)
         {
@@ -4194,6 +4249,8 @@ namespace charutils
      ************************************************************************/
     void DelExperiencePoints(CCharEntity* PChar, float retainPercent, uint16 forcedXpLoss)
     {
+        TracyZoneScoped;
+
         XI_DEBUG_BREAK_IF(retainPercent > 1.0f || retainPercent < 0.0f);
         XI_DEBUG_BREAK_IF(map_config.exp_loss_level > 99 || map_config.exp_loss_level < 1);
 
@@ -4292,6 +4349,8 @@ namespace charutils
 
     void AddExperiencePoints(bool expFromRaise, CCharEntity* PChar, CBaseEntity* PMob, uint32 exp, EMobDifficulty mobCheck, bool isexpchain)
     {
+        TracyZoneScoped;
+
         if (PChar->isDead())
         {
             return;
@@ -4518,12 +4577,14 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Сохраняем позицию                                                    *
+     *                                                                       *
      *                                                                       *
      ************************************************************************/
 
     void SaveCharPosition(CCharEntity* PChar)
     {
+        TracyZoneScoped;
+
         const char* Query = "UPDATE chars "
                             "SET "
                             "pos_rot = %u,"
@@ -4538,12 +4599,14 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Сохраняем список квестов                                             *
+     *                                                                       *
      *                                                                       *
      ************************************************************************/
 
     void SaveQuestsList(CCharEntity* PChar)
     {
+        TracyZoneScoped;
+
         const char* Query = "UPDATE chars "
                             "SET "
                             "quests = '%s' "
@@ -4557,12 +4620,14 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Сохраняем список квестов                                             *
+     *                                                                       *
      *                                                                       *
      ************************************************************************/
 
     void SaveFame(CCharEntity* PChar)
     {
+        TracyZoneScoped;
+
         const char* Query = "UPDATE char_profile "
                             "SET "
                             "fame_sandoria = %u,"
@@ -4595,6 +4660,8 @@ namespace charutils
 
     void SaveMissionsList(CCharEntity* PChar)
     {
+        TracyZoneScoped;
+
         const char* Query = "UPDATE chars "
                             "LEFT JOIN char_profile USING(charid) "
                             "SET "
@@ -4628,6 +4695,8 @@ namespace charutils
 
     void SaveEminenceData(CCharEntity* PChar)
     {
+        TracyZoneScoped;
+
         if (!roeutils::RoeSystem.RoeEnabled)
         {
             return;
@@ -4647,6 +4716,8 @@ namespace charutils
 
     void SaveCharInventoryCapacity(CCharEntity* PChar)
     {
+        TracyZoneScoped;
+
         const char* Query = "UPDATE char_storage "
                             "SET "
                             "inventory = %u,"
@@ -4691,6 +4762,8 @@ namespace charutils
 
     void SaveKeyItems(CCharEntity* PChar)
     {
+        TracyZoneScoped;
+
         const char* fmtQuery = "UPDATE chars SET keyitems = '%s' WHERE charid = %u;";
 
         char keyitems[sizeof(PChar->keys) * 2 + 1];
@@ -4701,12 +4774,14 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Сохраняем список выученных заклинаний                                *
+     *                                                                       *
      *                                                                       *
      ************************************************************************/
 
     void SaveSpell(CCharEntity* PChar, uint16 spellID)
     {
+        TracyZoneScoped;
+
         const char* Query = "INSERT IGNORE INTO char_spells "
                             "VALUES (%u, %u);";
 
@@ -4715,6 +4790,8 @@ namespace charutils
 
     void DeleteSpell(CCharEntity* PChar, uint16 spellID)
     {
+        TracyZoneScoped;
+
         const char* Query = "DELETE FROM char_spells "
                             "WHERE charid = %u AND spellid = %u;";
 
@@ -4723,12 +4800,14 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Сохраняем список выученных заклинаний                                *
+     *                                                                       *
      *                                                                       *
      ************************************************************************/
 
     void SaveLearnedAbilities(CCharEntity* PChar)
     {
+        TracyZoneScoped;
+
         const char* Query = "UPDATE chars SET "
                             "abilities = '%s', "
                             "weaponskills = '%s' "
@@ -4744,12 +4823,14 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Сохраняем список званий                                              *
+     *                                                                       *
      *                                                                       *
      ************************************************************************/
 
     void SaveTitles(CCharEntity* PChar)
     {
+        TracyZoneScoped;
+
         const char* Query = "UPDATE chars "
                             "LEFT JOIN char_stats USING(charid) "
                             "SET "
@@ -4765,12 +4846,14 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Сохраняем список посещенных зон                                      *
+     *                                                                       *
      *                                                                       *
      ************************************************************************/
 
     void SaveZonesVisited(CCharEntity* PChar)
     {
+        TracyZoneScoped;
+
         const char* fmtQuery = "UPDATE chars SET zones = '%s' WHERE charid = %u;";
 
         char zones[sizeof(PChar->m_ZonesList) * 2 + 1];
@@ -4781,12 +4864,14 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Сохраняем экипировку и внешний вид персонажа.                        *
+     *                                                                       *
      *                                                                       *
      ************************************************************************/
 
     void SaveCharEquip(CCharEntity* PChar)
     {
+        TracyZoneScoped;
+
         for (uint8 i = 0; i < 18; ++i)
         {
             if (PChar->equip[i] == 0)
@@ -4804,6 +4889,8 @@ namespace charutils
 
     void SaveCharLook(CCharEntity* PChar)
     {
+        TracyZoneScoped;
+
         const char* Query = "UPDATE char_look "
                             "SET head = %u, body = %u, hands = %u, legs = %u, feet = %u, main = %u, sub = %u, ranged = %u "
                             "WHERE charid = %u;";
@@ -4832,6 +4919,8 @@ namespace charutils
 
     void SaveCharStats(CCharEntity* PChar)
     {
+        TracyZoneScoped;
+
         const char* Query = "UPDATE char_stats "
                             "SET hp = %u, mp = %u, nameflags = %u, mhflag = %u, mjob = %u, sjob = %u, "
                             "pet_id = %u, pet_type = %u, pet_hp = %u, pet_mp = %u "
@@ -4849,6 +4938,8 @@ namespace charutils
 
     void SaveCharGMLevel(CCharEntity* PChar)
     {
+        TracyZoneScoped;
+
         const char* Query = "UPDATE %s SET %s %u WHERE charid = %u;";
 
         sql->Query(Query, "chars", "gmlevel =", PChar->m_GMlevel, PChar->id);
@@ -4857,6 +4948,8 @@ namespace charutils
 
     void SaveMentorFlag(CCharEntity* PChar)
     {
+        TracyZoneScoped;
+
         const char* Query = "UPDATE %s SET %s %u WHERE charid = %u;";
 
         sql->Query(Query, "chars", "mentor =", PChar->m_mentorUnlocked, PChar->id);
@@ -4864,6 +4957,8 @@ namespace charutils
 
     void SaveJobMasterDisplay(CCharEntity* PChar)
     {
+        TracyZoneScoped;
+
         const char* Query = "UPDATE %s SET %s %u WHERE charid = %u;";
 
         sql->Query(Query, "chars", "job_master =", PChar->m_jobMasterDisplay, PChar->id);
@@ -4876,6 +4971,8 @@ namespace charutils
      ************************************************************************/
     void SaveMenuConfigFlags(CCharEntity* PChar)
     {
+        TracyZoneScoped;
+
         const char* Query = "UPDATE %s SET %s %u WHERE charid = %u;";
 
         sql->Query(Query, "chars", "nnameflags =", PChar->menuConfigFlags.flags, PChar->id);
@@ -4889,6 +4986,8 @@ namespace charutils
 
     void SaveChatFilterFlags(CCharEntity* PChar)
     {
+        TracyZoneScoped;
+
         const char* Query = "UPDATE chars SET chatfilters = %llu WHERE charid = %u;";
 
         sql->Query(Query, PChar->chatFilterFlags, PChar->id);
@@ -4902,6 +5001,8 @@ namespace charutils
 
     void SaveLanguages(CCharEntity* PChar)
     {
+        TracyZoneScoped;
+
         const char* Query = "UPDATE chars SET languages = %u WHERE charid = %u;";
 
         sql->Query(Query, PChar->search.language, PChar->id);
@@ -4915,6 +5016,8 @@ namespace charutils
 
     void SaveCharNation(CCharEntity* PChar)
     {
+        TracyZoneScoped;
+
         const char* Query = "UPDATE chars "
                             "SET nation = %u "
                             "WHERE charid = %u;";
@@ -4930,6 +5033,8 @@ namespace charutils
 
     void SaveCampaignAllegiance(CCharEntity* PChar)
     {
+        TracyZoneScoped;
+
         const char* Query = "UPDATE chars "
                             "SET campaign_allegiance = %u "
                             "WHERE charid = %u;";
@@ -4945,6 +5050,8 @@ namespace charutils
 
     void SaveCharMoghancement(CCharEntity* PChar)
     {
+        TracyZoneScoped;
+
         const char* Query = "UPDATE chars "
                             "SET moghancement = %u "
                             "WHERE charid = %u;";
@@ -4960,6 +5067,8 @@ namespace charutils
 
     void SaveCharJob(CCharEntity* PChar, JOBTYPE job)
     {
+        TracyZoneScoped;
+
         XI_DEBUG_BREAK_IF(job == JOB_NON || job >= MAX_JOBTYPE);
 
         const char* fmtQuery;
@@ -5048,12 +5157,14 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Сохраняем текущий опыт персонажа                                     *
+     *                                                                       *
      *                                                                       *
      ************************************************************************/
 
     void SaveCharExp(CCharEntity* PChar, JOBTYPE job)
     {
+        TracyZoneScoped;
+
         XI_DEBUG_BREAK_IF(job == JOB_NON || job >= MAX_JOBTYPE);
 
         const char* Query;
@@ -5135,12 +5246,14 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Сохраняем значение выбранного умения персонажа                       *
+     *                                                                       *
      *                                                                       *
      ************************************************************************/
 
     void SaveCharSkills(CCharEntity* PChar, uint8 SkillID)
     {
+        TracyZoneScoped;
+
         XI_DEBUG_BREAK_IF(SkillID >= MAX_SKILLTYPE);
 
         const char* Query = "INSERT INTO char_skills "
@@ -5163,6 +5276,8 @@ namespace charutils
 
     void SaveTeleport(CCharEntity* PChar, TELEPORT_TYPE type)
     {
+        TracyZoneScoped;
+
         const char* column = "";
         uint32      value  = 0;
 
@@ -5235,6 +5350,8 @@ namespace charutils
 
     float AddExpBonus(CCharEntity* PChar, float exp)
     {
+        TracyZoneScoped;
+
         int32 bonus = 0;
         if (PChar->StatusEffectContainer->GetStatusEffect(EFFECT_DEDICATION) && PChar->loc.zone->GetRegionID() != REGION_TYPE::ABYSSEA)
         {
@@ -5279,6 +5396,8 @@ namespace charutils
 
     bool hasMogLockerAccess(CCharEntity* PChar)
     {
+        TracyZoneScoped;
+
         char fmtQuery[] = "SELECT value FROM char_vars WHERE charid = %u AND varname = '%s' ";
         sql->Query(fmtQuery, PChar->id, "mog-locker-expiry-timestamp");
 
@@ -5301,6 +5420,8 @@ namespace charutils
 
     uint16 AvatarPerpetuationReduction(CCharEntity* PChar)
     {
+        TracyZoneScoped;
+
         // REMEMBER:
         // Elements start at 0 and the 0th element is ELEMENT_NONE
         // Weather starts at 0 and the 0th weather is WEATHER_NONE
@@ -5332,7 +5453,7 @@ namespace charutils
             perpReduction += dayReduction;
         }
 
-        // TODO: #793 Whats the deal with the +1 to weather result here?
+        // TODO: Whats the deal with the +1 to weather result here?
         if (weather == weatherStrong[petElementIdx] || weather == weatherStrong[petElementIdx] + 1)
         {
             perpReduction += weatherReduction;
@@ -5349,12 +5470,16 @@ namespace charutils
 
     void SaveDeathTime(CCharEntity* PChar)
     {
+        TracyZoneScoped;
+
         const char* fmtQuery = "UPDATE char_stats SET death = %u WHERE charid = %u LIMIT 1;";
         sql->Query(fmtQuery, PChar->GetSecondsElapsedSinceDeath(), PChar->id);
     }
 
     void SavePlayTime(CCharEntity* PChar)
     {
+        TracyZoneScoped;
+
         uint32 playtime = PChar->GetPlayTime();
 
         sql->Query("UPDATE chars SET playtime = '%u' WHERE charid = '%u' LIMIT 1;", playtime, PChar->id);
@@ -5376,6 +5501,8 @@ namespace charutils
 
     void CheckUnarmedWeapon(CCharEntity* PChar)
     {
+        TracyZoneScoped;
+
         CItem* PSubslot = PChar->getEquip(SLOT_SUB);
 
         // Main or sub job provides H2H skill, and sub slot is empty.
@@ -5540,7 +5667,7 @@ namespace charutils
     {
         for (uint8 slotID = 0; slotID < 16; ++slotID)
         {
-            CItemEquipment* PItem = (CItemEquipment*)PChar->getEquip((SLOTTYPE)slotID);
+            CItemEquipment* PItem = PChar->getEquip((SLOTTYPE)slotID);
             if (PItem)
             {
                 PChar->addEquipModifiers(&PItem->modList, PItem->getReqLvl(), slotID);
@@ -5555,6 +5682,8 @@ namespace charutils
 
     void ClearTempItems(CCharEntity* PChar)
     {
+        TracyZoneScoped;
+
         CItemContainer* Temp = PChar->getStorage(LOC_TEMPITEMS);
 
         const char* Query = "DELETE FROM char_inventory WHERE charid = %u AND location = 3;";
@@ -5567,6 +5696,8 @@ namespace charutils
 
     void ReloadParty(CCharEntity* PChar)
     {
+        TracyZoneScoped;
+
         int ret = sql->Query("SELECT partyid, allianceid, partyflag & %d FROM accounts_sessions s JOIN accounts_parties p ON "
                             "s.charid = p.charid WHERE p.charid = %u;",
                             (PARTY_SECOND | PARTY_THIRD), PChar->id);
@@ -5629,15 +5760,19 @@ namespace charutils
                 else
                 {
                     // find if the alliance exists on this server already
+                    // clang-format off
                     CAlliance* PAlliance = nullptr;
-                    zoneutils::ForEachZone([allianceid, &PAlliance](CZone* PZone) {
-                        PZone->ForEachChar([allianceid, &PAlliance](CCharEntity* PChar) {
+                    zoneutils::ForEachZone([allianceid, &PAlliance](CZone* PZone)
+                    {
+                        PZone->ForEachChar([allianceid, &PAlliance](CCharEntity* PChar)
+                        {
                             if (PChar->PParty && PChar->PParty->m_PAlliance && PChar->PParty->m_PAlliance->m_AllianceID == allianceid)
                             {
                                 PAlliance = PChar->PParty->m_PAlliance;
                             }
                         });
                     });
+                    // clang-format on
 
                     // create new alliance if it doesn't exist on this server already
                     if (!PAlliance)
@@ -5691,13 +5826,16 @@ namespace charutils
     {
         if (PTarget->getBlockingAid())
         {
+            // clang-format off
             bool inAlliance = false;
-            PTarget->ForAlliance([&PInitiator, &inAlliance](CBattleEntity* PEntity) {
+            PTarget->ForAlliance([&PInitiator, &inAlliance](CBattleEntity* PEntity)
+            {
                 if (PEntity->id == PInitiator->id)
                 {
                     inAlliance = true;
                 }
             });
+            // clang-format on
 
             if (!inAlliance)
             {
@@ -5710,6 +5848,8 @@ namespace charutils
     // char_points manipulation
     void AddPoints(CCharEntity* PChar, const char* type, int32 amount, int32 max)
     {
+        TracyZoneScoped;
+
         const char* Query = "UPDATE char_points SET %s = GREATEST(LEAST(%s+%d, %d), 0) WHERE charid = %u;";
 
         sql->Query(Query, type, type, amount, max, PChar->id);
@@ -5733,6 +5873,8 @@ namespace charutils
 
     void SetPoints(CCharEntity* PChar, const char* type, int32 amount)
     {
+        TracyZoneScoped;
+
         const char* Query = "UPDATE char_points SET %s = %d WHERE charid = %u;";
 
         sql->Query(Query, type, amount, PChar->id);
@@ -5745,6 +5887,8 @@ namespace charutils
 
     int32 GetPoints(CCharEntity* PChar, const char* type)
     {
+        TracyZoneScoped;
+
         const char* Query = "SELECT %s FROM char_points WHERE charid = %u;";
 
         int ret = sql->Query(Query, type, PChar->id);
@@ -5758,6 +5902,8 @@ namespace charutils
 
     void SetUnityLeader(CCharEntity* PChar, uint8 leaderID)
     {
+        TracyZoneScoped;
+
         const char* leaderQuery = "UPDATE char_profile SET unity_leader=%d WHERE charid = %u;";
 
         if (leaderID < 1 || leaderID > 11)
@@ -5792,6 +5938,8 @@ namespace charutils
 
     void SendToZone(CCharEntity* PChar, uint8 type, uint64 ipp)
     {
+        TracyZoneScoped;
+
         if (type == 2)
         {
             sql->Query("UPDATE accounts_sessions SET server_addr = %u, server_port = %u WHERE charid = %u;", (uint32)ipp, (uint32)(ipp >> 32),
@@ -5823,6 +5971,8 @@ namespace charutils
 
     void HomePoint(CCharEntity* PChar)
     {
+        TracyZoneScoped;
+
         // remove weakness on homepoint
         PChar->StatusEffectContainer->DelStatusEffectSilent(EFFECT_WEAKNESS);
         PChar->StatusEffectContainer->DelStatusEffectSilent(EFFECT_LEVEL_SYNC);
@@ -5846,6 +5996,8 @@ namespace charutils
 
     bool AddWeaponSkillPoints(CCharEntity* PChar, SLOTTYPE slotid, int wspoints)
     {
+        TracyZoneScoped;
+
         CItemWeapon* PWeapon = (CItemWeapon*)PChar->m_Weapons[slotid];
 
         if (PWeapon && PWeapon->isUnlockable() && !PWeapon->isUnlocked())
@@ -5866,9 +6018,11 @@ namespace charutils
         return false;
     }
 
-    int32 GetCharVar(CCharEntity* PChar, const char* var)
+    int32 GetCharVar(CCharEntity* PChar, std::string const& var)
     {
         TracyZoneScoped;
+        TracyZoneString(PChar->name);
+        TracyZoneString(var);
 
         if (PChar == nullptr)
         {
@@ -5878,7 +6032,7 @@ namespace charutils
 
         const char* fmtQuery = "SELECT value FROM char_vars WHERE charid = %u AND varname = '%s' LIMIT 1;";
 
-        int32 ret = sql->Query(fmtQuery, PChar->id, var);
+        int32 ret = sql->Query(fmtQuery, PChar->id, var.c_str());
 
         if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
         {
@@ -5891,10 +6045,12 @@ namespace charutils
         return 0;
     }
 
-    void SetCharVar(CCharEntity* PChar, const char* var, int32 value)
+    void SetCharVar(CCharEntity* PChar, std::string const& var, int32 value)
     {
         TracyZoneScoped;
-        
+        TracyZoneString(PChar->name);
+        TracyZoneString(fmt::format("{} -> {}", var, value));
+
         if (PChar == nullptr)
         {
             ShowError("SetCharVar was requested for a nullptr PChar");
@@ -5903,19 +6059,22 @@ namespace charutils
 
         if (value == 0)
         {
-            sql->Query("DELETE FROM char_vars WHERE charid = %u AND varname = '%s' LIMIT 1;", PChar->id, var);
+            auto query = fmt::sprintf("DELETE FROM char_vars WHERE charid = %u AND varname = '%s' LIMIT 1;",
+                PChar->id, var);
+            sql->Query(query.c_str());
         }
         else
         {
-            const char* fmtQuery = "INSERT INTO char_vars SET charid = %u, varname = '%s', value = %i ON DUPLICATE KEY UPDATE value = %i;";
-            sql->Query(fmtQuery, PChar->id, var, value, value);
+            auto query = fmt::sprintf("INSERT INTO char_vars SET charid = %u, varname = '%s', value = %i ON DUPLICATE KEY UPDATE value = %i;",
+                PChar->id, var.c_str(), value, value);
+            sql->Query(query.c_str());
         }
     }
 
     void ClearCharVarsWithPrefix(CCharEntity* PChar, std::string prefix)
     {
         TracyZoneScoped;
-    
+
         if (PChar == nullptr)
         {
             return;
@@ -6026,6 +6185,8 @@ namespace charutils
 
     time_t getTraverserEpoch(CCharEntity* PChar)
     {
+        TracyZoneScoped;
+
         auto fmtQuery = "SELECT unix_timestamp(traverser_start) FROM char_unlocks WHERE charid = %u;";
 
         auto ret = sql->Query(fmtQuery, PChar->id);
@@ -6040,6 +6201,8 @@ namespace charutils
     // TODO: Perhaps allow for optional argument to support GM Commands
     void setTraverserEpoch(CCharEntity* PChar)
     {
+        TracyZoneScoped;
+
         auto fmtQuery = "UPDATE char_unlocks SET traverser_start = unix_timestamp() WHERE charid = %u;";
 
         sql->Query(fmtQuery, PChar->id);
@@ -6047,6 +6210,8 @@ namespace charutils
 
     uint32 getClaimedTraverserStones(CCharEntity* PChar)
     {
+        TracyZoneScoped;
+
         auto fmtQuery = "SELECT traverser_claimed FROM char_unlocks WHERE charid = %u;";
 
         auto ret = sql->Query(fmtQuery, PChar->id);
@@ -6060,6 +6225,8 @@ namespace charutils
 
     void addClaimedTraverserStones(CCharEntity* PChar, uint16 numStones)
     {
+        TracyZoneScoped;
+
         auto fmtQuery = "UPDATE char_unlocks SET traverser_claimed = traverser_claimed + %u WHERE charid = %u;";
 
         sql->Query(fmtQuery, numStones, PChar->id);
@@ -6067,6 +6234,8 @@ namespace charutils
 
     void setClaimedTraverserStones(CCharEntity* PChar, uint16 stoneTotal)
     {
+        TracyZoneScoped;
+
         auto fmtQuery = "UPDATE char_unlocks SET traverser_claimed = %u WHERE charid = %u;";
 
         sql->Query(fmtQuery, stoneTotal, PChar->id);
@@ -6074,6 +6243,8 @@ namespace charutils
 
     uint32 getAvailableTraverserStones(CCharEntity* PChar)
     {
+        TracyZoneScoped;
+
         auto fmtQuery = "SELECT unix_timestamp(traverser_start), traverser_claimed FROM char_unlocks WHERE charid = %u;";
         time_t traverserEpoch = 0;
         uint32 traverserClaimed = 0;
@@ -6100,6 +6271,8 @@ namespace charutils
 
     void ReadHistory(CCharEntity* PChar)
     {
+        TracyZoneScoped;
+
         if (PChar == nullptr)
         {
             return;
@@ -6145,6 +6318,8 @@ namespace charutils
 
     void WriteHistory(CCharEntity* PChar)
     {
+        TracyZoneScoped;
+
         if (PChar == nullptr)
         {
             return;
@@ -6248,7 +6423,7 @@ namespace charutils
 
     uint8 getMainhandItemLevel(CCharEntity* PChar)
     {
-        CItemEquipment* PItem = PChar->getEquip((SLOTTYPE)SLOTTYPE::SLOT_MAIN);
+        CItemEquipment* PItem = PChar->getEquip(SLOTTYPE::SLOT_MAIN);
 
         if (PItem)
         {
@@ -6261,17 +6436,71 @@ namespace charutils
     // Return Ranged Weapon Item Level; If ranged slot exists use that, else use Ammo
     uint8 getRangedItemLevel(CCharEntity* PChar)
     {
-        CItemEquipment* PItem = nullptr;
-
-        if (PItem = PChar->getEquip((SLOTTYPE)SLOTTYPE::SLOT_RANGED))
+        CItemEquipment* PItem = PChar->getEquip(SLOTTYPE::SLOT_RANGED);
+        if (PItem)
         {
             return PItem->getILvl();
         }
-        else if (PItem = PChar->getEquip((SLOTTYPE)SLOTTYPE::SLOT_AMMO))
+
+        PItem = PChar->getEquip(SLOTTYPE::SLOT_AMMO);
+        if (PItem)
         {
             return PItem->getILvl();
         }
 
         return 0;
     }
+
+    bool hasEntitySpawned(CCharEntity* PChar, CBaseEntity* entity)
+    {
+        SpawnIDList_t* spawnlist = nullptr;
+
+        if (!entity)
+        {
+            return false;
+        }
+
+        if (entity->targid < 0x400 || entity->targid >= 0x800)
+        {
+            if (entity->objtype == TYPE_MOB)
+            {
+                spawnlist = &PChar->SpawnMOBList;
+            }
+            else if (entity->objtype == TYPE_NPC)
+            {
+                spawnlist = &PChar->SpawnNPCList;
+            }
+        }
+        else if (entity->targid < 0x700)
+        {
+            spawnlist = &PChar->SpawnPCList;
+        }
+        else if (entity->targid < 0x780)
+        {
+            spawnlist = &PChar->SpawnPETList;
+        }
+        else if (entity->targid < 0x800)
+        {
+            spawnlist = &PChar->SpawnTRUSTList;
+        }
+        else
+        {
+            return false;
+        }
+
+        return spawnlist->find(entity->id) != spawnlist->end();
+    }
+
+    uint32 getCharIdFromName(std::string const& name)
+    {
+        TracyZoneScoped;
+
+        auto ret = sql->Query("SELECT charid FROM chars WHERE charname = %s LIMIT 1", name.c_str());
+        if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+        {
+            return sql->GetUIntData(0);
+        }
+        return 0;
+    }
+
 }; // namespace charutils

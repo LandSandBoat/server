@@ -237,6 +237,11 @@ xi.trust.canCast = function(caster, spell, not_allowed_trust_ids)
         return xi.msg.basic.TRUST_NO_CAST_TRUST
     end
 
+    -- GMs can do what they want (as long as ENABLE_TRUST_CASTING is enabled)
+    if caster:getGMLevel() > 0 and caster:checkNameFlags(0x04000000) then
+        return 0
+    end
+
     -- Trusts not allowed in an alliance
     if caster:checkSoloPartyAlliance() == 2 then
         return xi.msg.basic.TRUST_NO_CAST_TRUST

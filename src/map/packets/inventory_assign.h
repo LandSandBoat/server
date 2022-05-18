@@ -22,7 +22,7 @@
 #ifndef _CINVENTORYASSIGHPACKET_H
 #define _CINVENTORYASSIGHPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 

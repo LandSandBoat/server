@@ -7,11 +7,7 @@
 -----------------------------------
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/utils')
 require('scripts/globals/zone')
-require('scripts/settings/main')
------------------------------------
-local ID = require('scripts/zones/Western_Adoulin/IDs')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.THE_TWIN_WORLD_TREES)
@@ -28,13 +24,21 @@ mission.sections =
             return currentMission == mission.missionId
         end,
 
+        [xi.zone.WESTERN_ADOULIN] =
+        {
+            -- Note: This message persists over several missions.  Once a breakpoint is found,
+            -- this should be a replaceDefault after completion of the initial change.
+            ['Levil'] = mission:event(127),
+        },
+
         [xi.zone.EASTERN_ADOULIN] =
         {
             onRegionEnter =
             {
-                -- TODO: One day wait
                 [2] = function(player, region)
-                    return mission:progressEvent(1503)
+                    if mission:getVar(player, 'Timer') <= VanadielUniqueDay() then
+                        return mission:progressEvent(1503)
+                    end
                 end,
             },
 

@@ -1222,6 +1222,9 @@ xi.mod =
 
     -- Geomancer
     FULL_CIRCLE                     = 1025, -- Increases the initial multiplier on MP returned via Full Circle
+    BOLSTER_EFFECT                  = 1028, -- Adds bonus duration as +N seconds
+    LIFE_CYCLE_EFFECT               = 1029, -- Adds bonus HP% returned to the luopan when using Life Cycle
+    AURA_SIZE                       = 1030, -- Used to extend aura size, the formula is 6.25 + (PEntity->getMod(Mod::AURA_SIZE) / 100) so adding 100 will make this 7.25
 
     -- Rune Fencer
     ENHANCES_BATTUTA            = 1004, -- Used by RUN merit point cat 2 to add +N% bonus damage to parry spikes during Battuta effect
@@ -1627,7 +1630,7 @@ xi.mod =
     INDI_DURATION                   = 960,
     GEOMANCY_BONUS                  = 961, -- Used to increase potency of "Geomancy +" items (only the highest value is counted)
     WIDENED_COMPASS                 = 962,
-    MENDING_HALATION                = 968,
+    MENDING_HALATION                = 968, -- This mod should never exceed 1 as the multiplier is the merit, this is basicaly just a bool mod
     RADIAL_ARCANA                   = 969,
     CURATIVE_RECANTATION            = 970,
     PRIMEVAL_ZEAL                   = 971,

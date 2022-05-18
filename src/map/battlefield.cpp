@@ -310,7 +310,7 @@ bool CBattlefield::InsertEntity(CBaseEntity* PEntity, bool enter, BATTLEFIELDMOB
     else if (PEntity->objtype == TYPE_NPC)
     {
         PEntity->status = STATUS_TYPE::NORMAL;
-        PEntity->loc.zone->PushPacket(PEntity, CHAR_INRANGE, new CEntityUpdatePacket(PEntity, ENTITY_SPAWN, UPDATE_ALL_MOB));
+        PEntity->loc.zone->UpdateEntityPacket(PEntity, ENTITY_SPAWN, UPDATE_ALL_MOB);
         m_NpcList.push_back(static_cast<CNpcEntity*>(PEntity));
     }
     else if (PEntity->objtype == TYPE_MOB || PEntity->objtype == TYPE_PET)
@@ -512,7 +512,7 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
         if (PEntity->objtype == TYPE_NPC)
         {
             PEntity->status = STATUS_TYPE::DISAPPEAR;
-            PEntity->loc.zone->PushPacket(PEntity, CHAR_INRANGE, new CEntityUpdatePacket(PEntity, ENTITY_DESPAWN, UPDATE_ALL_MOB));
+            PEntity->loc.zone->UpdateEntityPacket(PEntity, ENTITY_DESPAWN, UPDATE_ALL_MOB);
 
             if (auto* PNpcEntity = dynamic_cast<CNpcEntity*>(PEntity))
             {
@@ -561,7 +561,7 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
                 m_AdditionalEnemyList.erase(std::remove_if(m_AdditionalEnemyList.begin(), m_AdditionalEnemyList.end(), check), m_AdditionalEnemyList.end());
             }
         }
-        PEntity->loc.zone->PushPacket(PEntity, CHAR_INRANGE, new CEntityAnimationPacket(PEntity, CEntityAnimationPacket::Fade_Out));
+        PEntity->loc.zone->PushPacket(PEntity, CHAR_INRANGE, new CEntityAnimationPacket(PEntity, PEntity, CEntityAnimationPacket::Fade_Out));
     }
 
     // Remove enmity from valid battle entities
@@ -789,7 +789,7 @@ void CBattlefield::ForEachPlayer(const std::function<void(CCharEntity*)>& func)
 {
     for (auto player : m_EnteredPlayers)
     {
-        func(static_cast<CCharEntity*>(GetZone()->GetCharByID(player)));
+        func(GetZone()->GetCharByID(player));
     }
 }
 

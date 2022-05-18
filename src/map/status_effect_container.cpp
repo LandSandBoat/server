@@ -1060,8 +1060,7 @@ bool CStatusEffectContainer::ApplyCorsairEffect(CStatusEffect* PStatusEffect, ui
         AddStatusEffect(PStatusEffect);
         return true;
     }
-
-    return false;
+    // return false;
 }
 
 bool CStatusEffectContainer::HasCorsairEffect(uint32 charid)
@@ -1164,7 +1163,7 @@ EFFECT CStatusEffectContainer::GetHighestRuneEffect()
     }
 
     EFFECT highestRune = EFFECT_NONE;
-    int highestRuneValue;
+    int highestRuneValue = 0;
 
     for (auto iter = runeEffects.begin(); iter != runeEffects.end(); ++iter)
     {
@@ -1543,13 +1542,13 @@ void CStatusEffectContainer::LoadStatusEffects()
     {
         while (sql->NextRow() == SQL_SUCCESS)
         {
-            auto flags    = (uint32)sql->GetUIntData(8);
-            auto duration = (uint32)sql->GetUIntData(4);
+            auto flags    = sql->GetUIntData(8);
+            auto duration = sql->GetUIntData(4);
             auto effectID = (EFFECT)sql->GetUIntData(0);
 
             if (flags & EFFECTFLAG_OFFLINE_TICK)
             {
-                auto timestamp = (uint32)sql->GetUIntData(9);
+                auto timestamp = sql->GetUIntData(9);
                 if (server_clock::now() < time_point() + std::chrono::seconds(timestamp) + std::chrono::seconds(duration))
                 {
                     duration = (uint32)std::chrono::duration_cast<std::chrono::seconds>(time_point() + std::chrono::seconds(timestamp) +
@@ -1570,7 +1569,7 @@ void CStatusEffectContainer::LoadStatusEffects()
             }
             CStatusEffect* PStatusEffect =
                 new CStatusEffect(effectID, (uint16)sql->GetUIntData(1), (uint16)sql->GetUIntData(2),
-                                  (uint32)sql->GetUIntData(3), duration, (uint16)sql->GetUIntData(5), (uint16)sql->GetUIntData(6),
+                                  sql->GetUIntData(3), duration, (uint16)sql->GetUIntData(5), (uint16)sql->GetUIntData(6),
                                   (uint16)sql->GetUIntData(7), flags);
 
             PEffectList.push_back(PStatusEffect);
@@ -1702,7 +1701,7 @@ void CStatusEffectContainer::CheckEffectsExpiry(time_point tick)
 void CStatusEffectContainer::HandleAura(CStatusEffect* PStatusEffect)
 {
     TracyZoneScoped;
-    CBattleEntity* PEntity    = static_cast<CBattleEntity*>(m_POwner);
+    CBattleEntity* PEntity    = m_POwner;
     AURA_TARGET    auraTarget = static_cast<AURA_TARGET>(PStatusEffect->GetTier());
 
     if (PEntity->objtype == TYPE_PET || PEntity->objtype == TYPE_TRUST)
@@ -1710,7 +1709,7 @@ void CStatusEffectContainer::HandleAura(CStatusEffect* PStatusEffect)
         PEntity = PEntity->PMaster;
     }
 
-    float aura_range = 6.25; // TODO: Add mods
+    float aura_range = 6.25 + (PEntity->getMod(Mod::AURA_SIZE) / 100); // Adding to this mod should be the value you want * 100
 
     if (PEntity->objtype == TYPE_PC)
     {
@@ -1721,8 +1720,8 @@ void CStatusEffectContainer::HandleAura(CStatusEffect* PStatusEffect)
                     !PMember->isDead())
                 {
                     CStatusEffect* PEffect = new CStatusEffect((EFFECT)PStatusEffect->GetSubID(),    // Effect ID
-                                                               (uint16)PStatusEffect->GetSubID(),    // Effect Icon (Associated with ID)
-                                                               (uint16)PStatusEffect->GetSubPower(), // Power
+                                                               PStatusEffect->GetSubID(),            // Effect Icon (Associated with ID)
+                                                               PStatusEffect->GetSubPower(),         // Power
                                                                3,                                    // Tick
                                                                4);                                   // Duration
                     PEffect->SetFlag(EFFECTFLAG_NO_LOSS_MESSAGE);
@@ -1733,13 +1732,13 @@ void CStatusEffectContainer::HandleAura(CStatusEffect* PStatusEffect)
         else if (auraTarget == AURA_TARGET::ENEMIES)
         {
             for (CBattleEntity* PTarget : *PEntity->PNotorietyContainer)
-            {
-                if (PTarget != nullptr && PEntity->loc.zone->GetID() == PTarget->loc.zone->GetID() && distance(m_POwner->loc.p, PTarget->loc.p) <= aura_range &&
+            {   // Check for trust here so negitive effects wont affect trust
+                if (PTarget != nullptr && PTarget->objtype != TYPE_TRUST && PEntity->loc.zone->GetID() == PTarget->loc.zone->GetID() && distance(m_POwner->loc.p, PTarget->loc.p) <= aura_range &&
                     !PTarget->isDead())
                 {
                     CStatusEffect* PEffect = new CStatusEffect((EFFECT)PStatusEffect->GetSubID(),    // Effect ID
-                                                               (uint16)PStatusEffect->GetSubID(),    // Effect Icon (Associated with ID)
-                                                               (uint16)PStatusEffect->GetSubPower(), // Power
+                                                               PStatusEffect->GetSubID(),            // Effect Icon (Associated with ID)
+                                                               PStatusEffect->GetSubPower(),         // Power
                                                                3,                                    // Tick
                                                                4);                                   // Duration
                     PEffect->SetFlag(EFFECTFLAG_NO_LOSS_MESSAGE);
@@ -1757,8 +1756,8 @@ void CStatusEffectContainer::HandleAura(CStatusEffect* PStatusEffect)
                     !PMember->isDead())
                 {
                     CStatusEffect* PEffect = new CStatusEffect((EFFECT)PStatusEffect->GetSubID(),    // Effect ID
-                                                               (uint16)PStatusEffect->GetSubID(),    // Effect Icon (Associated with ID)
-                                                               (uint16)PStatusEffect->GetSubPower(), // Power
+                                                               PStatusEffect->GetSubID(),            // Effect Icon (Associated with ID)
+                                                               PStatusEffect->GetSubPower(),         // Power
                                                                3,                                    // Tick
                                                                4);                                   // Duration
                     PEffect->SetFlag(EFFECTFLAG_NO_LOSS_MESSAGE);
@@ -1777,8 +1776,8 @@ void CStatusEffectContainer::HandleAura(CStatusEffect* PStatusEffect)
                     !PTarget->isDead())
                 {
                     CStatusEffect* PEffect = new CStatusEffect((EFFECT)PStatusEffect->GetSubID(),    // Effect ID
-                                                               (uint16)PStatusEffect->GetSubID(),    // Effect Icon (Associated with ID)
-                                                               (uint16)PStatusEffect->GetSubPower(), // Power
+                                                               PStatusEffect->GetSubID(),            // Effect Icon (Associated with ID)
+                                                               PStatusEffect->GetSubPower(),         // Power
                                                                3,                                    // Tick
                                                                4);                                   // Duration
                     PEffect->SetFlag(EFFECTFLAG_NO_LOSS_MESSAGE);

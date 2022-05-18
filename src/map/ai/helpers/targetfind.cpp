@@ -149,7 +149,7 @@ void CTargetFind::findWithinArea(CBattleEntity* PTarget, AOE_RADIUS radiusType, 
             withPet = PETS_CAN_AOE_BUFF;
         }
 
-        if (m_findFlags & FINDFLAGS_HIT_ALL || (m_findType == FIND_TYPE::MONSTER_PLAYER && ((CMobEntity*)m_PBattleEntity)->CalledForHelp()))
+        if (m_findFlags & FINDFLAGS_HIT_ALL || (m_findType == FIND_TYPE::MONSTER_PLAYER && ((CMobEntity*)m_PBattleEntity)->GetCallForHelpFlag()))
         {
             addAllInZone(m_PMasterTarget, withPet);
         }

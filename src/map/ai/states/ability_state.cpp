@@ -140,12 +140,15 @@ bool CAbilityState::CanUseAbility()
             return false;
         }
         if (PChar->StatusEffectContainer->HasStatusEffect({ EFFECT_AMNESIA, EFFECT_IMPAIRMENT }) ||
+            (PAbility->getID() >= ABILITY_CONCENTRIC_PULSE && PAbility->getID() <= ABILITY_RADIAL_ARCANA &&
+            PAbility->isPetAbility() && !charutils::hasAbility(PChar, PAbility->getID())) ||
             (!PAbility->isPetAbility() && !charutils::hasAbility(PChar, PAbility->getID())) ||
-            (PAbility->isPetAbility() && !charutils::hasPetAbility(PChar, PAbility->getID() - ABILITY_HEALING_RUBY)))
+            (PAbility->isPetAbility() && PAbility->getID() >= ABILITY_HEALING_RUBY && !charutils::hasPetAbility(PChar, PAbility->getID() - ABILITY_HEALING_RUBY)))
         {
             PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, MSGBASIC_UNABLE_TO_USE_JA2));
             return false;
         }
+
         std::unique_ptr<CBasicPacket> errMsg;
         auto*                         PTarget = GetTarget();
         if (PChar->IsValidTarget(PTarget->targid, PAbility->getValidTarget(), errMsg))

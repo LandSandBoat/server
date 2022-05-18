@@ -47,6 +47,6 @@ message(STATUS "LuaJIT_INCLUDE_DIR: ${LuaJIT_INCLUDE_DIR}")
 # TODO: Don't do this globally
 if (${LuaJIT_FOUND})
     link_libraries(${LuaJIT_LIBRARY})
-    include_directories(${LuaJIT_INCLUDE_DIR})
-    include_directories(${LuaJIT_INCLUDE_DIR}/../)
+    include_directories(SYSTEM ${LuaJIT_INCLUDE_DIR})
+    include_directories(SYSTEM ${LuaJIT_INCLUDE_DIR}/../)
 endif()

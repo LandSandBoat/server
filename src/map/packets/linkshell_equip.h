@@ -22,7 +22,7 @@
 #ifndef _CLINKSHELLEQUIPPACKET_H
 #define _CLINKSHELLEQUIPPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 

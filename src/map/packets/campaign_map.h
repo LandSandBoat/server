@@ -22,7 +22,7 @@
 #ifndef _CCAMPAIGNPACKET_H
 #define _CCAMPAIGNPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "../campaign_system.h"
 #include "basic.h"

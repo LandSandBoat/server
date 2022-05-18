@@ -30,6 +30,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <fstream>
 
 namespace
 {
@@ -117,22 +118,45 @@ namespace moduleutils
         // Load the helper file
         lua.script_file("./modules/module_utils.lua");
 
-        // Load each module file that isn't the helpers.lua file
-        for (auto const& entry : std::filesystem::recursive_directory_iterator("modules"))
+        // Read lines from init.txt
+        std::vector<std::string> list;
+        std::ifstream file("./modules/init.txt", std::ios_base::in);
+        std::string line;
+        while (std::getline(file, line))
         {
-            auto path          = entry.path().relative_path();
+            if (!line.empty() && line.at(0) != '#')
+            {
+                list.emplace_back("./modules/" + line);
+            }
+        }
+
+        // Expand out folders
+        std::vector<std::string> expandedList = list;
+        for (auto const& entry : list)
+        {
+            if (std::filesystem::is_directory(entry))
+            {
+                for (auto const& innerEntry : std::filesystem::recursive_directory_iterator(entry))
+                {
+                    auto path = innerEntry.path().relative_path();
+                    expandedList.emplace_back(path.generic_string());
+                }
+            }
+        }
+
+        // Load each module file that isn't the helpers.lua file or a directory
+        for (auto const& entry : expandedList)
+        {
+            auto path          = std::filesystem::path(entry).relative_path();
             bool isHelpersFile = path.filename() == "module_utils.lua";
 
-            if (!entry.is_directory() &&
-                path.extension() == ".lua" &&
-                !isHelpersFile)
+            if (!isHelpersFile &&
+                !std::filesystem::is_directory(path) &&
+                path.extension() == ".lua")
             {
                 std::string filename  = path.filename().generic_string();
                 std::string relPath   = path.relative_path().generic_string();
-                std::string pathNoExt = path.relative_path().replace_extension("").generic_string();
 
-                // Execute the script once in "safe mode" to check it for syntax errors
-                // lua.require_file will crash if it's given a bad script
                 auto res = lua.safe_script_file(relPath);
                 if (!res.valid())
                 {
@@ -142,22 +166,19 @@ namespace moduleutils
                     continue;
                 }
 
-                // Run for real
-                sol::table table = lua.require_file(pathNoExt, relPath);
-                if (table["enabled"])
+                sol::table table = res;
+                if (table["overrides"].valid()) // Check the file is a valid module
                 {
-                    auto moduleName = table.get<std::string>("name");
+                    auto moduleName = table.get_or("name", std::string());
                     ShowScript(fmt::format("=== Module: {} ===", moduleName));
-                    for (auto& override : table.get<std::vector<sol::table>>("overrides"))
+                    for (auto& override : table.get_or("overrides", std::vector<sol::table>()))
                     {
                         std::string name = override["name"];
                         sol::object func = override["func"];
 
                         ShowScript(fmt::format("Preparing override: {}", name));
 
-                        auto parts = split(name, '.');
-                        parts      = std::vector<std::string>(parts.begin() + 1, parts.end());
-
+                        auto parts = split(name, ".");
                         overrides.emplace_back(Override{ filename, name, parts, func, false });
                     }
                 }
@@ -172,10 +193,11 @@ namespace moduleutils
         {
             if (!override.applied)
             {
-                sol::table table = lua["xi"].get<sol::table>();
-
-                auto lastTable = *(override.nameParts.end() - 2);
+                auto firstElem  = override.nameParts.front();
+                auto lastTable = override.nameParts.size() < 2 ? firstElem : *(override.nameParts.end() - 2);
                 auto lastElem  = override.nameParts.back();
+
+                sol::table table = lua["_G"];
                 for (auto& part : override.nameParts)
                 {
                     table = table[part].get_or<sol::table>(sol::lua_nil);
@@ -184,7 +206,6 @@ namespace moduleutils
                         break;
                     }
 
-                    // Get parent table of the function at the end of the string
                     if (part == lastTable)
                     {
                         ShowScript(fmt::format("Applying override: {}", override.overrideName));
@@ -192,6 +213,8 @@ namespace moduleutils
                         lua["applyOverride"](table, lastElem, override.func);
 
                         override.applied = true;
+
+                        break;
                     }
                 }
             }

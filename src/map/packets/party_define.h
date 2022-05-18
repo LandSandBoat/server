@@ -22,7 +22,7 @@
 #ifndef _CPARTYDEFINEPACKET_H
 #define _CPARTYDEFINEPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 

@@ -19,8 +19,8 @@
 ===========================================================================
 */
 
-#include "../../common/timer.h"
-#include "../../common/utils.h"
+#include "common/timer.h"
+#include "common/utils.h"
 
 #include <algorithm>
 #include <array>
@@ -307,7 +307,7 @@ namespace battleutils
     {
         // The skill_caps table is 0-indexed, so our maximum level should one lower
         // than the size of the array.
-        std::size_t maxLevel = g_SkillTable.size() - 1;
+        auto maxLevel = static_cast<uint8>(g_SkillTable.size() - 1);
 
         if (level > maxLevel)
         {
@@ -319,7 +319,7 @@ namespace battleutils
 
     uint16 GetMaxSkill(uint8 rank, uint8 level)
     {
-        std::size_t maxLevel = g_SkillTable.size() - 1;
+        auto maxLevel = static_cast<uint8>(g_SkillTable.size() - 1);
 
         if (level > maxLevel)
         {
@@ -1048,8 +1048,8 @@ namespace battleutils
             }
         }
 
-        if (PAttacker->getMod(Mod::ENSPELL) > 0 && // Enspell overwrites weapon effects
-           (PAttacker->getMod(Mod::ENSPELL_CHANCE) == 0 || PAttacker->getMod(Mod::ENSPELL_CHANCE) > xirand::GetRandomNumber(100)) ||
+        if ((PAttacker->getMod(Mod::ENSPELL) > 0 && // Enspell overwrites weapon effects
+           (PAttacker->getMod(Mod::ENSPELL_CHANCE) == 0 || PAttacker->getMod(Mod::ENSPELL_CHANCE) > xirand::GetRandomNumber(100))) ||
             PAttacker->StatusEffectContainer->GetActiveRuneCount() > 0) // Rune Enhancement means we deal enspell damage
         {
             static SUBEFFECT enspell_subeffects[8] = {
@@ -1763,7 +1763,7 @@ namespace battleutils
                 skill = cap;
             }
 
-            float ratio = (float)cap / skill;
+            float ratio = cap / skill;
             check *= ratio;
 
             // prevent from spilling over 100 - resulting in players never being interupted
@@ -1776,7 +1776,7 @@ namespace battleutils
             meritReduction = ((CCharEntity*)PDefender)->PMeritPoints->GetMeritValue(MERIT_SPELL_INTERUPTION_RATE, (CCharEntity*)PDefender);
         }
 
-        float interruptRate = ((float)((100.0f - (meritReduction + (float)PDefender->getMod(Mod::SPELLINTERRUPT))) / 100.0f));
+        float interruptRate = ((100.0f - (meritReduction + (float)PDefender->getMod(Mod::SPELLINTERRUPT))) / 100.0f);
         check *= interruptRate;
         uint8 chance = xirand::GetRandomNumber(100);
 
@@ -1837,7 +1837,7 @@ namespace battleutils
         if (PDefender->objtype == TYPE_PC)
         {
             CCharEntity*    PChar = (CCharEntity*)PDefender;
-            CItemEquipment* PItem = (CItemEquipment*)PChar->getEquip(SLOT_SUB);
+            CItemEquipment* PItem = PChar->getEquip(SLOT_SUB);
 
             if (PItem)
             {
@@ -1971,7 +1971,7 @@ namespace battleutils
         {
             // assuming this is like parry
             float gbase = (float)PDefender->GetSkill(SKILL_GUARD) + PDefender->getMod(Mod::GUARD);
-            float skill = (float)gbase + ((float)gbase * (PDefender->getMod(Mod::GUARD_PERCENT) / 100));
+            float skill = gbase + gbase * (PDefender->getMod(Mod::GUARD_PERCENT) / 100);
 
             if (PWeapon)
             {
@@ -2181,13 +2181,13 @@ namespace battleutils
                     if (PDefender->PMaster != nullptr && PDefender->PMaster->objtype == TYPE_PC)
                     {
                         ((CPetEntity*)PDefender)
-                            ->loc.zone->PushPacket(PDefender, CHAR_INRANGE, new CEntityUpdatePacket(PDefender, ENTITY_UPDATE, UPDATE_COMBAT));
+                            ->loc.zone->UpdateEntityPacket(PDefender, ENTITY_UPDATE, UPDATE_COMBAT);
                     }
 
                     break;
 
                 case TYPE_PET:
-                    ((CPetEntity*)PDefender)->loc.zone->PushPacket(PDefender, CHAR_INRANGE, new CEntityUpdatePacket(PDefender, ENTITY_UPDATE, UPDATE_COMBAT));
+                    ((CPetEntity*)PDefender)->loc.zone->UpdateEntityPacket(PDefender, ENTITY_UPDATE, UPDATE_COMBAT);
                     break;
                 case TYPE_PC:
                     if (PAttacker->objtype == TYPE_MOB)
@@ -2257,7 +2257,7 @@ namespace battleutils
                 // account for attacker's subtle blow which reduces the baseTP gain for the defender
                 float sBlow1    = std::clamp((float)PAttacker->getMod(Mod::SUBTLE_BLOW), -50.0f, 50.0f);
                 float sBlow2    = std::clamp((float)PAttacker->getMod(Mod::SUBTLE_BLOW_II), -50.0f, 50.0f);
-                float sBlowMult = ((100.0f - std::clamp((float)(sBlow1 + sBlow2), -75.0f, 75.0f)) / 100.0f);
+                float sBlowMult = ((100.0f - std::clamp(sBlow1 + sBlow2, -75.0f, 75.0f)) / 100.0f);
 
                 // mobs hit get basetp+30 whereas pcs hit get basetp/3
                 if (PDefender->objtype == TYPE_PC || (PDefender->objtype == TYPE_PET && PDefender->PMaster && PDefender->PMaster->objtype == TYPE_PC))
@@ -2341,7 +2341,7 @@ namespace battleutils
                     if (PDefender->PMaster != nullptr && PDefender->PMaster->objtype == TYPE_PC)
                     {
                         ((CPetEntity*)PDefender)
-                            ->loc.zone->PushPacket(PDefender, CHAR_INRANGE, new CEntityUpdatePacket(PDefender, ENTITY_UPDATE, UPDATE_COMBAT));
+                            ->loc.zone->UpdateEntityPacket(PDefender, ENTITY_UPDATE, UPDATE_COMBAT);
                     }
 
                     if (((CMobEntity*)PDefender)->m_HiPCLvl < PAttacker->GetMLevel())
@@ -2352,7 +2352,7 @@ namespace battleutils
                     break;
 
                 case TYPE_PET:
-                    ((CPetEntity*)PDefender)->loc.zone->PushPacket(PDefender, CHAR_INRANGE, new CEntityUpdatePacket(PDefender, ENTITY_UPDATE, UPDATE_COMBAT));
+                    ((CPetEntity*)PDefender)->loc.zone->UpdateEntityPacket(PDefender, ENTITY_UPDATE, UPDATE_COMBAT);
                     break;
 
                 default:
@@ -2402,7 +2402,7 @@ namespace battleutils
             // account for attacker's subtle blow which reduces the baseTP gain for the defender
             float sBlow1    = std::clamp((float)PAttacker->getMod(Mod::SUBTLE_BLOW), -50.0f, 50.0f);
             float sBlow2    = std::clamp((float)PAttacker->getMod(Mod::SUBTLE_BLOW_II), -50.0f, 50.0f);
-            float sBlowMult = ((100.0f - std::clamp((float)(sBlow1 + sBlow2), -75.0f, 75.0f)) / 100.0f);
+            float sBlowMult = ((100.0f - std::clamp((sBlow1 + sBlow2), -75.0f, 75.0f) / 100.0f));
 
             // mobs hit get basetp+30 whereas pcs hit get basetp/3
             if (PDefender->objtype == TYPE_PC)
@@ -2733,7 +2733,7 @@ namespace battleutils
         if (dDexAbs > 39)
         {
             // 40-50: (dDEX-35)
-            critRate = dDexAbs - (int32)35;
+            critRate = dDexAbs - 35;
         }
         else if (dDexAbs > 29)
         {
@@ -2756,7 +2756,7 @@ namespace battleutils
         }
 
         // Crit rate delta from stats caps at +-15
-        return std::min(critRate, static_cast<int32>(15)) * sign;
+        return std::min(critRate, 15) * sign;
     }
 
     /************************************************************************
@@ -2819,7 +2819,7 @@ namespace battleutils
 
         critRate = dAgiAbs/10;
 
-        return std::min(critRate, static_cast<int32>(15)) * sign;
+        return std::min(critRate, 15) * sign;
     }
 
     /************************************************************************
@@ -3770,11 +3770,11 @@ namespace battleutils
                 PSCEffect->SetStartTime(server_clock::now());
                 //   ShowDebug("duration: %d", PSCEffect->GetDuration());
                 PSCEffect->SetDuration(PSCEffect->GetDuration() - 1000);
-                PSCEffect->SetTier(GetSkillchainTier((SKILLCHAIN_ELEMENT)skillchain));
+                PSCEffect->SetTier(GetSkillchainTier(skillchain));
                 PSCEffect->SetPower(skillchain);
                 PSCEffect->SetSubPower(std::min(PSCEffect->GetSubPower() + 1, 5)); // Linked, limited to 5
 
-                return (SUBEFFECT)GetSkillchainSubeffect((SKILLCHAIN_ELEMENT)skillchain);
+                return (SUBEFFECT)GetSkillchainSubeffect(skillchain);
             }
 
             PSCEffect->SetStartTime(server_clock::now());
@@ -3956,7 +3956,7 @@ namespace battleutils
         //            TODO:     × (1 + Staff Affinity)
 
         auto damage = (int32)floor((double)(abs(lastSkillDamage)) * g_SkillChainDamageModifiers[chainLevel][chainCount] / 1000 *
-                                   (100 + PAttacker->getMod(Mod::SKILLCHAINBONUS)) / 100 * (100 + PAttacker->getMod(Mod::SKILLCHAINDMG)) / 100);
+                                   (100 + PAttacker->getMod(Mod::SKILLCHAINBONUS)) / 100 * (10000 + PAttacker->getMod(Mod::SKILLCHAINDMG)) / 10000);
 
         auto* PChar = dynamic_cast<CCharEntity*>(PAttacker);
         if (PChar && PChar->StatusEffectContainer->HasStatusEffect(EFFECT_INNIN) && behind(PChar->loc.p, PDefender->loc.p, 64))
@@ -4129,7 +4129,7 @@ namespace battleutils
 
                 if (charutils::hasTrait(PChar, TRAIT_NINJA_TOOL_EXPERT))
                 {
-                    meritBonus = PChar->PMeritPoints->GetMeritValue(MERIT_NINJA_TOOL_EXPERTISE, (CCharEntity*)PChar);
+                    meritBonus = PChar->PMeritPoints->GetMeritValue(MERIT_NINJA_TOOL_EXPERTISE, PChar);
                 }
 
                 uint16 chance = (PChar->getMod(Mod::NINJA_TOOL) + meritBonus);
@@ -4360,14 +4360,14 @@ namespace battleutils
     void TransferEnmity(CBattleEntity* PHateReceiver, CBattleEntity* PHateGiver, CMobEntity* PMob, uint8 percentToTransfer)
     {
         // Ensure the players have a battle target..
-        if (PMob == nullptr || ((CMobEntity*)PMob)->PEnmityContainer == nullptr)
+        if (PMob == nullptr || (PMob)->PEnmityContainer == nullptr)
         {
             return;
         }
 
         // CBaseEntity* PMob = CharHateGiver->GetEntity(mobID, TYPE_MOB);
 
-        ((CMobEntity*)PMob)->PEnmityContainer->LowerEnmityByPercent(PHateGiver, percentToTransfer, PHateReceiver);
+        PMob->PEnmityContainer->LowerEnmityByPercent(PHateGiver, percentToTransfer, PHateReceiver);
     }
 
     /************************************************************************
@@ -5043,7 +5043,7 @@ namespace battleutils
                         static_cast<CMobController*>(attacker->PClaimedMob->PAI->GetController())->TapDeclaimTime();
                         attacker->PClaimedMob = nullptr;
                     }
-                    if (!mob->CalledForHelp())
+                    if (!mob->GetCallForHelpFlag())
                     {
                         if (battleutils::HasClaim(PAttacker, PDefender))
                         { // mob is currently claimed by your alliance, update ownership
@@ -5068,7 +5068,9 @@ namespace battleutils
                             {
                                 highestClaim = static_cast<CTrustEntity*>(highestClaim)->PMaster;
                             }
-                            PAttacker->ForAlliance([&](CBattleEntity* PMember) {
+                            // clang-format off
+                            PAttacker->ForAlliance([&](CBattleEntity* PMember)
+                            {
                                 if (!highestClaim || highestClaim == PMember || highestClaim == PMember->PPet)
                                 { // someone in your alliance is top of hate list, claim for your alliance
                                     mob->m_OwnerID.id     = PAttacker->id;
@@ -5080,6 +5082,7 @@ namespace battleutils
                                     }
                                 }
                             });
+                            // clang-format on
                         }
                     }
                 }
@@ -5107,13 +5110,16 @@ namespace battleutils
             {
                 uint8 pcinzone = 0;
                 uint8 maxLevel = 0;
-                PAttacker->ForAlliance([&pcinzone, &maxLevel, &mob](CBattleEntity* PMember) {
+                // clang-format off
+                PAttacker->ForAlliance([&pcinzone, &maxLevel, &mob](CBattleEntity* PMember)
+                {
                     if (PMember->getZone() == mob->getZone() && distance(PMember->loc.p, mob->loc.p) < 100)
                     {
                         maxLevel = std::max(maxLevel, PMember->GetMLevel());
                         pcinzone++;
                     }
                 });
+                // clang-format on
                 mob->m_HiPartySize = std::max(pcinzone, mob->m_HiPartySize);
                 mob->m_HiPCLvl     = std::max(maxLevel, mob->m_HiPCLvl);
             }
@@ -5126,7 +5132,9 @@ namespace battleutils
         if (mob && mob->isAlive() && mob->m_OwnerID.id == PChar->id)
         { // if we currently own a mob
             bool found = false;
-            static_cast<CBattleEntity*>(PChar)->ForAlliance([&PChar, &mob, &found](CBattleEntity* PMember) {
+            // clang-format off
+            static_cast<CBattleEntity*>(PChar)->ForAlliance([&PChar, &mob, &found](CBattleEntity* PMember)
+            {
                 CCharEntity* member = static_cast<CCharEntity*>(PMember);
                 if (member != PChar && !found && member->getZone() == PChar->getZone() && member->isAlive() &&
                     (!member->PClaimedMob || member->PClaimedMob == mob))
@@ -5135,6 +5143,7 @@ namespace battleutils
                     battleutils::ClaimMob(mob, PMember, true);
                 }
             });
+            // clang-format on
             if (!found)
             { // if mob didn't pass to someone else, unclaim it
                 static_cast<CMobController*>(mob->PAI->GetController())->TapDeclaimTime();
@@ -5820,7 +5829,7 @@ namespace battleutils
                     }
                     else
                     {
-                        PMember->loc.zone->PushPacket(PMember, CHAR_INRANGE, new CEntityUpdatePacket(PMember, ENTITY_UPDATE, UPDATE_POS));
+                        PMember->loc.zone->UpdateEntityPacket(PMember, ENTITY_UPDATE, UPDATE_POS);
                     }
 
                     luautils::OnMobDrawIn(PMob, PMember);
@@ -6256,6 +6265,11 @@ namespace battleutils
             {
                 fastCast += ((CCharEntity*)PEntity)->PMeritPoints->GetMeritValue(MERIT_CURE_CAST_TIME, (CCharEntity*)PEntity);
             }
+        }
+        else if (PSpell->getSkillType() == SKILLTYPE::SKILL_GEOMANCY && PEntity->objtype == TYPE_PC)
+        {
+            auto* PChar = static_cast<CCharEntity*>(PEntity);
+            fastCast += PChar->PJobPoints->GetJobPointValue(JP_WIDENED_COMPASS_EFFECT);
         }
 
         fastCast                  = std::clamp<int16>(fastCast, -100, 80);

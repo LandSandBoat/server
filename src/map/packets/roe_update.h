@@ -22,7 +22,7 @@
 #ifndef _CROEUPDATEPACKET_H
 #define _CROEUPDATEPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 

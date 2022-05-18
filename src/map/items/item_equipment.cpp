@@ -255,7 +255,7 @@ void CItemEquipment::setTrialNumber(uint16 trial)
 
     trial &= 0x7FFF; // Trial is only 15 bits long
     ref<uint16>(m_extra, 0x0A) &= ~0x7FFF;
-    ref<uint16>(m_extra, 0x0A) |= (uint16)trial;
+    ref<uint16>(m_extra, 0x0A) |= trial;
 }
 
 uint16 CItemEquipment::getTrialNumber()

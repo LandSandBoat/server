@@ -1,38 +1,27 @@
-set(SOURCES
-    item_currency.cpp
-    item_currency.h
-    item_equipment.cpp
-    item_equipment.h
-    item_fish.cpp
-    item_fish.h
-    item_flowerpot.cpp
-    item_flowerpot.h
-    item_furnishing.cpp
-    item_furnishing.h
-    item_general.cpp
-    item_general.h
-    item_linkshell.cpp
-    item_linkshell.h
-    item_puppet.cpp
-    item_puppet.h
-    item_shop.cpp
-    item_shop.h
-    item_usable.cpp
-    item_usable.h
-    item_weapon.cpp
-    item_weapon.h
-    item.cpp
-    item.h)
-
-add_library(items STATIC ${SOURCES})
-
-if(TRACY_ENABLE)
-    target_link_libraries(items PUBLIC tracy_client)
-endif(TRACY_ENABLE)
-
-target_link_libraries(items
-    PUBLIC
-    common
-    project_options
-    #project_warnings
+set(ITEM_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/item_currency.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/item_currency.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/item_equipment.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/item_equipment.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/item_fish.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/item_fish.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/item_flowerpot.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/item_flowerpot.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/item_furnishing.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/item_furnishing.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/item_general.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/item_general.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/item_linkshell.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/item_linkshell.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/item_puppet.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/item_puppet.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/item_shop.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/item_shop.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/item_usable.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/item_usable.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/item_weapon.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/item_weapon.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/item.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/item.h
+    PARENT_SCOPE
 )

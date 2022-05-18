@@ -170,6 +170,8 @@ public:
     uint64 GetUInt64Data(size_t col);
     float  GetFloatData(size_t col);
 
+    std::string GetStringData(size_t col);
+
     /// Frees the result of the query.
     void FreeResult();
 
@@ -181,6 +183,27 @@ public:
     bool TransactionRollback();
 
     std::shared_ptr<SqlPreparedStatement> GetPreparedStatement(std::string const& name);
+
+    // NOTE: You need to be very careful of the lifetime you pass into these std::functions.
+    //     : You should capture by value and be very careful of capturing pointers.
+    //     : `const char*` is a pointer! If you need to pass that in, construct a std::string
+    //     : and capture that by value!
+    void Async(std::function<void(SqlConnection*)>&& func);
+    void Async(std::string const& query);
+
+    template <typename... Args>
+    void Async(const char* query, Args... args)
+    {
+        TracyZoneScoped;
+
+        auto queryStr = fmt::sprintf(query, args...);
+        TracyZoneString(queryStr);
+
+        Async(queryStr);
+    }
+
+    void HandleAsync();
+
 private:
     Sql_t*      self;
     const char* m_User;

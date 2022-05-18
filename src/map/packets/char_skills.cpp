@@ -19,8 +19,8 @@
 ===========================================================================
 */
 
-#include "../../common/socket.h"
-#include "../../common/timer.h"
+#include "common/socket.h"
+#include "common/timer.h"
 
 #include <cstring>
 
