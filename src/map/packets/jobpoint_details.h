@@ -17,7 +17,7 @@
 #ifndef _CJOBPOINTDETAILSPACKET_H
 #define _CJOBPOINTDETAILSPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 

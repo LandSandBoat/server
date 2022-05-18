@@ -34,7 +34,6 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-                player:getMainLvl() >= 51 and
                 player:getLevelCap() == 55 and
                 xi.settings.MAX_LEVEL >= 60
         end,
@@ -44,7 +43,11 @@ quest.sections =
             ['Maat'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:progressEvent(82)
+                    if player:getMainLvl() >= 51 then
+                        return quest:progressEvent(82)
+                    else
+                        return quest:messageText(npc, 10387)
+                    end
                 end,
             },
 

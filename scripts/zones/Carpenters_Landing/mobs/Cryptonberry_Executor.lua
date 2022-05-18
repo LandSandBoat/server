@@ -5,7 +5,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Carpenters_Landing/IDs")
 mixins = {require("scripts/mixins/job_special")}
-require("scripts/globals/missions")
 -----------------------------------
 local entity = {}
 
@@ -33,17 +32,14 @@ entity.onMobFight = function(mob, target)
     -- spawn Assassins when enmity is gained against Executor
     if mob:getLocalVar("spawnedAssassins") == 0 and mob:getCE(target) > 0 then
         mob:setLocalVar("spawnedAssassins", 1)
-        SpawnMob(ID.mob.CRYPTONBERRY_EXECUTOR + 1)
-        SpawnMob(ID.mob.CRYPTONBERRY_EXECUTOR + 2)
-        SpawnMob(ID.mob.CRYPTONBERRY_EXECUTOR + 3)
+
+        for i = 1, 3 do
+            SpawnMob(ID.mob.CRYPTONBERRY_EXECUTOR + i)
+        end
     end
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    mob:messageText(mob, ID.text.CRYPTONBERRY_EXECUTOR_DIE)
-    if player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.CALM_BEFORE_THE_STORM and player:getCharVar("Cryptonberry_Executor_KILL") < 2 then
-        player:setCharVar("Cryptonberry_Executor_KILL", 1)
-    end
 end
 
 return entity

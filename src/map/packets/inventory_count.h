@@ -22,7 +22,7 @@
 #ifndef _CINVENTORYCOUNTPACKET_H
 #define _CINVENTORYCOUNTPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 

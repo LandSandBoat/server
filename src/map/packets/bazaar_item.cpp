@@ -19,8 +19,8 @@
 ===========================================================================
 */
 
-#include "../../common/socket.h"
-#include "../../common/utils.h"
+#include "common/socket.h"
+#include "common/utils.h"
 
 #include <cstring>
 

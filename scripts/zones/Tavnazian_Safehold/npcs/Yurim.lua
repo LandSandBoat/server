@@ -78,7 +78,7 @@ end
 
 entity.onTrigger = function(player, npc)
     -- IN THE NAME OF SCIENCE
-    if player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_WARRIOR_S_PATH) then
+    if player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_WARRIORS_PATH) then
         local nameOfScience  = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.IN_THE_NAME_OF_SCIENCE)
         local itemInProgress = player:getCharVar("NAME_OF_SCIENCE_target")
 

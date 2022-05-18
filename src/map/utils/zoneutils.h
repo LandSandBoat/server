@@ -22,7 +22,7 @@
 #ifndef _ZONEUTILS_H
 #define _ZONEUTILS_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "../zone.h"
 

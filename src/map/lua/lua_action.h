@@ -22,7 +22,7 @@
 #ifndef _LUAACTION_H
 #define _LUAACTION_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 #include "luautils.h"
 
 struct action_t;

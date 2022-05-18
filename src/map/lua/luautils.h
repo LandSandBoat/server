@@ -24,10 +24,14 @@
 
 #include <optional>
 
-#include "../../common/cbasetypes.h"
-#include "../../common/taskmgr.h"
+#include "common/cbasetypes.h"
+#include "common/taskmgr.h"
 
 #include "lua.hpp"
+
+#ifdef TRACY_ENABLE
+#include "TracyLua.hpp"
+#endif
 
 // Sol compilation definitions are in the base CMakeLists file
 // SOL_ALL_SAFETIES_ON = 1
@@ -149,7 +153,7 @@ namespace luautils
 
     auto   SpawnMob(uint32 mobid, sol::object const& arg2, sol::object const& arg3) -> std::optional<CLuaBaseEntity>; // Spawn Mob By Mob Id - NMs, BCNM...
     void   DespawnMob(uint32 mobid, sol::object const& arg2);                                                           // Despawn (Fade Out) Mob By Id
-    auto   GetPlayerByName(std::string name) -> std::optional<CLuaBaseEntity>;
+    auto   GetPlayerByName(std::string const& name) -> std::optional<CLuaBaseEntity>;
     auto   GetPlayerByID(uint32 pid) -> std::optional<CLuaBaseEntity>;
     auto   GetMagianTrial(sol::variadic_args va) -> sol::table;
     auto   GetMagianTrialsWithParent(int32 parentTrial) -> sol::table;
@@ -274,7 +278,7 @@ namespace luautils
     int32 OnUseAbility(CBattleEntity* PUser, CBattleEntity* PTarget, CAbility* PAbility, action_t* action);                                                                                     // triggers when job ability is used
 
     auto GetCachedInstanceScript(uint16 instanceId) -> sol::table;
-    
+
     int32 OnInstanceZoneIn(CCharEntity* PChar, CInstance* PInstance);            // triggered on zone in to instance
     void  AfterInstanceRegister(CBaseEntity* PChar);                             // triggers after a character is registered and zoned into an instance (the first time)
     int32 OnInstanceLoadFailed(CZone* PZone);                                    // triggers when an instance load is failed (ie. instance no longer exists)
@@ -291,7 +295,6 @@ namespace luautils
     void   UpdateNMSpawnPoint(uint32 mobid);                       // Update the spawn point of an NM
     void   SetDropRate(uint16 dropid, uint16 itemid, uint16 rate); // Set drop rate of a mob SetDropRate(dropid,itemid,newrate)
     int32  UpdateServerMessage();                                  // update server message, first modify in conf and update
-    auto   GetServerVersion() -> sol::table;
 
     int32 OnAdditionalEffect(CBattleEntity* PAttacker, CBattleEntity* PDefender, actionTarget_t* Action, int32 damage);                                      // for mobs with additional effects
     int32 OnSpikesDamage(CBattleEntity* PDefender, CBattleEntity* PAttacker, actionTarget_t* Action, int32 damage);                                          // for mobs with spikes

@@ -6,19 +6,18 @@
 -- Ergon_Locus_3      : !pos 442.000 0.660 -224.000 263
 -- Pellucid_Afflusion : !pos -175.100 1.700 387.700 263
 -----------------------------------
+require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/utils')
 require('scripts/globals/zone')
-require('scripts/settings/main')
------------------------------------
-local ID = require('scripts/zones/Western_Adoulin/IDs')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.IN_THE_PRESENCE_OF_ROYALTY)
 
 mission.reward =
 {
+    keyItem     = xi.ki.ROSULATIAS_POME,
+    title       = xi.title.QUEENS_CONFIDANTE,
     nextMission = { xi.mission.log_id.SOA, xi.mission.id.soa.THE_TWIN_WORLD_TREES },
 }
 
@@ -41,7 +40,7 @@ mission.sections =
             --    end,
             --},
 
-            ['Ergon_Locus_3'] =
+            ['Ergon_Locus_qm'] =
             {
                 onTrigger = function(player, npc)
                     return mission:keyItem(xi.ki.YORCIAS_TEAR)
@@ -61,16 +60,15 @@ mission.sections =
             ['Pellucid_Afflusion'] =
             {
                 onTrigger = function(player, npc)
-                    return mission:progressEvent(2)
+                    return mission:progressEvent(2, 263)
                 end,
             },
 
             onEventFinish =
             {
                 [2] = function(player, csid, option, npc)
-                    if mission:complete(player) then
-                        npcUtil.giveKeyItem(player, xi.ki.ROSULATIAS_POME)
-                    end
+                    mission:complete(player)
+                    xi.mission.setVar(player, xi.mission.log_id.SOA, xi.mission.id.soa.THE_TWIN_WORLD_TREES, 'Timer', VanadielUniqueDay() + 1)
                 end,
             },
         },

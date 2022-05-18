@@ -40,7 +40,10 @@
 
 enum ZONEID : uint16
 {
-    ZONE_RESIDENTIAL_AREA               = 0,
+    // Note: "residential zones" aren't really zones of their own.
+    // It's more of a sub zone - the dats for messages and entities will all be from the zone you entered from.
+    ZONE_RESIDENTIAL_AREA               = 0, // Old Tech Demonstration zone from pre-release (aka "the monorail place")
+    // The Above should NOT be labeled "RESIDENTIAL_AREA"
     ZONE_PHANAUET_CHANNEL               = 1,
     ZONE_CARPENTERS_LANDING             = 2,
     ZONE_MANACLIPPER                    = 3,
@@ -173,7 +176,7 @@ enum ZONEID : uint16
     ZONE_RUAUN_GARDENS                  = 130,
     ZONE_MORDION_GAOL                   = 131,
     ZONE_ABYSSEA_LA_THEINE              = 132,
-    ZONE_133                            = 133, // Seems to be the zone background of char select.
+    ZONE_133                            = 133, // The zone background of char select. AKA "Lilliput" because of tiny villages.
     ZONE_DYNAMIS_BEAUCEDINE             = 134,
     ZONE_DYNAMIS_XARCABARD              = 135,
     ZONE_BEAUCEDINE_GLACIER_S           = 136,
@@ -596,6 +599,9 @@ public:
     virtual void TOTDChange(TIMETYPE TOTD); // обработка реакции мира на смену времени суток
     virtual void PushPacket(CBaseEntity*, GLOBAL_MESSAGE_TYPE, CBasicPacket*); // отправляем глобальный пакет в пределах зоны
 
+    virtual void UpdateCharPacket(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask);
+    virtual void UpdateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 updatemask, bool alwaysInclude = false);
+
     bool IsZoneActive() const;
     CZoneEntities* GetZoneEntities();
 
@@ -621,6 +627,8 @@ public:
 
     CNavMesh* m_navMesh; // zones navmesh for finding paths
 
+    time_point m_LoadedAt; // time zone was loaded
+
 private:
     ZONEID         m_zoneID; // ID зоны
     ZONE_TYPE      m_zoneType;
@@ -633,6 +641,7 @@ private:
 
     WEATHER        m_Weather;           // текущая погода
     uint32         m_WeatherChangeTime; // время начала текущей погоды
+
     CZoneEntities* m_zoneEntities;
 
     uint16 m_tax; // налог в bazaar
@@ -659,6 +668,8 @@ protected:
     void createZoneTimer();
     void CharZoneIn(CCharEntity* PChar);
     void CharZoneOut(CCharEntity* PChar);
+
+    std::unordered_map<std::string, uint32> m_localVars;
 };
 
 #endif

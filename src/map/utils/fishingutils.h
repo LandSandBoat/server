@@ -22,7 +22,7 @@
 #ifndef _FISHINGUTILS_H
 #define _FISHINGUTILS_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 enum class FISH_ACTION : uint8
 {

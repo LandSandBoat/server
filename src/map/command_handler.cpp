@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -19,13 +19,12 @@
 ===========================================================================
 */
 
-#include "commandhandler.h"
+#include "command_handler.h"
 
-#include "../common/utils.h"
+#include "common/utils.h"
 #include "entities/charentity.h"
 #include "lua/lua_baseentity.h"
 #include "lua/luautils.h"
-#include "spdlog/fmt/fmt.h"
 
 #include <cmath>
 #include <iostream>
@@ -159,6 +158,7 @@ int32 CCommandHandler::call(sol::state& lua, CCharEntity* PChar, const int8* com
     lua.set("onTrigger", sol::lua_nil);
     lua.set("cmdprops", sol::lua_nil);
 
+    // TODO: stringstreams are slow. Replace with something else.
     std::istringstream clstream((char*)commandline);
     std::string        cmdname;
 
@@ -175,6 +175,9 @@ int32 CCommandHandler::call(sol::state& lua, CCharEntity* PChar, const int8* com
         ShowError("cmdhandler::call: function name was empty");
         return -1;
     }
+
+    TracyZoneString(PChar->name);
+    TracyZoneIString(commandline);
 
     auto filename   = fmt::format("./scripts/commands/{}.lua", cmdname.c_str());
     auto loadResult = lua.safe_script_file(filename);
@@ -216,8 +219,11 @@ int32 CCommandHandler::call(sol::state& lua, CCharEntity* PChar, const int8* com
     {
         if (map_config.audit_gm_cmd <= permission && map_config.audit_gm_cmd > 0)
         {
+            std::string name       = PChar->name;
+            std::string cmdlinestr = (const char*)commandline;
+
             char escaped_name[16 * 2 + 1];
-            sql->EscapeString(escaped_name, PChar->name.c_str());
+            sql->EscapeString(escaped_name, name.c_str());
 
             std::string escaped_gm_cmd;
             escaped_gm_cmd.reserve(cmdname.length() * 2 + 1);
@@ -225,7 +231,7 @@ int32 CCommandHandler::call(sol::state& lua, CCharEntity* PChar, const int8* com
 
             std::string escaped_full_string;
             escaped_full_string.reserve(strlen((char*)commandline) * 2 + 1);
-            sql->EscapeString(escaped_full_string.data(), (char*)commandline);
+            sql->EscapeString(escaped_full_string.data(), (char*)cmdlinestr.c_str());
 
             const char* fmtQuery = "INSERT into audit_gm (date_time,gm_name,command,full_string) VALUES(current_timestamp(),'%s','%s','%s')";
             if (sql->Query(fmtQuery, escaped_name, escaped_gm_cmd.data(), escaped_full_string.data()) == SQL_ERROR)

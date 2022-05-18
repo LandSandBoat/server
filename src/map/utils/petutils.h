@@ -23,8 +23,8 @@
 #ifndef _IPETUTILS_H
 #define _IPETUTILS_H
 
-#include "../../common/cbasetypes.h"
-#include "../../common/mmo.h"
+#include "common/cbasetypes.h"
+#include "common/mmo.h"
 
 enum PETID
 {

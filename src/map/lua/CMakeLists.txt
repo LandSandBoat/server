@@ -1,40 +1,29 @@
-set(SOURCES
-    lua_ability.cpp
-    lua_ability.h
-    lua_action.cpp
-    lua_action.h
-    lua_baseentity.cpp
-    lua_baseentity.h
-    lua_battlefield.cpp
-    lua_battlefield.h
-    lua_instance.cpp
-    lua_instance.h
-    lua_item.cpp
-    lua_item.h
-    lua_mobskill.cpp
-    lua_mobskill.h
-    lua_region.cpp
-    lua_region.h
-    lua_spell.cpp
-    lua_spell.h
-    lua_statuseffect.cpp
-    lua_statuseffect.h
-    lua_trade_container.cpp
-    lua_trade_container.h
-    lua_zone.cpp
-    lua_zone.h
-    luautils.cpp
-    luautils.h)
-
-add_library(lua_bindings STATIC ${SOURCES})
-
-if(TRACY_ENABLE)
-    target_link_libraries(lua_bindings PUBLIC tracy_client)
-endif(TRACY_ENABLE)
-
-target_link_libraries(lua_bindings
-    PUBLIC
-    common
-    project_options
-    #project_warnings
+set(LUA_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/lua_ability.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/lua_ability.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/lua_action.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/lua_action.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/lua_baseentity.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/lua_baseentity.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/lua_battlefield.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/lua_battlefield.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/lua_instance.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/lua_instance.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/lua_item.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/lua_item.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/lua_mobskill.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/lua_mobskill.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/lua_region.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/lua_region.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/lua_spell.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/lua_spell.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/lua_statuseffect.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/lua_statuseffect.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/lua_trade_container.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/lua_trade_container.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/lua_zone.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/lua_zone.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/luautils.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/luautils.h
+    PARENT_SCOPE
 )

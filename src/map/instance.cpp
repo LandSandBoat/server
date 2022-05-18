@@ -32,8 +32,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 CInstance::CInstance(CZone* zone, uint16 instanceid)
 : CZoneEntities(zone)
-, m_zone(zone)
 , m_instanceid(instanceid)
+, m_zone(zone)
 {
     LoadInstance();
 

@@ -22,7 +22,7 @@
 #ifndef _CITEMSHOP_H
 #define _CITEMSHOP_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "item.h"
 

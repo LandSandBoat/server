@@ -7,12 +7,8 @@
 -----------------------------------
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/utils')
 require('scripts/globals/zone')
-require('scripts/settings/main')
 require('scripts/missions/soa/helpers')
------------------------------------
-local ID = require('scripts/zones/Western_Adoulin/IDs')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.YGGDRASIL)
@@ -33,12 +29,16 @@ mission.sections =
         {
             ['Levil'] =
             {
-                -- TODO: One day wait
                 onTrigger = function(player, npc)
-                    if xi.soa.helpers.imprimaturGate(player, 30) then
-                        return mission:progressEvent(129)
+                    if
+                        xi.soa.helpers.imprimaturGate(player, 30) and
+                        mission:getVar(player, 'Timer') <= VanadielUniqueDay()
+                    then
+                        local hasDeclined = player:getMissionStatus(mission.areaId)
+
+                        return mission:progressEvent(129, 268, hasDeclined)
                     else
-                        return mission:event(126)
+                        return mission:event(126, 238)
                     end
                 end,
             },
@@ -46,7 +46,11 @@ mission.sections =
             onEventFinish =
             {
                 [129] = function(player, csid, option, npc)
-                    mission:complete(player)
+                    if option == 1 then
+                        mission:complete(player)
+                    else
+                        player:setMissionStatus(mission.areaId, 1)
+                    end
                 end,
             },
         },

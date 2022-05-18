@@ -22,7 +22,7 @@
 #ifndef _CITEMLINKSHELL_H
 #define _CITEMLINKSHELL_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "item.h"
 

@@ -20,7 +20,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 */
 
 #include "blacklistutils.h"
-#include "../../common/utils.h"
+#include "common/utils.h"
 #include "../entities/charentity.h"
 #include "../map.h"
 

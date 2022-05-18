@@ -24,12 +24,6 @@
 
 #include <string>
 
-#define XI_MAJOR_VERSION 2021 // Major Version
-#define XI_MINOR_VERSION 2    // Minor Version
-#define XI_REVISION      1    // Revision
-
-#define XI_RELEASE_FLAG  1 // 1=Stable, 0=Unstable
-
 #define XI_SERVER_NONE   0 // not defined
 #define XI_SERVER_LOGIN  1 // login server
 #define XI_SERVER_MAP    2 // map server
