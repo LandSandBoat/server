@@ -7,11 +7,7 @@
 -----------------------------------
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/utils')
 require('scripts/globals/zone')
-require('scripts/settings/main')
------------------------------------
-local ID = require('scripts/zones/Western_Adoulin/IDs')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.FRICTION_AND_FISSURES)
@@ -25,16 +21,19 @@ mission.sections =
 {
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId and missionStatus == 0
+            return currentMission == mission.missionId
         end,
 
         [xi.zone.WESTERN_ADOULIN] =
         {
             ['Levil'] =
             {
-                -- TODO: Wait until next day
                 onTrigger = function(player, npc)
-                    return mission:progressEvent(123)
+                    if mission:getVar(player, 'Timer') <= VanadielUniqueDay() then
+                        return mission:progressEvent(123)
+                    else
+                        return mission:event(127)
+                    end
                 end,
             },
 

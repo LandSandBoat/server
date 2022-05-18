@@ -7,12 +7,8 @@
 -----------------------------------
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/utils')
 require('scripts/globals/zone')
-require('scripts/settings/main')
 require('scripts/missions/soa/helpers')
------------------------------------
-local ID = require('scripts/zones/Western_Adoulin/IDs')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.ARCIELA_APPEARS_AGAIN)
@@ -52,7 +48,7 @@ mission.sections =
                     else
                         player:setMissionStatus(mission.areaId, 1)
                     end
-                    player:setMissionStatus(mission.areaId, 1)
+
                     mission:complete(player)
                 end,
 
