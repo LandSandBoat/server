@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2022 LandSandBoat Dev Teams
@@ -19,34 +19,33 @@
 ===========================================================================
 */
 
-#ifndef _NOTORIETYCONTAINER_H
-#define _NOTORIETYCONTAINER_H
+#pragma once
 
-#include <set>
+#include <memory>
+#include <string>
 
-class CBattleEntity;
-class CMobEntity;
+#include <argparse/argparse.hpp>
 
-// If enmity is a one-to-many list held by monsters,
-// notoriety is the many-to-one opposite list held by players (or other targets of enmity)
-class CNotorietyContainer
+#include "console_service.h"
+
+class Application
 {
 public:
-    CNotorietyContainer(CBattleEntity* owner);
-    ~CNotorietyContainer() = default;
+    Application(std::string const& serverName, std::unique_ptr<argparse::ArgumentParser>&& pArgParser);
+    virtual ~Application() = default;
 
-    std::set<CBattleEntity*>::iterator begin();
-    std::set<CBattleEntity*>::iterator end();
+    Application(const Application&) = delete;
+    Application(Application&&)      = delete;
+    Application& operator=(const Application&) = delete;
+    Application& operator=(Application&&) = delete;
 
-    void        add(CBattleEntity* entity);
-    void        remove(CBattleEntity* entity);
-    std::size_t size();
+    virtual bool IsRunning();
+    virtual void Tick();
 
-    bool hasEnmity();
+protected:
+    std::string m_ServerName;
+    bool        m_IsRunning;
 
-private:
-    CBattleEntity*           m_POwner;
-    std::set<CBattleEntity*> m_Lookup;
+    std::unique_ptr<argparse::ArgumentParser> gArgParser;
+    std::unique_ptr<ConsoleService>           gConsoleService;
 };
-
-#endif // _NOTORIETYCONTAINER_H
