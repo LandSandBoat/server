@@ -55,6 +55,15 @@ m:addOverride("xi.zones.Beaucedine_Glacier.npcs.relic.onTrade", function(player,
 end)
 
 m:addOverride("xi.zones.Beaucedine_Glacier.npcs.relic.onTrigger", function(player, npc)
+    local ID = require("scripts/zones/Beaucedine_Glacier/IDs")
+    if player:getCharVar("RelicWeaponVoucher") == 1 then
+	    player:setCharVar("RelicWeaponVoucher", 0)
+--	    player:setCharVar("RelicWeaponVoucherUsed") == 1
+        player:addItem(xi.items.RAGNAROK) 
+    	player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.RAGNAROK)
+		return
+	end	
+	
     player:PrintToPlayer("???: Hail to you hardened traveler,", 0xD)
     player:PrintToPlayer("???: Do you desire to switch your ally? Trade your relic back to me together with 5,000,000 gil", 0xD)
 	player:PrintToPlayer("???: and I'll exchange it for my soul. Let me return to the battlefield!", 0xD)
@@ -108,6 +117,15 @@ m:addOverride("xi.zones.Carpenters_Landing.npcs.relic.onTrade", function(player,
 end)
 
 m:addOverride("xi.zones.Carpenters_Landing.npcs.relic.onTrigger", function(player, npc)
+    local ID = require("scripts/zones/Carpenters_Landing/IDs")
+    if player:getCharVar("RelicWeaponVoucher") == 1 then
+	    player:setCharVar("RelicWeaponVoucher", 0)
+--	    player:setCharVar("RelicWeaponVoucherUsed") == 1
+        player:addItem(xi.items.AEGIS) 
+    	player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.AEGIS)
+		return
+	end	
+
     player:PrintToPlayer("???: Hail to you hardened traveler,", 0xD)
     player:PrintToPlayer("???: Do you desire to switch your ally? Trade your relic back to me together with 5,000,000 gil", 0xD)
 	player:PrintToPlayer("???: and I'll exchange it for my soul. Let me return to the battlefield!", 0xD)
@@ -161,6 +179,15 @@ m:addOverride("xi.zones.Castle_Oztroja.npcs.relic.onTrade", function(player, npc
 end)
 
 m:addOverride("xi.zones.Castle_Oztroja.npcs.relic.onTrigger", function(player, npc)
+    local ID = require("scripts/zones/Castle_Oztroja/IDs")
+    if player:getCharVar("RelicWeaponVoucher") == 1 then
+	    player:setCharVar("RelicWeaponVoucher", 0)
+--	    player:setCharVar("RelicWeaponVoucherUsed") == 1
+        player:addItem(xi.items.SPHARAI) 
+    	player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.SPHARAI)
+		return
+	end	
+
     player:PrintToPlayer("???: Hail to you hardened traveler,", 0xD)
     player:PrintToPlayer("???: Do you desire to switch your ally? Trade your relic back to me together with 5,000,000 gil", 0xD)
 	player:PrintToPlayer("???: and I'll exchange it for my soul. Let me return to the battlefield!", 0xD)
@@ -215,6 +242,15 @@ m:addOverride("xi.zones.Dragons_Aery.npcs.relic.onTrade", function(player, npc, 
 end)
 
 m:addOverride("xi.zones.Dragons_Aery.npcs.relic.onTrigger", function(player, npc)
+    local ID = require("scripts/zones/Dragons_Aery/IDs")
+    if player:getCharVar("RelicWeaponVoucher") == 1 then
+	    player:setCharVar("RelicWeaponVoucher", 0)
+--	    player:setCharVar("RelicWeaponVoucherUsed") == 1
+        player:addItem(xi.items.EXCALIBUR) 
+    	player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.EXCALIBUR)
+		return
+	end	
+
     player:PrintToPlayer("???: Hail to you hardened traveler,", 0xD)
     player:PrintToPlayer("???: Do you desire to switch your ally? Trade your relic back to me together with 5,000,000 gil", 0xD)
 	player:PrintToPlayer("???: and I'll exchange it for my soul. Let me return to the battlefield!", 0xD)
@@ -268,6 +304,15 @@ m:addOverride("xi.zones.Horlais_Peak.npcs.relic.onTrade", function(player, npc, 
 end)
 
 m:addOverride("xi.zones.Horlais_Peak.npcs.relic.onTrigger", function(player, npc)
+    local ID = require("scripts/zones/Horlais_Peak/IDs")
+    if player:getCharVar("RelicWeaponVoucher") == 1 then
+	    player:setCharVar("RelicWeaponVoucher", 0)
+--	    player:setCharVar("RelicWeaponVoucherUsed") == 1
+        player:addItem(xi.items.AMANOMURAKUMO) 
+    	player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.AMANOMURAKUMO)
+		return
+	end	
+
     player:PrintToPlayer("???: Hail to you hardened traveler,", 0xD)
     player:PrintToPlayer("???: Do you desire to switch your ally? Trade your relic back to me together with 5,000,000 gil", 0xD)
 	player:PrintToPlayer("???: and I'll exchange it for my soul. Let me return to the battlefield!", 0xD)
@@ -324,6 +369,15 @@ m:addOverride("xi.zones.Ifrits_Cauldron.npcs.relic.onTrade", function(player, np
 end)
 
 m:addOverride("xi.zones.Ifrits_Cauldron.npcs.relic.onTrigger", function(player, npc)
+    local ID = require("scripts/zones/Ifrits_Cauldron/IDs")
+    if player:getCharVar("RelicWeaponVoucher") == 1 then
+	    player:setCharVar("RelicWeaponVoucher", 0)
+--	    player:setCharVar("RelicWeaponVoucherUsed") == 1
+        player:addItem(xi.items.CLAUSTRUM) 
+    	player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.CLAUSTRUM)
+		return
+	end	
+
     player:PrintToPlayer("???: Hail to you hardened traveler,", 0xD)
     player:PrintToPlayer("???: Do you desire to switch your ally? Trade your relic back to me together with 5,000,000 gil", 0xD)
 	player:PrintToPlayer("???: and I'll exchange it for my soul. Let me return to the battlefield!", 0xD)
@@ -377,6 +431,15 @@ m:addOverride("xi.zones.Metalworks.npcs.relic.onTrade", function(player, npc, tr
 end)
 
 m:addOverride("xi.zones.Metalworks.npcs.relic.onTrigger", function(player, npc)
+    local ID = require("scripts/zones/Metalworks/IDs")
+    if player:getCharVar("RelicWeaponVoucher") == 1 then
+	    player:setCharVar("RelicWeaponVoucher", 0)
+--	    player:setCharVar("RelicWeaponVoucherUsed") == 1
+        player:addItem(xi.items.ANNIHILATOR) 
+    	player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.ANNIHILATOR)
+		return
+	end	
+
     player:PrintToPlayer("???: Hail to you hardened traveler,", 0xD)
     player:PrintToPlayer("???: Do you desire to switch your ally? Trade your relic back to me together with 5,000,000 gil", 0xD)
 	player:PrintToPlayer("???: and I'll exchange it for my soul. Let me return to the battlefield!", 0xD)
@@ -430,6 +493,15 @@ m:addOverride("xi.zones.North_Gustaberg.npcs.relic.onTrade", function(player, np
 end)
 
 m:addOverride("xi.zones.North_Gustaberg.npcs.relic.onTrigger", function(player, npc)
+    local ID = require("scripts/zones/North_Gustaberg/IDs")
+    if player:getCharVar("RelicWeaponVoucher") == 1 then
+	    player:setCharVar("RelicWeaponVoucher", 0)
+--	    player:setCharVar("RelicWeaponVoucherUsed") == 1
+        player:addItem(xi.items.APOCALYPSE) 
+    	player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.APOCALYPSE)
+		return
+	end	
+
     player:PrintToPlayer("???: Hail to you hardened traveler,", 0xD)
     player:PrintToPlayer("???: Do you desire to switch your ally? Trade your relic back to me together with 5,000,000 gil", 0xD)
 	player:PrintToPlayer("???: and I'll exchange it for my soul. Let me return to the battlefield!", 0xD)
@@ -486,6 +558,15 @@ m:addOverride("xi.zones.RuAun_Gardens.npcs.relic.onTrade", function(player, npc,
 end)
 
 m:addOverride("xi.zones.RuAun_Gardens.npcs.relic.onTrigger", function(player, npc)
+    local ID = require("scripts/zones/RuAun_Gardens/IDs")
+    if player:getCharVar("RelicWeaponVoucher") == 1 then
+	    player:setCharVar("RelicWeaponVoucher", 0)
+--	    player:setCharVar("RelicWeaponVoucherUsed") == 1
+        player:addItem(xi.items.GUNGNIR) 
+    	player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.GUNGNIR)
+		return
+	end	
+
     player:PrintToPlayer("???: Hail to you hardened traveler,", 0xD)
     player:PrintToPlayer("???: Do you desire to switch your ally? Trade your relic back to me together with 5,000,000 gil", 0xD)
 	player:PrintToPlayer("???: and I'll exchange it for my soul. Let me return to the battlefield!", 0xD)
@@ -542,6 +623,15 @@ m:addOverride("xi.zones.RuLude_Gardens.npcs.relic.onTrade", function(player, npc
 end)
 
 m:addOverride("xi.zones.RuLude_Gardens.npcs.relic.onTrigger", function(player, npc)
+    local ID = require("scripts/zones/RuLude_Gardens/IDs")
+    if player:getCharVar("RelicWeaponVoucher") == 1 then
+	    player:setCharVar("RelicWeaponVoucher", 0)
+--	    player:setCharVar("RelicWeaponVoucherUsed") == 1
+        player:addItem(xi.items.BRAVURA) 
+    	player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.BRAVURA)
+		return
+	end	
+
     player:PrintToPlayer("???: Hail to you hardened traveler,", 0xD)
     player:PrintToPlayer("???: Do you desire to switch your ally? Trade your relic back to me together with 5,000,000 gil", 0xD)
 	player:PrintToPlayer("???: and I'll exchange it for my soul. Let me return to the battlefield!", 0xD)
@@ -595,6 +685,15 @@ m:addOverride("xi.zones.Sea_Serpent_Grotto.npcs.relic.onTrade", function(player,
 end)
 
 m:addOverride("xi.zones.Sea_Serpent_Grotto.npcs.relic.onTrigger", function(player, npc)
+    local ID = require("scripts/zones/Sea_Serpent_Grotto/IDs")
+    if player:getCharVar("RelicWeaponVoucher") == 1 then
+	    player:setCharVar("RelicWeaponVoucher", 0)
+--	    player:setCharVar("RelicWeaponVoucherUsed") == 1
+        player:addItem(xi.items.KIKOKU) 
+    	player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.KIKOKU)
+		return
+	end	
+
     player:PrintToPlayer("???: Hail to you hardened traveler,", 0xD)
     player:PrintToPlayer("???: Do you desire to switch your ally? Trade your relic back to me together with 5,000,000 gil", 0xD)
 	player:PrintToPlayer("???: and I'll exchange it for my soul. Let me return to the battlefield!", 0xD)
@@ -648,6 +747,15 @@ m:addOverride("xi.zones.Cape_Terrigan.npcs.relic.onTrade", function(player, npc,
 end)
 
 m:addOverride("xi.zones.Cape_Terrigan.npcs.relic.onTrigger", function(player, npc)
+    local ID = require("scripts/zones/Cape_Terrigan/IDs")
+    if player:getCharVar("RelicWeaponVoucher") == 1 then
+	    player:setCharVar("RelicWeaponVoucher", 0)
+--	    player:setCharVar("RelicWeaponVoucherUsed") == 1
+        player:addItem(xi.items.YOICHINOYUMI) 
+    	player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.YOICHINOYUMI)
+		return
+	end	
+
     player:PrintToPlayer("???: Hail to you hardened traveler,", 0xD)
     player:PrintToPlayer("???: Do you desire to switch your ally? Trade your relic back to me together with 5,000,000 gil", 0xD)
 	player:PrintToPlayer("???: and I'll exchange it for my soul. Let me return to the battlefield!", 0xD)
@@ -701,6 +809,15 @@ m:addOverride("xi.zones.Valley_of_Sorrows.npcs.relic.onTrade", function(player, 
 end)
 
 m:addOverride("xi.zones.Valley_of_Sorrows.npcs.relic.onTrigger", function(player, npc)
+    local ID = require("scripts/zones/Valley_of_Sorrows/IDs")
+    if player:getCharVar("RelicWeaponVoucher") == 1 then
+	    player:setCharVar("RelicWeaponVoucher", 0)
+--	    player:setCharVar("RelicWeaponVoucherUsed") == 1
+        player:addItem(xi.items.GJALLARHORN) 
+    	player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.GJALLARHORN)
+		return
+	end	
+
     player:PrintToPlayer("???: Hail to you hardened traveler,", 0xD)
     player:PrintToPlayer("???: Do you desire to switch your ally? Trade your relic back to me together with 5,000,000 gil", 0xD)
 	player:PrintToPlayer("???: and I'll exchange it for my soul. Let me return to the battlefield!", 0xD)
@@ -754,6 +871,15 @@ m:addOverride("xi.zones.Western_Altepa_Desert.npcs.relic.onTrade", function(play
 end)
 
 m:addOverride("xi.zones.Western_Altepa_Desert.npcs.relic.onTrigger", function(player, npc)
+    local ID = require("scripts/zones/Western_Altepa_Desert/IDs")
+    if player:getCharVar("RelicWeaponVoucher") == 1 then
+	    player:setCharVar("RelicWeaponVoucher", 0)
+--	    player:setCharVar("RelicWeaponVoucherUsed") == 1
+        player:addItem(xi.items.GUTTLER) 
+    	player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.GUTTLER)
+		return
+	end	
+
     player:PrintToPlayer("???: Hail to you hardened traveler,", 0xD)
     player:PrintToPlayer("???: Do you desire to switch your ally? Trade your relic back to me together with 5,000,000 gil", 0xD)
 	player:PrintToPlayer("???: and I'll exchange it for my soul. Let me return to the battlefield!", 0xD)
@@ -820,6 +946,15 @@ m:addOverride("xi.zones.The_Sanctuary_of_ZiTah.npcs.relic.onTrade", function(pla
 end)
 
 m:addOverride("xi.zones.The_Sanctuary_of_ZiTah.npcs.relic.onTrigger", function(player, npc)
+    local ID = require("scripts/zones/The_Sanctuary_of_ZiTah/IDs")
+    if player:getCharVar("RelicWeaponVoucher") == 1 then
+	    player:setCharVar("RelicWeaponVoucher", 0)
+--	    player:setCharVar("RelicWeaponVoucherUsed") == 1
+        player:addItem(xi.items.MJOLLNIR) 
+    	player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.MJOLLNIR)
+		return
+	end	
+
     player:PrintToPlayer("???: Hail to you hardened traveler,", 0xD)
     player:PrintToPlayer("???: Do you desire to switch your ally? Trade your relic back to me together with 5,000,000 gil", 0xD)
 	player:PrintToPlayer("???: and I'll exchange it for my soul. Let me return to the battlefield!", 0xD)
