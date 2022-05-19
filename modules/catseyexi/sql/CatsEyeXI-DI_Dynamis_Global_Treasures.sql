@@ -33,3 +33,14 @@ REPLACE INTO `mob_groups` (`groupid`, `poolid`, `zoneid`, `name`, `respawntime`,
 
 -- Bahamut
 REPLACE INTO mob_groups (groupid, poolid, zoneid, name, respawntime, spawntype, dropid, HP, MP, minLevel, maxLevel, allegiance) VALUES (17, 325, 29, 'Bahamut', 0, 128, 0, 40000, 15000, 100, 100, 0);
+
+# Add cipher_of_mayakovs_alter_ego to Amphisbaena, Tortuga, and Battosai
+INSERT INTO mob_droplist (dropId, dropType, groupId, groupRate, itemId, itemRate) VALUES (8000, 0, 0, 1000, 10151, 100);
+
+# Add cipher_of_moogles_alter_ego (Matsui-P) to Bahamut
+INSERT INTO mob_droplist (dropId, dropType, groupId, groupRate, itemId, itemRate) VALUES (8001, 0, 0, 1000, 10127, 100);
+
+# Add Pearlscales to all NM's
+INSERT INTO mob_droplist (dropId, dropType, groupId, groupRate, itemId, itemRate) VALUES (8000, 0, 0, 1000, 5714, 100);
+INSERT INTO mob_droplist (dropId, dropType, groupId, groupRate, itemId, itemRate) VALUES (8001, 0, 0, 1000, 5714, 100);
+
