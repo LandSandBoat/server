@@ -264,7 +264,7 @@ void CTrustController::DoRoamTick(time_point tick)
             POwner->addMP(recoverMP);
             m_LastHealTickTime = m_Tick;
             POwner->updatemask |= UPDATE_HP;
-            m_NumHealingTicks = std::clamp(m_NumHealingTicks + 1, static_cast<std::size_t>(0U), static_cast<std::size_t>(m_tickDelays.size() - 1U));
+            m_NumHealingTicks = std::clamp(m_NumHealingTicks + 1, static_cast<std::size_t>(0U), m_tickDelays.size() - 1U);
         }
     }
 }
@@ -276,21 +276,23 @@ void CTrustController::Declump(CCharEntity* PMaster, CBattleEntity* PTarget)
     uint8 currentPartyPos = GetPartyPosition();
     for (auto* POtherTrust : PMaster->PTrusts)
     {
-        if (POtherTrust != POwner && !POtherTrust->PAI->PathFind->IsFollowingPath() && distance(POtherTrust->loc.p, POwner->loc.p) < 1.2f)
+        if (POtherTrust != POwner && !POtherTrust->PAI->PathFind->IsFollowingPath() && distance(POtherTrust->loc.p, POwner->loc.p) < 1.5f)
         {
-            auto       diff_angle = worldAngle(POwner->loc.p, PTarget->loc.p) + 64;
-            auto       amount     = (currentPartyPos % 2) ? 1.0f : -1.0f;
-            position_t new_pos    = {
-                POwner->loc.p.x - (cosf(rotationToRadian(diff_angle)) * amount),
+            auto diffAngle  = worldAngle(POwner->loc.p, PTarget->loc.p) + 64;
+            auto moveAmount = xirand::GetRandomNumber(0.0f, 1.5f) * ((currentPartyPos % 2) ? 1.0f : -1.0f);
+
+            position_t newPos =
+            {
+                POwner->loc.p.x - (cosf(rotationToRadian(diffAngle)) * moveAmount),
                 PTarget->loc.p.y,
-                POwner->loc.p.z + (sinf(rotationToRadian(diff_angle)) * amount),
+                POwner->loc.p.z + (sinf(rotationToRadian(diffAngle)) * moveAmount),
                 0,
                 0,
             };
 
-            if (POwner->PAI->PathFind->ValidPosition(new_pos))
+            if (POwner->PAI->PathFind->ValidPosition(newPos))
             {
-                POwner->PAI->PathFind->PathTo(new_pos, PATHFLAG_RUN | PATHFLAG_WALLHACK);
+                POwner->PAI->PathFind->PathTo(newPos, PATHFLAG_RUN | PATHFLAG_WALLHACK);
             }
             break;
         }
@@ -492,7 +494,7 @@ uint8 CTrustController::GetPartyPosition()
     {
         if (trustList.at(i)->id == POwner->id)
         {
-            return i;
+            return static_cast<uint8>(i);
         }
     }
     return 0;

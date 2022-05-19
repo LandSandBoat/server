@@ -22,7 +22,7 @@
 #ifndef _CCHATMESSAGEPACKET_H
 #define _CCHATMESSAGEPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 

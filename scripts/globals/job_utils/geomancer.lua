@@ -141,13 +141,180 @@ local potencyData =
     [xi.effect.GEO_HASTE]               = {divisor =  30.1,  minPotency = 2.4, maxPotency = 29.9, geoModMultiplier = 1.1},
 }
 
+local function getLuopan(player)
+    local pet = player:getPet()
+
+    if pet and player:getPetID() == xi.pet.id.LUOPAN then
+        return pet
+    end
+
+    return nil
+end
+
+local function hasLuopan(player)
+    return getLuopan(player) and true or false
+end
+
+-----------------------------------
+-- Ability Check Functions
+-----------------------------------
 xi.job_utils.geomancer.geoOnAbilityCheck = function(player, target, ability)
-    if player:getPetID() == xi.pet.id.LUOPAN then
+    if hasLuopan(player) then
         return 0,0
+    end
+    if ability == xi.jobAbility.LIFE_CYCLE then
+        if player:getHP() <= 2 then
+            return xi.msg.basic.UNABLE_TO_USE_JA
+        end
     end
     return xi.msg.basic.REQUIRE_LUOPAN, 0
 end
 
+xi.job_utils.geomancer.geoOnLifeCycleAbilityCheck = function(player, target, ability)
+    if not hasLuopan(player) then
+        return xi.msg.basic.REQUIRE_LUOPAN, 0
+    end
+
+    if player:getHP() <= 2 then
+        return xi.msg.basic.UNABLE_TO_USE_JA
+    end
+
+    return 0,0
+end
+
+-----------------------------------
+-- GEO/INDI Potency Function
+-----------------------------------
+local function getEffectPotency(player, effect)
+    -- Note: only one "Geomancy +" item takes effect so highest value on a single item wins.
+    -- Potency from a skill level perspective caps out once your combined hand bell skill and geomancy skill reaches 900.
+    local geoSkill      = player:getSkillLevel(xi.skill.GEOMANCY)
+    local handbellSkill = player:getSkillLevel(xi.skill.HANDBELL)
+    local geomancyMod   = player:getMaxGearMod(xi.mod.GEOMANCY_BONUS)
+
+    if
+        player:getEquipID(xi.slot.RANGED) == 0 or
+        player:getWeaponSkillType(xi.slot.RANGED) ~= xi.skill.HANDBELL
+    then
+        handbellSkill = 0
+    end
+
+    local combinedSkillLevel = utils.clamp(handbellSkill + geoSkill, 0, 900)
+    local divisor            = potencyData[effect].divisor
+    local minPotency         = potencyData[effect].minPotency
+    local maxPotency         = potencyData[effect].maxPotency
+    local potency            = utils.clamp(combinedSkillLevel / divisor, minPotency, maxPotency)
+
+    if geomancyMod > 0 and not player:hasStatusEffect(xi.effect.ENTRUST) then
+        -- Geomancy bonus is a mod value * the multiplier then added to the final potency of the effect
+        potency = potency + (geomancyMod * potencyData[effect].geoModMultiplier)
+    end
+
+    return potency
+end
+
+-----------------------------------
+-- Check for Widened Compass
+-- Apply mod as needed
+-----------------------------------
+local function windenedCompassCheck(player)
+    -- As the extended range does not change on an active indi spell if Widened Compass wears,
+    -- we need to set this mod each time we cast an indi spell to affect the aura range,
+    -- this is because we cannot delete the mod on onEffectLose or the range will reduce after a tick
+    if player:hasStatusEffect(xi.effect.WIDENED_COMPASS) then
+        player:setMod(xi.mod.AURA_SIZE, 625)
+    else
+        player:setMod(xi.mod.AURA_SIZE, 0)
+    end
+end
+
+-----------------------------------
+-- Ability Use Functions
+-----------------------------------
+xi.job_utils.geomancer.bolster = function(player, target, ability)
+    local bonusTime = player:getMod(xi.mod.BOLSTER_EFFECT)
+    player:addStatusEffect(xi.effect.BOLSTER, 0, 3, 240 + bonusTime)
+end
+
+xi.job_utils.geomancer.fullCircle = function(player, target, ability)
+    local hpp_remaining = target:getHPP()
+    local mp_cost       = target:getLocalVar("MP_COST")
+    local fc_merit      = player:getMerit(xi.merit.FULL_CIRCLE_EFFECT)
+    local cr_merit      = player:getMerit(xi.merit.CURATIVE_RECANTATION)
+    local fc_mod        = player:getMod(xi.mod.FULL_CIRCLE)
+    local cr_mod        = player:getMod(xi.mod.CURATIVE_RECANTATION)
+    local mp_multiplier = 0.5 + (fc_merit / 10) + (fc_mod / 10)
+    local hp_multiplier = 0.5 + (0.7 * cr_merit) + (cr_mod / 10)
+    local mp_returned   = 0
+    local hp_returned   = 0
+
+    -- calculate final mp value
+    mp_returned = math.floor(mp_multiplier * mp_cost * (hpp_remaining / 100))
+
+    if cr_merit > 0 then
+        -- calculate final hp value
+        hp_returned = math.floor(hp_multiplier * mp_cost * (hpp_remaining /100))
+        player:restoreHP(hp_returned)
+    end
+
+    player:restoreMP(mp_returned)
+    player:despawnPet()
+end
+
+xi.job_utils.geomancer.lastingEmanation = function(player, target, ability)
+    local hpDrain = target:getMod(xi.mod.REGEN_DOWN)
+    target:setMod(xi.mod.REGEN_DOWN, hpDrain - math.floor(target:getMainLvl() / 14))
+end
+
+xi.job_utils.geomancer.eclipticAttrition = function(player, target, ability)
+    local hpDrain = target:getMod(xi.mod.REGEN_DOWN)
+    target:setMod(xi.mod.REGEN_DOWN, hpDrain + math.floor(target:getMainLvl() / 16))
+
+    if player:hasStatusEffect(xi.effect.BOLSTER) then
+        return
+    end
+
+    local potency = target:getStatusEffect(xi.effect.COLURE_ACTIVE):getSubPower()
+    local bonusPotency = 0.25 * potency
+    local finalPotency = potency + bonusPotency
+    target:getStatusEffect(xi.effect.COLURE_ACTIVE):setSubPower(finalPotency)
+end
+
+xi.job_utils.geomancer.collimatedFervor = function(player, target, ability) -- TODO: cardinal direction stuff
+end
+
+xi.job_utils.geomancer.lifeCycle = function(player, target, ability)
+    local hpAmount    = math.floor(0.25 * player:getHP())
+    local hpTransfer = hpAmount
+
+    if player:getMod(xi.mod.LIFE_CYCLE_EFFECT) > 0 then
+        hpTransfer = hpAmount * (player:getMod(xi.mod.LIFE_CYCLE_EFFECT) / 10)
+    end
+
+    target:restoreHP(hpTransfer)
+    player:delHP(hpAmount)
+    return hpTransfer
+end
+
+xi.job_utils.geomancer.blazeOfGlory = function(player, target, ability)
+    player:addStatusEffect(xi.effect.BLAZE_OF_GLORY, 0, 3, 60)
+end
+
+xi.job_utils.geomancer.dematerialize = function(player, target, ability)
+    target:addStatusEffect(xi.effect.DEMATERIALIZE, 0, 3, 60)
+    return xi.effect.DEMATERIALIZE
+end
+
+xi.job_utils.geomancer.theugicFocus = function(player, target, ability) -- TODO: cardinal direction stuff
+end
+
+xi.job_utils.geomancer.widenedCompass = function(player, target, ability)
+    player:addStatusEffect(xi.effect.WIDENED_COMPASS, 0, 3, 60)
+end
+
+-----------------------------------
+-- Magic Casting Checks
+-----------------------------------
 xi.job_utils.geomancer.indiOnMagicCastingCheck = function(caster, target, spell)
     if target:hasStatusEffect(xi.effect.COLURE_ACTIVE) then
         local effect = target:getStatusEffect(xi.effect.COLURE_ACTIVE)
@@ -159,7 +326,7 @@ xi.job_utils.geomancer.indiOnMagicCastingCheck = function(caster, target, spell)
 end
 
 xi.job_utils.geomancer.geoOnMagicCastingCheck = function(caster, target, spell)
-    if caster:getPetID() == xi.pet.id.LUOPAN then
+    if hasLuopan(caster) then
         return xi.msg.basic.LUOPAN_ALREADY_PLACED
     elseif not caster:canUseMisc(xi.zoneMisc.PET) then
         return xi.msg.basic.CANT_BE_USED_IN_AREA
@@ -168,33 +335,8 @@ xi.job_utils.geomancer.geoOnMagicCastingCheck = function(caster, target, spell)
     end
 end
 
-local function getEffectPotency(player, effect)
-    -- Note: only one "Geomancy +" item takes effect so highest value on a single item wins.
-    -- Potency from a skill level perspective caps out once your combined hand bell skill and geomancy skill reaches 900.
-    -- Anything over that is unneeded and adds nothing
-    local geoSkill      = player:getSkillLevel(xi.skill.GEOMANCY)
-    local handbellSkill = player:getSkillLevel(xi.skill.HANDBELL)
-    local geomancyMod   = player:getMaxGearMod(xi.mod.GEOMANCY_BONUS) --getMod(xi.mod.GEOMANCY_BONUS)
-
-    if  player:getEquipID(xi.slot.RANGED) == 0 or player:getWeaponSkillType(xi.slot.RANGED) ~= xi.skill.HANDBELL then
-        handbellSkill = 0
-    end
-
-    local combinedSkillLevel = utils.clamp(handbellSkill + geoSkill, 0, 900)
-    local divisor            = potencyData[effect].divisor
-    local minPotency         = potencyData[effect].minPotency
-    local maxPotency         = potencyData[effect].maxPotency
-    local potency            = utils.clamp(combinedSkillLevel / divisor, minPotency, maxPotency)
-
-    if geomancyMod > 0 then
-        -- Geomancy bonus is a mod value * the multiplier then added to the final potency of the effect
-        potency = potency + (geomancyMod * potencyData[effect].geoModMultiplier)
-    end
-
-    return potency --math.floor(potency)
-end
-
 -----------------------------------
+-- Aura Function
 -- duration:   Length of the aura effect, not ticks of the aura's effect
 --             0 = does not wear off
 -- tickEffect: The effect being granted/imposed by the aura
@@ -208,20 +350,37 @@ xi.job_utils.geomancer.addAura = function(target, duration, tickEffect, tickPowe
     target:addStatusEffectEx(xi.effect.COLURE_ACTIVE, xi.effect.COLURE_ACTIVE, 0, 3, duration, tickEffect, tickPower, targetType, xi.effectFlag.AURA)
 end
 
+-----------------------------------
+-- Indi Spell Function
+-----------------------------------
 xi.job_utils.geomancer.doIndiSpell = function(caster, target, spell)
     local spellID      = spell:getID()
     local effect       = indiData[spellID].effect
     local potency      = getEffectPotency(caster, effect)
     local targetType   = indiData[spellID].targetType
     local visualEffect = indiData[spellID].visualEffect
-    local duration = 180 -- TODO: add mod for duration
+    local duration = 180 + caster:getMod(xi.mod.INDI_DURATION)
+
+    -- set a local var to adjust potency values after an ability has worn off
+    target:setLocalVar("INDI_POTENCY", potency)
+
+    if target:hasStatusEffect(xi.effect.BOLSTER) then
+        potency = potency * 2
+    end
+
+    windenedCompassCheck(caster)
 
     target:addStatusEffectEx(xi.effect.COLURE_ACTIVE, xi.effect.COLURE_ACTIVE, visualEffect, 3, duration, effect, potency, targetType, xi.effectFlag.AURA)
 
+    if caster:hasStatusEffect(xi.effect.ENTRUST) then
+        caster:delStatusEffectSilent(xi.effect.ENTRUST)
+    end
     return effect
 end
 
-
+-----------------------------------
+-- Spawn Luopan Function
+-----------------------------------
 xi.job_utils.geomancer.spawnLuopan = function(player, target, spell)
     if target then
         xi.pet.spawnPet(player, xi.pet.id.LUOPAN)
@@ -229,15 +388,30 @@ xi.job_utils.geomancer.spawnLuopan = function(player, target, spell)
         return
     end
 
-    local luopan     = player:getPet()
-    local spellID    = spell:getID()
-    local modelID    = geoData[spellID].luopanModel
-    local effect     = geoData[spellID].effect
-    local potency    = getEffectPotency(player, effect)
-    local targetType = geoData[spellID].targetType
+    local luopan       = player:getPet()
+    local spellID      = spell:getID()
+    local modelID      = geoData[spellID].luopanModel
+    local effect       = geoData[spellID].effect
+    local potency      = getEffectPotency(player, effect)
+    local finalPotency = potency
+    local targetType   = geoData[spellID].targetType
+    local bolsterValue = 0
+
+    -- set a local var to adjust potency values after an ability has worn off
+    luopan:setLocalVar("GEO_POTENCY", potency)
+
+    if player:hasStatusEffect(xi.effect.BLAZE_OF_GLORY) then
+        finalPotency = potency + 0.5 * potency
+    end
+
+    if player:hasStatusEffect(xi.effect.BOLSTER) then
+        finalPotency = potency * 2
+    end
+
+    windenedCompassCheck(player)
 
     -- Attach effect
-    xi.job_utils.geomancer.addAura(luopan, 0, effect, potency, targetType)
+    xi.job_utils.geomancer.addAura(luopan, 0, effect, finalPotency, targetType)
 
     -- Save the mp cost for use with Full Circle on the luopan
     luopan:setLocalVar("MP_COST", spell:getMPCost())
@@ -245,9 +419,57 @@ xi.job_utils.geomancer.spawnLuopan = function(player, target, spell)
     -- Change the luopans appearance to match the effect
     luopan:setModelId(modelID)
 
+    -- get the job point value of BOLSTER_EFFECT if Bolster is active
+    if player:hasStatusEffect(xi.effect.BOLSTER) then
+        bolsterValue = player:getJobPointLevel(xi.jp.BOLSTER_EFFECT)
+    end
+
+    if player:hasStatusEffect(xi.effect.BLAZE_OF_GLORY) then
+        player:delStatusEffect(xi.effect.BLAZE_OF_GLORY)
+        luopan:setHP((luopan:getMaxHP() / 2) + (luopan:getMaxHP() * (0.01 * player:getJobPointLevel(xi.jp.BLAZE_OF_GLORY_EFFECT))))
+    end
+
     -- Set HP loss over time
-    luopan:addMod(xi.mod.REGEN_DOWN, luopan:getMainLvl() / 4)
+    luopan:addMod(xi.mod.REGEN_DOWN, math.floor(luopan:getMainLvl() / 4) - bolsterValue)
 
     -- Innate Damage Taken -50%
     luopan:addMod(xi.mod.DMG, -5000)
+end
+
+-----------------------------------
+-- Ability Effect Gain Adjustments
+-----------------------------------
+xi.job_utils.geomancer.bolsterOnEffectGain = function(target, effect)
+    -- Luopans need to be recast to add this effect to them so we ignore them here
+    if target:hasStatusEffect(xi.effect.COLURE_ACTIVE) then
+        local indiPotency = target:getLocalVar("INDI_POTENCY")
+        target:getStatusEffect(xi.effect.COLURE_ACTIVE):setSubPower(indiPotency * 2)
+    end
+end
+
+-----------------------------------
+-- Ability Effect Wear Adjustments
+-----------------------------------
+xi.job_utils.geomancer.bolsterOnEffectLose = function(target, effect)
+    local bolsterJP = target:getJobPointLevel(xi.jp.BOLSTER_EFFECT)
+
+    -- Luopan Geo effect
+    if target:getPet() and target:getPet():getPetID() == xi.pet.id.LUOPAN then
+        local pet            = target:getPet()
+        local geoPotency     = pet:getLocalVar("GEO_POTENCY")
+        local currentPotency = pet:getStatusEffect(xi.effect.COLURE_ACTIVE):getSubPower()
+        if currentPotency == geoPotency * 2 then -- will always be this value with Bolster or Blaze of Glory active
+            pet:getStatusEffect(xi.effect.COLURE_ACTIVE):setSubPower(geoPotency)
+            pet:setMod(xi.mod.REGEN_DOWN, pet:getMod(xi.mod.REGEN_DOWN) + bolsterJP)
+        end
+    end
+
+    -- Player Indi effect
+    if target:hasStatusEffect(xi.effect.COLURE_ACTIVE) then
+        local indiPotency = target:getLocalVar("INDI_POTENCY")
+        local currentPotency = target:getStatusEffect(xi.effect.COLURE_ACTIVE):getSubPower()
+        if currentPotency == indiPotency * 2 then -- will always be this value with Bolster active
+            target:getStatusEffect(xi.effect.COLURE_ACTIVE):setSubPower(indiPotency)
+        end
+    end
 end

@@ -22,7 +22,7 @@
 #ifndef _BATTLEUTILS_H
 #define _BATTLEUTILS_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 #include "../blue_spell.h"
 #include "../merit.h"
 #include "../status_effect.h"

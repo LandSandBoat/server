@@ -238,13 +238,9 @@ void CPathFind::FollowPath()
     }
 
     m_onPoint = false;
-
-    // move mob to next point
     position_t& targetPoint = m_points[m_currentPoint];
 
-    StepTo(targetPoint, m_pathFlags & PATHFLAG_RUN);
-
-    if (m_carefulPathing)
+    if (isNavMeshEnabled() && m_carefulPathing)
     {
         m_POwner->loc.zone->m_navMesh->snapToValidPosition(m_POwner->loc.p);
     }
@@ -253,20 +249,34 @@ void CPathFind::FollowPath()
     {
         // if I have a max distance, check to stop me
         Clear();
-
         m_onPoint = true;
+        return;
     }
-    else if (AtPoint(targetPoint))
-    {
-        m_currentPoint++;
 
-        if (m_currentPoint >= (int16)m_points.size())
+    // Iterate over points in the current path and find the first point
+    // that we haven't successfully arrived at already.
+    while (m_currentPoint < (int16)m_points.size())
+    {
+        targetPoint = m_points[m_currentPoint];
+
+        if (AtPoint(targetPoint))
         {
-            FinishedPath();
+            m_currentPoint++;
+        }
+        else
+        {
+            break;
         }
 
         m_onPoint = true;
-        //#event onPoint event
+    }
+
+    StepTo(targetPoint, m_pathFlags & PATHFLAG_RUN);
+
+    if (m_currentPoint >= (int16)m_points.size())
+    {
+        FinishedPath();
+        m_onPoint = true;
     }
 }
 
@@ -283,7 +293,7 @@ void CPathFind::StepTo(const position_t& pos, bool run)
         speed /= 2;
     }
 
-    float stepDistance = ((float)speed / 10) / 2;
+    float stepDistance = (speed / 10) / 2;
     float distanceTo   = distance(m_POwner->loc.p, pos);
 
     // face point mob is moving towards
@@ -332,6 +342,12 @@ void CPathFind::StepTo(const position_t& pos, bool run)
 bool CPathFind::FindPath(const position_t& start, const position_t& end)
 {
     TracyZoneScoped;
+
+    if (!isNavMeshEnabled())
+    {
+        return false;
+    }
+
     m_points       = m_POwner->loc.zone->m_navMesh->findPath(start, end);
     m_currentPoint = 0;
 
@@ -347,6 +363,12 @@ bool CPathFind::FindPath(const position_t& start, const position_t& end)
 bool CPathFind::FindRandomPath(const position_t& start, float maxRadius, uint8 maxTurns, uint16 roamFlags)
 {
     TracyZoneScoped;
+
+    if (!isNavMeshEnabled())
+    {
+        return false;
+    }
+
     auto m_turnLength = xirand::GetRandomNumber((int)maxTurns) + 1;
 
     position_t startPosition = start;
@@ -375,6 +397,12 @@ bool CPathFind::FindRandomPath(const position_t& start, float maxRadius, uint8 m
 bool CPathFind::FindClosestPath(const position_t& start, const position_t& end)
 {
     TracyZoneScoped;
+
+    if (!isNavMeshEnabled())
+    {
+        return false;
+    }
+
     m_points       = m_POwner->loc.zone->m_navMesh->findPath(start, end);
     m_currentPoint = 0;
     m_points.push_back(end); // this prevents exploits with navmesh / impassible terrain
@@ -455,10 +483,6 @@ bool CPathFind::AtPoint(const position_t& pos)
 
 bool CPathFind::InWater()
 {
-    if (m_POwner->loc.zone->GetWeather() == WEATHER_SQUALL)
-    {
-        return true;
-    }
     if (isNavMeshEnabled())
     {
         return m_POwner->loc.zone->m_navMesh->inWater(m_POwner->loc.p);

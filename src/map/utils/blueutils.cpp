@@ -19,7 +19,7 @@
 ===========================================================================
 */
 
-#include "../../common/utils.h"
+#include "common/utils.h"
 
 #include "../packets/char_job_extra.h"
 #include "../packets/char_spells.h"
@@ -49,7 +49,7 @@ namespace blueutils
         // sanity check
         if (slotIndex < 20)
         {
-            if (dynamic_cast<CBlueSpell*>(PSpell))
+            if (PSpell)
             {
                 // Blue spells in SetBlueSpells must be 0x200 ofsetted so it's 1 byte per spell.
                 if (PChar->m_SetBlueSpells[slotIndex] != 0)

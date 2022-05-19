@@ -62,7 +62,7 @@ namespace guildutils
         const char* fmtQuery = "SELECT DISTINCT id, points_name FROM guilds ORDER BY id ASC;";
         if (sql->Query(fmtQuery) != SQL_ERROR && sql->NumRows() != 0)
         {
-            g_PGuildList.reserve((const unsigned int)sql->NumRows());
+            g_PGuildList.reserve((unsigned int)sql->NumRows());
 
             while (sql->NextRow() == SQL_SUCCESS)
             {
@@ -75,7 +75,7 @@ namespace guildutils
 
         if (sql->Query(fmtQuery) != SQL_ERROR && sql->NumRows() != 0)
         {
-            g_PGuildShopList.reserve((const unsigned int)sql->NumRows());
+            g_PGuildShopList.reserve((unsigned int)sql->NumRows());
 
             while (sql->NextRow() == SQL_SUCCESS)
             {
@@ -173,7 +173,7 @@ namespace guildutils
         }
 
         // load the pattern in case it was set by another server (and this server did not set it)
-        sql->Query("SELECT value FROM server_variables WHERE name = '[GUILD]pattern';");
+        ret = sql->Query("SELECT value FROM server_variables WHERE name = '[GUILD]pattern';");
         if (ret != SQL_ERROR && sql->NumRows() == 1 && sql->NextRow() == SQL_SUCCESS)
         {
             pattern = sql->GetUIntData(0);

@@ -259,6 +259,6 @@ void md5(unsigned char* text, unsigned char* hash, int size)
 {
     md5_context ctx;
     md5_starts(&ctx);
-    md5_update(&ctx, (uint8*)text, size);
+    md5_update(&ctx, text, size);
     md5_finish(&ctx, hash);
 }

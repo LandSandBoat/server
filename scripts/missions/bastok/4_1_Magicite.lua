@@ -22,6 +22,8 @@ require('scripts/settings/main')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------
+local ruludeID = require('scripts/zones/RuLude_Gardens/IDs')
+-----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.BASTOK, xi.mission.id.bastok.MAGICITE)
 
@@ -38,8 +40,8 @@ end
 
 mission.reward =
 {
-    rank = 5,
-    gil = 10000,
+    rank    = 5,
+    gil     = 10000,
     keyItem = xi.ki.MESSAGE_TO_JEUNO_BASTOK,
 }
 
@@ -55,21 +57,32 @@ mission.sections =
 
         [xi.zone.RULUDE_GARDENS] =
         {
+            ['_6r2'] =
+            {
+                onTrigger = function(player, npc)
+                    if xi.mission.getMissionRankPoints(player, xi.mission.id.bastok.MAGICITE) then
+                        local hasKIParam = player:hasKeyItem(xi.ki.ARCHDUCAL_AUDIENCE_PERMIT) and 1 or 0
+                        return mission:progressEvent(129, hasKIParam) -- This event starts the mission.
+                    end
+                end,
+            },
+
             ['Goggehn'] =
             {
                 onTrigger = function(player, npc)
                     if xi.mission.getMissionRankPoints(player, xi.mission.id.bastok.MAGICITE) then
-                        return mission:progressEvent(0)
+                        return mission:event(0)
                     else
-                        return mission:progressEvent(4)
+                        return mission:event(4)
                     end
                 end,
             },
 
             onEventFinish =
             {
-                [0] = function(player, csid, option, npc)
+                [129] = function(player, csid, option, npc)
                     mission:begin(player)
+                    npcUtil.giveKeyItem(player, xi.ki.ARCHDUCAL_AUDIENCE_PERMIT)
                 end,
             },
         },
@@ -84,21 +97,13 @@ mission.sections =
 
         [xi.zone.RULUDE_GARDENS] =
         {
-            ['_6r2'] =
-            {
-                onTrigger = function(player, npc)
-                    if player:getMissionStatus(mission.areaId) == 0 then
-                        local hasKIParam = player:hasKeyItem(xi.ki.ARCHDUCAL_AUDIENCE_PERMIT) and 1 or 0
-                        return mission:progressEvent(129, hasKIParam)
-                    end
-                end,
-            },
-
             ['_6r9'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getMissionStatus(mission.areaId) == 1 then
+                    if player:getMissionStatus(mission.areaId) == 0 then
                         return mission:progressEvent(128)
+                    else
+                        return mission:event(138, 1)
                     end
                 end,
             },
@@ -106,10 +111,10 @@ mission.sections =
             ['Goggehn'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getMissionStatus(mission.areaId) == 1 then
-                        return mission:progressEvent(132)
+                    if player:getMissionStatus(mission.areaId) == 0 then
+                        return mission:event(132)
                     else
-                        return mission:progressEvent(135)
+                        return mission:event(135)
                     end
                 end,
             },
@@ -117,13 +122,8 @@ mission.sections =
             onEventFinish =
             {
                 [128] = function(player, csid, option, npc)
-                    player:setMissionStatus(mission.areaId, 2)
-                    npcUtil.giveKeyItem(player, xi.ki.LETTER_TO_ALDO)
-                end,
-
-                [129] = function(player, csid, option, npc)
                     player:setMissionStatus(mission.areaId, 1)
-                    npcUtil.giveKeyItem(player, xi.ki.ARCHDUCAL_AUDIENCE_PERMIT)
+                    npcUtil.giveKeyItem(player, xi.ki.LETTER_TO_ALDO)
                 end,
             },
         },
@@ -133,11 +133,11 @@ mission.sections =
             ['Aldo'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getMissionStatus(mission.areaId) == 2 then
+                    if player:getMissionStatus(mission.areaId) == 1 then
                         if player:hasKeyItem(xi.ki.SILVER_BELL) then
-                            return mission:progressEvent(152, 1)
+                            return mission:progressEvent(152, 1) -- CS without Verena nor Fickblix
                         else
-                            return mission:progressEvent(152)
+                            return mission:progressEvent(152) -- Regular CS with Verena and Fickblix
                         end
                     end
                 end,
@@ -146,7 +146,7 @@ mission.sections =
             onEventFinish =
             {
                 [152] = function(player, csid, option, npc)
-                    player:setMissionStatus(mission.areaId, 3)
+                    player:setMissionStatus(mission.areaId, 2)
                     player:delKeyItem(xi.ki.LETTER_TO_ALDO)
 
                     if not player:hasKeyItem(xi.ki.SILVER_BELL) then
@@ -161,7 +161,7 @@ mission.sections =
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId and
-                player:getMissionStatus(mission.areaId) == 3
+                player:getMissionStatus(mission.areaId) == 2
         end,
 
         [xi.zone.RULUDE_GARDENS] =
@@ -175,6 +175,8 @@ mission.sections =
                         else
                             return mission:progressEvent(60)
                         end
+                    else
+                        return mission:event(138, 1)
                     end
                 end,
             },
@@ -182,7 +184,7 @@ mission.sections =
             ['Goggehn'] =
             {
                 onTrigger = function(player, npc)
-                    return mission:progressEvent(135)
+                    return mission:event(135)
                 end,
             },
 
@@ -200,7 +202,7 @@ mission.sections =
                     end
 
                     player:addTitle(xi.title.HAVE_WINGS_WILL_FLY)
-                    player:setMissionStatus(mission.areaId, 4)
+                    player:setMissionStatus(mission.areaId, 3)
                 end,
             },
         },
@@ -211,9 +213,9 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if magiciteCounter(player) == 0 then
-                        return mission:progressEvent(161)
+                        return mission:event(161)
                     else
-                        return mission:progressEvent(183)
+                        return mission:event(183)
                     end
                 end,
             },
@@ -225,13 +227,13 @@ mission.sections =
                         if mission:getVar(player, 'Option') == 1 then
                             return mission:progressEvent(184)
                         else
-                            return mission:progressEvent(80)
+                            return mission:event(80)
                         end
                     else
                         if mission:getVar(player, 'Option') == 2 then
-                            return mission:progressEvent(81)
+                            return mission:event(81)
                         else
-                            return mission:progressEvent(79)
+                            return mission:event(79)
                         end
                     end
                 end,
@@ -358,17 +360,22 @@ mission.sections =
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId and
-                player:getMissionStatus(mission.areaId) == 4
+                player:getMissionStatus(mission.areaId) == 3
         end,
 
         [xi.zone.RULUDE_GARDENS] =
         {
+            ['_6r2'] =
+            {
+                onTrigger = function(player, npc)
+                    return mission:messageSpecial(ruludeID.text.THE_CONSULATE_IS_AWAY)
+                end,
+            },
+
             ['Goggehn'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getMissionStatus(mission.areaId) == 4 then
-                        return mission:progressEvent(35)
-                    end
+                    return mission:progressEvent(35)
                 end,
             },
 
@@ -385,7 +392,7 @@ mission.sections =
             ['Aldo'] =
             {
                 onTrigger = function(player, npc)
-                    return mission:progressEvent(183)
+                    return mission:event(183)
                 end,
             },
         },

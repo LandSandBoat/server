@@ -776,10 +776,9 @@ void CMobController::DoRoamTick(time_point tick)
         else if (m_Tick >= m_LastActionTime + std::chrono::milliseconds(PMob->getBigMobMod(MOBMOD_ROAM_COOL)))
         {
             // lets buff up or move around
-
-            if (PMob->CalledForHelp())
+            if (PMob->GetCallForHelpFlag())
             {
-                PMob->CallForHelp(false);
+                PMob->SetCallForHelpFlag(false);
             }
 
             // can't rest with poison or disease
@@ -1008,7 +1007,7 @@ bool CMobController::Disengage()
 
     PMob->m_OwnerID.clean();
     PMob->updatemask |= (UPDATE_STATUS | UPDATE_HP);
-    PMob->CallForHelp(false);
+    PMob->SetCallForHelpFlag(false);
     PMob->animation = ANIMATION_NONE;
 
     return CController::Disengage();

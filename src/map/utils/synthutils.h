@@ -22,7 +22,7 @@
 #ifndef _SYNTHUTILS_H
 #define _SYNTHUTILS_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 /************************************************************************
  *																		*

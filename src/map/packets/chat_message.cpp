@@ -20,7 +20,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 */
 
 #include "chat_message.h"
-#include "../../common/socket.h"
+#include "common/socket.h"
 #include "../entities/charentity.h"
 #include <cstring>
 

@@ -79,4 +79,4 @@ message(STATUS "MARIADB_INCLUDE_DIR: ${MARIADB_INCLUDE_DIR}")
 
 add_library(mariadbclient INTERFACE)
 target_link_libraries(mariadbclient INTERFACE ${MARIADB_LIBRARY})
-target_include_directories(mariadbclient INTERFACE ${MARIADB_INCLUDE_DIR})
+target_include_directories(mariadbclient SYSTEM INTERFACE ${MARIADB_INCLUDE_DIR})

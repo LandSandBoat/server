@@ -20,16 +20,16 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 */
 #include <cstring>
 
-#include "../../common/logging.h"
-#include "../../common/socket.h"
+#include "common/logging.h"
+#include "common/socket.h"
 
 #include "../data_loader.h"
 
 #include "auction_history.h"
 
 CAHHistoryPacket::CAHHistoryPacket(uint16 ItemID)
+: m_count(0)
 {
-    m_count = 0;
 
     memset(m_PData, 0, sizeof(m_PData));
 

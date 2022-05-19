@@ -24,7 +24,7 @@
 #ifndef _CITEMFLOWERPOT_H
 #define _CITEMFLOWERPOT_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "item_furnishing.h"
 

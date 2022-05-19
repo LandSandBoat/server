@@ -19,7 +19,7 @@
 ===========================================================================
 */
 
-#include "../../common/timer.h"
+#include "common/timer.h"
 #include "../entities/baseentity.h"
 #include "../treasure_pool.h"
 

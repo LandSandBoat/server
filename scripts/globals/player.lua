@@ -41,10 +41,13 @@ local startingJobGear =
 }
 
 -----------------------------------
--- local functions
+-- public functions
 -----------------------------------
 
-local function CharCreate(player)
+xi = xi or {}
+xi.player = {}
+
+xi.player.charCreate = function(player)
     local race = player:getRace()
     local raceInfo = startingRaceInfo[race]
     local nation = player:getNation()
@@ -142,19 +145,12 @@ local function CharCreate(player)
     player:setNewPlayer(true) -- apply new player flag
 end
 
------------------------------------
--- public functions
------------------------------------
-
-xi = xi or {}
-xi.player = {}
-
 -- called by core after a player logs into the server or zones
 xi.player.onGameIn = function(player, firstLogin, zoning)
     if not zoning then
         -- things checked ONLY during logon go here
         if firstLogin then
-            CharCreate(player)
+            xi.player.charCreate(player)
         end
     else
         -- things checked ONLY during zone in go here

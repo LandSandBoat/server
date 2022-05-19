@@ -22,7 +22,7 @@
 #ifndef _CENTITYVISUALPACKET_H
 #define _CENTITYVISUALPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 

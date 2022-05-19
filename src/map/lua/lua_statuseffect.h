@@ -22,7 +22,7 @@
 #ifndef _LUASTATUSEFFECT_H
 #define _LUASTATUSEFFECT_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 #include "luautils.h"
 
 class CStatusEffect;

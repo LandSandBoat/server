@@ -18,6 +18,7 @@ entity.onTrigger = function(player, npc)
         player:setCharVar("cCollectSilence", 1)
     end
 
+    npc:entityAnimationPacket("sils", player)
     player:addStatusEffect(xi.effect.SILENCE, 0, 0, duration)
 
 end

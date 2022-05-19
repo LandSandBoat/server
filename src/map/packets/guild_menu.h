@@ -22,7 +22,7 @@
 #ifndef _CGUILDMENUPACKET_H
 #define _CGUILDMENUPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 

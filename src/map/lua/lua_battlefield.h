@@ -22,7 +22,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #ifndef _LUABATTLEFIELD_H
 #define _LUABATTLEFIELD_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 #include "luautils.h"
 
 class CBattlefield;
@@ -56,16 +56,16 @@ public:
     auto     getAllies() -> sol::table;
     auto     getRecord() -> std::tuple<std::string, uint32, uint32>;
     uint8    getStatus();
-    uint64_t getLocalVar(std::string name);
+    uint64_t getLocalVar(std::string const& name);
     uint32   getLastTimeUpdate();
     auto     getInitiator() -> std::pair<uint32, std::string>;
 
     void  setLastTimeUpdate(uint32 seconds);
     void  setTimeLimit(uint32 seconds);
     void  setWipeTime(uint32 seconds);
-    void  setRecord(std::string name, uint32 seconds);
+    void  setRecord(std::string const& name, uint32 seconds);
     void  setStatus(uint8 status);
-    void  setLocalVar(std::string name, uint64_t value);
+    void  setLocalVar(std::string const& name, uint64_t value);
     bool  loadMobs();
     bool  spawnLoot(sol::object const& PEntityObj);
     auto  insertEntity(uint16 targid, bool ally, bool inBattlefield) -> std::optional<CLuaBaseEntity>;

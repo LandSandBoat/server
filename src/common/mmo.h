@@ -149,6 +149,47 @@ enum MSGSERVTYPE : uint8
     MSG_SEND_TO_ENTITY,
 };
 
+constexpr auto msgTypeToStr = [](uint8 msgtype)
+{
+    switch (msgtype)
+    {
+        case MSG_LOGIN:
+            return "MSG_LOGIN";
+        case MSG_CHAT_TELL:
+            return "MSG_CHAT_TELL";
+        case MSG_CHAT_PARTY:
+            return "MSG_CHAT_PARTY";
+        case MSG_CHAT_LINKSHELL:
+            return "MSG_CHAT_LINKSHELL";
+        case MSG_CHAT_UNITY:
+            return "MSG_CHAT_UNITY";
+        case MSG_CHAT_YELL:
+            return "MSG_CHAT_YELL";
+        case MSG_CHAT_SERVMES:
+            return "MSG_CHAT_SERVMES";
+        case MSG_PT_INVITE:
+            return "MSG_PT_INVITE";
+        case MSG_PT_INV_RES:
+            return "MSG_PT_INV_RES";
+        case MSG_PT_RELOAD:
+            return "MSG_PT_RELOAD";
+        case MSG_PT_DISBAND:
+            return "MSG_PT_DISBAND";
+        case MSG_DIRECT:
+            return "MSG_DIRECT";
+        case MSG_LINKSHELL_RANK_CHANGE:
+            return "MSG_LINKSHELL_RANK_CHANGE";
+        case MSG_LINKSHELL_REMOVE:
+            return "MSG_LINKSHELL_REMOVE";
+        case MSG_SEND_TO_ZONE:
+            return "MSG_SEND_TO_ZONE";
+        case MSG_SEND_TO_ENTITY:
+            return "MSG_SEND_TO_ENTITY";
+        default:
+            return "Unknown";
+    };
+};
+
 typedef std::string string_t;
 
 // For characters, the size is stored in `size`.

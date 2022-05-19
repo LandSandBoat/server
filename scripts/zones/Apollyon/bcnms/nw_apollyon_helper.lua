@@ -89,7 +89,7 @@ xi.apollyon_nw.handleMobDeathFloorThreePortal = function(mob, player, isKiller, 
 
         if mobID == randomF3 then
             -- Select witch of the 7 Goryniches will open portal to floor 4.
-            battlefield:setLocalVar("randomF4", ID.mob.APOLLYON_NW_MOB[4] + math.random(1, 7))
+            battlefield:setLocalVar("randomF4", ID.mob.APOLLYON_NW_MOB[4] + math.random(1, 5))
 
             -- Open portal to floor 4.
             xi.limbus.handleDoors(battlefield, true, ID.npc.APOLLYON_NW_PORTAL[3])
@@ -111,9 +111,9 @@ end
 -----------------------------------
 -- Floor 4
 -----------------------------------
--- Mobs in floor 4: Cynoprosopi x1, Gorynich x7
+-- Mobs in floor 4: Cynoprosopi x1, Gorynich x5
 
--- Killing 1 of the 7 Goryniches opens the portal.
+-- Killing 1 of the 5 Goryniches opens the portal.
 xi.apollyon_nw.handleMobDeathFloorFourPortal = function(mob, player, isKiller, noKiller)
     if isKiller or noKiller then
         local mobID       = mob:getID()

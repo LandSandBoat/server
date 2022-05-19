@@ -31,6 +31,8 @@ public:
 
     CCharEntity* GetCharByName(int8* name); // finds the player if exists in zone
     CCharEntity* GetCharByID(uint32 id);
+    void UpdateCharPacket(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask);
+    void UpdateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 updatemask, bool alwaysInclude = false);
     CBaseEntity* GetEntity(uint16 targid, uint8 filter = -1); // получаем указатель на любую сущность в зоне
 
     void SpawnPCs(CCharEntity* PChar);  // отображаем персонажей в зоне
@@ -61,6 +63,8 @@ public:
 
     void TOTDChange(TIMETYPE TOTD); // обработка реакции мира на смену времени суток
     void WeatherChange(WEATHER weather);
+    void MusicChange(uint8 BlockID, uint8 MusicTrackID);
+
     void PushPacket(CBaseEntity*, GLOBAL_MESSAGE_TYPE, CBasicPacket*); // отправляем глобальный пакет в пределах зоны
 
     void ZoneServer(time_point tick, bool check_region);
@@ -68,9 +72,11 @@ public:
     CZone* GetZone();
 
     EntityList_t GetCharList() const;
+    EntityList_t GetMobList() const;
     bool         CharListEmpty() const;
-    uint16       GetNewCharTargID();
-    uint16       GetNewDynamicTargID();
+
+    uint16 GetNewCharTargID();
+    uint16 GetNewDynamicTargID();
 
     EntityList_t m_allyList;
     EntityList_t m_mobList; // список всех MOBs в зоне
@@ -79,6 +85,8 @@ public:
     EntityList_t m_npcList;  // список всех NPCs в зоне
     EntityList_t m_charList; // список всех PCs  в зоне
 
+    std::set<uint16> charTargIds; // Sorted set of targids for characters
+
     CZoneEntities(CZone*);
     ~CZoneEntities();
 
@@ -86,6 +94,9 @@ private:
     CZone*       m_zone;
     CBaseEntity* m_Transport; // указатель на транспорт в зоне
     time_point   m_EffectCheckTime{ server_clock::now() };
+
+    time_point computeTime { server_clock::now() };
+    uint16 lastCharComputeTargId;
 
     uint16 m_DynamicTargIDCount;
 };

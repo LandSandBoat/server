@@ -22,8 +22,66 @@
 #ifndef _MODULEUTILS_H
 #define _MODULEUTILS_H
 
+#include "common/logging.h"
+#include "../lua/luautils.h"
+
+#include <memory>
+
+extern std::unique_ptr<SqlConnection> sql;
+
+// Forward declare
+class CPPModule;
 namespace moduleutils
 {
+    void RegisterCPPModule(CPPModule* ptr);
+}
+
+class CPPModule
+{
+public:
+    CPPModule()
+    : lua(luautils::lua)
+    , sql(::sql)
+    {
+        moduleutils::RegisterCPPModule(this);
+    }
+
+    virtual ~CPPModule(){};
+
+    // Required
+    virtual void OnInit() = 0;
+
+    // Optional
+    virtual void OnZoneTick(CZone* PZone){};
+    virtual void OnTimeServerTick(){};
+    virtual void OnCharZoneIn(CCharEntity* PChar){};
+    virtual void OnCharZoneOut(CCharEntity* PChar){};
+
+    template <typename T>
+    static T* Register()
+    {
+        return new T();
+    };
+
+protected:
+    sol::state&                     lua;
+    std::unique_ptr<SqlConnection>& sql;
+};
+
+#define REGISTER_CPP_MODULE(className) \
+    static CPPModule* classNamePtr = className::Register<className>();
+
+namespace moduleutils
+{
+    void RegisterCPPModule(CPPModule* ptr);
+
+    // Hooks for calling modules
+    void OnInit();
+    void OnZoneTick(CZone* PZone);
+    void OnTimeServerTick();
+    void OnCharZoneIn(CCharEntity* PChar);
+    void OnCharZoneOut(CCharEntity* PChar);
+
     // The program has two "states":
     // - Load-time: As all data is being loaded and init'd
     // - Run-time: Once the main server tick starts
@@ -43,8 +101,8 @@ namespace moduleutils
     // problems.
 
     void LoadLuaModules();
-    void TryApplyModules();
-    void ReportModuleUsage();
+    void TryApplyLuaModules();
+    void ReportLuaModuleUsage();
 }; // namespace moduleutils
 
 #endif // _MODULEUTILS_H

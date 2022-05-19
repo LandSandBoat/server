@@ -69,6 +69,7 @@
 #include "utils/charutils.h"
 #include "utils/itemutils.h"
 #include "utils/mobutils.h"
+#include "utils/moduleutils.h"
 #include "utils/petutils.h"
 #include "utils/zoneutils.h"
 
@@ -826,6 +827,18 @@ void CZone::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message_type, C
     m_zoneEntities->PushPacket(PEntity, message_type, packet);
 }
 
+void CZone::UpdateCharPacket(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask)
+{
+    TracyZoneScoped
+    m_zoneEntities->UpdateCharPacket(PChar, type, updatemask);
+}
+
+void CZone::UpdateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 updatemask, bool alwaysInclude)
+{
+    TracyZoneScoped
+    m_zoneEntities->UpdateEntityPacket(PEntity, type, updatemask, alwaysInclude);
+}
+
 /************************************************************************
  *                                                                       *
  *  Wide Scan                                                            *
@@ -994,6 +1007,8 @@ void CZone::CharZoneIn(CCharEntity* PChar)
     PChar->PLatentEffectContainer->CheckLatentsZone();
 
     charutils::ReadHistory(PChar);
+
+    moduleutils::OnCharZoneIn(PChar);
 }
 
 void CZone::CharZoneOut(CCharEntity* PChar)
@@ -1008,6 +1023,7 @@ void CZone::CharZoneOut(CCharEntity* PChar)
         }
     }
 
+    moduleutils::OnCharZoneOut(PChar);
     luautils::OnZoneOut(PChar);
 
     if (PChar->m_LevelRestriction != 0)
@@ -1100,6 +1116,11 @@ void CZone::CharZoneOut(CCharEntity* PChar)
     }
 
     charutils::WriteHistory(PChar);
+}
+
+bool CZone::IsZoneActive() const
+{
+    return ZoneTimer != nullptr;
 }
 
 CZoneEntities* CZone::GetZoneEntities()

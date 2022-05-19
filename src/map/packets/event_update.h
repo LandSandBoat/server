@@ -22,7 +22,7 @@
 #ifndef _CEVENTUPDATEPACKET_H
 #define _CEVENTUPDATEPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 

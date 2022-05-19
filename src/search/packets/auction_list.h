@@ -22,7 +22,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #ifndef _CAHITEMSLISTPACKET_H_
 #define _CAHITEMSLISTPACKET_H_
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 class CAHItemsListPacket
 {

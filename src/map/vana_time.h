@@ -37,7 +37,7 @@
 
 #include "../common/cbasetypes.h"
 
-enum DAYTYPE
+enum DAYTYPE : uint8
 {
     FIRESDAY     = 0,
     EARTHSDAY    = 1,
@@ -49,7 +49,7 @@ enum DAYTYPE
     DARKSDAY     = 7
 };
 
-enum TIMETYPE
+enum TIMETYPE : uint8
 {
     TIME_NONE     = 0,
     TIME_MIDNIGHT = 1,

@@ -229,6 +229,15 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
     auto typeKey = (PEntity->objtype == TYPE_NPC) ? "npcs" : "mobs";
     auto cacheEntry = lua[sol::create_if_nil]["xi"]["zones"][(const char*)m_pLuaZone->GetName()][typeKey][lookupName];
 
+    // Bind any functions that are passed in
+    for (auto& [entryKey, entryValue] : table)
+    {
+        if (entryValue.get_type() == sol::type::function)
+        {
+            cacheEntry[entryKey] = entryValue.as<sol::function>();
+        }
+    }
+
     if (auto* PNpc = dynamic_cast<CNpcEntity*>(PEntity))
     {
         PNpc->namevis       = table.get_or<uint8>("namevis", 0);
@@ -239,29 +248,20 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
         // TODO: Does this even work?
         PNpc->widescan      = table.get_or<uint8>("widescan", 1);
 
-        auto onTrade = table["onTrade"].get_or<sol::function>(sol::lua_nil);
-        if (onTrade.valid())
-        {
-            cacheEntry["onTrade"] = onTrade;
-        }
-
+        // Ensure that the npc is triggerable if onTrigger is passed in
         auto onTrigger = table["onTrigger"].get_or<sol::function>(sol::lua_nil);
         if (onTrigger.valid())
         {
             PNpc->m_triggerable = true;
-            cacheEntry["onTrigger"] = onTrigger;
         }
 
         m_pLuaZone->InsertNPC(PNpc);
     }
     else if (auto* PMob = dynamic_cast<CMobEntity*>(PEntity))
     {
+        // Ensure mobs get a function for onMobDeath
         auto onMobDeath = table["onMobDeath"].get_or<sol::function>(sol::lua_nil);
-        if (onMobDeath.valid())
-        {
-            cacheEntry["onMobDeath"] = onMobDeath;
-        }
-        else
+        if (!onMobDeath.valid())
         {
             cacheEntry["onMobDeath"] = [](){}; // Empty func
         }

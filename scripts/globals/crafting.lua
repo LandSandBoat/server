@@ -185,8 +185,8 @@ end
 -- 1: test item
 -- 2: skill point
 -- 3: ??
--- 4: 0 pas dans la guilde 1 dans la guilde
--- 7: 0 pas deja dans une guilde, 11: nombreuse guilde
+-- 4: 0 Not in the guild 1 In the guild
+-- 7: 0 Not in a guild already, 11: Multiple guilds
 
 -----------------------------------
 -- getCraftSkillCap
