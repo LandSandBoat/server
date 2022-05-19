@@ -137,7 +137,7 @@ m:addOverride("xi.globals.spells.trust.rainemard.onSpellCast", function(caster, 
     trust:addSimpleGambit(ai.t.MELEE, ai.c.NOT_STATUS, xi.effect.HASTE, ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.HASTE)
     trust:addSimpleGambit(ai.t.CASTER, ai.c.NOT_STATUS, xi.effect.REFRESH, ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.REFRESH)
 	trust:addSimpleGambit(ai.t.TANK, ai.c.NOT_STATUS, xi.effect.REFRESH, ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.REFRESH)
-	trust:addSimpleGambit(ai.t.MELEE, ai.c.NOT_STATUS, xi.effect.REFRESH, ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.REFRESH)
+
     trust:addSimpleGambit(ai.t.RANGED, ai.c.NOT_STATUS, xi.effect.FLURRY, ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.FLURRY)
     trust:addSimpleGambit(ai.t.TOP_ENMITY, ai.c.NOT_STATUS, xi.effect.PHALANX, ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.PHALANX)
 
@@ -245,7 +245,7 @@ m:addOverride("xi.globals.spells.trust.maximilian.onSpellCast", function(caster,
 	trust:addMod(xi.mod.MDEF, power)
 	trust:addMod(xi.mod.ATT, power)
 	trust:addMod(xi.mod.ACC, power*4)
-	trust:addMod(xi.mod.TREASURE_HUNTER, 2)
+	trust:addMod(xi.mod.TREASURE_HUNTER, 1)
 	trust:addMod(xi.mod.DOUBLE_ATTACK, 15)
 end)
 
@@ -490,7 +490,7 @@ m:addOverride("xi.globals.spells.trust.nanaa_mihgo.onSpellCast", function(caster
 	trust:addMod(xi.mod.ATT, power)
 	trust:addMod(xi.mod.ACC, power*3)
 	trust:addMod(xi.mod.STORETP, 10)
-	trust:addMod(xi.mod.TREASURE_HUNTER, 2)	
+	trust:addMod(xi.mod.TREASURE_HUNTER, 1)	
 end)
 
 m:addOverride("xi.globals.spells.trust.qultada.onSpellCast", function(caster, target, spell)
@@ -556,7 +556,7 @@ m:addOverride(string.format("xi.globals.spells.trust.%s.onSpellCast", trustToRep
 	trust:addMod(xi.mod.ATT, power)
 	trust:addMod(xi.mod.ACC, power*4)
 	trust:addMod(xi.mod.DOUBLE_ATTACK, 25)	
-    trust:addMod(xi.mod.CONVHPTOMP, 50)	
+    trust:addMod(xi.mod.MP, 150)	
 end)
 
 m:addOverride(string.format("xi.globals.spells.trust.%s.onMobSpawn", trustToReplaceName), function(mob)
