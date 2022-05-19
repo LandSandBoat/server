@@ -2,6 +2,6 @@
 cd ..
 :onCrash
 echo [%date% %time%] Restarting Search Server...
-topaz_Search_64.exe
+xi_search.exe
 echo ...
 GOTO onCrash
