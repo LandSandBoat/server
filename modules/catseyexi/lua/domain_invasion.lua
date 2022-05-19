@@ -29,9 +29,9 @@ m:addOverride("xi.zones.Escha_RuAun.Zone.onZoneTick", function(zone)
 
     -- Spawn mob if its the correct mob and if it isnt spawned already
     if
-        GetServerVariable("[Domain]NM") == 0 and              -- Correct NM
-        GetServerVariable("[Domain]NMSpawned") == 0 and       -- NM isn't spawned
-        (os.time() - GetServerVariable("[Domain]NMToD")) > 30 -- NM Cooldown
+        GetServerVariable("[Domain]NM") == 0 and               -- Correct NM
+        GetServerVariable("[Domain]NMSpawned") == 0 and        -- NM isn't spawned
+        (os.time() - GetServerVariable("[Domain]NMToD")) > 300 -- NM Cooldown
     then
         local mob = zone:insertDynamicEntity({
             objtype = xi.objType.MOB,
@@ -133,9 +133,9 @@ m:addOverride("xi.zones.Reisenjima_Henge.Zone.onZoneTick", function(zone)
 
     -- Spawn mob if its the correct mob and if it isnt spawned already.
     if
-        GetServerVariable("[Domain]NM") == 1 and              -- Correct NM
-        GetServerVariable("[Domain]NMSpawned") == 0 and       -- NM isn't spawned
-        (os.time() - GetServerVariable("[Domain]NMToD")) > 30 -- NM Cooldown
+        GetServerVariable("[Domain]NM") == 1 and               -- Correct NM
+        GetServerVariable("[Domain]NMSpawned") == 0 and        -- NM isn't spawned
+        (os.time() - GetServerVariable("[Domain]NMToD")) > 300 -- NM Cooldown
     then
         local mob = zone:insertDynamicEntity({
             objtype = xi.objType.MOB,
@@ -248,9 +248,9 @@ m:addOverride("xi.zones.Provenance.Zone.onZoneTick", function(zone)
     -- NM 3 (Regular)
     --------------------
     if
-        GetServerVariable("[Domain]NM") == 2 and              -- Correct NM
-        GetServerVariable("[Domain]NMSpawned") == 0 and       -- NM isn't spawned
-        (os.time() - GetServerVariable("[Domain]NMToD")) > 30 -- NM Cooldown
+        GetServerVariable("[Domain]NM") == 2 and               -- Correct NM
+        GetServerVariable("[Domain]NMSpawned") == 0 and        -- NM isn't spawned
+        (os.time() - GetServerVariable("[Domain]NMToD")) > 300 -- NM Cooldown
     then
         local mob = zone:insertDynamicEntity({
             objtype     = xi.objType.MOB,
@@ -346,9 +346,9 @@ m:addOverride("xi.zones.Provenance.Zone.onZoneTick", function(zone)
 
     -- Spawn mob if its the correct mob and if it isnt spawned already.
     if
-        GetServerVariable("[Domain]NM") == 3 and              -- Correct NM
-        GetServerVariable("[Domain]NMSpawned") == 0 and       -- NM isn't spawned
-        (os.time() - GetServerVariable("[Domain]NMToD")) > 30 -- NM Cooldown
+        GetServerVariable("[Domain]NM") == 3 and               -- Correct NM
+        GetServerVariable("[Domain]NMSpawned") == 0 and        -- NM isn't spawned
+        (os.time() - GetServerVariable("[Domain]NMToD")) > 300 -- NM Cooldown
     then
         local mob = zone:insertDynamicEntity({
             objtype = xi.objType.MOB,

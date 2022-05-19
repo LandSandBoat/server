@@ -46,227 +46,160 @@ local atoritutori = zone:insertDynamicEntity({
 
     onTrade = function(player, npc, trade)
         local pointsCost = 300000
-    ----------------------------------------------------------------------
-        local hasAsceticsFury    = xi.ws_unlock.ASCETICS_FURY
-        local hasStringingPummel = xi.ws_unlock.STRINGING_PUMMEL
-        local hasMandalicStab    = xi.ws_unlock.MANDALIC_STAB
-        local hasPyrrhicKleos    = xi.ws_unlock.PYRRHIC_KLEOS
-        local hasMordantRime     = xi.ws_unlock.MORDANT_RIME
-        local hasKingsJustice    = xi.ws_unlock.KINGS_JUSTICE
-        local hasDeathBlossom    = xi.ws_unlock.DEATH_BLOSSOM
-        local hasPrimalRend      = xi.ws_unlock.PRIMAL_REND
-        local hasTrueFlight      = xi.ws_unlock.TRUEFLIGHT
-        local hasBladeKamu       = xi.ws_unlock.BLADE_KAMU
-        local hasLeadenSalute    = xi.ws_unlock.LEADEN_SALUTE
-        local hasAtonement       = xi.ws_unlock.ATONEMENT
-        local hasExpiacion       = xi.ws_unlock.EXPIACION
-        local hasInsurgency      = xi.ws_unlock.INSURGENCY
-        local hasTachiRana       = xi.ws_unlock.TACHI_RANA
-        local hasVidohunir       = xi.ws_unlock.VIDOHUNIR
-        local hasDrakesbane      = xi.ws_unlock.DRAKESBANE
-        local hasMysticBoon      = xi.ws_unlock.MYSTIC_BOON
-        local hasGarlandOfBliss  = xi.ws_unlock.GARLAND_OF_BLISS
-        local hasOmniscience     = xi.ws_unlock.OMNISCIENCE
-    ----------------------------------------------------------------------
+		
     	if player:getCharVar("PaidForMeritWs") == 1 then
             -- Shijin Spiral
-    	    if npcUtil.tradeHasExactly(trade, {{wsRequirements[1][2], wsRequirements[1][3]}, {wsRequirements[1][4], wsRequirements[1][5]}})
-                and player:hasLearnedWeaponskill(hasAsceticsFury or hasStringingPummel) then
+    	    if npcUtil.tradeHasExactly(trade, {{wsRequirements[1][2], wsRequirements[1][3]}, {wsRequirements[1][4], wsRequirements[1][5]}}) then
                 player:tradeComplete()
-    		    player:PrintToPlayer("Congratulations! You have unlocked \"Shijin Spiral\"!")
-                player:setCharVar("hasShijinSpiralUnlock", 1)
-                player:setCharVar("PaidForMeritWs", 0)
+    		    player:PrintToPlayer("Phase 1 Complete. You can now purchase \"Shijin Spiral\" from Nolan in Norg.")
+                player:setCharVar("PaidForMeritWs", 2)
                 return
             elseif npcUtil.tradeHasExactly(trade, {{ 'gil', 30 }}) then
                 player:tradeComplete()
-                player:PrintToPlayer("Atori-Tutori: I require 10 lancewood logs and 10 infinity cores with one mythic weaponskill unlocked!", 0xD)
-                player:PrintToPlayer("Unlock one of: AsceticsFury or StringingPummel", 28)
+                player:PrintToPlayer("Atori-Tutori: I require 10 lancewood logs and 10 infinity cores to complete this phase.", 0xD)
                 return
     
             -- Exenterator
-            elseif npcUtil.tradeHasExactly(trade, {{wsRequirements[2][2], wsRequirements[2][3]}, {wsRequirements[2][4], wsRequirements[2][5]}})
-                and player:hasLearnedWeaponskill(hasMandalicStab or hasPyrrhicKleos or hasMordantRime or hasKingsJustice or hasDeathBlossom or hasPrimalRend or hasTrueFlight or hasBladeKamu or hasLeadenSalute) then
+            elseif npcUtil.tradeHasExactly(trade, {{wsRequirements[2][2], wsRequirements[2][3]}, {wsRequirements[2][4], wsRequirements[2][5]}}) then
                 player:tradeComplete()
-    		    player:PrintToPlayer("Congratulations! You have unlocked \"Exenterator\"!")
-                player:setCharVar("hasExenteratorUnlock", 1)
-                player:setCharVar("PaidForMeritWs", 0)
+    		    player:PrintToPlayer("Phase 1 Complete. You can now purchase \"Exenterator\" from Nolan in Norg.")
+                player:setCharVar("PaidForMeritWs", 3)
                 return
             elseif npcUtil.tradeHasExactly(trade, {{ 'gil', 31 }}) then
                 player:tradeComplete()
-                player:PrintToPlayer("Atori-Tutori: I require 10 slime juices and 10 infinity cores with one mythic weaponskill unlocked!", 0xD)
-                player:PrintToPlayer("Unlock one of: MandalicStab, PyrrhicKleos, MordantRime, KingsJustice, DeathBlossom, PrimalRend, TrueFlight, BladeKamu or LeadenSalute", 28)
+                player:PrintToPlayer("Atori-Tutori: I require 10 slime juices and 10 infinity cores to complete this phase.", 0xD)
                 return
     
             -- Requiescat
-    	    elseif npcUtil.tradeHasExactly(trade, {{wsRequirements[3][2], wsRequirements[3][3]}, {wsRequirements[3][4], wsRequirements[3][5]}})
-                and player:hasLearnedWeaponskill(hasAtonement or hasExpiacion or hasDeathBlossom or hasKingsJustice or hasInsurgency or hasTachiRana or hasLeadenSalute) then
+    	    elseif npcUtil.tradeHasExactly(trade, {{wsRequirements[3][2], wsRequirements[3][3]}, {wsRequirements[3][4], wsRequirements[3][5]}}) then
                 player:tradeComplete()
-    		    player:PrintToPlayer("Congratulations! You have unlocked \"Requiescat\"!")
-                player:setCharVar("hasRequiescatUnlock", 1)
-                player:setCharVar("PaidForMeritWs", 0)
+    		    player:PrintToPlayer("Phase 1 Complete. You can now purchase \"Requiescat\" from Nolan in Norg.")
+                player:setCharVar("PaidForMeritWs", 4)
                 return
             elseif npcUtil.tradeHasExactly(trade, {{ 'gil', 32 }}) then
                 player:tradeComplete()
-                player:PrintToPlayer("Atori-Tutori: I require 10 colossal skulls and 10 infinity cores with one mythic weaponskill unlocked!", 0xD)
-                player:PrintToPlayer("Unlock one of: Atonement, Expiacion, Insurgency, KingsJustice, DeathBlossom, TachiRana or LeadenSalute", 28)
+                player:PrintToPlayer("Atori-Tutori: I require 10 colossal skulls and 10 infinity cores to complete this phase.", 0xD)
                 return
     
             -- Resolution
-    	    elseif npcUtil.tradeHasExactly(trade, {{wsRequirements[4][2], wsRequirements[4][3]}, {wsRequirements[4][4], wsRequirements[4][5]}})
-                and player:hasLearnedWeaponskill(hasAtonement or hasInsurgency or hasKingsJustice) then
+    	    elseif npcUtil.tradeHasExactly(trade, {{wsRequirements[4][2], wsRequirements[4][3]}, {wsRequirements[4][4], wsRequirements[4][5]}}) then
                 player:tradeComplete()
-    		    player:PrintToPlayer("Congratulations! You have unlocked \"Resolution\"!")
-                player:setCharVar("hasResolutionUnlock", 1)
-                player:setCharVar("PaidForMeritWs", 0)
+    		    player:PrintToPlayer("Phase 1 Complete. You can now purchase \"Resolution\" from Nolan in Norg.")
+                player:setCharVar("PaidForMeritWs", 5)
                 return
             elseif npcUtil.tradeHasExactly(trade, {{ 'gil', 33 }}) then
                 player:tradeComplete()
-                player:PrintToPlayer("Atori-Tutori: I require 10 goblin greases and 10 infinity cores with one mythic weaponskill unlocked!", 0xD)
-                player:PrintToPlayer("Unlock one of: Atonement, Insurgency or KingsJustice", 28)
+                player:PrintToPlayer("Atori-Tutori: I require 10 goblin greases and 10 infinity cores to complete this phase.", 0xD)
                 return
     
             -- Ruinator
-    	    elseif npcUtil.tradeHasExactly(trade, {{wsRequirements[5][2], wsRequirements[5][3]}, {wsRequirements[5][4], wsRequirements[5][5]}})
-                and player:hasLearnedWeaponskill(hasPrimalRend or hasKingsJustice or hasInsurgency or hasTrueFlight) then
+    	    elseif npcUtil.tradeHasExactly(trade, {{wsRequirements[5][2], wsRequirements[5][3]}, {wsRequirements[5][4], wsRequirements[5][5]}}) then
                 player:tradeComplete()
-    		    player:PrintToPlayer("Congratulations! You have unlocked \"Ruinator\"!")
-                player:setCharVar("hasRuinatorUnlock", 1)
-                player:setCharVar("PaidForMeritWs", 0)
+    		    player:PrintToPlayer("Phase 1 Complete. You can now purchase \"Ruinator\" from Nolan in Norg.")
+                player:setCharVar("PaidForMeritWs", 6)
                 return
             elseif npcUtil.tradeHasExactly(trade, {{ 'gil', 34 }}) then
                 player:tradeComplete()
-                player:PrintToPlayer("Atori-Tutori: I require 10 griffon hides and 10 infinity cores with one mythic weaponskill unlocked!", 0xD)
-                player:PrintToPlayer("Unlock one of: PrimalRend, TrueFlight, Insurgency or KingsJustice", 28)
+                player:PrintToPlayer("Atori-Tutori: I require 10 griffon hides and 10 infinity cores to complete this phase.", 0xD)
                 return
     
             -- Upheaval
-    	    elseif npcUtil.tradeHasExactly(trade, {{wsRequirements[6][2], wsRequirements[6][3]}, {wsRequirements[6][4], wsRequirements[6][5]}})
-                and player:hasLearnedWeaponskill(hasKingsJustice or hasInsurgency) then
+    	    elseif npcUtil.tradeHasExactly(trade, {{wsRequirements[6][2], wsRequirements[6][3]}, {wsRequirements[6][4], wsRequirements[6][5]}}) then
                 player:tradeComplete()
-    		    player:PrintToPlayer("Congratulations! You have unlocked \"Upheaval\"!")
-                player:setCharVar("hasUpheavalUnlock", 1)
-                player:setCharVar("PaidForMeritWs", 0)
+    		    player:PrintToPlayer("Phase 1 Complete. You can now purchase \"Upheaval\" from Nolan in Norg.")
+                player:setCharVar("PaidForMeritWs", 7)
                 return
             elseif npcUtil.tradeHasExactly(trade, {{ 'gil', 35 }}) then
                 player:tradeComplete()
-                player:PrintToPlayer("Atori-Tutori: I require 10 giant frozen heads and 10 infinity cores with one mythic weaponskill unlocked!", 0xD)
-                player:PrintToPlayer("Unlock one of: KingsJustice or Insurgency", 28)
+                player:PrintToPlayer("Atori-Tutori: I require 10 giant frozen heads and 10 infinity cores to complete this phase.", 0xD)
                 return
     
             -- Entropy
-    	    elseif npcUtil.tradeHasExactly(trade, {{wsRequirements[7][2], wsRequirements[7][3]}, {wsRequirements[7][4], wsRequirements[7][5]}})
-                and player:hasLearnedWeaponskill(hasInsurgency or hasKingsJustice or hasPrimalRend) then
+    	    elseif npcUtil.tradeHasExactly(trade, {{wsRequirements[7][2], wsRequirements[7][3]}, {wsRequirements[7][4], wsRequirements[7][5]}}) then
                 player:tradeComplete()
-    		    player:PrintToPlayer("Congratulations! You have unlocked \"Entropy\"!")
-                player:setCharVar("hasEntropyUnlock", 1)
-                player:setCharVar("PaidForMeritWs", 0)
+    		    player:PrintToPlayer("Phase 1 Complete. You can now purchase \"Entropy\" from Nolan in Norg.")
+                player:setCharVar("PaidForMeritWs", 8)
                 return
             elseif npcUtil.tradeHasExactly(trade, {{ 'gil', 36 }}) then
                 player:tradeComplete()
-                player:PrintToPlayer("Atori-Tutori: I require 10 relic irons and 10 infinity cores with one mythic weaponskill unlocked!", 0xD)
-                player:PrintToPlayer("Unlock one of: KingsJustice, Insurgency or PrimalRend", 28)
+                player:PrintToPlayer("Atori-Tutori: I require 10 relic irons and 10 infinity cores to complete this phase.", 0xD)
                 return
     
             -- Stardiver
-    	    elseif npcUtil.tradeHasExactly(trade, {{wsRequirements[8][2], wsRequirements[8][3]}, {wsRequirements[8][4], wsRequirements[8][5]}})
-                and player:hasLearnedWeaponskill(hasDrakesbane or hasTachiRana or hasKingsJustice) then
+    	    elseif npcUtil.tradeHasExactly(trade, {{wsRequirements[8][2], wsRequirements[8][3]}, {wsRequirements[8][4], wsRequirements[8][5]}}) then
                 player:tradeComplete()
-    		    player:PrintToPlayer("Congratulations! You have unlocked \"Stardiver\"!")
-                player:setCharVar("hasStardiverUnlock", 1)
-                player:setCharVar("PaidForMeritWs", 0)
+    		    player:PrintToPlayer("Phase 1 Complete. You can now purchase \"Stardiver\" from Nolan in Norg.")
+                player:setCharVar("PaidForMeritWs", 9)
                 return
             elseif npcUtil.tradeHasExactly(trade, {{ 'gil', 37 }}) then
                 player:tradeComplete()
-                player:PrintToPlayer("Atori-Tutori: I require 10 slime juices and 10 fresh orc livers with one mythic weaponskill unlocked!", 0xD)
-                player:PrintToPlayer("Unlock one of: Drakesbane, TachiRana or KingsJustice", 28)
+                player:PrintToPlayer("Atori-Tutori: I require 10 slime juices and 10 fresh orc livers to complete this phase.", 0xD)
                 return
     
             -- Blade: Shun
-    	    elseif npcUtil.tradeHasExactly(trade, {{wsRequirements[9][2], wsRequirements[9][3]}, {wsRequirements[9][4], wsRequirements[9][5]}})
-                and player:hasLearnedWeaponskill(hasBladeKamu) then
+    	    elseif npcUtil.tradeHasExactly(trade, {{wsRequirements[9][2], wsRequirements[9][3]}, {wsRequirements[9][4], wsRequirements[9][5]}}) then
                 player:tradeComplete()
-    		    player:PrintToPlayer("Congratulations! You have unlocked \"Blade Shun\"!")
-                player:setCharVar("hasBladeShunUnlock", 1)
-                player:setCharVar("PaidForMeritWs", 0)
+    		    player:PrintToPlayer("Phase 1 Complete. You can now purchase \"Blade: Shun\" from Nolan in Norg.")
+                player:setCharVar("PaidForMeritWs", 10)
                 return
             elseif npcUtil.tradeHasExactly(trade, {{ 'gil', 38 }}) then
                 player:tradeComplete()
-                player:PrintToPlayer("Atori-Tutori: I require 10 wootz ores and 10 infinity cores with one mythic weaponskill unlocked!", 0xD)
-                player:PrintToPlayer("Unlock: BladeKamu", 28)
+                player:PrintToPlayer("Atori-Tutori: I require 10 wootz ores and 10 infinity cores to complete this phase.", 0xD)
                 return
     
             -- Tachi: Shoha
-    	    elseif npcUtil.tradeHasExactly(trade, {{wsRequirements[10][2], wsRequirements[10][3]}, {wsRequirements[10][4], wsRequirements[10][5]}})
-                and player:hasLearnedWeaponskill(hasTachiRana) then
+    	    elseif npcUtil.tradeHasExactly(trade, {{wsRequirements[10][2], wsRequirements[10][3]}, {wsRequirements[10][4], wsRequirements[10][5]}}) then
                 player:tradeComplete()
-    		    player:PrintToPlayer("Congratulations! You have unlocked \"Tachi: Shoha\"!")
-                player:setCharVar("hasTachiShohaUnlock", 1)
-                player:setCharVar("PaidForMeritWs", 0)
+    		    player:PrintToPlayer("Phase 1 Complete. You can now purchase \"Tachi: Shoha\" from Nolan in Norg.")
+                player:setCharVar("PaidForMeritWs", 11)
                 return
             elseif npcUtil.tradeHasExactly(trade, {{ 'gil', 39 }}) then
                 player:tradeComplete()
-                player:PrintToPlayer("Atori-Tutori: I require 10 sparkling stones and 10 infinity cores with one mythic weaponskill unlocked!", 0xD)
-                player:PrintToPlayer("Unlock: TachiRana", 28)
+                player:PrintToPlayer("Atori-Tutori: I require 10 sparkling stones and 10 infinity cores to complete this phase.", 0xD)
                 return
     
             -- Realmrazer
-    --	    elseif npcUtil.tradeHasExactly(trade, {{wsRequirements[11][2], wsRequirements[11][3]}, {wsRequirements[11][4], wsRequirements[11][5]}, {wsRequirements[11][6], wsRequirements[1][7]}}) then
-    	    elseif npcUtil.tradeHasExactly(trade, {{wsRequirements[11][2], wsRequirements[11][3]}, {wsRequirements[11][4], wsRequirements[11][5]}})
-                and player:hasLearnedWeaponskill(hasMysticBoon or hasAtonement or hasKingsJustice or hasVidohunir or hasGarlandOfBliss or hasOmniscience) then
+    	    elseif npcUtil.tradeHasExactly(trade, {{wsRequirements[11][2], wsRequirements[11][3]}, {wsRequirements[11][4], wsRequirements[11][5]}}) then
                 player:tradeComplete()
-    		    player:PrintToPlayer("Congratulations! You have unlocked \"Realmrazer\"!")
-                player:setCharVar("hasRealmrazerUnlock", 1)
-                player:setCharVar("PaidForMeritWs", 0)
+    		    player:PrintToPlayer("Phase 1 Complete. You can now purchase \"Realmrazer\" from Nolan in Norg.")
+                player:setCharVar("PaidForMeritWs", 12)
                 return
             elseif npcUtil.tradeHasExactly(trade, {{ 'gil', 40 }}) then
                 player:tradeComplete()
-                player:PrintToPlayer("Atori-Tutori: I require 10 giant frozen heads and 10 colossal skulls with one mythic weaponskill unlocked!", 0xD)
-                player:PrintToPlayer("Unlock one of: MysticBoon, Atonement, Vidohunir, KingsJustice, GarlandOfBliss or Omniscience", 28)
+                player:PrintToPlayer("Atori-Tutori: I require 10 giant frozen heads and 10 colossal skulls to complete this phase.", 0xD)
                 return
     
             -- Shattersoul
-    --	    elseif npcUtil.tradeHasExactly(trade, {{wsRequirements[12][2], wsRequirements[12][3]}, {wsRequirements[12][4], wsRequirements[12][5]}, {wsRequirements[12][6], wsRequirements[12][7]}}) then
-    	    elseif npcUtil.tradeHasExactly(trade, {{wsRequirements[12][2], wsRequirements[12][3]}, {wsRequirements[12][4], wsRequirements[12][5]}})
-                and player:hasLearnedWeaponskill(hasKingsJustice or hasAsceticsFury or hasMysticBoon or hasVidohunir or hasAtonement or hasMordantRime or hasDrakesbane or hasGarlandOfBliss or hasOmniscience) then
+    	    elseif npcUtil.tradeHasExactly(trade, {{wsRequirements[12][2], wsRequirements[12][3]}, {wsRequirements[12][4], wsRequirements[12][5]}}) then
                 player:tradeComplete()
-    		    player:PrintToPlayer("Congratulations! You have unlocked \"Shattersoul\"!")
-                player:setCharVar("hasShattersoulUnlock", 1)
-                player:setCharVar("PaidForMeritWs", 0)
+    		    player:PrintToPlayer("Phase 1 Complete. You can now purchase \"Shattersoul\" from Nolan in Norg.")
+                player:setCharVar("PaidForMeritWs", 13)
                 return
             elseif npcUtil.tradeHasExactly(trade, {{ 'gil', 41 }}) then
                 player:tradeComplete()
-                player:PrintToPlayer("Atori-Tutori: I require 10 griffon hides and 10 infinity cores with one mythic weaponskill unlocked!", 0xD)
-                player:PrintToPlayer("Unlock one of: MysticBoon, Atonement, Vidohunir, KingsJustice, AsceticsFury, MordantRime, Drakesbane, GarlandOfBliss or Omniscience", 28)
+                player:PrintToPlayer("Atori-Tutori: I require 10 griffon hides and 10 infinity cores to complete this phase.", 0xD)
                 return
     
             -- Apex Arrow
-    --	    elseif npcUtil.tradeHasExactly(trade, {{wsRequirements[13][2], wsRequirements[13][3]}, {wsRequirements[13][4], wsRequirements[13][5]}, {wsRequirements[13][6], wsRequirements[13][7]}}) then
-    	    elseif npcUtil.tradeHasExactly(trade, {{wsRequirements[13][2], wsRequirements[13][3]}, {wsRequirements[13][4], wsRequirements[13][5]}})
-                and player:hasLearnedWeaponskill(hasTrueFlight or hasTachiRana) then
+    	    elseif npcUtil.tradeHasExactly(trade, {{wsRequirements[13][2], wsRequirements[13][3]}, {wsRequirements[13][4], wsRequirements[13][5]}}) then
                 player:tradeComplete()
-    		    player:PrintToPlayer("Congratulations! You have unlocked \"Apex Arrow\"!")
-                player:setCharVar("hasApexArrowUnlock", 1)
-                player:setCharVar("PaidForMeritWs", 0)
+    		    player:PrintToPlayer("Phase 1 Complete. You can now purchase \"Apex Arrow\" from Nolan in Norg.")
+                player:setCharVar("PaidForMeritWs", 14)
                 return
             elseif npcUtil.tradeHasExactly(trade, {{ 'gil', 42 }}) then
                 player:tradeComplete()
-                player:PrintToPlayer("Atori-Tutori: I require 10 griffon hides and 10 lancewood logs with one mythic weaponskill unlocked!", 0xD)
-                player:PrintToPlayer("Unlock: TrueFlight or TachiRana", 28)
+                player:PrintToPlayer("Atori-Tutori: I require 10 griffon hides and 10 lancewood logs to complete this phase.", 0xD)
                 return
     
             -- Last Stand
-    --	    elseif npcUtil.tradeHasExactly(trade, {{wsRequirements[14][2], wsRequirements[14][3]}, {wsRequirements[14][4], wsRequirements[14][5]}, {wsRequirements[14][6], wsRequirements[14][7]}}) then
-    	    elseif npcUtil.tradeHasExactly(trade, {{wsRequirements[14][2], wsRequirements[14][3]}, {wsRequirements[14][4], wsRequirements[14][5]}})
-                and player:hasLearnedWeaponskill(hasMandalicStab or hasLeadenSalute or hasTrueFlight) then
+    	    elseif npcUtil.tradeHasExactly(trade, {{wsRequirements[14][2], wsRequirements[14][3]}, {wsRequirements[14][4], wsRequirements[14][5]}}) then
                 player:tradeComplete()
-    		    player:PrintToPlayer("Congratulations! You have unlocked \"Last Stand\"!")
-                player:setCharVar("hasLastStandUnlock", 1)
-                player:setCharVar("PaidForMeritWs", 0)
+    		    player:PrintToPlayer("Phase 1 Complete. You can now purchase \"Last Stand\" from Nolan in Norg.")
+                player:setCharVar("PaidForMeritWs", 15)
                 return
             elseif npcUtil.tradeHasExactly(trade, {{ 'gil', 43 }}) then
                 player:tradeComplete()
-                player:PrintToPlayer("Atori-Tutori: I require 10 goblin greases and 10 relic irons with one mythic weaponskill unlocked!", 0xD)
-                player:PrintToPlayer("Unlock one of: MandalicStab, LeadenSalute or TrueFlight", 28)
+                player:PrintToPlayer("Atori-Tutori: I require 10 goblin greases and 10 relic irons to complete this phase.", 0xD)
                 return
     
                 --FALLBACK H
@@ -314,7 +247,7 @@ local atoritutori = zone:insertDynamicEntity({
                 player:setCharVar("PaidForMeritWs", 1)
                 player:PrintToPlayer("Atori-Tutori: I've deducted your San d'Oria conquest points and progressed you to the next step.\nTalk to me again for next steps.", 0xD)
             elseif (npcUtil.tradeHasExactly(trade, {{ 'gil', 1 }}) and player:getNation() == xi.nation.SANDORIA and (nationCp < pointsCost)) then
-                player:PrintToPlayer("Atori-Tutori: You will need more San D'oria conquest points before you do that.", 0xD)
+                player:PrintToPlayer("Atori-Tutori: You will need more San d'Oria conquest points before you do that.", 0xD)
     
         -- player has chosen to use their imperial standing points
     	elseif (npcUtil.tradeHasExactly(trade, {{ 'gil', 2 }}) and (player:getCurrency("imperial_standing") > pointsCost)) then
@@ -344,10 +277,14 @@ local atoritutori = zone:insertDynamicEntity({
         local alliedNotes = player:getCurrency("allied_notes")
         local pointsRequired = 30000
     
+		if player:getCharVar("PaidForMeritWs") > 1 then
+		    player:PrintToPlayer("Atori-Tutori: You already have a quest in progress. You must complete it before starting a new one.", 0xD)
+			return
+		end	
+
         -- if we've deducted the player's points, move to phase two (trade items)
     	if player:getCharVar("PaidForMeritWs") == 1 then
             player:PrintToPlayer(string.format("Atori-Tutori: Phase two: Please bring the the requisite items for the aeonic weaponskill you'd like to unlock."), 0xD)
-            player:PrintToPlayer("Atori-Tutori: You'll need to have the corresponding mythic weaponskill unlocked first! Check the wiki!", 0xD)
             player:PrintToPlayer("Atori-Tutori: Trade me the fixed amount of gil below, and I'll tell you which upgrade items are necessary...", 0xD)
             player:PrintToPlayer("Shijin Spiral: 30 gil, Exenterator: 31 gil, Requiescat: 32 gil, Resolution: 33 gil, Ruinator: 34 gil, Upheaval: 35 gil", 28)
             player:PrintToPlayer("Entropy: 36 gil, Stardiver: 37 gil, Blade Shun: 38 gil, Tachi: Shoha: 39 gil, Realmrazer: 40 gil, Shattersoul: 41 gil", 28)
@@ -357,7 +294,6 @@ local atoritutori = zone:insertDynamicEntity({
     	    -- standard dialog
             player:PrintToPlayer("Atori-Tutori: Up for a challenge? How about a new weaponskill?", 0xD)
             player:PrintToPlayer("Atori-Tutori: First, you'll need 300,000 conquest points, imperial standing, or allied notes.", 0xD)
-            player:PrintToPlayer("Atori-Tutori: You will also need a Mythic Weapon Skill unlocked but we can talk about that later...", 0xD)
     	end
     
         -- find out which nation player belongs to and use those conquest points
