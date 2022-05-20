@@ -11,9 +11,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getCurrentMission(TOAU) == xi.mission.id.toau.PATH_OF_DARKNESS and player:getCharVar("AhtUrganStatus") > 0 then
-        return
-    end
     npc:openDoor()
 end
 

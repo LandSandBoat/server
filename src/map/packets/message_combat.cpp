@@ -19,7 +19,7 @@
 ===========================================================================
 */
 
-#include "../../common/socket.h"
+#include "common/socket.h"
 
 #include "message_combat.h"
 
@@ -27,8 +27,8 @@
 
 CMessageCombatPacket::CMessageCombatPacket(CBaseEntity* PSender, CBaseEntity* PTarget, int32 param0, int32 param1, uint16 messageID)
 {
-    this->type = 0x2d;
-    this->size = 0x0e;
+    this->setType(0x2D);
+    this->setSize(0x1C);
 
     ref<uint32>(0x04) = PSender->id;
     ref<uint32>(0x08) = PTarget->id;

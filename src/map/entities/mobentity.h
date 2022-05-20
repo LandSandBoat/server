@@ -145,8 +145,8 @@ public:
     void  saveMobModifiers();                      // save current state of modifiers
     void  restoreMobModifiers();                   // restore to saved state
 
-    void CallForHelp(bool call);
-    bool CalledForHelp() const;
+    void SetCallForHelpFlag(bool call);
+    bool GetCallForHelpFlag() const;
     void HideHP(bool hide);
     bool IsHPHidden() const;
     void Untargetable(bool untargetable);
@@ -247,12 +247,18 @@ public:
 
     uint32   m_flags;       // includes the CFH flag and whether the HP bar should be shown or not (e.g. Yilgeban doesnt)
     uint8    m_name_prefix; // The ding bats VS Ding bats
-    string_t packetName;    // Used for battle allies
+
+    uint8 m_unk0; // possibly campaign related (entity x24)
+    uint8 m_unk1; // (entity_update x25)
+    uint8 m_unk2; // (entity_update x26)
+
+    bool m_CallForHelpBlocked;
 
     CEnmityContainer* PEnmityContainer; // система ненависти монстров
 
     CMobSpellContainer* SpellContainer;   // retrieves spells for the mob
-    uint8               m_HasSpellScript; // 1 if they have a spell script to use for working out what to cast.
+
+    bool m_IsClaimable;
 
     static constexpr float sound_range{ 8.f };
     static constexpr float sight_range{ 15.f };

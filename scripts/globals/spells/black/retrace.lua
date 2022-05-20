@@ -9,7 +9,7 @@ require("scripts/globals/msg")
 local spell_object = {}
 
 spell_object.onMagicCastingCheck = function(caster, target, spell)
-    if not (target:getCampaignAllegiance() > 0) then
+    if target:getCampaignAllegiance() == 0 then
         return 48
     else
         return 0
@@ -17,7 +17,7 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    if (target:getCampaignAllegiance() > 0) then
+    if target:getCampaignAllegiance() > 0 then
         target:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.RETRACE, 0, 4)
         spell:setMsg(xi.msg.basic.MAGIC_TELEPORT)
     else

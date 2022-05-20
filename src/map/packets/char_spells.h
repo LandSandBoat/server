@@ -22,15 +22,9 @@
 #ifndef _CCHARSPELLSPACKET_H
 #define _CCHARSPELLSPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
-
-/************************************************************************
- *																		*
- *  																		*
- *																		*
- ************************************************************************/
 
 class CCharEntity;
 

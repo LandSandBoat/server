@@ -12,21 +12,21 @@ zones[xi.zone.DYNAMIS_BUBURIMU] =
 {
     text =
     {
-        ITEM_CANNOT_BE_OBTAINED = 6383, -- You cannot obtain the <item>. Come back after sorting your inventory.
-        ITEM_OBTAINED           = 6389, -- Obtained: <item>.
-        GIL_OBTAINED            = 6390, -- Obtained <number> gil.
-        KEYITEM_OBTAINED        = 6392, -- Obtained key item: <keyitem>.
-        CARRIED_OVER_POINTS     = 7000, -- You have carried over <number> login point[/s].
-        LOGIN_CAMPAIGN_UNDERWAY = 7001, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
-        LOGIN_NUMBER            = 7002, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
-        CONQUEST_BASE           = 7156, -- Tallying conquest results...
-        DYNAMIS_TIME_BEGIN      = 7321, -- The sands of the <item> have begun to fall. You have <number> minutes (Earth time) remaining in Dynamis.
-        DYNAMIS_TIME_EXTEND     = 7322, -- our stay in Dynamis has been extended by <number> minute[/s].
-        DYNAMIS_TIME_UPDATE_1   = 7323, -- ou will be expelled from Dynamis in <number> [second/minute] (Earth time).
-        DYNAMIS_TIME_UPDATE_2   = 7324, -- ou will be expelled from Dynamis in <number> [seconds/minutes] (Earth time).
-        DYNAMIS_TIME_EXPIRED    = 7326, -- The sands of the hourglass have emptied...
-        DYNAMIS_SUB_UNLOCKED    = 7331, -- Memories of skills long forgotten come flooding back to you...
-        OMINOUS_PRESENCE        = 7338, -- You feel an ominous presence, as if something might happen if you possessed <item>.
+        ITEM_CANNOT_BE_OBTAINED = 6384, -- You cannot obtain the <item>. Come back after sorting your inventory.
+        ITEM_OBTAINED           = 6390, -- Obtained: <item>.
+        GIL_OBTAINED            = 6391, -- Obtained <number> gil.
+        KEYITEM_OBTAINED        = 6393, -- Obtained key item: <keyitem>.
+        CARRIED_OVER_POINTS     = 7001, -- You have carried over <number> login point[/s].
+        LOGIN_CAMPAIGN_UNDERWAY = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
+        LOGIN_NUMBER            = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
+        CONQUEST_BASE           = 7157, -- Tallying conquest results...
+        DYNAMIS_TIME_BEGIN      = 7322, -- The sands of the <item> have begun to fall. You have <number> minutes (Earth time) remaining in Dynamis.
+        DYNAMIS_TIME_EXTEND     = 7323, -- our stay in Dynamis has been extended by <number> minute[/s].
+        DYNAMIS_TIME_UPDATE_1   = 7324, -- ou will be expelled from Dynamis in <number> [second/minute] (Earth time).
+        DYNAMIS_TIME_UPDATE_2   = 7325, -- ou will be expelled from Dynamis in <number> [seconds/minutes] (Earth time).
+        DYNAMIS_TIME_EXPIRED    = 7327, -- The sands of the hourglass have emptied...
+        DYNAMIS_SUB_UNLOCKED    = 7332, -- Memories of skills long forgotten come flooding back to you...
+        OMINOUS_PRESENCE        = 7339, -- You feel an ominous presence, as if something might happen if you possessed <item>.
     },
     mob =
     {
@@ -41,89 +41,89 @@ zones[xi.zone.DYNAMIS_BUBURIMU] =
         REFILL_STATUE =
         {
             {
-                {mob = 16941068, eye = dynamis.eye.RED  }, -- Goblin_Replica
-                {mob = 16941069, eye = dynamis.eye.BLUE },
-                {mob = 16941070, eye = dynamis.eye.GREEN},
+                {mob = 16941068, eye = xi.dynamis.eye.RED  }, -- Goblin_Replica
+                {mob = 16941069, eye = xi.dynamis.eye.BLUE },
+                {mob = 16941070, eye = xi.dynamis.eye.GREEN},
             },
             {
-                {mob = 16941083, eye = dynamis.eye.RED  }, -- Goblin_Replica
-                {mob = 16941084, eye = dynamis.eye.BLUE },
-                {mob = 16941085, eye = dynamis.eye.GREEN},
+                {mob = 16941083, eye = xi.dynamis.eye.RED  }, -- Goblin_Replica
+                {mob = 16941084, eye = xi.dynamis.eye.BLUE },
+                {mob = 16941085, eye = xi.dynamis.eye.GREEN},
             },
             {
-                {mob = 16941098, eye = dynamis.eye.RED  }, -- Goblin_Replica
-                {mob = 16941099, eye = dynamis.eye.BLUE },
-                {mob = 16941100, eye = dynamis.eye.GREEN},
+                {mob = 16941098, eye = xi.dynamis.eye.RED  }, -- Goblin_Replica
+                {mob = 16941099, eye = xi.dynamis.eye.BLUE },
+                {mob = 16941100, eye = xi.dynamis.eye.GREEN},
             },
             {
-                {mob = 16941118, eye = dynamis.eye.RED  }, -- Serjeant_Tombstone
-                {mob = 16941119, eye = dynamis.eye.BLUE },
-                {mob = 16941120, eye = dynamis.eye.GREEN},
+                {mob = 16941118, eye = xi.dynamis.eye.RED  }, -- Serjeant_Tombstone
+                {mob = 16941119, eye = xi.dynamis.eye.BLUE },
+                {mob = 16941120, eye = xi.dynamis.eye.GREEN},
             },
             {
-                {mob = 16941135, eye = dynamis.eye.RED  }, -- Serjeant_Tombstone
-                {mob = 16941136, eye = dynamis.eye.BLUE },
-                {mob = 16941137, eye = dynamis.eye.GREEN},
+                {mob = 16941135, eye = xi.dynamis.eye.RED  }, -- Serjeant_Tombstone
+                {mob = 16941136, eye = xi.dynamis.eye.BLUE },
+                {mob = 16941137, eye = xi.dynamis.eye.GREEN},
             },
             {
-                {mob = 16941153, eye = dynamis.eye.RED  }, -- Adamantking_Effigy
-                {mob = 16941154, eye = dynamis.eye.BLUE },
-                {mob = 16941155, eye = dynamis.eye.GREEN},
+                {mob = 16941153, eye = xi.dynamis.eye.RED  }, -- Adamantking_Effigy
+                {mob = 16941154, eye = xi.dynamis.eye.BLUE },
+                {mob = 16941155, eye = xi.dynamis.eye.GREEN},
             },
             {
-                {mob = 16941171, eye = dynamis.eye.RED  }, -- Adamantking_Effigy
-                {mob = 16941172, eye = dynamis.eye.BLUE },
-                {mob = 16941173, eye = dynamis.eye.GREEN},
+                {mob = 16941171, eye = xi.dynamis.eye.RED  }, -- Adamantking_Effigy
+                {mob = 16941172, eye = xi.dynamis.eye.BLUE },
+                {mob = 16941173, eye = xi.dynamis.eye.GREEN},
             },
             {
-                {mob = 16941190, eye = dynamis.eye.RED  }, -- Manifest_Icon
-                {mob = 16941191, eye = dynamis.eye.BLUE },
-                {mob = 16941192, eye = dynamis.eye.GREEN},
+                {mob = 16941190, eye = xi.dynamis.eye.RED  }, -- Manifest_Icon
+                {mob = 16941191, eye = xi.dynamis.eye.BLUE },
+                {mob = 16941192, eye = xi.dynamis.eye.GREEN},
             },
             {
-                {mob = 16941208, eye = dynamis.eye.RED  }, -- Manifest_Icon
-                {mob = 16941209, eye = dynamis.eye.BLUE },
-                {mob = 16941210, eye = dynamis.eye.GREEN},
+                {mob = 16941208, eye = xi.dynamis.eye.RED  }, -- Manifest_Icon
+                {mob = 16941209, eye = xi.dynamis.eye.BLUE },
+                {mob = 16941210, eye = xi.dynamis.eye.GREEN},
             },
             {
-                {mob = 16941381, eye = dynamis.eye.RED  }, -- Goblin_Replica
-                {mob = 16941382, eye = dynamis.eye.BLUE },
-                {mob = 16941383, eye = dynamis.eye.GREEN},
+                {mob = 16941381, eye = xi.dynamis.eye.RED  }, -- Goblin_Replica
+                {mob = 16941382, eye = xi.dynamis.eye.BLUE },
+                {mob = 16941383, eye = xi.dynamis.eye.GREEN},
             },
             {
-                {mob = 16941395, eye = dynamis.eye.RED  }, -- Goblin_Replica
-                {mob = 16941396, eye = dynamis.eye.BLUE },
-                {mob = 16941397, eye = dynamis.eye.GREEN},
+                {mob = 16941395, eye = xi.dynamis.eye.RED  }, -- Goblin_Replica
+                {mob = 16941396, eye = xi.dynamis.eye.BLUE },
+                {mob = 16941397, eye = xi.dynamis.eye.GREEN},
             },
             {
-                {mob = 16941411, eye = dynamis.eye.RED  }, -- Serjeant_Tombstone
-                {mob = 16941412, eye = dynamis.eye.BLUE },
-                {mob = 16941413, eye = dynamis.eye.GREEN},
+                {mob = 16941411, eye = xi.dynamis.eye.RED  }, -- Serjeant_Tombstone
+                {mob = 16941412, eye = xi.dynamis.eye.BLUE },
+                {mob = 16941413, eye = xi.dynamis.eye.GREEN},
             },
             {
-                {mob = 16941425, eye = dynamis.eye.RED  }, -- Serjeant_Tombstone
-                {mob = 16941426, eye = dynamis.eye.BLUE },
-                {mob = 16941427, eye = dynamis.eye.GREEN},
+                {mob = 16941425, eye = xi.dynamis.eye.RED  }, -- Serjeant_Tombstone
+                {mob = 16941426, eye = xi.dynamis.eye.BLUE },
+                {mob = 16941427, eye = xi.dynamis.eye.GREEN},
             },
             {
-                {mob = 16941440, eye = dynamis.eye.RED  }, -- Adamantking_Effigy
-                {mob = 16941441, eye = dynamis.eye.BLUE },
-                {mob = 16941442, eye = dynamis.eye.GREEN},
+                {mob = 16941440, eye = xi.dynamis.eye.RED  }, -- Adamantking_Effigy
+                {mob = 16941441, eye = xi.dynamis.eye.BLUE },
+                {mob = 16941442, eye = xi.dynamis.eye.GREEN},
             },
             {
-                {mob = 16941455, eye = dynamis.eye.RED  }, -- Adamantking_Effigy
-                {mob = 16941456, eye = dynamis.eye.BLUE },
-                {mob = 16941457, eye = dynamis.eye.GREEN},
+                {mob = 16941455, eye = xi.dynamis.eye.RED  }, -- Adamantking_Effigy
+                {mob = 16941456, eye = xi.dynamis.eye.BLUE },
+                {mob = 16941457, eye = xi.dynamis.eye.GREEN},
             },
             {
-                {mob = 16941471, eye = dynamis.eye.RED  }, -- Manifest_Icon
-                {mob = 16941472, eye = dynamis.eye.BLUE },
-                {mob = 16941473, eye = dynamis.eye.GREEN},
+                {mob = 16941471, eye = xi.dynamis.eye.RED  }, -- Manifest_Icon
+                {mob = 16941472, eye = xi.dynamis.eye.BLUE },
+                {mob = 16941473, eye = xi.dynamis.eye.GREEN},
             },
             {
-                {mob = 16941485, eye = dynamis.eye.RED  }, -- Manifest_Icon
-                {mob = 16941486, eye = dynamis.eye.BLUE },
-                {mob = 16941487, eye = dynamis.eye.GREEN},
+                {mob = 16941485, eye = xi.dynamis.eye.RED  }, -- Manifest_Icon
+                {mob = 16941486, eye = xi.dynamis.eye.BLUE },
+                {mob = 16941487, eye = xi.dynamis.eye.GREEN},
             },
         },
         GOSSPIX_BLABBERLIPS_PH      = {[16941089] = 16941097}, -- Vanguard_Enchanter

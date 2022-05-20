@@ -106,6 +106,24 @@ mission.sections =
 
         [xi.zone.CHATEAU_DORAGUILLE] =
         {
+            ['Arsha'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:getMissionStatus(mission.areaId) == 2 then
+                        return mission:progressEvent(85)
+                    end
+                end,
+            },
+
+            ['Chupaile'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:getMissionStatus(mission.areaId) == 2 then
+                        return mission:progressEvent(86)
+                    end
+                end,
+            },
+
             ['Halver'] =
             {
                 onTrigger = function(player, npc)
@@ -128,6 +146,7 @@ mission.sections =
             {
                 [508] = function(player, csid, option, npc)
                     player:setMissionStatus(mission.areaId, 2)
+                    -- 7092 Here: You have been granted an audience with the king
                 end,
 
                 [537] = function(player, csid, option, npc)
@@ -157,7 +176,7 @@ mission.sections =
             ['_6r5'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getMissionStatus(mission.areaId) == 6 then
+                    if player:getMissionStatus(mission.areaId) == 5 then
                         return mission:progressEvent(39)
                     end
                 end,
@@ -172,10 +191,6 @@ mission.sections =
                 [42] = function(player, csid, option, npc)
                     player:setMissionStatus(mission.areaId, 4)
                     player:delKeyItem(xi.ki.LETTER_TO_THE_AMBASSADOR)
-                end,
-
-                [140] = function(player, csid, option, npc)
-                    player:setMissionStatus(mission.areaId, 6)
                 end,
             },
         },

@@ -19,14 +19,14 @@
 ===========================================================================
 */
 
-#include "../../common/socket.h"
+#include "common/socket.h"
 
 #include "shop_appraise.h"
 
 CShopAppraisePacket::CShopAppraisePacket(uint8 slotID, uint32 sellPrice)
 {
-    this->type = 0x3D;
-    this->size = 0x08;
+    this->setType(0x3D);
+    this->setSize(0x10);
 
     ref<uint32>(0x04) = sellPrice;
     ref<uint8>(0x08)  = slotID;

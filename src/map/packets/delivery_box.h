@@ -22,7 +22,7 @@
 #ifndef _CDELIVERYBOXPACKET_H
 #define _CDELIVERYBOXPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 
@@ -30,12 +30,6 @@
 #define AH_JEUNO    "AH-Jeuno"
 #define AH_WINDURST "AH-Windurst"
 #define AH_BASTOK   "AH-Bastok"
-
-/************************************************************************
- *																		*
- *  																		*
- *																		*
- ************************************************************************/
 
 class CDeliveryBoxPacket : public CBasicPacket
 {

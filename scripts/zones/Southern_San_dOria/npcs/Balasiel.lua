@@ -90,7 +90,7 @@ entity.onEventFinish = function(player, csid, option)
             player:addTitle(xi.title.KNIGHT_IN_TRAINING)
             player:addItem(16565)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 16565) -- Spatha
-            player:addFame(SANDORIA, 30)
+            player:addFame(xi.quest.fame_area.SANDORIA, 30)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_SQUIRE_S_TEST)
         else
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 16565) -- Spatha
@@ -103,7 +103,7 @@ entity.onEventFinish = function(player, csid, option)
         player:delKeyItem(xi.ki.STALACTITE_DEW)
         player:addKeyItem(xi.ki.SQUIRE_CERTIFICATE)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SQUIRE_CERTIFICATE)
-        player:addFame(SANDORIA, 30)
+        player:addFame(xi.quest.fame_area.SANDORIA, 30)
         player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_SQUIRE_S_TEST_II)
     elseif (csid == 627) then
         if (option == 0) then
@@ -129,7 +129,7 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 12306) -- Kite Shield
             player:unlockJob(xi.job.PLD)
             player:messageSpecial(ID.text.UNLOCK_PALADIN)
-            player:addFame(SANDORIA, 30)
+            player:addFame(xi.quest.fame_area.SANDORIA, 30)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_KNIGHT_S_TEST)
         else
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 12306) -- Kite Shield

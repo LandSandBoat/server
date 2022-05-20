@@ -22,15 +22,9 @@
 #ifndef _CBAZAARCONFIRMATIONPACKET_H
 #define _CBAZAARCONFIRMATIONPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
-
-/************************************************************************
- *																		*
- *  																		*
- *																		*
- ************************************************************************/
 
 class CCharEntity;
 class CItem;

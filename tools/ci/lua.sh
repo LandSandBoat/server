@@ -25,17 +25,16 @@ global_objects=(
     ai
     os
 
-    _G
     Module
     Override
     super
+    applyOverride
 
     common
     zones
     quests
     utils
     npcUtil
-    item_utils
 
     mixins
     g_mixins
@@ -64,101 +63,18 @@ global_objects=(
     KeyItemAction
     LambdaAction
     Message
+    NoAction
     Sequence
     Container
     Event
-    onMobDeathEx
-
-    checkForGearSet
 
     removeSleepEffects
-
-    SANDORIA
-    BASTOK
-    WINDURST
-    ZILART
-    TOAU
-    WOTG
-    COP
-    ASSAULT
-    CAMPAIGN
-    ACP
-    AMK
-    ASA
-    SOA
-    ROV
 
     QUEST_AVAILABLE
     QUEST_ACCEPTED
     QUEST_COMPLETED
 
-    GetMissionLogInfo
-    GetQuestLogInfo
-
-    SANDORIA
-    BASTOK
-    WINDURST
-    JEUNO
-    OTHER_AREAS
-    OUTLANDS
-    AHT_URHGAN
-    CRYSTAL_WAR
-    ABYSSEA
-    ADOULIN
-    COALITION
-
-    SANDORIA
-    BASTOK
-    WINDURST
-    JEUNO
-    SELBINA
-    MHAURA
-    RABAO
-    KAZHAM
-    NORG
-    OTHER_AREAS_LOG
-    TAVNAZIA
-    OUTLANDS
-    ZILART
-    COP
-    TOAU
-    AHT_URHGAN
-    ASSAULT
-    WOTG
-    CRYSTAL_WAR
-    CAMPAIGN
-    ACP
-    AMK
-    ASA
-    ABYSSEA
-    ABYSSEA_KONSCHTAT
-    ABYSSEA_TAHRONGI
-    ABYSSEA_LATHEINE
-    ABYSSEA_MISAREAUX
-    ABYSSEA_VUNKERL
-    ABYSSEA_ATTOHWA
-    ABYSSEA_ALTEPA
-    ABYSSEA_GRAUBERG
-    ABYSSEA_ULEGUERAND
-    SOA
-    ADOULIN
-    COALITION
-    ROV
-    QUEST_LOGS
-    MISSION_LOGS
-
-    TradeBCNM
-    EventTriggerBCNM
-    EventUpdateBCNM
-    EventFinishBCNM
-
     onBattlefieldHandlerInitialise
-
-    porterMoogleTrade
-    porterEventUpdate
-    porterEventFinish
-
-    dynamis
 
     doAutoPhysicalWeaponskill
     doAutoRangedWeaponskill
@@ -190,11 +106,6 @@ global_objects=(
     cmdprops
     error
     onTrigger
-
-    CheckMaps
-    CheckMapsUpdate
-
-    getDynamisMapList
 
     SetExplorerMoogles
 
@@ -266,12 +177,6 @@ global_objects=(
     MOBSKILL_MAGICAL
     MOBSKILL_PHYSICAL
 
-    getMedalRank
-    getBastokNotesItem
-    getSandOriaNotesItem
-    getWindurstNotesItem
-    getSigilTimeStamp
-
     TPMOD_NONE
     TPMOD_CHANCE
     TPMOD_CRITICAL
@@ -310,8 +215,6 @@ global_objects=(
     PERIQIA_ASSAULT_POINT
     ILRUSI_ASSAULT_POINT
     NYZUL_ISLE_ASSAULT_POINT
-
-    doRoyalPalaceArmorCheck
 )
 
 ignores=(

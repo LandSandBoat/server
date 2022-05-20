@@ -19,22 +19,16 @@
 ===========================================================================
 */
 
-#include "../../common/socket.h"
+#include "common/socket.h"
 
 #include "../entities/charentity.h"
 
 #include "trade_action.h"
 
-/************************************************************************
- *																		*
- *																		*
- *																		*
- ************************************************************************/
-
 CTradeActionPacket::CTradeActionPacket(CCharEntity* PChar, uint32 action)
 {
-    this->type = 0x22;
-    this->size = 0x08;
+    this->setType(0x22);
+    this->setSize(0x10);
 
     ref<uint32>(0x04) = PChar->id;
     ref<uint32>(0x08) = action;

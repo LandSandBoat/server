@@ -22,15 +22,9 @@
 #ifndef _CEQUIPPACKET_H
 #define _CEQUIPPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
-
-/************************************************************************
- *																		*
- *  																		*
- *																		*
- ************************************************************************/
 
 class CEquipPacket : public CBasicPacket
 {

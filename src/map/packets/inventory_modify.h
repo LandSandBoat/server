@@ -22,15 +22,9 @@
 #ifndef _CINVENTORYMODIFYPACKET_H
 #define _CINVENTORYMODIFYPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
-
-/************************************************************************
- *																		*
- *  																		*
- *																		*
- ************************************************************************/
 
 class CInventoryModifyPacket : public CBasicPacket
 {

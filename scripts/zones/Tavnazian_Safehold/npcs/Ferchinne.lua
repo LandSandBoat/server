@@ -21,7 +21,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getCurrentMission(COP) == xi.mission.id.cop.THE_SAVAGE or player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_SAVAGE) then
+    if player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.THE_SAVAGE or player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_SAVAGE) then
         local flyHigh = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.FLY_HIGH)
 
         if flyHigh == QUEST_AVAILABLE then
@@ -31,8 +31,6 @@ entity.onTrigger = function(player, npc)
         elseif flyHigh == QUEST_COMPLETED then
             player:startEvent(244)
         end
-    else
-        player:startEvent(240)
     end
 end
 
@@ -42,7 +40,7 @@ end
 entity.onEventFinish = function(player, csid, option)
     if csid == 241 then
         player:addQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.FLY_HIGH)
-    elseif csid == 243 and npcUtil.completeQuest(player, OTHER_AREAS_LOG, xi.quest.id.otherAreas.FLY_HIGH, {item = xi.items.MISTMELT, fame_area = TAVNAZIA}) then -- Mistmelt
+    elseif csid == 243 and npcUtil.completeQuest(player, xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.FLY_HIGH, { item = xi.items.MISTMELT }) then -- Mistmelt
         player:confirmTrade()
     elseif csid == 245 and npcUtil.giveItem(player, xi.items.MISTMELT) then -- Mistmelt
         player:confirmTrade()

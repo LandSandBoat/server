@@ -22,15 +22,13 @@
 #ifndef _CENTITYANIMATIONPACKET_H
 #define _CENTITYANIMATIONPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 
 /************************************************************************
- *																		*
- *  	Animates an entity in some fashion.  The parameter is a 4 byte      *
- *   ASCII word that the client will parse (and change to a proper anim) *
- *																		*
+ *   Animates an entity in some fashion.  The parameter is a 4 byte
+ *   ASCII word that the client will parse (and change to a proper anim)
  ************************************************************************/
 
 class CBaseEntity;
@@ -39,7 +37,7 @@ class CEntityAnimationPacket : public CBasicPacket
 {
 public:
     static const char* Fade_Out;
-    CEntityAnimationPacket(CBaseEntity* PEntity, const char type[4]);
+    CEntityAnimationPacket(CBaseEntity* PEntity, CBaseEntity* PTarget, const char type[4]);
 };
 
 #endif

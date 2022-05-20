@@ -19,7 +19,7 @@
 ===========================================================================
 */
 
-#include "../../common/socket.h"
+#include "common/socket.h"
 
 #include <cstring>
 
@@ -32,14 +32,14 @@
 
 CConquestPacket::CConquestPacket(CCharEntity* PChar)
 {
-    this->type = 0x5E;
-    this->size = 0x5A;
+    this->setType(0x5E);
+    this->setSize(0xB4);
 
     const char* Query = "SELECT region_id, region_control, region_control_prev, \
                          sandoria_influence, bastok_influence, windurst_influence, \
                          beastmen_influence FROM conquest_system;";
 
-    int32 ret = Sql_Query(SqlHandle, Query);
+    int32 ret = sql->Query(Query);
 
     uint8 sandoria_regions = 0;
     uint8 bastok_regions   = 0;
@@ -48,13 +48,13 @@ CConquestPacket::CConquestPacket(CCharEntity* PChar)
     uint8 bastok_prev      = 0;
     uint8 windurst_prev    = 0;
 
-    if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+    if (ret != SQL_ERROR && sql->NumRows() != 0)
     {
-        while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        while (sql->NextRow() == SQL_SUCCESS)
         {
-            int regionid            = Sql_GetIntData(SqlHandle, 0);
-            int region_control      = Sql_GetIntData(SqlHandle, 1);
-            int region_control_prev = Sql_GetIntData(SqlHandle, 2);
+            int regionid            = sql->GetIntData(0);
+            int region_control      = sql->GetIntData(1);
+            int region_control_prev = sql->GetIntData(2);
 
             if (region_control == 0)
             {
@@ -82,10 +82,10 @@ CConquestPacket::CConquestPacket(CCharEntity* PChar)
                 windurst_prev++;
             }
 
-            int32 san_inf                   = Sql_GetIntData(SqlHandle, 3);
-            int32 bas_inf                   = Sql_GetIntData(SqlHandle, 4);
-            int32 win_inf                   = Sql_GetIntData(SqlHandle, 5);
-            int32 bst_inf                   = Sql_GetIntData(SqlHandle, 6);
+            int32 san_inf                   = sql->GetIntData(3);
+            int32 bas_inf                   = sql->GetIntData(4);
+            int32 win_inf                   = sql->GetIntData(5);
+            int32 bst_inf                   = sql->GetIntData(6);
             ref<uint8>(0x1A + regionid * 4) = conquest::GetInfluenceRanking(san_inf, bas_inf, win_inf, bst_inf);
             ref<uint8>(0x1B + regionid * 4) = conquest::GetInfluenceRanking(san_inf, bas_inf, win_inf);
             ref<uint8>(0x1C + regionid * 4) = conquest::GetInfluenceGraphics(san_inf, bas_inf, win_inf, bst_inf);
@@ -120,23 +120,23 @@ CConquestPacket::CConquestPacket(CCharEntity* PChar)
     //};
     // memcpy(data+(0xA0), &packet, 16);
 
-    ref<uint8>(0xA0) = 16; // Situation: mamool ja niveau -> (1) 16 (2) 32 (3) 48 (4) 64 (5) 80 (6) 96 (7) 112 (8) 128
-    ref<uint8>(0xA1) = 17; // Situation: mercenaire trolls niveau -> 1~12 la suite avec un autre
-    ref<uint8>(0xA2) = 0; // Situation: mamool ja status du siege -> (0) entrainement > (1) en marche > (2) attaque > (3) retraite | (4) defense (5) preparation
-    ref<uint8>(0xA3) = 4; // Situation: undead status du siege ? (3) defense (4) entrainement (5) defense
+    ref<uint8>(0xA0) = 16; // Situation: mamool ja level -> (1) 16 (2) 32 (3) 48 (4) 64 (5) 80 (6) 96 (7) 112 (8) 128
+    ref<uint8>(0xA1) = 17; // Situation: troll mercenaries level -> 1~12 next with another
+    ref<uint8>(0xA2) = 0;  // Situation: mamool ja siege status -> (0) training > (1) advancing > (2) attacking > (3) retreat | (4) defense (5) preparing
+    ref<uint8>(0xA3) = 4;  // Situation: undead siege status? (3) defense (4) training(5) defense
 
-    ref<uint8>(0xA4) = 0; // mamool ja: (13) preparation (26) attaque (32) entrainement
-    ref<uint8>(0xA5) = 0; // mamool ja: forces ennemies (1=32)
-    ref<uint8>(0xA6) = 0; // mamool ja: miroir archaique (1=2)
+    ref<uint8>(0xA4) = 0; // mamool ja: (13) preparing (26) attacking (32) training
+    ref<uint8>(0xA5) = 0; // mamool ja: enemies forces (1=32)
+    ref<uint8>(0xA6) = 0; // mamool ja: archaic mirror (1=2)
     ref<uint8>(0xA7) = 0;
 
-    ref<uint8>(0xA8) = 0; // trolls: forces ennemies (66=8)
-    ref<uint8>(0xA9) = 0; // trolls: (70) attaque
-    ref<uint8>(0xAA) = 0; // trolls: miroir archaique (4=8)
+    ref<uint8>(0xA8) = 0; // trolls: enemies forces (66=8)
+    ref<uint8>(0xA9) = 0; // trolls: (70) attacking
+    ref<uint8>(0xAA) = 0; // trolls: archaic mirror (4=8)
     ref<uint8>(0xAB) = 0;
-    ref<uint8>(0xAC) = 0; // undead: forces ennemies (101=12)
-    ref<uint8>(0xAD) = 0; // undead: (61) preparation
-    ref<uint8>(0xAE) = 0; // undead: miroir archaique (4=8)
+    ref<uint8>(0xAC) = 0; // undead: enemies forces (101=12)
+    ref<uint8>(0xAD) = 0; // undead: (61) preparing
+    ref<uint8>(0xAE) = 0; // undead: archaic mirror (4=8)
     ref<uint8>(0xAF) = 0;
 
     ref<uint32>(0xB0) = charutils::GetPoints(PChar, "imperial_standing");

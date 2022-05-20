@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -223,13 +223,6 @@ bool CMobController::CanDetectTarget(CBattleEntity* PTarget, bool forceSight)
         return false;
     }
 
-    float verticalDistance = abs(PMob->loc.p.y - PTarget->loc.p.y);
-
-    if (verticalDistance > 8)
-    {
-        return false;
-    }
-
     auto detects         = PMob->m_Detects;
     auto currentDistance = distance(PTarget->loc.p, PMob->loc.p) + PTarget->getMod(Mod::STEALTH);
 
@@ -425,45 +418,39 @@ bool CMobController::TryCastSpell()
 
     m_LastMagicTime = m_Tick - std::chrono::milliseconds(xirand::GetRandomNumber(PMob->getBigMobMod(MOBMOD_MAGIC_COOL) / 2));
 
-    if (PMob->m_HasSpellScript)
+    // Find random spell from list
+    std::optional<SpellID> chosenSpellId;
+    if (m_firstSpell)
     {
-        // skip logic and follow script
-        auto chosenSpellId = luautils::OnMonsterMagicPrepare(PMob, PTarget);
-        if (chosenSpellId)
-        {
-            CastSpell(chosenSpellId.value());
-            return true;
-        }
+        // mobs first spell, should be aggro spell
+        chosenSpellId = PMob->SpellContainer->GetAggroSpell();
+        m_firstSpell  = false;
     }
     else
     {
-        // find random spell
-        std::optional<SpellID> chosenSpellId;
-        if (m_firstSpell)
-        {
-            // mobs first spell, should be aggro spell
-            chosenSpellId = PMob->SpellContainer->GetAggroSpell();
-            m_firstSpell  = false;
-        }
-        else
-        {
-            chosenSpellId = PMob->SpellContainer->GetSpell();
-        }
-
-        if (chosenSpellId)
-        {
-            //#TODO: select target based on spell type
-            CastSpell(chosenSpellId.value());
-            return true;
-        }
+        chosenSpellId = PMob->SpellContainer->GetSpell();
     }
+
+    // Try to get an override spell from the script (if available)
+    auto possibleOverriddenSpell = luautils::OnMobMagicPrepare(PMob, PTarget, chosenSpellId);
+    if (possibleOverriddenSpell.has_value())
+    {
+        chosenSpellId = possibleOverriddenSpell;
+    }
+
+    if (chosenSpellId.has_value())
+    {
+        CastSpell(chosenSpellId.value());
+        return true;
+    }
+
     return false;
 }
 
 bool CMobController::CanCastSpells()
 {
     TracyZoneScoped;
-    if (!PMob->SpellContainer->HasSpells() && !PMob->m_HasSpellScript)
+    if (!PMob->SpellContainer->HasSpells())
     {
         return false;
     }
@@ -789,10 +776,9 @@ void CMobController::DoRoamTick(time_point tick)
         else if (m_Tick >= m_LastActionTime + std::chrono::milliseconds(PMob->getBigMobMod(MOBMOD_ROAM_COOL)))
         {
             // lets buff up or move around
-
-            if (PMob->CalledForHelp())
+            if (PMob->GetCallForHelpFlag())
             {
-                PMob->CallForHelp(false);
+                PMob->SetCallForHelpFlag(false);
             }
 
             // can't rest with poison or disease
@@ -1021,7 +1007,7 @@ bool CMobController::Disengage()
 
     PMob->m_OwnerID.clean();
     PMob->updatemask |= (UPDATE_STATUS | UPDATE_HP);
-    PMob->CallForHelp(false);
+    PMob->SetCallForHelpFlag(false);
     PMob->animation = ANIMATION_NONE;
 
     return CController::Disengage();

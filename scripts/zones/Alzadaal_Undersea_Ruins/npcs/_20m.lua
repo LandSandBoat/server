@@ -22,18 +22,21 @@ entity.onEventUpdate = function(player, csid, option, target)
     -- Force the Nyzul Isle loop to bail out
     if xi.instance.onEventUpdate(player, csid, option) then
         player:setLocalVar("NYZUL_INSTANCE", 1)
-    else
-        player:updateEvent(405, 3, 3, 3, 3, 3, 3, 3)
+    -- This was causing entry to fail out, and 116 to not be hit.  Handled inside
+    -- Path of Darkness instance script.
+    -- else
+    --     v:updateEvent(405, 3, 3, 3, 3, 3, 3, 3)
     end
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     -- NOTE: Entrance to Nyzul Isle is two daisy-chained events, so we handle this
     --       here as a special case
     if csid == 405 and option == 1073741824 and player:getLocalVar("NYZUL_INSTANCE") == 1 then
         player:startEvent(116, 2) -- This means the event was force terminated. Loop into the entrance animation.
     elseif csid == 116 and option == 1 then
-        -- TODO: Entrance message for registrant: "Commencing transport to Nyzul Isle"
+        -- TODO: Entrance message for registrant: "Commencing transport to Nyzul Isle"  This was not being hit
+        -- by Path of Darkness, and has been moved (in that case) into the mission script.
         xi.instance.onEventFinish(player, csid, option)
     end
 end

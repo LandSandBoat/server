@@ -22,27 +22,21 @@
 #ifndef _CENTITYUPDATEPACKET_H
 #define _CENTITYUPDATEPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 
 enum MODELTYPE
 {
-    MODEL_STANDARD = 0,
-    MODEL_EQUIPED  = 1,
-    MODEL_DOOR     = 2,
-    MODEL_ELEVATOR = 3,
-    MODEL_SHIP     = 4,
-    MODEL_UNK_5    = 5,
-    MODEL_AUTOMATON = 6, // все куклы входят в эту категорию. но помимо них есть еще и некоторые монстры
-    MODEL_CHOCOBO = 7
+    MODEL_STANDARD  = 0,
+    MODEL_EQUIPPED  = 1,
+    MODEL_DOOR      = 2,
+    MODEL_ELEVATOR  = 3,
+    MODEL_SHIP      = 4,
+    MODEL_UNK_5     = 5,
+    MODEL_AUTOMATON = 6,
+    MODEL_CHOCOBO   = 7,
 };
-
-/************************************************************************
- *																		*
- *  																		*
- *																		*
- ************************************************************************/
 
 class CBaseEntity;
 
@@ -50,6 +44,7 @@ class CEntityUpdatePacket : public CBasicPacket
 {
 public:
     CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 updatemask);
+    void updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 updatemask);
 };
 
 #endif

@@ -131,7 +131,7 @@ bool CMagicState::Update(time_point tick)
             msg           = MSGBASIC_IS_PARALYZED;
             m_interrupted = true;
         }
-        else if (battleutils::IsIntimidated(m_PEntity, static_cast<CBattleEntity*>(PTarget)))
+        else if (battleutils::IsIntimidated(m_PEntity, PTarget))
         {
             msg           = MSGBASIC_IS_INTIMIDATED;
             m_interrupted = true;

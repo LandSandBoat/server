@@ -22,7 +22,7 @@
 #ifndef _CPARTYINVITEPACKET_H
 #define _CPARTYINVITEPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 
@@ -31,12 +31,6 @@ enum INVITETYPE
     INVITE_PARTY    = 0,
     INVITE_ALLIANCE = 5
 };
-
-/************************************************************************
- *																		*
- *  																		*
- *																		*
- ************************************************************************/
 
 class CCharEntity;
 

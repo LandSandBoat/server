@@ -22,15 +22,9 @@
 #ifndef _CLOCKONPACKET_H
 #define _CLOCKONPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
-
-/************************************************************************
- *																		*
- *  																		*
- *																		*
- ************************************************************************/
 
 class CCharEntity;
 class CBattleEntity;

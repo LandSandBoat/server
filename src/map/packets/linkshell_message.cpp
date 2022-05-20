@@ -19,7 +19,7 @@
 ===========================================================================
 */
 
-#include "../../common/socket.h"
+#include "common/socket.h"
 
 #include "linkshell_message.h"
 
@@ -27,8 +27,8 @@
 
 CLinkshellMessagePacket::CLinkshellMessagePacket(const int8* poster, const int8* message, const int8* lsname, uint32 posttime, bool ls1)
 {
-    CBasicPacket::id(id);
-    this->size = 0x58;
+    this->setType(id);
+    this->setSize(0xB0);
 
     ref<uint8>(0x04) = 0x03;
     ref<uint8>(0x05) = 0x90;
@@ -40,6 +40,7 @@ CLinkshellMessagePacket::CLinkshellMessagePacket(const int8* poster, const int8*
     {
         ref<uint8>(0x05) |= 0x40; // LS2
     }
+
     if (message)
     {
         memcpy(data + (0x08), message, std::min<size_t>(strlen((const char*)message), 115));
@@ -48,5 +49,6 @@ CLinkshellMessagePacket::CLinkshellMessagePacket(const int8* poster, const int8*
 
         ref<uint32>(0x88) = posttime;
     }
+
     ref<uint32>(0x9C) = 0x02;
 }

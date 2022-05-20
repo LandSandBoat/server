@@ -26,7 +26,7 @@ entity.onTrigger = function(player, npc)
 
     local tigersTeeth = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TIGER_S_TEETH)
 
-    if (player:getFameLevel(SANDORIA) >= 3 and tigersTeeth == QUEST_AVAILABLE) then
+    if (player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 3 and tigersTeeth == QUEST_AVAILABLE) then
         player:startEvent(574)
     elseif (tigersTeeth == QUEST_ACCEPTED) then
         player:startEvent(575)
@@ -51,10 +51,10 @@ entity.onEventFinish = function(player, csid, option)
         player:addGil(xi.settings.GIL_RATE*2100)
         player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE*2100)
         if (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TIGER_S_TEETH) == QUEST_ACCEPTED) then
-            player:addFame(SANDORIA, 30)
+            player:addFame(xi.quest.fame_area.SANDORIA, 30)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TIGER_S_TEETH)
         else
-            player:addFame(SANDORIA, 5)
+            player:addFame(xi.quest.fame_area.SANDORIA, 5)
         end
     end
 

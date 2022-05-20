@@ -22,15 +22,9 @@
 #ifndef _CCHARSTATSPACKET_H
 #define _CCHARSTATSPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
-
-/************************************************************************
- *																		*
- *  																		*
- *																		*
- ************************************************************************/
 
 class CCharEntity;
 

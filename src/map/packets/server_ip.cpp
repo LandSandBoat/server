@@ -19,7 +19,7 @@
 ===========================================================================
 */
 
-#include "../../common/socket.h"
+#include "common/socket.h"
 
 #include "../entities/charentity.h"
 #include "../utils/zoneutils.h"
@@ -27,8 +27,8 @@
 
 CServerIPPacket::CServerIPPacket(CCharEntity* PChar, uint8 type, uint64 ipp)
 {
-    this->type = 0x0B;
-    this->size = 0x0E;
+    this->setType(0x0B);
+    this->setSize(0x1C);
 
     ref<uint8>(0x04)  = type;
     ref<uint32>(0x08) = (uint32)ipp;

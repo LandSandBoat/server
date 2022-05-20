@@ -38,7 +38,7 @@ entity.onTrigger = function(player, npc)
             table.insert(stock, 1840)
         end
 
-        xi.shop.general(player, stock, WINDURST)
+        xi.shop.general(player, stock, xi.quest.fame_area.WINDURST)
     end
 end
 

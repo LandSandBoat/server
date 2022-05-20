@@ -22,18 +22,12 @@
 #ifndef _CEVENTUPDATESTRINGPACKET_H
 #define _CEVENTUPDATESTRINGPACKET_H
 
-#include "../../common/cbasetypes.h"
-#include "../../common/mmo.h"
+#include "common/cbasetypes.h"
+#include "common/mmo.h"
 
 #include <string>
 
 #include "basic.h"
-
-/************************************************************************
- *																		*
- *  																		*
- *																		*
- ************************************************************************/
 
 class CCharEntity;
 

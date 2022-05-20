@@ -46,19 +46,19 @@ g_mixins.dynamis_beastmen = function(dynamisBeastmenMob)
 
     dynamisBeastmenMob:addListener("MAGIC_TAKE", "DYNAMIS_MAGIC_PROC_CHECK", function(target, caster, spell)
         if procjobs[target:getMainJob()] == "ma" and math.random(0, 99) < 8 and target:getLocalVar("dynamis_proc") == 0 then
-            dynamis.procMonster(target, caster)
+            xi.dynamis.procMonster(target, caster)
         end
     end)
 
     dynamisBeastmenMob:addListener("WEAPONSKILL_TAKE", "DYNAMIS_WS_PROC_CHECK", function(target, user, wsid)
         if procjobs[target:getMainJob()] == "ws" and math.random(0, 99) < 25 and target:getLocalVar("dynamis_proc") == 0 then
-            dynamis.procMonster(target, user)
+            xi.dynamis.procMonster(target, user)
         end
     end)
 
     dynamisBeastmenMob:addListener("ABILITY_TAKE", "DYNAMIS_ABILITY_PROC_CHECK", function(mob, user, ability, action)
         if procjobs[mob:getMainJob()] == "ja" and math.random(0, 99) < 20 and mob:getLocalVar("dynamis_proc") == 0 then
-            dynamis.procMonster(mob, user)
+            xi.dynamis.procMonster(mob, user)
         end
     end)
 

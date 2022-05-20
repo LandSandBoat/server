@@ -24,7 +24,7 @@ local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.ATOP_THE_HIGHES
 quest.reward =
 {
     fame = 40,
-    fameArea = JEUNO,
+    fameArea = xi.quest.fame_area.JEUNO,
     title = xi.title.SUMMIT_BREAKER,
 }
 
@@ -34,7 +34,6 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-                player:getMainLvl() >= 51 and
                 player:getLevelCap() == 55 and
                 xi.settings.MAX_LEVEL >= 60
         end,
@@ -44,7 +43,11 @@ quest.sections =
             ['Maat'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:progressEvent(82)
+                    if player:getMainLvl() >= 51 then
+                        return quest:progressEvent(82)
+                    else
+                        return quest:messageText(npc, 10387)
+                    end
                 end,
             },
 

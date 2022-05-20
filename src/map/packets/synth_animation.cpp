@@ -19,15 +19,15 @@
 ===========================================================================
 */
 
-#include "../../common/socket.h"
+#include "common/socket.h"
 
 #include "../entities/charentity.h"
 #include "synth_animation.h"
 
 CSynthAnimationPacket::CSynthAnimationPacket(CCharEntity* PChar, uint16 effect, uint8 param)
 {
-    this->type = 0x30;
-    this->size = 0x08;
+    this->setType(0x30);
+    this->setSize(0x10);
 
     ref<uint32>(0x04) = PChar->id;
     ref<uint16>(0x08) = PChar->targid;

@@ -19,8 +19,8 @@
 ===========================================================================
 */
 
-#include "../../common/socket.h"
-#include "../../common/timer.h"
+#include "common/socket.h"
+#include "common/timer.h"
 
 #include <cstring>
 
@@ -30,9 +30,11 @@
 
 CCharSkillsPacket::CCharSkillsPacket(CCharEntity* PChar)
 {
-    this->type = 0x62;
-    this->size = 0x80;
+    this->setType(0x62);
+    this->setSize(0x100);
+
     memcpy(data + (0x80), &PChar->WorkingSkills, 128);
+
     // remove automaton skills from this menu (they are in another packet)
     ref<uint16>(0xAC) = 0x8000;
     ref<uint16>(0xAE) = 0x8000;

@@ -28,7 +28,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMonsterMagicPrepare = function(mob, target)
+entity.onMobMagicPrepare = function(mob, target, spellId)
     if mob:getHPP() <= 25 then
         return 244 -- Death
     else
@@ -51,7 +51,7 @@ entity.onMonsterMagicPrepare = function(mob, target)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    dynamis.megaBossOnDeath(mob, player, isKiller)
+    xi.dynamis.megaBossOnDeath(mob, player, isKiller)
 end
 
 return entity

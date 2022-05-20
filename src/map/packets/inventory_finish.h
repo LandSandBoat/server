@@ -22,20 +22,16 @@
 #ifndef _CINVENTORYFINISHPACKET_H
 #define _CINVENTORYFINISHPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
-
-/************************************************************************
- *																		*
- *  																		*
- *																		*
- ************************************************************************/
+#include "../item_container.h"
 
 class CInventoryFinishPacket : public CBasicPacket
 {
 public:
-    CInventoryFinishPacket();
+    explicit CInventoryFinishPacket();
+    explicit CInventoryFinishPacket(CONTAINER_ID id);
 };
 
 #endif

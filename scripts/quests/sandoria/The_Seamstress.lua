@@ -17,7 +17,7 @@ local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_SEAMS
 quest.reward =
 {
     fame = 30,
-    fameArea = SANDORIA,
+    fameArea = xi.quest.fame_area.SANDORIA,
     -- Repeatable Items handled within the Trigger:
     -- item = xi.items.LEATHER_GLOVES,
     -- title = xi.title.SILENCER_OF_THE_LAMBS,
@@ -102,7 +102,7 @@ quest.sections =
                         if not player:hasCompletedQuest(quest.areaId, quest.questId) then
                             quest:complete(player)
                         else
-                            player:addFame(SANDORIA, 5)
+                            player:addFame(xi.quest.fame_area.SANDORIA, 5)
                         end
                     end
                 end,
@@ -112,7 +112,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED and player:getFameLevel(SANDORIA) < 2
+            return status == QUEST_COMPLETED and player:getFameLevel(xi.quest.fame_area.SANDORIA) < 2
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA] =

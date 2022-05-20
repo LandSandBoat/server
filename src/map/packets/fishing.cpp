@@ -19,7 +19,7 @@
 ===========================================================================
 */
 
-#include "../../common/socket.h"
+#include "common/socket.h"
 
 #include <cstring>
 
@@ -54,8 +54,8 @@
 CFishingPacket::CFishingPacket(uint16 stamina, uint16 regen, uint16 response, uint16 hitDmg, uint16 arrowDelay, uint16 missRegen, uint16 gameTime, uint8 sense,
                                uint32 special)
 {
-    this->type = 0x15; // 0x115
-    this->size = 0x0D;
+    this->setType(0x115);
+    this->setSize(0x1A);
 
     ref<uint16>(0x04) = stamina;    // fish HP, generally in thousands - (100 + x)(floor(fishLvl / 2) + 18)
     ref<uint16>(0x06) = arrowDelay; // how long you have to hit the arrows, generally low 10s, max 15? Increased by 2 by Penguin Ring

@@ -19,7 +19,7 @@
 ===========================================================================
 */
 
-#include "../../common/socket.h"
+#include "common/socket.h"
 
 #include <cstring>
 
@@ -32,8 +32,8 @@
 
 CGuildMenuSellPacket::CGuildMenuSellPacket(CCharEntity* PChar, CItemContainer* PGuild)
 {
-    this->type = 0x85;
-    this->size = 0x7C;
+    this->setType(0x85);
+    this->setSize(0xF8);
 
     XI_DEBUG_BREAK_IF(PChar == nullptr);
     XI_DEBUG_BREAK_IF(PGuild == nullptr);

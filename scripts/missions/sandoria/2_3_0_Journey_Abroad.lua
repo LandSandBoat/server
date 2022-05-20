@@ -118,7 +118,9 @@ mission.sections =
                     if missionStatus == 11 then
                         return mission:progressEvent(507)
                     elseif missionStatus == 0 then
-                        return mission:progressEvent(505)
+                        local needsHalverTrust = (not player:hasSpell(972) and not player:findItem(xi.items.CIPHER_OF_HALVERS_ALTER_EGO)) and 1 or 0
+
+                        return mission:progressEvent(505, { [7] = needsHalverTrust })
                     else
                         return mission:progressEvent(532)
                     end
@@ -130,6 +132,13 @@ mission.sections =
                 [505] = function(player, csid, option, npc)
                     player:setMissionStatus(mission.areaId, 2)
                     npcUtil.giveKeyItem(player, xi.ki.LETTER_TO_THE_CONSULS_SANDORIA)
+
+                    if
+                        not player:hasSpell(972) and
+                        not player:findItem(xi.items.CIPHER_OF_HALVERS_ALTER_EGO)
+                    then
+                        npcUtil.giveItem(player, xi.items.CIPHER_OF_HALVERS_ALTER_EGO)
+                    end
                 end,
 
                 [507] = function(player, csid, option, npc)
@@ -142,6 +151,45 @@ mission.sections =
 
         [xi.zone.METALWORKS] =
         {
+            ['Chantain'] =
+            {
+                onTrigger = function(player, npc)
+                    local missionStatus = player:getMissionStatus(mission.areaId)
+
+                    if missionStatus == 7 then
+                        return mission:progressEvent(216)
+                    elseif missionStatus == 11 then
+                        return mission:progressEvent(218)
+                    end
+                end,
+            },
+
+            ['Lutia'] =
+            {
+                onTrigger = function(player, npc)
+                    local missionStatus = player:getMissionStatus(mission.areaId)
+
+                    if missionStatus == 7 then
+                        return mission:progressEvent(213)
+                    elseif missionStatus == 11 then
+                        return mission:progressEvent(215)
+                    end
+                end,
+            },
+
+            ['Riault'] =
+            {
+                onTrigger = function(player, npc)
+                    local missionStatus = player:getMissionStatus(mission.areaId)
+
+                    if missionStatus == 7 then
+                        return mission:progressEvent(210)
+                    elseif missionStatus == 11 then
+                        return mission:progressEvent(212)
+                    end
+                end,
+            },
+
             ['Savae_E_Paleade'] =
             {
                 onTrigger = function(player, npc)
@@ -153,6 +201,8 @@ mission.sections =
                     -- Part II - Windurst > Bastok
                     elseif missionStatus == 7 then
                         return mission:progressEvent(206)
+                    elseif missionStatus == 11 then
+                        return mission:progressEvent(209)
                     end
                 end,
             },
@@ -176,6 +226,42 @@ mission.sections =
 
         [xi.zone.WINDURST_WOODS] =
         {
+            ['Catalia'] =
+            {
+                onTrigger = function(player, npc)
+                    if
+                        player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_TO_WINDURST) and
+                        player:getMissionStatus(mission.areaId) == 7
+                    then
+                        return mission:progressEvent(459)
+                    end
+                end,
+            },
+
+            ['Erpolant'] =
+            {
+                onTrigger = function(player, npc)
+                    if
+                        player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_TO_WINDURST) and
+                        player:getMissionStatus(mission.areaId) == 7
+                    then
+                        return mission:progressEvent(460)
+                    end
+                end,
+            },
+
+            ['Forine'] =
+            {
+                onTrigger = function(player, npc)
+                    if
+                        player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_TO_WINDURST) and
+                        player:getMissionStatus(mission.areaId) == 7
+                    then
+                        return mission:progressEvent(461)
+                    end
+                end,
+            },
+
             ['Mourices'] =
             {
                 onTrigger = function(player, npc)

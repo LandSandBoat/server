@@ -61,12 +61,16 @@ void CEnmityContainer::Clear(uint32 EntityID)
     TracyZoneScoped;
     if (EntityID == 0)
     {
-        for (const auto& entry : m_EnmityList)
+        // Iterate over all all entries and remove the relevant entry from their notoriety list
+        for (const auto& listEntry : m_EnmityList)
         {
-            if (const auto& enmity_obj = m_EnmityList.find(entry.first);
-                enmity_obj != m_EnmityList.end() && enmity_obj->second.PEnmityOwner && enmity_obj->second.PEnmityOwner->PNotorietyContainer)
+            if (const auto& maybeEntityObj = m_EnmityList.find(listEntry.first); maybeEntityObj != m_EnmityList.end())
             {
-                enmity_obj->second.PEnmityOwner->PNotorietyContainer->remove(m_EnmityHolder);
+                auto entry = maybeEntityObj->second;
+                if (entry.PEnmityOwner && m_EnmityHolder)
+                {
+                    entry.PEnmityOwner->PNotorietyContainer->remove(m_EnmityHolder);
+                }
             }
         }
         m_EnmityList.clear();
@@ -74,10 +78,13 @@ void CEnmityContainer::Clear(uint32 EntityID)
     }
     else
     {
-        if (const auto& enmity_obj = m_EnmityList.find(EntityID);
-            enmity_obj != m_EnmityList.end() && enmity_obj->second.PEnmityOwner && enmity_obj->second.PEnmityOwner->PNotorietyContainer)
+        if (const auto& maybeEntityObj = m_EnmityList.find(EntityID); maybeEntityObj != m_EnmityList.end())
         {
-            enmity_obj->second.PEnmityOwner->PNotorietyContainer->remove(m_EnmityHolder);
+            auto entry = maybeEntityObj->second;
+            if (entry.PEnmityOwner && m_EnmityHolder)
+            {
+                entry.PEnmityOwner->PNotorietyContainer->remove(m_EnmityHolder);
+            }
         }
         m_EnmityList.erase(EntityID);
     }
@@ -114,6 +121,7 @@ void CEnmityContainer::AddBaseEnmity(CBattleEntity* PChar)
 
 float CEnmityContainer::CalculateEnmityBonus(CBattleEntity* PEntity)
 {
+    TracyZoneScoped;
     int enmityBonus = PEntity->getMod(Mod::ENMITY);
 
     if (auto* PChar = dynamic_cast<CCharEntity*>(PEntity))
@@ -274,6 +282,7 @@ void CEnmityContainer::UpdateEnmityFromCure(CBattleEntity* PEntity, uint8 level,
 
 void CEnmityContainer::LowerEnmityByPercent(CBattleEntity* PEntity, uint8 percent, CBattleEntity* HateReceiver)
 {
+    TracyZoneScoped;
     auto enmity_obj = m_EnmityList.find(PEntity->id);
 
     if (enmity_obj != m_EnmityList.end())

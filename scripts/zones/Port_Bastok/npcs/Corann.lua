@@ -47,7 +47,7 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 81 then
         player:tradeComplete()
         player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_QUADAV_S_CURSE)
-        player:addFame(BASTOK, 120)
+        player:addFame(xi.quest.fame_area.BASTOK, 120)
         player:addItem(12832)
         player:messageSpecial(ID.text.ITEM_OBTAINED, 12832)
     end

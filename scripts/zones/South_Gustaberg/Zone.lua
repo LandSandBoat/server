@@ -5,7 +5,6 @@ local ID = require("scripts/zones/South_Gustaberg/IDs")
 require("scripts/quests/i_can_hear_a_rainbow")
 require("scripts/globals/chocobo_digging")
 require("scripts/globals/conquest")
-require("scripts/globals/missions")
 -----------------------------------
 local zone_object = {}
 
@@ -23,9 +22,7 @@ zone_object.onZoneIn = function(player, prevZone)
         player:setPos(-601.433, 35.204, -520.031, 1)
     end
 
-    if player:getCurrentMission(COP) == xi.mission.id.cop.THE_CALL_OF_THE_WYRMKING and player:getCharVar("VowsDone") == 1 then
-        cs = 906
-    elseif quests.rainbow.onZoneIn(player) then
+    if quests.rainbow.onZoneIn(player) then
         cs = 901
     end
 
@@ -46,13 +43,6 @@ zone_object.onEventUpdate = function(player, csid, option)
 end
 
 zone_object.onEventFinish = function(player, csid, option)
-    if csid == 906 then
-        if player:getCurrentMission(COP) == xi.mission.id.cop.A_TRANSIENT_DREAM then
-            player:completeMission(xi.mission.log_id.COP, xi.mission.id.cop.A_TRANSIENT_DREAM)
-            player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_CALL_OF_THE_WYRMKING)
-        end
-        player:setCharVar("VowsDone", 0)
-    end
 end
 
 return zone_object

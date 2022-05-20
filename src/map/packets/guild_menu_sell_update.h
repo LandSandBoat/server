@@ -22,15 +22,9 @@
 #ifndef _CGUILDMENUSELLUPDATEPACKET_H
 #define _CGUILDMENUSELLUPDATEPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
-
-/************************************************************************
- *																		*
- *  																		*
- *																		*
- ************************************************************************/
 
 class CCharEntity;
 class CItemContainer;

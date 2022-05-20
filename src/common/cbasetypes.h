@@ -7,6 +7,8 @@
 #include <cstddef>
 #include <cstdint>
 
+#include "logging.h"
+
 // debug mode
 #if defined(_DEBUG) && !defined(DEBUG)
 #define DEBUG
@@ -15,17 +17,27 @@
 // define a break macro for debugging.
 #if defined(DEBUG)
 #if defined(_MSC_VER)
-#define XI_DEBUG_BREAK_IF(_CONDITION_)                                                                                                                        \
-    if (_CONDITION_)                                                                                                                                           \
-    {                                                                                                                                                          \
-        __debugbreak();                                                                                                                                        \
+#define XI_DEBUG_BREAK_IF(_CONDITION_)                      \
+    if (_CONDITION_)                                        \
+    {                                                       \
+        ShowError("HIT DEBUG CONDITION: %s", #_CONDITION_); \
+        __debugbreak();                                     \
     }
 #else
 #include "assert.h"
-#define XI_DEBUG_BREAK_IF(_CONDITION_) assert(!(_CONDITION_));
+#define XI_DEBUG_BREAK_IF(_CONDITION_) \
+    if (_CONDITION_)                                        \
+    {                                                       \
+        ShowError("HIT DEBUG CONDITION: %s", #_CONDITION_); \
+        assert(!(_CONDITION_));                             \
+    }
 #endif
 #else
-#define XI_DEBUG_BREAK_IF(_CONDITION_)
+#define XI_DEBUG_BREAK_IF(_CONDITION_) \
+    if (_CONDITION_)                                        \
+    {                                                       \
+        ShowError("HIT DEBUG CONDITION: %s", #_CONDITION_); \
+    }
 #endif
 
 // typedef/using
@@ -51,6 +63,23 @@ using namespace std::literals::chrono_literals;
 using server_clock = std::chrono::system_clock;
 using time_point   = server_clock::time_point;
 using duration     = server_clock::duration;
+
+#include <queue>
+
+template <class T>
+using MinHeap = std::priority_queue<T, std::vector<T>, std::greater<T>>;
+
+template <typename T>
+struct PtrGreater
+{
+    bool operator()(const T left, const T right)
+    {
+        return *left > *right;
+    }
+};
+
+template <class T>
+using MinHeapPtr = std::priority_queue<T, std::vector<T>, PtrGreater<T>>;
 
 #include "tracy.h"
 

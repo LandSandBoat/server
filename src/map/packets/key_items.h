@@ -22,7 +22,7 @@
 #ifndef _CKEYITEMSPACKET_H
 #define _CKEYITEMSPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 
@@ -40,12 +40,6 @@ enum KEYS_TABLE
 };
 
 #define MAX_KEYS_TABLE 7
-
-/************************************************************************
- *																		*
- *  																		*
- *																		*
- ************************************************************************/
 
 class CCharEntity;
 

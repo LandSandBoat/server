@@ -319,7 +319,7 @@ INSERT INTO `item_mods` VALUES (10327,30,4); -- MACC +4
 INSERT INTO `item_mods` VALUES (10327,111,11); -- Divine +11
 INSERT INTO `item_mods` VALUES (10327,112,11); -- Healing +11
 INSERT INTO `item_mods` VALUES (10327,114,11); -- Enfeebling +11
-INSERT INTO `item_mods` VALUES (10327,384,300);-- Haste +3%
+INSERT INTO `item_mods` VALUES (10327,384,300); -- Haste +3%
 INSERT INTO `item_mods` VALUES (10328,1,49); -- Murzim Cosciales DEF + 49
 INSERT INTO `item_mods` VALUES (10328,2,36); -- HP +36
 INSERT INTO `item_mods` VALUES (10328,5,36); -- MP +36
@@ -2921,8 +2921,9 @@ INSERT INTO `item_mods` VALUES (10972,10,5);
 INSERT INTO `item_mods` VALUES (10973,1,8);
 INSERT INTO `item_mods` VALUES (10973,30,5);
 INSERT INTO `item_mods` VALUES (10973,233,1);
-INSERT INTO `item_mods` VALUES (10974,1,9);
-INSERT INTO `item_mods` VALUES (10974,31,5);
+INSERT INTO `item_mods` VALUES (10974,1,9); -- Mujin Mantle - DEF +9
+INSERT INTO `item_mods` VALUES (10974,31,5); -- Magic Evasion +5
+-- INSERT INTO `item_mods` VALUES (10974,?,-1); -- Todo - Ninjutsu recast delay -1
 INSERT INTO `item_mods` VALUES (10975,1,17); -- ARCHON CAPE, DEF:17 Occasionally annuls severe physical damage taken Dark weather:Accuracy+13 Attack+13
 -- INSERT INTO `item_mods` VALUES (10975,OCCASIONALLY ANNULS SEVERE PHYSICAL DMG TAKEN,1);
 INSERT INTO `item_mods` VALUES (10976,1,7);
@@ -3114,10 +3115,10 @@ INSERT INTO `item_mods` VALUES (11029,27,4);
 INSERT INTO `item_mods` VALUES (11029,22,17); -- DARK_RES
 INSERT INTO `item_mods` VALUES (11030,2,15);
 INSERT INTO `item_mods` VALUES (11030,375,5);
-INSERT INTO `item_mods` VALUES (11031,24,3);
-INSERT INTO `item_mods` VALUES (11031,27,-2);
-INSERT INTO `item_mods` VALUES (11032,29,2);
-INSERT INTO `item_mods` VALUES (11032,289,4);
+INSERT INTO `item_mods` VALUES (11031,24,3); -- Oneiros pearl - Range Attack +3
+INSERT INTO `item_mods` VALUES (11031,27,-2); -- Enmity -2
+INSERT INTO `item_mods` VALUES (11032,29,2); -- Mujin stud - Magic Def +2
+INSERT INTO `item_mods` VALUES (11032,289,4); -- "Subtle Blow" +4
 INSERT INTO `item_mods` VALUES (11033,80,3);
 INSERT INTO `item_mods` VALUES (11033,289,-10);
 INSERT INTO `item_mods` VALUES (11034,25,3);
@@ -3424,7 +3425,7 @@ INSERT INTO `item_mods` VALUES (11109,8,8);
 INSERT INTO `item_mods` VALUES (11109,9,8);
 INSERT INTO `item_mods` VALUES (11109,23,16);
 INSERT INTO `item_mods` VALUES (11109,25,12);
-INSERT INTO `item_mods` VALUES (11109,874,12); -- Increases "Sneak Attack" damage
+INSERT INTO `item_mods` VALUES (11109,830,12); -- Increases "Sneak Attack" damage
 INSERT INTO `item_mods` VALUES (11110,1,35);
 INSERT INTO `item_mods` VALUES (11110,8,11);
 INSERT INTO `item_mods` VALUES (11110,10,11);
@@ -3910,7 +3911,7 @@ INSERT INTO `item_mods` VALUES (11209,8,6);
 INSERT INTO `item_mods` VALUES (11209,9,6);
 INSERT INTO `item_mods` VALUES (11209,23,10);
 INSERT INTO `item_mods` VALUES (11209,25,8);
-INSERT INTO `item_mods` VALUES (11209,874,10); -- Increases "Sneak Attack" damage
+INSERT INTO `item_mods` VALUES (11209,830,10); -- Increases "Sneak Attack" damage
 INSERT INTO `item_mods` VALUES (11210,1,33);
 INSERT INTO `item_mods` VALUES (11210,8,7);
 INSERT INTO `item_mods` VALUES (11210,10,7);
@@ -5953,6 +5954,7 @@ INSERT INTO `item_mods` VALUES (11819,1,27);      -- oneiros_coif DEF:+27
 INSERT INTO `item_mods` VALUES (11819,8,4);       -- STR+4
 INSERT INTO `item_mods` VALUES (11819,24,11);     -- Ranged Attack+11
 INSERT INTO `item_mods` VALUES (11819,27,3);      -- Enmity+3
+-- INSERT INTO `item_mods` VALUES (11819,?,?);      -- Todo Reduces Snapshot effect
 INSERT INTO `item_mods` VALUES (11820,1,24);
 INSERT INTO `item_mods` VALUES (11820,7,30);
 INSERT INTO `item_mods` VALUES (11820,23,14);
@@ -19942,7 +19944,12 @@ INSERT INTO `item_mods` VALUES (16383,27,-5);
 INSERT INTO `item_mods` VALUES (16385,25,3);
 INSERT INTO `item_mods` VALUES (16386,25,3);
 INSERT INTO `item_mods` VALUES (16387,25,3);
-INSERT INTO `item_mods` VALUES (16387,431,1);
+INSERT INTO `item_mods` VALUES (16387,431,2);   -- Poison Cesti (Additional effect: Poison)
+INSERT INTO `item_mods` VALUES (16387,499,10);  -- Additional effect animation (subEffect) xi.subEffect.Poison
+INSERT INTO `item_mods` VALUES (16387,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (16387,951,3);   -- Additional effect Status ID xi.effect.Poison
+INSERT INTO `item_mods` VALUES (16387,952,4);   -- Additional effect Status Potency 4
+INSERT INTO `item_mods` VALUES (16387,953,30);  -- Additional effect Status Duration 30sec
 INSERT INTO `item_mods` VALUES (16388,25,3);
 INSERT INTO `item_mods` VALUES (16389,9,1);
 INSERT INTO `item_mods` VALUES (16389,11,1);
@@ -19959,11 +19966,30 @@ INSERT INTO `item_mods` VALUES (16396,25,2);
 INSERT INTO `item_mods` VALUES (16397,2,15);
 INSERT INTO `item_mods` VALUES (16397,25,3);
 INSERT INTO `item_mods` VALUES (16398,25,3);
-INSERT INTO `item_mods` VALUES (16398,431,1);
-INSERT INTO `item_mods` VALUES (16403,431,1);
-INSERT INTO `item_mods` VALUES (16410,431,1);
+INSERT INTO `item_mods` VALUES (16398,431,1);   -- Burning Cesti (Additional effect: Fire Damage) 
+INSERT INTO `item_mods` VALUES (16398,499,1);   -- Additional effect animation (subEffect)
+INSERT INTO `item_mods` VALUES (16398,500,10);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (16398,501,5);   -- Additional effect Chance 5%
+INSERT INTO `item_mods` VALUES (16398,950,1);   -- Additional effect element Fire (xi.magic.element)
+INSERT INTO `item_mods` VALUES (16403,431,2);   -- Poison Katars (Additional effect: Poison)
+INSERT INTO `item_mods` VALUES (16403,499,10);  -- Additional effect animation (subEffect) xi.subEffect.Poison
+INSERT INTO `item_mods` VALUES (16403,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (16403,951,3);   -- Additional effect Status ID xi.effect.Poison
+INSERT INTO `item_mods` VALUES (16403,952,4);   -- Additional effect Status Potency 4
+INSERT INTO `item_mods` VALUES (16403,953,30);  -- Additional effect Status Duration 30sec
+INSERT INTO `item_mods` VALUES (16410,431,2);   -- Poison Baghnakhs (Additional effect: Poison)
+INSERT INTO `item_mods` VALUES (16410,499,10);  -- Additional effect animation (subEffect) xi.subEffect.Poison
+INSERT INTO `item_mods` VALUES (16410,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (16410,951,3);   -- Additional effect Status ID xi.effect.Poison
+INSERT INTO `item_mods` VALUES (16410,952,4);   -- Additional effect Status Potency 4
+INSERT INTO `item_mods` VALUES (16410,953,30);  -- Additional effect Status Duration 30sec
 INSERT INTO `item_mods` VALUES (16416,15,5);
-INSERT INTO `item_mods` VALUES (16417,431,1);
+INSERT INTO `item_mods` VALUES (16417,431,2);   -- Poison Claws (Additional effect: Poison)
+INSERT INTO `item_mods` VALUES (16417,499,10);  -- Additional effect animation (subEffect) xi.subEffect.Poison
+INSERT INTO `item_mods` VALUES (16417,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (16417,951,3);   -- Additional effect Status ID xi.effect.Poison
+INSERT INTO `item_mods` VALUES (16417,952,4);   -- Additional effect Status Potency 4
+INSERT INTO `item_mods` VALUES (16417,953,30);  -- Additional effect Status Duration 30sec
 INSERT INTO `item_mods` VALUES (16423,10,2);
 INSERT INTO `item_mods` VALUES (16426,1,-10);
 INSERT INTO `item_mods` VALUES (16426,23,10);
@@ -20002,7 +20028,11 @@ INSERT INTO `item_mods` VALUES (16432,953,5);   -- Additional effect Status Dura
 INSERT INTO `item_mods` VALUES (16433,23,3);
 INSERT INTO `item_mods` VALUES (16433,25,2);
 INSERT INTO `item_mods` VALUES (16434,25,2);
-INSERT INTO `item_mods` VALUES (16434,431,1);
+INSERT INTO `item_mods` VALUES (16434,431,1);   -- Sonic Knuckles Additional effect: Wind Damage 
+INSERT INTO `item_mods` VALUES (16434,499,3);   -- Additional effect animation (subEffect)
+INSERT INTO `item_mods` VALUES (16434,500,15);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (16434,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (16434,950,3);   -- Additional effect element Wind (xi.magic.element)
 INSERT INTO `item_mods` VALUES (16437,25,3);
 INSERT INTO `item_mods` VALUES (16438,431,2);   -- Silence Baghnakhs +1 (Additional effect: Silence)
 INSERT INTO `item_mods` VALUES (16438,499,13);  -- Additional effect animation (subEffect) xi.subEffect.SILENCE
@@ -20010,7 +20040,12 @@ INSERT INTO `item_mods` VALUES (16438,501,15);  -- Additional effect Chance 15%
 INSERT INTO `item_mods` VALUES (16438,951,6);   -- Additional effect Status ID xi.effect.SILENCE
 INSERT INTO `item_mods` VALUES (16438,952,1);   -- Additional effect Status Potency 1
 INSERT INTO `item_mods` VALUES (16438,953,30);  -- Additional effect Status Duration 30sec
-INSERT INTO `item_mods` VALUES (16439,431,1);
+INSERT INTO `item_mods` VALUES (16439,431,2);   -- Poison Claws +1 (Additional effect: Poison)
+INSERT INTO `item_mods` VALUES (16439,499,10);  -- Additional effect animation (subEffect) xi.subEffect.Poison
+INSERT INTO `item_mods` VALUES (16439,501,15);  -- Additional effect Chance 15%
+INSERT INTO `item_mods` VALUES (16439,951,3);   -- Additional effect Status ID xi.effect.Poison
+INSERT INTO `item_mods` VALUES (16439,952,4);   -- Additional effect Status Potency 4
+INSERT INTO `item_mods` VALUES (16439,953,30);  -- Additional effect Status Duration 30sec
 INSERT INTO `item_mods` VALUES (16440,25,3);
 INSERT INTO `item_mods` VALUES (16443,25,3);
 INSERT INTO `item_mods` VALUES (16446,25,3);
@@ -20026,7 +20061,12 @@ INSERT INTO `item_mods` VALUES (16454,501,10);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (16454,951,5);   -- Additional effect Status ID xi.effect.BLINDNESS
 INSERT INTO `item_mods` VALUES (16454,952,10);  -- Additional effect Status Potency 10
 INSERT INTO `item_mods` VALUES (16454,953,30);  -- Additional effect Status Duration 30sec
-INSERT INTO `item_mods` VALUES (16458,431,1);
+INSERT INTO `item_mods` VALUES (16458,431,2);   -- Poison Baselard (Additional effect: Poison)
+INSERT INTO `item_mods` VALUES (16458,499,10);  -- Additional effect animation (subEffect) xi.subEffect.Poison
+INSERT INTO `item_mods` VALUES (16458,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (16458,951,3);   -- Additional effect Status ID xi.effect.Poison
+INSERT INTO `item_mods` VALUES (16458,952,4);   -- Additional effect Status Potency 4
+INSERT INTO `item_mods` VALUES (16458,953,30);  -- Additional effect Status Duration 30sec
 INSERT INTO `item_mods` VALUES (16459,431,2);   -- Acid Baselard (Additional effect: Weakens defense)
 INSERT INTO `item_mods` VALUES (16459,499,18);  -- Additional effect animation (subEffect) xi.subEffect.DEFENSE_DOWN
 INSERT INTO `item_mods` VALUES (16459,501,10);  -- Additional effect Chance 10%
@@ -20047,8 +20087,18 @@ INSERT INTO `item_mods` VALUES (16471,501,10);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (16471,951,5);   -- Additional effect Status ID xi.effect.BLINDNESS
 INSERT INTO `item_mods` VALUES (16471,952,10);  -- Additional effect Status Potency 10
 INSERT INTO `item_mods` VALUES (16471,953,30);  -- Additional effect Status Duration 30sec
-INSERT INTO `item_mods` VALUES (16472,431,1);
-INSERT INTO `item_mods` VALUES (16478,431,1);
+INSERT INTO `item_mods` VALUES (16472,431,2);   -- Poison Knife (Additional effect: Poison)
+INSERT INTO `item_mods` VALUES (16472,499,10);  -- Additional effect animation (subEffect) xi.subEffect.Poison
+INSERT INTO `item_mods` VALUES (16472,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (16472,951,3);   -- Additional effect Status ID xi.effect.Poison
+INSERT INTO `item_mods` VALUES (16472,952,4);   -- Additional effect Status Potency 4
+INSERT INTO `item_mods` VALUES (16472,953,30);  -- Additional effect Status Duration 30sec
+INSERT INTO `item_mods` VALUES (16478,431,2);   -- Poison Kukri (Additional effect: Poison)
+INSERT INTO `item_mods` VALUES (16478,499,10);  -- Additional effect animation (subEffect) xi.subEffect.Poison
+INSERT INTO `item_mods` VALUES (16478,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (16478,951,3);   -- Additional effect Status ID xi.effect.Poison
+INSERT INTO `item_mods` VALUES (16478,952,4);   -- Additional effect Status Potency 4
+INSERT INTO `item_mods` VALUES (16478,953,30);  -- Additional effect Status Duration 30sec
 INSERT INTO `item_mods` VALUES (16479,431,2);   -- Acid Kukri (Additional effect: Weakens defense)
 INSERT INTO `item_mods` VALUES (16479,499,18);  -- Additional effect animation (subEffect) xi.subEffect.DEFENSE_DOWN
 INSERT INTO `item_mods` VALUES (16479,501,10);  -- Additional effect Chance 10%
@@ -20069,7 +20119,12 @@ INSERT INTO `item_mods` VALUES (16487,68,3);
 INSERT INTO `item_mods` VALUES (16488,11,7);
 INSERT INTO `item_mods` VALUES (16488,24,10);
 INSERT INTO `item_mods` VALUES (16488,26,-5);
-INSERT INTO `item_mods` VALUES (16489,431,1);
+INSERT INTO `item_mods` VALUES (16489,431,2);   -- Poison Kukri +1 (Additional effect: Poison)
+INSERT INTO `item_mods` VALUES (16489,499,10);  -- Additional effect animation (subEffect) xi.subEffect.Poison
+INSERT INTO `item_mods` VALUES (16489,501,15);  -- Additional effect Chance 15%
+INSERT INTO `item_mods` VALUES (16489,951,3);   -- Additional effect Status ID xi.effect.Poison
+INSERT INTO `item_mods` VALUES (16489,952,4);   -- Additional effect Status Potency 4
+INSERT INTO `item_mods` VALUES (16489,953,30);  -- Additional effect Status Duration 30sec
 INSERT INTO `item_mods` VALUES (16490,431,2);   -- Blind Knife +1 (Additional effect: Blindness)
 INSERT INTO `item_mods` VALUES (16490,499,12);  -- Additional effect animation (subEffect) xi.subEffect.BLIND
 INSERT INTO `item_mods` VALUES (16490,501,10);  -- Additional effect Chance 10%
@@ -20094,8 +20149,17 @@ INSERT INTO `item_mods` VALUES (16495,501,10);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (16495,951,6);   -- Additional effect Status ID xi.effect.SILENCE
 INSERT INTO `item_mods` VALUES (16495,952,1);   -- Additional effect Status Potency 1
 INSERT INTO `item_mods` VALUES (16495,953,30);  -- Additional effect Status Duration 30sec
-INSERT INTO `item_mods` VALUES (16496,431,1);
-INSERT INTO `item_mods` VALUES (16497,431,1);
+INSERT INTO `item_mods` VALUES (16496,431,2);   -- Poison Dagger (Additional effect: Poison)
+INSERT INTO `item_mods` VALUES (16496,499,10);  -- Additional effect animation (subEffect) xi.subEffect.Poison
+INSERT INTO `item_mods` VALUES (16496,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (16496,951,3);   -- Additional effect Status ID xi.effect.Poison
+INSERT INTO `item_mods` VALUES (16496,952,4);   -- Additional effect Status Potency 4
+INSERT INTO `item_mods` VALUES (16496,953,30);  -- Additional effect Status Duration 30sec
+INSERT INTO `item_mods` VALUES (16497,431,2);   -- Sleep Dagger (Additional effect: Sleep)
+INSERT INTO `item_mods` VALUES (16497,499,9);   -- Additional effect animation (subEffect) xi.subEffect.Sleep
+INSERT INTO `item_mods` VALUES (16497,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (16497,951,2);   -- Additional effect Status ID xi.effect.Sleep
+INSERT INTO `item_mods` VALUES (16497,953,25);  -- Additional effect Status Duration 25sec
 INSERT INTO `item_mods` VALUES (16498,8,5);
 INSERT INTO `item_mods` VALUES (16498,24,12);
 INSERT INTO `item_mods` VALUES (16498,27,4);
@@ -20119,7 +20183,12 @@ INSERT INTO `item_mods` VALUES (16503,952,10);  -- Additional effect Status Pote
 INSERT INTO `item_mods` VALUES (16503,953,5);   -- Additional effect Status Duration 5sec
 
 INSERT INTO `item_mods` VALUES (16504,250,2);
-INSERT INTO `item_mods` VALUES (16504,431,1);
+INSERT INTO `item_mods` VALUES (16504,431,11);  -- Oynos Knife (Additional effect: Haste)
+INSERT INTO `item_mods` VALUES (16504,499,23);  -- Additional effect animation (subEffect) xi.subEffect.Haste
+INSERT INTO `item_mods` VALUES (16504,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (16504,951,3);   -- Additional effect Status ID xi.effect.Haste
+INSERT INTO `item_mods` VALUES (16504,952,15);  -- Additional effect Status Potency 15
+INSERT INTO `item_mods` VALUES (16504,953,180); -- Additional effect Status Duration 180sec
 
 -- Stun Kukri
 INSERT INTO `item_mods` VALUES (16506,431,2);   -- Additional effect: "Stun" (Type DEBUFF)
@@ -20135,7 +20204,11 @@ INSERT INTO `item_mods` VALUES (16508,501,15);  -- Additional effect Chance 15%
 INSERT INTO `item_mods` VALUES (16508,951,6);   -- Additional effect Status ID xi.effect.SILENCE
 INSERT INTO `item_mods` VALUES (16508,952,1);   -- Additional effect Status Potency 1
 INSERT INTO `item_mods` VALUES (16508,953,30);  -- Additional effect Status Duration 30sec
-INSERT INTO `item_mods` VALUES (16509,431,1);
+INSERT INTO `item_mods` VALUES (16509,431,6);   -- Aspir Knife Additional effect: Aspir (Type DEBUFF)
+INSERT INTO `item_mods` VALUES (16509,499,22);  -- Additional effect animation (subEffect) xi.subEffect.Aspir
+INSERT INTO `item_mods` VALUES (16509,500,3);   -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (16509,501,10);  -- Additional effect DAMAGE
+INSERT INTO `item_mods` VALUES (16509,950,1);   -- Additional effect element Darkness (xi.magic.element)
 INSERT INTO `item_mods` VALUES (16520,5,18);
 INSERT INTO `item_mods` VALUES (16520,110,7);
 INSERT INTO `item_mods` VALUES (16521,110,5);
@@ -20147,21 +20220,38 @@ INSERT INTO `item_mods` VALUES (16541,11,2);
 INSERT INTO `item_mods` VALUES (16542,8,2);
 INSERT INTO `item_mods` VALUES (16542,10,2);
 INSERT INTO `item_mods` VALUES (16542,11,2);
-INSERT INTO `item_mods` VALUES (16543,431,1);
+INSERT INTO `item_mods` VALUES (16543,431,1);   -- Fire Sword (Additional effect: Fire Damage) 
+INSERT INTO `item_mods` VALUES (16543,499,1);   -- Additional effect animation (subEffect)
+INSERT INTO `item_mods` VALUES (16543,500,10);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (16543,501,5);   -- Additional effect Chance 5%
+INSERT INTO `item_mods` VALUES (16543,950,1);   -- Additional effect element Fire (xi.magic.element)
 INSERT INTO `item_mods` VALUES (16547,2,10);
 INSERT INTO `item_mods` VALUES (16547,9,2);
 INSERT INTO `item_mods` VALUES (16547,10,2);
 INSERT INTO `item_mods` VALUES (16548,20,8); -- WATER_RES
-INSERT INTO `item_mods` VALUES (16549,431,1);
-INSERT INTO `item_mods` VALUES (16550,431,1);
+INSERT INTO `item_mods` VALUES (16549,431,1);   -- Divine Sword (Additional effect: Light Damage) 
+INSERT INTO `item_mods` VALUES (16549,499,7);   -- Additional effect animation (subEffect)
+INSERT INTO `item_mods` VALUES (16549,500,21);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (16549,501,5);   -- Additional effect Chance 5%
+INSERT INTO `item_mods` VALUES (16549,950,7);   -- Additional effect element Light (xi.magic.element)
+INSERT INTO `item_mods` VALUES (16550,431,1);   -- Hallowed Sword (Additional effect: Light Damage) 
+INSERT INTO `item_mods` VALUES (16550,499,7);   -- Additional effect animation (subEffect)
+INSERT INTO `item_mods` VALUES (16550,500,21);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (16550,501,5);   -- Additional effect Chance 5%
+INSERT INTO `item_mods` VALUES (16550,950,7);   -- Additional effect element Light (xi.magic.element)
+INSERT INTO `item_mods` VALUES (16556,431,5);   -- Bloody Blade Additional effect: HP Drain 
+INSERT INTO `item_mods` VALUES (16556,499,21);  -- Additional effect animation (subEffect)
+INSERT INTO `item_mods` VALUES (16556,500,10);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (16556,501,5);   -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (16556,950,8);   -- Additional effect element Darkness (xi.magic.element)
 INSERT INTO `item_mods` VALUES (16557,23,6);
 INSERT INTO `item_mods` VALUES (16557,25,3);
 INSERT INTO `item_mods` VALUES (16562,9,1);
-INSERT INTO `item_mods` VALUES (16564,431,1); -- Flame Blade: AddEffect (Type DAMAGE)
-INSERT INTO `item_mods` VALUES (16564,499,1); -- subEffect fire
-INSERT INTO `item_mods` VALUES (16564,500,10); -- AddEffect damage 10
-INSERT INTO `item_mods` VALUES (16564,501,10); -- AddEffect chance 10%
-INSERT INTO `item_mods` VALUES (16564,950,1); -- AddEffect element fire
+INSERT INTO `item_mods` VALUES (16564,431,1);   -- Flame Blade (Additional effect: Fire Damage) 
+INSERT INTO `item_mods` VALUES (16564,499,1);   -- Additional effect animation (subEffect)
+INSERT INTO `item_mods` VALUES (16564,500,10);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (16564,501,5);   -- Additional effect Chance 5%
+INSERT INTO `item_mods` VALUES (16564,950,1);   -- Additional effect element Fire (xi.magic.element)
 INSERT INTO `item_mods` VALUES (16575,14,7);
 INSERT INTO `item_mods` VALUES (16578,10,2);
 INSERT INTO `item_mods` VALUES (16578,13,2);
@@ -20176,12 +20266,24 @@ INSERT INTO `item_mods` VALUES (16580,11,4);
 INSERT INTO `item_mods` VALUES (16580,12,4);
 INSERT INTO `item_mods` VALUES (16580,13,-8);
 INSERT INTO `item_mods` VALUES (16580,14,-8);
-INSERT INTO `item_mods` VALUES (16581,431,1);
+INSERT INTO `item_mods` VALUES (16581,431,1);   -- HOly Sword (Additional effect: Light Damage) 
+INSERT INTO `item_mods` VALUES (16581,499,7);   -- Additional effect animation (subEffect)
+INSERT INTO `item_mods` VALUES (16581,500,10);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (16581,501,5);   -- Additional effect Chance 5%
+INSERT INTO `item_mods` VALUES (16581,950,7);   -- Additional effect element Light (xi.magic.element)
 INSERT INTO `item_mods` VALUES (16582,2,30);     -- vetala_sword HP+30
 INSERT INTO `item_mods` VALUES (16582,8,3);      -- STR+3
 INSERT INTO `item_mods` VALUES (16587,25,4);
-INSERT INTO `item_mods` VALUES (16588,431,1);
-INSERT INTO `item_mods` VALUES (16594,431,1);
+INSERT INTO `item_mods` VALUES (16588,431,1);   -- Fire Claymore (Additional effect: Fire Damage) 
+INSERT INTO `item_mods` VALUES (16588,499,1);   -- Additional effect animation (subEffect)
+INSERT INTO `item_mods` VALUES (16588,500,10);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (16588,501,5);   -- Additional effect Chance 5%
+INSERT INTO `item_mods` VALUES (16588,950,1);   -- Additional effect element Fire (xi.magic.element)
+INSERT INTO `item_mods` VALUES (16594,431,1);   -- Inferno Sword (Additional effect: Fire Damage) 
+INSERT INTO `item_mods` VALUES (16594,499,1);   -- Additional effect animation (subEffect)
+INSERT INTO `item_mods` VALUES (16594,500,10);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (16594,501,5);   -- Additional effect Chance 5%
+INSERT INTO `item_mods` VALUES (16594,950,1);   -- Additional effect element Fire (xi.magic.element)
 INSERT INTO `item_mods` VALUES (16596,13,2);
 INSERT INTO `item_mods` VALUES (16596,23,5);
 INSERT INTO `item_mods` VALUES (16597,2,10);
@@ -20196,10 +20298,18 @@ INSERT INTO `item_mods` VALUES (16604,967,5);    -- Save the Queen - Cover Durat
 INSERT INTO `item_mods` VALUES (16605,432,5);
 INSERT INTO `item_mods` VALUES (16610,25,2);
 INSERT INTO `item_mods` VALUES (16611,25,2);
-INSERT INTO `item_mods` VALUES (16613,431,1);
+INSERT INTO `item_mods` VALUES (16613,431,1);   -- Spirit Sword (Additional effect: Light Damage) 
+INSERT INTO `item_mods` VALUES (16613,499,7);   -- Additional effect animation (subEffect)
+INSERT INTO `item_mods` VALUES (16613,500,21);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (16613,501,5);   -- Additional effect Chance 5%
+INSERT INTO `item_mods` VALUES (16613,950,7);   -- Additional effect element Light (xi.magic.element)
 INSERT INTO `item_mods` VALUES (16619,25,3);
 INSERT INTO `item_mods` VALUES (16620,20,9); -- WATER_RES
-INSERT INTO `item_mods` VALUES (16621,431,1);
+INSERT INTO `item_mods` VALUES (16621,431,1);   -- Flame Sword (Additional effect: Fire Damage) 
+INSERT INTO `item_mods` VALUES (16621,499,1);   -- Additional effect animation (subEffect)
+INSERT INTO `item_mods` VALUES (16621,500,9);   -- Additional effect damage
+INSERT INTO `item_mods` VALUES (16621,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (16621,950,1);   -- Additional effect element Fire (xi.magic.element)
 INSERT INTO `item_mods` VALUES (16629,9,2);
 INSERT INTO `item_mods` VALUES (16630,11,7);
 INSERT INTO `item_mods` VALUES (16637,1,-6);
@@ -20247,17 +20357,36 @@ INSERT INTO `item_mods` VALUES (16689,25,3);
 INSERT INTO `item_mods` VALUES (16690,25,4);
 INSERT INTO `item_mods` VALUES (16691,25,3);
 INSERT INTO `item_mods` VALUES (16691,15,2); -- FIRE_RES
-INSERT INTO `item_mods` VALUES (16692,431,1);
-INSERT INTO `item_mods` VALUES (16693,431,1);
+INSERT INTO `item_mods` VALUES (16692,431,2);   -- poison baghnakhs +1 (Additional effect: Poison)
+INSERT INTO `item_mods` VALUES (16692,499,10);  -- Additional effect animation (subEffect) xi.subEffect.Poison
+INSERT INTO `item_mods` VALUES (16692,501,15);  -- Additional effect Chance 15%
+INSERT INTO `item_mods` VALUES (16692,951,3);   -- Additional effect Status ID xi.effect.Poison
+INSERT INTO `item_mods` VALUES (16692,952,4);   -- Additional effect Status Potency 4
+INSERT INTO `item_mods` VALUES (16692,953,30);  -- Additional effect Status Duration 30sec
+INSERT INTO `item_mods` VALUES (16693,431,2);   -- poison katars +1 (Additional effect: Poison)
+INSERT INTO `item_mods` VALUES (16693,499,10);  -- Additional effect animation (subEffect) xi.subEffect.Poison
+INSERT INTO `item_mods` VALUES (16693,501,15);  -- Additional effect Chance 15%
+INSERT INTO `item_mods` VALUES (16693,951,3);   -- Additional effect Status ID xi.effect.Poison
+INSERT INTO `item_mods` VALUES (16693,952,4);   -- Additional effect Status Potency 4
+INSERT INTO `item_mods` VALUES (16693,953,30);  -- Additional effect Status Duration 30sec
 INSERT INTO `item_mods` VALUES (16694,1,-10);
 INSERT INTO `item_mods` VALUES (16694,23,10);
 INSERT INTO `item_mods` VALUES (16698,25,3);
 INSERT INTO `item_mods` VALUES (16699,25,4);
 INSERT INTO `item_mods` VALUES (16700,25,4);
-INSERT INTO `item_mods` VALUES (16700,431,1);
+INSERT INTO `item_mods` VALUES (16700,431,2);   -- Poison Cesti +1 (Additional effect: Poison)
+INSERT INTO `item_mods` VALUES (16700,499,10);  -- Additional effect animation (subEffect) xi.subEffect.Poison
+INSERT INTO `item_mods` VALUES (16700,501,15);  -- Additional effect Chance 15%
+INSERT INTO `item_mods` VALUES (16700,951,3);   -- Additional effect Status ID xi.effect.Poison
+INSERT INTO `item_mods` VALUES (16700,952,4);   -- Additional effect Status Potency 4
+INSERT INTO `item_mods` VALUES (16700,953,30);  -- Additional effect Status Duration 30sec
 INSERT INTO `item_mods` VALUES (16701,9,2);
 INSERT INTO `item_mods` VALUES (16702,16,4); -- ICE_RES
-INSERT INTO `item_mods` VALUES (16702,431,1);
+INSERT INTO `item_mods` VALUES (16702,431,1);   -- Cougar Baghnakhs (Additional effect: Ice Damage)
+INSERT INTO `item_mods` VALUES (16702,499,2);   -- Additional effect animation (subEffect)
+INSERT INTO `item_mods` VALUES (16702,500,10);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (16702,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (16702,950,2);   -- Additional effect element Ice (xi.magic.element)
 INSERT INTO `item_mods` VALUES (16703,8,1);
 INSERT INTO `item_mods` VALUES (16703,25,3);
 INSERT INTO `item_mods` VALUES (16707,2,10);
@@ -20265,13 +20394,21 @@ INSERT INTO `item_mods` VALUES (16707,9,2);
 INSERT INTO `item_mods` VALUES (16707,10,2);
 INSERT INTO `item_mods` VALUES (16708,10,1);
 INSERT INTO `item_mods` VALUES (16708,23,8);
-INSERT INTO `item_mods` VALUES (16709,431,1);
+INSERT INTO `item_mods` VALUES (16709,431,1);   -- Inferno Axe (Additional effect: Fire Damage) 
+INSERT INTO `item_mods` VALUES (16709,499,1);   -- Additional effect animation (subEffect)
+INSERT INTO `item_mods` VALUES (16709,500,10);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (16709,501,5);   -- Additional effect Chance 5%
+INSERT INTO `item_mods` VALUES (16709,950,1);   -- Additional effect element Fire (xi.magic.element)
 INSERT INTO `item_mods` VALUES (16710,8,4);
 INSERT INTO `item_mods` VALUES (16710,12,-4);
 INSERT INTO `item_mods` VALUES (16711,8,6);
 INSERT INTO `item_mods` VALUES (16711,12,6);
 INSERT INTO `item_mods` VALUES (16711,116,6);
-INSERT INTO `item_mods` VALUES (16713,431,1);
+INSERT INTO `item_mods` VALUES (16713,431,1);   -- Hellfire Axe (Additional effect: Fire Damage) 
+INSERT INTO `item_mods` VALUES (16713,499,1);   -- Additional effect animation (subEffect)
+INSERT INTO `item_mods` VALUES (16713,500,10);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (16713,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (16713,950,1);   -- Additional effect element Fire (xi.magic.element)
 INSERT INTO `item_mods` VALUES (16714,25,5);
 INSERT INTO `item_mods` VALUES (16719,9,1);
 INSERT INTO `item_mods` VALUES (16721,8,2);
@@ -20293,9 +20430,24 @@ INSERT INTO `item_mods` VALUES (16731,12,-5);
 INSERT INTO `item_mods` VALUES (16735,2,20);
 INSERT INTO `item_mods` VALUES (16735,18,10); -- EARTH_RES
 INSERT INTO `item_mods` VALUES (16735,20,10); -- WATER_RES
-INSERT INTO `item_mods` VALUES (16741,431,1);
-INSERT INTO `item_mods` VALUES (16742,431,1);
-INSERT INTO `item_mods` VALUES (16743,431,1);
+INSERT INTO `item_mods` VALUES (16741,431,2);   -- Poison Dagger (Additional effect: Poison)
+INSERT INTO `item_mods` VALUES (16741,499,10);  -- Additional effect animation (subEffect) xi.subEffect.Poison
+INSERT INTO `item_mods` VALUES (16741,501,15);  -- Additional effect Chance 15%
+INSERT INTO `item_mods` VALUES (16741,951,3);   -- Additional effect Status ID xi.effect.Poison
+INSERT INTO `item_mods` VALUES (16741,952,4);   -- Additional effect Status Potency 4
+INSERT INTO `item_mods` VALUES (16741,953,30);  -- Additional effect Status Duration 30sec
+INSERT INTO `item_mods` VALUES (16742,431,2);   -- Poison Knife +1 (Additional effect: Poison)
+INSERT INTO `item_mods` VALUES (16742,499,10);  -- Additional effect animation (subEffect) xi.subEffect.Poison
+INSERT INTO `item_mods` VALUES (16742,501,15);  -- Additional effect Chance 15%
+INSERT INTO `item_mods` VALUES (16742,951,3);   -- Additional effect Status ID xi.effect.Poison
+INSERT INTO `item_mods` VALUES (16742,952,4);   -- Additional effect Status Potency 4
+INSERT INTO `item_mods` VALUES (16742,953,30);  -- Additional effect Status Duration 30sec
+INSERT INTO `item_mods` VALUES (16743,431,2);   -- Python Baselard (Additional effect: Poison)
+INSERT INTO `item_mods` VALUES (16743,499,10);  -- Additional effect animation (subEffect) xi.subEffect.Poison
+INSERT INTO `item_mods` VALUES (16743,501,15);  -- Additional effect Chance 15%
+INSERT INTO `item_mods` VALUES (16743,951,3);   -- Additional effect Status ID xi.effect.Poison
+INSERT INTO `item_mods` VALUES (16743,952,4);   -- Additional effect Status Potency 4
+INSERT INTO `item_mods` VALUES (16743,953,30);  -- Additional effect Status Duration 30sec
 INSERT INTO `item_mods` VALUES (16744,25,3);
 INSERT INTO `item_mods` VALUES (16745,25,2);
 INSERT INTO `item_mods` VALUES (16746,25,2);
@@ -20323,18 +20475,35 @@ INSERT INTO `item_mods` VALUES (16773,12,2);
 INSERT INTO `item_mods` VALUES (16773,13,-2);
 INSERT INTO `item_mods` VALUES (16773,21,-2); -- LIGHT_RES
 INSERT INTO `item_mods` VALUES (16773,22,2);  -- DARK_RES
-INSERT INTO `item_mods` VALUES (16773,431,1);
-INSERT INTO `item_mods` VALUES (16777,431,1);
+INSERT INTO `item_mods` VALUES (16773,431,2);   -- Cruel Scythe (Additional effect: Evasion Down)
+INSERT INTO `item_mods` VALUES (16773,499,18);  -- Additional effect animation (subEffect) xi.subEffect.EVASION_DOWN
+INSERT INTO `item_mods` VALUES (16773,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (16773,951,148); -- Additional effect Status ID xi.effect.EVASION_DOWN
+INSERT INTO `item_mods` VALUES (16773,952,12);  -- Additional effect Status Potency 12
+INSERT INTO `item_mods` VALUES (16773,953,60);  -- Additional effect Status Duration 60sec
+INSERT INTO `item_mods` VALUES (16777,431,5);   -- Death Scythe (Additional effect: HP DRAIN)
+INSERT INTO `item_mods` VALUES (16777,499,21);  -- Additional effect animation (subEffect) xi.subEffect.HP_DRAIN
+INSERT INTO `item_mods` VALUES (16777,500,10);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (16777,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (16777,950,8);   -- Additional effect element Darkness (xi.magic.element)
 INSERT INTO `item_mods` VALUES (16780,8,2);
 INSERT INTO `item_mods` VALUES (16780,10,-1);
 INSERT INTO `item_mods` VALUES (16784,16,6); -- ICE_RES
-INSERT INTO `item_mods` VALUES (16784,431,1);
+INSERT INTO `item_mods` VALUES (16784,431,1);   -- Frostreaper (Additional effect: Ice Damage)
+INSERT INTO `item_mods` VALUES (16784,499,2);   -- Additional effect animation (subEffect)
+INSERT INTO `item_mods` VALUES (16784,500,5);   -- Additional effect damage
+INSERT INTO `item_mods` VALUES (16784,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (16784,950,2);   -- Additional effect element Ice (xi.magic.element)
 INSERT INTO `item_mods` VALUES (16786,23,25);
 INSERT INTO `item_mods` VALUES (16786,25,-5);
 INSERT INTO `item_mods` VALUES (16787,22,12); -- DARK_RES
 INSERT INTO `item_mods` VALUES (16788,3,-5);
 INSERT INTO `item_mods` VALUES (16788,25,5);
-INSERT INTO `item_mods` VALUES (16791,431,1);
+INSERT INTO `item_mods` VALUES (16791,431,5);   -- Death Scythe +1 (Additional effect: HP DRAIN)
+INSERT INTO `item_mods` VALUES (16791,499,21);  -- Additional effect animation (subEffect) xi.subEffect.HP_DRAIN
+INSERT INTO `item_mods` VALUES (16791,500,10);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (16791,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (16791,950,8);   -- Additional effect element Darkness (xi.magic.element)
 INSERT INTO `item_mods` VALUES (16793,2,20);
 INSERT INTO `item_mods` VALUES (16793,19,10); -- THUNDER_RES
 INSERT INTO `item_mods` VALUES (16793,21,10); -- LIGHT_RES
@@ -20351,14 +20520,22 @@ INSERT INTO `item_mods` VALUES (16808,1,3);
 INSERT INTO `item_mods` VALUES (16808,68,3);
 INSERT INTO `item_mods` VALUES (16809,23,14);
 INSERT INTO `item_mods` VALUES (16810,23,12);
-INSERT INTO `item_mods` VALUES (16816,431,1);
+INSERT INTO `item_mods` VALUES (16816,431,1);   -- Holy Sword +1 (Additional effect: Light Damage) 
+INSERT INTO `item_mods` VALUES (16816,499,7);   -- Additional effect animation (subEffect)
+INSERT INTO `item_mods` VALUES (16816,500,10);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (16816,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (16816,950,7);   -- Additional effect element Light (xi.magic.element)
 INSERT INTO `item_mods` VALUES (16818,23,5);
 INSERT INTO `item_mods` VALUES (16819,9,3);
 INSERT INTO `item_mods` VALUES (16820,11,3);
 INSERT INTO `item_mods` VALUES (16821,110,10);
 INSERT INTO `item_mods` VALUES (16822,5,10);
 INSERT INTO `item_mods` VALUES (16822,12,5);
-INSERT INTO `item_mods` VALUES (16826,431,1);
+INSERT INTO `item_mods` VALUES (16826,431,1);   -- Divine Sword +1 (Additional effect: Light Damage) 
+INSERT INTO `item_mods` VALUES (16826,499,7);   -- Additional effect animation (subEffect)
+INSERT INTO `item_mods` VALUES (16826,500,21);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (16826,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (16826,950,7);   -- Additional effect element Light (xi.magic.element)
 INSERT INTO `item_mods` VALUES (16829,5,10);
 INSERT INTO `item_mods` VALUES (16829,12,1);
 INSERT INTO `item_mods` VALUES (16829,13,1);
@@ -20397,7 +20574,12 @@ INSERT INTO `item_mods` VALUES (16863,12,2);
 INSERT INTO `item_mods` VALUES (16863,13,-2);
 INSERT INTO `item_mods` VALUES (16863,21,-2); -- LIGHT_RES
 INSERT INTO `item_mods` VALUES (16863,22,2);  -- DARK_RES
-INSERT INTO `item_mods` VALUES (16863,431,1);
+INSERT INTO `item_mods` VALUES (16863,431,2);   -- Cruel Spear (Additional effect: Evasion Down)
+INSERT INTO `item_mods` VALUES (16863,499,18);  -- Additional effect animation (subEffect) xi.subEffect.EVASION_DOWN
+INSERT INTO `item_mods` VALUES (16863,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (16863,951,148); -- Additional effect Status ID xi.effect.EVASION_DOWN
+INSERT INTO `item_mods` VALUES (16863,952,12);  -- Additional effect Status Potency 12
+INSERT INTO `item_mods` VALUES (16863,953,60);  -- Additional effect Status Duration 60sec
 INSERT INTO `item_mods` VALUES (16867,2,7);
 INSERT INTO `item_mods` VALUES (16867,14,4);
 INSERT INTO `item_mods` VALUES (16868,68,-3);
@@ -20442,28 +20624,82 @@ INSERT INTO `item_mods` VALUES (16894,9,3);
 INSERT INTO `item_mods` VALUES (16894,10,3);
 INSERT INTO `item_mods` VALUES (16899,25,3);
 INSERT INTO `item_mods` VALUES (16904,165,3);
-INSERT INTO `item_mods` VALUES (16905,431,1);
-INSERT INTO `item_mods` VALUES (16906,431,1);
-INSERT INTO `item_mods` VALUES (16907,431,1);
-INSERT INTO `item_mods` VALUES (16908,431,1);
-INSERT INTO `item_mods` VALUES (16910,431,1);
+INSERT INTO `item_mods` VALUES (16905,431,2);   -- Bokuto (Additional effect: BLIND)
+INSERT INTO `item_mods` VALUES (16905,499,12);  -- Additional effect animation (subEffect) xi.subEffect.BLIND
+INSERT INTO `item_mods` VALUES (16905,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (16905,951,5);   -- Additional effect Status ID xi.effect.Blindness
+INSERT INTO `item_mods` VALUES (16905,952,10);  -- Additional effect Status Potency 1
+INSERT INTO `item_mods` VALUES (16905,953,30);  -- Additional effect Status Duration 30sec
+INSERT INTO `item_mods` VALUES (16906,431,2);   -- Mokuto (Additional effect: Silence)
+INSERT INTO `item_mods` VALUES (16906,499,13);  -- Additional effect animation (subEffect) xi.subEffect.SILENCE
+INSERT INTO `item_mods` VALUES (16906,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (16906,951,6);   -- Additional effect Status ID xi.effect.SILENCE
+INSERT INTO `item_mods` VALUES (16906,952,5);   -- Additional effect Status Potency 5
+INSERT INTO `item_mods` VALUES (16906,953,30);  -- Additional effect Status Duration 30sec
+INSERT INTO `item_mods` VALUES (16907,431,2);   -- Busuto (Additional effect: Poison)
+INSERT INTO `item_mods` VALUES (16907,499,10);  -- Additional effect animation (subEffect) xi.subEffect.Poison
+INSERT INTO `item_mods` VALUES (16907,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (16907,951,3);   -- Additional effect Status ID xi.effect.Poison
+INSERT INTO `item_mods` VALUES (16907,952,4);   -- Additional effect Status Potency 4
+INSERT INTO `item_mods` VALUES (16907,953,30);  -- Additional effect Status Duration 30sec
+INSERT INTO `item_mods` VALUES (16908,431,2);   -- Yoto (Additional effect: DEFENSE_DOWN)
+INSERT INTO `item_mods` VALUES (16908,499,18);  -- Additional effect animation (subEffect) xi.subEffect.DEFENSE_DOWN
+INSERT INTO `item_mods` VALUES (16908,501,5);   -- Additional effect Chance 5%
+INSERT INTO `item_mods` VALUES (16908,951,149); -- Additional effect Status ID xi.effect.DEFENSE_DOWN
+INSERT INTO `item_mods` VALUES (16908,952,12);  -- Additional effect Status Potency 12
+INSERT INTO `item_mods` VALUES (16908,953,60);  -- Additional effect Status Duration 60sec
+INSERT INTO `item_mods` VALUES (16910,431,2);   -- mamushito (Additional effect: Stun)
+INSERT INTO `item_mods` VALUES (16910,499,16);  -- Additional effect animation (subEffect) xi.subEffect.STUN
+INSERT INTO `item_mods` VALUES (16910,501,5);   -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (16910,951,10);  -- Additional effect Status ID xi.effect.STUN
+INSERT INTO `item_mods` VALUES (16910,953,3);   -- Additional effect Status Duration 3sec
 INSERT INTO `item_mods` VALUES (16911,25,-1);
 INSERT INTO `item_mods` VALUES (16913,9,3);
 INSERT INTO `item_mods` VALUES (16924,135,3);
-INSERT INTO `item_mods` VALUES (16925,431,1);
-INSERT INTO `item_mods` VALUES (16926,431,1);
-INSERT INTO `item_mods` VALUES (16927,431,1);
-INSERT INTO `item_mods` VALUES (16928,431,1);
-INSERT INTO `item_mods` VALUES (16929,431,1);
+INSERT INTO `item_mods` VALUES (16925,431,2);   -- mokuto +1 (Additional effect: Silence)
+INSERT INTO `item_mods` VALUES (16925,499,13);  -- Additional effect animation (subEffect) xi.subEffect.SILENCE
+INSERT INTO `item_mods` VALUES (16925,501,15);  -- Additional effect Chance 15%
+INSERT INTO `item_mods` VALUES (16925,951,6);   -- Additional effect Status ID xi.effect.SILENCE
+INSERT INTO `item_mods` VALUES (16925,953,30);  -- Additional effect Status Duration 30sec
+INSERT INTO `item_mods` VALUES (16926,431,2);   -- bokuto +1 (Additional effect: BLIND)
+INSERT INTO `item_mods` VALUES (16926,499,12);  -- Additional effect animation (subEffect) xi.subEffect.BLIND
+INSERT INTO `item_mods` VALUES (16926,501,15);  -- Additional effect Chance 15%
+INSERT INTO `item_mods` VALUES (16926,951,5);   -- Additional effect Status ID xi.effect.Blindness
+INSERT INTO `item_mods` VALUES (16926,952,10);  -- Additional effect Status Potency 10
+INSERT INTO `item_mods` VALUES (16926,953,30);  -- Additional effect Status Duration 30sec
+INSERT INTO `item_mods` VALUES (16927,431,2);   -- busuto +1 (Additional effect: Poison)
+INSERT INTO `item_mods` VALUES (16927,499,10);  -- Additional effect animation (subEffect) xi.subEffect.Poison
+INSERT INTO `item_mods` VALUES (16927,501,15);  -- Additional effect Chance 15%
+INSERT INTO `item_mods` VALUES (16927,951,3);   -- Additional effect Status ID xi.effect.Poison
+INSERT INTO `item_mods` VALUES (16927,952,4);   -- Additional effect Status Potency 4
+INSERT INTO `item_mods` VALUES (16927,953,30);  -- Additional effect Status Duration sec
+INSERT INTO `item_mods` VALUES (16928,431,1);   -- Hellfire Sword (Additional effect: Fire Damage) 
+INSERT INTO `item_mods` VALUES (16928,499,1);   -- Additional effect animation (subEffect)
+INSERT INTO `item_mods` VALUES (16928,500,10);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (16928,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (16928,950,1);   -- Additional effect element Fire (xi.magic.element)
+INSERT INTO `item_mods` VALUES (16929,431,1);   -- Burning Claymore (Additional effect: Fire Damage) 
+INSERT INTO `item_mods` VALUES (16929,499,1);   -- Additional effect animation (subEffect)
+INSERT INTO `item_mods` VALUES (16929,500,10);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (16929,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (16929,950,1);   -- Additional effect element Fire (xi.magic.element)
 INSERT INTO `item_mods` VALUES (16930,23,7);
 INSERT INTO `item_mods` VALUES (16934,9,2);
 INSERT INTO `item_mods` VALUES (16934,25,5);
 INSERT INTO `item_mods` VALUES (16935,23,15);
 INSERT INTO `item_mods` VALUES (16935,25,-5);
 INSERT INTO `item_mods` VALUES (16936,22,8); -- DARK_RES
-INSERT INTO `item_mods` VALUES (16936,431,1);
+INSERT INTO `item_mods` VALUES (16936,431,1);   -- Demonic Sword (Additional effect: Darkness Damage)
+INSERT INTO `item_mods` VALUES (16936,499,8);   -- Additional effect animation (subEffect)
+INSERT INTO `item_mods` VALUES (16936,500,21);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (16936,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (16936,950,8);   -- Additional effect element Darkness (xi.magic.element)
 INSERT INTO `item_mods` VALUES (16937,16,8); -- ICE_RES
-INSERT INTO `item_mods` VALUES (16937,431,1);
+INSERT INTO `item_mods` VALUES (16937,431,1);   -- Icicle Sword (Additional effect: Ice Damage)
+INSERT INTO `item_mods` VALUES (16937,499,2);   -- Additional effect animation (subEffect)
+INSERT INTO `item_mods` VALUES (16937,500,10);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (16937,501,5);   -- Additional effect Chance 5%
+INSERT INTO `item_mods` VALUES (16937,950,2);   -- Additional effect element Ice (xi.magic.element)
 INSERT INTO `item_mods` VALUES (16938,21,12); -- LIGHT_RES
 INSERT INTO `item_mods` VALUES (16941,13,3);
 INSERT INTO `item_mods` VALUES (16941,23,7);
@@ -20500,13 +20736,26 @@ INSERT INTO `item_mods` VALUES (16968,25,5);
 INSERT INTO `item_mods` VALUES (16971,8,3);
 INSERT INTO `item_mods` VALUES (16971,10,3);
 INSERT INTO `item_mods` VALUES (16972,14,2);
-INSERT INTO `item_mods` VALUES (16973,431,1);
-INSERT INTO `item_mods` VALUES (16974,431,1);
+INSERT INTO `item_mods` VALUES (16973,431,1);   -- Homura (Additional effect: Fire Damage) 
+INSERT INTO `item_mods` VALUES (16973,499,1);   -- Additional effect animation (subEffect)
+INSERT INTO `item_mods` VALUES (16973,500,19);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (16973,501,5);   -- Additional effect Chance 5%
+INSERT INTO `item_mods` VALUES (16973,950,1);   -- Additional effect element Fire (xi.magic.element)
+INSERT INTO `item_mods` VALUES (16974,431,2);   -- Dotanuki (Additional effect: Evasion Down)
+INSERT INTO `item_mods` VALUES (16974,499,18);  -- Additional effect animation (subEffect) xi.subEffect.EVASION_DOWN
+INSERT INTO `item_mods` VALUES (16974,501,30);  -- Additional effect Chance 30%
+INSERT INTO `item_mods` VALUES (16974,951,148); -- Additional effect Status ID xi.effect.EVASION_DOWN
+INSERT INTO `item_mods` VALUES (16974,952,10);  -- Additional effect Status Potency 10
+INSERT INTO `item_mods` VALUES (16974,953,30);  -- Additional effect Status Duration 30sec
 INSERT INTO `item_mods` VALUES (16977,8,4);
 INSERT INTO `item_mods` VALUES (16977,10,4);
 INSERT INTO `item_mods` VALUES (16980,23,7);
 INSERT INTO `item_mods` VALUES (16980,288,1);
-INSERT INTO `item_mods` VALUES (16986,431,1);
+INSERT INTO `item_mods` VALUES (16986,431,1);   -- Homura +1 (Additional effect: Fire Damage) 
+INSERT INTO `item_mods` VALUES (16986,499,1);   -- Additional effect animation (subEffect)
+INSERT INTO `item_mods` VALUES (16986,500,23);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (16986,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (16986,950,1);   -- Additional effect element Fire (xi.magic.element)
 INSERT INTO `item_mods` VALUES (16990,8,3);
 INSERT INTO `item_mods` VALUES (17038,5,10);
 INSERT INTO `item_mods` VALUES (17038,9,2);
@@ -20545,16 +20794,28 @@ INSERT INTO `item_mods` VALUES (17065,2,18);
 INSERT INTO `item_mods` VALUES (17067,2,18);
 INSERT INTO `item_mods` VALUES (17067,13,1);
 INSERT INTO `item_mods` VALUES (17067,14,1);
-INSERT INTO `item_mods` VALUES (17069,431,1);
+INSERT INTO `item_mods` VALUES (17069,431,2);   -- Moepapa Mace (Additional effect: Flash)
+INSERT INTO `item_mods` VALUES (17069,499,12);  -- Additional effect animation (subEffect) xi.subEffect.Blind
+INSERT INTO `item_mods` VALUES (17069,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (17069,951,155); -- Additional effect Status ID xi.effect.Flash
+INSERT INTO `item_mods` VALUES (17069,953,12);  -- Additional effect Status Duration 3sec
 INSERT INTO `item_mods` VALUES (17070,2,21);
-INSERT INTO `item_mods` VALUES (17071,431,1);
+INSERT INTO `item_mods` VALUES (17071,431,1);   -- Head Rod Additional effect: lightning Damage 
+INSERT INTO `item_mods` VALUES (17071,499,5);   -- Additional effect animation (subEffect)
+INSERT INTO `item_mods` VALUES (17071,500,20);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (17071,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (17071,950,5);   -- Additional effect element lightning (xi.magic.element)
 INSERT INTO `item_mods` VALUES (17072,5,10);
 INSERT INTO `item_mods` VALUES (17072,12,5);
 INSERT INTO `item_mods` VALUES (17073,12,10);
 INSERT INTO `item_mods` VALUES (17073,13,10);
 INSERT INTO `item_mods` VALUES (17074,511,30);    -- Chocobo Wand: Chocobo riding time +30
 INSERT INTO `item_mods` VALUES (17075,2,27);
-INSERT INTO `item_mods` VALUES (17076,431,1);
+INSERT INTO `item_mods` VALUES (17076,431,1);   -- Earth Wand (Additional effect: earth Damage)
+INSERT INTO `item_mods` VALUES (17076,499,4);   -- Additional effect animation (subEffect)
+INSERT INTO `item_mods` VALUES (17076,500,20);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (17076,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (17076,950,4);   -- Additional effect element earth (xi.magic.element)
 INSERT INTO `item_mods` VALUES (17077,112,15);    -- Beneficus: Healing magic skill +15
 INSERT INTO `item_mods` VALUES (17077,113,15);    -- Enhancing magic skill +15
 INSERT INTO `item_mods` VALUES (17077,827,5);     -- Barspell Magic Def. Bonus +5
@@ -20566,7 +20827,11 @@ INSERT INTO `item_mods` VALUES (17079,10,3);      -- VIT +3
 INSERT INTO `item_mods` VALUES (17079,170,2);     -- Fast Cast +2%
 INSERT INTO `item_mods` VALUES (17080,13,2);
 INSERT INTO `item_mods` VALUES (17080,22,3);      -- DARKRES
-INSERT INTO `item_mods` VALUES (17080,431,1);
+INSERT INTO `item_mods` VALUES (17080,431,1);   -- Holy Maul (Additional effect: Light Damage) 
+INSERT INTO `item_mods` VALUES (17080,499,7);   -- Additional effect animation (subEffect)
+INSERT INTO `item_mods` VALUES (17080,500,21);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (17080,501,5);   -- Additional effect Chance 5%
+INSERT INTO `item_mods` VALUES (17080,950,7);   -- Additional effect element Light (xi.magic.element)
 INSERT INTO `item_mods` VALUES (17081,2,3);
 INSERT INTO `item_mods` VALUES (17081,12,1);
 INSERT INTO `item_mods` VALUES (17082,5,5);
@@ -20604,9 +20869,21 @@ INSERT INTO `item_mods` VALUES (17113,160,1000);   -- owleyes Damage Taken +10%
 INSERT INTO `item_mods` VALUES (17113,369,1);    -- Refresh+1
 INSERT INTO `item_mods` VALUES (17114,13,3);
 INSERT INTO `item_mods` VALUES (17114,22,4);     -- DARKRES
-INSERT INTO `item_mods` VALUES (17114,431,1);
-INSERT INTO `item_mods` VALUES (17116,431,1);
-INSERT INTO `item_mods` VALUES (17117,431,1);
+INSERT INTO `item_mods` VALUES (17114,431,1);    -- Holy Maul +1 (Additional effect: Light Damage) 
+INSERT INTO `item_mods` VALUES (17114,499,7);    -- Additional effect animation (subEffect)
+INSERT INTO `item_mods` VALUES (17114,500,21);   -- Additional effect damage
+INSERT INTO `item_mods` VALUES (17114,501,10);   -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (17114,950,7);    -- Additional effect element Light (xi.magic.element)
+INSERT INTO `item_mods` VALUES (17116,431,2);    -- Misery Staff (Additional effect: Curse)
+INSERT INTO `item_mods` VALUES (17116,499,17);   -- Additional effect animation (subEffect) xi.subEffect.Curse
+INSERT INTO `item_mods` VALUES (17116,501,10);   -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (17116,951,9);    -- Additional effect Status ID xi.effect.Curse
+INSERT INTO `item_mods` VALUES (17116,953,30);   -- Additional effect Status Duration 30sec
+INSERT INTO `item_mods` VALUES (17117,431,2);    -- Hypno Staff (Additional effect: Sleep)
+INSERT INTO `item_mods` VALUES (17117,499,9);    -- Additional effect animation (subEffect) xi.subEffect.Sleep
+INSERT INTO `item_mods` VALUES (17117,501,10);   -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (17117,951,2);    -- Additional effect Status ID xi.effect.Sleep
+INSERT INTO `item_mods` VALUES (17117,953,25);   -- Additional effect Status Duration 25sec
 INSERT INTO `item_mods` VALUES (17118,11,4);     -- littus_+1 AGI+4
 INSERT INTO `item_mods` VALUES (17118,12,4);     -- INT+4
 INSERT INTO `item_mods` VALUES (17123,2,3);
@@ -20636,7 +20913,11 @@ INSERT INTO `item_mods` VALUES (17133,119,4);
 INSERT INTO `item_mods` VALUES (17134,2,7);
 INSERT INTO `item_mods` VALUES (17134,5,7);
 INSERT INTO `item_mods` VALUES (17134,20,6); -- WATER_RES
-INSERT INTO `item_mods` VALUES (17134,431,1);
+INSERT INTO `item_mods` VALUES (17134,431,1);   -- Dolphin Staff (Additional effect: water Damage)
+INSERT INTO `item_mods` VALUES (17134,499,6);   -- Additional effect animation (subEffect)
+INSERT INTO `item_mods` VALUES (17134,500,10);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (17134,501,5);   -- Additional effect Chance 5%
+INSERT INTO `item_mods` VALUES (17134,950,6);   -- Additional effect element water (xi.magic.element)
 INSERT INTO `item_mods` VALUES (17135,2,9);
 INSERT INTO `item_mods` VALUES (17135,5,9);
 INSERT INTO `item_mods` VALUES (17135,16,10); -- ICE_RES
@@ -20801,14 +21082,23 @@ INSERT INTO `item_mods` VALUES (17294,22,4); -- DARK_RES
 INSERT INTO `item_mods` VALUES (17295,26,10);
 INSERT INTO `item_mods` VALUES (17300,26,10);
 INSERT INTO `item_mods` VALUES (17317,26,15);
-INSERT INTO `item_mods` VALUES (17325,431,1);
+INSERT INTO `item_mods` VALUES (17325,431,2);   -- Kabura Arrow (Additional effect: Silence)
+INSERT INTO `item_mods` VALUES (17325,499,13);  -- Additional effect animation (subEffect) xi.subEffect.SILENCE
+INSERT INTO `item_mods` VALUES (17325,501,95);  -- Additional effect Chance 75%
+INSERT INTO `item_mods` VALUES (17325,951,6);   -- Additional effect Status ID xi.effect.SILENCE
+INSERT INTO `item_mods` VALUES (17325,953,60);  -- Additional effect Status Duration 60sec
 INSERT INTO `item_mods` VALUES (17327,24,20);
 INSERT INTO `item_mods` VALUES (17327,26,10);
 INSERT INTO `item_mods` VALUES (17328,24,20);
 INSERT INTO `item_mods` VALUES (17328,26,10);
 INSERT INTO `item_mods` VALUES (17329,24,10);    -- Ranged Attack+10
 INSERT INTO `item_mods` VALUES (17329,26,40);
-INSERT INTO `item_mods` VALUES (17329,431,1);
+INSERT INTO `item_mods` VALUES (17329,431,2);   -- Patriarch Protectors Arrow (Additional effect: PARALYSIS)
+INSERT INTO `item_mods` VALUES (17329,499,11);  -- Additional effect animation (subEffect) xi.subEffect.PARALYSIS
+INSERT INTO `item_mods` VALUES (17329,501,95);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (17329,951,4);   -- Additional effect Status ID xi.effect.PARALYSIS
+INSERT INTO `item_mods` VALUES (17329,952,30);  -- Additional effect Status Potency 30
+INSERT INTO `item_mods` VALUES (17329,953,30);  -- Additional effect Status Duration 15sec
 INSERT INTO `item_mods` VALUES (17331,26,-3);
 INSERT INTO `item_mods` VALUES (17332,26,5);
 INSERT INTO `item_mods` VALUES (17334,26,15);
@@ -20869,7 +21159,11 @@ INSERT INTO `item_mods` VALUES (17413,168,25);    -- Spell interruption rate dow
 INSERT INTO `item_mods` VALUES (17414,25,5);
 INSERT INTO `item_mods` VALUES (17414,21,3); -- LIGHT_RES
 INSERT INTO `item_mods` VALUES (17414,22,3); -- DARK_RES
-INSERT INTO `item_mods` VALUES (17414,431,1);
+INSERT INTO `item_mods` VALUES (17414,431,1);   -- Pixie Mace (Additional effect: Light Damage) 
+INSERT INTO `item_mods` VALUES (17414,499,7);   -- Additional effect animation (subEffect)
+INSERT INTO `item_mods` VALUES (17414,500,11);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (17414,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (17414,950,7);   -- Additional effect element Light (xi.magic.element)
 INSERT INTO `item_mods` VALUES (17415,2,7);
 INSERT INTO `item_mods` VALUES (17415,14,4);
 INSERT INTO `item_mods` VALUES (17417,3,1);
@@ -21002,7 +21296,7 @@ INSERT INTO `item_mods` VALUES (17484,951,10);  -- Additional effect Status ID x
 INSERT INTO `item_mods` VALUES (17484,952,10);  -- Additional effect Status Potency 10
 INSERT INTO `item_mods` VALUES (17484,953,5);   -- Additional effect Status Duration 5sec
 
-INSERT INTO `item_mods` VALUES (17485,15,6);  -- FIRE_RES
+INSERT INTO `item_mods` VALUES (17485,15,6);    -- FIRE_RES
 INSERT INTO `item_mods` VALUES (17486,431,2);   -- Stun claws +1 (Additional effect: "Stun")
 INSERT INTO `item_mods` VALUES (17486,499,16);  -- Additional effect animation (subEffect) xi.subEffect.STUN
 INSERT INTO `item_mods` VALUES (17486,501,10);  -- Additional effect Chance 10%
@@ -21020,12 +21314,12 @@ INSERT INTO `item_mods` VALUES (17491,25,2);
 -- Shiva's Claws
 INSERT INTO `item_mods` VALUES (17492,12,3);
 INSERT INTO `item_mods` VALUES (17492,25,8);
-INSERT INTO `item_mods` VALUES (17492,431,1);  -- Additional effect: Ice Damage (Type DAMAGE)
-INSERT INTO `item_mods` VALUES (17492,499,11); -- Additional effect animation (subEffect) Paralyze
-INSERT INTO `item_mods` VALUES (17492,501,10); -- Additional effect Chance 10%
-INSERT INTO `item_mods` VALUES (17492,951,4);  -- Additional effect Status ID Paralyze
-INSERT INTO `item_mods` VALUES (17492,952,10); -- Additional effect Status Potency 10
-INSERT INTO `item_mods` VALUES (17492,953,30); -- Additional effect Status Duration 30sec
+INSERT INTO `item_mods` VALUES (17492,431,2);   -- (Additional effect: PARALYSIS)
+INSERT INTO `item_mods` VALUES (17492,499,11);  -- Additional effect animation (subEffect) xi.subEffect.PARALYSIS
+INSERT INTO `item_mods` VALUES (17492,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (17492,951,4);   -- Additional effect Status ID xi.effect.PARALYSIS
+INSERT INTO `item_mods` VALUES (17492,952,10);  -- Additional effect Status Potency 10
+INSERT INTO `item_mods` VALUES (17492,953,30);  -- Additional effect Status Duration 30sec
 
 INSERT INTO `item_mods` VALUES (17493,25,10);
 INSERT INTO `item_mods` VALUES (17494,25,12);
@@ -21068,7 +21362,11 @@ INSERT INTO `item_mods` VALUES (17507,18,10); -- EARTH_RES
 INSERT INTO `item_mods` VALUES (17507,20,10); -- WATER_RES
 INSERT INTO `item_mods` VALUES (17508,241,2);
 INSERT INTO `item_mods` VALUES (17509,377,13);
-INSERT INTO `item_mods` VALUES (17510,431,1);
+INSERT INTO `item_mods` VALUES (17510,431,5);   -- Vampiric Claws (Additional effect: HP DRAIN)
+INSERT INTO `item_mods` VALUES (17510,499,21);  -- Additional effect animation (subEffect) xi.subEffect.HP_Drain
+INSERT INTO `item_mods` VALUES (17510,500,15);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (17510,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (17510,950,8);   -- Additional effect element Darkness (xi.magic.element)
 INSERT INTO `item_mods` VALUES (17511,302,1);
 INSERT INTO `item_mods` VALUES (17518,10,3);
 INSERT INTO `item_mods` VALUES (17520,2,12);
@@ -21097,11 +21395,19 @@ INSERT INTO `item_mods` VALUES (17532,5,20);
 INSERT INTO `item_mods` VALUES (17533,2,14);
 INSERT INTO `item_mods` VALUES (17533,5,7);
 INSERT INTO `item_mods` VALUES (17533,20,7); -- WATER_RES
-INSERT INTO `item_mods` VALUES (17533,431,1);
+INSERT INTO `item_mods` VALUES (17533,431,1);   -- Whale Staff (Additional effect: water Damage)
+INSERT INTO `item_mods` VALUES (17533,499,6);   -- Additional effect animation (subEffect)
+INSERT INTO `item_mods` VALUES (17533,500,10);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (17533,501,5);   -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (17533,950,6);   -- Additional effect element water (xi.magic.element)
 INSERT INTO `item_mods` VALUES (17534,2,15);
 INSERT INTO `item_mods` VALUES (17534,5,7);
 INSERT INTO `item_mods` VALUES (17534,20,8); -- WATER_RES
-INSERT INTO `item_mods` VALUES (17534,431,1);
+INSERT INTO `item_mods` VALUES (17534,431,1);   -- Whale Staff +1 (Additional effect: water Damage)
+INSERT INTO `item_mods` VALUES (17534,499,6);   -- Additional effect animation (subEffect)
+INSERT INTO `item_mods` VALUES (17534,500,10);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (17534,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (17534,950,6);   -- Additional effect element water (xi.magic.element)
 INSERT INTO `item_mods` VALUES (17535,23,3);
 INSERT INTO `item_mods` VALUES (17536,23,5);
 INSERT INTO `item_mods` VALUES (17537,2,6);
@@ -21446,7 +21752,12 @@ INSERT INTO `item_mods` VALUES (17626,259,5);
 INSERT INTO `item_mods` VALUES (17626,289,10);
 INSERT INTO `item_mods` VALUES (17627,11,3);
 INSERT INTO `item_mods` VALUES (17627,23,7);
-INSERT INTO `item_mods` VALUES (17627,431,1);
+INSERT INTO `item_mods` VALUES (17627,431,2);   -- Garudas Dagger (Additional effect: Silence)
+INSERT INTO `item_mods` VALUES (17627,499,13);  -- Additional effect animation (subEffect) xi.subEffect.SILENCE
+INSERT INTO `item_mods` VALUES (17627,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (17627,951,6);   -- Additional effect Status ID xi.effect.SILENCE
+INSERT INTO `item_mods` VALUES (17627,952,10);  -- Additional effect Status Potency 1
+INSERT INTO `item_mods` VALUES (17627,953,30);  -- Additional effect Status Duration 30sec
 INSERT INTO `item_mods` VALUES (17628,2,25);
 INSERT INTO `item_mods` VALUES (17628,23,8);
 INSERT INTO `item_mods` VALUES (17629,2,30);
@@ -21474,7 +21785,12 @@ INSERT INTO `item_mods` VALUES (17647,25,3);
 INSERT INTO `item_mods` VALUES (17647,110,5);
 INSERT INTO `item_mods` VALUES (17648,13,1);
 INSERT INTO `item_mods` VALUES (17650,20,3); -- WATER_RES
-INSERT INTO `item_mods` VALUES (17650,431,1);
+INSERT INTO `item_mods` VALUES (17650,431,2);   -- Nadrs (Additional effect: Poison)
+INSERT INTO `item_mods` VALUES (17650,499,10);  -- Additional effect animation (subEffect) xi.subEffect.Poison
+INSERT INTO `item_mods` VALUES (17650,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (17650,951,3);   -- Additional effect Status ID xi.effect.Poison
+INSERT INTO `item_mods` VALUES (17650,952,4);   -- Additional effect Status Potency 4
+INSERT INTO `item_mods` VALUES (17650,953,30);  -- Additional effect Status Duration 30sec
 INSERT INTO `item_mods` VALUES (17652,22,14); -- DARK_ES
 INSERT INTO `item_mods` VALUES (17653,15,15); -- FIRE_RES
 INSERT INTO `item_mods` VALUES (17653,20,-15); -- WATER_RES
@@ -21519,7 +21835,11 @@ INSERT INTO `item_mods` VALUES (17676,23,12);
 INSERT INTO `item_mods` VALUES (17677,23,12);
 INSERT INTO `item_mods` VALUES (17678,2,4);
 INSERT INTO `item_mods` VALUES (17679,2,6);
-INSERT INTO `item_mods` VALUES (17682,431,1);
+INSERT INTO `item_mods` VALUES (17682,431,1);   -- Sacred Sword (Additional effect: Light Damage) 
+INSERT INTO `item_mods` VALUES (17682,499,7);   -- Additional effect animation (subEffect)
+INSERT INTO `item_mods` VALUES (17682,500,21);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (17682,501,5);   -- Additional effect Chance 5%
+INSERT INTO `item_mods` VALUES (17682,950,7);   -- Additional effect element Light (xi.magic.element)
 INSERT INTO `item_mods` VALUES (17690,110,5);
 INSERT INTO `item_mods` VALUES (17691,110,6);
 INSERT INTO `item_mods` VALUES (17693,27,1);
@@ -21527,7 +21847,12 @@ INSERT INTO `item_mods` VALUES (17694,8,1);
 INSERT INTO `item_mods` VALUES (17694,13,6);
 INSERT INTO `item_mods` VALUES (17695,8,3);
 INSERT INTO `item_mods` VALUES (17695,13,3);
-INSERT INTO `item_mods` VALUES (17695,431,1);
+INSERT INTO `item_mods` VALUES (17695,431,2);   -- Bayards Sword (Additional effect: Evasion Down)
+INSERT INTO `item_mods` VALUES (17695,499,18);  -- Additional effect animation (subEffect) xi.subEffect.EVASION_DOWN
+INSERT INTO `item_mods` VALUES (17695,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (17695,951,148); -- Additional effect Status ID xi.effect.EVASION_DOWN
+INSERT INTO `item_mods` VALUES (17695,952,10);  -- Additional effect Status Potency 10
+INSERT INTO `item_mods` VALUES (17695,953,60);  -- Additional effect Status Duration 60sec
 INSERT INTO `item_mods` VALUES (17696,9,1);
 INSERT INTO `item_mods` VALUES (17696,432,2);    -- Sword enhancement spell damage +2
 INSERT INTO `item_mods` VALUES (17697,9,2);
@@ -21545,7 +21870,11 @@ INSERT INTO `item_mods` VALUES (17702,109,-3);
 INSERT INTO `item_mods` VALUES (17703,2,10);
 INSERT INTO `item_mods` VALUES (17703,9,2);
 INSERT INTO `item_mods` VALUES (17703,10,2);
-INSERT INTO `item_mods` VALUES (17704,431,1);
+INSERT INTO `item_mods` VALUES (17704,431,1);   -- Vulcan Sword (Additional effect: Fire Damage) 
+INSERT INTO `item_mods` VALUES (17704,499,1);   -- Additional effect animation (subEffect)
+INSERT INTO `item_mods` VALUES (17704,500,10);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (17704,501,5);   -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (17704,950,1);   -- Additional effect element Fire (xi.magic.element)
 INSERT INTO `item_mods` VALUES (17707,345,1000);  -- Martial Anelace: TP Bonus +1000
 INSERT INTO `item_mods` VALUES (17708,25,2);
 INSERT INTO `item_mods` VALUES (17709,11,-4);
@@ -21649,8 +21978,17 @@ INSERT INTO `item_mods` VALUES (17760,11,2);
 INSERT INTO `item_mods` VALUES (17760,68,2);
 INSERT INTO `item_mods` VALUES (17762,366,4);
 INSERT INTO `item_mods` VALUES (17763,366,6);
-INSERT INTO `item_mods` VALUES (17768,431,1);
-INSERT INTO `item_mods` VALUES (17770,431,1);
+INSERT INTO `item_mods` VALUES (17768,431,2);   -- Yoto +1 (Additional effect: DEFENSE_DOWN)
+INSERT INTO `item_mods` VALUES (17768,499,18);  -- Additional effect animation (subEffect) xi.subEffect.DEFENSE_DOWN
+INSERT INTO `item_mods` VALUES (17768,501,15);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (17768,951,149); -- Additional effect Status ID xi.effect.DEFENSE_DOWN
+INSERT INTO `item_mods` VALUES (17768,952,12);  -- Additional effect Status Potency 12
+INSERT INTO `item_mods` VALUES (17768,953,60);  -- Additional effect Status Duration 60sec
+INSERT INTO `item_mods` VALUES (17770,431,2);   -- Mamushito +1 (Additional effect: Stun)
+INSERT INTO `item_mods` VALUES (17770,499,16);  -- Additional effect animation (subEffect) xi.subEffect.STUN
+INSERT INTO `item_mods` VALUES (17770,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (17770,951,10);  -- Additional effect Status ID xi.effect.STUN
+INSERT INTO `item_mods` VALUES (17770,953,3);   -- Additional effect Status Duration 3sec
 INSERT INTO `item_mods` VALUES (17771,8,-1);
 INSERT INTO `item_mods` VALUES (17771,9,2);
 INSERT INTO `item_mods` VALUES (17772,8,2);
@@ -21659,7 +21997,11 @@ INSERT INTO `item_mods` VALUES (17773,2,20);
 INSERT INTO `item_mods` VALUES (17773,15,10); -- FIRE_RES
 INSERT INTO `item_mods` VALUES (17773,21,10); -- LIGHT_RES
 INSERT INTO `item_mods` VALUES (17774,68,3);
-INSERT INTO `item_mods` VALUES (17774,431,1);
+-- INSERT INTO `item_mods` VALUES (17774,431,1);  -- Shiranui (Additional effect: Light Damage) 
+-- INSERT INTO `item_mods` VALUES (17774,499,7);  -- Additional effect animation (subEffect)
+-- INSERT INTO `item_mods` VALUES (17774,500,11); -- Additional effect damage
+-- INSERT INTO `item_mods` VALUES (17774,501,15); -- Additional effect Chance 10% -- Nightime only
+-- INSERT INTO `item_mods` VALUES (17774,950,7);  -- Additional effect element Light (xi.magic.element)
 INSERT INTO `item_mods` VALUES (17775,8,1);
 INSERT INTO `item_mods` VALUES (17775,11,1);
 INSERT INTO `item_mods` VALUES (17787,8,1);
@@ -21679,7 +22021,11 @@ INSERT INTO `item_mods` VALUES (17793,377,13);
 INSERT INTO `item_mods` VALUES (17794,288,1);
 INSERT INTO `item_mods` VALUES (17795,110,3);
 INSERT INTO `item_mods` VALUES (17796,110,5);
-INSERT INTO `item_mods` VALUES (17797,431,1);
+INSERT INTO `item_mods` VALUES (17797,431,2);   -- Seito (Additional effect: Silence)
+INSERT INTO `item_mods` VALUES (17797,499,13);  -- Additional effect animation (subEffect) xi.subEffect.SILENCE
+INSERT INTO `item_mods` VALUES (17797,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (17797,951,6);   -- Additional effect Status ID xi.effect.SILENCE
+INSERT INTO `item_mods` VALUES (17797,953,60);  -- Additional effect Status Duration 60sec
 INSERT INTO `item_mods` VALUES (17798,345,1000);  -- Shamo: TP Bonus +1000
 INSERT INTO `item_mods` VALUES (17799,27,2);
 INSERT INTO `item_mods` VALUES (17801,8,5);
@@ -21713,7 +22059,11 @@ INSERT INTO `item_mods` VALUES (17823,11,1);
 INSERT INTO `item_mods` VALUES (17823,12,-1);
 INSERT INTO `item_mods` VALUES (17824,8,2);
 INSERT INTO `item_mods` VALUES (17826,14,2);
-INSERT INTO `item_mods` VALUES (17828,431,1);
+INSERT INTO `item_mods` VALUES (17828,431,1);   -- Koen (Additional effect: Fire Damage) 
+INSERT INTO `item_mods` VALUES (17828,499,1);   -- Additional effect animation (subEffect)
+INSERT INTO `item_mods` VALUES (17828,500,19);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (17828,501,5);   -- Additional effect Chance 5%
+INSERT INTO `item_mods` VALUES (17828,950,1);   -- Additional effect element Fire (xi.magic.element)
 INSERT INTO `item_mods` VALUES (17829,345,1000);  -- Hagun: TP Bonus +1000
 INSERT INTO `item_mods` VALUES (17832,2,20);
 INSERT INTO `item_mods` VALUES (17832,436,3);
@@ -21875,7 +22225,7 @@ INSERT INTO `item_mods` VALUES (18008,501,10);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (18008,951,6);   -- Additional effect Status ID xi.effect.SILENCE
 INSERT INTO `item_mods` VALUES (18008,952,5);   -- Additional effect Status Potency 5
 INSERT INTO `item_mods` VALUES (18008,953,30);  -- Additional effect Status Duration 30sec
-INSERT INTO `item_mods` VALUES (18009,345,1000);  -- Martial Knife: TP Bonus +1000
+INSERT INTO `item_mods` VALUES (18009,345,1000); -- Martial Knife: TP Bonus +1000
 INSERT INTO `item_mods` VALUES (18010,431,2);   -- Melt Dagger (Additional effect: Weakens defense)
 INSERT INTO `item_mods` VALUES (18010,499,18);  -- Additional effect animation (subEffect) xi.subEffect.DEFENSE_DOWN
 INSERT INTO `item_mods` VALUES (18010,501,10);  -- Additional effect Chance 10%
@@ -21904,7 +22254,7 @@ INSERT INTO `item_mods` VALUES (18013,953,60);  -- Additional effect Status Dura
 -- Sirocco Kukri
 INSERT INTO `item_mods` VALUES (18018,16,-7);   -- ICE_RES
 INSERT INTO `item_mods` VALUES (18018,17,7);    -- WIND_RES
-INSERT INTO `item_mods` VALUES (18018,431,1);   -- Additional effect: Wind Damage (Type DAMAGE)
+INSERT INTO `item_mods` VALUES (18018,431,1);   -- Additional effect: Wind Damage 
 INSERT INTO `item_mods` VALUES (18018,499,3);   -- Additional effect animation (subEffect)
 INSERT INTO `item_mods` VALUES (18018,500,9);   -- Additional effect damage
 INSERT INTO `item_mods` VALUES (18018,501,100); -- Additional effect Chance 100%
@@ -21935,12 +22285,22 @@ INSERT INTO `item_mods` VALUES (18032,2,15);
 INSERT INTO `item_mods` VALUES (18032,68,4);
 INSERT INTO `item_mods` VALUES (18032,241,2);
 INSERT INTO `item_mods` VALUES (18032,246,2);
-INSERT INTO `item_mods` VALUES (18032,431,1);
+INSERT INTO `item_mods` VALUES (18032,431,2);   -- Adder Jambiya (Additional effect: Evasion Down)
+INSERT INTO `item_mods` VALUES (18032,499,18);  -- Additional effect animation (subEffect) xi.subEffect.EVASION_DOWN
+INSERT INTO `item_mods` VALUES (18032,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (18032,951,148); -- Additional effect Status ID xi.effect.EVASION_DOWN
+INSERT INTO `item_mods` VALUES (18032,952,10);  -- Additional effect Status Potency 10
+INSERT INTO `item_mods` VALUES (18032,953,60);  -- Additional effect Status Duration 60sec
 INSERT INTO `item_mods` VALUES (18033,2,20);
 INSERT INTO `item_mods` VALUES (18033,68,5);
 INSERT INTO `item_mods` VALUES (18033,241,3);
 INSERT INTO `item_mods` VALUES (18033,246,3);
-INSERT INTO `item_mods` VALUES (18033,431,1);
+INSERT INTO `item_mods` VALUES (18033,431,2);   -- Adder Jambiya +1 (Additional effect: Evasion Down)
+INSERT INTO `item_mods` VALUES (18033,499,18);  -- Additional effect animation (subEffect) xi.subEffect.EVASION_DOWN
+INSERT INTO `item_mods` VALUES (18033,501,15);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (18033,951,148); -- Additional effect Status ID xi.effect.EVASION_DOWN
+INSERT INTO `item_mods` VALUES (18033,952,10);  -- Additional effect Status Potency 1
+INSERT INTO `item_mods` VALUES (18033,953,60);  -- Additional effect Status Duration 15sec
 INSERT INTO `item_mods` VALUES (18035,23,3);
 INSERT INTO `item_mods` VALUES (18035,25,3);
 INSERT INTO `item_mods` VALUES (18035,21,-5); -- LIGHT_RES
@@ -22011,7 +22371,11 @@ INSERT INTO `item_mods` VALUES (18097,377,13);
 INSERT INTO `item_mods` VALUES (18098,345,1000);  -- Martial Lance: TP Bonus +1000
 INSERT INTO `item_mods` VALUES (18100,9,7);
 INSERT INTO `item_mods` VALUES (18100,826,2);
-INSERT INTO `item_mods` VALUES (18104,431,1);
+INSERT INTO `item_mods` VALUES (18104,431,1);   -- Fuscina (Additional effect: lightning Damage)
+INSERT INTO `item_mods` VALUES (18104,499,5);   -- Additional effect animation (subEffect)
+INSERT INTO `item_mods` VALUES (18104,500,10);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (18104,501,5);   -- Additional effect Chance 5%
+INSERT INTO `item_mods` VALUES (18104,950,5);   -- Additional effect element lightning (xi.magic.element)
 INSERT INTO `item_mods` VALUES (18105,25,2);
 INSERT INTO `item_mods` VALUES (18105,26,2);
 INSERT INTO `item_mods` VALUES (18106,25,3);
@@ -22022,16 +22386,36 @@ INSERT INTO `item_mods` VALUES (18109,13,8);
 INSERT INTO `item_mods` VALUES (18109,23,8);
 INSERT INTO `item_mods` VALUES (18110,8,2);
 INSERT INTO `item_mods` VALUES (18110,10,2);
-INSERT INTO `item_mods` VALUES (18110,431,1);
+INSERT INTO `item_mods` VALUES (18110,431,2);   -- Mezraq (Additional effect: Evasion Down)
+INSERT INTO `item_mods` VALUES (18110,499,18);  -- Additional effect animation (subEffect) xi.subEffect.EVASION_DOWN
+INSERT INTO `item_mods` VALUES (18110,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (18110,951,148); -- Additional effect Status ID xi.effect.EVASION_DOWN
+INSERT INTO `item_mods` VALUES (18110,952,25);  -- Additional effect Status Potency 25
+INSERT INTO `item_mods` VALUES (18110,953,30);  -- Additional effect Status Duration 30sec
 INSERT INTO `item_mods` VALUES (18111,8,3);
 INSERT INTO `item_mods` VALUES (18111,10,3);
-INSERT INTO `item_mods` VALUES (18111,431,1);
+INSERT INTO `item_mods` VALUES (18111,431,2);   -- Mezraq +1 (Additional effect: Evasion Down)
+INSERT INTO `item_mods` VALUES (18111,499,18);  -- Additional effect animation (subEffect) xi.subEffect.EVASION_DOWN
+INSERT INTO `item_mods` VALUES (18111,501,15);  -- Additional effect Chance 15%
+INSERT INTO `item_mods` VALUES (18111,951,148); -- Additional effect Status ID xi.effect.EVASION_DOWN
+INSERT INTO `item_mods` VALUES (18111,952,10);  -- Additional effect Status Potency 10
+INSERT INTO `item_mods` VALUES (18111,953,30);  -- Additional effect Status Duration 30sec
 INSERT INTO `item_mods` VALUES (18114,73,3);
 INSERT INTO `item_mods` VALUES (18115,25,2);
 INSERT INTO `item_mods` VALUES (18115,73,1);
 INSERT INTO `item_mods` VALUES (18116,25,3);
-INSERT INTO `item_mods` VALUES (18118,431,1);
-INSERT INTO `item_mods` VALUES (18119,431,1);
+INSERT INTO `item_mods` VALUES (18118,431,2);   -- Dark Mezraq (Additional effect: Evasion Down)
+INSERT INTO `item_mods` VALUES (18118,499,18);  -- Additional effect animation (subEffect) xi.subEffect.EVASION_DOWN
+INSERT INTO `item_mods` VALUES (18118,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (18118,951,148); -- Additional effect Status ID xi.effect.EVASION_DOWN
+INSERT INTO `item_mods` VALUES (18118,952,25);  -- Additional effect Status Potency 10
+INSERT INTO `item_mods` VALUES (18118,953,30);  -- Additional effect Status Duration 30sec
+INSERT INTO `item_mods` VALUES (18119,431,2);   -- Dark Mezraq +1 (Additional effect: EVASION_DOWN)
+INSERT INTO `item_mods` VALUES (18119,499,18);  -- Additional effect animation (subEffect) xi.subEffect.EVASION_DOWN
+INSERT INTO `item_mods` VALUES (18119,501,15);  -- Additional effect Chance 15%
+INSERT INTO `item_mods` VALUES (18119,951,148); -- Additional effect Status ID xi.effect.EVASION_DOWN
+INSERT INTO `item_mods` VALUES (18119,952,10);  -- Additional effect Status Potency 10
+INSERT INTO `item_mods` VALUES (18119,953,30);  -- Additional effect Status Duration 30sec
 INSERT INTO `item_mods` VALUES (18121,288,3); -- Valkyrie's fork - "Double Attack"+3%
 INSERT INTO `item_mods` VALUES (18121,73,3); -- Store tp +3
 INSERT INTO `item_mods` VALUES (18122,8,2);
@@ -22041,12 +22425,22 @@ INSERT INTO `item_mods` VALUES (18123,2,10);
 INSERT INTO `item_mods` VALUES (18123,9,2);
 INSERT INTO `item_mods` VALUES (18123,10,2);
 INSERT INTO `item_mods` VALUES (18123,245,2);
-INSERT INTO `item_mods` VALUES (18123,431,1);
+INSERT INTO `item_mods` VALUES (18123,431,2);   -- Thalassocrat (Additional effect: EVASION_DOWN)
+INSERT INTO `item_mods` VALUES (18123,499,18);  -- Additional effect animation (subEffect) xi.subEffect.EVASION_DOWN
+INSERT INTO `item_mods` VALUES (18123,501,5);   -- Additional effect Chance 5%
+INSERT INTO `item_mods` VALUES (18123,951,148); -- Additional effect Status ID xi.effect.EVASION_DOWN
+INSERT INTO `item_mods` VALUES (18123,952,25);  -- Additional effect Status Potency 25
+INSERT INTO `item_mods` VALUES (18123,953,30);  -- Additional effect Status Duration 30sec
 INSERT INTO `item_mods` VALUES (18124,2,12);
 INSERT INTO `item_mods` VALUES (18124,9,3);
 INSERT INTO `item_mods` VALUES (18124,10,3);
 INSERT INTO `item_mods` VALUES (18124,245,3);
-INSERT INTO `item_mods` VALUES (18124,431,1);
+INSERT INTO `item_mods` VALUES (18124,431,2);   -- Thalassocrat +1 (Additional effect: EVASION_DOWN)
+INSERT INTO `item_mods` VALUES (18124,499,18);  -- Additional effect animation (subEffect) xi.subEffect.EVASION_DOWN
+INSERT INTO `item_mods` VALUES (18124,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (18124,951,148); -- Additional effect Status ID xi.effect.EVASION_DOWN
+INSERT INTO `item_mods` VALUES (18124,952,25);  -- Additional effect Status Potency 25
+INSERT INTO `item_mods` VALUES (18124,953,30);  -- Additional effect Status Duration 30sec
 INSERT INTO `item_mods` VALUES (18125,2,15);
 INSERT INTO `item_mods` VALUES (18125,5,15);
 INSERT INTO `item_mods` VALUES (18125,10,5);
@@ -22101,22 +22495,53 @@ INSERT INTO `item_mods` VALUES (18148,501,10);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (18148,951,149); -- Additional effect Status ID xi.effect.DEFENSE_DOWN
 INSERT INTO `item_mods` VALUES (18148,952,12);  -- Additional effect Status Potency 12
 INSERT INTO `item_mods` VALUES (18148,953,60);  -- Additional effect Status Duration 60sec
-INSERT INTO `item_mods` VALUES (18149,431,1);
+INSERT INTO `item_mods` VALUES (18149,431,2);   -- Sleep Bolt (Additional effect: Sleep)
+INSERT INTO `item_mods` VALUES (18149,499,9);   -- Additional effect animation (subEffect) xi.subEffect.Sleep
+INSERT INTO `item_mods` VALUES (18149,501,95);  -- Additional effect Chance 75%
+INSERT INTO `item_mods` VALUES (18149,951,2);   -- Additional effect Status ID xi.effect.Sleep
+INSERT INTO `item_mods` VALUES (18149,953,25);  -- Additional effect Status Duration 25sec
 INSERT INTO `item_mods` VALUES (18150,431,2);   -- Blind Bolt (Additional effect: Blindness)
 INSERT INTO `item_mods` VALUES (18150,499,12);  -- Additional effect animation (subEffect) xi.subEffect.BLIND
 INSERT INTO `item_mods` VALUES (18150,501,10);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (18150,951,5);   -- Additional effect Status ID xi.effect.BLINDNESS
 INSERT INTO `item_mods` VALUES (18150,952,10);  -- Additional effect Status Potency 10
 INSERT INTO `item_mods` VALUES (18150,953,30);  -- Additional effect Status Duration 30sec
-INSERT INTO `item_mods` VALUES (18151,431,1);
-INSERT INTO `item_mods` VALUES (18152,431,1);
-INSERT INTO `item_mods` VALUES (18153,431,1);
+INSERT INTO `item_mods` VALUES (18151,431,5);   -- Bloody Bolt (Additional effect: HP DRAIN)
+INSERT INTO `item_mods` VALUES (18151,499,21);  -- Additional effect animation (subEffect) xi.subEffect.HP_Drain
+INSERT INTO `item_mods` VALUES (18151,500,10);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (18151,501,95);  -- Additional effect Chance 95%
+INSERT INTO `item_mods` VALUES (18151,950,8);   -- Additional effect element Darkness (xi.magic.element)
+INSERT INTO `item_mods` VALUES (18152,431,2);   -- Venom Bolt (Additional effect: Poison)
+INSERT INTO `item_mods` VALUES (18152,499,10);  -- Additional effect animation (subEffect) xi.subEffect.poison
+INSERT INTO `item_mods` VALUES (18152,501,95);  -- Additional effect Chance 75%
+INSERT INTO `item_mods` VALUES (18152,951,3);   -- Additional effect Status ID xi.effect.poison
+INSERT INTO `item_mods` VALUES (18152,952,4);   -- Additional effect Status Potency 4
+INSERT INTO `item_mods` VALUES (18152,953,30);  -- Additional effect Status Duration 30sec
+INSERT INTO `item_mods` VALUES (18153,431,1);   -- Holy Bolt ((Additional effect: Light Damage))
+INSERT INTO `item_mods` VALUES (18153,499,7);   -- Additional effect animation (subEffect)
+INSERT INTO `item_mods` VALUES (18153,500,40);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (18153,501,100); -- Additional effect Chance 100%
+INSERT INTO `item_mods` VALUES (18153,950,7);   -- Additional effect element Light (xi.magic.element)
 INSERT INTO `item_mods` VALUES (18154,26,5);
 INSERT INTO `item_mods` VALUES (18155,26,5);
 INSERT INTO `item_mods` VALUES (18156,26,5);
-INSERT INTO `item_mods` VALUES (18157,431,1);
-INSERT INTO `item_mods` VALUES (18158,431,1);
-INSERT INTO `item_mods` VALUES (18159,431,1);
+INSERT INTO `item_mods` VALUES (18157,431,2);   -- Poison Arrow (Additional effect: Poison)
+INSERT INTO `item_mods` VALUES (18157,499,10);  -- Additional effect animation (subEffect) xi.subEffect.poison
+INSERT INTO `item_mods` VALUES (18157,501,95);  -- Additional effect Chance 95%
+INSERT INTO `item_mods` VALUES (18157,951,3);   -- Additional effect Status ID xi.effect.poison
+INSERT INTO `item_mods` VALUES (18157,952,4);   -- Additional effect Status Potency 1
+INSERT INTO `item_mods` VALUES (18157,953,30);  -- Additional effect Status Duration 30sec
+INSERT INTO `item_mods` VALUES (18158,431,2);   -- Sleep Arrow (Additional effect: Sleep)
+INSERT INTO `item_mods` VALUES (18158,499,9);   -- Additional effect animation (subEffect) xi.subEffect.Sleep
+INSERT INTO `item_mods` VALUES (18158,501,95);  -- Additional effect Chance 75%
+INSERT INTO `item_mods` VALUES (18158,951,2);   -- Additional effect Status ID xi.effect.Sleep
+INSERT INTO `item_mods` VALUES (18158,953,25);  -- Additional effect Status Duration 15sec
+INSERT INTO `item_mods` VALUES (18159,431,2);   -- Demon Arrow (Additional effect: ATTACK_DOWN)
+INSERT INTO `item_mods` VALUES (18159,499,18);  -- Additional effect animation (subEffect) xi.subEffect.ATTACK_DOWN
+INSERT INTO `item_mods` VALUES (18159,501,95);  -- Additional effect Chance 95%
+INSERT INTO `item_mods` VALUES (18159,951,147); -- Additional effect Status ID xi.effect.ATTACK_DOWN
+INSERT INTO `item_mods` VALUES (18159,952,12);  -- Additional effect Status Potency 12
+INSERT INTO `item_mods` VALUES (18159,953,60);  -- Additional effect Status Duration 60sec
 
 -- Spartan Bullet
 INSERT INTO `item_mods` VALUES (18160,431,2);   -- Additional effect: "Stun" (Type DEBUFF)
@@ -22182,8 +22607,12 @@ INSERT INTO `item_mods` VALUES (18211,11,-2);
 INSERT INTO `item_mods` VALUES (18212,11,1);
 INSERT INTO `item_mods` VALUES (18213,10,1);
 INSERT INTO `item_mods` VALUES (18213,11,1);
-INSERT INTO `item_mods` VALUES (18220,431,1);
-INSERT INTO `item_mods` VALUES (18221,345,1000);  -- Martial Bhuj: TP Bonus +1000
+INSERT INTO `item_mods` VALUES (18220,431,1);   -- Prominence Axe ((Additional effect: Fire Damage))
+INSERT INTO `item_mods` VALUES (18220,499,1);   -- Additional effect animation (subEffect)
+INSERT INTO `item_mods` VALUES (18220,500,10);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (18220,501,5);   -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (18220,950,1);   -- Additional effect element Fire (xi.magic.element)
+INSERT INTO `item_mods` VALUES (18221,345,1000); -- Martial Bhuj: TP Bonus +1000
 INSERT INTO `item_mods` VALUES (18222,10,7);
 INSERT INTO `item_mods` VALUES (18222,826,2);
 INSERT INTO `item_mods` VALUES (18223,2,10);
@@ -22221,28 +22650,33 @@ INSERT INTO `item_mods` VALUES (18256,119,1);
 INSERT INTO `item_mods` VALUES (18257,10,4);
 INSERT INTO `item_mods` VALUES (18257,20,3); -- WATER_RES
 INSERT INTO `item_mods` VALUES (18257,228,2);
-INSERT INTO `item_mods` VALUES (18263,256,1); -- Stage 4 Spharai - Aftermath
-INSERT INTO `item_mods` VALUES (18263,356,10); -- Final Heaven
-INSERT INTO `item_mods` VALUES (18264,23,20); -- Spharai LV75 - ATT +20
-INSERT INTO `item_mods` VALUES (18264,256,1); -- Aftermath
-INSERT INTO `item_mods` VALUES (18264,291,5); -- Counter +5
-INSERT INTO `item_mods` VALUES (18264,355,10); -- Final Heaven
-INSERT INTO `item_mods` VALUES (18264,506,50); -- Extra DMG Chance 5%
+INSERT INTO `item_mods` VALUES (18263,256,1);   -- Stage 4 Spharai - Aftermath
+INSERT INTO `item_mods` VALUES (18263,356,10);  -- Final Heaven
+INSERT INTO `item_mods` VALUES (18264,23,20);   -- Spharai LV75 - ATT +20
+INSERT INTO `item_mods` VALUES (18264,256,1);   -- Aftermath
+INSERT INTO `item_mods` VALUES (18264,291,5);   -- Counter +5
+INSERT INTO `item_mods` VALUES (18264,355,10);  -- Final Heaven
+INSERT INTO `item_mods` VALUES (18264,506,50);  -- Extra DMG Chance 5%
 INSERT INTO `item_mods` VALUES (18264,507,300); -- Extra DMG X3
-INSERT INTO `item_mods` VALUES (18265,23,25); -- Spharai LV80 - ATT +25
-INSERT INTO `item_mods` VALUES (18265,256,1); -- Aftermath
-INSERT INTO `item_mods` VALUES (18265,291,7); -- Counter +7
-INSERT INTO `item_mods` VALUES (18265,355,10); -- Final Heaven
-INSERT INTO `item_mods` VALUES (18265,506,50); -- Extra DMG Chance 5%
+INSERT INTO `item_mods` VALUES (18265,23,25);   -- Spharai LV80 - ATT +25
+INSERT INTO `item_mods` VALUES (18265,256,1);   -- Aftermath
+INSERT INTO `item_mods` VALUES (18265,291,7);   -- Counter +7
+INSERT INTO `item_mods` VALUES (18265,355,10);  -- Final Heaven
+INSERT INTO `item_mods` VALUES (18265,506,50);  -- Extra DMG Chance 5%
 INSERT INTO `item_mods` VALUES (18265,507,300); -- Extra DMG X3
-INSERT INTO `item_mods` VALUES (18269,256,2); -- Stage 4 Mandau - Aftermath
-INSERT INTO `item_mods` VALUES (18269,356,26); -- Mercy Stroke
-INSERT INTO `item_mods` VALUES (18270,23,20); -- Mandau LV75 - ATT +20
-INSERT INTO `item_mods` VALUES (18270,256,2); -- Aftermath
-INSERT INTO `item_mods` VALUES (18270,355,26); -- Mercy Stroke
-INSERT INTO `item_mods` VALUES (18270,431,1); -- Additional Effect
-INSERT INTO `item_mods` VALUES (18270,506,50); -- Extra DMG Chance 5%
+INSERT INTO `item_mods` VALUES (18269,256,2);   -- Stage 4 Mandau - Aftermath
+INSERT INTO `item_mods` VALUES (18269,356,26);  -- Mercy Stroke
+INSERT INTO `item_mods` VALUES (18270,23,20);   -- Mandau LV75 - ATT +20
+INSERT INTO `item_mods` VALUES (18270,256,2);   -- Aftermath
+INSERT INTO `item_mods` VALUES (18270,355,26);  -- Mercy Stroke
+INSERT INTO `item_mods` VALUES (18270,431,2);   -- Mandau (Additional effect:Poison)
+INSERT INTO `item_mods` VALUES (18270,499,10);  -- Additional effect animation (subEffect) xi.subEffect.Poison
+INSERT INTO `item_mods` VALUES (18270,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (18270,506,50);  -- Extra DMG Chance 5%
 INSERT INTO `item_mods` VALUES (18270,507,300); -- Extra DMG X3
+INSERT INTO `item_mods` VALUES (18270,951,3);   -- Additional effect Status ID xi.effect.Poison
+INSERT INTO `item_mods` VALUES (18270,952,10);  -- Additional effect Status Potency 1
+INSERT INTO `item_mods` VALUES (18270,953,30);  -- Additional effect Status Duration 30sec
 INSERT INTO `item_mods` VALUES (18271,23,25); -- Mandau LV80 - ATT +25
 INSERT INTO `item_mods` VALUES (18271,256,2); -- Aftermath
 INSERT INTO `item_mods` VALUES (18271,355,26); -- Mercy Stroke
@@ -22282,13 +22716,18 @@ INSERT INTO `item_mods` VALUES (18287,356,73); -- Onslaught
 INSERT INTO `item_mods` VALUES (18288,23,20); -- Guttler LV75 - ATT +20
 INSERT INTO `item_mods` VALUES (18288,256,5); -- Aftermath
 INSERT INTO `item_mods` VALUES (18288,355,73); -- Onslaught
-INSERT INTO `item_mods` VALUES (18288,431,1); -- Additional Effect
+INSERT INTO `item_mods` VALUES (18288,431,2);   -- Gutler (Additional effect: Choke)
+INSERT INTO `item_mods` VALUES (18288,499,3);   -- Additional effect animation (subEffect) xi.subEffect.Choke
+INSERT INTO `item_mods` VALUES (18288,501,10);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (18288,506,50); -- Extra DMG Chance 5%
 INSERT INTO `item_mods` VALUES (18288,507,250); -- Extra DMG X2.5
+INSERT INTO `item_mods` VALUES (18288,951,130);   -- Additional effect Status ID xi.effect.Choke
+INSERT INTO `item_mods` VALUES (18288,952,17);   -- Additional effect Status Potency 1
+INSERT INTO `item_mods` VALUES (18288,953,60);  -- Additional effect Status Duration 60sec
 INSERT INTO `item_mods` VALUES (18289,23,25); -- Guttler LV80 - ATT +25
 INSERT INTO `item_mods` VALUES (18289,256,5); -- Aftermath
 INSERT INTO `item_mods` VALUES (18289,355,73); -- Onslaught
-INSERT INTO `item_mods` VALUES (18289,431,1); -- Additional Effect
+INSERT INTO `item_mods` VALUES (18289,431,1);  -- Additional Effect
 INSERT INTO `item_mods` VALUES (18289,506,50); -- Extra DMG Chance 5%
 INSERT INTO `item_mods` VALUES (18289,507,250); -- Extra DMG X2.5
 INSERT INTO `item_mods` VALUES (18293,256,6); -- Stage 4 Bravura - Aftermath
@@ -22296,9 +22735,14 @@ INSERT INTO `item_mods` VALUES (18293,356,89); -- Metatron Torment
 INSERT INTO `item_mods` VALUES (18294,25,20); -- Bravura LV75 - ACC +20
 INSERT INTO `item_mods` VALUES (18294,256,6); -- Aftermath
 INSERT INTO `item_mods` VALUES (18294,355,89); -- Metatron Torment
-INSERT INTO `item_mods` VALUES (18294,431,1); -- Additional Effect
+INSERT INTO `item_mods` VALUES (18294,431,2);   -- Bravura (Additional effect: EVASION_DOWN)
+INSERT INTO `item_mods` VALUES (18294,499,18);  -- Additional effect animation (subEffect) xi.subEffect.EVASION_DOWN
+INSERT INTO `item_mods` VALUES (18294,501,10);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (18294,506,50); -- Extra DMG Chance 5%
 INSERT INTO `item_mods` VALUES (18294,507,200); -- Extra DMG X2
+INSERT INTO `item_mods` VALUES (18294,951,148); -- Additional effect Status ID xi.effect.EVASION_DOWN
+INSERT INTO `item_mods` VALUES (18294,952,15);  -- Additional effect Status Potency 15gung
+INSERT INTO `item_mods` VALUES (18294,953,60);  -- Additional effect Status Duration 60sec
 INSERT INTO `item_mods` VALUES (18295,25,25); -- Bravura LV80 - ACC +25
 INSERT INTO `item_mods` VALUES (18295,256,6); -- Aftermath
 INSERT INTO `item_mods` VALUES (18295,355,89); -- Metatron Torment
@@ -22310,9 +22754,14 @@ INSERT INTO `item_mods` VALUES (18299,356,121); -- Geirskogul
 INSERT INTO `item_mods` VALUES (18300,25,20); -- Gungnir LV75 - ACC +20
 INSERT INTO `item_mods` VALUES (18300,256,8); -- Aftermath
 INSERT INTO `item_mods` VALUES (18300,355,121); -- Geirskogul
-INSERT INTO `item_mods` VALUES (18300,431,1); -- Additional Effect
+INSERT INTO `item_mods` VALUES (18300,431,2);   -- Gungnir (Additional effect: DEFENSE_DOWN)
+INSERT INTO `item_mods` VALUES (18300,499,18);  -- Additional effect animation (subEffect) xi.subEffect.DEFENSE_DOWN
+INSERT INTO `item_mods` VALUES (18300,501,10);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (18300,506,50); -- Extra DMG Chance %5
 INSERT INTO `item_mods` VALUES (18300,507,200); -- Extra DMG X2
+INSERT INTO `item_mods` VALUES (18300,951,149); -- Additional effect Status ID xi.effect.DEFENSE_DOWN
+INSERT INTO `item_mods` VALUES (18300,952,17);  -- Additional effect Status Potency 1
+INSERT INTO `item_mods` VALUES (18300,953,60);  -- Additional effect Status Duration 60sec
 INSERT INTO `item_mods` VALUES (18301,25,25); -- Gungnir LV80 - ACC +25
 INSERT INTO `item_mods` VALUES (18301,256,8); -- Aftermath
 INSERT INTO `item_mods` VALUES (18301,355,121); -- Geirskogul
@@ -22324,9 +22773,14 @@ INSERT INTO `item_mods` VALUES (18305,356,105); -- Catastrophe
 INSERT INTO `item_mods` VALUES (18306,25,20); -- Apocalypse LV75 - ACC +20
 INSERT INTO `item_mods` VALUES (18306,256,7); -- Aftermath
 INSERT INTO `item_mods` VALUES (18306,355,105); -- Catastrophe
-INSERT INTO `item_mods` VALUES (18306,431,1); -- Additional Effect
+INSERT INTO `item_mods` VALUES (18306,431,2);   -- Apocalypse (Additional effect: BLIND)
+INSERT INTO `item_mods` VALUES (18306,499,12);  -- Additional effect animation (subEffect) xi.subEffect.BLIND
+INSERT INTO `item_mods` VALUES (18306,501,10);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (18306,506,50); -- Extra DMG Chance 5%
 INSERT INTO `item_mods` VALUES (18306,507,200); -- Extra DMG X2
+INSERT INTO `item_mods` VALUES (18306,951,5);   -- Additional effect Status ID xi.effect.Blindness
+INSERT INTO `item_mods` VALUES (18306,952,15);  -- Additional effect Status Potency 1
+INSERT INTO `item_mods` VALUES (18306,953,30);  -- Additional effect Status Duration 30sec
 INSERT INTO `item_mods` VALUES (18307,25,25); -- Apocalypse LV80 - ACC +25
 INSERT INTO `item_mods` VALUES (18307,256,7); -- Aftermath
 INSERT INTO `item_mods` VALUES (18307,355,105); -- Catastrophe
@@ -22338,9 +22792,14 @@ INSERT INTO `item_mods` VALUES (18311,356,137); -- Blade: Metsu
 INSERT INTO `item_mods` VALUES (18312,23,20); -- Kikoku LV75 - ATT +20
 INSERT INTO `item_mods` VALUES (18312,256,9); -- Aftermath
 INSERT INTO `item_mods` VALUES (18312,355,137); -- Blade: Metsu
-INSERT INTO `item_mods` VALUES (18312,431,1); -- Additional Effect
+INSERT INTO `item_mods` VALUES (18312,431,2);   -- Kikoku (Additional effect: PARALYSIS)
+INSERT INTO `item_mods` VALUES (18312,499,11);  -- Additional effect animation (subEffect) xi.subEffect.PARALYSIS
+INSERT INTO `item_mods` VALUES (18312,501,10);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (18312,506,50); -- Extra DMG Chance 5%
 INSERT INTO `item_mods` VALUES (18312,507,300); -- Extra DMG X3
+INSERT INTO `item_mods` VALUES (18312,951,4);   -- Additional effect Status ID xi.effect.PARALYSIS
+INSERT INTO `item_mods` VALUES (18312,952,17);  -- Additional effect Status Potency 1
+INSERT INTO `item_mods` VALUES (18312,953,30);  -- Additional effect Status Duration 30sec
 INSERT INTO `item_mods` VALUES (18313,23,25); -- Kikoku LV80 - ATT +25
 INSERT INTO `item_mods` VALUES (18313,256,9); -- Aftermath
 INSERT INTO `item_mods` VALUES (18313,355,137); -- Blade: Metsu
@@ -22352,9 +22811,14 @@ INSERT INTO `item_mods` VALUES (18317,356,153); -- Tachi: Kaiten
 INSERT INTO `item_mods` VALUES (18318,25,20); -- Amanomurakumo LV75 - ACC +20
 INSERT INTO `item_mods` VALUES (18318,256,10); -- Aftermath
 INSERT INTO `item_mods` VALUES (18318,355,153); -- Tachi: Kaiten
-INSERT INTO `item_mods` VALUES (18318,431,1); -- Additional Effect
+INSERT INTO `item_mods` VALUES (18318,431,2);   -- Amanomurakumo (Additional effect: ATTACK_DOWN)
+INSERT INTO `item_mods` VALUES (18318,499,18);  -- Additional effect animation (subEffect) xi.subEffect.ATTACK_DOWN
+INSERT INTO `item_mods` VALUES (18318,501,10);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (18318,506,50); -- Extra DMG Chance 5%
 INSERT INTO `item_mods` VALUES (18318,507,250); -- Extra DMG X2.5
+INSERT INTO `item_mods` VALUES (18318,951,147); -- Additional effect Status ID xi.effect.ATTACK_DOWN
+INSERT INTO `item_mods` VALUES (18318,952,10);  -- Additional effect Status Potency 1
+INSERT INTO `item_mods` VALUES (18318,953,60);  -- Additional effect Status Duration 60sec
 INSERT INTO `item_mods` VALUES (18319,25,25); -- Amanomurakumo LV80 - ACC +25
 INSERT INTO `item_mods` VALUES (18319,256,10); -- Aftermath
 INSERT INTO `item_mods` VALUES (18319,355,153); -- Tachi: Kaiten
@@ -22366,7 +22830,10 @@ INSERT INTO `item_mods` VALUES (18323,356,170); -- Randgrith
 INSERT INTO `item_mods` VALUES (18324,23,20); -- Mjollnir LV75 - ATT +20
 INSERT INTO `item_mods` VALUES (18324,256,11); -- Aftermath
 INSERT INTO `item_mods` VALUES (18324,355,170); -- Randgrith
-INSERT INTO `item_mods` VALUES (18324,431,1); -- Additional Effect
+INSERT INTO `item_mods` VALUES (18324,431,4);   -- Mjollnir (Additional effect: MP_HEAL)
+INSERT INTO `item_mods` VALUES (18324,499,18);  -- Additional effect animation (subEffect) xi.subEffect.MP_DRAIN
+INSERT INTO `item_mods` VALUES (18324,500,16);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (18324,501,10);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (18324,506,50); -- Extra DMG Chance 5%
 INSERT INTO `item_mods` VALUES (18324,507,300); -- Extra DMG X3
 INSERT INTO `item_mods` VALUES (18325,23,25); -- Mjollnir LV80 - ATT +25
@@ -22380,7 +22847,9 @@ INSERT INTO `item_mods` VALUES (18329,356,185); -- Gates of Tartarus
 INSERT INTO `item_mods` VALUES (18330,25,20); -- Claustrum LV75 - ACC +20
 INSERT INTO `item_mods` VALUES (18330,256,12); -- Aftermath
 INSERT INTO `item_mods` VALUES (18330,355,185); -- Gate of Tartarus
-INSERT INTO `item_mods` VALUES (18330,431,1); -- Additional Effect
+INSERT INTO `item_mods` VALUES (18330,431,9);   -- Claustrum (Additional effect: DISPEL)
+INSERT INTO `item_mods` VALUES (18330,499,8);   -- Additional effect animation (subEffect) xi.subEffect.DARKNESS_DAMAGE
+INSERT INTO `item_mods` VALUES (18330,501,15);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (18330,506,50); -- Extra DMG Chance 5%
 INSERT INTO `item_mods` VALUES (18330,507,250); -- Extra DMG X2.5
 INSERT INTO `item_mods` VALUES (18331,25,25); -- Claustrum LV80 - ACC +25
@@ -22446,7 +22915,11 @@ INSERT INTO `item_mods` VALUES (18357,501,10);  -- Additional effect Chance 10%
 INSERT INTO `item_mods` VALUES (18357,951,149); -- Additional effect Status ID xi.effect.DEFENSE_DOWN
 INSERT INTO `item_mods` VALUES (18357,952,12);  -- Additional effect Status Potency 12
 INSERT INTO `item_mods` VALUES (18357,953,60);  -- Additional effect Status Duration 60sec
-INSERT INTO `item_mods` VALUES (18359,431,1);
+INSERT INTO `item_mods` VALUES (18359,431,1);   -- Boreas Cesti (Additional effect: Wind Damage)
+INSERT INTO `item_mods` VALUES (18359,499,3);   -- Additional effect animation (subEffect)
+INSERT INTO `item_mods` VALUES (18359,500,15);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (18359,501,100); -- Additional effect Chance 100%
+INSERT INTO `item_mods` VALUES (18359,950,3);   -- Additional effect element Wind (xi.magic.element)
 INSERT INTO `item_mods` VALUES (18360,13,7);
 INSERT INTO `item_mods` VALUES (18360,826,2);
 INSERT INTO `item_mods` VALUES (18361,10,2);
@@ -22467,9 +22940,17 @@ INSERT INTO `item_mods` VALUES (18373,12,2);
 INSERT INTO `item_mods` VALUES (18374,8,1);
 INSERT INTO `item_mods` VALUES (18374,9,1);
 INSERT INTO `item_mods` VALUES (18378,377,13);
-INSERT INTO `item_mods` VALUES (18379,431,1);
+INSERT INTO `item_mods` VALUES (18379,431,1);   -- Vulcan Claymore ((Additional effect: Fire Damage))
+INSERT INTO `item_mods` VALUES (18379,499,1);   -- Additional effect animation (subEffect)
+INSERT INTO `item_mods` VALUES (18379,500,10);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (18379,501,5);   -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (18379,950,1);   -- Additional effect element Fire (xi.magic.element)
 INSERT INTO `item_mods` VALUES (18380,345,1000);  -- Martial Sword: TP Bonus +1000
-INSERT INTO `item_mods` VALUES (18381,431,1);
+INSERT INTO `item_mods` VALUES (18381,431,1);   -- Prominence Sword ((Additional effect: Fire Damage))
+INSERT INTO `item_mods` VALUES (18381,499,1);   -- Additional effect animation (subEffect)
+INSERT INTO `item_mods` VALUES (18381,500,10);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (18381,501,5);   -- Additional effect Chance 5%
+INSERT INTO `item_mods` VALUES (18381,950,1);   -- Additional effect element Fire (xi.magic.element)
 INSERT INTO `item_mods` VALUES (18385,23,3);
 INSERT INTO `item_mods` VALUES (18385,302,3);
 INSERT INTO `item_mods` VALUES (18386,28,2);
@@ -22477,7 +22958,11 @@ INSERT INTO `item_mods` VALUES (18386,30,2);
 INSERT INTO `item_mods` VALUES (18389,392,15);    -- Crude Sword: "Weapon Bash"+15
 INSERT INTO `item_mods` VALUES (18392,13,2);
 INSERT INTO `item_mods` VALUES (18392,22,3); -- DARK_RES
-INSERT INTO `item_mods` VALUES (18392,431,1);
+INSERT INTO `item_mods` VALUES (18392,431,1);   -- Sacred Maul ((Additional effect: Light Damage))
+INSERT INTO `item_mods` VALUES (18392,499,7);   -- Additional effect animation (subEffect)
+INSERT INTO `item_mods` VALUES (18392,500,21);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (18392,501,5);   -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (18392,950,7);   -- Additional effect element Light (xi.magic.element)
 INSERT INTO `item_mods` VALUES (18393,111,4);
 INSERT INTO `item_mods` VALUES (18394,71,2);
 INSERT INTO `item_mods` VALUES (18395,8,5);
@@ -22561,7 +23046,11 @@ INSERT INTO `item_mods` VALUES (18447,306,100);
 INSERT INTO `item_mods` VALUES (18448,25,4);
 INSERT INTO `item_mods` VALUES (18449,27,5);
 INSERT INTO `item_mods` VALUES (18450,289,2);
-INSERT INTO `item_mods` VALUES (18451,431,1);
+INSERT INTO `item_mods` VALUES (18451,431,1);   -- Mokusa (Additional effect: Wind Damage)
+INSERT INTO `item_mods` VALUES (18451,499,3);   -- Additional effect animation (subEffect)
+INSERT INTO `item_mods` VALUES (18451,500,19);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (18451,501,5);   -- Additional effect Chance 5%
+INSERT INTO `item_mods` VALUES (18451,950,3);   -- Additional effect element Wind (xi.magic.element)
 INSERT INTO `item_mods` VALUES (18454,10,10);     -- Ishikirimaru: VIT+10
 INSERT INTO `item_mods` VALUES (18454,18,10);     -- Earth+10
 INSERT INTO `item_mods` VALUES (18456,23,7);      -- Yoshihiro: Attack+7
@@ -22638,7 +23127,11 @@ INSERT INTO `item_mods` VALUES (18498,161,-800);
 INSERT INTO `item_mods` VALUES (18499,2,10);
 INSERT INTO `item_mods` VALUES (18499,5,10);
 INSERT INTO `item_mods` VALUES (18500,384,100);
-INSERT INTO `item_mods` VALUES (18503,431,1);
+INSERT INTO `item_mods` VALUES (18503,431,1);   -- Mammut (Additional effect: Ice Damage)
+INSERT INTO `item_mods` VALUES (18503,499,2);   -- Additional effect animation (subEffect)
+INSERT INTO `item_mods` VALUES (18503,500,15);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (18503,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (18503,950,2);   -- Additional effect element Ice (xi.magic.element)
 INSERT INTO `item_mods` VALUES (18504,11,4);
 INSERT INTO `item_mods` VALUES (18504,229,2);
 INSERT INTO `item_mods` VALUES (18506,288,1);
@@ -22777,7 +23270,11 @@ INSERT INTO `item_mods` VALUES (18595,73,5);
 INSERT INTO `item_mods` VALUES (18596,29,5);
 INSERT INTO `item_mods` VALUES (18597,487,5);     -- Catalyst: Bonus damage added to magic burst
 INSERT INTO `item_mods` VALUES (18599,5,10);
-INSERT INTO `item_mods` VALUES (18599,431,1);
+INSERT INTO `item_mods` VALUES (18599,431,6);   -- Pestle (Additional effect: MP DRAIN) 
+INSERT INTO `item_mods` VALUES (18599,499,22);  -- Additional effect animation (subEffect)
+INSERT INTO `item_mods` VALUES (18599,500,8);   -- Additional effect damage
+INSERT INTO `item_mods` VALUES (18599,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (18599,950,8);   -- Additional effect element Darkness (xi.magic.element)
 INSERT INTO `item_mods` VALUES (18600,18,2); -- EARTH_RES
 INSERT INTO `item_mods` VALUES (18604,12,2);
 INSERT INTO `item_mods` VALUES (18604,30,3);
@@ -23346,7 +23843,7 @@ INSERT INTO `item_mods` VALUES (18808,27,-2);
 INSERT INTO `item_mods` VALUES (18809,13,3);
 INSERT INTO `item_mods` VALUES (18809,27,-3);
 INSERT INTO `item_mods` VALUES (18810,431,1);
-INSERT INTO `item_mods` VALUES (18811,370,1);
+INSERT INTO `item_mods` VALUES (18811,370,1); -- Oneiros Grip - Regen effect
 INSERT INTO `item_mods` VALUES (18812,16,10); -- ICE_RES
 INSERT INTO `item_mods` VALUES (18814,2,40);      -- Salubrious Grip: HP+40
 INSERT INTO `item_mods` VALUES (18815,289,-5);    -- Arbuda Grip: "Subtle Blow"-5
@@ -23421,7 +23918,11 @@ INSERT INTO `item_mods` VALUES (18849,10,6);
 INSERT INTO `item_mods` VALUES (18851,8,8);
 INSERT INTO `item_mods` VALUES (18853,13,2);
 INSERT INTO `item_mods` VALUES (18853,22,3); -- DARK_RES
-INSERT INTO `item_mods` VALUES (18853,431,1);
+INSERT INTO `item_mods` VALUES (18853,431,1);   -- Spirit Maul ((Additional effect: Light Damage))
+INSERT INTO `item_mods` VALUES (18853,499,7);   -- Additional effect animation (subEffect)
+INSERT INTO `item_mods` VALUES (18853,500,21);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (18853,501,5);   -- Additional effect Chance 5%
+INSERT INTO `item_mods` VALUES (18853,950,7);   -- Additional effect element Light (xi.magic.element)
 INSERT INTO `item_mods` VALUES (18854,2,30);
 INSERT INTO `item_mods` VALUES (18854,5,30);
 INSERT INTO `item_mods` VALUES (18854,28,4);
@@ -23570,7 +24071,11 @@ INSERT INTO `item_mods` VALUES (18951,230,2);
 INSERT INTO `item_mods` VALUES (18952,161,-500);
 INSERT INTO `item_mods` VALUES (18953,2,12);
 INSERT INTO `item_mods` VALUES (18953,5,12);
-INSERT INTO `item_mods` VALUES (18953,431,1);
+INSERT INTO `item_mods` VALUES (18953,431,1);   -- Beluga (Additional effect: Water Damage)
+INSERT INTO `item_mods` VALUES (18953,499,6);   -- Additional effect animation (subEffect)
+INSERT INTO `item_mods` VALUES (18953,500,21);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (18953,501,10);  -- Additional effect Chance 10%
+INSERT INTO `item_mods` VALUES (18953,950,6);   -- Additional effect element water (xi.magic.element)
 INSERT INTO `item_mods` VALUES (18957,392,8);     -- Smiting Scythe: "Weapon Bash"+8
 INSERT INTO `item_mods` VALUES (18960,392,10);    -- Smiting Scythe +1: "Weapon Bash"+10
 INSERT INTO `item_mods` VALUES (18964,9,3);
@@ -23962,8 +24467,8 @@ INSERT INTO `item_mods` VALUES (19139,25,5);
 INSERT INTO `item_mods` VALUES (19140,8,8);
 INSERT INTO `item_mods` VALUES (19140,11,8);
 INSERT INTO `item_mods` VALUES (19140,431,1);
-INSERT INTO `item_mods` VALUES (19141,11,6);
-INSERT INTO `item_mods` VALUES (19141,421,5);
+INSERT INTO `item_mods` VALUES (19141,11,6); -- Oneiros Knife - AGI +6
+INSERT INTO `item_mods` VALUES (19141,421,10); -- Increase Crit Hit Damage +10% https://www.bg-wiki.com/ffxi/Oneiros%20Knife
 INSERT INTO `item_mods` VALUES (19142,22,20); -- DARK_RES
 INSERT INTO `item_mods` VALUES (19142,241,2);
 INSERT INTO `item_mods` VALUES (19142,242,2);
@@ -24643,8 +25148,8 @@ INSERT INTO `item_mods` VALUES (19760,23,2);  -- Anger Bomblet -- 2 Att
 INSERT INTO `item_mods` VALUES (19760,68,-2); -- -2 Eva
 INSERT INTO `item_mods` VALUES (19760,288,1); -- 1 Double Attack
 INSERT INTO `item_mods` VALUES (19761,168,10);    -- Impatiens: Spell interruption rate down 10%
-INSERT INTO `item_mods` VALUES (19762,84,2);
-INSERT INTO `item_mods` VALUES (19762,909,2);     -- Occ. quickens spellcasting +2%
+INSERT INTO `item_mods` VALUES (19762,84,2); -- Oneiros tanthlum - Axe skill +2
+INSERT INTO `item_mods` VALUES (19762,438,6); -- "Madrigal" Attack +6
 INSERT INTO `item_mods` VALUES (19763,23,-7);  -- Oneiros Cluster -- -7 Att
 INSERT INTO `item_mods` VALUES (19763,384,100); -- 1% Gear Haste
 INSERT INTO `item_mods` VALUES (19764,9,4);
@@ -25298,7 +25803,7 @@ INSERT INTO `item_mods` VALUES (20563,355,31); -- Rudra's Storm
 INSERT INTO `item_mods` VALUES (20564,9,20);   -- Twasthar 119 AG - DEX+20
 INSERT INTO `item_mods` VALUES (20564,256,44); -- Aftermath
 INSERT INTO `item_mods` VALUES (20564,355,31); -- Rudra's Storm
-INSERT INTO `item_mods` VALUES (20568,431,1);  -- Wind Knife +1: Additional effect: Wind Damage (Type DAMAGE)
+INSERT INTO `item_mods` VALUES (20568,431,1);  -- Wind Knife +1: Additional effect: Wind Damage 
 INSERT INTO `item_mods` VALUES (20568,499,3);  -- Additional effect animation (subEffect)
 INSERT INTO `item_mods` VALUES (20568,500,2);  -- Additional effect damage before resists
 INSERT INTO `item_mods` VALUES (20568,501,80); -- Additional effect Chance 80% (per https://www.bg-wiki.com/ffxi/Wind_Knife_+1)
@@ -25509,7 +26014,7 @@ INSERT INTO `item_mods` VALUES (20716,8,12);      -- Perfervid sword - STR+15
 INSERT INTO `item_mods` VALUES (20716,15,25);     -- [Element: Fire]+25
 INSERT INTO `item_mods` VALUES (20716,25,25);     -- Accuracy+20
 INSERT INTO `item_mods` VALUES (20716,32,15);     -- Fire elemental "Magic Atk. Bonus"+15
--- INSERT INTO `item_mods` VALUES (20716,431,1);     -- Additional effect: Fire damage
+-- INSERT INTO `item_mods` VALUES (20716,431,1);  -- (Additional effect: Fire Damage)
 INSERT INTO `item_mods` VALUES (20717,25,27);     -- Arendsi Fleuret (iLvl 119): Accuracy +27
 INSERT INTO `item_mods` VALUES (20717,30,15);     -- Magic Accuracy +15
 INSERT INTO `item_mods` VALUES (20717,68,13);     -- Evasion +13
@@ -26581,6 +27086,8 @@ INSERT INTO `item_mods` VALUES (21371,25,5);
 INSERT INTO `item_mods` VALUES (21371,73,3);
 INSERT INTO `item_mods` VALUES (21371,302,2);
 INSERT INTO `item_mods` VALUES (21371,384,900);
+INSERT INTO `item_mods` VALUES (21372,1027,18);    -- Dunna: Handbell Skill+18
+INSERT INTO `item_mods` VALUES (21372,961,5);      -- Dunna: Geomancy +5
 INSERT INTO `item_mods` VALUES (21373,5,15);
 INSERT INTO `item_mods` VALUES (21373,163,-200);
 INSERT INTO `item_mods` VALUES (21374,27,2);
@@ -26655,7 +27162,11 @@ INSERT INTO `item_mods` VALUES (21428,23,10);
 INSERT INTO `item_mods` VALUES (21428,25,10);
 INSERT INTO `item_mods` VALUES (21429,30,5);
 INSERT INTO `item_mods` VALUES (21429,114,5);
-INSERT INTO `item_mods` VALUES (21460,5,5);
+INSERT INTO `item_mods` VALUES (21460,5,5);        -- Matre bell:  Geomancy +5
+INSERT INTO `item_mods` VALUES (21461,5,30);       -- Filiae Bell: MP+30
+INSERT INTO `item_mods` VALUES (21461,1027,15);    -- Filiae Bell: Handbell Skill+15
+INSERT INTO `item_mods` VALUES (21462,961,3);      -- Eminent bell: Geomancy +3
+INSERT INTO `item_mods` VALUES (21463,961,5);      -- Nepote bell: Geomancy +5
 INSERT INTO `item_mods` VALUES (21479,24,15);
 INSERT INTO `item_mods` VALUES (21479,26,5);
 INSERT INTO `item_mods` VALUES (21479,305,15);
@@ -28113,7 +28624,7 @@ INSERT INTO `item_mods` VALUES (22286,25,15);     -- Accuracy+15
 INSERT INTO `item_mods` VALUES (22287,26,25);     -- Scout's Bolt: Ranged Accuracy+25
 INSERT INTO `item_mods` VALUES (22287,30,25);     -- Scout's Bolt: Magic Accuracy+25
 INSERT INTO `item_mods` VALUES (22287,305,20);    -- Scout's Bolt: "Recycle"+20
--- INSERT INTO `item_mods` VALUES (22287,431,1);  -- Scout's Bolt: Additional effect: Light damage
+-- INSERT INTO `item_mods` VALUES (22287,431,1);  -- Scout's Bolt: (Additional effect: Light Damage)
 INSERT INTO `item_mods` VALUES (22300,8,3);       -- Crepuscular Pebble: STR+3
 INSERT INTO `item_mods` VALUES (22300,10,3);      -- VIT+3
 -- INSERT INTO `item_mods` VALUES (22300,,3);     -- Physical damage cap +3%
@@ -28483,7 +28994,7 @@ INSERT INTO `item_mods` VALUES (23060,68,46);     -- Evasion+46
 INSERT INTO `item_mods` VALUES (23060,170,4);     -- Fast Cast+4
 INSERT INTO `item_mods` VALUES (23060,384,600);   -- Haste +6%
 INSERT INTO `item_mods` VALUES (23060,401,3);     -- Sublimation+3
-INSERT INTO `item_mods` VALUES (23061,1,107);     -- geo._galero_+2 DEF:107
+INSERT INTO `item_mods` VALUES (23061,1,107);     -- Geomancy Galero +2: DEF 107
 INSERT INTO `item_mods` VALUES (23061,2,54);      -- HP+54
 INSERT INTO `item_mods` VALUES (23061,5,69);      -- MP+69
 INSERT INTO `item_mods` VALUES (23061,8,21);      -- STR+21
@@ -28493,12 +29004,13 @@ INSERT INTO `item_mods` VALUES (23061,11,21);     -- AGI+21
 INSERT INTO `item_mods` VALUES (23061,12,31);     -- INT+31
 INSERT INTO `item_mods` VALUES (23061,13,31);     -- MND+31
 INSERT INTO `item_mods` VALUES (23061,14,26);     -- CHR+26
-INSERT INTO `item_mods` VALUES (23061,29,5);      -- Magic Defense Bonus+5
 INSERT INTO `item_mods` VALUES (23061,30,37);     -- Magic Accuracy+37
-INSERT INTO `item_mods` VALUES (23061,31,85);     -- Magic Evasion+85
-INSERT INTO `item_mods` VALUES (23061,68,46);     -- Evasion+46
-INSERT INTO `item_mods` VALUES (23061,115,17);    -- Elemental Magic Skill+17
+INSERT INTO `item_mods` VALUES (23061,68,46);     -- Evasion +46
+INSERT INTO `item_mods` VALUES (23061,31,85);     -- Magic Evasion +85
+INSERT INTO `item_mods` VALUES (23061,29,5);      -- Magic Def. Bonus +5
 INSERT INTO `item_mods` VALUES (23061,384,600);   -- Haste +6%
+INSERT INTO `item_mods` VALUES (23061,115,17);    -- Elemental magic skill +17
+INSERT INTO `item_mods` VALUES (23061,959,75);    -- Enhances "Cardinal Chant" effect +3
 INSERT INTO `item_mods` VALUES (23062,1,115);     -- rune._bandeau_+2 DEF:115
 INSERT INTO `item_mods` VALUES (23062,2,99);      -- HP+99
 INSERT INTO `item_mods` VALUES (23062,5,79);      -- MP+79
@@ -28534,6 +29046,24 @@ INSERT INTO `item_mods` VALUES (23076,68,43);     -- Evasion+43
 INSERT INTO `item_mods` VALUES (23076,384,700);   -- Haste+7
 INSERT INTO `item_mods` VALUES (23076,402,64);    -- Healing breath 64/256
 INSERT INTO `item_mods` VALUES (23079,542,50);    -- Phantom Roll Bonus Without Job Present %+
+INSERT INTO `item_mods` VALUES (23083,1,108);     -- Bagua Galero +2: DEF 108
+INSERT INTO `item_mods` VALUES (23083,2,81);      -- HP+81
+INSERT INTO `item_mods` VALUES (23083,5,42);      -- MP+42
+INSERT INTO `item_mods` VALUES (23083,8,19);      -- STR+19
+INSERT INTO `item_mods` VALUES (23083,9,19);      -- DEX+19
+INSERT INTO `item_mods` VALUES (23083,10,19);     -- VIT+19
+INSERT INTO `item_mods` VALUES (23083,11,19);     -- AGI+19
+INSERT INTO `item_mods` VALUES (23083,12,24);     -- INT+24
+INSERT INTO `item_mods` VALUES (23083,13,24);     -- MND+24
+INSERT INTO `item_mods` VALUES (23083,14,24);     -- CHR+24
+INSERT INTO `item_mods` VALUES (23083,25,27);     -- Accuracy+27
+INSERT INTO `item_mods` VALUES (23083,30,36);     -- Magic Accuracy +36
+INSERT INTO `item_mods` VALUES (23083,68,46);     -- Evasion+46
+INSERT INTO `item_mods` VALUES (23083,31,85);     -- Magic Evasion +85
+INSERT INTO `item_mods` VALUES (23083,28,42);     -- Magic Attack Bonus+42
+INSERT INTO `item_mods` VALUES (23083,29,6);      -- Magic Def. Bonus +6
+INSERT INTO `item_mods` VALUES (23083,384,600);   -- Haste +6%
+INSERT INTO `item_mods` VALUES (23083,315,30);    -- Drain and Aspir potency +30%
 INSERT INTO `item_mods` VALUES (23107,1,153);     -- pumm._lorica_+2 DEF:153
 INSERT INTO `item_mods` VALUES (23107,2,91);      -- HP+91
 INSERT INTO `item_mods` VALUES (23107,8,35);      -- STR+35
@@ -28910,7 +29440,7 @@ INSERT INTO `item_mods` VALUES (23127,337,22);    -- Dark Arts+22
 INSERT INTO `item_mods` VALUES (23127,369,2);     -- Refresh+2
 INSERT INTO `item_mods` VALUES (23127,384,300);   -- Haste +30
 INSERT INTO `item_mods` VALUES (23127,487,5);     -- Magic Burst Damage+5
-INSERT INTO `item_mods` VALUES (23128,1,137);     -- geomancy_tunic_+2 DEF:137
+INSERT INTO `item_mods` VALUES (23128,1,137);     -- Geomancy Tunic +2: DEF 137
 INSERT INTO `item_mods` VALUES (23128,2,81);      -- HP+81
 INSERT INTO `item_mods` VALUES (23128,5,127);     -- MP+127
 INSERT INTO `item_mods` VALUES (23128,8,26);      -- STR+26
@@ -28920,13 +29450,14 @@ INSERT INTO `item_mods` VALUES (23128,11,26);     -- AGI+26
 INSERT INTO `item_mods` VALUES (23128,12,34);     -- INT+34
 INSERT INTO `item_mods` VALUES (23128,13,34);     -- MND+34
 INSERT INTO `item_mods` VALUES (23128,14,34);     -- CHR+34
-INSERT INTO `item_mods` VALUES (23128,29,6);      -- Magic Defense Bonus+6
-INSERT INTO `item_mods` VALUES (23128,30,40);     -- Magic Accuracy+40
-INSERT INTO `item_mods` VALUES (23128,31,90);     -- Magic Evasion+90
-INSERT INTO `item_mods` VALUES (23128,68,51);     -- Evasion+51
-INSERT INTO `item_mods` VALUES (23128,116,19);    -- Dark Magic Skill+19
-INSERT INTO `item_mods` VALUES (23128,369,2);     -- Refresh+2
-INSERT INTO `item_mods` VALUES (23128,384,300);   -- Haste +30
+INSERT INTO `item_mods` VALUES (23128,30,40);     -- Magic Accuracy +40
+INSERT INTO `item_mods` VALUES (23128,68,51);     -- Evasion +51
+INSERT INTO `item_mods` VALUES (23128,31,90);     -- Magic Evasion +90
+INSERT INTO `item_mods` VALUES (23128,29,6);      -- Magic Def. Bonus +6
+INSERT INTO `item_mods` VALUES (23128,116,19);    -- Dark magic skill +19
+INSERT INTO `item_mods` VALUES (23128,384,300);   -- Haste +3%
+INSERT INTO `item_mods` VALUES (23128,1029,12);   -- "Life Cycle"+12
+INSERT INTO `item_mods` VALUES (23128,369,2);     -- Refresh +2
 INSERT INTO `item_mods` VALUES (23129,1,145);     -- runeists_coat_+2 DEF:145
 INSERT INTO `item_mods` VALUES (23129,2,208);     -- HP+208
 INSERT INTO `item_mods` VALUES (23129,5,66);      -- MP+66
@@ -28953,6 +29484,24 @@ INSERT INTO `item_mods` VALUES (23129,369,2);     -- Refresh+2
 INSERT INTO `item_mods` VALUES (23129,384,400);   -- Haste +40
 INSERT INTO `item_mods` VALUES (23130,955,25);  -- WAR AF2 119 +2 Body Aggressor Duration +25
 INSERT INTO `item_mods` VALUES (23136,965,38);    -- Caballarius Surcoat +2 - Converts 38% Covered Physical Damage to MP
+INSERT INTO `item_mods` VALUES (23150,1,139);   -- Bagua Tunic +2: DEF 139
+INSERT INTO `item_mods` VALUES (23150,2,104);   -- HP+104
+INSERT INTO `item_mods` VALUES (23150,5,109);   -- MP+109
+INSERT INTO `item_mods` VALUES (23150,8,26);    -- STR+26
+INSERT INTO `item_mods` VALUES (23150,9,26);    -- DEX+26
+INSERT INTO `item_mods` VALUES (23150,10,26);   -- VIT+26
+INSERT INTO `item_mods` VALUES (23150,11,26);   -- AGI+26
+INSERT INTO `item_mods` VALUES (23150,12,34);   -- INT+34
+INSERT INTO `item_mods` VALUES (23150,13,34);   -- MND+34
+INSERT INTO `item_mods` VALUES (23150,14,34);   -- CHR+34
+INSERT INTO `item_mods` VALUES (23150,25,30);   -- Accuracy+30
+INSERT INTO `item_mods` VALUES (23150,30,30);   -- Magic Accuracy+30
+INSERT INTO `item_mods` VALUES (23150,28,56);   -- "Magic Atk. Bonus"+56
+INSERT INTO `item_mods` VALUES (23150,68,51);   -- Evasion+51
+INSERT INTO `item_mods` VALUES (23150,31,90);   -- Magic Evasion+90
+INSERT INTO `item_mods` VALUES (23150,29,7);    -- "Magic Def. Bonus"+7
+INSERT INTO `item_mods` VALUES (23150,1026,14); -- Geomancy skill +14
+INSERT INTO `item_mods` VALUES (23150,348,300); -- Haste+3%
 INSERT INTO `item_mods` VALUES (23174,1,111);     -- pumm._mufflers_+2 DEF:111
 INSERT INTO `item_mods` VALUES (23174,2,55);      -- HP+55
 INSERT INTO `item_mods` VALUES (23174,8,23);      -- STR+23
@@ -29312,7 +29861,7 @@ INSERT INTO `item_mods` VALUES (23194,68,32);     -- Evasion+32
 INSERT INTO `item_mods` VALUES (23194,170,7);     -- Fast Cast+7
 INSERT INTO `item_mods` VALUES (23194,296,6);     -- Conserve MP+6
 INSERT INTO `item_mods` VALUES (23194,384,300);   -- Haste +30
-INSERT INTO `item_mods` VALUES (23195,1,95);      -- geo._mitaines_+2 DEF:95
+INSERT INTO `item_mods` VALUES (23195,1,95);      -- Geomancy Mitaines +2 DEF:95
 INSERT INTO `item_mods` VALUES (23195,2,70);      -- HP+70
 INSERT INTO `item_mods` VALUES (23195,5,58);      -- MP+58
 INSERT INTO `item_mods` VALUES (23195,8,11);      -- STR+11
@@ -29322,12 +29871,13 @@ INSERT INTO `item_mods` VALUES (23195,11,10);     -- AGI+10
 INSERT INTO `item_mods` VALUES (23195,12,24);     -- INT+24
 INSERT INTO `item_mods` VALUES (23195,13,38);     -- MND+38
 INSERT INTO `item_mods` VALUES (23195,14,24);     -- CHR+24
-INSERT INTO `item_mods` VALUES (23195,29,3);      -- Magic Defense Bonus+3
 INSERT INTO `item_mods` VALUES (23195,30,38);     -- Magic Accuracy+38
-INSERT INTO `item_mods` VALUES (23195,31,47);     -- Magic Evasion+47
 INSERT INTO `item_mods` VALUES (23195,68,32);     -- Evasion+32
-INSERT INTO `item_mods` VALUES (23195,161,-200);    -- Physical Damage Taken-2
-INSERT INTO `item_mods` VALUES (23195,384,300);   -- Haste +30
+INSERT INTO `item_mods` VALUES (23195,31,47);     -- Magic Evasion+47
+INSERT INTO `item_mods` VALUES (23195,29,3);      -- Magic Defense Bonus+3
+INSERT INTO `item_mods` VALUES (23195,1026,17);   -- Geomancy skill +17
+INSERT INTO `item_mods` VALUES (23195,384,300);   -- Haste +3%
+INSERT INTO `item_mods` VALUES (23195,161,-200);  -- Physical Damage Taken-2
 INSERT INTO `item_mods` VALUES (23196,1,103);     -- runeist_mitons_+2 DEF:103
 INSERT INTO `item_mods` VALUES (23196,2,75);      -- HP+75
 INSERT INTO `item_mods` VALUES (23196,5,37);      -- MP+37
@@ -29346,6 +29896,27 @@ INSERT INTO `item_mods` VALUES (23196,113,17);    -- Enhancing Magic Skill+17
 INSERT INTO `item_mods` VALUES (23196,161,-200);    -- Physical Damage Taken-2
 INSERT INTO `item_mods` VALUES (23196,384,500);   -- Haste +5%
 INSERT INTO `item_mods` VALUES (23197,956,10);  -- WAR AF2 119 +2 Hands Defender Duration +10
+INSERT INTO `item_mods` VALUES (23217,1,94);    -- Bagua Mitaines +2: DEF:94
+INSERT INTO `item_mods` VALUES (23217,2,32);    -- HP+32
+INSERT INTO `item_mods` VALUES (23217,5,24);    -- MP+24
+INSERT INTO `item_mods` VALUES (23217,8,11);    -- STR+11
+INSERT INTO `item_mods` VALUES (23217,9,33);    -- DEX+33
+INSERT INTO `item_mods` VALUES (23217,10,30);   -- VIT+30
+INSERT INTO `item_mods` VALUES (23217,11,10);   -- AGI+10
+INSERT INTO `item_mods` VALUES (23217,12,24);   -- INT+24
+INSERT INTO `item_mods` VALUES (23217,13,38);   -- MND+38
+INSERT INTO `item_mods` VALUES (23217,14,24);   -- CHR+24
+INSERT INTO `item_mods` VALUES (23217,25,28);   -- Accuracy+28
+INSERT INTO `item_mods` VALUES (23217,30,28);   -- Magic Accuracy+28
+INSERT INTO `item_mods` VALUES (23217,41,32);   -- Evasion+32
+INSERT INTO `item_mods` VALUES (23217,31,47);   -- Magic Evasion+47
+INSERT INTO `item_mods` VALUES (23217,28,43);   -- "Magic Atk. Bonus"+43
+INSERT INTO `item_mods` VALUES (23217,29,4);    -- "Magic Def. Bonus"+4
+INSERT INTO `item_mods` VALUES (23217,348,300); -- Haste+3%
+INSERT INTO `item_mods` VALUES (23217,27,7);    -- Enmity-7
+INSERT INTO `item_mods` VALUES (23217,487,8);   -- Magic burst damage +8
+INSERT INTO `item_mods` VALUES (23217,369,1);   -- "Refresh"+1
+INSERT INTO `item_mods` VALUES (23217,399,13);  -- Elemental magic casting time -13%
 INSERT INTO `item_mods` VALUES (23241,1,135);     -- pumm._cuisses_+2 DEF:135
 INSERT INTO `item_mods` VALUES (23241,2,75);      -- HP+75
 INSERT INTO `item_mods` VALUES (23241,8,35);      -- STR+35
@@ -29702,7 +30273,7 @@ INSERT INTO `item_mods` VALUES (23261,68,37);     -- Evasion+37
 INSERT INTO `item_mods` VALUES (23261,336,22);    -- Light Arts+22
 INSERT INTO `item_mods` VALUES (23261,374,8);     -- Cure Potency+8
 INSERT INTO `item_mods` VALUES (23261,384,500);   -- Haste +5%
-INSERT INTO `item_mods` VALUES (23262,1,119);     -- geomancy_pants_+2 DEF:119
+INSERT INTO `item_mods` VALUES (23262,1,119);     -- Geomancy Pants +2 DEF:119
 INSERT INTO `item_mods` VALUES (23262,2,117);     -- HP+117
 INSERT INTO `item_mods` VALUES (23262,5,96);      -- MP+96
 INSERT INTO `item_mods` VALUES (23262,8,30);      -- STR+30
@@ -29735,6 +30306,23 @@ INSERT INTO `item_mods` VALUES (23263,111,17);    -- Divine Magic Skill+17
 INSERT INTO `item_mods` VALUES (23263,161,-400);    -- Physical Damage Taken-4
 INSERT INTO `item_mods` VALUES (23263,384,600);   -- Haste +6%
 INSERT INTO `item_mods` VALUES (23263,958,8);     -- "resistance to all status ailments" +8
+INSERT INTO `item_mods` VALUES (23284,1,118);   -- Bagua pants +2: DEF:118
+INSERT INTO `item_mods` VALUES (23284,2,108);   -- HP+108
+INSERT INTO `item_mods` VALUES (23284,5,39);    -- MP+39
+INSERT INTO `item_mods` VALUES (23284,8,30);    -- STR+30
+INSERT INTO `item_mods` VALUES (23284,10,17);   -- VIT+17
+INSERT INTO `item_mods` VALUES (23284,11,25);   -- AGI+25
+INSERT INTO `item_mods` VALUES (23284,12,42);   -- INT+42
+INSERT INTO `item_mods` VALUES (23284,13,32);   -- MND+32
+INSERT INTO `item_mods` VALUES (23284,14,24);   -- CHR+24
+INSERT INTO `item_mods` VALUES (23284,25,29);   -- Accuracy+29
+INSERT INTO `item_mods` VALUES (23284,30,29);   -- Magic Accuracy+29
+INSERT INTO `item_mods` VALUES (23284,41,50);   -- Evasion+50
+INSERT INTO `item_mods` VALUES (23284,31,117);  -- Magic Evasion+117
+INSERT INTO `item_mods` VALUES (23284,23,44);   -- "Magic Atk. Bonus"+44
+INSERT INTO `item_mods` VALUES (23284,29,7);    -- "Magic Def. Bonus"+7
+INSERT INTO `item_mods` VALUES (23284,348,500); -- Haste+5%
+INSERT INTO `item_mods` VALUES (23284,960,18);  -- "Indicolure" spell duration +18
 INSERT INTO `item_mods` VALUES (23308,1,93);      -- pumm._calligae_+2 DEF:93
 INSERT INTO `item_mods` VALUES (23308,2,45);      -- HP+45
 INSERT INTO `item_mods` VALUES (23308,8,19);      -- STR+19
@@ -30078,7 +30666,7 @@ INSERT INTO `item_mods` VALUES (23328,31,117);    -- Magic Evasion+117
 INSERT INTO `item_mods` VALUES (23328,68,65);     -- Evasion+65
 INSERT INTO `item_mods` VALUES (23328,384,300);   -- Haste +30
 INSERT INTO `item_mods` VALUES (23328,489,-10);   -- Grimoire: Spellcasting time -10%
-INSERT INTO `item_mods` VALUES (23329,1,77);      -- geo._sandals_+2 DEF:77
+INSERT INTO `item_mods` VALUES (23329,1,77);      -- Geomancy sandals +2 DEF:77
 INSERT INTO `item_mods` VALUES (23329,2,19);      -- HP+19
 INSERT INTO `item_mods` VALUES (23329,5,73);      -- MP+73
 INSERT INTO `item_mods` VALUES (23329,8,15);      -- STR+15
@@ -30092,8 +30680,8 @@ INSERT INTO `item_mods` VALUES (23329,29,5);      -- Magic Defense Bonus+5
 INSERT INTO `item_mods` VALUES (23329,30,36);     -- Magic Accuracy+36
 INSERT INTO `item_mods` VALUES (23329,31,117);    -- Magic Evasion+117
 INSERT INTO `item_mods` VALUES (23329,68,65);     -- Evasion+65
-INSERT INTO `item_mods` VALUES (23329,169,12);    -- Movement Speed+12
-INSERT INTO `item_mods` VALUES (23329,384,300);   -- Haste +30
+INSERT INTO `item_mods` VALUES (23329,169,12);    -- Movement Speed+12%
+INSERT INTO `item_mods` VALUES (23329,384,300);   -- Haste +3%
 INSERT INTO `item_mods` VALUES (23330,1,85);      -- runeist_boots_+2 DEF:85
 INSERT INTO `item_mods` VALUES (23330,2,64);      -- HP+64
 INSERT INTO `item_mods` VALUES (23330,8,17);      -- STR+17
@@ -30108,6 +30696,24 @@ INSERT INTO `item_mods` VALUES (23330,31,89);     -- Magic Evasion+89
 INSERT INTO `item_mods` VALUES (23330,68,102);    -- Evasion+102
 INSERT INTO `item_mods` VALUES (23330,384,400);   -- Haste +40
 INSERT INTO `item_mods` VALUES (23331,954,25);  -- WAR AF2 119 +2 Feet Berserk Duration +25
+INSERT INTO `item_mods` VALUES (23351,1,77);      -- Bagua Sandals +2: DEF:77
+INSERT INTO `item_mods` VALUES (23351,2,53);      -- HP+53
+INSERT INTO `item_mods` VALUES (23351,5,24);      -- MP+24
+INSERT INTO `item_mods` VALUES (23351,8,15);      -- STR+15
+INSERT INTO `item_mods` VALUES (23351,9,16);      -- DEX+16
+INSERT INTO `item_mods` VALUES (23351,10,18);     -- VIT+18
+INSERT INTO `item_mods` VALUES (23351,11,38);     -- AGI+38
+INSERT INTO `item_mods` VALUES (23351,12,25);     -- INT+25
+INSERT INTO `item_mods` VALUES (23351,13,27);     -- MND+27
+INSERT INTO `item_mods` VALUES (23351,14,39);     -- CHR+39
+INSERT INTO `item_mods` VALUES (23351,25,26);     -- Accuracy+26
+INSERT INTO `item_mods` VALUES (23351,28,41);     -- "Magic Atk. Bonus"+41
+INSERT INTO `item_mods` VALUES (23351,29,6);      -- "Magic Def. Bonus"+6
+INSERT INTO `item_mods` VALUES (23351,30,26);     -- Magic Accuracy+26
+INSERT INTO `item_mods` VALUES (23351,31,117);    -- Magic Evasion+117
+INSERT INTO `item_mods` VALUES (23351,68,65);     -- Evasion+65
+INSERT INTO `item_mods` VALUES (23351,114,19);    -- Enfeebling magic skill +19
+INSERT INTO `item_mods` VALUES (23351,384,300);   -- Haste+3%
 INSERT INTO `item_mods` VALUES (23375,1,133);     -- pummelers_mask_+3 DEF:133
 INSERT INTO `item_mods` VALUES (23375,2,67);      -- HP+67
 INSERT INTO `item_mods` VALUES (23375,8,31);      -- STR+31
@@ -30474,7 +31080,7 @@ INSERT INTO `item_mods` VALUES (23395,68,56);     -- Evasion+56
 INSERT INTO `item_mods` VALUES (23395,170,8);     -- Fast Cast+8
 INSERT INTO `item_mods` VALUES (23395,384,600);   -- Haste +6%
 INSERT INTO `item_mods` VALUES (23395,401,4);     -- Sublimation+4
-INSERT INTO `item_mods` VALUES (23396,1,117);     -- geo._galero_+3 DEF:117
+INSERT INTO `item_mods` VALUES (23396,1,117);     -- Geomancy Galero +3: DEF 117
 INSERT INTO `item_mods` VALUES (23396,2,64);      -- HP+64
 INSERT INTO `item_mods` VALUES (23396,5,79);      -- MP+79
 INSERT INTO `item_mods` VALUES (23396,8,26);      -- STR+26
@@ -30484,12 +31090,13 @@ INSERT INTO `item_mods` VALUES (23396,11,26);     -- AGI+26
 INSERT INTO `item_mods` VALUES (23396,12,36);     -- INT+36
 INSERT INTO `item_mods` VALUES (23396,13,36);     -- MND+36
 INSERT INTO `item_mods` VALUES (23396,14,31);     -- CHR+31
-INSERT INTO `item_mods` VALUES (23396,29,6);      -- Magic Defense Bonus+6
 INSERT INTO `item_mods` VALUES (23396,30,47);     -- Magic Accuracy+47
-INSERT INTO `item_mods` VALUES (23396,31,95);     -- Magic Evasion+95
-INSERT INTO `item_mods` VALUES (23396,68,56);     -- Evasion+56
-INSERT INTO `item_mods` VALUES (23396,115,19);    -- Elemental Magic Skill+19
+INSERT INTO `item_mods` VALUES (23396,68,56);     -- Evasion +56
+INSERT INTO `item_mods` VALUES (23396,31,95);     -- Magic Evasion +95
+INSERT INTO `item_mods` VALUES (23396,29,6);      -- Magic Def. Bonus +6
 INSERT INTO `item_mods` VALUES (23396,384,600);   -- Haste +6%
+INSERT INTO `item_mods` VALUES (23396,115,19);    -- Elemental magic skill +19
+INSERT INTO `item_mods` VALUES (23396,959,100);   -- Enhances "Cardinal Chant" effect +4
 INSERT INTO `item_mods` VALUES (23397,1,125);     -- rune._bandeau_+3 DEF:125
 INSERT INTO `item_mods` VALUES (23397,2,109);     -- HP+109
 INSERT INTO `item_mods` VALUES (23397,5,89);      -- MP+89
@@ -30525,6 +31132,24 @@ INSERT INTO `item_mods` VALUES (23411,68,53);     -- Evasion +53
 INSERT INTO `item_mods` VALUES (23411,384,700);   -- Haste +7%
 INSERT INTO `item_mods` VALUES (23411,402,72);    -- Healing breath 72/256
 INSERT INTO `item_mods` VALUES (23414,542,50);    -- Phantom Roll Bonus Without Job Present %+
+INSERT INTO `item_mods` VALUES (23418,1,118);     -- Bagua Galero +3: DEF 118
+INSERT INTO `item_mods` VALUES (23418,2,91);      -- HP +91
+INSERT INTO `item_mods` VALUES (23418,5,52);      -- MP +52
+INSERT INTO `item_mods` VALUES (23418,8,24);      -- STR +24
+INSERT INTO `item_mods` VALUES (23418,9,24);      -- DEX +24
+INSERT INTO `item_mods` VALUES (23418,10,24);     -- VIT +24
+INSERT INTO `item_mods` VALUES (23418,11,24);     -- AGI +24
+INSERT INTO `item_mods` VALUES (23418,12,29);     -- INT +29
+INSERT INTO `item_mods` VALUES (23418,13,29);     -- MND +29
+INSERT INTO `item_mods` VALUES (23418,14,29);     -- CHR +29
+INSERT INTO `item_mods` VALUES (23418,25,37);     -- Accuracy+37
+INSERT INTO `item_mods` VALUES (23418,30,46);     -- Magic Accuracy +46
+INSERT INTO `item_mods` VALUES (23418,68,56);     -- Evasion+56
+INSERT INTO `item_mods` VALUES (23418,31,95);     -- Magic Evasion +95
+INSERT INTO `item_mods` VALUES (23418,28,49);     -- Magic Attack Bonus+49
+INSERT INTO `item_mods` VALUES (23418,29,7);      -- Magic Def. Bonus +7
+INSERT INTO `item_mods` VALUES (23418,384,600);   -- Haste +6%
+INSERT INTO `item_mods` VALUES (23418,315,35);    -- Drain and Aspir potency +35%
 INSERT INTO `item_mods` VALUES (23442,1,163);     -- pumm._lorica_+3 DEF:163
 INSERT INTO `item_mods` VALUES (23442,2,101);     -- HP+101
 INSERT INTO `item_mods` VALUES (23442,8,40);      -- STR+40
@@ -30901,7 +31526,7 @@ INSERT INTO `item_mods` VALUES (23462,337,24);    -- Dark Arts+24
 INSERT INTO `item_mods` VALUES (23462,369,3);     -- Refresh+3
 INSERT INTO `item_mods` VALUES (23462,384,300);   -- Haste +30
 INSERT INTO `item_mods` VALUES (23462,487,10);    -- Magic Burst Damage+10
-INSERT INTO `item_mods` VALUES (23463,1,147);     -- geomancy_tunic_+3 DEF:147
+INSERT INTO `item_mods` VALUES (23463,1,147);     -- Geomancy Tunic +3: DEF 147
 INSERT INTO `item_mods` VALUES (23463,2,91);      -- HP+91
 INSERT INTO `item_mods` VALUES (23463,5,137);     -- MP+137
 INSERT INTO `item_mods` VALUES (23463,8,31);      -- STR+31
@@ -30911,13 +31536,14 @@ INSERT INTO `item_mods` VALUES (23463,11,31);     -- AGI+31
 INSERT INTO `item_mods` VALUES (23463,12,39);     -- INT+39
 INSERT INTO `item_mods` VALUES (23463,13,39);     -- MND+39
 INSERT INTO `item_mods` VALUES (23463,14,39);     -- CHR+39
-INSERT INTO `item_mods` VALUES (23463,29,7);      -- Magic Defense Bonus+7
-INSERT INTO `item_mods` VALUES (23463,30,50);     -- Magic Accuracy+50
-INSERT INTO `item_mods` VALUES (23463,31,100);    -- Magic Evasion+100
-INSERT INTO `item_mods` VALUES (23463,68,61);     -- Evasion+61
-INSERT INTO `item_mods` VALUES (23463,116,21);    -- Dark Magic Skill+21
-INSERT INTO `item_mods` VALUES (23463,369,3);     -- Refresh+3
-INSERT INTO `item_mods` VALUES (23463,384,300);    -- Haste+3%
+INSERT INTO `item_mods` VALUES (23463,30,50);     -- Magic Accuracy +50
+INSERT INTO `item_mods` VALUES (23463,68,61);     -- Evasion +61
+INSERT INTO `item_mods` VALUES (23463,31,100);    -- Magic Evasion +100
+INSERT INTO `item_mods` VALUES (23463,29,7);      -- Magic Def. Bonus +7
+INSERT INTO `item_mods` VALUES (23463,116,21);    -- Dark magic skill +21
+INSERT INTO `item_mods` VALUES (23463,384,300);   -- Haste +3%
+INSERT INTO `item_mods` VALUES (23463,1029,14);   -- "Life Cycle"+14
+INSERT INTO `item_mods` VALUES (23463,369,3);     -- Refresh +3
 INSERT INTO `item_mods` VALUES (23464,1,155);     -- runeists_coat_+3 DEF:155
 INSERT INTO `item_mods` VALUES (23464,2,218);     -- HP+218
 INSERT INTO `item_mods` VALUES (23464,5,76);      -- MP+76
@@ -30944,6 +31570,24 @@ INSERT INTO `item_mods` VALUES (23464,369,3);     -- Refresh+3
 INSERT INTO `item_mods` VALUES (23464,384,400);   -- Haste +40
 INSERT INTO `item_mods` VALUES (23465,955,30);  -- WAR AF2 119 +3 Body Aggressor Duration +30
 INSERT INTO `item_mods` VALUES (23471,965,41);    -- Caballarius Surcoat +3 - Converts 41% Covered Physical Damage to MP
+INSERT INTO `item_mods` VALUES (23485,1,149);   -- Bagua Tunic +3: DEF 149
+INSERT INTO `item_mods` VALUES (23485,2,114);   -- HP+114
+INSERT INTO `item_mods` VALUES (23485,5,119);   -- MP+119
+INSERT INTO `item_mods` VALUES (23485,8,31);    -- STR+31
+INSERT INTO `item_mods` VALUES (23485,9,31);    -- DEX+31
+INSERT INTO `item_mods` VALUES (23485,10,31);   -- VIT+31
+INSERT INTO `item_mods` VALUES (23485,11,31);   -- AGI+31
+INSERT INTO `item_mods` VALUES (23485,12,39);   -- INT+39
+INSERT INTO `item_mods` VALUES (23485,13,39);   -- MND+39
+INSERT INTO `item_mods` VALUES (23485,14,39);   -- CHR+39
+INSERT INTO `item_mods` VALUES (23485,25,40);   -- Accuracy+40
+INSERT INTO `item_mods` VALUES (23485,30,40);   -- Magic Accuracy+40
+INSERT INTO `item_mods` VALUES (23485,28,63);   -- "Magic Atk. Bonus"+63
+INSERT INTO `item_mods` VALUES (23485,68,61);   -- Evasion+61
+INSERT INTO `item_mods` VALUES (23485,31,100);  -- Magic Evasion+100
+INSERT INTO `item_mods` VALUES (23485,29,8);    -- "Magic Def. Bonus"+8
+INSERT INTO `item_mods` VALUES (23485,1026,16); -- Geomancy skill +16
+INSERT INTO `item_mods` VALUES (23485,348,300); -- Haste+3%
 INSERT INTO `item_mods` VALUES (23509,1,121);     -- pumm._mufflers_+3 DEF:121
 INSERT INTO `item_mods` VALUES (23509,2,65);      -- HP+65
 INSERT INTO `item_mods` VALUES (23509,8,28);      -- STR+28
@@ -31303,7 +31947,7 @@ INSERT INTO `item_mods` VALUES (23529,68,42);     -- Evasion+42
 INSERT INTO `item_mods` VALUES (23529,170,9);     -- Fast Cast+9
 INSERT INTO `item_mods` VALUES (23529,296,8);     -- Conserve MP+8
 INSERT INTO `item_mods` VALUES (23529,384,300);   -- Haste +30
-INSERT INTO `item_mods` VALUES (23530,1,105);     -- geo._mitaines_+3 DEF:105
+INSERT INTO `item_mods` VALUES (23530,1,105);     -- Geomancy Mitaines +3 DEF:105
 INSERT INTO `item_mods` VALUES (23530,2,80);      -- HP+80
 INSERT INTO `item_mods` VALUES (23530,5,68);      -- MP+68
 INSERT INTO `item_mods` VALUES (23530,8,16);      -- STR+16
@@ -31317,8 +31961,9 @@ INSERT INTO `item_mods` VALUES (23530,29,4);      -- Magic Defense Bonus+4
 INSERT INTO `item_mods` VALUES (23530,30,48);     -- Magic Accuracy+48
 INSERT INTO `item_mods` VALUES (23530,31,57);     -- Magic Evasion+57
 INSERT INTO `item_mods` VALUES (23530,68,42);     -- Evasion+42
-INSERT INTO `item_mods` VALUES (23530,161,-300);    -- Physical Damage Taken-3
-INSERT INTO `item_mods` VALUES (23530,384,300);   -- Haste +30
+INSERT INTO `item_mods` VALUES (23530,1026,19);   -- Geomancy skill +19
+INSERT INTO `item_mods` VALUES (23530,161,-300);  -- Physical Damage Taken-3
+INSERT INTO `item_mods` VALUES (23530,384,300);   -- Haste +3
 INSERT INTO `item_mods` VALUES (23531,1,113);     -- runeist_mitons_+3 DEF:113
 INSERT INTO `item_mods` VALUES (23531,2,85);      -- HP+85
 INSERT INTO `item_mods` VALUES (23531,5,47);      -- MP+47
@@ -31339,6 +31984,27 @@ INSERT INTO `item_mods` VALUES (23531,384,500);   -- Haste +5%
 INSERT INTO `item_mods` VALUES (23532,903,50);  -- WAR AF2 119 +3: "Fencer"+1
 INSERT INTO `item_mods` VALUES (23532,904,1);   -- WAR AF2 119 +3: "Fencer"+1
 INSERT INTO `item_mods` VALUES (23532,956,15);  -- WAR AF2 119 +3 Hands Defender Duration +15
+INSERT INTO `item_mods` VALUES (23552,1,104);   -- Bagua Mitaines +3: DEF:104
+INSERT INTO `item_mods` VALUES (23552,2,42);    -- HP+42
+INSERT INTO `item_mods` VALUES (23552,5,34);    -- MP+34
+INSERT INTO `item_mods` VALUES (23552,8,16);    -- STR+16
+INSERT INTO `item_mods` VALUES (23552,9,38);    -- DEX+38
+INSERT INTO `item_mods` VALUES (23552,10,35);   -- VIT+35
+INSERT INTO `item_mods` VALUES (23552,11,15);   -- AGI+15
+INSERT INTO `item_mods` VALUES (23552,12,29);   -- INT+29
+INSERT INTO `item_mods` VALUES (23552,13,43);   -- MND+43
+INSERT INTO `item_mods` VALUES (23552,14,29);   -- CHR+29
+INSERT INTO `item_mods` VALUES (23552,25,38);   -- Accuracy+38
+INSERT INTO `item_mods` VALUES (23552,30,38);   -- Magic Accuracy+38
+INSERT INTO `item_mods` VALUES (23552,41,42);   -- Evasion+42
+INSERT INTO `item_mods` VALUES (23552,31,57);   -- Magic Evasion+57
+INSERT INTO `item_mods` VALUES (23552,28,50);   -- "Magic Atk. Bonus"+50
+INSERT INTO `item_mods` VALUES (23552,29,5);    -- "Magic Def. Bonus"+5
+INSERT INTO `item_mods` VALUES (23552,348,300); -- Haste+3%
+INSERT INTO `item_mods` VALUES (23552,27,8);    -- Enmity-8
+INSERT INTO `item_mods` VALUES (23552,487,12);  -- Magic burst damage +12
+INSERT INTO `item_mods` VALUES (23552,369,2);   -- "Refresh"+2
+INSERT INTO `item_mods` VALUES (23552,399,14);  -- Elemental magic casting time -14%
 INSERT INTO `item_mods` VALUES (23576,1,145);     -- pumm._cuisses_+3 DEF:145
 INSERT INTO `item_mods` VALUES (23576,2,85);      -- HP+85
 INSERT INTO `item_mods` VALUES (23576,8,40);      -- STR+40
@@ -31695,7 +32361,7 @@ INSERT INTO `item_mods` VALUES (23596,68,47);     -- Evasion+47
 INSERT INTO `item_mods` VALUES (23596,336,24);    -- Light Arts+24
 INSERT INTO `item_mods` VALUES (23596,374,15);    -- Cure Potency+15
 INSERT INTO `item_mods` VALUES (23596,384,500);   -- Haste +5%
-INSERT INTO `item_mods` VALUES (23597,1,129);     -- geomancy_pants_+3 DEF:129
+INSERT INTO `item_mods` VALUES (23597,1,129);     -- Geomancy Pants +3 DEF:129
 INSERT INTO `item_mods` VALUES (23597,2,127);     -- HP+127
 INSERT INTO `item_mods` VALUES (23597,5,106);     -- MP+106
 INSERT INTO `item_mods` VALUES (23597,8,35);      -- STR+35
@@ -31708,8 +32374,8 @@ INSERT INTO `item_mods` VALUES (23597,29,7);      -- Magic Defense Bonus+7
 INSERT INTO `item_mods` VALUES (23597,30,49);     -- Magic Accuracy+49
 INSERT INTO `item_mods` VALUES (23597,31,127);    -- Magic Evasion+127
 INSERT INTO `item_mods` VALUES (23597,68,47);     -- Evasion+47
-INSERT INTO `item_mods` VALUES (23597,168,24);    -- Spell Interruption Rate Down+24
-INSERT INTO `item_mods` VALUES (23597,170,15);    -- Fast Cast+15
+INSERT INTO `item_mods` VALUES (23597,168,24);    -- Spell Interruption Rate Down +24%
+INSERT INTO `item_mods` VALUES (23597,170,15);    -- Fast Cast +15%
 INSERT INTO `item_mods` VALUES (23597,384,500);   -- Haste +5%
 INSERT INTO `item_mods` VALUES (23598,1,137);     -- rune._trousers_+3 DEF:137
 INSERT INTO `item_mods` VALUES (23598,2,80);      -- HP+80
@@ -31727,7 +32393,24 @@ INSERT INTO `item_mods` VALUES (23598,68,58);     -- Evasion+58
 INSERT INTO `item_mods` VALUES (23598,111,19);    -- Divine Magic Skill+19
 INSERT INTO `item_mods` VALUES (23598,161,-500);    -- Physical Damage Taken-5
 INSERT INTO `item_mods` VALUES (23598,384,600);   -- Haste +6%
-INSERT INTO `item_mods` VALUES (23598,958,10);    -- "resistance to all status ailments" +10
+INSERT INTO `item_mods` VALUES (23619,958,10);    -- "resistance to all status ailments" +10
+INSERT INTO `item_mods` VALUES (23619,1,128);   -- Bagua pants +3: DEF:128
+INSERT INTO `item_mods` VALUES (23619,2,118);   -- HP+118
+INSERT INTO `item_mods` VALUES (23619,5,49);    -- MP+49
+INSERT INTO `item_mods` VALUES (23619,8,35);    -- STR+35
+INSERT INTO `item_mods` VALUES (23619,10,22);   -- VIT+22
+INSERT INTO `item_mods` VALUES (23619,11,30);   -- AGI+30
+INSERT INTO `item_mods` VALUES (23619,12,47);   -- INT+47
+INSERT INTO `item_mods` VALUES (23619,13,37);   -- MND+37
+INSERT INTO `item_mods` VALUES (23619,14,29);   -- CHR+29
+INSERT INTO `item_mods` VALUES (23619,25,29);   -- Accuracy+29
+INSERT INTO `item_mods` VALUES (23619,30,39);   -- Magic Accuracy+39
+INSERT INTO `item_mods` VALUES (23619,41,60);   -- Evasion+60
+INSERT INTO `item_mods` VALUES (23619,31,127);  -- Magic Evasion+127
+INSERT INTO `item_mods` VALUES (23619,23,51);  -- "Magic Atk. Bonus"+51
+INSERT INTO `item_mods` VALUES (23619,29,8);    -- "Magic Def. Bonus"+8
+INSERT INTO `item_mods` VALUES (23619,348,500); -- Haste+5%
+INSERT INTO `item_mods` VALUES (23619,960,21);  -- "Indicolure" spell duration +21
 INSERT INTO `item_mods` VALUES (23643,1,103);     -- pumm._calligae_+3 DEF:103
 INSERT INTO `item_mods` VALUES (23643,2,55);      -- HP+55
 INSERT INTO `item_mods` VALUES (23643,8,24);      -- STR+24
@@ -32071,7 +32754,7 @@ INSERT INTO `item_mods` VALUES (23663,31,127);    -- Magic Evasion+127
 INSERT INTO `item_mods` VALUES (23663,68,75);     -- Evasion+75
 INSERT INTO `item_mods` VALUES (23663,384,300);   -- Haste +30
 INSERT INTO `item_mods` VALUES (23663,489,-12);   -- Grimoire: Spellcasting time -12%
-INSERT INTO `item_mods` VALUES (23664,1,87);      -- geo._sandals_+3 DEF:87
+INSERT INTO `item_mods` VALUES (23664,1,87);      -- Geomancy sandals +3 DEF:87
 INSERT INTO `item_mods` VALUES (23664,2,29);      -- HP+29
 INSERT INTO `item_mods` VALUES (23664,5,83);      -- MP+83
 INSERT INTO `item_mods` VALUES (23664,8,20);      -- STR+20
@@ -32085,8 +32768,8 @@ INSERT INTO `item_mods` VALUES (23664,29,6);      -- Magic Defense Bonus+6
 INSERT INTO `item_mods` VALUES (23664,30,43);     -- Magic Accuracy+43
 INSERT INTO `item_mods` VALUES (23664,31,127);    -- Magic Evasion+127
 INSERT INTO `item_mods` VALUES (23664,68,75);     -- Evasion+75
-INSERT INTO `item_mods` VALUES (23664,169,18);    -- Movement Speed+18
-INSERT INTO `item_mods` VALUES (23664,384,300);   -- Haste +30
+INSERT INTO `item_mods` VALUES (23664,169,18);    -- Movement Speed +18%
+INSERT INTO `item_mods` VALUES (23664,384,300);   -- Haste +3%
 INSERT INTO `item_mods` VALUES (23665,1,95);      -- runeist_boots_+3 DEF:95
 INSERT INTO `item_mods` VALUES (23665,2,74);      -- HP+74
 INSERT INTO `item_mods` VALUES (23665,8,22);      -- STR+22
@@ -32460,23 +33143,23 @@ INSERT INTO `item_mods` VALUES (23685,112,20);    -- Pedagogy Loafers +3: Healin
 INSERT INTO `item_mods` VALUES (23685,170,8);     -- Pedagogy Loafers +3: "Fast Cast"+8%
 INSERT INTO `item_mods` VALUES (23685,384,300);   -- Pedagogy Loafers +3: Haste+3%
 INSERT INTO `item_mods` VALUES (23686,1,87);      -- Bagua Sandals +3: DEF:87
-INSERT INTO `item_mods` VALUES (23686,2,63);      -- Bagua Sandals +3: HP+63
-INSERT INTO `item_mods` VALUES (23686,5,34);      -- Bagua Sandals +3: MP+34
-INSERT INTO `item_mods` VALUES (23686,8,20);      -- Bagua Sandals +3: STR+20
-INSERT INTO `item_mods` VALUES (23686,9,21);      -- Bagua Sandals +3: DEX+21
-INSERT INTO `item_mods` VALUES (23686,10,23);     -- Bagua Sandals +3: VIT+23
-INSERT INTO `item_mods` VALUES (23686,11,43);     -- Bagua Sandals +3: AGI+43
-INSERT INTO `item_mods` VALUES (23686,12,30);     -- Bagua Sandals +3: INT+30
-INSERT INTO `item_mods` VALUES (23686,13,32);     -- Bagua Sandals +3: MND+32
-INSERT INTO `item_mods` VALUES (23686,14,44);     -- Bagua Sandals +3: CHR+44
-INSERT INTO `item_mods` VALUES (23686,25,36);     -- Bagua Sandals +3: Accuracy+36
-INSERT INTO `item_mods` VALUES (23686,28,48);     -- Bagua Sandals +3: "Magic Atk. Bonus"+48
-INSERT INTO `item_mods` VALUES (23686,29,7);      -- Bagua Sandals +3: "Magic Def. Bonus"+7
-INSERT INTO `item_mods` VALUES (23686,30,36);     -- Bagua Sandals +3: Magic Accuracy+36
-INSERT INTO `item_mods` VALUES (23686,31,127);    -- Bagua Sandals +3: Magic Evasion+127
-INSERT INTO `item_mods` VALUES (23686,68,75);     -- Bagua Sandals +3: Evasion+75
-INSERT INTO `item_mods` VALUES (23686,114,21);    -- Bagua Sandals +3: Enfeebling magic skill +21
-INSERT INTO `item_mods` VALUES (23686,384,300);   -- Bagua Sandals +3: Haste+3%
+INSERT INTO `item_mods` VALUES (23686,2,63);      -- HP+63
+INSERT INTO `item_mods` VALUES (23686,5,34);      -- MP+34
+INSERT INTO `item_mods` VALUES (23686,8,20);      -- STR+20
+INSERT INTO `item_mods` VALUES (23686,9,21);      -- DEX+21
+INSERT INTO `item_mods` VALUES (23686,10,23);     -- VIT+23
+INSERT INTO `item_mods` VALUES (23686,11,43);     -- AGI+43
+INSERT INTO `item_mods` VALUES (23686,12,30);     -- INT+30
+INSERT INTO `item_mods` VALUES (23686,13,32);     -- MND+32
+INSERT INTO `item_mods` VALUES (23686,14,44);     -- CHR+44
+INSERT INTO `item_mods` VALUES (23686,25,36);     -- Accuracy+36
+INSERT INTO `item_mods` VALUES (23686,28,48);     -- "Magic Atk. Bonus"+48
+INSERT INTO `item_mods` VALUES (23686,29,7);      -- "Magic Def. Bonus"+7
+INSERT INTO `item_mods` VALUES (23686,30,36);     -- Magic Accuracy+36
+INSERT INTO `item_mods` VALUES (23686,31,127);    -- Magic Evasion+127
+INSERT INTO `item_mods` VALUES (23686,68,75);     -- Evasion+75
+INSERT INTO `item_mods` VALUES (23686,114,21);    -- Enfeebling magic skill +21
+INSERT INTO `item_mods` VALUES (23686,384,300);   -- Haste+3%
 INSERT INTO `item_mods` VALUES (23687,1,95);      -- Futhark Boots +3: DEF:95
 INSERT INTO `item_mods` VALUES (23687,2,33);      -- Futhark Boots +3: HP+33
 INSERT INTO `item_mods` VALUES (23687,5,50);      -- Futhark Boots +3: MP+50
@@ -33290,11 +33973,11 @@ INSERT INTO `item_mods` VALUES (25532,487,7);     -- Argute Stole +1: Magic burs
 INSERT INTO `item_mods` VALUES (25533,30,30);     -- Argute Stole +2: Magic Accuracy+30
 INSERT INTO `item_mods` VALUES (25533,487,10);    -- Argute Stole +2: Magic burst damage +10
 INSERT INTO `item_mods` VALUES (25537,30,20);     -- Bagua Charm: Magic Accuracy+20
--- INSERT INTO `item_mods` VALUES (25537,,5);     -- Bagua Charm: Geomancy +5
+INSERT INTO `item_mods` VALUES (25537,961,5);     -- Bagua Charm: Geomancy +5
 INSERT INTO `item_mods` VALUES (25538,30,25);     -- Bagua Charm +1: Magic Accuracy+25
--- INSERT INTO `item_mods` VALUES (25538,,6);     -- Bagua Charm +1: Geomancy +6
+INSERT INTO `item_mods` VALUES (25538,961,6);     -- Bagua Charm +1: Geomancy +6
 INSERT INTO `item_mods` VALUES (25539,30,30);     -- Bagua Charm +2: Magic Accuracy+30
--- INSERT INTO `item_mods` VALUES (25539,,7);     -- Bagua Charm +2: Geomancy +7
+INSERT INTO `item_mods` VALUES (25539,961,7);     -- Bagua Charm +2: Geomancy +7
 INSERT INTO `item_mods` VALUES (25543,27,5);      -- Futhark Torque: Enmity+5
 INSERT INTO `item_mods` VALUES (25543,31,20);     -- Futhark Torque: Magic Evasion+20
 INSERT INTO `item_mods` VALUES (25544,27,7);      -- Futhark Torque +1: Enmity+7
@@ -35689,6 +36372,12 @@ INSERT INTO `item_mods` VALUES (26341,9,20);      -- DEX+20
 INSERT INTO `item_mods` VALUES (26341,160,-600);    -- Damage Taken-6
 INSERT INTO `item_mods` VALUES (26341,302,8);     -- Triple Attack+8
 INSERT INTO `item_mods` VALUES (26341,973,15);    -- Subtle Blow II +15
+INSERT INTO `item_mods` VALUES (26356,30,5);    -- Skrymir Cord: Magic Accuracy + 5
+INSERT INTO `item_mods` VALUES (26356,28,5);    -- Magic Attack Bonus + 5
+INSERT INTO `item_mods` VALUES (26356,311,30);    -- Magic Damage + 30
+INSERT INTO `item_mods` VALUES (26357,30,7);    -- Skrymir Cord +1: Magic Accuracy + 7
+INSERT INTO `item_mods` VALUES (26357,28,7);    --  Magic Attack Bonus + 7
+INSERT INTO `item_mods` VALUES (26357,311,35);    -- Magic Damage + 35
 INSERT INTO `item_mods` VALUES (26400,1,60); -- Culminus: DEF+60
 INSERT INTO `item_mods` VALUES (26400,2,57); -- HP+57
 INSERT INTO `item_mods` VALUES (26400,5,64); -- MP+64
@@ -36440,7 +37129,7 @@ INSERT INTO `item_mods` VALUES (26664,30,15);     -- Magic Accuracy +15
 INSERT INTO `item_mods` VALUES (26664,31,51);     -- Magic Evasion +51
 INSERT INTO `item_mods` VALUES (26664,68,16);     -- Evasion +16
 INSERT INTO `item_mods` VALUES (26664,315,20);    -- Drain and Aspir potency +20%
-INSERT INTO `item_mods` VALUES (26664,384,500);    -- Haste +5%
+INSERT INTO `item_mods` VALUES (26664,384,500);   -- Haste +5%
 INSERT INTO `item_mods` VALUES (26665,1,98);      -- Bagua Galero +1: DEF 98
 INSERT INTO `item_mods` VALUES (26665,2,71);      -- HP +71
 INSERT INTO `item_mods` VALUES (26665,5,32);      -- MP +32
@@ -36456,7 +37145,7 @@ INSERT INTO `item_mods` VALUES (26665,30,18);     -- Magic Accuracy +18
 INSERT INTO `item_mods` VALUES (26665,31,75);     -- Magic Evasion +75
 INSERT INTO `item_mods` VALUES (26665,68,36);     -- Evasion +36
 INSERT INTO `item_mods` VALUES (26665,315,25);    -- Drain and Aspir potency +25%
-INSERT INTO `item_mods` VALUES (26665,384,600);    -- Haste +6%
+INSERT INTO `item_mods` VALUES (26665,384,600);   -- Haste +6%
 INSERT INTO `item_mods` VALUES (26698,1,110); -- Baghere Salade Def: +110
 INSERT INTO `item_mods` VALUES (26698,2,38); -- HP+38
 INSERT INTO `item_mods` VALUES (26698,5,23); -- MP+23
@@ -37970,6 +38659,38 @@ INSERT INTO `item_mods` VALUES (26839,112,15);
 INSERT INTO `item_mods` VALUES (26839,113,15);
 INSERT INTO `item_mods` VALUES (26839,384,300);
 INSERT INTO `item_mods` VALUES (26839,401,3);
+INSERT INTO `item_mods` VALUES (26840,1,93);    -- Bagua Tunic : DEF 93
+INSERT INTO `item_mods` VALUES (26840,2,65);    -- HP+65
+INSERT INTO `item_mods` VALUES (26840,5,89);    -- MP+89
+INSERT INTO `item_mods` VALUES (26840,8,13);    -- STR+13
+INSERT INTO `item_mods` VALUES (26840,9,13);    -- DEX+13
+INSERT INTO `item_mods` VALUES (26840,10,13);   -- VIT+13
+INSERT INTO `item_mods` VALUES (26840,11,13);   -- AGI+13
+INSERT INTO `item_mods` VALUES (26840,12,18);   -- INT+18
+INSERT INTO `item_mods` VALUES (26840,13,18);   -- MND+18
+INSERT INTO `item_mods` VALUES (26840,14,18);   -- CHR+18
+INSERT INTO `item_mods` VALUES (26840,28,20);   -- "Magic Atk. Bonus"+20
+INSERT INTO `item_mods` VALUES (26840,68,19);   -- Evasion+19
+INSERT INTO `item_mods` VALUES (26840,31,54);   -- Magic Evasion+54
+INSERT INTO `item_mods` VALUES (26840,29,3);    -- "Magic Def. Bonus"+3
+INSERT INTO `item_mods` VALUES (26840,1026,10); -- Geomancy skill +10
+INSERT INTO `item_mods` VALUES (26840,348,200); -- Haste+2%
+INSERT INTO `item_mods` VALUES (26841,1,129);   -- Bagua Tunic +1: DEF 129
+INSERT INTO `item_mods` VALUES (26841,2,94);    -- HP+94
+INSERT INTO `item_mods` VALUES (26841,5,99);    -- MP+99
+INSERT INTO `item_mods` VALUES (26841,8,21);    -- STR+21
+INSERT INTO `item_mods` VALUES (26841,9,21);    -- DEX+21
+INSERT INTO `item_mods` VALUES (26841,10,21);   -- VIT+21
+INSERT INTO `item_mods` VALUES (26841,11,21);   -- AGI+21
+INSERT INTO `item_mods` VALUES (26841,12,29);   -- INT+29
+INSERT INTO `item_mods` VALUES (26841,13,29);   -- MND+29
+INSERT INTO `item_mods` VALUES (26841,14,29);   -- CHR+29
+INSERT INTO `item_mods` VALUES (26841,28,23);   -- "Magic Atk. Bonus"+23
+INSERT INTO `item_mods` VALUES (26841,68,41);   -- Evasion+41
+INSERT INTO `item_mods` VALUES (26841,31,80);   -- Magic Evasion+80
+INSERT INTO `item_mods` VALUES (26841,29,6);    -- "Magic Def. Bonus"+6
+INSERT INTO `item_mods` VALUES (26841,1026,12); -- Geomancy skill +12
+INSERT INTO `item_mods` VALUES (26841,348,300); -- Haste+3%
 INSERT INTO `item_mods` VALUES (26852,541,2);
 INSERT INTO `item_mods` VALUES (26853,541,3);
 INSERT INTO `item_mods` VALUES (26868,1,124);     -- Rosette Jaseran +1: DEF 124
@@ -39119,7 +39840,7 @@ INSERT INTO `item_mods` VALUES (26971,68,22); -- Evasion +22
 INSERT INTO `item_mods` VALUES (26971,31,37); -- Magic Evasion +37
 INSERT INTO `item_mods` VALUES (26971,29,6); -- "Magic Def. Bonus"+6
 INSERT INTO `item_mods` VALUES (26971,384,400); -- Haste +4
-INSERT INTO `item_mods` VALUES (26971,905,3);-- "Shield Def. Bonus"+3
+INSERT INTO `item_mods` VALUES (26971,905,3); -- "Shield Def. Bonus"+3
 INSERT INTO `item_mods` VALUES (26971,369,2); -- "Refresh"+2
 INSERT INTO `item_mods` VALUES (26971,160,-800); -- Damage taken -8%
 INSERT INTO `item_mods` VALUES (26973,255,15); -- Samnuha Coat "Death" Resistance +15
@@ -39746,6 +40467,40 @@ INSERT INTO `item_mods` VALUES (27015,68,22);
 INSERT INTO `item_mods` VALUES (27015,112,15);
 INSERT INTO `item_mods` VALUES (27015,114,15);
 INSERT INTO `item_mods` VALUES (27015,384,500);
+INSERT INTO `item_mods` VALUES (27016,1,60);    -- Bagua Mitaines: DEF:60
+INSERT INTO `item_mods` VALUES (27016,2,10);    -- HP+10
+INSERT INTO `item_mods` VALUES (27016,5,12);    -- MP+12
+INSERT INTO `item_mods` VALUES (27016,8,4);     -- STR+4
+INSERT INTO `item_mods` VALUES (27016,9,7);     -- DEX+17
+INSERT INTO `item_mods` VALUES (27016,10,6);    -- VIT+16
+INSERT INTO `item_mods` VALUES (27016,11,3);    -- AGI+3
+INSERT INTO `item_mods` VALUES (27016,12,12);   -- INT+12
+INSERT INTO `item_mods` VALUES (27016,13,21);   -- MND+21
+INSERT INTO `item_mods` VALUES (27016,14,12);   -- CHR+12
+INSERT INTO `item_mods` VALUES (27016,41,10);   -- Evasion+10
+INSERT INTO `item_mods` VALUES (27016,31,25);   -- Magic Evasion+25
+INSERT INTO `item_mods` VALUES (27016,29,1);    -- "Magic Def. Bonus"+1
+INSERT INTO `item_mods` VALUES (27016,348,300); -- Haste+3%
+INSERT INTO `item_mods` VALUES (27016,27,5);    -- Enmity-5
+INSERT INTO `item_mods` VALUES (27016,369,1);   -- "Refresh"+1
+INSERT INTO `item_mods` VALUES (27016,399,11);  -- Elemental magic casting time -11%
+INSERT INTO `item_mods` VALUES (27017,1,84);    -- Bagua Mitaines +1: DEF:84
+INSERT INTO `item_mods` VALUES (27017,2,22);    -- HP+22
+INSERT INTO `item_mods` VALUES (27017,5,14);    -- MP+14
+INSERT INTO `item_mods` VALUES (27017,8,6);     -- STR+6
+INSERT INTO `item_mods` VALUES (27017,9,28);    -- DEX+28
+INSERT INTO `item_mods` VALUES (27017,10,25);   -- VIT+25
+INSERT INTO `item_mods` VALUES (27017,11,5);    -- AGI+5
+INSERT INTO `item_mods` VALUES (27017,12,19);   -- INT+19
+INSERT INTO `item_mods` VALUES (27017,13,33);   -- MND+33
+INSERT INTO `item_mods` VALUES (27017,14,19);   -- CHR+19
+INSERT INTO `item_mods` VALUES (27017,41,22);   -- Evasion+22
+INSERT INTO `item_mods` VALUES (27017,31,37);   -- Magic Evasion+37
+INSERT INTO `item_mods` VALUES (27017,29,3);    -- "Magic Def. Bonus"+3
+INSERT INTO `item_mods` VALUES (27017,348,300); -- Haste+3%
+INSERT INTO `item_mods` VALUES (27017,27,6);    -- Enmity-6
+INSERT INTO `item_mods` VALUES (27017,369,1);   -- "Refresh"+1
+INSERT INTO `item_mods` VALUES (27017,399,12);  -- Elemental magic casting time -12%
 INSERT INTO `item_mods` VALUES (27044,1,143);
 INSERT INTO `item_mods` VALUES (27044,2,29);
 INSERT INTO `item_mods` VALUES (27044,8,10);
@@ -40022,7 +40777,7 @@ INSERT INTO `item_mods` VALUES (27062,29,1);
 INSERT INTO `item_mods` VALUES (27062,31,29);
 INSERT INTO `item_mods` VALUES (27062,68,16);
 INSERT INTO `item_mods` VALUES (27062,384,400);
-INSERT INTO `item_mods` VALUES (27062,874,12); -- Increases "Sneak Attack" damage
+INSERT INTO `item_mods` VALUES (27062,830,12); -- Increases "Sneak Attack" damage
 INSERT INTO `item_mods` VALUES (27063,1,91);
 INSERT INTO `item_mods` VALUES (27063,2,27);
 INSERT INTO `item_mods` VALUES (27063,8,14);
@@ -40038,7 +40793,7 @@ INSERT INTO `item_mods` VALUES (27063,29,2);
 INSERT INTO `item_mods` VALUES (27063,31,43);
 INSERT INTO `item_mods` VALUES (27063,68,36);
 INSERT INTO `item_mods` VALUES (27063,384,500);
-INSERT INTO `item_mods` VALUES (27063,874,12.5); -- Increases "Sneak Attack" damage
+INSERT INTO `item_mods` VALUES (27063,830,12.5); -- Increases "Sneak Attack" damage
 INSERT INTO `item_mods` VALUES (27064,1,77);
 INSERT INTO `item_mods` VALUES (27064,2,16);
 INSERT INTO `item_mods` VALUES (27064,5,12);
@@ -41130,6 +41885,34 @@ INSERT INTO `item_mods` VALUES (27191,68,27);
 INSERT INTO `item_mods` VALUES (27191,115,15);
 INSERT INTO `item_mods` VALUES (27191,116,15);
 INSERT INTO `item_mods` VALUES (27191,384,500);
+INSERT INTO `item_mods` VALUES (27192,1,84);    -- Bagua pants: DEF:84
+INSERT INTO `item_mods` VALUES (27192,2,60);    -- HP+60
+INSERT INTO `item_mods` VALUES (27192,5,24);    -- MP+24
+INSERT INTO `item_mods` VALUES (27192,8,16);    -- STR+16
+INSERT INTO `item_mods` VALUES (27192,10,8);    -- VIT+8
+INSERT INTO `item_mods` VALUES (27192,11,14);   -- AGI+14
+INSERT INTO `item_mods` VALUES (27192,12,24);   -- INT+24
+INSERT INTO `item_mods` VALUES (27192,13,18);   -- MND+18
+INSERT INTO `item_mods` VALUES (27192,14,12);   -- CHR+12
+INSERT INTO `item_mods` VALUES (27192,41,22);   -- Evasion+22
+INSERT INTO `item_mods` VALUES (27192,31,73);   -- Magic Evasion+73
+INSERT INTO `item_mods` VALUES (27192,29,3);    -- "Magic Def. Bonus"+3
+INSERT INTO `item_mods` VALUES (27192,348,400); -- Haste+4%
+INSERT INTO `item_mods` VALUES (27192,960,12);  -- "Indicolure" spell duration +12
+INSERT INTO `item_mods` VALUES (27193,1,108);   -- Bagua pants +1: DEF:108
+INSERT INTO `item_mods` VALUES (27193,2,98);    -- HP+98
+INSERT INTO `item_mods` VALUES (27193,5,29);    -- MP+29
+INSERT INTO `item_mods` VALUES (27193,8,25);    -- STR+25
+INSERT INTO `item_mods` VALUES (27193,10,12);   -- VIT+12
+INSERT INTO `item_mods` VALUES (27193,11,20);   -- AGI+20
+INSERT INTO `item_mods` VALUES (27193,12,37);   -- INT+37
+INSERT INTO `item_mods` VALUES (27193,13,27);   -- MND+27
+INSERT INTO `item_mods` VALUES (27193,14,19);   -- CHR+19
+INSERT INTO `item_mods` VALUES (27193,41,40);   -- Evasion+40
+INSERT INTO `item_mods` VALUES (27193,31,107);  -- Magic Evasion+107
+INSERT INTO `item_mods` VALUES (27193,29,6);    -- "Magic Def. Bonus"+6
+INSERT INTO `item_mods` VALUES (27193,348,500); -- Haste+5%
+INSERT INTO `item_mods` VALUES (27193,960,15);  -- "Indicolure" spell duration +15
 INSERT INTO `item_mods` VALUES (27220,1,107);
 INSERT INTO `item_mods` VALUES (27220,2,43);
 INSERT INTO `item_mods` VALUES (27220,5,29);
@@ -42571,6 +43354,35 @@ INSERT INTO `item_mods` VALUES (27367,68,55);     -- Evasion +55
 INSERT INTO `item_mods` VALUES (27367,112,16);    -- Healing magic skill +16
 INSERT INTO `item_mods` VALUES (27367,384,300);    -- Haste +3%
 INSERT INTO `item_mods` VALUES (27367,407,6);     -- Uncapped Fast Cast +6% ?
+INSERT INTO `item_mods` VALUES (27368,1,48);      -- Bagua Sandals: DEF:48
+INSERT INTO `item_mods` VALUES (27368,2,36);      -- HP+36
+INSERT INTO `item_mods` VALUES (27368,5,12);      -- MP+12
+INSERT INTO `item_mods` VALUES (27368,8,6);       -- STR+6
+INSERT INTO `item_mods` VALUES (27368,9,7);       -- DEX+7
+INSERT INTO `item_mods` VALUES (27368,10,9);      -- VIT+9
+INSERT INTO `item_mods` VALUES (27368,11,21);     -- AGI+21
+INSERT INTO `item_mods` VALUES (27368,12,14);     -- INT+14
+INSERT INTO `item_mods` VALUES (27368,13,15);     -- MND+15
+INSERT INTO `item_mods` VALUES (27368,14,21);     -- CHR+21
+INSERT INTO `item_mods` VALUES (27368,29,2);      -- "Magic Def. Bonus"+2
+INSERT INTO `item_mods` VALUES (27368,31,73);     -- Magic Evasion+73
+INSERT INTO `item_mods` VALUES (27368,114,15);    -- Enfeebling magic skill +15
+INSERT INTO `item_mods` VALUES (27368,384,300);   -- Haste+3%
+INSERT INTO `item_mods` VALUES (27369,1,67);      -- Bagua Sandals +1: DEF:67
+INSERT INTO `item_mods` VALUES (27369,2,43);      -- HP+43
+INSERT INTO `item_mods` VALUES (27369,5,14);      -- MP+14
+INSERT INTO `item_mods` VALUES (27369,8,10);      -- STR+10
+INSERT INTO `item_mods` VALUES (27369,9,11);      -- DEX+11
+INSERT INTO `item_mods` VALUES (27369,10,13);     -- VIT+13
+INSERT INTO `item_mods` VALUES (27369,11,33);     -- AGI+33
+INSERT INTO `item_mods` VALUES (27369,12,20);     -- INT+20
+INSERT INTO `item_mods` VALUES (27369,13,22);     -- MND+22
+INSERT INTO `item_mods` VALUES (27369,14,34);     -- CHR+34
+INSERT INTO `item_mods` VALUES (27369,29,5);      -- "Magic Def. Bonus"+5
+INSERT INTO `item_mods` VALUES (27369,31,107);    -- Magic Evasion+107
+INSERT INTO `item_mods` VALUES (27369,68,55);     -- Evasion+55
+INSERT INTO `item_mods` VALUES (27369,114,17);    -- Enfeebling magic skill +17
+INSERT INTO `item_mods` VALUES (27369,384,300);   -- Haste+3%
 INSERT INTO `item_mods` VALUES (27396,1,83); -- Gefechtschuhs: DEF +82
 INSERT INTO `item_mods` VALUES (27396,10,15); -- VIT +15
 INSERT INTO `item_mods` VALUES (27396,11,32); -- AGL +32
@@ -44417,6 +45229,22 @@ INSERT INTO `item_mods` VALUES (27704,31,75);
 INSERT INTO `item_mods` VALUES (27704,68,36);
 INSERT INTO `item_mods` VALUES (27704,384,600);
 INSERT INTO `item_mods` VALUES (27704,401,2);
+INSERT INTO `item_mods` VALUES (27705,1,97);      -- Geomancy Galero +1: DEF 97
+INSERT INTO `item_mods` VALUES (27705,2,36);      -- HP+36
+INSERT INTO `item_mods` VALUES (27705,5,46);      -- MP+46
+INSERT INTO `item_mods` VALUES (27705,8,16);      -- STR+16
+INSERT INTO `item_mods` VALUES (27705,9,16);      -- DEX+16
+INSERT INTO `item_mods` VALUES (27705,10,16);     -- VIT+16
+INSERT INTO `item_mods` VALUES (27705,11,16);     -- AGI+16
+INSERT INTO `item_mods` VALUES (27705,12,26);     -- INT+26
+INSERT INTO `item_mods` VALUES (27705,13,26);     -- MND+26
+INSERT INTO `item_mods` VALUES (27705,14,21);     -- CHR+21
+INSERT INTO `item_mods` VALUES (27705,68,36);     -- Evasion +36
+INSERT INTO `item_mods` VALUES (27705,31,75);     -- Magic Evasion +75
+INSERT INTO `item_mods` VALUES (27705,29,5);      -- Magic Def. Bonus +5
+INSERT INTO `item_mods` VALUES (27705,384,600);   -- Haste +6%
+INSERT INTO `item_mods` VALUES (27705,115,15);    -- Elemental magic skill +15
+INSERT INTO `item_mods` VALUES (27705,959,50);    -- Enhances "Cardinal Chant" effect +2
 INSERT INTO `item_mods` VALUES (27708,1,112); -- Baghere salade: DEF+112
 INSERT INTO `item_mods` VALUES (27708,2,71); -- HP+71
 INSERT INTO `item_mods` VALUES (27708,5,53); -- MP+53
@@ -45273,6 +46101,22 @@ INSERT INTO `item_mods` VALUES (27785,14,7);
 INSERT INTO `item_mods` VALUES (27785,25,10);
 INSERT INTO `item_mods` VALUES (27785,31,12);
 INSERT INTO `item_mods` VALUES (27785,384,600);
+INSERT INTO `item_mods` VALUES (27786,1,70);      -- Geomancy Galero: DEF 70
+INSERT INTO `item_mods` VALUES (27786,2,17);      -- HP+17
+INSERT INTO `item_mods` VALUES (27786,5,40);      -- MP+40
+INSERT INTO `item_mods` VALUES (27786,8,10);      -- STR+10
+INSERT INTO `item_mods` VALUES (27786,9,10);      -- DEX+10
+INSERT INTO `item_mods` VALUES (27786,10,10);     -- VIT+10
+INSERT INTO `item_mods` VALUES (27786,11,10);     -- AGI+10
+INSERT INTO `item_mods` VALUES (27786,12,19);     -- INT+19
+INSERT INTO `item_mods` VALUES (27786,13,19);     -- MND+19
+INSERT INTO `item_mods` VALUES (27786,14,14);     -- CHR+14
+INSERT INTO `item_mods` VALUES (27786,68,16);     -- Evasion +16
+INSERT INTO `item_mods` VALUES (27786,31,51);     -- Magic Evasion +51
+INSERT INTO `item_mods` VALUES (27786,29,2);      -- Magic Def. Bonus +2
+INSERT INTO `item_mods` VALUES (27786,384,500);   -- Haste +5%
+INSERT INTO `item_mods` VALUES (27786,115,15);    -- Elemental magic skill +15
+INSERT INTO `item_mods` VALUES (27786,959,25);    -- Enhances "Cardinal Chant" effect
 INSERT INTO `item_mods` VALUES (27788,1,81);
 INSERT INTO `item_mods` VALUES (27788,3,5);
 INSERT INTO `item_mods` VALUES (27788,6,5);
@@ -46066,8 +46910,9 @@ INSERT INTO `item_mods` VALUES (27849,29,6);      -- Magic Def. Bonus +6
 INSERT INTO `item_mods` VALUES (27849,31,80);     -- Magic Evasion +80
 INSERT INTO `item_mods` VALUES (27849,68,41);     -- Evasion +41
 INSERT INTO `item_mods` VALUES (27849,116,17);    -- Dark magic skill +17
-INSERT INTO `item_mods` VALUES (27849,384,300);    -- Haste +3%
-INSERT INTO `item_mods` VALUES (27849,529,2);     -- Enhances Refresh effect +2
+INSERT INTO `item_mods` VALUES (27849,1029,10);   -- "Life Cycle"+10
+INSERT INTO `item_mods` VALUES (27849,384,300);   -- Haste +3%
+INSERT INTO `item_mods` VALUES (27849,369,2);     -- Refresh +2
 INSERT INTO `item_mods` VALUES (27850,1,135);     -- Runeist Coat +1: DEF 135
 INSERT INTO `item_mods` VALUES (27850,2,139);     -- HP +139
 INSERT INTO `item_mods` VALUES (27850,5,44);      -- MP +44
@@ -46876,8 +47721,9 @@ INSERT INTO `item_mods` VALUES (27926,29,3);      -- Magic Def. Bonus +3
 INSERT INTO `item_mods` VALUES (27926,31,54);     -- Magic Evasion +54
 INSERT INTO `item_mods` VALUES (27926,68,19);     -- Evasion +19
 INSERT INTO `item_mods` VALUES (27926,116,15);    -- Dark magic skill +15
-INSERT INTO `item_mods` VALUES (27926,384,200);    -- Haste +2%
-INSERT INTO `item_mods` VALUES (27926,529,2);     -- Enhances Refresh effect +2
+INSERT INTO `item_mods` VALUES (27926,1029,10);   -- "Life Cycle"+10
+INSERT INTO `item_mods` VALUES (27926,384,200);   -- Haste +2%
+INSERT INTO `item_mods` VALUES (27926,369,1);     -- Adds "Refresh" efffect
 INSERT INTO `item_mods` VALUES (27927,1,104);     -- Runeist Coat: DEF 104
 INSERT INTO `item_mods` VALUES (27927,2,108);     -- HP +108
 INSERT INTO `item_mods` VALUES (27927,5,36);      -- MP +36
@@ -47620,6 +48466,22 @@ INSERT INTO `item_mods` VALUES (27984,68,22);
 INSERT INTO `item_mods` VALUES (27984,296,4);
 INSERT INTO `item_mods` VALUES (27984,384,300);
 INSERT INTO `item_mods` VALUES (27984,407,5);
+INSERT INTO `item_mods` VALUES (27985,1,85);      -- Geomancy Mitaines +1 DEF:85
+INSERT INTO `item_mods` VALUES (27985,2,47);      -- HP+47
+INSERT INTO `item_mods` VALUES (27985,5,39);      -- MP+39
+INSERT INTO `item_mods` VALUES (27985,8,6);       -- STR+6
+INSERT INTO `item_mods` VALUES (27985,9,28);      -- DEX+28
+INSERT INTO `item_mods` VALUES (27985,10,25);     -- VIT+25
+INSERT INTO `item_mods` VALUES (27985,11,5);      -- AGI+5
+INSERT INTO `item_mods` VALUES (27985,12,19);     -- INT+19
+INSERT INTO `item_mods` VALUES (27985,13,33);     -- MND+33
+INSERT INTO `item_mods` VALUES (27985,14,19);     -- CHR+19
+INSERT INTO `item_mods` VALUES (27985,68,22);     -- Evasion+22
+INSERT INTO `item_mods` VALUES (27985,31,37);     -- Magic Evasion+37
+INSERT INTO `item_mods` VALUES (27985,29,3);      -- Magic Defense Bonus+3
+INSERT INTO `item_mods` VALUES (27985,1026,15);   -- Geomancy skill +15
+INSERT INTO `item_mods` VALUES (27985,384,300);   -- Haste +3%
+INSERT INTO `item_mods` VALUES (27985,161,-100);  -- Physical Damage Taken -1%
 INSERT INTO `item_mods` VALUES (27987,1,101); -- Gefechthentzes -- 101 Def
 INSERT INTO `item_mods` VALUES (27987,2,57); -- 57 HP
 INSERT INTO `item_mods` VALUES (27987,8,6); -- 6 STR
@@ -48451,6 +49313,22 @@ INSERT INTO `item_mods` VALUES (28065,14,6);
 INSERT INTO `item_mods` VALUES (28065,25,10);
 INSERT INTO `item_mods` VALUES (28065,31,10);
 INSERT INTO `item_mods` VALUES (28065,384,400);
+INSERT INTO `item_mods` VALUES (28066,1,61);      -- Geomancy Mitaines DEF:61
+INSERT INTO `item_mods` VALUES (28066,2,35);      -- HP+35
+INSERT INTO `item_mods` VALUES (28066,5,37);      -- MP+37
+INSERT INTO `item_mods` VALUES (28066,8,4);       -- STR+4
+INSERT INTO `item_mods` VALUES (28066,9,17);      -- DEX+17
+INSERT INTO `item_mods` VALUES (28066,10,16);     -- VIT+16
+INSERT INTO `item_mods` VALUES (28066,11,3);      -- AGI+3
+INSERT INTO `item_mods` VALUES (28066,12,12);     -- INT+12
+INSERT INTO `item_mods` VALUES (28066,13,21);     -- MND+21
+INSERT INTO `item_mods` VALUES (28066,14,12);     -- CHR+12
+INSERT INTO `item_mods` VALUES (28066,68,10);     -- Evasion+10
+INSERT INTO `item_mods` VALUES (28066,31,25);     -- Magic Evasion+25
+INSERT INTO `item_mods` VALUES (28066,29,1);      -- Magic Defense Bonus+1
+INSERT INTO `item_mods` VALUES (28066,1026,15);   -- Geomancy skill +15
+INSERT INTO `item_mods` VALUES (28066,384,300);   -- Haste +3%
+INSERT INTO `item_mods` VALUES (28066,161,-100);  -- Physical Damage Taken -1%
 INSERT INTO `item_mods` VALUES (28068,1,50);
 INSERT INTO `item_mods` VALUES (28068,8,10);
 INSERT INTO `item_mods` VALUES (28068,9,10);
@@ -49185,6 +50063,21 @@ INSERT INTO `item_mods` VALUES (28131,31,107);
 INSERT INTO `item_mods` VALUES (28131,68,27);
 INSERT INTO `item_mods` VALUES (28131,334,20);
 INSERT INTO `item_mods` VALUES (28131,384,500);
+INSERT INTO `item_mods` VALUES (28132,1,109);     -- Geomancy Pants +1: DEF 109
+INSERT INTO `item_mods` VALUES (28132,2,78);      -- HP+78
+INSERT INTO `item_mods` VALUES (28132,5,64);      -- MP+64
+INSERT INTO `item_mods` VALUES (28132,8,25);      -- STR+25
+INSERT INTO `item_mods` VALUES (28132,10,12);     -- VIT+12
+INSERT INTO `item_mods` VALUES (28132,11,17);     -- AGI+17
+INSERT INTO `item_mods` VALUES (28132,12,34);     -- INT+34
+INSERT INTO `item_mods` VALUES (28132,13,24);     -- MND+24
+INSERT INTO `item_mods` VALUES (28132,14,19);     -- CHR+19
+INSERT INTO `item_mods` VALUES (28132,29,6);      -- Magic Def. Bonus +6
+INSERT INTO `item_mods` VALUES (28132,31,107);    -- Magic Evasion +107
+INSERT INTO `item_mods` VALUES (28132,68,27);     -- Evasion +27
+INSERT INTO `item_mods` VALUES (28132,168,20);    -- Spell interruption rate down 20%
+INSERT INTO `item_mods` VALUES (28132,170,11);    -- Fast Cast +11%
+INSERT INTO `item_mods` VALUES (28132,384,400);   -- Haste +4%
 INSERT INTO `item_mods` VALUES (28135,1,105);
 INSERT INTO `item_mods` VALUES (28135,2,43);
 INSERT INTO `item_mods` VALUES (28135,5,29);
@@ -52387,6 +53280,8 @@ INSERT INTO `item_mods` VALUES (28583,2,50);      -- Vexer Ring +1: HP +50
 INSERT INTO `item_mods` VALUES (28583,27,3);      -- Enmity +3
 INSERT INTO `item_mods` VALUES (28583,29,3);      -- Magic Def. Bonus +3
 INSERT INTO `item_mods` VALUES (28584,2,55);      -- Vexer Ring +1: HP +55
+INSERT INTO `item_mods` VALUES (28585,861,-1);    -- Craftkeeper's Ring: Synthesis material loss -1%
+INSERT INTO `item_mods` VALUES (28586,862,1);     -- Craftmaster's Ring: Increase rate of HQ +1%
 INSERT INTO `item_mods` VALUES (28584,27,4);      -- Enmity +4
 INSERT INTO `item_mods` VALUES (28584,29,4);      -- Magic Def. Bonus +4
 INSERT INTO `item_mods` VALUES (28587,851,1);     -- Artificier's Ring Synthesis Skill +1
@@ -52762,6 +53657,733 @@ INSERT INTO `item_mods` VALUES (28671,8,7);       -- STR +7
 INSERT INTO `item_mods` VALUES (28671,10,7);      -- VIT +7
 INSERT INTO `item_mods` VALUES (28671,13,7);      -- MND +7
 INSERT INTO `item_mods` VALUES (28671,161,-400);    -- Physical damage taken -4%
+INSERT INTO `item_mods` VALUES (25612,1,116); -- Ryuo Somen +1 
+INSERT INTO `item_mods` VALUES (25612,2,46);
+INSERT INTO `item_mods` VALUES (25612,8,21);
+INSERT INTO `item_mods` VALUES (25612,9,17);
+INSERT INTO `item_mods` VALUES (25612,10,14);
+INSERT INTO `item_mods` VALUES (25612,11,20);
+INSERT INTO `item_mods` VALUES (25612,12,11);
+INSERT INTO `item_mods` VALUES (25612,13,11);
+INSERT INTO `item_mods` VALUES (25612,14,11);
+INSERT INTO `item_mods` VALUES (25612,25,35);
+INSERT INTO `item_mods` VALUES (25612,26,35);
+INSERT INTO `item_mods` VALUES (25612,68,36);
+INSERT INTO `item_mods` VALUES (25612,31,48);
+INSERT INTO `item_mods` VALUES (25612,29,2);
+INSERT INTO `item_mods` VALUES (25612,384,700);
+INSERT INTO `item_mods` VALUES (25612,27,-6);
+INSERT INTO `item_mods` VALUES (25612,73,7);
+INSERT INTO `item_mods` VALUES (25612,259,9);
+INSERT INTO `item_mods` VALUES (25611,1,115); -- Ryuo Somen DEF
+INSERT INTO `item_mods` VALUES (25611,2,41); -- HP
+INSERT INTO `item_mods` VALUES (25611,8,21); -- STR
+INSERT INTO `item_mods` VALUES (25611,9,17); -- DEX
+INSERT INTO `item_mods` VALUES (25611,10,14); -- VIT
+INSERT INTO `item_mods` VALUES (25611,11,20); -- AGI
+INSERT INTO `item_mods` VALUES (25611,12,11); -- INT
+INSERT INTO `item_mods` VALUES (25611,13,11); -- MND
+INSERT INTO `item_mods` VALUES (25611,14,11); -- CHR
+INSERT INTO `item_mods` VALUES (25611,25,25); -- ACC
+INSERT INTO `item_mods` VALUES (25611,26,25); -- RACC
+INSERT INTO `item_mods` VALUES (25611,68,36); -- EVA
+INSERT INTO `item_mods` VALUES (25611,31,48); -- MEVA
+INSERT INTO `item_mods` VALUES (25611,29,2); -- MDEF
+INSERT INTO `item_mods` VALUES (25611,384,700); -- HASTE
+INSERT INTO `item_mods` VALUES (25611,27,-5); -- ENMITY
+INSERT INTO `item_mods` VALUES (25611,73,6); -- STORE TP
+INSERT INTO `item_mods` VALUES (25611,259,8); -- DUAL WIELD
+INSERT INTO `item_mods` VALUES (27540,2,45); -- Eabani Earring HP
+INSERT INTO `item_mods` VALUES (27540,68,15); -- EVA
+INSERT INTO `item_mods` VALUES (27540,31,8); -- MEVA
+INSERT INTO `item_mods` VALUES (27540,259,4); -- DUAL WIELD
+INSERT INTO `item_mods` VALUES (25687,1,133); -- Adhemar Jacket +1  
+INSERT INTO `item_mods` VALUES (25687,2,63);
+INSERT INTO `item_mods` VALUES (25687,8,21);
+INSERT INTO `item_mods` VALUES (25687,9,33);
+INSERT INTO `item_mods` VALUES (25687,10,23);
+INSERT INTO `item_mods` VALUES (25687,11,29);
+INSERT INTO `item_mods` VALUES (25687,12,20);
+INSERT INTO `item_mods` VALUES (25687,13,20);
+INSERT INTO `item_mods` VALUES (25687,14,20);
+INSERT INTO `item_mods` VALUES (25687,25,35);
+INSERT INTO `item_mods` VALUES (25687,23,35);
+INSERT INTO `item_mods` VALUES (25687,26,35);
+INSERT INTO `item_mods` VALUES (25687,24,35);
+INSERT INTO `item_mods` VALUES (25687,68,55);
+INSERT INTO `item_mods` VALUES (25687,31,69);
+INSERT INTO `item_mods` VALUES (25687,29,6);
+INSERT INTO `item_mods` VALUES (25687,384,400);
+INSERT INTO `item_mods` VALUES (25687,302,4);
+INSERT INTO `item_mods` VALUES (25687,27,-8);
+INSERT INTO `item_mods` VALUES (25687,259,6);
+INSERT INTO `item_mods` VALUES (25686,1,132); -- Adhemar Jacket  DEF
+INSERT INTO `item_mods` VALUES (25686,2,63); -- HP
+INSERT INTO `item_mods` VALUES (25686,8,21); -- STR
+INSERT INTO `item_mods` VALUES (25686,9,33); -- DEX
+INSERT INTO `item_mods` VALUES (25686,10,23); -- VIT
+INSERT INTO `item_mods` VALUES (25686,11,29); -- AGI
+INSERT INTO `item_mods` VALUES (25686,12,20); -- INT
+INSERT INTO `item_mods` VALUES (25686,13,20); -- MND
+INSERT INTO `item_mods` VALUES (25686,14,20); -- CHR
+INSERT INTO `item_mods` VALUES (25686,25,25); -- ACC
+INSERT INTO `item_mods` VALUES (25686,23,25); -- ATT
+INSERT INTO `item_mods` VALUES (25686,26,25); -- RACC
+INSERT INTO `item_mods` VALUES (25686,24,25); -- RATT
+INSERT INTO `item_mods` VALUES (25686,68,55); -- EVA
+INSERT INTO `item_mods` VALUES (25686,31,69); -- MEVA
+INSERT INTO `item_mods` VALUES (25686,29,6); -- MDEF
+INSERT INTO `item_mods` VALUES (25686,384,400);  -- HASTE
+INSERT INTO `item_mods` VALUES (25686,302,3); -- TRIPLE ATT
+INSERT INTO `item_mods` VALUES (25686,27,-7); -- ENMITY
+INSERT INTO `item_mods` VALUES (25686,259,5); -- DUAL WIELD
+INSERT INTO `item_mods` VALUES (27118,1,93); -- Adhemar Wrist. +1  
+INSERT INTO `item_mods` VALUES (27118,2,22);
+INSERT INTO `item_mods` VALUES (27118,8,15);
+INSERT INTO `item_mods` VALUES (27118,9,44);
+INSERT INTO `item_mods` VALUES (27118,10,29);
+INSERT INTO `item_mods` VALUES (27118,11,7);
+INSERT INTO `item_mods` VALUES (27118,12,12);
+INSERT INTO `item_mods` VALUES (27118,13,30);
+INSERT INTO `item_mods` VALUES (27118,14,17);
+INSERT INTO `item_mods` VALUES (27118,25,32);
+INSERT INTO `item_mods` VALUES (27118,26,32);
+INSERT INTO `item_mods` VALUES (27118,68,36);
+INSERT INTO `item_mods` VALUES (27118,31,43);
+INSERT INTO `item_mods` VALUES (27118,29,6);
+INSERT INTO `item_mods` VALUES (27118,384,500);
+INSERT INTO `item_mods` VALUES (27118,302,4);
+INSERT INTO `item_mods` VALUES (27118,73,7);
+INSERT INTO `item_mods` VALUES (27118,165,6);
+INSERT INTO `item_mods` VALUES (25948,1,85); -- Hiza. Sune-Ate +2 
+INSERT INTO `item_mods` VALUES (25948,2,30);
+INSERT INTO `item_mods` VALUES (25948,8,28);
+INSERT INTO `item_mods` VALUES (25948,9,31);
+INSERT INTO `item_mods` VALUES (25948,10,23);
+INSERT INTO `item_mods` VALUES (25948,11,34);
+INSERT INTO `item_mods` VALUES (25948,13,3);
+INSERT INTO `item_mods` VALUES (25948,14,28);
+INSERT INTO `item_mods` VALUES (25948,25,42);
+INSERT INTO `item_mods` VALUES (25948,68,114);
+INSERT INTO `item_mods` VALUES (25948,31,75);
+INSERT INTO `item_mods` VALUES (25948,29,6);
+INSERT INTO `item_mods` VALUES (25948,384,300);
+INSERT INTO `item_mods` VALUES (25948,259,8);
+INSERT INTO `item_mods` VALUES (25948,23,24);
+INSERT INTO `item_mods` VALUES (27295,1,116); -- Samnuha Tights
+INSERT INTO `item_mods` VALUES (27295,2,41);
+INSERT INTO `item_mods` VALUES (27295,8,38);
+INSERT INTO `item_mods` VALUES (27295,9,6);
+INSERT INTO `item_mods` VALUES (27295,10,15);
+INSERT INTO `item_mods` VALUES (27295,11,30);
+INSERT INTO `item_mods` VALUES (27295,12,28);
+INSERT INTO `item_mods` VALUES (27295,13,16);
+INSERT INTO `item_mods` VALUES (27295,14,8);
+INSERT INTO `item_mods` VALUES (27295,25,15);
+INSERT INTO `item_mods` VALUES (27295,26,15);
+INSERT INTO `item_mods` VALUES (27295,68,41);
+INSERT INTO `item_mods` VALUES (27295,31,75);
+INSERT INTO `item_mods` VALUES (27295,29,6);
+INSERT INTO `item_mods` VALUES (27295,384,600);
+INSERT INTO `item_mods` VALUES (27295,73,7);
+INSERT INTO `item_mods` VALUES (28471,8,10); -- Gere Ring STR
+INSERT INTO `item_mods` VALUES (28471,23,16); -- ATT
+INSERT INTO `item_mods` VALUES (28471,302,5); -- TRIPLE ATT
+INSERT INTO `item_mods` VALUES (26321,1,10); -- Reiki Yotai DEF
+INSERT INTO `item_mods` VALUES (26321,25,10); -- ACC
+INSERT INTO `item_mods` VALUES (26321,26,10); -- RACC
+INSERT INTO `item_mods` VALUES (26321,27,-2); -- ENMITY
+INSERT INTO `item_mods` VALUES (26321,73,4); -- STORE TP
+INSERT INTO `item_mods` VALUES (26321,259,7); -- DUAL WIELD
+INSERT INTO `item_mods` VALUES (26528,1,150); -- Ken. Samue +1
+INSERT INTO `item_mods` VALUES (26528,2,122);
+INSERT INTO `item_mods` VALUES (26528,8,33);
+INSERT INTO `item_mods` VALUES (26528,9,39);
+INSERT INTO `item_mods` VALUES (26528,10,21);
+INSERT INTO `item_mods` VALUES (26528,11,37);
+INSERT INTO `item_mods` VALUES (26528,12,24);
+INSERT INTO `item_mods` VALUES (26528,13,23);
+INSERT INTO `item_mods` VALUES (26528,14,21);
+INSERT INTO `item_mods` VALUES (26528,25,52);
+INSERT INTO `item_mods` VALUES (26528,26,47);
+INSERT INTO `item_mods` VALUES (26528,68,70);
+INSERT INTO `item_mods` VALUES (26528,31,117);
+INSERT INTO `item_mods` VALUES (26528,29,9);
+INSERT INTO `item_mods` VALUES (26528,384,400);
+INSERT INTO `item_mods` VALUES (26528,302,6);
+INSERT INTO `item_mods` VALUES (26528,289,12);
+INSERT INTO `item_mods` VALUES (26528,165,9);
+INSERT INTO `item_mods` VALUES (23611,1,134); -- Mochi. Hakama +3
+INSERT INTO `item_mods` VALUES (23611,2,82);
+INSERT INTO `item_mods` VALUES (23611,8,42);
+INSERT INTO `item_mods` VALUES (23611,9,10);
+INSERT INTO `item_mods` VALUES (23611,10,24);
+INSERT INTO `item_mods` VALUES (23611,11,37);
+INSERT INTO `item_mods` VALUES (23611,12,42);
+INSERT INTO `item_mods` VALUES (23611,13,27);
+INSERT INTO `item_mods` VALUES (23611,14,21);
+INSERT INTO `item_mods` VALUES (23611,25,39);
+INSERT INTO `item_mods` VALUES (23611,23,64);
+INSERT INTO `item_mods` VALUES (23611,68,63);
+INSERT INTO `item_mods` VALUES (23611,31,84);
+INSERT INTO `item_mods` VALUES (23611,29,9);
+INSERT INTO `item_mods` VALUES (23611,384,600);
+INSERT INTO `item_mods` VALUES (23611,302,6);
+INSERT INTO `item_mods` VALUES (23611,30,39);
+INSERT INTO `item_mods` VALUES (23611,165,6);
+INSERT INTO `item_mods` VALUES (23611,259,10);
+INSERT INTO `item_mods` VALUES (23611,570,10);
+INSERT INTO `item_mods` VALUES (26108,9,10); -- Odr Earring DEX
+INSERT INTO `item_mods` VALUES (26108,25,10); -- ACC
+INSERT INTO `item_mods` VALUES (26108,165,5); -- CRIT HIT RATE
+INSERT INTO `item_mods` VALUES (27474,1,75); -- Adhe. Gamashes +1
+INSERT INTO `item_mods` VALUES (27474,2,11);
+INSERT INTO `item_mods` VALUES (27474,8,11);
+INSERT INTO `item_mods` VALUES (27474,9,23);
+INSERT INTO `item_mods` VALUES (27474,10,8);
+INSERT INTO `item_mods` VALUES (27474,11,42);
+INSERT INTO `item_mods` VALUES (27474,13,11);
+INSERT INTO `item_mods` VALUES (27474,14,25);
+INSERT INTO `item_mods` VALUES (27474,23,34);
+INSERT INTO `item_mods` VALUES (27474,68,74);
+INSERT INTO `item_mods` VALUES (27474,31,75);
+INSERT INTO `item_mods` VALUES (27474,29,5);
+INSERT INTO `item_mods` VALUES (27474,384,400);
+INSERT INTO `item_mods` VALUES (27474,302,6);
+INSERT INTO `item_mods` VALUES (27474,28,39);
+INSERT INTO `item_mods` VALUES (27474,165,6);
+INSERT INTO `item_mods` VALUES (27474,24,34);
+INSERT INTO `item_mods` VALUES (25614,1,102); -- Adhemar Bonnet +1
+INSERT INTO `item_mods` VALUES (25614,2,41);
+INSERT INTO `item_mods` VALUES (25614,8,19);
+INSERT INTO `item_mods` VALUES (25614,9,23);
+INSERT INTO `item_mods` VALUES (25614,10,15);
+INSERT INTO `item_mods` VALUES (25614,11,19);
+INSERT INTO `item_mods` VALUES (25614,13,14);
+INSERT INTO `item_mods` VALUES (25614,14,14);
+INSERT INTO `item_mods` VALUES (25614,23,36);
+INSERT INTO `item_mods` VALUES (25614,68,49);
+INSERT INTO `item_mods` VALUES (25614,31,59);
+INSERT INTO `item_mods` VALUES (25614,29,5);
+INSERT INTO `item_mods` VALUES (25614,384,800);
+INSERT INTO `item_mods` VALUES (25614,302,6);
+INSERT INTO `item_mods` VALUES (25614,289,8);
+INSERT INTO `item_mods` VALUES (25614,165,6);
+INSERT INTO `item_mods` VALUES (25614,12,14);
+INSERT INTO `item_mods` VALUES (27116,1,106); -- Ryuo Tekko +1
+INSERT INTO `item_mods` VALUES (27116,2,29);
+INSERT INTO `item_mods` VALUES (27116,8,12);
+INSERT INTO `item_mods` VALUES (27116,9,38);
+INSERT INTO `item_mods` VALUES (27116,10,13);
+INSERT INTO `item_mods` VALUES (27116,11,19);
+INSERT INTO `item_mods` VALUES (27116,13,30);
+INSERT INTO `item_mods` VALUES (27116,14,17);
+INSERT INTO `item_mods` VALUES (27116,25,36);
+INSERT INTO `item_mods` VALUES (27116,68,24);
+INSERT INTO `item_mods` VALUES (27116,31,32);
+INSERT INTO `item_mods` VALUES (27116,29,1);
+INSERT INTO `item_mods` VALUES (27116,384,400);
+INSERT INTO `item_mods` VALUES (27116,421,5);
+INSERT INTO `item_mods` VALUES (27116,165,6);
+INSERT INTO `item_mods` VALUES (27116,12,14);
+INSERT INTO `item_mods` VALUES (27116,26,33);
+INSERT INTO `item_mods` VALUES (21391,2,25); -- Seki Shuriken HP
+INSERT INTO `item_mods` VALUES (21391,23,13); -- ATT
+INSERT INTO `item_mods` VALUES (21391,171,192); -- DELAY
+INSERT INTO `item_mods` VALUES (21391,73,2); -- STORE TP
+INSERT INTO `item_mods` VALUES (21391,106,242); -- THROW SKILL
+INSERT INTO `item_mods` VALUES (26191,2,50); -- Regal Ring  HP
+INSERT INTO `item_mods` VALUES (26191,8,15); -- STR
+INSERT INTO `item_mods` VALUES (26191,9,15); -- DEX
+INSERT INTO `item_mods` VALUES (26191,10,15); -- VIT
+INSERT INTO `item_mods` VALUES (26191,11,15); -- AGI
+INSERT INTO `item_mods` VALUES (26191,23,20); -- ATT
+INSERT INTO `item_mods` VALUES (26191,24,20); -- RATT
+INSERT INTO `item_mods` VALUES (23402,1,118); -- 	Viti. Chapeau +3
+INSERT INTO `item_mods` VALUES (23402,2,81);
+INSERT INTO `item_mods` VALUES (23402,5,7);
+INSERT INTO `item_mods` VALUES (23402,8,24);
+INSERT INTO `item_mods` VALUES (23402,9,24);
+INSERT INTO `item_mods` VALUES (23402,10,24);
+INSERT INTO `item_mods` VALUES (23402,11,24);
+INSERT INTO `item_mods` VALUES (23402,12,29);
+INSERT INTO `item_mods` VALUES (23402,13,42);
+INSERT INTO `item_mods` VALUES (23402,14,29);
+INSERT INTO `item_mods` VALUES (23402,25,37);
+INSERT INTO `item_mods` VALUES (23402,23,62);
+INSERT INTO `item_mods` VALUES (23402,30,37);
+INSERT INTO `item_mods` VALUES (23402,68,56);
+INSERT INTO `item_mods` VALUES (23402,31,95);
+INSERT INTO `item_mods` VALUES (23402,29,7);
+INSERT INTO `item_mods` VALUES (23402,114,26);
+INSERT INTO `item_mods` VALUES (23402,384,600);
+INSERT INTO `item_mods` VALUES (23402,369,4);
+INSERT INTO `item_mods` VALUES (23402,570,6);
+INSERT INTO `item_mods` VALUES (25794,1,119); -- Jhakri Robe +2
+INSERT INTO `item_mods` VALUES (25794,8,37);
+INSERT INTO `item_mods` VALUES (25794,9,33);
+INSERT INTO `item_mods` VALUES (25794,10,14);
+INSERT INTO `item_mods` VALUES (25794,11,16);
+INSERT INTO `item_mods` VALUES (25794,12,50);
+INSERT INTO `item_mods` VALUES (25794,13,32);
+INSERT INTO `item_mods` VALUES (25794,14,30);
+INSERT INTO `item_mods` VALUES (25794,25,46);
+INSERT INTO `item_mods` VALUES (25794,23,46);
+INSERT INTO `item_mods` VALUES (25794,30,46);
+INSERT INTO `item_mods` VALUES (25794,68,33);
+INSERT INTO `item_mods` VALUES (25794,28,43);
+INSERT INTO `item_mods` VALUES (25794,29,7);
+INSERT INTO `item_mods` VALUES (25794,384,600);
+INSERT INTO `item_mods` VALUES (25794,369,4);
+INSERT INTO `item_mods` VALUES (26040,1,17); -- Yngvi Earring DEF
+INSERT INTO `item_mods` VALUES (26040,27,-5); -- ENMITY
+INSERT INTO `item_mods` VALUES (26040,370,2); -- REGEN
+INSERT INTO `item_mods` VALUES (21396,13,7); -- Regal Gem MND
+INSERT INTO `item_mods` VALUES (21396,30,15); -- MACC
+INSERT INTO `item_mods` VALUES (21396,114,10); -- ENFEEB
+INSERT INTO `item_mods` VALUES (26085,12,10); -- Regal Earring INT
+INSERT INTO `item_mods` VALUES (26085,13,10); -- MND
+INSERT INTO `item_mods` VALUES (26085,14,10); -- CHR
+INSERT INTO `item_mods` VALUES (26085,5,20); -- MP
+INSERT INTO `item_mods` VALUES (26085,28,7); -- MATT
+INSERT INTO `item_mods` VALUES (26109,30,10); -- Snotra Earring MACC
+INSERT INTO `item_mods` VALUES (26109,13,8); -- MND
+INSERT INTO `item_mods` VALUES (26109,114,10); -- ENFEEB
+INSERT INTO `item_mods` VALUES (26487,1,130); -- Sacro Bulwark DEF
+INSERT INTO `item_mods` VALUES (26487,109,112); -- SHIELD SKILL
+INSERT INTO `item_mods` VALUES (26487,374,5); -- CURE POT
+INSERT INTO `item_mods` VALUES (26487,168,7); -- SPELL INTERRUPTION
+INSERT INTO `item_mods` VALUES (26487,160,-10); -- DMG
+INSERT INTO `item_mods` VALUES (22040,171,216); -- Daybreak DELAY
+INSERT INTO `item_mods` VALUES (22040,5,60); -- MP
+INSERT INTO `item_mods` VALUES (22040,13,30); -- MND
+INSERT INTO `item_mods` VALUES (22040,30,40); -- MACC
+INSERT INTO `item_mods` VALUES (22040,31,30); -- MEVA
+INSERT INTO `item_mods` VALUES (22040,28,40); -- MATT
+INSERT INTO `item_mods` VALUES (22040,311,241); -- MDMG
+INSERT INTO `item_mods` VALUES (22040,90,228); -- CLUB SKILL
+INSERT INTO `item_mods` VALUES (22040,110,228); -- PARRY SKILL
+INSERT INTO `item_mods` VALUES (22040,369,1); -- REFRESH
+INSERT INTO `item_mods` VALUES (22040,374,30); -- CURE POT
+INSERT INTO `item_mods` VALUES (27122,1,86); -- Kaykaus Cuffs +1
+INSERT INTO `item_mods` VALUES (27122,2,20);
+INSERT INTO `item_mods` VALUES (27122,5,20);
+INSERT INTO `item_mods` VALUES (27122,8,6);
+INSERT INTO `item_mods` VALUES (27122,9,25);
+INSERT INTO `item_mods` VALUES (27122,10,25);
+INSERT INTO `item_mods` VALUES (27122,11,5);
+INSERT INTO `item_mods` VALUES (27122,12,19);
+INSERT INTO `item_mods` VALUES (27122,13,35);
+INSERT INTO `item_mods` VALUES (27122,14,16);
+INSERT INTO `item_mods` VALUES (27122,30,33);
+INSERT INTO `item_mods` VALUES (27122,68,32);
+INSERT INTO `item_mods` VALUES (27122,31,37);
+INSERT INTO `item_mods` VALUES (27122,29,3);
+INSERT INTO `item_mods` VALUES (27122,114,25);
+INSERT INTO `item_mods` VALUES (27122,384,300);
+INSERT INTO `item_mods` VALUES (27122,27,-6);
+INSERT INTO `item_mods` VALUES (27122,374,11);
+INSERT INTO `item_mods` VALUES (27122,260,5);
+INSERT INTO `item_mods` VALUES (26250,1,15); -- Sucellos's Cape DEF
+INSERT INTO `item_mods` VALUES (26250,114,10); -- ENFEEB
+INSERT INTO `item_mods` VALUES (26250,113,20); -- ENHANCE
+INSERT INTO `item_mods` VALUES (26098,1,20); -- Meili Earring DEF
+INSERT INTO `item_mods` VALUES (26098,112,10); -- HEALING
+INSERT INTO `item_mods` VALUES (26329,1,12); -- Luminary Sash DEF
+INSERT INTO `item_mods` VALUES (26329,5,45); -- MP
+INSERT INTO `item_mods` VALUES (26329,13,10); -- MND
+INSERT INTO `item_mods` VALUES (26329,30,10); -- MACC
+INSERT INTO `item_mods` VALUES (26329,296,4); -- Conserve MP
+INSERT INTO `item_mods` VALUES (25844,1,109); -- Chironic Hose
+INSERT INTO `item_mods` VALUES (25844,2,31);
+INSERT INTO `item_mods` VALUES (25844,5,47);
+INSERT INTO `item_mods` VALUES (25844,8,19);
+INSERT INTO `item_mods` VALUES (25844,10,6);
+INSERT INTO `item_mods` VALUES (25844,11,14);
+INSERT INTO `item_mods` VALUES (25844,12,42);
+INSERT INTO `item_mods` VALUES (25844,13,42);
+INSERT INTO `item_mods` VALUES (25844,14,20);
+INSERT INTO `item_mods` VALUES (25844,30,40);
+INSERT INTO `item_mods` VALUES (25844,68,24);
+INSERT INTO `item_mods` VALUES (25844,31,118);
+INSERT INTO `item_mods` VALUES (25844,29,6);
+INSERT INTO `item_mods` VALUES (25844,114,25);
+INSERT INTO `item_mods` VALUES (25844,384,500);
+INSERT INTO `item_mods` VALUES (25844,374,11);
+INSERT INTO `item_mods` VALUES (25618,1,96); -- Kaykaus Mitra +1
+INSERT INTO `item_mods` VALUES (25618,2,35);
+INSERT INTO `item_mods` VALUES (25618,5,80);
+INSERT INTO `item_mods` VALUES (25618,8,11);
+INSERT INTO `item_mods` VALUES (25618,9,14);
+INSERT INTO `item_mods` VALUES (25618,10,14);
+INSERT INTO `item_mods` VALUES (25618,11,14);
+INSERT INTO `item_mods` VALUES (25618,12,30);
+INSERT INTO `item_mods` VALUES (25618,13,32);
+INSERT INTO `item_mods` VALUES (25618,14,20);
+INSERT INTO `item_mods` VALUES (25618,30,40);
+INSERT INTO `item_mods` VALUES (25618,68,36);
+INSERT INTO `item_mods` VALUES (25618,31,75);
+INSERT INTO `item_mods` VALUES (25618,29,6);
+INSERT INTO `item_mods` VALUES (25618,112,20);
+INSERT INTO `item_mods` VALUES (25618,384,600);
+INSERT INTO `item_mods` VALUES (25618,374,11);
+INSERT INTO `item_mods` VALUES (25691,1,126); -- Kaykaus Bliaut +1
+INSERT INTO `item_mods` VALUES (25691,2,52);
+INSERT INTO `item_mods` VALUES (25691,5,64);
+INSERT INTO `item_mods` VALUES (25691,8,20);
+INSERT INTO `item_mods` VALUES (25691,9,20);
+INSERT INTO `item_mods` VALUES (25691,10,20);
+INSERT INTO `item_mods` VALUES (25691,11,20);
+INSERT INTO `item_mods` VALUES (25691,12,33);
+INSERT INTO `item_mods` VALUES (25691,13,33);
+INSERT INTO `item_mods` VALUES (25691,14,29);
+INSERT INTO `item_mods` VALUES (25691,25,35);
+INSERT INTO `item_mods` VALUES (25691,30,40);
+INSERT INTO `item_mods` VALUES (25691,68,41);
+INSERT INTO `item_mods` VALUES (25691,28,30);
+INSERT INTO `item_mods` VALUES (25691,29,7);
+INSERT INTO `item_mods` VALUES (25691,112,16);
+INSERT INTO `item_mods` VALUES (25691,384,300);
+INSERT INTO `item_mods` VALUES (25691,369,3);
+INSERT INTO `item_mods` VALUES (25691,260,6);
+INSERT INTO `item_mods` VALUES (27307,1,108); -- Kaykaus Tights +1
+INSERT INTO `item_mods` VALUES (27307,2,41);
+INSERT INTO `item_mods` VALUES (27307,5,35);
+INSERT INTO `item_mods` VALUES (27307,8,24);
+INSERT INTO `item_mods` VALUES (27307,10,12);
+INSERT INTO `item_mods` VALUES (27307,11,17);
+INSERT INTO `item_mods` VALUES (27307,12,33);
+INSERT INTO `item_mods` VALUES (27307,13,33);
+INSERT INTO `item_mods` VALUES (27307,14,16);
+INSERT INTO `item_mods` VALUES (27307,30,40);
+INSERT INTO `item_mods` VALUES (27307,68,27);
+INSERT INTO `item_mods` VALUES (27307,31,16);
+INSERT INTO `item_mods` VALUES (27307,29,7);
+INSERT INTO `item_mods` VALUES (27307,111,16);
+INSERT INTO `item_mods` VALUES (27307,384,500);
+INSERT INTO `item_mods` VALUES (27307,170,7);
+INSERT INTO `item_mods` VALUES (27307,260,11);
+INSERT INTO `item_mods` VALUES (27478,1,68); -- Kaykaus Boots +1
+INSERT INTO `item_mods` VALUES (27478,2,11);
+INSERT INTO `item_mods` VALUES (27478,5,80);
+INSERT INTO `item_mods` VALUES (27478,8,10);
+INSERT INTO `item_mods` VALUES (27478,9,11);
+INSERT INTO `item_mods` VALUES (27478,10,10);
+INSERT INTO `item_mods` VALUES (27478,11,33);
+INSERT INTO `item_mods` VALUES (27478,12,30);
+INSERT INTO `item_mods` VALUES (27478,13,30);
+INSERT INTO `item_mods` VALUES (27478,14,34);
+INSERT INTO `item_mods` VALUES (27478,31,107);
+INSERT INTO `item_mods` VALUES (27478,68,55);
+INSERT INTO `item_mods` VALUES (27478,29,7);
+INSERT INTO `item_mods` VALUES (27478,113,21);
+INSERT INTO `item_mods` VALUES (27478,384,300);
+INSERT INTO `item_mods` VALUES (27478,27,-6);
+INSERT INTO `item_mods` VALUES (27478,374,11);
+INSERT INTO `item_mods` VALUES (27478,296,7);
+INSERT INTO `item_mods` VALUES (27620,1,17); -- Aurist's Cape +1
+INSERT INTO `item_mods` VALUES (27620,5,45);
+INSERT INTO `item_mods` VALUES (27620,12,25);
+INSERT INTO `item_mods` VALUES (27620,13,25);
+INSERT INTO `item_mods` VALUES (27620,25,25);
+INSERT INTO `item_mods` VALUES (27620,30,50);
+INSERT INTO `item_mods` VALUES (27620,296,5);
+INSERT INTO `item_mods` VALUES (26351,28,8); -- Sacro Cord MATT
+INSERT INTO `item_mods` VALUES (26351,12,8); -- INT
+INSERT INTO `item_mods` VALUES (26351,13,8); -- MND
+INSERT INTO `item_mods` VALUES (26351,30,8); -- MACC
+INSERT INTO `item_mods` VALUES (26351,27,-3); -- ENMITY
+INSERT INTO `item_mods` VALUES (27305,1,106); -- Amalric Slops +1
+INSERT INTO `item_mods` VALUES (27305,2,34);
+INSERT INTO `item_mods` VALUES (27305,5,200);
+INSERT INTO `item_mods` VALUES (27305,8,19);
+INSERT INTO `item_mods` VALUES (27305,10,6);
+INSERT INTO `item_mods` VALUES (27305,11,14);
+INSERT INTO `item_mods` VALUES (27305,12,40);
+INSERT INTO `item_mods` VALUES (27305,13,25);
+INSERT INTO `item_mods` VALUES (27305,14,19);
+INSERT INTO `item_mods` VALUES (27305,31,118);
+INSERT INTO `item_mods` VALUES (27305,68,24);
+INSERT INTO `item_mods` VALUES (27305,29,7);
+INSERT INTO `item_mods` VALUES (27305,28,60);
+INSERT INTO `item_mods` VALUES (27305,384,500);
+INSERT INTO `item_mods` VALUES (27305,27,-6);
+INSERT INTO `item_mods` VALUES (27305,175,8);
+INSERT INTO `item_mods` VALUES (27305,296,7);
+INSERT INTO `item_mods` VALUES (27476,1,67); -- Amalric Nails +1
+INSERT INTO `item_mods` VALUES (27476,2,4);
+INSERT INTO `item_mods` VALUES (27476,5,80);
+INSERT INTO `item_mods` VALUES (27476,8,6);
+INSERT INTO `item_mods` VALUES (27476,9,6);
+INSERT INTO `item_mods` VALUES (27476,10,6);
+INSERT INTO `item_mods` VALUES (27476,11,26);
+INSERT INTO `item_mods` VALUES (27476,12,30);
+INSERT INTO `item_mods` VALUES (27476,13,30);
+INSERT INTO `item_mods` VALUES (27476,14,33);
+INSERT INTO `item_mods` VALUES (27476,311,30);
+INSERT INTO `item_mods` VALUES (27476,31,118);
+INSERT INTO `item_mods` VALUES (27476,68,60);
+INSERT INTO `item_mods` VALUES (27476,29,7);
+INSERT INTO `item_mods` VALUES (27476,28,32);
+INSERT INTO `item_mods` VALUES (27476,384,300);
+INSERT INTO `item_mods` VALUES (27476,170,6);
+INSERT INTO `item_mods` VALUES (27476,168,16);
+INSERT INTO `item_mods` VALUES (25593,1,95); -- C. Palug Crown
+INSERT INTO `item_mods` VALUES (25593,2,45);
+INSERT INTO `item_mods` VALUES (25593,5,45);
+INSERT INTO `item_mods` VALUES (25593,8,24);
+INSERT INTO `item_mods` VALUES (25593,9,24);
+INSERT INTO `item_mods` VALUES (25593,10,24);
+INSERT INTO `item_mods` VALUES (25593,11,24);
+INSERT INTO `item_mods` VALUES (25593,12,40);
+INSERT INTO `item_mods` VALUES (25593,13,40);
+INSERT INTO `item_mods` VALUES (25593,33,50);
+INSERT INTO `item_mods` VALUES (25593,31,86);
+INSERT INTO `item_mods` VALUES (25593,68,33);
+INSERT INTO `item_mods` VALUES (25593,29,7);
+INSERT INTO `item_mods` VALUES (25593,28,45);
+INSERT INTO `item_mods` VALUES (25593,384,600);
+INSERT INTO `item_mods` VALUES (25593,170,8);
+INSERT INTO `item_mods` VALUES (25689,1,126); -- Amalric Doublet +1
+INSERT INTO `item_mods` VALUES (25689,2,45);
+INSERT INTO `item_mods` VALUES (25689,5,80);
+INSERT INTO `item_mods` VALUES (25689,8,16);
+INSERT INTO `item_mods` VALUES (25689,9,19);
+INSERT INTO `item_mods` VALUES (25689,10,16);
+INSERT INTO `item_mods` VALUES (25689,11,16);
+INSERT INTO `item_mods` VALUES (25689,12,38);
+INSERT INTO `item_mods` VALUES (25689,13,30);
+INSERT INTO `item_mods` VALUES (25689,14,29);
+INSERT INTO `item_mods` VALUES (25689,33,40);
+INSERT INTO `item_mods` VALUES (25689,31,91);
+INSERT INTO `item_mods` VALUES (25689,68,38);
+INSERT INTO `item_mods` VALUES (25689,29,7);
+INSERT INTO `item_mods` VALUES (25689,28,33);
+INSERT INTO `item_mods` VALUES (25689,384,300);
+INSERT INTO `item_mods` VALUES (25689,27,-6);
+INSERT INTO `item_mods` VALUES (25689,296,7);
+INSERT INTO `item_mods` VALUES (25689,369,3);
+INSERT INTO `item_mods` VALUES (25689,562,15);
+INSERT INTO `item_mods` VALUES (27021,1,82); -- Lustr. Mittens +1
+INSERT INTO `item_mods` VALUES (27021,2,13);
+INSERT INTO `item_mods` VALUES (27021,5,80);
+INSERT INTO `item_mods` VALUES (27021,8,3);
+INSERT INTO `item_mods` VALUES (27021,9,23);
+INSERT INTO `item_mods` VALUES (27021,10,20);
+INSERT INTO `item_mods` VALUES (27021,11,2);
+INSERT INTO `item_mods` VALUES (27021,12,34);
+INSERT INTO `item_mods` VALUES (27021,13,34);
+INSERT INTO `item_mods` VALUES (27021,14,19);
+INSERT INTO `item_mods` VALUES (27021,33,40);
+INSERT INTO `item_mods` VALUES (27021,31,48);
+INSERT INTO `item_mods` VALUES (27021,68,19);
+INSERT INTO `item_mods` VALUES (27021,29,3);
+INSERT INTO `item_mods` VALUES (27021,28,33);
+INSERT INTO `item_mods` VALUES (27021,384,300);
+INSERT INTO `item_mods` VALUES (27021,487,20);
+INSERT INTO `item_mods` VALUES (27021,168,11);
+INSERT INTO `item_mods` VALUES (26023,1,14); -- Sanctity Necklace
+INSERT INTO `item_mods` VALUES (26023,2,35);
+INSERT INTO `item_mods` VALUES (26023,5,35);
+INSERT INTO `item_mods` VALUES (26023,23,10);
+INSERT INTO `item_mods` VALUES (26023,25,10);
+INSERT INTO `item_mods` VALUES (26023,24,10);
+INSERT INTO `item_mods` VALUES (26023,26,10);
+INSERT INTO `item_mods` VALUES (26023,30,50);
+INSERT INTO `item_mods` VALUES (26023,28,50);
+INSERT INTO `item_mods` VALUES (26023,370,2);
+INSERT INTO `item_mods` VALUES (26088,12,20); -- Malignance Earring
+INSERT INTO `item_mods` VALUES (26088,13,20);
+INSERT INTO `item_mods` VALUES (26088,33,40);
+INSERT INTO `item_mods` VALUES (26088,28,40);
+INSERT INTO `item_mods` VALUES (26088,170,4);
+INSERT INTO `item_mods` VALUES (28472,12,10); -- Freke Ring INT
+INSERT INTO `item_mods` VALUES (28472,28,8); -- MATT
+INSERT INTO `item_mods` VALUES (28472,168,10); -- Spell INTERRUPTION
+INSERT INTO `item_mods` VALUES (26323,375,10); -- Gishdubar Sash cure pot
+INSERT INTO `item_mods` VALUES (26323,67,10); -- Cursna
+INSERT INTO `item_mods` VALUES (26323,529,20); -- Refresh
+INSERT INTO `item_mods` VALUES (25616,1,96); -- Amalric Coif +1
+INSERT INTO `item_mods` VALUES (25616,2,30);
+INSERT INTO `item_mods` VALUES (25616,5,65);
+INSERT INTO `item_mods` VALUES (25616,8,10);
+INSERT INTO `item_mods` VALUES (25616,9,10);
+INSERT INTO `item_mods` VALUES (25616,10,10);
+INSERT INTO `item_mods` VALUES (25616,11,2);
+INSERT INTO `item_mods` VALUES (25616,12,30);
+INSERT INTO `item_mods` VALUES (25616,13,30);
+INSERT INTO `item_mods` VALUES (25616,14,19);
+INSERT INTO `item_mods` VALUES (25616,33,50);
+INSERT INTO `item_mods` VALUES (25616,31,86);
+INSERT INTO `item_mods` VALUES (25616,68,33);
+INSERT INTO `item_mods` VALUES (25616,29,6);
+INSERT INTO `item_mods` VALUES (25616,384,600);
+INSERT INTO `item_mods` VALUES (25616,529,3);
+INSERT INTO `item_mods` VALUES (25616,170,11);
+INSERT INTO `item_mods` VALUES (25616,832,2);
+INSERT INTO `item_mods` VALUES (20677,171,240); -- Colada
+INSERT INTO `item_mods` VALUES (20677,25,20);
+INSERT INTO `item_mods` VALUES (20677,23,20);
+INSERT INTO `item_mods` VALUES (20677,33,100);
+INSERT INTO `item_mods` VALUES (20677,28,25);
+INSERT INTO `item_mods` VALUES (20677,68,30);
+INSERT INTO `item_mods` VALUES (20677,29,6);
+INSERT INTO `item_mods` VALUES (20677,384,600);
+INSERT INTO `item_mods` VALUES (20677,369,3);
+INSERT INTO `item_mods` VALUES (20677,170,4);
+INSERT INTO `item_mods` VALUES (20677,163,123);
+INSERT INTO `item_mods` VALUES (20677,82,242);
+INSERT INTO `item_mods` VALUES (20677,110,242);
+INSERT INTO `item_mods` VALUES (20743,171,225); -- Bihkah Sword +1 DELAY
+INSERT INTO `item_mods` VALUES (20743,25,11); -- ACC
+INSERT INTO `item_mods` VALUES (20743,23,11); -- ATT
+INSERT INTO `item_mods` VALUES (20743,384,200); -- HASTE
+INSERT INTO `item_mods` VALUES (20743,2,65); -- HP
+INSERT INTO `item_mods` VALUES (20743,160,-2); -- Physical DMG
+INSERT INTO `item_mods` VALUES (23732,1,121); -- Malignance Chapeau DEF
+INSERT INTO `item_mods` VALUES (23732,2,45); -- HP
+INSERT INTO `item_mods` VALUES (23732,5,25); -- MP
+INSERT INTO `item_mods` VALUES (23732,8,11);-- STR
+INSERT INTO `item_mods` VALUES (23732,9,40); -- DEX
+INSERT INTO `item_mods` VALUES (23732,10,19); -- VIT
+INSERT INTO `item_mods` VALUES (23732,11,33); -- AGI
+INSERT INTO `item_mods` VALUES (23732,12,25); -- INT
+INSERT INTO `item_mods` VALUES (23732,13,16); -- MND
+INSERT INTO `item_mods` VALUES (23732,14,17); -- CHR
+INSERT INTO `item_mods` VALUES (23732,25,50); -- Accuracy
+INSERT INTO `item_mods` VALUES (23732,26,50); -- Ranged Accuracy
+INSERT INTO `item_mods` VALUES (23732,30,50); -- Magic Accuracy
+INSERT INTO `item_mods` VALUES (23732,68,91); -- Evasion
+INSERT INTO `item_mods` VALUES (23732,31,123); -- Magic Evasion 
+INSERT INTO `item_mods` VALUES (23732,29,5); -- Magic Def. Bonus
+INSERT INTO `item_mods` VALUES (23732,384,600); -- Haste
+INSERT INTO `item_mods` VALUES (23732,73,8); -- Store TP
+INSERT INTO `item_mods` VALUES (23732,161,-600); -- Damage taken
+INSERT INTO `item_mods` VALUES (23733,1,143); -- Malignance Tabard DEF
+INSERT INTO `item_mods` VALUES (23733,2,68); -- HP
+INSERT INTO `item_mods` VALUES (23733,5,44); -- MP
+INSERT INTO `item_mods` VALUES (23733,8,19); -- STR
+INSERT INTO `item_mods` VALUES (23733,9,49); -- DEX
+INSERT INTO `item_mods` VALUES (23733,10,25); -- VIT
+INSERT INTO `item_mods` VALUES (23733,11,42); -- AGI
+INSERT INTO `item_mods` VALUES (23733,12,19); -- INT
+INSERT INTO `item_mods` VALUES (23733,13,25); -- MND
+INSERT INTO `item_mods` VALUES (23733,14,24); -- CHR
+INSERT INTO `item_mods` VALUES (23733,25,50); -- Accuracy
+INSERT INTO `item_mods` VALUES (23733,26,50); -- Ranged Accuracy
+INSERT INTO `item_mods` VALUES (23733,30,50); -- Magic Accuracy
+INSERT INTO `item_mods` VALUES (23733,68,102); -- Evasion
+INSERT INTO `item_mods` VALUES (23733,31,139); -- Magic Evasion 
+INSERT INTO `item_mods` VALUES (23733,29,8); -- Magic Def. Bonus
+INSERT INTO `item_mods` VALUES (23733,384,400); -- Haste
+INSERT INTO `item_mods` VALUES (23733,73,11); -- Store TP
+INSERT INTO `item_mods` VALUES (23733,161,-900); -- Damage taken
+INSERT INTO `item_mods` VALUES (23734,1,108); -- Malignance Gloves DEF
+INSERT INTO `item_mods` VALUES (23734,2,57); -- HP
+INSERT INTO `item_mods` VALUES (23734,5,36); -- MP
+INSERT INTO `item_mods` VALUES (23734,8,25); -- STR
+INSERT INTO `item_mods` VALUES (23734,9,56); -- DEX
+INSERT INTO `item_mods` VALUES (23734,10,32); -- VIT
+INSERT INTO `item_mods` VALUES (23734,11,24); -- AGI
+INSERT INTO `item_mods` VALUES (23734,12,11); -- INT
+INSERT INTO `item_mods` VALUES (23734,13,42); -- MND
+INSERT INTO `item_mods` VALUES (23734,14,21); -- CHR
+INSERT INTO `item_mods` VALUES (23734,25,50); -- Accuracy
+INSERT INTO `item_mods` VALUES (23734,26,50); -- Ranged Accuracy
+INSERT INTO `item_mods` VALUES (23734,30,50); -- Magic Accuracy
+INSERT INTO `item_mods` VALUES (23734,68,80); -- Evasion
+INSERT INTO `item_mods` VALUES (23734,31,112); -- Magic Evasion 
+INSERT INTO `item_mods` VALUES (23734,29,4); -- Magic Def. Bonus
+INSERT INTO `item_mods` VALUES (23734,384,400); -- Haste
+INSERT INTO `item_mods` VALUES (23734,73,12); -- Store TP
+INSERT INTO `item_mods` VALUES (23734,161,-500); -- Damage taken
+INSERT INTO `item_mods` VALUES (23735,1,125); -- Malignance Tights DEF
+INSERT INTO `item_mods` VALUES (23735,2,45); -- HP
+INSERT INTO `item_mods` VALUES (23735,5,29); -- MP
+INSERT INTO `item_mods` VALUES (23735,8,28); -- STR
+INSERT INTO `item_mods` VALUES (23735,9,17); -- DEX
+INSERT INTO `item_mods` VALUES (23735,10,17); -- VIT
+INSERT INTO `item_mods` VALUES (23735,11,42); -- AGI
+INSERT INTO `item_mods` VALUES (23735,12,26); -- INT
+INSERT INTO `item_mods` VALUES (23735,13,19); -- MND
+INSERT INTO `item_mods` VALUES (23735,14,12); -- CHR
+INSERT INTO `item_mods` VALUES (23735,25,50); -- Accuracy
+INSERT INTO `item_mods` VALUES (23735,26,50); -- Ranged Accuracy
+INSERT INTO `item_mods` VALUES (23735,30,50); -- Magic Accuracy
+INSERT INTO `item_mods` VALUES (23735,68,85); -- Evasion
+INSERT INTO `item_mods` VALUES (23735,31,150); -- Magic Evasion 
+INSERT INTO `item_mods` VALUES (23735,29,7); -- Magic Def. Bonus
+INSERT INTO `item_mods` VALUES (23735,384,900); -- Haste
+INSERT INTO `item_mods` VALUES (23735,73,10); -- Store TP
+INSERT INTO `item_mods` VALUES (23735,161,-700); -- Damage taken
+INSERT INTO `item_mods` VALUES (23736,1,88); -- Malignance Boots DEF
+INSERT INTO `item_mods` VALUES (23736,2,34); -- HP
+INSERT INTO `item_mods` VALUES (23736,5,22); -- MP
+INSERT INTO `item_mods` VALUES (23736,8,6); -- STR
+INSERT INTO `item_mods` VALUES (23736,9,40); -- DEX
+INSERT INTO `item_mods` VALUES (23736,10,12); -- VIT
+INSERT INTO `item_mods` VALUES (23736,11,49); -- AGI
+INSERT INTO `item_mods` VALUES (23736,12,4); -- INT
+INSERT INTO `item_mods` VALUES (23736,13,15); -- MND
+INSERT INTO `item_mods` VALUES (23736,14,40); -- CHR
+INSERT INTO `item_mods` VALUES (23736,25,50); -- Accuracy
+INSERT INTO `item_mods` VALUES (23736,26,50); -- Ranged Accuracy
+INSERT INTO `item_mods` VALUES (23736,30,50); -- Magic Accuracy
+INSERT INTO `item_mods` VALUES (23736,68,119); -- Evasion
+INSERT INTO `item_mods` VALUES (23736,31,150); -- Magic Evasion 
+INSERT INTO `item_mods` VALUES (23736,29,7); -- Magic Def. Bonus
+INSERT INTO `item_mods` VALUES (23736,384,300); -- Haste
+INSERT INTO `item_mods` VALUES (23736,73,10); -- Store TP
+INSERT INTO `item_mods` VALUES (23736,161,-700); -- Damage taken
+INSERT INTO `item_mods` VALUES (21430,25,10); --  Accuracy 
+INSERT INTO `item_mods` VALUES (21430,27,-3); -- Enmity
+INSERT INTO `item_mods` VALUES (21432,541,5); -- Bloodpact Delay II
+INSERT INTO `item_mods` VALUES (21433,25,10); -- Accuracy
+INSERT INTO `item_mods` VALUES (21433,814,5); -- WS Damage
+INSERT INTO `item_mods` VALUES (21431,288,3); -- Double Attack
+INSERT INTO `item_mods` VALUES (21431,73,3); -- Store TP
+INSERT INTO `item_mods` VALUES (21568,171,201); -- Delay
+INSERT INTO `item_mods` VALUES (21568,2,114); -- HP
+INSERT INTO `item_mods` VALUES (21568,10,15); -- VIT
+INSERT INTO `item_mods` VALUES (21568,11,15); -- AGI
+INSERT INTO `item_mods` VALUES (21568,25,40); -- Accuracy
+INSERT INTO `item_mods` VALUES (21568,30,40); -- Magic Accuracy
+INSERT INTO `item_mods` VALUES (21568,68,30); -- Evasion
+INSERT INTO `item_mods` VALUES (21568,31,30); -- Magic Evasion
+INSERT INTO `item_mods` VALUES (21568,81,247); -- Dagger Skill
+INSERT INTO `item_mods` VALUES (21568,110,247); -- Parry Skill
+-- INSERT INTO `item_mods` VALUES (21568,0,234); -- Magic Acc Skill
+INSERT INTO `item_mods` VALUES (21568,27,10); -- Enmity 
+INSERT INTO `item_mods` VALUES (21568,73,3); -- Store TP
+INSERT INTO `item_mods` VALUES (21568,161,-800); -- Damage taken
+INSERT INTO `item_mods` VALUES (21926,171,190); -- Delay
+INSERT INTO `item_mods` VALUES (21926,2,114); -- HP
+INSERT INTO `item_mods` VALUES (21926,10,15); -- VIT
+INSERT INTO `item_mods` VALUES (21926,11,15); -- AGI
+INSERT INTO `item_mods` VALUES (21926,25,40); -- Accuracy
+INSERT INTO `item_mods` VALUES (21926,26,40); -- Range Accuracy
+INSERT INTO `item_mods` VALUES (21926,30,40); -- Magic Accuracy
+INSERT INTO `item_mods` VALUES (21926,68,30); -- Evasion
+INSERT INTO `item_mods` VALUES (21926,31,30); -- Magic Evasion
+INSERT INTO `item_mods` VALUES (21926,88,242); -- Katana Skill
+INSERT INTO `item_mods` VALUES (21926,110,242); -- Parry Skill
+-- INSERT INTO `item_mods` VALUES (21926,0,242); -- Magic Acc Skill
+INSERT INTO `item_mods` VALUES (21926,27,10); -- Enmity 
+INSERT INTO `item_mods` VALUES (21926,161,-800); -- Damage taken
+INSERT INTO `item_mods` VALUES (26218,8,3); -- STR
+INSERT INTO `item_mods` VALUES (26218,9,3); -- DEX
+INSERT INTO `item_mods` VALUES (26218,10,3); -- VIT
+INSERT INTO `item_mods` VALUES (26218,11,3); -- AGI
+INSERT INTO `item_mods` VALUES (26218,814,2); -- WS Damage
+INSERT INTO `item_mods` VALUES (26116,8,5); -- STR
+INSERT INTO `item_mods` VALUES (26116,288,6); -- Double Attack
+INSERT INTO `item_mods` VALUES (26116,289,3); -- Subtle Blow
+INSERT INTO `item_mods` VALUES (26116,11,3); -- AGI
+INSERT INTO `item_mods` VALUES (26362,11,3); -- AGI
+-- INSERT INTO `item_mods` VALUES (26362,0,5); -- True Shot
+INSERT INTO `item_mods` VALUES (26362,73,4); -- Store TP
+INSERT INTO `item_mods` VALUES (26363,13,5); -- Mnd
+INSERT INTO `item_mods` VALUES (26363,114,5); -- Enfeebling
 /*!40000 ALTER TABLE `item_mods` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

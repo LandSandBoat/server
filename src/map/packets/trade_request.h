@@ -22,15 +22,9 @@
 #ifndef _CTRADEREQUESTPACKET_H
 #define _CTRADEREQUESTPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
-
-/************************************************************************
- *																		*
- *																		*
- *																		*
- ************************************************************************/
 
 class CCharEntity;
 

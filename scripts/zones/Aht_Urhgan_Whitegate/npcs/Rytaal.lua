@@ -18,9 +18,7 @@ end
 entity.onTrigger = function(player, npc)
     local currentAssault = player:getCurrentAssault()
 
-    if player:getCurrentMission(TOAU) == xi.mission.id.toau.PRESIDENT_SALAHEEM and player:getCharVar("AhtUrganStatus") == 0 then
-        player:startEvent(269, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-    elseif player:getCurrentMission(TOAU) <= xi.mission.id.toau.IMMORTAL_SENTRIES or player:getMainLvl() <= 49 then
+    if player:getCurrentMission(xi.mission.log_id.TOAU) <= xi.mission.id.toau.IMMORTAL_SENTRIES or player:getMainLvl() <= 49 then
         player:startEvent(270)
     elseif currentAssault ~= 0 and player:getCharVar("assaultEntered") ~= 0 then
         if player:getCharVar("AssaultComplete") == 1 then
@@ -49,9 +47,9 @@ entity.onTrigger = function(player, npc)
             end
         end
     elseif
-        player:getCurrentMission(TOAU) > xi.mission.id.toau.PRESIDENT_SALAHEEM or
-        (player:getCurrentMission(TOAU) == xi.mission.id.toau.PRESIDENT_SALAHEEM and
-        player:getVar("AhtUrganStatus") >= 1)
+        player:getCurrentMission(xi.mission.log_id.TOAU) > xi.mission.id.toau.PRESIDENT_SALAHEEM or
+        (player:getCurrentMission(xi.mission.log_id.TOAU) == xi.mission.id.toau.PRESIDENT_SALAHEEM and
+        player:getVar("ToAU3Progress") >= 1)
     then
         local currentTime = os.time()
         local refreshTime = player:getVar("nextTagTime")
@@ -104,9 +102,7 @@ end
 entity.onEventFinish = function(player, csid, option)
     local tagStock = player:getCurrency("id_tags")
 
-    if csid == 269 then
-        player:setCharVar("AhtUrganStatus", 1)
-    elseif csid == 268 and option == 1 and not player:hasKeyItem(xi.ki.IMPERIAL_ARMY_ID_TAG) and tagStock > 0 then
+    if csid == 268 and option == 1 and not player:hasKeyItem(xi.ki.IMPERIAL_ARMY_ID_TAG) and tagStock > 0 then
         if player:getCurrentAssault() ~= 0 then
             player:messageSpecial(ID.text.CANNOT_ISSUE_TAG, xi.ki.IMPERIAL_ARMY_ID_TAG)
             return

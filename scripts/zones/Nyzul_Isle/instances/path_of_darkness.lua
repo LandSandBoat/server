@@ -5,19 +5,20 @@
 local ID = require("scripts/zones/Nyzul_Isle/IDs")
 require("scripts/globals/instance")
 require("scripts/globals/keyitems")
+require("scripts/globals/missions")
 -----------------------------------
 local instance_object = {}
 
 -- Requirements for the first player registering the instance
 instance_object.registryRequirements = function(player)
-    return player:getCurrentMission(TOAU) == xi.mission.id.toau.PATH_OF_DARKNESS and
-           player:hasKeyItem(xi.ki.NYZUL_ISLE_ROUTE) and
-           player:getCharVar("AhtUrganStatus") == 1
+    return player:getCurrentMission(xi.mission.log_id.TOAU) == xi.mission.id.toau.PATH_OF_DARKNESS and
+        player:hasKeyItem(xi.ki.NYZUL_ISLE_ROUTE) and
+        player:getMissionStatus(xi.mission.log_id.TOAU) == 1
 end
 
 -- Requirements for further players entering an already-registered instance
 instance_object.entryRequirements = function(player)
-    return player:getCurrentMission(TOAU) >= xi.mission.id.toau.PATH_OF_DARKNESS
+    return player:getCurrentMission(xi.mission.log_id.TOAU) >= xi.mission.id.toau.PATH_OF_DARKNESS
 end
 
 -- Called on the instance once it is created and ready
@@ -41,9 +42,17 @@ end
 -- When the player zones into the instance
 instance_object.afterInstanceRegister = function(player)
     local instance = player:getInstance()
+
+    -- NOTE: Time Limit observed in capture prior to KI fading.  This could be asyncronyous,
+    -- but moving here from that reference.
     player:messageSpecial(ID.text.TIME_TO_COMPLETE, instance:getTimeLimit())
 
-    player:delKeyItem(xi.ki.NYZUL_ISLE_ROUTE)
+    if player:hasKeyItem(xi.ki.NYZUL_ISLE_ROUTE) then
+        player:delKeyItem(xi.ki.NYZUL_ISLE_ROUTE)
+        player:messageSpecial(ID.text.FADES_INTO_NOTHINGNESS, xi.ki.NYZUL_ISLE_ROUTE)
+    end
+
+    player:addTempItem(xi.items.UNDERSEA_RUINS_FIREFLIES)
 end
 
 -- Instance "tick"
@@ -63,18 +72,17 @@ end
 
 -- When something in the instance calls: instance:setProgress(...)
 instance_object.onInstanceProgressUpdate = function(instance, progress)
-
-    if(progress >= 10 and progress < 20) then
+    if progress >= 10 and progress < 20 then
         DespawnMob(ID.mob[58].AMNAF_BLU, instance)
-    elseif(progress == 24) then
+    elseif progress == 24 then
         local v = GetMobByID(ID.mob[58].NAJA, instance)
         v:setLocalVar("ready", 0)
         v:setLocalVar("Stage", 2)
 
         SpawnMob(ID.mob[58].AMNAF_BLU, instance)
-    elseif(progress >= 30 and progress < 40) then
+    elseif progress >= 30 and progress < 40 then
         DespawnMob(ID.mob[58].AMNAF_BLU, instance)
-    elseif(progress == 48) then
+    elseif progress == 48 then
         SpawnMob(ID.mob[58].AMNAF_PSYCHEFLAYER, instance)
 
         local v = GetMobByID(ID.mob[58].NAJA, instance)
@@ -88,19 +96,21 @@ instance_object.onInstanceProgressUpdate = function(instance, progress)
                 value:setAnimation(8)
             end
         end
-    elseif(progress == 50) then
+    elseif progress == 50 then
         instance:complete()
     end
 end
 
 -- On win
 instance_object.onInstanceComplete = function(instance)
-
     local chars = instance:getChars()
 
     for i, v in pairs(chars) do
-        if (v:getCurrentMission(TOAU) == xi.mission.id.toau.PATH_OF_DARKNESS and v:getCharVar("AhtUrganStatus") == 1) then
-            v:setCharVar("AhtUrganStatus", 2)
+        if
+            v:getCurrentMission(xi.mission.log_id.TOAU) == xi.mission.id.toau.PATH_OF_DARKNESS and
+            v:getMissionStatus(xi.mission.log_id.TOAU) == 1
+        then
+            v:setMissionStatus(xi.mission.log_id.TOAU, 2)
         end
 
         v:setPos(0, 0, 0, 0, 72)

@@ -19,12 +19,12 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 ===========================================================================
 */
 
-#include "../common/blowfish.h"
-#include "../common/md52.h"
-#include "../common/mmo.h"
-#include "../common/logging.h"
-#include "../common/socket.h"
-#include "../common/utils.h"
+#include "common/blowfish.h"
+#include "common/md52.h"
+#include "common/mmo.h"
+#include "common/logging.h"
+#include "common/socket.h"
+#include "common/utils.h"
 
 #ifdef WIN32
 #include <winsock2.h>
@@ -99,7 +99,7 @@ int32 CTCPRequestPacket::ReceiveFromSocket()
     }
     if (m_size == 0)
     {
-        // ShowError("TCP Connection closing...");
+        // ShowError("TCP Connection closing");
         return 0;
     }
     if (m_size != ref<uint16>(recvbuf, (0x00)) || m_size < 28)
@@ -187,13 +187,13 @@ int32 CTCPRequestPacket::CheckPacketHash()
     toHash -= 0x10; // -hashsize
     toHash -= 0x04; // -keysize
 
-    md5((uint8*)(&m_data[8]), PacketHash, toHash);
+    md5((&m_data[8]), PacketHash, toHash);
 
     for (uint8 i = 0; i < 16; ++i)
     {
-        if ((uint8)m_data[m_size - 0x14 + i] != PacketHash[i])
+        if (m_data[m_size - 0x14 + i] != PacketHash[i])
         {
-            ShowError("Search hash wrong byte %d: 0x%.2X should be 0x%.2x", i, PacketHash[i], (uint8)m_data[m_size - 0x14 + i]);
+            ShowError("Search hash wrong byte %d: 0x%.2X should be 0x%.2x", i, PacketHash[i], m_data[m_size - 0x14 + i]);
             return 0;
         }
     }

@@ -10,29 +10,29 @@ require("scripts/globals/keyitems")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    TradeBCNM(player, npc, trade)
+    xi.bcnm.onTrade(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
 
-    -- if (player:hasKeyItem(xi.ki.MARK_OF_SEED) and player:getCurrentMission(ACP) == xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_II) then
+    -- if (player:hasKeyItem(xi.ki.MARK_OF_SEED) and player:getCurrentMission(xi.mission.log_id.ACP) == xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_II) then
     --     player:startEvent(5)
-    -- elseif (EventTriggerBCNM(player, npc)) then
+    -- else xi.bcnm.onTrigger(player, npc)
     -- Temp disabled pending fixes for the BCNM mobs.
 
-    EventTriggerBCNM(player, npc)
+    xi.bcnm.onTrigger(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option, extras)
-    EventUpdateBCNM(player, csid, option, extras)
+    xi.bcnm.onEventUpdate(player, csid, option, extras)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 5) then
+    if csid == 5 then
         player:completeMission(xi.mission.log_id.ACP, xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_II)
         player:addMission(xi.mission.log_id.ACP, xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_III)
     else
-        EventFinishBCNM(player, csid, option)
+        xi.bcnm.onEventFinish(player, csid, option)
     end
 end
 

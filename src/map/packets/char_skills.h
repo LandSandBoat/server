@@ -22,15 +22,9 @@
 #ifndef _CCHARSKILLSPACKET_H
 #define _CCHARSKILLSPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
-
-/************************************************************************
- *																		*
- *  																		*
- *																		*
- ************************************************************************/
 
 class CCharEntity;
 

@@ -19,7 +19,7 @@ entity.onTrigger = function(player, npc)
     local ATFTA = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.A_THIRST_FOR_THE_AGES)
     local ATFTA_Need_KI = ((player:getCharVar("ATFTA_Status") < 2) and (not player:hasKeyItem(xi.ki.COPY_OF_THE_ALLIANCE_AGREEMENT)))
 
-    local SOA_Mission = player:getCurrentMission(SOA)
+    local SOA_Mission = player:getCurrentMission(xi.mission.log_id.SOA)
 
     if (SOA_Mission >= xi.mission.id.soa.LIFE_ON_THE_FRONTIER) then
         if ((ATFTA == QUEST_ACCEPTED) and ATFTA_Need_KI) then

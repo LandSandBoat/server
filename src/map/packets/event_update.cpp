@@ -19,15 +19,15 @@
 ===========================================================================
 */
 
-#include "../../common/socket.h"
+#include "common/socket.h"
 
 #include "../entities/charentity.h"
 #include "event_update.h"
 
 CEventUpdatePacket::CEventUpdatePacket(std::vector<std::pair<uint8, uint32>> params)
 {
-    this->type = 0x5C;
-    this->size = 0x12;
+    this->setType(0x5C);
+    this->setSize(0x24);
 
     for (auto paramPair : params)
     {

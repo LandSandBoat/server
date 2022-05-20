@@ -22,7 +22,7 @@ local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.WHENCE_BLOWS_TH
 quest.reward =
 {
     fame = 50,
-    fameArea = JEUNO,
+    fameArea = xi.quest.fame_area.JEUNO,
     title = xi.title.SKY_BREAKER,
 }
 
@@ -32,7 +32,6 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-                player:getMainLvl() >= 56 and
                 player:getLevelCap() == 60 and
                 xi.settings.MAX_LEVEL >= 65
         end,
@@ -42,7 +41,11 @@ quest.sections =
             ['Maat'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:progressEvent(85)
+                    if player:getMainLvl() >= 56 then
+                        return quest:progressEvent(85)
+                    else
+                        return quest:messageText(npc, 10399)
+                    end
                 end,
             },
 

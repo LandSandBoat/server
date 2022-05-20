@@ -22,15 +22,9 @@
 #ifndef _CINVENTORYSIZEPACKET_H
 #define _CINVENTORYSIZEPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
-
-/************************************************************************
- *																		*
- *  																		*
- *																		*
- ************************************************************************/
 
 class CCharEntity;
 

@@ -19,8 +19,8 @@
 ===========================================================================
 */
 
-#include "../../common/socket.h"
-#include "../../common/utils.h"
+#include "common/socket.h"
+#include "common/utils.h"
 
 #include <cstring>
 
@@ -31,8 +31,8 @@
 
 CBazaarItemPacket::CBazaarItemPacket(CItem* PItem, uint8 SlotID, uint16 Tax)
 {
-    this->type = 0x05; // 0x105
-    this->size = 0x17;
+    this->setType(0x105);
+    this->setSize(0x2E);
 
     ref<uint8>(0x10) = SlotID;
 

@@ -1,12 +1,11 @@
 -----------------------------------
 -- Zone: Abyssea-Konschtat
---  NPC: ???
+--  NPC: qm_eccentric_eve (???)
 -- Spawns Eccentric Eve
 -- !pos 230.413 32.278 280.677 15
--- !pos 215.413 32.778 280.677 15
--- !pos 245.413 31.778 280.677 15
 -----------------------------------
-require("scripts/globals/abyssea")
+require('scripts/globals/abyssea')
+require('scripts/globals/keyitems')
 -----------------------------------
 local entity = {}
 
@@ -15,7 +14,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    xi.abyssea.qmOnTrigger(player, npc)
+    local ID = zones[player:getZoneID()]
+    xi.abyssea.qmOnTrigger(player, npc, ID.mob.ECCENTRIC_EVE_1, { xi.ki.FRAGRANT_TREANT_PETAL, xi.ki.FETID_RAFFLESIA_STALK, xi.ki.DECAYING_MORBOL_TOOTH, xi.ki.TURBID_SLIME_OIL, xi.ki.VENOMOUS_PEISTE_CLAW })
 end
 
 entity.onEventUpdate = function(player, csid, option)

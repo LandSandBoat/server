@@ -19,16 +19,15 @@
 ===========================================================================
 */
 
-#include "../../common/socket.h"
+#include "common/socket.h"
 
-#include "spdlog/fmt/bundled/printf.h"
 #include "world_pass.h"
 #include <cinttypes>
 
 CWorldPassPacket::CWorldPassPacket(uint32 WorldPass)
 {
-    this->type = 0x59;
-    this->size = 0x12;
+    this->setType(0x59);
+    this->setSize(0x24);
 
     ref<uint32>(0x0C) = 10000; // price
 

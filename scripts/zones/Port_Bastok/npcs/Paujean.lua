@@ -32,7 +32,7 @@ entity.onTrigger = function(player, npc)
 
     if (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatBastok, 2)) then
         player:startEvent(355)
-    elseif (SilenceOfTheRams == QUEST_AVAILABLE and player:getFameLevel(NORG) >= 2) then
+    elseif (SilenceOfTheRams == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.NORG) >= 2) then
         player:startEvent(195)
     elseif (SilenceOfTheRams == QUEST_ACCEPTED) then
         player:showText(npc, ID.text.PAUJEAN_DIALOG_1)

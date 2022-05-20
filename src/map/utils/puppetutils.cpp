@@ -40,13 +40,13 @@ namespace puppetutils
                             "char_pet LEFT JOIN pet_name ON automatonid = id "
                             "WHERE charid = %u;";
 
-        int32 ret = Sql_Query(SqlHandle, Query, PChar->id);
+        int32 ret = sql->Query(Query, PChar->id);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
         {
             size_t length      = 0;
             char*  attachments = nullptr;
-            Sql_GetData(SqlHandle, 0, &attachments, &length);
+            sql->GetData(0, &attachments, &length);
             memcpy(&PChar->m_unlockedAttachments, attachments, (length > sizeof(PChar->m_unlockedAttachments) ? sizeof(PChar->m_unlockedAttachments) : length));
 
             if (PChar->PAutomaton != nullptr)
@@ -68,10 +68,10 @@ namespace puppetutils
             if (PChar->GetMJob() == JOB_PUP || PChar->GetSJob() == JOB_PUP)
             {
                 PChar->PAutomaton = new CAutomatonEntity();
-                PChar->PAutomaton->name.insert(0, (const char*)Sql_GetData(SqlHandle, 1));
+                PChar->PAutomaton->name.insert(0, (const char*)sql->GetData(1));
                 automaton_equip_t tempEquip;
                 attachments = nullptr;
-                Sql_GetData(SqlHandle, 2, &attachments, &length);
+                sql->GetData(2, &attachments, &length);
                 memcpy(&tempEquip, attachments, (length > sizeof(tempEquip) ? sizeof(tempEquip) : length));
 
                 // If any of this happens then the Automaton failed to load properly and should just reset (Should only occur with older characters or if DB is
@@ -146,14 +146,14 @@ namespace puppetutils
             char unlockedAttachmentsEscaped[sizeof(PChar->m_unlockedAttachments) * 2 + 1];
             char unlockedAttachments[sizeof(PChar->m_unlockedAttachments)];
             memcpy(unlockedAttachments, &PChar->m_unlockedAttachments, sizeof(unlockedAttachments));
-            Sql_EscapeStringLen(SqlHandle, unlockedAttachmentsEscaped, unlockedAttachments, sizeof(unlockedAttachments));
+            sql->EscapeStringLen(unlockedAttachmentsEscaped, unlockedAttachments, sizeof(unlockedAttachments));
 
             char equippedAttachmentsEscaped[sizeof(PChar->PAutomaton->m_Equip) * 2 + 1];
             char equippedAttachments[sizeof(PChar->PAutomaton->m_Equip)];
             memcpy(equippedAttachments, &PChar->PAutomaton->m_Equip, sizeof(equippedAttachments));
-            Sql_EscapeStringLen(SqlHandle, equippedAttachmentsEscaped, equippedAttachments, sizeof(equippedAttachments));
+            sql->EscapeStringLen(equippedAttachmentsEscaped, equippedAttachments, sizeof(equippedAttachments));
 
-            Sql_Query(SqlHandle, Query, unlockedAttachmentsEscaped, equippedAttachmentsEscaped, PChar->id);
+            sql->Query(Query, unlockedAttachmentsEscaped, equippedAttachmentsEscaped, PChar->id);
         }
         else
         {
@@ -164,9 +164,9 @@ namespace puppetutils
             char unlockedAttachmentsEscaped[sizeof(PChar->m_unlockedAttachments) * 2 + 1];
             char unlockedAttachments[sizeof(PChar->m_unlockedAttachments)];
             memcpy(unlockedAttachments, &PChar->m_unlockedAttachments, sizeof(unlockedAttachments));
-            Sql_EscapeStringLen(SqlHandle, unlockedAttachmentsEscaped, unlockedAttachments, sizeof(unlockedAttachments));
+            sql->EscapeStringLen(unlockedAttachmentsEscaped, unlockedAttachments, sizeof(unlockedAttachments));
 
-            Sql_Query(SqlHandle, Query, unlockedAttachmentsEscaped, PChar->id);
+            sql->Query(Query, unlockedAttachmentsEscaped, PChar->id);
         }
         // TODO: PUP only: save equipped automaton items
     }

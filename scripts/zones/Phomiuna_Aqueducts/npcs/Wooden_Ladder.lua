@@ -71,8 +71,8 @@ entity.onTrigger = function(player, npc)
                 player:messageSpecial(ID.text.CANNOT_REACH_LADDER)
             elseif
                 eventID == 28 and
-                player:getCurrentMission(COP) == xi.mission.id.cop.DISTANT_BELIEFS and
-                player:getCharVar("PromathiaStatus") == 1
+                player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.DISTANT_BELIEFS and
+                xi.mission.getVar(player, xi.mission.log_id.COP, xi.mission.id.cop.DISTANT_BELIEFS, 'Status') == 1
             then
                 player:startEvent(35)
             elseif eventID == 99 then
@@ -89,7 +89,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 35 then
-        player:setCharVar("PromathiaStatus", 2)
+        xi.mission.setVar(player, xi.mission.log_id.COP, xi.mission.id.cop.DISTANT_BELIEFS, 'Status', 2)
     end
 end
 

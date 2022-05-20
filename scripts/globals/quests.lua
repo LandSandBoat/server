@@ -1,4 +1,3 @@
-require("scripts/globals/log_ids")
 require("scripts/globals/zone")
 
 xi = xi or {}
@@ -30,7 +29,7 @@ xi.quest.log_id =
     CRYSTAL_WAR =  7,
     ABYSSEA     =  8,
     ADOULIN     =  9,
-    COALITION   = 10
+    COALITION   = 10,
 }
 
 xi.quest.area =
@@ -45,7 +44,30 @@ xi.quest.area =
     [xi.quest.log_id.CRYSTAL_WAR] = 'crystalWar',
     [xi.quest.log_id.ABYSSEA]     = 'abyssea',
     [xi.quest.log_id.ADOULIN]     = 'adoulin',
-    [xi.quest.log_id.COALITION]   = 'coalition'
+    [xi.quest.log_id.COALITION]   = 'coalition',
+}
+
+-- NOTE: Duplicated areas should not be used here.  For example,
+-- Mhaura and Kazham fame use WINDURST fame area.  This table
+-- follows mapping of CLuaBaseEntity::addFame()
+xi.quest.fame_area =
+{
+    SANDORIA           =  0,
+    BASTOK             =  1,
+    WINDURST           =  2, -- Mhaura, Kazham
+    JEUNO              =  3,
+    SELBINA_RABAO      =  4,
+    NORG               =  5,
+    ABYSSEA_KONSCHTAT  =  6,
+    ABYSSEA_TAHRONGI   =  7,
+    ABYSSEA_LATHEINE   =  8,
+    ABYSSEA_MISAREAUX  =  9,
+    ABYSSEA_VUNKERL    = 10,
+    ABYSSEA_ATTOHWA    = 11,
+    ABYSSEA_ALTEPA     = 12,
+    ABYSSEA_GRAUBERG   = 13,
+    ABYSSEA_ULEGUERAND = 14,
+    ADOULIN            = 15,
 }
 
 xi.quest.id =
@@ -62,8 +84,8 @@ xi.quest.id =
         FATHER_AND_SON                  = 4,  -- + Converted
         THE_SEAMSTRESS                  = 5,  -- + Converted
         THE_DISMAYED_CUSTOMER           = 6,  -- + Converted
-        THE_TRADER_IN_THE_FOREST        = 7,  -- +
-        THE_SWEETEST_THINGS             = 8,  -- +
+        THE_TRADER_IN_THE_FOREST        = 7,  -- + Converted
+        THE_SWEETEST_THINGS             = 8,  -- + Converted
         THE_VICASQUE_S_SERMON           = 9,  -- +
         A_SQUIRE_S_TEST                 = 10, -- +
         GRAVE_CONCERNS                  = 11, -- ±
@@ -437,7 +459,7 @@ xi.quest.id =
         THE_GOBBIEBAG_PART_VII          = 93, -- + Converted
         THE_GOBBIEBAG_PART_VIII         = 94, -- + Converted
         LAKESIDE_MINUET                 = 95, -- + Converted
-        THE_UNFINISHED_WALTZ            = 96, -- ±
+        THE_UNFINISHED_WALTZ            = 96, -- ± Converted
         THE_ROAD_TO_DIVADOM             = 97, -- + Converted
         COMEBACK_QUEEN                  = 98,
         A_FURIOUS_FINALE                = 99,
@@ -646,8 +668,8 @@ xi.quest.id =
         OLDUUM                          = 2, -- + Converted
         GOT_IT_ALL                      = 3, -- + Converted
         GET_THE_PICTURE                 = 4,
-        AN_EMPTY_VESSEL                 = 5, -- +
-        LUCK_OF_THE_DRAW                = 6, -- ± Converted
+        AN_EMPTY_VESSEL                 = 5, -- + Converted
+        LUCK_OF_THE_DRAW                = 6, -- + Converted
         NO_STRINGS_ATTACHED             = 7, -- +
         FINDING_FAULTS                  = 8,
         GIVE_PEACE_A_CHANCE             = 9, -- + Converted
@@ -662,9 +684,9 @@ xi.quest.id =
         TOTOROONS_TREASURE_HUNT         = 18,
         WHAT_FRIENDS_ARE_FOR            = 19, -- + Converted
         ROCK_BOTTOM                     = 20, -- + Converted
-        BEGINNINGS                      = 21, -- +
-        OMENS                           = 22, -- +
-        TRANSFORMATIONS                 = 23, -- +
+        BEGINNINGS                      = 21, -- + Converted
+        OMENS                           = 22, -- + Converted
+        TRANSFORMATIONS                 = 23, -- + Converted
         EQUIPPED_FOR_ALL_OCCASIONS      = 24, -- + Converted
         NAVIGATING_THE_UNFRIENDLY_SEAS  = 25, -- +
         AGAINST_ALL_ODDS                = 26,
@@ -1045,10 +1067,10 @@ xi.quest.id =
         WESTERN_WAYPOINTS_HO            = 50,
         WESEASTERN_WAYPOINTS_HO         = 51,
         GRIND_TO_SAWDUST                = 53,
-        BREAKING_THE_ICE                = 54,
-        IM_ON_A_BOAT                    = 55,
-        A_STONES_THROW_AWAY             = 56,
-        HIDE_AND_GO_PEAK                = 57,
+        BREAKING_THE_ICE                = 54, -- + Converted
+        IM_ON_A_BOAT                    = 55, -- + Converted
+        A_STONES_THROW_AWAY             = 56, -- + Converted
+        HIDE_AND_GO_PEAK                = 57, -- + Converted
         THE_WHOLE_PLACE_IS_ABUZZ        = 58,
         OROBON_APPETIT                  = 59,
         TALK_ABOUT_WRINKLY_SKIN         = 60,
@@ -1060,16 +1082,16 @@ xi.quest.id =
         RAPTOR_RAPTURE                  = 73,
         EXOTIC_DELICACIES               = 74, -- +
         A_PIONEERS_BEST_IMAGINARY_FRIEND= 75, -- +
-        HUNGER_STRIKES                  = 76, -- +
+        HUNGER_STRIKES                  = 76, -- + Converted
         THE_OLD_MAN_AND_THE_HARPOON     = 77, -- +
-        A_CERTAIN_SUBSTITUTE_PATROLMAN  = 78, -- +
+        A_CERTAIN_SUBSTITUTE_PATROLMAN  = 78, -- + Converted
         IT_SETS_MY_HEART_AFLUTTER       = 79, -- + Converted
-        TRANSPORTING                    = 82,
-        THE_STARVING                    = 84, -- +
+        TRANSPORTING                    = 82, -- + Converted
+        THE_STARVING                    = 84, -- + Converted
         FERTILE_GROUND                  = 85,
         ALWAYS_MORE_QUOTH_THE_RAVENOUS  = 88, -- +
         MEGALOMANIAC                    = 89,
-        THE_LONGEST_WAY_ROUND           = 91,
+        THE_LONGEST_WAY_ROUND           = 91, -- + Converted
         A_GOOD_PAIR_OF_CROCS            = 93, -- + Converted
         CAFETERIA                       = 94,
         A_SHOT_IN_THE_DARK              = 96, -- + Converted
@@ -1094,7 +1116,7 @@ xi.quest.id =
         VELKKOVERT_OPERATIONS           = 123,
         HYPOCRITICAL_OATH               = 124,
         THE_GOOD_THE_BAD_THE_CLEMENT    = 125,
-        LERENES_LAMENT                  = 126,
+        LERENES_LAMENT                  = 126, -- + Converted
         THE_SECRET_TO_SUCCESS           = 127,
         NO_MERCY_FOR_THE_WICKED         = 128,
         MISTRESS_OF_CEREMONIES          = 129,
@@ -1243,10 +1265,10 @@ xi.quest.setLocalVar = function(player, areaId, questId, name, value)
     return player:setLocalVar(getVarPrefix(areaId, questId) .. name, value)
 end
 
-xi.quest.getMustZone = function(player, areaId, questId, name)
+xi.quest.getMustZone = function(player, areaId, questId)
     return player:getLocalVar(getVarPrefix(areaId, questId) .. "mustZone") == 1 and true or false
 end
 
-xi.quest.setMustZone = function(player, areaId, questId, name, value)
+xi.quest.setMustZone = function(player, areaId, questId)
     player:setLocalVar(getVarPrefix(areaId, questId) .. "mustZone", 1)
 end

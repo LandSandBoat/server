@@ -19,7 +19,7 @@
 ===========================================================================
 */
 
-#include "../../common/socket.h"
+#include "common/socket.h"
 
 #include "zone_in.h"
 
@@ -37,6 +37,7 @@
 
 uint16 GetMogHouseID(CCharEntity* PChar)
 {
+    // TODO: verify wtf is going on with this function. either these aren't supposed to be zone IDs or somehow Jeuno's mog is western adoulin!
     switch (zoneutils::GetCurrentRegion(PChar->getZone()))
     {
         case REGION_TYPE::WEST_AHT_URHGAN:
@@ -56,7 +57,7 @@ uint16 GetMogHouseID(CCharEntity* PChar)
         case REGION_TYPE::JEUNO:
             return 0x0100;
         default:
-            ShowWarning("Default case reached for GetMogHouseID by %s", PChar->GetName());
+            ShowWarning("Default case reached for GetMogHouseID by %s (%u)", PChar->GetName(), PChar->getZone());
             return 0x0100;
     }
 }
@@ -76,26 +77,31 @@ uint8 GetMogHouseFlag(CCharEntity* PChar)
             {
                 return 5;
             }
+            break;
         case REGION_TYPE::SANDORIA:
             if (PChar->profile.mhflag & 0x01)
             {
                 return 1;
             }
+            break;
         case REGION_TYPE::BASTOK:
             if (PChar->profile.mhflag & 0x02)
             {
                 return 2;
             }
+            break;
         case REGION_TYPE::WINDURST:
             if (PChar->profile.mhflag & 0x04)
             {
                 return 3;
             }
+            break;
         case REGION_TYPE::JEUNO:
             if (PChar->profile.mhflag & 0x08)
             {
                 return 4;
             }
+            break;
         default:
             break;
     }
@@ -110,8 +116,8 @@ uint8 GetMogHouseFlag(CCharEntity* PChar)
 
 CZoneInPacket::CZoneInPacket(CCharEntity* PChar, int16 csid)
 {
-    this->type = 0x0A;
-    this->size = 0x82;
+    this->setType(0x0A);
+    this->setSize(0x104);
 
     // необходимо для работы manaklipper
     // последние 8 байт похожи на время
@@ -179,7 +185,7 @@ CZoneInPacket::CZoneInPacket(CCharEntity* PChar, int16 csid)
         // ref<uint8>(data,(0x1F)) = 4;                             // предположительно animation
         // ref<uint8>(data,(0x20)) = 2;
 
-        ref<uint16>(0x40) = PChar->getZone();
+        ref<uint16>(0x40) = PChar->currentEvent->textTable == -1 ? PChar->getZone() : PChar->currentEvent->textTable;
         ref<uint16>(0x62) = PChar->getZone();
         ref<uint16>(0x64) = csid;
     }
@@ -218,7 +224,14 @@ CZoneInPacket::CZoneInPacket(CCharEntity* PChar, int16 csid)
     ref<uint32>(0xE8) = PChar->GetMaxHP();
     ref<uint32>(0xEC) = PChar->GetMaxMP();
 
-    // ref<uint8>(0xF4) = 0x18; // Replace with menuConfigFlags
+    // MenuConfig (F4-F7) -- see CMenuConfigPacket
+    ref<uint8>(0xF4) = 0x18 | PChar->menuConfigFlags.byte1 | (PChar->nameflags.flags & static_cast<uint32>(FLAG_INVITE) ? static_cast<uint32>(NFLAG_INVITE) : 0);
+    ref<uint8>(0xF5) = PChar->menuConfigFlags.byte2 | (PChar->m_hasAutoTarget ? 0 : NFLAG_AUTOTARGET >> 8);
+    ref<uint8>(0xF6) = PChar->menuConfigFlags.byte3;
+    ref<uint8>(0xF7) = PChar->menuConfigFlags.byte4;
+
+    // ChatFilterFlags (F8-FF)
+    ref<uint64>(0xF8) = PChar->chatFilterFlags;
 
     ref<uint8>(0x100) = 0x01; // observed: RoZ = 3, CoP = 5, ToAU = 9, WoTG = 11, SoA/original areas = 1
 }

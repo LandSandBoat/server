@@ -14,23 +14,15 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getCurrentMission(TOAU) == xi.mission.id.toau.PUPPET_IN_PERIL and player:getCharVar("AhtUrganStatus") == 0 then
-        player:startEvent(4)
-    elseif EventTriggerBCNM(player, npc) then
-        return
-    end
+    xi.bcnm.onTrigger(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option, extras)
-    EventUpdateBCNM(player, csid, option, extras)
+    xi.bcnm.onEventUpdate(player, csid, option, extras)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 4 then
-        player:setCharVar("AhtUrganStatus", 1)
-    elseif EventFinishBCNM(player, csid, option) then
-        return
-    end
+    xi.bcnm.onEventFinish(player, csid, option)
 end
 
 return entity

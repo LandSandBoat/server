@@ -52,7 +52,7 @@ local function teleportMenuUpdate(player, option)
 
         local index = bit.rshift(bit.band(option, 0xFF0000), 16)
 
-        if not (choice == optionMap.TELEPORT_MENU) then
+        if choice ~= optionMap.TELEPORT_MENU then
             if choice == optionMap.ADD_FAVORITE then
                 local temp = 0
                 for x = 1, 9 do
@@ -151,16 +151,16 @@ xi.survivalGuide.onEventFinish = function(player, eventId, option)
             local guide = survival.survivalGuides[selectedMenuId]
             local currentZoneId = player:getZoneID()
 
-            if guide and not (guide.zoneId == currentZoneId) then
+            if guide and guide.zoneId ~= currentZoneId then
                 local teleportCostGil = SURVIVAL_GUIDE_TELEPORT_COST_GIL
                 local teleportCostTabs = SURVIVAL_GUIDE_TELEPORT_COST_TABS
 
-                -- If the player has the rhapsody in white, the cost is 10% of original gil or 20% of original tabs.
-                -- GIL: 1000 -> 200
-                -- TABS: 100 -> 10
+                -- If the player has the "Rhapsody in White" KI, the cost is 10% of original gil or 20% of original tabs.
+                -- GIL: 1000 -> 100
+                -- TABS: 50 -> 10
                 if player:hasKeyItem(xi.ki.RHAPSODY_IN_WHITE) then
-                    teleportCostGil = teleportCostGil * .2
-                    teleportCostTabs = teleportCostTabs * .2
+                    teleportCostGil = teleportCostGil / 10
+                    teleportCostTabs = teleportCostTabs / 5
                 end
 
                 local canTeleport = false

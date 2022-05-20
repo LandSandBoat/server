@@ -1462,8 +1462,9 @@ INSERT INTO `item_latents` VALUES (15162,68,2,29,0);
 INSERT INTO `item_latents` VALUES (15164,68,2,29,0);
 INSERT INTO `item_latents` VALUES (15168,68,2,29,0);
 INSERT INTO `item_latents` VALUES (15168,68,2,31,0);
+
 INSERT INTO `item_latents` VALUES (15174,25,12,10,0);
-INSERT INTO `item_latents` VALUES (15174,370,-100,10,0);
+INSERT INTO `item_latents` VALUES (15174,404,100,10,0);
 INSERT INTO `item_latents` VALUES (15174,384,400,10,0);
 
 -- -------------------------------------------------------
@@ -1644,7 +1645,7 @@ INSERT INTO `item_latents` VALUES (15520,68,7,58,0);     -- storm torque eva +7
 -- Berserker's Torque
 -- -------------------------------------------------------
 INSERT INTO `item_latents` VALUES (15530,368,10,10,0);   -- HP-50/Tick of TP while weapon drawn
-INSERT INTO `item_latents` VALUES (15530,370,-50,10,0);
+INSERT INTO `item_latents` VALUES (15530,404,50,10,0);
 
 -- -------------------------------------------------------
 -- Shark Necklace
@@ -2965,6 +2966,11 @@ INSERT INTO `item_latents` VALUES (18771,23,1,16,3);     -- ATT +1~4,party size 
 INSERT INTO `item_latents` VALUES (18771,23,1,16,4);     -- ATT +1~4,party size 3+. Effect strengthens with more members
 INSERT INTO `item_latents` VALUES (18771,23,1,16,5);     -- ATT +1~4,party size 3+. Effect strengthens with more members
 INSERT INTO `item_latents` VALUES (18771,23,1,16,6);     -- ATT +1~4,party size 3+. Effect strengthens with more members
+
+-- -------------------------------------------------------
+-- Oneiros Grip
+-- -------------------------------------------------------
+INSERT INTO `item_latents` VALUES (18811,369,1,4,750);  -- Refresh MP <= 75%
 
 -- -------------------------------------------------------
 -- Perdu Wand

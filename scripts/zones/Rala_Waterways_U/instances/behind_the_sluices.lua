@@ -149,7 +149,7 @@ instance_object.onInstanceComplete = function(instance)
     for i, v in pairs(chars) do
         v:startEvent(1000)
 
-        local onThisMission = v:getCurrentMission(SOA) == xi.mission.id.soa.BEHIND_THE_SLUICES
+        local onThisMission = v:getCurrentMission(xi.mission.log_id.SOA) == xi.mission.id.soa.BEHIND_THE_SLUICES
         local onThisFight = v:getMissionStatus(xi.mission.log_id.SOA) == 2
         if onThisMission and onThisFight then
             v:setMissionStatus(xi.mission.log_id.SOA, 3)

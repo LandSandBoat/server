@@ -27,8 +27,9 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     params.skill = xi.skill.DAGGER
     params.includemab = true
 
-    if (xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then
+    if xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.dex_wsc = 0.4 params.int_wsc = 0.4
+        params.ftp300 = 3 -- http://wiki.ffo.jp/html/682.html
     end
 
     local damage, criticalHit, tpHits, extraHits = doMagicWeaponskill(player, target, wsID, params, tp, action, primary)

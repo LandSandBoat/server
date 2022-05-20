@@ -14,7 +14,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:startEvent(514)
 end
 
 entity.onEventUpdate = function(player, csid, option)

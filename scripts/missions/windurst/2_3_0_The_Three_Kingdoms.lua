@@ -115,7 +115,9 @@ mission.sections =
                     local missionStatus = player:getMissionStatus(mission.areaId)
 
                     if missionStatus == 0 then
-                        return mission:progressEvent(95, 0, 0, 0, xi.ki.LETTER_TO_THE_CONSULS_WINDURST)
+                        local needsSemihTrust = (not player:hasSpell(940) and not player:findItem(xi.items.CIPHER_OF_SEMIHS_ALTER_EGO)) and 1 or 0
+
+                        return mission:progressEvent(95, 0, 0, 0, xi.ki.LETTER_TO_THE_CONSULS_WINDURST, 0, 0, 0, needsSemihTrust)
                     elseif missionStatus == 11 then
                         return mission:progressEvent(101, 0, 0, xi.ki.ADVENTURERS_CERTIFICATE)
                     else
@@ -129,6 +131,13 @@ mission.sections =
                 [95] = function(player, csid, option, npc)
                     player:setMissionStatus(mission.areaId, 1)
                     npcUtil.giveKeyItem(player, xi.ki.LETTER_TO_THE_CONSULS_WINDURST)
+
+                    if
+                        not player:hasSpell(940) and
+                        not player:findItem(xi.items.CIPHER_OF_SEMIHS_ALTER_EGO)
+                    then
+                        npcUtil.giveItem(player, xi.items.CIPHER_OF_SEMIHS_ALTER_EGO)
+                    end
                 end,
 
                 [101] = function(player, csid, option, npc)
@@ -193,7 +202,9 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if player:getMissionStatus(mission.areaId) == 1 then
-                        return mission:progressEvent(582)
+                        local onPathUntraveled = player:getCurrentMission(xi.mission.log_id.ROV) == xi.mission.id.rov.THE_PATH_UNTRAVELED and 1 or 0
+
+                        return mission:progressEvent(582, { [7] = onPathUntraveled })
                     end
                 end,
             },

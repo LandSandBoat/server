@@ -21,6 +21,9 @@ battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
     if leavecode == xi.battlefield.leaveCode.WON then
         local _, clearTime, partySize = battlefield:getRecord()
         local arg8 = (player:hasCompletedMission(xi.mission.log_id.TOAU, xi.mission.id.toau.PUPPET_IN_PERIL)) and 1 or 0
+
+        player:setLocalVar("battlefieldWin", battlefield:getID())
+
         player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar("[cs]bit"), arg8)
     elseif leavecode == xi.battlefield.leaveCode.LOST then
         player:startEvent(32002)
@@ -31,11 +34,6 @@ battlefield_object.onEventUpdate = function(player, csid, option)
 end
 
 battlefield_object.onEventFinish = function(player, csid, option)
-    if csid == 32001 and player:getCurrentMission(TOAU) == xi.mission.id.toau.PUPPET_IN_PERIL then
-        player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.PUPPET_IN_PERIL)
-        player:addMission(xi.mission.log_id.TOAU, xi.mission.id.toau.PREVALENCE_OF_PIRATES)
-        player:setCharVar("AhtUrganStatus", 0)
-    end
 end
 
 return battlefield_object

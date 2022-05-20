@@ -22,15 +22,9 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #ifndef _CAddtoEquipSet_H
 #define _CAddtoEquipSet_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
-
-/************************************************************************
- *																		*
- *  																		*
- *																		*
- ************************************************************************/
 
 class CAddtoEquipSet : public CBasicPacket
 {

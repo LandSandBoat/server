@@ -19,7 +19,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 ===========================================================================
 */
 
-#include "../../common/socket.h"
+#include "common/socket.h"
 
 #include "party_define.h"
 
@@ -33,8 +33,8 @@ const char* msg = "SELECT chars.charid, partyflag, pos_zone, pos_prevzone FROM a
 
 CPartyDefinePacket::CPartyDefinePacket(CParty* PParty, bool loadTrust)
 {
-    this->type = 0xC8;
-    this->size = 0x7C;
+    this->setType(0xC8);
+    this->setSize(0xF8);
 
     if (PParty)
     {
@@ -46,22 +46,22 @@ CPartyDefinePacket::CPartyDefinePacket(CParty* PParty, bool loadTrust)
 
         uint8 i = 0;
 
-        int ret = Sql_Query(SqlHandle, msg, allianceid, PParty->GetPartyID(), PARTY_SECOND | PARTY_THIRD);
+        int ret = sql->Query(msg, allianceid, PParty->GetPartyID(), PARTY_SECOND | PARTY_THIRD);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) > 0)
+        if (ret != SQL_ERROR && sql->NumRows() > 0)
         {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql->NextRow() == SQL_SUCCESS)
             {
                 uint16       targid = 0;
-                CCharEntity* PChar  = zoneutils::GetChar(Sql_GetUIntData(SqlHandle, 0));
+                CCharEntity* PChar  = zoneutils::GetChar(sql->GetUIntData(0));
                 if (PChar)
                 {
                     targid = PChar->targid;
                 }
-                ref<uint32>(12 * i + 0x08) = Sql_GetUIntData(SqlHandle, 0);
+                ref<uint32>(12 * i + 0x08) = sql->GetUIntData(0);
                 ref<uint16>(12 * i + 0x0C) = targid;
-                ref<uint16>(12 * i + 0x0E) = Sql_GetUIntData(SqlHandle, 1);
-                ref<uint16>(12 * i + 0x10) = Sql_GetUIntData(SqlHandle, 2) ? Sql_GetUIntData(SqlHandle, 2) : Sql_GetUIntData(SqlHandle, 3);
+                ref<uint16>(12 * i + 0x0E) = sql->GetUIntData(1);
+                ref<uint16>(12 * i + 0x10) = sql->GetUIntData(2) ? sql->GetUIntData(2) : sql->GetUIntData(3);
                 i++;
             }
         }

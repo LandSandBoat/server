@@ -1,5 +1,4 @@
 require("scripts/globals/keyitems")
-require("scripts/globals/log_ids")
 require("scripts/globals/utils")
 require("scripts/globals/zone")
 
@@ -42,7 +41,6 @@ xi.mission.area =
     [xi.mission.log_id.ROV]         = 'rov',
 }
 
---[[
 xi.mission.status =
 {
     COP =
@@ -57,7 +55,6 @@ xi.mission.status =
         RUBIOUS    = 7,
     },
 }
-]]--
 
 xi.mission.id =
 {
@@ -257,7 +254,7 @@ xi.mission.id =
         FLAMES_IN_THE_DARKNESS           = 718, -- ±
         FIRE_IN_THE_EYES_OF_MEN          = 728, -- ±
         CALM_BEFORE_THE_STORM            = 738, -- ±
-        THE_WARRIOR_S_PATH               = 748, -- ±
+        THE_WARRIORS_PATH                = 748, -- ±
         EMPTINESS_BLEEDS                 = 758, -- ± ---- Category
         GARDEN_OF_ANTIQUITY              = 800, -- ±
         A_FATE_DECIDED                   = 818, -- ±
@@ -589,11 +586,11 @@ xi.mission.id =
         RING_MY_BELL                    = 42,  -- ±
         -- REVITALIZATION               =  -- Category
         SPIRITS_AWOKEN                  = 44,  -- ±
-        CRASHING_WAVES                  = 46,
-        CALL_TO_SERVE                   = 48,
-        NUMBERING_DAYS                  = 50,
-        INESCAPABLE_BINDS               = 52,
-        DESERT_WINDS                    = 54,
+        CRASHING_WAVES                  = 46,  -- ±
+        CALL_TO_SERVE                   = 48,  -- ±
+        NUMBERING_DAYS                  = 50,  -- ±
+        INESCAPABLE_BINDS               = 52,  -- ±
+        DESERT_WINDS                    = 54,  -- ±
         EVER_FORWARD                    = 56,
         THE_ENDLESS_SKY                 = 60,
         APHMAUS_LIGHT                   = 62,
@@ -722,9 +719,9 @@ end
 local missionType =
 {
     -- Required Rank             :   1  1  1  2  2  2  2  2  2  2  3  3  3  4  5  5  6  6  7  7  8  8  9  9
-    [xi.mission.log_id.SANDORIA] = { 1, 1, 1, 0, 1, 0, 2, 2, 2, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-    [xi.mission.log_id.BASTOK]   = { 2, 0, 1, 0, 1, 0, 2, 2, 2, 2, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-    [xi.mission.log_id.WINDURST] = { 2, 0, 0, 0, 1, 0, 2, 2, 2, 2, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+    [xi.mission.log_id.SANDORIA] = { 1, 1, 1, 0, 1, 0, 2, 2, 2, 2, 1, 1, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+    [xi.mission.log_id.BASTOK]   = { 2, 0, 1, 0, 1, 0, 2, 2, 2, 2, 0, 1, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+    [xi.mission.log_id.WINDURST] = { 2, 0, 0, 0, 1, 0, 2, 2, 2, 2, 0, 1, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
 }
 
 local function getRequiredRank(missionId)

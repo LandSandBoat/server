@@ -22,15 +22,9 @@
 #ifndef _CTREASUREFINDITEMPACKET_H
 #define _CTREASUREFINDITEMPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
-
-/************************************************************************
- *																		*
- *  																		*
- *																		*
- ************************************************************************/
 
 class CBaseEntity;
 struct TreasurePoolItem;

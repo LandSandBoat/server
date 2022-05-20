@@ -19,15 +19,15 @@
 ===========================================================================
 */
 
-#include "../../common/socket.h"
-#include "../../common/utils.h"
+#include "common/socket.h"
+#include "common/utils.h"
 
 #include "guild_menu.h"
 
 CGuildMenuPacket::CGuildMenuPacket(GUILDSTATUS status, uint8 open, uint8 close, uint8 holiday)
 {
-    this->type = 0x86;
-    this->size = 0x06;
+    this->setType(0x86);
+    this->setSize(0x0C);
 
     // XI_DEBUG_BREAK_IF(open > close);
 

@@ -22,7 +22,7 @@
 #ifndef _CRAISETRACTORMENUPACKET_H
 #define _CRAISETRACTORMENUPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 
@@ -32,12 +32,6 @@ enum REVIVAL_TYPE
     TYPE_RAISE     = 1,
     TYPE_TRACTOR   = 2
 };
-
-/************************************************************************
- *																		*
- *  																		*
- *																		*
- ************************************************************************/
 
 class CCharEntity;
 

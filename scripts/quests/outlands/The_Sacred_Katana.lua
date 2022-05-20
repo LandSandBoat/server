@@ -23,7 +23,7 @@ local quest = Quest:new(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_SACRE
 quest.reward =
 {
     fame = 20,
-    fameArea = NORG,
+    fameArea = xi.quest.fame_area.NORG,
     item = xi.items.MAGOROKU,
 }
 

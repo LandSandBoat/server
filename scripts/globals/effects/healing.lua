@@ -2,6 +2,7 @@
 -- xi.effect.HEALING
 -- Activated through the /heal command
 -----------------------------------
+require("scripts/globals/abyssea")
 require("scripts/globals/keyitems")
 require("scripts/settings/main")
 require("scripts/globals/quests")
@@ -14,6 +15,19 @@ local effect_object = {}
 
 effect_object.onEffectGain = function(target, effect)
     target:setAnimation(33)
+
+    -- Abyssea Lights and time remaining check
+    if
+        target:isPC() and
+        xi.abyssea.isInAbysseaZone(target)
+    then
+        local visitantEffect = target:getStatusEffect(xi.effect.VISITANT)
+
+        if visitantEffect and visitantEffect:getIcon() == xi.effect.VISITANT then
+            xi.abyssea.displayTimeRemaining(target)
+            xi.abyssea.displayAbysseaLights(target)
+        end
+    end
 
     -- Dances with Luopans
     if target:getLocalVar("GEO_DWL_Locus_Area") == 1 and target:getCharVar("GEO_DWL_Luopan") == 0 then

@@ -19,19 +19,13 @@
 ===========================================================================
 */
 
-#include "../../common/socket.h"
+#include "common/socket.h"
 
 #include <cstring>
 
 #include "merit_points_categories.h"
 
 #include "../entities/charentity.h"
-
-/************************************************************************
- *                                                                       *
- *  Примечание                                                           *
- *                                                                       *
- ************************************************************************/
 
 /*
 пакет, содержащий информацию об примененных меритах и количестве, необходимом для следующего усиления
@@ -63,8 +57,8 @@ struct
 
 CMeritPointsCategoriesPacket::CMeritPointsCategoriesPacket(CCharEntity* PChar)
 {
-    this->type = 0x8C;
-    this->size = 0x80;
+    this->setType(0x8C);
+    this->setSize(0x100);
 
     ref<uint8>(0x04) = MAX_MERITS_IN_PACKET;
 
@@ -74,7 +68,7 @@ CMeritPointsCategoriesPacket::CMeritPointsCategoriesPacket(CCharEntity* PChar)
 
         PChar->pushPacket(new CBasicPacket(*this));
     }
-    MeritPointsCategoriesPacket(PChar, (uint8)(5 * MAX_MERITS_IN_PACKET));
+    MeritPointsCategoriesPacket(PChar, static_cast<uint8>(5 * MAX_MERITS_IN_PACKET));
 }
 
 /************************************************************************
@@ -85,8 +79,8 @@ CMeritPointsCategoriesPacket::CMeritPointsCategoriesPacket(CCharEntity* PChar)
 
 CMeritPointsCategoriesPacket::CMeritPointsCategoriesPacket(CCharEntity* PChar, MERIT_TYPE merit)
 {
-    this->type = 0x8C;
-    this->size = 0x08;
+    this->setType(0x8C);
+    this->setSize(0x10);
 
     ref<uint8>(0x04)  = 1;
     ref<uint32>(0x08) = PChar->PMeritPoints->GetMerit(merit)->data;
@@ -169,6 +163,8 @@ void CMeritPointsCategoriesPacket::MeritPointsCategoriesPacket(CCharEntity* PCha
         String Instrument Skill (+2 per upgrade)
         Wind Instrument Skill (+2 per upgrade)
         Blue Magic Skill (+2 per upgrade)
+        Geomancy Magic Skill (+2 per upgrade)
+        Handbell Instrument Skill (+2 per upgrade)
 0x01 0x40 - Others
         Enmity Increase (+1 per upgrade)
         Enmity Decrease (-1 per upgrade)

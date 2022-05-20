@@ -19,7 +19,7 @@
 ===========================================================================
 */
 
-#include "../../common/socket.h"
+#include "common/socket.h"
 
 #include "chocobo_digging.h"
 
@@ -27,8 +27,8 @@
 
 CChocoboDiggingPacket::CChocoboDiggingPacket(CCharEntity* PChar)
 {
-    this->type = 0x2F;
-    this->size = 0x06;
+    this->setType(0x2F);
+    this->setSize(0x0C);
 
     ref<uint32>(0x04) = PChar->id;
     ref<uint16>(0x08) = PChar->targid;

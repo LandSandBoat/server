@@ -22,16 +22,10 @@
 #ifndef _CSTOPDOWNLOADINGPACKET_H
 #define _CSTOPDOWNLOADINGPACKET_H
 
-#include "../../common/cbasetypes.h"
-#include "../../common/mmo.h"
+#include "common/cbasetypes.h"
+#include "common/mmo.h"
 #include "basic.h"
 #include <vector>
-
-/************************************************************************
- *																		*
- *  																		*
- *																		*
- ************************************************************************/
 
 class CCharEntity;
 

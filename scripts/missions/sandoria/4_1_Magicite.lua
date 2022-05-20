@@ -69,13 +69,15 @@ mission.sections =
             onEventFinish =
             {
                 [45] = function(player, csid, option, npc)
+                    -- TODO: Verify that the mission is displayed in the logs here.  It may not officially be logged
+                    -- until talking to the Ambassador.
                     mission:begin(player)
                 end,
             },
         },
     },
 
-    -- Section 1: Mandatory pre-requisites. Necesary steps required even when having completed this mission for another nation.
+    -- Section 1: Mandatory pre-requisites. Necessary steps required even when having completed this mission for another nation.
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId and
@@ -89,7 +91,7 @@ mission.sections =
                 onTrigger = function(player, npc)
                     if player:getMissionStatus(mission.areaId) == 0 then
                         local hasKIParam = player:hasKeyItem(xi.ki.ARCHDUCAL_AUDIENCE_PERMIT) and 1 or 0
-                        return mission:progressEvent(129, hasKIParam)
+                        return mission:progressEvent(130, hasKIParam)
                     end
                 end,
             },
@@ -103,10 +105,35 @@ mission.sections =
                 end,
             },
 
-            ['Nelcabrit'] =
+            ['High_Wind'] =
             {
                 onTrigger = function(player, npc)
                     if player:getMissionStatus(mission.areaId) == 1 then
+                        -- Note: The event parameter below corresponds to having keyItem for Audience Permit.
+                        -- Currently have not captured a case where the negative answer is displayed.
+                        return mission:progressEvent(164, 1)
+                    end
+                end,
+            },
+
+            ['Rainhard'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:getMissionStatus(mission.areaId) == 1 then
+                        return mission:progressEvent(165, 1)
+                    end
+                end,
+            },
+
+            ['Nelcabrit'] =
+            {
+                onTrigger = function(player, npc)
+                    local missionStatus = player:getMissionStatus(mission.areaId)
+
+                    if missionStatus == 0 then
+                        -- Nelcabrit will display this message until talking to Jima (Door)
+                        return mission:progressEvent(45)
+                    elseif missionStatus == 1 then
                         return mission:progressEvent(133)
                     else
                         return mission:progressEvent(136)
@@ -121,8 +148,9 @@ mission.sections =
                     npcUtil.giveKeyItem(player, xi.ki.LETTER_TO_ALDO)
                 end,
 
-                [129] = function(player, csid, option, npc)
+                [130] = function(player, csid, option, npc)
                     player:setMissionStatus(mission.areaId, 1)
+                    -- You Accept the Mission message here
                     npcUtil.giveKeyItem(player, xi.ki.ARCHDUCAL_AUDIENCE_PERMIT)
                 end,
             },
@@ -157,7 +185,7 @@ mission.sections =
         },
     },
 
-    -- Section 2: Key Item hunt and Magicite obtention. Several steps aren't required or may have been already completed in another nation.
+    -- Section 2: Key Item hunt and Magicite gathering. Several steps aren't required or may have been already completed in another nation.
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId and
@@ -175,6 +203,24 @@ mission.sections =
                         else
                             return mission:progressEvent(60)
                         end
+                    end
+                end,
+            },
+
+            ['High_Wind'] =
+            {
+                onTrigger = function(player, npc)
+                    if magiciteCounter(player) == 3 then
+                        return mission:progressEvent(164, 1)
+                    end
+                end,
+            },
+
+            ['Rainhard'] =
+            {
+                onTrigger = function(player, npc)
+                    if magiciteCounter(player) == 3 then
+                        return mission:progressEvent(165, 1)
                     end
                 end,
             },
@@ -337,9 +383,9 @@ mission.sections =
                     if not player:hasKeyItem(xi.ki.MAGICITE_AURASTONE) then
                         if magiciteCounter(player) == 2 then
                             -- Play Lion part of the CS (Last Magicite Received)
-                            return mission:progressEvent(0, 1)
+                            return mission:progressEvent(0, 1, 46, 47)
                         else
-                            return mission:progressEvent(0)
+                            return mission:progressEvent(0, 0, 46, 47)
                         end
                     end
                 end,
@@ -354,7 +400,7 @@ mission.sections =
         },
     },
 
-    -- Section 3: Magicite given to Jeuno totally-not-evil leader. Finish quest.
+    -- Section 3: Magicite given to Jeuno leader. Finish quest.
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId and

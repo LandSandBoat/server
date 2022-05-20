@@ -19,7 +19,7 @@
 ===========================================================================
 */
 
-#include "../../common/logging.h"
+#include "common/logging.h"
 
 #include <cstring>
 
@@ -36,6 +36,7 @@
 #include "../packets/message_system.h"
 #include "../packets/message_text.h"
 #include "../packets/release.h"
+#include "../packets/chat_message.h"
 
 #include "../map.h"
 #include "../vana_time.h"
@@ -80,8 +81,10 @@ namespace fishingutils
     {
         // NOTE: Fishing is disabled until further notice, since it is a security liability.
         ShowWarning("Fishing is currently disabled");
+        PChar->pushPacket(new CChatMessagePacket(PChar, CHAT_MESSAGE_TYPE::MESSAGE_SYSTEM_1, "Fishing is currently disabled"));
+        PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::FISHING));
         return;
-
+        /*
         if (PChar->animation != ANIMATION_NONE)
         {
             PChar->pushPacket(new CMessageSystemPacket(0, 0, 142));
@@ -104,7 +107,7 @@ namespace fishingutils
 
         if ((WeaponItem == nullptr) || !(WeaponItem->isType(ITEM_WEAPON)) || (WeaponItem->getSkillType() != SKILL_FISHING))
         {
-            // сообщение: "You can't fish without a rod in your hands"
+            // message: "You can't fish without a rod in your hands"
 
             PChar->pushPacket(new CMessageTextPacket(PChar, MessageOffset + 0x01));
             PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::FISHING));
@@ -115,7 +118,7 @@ namespace fishingutils
 
         if ((WeaponItem == nullptr) || !(WeaponItem->isType(ITEM_WEAPON)) || (WeaponItem->getSkillType() != SKILL_FISHING))
         {
-            // сообщение: "You can't fish without bait on the hook"
+            // message: "You can't fish without bait on the hook"
 
             PChar->pushPacket(new CMessageTextPacket(PChar, MessageOffset + 0x02));
             PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::FISHING));
@@ -127,6 +130,7 @@ namespace fishingutils
 
         PChar->pushPacket(new CCharUpdatePacket(PChar));
         PChar->pushPacket(new CCharSyncPacket(PChar));
+        */
     }
 
     /************************************************************************
@@ -181,24 +185,24 @@ namespace fishingutils
                                 "INNER JOIN fishing_fish AS fish USING (fishid) "
                                 "WHERE zone.zoneid = %u AND rod.rodid = %u AND lure.lureid = %u AND lure.luck = 0";
 
-            int32 ret = Sql_Query(SqlHandle, Query, PChar->getZone(), RodID, LureID);
+            int32 ret = sql->Query(Query, PChar->getZone(), RodID, LureID);
 
-            if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+            if (ret != SQL_ERROR && sql->NumRows() != 0)
             {
                 // array to store fish ids that i can get
-                std::vector<int32> fishIDs((int32)Sql_NumRows(SqlHandle));
+                std::vector<int32> fishIDs((int32)sql->NumRows());
                 int32              fishCounter       = 0;
                 bool               caughtQuestedFish = false;
 
-                while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+                while (sql->NextRow() == SQL_SUCCESS)
                 {
                     // store fish id
-                    fishIDs[fishCounter] = Sql_GetIntData(SqlHandle, 0);
+                    fishIDs[fishCounter] = sql->GetIntData(0);
 
                     // ловля предметов, необходимых для поисков
 
-                    uint8  logid = (uint8)Sql_GetIntData(SqlHandle, 5);
-                    uint16 quest = (uint16)Sql_GetIntData(SqlHandle, 6);
+                    uint8  logid = (uint8)sql->GetIntData(5);
+                    uint16 quest = (uint16)sql->GetIntData(6);
 
                     if (logid < MAX_QUESTAREA && quest < MAX_QUESTID)
                     {
@@ -207,7 +211,7 @@ namespace fishingutils
 
                         if (complete == 0 && current != 0)
                         {
-                            PFish = new CItemFish(*itemutils::GetItemPointer(Sql_GetIntData(SqlHandle, 0)));
+                            PFish = new CItemFish(*itemutils::GetItemPointer(sql->GetIntData(0)));
 
                             PChar->UContainer->SetType(UCONTAINER_FISHING);
                             PChar->UContainer->SetItem(0, PFish);
@@ -223,7 +227,7 @@ namespace fishingutils
 
                 if (!caughtQuestedFish)
                 {
-                    int32 luckyFish = xirand::GetRandomNumber((int32)Sql_NumRows(SqlHandle));
+                    int32 luckyFish = xirand::GetRandomNumber((int32)sql->NumRows());
                     PFish           = new CItemFish(*itemutils::GetItemPointer(fishIDs[luckyFish]));
 
                     PChar->UContainer->SetType(UCONTAINER_FISHING);
@@ -249,20 +253,20 @@ namespace fishingutils
                                 "WHERE zone.zoneid = %u AND rod.rodid = %u AND lure.lureid = %u AND lure.luck != 0 "
                                 "ORDER BY luck";
 
-            int32 ret = Sql_Query(SqlHandle, Query, PChar->getZone(), RodID, LureID);
+            int32 ret = sql->Query(Query, PChar->getZone(), RodID, LureID);
 
-            if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+            if (ret != SQL_ERROR && sql->NumRows() != 0)
             {
                 int32 FisherLuck    = 0;
                 int32 FishingChance = xirand::GetRandomNumber(1000);
 
-                while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+                while (sql->NextRow() == SQL_SUCCESS)
                 {
-                    FisherLuck += Sql_GetIntData(SqlHandle, 7);
+                    FisherLuck += sql->GetIntData(7);
 
                     if (FishingChance <= FisherLuck)
                     {
-                        PFish = new CItemFish(*itemutils::GetItemPointer(Sql_GetIntData(SqlHandle, 0)));
+                        PFish = new CItemFish(*itemutils::GetItemPointer(sql->GetIntData(0)));
 
                         PChar->UContainer->SetType(UCONTAINER_FISHING);
                         PChar->UContainer->SetItem(0, PFish);
@@ -379,9 +383,12 @@ namespace fishingutils
 
     void FishingAction(CCharEntity* PChar, FISH_ACTION action, uint16 stamina, uint32 special)
     {
-        ShowWarning("Fishing is currently disabled");
+        // NOTE: Fishing is disabled until further notice, since it is a security liability.
+        ShowWarning("Fishing is currently disabled, but somehow we have somone commencing a fishing action");
+        // Unlikely anyone can get here legit, since we already disabled "startFishing"
+        PChar->animation = ANIMATION_FISHING_STOP;
         return;
-
+        /*
         uint16 MessageOffset = GetMessageOffset(PChar->getZone());
 
         switch (action)
@@ -390,7 +397,7 @@ namespace fishingutils
             {
                 if (CheckFisherLuck(PChar))
                 {
-                    // сообщение: "Something caught the hook!"
+                    // message: "Something caught the hook!"
 
                     // PChar->animation = ANIMATION_FISHING_FISH;
                     // PChar->updatemask |= UPDATE_HP;
@@ -399,7 +406,7 @@ namespace fishingutils
                 }
                 else
                 {
-                    // сообщение: "You didn't catch anything."
+                    // message: "You didn't catch anything."
 
                     PChar->animation = ANIMATION_FISHING_STOP;
                     PChar->updatemask |= UPDATE_HP;
@@ -411,7 +418,7 @@ namespace fishingutils
             {
                 if (stamina == 0)
                 {
-                    // сообщение: "You caught fish!"
+                    // message: "You caught fish!"
 
                     XI_DEBUG_BREAK_IF(PChar->UContainer->GetType() != UCONTAINER_FISHING);
                     XI_DEBUG_BREAK_IF(PChar->UContainer->GetItem(0) == nullptr);
@@ -434,7 +441,7 @@ namespace fishingutils
                 }
                 else if (stamina <= 0x64)
                 {
-                    // сообщение: "Your line breaks!"
+                    // message: "Your line breaks!"
 
                     PChar->animation = ANIMATION_FISHING_LINE_BREAK;
                     PChar->updatemask |= UPDATE_HP;
@@ -443,7 +450,7 @@ namespace fishingutils
                 }
                 else if (stamina <= 0x100)
                 {
-                    // сообщение: "You give up!"
+                    // message: "You give up!"
 
                     PChar->animation = ANIMATION_FISHING_STOP;
                     PChar->updatemask |= UPDATE_HP;
@@ -459,7 +466,7 @@ namespace fishingutils
                 }
                 else
                 {
-                    // сообщение: "You lost your catch!"
+                    // message: "You lost your catch!"
 
                     PChar->animation = ANIMATION_FISHING_STOP;
                     PChar->updatemask |= UPDATE_HP;
@@ -471,7 +478,7 @@ namespace fishingutils
             break;
             case FISH_ACTION::WARNING:
             {
-                // сообщение: "You don't know how much longer you can keep this one on the line..."
+                // message: "You don't know how much longer you can keep this one on the line..."
 
                 PChar->pushPacket(new CMessageTextPacket(PChar, MessageOffset + 0x28));
                 return;
@@ -489,6 +496,7 @@ namespace fishingutils
 
         PChar->pushPacket(new CCharUpdatePacket(PChar));
         PChar->pushPacket(new CCharSyncPacket(PChar));
+        */
     }
 
 } // namespace fishingutils

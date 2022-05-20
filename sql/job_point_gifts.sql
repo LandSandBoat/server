@@ -1419,7 +1419,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES (22, 100, 997, 1, 'RUN_Superior 2');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES (22, 125, 113, 5, 'RUN_Enhancing Magic Skill Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES (22, 145, 915, 13, 'RUN_Capacity Point Bonus');
-INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES (22, 150, 992, 2, 'RUN_Inquartata Effect');
+INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES (22, 150, 963, 2, 'RUN_Inquartata Effect');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES (22, 180, 1, 8, 'RUN_Physical Defense Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES (22, 205, 915, 15, 'RUN_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES (22, 210, 23, 11, 'RUN_Attack Bonus');
@@ -1435,7 +1435,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES (22, 445, 915, 21, 'RUN_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES (22, 450, 113, 8, 'RUN_Enhancing Magic Skill Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES (22, 500, 997, 1, 'RUN_Superior 3');
-INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES (22, 500, 992, 2, 'RUN_Inquartata Effect');
+INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES (22, 500, 963, 2, 'RUN_Inquartata Effect');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES (22, 545, 915, 23, 'RUN_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES (22, 605, 1, 10, 'RUN_Physical Defense Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES (22, 655, 915, 25, 'RUN_Capacity Point Bonus');
@@ -1451,7 +1451,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES (22, 980, 30, 10, 'RUN_Magic Accuracy Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES (22, 1045, 915, 31, 'RUN_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES (22, 1050, 113, 10, 'RUN_Enhancing Magic Skill Bonus');
-INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES (22, 1125, 992, 2, 'RUN_Inquartata Effect');
+INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES (22, 1125, 963, 2, 'RUN_Inquartata Effect');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES (22, 1195, 915, 33, 'RUN_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES (22, 1200, 997, 1, 'RUN_Superior 4');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES (22, 1200, 991, 10, 'RUN_Enh. Magic Received Duration');
@@ -1466,7 +1466,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES (22, 1710, 31, 25, 'RUN_Magic Evasion Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES (22, 1805, 30, 13, 'RUN_Magic Accuracy Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES (22, 1900, 113, 13, 'RUN_Enhancing Magic Skill Bonus');
-INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES (22, 2000, 992, 2, 'RUN_Inquartata Effect');
+INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES (22, 2000, 963, 2, 'RUN_Inquartata Effect');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES (22, 2100, 997, 1, 'RUN_Superior 5');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES (22, 2100, 996, 15, 'RUN_1 Hour Delay');
 /*!40000 ALTER TABLE `job_point_gifts` ENABLE KEYS */;

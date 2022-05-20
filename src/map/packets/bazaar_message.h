@@ -22,15 +22,9 @@
 #ifndef _CBAZAARMESSAGEPACKET_H
 #define _CBAZAARMESSAGEPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
-
-/************************************************************************
- *																		*
- *  																		*
- *																		*
- ************************************************************************/
 
 class CCharEntity;
 

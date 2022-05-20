@@ -19,12 +19,12 @@
 ===========================================================================
 */
 
-#include "../../common/socket.h"
+#include "common/socket.h"
 
 #include "menu_mog.h"
 
 CMenuMogPacket::CMenuMogPacket()
 {
-    this->type = 0x2E;
-    this->size = 0x02;
+    this->setType(0x2E);
+    this->setSize(0x04);
 }

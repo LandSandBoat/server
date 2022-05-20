@@ -22,8 +22,8 @@
 #ifndef _NPCENTITY_H
 #define _NPCENTITY_H
 
-#include "../../common/cbasetypes.h"
-#include "../../common/taskmgr.h"
+#include "common/cbasetypes.h"
+#include "common/taskmgr.h"
 
 #include "baseentity.h"
 
@@ -33,12 +33,14 @@ public:
     uint32       m_flags;
     uint8        name_prefix;
     uint8        widescan;
+    bool         m_triggerable = false;
     uint32       getEntityFlags() const;             // Returns the current value in m_flags
     void         setEntityFlags(uint32 EntityFlags); // Change the current value in m_flags
     void         HideHP(bool hide);
     bool         IsHPHidden() const;
     void         Untargetable(bool untargetable);
     bool         IsUntargetable() const;
+    bool         IsTriggerable() const;
     virtual bool isWideScannable() override;
     virtual void PostTick() override;
     virtual void Tick(time_point) override

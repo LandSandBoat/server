@@ -1,0 +1,157 @@
+Applied inside src/map/packets/entity_update.cpp
+
+switch (PEntity->objtype)
+{
+    case TYPE_NPC:
+    {
+        auto* PNpc = static_cast<CNpcEntity*>(PEntity);
+
+        if (updatemask & UPDATE_HP)
+        {
+            ...
+
+
+
+// 0x20:
+// 0:
+// 1: Can attack, light yellow name
+// 2: Disappears from view, and radar
+// 4:
+// 8:
+// 16:
+// 32:
+// 64:
+// 128:
+// 256:
+
+// 0x21:
+// 0:
+// 1:
+// 2:
+// 4:
+// 8:
+// 16:
+// 32: Orange name, call for help?
+// 64:
+// 128:
+// 256:
+
+// 0x22:
+// 0:
+// 1: Hide HP bar
+// 2:
+// 4:
+// 8:
+// 16:
+// 32:
+// 64:
+// 128:
+// 256:
+
+// 0x23:
+// 0:
+// 1: New adventurer icon (green/yellow)
+// 2:
+// 4: Triangle GM Icon
+// 8:
+// 11: POL Icon
+// 15: Circular GM Icon
+// 16:
+// 32:
+// 64:
+// 128: Bazaar Icon
+// 256:
+
+// 0x24:
+// 0:
+// 1:
+// 2:
+// 4:
+// 8:
+// 11:
+// 15:
+// 16:
+// 32:
+// 64:
+// 128:
+// 256:
+
+// 0x25:
+// 0:
+// 1:
+// 2:
+// 4:
+// 8:
+// 16:
+// 32:
+// 64:
+// 128:
+// 256:
+
+// 0x26:
+// 0:
+// 1:
+// 2:
+// 4:
+// 8:
+// 16:
+// 32:
+// 64:
+// 128:
+// 256:
+
+// 0x27:
+// 0:
+// 1:
+// 2:
+// 4:
+// 8:
+// 16:
+// 32:
+// 64:
+// 128: Disappear, untargetable, not on radar
+// 256:
+
+// 0x28:
+// 0:
+// 1: Simple menu (magic, abilities, trust, items)
+// 2:
+// 4:
+// 8:
+// 16:
+// 32:
+// 64: Triggerable
+// 128:
+// 256:
+
+// (For NPC Entity)
+// 0x29:
+// 0: Green Name
+// 1: White Name
+// 2: Sandoria Flag, Green Name
+// 3: Bastok Flag, Green Name
+// 4: Windurst Flag, Green Name
+// 5: Wyverns Flag, Green Name
+// 6: Griffon Flag, Green Name
+// 7: Green Name
+// 8: Sword and Shield, Green Name
+// 16:
+// 32: Red Background, 2 Butting Heads, Green Name
+// 32: Blue Background, 2 Butting Heads, Green Name
+// 64:
+// 128:
+// 256:
+
+// 0x2A: Seemingly nothing
+
+// Sword and Shield name logo
+// ref<uint8>(0x29) |= 0x08;
+
+// Red background, two butting heads
+// ref<uint8>(0x29) |= 0x20;
+
+// Blue background, two butting heads
+// ref<uint8>(0x29) |= 0x21;
+
+// Set to Ghost
+// ref<uint8>(0x2B) |= 0x80;

@@ -22,15 +22,9 @@
 #ifndef _CSHOPAPPRAISEPACKET_H
 #define _CSHOPAPPRAISEPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
-
-/************************************************************************
- *																		*
- *  																		*
- *																		*
- ************************************************************************/
 
 class CShopAppraisePacket : public CBasicPacket
 {

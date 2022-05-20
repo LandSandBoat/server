@@ -23,8 +23,7 @@ entity.onTrigger = function(player, npc)
     local Fertile_Ground = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.FERTILE_GROUND)
     local Wayward_Waypoints = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.WAYWARD_WAYPOINTS)
     Wayward_Waypoints = (Wayward_Waypoints == QUEST_ACCEPTED) and (player:getCharVar("WW_Need_Shipilolo") > 0)
-    local ACSP = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.A_CERTAIN_SUBSTITUTE_PATROLMAN)
-    local SOA_Mission = player:getCurrentMission(SOA)
+    local SOA_Mission = player:getCurrentMission(xi.mission.log_id.SOA)
 
     if (SOA_Mission >= xi.mission.id.soa.LIFE_ON_THE_FRONTIER) then
         if ((TOMATH == QUEST_ACCEPTED) and player:hasKeyItem(xi.ki.BROKEN_HARPOON)) then
@@ -36,9 +35,6 @@ entity.onTrigger = function(player, npc)
         elseif (Wayward_Waypoints and (not player:hasKeyItem(xi.ki.WAYPOINT_RECALIBRATION_KIT))) then
             -- Progresses Quest: 'Wayward Waypoints'
             player:startEvent(79)
-        elseif ((ACSP == QUEST_ACCEPTED) and (player:getCharVar("ACSP_NPCs_Visited") == 5)) then
-            -- Progresses Quest: 'A Certain Substitute Patrolman'
-            player:startEvent(2557)
         else
             -- Standard dialogue
             player:startEvent(535)
@@ -64,9 +60,6 @@ entity.onEventFinish = function(player, csid, option)
     elseif (csid == 79) then
         player:addKeyItem(xi.ki.WAYPOINT_RECALIBRATION_KIT)
         player:setCharVar("WW_Need_Shipilolo", 0)
-    elseif (csid == 2557) then
-        -- Progresses Quest: 'A Certain Substitute Patrolman'
-        player:setCharVar("ACSP_NPCs_Visited", 6)
     end
 end
 

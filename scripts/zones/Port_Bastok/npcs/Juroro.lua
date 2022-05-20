@@ -27,7 +27,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(257, 0, 1169, 0, 0, 0, 0, 0, 0)
     elseif (ThePuppetMaster == QUEST_ACCEPTED and ThePuppetMasterProgress == 3) then
         player:startEvent(258)
-    elseif ((TrialByEarth == QUEST_AVAILABLE and player:getFameLevel(BASTOK) >= 6) or (TrialByEarth == QUEST_COMPLETED and os.time() > player:getCharVar("TrialByEarth_date"))) then
+    elseif ((TrialByEarth == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.BASTOK) >= 6) or (TrialByEarth == QUEST_COMPLETED and os.time() > player:getCharVar("TrialByEarth_date"))) then
         player:startEvent(249, 0, xi.ki.TUNING_FORK_OF_EARTH) -- Start and restart quest "Trial by Earth"
     elseif (TrialByEarth == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.TUNING_FORK_OF_EARTH) == false and WhisperOfTremors == false) then
         player:startEvent(284, 0, xi.ki.TUNING_FORK_OF_EARTH) -- Defeat against Titan : Need new Fork
@@ -106,7 +106,7 @@ entity.onEventFinish = function(player, csid, option)
             player:addTitle(xi.title.HEIR_OF_THE_GREAT_EARTH)
             player:delKeyItem(xi.ki.WHISPER_OF_TREMORS) --Whisper of Tremors, as a trade for the above rewards
             player:setCharVar("TrialByEarth_date", getMidnight())
-            player:addFame(BASTOK, 30)
+            player:addFame(xi.quest.fame_area.BASTOK, 30)
             player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRIAL_BY_EARTH)
         end
     end

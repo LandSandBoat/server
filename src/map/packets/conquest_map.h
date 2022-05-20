@@ -22,15 +22,9 @@
 #ifndef _CCONQUESTPACKET_H
 #define _CCONQUESTPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
-
-/************************************************************************
- *																		*
- *  																		*
- *																		*
- ************************************************************************/
 
 class CCharEntity;
 

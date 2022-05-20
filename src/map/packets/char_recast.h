@@ -22,15 +22,9 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #ifndef _CCHARRECASTPACKET_H
 #define _CCHARRECASTPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
-
-/************************************************************************
- *																		*
- *  																		*
- *																		*
- ************************************************************************/
 
 class CCharEntity;
 

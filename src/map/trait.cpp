@@ -59,28 +59,28 @@ namespace traits
                              WHERE traitid < %u \
 							 ORDER BY job, traitid ASC, rank DESC";
 
-        int32 ret = Sql_Query(SqlHandle, Query, MAX_TRAIT_ID);
+        int32 ret = sql->Query(Query, MAX_TRAIT_ID);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (ret != SQL_ERROR && sql->NumRows() != 0)
         {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql->NextRow() == SQL_SUCCESS)
             {
                 char* contentTag = nullptr;
-                Sql_GetData(SqlHandle, 6, &contentTag, nullptr);
+                sql->GetData(6, &contentTag, nullptr);
 
                 if (!luautils::IsContentEnabled(contentTag))
                 {
                     continue;
                 }
 
-                CTrait* PTrait = new CTrait(Sql_GetIntData(SqlHandle, 0));
+                CTrait* PTrait = new CTrait(sql->GetIntData(0));
 
-                PTrait->setJob(Sql_GetIntData(SqlHandle, 1));
-                PTrait->setLevel(Sql_GetIntData(SqlHandle, 2));
-                PTrait->setRank(Sql_GetIntData(SqlHandle, 3));
-                PTrait->setMod(static_cast<Mod>(Sql_GetIntData(SqlHandle, 4)));
-                PTrait->setValue(Sql_GetIntData(SqlHandle, 5));
-                PTrait->setMeritId(Sql_GetIntData(SqlHandle, 7));
+                PTrait->setJob(sql->GetIntData(1));
+                PTrait->setLevel(sql->GetIntData(2));
+                PTrait->setRank(sql->GetIntData(3));
+                PTrait->setMod(static_cast<Mod>(sql->GetIntData(4)));
+                PTrait->setValue(sql->GetIntData(5));
+                PTrait->setMeritId(sql->GetIntData(7));
 
                 PTraitsList[PTrait->getJob()].push_back(PTrait);
             }
@@ -91,19 +91,19 @@ namespace traits
                              WHERE traitid < %u \
 							 ORDER BY trait_category ASC, trait_points_needed DESC";
 
-        ret = Sql_Query(SqlHandle, Query, MAX_TRAIT_ID);
+        ret = sql->Query(Query, MAX_TRAIT_ID);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (ret != SQL_ERROR && sql->NumRows() != 0)
         {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql->NextRow() == SQL_SUCCESS)
             {
-                CBlueTrait* PTrait = new CBlueTrait(Sql_GetIntData(SqlHandle, 0), Sql_GetIntData(SqlHandle, 2));
+                CBlueTrait* PTrait = new CBlueTrait(sql->GetIntData(0), sql->GetIntData(2));
 
                 PTrait->setJob(JOB_BLU);
                 PTrait->setRank(1);
-                PTrait->setPoints(Sql_GetIntData(SqlHandle, 1));
-                PTrait->setMod(static_cast<Mod>(Sql_GetIntData(SqlHandle, 3)));
-                PTrait->setValue(Sql_GetIntData(SqlHandle, 4));
+                PTrait->setPoints(sql->GetIntData(1));
+                PTrait->setMod(static_cast<Mod>(sql->GetIntData(3)));
+                PTrait->setValue(sql->GetIntData(4));
 
                 PTraitsList[JOB_BLU].push_back(PTrait);
             }

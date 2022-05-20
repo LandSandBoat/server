@@ -22,15 +22,9 @@
 #ifndef _CCHARJOBSPACKET_H
 #define _CCHARJOBSPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
-
-/************************************************************************
- *																		*
- *  																		*
- *																		*
- ************************************************************************/
 
 class CCharEntity;
 

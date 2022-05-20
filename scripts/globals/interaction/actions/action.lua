@@ -21,6 +21,7 @@ Action.Type = {
     Wait = 5,
     Release = 6,
     KeyItem = 7,
+    NoAction = 8,
 }
 
 function Action:new(type)
@@ -49,6 +50,13 @@ end
 function Action:replaceDefault()
      -- Always prefer this over falling back to default in lua file
     return self:setPriority(Action.Priority.ReplaceDefault)
+end
+
+-- Perform the action as a Progress priority, and then default back to event
+function Action:importantEvent()
+    self.priority = Action.Priority.Progress
+    self.secondaryPriority = Action.Priority.Event
+    return self
 end
 
  -- After the first time the action is performed, it will have a lower priority

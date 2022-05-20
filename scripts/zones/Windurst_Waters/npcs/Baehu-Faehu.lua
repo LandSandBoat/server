@@ -28,7 +28,7 @@ entity.onTrigger = function(player, npc)
             4392,  29,  -- Saruta Orange
             635,   18   -- Windurstian Tea Leaves
         }
-        xi.shop.general(player, stock, WINDURST)
+        xi.shop.general(player, stock, xi.quest.fame_area.WINDURST)
 
     end
 

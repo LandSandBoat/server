@@ -1,38 +1,31 @@
-set(SOURCES
-    ability_state.cpp
-    ability_state.h
-    attack_state.cpp
-    attack_state.h
-    death_state.cpp
-    death_state.h
-    despawn_state.cpp
-    despawn_state.h
-    inactive_state.cpp
-    inactive_state.h
-    item_state.cpp
-    item_state.h
-    magic_state.cpp
-    magic_state.h
-    mobskill_state.cpp
-    mobskill_state.h
-    raise_state.cpp
-    raise_state.h
-    range_state.cpp
-    range_state.h
-    respawn_state.cpp
-    respawn_state.h
-    state.cpp
-    state.h
-    trigger_state.cpp
-    trigger_state.h
-    weaponskill_state.cpp
-    weaponskill_state.h)
-
-add_library(ai_states STATIC ${SOURCES})
-
-target_link_libraries(ai_states
-    PUBLIC
-    common
-    project_options
-    #project_warnings
+set(AI_STATE_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/ability_state.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/ability_state.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/attack_state.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/attack_state.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/death_state.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/death_state.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/despawn_state.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/despawn_state.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/inactive_state.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/inactive_state.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/item_state.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/item_state.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/magic_state.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/magic_state.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/mobskill_state.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/mobskill_state.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/raise_state.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/raise_state.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/range_state.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/range_state.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/respawn_state.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/respawn_state.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/state.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/state.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/trigger_state.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/trigger_state.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/weaponskill_state.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/weaponskill_state.h
+    PARENT_SCOPE
 )

@@ -19,7 +19,7 @@
 ===========================================================================
 */
 
-#include "../../common/timer.h"
+#include "common/timer.h"
 #include "../entities/baseentity.h"
 #include "../treasure_pool.h"
 
@@ -27,8 +27,8 @@
 
 CTreasureFindItemPacket::CTreasureFindItemPacket(TreasurePoolItem* PItem, CBaseEntity* PEntity, bool isOldItem)
 {
-    this->id(0x0D2);
-    this->length(60);
+    this->setType(0x0D2);
+    this->setSize(60);
 
     ref<uint32>(0x04) = 1;                 // Item Quantity
     ref<uint16>(0x0C) = 0;                 // TODO: Gil Found

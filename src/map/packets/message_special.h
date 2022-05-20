@@ -22,15 +22,9 @@
 #ifndef _CMESSAGESPECIALPACKET_H
 #define _CMESSAGESPECIALPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
-
-/************************************************************************
- *																		*
- *  																		*
- *																		*
- ************************************************************************/
 
 class CBaseEntity;
 

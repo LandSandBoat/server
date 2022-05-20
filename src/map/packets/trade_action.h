@@ -22,15 +22,9 @@
 #ifndef _CTRADEACTIONPACKET_H
 #define _CTRADEACTIONPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
-
-/************************************************************************
- *																		*
- *																		*
- *																		*
- ************************************************************************/
 
 class CCharEntity;
 

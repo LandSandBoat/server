@@ -109,6 +109,7 @@ quest.sections =
             ['Quelveuiat'] =
             {
                 onTrade = function(player, npc, trade)
+                    -- TODO: Needs verification for single-trade events
                     if not player:hasKeyItem(xi.ki.TEMPLE_KNIGHT_KEY) then
                         if
                             npcUtil.tradeHasExactly(trade, xi.items.SEALION_CREST_KEY) or
@@ -120,6 +121,20 @@ quest.sections =
                             return quest:progressEvent(631, xi.items.SEALION_CREST_KEY, xi.items.CORAL_CREST_KEY)
                         end
                     end
+                end,
+
+                onTrigger = function(player, npc)
+                    local itemCount = 0
+                    local itemTable = { 0, 0 }
+
+                    for itemId = xi.items.SEALION_CREST_KEY, xi.items.CORAL_CREST_KEY do
+                        if player:findItem(itemId) then
+                            itemCount = itemCount + 1
+                            itemTable[itemCount] = itemId
+                        end
+                    end
+
+                    return quest:progressEvent(631, itemTable[1], itemTable[2])
                 end,
             },
 

@@ -78,7 +78,7 @@ end
 
 entity.onTrigger = function(player, npc)
     -- IN THE NAME OF SCIENCE
-    if player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_WARRIOR_S_PATH) then
+    if player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_WARRIORS_PATH) then
         local nameOfScience  = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.IN_THE_NAME_OF_SCIENCE)
         local itemInProgress = player:getCharVar("NAME_OF_SCIENCE_target")
 
@@ -95,12 +95,9 @@ entity.onTrigger = function(player, npc)
         end
 
     -- STANDARD DIALOG
-    else
-        if math.random(100) <= 50 then
-            player:startEvent(527)
-        else
-            player:startEvent(519)
-        end
+    -- TODO: This is not a true default action, and needs to be verified for when this begins to be displayed
+    -- else
+    --    player:startEvent(519)
     end
 end
 
@@ -116,7 +113,7 @@ entity.onEventFinish = function(player, csid, option)
         player:confirmTrade()
     elseif csid == 529 then
         local itemInProgress = player:getCharVar("NAME_OF_SCIENCE_target")
-        if npcUtil.completeQuest(player, OTHER_AREAS_LOG, xi.quest.id.otherAreas.IN_THE_NAME_OF_SCIENCE, {item=itemInProgress, var={"NAME_OF_SCIENCE_target"}}) then
+        if npcUtil.completeQuest(player, xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.IN_THE_NAME_OF_SCIENCE, {item=itemInProgress, var={"NAME_OF_SCIENCE_target"}}) then
             player:confirmTrade()
         end
     end

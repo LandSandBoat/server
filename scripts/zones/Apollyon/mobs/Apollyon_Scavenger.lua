@@ -1,9 +1,9 @@
 -----------------------------------
--- Area: Apollyon NW
+-- Area: Apollyon NW, Floor 3
 --  Mob: Apollyon Scavenger
 -----------------------------------
 local ID = require("scripts/zones/Apollyon/IDs")
-require("scripts/globals/limbus")
+require("scripts/zones/Apollyon/bcnms/nw_apollyon_helper")
 require("scripts/globals/pathfind")
 -----------------------------------
 local entity = {}
@@ -43,16 +43,7 @@ entity.onMobRoam = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, isKiller, noKiller)
-    if isKiller or noKiller then
-        local mobID       = mob:getID()
-        local battlefield = mob:getBattlefield()
-        local randomF3    = battlefield:getLocalVar("randomF3")
-
-        if mobID == randomF3 then
-            battlefield:setLocalVar("randomF4", ID.mob.APOLLYON_NW_MOB[4] + math.random(1, 5))
-            xi.limbus.handleDoors(battlefield, true, ID.npc.APOLLYON_NW_PORTAL[3])
-        end
-    end
+    xi.apollyon_nw.handleMobDeathFloorThreePortal(mob, player, isKiller, noKiller)
 end
 
 return entity

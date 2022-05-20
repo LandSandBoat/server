@@ -18,9 +18,10 @@ local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_TRADE
 
 quest.reward =
 {
-    fame  = 30,
-    item  = xi.items.ROBE,
-    title = xi.title.GREEN_GROCER,
+    fame     = 30,
+    fameArea = xi.quest.fame_area.SANDORIA,
+    item     = xi.items.ROBE,
+    title    = xi.title.GREEN_GROCER,
 }
 
 quest.sections =

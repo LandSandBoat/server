@@ -22,15 +22,9 @@
 #ifndef _CMESSAGESYSTEMPACKET_H
 #define _CMESSAGESYSTEMPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
-
-/************************************************************************
- *																		*
- *  																		*
- *																		*
- ************************************************************************/
 
 class CMessageSystemPacket : public CBasicPacket
 {

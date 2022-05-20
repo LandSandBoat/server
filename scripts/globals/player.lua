@@ -1,5 +1,6 @@
 require("scripts/globals/gear_sets")
 require("scripts/globals/keyitems")
+require("scripts/globals/quests")
 require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/teleports")
@@ -40,10 +41,13 @@ local startingJobGear =
 }
 
 -----------------------------------
--- local functions
+-- public functions
 -----------------------------------
 
-local function CharCreate(player)
+xi = xi or {}
+xi.player = {}
+
+xi.player.charCreate = function(player)
     local race = player:getRace()
     local raceInfo = startingRaceInfo[race]
     local nation = player:getNation()
@@ -66,6 +70,14 @@ local function CharCreate(player)
 
     -- add nation-specific map
     player:addKeyItem(nationInfo.map)
+
+    -- add job-emote Key items
+    player:addKeyItem(xi.ki.JOB_GESTURE_WARRIOR)
+    player:addKeyItem(xi.ki.JOB_GESTURE_MONK)
+    player:addKeyItem(xi.ki.JOB_GESTURE_WHITE_MAGE)
+    player:addKeyItem(xi.ki.JOB_GESTURE_BLACK_MAGE)
+    player:addKeyItem(xi.ki.JOB_GESTURE_RED_MAGE)
+    player:addKeyItem(xi.ki.JOB_GESTURE_THIEF)
 
     -- add nation- and race-specific ring
     if nation == raceInfo.homeNation and not player:hasItem(nationInfo.ring) then
@@ -125,7 +137,7 @@ local function CharCreate(player)
 
     player:addItem(536) -- adventurer coupon
     player:addTitle(xi.title.NEW_ADVENTURER)
-    player:setCharVar("MoghouseExplication", 1) -- needs Moghouse intro
+    player:setCharVar("HQuest[moghouseExpo]notSeen", 1) -- needs Moghouse intro
     player:setCharVar("spokeKindlix", 1) -- Kindlix introduction
     player:setCharVar("spokePyropox", 1) -- Pyropox introduction
     player:setCharVar("TutorialProgress", 1) -- Has not started tutorial
@@ -133,26 +145,40 @@ local function CharCreate(player)
     player:setNewPlayer(true) -- apply new player flag
 end
 
------------------------------------
--- public functions
------------------------------------
-
-xi = xi or {}
-xi.player = {}
-
 -- called by core after a player logs into the server or zones
 xi.player.onGameIn = function(player, firstLogin, zoning)
     if not zoning then
         -- things checked ONLY during logon go here
         if firstLogin then
-            CharCreate(player)
+            xi.player.charCreate(player)
         end
     else
         -- things checked ONLY during zone in go here
+		if player:getLocalVar("[WasInAbyssea]") == 1 then
+			--abyssea time logged
+			player:setCharVar("lastEnteredAbyssea", os.time() + 14400)
+			player:setCharVar("[WasInAbyssea]", 0)
+		end
+    end
+
+    -- Abyssea starting quest should be flagged when expansion is active
+    if
+        xi.settings.ENABLE_ABYSSEA == 1 and
+        player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_JOURNEY_BEGINS) == QUEST_AVAILABLE
+    then
+        player:addQuest(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_JOURNEY_BEGINS)
+    end
+
+    -- This is for migration safety only, and should be removed at a later date
+    if
+        player:hasCompletedQuest(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_JOURNEY_BEGINS) and
+        player:getTraverserEpoch() == 0
+    then
+        player:setTraverserEpoch()
     end
 
     -- apply mods from gearsets (scripts/globals/gear_sets.lua)
-    checkForGearSet(player)
+    xi.gear_sets.checkForGearSet(player)
 
     -- god mode
     if player:getCharVar("GodMode") == 1 then
@@ -201,10 +227,25 @@ xi.player.onGameIn = function(player, firstLogin, zoning)
     end)
 end
 
+xi.player.onPlayerDeath = function(player)
+end
+
 xi.player.onPlayerLevelUp = function(player)
 end
 
 xi.player.onPlayerLevelDown = function(player)
+end
+
+xi.player.onPlayerMount = function(player)
+    -- For PM3-3 The Road Forks.  This value will be checked periodically, and break
+    -- the Mimeo Jewel should a player be mounted, zone, or disconnect.
+    if
+        player:getZoneID() == xi.zone.ATTOHWA_CHASM and
+        player:hasKeyItem(xi.ki.MIMEO_JEWEL)
+    then
+        player:messageSpecial(zones[xi.zone.ATTOHWA_CHASM].text.MIMEO_JEWEL_OFFSET + 4, xi.ki.MIMEO_JEWEL)
+        player:delKeyItem(xi.ki.MIMEO_JEWEL)
+    end
 end
 
 xi.player.onPlayerEmote = function(player, emoteId)

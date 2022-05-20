@@ -22,14 +22,14 @@
 #ifndef _CPARTYSEARCHPACKET_H
 #define _CPARTYSEARCHPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 
 /************************************************************************
- *                                                                       *
- *  Отправляем PartyID, по которому осуществляется поиск                 *
- *                                                                       *
+ *
+ *  We send Partyid to search
+ *
  ************************************************************************/
 
 class CCharEntity;

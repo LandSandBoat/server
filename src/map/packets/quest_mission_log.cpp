@@ -19,7 +19,7 @@
 ===========================================================================
 */
 
-#include "../../common/socket.h"
+#include "common/socket.h"
 
 #include <cstring>
 
@@ -28,8 +28,8 @@
 
 CQuestMissionLogPacket::CQuestMissionLogPacket(CCharEntity* PChar, uint8 logID, LOG_TYPE logType)
 {
-    this->type = 0x56;
-    this->size = 0x14;
+    this->setType(0x56);
+    this->setSize(0x28);
 
     uint16 packetType = 0x00;
 
@@ -85,7 +85,7 @@ CQuestMissionLogPacket::CQuestMissionLogPacket(CCharEntity* PChar, uint8 logID, 
                     break;
                 case LOG_CAMPAIGN_TWO:
                     // Second Campaign packet, summoned through logType
-                    generateCampaignMissionPacket(PChar, (uint8)256);
+                    generateCampaignMissionPacket(PChar, 1);
                     packetType = CAMPAIGN_MISSION_TWO;
                     break;
                 default:

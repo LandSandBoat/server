@@ -22,17 +22,11 @@
 #ifndef _CMERITPOINTSCATEGORIESPACKET_H_
 #define _CMERITPOINTSCATEGORIESPACKET_H_
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "../merit.h"
 
 #include "basic.h"
-
-/************************************************************************
- *																		*
- *  																		*
- *																		*
- ************************************************************************/
 
 class CCharEntity;
 

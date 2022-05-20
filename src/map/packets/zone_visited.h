@@ -22,15 +22,9 @@
 #ifndef _CZONEVISITEDPACKET_H_
 #define _CZONEVISITEDPACKET_H_
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
-
-/************************************************************************
- *																		*
- *  																		*
- *																		*
- ************************************************************************/
 
 class CCharEntity;
 

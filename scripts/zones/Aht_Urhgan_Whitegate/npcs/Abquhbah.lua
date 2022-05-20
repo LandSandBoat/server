@@ -12,6 +12,8 @@ entity.onTrigger = function(player, npc)
     local promotion = player:getCharVar("AssaultPromotion")
     local rank = 0
 
+    -- 3152 on Nashmiera's Plea (oncePerZone)
+
     if promotion <= 7 then
         rank = 1
     elseif promotion >= 8 and promotion <= 11 then

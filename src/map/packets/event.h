@@ -22,18 +22,12 @@
 #ifndef _CEVENTPACKET_H
 #define _CEVENTPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 #include "../event_info.h"
 
 #include <string>
 
 #include "basic.h"
-
-/************************************************************************
- *																		*
- *  																		*
- *																		*
- ************************************************************************/
 
 class CCharEntity;
 

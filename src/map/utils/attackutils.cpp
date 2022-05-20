@@ -20,7 +20,7 @@
 */
 
 #include "attackutils.h"
-#include "../../common/utils.h"
+#include "common/utils.h"
 #include "../attack.h"
 #include "../items/item_weapon.h"
 #include "../status_effect_container.h"
@@ -337,26 +337,31 @@ namespace attackutils
                 {
                     return originalDamage * 2;
                 }
+                break;
             case PHYSICAL_ATTACK_TYPE::TRIPLE:
                 if (xirand::GetRandomNumber(100) < PChar->getMod(Mod::TA_TRIPLE_DAMAGE))
                 {
                     return originalDamage * 3;
                 }
+                break;
             case PHYSICAL_ATTACK_TYPE::DOUBLE:
                 if (xirand::GetRandomNumber(100) < PChar->getMod(Mod::DA_DOUBLE_DAMAGE))
                 {
                     return originalDamage * 2;
                 }
+                break;
             case PHYSICAL_ATTACK_TYPE::RAPID_SHOT:
                 if (xirand::GetRandomNumber(100) < PChar->getMod(Mod::RAPID_SHOT_DOUBLE_DAMAGE))
                 {
                     return originalDamage * 2;
                 }
+                break;
             case PHYSICAL_ATTACK_TYPE::SAMBA:
                 if (xirand::GetRandomNumber(100) < PChar->getMod(Mod::SAMBA_DOUBLE_DAMAGE))
                 {
                     return originalDamage * 2;
                 }
+                break;
             default:
                 break;
         }

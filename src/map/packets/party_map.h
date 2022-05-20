@@ -22,15 +22,9 @@
 #ifndef _CPARTYMAPPACKET_H
 #define _CPARTYMAPPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
-
-/************************************************************************
- *																		*
- *  																		*
- *																		*
- ************************************************************************/
 
 class CCharEntity;
 

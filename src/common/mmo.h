@@ -59,15 +59,72 @@ enum FLAGTYPE : uint32
 
 enum NFLAGTYPE : uint32
 {
-    NFLAG_INVITE       = 0x00000001,
-    NFLAG_AWAY         = 0x00000002,
-    NFLAG_ANON         = 0x00000004,
-    NFLAG_AUTOTARGET   = 0x00004000,
-    NFLAG_AUTOGROUP    = 0x00008000,
-    NFLAG_MENTOR       = 0x02000000,
-    NFLAG_NEWPLAYER    = 0x04000000,
-    NFLAG_DISPLAY_HEAD = 0x08000000,
-    NFLAG_RECRUIT      = 0x20000000,
+    NFLAG_INVITE          = 0x00000001,
+    NFLAG_AWAY            = 0x00000002,
+    NFLAG_ANON            = 0x00000004,
+    NFLAG_SYSTEM_FILTER_L = 0x00000800,
+    NFLAG_SYSTEM_FILTER_H = 0x00001000,
+    NFLAG_AUTOTARGET      = 0x00004000,
+    NFLAG_AUTOGROUP       = 0x00008000,
+    NFLAG_MENTOR          = 0x02000000,
+    NFLAG_NEWPLAYER       = 0x04000000,
+    NFLAG_DISPLAY_HEAD    = 0x08000000,
+    NFLAG_RECRUIT         = 0x20000000,
+};
+
+enum CHATFILTERTYPE : uint64
+{
+    CHATFILTER_SAY         = 0x00000000000001,
+    CHATFILTER_ASSIST_J    = 0x08000000000000,
+    CHATFILTER_ASSIST_E    = 0x10000000000000,
+    CHATFILTER_EMOTES      = 0x00000000000008,
+    CHATFILTER_SHOUT       = 0x00000000000002,
+    CHATFILTER_YELL        = 0x01000000000000,
+    CHATFILTER_BATTLE0     = 0x00000000000010,
+    CHATFILTER_BATTLE1     = 0x00000000000020,
+    CHATFILTER_BATTLE2     = 0x00000000000040,
+    CHATFILTER_BATTLE3     = 0x00000000000080,
+    CHATFILTER_BATTLE4     = 0x00000000000100,
+    CHATFILTER_BATTLE5     = 0x00000000000200,
+    CHATFILTER_BATTLE6     = 0x00000000800000,
+    CHATFILTER_BATTLE7     = 0x00000000002000,
+    CHATFILTER_BATTLE8     = 0x00000000004000,
+    CHATFILTER_BATTLE9     = 0x00000000008000,
+    CHATFILTER_BATTLE10    = 0x00000000010000,
+    CHATFILTER_BATTLE11    = 0x00000000020000,
+    CHATFILTER_BATTLE12    = 0x00000001000000,
+    CHATFILTER_BATTLE13    = 0x00000000040000,
+    CHATFILTER_BATTLE14    = 0x00000000080000,
+    CHATFILTER_BATTLE15    = 0x00000000100000,
+    CHATFILTER_BATTLE16    = 0x00000000200000,
+    CHATFILTER_BATTLE17    = 0x00000000400000,
+    CHATFILTER_BATTLE18    = 0x00020000000000,
+    CHATFILTER_BATTLE19    = 0x00010000000000,
+    CHATFILTER_BATTLE20    = 0x00001000000000,
+    CHATFILTER_BATTLE21    = 0x00002000000000,
+    CHATFILTER_BATTLE22    = 0x00004000000000,
+    CHATFILTER_BATTLE23    = 0x00008000000000,
+    CHATFILTER_BATTLE24    = 0x00000800000000,
+    CHATFILTER_BATTLE25    = 0x00000400000000,
+    CHATFILTER_BATTLE26    = 0x00000010000000,
+    CHATFILTER_BATTLE27    = 0x00000020000000,
+    CHATFILTER_BATTLE28    = 0x00000100000000,
+    CHATFILTER_BATTLE29    = 0x00000200000000,
+    CHATFILTER_BATTLE30    = 0x00000002000000,
+    CHATFILTER_BATTLE31    = 0x00000000000400,
+    CHATFILTER_BATTLE32    = 0x00000000000800,
+    CHATFILTER_BATTLE33    = 0x00000000001000,
+    CHATFILTER_SYNTHESIS   = 0x00000004000000,
+    CHATFILTER_LOT_RESULTS = 0x00000008000000,
+    CHATFILTER_CAMPAIGN    = 0x00040000000000,
+    CHATFILTER_TELL_SPAM   = 0x00080000000000,
+    CHATFILTER_YELL_SPAM   = 0x00100000000000,
+    CHATFILTER_JOBEMOTE    = 0x00800000000000,
+    CHATFILTER_ALTEREGO    = 0x02000000000000,
+    // System message filters are
+    // NFLAG_SYSTEM_FILTER_L
+    // NFLAG_SYSTEM_FILTER_H
+    // Filter level is 0-3
 };
 
 enum MSGSERVTYPE : uint8
@@ -90,6 +147,47 @@ enum MSGSERVTYPE : uint8
     // gm commands
     MSG_SEND_TO_ZONE,
     MSG_SEND_TO_ENTITY,
+};
+
+constexpr auto msgTypeToStr = [](uint8 msgtype)
+{
+    switch (msgtype)
+    {
+        case MSG_LOGIN:
+            return "MSG_LOGIN";
+        case MSG_CHAT_TELL:
+            return "MSG_CHAT_TELL";
+        case MSG_CHAT_PARTY:
+            return "MSG_CHAT_PARTY";
+        case MSG_CHAT_LINKSHELL:
+            return "MSG_CHAT_LINKSHELL";
+        case MSG_CHAT_UNITY:
+            return "MSG_CHAT_UNITY";
+        case MSG_CHAT_YELL:
+            return "MSG_CHAT_YELL";
+        case MSG_CHAT_SERVMES:
+            return "MSG_CHAT_SERVMES";
+        case MSG_PT_INVITE:
+            return "MSG_PT_INVITE";
+        case MSG_PT_INV_RES:
+            return "MSG_PT_INV_RES";
+        case MSG_PT_RELOAD:
+            return "MSG_PT_RELOAD";
+        case MSG_PT_DISBAND:
+            return "MSG_PT_DISBAND";
+        case MSG_DIRECT:
+            return "MSG_DIRECT";
+        case MSG_LINKSHELL_RANK_CHANGE:
+            return "MSG_LINKSHELL_RANK_CHANGE";
+        case MSG_LINKSHELL_REMOVE:
+            return "MSG_LINKSHELL_REMOVE";
+        case MSG_SEND_TO_ZONE:
+            return "MSG_SEND_TO_ZONE";
+        case MSG_SEND_TO_ENTITY:
+            return "MSG_SEND_TO_ENTITY";
+        default:
+            return "Unknown";
+    };
 };
 
 typedef std::string string_t;
@@ -129,8 +227,10 @@ struct skills_t
             uint16 archery, marksmanship, throwing, guarding, evasion, shield, parrying, divine, healing;
             // SkillID 34-43
             uint16 enhancing, enfeebling, elemental, dark, summoning, ninjutsu, singing, string, wind, blue;
-            // SkillID 44-47
-            uint16 reserved2[4];
+            // SkillID 45-46
+            uint16 geomancy, handbell;
+            // SkillID 46-47
+            uint16 reserved2[2];
             // SkillID 48-54
             uint16 fishing, woodworking, smithing, goldsmithing, clothcraft, leathercraft, bonecraft;
             // SkillID 55-58
@@ -234,8 +334,8 @@ struct nameflags_t
 
 struct search_t
 {
-    uint8 language;
-    uint8 messagetype;
+    uint8       language;
+    uint8       messagetype;
     std::string message;
 };
 

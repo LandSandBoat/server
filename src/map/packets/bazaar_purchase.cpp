@@ -19,7 +19,7 @@
 ===========================================================================
 */
 
-#include "../../common/socket.h"
+#include "common/socket.h"
 
 #include "../entities/charentity.h"
 
@@ -27,16 +27,10 @@
 
 #include "bazaar_purchase.h"
 
-/************************************************************************
- *																		*
- *																		*
- *																		*
- ************************************************************************/
-
 CBazaarPurchasePacket::CBazaarPurchasePacket(CCharEntity* PChar, bool result)
 {
-    this->type = 0x06; // 0x106
-    this->size = 0x0D;
+    this->setType(0x106);
+    this->setSize(0x1A);
 
     ref<uint8>(0x04) = !result;
 

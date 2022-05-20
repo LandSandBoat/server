@@ -23,6 +23,7 @@ local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.LAKESIDE_MINUET
 quest.reward =
 {
     fame = 30,
+    fameArea = xi.quest.fame_area.JEUNO,
     title = xi.title.TROUPE_BRILIOTH_DANCER,
 }
 
@@ -63,8 +64,6 @@ quest.sections =
                     if player:hasKeyItem(xi.ki.STARDUST_PEBBLE) then
                         return quest:progressEvent(10118)
                     else
-                        -- TODO: Verify CS events for Laila for other mission statuses.  Original
-                        -- code had event 10113 for quest progress 3; however, that is incorrect.
                         return quest:progressEvent(10112)
                     end
                 end,
@@ -81,8 +80,14 @@ quest.sections =
                         return quest:progressEvent(10114)
                     elseif questProgress == 2 then
                         return quest:progressEvent(10115)
-                    elseif questProgress >= 3 then
-                        return quest:progressEvent(10116)
+                    elseif questProgress == 3 then
+                        if quest:getLocalVar(player, 'rheaOption') == 0 then
+                            return quest:progressEvent(10117)
+                        else
+                            return quest:progressEvent(10116)
+                        end
+                    elseif questProgress == 4 then
+                        return quest:progressEvent(10121)
                     end
                 end,
             },
@@ -99,11 +104,20 @@ quest.sections =
                     quest:setVar(player, 'Prog', 3)
                 end,
 
+                [10116] = function(player, csid, option, npc)
+                    quest:setLocalVar(player, 'rheaOption', 0)
+                end,
+
+                [10117] = function(player, csid, option, npc)
+                    quest:setLocalVar(player, 'rheaOption', 1)
+                end,
+
                 [10118] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:unlockJob(xi.job.DNC)
                         player:messageSpecial(upperJeunoID.text.UNLOCK_DANCER)
                         player:delKeyItem(xi.ki.STARDUST_PEBBLE)
+                        npcUtil.giveKeyItem(player, xi.ki.JOB_GESTURE_DANCER)
                         player:needToZone(true)
                     end
                 end,
@@ -120,7 +134,7 @@ quest.sections =
                     if questProgress == 1 then
                         return quest:progressEvent(888)
                     elseif questProgress >= 2 then
-                        return quest:progressEvent(889)
+                        return quest:event(889)
                     end
                 end,
             },
@@ -151,6 +165,7 @@ quest.sections =
             {
                 [100] = function(player, csid, option, npc)
                     npcUtil.giveKeyItem(player, xi.ki.STARDUST_PEBBLE)
+                    quest:setVar(player, 'Prog', 4)
                 end,
             }
         },
@@ -158,12 +173,14 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED and player:needToZone()
+            return status == QUEST_COMPLETED and
+                not player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_UNFINISHED_WALTZ)
         end,
 
         [xi.zone.UPPER_JEUNO] =
         {
-            ['Laila'] = quest:progressEvent(10119),
+            ['Laila']        = quest:event(10119):replaceDefault(),
+            ['Rhea_Myuliah'] = quest:event(10126):replaceDefault(),
         },
     },
 }

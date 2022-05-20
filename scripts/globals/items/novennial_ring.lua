@@ -13,7 +13,7 @@ local item_object = {}
 
 item_object.onItemCheck = function(target)
     local result = 0
-    if (target:hasStatusEffect(xi.effect.DEDICATION) == true) then
+    if target:hasStatusEffect(xi.effect.DEDICATION) then
         result = 56
     end
     return result

@@ -19,8 +19,8 @@
 ===========================================================================
 */
 
-#include "../../common/socket.h"
-#include "../../common/utils.h"
+#include "common/socket.h"
+#include "common/utils.h"
 
 #include <cstring>
 
@@ -30,8 +30,8 @@
 
 CMessageSpecialPacket::CMessageSpecialPacket(CBaseEntity* PEntity, uint16 messageID, uint32 param0, uint32 param1, uint32 param2, uint32 param3, bool ShowName)
 {
-    this->type = 0x2A;
-    this->size = 0x10;
+    this->setType(0x2A);
+    this->setSize(0x20);
 
     // XI_DEBUG_BREAK_IF(PEntity == nullptr);
 
@@ -46,8 +46,7 @@ CMessageSpecialPacket::CMessageSpecialPacket(CBaseEntity* PEntity, uint16 messag
 
     if (ShowName)
     {
-        this->size = 0x18;
-
+        this->setSize(0x30);
         memcpy(data + (0x1E), PEntity->GetName(), std::min<size_t>(PEntity->name.size(), PacketNameLength));
     }
     else if (PEntity->objtype == TYPE_PC)

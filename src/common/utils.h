@@ -29,6 +29,10 @@
 
 constexpr size_t PacketNameLength = 15;
 
+constexpr size_t DecodeStringLength    = 21; // used for size of decoded strings of signature/linkshells
+constexpr size_t SignatureStringLength = 12; // encoded signature string size
+constexpr size_t LinkshellStringLength = 16; // encoded linkshell string size
+
 int32 checksum(uint8* buf, uint32 buflen, char checkhash[16]);
 int   config_switch(const char* str);
 bool  bin2hex(char* output, unsigned char* input, size_t count);
@@ -63,6 +67,7 @@ uint32 packBitsBE(uint8* target, uint64 value, int32 byteOffset, int32 bitOffset
 uint32 packBitsBE(uint8* target, uint64 value, int32 bitOffset, uint8 lengthInBit);
 uint64 unpackBitsBE(uint8* target, int32 byteOffset, int32 bitOffset, uint8 lengthInBit);
 uint64 unpackBitsBE(uint8* target, int32 bitOffset, uint8 lengthInBit);
+
 //(un)pack functions for Little Endian(LE) targets
 uint32 packBitsLE(uint8* target, uint64 value, int32 byteOffset, int32 bitOffset, uint8 lengthInBit);
 uint32 packBitsLE(uint8* target, uint64 value, int32 bitOffset, uint8 lengthInBit);
@@ -74,8 +79,14 @@ void        EncodeStringLinkshell(int8* signature, int8* target);
 void        DecodeStringLinkshell(int8* signature, int8* target);
 int8*       EncodeStringSignature(int8* signature, int8* target);
 void        DecodeStringSignature(int8* signature, int8* target);
-void        PackSoultrapperName(std::string name, uint8 output[], uint8 size);
+void        PackSoultrapperName(std::string name, uint8 output[]);
+std::string UnpackSoultrapperName(uint8 input[]);
+
 std::string escape(std::string const& s);
+
+std::vector<std::string> split(std::string const& s, std::string const& delimiter);
+std::string trim(const std::string& str, const std::string& whitespace = " \t");
+look_t stringToLook(std::string str);
 
 // Float tools
 // https://stackoverflow.com/a/253874
@@ -85,5 +96,22 @@ bool definitelyGreaterThan(float a, float b);
 bool definitelyLessThan(float a, float b);
 
 void crash();
+
+class ScopeGuard
+{
+public:
+    ScopeGuard(std::function<void()> func)
+    : func(func)
+    {
+    }
+
+    ~ScopeGuard()
+    {
+        func();
+    }
+
+private:
+    std::function<void()> func;
+};
 
 #endif

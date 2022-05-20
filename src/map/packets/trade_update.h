@@ -22,16 +22,10 @@
 #ifndef _CTRADEUPDATEPACKET_H
 #define _CTRADEUPDATEPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 #include <string.h>
 
 #include "basic.h"
-
-/************************************************************************
- *																		*
- *																		*
- *																		*
- ************************************************************************/
 
 class CItem;
 

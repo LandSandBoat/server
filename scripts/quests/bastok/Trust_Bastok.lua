@@ -281,7 +281,7 @@ quest.sections =
                     local rank3 = player:getRank(player:getNation()) >= 3 and 1 or 0
 
                     if not player:hasSpell(xi.magic.spell.AYAME) then
-                        return quest:progressEvent(985, 0, 0, 0, trustMemoryAyame(player), 0, 0, 0, rank3):oncePerZone()
+                        return quest:event(985, 0, 0, 0, trustMemoryAyame(player), 0, 0, 0, rank3)
                     end
                 end,
             },
@@ -306,7 +306,7 @@ quest.sections =
                     local rank6 = player:getRank(player:getNation()) >= 6 and 1 or 0
 
                     if not player:hasSpell(xi.magic.spell.VOLKER) then
-                        return quest:progressEvent(986, 0, 0, 0, trustMemoryVolker(player), 0, 0, 0, rank6):oncePerZone()
+                        return quest:event(986, 0, 0, 0, trustMemoryVolker(player), 0, 0, 0, rank6)
                     end
                 end,
             },

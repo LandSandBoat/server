@@ -19,7 +19,7 @@
 ===========================================================================
 */
 
-#include "../../common/socket.h"
+#include "common/socket.h"
 
 #include <cstring>
 
@@ -28,8 +28,8 @@
 
 CCharJobsPacket::CCharJobsPacket(CCharEntity* PChar)
 {
-    this->type = 0x1B;
-    this->size = 0x34;
+    this->setType(0x1B);
+    this->setSize(0x68);
 
     ref<uint8>(0x04) = PChar->look.race;
 

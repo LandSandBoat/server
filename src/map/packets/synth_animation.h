@@ -22,7 +22,7 @@
 #ifndef _CSYNTHANIMATIONPACKET_H
 #define _CSYNTHANIMATIONPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 
@@ -40,12 +40,6 @@
 #define EFFECT_ICESYNTH       0x0015
 #define EFFECT_LIGHTSYNTH     0x0016
 #define EFFECT_DARKSYNTH      0x0017
-
-/************************************************************************
- *																		*
- *  																		*
- *																		*
- ************************************************************************/
 
 class CCharEntity;
 

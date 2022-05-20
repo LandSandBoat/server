@@ -334,7 +334,7 @@ xi.automaton.onUseManeuver = function(player, target, ability, action)
 
         local bonus = 1 + (pupLevel / 15) + target:getMod(xi.mod.MANEUVER_BONUS)
 
-        if target:getActiveManeuvers() == 3 then
+        if target:getActiveManeuverCount() == 3 then
             target:removeOldestManeuver()
         end
 

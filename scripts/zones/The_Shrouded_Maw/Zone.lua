@@ -1,7 +1,5 @@
 -----------------------------------
---
 -- Zone: The_Shrouded_Maw (10)
---
 -----------------------------------
 local ID = require("scripts/zones/The_Shrouded_Maw/IDs")
 require("scripts/globals/conquest")
@@ -14,12 +12,11 @@ end
 
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
+
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
         player:setPos(-300, -1.5, -220, 62)
     end
-    if (player:getCurrentMission(COP) == xi.mission.id.cop.DARKNESS_NAMED  and  player:getCharVar("PromathiaStatus") == 1) then
-        cs =2
-    end
+
     return cs
 end
 
@@ -34,9 +31,6 @@ zone_object.onEventUpdate = function(player, csid, option)
 end
 
 zone_object.onEventFinish = function(player, csid, option)
-    if (csid == 2) then
-        player:setCharVar("PromathiaStatus", 2)
-    end
 end
 
 return zone_object

@@ -16,7 +16,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local pFame = player:getFameLevel(BASTOK)
+    local pFame = player:getFameLevel(xi.quest.fame_area.BASTOK)
     local momTheAdventurer = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.MOM_THE_ADVENTURER)
     local questStatus = player:getCharVar("MomTheAdventurer_Event")
 
@@ -69,10 +69,10 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("MomTheAdventurer_Event", 0)
 
         if (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.MOM_THE_ADVENTURER) == QUEST_ACCEPTED) then
-            player:addFame(BASTOK, 20)
+            player:addFame(xi.quest.fame_area.BASTOK, 20)
             player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.MOM_THE_ADVENTURER)
         else
-            player:addFame(BASTOK, 8)
+            player:addFame(xi.quest.fame_area.BASTOK, 8)
         end
     elseif (csid == 235 and option == 0) then
         player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_SIGNPOST_MARKS_THE_SPOT)

@@ -19,14 +19,14 @@
 ===========================================================================
 */
 
-#include "../../common/socket.h"
+#include "common/socket.h"
 
 #include "char_equip.h"
 
 CEquipPacket::CEquipPacket(uint8 EquipSlot, uint8 SlotID, uint8 containerID)
 {
-    this->type = 0x50;
-    this->size = 0x04;
+    this->setType(0x50);
+    this->setSize(0x08);
 
     ref<uint8>(0x04) = EquipSlot;
     ref<uint8>(0x05) = SlotID;

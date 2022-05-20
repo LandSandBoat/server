@@ -12,20 +12,20 @@ zones[xi.zone.DYNAMIS_JEUNO] =
 {
     text =
     {
-        ITEM_CANNOT_BE_OBTAINED = 6383, -- You cannot obtain the <item>. Come back after sorting your inventory.
-        ITEM_OBTAINED           = 6389, -- Obtained: <item>.
-        GIL_OBTAINED            = 6390, -- Obtained <number> gil.
-        KEYITEM_OBTAINED        = 6392, -- Obtained key item: <keyitem>.
-        CARRIED_OVER_POINTS     = 7000, -- You have carried over <number> login point[/s].
-        LOGIN_CAMPAIGN_UNDERWAY = 7001, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
-        LOGIN_NUMBER            = 7002, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
-        CONQUEST_BASE           = 7062, -- Tallying conquest results...
-        DYNAMIS_TIME_BEGIN      = 7221, -- The sands of the <item> have begun to fall. You have <number> minutes (Earth time) remaining in Dynamis.
-        DYNAMIS_TIME_EXTEND     = 7222, -- our stay in Dynamis has been extended by <number> minute[/s].
-        DYNAMIS_TIME_UPDATE_1   = 7223, -- ou will be expelled from Dynamis in <number> [second/minute] (Earth time).
-        DYNAMIS_TIME_UPDATE_2   = 7224, -- ou will be expelled from Dynamis in <number> [seconds/minutes] (Earth time).
-        DYNAMIS_TIME_EXPIRED    = 7226, -- The sands of the hourglass have emptied...
-        OMINOUS_PRESENCE        = 7238, -- You feel an ominous presence, as if something might happen if you possessed <item>.
+        ITEM_CANNOT_BE_OBTAINED = 6384, -- You cannot obtain the <item>. Come back after sorting your inventory.
+        ITEM_OBTAINED           = 6390, -- Obtained: <item>.
+        GIL_OBTAINED            = 6391, -- Obtained <number> gil.
+        KEYITEM_OBTAINED        = 6393, -- Obtained key item: <keyitem>.
+        CARRIED_OVER_POINTS     = 7001, -- You have carried over <number> login point[/s].
+        LOGIN_CAMPAIGN_UNDERWAY = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
+        LOGIN_NUMBER            = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
+        CONQUEST_BASE           = 7063, -- Tallying conquest results...
+        DYNAMIS_TIME_BEGIN      = 7222, -- The sands of the <item> have begun to fall. You have <number> minutes (Earth time) remaining in Dynamis.
+        DYNAMIS_TIME_EXTEND     = 7223, -- our stay in Dynamis has been extended by <number> minute[/s].
+        DYNAMIS_TIME_UPDATE_1   = 7224, -- ou will be expelled from Dynamis in <number> [second/minute] (Earth time).
+        DYNAMIS_TIME_UPDATE_2   = 7225, -- ou will be expelled from Dynamis in <number> [seconds/minutes] (Earth time).
+        DYNAMIS_TIME_EXPIRED    = 7227, -- The sands of the hourglass have emptied...
+        OMINOUS_PRESENCE        = 7239, -- You feel an ominous presence, as if something might happen if you possessed <item>.
     },
     mob =
     {
@@ -40,24 +40,24 @@ zones[xi.zone.DYNAMIS_JEUNO] =
         REFILL_STATUE =
         {
             {
-                {mob = 17547295, eye = dynamis.eye.RED  }, -- Goblin_Replica
-                {mob = 17547296, eye = dynamis.eye.BLUE },
-                {mob = 17547297, eye = dynamis.eye.GREEN},
+                {mob = 17547295, eye = xi.dynamis.eye.RED  }, -- Goblin_Replica
+                {mob = 17547296, eye = xi.dynamis.eye.BLUE },
+                {mob = 17547297, eye = xi.dynamis.eye.GREEN},
             },
             {
-                {mob = 17547391, eye = dynamis.eye.RED  }, -- Goblin_Replica
-                {mob = 17547392, eye = dynamis.eye.BLUE },
-                {mob = 17547393, eye = dynamis.eye.GREEN},
+                {mob = 17547391, eye = xi.dynamis.eye.RED  }, -- Goblin_Replica
+                {mob = 17547392, eye = xi.dynamis.eye.BLUE },
+                {mob = 17547393, eye = xi.dynamis.eye.GREEN},
             },
             {
-                {mob = 17547421, eye = dynamis.eye.RED  }, -- Goblin_Replica
-                {mob = 17547422, eye = dynamis.eye.BLUE },
-                {mob = 17547423, eye = dynamis.eye.GREEN},
+                {mob = 17547421, eye = xi.dynamis.eye.RED  }, -- Goblin_Replica
+                {mob = 17547422, eye = xi.dynamis.eye.BLUE },
+                {mob = 17547423, eye = xi.dynamis.eye.GREEN},
             },
             {
-                {mob = 17547456, eye = dynamis.eye.RED  }, -- Goblin_Replica
-                {mob = 17547457, eye = dynamis.eye.BLUE },
-                {mob = 17547458, eye = dynamis.eye.GREEN},
+                {mob = 17547456, eye = xi.dynamis.eye.RED  }, -- Goblin_Replica
+                {mob = 17547457, eye = xi.dynamis.eye.BLUE },
+                {mob = 17547458, eye = xi.dynamis.eye.GREEN},
             },
         },
     },

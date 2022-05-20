@@ -19,8 +19,8 @@
 ===========================================================================
 */
 
-#include "../../common/logging.h"
-#include "../../common/timer.h"
+#include "common/logging.h"
+#include "common/timer.h"
 
 #include "../status_effect.h"
 #include "lua_statuseffect.h"
@@ -211,6 +211,11 @@ void CLuaStatusEffect::unsetFlag(uint32 flag)
     m_PLuaStatusEffect->UnsetFlag(flag);
 }
 
+uint16 CLuaStatusEffect::getIcon()
+{
+    return m_PLuaStatusEffect->GetIcon();
+}
+
 //======================================================//
 
 void CLuaStatusEffect::Register()
@@ -239,6 +244,7 @@ void CLuaStatusEffect::Register()
     SOL_REGISTER("getFlag", CLuaStatusEffect::getFlag);
     SOL_REGISTER("setFlag", CLuaStatusEffect::setFlag);
     SOL_REGISTER("unsetFlag", CLuaStatusEffect::unsetFlag);
+    SOL_REGISTER("getIcon", CLuaStatusEffect::getIcon);
 }
 
 std::ostream& operator<<(std::ostream& os, const CLuaStatusEffect& effect)

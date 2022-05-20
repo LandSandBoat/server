@@ -19,7 +19,7 @@
 ===========================================================================
 */
 
-#include "../../common/taskmgr.h"
+#include "common/taskmgr.h"
 
 #include "../ai/ai_container.h"
 #include "../utils/zoneutils.h"
@@ -88,6 +88,11 @@ bool CNpcEntity::IsUntargetable() const
     return (m_flags & 0x800) == 0x800;
 }
 
+bool CNpcEntity::IsTriggerable() const
+{
+    return m_triggerable;
+}
+
 bool CNpcEntity::isWideScannable()
 {
     return widescan == 1 && status == STATUS_TYPE::NORMAL && CBaseEntity::isWideScannable();
@@ -95,9 +100,11 @@ bool CNpcEntity::isWideScannable()
 
 void CNpcEntity::PostTick()
 {
-    if (loc.zone && updatemask)
+    std::chrono::steady_clock::time_point now = std::chrono::steady_clock::now();
+    if (loc.zone && updatemask && now > m_nextUpdateTimer)
     {
-        loc.zone->PushPacket(this, CHAR_INRANGE, new CEntityUpdatePacket(this, ENTITY_UPDATE, updatemask));
+        m_nextUpdateTimer = now + 250ms;
+        loc.zone->UpdateEntityPacket(this, ENTITY_UPDATE, updatemask);
         updatemask = 0;
     }
 }

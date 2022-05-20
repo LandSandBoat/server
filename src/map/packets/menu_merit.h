@@ -22,16 +22,10 @@
 #ifndef _CMENUMERITPACKET_H
 #define _CMENUMERITPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "../merit.h"
 #include "basic.h"
-
-/************************************************************************
- *																		*
- *  																		*
- *																		*
- ************************************************************************/
 
 class CCharEntity;
 

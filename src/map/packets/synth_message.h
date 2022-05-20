@@ -22,7 +22,7 @@
 #ifndef _CSYNTHMESSAGEPACKET_H
 #define _CSYNTHMESSAGEPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 
@@ -37,12 +37,6 @@ enum SYNTH_MESSAGE
     SYNTH_NOSKILL,
     SYNTH_CANCELRARE
 };
-
-/************************************************************************
- *																		*
- *  																		*
- *																		*
- ************************************************************************/
 
 class CCharEntity;
 

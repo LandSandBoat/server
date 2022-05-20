@@ -32,6 +32,7 @@
 #include "transport.h"
 #include "utils/guildutils.h"
 #include "utils/instanceutils.h"
+#include "utils/moduleutils.h"
 #include "utils/zoneutils.h"
 #include "vana_time.h"
 
@@ -71,13 +72,17 @@ int32 time_server(time_point tick, CTaskMgr::CTask* PTask)
     {
         if (tick > (lastVHourlyUpdate + 4800ms))
         {
-            zoneutils::ForEachZone([](CZone* PZone) {
+            // clang-format off
+            zoneutils::ForEachZone([](CZone* PZone)
+            {
                 luautils::OnGameHour(PZone);
-                PZone->ForEachChar([](CCharEntity* PChar) {
+                PZone->ForEachChar([](CCharEntity* PChar)
+                {
                     PChar->PLatentEffectContainer->CheckLatentsHours();
                     PChar->PLatentEffectContainer->CheckLatentsMoonPhase();
                 });
             });
+            // clang-format on
 
             lastVHourlyUpdate = tick;
         }
@@ -114,10 +119,16 @@ int32 time_server(time_point tick, CTaskMgr::CTask* PTask)
         TracyZoneScoped;
         if (tick > (lastVDailyUpdate + 4800ms))
         {
-            zoneutils::ForEachZone([](CZone* PZone) {
+            // clang-format off
+            zoneutils::ForEachZone([](CZone* PZone)
+            {
                 luautils::OnGameDay(PZone);
-                PZone->ForEachChar([](CCharEntity* PChar) { PChar->PLatentEffectContainer->CheckLatentsWeekDay(); });
+                PZone->ForEachChar([](CCharEntity* PChar)
+                {
+                    PChar->PLatentEffectContainer->CheckLatentsWeekDay();
+                });
             });
+            // clang-format on
 
             guildutils::UpdateGuildsStock();
             zoneutils::SavePlayTime();
@@ -133,12 +144,16 @@ int32 time_server(time_point tick, CTaskMgr::CTask* PTask)
 
         if ((VanadielTOTD == TIME_DAY) || (VanadielTOTD == TIME_DUSK) || (VanadielTOTD == TIME_NIGHT))
         {
-            zoneutils::ForEachZone([](CZone* PZone) {
-                PZone->ForEachChar([](CCharEntity* PChar) {
+            // clang-format off
+            zoneutils::ForEachZone([](CZone* PZone)
+            {
+                PZone->ForEachChar([](CCharEntity* PChar)
+                {
                     PChar->PLatentEffectContainer->CheckLatentsDay();
                     PChar->PLatentEffectContainer->CheckLatentsJobLevel();
                 });
             });
+            // clang-format on
         }
     }
 
@@ -147,7 +162,11 @@ int32 time_server(time_point tick, CTaskMgr::CTask* PTask)
 
     instanceutils::CheckInstance();
 
+    luautils::OnTimeServerTick();
+
     luautils::ReloadFilewatchList();
+
+    moduleutils::OnTimeServerTick();
 
     TracyFrameMark;
     return 0;

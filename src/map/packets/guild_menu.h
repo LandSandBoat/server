@@ -22,7 +22,7 @@
 #ifndef _CGUILDMENUPACKET_H
 #define _CGUILDMENUPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 
@@ -32,12 +32,6 @@ enum GUILDSTATUS
     GUILD_CLOSE   = 1,
     GUILD_HOLYDAY = 2
 };
-
-/************************************************************************
- *																		*
- *  																		*
- *																		*
- ************************************************************************/
 
 class CGuildMenuPacket : public CBasicPacket
 {

@@ -22,9 +22,87 @@
 #ifndef _MODULEUTILS_H
 #define _MODULEUTILS_H
 
+#include "common/logging.h"
+#include "../lua/luautils.h"
+
+#include <memory>
+
+extern std::unique_ptr<SqlConnection> sql;
+
+// Forward declare
+class CPPModule;
 namespace moduleutils
 {
-    void LoadModules();
+    void RegisterCPPModule(CPPModule* ptr);
+}
+
+class CPPModule
+{
+public:
+    CPPModule()
+    : lua(luautils::lua)
+    , sql(::sql)
+    {
+        moduleutils::RegisterCPPModule(this);
+    }
+
+    virtual ~CPPModule() = default;
+
+    // Required
+    virtual void OnInit() = 0;
+
+    // Optional
+    virtual void OnZoneTick(CZone* PZone){};
+    virtual void OnTimeServerTick(){};
+    virtual void OnCharZoneIn(CCharEntity* PChar){};
+    virtual void OnCharZoneOut(CCharEntity* PChar){};
+
+    template <typename T>
+    static T* Register()
+    {
+        return new T();
+    };
+
+protected:
+    sol::state&                     lua;
+    std::unique_ptr<SqlConnection>& sql;
+};
+
+#define REGISTER_CPP_MODULE(className) \
+    static CPPModule* classNamePtr = className::Register<className>();
+
+namespace moduleutils
+{
+    void RegisterCPPModule(CPPModule* ptr);
+
+    // Hooks for calling modules
+    void OnInit();
+    void OnZoneTick(CZone* PZone);
+    void OnTimeServerTick();
+    void OnCharZoneIn(CCharEntity* PChar);
+    void OnCharZoneOut(CCharEntity* PChar);
+
+    // The program has two "states":
+    // - Load-time: As all data is being loaded and init'd
+    // - Run-time: Once the main server tick starts
+    //
+    // There are multiple points where we'd like to override
+    // the functionality of our Lua scripts, but it's hard
+    // to determine when is the correct time to apply everything.
+    //
+    // So instead, we maintain a list of overrides specified by
+    // active modules, and try multiple times during load-time
+    // to apply them - looking for whether or not the cache
+    // entry they want to modify exists.
+    //
+    // When run-time starts, we will be left with a list of
+    // overrides that were either successfully or unsuccessfully
+    // applied, and we can warn the user if there have been any
+    // problems.
+
+    void LoadLuaModules();
+    void TryApplyLuaModules();
+    void ReportLuaModuleUsage();
 }; // namespace moduleutils
 
 #endif // _MODULEUTILS_H

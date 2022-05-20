@@ -22,11 +22,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #ifndef _CINSTANCELOADER_H
 #define _CINSTANCELOADER_H
 
-#include <future>
-
-#include "../common/cbasetypes.h"
-#include "../common/socket.h"
-#include "../common/sql.h"
+#include "common/cbasetypes.h"
+#include "common/socket.h"
 
 class CCharEntity;
 class CInstance;
@@ -43,7 +40,6 @@ private:
     CInstance*              instance;
     CZone*                  zone;
     CCharEntity*            requester;
-    Sql_t*                  SqlInstanceHandle;
 };
 
 #endif

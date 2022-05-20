@@ -22,15 +22,9 @@
 #ifndef _CTRADEITEMPACKET_H
 #define _CTRADEITEMPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
-
-/************************************************************************
- *																		*
- *																		*
- *																		*
- ************************************************************************/
 
 class CItem;
 

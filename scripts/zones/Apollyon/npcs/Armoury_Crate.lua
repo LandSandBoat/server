@@ -2,11 +2,11 @@
 -- Area: Apollyon
 --  NPC: Armoury Crate
 -----------------------------------
+local ID = require("scripts/zones/Apollyon/IDs")
 require("scripts/globals/titles")
 require("scripts/globals/quests")
 require("scripts/globals/limbus")
 require("scripts/globals/zone")
-local ID = require("scripts/zones/Apollyon/IDs")
 -----------------------------------
 local entity = {}
 
@@ -392,6 +392,8 @@ local loot =
             },
         },
     },
+
+    -- Apollyon: SW
     [1291] =
     {
         -- SW_Apollyon floor 1
@@ -562,6 +564,8 @@ local loot =
             },
         },
     },
+
+    -- Apollyon: NW
     [1290] =
     {
         -- NW_Apollyon floor 1
@@ -805,9 +809,10 @@ local loot =
             },
         },
     },
+
+    -- CS Apollyon
     [1294] =
     {
-        -- CS_Apollyon
         [1] =
         {
             {
@@ -839,9 +844,11 @@ local loot =
             },
         },
     },
+
+    -- Central Apollyon
     [1296] =
     {
-        -- omega
+        -- Proto-Omega
         [1] =
         {
             {
@@ -888,30 +895,34 @@ end
 
 entity.onTrigger = function(player, npc)
     local battlefield = player:getBattlefield()
+
     if not battlefield then
         return
     end
+
     local crateID = npc:getID()
-    local model = npc:getModelId()
-    local X = npc:getXPos()
-    local Y = npc:getYPos()
-    local Z = npc:getZPos()
-    local bfid = battlefield:getID()
-    local hold = false
+    local model   = npc:getModelId()
+    local X       = npc:getXPos()
+    local Y       = npc:getYPos()
+    local Z       = npc:getZPos()
+    local bfid    = battlefield:getID()
+    local hold    = false
+
     if npc:getLocalVar("open") == 0 then
         switch (bfid): caseof
         {
-            [1290] = function() -- NW Apollyon Crate Handling
+            -- NW Apollyon Crate Handling
+            [1290] = function()
                 if crateID ~= ID.npc.APOLLYON_NW_CRATE[5] then
                     for i = 1, 4 do
                         for j = 1, 5 do
                             if crateID == ID.npc.APOLLYON_NW_CRATE[i][j] then
                                 if model == 960 then
-                                    xi.battlefield.HealPlayers(battlefield)
+                                    xi.battlefield.HealPlayers(battlefield) -- HP/MP Chest.
                                 elseif model == 961 then
-                                    xi.limbus.handleLootRolls(battlefield, loot[bfid][i], nil, npc)
+                                    xi.limbus.handleLootRolls(battlefield, loot[bfid][i], nil, npc) -- Item Chest.
                                 elseif model == 962 then
-                                    xi.limbus.extendTimeLimit(battlefield, 5, xi.zone.APOLLYON)
+                                    xi.limbus.extendTimeLimit(battlefield, 5, xi.zone.APOLLYON) -- Time chest.
                                 end
                             end
                         end
@@ -922,42 +933,50 @@ entity.onTrigger = function(player, npc)
                     battlefield:setLocalVar("lootSeen", 1)
                 end
             end,
-            [1291] = function() -- SW Apollyon Crate Handling
+
+            -- SW Apollyon Crate Handling
+            [1291] = function()
                 if crateID ~= ID.npc.APOLLYON_SW_CRATE[4] then
                     for i = 1, 3 do
+                        -- Floor 3
                         if i == 3 then
                             local mimicSpawned = battlefield:getLocalVar("mimicSpawned")
+
                             if mimicSpawned ~= 7 then
-                                local timePH = battlefield:getLocalVar("timePH")
+                                local timePH    = battlefield:getLocalVar("timePH")
                                 local restorePH = battlefield:getLocalVar("restorePH")
-                                local itemPH = battlefield:getLocalVar("itemPH")
+                                local itemPH    = battlefield:getLocalVar("itemPH")
+
                                 for j = 0, 9 do
-                                    if crateID == ID.npc.APOLLYON_SW_CRATE[i]+j then
+                                    if crateID == ID.npc.APOLLYON_SW_CRATE[i] + j then
                                         if crateID == restorePH then
-                                            xi.battlefield.HealPlayers(battlefield)
+                                            xi.battlefield.HealPlayers(battlefield) -- HP/MP Chest.
                                         elseif crateID == itemPH then
-                                            xi.limbus.handleLootRolls(battlefield, loot[bfid][i], nil, npc)
+                                            xi.limbus.handleLootRolls(battlefield, loot[bfid][i], nil, npc) -- Item Chest.
                                         elseif crateID == timePH then
-                                            xi.limbus.extendTimeLimit(battlefield, 5, xi.zone.APOLLYON)
+                                            xi.limbus.extendTimeLimit(battlefield, 5, xi.zone.APOLLYON) -- Time chest.
+
+                                        -- This is done becouse we use only 3 mobs in DB, instead of the actual number of mobs in the floor.
+                                        -- So we cycle through them. Shut up. Don't ask questions, it makes TOTAL sense.
                                         else
                                             if mimicSpawned == 0 or mimicSpawned == 2 or mimicSpawned == 4 or mimicSpawned == 6 then
                                                 npc:setStatus(xi.status.DISAPPEAR)
-                                                battlefield:setLocalVar("mimicSpawned", mimicSpawned+1)
+                                                battlefield:setLocalVar("mimicSpawned", mimicSpawned + 1)
                                                 GetMobByID(ID.mob.APOLLYON_SW_MOB[3]):setSpawn(X, Y, Z)
                                                 SpawnMob(ID.mob.APOLLYON_SW_MOB[3]):setPos(X, Y, Z)
                                                 GetMobByID(ID.mob.APOLLYON_SW_MOB[3]):updateClaim(player)
                                             elseif mimicSpawned == 1 or mimicSpawned == 5 then
                                                 npc:setStatus(xi.status.DISAPPEAR)
-                                                battlefield:setLocalVar("mimicSpawned", mimicSpawned+2)
-                                                GetMobByID(ID.mob.APOLLYON_SW_MOB[3]+1):setSpawn(X, Y, Z)
-                                                SpawnMob(ID.mob.APOLLYON_SW_MOB[3]+1):setPos(X, Y, Z)
-                                                GetMobByID(ID.mob.APOLLYON_SW_MOB[3]+1):updateClaim(player)
+                                                battlefield:setLocalVar("mimicSpawned", mimicSpawned + 2)
+                                                GetMobByID(ID.mob.APOLLYON_SW_MOB[3] + 1):setSpawn(X, Y, Z)
+                                                SpawnMob(ID.mob.APOLLYON_SW_MOB[3] + 1):setPos(X, Y, Z)
+                                                GetMobByID(ID.mob.APOLLYON_SW_MOB[3] + 1):updateClaim(player)
                                             elseif mimicSpawned == 3 then
                                                 npc:setStatus(xi.status.DISAPPEAR)
-                                                battlefield:setLocalVar("mimicSpawned", mimicSpawned+4)
-                                                GetMobByID(ID.mob.APOLLYON_SW_MOB[3]+2):setSpawn(X, Y, Z)
-                                                SpawnMob(ID.mob.APOLLYON_SW_MOB[3]+2):setPos(X, Y, Z)
-                                                GetMobByID(ID.mob.APOLLYON_SW_MOB[3]+2):updateClaim(player)
+                                                battlefield:setLocalVar("mimicSpawned", mimicSpawned + 4)
+                                                GetMobByID(ID.mob.APOLLYON_SW_MOB[3] + 2):setSpawn(X, Y, Z)
+                                                SpawnMob(ID.mob.APOLLYON_SW_MOB[3] + 2):setPos(X, Y, Z)
+                                                GetMobByID(ID.mob.APOLLYON_SW_MOB[3] + 2):updateClaim(player)
                                             end
                                         end
                                     end
@@ -965,61 +984,79 @@ entity.onTrigger = function(player, npc)
                             else
                                 hold = true
                             end
+                        -- Floors 1 and 2
                         else
                             for j = 0, 2 do
-                                if crateID == ID.npc.APOLLYON_SW_CRATE[i]+j then
-                                    if j ~= 0 then GetNPCByID(ID.npc.APOLLYON_SW_CRATE[i]):setStatus(xi.status.DISAPPEAR) end
-                                    if j ~= 1 then GetNPCByID(ID.npc.APOLLYON_SW_CRATE[i]+1):setStatus(xi.status.DISAPPEAR) end
-                                    if j ~= 2 then GetNPCByID(ID.npc.APOLLYON_SW_CRATE[i]+2):setStatus(xi.status.DISAPPEAR) end
+                                if crateID == ID.npc.APOLLYON_SW_CRATE[i] + j then
+                                    if j ~= 0 then
+                                        GetNPCByID(ID.npc.APOLLYON_SW_CRATE[i]):setStatus(xi.status.DISAPPEAR)
+                                    end
+
+                                    if j ~= 1 then
+                                        GetNPCByID(ID.npc.APOLLYON_SW_CRATE[i] + 1):setStatus(xi.status.DISAPPEAR)
+                                    end
+
+                                    if j ~= 2 then
+                                        GetNPCByID(ID.npc.APOLLYON_SW_CRATE[i] + 2):setStatus(xi.status.DISAPPEAR)
+                                    end
+
                                     if model == 960 then
-                                        xi.battlefield.HealPlayers(battlefield)
+                                        xi.battlefield.HealPlayers(battlefield) -- HP/MP Chest.
                                     elseif model == 961 then
-                                        xi.limbus.handleLootRolls(battlefield, loot[bfid][i], nil, npc)
+                                        xi.limbus.handleLootRolls(battlefield, loot[bfid][i], nil, npc) -- Item Chest.
                                     elseif model == 962 then
-                                        xi.limbus.extendTimeLimit(battlefield, 5, xi.zone.APOLLYON)
+                                        xi.limbus.extendTimeLimit(battlefield, 5, xi.zone.APOLLYON) -- Time chest.
                                     end
                                 end
                             end
                         end
                     end
+
+                -- Floor 4 (Last)
                 else
                     xi.limbus.handleLootRolls(battlefield, loot[bfid][4], nil, npc)
                     battlefield:setLocalVar("cutsceneTimer", 10)
                     battlefield:setLocalVar("lootSeen", 1)
                 end
             end,
-            [1292] = function() -- NE Apollyon Crate Handling
+
+            -- NE Apollyon Crate Handling
+            [1292] = function()
+                -- Floors 1 to 4
                 if crateID ~= ID.npc.APOLLYON_NE_CRATE[5] then
                     for i = 1, 4 do
                         for j = 1, 5 do
                             if crateID == ID.npc.APOLLYON_NE_CRATE[i][j] then
                                 if model == 960 then
-                                    xi.battlefield.HealPlayers(battlefield)
+                                    xi.battlefield.HealPlayers(battlefield) -- HP/MP Chest.
                                 elseif model == 961 then
-                                    xi.limbus.handleLootRolls(battlefield, loot[bfid][i], nil, npc)
+                                    xi.limbus.handleLootRolls(battlefield, loot[bfid][i], nil, npc) -- Item Chest.
                                 elseif model == 962 then
-                                    xi.limbus.extendTimeLimit(battlefield, 5, xi.zone.APOLLYON)
+                                    xi.limbus.extendTimeLimit(battlefield, 5, xi.zone.APOLLYON) -- Time chest.
                                 end
                             end
                         end
                     end
+                -- Floor 5 (Last)
                 else
                     xi.limbus.handleLootRolls(battlefield, loot[bfid][5], nil, npc)
                     battlefield:setLocalVar("cutsceneTimer", 10)
                     battlefield:setLocalVar("lootSeen", 1)
                 end
             end,
-            [1293] = function() -- SE Apollyon Crate Handling
+
+            -- SE Apollyon Crate Handling
+            [1293] = function()
                 if crateID ~= ID.npc.APOLLYON_SE_CRATE[4] then
                     for i = 1, 3 do
                         for j = 0, 2 do
                             if crateID == ID.npc.APOLLYON_SE_CRATE[i]+j then
                                 if model == 960 then
-                                    xi.battlefield.HealPlayers(battlefield)
+                                    xi.battlefield.HealPlayers(battlefield) -- HP/MP Chest.
                                 elseif model == 961 then
-                                    xi.limbus.handleLootRolls(battlefield, loot[bfid][i], nil, npc)
+                                    xi.limbus.handleLootRolls(battlefield, loot[bfid][i], nil, npc) -- Item Chest.
                                 elseif model == 962 then
-                                    xi.limbus.extendTimeLimit(battlefield, 10, xi.zone.APOLLYON)
+                                    xi.limbus.extendTimeLimit(battlefield, 10, xi.zone.APOLLYON) -- Time chest.
                                 end
                             end
                         end
@@ -1033,7 +1070,9 @@ entity.onTrigger = function(player, npc)
                     battlefield:setLocalVar("lootSeen", 1)
                 end
             end,
-            [1294] = function() -- CS Apollyon Crate Handling
+
+            -- CS Apollyon Crate Handling
+            [1294] = function()
                 if crateID ~= ID.npc.APOLLYON_CS_CRATE then
                     xi.limbus.extendTimeLimit(battlefield, 5, xi.zone.APOLLYON)
                 else
@@ -1042,12 +1081,15 @@ entity.onTrigger = function(player, npc)
                     battlefield:setLocalVar("lootSeen", 1)
                 end
             end,
-            [1296] = function() -- Central Apollyon Crate Handling
+
+            -- Central Apollyon Crate Handling
+            [1296] = function()
                 xi.limbus.handleLootRolls(battlefield, loot[bfid][1], nil, npc)
                 battlefield:setLocalVar("cutsceneTimer", 10)
                 battlefield:setLocalVar("lootSeen", 1)
             end,
         }
+
         if not hold then
             npc:entityAnimationPacket("open")
             npc:setLocalVar("open", 1)

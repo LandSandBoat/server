@@ -19,7 +19,7 @@
 ===========================================================================
 */
 
-#include "../../common/socket.h"
+#include "common/socket.h"
 
 #include <cstring>
 
@@ -30,8 +30,8 @@ CEventUpdateStringPacket::CEventUpdateStringPacket(const std::string& string0, c
                                                    const std::string& string3, uint32 param0, uint32 param1, uint32 param2, uint32 param3, uint32 param4,
                                                    uint32 param5, uint32 param6, uint32 param7, uint32 param8)
 {
-    this->type = 0x5D;
-    this->size = 0x2C;
+    this->setType(0x5D);
+    this->setSize(0x58);
 
     ref<uint32>(0x04) = param0;
     ref<uint32>(0x08) = param1;

@@ -19,9 +19,9 @@
 ===========================================================================
 */
 
-#include "../../common/logging.h"
-#include "../../common/socket.h"
-#include "../../common/utils.h"
+#include "common/logging.h"
+#include "common/socket.h"
+#include "common/utils.h"
 
 #include <cstring>
 
@@ -36,18 +36,18 @@
 #include "../weapon_skill.h"
 
 /************************************************************************
- *																		*
- *  ActionTargetID содержит ID цели, над которой производится действие,	*
- *  Если над целью необходимо произвести несколько действий, то в		*
- *  последующих структурах это поле оставляется пустым (равным нулю),	*
- *  это говорит о том, что это действие над ранее указанной целью		*
- *																		*
- ************************************************************************/
+ *
+ * ActionTargetID Contains the target ID on which the action is performed
+ * If you need to make several actions, then in
+ * Subsequent structures this field is left blank (equal to zero),
+ * This suggests that this action on the previously specified purpose
+ *
+ *************************************************************************/
 
 CActionPacket::CActionPacket(action_t& action)
 {
-    this->type = 0x28;
-    this->size = 0x12;
+    this->setType(0x28);
+    this->setSize(0x24);
 
     ref<uint32>(0x05) = action.id;
 
@@ -66,7 +66,7 @@ CActionPacket::CActionPacket(action_t& action)
         break;
         case ACTION_WEAPONSKILL_FINISH:
         {
-            packBitsBE(data, action.actionid, 86, 10);
+            packBitsBE(data, action.actionid, 86, 16);
         }
         break;
         case ACTION_JOBABILITY_START:
@@ -78,6 +78,11 @@ CActionPacket::CActionPacket(action_t& action)
         {
             packBitsBE(data, action.actionid, 86, 10);
             packBitsBE(data, action.recast, 118, 10);
+        }
+        break;
+        case ACTION_RUN_WARD_EFFUSION:
+        {
+            packBitsBE(data, action.actionid, 86, 10);
         }
         break;
         case ACTION_WEAPONSKILL_START:
@@ -349,7 +354,7 @@ CActionPacket::CActionPacket(action_t& action)
             bitOffset = packBitsBE(data, static_cast<uint64>(target.speceffect), bitOffset, 7); // specialEffect
             bitOffset = packBitsBE(data, target.knockback, bitOffset, 3);                       // knockback amount (mobskill only)
             bitOffset = packBitsBE(data, target.param, bitOffset, 17);                          // параметр сообщения (урон)
-            bitOffset = packBitsBE(data, target.messageID, bitOffset, 10);                      // сообщение
+            bitOffset = packBitsBE(data, target.messageID, bitOffset, 10);                      // message
             bitOffset += 31;
 
             if (target.additionalEffect != SUBEFFECT_NONE)
@@ -384,7 +389,8 @@ CActionPacket::CActionPacket(action_t& action)
     ref<uint8>(0x09) = targets;
     uint8 WorkSize   = ((bitOffset >> 3) + (bitOffset % 8 != 0));
 
-    this->size = ((((WorkSize + 7) >> 1) + 1) & -2);
+    // TODO: Verify and improve math on this
+    this->setSize(((((WorkSize + 7) >> 1) + 1) & -2) * 2);
 
     ref<uint8>(0x04) = WorkSize;
 }

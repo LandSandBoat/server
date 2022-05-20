@@ -22,23 +22,25 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #ifndef _CHARENTITY_H
 #define _CHARENTITY_H
 
-#include "../../common/cbasetypes.h"
-#include "../../common/mmo.h"
+#include "common/cbasetypes.h"
+#include "common/mmo.h"
 #include "../event_info.h"
+#include "../packets/char.h"
+#include "../packets/entity_update.h"
 
 #include <bitset>
 #include <deque>
 #include <map>
-#include <mutex>
 #include <unordered_map>
 
 #include "battleentity.h"
 #include "petentity.h"
 
-#define MAX_QUESTAREA   11
-#define MAX_QUESTID     256
-#define MAX_MISSIONAREA 15
-#define MAX_MISSIONID   851
+#define MAX_QUESTAREA    11
+#define MAX_QUESTID      256
+#define MAX_MISSIONAREA  15
+#define MAX_MISSIONID    851
+#define MAX_ABYSSEAZONES 9
 
 class CItemWeapon;
 class CTrustEntity;
@@ -53,13 +55,13 @@ struct jobs_t
 
 struct profile_t
 {
-    uint8      nation;     // your nation alligeance
-    uint8      mhflag;     // флаг выхода из MogHouse
-    uint16     title;      // звание
-    uint16     fame[15];   // известность
-    uint8      rank[3];    // рагн в трех государствах
-    uint16     rankpoints; // очки ранга в трех государствах
-    location_t home_point; // точка возрождения персонажа
+    uint8      nation;     // Your Nation Allegiance.
+    uint8      mhflag;     // Flag of exit from MOGHOUSE
+    uint16     title;      // rank
+    uint16     fame[15];   // Fame
+    uint8      rank[3];    // RAGN in three states
+    uint16     rankpoints; // rank glasses in three states
+    location_t home_point; // Renaissance point character
     uint8      campaign_allegiance;
     uint8      unity_leader;
 };
@@ -94,6 +96,7 @@ struct Teleport_t
     uint32      campaignWindy;
     Telepoint_t homepoint;
     Telepoint_t survival;
+    uint8       abysseaConflux[MAX_ABYSSEAZONES];
 };
 
 struct PetInfo_t
@@ -201,8 +204,10 @@ typedef std::vector<EntityID_t>        BazaarList_t;
 class CCharEntity : public CBattleEntity
 {
 public:
-    jobs_t     jobs;       // доступрые профессии персонажа
-    keyitems_t keys;       // таблица ключевых предметов
+    uint32     accid; // Account ID associated with the character.
+
+    jobs_t     jobs;       // Available Character professions
+    keyitems_t keys;       // Table key objects
 
     EventPrep* eventPreparation;      // Information about a potential upcoming event
     EventInfo* currentEvent;          // The currently ongoing event playing for the player
@@ -212,8 +217,9 @@ public:
 
     skills_t   RealSkills; // структура всех реальных умений персонажа, с точностью до 0.1 и не ограниченных уровнем
 
-    nameflags_t nameflags;           // флаги перед именем персонажа
+    nameflags_t nameflags;           // Flags in front of the character's name
     nameflags_t menuConfigFlags;     // These flags are used for MenuConfig packets. Some nameflags values are duplicated.
+    uint64      chatFilterFlags;     // Chat filter flags, raw object bytes from incoming packet
     uint32      lastOnline{ 0 };     // UTC Unix Timestamp of the last time char zoned or logged out
     bool        isNewPlayer() const; // Checks if new player bit is unset.
 
@@ -229,14 +235,14 @@ public:
     uint8      equipLoc[18];        // ContainerID where equipment is
     uint16     styleItems[16];      // Item IDs for items that are style locked.
 
-    uint8             m_ZonesList[36];        // список посещенных персонажем зон
-    std::bitset<1024> m_SpellList;            // список изученных заклинаний
-    uint8             m_TitleList[94];        // список заслуженных завний
-    uint8             m_Abilities[62];        // список текущих способностей
-    uint8             m_LearnedAbilities[49]; // learnable abilities (corsair rolls)
-    std::bitset<49>   m_LearnedWeaponskills;  // learnable weaponskills
-    uint8             m_TraitList[16];        // список постянно активных способностей в виде битовой маски
-    uint8             m_PetCommands[32];      // список доступных команд питомцу
+    uint8             m_ZonesList[36];        // List of visited zone character
+    std::bitset<1024> m_SpellList;            // List of studied spells
+    uint8             m_TitleList[143];       // List of obtained titles
+    uint8             m_Abilities[62];        // List of current abilities
+    uint8             m_LearnedAbilities[49]; // LearnableAbilities (corsairRolls)
+    std::bitset<50>   m_LearnedWeaponskills;  // LearnableWeaponskills
+    uint8             m_TraitList[16];        // List of advance active abilities in the form of a bit mask
+    uint8             m_PetCommands[32];      // List of available pet commands
     uint8             m_WeaponSkills[32];
     questlog_t        m_questLog[MAX_QUESTAREA];     // список всех квестов
     missionlog_t      m_missionLog[MAX_MISSIONAREA]; // список миссий
@@ -255,20 +261,24 @@ public:
     CAutomatonEntity*     PAutomaton;            // Automaton statistics
 
     std::vector<CTrustEntity*> PTrusts; // Active trusts
+
     template <typename F, typename... Args>
     void ForPartyWithTrusts(F func, Args&&... args)
     {
         if (PParty)
         {
-            for (auto PMember : PParty->members)
+            for (auto* PMember : PParty->members)
             {
                 func(PMember, std::forward<Args>(args)...);
             }
-            for (auto PMember : PParty->members)
+            for (auto* PMember : PParty->members)
             {
-                for (auto PTrust : static_cast<CCharEntity*>(PMember)->PTrusts)
+                if (auto* PCharMember = dynamic_cast<CCharEntity*>(PMember))
                 {
-                    func(PTrust, std::forward<Args>(args)...);
+                    for (auto* PTrust : PCharMember->PTrusts)
+                    {
+                        func(PTrust, std::forward<Args>(args)...);
+                    }
                 }
             }
         }
@@ -297,15 +307,17 @@ public:
 
     uint8 GetGender(); // узнаем пол персонажа
 
-    void          clearPacketList();                         // отчистка PacketList
-    void          pushPacket(CBasicPacket*);                 // добавление копии пакета в PacketList
-    void          pushPacket(std::unique_ptr<CBasicPacket>); // push packet to packet list
-    bool          isPacketListEmpty();                       // проверка размера PacketList
-    CBasicPacket* popPacket();                               // получение первого пакета из PacketList
-    PacketList_t  getPacketList();                           // returns a COPY of packet list
-    size_t        getPacketCount();
-    void          erasePackets(uint8 num); // erase num elements from front of packet list
-    virtual void  HandleErrorMessage(std::unique_ptr<CBasicPacket>&) override;
+    void          clearPacketList();                                                             // отчистка PacketList
+    void          pushPacket(CBasicPacket*);                                                     // добавление копии пакета в PacketList
+    void          pushPacket(std::unique_ptr<CBasicPacket>);                                     // push packet to packet list
+    void          updateCharPacket(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask);     // Push or update a char packet
+    void          updateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 updatemask); // Push or update an entity update packet
+    bool          isPacketListEmpty();                                                           // проверка размера PacketList
+    CBasicPacket* popPacket();                                                                   // получение первого пакета из PacketList
+    PacketList_t  getPacketList();                                                               // returns a COPY of packet list
+    size_t        getPacketCount();                                                              //
+    void          erasePackets(uint8 num);                                                       // erase num elements from front of packet list
+    virtual void  HandleErrorMessage(std::unique_ptr<CBasicPacket>&) override;                   //
 
     CLinkshell*    PLinkshell1; // linkshell, в которой общается персонаж
     CLinkshell*    PLinkshell2; // linkshell 2
@@ -350,8 +362,11 @@ public:
 
     uint8      m_hasTractor;     // checks if player has tractor already
     uint8      m_hasRaise;       // checks if player has raise already
+    uint8      m_weaknessLvl;    // tracks if the player was previously weakend
+    bool       m_hasArise;       // checks if the white magic spell arise was cast on the player and a re-raise effect should be applied
     uint8      m_hasAutoTarget;  // возможность использования AutoTarget функции
-    position_t m_StartActionPos; // позиция начала действия (использование предмета, начало стрельбы, позиция tractor)
+    position_t m_StartActionPos; // action start position (item use, shooting start, tractor position)
+    position_t m_ActionOffsetPos; // action offset position from the action packet(currently only used for repositioning of luopans)
 
     location_t m_previousLocation;
 
@@ -359,6 +374,8 @@ public:
     uint32 m_SaveTime;
 
     uint32 m_LastYell;
+
+    time_point m_LeaderCreatedPartyTime; // Time that a party member joined and this player was leader.
 
     uint8 m_GMlevel;    // Level of the GM flag assigned to this character
     bool  m_isGMHidden; // GM Hidden flag to prevent player updates from being processed.
@@ -396,6 +413,10 @@ public:
     uint32 GetPlayTime(bool needUpdate = true); // Get playtime
 
     CItemEquipment* getEquip(SLOTTYPE slot);
+
+    CBasicPacket* PendingPositionPacket = nullptr;
+
+    bool requestedInfoSync = false;
 
     void ReloadPartyInc();
     void ReloadPartyDec();
@@ -449,15 +470,16 @@ public:
     virtual void           OnCastInterrupted(CMagicState&, action_t&, MSGBASIC_ID msg) override;
     virtual void           OnWeaponSkillFinished(CWeaponSkillState&, action_t&) override;
     virtual void           OnAbility(CAbilityState&, action_t&) override;
-    virtual void           OnRangedAttack(CRangeState&, action_t&);
+    virtual void           OnRangedAttack(CRangeState&, action_t&) override;
     virtual void           OnDeathTimer() override;
     virtual void           OnRaise() override;
+
     virtual void           OnItemFinish(CItemState&, action_t&);
 
     bool m_Locked; // Is the player locked in a cutscene
 
-    CCharEntity();  // constructor
-    ~CCharEntity(); // destructor
+    CCharEntity();
+    ~CCharEntity();
 
 protected:
     bool IsMobOwner(CBattleEntity* PTarget);
@@ -477,14 +499,19 @@ private:
     std::unique_ptr<CItemContainer> m_Wardrobe2;
     std::unique_ptr<CItemContainer> m_Wardrobe3;
     std::unique_ptr<CItemContainer> m_Wardrobe4;
+    std::unique_ptr<CItemContainer> m_Wardrobe5;
+    std::unique_ptr<CItemContainer> m_Wardrobe6;
+    std::unique_ptr<CItemContainer> m_Wardrobe7;
+    std::unique_ptr<CItemContainer> m_Wardrobe8;
+    std::unique_ptr<CItemContainer> m_RecycleBin;
 
     bool m_isStyleLocked;
     bool m_isBlockingAid;
     bool m_reloadParty;
 
-    PacketList_t PacketList; // the list of packets to be sent to the character during the next network cycle
-
-    std::mutex m_PacketListMutex;
+    PacketList_t PacketList;                                               // the list of packets to be sent to the character during the next network cycle
+    std::unordered_map<uint32, CCharPacket*> PendingCharPackets;           // Keep track of which char packets are queued up for this char, such that they can be updated
+    std::unordered_map<uint32, CEntityUpdatePacket*> PendingEntityPackets; // Keep track of which entity update packets are queued up for this char, such that they can be updated
 };
 
 #endif

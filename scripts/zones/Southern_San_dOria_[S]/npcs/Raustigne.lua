@@ -14,7 +14,7 @@ end
 entity.onTrigger = function(player, npc)
 
     if (player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.CLAWS_OF_THE_GRIFFON) == QUEST_COMPLETED and player:getCharVar("BoyAndTheBeast") == 0) then
-        if (player:getCurrentMission(WOTG) == xi.mission.id.wotg.CAIT_SITH or player:hasCompletedMission(xi.mission.log_id.WOTG, xi.mission.id.wotg.CAIT_SITH)) then
+        if (player:getCurrentMission(xi.mission.log_id.WOTG) == xi.mission.id.wotg.CAIT_SITH or player:hasCompletedMission(xi.mission.log_id.WOTG, xi.mission.id.wotg.CAIT_SITH)) then
             player:startEvent(55)
         end
     end

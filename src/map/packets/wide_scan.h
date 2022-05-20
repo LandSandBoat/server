@@ -22,7 +22,7 @@
 #ifndef _CWIDESCANPACKET_H
 #define _CWIDESCANPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 
@@ -31,12 +31,6 @@ enum WIDESCAN_STATUS
     WIDESCAN_BEGIN = 1,
     WIDESCAN_END   = 2
 };
-
-/************************************************************************
- *																		*
- *  																		*
- *																		*
- ************************************************************************/
 
 class CBaseEntity;
 class CCharEntity;

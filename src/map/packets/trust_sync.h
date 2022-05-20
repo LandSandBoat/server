@@ -22,15 +22,9 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #ifndef _CTRUSTSYNCPACKET_H
 #define _CTRUSTSYNCPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
-
-/************************************************************************
- *																		*
- *  																		*
- *																		*
- ************************************************************************/
 
 class CCharEntity;
 class CTrustEntity;

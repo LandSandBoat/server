@@ -21,7 +21,7 @@
 
 #include <cstring>
 
-#include "../../common/utils.h"
+#include "common/utils.h"
 #include "../ai/ai_container.h"
 #include "../ai/controllers/pet_controller.h"
 #include "../ai/helpers/pathfind.h"
@@ -44,7 +44,6 @@ CPetEntity::CPetEntity(PET_TYPE petType)
     m_EcoSystem      = ECOSYSTEM::UNCLASSIFIED;
     allegiance       = ALLEGIANCE_TYPE::PLAYER;
     m_MobSkillList   = 0;
-    m_HasSpellScript = 0;
     PAI = std::make_unique<CAIContainer>(this, std::make_unique<CPathFind>(this), std::make_unique<CPetController>(this), std::make_unique<CTargetFind>(this));
 }
 
@@ -130,12 +129,12 @@ WYVERN_TYPE CPetEntity::getWyvernType()
 
 void CPetEntity::PostTick()
 {
-    // NOTE: This is purposefully calling CBattleEntity's impl.
-    // TODO: Calling a grand-parent's impl. of an overrideden function is bad
     CBattleEntity::PostTick();
-    if (loc.zone && updatemask && status != STATUS_TYPE::DISAPPEAR)
+    std::chrono::steady_clock::time_point now = std::chrono::steady_clock::now();
+    if (loc.zone && updatemask && status != STATUS_TYPE::DISAPPEAR && now > m_nextUpdateTimer)
     {
-        loc.zone->PushPacket(this, CHAR_INRANGE, new CEntityUpdatePacket(this, ENTITY_UPDATE, updatemask));
+        m_nextUpdateTimer = now + 250ms;
+        loc.zone->UpdateEntityPacket(this, ENTITY_UPDATE, updatemask);
 
         if (PMaster && PMaster->PPet == this)
         {
@@ -149,7 +148,7 @@ void CPetEntity::PostTick()
 void CPetEntity::FadeOut()
 {
     CMobEntity::FadeOut();
-    loc.zone->PushPacket(this, CHAR_INRANGE, new CEntityUpdatePacket(this, ENTITY_DESPAWN, UPDATE_NONE));
+    loc.zone->UpdateEntityPacket(this, ENTITY_DESPAWN, UPDATE_NONE);
 }
 
 void CPetEntity::Die()

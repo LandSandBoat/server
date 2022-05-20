@@ -74,7 +74,7 @@ void Transport_Ship::setName(uint32 value) const
 
 void TransportZone_Town::updateShip() const
 {
-    this->ship.dock.zone->PushPacket(nullptr, CHAR_INZONE, new CEntityUpdatePacket(this->ship.npc, ENTITY_UPDATE, UPDATE_COMBAT));
+    this->ship.dock.zone->UpdateEntityPacket(this->ship.npc, ENTITY_UPDATE, UPDATE_COMBAT, true);
 }
 
 void TransportZone_Town::openDoor(bool sendPacket) const
@@ -83,7 +83,7 @@ void TransportZone_Town::openDoor(bool sendPacket) const
 
     if (sendPacket)
     {
-        this->ship.dock.zone->PushPacket(this->npcDoor, CHAR_INRANGE, new CEntityUpdatePacket(this->npcDoor, ENTITY_UPDATE, UPDATE_COMBAT));
+        this->ship.dock.zone->UpdateEntityPacket(this->npcDoor, ENTITY_UPDATE, UPDATE_COMBAT, true);
     }
 }
 
@@ -93,7 +93,7 @@ void TransportZone_Town::closeDoor(bool sendPacket) const
 
     if (sendPacket)
     {
-        this->ship.dock.zone->PushPacket(this->npcDoor, CHAR_INRANGE, new CEntityUpdatePacket(this->npcDoor, ENTITY_UPDATE, UPDATE_COMBAT));
+        this->ship.dock.zone->UpdateEntityPacket(this->npcDoor, ENTITY_UPDATE, UPDATE_COMBAT, true);
     }
 }
 
@@ -105,13 +105,13 @@ void TransportZone_Town::depart() const
 void Elevator_t::openDoor(CNpcEntity* npc) const
 {
     npc->animation = ANIMATION_OPEN_DOOR;
-    zoneutils::GetZone(this->zoneID)->PushPacket(npc, CHAR_INRANGE, new CEntityUpdatePacket(npc, ENTITY_SPAWN, UPDATE_ALL_MOB));
+    zoneutils::GetZone(this->zoneID)->UpdateEntityPacket(npc, ENTITY_SPAWN, UPDATE_ALL_MOB, true);
 }
 
 void Elevator_t::closeDoor(CNpcEntity* npc) const
 {
     npc->animation = ANIMATION_CLOSE_DOOR;
-    zoneutils::GetZone(this->zoneID)->PushPacket(npc, CHAR_INRANGE, new CEntityUpdatePacket(npc, ENTITY_SPAWN, UPDATE_ALL_MOB));
+    zoneutils::GetZone(this->zoneID)->UpdateEntityPacket(npc, ENTITY_SPAWN, UPDATE_ALL_MOB, true);
 }
 
 /************************************************************************
@@ -132,35 +132,35 @@ void CTransportHandler::InitializeTransport()
 
     char address[INET_ADDRSTRLEN];
     inet_ntop(AF_INET, &map_ip, address, INET_ADDRSTRLEN);
-    int32 ret = Sql_Query(SqlHandle, fmtQuery, map_ip.s_addr, address, map_port);
+    int32 ret = sql->Query(fmtQuery, map_ip.s_addr, address, map_port);
 
-    if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+    if (ret != SQL_ERROR && sql->NumRows() != 0)
     {
-        while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        while (sql->NextRow() == SQL_SUCCESS)
         {
             TransportZone_Town zoneTown;
 
-            zoneTown.ship.dock.zone = zoneutils::GetZone((Sql_GetUIntData(SqlHandle, 1) >> 12) & 0x0FFF);
+            zoneTown.ship.dock.zone = zoneutils::GetZone((sql->GetUIntData(1) >> 12) & 0x0FFF);
 
-            zoneTown.ship.dock.p.x        = Sql_GetFloatData(SqlHandle, 3);
-            zoneTown.ship.dock.p.y        = Sql_GetFloatData(SqlHandle, 4);
-            zoneTown.ship.dock.p.z        = Sql_GetFloatData(SqlHandle, 5);
-            zoneTown.ship.dock.p.rotation = (uint8)Sql_GetIntData(SqlHandle, 6);
-            zoneTown.ship.dock.boundary   = (uint16)Sql_GetIntData(SqlHandle, 7);
-            zoneTown.ship.dock.prevzone   = (uint8)Sql_GetIntData(SqlHandle, 8);
+            zoneTown.ship.dock.p.x        = sql->GetFloatData(3);
+            zoneTown.ship.dock.p.y        = sql->GetFloatData(4);
+            zoneTown.ship.dock.p.z        = sql->GetFloatData(5);
+            zoneTown.ship.dock.p.rotation = (uint8)sql->GetIntData(6);
+            zoneTown.ship.dock.boundary   = (uint16)sql->GetIntData(7);
+            zoneTown.ship.dock.prevzone   = (uint8)sql->GetIntData(8);
 
-            zoneTown.npcDoor  = zoneutils::GetEntity(Sql_GetUIntData(SqlHandle, 2), TYPE_NPC);
-            zoneTown.ship.npc = zoneutils::GetEntity(Sql_GetUIntData(SqlHandle, 1), TYPE_SHIP);
+            zoneTown.npcDoor  = zoneutils::GetEntity(sql->GetUIntData(2), TYPE_NPC);
+            zoneTown.ship.npc = zoneutils::GetEntity(sql->GetUIntData(1), TYPE_SHIP);
             zoneTown.ship.npc->name.resize(8);
 
-            zoneTown.ship.animationArrive = (uint8)Sql_GetIntData(SqlHandle, 9);
-            zoneTown.ship.animationDepart = (uint8)Sql_GetIntData(SqlHandle, 10);
+            zoneTown.ship.animationArrive = (uint8)sql->GetIntData(9);
+            zoneTown.ship.animationDepart = (uint8)sql->GetIntData(10);
 
-            zoneTown.ship.timeOffset      = (uint16)Sql_GetIntData(SqlHandle, 11);
-            zoneTown.ship.timeInterval    = (uint16)Sql_GetIntData(SqlHandle, 12);
-            zoneTown.ship.timeArriveDock  = (uint16)Sql_GetIntData(SqlHandle, 14);
-            zoneTown.ship.timeDepartDock  = zoneTown.ship.timeArriveDock + (uint16)Sql_GetIntData(SqlHandle, 13);
-            zoneTown.ship.timeVoyageStart = zoneTown.ship.timeDepartDock + (uint16)Sql_GetIntData(SqlHandle, 15) - 1;
+            zoneTown.ship.timeOffset      = (uint16)sql->GetIntData(11);
+            zoneTown.ship.timeInterval    = (uint16)sql->GetIntData(12);
+            zoneTown.ship.timeArriveDock  = (uint16)sql->GetIntData(14);
+            zoneTown.ship.timeDepartDock  = zoneTown.ship.timeArriveDock + (uint16)sql->GetIntData(13);
+            zoneTown.ship.timeVoyageStart = zoneTown.ship.timeDepartDock + (uint16)sql->GetIntData(15) - 1;
 
             zoneTown.ship.state = STATE_TRANSPORT_INIT;
             zoneTown.ship.setVisible(false);
@@ -168,17 +168,17 @@ void CTransportHandler::InitializeTransport()
 
             if (zoneTown.npcDoor == nullptr || zoneTown.ship.npc == nullptr)
             {
-                ShowError("Transport <%u>: transport or door not found", (uint8)Sql_GetIntData(SqlHandle, 0));
+                ShowError("Transport <%u>: transport or door not found", (uint8)sql->GetIntData(0));
                 continue;
             }
             if (zoneTown.ship.timeArriveDock < 10)
             {
-                ShowError("Transport <%u>: time_anim_arrive must be > 10", (uint8)Sql_GetIntData(SqlHandle, 0));
+                ShowError("Transport <%u>: time_anim_arrive must be > 10", (uint8)sql->GetIntData(0));
                 continue;
             }
             if (zoneTown.ship.timeInterval < zoneTown.ship.timeVoyageStart)
             {
-                ShowError("Transport <%u>: time_interval must be > time_anim_arrive + time_waiting + time_anim_depart", (uint8)Sql_GetIntData(SqlHandle, 0));
+                ShowError("Transport <%u>: time_interval must be > time_anim_arrive + time_waiting + time_anim_depart", (uint8)sql->GetIntData(0));
                 continue;
             }
 
@@ -191,25 +191,25 @@ void CTransportHandler::InitializeTransport()
                 zone_settings ON zone = zoneid WHERE \
                 IF(%d <> 0, '%s' = zoneip AND %d = zoneport, TRUE)";
 
-    ret = Sql_Query(SqlHandle, fmtQuery, map_ip.s_addr, address, map_port);
+    ret = sql->Query(fmtQuery, map_ip.s_addr, address, map_port);
 
-    if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+    if (ret != SQL_ERROR && sql->NumRows() != 0)
     {
-        while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        while (sql->NextRow() == SQL_SUCCESS)
         {
             TransportZone_Voyage voyageZone;
 
             voyageZone.voyageZone = nullptr;
-            voyageZone.voyageZone = zoneutils::GetZone((uint8)Sql_GetUIntData(SqlHandle, 0));
+            voyageZone.voyageZone = zoneutils::GetZone((uint8)sql->GetUIntData(0));
 
             if (voyageZone.voyageZone != nullptr && voyageZone.voyageZone->GetID() > 0)
             {
-                voyageZone.timeOffset   = (uint16)Sql_GetIntData(SqlHandle, 1);
-                voyageZone.timeInterval = (uint16)Sql_GetIntData(SqlHandle, 2);
+                voyageZone.timeOffset   = (uint16)sql->GetIntData(1);
+                voyageZone.timeInterval = (uint16)sql->GetIntData(2);
 
-                voyageZone.timeArriveDock  = (uint16)Sql_GetIntData(SqlHandle, 4);
-                voyageZone.timeDepartDock  = voyageZone.timeArriveDock + (uint16)Sql_GetIntData(SqlHandle, 3);
-                voyageZone.timeVoyageStart = voyageZone.timeDepartDock + (uint16)Sql_GetIntData(SqlHandle, 5);
+                voyageZone.timeArriveDock  = (uint16)sql->GetIntData(4);
+                voyageZone.timeDepartDock  = voyageZone.timeArriveDock + (uint16)sql->GetIntData(3);
+                voyageZone.timeVoyageStart = voyageZone.timeDepartDock + (uint16)sql->GetIntData(5);
 
                 voyageZone.state = STATE_TRANSPORTZONE_INIT;
 
@@ -217,7 +217,7 @@ void CTransportHandler::InitializeTransport()
             }
             else
             {
-                ShowError("TransportZone <%u>: zone not found", (uint8)Sql_GetIntData(SqlHandle, 0));
+                ShowError("TransportZone <%u>: zone not found", (uint8)sql->GetIntData(0));
             }
         }
     }
@@ -521,7 +521,7 @@ void CTransportHandler::startElevator(Elevator_t* elevator)
 
     ref<uint32>(&elevator->Elevator->name[0], 4) = CVanaTime::getInstance()->getVanaTime();
 
-    zoneutils::GetZone(elevator->zoneID)->PushPacket(nullptr, CHAR_INZONE, new CEntityUpdatePacket(elevator->Elevator, ENTITY_UPDATE, UPDATE_COMBAT));
+    zoneutils::GetZone(elevator->zoneID)->UpdateEntityPacket(elevator->Elevator, ENTITY_UPDATE, UPDATE_COMBAT, true);
 }
 
 /************************************************************************

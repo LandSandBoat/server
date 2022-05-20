@@ -2,8 +2,9 @@
 -- func: addmission <logID> <missionID> <player>
 -- desc: Adds a mission to the GM or target players log.
 -----------------------------------
-
 require("scripts/globals/missions")
+local logIdHelpers = require('scripts/globals/log_ids')
+-----------------------------------
 
 cmdprops =
 {
@@ -20,7 +21,7 @@ function onTrigger(player, logId, missionId, target)
 
     -- validate logId
     local logName
-    local logInfo = GetMissionLogInfo(logId)
+    local logInfo = logIdHelpers.getMissionLogInfo(logId)
     if (logInfo == nil) then
         error(player, "Invalid logID.")
         return

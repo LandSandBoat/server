@@ -22,7 +22,7 @@
 #ifndef _CCHATMESSAGEPACKET_H
 #define _CCHATMESSAGEPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 
@@ -63,12 +63,6 @@ enum CHAT_MESSAGE_TYPE
     MESSAGE_JP_ASSIST     = 34,
     MESSAGE_NA_ASSIST     = 35,
 };
-
-/************************************************************************
- *																		*
- *  																		*
- *																		*
- ************************************************************************/
 
 class CCharEntity;
 

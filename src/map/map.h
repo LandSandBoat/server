@@ -22,20 +22,20 @@
 #ifndef _MAP_H
 #define _MAP_H
 
-#include "../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
-#include "../common/blowfish.h"
-#include "../common/kernel.h"
-#include "../common/mmo.h"
-#include "../common/socket.h"
-#include "../common/sql.h"
-#include "../common/taskmgr.h"
-#include "../common/xirand.h"
+#include "common/blowfish.h"
+#include "common/kernel.h"
+#include "common/mmo.h"
+#include "common/socket.h"
+#include "common/sql.h"
+#include "common/taskmgr.h"
+#include "common/xirand.h"
 
 #include <list>
 #include <map>
 
-#include "commandhandler.h"
+#include "command_handler.h"
 #include "zone.h"
 
 enum SKILLUP_STYLE
@@ -56,8 +56,6 @@ enum SKILLUP_STYLE
 
 struct map_config_t
 {
-    uint32 buffer_size; // max size of recv buffer -> default 1800 bytes
-
     uint16 usMapPort; // port of map server      -> xxxxx
     uint32 uiMapIp;   // ip of map server        -> INADDR_ANY
 
@@ -164,21 +162,16 @@ struct map_config_t
 
 struct map_session_data_t
 {
-    uint32     client_addr;
-    uint16     client_port;
-    uint16     client_packet_id;   // id последнего пакета, пришедшего от клиента
-    uint16     server_packet_id;   // id последнего пакета, отправленного сервером
-    int8*      server_packet_data; // указатель на собранный пакет, который был ранее отправлен клиенту
-    size_t     server_packet_size; // размер пакета, который был ранее отправлен клиенту
-    time_t     last_update;        // time of last packet recv
-    blowfish_t blowfish;           // unique decypher keys
-    CCharEntity* PChar;            // game char
-    uint8        shuttingDown;     // prevents double session closing
-
-    map_session_data_t()
-    {
-        shuttingDown = 0;
-    }
+    uint32       client_addr        = 0;
+    uint16       client_port        = 0;
+    uint16       client_packet_id   = 0;        // id of the last packet that came from the client
+    uint16       server_packet_id   = 0;        // id of the last packet sent by the server
+    int8*        server_packet_data = nullptr;  // a pointer to the packet, which was previously sent to the client
+    size_t       server_packet_size = 0;        // the size of the packet that was previously sent to the client
+    time_t       last_update        = 0;        // time of last packet recv
+    blowfish_t   blowfish           = {};       // unique decypher keys
+    CCharEntity* PChar              = nullptr;  // game char
+    uint8        shuttingDown       = 0;        // prevents double session closing
 };
 
 extern map_config_t map_config;
@@ -186,8 +179,6 @@ extern uint32       map_amntplayers;
 extern int32        map_fd;
 
 static constexpr float server_tick_rate = 2.5f;
-
-extern thread_local Sql_t* SqlHandle;
 
 typedef std::map<uint64, map_session_data_t*> map_session_list_t;
 extern map_session_list_t                     map_session_list;
@@ -198,6 +189,8 @@ extern uint16  map_port;
 extern inline map_session_data_t* mapsession_getbyipp(uint64 ipp);
 extern inline map_session_data_t* mapsession_createsession(uint32 ip, uint16 port);
 
+extern std::unique_ptr<SqlConnection> sql;
+
 //=======================================================================
 
 int32 recv_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*); // main function to parse recv packets
@@ -205,7 +198,6 @@ int32 parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*
 int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*); // main function is building big packet
 
 void map_helpscreen(int32 flag);    // Map-Server Version Screen [venom]
-void map_versionscreen(int32 flag); // Map-Server Version Screen [venom]
 
 int32 map_config_read(const int8* cfgName); // Map-Server Config [venom]
 int32 map_config_default();

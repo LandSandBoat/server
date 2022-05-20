@@ -36,7 +36,7 @@ uint32 CUnityChat::getLeader() const
 
 void CUnityChat::AddMember(CCharEntity* PChar)
 {
-    Sql_Query(SqlHandle, "UPDATE accounts_sessions SET unitychat = %u WHERE charid = %u", this->getLeader(), PChar->id);
+    sql->Query("UPDATE accounts_sessions SET unitychat = %u WHERE charid = %u", this->getLeader(), PChar->id);
     PChar->PUnityChat = this;
     members.push_back(PChar);
 }
@@ -47,7 +47,7 @@ bool CUnityChat::DelMember(CCharEntity* PChar)
     {
         if (members.at(i) == PChar)
         {
-            Sql_Query(SqlHandle, "UPDATE accounts_sessions SET unitychat = 0 WHERE charid = %u", PChar->id);
+            sql->Query("UPDATE accounts_sessions SET unitychat = 0 WHERE charid = %u", PChar->id);
             PChar->PUnityChat = nullptr;
             members.erase(members.begin() + i);
             break;

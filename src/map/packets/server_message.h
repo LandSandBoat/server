@@ -22,16 +22,10 @@
 #ifndef _CSERVERMESSAGEPACKET_H
 #define _CSERVERMESSAGEPACKET_H
 
-#include "../../common/cbasetypes.h"
-#include "../../common/mmo.h"
+#include "common/cbasetypes.h"
+#include "common/mmo.h"
 
 #include "basic.h"
-
-/************************************************************************
- *																		*
- *  																		*
- *																		*
- ************************************************************************/
 
 class CServerMessagePacket : public CBasicPacket
 {

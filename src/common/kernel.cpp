@@ -19,11 +19,11 @@
 ===========================================================================
 */
 
-#include "../common/kernel.h"
-#include "../common/socket.h"
-#include "../common/taskmgr.h"
-#include "../common/timer.h"
-#include "../common/version.h"
+#include "common/kernel.h"
+#include "common/socket.h"
+#include "common/taskmgr.h"
+#include "common/timer.h"
+#include "common/version.h"
 
 #include "debug.h"
 #include "logging.h"
@@ -52,6 +52,11 @@ char** arg_v   = nullptr;
 
 char* SERVER_NAME = nullptr;
 char  SERVER_TYPE = XI_SERVER_NONE;
+
+std::array<std::unique_ptr<socket_data>, FD_SETSIZE> sessions;
+
+// This must be manually created
+std::unique_ptr<ConsoleService> gConsoleService;
 
 // Copyright (c) Athena Dev Teams
 // Added by Gabuzomeu
@@ -169,9 +174,14 @@ static void sig_proc(int sn)
         case SIGFPE:
             dump_backtrace();
             do_abort();
+#ifdef _WIN32
+#ifdef _DEBUG
             // Pass the signal to the system's default handler
             compat_signal(sn, SIG_DFL);
             raise(sn);
+#endif // _DEBUG
+#endif // _WIN32
+
             break;
 #ifndef _WIN32
         case SIGXFSZ:
@@ -258,6 +268,7 @@ int main(int argc, char** argv)
     socket_init();
 
     do_init(argc, argv);
+
     fd_set rfd;
     { // Main runtime cycle
         duration next;
@@ -269,7 +280,13 @@ int main(int argc, char** argv)
         }
     }
 
+    gConsoleService = nullptr;
+
     do_final(EXIT_SUCCESS);
+#ifdef _WIN32
+#ifdef _DEBUG
     return 0;
+#endif // _WIN32
+#endif // _DEBUG
 }
-#endif
+#endif // DEFINE_OWN_MAIN

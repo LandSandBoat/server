@@ -14,7 +14,7 @@
 ===========================================================================
 */
 
-#include "../../common/socket.h"
+#include "common/socket.h"
 
 #include "menu_jobpoints.h"
 
@@ -25,14 +25,14 @@
 CMenuJobPointsPacket::CMenuJobPointsPacket(CCharEntity* PChar)
 {
 #define PACKET_DATA_OFFSET 0x0C
-#define PACKET_DATA_SIZE   0x06 //Size in number of uint8
+#define PACKET_DATA_SIZE   0x06 // Size in number of uint8
 
-    this->type = 0x63;
-    this->size = 0x9C;
+    this->setType(0x63);
+    this->setSize(0x9C);
 
     JobPoints_t* PJobPoints = PChar->PJobPoints->GetAllJobPoints();
 
-    ref<uint8>(0x04) = 0x05; //JP Data Type
+    ref<uint8>(0x04) = 0x05; // JP Data Type
     ref<uint8>(0x06) = 0x98;
 
     ref<uint8>(0x08) = 0x1; // 0x0 for no access, 0x1 for access

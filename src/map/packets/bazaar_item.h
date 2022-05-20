@@ -22,15 +22,9 @@
 #ifndef _CBAZAARITEMPACKET_H
 #define _CBAZAARITEMPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
-
-/************************************************************************
- *																		*
- *  																		*
- *																		*
- ************************************************************************/
 
 class CItem;
 

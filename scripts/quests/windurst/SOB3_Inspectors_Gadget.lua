@@ -16,7 +16,7 @@ local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.INSPECTOR
 quest.reward =
 {
     fame     = 10,
-    fameArea = WINDURST,
+    fameArea = xi.quest.fame_area.WINDURST,
     item     = xi.items.HEKO_OBI,
     title    = xi.title.FAKE_MOUSTACHED_INVESTIGATOR,
 }
@@ -27,7 +27,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.KNOW_ONE_S_ONIONS)
+                player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.KNOW_ONES_ONIONS)
         end,
 
         [xi.zone.PORT_WINDURST] =
@@ -37,7 +37,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if
                         player:getMainLvl() >= 5 and
-                        player:getFameLevel(WINDURST) >= 2 and
+                        player:getFameLevel(xi.quest.fame_area.WINDURST) >= 2 and
                         not quest:getMustZone(player)
                     then
                         return quest:progressEvent(413) -- Quest starting event.

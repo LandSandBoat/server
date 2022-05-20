@@ -42,7 +42,7 @@ end
 
 zone_object.onEventFinish = function(player, csid, option)
     if csid == 100 then
-        npcUtil.completeQuest(player, BASTOK, xi.quest.id.bastok.THE_TALEKEEPER_S_GIFT, {item = 12638, fame = 60, title = xi.title.PARAGON_OF_WARRIOR_EXCELLENCE, var = {"theTalekeeperGiftCS", "theTalekeepersGiftKilledNM"}})
+        npcUtil.completeQuest(player, xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_TALEKEEPER_S_GIFT, {item = 12638, fame = 60, title = xi.title.PARAGON_OF_WARRIOR_EXCELLENCE, var = {"theTalekeeperGiftCS", "theTalekeepersGiftKilledNM"}})
     end
 end
 

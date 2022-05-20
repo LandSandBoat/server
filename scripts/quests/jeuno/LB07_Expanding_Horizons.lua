@@ -19,7 +19,7 @@ local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.EXPANDING_HORIZ
 quest.reward =
 {
     fame = 50,
-    fameArea = JEUNO,
+    fameArea = xi.quest.fame_area.JEUNO,
 }
 
 quest.sections =
@@ -38,7 +38,7 @@ quest.sections =
             ['Nomad_Moogle'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:progressEvent(10045, 0, 1, 2, 0)
+                    return quest:progressEvent(10045, 0, 1, 2, 0) -- Confirmed.
                 end,
             },
 

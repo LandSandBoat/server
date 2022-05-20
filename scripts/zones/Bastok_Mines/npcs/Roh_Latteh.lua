@@ -47,7 +47,7 @@ entity.onEventFinish = function(player, csid, option)
             player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_SIGNPOST_MARKS_THE_SPOT)
             player:delKeyItem(xi.ki.PAINTING_OF_A_WINDMILL)
             player:addTitle(xi.title.TREASURE_SCAVENGER)
-            player:addFame(BASTOK, 50)
+            player:addFame(xi.quest.fame_area.BASTOK, 50)
             player:addItem(12601)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 12601) -- Linen Robe
         else

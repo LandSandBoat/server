@@ -19,7 +19,7 @@
 ===========================================================================
 */
 
-#include "../../common/socket.h"
+#include "common/socket.h"
 
 #include "../entities/baseentity.h"
 
@@ -27,8 +27,8 @@
 
 CEntityVisualPacket::CEntityVisualPacket(CBaseEntity* PEntity, const char type[4])
 {
-    this->type = 0x39;
-    this->size = 0x0A;
+    this->setType(0x39);
+    this->setSize(0x14);
 
     if (PEntity)
     {

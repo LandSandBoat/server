@@ -22,15 +22,9 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #ifndef _CSYNTHRESULTMESSAGEPACKET_H
 #define _CSYNTHRESULTMESSAGEPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
-
-/************************************************************************
- *																		*
- *  																		*
- *																		*
- ************************************************************************/
 
 class CBaseEntity;
 

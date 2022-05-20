@@ -3,15 +3,11 @@
 -- Seekers of Adoulin M2-4-1
 -----------------------------------
 -- !addmission 12 19
--- Yeggha_Dolashi : !pos 260.000 -5.768 60.000 258
+-- Yeggha_Dolashi : !pos 260 -5.768 60 258
 -----------------------------------
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/utils')
 require('scripts/globals/zone')
-require('scripts/settings/main')
------------------------------------
-local ID = require('scripts/zones/Western_Adoulin/IDs')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.THE_WATERGARDEN_COLISEUM)
@@ -40,7 +36,9 @@ mission.sections =
             onEventFinish =
             {
                 [0] = function(player, csid, option, npc)
-                    mission:complete(player)
+                    if mission:complete(player) then
+                        xi.mission.setVar(player, xi.mission.log_id.SOA, xi.mission.id.soa.FRICTION_AND_FISSURES, 'Timer', VanadielUniqueDay() + 1)
+                    end
                 end,
             },
         },

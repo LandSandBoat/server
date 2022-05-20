@@ -22,7 +22,7 @@
 #ifndef _CITEMCURRENCY_H
 #define _CITEMCURRENCY_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "item.h"
 

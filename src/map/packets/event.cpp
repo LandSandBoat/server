@@ -19,7 +19,7 @@
 ===========================================================================
 */
 
-#include "../../common/socket.h"
+#include "common/socket.h"
 
 #include <cstring>
 
@@ -28,8 +28,8 @@
 
 CEventPacket::CEventPacket(CCharEntity* PChar, EventInfo* eventInfo)
 {
-    this->type = 0x32;
-    this->size = 0x0A;
+    this->setType(0x32);
+    this->setSize(0x14);
 
     uint32 npcID = 0;
     auto*  PNpc  = eventInfo->targetEntity;
@@ -47,8 +47,8 @@ CEventPacket::CEventPacket(CCharEntity* PChar, EventInfo* eventInfo)
 
     if (eventInfo->params.size() > 0 || eventInfo->textTable != -1)
     {
-        this->type = 0x34;
-        this->size = 0x1A;
+        this->setType(0x34);
+        this->setSize(0x34);
 
         for (auto paramPair : eventInfo->params)
         {

@@ -12,20 +12,20 @@ zones[xi.zone.DYNAMIS_BEAUCEDINE] =
 {
     text =
     {
-        ITEM_CANNOT_BE_OBTAINED = 6383, -- You cannot obtain the <item>. Come back after sorting your inventory.
-        ITEM_OBTAINED           = 6389, -- Obtained: <item>.
-        GIL_OBTAINED            = 6390, -- Obtained <number> gil.
-        KEYITEM_OBTAINED        = 6392, -- Obtained key item: <keyitem>.
-        CARRIED_OVER_POINTS     = 7000, -- You have carried over <number> login point[/s].
-        LOGIN_CAMPAIGN_UNDERWAY = 7001, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
-        LOGIN_NUMBER            = 7002, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
-        CONQUEST_BASE           = 7162, -- Tallying conquest results...
-        DYNAMIS_TIME_BEGIN      = 7321, -- The sands of the <item> have begun to fall. You have <number> minutes (Earth time) remaining in Dynamis.
-        DYNAMIS_TIME_EXTEND     = 7322, -- our stay in Dynamis has been extended by <number> minute[/s].
-        DYNAMIS_TIME_UPDATE_1   = 7323, -- ou will be expelled from Dynamis in <number> [second/minute] (Earth time).
-        DYNAMIS_TIME_UPDATE_2   = 7324, -- ou will be expelled from Dynamis in <number> [seconds/minutes] (Earth time).
-        DYNAMIS_TIME_EXPIRED    = 7326, -- The sands of the hourglass have emptied...
-        OMINOUS_PRESENCE        = 7338, -- You feel an ominous presence, as if something might happen if you possessed <item>.
+        ITEM_CANNOT_BE_OBTAINED = 6384, -- You cannot obtain the <item>. Come back after sorting your inventory.
+        ITEM_OBTAINED           = 6390, -- Obtained: <item>.
+        GIL_OBTAINED            = 6391, -- Obtained <number> gil.
+        KEYITEM_OBTAINED        = 6393, -- Obtained key item: <keyitem>.
+        CARRIED_OVER_POINTS     = 7001, -- You have carried over <number> login point[/s].
+        LOGIN_CAMPAIGN_UNDERWAY = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
+        LOGIN_NUMBER            = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
+        CONQUEST_BASE           = 7163, -- Tallying conquest results...
+        DYNAMIS_TIME_BEGIN      = 7322, -- The sands of the <item> have begun to fall. You have <number> minutes (Earth time) remaining in Dynamis.
+        DYNAMIS_TIME_EXTEND     = 7323, -- our stay in Dynamis has been extended by <number> minute[/s].
+        DYNAMIS_TIME_UPDATE_1   = 7324, -- ou will be expelled from Dynamis in <number> [second/minute] (Earth time).
+        DYNAMIS_TIME_UPDATE_2   = 7325, -- ou will be expelled from Dynamis in <number> [seconds/minutes] (Earth time).
+        DYNAMIS_TIME_EXPIRED    = 7327, -- The sands of the hourglass have emptied...
+        OMINOUS_PRESENCE        = 7339, -- You feel an ominous presence, as if something might happen if you possessed <item>.
     },
     mob =
     {
@@ -40,36 +40,36 @@ zones[xi.zone.DYNAMIS_BEAUCEDINE] =
         REFILL_STATUE =
         {
             {
-                {mob = 17326203, eye = dynamis.eye.RED  }, -- Adamantking_Effigy
-                {mob = 17326204, eye = dynamis.eye.BLUE },
+                {mob = 17326203, eye = xi.dynamis.eye.RED  }, -- Adamantking_Effigy
+                {mob = 17326204, eye = xi.dynamis.eye.BLUE },
             },
             {
-                {mob = 17326205, eye = dynamis.eye.RED  }, -- Adamantking_Effigy
-                {mob = 17326206, eye = dynamis.eye.GREEN},
+                {mob = 17326205, eye = xi.dynamis.eye.RED  }, -- Adamantking_Effigy
+                {mob = 17326206, eye = xi.dynamis.eye.GREEN},
             },
             {
-                {mob = 17326275, eye = dynamis.eye.RED  }, -- Serjeant_Tombstone
-                {mob = 17326276, eye = dynamis.eye.BLUE },
+                {mob = 17326275, eye = xi.dynamis.eye.RED  }, -- Serjeant_Tombstone
+                {mob = 17326276, eye = xi.dynamis.eye.BLUE },
             },
             {
-                {mob = 17326277, eye = dynamis.eye.RED  }, -- Serjeant_Tombstone
-                {mob = 17326278, eye = dynamis.eye.GREEN},
+                {mob = 17326277, eye = xi.dynamis.eye.RED  }, -- Serjeant_Tombstone
+                {mob = 17326278, eye = xi.dynamis.eye.GREEN},
             },
             {
-                {mob = 17326349, eye = dynamis.eye.RED  }, -- Avatar_Icon
-                {mob = 17326350, eye = dynamis.eye.BLUE },
+                {mob = 17326349, eye = xi.dynamis.eye.RED  }, -- Avatar_Icon
+                {mob = 17326350, eye = xi.dynamis.eye.BLUE },
             },
             {
-                {mob = 17326351, eye = dynamis.eye.RED  }, -- Avatar_Icon
-                {mob = 17326352, eye = dynamis.eye.GREEN},
+                {mob = 17326351, eye = xi.dynamis.eye.RED  }, -- Avatar_Icon
+                {mob = 17326352, eye = xi.dynamis.eye.GREEN},
             },
             {
-                {mob = 17326464, eye = dynamis.eye.RED  }, -- Goblin_Replica
-                {mob = 17326465, eye = dynamis.eye.BLUE },
+                {mob = 17326464, eye = xi.dynamis.eye.RED  }, -- Goblin_Replica
+                {mob = 17326465, eye = xi.dynamis.eye.BLUE },
             },
             {
-                {mob = 17326466, eye = dynamis.eye.RED  }, -- Goblin_Replica
-                {mob = 17326467, eye = dynamis.eye.GREEN},
+                {mob = 17326466, eye = xi.dynamis.eye.RED  }, -- Goblin_Replica
+                {mob = 17326467, eye = xi.dynamis.eye.GREEN},
             },
         },
         MOLTENOX_STUBTHUMBS_PH      = {[17326372] = 17326374}, -- Vanguard_Smithy

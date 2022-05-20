@@ -293,7 +293,7 @@ bool CBattlefield::InsertEntity(CBaseEntity* PEntity, bool enter, BATTLEFIELDMOB
                 m_EnteredPlayers.emplace(PEntity->id);
                 PChar->ClearTrusts();
                 luautils::OnBattlefieldEnter(PChar, this);
-                charutils::SendTimerPacket(PChar, m_TimeLimit);
+                charutils::SendTimerPacket(PChar, GetRemainingTime());
             }
             else if (!IsRegistered(PChar))
             {
@@ -310,7 +310,7 @@ bool CBattlefield::InsertEntity(CBaseEntity* PEntity, bool enter, BATTLEFIELDMOB
     else if (PEntity->objtype == TYPE_NPC)
     {
         PEntity->status = STATUS_TYPE::NORMAL;
-        PEntity->loc.zone->PushPacket(PEntity, CHAR_INRANGE, new CEntityUpdatePacket(PEntity, ENTITY_SPAWN, UPDATE_ALL_MOB));
+        PEntity->loc.zone->UpdateEntityPacket(PEntity, ENTITY_SPAWN, UPDATE_ALL_MOB);
         m_NpcList.push_back(static_cast<CNpcEntity*>(PEntity));
     }
     else if (PEntity->objtype == TYPE_MOB || PEntity->objtype == TYPE_PET)
@@ -367,6 +367,7 @@ bool CBattlefield::InsertEntity(CBaseEntity* PEntity, bool enter, BATTLEFIELDMOB
     {
         PEntity->PBattlefield = this;
     }
+
     // mob, initiator or ally
     if (entity && !entity->StatusEffectContainer->GetStatusEffect(EFFECT_BATTLEFIELD))
     {
@@ -511,7 +512,7 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
         if (PEntity->objtype == TYPE_NPC)
         {
             PEntity->status = STATUS_TYPE::DISAPPEAR;
-            PEntity->loc.zone->PushPacket(PEntity, CHAR_INRANGE, new CEntityUpdatePacket(PEntity, ENTITY_DESPAWN, UPDATE_ALL_MOB));
+            PEntity->loc.zone->UpdateEntityPacket(PEntity, ENTITY_DESPAWN, UPDATE_ALL_MOB);
 
             if (auto* PNpcEntity = dynamic_cast<CNpcEntity*>(PEntity))
             {
@@ -560,7 +561,7 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
                 m_AdditionalEnemyList.erase(std::remove_if(m_AdditionalEnemyList.begin(), m_AdditionalEnemyList.end(), check), m_AdditionalEnemyList.end());
             }
         }
-        PEntity->loc.zone->PushPacket(PEntity, CHAR_INRANGE, new CEntityAnimationPacket(PEntity, CEntityAnimationPacket::Fade_Out));
+        PEntity->loc.zone->PushPacket(PEntity, CHAR_INRANGE, new CEntityAnimationPacket(PEntity, PEntity, CEntityAnimationPacket::Fade_Out));
     }
 
     // Remove enmity from valid battle entities
@@ -671,11 +672,11 @@ void CBattlefield::Cleanup()
     if (m_Attacked && m_Status == BATTLEFIELD_STATUS_WON)
     {
         const char* query        = "SELECT fastestTime FROM bcnm_info WHERE bcnmId = %u AND zoneId = %u";
-        auto        ret          = Sql_Query(SqlHandle, query, this->GetID(), this->GetZoneID());
+        auto        ret          = sql->Query(query, this->GetID(), this->GetZoneID());
         bool        updateRecord = true;
-        if (ret != SQL_ERROR && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        if (ret != SQL_ERROR && sql->NextRow() == SQL_SUCCESS)
         {
-            updateRecord = Sql_GetUIntData(SqlHandle, 0) > std::chrono::duration_cast<std::chrono::seconds>(m_Record.time).count();
+            updateRecord = sql->GetUIntData(0) > std::chrono::duration_cast<std::chrono::seconds>(m_Record.time).count();
         }
 
         if (updateRecord)
@@ -683,7 +684,7 @@ void CBattlefield::Cleanup()
             query          = "UPDATE bcnm_info SET fastestName = '%s', fastestTime = %u, fastestPartySize = %u WHERE bcnmId = %u AND zoneid = %u";
             auto timeThing = std::chrono::duration_cast<std::chrono::seconds>(m_Record.time).count();
 
-            Sql_Query(SqlHandle, query, m_Record.name.c_str(), timeThing, m_Record.partySize, this->GetID(), GetZoneID());
+            sql->Query(query, m_Record.name.c_str(), timeThing, m_Record.partySize, this->GetID(), GetZoneID());
         }
     }
 }
@@ -695,18 +696,18 @@ bool CBattlefield::LoadMobs()
                             FROM bcnm_battlefield \
                             WHERE bcnmId = %u AND battlefieldNumber = %u";
 
-    auto ret = Sql_Query(SqlHandle, fmtQuery, this->GetID(), this->GetArea());
+    auto ret = sql->Query(fmtQuery, this->GetID(), this->GetArea());
 
-    if (ret == SQL_ERROR || Sql_NumRows(SqlHandle) == 0)
+    if (ret == SQL_ERROR || sql->NumRows() == 0)
     {
         ShowError("Battlefield::LoadMobs() : Cannot find any monster IDs for battlefield %i area %i ", this->GetID(), this->GetArea());
     }
     else
     {
-        while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        while (sql->NextRow() == SQL_SUCCESS)
         {
-            auto  mobid     = Sql_GetUIntData(SqlHandle, 0);
-            auto  condition = Sql_GetUIntData(SqlHandle, 1);
+            auto  mobid     = sql->GetUIntData(0);
+            auto  condition = sql->GetUIntData(1);
             auto* PMob      = static_cast<CMobEntity*>(zoneutils::GetEntity(mobid, TYPE_MOB | TYPE_PET));
 
             if (PMob)
@@ -728,18 +729,18 @@ bool CBattlefield::SpawnLoot(CBaseEntity* PEntity)
     if (!PEntity)
     {
         const auto* fmtQuery = "SELECT npcId FROM bcnm_treasure_chests WHERE bcnmId = %u AND battlefieldNumber = %u;";
-        auto        ret      = Sql_Query(SqlHandle, fmtQuery, this->GetID(), this->GetArea());
+        auto        ret      = sql->Query(fmtQuery, this->GetID(), this->GetArea());
 
-        if (ret == SQL_ERROR || Sql_NumRows(SqlHandle) == 0)
+        if (ret == SQL_ERROR || sql->NumRows() == 0)
         {
             ShowError("Battlefield::SpawnLoot() : Cannot find treasure chest for battlefield %i area %i ", this->GetID(), this->GetArea());
             return false;
         }
         else
         {
-            if (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            if (sql->NextRow() == SQL_SUCCESS)
             {
-                auto npcId = Sql_GetUIntData(SqlHandle, 0);
+                auto npcId = sql->GetUIntData(0);
                 PEntity    = zoneutils::GetEntity(npcId);
             }
         }
@@ -788,7 +789,7 @@ void CBattlefield::ForEachPlayer(const std::function<void(CCharEntity*)>& func)
 {
     for (auto player : m_EnteredPlayers)
     {
-        func(static_cast<CCharEntity*>(GetZone()->GetCharByID(player)));
+        func(GetZone()->GetCharByID(player));
     }
 }
 

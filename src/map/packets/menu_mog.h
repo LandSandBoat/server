@@ -22,15 +22,9 @@
 #ifndef _CMENUMOGPACKET_H
 #define _CMENUMOGPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
-
-/************************************************************************
- *																		*
- *  																		*
- *																		*
- ************************************************************************/
 
 class CMenuMogPacket : public CBasicPacket
 {

@@ -10480,7 +10480,7 @@ INSERT INTO `item_equipment` VALUES (21368,'bestas_bane',99,119,299040,27,0,0,4,
 INSERT INTO `item_equipment` VALUES (21369,'moggie_goodie_bag',1,0,4194303,0,0,0,8,0,0);
 INSERT INTO `item_equipment` VALUES (21370,'gobbie_goodie_bag',1,0,4194303,0,0,0,8,0,0);
 INSERT INTO `item_equipment` VALUES (21371,'ginsen',99,0,2473971,0,0,0,8,0,0);
-INSERT INTO `item_equipment` VALUES (21372,'dunna',99,0,1048576,0,0,0,4,0,0);
+INSERT INTO `item_equipment` VALUES (21372,'dunna',99,0,1048576,121,0,0,4,0,0);
 INSERT INTO `item_equipment` VALUES (21373,'sihirik',99,0,30639,0,0,0,8,0,0);
 INSERT INTO `item_equipment` VALUES (21374,'paeapua',99,0,2385,0,0,0,8,0,0);
 INSERT INTO `item_equipment` VALUES (21375,'magneto',99,117,131072,0,0,0,4,0,0);
@@ -10885,6 +10885,7 @@ INSERT INTO `item_equipment` VALUES (22036,'bagua_wand',99,119,1048576,218,0,0,3
 INSERT INTO `item_equipment` VALUES (22037,'sifang_wand',99,119,1048576,218,0,0,3,0,4);
 INSERT INTO `item_equipment` VALUES (22038,'bhima',99,119,1048576,818,0,0,3,0,5);
 INSERT INTO `item_equipment` VALUES (22039,'floral_hagoita',1,0,4194303,835,0,0,3,0,0);
+INSERT INTO `item_equipment` VALUES (22040,'daybreak',99,0,1589788,532,0,0,3,0,0);
 INSERT INTO `item_equipment` VALUES (22054,'grioavolr',99,119,1589788,601,0,0,1,0,0);
 INSERT INTO `item_equipment` VALUES (22055,'oranyan',99,119,1589788,306,0,0,1,0,0);
 INSERT INTO `item_equipment` VALUES (22056,'gozuki_mezuki',99,119,4194303,361,0,0,1,0,0);
@@ -11666,6 +11667,7 @@ INSERT INTO `item_equipment` VALUES (25588,'aya._zucchetto',99,119,2130452,159,0
 INSERT INTO `item_equipment` VALUES (25589,'aya._zucchetto_+1',99,119,2130452,159,0,0,16,0,0);
 INSERT INTO `item_equipment` VALUES (25590,'taliah_turban',99,119,147712,160,0,0,16,0,0);
 INSERT INTO `item_equipment` VALUES (25591,'taliah_turban_+1',99,119,147712,160,0,0,16,0,0);
+INSERT INTO `item_equipment` VALUES (25593,'cath_palug_crown',99,0,1589276,53,0,0,16,0,0);
 INSERT INTO `item_equipment` VALUES (25600,'maiitsoh_haube',99,119,14785,218,0,0,16,0,0);
 INSERT INTO `item_equipment` VALUES (25601,'blistering_sallet',99,119,4194303,29,0,0,16,0,0);
 INSERT INTO `item_equipment` VALUES (25602,'blistering_sallet_+1',99,119,4194303,29,0,0,16,0,0);
@@ -12060,12 +12062,16 @@ INSERT INTO `item_equipment` VALUES (26035,'moonlight_nodowa',99,0,6146,0,0,0,51
 INSERT INTO `item_equipment` VALUES (26036,'moonbeam_necklace',99,0,2101315,0,0,0,512,0,0);
 INSERT INTO `item_equipment` VALUES (26037,'moonlight_necklace',99,0,2101315,0,0,0,512,0,0);
 INSERT INTO `item_equipment` VALUES (26038,'regal_necklace',99,0,65536,0,0,0,512,0,0);
+INSERT INTO `item_equipment` VALUES (26040,'yngvi_earring',99,0,4194303,0,0,0,512,0,0);
 INSERT INTO `item_equipment` VALUES (26080,'mache_earring',99,0,4194303,0,0,0,6144,0,0);
 INSERT INTO `item_equipment` VALUES (26081,'mache_earring_+1',99,0,4194303,0,0,0,6144,0,0);
 INSERT INTO `item_equipment` VALUES (26082,'lugalbanda_earring',99,0,1589256,0,0,0,6144,0,0);
 INSERT INTO `item_equipment` VALUES (26083,'enmerkar_earring',99,0,155904,0,0,0,6144,0,0);
 INSERT INTO `item_equipment` VALUES (26084,'sherida_earring',99,0,2368818,0,0,0,6144,0,0);
 INSERT INTO `item_equipment` VALUES (26085,'regal_earring',99,0,1606172,0,0,0,6144,0,0);
+INSERT INTO `item_equipment` VALUES (26088,'malignance_earring',99,0,1589404,0,0,0,6144,0,0);
+INSERT INTO `item_equipment` VALUES (26108,'odr_earring',99,0,2462754,0,0,0,6144,0,0);
+INSERT INTO `item_equipment` VALUES (26109,'snotra_earring',99,0,16,0,0,0,6144,0,0);
 INSERT INTO `item_equipment` VALUES (26160,'evanescence_ring',99,0,4194303,0,0,0,24576,0,0);
 INSERT INTO `item_equipment` VALUES (26161,'shukuyu_ring',99,0,4194303,0,0,0,24576,0,0);
 INSERT INTO `item_equipment` VALUES (26162,'rahab_ring',99,0,4194303,0,0,0,24576,0,0);
@@ -12181,6 +12187,9 @@ INSERT INTO `item_equipment` VALUES (26339,'comaa_belt',99,0,131074,0,0,0,1024,0
 INSERT INTO `item_equipment` VALUES (26340,'moonbow_belt',99,0,131074,0,0,0,1024,0,0);
 INSERT INTO `item_equipment` VALUES (26341,'moonbow_belt_+1',99,0,131074,0,0,0,1024,0,0);
 INSERT INTO `item_equipment` VALUES (26342,'regal_belt',99,0,16384,0,0,0,1024,0,0);
+INSERT INTO `item_equipment` VALUES (26351,'sacro_cord',99,0,1605660,0,0,0,1024,0,0);
+INSERT INTO `item_equipment` VALUES (26356,'skrymir_cord',99,0,4194303,0,0,0,1024,0,0); -- FFXI clopedia BGWiki and JPWiki all in agreement
+INSERT INTO `item_equipment` VALUES (26357,'skrymir_cord_+1',99,0,4194303,0,0,0,1024,0,0); -- FFXI clopedia BGWiki and JPWiki all in agreement
 INSERT INTO `item_equipment` VALUES (26400,'culminus',99,119,1622556,657,1,0,2,0,0);
 INSERT INTO `item_equipment` VALUES (26401,'forfend',99,119,2385,45,1,0,2,0,0);
 INSERT INTO `item_equipment` VALUES (26402,'forfend_+1',99,119,2385,45,1,0,2,0,0);
@@ -14093,6 +14102,8 @@ INSERT INTO `item_equipment` VALUES (28466,'dynamic_belt',99,0,2473969,0,0,0,102
 INSERT INTO `item_equipment` VALUES (28467,'dynamic_belt_+1',99,0,2473969,0,0,0,1024,0,0);
 INSERT INTO `item_equipment` VALUES (28468,'matanki_earring',99,0,4194303,0,0,0,6144,0,0);
 INSERT INTO `item_equipment` VALUES (28470,'emporoxs_ring',99,0,4194303,0,0,0,24576,0,0);
+INSERT INTO `item_equipment` VALUES (28471,'gere_ring',99,0,2494754,0,0,0,24576,0,0);
+INSERT INTO `item_equipment` VALUES (28472,'freke_ring',99,0,1589276,0,0,0,24576,0,0);
 INSERT INTO `item_equipment` VALUES (28474,'mendi._earring',99,0,4194303,0,0,0,6144,0,0);
 INSERT INTO `item_equipment` VALUES (28475,'infused_earring',99,0,4194303,0,0,0,6144,0,0);
 INSERT INTO `item_equipment` VALUES (28476,'calamitous_earring',99,0,4194303,0,0,0,6144,0,0);
@@ -14289,6 +14300,14 @@ INSERT INTO `item_equipment` VALUES (28668,'matamata_shield_+1',99,101,2385,31,1
 INSERT INTO `item_equipment` VALUES (28669,'butznar_shield_+1',99,101,193,25,3,0,2,0,0);
 INSERT INTO `item_equipment` VALUES (28670,'leafkin_shield',1,0,4194303,641,1,0,2,0,0);
 INSERT INTO `item_equipment` VALUES (28671,'butznar_shield',99,100,193,25,3,0,2,0,0);
+INSERT INTO `item_equipment` VALUES (21430,'hesperiidae',99,0,155904,0,0,0,8,0,0);
+INSERT INTO `item_equipment` VALUES (21432,'epitaph',99,119,16384,0,0,0,8,0,0);
+INSERT INTO `item_equipment` VALUES (21431,'coiste_bodhar',99,0,2473971,0,0,0,8,0,0);
+INSERT INTO `item_equipment` VALUES (21568,'acrontica',99,119,262176,615,0,0,3,0,0);
+INSERT INTO `item_equipment` VALUES (21926,'tsuru',99,119,4096,312,0,0,3,0,0);
+INSERT INTO `item_equipment` VALUES (26116,'schere_earring',99,0,133251,0,0,0,6144,0,0);
+INSERT INTO `item_equipment` VALUES (26362,'tellen_belt',99,0,66560,0,0,0,1024,0,0);
+INSERT INTO `item_equipment` VALUES (26363,'obstin._sash',99,0,524820,0,0,0,1024,0,0);
 /*!40000 ALTER TABLE `item_equipment` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

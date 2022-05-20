@@ -289,7 +289,7 @@ class Decompress:
         # byte[] final = new byte[w];
 
         w = 0
-        pos = self.jump_table[0]
+        # pos = self.jump_table[0]
         out_buf = bytearray(1750)
 
         # Loop

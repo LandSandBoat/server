@@ -20,17 +20,17 @@
 */
 
 #include "automaton_controller.h"
-#include "../../../common/utils.h"
-#include "../../enmity_container.h"
-#include "../../entities/trustentity.h"
-#include "../../lua/luautils.h"
-#include "../../mobskill.h"
-#include "../../recast_container.h"
-#include "../../status_effect_container.h"
-#include "../../utils/battleutils.h"
-#include "../../utils/itemutils.h"
-#include "../../utils/petutils.h"
-#include "../../utils/puppetutils.h"
+#include "common/utils.h"
+#include "enmity_container.h"
+#include "entities/trustentity.h"
+#include "lua/luautils.h"
+#include "mobskill.h"
+#include "recast_container.h"
+#include "status_effect_container.h"
+#include "utils/battleutils.h"
+#include "utils/itemutils.h"
+#include "utils/petutils.h"
+#include "utils/puppetutils.h"
 #include "../ai_container.h"
 #include "../states/ability_state.h"
 #include "../states/magic_state.h"
@@ -726,6 +726,7 @@ bool CAutomatonController::TryEnfeeble(const CurrentManeuvers& maneuvers)
             {
                 castPriority.push_back(SpellID::Dispel);
             }
+            break;
         }
         default:
         {
@@ -832,8 +833,8 @@ bool CAutomatonController::TryEnfeeble(const CurrentManeuvers& maneuvers)
             {
                 defaultPriority.push_back(SpellID::Addle);
             }
+            break;
         }
-        break;
         case HEAD_SPIRITREAVER:
         {
             if (PAutomaton->GetMPP() <= 75 && PTarget->health.mp > 0) // MPP <= 75 -> Aspir
@@ -936,8 +937,8 @@ bool CAutomatonController::TryEnfeeble(const CurrentManeuvers& maneuvers)
                     defaultPriority.push_back(SpellID::Addle);
                 }
             }
+            break;
         }
-        break;
         case HEAD_SOULSOOTHER:
         {
             if (maneuvers.earth)
@@ -1039,6 +1040,7 @@ bool CAutomatonController::TryEnfeeble(const CurrentManeuvers& maneuvers)
             {
                 defaultPriority.push_back(SpellID::Addle);
             }
+            break;
         }
     }
 
@@ -1155,13 +1157,6 @@ bool CAutomatonController::TryEnhance()
         return Cast(PAutomaton->targid, SpellID::Dread_Spikes);
     }
 
-    EnmityList_t* enmityList;
-    auto*         PMob = dynamic_cast<CMobEntity*>(PTarget);
-    if (PMob)
-    {
-        enmityList = PMob->PEnmityContainer->GetEnmityList();
-    }
-
     uint16 highestEnmity = 0;
 
     CBattleEntity* PRegenTarget     = nullptr;
@@ -1183,10 +1178,11 @@ bool CAutomatonController::TryEnhance()
 
     if (distance(PAutomaton->loc.p, PAutomaton->PMaster->loc.p) < 20)
     {
-        if (PMob)
+        if (auto* PMob = dynamic_cast<CMobEntity*>(PTarget))
         {
-            auto enmity_obj = enmityList->find(PAutomaton->PMaster->id);
-            if (enmity_obj != enmityList->end())
+            auto enmityList = PMob->PEnmityContainer->GetEnmityList();
+            if (auto enmity_obj = enmityList->find(PAutomaton->PMaster->id);
+                enmity_obj != enmityList->end())
             {
                 isEngaged = true;
                 if (highestEnmity < enmity_obj->second.CE + enmity_obj->second.VE)
@@ -1195,10 +1191,10 @@ bool CAutomatonController::TryEnhance()
                     PRegenTarget  = PAutomaton->PMaster;
                 }
             }
-        }
-        else
-        {
-            isEngaged = true; // Assume everyone is engaged if the target isn't a mob
+            else
+            {
+                isEngaged = true; // Assume everyone is engaged if the target isn't a mob
+            }
         }
 
         PAutomaton->PMaster->StatusEffectContainer->ForEachEffect(
@@ -1270,8 +1266,9 @@ bool CAutomatonController::TryEnhance()
     stoneskin = false;
     phalanx   = false;
 
-    if (PMob)
+    if (auto* PMob = dynamic_cast<CMobEntity*>(PTarget))
     {
+        auto enmityList = PMob->PEnmityContainer->GetEnmityList();
         auto enmity_obj = enmityList->find(PAutomaton->id);
         if (enmity_obj != enmityList->end() && highestEnmity < enmity_obj->second.CE + enmity_obj->second.VE)
         {
@@ -1280,7 +1277,9 @@ bool CAutomatonController::TryEnhance()
         }
     }
 
-    PAutomaton->StatusEffectContainer->ForEachEffect([&protect, &shell, &haste, &stoneskin, &phalanx](CStatusEffect* PStatus) {
+    // clang-format off
+    PAutomaton->StatusEffectContainer->ForEachEffect([&protect, &shell, &haste](CStatusEffect* PStatus)
+    {
         if (PStatus->GetDuration() > 0)
         {
             if (PStatus->GetStatusID() == EFFECT_PROTECT)
@@ -1299,6 +1298,7 @@ bool CAutomatonController::TryEnhance()
             }
         }
     });
+    // clang-format on
 
     if (!PProtectTarget && !protect)
     {
@@ -1330,8 +1330,9 @@ bool CAutomatonController::TryEnhance()
 
                 isEngaged = false;
 
-                if (PMob)
+                if (auto* PMob = dynamic_cast<CMobEntity*>(PTarget))
                 {
+                    auto enmityList = PMob->PEnmityContainer->GetEnmityList();
                     auto enmity_obj = enmityList->find(PMember->id);
                     if (enmity_obj != enmityList->end())
                     {
@@ -1348,7 +1349,9 @@ bool CAutomatonController::TryEnhance()
                     isEngaged = true; // Assume everyone is engaged if the target isn't a mob
                 }
 
-                PMember->StatusEffectContainer->ForEachEffect([&protect, &protectcount, &shell, &shellcount, &haste](CStatusEffect* PStatus) {
+                // clang-format off
+                PMember->StatusEffectContainer->ForEachEffect([&protect, &protectcount, &shell, &shellcount, &haste](CStatusEffect* PStatus)
+                {
                     if (PStatus->GetDuration() > 0)
                     {
                         if (PStatus->GetStatusID() == EFFECT_PROTECT)
@@ -1369,6 +1372,7 @@ bool CAutomatonController::TryEnhance()
                         }
                     }
                 });
+                // clang-format on
 
                 if (isEngaged)
                 {
@@ -1630,17 +1634,24 @@ namespace automaton
     {
         const char* Query = "SELECT spellid, skilllevel, heads, enfeeble, immunity, removes FROM automaton_spells;";
 
-        int32 ret = Sql_Query(SqlHandle, Query);
+        int32 ret = sql->Query(Query);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (ret != SQL_ERROR && sql->NumRows() != 0)
         {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql->NextRow() == SQL_SUCCESS)
             {
-                SpellID        id = (SpellID)Sql_GetUIntData(SqlHandle, 0);
-                AutomatonSpell PSpell{ (uint16)Sql_GetUIntData(SqlHandle, 1), (uint8)Sql_GetUIntData(SqlHandle, 2), (EFFECT)Sql_GetUIntData(SqlHandle, 3),
-                                       (IMMUNITY)Sql_GetUIntData(SqlHandle, 4) };
+                SpellID id = (SpellID)sql->GetUIntData(0);
 
-                uint32 removes = Sql_GetUIntData(SqlHandle, 5);
+                AutomatonSpell PSpell
+                {
+                    (uint16)sql->GetUIntData(1),
+                    (uint8)sql->GetUIntData(2),
+                    (EFFECT)sql->GetUIntData(3),
+                    (IMMUNITY)sql->GetUIntData(4),
+                    {} // Will handle in a moment
+                };
+
+                uint32 removes = sql->GetUIntData(5);
                 while (removes > 0)
                 {
                     PSpell.removes.push_back((EFFECT)(removes & 0xFF));
@@ -1696,18 +1707,18 @@ namespace automaton
     {
         const char* Query = "SELECT abilityid, abilityname, reqframe, skilllevel FROM automaton_abilities;";
 
-        int32 ret = Sql_Query(SqlHandle, Query);
+        int32 ret = sql->Query(Query);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        if (ret != SQL_ERROR && sql->NumRows() != 0)
         {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql->NextRow() == SQL_SUCCESS)
             {
-                uint16           id = (uint16)Sql_GetUIntData(SqlHandle, 0);
-                AutomatonAbility PAbility{ (uint8)Sql_GetUIntData(SqlHandle, 2), (uint16)Sql_GetUIntData(SqlHandle, 3) };
+                uint16           id = (uint16)sql->GetUIntData(0);
+                AutomatonAbility PAbility{ (uint8)sql->GetUIntData(2), (uint16)sql->GetUIntData(3) };
 
                 autoAbilityList[id] = std::move(PAbility);
 
-                auto filename = fmt::format("./scripts/globals/abilities/pets/automaton/{}.lua", Sql_GetData(SqlHandle, 1));
+                auto filename = fmt::format("./scripts/globals/abilities/pets/automaton/{}.lua", sql->GetData(1));
                 luautils::CacheLuaObjectFromFile(filename);
             }
         }

@@ -19,7 +19,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 ===========================================================================
 */
 
-#include "../../common/socket.h"
+#include "common/socket.h"
 
 #include "../entities/charentity.h"
 #include "../trade_container.h"
@@ -28,17 +28,19 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 CSynthResultMessagePacket::CSynthResultMessagePacket(CCharEntity* PChar, SYNTH_MESSAGE messageID, uint16 itemID, uint8 quantity)
 {
-    this->type = 0x70;
-    this->size = 0x30;
+    this->setType(0x70);
+    this->setSize(0x60);
 
     ref<uint8>(0x04) = messageID;
 
     ref<uint16>(0x1a) = PChar->id;
+
     if (itemID != 0)
     {
         ref<uint8>(0x06)  = quantity;
         ref<uint16>(0x08) = itemID;
     }
+
     if (messageID == SYNTH_FAIL)
     {
         uint8 count = 0;
@@ -53,5 +55,6 @@ CSynthResultMessagePacket::CSynthResultMessagePacket(CCharEntity* PChar, SYNTH_M
             }
         }
     }
+
     memcpy(data + (0x1E), PChar->GetName(), PChar->name.size());
 }

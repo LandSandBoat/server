@@ -22,7 +22,7 @@
 #ifndef _CQUESTMISSIONLOGPACKET_H
 #define _CQUESTMISSIONLOGPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 #include <unordered_map>
 
 #include "basic.h"
@@ -81,12 +81,6 @@ static const std::unordered_map<uint8, std::pair<uint16, uint16>> questPacketByt
 #define ASSAULT_COMPLETE           0xC0
 #define CAMPAIGN_MISSION_ONE       0x30
 #define CAMPAIGN_MISSION_TWO       0x38
-
-/************************************************************************
- *																		*
- *  																		*
- *																		*
- ************************************************************************/
 
 class CCharEntity;
 

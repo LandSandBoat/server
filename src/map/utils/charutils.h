@@ -22,7 +22,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #ifndef _CHARUTILS_H
 #define _CHARUTILS_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "../entities/charentity.h"
 #include "../items/item_equipment.h"
@@ -99,6 +99,7 @@ namespace charutils
     uint8  AddItem(CCharEntity* PChar, uint8 LocationID, uint16 itemID, uint32 quantity = 1, bool silence = false);
     uint8  MoveItem(CCharEntity* PChar, uint8 LocationID, uint8 SlotID, uint8 NewSlotID);
     uint32 UpdateItem(CCharEntity* PChar, uint8 LocationID, uint8 slotID, int32 quantity, bool force = false);
+    void   DropItem(CCharEntity* PChar, uint8 container, uint8 slotID, int32 quantity, uint16 ItemID);
     void   CheckValidEquipment(CCharEntity* PChar);
     void   CheckEquipLogic(CCharEntity* PChar, SCRIPTTYPE ScriptType, uint32 param);
     void   EquipItem(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 containerID);
@@ -110,6 +111,8 @@ namespace charutils
     void   SetStyleLock(CCharEntity* PChar, bool isStyleLocked);
     void   UpdateWeaponStyle(CCharEntity* PChar, uint8 equipSlotID, CItemWeapon* PItem);
     void   UpdateArmorStyle(CCharEntity* PChar, uint8 equipSlotID);
+    void   AddItemToRecycleBin(CCharEntity* PChar, uint32 container, uint8 slotID, uint8 quantity);
+    void   EmptyRecycleBin(CCharEntity* PChar);
 
     bool hasKeyItem(CCharEntity* PChar, uint16 KeyItemID);    // проверяем наличие ключевого предмета
     bool seenKeyItem(CCharEntity* PChar, uint16 KeyItemID);   // проверяем, было ли описание ключевого предмета прочитано
@@ -171,6 +174,8 @@ namespace charutils
     void SaveMentorFlag(CCharEntity* PChar);                   // saves the char's mentor flag
     void SaveJobMasterDisplay(CCharEntity* PChar);             // Saves the char's job master display status
     void SaveMenuConfigFlags(CCharEntity* PChar);              // saves the char's unnamed flags
+    void SaveChatFilterFlags(CCharEntity* PChar);              // saves the char's chat filters
+    void SaveLanguages(CCharEntity* PChar);                    // saves the char's language preference
     void SaveCharNation(CCharEntity* PChar);                   // Save the character's nation of allegiance.
     void SaveCampaignAllegiance(CCharEntity* PChar);           // Save the character's campaign allegiance.
     void SaveCharMoghancement(CCharEntity* PChar);             // Save the character's current moghancement
@@ -209,8 +214,8 @@ namespace charutils
     void  HomePoint(CCharEntity* PChar);
     bool  AddWeaponSkillPoints(CCharEntity*, SLOTTYPE, int);
 
-    int32 GetCharVar(CCharEntity* PChar, const char* var);
-    void  SetCharVar(CCharEntity* PChar, const char* var, int32 value);
+    int32 GetCharVar(CCharEntity* PChar, std::string const& var);
+    void  SetCharVar(CCharEntity* PChar, std::string const& var, int32 value);
     void ClearCharVarsWithPrefix(CCharEntity* PChar, std::string prefix);
 
     uint16 getWideScanRange(JOBTYPE job, uint8 level);
@@ -220,6 +225,13 @@ namespace charutils
     void SendTimerPacket(CCharEntity* PChar, duration dur);
     void SendClearTimerPacket(CCharEntity* PChar);
 
+    time_t getTraverserEpoch(CCharEntity* PChar);
+    void   setTraverserEpoch(CCharEntity* PChar);
+    uint32 getClaimedTraverserStones(CCharEntity* PChar);
+    void   addClaimedTraverserStones(CCharEntity* PChar, uint16 numStones);
+    void   setClaimedTraverserStones(CCharEntity* PChar, uint16 stoneTotal);
+    uint32 getAvailableTraverserStones(CCharEntity* PChar);
+
     void ReadHistory(CCharEntity* PChar);
     void WriteHistory(CCharEntity* PChar);
 
@@ -227,6 +239,10 @@ namespace charutils
     uint8 getItemLevelDifference(CCharEntity* PChar);
     uint8 getMainhandItemLevel(CCharEntity* PChar);
     uint8 getRangedItemLevel(CCharEntity* PChar);
+
+    bool hasEntitySpawned(CCharEntity* PChar, CBaseEntity* entity);
+
+    uint32 getCharIdFromName(std::string const& name);
 }; // namespace charutils
 
 #endif // _CHARUTILS_H

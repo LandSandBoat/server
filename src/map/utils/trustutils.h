@@ -1,8 +1,8 @@
 #ifndef _ITRUSTUTILS_H
 #define _ITRUSTUTILS_H
 
-#include "../../common/cbasetypes.h"
-#include "../../common/mmo.h"
+#include "common/cbasetypes.h"
+#include "common/mmo.h"
 
 class CBattleEntity;
 class CCharEntity;
@@ -13,7 +13,7 @@ namespace trustutils
     void LoadTrustList();
     void FreeTrustList();
 
-    void SpawnTrust(CCharEntity* PMaster, uint32 TrustID);
+    CTrustEntity* SpawnTrust(CCharEntity* PMaster, uint32 TrustID);
 
     // Internal
     void          BuildTrust(uint32 TrustID);

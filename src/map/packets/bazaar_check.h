@@ -22,7 +22,7 @@
 #ifndef _CBAZAARCHECKPACKET_H
 #define _CBAZAARCHECKPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 
@@ -32,11 +32,6 @@ enum BAZAARCHECK
     BAZAAR_LEAVE = 1
 };
 
-/************************************************************************
- *																		*
- *  																		*
- *																		*
- ************************************************************************/
 
 class CCharEntity;
 

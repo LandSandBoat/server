@@ -19,7 +19,7 @@
 ===========================================================================
 */
 
-#include "../../common/socket.h"
+#include "common/socket.h"
 
 #include <cstring>
 
@@ -28,8 +28,8 @@
 
 CKeyItemsPacket::CKeyItemsPacket(CCharEntity* PChar, KEYS_TABLE KeyTable)
 {
-    this->type = 0x55;
-    this->size = 0x44;
+    this->setType(0x55);
+    this->setSize(0x88);
 
     XI_DEBUG_BREAK_IF(KeyTable >= MAX_KEYS_TABLE);
 

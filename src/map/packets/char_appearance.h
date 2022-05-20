@@ -22,15 +22,9 @@
 #ifndef _CHARAPPEARANCEPACKET_H
 #define _CHARAPPEARANCEPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
-
-/************************************************************************
- *																		*
- *  																		*
- *																		*
- ************************************************************************/
 
 class CCharEntity;
 

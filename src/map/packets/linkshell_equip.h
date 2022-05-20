@@ -22,13 +22,13 @@
 #ifndef _CLINKSHELLEQUIPPACKET_H
 #define _CLINKSHELLEQUIPPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 
 /************************************************************************
  *                                                                       *
- *  Отправляем LinkshellID, по которому осуществляется поиск             *
+ *  We send Linkshellid to which the search is carried out.             *
  *                                                                       *
  ************************************************************************/
 

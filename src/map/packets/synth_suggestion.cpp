@@ -19,7 +19,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 ===========================================================================
 */
 
-#include "../../common/socket.h"
+#include "common/socket.h"
 #include "../map.h"
 
 #include "synth_suggestion.h"
@@ -27,8 +27,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 CSynthSuggestionPacket::CSynthSuggestionPacket(uint16 skillID, uint16 skillLevel)
 {
-    this->type = 0x31;
-    this->size = 0x1A;
+    this->setType(0x31);
+    this->setSize(0x34);
 
     char craftname[8];
     memset(craftname, 0, 8);
@@ -80,9 +80,9 @@ CSynthSuggestionPacket::CSynthSuggestionPacket(uint16 skillID, uint16 skillLevel
     //      craft level of the "main" craft against the craft level of
     //      each craft one at a time to ensure we are only getting
     //      recipes intended for the craft we are seeking to improve?
-    int32 ret = Sql_Query(SqlHandle, fmtQuery, craftname, craftname, skillLevel + 5, skillLevel + 10);
+    int32 ret = sql->Query(fmtQuery, craftname, craftname, skillLevel + 5, skillLevel + 10);
 
-    if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+    if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
     {
         std::map<uint16, uint16> ingredients;
         uint16                   subcraftIDs[3] = { 0u, 0u, 0u };
@@ -95,7 +95,7 @@ CSynthSuggestionPacket::CSynthSuggestionPacket(uint16 skillID, uint16 skillLevel
             uint16 this_skill = 0u;
             if (i != skillID && subidx < 3)
             {
-                this_skill = Sql_GetUIntData(SqlHandle, i);
+                this_skill = sql->GetUIntData(i);
             }
 
             if (this_skill > 0u)
@@ -105,12 +105,12 @@ CSynthSuggestionPacket::CSynthSuggestionPacket(uint16 skillID, uint16 skillLevel
             }
         }
 
-        ref<uint16>(0x04) = Sql_GetUIntData(SqlHandle, 10);
+        ref<uint16>(0x04) = sql->GetUIntData(10);
         ref<uint16>(0x06) = subcraftIDs[0];
         ref<uint16>(0x08) = subcraftIDs[1];
         ref<uint16>(0x0A) = subcraftIDs[2];
-        ref<uint16>(0x0C) = Sql_GetUIntData(SqlHandle, 9);
-        ref<uint16>(0x0E) = Sql_GetUIntData(SqlHandle, 0);
+        ref<uint16>(0x0C) = sql->GetUIntData(9);
+        ref<uint16>(0x0E) = sql->GetUIntData(0);
 
         // So this loop is a little weird. What we store in the db
         //     is a list of 8 individual ingredients which may or
@@ -124,7 +124,7 @@ CSynthSuggestionPacket::CSynthSuggestionPacket(uint16 skillID, uint16 skillLevel
         {
             uint16 this_ingredient = 0;
 
-            this_ingredient = Sql_GetUIntData(SqlHandle, 11 + i);
+            this_ingredient = sql->GetUIntData(11 + i);
             if (this_ingredient != 0)
             {
                 if (ingredients[this_ingredient])

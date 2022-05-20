@@ -51,25 +51,15 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-
     if
-        player:getCurrentMission(COP) == xi.mission.id.cop.BELOW_THE_ARKS and
-        player:getCharVar("PromathiaStatus") == 1
-    then
-        player:startEvent(113)
-
-    elseif
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.EMPTY_MEMORIES) == QUEST_AVAILABLE and
-        player:getCurrentMission(COP) >= xi.mission.id.cop.THE_MOTHERCRYSTALS
+        player:getCurrentMission(xi.mission.log_id.COP) >= xi.mission.id.cop.THE_MOTHERCRYSTALS
     then
         player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.EMPTY_MEMORIES)
-        player:startEvent(114)
+        player:startEvent(113)
 
     elseif player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.EMPTY_MEMORIES) >= QUEST_ACCEPTED then
         player:startEvent(114)
-
-    else
-        player:startEvent(111)
     end
 end
 
@@ -86,10 +76,10 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("harithreward", 0)
 
         if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.EMPTY_MEMORIES) == QUEST_ACCEPTED then
-            player:addFame(JEUNO, 30)
+            player:addFame(xi.quest.fame_area.JEUNO, 30)
             player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.EMPTY_MEMORIES)
         else
-            player:addFame(JEUNO, 5)
+            player:addFame(xi.quest.fame_area.JEUNO, 5)
         end
     end
 end

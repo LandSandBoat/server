@@ -22,15 +22,9 @@
 #ifndef _CSHOPITEMSPACKET_H
 #define _CSHOPITEMSPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
-
-/************************************************************************
- *																		*
- *  																		*
- *																		*
- ************************************************************************/
 
 class CCharEntity;
 

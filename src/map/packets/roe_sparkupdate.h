@@ -22,15 +22,9 @@
 #ifndef _CROESPARKPACKET_H
 #define _CROESPARKPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
-
-/************************************************************************
- *																		*
- *  																		*
- *																		*
- ************************************************************************/
 
 class CCharEntity;
 

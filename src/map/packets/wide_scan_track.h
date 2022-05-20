@@ -22,15 +22,9 @@
 #ifndef _CWIDESCANTRACKPACKET_H
 #define _CWIDESCANTRACKPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
-
-/************************************************************************
- *																		*
- *  																		*
- *																		*
- ************************************************************************/
 
 class CBaseEntity;
 

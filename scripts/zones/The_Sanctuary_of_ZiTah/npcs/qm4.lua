@@ -27,7 +27,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 204 then
-        npcUtil.completeQuest(player, BASTOK, xi.quest.id.bastok.LOVERS_IN_THE_DUSK, {item = 17346, fame = 120})
+        npcUtil.completeQuest(player, xi.quest.log_id.BASTOK, xi.quest.id.bastok.LOVERS_IN_THE_DUSK, {item = 17346, fame = 120})
     end
 end
 

@@ -17,12 +17,12 @@ xi.rhapsodies.character = {
 
 xi.rhapsodies.expansion =
 {
-    [xi.rhapsodies.character.PRISHE]     = COP,
-    [xi.rhapsodies.character.TENZEN]     = COP,
-    [xi.rhapsodies.character.APHMAU]     = TOAU,
-    [xi.rhapsodies.character.LILLISETTE] = WOTG,
-    [xi.rhapsodies.character.CAIT_SITH]  = WOTG,
-    [xi.rhapsodies.character.ARCIELA]    = SOA,
+    [xi.rhapsodies.character.PRISHE]     = xi.mission.log_id.COP,
+    [xi.rhapsodies.character.TENZEN]     = xi.mission.log_id.COP,
+    [xi.rhapsodies.character.APHMAU]     = xi.mission.log_id.TOAU,
+    [xi.rhapsodies.character.LILLISETTE] = xi.mission.log_id.WOTG,
+    [xi.rhapsodies.character.CAIT_SITH]  = xi.mission.log_id.WOTG,
+    [xi.rhapsodies.character.ARCIELA]    = xi.mission.log_id.SOA,
 }
 
 xi.rhapsodies.unavailability =
@@ -36,7 +36,7 @@ xi.rhapsodies.unavailability =
        xi.mission.id.cop.A_PLACE_TO_RETURN,
        xi.mission.id.cop.MORE_QUESTIONS_THAN_ANSWERS,
        xi.mission.id.cop.ONE_TO_BE_FEARED,
-       xi.mission.id.cop.THE_WARRIOR_S_PATH,
+       xi.mission.id.cop.THE_WARRIORS_PATH,
        xi.mission.id.cop.GARDEN_OF_ANTIQUITY,
        xi.mission.id.cop.WHEN_ANGELS_FALL,
        xi.mission.id.cop.DAWN,
@@ -45,7 +45,7 @@ xi.rhapsodies.unavailability =
         xi.mission.id.cop.THE_CALL_OF_THE_WYRMKING,
         xi.mission.id.cop.A_VESSEL_WITHOUT_A_CAPTAIN,
         xi.mission.id.cop.DESIRES_OF_EMPTINESS,
-        xi.mission.id.cop.THE_WARRIOR_S_PATH,
+        xi.mission.id.cop.THE_WARRIORS_PATH,
         xi.mission.id.cop.GARDEN_OF_ANTIQUITY,
         xi.mission.id.cop.WHEN_ANGELS_FALL,
         xi.mission.id.cop.DAWN,
@@ -297,7 +297,7 @@ xi.rhapsodies.requiredCharacters =
 -- http://forum.square-enix.com/ffxi/threads/47983-What-should-I-do-if-I-can%E2%80%99t-progress-in-Rhapsodies-of-Vana%E2%80%99diel
 
 xi.rhapsodies.charactersAvailable = function(player)
-    local rov_mission = player:getCurrentMission(ROV)
+    local rov_mission = player:getCurrentMission(xi.mission.log_id.ROV)
     for _, char in pairs(xi.rhapsodies.requiredCharacters[rov_mission]) do
         local expansion_mission = player:getCurrentMission(xi.rhapsodies.expansion[char])
         if xi.rhapsodies.unavailability[char][expansion_mission] then

@@ -21,7 +21,7 @@
 
 #include <cstring>
 
-#include "../../common/utils.h"
+#include "common/utils.h"
 #include "item.h"
 
 /************************************************************************
@@ -31,32 +31,29 @@
  ************************************************************************/
 
 CItem::CItem(uint16 id)
+: m_id(id)
+, m_subid(0)
+, m_type(0)
+, m_subtype(0)
+, m_quantity(0)
+, m_reserve(0)
+, m_stackSize(0)
+, m_BasePrice(0)
+, m_CharPrice(0)
+, m_ahCat(0)
+, m_flag(0)
+, m_slotID(-1)
+, m_locationID(-1)
+, m_sent(false)
 {
-    m_id = id;
-
-    m_subid     = 0;
-    m_type      = 0;
-    m_subtype   = 0;
-    m_reserve   = 0;
-    m_quantity  = 0;
-    m_stackSize = 0;
-    m_BasePrice = 0;
-    m_CharPrice = 0;
-    m_ahCat     = 0;
-    m_flag      = 0;
-    m_sent      = false;
-
-    m_slotID     = -1;
-    m_locationID = -1;
-
-    memset(m_extra, 0, sizeof m_extra);
+    std::memset(m_extra, 0, sizeof(m_extra));
 }
 
 CItem::~CItem() = default;
 
 /************************************************************************
  *                                                                       *
- *  Уникальный номер предмета                                            *
+ *                                                                       *
  *                                                                       *
  ************************************************************************/
 
@@ -88,7 +85,7 @@ uint16 CItem::getSubID() const
 
 /************************************************************************
  *                                                                       *
- *  Параметр, определяющий характеристики предмета                       *
+ *  Parameter defining the characteristics of the subject                *
  *                                                                       *
  ************************************************************************/
 
@@ -168,7 +165,7 @@ bool CItem::isSubType(ITEM_SUBTYPE subtype) const
 
 /************************************************************************
  *                                                                       *
- *  Зарезервированное количество предметов в пачке                       *
+ * Reserved number of objects in a pack                                  *
  *                                                                       *
  ************************************************************************/
 
@@ -184,7 +181,7 @@ uint32 CItem::getReserve() const
 
 /************************************************************************
  *                                                                       *
- *  Текущее количество предметов в пачке                                 *
+ *  The current number of objects in a pack                              *
  *                                                                       *
  ************************************************************************/
 
@@ -200,7 +197,7 @@ uint32 CItem::getQuantity() const
 
 /************************************************************************
  *                                                                       *
- *  Максимальное количество предметов в пачке                            *
+ * The maximum number of objects in the pack                             *
  *                                                                       *
  ************************************************************************/
 
@@ -251,7 +248,7 @@ uint32 CItem::getCharPrice() const
 
 /************************************************************************
  *                                                                       *
- *  Название предмета                                                    *
+ *  The name of the subject                                              *
  *                                                                       *
  ************************************************************************/
 
@@ -380,9 +377,9 @@ bool CItem::isSoultrapper() const
     return m_id == 18721 || m_id == 18724;
 }
 
-void CItem::setSoulPlateData(std::string name, uint16 mobFamily, uint8 zeni, uint16 skillIndex, uint8 fp)
+void CItem::setSoulPlateData(std::string const& name, uint16 mobFamily, uint8 zeni, uint16 skillIndex, uint8 fp)
 {
-    PackSoultrapperName(name, m_extra, name.size());
+    PackSoultrapperName(name, m_extra);
 
     // Hack: Artificially chop off extremely long names, so we can pack the mobFamily info into m_extra
     m_extra[17] = (mobFamily & 0xFF00) >> 8;

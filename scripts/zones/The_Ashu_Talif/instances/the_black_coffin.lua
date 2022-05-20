@@ -9,12 +9,12 @@ local ID = require("scripts/zones/The_Ashu_Talif/IDs")
 local instance_object = {}
 
 instance_object.registryRequirements = function(player)
-    return player:getCurrentMission(TOAU) == xi.mission.id.toau.THE_BLACK_COFFIN and
+    return player:getCurrentMission(xi.mission.log_id.TOAU) == xi.mission.id.toau.THE_BLACK_COFFIN and
            player:hasKeyItem(xi.ki.EPHRAMADIAN_GOLD_COIN)
 end
 
 instance_object.entryRequirements = function(player)
-    return player:getCurrentMission(TOAU) >= xi.mission.id.toau.THE_BLACK_COFFIN and
+    return player:getCurrentMission(xi.mission.log_id.TOAU) >= xi.mission.id.toau.THE_BLACK_COFFIN and
            player:hasKeyItem(xi.ki.EPHRAMADIAN_GOLD_COIN)
 end
 
@@ -73,9 +73,13 @@ instance_object.onInstanceComplete = function(instance)
     end
 
     for i, player in pairs(players) do
-        if player:getCurrentMission(TOAU) == xi.mission.id.toau.THE_BLACK_COFFIN and player:getCharVar("AhtUrganStatus") == 1 then
-            player:setCharVar("AhtUrganStatus", 2)
+        if
+            player:getCurrentMission(xi.mission.log_id.TOAU) == xi.mission.id.toau.THE_BLACK_COFFIN and
+            player:getMissionStatus(xi.mission.log_id.TOAU) == 1
+        then
+            player:setMissionStatus(xi.mission.log_id.TOAU, 2)
         end
+
         player:startEvent(102)
     end
 end

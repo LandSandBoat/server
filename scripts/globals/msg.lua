@@ -239,6 +239,7 @@ xi.msg.basic =
     ADD_EFFECT_HP_DRAIN    = 161, -- Additional effect: <number> HP drained from <target>.
     ADD_EFFECT_MP_DRAIN    = 162, -- Additional effect: <number> MP drained from <target>.
     ADD_EFFECT_DMG         = 163, -- Additional effect: <number> points of damage.
+    ADD_EFFECT_DMG_2       = 229, -- Additional effect: The <target> takes <number> additional points of damage.
     ADD_EFFECT_STATUS_2    = 164, -- Additional effect: <Status Effect>. (Duplicate?)
     ADD_EFFECT_TP_DRAIN    = 165, -- Additional effect: <number> TP drained from <target>.
     ADD_EFFECT_SELFBUFF    = 166, -- Additional effect: <player> gains the effect of <Status Effect>.
@@ -310,6 +311,15 @@ xi.msg.basic =
     LUOPAN_HP_RATE_DOWN    = 663, -- <player> uses <ability>. The luopan's HP consumption rate has been reduced.
     LUOPAN_HP_RATE_UP      = 664, -- <player> uses <ability>. The luopan's HP consumption rate has been increased.
     HAS_LUOPON_NO_USE      = 665, -- <player> has a pet. Unable to use ability.
+
+    --- RUN
+    REQUIRE_RUNE           = 666, -- That action requires the ability Rune Enchantment.
+    SWORDPLAY_GAIN         = 667, -- <Player> uses <Ability>. Accuracy and evasion are enhanced.
+    VALLATION_GAIN         = 668, -- <Target> receives the effect of Vallation, reducing damage taken from certain elemental magic spells. -- Vallation and Valiance both use this message for the RUN using the ja
+    VALIANCE_GAIN_PARTY    = 669, -- Magic damage of a certain element is reduced for <Target>                                             -- This message is when a party member recieves the aoe effect of Valiance
+    LIEMENT_GAIN           = 670, -- <Player> uses <Ability>. <Target> can now absorb magic damage of a certain element.
+    PFLUG_GAIN             = 671, -- <Player> uses <Ability>. <Target> now has enhanced resistance.
+    GAMBIT_GAIN            = 672, -- <Player> uses <Ability>. <Target> receives the effect of Gambit, reducing magic defense against magic of a certain element.
 
     -- Fields / Grounds of Valor
     FOV_DEFEATED_TARGET     = 558,  -- You defeated a designated target.${lb}(Progress: ${number}/${number2})

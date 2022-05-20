@@ -1,25 +1,13 @@
 -----------------------------------
--- Area: Apollyon NE
+-- Area: Apollyon NE, Floor 3
 --  Mob: Apollyon Cleaner
 -----------------------------------
-local ID = require("scripts/zones/Apollyon/IDs")
+require("scripts/zones/Apollyon/bcnms/ne_apollyon_helper")
 -----------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, isKiller, noKiller)
-    if isKiller or noKiller then
-        local mobID       = mob:getID()
-        local battlefield = mob:getBattlefield()
-        local itemF3      = battlefield:getLocalVar("itemF3")
-
-        if itemF3 == mobID then
-            local mobX = mob:getXPos()
-            local mobY = mob:getYPos()
-            local mobZ = mob:getZPos()
-            GetNPCByID(ID.npc.APOLLYON_NE_CRATE[3][1]):setPos(mobX, mobY, mobZ)
-            GetNPCByID(ID.npc.APOLLYON_NE_CRATE[3][1]):setStatus(xi.status.NORMAL)
-        end
-    end
+    xi.apollyon_ne.handleMobDeathFloorThree(mob, player, isKiller, noKiller)
 end
 
 return entity

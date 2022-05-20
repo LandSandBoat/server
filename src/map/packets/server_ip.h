@@ -22,15 +22,9 @@
 #ifndef _CSERVERIPPACKET_H
 #define _CSERVERIPPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
-
-/************************************************************************
- *																		*
- *  																		*
- *																		*
- ************************************************************************/
 
 class CCharEntity;
 

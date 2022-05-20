@@ -57,14 +57,17 @@ void CTrustEntity::PostTick()
     // NOTE: This is purposefully calling CBattleEntity's impl.
     // TODO: Calling a grand-parent's impl. of an overrideden function is bad
     CBattleEntity::PostTick();
-    if (loc.zone && updatemask && status != STATUS_TYPE::DISAPPEAR)
+    std::chrono::steady_clock::time_point now = std::chrono::steady_clock::now();
+    if (loc.zone && updatemask && status != STATUS_TYPE::DISAPPEAR && now > m_nextUpdateTimer)
     {
-        loc.zone->PushPacket(this, CHAR_INRANGE, new CEntityUpdatePacket(this, ENTITY_UPDATE, updatemask));
+        m_nextUpdateTimer = now + 250ms;
+        loc.zone->UpdateEntityPacket(this, ENTITY_UPDATE, updatemask);
 
         if (PMaster && PMaster->PParty && updatemask & UPDATE_HP)
         {
             PMaster->ForParty([this](auto PMember) { static_cast<CCharEntity*>(PMember)->pushPacket(new CCharHealthPacket(this)); });
         }
+
         updatemask = 0;
     }
 }
@@ -72,7 +75,7 @@ void CTrustEntity::PostTick()
 void CTrustEntity::FadeOut()
 {
     CBaseEntity::FadeOut();
-    loc.zone->PushPacket(this, (loc.zone->m_BattlefieldHandler) ? CHAR_INZONE : CHAR_INRANGE, new CEntityUpdatePacket(this, ENTITY_DESPAWN, UPDATE_NONE));
+    loc.zone->UpdateEntityPacket(this, ENTITY_DESPAWN, UPDATE_NONE);
 }
 
 void CTrustEntity::Die()
@@ -236,7 +239,7 @@ void CTrustEntity::OnRangedAttack(CRangeState& state, action_t& action)
     uint8 shadowsTaken = 0;
     uint8 hitCount     = 1; // 1 hit by default
     uint8 realHits     = 0; // to store the real number of hit for tp multipler
-    auto  ammoConsumed = 0;
+    // auto  ammoConsumed = 0;
     bool  hitOccured   = false; // track if player hit mob at all
     bool  isSange      = false;
     bool  isBarrage    = StatusEffectContainer->HasStatusEffect(EFFECT_BARRAGE, 0);
@@ -433,6 +436,16 @@ bool CTrustEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
         return true;
     }
 
+    if ((targetFlags & TARGET_PLAYER_PARTY_PIANISSIMO) && PInitiator->allegiance == allegiance && PMaster && PInitiator != this)
+    {
+        return true;
+    }
+
+    if ((targetFlags & TARGET_PLAYER_PARTY_ENTRUST) && PInitiator->allegiance == allegiance && PMaster && PInitiator != this)
+    {
+        return true;
+    }
+
     if (targetFlags & TARGET_PLAYER_PARTY && PInitiator->objtype == TYPE_PET && PInitiator->allegiance == allegiance)
     {
         return true;
@@ -485,7 +498,7 @@ void CTrustEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& act
     int16 tp = state.GetSpentTP();
     tp       = battleutils::CalculateWeaponSkillTP(this, PWeaponSkill, tp);
 
-    if (distance(loc.p, PBattleTarget->loc.p) - PBattleTarget->m_ModelSize <= PWeaponSkill->getRange())
+    if (distance(loc.p, PBattleTarget->loc.p) - PBattleTarget->m_ModelRadius <= PWeaponSkill->getRange())
     {
         PAI->TargetFind->reset();
         if (PWeaponSkill->isAoE())

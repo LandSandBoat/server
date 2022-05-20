@@ -49,6 +49,7 @@ class CPetEntity : public CMobEntity
 public:
     CPetEntity(PET_TYPE petType); // конструктор
     ~CPetEntity();               // деструктор
+
     PET_TYPE    getPetType();
     bool        isBstPet();
     uint8       m_Element;
