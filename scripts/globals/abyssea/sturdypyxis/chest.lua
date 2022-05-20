@@ -62,6 +62,7 @@ xi.pyxis.canOpenChest = function(player, npc)
     end
 
     if not canOpen then
+        local ID = zones[player:getZoneID()]
         player:messageSpecial(ID.text.PARTY_NOT_OWN_CHEST)
     end
 
