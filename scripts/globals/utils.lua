@@ -10,7 +10,6 @@ utils.MAX_INT32  = 2147483647
 
 -- Used to keep the linter quiet
 function utils.unused(...)
-    return
 end
 
 -- Shuffles a table and returns a new table containing the randomized result.
