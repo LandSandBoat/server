@@ -46,7 +46,7 @@ public:
         moduleutils::RegisterCPPModule(this);
     }
 
-    virtual ~CPPModule(){};
+    virtual ~CPPModule() = default;
 
     // Required
     virtual void OnInit() = 0;

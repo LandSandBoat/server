@@ -210,7 +210,7 @@ namespace moduleutils
                     {
                         ShowScript(fmt::format("Applying override: {}", override.overrideName));
 
-                        lua["applyOverride"](table, lastElem, override.func);
+                        lua["applyOverride"](table, override.func, lastElem, override.overrideName, override.filename);
 
                         override.applied = true;
 
@@ -227,7 +227,7 @@ namespace moduleutils
         {
             if (!override.applied)
             {
-                ShowWarning(fmt::format("Override not applied: {} ({})", override.overrideName, override.filename));
+                ShowError(fmt::format("Override not applied: {} ({})", override.overrideName, override.filename));
             }
         }
     }
