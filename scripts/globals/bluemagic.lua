@@ -388,11 +388,16 @@ function BlueFinalAdjustments(caster, target, spell, dmg, params)
         dmg = 0
     end
 
+    local attackType = params.attackType or xi.attackType.NONE
+    local damageType = params.damageType or xi.damageType.NONE
+
+    -- handle One For All
+    if damagetype == xi.damageType.MAGICAL then
+        dmg = utils.oneforall(target, dmg)
+    end
     -- handling stoneskin
     dmg = utils.stoneskin(target, dmg)
 
-    local attackType = params.attackType or xi.attackType.NONE
-    local damageType = params.damageType or xi.damageType.NONE
     target:takeSpellDamage(caster, spell, dmg, attackType, damageType)
     target:updateEnmityFromDamage(caster, dmg)
     target:handleAfflatusMiseryDamage(dmg)
