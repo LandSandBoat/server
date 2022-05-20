@@ -210,7 +210,7 @@ namespace moduleutils
                     {
                         ShowScript(fmt::format("Applying override: {}", override.overrideName));
 
-                        lua["applyOverride"](table, override.func, lastElem, override.overrideName, override.filename);
+                        lua["applyOverride"](table, lastElem, override.func, override.overrideName, override.filename);
 
                         override.applied = true;
 

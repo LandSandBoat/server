@@ -5,7 +5,7 @@ require("scripts/globals/utils")
 -----------------------------------
 
 -- Global, for use in C++
-function applyOverride(base_table, func, name, fullname, filename)
+function applyOverride(base_table, name, func, fullname, filename)
     local old = base_table[name]
 
     if old == nil then
