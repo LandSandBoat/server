@@ -119,6 +119,12 @@ namespace luautils
         // Globally require bit library
         lua.do_string("if not bit then bit = require('bit') end");
 
+        lua.do_string(
+            "function __FILE__() return debug.getinfo(2, 'S').source end\n"
+            "function __LINE__() return debug.getinfo(2, 'l').currentline end\n"
+            "function __FUNC__() return debug.getinfo(2, 'n').name end\n"
+        );
+
         // Bind print(...) globally
         lua.set_function("print", &luautils::print);
 

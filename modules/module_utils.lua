@@ -5,11 +5,11 @@ require("scripts/globals/utils")
 -----------------------------------
 
 -- Global, for use in C++
-function applyOverride(base_table, name, func)
+function applyOverride(base_table, func, name, fullname, filename)
     local old = base_table[name]
 
     if old == nil then
-        print("Inserting empty function to override for: " .. name)
+        print(string.format("Inserting empty function to override for: %s (%s)"), fullname, filename)
         old = function() end -- Insert empty function
     end
 
