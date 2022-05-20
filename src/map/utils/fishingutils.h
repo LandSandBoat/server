@@ -681,9 +681,9 @@ enum FISHINGROD : uint32
 };
 
 /************************************************************************
-*																		*
+*                                                                       *
 *  All the methods necessary for the implementation of fishing          *
-*																		*
+*                                                                       *
 ************************************************************************/
 
 class CBasicPacket;

@@ -212,7 +212,7 @@ uint8 CItemWeapon::getSkillType() const
 /************************************************************************
  *                                                                      *
  *   Set sub skillType.  Used for guns vs crossbows and other           *
- *	exclusives                                                          *
+ *  exclusives                                                          *
  *                                                                      *
  ************************************************************************/
 
