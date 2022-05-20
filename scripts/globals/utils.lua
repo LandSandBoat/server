@@ -483,3 +483,43 @@ function utils.splitStr(s, sep)
     string.gsub(s, pattern, function(c) fields[#fields + 1] = c end)
     return fields
 end
+
+function utils.mobTeleport(mob, hideDuration, pos, disAnim, reapAnim)
+    if hideDuration == nil then hideDuration = 5000 end
+    if disAnim == nil then disAnim = "kesu" end
+    if reapAnim == nil then reapAnim = "deru" end
+    if pos == nil then pos = mob:getPos() end
+
+    local mobSpeed = mob:getSpeed()
+
+    if hideDuration < 1500 then
+        hideDuration = 1500
+    end
+
+    if mob:isDead() then
+        return
+    end
+
+    mob:entityAnimationPacket(disAnim)
+    mob:hideName(true)
+    mob:untargetable(true)
+    mob:SetAutoAttackEnabled(false)
+    mob:SetMagicCastingEnabled(false)
+    mob:SetMobAbilityEnabled(false)
+    mob:setPos(pos, 0)
+    mob:setSpeed(0)
+
+    mob:entityAnimationPacket("deru")
+    mob:timer(hideDuration, function(mobArg)
+        mob:hideName(false)
+        mob:untargetable(false)
+        mob:SetAutoAttackEnabled(true)
+        mob:SetMagicCastingEnabled(true)
+        mob:SetMobAbilityEnabled(true)
+        mob:setSpeed(mobSpeed)
+
+        if mob:isDead() then
+            return
+        end
+    end)
+end
