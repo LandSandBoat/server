@@ -3314,7 +3314,9 @@ bool CLuaBaseEntity::addItem(sol::variadic_args va)
 
                 if (!signature.empty())
                 {
-                    int8 encoded[12];
+                    int8 encoded[SignatureStringLength];
+
+                    memset(encoded, 0, sizeof(encoded));
                     PItem->setSignature(EncodeStringSignature((int8*)signature.c_str(), encoded));
                 }
 
@@ -3774,7 +3776,9 @@ bool CLuaBaseEntity::breakLinkshell(std::string const& lsname)
             PLinkshell = linkshell::LoadLinkshell(lsid);
         }
 
-        int8 EncodedName[16];
+        int8 EncodedName[LinkshellStringLength];
+
+        memset(EncodedName, 0, sizeof(EncodedName));
         EncodeStringLinkshell((int8*)lsname.c_str(), EncodedName);
         PLinkshell->BreakLinkshell(EncodedName, true);
         linkshell::UnloadLinkshell(lsid);
@@ -3803,7 +3807,9 @@ bool CLuaBaseEntity::addLinkpearl(std::string const& lsname, bool equip)
         if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
         {
             // build linkpearl
-            int8 EncodedString[16];
+            int8 EncodedString[LinkshellStringLength];
+
+            memset(EncodedString, 0, sizeof(EncodedString));
             EncodeStringLinkshell((int8*)lsname.c_str(), EncodedString);
             ((CItem*)PItemLinkPearl)->setSignature(EncodedString);
             PItemLinkPearl->SetLSID(sql->GetUIntData(0));
