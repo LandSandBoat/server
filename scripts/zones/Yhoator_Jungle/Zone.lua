@@ -43,6 +43,9 @@ end
 
 zone_object.onGameDay = function()
     xi.bmt.updatePeddlestox(xi.zone.YHOATOR_JUNGLE, ID.npc.PEDDLESTOX)
+
+    -- Chocobo Digging.
+    SetServerVariable("[DIG]ZONE124_ITEMS", 0)
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)

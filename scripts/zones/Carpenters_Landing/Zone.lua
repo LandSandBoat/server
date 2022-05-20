@@ -43,6 +43,10 @@ zone_object.onGameHour = function(zone)
     end
 end
 
+zone_object.onGameDay = function()
+    SetServerVariable("[DIG]ZONE2_ITEMS", 0)
+end
+
 zone_object.onRegionEnter = function(player, region)
 end
 

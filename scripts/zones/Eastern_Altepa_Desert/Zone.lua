@@ -53,6 +53,10 @@ zone_object.onZoneIn = function(player, prevZone)
     return cs
 end
 
+zone_object.onGameDay = function()
+    SetServerVariable("[DIG]ZONE114_ITEMS", 0)
+end
+
 zone_object.onRegionEnter = function(player, region)
 end
 
