@@ -1462,8 +1462,9 @@ INSERT INTO `item_latents` VALUES (15162,68,2,29,0);
 INSERT INTO `item_latents` VALUES (15164,68,2,29,0);
 INSERT INTO `item_latents` VALUES (15168,68,2,29,0);
 INSERT INTO `item_latents` VALUES (15168,68,2,31,0);
+
 INSERT INTO `item_latents` VALUES (15174,25,12,10,0);
-INSERT INTO `item_latents` VALUES (15174,370,-100,10,0);
+INSERT INTO `item_latents` VALUES (15174,404,100,10,0);
 INSERT INTO `item_latents` VALUES (15174,384,400,10,0);
 
 -- -------------------------------------------------------
@@ -1644,7 +1645,7 @@ INSERT INTO `item_latents` VALUES (15520,68,7,58,0);     -- storm torque eva +7
 -- Berserker's Torque
 -- -------------------------------------------------------
 INSERT INTO `item_latents` VALUES (15530,368,10,10,0);   -- HP-50/Tick of TP while weapon drawn
-INSERT INTO `item_latents` VALUES (15530,370,-50,10,0);
+INSERT INTO `item_latents` VALUES (15530,404,50,10,0);
 
 -- -------------------------------------------------------
 -- Shark Necklace
