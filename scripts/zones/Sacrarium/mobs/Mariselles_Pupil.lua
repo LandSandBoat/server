@@ -167,7 +167,8 @@ end
 entity.onMobRoam = function(mob)
     local profLocation = mob:getLocalVar("spawnLocation")
     local returnPoint =
-    {{102.669, -3.111, 127.279},
+    {
+      {102.669, -3.111, 127.279},
       {62.668, -3.111, 127.288},
       {22.669, -3.111, 127.279},
       {102.670, -3.111, -127.318},
