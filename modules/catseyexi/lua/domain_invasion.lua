@@ -96,7 +96,7 @@ m:addOverride("xi.zones.Escha_RuAun.Zone.onZoneTick", function(zone)
         })
 
         mob:setSpawn(0.421, -43.600, -196.322, 65)
-        mob:setDropID(8000)
+        mob:setDropID(3900)
         mob:spawn()
 
         -- Set MobMods 
@@ -202,7 +202,7 @@ m:addOverride("xi.zones.Reisenjima_Henge.Zone.onZoneTick", function(zone)
         })
     
         mob:setSpawn(0.195, 5.500, -1.378, 65)
-        mob:setDropID(8000)
+        mob:setDropID(3900)
         mob:spawn()
 
         -- Set MobMods 
@@ -300,7 +300,7 @@ m:addOverride("xi.zones.Provenance.Zone.onZoneTick", function(zone)
         })
     
         mob:setSpawn(-580, -228, 540, 65)
-        mob:setDropID(8000)
+        mob:setDropID(3900)
         mob:spawn()
 
         -- Set MobMods 
@@ -435,7 +435,7 @@ m:addOverride("xi.zones.Provenance.Zone.onZoneTick", function(zone)
         })
   
         mob:setSpawn(-580, -228, 540, 65)
-        mob:setDropID(8001)
+        mob:setDropID(3901)
         mob:spawn()
 
         --  Set MobMods
