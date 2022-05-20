@@ -20,8 +20,6 @@ Teleport = function(mob, hideDuration, pos)
     mob:SetAutoAttackEnabled(false)
     mob:SetMagicCastingEnabled(false)
     mob:SetMobAbilityEnabled(false)
-
-
     mob:setPos(pos, 0)
 
     hideDuration = hideDuration or 5000
@@ -41,8 +39,6 @@ Teleport = function(mob, hideDuration, pos)
         if mob:isDead() then
             return
         end
-
-
     end)
 end
 
@@ -55,7 +51,6 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobFight = function(mob, target)
-
     SW = --Southwest room
     {
         {8.7566, -2.0000, -109.7524},
@@ -128,7 +123,6 @@ entity.onMobFight = function(mob, target)
         {110.8072, -2.1785, 130.0085},
         {100.0483, -2, 116.4553}
     }
-
 
     local teleTime = mob:getLocalVar("teleTime")
     if mob:getBattleTime() - teleTime > 30 and mob:getBattleTime() > 59 then

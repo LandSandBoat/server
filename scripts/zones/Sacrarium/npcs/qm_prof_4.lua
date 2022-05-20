@@ -14,10 +14,6 @@ end
 entity.onTrigger = function(player, npc)
     local isSpawnPoint = npc:getLocalVar('hasProfessorMariselle') == 1
 
-    if isSpawnPoint == true then
-        print('check')
-    end
-
     if isSpawnPoint then
         player:messageSpecial(ID.text.DRAWER_SHUT)
     else

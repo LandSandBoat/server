@@ -20,8 +20,6 @@ Teleport = function(mob, hideDuration, pos)
     mob:SetAutoAttackEnabled(false)
     mob:SetMagicCastingEnabled(false)
     mob:SetMobAbilityEnabled(false)
-
-
     mob:setPos(pos, 0)
 
     hideDuration = hideDuration or 5000
@@ -41,8 +39,6 @@ Teleport = function(mob, hideDuration, pos)
         if mob:isDead() then
             return
         end
-
-
     end)
 end
 
