@@ -28,6 +28,7 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     params.hybridWS = true
     params.ele = xi.magic.ele.WATER
     params.skill = xi.skill.KATANA
+    params.includemab = true
 
     if xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.str_wsc = 0.3 params.int_wsc = 0.3
