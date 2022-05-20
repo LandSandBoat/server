@@ -6059,15 +6059,13 @@ namespace charutils
 
         if (value == 0)
         {
-            auto query = fmt::sprintf("DELETE FROM char_vars WHERE charid = %u AND varname = '%s' LIMIT 1;",
-                PChar->id, var);
-            sql->Query(query.c_str());
+            sql->Async(fmt::format("DELETE FROM char_vars WHERE charid = {} AND varname = '{}' LIMIT 1;",
+                PChar->id, var));
         }
         else
         {
-            auto query = fmt::sprintf("INSERT INTO char_vars SET charid = %u, varname = '%s', value = %i ON DUPLICATE KEY UPDATE value = %i;",
-                PChar->id, var.c_str(), value, value);
-            sql->Query(query.c_str());
+            sql->Async(fmt::format("INSERT INTO char_vars SET charid = {}, varname = '{}', value = {} ON DUPLICATE KEY UPDATE value = {};",
+                PChar->id, var.c_str(), value, value));
         }
     }
 
