@@ -56,7 +56,7 @@ def populate_migrations():
 
 # Migrations are automatically scraped from the migrations folder
 migrations = populate_migrations()
-
+# These are the 'protected' files
 player_data = [
     'accounts.sql',
     'accounts_banned.sql',
@@ -88,8 +88,6 @@ player_data = [
     'server_variables.sql',
     'unity_system.sql',
 ]
-
-# These are the 'protected' files
 
 import_files = []
 backups = []
