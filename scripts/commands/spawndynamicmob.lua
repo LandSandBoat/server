@@ -1,22 +1,12 @@
 -----------------------------------
-<<<<<<< HEAD
--- func: spawndynamicmob <Mob's Group ID> <Mob's Zone ID> <Number of Mobs> <Name for the Mob>
--- desc: Spawn a dynamic mob exactly matching that of a normal mob.
--- note:
-=======
 -- func: !spawndynamicmob <Mob's Group ID> <Mob's Zone ID> {Number of Mobs} {Name for the Mob} {dropsEnabled (1/0} {Costume Finder (1/0)}
 -- desc: Spawn a dynamic mob exactly matching that of a normal mob.
 -- note: Original code from zach2Good's Fafnir.lua
->>>>>>> base
 -----------------------------------
 
 cmdprops =
 {
-<<<<<<< HEAD
-    permission = 2,
-=======
     permission = 4,
->>>>>>> base
     parameters = "iiiiisii"
 }
 
@@ -118,8 +108,4 @@ function onTrigger(player, mobGroupID, mobZoneID, numberOfMob, mobLook, mobName,
             i = i + 1
         end
     end
-<<<<<<< HEAD
 end
-=======
-end
->>>>>>> base
