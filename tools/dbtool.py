@@ -8,7 +8,6 @@ import fileinput
 import shutil
 import importlib
 import pathlib
-from dbtool_protect import *
 
 # Pre-flight sanity checks
 def preflight_exit():
