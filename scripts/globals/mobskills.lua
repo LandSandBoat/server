@@ -158,7 +158,7 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod
     local lvluser = mob:getMainLvl()
     local lvltarget = target:getMainLvl()
     local acc = mob:getACC()
-    local eva = target:getEVA() + target:getMod(SPECIAL_ATTACK_EVASION)
+    local eva = target:getEVA() + target:getMod(xi.mod.SPECIAL_ATTACK_EVASION)
 
     if target:hasStatusEffect(xi.effect.YONIN) and mob:isFacing(target, 23) then -- Yonin evasion boost if mob is facing target
         eva = eva + target:getStatusEffect(xi.effect.YONIN):getPower()
