@@ -20,6 +20,10 @@ set(PACKET_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/blacklist.h
     ${CMAKE_CURRENT_SOURCE_DIR}/campaign_map.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/campaign_map.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/caught_fish.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/caught_fish.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/caught_monster.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/caught_monster.h
     ${CMAKE_CURRENT_SOURCE_DIR}/change_music.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/change_music.h
     ${CMAKE_CURRENT_SOURCE_DIR}/char.cpp
