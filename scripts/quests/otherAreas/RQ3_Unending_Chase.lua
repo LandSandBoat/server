@@ -16,10 +16,10 @@ local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.UNEN
 
 quest.reward =
 {
-    fame  = 120,
-    fameArea = MHAURA,
-    title = xi.title.TWO_STAR_PURVEYOR,
-    gil = 2100,
+    fame     = 120,
+    fameArea = xi.quest.fame_area.WINDURST,
+    title    = xi.title.TWO_STAR_PURVEYOR,
+    gil      = 2100,
 }
 
 quest.sections =
@@ -38,7 +38,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if
                         player:getCharVar("Quest[4][1]DayCompleted") + 7 < VanadielUniqueDay() and
-                        player:getFameLevel(WINDURST) > 2
+                        player:getFameLevel(xi.quest.fame_area.WINDURST) > 2
                     then
                         if quest:getVar(player, 'Prog') == 0 then
                             return quest:progressEvent(82, xi.items.PUFFBALL) -- Unending Chase starting event.
@@ -58,6 +58,7 @@ quest.sections =
                 [82] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 1)
                     player:setCharVar("Quest[4][1]DayCompleted", 0)  -- Delete previous quest (Rycharde the Chef) variables
+
                     if option == 77 then -- Accept quest option.
                         quest:begin(player)
                     end

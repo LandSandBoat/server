@@ -20,10 +20,10 @@ local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_
 
 quest.reward =
 {
-    fame = 120,
-    fameArea = MHAURA,
-    item = xi.items.TEA_SET,
-    title = xi.title.FIVE_STAR_PURVEYOR,
+    fame     = 120,
+    fameArea = xi.quest.fame_area.WINDURST,
+    item     = xi.items.TEA_SET,
+    title    = xi.title.FIVE_STAR_PURVEYOR,
 }
 
 quest.sections =
@@ -31,7 +31,7 @@ quest.sections =
     -- Section: Quest is available.
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and player:getFameLevel(WINDURST) > 4 and
+            return status == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.WINDURST) > 4 and
                 player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_CLUE) == QUEST_COMPLETED
         end,
 
@@ -46,6 +46,13 @@ quest.sections =
                 end,
             },
 
+            ['Take'] =
+            {
+                onTrigger = function(player, npc)
+                    return quest:event(66)
+                end,
+            },
+
             onEventFinish =
             {
                 [94] = function(player, csid, option, npc)
@@ -57,12 +64,22 @@ quest.sections =
                 end,
             },
         },
+
+        [xi.zone.SELBINA] =
+        {
+            ['Valgeir'] =
+            {
+                onTrigger = function(player, npc)
+                    return quest:event(144)
+                end,
+            },
+        },
     },
 
     -- Section: Quest accepeted.
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and vars.Prog == 0
+            return status == QUEST_ACCEPTED
         end,
 
         [xi.zone.MHAURA] =
@@ -72,54 +89,18 @@ quest.sections =
 
             ['Rycharde'] =
             {
-                onTrigger = function(player, npc)
-                    return quest:event(95) -- Not delivered the Key Item yet.
-                end,
-            },
-        },
-
-        [xi.zone.SELBINA] =
-        {
-            ['Valgeir'] =
-            {
-                onTrigger = function(player, npc)
-                    return quest:progressEvent(106) -- Deliver Key Item.
-                end,
-            },
-
-            onEventFinish =
-            {
-                [106] = function(player, csid, option, npc)
-                    npcUtil.giveItem(player, xi.items.BAKED_POPOTO)
-                    player:delKeyItem(xi.ki.MHAURAN_COUSCOUS)
-                    player:messageSpecial(selbinaID.text.KEYITEM_OBTAINED + 1, xi.ki.MHAURAN_COUSCOUS)
-                    quest:setVar(player, 'Prog', 1)
-                end,
-            },
-        },
-
-    },
-
-    -- Section: Finish quest.
-    {
-        check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and vars.Prog == 1
-        end,
-
-        [xi.zone.MHAURA] =
-        {
-            ['Rycharde'] =
-            {
-                onTrigger = function(player, npc)
-                    return quest:event(95) -- Commentary.
-                end,
-
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, {xi.items.BAKED_POPOTO}) then
+                    if
+                        npcUtil.tradeHasExactly(trade, {xi.items.BAKED_POPOTO}) and
+                        quest:getVar(player, 'Prog') == 1
+                    then
                         return quest:progressEvent(96) -- Quest completed.
                     end
                 end,
 
+                onTrigger = function(player, npc)
+                    return quest:event(95)
+                end,
             },
 
             onEventFinish =
@@ -140,10 +121,25 @@ quest.sections =
             ['Valgeir'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:event(145)
+                    if quest:getVar(player, 'Prog') == 0 then
+                        return quest:progressEvent(106) -- Deliver Key Item.
+                    else
+                        return quest:event(145)
+                    end
+                end,
+            },
+
+            onEventFinish =
+            {
+                [106] = function(player, csid, option, npc)
+                    npcUtil.giveItem(player, xi.items.BAKED_POPOTO)
+                    player:delKeyItem(xi.ki.MHAURAN_COUSCOUS)
+                    player:messageSpecial(selbinaID.text.KEYITEM_OBTAINED + 1, xi.ki.MHAURAN_COUSCOUS)
+                    quest:setVar(player, 'Prog', 1)
                 end,
             },
         },
+
     },
 
     -- Section: Quest completed. Handle optional post quest dialogs and default interactions.

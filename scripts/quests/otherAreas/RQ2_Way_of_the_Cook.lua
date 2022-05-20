@@ -20,9 +20,9 @@ local totalHoursLeft = 0
 
 quest.reward =
 {
-    fame  = 120,
-    fameArea = MHAURA,
-    title = xi.title.ONE_STAR_PURVEYOR,
+    fame     = 120,
+    fameArea = xi.quest.fame_area.WINDURST,
+    title    = xi.title.ONE_STAR_PURVEYOR,
 }
 
 quest.sections =
@@ -41,7 +41,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if
                         player:getCharVar("Quest[4][0]DayCompleted") + 7 < VanadielUniqueDay() and
-                        player:getFameLevel(WINDURST) > 2
+                        player:getFameLevel(xi.quest.fame_area.WINDURST) > 2
                     then
                         return quest:progressEvent(76, xi.items.BEEHIVE_CHIP, xi.items.DHALMEL_MEAT) -- Way of the Cook starting event.
                     else

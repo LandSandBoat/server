@@ -17,10 +17,10 @@ local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.RYCH
 
 quest.reward =
 {
-    fame  = 120,
-    fameArea = MHAURA,
-    title = xi.title.PURVEYOR_IN_TRAINING,
-    gil = 1500,
+    fame     = 120,
+    fameArea = xi.quest.fame_area.WINDURST,
+    title    = xi.title.PURVEYOR_IN_TRAINING,
+    gil      = 1500,
 }
 
 quest.sections =
