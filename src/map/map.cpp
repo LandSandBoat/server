@@ -222,9 +222,8 @@ int32 do_init(int32 argc, char** argv)
                                           map_config.mysql_port,
                                           map_config.mysql_database.c_str());
 
-    auto query = fmt::sprintf("DELETE FROM accounts_sessions WHERE IF(%u = 0 AND %u = 0, true, server_addr = %u AND server_port = %u);",
+    sql->Query("DELETE FROM accounts_sessions WHERE IF(%u = 0 AND %u = 0, true, server_addr = %u AND server_port = %u);",
         map_ip.s_addr, map_port, map_ip.s_addr, map_port);
-    sql->Async(std::move(query));
 
     ShowStatus("do_init: zlib is reading");
     zlib_init();
@@ -886,7 +885,7 @@ int32 map_close_session(time_point tick, map_session_data_t* map_session_data)
         // clear accounts_sessions if character is logging out (not when zoning)
         if (map_session_data->shuttingDown == 1)
         {
-            sql->Async("DELETE FROM accounts_sessions WHERE charid = %u", map_session_data->PChar->id);
+            sql->Query("DELETE FROM accounts_sessions WHERE charid = %u", map_session_data->PChar->id);
         }
 
         uint64 port64 = map_session_data->client_port;
@@ -977,7 +976,7 @@ int32 map_cleanup(time_point tick, CTaskMgr::CTask* PTask)
                     else
                     {
                         map_session_data->PChar->StatusEffectContainer->SaveStatusEffects(true);
-                        sql->Async("DELETE FROM accounts_sessions WHERE charid = %u;", map_session_data->PChar->id);
+                        sql->Query("DELETE FROM accounts_sessions WHERE charid = %u;", map_session_data->PChar->id);
 
                         delete[] map_session_data->server_packet_data;
                         delete map_session_data->PChar;
@@ -993,7 +992,7 @@ int32 map_cleanup(time_point tick, CTaskMgr::CTask* PTask)
                     ShowWarning("map_cleanup: WHITHOUT CHAR timed out, session closed");
 
                     const char* Query = "DELETE FROM accounts_sessions WHERE client_addr = %u AND client_port = %u";
-                    sql->Async(Query, map_session_data->client_addr, map_session_data->client_port);
+                    sql->Query(Query, map_session_data->client_addr, map_session_data->client_port);
 
                     delete[] map_session_data->server_packet_data;
                     map_session_list.erase(it++);
