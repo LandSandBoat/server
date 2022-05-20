@@ -1,3 +1,0 @@
-Move the dbtool_protect.py into your tools folder
-
-Edit the protected list in the dbtool_protect.py to make a permanent protected list for server updates.
