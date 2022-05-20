@@ -29,6 +29,10 @@
 
 constexpr size_t PacketNameLength = 15;
 
+constexpr size_t DecodeStringLength    = 21; // used for size of decoded strings of signature/linkshells
+constexpr size_t SignatureStringLength = 12; // encoded linkshell string size
+constexpr size_t LinkshellStringLength = 16; // encoded signature string size
+
 int32 checksum(uint8* buf, uint32 buflen, char checkhash[16]);
 int   config_switch(const char* str);
 bool  bin2hex(char* output, unsigned char* input, size_t count);

@@ -1301,7 +1301,7 @@ namespace charutils
                                 "extra) "
                                 "VALUES(%u,%u,%u,%u,%u,'%s','%s')";
 
-            int8 signature[21];
+            int8 signature[DecodeStringLength];
             if (PItem->isType(ITEM_LINKSHELL))
             {
                 DecodeStringLinkshell((int8*)PItem->getSignature(), signature);

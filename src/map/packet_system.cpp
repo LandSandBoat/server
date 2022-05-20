@@ -5360,8 +5360,12 @@ void SmallPacket0x0C4(map_session_data_t* const PSession, CCharEntity* const PCh
         {
             uint32 LinkshellID    = 0;
             uint16 LinkshellColor = data.ref<uint16>(0x04);
-            int8   DecodedName[21];
-            int8   EncodedName[16];
+
+            int8   DecodedName[DecodeStringLength];
+            int8   EncodedName[LinkshellStringLength];
+
+            memset(DecodedName, 0, sizeof(DecodedName));
+            memset(EncodedName, 0, sizeof(EncodedName));
 
             DecodeStringLinkshell(data[12], DecodedName);
             EncodeStringLinkshell(DecodedName, EncodedName);
