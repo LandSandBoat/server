@@ -9,7 +9,7 @@ function applyOverride(base_table, func, name, fullname, filename)
     local old = base_table[name]
 
     if old == nil then
-        print(string.format("Inserting empty function to override for: %s (%s)"), fullname, filename)
+        print(string.format("Inserting empty function to override for: %s (%s)", fullname, filename))
         old = function() end -- Insert empty function
     end
 
