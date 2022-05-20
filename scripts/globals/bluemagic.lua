@@ -392,7 +392,7 @@ function BlueFinalAdjustments(caster, target, spell, dmg, params)
     local damageType = params.damageType or xi.damageType.NONE
 
     -- handle One For All
-    if damagetype == xi.damageType.MAGICAL then
+    if damageType == xi.damageType.MAGICAL then
         dmg = utils.oneforall(target, dmg)
     end
     -- handling stoneskin
