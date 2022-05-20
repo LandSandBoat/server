@@ -21,6 +21,8 @@ local digReq =
     BORE     = 2,
     MODIFIER = 4,
     NIGHT    = 8,
+    WEATHER  = 16,
+    ORE      = 32,
 }
 
 local crystalMap =
@@ -72,8 +74,8 @@ local digInfo =
         {  699,  76, digReq.NONE    },
         { 4447,  38, digReq.NONE    },
         {  695,  45, digReq.NONE    },
-        { 4096, 100, digReq.NONE    }, -- all crystals
-        { 1255,  10, digReq.NONE    }, -- all ores
+        { 4096, 100, digReq.WEATHER }, -- all crystals
+        { 1255,  10, digReq.ORE     }, -- all ores
         { 4100,  59, digReq.BURROW  },
         { 4101,  59, digReq.BURROW  },
         {  690,  15, digReq.BORE    },
@@ -87,6 +89,7 @@ local digInfo =
         { 1188,  10, digReq.MODIFIER},
         { 4532,  12, digReq.MODIFIER},
     },
+
     [xi.zone.BIBIKI_BAY] = -- 4
     {
         {  847,  70, digReq.NONE    },
@@ -99,8 +102,8 @@ local digInfo =
         {17397, 110, digReq.NONE    },
         {  641, 130, digReq.NONE    },
         {  885,  30, digReq.NONE    },
-        { 4096, 100, digReq.NONE    }, -- all crystals
-        { 1255,  10, digReq.NONE    }, -- all ores
+        { 4096, 100, digReq.WEATHER }, -- all crystals
+        { 1255,  10, digReq.ORE     }, -- all ores
         {  845, 150, digReq.BURROW  },
         {  843,  10, digReq.BURROW  },
         {  844,  90, digReq.BURROW  },
@@ -120,6 +123,7 @@ local digInfo =
         { 1188,  10, digReq.MODIFIER},
         { 4532,  12, digReq.MODIFIER},
     },
+
     [xi.zone.WAJAOM_WOODLANDS] = -- 51
     {
         {  646,   3, digReq.NONE    },
@@ -131,8 +135,8 @@ local digInfo =
         { 2164,  17, digReq.NONE    },
         { 2213, 152, digReq.NONE    },
         {  838,   4, digReq.NONE    },
-        { 4096, 100, digReq.NONE    }, -- all crystals
-        { 1255,  10, digReq.NONE    }, -- all ores
+        { 4096, 100, digReq.WEATHER }, -- all crystals
+        { 1255,  10, digReq.ORE     }, -- all ores
         {  688, 137, digReq.BURROW  },
         {  690,  10, digReq.BURROW  },
         { 1446,   1, digReq.BURROW  },
@@ -153,6 +157,7 @@ local digInfo =
         { 1188,  10, digReq.MODIFIER},
         { 4532,  12, digReq.MODIFIER},
     },
+
     [xi.zone.BHAFLAU_THICKETS] = -- 52
     {
         {  770,  50, digReq.NONE    },
@@ -164,8 +169,8 @@ local digInfo =
         {  703,  69, digReq.NONE    },
         { 2213, 135, digReq.NONE    },
         {  838,  21, digReq.NONE    },
-        { 4096, 100, digReq.NONE    }, -- all crystals
-        { 1255,  10, digReq.NONE    }, -- all ores
+        { 4096, 100, digReq.WEATHER }, -- all crystals
+        { 1255,  10, digReq.ORE     }, -- all ores
         {  688, 144, digReq.BURROW  },
         {  702,  14, digReq.BURROW  },
         {  690,  23, digReq.BURROW  },
@@ -186,6 +191,7 @@ local digInfo =
         { 1188,  10, digReq.MODIFIER},
         { 4532,  12, digReq.MODIFIER},
     },
+
     [xi.zone.WEST_RONFAURE] = -- 100
     {
         { 4504, 120, digReq.NONE    },
@@ -198,8 +204,8 @@ local digInfo =
         {  639,  10, digReq.NONE    },
         {  694,  63, digReq.NONE    },
         {  918,  12, digReq.NONE    },
-        { 4096, 100, digReq.NONE    }, -- all crystals
-        { 1255,  10, digReq.NONE    }, -- all ores
+        { 4096, 100, digReq.WEATHER }, -- all crystals
+        { 1255,  10, digReq.ORE     }, -- all ores
         { 4545,   5, digReq.BURROW  },
         {  636,  63, digReq.BURROW  },
         {  617,  63, digReq.BORE    },
@@ -210,6 +216,7 @@ local digInfo =
         { 4532,  12, digReq.MODIFIER},
         {  573,  23, digReq.NIGHT   },
     },
+
     [xi.zone.EAST_RONFAURE] = -- 101
     {
         { 4504, 224, digReq.NONE    },
@@ -222,8 +229,8 @@ local digInfo =
         {  694,  10, digReq.NONE    },
         { 4386,  11, digReq.NONE    },
         {  918,  10, digReq.NONE    },
-        { 4096, 100, digReq.NONE    }, -- all crystals
-        { 1255,  10, digReq.NONE    }, -- all ores
+        { 4096, 100, digReq.WEATHER }, -- all crystals
+        { 1255,  10, digReq.ORE     }, -- all ores
         { 4545,  12, digReq.BURROW  },
         {  636,  29, digReq.BURROW  },
         {  617,  12, digReq.BORE    },
@@ -234,6 +241,7 @@ local digInfo =
         { 4532,  11, digReq.MODIFIER},
         {  574,  37, digReq.NIGHT   },
     },
+
     [xi.zone.LA_THEINE_PLATEAU] = -- 102
     {
         {  688, 153, digReq.NONE    },
@@ -246,8 +254,8 @@ local digInfo =
         {  694,  40, digReq.NONE    },
         {  622,  28, digReq.NONE    },
         {  700,   3, digReq.NONE    },
-        { 4096, 100, digReq.NONE    }, -- all crystals
-        { 1255,  10, digReq.NONE    }, -- all ores
+        { 4096, 100, digReq.WEATHER }, -- all crystals
+        { 1255,  10, digReq.ORE     }, -- all ores
         { 4545,  34, digReq.BURROW  },
         {  636,  20, digReq.BURROW  },
         {  616,   8, digReq.BURROW  },
@@ -261,6 +269,7 @@ local digInfo =
         { 1188,  10, digReq.MODIFIER},
         { 1237,  12, digReq.MODIFIER},
     },
+
     [xi.zone.VALKURM_DUNES] = -- 103
     {
         {  770,   1, digReq.NONE    },
@@ -274,8 +283,8 @@ local digInfo =
         { 4484,  32, digReq.NONE    },
         {17397,  21, digReq.NONE    },
         {  885,  10, digReq.NONE    },
-        { 4096, 100, digReq.NONE    }, -- all crystals
-        { 1255,  10, digReq.NONE    }, -- all ores
+        { 4096, 100, digReq.WEATHER }, -- all crystals
+        { 1255,  10, digReq.ORE     }, -- all ores
         {  845, 125, digReq.BURROW  },
         {  843,  10, digReq.BURROW  },
         {  844,  40, digReq.BURROW  },
@@ -293,6 +302,7 @@ local digInfo =
         { 1188,  10, digReq.MODIFIER},
         { 4532,  12, digReq.MODIFIER},
     },
+
     [xi.zone.JUGNER_FOREST] = -- 104
     {
         { 4504, 152, digReq.NONE    },
@@ -305,8 +315,8 @@ local digInfo =
         {  699,  76, digReq.NONE    },
         { 4447,  38, digReq.NONE    },
         {  695,  45, digReq.NONE    },
-        { 4096, 100, digReq.NONE    }, -- all crystals
-        { 1255,  10, digReq.NONE    }, -- all ores
+        { 4096, 100, digReq.WEATHER }, -- all crystals
+        { 1255,  10, digReq.ORE     }, -- all ores
         {  690,  15, digReq.BORE    },
         { 1446,   8, digReq.BORE    },
         {  702,  23, digReq.BORE    },
@@ -318,6 +328,7 @@ local digInfo =
         { 1188,  10, digReq.MODIFIER},
         { 4532,  12, digReq.MODIFIER},
     },
+
     [xi.zone.BATALLIA_DOWNS] = -- 105
     {
         {  847,  69, digReq.NONE    },
@@ -330,8 +341,8 @@ local digInfo =
         {  774,  26, digReq.NONE    },
         {  106,  69, digReq.NONE    },
         { 4449,   3, digReq.NONE    },
-        { 4096, 100, digReq.NONE    }, -- all crystals
-        { 1255,  10, digReq.NONE    }, -- all ores
+        { 4096, 100, digReq.WEATHER }, -- all crystals
+        { 1255,  10, digReq.ORE     }, -- all ores
         {  656, 106, digReq.BURROW  },
         {  748,   8, digReq.BURROW  },
         {  749,  30, digReq.BURROW  },
@@ -345,6 +356,7 @@ local digInfo =
         { 1188,  10, digReq.MODIFIER},
         { 4532,  12, digReq.MODIFIER},
     },
+
     [xi.zone.NORTH_GUSTABERG] = -- 106
     {
         {  880, 226, digReq.NONE    },
@@ -358,8 +370,8 @@ local digInfo =
         {  749,  63, digReq.NONE    },
         {  644,  60, digReq.NONE    },
         {  645,   3, digReq.NONE    },
-        { 4096, 100, digReq.NONE    }, -- all crystals
-        { 1255,  10, digReq.NONE    }, -- all ores
+        { 4096, 100, digReq.WEATHER }, -- all crystals
+        { 1255,  10, digReq.ORE     }, -- all ores
         { 4545, 150, digReq.BURROW  },
         {  636,  50, digReq.BURROW  },
         {  617, 100, digReq.BORE    },
@@ -370,6 +382,7 @@ local digInfo =
         { 4532,  12, digReq.MODIFIER},
         { 1236,   3, digReq.NIGHT   },
     },
+
     [xi.zone.SOUTH_GUSTABERG] = -- 107
     {
         {17296, 252, digReq.NONE    },
@@ -381,8 +394,8 @@ local digInfo =
         {  749,  32, digReq.NONE    },
         {  847,  23, digReq.NONE    },
         {  644,   5, digReq.NONE    },
-        { 4096, 100, digReq.NONE    }, -- all crystals
-        { 1255,  10, digReq.NONE    }, -- all ores
+        { 4096, 100, digReq.WEATHER }, -- all crystals
+        { 1255,  10, digReq.ORE     }, -- all ores
         { 4545,   5, digReq.BURROW  },
         {  636,  63, digReq.BURROW  },
         {  617,  63, digReq.BORE    },
@@ -393,6 +406,7 @@ local digInfo =
         { 4532,  12, digReq.MODIFIER},
         {  575,  14, digReq.NIGHT   },
     },
+
     [xi.zone.KONSCHTAT_HIGHLANDS] = -- 108
     {
         {  847,  13, digReq.NONE    },
@@ -406,8 +420,8 @@ local digInfo =
         {  844,  14, digReq.NONE    },
         {  868,  45, digReq.NONE    },
         {  642,  71, digReq.NONE    },
-        { 4096, 100, digReq.NONE    }, -- all crystals
-        { 1255,  10, digReq.NONE    }, -- all ores
+        { 4096, 100, digReq.WEATHER }, -- all crystals
+        { 1255,  10, digReq.ORE     }, -- all ores
         {  845,  28, digReq.BORE    },
         {  842,  27, digReq.BORE    },
         {  843,  23, digReq.BORE    },
@@ -419,6 +433,7 @@ local digInfo =
         { 1188,  10, digReq.MODIFIER},
         { 4532,  12, digReq.MODIFIER},
     },
+
     [xi.zone.PASHHOW_MARSHLANDS] = -- 109
     {
         {  846, 216, digReq.NONE    },
@@ -431,8 +446,8 @@ local digInfo =
         {  749,  18, digReq.NONE    },
         {  703,   6, digReq.NONE    },
         {  885,   9, digReq.NONE    },
-        { 4096, 100, digReq.NONE    }, -- all crystals
-        { 1255,  10, digReq.NONE    }, -- all ores
+        { 4096, 100, digReq.WEATHER }, -- all crystals
+        { 1255,  10, digReq.ORE     }, -- all ores
         { 2364, 120, digReq.BURROW  },
         { 2235,  42, digReq.BURROW  },
         { 1237,  24, digReq.BURROW  },
@@ -443,6 +458,7 @@ local digInfo =
         { 1188,  10, digReq.MODIFIER},
         { 4532,  12, digReq.MODIFIER},
     },
+
     [xi.zone.ROLANBERRY_FIELDS] = -- 110
     {
         { 4450,  30, digReq.NONE    },
@@ -457,8 +473,8 @@ local digInfo =
         { 4448,  15, digReq.NONE    },
         {  638,  82, digReq.NONE    },
         {  106,  37, digReq.NONE    },
-        { 4096, 100, digReq.NONE    }, -- all crystals
-        { 1255,  10, digReq.NONE    }, -- all ores
+        { 4096, 100, digReq.WEATHER }, -- all crystals
+        { 1255,  10, digReq.ORE     }, -- all ores
         {  656, 200, digReq.BURROW  },
         {  750, 100, digReq.BURROW  },
         { 4375,  60, digReq.BORE    },
@@ -471,6 +487,7 @@ local digInfo =
         { 1188,  10, digReq.MODIFIER},
         { 4532,  12, digReq.MODIFIER},
     },
+
     [xi.zone.EASTERN_ALTEPA_DESERT] = -- 114
     {
         {  880, 167, digReq.NONE    },
@@ -481,8 +498,8 @@ local digInfo =
         {  942,   4, digReq.NONE    },
         {  738,  12, digReq.NONE    },
         {  866,  36, digReq.NONE    },
-        {  642,  58, digReq.NONE    },
-        { 4096, 100, digReq.NONE    }, -- all crystals
+        {  642,  58, digReq.NONE     },
+        { 4096, 100, digReq.WEATHER }, -- all crystals
         {  574,  33, digReq.BURROW  },
         {  575,  74, digReq.BURROW  },
         {  572,  59, digReq.BURROW  },
@@ -501,6 +518,7 @@ local digInfo =
         { 1188,  10, digReq.MODIFIER},
         { 4532,  12, digReq.MODIFIER},
     },
+
     [xi.zone.WEST_SARUTABARUTA] = -- 115
     {
         {  689, 205, digReq.NONE    },
@@ -514,8 +532,8 @@ local digInfo =
         {  834,  50, digReq.NONE    },
         {  701,  50, digReq.NONE    },
         {  702,   3, digReq.NONE    },
-        { 4096, 100, digReq.NONE    }, -- all crystals
-        { 1255,  10, digReq.NONE    }, -- all ores
+        { 4096, 100, digReq.WEATHER }, -- all crystals
+        { 1255,  10, digReq.ORE     }, -- all ores
         {  617,  50, digReq.BORE    },
         { 4570,  10, digReq.MODIFIER},
         { 4487,  11, digReq.MODIFIER},
@@ -524,6 +542,7 @@ local digInfo =
         { 4532,  12, digReq.MODIFIER},
         { 1237,  10, digReq.NIGHT   },
     },
+
     [xi.zone.EAST_SARUTABARUTA] = -- 116
     {
         {  689, 132, digReq.NONE    },
@@ -537,8 +556,8 @@ local digInfo =
         {  772,  50, digReq.NONE    },
         {  701,  50, digReq.NONE    },
         {  702,   3, digReq.NONE    },
-        { 4096, 100, digReq.NONE    }, -- all crystals
-        { 1255,  10, digReq.NONE    }, -- all ores
+        { 4096, 100, digReq.WEATHER }, -- all crystals
+        { 1255,  10, digReq.ORE     }, -- all ores
         { 4545, 200, digReq.BURROW  },
         {  636,  50, digReq.BURROW  },
         { 5235,  10, digReq.BURROW  },
@@ -550,6 +569,7 @@ local digInfo =
         { 4532,  12, digReq.MODIFIER},
         {  572, 100, digReq.NIGHT   },
     },
+
     [xi.zone.TAHRONGI_CANYON] = -- 117
     {
         {  880, 118, digReq.NONE    },
@@ -563,8 +583,8 @@ local digInfo =
         {  641, 100, digReq.NONE    },
         {  841,  45, digReq.NONE    },
         {  843,   4, digReq.NONE    },
-        { 4096, 100, digReq.NONE    }, -- all crystals
-        { 1255,  10, digReq.NONE    }, -- all ores
+        { 4096, 100, digReq.WEATHER }, -- all crystals
+        { 1255,  10, digReq.ORE     }, -- all ores
         {  656, 148, digReq.BURROW  },
         {  749,  25, digReq.BURROW  },
         {  751,   1, digReq.BURROW  },
@@ -582,6 +602,7 @@ local digInfo =
         { 1188,  10, digReq.MODIFIER},
         { 4532,  12, digReq.MODIFIER},
     },
+
     [xi.zone.BUBURIMU_PENINSULA] = -- 118
     {
         {  847,  45, digReq.NONE    },
@@ -594,8 +615,8 @@ local digInfo =
         {17397,  66, digReq.NONE    },
         {  641, 134, digReq.NONE    },
         {  885,  12, digReq.NONE    },
-        { 4096, 100, digReq.NONE    }, -- all crystals
-        { 1255,  10, digReq.NONE    }, -- all ores
+        { 4096, 100, digReq.WEATHER }, -- all crystals
+        { 1255,  10, digReq.ORE     }, -- all ores
         {  845, 125, digReq.BURROW  },
         {  843,   1, digReq.BURROW  },
         {  844,  64, digReq.BURROW  },
@@ -615,6 +636,7 @@ local digInfo =
         { 1188,  10, digReq.MODIFIER},
         { 4532,  12, digReq.MODIFIER},
     },
+
     [xi.zone.MERIPHATAUD_MOUNTAINS] = -- 119
     {
         {  646,   4, digReq.NONE    },
@@ -627,8 +649,8 @@ local digInfo =
         {  869, 100, digReq.NONE    },
         {17296, 162, digReq.NONE    },
         {  771,  21, digReq.NONE    },
-        { 4096, 100, digReq.NONE    }, -- all crystals
-        { 1255,  10, digReq.NONE    }, -- all ores
+        { 4096, 100, digReq.WEATHER }, -- all crystals
+        { 1255,  10, digReq.ORE     }, -- all ores
         {  678,   5, digReq.BURROW  },
         {  645,   9, digReq.BURROW  },
         {  737,   5, digReq.BURROW  },
@@ -647,6 +669,7 @@ local digInfo =
         { 1188,  10, digReq.MODIFIER},
         { 4532,  12, digReq.MODIFIER},
     },
+
     [xi.zone.SAUROMUGUE_CHAMPAIGN] = -- 120
     {
         {  845,   8, digReq.NONE    },
@@ -661,8 +684,8 @@ local digInfo =
         {17296, 168, digReq.NONE    },
         {  106,  32, digReq.NONE    },
         {  773,  50, digReq.NONE    },
-        { 4096, 100, digReq.NONE    }, -- all crystals
-        { 1255,  10, digReq.NONE    }, -- all ores
+        { 4096, 100, digReq.WEATHER }, -- all crystals
+        { 1255,  10, digReq.ORE     }, -- all ores
         {  656,  95, digReq.BURROW  },
         {  749,  26, digReq.BURROW  },
         {  751,  33, digReq.BURROW  },
@@ -681,6 +704,7 @@ local digInfo =
         { 1188,  10, digReq.MODIFIER},
         { 4532,  12, digReq.MODIFIER},
     },
+
     [xi.zone.THE_SANCTUARY_OF_ZITAH] = -- 121
     {
         {  688, 117, digReq.NONE    },
@@ -693,8 +717,8 @@ local digInfo =
         {  773,  33, digReq.NONE    },
         { 4386,   9, digReq.NONE    },
         {  703,   7, digReq.NONE    },
-        { 4096, 100, digReq.NONE    }, -- all crystals
-        { 1255,  10, digReq.NONE    }, -- all ores
+        { 4096, 100, digReq.WEATHER }, -- all crystals
+        { 1255,  10, digReq.ORE     }, -- all ores
         {  656, 117, digReq.BURROW  },
         {  750, 133, digReq.BURROW  },
         {  749, 117, digReq.BURROW  },
@@ -709,6 +733,7 @@ local digInfo =
         { 1188,  10, digReq.MODIFIER},
         { 4532,  12, digReq.MODIFIER},
     },
+
     [xi.zone.YUHTUNGA_JUNGLE] = -- 123
     {
         {  880, 185, digReq.NONE    },
@@ -722,7 +747,7 @@ local digInfo =
         {  703,   9, digReq.NONE    },
         { 4448,   7, digReq.NONE    },
         {  720,   3, digReq.NONE    },
-        { 4096, 100, digReq.NONE    }, -- all crystals
+        { 4096, 100, digReq.WEATHER }, -- all crystals
         { 4374,  17, digReq.BURROW  },
         { 4373,  41, digReq.BURROW  },
         { 4375,  15, digReq.BURROW  },
@@ -739,6 +764,7 @@ local digInfo =
         { 1188,  10, digReq.MODIFIER},
         { 4532,  12, digReq.MODIFIER},
     },
+
     [xi.zone.YHOATOR_JUNGLE] = -- 124
     {
         {  880, 282, digReq.NONE    },
@@ -748,9 +774,9 @@ local digInfo =
         {  702,  41, digReq.NONE    },
         {  700,  44, digReq.NONE    },
         { 4450,  47, digReq.NONE    },
-        {  703,  26, digReq.NONE    },
+        {  703,  26, digReq.NONE    }, 
         { 4449,  12, digReq.NONE    },
-        { 4096, 100, digReq.NONE    }, -- all crystals
+        { 4096, 100, digReq.WEATHER }, -- all crystals
         { 4374,  17, digReq.BURROW  },
         { 4373,  41, digReq.BURROW  },
         { 4375,  15, digReq.BURROW  },
@@ -767,6 +793,7 @@ local digInfo =
         { 1188,  10, digReq.MODIFIER},
         { 4532,  12, digReq.MODIFIER},
     },
+
     [xi.zone.WESTERN_ALTEPA_DESERT] = -- 125
     {
         {  880, 224, digReq.NONE    },
@@ -780,7 +807,7 @@ local digInfo =
         {  642,  58, digReq.NONE    },
         {  864,  22, digReq.NONE    },
         {  843,   4, digReq.NONE    },
-        { 4096, 100, digReq.NONE    }, -- all crystals
+        { 4096, 100, digReq.WEATHER }, -- all crystals
         {  845, 122, digReq.BURROW  },
         {  844,  71, digReq.BURROW  },
         { 1845,  33, digReq.BURROW  },
@@ -808,10 +835,9 @@ local function updatePlayerDigCount(player, increment)
         player:setCharVar('[DIG]DigCount', player:getCharVar('[DIG]DigCount') + increment)
     end
 
-    player:setLocalVar('[DIG]LastDigTime', os.time())
+    player:setCharVar('[DIG]LastDigTime', os.time())
 end
 
---[[ Not Implemented
 local function updateZoneDigCount(zoneId, increment)
     local serverVar = '[DIG]ZONE' .. zoneId .. '_ITEMS'
 
@@ -822,106 +848,243 @@ local function updateZoneDigCount(zoneId, increment)
         SetServerVariable(serverVar, GetServerVariable(serverVar) + increment)
     end
 end
-]]--
 
 local function canDig(player)
-    local digCount = player:getCharVar('[DIG]DigCount')
-    local lastDigTime = player:getLocalVar('[DIG]LastDigTime')
-    local zoneItemsDug = GetServerVariable('[DIG]ZONE'..player:getZoneID()..'_ITEMS')
-    local zoneInTime = player:getLocalVar('ZoneInTime')
-    local currentTime = os.time()
-    local skillRank = player:getSkillRank(xi.skill.DIG)
-
+    local digCount        = player:getCharVar('[DIG]DigCount')
+    local lastDigTime     = player:getCharVar('[DIG]LastDigTime')
+    local lastDigX        = player:getCharVar('[DIG]LastDigX')
+    local lastDigY        = player:getCharVar('[DIG]LastDigY')
+    local lastDigZ        = player:getCharVar('[DIG]LastDigZ')
+    local posTable        = player:getPos()
+    local currX           = math.floor(posTable.x)
+    local currY           = math.floor(posTable.y)
+    local currZ           = math.floor(posTable.z)
+    local distanceSquared = (lastDigX - currX) * (lastDigX - currX) + (lastDigY - currY) * (lastDigY - currY) + (lastDigZ - currZ) * (lastDigZ - currZ)
+    local zoneItemsDug    = GetServerVariable('[DIG]ZONE'..player:getZoneID()..'_ITEMS')
+    local zoneInTime      = player:getLocalVar('ZoneInTime')
+    local currentTime     = os.time()
+    local skillRank       = player:getSkillRank(xi.skill.DIG)
+     -- personal dig caps
+    local digCap          = 100 + (skillRank * 10)
     -- base delay -5 for each rank
-    local digDelay = 16 - (skillRank * 5)
-    local areaDigDelay = 60 - (skillRank * 5)
+    local digDelay        = 16 - (skillRank * 5)
+    local areaDigDelay    = 60 - (skillRank * 5)
 
-    local prevMidnight = getMidnight() - 86400
+    if player:hasItem(4545, 0) then 
+        -- Minimum delay to cover the animation time
 
-    -- Last dig was before today, so reset player fatigue
-    if lastDigTime < prevMidnight then
-        updatePlayerDigCount(player, 0)
-        digCount = 0
-    end
+        local prevMidnight = getMidnight() - 86400
 
-    -- neither player nor zone have reached their dig limit
+        -- Last dig was before today, so reset player fatigue
+        if lastDigTime < prevMidnight then
+            updatePlayerDigCount(player, 0)
+            digCount = 0
+        end
+        
+        -- player:PrintToPlayer(distanceSquared)
 
-    if (digCount < 100 and zoneItemsDug < 20) or xi.settings.DIG_FATIGUE == 0 then
-        -- pesky delays
-        if (zoneInTime + areaDigDelay) <= currentTime and (lastDigTime + digDelay) <= currentTime then
-            return true
+        -- neither player nor zone have reached their dig limit
+        if
+            (digCount < digCap and zoneItemsDug < 120) or
+            DIG_FATIGUE == 0
+        then
+            -- pesky delays
+            if
+                (zoneInTime + areaDigDelay) <= currentTime and
+                (lastDigTime + digDelay) <= currentTime and
+                distanceSquared > 45
+            then
+                player:setCharVar('[DIG]LastDigX', currX)
+                player:setCharVar('[DIG]LastDigY', currY)
+                player:setCharVar('[DIG]LastDigZ', currZ)
+                player:delItem(4545, 1)
+
+                return true
+            end
         end
     end
 
     return false
 end
 
+--[[
+per wiki, avg. digs needed per rank
+taken from wiki, took the average of top/bottom
+and then x12 to convert from "stacks" to singles
+
+Amateur    1650 (chopped the 50 so we dont have to math.floor later)
+Recruit    3600
+Initiate    6000
+Novice         9000
+Apprentice    12600
+Journeyman  16200
+Craftsman    21000
+Artisan    27000
+Adept         33000
+Veteran    39000
+Expert         ---- 
+]]
 
 local function calculateSkillUp(player)
-    local skillRank = player:getSkillRank(xi.skill.DIG)
-    local maxSkill = utils.clamp((skillRank + 1) * 100, 0, 1000)
-    local realSkill = player:getCharSkillLevel(xi.skill.DIG)
-    local increment = 1
+    local skillRank  = player:getSkillRank(xi.skill.DIG)
+    local maxSkill   = utils.clamp((skillRank + 1) * 100, 0, 1000) -- if im at 0 i max at 100, if im at 1 i max at 200
+    local realSkill  = player:getCharSkillLevel(xi.skill.DIG)
+    --[[ OLD SKILL RATES
+    if     skillRank == 0 then digsNeeded =  1600
+    elseif skillRank == 1 then digsNeeded =  3600
+    elseif skillRank == 2 then digsNeeded =  6000
+    elseif skillRank == 3 then digsNeeded =  9000
+    elseif skillRank == 4 then digsNeeded = 12600
+    elseif skillRank == 5 then digsNeeded = 16200
+    elseif skillRank == 6 then digsNeeded = 21000
+    elseif skillRank == 7 then digsNeeded = 27000
+    elseif skillRank == 8 then digsNeeded = 33000
+    elseif skillRank == 9 then digsNeeded = 39000
+    else return end
+    ]]
 
-    -- this probably needs correcting
-    local roll = math.random(0, 100)
+    --[[ THIS IS HORRIBLE
+    if     skillRank == 0 then digsNeeded =  2000
+    elseif skillRank == 1 then digsNeeded =  2500
+    elseif skillRank == 2 then digsNeeded =  3300
+    elseif skillRank == 3 then digsNeeded =  5000
+    elseif skillRank == 4 then digsNeeded = 10000
+    elseif skillRank == 5 then digsNeeded = 11100
+    elseif skillRank == 6 then digsNeeded = 12500
+    elseif skillRank == 7 then digsNeeded = 14300
+    elseif skillRank == 8 then digsNeeded = 16700
+    elseif skillRank == 9 then digsNeeded = 20000
+    else return end
+    ]]
 
-    -- make sure our skill isn't capped
-    if realSkill < maxSkill then
-        -- can we skill up?
-        if roll <= 15 then
-            if (increment + realSkill) > maxSkill then
-                increment = maxSkill - realSkill
-            end
+    local digsTable =
+	{
+        [0] = { 2000},
+        [1] = { 2500},
+        [2] = { 3300},
+        [3] = { 5000},
+        [4] = {10000},
+        [5] = {11100},
+        [6] = {12500},
+        [7] = {14300},
+        [8] = {16700},
+        [9] = {20000},
+	}
 
-            -- skill up!
-            player:setSkillLevel(xi.skill.DIG, realSkill + increment)
+    if math.random(1, digsTable[skillRank][1] / 100) == 1 then
+	    if realSkill < 1000 then -- Safety check.
+            player:setSkillLevel(xi.skill.DIG, realSkill + 1)
 
-            -- update the skill rank
             -- Digging does not have test items, so increment rank once player hits 10.0, 20.0, .. 100.0
-            if (realSkill + increment) >= (skillRank * 100) + 100 then
-                player:setSkillRank(xi.skill.DIG, skillRank + 1)
+            if (realSkill + 1) >= (skillRank * 100) + 100 then
+               player:setSkillRank(xi.skill.DIG, skillRank + 1)
             end
         end
     end
 end
 
-
 local function getChocoboDiggingItem(player)
-    local allItems = digInfo[player:getZoneID()]
-    local burrowAbility = (xi.settings.DIG_GRANT_BURROW == 1) and 1 or 0
-    local boreAbility = (xi.settings.DIG_GRANT_BORE == 1) and 1 or 0
-    local modifier = player:getMod(xi.mod.EGGHELM)
-    local totd = VanadielTOTD()
-    local weather = player:getWeather()
-    local moon = VanadielMoonPhase()
-
-    -- filter allItems to possibleItems and sum weights
+    local allItems      = digInfo[player:getZoneID()]
+    local burrowAbility = (DIG_GRANT_BURROW == 1) and 1 or 0
+    local boreAbility   = (DIG_GRANT_BORE == 1) and 1 or 0
+    local modifier      = player:getMod(xi.mod.EGGHELM)
+    local totd          = VanadielTOTD()
+    -- Zone Weather
+    local zone          = player:getZone()
+    local weather       = zone:getWeather()
+    -- Waxing 7% - 24%
+    local moon          = VanadielMoonPhase()
+    local moonDirection = VanadielMoonDirection()
+    local DigRank       = player:getSkillRank(xi.skill.DIG)
+    -- Filter allItems to possibleItems and sum weights
     local possibleItems = {}
-    local sum = 0
+    local itemWeight    = 0
+    local sum           = 0
 
     for i = 1, #allItems do
-        local item = allItems[i]
+        local item    = allItems[i]
         local itemReq = item[3]
+
         if
             (itemReq == digReq.NONE) or
             (itemReq == digReq.BURROW and burrowAbility == 1) or
             (itemReq == digReq.BORE and boreAbility == 1) or
             (itemReq == digReq.MODIFIER and modifier == 1) or
-            (itemReq == digReq.NIGHT and totd == xi.time.NIGHT)
+            (itemReq == digReq.NIGHT and totd == xi.time.NIGHT) or
+            (itemReq == digReq.WEATHER and weather > xi.weather.FOG) or
+            (itemReq == digReq.ORE and weather >= xi.weather.FOG and moonDirection == 2 and moon >= 7 and moon <= 24 and DigRank >= 6)
         then
-            sum = sum + item[2]
+            -- skill up weight variation and ore moon variation
+            itemWeight = item[2]
+
+            if DigRank > 0 then
+                if itemWeight >= 150 then
+                    itemWeight = itemWeight * (0.95^DigRank) 
+                elseif itemWeight >= 125 then
+                    itemWeight = itemWeight * (0.97^DigRank)
+                elseif itemWeight >= 100 then     
+                    itemWeight = itemWeight * (0.99^DigRank)
+                elseif itemWeight >= 50 then
+                    itemWeight = itemWeight * (1.03^DigRank)
+                elseif itemWeight >= 1 then
+                    itemWeight = itemWeight * (1.05^DigRank)
+                end
+            end
+
+            if item[1] == 1255 then
+                if moon >= 7 and moon <= 9 then
+                    itemWeight = itemWeight * 0.7
+                elseif moon >= 10 and moon <= 14 then
+                    itemWeight = itemWeight
+                elseif moon >= 15 and moon <= 21 then
+                    itemWeight = itemWeight * 0.9
+                elseif moon >= 21 and moon <= 24 then
+                    itemWeight = itemWeight * 0.5
+                end
+            end
+
+            sum = sum + itemWeight
             table.insert(possibleItems, item)
         end
     end
 
     -- pick weighted result
     local itemId = 0
-    local pick = math.random(sum)
-    sum = 0
+    local pick   = math.random(sum)
+    sum          = 0
 
     for i = 1, #possibleItems do
-        sum = sum + possibleItems[i][2]
+        local itemWeight = possibleItems[i][2]
+
+        -- skill up weight variation and ore moon variation
+        if DigRank > 0 then
+            if itemWeight >= 150 then
+                itemWeight = itemWeight * (0.95^DigRank) 
+            elseif itemWeight >= 125 then
+                itemWeight = itemWeight * (0.97^DigRank)
+            elseif itemWeight >= 100 then     
+                itemWeight = itemWeight * (0.99^DigRank)
+            elseif itemWeight >= 50 then
+                itemWeight = itemWeight * (1.03^DigRank)
+            elseif itemWeight >= 1 then
+                itemWeight = itemWeight * (1.05^DigRank)
+            end
+        end
+
+        if possibleItems[i][1] == 1255 then
+            if moon >= 7 and moon <= 9 then
+                itemWeight = itemWeight * 0.7
+            elseif moon >= 10 and moon <= 14 then
+                itemWeight = itemWeight
+            elseif moon >= 15 and moon <= 21 then
+                itemWeight = itemWeight * 0.9
+            elseif moon >= 21 and moon <= 24 then
+                itemWeight = itemWeight * 0.5
+            end
+        end
+
+        sum = sum + itemWeight
+
         if sum >= pick then
             itemId = possibleItems[i][1]
             break
@@ -930,39 +1093,32 @@ local function getChocoboDiggingItem(player)
 
     -- item is a crystal or ore
     if itemId == 4096 then
-        if weather >= xi.weather.HOT_SPELL then
-            itemId = crystalMap[weather]
-        else
-            itemId = 0
-        end
+        itemId = crystalMap[weather]
     elseif itemId == 1255 then
-        if weather >= xi.weather.CLOUDS and moon >= 10 and moon <= 40 and player:getSkillRank(xi.skill.DIG) >= 7 then
-            itemId = oreMap[VanadielDayOfTheWeek()]
-        else
-            itemId = 0
-        end
+        itemId = oreMap[VanadielDayOfTheWeek()]
     end
 
     return itemId
 end
 
 xi.chocoboDig.start = function(player, precheck)
-    local zoneId = player:getZoneID()
-    local text = zones[zoneId].text
+    local zoneId    = player:getZoneID()
+    local text      = zones[zoneId].text
+    local skillRank = player:getSkillRank(xi.skill.DIG)
 
     -- make sure the player can dig before going any further
     -- (and also cause i need a return before core can go any further with this)
-    if precheck then
-        return canDig(player)
+    if canDig(player) == true then
+        local roll          = math.random(0, 100)
+        local moon          = VanadielMoonPhase()
+        local moonmodifier  = 1
+        local skillmodifier = 0.5 + (skillRank / 20) -- 50% at amateur, 55% at recruit, 60% at initiate, and so on, to 100% at exper
 
-    else
-        local roll = math.random(0, 100)
-        local moon = VanadielMoonPhase()
-
-        -- 45-60% moon phase results in a much lower dig chance than the rest of the phases
-        if moon >= 45 and moon <= 60 then
-            roll = roll * .5
+        if moon < 50 then
+            moon = 100 - moon -- This converts moon phase percent to a number that represents how FAR the moon phase is from 50
         end
+      
+        moonmodifier = 1 - (100 - moon) / 100 -- the more the moon phase is from 50, the closer we get to 100% on this modifier.
 
         -- AMK07
         if
@@ -974,8 +1130,9 @@ xi.chocoboDig.start = function(player, precheck)
         end
 
         -- dig chance failure
-        if roll > xi.settings.DIGGING_RATE then
+        if roll > (DIGGING_RATE * moonmodifier * skillmodifier) then -- base digging rate is 85% and it is multiplied by the moon and skill modifiers
             player:messageText(player, text.FIND_NOTHING)
+            player:setCharVar('[DIG]LastDigTime', os.time())
 
         -- dig chance success
         else
@@ -985,24 +1142,31 @@ xi.chocoboDig.start = function(player, precheck)
             if itemId ~= 0 then
                 -- make sure we have enough room for the item
                 if player:addItem(itemId) then
+                    local zonedug = '[DIG]ZONE'..player:getZoneID()..'_ITEMS'
+                 
                     player:messageSpecial(text.ITEM_OBTAINED, itemId)
+                    SetServerVariable(zonedug, GetServerVariable(zonedug) + 1)
+                    updatePlayerDigCount(player, 1)
                 else
                     player:messageSpecial(text.DIG_THROW_AWAY, itemId)
+                    updatePlayerDigCount(player, 1)
                 end
-
+				
                 player:triggerRoeEvent(xi.roe.triggers.chocoboDigSuccess)
 
             -- got a crystal ore, but lacked weather or skill to dig it up
             else
                 player:messageText(player, text.FIND_NOTHING, false)
+                player:setCharVar('[DIG]LastDigTime', os.time())
             end
 
-            updatePlayerDigCount(player, 1)
             -- updateZoneDigCount(zoneId, 1) -- TODO: implement mechanic for resetting zone dig count. until then, leave this commented out
             -- TODO: learn abilities from chocobo raising
         end
-
-        calculateSkillUp(player)
+        
+		if skillRank < 10 then -- Safety check. Let's not try to skill-up if at max skill.
+            calculateSkillUp(player)
+        end
 
         return true
     end
