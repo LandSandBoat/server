@@ -484,6 +484,9 @@ function utils.splitStr(s, sep)
 end
 
 function utils.mobTeleport(mob, hideDuration, pos, disAnim, reapAnim)
+
+    --TODO Table of animations that are used for TEleporst for reference
+
     if hideDuration == nil then hideDuration = 5000 end
     if disAnim == nil then disAnim = "kesu" end
     if reapAnim == nil then reapAnim = "deru" end
