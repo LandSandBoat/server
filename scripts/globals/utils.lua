@@ -485,7 +485,7 @@ end
 
 function utils.mobTeleport(mob, hideDuration, pos, disAnim, reapAnim)
 
-    --TODO Table of animations that are used for teleporst for reference
+    --TODO Table of animations that are used for teleports for reference
 
     if hideDuration == nil then hideDuration = 5000 end
     if disAnim == nil then disAnim = "kesu" end
