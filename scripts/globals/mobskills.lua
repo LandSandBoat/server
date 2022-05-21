@@ -577,6 +577,14 @@ xi.mobskills.mobFinalAdjustments = function(dmg, mob, skill, target, attackType,
         return 0
     end
 
+    if attackType == xi.attackType.MAGICAL then
+        dmg = utils.oneforall(target, dmg)
+
+        if dmg < 0 then
+            return 0
+        end
+    end
+
     dmg = utils.stoneskin(target, dmg)
 
     if dmg > 0 then

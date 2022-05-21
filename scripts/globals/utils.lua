@@ -95,6 +95,18 @@ function utils.stoneskin(target, dmg)
     return dmg
 end
 
+-- returns reduced magic damage from RUN buff, "One for All"
+function utils.oneforall(target, dmg)
+    if dmg > 0 then
+        local OFA = target:getStatusEffect(xi.effect.ONE_FOR_ALL)
+        if OFA ~= nil then
+            local power = OFA:getPower()
+            dmg = math.max(0, dmg - power)
+        end
+    end
+    return dmg
+end
+
 function utils.takeShadows(target, dmg, shadowbehav)
     if shadowbehav == nil then
         shadowbehav = 1
