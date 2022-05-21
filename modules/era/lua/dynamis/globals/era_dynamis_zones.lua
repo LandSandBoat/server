@@ -1,5 +1,5 @@
 --------------------------------------------
---      Dynamis Wings 75 Era Module       --
+--         Dynamis 75 Era Module          --
 --------------------------------------------
 --------------------------------------------
 --       Module Required Scripts          --
@@ -11,8 +11,7 @@ require("modules/module_utils")
 --------------------------------------------
 --------------------------------------------
 
-local m = Module:new("wings_75_cap_dynamis_zones")
-m:setEnabled(false)
+local m = Module:new("era_dynamis_zones")
 
 local dynamisZones =
 {
@@ -43,7 +42,6 @@ local startingZones =
 }
 
 for _, zoneID in pairs(dynamisZones) do
-    --super(GetZone(zoneID[1])) -- Returns can't index zone is nil value
     m:addOverride(string.format("xi.zones.%s.Zone.onInitialize", zoneID[2]),
     function(zone)
         xi.dynamis.cleanupDynamis(zone) -- Run cleanupDynamis
@@ -54,20 +52,20 @@ for _, zoneID in pairs(dynamisZones) do
     end)
 end
 
--- for _, zoneID in pairs(startIngZones) do
---     if entryInfoEra[zoneID].csBit >= 7 then
---         m:addOverride(string.format("xi.zones.%s.npcs.Hieroglyphics.onTrade", zoneID[2]),
---         function(player, npc, trade)
---             super(npc)
---             xi.dynamis.entryNpcOnTrade(player, npc, trade)
---         end)
---     else
---         m:addOverride(string.format("xi.zones.%s.npcs.Trail_Markings.onTrade", zoneID[2]),
---         function(player, npc, trade)
---             super(npc)
---             xi.dynamis.entryNpcOnTrade(player, npc, trade)
---         end)
---     end
--- end
+for _, zoneID in pairs(startingZones) do
+    m:addOverride(string.format("xi.zones.%s.Zone.onInitialize", zoneID[2]), function(zone)
+        if xi.entryInfoEra[zoneID].csBit >= 7 then
+            m:addOverride(string.format("xi.zones.%s.npcs.Hieroglyphics.onTrade", zoneID[2]),
+            function(player, npc, trade)
+                xi.dynamis.entryNpcOnTrade(player, npc, trade)
+            end)
+        else
+            m:addOverride(string.format("xi.zones.%s.npcs.Trail_Markings.onTrade", zoneID[2]),
+            function(player, npc, trade)
+                xi.dynamis.entryNpcOnTrade(player, npc, trade)
+            end)
+        end
+    end)
+end
 
 return m

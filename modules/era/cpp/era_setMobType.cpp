@@ -1,3 +1,9 @@
+/* 
+   Used for the 75 Cap Dynamis Zones
+   Used to allow for Lua adjustments of
+   major mobs within a zone actively.
+*/
+
 #include "../src/map/lua/lua_baseentity.h"
 #include "../src/map/entities/baseentity.h"
 #include "../src/map/entities/mobentity.h"

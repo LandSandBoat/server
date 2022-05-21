@@ -1,5 +1,5 @@
 --------------------------------------------
---      Dynamis Wings 75 Era Module       --
+--          Dynamis 75 Era Module         --
 --------------------------------------------
 --------------------------------------------
 --       Module Required Scripts          --
@@ -15,6 +15,7 @@ require("scripts/globals/utils")
 require("scripts/globals/zone")
 require("scripts/globals/msg")
 require("scripts/globals/pathfind")
+require("scripts/globals/dynamis")
 require("scripts/zones/Dynamis-Bastok/dynamis_mobs")
 require("scripts/zones/Dynamis-Beaucedine/dynamis_mobs")
 require("scripts/zones/Dynamis-Buburimu/dynamis_mobs")
@@ -25,17 +26,10 @@ require("scripts/zones/Dynamis-Tavnazia/dynamis_mobs")
 require("scripts/zones/Dynamis-Valkurm/dynamis_mobs")
 require("scripts/zones/Dynamis-Windurst/dynamis_mobs")
 require("scripts/zones/Dynamis-Xarcabard/dynamis_mobs")
-require("modules/dynamis/wings_75_cap_dynamis")
 mixins = {require("scripts/mixins/job_special")}
 require("modules/module_utils")
---------------------------------------------
---       Module Affected Scripts          --
---------------------------------------------
-require("scripts/globals/dynamis")
---------------------------------------------
 
-local m = Module:new("wings_75_cap_dynamis_spawning")
-m:setEnabled(false)
+local m = Module:new("era_dynamis_spawning")
 
 xi = xi or {}
 xi.dynamis = xi.dynamis or {}
@@ -530,318 +524,14 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         mobNameFound = nmInfoLookup[mobName][1]
         groupIdFound = nmInfoLookup[mobName][2]
         groupZoneFound = nmInfoLookup[mobName][3]
-        onMobSpawn = function(mob) 
-            local mobID = mob:getID()
-            xi.dynamis.setMegaBossStats(mob)
-            mob:setMobMod(xi.mobMod.MAGIC_COOL, 25)
-        
-            xi.mix.jobSpecial.config(mob, {
-                between = 300,
-                specials =
-                {
-                    {id = xi.jsa.CHAINSPELL, hpp = 25},
-                },
-            })
-        end
-        onMobEngaged = function(mob, target)
-            local OMobIndex = mobIndex
-            local OMob = mob
-            local i = 0
-            local pets =
-            {
-                ["Fire Puki"] = {"4650756b" , 130, 134, 0, nil, nil}, -- FPuk
-                ["Wind Puki"] = {"5750756b" , 130, 134, 0, nil, nil}, -- WPuk
-                ["Poison Puki"] = {"506f50756b" , 130, 134, 0, nil, nil}, -- PoPuk
-                ["Petro Puki"] = {"506550756b" , 130, 134, 0, nil, nil}, -- PePuk
-            }
-            for _, pet in pairs(pets) do
-                local mob = zone:insertDynamicEntity({
-                    objtype = xi.objType.MOB,
-                    name = nameObj[1],
-                    x = oMob:getXPos()+math.random()*6-3,
-                    y = oMob:getYPos()-0.3,
-                    z = oMob:getXPos()+math.random()*6-3,
-                    rotation = oMob:getRotPos(),
-                    groupId = nameObj[2],
-                    groupZoneId = nameObj[3],
-                    onMobSpawn = function(mob) xi.dynamis.setNMStats(mob) end,
-                    onMobRoam = function(mob) xi.dynamis.mobOnRoam(mob) end,
-                    onMobFight = function(mob) xi.dynamis.mobOnFight(mob) end,
-                    onMobRoamAction = function(mob) xi.dynamis.mobOnRoamAction(mob) end,
-                    onMobDeath = function(mob, playerArg, isKiller)
-                        xi.dynamis.mobOnDeath(mob, mobList[mob:getZoneID()], zones[mob:getZoneID()].text.DYNAMIS_TIME_EXTEND)
-                    end,
-                })
-                mob:setSpawn(oMob:getXPos()+math.random()*6-3, oMob:getYPos()-0.3, oMob:getZPos()+math.random()*6-3, oMob:getRotPos())
-                mob:setDropID(nameObj[4])
-                if nameObj[5] ~= nil then -- If SpellList ~= nil set SpellList
-                    mob:setSpellList(nameObj[5])
-                end
-                if nameObj[6] ~= nil then -- If SkillList ~= nil set SkillList
-                    mob:setMobMod(xi.mobMod.SKILL_LIST, nameObj[6])
-                end
-                OMob:setLocalVar(string.format("PetID_%i", i + 1), mob:getID())
-                mob:setLocalVar("PetMaster", OMobIndex)
-                mob:spawn()
-                mob:updateEnmity(target)
-            end
-        end
-        onMobFight = function(mob) 
-            teles =
-            {
-            {279.4038, 20, 535.4518},
-            {312.6868, 20.5267, 511.9843},
-            {322.2653, 20, 481.8030},
-            {295.9948, 20.7949, 483.1078},
-            {269.6127, 19.5547, 505.3206},
-            {240.9685, 20, 521.5283},
-            {239.8057, 20.1687, 487.3961},
-            {258.6785, 20.1525, 460.4170},
-            }
-        
-        
-            local teleTime = mob:getLocalVar("teleTime")
-            if mob:getBattleTime() - teleTime > 30 then
-                randPos = teles[math.random((1), (8))]
-                xi.dynamis.teleport(mob, 1000)
-                mob:setPos(randPos, 0)
-                for i = 1, 4 do
-                    local pet = GetMobByID(mob:getLocalVar(string.format("PetID_%i", i)))
-                    if pet:isAlive() and mob:getHPP() <= 99 then
-                        pet:disengage()
-                        pet:resetEnmity(target)
-                        pet:updateEnmity(mob:getTarget())
-                    end
-                end
-                mob:setLocalVar("teleTime", mob:getBattleTime())
-            end
-        
-            for i = 1, 4 do
-                local pet = GetMobByID(mob:getLocalVar(string.format("PetID_%i", i)))
-                if pet:isAlive() and pet:getCurrentAction() == xi.act.ROAMING then
-                    pet:updateEnmity(target)
-                end
-            end
-        end
-        onMobRoam = function(mob) mob:setLocalVar("teleTime", 0) end
-        onMobRoamAction = function(mob) xi.dynamis.mobOnRoamAction(mob) end
-        onMobMagicPrepare = function(mob, target)
-            if mob:getHPP() <= 25 then
-                return 367 -- Death
-            else
-                -- Can cast Blindga, Death, Graviga, Silencega, and Sleepga II.
-                -- Casts Graviga every time before he teleports.
-                local rnd = math.random()
-        
-                if rnd < 0.2 then
-                    return 361 -- Blindga
-                elseif rnd < 0.4 then
-                    return 367 -- Death
-                elseif rnd < 0.6 then
-                    return 366 -- Graviga
-                elseif rnd < 0.8 then
-                    return 274 -- Sleepga II
-                else
-                    return 359 -- Silencega
-                end
-            end
-        end
-        onMobWeaponSkillPrepare = function(mob, target) end
-        onMobWeaponSkill = function( target, mob, skill) end
         onMobDeath = function(mob, player, isKiller) xi.dynamis.megaBossOnDeath(mob, player, mobVar) end
     elseif mobName == "Apocalyptic Beast" then -- Dynamis Buburimu Megaboss
         mobVar =  nmInfoLookup[mobFamily][mobName][7]
         mobNameFound = nmInfoLookup[mobName][1]
         groupIdFound = nmInfoLookup[mobName][2]
         groupZoneFound = nmInfoLookup[mobName][3]
-        onMobSpawn = function(mob)
-            local zone = mob:getZone()
-            xi.dynamis.setMegaBossStats(mob)
-            -- Set Mods
-            mob:setMod(xi.mod.GRAVITYRES, 100)
-            mob:setMod(xi.mod.BINDRES, 50)
-            mob:setMod(xi.mod.STUNRES, 99)
-            mob:setMod(xi.mod.REGAIN, 500)
-            mob:setMod(xi.mod.REFRESH, 500)
-            mob:setMod(xi.mod.SILENCERES, 100)
-            mob:setMod(xi.mod.BLINDRES, 100)
-            mob:setMod(xi.mod.PARALYZERES, 50)
-            mob:setMod(xi.mod.SLOWRES, 50)
-            mob:setMod(xi.mod.SLEEPRES, 100)
-            mob:setMod(xi.mod.LULLABYRES, 100)
-            -- Make it so we can reference arbitrary mob
-            zone:setLocalVar("Apocalyptic_Beast", mob:getID())
-        end
-        onMobEngaged = function(mob) 
-            mob:setLocalVar("last2hrtime", os.time())
-            mob:setLocalVar("next2hr", 1)        
-        end
-        onMobFight = function(mob)
-            local abilities2hr =
-            {
-                [1 ] = xi.jsa.MIGHTY_STRIKES,
-                [2 ] = xi.jsa.HUNDRED_FISTS,
-                [3 ] = xi.jsa.BENEDICTION,
-                [4 ] = xi.jsa.MANAFONT,
-                [5 ] = xi.jsa.CHAINSPELL,
-                [6 ] = xi.jsa.PERFECT_DODGE,
-                [7 ] = xi.jsa.INVINCIBLE,
-                [8 ] = xi.jsa.BLOOD_WEAPON,
-                [9 ] = xi.jsa.FAMILIAR,
-                [10] = xi.jsa.SOUL_VOICE,
-                [11] = xi.jsa.EES_DRAGON,
-                [12] = xi.jsa.MEIKYO_SHISUI,
-                [13] = xi.jsa.MIJIN_GAKURE,
-                [14] = xi.jsa.CALL_WYVERN,
-                [15] = xi.jsa.ASTRAL_FLOW,
-            }
-            local manafontspells =
-            {
-                [1 ] = 176, -- Firaga III
-                [2 ] = 181, -- Blizzaga III
-                [3 ] = 186, -- Aeroga III
-                [4 ] = 191, -- Stonega III
-                [5 ] = 196, -- Thundaga III
-                [6 ] = 201, -- Waterga III
-            }
-            local chainspellspells =
-            {
-                [1 ] = 361, -- Blindga
-                [2 ] = 356, -- Paralyga
-                [3 ] = 362, -- Bindga
-                [4 ] = 365, -- Breakga
-                [5 ] = 274, -- Sleepga II
-                [6 ] = 367, -- Death
-            }
-            local soulvoicesongs =
-            {
-                [1 ] = 376, -- Horde Lullaby
-                [2 ] = 373, -- Foe Requiem VI
-                [3 ] = 397, -- Valor Minuet IV
-                [4 ] = 420, -- Victory March
-                [5 ] = 422, -- Carnage Elegy
-                [6 ] = 463, -- Foe Lullaby
-            }
-        
-            while os.time() >= (mob:getLocalVar("last2hrtime") + 45) do
-                i = mob:getLocalVar("next2hr")
-                mob:useMobAbility(abilities2hr[i])
-                mob:setLocalVar("last2hrtime", os.time())
-                mob:setLocalVar("next2hr", i + 1)
-            end
-        
-            if mob:getLocalVar("familiarcharm") == 1 then
-                if mob:getLocalVar("next2hr") == 9 and (os.time() >= (mob:getLocalVar("last2hrtime") + 43)) then
-                    mob:useMobAbility(710)
-                end
-            end
-        
-            if mob:hasStatusEffect(xi.effect.MANAFONT) then
-                if mob:getStatus() == xi.action.NONE then
-                    local spell = manafontspells[math.random(1,6)]
-                    mob:castSpell(spell)
-                end
-            end
-        
-            if mob:hasStatusEffect(xi.effect.CHAINSPELL) then
-                if mob:getStatus() == xi.action.NONE then
-                    local spell = chainspellspells[math.random(1,6)]
-                    mob:castSpell(spell)
-                end
-            end
-        
-            if mob:hasStatusEffect(xi.effect.SOUL_VOICE) then
-                if mob:getStatus() == xi.action.NONE then
-                    local song = soulvoicesongs[math.random(1,6)]
-                    mob:castSpell(song)
-                end
-            end
-        end
-        onMobRoam = function(mob) xi.dynamis.mobOnRoam(mob) end
-        onMobRoamAction = function(mob) xi.dynamis.mobOnRoamAction(mob) end
-        onMobMagicPrepare = function(mob, target) end
-        onMobWeaponSkillPrepare = function(mob, target)
-            local zone = mob:getZone()
-            local voidsong = 10
-            local chaosblade = 10
-            local bodyslam = 10
-            local petroeyes = 10
-            local windbreath = 10
-            local flamebreath = 10
-            local lodesong = 10
-            local heavystomp = 10
-            local poisonbreath = 10
-            local thornsong = 10
-            local charm = 10
-        
-            -- Set Probabilities of Each Skill Based on Dragon Kill Status
-            if not GetMobByID(zone:getLocalVar("Aitvaras")):isAlive() then
-                voidsong = 0
-            end
-            if not GetMobByID(zone:getLocalVar("Alklha")):isAlive() then
-                chaosblade = 0
-            end
-            if not GetMobByID(zone:getLocalVar("Barong")):isAlive() then
-                bodyslam = 0
-            end
-            if not GetMobByID(zone:getLocalVar("Basillic")):isAlive() then
-                petroeyes = 0
-            end
-            if not GetMobByID(zone:getLocalVar("Jurik")):isAlive() then
-                windbreath = 0
-            end
-            if not GetMobByID(zone:getLocalVar("Koschei")):isAlive() then
-                thornsong = 0
-            end
-            if not GetMobByID(zone:getLocalVar("Stihi")):isAlive() then
-                flamebreath = 0
-            end
-            if not GetMobByID(zone:getLocalVar("Stollenwurm")):isAlive() then
-                lodesong = 0
-            end
-            if not GetMobByID(zone:getLocalVar("Tarasca")):isAlive() then
-                heavystomp = 0
-            end
-            if not GetMobByID(zone:getLocalVar("Vishap")):isAlive() then
-                poisonbreath = 0
-            end
-            if mob:getLocalVar("familiarcharm") == 0 then
-                charm = 0
-            end
-        
-            local totalchance = voidsong + chaosblade + bodyslam + petroeyes + windbreath + thornsong + flamebreath + lodesong + heavystomp + poisonbreath + charm
-            local randomchance = math.random(1, totalchance)
-        
-            -- Choose Skill
-            if randomchance >= (totalchance - voidsong) then
-                return 649 -- Voidsong
-            elseif randomchance >= (totalchance - (voidsong + chaosblade)) then
-                return 647 -- Chaos Blade
-            elseif randomchance >= (totalchance - (voidsong + chaosblade + bodyslam)) then
-                return 645 -- Body Slam
-            elseif randomchance >= (totalchance - (voidsong + chaosblade + bodyslam + petroeyes)) then
-                return 648 -- Petro Eyes
-            elseif randomchance >= (totalchance - (voidsong + chaosblade + bodyslam + petroeyes + windbreath)) then
-                return 644 -- Wind Breath
-            elseif randomchance >= (totalchance - (voidsong + chaosblade + bodyslam + petroeyes + windbreath + thornsong)) then
-                return 650 -- Thornsong
-            elseif randomchance >= (totalchance - (voidsong + chaosblade + bodyslam + petroeyes + windbreath + thornsong + flamebreath)) then
-                return 642 -- Flame Breath
-            elseif randomchance >= (totalchance - (voidsong + chaosblade + bodyslam + petroeyes + windbreath + thornsong + flamebreath + lodesong)) then
-                return 651 -- Lodesong
-            elseif randomchance >= (totalchance - (voidsong + chaosblade + bodyslam + petroeyes + windbreath + thornsong + flamebreath + lodesong + heavystomp)) then
-                return 646 -- Heavy Stomp
-            elseif randomchance >= (totalchance - (voidsong + chaosblade + bodyslam + petroeyes + windbreath + thornsong + flamebreath + lodesong + heavystomp + poisonbreath)) then
-                return 643 -- Poison Breath
-            elseif randomchance >= (totalchance - (voidsong + chaosblade + bodyslam + petroeyes + windbreath + thornsong + flamebreath + lodesong + heavystomp + poisonbreath + charm)) then
-                return 710 -- Charm
-            else
-                return 0
-            end
-        end
-        onMobWeaponSkill = function( target, mob, skill) end
-        onMobDeath = function(mob, player, isKiller) 
-            xi.dynamis.megaBossOnDeath(mob, player, mobVar)
+        onMobDeath = function(mob, player, isKiller)
+            xi.dynamis.megaBossOnDeath(mob, player, isKiller)
             if GetMobByID(zone:getLocalVar("Aitvaras")):isAlive() then
                 DespawnMob(zone:getLocalVar("Aitvaras"))
             end
@@ -878,442 +568,21 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         mobNameFound = nmInfoLookup[mobName][1]
         groupIdFound = nmInfoLookup[mobName][2]
         groupZoneFound = nmInfoLookup[mobName][3]
-        onMobSpawn = function(mob) 
-            xi.dynamis.setMegaBossStats(mob)
-            -- Set Removable Mods
-            mob:addMod(xi.mod.REGEN, 1000)
-            mob:addMod(xi.mod.CRITHITRATE, 100)
-            mob:addMod(xi.mod.UDMGRANGE, -99)
-            mob:addMod(xi.mod.UDMGPHYS, -99)
-            mob:addMod(xi.mod.UDMGBREATH, -99)
-            mob:addMod(xi.mod.FIRERES, 1000)
-            mob:addMod(xi.mod.ICERES, 1000)
-            mob:addMod(xi.mod.WINDRES, 1000)
-            mob:addMod(xi.mod.EARTHRES, 1000)
-            mob:addMod(xi.mod.THUNDERRES, 1000)
-            mob:addMod(xi.mod.WATERRES, 1000)
-            mob:addMod(xi.mod.LIGHTRES, 1000)
-            mob:addMod(xi.mod.DARKRES, 1000)
-            -- Set Non-Removable Mods
-            -- Anateus should not standback and should be able to avoid most RAs via melee range. (https://ffxiclopedia.fandom.com/wiki/Antaeus)
-            mob:addMobMod(xi.mobMod.NO_STANDBACK, 1)
-            -- Sleep Res and Lullaby Res are unverified but added in case (https://ffxiclopedia.fandom.com/wiki/Antaeus)
-            mob:addMod(xi.mod.SLEEPRES, 99)
-            mob:addMod(xi.mod.LULLABYRES, 99)
-            -- Adding Normal Dynamis Boss Resistances and Regain
-            mob:addMod(xi.mod.GRAVITYRES, 40)
-            mob:addMod(xi.mod.BINDRES, 40)
-            mob:addMod(xi.mod.REGAIN, 50)
-        end
-        onMobEngaged = function(mob) xi.dynamis.parentOnEngaged(mob, target) end
-        onMobFight = function(mob) 
-            local zone = mob:getZone()
-            -- Remove Mods Per NM or Elemental Kill
-            if not GetMobByID(zone:getLocalVar("Scolopendra")):isAlive() then
-                if mob:getMod(xi.mod.REGEN) ~= 0 then
-                    mob:setMod(xi.mod.REGEN, 0)
-                end
-            end
-            if not GetMobByID(zone:getLocalVar("Stringes")):isAlive() then
-                if mob:getMod(xi.mod.CRITHITRATE) ~= 10 then
-                    mob:setMod(xi.mod.CRITHITRATE, 10)
-                end
-            end
-            if not GetMobByID(zone:getLocalVar("Suttung")):isAlive() then
-                if mob:getMod(xi.mod.UDMGPHYS) ~= 0 then
-                    mob:setMod(xi.mod.UDMGRANGE, 0)
-                    mob:setMod(xi.mod.UDMGPHYS, 0)
-                    mob:setMod(xi.mod.UDMGBREATH, 0)
-                    mob:setMod(xi.mod.UDMGRANGE, 0)
-                end
-            end
-            if not GetMobByID(zone:getLocalVar("Fire_Elemental")):isAlive() then
-                if mob:getMod(xi.mod.FIRERES) ~= 0 then
-                    mob:setMod(xi.mod.FIRERES, 0)
-                end
-            end
-            if not GetMobByID(zone:getLocalVar("Ice_Elemental")):isAlive() then
-                if mob:getMod(xi.mod.ICERES) ~= 0 then
-                    mob:setMod(xi.mod.ICERES, 0)
-                end
-            end
-            if not GetMobByID(zone:getLocalVar("Air_Elemental")):isAlive() then
-                if mob:getMod(xi.mod.WINDRES) ~= 0 then
-                    mob:setMod(xi.mod.WINDRES, 0)
-                end
-            end
-            if not GetMobByID(zone:getLocalVar("Earth_Elemental")):isAlive() then
-                if mob:getMod(xi.mod.EARTHRES) ~= 0 then
-                    mob:setMod(xi.mod.EARTHRES, 0)
-                end
-            end
-            if not GetMobByID(zone:getLocalVar("Thunder_Elemental")):isAlive() then
-                if mob:getMod(xi.mod.THUNDERRES) ~= 0 then
-                    mob:setMod(xi.mod.THUNDERRES, 0)
-                end
-            end
-            if not GetMobByID(zone:getLocalVar("Water_Elemental")):isAlive() then
-                if mob:getMod(xi.mod.WATERRES) ~= 0 then
-                    mob:setMod(xi.mod.WATERRES, 0)
-                end
-            end
-            if not GetMobByID(zone:getLocalVar("Light_Elemental")):isAlive() then
-                if mob:getMod(xi.mod.LIGHTRES) ~= 0 then
-                    mob:setMod(xi.mod.LIGHTRES, 0)
-                end
-            end
-            if not GetMobByID(zone:getLocalVar("Dark_Elemental")):isAlive() then
-                if mob:getMod(xi.mod.DARKRES) ~= 0 then
-                    mob:setMod(xi.mod.DARKRES, 0)
-                end
-            end
-
-        end
-        onMobRoam = function(mob) xi.dynamis.mobOnRoam(mob) end
-        onMobRoamAction = function(mob) xi.dynamis.mobOnRoamAction(mob) end
-        onMobMagicPrepare = function(mob, target) end
-        onMobWeaponSkillPrepare = function(mob, target) end
-        onMobWeaponSkill = function( target, mob, skill) end
         onMobDeath = function(mob, player, isKiller) xi.dynamis.megaBossOnDeath(mob, player, mobVar) end
     elseif mobName == "Cirrate Christelle" then
         mobVar =  nmInfoLookup[mobFamily][mobName][7]
         mobNameFound = nmInfoLookup[mobName][1]
         groupIdFound = nmInfoLookup[mobName][2]
         groupZoneFound = nmInfoLookup[mobName][3]
-        onMobSpawn = function(mob) 
-            xi.dynamis.setMegaBossStats(mob)
-            -- Set Mods
-            mob:speed(140)
-            mob:addMod(xi.mod.REGAIN, 1250)
-            mob:SetAutoAttackEnabled(false)
-        end
-        onMobEngaged = function(mob) xi.dynamis.parentOnEngaged(mob, target) end
-        onMobFight = function(mob) 
-            local zone = mob:getZone()
-            if not GetMobByID(zone:getLocalVar("Dragontrap_1")):isAlive() and GetMobByID(zone:getLocalVar("Dragontrap_2")):isAlive() and GetMobByID(zone:getLocalVar("Dragontrap_3")):isAlive() then
-                if mob:getLocalVar("PetsSpawned") ~= 1 then
-                local OMobIndex = mobIndex
-                local OMob = mob
-                local i = 1
-                local pets =
-                {
-                    {"4650756b" , 130, 134, 0, nil, nil}, -- FPuk
-                }
-                    while i <= 2 do
-                        local mob = zone:insertDynamicEntity({
-                            objtype = xi.objType.MOB,
-                            name = pets[1],
-                            x = oMob:getXPos()+math.random()*6-3,
-                            y = oMob:getYPos()-0.3,
-                            z = oMob:getXPos()+math.random()*6-3,
-                            rotation = oMob:getRotPos(),
-                            groupId = pets[2],
-                            groupZoneId = pets[3],
-                            onMobSpawn = function(mob) xi.dynamis.setNMStats(mob) end,
-                            onMobRoam = function(mob) xi.dynamis.mobOnRoam(mob) end,
-                            onMobFight = function(mob) xi.dynamis.mobOnFight(mob) end,
-                            onMobRoamAction = function(mob) xi.dynamis.mobOnRoamAction(mob) end,
-                            onMobDeath = function(mob, playerArg, isKiller)
-                                xi.dynamis.mobOnDeath(mob, mobList[mob:getZoneID()], zones[mob:getZoneID()].text.DYNAMIS_TIME_EXTEND)
-                            end,
-                        })
-                        mob:setSpawn(oMob:getXPos()+math.random()*6-3, oMob:getYPos()-0.3, oMob:getZPos()+math.random()*6-3, oMob:getRotPos())
-                        mob:setDropID(pets[4])
-                        if pets[5] ~= nil then -- If SpellList ~= nil set SpellList
-                            mob:setSpellList(pets[5])
-                        end
-                        if pets[6] ~= nil then -- If SkillList ~= nil set SkillList
-                            mob:setMobMod(xi.mobMod.SKILL_LIST, pets[6])
-                        end
-                        mob:setMobMod(xi.mobMod.SUPERLINK, 1)
-                        OMob:setLocalVar(string.format("Nightmare_Morbol_%i", i), mob:getID())
-                        mob:setLocalVar("PetMaster", OMobIndex)
-                        mob:spawn()
-                        mob:updateEnmity(target)
-                        if i == 2 then
-                            mob:setLocalVar("PetsSpawned", 1)
-                        end
-                    end
-                    i = i + 1
-                end
-            end
-
-            if not GetMobByID(zone:getLocalVar("Dragontrap_1")):isAlive() and GetMobByID(zone:getLocalVar("Dragontrap_2")):isAlive() and GetMobByID(zone:getLocalVar("Dragontrap_3")):isAlive() then
-                mob:setLocalVar("putridbreathcap", 500)
-            end
-            if not GetMobByID(zone:getLocalVar("Fairy_Ring")):isAlive() then
-                mob:speed(40)
-                mob:setLocalVar("miasmicbreathpower", 30)
-            end
-            if not GetMobByID(zone:getLocalVar("Nanatina")):isAlive() then
-                mob:setLocalVar("fragrantbreathduration", 30)
-            end
-            if not GetMobByID(zone:getLocalVar("Stcemqestcint")):isAlive() then
-                mob:setLocalVar("vampiriclashpower", 1)
-            end
-
-        end
-        onMobRoam = function(mob) xi.dynamis.mobOnRoam(mob) end
-        onMobRoamAction = function(mob) xi.dynamis.mobOnRoamAction(mob) end
-        onMobMagicPrepare = function(mob, target) end
-        onMobWeaponSkillPrepare = function(mob, target) 
-            -- Set Locals
-            local ID = zones[zone]
-            local fragrantbreath = 24
-            local miasmicbreath = 24
-            local putridbreath = 24
-            local vampiriclash = 24
-            local randomchance = math.random(1, 100)
-            local totalchance = 100
-
-            -- Set Probabilities of Each Skill Based on NM Kill Status
-            if not GetMobByID(zone:getLocalVar("Nanatina")):isAlive() then
-                fragrantbreath = 12
-            end
-            if not GetMobByID(zone:getLocalVar("Fairy_Ring")):isAlive() then
-                miasmicbreath = 12
-            end
-            if not GetMobByID(zone:getLocalVar("Dragontrap_1")):isAlive() and GetMobByID(zone:getLocalVar("Dragontrap_2")):isAlive() and GetMobByID(zone:getLocalVar("Dragontrap_3")):isAlive() then
-                putridbreath = 12
-            end
-            if not GetMobByID(zone:getLocalVar("Stcemqestcint")):isAlive() then
-                vampiriclash = 12
-            end
-
-            -- Choose Skill
-            if randomchance >= (totalchance - fragrantbreath) then
-                return 1607 -- Fragrant Breath
-            elseif randomchance >= (totalchance - (fragrantbreath + miasmicbreath)) then
-                return 1605 -- Miasmic Breath
-            elseif randomchance >= (totalchance - (fragrantbreath + miasmicbreath + putridbreath)) then
-                return 1609 -- Putrid Breath
-            elseif randomchance >= (totalchance - (fragrantbreath + miasmicbreath + putridbreath + vampiriclash)) then
-                return 1611 -- Vampiric Lash
-            else
-                return 1610 -- Extremely Bad Breath: Gains Chance as Other Skills are Mitigated
-            end
-        end
-        onMobWeaponSkill = function( target, mob, skill) end
         onMobDeath = function(mob, player, isKiller) xi.dynamis.megaBossOnDeath(mob, player, mobVar) end
     elseif mobName == "Dynamis Lord" then
         mobVar =  nmInfoLookup[mobFamily][mobName][7]
         mobNameFound = nmInfoLookup[mobName][1]
         groupIdFound = nmInfoLookup[mobName][2]
         groupZoneFound = nmInfoLookup[mobName][3]
-        onMobSpawn = function(mob)
-            dialogDL = 7272
-            local zone = mob:getZone()
-            xi.dynamis.setMegaBossStats(mob) 
-            mob:setMod(xi.mod.SLEEPRESTRAIT, 100)
-            mob:setMod(xi.mod.BINDRESTRAIT, 100)
-            mob:setMod(xi.mod.GRAVITYRESTRAIT, 100)
-            mob:setMod(xi.mod.BINDRESTRAIT, 100)
-            mob:setMod(xi.mod.UFASTCAST, 100)
-            zone:setLocalVar("MainDynaLord", mob:getID())
-            mob:setLocalVar("tpTime", 0)
-            mob:SetAutoAttackEnabled(false)
-            mob:SetMagicCastingEnabled(false)
-
-            xi.mix.jobSpecial.config(mob, {
-                between = 60,
-                specials =
-                {
-                    {id = xi.jsa.HUNDRED_FISTS, hpp = 95, begCode = function(mob) mob:messageText(mob, dialogDL + 11) end},
-                    {id = xi.jsa.MIGHTY_STRIKES, hpp = 95, begCode = function(mob) mob:messageText(mob, dialogDL + 14) end},
-                    {id = xi.jsa.BLOOD_WEAPON, hpp = 95, begCode = function(mob) mob:messageText(mob, dialogDL + 12) end},
-                    {id = xi.jsa.CHAINSPELL, hpp = 50, begCode = function(mob) mob:messageText(mob, dialogDL + 13) end},
-                },
-            })
-        end
-        onMobEngaged = function(mob)
-            local zone = mob:getZone()
-            mob:setLocalVar("teraTime", os.time() + math.random(90,120))
-            mob:setLocalVar("lastPetPop", os.time() + 60)
-            local mainLord = zone:getLocalVar("MainDynaLord")
-            if mob:getID() == mainLord then
-                mob:showText(mob, dialogDL + 8) -- Immortal Drakes, deafeated
-            end
-        end
-        onMobFight = function(mob)
-            local zone = mob:getZone()
-            local tpTime = mob:getLocalVar("tpTime")
-            local mainLord = zone:getLocalVar("MainDynaLord")
-            local ying = GetMobByID(zone:getLocalVar("Ying"))
-            local yang = GetMobByID(zone:getLocalVar("Yang"))
-            if os.time() > tpTime and tpTime ~= 0 then
-                local cloneMove = zone:getLocalVar("CloneMove")
-                mob:useMobAbility(cloneMove)
-                mob:setLocalVar("tpTime", 0)
-                GetMobByID(mainLord):setLocalVar("teraTime", os.time() + math.random(90,120))
-            elseif tpTime == 0 or os.time() > tpTime then
-                mob:SetAutoAttackEnabled(true)
-                mob:SetMagicCastingEnabled(true)
-            end
-
-            if mob:getLocalVar("WeaponskillPerformed") == 1 and mob:getID() ~= mainLord then
-                DespawnMob(mog:getID())
-            else
-                mob:setLocalVar("WeaponskillPerformed", 0)
-            end
-
-            local alreadyPopped = false
-
-            if os.time() - mob:getLocalVar("lastPetPop") > 30 then
-                local pets = 
-                {
-                    ["Ying"] = {"4650756b" , 130, 134, 0, nil, nil}, -- Ying
-                    ["Yang"] = {"4650756b" , 130, 134, 0, nil, nil}, -- Yang
-                }
-                for _, dwagon in pairs(pets) do
-                    if GetMobByID(string.format("%s", pets[dwagon])):isAlive() then
-                        break
-                    else
-                        mob:entityAnimationPacket("casm")
-                        mob:SetAutoAttackEnabled(false)
-                        mob:SetMagicCastingEnabled(false)
-                        mob:SetMobAbilityEnabled(false)
-                        mob:timer(3000, function(mob) 
-                            local pet = zone:insertDynamicEntity({
-                            objtype = xi.objType.MOB,
-                            name = pets[dwagon][1],
-                            x = -414.282,
-                            y = -44,
-                            z = 20.427,
-                            rotation = mob:getRotPos(),
-                            groupId = pets[dwagon][2],
-                            groupZoneId = pets[dwagon][3],
-                            onMobSpawn = function(pet) xi.dynamis.setNMStats(pet) end,
-                            onMobRoam = function(pet) xi.dynamis.mobOnRoam(pet) end,
-                            onMobFight = function(pet) xi.dynamis.mobOnFight(pet) end,
-                            onMobRoamAction = function(pet) xi.dynamis.mobOnRoamAction(pet) end,
-                            onMobDeath = function(pet, playerArg, isKiller) end,
-                            })
-                            pet:setSpawn(-414.282, -44, 20.427, mob:getRotPos())
-                            mob:setDropID(pets[dwagon][4])
-                            if pets[dwagon][5] ~= nil then -- If SpellList ~= nil set SpellList
-                                pet:setSpellList(pets[dwagon][5])
-                            end
-                            if pets[dwagon][6] ~= nil then -- If SkillList ~= nil set SkillList
-                                pet:setMobMod(xi.mobMod.SKILL_LIST, pets[dwagon][6])
-                            end
-                            pet:setMobMod(xi.mobMod.SUPERLINK, 1)
-                            mob:setLocalVar(string.format("%s", pets[dwagon]), pet:getID())
-                            pet:setLocalVar("PetMaster", mob:getID())
-                            zone:setLocalVar(string.format("%s", pets[dwagon]), pet:getID())
-                            if mob:isAlive() then
-                                mob:entityAnimationPacket("shsm")
-                                mob:SetAutoAttackEnabled(true)
-                                mob:SetMagicCastingEnabled(true)
-                                mob:SetMobAbilityEnabled(true)
-                                pet:spawn()
-                                pet:updateEnmity(target)
-                                mob:setLocalVar("lastPetPop", os.time() +30)
-                                if mob:getLocalVar("initialSpawnDialog") == 0 and mob:getID() == mainLord then
-                                    mob:showText(mob, dialogDL +7)
-                                    mob:setLocalVar("initialSpawnDialog", 1)
-                                end
-                            end
-                        end)
-                    end
-                end
-            end
-
-            if ying:isAlive() and ying:getCurrentAction() == xi.act.ROAMING then
-                ying:updateEnmity(target)
-            end
-            if yang:isAlive() and yang:getCurrentAction() == xi.act.ROAMING then
-                yang:updateEnmity(target)
-            end
-
-            -- Dynamis Lord spawns clones of himself 1 1/2 - 2min after pull that use a TP move in unison and despawn after
-            local teraTime = mob:getLocalVar("teraTime")
-            if os.time() > teraTime and mob:getID() == mainLord then
-                local targetList = mob:getEnmityList()
-                local i = 1
-                mob:entityAnimationPacket("casm")
-                mob:SetAutoAttackEnabled(false)
-                mob:SetMagicCastingEnabled(false)
-                mob:SetMobAbilityEnabled(false)
-                mob:timer(3000, function(mob) 
-                    while i <= 5 do
-                        local victim = math.random(#targetList)
-                        local victimPos = targetList[victim].entity:getPos()
-                        local clone = zone:insertDynamicEntity({
-                        objtype = xi.objType.MOB,
-                        name = nmInfoLookup["Dynamis Lord"][1],
-                        x = victimPos.x,
-                        y = victimPos.y,
-                        z = victimPos.z,
-                        rotation = mob:getRotPos(),
-                        groupId = nmInfoLookup["Dynamis Lord"][2],
-                        groupZoneId = nmInfoLookup["Dynamis Lord"][3],
-                        onMobSpawn = function(pet) xi.dynamis.setNMStats(pet) end,
-                        onMobRoam = function(pet) xi.dynamis.mobOnRoam(pet) end,
-                        onMobFight = function(pet) xi.dynamis.mobOnFight(pet) end,
-                        onMobRoamAction = function(pet) xi.dynamis.mobOnRoamAction(pet) end,
-                        onMobDeath = function(pet, playerArg, isKiller) end,
-                        })
-                        clone:setSpawn(victimPos.x, victimPos.y, victimPos.z, mob:getRotPos())
-                        mob:setDropID(nmInfoLookup["Dynamis Lord"][4])
-                        if nmInfoLookup["Dynamis Lord"][5] ~= nil then -- If SpellList ~= nil set SpellList
-                            clone:setSpellList(nmInfoLookup["Dynamis Lord"][5])
-                        end
-                        if nmInfoLookup["Dynamis Lord"][6] ~= nil then -- If SkillList ~= nil set SkillList
-                            clone:setMobMod(xi.mobMod.SKILL_LIST, nmInfoLookup["Dynamis Lord"][6])
-                        end
-                        clone:setMobMod(xi.mobMod.SUPERLINK, 1)
-                        zone:setLocalVar(string.format("Dynamis_Lord_%i", i), clone:getID())
-                        clone:spawn()
-                        clone:setHP(mob:getHP())
-                        clone:updateEnmity(targetList[victim].entity)
-                        clone:setLocalVar("tpTime", os.time() + 2)
-                    end
-                    i = i + 1
-                    if mob:isAlive() then
-                        mob:entityAnimationPacket("shsm")
-                        mob:SetAutoAttackEnabled(true)
-                        mob:SetMagicCastingEnabled(true)
-                        mob:SetMobAbilityEnabled(true)
-                        local newDynaLord = zone:getLocalVar(string.format("Dynamis_Lord_%i", math.random(1, 5)))
-                        zone:setLocalVar("MainDynaLord", newDynaLord)
-                    end
-                end)
-            end
-        end
-        onMobRoam = function(mob) xi.dynamis.mobOnRoam(mob) end
-        onMobRoamAction = function(mob) xi.dynamis.mobOnRoamAction(mob) end
-        onMobMagicPrepare = function(mob, target) 
-            local rnd = math.random(0, 1000)
-            -- Dynamis Lord has a small chance to choose death
-            if rnd <= 0.05 then
-                return 367 -- Death
-            end
-        end
-        onMobWeaponSkillPrepare = function(mob, target) 
-            -- at or below 25% hp, tera slash & oblivion smash have a chance to insta death on hit.
-            -- each has two animations per skill, one jumping (insta death) the other standing on the ground.
-            if mob:getHPP() <= 25 then
-                if math.random() < 0.25 then
-                    return 1135
-                elseif math.random() < 0.50 then
-                    return 1133
-                elseif math.random() < 0.75 then
-                    return 1134
-                else
-                    return 1132
-                end
-            end
-        end
-        onMobWeaponSkill = function( target, mob, skill) 
-            local zone = mob:getZone()
-            local mainLord = zone:getLocalVar("MainDynaLord")
-            if skill:getID() == 1135 and mob:getID() == mainLord then
-                mob:showText(mob, dialogDL + 1)
-            end
-            mob:setLocalVar("WeaponskillPerformed", 1)
-        end
         onMobDeath = function(mob, player, isKiller)
             local zone = mob:getZone()
+            local dialogDL = 7272
             xi.dynamis.megaBossOnDeath(mob, player, mobVar)
             if isKiller then
                 mob:showText(mob, dialogDL + 2)
@@ -1367,36 +636,6 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         mobNameFound = nmInfoLookup[mobName][1]
         groupIdFound = nmInfoLookup[mobName][2]
         groupZoneFound = nmInfoLookup[mobName][3]
-        onMobSpawn = function(mob) 
-            local zone = mob:getZone()
-            local dynaLord = GetMobByID(zone:getLocalVar("MainDynaLord"))
-            xi.dynamis.setNMStats(mob)
-            if dynaLord:getLocalVar("magImmune") < 2 then -- both dragons have not been killed initially
-                dynaLord:setMod(xi.mod.UDMGMAGIC, -100)
-                dynaLord:setMod(xi.mod.UDMGBREATH, -100)
-                dynaLord:setLocalVar("magImmune", 0)
-                mob:setSpawn(-364, -35.661, 17.254) -- Reset Ying's spawn point to initial spot.
-            else
-                mob:setSpawn(-414.282, -44, 20.427) -- Spawned by DL, reset to DL's spawn point.
-            end
-        end
-        onMobEngaged = function(mob) end
-        onMobFight = function(mob, target) 
-            local zone = mob:getZone()
-            local yang = GetMobByID(zone:getLocalVar("Yang"))
-            local yangToD = mob:getLocalVar("yangToD")
-            -- Repop Yang every 30 seconds if Ying is up and Yang is not.
-            if not yang:isSpawned() and os.time() > yangToD + 30 then
-                yang:setSpawn(mob:getXPos(), mob:getYPos(), mob:getZPos())
-                yang:spawn()
-                yang:updateEnmity(target)
-            end
-        end
-        onMobRoam = function(mob) xi.dynamis.mobOnRoam(mob) end
-        onMobRoamAction = function(mob) xi.dynamis.mobOnRoamAction(mob) end
-        onMobMagicPrepare = function(mob, target) end
-        onMobWeaponSkillPrepare = function(mob, target) end
-        onMobWeaponSkill = function( target, mob, skill) end
         onMobDeath = function(mob, player, isKiller) 
             local zone = mob:getZone()
             local yang = GetMobByID(zone:getLocalVar("Yang"))
@@ -1427,36 +666,6 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         mobNameFound = nmInfoLookup[mobName][1]
         groupIdFound = nmInfoLookup[mobName][2]
         groupZoneFound = nmInfoLookup[mobName][3]
-        onMobSpawn = function(mob) 
-            local zone = mob:getZone()
-            local dynaLord = GetMobByID(zone:getLocalVar("MainDynaLord"))
-            xi.dynamis.setNMStats(mob)
-            if dynaLord:getLocalVar("magImmune") < 2 then -- both dragons have not been killed initially
-                dynaLord:setMod(xi.mod.UDMGMAGIC, -100)
-                dynaLord:setMod(xi.mod.UDMGBREATH, -100)
-                dynaLord:setLocalVar("magImmune", 0)
-                mob:setSpawn(-364, -35.661, 17.254) -- Reset Ying's spawn point to initial spot.
-            else
-                mob:setSpawn(-414.282, -44, 20.427) -- Spawned by DL, reset to DL's spawn point.
-            end
-        end
-        onMobEngaged = function(mob) end
-        onMobFight = function(mob, target) 
-            local zone = mob:getZone()
-            local ying = GetMobByID(zone:getLocalVar("Ying"))
-            local yingToD = mob:getLocalVar("yingToD")
-            -- Repop ying every 30 seconds if Ying is up and ying is not.
-            if not ying:isSpawned() and os.time() > yingToD + 30 then
-                ying:setSpawn(mob:getXPos(), mob:getYPos(), mob:getZPos())
-                ying:spawn()
-                ying:updateEnmity(target)
-            end
-        end
-        onMobRoam = function(mob) xi.dynamis.mobOnRoam(mob) end
-        onMobRoamAction = function(mob) xi.dynamis.mobOnRoamAction(mob) end
-        onMobMagicPrepare = function(mob, target) end
-        onMobWeaponSkillPrepare = function(mob, target) end
-        onMobWeaponSkill = function( target, mob, skill) end
         onMobDeath = function(mob, player, isKiller) 
             local zone = mob:getZone()
             local ying = GetMobByID(zone:getLocalVar("Ying"))
@@ -1497,50 +706,90 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         onMobWeaponSkill = function( target, mob, skill) end
         onMobDeath = function(mob, player, isKiller) xi.dynamis.megaBossOnDeath(mob, player, mobVar) end
     end
-    local mob = zone:insertDynamicEntity({
-        objtype = xi.objType.MOB,
-        name = mobNameFound,
-        x = xPos,
-        y = yPos,
-        z = zPos,
-        rotation = rPos,
-        groupId = groupIdFound,
-        groupZoneId = groupZoneFound,
-        onMobSpawn,
-        onMobEngaged,
-        onMobFight,
-        onMobRoam,
-        onMobRoamAction,
-        onMobMagicPrepare,
-        onMobWeaponSkillPrepare,
-        onMobWeaponSkill,
-        onMobDeath,
-    })
-    mob:setSpawn(xPos, yPos, zPos, rPos)
-    if mobFamily == nil then
-        mob:setDropID(nmInfoLookup[mobName][4])
-        if nmInfoLookup[mobName][5] ~= nil then -- If SpellList ~= nil set SpellList
-            mob:setSpellList(nmInfoLookup[mobName][5])
+    if nmInfoLookup[mobFamily] == "Goblin" or nmInfoLookup[mobFamily] == "Orc" or nmInfoLookup[mobFamily] == "Yagudo" or nmInfoLookup[mobFamily] == "Kindred" or nmInfoLookup[mobFamily] == "Hydra" then
+        local mob = zone:insertDynamicEntity({
+            objtype = xi.objType.MOB,
+            name = mobNameFound,
+            x = xPos,
+            y = yPos,
+            z = zPos,
+            rotation = rPos,
+            groupId = groupIdFound,
+            groupZoneId = groupZoneFound,
+            onMobSpawn,
+            onMobEngaged,
+            onMobFight,
+            onMobRoam,
+            onMobRoamAction,
+            onMobMagicPrepare,
+            onMobWeaponSkillPrepare,
+            onMobWeaponSkill,
+            onMobDeath,
+        })
+        mob:setSpawn(xPos, yPos, zPos, rPos)
+        if mobFamily == nil then
+            mob:setDropID(nmInfoLookup[mobName][4])
+            if nmInfoLookup[mobName][5] ~= nil then -- If SpellList ~= nil set SpellList
+                mob:setSpellList(nmInfoLookup[mobName][5])
+            end
+            if nmInfoLookup[mobName][6] ~= nil then -- If SkillList ~= nil set SkillList
+                mob:setMobMod(xi.mobMod.SKILL_LIST, nmInfoLookup[mobName][6])
+            end
+        else
+            mob:setDropID(nmInfoLookup[mobFamily][mobName][4])
+            if nmInfoLookup[mobFamily][mobName][5] ~= nil then -- If SpellList ~= nil set SpellList
+                mob:setSpellList(nmInfoLookup[mobFamily][mobName][5])
+            end
+            if nmInfoLookup[mobFamily][mobName][6] ~= nil then -- If SkillList ~= nil set SkillList
+                mob:setMobMod(xi.mobMod.SKILL_LIST, nmInfoLookup[mobFamily][mobName][6])
+            end
         end
-        if nmInfoLookup[mobName][6] ~= nil then -- If SkillList ~= nil set SkillList
-            mob:setMobMod(xi.mobMod.SKILL_LIST, nmInfoLookup[mobName][6])
+        if oMobIndex ~= nil then
+            mob:setLocalVar("Parent", oMobIndex)
+        end
+        mob:setLocalVar("MobIndex", mobIndex)
+        mob:spawn()
+        if forceLink == true then
+            mob:updateEnmity(target)
         end
     else
-        mob:setDropID(nmInfoLookup[mobFamily][mobName][4])
-        if nmInfoLookup[mobFamily][mobName][5] ~= nil then -- If SpellList ~= nil set SpellList
-            mob:setSpellList(nmInfoLookup[mobFamily][mobName][5])
+        local mob = zone:insertDynamicEntity({
+            objtype = xi.objType.MOB,
+            name = mobNameFound,
+            x = xPos,
+            y = yPos,
+            z = zPos,
+            rotation = rPos,
+            groupId = groupIdFound,
+            groupZoneId = groupZoneFound,
+            onMobDeath,
+        })
+        mob:setSpawn(xPos, yPos, zPos, rPos)
+        if mobFamily == nil then
+            mob:setDropID(nmInfoLookup[mobName][4])
+            if nmInfoLookup[mobName][5] ~= nil then -- If SpellList ~= nil set SpellList
+                mob:setSpellList(nmInfoLookup[mobName][5])
+            end
+            if nmInfoLookup[mobName][6] ~= nil then -- If SkillList ~= nil set SkillList
+                mob:setMobMod(xi.mobMod.SKILL_LIST, nmInfoLookup[mobName][6])
+            end
+        else
+            mob:setDropID(nmInfoLookup[mobFamily][mobName][4])
+            if nmInfoLookup[mobFamily][mobName][5] ~= nil then -- If SpellList ~= nil set SpellList
+                mob:setSpellList(nmInfoLookup[mobFamily][mobName][5])
+            end
+            if nmInfoLookup[mobFamily][mobName][6] ~= nil then -- If SkillList ~= nil set SkillList
+                mob:setMobMod(xi.mobMod.SKILL_LIST, nmInfoLookup[mobFamily][mobName][6])
+            end
         end
-        if nmInfoLookup[mobFamily][mobName][6] ~= nil then -- If SkillList ~= nil set SkillList
-            mob:setMobMod(xi.mobMod.SKILL_LIST, nmInfoLookup[mobFamily][mobName][6])
+        if oMobIndex ~= nil then
+            mob:setLocalVar("Parent", oMobIndex)
         end
-    end
-    if oMobIndex ~= nil then
-        mob:setLocalVar("Parent", oMobIndex)
-    end
-    mob:setLocalVar("MobIndex", mobIndex)
-    mob:spawn()
-    if forceLink == true then
-        mob:updateEnmity(target)
+        mob:setLocalVar("MobIndex", mobIndex)
+        mob:spawn()
+        if forceLink == true then
+            mob:updateEnmity(target)
+        end
     end
 end
 
