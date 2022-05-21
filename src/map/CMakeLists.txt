@@ -23,6 +23,8 @@ set(SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/attack.h
     ${CMAKE_CURRENT_SOURCE_DIR}/attackround.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/attackround.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/autotranslate.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/autotranslate.h
     ${CMAKE_CURRENT_SOURCE_DIR}/battlefield_handler.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/battlefield_handler.h
     ${CMAKE_CURRENT_SOURCE_DIR}/battlefield.cpp

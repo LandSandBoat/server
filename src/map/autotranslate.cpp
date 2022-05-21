@@ -78,14 +78,37 @@ with open('autotranslate.cpp', 'w') as f:
     f.write("}\n")
 */
 
+/*
+SQL tables with auto-translate strings for web tools
+Post by bluekirby0
+http://forums.dspt.info/viewtopic.php?f=16&t=702&sid=e3b33037605e19d3736f8a1b4c0b5b34
+
+Basically the idea is you detect auto-translated text by searching for 0xFD characters. It will then always follow this pattern:
+
+0xFD XX YY ZZ AA 0xFD
+
+where 0xFD are literals.
+
+XX is the type, and will usually be 0x02. If this is the case, you will be using the auto_translate_strings table.
+YY is a language code and can be safely ignored.
+ZZ is the category you should use in your query
+AA is the index you should use in your query
+
+So just replace that sequence with the string retrieved from your query and voila!
+
+The pattern is a little different if XX is not 02.
+
+If it is 0x07 then it is an item. If it is 0x13 then it is a key item.
+In either case, ZZ AA together become the id you use in your query. You will query auto_translate_items for 0x07 and auto_translate_keyitems for 0x13.
+*/
+
 #include <map>
 #include <vector>
 
 #include "common/cbasetypes.h"
 
 // NOTE: This is not the complete table, there are still many lookups to do!
-const std::map<unsigned int, const char*> values =
-{
+const std::map<unsigned int, const char*> values = {
     { 66050, "Greetings" },
     { 16843266, "Nice to meet you." },
     { 33620482, "See you again!" },
@@ -2751,11 +2774,16 @@ std::string doLookup(std::string const& str, std::vector<uint16>& data)
         return "?";
     }
 
-    uint32 key = 0;
-    for (std::size_t idx = 0; idx < 4; ++idx)
-    {
-        key += data.at(idx) << (idx * 8);
-    }
+    auto type     = data.at(0);
+    auto language = data.at(1);
+    auto category = data.at(2);
+    auto index    = data.at(3);
+
+    // Type (usually always 0x02):
+    // If it is 0x07 then it is an item. If it is 0x13 then it is a key item.
+    // In either case, ZZ AA together become the id you use in your query. You will query auto_translate_items for 0x07 and auto_translate_keyitems for 0x13.
+
+    uint32 key = (type << (8 * 0)) + (language << (8 * 1)) + (category << (8 * 2)) + (index << (8 * 3));
 
     if (values.find(key) == values.end())
     {
@@ -2765,15 +2793,38 @@ std::string doLookup(std::string const& str, std::vector<uint16>& data)
 
     auto value = values.at(key);
 
-    // ShowInfo(fmt::format("autotranslate: {}: {}", key, value));
+    ShowInfo(fmt::format("autotranslate: {}: {}", key, value));
+    switch (type)
+    {
+        case 0x02:
+        {
+            ShowInfo(fmt::format("autotranslate: type: string, lang: {}, cat: {}, index: {}", language, category, index));
+        }
+        break;
+        case 0x07:
+        {
+            ShowInfo(fmt::format("autotranslate: type: item, lang: {}, cat: {}, index: {}", language, category, index));
+        }
+        break;
+        case 0x13:
+        {
+            ShowInfo(fmt::format("autotranslate: type: keyitem, lang: {}, cat: {}, index: {}", language, category, index));
+        }
+        break;
+        default:
+        {
+            ShowInfo(fmt::format("autotranslate: type: unknown ({}), lang: {}, cat: {}, index: {}", type, language, category, index));
+        }
+        break;
+    }
 
     return values.at(key);
 }
 
 std::string autotranslate::replaceBytes(std::string const& str)
 {
-    bool inATBlock = false;
-    std::string outStr = "";
+    bool                inATBlock = false;
+    std::string         outStr    = "";
     std::vector<uint16> data;
 
     for (auto& ch : str)
