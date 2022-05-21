@@ -21,6 +21,7 @@ entity.onMobFight = function(mob, target)
     local OP_Mariselle = mob:getID()
     local Locations =
     {
+        [0] =
         {
     --Northeast room
         { 88.6123, -2, 110.1267 },
@@ -33,6 +34,7 @@ entity.onMobFight = function(mob, target)
         { 110.8072, -2.1785, 130.0085 },
         { 100.0483, -2, 116.4553 },
         },
+        [1] =
     --Northmid room
         {
         { 70.8789, -2, 109.542 },
@@ -45,6 +47,7 @@ entity.onMobFight = function(mob, target)
         { 58.1095, -2.7298, 129.9273 },
         { 50.1262, -2.1785, 130.2446 },
         },
+        [2] =
     --Northwest room
         {
         { 9.7012, -2, 109.5587 },
@@ -57,6 +60,7 @@ entity.onMobFight = function(mob, target)
         { 19.8528, -2.7298, 130.7574 },
         { 30.7859, -2.1785, 129.5448 },
         },
+        [3] =
     --Southeast room
         {
         { 110.3006, -2.1785, -129.8003 },
@@ -69,6 +73,7 @@ entity.onMobFight = function(mob, target)
         { 97.4817, -2.0000, -109.9677 },
         { 88.0128, -2.0000, -110.1289 },
         },
+        [4] =
     --Southmid room
         {
         { 49.0167, -2.0000, -109.8401 },
@@ -81,6 +86,7 @@ entity.onMobFight = function(mob, target)
         { 62.3159, -2.6880, -129.7956 },
         { 69.3685, -2.1785, -129.3329 },
         },
+        [5] =
     --Southwest room
         {
         { 8.7566, -2.0000, -109.7524 },
@@ -103,7 +109,6 @@ entity.onMobFight = function(mob, target)
         for i = OP_Mariselle+1, OP_Mariselle+2 do
             local m = GetMobByID(i)
             if not m:isSpawned() then
-                mob:entityAnimationPacket("casm")
                 m:spawn()
                 m:updateEnmity(target)
                 m:setPos(X + 1, Y, Z + 1) -- Set pupil x and z position +1 from Mariselle
@@ -120,15 +125,20 @@ entity.onMobFight = function(mob, target)
     end
 
     local teleTime = mob:getLocalVar("teleTime")
-    if mob:getBattleTime() - teleTime > 30 and mob:getBattleTime() > 59 then
+    if mob:getBattleTime() - teleTime > 30 and mob:getBattleTime() > 59 and mob:actionQueueEmpty() == true then
         local profLocation = mob:getLocalVar("spawnLocation")
         local randomPosition = math.random((1), (9))
-        utils.mobTeleport(mob, 2000, Locations[profLocation+1][randomPosition])
+        utils.mobTeleport(mob, 2000, Locations[profLocation][randomPosition])
 
         mob:setLocalVar("teleTime", mob:getBattleTime())
     end
 
-    if mob:checkDistance(mob:getTarget()) > 55 then     -- If players wander too far from professor and his teleport room he deaggros
+    -- If players wander too far from professor and his teleport room he deaggros --
+    -- This is a safety measure due to the navmesh sucking, if players wanted too far and OPM + Babies are teleporting they will just wander through walls --
+    -- This happens to all mobs, but due to the teleport mechanics can sometimes cause issues --
+    --TO-DO Remove de-aggro when OOB Navmesh issues are fixed
+
+    if mob:checkDistance(mob:getTarget()) > 55 then
         mob:disengage()
         mob:resetEnmity(target)
         for i = OP_Mariselle+1, OP_Mariselle+2 do
@@ -175,15 +185,15 @@ entity.onMobRoam = function(mob)
     local profLocation = mob:getLocalVar("spawnLocation")
     local returnPoint =
     {
-      { 102.669, -3.111, 127.279 },
-      { 62.668, -3.111, 127.288 },
-      { 22.669, -3.111, 127.279 },
-      { 102.670, -3.111, -127.318 },
-      { 62.668, -3.111, -127.318 },
-      { 22.669, -3.111, -127.318 },
+    [0] = { 102.669, -3.111, 127.279 },
+    [1] = { 62.668, -3.111, 127.288 },
+    [2] = { 22.669, -3.111, 127.279 },
+    [3] = { 102.670, -3.111, -127.318 },
+    [4] = { 62.668, -3.111, -127.318 },
+    [5] = { 22.669, -3.111, -127.318 },
     }
 
-    local posPath = {mob:getXPos(), mob:getYPos(), mob:getZPos(), returnPoint[profLocation+1]}
+    local posPath = {mob:getXPos(), mob:getYPos(), mob:getZPos(), returnPoint[profLocation][1], returnPoint[profLocation][2], returnPoint[profLocation][3]}
     xi.path.patrol(mob, posPath)
 end
 

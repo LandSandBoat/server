@@ -19,6 +19,32 @@ local sacrariumID = require("scripts/zones/Sacrarium/IDs")
 
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.THE_SECRETS_OF_WORSHIP)
 
+local profQmOnTrigger = function(player, npc)
+    local missionStatus = mission:getVar(player, 'Status')
+    local isSpawnPoint = npc:getLocalVar('hasProfessorMariselle') == 1
+
+    print('wtf')
+
+    if
+        missionStatus == 3 and
+        not player:hasKeyItem(xi.ki.RELIQUIARIUM_KEY) and
+        isSpawnPoint and
+        npcUtil.popFromQM(player, npc, sacrariumID.mob.OLD_PROFESSOR_MARISELLE, { radius = 2, hide = 0 })
+    then
+        print('wtf')
+        return mission:messageSpecial(sacrariumID.text.EVIL_PRESENCE)
+
+    elseif
+        mission:getLocalVar(player, 'hasKilled') == 1 and
+        not player:hasKeyItem(xi.ki.RELIQUIARIUM_KEY)
+    then
+        print('wtf')
+        npcUtil.giveKeyItem(player, xi.ki.RELIQUIARIUM_KEY)
+        return mission:noAction()
+
+    end
+end
+
 mission.reward =
 {
     nextMission = { xi.mission.log_id.COP, xi.mission.id.cop.SLANDEROUS_UTTERINGS },
@@ -119,28 +145,17 @@ mission.sections =
                 end,
             },
 
-            ['qm_professor_mariselle'] =
-            {
-                onTrigger = function(player, npc)
-                    local missionStatus = mission:getVar(player, 'Status')
-                    local isSpawnPoint = npc:getLocalVar('hasProfessorMariselle') == 1
+            ['qm_prof_0'] = profQmOnTrigger,
 
-                    if
-                        missionStatus == 3 and
-                        not player:hasKeyItem(xi.ki.RELIQUIARIUM_KEY) and
-                        isSpawnPoint and
-                        npcUtil.popFromQM(player, npc, sacrariumID.mob.OLD_PROFESSOR_MARISELLE, { radius = 2, hide = 0 })
-                    then
-                        return mission:messageSpecial(sacrariumID.text.EVIL_PRESENCE)
-                    elseif
-                        mission:getLocalVar(player, 'hasKilled') == 1 and
-                        not player:hasKeyItem(xi.ki.RELIQUIARIUM_KEY)
-                    then
-                        npcUtil.giveKeyItem(player, xi.ki.RELIQUIARIUM_KEY)
-                        return mission:noAction()
-                    end
-                end,
-            },
+            ['qm_prof_1'] = profQmOnTrigger,
+
+            ['qm_prof_2'] = profQmOnTrigger,
+
+            ['qm_prof_3'] = profQmOnTrigger,
+
+            ['qm_prof_4'] = profQmOnTrigger,
+
+            ['qm_prof_5'] = profQmOnTrigger,
 
             ['Old_Professor_Mariselle'] =
             {

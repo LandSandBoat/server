@@ -492,8 +492,8 @@ function utils.mobTeleport(mob, hideDuration, pos, disAnim, reapAnim)
 
     local mobSpeed = mob:getSpeed()
 
-    if hideDuration < 1500 then
-        hideDuration = 1500
+    if hideDuration < 1000 then
+        hideDuration = 1000
     end
 
     if mob:isDead() then
@@ -509,14 +509,15 @@ function utils.mobTeleport(mob, hideDuration, pos, disAnim, reapAnim)
     mob:setPos(pos, 0)
     mob:setSpeed(0)
 
-    mob:entityAnimationPacket("deru")
     mob:timer(hideDuration, function(mobArg)
+        mob:setPos(pos, 0)
         mob:hideName(false)
         mob:untargetable(false)
         mob:SetAutoAttackEnabled(true)
         mob:SetMagicCastingEnabled(true)
         mob:SetMobAbilityEnabled(true)
         mob:setSpeed(mobSpeed)
+        mob:entityAnimationPacket(reapAnim)
 
         if mob:isDead() then
             return
