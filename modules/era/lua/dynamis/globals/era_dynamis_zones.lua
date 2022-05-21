@@ -53,19 +53,17 @@ for _, zoneID in pairs(dynamisZones) do
 end
 
 for _, zoneID in pairs(startingZones) do
-    m:addOverride(string.format("xi.zones.%s.Zone.onInitialize", zoneID[2]), function(zone)
-        if xi.entryInfoEra[zoneID].csBit >= 7 then
-            m:addOverride(string.format("xi.zones.%s.npcs.Hieroglyphics.onTrade", zoneID[2]),
-            function(player, npc, trade)
-                xi.dynamis.entryNpcOnTrade(player, npc, trade)
-            end)
-        else
-            m:addOverride(string.format("xi.zones.%s.npcs.Trail_Markings.onTrade", zoneID[2]),
-            function(player, npc, trade)
-                xi.dynamis.entryNpcOnTrade(player, npc, trade)
-            end)
-        end
-    end)
+    if xi.dynamis.entryInfoEra[zoneID[1]].csBit >= 7 then
+        m:addOverride(string.format("xi.zones.%s.npcs.Hieroglyphics.onTrade", zoneID[2]),
+        function(player, npc, trade)
+            xi.dynamis.entryNpcOnTrade(player, npc, trade)
+        end)
+    else
+        m:addOverride(string.format("xi.zones.%s.npcs.Trail_Markings.onTrade", zoneID[2]),
+        function(player, npc, trade)
+            xi.dynamis.entryNpcOnTrade(player, npc, trade)
+        end)
+    end
 end
 
 return m
