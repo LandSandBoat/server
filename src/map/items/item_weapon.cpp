@@ -212,7 +212,7 @@ uint8 CItemWeapon::getSkillType() const
 /************************************************************************
  *                                                                      *
  *   Set sub skillType.  Used for guns vs crossbows and other           *
- *	exclusives                                                          *
+ *   exclusives                                                         *
  *                                                                      *
  ************************************************************************/
 
@@ -371,6 +371,19 @@ uint16 CItemWeapon::getTotalUnlockPointsNeeded() const
 uint16 CItemWeapon::getCurrentUnlockPoints()
 {
     return ref<uint16>(m_extra, 0);
+}
+
+/************************************************************************
+ *                                                                       *
+ * set rod number                                                        *
+ *                                                                       *
+ ************************************************************************/
+
+void CItemWeapon::setRodNumber(uint16 number)
+{
+    ref<uint16>(m_extra, 0x00) = 0x1002;
+    ref<uint8>(m_extra, 0x04)  = 0x63;
+    ref<uint16>(m_extra, 0x06) = number;
 }
 
 /************************************************************************

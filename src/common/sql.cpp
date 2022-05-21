@@ -62,9 +62,9 @@ void SqlConnection::Async(std::string const& query)
     TracyZoneString(query);
 
     // clang-format off
-    Async([query](SqlConnection* sql)
+    Async([query = std::move(query)](SqlConnection* sql)
     {
-        // Executed on worker thread with a copy of query
+        // Executed on worker thread
         if (sql->QueryStr(query.c_str()) == SQL_ERROR)
         {
             ShowFatalError("Asyc Query Error");
