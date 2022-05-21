@@ -141,15 +141,10 @@ mission.sections =
             },
 
             ['qm_prof_0'] = profQmOnTrigger,
-
             ['qm_prof_1'] = profQmOnTrigger,
-
             ['qm_prof_2'] = profQmOnTrigger,
-
             ['qm_prof_3'] = profQmOnTrigger,
-
             ['qm_prof_4'] = profQmOnTrigger,
-
             ['qm_prof_5'] = profQmOnTrigger,
 
             ['Old_Professor_Mariselle'] =

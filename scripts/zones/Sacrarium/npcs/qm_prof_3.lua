@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Sacrarium
---  NPC: qm_professor_mariselle (???)
+--  NPC: qm_prof_3 (???)
 -- Notes: Used to spawn Old Prof. Mariselle
 -- !pos 102.670 -3.111 -127.318 28
 
