@@ -4149,6 +4149,43 @@ INSERT INTO `mob_spell_lists` VALUES ('Nepionic_Soulflayer',460,259,1,60); -- sl
 INSERT INTO `mob_spell_lists` VALUES ('Nepionic_Soulflayer',460,273,1,60); -- sleepga
 INSERT INTO `mob_spell_lists` VALUES ('Nepionic_Soulflayer',460,274,1,60); -- sleepga_II
 
+-- CoP 5-3L Head Wind (Boneyard Gulley) -- Shikaree X (Used Capture from FFXI Captures Discord)
+INSERT INTO `mob_spell_lists` VALUES ('Shikaree_X',461,344,1,255); -- Hojo: Ichi
+INSERT INTO `mob_spell_lists` VALUES ('Shikaree_X',461,347,1,255); -- Kurayami: Ichi
+INSERT INTO `mob_spell_lists` VALUES ('Shikaree_X',461,338,1,255); -- Utsusemi: Ichi
+INSERT INTO `mob_spell_lists` VALUES ('Shikaree_X',461,320,1,255); -- Katon: Ichi
+INSERT INTO `mob_spell_lists` VALUES ('Shikaree_X',461,323,1,255); -- Hyoton: Ichi
+INSERT INTO `mob_spell_lists` VALUES ('Shikaree_X',461,326,1,255); -- Huton: Ichi
+INSERT INTO `mob_spell_lists` VALUES ('Shikaree_X',461,329,1,255); -- Doton: Ichi
+INSERT INTO `mob_spell_lists` VALUES ('Shikaree_X',461,332,1,255); -- Raiton: Ichi
+INSERT INTO `mob_spell_lists` VALUES ('Shikaree_X',461,335,1,255); -- Suiton: Ichi
+
+-- CoP 5-3L Head Wind (Boneyard Gulley) -- Shikaree Y (Used Capture from FFXI Captures Discord)
+INSERT INTO `mob_spell_lists` VALUES ('Shikaree_Y',462,159,1,255); -- Stone
+INSERT INTO `mob_spell_lists` VALUES ('Shikaree_Y',462,169,1,255); -- Water
+INSERT INTO `mob_spell_lists` VALUES ('Shikaree_Y',462,154,1,255); -- Aero
+INSERT INTO `mob_spell_lists` VALUES ('Shikaree_Y',462,144,1,255); -- Fire
+INSERT INTO `mob_spell_lists` VALUES ('Shikaree_Y',462,149,1,255); -- Blizzard
+INSERT INTO `mob_spell_lists` VALUES ('Shikaree_Y',462,164,1,255); -- Thunder
+INSERT INTO `mob_spell_lists` VALUES ('Shikaree_Y',462,220,1,255); -- Poison
+INSERT INTO `mob_spell_lists` VALUES ('Shikaree_Y',462,265,1,255); -- Poisonga
+INSERT INTO `mob_spell_lists` VALUES ('Shikaree_Y',462,247,1,255); -- Aspir
+INSERT INTO `mob_spell_lists` VALUES ('Shikaree_Y',462,245,1,255); -- Drain
+INSERT INTO `mob_spell_lists` VALUES ('Shikaree_Y',462,266,1,255); -- Absorb-STR
+INSERT INTO `mob_spell_lists` VALUES ('Shikaree_Y',462,267,1,255); -- Absorb-DEX
+INSERT INTO `mob_spell_lists` VALUES ('Shikaree_Y',462,275,1,255); -- Absorb-TP
+
+-- CoP 5-3L Head Wind (Boneyard Gulley) -- Shikaree Z (Used Capture from FFXI Captures Discord)
+INSERT INTO `mob_spell_lists` VALUES ('Shikaree_Z',463,28,1,255); -- Banish
+INSERT INTO `mob_spell_lists` VALUES ('Shikaree_Z',463,38,1,255); -- Banisga
+INSERT INTO `mob_spell_lists` VALUES ('Shikaree_Z',463,53,1,255); -- Blink
+INSERT INTO `mob_spell_lists` VALUES ('Shikaree_Z',463,23,1,255); -- Dia
+INSERT INTO `mob_spell_lists` VALUES ('Shikaree_Z',463,33,1,255); -- Diaga
+INSERT INTO `mob_spell_lists` VALUES ('Shikaree_Z',463,14,1,255); -- Poisona
+INSERT INTO `mob_spell_lists` VALUES ('Shikaree_Z',463,15,1,255); -- Paralyna
+INSERT INTO `mob_spell_lists` VALUES ('Shikaree_Z',463,55,1,255); -- Aquaveil
+
+
 -- Next Available: 461
 
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;

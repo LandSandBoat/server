@@ -3770,6 +3770,19 @@ INSERT INTO `mob_skill_lists` VALUES ('Snoll_Tzar',1164,600); -- Cold Wave
 INSERT INTO `mob_skill_lists` VALUES ('Snoll_Tzar',1164,601); -- Hiemal Storm
 INSERT INTO `mob_skill_lists` VALUES ('Snoll_Tzar',1164,598); -- Berserk
 
+INSERT INTO `mob_skill_lists` VALUES('Shikaree_X', 1165, 18); -- Shadowstitch
+INSERT INTO `mob_skill_lists` VALUES('Shikaree_X', 1165, 23); -- Dancing edge
+INSERT INTO `mob_skill_lists` VALUES('Shikaree_X', 1165, 25); -- Evisceration
+
+INSERT INTO `mob_skill_lists` VALUES('Shikaree_Y', 1166, 101); -- Vorpal Scythe
+INSERT INTO `mob_skill_lists` VALUES('Shikaree_Y', 1166, 102); -- Guillotine
+INSERT INTO `mob_skill_lists` VALUES('Shikaree_Y', 1166, 104); -- Spiral Hell
+
+INSERT INTO `mob_skill_lists` VALUES('Shikaree_Z', 1167, 116); -- Penta Thrust
+INSERT INTO `mob_skill_lists` VALUES('Shikaree_Z', 1167, 118); -- Skewer
+INSERT INTO `mob_skill_lists` VALUES('Shikaree_Z', 1167, 119); -- Wheeling Thrust
+INSERT INTO `mob_skill_lists` VALUES('Shikaree_Z', 1167, 120); -- Impulse Drive
+
 -- 1162 -> Wamouracampa_curl
 
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Shantotto_II_Melee',1163,3739); -- shantotto_ii_melee (no name)
