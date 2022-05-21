@@ -3765,6 +3765,11 @@ INSERT INTO `mob_skill_lists` VALUES ('The_Briars_elv',1160,42); -- Savage Blade
 INSERT INTO `mob_skill_lists` VALUES ('The_Briars_gal',1161,86); -- Raging Rush
 INSERT INTO `mob_skill_lists` VALUES ('The_Briars_gal',1161,91); -- Fell Cleave
 
+INSERT INTO `mob_skill_lists` VALUES ('Snoll_Tzar',1164,599); -- Arctic Impact
+INSERT INTO `mob_skill_lists` VALUES ('Snoll_Tzar',1164,600); -- Cold Wave
+INSERT INTO `mob_skill_lists` VALUES ('Snoll_Tzar',1164,601); -- Hiemal Storm
+INSERT INTO `mob_skill_lists` VALUES ('Snoll_Tzar',1164,598); -- Berserk
+
 -- 1162 -> Wamouracampa_curl
 
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Shantotto_II_Melee',1163,3739); -- shantotto_ii_melee (no name)
