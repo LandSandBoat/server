@@ -3,7 +3,6 @@
 --  NPC: qm_prof_3 (???)
 -- Notes: Used to spawn Old Prof. Mariselle
 -- !pos 102.670 -3.111 -127.318 28
-
 -----------------------------------
 local ID = require("scripts/zones/Sacrarium/IDs")
 -----------------------------------
