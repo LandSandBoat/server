@@ -79,8 +79,11 @@ with open('autotranslate.cpp', 'w') as f:
 */
 
 #include <map>
+#include <vector>
 
-// NOTE: This is not the complete table, there are still lookups to do!
+#include "common/cbasetypes.h"
+
+// NOTE: This is not the complete table, there are still many lookups to do!
 const std::map<unsigned int, const char*> values =
 {
     { 66050, "Greetings" },
@@ -870,7 +873,7 @@ const std::map<unsigned int, const char*> values =
     { 51642882, "@AC1" },
     { 68420098, "@A98" },
     { 85197314, "32 ' '" },
-    { 101974530, "@AF6" },
+    { 101974530, "Port Jeuno" },
     { 118751746, "@A6E" },
     { 135528962, "@A7E" },
     { 152306178, "@AFC" },
@@ -878,18 +881,18 @@ const std::map<unsigned int, const char*> values =
     { 185860610, "@A9E" },
     { 202637826, "@A9D" },
     { 219415042, "@AB8" },
-    { 236192258, "@AF5" },
+    { 236192258, "Lower Jeuno" },
     { 252969474, "@A65" },
     { 269746690, "32 ' '" },
     { 286523906, "@A64" },
     { 303301122, "San d'Oria" },
-    { 320078338, "@AF3" },
+    { 320078338, "Ru'Lude Gardens" },
     { 336855554, "@AC8" },
     { 353632770, "@AC6" },
     { 370409986, "@A76" },
     { 387187202, "@A75" },
     { 403964418, "@A73" },
-    { 420741634, "@A92" },
+    { 420741634, "Balga's Dais" },
     { 437518850, "@A90" },
     { 454296066, "@AC2" },
     { 471073282, "@AC0" },
@@ -898,7 +901,7 @@ const std::map<unsigned int, const char*> values =
     { 521404930, "@A8D" },
     { 538182146, "@A77" },
     { 554959362, "@A91" },
-    { 571736578, "@AE9" },
+    { 571736578, "Chateau d'Oraguille" },
     { 588513794, "@A97" },
     { 605291010, "@A6F" },
     { 622068226, "@AA1" },
@@ -911,8 +914,8 @@ const std::map<unsigned int, const char*> values =
     { 739508738, "@AC5" },
     { 756285954, "@AA6" },
     { 773063170, "@A78" },
-    { 789840386, "@AED" },
-    { 806617602, "@AE7" },
+    { 789840386, "Metalworks" },
+    { 806617602, "Northern San d'Oria" },
     { 823394818, "@AF7" },
     { 840172034, "@AA7" },
     { 856949250, "@AD5" },
@@ -920,11 +923,11 @@ const std::map<unsigned int, const char*> values =
     { 890503682, "@AA0" },
     { 907280898, "@A9F" },
     { 924058114, "@A9A" },
-    { 940835330, "@AF1" },
+    { 940835330, "Windurst Woods" },
     { 957612546, "@AA3" },
-    { 974389762, "@AEE" },
+    { 974389762, "Windurst Waters" },
     { 991166978, "@AA8" },
-    { 1007944194, "@AEC" },
+    { 1007944194, "Port Bastok" },
     { 1024721410, "@A71" },
     { 1041498626, "@A72" },
     { 1058275842, "@A79" },
@@ -933,24 +936,24 @@ const std::map<unsigned int, const char*> values =
     { 1108607490, "@A7D" },
     { 1125384706, "@A80" },
     { 1142161922, "@A99" },
-    { 1158939138, "@AF0" },
-    { 1175716354, "@AEA" },
+    { 1158939138, "Port Windurst" },
+    { 1175716354, "Bastok Mines" },
     { 1192493570, "Jeuno" },
     { 1209270786, "Windurst" },
     { 1226048002, "32 ' '" },
     { 1242825218, "@ACC" },
     { 1259602434, "32 ' '" },
-    { 1276379650, "@AE6" },
+    { 1276379650, "Southern San d'Oria" },
     { 1293156866, "@A70" },
-    { 1309934082, "@AF4" },
+    { 1309934082, "Upper Jeuno" },
     { 1326711298, "@AA2" },
     { 1343488514, "@AA2" },
     { 1360265730, "@A66" },
-    { 1377042946, "@AE8" },
+    { 1377042946, "Port San d'Oria" },
     { 1393820162, "Bastok" },
-    { 1410597378, "@AEF" },
-    { 1427374594, "@AF2" },
-    { 1444151810, "@AEB" },
+    { 1410597378, "Windurst Walls" },
+    { 1427374594, "Heavens Tower" },
+    { 1444151810, "Bastok Markets" },
     { 1460929026, "@AD0" },
     { 1477706242, "@ACD" },
     { 1494483458, "@AB0" },
@@ -2588,7 +2591,7 @@ const std::map<unsigned int, const char*> values =
     { 421986818, "@A56" },
     { 438764034, "@AAF" },
     { 455541250, "Escha - Ru'Aun" },
-    { 472318466, "@A57" },
+    { 472318466, "Bastok Markets [S]" },
     { 489095682, "Reisenjima" },
     { 505872898, "@A58" },
     { 522650114, "32 ' '" },
@@ -2603,7 +2606,7 @@ const std::map<unsigned int, const char*> values =
     { 673645058, "32 ' '" },
     { 690422274, "@AAB" },
     { 707199490, "32 ' '" },
-    { 723976706, "@A5E" },
+    { 723976706, "Windurst Waters [S]" },
     { 740753922, "32 ' '" },
     { 757531138, "@A5F" },
     { 774308354, "32 ' '" },
@@ -2740,18 +2743,64 @@ const std::map<unsigned int, const char*> values =
     { 220791298, "Rhapsodies of Vana'diel" },
 };
 
+std::string doLookup(std::string const& str, std::vector<uint16>& data)
+{
+    if (data.size() != 4)
+    {
+        ShowError(fmt::format("Invalid data length during autotranslate lookup: {}, using '?'", str));
+        return "?";
+    }
+
+    uint32 key = 0;
+    for (std::size_t idx = 0; idx < 4; ++idx)
+    {
+        key += data.at(idx) << (idx * 8);
+    }
+
+    if (values.find(key) == values.end())
+    {
+        ShowError(fmt::format("Invalid key generation during autotranslate lookup: {}, using '?'", str));
+        return "?";
+    }
+
+    auto value = values.at(key);
+
+    // ShowInfo(fmt::format("autotranslate: {}: {}", key, value));
+
+    return values.at(key);
+}
+
 std::string autotranslate::replaceBytes(std::string const& str)
 {
-    // Packet:
-    // 195 189 2 2 30 194 167 195 189
-    //
-    // DAT:
-    // { 2803761666, "wind" },
-    // 1010 0111 - 167
-    // 0001 1110 - 30
-    // 0000 0010 - 2
-    // 0000 0010 - 2
-    //
-    // auto token = std::string{char(195), char(189)};
-    return "{}";
+    bool inATBlock = false;
+    std::string outStr = "";
+    std::vector<uint16> data;
+
+    for (auto& ch : str)
+    {
+        auto chAsInt = static_cast<uint16>(ch);
+        if (chAsInt == 65533 && !inATBlock)
+        {
+            outStr += "{";
+            inATBlock = true;
+        }
+        else if (chAsInt == 65533 && inATBlock)
+        {
+            outStr += doLookup(str, data);
+            data.clear();
+
+            outStr += "}";
+            inATBlock = false;
+        }
+        else if (!inATBlock)
+        {
+            outStr += ch;
+        }
+        else
+        {
+            data.emplace_back(chAsInt);
+        }
+    }
+
+    return outStr;
 }
