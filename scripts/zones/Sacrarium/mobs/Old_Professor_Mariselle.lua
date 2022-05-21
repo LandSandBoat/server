@@ -2,18 +2,18 @@
 -- Area: Sacrarium
 --  Mob: Old Professor Mariselle
 -----------------------------------
-local ID = require("scripts/zones/Sacrarium/IDs")
-local professorTables = require("scripts/zones/Sacrarium/globals")
-require("scripts/globals/keyitems")
-require("scripts/globals/missions")
-require("scripts/globals/utils")
+local ID = require('scripts/zones/Sacrarium/IDs')
+local professorTables = require('scripts/zones/Sacrarium/globals')
+require('scripts/globals/keyitems')
+require('scripts/globals/missions')
+require('scripts/globals/utils')
 -----------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)
     for i = 0, 5 do
-        if GetNPCByID(ID.npc.QM_MARISELLE_OFFSET + i):getLocalVar("hasProfessorMariselle") == 1 then
-            mob:setLocalVar("spawnLocation", i)
+        if GetNPCByID(ID.npc.QM_MARISELLE_OFFSET + i):getLocalVar('hasProfessorMariselle') == 1 then
+            mob:setLocalVar('spawnLocation', i)
         end
     end
 end
@@ -46,15 +46,15 @@ entity.onMobFight = function(mob, target)
         end
     end
 
-    local teleTime = mob:getLocalVar("teleTime")
+    local teleTime = mob:getLocalVar('teleTime')
     if mob:getBattleTime() - teleTime > 30 and
        mob:getBattleTime() > 59 and
        mob:actionQueueEmpty()
     then
-        local profLocation = mob:getLocalVar("spawnLocation")
+        local profLocation = mob:getLocalVar('spawnLocation')
         local randomPosition = math.random(1, 9)
         utils.mobTeleport(mob, 2000, professorTables.locations[profLocation][randomPosition])
-        mob:setLocalVar("teleTime", mob:getBattleTime())
+        mob:setLocalVar('teleTime', mob:getBattleTime())
     end
 
     -- If players wander too far from professor and his teleport room he deaggros --
@@ -72,7 +72,7 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onMobDisengage = function(mob)
-    mob:setLocalVar("teleTime", 0)
+    mob:setLocalVar('teleTime', 0)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
@@ -99,12 +99,12 @@ entity.onMobDespawn = function(mob)
     -- Randomize Old Prof. Mariselle's spawn location
     local nextSpawn = math.random(0,5)
     for i = 0, 5 do
-        GetNPCByID(ID.npc.QM_MARISELLE_OFFSET + i):setLocalVar("hasProfessorMariselle", (i == nextSpawn) and 1 or 0)
+        GetNPCByID(ID.npc.QM_MARISELLE_OFFSET + i):setLocalVar('hasProfessorMariselle', (i == nextSpawn) and 1 or 0)
     end
 end
 
 entity.onMobRoam = function(mob)
-    local profLocation = mob:getLocalVar("spawnLocation")
+    local profLocation = mob:getLocalVar('spawnLocation')
     local posPath = { mob:getXPos(), mob:getYPos(), mob:getZPos(), professorTables.returnPoint[profLocation][1], professorTables.returnPoint[profLocation][2], professorTables.returnPoint[profLocation][3] }
 
     xi.path.patrol(mob, posPath)

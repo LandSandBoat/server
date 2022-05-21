@@ -2,41 +2,41 @@
 -- Area: Sacrarium
 --  Mob: Mariselles' Pupils
 -----------------------------------
-local ID = require("scripts/zones/Sacrarium/IDs")
-local professorTables = require("scripts/zones/Sacrarium/globals")
-require("scripts/globals/keyitems")
-require("scripts/globals/missions")
-require("scripts/globals/utils")
+local ID = require('scripts/zones/Sacrarium/IDs')
+local professorTables = require('scripts/zones/Sacrarium/globals')
+require('scripts/globals/keyitems')
+require('scripts/globals/missions')
+require('scripts/globals/utils')
 -----------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)
     for i = 0, 5 do
-        if GetNPCByID(ID.npc.QM_MARISELLE_OFFSET + i):getLocalVar("hasProfessorMariselle") == 1 then
-            mob:setLocalVar("spawnLocation", i)
+        if GetNPCByID(ID.npc.QM_MARISELLE_OFFSET + i):getLocalVar('hasProfessorMariselle') == 1 then
+            mob:setLocalVar('spawnLocation', i)
         end
     end
 end
 
 entity.onMobFight = function(mob, target)
-    local teleTime = mob:getLocalVar("teleTime")
+    local teleTime = mob:getLocalVar('teleTime')
     if mob:getBattleTime() - teleTime > 30 and
        mob:getBattleTime() > 59 and
        mob:actionQueueEmpty()
     then
-        local profLocation = mob:getLocalVar("spawnLocation")
+        local profLocation = mob:getLocalVar('spawnLocation')
         local randomPosition = math.random(1, 9)
         utils.mobTeleport(mob, 2000, professorTables.locations[profLocation][randomPosition])
-        mob:setLocalVar("teleTime", mob:getBattleTime())
+        mob:setLocalVar('teleTime', mob:getBattleTime())
     end
 end
 
 entity.onMobDisengage = function(mob)
-    mob:setLocalVar("teleTime", 0)
+    mob:setLocalVar('teleTime', 0)
 end
 
 entity.onMobRoam = function(mob)
-    local profLocation = mob:getLocalVar("spawnLocation")
+    local profLocation = mob:getLocalVar('spawnLocation')
     local posPath = { mob:getXPos(), mob:getYPos(), mob:getZPos(), professorTables.returnPoint[profLocation][1], professorTables.returnPoint[profLocation][2], professorTables.returnPoint[profLocation][3] }
 
     xi.path.patrol(mob, posPath)
