@@ -55,6 +55,7 @@ def populate_migrations():
 
 # Migrations are automatically scraped from the migrations folder
 migrations = populate_migrations()
+
 # These are the 'protected' files
 player_data = [
     'accounts.sql',

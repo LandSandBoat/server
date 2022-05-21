@@ -21,9 +21,9 @@ entity.onMobFight = function(mob, target)
     local OP_Mariselle = mob:getID()
     local Locations =
     {
+        --Northeast room
         [0] =
         {
-    --Northeast room
         { 88.6123, -2, 110.1267 },
         { 99.8369, -2, 109.8693 },
         { 111.5963, -2, 111.03 },
@@ -34,8 +34,8 @@ entity.onMobFight = function(mob, target)
         { 110.8072, -2.1785, 130.0085 },
         { 100.0483, -2, 116.4553 },
         },
+        --Northmid room
         [1] =
-    --Northmid room
         {
         { 70.8789, -2, 109.542 },
         { 60.4267, -2, 110.0887 },
@@ -47,8 +47,8 @@ entity.onMobFight = function(mob, target)
         { 58.1095, -2.7298, 129.9273 },
         { 50.1262, -2.1785, 130.2446 },
         },
+        --Northwest room
         [2] =
-    --Northwest room
         {
         { 9.7012, -2, 109.5587 },
         { 22.042, -2, 110.0485 },
@@ -60,8 +60,8 @@ entity.onMobFight = function(mob, target)
         { 19.8528, -2.7298, 130.7574 },
         { 30.7859, -2.1785, 129.5448 },
         },
+        --Southeast room
         [3] =
-    --Southeast room
         {
         { 110.3006, -2.1785, -129.8003 },
         { 98.4509, -2.7298, -129.8176 },
@@ -73,8 +73,8 @@ entity.onMobFight = function(mob, target)
         { 97.4817, -2.0000, -109.9677 },
         { 88.0128, -2.0000, -110.1289 },
         },
+        --Southmid room
         [4] =
-    --Southmid room
         {
         { 49.0167, -2.0000, -109.8401 },
         { 60.2168, -2.0000, -109.9171 },
@@ -86,8 +86,8 @@ entity.onMobFight = function(mob, target)
         { 62.3159, -2.6880, -129.7956 },
         { 69.3685, -2.1785, -129.3329 },
         },
+        --Southwest room
         [5] =
-    --Southwest room
         {
         { 8.7566, -2.0000, -109.7524 },
         { 20.8865, -2.0000, -110.3810 },
@@ -127,7 +127,7 @@ entity.onMobFight = function(mob, target)
     local teleTime = mob:getLocalVar("teleTime")
     if mob:getBattleTime() - teleTime > 30 and mob:getBattleTime() > 59 and mob:actionQueueEmpty() == true then
         local profLocation = mob:getLocalVar("spawnLocation")
-        local randomPosition = math.random((1), (9))
+        local randomPosition = math.random(1, 9)
         utils.mobTeleport(mob, 2000, Locations[profLocation][randomPosition])
 
         mob:setLocalVar("teleTime", mob:getBattleTime())
@@ -185,12 +185,12 @@ entity.onMobRoam = function(mob)
     local profLocation = mob:getLocalVar("spawnLocation")
     local returnPoint =
     {
-    [0] = { 102.669, -3.111, 127.279 },
-    [1] = { 62.668, -3.111, 127.288 },
-    [2] = { 22.669, -3.111, 127.279 },
-    [3] = { 102.670, -3.111, -127.318 },
-    [4] = { 62.668, -3.111, -127.318 },
-    [5] = { 22.669, -3.111, -127.318 },
+        [0] = { 102.669, -3.111, 127.279 },
+        [1] = { 62.668, -3.111, 127.288 },
+        [2] = { 22.669, -3.111, 127.279 },
+        [3] = { 102.670, -3.111, -127.318 },
+        [4] = { 62.668, -3.111, -127.318 },
+        [5] = { 22.669, -3.111, -127.318 },
     }
 
     local posPath = {mob:getXPos(), mob:getYPos(), mob:getZPos(), returnPoint[profLocation][1], returnPoint[profLocation][2], returnPoint[profLocation][3]}
