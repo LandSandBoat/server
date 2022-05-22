@@ -6,7 +6,6 @@
 -- Trodden Snow  : !pos -19.7 -17.3 104.4 126
 -----------------------------------
 require('scripts/globals/missions')
-require('scripts/settings/main')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------
@@ -41,8 +40,7 @@ mission.sections =
                     if player:hasKeyItem(xi.ki.DOMINAS_SCARLET_SEAL) and mission:getVar(player, 'Ifrit') == 0 then
                         mission:setVar(player, 'Ifrit', 1)
                         return mission:messageSpecial(flamesID.text.POWER_STYMIES, xi.keyItem.DOMINAS_SCARLET_SEAL)
-                    elseif player:hasKeyItem(xi.ki.DOMINAS_SCARLET_SEAL) and mission:getVar(player, 'Ifrit') == 2 then
-                        mission:setVar(player, 'Ifrit', 3)
+                    elseif player:hasKeyItem(xi.ki.DOMINAS_SCARLET_SEAL) and player:getLocalVar('battlefieldWin') == 547 then
                         return mission:progressEvent(2)
                     end
                 end,
@@ -54,8 +52,7 @@ mission.sections =
                         player:addKeyItem(xi.ki.SCARLET_COUNTERSEAL)
                         player:messageSpecial(flamesID.text.ATTACH_SEAL, xi.ki.DOMINAS_SCARLET_SEAL)
                         player:messageSpecial(flamesID.text.KEYITEM_OBTAINED, xi.ki.SCARLET_COUNTERSEAL)
-                        local sealCount = mission:getVar(player, 'SealCount')
-                        mission:setVar(player, 'SealCount', sealCount + 1)
+                        mission:addVar(player, 'SealCount', 1)
                     end,
                 }
             },
@@ -66,13 +63,10 @@ mission.sections =
             ['Ice_Protocrystal'] =
             {
                 onTrigger = function(player, npc)
-                    local asaPrimal = mission:getVar(player, 'Shiva')
-
-                    if player:hasKeyItem(xi.ki.DOMINAS_AZURE_SEAL) and asaPrimal == 0 then
+                    if player:hasKeyItem(xi.ki.DOMINAS_AZURE_SEAL) and mission:getVar(player, 'Shiva') == 0 then
                         mission:setVar(player, 'Shiva', 1)
                         return mission:messageSpecial(frostID.text.POWER_STYMIES, xi.keyItem.DOMINAS_AZURE_SEAL)
-                    elseif player:hasKeyItem(xi.ki.DOMINAS_AZURE_SEAL) and asaPrimal == 2 then
-                        mission:setVar(player, 'Shiva', 3)
+                    elseif player:hasKeyItem(xi.ki.DOMINAS_AZURE_SEAL) and player:getLocalVar('battlefieldWin') == 484 then
                         return mission:progressEvent(2)
                     end
                 end,
@@ -84,8 +78,7 @@ mission.sections =
                         player:addKeyItem(xi.ki.AZURE_COUNTERSEAL)
                         player:messageSpecial(frostID.text.ATTACH_SEAL, xi.ki.DOMINAS_AZURE_SEAL)
                         player:messageSpecial(frostID.text.KEYITEM_OBTAINED, xi.ki.AZURE_COUNTERSEAL)
-                        local sealCount = mission:getVar(player, 'SealCount')
-                        mission:setVar(player, 'SealCount', sealCount + 1)
+                        mission:addVar(player, 'SealCount', 1)
                     end,
                 }
             },
@@ -96,13 +89,10 @@ mission.sections =
             ['Wind_Protocrystal'] =
             {
                 onTrigger = function(player, npc)
-                    local asaPrimal = mission:getVar(player, 'Garuda')
-
-                    if player:hasKeyItem(xi.ki.DOMINAS_EMERALD_SEAL) and asaPrimal == 0 then
+                    if player:hasKeyItem(xi.ki.DOMINAS_EMERALD_SEAL) and mission:getVar(player, 'Garuda') == 0 then
                         mission:setVar(player, 'Garuda', 1)
                         return mission:messageSpecial(galesID.text.POWER_STYMIES, xi.keyItem.DOMINAS_EMERALD_SEAL)
-                    elseif player:hasKeyItem(xi.ki.DOMINAS_EMERALD_SEAL) and asaPrimal == 2 then
-                        mission:setVar(player, 'Garuda', 3)
+                    elseif player:hasKeyItem(xi.ki.DOMINAS_EMERALD_SEAL) and player:getLocalVar('battlefieldWin') == 420 then
                         return mission:progressEvent(2)
                     end
                 end,
@@ -114,8 +104,7 @@ mission.sections =
                         player:addKeyItem(xi.ki.EMERALD_COUNTERSEAL)
                         player:messageSpecial(galesID.text.ATTACH_SEAL, xi.ki.DOMINAS_EMERALD_SEAL)
                         player:messageSpecial(galesID.text.KEYITEM_OBTAINED, xi.ki.EMERALD_COUNTERSEAL)
-                        local sealCount = mission:getVar(player, 'SealCount')
-                        mission:setVar(player, 'SealCount', sealCount + 1)
+                        mission:addVar(player, 'SealCount', 1)
                     end,
                 }
             },
@@ -126,13 +115,10 @@ mission.sections =
             ['Lightning_Protocrystal'] =
             {
                 onTrigger = function(player, npc)
-                    local asaPrimal = mission:getVar(player, 'Ramuh')
-
-                    if player:hasKeyItem(xi.ki.DOMINAS_VIOLET_SEAL) and asaPrimal == 0 then
+                    if player:hasKeyItem(xi.ki.DOMINAS_VIOLET_SEAL) and mission:getVar(player, 'Ramuh') == 0 then
                         mission:setVar(player, 'Ramuh', 1)
                         return mission:messageSpecial(stormsID.text.POWER_STYMIES, xi.keyItem.DOMINAS_VIOLET_SEAL)
-                    elseif player:hasKeyItem(xi.ki.DOMINAS_VIOLET_SEAL) and asaPrimal == 2 then
-                        mission:setVar(player, 'Ramuh', 3)
+                    elseif player:hasKeyItem(xi.ki.DOMINAS_VIOLET_SEAL) and player:getLocalVar('battlefieldWin') == 452 then
                         return mission:progressEvent(2)
                     end
                 end,
@@ -144,8 +130,7 @@ mission.sections =
                         player:addKeyItem(xi.ki.VIOLET_COUNTERSEAL)
                         player:messageSpecial(stormsID.text.ATTACH_SEAL, xi.ki.DOMINAS_VIOLET_SEAL)
                         player:messageSpecial(stormsID.text.KEYITEM_OBTAINED, xi.ki.VIOLET_COUNTERSEAL)
-                        local sealCount = mission:getVar(player, 'SealCount')
-                        mission:setVar(player, 'SealCount', sealCount + 1)
+                        mission:addVar(player, 'SealCount', 1)
                     end,
                 }
             },
@@ -156,13 +141,10 @@ mission.sections =
             ['Water_Protocrystal'] =
             {
                 onTrigger = function(player, npc)
-                    local asaPrimal = mission:getVar(player, 'Leviathan')
-
-                    if player:hasKeyItem(xi.ki.DOMINAS_CERULEAN_SEAL) and asaPrimal == 0 then
+                    if player:hasKeyItem(xi.ki.DOMINAS_CERULEAN_SEAL) and mission:getVar(player, 'Leviathan') == 0 then
                         mission:setVar(player, 'Leviathan', 1)
                         return mission:messageSpecial(tidesID.text.POWER_STYMIES, xi.keyItem.DOMINAS_CERULEAN_SEAL)
-                    elseif player:hasKeyItem(xi.ki.DOMINAS_CERULEAN_SEAL) and asaPrimal == 2 then
-                        mission:setVar(player, 'Leviathan', 3)
+                    elseif player:hasKeyItem(xi.ki.DOMINAS_CERULEAN_SEAL) and player:getLocalVar('battlefieldWin') == 611 then
                         return mission:progressEvent(2)
                     end
                 end,
@@ -174,8 +156,7 @@ mission.sections =
                         player:addKeyItem(xi.ki.CERULEAN_COUNTERSEAL)
                         player:messageSpecial(tidesID.text.ATTACH_SEAL, xi.ki.DOMINAS_CERULEAN_SEAL)
                         player:messageSpecial(tidesID.text.KEYITEM_OBTAINED, xi.ki.CERULEAN_COUNTERSEAL)
-                        local sealCount = mission:getVar(player, 'SealCount')
-                        mission:setVar(player, 'SealCount', sealCount + 1)
+                        mission:addVar(player, 'SealCount', 1)
                     end,
                 }
             },
@@ -186,13 +167,10 @@ mission.sections =
             ['Earth_Protocrystal'] =
             {
                 onTrigger = function(player, npc)
-                    local asaPrimal = mission:getVar(player, 'Titan')
-
-                    if player:hasKeyItem(xi.ki.DOMINAS_AMBER_SEAL) and asaPrimal == 0 then
+                    if player:hasKeyItem(xi.ki.DOMINAS_AMBER_SEAL) and mission:getVar(player, 'Titan') == 0 then
                         mission:setVar(player, 'Titan', 1)
                         return mission:messageSpecial(tremorsID.text.POWER_STYMIES, xi.keyItem.DOMINAS_AMBER_SEAL)
-                    elseif player:hasKeyItem(xi.ki.DOMINAS_AMBER_SEAL) and asaPrimal == 2 then
-                        mission:setVar(player, 'Titan', 3)
+                    elseif player:hasKeyItem(xi.ki.DOMINAS_AMBER_SEAL) and player:getLocalVar('battlefieldWin') == 580 then
                         return mission:progressEvent(2)
                     end
                 end,
@@ -204,8 +182,7 @@ mission.sections =
                         player:addKeyItem(xi.ki.AMBER_COUNTERSEAL)
                         player:messageSpecial(tremorsID.text.ATTACH_SEAL, xi.ki.DOMINAS_AMBER_SEAL)
                         player:messageSpecial(tremorsID.text.KEYITEM_OBTAINED, xi.ki.AMBER_COUNTERSEAL)
-                        local sealCount = mission:getVar(player, 'SealCount')
-                        mission:setVar(player, 'SealCount', sealCount + 1)
+                        mission:addVar(player, 'SealCount', 1)
                     end,
                 }
             },
@@ -216,14 +193,23 @@ mission.sections =
             ['Trodden_Snow'] =
             {
                 onTrigger = function(player, npc)
+                    local counterseals =
+                    {
+                        xi.ki.AMBER_COUNTERSEAL,
+                        xi.ki.AZURE_COUNTERSEAL,
+                        xi.ki.CERULEAN_COUNTERSEAL,
+                        xi.ki.EMERALD_COUNTERSEAL,
+                        xi.ki.SCARLET_COUNTERSEAL,
+                        xi.ki.VIOLET_COUNTERSEAL,
+                    }
+
                     --ASA 4 CS: Triggers With At Least 3 Counterseals.
-                    local completedSeals =
-                        (player:hasKeyItem(xi.ki.AMBER_COUNTERSEAL)    and 1 or 0) +
-                        (player:hasKeyItem(xi.ki.AZURE_COUNTERSEAL)    and 1 or 0) +
-                        (player:hasKeyItem(xi.ki.CERULEAN_COUNTERSEAL) and 1 or 0) +
-                        (player:hasKeyItem(xi.ki.EMERALD_COUNTERSEAL)  and 1 or 0) +
-                        (player:hasKeyItem(xi.ki.SCARLET_COUNTERSEAL)  and 1 or 0) +
-                        (player:hasKeyItem(xi.ki.VIOLET_COUNTERSEAL)   and 1 or 0)
+                    local completedSeals = 0
+                    for _, ki in counterseals do
+                        if player:hasKeyItem(ki) then
+                            completedSeals = completedSeals + 1
+                        end
+                    end
 
                     if completedSeals >= 3 then
                         mission:setVar(player, 'SealCount', completedSeals)
@@ -238,34 +224,41 @@ mission.sections =
                     local completedSeals = mission:getVar(player, 'SealCount')
 
                     -- Calculate Reward
-                    if completedSeals == 3 then
-                        player:addGil(xi.settings.GIL_RATE * 3000)
-                        player:messageSpecial(qufimID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 3000)
-                    elseif completedSeals == 4 then
-                        player:addGil(xi.settings.GIL_RATE * 10000)
-                        player:messageSpecial(qufimID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 10000)
-                    elseif completedSeals == 5 then
-                        player:addGil(xi.settings.GIL_RATE * 30000)
-                        player:messageSpecial(qufimID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 30000)
-                    elseif completedSeals == 6 then
-                        player:addGil(xi.settings.GIL_RATE * 50000)
-                        player:messageSpecial(qufimID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 50000)
+                    local gilRewards =
+                    {
+                        { 3, 3000 },
+                        { 4, 10000 },
+                        { 5, 30000 },
+                        { 6, 50000 },
+                    }
+
+                    for _, v in pairs(gilRewards) do
+                        if completedSeals == v[1] then
+                            player:addGil(xi.settings.GIL_RATE * v[2])
+                            player:messageSpecial(qufimID.text.GIL_OBTAINED, xi.settings.GIL_RATE * v[2])
+                        end
                     end
 
                     -- Clean Up Remaining Key Items
-                    player:delKeyItem(xi.ki.DOMINAS_SCARLET_SEAL)
-                    player:delKeyItem(xi.ki.DOMINAS_CERULEAN_SEAL)
-                    player:delKeyItem(xi.ki.DOMINAS_EMERALD_SEAL)
-                    player:delKeyItem(xi.ki.DOMINAS_AMBER_SEAL)
-                    player:delKeyItem(xi.ki.DOMINAS_VIOLET_SEAL)
-                    player:delKeyItem(xi.ki.DOMINAS_AZURE_SEAL)
+                    local keyItems =
+                    {
+                        xi.ki.DOMINAS_SCARLET_SEAL,
+                        xi.ki.DOMINAS_CERULEAN_SEAL,
+                        xi.ki.DOMINAS_EMERALD_SEAL,
+                        xi.ki.DOMINAS_AMBER_SEAL,
+                        xi.ki.DOMINAS_VIOLET_SEAL,
+                        xi.ki.DOMINAS_AZURE_SEAL,
+                        xi.ki.SCARLET_COUNTERSEAL,
+                        xi.ki.CERULEAN_COUNTERSEAL,
+                        xi.ki.EMERALD_COUNTERSEAL,
+                        xi.ki.AMBER_COUNTERSEAL,
+                        xi.ki.VIOLET_COUNTERSEAL,
+                        xi.ki.AZURE_COUNTERSEAL
+                    }
 
-                    player:delKeyItem(xi.ki.SCARLET_COUNTERSEAL)
-                    player:delKeyItem(xi.ki.CERULEAN_COUNTERSEAL)
-                    player:delKeyItem(xi.ki.EMERALD_COUNTERSEAL)
-                    player:delKeyItem(xi.ki.AMBER_COUNTERSEAL)
-                    player:delKeyItem(xi.ki.VIOLET_COUNTERSEAL)
-                    player:delKeyItem(xi.ki.AZURE_COUNTERSEAL)
+                    for _, v in keyItems do
+                        player:delKeyItem(v)
+                    end
 
                     mission:complete(player)
                 end,

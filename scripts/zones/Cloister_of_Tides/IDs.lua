@@ -25,7 +25,6 @@ zones[xi.zone.CLOISTER_OF_TIDES] =
         LEVIATHAN_UNLOCKED               = 7576, -- You are now able to summon [Ifrit/Titan/Leviathan/Garuda/Shiva/Ramuh].
         ATTACH_SEAL                      = 7721, -- {player} attaches <item> to the protocrystal.
         POWER_STYMIES                    = 7722, -- An unseen power stymies your efforts to attach <item> to the protocrystal.
-
     },
     mob =
     {

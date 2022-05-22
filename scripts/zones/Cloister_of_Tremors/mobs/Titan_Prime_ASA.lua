@@ -30,7 +30,7 @@ entity.onMobFight = function(mob, target)
         end
     end
 
-    if astralFlows >= 5 and utils.canUseAbility(mob) == true then
+    if astralFlows >= 5 and utils.canUseAbility(mob) then
         mob:setUnkillable(false)
     end
 end
