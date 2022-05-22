@@ -79,6 +79,7 @@ zones[xi.zone.NORTHERN_SAN_DORIA] =
         DOGGOMEHR_SHOP_DIALOG    = 11552, -- Welcome to the Blacksmiths' Guild shop.
         LUCRETIA_SHOP_DIALOG     = 11553, -- Blacksmiths' Guild shop, at your service!
         CAUZERISTE_SHOP_DIALOG   = 11620, -- Welcome! San d'Oria Carpenters' Guild shop, at your service.
+        THE_EMISSARY_PLACEHOLDER = 11627, -- I'm glad you brought a letter of introduction, but you haven't finished your duty to Consul Melek yet. You'll need to come back once that's out of the way.
         ANTONIAN_OPEN_DIALOG     = 11635, -- Interested in goods from Aragoneu?
         BONCORT_SHOP_DIALOG      = 11636, -- Welcome to the Phoenix Perch!
         PIRVIDIAUCE_SHOP_DIALOG  = 11637, -- Care to see what I have?

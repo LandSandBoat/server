@@ -16,7 +16,8 @@ require('scripts/globals/titles')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------
-local chateauID = require('scripts/zones/Chateau_dOraguille/IDs')
+local chateauID       = require('scripts/zones/Chateau_dOraguille/IDs')
+local northSandoriaID = require('scripts/zones/Northern_San_dOria/IDs')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_EMISSARY_SANDORIA2)
@@ -72,7 +73,6 @@ mission.sections =
                         player:getLocalVar('battlefieldWin') == 999
                     then
                         npcUtil.giveKeyItem(player, xi.ki.KINDRED_CREST)
-                        player:delKeyItem(xi.ki.DARK_KEY)
                         player:setMissionStatus(mission.areaId, 10)
                     end
                 end,
@@ -84,24 +84,15 @@ mission.sections =
             ['Helaku'] =
             {
                 onTrigger = function(player, npc)
-                    local missionStatus = player:getMissionStatus(mission.areaId)
-
-                    if missionStatus == 9 then
-                        return mission:progressEvent(542)
-                    elseif player:hasKeyItem(xi.ki.KINDRED_CREST) then
+                    if player:hasKeyItem(xi.ki.KINDRED_CREST) then
                         return mission:progressEvent(545)
+                    else
+                        return mission:messageText(northSandoriaID.text.HELAKU_DIALOG + 16)
                     end
                 end,
             },
 
-            ['Shakir'] =
-            {
-                onTrigger = function(player, npc)
-                    if player:getMissionStatus(mission.areaId) == 9 then
-                        return mission:progressEvent(556)
-                    end
-                end,
-            },
+            ['Shakir'] = mission:event(538),
 
             onEventFinish =
             {

@@ -361,6 +361,15 @@ local function getSingleHitDamage(attacker, target, dmg, wsParams, calcParams)
                 magicdmg = target:magicDmgTaken(magicdmg)
                 magicdmg = adjustForTarget(target, magicdmg, wsParams.ele)
 
+
+                if magicdmg > 0 then
+                    magicdmg = magicdmg - target:getMod(xi.mod.PHALANX)
+                    magicdmg = utils.clamp(magicdmg, 0, 99999)
+                end
+
+                magicdmg = utils.oneforall(target, magicdmg)
+                magicdmg = utils.stoneskin(target, magicdmg)
+
                 finaldmg = finaldmg + magicdmg
             end
 
@@ -389,6 +398,13 @@ local function modifyMeleeHitDamage(attacker, target, attackTbl, wsParams, rawDa
             adjustedDamage = adjustedDamage * target:getMod(xi.mod.SLASH_SDT) / 1000
         end
     end
+
+    if adjustedDamage > 0 then
+        adjustedDamage = adjustedDamage - target:getMod(xi.mod.PHALANX)
+        adjustedDamage = utils.clamp(adjustedDamage, 0, 99999)
+    end
+
+    adjustedDamage = utils.stoneskin(target, adjustedDamage)
 
     adjustedDamage = adjustedDamage + souleaterBonus(attacker, wsParams)
 
@@ -786,6 +802,15 @@ function doMagicWeaponskill(attacker, target, wsID, wsParams, tp, action, primar
         dmg = dmg * applyResistanceAbility(attacker, target, wsParams.ele, wsParams.skill, bonusacc)
         dmg = target:magicDmgTaken(dmg)
         dmg = adjustForTarget(target, dmg, wsParams.ele)
+
+
+        if dmg > 0 then
+            dmg = dmg - target:getMod(xi.mod.PHALANX)
+            dmg = utils.clamp(dmg, 0, 99999)
+        end
+
+        dmg = utils.oneforall(target, dmg)
+        dmg = utils.stoneskin(target, dmg)
 
         dmg = dmg * xi.settings.WEAPON_SKILL_POWER -- Add server bonus
     else

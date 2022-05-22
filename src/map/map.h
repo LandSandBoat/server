@@ -104,6 +104,8 @@ struct map_config_t
     bool        craft_modern_system;         // Enable/disable current retail margins and rates.
     uint16      craft_common_cap;            // Used in crafting, in synthutils.cpp. Defines skill limit before specialization system
     uint16      craft_specialization_points; // Used in crafting, in synthutils.cpp. Defines the maximum points of the specialization system.
+    bool        fishing_enable;              // Enable/disable fishing system.
+    float       fishing_skill_multiplier;    // Used to multiply the chance of gaining a skill up when fishing.
     float       mob_tp_multiplier;           // Multiplies the amount of TP mobs gain on any effect that would grant TP
     float       player_tp_multiplier;        // Multiplies the amount of TP players gain on any effect that would grant TP
     bool        mob_no_despawn;              // Toggle whether mobs roam home or despawn

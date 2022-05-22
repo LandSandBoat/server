@@ -156,7 +156,184 @@ xi.spells.parameters.damage =
     [xi.magic.spell.BANISHGA_IV ] = { xi.mod.MND, 600,   1.5,  600, 600 }, -- Enemy only. Stats unknown.
     [xi.magic.spell.HOLY        ] = { xi.mod.MND, 125,     1,  125, 150 },
     [xi.magic.spell.HOLY_II     ] = { xi.mod.MND, 250,     2,  250, 300 },
+}
 
+xi.spells.parameters.enhancingSpell =
+{
+--                                     1     2            3            4           5              6          7
+-- Structure:            [spellId] = { Tier, Main_Effect, Spell_Level, Base_Power, Base_Duration, Composure, Always_Overwrite },
+
+    -- Aquaveil
+    [xi.magic.spell.AQUAVEIL     ] = { 1, xi.effect.AQUAVEIL,       1,    1,  600, true,  true  },
+
+    -- Auspice
+    [xi.magic.spell.AUSPICE      ] = { 1, xi.effect.AUSPICE,       55,    0,  180, true,  false },
+
+    -- Bar-Element
+    [xi.magic.spell.BARAERO      ] = { 1, xi.effect.BARAERO,        1,    0,  480, true,  true  },
+    [xi.magic.spell.BARBLIZZARD  ] = { 1, xi.effect.BARBLIZZARD,    1,    0,  480, true,  true  },
+    [xi.magic.spell.BARFIRE      ] = { 1, xi.effect.BARFIRE,        1,    0,  480, true,  true  },
+    [xi.magic.spell.BARSTONE     ] = { 1, xi.effect.BARSTONE,       1,    0,  480, true,  true  },
+    [xi.magic.spell.BARTHUNDER   ] = { 1, xi.effect.BARTHUNDER,     1,    0,  480, true,  true  },
+    [xi.magic.spell.BARWATER     ] = { 1, xi.effect.BARWATER,       1,    0,  480, true,  true  },
+    [xi.magic.spell.BARAERA      ] = { 2, xi.effect.BARAERO,        1,    0,  480, true,  true  },
+    [xi.magic.spell.BARBLIZZARA  ] = { 2, xi.effect.BARBLIZZARD,    1,    0,  480, true,  true  },
+    [xi.magic.spell.BARFIRA      ] = { 2, xi.effect.BARFIRE,        1,    0,  480, true,  true  },
+    [xi.magic.spell.BARSTONRA    ] = { 2, xi.effect.BARSTONE,       1,    0,  480, true,  true  },
+    [xi.magic.spell.BARTHUNDRA   ] = { 2, xi.effect.BARTHUNDER,     1,    0,  480, true,  true  },
+    [xi.magic.spell.BARWATERA    ] = { 2, xi.effect.BARWATER,       1,    0,  480, true,  true  },
+
+    -- Bar-Element
+    [xi.magic.spell.BARAMNESIA   ] = { 1, xi.effect.BARAMNESIA,     1,    1,  480, true,  true  },
+    [xi.magic.spell.BARBLIND     ] = { 1, xi.effect.BARBLIND,       1,    1,  480, true,  true  },
+    [xi.magic.spell.BARPARALYZE  ] = { 1, xi.effect.BARPARALYZE,    1,    1,  480, true,  true  },
+    [xi.magic.spell.BARPETRIFY   ] = { 1, xi.effect.BARPETRIFY,     1,    1,  480, true,  true  },
+    [xi.magic.spell.BARPOISON    ] = { 1, xi.effect.BARPOISON,      1,    1,  480, true,  true  },
+    [xi.magic.spell.BARSILENCE   ] = { 1, xi.effect.BARSILENCE,     1,    1,  480, true,  true  },
+    [xi.magic.spell.BARSLEEP     ] = { 1, xi.effect.BARSLEEP,       1,    1,  480, true,  true  },
+    [xi.magic.spell.BARVIRUS     ] = { 1, xi.effect.BARVIRUS,       1,    1,  480, true,  true  },
+    [xi.magic.spell.BARAMNESRA   ] = { 2, xi.effect.BARAMNESIA,     1,    1,  480, true,  true  },
+    [xi.magic.spell.BARBLINDRA   ] = { 2, xi.effect.BARBLIND,       1,    1,  480, true,  true  },
+    [xi.magic.spell.BARPARALYZRA ] = { 2, xi.effect.BARPARALYZE,    1,    1,  480, true,  true  },
+    [xi.magic.spell.BARPETRA     ] = { 2, xi.effect.BARPETRIFY,     1,    1,  480, true,  true  },
+    [xi.magic.spell.BARPOISONRA  ] = { 2, xi.effect.BARPOISON,      1,    1,  480, true,  true  },
+    [xi.magic.spell.BARSILENCERA ] = { 2, xi.effect.BARSILENCE,     1,    1,  480, true,  true  },
+    [xi.magic.spell.BARSLEEPRA   ] = { 2, xi.effect.BARSLEEP,       1,    1,  480, true,  true  },
+    [xi.magic.spell.BARVIRA      ] = { 2, xi.effect.BARVIRUS,       1,    1,  480, true,  true  },
+
+    -- Blink
+    [xi.magic.spell.BLINK        ] = { 1, xi.effect.BLINK,          1,    2,  300, true,  false },
+
+    -- Boost-Stat
+    [xi.magic.spell.BOOST_STR    ] = { 1, xi.effect.STR_BOOST,      1,    5,  300, true,  false },
+    [xi.magic.spell.BOOST_DEX    ] = { 1, xi.effect.DEX_BOOST,      1,    5,  300, true,  false },
+    [xi.magic.spell.BOOST_VIT    ] = { 1, xi.effect.VIT_BOOST,      1,    5,  300, true,  false },
+    [xi.magic.spell.BOOST_AGI    ] = { 1, xi.effect.AGI_BOOST,      1,    5,  300, true,  false },
+    [xi.magic.spell.BOOST_INT    ] = { 1, xi.effect.INT_BOOST,      1,    5,  300, true,  false },
+    [xi.magic.spell.BOOST_MND    ] = { 1, xi.effect.MND_BOOST,      1,    5,  300, true,  false },
+    [xi.magic.spell.BOOST_CHR    ] = { 1, xi.effect.CHR_BOOST,      1,    5,  300, true,  false },
+
+    -- Crusade
+    [xi.magic.spell.CRUSADE      ] = { 1, xi.effect.ENMITY_BOOST,  88,   30,  300, true,  false },
+
+    -- Deodorize / Invisible / Sneak
+    [xi.magic.spell.DEODORIZE    ] = { 1, xi.effect.DEODORIZE,     15,    0,  420, true,  false },
+    [xi.magic.spell.INVISIBLE    ] = { 1, xi.effect.INVISIBLE,     20,    0,  420, true,  false },
+    [xi.magic.spell.SNEAK        ] = { 1, xi.effect.SNEAK,         20,    0,  420, true,  false },
+
+    -- Embrava
+    [xi.magic.spell.EMBRAVA      ] = { 1, xi.effect.EMBRAVA,        5,    0,   90, true,  true  },
+
+    -- En-Spell
+    [xi.magic.spell.ENAERO       ] = { 1, xi.effect.ENAERO,        20,    0,  180, true,  false },
+    [xi.magic.spell.ENBLIZZARD   ] = { 1, xi.effect.ENBLIZZARD,    22,    0,  180, true,  false },
+    [xi.magic.spell.ENFIRE       ] = { 1, xi.effect.ENFIRE,        24,    0,  180, true,  false },
+    [xi.magic.spell.ENSTONE      ] = { 1, xi.effect.ENSTONE,       18,    0,  180, true,  false },
+    [xi.magic.spell.ENTHUNDER    ] = { 1, xi.effect.ENTHUNDER,     16,    0,  180, true,  false },
+    [xi.magic.spell.ENWATER      ] = { 1, xi.effect.ENWATER,       27,    0,  180, true,  false },
+    [xi.magic.spell.ENAERO_II    ] = { 2, xi.effect.ENAERO_II,     54,    0,  180, true,  false },
+    [xi.magic.spell.ENBLIZZARD_II] = { 2, xi.effect.ENBLIZZARD_II, 56,    0,  180, true,  false },
+    [xi.magic.spell.ENFIRE_II    ] = { 2, xi.effect.ENFIRE_II,     58,    0,  180, true,  false },
+    [xi.magic.spell.ENSTONE_II   ] = { 2, xi.effect.ENSTONE_II,    52,    0,  180, true,  false },
+    [xi.magic.spell.ENTHUNDER_II ] = { 2, xi.effect.ENTHUNDER_II,  50,    0,  180, true,  false },
+    [xi.magic.spell.ENWATER_II   ] = { 2, xi.effect.ENWATER_II,    60,    0,  180, true,  false },
+
+    -- Flurry
+    [xi.magic.spell.FLURRY       ] = { 1, xi.effect.FLURRY,        48,   15,  180, true,  false },
+    [xi.magic.spell.FLURRY_II    ] = { 2, xi.effect.FLURRY_II,     96,   30,  180, true,  false },
+
+    -- Foil
+    [xi.magic.spell.FOIL         ] = { 1, xi.effect.FOIL,          58,    0,   30, true,  false },
+
+    -- Gain-Stat
+    [xi.magic.spell.GAIN_STR     ] = { 1, xi.effect.STR_BOOST,      1,    5,  300, true,  false },
+    [xi.magic.spell.GAIN_DEX     ] = { 1, xi.effect.DEX_BOOST,      1,    5,  300, true,  false },
+    [xi.magic.spell.GAIN_VIT     ] = { 1, xi.effect.VIT_BOOST,      1,    5,  300, true,  false },
+    [xi.magic.spell.GAIN_AGI     ] = { 1, xi.effect.AGI_BOOST,      1,    5,  300, true,  false },
+    [xi.magic.spell.GAIN_INT     ] = { 1, xi.effect.INT_BOOST,      1,    5,  300, true,  false },
+    [xi.magic.spell.GAIN_MND     ] = { 1, xi.effect.MND_BOOST,      1,    5,  300, true,  false },
+    [xi.magic.spell.GAIN_CHR     ] = { 1, xi.effect.CHR_BOOST,      1,    5,  300, true,  false },
+
+    -- Haste
+    [xi.magic.spell.HASTE        ] = { 1, xi.effect.HASTE,         48, 1465,  180, true,  false },
+    [xi.magic.spell.HASTE_II     ] = { 2, xi.effect.HASTE,         96, 2998,  180, true,  false },
+    [xi.magic.spell.HASTEGA      ] = { 1, xi.effect.HASTE,         48, 1494,  180, false, false },
+    -- [xi.magic.spell.HASTEGA_II   ] = { 2, xi.effect.HASTE,         99, 2998,  180, false, false },
+
+    -- Phalanx
+    [xi.magic.spell.PHALANX      ] = { 1, xi.effect.PHALANX,       33,    0,  180, true,  false },
+    [xi.magic.spell.PHALANX_II   ] = { 2, xi.effect.PHALANX,       75,    0,  240, true,  false },
+
+    -- Protect / Protectra
+    [xi.magic.spell.PROTECT      ] = { 1, xi.effect.PROTECT,        7,   20, 1800, false, false },
+    [xi.magic.spell.PROTECT_II   ] = { 2, xi.effect.PROTECT,       27,   50, 1800, false, false },
+    [xi.magic.spell.PROTECT_III  ] = { 3, xi.effect.PROTECT,       47,   90, 1800, false, false },
+    [xi.magic.spell.PROTECT_IV   ] = { 4, xi.effect.PROTECT,       63,  140, 1800, false, false },
+    [xi.magic.spell.PROTECT_V    ] = { 5, xi.effect.PROTECT,       76,  220, 1800, false, false },
+    [xi.magic.spell.PROTECTRA    ] = { 1, xi.effect.PROTECT,        7,   20, 1800, false, false },
+    [xi.magic.spell.PROTECTRA_II ] = { 2, xi.effect.PROTECT,       27,   50, 1800, false, false },
+    [xi.magic.spell.PROTECTRA_III] = { 3, xi.effect.PROTECT,       47,   90, 1800, false, false },
+    [xi.magic.spell.PROTECTRA_IV ] = { 4, xi.effect.PROTECT,       63,  140, 1800, false, false },
+    [xi.magic.spell.PROTECTRA_V  ] = { 5, xi.effect.PROTECT,       75,  220, 1800, false, false },
+
+    -- Refresh
+    [xi.magic.spell.REFRESH      ] = { 1, xi.effect.REFRESH,       41,    3,  150, true,  true  },
+    [xi.magic.spell.REFRESH_II   ] = { 2, xi.effect.REFRESH,       82,    6,  150, true,  true  },
+    [xi.magic.spell.REFRESH_III  ] = { 3, xi.effect.REFRESH,       99,    9,  150, true,  true  },
+
+    -- Regen
+    [xi.magic.spell.REGEN        ] = { 1, xi.effect.REGEN,         21,    5,   75, true,  false },
+    [xi.magic.spell.REGEN_II     ] = { 2, xi.effect.REGEN,         44,   12,   60, true,  false },
+    [xi.magic.spell.REGEN_III    ] = { 3, xi.effect.REGEN,         66,   20,   60, true,  false },
+    [xi.magic.spell.REGEN_IV     ] = { 4, xi.effect.REGEN,         86,   30,   60, true,  false },
+    [xi.magic.spell.REGEN_V      ] = { 5, xi.effect.REGEN,         99,   40,   60, true,  false },
+
+    -- Shell / Shellra
+    [xi.magic.spell.SHELL        ] = { 1, xi.effect.SHELL,         18, 1055, 1800, false, false },
+    [xi.magic.spell.SHELL_II     ] = { 2, xi.effect.SHELL,         37, 1641, 1800, false, false },
+    [xi.magic.spell.SHELL_III    ] = { 3, xi.effect.SHELL,         57, 2188, 1800, false, false },
+    [xi.magic.spell.SHELL_IV     ] = { 4, xi.effect.SHELL,         68, 2617, 1800, false, false },
+    [xi.magic.spell.SHELL_V      ] = { 5, xi.effect.SHELL,         76, 2930, 1800, false, false },
+    [xi.magic.spell.SHELLRA      ] = { 1, xi.effect.SHELL,         18, 1055, 1800, false, false },
+    [xi.magic.spell.SHELLRA_II   ] = { 2, xi.effect.SHELL,         37, 1641, 1800, false, false },
+    [xi.magic.spell.SHELLRA_III  ] = { 3, xi.effect.SHELL,         57, 2188, 1800, false, false },
+    [xi.magic.spell.SHELLRA_IV   ] = { 4, xi.effect.SHELL,         68, 2617, 1800, false, false },
+    [xi.magic.spell.SHELLRA_V    ] = { 5, xi.effect.SHELL,         75, 2930, 1800, false, false },
+
+    -- -Spikes
+    [xi.magic.spell.BLAZE_SPIKES ] = { 1, xi.effect.BLAZE_SPIKES,   1,    0,  180, true,  false },
+    [xi.magic.spell.ICE_SPIKES   ] = { 1, xi.effect.ICE_SPIKES,     1,    0,  180, true,  false },
+    [xi.magic.spell.SHOCK_SPIKES ] = { 1, xi.effect.SHOCK_SPIKES,   1,    0,  180, true,  false },
+
+    -- -storm
+    [xi.magic.spell.AURORASTORM  ] = { 1, xi.effect.AURORASTORM,   48,    2,  180, true,  true  },
+    [xi.magic.spell.FIRESTORM    ] = { 1, xi.effect.FIRESTORM,     44,    2,  180, true,  true  },
+    [xi.magic.spell.HAILSTORM    ] = { 1, xi.effect.HAILSTORM,     45,    2,  180, true,  true  },
+    [xi.magic.spell.RAINSTORM    ] = { 1, xi.effect.RAINSTORM,     42,    2,  180, true,  true  },
+    [xi.magic.spell.SANDSTORM    ] = { 1, xi.effect.SANDSTORM,     41,    2,  180, true,  true  },
+    [xi.magic.spell.THUNDERSTORM ] = { 1, xi.effect.THUNDERSTORM,  46,    2,  180, true,  true  },
+    [xi.magic.spell.VOIDSTORM    ] = { 1, xi.effect.VOIDSTORM,     47,    2,  180, true,  true  },
+    [xi.magic.spell.WINDSTORM    ] = { 1, xi.effect.WINDSTORM,     43,    2,  180, true,  true  },
+
+    -- Temper
+    [xi.magic.spell.TEMPER       ] = { 1, xi.effect.MULTI_STRIKES, 95,    5,  180, true,  false },
+    -- [xi.magic.spell.TEMPER_II    ] = { 2, 0                      , 99,    5,  180, true,  false },
+}
+
+xi.spells.parameters.enhancingNinjutsu =
+{
+-- Structure:            [spellId] = { Tier, Main_Effect, Power, Duration, Always_Overwrite },
+    [xi.magic.spell.GEKKA_ICHI   ] = { 1, xi.effect.ENMITY_BOOST,     30, 300, true  },
+    [xi.magic.spell.KAKKA_ICHI   ] = { 1, xi.effect.STORE_TP,         10, 180, true  },
+    [xi.magic.spell.MIGAWARI_ICHI] = { 1, xi.effect.MIGAWARI,          0,  60, true  },
+    [xi.magic.spell.MONOMI_ICHI  ] = { 1, xi.effect.SNEAK,             0, 120, false },
+    [xi.magic.spell.MYOSHU_ICHI  ] = { 1, xi.effect.SUBTLE_BLOW_PLUS, 10, 180, true  },
+    [xi.magic.spell.TONKO_ICHI   ] = { 1, xi.effect.INVISIBLE,         0, 180, false },
+    [xi.magic.spell.TONKO_NI     ] = { 2, xi.effect.INVISIBLE,         0, 300, false },
+    [xi.magic.spell.UTSUSEMI_ICHI] = { 1, xi.effect.COPY_IMAGE,        3,   0, false },
+    [xi.magic.spell.UTSUSEMI_NI  ] = { 1, xi.effect.COPY_IMAGE,        4,   0, false },
+    [xi.magic.spell.UTSUSEMI_SAN ] = { 1, xi.effect.COPY_IMAGE,        5,   0, false },
+    [xi.magic.spell.YAIN_ICHI    ] = { 1, xi.effect.PAX,              15, 300, true  },
 }
 
 xi.spells.parameters.enhancingSong =
@@ -249,4 +426,22 @@ xi.spells.parameters.enhancingSong =
     -- Emnity Songs
     [xi.magic.spell.FOE_SIRVENTE      ] = { 1, xi.effect.SIRVENTE,  xi.mod.AUGMENT_SONG_STAT, 0,                      0,                        0,                   35,   0,  35,   1,  0, true  },
     [xi.magic.spell.ADVENTURERS_DIRGE ] = { 1, xi.effect.DIRGE,     xi.mod.AUGMENT_SONG_STAT, 0,                      0,                        0,                   32,   0,  32,   0,  0, true  },
+}
+
+xi.spells.parameters.teleportSpell =
+{
+-- Structure:       [spellId] = { Teleport, Key_Item, unknown_parameter, campaign },
+    [xi.magic.spell.ESCAPE        ] = { xi.teleport.id.ESCAPE,  0,                                4, false },
+    [xi.magic.spell.RECALL_JUGNER ] = { xi.teleport.id.JUGNER,  xi.ki.JUGNER_GATE_CRYSTAL,      4.7, false },
+    [xi.magic.spell.RECALL_MERIPH ] = { xi.teleport.id.MERIPH,  xi.ki.MERIPHATAUD_GATE_CRYSTAL, 4.7, false },
+    [xi.magic.spell.RECALL_PASHH  ] = { xi.teleport.id.PASHH,   xi.ki.PASHHOW_GATE_CRYSTAL,     4.7, false },
+    [xi.magic.spell.RETRACE       ] = { xi.teleport.id.RETRACE, 0,                                4, true  },
+    [xi.magic.spell.TELEPORT_ALTEP] = { xi.teleport.id.ALTEP,   xi.ki.ALTEPA_GATE_CRYSTAL,      4.7, false },
+    [xi.magic.spell.TELEPORT_DEM  ] = { xi.teleport.id.DEM,     xi.ki.DEM_GATE_CRYSTAL,         4.7, false },
+    [xi.magic.spell.TELEPORT_HOLLA] = { xi.teleport.id.HOLLA,   xi.ki.HOLLA_GATE_CRYSTAL,       4.7, false },
+    [xi.magic.spell.TELEPORT_MEA  ] = { xi.teleport.id.MEA,     xi.ki.MEA_GATE_CRYSTAL,         4.7, false },
+    [xi.magic.spell.TELEPORT_VAHZL] = { xi.teleport.id.VAHZL,   xi.ki.VAHZL_GATE_CRYSTAL,       4.7, false },
+    [xi.magic.spell.TELEPORT_YHOAT] = { xi.teleport.id.YHOAT,   xi.ki.YHOATOR_GATE_CRYSTAL,     4.7, false },
+    [xi.magic.spell.WARP          ] = { xi.teleport.id.WARP,    0,                                4, false },
+    [xi.magic.spell.WARP_II       ] = { xi.teleport.id.WARP,    0,                              3.4, false },
 }

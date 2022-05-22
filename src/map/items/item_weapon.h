@@ -65,6 +65,7 @@ public:
     void setILvlMacc(uint16 macc);
     void setDelay(uint16 delay);
     void setBaseDelay(uint16 delay); // should ONLY be set by zoneutils!
+    void setRodNumber(uint16 number);
     void setDamage(uint16 damage);
     void setDmgType(DAMAGE_TYPE dmgType);
     void setAdditionalEffect(uint8 effect);
