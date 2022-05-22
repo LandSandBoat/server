@@ -5,7 +5,6 @@
 -- !addmission 11 1
 -----------------------------------
 require('scripts/globals/missions')
-require('scripts/settings/main')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------
@@ -31,7 +30,7 @@ mission.sections =
                 function(player, prevZone)
                     if
                         prevZone == xi.zone.WINDURST_WOODS and
-                        player:hasStatusEffect(xi.effect.MOUNTED) == false
+                        not player:hasStatusEffect(xi.effect.MOUNTED)
                     then
                         return mission:event(71)
                     end
@@ -43,7 +42,7 @@ mission.sections =
                 [71] = function(player, csid, option, npc)
                     local kit = 2779 + math.random(0,3)
                     player:updateEvent(kit)
-                    player:setCharVar("ASA_kit", kit)
+                    xi.mission.setVar(player, xi.mission.log_id.ASA, xi.mission.id.asa.THAT_WHICH_CURDLES_BLOOD, 'Option', kit)
                 end,
             },
 
@@ -60,15 +59,9 @@ mission.sections =
             onZoneIn =
             {
                 function(player, prevZone)
-                    if
-                        prevZone == xi.zone.WINDURST_WATERS
-                    then
+                    if prevZone == xi.zone.WINDURST_WATERS then
                         return 62
-                    end
-
-                    if
-                        prevZone == xi.zone.PORT_WINDURST
-                    then
+                    elseif prevZone == xi.zone.PORT_WINDURST then
                         return 63
                     end
                 end,
@@ -79,13 +72,13 @@ mission.sections =
                 [62] = function(player, csid, option, npc)
                     local kit = 2779 + math.random(0,3)
                     player:updateEvent(kit)
-                    player:setCharVar("ASA_kit", kit)
+                    xi.mission.setVar(player, xi.mission.log_id.ASA, xi.mission.id.asa.THAT_WHICH_CURDLES_BLOOD, 'Option', kit)
                 end,
 
                 [63] = function(player, csid, option, npc)
                     local kit = 2779 + math.random(0,3)
                     player:updateEvent(kit)
-                    player:setCharVar("ASA_kit", kit)
+                    xi.mission.setVar(player, xi.mission.log_id.ASA, xi.mission.id.asa.THAT_WHICH_CURDLES_BLOOD, 'Option', kit)
                 end,
             },
 

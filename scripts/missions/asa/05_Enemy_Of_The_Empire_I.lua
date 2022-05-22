@@ -6,40 +6,46 @@
 -- Andrause : !pos 22.72 -5.13 18.51 252
 -----------------------------------
 require('scripts/globals/missions')
-require('scripts/settings/main')
+require('scripts/globals/keyitems')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------
-local norgID = require("scripts/zones/Norg/IDs")
+local norgID = require('scripts/zones/Norg/IDs')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.ASA, xi.mission.id.asa.ENEMY_OF_THE_EMPIRE_I)
 
+mission.reward =
+{
+    ki = xi.ki.BLACK_BOOK,
+    nextMission = { xi.mission.log_id.ASA, xi.mission.id.asa.ENEMY_OF_THE_EMPIRE_II },
+}
+
 local mobList =
 {
-    {"Bigclaw", "Bigclaw"},
-    {"Brook Sahagin", "BrookSahagin"},
-    {"Riparian Sahagin", "RiparianSahagin"},
-    {"Rivulet Sahagin", "RivuletSahagin"},
-    {"Royal Leech", "RoyalLeech"},
-    {"Undead Bats", "UndeadBats"},
-    {"Grotto Pugil", "GrottoPugil"},
-    {"Sea Bonze", "SeaBonze"},
-    {"Blubber Eyes", "BlubberEyes"},
-    {"Bog Sahagin", "BogSahagin"},
-    {"Marsh Sahagin", "MarshSahagin"},
-    {"Rock Crab", "RockCrab"},
-    {"Razorjaw Pugil", "RazorjawPugil"},
-    {"Sahagin Parasite", "SahaginParasitd"},
-    {"Swamp Sahagin", "SwampSahagin"},
-    {"Devil Manta", "DevilManta"},
-    {"Dire Bat", "DireBat"},
-    {"Lagoon Sahagin", "LagoonSahagin"},
-    {"Delta Sahagin", "DeltaSahagin"},
-    {"Coastal Sahagin", "CoastalSahagin"},
-    {"Mousse", "Mousse"},
-    {"Robber Crab", "RobberCrab"},
-    {"Shore Sahagin", "ShoreSahagin"},
+    {'Bigclaw',           'Bigclaw'},
+    {'Brook Sahagin',     'BrookSahagin'},
+    {'Riparian Sahagin',  'RiparianSahagin'},
+    {'Rivulet Sahagin',   'RivuletSahagin'},
+    {'Royal Leech',       'RoyalLeech'},
+    {'Undead Bats',       'UndeadBats'},
+    {'Grotto Pugil',      'GrottoPugil'},
+    {'Sea Bonze',         'SeaBonze'},
+    {'Blubber Eyes',      'BlubberEyes'},
+    {'Bog Sahagin',      'BogSahagin'},
+    {'Marsh Sahagin',    'MarshSahagin'},
+    {'Rock Crab',        'RockCrab'},
+    {'Razorjaw Pugil',   'RazorjawPugil'},
+    {'Sahagin Parasite', 'SahaginParasitd'},
+    {'Swamp Sahagin',    'SwampSahagin'},
+    {'Devil Manta',      'DevilManta'},
+    {'Dire Bat',         'DireBat'},
+    {'Lagoon Sahagin',   'LagoonSahagin'},
+    {'Delta Sahagin',    'DeltaSahagin'},
+    {'Coastal Sahagin',  'CoastalSahagin'},
+    {'Mousse',           'Mousse'},
+    {'Robber Crab',      'RobberCrab'},
+    {'Shore Sahagin',    'ShoreSahagin'},
 }
 
 local function handleTradeEvent(player, trade)
@@ -78,12 +84,6 @@ local function handleTradeEvent(player, trade)
     end
 end
 
-mission.reward =
-{
-    nextMission = { xi.mission.log_id.ASA, xi.mission.id.asa.ENEMY_OF_THE_EMPIRE_II },
-    ki = xi.ki.BLACK_BOOK,
-}
-
 mission.sections =
 {
     {
@@ -102,17 +102,10 @@ mission.sections =
                     if not player:hasKeyItem(xi.ki.BLACK_BOOK) then
                         -- Select mobs for player to get pictures of
                         if mobOne == 0 then
-                            mobOne = math.random(1,23)
-                            local mobTwo = math.random(1,23)
-                            while mobTwo == mobOne do
-                                mobTwo = math.random(1,23)
-                            end
-                            local mobThree = math.random(1,23)
-                            while mobThree == mobOne or mobThree == mobTwo do
-                                mobTwo = math.random(1,23)
-                            end
+                            local mobOne, MobTwo, mobThree = unpack(utils.uniqueRandomTable(1, 23, 3))
+
                             mission:setVar(player, 'MobOne', mobOne)
-                            mission:setVar(player, 'MobTwo', mobTwo)
+                            mission:setVar(player, 'MobTwo', MobTwo)
                             mission:setVar(player, 'MobThree', mobThree)
 
                             return mission:progressEvent(237)
@@ -139,7 +132,7 @@ mission.sections =
                 -- Handle telling player what mobs to get pictures of and selling Soultrapper + Plates
                 -- event 237
                 -- option 2 = yes, ill do it
-                -- option 5 = buy the camera, doesnt appear to be a "not enough gil dialogue"
+                -- option 5 = buy the camera, doesnt appear to be a 'not enough gil dialogue'
                 [237] = function(player, csid, option, npc)
                     local mobOne = mission:getVar(player, 'MobOne')
                     local mobTwo = mission:getVar(player, 'MobTwo')
@@ -150,7 +143,7 @@ mission.sections =
                     elseif option == 1 then
                         player:updateEventString(mobList[mobOne][1], mobList[mobTwo][1], mobList[mobThree][1], '', 49284, 524420, 0, 0, 0, 0, 0, 0)
                     elseif option == 6 then
-                        -- Param 0 = allowed to buy a camera, >0 = "im out of stock"
+                        -- Param 0 = allowed to buy a camera, >0 = 'im out of stock'
                         -- param 3 = x .:(You have x) (maybe number of blank plates?)
                         player:updateEvent(0, 18721, 18722, player:getGil())
                     elseif option == 5 then
@@ -242,11 +235,9 @@ mission.sections =
                     if mission:getVar(player, 'AndrauseBuy') == 1 and player:getGil() > 800 then
                         player:delGil(800)
                         if not player:hasItem(18721) then
-                            player:addItem(18721)
-                            player:messageSpecial(norgID.text.ITEM_OBTAINED, 18721) -- Soultrapper
+                            npcUtil.giveItem(player, 18721)
                         end
-                        player:addItem(18722, 12)
-                        player:messageSpecial(norgID.text.YOU_OBTAIN, 18722, 12) -- Soul Plates
+                        npcUtil.giveItem(player, {18721, 12})
                         mission:setVar(player, 'AndrauseBuy', 0)
                         mission:setVar(player, 'Soulplate', getMidnight())
                     elseif mission:getVar(player, 'AndrauseBuy') == 1 and player:getGil() < 800 then
