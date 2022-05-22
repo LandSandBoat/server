@@ -508,6 +508,11 @@ local function calculateSwipeLungeDamage(player, target, skillModifier, gearBonu
         damage = utils.clamp(damage - target:getMod(xi.mod.PHALANX), 0, 99999)
     end
 
+    -- Handle One For All
+    if damage > 0 then
+        damage = utils.clamp(utils.oneforall(target, damage), 0, 99999)
+    end
+
     -- Handle Stoneskin
     if damage > 0 then
         damage = utils.clamp(utils.stoneskin(target, damage), -99999, 99999)
@@ -713,4 +718,22 @@ xi.job_utils.rune_fencer.useRayke = function(player, target, ability, action)
     action:setAnimation(target:getID(), getAnimationEffusion(weaponSkillType, 20)) -- set animation for currently equipped weapon
 
     -- TODO: implement
+end
+
+-- see https://www.bg-wiki.com/ffxi/One_for_All
+xi.job_utils.rune_fencer.useOneForAll = function(player, target, ability, action)
+
+    local duration = 30 + player:getJobPointLevel(xi.jp.ONE_FOR_ALL_DURATION)
+
+    if player:getID() ~= target:getID() then -- Only the caster can apply effects, including to the party
+        return
+    end
+
+    local power = player:getMaxHP() * 0.2
+
+    local party = player:getParty()
+    for _, member in pairs(party) do
+        member:delStatusEffect(xi.effect.ONE_FOR_ALL) -- remove old, apparently the newest OFA always wins.
+        member:addStatusEffect(xi.effect.ONE_FOR_ALL, power, 0, duration)
+    end
 end

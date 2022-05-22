@@ -6,5 +6,5 @@ return {
     ['Naillina']     = { event = 14 },
     ['Pacomart']     = { event = 180 },
     ['Thunder_Hawk'] = { event = 84 },
-    ['Valgeir']      = { event = 101 },
+    ['Valgeir']      = { event = 140 },
 }

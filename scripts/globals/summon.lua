@@ -406,6 +406,10 @@ function AvatarFinalAdjustments(dmg, mob, skill, target, skilltype, skillparam, 
     -- Calculate Blood Pact Damage before stoneskin
     dmg = dmg + dmg * mob:getMod(xi.mod.BP_DAMAGE) / 100
 
+    if skilltype == xi.attackType.MAGICAL then
+        dmg = utils.oneforall(target, dmg)
+    end
+
     -- handling stoneskin
     dmg = utils.stoneskin(target, dmg)
 
