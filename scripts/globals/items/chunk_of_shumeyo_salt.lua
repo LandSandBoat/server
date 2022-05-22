@@ -14,15 +14,9 @@ item_object.onItemCheck= function(target, player)
     local result = 0
 	local id = target:getID()
     local checkID = true
-    local snollID =
-    {
-        16801793,
-        16801794,
-        16801795,
-    }
 
-    for _, mobID in pairs(snollID) do
-        if mobID == id then
+    for i = 0, 2 do
+        if ID.mob.SNOLL_TZAR_OFFSET + i == id then
              checkID = false
         end
     end

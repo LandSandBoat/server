@@ -60,8 +60,8 @@ INSERT INTO `mob_pool_mods` VALUES (459,430,20,0); -- (Bloodlapper) Quad Attack
 INSERT INTO `mob_pool_mods` VALUES (519,160,-50,0);
 INSERT INTO `mob_pool_mods` VALUES (532,160,-50,0);
 INSERT INTO `mob_pool_mods` VALUES (559,62,-50,0); -- Bugbby -ATTP-
-INSERT INTO `mob_pool_mods` VALUES (559,288,40,100); --DATT
-INSERT INTO `mob_pool_mods` VALUES (559,302,40,30); --TATT
+INSERT INTO `mob_pool_mods` VALUES (559,288,40,100); -- DATT
+INSERT INTO `mob_pool_mods` VALUES (559,302,40,30); -- TATT
 INSERT INTO `mob_pool_mods` VALUES (592,68,15,0);
 INSERT INTO `mob_pool_mods` VALUES (592,302,45,0);
 INSERT INTO `mob_pool_mods` VALUES (592,3,100,1);

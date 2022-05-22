@@ -27,6 +27,7 @@ zones[xi.zone.BEARCLAW_PINNACLE] =
     },
     mob =
     {
+        SNOLL_TZAR_OFFSET = 16801793,
     },
     npc =
     {

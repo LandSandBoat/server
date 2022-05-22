@@ -10,22 +10,6 @@ require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
-local aCenturyOfHardship =
-{
-    [1] =
-    {
-        MOBLIN_IDS = { 16830465, 16830466, 16830467, 16830468 }
-    },
-    [2] =
-    {
-        MOBLIN_IDS = { 16830470, 16830471, 16830472, 16830473 }
-    },
-    [3] =
-    {
-        MOBLIN_IDS = { 16830475, 16830476, 16830477, 16830478 }
-    },
-}
-
 entity.onMobInitialize = function(mob)
 end
 
@@ -51,7 +35,7 @@ entity.onMobFight = function(mob, target)
     if timeBlock >= hateReset then
         local bfID = mob:getBattlefield():getArea()
         mob:setLocalVar("hateResetTimer", hateReset + 1)
-        for i, v in ipairs(aCenturyOfHardship[bfID].MOBLIN_IDS) do
+        for i, v in ipairs(ID.MOBLIN_IDS[bfID].MOBLIN_IDS) do
             local moblinAlive = GetMobByID(v)
             if moblinAlive:isAlive() then -- make sure we're not adding dead moblins into the table
                 table.insert(activeMoblins, v)
