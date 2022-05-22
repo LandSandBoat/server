@@ -13,14 +13,13 @@ local ID = require("scripts/zones/Western_Adoulin/IDs")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local HS = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.HUNGER_STRIKES)
-    local TS = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.THE_STARVING)
     local AMQTR = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.ALWAYS_MORE_QUOTH_THE_RAVENOUS)
 
     if ((trade:getItemCount() == 1) and (trade:getGil() == 0)) then
         local item = trade:getItem(0)
         local item_ID = item:getID()
         local AH_Category = item:getAHCat()
+
         if (AH_Category >= 52) and (AH_Category <= 57) then
             -- We traded him a food item
             if ((player:getCharVar("ATWTTB_Can_Trade_Gruel") == 1) and ((item_ID == 4489) or (item_ID == 4534))) then
@@ -31,28 +30,9 @@ entity.onTrade = function(player, npc, trade)
                     -- Trading him Medicinal Gruel after completing Quest: 'All The Way To The Bank'
                     player:startEvent(5068, 1)
                 end
-            elseif (HS == QUEST_ACCEPTED) then
-                if (item_ID == 4592) then
-                    -- We gave him Wisdom Soup.
-                    -- Finishes Quest: 'Hunger Strikes'.
-                    player:startEvent(2532)
-                else
-                    -- Special event where he consumes the food item despite it being wrong.
-                    player:startEvent(2533)
-                end
             end
         elseif (AH_Category == 58) then
-            -- We traded him a drink.
-            if (TS == QUEST_ACCEPTED) then
-                if (item_ID == 4541) then
-                    -- We gave him Goblin Drink.
-                    -- Finishes Quest: 'The Starving'.
-                    player:startEvent(3007)
-                else
-                    -- Special event where he drinks a non-goblin drink.
-                    player:startEvent(3008)
-                end
-            elseif (AMQTR == QUEST_ACCEPTED) then
+            if (AMQTR == QUEST_ACCEPTED) then
                 if (item_ID == 4541) then
                     -- We gave him another Goblin Drink.
                     -- Special event where he refuses it.
@@ -73,27 +53,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local HS = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.HUNGER_STRIKES)
-    local TS = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.THE_STARVING)
     local AMQTR = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.ALWAYS_MORE_QUOTH_THE_RAVENOUS)
-    if (HS ~= QUEST_COMPLETED) then
-        if (HS == QUEST_AVAILABLE) then
-            -- Starts Quest: 'Hunger Strikes'
-            player:startEvent(2530)
-        else
-            -- Reminder for Quest: 'Hunger Strikes'
-            player:startEvent(2531)
-        end
-    elseif ((player:getFameLevel(xi.quest.fame_area.ADOULIN) >= 2) and (not player:needToZone()) and (vanaDay() > player:getCharVar("Westerly_Breeze_Wait"))) then
-        if (TS ~= QUEST_COMPLETED) then
-            if (TS == QUEST_AVAILABLE) then
-                -- Starts Quest: 'The Starving'
-                player:startEvent(3005)
-            else
-                -- Reminder for Quest: 'The Starving'
-                player:startEvent(3006)
-            end
-        elseif ((AMQTR ~= QUEST_COMPLETED) and (player:getFameLevel(xi.quest.fame_area.ADOULIN) >= 3)) then
+
+    if ((player:getFameLevel(xi.quest.fame_area.ADOULIN) >= 2) and (not player:needToZone()) and (vanaDay() > player:getCharVar("Westerly_Breeze_Wait"))) then
+        if ((AMQTR ~= QUEST_COMPLETED) and (player:getFameLevel(xi.quest.fame_area.ADOULIN) >= 3)) then
             if (AMQTR == QUEST_AVAILABLE) then
                 -- Starts Quest: 'Always More Quoth the Ravenous'
                 player:startEvent(3010)
@@ -101,13 +64,7 @@ entity.onTrigger = function(player, npc)
                 -- Reminder for Quest: 'Always More Quoth the Ravenous'
                 player:startEvent(3011)
             end
-        else
-            -- Standard dialogue
-            player:startEvent(553)
         end
-    else
-        -- Standard dialogue
-        player:startEvent(553)
     end
 end
 
@@ -115,28 +72,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 2530) then
-        -- Starting Quest: 'Hunger Strikes'
-        player:addQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.HUNGER_STRIKES)
-    elseif ((csid == 2532) or (csid == 3007)) then
-        -- Finishing Quest: 'Hunger Strikes' or 'The Starving'
-        player:tradeComplete()
-        player:addExp(1000 * xi.settings.EXP_RATE)
-        player:addCurrency('bayld', 500 * xi.settings.BAYLD_RATE)
-        player:messageSpecial(ID.text.BAYLD_OBTAINED, 500 * xi.settings.BAYLD_RATE)
-        player:addFame(xi.quest.fame_area.ADOULIN)
-        player:setCharVar("Westerly_Breeze_Wait", vanaDay())
-        player:needToZone(true)
-
-        if (csid == 2532) then
-            player:completeQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.HUNGER_STRIKES)
-        elseif (csid == 3007) then
-            player:completeQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.THE_STARVING)
-        end
-    elseif (csid == 3005) then
-        -- Starting Quest: 'The Starving'
-        player:addQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.THE_STARVING)
-    elseif (csid == 3010) then
+    if (csid == 3010) then
         -- Starting Quest: 'Always More Quoth the Ravenous'
         player:addQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.ALWAYS_MORE_QUOTH_THE_RAVENOUS)
     elseif (csid == 3012) then
@@ -148,7 +84,7 @@ entity.onEventFinish = function(player, csid, option)
         player:messageSpecial(ID.text.BAYLD_OBTAINED, 1000 * xi.settings.BAYLD_RATE)
         player:addFame(xi.quest.fame_area.ADOULIN)
         player:setCharVar("Westerly_Breeze_Wait", 0)
-    elseif ((csid == 2533) or (csid == 3008) or (csid == 3014)) then
+    elseif csid == 3014 then
         -- Consuming wrong food item given to him during his quests
         player:tradeComplete()
     elseif (csid == 5068) then

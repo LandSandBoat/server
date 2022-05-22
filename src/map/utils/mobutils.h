@@ -24,8 +24,8 @@
 
 #include <unordered_map>
 
-#include "../../common/cbasetypes.h"
-#include "../../common/mmo.h"
+#include "common/cbasetypes.h"
+#include "common/mmo.h"
 
 #include "../entities/mobentity.h"
 #include "../modifier.h"
@@ -49,7 +49,7 @@ typedef std::unordered_map<uint32, ModsList_t*> ModsMap_t;
 
 namespace mobutils
 {
-    void CalculateStats(CMobEntity* PMob);
+    void CalculateMobStats(CMobEntity* PMob, bool recover = true);
     void SetupJob(CMobEntity* PMob);
     void SetupRoaming(CMobEntity* PMob);
     void SetupDynamisMob(CMobEntity* PMob);

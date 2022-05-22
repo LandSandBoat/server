@@ -22,7 +22,7 @@
 #ifndef _CITEMWEAPON_H
 #define _CITEMWEAPON_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 #include "../entities/battleentity.h"
 
 #include "item_equipment.h"
@@ -65,6 +65,7 @@ public:
     void setILvlMacc(uint16 macc);
     void setDelay(uint16 delay);
     void setBaseDelay(uint16 delay); // should ONLY be set by zoneutils!
+    void setRodNumber(uint16 number);
     void setDamage(uint16 damage);
     void setDmgType(DAMAGE_TYPE dmgType);
     void setAdditionalEffect(uint8 effect);

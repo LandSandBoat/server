@@ -5,7 +5,7 @@
 #include <string>
 #include <memory>
 
-#include "efsw/efsw.hpp"
+#include <efsw/efsw.hpp>
 #include <concurrentqueue.h>
 
 class Filewatcher : public efsw::FileWatchListener

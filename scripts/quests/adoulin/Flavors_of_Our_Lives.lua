@@ -76,7 +76,20 @@ quest.sections =
         [xi.zone.WESTERN_ADOULIN] =
         {
             ['Berghent'] = quest:event(82), -- Reminder
-            ['Masad'] = quest:progressEvent(83),
+
+            ['Masad'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:getCurrentMission(xi.mission.log_id.SOA) <= xi.mission.id.soa.BUDDING_PROSPECTS then
+                        xi.mission.setVar(player, xi.mission.log_id.SOA, xi.mission.id.soa.BUDDING_PROSPECTS, 'Timer', VanadielUniqueDay() + 1)
+                        xi.mission.setMustZone(player, xi.mission.log_id.SOA, xi.mission.id.soa.BUDDING_PROSPECTS)
+                    end
+
+                    quest:setVar(player, 'Timer', VanadielUniqueDay() + 1)
+
+                    return quest:progressEvent(83)
+                end,
+            },
 
             onEventFinish =
             {
@@ -95,8 +108,22 @@ quest.sections =
 
         [xi.zone.WESTERN_ADOULIN] =
         {
-            ['Berghent'] = quest:event(82), -- Reminder
-            ['Dewalt'] = quest:progressEvent(85),
+            ['Berghent'] = quest:event(82),  -- Reminder
+            ['Dewalt']   = quest:progressEvent(85),
+
+            ['Masad'] =
+            {
+                onTrigger = function(player, npc)
+                    local waitTimer = quest:getVar(player, 'Timer')
+
+                    -- Priority changes from blocking to non-blocking after the timer has expired
+                    if waitTimer > VanadielUniqueDay() then
+                        return quest:progressEvent(104)
+                    else
+                        return quest:event(104):oncePerZone()
+                    end
+                end,
+            },
 
             onEventFinish =
             {
@@ -115,8 +142,8 @@ quest.sections =
 
         [xi.zone.WESTERN_ADOULIN] =
         {
-            ['Berghent'] = quest:event(82), -- Reminder
-            ['Dewalt'] = quest:event(105), -- Reminder
+            ['Berghent'] = quest:event(82),  -- Reminder
+            ['Dewalt']   = quest:event(105), -- Reminder
         },
 
         [xi.zone.RALA_WATERWAYS] =
@@ -140,8 +167,8 @@ quest.sections =
 
         [xi.zone.WESTERN_ADOULIN] =
         {
-            ['Berghent'] = quest:event(82), -- Reminder
-            ['Dewalt'] = quest:event(105), -- Reminder
+            ['Berghent'] = quest:event(82),  -- Reminder
+            ['Dewalt']   = quest:event(105), -- Reminder
         },
 
         [xi.zone.RALA_WATERWAYS] =

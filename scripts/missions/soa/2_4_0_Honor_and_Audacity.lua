@@ -7,11 +7,7 @@
 -----------------------------------
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/utils')
 require('scripts/globals/zone')
-require('scripts/settings/main')
------------------------------------
-local ID = require('scripts/zones/Western_Adoulin/IDs')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.HONOR_AND_AUDACITY)
@@ -27,6 +23,11 @@ mission.sections =
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId
         end,
+
+        [xi.zone.WESTERN_ADOULIN] =
+        {
+            ['Levil'] = mission:event(127),
+        },
 
         [xi.zone.RALA_WATERWAYS] =
         {

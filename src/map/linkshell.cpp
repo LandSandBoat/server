@@ -173,7 +173,7 @@ void CLinkshell::ChangeMemberRank(int8* MemberName, uint8 toSack)
         {
             if (strcmp((const char*)MemberName, (const char*)member->GetName()) == 0)
             {
-                CCharEntity* PMember = (CCharEntity*)member;
+                CCharEntity* PMember = member;
 
                 SLOTTYPE slot = SLOT_LINK1;
                 int      lsID = 1;
@@ -247,7 +247,7 @@ void CLinkshell::RemoveMemberByName(int8* MemberName, uint8 kickerRank, bool bre
     {
         if (strcmp((const char*)MemberName, (const char*)member->GetName()) == 0)
         {
-            CCharEntity* PMember = (CCharEntity*)member;
+            CCharEntity* PMember = member;
 
             CItemLinkshell* PItemLinkshell = (CItemLinkshell*)PMember->getEquip(SLOT_LINK1);
             SLOTTYPE        slot           = SLOT_LINK1;
@@ -329,7 +329,7 @@ void CLinkshell::RemoveMemberByName(int8* MemberName, uint8 kickerRank, bool bre
 void CLinkshell::BreakLinkshell(int8* lsname, bool gm)
 {
     uint32 lsid = m_id;
-    int8   signature[21];
+    int8   signature[DecodeStringLength];
     DecodeStringLinkshell(lsname, signature);
 
     // break logged in and equipped members
@@ -407,7 +407,10 @@ namespace linkshell
             auto PLinkshell = std::make_unique<CLinkshell>(sql->GetUIntData(0));
 
             PLinkshell->setColor(sql->GetIntData(1));
-            int8 EncodedName[16];
+            int8 EncodedName[LinkshellStringLength];
+
+            memset(EncodedName, 0, sizeof(EncodedName));
+
             EncodeStringLinkshell(sql->GetData(2), EncodedName);
             PLinkshell->setName(EncodedName);
             if (sql->GetUIntData(3) < LSTYPE_LINKSHELL || sql->GetUIntData(3) > LSTYPE_LINKPEARL)

@@ -22,7 +22,7 @@
 #ifndef _LUAMOBSKILL_H
 #define _LUAMOBSKILL_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 #include "luautils.h"
 
 class CMobSkill;

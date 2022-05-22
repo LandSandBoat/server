@@ -22,9 +22,11 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #ifndef _CHARENTITY_H
 #define _CHARENTITY_H
 
-#include "../../common/cbasetypes.h"
-#include "../../common/mmo.h"
+#include "common/cbasetypes.h"
+#include "common/mmo.h"
 #include "../event_info.h"
+#include "../packets/char.h"
+#include "../packets/entity_update.h"
 
 #include <bitset>
 #include <deque>
@@ -33,6 +35,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "battleentity.h"
 #include "petentity.h"
+
+#include "../utils/fishingutils.h"
 
 #define MAX_QUESTAREA    11
 #define MAX_QUESTID      256
@@ -202,6 +206,8 @@ typedef std::vector<EntityID_t>        BazaarList_t;
 class CCharEntity : public CBattleEntity
 {
 public:
+    uint32     accid; // Account ID associated with the character.
+
     jobs_t     jobs;       // Available Character professions
     keyitems_t keys;       // Table key objects
 
@@ -233,10 +239,10 @@ public:
 
     uint8             m_ZonesList[36];        // List of visited zone character
     std::bitset<1024> m_SpellList;            // List of studied spells
-    uint8             m_TitleList[94];        // List of honored windows
+    uint8             m_TitleList[143];       // List of obtained titles
     uint8             m_Abilities[62];        // List of current abilities
-    uint8             m_LearnedAbilities[49]; //LearnableAbilities (corsairRolls)
-    std::bitset<50>   m_LearnedWeaponskills;  //LearnableWeaponskills
+    uint8             m_LearnedAbilities[49]; // LearnableAbilities (corsairRolls)
+    std::bitset<50>   m_LearnedWeaponskills;  // LearnableWeaponskills
     uint8             m_TraitList[16];        // List of advance active abilities in the form of a bit mask
     uint8             m_PetCommands[32];      // List of available pet commands
     uint8             m_WeaponSkills[32];
@@ -303,15 +309,17 @@ public:
 
     uint8 GetGender(); // узнаем пол персонажа
 
-    void          clearPacketList();                         // отчистка PacketList
-    void          pushPacket(CBasicPacket*);                 // добавление копии пакета в PacketList
-    void          pushPacket(std::unique_ptr<CBasicPacket>); // push packet to packet list
-    bool          isPacketListEmpty();                       // проверка размера PacketList
-    CBasicPacket* popPacket();                               // получение первого пакета из PacketList
-    PacketList_t  getPacketList();                           // returns a COPY of packet list
-    size_t        getPacketCount();
-    void          erasePackets(uint8 num); // erase num elements from front of packet list
-    virtual void  HandleErrorMessage(std::unique_ptr<CBasicPacket>&) override;
+    void          clearPacketList();                                                             // отчистка PacketList
+    void          pushPacket(CBasicPacket*);                                                     // добавление копии пакета в PacketList
+    void          pushPacket(std::unique_ptr<CBasicPacket>);                                     // push packet to packet list
+    void          updateCharPacket(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask);     // Push or update a char packet
+    void          updateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 updatemask); // Push or update an entity update packet
+    bool          isPacketListEmpty();                                                           // проверка размера PacketList
+    CBasicPacket* popPacket();                                                                   // получение первого пакета из PacketList
+    PacketList_t  getPacketList();                                                               // returns a COPY of packet list
+    size_t        getPacketCount();                                                              //
+    void          erasePackets(uint8 num);                                                       // erase num elements from front of packet list
+    virtual void  HandleErrorMessage(std::unique_ptr<CBasicPacket>&) override;                   //
 
     CLinkshell*    PLinkshell1; // linkshell, в которой общается персонаж
     CLinkshell*    PLinkshell2; // linkshell 2
@@ -408,6 +416,16 @@ public:
 
     CItemEquipment* getEquip(SLOTTYPE slot);
 
+    CBasicPacket* PendingPositionPacket = nullptr;
+
+    bool requestedInfoSync = false;
+
+    fishresponse_t* hookedFish;   // Currently hooked fish/item/monster
+    uint32          nextFishTime; // When char is allowed to fish again
+    uint32          lastCastTime; // When char last cast their rod
+    uint32          fishingToken; // To track fishing process
+    uint16          hookDelay;    // How long it takes to hook a fish
+
     void ReloadPartyInc();
     void ReloadPartyDec();
     bool ReloadParty() const;
@@ -460,15 +478,16 @@ public:
     virtual void           OnCastInterrupted(CMagicState&, action_t&, MSGBASIC_ID msg) override;
     virtual void           OnWeaponSkillFinished(CWeaponSkillState&, action_t&) override;
     virtual void           OnAbility(CAbilityState&, action_t&) override;
-    virtual void           OnRangedAttack(CRangeState&, action_t&);
+    virtual void           OnRangedAttack(CRangeState&, action_t&) override;
     virtual void           OnDeathTimer() override;
     virtual void           OnRaise() override;
+
     virtual void           OnItemFinish(CItemState&, action_t&);
 
     bool m_Locked; // Is the player locked in a cutscene
 
-    CCharEntity();  // constructor
-    ~CCharEntity(); // destructor
+    CCharEntity();
+    ~CCharEntity();
 
 protected:
     bool IsMobOwner(CBattleEntity* PTarget);
@@ -498,7 +517,9 @@ private:
     bool m_isBlockingAid;
     bool m_reloadParty;
 
-    PacketList_t PacketList; // the list of packets to be sent to the character during the next network cycle
+    PacketList_t PacketList;                                               // the list of packets to be sent to the character during the next network cycle
+    std::unordered_map<uint32, CCharPacket*> PendingCharPackets;           // Keep track of which char packets are queued up for this char, such that they can be updated
+    std::unordered_map<uint32, CEntityUpdatePacket*> PendingEntityPackets; // Keep track of which entity update packets are queued up for this char, such that they can be updated
 };
 
 #endif

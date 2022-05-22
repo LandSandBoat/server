@@ -185,6 +185,8 @@ namespace charutils
     void SavePlayTime(CCharEntity* PChar);                     // Saves this characters total play time.
     bool hasMogLockerAccess(CCharEntity* PChar);               // true if have access, false otherwise.
 
+    uint8 getQuestStatus(CCharEntity* PChar, uint8 log, uint8 quest); // Get Quest status. Used in FishingUtils.cpp, allows to fish quest specific mobs, like PLD AF NM.
+
     float AddExpBonus(CCharEntity* PChar, float exp);
 
     void RemoveAllEquipment(CCharEntity* PChar);
@@ -214,8 +216,8 @@ namespace charutils
     void  HomePoint(CCharEntity* PChar);
     bool  AddWeaponSkillPoints(CCharEntity*, SLOTTYPE, int);
 
-    int32 GetCharVar(CCharEntity* PChar, const char* var);
-    void  SetCharVar(CCharEntity* PChar, const char* var, int32 value);
+    int32 GetCharVar(CCharEntity* PChar, std::string const& var);
+    void  SetCharVar(CCharEntity* PChar, std::string const& var, int32 value);
     void ClearCharVarsWithPrefix(CCharEntity* PChar, std::string prefix);
 
     uint16 getWideScanRange(JOBTYPE job, uint8 level);
@@ -239,6 +241,10 @@ namespace charutils
     uint8 getItemLevelDifference(CCharEntity* PChar);
     uint8 getMainhandItemLevel(CCharEntity* PChar);
     uint8 getRangedItemLevel(CCharEntity* PChar);
+
+    bool hasEntitySpawned(CCharEntity* PChar, CBaseEntity* entity);
+
+    uint32 getCharIdFromName(std::string const& name);
 }; // namespace charutils
 
 #endif // _CHARUTILS_H

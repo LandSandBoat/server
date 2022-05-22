@@ -254,7 +254,7 @@ xi.mission.id =
         FLAMES_IN_THE_DARKNESS           = 718, -- ±
         FIRE_IN_THE_EYES_OF_MEN          = 728, -- ±
         CALM_BEFORE_THE_STORM            = 738, -- ±
-        THE_WARRIOR_S_PATH               = 748, -- ±
+        THE_WARRIORS_PATH                = 748, -- ±
         EMPTINESS_BLEEDS                 = 758, -- ± ---- Category
         GARDEN_OF_ANTIQUITY              = 800, -- ±
         A_FATE_DECIDED                   = 818, -- ±
@@ -477,8 +477,8 @@ xi.mission.id =
         THE_LEAFKIN_MONARCH             = 34,  -- ±
         YGGDRASIL                       = 35,  -- ±
         -- SHADOWS_UPON_ADOULIN         =  -- Category
-        RETURN_OF_THE_EXORCIST          = 37,
-        THE_MERCILESS_ONE               = 38,
+        RETURN_OF_THE_EXORCIST          = 37,  -- ±
+        THE_MERCILESS_ONE               = 38,  -- ±
         A_CURSE_FROM_THE_PAST           = 39,
         THE_PURGATION                   = 40,
         THE_KEY                         = 41,
@@ -719,9 +719,9 @@ end
 local missionType =
 {
     -- Required Rank             :   1  1  1  2  2  2  2  2  2  2  3  3  3  4  5  5  6  6  7  7  8  8  9  9
-    [xi.mission.log_id.SANDORIA] = { 1, 1, 1, 0, 1, 0, 2, 2, 2, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-    [xi.mission.log_id.BASTOK]   = { 2, 0, 1, 0, 1, 0, 2, 2, 2, 2, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-    [xi.mission.log_id.WINDURST] = { 2, 0, 0, 0, 1, 0, 2, 2, 2, 2, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+    [xi.mission.log_id.SANDORIA] = { 1, 1, 1, 0, 1, 0, 2, 2, 2, 2, 1, 1, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+    [xi.mission.log_id.BASTOK]   = { 2, 0, 1, 0, 1, 0, 2, 2, 2, 2, 0, 1, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+    [xi.mission.log_id.WINDURST] = { 2, 0, 0, 0, 1, 0, 2, 2, 2, 2, 0, 1, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
 }
 
 local function getRequiredRank(missionId)

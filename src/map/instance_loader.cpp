@@ -92,7 +92,7 @@ CInstance* CInstanceLoader::LoadInstance()
             CMobEntity* PMob = new CMobEntity;
 
             PMob->name.insert(0, (const char*)sql->GetData(0));
-            PMob->id     = (uint32)sql->GetUIntData(1);
+            PMob->id     = sql->GetUIntData(1);
             PMob->targid = (uint16)PMob->id & 0x0FFF;
 
             PMob->m_SpawnPoint.rotation = (uint8)sql->GetIntData(2);
@@ -172,8 +172,8 @@ CInstance* CInstanceLoader::LoadInstance()
             PMob->m_flags       = (uint32)sql->GetIntData(60);
 
             // Special sub animation for Mob (yovra, jailer of love, phuabo)
-            // yovra 1: en hauteur, 2: en bas, 3: en haut
-            // phuabo 1: sous l'eau, 2: sort de l'eau, 3: rentre dans l'eau
+            // yovra 1: On top/in the sky, 2: , 3: On top/in the sky
+            // phuabo 1: Underwater, 2: Out of the water, 3: Goes back underwater
             PMob->animationsub = (uint32)sql->GetIntData(61);
 
             // Setup HP / MP Stat Percentage Boost
@@ -237,7 +237,7 @@ CInstance* CInstanceLoader::LoadInstance()
             while (sql->NextRow() == SQL_SUCCESS)
             {
                 CNpcEntity* PNpc = new CNpcEntity;
-                PNpc->id         = (uint32)sql->GetUIntData(0);
+                PNpc->id         = sql->GetUIntData(0);
                 PNpc->targid     = PNpc->id & 0xFFF;
 
                 PNpc->name.insert(0, (const char*)sql->GetData(1));
@@ -248,7 +248,7 @@ CInstance* CInstanceLoader::LoadInstance()
                 PNpc->loc.p.z        = sql->GetFloatData(5);
                 PNpc->loc.p.moving   = (uint16)sql->GetUIntData(6);
 
-                PNpc->m_TargID = (uint32)sql->GetUIntData(6) >> 16; // вполне вероятно
+                PNpc->m_TargID = sql->GetUIntData(6) >> 16; // "quite likely"
 
                 PNpc->speed        = (uint8)sql->GetIntData(7);
                 PNpc->speedsub     = (uint8)sql->GetIntData(8);
@@ -257,7 +257,7 @@ CInstance* CInstanceLoader::LoadInstance()
 
                 PNpc->namevis = (uint8)sql->GetIntData(11);
                 PNpc->status  = static_cast<STATUS_TYPE>(sql->GetIntData(12));
-                PNpc->m_flags = (uint32)sql->GetUIntData(13);
+                PNpc->m_flags = sql->GetUIntData(13);
 
                 memcpy(&PNpc->look, sql->GetData(14), 20);
 

@@ -22,7 +22,7 @@
 #ifndef _CCURRENCYPACKET_H
 #define _CCURRENCYPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 

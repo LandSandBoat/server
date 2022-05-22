@@ -20,9 +20,9 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 */
 #include <cstring>
 
-#include "../common/logging.h"
-#include "../common/mmo.h"
-#include "../common/sql.h"
+#include "common/logging.h"
+#include "common/mmo.h"
+#include "common/sql.h"
 
 #include <algorithm>
 
@@ -223,7 +223,7 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
 
             memcpy(PPlayer->name, sql->GetData(2), 15);
 
-            PPlayer->id       = (uint32)sql->GetUIntData(0);
+            PPlayer->id       = sql->GetUIntData(0);
             PPlayer->zone     = (uint16)sql->GetIntData(3);
             PPlayer->prevzone = (uint16)sql->GetIntData(4);
             PPlayer->nation   = (uint8)sql->GetIntData(5);
@@ -239,8 +239,8 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
             PPlayer->mentor      = sql->GetUIntData(16) & NFLAG_MENTOR;
             PPlayer->seacom_type = (uint8)sql->GetUIntData(17);
 
-            uint32 partyid  = (uint32)sql->GetUIntData(1);
-            uint32 nameflag = (uint32)sql->GetUIntData(10);
+            uint32 partyid  = sql->GetUIntData(1);
+            uint32 nameflag = sql->GetUIntData(10);
 
             if (PPlayer->mentor)
             {
@@ -424,7 +424,7 @@ std::list<SearchEntity*> CDataLoader::GetPartyList(uint16 PartyID, uint16 Allian
 
             memcpy(PPlayer->name, sql->GetData(2), 15);
 
-            PPlayer->id          = (uint32)sql->GetUIntData(0);
+            PPlayer->id          = sql->GetUIntData(0);
             PPlayer->zone        = (uint16)sql->GetIntData(3);
             PPlayer->nation      = (uint8)sql->GetIntData(4);
             PPlayer->mjob        = (uint8)sql->GetIntData(10);
@@ -437,7 +437,7 @@ std::list<SearchEntity*> CDataLoader::GetPartyList(uint16 PartyID, uint16 Allian
             PPlayer->mentor      = sql->GetUIntData(15) & NFLAG_MENTOR;
             PPlayer->seacom_type = (uint8)sql->GetUIntData(16);
 
-            uint32 nameflag = (uint32)sql->GetUIntData(9);
+            uint32 nameflag = sql->GetUIntData(9);
 
             if (PPlayer->mentor)
             {
@@ -513,7 +513,7 @@ std::list<SearchEntity*> CDataLoader::GetLinkshellList(uint32 LinkshellID)
 
             memcpy(PPlayer->name, sql->GetData(2), 15);
 
-            PPlayer->id             = (uint32)sql->GetUIntData(0);
+            PPlayer->id             = sql->GetUIntData(0);
             PPlayer->zone           = (uint16)sql->GetIntData(3);
             PPlayer->nation         = (uint8)sql->GetIntData(4);
             PPlayer->mjob           = (uint8)sql->GetIntData(10);
@@ -527,8 +527,8 @@ std::list<SearchEntity*> CDataLoader::GetLinkshellList(uint32 LinkshellID)
             PPlayer->linkshellrank1 = sql->GetIntData(16);
             PPlayer->linkshellrank2 = sql->GetIntData(17);
 
-            uint32 partyid  = (uint32)sql->GetUIntData(1);
-            uint32 nameflag = (uint32)sql->GetUIntData(9);
+            uint32 partyid  = sql->GetUIntData(1);
+            uint32 nameflag = sql->GetUIntData(9);
 
             if (partyid == PPlayer->id)
             {
@@ -595,11 +595,11 @@ void CDataLoader::ExpireAHItems()
         while (sql2->NextRow() == SQL_SUCCESS)
         {
             // iterate through the expired auctions and return them to the seller
-            uint32 saleID    = (uint32)sql2->GetUIntData(0);
-            uint32 itemID    = (uint32)sql2->GetUIntData(1);
+            uint32 saleID    = sql2->GetUIntData(0);
+            uint32 itemID    = sql2->GetUIntData(1);
             uint8  itemStack = (uint8)sql2->GetUIntData(2);
             uint8  ahStack   = (uint8)sql2->GetUIntData(3);
-            uint32 seller    = (uint32)sql2->GetUIntData(4);
+            uint32 seller    = sql2->GetUIntData(4);
 
             ret = sql2->Query(
                 "INSERT INTO delivery_box (charid, charname, box, itemid, itemsubid, quantity, senderid, sender) VALUES "

@@ -158,7 +158,7 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod
     local lvluser = mob:getMainLvl()
     local lvltarget = target:getMainLvl()
     local acc = mob:getACC()
-    local eva = target:getEVA()
+    local eva = target:getEVA() + target:getMod(xi.mod.SPECIAL_ATTACK_EVASION)
 
     if target:hasStatusEffect(xi.effect.YONIN) and mob:isFacing(target, 23) then -- Yonin evasion boost if mob is facing target
         eva = eva + target:getStatusEffect(xi.effect.YONIN):getPower()
@@ -184,8 +184,8 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod
     ratio = ratio + lvldiff * 0.05
     ratio = utils.clamp(ratio, 0, 4)
 
-    --work out hit rate for mobs (bias towards them)
-    local hitrate = (acc * accmod) - eva + (lvldiff * 2) + 75
+    --work out hit rate for mobs
+    local hitrate = ( (acc * accmod) - eva) / 2 + (lvldiff * 2) + 75
 
     hitrate = utils.clamp(hitrate, 20, 95)
 
@@ -575,6 +575,14 @@ xi.mobskills.mobFinalAdjustments = function(dmg, mob, skill, target, attackType,
 
     if dmg < 0 then
         return 0
+    end
+
+    if attackType == xi.attackType.MAGICAL then
+        dmg = utils.oneforall(target, dmg)
+
+        if dmg < 0 then
+            return 0
+        end
     end
 
     dmg = utils.stoneskin(target, dmg)

@@ -22,8 +22,8 @@
 #ifndef _NPCENTITY_H
 #define _NPCENTITY_H
 
-#include "../../common/cbasetypes.h"
-#include "../../common/taskmgr.h"
+#include "common/cbasetypes.h"
+#include "common/taskmgr.h"
 
 #include "baseentity.h"
 

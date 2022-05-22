@@ -74,7 +74,7 @@ void Transport_Ship::setName(uint32 value) const
 
 void TransportZone_Town::updateShip() const
 {
-    this->ship.dock.zone->PushPacket(nullptr, CHAR_INZONE, new CEntityUpdatePacket(this->ship.npc, ENTITY_UPDATE, UPDATE_COMBAT));
+    this->ship.dock.zone->UpdateEntityPacket(this->ship.npc, ENTITY_UPDATE, UPDATE_COMBAT, true);
 }
 
 void TransportZone_Town::openDoor(bool sendPacket) const
@@ -83,7 +83,7 @@ void TransportZone_Town::openDoor(bool sendPacket) const
 
     if (sendPacket)
     {
-        this->ship.dock.zone->PushPacket(this->npcDoor, CHAR_INRANGE, new CEntityUpdatePacket(this->npcDoor, ENTITY_UPDATE, UPDATE_COMBAT));
+        this->ship.dock.zone->UpdateEntityPacket(this->npcDoor, ENTITY_UPDATE, UPDATE_COMBAT, true);
     }
 }
 
@@ -93,7 +93,7 @@ void TransportZone_Town::closeDoor(bool sendPacket) const
 
     if (sendPacket)
     {
-        this->ship.dock.zone->PushPacket(this->npcDoor, CHAR_INRANGE, new CEntityUpdatePacket(this->npcDoor, ENTITY_UPDATE, UPDATE_COMBAT));
+        this->ship.dock.zone->UpdateEntityPacket(this->npcDoor, ENTITY_UPDATE, UPDATE_COMBAT, true);
     }
 }
 
@@ -105,13 +105,13 @@ void TransportZone_Town::depart() const
 void Elevator_t::openDoor(CNpcEntity* npc) const
 {
     npc->animation = ANIMATION_OPEN_DOOR;
-    zoneutils::GetZone(this->zoneID)->PushPacket(npc, CHAR_INRANGE, new CEntityUpdatePacket(npc, ENTITY_SPAWN, UPDATE_ALL_MOB));
+    zoneutils::GetZone(this->zoneID)->UpdateEntityPacket(npc, ENTITY_SPAWN, UPDATE_ALL_MOB, true);
 }
 
 void Elevator_t::closeDoor(CNpcEntity* npc) const
 {
     npc->animation = ANIMATION_CLOSE_DOOR;
-    zoneutils::GetZone(this->zoneID)->PushPacket(npc, CHAR_INRANGE, new CEntityUpdatePacket(npc, ENTITY_SPAWN, UPDATE_ALL_MOB));
+    zoneutils::GetZone(this->zoneID)->UpdateEntityPacket(npc, ENTITY_SPAWN, UPDATE_ALL_MOB, true);
 }
 
 /************************************************************************
@@ -521,7 +521,7 @@ void CTransportHandler::startElevator(Elevator_t* elevator)
 
     ref<uint32>(&elevator->Elevator->name[0], 4) = CVanaTime::getInstance()->getVanaTime();
 
-    zoneutils::GetZone(elevator->zoneID)->PushPacket(nullptr, CHAR_INZONE, new CEntityUpdatePacket(elevator->Elevator, ENTITY_UPDATE, UPDATE_COMBAT));
+    zoneutils::GetZone(elevator->zoneID)->UpdateEntityPacket(elevator->Elevator, ENTITY_UPDATE, UPDATE_COMBAT, true);
 }
 
 /************************************************************************

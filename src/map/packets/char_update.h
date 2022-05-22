@@ -22,7 +22,7 @@
 #ifndef _CCHARUPDATEPACKET_H
 #define _CCHARUPDATEPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 

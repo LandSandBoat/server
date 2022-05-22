@@ -7,11 +7,7 @@
 -----------------------------------
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/utils')
 require('scripts/globals/zone')
-require('scripts/settings/main')
------------------------------------
-local ID = require('scripts/zones/Western_Adoulin/IDs')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.THE_LEAFKIN_MONARCH)
@@ -40,7 +36,9 @@ mission.sections =
             onEventFinish =
             {
                 [1507] = function(player, csid, option, npc)
-                    mission:complete(player)
+                    if mission:complete(player) then
+                        xi.mission.setVar(player, xi.mission.log_id.SOA, xi.mission.id.soa.YGGDRASIL, 'Timer', VanadielUniqueDay() + 1)
+                    end
                 end,
             },
         },

@@ -19,7 +19,7 @@
 ===========================================================================
 */
 
-#include "../../common/socket.h"
+#include "common/socket.h"
 
 #include "zone_in.h"
 
@@ -37,6 +37,7 @@
 
 uint16 GetMogHouseID(CCharEntity* PChar)
 {
+    // TODO: verify wtf is going on with this function. either these aren't supposed to be zone IDs or somehow Jeuno's mog is western adoulin!
     switch (zoneutils::GetCurrentRegion(PChar->getZone()))
     {
         case REGION_TYPE::WEST_AHT_URHGAN:
@@ -56,7 +57,7 @@ uint16 GetMogHouseID(CCharEntity* PChar)
         case REGION_TYPE::JEUNO:
             return 0x0100;
         default:
-            ShowWarning("Default case reached for GetMogHouseID by %s", PChar->GetName());
+            ShowWarning("Default case reached for GetMogHouseID by %s (%u)", PChar->GetName(), PChar->getZone());
             return 0x0100;
     }
 }
@@ -76,26 +77,31 @@ uint8 GetMogHouseFlag(CCharEntity* PChar)
             {
                 return 5;
             }
+            break;
         case REGION_TYPE::SANDORIA:
             if (PChar->profile.mhflag & 0x01)
             {
                 return 1;
             }
+            break;
         case REGION_TYPE::BASTOK:
             if (PChar->profile.mhflag & 0x02)
             {
                 return 2;
             }
+            break;
         case REGION_TYPE::WINDURST:
             if (PChar->profile.mhflag & 0x04)
             {
                 return 3;
             }
+            break;
         case REGION_TYPE::JEUNO:
             if (PChar->profile.mhflag & 0x08)
             {
                 return 4;
             }
+            break;
         default:
             break;
     }
@@ -219,7 +225,7 @@ CZoneInPacket::CZoneInPacket(CCharEntity* PChar, int16 csid)
     ref<uint32>(0xEC) = PChar->GetMaxMP();
 
     // MenuConfig (F4-F7) -- see CMenuConfigPacket
-    ref<uint8>(0xF4) = 0x18 | PChar->menuConfigFlags.byte1 | (PChar->nameflags.flags & FLAG_INVITE ? NFLAG_INVITE : 0);
+    ref<uint8>(0xF4) = 0x18 | PChar->menuConfigFlags.byte1 | (PChar->nameflags.flags & static_cast<uint32>(FLAG_INVITE) ? static_cast<uint32>(NFLAG_INVITE) : 0);
     ref<uint8>(0xF5) = PChar->menuConfigFlags.byte2 | (PChar->m_hasAutoTarget ? 0 : NFLAG_AUTOTARGET >> 8);
     ref<uint8>(0xF6) = PChar->menuConfigFlags.byte3;
     ref<uint8>(0xF7) = PChar->menuConfigFlags.byte4;

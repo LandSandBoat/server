@@ -534,6 +534,7 @@
         "xutility": "cpp",
         "complex": "cpp",
         "coroutine": "cpp",
-        "resumable": "cpp"
+        "resumable": "cpp",
+        "typeindex": "cpp"
     }
 }

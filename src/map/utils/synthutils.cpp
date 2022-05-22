@@ -19,9 +19,9 @@
 ===========================================================================
 */
 
-#include "../../common/logging.h"
-#include "../../common/socket.h"
-#include "../../common/utils.h"
+#include "common/logging.h"
+#include "common/socket.h"
+#include "common/utils.h"
 
 #include <cmath>
 #include <cstring>
@@ -932,7 +932,9 @@ namespace synthutils
             {
                 if ((PItem->getFlag() & ITEM_FLAG_INSCRIBABLE) && (PChar->CraftContainer->getItemID(0) > 0x1080))
                 {
-                    int8 encodedSignature[12];
+                    int8 encodedSignature[SignatureStringLength];
+
+                    memset(encodedSignature, 0, sizeof(encodedSignature));
                     PItem->setSignature(EncodeStringSignature((int8*)PChar->name.c_str(), encodedSignature));
 
                     char signature_esc[31]; // max charname: 15 chars * 2 + 1

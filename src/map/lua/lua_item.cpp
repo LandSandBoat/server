@@ -21,7 +21,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "lua_item.h"
 
-#include "../../common/logging.h"
+#include "common/logging.h"
 #include "../items/item.h"
 #include "../items/item_equipment.h"
 #include "../items/item_general.h"
@@ -65,7 +65,7 @@ uint32 CLuaItem::getQuantity()
 
 uint32 CLuaItem::getBasePrice()
 {
-    return static_cast<CItem*>(m_PLuaItem)->getBasePrice();
+    return m_PLuaItem->getBasePrice();
 }
 
 uint8 CLuaItem::getLocationID()
@@ -122,7 +122,7 @@ auto CLuaItem::getMatchingTrials() -> sol::table
         int32 trialCount = 0;
         while (sql->NextRow() == SQL_SUCCESS)
         {
-            auto id             = static_cast<int32>(sql->GetIntData(0));
+            auto id             = sql->GetIntData(0);
             table[++trialCount] = id;
         }
     }
@@ -266,7 +266,9 @@ bool CLuaItem::isShield()
 
 auto CLuaItem::getSignature() -> std::string
 {
-    int8 signature[21];
+    int8 signature[DecodeStringLength];
+
+    memset(signature, 0, sizeof(signature));
     if (m_PLuaItem->isType(ITEM_LINKSHELL))
     {
         DecodeStringLinkshell((int8*)m_PLuaItem->getSignature(), signature);
@@ -300,7 +302,7 @@ bool CLuaItem::isInstalled()
     return PFurnishing->isInstalled();
 }
 
-void CLuaItem::setSoulPlateData(std::string name, uint16 mobFamily, uint8 zeni, uint16 skillIndex, uint8 fp)
+void CLuaItem::setSoulPlateData(std::string const& name, uint16 mobFamily, uint8 zeni, uint16 skillIndex, uint8 fp)
 {
     m_PLuaItem->setSoulPlateData(name, mobFamily, zeni, skillIndex, fp);
 }

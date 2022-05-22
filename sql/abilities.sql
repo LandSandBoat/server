@@ -349,17 +349,17 @@ INSERT INTO `abilities` VALUES (341,'gran_pas',19,96,1,3600,254,0,0,289,2000,0,6
 INSERT INTO `abilities` VALUES (342,'caper_emissarius',20,96,2,3600,254,0,0,290,2000,0,6,8.0,0,0,0,0,0,NULL); -- check animation
 INSERT INTO `abilities` VALUES (343,'bolster',21,1,1,3600,0,0,0,303,2000,0,6,0.0,0,1,300,0,0,'SOA'); -- check animation
 INSERT INTO `abilities` VALUES (344,'swipe',22,25,4,90,241,110,0,0,2000,0,15,4.5,0,80,320,0,0,'SOA');
-INSERT INTO `abilities` VALUES (345,'full_circle',21,5,1,10,243,0,0,94,2000,0,6,0.0,0,1,300,0,0,'SOA');
-INSERT INTO `abilities` VALUES (346,'lasting_emanation',21,25,1,300,244,663,0,306,2000,0,6,0.0,0,1,300,0,0,'SOA');
-INSERT INTO `abilities` VALUES (347,'ecliptic_attrition',21,25,1,300,244,664,0,307,2000,0,6,0.0,0,1,300,0,0,'SOA');
+INSERT INTO `abilities` VALUES (345,'full_circle',21,5,256,10,243,0,0,94,2000,0,6,20.0,0,1,300,0,0,'SOA');
+INSERT INTO `abilities` VALUES (346,'lasting_emanation',21,25,256,300,244,663,0,306,2000,0,6,10.0,0,1,300,0,0,'SOA');
+INSERT INTO `abilities` VALUES (347,'ecliptic_attrition',21,25,256,300,244,664,0,307,2000,0,6,10.0,0,1,300,0,0,'SOA');
 INSERT INTO `abilities` VALUES (348,'collimated_fervor',21,40,1,300,245,100,0,304,2000,0,6,0.0,0,1,300,0,0,'SOA');
-INSERT INTO `abilities` VALUES (349,'life_cycle',21,50,1,600,246,306,0,309,2000,0,6,0.0,0,1,300,0,0,'SOA');
-INSERT INTO `abilities` VALUES (350,'blaze_of_glory',21,60,1,600,247,100,0,308,2000,0,6,0.0,0,1,300,0,0,'SOA');
-INSERT INTO `abilities` VALUES (351,'dematerialize',21,70,1,600,248,100,0,310,2000,0,6,0.0,0,1,300,0,0,'SOA');
+INSERT INTO `abilities` VALUES (349,'life_cycle',21,50,256,600,246,306,0,309,2000,0,6,20.0,0,1,300,0,0,'SOA');
+INSERT INTO `abilities` VALUES (350,'blaze_of_glory',21,60,1,600,247,100,0,308,2000,0,6,20.0,0,1,300,0,0,'SOA');
+INSERT INTO `abilities` VALUES (351,'dematerialize',21,70,256,600,248,319,0,310,2000,0,6,20.0,0,1,300,0,0,'SOA');
 INSERT INTO `abilities` VALUES (352,'theurgic_focus',21,80,1,300,249,100,0,305,2000,0,6,0.0,0,1,300,0,0,'SOA');
-INSERT INTO `abilities` VALUES (353,'concentric_pulse',21,90,4,300,250,0,0,311,2000,0,6,8.0,0,1,300,0,0,'SOA');
-INSERT INTO `abilities` VALUES (354,'mending_halation',21,75,1,300,251,0,0,311,2000,0,6,10.0,0,1,0,3392,1,'SOA');
-INSERT INTO `abilities` VALUES (355,'radial_arcana',21,75,1,300,252,0,0,311,2000,0,6,10.0,0,1,0,3394,1,'SOA');
+INSERT INTO `abilities` VALUES (353,'concentric_pulse',21,90,4,300,250,0,0,3045,2000,0,6,10.0,0,1,300,0,0,'SOA');    -- animation is pet ability id
+INSERT INTO `abilities` VALUES (354,'mending_halation',21,75,256,300,251,0,0,3051,2000,0,6,10.0,0,1,0,3392,1,'SOA'); -- animation is pet ability id
+INSERT INTO `abilities` VALUES (355,'radial_arcana',21,75,256,300,252,0,0,3052,2000,0,6,10.0,0,1,0,3394,1,'SOA');    -- animation is pet ability id
 INSERT INTO `abilities` VALUES (356,'elemental_sforzo',22,0,1,3600,0,0,0,302,2000,0,6,20.0,0,1800,7200,0,0,'SOA');
 INSERT INTO `abilities` VALUES (357,'rune_enchantment',22,5,1,0,92,0,0,0,2000,0,6,0.0,0,0,0,0,0,'SOA');
 INSERT INTO `abilities` VALUES (358,'ignis',22,5,1,5,10,0,0,291,2000,0,6,0.0,0,0,0,0,0,'SOA');
@@ -378,7 +378,7 @@ INSERT INTO `abilities` VALUES (370,'embolden',22,60,1,600,72,100,0,300,2000,0,6
 INSERT INTO `abilities` VALUES (371,'valiance',22,50,1,300,113,668,0,2,2000,0,15,14.0,1,450,900,0,0,'SOA');
 INSERT INTO `abilities` VALUES (372,'gambit',22,70,4,300,116,672,0,4,2000,0,15,4.5,0,640,1280,1800,0,'SOA');
 INSERT INTO `abilities` VALUES (373,'liement',22,85,1,180,117,670,373,3,2000,0,15,0.0,0,450,900,0,0,'SOA'); -- check animation
-INSERT INTO `abilities` VALUES (374,'one_for_all',22,95,1,300,118,100,0,301,2000,0,6,0.0,1,160,320,0,0,'SOA');
+INSERT INTO `abilities` VALUES (374,'one_for_all',22,95,1,300,118,100,0,301,2000,0,6,10.0,1,160,320,0,0,'SOA');
 -- INSERT INTO `abilities` VALUES (375,'rayke',22,75,4,300,119,320,0,4,2000,0,15,4.5,0,640,1260,3458,1,'SOA');
 INSERT INTO `abilities` VALUES (376,'battuta',22,75,1,300,120,100,0,4,2000,0,15,0.0,0,450,900,3456,1,'SOA');
 INSERT INTO `abilities` VALUES (377,'widened_compass',21,96,1,3600,130,100,0,276,2000,0,6,0.0,0,1,300,0,0,'SOA');

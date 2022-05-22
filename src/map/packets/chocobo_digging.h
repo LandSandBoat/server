@@ -22,7 +22,7 @@
 #ifndef _CCHOCOBODIGGINGPACKET_H
 #define _CCHOCOBODIGGINGPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 

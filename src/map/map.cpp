@@ -101,6 +101,17 @@ std::unique_ptr<SqlConnection> sql;
 
 extern std::map<uint16, CZone*> g_PZoneList; // Global array of pointers for zones
 
+namespace
+{
+    uint32 MAX_BUFFER_SIZE             = 2500U;
+    uint32 MAX_PACKETS_PER_COMPRESSION = 32U;
+    uint32 MAX_PACKET_BACKLOG_SIZE     = MAX_PACKETS_PER_COMPRESSION * 6U; // If we hit this number, things are going very very badly.
+
+    uint32 TotalPacketsToSendPerTick  = 0U;
+    uint32 TotalPacketsSentPerTick    = 0U;
+    uint32 TotalPacketsDelayedPerTick = 0U;
+}
+
 /************************************************************************
  *                                                                       *
  *  mapsession_getbyipp                                                  *
@@ -131,10 +142,10 @@ map_session_data_t* mapsession_getbyipp(uint64 ipp)
 map_session_data_t* mapsession_createsession(uint32 ip, uint16 port)
 {
     TracyZoneScoped;
-    map_session_data_t* map_session_data = new map_session_data_t;
-    memset(map_session_data, 0, sizeof(map_session_data_t));
 
-    map_session_data->server_packet_data = new int8[map_config.buffer_size + 20];
+    map_session_data_t* map_session_data = new map_session_data_t();
+
+    map_session_data->server_packet_data = new int8[MAX_BUFFER_SIZE + 20];
 
     map_session_data->last_update = time(nullptr);
     map_session_data->client_addr = ip;
@@ -211,9 +222,8 @@ int32 do_init(int32 argc, char** argv)
                                           map_config.mysql_port,
                                           map_config.mysql_database.c_str());
 
-    // We clear the session table at server start (temporary solution)
-    sql->Query("DELETE FROM accounts_sessions WHERE IF(%u = 0 AND %u = 0, true, server_addr = %u AND server_port = %u);", map_ip.s_addr, map_port,
-                map_ip.s_addr, map_port);
+    sql->Query("DELETE FROM accounts_sessions WHERE IF(%u = 0 AND %u = 0, true, server_addr = %u AND server_port = %u);",
+        map_ip.s_addr, map_port, map_ip.s_addr, map_port);
 
     ShowStatus("do_init: zlib is reading");
     zlib_init();
@@ -257,7 +267,7 @@ int32 do_init(int32 argc, char** argv)
     ShowStatus("do_init: loading zones");
     zoneutils::LoadZoneList();
 
-    fishingutils::LoadFishingMessages();
+    fishingutils::InitializeFishingSystem();
     instanceutils::LoadInstanceList();
 
     ShowStatus("do_init: server is binding with port %u", map_port == 0 ? map_config.usMapPort : map_port);
@@ -273,8 +283,8 @@ int32 do_init(int32 argc, char** argv)
     CTaskMgr::getInstance()->AddTask("map_cleanup", server_clock::now(), nullptr, CTaskMgr::TASK_INTERVAL, map_cleanup, 5s);
     CTaskMgr::getInstance()->AddTask("garbage_collect", server_clock::now(), nullptr, CTaskMgr::TASK_INTERVAL, map_garbage_collect, 15min);
 
-    g_PBuff   = new int8[map_config.buffer_size + 20];
-    PTempBuff = new int8[map_config.buffer_size + 20];
+    g_PBuff   = new int8[MAX_BUFFER_SIZE + 20];
+    PTempBuff = new int8[MAX_BUFFER_SIZE + 20];
 
     PacketGuard::Init();
 
@@ -284,6 +294,9 @@ int32 do_init(int32 argc, char** argv)
 
     ShowStatus("The map-server is ready to work!");
     ShowMessage("=======================================================================");
+
+    gConsoleService = std::make_unique<ConsoleService>();
+
     return 0;
 }
 
@@ -351,9 +364,11 @@ void set_server_type()
 void ReportTracyStats()
 {
     TracyReportLuaMemory(luautils::lua.lua_state());
+
     std::size_t activeZoneCount = 0;
     std::size_t playerCount = 0;
     std::size_t mobCount = 0;
+
     for (auto& [id, PZone] : g_PZoneList)
     {
         if (PZone->IsZoneActive())
@@ -363,10 +378,19 @@ void ReportTracyStats()
             mobCount += PZone->GetZoneEntities()->GetMobList().size();
         }
     }
+
     TracyReportGraphNumber("Active Zones (Process)", static_cast<std::int64_t>(activeZoneCount));
     TracyReportGraphNumber("Connected Players (Process)", static_cast<std::int64_t>(playerCount));
     TracyReportGraphNumber("Active Mobs (Process)", static_cast<std::int64_t>(mobCount));
     TracyReportGraphNumber("Task Manager Tasks", static_cast<std::int64_t>(CTaskMgr::getInstance()->getTaskList().size()));
+
+    TracyReportGraphNumber("Total Packets To Send Per Tick", static_cast<std::int64_t>(TotalPacketsToSendPerTick));
+    TracyReportGraphNumber("Total Packets Sent Per Tick", static_cast<std::int64_t>(TotalPacketsSentPerTick));
+    TracyReportGraphNumber("Total Packets Delayed Per Tick", static_cast<std::int64_t>(TotalPacketsDelayedPerTick));
+
+    TotalPacketsToSendPerTick = 0;
+    TotalPacketsSentPerTick = 0;
+    TotalPacketsDelayedPerTick = 0;
 }
 
 /************************************************************************
@@ -377,16 +401,14 @@ void ReportTracyStats()
 
 int32 do_sockets(fd_set* rfd, duration next)
 {
-    TracyZoneScoped;
-
     message::handle_incoming();
 
     struct timeval timeout;
     int32          ret;
     memcpy(rfd, &readfds, sizeof(*rfd));
 
-    timeout.tv_sec  = (long)std::chrono::duration_cast<std::chrono::seconds>(next).count();
-    timeout.tv_usec = (long)std::chrono::duration_cast<std::chrono::microseconds>(next - std::chrono::duration_cast<std::chrono::seconds>(next)).count();
+    timeout.tv_sec  = std::chrono::duration_cast<std::chrono::seconds>(next).count();
+    timeout.tv_usec = std::chrono::duration_cast<std::chrono::microseconds>(next - std::chrono::duration_cast<std::chrono::seconds>(next)).count();
 
     ret = sSelect(fd_max, rfd, nullptr, nullptr, &timeout);
 
@@ -407,7 +429,7 @@ int32 do_sockets(fd_set* rfd, duration next)
         struct sockaddr_in from;
         socklen_t          fromlen = sizeof(from);
 
-        int32 ret = recvudp(map_fd, g_PBuff, map_config.buffer_size, 0, (struct sockaddr*)&from, &fromlen);
+        int32 ret = recvudp(map_fd, g_PBuff, MAX_BUFFER_SIZE, 0, (struct sockaddr*)&from, &fromlen);
         if (ret != -1)
         {
             // find player char
@@ -468,17 +490,6 @@ int32 do_sockets(fd_set* rfd, duration next)
 
 /************************************************************************
  *                                                                       *
- *  parse_console                                                        *
- *                                                                       *
- ************************************************************************/
-
-int32 parse_console(int8* buf)
-{
-    return 0;
-}
-
-/************************************************************************
- *                                                                       *
  *  map_decipher_packet                                                  *
  *                                                                       *
  ************************************************************************/
@@ -529,7 +540,6 @@ int32 recv_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
     size_t size           = *buffsize;
     int32  checksumResult = -1;
 
-#ifdef WIN32
     try
     {
         checksumResult = checksum((uint8*)(buff + FFXI_HEADER_SIZE), (uint32)(size - (FFXI_HEADER_SIZE + 16)), (char*)(buff + size - 16));
@@ -539,9 +549,6 @@ int32 recv_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
         ShowError("Possible crash attempt from: %s", ip2str(map_session_data->client_addr));
         return -1;
     }
-#else
-    checksumResult = checksum((uint8*)(buff + FFXI_HEADER_SIZE), size - (FFXI_HEADER_SIZE + 16), (char*)(buff + size - 16));
-#endif
 
     if (checksumResult == 0)
     {
@@ -593,7 +600,6 @@ int32 recv_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
     else
     {
         // char packets
-
         if (map_decipher_packet(buff, *buffsize, from, map_session_data) == -1)
         {
             *buffsize = 0;
@@ -602,18 +608,23 @@ int32 recv_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
         // reading data size
         uint32 PacketDataSize = ref<uint32>(buff, *buffsize - sizeof(int32) - 16);
         // creating buffer for decompress data
-        auto PacketDataBuff = std::make_unique<int8[]>(map_config.buffer_size);
+        auto PacketDataBuff = std::make_unique<int8[]>(MAX_BUFFER_SIZE);
         // it's decompressing data and getting new size
-        PacketDataSize = zlib_decompress(buff + FFXI_HEADER_SIZE, PacketDataSize, PacketDataBuff.get(), map_config.buffer_size);
+        PacketDataSize = zlib_decompress(buff + FFXI_HEADER_SIZE, PacketDataSize, PacketDataBuff.get(), MAX_BUFFER_SIZE);
 
-        // it's making result buff
-        // don't need memcpy header
-        memcpy(buff + FFXI_HEADER_SIZE, PacketDataBuff.get(), PacketDataSize);
-        *buffsize = FFXI_HEADER_SIZE + PacketDataSize;
+        // Not sure why zlib_decompress is defined to return a uint32 when it returns -1 in situations.
+        if (static_cast<int32>(PacketDataSize) != -1)
+        {
+            // it's making result buff
+            // don't need memcpy header
+            memcpy(buff + FFXI_HEADER_SIZE, PacketDataBuff.get(), PacketDataSize);
+            *buffsize = FFXI_HEADER_SIZE + PacketDataSize;
+
+            return 0;
+        }
 
         return 0;
     }
-    return -1;
 }
 
 /************************************************************************
@@ -683,9 +694,8 @@ int32 parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*
             {
                 // NOTE:
                 // CBasicPacket is incredibly light when constructed from a pointer like we're doing here.
-                // It is just a bag of offsets to the data in SmallPD_ptr, so its safe to construct and
-                // move it into the PacketParser call to keep the linter quiet
-                PacketParser[SmallPD_Type](map_session_data, PChar, std::move(CBasicPacket(reinterpret_cast<uint8*>(SmallPD_ptr))));
+                // It is just a bag of offsets to the data in SmallPD_ptr so its safe to construct.
+                PacketParser[SmallPD_Type](map_session_data, PChar, CBasicPacket(reinterpret_cast<uint8*>(SmallPD_ptr)));
             }
         }
         else
@@ -742,11 +752,15 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
 
     // build a large package, consisting of several small packets
     CCharEntity*  PChar = map_session_data->PChar;
+    TracyZoneString(PChar->name);
+
     CBasicPacket* PSmallPacket;
 
     uint32 PacketSize  = UINT32_MAX;
-    auto   PacketCount = PChar->getPacketCount();
+    size_t PacketCount = std::clamp<size_t>(PChar->getPacketCount(), 0, MAX_PACKETS_PER_COMPRESSION);
     uint8  packets     = 0;
+
+    TotalPacketsToSendPerTick += static_cast<uint32>(PChar->getPacketCount());
 
 #ifdef LOG_OUTGOING_PACKETS
     PacketGuard::PrintPacketList(PChar);
@@ -756,16 +770,14 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
     {
         do
         {
-            *buffsize               = FFXI_HEADER_SIZE;
-            PacketList_t packetList = PChar->getPacketList();
-            packets                 = 0;
+            *buffsize                = FFXI_HEADER_SIZE;
+            PacketList_t packetList  = PChar->getPacketList();
+            packets                  = 0;
 
-            while (!packetList.empty() && *buffsize + packetList.front()->getSize() < map_config.buffer_size && packets < PacketCount)
+            while (!packetList.empty() && *buffsize + packetList.front()->getSize() < MAX_BUFFER_SIZE && packets < PacketCount)
             {
                 PSmallPacket = packetList.front();
                 packetList.pop_front();
-
-                // ShowInfo("> Outgoing packet: Type: 0x%X, Size: (%d / 0x%X)", PSmallPacket->getType(), PSmallPacket->getSize(), PSmallPacket->getSize());
 
                 PSmallPacket->setSequence(map_session_data->server_packet_id);
                 memcpy(buff + *buffsize, *PSmallPacket, PSmallPacket->getSize());
@@ -775,11 +787,11 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
                 packets++;
             }
 
-            PacketCount /= 2;
+            PacketCount -= PacketCount / 3;
 
             // Compress the data without regard to the header
             // The returned size is 8 times the real data
-            PacketSize = zlib_compress(buff + FFXI_HEADER_SIZE, (uint32)(*buffsize - FFXI_HEADER_SIZE), PTempBuff, map_config.buffer_size);
+            PacketSize = zlib_compress(buff + FFXI_HEADER_SIZE, (uint32)(*buffsize - FFXI_HEADER_SIZE), PTempBuff, MAX_BUFFER_SIZE);
 
             // handle compression error
             if (PacketSize == static_cast<uint32>(-1))
@@ -809,6 +821,8 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
         }
     } while (PacketSize == static_cast<uint32>(-1));
     PChar->erasePackets(packets);
+    TotalPacketsSentPerTick += packets;
+    TracyZoneString(fmt::format("Sending {} packets", packets));
 
     // Record data size excluding header
     uint8 hash[16];
@@ -816,7 +830,7 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
     memcpy(PTempBuff + PacketSize, hash, 16);
     PacketSize += 16;
 
-    if (PacketSize > map_config.buffer_size + 20)
+    if (PacketSize > MAX_BUFFER_SIZE + 20)
     {
         ShowFatalError("Memory manager: PTempBuff is overflowed (%u)", PacketSize);
     }
@@ -841,6 +855,15 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
     // decrease the size of BuffMaxSize in 4 byte increments until it is removed (manually)
 
     *buffsize = PacketSize + FFXI_HEADER_SIZE;
+
+    auto remainingPackets = PChar->getPacketList().size();
+    TotalPacketsDelayedPerTick += static_cast<uint32>(remainingPackets);
+    TracyZoneString(fmt::format("{} packets remaining", remainingPackets));
+    if (remainingPackets > MAX_PACKET_BACKLOG_SIZE)
+    {
+        ShowWarning(fmt::format("Packet backlog for char {} in {} is {}! Limit is: {}",
+            PChar->name, PChar->loc.zone->GetName(), remainingPackets, MAX_PACKET_BACKLOG_SIZE));
+    }
 
     return 0;
 }
@@ -1018,21 +1041,6 @@ void map_helpscreen(int32 flag)
 
 /************************************************************************
  *                                                                       *
- *  Map-Server Version Screen [venom]                                    *
- *                                                                       *
- ************************************************************************/
-
-void map_versionscreen(int32 flag)
-{
-    ShowInfo("Server version %d%02d_%d (%s)", XI_MAJOR_VERSION, XI_MINOR_VERSION, XI_REVISION, XI_RELEASE_FLAG ? "stable" : "unstable");
-    if (flag)
-    {
-        exit(EXIT_FAILURE);
-    }
-}
-
-/************************************************************************
- *                                                                       *
  *  map_config_default                                                   *
  *                                                                       *
  ************************************************************************/
@@ -1047,7 +1055,6 @@ int32 map_config_default()
     map_config.mysql_database              = "xidb";
     map_config.mysql_port                  = 3306;
     map_config.server_message              = "";
-    map_config.buffer_size                 = 1800;
     map_config.ah_base_fee_single          = 1;
     map_config.ah_base_fee_stacks          = 4;
     map_config.ah_tax_rate_single          = 1.0;
@@ -1078,6 +1085,8 @@ int32 map_config_default()
     map_config.craft_modern_system         = 1;
     map_config.craft_common_cap            = 700;
     map_config.craft_specialization_points = 400;
+    map_config.fishing_enable              = 0;
+    map_config.fishing_skill_multiplier    = 1.0f;
     map_config.mob_tp_multiplier           = 1.0f;
     map_config.player_tp_multiplier        = 1.0f;
     map_config.nm_hp_multiplier            = 1.0f;
@@ -1185,7 +1194,7 @@ int32 map_config_read(const int8* cfgName)
         ptr++;
         *ptr = '\0';
 
-        int  stdout_with_ansisequence = 0;
+        //int  stdout_with_ansisequence = 0; // unused
         int  msg_silent               = 0;                    // Specifies how silent the console is.
         char timestamp_format[20]     = "[%d/%b] [%H:%M:%S]"; // For displaying Timestamps, default value
 
@@ -1193,10 +1202,12 @@ int32 map_config_read(const int8* cfgName)
         {
             strncpy(timestamp_format, w2, 20);
         }
+/*      // unused
         else if (strcmpi(w1, "stdout_with_ansisequence") == 0)
         {
             stdout_with_ansisequence = config_switch(w2);
         }
+*/
         else if (strcmpi(w1, "console_silent") == 0)
         {
             ShowInfo("Console Silent Setting: %d", atoi(w2));
@@ -1206,10 +1217,6 @@ int32 map_config_read(const int8* cfgName)
         else if (strcmpi(w1, "map_port") == 0)
         {
             map_config.usMapPort = (atoi(w2));
-        }
-        else if (strcmp(w1, "buff_maxsize") == 0)
-        {
-            map_config.buffer_size = atoi(w2);
         }
         else if (strcmp(w1, "max_time_lastupdate") == 0)
         {
@@ -1435,6 +1442,14 @@ int32 map_config_read(const int8* cfgName)
         {
             map_config.craft_specialization_points = atoi(w2);
         }
+        else if (strcmp(w1, "fishing_enable") == 0)
+        {
+            map_config.fishing_enable = atof(w2);
+        }
+        else if (strcmp(w1, "fishing_skill_multiplier") == 0)
+        {
+            map_config.fishing_skill_multiplier = (float)atof(w2);
+        }
         else if (strcmp(w1, "garden_day_matters") == 0)
         {
             map_config.garden_day_matters = atof(w2);
@@ -1569,7 +1584,7 @@ int32 map_config_read(const int8* cfgName)
         }
         else
         {
-            ShowWarning("Unknown setting '%s' in file %s", w1, cfgName);
+            ShowWarning("Unknown setting '%s' in file %s. Has this setting been removed?", w1, cfgName);
         }
     }
 

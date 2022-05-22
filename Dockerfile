@@ -31,6 +31,9 @@ RUN mkdir docker_build && cd docker_build && cmake .. && make -j $(nproc)  && cd
 # Copy the docker config files to the conf folder instead of the default config
 COPY /conf/default/* conf/
 
+# Copy the docker settings files to the settings folder instead of the default settings
+COPY /scripts/settings/default/* scripts/settings/
+
 # Ensure wait_for_db_then_launch.sh is executable
 RUN chmod +x ./tools/wait_for_db_then_launch.sh
 

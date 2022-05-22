@@ -16,6 +16,8 @@ TestResults
 
 # Build results
 build/
+lbuild/
+out/
 [Dd]ebug/
 [Rr]elease/
 x64/
@@ -71,7 +73,7 @@ cmake-*
 *.ncrunch*
 .*crunch*.local.xml
 
-# Installshield output folder 
+# Installshield output folder
 [Ee]xpress
 
 # DocProject is a documentation generator add-in
@@ -130,12 +132,10 @@ UpgradeLog*.XML
 *.app
 
 # Generated executables
-/topaz_connect
-/topaz_game
-/topaz_search
-/topaz_connect_64
-/topaz_game_64
-/topaz_search_64
+/xi_connect
+/xi_map
+/xi_search
+/xi_world
 
 # Generated files, mostly autotools-related
 .deps
@@ -168,7 +168,7 @@ log/leaks.txt
 .metadata/**
 .project
 .vs
-/win32/.vs/topaz/v15
+/win32/.vs/xi/v15
 
 # VS Code
 .vscode

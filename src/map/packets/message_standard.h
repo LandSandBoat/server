@@ -22,7 +22,7 @@
 #ifndef _CMESSAGESTANDARTPACKET_H
 #define _CMESSAGESTANDARTPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 

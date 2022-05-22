@@ -24,8 +24,6 @@ entity.onTrigger = function(player, npc)
         player:startEvent(164)
     elseif (player:getCurrentMission(xi.mission.log_id.COP) > xi.mission.id.cop.GARDEN_OF_ANTIQUITY or (player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.GARDEN_OF_ANTIQUITY and player:getCharVar("PromathiaStatus") == 3)) then
         player:startEvent(100) -- Teleport inside
-    else
-        player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY) -- Access should be restricted if below requirements. Message is probably wrong, though.
     end
 end
 

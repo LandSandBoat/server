@@ -801,6 +801,11 @@ xi.spells.spell_damage.useDamageSpell = function(caster, target, spell)
         finalDamage = utils.clamp(finalDamage - target:getMod(xi.mod.PHALANX), 0, 99999)
     end
 
+    -- Handle One For All
+    if finalDamage > 0 then
+        finalDamage = utils.clamp(utils.oneforall(target, finalDamage), 0, 99999)
+    end
+
     -- Handle Stoneskin
     if finalDamage > 0 then
         finalDamage = utils.clamp(utils.stoneskin(target, finalDamage), -99999, 99999)

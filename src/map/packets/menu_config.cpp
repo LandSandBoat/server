@@ -19,7 +19,7 @@
 ===========================================================================
 */
 
-#include "../../common/socket.h"
+#include "common/socket.h"
 
 #include "menu_config.h"
 
@@ -33,8 +33,8 @@ CMenuConfigPacket::CMenuConfigPacket(CCharEntity* PChar)
     // Invite, Online/Away, and Anon are handled in the first byte.
     // Due to the way invites are cleared from nameflags when and handled in
     // other parts of the codebase, this
-    ref<uint8>(0x04) = 0x18 | PChar->menuConfigFlags.byte1 | (PChar->nameflags.flags & FLAG_INVITE ? NFLAG_INVITE : 0);
-    ref<uint8>(0x05) = PChar->menuConfigFlags.byte2 | (PChar->m_hasAutoTarget ? 0 : NFLAG_AUTOTARGET >> 8);
+    ref<uint8>(0x04) = 0x18 | PChar->menuConfigFlags.byte1 | (PChar->nameflags.flags & static_cast<uint8>(FLAG_INVITE) ? static_cast<uint8>(NFLAG_INVITE) : 0);
+    ref<uint8>(0x05) = PChar->menuConfigFlags.byte2 | (PChar->m_hasAutoTarget ? 0 : static_cast<uint8>(NFLAG_AUTOTARGET >> 8));
     ref<uint8>(0x06) = PChar->menuConfigFlags.byte3;
     ref<uint8>(0x07) = PChar->menuConfigFlags.byte4;
 

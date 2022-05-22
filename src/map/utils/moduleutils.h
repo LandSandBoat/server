@@ -22,7 +22,7 @@
 #ifndef _MODULEUTILS_H
 #define _MODULEUTILS_H
 
-#include "../../common/logging.h"
+#include "common/logging.h"
 #include "../lua/luautils.h"
 
 #include <memory>
@@ -46,7 +46,7 @@ public:
         moduleutils::RegisterCPPModule(this);
     }
 
-    virtual ~CPPModule(){};
+    virtual ~CPPModule() = default;
 
     // Required
     virtual void OnInit() = 0;

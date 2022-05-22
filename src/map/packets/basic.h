@@ -22,8 +22,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #ifndef _BASICPACKET_H
 #define _BASICPACKET_H
 
-#include "../../common/cbasetypes.h"
-#include "../../common/socket.h"
+#include "common/cbasetypes.h"
+#include "common/socket.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -47,6 +47,9 @@ enum ENTITYUPDATE
  */
 class CBasicPacket
 {
+protected:
+    uint8*  data;
+
 // Mark these members as private, so that they can't be set without using their
 // specialised setters.
 private:
@@ -54,7 +57,6 @@ private:
     uint8& size;
 
 protected:
-    uint8*  data;
     uint16& code;
     bool    owner;
 
@@ -108,6 +110,15 @@ public:
 
     CBasicPacket& operator=(const CBasicPacket& other) = delete;
     CBasicPacket& operator=(CBasicPacket&& other) = delete;
+
+    /// <summary>
+    /// Copies the given packet data.
+    /// </summary>
+    /// <param name="other"></param>
+    void copy(CBasicPacket* other)
+    {
+        memcpy(data, other->data, PACKET_SIZE);
+    }
 
     /* Getters for the header */
 

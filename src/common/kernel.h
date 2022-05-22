@@ -23,6 +23,7 @@
 #define _KERNEL_H_
 
 #include "cbasetypes.h"
+#include "console_service.h"
 
 extern int    arg_c;
 extern char** arg_v;
@@ -31,11 +32,12 @@ extern int   runflag;
 extern char* SERVER_NAME;
 extern char  SERVER_TYPE;
 
-extern int   parse_console(char* buf);
 extern void  log_init(int, char**);
 extern int32 do_init(int32, char**);
 extern void  set_server_type(void);
 extern void  do_abort(void);
 extern void  do_final(int);
+
+extern std::unique_ptr<ConsoleService> gConsoleService;
 
 #endif // _KERNEL_H_

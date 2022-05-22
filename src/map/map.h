@@ -35,7 +35,7 @@
 #include <list>
 #include <map>
 
-#include "commandhandler.h"
+#include "command_handler.h"
 #include "zone.h"
 
 enum SKILLUP_STYLE
@@ -56,8 +56,6 @@ enum SKILLUP_STYLE
 
 struct map_config_t
 {
-    uint32 buffer_size; // max size of recv buffer -> default 1800 bytes
-
     uint16 usMapPort; // port of map server      -> xxxxx
     uint32 uiMapIp;   // ip of map server        -> INADDR_ANY
 
@@ -106,6 +104,8 @@ struct map_config_t
     bool        craft_modern_system;         // Enable/disable current retail margins and rates.
     uint16      craft_common_cap;            // Used in crafting, in synthutils.cpp. Defines skill limit before specialization system
     uint16      craft_specialization_points; // Used in crafting, in synthutils.cpp. Defines the maximum points of the specialization system.
+    bool        fishing_enable;              // Enable/disable fishing system.
+    float       fishing_skill_multiplier;    // Used to multiply the chance of gaining a skill up when fishing.
     float       mob_tp_multiplier;           // Multiplies the amount of TP mobs gain on any effect that would grant TP
     float       player_tp_multiplier;        // Multiplies the amount of TP players gain on any effect that would grant TP
     bool        mob_no_despawn;              // Toggle whether mobs roam home or despawn
@@ -164,21 +164,16 @@ struct map_config_t
 
 struct map_session_data_t
 {
-    uint32     client_addr;
-    uint16     client_port;
-    uint16     client_packet_id;   // id последнего пакета, пришедшего от клиента
-    uint16     server_packet_id;   // id последнего пакета, отправленного сервером
-    int8*      server_packet_data; // указатель на собранный пакет, который был ранее отправлен клиенту
-    size_t     server_packet_size; // размер пакета, который был ранее отправлен клиенту
-    time_t     last_update;        // time of last packet recv
-    blowfish_t blowfish;           // unique decypher keys
-    CCharEntity* PChar;            // game char
-    uint8        shuttingDown;     // prevents double session closing
-
-    map_session_data_t()
-    {
-        shuttingDown = 0;
-    }
+    uint32       client_addr        = 0;
+    uint16       client_port        = 0;
+    uint16       client_packet_id   = 0;        // id of the last packet that came from the client
+    uint16       server_packet_id   = 0;        // id of the last packet sent by the server
+    int8*        server_packet_data = nullptr;  // a pointer to the packet, which was previously sent to the client
+    size_t       server_packet_size = 0;        // the size of the packet that was previously sent to the client
+    time_t       last_update        = 0;        // time of last packet recv
+    blowfish_t   blowfish           = {};       // unique decypher keys
+    CCharEntity* PChar              = nullptr;  // game char
+    uint8        shuttingDown       = 0;        // prevents double session closing
 };
 
 extern map_config_t map_config;
@@ -205,7 +200,6 @@ int32 parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*
 int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*); // main function is building big packet
 
 void map_helpscreen(int32 flag);    // Map-Server Version Screen [venom]
-void map_versionscreen(int32 flag); // Map-Server Version Screen [venom]
 
 int32 map_config_read(const int8* cfgName); // Map-Server Config [venom]
 int32 map_config_default();

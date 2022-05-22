@@ -382,17 +382,21 @@ namespace conquest
             luautils::SetRegionalConquestOverseers(i);
         }
 
-        zoneutils::ForEachZone([](CZone* PZone) {
+        // clang-format off
+        zoneutils::ForEachZone([](CZone* PZone)
+        {
             // only find chars for zones that have had conquest updated
             if (PZone->GetRegionID() <= REGION_TYPE::TAVNAZIA)
             {
                 luautils::OnConquestUpdate(PZone, Conquest_Tally_End);
-                PZone->ForEachChar([](CCharEntity* PChar) {
+                PZone->ForEachChar([](CCharEntity* PChar)
+                {
                     PChar->pushPacket(new CConquestPacket(PChar));
                     PChar->PLatentEffectContainer->CheckLatentsZone();
                 });
             }
         });
+        // clang-format on
 
         ShowDebug("Conquest Weekly Update is finished");
     }

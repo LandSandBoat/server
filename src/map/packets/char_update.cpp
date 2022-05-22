@@ -19,8 +19,8 @@
 ===========================================================================
 */
 
-#include "../../common/logging.h"
-#include "../../common/socket.h"
+#include "common/logging.h"
+#include "common/socket.h"
 
 #include <cstring>
 
@@ -69,7 +69,7 @@ CCharUpdatePacket::CCharUpdatePacket(CCharEntity* PChar)
     ref<uint8>(0x29) = PChar->GetGender() + (PChar->look.size > 0 ? PChar->look.size * 8 : 2); // + model sizing : 0x02 - 0; 0x08 - 1; 0x10 - 2;
     ref<uint8>(0x2C) = PChar->GetSpeed();
     ref<uint16>(0x2E) |= PChar->speedsub << 1; // Not sure about this, it was a work around when we set speedsub incorrectly..
-    ref<uint8>(0x30) = PChar->isInEvent() ? ANIMATION_EVENT : PChar->animation;
+    ref<uint8>(0x30) = PChar->isInEvent() ? (uint8)ANIMATION_EVENT : PChar->animation;
 
     CItemLinkshell* linkshell = (CItemLinkshell*)PChar->getEquip(SLOT_LINK1);
 
@@ -105,7 +105,7 @@ CCharUpdatePacket::CCharUpdatePacket(CCharEntity* PChar)
 
     if (PChar->animation == ANIMATION_FISHING_START)
     {
-        ref<uint8>(0x4A) = 0x0D; // was 0x10
+        ref<uint16>(0x4A) = PChar->hookDelay;
     }
     ref<uint64>(0x4C) = PChar->StatusEffectContainer->m_Flags;
 

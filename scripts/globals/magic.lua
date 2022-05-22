@@ -758,6 +758,9 @@ end
         dmg = utils.clamp(dmg, 0, 99999)
     end
 
+    -- handle one for all
+    dmg = utils.oneforall(target, dmg)
+
     --handling stoneskin
     dmg = utils.stoneskin(target, dmg)
     dmg = utils.clamp(dmg, -99999, 99999)
@@ -779,7 +782,7 @@ end
  end
 
 function finalMagicNonSpellAdjustments(caster, target, ele, dmg)
-    --Handles target's HP adjustment and returns SIGNED dmg (negative values on absorb)
+    -- Handles target's HP adjustment and returns SIGNED dmg (negative values on absorb)
 
     dmg = target:magicDmgTaken(dmg)
 
@@ -788,7 +791,10 @@ function finalMagicNonSpellAdjustments(caster, target, ele, dmg)
         dmg = utils.clamp(dmg, 0, 99999)
     end
 
-    --handling stoneskin
+    -- handle one for all
+    dmg = utils.oneforall(target, dmg)
+
+    -- handling stoneskin
     dmg = utils.stoneskin(target, dmg)
 
     dmg = utils.clamp(dmg, -99999, 99999)
@@ -798,9 +804,9 @@ function finalMagicNonSpellAdjustments(caster, target, ele, dmg)
     else
         target:takeDamage(dmg, caster, xi.attackType.MAGICAL, xi.damageType.ELEMENTAL + ele)
     end
-    --Not updating enmity from damage, as this is primarily used for additional effects (which don't generate emnity)
-    -- in the case that updating enmity is needed, do it manually after calling this
-    --target:updateEnmityFromDamage(caster, dmg)
+    -- Not updating enmity from damage, as this is primarily used for additional effects (which don't generate emnity)
+    --  in the case that updating enmity is needed, do it manually after calling this
+    -- target:updateEnmityFromDamage(caster, dmg)
 
     return dmg
 end
