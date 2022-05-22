@@ -9,7 +9,7 @@ g_mixins = g_mixins or {}
 
 g_mixins.warders_cop = function(mob)
 
-    mob:addListener('COMBAT_TICK', 'WARDER_CTICK', function(mob)
+    mob:addListener('COMBAT_TICK', 'WARDER_CTICK', function(mobArg)
         local battletime = mob:getBattleTime()
         local changeTime = mob:getLocalVar('changeTime')
         local initiate = mob:getLocalVar('initiate')
@@ -39,7 +39,7 @@ g_mixins.warders_cop = function(mob)
         end
     end)
 
-    mob:addListener('WEAPONSKILL_STATE_ENTER', 'WS_START_MSG', function(mob, skillID)
+    mob:addListener('WEAPONSKILL_STATE_ENTER', 'WS_START_MSG', function(mobArg, skillID)
         if skillID == 561 then -- if warders use Electromagnetic Field, use Reactive Armor next
             mob:setLocalVar('reactive', 1)
         elseif skillID == 562 then -- if warders use Reactive Armor, use Electromagnetic Field next
