@@ -1,10 +1,8 @@
 -----------------------------------
 -- Spell: Boost-VIT
---     Boosts VIT for Allies in AoE
+-- Boosts VIT for Allies in AoE
 -----------------------------------
-require("scripts/settings/main")
-require("scripts/globals/status")
-require("scripts/globals/magic")
+require("scripts/globals/spells/spell_enhancing")
 -----------------------------------
 local spell_object = {}
 
@@ -13,9 +11,7 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    local effect = xi.effect.VIT_BOOST
-    doBoostGain(caster, target, spell, effect)
-    return effect
+    return xi.spells.spell_enhancing.useEnhancingSpell(caster, target, spell)
 end
 
 return spell_object
