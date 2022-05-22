@@ -17,6 +17,7 @@ zones[xi.zone.WESTERN_ADOULIN] =
         KEYITEM_LOST               = 6394,  -- Lost key item: <keyitem>.
         NOT_HAVE_ENOUGH_GIL        = 6395,  -- You do not have enough gil.
         YOU_OBTAIN_ITEM            = 6396,  -- You obtain  <item>!
+        NOTHING_OUT_OF_ORDINARY    = 6404,  -- There is nothing out of the ordinary here.
         CARRIED_OVER_POINTS        = 7001,  -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY    = 7002,  -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER               = 7003,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.

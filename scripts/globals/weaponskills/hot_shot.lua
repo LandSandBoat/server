@@ -30,6 +30,7 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     params.hybridWS = true
     params.ele = xi.magic.ele.FIRE
     params.skill = xi.skill.MARKSMANSHIP
+    params.includemab = true
 
     if (xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then
         params.ftp200 = 1.55 params.ftp300 = 2.1
