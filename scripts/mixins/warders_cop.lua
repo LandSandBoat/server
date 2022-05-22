@@ -4,11 +4,9 @@
 require('scripts/globals/mixins')
 require('scripts/globals/status')
 -----------------------------------
-
 g_mixins = g_mixins or {}
 
 g_mixins.warders_cop = function(mob)
-
     mob:addListener('COMBAT_TICK', 'WARDER_CTICK', function(mobArg)
         local battletime = mob:getBattleTime()
         local changeTime = mob:getLocalVar('changeTime')
@@ -18,13 +16,15 @@ g_mixins.warders_cop = function(mob)
         local reactive = mob:getLocalVar('reactive')
         local ID = zones[mob:getZoneID()]
 
-        if battletime - initiate >= 27 and
-           warder <= 1
+        if
+            battletime - initiate >= 27 and
+            warder <= 1
         then -- warder signals to the others before using abilities
             mob:showText(mob, ID.text.BEEP_BEEP)
             mob:setLocalVar('initiate', battletime)
-        elseif battletime - changeTime >= 30 and
-               warder >= 1
+        elseif
+            battletime - changeTime >= 30 and
+            warder >= 1
         then -- shortly after each will use the same ability at the same time
             mob:showText(mob, ID.text.BEEP_CLICK_WHIR)
             mob:setLocalVar('initiate', battletime)
