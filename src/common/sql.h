@@ -191,17 +191,6 @@ public:
     void Async(std::function<void(SqlConnection*)>&& func);
     void Async(std::string const& query);
 
-    template <typename... Args>
-    void Async(const char* query, Args... args)
-    {
-        TracyZoneScoped;
-
-        auto queryStr = fmt::sprintf(query, args...);
-        TracyZoneString(queryStr);
-
-        Async(queryStr);
-    }
-
     void HandleAsync();
 
 private:

@@ -30,6 +30,7 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     params.hybridWS = true
     params.ele = xi.magic.ele.EARTH
     params.skill = xi.skill.KATANA
+    params.includemab = true
 
     if xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.ftp200 = 1.375 params.ftp300 = 2.25 -- http://wiki.ffo.jp/html/720.html

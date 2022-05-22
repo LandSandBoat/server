@@ -498,7 +498,7 @@ uint64 unpackBitsLE(const uint8* target, int32 byteOffset, int32 bitOffset, uint
 
 void EncodeStringLinkshell(int8* signature, int8* target)
 {
-    uint8 encodedSignature[16];
+    uint8 encodedSignature[LinkshellStringLength];
     memset(encodedSignature, 0, sizeof encodedSignature);
     uint8 chars    = 0;
     uint8 leftover = 0;
@@ -527,8 +527,7 @@ void EncodeStringLinkshell(int8* signature, int8* target)
     leftover = (leftover == 8 || leftover == 2 ? 6 : leftover);
     packBitsLE(encodedSignature, 0xFF, 6 * chars, leftover);
 
-    // TODO: -Wno-sizeof-pointer-memaccess - sizeof references source not destination
-    strncpy((char*)target, (const char*)encodedSignature, sizeof target);
+    strncpy((char*)target, (const char*)encodedSignature, LinkshellStringLength);
 }
 
 void DecodeStringLinkshell(int8* signature, int8* target)
@@ -569,13 +568,13 @@ void DecodeStringLinkshell(int8* signature, int8* target)
             decodedSignature[currChar] = tempChar;
         }
     }
-    // TODO: -Wno-sizeof-pointer-memaccess - sizeof references source not destination
-    strncpy((char*)target, (const char*)decodedSignature, sizeof target);
+
+    strncpy((char*)target, (const char*)decodedSignature, LinkshellStringLength);
 }
 
 int8* EncodeStringSignature(int8* signature, int8* target)
 {
-    uint8 encodedSignature[12];
+    uint8 encodedSignature[SignatureStringLength];
     memset(encodedSignature, 0, sizeof encodedSignature);
     uint8 chars = 0;
     // uint8 leftover = 0;
@@ -604,8 +603,7 @@ int8* EncodeStringSignature(int8* signature, int8* target)
     // leftover = (leftover == 8 ? 6 : leftover);
     // packBitsLE(encodedSignature,0xFF,6*chars, leftover);
 
-    // TODO: -Wno-sizeof-pointer-memaccess - sizeof references source not destination
-    return (int8*)strncpy((char*)target, (const char*)encodedSignature, sizeof target);
+    return (int8*)strncpy((char*)target, (const char*)encodedSignature, SignatureStringLength);
 }
 
 void DecodeStringSignature(int8* signature, int8* target)
@@ -629,8 +627,7 @@ void DecodeStringSignature(int8* signature, int8* target)
 
         decodedSignature[currChar] = tempChar;
     }
-    // TODO: -Wno-sizeof-pointer-memaccess - sizeof references source not destination
-    strncpy((char*)target, (const char*)decodedSignature, sizeof target);
+    strncpy((char*)target, (const char*)decodedSignature, SignatureStringLength);
 }
 
 // Take a regular string of 8-bit wide chars and packs it down into an

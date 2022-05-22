@@ -25,6 +25,7 @@
 #include "entities/charentity.h"
 #include "lua/lua_baseentity.h"
 #include "lua/luautils.h"
+#include "autotranslate.h"
 
 #include <cmath>
 #include <iostream>
@@ -220,7 +221,7 @@ int32 CCommandHandler::call(sol::state& lua, CCharEntity* PChar, const int8* com
         if (map_config.audit_gm_cmd <= permission && map_config.audit_gm_cmd > 0)
         {
             std::string name       = PChar->name;
-            std::string cmdlinestr = (const char*)commandline;
+            std::string cmdlinestr = autotranslate::replaceBytes((const char*)commandline);
 
             char escaped_name[16 * 2 + 1];
             sql->EscapeString(escaped_name, name.c_str());

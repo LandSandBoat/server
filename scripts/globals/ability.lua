@@ -752,6 +752,10 @@ function AbilityFinalAdjustments(dmg,mob,skill,target,skilltype,skillparam,shado
         return 0
     end
 
+    if skilltype == xi.attackType.MAGICAL then
+        dmg = utils.oneforall(target, dmg)
+    end
+
     dmg = utils.stoneskin(target, dmg)
 
     if (dmg > 0) then
