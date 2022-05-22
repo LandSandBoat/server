@@ -110,9 +110,12 @@ xi.spells.spell_enhancing.calculateEnhancingFinalPower = function(caster, target
     --------------------
     -- Enboden effect.
     --------------------
-    --  Applied before other bonuses. TODO: Job points further enhances Embolden bonus.
-    if target:hasStatusEffect(xi.effect.EMBOLDEN) and spellGroup == xi.magic.spellGroup.WHITE then
-        finalPower = math.floor(finalPower * 1.5)
+    --  Applied before other bonuses, pet buffs seem to not work.
+    if not caster:isPet() and target:hasStatusEffect(xi.effect.EMBOLDEN) and spellGroup == xi.magic.spellGroup.WHITE then
+
+        local emboldenPower = 1.5 + target:getJobPointLevel(xi.jp.EMBOLDEN_EFFECT) / 100 -- 1 point in job point category = 1%
+
+        finalPower = math.floor(finalPower * emboldenPower)
     end
 
     ----------------------------------------
@@ -173,10 +176,11 @@ xi.spells.spell_enhancing.calculateEnhancingDuration = function(caster, target, 
     end
 
     --------------------
-    -- Embolden
+    -- Embolden, buffs cast by pet do not work.
     --------------------
-    if target:hasStatusEffect(xi.effect.EMBOLDEN) and spellGroup == xi.magic.spellGroup.WHITE then
-        duration = duration / 2
+    if not caster:isPet() and target:hasStatusEffect(xi.effect.EMBOLDEN) and spellGroup == xi.magic.spellGroup.WHITE then
+        local emboldenDurationModifier = 0.5 + target:getMod(xi.mod.EMBOLDEN_DURATION) / 100 -- 1 point = 1%
+        duration = duration * emboldenDurationModifier
     end
 
     --------------------
@@ -316,10 +320,10 @@ xi.spells.spell_enhancing.useEnhancingSpell = function(caster, target, spell)
     local duration   = xi.spells.spell_enhancing.calculateEnhancingDuration(caster, target, spell, spellId, spellGroup, spellEffect)
 
     ------------------------------
-    -- Handle Status Effects.
+    -- Handle Status Effects, Embolden buffs can only be applied by player, so do not remove embolden..
     ------------------------------
-    if caster:hasStatusEffect(xi.effect.EMBOLDEN) and spellGroup == xi.magic.spellGroup.WHITE then
-        caster:delStatusEffect(xi.effect.EMBOLDEN)
+    if not caster:isPet() and target:hasStatusEffect(xi.effect.EMBOLDEN) and spellGroup == xi.magic.spellGroup.WHITE then
+        target:delStatusEffectSilent(xi.effect.EMBOLDEN)
     end
 
     ------------------------------------------------------------
