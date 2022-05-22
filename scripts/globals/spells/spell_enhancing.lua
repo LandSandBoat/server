@@ -241,6 +241,7 @@ xi.spells.spell_enhancing.useEnhancingSpell = function(caster, target, spell)
     local spellEffect     = enhancingTable[spellId][2]
     local alwaysOverwrite = enhancingTable[spellId][7]
     local tickTime        = enhancingTable[spellId][8]
+
     ------------------------------------------------------------
     -- Handle exceptions and weird behaviour here, before calculating anything.
     ------------------------------------------------------------
