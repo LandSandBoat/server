@@ -5,7 +5,7 @@ require("scripts/globals/status")
 -----------------------------------
 local effect_object = {}
 
--- these functions are intentionally blank. See scritps/globals/spells/spell_enhancing.lua
+-- these functions are intentionally blank. See scripts/globals/spells/spell_enhancing.lua
 effect_object.onEffectGain = function(target, effect)
 end
 

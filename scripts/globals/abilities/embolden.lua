@@ -14,7 +14,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability, action)
-    target:addStatusEffect(xi.effect.EMBOLDEN, 0, 0, 60) -- effects handled in globals/spells/spell_enhancing.lua
+    target:addStatusEffect(xi.effect.EMBOLDEN, 0, 0, 60) -- effects handled in scripts/globals/spells/spell_enhancing.lua
 end
 
 return ability_object
