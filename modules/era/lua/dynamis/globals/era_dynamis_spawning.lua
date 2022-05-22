@@ -17,15 +17,6 @@ require("scripts/globals/msg")
 require("scripts/globals/pathfind")
 require("scripts/globals/dynamis")
 require("scripts/zones/Dynamis-Bastok/dynamis_mobs")
-require("scripts/zones/Dynamis-Beaucedine/dynamis_mobs")
-require("scripts/zones/Dynamis-Buburimu/dynamis_mobs")
-require("scripts/zones/Dynamis-Jeuno/dynamis_mobs")
-require("scripts/zones/Dynamis-Qufim/dynamis_mobs")
-require("scripts/zones/Dynamis-San_dOria/dynamis_mobs")
-require("scripts/zones/Dynamis-Tavnazia/dynamis_mobs")
-require("scripts/zones/Dynamis-Valkurm/dynamis_mobs")
-require("scripts/zones/Dynamis-Windurst/dynamis_mobs")
-require("scripts/zones/Dynamis-Xarcabard/dynamis_mobs")
 mixins = {require("scripts/mixins/job_special")}
 require("modules/module_utils")
 
@@ -39,17 +30,17 @@ xi.dynamis = xi.dynamis or {}
 --------------------------------------------
 
 xi.dynamis.spawnWave = function(zone, waveNumber)
-    zoneID = zone:getID()
-    tableLookup = string.format(".wave%i", waveNumber)
-    for _, index in pairs(mobList[zoneID].tableLookup) do
-        mobIndex = mobList[zoneID].tableLookup[index]
-        mobType = mobList[zoneID][mobIndex].info[1]
-        if mobType == "NM" then -- NMs
-            xi.dynamis.nmDynamicSpawn(mobIndex, nil, true, zoneID)
-        elseif mobType ~= nil then -- Nightmare Mobs and Statues
-            xi.dynamis.nonStandardDynamicSpawn(mobIndex, nil, true, zoneID)
+    local zoneID = zone:getID()
+    for _, index in pairs(xi.dynamis.mobList[zoneID][waveNumber].wave) do
+        local mobIndex = xi.dynamis.mobList[zoneID][waveNumber].wave[index]
+        if mobIndex ~= nil then
+            local mobType = xi.dynamis.mobList[zoneID][mobIndex].info[1]
+            if mobType == "NM" then -- NMs
+                xi.dynamis.nmDynamicSpawn(mobIndex, nil, true, zoneID)
+            elseif mobType ~= nil then -- Nightmare Mobs and Statues
+                xi.dynamis.nonStandardDynamicSpawn(mobIndex, nil, true, zoneID)
+            end
         end
-        index = index + 1
     end
     zone:setLocalVar(string.format("Wave_%i_Spawned", waveNumber), 1)
 end
@@ -58,13 +49,13 @@ xi.dynamis.parentOnEngaged = function(mob, target, mobList)
     local zoneID = mob:getZoneID()
     local oMobIndex = mob:getLocalVar("MobIndex")
     local oMob = GetMobByID(mob:getID())
-    local forceLink = mobList[zoneID][oMobIndex].NMChildren[1]
-    for _, index in pairs(mobList[zoneID][oMobIndex].NMChildren) do
-        if mobList[zoneID][oMobIndex].NMChildren[index] == true or mobList[zoneID][oMobIndex].NMChildren[index] == false then
+    local forceLink = xi.dynamis.mobList[zoneID][oMobIndex].NMChildren[1]
+    for _, index in pairs(xi.dynamis.mobList[zoneID][oMobIndex].NMChildren) do
+        if xi.dynamis.mobList[zoneID][oMobIndex].NMChildren[index] == true or xi.dynamis.mobList[zoneID][oMobIndex].NMChildren[index] == false then
             index = index + 1
         else
-            local mobIndex = mobList[zoneID][oMobIndex].NMChildren[index]
-            local mobType = mobList[zoneID][mobIndex].info[1]
+            local mobIndex = xi.dynamis.mobList[zoneID][oMobIndex].NMChildren[index]
+            local mobType = xi.dynamis.mobList[zoneID][mobIndex].info[1]
             if mobType == "NM" then -- NMs
                 xi.dynamis.nmDynamicSpawn(mobIndex, oMobIndex, forceLink, zoneID, target, oMob)
                 index = index + 1
@@ -301,12 +292,13 @@ xi.dynamis.normalDynamicSpawn = function(mob, oMobIndex)
 end
 
 xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID, target, oMobIndex)
-    local mobMobType = mobList[zoneID][mobIndex].info[1]
-    local mobName = mobList[zoneID][mobIndex].info[2]
-    local xPos = mobList[zoneID][mobIndex].pos[1]
-    local yPos = mobList[zoneID][mobIndex].pos[2]
-    local zPos = mobList[zoneID][mobIndex].pos[3]
-    local rPos = mobList[zoneID][mobIndex].pos[4]
+    local mobMobType = xi.dynamis.mobList[zoneID][mobIndex].info[1]
+    local mobName = xi.dynamis.mobList[zoneID][mobIndex].info[2]
+    local xPos = xi.dynamis.mobList[zoneID][mobIndex].pos[1]
+    local yPos = xi.dynamis.mobList[zoneID][mobIndex].pos[2]
+    local zPos = xi.dynamis.mobList[zoneID][mobIndex].pos[3]
+    local rPos = xi.dynamis.mobList[zoneID][mobIndex].pos[4]
+    local zone = GetZone(zoneID)
     local spawnLookUp =
     {
         ["Statue"] =
@@ -366,7 +358,7 @@ xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID,
         onMobRoam = function(mob) xi.dynamis.mobOnRoam(mob) end,
         onMobRoamAction = function(mob) xi.dynamis.mobOnRoamAction(mob) end,
         onMobDeath = function(mob, playerArg, isKiller)
-            xi.dynamis.mobOnDeath(mob, mobList[zoneID], zones[zoneID].text.DYNAMIS_TIME_EXTEND)
+            xi.dynamis.mobOnDeath(mob, xi.dynamis.mobList[zoneID], zones[zoneID].text.DYNAMIS_TIME_EXTEND)
         end,
     })
     mob:setSpawn(xPos, yPos, zPos, rPos)
@@ -392,20 +384,20 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
     local yPos = nil
     local zPos = nil
     local rPos = nil
-    if mobList[zoneID][mobIndex].pos[1] == nil then
+    if xi.dynamis.mobList[zoneID][mobIndex].pos[1] == nil then
         xPos = oMob:getXPos()
         yPos = oMob:getYPos()
         zPos = oMob:getZPos()
         rPos = oMob:getRotPos()
     else
-        xPos = mobList[zoneID][mobIndex].pos[1]
-        yPos = mobList[zoneID][mobIndex].pos[2]
-        zPos = mobList[zoneID][mobIndex].pos[3]
-        rPos = mobList[zoneID][mobIndex].pos[4]
+        xPos = xi.dynamis.mobList[zoneID][mobIndex].pos[1]
+        yPos = xi.dynamis.mobList[zoneID][mobIndex].pos[2]
+        zPos = xi.dynamis.mobList[zoneID][mobIndex].pos[3]
+        rPos = xi.dynamis.mobList[zoneID][mobIndex].pos[4]
     end
-    local mobName = mobList[zoneID][mobIndex].info[2]
-    local mobFamily = mobList[zoneID][mobIndex].info[3]
-    local mainJob = mobList[zoneID][mobIndex].info[4]
+    local mobName = xi.dynamis.mobList[zoneID][mobIndex].info[2]
+    local mobFamily = xi.dynamis.mobList[zoneID][mobIndex].info[3]
+    local mainJob = xi.dynamis.mobList[zoneID][mobIndex].info[4]
     local nmInfoLookup = 
     {
         -- Below use used to lookup Beastmen NMs
@@ -504,7 +496,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         onMobMagicPrepare = function(mob, target) end
         onMobWeaponSkillPrepare = function(mob, target) end
         onMobWeaponSkill = function( target, mob, skill) end
-        onMobDeath = function(mob, player, isKiller) xi.dynamis.mobOnDeath(mob, mobList[zoneID], zones[zoneID].text.DYNAMIS_TIME_EXTEND, mobVar) end
+        onMobDeath = function(mob, player, isKiller) xi.dynamis.mobOnDeath(mob, xi.dynamis.mobList[zoneID], zones[zoneID].text.DYNAMIS_TIME_EXTEND, mobVar) end
     elseif mobName == "Gu'Dha Effigy" or mobName == "Goblin Golem" or mobName == "Overlord's Tombstone" or mobName == "Tzee Xicu Idol" then -- City Dynamis Megabosses (Bastok, Jeuno, Sandy, Windy)
         mobVar =  nmInfoLookup[mobFamily][mobName][7]
         mobNameFound = nmInfoLookup[mobName][1]

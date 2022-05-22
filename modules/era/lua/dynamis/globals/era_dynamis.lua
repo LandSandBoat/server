@@ -15,6 +15,7 @@ require("scripts/globals/utils")
 require("scripts/globals/zone")
 require("scripts/globals/msg")
 require("scripts/globals/pathfind")
+require("scripts/zones/Dynamis-Bastok/dynamis_mobs")
 mixins = {require("scripts/mixins/job_special")}
 require("modules/module_utils")
 --------------------------------------------
@@ -711,36 +712,27 @@ xi.dynamis.dynaInfoEra =
 
 }
 
-xi.dynamis.eyesEra =
-{
-    NONE    = 0,
-    RED     = 1,
-    BLUE    = 2,
-    GREEN   = 3,
-}
-
 --------------------------------------------
 --      onZoneTick Dynamis Functions      --
 --------------------------------------------
 -- 
 xi.dynamis.handleDynamis = function(zone)
-    if GetServerVariable(string.format("[DYNA]ValidOnTick_%i", zone:getID())) == 1 then -- Check if dynamis should be active. This is to save resources when the zone is not in use.
-        require(string.format("scripts/zones/%s/dynamis_mobs", zone:getName()))
-        local zoneToken = GetServerVariable(string.format("[DYNA]Token_%i", zone:getID()))
-        local zoneExpireTime = GetServerVariable(string.format("[DYNA]Timepoint_%i", zone:getID()))
+    --if GetServerVariable(string.format("[DYNA]ValidOnTick_%s", zone:getID())) == 1 then -- Check if dynamis should be active. This is to save resources when the zone is not in use.
+        local zoneToken = GetServerVariable(string.format("[DYNA]Token_%s", zone:getID()))
+        local zoneExpireTime = GetServerVariable(string.format("[DYNA]Timepoint_%s", zone:getID()))
         local playersInZone = zone:getPlayers()
         local zoneID = zone:getID()
 
         for _, player in pairs(playersInZone) do
             xi.dynamis.verifyHoldsValidHourglass(player, zoneToken, zoneExpireTime)
 
-            if os.time() >= player:getCharVar(string.format("[DYNA]EjectPlayer_%i", zone:getID())) then
+            if os.time() >= player:getCharVar(string.format("[DYNA]EjectPlayer_%s", zone:getID())) then
                 xi.dynamis.ejectPlayer(player)
             end
         end
 
-        for waveNumber = 2, 10 do
-            if mobList[zoneID].waveDefeatRequirements[waveNumber] == true and zone:getLocalVar(string.format("Wave_%i_Spawned", waveNumber)) ~= 1 then
+        for waveNumber = 2, xi.dynamis.mobList[zoneID].maxWaves do
+            if xi.dynamis.mobList[zoneID].waveDefeatRequirements[waveNumber] == true and zone:getLocalVar(string.format("Wave_%i_Spawned", waveNumber)) ~= 1 then
                 xi.dynamis.spawnWave(zone, waveNumber)
                 waveNumber = waveNumber + 1
             else
@@ -748,42 +740,42 @@ xi.dynamis.handleDynamis = function(zone)
             end
         end
 
-        if (GetServerVariable(string.format("[DYNA]Given10MinuteWarning_%i", zone:getID())) == 0) and (xi.dynamis.getDynaTimeRemaining(zone) < 660) then -- If now is < 11 minutes give warning.
+        if (GetServerVariable(string.format("[DYNA]Given10MinuteWarning_%s", zone:getID())) == 0) and (xi.dynamis.getDynaTimeRemaining(zone) < 660) then -- If now is < 11 minutes give warning.
             xi.dynamis.dynamisTimeWarning(zone) -- Send time warning.
-            SetServerVariable(string.format("[DYNA]Given10MinuteWarning_%i", zone:getID()), 1) -- Sets to true to not give another warning.
+            SetServerVariable(string.format("[DYNA]Given10MinuteWarning_%s", zone:getID()), 1) -- Sets to true to not give another warning.
         end
 
-        if (GetServerVariable(string.format("[DYNA]Given3MinuteWarning_%i", zone:getID())) == 0) and (xi.dynamis.getDynaTimeRemaining(zone) < 240) then -- If now is < 4 minutes give warning.
+        if (GetServerVariable(string.format("[DYNA]Given3MinuteWarning_%s", zone:getID())) == 0) and (xi.dynamis.getDynaTimeRemaining(zone) < 240) then -- If now is < 4 minutes give warning.
             xi.dynamis.dynamisTimeWarning(zone) -- Send time warning.
-            SetServerVariable(string.format("[DYNA]Given3MinuteWarning_%i", zone:getID()), 1) -- Sets to true to not give another warning.
+            SetServerVariable(string.format("[DYNA]Given3MinuteWarning_%s", zone:getID()), 1) -- Sets to true to not give another warning.
         end
 
-        if (GetServerVariable(string.format("[DYNA]Given1MinuteWarning_%i", zone:getID())) == 0) and (xi.dynamis.getDynaTimeRemaining(zone) < 120) then -- If now is < 4 minutes give warning.
+        if (GetServerVariable(string.format("[DYNA]Given1MinuteWarning_%s", zone:getID())) == 0) and (xi.dynamis.getDynaTimeRemaining(zone) < 120) then -- If now is < 4 minutes give warning.
             xi.dynamis.dynamisTimeWarning(zone) -- Send time warning.
-            SetServerVariable(string.format("[DYNA]Given1MinuteWarning_%i", zone:getID()), 1) -- Sets to true to not give another warning.
+            SetServerVariable(string.format("[DYNA]Given1MinuteWarning_%s", zone:getID()), 1) -- Sets to true to not give another warning.
         end
 
-        if (GetServerVariable(string.format("[DYNA]ExpireRoutine_%i", zone:getID())) == 0) and (xi.dynamis.getDynaTimeRemaining(zone) < 0) then -- If now is < 0 minutes remove players and flag cleanup.
+        if (GetServerVariable(string.format("[DYNA]ExpireRoutine_%s", zone:getID())) == 0) and (xi.dynamis.getDynaTimeRemaining(zone) < 0) then -- If now is < 0 minutes remove players and flag cleanup.
             xi.dynamis.ejectAllPlayers(zone) -- Eject players from the zone.
-            SetServerVariable(string.format("[DYNA]ExpireRoutine_%i", zone:getID()), os.time() + 30) -- Flags zone to start cleanup.
+            SetServerVariable(string.format("[DYNA]ExpireRoutine_%s", zone:getID()), os.time() + 30) -- Flags zone to start cleanup.
         end
 
-        if GetServerVariable(string.format("[DYNA]ExpireRoutine_%i", zone:getID())) ~= 0 then -- Zone should start cleanup.
-            if GetServerVariable(string.format("[DYNA]ExpireRoutine_%i", zone:getID())) <= os.time() then -- Checks to see if 30s passed between start and now.
+        if GetServerVariable(string.format("[DYNA]ExpireRoutine_%s", zone:getID())) ~= 0 then -- Zone should start cleanup.
+            if GetServerVariable(string.format("[DYNA]ExpireRoutine_%s", zone:getID())) <= os.time() then -- Checks to see if 30s passed between start and now.
                 xi.dynamis.cleanupDynamis(zone) -- Runs cleanup function.
             end
         end
 
         if playersInZone == nil then
-            zone:setLocalVar(string.format("[DYNA]NoPlayersInZone_%i", zone:getID()), os.time + (60 * 15)) -- Give 15 minutes for zone to repopulate.
+            zone:setLocalVar(string.format("[DYNA]NoPlayersInZone_%s", zone:getID()), os.time() + (60 * 15)) -- Give 15 minutes for zone to repopulate.
         else
-            zone:setLocalVar(string.format("[DYNA]NoPlayersInZone_%i", zone:getID()), os.time + (60 * 60 * 5)) -- Ignore for 5 hours or until zone empties.
+            zone:setLocalVar(string.format("[DYNA]NoPlayersInZone_%s", zone:getID()), os.time() + (60 * 60 * 5)) -- Ignore for 5 hours or until zone empties.
         end
 
-        if GetServerVariable(string.format("[DYNA]NoPlayersInZone_%i", zone:getID())) <= os.time() then
+        if GetServerVariable(string.format("[DYNA]NoPlayersInZone_%s", zone:getID())) <= os.time() then
             xi.dynamis.cleanupDynamis(zone)
         end
-    end
+    --end
 end
 
 --------------------------------------------
@@ -791,9 +783,8 @@ end
 --------------------------------------------
 
 xi.dynamis.onNewDynamis = function(player)
-    local zone = GetZone(xi.dynamis.entryInfoEra[player:getZoneID()].zoneName)
-    require(string.format("scripts/zones/%s/dynamis_mobs", zone:getName()))
-    SetServerVariable(string.format("[DYNA]ValidOnTick_%i", xi.dynamis.dynaInfoEra[player:getZoneID()].dynaZone), 1)
+    SetServerVariable(string.format("[DYNA]ValidOnTick_%s", xi.dynamis.dynaInfoEra[player:getZoneID()].dynaZone), 1)
+    local zone = GetZone(xi.dynamis.dynaInfoEra[player:getZoneID()].dynaZone)
     xi.dynamis.spawnWave(zone, 1) -- Spawn Wave 1
 end
 
@@ -802,26 +793,26 @@ end
 --------------------------------------------
 
 xi.dynamis.addTimetoDynamis = function(zone, extensionTime, msg)
-    local prevExpire = GetServerVariable(string.format("[DYNA]Timepoint_%i", zone:getID())) -- Determine previous expiration time.
+    local prevExpire = GetServerVariable(string.format("[DYNA]Timepoint_%s", zone:getID())) -- Determine previous expiration time.
     local expirationTime = prevExpire + (60 * extensionTime) -- Add more time to increase previous expiration point.
     playersInZone = zone:getPlayers()
     for _, player in pairs(playersInZone) do
         player:messageSpecial(zones[zone].text.DYNAMIS_TIME_EXTEND, extensionTime) -- Send extension time message.
         xi.dynamis.updateHourglass(player) -- Runs hourglass update function per player.
     end
-    SetServerVariable(string.format("[DYNA]Timepoint_%i", zone:getID()), (60 * expirationTime))
+    SetServerVariable(string.format("[DYNA]Timepoint_%s", zone:getID()), (60 * expirationTime))
 
     local timeRemaining = xi.dynamis.getDynaTimeRemaining(zone) -- Gets the time remaining in seconds.
     if timeRemaining > 660 then -- Checks if time remaining > 11 minutes.
-        SetServerVariable(string.format("[DYNA]Given10MinuteWarning_%i", zone:getID()), 0) -- Resets var if time remaining greater than threshold.
+        SetServerVariable(string.format("[DYNA]Given10MinuteWarning_%s", zone:getID()), 0) -- Resets var if time remaining greater than threshold.
     end
 
     if timeRemaining > 240 then -- Checks if time remaining > 4 minutes.
-        SetServerVariable(string.format("[DYNA]Given3MinuteWarning_%i", zone:getID()), 0) -- Resets var if time remaining greater than threshold.
+        SetServerVariable(string.format("[DYNA]Given3MinuteWarning_%s", zone:getID()), 0) -- Resets var if time remaining greater than threshold.
     end
 
     if timeRemaining > 120 then -- Checks if time remaining > 2 minutes.
-        SetServerVariable(string.format("[DYNA]Given1MinuteWarning_%i", zone:getID()), 0) -- Resets var if time remaining greater than threshold.
+        SetServerVariable(string.format("[DYNA]Given1MinuteWarning_%s", zone:getID()), 0) -- Resets var if time remaining greater than threshold.
     end
 end
 
@@ -833,20 +824,20 @@ xi.dynamis.ejectAllPlayers = function(zone)
 end
 
 xi.dynamis.getDynaTimeRemaining = function(zone)
-    local dynaTimeRemaining = (GetServerVariable(string.format("[DYNA]Timepoint_%i", zone:getID())) - os.time()) -- Checks difference between the expiry timepoint and now.
+    local dynaTimeRemaining = (GetServerVariable(string.format("[DYNA]Timepoint_%s", zone:getID())) - os.time()) -- Checks difference between the expiry timepoint and now.
     return dynaTimeRemaining -- Returns difference.
 end
 
 xi.dynamis.cleanupDynamis = function(zone)
-    SetServerVariable(string.format("[DYNA]RegisteredPlayers_%i", zone:getID()), 0)
-    SetServerVariable(string.format("[DYNA]Token_%i", zone:getID()), 0)
-    SetServerVariable(string.format("[DYNA]Timepoint_%i", zone:getID()), 0)
-    SetServerVariable(string.format("[DYNA]OriginalRegistrant_%i", zone:getID()), 0)
-    SetServerVariable(string.format("[DYNA]Given10MinuteWarning_%i", zone:getID()), 0)
-    SetServerVariable(string.format("[DYNA]Given3MinuteWarning_%i", zone:getID()), 0)
-    SetServerVariable(string.format("[DYNA]Given1MinuteWarning_%i", zone:getID()), 0)
-    SetServerVariable(string.format("[DYNA]ExpireRoutine_%i", zone:getID()), 0)
-    SetServerVariable(string.format("[DYNA]ValidOnTick_%i", zone:getID()), 0)
+    SetServerVariable(string.format("[DYNA]RegisteredPlayers_%s", zone:getID()), 0)
+    SetServerVariable(string.format("[DYNA]Token_%s", zone:getID()), 0)
+    SetServerVariable(string.format("[DYNA]Timepoint_%s", zone:getID()), 0)
+    SetServerVariable(string.format("[DYNA]OriginalRegistrant_%s", zone:getID()), 0)
+    SetServerVariable(string.format("[DYNA]Given10MinuteWarning_%s", zone:getID()), 0)
+    SetServerVariable(string.format("[DYNA]Given3MinuteWarning_%s", zone:getID()), 0)
+    SetServerVariable(string.format("[DYNA]Given1MinuteWarning_%s", zone:getID()), 0)
+    SetServerVariable(string.format("[DYNA]ExpireRoutine_%s", zone:getID()), 0)
+    SetServerVariable(string.format("[DYNA]ValidOnTick_%s", zone:getID()), 0)
     xi.dynamis.ejectAllPlayers(zone) -- Remove Players (This is precautionary but not necessary.)
     
     -- Cleanup Zone
@@ -882,13 +873,15 @@ xi.dynamis.registerDynamis = function(player)
     xi.dynamis.setOriginalExpiryTimepoint(player) -- Create original expiry timepoint.
     xi.dynamis.onNewDynamis(player) -- Start spawning wave 1.
 
-    while player:hasItem(dynamis_timeless) do -- Check for instances of timeless, players should only be able to carry one at a time.
-        player:delItem(dynamis_timeless) -- Deletes timeless hourglass.
-    end
+    -- while player:hasItem(dynamis_timeless) do -- Check for instances of timeless, players should only be able to carry one at a time.
+    --     player:delItem(dynamis_timeless, 1) -- Deletes timeless hourglass.
+    -- end
 
-    if GetServerVariable(string.format("[DYNA]Token_%i", xi.dynamis.dynaInfoEra[player:getZoneID()].dynaZone)) ~= 0 then
-        local dynamisToken = GetServerVariable(string.format("[DYNA]Token_%i", xi.dynamis.dynaInfoEra[player:getZoneID()].dynaZone))
-        local hourglassInitial = string.format("%s : %s", xi.dynamis.dynaInfoEra[player:getZoneID()].dynaNameShort, dynamisToken)
+    if GetServerVariable(string.format("[DYNA]Token_%s", xi.dynamis.dynaInfoEra[player:getZoneID()].dynaZone)) ~= 0 then
+        local dynamisToken = GetServerVariable(string.format("[DYNA]Token_%s", xi.dynamis.dynaInfoEra[player:getZoneID()].dynaZone))
+        print(dynamisToken)
+        local hourglassInitial = string.format("%s_%s", xi.dynamis.dynaInfoEra[player:getZoneID()].dynaNameShort, math.floor(dynamisToken / 100))
+        print(hourglassInitial)
         player:addItem({id=dynamis_perpetual, signature=hourglassInitial}) -- Add a perpetual hourglass with token signature.
         player:messageSpecial(xi.dynamis.dynaIDLookup[player:getZoneID()].text.INFORMATION_RECORDED, dynamis_perpetual)
         player:messageSpecial(zones[player:getZoneID()].text.ITEM_OBTAINED, dynamis_perpetual)
@@ -896,24 +889,25 @@ xi.dynamis.registerDynamis = function(player)
 end
 
 xi.dynamis.setDynanamisToken = function(player)
-    SetServerVariable(string.format("[DYNA]Token_%i", xi.dynamis.dynaInfoEra[player:getZoneID()].dynaZone), ((xi.dynamis.dynaInfoEra[player:getZoneID()].dynaZone * math.random(1,100)) + (zone:getID() * math.random(1, 50)))) -- Pseudo random function to generate unique token.
+    SetServerVariable(string.format("[DYNA]Token_%s", xi.dynamis.dynaInfoEra[player:getZoneID()].dynaZone), ((xi.dynamis.dynaInfoEra[player:getZoneID()].dynaZone * math.random(1,100)) + (xi.dynamis.dynaInfoEra[player:getZoneID()].dynaZone * math.random(1, 50)))) -- Pseudo random function to generate unique token.
 end
 
 xi.dynamis.setOriginalExpiryTimepoint = function(player)
     expirationTime = os.time() + (60 * (60 + dynamis_staging_time)) -- Amount of time to extend timepoint by. 60 minutes by default for fresh zones.
-    SetServerVariable(string.format("[DYNA]Timepoint_%i", xi.dynamis.dynaInfoEra[player:getZoneID()].dynaZone, expirationTime)) -- Sets timepoint which dynamis will expire.
+    SetServerVariable(string.format("[DYNA]Timepoint_%s", xi.dynamis.dynaInfoEra[player:getZoneID()].dynaZone), expirationTime) -- Sets timepoint which dynamis will expire.
 end
 
 xi.dynamis.registerPlayer = function(player)
-    player:setCharVar(string.format("[DYNA]PlayerRegistered_%i", (xi.dynamis.dynaInfoEra[player:getZoneID()].dynaZone), GetServerVariable(string.format("[DYNA]Token_%i", xi.dynamis.dynaInfoEra[player:getZoneID()].dynaZone)) + player:getZoneID())) -- Obfuscate player registration value with dynamis token + player's zone ID info. (Ensures the player is counted as new registrant if token is different.)
-    player:setCharVar(string.format("[DYNA]PlayerZoneToken_%i", xi.dynamis.dynaInfoEra[player:getZoneID()].dynaZone), GetServerVariable(string.format("[DYNA]Token_%i", xi.dynamis.dynaInfoEra[player:getZoneID()].dynaZone))) -- Give the player a copy of the token value.
+    player:setCharVar(string.format("[DYNA]PlayerRegisterKey_%s", (xi.dynamis.dynaInfoEra[player:getZoneID()].dynaZone)), math.random(1,100))
+    player:setCharVar(string.format("[DYNA]PlayerRegistered_%s", (xi.dynamis.dynaInfoEra[player:getZoneID()].dynaZone)), (GetServerVariable(string.format("[DYNA]Token_%s", xi.dynamis.dynaInfoEra[player:getZoneID()].dynaZone)) + player:getCharVar(string.format("[DYNA]PlayerRegisterKey_%s", (xi.dynamis.dynaInfoEra[player:getZoneID()].dynaZone))))) -- Obfuscate player registration value with dynamis token + player's zone ID info. (Ensures the player is counted as new registrant if token is different.)
+    player:setCharVar(string.format("[DYNA]PlayerZoneToken_%s", xi.dynamis.dynaInfoEra[player:getZoneID()].dynaZone), GetServerVariable(string.format("[DYNA]Token_%s", xi.dynamis.dynaInfoEra[player:getZoneID()].dynaZone))) -- Give the player a copy of the token value.
 end
 
 xi.dynamis.isPlayerRegistered = function(player)
-    local registerID = player:getCharVar(string.format("[DYNA]PlayerRegistered_%i", (xi.dynamis.dynaInfoEra[player:getZoneID()].dynaZone))) -- Get player's registered ID.
-    local dynamisToken = GetServerVariable(string.format("[DYNA]Token_%i", xi.dynamis.dynaInfoEra[player:getZoneID()].dynaZone)) -- Get a copy of the dynamis token.
+    local registerID = player:getCharVar(string.format("[DYNA]PlayerRegistered_%s", (xi.dynamis.dynaInfoEra[player:getZoneID()].dynaZone))) -- Get player's registered ID.
+    local dynamisToken = GetServerVariable(string.format("[DYNA]Token_%s", xi.dynamis.dynaInfoEra[player:getZoneID()].dynaZone)) -- Get a copy of the dynamis token.
 
-    if (registerID - dynamisToken) == player:getZoneID() then -- If the remainder is the player's zoneID then they are already registered.
+    if (registerID - dynamisToken) == player:getCharVar(string.format("[DYNA]PlayerRegisterKey_%s", (xi.dynamis.dynaInfoEra[player:getZoneID()].dynaZone))) then -- If the remainder is the player's zoneID then they are already registered.
         return true -- Treat as previous registrant.
     else
         return false -- Treat as new registrant.
@@ -924,9 +918,9 @@ xi.dynamis.ejectPlayer = function(player)
     if player:getCurrentRegion() == xi.region.DYNAMIS then
         if player:getLocalVar("Warning_Text_Given") == 0 then
             player:timer(1000, function(player) player:messageSpecial(xi.dynamis.dynaIDLookup[player:getZoneID()].text.NO_LONGER_HAVE_CLEARANCE, 0, 30) end) -- Wait 1 second, send no clearance message.
-            player:setCharVar(string.format("[DYNA]PlayerRegistered_%i", xi.dynamis.dynaInfoEra[player:getZoneID()].dynaZone), 0) -- Reset player's registered status.
-            player:setCharVar(string.format("[DYNA]PlayerZoneToken_%i", xi.dynamis.dynaInfoEra[player:getZoneID()].dynaZone), 0) -- Reset player's token.
-            player:setCharVar(string.format("[DYNA]EjectPlayer_%i", xi.dynamis.dynaInfoEra[player:getZoneID()].dynaZone), -1) -- Reset player's eject timer.
+            player:setCharVar(string.format("[DYNA]PlayerRegistered_%s", xi.dynamis.dynaInfoEra[player:getZoneID()].dynaZone), 0) -- Reset player's registered status.
+            player:setCharVar(string.format("[DYNA]PlayerZoneToken_%s", xi.dynamis.dynaInfoEra[player:getZoneID()].dynaZone), 0) -- Reset player's token.
+            player:setCharVar(string.format("[DYNA]EjectPlayer_%s", xi.dynamis.dynaInfoEra[player:getZoneID()].dynaZone), -1) -- Reset player's eject timer.
             player:disengage() -- Force disengage.
             player:timer(2000, function(player) player:startCutscene(100) end) -- Wait 2 seconds then play exit CS.
             player:setLocalVar("Warning_Text_Given", 1)
@@ -939,9 +933,9 @@ xi.dynamis.updateHourglass = function(player)
     local newExpire = 0
 
     if zone:getType() == xi.zoneType.DYNAMIS then -- Check if they are in a dynamis zone. This determines the parameters for retrieving timepoint.
-        newExpire = GetServerVariable(string.format("[DYNA]Timepoint_%i", xi.dynamis.dynaInfoEra[player:getZoneID()].dynaZone)) -- Get timepoint.
+        newExpire = GetServerVariable(string.format("[DYNA]Timepoint_%s", xi.dynamis.dynaInfoEra[player:getZoneID()].dynaZone)) -- Get timepoint.
     else
-        newExpire = GetServerVariable(string.format("[DYNA]Timepoint_%i", xi.dynamis.dynaInfoEra[zone:getID()].dynaZone)) -- Get timepoint.
+        newExpire = GetServerVariable(string.format("[DYNA]Timepoint_%s", xi.dynamis.dynaInfoEra[zone:getID()].dynaZone)) -- Get timepoint.
     end
 
     local hourglassNew = string.format("%s : %s. %s, %s, %s:%s:%s%s", xi.dynamis.dynaInfoEra[player:getZoneID()].dynaNameShort, os.date("%b", newExpire), os.date("%d", 
@@ -950,7 +944,7 @@ xi.dynamis.updateHourglass = function(player)
     local numHourglass = 0
 
     while player:hasItem(dynamis_perpetual) == true do
-        player:delItem(dynamis_perpetual) -- Delete old hourglass.
+        player:delItem(dynamis_perpetual, 1) -- Delete old hourglass.
         numHourglass = numHourglass + 1 -- Keep track of the number of hourglasses removed.
     end
 
@@ -964,35 +958,35 @@ xi.dynamis.verifyHoldsValidHourglass = function(player, zoneToken, zoneExpireTim
     
     -- Nil functions are used to reduce the number of db requests. Ideally the function is provided zoneToken and zoneExpireTime
     if zoneToken == nil then -- If missing then look for it.
-        zoneToken = GetServerVariable(string.format("[DYNA]Token_%i", player:getZoneID()))
+        zoneToken = GetServerVariable(string.format("[DYNA]Token_%s", player:getZoneID()))
     end
 
     if zoneExpireTime == nil then -- If missing then look for it.
-        zoneExpireTime = GetServerVariable(string.format("[DYNA]Timepoint_%i", player:getZoneID()))
+        zoneExpireTime = GetServerVariable(string.format("[DYNA]Timepoint_%s", player:getZoneID()))
     end
 
     if player:getGMLevel() < 2 then -- Check if player is a GM.
-        if (player:hasItem(dynamis_perpetual) == false) and (player:getCharVar(string.format("[DYNA]PlayerZoneToken_%i", player:getZoneID())) == zoneToken) then
-            player:setCharVar(string.format("[DYNA]EjectPlayer_%i", player:getZoneID()), (os.time() + 30)) -- If player has no hourglass but is in the correct dynamis.
+        if (player:hasItem(dynamis_perpetual) == false) and (player:getCharVar(string.format("[DYNA]PlayerZoneToken_%s", player:getZoneID())) == zoneToken) then
+            player:setCharVar(string.format("[DYNA]EjectPlayer_%s", player:getZoneID()), (os.time() + 30)) -- If player has no hourglass but is in the correct dynamis.
         elseif (player:hasItem(dynamis_perpetual) == false) then
-            player:setCharVar(string.format("[DYNA]EjectPlayer_%i", player:getZoneID()), (os.time() + 0)) -- If player does not have hourglass and isn't in the correct dynamis.
-        elseif (player:hasItem(dynamis_perpetual) == true) and (player:getCharVar(string.format("[DYNA]PlayerZoneToken_%i", player:getZoneID())) ~= zoneToken) then
-            player:setCharVar(string.format("[DYNA]EjectPlayer_%i", player:getZoneID()), (os.time() + 0)) -- If player has an hourglass but isn't in the correct dynamis.
-        elseif (player:hasItem(dynamis_perpetual) == true) and (player:getCharVar(string.format("[DYNA]PlayerZoneToken_%i", player:getZoneID())) == zoneToken) then
-            player:setCharVar(string.format("[DYNA]EjectPlayer_%i", player:getZoneID()), zoneExpireTime) -- If player has an hourglass and is in the correct dynamis.
+            player:setCharVar(string.format("[DYNA]EjectPlayer_%s", player:getZoneID()), (os.time() + 0)) -- If player does not have hourglass and isn't in the correct dynamis.
+        elseif (player:hasItem(dynamis_perpetual) == true) and (player:getCharVar(string.format("[DYNA]PlayerZoneToken_%s", player:getZoneID())) ~= zoneToken) then
+            player:setCharVar(string.format("[DYNA]EjectPlayer_%s", player:getZoneID()), (os.time() + 0)) -- If player has an hourglass but isn't in the correct dynamis.
+        elseif (player:hasItem(dynamis_perpetual) == true) and (player:getCharVar(string.format("[DYNA]PlayerZoneToken_%s", player:getZoneID())) == zoneToken) then
+            player:setCharVar(string.format("[DYNA]EjectPlayer_%s", player:getZoneID()), zoneExpireTime) -- If player has an hourglass and is in the correct dynamis.
         else
-            player:setCharVar(string.format("[DYNA]EjectPlayer_%i", player:getZoneID()), (os.time() + 0)) -- Fail closed and force eject player.
+            player:setCharVar(string.format("[DYNA]EjectPlayer_%s", player:getZoneID()), (os.time() + 0)) -- Fail closed and force eject player.
         end
     end
 end
 
 xi.dynamis.verifyTradeHourglass = function(player, trade)
-    local dynamisToken = GetServerVariable(string.format("[DYNA]Token_%i", xi.dynamis.dynaInfoEra[player:getZoneID()].dynaZone))
-    local expireTime = GetServerVariable(string.format("[DYNA]Timepoint_%i", xi.dynamis.dynaInfoEra[player:getZoneID()].dynaZone))
+    local dynamisToken = GetServerVariable(string.format("[DYNA]Token_%s", xi.dynamis.dynaInfoEra[player:getZoneID()].dynaZone))
+    local expireTime = GetServerVariable(string.format("[DYNA]Timepoint_%s", xi.dynamis.dynaInfoEra[player:getZoneID()].dynaZone))
     local hourglassInfo = string.format("%s : %s. %s, %s, %s:%s:%s%s", xi.dynamis.dynaInfoEra[player:getZoneID()].dynaNameShort, os.date("%b", expireTime), os.date("%d", 
                                             expireTime), os.date("%Y", expireTime), os.date("%I", expireTime), os.date("%M", expireTime), 
                                             os.date("%S", expireTime), os.date("%p", expireTime)) -- New Hourglass String Ex. DynamisSan : Jan. 01, 2001, 1:11:11pm
-    if trade:getItem(0):getSignature() == string.format("%s : %s", xi.dynamis.dynaInfoEra[player:getZoneID()].dynaNameShort, dynamisToken) then -- If signature doesn't have time then new hourglass.
+    if trade:getItem(0):getSignature() == string.format("%s : %s", xi.dynamis.dynaInfoEra[player:getZoneID()].dynaNameShort, math.floor(dynamisToken / 100)) then -- If signature doesn't have time then new hourglass.
         return 1 -- New hourglass.
     elseif trade:getItem(0):getSignature() == hourglassInfo then
         return 2 -- Current hourglass.
@@ -1024,16 +1018,16 @@ xi.dynamis.entryNpcOnTrade = function(player, npc, trade)
         if dynamis_time_remaining > 0 then -- Check if another group is present.
             player:messageSpecial(xi.dynamis.dynaIDLookup[player:getZoneID()].text.ANOTHER_GROUP, xi.dynamis.entryInfoEra[zoneID].csBit)
         elseif player:getGMLevel() > 1 then -- If no other group, if GM bypass lockout and start new dynamis.
-            player:startEvent(xi.dynamis.entryInfoEra[zoneID].csRegisterGlass, xi.dynamis.entryInfoEra[zoneID].csBit, dynamis_has_entered, dynamis_reservation_cancel, dynamis_reentry_days, xi.dynamis.entryInfoEra[zoneID].maxCapacity, xi.ki.VIAL_OF_SHROUDED_SAND, dynamis_timeless, dynamis_perpetual)
+            player:startEvent(xi.dynamis.entryInfoEra[zoneID].csRegisterGlass, xi.dynamis.entryInfoEra[zoneID].csBit, dynamis_has_entered == 1 and 0 or 1, dynamis_reservation_cancel, dynamis_reentry_days, xi.dynamis.entryInfoEra[zoneID].maxCapacity, xi.ki.VIAL_OF_SHROUDED_SAND, dynamis_timeless, dynamis_perpetual)
         elseif dynamis_last_reservation < dynamis_rentry_hours then -- Still in lockout period.
             player:messageSpecial(zones[player:getZoneID()].text.YOU_CANNOT_ENTER_DYNAMIS, math.ceil(dynamis_rentry_hours - dynamis_last_reservation), xi.dynamis.entryInfoEra[zoneID].csBit)
         else -- Proceed in starting new dynamis.
-            player:startEvent(xi.dynamis.entryInfoEra[zoneID].csRegisterGlass, xi.dynamis.entryInfoEra[zoneID].csBit, dynamis_has_entered, dynamis_reservation_cancel, dynamis_reentry_days, xi.dynamis.entryInfoEra[zoneID].maxCapacity, xi.ki.VIAL_OF_SHROUDED_SAND, dynamis_timeless, dynamis_perpetual)
+            player:startEvent(xi.dynamis.entryInfoEra[zoneID].csRegisterGlass, xi.dynamis.entryInfoEra[zoneID].csBit, dynamis_has_entered == 1 and 0 or 1, dynamis_reservation_cancel, dynamis_reentry_days, xi.dynamis.entryInfoEra[zoneID].maxCapacity, xi.ki.VIAL_OF_SHROUDED_SAND, dynamis_timeless, dynamis_perpetual)
         end
     elseif npcUtil.tradeHas(trade, dynamis_perpetual, true, false) then -- Check for perpetual hourglass to  enter instance
         local dynamis_glass_valid = xi.dynamis.verifyTradeHourglass(player, trade)
         local isPlayerRegistered = xi.dynamis.isPlayerRegistered(player)
-        local dynaCapacity = GetServerVariable(string.format("[DYNA]RegisteredPlayers_%i", xi.dynamis.entryInfoEra[zoneID].enterPos[5]))
+        local dynaCapacity = GetServerVariable(string.format("[DYNA]RegisteredPlayers_%s", xi.dynamis.entryInfoEra[zoneID].enterPos[5]))
         if dynamis_glass_valid < 3 then -- 1 = New Registrant, 2 = Re-entering, 3 = Not Valid
             if player:getGMLevel() > 1 then -- Don't register GMs.
                 player:startEvent(xi.dynamis.entryInfoEra[zoneID].csDyna, xi.dynamis.entryInfoEra[zoneID].csBit, dynamis_has_entered == 1 and 0 or 1, dynamis_reservation_cancel, dynamis_reentry_days, xi.dynamis.entryInfoEra[zoneID].maxCapacity, xi.ki.VIAL_OF_SHROUDED_SAND, dynamis_timeless, dynamis_perpetual)
@@ -1041,12 +1035,12 @@ xi.dynamis.entryNpcOnTrade = function(player, npc, trade)
                 player:messageSpecial(zones[player:getZoneID()].text.YOU_CANNOT_ENTER_DYNAMIS, (dynamis_rentry_hours - dynamis_last_reservation), xi.dynamis.entryInfoEra[zoneID].csBit)
             elseif isPlayerRegistered == true then -- Allow previous registrant into the zone.
                 player:startEvent(xi.dynamis.entryInfoEra[zoneID].csDyna, xi.dynamis.entryInfoEra[zoneID].csBit, dynamis_has_entered == 1 and 0 or 1, dynamis_reservation_cancel, dynamis_reentry_days, xi.dynamis.entryInfoEra[zoneID].maxCapacity, xi.ki.VIAL_OF_SHROUDED_SAND, dynamis_timeless, dynamis_perpetual)
-                player:setCharVar(string.format("[DYNA]InflictWeakness_%i", xi.dynamis.entryInfoEra[zoneID].enterPos[5]), true) -- Tell dynamis to inflict weakness.
+                player:setCharVar(string.format("[DYNA]InflictWeakness_%s", xi.dynamis.entryInfoEra[zoneID].enterPos[5]), true) -- Tell dynamis to inflict weakness.
             elseif isPlayerRegistered == false then -- Initiate new registrant procedure.
                 if dynaCapacity < xi.dynamis.entryInfoEra[player:getZoneID()].maxCapacity then -- If not at max capacity, allow in.
                     player:startEvent(xi.dynamis.entryInfoEra[zoneID].csDyna, xi.dynamis.entryInfoEra[zoneID].csBit, dynamis_has_entered == 1 and 0 or 1, dynamis_reservation_cancel, dynamis_reentry_days, xi.dynamis.entryInfoEra[zoneID].maxCapacity, xi.ki.VIAL_OF_SHROUDED_SAND, dynamis_timeless, dynamis_perpetual)
-                    player:setCharVar(string.format("[DYNA]InflictWeakness_%i", xi.dynamis.entryInfoEra[zoneID].enterPos[5]), false) -- Tell dynamis to not inflict weakness.
-                    SetServerVariable(string.format("[DYNA]RegisteredPlayers_%i", xi.dynamis.entryInfoEra[zoneID].enterPos[5]), dynaCapacity + 1) -- Increment registered players by 1.
+                    player:setCharVar(string.format("[DYNA]InflictWeakness_%s", xi.dynamis.entryInfoEra[zoneID].enterPos[5]), false) -- Tell dynamis to not inflict weakness.
+                    SetServerVariable(string.format("[DYNA]RegisteredPlayers_%s", xi.dynamis.entryInfoEra[zoneID].enterPos[5]), dynaCapacity + 1) -- Increment registered players by 1.
                 else
                     player:PrintToPlayer("The Dynamis instance has reached its maximum capacity of".. xi.dynamis.entryInfoEra[zoneID].maxCapacity .. "registrants.", 29) -- Let player know max registration has taken place.
                 end
@@ -1067,6 +1061,8 @@ m:addOverride("xi.dynamis.entryNpcOnTrigger", function(player, npc)
         player:messageSpecial(zones[player:getZoneID()].text.DYNA_NPC_DEFAULT_MESSAGE)
         return
     end
+
+
     if xi.dynamis.entryInfoEra[zoneID].csSand ~= nil and player:getCharVar("HasSeenXarcabardDynamisCS") == 1 and player:hasKeyItem(xi.ki.VIAL_OF_SHROUDED_SAND) == false then -- If player does not have sand, start CS to give sand.
         player:startEvent(xi.dynamis.entryInfoEra[zoneID].csSand)
     elseif xi.dynamis.entryInfoEra[zoneID].csWin ~= nil and player:hasKeyItem(xi.dynamis.entryInfoEra[zoneID].winKI) and player:getCharVar(xi.dynamis.entryInfoEra[zoneID].hasSeenWinCSVar) == 0 then -- If player hasn't seen win CS play win CS.
@@ -1081,7 +1077,10 @@ xi.dynamis.entryNpcOnEventUpdate = function(player, csid, option)
     if xi.dynamis.entryInfoEra[zoneID].enabled == false then return end -- If not enabled return.
     if csid == xi.dynamis.entryInfoEra[zoneID].csRegisterGlass then -- If dynamis register glass cs.
         if option == 0 then -- If completes the cutscene.
+            player:updateEvent(2)
+            player:release()
             xi.dynamis.registerDynamis(player) -- Trigger the generation of a token, timepoint, and start spawning wave 1.
+            player:tradeComplete()
         else
             player:release() -- Failed to complete CS.
             player:messageSpecial(xi.dynamis.dynaIDLookup[player:getZoneID()].text.UNABLE_TO_CONNECT)
@@ -1121,7 +1120,7 @@ xi.dynamis.sjQMOnTrigger = function(player, npc)
                     player:setLocalVar("reraise_duration", player:getStatusEffect(xi.effect.RERAISE):getDuration())
                 end
                 player:delStatusEffect(xi.effect.SJ_RESTRICTION) -- Remove SJ restriction
-                player:setCharVar(string.format("[DYNA]SJUnlock_%i", player:getZoneID()), os.time() + 14400) -- Set Immune to reobtaining SJ_Restriction for 4 hours.
+                player:setCharVar(string.format("[DYNA]SJUnlock_%s", player:getZoneID()), os.time() + 14400) -- Set Immune to reobtaining SJ_Restriction for 4 hours.
                 if player:getLocalVar("had_reraise") == 1 and player:hasStatusEffect(xi.effect.RERAISE) == false then -- Reapply previous reraise if lost.
                         player:addStatusEffect(xi.effect.RERAISE, player:getLocalVar("reraise_power"), 0, player:getLocalVar("reraise_duration"))
                 end
@@ -1172,13 +1171,13 @@ m:addOverride("xi.dynamis.zoneOnZoneIn", function(player, prevZone)
             player:messageSpecial(ID.text.DYNAMIS_TIME_UPDATE_2, math.floor(xi.dynamis.getDynaTimeRemaining(player:getZone()) / 60), 1) -- Send message letting player know how long they have.
         end)
 
-        if player:getCharVar(string.format("[DYNA]InflictWeakness_%i", player:getZoneID())) == true then -- Should I inflict weakness?
+        if player:getCharVar(string.format("[DYNA]InflictWeakness_%s", player:getZoneID())) == true then -- Should I inflict weakness?
             player:addStatusEffect(xi.effect.WEAKNESS, 1, 3, 60 * 10) -- Inflict weakness.
-            player:setCharVar(string.format("[DYNA]InflictWeakness_%i", player:getZoneID()), false) -- Reset var.
+            player:setCharVar(string.format("[DYNA]InflictWeakness_%s", player:getZoneID()), false) -- Reset var.
         end
 
         if dynamis.xi.dynamis.dynaInfoEra[zoneId].csBit >= 7 then  -- Is this dreamlands?
-            if os.time() > player:getCharVar(string.format("[DYNA]SJUnlock_%i", player:getZoneID())) then -- Should the player be allowed to keep subjob?
+            if os.time() > player:getCharVar(string.format("[DYNA]SJUnlock_%s", player:getZoneID())) then -- Should the player be allowed to keep subjob?
                 player:addStatusEffect(xi.effect.SJ_RESTRICTION, 1, 3, 0) -- Inflict SJ Restriction
             end
         end

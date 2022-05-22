@@ -29,16 +29,16 @@ local dynamisZones =
 
 local startingZones =
 {
-    {xi.zone.BASTOK_MINES, "Bastok_Mines"},
-    {xi.zone.BEAUCEDINE_GLACIER, "Beaucedine_Glacier"},
-    {xi.zone.BUBURIMU_PENINSULA, "Buburimu_Peninsula"},
-    {xi.zone.RULUDE_GARDENS, "RuLude_Gardens"},
-    {xi.zone.QUFIM_ISLAND, "Qufim_Island"},
-    {xi.zone.SOUTHERN_SAN_DORIA, "Southern_San_dOria"},
-    {xi.zone.TAVNAZIAN_SAFEHOLD, "Tavnazian_Safehold"},
-    {xi.zone.VALKURM_DUNES, "Valkurm_Dunes"},
-    {xi.zone.WINDURST_WALLS, "Windurst_Walls"},
-    {xi.zone.XARCABARD, "Xarcabard"}
+    {xi.zone.BASTOK_MINES, "Bastok_Mines", 2},
+    {xi.zone.BEAUCEDINE_GLACIER, "Beaucedine_Glacier", 5},
+    {xi.zone.BUBURIMU_PENINSULA, "Buburimu_Peninsula", 8},
+    {xi.zone.RULUDE_GARDENS, "RuLude_Gardens", 4},
+    {xi.zone.QUFIM_ISLAND, "Qufim_Island", 9},
+    {xi.zone.SOUTHERN_SAN_DORIA, "Southern_San_dOria", 1},
+    {xi.zone.TAVNAZIAN_SAFEHOLD, "Tavnazian_Safehold", 10},
+    {xi.zone.VALKURM_DUNES, "Valkurm_Dunes", 7},
+    {xi.zone.WINDURST_WALLS, "Windurst_Walls", 3},
+    {xi.zone.XARCABARD, "Xarcabard", 6}
 }
 
 for _, zoneID in pairs(dynamisZones) do
@@ -53,15 +53,31 @@ for _, zoneID in pairs(dynamisZones) do
 end
 
 for _, zoneID in pairs(startingZones) do
-    if xi.dynamis.entryInfoEra[zoneID[1]].csBit >= 7 then
+    if zoneID[3] >= 7 then
         m:addOverride(string.format("xi.zones.%s.npcs.Hieroglyphics.onTrade", zoneID[2]),
         function(player, npc, trade)
             xi.dynamis.entryNpcOnTrade(player, npc, trade)
+        end)
+        m:addOverride(string.format("xi.zones.%s.npcs.Hieroglyphics.onEventUpdate", zoneID[2]),
+        function(player, npc, trade)
+            xi.dynamis.entryNpcOnEventUpdate(player, npc, trade)
+        end)
+        m:addOverride(string.format("xi.zones.%s.npcs.Hieroglyphics.onEventFinish", zoneID[2]),
+        function(player, npc, trade)
+            xi.dynamis.entryNpcOnEventFinish(player, npc, trade)
         end)
     else
         m:addOverride(string.format("xi.zones.%s.npcs.Trail_Markings.onTrade", zoneID[2]),
         function(player, npc, trade)
             xi.dynamis.entryNpcOnTrade(player, npc, trade)
+        end)
+        m:addOverride(string.format("xi.zones.%s.npcs.Trail_Markings.onEventUpdate", zoneID[2]),
+        function(player, npc, trade)
+            xi.dynamis.entryNpcOnEventUpdate(player, npc, trade)
+        end)
+        m:addOverride(string.format("xi.zones.%s.npcs.Trail_Markings.onEventFinish", zoneID[2]),
+        function(player, npc, trade)
+            xi.dynamis.entryNpcOnEventFinish(player, npc, trade)
         end)
     end
 end
