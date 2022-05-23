@@ -55,7 +55,7 @@ xi.spells.spell_enhancing_ninjutsu.useEnhancingNinjutsu = function(caster, targe
     --------------------------------------------------
     -- Calculate Spell Potency and subpower.
     --------------------------------------------------
-    local power, subPower = xi.spells.spell_enhancing_Ninjutsu.calculateNinjutsuPower(caster, target, spell, spellId, tier, spellEffect)
+    local power, subPower = xi.spells.spell_enhancing_ninjutsu.calculateNinjutsuPower(caster, target, spell, spellId, tier, spellEffect)
 
     ------------------------------
     -- Handle exceptions.
