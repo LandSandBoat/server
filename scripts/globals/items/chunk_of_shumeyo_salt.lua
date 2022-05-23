@@ -12,16 +12,16 @@ local item_object = {}
 
 item_object.onItemCheck= function(target, player)
     local result = 0
-	local id = target:getID()
+    local id = target:getID()
     local checkID = true
 
     for i = 0, 2 do
         if ID.mob.SNOLL_TZAR_OFFSET + i == id then
-             checkID = false
+            checkID = false
         end
     end
 
-	if checkID then -- snoll tzar
+    if checkID then -- snoll tzar
         result = xi.msg.basic.ITEM_UNABLE_TO_USE
     elseif target:checkDistance(player) > 10 then
         result = xi.msg.basic.TOO_FAR_AWAY

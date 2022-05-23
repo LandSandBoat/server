@@ -31,7 +31,12 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
         end
     end
 
-	if dmg > 0 and skill:getMsg() ~= 31 then target:tryInterruptSpell(mob, info.hitslanded) end
+    if
+        dmg > 0 and
+        skill:getMsg() ~= 31
+    then
+        target:tryInterruptSpell(mob, info.hitslanded)
+    end
     return dmg
 end
 
