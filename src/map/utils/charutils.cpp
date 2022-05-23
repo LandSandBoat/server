@@ -5412,6 +5412,14 @@ namespace charutils
         return false;
     }
 
+    uint8 getQuestStatus(CCharEntity* PChar, uint8 log, uint8 quest)
+    {
+        uint8 current  = PChar->m_questLog[log].current[quest / 8] & (1 << (quest % 8));
+        uint8 complete = PChar->m_questLog[log].complete[quest / 8] & (1 << (quest % 8));
+
+        return (complete != 0 ? 2 : (current != 0 ? 1 : 0));
+    }
+
     /************************************************************************
      *                                                                       *
      *                                                                       *
@@ -6059,13 +6067,13 @@ namespace charutils
 
         if (value == 0)
         {
-            sql->Async(fmt::format("DELETE FROM char_vars WHERE charid = {} AND varname = '{}' LIMIT 1;",
-                PChar->id, var));
+            sql->Query(fmt::format("DELETE FROM char_vars WHERE charid = {} AND varname = '{}' LIMIT 1;",
+                PChar->id, var).c_str());
         }
         else
         {
-            sql->Async(fmt::format("INSERT INTO char_vars SET charid = {}, varname = '{}', value = {} ON DUPLICATE KEY UPDATE value = {};",
-                PChar->id, var.c_str(), value, value));
+            sql->Query(fmt::format("INSERT INTO char_vars SET charid = {}, varname = '{}', value = {} ON DUPLICATE KEY UPDATE value = {};",
+                PChar->id, var.c_str(), value, value).c_str());
         }
     }
 

@@ -656,8 +656,10 @@ namespace battleutils
         if (damage > 0)
         {
             damage = std::max(damage - PDefender->getMod(Mod::PHALANX), 0);
+            damage = HandleOneForAll(PDefender, damage);
             damage = HandleStoneskin(PDefender, damage);
         }
+
         damage = std::clamp(damage, -99999, 99999);
 
         return damage;
@@ -751,7 +753,14 @@ namespace battleutils
             }
 
             // calculate damage
-            Action->spikesParam = HandleStoneskin(PAttacker, CalculateSpikeDamage(PAttacker, PDefender, Action, (uint16)(abs(damage))));
+            uint16 spikesDamage = CalculateSpikeDamage(PAttacker, PDefender, Action, (uint16)(abs(damage)));
+            if (spikesDamage > 0)
+            {
+                spikesDamage = std::max(spikesDamage - PAttacker->getMod(Mod::PHALANX), 0);
+                spikesDamage = HandleOneForAll(PAttacker, spikesDamage);
+                spikesDamage = HandleStoneskin(PAttacker, spikesDamage);
+            }
+            Action->spikesParam = spikesDamage;
 
             switch (static_cast<SPIKES>(Action->spikesEffect))
             {
@@ -889,7 +898,15 @@ namespace battleutils
         if (Action->spikesEffect > 0)
         {
             // calculate damage
-            Action->spikesParam = HandleStoneskin(PAttacker, CalculateSpikeDamage(PAttacker, PDefender, Action, (uint16)(abs(damage))));
+            uint16 spikesDamage = CalculateSpikeDamage(PAttacker, PDefender, Action, (uint16)(abs(damage)));
+            if (spikesDamage > 0)
+            {
+                spikesDamage = std::max(spikesDamage - PAttacker->getMod(Mod::PHALANX), 0);
+                spikesDamage = HandleOneForAll(PAttacker, spikesDamage);
+                spikesDamage = HandleStoneskin(PAttacker, spikesDamage);
+            }
+            Action->spikesParam = spikesDamage;
+
             PAttacker->takeDamage(Action->spikesParam, PDefender, ATTACK_TYPE::MAGICAL, GetSpikesDamageType(Action->spikesEffect));
 
             battleutils::DirtyExp(PAttacker, PDefender);
@@ -917,7 +934,17 @@ namespace battleutils
             else
             {
                 auto ratio          = std::clamp<uint8>(damage / 4, 1, 255);
-                Action->spikesParam = HandleStoneskin(PAttacker, damage - xirand::GetRandomNumber<uint16>(ratio) + xirand::GetRandomNumber<uint16>(ratio));
+
+                // calculate damage
+                uint16 spikesDamage = CalculateSpikeDamage(PAttacker, PDefender, Action, damage - xirand::GetRandomNumber<uint16>(ratio) + xirand::GetRandomNumber<uint16>(ratio));
+                if (spikesDamage > 0)
+                {
+                    spikesDamage = std::max(spikesDamage - PAttacker->getMod(Mod::PHALANX), 0);
+                    spikesDamage = HandleOneForAll(PAttacker, spikesDamage);
+                    spikesDamage = HandleStoneskin(PAttacker, spikesDamage);
+                }
+                Action->spikesParam = spikesDamage;
+
                 PAttacker->takeDamage(Action->spikesParam, PDefender, ATTACK_TYPE::MAGICAL, GetSpikesDamageType(spikesType));
             }
 
@@ -3969,6 +3996,7 @@ namespace battleutils
         if (damage > 0)
         {
             damage = std::max(damage - PDefender->getMod(Mod::PHALANX), 0);
+            damage = HandleOneForAll(PDefender, damage);
             damage = HandleStoneskin(PDefender, damage);
             HandleAfflatusMiseryDamage(PDefender, damage);
         }
@@ -5434,6 +5462,19 @@ namespace battleutils
                 PDefender->StatusEffectContainer->DelStatusEffect(EFFECT_BIND);
             }
         }
+    }
+
+    int32 HandleOneForAll(CBattleEntity* PDefender, int32 damage)
+    {
+        if (damage > 0)
+        {
+            auto* PEffect = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_ONE_FOR_ALL);
+            if (PEffect != nullptr)
+            {
+                damage = std::max(damage - PEffect->GetPower(), 0);
+            }
+        }
+        return damage;
     }
 
     int32 HandleStoneskin(CBattleEntity* PDefender, int32 damage)
