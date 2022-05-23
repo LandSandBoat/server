@@ -123,6 +123,8 @@ INSERT INTO `mob_pool_mods` VALUES (2420,302,10,0);
 INSERT INTO `mob_pool_mods` VALUES (2461,61,25,1);
 INSERT INTO `mob_pool_mods` VALUES (2462,61,25,1);
 INSERT INTO `mob_pool_mods` VALUES (2463,61,20,1);
+INSERT INTO `mob_pool_mods` VALUES (2499,240,90,0); -- Mammet Sleep Res
+INSERT INTO `mob_pool_mods` VALUES (2500,240,90,0); -- Mammet Sleep Res
 INSERT INTO `mob_pool_mods` VALUES (2614,368,100,0); -- Memory Receptacle regain 10%
 INSERT INTO `mob_pool_mods` VALUES (2643,160,-50,0);
 INSERT INTO `mob_pool_mods` VALUES (2647,160,-50,0);

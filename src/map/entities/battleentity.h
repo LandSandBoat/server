@@ -423,6 +423,9 @@ enum IMMUNITY : uint16
     IMMUNITY_REQUIEM     = 0x400,  // 1024
     IMMUNITY_LIGHT_SLEEP = 0x800,  // 2048
     IMMUNITY_DARK_SLEEP  = 0x1000, // 4096
+    IMMUNITY_ASPIR = 1 << 13,     // 8192
+    IMMUNITY_TERROR = 1 << 14,    // 16384
+    IMMUNITY_DISPEL = 1 << 15,    // 32768
 };
 
 struct apAction_t
