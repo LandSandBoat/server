@@ -20,18 +20,15 @@ local tpMoves =
     -- Transmogrification: Absorbs all physical damage for ~30 seconds
     -- Tremorous Tread: Low AoE damage with a Stun effect, absorbed by Utsusemi.
     [0] = { 487, 540 },
-
     -- Sword Skills:
     -- Velocious Blade: 5-hit attack, high da
     -- Sonic Blade: High AoE damage.
     -- Scission Thrust: Low conal AoE damage.
     [1] = { 347, 419, 422 },
-
     -- Percussive Foin: Medium directional AoE damage.
     -- Gravity Wheel: High AoE damage and Gravity.
     -- Microquake: High single-target damage.
     [2] = { 441, 447, 457 },
-
     -- Psychomancy: AoE Aspir, drains 80+ MP.
     -- Mind Wall: Gives the Mammet a special Magic Shield effect causing it to absorb offensive magic used against it for ~30 seconds.
     [3] = { 464, 471},
