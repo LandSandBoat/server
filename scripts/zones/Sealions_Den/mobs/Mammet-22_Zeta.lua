@@ -9,7 +9,6 @@ local entity = {}
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.EXP_BONUS, -100)
     mob:setMobMod(xi.mobMod.GIL_MAX, -1)
-    mob:setLocalVar("formHealthTracker", 100)
 end
 
 local forms =
@@ -20,21 +19,41 @@ local forms =
     STAFF   = 3,
 }
 
+local tpMoves =
+{
+    -- NOTE: Mammets always have access to:
+    -- Transmogrification: Absorbs all physical damage for ~30 seconds
+    -- Tremorous Tread: Low AoE damage with a Stun effect, absorbed by Utsusemi.
+    [0] = { 487, 540 },
+    -- Sword Skills:
+    -- Velocious Blade: 5-hit attack, high da
+    -- Sonic Blade: High AoE damage.
+    -- Scission Thrust: Low conal AoE damage.
+    [1] = { 347, 419, 422 },
+    -- Percussive Foin: Medium directional AoE damage.
+    -- Gravity Wheel: High AoE damage and Gravity.
+    -- Microquake: High single-target damage.
+    [2] = { 441, 447, 457 },
+    -- Psychomancy: AoE Aspir, drains 80+ MP.
+    -- Mind Wall: Gives the Mammet a special Magic Shield effect causing it to absorb offensive magic used against it for ~30 seconds.
+    [3] = { 464, 471},
+}
+
 entity.onMobSpawn = function(mob)
     mob:SetMagicCastingEnabled(false)
 end
 
 entity.onMobFight = function(mob, target)
-    -- TODO: What are the conditions for a Mammet to change forms?
-    --       For now we'll change forms every 20% health
-    local healthTracker = mob:getLocalVar("formHealthTracker")
-    local currentHealth = mob:getHPP()
+
+    -- Chages forms after 30-60 seconds randomly
+    local TT = mob:getLocalVar("formTimeTracker")
+    local currentTime = mob:getBattleTime()
 
     -- NOTE: Yellow Liquid applies xi.effect.FOOD to the Mammets
     local cannotChangeForm = mob:hasStatusEffect(xi.effect.FOOD)
 
-    if healthTracker - currentHealth > 20 and not cannotChangeForm then
-        -- Pick a new form
+    if currentTime >= TT and not cannotChangeForm then
+        -- Pick a new form --
         local rand = math.random(0, 3)
         mob:setAnimationSub(rand)
         switch (rand): caseof
@@ -61,32 +80,28 @@ entity.onMobFight = function(mob, target)
                 mob:setDamage(40)
             end,
         }
-        mob:setLocalVar("formHealthTracker", currentHealth)
+        mob:setLocalVar("formTimeTracker", mob:getBattleTime() + math.random(30, 60))
     end
 end
 
 entity.onMobWeaponSkillPrepare = function(mob, target)
-    -- NOTE: Mammets always have access to:
-    -- TODO: Transmogrification: Absorbs all physical damage for ~30 seconds
-    -- TODO: Tremorous Tread: Low AoE damage with a Stun effect, absorbed by Utsusemi.
     switch (mob:getAnimationSub()): caseof
     {
         [forms.UNARMED] = function()
-            -- Just default moves
+            local wsChoice = math.random(1,2)
+            return tpMoves[forms.UNARMED][wsChoice]
         end,
         [forms.SWORD] = function()
-            -- TODO: Velocious Blade: 5-hit attack, high damage.
-            -- TODO: Sonic Blade: High AoE damage.
-            -- TODO: Scission Thrust: Low conal AoE damage.
+            local wsChoice = math.random(1,3)
+            return tpMoves[forms.SWORD][wsChoice]
         end,
         [forms.POLEARM] = function()
-            -- TODO: Percussive Foin: Medium directional AoE damage.
-            -- TODO: Microquake: High single-target damage.
-            -- TODO: Gravity Wheel: High AoE damage and Gravity.
+            local wsChoice = math.random(1,3)
+            return tpMoves[forms.POLEARM][wsChoice]
         end,
         [forms.STAFF] = function()
-            -- TODO: Psychomancy: AoE Aspir, drains 80+ MP.
-            -- TODO: Mind Wall: Gives the Mammet a special Magic Shield effect causing it to absorb offensive magic used against it for ~30 seconds.
+            local wsChoice = math.random(1,2)
+            return tpMoves[forms.STAFF][wsChoice]
         end,
     }
 end

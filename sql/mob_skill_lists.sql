@@ -209,7 +209,7 @@ INSERT INTO `mob_skill_lists` VALUES ('Likho',53,555);
 INSERT INTO `mob_skill_lists` VALUES ('Omega',54,1533);
 INSERT INTO `mob_skill_lists` VALUES ('Omega',54,1534);
 INSERT INTO `mob_skill_lists` VALUES ('Omega',54,1535);
--- INSERT INTO `mob_skill_lists` VALUES ('Omega',54,1536)
+INSERT INTO `mob_skill_lists` VALUES ('Omega',54,1536);
 INSERT INTO `mob_skill_lists` VALUES ('Omega',54,1537);
 INSERT INTO `mob_skill_lists` VALUES ('Omega',54,1538);
 INSERT INTO `mob_skill_lists` VALUES ('Omega',54,1539);
@@ -2447,7 +2447,7 @@ INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1530);
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1532);
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1533);
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1534);
--- INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1536);
+INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1536);
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1538);
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1539);
 INSERT INTO `mob_skill_lists` VALUES ('Ultima',728,1259);

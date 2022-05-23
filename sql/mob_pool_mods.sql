@@ -142,6 +142,7 @@ INSERT INTO `mob_pool_mods` VALUES (2840,368,70,0);
 INSERT INTO `mob_pool_mods` VALUES (2840,370,50,0);
 INSERT INTO `mob_pool_mods` VALUES (2922,370,100,0);
 INSERT INTO `mob_pool_mods` VALUES (2973,370,1,0);
+INSERT INTO `mob_pool_mods` VALUES (2973,291,25,0);
 INSERT INTO `mob_pool_mods` VALUES (3051,4,4,1);
 INSERT INTO `mob_pool_mods` VALUES (3099,23,23,1); -- Parata immune to Sleep, Bind, Silence and Gravity.
 INSERT INTO `mob_pool_mods` VALUES (3124,48,434,1);
@@ -178,6 +179,7 @@ INSERT INTO `mob_pool_mods` VALUES (3941,163,-100,0);
 INSERT INTO `mob_pool_mods` VALUES (4046,23,6191,1);
 INSERT INTO `mob_pool_mods` VALUES (4082,4,4,1);
 INSERT INTO `mob_pool_mods` VALUES (4083,370,1,0);
+INSERT INTO `mob_pool_mods` VALUES (4083,368,30,0);
 INSERT INTO `mob_pool_mods` VALUES (4186,244,15,0);
 INSERT INTO `mob_pool_mods` VALUES (4186,34,20,1);
 INSERT INTO `mob_pool_mods` VALUES (4186,35,0,1);
