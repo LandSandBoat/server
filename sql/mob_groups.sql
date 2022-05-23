@@ -7538,7 +7538,7 @@ INSERT INTO `mob_groups` VALUES (12,1737,106,'Goblin_Thug',330,0,1170,0,0,4,8,0)
 INSERT INTO `mob_groups` VALUES (13,1364,106,'Fledermaus',330,2,19,0,0,3,5,0);
 INSERT INTO `mob_groups` VALUES (14,441,106,'Black_Wolf',330,1,288,0,0,5,8,0);
 INSERT INTO `mob_groups` VALUES (15,1744,106,'Goblin_Weaver',330,0,1183,0,0,4,8,0);
-INSERT INTO `mob_groups` VALUES (16,3774,106,'Stinging_Sophie',0,32,2336,0,0,9,10,0);
+INSERT INTO `mob_groups` VALUES (16,3774,106,'Stinging_Sophie',0,32,2336,550,0,9,10,0);
 INSERT INTO `mob_groups` VALUES (17,1214,106,'Enchanted_Bones_blm',330,1,769,0,0,5,8,0);
 INSERT INTO `mob_groups` VALUES (18,3371,106,'River_Crab',330,0,481,0,0,1,5,0);
 INSERT INTO `mob_groups` VALUES (19,3381,106,'Rock_Lizard',330,0,0,0,0,3,8,0);
