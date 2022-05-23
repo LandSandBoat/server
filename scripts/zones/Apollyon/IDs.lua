@@ -68,7 +68,6 @@ zones[xi.zone.APOLLYON] =
             16933144,
         },
         PROTO_OMEGA = 16933124,
-
     },
     npc =
     {
