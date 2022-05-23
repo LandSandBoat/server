@@ -38,7 +38,7 @@ entity.onTrade = function(player, npc, trade)
 	local YoichiExchange = (ExchangeToken == 1 and npcUtil.tradeHas(trade, 18344)) -- relic_bow
 	
 -- give player their exchange token
-    if Gil == 10000000 and
+    if Gil == 5000000 and
        (TradeSpharai or TradeMandau or TradeExcalibur or TradeRagnarok or TradeGuttler or TradeBravura or TradeApocalypse or
         TradeGungnir or TradeKikoku or TradeAmano or TradeMjollnir or TradeClaustrum or TradeYoichi or TradeAnnihilator or
         TradeGjallhorn or TradeAegis) then
@@ -51,14 +51,21 @@ entity.onTrade = function(player, npc, trade)
 	    player:addItem(xi.items.YOICHINOYUMI) 
 		player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.YOICHINOYUMI)
    	else
-        player:PrintToPlayer("???: The covenant states 10,000,000 gil and your existing relic. Don't keep me waiting.", 0xD)
+        player:PrintToPlayer("???: The covenant states 5,000,000 gil and your existing relic. Don't keep me waiting.", 0xD)
     end
 end
 
 entity.onTrigger = function(player, npc)
---    player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
+    if player:getCharVar("RelicWeaponVoucher") == 1 then
+	    player:setCharVar("RelicWeaponVoucher", 0)
+--	    player:setCharVar("RelicWeaponVoucherUsed") == 1
+        player:addItem(xi.items.YOICHINOYUMI) 
+    	player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.YOICHINOYUMI)
+		return
+	end	
+
     player:PrintToPlayer("???: Hail to you hardened traveler,", 0xD)
-    player:PrintToPlayer("???: Do you desire to switch your ally? Trade your relic back to me together with 10,000,000 gil", 0xD)
+    player:PrintToPlayer("???: Do you desire to switch your ally? Trade your relic back to me together with 5,000,000 gil", 0xD)
 	player:PrintToPlayer("???: and I'll exchange it for my soul. Let me return to the battlefield!", 0xD)
 end
 

@@ -73,7 +73,8 @@ m:addOverride("xi.zones.Escha_RuAun.Zone.onZoneTick", function(zone)
                 SetServerVariable("[Domain]NMToD", os.time())
                 SetServerVariable("[Domain]NM", 1)
                 SetServerVariable("[Domain]NMSpawned", 0)
-
+				SetServerVariable("[Domain]Notification", 0)
+				
                 -- Server-wide message
                 player:PrintToArea("{Apururu} Oh dear, one of our members-wembers in Reisenjima Henge says that Tortuga could appear anytime in the next 5 minutes.", xi.msg.channel.SYSTEM_3, xi.msg.area.SYSTEM)
                 player:PrintToArea("{Apururu} Would you please go and see if she's alrightaru?", xi.msg.channel.SYSTEM_3, xi.msg.area.SYSTEM)
@@ -183,7 +184,8 @@ m:addOverride("xi.zones.Reisenjima_Henge.Zone.onZoneTick", function(zone)
 
                 SetServerVariable("[Domain]NMToD", os.time())
                 SetServerVariable("[Domain]NMSpawned", 0)
-                
+                SetServerVariable("[Domain]Notification", 0)
+				
                 -- Reward escha beads
                 local beadsRewarded = math.random(425, 625)
                 local players = mob:getZone():getPlayers()
@@ -278,6 +280,7 @@ m:addOverride("xi.zones.Provenance.Zone.onZoneTick", function(zone)
                 SetServerVariable("[Domain]NMToD", os.time()) -- Set NM ToD
                 SetServerVariable("[Domain]NM", 0)            -- Set NM to be spawned next
                 SetServerVariable("[Domain]NMSpawned", 0)     -- Set NM spawned flag (To not spawn infinite NMs)
+				SetServerVariable("[Domain]Notification", 0)
 
                 -- Server-wide message
                 player:PrintToArea("{Apururu} Oh dear, one of our members-wembers in Escha Ru'Aun says that Amphisbaena could appear anytime in the next 5 minutes.", xi.msg.channel.SYSTEM_3, xi.msg.area.SYSTEM)
@@ -412,7 +415,7 @@ m:addOverride("xi.zones.Provenance.Zone.onZoneTick", function(zone)
                 SetServerVariable("[Domain]NMToD", os.time()) -- Set NM ToD
                 SetServerVariable("[Domain]NM", 0)            -- Set NM to be spawned next
                 SetServerVariable("[Domain]NMSpawned", 0)     -- Set NM spawned flag (To not spawn infinite NMs)
-
+				SetServerVariable("[Domain]Notification", 0)
 
                 -- Server-wide message
                 player:PrintToArea("{Apururu} Oh dear, one of our members-wembers in Escha Ru'Aun says that Amphisbaena could appear anytime in the next 5 minutes.", xi.msg.channel.SYSTEM_3, xi.msg.area.SYSTEM)
@@ -484,7 +487,10 @@ m:addOverride("xi.zones.Misareaux_Coast.npcs.Undulating_Confluence.onEventFinish
         npcUtil.giveItem(player, xi.items.SCROLL_OF_INSTANT_WARP) -- scroll_of_instant_warp
         player:setPos(-0.037, -43.676, -260.951, 187, 289)
         player:addStatusEffect(xi.effect.ELVORSEAL, 1, 0, 0)
-        player:PrintToArea("{Apururu} Looks like our forces-warses are gathering for domain invasion! Hurry-worry and join them!", xi.msg.channel.SYSTEM_3, xi.msg.area.SYSTEM)
+		if GetServerVariable("[Domain]Notification") ~= 1 then
+		    SetServerVariable("[Domain]Notification", 1)
+            player:PrintToArea("{Apururu} Looks like our forces-warses are gathering for domain invasion! Hurry-worry and join them!", xi.msg.channel.SYSTEM_3, xi.msg.area.SYSTEM)
+		end	
     end
 end)
 
@@ -507,7 +513,10 @@ m:addOverride("xi.zones.Qufim_Island.npcs.Undulating_Confluence.onEventFinish", 
         npcUtil.giveItem(player, xi.items.SCROLL_OF_INSTANT_WARP) -- scroll_of_instant_warp
         player:setPos(-576.140, -228.000, 503.928, 120, 222)
         player:addStatusEffect(xi.effect.ELVORSEAL, 1, 0, 0)
-        player:PrintToArea("{Apururu} Looks like our forces-warses are gathering for domain invasion! Hurry-worry and join them!", xi.msg.channel.SYSTEM_3, xi.msg.area.SYSTEM)
+		if GetServerVariable("[Domain]Notification") ~= 1 then
+		    SetServerVariable("[Domain]Notification", 1)
+            player:PrintToArea("{Apururu} Looks like our forces-warses are gathering for domain invasion! Hurry-worry and join them!", xi.msg.channel.SYSTEM_3, xi.msg.area.SYSTEM)
+		end	
     end
 end)
 
@@ -549,7 +558,10 @@ m:addOverride("xi.zones.La_Theine_Plateau.npcs.Dimensional_Portal.onTrigger", fu
         
         onEnd = function(playerArg)
             if GetServerVariable("[Domain]NM") == 1 then
-                playerArg:PrintToArea("{Apururu} Looks like our forces-warses are gathering for domain invasion! Hurry-worry and join them!", xi.msg.channel.SYSTEM_3, xi.msg.area.SYSTEM)
+        		if GetServerVariable("[Domain]Notification") ~= 1 then
+        		    SetServerVariable("[Domain]Notification", 1)
+                    player:PrintToArea("{Apururu} Looks like our forces-warses are gathering for domain invasion! Hurry-worry and join them!", xi.msg.channel.SYSTEM_3, xi.msg.area.SYSTEM)
+        		end	
             end    
         end,
     }
@@ -594,7 +606,10 @@ m:addOverride("xi.zones.Konschtat_Highlands.npcs.Dimensional_Portal.onTrigger", 
         
         onEnd = function(playerArg)
             if GetServerVariable("[Domain]NM") == 1 then
-                playerArg:PrintToArea("{Apururu} Looks like our forces-warses are gathering for domain invasion! Hurry-worry and join them!", xi.msg.channel.SYSTEM_3, xi.msg.area.SYSTEM)
+        		if GetServerVariable("[Domain]Notification") ~= 1 then
+        		    SetServerVariable("[Domain]Notification", 1)
+                    player:PrintToArea("{Apururu} Looks like our forces-warses are gathering for domain invasion! Hurry-worry and join them!", xi.msg.channel.SYSTEM_3, xi.msg.area.SYSTEM)
+        		end	
             end    
         end,
     }
@@ -639,7 +654,10 @@ m:addOverride("xi.zones.Tahrongi_Canyon.npcs.Dimensional_Portal.onTrigger", func
         
         onEnd = function(playerArg)
             if GetServerVariable("[Domain]NM") == 1 then
-                playerArg:PrintToArea("{Apururu} Looks like our forces-warses are gathering for domain invasion! Hurry-worry and join them!", xi.msg.channel.SYSTEM_3, xi.msg.area.SYSTEM)
+        		if GetServerVariable("[Domain]Notification") ~= 1 then
+        		    SetServerVariable("[Domain]Notification", 1)
+                    player:PrintToArea("{Apururu} Looks like our forces-warses are gathering for domain invasion! Hurry-worry and join them!", xi.msg.channel.SYSTEM_3, xi.msg.area.SYSTEM)
+        		end	
             end    
         end,
     }
