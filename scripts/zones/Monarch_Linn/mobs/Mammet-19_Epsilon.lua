@@ -39,11 +39,9 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobFight = function(mob, target)
-
     -- Chages forms after 30-60 seconds randomly
     local TT = mob:getLocalVar("formTimeTracker")
     local currentTime = mob:getBattleTime()
-
     -- NOTE: Yellow Liquid applies xi.effect.FOOD to the Mammets
     local cannotChangeForm = mob:hasStatusEffect(xi.effect.FOOD)
 
