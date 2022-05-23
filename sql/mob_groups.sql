@@ -12512,7 +12512,7 @@ INSERT INTO `mob_groups` VALUES (6,3381,191,'Rock_Lizard',330,0,2121,0,0,5,8,0);
 INSERT INTO `mob_groups` VALUES (7,1737,191,'Goblin_Thug',330,0,1173,0,0,5,8,0);
 INSERT INTO `mob_groups` VALUES (8,1744,191,'Goblin_Weaver',330,0,1187,0,0,5,8,0);
 INSERT INTO `mob_groups` VALUES (9,1965,191,'Hoarder_Hare',330,0,1320,0,0,6,8,0);
-INSERT INTO `mob_groups` VALUES (10,4830,191,'Teporingo',0,32,3019,0,0,20,20,0);
+INSERT INTO `mob_groups` VALUES (10,4830,191,'Teporingo',0,32,3019,630,0,20,20,0);
 INSERT INTO `mob_groups` VALUES (11,1635,191,'Goblin_Ambusher',330,0,1020,0,0,12,16,0);
 INSERT INTO `mob_groups` VALUES (12,1738,191,'Goblin_Tinkerer',330,0,1176,0,0,12,16,0);
 INSERT INTO `mob_groups` VALUES (13,1643,191,'Goblin_Butcher',330,0,1034,0,0,12,16,0);
@@ -12533,7 +12533,7 @@ INSERT INTO `mob_groups` VALUES (27,5644,191,'Fume_Lizard',330,0,424,0,0,86,89,0
 INSERT INTO `mob_groups` VALUES (28,6670,191,'Goblin_Conjurer',330,0,3187,0,0,86,91,0);
 INSERT INTO `mob_groups` VALUES (29,6660,191,'Goblin_Bladesmith',330,0,3150,0,0,86,91,0);
 INSERT INTO `mob_groups` VALUES (30,6665,191,'Goblin_Bushwhacker',330,0,3167,0,0,90,91,0);
-INSERT INTO `mob_groups` VALUES (31,724,191,'Chocoboleech',0,128,470,0,0,24,25,0);
+INSERT INTO `mob_groups` VALUES (31,724,191,'Chocoboleech',0,128,470,1100,0,24,25,0);
 INSERT INTO `mob_groups` VALUES (32,5528,191,'Fire_Elemental',0,128,0,0,0,75,75,0);
 INSERT INTO `mob_groups` VALUES (33,4273,191,'Wadi_Leech',0,128,2599,0,0,11,14,0);
 INSERT INTO `mob_groups` VALUES (34,6890,191,'Celaeno',0,128,0,0,0,100,100,0);
