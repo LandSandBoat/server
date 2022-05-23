@@ -26,9 +26,13 @@ local profQmOnTrigger = function(player, npc)
     if
         missionStatus == 3 and
         not player:hasKeyItem(xi.ki.RELIQUIARIUM_KEY) and
-        isSpawnPoint and
-        npcUtil.popFromQM(player, npc, sacrariumID.mob.OLD_PROFESSOR_MARISELLE, { radius = 2, hide = 0 })
+        isSpawnPoint
     then
+        GetMobByID(sacrariumID.mob.OLD_PROFESSOR_MARISELLE):setSpawn(npc:getXPos(), npc:getYPos(), npc:getZPos(), 0)
+        for i = 1,2 do
+            GetMobByID(sacrariumID.mob.OLD_PROFESSOR_MARISELLE+i):setSpawn(npc:getXPos(), npc:getYPos(), npc:getZPos(), 0)
+        end
+        npcUtil.popFromQM(player, npc, sacrariumID.mob.OLD_PROFESSOR_MARISELLE, { radius = 2, hide = 0 })
         return mission:messageSpecial(sacrariumID.text.EVIL_PRESENCE)
     elseif
         mission:getLocalVar(player, 'hasKilled') == 1 and

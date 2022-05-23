@@ -11,6 +11,8 @@ require('scripts/globals/utils')
 local entity = {}
 
 entity.onMobSpawn = function(mob)
+    mob:setCarefulPathing(true)
+
     for i = 0, 5 do
         if GetNPCByID(ID.npc.QM_MARISELLE_OFFSET + i):getLocalVar('hasProfessorMariselle') == 1 then
             mob:setLocalVar('spawnLocation', i)
@@ -29,17 +31,15 @@ entity.onMobFight = function(mob, target)
         utils.mobTeleport(mob, 2000, professorTables.locations[profLocation][randomPosition])
         mob:setLocalVar('teleTime', mob:getBattleTime())
     end
+
+    if mob:checkDistance(mob:getTarget()) > 55 then
+        mob:disengage()
+        mob:resetEnmity(target)
+    end
 end
 
 entity.onMobDisengage = function(mob)
     mob:setLocalVar('teleTime', 0)
-end
-
-entity.onMobRoam = function(mob)
-    local profLocation = mob:getLocalVar('spawnLocation')
-    local posPath = { mob:getXPos(), mob:getYPos(), mob:getZPos(), professorTables.returnPoint[profLocation][1], professorTables.returnPoint[profLocation][2], professorTables.returnPoint[profLocation][3] }
-
-    xi.path.patrol(mob, posPath)
 end
 
 return entity
