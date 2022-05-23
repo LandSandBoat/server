@@ -873,16 +873,9 @@ xi.dynamis.registerDynamis = function(player)
     xi.dynamis.setOriginalExpiryTimepoint(player) -- Create original expiry timepoint.
     xi.dynamis.onNewDynamis(player) -- Start spawning wave 1.
 
-    -- while player:hasItem(dynamis_timeless) do -- Check for instances of timeless, players should only be able to carry one at a time.
-    --     player:delItem(dynamis_timeless, 1) -- Deletes timeless hourglass.
-    -- end
-
     if GetServerVariable(string.format("[DYNA]Token_%s", xi.dynamis.dynaInfoEra[player:getZoneID()].dynaZone)) ~= 0 then
         local dynamisToken = GetServerVariable(string.format("[DYNA]Token_%s", xi.dynamis.dynaInfoEra[player:getZoneID()].dynaZone))
-        print(dynamisToken)
-        local hourglassInitial = string.format("%s_%s", xi.dynamis.dynaInfoEra[player:getZoneID()].dynaNameShort, math.floor(dynamisToken / 100))
-        print(hourglassInitial)
-        player:addItem({id=dynamis_perpetual, signature=hourglassInitial}) -- Add a perpetual hourglass with token signature.
+        player:addItem({id=dynamis_perpetual, exdata={[10]=xi.dynamis.dynaInfoEra[player:getZoneID()].zoneName, [16]=dynamisToken}}) -- Add a perpetual hourglass with token hidden.
         player:messageSpecial(xi.dynamis.dynaIDLookup[player:getZoneID()].text.INFORMATION_RECORDED, dynamis_perpetual)
         player:messageSpecial(zones[player:getZoneID()].text.ITEM_OBTAINED, dynamis_perpetual)
     end
@@ -895,6 +888,7 @@ end
 xi.dynamis.setOriginalExpiryTimepoint = function(player)
     expirationTime = os.time() + (60 * (60 + dynamis_staging_time)) -- Amount of time to extend timepoint by. 60 minutes by default for fresh zones.
     SetServerVariable(string.format("[DYNA]Timepoint_%s", xi.dynamis.dynaInfoEra[player:getZoneID()].dynaZone), expirationTime) -- Sets timepoint which dynamis will expire.
+    SetServerVariable(string.format("[DYNA]RegTimepoint_%s", xi.dynamis.dynaInfoEra[player:getZoneID()].dynaZone), os.time())
 end
 
 xi.dynamis.registerPlayer = function(player)
@@ -931,6 +925,7 @@ end
 xi.dynamis.updateHourglass = function(player)
     local zone = player:getZone()
     local newExpire = 0
+    local dynamisToken = GetServerVariable(string.format("[DYNA]Token_%s", player:getZoneID()))
 
     if zone:getType() == xi.zoneType.DYNAMIS then -- Check if they are in a dynamis zone. This determines the parameters for retrieving timepoint.
         newExpire = GetServerVariable(string.format("[DYNA]Timepoint_%s", xi.dynamis.dynaInfoEra[player:getZoneID()].dynaZone)) -- Get timepoint.
@@ -944,12 +939,16 @@ xi.dynamis.updateHourglass = function(player)
     local numHourglass = 0
 
     while player:hasItem(dynamis_perpetual) == true do
-        player:delItem(dynamis_perpetual, 1) -- Delete old hourglass.
-        numHourglass = numHourglass + 1 -- Keep track of the number of hourglasses removed.
+        if player:getCharVar(string.format("[DYNA]PlayerZoneToken_%s", player:getZoneID())) == dynamisToken then -- Checks to see if player should receive new hourglass.
+            player:delItem(dynamis_perpetual, 1) -- Delete old hourglass.
+            numHourglass = numHourglass + 1 -- Keep track of the number of hourglasses removed.
+        else
+            player:delItem(dynamis_perpetual, 1)
+        end
     end
 
     while numHourglass > 0 do -- Replace all hourglasses removed.
-        player:addItem({id=dynamis_perpetual, signature=hourglassNew}) -- Add a new hourglass with new signature.
+        player:addItem({id=dynamis_perpetual, exdata={[10]=player:getZoneID(), [08]=newExpire, [16]=dynamisToken}}) -- Add a perpetual hourglass with token hidden.
         numHourglass = numHourglass - 1 -- Keep track of the number of hourglasses given.
     end
 end
@@ -986,10 +985,16 @@ xi.dynamis.verifyTradeHourglass = function(player, trade)
     local hourglassInfo = string.format("%s : %s. %s, %s, %s:%s:%s%s", xi.dynamis.dynaInfoEra[player:getZoneID()].dynaNameShort, os.date("%b", expireTime), os.date("%d", 
                                             expireTime), os.date("%Y", expireTime), os.date("%I", expireTime), os.date("%M", expireTime), 
                                             os.date("%S", expireTime), os.date("%p", expireTime)) -- New Hourglass String Ex. DynamisSan : Jan. 01, 2001, 1:11:11pm
-    if trade:getItem(0):getSignature() == string.format("%s : %s", xi.dynamis.dynaInfoEra[player:getZoneID()].dynaNameShort, math.floor(dynamisToken / 100)) then -- If signature doesn't have time then new hourglass.
-        return 1 -- New hourglass.
-    elseif trade:getItem(0):getSignature() == hourglassInfo then
-        return 2 -- Current hourglass.
+    local hourglassShort = string.format("%s : %s", xi.dynamis.dynaInfoEra[player:getZoneID()].dynaNameShort, dynamisToken)
+    print(trade:getItem(0):getAppraisalID())
+    if trade:getItem(0):getAppraisalID() == dynamisToken and player:getCharVar(string.format("[DYNA]PlayerRegistered_%s", xi.dynamis.dynaInfoEra[player:getZoneID()].dynaZone)) == 1 then -- If signature doesn't have time then new hourglass.
+        print("Player Registered")
+        print(trade:getItem(0):getAppraisalID())
+        return 2 -- Previous entrant, valid hourglass.
+    elseif trade:getItem(0):getAppraisalID() == dynamisToken then
+        print("New Player")
+        print(trade:getItem(0):getAppraisalID())
+        return 1 -- New hourglass and entrant.
     else
         return 3 -- Not valid.
     end
