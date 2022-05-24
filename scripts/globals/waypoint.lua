@@ -209,13 +209,22 @@ xi.waypoint.onTrigger = function(player, npc)
     player:startEvent(unpack(resultTable))
 end
 
-xi.waypoint.onEventUpdate = function(player, csid, option, npc)
-    -- local currentWaypointIndex = bit.band(option, 0x7F)
-    -- local destinationGroup     = bit.band(bit.rshift(option, 7), 0xF)
-    -- local destinationOffset    = bit.band(bit.rshift(option, 11), 0xF)
-    -- local travelCost           = bit.rshift(option, 21)
+-- Note: There is additional data packed into the event update option that is unused at this time (below):
+-- currentWaypointIndex = bit.band(option, 0x7F)
+-- destinationGroup     = bit.band(bit.rshift(option, 7), 0xF)
+-- destinationOffset    = bit.band(bit.rshift(option, 11), 0xF)
 
-    player:updateEvent(0, 0, 0, 0, 0, 0, 0, 1)
+xi.waypoint.onEventUpdate = function(player, csid, option, npc)
+    local ID = zones[player:getZoneID()]
+    local travelCost = bit.rshift(option, 21)
+
+    if player:getCurrency('kinetic_unit') >= travelCost then
+        player:updateEvent(0, 0, 0, 0, 0, 0, 0, 1)
+        player:delCurrency('kinetic_unit', travelCost)
+        player:messageSpecial(ID.text.EXPENDED_KINETIC_UNITS, travelCost)
+    else
+        player:messageSpecial(ID.text.INSUFFICIENT_UNITS)
+    end
 end
 
 xi.waypoint.onEventFinish = function(player, csid, option, npc)

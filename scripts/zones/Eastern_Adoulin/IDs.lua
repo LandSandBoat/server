@@ -22,6 +22,8 @@ zones[xi.zone.EASTERN_ADOULIN] =
         YOU_CAN_NOW_BECOME      = 7011,  -- You can now become a [geomancer/rune fencer]!
         YOU_LEARNED_TRUST       = 7025,  -- You learned Trust: <name>!
         MOG_LOCKER_OFFSET       = 7582,  -- Your Mog Locker lease is valid until <timestamp>, kupo.
+        EXPENDED_KINETIC_UNITS  = 7802,  -- You have expended <number> kinetic unit[/s] and will be transported to another locale.
+        INSUFFICIENT_UNITS      = 7803,  -- Your stock of kinetic units is insufficient.
         HOMEPOINT_SET           = 8298,  -- Home point set!
         COMMON_SENSE_SURVIVAL   = 13860, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },

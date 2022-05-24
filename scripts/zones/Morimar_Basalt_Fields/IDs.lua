@@ -19,6 +19,8 @@ zones[xi.zone.MORIMAR_BASALT_FIELDS] =
         LOGIN_NUMBER            = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         BAYLD_OBTAINED          = 7007, -- You have obtained <number> bayld!
         YOU_HAVE_LEARNED        = 7015, -- You have learned <keyitem>!
+        EXPENDED_KINETIC_UNITS  = 7604, -- You have expended <number> kinetic unit[/s] and will be transported to another locale.
+        INSUFFICIENT_UNITS      = 7605, -- Your stock of kinetic units is insufficient.
         HOMEPOINT_SET           = 8171, -- Home point set!
     },
     mob =

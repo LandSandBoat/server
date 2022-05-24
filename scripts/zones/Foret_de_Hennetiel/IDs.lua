@@ -21,6 +21,8 @@ zones[xi.zone.FORET_DE_HENNETIEL] =
         YOU_HAVE_LEARNED        = 7015, -- You have learned <keyitem>!
         STARTED_TO_LEARN_BOAT   = 7518, -- You have started to learn a bit about how to operate your boat.
         FIGURED_OUT_BOAT        = 7519, -- You have figured out how to properly use the boat! Report your progress to Choubollet.
+        EXPENDED_KINETIC_UNITS  = 7688, -- You have expended <number> kinetic unit[/s] and will be transported to another locale.
+        INSUFFICIENT_UNITS      = 7689, -- Your stock of kinetic units is insufficient.
         HOMEPOINT_SET           = 8002, -- Home point set!
     },
     mob =
