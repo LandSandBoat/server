@@ -3765,6 +3765,7 @@ INSERT INTO `mob_skill_lists` VALUES ('The_Briars_elv',1160,42); -- Savage Blade
 INSERT INTO `mob_skill_lists` VALUES ('The_Briars_gal',1161,86); -- Raging Rush
 INSERT INTO `mob_skill_lists` VALUES ('The_Briars_gal',1161,91); -- Fell Cleave
 
+INSERT INTO `mob_skill_lists` VALUES ('Tenzen_Ranged',1171,1396); -- Tenzen Ranged Attack
 -- 1162 -> Wamouracampa_curl
 
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Shantotto_II_Melee',1163,3739); -- shantotto_ii_melee (no name)

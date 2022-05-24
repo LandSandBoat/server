@@ -1191,9 +1191,9 @@ INSERT INTO `mob_groups` VALUES (1,2500,32,'Mammet-22_Zeta',0,128,1585,4000,0,60
 INSERT INTO `mob_groups` VALUES (2,2973,32,'Omega',0,128,0,14000,0,63,64,0);
 INSERT INTO `mob_groups` VALUES (3,4083,32,'Ultima',0,128,0,15000,0,63,64,0);
 INSERT INTO `mob_groups` VALUES (4,3875,32,'Tenzen',0,128,0,15000,0,75,75,0);
-INSERT INTO `mob_groups` VALUES (5,2492,32,'Makki-Chebukki',0,128,0,50000,0,75,75,0);
-INSERT INTO `mob_groups` VALUES (6,2293,32,'Kukki-Chebukki',0,128,0,50000,0,75,75,0);
-INSERT INTO `mob_groups` VALUES (7,710,32,'Cherukiki',0,128,0,50000,0,75,75,0);
+INSERT INTO `mob_groups` VALUES (5,2492,32,'Makki-Chebukki',0,128,0,50000,0,67,67,0);
+INSERT INTO `mob_groups` VALUES (6,2293,32,'Kukki-Chebukki',0,128,0,50000,0,67,67,0);
+INSERT INTO `mob_groups` VALUES (7,710,32,'Cherukiki',0,128,0,50000,0,67,67,0);
 INSERT INTO `mob_groups` VALUES (8,2973,32,'Omega_HTBF',0,128,0,0,0,99,99,0);
 INSERT INTO `mob_groups` VALUES (9,4083,32,'Ultima_HTBF',0,128,0,0,0,99,99,0);
 INSERT INTO `mob_groups` VALUES (10,3875,32,'Tenzen',0,128,0,0,0,99,99,0);

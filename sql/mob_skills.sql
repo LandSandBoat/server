@@ -1215,7 +1215,7 @@ INSERT INTO `mob_skills` VALUES (1392,1039,'amatsu_yukiarashi',0,15.0,2000,1500,
 INSERT INTO `mob_skills` VALUES (1393,1040,'amatsu_tsukioboro',0,15.0,2000,1500,4,0,0,0,10,5,0);
 INSERT INTO `mob_skills` VALUES (1394,1041,'amatsu_hanaikusa',0,15.0,2000,1500,4,0,0,0,11,2,0);
 INSERT INTO `mob_skills` VALUES (1395,1036,'amatsu_tsukikage',0,15.0,2000,1500,4,0,0,0,12,6,0);
--- INSERT INTO `mob_skills` VALUES (1396,1140,'.',0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1396,1034,'tenzen_ranged_alt',0,25,2000,0,4,4,0,0,0,0,0); -- tenzen ranged attack
 INSERT INTO `mob_skills` VALUES (1397,1042,'oisoya',0,15.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1398,1032,'riceball',0,15.0,2000,1500,1,0,0,0,0,0,0); -- riceball eating
 INSERT INTO `mob_skills` VALUES (1399,1035,'cosmic_elucidation',0,15.0,2000,1500,4,0,0,0,0,0,0); -- cosmic elucidation
