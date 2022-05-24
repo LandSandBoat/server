@@ -148,10 +148,10 @@ xi.garrison.waveAlive = function(player, npc, wave, party)
         mob = mob + 1
     end
     -- If logic im sorry!!!
-    if 
-        killedAllMobs == true and 
-        wave == 4 and 
-        killedAllNPC == false 
+    if
+        killedAllMobs == true and
+        wave == 4 and
+        killedAllNPC == false
     then
         --win
         npc:getZone():setLocalVar(string.format("[GARRISON]EndTime_%s", zoneID), os.time())
@@ -171,10 +171,10 @@ xi.garrison.waveAlive = function(player, npc, wave, party)
             xi.garrison.despawnNPCs(npc, party)
             -- Var to give rewards to party trigger from guard
             player:setCharVar("Garrison_Treasure", 1)
-    elseif 
-        killedAllMobs == true and 
-        wave <=3 and 
-        killedAllNPC == false 
+    elseif
+        killedAllMobs == true and
+        wave <=3 and
+        killedAllNPC == false
     then
         -- next wave
         wave = wave + 1
@@ -232,8 +232,8 @@ xi.garrison.onTrade = function(player, npc, trade)
     local zoneId = npc:getZoneID()
     local garrisonZoneData = xi.garrison.data[zoneId]
     local item = garrisonZoneData.itemReq
-    if 
-        npcUtil.tradeHasExactly(trade, item) and 
+    if
+        npcUtil.tradeHasExactly(trade, item) and
         os.time() > garrisonRunning
     then
         xi.garrison.start(player, npc)
