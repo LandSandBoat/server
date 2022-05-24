@@ -9,138 +9,138 @@ xi.garrison = xi.garrison or {}
 -- Alliance/Party Size determines how many Mobs spawn per wave.
 xi.garrison.waveSize =
 {
-	-- One Party player count > 1
-	[1] =
-	{
-		[1] =
-			{
-			size = 2 
-			},
-		[2] =
-			{
-			size = 4
-			},
-		[3] =
-			{
-			size = 6 
-			},
-		[4] =
-			{
-			size = 6 
-			},
-	},
-	-- Two Parties player count > 6
-	[2] =
-	{
-		[1] =
-			{
-			size = 4
-			},
-		[2] =
-			{
-			size = 6
-			},
-		[3] =
-			{
-			size = 8 
-			},
-		[4] =
-			{
-			size = 8 
-			},
-	},
-	-- Three Parties player count > 12
-	[3] =
-	{		
-		[1] =
-			{
-			size = 6
-			},
-		[2] =
-			{
-			size = 8
-			},
-		[3] =
-			{
-			size = 8 -- is supposed to be 10 Too Many Mobs need to add mini wave logic
-			},
-		[4] =
-			{
-			size = 8 -- is supposed to be 10 Too Many Mobs need to add mini wave logic
-			}, 
-	}
-	
+    -- One Party player count > 1
+    [1] =
+    {
+        [1] =
+            {
+            size = 2
+            },
+        [2] =
+            {
+            size = 4
+            },
+        [3] =
+            {
+            size = 6
+            },
+        [4] =
+            {
+            size = 6
+            },
+    },
+    -- Two Parties player count > 6
+    [2] =
+    {
+        [1] =
+            {
+            size = 4
+            },
+        [2] =
+            {
+            size = 6
+            },
+        [3] =
+            {
+            size = 8
+            },
+        [4] =
+            {
+            size = 8
+            },
+    },
+    -- Three Parties player count > 12
+    [3] =
+    {
+        [1] =
+            {
+            size = 6
+            },
+        [2] =
+            {
+            size = 8
+            },
+        [3] =
+            {
+            size = 8 -- is supposed to be 10 Too Many Mobs need to add mini wave logic
+            },
+        [4] =
+            {
+            size = 8 -- is supposed to be 10 Too Many Mobs need to add mini wave logic
+            },
+    }
+
 }
 -- Loot is determined by LevelCap
 xi.garrison.loot =
 {
-	--level 20 garrison loot
-	[20] =
-	{
-		{itemId = 4198, dropRate = 1000}, -- Dragon Chronicles
-		{itemId = 13818, dropRate = 200}, -- Garrison Tunica
-		{itemId = 14206, dropRate = 200}, -- Garrison Boots
-		{itemId = 14314, dropRate = 200}, -- Garrison Hose
-		{itemId = 14841, dropRate = 200}, -- Garrison Gloves
-		{itemId = 15147, dropRate = 200}, -- Garrison Sallet
-	},
-	--level 30 garrison loot
-	[30] =
-	{
-		{itemId = 4198, dropRate = 1000}, -- Dragon Chronicles
-		{itemId = 17272, dropRate = 200}, -- Military Gun
-		{itemId = 17580, dropRate = 200}, -- Military Pole
-		{itemId = 17839, dropRate = 200}, -- Military Harp
-		{itemId = 17940, dropRate = 200}, -- Military Pick
-		{itemId = 18090, dropRate = 200}, -- Military Spear
-		{itemId = 18212, dropRate = 200}, -- Military Axe
-	},
-	--level 40 garrison loot
-	[40] =
-	{
-		{itemId = 4198, dropRate = 1000}, -- Dragon Chronicles
-		{itemId = 13680, dropRate = 200}, -- Variable Mantle
-		{itemId = 13681, dropRate = 200}, -- Variable Cape
-		{itemId = 14652, dropRate = 200}, -- Protean Ring
-		{itemId = 14653, dropRate = 200}, -- Variable Ring
-		{itemId = 14757, dropRate = 200}, -- Mecurial Earring
-	},
-	--level 50 garrison loot
-	[50] =
-	{
-		{itemId = 4198, dropRate = 1000}, -- Dragon Chronicles
-		{itemId = 14744, dropRate = 200}, -- Undead Earring
-		{itemId = 14745, dropRate = 200}, -- Arcana Earring
-		{itemId = 14746, dropRate = 200}, -- Vermin Earring
-		{itemId = 14747, dropRate = 200}, -- Bird Earring
-		{itemId = 14748, dropRate = 200}, -- Amorph Earring
-		{itemId = 14749, dropRate = 200}, -- Lizard Earring
-		{itemId = 14750, dropRate = 200}, -- Aquan Earring
-		{itemId = 14751, dropRate = 200}, -- Plantoid Earring
-		{itemId = 14752, dropRate = 200}, -- Beast Earring
-		{itemId = 14753, dropRate = 200}, -- Demon Earring
-		{itemId = 14754, dropRate = 200}, -- Dragon Earring
-		{itemId = 14755, dropRate = 200}, -- Refresh Earring
-		{itemId = 14756, dropRate = 200}, -- Accurate Earring
-	},
-	--level 75 garrison loot
-	[75] =
-	{
-		{itemId = 4247, dropRate = 1000}, -- Miratete's Memoirs
-		{itemId = 17204, dropRate = 200}, -- Mighty Bow
-		{itemId = 17465, dropRate = 200}, -- Mighty Cudgel
-		{itemId = 17581, dropRate = 200}, -- Mighty Pole
-		{itemId = 17697, dropRate = 200}, -- Mighty Talwar
-		{itemId = 17791, dropRate = 200}, -- Rai Kunimitsu
-		{itemId = 17824, dropRate = 200}, -- Nukemaru
-		{itemId = 17941, dropRate = 200}, -- Mighty Pick
-		{itemId = 18000, dropRate = 200}, -- Mighty Knife
-		{itemId = 18049, dropRate = 200}, -- Mighty Zaghnal
-		{itemId = 18091, dropRate = 200}, -- Mighty Lance
-		{itemId = 18213, dropRate = 200}, -- Mighty Axe
-		{itemId = 18352, dropRate = 200}, -- Mighty Patas
-		{itemId = 18374, dropRate = 200}, -- Mighty Sword
-	},
+    --level 20 garrison loot
+    [20] =
+    {
+        {itemId = 4198, dropRate = 1000}, -- Dragon Chronicles
+        {itemId = 13818, dropRate = 200}, -- Garrison Tunica
+        {itemId = 14206, dropRate = 200}, -- Garrison Boots
+        {itemId = 14314, dropRate = 200}, -- Garrison Hose
+        {itemId = 14841, dropRate = 200}, -- Garrison Gloves
+        {itemId = 15147, dropRate = 200}, -- Garrison Sallet
+    },
+    --level 30 garrison loot
+    [30] =
+    {
+        {itemId = 4198, dropRate = 1000}, -- Dragon Chronicles
+        {itemId = 17272, dropRate = 200}, -- Military Gun
+        {itemId = 17580, dropRate = 200}, -- Military Pole
+        {itemId = 17839, dropRate = 200}, -- Military Harp
+        {itemId = 17940, dropRate = 200}, -- Military Pick
+        {itemId = 18090, dropRate = 200}, -- Military Spear
+        {itemId = 18212, dropRate = 200}, -- Military Axe
+    },
+    --level 40 garrison loot
+    [40] =
+    {
+        {itemId = 4198, dropRate = 1000}, -- Dragon Chronicles
+        {itemId = 13680, dropRate = 200}, -- Variable Mantle
+        {itemId = 13681, dropRate = 200}, -- Variable Cape
+        {itemId = 14652, dropRate = 200}, -- Protean Ring
+        {itemId = 14653, dropRate = 200}, -- Variable Ring
+        {itemId = 14757, dropRate = 200}, -- Mecurial Earring
+    },
+    --level 50 garrison loot
+    [50] =
+    {
+        {itemId = 4198, dropRate = 1000}, -- Dragon Chronicles
+        {itemId = 14744, dropRate = 200}, -- Undead Earring
+        {itemId = 14745, dropRate = 200}, -- Arcana Earring
+        {itemId = 14746, dropRate = 200}, -- Vermin Earring
+        {itemId = 14747, dropRate = 200}, -- Bird Earring
+        {itemId = 14748, dropRate = 200}, -- Amorph Earring
+        {itemId = 14749, dropRate = 200}, -- Lizard Earring
+        {itemId = 14750, dropRate = 200}, -- Aquan Earring
+        {itemId = 14751, dropRate = 200}, -- Plantoid Earring
+        {itemId = 14752, dropRate = 200}, -- Beast Earring
+        {itemId = 14753, dropRate = 200}, -- Demon Earring
+        {itemId = 14754, dropRate = 200}, -- Dragon Earring
+        {itemId = 14755, dropRate = 200}, -- Refresh Earring
+        {itemId = 14756, dropRate = 200}, -- Accurate Earring
+    },
+    --level 75 garrison loot
+    [75] =
+    {
+        {itemId = 4247, dropRate = 1000}, -- Miratete's Memoirs
+        {itemId = 17204, dropRate = 200}, -- Mighty Bow
+        {itemId = 17465, dropRate = 200}, -- Mighty Cudgel
+        {itemId = 17581, dropRate = 200}, -- Mighty Pole
+        {itemId = 17697, dropRate = 200}, -- Mighty Talwar
+        {itemId = 17791, dropRate = 200}, -- Rai Kunimitsu
+        {itemId = 17824, dropRate = 200}, -- Nukemaru
+        {itemId = 17941, dropRate = 200}, -- Mighty Pick
+        {itemId = 18000, dropRate = 200}, -- Mighty Knife
+        {itemId = 18049, dropRate = 200}, -- Mighty Zaghnal
+        {itemId = 18091, dropRate = 200}, -- Mighty Lance
+        {itemId = 18213, dropRate = 200}, -- Mighty Axe
+        {itemId = 18352, dropRate = 200}, -- Mighty Patas
+        {itemId = 18374, dropRate = 200}, -- Mighty Sword
+    },
 
 }
 
@@ -163,24 +163,24 @@ xi.garrison.data =
                 --17211853, --'Brass_Quadav','Brass Quadav',37,0,0,0,0);
                 --17211854, --'Brass_Quadav','Brass Quadav',37,0,0,0,0);
                 --17211855, --'Sapphirine_Quadav','Sapphirine Quadav',38,0,0,0,0);
-				--17211856, --'Sapphirine_Quadav','Sapphirine Quadav',38,0,0,0,0);
+                --17211856, --'Sapphirine_Quadav','Sapphirine Quadav',38,0,0,0,0);
                 --17211857, --'Lead_Quadav','Lead Quadav',39,0,0,0,0);
     },
-	[xi.zone.WEST_SARUTABARUTA] =
+    [xi.zone.WEST_SARUTABARUTA] =
     {
         itemReq = 1530, -- Seven-Knot Quipu
         levelCap = 20,
         npcs = 17201183, -- need npc
         mobs = 17248598 -- all mobs have spawn info
     },
-    [xi.zone.VALKURM_DUNES] = 
+    [xi.zone.VALKURM_DUNES] =
     {
         itemReq = 1531, -- Galka Fang Sack
         levelCap = 30,
         npcs = 17201183,
         mobs = 17199593 -- all mobs have spawn info
     },
-    [xi.zone.JUGNER_FOREST] = 
+    [xi.zone.JUGNER_FOREST] =
     {
         itemReq = 1532, -- Silver Engraving
         levelCap = 30,
