@@ -125,16 +125,16 @@ xi.garrison.waveAlive = function(player, npc, wave, party)
     local garrisonZoneData = xi.garrison.data[zoneId]
     local garrisonLoot = {}
     garrisonLoot = xi.garrison.loot[garrisonZoneData.levelCap]
-    local killedallmobs = true
+    local killedAllMobs = true
     local npcs = garrisonZoneData.npcs
-    local killedallnpc = true
+    local killedAllNPC = true
     local npcnum = 1
     local mob = garrisonZoneData.mobs
     local mobnum = 1
     -- Check all NPCs are dead -> lose
     while npcnum <= party do
         if GetMobByID(npcs):isAlive() then
-            killedallnpc = false
+            killedAllNPC = false
         end
         npcnum = npcnum + 1
         npcs = npcs + 1
@@ -142,13 +142,17 @@ xi.garrison.waveAlive = function(player, npc, wave, party)
     -- Check all Mobs are dead -> New Wave/Win
     while mobnum <= 9 do
         if GetMobByID(mob):isAlive() then
-            killedallmobs = false
+            killedAllMobs = false
         end
         mobnum = mobnum + 1
         mob = mob + 1
     end
     -- If logic im sorry!!!
-    if killedallmobs == true and wave == 4 and killedallnpc == false then
+    if 
+        killedAllMobs == true and 
+        wave == 4 and 
+        killedAllNPC == false 
+    then
         --win
         npc:getZone():setLocalVar(string.format("[GARRISON]EndTime_%s", zoneID), os.time())
         for _, v in ipairs(player:getAlliance()) do
@@ -167,13 +171,17 @@ xi.garrison.waveAlive = function(player, npc, wave, party)
             xi.garrison.despawnNPCs(npc, party)
             -- Var to give rewards to party trigger from guard
             player:setCharVar("Garrison_Treasure", 1)
-    elseif killedallmobs == true and wave <=3 and killedallnpc == false then
+    elseif 
+        killedAllMobs == true and 
+        wave <=3 and 
+        killedAllNPC == false 
+    then
         -- next wave
         wave = wave + 1
         npc:timer(30000, function(npcArg)
             xi.garrison.spawnWave(player, npc, wave, party)
         end)
-    elseif killedallnpc == true then
+    elseif killedAllNPC == true then
         -- lose
         npc:getZone():setLocalVar(string.format("[GARRISON]EndTime_%s", zoneID), os.time())
         for _, v in ipairs(player:getAlliance()) do
@@ -224,7 +232,10 @@ xi.garrison.onTrade = function(player, npc, trade)
     local zoneId = npc:getZoneID()
     local garrisonZoneData = xi.garrison.data[zoneId]
     local item = garrisonZoneData.itemReq
-    if npcUtil.tradeHasExactly(trade, item) and (os.time() > garrisonRunning) then
+    if 
+        npcUtil.tradeHasExactly(trade, item) and 
+        os.time() > garrisonRunning
+    then
         xi.garrison.start(player, npc)
         player:confirmTrade()
         npc:getZone():setLocalVar(string.format("[GARRISON]EndTime_%s", zoneID), os.time() + lockout)

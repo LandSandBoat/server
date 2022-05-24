@@ -16,7 +16,7 @@ local guardEvent  = 32761
 
 entity.onTrade = function(player, npc, trade)
     xi.conq.overseerOnTrade(player, npc, trade, guardNation, guardType)
-    if(player:getNation()==guardNation) then
+    if player:getNation()==guardNation then
         xi.garrison.onTrade(player, npc, trade)
     else
         --not of nation event
