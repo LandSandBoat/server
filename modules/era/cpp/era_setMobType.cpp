@@ -9,7 +9,7 @@
 #include "../src/map/entities/mobentity.h"
 #include "../src/map/utils/moduleutils.h"
 
-class CustomCPPModule : public CPPModule
+class MobTypeFunction : public CPPModule
 {
     // Required
     void OnInit() override
@@ -36,4 +36,4 @@ class CustomCPPModule : public CPPModule
     }
 };
 
-REGISTER_CPP_MODULE(CustomCPPModule);
+REGISTER_CPP_MODULE(MobTypeFunction);
