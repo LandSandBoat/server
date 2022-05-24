@@ -822,14 +822,15 @@ xi.dynamis.cleanupDynamis = function(zone)
 end
 
 xi.dynamis.dynamisTimeWarning = function(zone)
+    local zoneID = zone:getID()
     local playersInZone = zone:getPlayers()
     local timeRemaining = math.floor((xi.dynamis.getDynaTimeRemaining(zone) / 60)) -- Get time remaining, convert to minutes, floor value.
     for _, player in pairs(playersInZone) do
         if player:getLocalVar("Received_Warning") ~= 1 then
             if timeRemaining <= 2 then
-                player:messageSpecial(zones[zone].text.DYNAMIS_TIME_UPDATE_1, timeRemaining, 1) -- Send 1 minute warning.
+                player:messageSpecial(xi.dynamis.dynaIDLookup[zoneID].text.DYNAMIS_TIME_UPDATE_1, timeRemaining, 1) -- Send 1 minute warning.
             else
-                player:messageSpecial(zones[zone].text.DYNAMIS_TIME_UPDATE_2, timeRemaining, 1) -- Send [3/10] minutes warning.
+                player:messageSpecial(xi.dynamis.dynaIDLookup[zoneID].text.DYNAMIS_TIME_UPDATE_2, timeRemaining, 1) -- Send [3/10] minutes warning.
             end
             player:setLocalVar("Received_Warning", 1)
         end
@@ -850,9 +851,6 @@ xi.dynamis.registerDynamis = function(player)
     local dynamisToken = GetServerVariable(string.format("[DYNA]Token_%s", xi.dynamis.dynaInfoEra[player:getZoneID()].dynaZone))
     
     if dynamisToken ~= 0 and dynamisToken ~= nil then -- Double check that we have a token.
-        print(dynamisToken)
-        print(xi.dynamis.dynaInfoEra[zoneID].dynaZone)
-        print(player)
         player:createHourglass(xi.dynamis.dynaInfoEra[zoneID].dynaZone, dynamisToken) -- Create initial perpetual.
         player:messageSpecial(xi.dynamis.dynaIDLookup[zoneID].text.INFORMATION_RECORDED, dynamis_perpetual) -- Send player the recorded message.
         player:messageSpecial(zones[player:getZoneID()].text.ITEM_OBTAINED, dynamis_perpetual) -- Give player a message stating the perpetual has been obtained. 

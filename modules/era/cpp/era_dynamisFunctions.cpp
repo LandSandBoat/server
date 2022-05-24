@@ -16,6 +16,7 @@
 #include "map/packets/inventory_finish.h"
 #include "map/packets/inventory_item.h"
 #include "map/items/item_furnishing.h"
+#include "map/utils/charutils.h"
 
 
 namespace
@@ -44,14 +45,20 @@ class DynaFuncModule : public CPPModule
                 return;
             }
 
-            CItem* PItem = itemutils::GetItem(HOURGLASS_ID);
-            PItem->setQuantity(1);
+            auto* PCharEntity = static_cast<CCharEntity*>(PEntity);
+            
+            if (PCharEntity != nullptr)
+            {
+                CItem* PItem = itemutils::GetItem(HOURGLASS_ID);
+                PItem->setQuantity(1);
 
-            ref<uint8>(PItem->m_extra,  0x02) = 1;
-            ref<uint32>(PItem->m_extra, 0x04) = PEntity->id;
-            ref<uint32>(PItem->m_extra, 0x0C) = currentEpoch();
-            ref<uint8>(PItem->m_extra,  0x10) = zoneID;
-            ref<uint32>(PItem->m_extra, 0x14) = dynamistoken;
+                ref<uint8>(PItem->m_extra,  0x02) = 1;
+                ref<uint32>(PItem->m_extra, 0x04) = PEntity->id;
+                ref<uint32>(PItem->m_extra, 0x0C) = currentEpoch();
+                ref<uint8>(PItem->m_extra,  0x10) = zoneID;
+                ref<uint32>(PItem->m_extra, 0x14) = dynamistoken;
+                charutils::AddItem(PCharEntity, LOC_INVENTORY, PItem);
+            }
         };
 
         /* player:updateHourglass(dynamistoken, timepoint)
