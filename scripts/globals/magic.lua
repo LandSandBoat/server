@@ -304,49 +304,6 @@ function calculateMagicDamage(caster, target, spell, params)
     -- printf("dmg: %d dINT: %d\n", dmg, dINT)
 
     return dmg
-
-end
-
-function doBoostGain(caster, target, spell, effect)
-    local duration = calculateDuration(300, spell:getSkillType(), spell:getSpellGroup(), caster, target)
-
-    -- calculate potency
-    local magicskill = caster:getSkillLevel(spell:getSkillType())
-    local potency = math.floor((magicskill - 300) / 10) + 5
-
-    if potency > 25 then
-        potency = 25
-    elseif potency < 5 then
-        potency = 5
-    end
-
-    -- printf("BOOST-GAIN: POTENCY = %d", potency)
-
-    -- Only one Boost Effect can be active at once, so if the player has any we have to cancel & overwrite
-    local effectOverwrite =
-    {
-        xi.effect.STR_BOOST,
-        xi.effect.DEX_BOOST,
-        xi.effect.VIT_BOOST,
-        xi.effect.AGI_BOOST,
-        xi.effect.INT_BOOST,
-        xi.effect.MND_BOOST,
-        xi.effect.CHR_BOOST
-    }
-
-    for i, effectValue in ipairs(effectOverwrite) do
-        -- printf("BOOST-GAIN: CHECKING FOR EFFECT %d...", effect)
-        if target:hasStatusEffect(effectValue) then
-            -- printf("BOOST-GAIN: HAS EFFECT %d, DELETING...", effect)
-            target:delStatusEffect(effectValue)
-        end
-    end
-
-    if target:addStatusEffect(effect, potency, 0, duration) then
-        spell:setMsg(xi.msg.basic.MAGIC_GAIN_EFFECT)
-    else
-        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
-    end
 end
 
 function doEnspell(caster, target, spell, effect)

@@ -1,8 +1,7 @@
 -----------------------------------
 -- Spell: Enstone II
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/magic")
+require("scripts/globals/spells/spell_enhancing")
 -----------------------------------
 local spell_object = {}
 
@@ -11,9 +10,7 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    local effect = xi.effect.ENSTONE_II
-    doEnspell(caster, target, spell, effect)
-    return effect
+    return xi.spells.spell_enhancing.useEnhancingSpell(caster, target, spell)
 end
 
 return spell_object

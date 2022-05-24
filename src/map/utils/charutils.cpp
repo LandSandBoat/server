@@ -6067,13 +6067,13 @@ namespace charutils
 
         if (value == 0)
         {
-            sql->Async(fmt::format("DELETE FROM char_vars WHERE charid = {} AND varname = '{}' LIMIT 1;",
-                PChar->id, var));
+            sql->Query(fmt::format("DELETE FROM char_vars WHERE charid = {} AND varname = '{}' LIMIT 1;",
+                PChar->id, var).c_str());
         }
         else
         {
-            sql->Async(fmt::format("INSERT INTO char_vars SET charid = {}, varname = '{}', value = {} ON DUPLICATE KEY UPDATE value = {};",
-                PChar->id, var.c_str(), value, value));
+            sql->Query(fmt::format("INSERT INTO char_vars SET charid = {}, varname = '{}', value = {} ON DUPLICATE KEY UPDATE value = {};",
+                PChar->id, var.c_str(), value, value).c_str());
         }
     }
 

@@ -1,12 +1,7 @@
 -----------------------------------
 -- Spell: Invisible
--- Lessens chance of being detected by sight.
--- Duration is random number between 30 seconds and 5 minutes.
 -----------------------------------
-require("scripts/globals/magic")
-require("scripts/globals/msg")
-require("scripts/settings/main")
-require("scripts/globals/status")
+require("scripts/globals/spells/spell_enhancing")
 -----------------------------------
 local spell_object = {}
 
@@ -15,21 +10,7 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    if not target:hasStatusEffect(xi.effect.INVISIBLE) then
-
-        local duration = calculateDuration(math.random(420, 540), spell:getSkillType(), spell:getSpellGroup(), caster, target)
-
-        duration = duration + target:getMod(xi.mod.INVISIBLE_DURATION)
-
-        duration = math.max(300, calculateDurationForLvl(duration, 20, target:getMainLvl()))
-
-        spell:setMsg(xi.msg.basic.MAGIC_GAIN_EFFECT)
-        target:addStatusEffect(xi.effect.INVISIBLE, 0, 10, math.floor(duration * xi.settings.SNEAK_INVIS_DURATION_MULTIPLIER))
-    else
-        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
-    end
-
-    return xi.effect.INVISIBLE
+    return xi.spells.spell_enhancing.useEnhancingSpell(caster, target, spell)
 end
 
 return spell_object
