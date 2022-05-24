@@ -2740,6 +2740,14 @@ void CLuaBaseEntity::addTeleport(uint8 teleType, uint32 bitval, sol::object cons
         case TELEPORT_TYPE::ABYSSEA_CONFLUX:
             PChar->teleport.abysseaConflux[set] |= bit;
             break;
+        case TELEPORT_TYPE::WAYPOINT:
+        {
+            uint8 index  = bitval / 32;
+            uint8 setBit = bitval % 32;
+
+            PChar->teleport.waypoints[index] |= (1 << setBit);
+        }
+        break;
         default:
             ShowError("LuaBaseEntity::addTeleport : Parameter 1 out of bounds.");
             return;
@@ -2835,6 +2843,13 @@ sol::table CLuaBaseEntity::getTeleportTable(uint8 type)
             }
             return teleTable;
             break;
+        case TELEPORT_TYPE::WAYPOINT:
+            for (uint8 x = 0; x < 6; x++)
+            {
+                teleTable.add(PChar->teleport.waypoints[x]);
+            }
+            return teleTable;
+            break;
         default:
             ShowError("LuaBaseEntity::getteleport : Parameter 1 out of bounds.");
     }
@@ -2909,6 +2924,13 @@ bool CLuaBaseEntity::hasTeleport(uint8 tType, uint8 bit, sol::object const& arg2
         case TELEPORT_TYPE::CAMPAIGN_WINDY:
         {
             return PChar->teleport.campaignWindy & (1 << bit);
+        }
+        case TELEPORT_TYPE::WAYPOINT:
+        {
+            uint8 index  = bit / 32;
+            uint8 bitVal = bit % 32;
+
+            return PChar->teleport.waypoints[index] & (1 << bitVal);
         }
         default:
         {

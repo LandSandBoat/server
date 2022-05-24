@@ -181,32 +181,33 @@ xi.waypoint.onTrade = function(player, npc, trade)
 end
 
 xi.waypoint.onTrigger = function(player, npc)
-    local resultTable    = { 0, 0, 0, 0, 0, 0, 0, 0 }
+    local unlockedWaypoints = player:getTeleportTable(xi.teleport.type.WAYPOINT)
+    print(unlockedWaypoints)
     local waypointData   = getWaypointData(npc)
     local discountParams = 0b0100 -- TODO: Bit 2 here is discount, Bit 3 is accept/decline for simple/normal transport
 
     -- Waypoint Event ID
-    resultTable[1] = waypointData[4]
+    local eventId = waypointData[4]
 
     -- First event parameters packs the player's kinetic units, two bits that determine teleportation cost,
     -- and the Index value of the waypoint (See: waypointInfo table)
-    resultTable[2] = bit.lshift(player:getCurrency('kinetic_unit'), 16) + bit.lshift(discountParams, 12) + waypointData[1]
+    local p0 = bit.lshift(player:getCurrency('kinetic_unit'), 16) + bit.lshift(discountParams, 12) + waypointData[1]
 
     -- Second event parameter packs an initial bit which could be related to having the charter permit,
     -- along with the unlocked geomagnetrons in Eastern and Western Adoulin
-    resultTable[3] = 16744959
+    local p1 = unlockedWaypoints[1]
 
     -- Third event parameter is an inverted bitfield for all but bit 0, the remainder of the field is set
     -- by the key items for warp runes.
-    resultTable[4] = getRuneMask(player)
+    local p2 = getRuneMask(player)
 
     -- Unlock all non-city Waypoints
-    resultTable[5] = 975
-    resultTable[6] = 4063
-    resultTable[7] = 1999
-    resultTable[8] = 1984
+    local p3 = unlockedWaypoints[3]
+    local p4 = unlockedWaypoints[4]
+    local p5 = unlockedWaypoints[5]
+    local p6 = unlockedWaypoints[6]
 
-    player:startEvent(unpack(resultTable))
+    player:startEvent(eventId, p0, p1, p2, p3, p4, p5, p6)
 end
 
 -- Note: There is additional data packed into the event update option that is unused at this time (below):
