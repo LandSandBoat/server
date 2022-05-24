@@ -41,15 +41,18 @@ class DynaFuncModule : public CPPModule
         CBaseEntity* PEntity = PLuaBaseEntity->GetBaseEntity();
         if (PEntity->objtype != TYPE_PC)
         {
+            printf("Not a PC");
             return;
         }
 
         auto ret = sql->Query("SELECT value FROM server_variables WHERE name = '[DYNA]Token_%s' LIMIT 1;", zoneID);
+        printf("Token Found");
         if (ret != SQL_ERROR && sql->NumRows() && sql->NextRow())
         {
-            auto res = sql->GetUIntData(0);
-            if (res == HOURGLASS_ID)
-            {
+            // auto res = sql->GetUIntData(0);
+            // if (res == HOURGLASS_ID)
+            // {
+                printf("Valid Token");
                 CItem* PItem = itemutils::GetItem(HOURGLASS_ID);
                 PItem->setQuantity(1);
 
@@ -58,7 +61,7 @@ class DynaFuncModule : public CPPModule
                 ref<uint32>(PItem->m_extra, 0x0C) = currentEpoch();
                 ref<uint8>(PItem->m_extra,  0x10) = zoneID;
                 ref<uint32>(PItem->m_extra, 0x14) = dynamistoken;
-            }
+            // }
         }
     }
 

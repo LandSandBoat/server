@@ -877,7 +877,7 @@ xi.dynamis.registerDynamis = function(player)
     local dynamisToken = GetServerVariable(string.format("[DYNA]Token_%s", xi.dynamis.dynaInfoEra[player:getZoneID()].dynaZone))
     
     if dynamisToken ~= 0 and dynamisToken ~= nil then -- Double check that we have a token.
-        player:createHourglass(xi.dynamis.dynaInfoEra[player:getZoneID()].zoneName, dynamisToken) -- Create initial perpetual.
+        player:createHourglass(xi.dynamis.dynaInfoEra[zoneID].zoneName, dynamisToken) -- Create initial perpetual.
         player:messageSpecial(xi.dynamis.dynaIDLookup[player:getZoneID()].text.INFORMATION_RECORDED, dynamis_perpetual) -- Send player the recorded message.
         player:messageSpecial(zones[player:getZoneID()].text.ITEM_OBTAINED, dynamis_perpetual) -- Give player a message stating the perpetual has been obtained. 
     end
