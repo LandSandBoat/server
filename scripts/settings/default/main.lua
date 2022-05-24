@@ -199,4 +199,11 @@ xi.settings =
     ENM_COOLDOWN                 = 120,  -- Number of hours before a player can obtain same KI for ENMs (default: 5 days)
     FORCE_SPAWN_QM_RESET_TIME    = 300,  -- Number of seconds the ??? remains hidden for after the despawning of the mob it force spawns.
     GOBBIE_BOX_MIN_AGE           = 45,   -- Minimum character age in days before a character can sign up for Gobbie Mystery Box
+
+    -- GARRISON
+    GARRISON_LOCKOUT             = 1800; -- Time in seconds before a new garrison can be started (default: 1800)
+    GARRISON_TIME_LIMIT          = 1800; -- Time in seconds before lose ongoing garrison (default: 1800)
+    GARRISON_ONCE_PER_WEEK       = 0;    -- Set to 1 to bypass the limit of one garrison per Conquest Tally Week.
+    GARRISON_PARTY_LIMIT         = 18;   -- Set to max party members you want to do garrison (default: 18).
+    GARRISON_NATION_BYPASS       = 0;    -- Set to 1 to bypass the nation requirement.
 }
