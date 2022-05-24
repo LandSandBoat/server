@@ -143,8 +143,7 @@ xi.garrison.loot =
     },
 
 }
-
-
+--Zone Data 
 xi.garrison.data =
 {
     [xi.zone.WEST_RONFAURE] =

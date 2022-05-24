@@ -16,7 +16,6 @@ xi.garrison = xi.garrison or {}
 -- Helpers
 -----------------------------------
 
-
 -----------------------------------
 -- Main Functions
 -----------------------------------
@@ -26,7 +25,6 @@ xi.garrison.tick = function(player, npc, wave, party)
     local garrisonData = xi.garrison.lookup[zoneId]
     xi.garrison.waveAlive(player, npc, wave, party)
 end
-
 
 xi.garrison.spawnNPCs = function(npc, party)
     local zoneId = npc:getZoneID()
@@ -45,7 +43,6 @@ xi.garrison.spawnNPCs = function(npc, party)
     end
 end
 
-
 xi.garrison.despawnNPCs = function(npc, party)
     local zoneId = npc:getZoneID()
     local garrisonZoneData = xi.garrison.data[zoneId]
@@ -57,7 +54,6 @@ xi.garrison.despawnNPCs = function(npc, party)
         npcs = npcs + 1
     end
 end
-
 
 xi.garrison.spawnWave = function(player, npc, wave, party)
     local zoneId = npc:getZoneID()
@@ -123,7 +119,6 @@ xi.garrison.spawnWave = function(player, npc, wave, party)
         end)
     end
 end
-
 
 xi.garrison.waveAlive = function(player, npc, wave, party)
     local zoneId = npc:getZoneID()
@@ -201,7 +196,6 @@ xi.garrison.waveAlive = function(player, npc, wave, party)
     end
 end
 
-
 xi.garrison.start = function(player, npc)
     local zoneId = npc:getZoneID()
     local garrisonZoneData = xi.garrison.data[zoneId]
@@ -213,7 +207,6 @@ xi.garrison.start = function(player, npc)
         for _, v in ipairs(player:getAlliance()) do
             v:addStatusEffect(xi.effect.LEVEL_RESTRICTION, garrisonZoneData.levelCap, 0, 0)
             v:addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0)
-
         end
     -- Spawn NPC needs to be changed to dynamic similar to pets/trusts/fellows shifting ids
     xi.garrison.spawnNPCs(npc, party)
@@ -221,7 +214,6 @@ xi.garrison.start = function(player, npc)
     local wave = 1
     xi.garrison.spawnWave(player, npc, wave, party)
 end
-
 
 xi.garrison.onTrade = function(player, npc, trade)
     -- TODO: Once Per Conquest Tally
