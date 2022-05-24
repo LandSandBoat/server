@@ -117,12 +117,9 @@ class DynaFuncModule : public CPPModule
             return false;
         }
 
-        auto zoneID = Zone->GetID();
-
         if (auto* PCharEntity = static_cast<CCharEntity*>(PEntity))
         {
             CItemContainer* PContainer = PCharEntity->getStorage(LOC_INVENTORY);
-            uint8 numitemsupdated = 0;
             for (int slotIndex = 1; slotIndex <= PContainer->GetSize(); ++slotIndex)
             {
                 CItem* PItem = PContainer->GetItem(slotIndex);
