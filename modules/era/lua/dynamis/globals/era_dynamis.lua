@@ -276,7 +276,6 @@ xi.dynamis.entryInfoEra =
         winVar = "DynaSandoria_Win",
         dynamis_has_enteredVar = "DynaSandoria_dynamis_has_entered",
         hasSeenWinCSVar = "DynaSandoria_HasSeenWinCS",
-        zoneName = xi.zone.DYNAMIS_SAN_DORIA,
         winKI = xi.ki.HYDRA_CORPS_COMMAND_SCEPTER,
         enterPos = {161.838, -2.000, 161.673, 93, 185},
         reqs = function(player)
@@ -297,7 +296,6 @@ xi.dynamis.entryInfoEra =
         winVar = "DynaBastok_Win",
         dynamis_has_enteredVar = "DynaBastok_dynamis_has_entered",
         hasSeenWinCSVar = "DynaBastok_HasSeenWinCS",
-        zoneName = xi.zone.DYNAMIS_BASTOK,
         winKI = xi.ki.HYDRA_CORPS_EYEGLASS,
         enterPos = {116.482, 0.994, -72.121, 128, 186},
         reqs = function(player)
@@ -318,7 +316,6 @@ xi.dynamis.entryInfoEra =
         winVar = "DynaWindurst_Win",
         dynamis_has_enteredVar = "DynaWindurst_dynamis_has_entered",
         hasSeenWinCSVar = "DynaWindurst_HasSeenWinCS",
-        zoneName = xi.zone.WINDURST_WALLS,
         winKI = xi.ki.HYDRA_CORPS_LANTERN,
         enterPos = {-221.988, 1.000, -120.184, 0, 187},
         reqs = function(player)
@@ -339,7 +336,6 @@ xi.dynamis.entryInfoEra =
         winVar = "DynaJeuno_Win",
         dynamis_has_enteredVar = "DynaJeuno_dynamis_has_entered",
         hasSeenWinCSVar = "DynaJeuno_HasSeenWinCS",
-        zoneName = xi.zone.DYNAMIS_JEUNO,
         winKI = xi.ki.HYDRA_CORPS_TACTICAL_MAP,
         enterPos = {48.930, 10.002, -71.032, 195, 188},
         reqs = function(player)
@@ -359,7 +355,6 @@ xi.dynamis.entryInfoEra =
         winVar = "DynaBeaucedine_Win",
         dynamis_has_enteredVar = "DynaBeaucedine_dynamis_has_entered",
         hasSeenWinCSVar = "DynaBeaucedine_HasSeenWinCS",
-        zoneName = xi.zone.DYNAMIS_BEAUCEDINE,
         winKI = xi.ki.HYDRA_CORPS_INSIGNIA,
         enterPos = {-284.751, -39.923, -422.948, 235, 134},
         reqs = function(player)
@@ -382,7 +377,6 @@ xi.dynamis.entryInfoEra =
         winVar = "DynaXarcabard_Win",
         dynamis_has_enteredVar = "DynaXarcabard_dynamis_has_entered",
         hasSeenWinCSVar = "DynaXarcabard_HasSeenWinCS",
-        zoneName = xi.zone.DYNAMIS_XARCABARD,
         winKI = xi.ki.HYDRA_CORPS_BATTLE_STANDARD,
         enterPos = {569.312, -0.098, -270.158, 90, 135},
         reqs = function(player)
@@ -403,7 +397,6 @@ xi.dynamis.entryInfoEra =
         winVar = "DynaValkurm_Win",
         dynamis_has_enteredVar = "DynaValkurm_dynamis_has_entered",
         hasSeenWinCSVar = "DynaValkurm_HasSeenWinCS",
-        zoneName = xi.zone.DYNAMIS_VALKURM,
         winKI = xi.ki.DYNAMIS_VALKURM_SLIVER,
         enterPos = {100, -8, 131, 47, 39},
         reqs = function(player)
@@ -425,7 +418,6 @@ xi.dynamis.entryInfoEra =
         winVar = "DynaBuburimu_Win",
         dynamis_has_enteredVar = "DynaBuburimu_dynamis_has_entered",
         hasSeenWinCSVar = "DynaBuburimu_HasSeenWinCS",
-        zoneName = xi.zone.DYNAMIS_BUBURIMU,
         winKI = xi.ki.DYNAMIS_BUBURIMU_SLIVER,
         enterPos = {155, -1, -169, 170, 40},
         reqs = function(player)
@@ -447,7 +439,6 @@ xi.dynamis.entryInfoEra =
         winVar = "DynaQufim_Win",
         dynamis_has_enteredVar = "DynaQufim_dynamis_has_entered",
         hasSeenWinCSVar = "DynaQufim_HasSeenWinCS",
-        zoneName = xi.zone.DYNAMIS_QUFIM,
         winKI = xi.ki.DYNAMIS_QUFIM_SLIVER,
         enterPos = {-19, -17, 104, 253, 41},
         reqs = function(player)
@@ -469,7 +460,6 @@ xi.dynamis.entryInfoEra =
         winVar = "DynaTavnazia_Win",
         dynamis_has_enteredVar = "DynaTavnazia_dynamis_has_entered",
         hasSeenWinCSVar = "DynaQufim_HasSeenWinCS",
-        zoneName = xi.zone.DYNAMIS_TAVNAZIA,
         winKI = xi.ki.DYNAMIS_TAVNAZIA_SLIVER,
         enterPos = {0.1, -7, -21, 190, 42},
         reqs = function(player)
@@ -505,7 +495,6 @@ xi.dynamis.dynaInfoEra =
         winVar = "DynaSandoria_Win",
         dynamis_has_enteredVar = "DynaSandoria_dynamis_has_entered",
         hasSeenWinCSVar = "DynaSandoria_HasSeenWinCS",
-        dynaNameShort = "DynamisSan",
         winKI = xi.ki.HYDRA_CORPS_COMMAND_SCEPTER,
         winTitle = xi.title.DYNAMIS_SAN_DORIA_INTERLOPER,
         winQM = 17535223,
@@ -517,7 +506,6 @@ xi.dynamis.dynaInfoEra =
     [xi.zone.SOUTHERN_SAN_DORIA] =
     {
         dynaZone = xi.zone.DYNAMIS_SAN_DORIA,
-        dynaNameShort = "DynamisSan",
         dynaZoneMessageParam = 1,
     },
     [xi.zone.DYNAMIS_BASTOK] =
@@ -525,7 +513,6 @@ xi.dynamis.dynaInfoEra =
         winVar = "DynaBastok_Win",
         dynamis_has_enteredVar = "DynaBastok_dynamis_has_entered",
         hasSeenWinCSVar = "DynaBastok_HasSeenWinCS",
-        dynaNameShort = "DynamisBas",
         winKI = xi.ki.HYDRA_CORPS_EYEGLASS,
         winTitle = xi.title.DYNAMIS_BASTOK_INTERLOPER,
         winQM = 17539322,
@@ -535,7 +522,6 @@ xi.dynamis.dynaInfoEra =
     [xi.zone.BASTOK_MINES] =
     {
         dynaZone = xi.zone.DYNAMIS_BASTOK,
-        dynaNameShort = "DynamisBas",
         dynaZoneMessageParam = 2,
     },
     [xi.zone.DYNAMIS_WINDURST] =
@@ -543,7 +529,6 @@ xi.dynamis.dynaInfoEra =
         winVar = "DynaWindurst_Win",
         dynamis_has_enteredVar = "DynaWindurst_dynamis_has_entered",
         hasSeenWinCSVar = "DynaWindurst_HasSeenWinCS",
-        dynaNameShort = "DynamisWin",
         winKI = xi.ki.HYDRA_CORPS_LANTERN,
         winTitle = xi.title.DYNAMIS_WINDURST_INTERLOPER,
         winQM = 17543479,
@@ -553,7 +538,6 @@ xi.dynamis.dynaInfoEra =
     [xi.zone.WINDURST_WALLS] =
     {
         dynaZone = xi.zone.DYNAMIS_WINDURST,
-        dynaNameShort = "DynamisWin",
         dynaZoneMessageParam = 3,
     },
     [xi.zone.DYNAMIS_JEUNO] =
@@ -561,7 +545,6 @@ xi.dynamis.dynaInfoEra =
         winVar = "DynaJeuno_Win",
         dynamis_has_enteredVar = "DynaJeuno_dynamis_has_entered",
         hasSeenWinCSVar = "DynaJeuno_HasSeenWinCS",
-        dynaNameShort = "DynamisJeu",
         winKI = xi.ki.HYDRA_CORPS_TACTICAL_MAP,
         winTitle = xi.title.DYNAMIS_JEUNO_INTERLOPER,
         winQM = 17547509,
@@ -572,7 +555,6 @@ xi.dynamis.dynaInfoEra =
     [xi.zone.RULUDE_GARDENS] =
     {
         dynaZone = xi.zone.DYNAMIS_JEUNO,
-        dynaNameShort = "DynamisJeu",
         dynaZoneMessageParam = 4,
     },
     [xi.zone.DYNAMIS_BEAUCEDINE] =
@@ -580,7 +562,6 @@ xi.dynamis.dynaInfoEra =
         winVar = "DynaBeaucedine_Win",
         dynamis_has_enteredVar = "DynaBeaucedine_dynamis_has_entered",
         hasSeenWinCSVar = "DynaBeaucedine_HasSeenWinCS",
-        dynaNameShort = "DynamisBea",
         winKI = xi.ki.HYDRA_CORPS_INSIGNIA,
         winTitle = xi.title.DYNAMIS_BEAUCEDINE_INTERLOPER,
         winQM = 17326800,
@@ -590,7 +571,6 @@ xi.dynamis.dynaInfoEra =
     [xi.zone.BEAUCEDINE_GLACIER] =
     {
         dynaZone = xi.zone.DYNAMIS_BEAUCEDINE,
-        dynaNameShort = "DynamisBea",
         dynaZoneMessageParam = 5,
     },
     [xi.zone.DYNAMIS_XARCABARD] =
@@ -598,7 +578,6 @@ xi.dynamis.dynaInfoEra =
         winVar = "DynaXarcabard_Win",
         dynamis_has_enteredVar = "DynaXarcabard_dynamis_has_entered",
         hasSeenWinCSVar = "DynaXarcabard_HasSeenWinCS",
-        dynaNameShort = "DynamisXar",
         winKI = xi.ki.HYDRA_CORPS_BATTLE_STANDARD,
         winTitle = xi.title.DYNAMIS_XARCABARD_INTERLOPER,
         winQM = 17330780,
@@ -608,7 +587,6 @@ xi.dynamis.dynaInfoEra =
     [xi.zone.XARCABARD] =
     {
         dynaZone = xi.zone.DYNAMIS_XARCABARD,
-        dynaNameShort = "DynamisXar",
         dynaZoneMessageParam = 6,
     },
     [xi.zone.DYNAMIS_VALKURM] =
@@ -616,7 +594,6 @@ xi.dynamis.dynaInfoEra =
         winVar = "DynaValkurm_Win",
         dynamis_has_enteredVar = "DynaValkurm_dynamis_has_entered",
         hasSeenWinCSVar = "DynaValkurm_HasSeenWinCS",
-        dynaNameShort = "DynamisVal",
         winKI = xi.ki.DYNAMIS_VALKURM_SLIVER,
         winTitle = xi.title.DYNAMIS_VALKURM_INTERLOPER,
         winQM = 16937586,
@@ -626,7 +603,6 @@ xi.dynamis.dynaInfoEra =
     [xi.zone.VALKURM_DUNES] =
     {
         dynaZone = xi.zone.DYNAMIS_VALKURM,
-        dynaNameShort = "DynamisVal",
         dynaZoneMessageParam = 7,
     },
     [xi.zone.DYNAMIS_BUBURIMU] =
@@ -634,7 +610,6 @@ xi.dynamis.dynaInfoEra =
         winVar = "DynaBuburimu_Win",
         dynamis_has_enteredVar = "DynaBuburimu_dynamis_has_entered",
         hasSeenWinCSVar = "DynaBuburimu_HasSeenWinCS",
-        dynaNameShort = "DynamisBub",
         winKI = xi.ki.DYNAMIS_BUBURIMU_SLIVER,
         winTitle = xi.title.DYNAMIS_BUBURIMU_INTERLOPER,
         winQM = 16941677,
@@ -653,7 +628,6 @@ xi.dynamis.dynaInfoEra =
     [xi.zone.BUBURIMU_PENINSULA] =
     {
         dynaZone = xi.zone.DYNAMIS_BUBURIMU,
-        dynaNameShort = "DynamisBub",
         dynaZoneMessageParam = 8,
     },
     [xi.zone.DYNAMIS_QUFIM] =
@@ -661,7 +635,6 @@ xi.dynamis.dynaInfoEra =
         winVar = "DynaQufim_Win",
         dynamis_has_enteredVar = "DynaQufim_dynamis_has_entered",
         hasSeenWinCSVar = "DynaQufim_HasSeenWinCS",
-        dynaNameShort = "DynamisQuf",
         winKI = xi.ki.DYNAMIS_QUFIM_SLIVER,
         winTitle = xi.title.DYNAMIS_QUFIM_INTERLOPER,
         winQM = 16945639,
@@ -688,7 +661,6 @@ xi.dynamis.dynaInfoEra =
     [xi.zone.QUFIM_ISLAND] =
     {
         dynaZone = xi.zone.DYNAMIS_QUFIM,
-        dynaNameShort = "DynamisQuf",
         dynaZoneMessageParam = 9,
     },
     [xi.zone.DYNAMIS_TAVNAZIA] =
@@ -696,7 +668,6 @@ xi.dynamis.dynaInfoEra =
         winVar = "DynaTavnazia_Win",
         dynamis_has_enteredVar = "DynaTavnazia_dynamis_has_entered",
         hasSeenWinCSVar = "DynaQufim_HasSeenWinCS",
-        dynaNameShort = "DynamisTav",
         winKI = xi.ki.DYNAMIS_TAVNAZIA_SLIVER,
         winTitle = xi.title.DYNAMIS_TAVNAZIA_INTERLOPER,
         winQM = nil,
@@ -706,7 +677,6 @@ xi.dynamis.dynaInfoEra =
     [xi.zone.TAVNAZIAN_SAFEHOLD] =
     {
         dynaZone = xi.zone.DYNAMIS_TAVNAZIA,
-        dynaNameShort = "DynamisTav",
         dynaZoneMessageParam = 10,
     },
 
@@ -855,10 +825,13 @@ xi.dynamis.dynamisTimeWarning = function(zone)
     local playersInZone = zone:getPlayers()
     local timeRemaining = math.floor((xi.dynamis.getDynaTimeRemaining(zone) / 60)) -- Get time remaining, convert to minutes, floor value.
     for _, player in pairs(playersInZone) do
-        if timeRemaining <= 2 then
-            player:messageSpecial(zones[zone].text.DYNAMIS_TIME_UPDATE_1, timeRemaining, 1) -- Send 1 minute warning.
-        else
-            player:messageSpecial(zones[zone].text.DYNAMIS_TIME_UPDATE_2, timeRemaining, 1) -- Send [3/10] minutes warning.
+        if player:getLocalVar("Received_Warning") ~= 1 then
+            if timeRemaining <= 2 then
+                player:messageSpecial(zones[zone].text.DYNAMIS_TIME_UPDATE_1, timeRemaining, 1) -- Send 1 minute warning.
+            else
+                player:messageSpecial(zones[zone].text.DYNAMIS_TIME_UPDATE_2, timeRemaining, 1) -- Send [3/10] minutes warning.
+            end
+            player:setLocalVar("Received_Warning", 1)
         end
     end
 end
@@ -877,8 +850,11 @@ xi.dynamis.registerDynamis = function(player)
     local dynamisToken = GetServerVariable(string.format("[DYNA]Token_%s", xi.dynamis.dynaInfoEra[player:getZoneID()].dynaZone))
     
     if dynamisToken ~= 0 and dynamisToken ~= nil then -- Double check that we have a token.
-        player:createHourglass(xi.dynamis.dynaInfoEra[zoneID].zoneName, dynamisToken) -- Create initial perpetual.
-        player:messageSpecial(xi.dynamis.dynaIDLookup[player:getZoneID()].text.INFORMATION_RECORDED, dynamis_perpetual) -- Send player the recorded message.
+        print(dynamisToken)
+        print(xi.dynamis.dynaInfoEra[zoneID].dynaZone)
+        print(player)
+        player:createHourglass(xi.dynamis.dynaInfoEra[zoneID].dynaZone, dynamisToken) -- Create initial perpetual.
+        player:messageSpecial(xi.dynamis.dynaIDLookup[zoneID].text.INFORMATION_RECORDED, dynamis_perpetual) -- Send player the recorded message.
         player:messageSpecial(zones[player:getZoneID()].text.ITEM_OBTAINED, dynamis_perpetual) -- Give player a message stating the perpetual has been obtained. 
     end
 end
@@ -892,9 +868,10 @@ xi.dynamis.registerPlayer = function(player)
 end
 
 xi.dynamis.isPlayerRegistered = function(player, dynamisToken)
-    local registerID = player:getCharVar(string.format("[DYNA]PlayerRegistered_%s", (xi.dynamis.dynaInfoEra[player:getZoneID()].dynaZone))) -- Get player's registered ID.
+    local zoneID = player:getZoneID()
+    local registerID = player:getCharVar(string.format("[DYNA]PlayerRegistered_%s", (xi.dynamis.dynaInfoEra[zoneID].dynaZone))) -- Get player's registered ID.
 
-    if (registerID - dynamisToken) == player:getCharVar(string.format("[DYNA]PlayerRegisterKey_%s", (xi.dynamis.dynaInfoEra[player:getZoneID()].dynaZone))) then -- If the remainder is the player's zoneID then they are already registered.
+    if (registerID - dynamisToken) == player:getCharVar(string.format("[DYNA]PlayerRegisterKey_%s", (xi.dynamis.dynaInfoEra[zoneID].dynaZone))) then -- If the remainder is the player's zoneID then they are already registered.
         return true -- Treat as previous registrant.
     else
         return false -- Treat as new registrant.
@@ -902,9 +879,10 @@ xi.dynamis.isPlayerRegistered = function(player, dynamisToken)
 end
 
 xi.dynamis.ejectPlayer = function(player)
+    local zoneID = player:getZoneID()
     if player:getCurrentRegion() == xi.region.DYNAMIS then
-        player:timer(1000, function(player) player:messageSpecial(xi.dynamis.dynaIDLookup[player:getZoneID()].text.NO_LONGER_HAVE_CLEARANCE, 0, 30) end) -- Wait 1 second, send no clearance message.
-        player:setCharVar(string.format("[DYNA]EjectPlayer_%s", xi.dynamis.dynaInfoEra[player:getZoneID()].dynaZone), -1) -- Reset player's eject timer.
+        player:timer(1000, function(player) player:messageSpecial(xi.dynamis.dynaIDLookup[zoneID].text.NO_LONGER_HAVE_CLEARANCE, 0, 30) end) -- Wait 1 second, send no clearance message.
+        player:setCharVar(string.format("[DYNA]EjectPlayer_%s", xi.dynamis.dynaInfoEra[zoneID].dynaZone), -1) -- Reset player's eject timer.
         player:disengage() -- Force disengage.
         player:timer(2000, function(player) player:startCutscene(100) end) -- Wait 2 seconds then play exit CS.
     end
@@ -959,11 +937,11 @@ xi.dynamis.entryNpcOnTrade = function(player, npc, trade)
 
     if npcUtil.tradeHas(trade, dynamis_timeless, true, false) then -- Check for timeless hourglass to trade for perpetual hourglass to start instance
         if dynamis_time_remaining > 0 then -- Check if another group is present.
-            player:messageSpecial(xi.dynamis.dynaIDLookup[player:getZoneID()].text.ANOTHER_GROUP, xi.dynamis.entryInfoEra[zoneID].csBit)
+            player:messageSpecial(xi.dynamis.dynaIDLookup[zoneID].text.ANOTHER_GROUP, xi.dynamis.entryInfoEra[zoneID].csBit)
         elseif player:getGMLevel() >= 2 then -- If no other group, if GM bypass lockout and start new dynamis.
             player:startEvent(xi.dynamis.entryInfoEra[zoneID].csRegisterGlass, xi.dynamis.entryInfoEra[zoneID].csBit, dynamis_has_entered == 1 and 0 or 1, dynamis_reservation_cancel, dynamis_reentry_days, xi.dynamis.entryInfoEra[zoneID].maxCapacity, xi.ki.VIAL_OF_SHROUDED_SAND, dynamis_timeless, dynamis_perpetual)
         elseif dynamis_last_reservation < dynamis_rentry_hours then -- Still in lockout period.
-            player:messageSpecial(zones[player:getZoneID()].text.YOU_CANNOT_ENTER_DYNAMIS, math.ceil(dynamis_rentry_hours - dynamis_last_reservation), xi.dynamis.entryInfoEra[zoneID].csBit)
+            player:messageSpecial(zones[zoneID].text.YOU_CANNOT_ENTER_DYNAMIS, math.ceil(dynamis_rentry_hours - dynamis_last_reservation), xi.dynamis.entryInfoEra[zoneID].csBit)
         else -- Proceed in starting new dynamis.
             player:startEvent(xi.dynamis.entryInfoEra[zoneID].csRegisterGlass, xi.dynamis.entryInfoEra[zoneID].csBit, dynamis_has_entered == 1 and 0 or 1, dynamis_reservation_cancel, dynamis_reentry_days, xi.dynamis.entryInfoEra[zoneID].maxCapacity, xi.ki.VIAL_OF_SHROUDED_SAND, dynamis_timeless, dynamis_perpetual)
         end
@@ -977,9 +955,9 @@ xi.dynamis.entryNpcOnTrade = function(player, npc, trade)
                 player:startEvent(xi.dynamis.entryInfoEra[zoneID].csDyna, xi.dynamis.entryInfoEra[zoneID].csBit, dynamis_has_entered == 1 and 0 or 1, dynamis_reservation_cancel, dynamis_reentry_days, xi.dynamis.entryInfoEra[zoneID].maxCapacity, xi.ki.VIAL_OF_SHROUDED_SAND, dynamis_timeless, dynamis_perpetual)
                 player:setCharVar(string.format("[DYNA]InflictWeakness_%s", xi.dynamis.dynaInfoEra[zoneID].dynaZone), true) -- Tell dynamis to inflict weakness.
             elseif dynamis_last_reservation < dynamis_rentry_hours then -- If in lockout, deny.
-                player:messageSpecial(zones[player:getZoneID()].text.YOU_CANNOT_ENTER_DYNAMIS, (dynamis_rentry_hours - dynamis_last_reservation), xi.dynamis.entryInfoEra[zoneID].csBit)
+                player:messageSpecial(zones[zoneID].text.YOU_CANNOT_ENTER_DYNAMIS, (dynamis_rentry_hours - dynamis_last_reservation), xi.dynamis.entryInfoEra[zoneID].csBit)
             elseif dynamis_glass_valid == 1 then -- Initiate new registrant procedure.
-                if dynaCapacity < xi.dynamis.entryInfoEra[player:getZoneID()].maxCapacity then -- If not at max capacity, allow in.
+                if dynaCapacity < xi.dynamis.entryInfoEra[zoneID].maxCapacity then -- If not at max capacity, allow in.
                     player:startEvent(xi.dynamis.entryInfoEra[zoneID].csDyna, xi.dynamis.entryInfoEra[zoneID].csBit, dynamis_has_entered == 1 and 0 or 1, dynamis_reservation_cancel, dynamis_reentry_days, xi.dynamis.entryInfoEra[zoneID].maxCapacity, xi.ki.VIAL_OF_SHROUDED_SAND, dynamis_timeless, dynamis_perpetual)
                     player:setCharVar(string.format("[DYNA]InflictWeakness_%s", xi.dynamis.dynaInfoEra[zoneID].dynaZone), false) -- Tell dynamis to not inflict weakness.
                     SetServerVariable(string.format("[DYNA]RegisteredPlayers_%s", xi.dynamis.dynaInfoEra[zoneID].dynaZone), dynaCapacity + 1) -- Increment registered players by 1.
@@ -988,7 +966,7 @@ xi.dynamis.entryNpcOnTrade = function(player, npc, trade)
                 end
             else
                 if dynamis_time_remaining > 0 then
-                    player:messageSpecial(xi.dynamis.dynaIDLookup[player:getZoneID()].text.ANOTHER_GROUP, xi.dynamis.entryInfoEra[zoneID].csBit) -- There is another group in dynamis.
+                    player:messageSpecial(xi.dynamis.dynaIDLookup[zoneID].text.ANOTHER_GROUP, xi.dynamis.entryInfoEra[zoneID].csBit) -- There is another group in dynamis.
                 else
                     player:PrintToPlayer("The Perpetual Hourglass' time has run out.", 29) -- Something is invalid, fail to time has run out.
                 end
@@ -1010,7 +988,7 @@ m:addOverride("xi.dynamis.entryNpcOnTrigger", function(player, npc)
     elseif xi.dynamis.entryInfoEra[zoneID].csWin ~= nil and player:hasKeyItem(xi.dynamis.entryInfoEra[zoneID].winKI) and player:getCharVar(xi.dynamis.entryInfoEra[zoneID].hasSeenWinCSVar) == 0 then -- If player hasn't seen win CS play win CS.
         player:startEvent(xi.dynamis.entryInfoEra[zoneID].csWin)
     else
-        player:messageSpecial(zones[player:getZoneID()].text.DYNA_NPC_DEFAULT_MESSAGE) -- Just play default message otherwise.
+        player:messageSpecial(zones[zoneID].text.DYNA_NPC_DEFAULT_MESSAGE) -- Just play default message otherwise.
     end
 end)
 
@@ -1019,10 +997,9 @@ xi.dynamis.entryNpcOnEventUpdate = function(player, csid, option)
     if xi.dynamis.entryInfoEra[zoneID].enabled == false then return end -- If not enabled return.
     if csid == xi.dynamis.entryInfoEra[zoneID].csRegisterGlass then -- If dynamis register glass cs.
         if option == 0 then -- If completes the cutscene.
-            player:updateEvent(2)
-            player:release()
             xi.dynamis.registerDynamis(player) -- Trigger the generation of a token, timepoint, and start spawning wave 1.
             player:tradeComplete()
+            player:release()
         else
             player:release() -- Failed to complete CS.
             player:messageSpecial(xi.dynamis.dynaIDLookup[zoneID].text.UNABLE_TO_CONNECT)
