@@ -135,8 +135,8 @@ xi.garrison.spawnWave = function(player, npc, wave, party)
             SpawnMob(boss)
             -- BATTLEFIELD this is to prevent outside help, is not retail
             GetMobByID(boss):addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0)
-            local npcs = garrisonZoneData.npcs
-            local npcnum = 1
+            npcs = garrisonZoneData.npcs
+            npcnum = 1
             while npcnum <= party do
                 if GetMobByID(npcs):isAlive() == true then
                     GetMobByID(npcs):addEnmity(GetMobByID(boss), 1, 1)
@@ -161,11 +161,9 @@ xi.garrison.waveAlive = function(player, npc, wave, party)
     local garrisonZoneData = xi.garrison.data[zoneId]
     local garrisonLoot = {}
     garrisonLoot = xi.garrison.loot[garrisonZoneData.levelCap]
-    local npcs = garrisonZoneData.npcs
-    local npcnum = 1
     local mob = garrisonZoneData.mobs
     local mobnum = 1
-    local garrisonRunning = npc:getZone():getLocalVar(string.format("[GARRISON]EndTime_%s", zoneID))
+    local garrisonRunning = npc:getZone():getLocalVar(string.format("[GARRISON]EndTime_%s", zoneId))
     -- Check all NPCs are dead -> lose
     if
         xi.garrison.mobsAlive(player) == false and
@@ -173,8 +171,8 @@ xi.garrison.waveAlive = function(player, npc, wave, party)
         xi.garrison.npcAlive(player, party) == true
     then
         --win
-        npc:getZone():setLocalVar(string.format("[GARRISON]EndTime_%s", zoneID), os.time())
-        npc:getZone():setLocalVar(string.format("[GARRISON]LockOut_%s", zoneID), os.time())
+        npc:getZone():setLocalVar(string.format("[GARRISON]EndTime_%s", zoneId), os.time())
+        npc:getZone():setLocalVar(string.format("[GARRISON]LockOut_%s", zoneId), os.time())
         for _, v in ipairs(player:getAlliance()) do
             -- Not sure this is needed but putting here for each member, talk to gaurd to remove effect??
             v:setCharVar("Garrison_Won", 1)
@@ -206,8 +204,8 @@ xi.garrison.waveAlive = function(player, npc, wave, party)
         os.time() >= garrisonRunning
     then
         -- lose
-        npc:getZone():setLocalVar(string.format("[GARRISON]EndTime_%s", zoneID), os.time())
-        npc:getZone():setLocalVar(string.format("[GARRISON]LockOut_%s", zoneID), os.time())
+        npc:getZone():setLocalVar(string.format("[GARRISON]EndTime_%s", zoneId), os.time())
+        npc:getZone():setLocalVar(string.format("[GARRISON]LockOut_%s", zoneId), os.time())
         for _, v in ipairs(player:getAlliance()) do
             -- Talk to NPC to Remove effects (done here now for testing)
             v:delStatusEffect(xi.effect.LEVEL_RESTRICTION)
@@ -220,7 +218,7 @@ xi.garrison.waveAlive = function(player, npc, wave, party)
             mobnum = mobnum + 1
             mob = mob + 1
         end
-        despawnNPCs(npc, party)
+        xi.garrison.despawnNPCs(npc, party)
     else
     -- start next tick
         npc:timer(10000, function(npcArg)
@@ -251,7 +249,7 @@ xi.garrison.onTrade = function(player, npc, trade)
     local garrisonZoneData = xi.garrison.data[zoneId]
     local lockout = xi.settings.GARRISON_LOCKOUT
     local timeLimit = xi.settings.GARRISON_TIME_LIMIT
-    local garrisonRunning = npc:getZone():getLocalVar(string.format("[GARRISON]LockOut_%s", zoneID))
+    local garrisonRunning = npc:getZone():getLocalVar(string.format("[GARRISON]LockOut_%s", zoneId))
     local item = garrisonZoneData.itemReq
     -- Collect entrant information
     local party = player:getAlliance()
@@ -268,7 +266,7 @@ xi.garrison.onTrade = function(player, npc, trade)
         player:confirmTrade()
         player:setCharVar("GARRISON_CONQUEST_WAIT", getConquestTally())
         npc:getZone():setLocalVar(string.format("[GARRISON]EndTime_%s", zoneID), os.time() + timeLimit)
-        npc:getZone():setLocalVar(string.format("[GARRISON]LockOut_%s", zoneID), os.time() + lockout)
+        npc:getZone():setLocalVar(string.format("[GARRISON]LockOut_%s", zoneId), os.time() + lockout)
     else
         -- TODO event for not having met requirements
     end
