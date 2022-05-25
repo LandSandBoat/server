@@ -12,9 +12,67 @@ require("scripts/globals/zone")
 -----------------------------------
 xi = xi or {}
 xi.garrison = xi.garrison or {}
+xi.garrison.lookup = xi.garrison.lookup or {}
+
 -----------------------------------
 -- Helpers
 -----------------------------------
+
+mobsAlive = function(player)
+    local zoneId = player:getZoneID()
+    local garrisonZoneData = xi.garrison.data[zoneId]
+    local killedAllMobs = true
+    local mob = garrisonZoneData.mobs
+    local mobnum = 1
+    -- Check all mobs if alive
+    while mobnum <= 9 do
+        if GetMobByID(mob):isAlive() then
+            killedAllMobs = false
+        end
+        mobnum = mobnum + 1
+        mob = mob + 1
+    end
+    -- return result
+    if killedAllMobs == false then
+        return true
+    else
+        return false
+    end
+end
+
+npcAlive = function(player, party)
+    local zoneId = player:getZoneID()
+    local garrisonZoneData = xi.garrison.data[zoneId]
+    local npcs = garrisonZoneData.npcs
+    local killedAllNPC = true
+    local npcnum = 1
+    -- Check all NPCs are dead
+    while npcnum <= party do
+        if GetMobByID(npcs):isAlive() then
+            killedAllNPC = false
+        end
+        npcnum = npcnum + 1
+        npcs = npcs + 1
+    end
+    -- return result
+    if killedAllNPC == false then
+        return true
+    else
+        return false
+    end
+end
+
+despawnNPCs = function(npc, party)
+    local zoneId = npc:getZoneID()
+    local garrisonZoneData = xi.garrison.data[zoneId]
+    local npcs = garrisonZoneData.npcs
+    local npcnum = 1
+    while npcnum <= party do
+        DespawnMob(npcs)
+        npcnum = npcnum + 1
+        npcs = npcs + 1
+    end
+end
 
 -----------------------------------
 -- Main Functions
@@ -32,24 +90,13 @@ xi.garrison.spawnNPCs = function(npc, party)
     local npcs = garrisonZoneData.npcs
     local npcnum = 1
     while npcnum <= party do
+    -- TODO: Dynamic Spawning
         SpawnMob(npcs)
-        -- Apply BATTLEFIELD effect
+        -- BATTLEFIELD this is to prevent outside help, is not retail
         GetMobByID(npcs):addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0)
         -- TODO need pathing so they return to spawnpoint
-        GetMobByID(npcs):setSpeed(1)
+        GetMobByID(npcs):setSpeed(0)
         -- increment up the list
-        npcnum = npcnum + 1
-        npcs = npcs + 1
-    end
-end
-
-xi.garrison.despawnNPCs = function(npc, party)
-    local zoneId = npc:getZoneID()
-    local garrisonZoneData = xi.garrison.data[zoneId]
-    local npcs = garrisonZoneData.npcs
-    local npcnum = 1
-    while npcnum <= party do
-        DespawnMob(npcs)
         npcnum = npcnum + 1
         npcs = npcs + 1
     end
@@ -61,48 +108,43 @@ xi.garrison.spawnWave = function(player, npc, wave, party)
     local mob = garrisonZoneData.mobs
     local allianceSize = 0
     if party >= 1 then
-        allianceSize = 1
+        allianceSize = wave + 0
     end
     if party > 6 then
-        allianceSize = 2
+        allianceSize = wave + 1
     end
     if party > 12 then
-        allianceSize = 3
+        allianceSize = wave + 2
     end
-    local partySize = xi.garrison.waveSize[allianceSize]
-    local waveSize = partySize[wave]
     local mob = garrisonZoneData.mobs
     local boss = garrisonZoneData.mobs + 8
     local npcs = garrisonZoneData.npcs
-    local npcnum = 1
-    local mobnum = 1
-    --TODO spawn mobs in mini waves also make random from list (not sure how to do this)
-    while mobnum <= waveSize.size do
+    --TODO spawn mobs in 15 second intervals random from table
+    for _, mobId in ipairs(garrisonZoneData.waveSize[allianceSize]) do
     npcs = garrisonZoneData.npcs
     npcnum = 1
-        SpawnMob(mob)
-        -- Apply BATTLEFIELD effect
-        GetMobByID(mob):addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0)
+        SpawnMob(mobId)
+        -- BATTLEFIELD this is to prevent outside help, is not retail
+        GetMobByID(mobId):addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0)
         while npcnum <= party do
-            if GetMobByID(npcs):isAlive()==true then
-                GetMobByID(npcs):addEnmity(GetMobByID(mob), 1, 1)
-                GetMobByID(mob):addEnmity(GetMobByID(npcs), 1, 1)
+            if GetMobByID(npcs):isAlive() == true then
+                GetMobByID(npcs):addEnmity(GetMobByID(mobId), 1, 1)
+                GetMobByID(mobId):addEnmity(GetMobByID(npcs), 1, 1)
             end
             npcnum = npcnum + 1
             npcs = npcs + 1
         end
-        mobnum = mobnum + 1
-        mob = mob + 1
     end
     if wave == 4 then
-        npc:timer(20000, function(npcArg)
-            --spawn boss after a little bit... use something similar for mini waves???
+        npc:timer(60000, function(npcArg)
+            --spawn boss after 1 minute
             SpawnMob(boss)
+            -- BATTLEFIELD this is to prevent outside help, is not retail
             GetMobByID(boss):addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0)
             local npcs = garrisonZoneData.npcs
             local npcnum = 1
             while npcnum <= party do
-                if GetMobByID(npcs):isAlive()==true then
+                if GetMobByID(npcs):isAlive() == true then
                     GetMobByID(npcs):addEnmity(GetMobByID(boss), 1, 1)
                     GetMobByID(boss):addEnmity(GetMobByID(npcs), 1, 1)
                 end
@@ -125,36 +167,20 @@ xi.garrison.waveAlive = function(player, npc, wave, party)
     local garrisonZoneData = xi.garrison.data[zoneId]
     local garrisonLoot = {}
     garrisonLoot = xi.garrison.loot[garrisonZoneData.levelCap]
-    local killedAllMobs = true
     local npcs = garrisonZoneData.npcs
-    local killedAllNPC = true
     local npcnum = 1
     local mob = garrisonZoneData.mobs
     local mobnum = 1
+    local garrisonRunning = npc:getZone():getLocalVar(string.format("[GARRISON]EndTime_%s", zoneID))
     -- Check all NPCs are dead -> lose
-    while npcnum <= party do
-        if GetMobByID(npcs):isAlive() then
-            killedAllNPC = false
-        end
-        npcnum = npcnum + 1
-        npcs = npcs + 1
-    end
-    -- Check all Mobs are dead -> New Wave/Win
-    while mobnum <= 9 do
-        if GetMobByID(mob):isAlive() then
-            killedAllMobs = false
-        end
-        mobnum = mobnum + 1
-        mob = mob + 1
-    end
-    -- If logic im sorry!!!
     if
-        killedAllMobs == true and
+        mobsAlive(player) == false and
         wave == 4 and
-        killedAllNPC == false
+        npcAlive(player, party) == true
     then
         --win
         npc:getZone():setLocalVar(string.format("[GARRISON]EndTime_%s", zoneID), os.time())
+        npc:getZone():setLocalVar(string.format("[GARRISON]LockOut_%s", zoneID), os.time())
         for _, v in ipairs(player:getAlliance()) do
             -- Not sure this is needed but putting here for each member, talk to gaurd to remove effect??
             v:setCharVar("Garrison_Won", 1)
@@ -167,23 +193,27 @@ xi.garrison.waveAlive = function(player, npc, wave, party)
                 player:addTreasure(loot.itemId)
             end
         end
-            -- Pretty sure they dont despawn until party leader talks to gaurd
-            xi.garrison.despawnNPCs(npc, party)
+            -- They dont despawn until party leader talks to gaurd
+            despawnNPCs(npc, party)
             -- Var to give rewards to party trigger from guard
             player:setCharVar("Garrison_Treasure", 1)
     elseif
-        killedAllMobs == true and
+        mobsAlive(player) == false and
         wave <=3 and
-        killedAllNPC == false
+        npcAlive(player, party) == true
     then
         -- next wave
         wave = wave + 1
         npc:timer(30000, function(npcArg)
             xi.garrison.spawnWave(player, npc, wave, party)
         end)
-    elseif killedAllNPC == true then
+    elseif
+        npcAlive(player, party) == false or
+        os.time() >= garrisonRunning
+    then
         -- lose
         npc:getZone():setLocalVar(string.format("[GARRISON]EndTime_%s", zoneID), os.time())
+        npc:getZone():setLocalVar(string.format("[GARRISON]LockOut_%s", zoneID), os.time())
         for _, v in ipairs(player:getAlliance()) do
             -- Talk to NPC to Remove effects (done here now for testing)
             v:delStatusEffect(xi.effect.LEVEL_RESTRICTION)
@@ -196,6 +226,7 @@ xi.garrison.waveAlive = function(player, npc, wave, party)
             mobnum = mobnum + 1
             mob = mob + 1
         end
+        despawnNPCs(npc, party)
     else
     -- start next tick
         npc:timer(10000, function(npcArg)
@@ -204,16 +235,13 @@ xi.garrison.waveAlive = function(player, npc, wave, party)
     end
 end
 
-xi.garrison.start = function(player, npc)
+xi.garrison.start = function(player, npc, party)
     local zoneId = npc:getZoneID()
     local garrisonZoneData = xi.garrison.data[zoneId]
-    -- Collect entrant information
-    local party = player:getAlliance()
-    --gets party size for spawning each NPC
-    party = #party
-    -- Apply level cap + BATTLEFIELD??? effect
+    -- Apply level restriction
         for _, v in ipairs(player:getAlliance()) do
             v:addStatusEffect(xi.effect.LEVEL_RESTRICTION, garrisonZoneData.levelCap, 0, 0)
+            -- BATTLEFIELD this is to prevent outside help, is not retail
             v:addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0)
         end
     -- Spawn NPC needs to be changed to dynamic similar to pets/trusts/fellows shifting ids
@@ -224,21 +252,29 @@ xi.garrison.start = function(player, npc)
 end
 
 xi.garrison.onTrade = function(player, npc, trade)
-    -- TODO: Once Per Conquest Tally
     -- TODO: Check to see if there is Ballista in the Zone
-    -- TODO: 30 minute time limit
-    local lockout = 1800000 -- 30 mins set to settings/main
-    local garrisonRunning = npc:getZone():getLocalVar(string.format("[GARRISON]EndTime_%s", zoneID))
+    local lockout = xi.settings.GARRISON_LOCKOUT
+    local timeLimit = xi.settings.GARRISON_TIME_LIMIT
+    local garrisonRunning = npc:getZone():getLocalVar(string.format("[GARRISON]LockOut_%s", zoneID))
     local zoneId = npc:getZoneID()
     local garrisonZoneData = xi.garrison.data[zoneId]
     local item = garrisonZoneData.itemReq
+    -- Collect entrant information
+    local party = player:getAlliance()
+    --gets party size for spawning each NPC
+    party = #party
+    -- TODO break into different requirements
     if
         npcUtil.tradeHasExactly(trade, item) and
-        os.time() > garrisonRunning
+        os.time() > garrisonRunning and
+        party <= xi.settings.GARRISON_PARTY_LIMIT and
+        ( xi.settings.GARRISON_ONCE_PER_WEEK == 1 or player:getCharVar("GARRISON_CONQUEST_WAIT") < os.time() )
     then
-        xi.garrison.start(player, npc)
+        xi.garrison.start(player, npc, party)
         player:confirmTrade()
-        npc:getZone():setLocalVar(string.format("[GARRISON]EndTime_%s", zoneID), os.time() + lockout)
+        player:setCharVar("GARRISON_CONQUEST_WAIT", getConquestTally())
+        npc:getZone():setLocalVar(string.format("[GARRISON]EndTime_%s", zoneID), os.time() + timeLimit)
+        npc:getZone():setLocalVar(string.format("[GARRISON]LockOut_%s", zoneID), os.time() + lockout)
     else
         -- TODO event for not having met requirements
     end

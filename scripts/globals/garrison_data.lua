@@ -6,71 +6,6 @@ require("scripts/globals/zone")
 xi = xi or {}
 xi.garrison = xi.garrison or {}
 
--- Alliance/Party Size determines how many Mobs spawn per wave.
-xi.garrison.waveSize =
-{
-    -- One Party player count > 1
-    [1] =
-    {
-        [1] =
-            {
-            size = 2
-            },
-        [2] =
-            {
-            size = 4
-            },
-        [3] =
-            {
-            size = 6
-            },
-        [4] =
-            {
-            size = 6
-            },
-    },
-    -- Two Parties player count > 6
-    [2] =
-    {
-        [1] =
-            {
-            size = 4
-            },
-        [2] =
-            {
-            size = 6
-            },
-        [3] =
-            {
-            size = 8
-            },
-        [4] =
-            {
-            size = 8
-            },
-    },
-    -- Three Parties player count > 12
-    [3] =
-    {
-        [1] =
-            {
-            size = 6
-            },
-        [2] =
-            {
-            size = 8
-            },
-        [3] =
-            {
-            size = 8 -- is supposed to be 10 Too Many Mobs need to add mini wave logic
-            },
-        [4] =
-            {
-            size = 8 -- is supposed to be 10 Too Many Mobs need to add mini wave logic
-            },
-    }
-
-}
 -- Loot is determined by LevelCap
 xi.garrison.loot =
 {
@@ -143,15 +78,72 @@ xi.garrison.loot =
     },
 
 }
---Zone Data 
+--Zone Data
 xi.garrison.data =
 {
     [xi.zone.WEST_RONFAURE] =
     {
         itemReq = 1528, -- Red Cryptex
-        levelCap = 20,
+        levelCap = 75,
         npcs = 17188899,
-        mobs = 17187274 -- all mobs have spawn info
+        mobs = 17187274, -- all mobs have spawn info
+        waveSize = {
+        -- Wave + Number of Parties
+            [1] =
+            {
+                17187278, -- Orcish Fighter
+                17187279 -- Orcish Fighter
+            },
+            [2] =
+            {
+                17187278, -- Orcish Fighter
+                17187279, -- Orcish Fighter
+                17187280, -- Orcish Chasseur
+                17187281 -- Orcish Chasseur
+            },
+            [3] =
+            {
+                17187276, -- Orcish Serjeant
+                17187277, -- Orcish Serjeant
+                17187278, -- Orcish Fighter
+                17187279, -- Orcish Fighter
+                17187280, -- Orcish Chasseur
+                17187281 -- Orcish Chasseur
+            },
+            [4] =
+            {
+                17187274, -- Orcish_Cursemaker
+                17187275, -- Orcish_Cursemaker
+                17187276, -- Orcish Serjeant
+                17187277, -- Orcish Serjeant
+                17187278, -- Orcish Fighter
+                17187279, -- Orcish Fighter
+                17187280, -- Orcish Chasseur
+                17187281 -- Orcish Chasseur
+            },
+            [5] =
+            {
+                17187274, -- Orcish_Cursemaker
+                17187275, -- Orcish_Cursemaker
+                17187276, -- Orcish Serjeant
+                17187277, -- Orcish Serjeant
+                17187278, -- Orcish Fighter
+                17187279, -- Orcish Fighter
+                17187280, -- Orcish Chasseur
+                17187281 -- Orcish Chasseur
+            },
+            [6] =
+            {
+                17187274, -- Orcish_Cursemaker
+                17187275, -- Orcish_Cursemaker
+                17187276, -- Orcish Serjeant
+                17187277, -- Orcish Serjeant
+                17187278, -- Orcish Fighter
+                17187279, -- Orcish Fighter
+                17187280, -- Orcish Chasseur
+                17187281 -- Orcish Chasseur
+            },
+        },
     },
     [xi.zone.NORTH_GUSTABERG] =
     {
