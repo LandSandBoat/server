@@ -4826,6 +4826,7 @@ uint8 CLuaBaseEntity::getAllegiance()
 void CLuaBaseEntity::setAllegiance(uint8 allegiance)
 {
     m_PBaseEntity->allegiance = static_cast<ALLEGIANCE_TYPE>(allegiance);
+    m_PBaseEntity->updatemask |= UPDATE_HP | UPDATE_NAME;
 }
 
 /************************************************************************
