@@ -85,7 +85,8 @@ public:
     EntityList_t m_npcList;  // список всех NPCs в зоне
     EntityList_t m_charList; // список всех PCs  в зоне
 
-    std::set<uint16> charTargIds; // Sorted set of targids for characters
+    std::set<uint16> charTargIds;    // Sorted set of targids for characters
+    std::set<uint16> dynamicTargIds; // Sorted set of targids for dynamic entities
 
     CZoneEntities(CZone*);
     ~CZoneEntities();
@@ -97,8 +98,6 @@ private:
 
     time_point computeTime { server_clock::now() };
     uint16 lastCharComputeTargId;
-
-    uint16 m_DynamicTargIDCount;
 };
 
 #endif

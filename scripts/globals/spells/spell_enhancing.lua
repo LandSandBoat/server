@@ -23,8 +23,7 @@ local enhancingTable = xi.spells.parameters.enhancingSpell
 -- Enhancing Spell Base Potency function.
 xi.spells.spell_enhancing.calculateEnhancingBasePower = function(caster, target, spell, spellId, spellEffect)
     local basePower  = enhancingTable[spellId][4]
-    local skillLevel = caster:getSkillLevel(spellEffect)
-
+    local skillLevel = caster:getSkillLevel(spell:getSkillType())
     ------------------------------------------------------------
     -- Spell specific equations for potency. (Skill and stat)
     ------------------------------------------------------------
@@ -46,7 +45,6 @@ xi.spells.spell_enhancing.calculateEnhancingBasePower = function(caster, target,
         end
 
         basePower = utils.clamp(basePower, 40, 150) -- Max is 150 and min is 40 at skill 0.
-
     -- Bar-Status
     elseif spellEffect == xi.effect.BARAMNESIA or (spellEffect >= xi.effect.BARSLEEP and spellEffect <= xi.effect.BARVIRUS) then
         basePower = basePower + skillLevel / 50 -- This is WRONG. SO SO WRONG.
@@ -63,7 +61,7 @@ xi.spells.spell_enhancing.calculateEnhancingBasePower = function(caster, target,
     elseif
         (spellEffect >= xi.effect.ENFIRE and spellEffect <= xi.effect.ENWATER) or
         (spellEffect >= xi.effect.ENFIRE_II and spellEffect <= xi.effect.ENWATER_II) or
-        spellEffect >= xi.effect.AUSPICE
+        spellEffect == xi.effect.AUSPICE
     then
         if skillLevel > 500 then
             basePower = math.floor(3 * (skillLevel + 50) / 25)
@@ -112,9 +110,12 @@ xi.spells.spell_enhancing.calculateEnhancingFinalPower = function(caster, target
     --------------------
     -- Enboden effect.
     --------------------
-    --  Applied before other bonuses. TODO: Job points further enhances Embolden bonus.
-    if target:hasStatusEffect(xi.effect.EMBOLDEN) and spellGroup == xi.magic.spellGroup.WHITE then
-        finalPower = math.floor(finalPower * 1.5)
+    --  Applied before other bonuses, pet buffs seem to not work.
+    if not caster:isPet() and target:hasStatusEffect(xi.effect.EMBOLDEN) and spellGroup == xi.magic.spellGroup.WHITE then
+
+        local emboldenPower = 1.5 + target:getJobPointLevel(xi.jp.EMBOLDEN_EFFECT) / 100 -- 1 point in job point category = 1%
+
+        finalPower = math.floor(finalPower * emboldenPower)
     end
 
     ----------------------------------------
@@ -175,10 +176,11 @@ xi.spells.spell_enhancing.calculateEnhancingDuration = function(caster, target, 
     end
 
     --------------------
-    -- Embolden
+    -- Embolden, buffs cast by pet do not work.
     --------------------
-    if target:hasStatusEffect(xi.effect.EMBOLDEN) and spellGroup == xi.magic.spellGroup.WHITE then
-        duration = duration / 2
+    if not caster:isPet() and target:hasStatusEffect(xi.effect.EMBOLDEN) and spellGroup == xi.magic.spellGroup.WHITE then
+        local emboldenDurationModifier = 0.5 + target:getMod(xi.mod.EMBOLDEN_DURATION) / 100 -- 1 point = 1%
+        duration = duration * emboldenDurationModifier
     end
 
     --------------------
@@ -238,11 +240,11 @@ xi.spells.spell_enhancing.useEnhancingSpell = function(caster, target, spell)
     local spellId    = spell:getID()
     local spellGroup = spell:getSpellGroup()
     local MDB        = 0
-    local paramThree = 0
     -- Get Variables from Parameters Table.
     local tier            = enhancingTable[spellId][1]
     local spellEffect     = enhancingTable[spellId][2]
     local alwaysOverwrite = enhancingTable[spellId][7]
+    local tickTime        = enhancingTable[spellId][8]
 
     ------------------------------------------------------------
     -- Handle exceptions and weird behaviour here, before calculating anything.
@@ -253,11 +255,6 @@ xi.spells.spell_enhancing.useEnhancingSpell = function(caster, target, spell)
     -- Bar-Element (They use addStatusEffect argument 6. Bar-Status current implementation doesn't.)
     if spellEffect >= xi.effect.BARFIRE and spellEffect <= xi.effect.BARWATER then
         MDB = caster:getMerit(xi.merit.BAR_SPELL_EFFECT) + caster:getMod(xi.mod.BARSPELL_MDEF_BONUS)
-
-    -- Deodorize, Invisible, Sneak
-    elseif spellEffect == xi.effect.DEODORIZE or spellEffect == xi.effect.INVISIBLE or spellEffect == xi.effect.SNEAK then
-        paramThree = 10
-
     -- Embrava
     elseif spellEffect == xi.effect.EMBRAVA then
         -- If Tabula Rasa wears before spell goes off, no Embrava for you!
@@ -323,10 +320,10 @@ xi.spells.spell_enhancing.useEnhancingSpell = function(caster, target, spell)
     local duration   = xi.spells.spell_enhancing.calculateEnhancingDuration(caster, target, spell, spellId, spellGroup, spellEffect)
 
     ------------------------------
-    -- Handle Status Effects.
+    -- Handle Status Effects, Embolden buffs can only be applied by player, so do not remove embolden..
     ------------------------------
-    if caster:hasStatusEffect(xi.effect.EMBOLDEN) and spellGroup == xi.magic.spellGroup.WHITE then
-        caster:delStatusEffect(xi.effect.EMBOLDEN)
+    if not caster:isPet() and target:hasStatusEffect(xi.effect.EMBOLDEN) and spellGroup == xi.magic.spellGroup.WHITE then
+        target:delStatusEffectSilent(xi.effect.EMBOLDEN)
     end
 
     ------------------------------------------------------------
@@ -334,9 +331,9 @@ xi.spells.spell_enhancing.useEnhancingSpell = function(caster, target, spell)
     ------------------------------------------------------------
     if alwaysOverwrite then
         target:delStatusEffect(spellEffect)
-        target:addStatusEffect(spellEffect, finalPower, paramThree, duration, 0, MDB, tier)
+        target:addStatusEffect(spellEffect, finalPower, tickTime, duration, 0, MDB, tier)
     else
-        if target:addStatusEffect(spellEffect, finalPower, paramThree, duration, 0, MDB, tier) then
+        if target:addStatusEffect(spellEffect, finalPower, tickTime, duration, 0, MDB, tier) then
             spell:setMsg(xi.msg.basic.MAGIC_GAIN_EFFECT)
         else
             spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- No effect.

@@ -41,6 +41,10 @@ function onTrigger(player)
         onMobDeath = function(mob, playerArg, isKiller)
             -- Do stuff
         end,
+
+        -- If set to true, the internal id assigned to this mob will be released for other dynamic entities to use
+        -- after this mob has died. Defaults to false.
+        releaseIdOnDeath = true,
     })
 
     -- Use the mob object as you normally would
