@@ -265,7 +265,7 @@ xi.garrison.onTrade = function(player, npc, trade)
         xi.garrison.start(player, npc, party)
         player:confirmTrade()
         player:setCharVar("GARRISON_CONQUEST_WAIT", getConquestTally())
-        npc:getZone():setLocalVar(string.format("[GARRISON]EndTime_%s", zoneID), os.time() + timeLimit)
+        npc:getZone():setLocalVar(string.format("[GARRISON]EndTime_%s", zoneId), os.time() + timeLimit)
         npc:getZone():setLocalVar(string.format("[GARRISON]LockOut_%s", zoneId), os.time() + lockout)
     else
         -- TODO event for not having met requirements
