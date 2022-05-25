@@ -84,9 +84,20 @@ xi.garrison.data =
     [xi.zone.WEST_RONFAURE] =
     {
         itemReq = 1528, -- Red Cryptex
-        levelCap = 75,
+        levelCap = 20,
         npcs = 17188899,
         mobs = 17187274, -- all mobs have spawn info
+        xPos = -436,
+        yPos = -20,
+        zPos = -217,
+        xChange = 0,
+        zChange = -2,
+        xSecondLine = -2,
+        zSecondLine = 0,
+        xThirdLine = -4,
+        zThirdLine = 0,
+        rot = 0,
+        name = "Garrison NPC",
         waveSize = {
         -- Wave + Number of Parties
             [1] =

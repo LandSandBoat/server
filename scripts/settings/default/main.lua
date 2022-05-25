@@ -205,4 +205,5 @@ xi.settings =
     GARRISON_TIME_LIMIT          = 1800; -- Time in seconds before lose ongoing garrison (default: 1800)
     GARRISON_ONCE_PER_WEEK       = 0;    -- Set to 1 to bypass the limit of one garrison per Conquest Tally Week.
     GARRISON_PARTY_LIMIT         = 18;   -- Set to max party members you want to do garrison (default: 18).
+    GARRISON_NATION_BYPASS       = 0;    -- Set to 1 to bypass the nation requirement.
 }

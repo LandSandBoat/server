@@ -13,12 +13,10 @@ require("scripts/globals/zone")
 xi = xi or {}
 xi.garrison = xi.garrison or {}
 xi.garrison.lookup = xi.garrison.lookup or {}
-
 -----------------------------------
 -- Helpers
 -----------------------------------
-
-mobsAlive = function(player)
+xi.garrison.mobsAlive = function(player)
     local zoneId = player:getZoneID()
     local garrisonZoneData = xi.garrison.data[zoneId]
     local killedAllMobs = true
@@ -40,7 +38,7 @@ mobsAlive = function(player)
     end
 end
 
-npcAlive = function(player, party)
+xi.garrison.npcAlive = function(player, party)
     local zoneId = player:getZoneID()
     local garrisonZoneData = xi.garrison.data[zoneId]
     local npcs = garrisonZoneData.npcs
@@ -62,7 +60,7 @@ npcAlive = function(player, party)
     end
 end
 
-despawnNPCs = function(npc, party)
+xi.garrison.despawnNPCs = function(npc, party)
     local zoneId = npc:getZoneID()
     local garrisonZoneData = xi.garrison.data[zoneId]
     local npcs = garrisonZoneData.npcs
@@ -73,14 +71,11 @@ despawnNPCs = function(npc, party)
         npcs = npcs + 1
     end
 end
-
 -----------------------------------
 -- Main Functions
 -----------------------------------
 xi.garrison.tick = function(player, npc, wave, party)
     print("Garrison Tick wave:", wave)
-    local zoneId = npc:getZoneID()
-    local garrisonData = xi.garrison.lookup[zoneId]
     xi.garrison.waveAlive(player, npc, wave, party)
 end
 
@@ -105,8 +100,10 @@ end
 xi.garrison.spawnWave = function(player, npc, wave, party)
     local zoneId = npc:getZoneID()
     local garrisonZoneData = xi.garrison.data[zoneId]
-    local mob = garrisonZoneData.mobs
     local allianceSize = 0
+    local boss = garrisonZoneData.mobs + 8
+    local npcs = garrisonZoneData.npcs
+    local npcnum = 1
     if party >= 1 then
         allianceSize = wave + 0
     end
@@ -116,10 +113,7 @@ xi.garrison.spawnWave = function(player, npc, wave, party)
     if party > 12 then
         allianceSize = wave + 2
     end
-    local mob = garrisonZoneData.mobs
-    local boss = garrisonZoneData.mobs + 8
-    local npcs = garrisonZoneData.npcs
-    --TODO spawn mobs in 15 second intervals random from table
+    --TODO spawn mobs in 15 second intervals random from table (more relevant in 1 party vs 3 parties)
     for _, mobId in ipairs(garrisonZoneData.waveSize[allianceSize]) do
     npcs = garrisonZoneData.npcs
     npcnum = 1
@@ -174,9 +168,9 @@ xi.garrison.waveAlive = function(player, npc, wave, party)
     local garrisonRunning = npc:getZone():getLocalVar(string.format("[GARRISON]EndTime_%s", zoneID))
     -- Check all NPCs are dead -> lose
     if
-        mobsAlive(player) == false and
+        xi.garrison.mobsAlive(player) == false and
         wave == 4 and
-        npcAlive(player, party) == true
+        xi.garrison.npcAlive(player, party) == true
     then
         --win
         npc:getZone():setLocalVar(string.format("[GARRISON]EndTime_%s", zoneID), os.time())
@@ -194,13 +188,13 @@ xi.garrison.waveAlive = function(player, npc, wave, party)
             end
         end
             -- They dont despawn until party leader talks to gaurd
-            despawnNPCs(npc, party)
+            xi.garrison.despawnNPCs(npc, party)
             -- Var to give rewards to party trigger from guard
             player:setCharVar("Garrison_Treasure", 1)
     elseif
-        mobsAlive(player) == false and
+        xi.garrison.mobsAlive(player) == false and
         wave <=3 and
-        npcAlive(player, party) == true
+        xi.garrison.npcAlive(player, party) == true
     then
         -- next wave
         wave = wave + 1
@@ -208,7 +202,7 @@ xi.garrison.waveAlive = function(player, npc, wave, party)
             xi.garrison.spawnWave(player, npc, wave, party)
         end)
     elseif
-        npcAlive(player, party) == false or
+        xi.garrison.npcAlive(player, party) == false or
         os.time() >= garrisonRunning
     then
         -- lose
@@ -253,11 +247,11 @@ end
 
 xi.garrison.onTrade = function(player, npc, trade)
     -- TODO: Check to see if there is Ballista in the Zone
+    local zoneId = npc:getZoneID()
+    local garrisonZoneData = xi.garrison.data[zoneId]
     local lockout = xi.settings.GARRISON_LOCKOUT
     local timeLimit = xi.settings.GARRISON_TIME_LIMIT
     local garrisonRunning = npc:getZone():getLocalVar(string.format("[GARRISON]LockOut_%s", zoneID))
-    local zoneId = npc:getZoneID()
-    local garrisonZoneData = xi.garrison.data[zoneId]
     local item = garrisonZoneData.itemReq
     -- Collect entrant information
     local party = player:getAlliance()
@@ -279,4 +273,3 @@ xi.garrison.onTrade = function(player, npc, trade)
         -- TODO event for not having met requirements
     end
 end
-
