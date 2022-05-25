@@ -31,7 +31,10 @@ entity.onMobEngaged = function(mob, target)
     -- three tarus fight with tenzen
     local mobId = mob:getID()
     local offset = mobId - ID.mob.WARRIORS_PATH_OFFSET
-    if (offset >= 0 and offset <= 8) then
+    if
+        offset >= 0 and
+        offset <= 8
+    then
         for i = mobId + 1, mobId + 3 do
             GetMobByID(i):updateEnmity(target)
         end
@@ -42,20 +45,33 @@ entity.onMobFight = function(mob, target)
     -- Uses Meikyo Shisui around 75-80% Hanaikusa > Torimai > Kazakiri > Tsukikage > Cosmic Elucidation
     local twohourtrigger = mob:getLocalVar("twohourtrigger")
     local twohourthreshold = mob:getLocalVar("twohourthreshold")
-    if mob:getHPP() < twohourthreshold and twohourtrigger == 0 then -- first meikyo shisui usage 75-85%
+    if
+        mob:getHPP() < twohourthreshold and
+        twohourtrigger == 0
+    then -- first meikyo shisui usage 75-85%
         TenzenFunctions.firstMeikyo(mob)
-    elseif mob:getHPP() < twohourthreshold and twohourtrigger == 2 then -- second meikyo shisui usage 45-55%
+    elseif
+        mob:getHPP() < twohourthreshold and
+        twohourtrigger == 2
+    then -- second meikyo shisui usage 45-55%
         TenzenFunctions.secondMeikyo(mob)
     end
 
     local isBusy = false
     local act = mob:getCurrentAction()
-    if act == xi.act.MOBABILITY_START or act == xi.act.MOBABILITY_USING or act == xi.act.MOBABILITY_FINISH then
+    if
+        act == xi.act.MOBABILITY_START or
+        act == xi.act.MOBABILITY_USING or
+        act == xi.act.MOBABILITY_FINISH
+    then
         isBusy = true -- is set to true if Tenzen is in any stage of using a mobskill
     end
 
     -- scripted sequence of weaponskills in order to potentially create the level 4 skillchain cosmic elucidation
-    if mob:actionQueueEmpty() == true and not isBusy then
+    if
+        mob:actionQueueEmpty() == true and
+        not isBusy
+    then
         TenzenFunctions.wsSequence(mob)
     end
 
@@ -63,7 +79,10 @@ entity.onMobFight = function(mob, target)
 
     -- win condition set
     local battlefield = mob:getBattlefield()
-    if (battlefield:getID() == 993 and mob:getHPP() <= 15) then -- Tenzen gives up at 15% - win
+    if
+        battlefield:getID() == 993 and
+        mob:getHPP() <= 15
+    then -- Tenzen gives up at 15% - win
         mob:showText(target, ID.text.TENZEN_MSG_OFFSET +2)
         mob:AnimationSub(5)
         mob:setMobMod(xi.mobMod.NO_MOVE, 1)

@@ -22,7 +22,10 @@ TenzenFunctions.wsSequence = function(mob)
     local step = mob:getLocalVar("step")
     local meikyo = mob:getLocalVar("meikyo")
     local battlefield = mob:getBattlefield()
-    if step == 1 and meikyo == 1 then
+    if
+        step == 1 and
+        meikyo == 1
+    then
         mob:setTP(0)
         mob:setMod(xi.mod.DELAY, 0)
         mob:AnimationSub(0)
@@ -77,7 +80,10 @@ TenzenFunctions.formSwap = function(mob)
     local battleTime = mob:getBattleTime()
 
     if mob:getLocalVar("meikyo") == 0 then
-        if (mob:AnimationSub() == 0 and battleTime - changeTime > 60) then
+        if
+            mob:AnimationSub() == 0 and
+            battleTime - changeTime > 60
+        then
             mob:AnimationSub(5) -- 5 lowered bow mode (1033 animation) 6 is raised bow mode (1034 animation)
             mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.STANDBACK))
             mob:SetMobSkillAttack(1171)
@@ -88,7 +94,10 @@ TenzenFunctions.formSwap = function(mob)
                     mob:AnimationSub(6)
                 end)
             end
-        elseif (mob:AnimationSub() == 6 and battleTime - changeTime > 30) then
+        elseif
+            mob:AnimationSub() == 6 and
+            battleTime - changeTime > 30
+        then
             mob:AnimationSub(0)
             mob:setBehaviour(bit.band(mob:getBehaviour(), bit.bnot(xi.behavior.STANDBACK)))
             mob:SetMobSkillAttack(0)
@@ -100,8 +109,14 @@ end
 
 TenzenFunctions.riceBall = function(mob, target, busyState)
     local battlefield = mob:getBattlefield()
-    if mob:actionQueueEmpty() == true and not busyState then
-        if mob:getHPP() <= 70 and mob:getLocalVar("riceball") == 0 then
+    if
+        mob:actionQueueEmpty() == true and
+        not busyState
+    then
+        if
+            mob:getHPP() <= 70 and
+            mob:getLocalVar("riceball") == 0
+        then
             if battlefield:getLocalVar("fireworks") ~= 1 then
                 mob:showText(target, ID.text.TENZEN_MSG_OFFSET +3)
                 mob:useMobAbility(1398)

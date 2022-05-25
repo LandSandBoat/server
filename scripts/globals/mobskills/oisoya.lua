@@ -31,7 +31,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.RANGED, xi.damageType.PIERCING, info.hitslanded)
 
     target:takeDamage(dmg, mob, xi.attackType.RANGED, xi.damageType.PIERCING)
-	if
+    if
         dmg > 0 and
         skill:getMsg() ~= 31
     then

@@ -8,6 +8,7 @@ mixins = {require("scripts/mixins/warriors_path_taru")}
 local entity = {}
 
 entity.onMobSpawn = function(mob)
+    -- Leaving these mods here for visual: Tarus can't take damage, don't move, and have scripted fight interactions
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 60)
     mob:setMobMod(xi.mobMod.NO_AGGRO, 1)
     mob:setMobMod(xi.mobMod.NO_LINK, 1)
