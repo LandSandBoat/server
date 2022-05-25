@@ -26,7 +26,7 @@ entity.onMobEngaged = function(mob, target)
     mob:setMobMod(xi.mobMod.NO_LINK, 0)
     mob:setMobMod(xi.mobMod.NO_AGGRO, 0)
     mob:SetMagicCastingEnabled(true)
-    mob:AnimationSub(1)
+    mob:setAnimationSub(1)
 end
 
 entity.onMobFight = function(mob, target)
@@ -37,14 +37,14 @@ entity.onMobFight = function(mob, target)
         if battletime - changetime >= 3 then
             mob:SetMagicCastingEnabled(false)
             mob:entityAnimationPacket("ffr2")
-            mob:AnimationSub(2)
+            mob:setAnimationSub(2)
             mob:setLocalVar("changetime", mob:getBattleTime())
         end
     end
 end
 
 entity.onMobDisengage = function(mob, target)
-    mob:AnimationSub(2) -- laughing pose
+    mob:setAnimationSub(2) -- laughing pose
 end
 
 return entity

@@ -14,8 +14,8 @@ local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)
     if
-        mob:AnimationSub() == 5 or
-        mob:AnimationSub() == 6
+        mob:getAnimationSub() == 5 or
+        mob:getAnimationSub() == 6
     then -- if tenzen is in bow mode
         return 0
     end

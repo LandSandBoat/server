@@ -16,7 +16,7 @@ entity.onMobSpawn = function(mob)
     mob:setBehaviour(bit.band(mob:getBehaviour(), bit.bnot(xi.behavior.STANDBACK)))
     mob:setMobMod(xi.mobMod.NO_MOVE, 1)
     mob:setMobMod(xi.mobMod.SIGHT_RANGE, 10)
-    mob:AnimationSub(0)
+    mob:setAnimationSub(0)
     mob:SetMobSkillAttack(0)
     mob:SetMobAbilityEnabled(true)
     mob:SetAutoAttackEnabled(true)
@@ -84,7 +84,7 @@ entity.onMobFight = function(mob, target)
         mob:getHPP() <= 15
     then -- Tenzen gives up at 15% - win
         mob:showText(target, ID.text.TENZEN_MSG_OFFSET +2)
-        mob:AnimationSub(5)
+        mob:setAnimationSub(5)
         mob:setMobMod(xi.mobMod.NO_MOVE, 1)
         battlefield:win()
         return
