@@ -3,7 +3,6 @@
 --  Mob: Omega
 -----------------------------------
 local oneToBeFeared = require("scripts/zones/Sealions_Den/helpers/One_to_be_Feared")
-local ID = require("scripts/zones/Sealions_Den/IDs")
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
