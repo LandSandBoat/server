@@ -63,38 +63,69 @@ class DynaFuncModule : public CPPModule
 
         /* player:updateHourglass(dynamistoken, timepoint)
                                                    v----------object------------v  v------param0-----v  v----param1----v */
-        lua["CBaseEntity"]["updateHourglass"] = [](CLuaBaseEntity* PLuaBaseEntity, uint32 dynamistoken, uint32 timepoint)
+        lua["CBaseEntity"]["updateHourglass"] = [](CLuaBaseEntity* PLuaBaseEntity, uint8 zoneID, uint32 timepoint)
         {
             TracyZoneScoped;
 
+            if (PLuaBaseEntity == nullptr)
+            {
+                return;
+            }
+
             CBaseEntity* PEntity = PLuaBaseEntity->GetBaseEntity();
-            auto Zone = PEntity->loc.zone;
 
             if (PEntity->objtype != TYPE_PC)
             {
                 return;
             }
 
-            auto zoneID = Zone->GetID();
-
+            
             if (auto* PCharEntity = static_cast<CCharEntity*>(PEntity))
             {
-                CItemContainer* PContainer = PCharEntity->getStorage(LOC_INVENTORY);
                 uint8 numitemsupdated = 0;
-                for (int slotIndex = 1; slotIndex <= PContainer->GetSize(); ++slotIndex)
+                PCharEntity->getStorage(LOC_INVENTORY)->ForEachItem([&PCharEntity, &zoneID, &timepoint, &numitemsupdated](CItem* PItem)
                 {
-                    CItem* PItem = PContainer->GetItem(slotIndex);
-                    if (PItem != nullptr && PItem->getID() == HOURGLASS_ID && PItem->m_extra[0x14] == dynamistoken && (PItem->m_extra[0x08] != timepoint || PItem->m_extra[0x10] != zoneID))
+                    if (PItem != nullptr && PItem->getID() == HOURGLASS_ID && PItem->m_extra[0x10] == zoneID)
                     {
-                        ref<uint32>(PItem->m_extra,  0x08) = timepoint; // Update hourglass timestamp.
-                        ref<uint8>(PItem->m_extra,  0x10) = zoneID; // Auto correct for the small chance an incorrect zone was set.
+                        ref<uint32>(PItem->m_extra, 0x08) = timepoint; // Update hourglass timestamp.
                         PCharEntity->pushPacket(new CInventoryItemPacket(PItem, LOC_INVENTORY, PItem->getSlotID()));
                         ++numitemsupdated;
                     }
-                };
+                });
                 if (numitemsupdated)
                 {
                     PCharEntity->pushPacket(new CInventoryFinishPacket());
+                }
+            }
+        };
+
+        lua["CBaseEntity"]["duplicateHourglass"] = [](CLuaBaseEntity* PLuaBaseEntity, uint8 zoneID, uint32 dynamistoken, uint8 originalregistrant)
+        {
+            TracyZoneScoped;
+
+            CBaseEntity* PEntity = PLuaBaseEntity->GetBaseEntity();
+            if (PEntity->objtype != TYPE_PC)
+            {
+                return;
+            }
+
+            auto* PCharEntity = static_cast<CCharEntity*>(PEntity);
+
+            if (PCharEntity != nullptr)
+            {
+                int i = 1;
+                while (i <= 2)
+                {
+                    CItem* PItem = itemutils::GetItem(HOURGLASS_ID);
+                    PItem->setQuantity(1);
+
+                    ref<uint8>(PItem->m_extra,  0x02) = 1;
+                    ref<uint32>(PItem->m_extra, 0x04) = originalregistrant;
+                    ref<uint32>(PItem->m_extra, 0x0C) = currentEpoch();
+                    ref<uint8>(PItem->m_extra,  0x10) = zoneID;
+                    ref<uint32>(PItem->m_extra, 0x14) = dynamistoken;
+                    charutils::AddItem(PCharEntity, LOC_INVENTORY, PItem);
+                    ++i;
                 }
             }
         };
@@ -128,10 +159,10 @@ class DynaFuncModule : public CPPModule
             return false;
         };
 
-        lua["CBaseEntity"]["getHourglassToken"] = [](CLuaItem* PLuaBaseItem)
+        lua["CBaseEntity"]["getHourglassRegistrant"] = [](CLuaItem* PLuaBaseItem)
         {
             TracyZoneScoped;
-            return PLuaBaseItem->GetItem()->m_extra[0x14];
+            return PLuaBaseItem->GetItem()->m_extra[0x04];
         };
 
         /*item:getHourglassZone() - Returns a value for the zoneID from the hourglass' m_extra.

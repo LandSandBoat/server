@@ -697,9 +697,12 @@ xi.dynamis.handleDynamis = function(zone)
     local zone1Min = zone:getLocalVar(string.format("[DYNA]Given1MinuteWarning_%s", zoneID))
     local playersInZone = zone:getPlayers()
     local playercount = 0
-    
 
     for _, player in pairs(playersInZone) do -- Iterates through player list to do stuff.
+        if player:getCharVar("Requires_Initial_Update") == 1 then
+            xi.dynamis.updatePlayerHourglass(player)
+            player:setCharVar("Requires_Initial_Update", 0)
+        end
         if player:getGMLevel() < 2 then -- GMs can stay in zone until expiry.
             local hasValidHourglass = xi.dynamis.verifyHoldsValidHourglass(player, zoneDynamistoken, zoneTimepoint) -- Checks for a valid hourglass.
             if hasValidHourglass ~= true then
@@ -746,9 +749,9 @@ xi.dynamis.handleDynamis = function(zone)
     end
 
     if playercount == 0 then -- If player count in zone is 0 initiate cooldown for cleanup.
-        zone:setLocalVar(string.format("[DYNA]NoPlayersInZone_%s", zoneID), (os.time() + (1000 * 60 * 15))) -- Give 15 minutes for zone to repopulate.
+        zone:setLocalVar(string.format("[DYNA]NoPlayersInZone_%s", zoneID), (os.time() + (60 * 15))) -- Give 15 minutes for zone to repopulate.
     else
-        zone:setLocalVar(string.format("[DYNA]NoPlayersInZone_%s", zoneID), (os.time() + (1000 * 60 * 60 * 5))) -- Ignore for 5 hours or until zone empties.
+        zone:setLocalVar(string.format("[DYNA]NoPlayersInZone_%s", zoneID), (os.time() + (60 * 60 * 5))) -- Ignore for 5 hours or until zone empties.
     end
 
     if zone:getLocalVar(string.format("[DYNA]NoPlayersInZone_%s", zoneID)) <= os.time() then -- If cooldown period eclipses current OS time, cleanup.
@@ -771,16 +774,19 @@ end
 
 xi.dynamis.addTimetoDynamis = function(zone, extensionTime, msg)
     local zoneID = zone:getID()
+    local zoneDynamisToken = zone:getLocalVar(string.format("[DYNA]Token_%s", zoneID))
     local prevExpire = GetServerVariable(string.format("[DYNA]Timepoint_%s", zoneID)) -- Determine previous expiration time.
-    local expirationTime = prevExpire + (1000 * 60 * extensionTime) -- Add more time to increase previous expiration point.
+    local expirationTime = prevExpire + (60 * extensionTime) -- Add more time to increase previous expiration point.
     playersInZone = zone:getPlayers()
+    
+    SetServerVariable(string.format("[DYNA]Timepoint_%s", zoneID), expirationTime)
+    local zoneTimepoint = GetServerVariable(string.format("[DYNA]Timepoint_%s", zoneID))
+
     for _, player in pairs(playersInZone) do
         player:messageSpecial(zones[zone].text.DYNAMIS_TIME_EXTEND, extensionTime) -- Send extension time message.
-        xi.dynamis.updateHourglass(player) -- Runs hourglass update function per player.
+        xi.dynamis.updatePlayerHourglass(player) -- Runs hourglass update function per player.
     end
-    SetServerVariable(string.format("[DYNA]Timepoint_%s", zoneID), expirationTime)
 
-    local zoneTimepoint = GetServerVariable(string.format("[DYNA]Timepoint_%s", zoneID))
     local timeRemaining = xi.dynamis.getDynaTimeRemaining(zone, zoneTimepoint) -- Gets the time remaining in seconds.
     if timeRemaining > 660 then -- Checks if time remaining > 11 minutes.
         SetServerVariable(string.format("[DYNA]Given10MinuteWarning_%s", zoneID), 0) -- Resets var if time remaining greater than threshold.
@@ -815,8 +821,8 @@ xi.dynamis.cleanupDynamis = function(zone)
     SetServerVariable(string.format("[DYNA]Given10MinuteWarning_%s", zoneID), 0)
     SetServerVariable(string.format("[DYNA]Given3MinuteWarning_%s", zoneID), 0)
     SetServerVariable(string.format("[DYNA]Given1MinuteWarning_%s", zoneID), 0)
+    SetServerVariable(string.format("[DYNA]OriginalRegistrant_%s", zoneID), 0)
     zone:setLocalVar(string.format("[DYNA]Token_%s", zoneID), 0)
-    zone:setLocalVar(string.format("[DYNA]Token_%s", xi.dynamis.dynaInfoEra[zoneID].dynaZone), 0)
     zone:setLocalVar(string.format("[DYNA]ExpireRoutine_%s", zoneID), 0)
     zone:setLocalVar(string.format("[DYNA]NoPlayersInZone_%s", zoneID), 0)
     xi.dynamis.ejectAllPlayers(zone) -- Remove Players (This is precautionary but not necessary.)
@@ -856,17 +862,18 @@ end
 xi.dynamis.registerDynamis = function(player)
     local zoneID = player:getZoneID()
     local zone = GetZone(xi.dynamis.dynaInfoEra[zoneID].dynaZone)
-    local expirationTime = os.time() + (1000 * 60 * (60 + dynamis_staging_time)) -- Amount of time to extend timepoint by. 60 minutes by default for fresh zones.
+    local expirationTime = os.time() + (60 * (60 + dynamis_staging_time)) -- Amount of time to extend timepoint by. 60 minutes by default for fresh zones.
     SetServerVariable(string.format("[DYNA]Token_%s", xi.dynamis.dynaInfoEra[zoneID].dynaZone), (xi.dynamis.dynaInfoEra[zoneID].dynaZone + expirationTime)) -- Sets Dynamis Token Based on original expiration time and zone ID
     SetServerVariable(string.format("[DYNA]Timepoint_%s", xi.dynamis.dynaInfoEra[zoneID].dynaZone), expirationTime) -- Sets original timepoint which dynamis will expire.
     SetServerVariable(string.format("[DYNA]RegTimepoint_%s", xi.dynamis.dynaInfoEra[zoneID].dynaZone), os.time()) -- Sets last registered time.
+    SetServerVariable(string.format("[DYNA]OriginalRegistrant_%s", xi.dynamis.dynaInfoEra[zoneID].dynaZone), player:getID())
     xi.dynamis.onNewDynamis(player) -- Start spawning wave 1.
 
     local dynamisToken = GetServerVariable(string.format("[DYNA]Token_%s", xi.dynamis.dynaInfoEra[zoneID].dynaZone))
     
     zone:setLocalVar(string.format("[DYNA]Token_%s", xi.dynamis.dynaInfoEra[zoneID].dynaZone), dynamisToken)
     if dynamisToken ~= 0 and dynamisToken ~= nil then -- Double check that we have a token.
-        player:createHourglass(xi.dynamis.dynaInfoEra[zoneID].dynaZone, dynamisToken) -- Create initial perpetual.
+        player:createHourglass(xi.dynamis.dynaInfoEra[zoneID].dynaZone, dynamisToken, player:getID()) -- Create initial perpetual.
         player:messageSpecial(xi.dynamis.dynaIDLookup[zoneID].text.INFORMATION_RECORDED, dynamis_perpetual) -- Send player the recorded message.
         player:messageSpecial(zones[zoneID].text.ITEM_OBTAINED, dynamis_perpetual) -- Give player a message stating the perpetual has been obtained. 
     end
@@ -923,15 +930,22 @@ end
 xi.dynamis.verifyTradeHourglass = function(player, trade)
     local zoneID = player:getZoneID()
     local dynamisToken = GetServerVariable(string.format("[DYNA]Token_%s", xi.dynamis.dynaInfoEra[zoneID].dynaZone))
-    local storedToken = trade:getItem(0):getHourglassToken()
+    local originalRegistrant = GetServerVariable(string.format("[DYNA]OriginalRegistrant_%s", xi.dynamis.dynaInfoEra[zoneID].dynaZone))
     local storedZoneID = trade:getItem(0):getHourglassZone()
-    if storedToken == dynamisToken and storedZoneID == xi.dynamis.dynaInfoEra[zoneID].dynaZone and xi.dynamis.isPlayerRegistered(player, dynamisToken) == false then -- If signature doesn't have time then new hourglass.
+    if trade:getItem(0):getOriginalRegistrant() == originalRegistrant and storedZoneID == xi.dynamis.dynaInfoEra[zoneID].dynaZone and xi.dynamis.isPlayerRegistered(player, dynamisToken) == false then -- If signature doesn't have time then new hourglass.
         return 1 -- New Registrant's Hourglass
-    elseif storedToken == dynamisToken and storedZoneID == xi.dynamis.dynaInfoEra[zoneID].dynaZone and xi.dynamis.isPlayerRegistered(player, dynamisToken) == true then
+    elseif trade:getItem(0):getOriginalRegistrant() == originalRegistrant and storedZoneID == xi.dynamis.dynaInfoEra[zoneID].dynaZone and xi.dynamis.isPlayerRegistered(player, dynamisToken) == true then
         return 2 -- Previous Registrant's Hourglass
     else
         return 3 -- Not valid.
     end
+end
+
+xi.dynamis.updatePlayerHourglass = function(player)
+    local zoneID = player:getZoneID()
+    local zoneTimepoint = GetServerVariable(string.format("[DYNA]Timepoint_%s", zoneID))
+
+    player:updateHourglass(zoneID, zoneTimepoint)
 end
 
 --------------------------------------------
@@ -1034,9 +1048,10 @@ m:addOverride("xi.dynamis.entryNpcOnEventFinish", function(player, csid, option)
         if option == 0 then
             local entryPos = xi.dynamis.entryInfoEra[zoneID].enterPos
             if entryPos == nil then return end -- If entryPos isn't there, don't teleport.
+            player:messageSpecial(xi.dynamis.dynaIDLookup[player:getZoneID()].text.CONNECTING_WITH_THE_SERVER) -- Just to mimic what we have previously had.
+            player:setCharVar("Requires_Initial_Update", 1)
             player:setCharVar(xi.dynamis.entryInfoEra[zoneID].dynamis_has_enteredVar, 1) -- Mark the player as having entered at least once.
-            -- player:messageSpecial(xi.dynamis.dynaIDLookup[player:getZoneID()].text.CONNECTING_WITH_THE_SERVER) -- Just to mimic what we have previously had.
-            player:setPos(entryPos[1], entryPos[2], entryPos[3], entryPos[4], entryPos[5])
+            player:timer(5000, function(player) player:setPos(entryPos[1], entryPos[2], entryPos[3], entryPos[4], entryPos[5]) end)
         end
     elseif csid == xi.dynamis.entryInfoEra[zoneID].csSand then -- Give Shrouded Sand KI
         npcUtil.giveKeyItem(player, xi.ki.VIAL_OF_SHROUDED_SAND)
@@ -1106,8 +1121,7 @@ m:addOverride("xi.dynamis.zoneOnZoneIn", function(player, prevZone)
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then player:setPos(info.entryPos[1], info.entryPos[2], info.entryPos[3], info.entryPos[4]) end -- If player is in void, move player to entry.
 
     if xi.dynamis.verifyHoldsValidHourglass(player, zoneDynamisToken, zoneTimepoint) == true then -- Check if player has an hourglass and their personal token matches the zone token.
-        xi.dynamis.updateHourglass(player) -- Proceed in swapping out the hourglass the player has.
-        player:timer(1000, function(player)
+        player:timer(10000, function(player)
             player:messageSpecial(ID.text.DYNAMIS_TIME_UPDATE_2, math.floor(xi.dynamis.getDynaTimeRemaining(player:getZone(), zoneTimepoint) / 60), 1) -- Send message letting player know how long they have.
         end)
 
