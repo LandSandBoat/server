@@ -58,7 +58,7 @@ local function giveAllItems(player)
         if not player:hasItem(itemList.item, xi.inventoryLocation.TEMPITEMS) then
             if player:getCurrency("nyzul_isle_assault_point") >= itemList.cost then
                 player:addTempItem(itemList.item)
-                player:messageSpecial(ID.text.TEMP_ITEM_OBATINED, itemList.item)
+                player:messageSpecial(ID.text.TEMP_ITEM_OBTAINED, itemList.item)
                 player:delCurrency("nyzul_isle_assault_point", itemList.cost)
             end
         end
@@ -105,7 +105,7 @@ local function giveAllPrefered(player)
             if choice ~= nil then
                 if not player:hasItem(choice, xi.inventoryLocation.TEMPITEMS) then
                     player:addTempItem(choice)
-                    player:messageSpecial(ID.text.TEMP_ITEM_OBATINED, choice)
+                    player:messageSpecial(ID.text.TEMP_ITEM_OBTAINED, choice)
                     player:delCurrency("nyzul_isle_assault_point", items[mask].cost)
                 end
             end
@@ -139,7 +139,7 @@ entity.onEventUpdate = function(player, csid, option)
 
             if player:getCurrency("nyzul_isle_assault_point") >= vendorItems.cost then
                 player:addTempItem(vendorItems.item)
-                player:messageSpecial(ID.text.TEMP_ITEM_OBATINED, vendorItems.item)
+                player:messageSpecial(ID.text.TEMP_ITEM_OBTAINED, vendorItems.item)
                 player:delCurrency("nyzul_isle_assault_point", vendorItems.cost)
             end
         end

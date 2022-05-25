@@ -291,12 +291,12 @@ local function pickMobs(instance)
             end
 
             -- Trash NM's of floor
-            local spawnmedNMs = math.random(0, 4)
+            local spawnedNMs = math.random(0, 4)
 
-            if spawnmedNMs > 0 then
+            if spawnedNMs > 0 then
                 local floorSection = math.floor(currentFloor / 20) + 1
 
-                while spawnmedNMs > 2 do
+                while spawnedNMs > 2 do
                     local sPoint   = math.random(1, #spawnPoint)
                     local randomNM = 0
                     local NM_mob   = 0
@@ -320,7 +320,7 @@ local function pickMobs(instance)
 
                     table.remove(spawnPoint, sPoint)
 
-                    spawnmedNMs = spawnmedNMs - 1
+                    spawnedNMs = spawnedNMs - 1
 
                     if instance:getStage() == xi.nyzul.objective.ELIMINATE_ALL_ENEMIES then
                         instance:setLocalVar("Eliminate", instance:getLocalVar("Eliminate") + 1)
@@ -401,7 +401,7 @@ end
 
 -- Instance "tick"
 instance_object.onInstanceTimeUpdate = function(instance, elapsed)
-    xi.instance.updateInstanceTime(instance, elapsed, ID.text)
+    xi.instance.updateInstanceTime(instance, elapsed)
 end
 
 -- On fail

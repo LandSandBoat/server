@@ -16,7 +16,7 @@ local entity = {}
 entity.onTrigger = function(player, npc)
     local instance = npc:getInstance()
 
-    if npc:getAnimationSub() == 1 then
+    if npc:getAnimationSub() == 1 and npc:getLocalVar("cued") == 0 then
        if instance:getLocalVar("menuChoice") > 1 then
             -- Normal Menu
             player:startOptionalCutscene(201, {[0] = 7, cs_option = {1, 2}})
@@ -88,7 +88,7 @@ entity.onEventFinish = function(player, csid, option, npc)
                 local tokens = math.max(0, instance:getLocalVar("potential_tokens") - xi.nyzul.get_token_penalty(instance))
 
                 -- Assault initiator gets 10% more tokens
-                if players:getID() == instance:getLocalVar("assaultInitaitor") then
+                if players:getID() == instance:getLocalVar("assaultInitiator") then
                     tokens = tokens * 1.1
                 end
 
@@ -107,7 +107,8 @@ entity.onEventFinish = function(player, csid, option, npc)
             end
         end
 
-        if option >= 2 then
+        if option >= 2 and npc:getLocalVar("cued") == 0 then
+            npc:setLocalVar("cued", 1)
             local currentFloor = instance:getLocalVar("Nyzul_Current_Floor")
 
             if currentFloor == 100 then
@@ -137,7 +138,11 @@ entity.onEventFinish = function(player, csid, option, npc)
             end
 
             xi.nyzul.clearChests(instance)
-            npc:timer(8000, function(rune) rune:setAnimationSub(0) rune:setStatus(xi.status.DISAPPEAR) end)
+            npc:timer(8000, function(rune)
+                rune:setAnimationSub(0)
+                rune:setStatus(xi.status.DISAPPEAR)
+                rune:setLocalVar("cued", 0)
+            end)
         end
     end
 end

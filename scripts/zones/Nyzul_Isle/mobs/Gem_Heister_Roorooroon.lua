@@ -19,7 +19,10 @@ local function pickRunPoint(mob)
         fromTarget = mob
     end
 
-    local pos = GetFurthestValidPosition(fromTarget, distance, angle)
+    -- local pos = GetFurthestValidPosition(fromTarget, distance, angle)
+    -- ^ We lack this function. TODO: Add thisfunction. Below code is a workarround
+    local pos = mob:getPos()
+
     mob:setLocalVar("posX", pos.x)
     mob:setLocalVar("posY", pos.y)
     mob:setLocalVar("posZ", pos.z)
@@ -86,7 +89,7 @@ entity.onMobFight = function(mob, target)
         continuePoints(mob)
 
         if GetMobByID(mob:getID() + 1, instance):getStatus() == xi.status.DISAPPEAR then
-            if math.random(1, 5) == 2 then
+            if math.random(1, 5) == 2 then -- TODO:add sleep check here aswell
                 dropBomb(mob)
             end
         end

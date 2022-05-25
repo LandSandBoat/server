@@ -9,6 +9,12 @@ require("scripts/globals/nyzul")
 -----------------------------------
 local entity = {}
 
+entity.onMonsterAbilityPrepare = function(mob, skill)
+    if math.random(1, 4) > 1 then
+        return 1957
+    end
+end
+
 entity.onMobDeath = function(mob, player, isKiller, noKiller)
     if isKiller or noKiller then
         xi.nyzul.spawnChest(mob, player)

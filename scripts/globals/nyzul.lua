@@ -93,7 +93,7 @@ xi.nyzul.pathos =
     -- Positive Effects
     [18] = { effect = xi.effect.REGAIN,        power = 5,     textId = ID.text.RECEIVED_REGAIN_EFFECT        }, -- confirmed 50
     [19] = { effect = xi.effect.REGEN,         power = 15,    textId = ID.text.RECEIVED_REGEN_EFFECT         }, -- confirmed 15
-    [20] = { effect = xi.effect.REFRESH,       power = 1,     textId = ID.text.RECEIVED_REFRESH_EFFECT       },
+    [20] = { effect = xi.effect.REFRESH,       power = 10,    textId = ID.text.RECEIVED_REFRESH_EFFECT       }, -- confirmed 10
     [21] = { effect = xi.effect.FLURRY,        power = 15,    textId = ID.text.RECEIVED_FLURRY_EFFECT        },
     [22] = { effect = xi.effect.CONCENTRATION, power = 30,    textId = ID.text.RECEIVED_CONCENTRATION_EFFECT },
     [23] = { effect = xi.effect.STR_BOOST_II,  power = 30,    textId = ID.text.RECEIVED_STR_BOOST            }, -- confirmed 30
@@ -893,14 +893,15 @@ xi.nyzul.addFloorPathos = function(instance)
         local pathos = xi.nyzul.pathos[randomPathos]
         local chars  = instance:getChars()
 
-        for _, players in pairs(chars) do
-            players:addStatusEffect(pathos.effect, pathos.power, 0, 0)
-            players:getStatusEffect(pathos.effect):unsetFlag(3) -- dispelable + eraseable
-            players:getStatusEffect(pathos.effect):setFlag(8388864) -- on zone + no cancel
-            players:messageSpecial(pathos.textId)
+        for _, player in pairs(chars) do
+            player:addStatusEffect(pathos.effect, pathos.power, 0, 0)
+            player:getStatusEffect(pathos.effect):unsetFlag(3) -- dispelable + eraseable
+            player:getStatusEffect(pathos.effect):setFlag(8388864) -- on zone + no cancel
 
-            if players:hasPet() then
-                local pet = players:getPet()
+            player:messageSpecial(pathos.textId)
+
+            if player:hasPet() then
+                local pet = player:getPet()
                 pet:addStatusEffectEx(pathos.effect, pathos.effect, pathos.power, 0, 0)
                 pet:getStatusEffect(pathos.effect):unsetFlag(3) -- dispelable + eraseable
                 pet:getStatusEffect(pathos.effect):setFlag(8388864) -- on zone + no cancel
@@ -948,23 +949,23 @@ xi.nyzul.addPenalty = function(mob)
                 local effect = pathos.effect
                 local power  = pathos.power
 
-                for _, players in pairs(chars) do
+                for _, player in pairs(chars) do
                     if effect == xi.effect.IMPAIRMENT or effect == xi.effect.OMERTA or effect == xi.effect.DEBILITATION then
-                        if players:hasStatusEffect(effect) then
-                            local statusEffect = players:getStatusEffect(effect)
+                        if player:hasStatusEffect(effect) then
+                            local statusEffect = player:getStatusEffect(effect)
                             local effectPower  = statusEffect:getPower()
                             power              = bit.bor(effectPower, power)
                         end
                     end
 
-                    players:addStatusEffect(effect, power, 0, 0)
-                    players:getStatusEffect(effect):unsetFlag(3) -- dispelable + eraseable
-                    players:getStatusEffect(effect):setFlag(8388864) -- on zone + no cancel
-                    players:messageSpecial(ID.text.MALFUNCTION)
-                    players:messageSpecial(pathos.textId)
+                    player:addStatusEffect(effect, power, 0, 0)
+                    player:getStatusEffect(effect):unsetFlag(3) -- dispelable + eraseable
+                    player:getStatusEffect(effect):setFlag(8388864) -- on zone + no cancel
+                    player:messageSpecial(ID.text.MALFUNCTION)
+                    player:messageSpecial(pathos.textId)
 
-                    if players:hasPet() then
-                        local pet = players:getPet()
+                    if player:hasPet() then
+                        local pet = player:getPet()
                         pet:addStatusEffectEx(effect, effect, power, 0, 0)
                         pet:getStatusEffect(effect):unsetFlag(3) -- dispelable + eraseable
                         pet:getStatusEffect(effect):setFlag(8388864) -- on zone + no cancel
