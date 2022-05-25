@@ -175,12 +175,12 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
     CBaseEntity* PEntity = nullptr;
     if (table.get_or<uint8>("objtype", TYPE_NPC) == TYPE_NPC)
     {
-        PEntity = new CNpcEntity();
+        PEntity       = new CNpcEntity();
         PEntity->name = "DefaultName";
     }
     else
     {
-        auto groupId = table.get_or<uint32>("groupId", 0);
+        auto groupId     = table.get_or<uint32>("groupId", 0);
         auto groupZoneId = table.get_or<uint32>("groupZoneId", 0);
 
         PEntity = mobutils::InstantiateDynamicMob(groupId, groupZoneId, m_pLuaZone->GetID());
@@ -200,6 +200,8 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
         ShowError("CLuaZone::insertDynamicEntity : targid is high (03hX), update packets will be ignored", PEntity->targid);
     }
 
+    m_pLuaZone->GetZoneEntities()->dynamicTargIds.insert(PEntity->targid);
+
     PEntity->id = 0x1000000 + (ZoneID << 12) + PEntity->targid;
 
     PEntity->loc.zone       = m_pLuaZone;
@@ -213,7 +215,7 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
     if (name.empty())
     {
         ShowWarning("Trying to spawn dynamic entity without a name! (%s - %s)",
-            PEntity->name.c_str(), (const char*)m_pLuaZone->GetName());
+                    PEntity->name.c_str(), (const char*)m_pLuaZone->GetName());
 
         // If the name hasn't been provided, use "DefaultName" for NPCs, and whatever comes from the mob_pool for Mobs
         name = PEntity->name;
@@ -221,12 +223,12 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
 
     auto lookupName = "DE_" + name;
 
-    PEntity->name = lookupName;
+    PEntity->name       = lookupName;
     PEntity->packetName = name;
 
     PEntity->isRenamed = true;
 
-    auto typeKey = (PEntity->objtype == TYPE_NPC) ? "npcs" : "mobs";
+    auto typeKey    = (PEntity->objtype == TYPE_NPC) ? "npcs" : "mobs";
     auto cacheEntry = lua[sol::create_if_nil]["xi"]["zones"][(const char*)m_pLuaZone->GetName()][typeKey][lookupName];
 
     // Bind any functions that are passed in
@@ -240,13 +242,13 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
 
     if (auto* PNpc = dynamic_cast<CNpcEntity*>(PEntity))
     {
-        PNpc->namevis       = table.get_or<uint8>("namevis", 0);
-        PNpc->status        = STATUS_TYPE::NORMAL;
-        PNpc->m_flags       = 0;
-        PNpc->name_prefix   = 32;
+        PNpc->namevis     = table.get_or<uint8>("namevis", 0);
+        PNpc->status      = STATUS_TYPE::NORMAL;
+        PNpc->m_flags     = 0;
+        PNpc->name_prefix = 32;
 
         // TODO: Does this even work?
-        PNpc->widescan      = table.get_or<uint8>("widescan", 1);
+        PNpc->widescan = table.get_or<uint8>("widescan", 1);
 
         // Ensure that the npc is triggerable if onTrigger is passed in
         auto onTrigger = table["onTrigger"].get_or<sol::function>(sol::lua_nil);
@@ -259,11 +261,22 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
     }
     else if (auto* PMob = dynamic_cast<CMobEntity*>(PEntity))
     {
+        luautils::OnEntityLoad(PMob);
+
+        luautils::OnMobInitialize(PMob);
+        luautils::ApplyMixins(PMob);
+        luautils::ApplyZoneMixins(PMob);
+
+        PMob->saveModifiers();
+        PMob->saveMobModifiers();
+
+        PMob->m_bReleaseTargIDOnDeath = table["releaseIdOnDeath"].get_or(false);
+
         // Ensure mobs get a function for onMobDeath
         auto onMobDeath = table["onMobDeath"].get_or<sol::function>(sol::lua_nil);
         if (!onMobDeath.valid())
         {
-            cacheEntry["onMobDeath"] = [](){}; // Empty func
+            cacheEntry["onMobDeath"] = []() {}; // Empty func
         }
 
         m_pLuaZone->InsertMOB(PMob);
