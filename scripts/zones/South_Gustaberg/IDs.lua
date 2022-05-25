@@ -59,9 +59,7 @@ zones[xi.zone.SOUTH_GUSTABERG] =
             [17215867] = 17215868, -- -275.441 20.451 -347.294
             [17215887] = 17215888, -- -322.871 30.052 -401.184
         },
-        LEAPING_LIZZY_N = 17215868,
-        LEAPING_LIZZY_S = 17215888,
-        BUBBLY_BERNIE   = 17215494,
+        BUBBLY_BERNIE    = 17215494,
     },
     npc =
     {
