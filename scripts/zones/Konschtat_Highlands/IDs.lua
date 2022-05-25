@@ -78,8 +78,6 @@ zones[xi.zone.KONSCHTAT_HIGHLANDS] =
         FORGER         = 17219999,
         HATY           = 17220000,
         BENDIGEIT_VRAN = 17220001,
-        STRAY_MARY_N   = 17219795,
-        STRAY_MARY_S   = 17219933,
         VOIDWALKER  =
         {
             [xi.keyItem.CLEAR_ABYSSITE] = {
