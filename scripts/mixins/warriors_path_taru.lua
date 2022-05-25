@@ -26,7 +26,7 @@ g_mixins.warriors_path_taru = function(mob)
         local changetime = mob:getLocalVar("changetime")
         local battletime = mob:getBattleTime()
         local ID = zones[mob:getZoneID()]
-        local randOffset = math.random(1, 3) -- each taru most commonly uses text offset +1-3 for during fight
+        local randOffset = math.random(0, 2) -- each taru most commonly uses text offset 0-2+ for during fight
         local animationchance = math.random()
         local battlefield = mob:getBattlefield()
         if -- every 5 seconds the taru's will say something and use a random animation
@@ -38,16 +38,16 @@ g_mixins.warriors_path_taru = function(mob)
                 for i = 1,6 do
                     if animationchance < randChance[i] then
                         mob:entityAnimationPacket(taruAnimitions[1][i])
-                        return
+                        break
                     end
                 end
                 mob:setLocalVar("changetime", mob:getBattleTime())
             elseif makki == 1 then
-                mob:showText(mob, ID.text.MAKKI_CHUBUKKI_OFFSET + randOffset)
+                mob:showText(mob, ID.text.MAKKI_CHEBUKKI_OFFSET + randOffset)
                 for i = 1,6 do
                     if animationchance < randChance[i] then
                         mob:entityAnimationPacket(taruAnimitions[2][i])
-                        return
+                        break
                     end
                 end
                 mob:setLocalVar("changetime", mob:getBattleTime())
@@ -56,7 +56,7 @@ g_mixins.warriors_path_taru = function(mob)
                 for i = 1,6 do
                     if animationchance < randChance[i] then
                         mob:entityAnimationPacket(taruAnimitions[3][i])
-                        return
+                        break
                     end
                 end
                 mob:setLocalVar("changetime", mob:getBattleTime())
