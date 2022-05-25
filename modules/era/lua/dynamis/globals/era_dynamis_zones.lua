@@ -46,6 +46,10 @@ for _, zoneID in pairs(dynamisZones) do
     function(zone)
         xi.dynamis.cleanupDynamis(zone) -- Run cleanupDynamis
     end)
+    m:addOverride(string.format("xi.zones.%s.Zone.onZoneIn", zoneID[2]),
+    function(player, prevZone)
+        xi.dynamis.zoneOnZoneIn(player, prevZone) -- Run onZoneIn functions.
+    end)
     m:addOverride(string.format("xi.zones.%s.Zone.onZoneTick", zoneID[2]),
     function(zone)
         xi.dynamis.handleDynamis(zone)

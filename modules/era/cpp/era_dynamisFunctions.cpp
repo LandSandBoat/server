@@ -1,4 +1,4 @@
-/*************************************
+﻿/*************************************
 *  Used for the 75 Cap Dynamis
 *  Used to handle hourglass functions.
 *************************************/
@@ -46,7 +46,7 @@ class DynaFuncModule : public CPPModule
             }
 
             auto* PCharEntity = static_cast<CCharEntity*>(PEntity);
-            
+
             if (PCharEntity != nullptr)
             {
                 CItem* PItem = itemutils::GetItem(HOURGLASS_ID);
@@ -70,7 +70,7 @@ class DynaFuncModule : public CPPModule
             CBaseEntity* PEntity = PLuaBaseEntity->GetBaseEntity();
             auto Zone = PEntity->loc.zone;
 
-            if (PEntity->objtype != TYPE_PC || Zone->GetType() != ZONE_TYPE::DYNAMIS)
+            if (PEntity->objtype != TYPE_PC)
             {
                 return;
             }
@@ -106,9 +106,8 @@ class DynaFuncModule : public CPPModule
             TracyZoneScoped;
 
             CBaseEntity* PEntity = PLuaBaseEntity->GetBaseEntity();
-            auto Zone = PEntity->loc.zone;
 
-            if (PEntity->objtype != TYPE_PC || Zone->GetType() != ZONE_TYPE::DYNAMIS)
+            if (PEntity->objtype != TYPE_PC)
             {
                 return false;
             }
