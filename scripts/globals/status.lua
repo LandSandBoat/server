@@ -2831,7 +2831,7 @@ xi.anim = xi.animation
 xi.mount =
 {
     CHOCOBO        = 0,
-    QUEST_RAPTOR   = 1,
+    QUEST_RAPTOR   = 1, -- NOTE: This now appears as a plain chocobo
     RAPTOR         = 2,
     TIGER          = 3,
     CRAB           = 4,
