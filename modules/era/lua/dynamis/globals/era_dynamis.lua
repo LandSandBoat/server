@@ -1336,7 +1336,7 @@ end
 xi.dynamis.setStatueStats = function(mob, mobIndex)
     local zoneID = mob:getZoneID()
     local eyes = xi.dynamis.mobList[zoneID][mobIndex].eyes
-    mob:addRoamFlag(256)
+    mob:setRoamFlags(xi.roamFlag.EVENT)
     mob:setMobType(MOBTYPE_NOTORIOUS)
     mob:setMobLevel(math.random(82,84))
     mob:setMod(xi.mod.STR, -5)

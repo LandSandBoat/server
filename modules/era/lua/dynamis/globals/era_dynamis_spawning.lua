@@ -347,44 +347,82 @@ xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID,
             ["Nightmare Fly"] = {"594d53746174" , 130, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- Yagudo Statue (YMStat)
         },
     }
+    -- if mobMobType == "Statue" then
+    --     onMobSpawn = function(mob) xi.dynamis.setStatueStats(mob, mobIndex) end
+    -- elseif mobMobType == "Nightmare" then
+    --     onMobSpawn = function(mob) xi.dynamis.setMobStats(mob) end
+    -- end
     if mobMobType == "Statue" then
-        onMobSpawn = function(mob) xi.dynamis.setStatueStats(mob, mobIndex) end
-    elseif mobMobType == "Nightmare" then
-        onMobSpawn = function(mob) xi.dynamis.setMobStats(mob) end
-    end
-    local mob = zone:insertDynamicEntity({
-        objtype = xi.objType.MOB,
-        name = spawnLookUp[mobMobType][mobName][1],
-        x = xPos,
-        y = yPos,
-        z = zPos,
-        rotation = rPos,
-        groupId = spawnLookUp[mobMobType][mobName][2],
-        groupZoneId = spawnLookUp[mobMobType][mobName][3],
-        onMobSpawn,
-        onMobEngaged = function(mob) xi.dynamis.parentOnEngaged(mob, target) end,
-        onMobFight = function(mob) xi.dynamis.statueOnFight(mob) end,
-        onMobRoam = function(mob) xi.dynamis.mobOnRoam(mob) end,
-        onMobRoamAction = function(mob) xi.dynamis.mobOnRoamAction(mob) end,
-        onMobDeath = function(mob, playerArg, isKiller)
-            xi.dynamis.mobOnDeath(mob, xi.dynamis.mobList[zoneID], zones[zoneID].text.DYNAMIS_TIME_EXTEND)
-        end,
-    })
-    mob:setSpawn(xPos, yPos, zPos, rPos)
-    mob:setDropID(spawnLookUp[mobMobType][mobName][4])
-    if spawnLookUp[mobMobType][mobName][5] ~= nil then -- If SpellList ~= nil set SpellList
-        mob:setSpellList(spawnLookUp[mobMobType][mobName][5])
-    end
-    if spawnLookUp[mobMobType][mobName][6] ~= nil then -- If SkillList ~= nil set SkillList
-        mob:setMobMod(xi.mobMod.SKILL_LIST, spawnLookUp[mobMobType][mobName][6])
-    end
-    if oMobIndex ~= nil then
-        mob:setLocalVar("Parent", oMobIndex)
-    end
-    mob:setLocalVar("MobIndex", mobIndex)
-    mob:spawn()
-    if forceLink == true then
-        mob:updateEnmity(target)
+        local mob = zone:insertDynamicEntity({
+            objtype = xi.objType.MOB,
+            name = spawnLookUp[mobMobType][mobName][1],
+            x = xPos,
+            y = yPos,
+            z = zPos,
+            rotation = rPos,
+            groupId = spawnLookUp[mobMobType][mobName][2],
+            groupZoneId = spawnLookUp[mobMobType][mobName][3],
+            onMobSpawn = function(mob) xi.dynamis.setStatueStats(mob, mobIndex) end,
+            onMobEngaged = function(mob) xi.dynamis.parentOnEngaged(mob, target) end,
+            onMobFight = function(mob) xi.dynamis.statueOnFight(mob) end,
+            onMobRoam = function(mob) xi.dynamis.mobOnRoam(mob) end,
+            onMobRoamAction = function(mob) xi.dynamis.mobOnRoamAction(mob) end,
+            onMobDeath = function(mob, playerArg, isKiller)
+                xi.dynamis.mobOnDeath(mob, xi.dynamis.mobList[zoneID], zones[zoneID].text.DYNAMIS_TIME_EXTEND)
+            end,
+        })
+        mob:setSpawn(xPos, yPos, zPos, rPos)
+        mob:setDropID(spawnLookUp[mobMobType][mobName][4])
+        if spawnLookUp[mobMobType][mobName][5] ~= nil then -- If SpellList ~= nil set SpellList
+            mob:setSpellList(spawnLookUp[mobMobType][mobName][5])
+        end
+        if spawnLookUp[mobMobType][mobName][6] ~= nil then -- If SkillList ~= nil set SkillList
+            mob:setMobMod(xi.mobMod.SKILL_LIST, spawnLookUp[mobMobType][mobName][6])
+        end
+        if oMobIndex ~= nil then
+            mob:setLocalVar("Parent", oMobIndex)
+        end
+        mob:setLocalVar("MobIndex", mobIndex)
+        mob:setRoamFlags(xi.roamFlag.EVENT)
+        mob:spawn()
+        if forceLink == true then
+            mob:updateEnmity(target)
+        end
+    else
+        local mob = zone:insertDynamicEntity({
+            objtype = xi.objType.MOB,
+            name = spawnLookUp[mobMobType][mobName][1],
+            x = xPos,
+            y = yPos,
+            z = zPos,
+            rotation = rPos,
+            groupId = spawnLookUp[mobMobType][mobName][2],
+            groupZoneId = spawnLookUp[mobMobType][mobName][3],
+            onMobSpawn = function(mob) xi.dynamis.setMobStats(mob) end,
+            onMobEngaged = function(mob) xi.dynamis.parentOnEngaged(mob, target) end,
+            onMobFight = function(mob) xi.dynamis.statueOnFight(mob) end,
+            onMobRoam = function(mob) xi.dynamis.mobOnRoam(mob) end,
+            onMobRoamAction = function(mob) xi.dynamis.mobOnRoamAction(mob) end,
+            onMobDeath = function(mob, playerArg, isKiller)
+                xi.dynamis.mobOnDeath(mob, xi.dynamis.mobList[zoneID], zones[zoneID].text.DYNAMIS_TIME_EXTEND)
+            end,
+        })
+        mob:setSpawn(xPos, yPos, zPos, rPos)
+        mob:setDropID(spawnLookUp[mobMobType][mobName][4])
+        if spawnLookUp[mobMobType][mobName][5] ~= nil then -- If SpellList ~= nil set SpellList
+            mob:setSpellList(spawnLookUp[mobMobType][mobName][5])
+        end
+        if spawnLookUp[mobMobType][mobName][6] ~= nil then -- If SkillList ~= nil set SkillList
+            mob:setMobMod(xi.mobMod.SKILL_LIST, spawnLookUp[mobMobType][mobName][6])
+        end
+        if oMobIndex ~= nil then
+            mob:setLocalVar("Parent", oMobIndex)
+        end
+        mob:setLocalVar("MobIndex", mobIndex)
+        mob:spawn()
+        if forceLink == true then
+            mob:updateEnmity(target)
+        end
     end
 end
 

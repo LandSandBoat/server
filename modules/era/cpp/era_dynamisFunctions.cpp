@@ -182,6 +182,27 @@ class DynaFuncModule : public CPPModule
             return PLuaBaseItem->GetItem()->m_extra[0x0C];
         };
 
+        lua["CBaseEntity"]["setMobType"] = [](CLuaBaseEntity* PLuaBaseEntity, uint8 mobType)
+       {
+           TracyZoneScoped;
+
+           CBaseEntity* PEntity = PLuaBaseEntity->GetBaseEntity();
+
+            if (PEntity->objtype != TYPE_MOB)
+            {   
+                return 0;
+            }
+
+            CMobEntity* PMob = static_cast<CMobEntity*>(PEntity);
+
+           if (PMob->m_Type >= MOBTYPE_NORMAL && PMob->m_Type <= MOBTYPE_EVENT)
+            {
+                PMob->m_Type = mobType;
+            }
+            
+            return 0;
+       };
+
     }
 };
 

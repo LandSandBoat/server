@@ -40,7 +40,6 @@ custom/lua/test_npcs_in_gm_home.lua
 #-----------------------
 #        Dynamis
 #-----------------------
-era/cpp/era_setMobType.cpp
 era/cpp/era_dynamisFunctions.cpp
 era/lua/dynamis/globals/era_dynamis.lua
 era/lua/dynamis/globals/era_dynamis_spawning.lua
