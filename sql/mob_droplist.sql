@@ -7863,10 +7863,10 @@ INSERT INTO `mob_droplist` VALUES (1502,0,0,1000,4272,100);
 INSERT INTO `mob_droplist` VALUES (1502,0,0,1000,4377,70);
 INSERT INTO `mob_droplist` VALUES (1502,0,0,1000,11562,370);
 INSERT INTO `mob_droplist` VALUES (1503,0,0,1000,18445,240);
-INSERT INTO `mob_droplist` VALUES (1504,0,0,1000,852,380);
-INSERT INTO `mob_droplist` VALUES (1504,0,0,1000,926,580);
+INSERT INTO `mob_droplist` VALUES (1504,0,0,1000,852,100);
+INSERT INTO `mob_droplist` VALUES (1504,0,0,1000,926,240);
 INSERT INTO `mob_droplist` VALUES (1504,2,0,1000,4362,0);
-INSERT INTO `mob_droplist` VALUES (1504,0,0,1000,15351,70);
+INSERT INTO `mob_droplist` VALUES (1504,0,0,1000,15351,150);
 INSERT INTO `mob_droplist` VALUES (1505,0,0,1000,924,150);
 INSERT INTO `mob_droplist` VALUES (1505,0,0,1000,1125,20);
 INSERT INTO `mob_droplist` VALUES (1505,0,0,1000,13359,220);
@@ -15355,9 +15355,9 @@ INSERT INTO `mob_droplist` VALUES (2834,0,0,1000,5072,100);
 INSERT INTO `mob_droplist` VALUES (2834,0,0,1000,5073,10);
 INSERT INTO `mob_droplist` VALUES (2835,0,0,1000,14469,1000);
 INSERT INTO `mob_droplist` VALUES (2836,0,0,1000,18610,250);
-INSERT INTO `mob_droplist` VALUES (2837,0,0,1000,12340,100);
+INSERT INTO `mob_droplist` VALUES (2837,1,1,1000,12340,930);
+INSERT INTO `mob_droplist` VALUES (2837,1,1,1000,13071,70);
 INSERT INTO `mob_droplist` VALUES (2837,0,0,1000,501,100);
-INSERT INTO `mob_droplist` VALUES (2837,0,0,1000,13071,100);
 INSERT INTO `mob_droplist` VALUES (2838,0,0,1000,16934,100);
 INSERT INTO `mob_droplist` VALUES (2838,0,0,1000,12797,900);
 INSERT INTO `mob_droplist` VALUES (2839,1,1,1000,13837,930);
@@ -15760,7 +15760,7 @@ INSERT INTO `mob_droplist` VALUES (2935,0,0,1000,853,55);
 INSERT INTO `mob_droplist` VALUES (2936,0,0,1000,19123,200);
 INSERT INTO `mob_droplist` VALUES (2937,0,0,1000,2853,26);
 INSERT INTO `mob_droplist` VALUES (2938,0,0,1000,2842,222);
-INSERT INTO `mob_droplist` VALUES (2939,0,0,1000,16296,268);
+INSERT INTO `mob_droplist` VALUES (2939,0,0,1000,16296,240);
 INSERT INTO `mob_droplist` VALUES (2940,0,0,1000,15052,257);
 INSERT INTO `mob_droplist` VALUES (2941,0,0,1000,19043,269);
 INSERT INTO `mob_droplist` VALUES (2942,0,0,1000,2832,218);
@@ -15956,7 +15956,7 @@ INSERT INTO `mob_droplist` VALUES (3054,0,0,1000,2848,222); -- (Trembler Tabitha
 INSERT INTO `mob_droplist` VALUES (3055,0,0,1000,16018,333); -- (Naa Zeku the Unwaiting) Ataraxy Earring
 INSERT INTO `mob_droplist` VALUES (3056,0,0,1000,17970,100); -- (Centipedal Centruroides) Lyft Tabar
 INSERT INTO `mob_droplist` VALUES (3057,0,0,1000,16297,62); -- (Okyupete) Shepherd's Chain
-INSERT INTO `mob_droplist` VALUES (3058,0,0,1000,2841,444); -- (Be'Hya Hundredwall) Quadav Silver Ingot
+INSERT INTO `mob_droplist` VALUES (3058,0,0,1000,2841,240); -- (Be'Hya Hundredwall) Quadav Silver Ingot
 INSERT INTO `mob_droplist` VALUES (3059,0,0,1000,16023,185); -- (Slippery Sucker) Mystique Earring
 INSERT INTO `mob_droplist` VALUES (3060,0,0,1000,16300,333); -- (Gloom Eye) Wit Pendant
 INSERT INTO `mob_droplist` VALUES (3061,0,0,1000,2838,321); -- (Quu Xijo the Illusory) Ephemeral Cloth
