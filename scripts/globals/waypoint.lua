@@ -52,51 +52,51 @@ local waypointInfo =
     [29] = { 23, 2, 5008, {   95.994, -40.15, -74.541,   0, xi.zone.EASTERN_ADOULIN } }, -- Castle Gates
 
     -- Yahse Hunting Grounds
-    [31] = { 70, 4, 5000, {    321, 0, -199.8, 127, xi.zone.YAHSE_HUNTING_GROUNDS } }, -- Frontier Station
-    [32] = { 71, 4, 5001, {   86.5, 0,    1.5,   0, xi.zone.YAHSE_HUNTING_GROUNDS } }, -- Bivouac #1
-    [33] = { 72, 4, 5002, { -286.5, 0,   43.5, 127, xi.zone.YAHSE_HUNTING_GROUNDS } }, -- Bivouac #2
-    [34] = { 73, 4, 5003, { -162.4, 0, -272.8, 191, xi.zone.YAHSE_HUNTING_GROUNDS } }, -- Bivouac #3
+    [31] = { 38, 4, 5000, {    321, 0, -199.8, 127, xi.zone.YAHSE_HUNTING_GROUNDS } }, -- Frontier Station
+    [32] = { 39, 4, 5001, {   86.5, 0,    1.5,   0, xi.zone.YAHSE_HUNTING_GROUNDS } }, -- Bivouac #1
+    [33] = { 40, 4, 5002, { -286.5, 0,   43.5, 127, xi.zone.YAHSE_HUNTING_GROUNDS } }, -- Bivouac #2
+    [34] = { 41, 4, 5003, { -162.4, 0, -272.8, 191, xi.zone.YAHSE_HUNTING_GROUNDS } }, -- Bivouac #3
 
     -- Ceizak Battlegrounds
-    [41] = { 64, 3, 5000, {    365, 0.448,      190, 128, xi.zone.CEIZAK_BATTLEGROUNDS } }, -- Frontier Station
-    [42] = { 65, 3, 5001, { -6.879,     0, -117.511,  63, xi.zone.CEIZAK_BATTLEGROUNDS } }, -- Bivouac #1
-    [43] = { 66, 3, 5002, {    -42,     0,      155, 191, xi.zone.CEIZAK_BATTLEGROUNDS } }, -- Bivouac #2
-    [44] = { 67, 3, 5003, {   -442,     0,     -247, 191, xi.zone.CEIZAK_BATTLEGROUNDS } }, -- Bivouac #3
+    [41] = { 32, 3, 5000, {    365, 0.448,      190, 128, xi.zone.CEIZAK_BATTLEGROUNDS } }, -- Frontier Station
+    [42] = { 33, 3, 5001, { -6.879,     0, -117.511,  63, xi.zone.CEIZAK_BATTLEGROUNDS } }, -- Bivouac #1
+    [43] = { 34, 3, 5002, {    -42,     0,      155, 191, xi.zone.CEIZAK_BATTLEGROUNDS } }, -- Bivouac #2
+    [44] = { 35, 3, 5003, {   -442,     0,     -247, 191, xi.zone.CEIZAK_BATTLEGROUNDS } }, -- Bivouac #3
 
     -- Foret de Hennetiel
-    [51] = {  96, 5, 5000, { 398.11,    -2, 279.11,   0, xi.zone.FORET_DE_HENNETIEL } }, -- Frontier Station
-    [52] = {  97, 5, 5001, {   12.6,  -2.4,    342,   0, xi.zone.FORET_DE_HENNETIEL } }, -- Bivouac #1
-    [53] = {  98, 5, 5002, {    505, -2.25, -303.5, 127, xi.zone.FORET_DE_HENNETIEL } }, -- Bivouac #2
-    [54] = {  99, 5, 5003, {    103,  -2.2,  -92.3,  63, xi.zone.FORET_DE_HENNETIEL } }, -- Bivouac #3
-    [55] = { 100, 5, 5004, { -251.8, -2.37, -39.25,  63, xi.zone.FORET_DE_HENNETIEL } }, -- Bivouac #4
+    [51] = { 64, 5, 5000, { 398.11,    -2, 279.11,   0, xi.zone.FORET_DE_HENNETIEL } }, -- Frontier Station
+    [52] = { 65, 5, 5001, {   12.6,  -2.4,    342,   0, xi.zone.FORET_DE_HENNETIEL } }, -- Bivouac #1
+    [53] = { 66, 5, 5002, {    505, -2.25, -303.5, 127, xi.zone.FORET_DE_HENNETIEL } }, -- Bivouac #2
+    [54] = { 67, 5, 5003, {    103,  -2.2,  -92.3,  63, xi.zone.FORET_DE_HENNETIEL } }, -- Bivouac #3
+    [55] = { 68, 5, 5004, { -251.8, -2.37, -39.25,  63, xi.zone.FORET_DE_HENNETIEL } }, -- Bivouac #4
 
     -- Morimar Basalt Fields
-    [61] = { 102, 6, 5000, { 443.728,     -16, -325.428, 191, xi.zone.MORIMAR_BASALT_FIELDS } }, -- Frontier Station
-    [62] = { 103, 6, 5001, {     368,     -16,     37.5, 127, xi.zone.MORIMAR_BASALT_FIELDS } }, -- Bivouac #1
-    [63] = { 104, 6, 5002, {   112.8,  -0.483,    324.4,  63, xi.zone.MORIMAR_BASALT_FIELDS } }, -- Bivouac #2
-    [64] = { 105, 6, 5003, {   175.5, -15.581,   -318.2, 127, xi.zone.MORIMAR_BASALT_FIELDS } }, -- Bivouac #3
-    [65] = { 106, 6, 5004, {    -323,     -32,        2,  63, xi.zone.MORIMAR_BASALT_FIELDS } }, -- Bivouac #4
-    [66] = { 107, 6, 5005, {   -78.2, -47.284,      303, 191, xi.zone.MORIMAR_BASALT_FIELDS } }, -- Bivouac #5
+    [61] = { 70, 6, 5000, { 443.728,     -16, -325.428, 191, xi.zone.MORIMAR_BASALT_FIELDS } }, -- Frontier Station
+    [62] = { 71, 6, 5001, {     368,     -16,     37.5, 127, xi.zone.MORIMAR_BASALT_FIELDS } }, -- Bivouac #1
+    [63] = { 72, 6, 5002, {   112.8,  -0.483,    324.4,  63, xi.zone.MORIMAR_BASALT_FIELDS } }, -- Bivouac #2
+    [64] = { 73, 6, 5003, {   175.5, -15.581,   -318.2, 127, xi.zone.MORIMAR_BASALT_FIELDS } }, -- Bivouac #3
+    [65] = { 74, 6, 5004, {    -323,     -32,        2,  63, xi.zone.MORIMAR_BASALT_FIELDS } }, -- Bivouac #4
+    [66] = { 75, 6, 5005, {   -78.2, -47.284,      303, 191, xi.zone.MORIMAR_BASALT_FIELDS } }, -- Bivouac #5
 
     -- Yorcia Weald
-    [71] = { 128, 7, 5000, {    353.3,   0.2,    153.3, 223, xi.zone.YORCIA_WEALD } }, -- Frontier Station
-    [72] = { 129, 7, 5001, {    -40.5, 0.367,  296.367,   0, xi.zone.YORCIA_WEALD } }, -- Bivouac #1
-    [73] = { 130, 7, 5002, {  122.132, 0.146, -287.731, 127, xi.zone.YORCIA_WEALD } }, -- Bivouac #2
-    [74] = { 131, 7, 5003, { -274.776, 0.357,  85.376,  127, xi.zone.YORCIA_WEALD } }, -- Bivouac #3
+    [71] = { 96, 7, 5000, {    353.3,   0.2,    153.3, 223, xi.zone.YORCIA_WEALD } }, -- Frontier Station
+    [72] = { 97, 7, 5001, {    -40.5, 0.367,  296.367,   0, xi.zone.YORCIA_WEALD } }, -- Bivouac #1
+    [73] = { 98, 7, 5002, {  122.132, 0.146, -287.731, 127, xi.zone.YORCIA_WEALD } }, -- Bivouac #2
+    [74] = { 99, 7, 5003, { -274.776, 0.357,  85.376,  127, xi.zone.YORCIA_WEALD } }, -- Bivouac #3
 
     -- Marjami Ravine
-    [81] = { 134, 8, 5000, {      358,     -60,      165,  63, xi.zone.MARJAMI_RAVINE } }, -- Frontier Station
-    [82] = { 135, 8, 5001, {      323,     -20,      -79,   0, xi.zone.MARJAMI_RAVINE } }, -- Bivouac #1
-    [83] = { 136, 8, 5002, {    6.808,       0,   78.437, 191, xi.zone.MARJAMI_RAVINE } }, -- Bivouac #2
-    [84] = { 137, 8, 5003, { -318.708,     -20, -127.275,  63, xi.zone.MARJAMI_RAVINE } }, -- Bivouac #3
-    [85] = { 138, 8, 5004, { -326.022, -40.023,  201.096, 191, xi.zone.MARJAMI_RAVINE } }, -- Bivouac #4
+    [81] = { 102, 8, 5000, {      358,     -60,      165,  63, xi.zone.MARJAMI_RAVINE } }, -- Frontier Station
+    [82] = { 103, 8, 5001, {      323,     -20,      -79,   0, xi.zone.MARJAMI_RAVINE } }, -- Bivouac #1
+    [83] = { 104, 8, 5002, {    6.808,       0,   78.437, 191, xi.zone.MARJAMI_RAVINE } }, -- Bivouac #2
+    [84] = { 105, 8, 5003, { -318.708,     -20, -127.275,  63, xi.zone.MARJAMI_RAVINE } }, -- Bivouac #3
+    [85] = { 106, 8, 5004, { -326.022, -40.023,  201.096, 191, xi.zone.MARJAMI_RAVINE } }, -- Bivouac #4
 
     -- Kamihr Drifts
-    [91] = { 166, 9, 5000, {  439.403,    63, -272.554,  63, xi.zone.KAMIHR_DRIFTS } }, -- Frontier Station
-    [92] = { 167, 9, 5001, {  -42.574,    43,  -71.319,   0, xi.zone.KAMIHR_DRIFTS } }, -- Bivouac #1
-    [93] = { 168, 9, 5002, {     8.24,    43, -283.017, 191, xi.zone.KAMIHR_DRIFTS } }, -- Bivouac #2
-    [94] = { 169, 9, 5003, {     9.24,    23,  162.803,  63, xi.zone.KAMIHR_DRIFTS } }, -- Bivouac #3
-    [95] = { 170, 9, 5004, { -228.942, 3.567,  364.512, 127, xi.zone.KAMIHR_DRIFTS } }, -- Bivouac #4
+    [91] = { 134, 9, 5000, {  439.403,    63, -272.554,  63, xi.zone.KAMIHR_DRIFTS } }, -- Frontier Station
+    [92] = { 135, 9, 5001, {  -42.574,    43,  -71.319,   0, xi.zone.KAMIHR_DRIFTS } }, -- Bivouac #1
+    [93] = { 136, 9, 5002, {     8.24,    43, -283.017, 191, xi.zone.KAMIHR_DRIFTS } }, -- Bivouac #2
+    [94] = { 137, 9, 5003, {     9.24,    23,  162.803,  63, xi.zone.KAMIHR_DRIFTS } }, -- Bivouac #3
+    [95] = { 138, 9, 5004, { -228.942, 3.567,  364.512, 127, xi.zone.KAMIHR_DRIFTS } }, -- Bivouac #4
 
     -- Jeuno
 
@@ -142,22 +142,18 @@ local crystalTradeValues =
     [xi.items.LIGHT_CLUSTER    ] = 1000,
 }
 
-local function getWaypointData(npcObj)
+local function getWaypointIndex(npcObj)
     local waypointNpcId = npcObj:getID()
     local zoneObject    = npcObj:getZone()
     local waypointList  = zoneObject:queryEntitiesByName('Waypoint') -- TODO: Fallback to Enigmatic devices if not found
-    local waypointData  = {}
 
     for indexVal, npcData in ipairs(waypointList) do
         if npcData:getID() == waypointNpcId then
-            waypointData[1] = waypointStartIndex[zoneObject:getID()] + indexVal
-            waypointData[2] = waypointInfo[waypointData[1]][1]
-            waypointData[3] = waypointInfo[waypointData[1]][2]
-            waypointData[4] = waypointInfo[waypointData[1]][3]
-
-            return waypointData
+            return waypointStartIndex[zoneObject:getID()] + indexVal
         end
     end
+
+    return nil
 end
 
 local function getRuneMask(player)
@@ -181,33 +177,41 @@ xi.waypoint.onTrade = function(player, npc, trade)
 end
 
 xi.waypoint.onTrigger = function(player, npc)
-    local unlockedWaypoints = player:getTeleportTable(xi.teleport.type.WAYPOINT)
-    print(unlockedWaypoints)
-    local waypointData   = getWaypointData(npc)
-    local discountParams = 0b0100 -- TODO: Bit 2 here is discount, Bit 3 is accept/decline for simple/normal transport
+    local waypointIndex     = getWaypointIndex(npc)
 
-    -- Waypoint Event ID
-    local eventId = waypointData[4]
+    if player:hasTeleport(xi.teleport.type.WAYPOINT, waypointInfo[waypointIndex][1]) then
+        local unlockedWaypoints = player:getTeleportTable(xi.teleport.type.WAYPOINT)
+        local discountParams    = 4 -- TODO: (nibble: Bit 2 here is discount, Bit 3 is accept/decline for simple/normal transport)
 
-    -- First event parameters packs the player's kinetic units, two bits that determine teleportation cost,
-    -- and the Index value of the waypoint (See: waypointInfo table)
-    local p0 = bit.lshift(player:getCurrency('kinetic_unit'), 16) + bit.lshift(discountParams, 12) + waypointData[1]
+        -- Waypoint Event ID
+        local eventId = waypointInfo[waypointIndex][3]
 
-    -- Second event parameter packs an initial bit which could be related to having the charter permit,
-    -- along with the unlocked geomagnetrons in Eastern and Western Adoulin
-    local p1 = unlockedWaypoints[1]
+        -- First event parameters packs the player's kinetic units, two bits that determine teleportation cost,
+        -- and the Index value of the waypoint (See: waypointInfo table)
+        local p0 = bit.lshift(player:getCurrency('kinetic_unit'), 16) + bit.lshift(discountParams, 12) + waypointIndex
 
-    -- Third event parameter is an inverted bitfield for all but bit 0, the remainder of the field is set
-    -- by the key items for warp runes.
-    local p2 = getRuneMask(player)
+        -- Second event parameter packs an initial bit which could be related to having the charter permit,
+        -- along with the unlocked geomagnetrons in Eastern and Western Adoulin
+        local p1 = unlockedWaypoints[1]
 
-    -- Unlock all non-city Waypoints
-    local p3 = unlockedWaypoints[3]
-    local p4 = unlockedWaypoints[4]
-    local p5 = unlockedWaypoints[5]
-    local p6 = unlockedWaypoints[6]
+        -- Third event parameter is an inverted bitfield for all but bit 0, the remainder of the field is set
+        -- by the key items for warp runes.
+        local p2 = getRuneMask(player)
 
-    player:startEvent(eventId, p0, p1, p2, p3, p4, p5, p6)
+        -- Unlock all non-city Waypoints
+        local p3 = unlockedWaypoints[2]
+        local p4 = unlockedWaypoints[3]
+        local p5 = unlockedWaypoints[4]
+        local p6 = unlockedWaypoints[5]
+
+        player:startEvent(eventId, p0, p1, p2, p3, p4, p5, p6)
+    else
+        local zoneId = player:getZoneID()
+        local ID = zones[zoneId]
+
+        player:addTeleport(xi.teleport.type.WAYPOINT, waypointInfo[waypointIndex][1])
+        player:messageSpecial(ID.text.GEOMAGNETRON_ATTUNED, waypointIndex - waypointStartIndex[zoneId], xi.ki.GEOMAGNETRON)
+    end
 end
 
 -- Note: There is additional data packed into the event update option that is unused at this time (below):

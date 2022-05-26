@@ -22,6 +22,7 @@ zones[xi.zone.EASTERN_ADOULIN] =
         YOU_CAN_NOW_BECOME      = 7011,  -- You can now become a [geomancer/rune fencer]!
         YOU_LEARNED_TRUST       = 7025,  -- You learned Trust: <name>!
         MOG_LOCKER_OFFSET       = 7582,  -- Your Mog Locker lease is valid until <timestamp>, kupo.
+        GEOMAGNETRON_ATTUNED    = 7783,  -- Your <keyitem> has been attuned to a geomagnetic fount [/ in front of the Peacekeepers' Coalition/ in front of the Scouts' Coalition/ at the Statue of the Goddess/ at the wharf to Yahse Hunting Grounds/ in front of your Rent-a-Room/ in front of the auction house/ on Sverdhried Hillock/ in the Coronal Esplanade/ at the gates of Castle Adoulin]!
         EXPENDED_KINETIC_UNITS  = 7802,  -- You have expended <number> kinetic unit[/s] and will be transported to another locale.
         INSUFFICIENT_UNITS      = 7803,  -- Your stock of kinetic units is insufficient.
         HOMEPOINT_SET           = 8298,  -- Home point set!

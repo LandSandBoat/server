@@ -99,7 +99,7 @@ struct Teleport_t
     Telepoint_t homepoint;
     Telepoint_t survival;
     uint8       abysseaConflux[MAX_ABYSSEAZONES];
-    uint32      waypoints[6];
+    uint32      waypoints[5];
 };
 
 struct PetInfo_t
