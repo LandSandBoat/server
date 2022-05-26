@@ -248,12 +248,12 @@ xi.garrison.start = function(player, npc, party)
     local garrisonZoneData = xi.garrison.data[zoneId]
     -- Apply level restriction
         for _, v in ipairs(player:getAlliance()) do
-			-- Make sure they are in the same zone
-			if v:getZoneID() == zoneId then
-				v:addStatusEffect(xi.effect.LEVEL_RESTRICTION, garrisonZoneData.levelCap, 0, 0)
-				-- BATTLEFIELD this is to prevent outside help, is not retail
-				v:addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0)
-			end
+            -- Make sure they are in the same zone
+            if v:getZoneID() == zoneId then
+                v:addStatusEffect(xi.effect.LEVEL_RESTRICTION, garrisonZoneData.levelCap, 0, 0)
+                -- BATTLEFIELD this is to prevent outside help, is not retail
+                v:addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0)
+            end
         end
     -- Spawn NPC needs to be changed to dynamic similar to pets/trusts/fellows shifting ids
     xi.garrison.spawnNPCs(player, npc, party)
