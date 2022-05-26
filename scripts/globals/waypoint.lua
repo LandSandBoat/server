@@ -99,6 +99,7 @@ local waypointInfo =
     [95] = { 138, 9, 5004, { -228.942, 3.567,  364.512, 127, xi.zone.KAMIHR_DRIFTS } }, -- Bivouac #4
 
     -- Jeuno
+    [100] = { nil, 10, 10121, { } }, -- Lower Jeuno (Special case, Default Active)
 
     -- Enigmatic Devices
 
@@ -173,13 +174,26 @@ end
 
 -- The below functions are used by all Waypoint NPCs
 xi.waypoint.onTrade = function(player, npc, trade)
+    local kineticValue = 0
 
+    for crystalId, crystalValue in ipairs(crystalTradeValues) do
+        local numCrystals = trade:getItemQty(crystalId)
+
+        if numCrystals > 0 then
+            kineticValue = kineticValue + numCrystals * crystalValue
+            trade:confirmItem(crystalId, numCrystals)
+        end
+    end
 end
 
 xi.waypoint.onTrigger = function(player, npc)
-    local waypointIndex     = getWaypointIndex(npc)
+    local waypointIndex = getWaypointIndex(npc)
+    local zoneId        = player:getZoneID()
 
-    if player:hasTeleport(xi.teleport.type.WAYPOINT, waypointInfo[waypointIndex][1]) then
+    if
+        player:hasTeleport(xi.teleport.type.WAYPOINT, waypointInfo[waypointIndex][1]) or
+        zoneId == xi.zone.LOWER_JEUNO
+    then
         local unlockedWaypoints = player:getTeleportTable(xi.teleport.type.WAYPOINT)
         local discountParams    = 4 -- TODO: (nibble: Bit 2 here is discount, Bit 3 is accept/decline for simple/normal transport)
 
@@ -205,8 +219,7 @@ xi.waypoint.onTrigger = function(player, npc)
         local p6 = unlockedWaypoints[5]
 
         player:startEvent(eventId, p0, p1, p2, p3, p4, p5, p6)
-    else
-        local zoneId = player:getZoneID()
+    elseif zoneId ~= xi.zone.LOWER_JEUNO then
         local ID = zones[zoneId]
 
         player:addTeleport(xi.teleport.type.WAYPOINT, waypointInfo[waypointIndex][1])
