@@ -86,6 +86,12 @@ struct Telepoint_t
     int32  menu[10];
 };
 
+struct Waypoint_t
+{
+    uint32 access[5];
+    bool   confirmation;
+};
+
 struct Teleport_t
 {
     uint32      outpostSandy;
@@ -99,7 +105,7 @@ struct Teleport_t
     Telepoint_t homepoint;
     Telepoint_t survival;
     uint8       abysseaConflux[MAX_ABYSSEAZONES];
-    uint32      waypoints[5];
+    Waypoint_t  waypoints;
 };
 
 struct PetInfo_t

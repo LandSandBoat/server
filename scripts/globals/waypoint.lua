@@ -216,10 +216,15 @@ xi.waypoint.onTrade = function(player, npc, trade)
 
     if kineticValue > 0 then
         if currentUnits + kineticValue > 50000 then
-            -- Reached Terminal
-            -- Aether lost
+            local lostUnits = currentUnits + kineticValue - 50000
+
+            player:messageSpecial(ID.text.ARTIFACT_TERMINAL_VOLUME)
+            player:messageSpecial(ID.text.SURPLUS_LOST_TO_AETHER, lostUnits)
+
+            player:setCurrency('kinetic_unit', 50000)
         else
-            -- 7823
+            player:messageSpecial(ID.text.ARTIFACT_HAS_BEEN_CHARGED, kineticValue, kineticValue + currentUnits)
+            player:addCurrency('kinetic_unit', kineticValue)
         end
     else
         player:messageSpecial(ID.text.CANNOT_RECEIVE_KINETIC)
@@ -230,19 +235,22 @@ xi.waypoint.onTrigger = function(player, npc)
     local waypointIndex = getWaypointIndex(npc)
     local zoneId        = player:getZoneID()
 
+    print(player:getTeleportMenu(xi.teleport.type.WAYPOINT))
+
     if
         player:hasTeleport(xi.teleport.type.WAYPOINT, waypointInfo[waypointIndex][1]) or
         zoneId == xi.zone.LOWER_JEUNO
     then
         local unlockedWaypoints = player:getTeleportTable(xi.teleport.type.WAYPOINT)
-        local discountParams    = 4 -- TODO: (nibble: Bit 2 here is discount, Bit 3 is accept/decline for simple/normal transport)
+        local destConfirmation  = player:getTeleportMenu(xi.teleport.type.WAYPOINT)[1] and 1 or 0
+        local menuParams = bit.bor(4, bit.bor(bit.lshift(destConfirmation, 3))) -- TODO: (nibble: Bit 2 here is discount, Bit 3 is accept/decline for simple/normal transport)
 
         -- Waypoint Event ID
         local eventId = waypointInfo[waypointIndex][3]
 
         -- First event parameters packs the player's kinetic units, two bits that determine teleportation cost,
         -- and the Index value of the waypoint (See: waypointInfo table)
-        local p0 = bit.lshift(player:getCurrency('kinetic_unit'), 16) + bit.lshift(discountParams, 12) + waypointIndex
+        local p0 = bit.lshift(player:getCurrency('kinetic_unit'), 16) + bit.lshift(menuParams, 12) + waypointIndex
 
         -- Second event parameter packs an initial bit which could be related to having the charter permit,
         -- along with the unlocked geomagnetrons in Eastern and Western Adoulin
@@ -288,8 +296,10 @@ end
 xi.waypoint.onEventFinish = function(player, csid, option, npc)
     if option > 0 and option <= 303 then
         player:setPos(unpack(waypointInfo[option][4]))
+    elseif option == 1000 then
+        -- Decline Confirmation (Default Off)
+        player:setTeleportMenu(xi.teleport.type.WAYPOINT, true)
     elseif option == 1001 then
-        -- Toggle Accept/Decline bit in waypoints
-        -- Bit 15
+        player:setTeleportMenu(xi.teleport.type.WAYPOINT, false)
     end
 end
