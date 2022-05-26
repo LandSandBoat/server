@@ -101,7 +101,6 @@ xi.garrison.spawnNPCs = function(player, npc, party)
     -- Use the mob object as you normally would
         mob:setSpawn(xPos, yPos, zPos, rot)
         mob:spawn()
-        mob:hideName(false)
         mob:setMobLevel(garrisonZoneData.levelCap)
         -- TODO need pathing so they return to spawnpoint
         mob:setSpeed(0)
@@ -120,7 +119,6 @@ xi.garrison.spawnNPCs = function(player, npc, party)
         end
         table.insert(npcs, mob:getID())
         npcnum = npcnum + 1
-    player:PrintToPlayer(string.format("Spawning Garrison NPC (Lv: %i, HP: %i)\n%s", mob:getMainLvl(), mob:getMaxHP(), mob))
     end
 end
 
@@ -250,9 +248,12 @@ xi.garrison.start = function(player, npc, party)
     local garrisonZoneData = xi.garrison.data[zoneId]
     -- Apply level restriction
         for _, v in ipairs(player:getAlliance()) do
-            v:addStatusEffect(xi.effect.LEVEL_RESTRICTION, garrisonZoneData.levelCap, 0, 0)
-            -- BATTLEFIELD this is to prevent outside help, is not retail
-            v:addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0)
+			-- Make sure they are in the same zone
+			if v:getZoneID() == zoneId then
+				v:addStatusEffect(xi.effect.LEVEL_RESTRICTION, garrisonZoneData.levelCap, 0, 0)
+				-- BATTLEFIELD this is to prevent outside help, is not retail
+				v:addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0)
+			end
         end
     -- Spawn NPC needs to be changed to dynamic similar to pets/trusts/fellows shifting ids
     xi.garrison.spawnNPCs(player, npc, party)
@@ -289,4 +290,3 @@ xi.garrison.onTrade = function(player, npc, trade)
         -- TODO event for not having met requirements
     end
 end
-
