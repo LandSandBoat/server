@@ -4,9 +4,9 @@
 --  SoA: Waypoint
 -- !pos 20 -34.922 0.000 245
 -----------------------------------
-local ID = require("scripts/zones/Lower_Jeuno/IDs")
-require("scripts/globals/missions")
-require("scripts/globals/zone")
+require('scripts/globals/keyitems')
+require('scripts/globals/waypoint')
+require('scripts/globals/zone')
 -----------------------------------
 local entity = {}
 
@@ -14,11 +14,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local adoulinAccess = player:getCurrentMission(xi.mission.log_id.SOA) > xi.mission.id.soa.ONWARD_TO_ADOULIN
-    if adoulinAccess then
-        player:startEvent(10121)
-    else
-        player:messageSpecial(ID.text.WAYPOINT_EXAMINE)
+    if player:hasKeyItem(xi.ki.ADOULINIAN_CHARTER_PERMIT) then
+        xi.waypoint.onTrigger(player, npc)
     end
 end
 

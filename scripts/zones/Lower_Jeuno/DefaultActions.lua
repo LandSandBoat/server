@@ -8,5 +8,6 @@ return {
     ['Muckvix']       = { event = 15 },
     ['Omer']          = { event = 206 },
     ['Sattal-Mansal'] = { event = 96 },
+    ['Waypoint']      = { messageSpecial = ID.text.WAYPOINT_EXAMINE },
     ['Yatniel']       = { event = 10028 },
 }
