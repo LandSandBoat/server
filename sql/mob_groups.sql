@@ -12360,48 +12360,48 @@ INSERT INTO `mob_groups` VALUES (54,4185,187,'Vanguards_Avatar',0,128,0,2400,0,8
 -- ------------------------------------------------------------
 -- Dynamis-Jeuno (Zone 188)
 -- ------------------------------------------------------------
-
+ -- Removed Spawn timer for group poping
 INSERT INTO `mob_groups` VALUES (1,1668,188,'Goblin_Golem',0,128,1085,12500,12500,85,85,0);
-INSERT INTO `mob_groups` VALUES (2,4184,188,'Vanguard_Smithy',600,0,2543,4000,0,75,77,0);
-INSERT INTO `mob_groups` VALUES (3,4199,188,'Vanguard_Welldigger',600,0,2543,4000,0,75,77,0);
-INSERT INTO `mob_groups` VALUES (4,4170,188,'Vanguard_Pathfinder',600,0,2563,4000,0,75,77,0);
+INSERT INTO `mob_groups` VALUES (2,4184,188,'Vanguard_Smithy',0,128,2543,4000,0,75,77,0); -- New grouping for odious_grenade
+INSERT INTO `mob_groups` VALUES (3,4199,188,'Vanguard_Welldigger',0,128,1831,4000,0,75,77,0); -- New grouping for odious_die
+INSERT INTO `mob_groups` VALUES (4,4170,188,'Vanguard_Pathfinder',0,128,2543,4000,0,75,77,0); -- New grouping for odious_grenade
 INSERT INTO `mob_groups` VALUES (5,4189,188,'Vanguards_Slime',0,128,0,2400,1000,75,77,0);
-INSERT INTO `mob_groups` VALUES (6,4182,188,'Vanguard_Shaman',600,0,2543,4000,0,75,77,0);
-INSERT INTO `mob_groups` VALUES (7,4147,188,'Vanguard_Enchanter',600,0,2560,4000,0,75,77,0);
-INSERT INTO `mob_groups` VALUES (8,4192,188,'Vanguard_Tinkerer',600,0,2543,4000,0,75,77,0);
-INSERT INTO `mob_groups` VALUES (9,4136,188,'Vanguard_Armorer',600,0,2543,4000,0,75,77,0);
-INSERT INTO `mob_groups` VALUES (10,4155,188,'Vanguard_Hitman',600,0,2543,4000,0,75,77,0);
-INSERT INTO `mob_groups` VALUES (11,1444,188,'Gabblox_Magpietongue',0,32,922,8000,0,75,77,0);
-INSERT INTO `mob_groups` VALUES (12,4173,188,'Vanguard_Pitfighter',600,0,2543,4000,0,75,77,0);
-INSERT INTO `mob_groups` VALUES (13,4133,188,'Vanguard_Alchemist',600,0,2543,4000,0,75,77,0);
-INSERT INTO `mob_groups` VALUES (14,4160,188,'Vanguard_Maestro',600,0,2543,4000,0,75,77,0);
-INSERT INTO `mob_groups` VALUES (15,4649,188,'Vanguard_Dragontamer',600,0,0,0,0,75,77,0);
+INSERT INTO `mob_groups` VALUES (6,4182,188,'Vanguard_Shaman',0,128,1831,4000,0,75,77,0); -- New grouping for odious_die
+INSERT INTO `mob_groups` VALUES (7,4147,188,'Vanguard_Enchanter',0,128,2560,4000,0,75,77,0); -- New grouping for odious_cup
+INSERT INTO `mob_groups` VALUES (8,4192,188,'Vanguard_Tinkerer',0,128,2560,4000,0,75,77,0); -- New grouping for odious_cup
+INSERT INTO `mob_groups` VALUES (9,4136,188,'Vanguard_Armorer',0,128,1831,4000,0,75,77,0); -- New grouping for odious_die
+INSERT INTO `mob_groups` VALUES (10,4155,188,'Vanguard_Hitman',0,128,2563,4000,0,75,77,0); -- New grouping for odious_mask
+INSERT INTO `mob_groups` VALUES (11,1444,188,'Gabblox_Magpietongue',0,32,143,8000,0,75,77,0); -- Regrouped with other normal gob nm
+INSERT INTO `mob_groups` VALUES (12,4173,188,'Vanguard_Pitfighter',0,128,2543,4000,0,75,77,0); -- New grouping for odious_grenade
+INSERT INTO `mob_groups` VALUES (13,4133,188,'Vanguard_Alchemist',0,128,2563,4000,0,75,77,0); -- New grouping for odious_mask
+INSERT INTO `mob_groups` VALUES (14,4160,188,'Vanguard_Maestro',0,128,2563,4000,0,75,77,0); -- New grouping for odious_mask
+INSERT INTO `mob_groups` VALUES (15,4649,188,'Vanguard_Dragontamer',0,128,1831,4000,0,75,77,0); -- New grouping for odious_die
 INSERT INTO `mob_groups` VALUES (16,4190,188,'Vanguards_Wyvern',0,128,0,2400,1000,75,77,0);
-INSERT INTO `mob_groups` VALUES (17,4134,188,'Vanguard_Ambusher',600,0,2543,4000,0,75,77,0);
-INSERT INTO `mob_groups` VALUES (18,4166,188,'Vanguard_Necromancer',600,0,2543,4000,0,75,77,0);
+INSERT INTO `mob_groups` VALUES (17,4134,188,'Vanguard_Ambusher',0,128,2560,4000,0,75,77,0); -- New grouping for odious_cup
+INSERT INTO `mob_groups` VALUES (18,4166,188,'Vanguard_Necromancer',0,128,2560,4000,0,75,77,0); -- New grouping for odious_cup
 INSERT INTO `mob_groups` VALUES (19,4185,188,'Vanguards_Avatar',0,128,0,2400,1000,75,77,0);
-INSERT INTO `mob_groups` VALUES (20,4179,188,'Vanguard_Ronin',600,0,2543,4000,0,75,77,0);
+INSERT INTO `mob_groups` VALUES (20,4179,188,'Vanguard_Ronin',0,128,2543,4000,0,75,77,0); -- New grouping for odious_grenade
 INSERT INTO `mob_groups` VALUES (21,4047,188,'Tufflix_Loglimbs',0,32,143,8000,0,75,77,0);
 INSERT INTO `mob_groups` VALUES (22,1707,188,'Goblin_Replica',0,128,1144,1000,1000,65,65,0);
-INSERT INTO `mob_groups` VALUES (23,3676,188,'Smeltix_Thickhide',0,32,143,8000,0,75,77,0);
-INSERT INTO `mob_groups` VALUES (24,2116,188,'Jabkix_Pigeonpecs',0,32,143,8000,0,75,77,0);
-INSERT INTO `mob_groups` VALUES (25,4303,188,'Wasabix_Callusdigit',0,32,143,8000,0,73,73,0);
+INSERT INTO `mob_groups` VALUES (23,3676,188,'Smeltix_Thickhide',0,128,143,8000,0,75,77,0); -- Time spawn nm in Group
+INSERT INTO `mob_groups` VALUES (24,2116,188,'Jabkix_Pigeonpecs',0,128,143,8000,0,75,77,0); -- Time spawn nm in Group
+INSERT INTO `mob_groups` VALUES (25,4303,188,'Wasabix_Callusdigit',0,128,143,8000,0,73,73,0); -- Time spawn nm in Group
 INSERT INTO `mob_groups` VALUES (26,1716,188,'Goblin_Statue',0,128,0,1000,1000,65,65,0);
 INSERT INTO `mob_groups` VALUES (27,1935,188,'Hermitrix_Toothrot',0,32,143,8000,0,75,77,0);
 INSERT INTO `mob_groups` VALUES (28,4388,188,'Wyrmwix_Snakespecs',0,32,143,8000,0,75,77,0);
-INSERT INTO `mob_groups` VALUES (29,2747,188,'Morgmox_Moldnoggin',0,32,143,8000,0,75,77,0);
-INSERT INTO `mob_groups` VALUES (30,3718,188,'Sparkspox_Sweatbrow',0,32,143,8000,0,75,77,0);
-INSERT INTO `mob_groups` VALUES (31,1199,188,'Elixmix_Hooknose',0,32,143,8000,0,75,77,0);
-INSERT INTO `mob_groups` VALUES (32,336,188,'Bandrix_Rockjaw',0,32,220,8000,0,79,79,0);
-INSERT INTO `mob_groups` VALUES (33,554,188,'Buffrix_Eargone',0,32,143,8000,0,75,77,0);
-INSERT INTO `mob_groups` VALUES (34,2007,188,'Humnox_Drumbelly',0,32,143,8000,0,75,77,0);
-INSERT INTO `mob_groups` VALUES (35,3917,188,'Ticktox_Beadyeyes',0,32,143,8000,0,79,79,0);
-INSERT INTO `mob_groups` VALUES (36,2453,188,'Lurklox_Dhalmelneck',0,32,143,8000,0,75,77,0);
-INSERT INTO `mob_groups` VALUES (37,3985,188,'Trailblix_Goatmug',0,32,2459,8000,0,75,77,0);
-INSERT INTO `mob_groups` VALUES (38,2225,188,'Kikklix_Longlegs',0,32,143,8000,0,90,92,0);
-INSERT INTO `mob_groups` VALUES (39,2191,188,'Karashix_Swollenskull',0,32,143,8000,0,90,92,0);
-INSERT INTO `mob_groups` VALUES (40,3419,188,'Rutrix_Hamgams',0,32,922,8000,0,75,77,0);
-INSERT INTO `mob_groups` VALUES (41,3692,188,'Snypestix_Eaglebeak',0,32,143,8000,0,90,92,0);
+INSERT INTO `mob_groups` VALUES (29,2747,188,'Morgmox_Moldnoggin',0,128,143,8000,0,75,77,0); -- Time spawn nm in Group
+INSERT INTO `mob_groups` VALUES (30,3718,188,'Sparkspox_Sweatbrow',0,128,143,8000,0,75,77,0); -- Time spawn nm in Group
+INSERT INTO `mob_groups` VALUES (31,1199,188,'Elixmix_Hooknose',0,128,143,8000,0,75,77,0); -- Time spawn nm in Group
+INSERT INTO `mob_groups` VALUES (32,336,188,'Bandrix_Rockjaw',0,128,143,8000,0,79,79,0); -- Regrouped with other normal gob nm -- Time spawn nm in Group
+INSERT INTO `mob_groups` VALUES (33,554,188,'Buffrix_Eargone',0,128,143,8000,0,75,77,0); -- Time spawn nm in Group
+INSERT INTO `mob_groups` VALUES (34,2007,188,'Humnox_Drumbelly',0,128,143,8000,0,75,77,0); -- Time spawn nm in Group
+INSERT INTO `mob_groups` VALUES (35,3917,188,'Ticktox_Beadyeyes',0,128,143,8000,0,79,79,0); -- Time spawn nm in Group
+INSERT INTO `mob_groups` VALUES (36,2453,188,'Lurklox_Dhalmelneck',0,128,143,8000,0,75,77,0); -- Time spawn nm in Group
+INSERT INTO `mob_groups` VALUES (37,3985,188,'Trailblix_Goatmug',0,128,143,8000,0,75,77,0); -- Regrouped with other normal gob nm -- Time spawn nm in Group
+INSERT INTO `mob_groups` VALUES (38,2225,188,'Kikklix_Longlegs',0,128,143,8000,0,90,92,0); -- Time spawn nm in Group
+INSERT INTO `mob_groups` VALUES (39,2191,188,'Karashix_Swollenskull',0,128,143,8000,0,90,92,0); -- Time spawn nm in Group
+INSERT INTO `mob_groups` VALUES (40,3419,188,'Rutrix_Hamgams',0,32,143,8000,0,75,77,0); -- Regrouped with other normal gob nm
+INSERT INTO `mob_groups` VALUES (41,3692,188,'Snypestix_Eaglebeak',1200,0,143,8000,0,90,92,0); -- Time spawn nm
 INSERT INTO `mob_groups` VALUES (42,194,188,'Anvilix_Sootwrists',0,32,143,8000,0,75,77,0);
 INSERT INTO `mob_groups` VALUES (43,505,188,'Bootrix_Jaggedelbow',0,32,143,8000,0,75,77,0);
 INSERT INTO `mob_groups` VALUES (44,2711,188,'Mobpix_Mucousmouth',0,32,143,8000,0,75,77,0);
@@ -12414,32 +12414,32 @@ INSERT INTO `mob_groups` VALUES (50,3213,188,'Prowlox_Barrelbelly',0,32,143,8000
 INSERT INTO `mob_groups` VALUES (51,745,188,'Cloktix_Longnail',0,32,143,8000,0,75,77,0);
 INSERT INTO `mob_groups` VALUES (52,2751,188,'Mortilox_Wartpaws',0,32,143,8000,0,90,92,0);
 INSERT INTO `mob_groups` VALUES (53,3674,188,'Slystix_Megapeepers',0,32,143,8000,0,75,77,0);
-INSERT INTO `mob_groups` VALUES (54,4064,188,'Tymexox_Ninefingers',0,32,2490,8000,0,90,92,0);
-INSERT INTO `mob_groups` VALUES (55,4241,188,'Quicktrix_Hexhands',0,128,0,0,0,95,95,0);
-INSERT INTO `mob_groups` VALUES (56,4653,188,'Feralox_Honeylips',0,128,0,0,0,95,95,0);
+INSERT INTO `mob_groups` VALUES (54,4064,188,'Tymexox_Ninefingers',0,32,143,8000,0,90,92,0); -- Regrouped with other normal gob nm
+INSERT INTO `mob_groups` VALUES (55,4241,188,'Quicktrix_Hexhands',0,128,2490,0,0,95,95,0); -- odious_cub pop nm
+INSERT INTO `mob_groups` VALUES (56,4653,188,'Feralox_Honeylips',0,128,2459,0,0,95,95,0); -- odious_die pop nm
 INSERT INTO `mob_groups` VALUES (57,2841,188,'Feraloxs_Slime',0,128,0,0,0,92,92,0);
-INSERT INTO `mob_groups` VALUES (58,2846,188,'Scourquix_Scaleskin',0,128,0,0,0,95,95,0);
+INSERT INTO `mob_groups` VALUES (58,2846,188,'Scourquix_Scaleskin',0,128,922,0,0,95,95,0); -- odious_mask pop nm
 INSERT INTO `mob_groups` VALUES (59,3778,188,'Scourquixs_Wyvern',0,128,0,0,0,92,92,0);
-INSERT INTO `mob_groups` VALUES (60,3843,188,'Wilywox_Tenderpalm',0,128,0,0,0,95,95,0);
-INSERT INTO `mob_groups` VALUES (61,4844,188,'Arch_Goblin_Golem',0,128,0,0,0,99,99,0);
-INSERT INTO `mob_groups` VALUES (62,4184,188,'Vanguard_Smithy',600,0,2543,4000,0,90,92,0);
-INSERT INTO `mob_groups` VALUES (63,4173,188,'Vanguard_Pitfighter',600,0,2543,4000,0,90,92,0);
-INSERT INTO `mob_groups` VALUES (64,4199,188,'Vanguard_Welldigger',600,0,2543,4000,0,90,92,0);
-INSERT INTO `mob_groups` VALUES (65,4133,188,'Vanguard_Alchemist',600,0,2543,4000,0,90,92,0);
-INSERT INTO `mob_groups` VALUES (66,4182,188,'Vanguard_Shaman',600,0,2543,4000,0,90,92,0);
-INSERT INTO `mob_groups` VALUES (67,4147,188,'Vanguard_Enchanter',600,0,2560,4000,0,90,92,0);
-INSERT INTO `mob_groups` VALUES (68,4192,188,'Vanguard_Tinkerer',600,0,2543,4000,0,90,92,0);
-INSERT INTO `mob_groups` VALUES (69,4649,188,'Vanguard_Dragontamer',600,0,0,0,0,90,92,0);
+INSERT INTO `mob_groups` VALUES (60,3843,188,'Wilywox_Tenderpalm',0,128,220,0,0,95,95,0); -- odious_grenade pop nm
+INSERT INTO `mob_groups` VALUES (61,4844,188,'Arch_Goblin_Golem',0,128,0,0,0,99,99,0); -- fiendish tome pop nm
+INSERT INTO `mob_groups` VALUES (62,4184,188,'Vanguard_Smithy',0,128,2543,4000,0,90,92,0);  -- New grouping for odious_grenade
+INSERT INTO `mob_groups` VALUES (63,4173,188,'Vanguard_Pitfighter',0,128,2543,4000,0,90,92,0);  -- New grouping for odious_grenade
+INSERT INTO `mob_groups` VALUES (64,4199,188,'Vanguard_Welldigger',0,128,1831,4000,0,90,92,0); -- New grouping for odious_die
+INSERT INTO `mob_groups` VALUES (65,4133,188,'Vanguard_Alchemist',0,128,2563,4000,0,90,92,0); -- New grouping for odious_mask
+INSERT INTO `mob_groups` VALUES (66,4182,188,'Vanguard_Shaman',0,128,1831,4000,0,90,92,0); -- New grouping for odious_die
+INSERT INTO `mob_groups` VALUES (67,4147,188,'Vanguard_Enchanter',0,128,2560,4000,0,90,92,0); -- New grouping for odious_cup
+INSERT INTO `mob_groups` VALUES (68,4192,188,'Vanguard_Tinkerer',0,128,2560,4000,0,90,92,0); -- New grouping for odious_cup
+INSERT INTO `mob_groups` VALUES (69,4649,188,'Vanguard_Dragontamer',0,128,1831,4000,0,90,92,0); -- New grouping for odious_die
 INSERT INTO `mob_groups` VALUES (70,4190,188,'Vanguards_Wyvern',0,128,0,2400,1000,90,92,0);
-INSERT INTO `mob_groups` VALUES (71,4170,188,'Vanguard_Pathfinder',600,0,2563,4000,0,90,92,0);
+INSERT INTO `mob_groups` VALUES (71,4170,188,'Vanguard_Pathfinder',0,128,2543,4000,0,90,92,0);  -- New grouping for odious_grenade
 INSERT INTO `mob_groups` VALUES (72,4189,188,'Vanguards_Slime',0,128,0,2400,1000,90,92,0);
-INSERT INTO `mob_groups` VALUES (73,4160,188,'Vanguard_Maestro',600,0,2543,4000,0,90,92,0);
-INSERT INTO `mob_groups` VALUES (74,4179,188,'Vanguard_Ronin',600,0,2543,4000,0,90,92,0);
-INSERT INTO `mob_groups` VALUES (75,4136,188,'Vanguard_Armorer',600,0,2543,4000,0,90,92,0);
-INSERT INTO `mob_groups` VALUES (76,4166,188,'Vanguard_Necromancer',600,0,2543,4000,0,90,92,0);
+INSERT INTO `mob_groups` VALUES (73,4160,188,'Vanguard_Maestro',0,128,2563,4000,0,90,92,0); -- New grouping for odious_mask
+INSERT INTO `mob_groups` VALUES (74,4179,188,'Vanguard_Ronin',0,128,2543,4000,0,90,92,0);  -- New grouping for odious_grenade
+INSERT INTO `mob_groups` VALUES (75,4136,188,'Vanguard_Armorer',0,128,1831,4000,0,90,92,0); -- New grouping for odious_die
+INSERT INTO `mob_groups` VALUES (76,4166,188,'Vanguard_Necromancer',0,128,2560,4000,0,90,92,0); -- New grouping for odious_cup
 INSERT INTO `mob_groups` VALUES (77,4185,188,'Vanguards_Avatar',0,128,0,2400,1000,90,92,0);
-INSERT INTO `mob_groups` VALUES (78,4134,188,'Vanguard_Ambusher',600,0,2543,4000,0,90,92,0);
-INSERT INTO `mob_groups` VALUES (79,4155,188,'Vanguard_Hitman',600,0,2543,4000,0,90,92,0);
+INSERT INTO `mob_groups` VALUES (78,4134,188,'Vanguard_Ambusher',0,128,2560,4000,0,90,92,0); -- New grouping for odious_cup
+INSERT INTO `mob_groups` VALUES (79,4155,188,'Vanguard_Hitman',0,128,2563,4000,0,90,92,0); -- New grouping for odious_mask
 INSERT INTO `mob_groups` VALUES (80,1716,188,'Goblin_Statue',0,128,0,1000,1000,70,70,0);
 INSERT INTO `mob_groups` VALUES (81,1707,188,'Goblin_Replica',0,128,1144,1000,1000,80,80,0);
 INSERT INTO `mob_groups` VALUES (82,1716,188,'Goblin_Statue',0,128,0,1000,1000,80,80,0);
