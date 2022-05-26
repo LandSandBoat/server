@@ -3789,6 +3789,13 @@ INSERT INTO `mob_skill_lists` VALUES ('Cop_Wardens',1170,562); -- Reactive Armor
 
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Shantotto_II_Melee',1163,3739); -- shantotto_ii_melee (no name)
 INSERT INTO `mob_skill_lists` VALUES ('Teporingo',1164,258);
+INSERT INTO `mob_skill_lists` VALUES ('Bugbear_Muscleman',1165,361);
+INSERT INTO `mob_skill_lists` VALUES ('Goblin_NM',1166,590);
+INSERT INTO `mob_skill_lists` VALUES ('Goblin_NM',1166,591);
+INSERT INTO `mob_skill_lists` VALUES ('Goblin_NM',1166,1081);
+INSERT INTO `mob_skill_lists` VALUES ('Goblin_NM',1166,1082);
+INSERT INTO `mob_skill_lists` VALUES ('Goblin_NM',1166,1084);
+INSERT INTO `mob_skill_lists` VALUES ('Goblin_NM',1166,1086);
 INSERT INTO `mob_skill_lists` VALUES ('Ladybug_Night',1167,2178);
 INSERT INTO `mob_skill_lists` VALUES ('Puk_M',1169,1718);
 INSERT INTO `mob_skill_lists` VALUES ('Puk_M',1169,1720);

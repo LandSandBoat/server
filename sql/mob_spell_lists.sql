@@ -4151,6 +4151,21 @@ INSERT INTO `mob_spell_lists` VALUES ('Nepionic_Soulflayer',460,274,1,60); -- sl
 
 INSERT INTO `mob_spell_lists` VALUES ('Bombast',461,235,1,255); -- sleepga_II
 
+INSERT INTO `mob_spell_lists` VALUES('Goblin_Wolfman', 462, 245, 10, 255);
+INSERT INTO `mob_spell_lists` VALUES('Goblin_Wolfman', 462, 247, 20, 255);
+INSERT INTO `mob_spell_lists` VALUES('Goblin_Wolfman', 462, 252, 20, 255);
+INSERT INTO `mob_spell_lists` VALUES('Goblin_Wolfman', 462, 266, 43, 255);
+INSERT INTO `mob_spell_lists` VALUES('Goblin_Wolfman', 462, 267, 41, 255);
+INSERT INTO `mob_spell_lists` VALUES('Goblin_Wolfman', 462, 268, 35, 255);
+INSERT INTO `mob_spell_lists` VALUES('Goblin_Wolfman', 462, 269, 37, 255);
+INSERT INTO `mob_spell_lists` VALUES('Goblin_Wolfman', 462, 270, 39, 255);
+INSERT INTO `mob_spell_lists` VALUES('Goblin_Wolfman', 462, 271, 31, 255);
+INSERT INTO `mob_spell_lists` VALUES('Goblin_Wolfman', 462, 272, 33, 255);
+INSERT INTO `mob_spell_lists` VALUES('Goblin_Wolfman', 462, 275, 45, 255);
+INSERT INTO `mob_spell_lists` VALUES('Goblin_Collector', 463, 35, 45, 255);
+INSERT INTO `mob_spell_lists` VALUES('Goblin_Collector', 463, 21, 45, 255);
+INSERT INTO `mob_spell_lists` VALUES('Goblin_Collector', 463, 40, 45, 255);
+
 -- CoP 5-3L Head Wind (Boneyard Gulley) -- Shikaree X (Used Capture from FFXI Captures Discord)
 INSERT INTO `mob_spell_lists` VALUES ('Shikaree_X',464,344,1,255); -- Hojo: Ichi
 INSERT INTO `mob_spell_lists` VALUES ('Shikaree_X',464,347,1,255); -- Kurayami: Ichi
@@ -4274,6 +4289,10 @@ INSERT INTO `mob_spell_lists` VALUES('Ghrah_Fire',484,176,1,255);
 INSERT INTO `mob_spell_lists` VALUES('Ghrah_Fire',484,204,1,255);
 INSERT INTO `mob_spell_lists` VALUES('Ghrah_Fire',484,235,1,255);
 
+INSERT INTO `mob_spell_lists` VALUES('Sword_Sorcerer_Solisoq', 485, 21, 45, 255);
+INSERT INTO `mob_spell_lists` VALUES('Sword_Sorcerer_Solisoq', 485, 34, 45, 255);
+
+-- Next Available: 464
 
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;

@@ -469,7 +469,7 @@ INSERT INTO `mob_groups` VALUES (14,2700,11,'Moblin_Ragman',792,0,1715,0,0,33,36
 INSERT INTO `mob_groups` VALUES (15,2687,11,'Moblin_Chapman',792,0,1705,0,0,33,36,0);
 INSERT INTO `mob_groups` VALUES (16,565,11,'Bugbear_Servingman',720,0,377,0,0,32,35,0);
 INSERT INTO `mob_groups` VALUES (17,1160,11,'Earth_Elemental',924,4,733,0,0,45,50,0);
-INSERT INTO `mob_groups` VALUES (18,563,11,'Bugbear_Muscleman',5700,0,376,0,0,52,52,0);
+INSERT INTO `mob_groups` VALUES (18,563,11,'Bugbear_Muscleman',5700,0,376,4700,0,52,52,0);
 INSERT INTO `mob_groups` VALUES (19,3776,11,'Stirge',792,0,2338,0,0,33,36,0);
 INSERT INTO `mob_groups` VALUES (20,121,11,'Ancient_Bomb',924,0,83,0,0,40,45,0);
 INSERT INTO `mob_groups` VALUES (21,3912,11,'Thunder_Elemental',924,4,2412,0,0,45,50,0);
@@ -531,10 +531,13 @@ INSERT INTO `mob_groups` VALUES (29,3824,12,'Swashstox_Beadblinker',0,32,2366,0,
 INSERT INTO `mob_groups` VALUES (30,2695,12,'Moblin_Groundman',960,0,1710,0,0,77,77,0);
 INSERT INTO `mob_groups` VALUES (31,2664,12,'Mimic',0,128,1675,0,0,75,79,0);
 INSERT INTO `mob_groups` VALUES (32,2704,12,'Moblin_Scalpelman',960,0,1719,0,0,78,80,0);
-INSERT INTO `mob_groups` VALUES (33,1645,12,'Goblin_Collector',0,128,1037,0,0,79,81,0);
+INSERT INTO `mob_groups` VALUES (33,1645,12,'Goblin_Collector',0,128,1037,20000,0,79,81,0);
 INSERT INTO `mob_groups` VALUES (34,562,12,'Bugbear_Matman',0,128,375,20000,0,75,79,0);
 INSERT INTO `mob_groups` VALUES (35,1160,12,'Earth_Elemental',960,4,733,0,0,80,80,0);
-INSERT INTO `mob_groups` VALUES (36,6718,12,'Sword_Sorcerer_Solisoq',0,128,0,0,0,83,83,0);
+INSERT INTO `mob_groups` VALUES (36,6718,12,'Sword_Sorcerer_Solisoq',3600,0,3224,14000,0,83,83,0);
+INSERT INTO `mob_groups` VALUES (37,2684,12,'Moblin_Aidman',0,128,1703,0,0,75,79,0);
+INSERT INTO `mob_groups` VALUES (38,2692,12,'Moblin_Engineman',0,128,1708,0,0,75,79,0);
+
 
 -- ------------------------------------------------------------
 -- Mine_Shaft_2716 (Zone 13)

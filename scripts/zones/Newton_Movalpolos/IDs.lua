@@ -29,8 +29,15 @@ zones[xi.zone.NEWTON_MOVALPOLOS] =
     },
     mob =
     {
-        MIMIC                = 16826564,
-        BUGBEAR_MATMAN       = 16826570,
+        SWASHSTOX_BEADBLINKER_PH =
+        {
+            [16826507] = 16826517, -- 92.145, 15.500, 66.595
+            [16826514] = 16826517, -- 88.412, 15.421, -19.950
+        },
+        SWASHSTOX_BEADBLINKER    = 16826510,
+        MIMIC                    = 16826564,
+        BUGBEAR_MATMAN           = 16826570,
+        GOBLIN_COLLECTOR         = 16826569,
     },
     npc =
     {
