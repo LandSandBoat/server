@@ -1214,7 +1214,7 @@ xi.dynamis.setMobStats = function(mob)
 
         mob:setMobMod(xi.mobMod.HP_SCALE, 132)
         mob:setHP(mob:getMaxHP())
-        --mob:setMobType(MOBTYPE_NORMAL)
+        --mob:setMobType(xi.mobskills.mobType.NORMAL)
         mob:setMobLevel(math.random(78,80))
         mob:setTrueDetection(true)
 
@@ -1315,7 +1315,7 @@ end
 xi.dynamis.setNMStats = function(mob)
     local job = mob:getMainJob()
 
-    --mob:setMobType(MOBTYPE_NOTORIOUS)
+    --mob:setMobType(xi.mobskills.mobType.NOTORIOUS)
     mob:setMobMod(xi.mobMod.HP_SCALE, 132)
     mob:setHP(mob:getMaxHP())
     mob:setMobLevel(math.random(80,82))
@@ -1337,7 +1337,7 @@ xi.dynamis.setStatueStats = function(mob, mobIndex)
     local zoneID = mob:getZoneID()
     local eyes = xi.dynamis.mobList[zoneID][mobIndex].eyes
     mob:setRoamFlags(xi.roamFlag.EVENT)
-    mob:setMobType(MOBTYPE_NOTORIOUS)
+    mob:setMobType(xi.mobskills.mobType.NOTORIOUS)
     mob:setMobLevel(math.random(82,84))
     mob:setMod(xi.mod.STR, -5)
     mob:setMod(xi.mod.VIT, -5)
@@ -1350,7 +1350,9 @@ xi.dynamis.setStatueStats = function(mob, mobIndex)
     mob:setMod(xi.mod.MPHEAL, 0)
     
     if mob:getFamily() >= 92 and mob:getFamily() <= 95 then -- If statue
-        mob:setLocalVar("eyeColor", eyes) -- Set Eyes if need be
+        if eyes ~= nil then
+            mob:setLocalVar("eyeColor", eyes) -- Set Eyes if need be
+        end
         if eyes >= 2 then -- If HP or MP restore statue
             mob:setUnkillable(true) -- Set Unkillable as we will use skills then kill.
         end
@@ -1359,7 +1361,7 @@ xi.dynamis.setStatueStats = function(mob, mobIndex)
 end
 
 xi.dynamis.setMegaBossStats = function(mob)
-    --mob:setMobType(MOBTYPE_NOTORIOUS)
+    --mob:setMobType(xi.mobskills.mobType.NOTORIOUS)
     mob:setMobLevel(88)
     mob:setMod(xi.mod.STR, -10)
     mob:setTrueDetection(true)
@@ -1388,7 +1390,7 @@ xi.dynamis.setAnimatedWeaponStats = function(mob)
 end
 
 xi.dynamis.setEyeStats = function(mob)
-    --mob:setMobType(MOBTYPE_NOTORIOUS)
+    --mob:setMobType(xi.mobskills.mobType.NOTORIOUS)
     mob:setMobLevel(math.random(82,84))
     mob:setMod(xi.mod.DEF, 420)
     mob:addMod(xi.mod.MDEF, 150)

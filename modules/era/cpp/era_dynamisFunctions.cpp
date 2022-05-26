@@ -17,6 +17,7 @@
 #include "map/packets/inventory_item.h"
 #include "map/items/item_furnishing.h"
 #include "map/utils/charutils.h"
+#include "map/entities/mobentity.h"
 
 
 namespace
@@ -183,25 +184,25 @@ class DynaFuncModule : public CPPModule
         };
 
         lua["CBaseEntity"]["setMobType"] = [](CLuaBaseEntity* PLuaBaseEntity, uint8 mobType)
-       {
-           TracyZoneScoped;
+        {
+            TracyZoneScoped;
 
-           CBaseEntity* PEntity = PLuaBaseEntity->GetBaseEntity();
+            CBaseEntity* PEntity = PLuaBaseEntity->GetBaseEntity();
 
             if (PEntity->objtype != TYPE_MOB)
             {   
-                return 0;
+                return;
             }
 
-            CMobEntity* PMob = static_cast<CMobEntity*>(PEntity);
+            auto* PMob = static_cast<CMobEntity*>(PEntity);
+            printf("PMob: %p\n", PMob);
 
-           if (PMob->m_Type >= MOBTYPE_NORMAL && PMob->m_Type <= MOBTYPE_EVENT)
+            if (mobType >= MOBTYPE_NORMAL && mobType <= MOBTYPE_EVENT)
             {
+                printf("Setting MobType: %i\n", mobType);
                 PMob->m_Type = mobType;
             }
-            
-            return 0;
-       };
+        };
 
     }
 };
