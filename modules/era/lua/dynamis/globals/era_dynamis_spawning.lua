@@ -69,6 +69,7 @@ xi.dynamis.parentOnEngaged = function(mob, target)
                 index = index + 1
             end
         end
+    end
     xi.dynamis.normalDynamicSpawn(mob, oMobIndex) -- Normies have their own loop, so they don't need one here.
 end
 
