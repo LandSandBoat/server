@@ -25,6 +25,16 @@ mission.reward =
     nextMission = { xi.mission.log_id.ASA, xi.mission.id.asa.ENEMY_OF_THE_EMPIRE_I },
 }
 
+local counterseals =
+{
+    xi.ki.AMBER_COUNTERSEAL,
+    xi.ki.AZURE_COUNTERSEAL,
+    xi.ki.CERULEAN_COUNTERSEAL,
+    xi.ki.EMERALD_COUNTERSEAL,
+    xi.ki.SCARLET_COUNTERSEAL,
+    xi.ki.VIOLET_COUNTERSEAL,
+}
+
 mission.sections =
 {
     {
@@ -52,7 +62,6 @@ mission.sections =
                         player:addKeyItem(xi.ki.SCARLET_COUNTERSEAL)
                         player:messageSpecial(flamesID.text.ATTACH_SEAL, xi.ki.DOMINAS_SCARLET_SEAL)
                         player:messageSpecial(flamesID.text.KEYITEM_OBTAINED, xi.ki.SCARLET_COUNTERSEAL)
-                        mission:addVar(player, 'SealCount', 1)
                     end,
                 }
             },
@@ -78,7 +87,6 @@ mission.sections =
                         player:addKeyItem(xi.ki.AZURE_COUNTERSEAL)
                         player:messageSpecial(frostID.text.ATTACH_SEAL, xi.ki.DOMINAS_AZURE_SEAL)
                         player:messageSpecial(frostID.text.KEYITEM_OBTAINED, xi.ki.AZURE_COUNTERSEAL)
-                        mission:addVar(player, 'SealCount', 1)
                     end,
                 }
             },
@@ -104,7 +112,6 @@ mission.sections =
                         player:addKeyItem(xi.ki.EMERALD_COUNTERSEAL)
                         player:messageSpecial(galesID.text.ATTACH_SEAL, xi.ki.DOMINAS_EMERALD_SEAL)
                         player:messageSpecial(galesID.text.KEYITEM_OBTAINED, xi.ki.EMERALD_COUNTERSEAL)
-                        mission:addVar(player, 'SealCount', 1)
                     end,
                 }
             },
@@ -130,7 +137,6 @@ mission.sections =
                         player:addKeyItem(xi.ki.VIOLET_COUNTERSEAL)
                         player:messageSpecial(stormsID.text.ATTACH_SEAL, xi.ki.DOMINAS_VIOLET_SEAL)
                         player:messageSpecial(stormsID.text.KEYITEM_OBTAINED, xi.ki.VIOLET_COUNTERSEAL)
-                        mission:addVar(player, 'SealCount', 1)
                     end,
                 }
             },
@@ -156,7 +162,6 @@ mission.sections =
                         player:addKeyItem(xi.ki.CERULEAN_COUNTERSEAL)
                         player:messageSpecial(tidesID.text.ATTACH_SEAL, xi.ki.DOMINAS_CERULEAN_SEAL)
                         player:messageSpecial(tidesID.text.KEYITEM_OBTAINED, xi.ki.CERULEAN_COUNTERSEAL)
-                        mission:addVar(player, 'SealCount', 1)
                     end,
                 }
             },
@@ -182,7 +187,6 @@ mission.sections =
                         player:addKeyItem(xi.ki.AMBER_COUNTERSEAL)
                         player:messageSpecial(tremorsID.text.ATTACH_SEAL, xi.ki.DOMINAS_AMBER_SEAL)
                         player:messageSpecial(tremorsID.text.KEYITEM_OBTAINED, xi.ki.AMBER_COUNTERSEAL)
-                        mission:addVar(player, 'SealCount', 1)
                     end,
                 }
             },
@@ -193,26 +197,15 @@ mission.sections =
             ['Trodden_Snow'] =
             {
                 onTrigger = function(player, npc)
-                    local counterseals =
-                    {
-                        xi.ki.AMBER_COUNTERSEAL,
-                        xi.ki.AZURE_COUNTERSEAL,
-                        xi.ki.CERULEAN_COUNTERSEAL,
-                        xi.ki.EMERALD_COUNTERSEAL,
-                        xi.ki.SCARLET_COUNTERSEAL,
-                        xi.ki.VIOLET_COUNTERSEAL,
-                    }
-
                     --ASA 4 CS: Triggers With At Least 3 Counterseals.
                     local completedSeals = 0
-                    for _, ki in counterseals do
+                    for _, ki in pairs(counterseals) do
                         if player:hasKeyItem(ki) then
                             completedSeals = completedSeals + 1
                         end
                     end
 
                     if completedSeals >= 3 then
-                        mission:setVar(player, 'SealCount', completedSeals)
                         return mission:progressEvent(45)
                     end
                 end,
@@ -221,7 +214,12 @@ mission.sections =
             onEventFinish =
             {
                 [45] = function(player, csid, option, npc)
-                    local completedSeals = mission:getVar(player, 'SealCount')
+                    local completedSeals = 0
+                    for _, ki in pairs(counterseals) do
+                        if player:hasKeyItem(ki) then
+                            completedSeals = completedSeals + 1
+                        end
+                    end
 
                     -- Calculate Reward
                     local gilRewards =
@@ -256,7 +254,7 @@ mission.sections =
                         xi.ki.AZURE_COUNTERSEAL
                     }
 
-                    for _, v in keyItems do
+                    for _, v in pairs(keyItems) do
                         player:delKeyItem(v)
                     end
 
