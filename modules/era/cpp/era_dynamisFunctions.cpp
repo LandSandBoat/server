@@ -58,6 +58,7 @@ class DynaFuncModule : public CPPModule
                 ref<uint8>(PItem->m_extra,  0x10) = zoneID;
                 ref<uint32>(PItem->m_extra, 0x14) = dynamistoken;
                 charutils::AddItem(PCharEntity, LOC_INVENTORY, PItem);
+                printf("Dynamis Token: %i", PItem->m_extra[0x14]);
             }
         };
 

@@ -45,23 +45,25 @@ xi.dynamis.spawnWave = function(zone, waveNumber)
     zone:setLocalVar(string.format("Wave_%i_Spawned", waveNumber), 1)
 end
 
-xi.dynamis.parentOnEngaged = function(mob, target, mobList)
+xi.dynamis.parentOnEngaged = function(mob, target)
     local zoneID = mob:getZoneID()
     local oMobIndex = mob:getLocalVar("MobIndex")
     local oMob = GetMobByID(mob:getID())
-    local forceLink = xi.dynamis.mobList[zoneID][oMobIndex].NMChildren[1]
-    for _, index in pairs(xi.dynamis.mobList[zoneID][oMobIndex].NMChildren) do
-        if xi.dynamis.mobList[zoneID][oMobIndex].NMChildren[index] == true or xi.dynamis.mobList[zoneID][oMobIndex].NMChildren[index] == false then
-            index = index + 1
-        else
-            local mobIndex = xi.dynamis.mobList[zoneID][oMobIndex].NMChildren[index]
-            local mobType = xi.dynamis.mobList[zoneID][mobIndex].info[1]
-            if mobType == "NM" then -- NMs
-                xi.dynamis.nmDynamicSpawn(mobIndex, oMobIndex, forceLink, zoneID, target, oMob)
+    if not xi.dynamis.mobList[zoneID][oMobIndex].nmchildren == nil then
+        for key, index in pairs(xi.dynamis.mobList[zoneID][oMobIndex].nmchildren) do
+            if xi.dynamis.mobList[zoneID][oMobIndex].nmchildren[index] == true or xi.dynamis.mobList[zoneID][oMobIndex].nmchildren[index] == false then
                 index = index + 1
-            elseif mobType ~= nil then -- Nightmare Mobs and Statues
-                xi.dynamis.nonStandardDynamicSpawn(mobIndex, oMobIndex, forceLink, zoneID, target, oMob)
-                index = index + 1
+            else
+                local forceLink = xi.dynamis.mobList[zoneID][oMobIndex].nmchildren[1]
+                local mobIndex = xi.dynamis.mobList[zoneID][oMobIndex].nmchildren[index]
+                local mobType = xi.dynamis.mobList[zoneID][mobIndex].info[1]
+                if mobType == "NM" then -- NMs
+                    xi.dynamis.nmDynamicSpawn(mobIndex, oMobIndex, forceLink, zoneID, target, oMob)
+                    index = index + 1
+                elseif mobType ~= nil then -- Nightmare Mobs and Statues
+                    xi.dynamis.nonStandardDynamicSpawn(mobIndex, oMob, forceLink, zoneID, target, oMobIndex)
+                    index = index + 1
+                end
             end
         end
     end
@@ -245,7 +247,7 @@ xi.dynamis.normalDynamicSpawn = function(mob, oMobIndex)
         }
     }
 
-    for _, job in pairs(mobList[mobZoneID][oMobIndex].mobchildren) do
+    for key, job in pairs(xi.dynamis.mobList[mobZoneID][oMobIndex].mobchildren) do
         local indexJob = 1
         local indexEndJob = mobList[mobZoneID][oMobIndex].mobchildren[job]
         while (indexEndJob ~= nil and indexJob <= indexEndJob) do
@@ -303,14 +305,21 @@ xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID,
     {
         ["Statue"] =
         {
-            ["Vanguard Eye"] = {"56457965" , 130, 134, 0, nil, nil, MOBTYPE_NOTORIOUS}, -- Vanguard Eye (VEye)
-            ["Goblin Statue"] = {"4753746174" , 130, 134, 0, nil, nil, MOBTYPE_NOTORIOUS}, -- Goblin Statue (GStat)
-            ["Goblin Replica"] = {"475253746174" , 130, 134, 0, nil, nil, MOBTYPE_NOTORIOUS}, -- Goblin Statue (GRStat)
-            ["Serjeant Tombstone"] = {"4f53746174" , 130, 134, 0, nil, nil, MOBTYPE_NOTORIOUS}, -- Orc Statue (OStat)
-            ["Warchief Tombstone"] = {"4f5753746174" , 130, 134, 0, nil, nil, MOBTYPE_NOTORIOUS}, -- Orc Statue (OWStat)
-            ["Adamantking Effigy"] = {"5153746174" , 130, 134, 0, nil, nil, MOBTYPE_NOTORIOUS}, -- Quadav Statue (QStat)
-            ["Avatar Idol"] = {"5953746174" , 130, 134, 0, nil, nil, MOBTYPE_NOTORIOUS}, -- Yagudo Statue (YStat)
-            ["Manifest Icon"] = {"594d53746174" , 130, 134, 0, nil, nil, MOBTYPE_NOTORIOUS}, -- Yagudo Statue (YMStat)
+            ["Vanguard Eye"] = {"56457965" , 163, 134, 0, nil, nil, MOBTYPE_NOTORIOUS}, -- Vanguard Eye (VEye)
+            ["Prototype Eye"] = {"50457965" , 61, 42, 0, nil, nil, MOBTYPE_NOTORIOUS}, -- Prototype Eye (PEye)
+            ["Goblin Statue"] = {"4753746174" , 158, 134, 0, nil, nil, MOBTYPE_NOTORIOUS}, -- Goblin Statue (GStat)
+            ["Goblin Replica"] = {"475253746174" , 157, 134, 0, nil, nil, MOBTYPE_NOTORIOUS}, -- Goblin Statue (GRStat)
+            ["Statue Prototype"] = {"475053746174" , 36, 42, 0, nil, nil, MOBTYPE_NOTORIOUS}, -- Goblin Statue (GPStat)
+            ["Serjeant Tombstone"] = {"4f53746174" , 89, 134, 0, nil, nil, MOBTYPE_NOTORIOUS}, -- Orc Statue (OStat)
+            ["Warchief Tombstone"] = {"4f5753746174" , 90, 134, 0, nil, nil, MOBTYPE_NOTORIOUS}, -- Orc Statue (OWStat)
+            ["Tombstone Prototype"] = {"545053746174" , 20, 42, 0, nil, nil, MOBTYPE_NOTORIOUS}, -- Orc Statue (TPStat)
+            ["Adamantking Effigy"] = {"5153746174" , 55, 134, 0, nil, nil, MOBTYPE_NOTORIOUS}, -- Quadav Statue (QStat)
+            ["Adamantking Image"] = {"514953746174" , 56, 134, 0, nil, nil, MOBTYPE_NOTORIOUS}, -- Quadav Statue (QIStat)
+            ["Effigy Prototype"] = {"515053746174" , 9, 42, 0, nil, nil, MOBTYPE_NOTORIOUS}, -- Quadav Statue (QPStat)
+            ["Avatar Idol"] = {"5953746174" , 124, 134, 0, nil, nil, MOBTYPE_NOTORIOUS}, -- Yagudo Statue (YStat)
+            ["Manifest Icon"] = {"594d53746174" , 68, 39, 0, nil, nil, MOBTYPE_NOTORIOUS}, -- Yagudo Statue (YMStat)
+            ["Avatar Icon"] = {"414953746174" , 123, 134, 0, nil, nil, MOBTYPE_NOTORIOUS}, -- Yagudo Statue (AIStat)
+            ["Icon Prototype"] = {"595053746174" , 32, 42, 0, nil, nil, MOBTYPE_NOTORIOUS}, -- Yagudo Statue (YPStat)
         },
         ["Nightmare"] =
         {
@@ -338,9 +347,9 @@ xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID,
             ["Nightmare Fly"] = {"594d53746174" , 130, 134, 0, nil, nil, MOBTYPE_NORMAL}, -- Yagudo Statue (YMStat)
         },
     }
-    if spawnLookUp[mobMobType][mobName][7] == MOBTYPE_NOTORIOUS then
-        onMobSpawn = function(mob) xi.dynamis.setNMStats(mob) end
-    else
+    if mobMobType == "Statue" then
+        onMobSpawn = function(mob) xi.dynamis.setStatueStats(mob, mobIndex) end
+    elseif mobMobType == "Nightmare" then
         onMobSpawn = function(mob) xi.dynamis.setMobStats(mob) end
     end
     local mob = zone:insertDynamicEntity({
@@ -354,7 +363,7 @@ xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID,
         groupZoneId = spawnLookUp[mobMobType][mobName][3],
         onMobSpawn,
         onMobEngaged = function(mob) xi.dynamis.parentOnEngaged(mob, target) end,
-        onMobFight = function(mob) xi.dynamis.mobOnFight(mob) end,
+        onMobFight = function(mob) xi.dynamis.statueOnFight(mob) end,
         onMobRoam = function(mob) xi.dynamis.mobOnRoam(mob) end,
         onMobRoamAction = function(mob) xi.dynamis.mobOnRoamAction(mob) end,
         onMobDeath = function(mob, playerArg, isKiller)

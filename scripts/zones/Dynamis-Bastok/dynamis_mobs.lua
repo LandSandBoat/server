@@ -45,9 +45,9 @@ require("scripts/globals/zone")
 --    Ex. xi.dynamis.mobList[zoneID][MobIndex].mobchildren = {#WAR, #MNK, #WHM, #BLM, #RDM, #THF, #PLD, #DRK, #BST, #BRD, #RNG, #SAM, #NIN, #DRG, #SMN}
 --    Ex. For 2 Wars: xi.dynamis.mobList[zoneID][MobIndex].mobchildren = {2, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil}
 --
--- 7.  xi.dynamis.mobList[zoneID][MobIndex].NMchildren is used to spawn specific NMs outlined in xi.dynamis.mobList[zoneID][MobIndex].info
+-- 7.  xi.dynamis.mobList[zoneID][MobIndex].nmchildren is used to spawn specific NMs outlined in xi.dynamis.mobList[zoneID][MobIndex].info
 --     MobIndex is the index of the mob spawning the NM, MobIndex(NM) points to which NM in .info it should spawn.
---     Ex. xi.dynamis.mobList[zoneID][MobIndex].NMchildren = {MobIndex(NM1), MobIndex(NM2), MobIndex(NM3)}
+--     Ex. xi.dynamis.mobList[zoneID][MobIndex].nmchildren = {MobIndex(NM1), MobIndex(NM2), MobIndex(NM3)}
 --
 -- 8. xi.dynamis.mobList[zoneID][MobIndex].patrolPath is used to set a specific path for a mob, if left blank for that MobIndex,
 --    the mob will not path on a predetermined course. If it is a statue, it will not path at all. You can add
@@ -75,6 +75,8 @@ xi.dynamis = xi.dynamis or {} -- Ignore me I just set the global.
 xi.dynamis.mobList = xi.dynamis.mobList or { } -- Ignore me I just set the global.
 xi.dynamis.mobList[zoneID] = { } -- Ignore me, I just start the table.
 xi.dynamis.mobList[zoneID].zoneID = zoneID -- Ignore me, I just ensure .zoneIDID exists.
+xi.dynamis.mobList[zoneID].nmchildren = { }
+xi.dynamis.mobList[zoneID].mobchildren = { }
 xi.dynamis.mobList[zoneID].waveDefeatRequirements = { } -- Ignore me, I just start the table.
 xi.dynamis.mobList[zoneID].waveDefeatRequirements[1] = { } -- Ignore me, I just allow for wave 1 spawning.
 xi.dynamis.mobList[zoneID].maxWaves = 3 -- Ignore me because Oph told me to
@@ -553,20 +555,20 @@ xi.dynamis.mobList[zoneID][142].mobchildren = { nil, nil, nil, nil, nil, nil, ni
 ------------------------------------------
 --            NM Child Spawn            --
 ------------------------------------------
--- xi.dynamis.mobList[zoneID][MobIndex].NMchildren = {MobIndex(NM1), MobIndex(NM2), MobIndex(NM3)}
+-- xi.dynamis.mobList[zoneID][MobIndex].nmchildren = {MobIndex(NM1), MobIndex(NM2), MobIndex(NM3)}
 -- boolean value = forceLink true/false
 
-xi.dynamis.mobList[zoneID][25 ].specificChildren = { true, 26 }
-xi.dynamis.mobList[zoneID][28 ].specificChildren = { true, 29, 30, 31 }
-xi.dynamis.mobList[zoneID][42 ].specificChildren = { true, 152 } -- Be'Ebo Tortoisedriver (BST)
-xi.dynamis.mobList[zoneID][53 ].specificChildren = { true, 54, 153 } -- Gi'Pha Manameister (BLM)
-xi.dynamis.mobList[zoneID][55 ].specificChildren = { true, 154 } -- Gu'Nhi Noondozer (SMN)
-xi.dynamis.mobList[zoneID][62 ].specificChildren = { true, 151 } -- Aa'Nyu Dismantler (DRK)
-xi.dynamis.mobList[zoneID][69 ].specificChildren = { true, 156 } -- Ke'Dhe Cannonball (MNK)
-xi.dynamis.mobList[zoneID][88 ].specificChildren = { true, 89 }
-xi.dynamis.mobList[zoneID][89 ].specificChildren = { true, 162, 163, 164 } -- Vanguard Vindicator/Constable/Militant (2x 10min TEs)
-xi.dynamis.mobList[zoneID][91 ].specificChildren = { true, 92, 155 } -- Ze'Vho Fallsplitter (DRK)
-xi.dynamis.mobList[zoneID][110].specificChildren = { true, 111, 157, 158, 159, 160, 161 } -- Boss spawns 5 NMs (Effigy Shields) and 1 statue
+xi.dynamis.mobList[zoneID][25 ].nmchildren = { true, 26 }
+xi.dynamis.mobList[zoneID][28 ].nmchildren = { true, 29, 30, 31 }
+xi.dynamis.mobList[zoneID][42 ].nmchildren = { true, 152 } -- Be'Ebo Tortoisedriver (BST)
+xi.dynamis.mobList[zoneID][53 ].nmchildren = { true, 54, 153 } -- Gi'Pha Manameister (BLM)
+xi.dynamis.mobList[zoneID][55 ].nmchildren = { true, 154 } -- Gu'Nhi Noondozer (SMN)
+xi.dynamis.mobList[zoneID][62 ].nmchildren = { true, 151 } -- Aa'Nyu Dismantler (DRK)
+xi.dynamis.mobList[zoneID][69 ].nmchildren = { true, 156 } -- Ke'Dhe Cannonball (MNK)
+xi.dynamis.mobList[zoneID][88 ].nmchildren = { true, 89 }
+xi.dynamis.mobList[zoneID][89 ].nmchildren = { true, 162, 163, 164 } -- Vanguard Vindicator/Constable/Militant (2x 10min TEs)
+xi.dynamis.mobList[zoneID][91 ].nmchildren = { true, 92, 155 } -- Ze'Vho Fallsplitter (DRK)
+xi.dynamis.mobList[zoneID][110].nmchildren = { true, 111, 157, 158, 159, 160, 161 } -- Boss spawns 5 NMs (Effigy Shields) and 1 statue
 
 ------------------------------------------
 --          Mob Position Info           --

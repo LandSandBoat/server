@@ -1333,8 +1333,11 @@ xi.dynamis.setNMStats = function(mob)
     end
 end
 
-xi.dynamis.setStatueStats = function(mob)
-    --mob:setMobType(MOBTYPE_NOTORIOUS)
+xi.dynamis.setStatueStats = function(mob, mobIndex)
+    local zoneID = mob:getZoneID()
+    local eyes = xi.dynamis.mobList[zoneID][mobIndex].eyes
+    mob:addRoamFlag(256)
+    mob:setMobType(MOBTYPE_NOTORIOUS)
     mob:setMobLevel(math.random(82,84))
     mob:setMod(xi.mod.STR, -5)
     mob:setMod(xi.mod.VIT, -5)
@@ -1345,6 +1348,14 @@ xi.dynamis.setStatueStats = function(mob)
     mob:setMod(xi.mod.MDEF, 0)
     mob:setMod(xi.mod.REGEN, 0)
     mob:setMod(xi.mod.MPHEAL, 0)
+    
+    if mob:getFamily() >= 92 and mob:getFamily() <= 95 then -- If statue
+        mob:setLocalVar("eyeColor", eyes) -- Set Eyes if need be
+        if eyes >= 2 then -- If HP or MP restore statue
+            mob:setUnkillable(true) -- Set Unkillable as we will use skills then kill.
+        end
+    end
+
 end
 
 xi.dynamis.setMegaBossStats = function(mob)
@@ -1475,15 +1486,8 @@ xi.dynamis.statueOnFight = function(mob, target)
     end
 end
 
-xi.dynamis.statueOnSpawn = function(mob, eyes, mobList) -- Used to spawn mobs off of a single parent
-    mob:setLocalVar("dynaReadyToSpawnChildren", 1) -- Marks mob available for spawning.
-    mob:setLocalVar("Index", mobList[zone])
-    if mob:getFamily() >= 92 and mob:getFamily() <= 95 then -- If statue
-        mob:setLocalVar("eyeColor", eyes) -- Set Eyes if need be
-        if eyes >= 2 then -- If HP or MP restore statue
-            mob:setUnkillable(true) -- Set Unkillable as we will use skills then kill.
-        end
-    end
+xi.dynamis.statueOnSpawn = function(mob, mobIndex) -- Used to spawn mobs off of a single parent
+    
 end
 
 return m
