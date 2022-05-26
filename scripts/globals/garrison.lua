@@ -105,10 +105,6 @@ xi.garrison.spawnNPCs = function(player, npc, party)
         groupZoneId = 103,
 
         onMobDeath = function(mob, playerArg, isKiller)
-            -- Remove from NPC Table
-            local zoneId = mob:getZoneID()
-            local garrisonZoneData = xi.garrison.data[zoneId]
-            local npcs = garrisonZoneData.npcs
         end,
         releaseIdOnDeath = false,
     })
@@ -146,7 +142,6 @@ xi.garrison.spawnWave = function(player, npc, wave, party)
     local allianceSize = 0
     local boss = garrisonZoneData.mobs + 8
     local npcs = garrisonZoneData.npcs
-    local npcnum = 1
     if party >= 1 then
         allianceSize = wave + 0
     end

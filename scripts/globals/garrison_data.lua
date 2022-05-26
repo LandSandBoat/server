@@ -240,7 +240,7 @@ xi.garrison.data =
             },
         },
     },
-    [xi.zone.VALKURM_DUNES] = 
+    [xi.zone.VALKURM_DUNES] =
     {
         itemReq = 1531, -- Galka Fang Sack
         levelCap = 30,
