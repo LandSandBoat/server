@@ -137,7 +137,6 @@ local runeKeyItems =
 }
 
 -- Number of Kinetic Units granted for each item trade.
--- TODO: Add support for HQ Crystals
 local crystalTradeValues =
 {
     [xi.items.EARTH_CRYSTAL    ] = 15,
@@ -154,6 +153,14 @@ local crystalTradeValues =
     [xi.items.WIND_CLUSTER     ] = 200,
     [xi.items.ICE_CLUSTER      ] = 400,
     [xi.items.LIGHTNING_CLUSTER] = 400,
+    [xi.items.INFERNO_CRYSTAL  ] = 500,
+    [xi.items.GLACIER_CRYSTAL  ] = 500,
+    [xi.items.CYCLONE_CRYSTAL  ] = 500,
+    [xi.items.TERRA_CRYSTAL    ] = 500,
+    [xi.items.PLASMA_CRYSTAL   ] = 500,
+    [xi.items.TORRENT_CRYSTAL  ] = 500,
+    [xi.items.AURORA_CRYSTAL   ] = 500,
+    [xi.items.TWILIGHT_CRYSTAL ] = 500,
     [xi.items.DARK_CLUSTER     ] = 1000,
     [xi.items.LIGHT_CLUSTER    ] = 1000,
 }
