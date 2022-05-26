@@ -6,8 +6,6 @@ require("scripts/globals/hunts")
 require("scripts/globals/titles")
 require("scripts/quests/tutorial")
 -----------------------------------
-local ID = require("scripts/zones/Konschtat_Highlands/IDs")
------------------------------------
 
 local entity = {}
 

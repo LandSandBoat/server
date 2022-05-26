@@ -40,35 +40,22 @@ zone_object.onGameHour = function(zone)
     local totd = VanadielTOTD()
 
     if totd == xi.time.NEW_DAY or totd == xi.time.MIDNIGHT then
-        local asphyxiated = GetMobByID(ID.mob.ASPHYXIATED_AMSEL)
-        local burned = GetMobByID(ID.mob.BURNED_BERGMANN)
-        local crushed = GetMobByID(ID.mob.CRUSHED_KRAUSE)
-        local pulverized = GetMobByID(ID.mob.PULVERIZED_PFEFFER)
-        local smothered = GetMobByID(ID.mob.SMOTHERED_SCHMIDT)
-        local wounded = GetMobByID(ID.mob.WOUNDED_WURFEL)
+        local ghost
+        local ghostTable =
+        {
+            [1] = {id = ID.mob.ASPHYXIATED_AMSEL, nm = GetMobByID(ID.mob.ASPHYXIATED_AMSEL)},
+            [2] = {id = ID.mob.BURNED_BERGMANN, nm = GetMobByID(ID.mob.BURNED_BERGMANN)},
+            [3] = {id = ID.mob.CRUSHED_KRAUSE, nm = GetMobByID(ID.mob.CRUSHED_KRAUSE)},
+            [4] = {id = ID.mob.PULVERIZED_PFEFFER, nm = GetMobByID(ID.mob.PULVERIZED_PFEFFER)},
+            [5] = {id = ID.mob.SMOTHERED_SCHMIDT, nm = GetMobByID(ID.mob.SMOTHERED_SCHMIDT)},
+            [6] = {id = ID.mob.WOUNDED_WURFEL, nm = GetMobByID(ID.mob.WOUNDED_WURFEL)},
+        }
 
-        if not asphyxiated:isSpawned() and os.time() > asphyxiated:getLocalVar("cooldown") then
-            SpawnMob(ID.mob.ASPHYXIATED_AMSEL)
-        end
-
-        if not burned:isSpawned() and os.time() > burned:getLocalVar("cooldown") then
-            SpawnMob(ID.mob.BURNED_BERGMANN)
-        end
-
-        if not crushed:isSpawned() and os.time() > crushed:getLocalVar("cooldown") then
-            SpawnMob(ID.mob.CRUSHED_KRAUSE)
-        end
-
-        if not pulverized:isSpawned() and os.time() > pulverized:getLocalVar("cooldown") then
-            SpawnMob(ID.mob.PULVERIZED_PFEFFER)
-        end
-
-        if not smothered:isSpawned() and os.time() > smothered:getLocalVar("cooldown") then
-            SpawnMob(ID.mob.SMOTHERED_SCHMIDT)
-        end
-
-        if not wounded:isSpawned() and os.time() > wounded:getLocalVar("cooldown") then
-            SpawnMob(ID.mob.WOUNDED_WURFEL)
+        for i = 1, 6 do
+            ghost = ghostTable[i].nm
+            if not ghost:isSpawned() and os.time() > ghost:getLocalVar("cooldown") then
+                SpawnMob(ghostTable[i].id)
+            end
         end
     end
 end
