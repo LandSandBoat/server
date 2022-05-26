@@ -99,11 +99,26 @@ local waypointInfo =
     [95] = { 138, 9, 5004, { -228.942, 3.567,  364.512, 127, xi.zone.KAMIHR_DRIFTS } }, -- Bivouac #4
 
     -- Jeuno
-    [100] = { nil, 10, 10121, { } }, -- Lower Jeuno (Special case, Default Active)
+    [100] = { nil, 10, 10121, { -33.550, 0, -31.840, 150, xi.zone.LOWER_JEUNO } }, -- Lower Jeuno (Special case, Default Active)
 
-    -- Enigmatic Devices
+    -- Runes (One-way, bitmask determined by key items)
+    [200] = { nil, nil, nil, {   96.642,  -0.199,     -4.8, 160, xi.zone.NORTHERN_SAN_DORIA } }, -- Northern San d'Oria
+    [201] = { nil, nil, nil, { -176.619,      -8,  -30.091, 128, xi.zone.BASTOK_MARKETS     } }, -- Bastok Markets
+    [202] = { nil, nil, nil, {  -85.592,      -5,   37.239,   0, xi.zone.WINDURST_WOODS     } }, -- Windurst Woods
+    [203] = { nil, nil, nil, {   18.360, -14.559,   74.017,  64, xi.zone.SELBINA            } }, -- Selbina
+    [204] = { nil, nil, nil, {   -0.201,      -4,  109.852,  64, xi.zone.MHAURA             } }, -- Mhaura
+    [205] = { nil, nil, nil, {  -51.565,     -10, -104.851, 192, xi.zone.KAZHAM             } }, -- Kazham
+    [206] = { nil, nil, nil, {   -7.348,       0,  -82.643, 192, xi.zone.RABAO              } }, -- Rabao
+    [207] = { nil, nil, nil, {  -19.104,   0.220,  -47.464, 192, xi.zone.NORG               } }, -- Norg
+    [208] = { nil, nil, nil, {        0,   -23.5,   35.466,  64, xi.zone.TAVNAZIAN_SAFEHOLD } }, -- Tavnazian Safehold
+    [209] = { nil, nil, nil, {  676.982,   -15.5,      220,   0, xi.zone.WAJAOM_WOODLANDS   } }, -- Aht Urhgan Whitegate (Wajaom Woodlands)
+    [210] = { nil, nil, nil, {   13.202,  -3.675, -453.439, 128, xi.zone.CAEDARVA_MIRE      } }, -- Nashmau (Caedarva Mire)
 
-    -- Runes
+    -- Enigmatic Devices (One-way, so event should never be called)
+    [300] = { 128, 11, nil, {     -588, -7.5,      19, 192, xi.zone.RALA_WATERWAYS } }, -- Rala Waterways
+    [301] = { 129, 11, nil, { -108.288,    4, -12.370, 151, xi.zone.CIRDAS_CAVERNS } }, -- Cirdas Caverns
+    [302] = { 130, 11, nil, {      171, 4.47,    -259, 128, xi.zone.YORCIA_WEALD   } }, -- Yorcia Weald
+    [303] = { 131, 11, nil, {     -148, -170,      27, 192, xi.zone.OUTER_RAKAZNAR } }, -- Outer Ra'Kaznar
 }
 
 local runeKeyItems =
@@ -174,7 +189,14 @@ end
 
 -- The below functions are used by all Waypoint NPCs
 xi.waypoint.onTrade = function(player, npc, trade)
+    local ID = zones[player:getZoneID()]
+    local currentUnits = player:getCurrency('kinetic_unit')
     local kineticValue = 0
+
+    if currentUnits == 50000 then
+        player:messageSpecial(ID.text.REACHED_KINETIC_UNIT_LIMIT)
+        return
+    end
 
     for crystalId, crystalValue in ipairs(crystalTradeValues) do
         local numCrystals = trade:getItemQty(crystalId)
@@ -183,6 +205,17 @@ xi.waypoint.onTrade = function(player, npc, trade)
             kineticValue = kineticValue + numCrystals * crystalValue
             trade:confirmItem(crystalId, numCrystals)
         end
+    end
+
+    if kineticValue > 0 then
+        if currentUnits + kineticValue > 50000 then
+            -- Reached Terminal
+            -- Aether lost
+        else
+            -- 7823
+        end
+    else
+        player:messageSpecial(ID.text.CANNOT_RECEIVE_KINETIC)
     end
 end
 
@@ -248,5 +281,8 @@ end
 xi.waypoint.onEventFinish = function(player, csid, option, npc)
     if option > 0 and option <= 303 then
         player:setPos(unpack(waypointInfo[option][4]))
+    elseif option == 1001 then
+        -- Toggle Accept/Decline bit in waypoints
+        -- Bit 15
     end
 end
