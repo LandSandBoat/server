@@ -7343,13 +7343,8 @@ INSERT INTO `mob_groups` VALUES (71,4693,103,'Ig-Alima',0,128,0,0,9999,95,95,0);
 INSERT INTO `mob_groups` VALUES (72,1642,103,'Goblin_Bounty_Hunter',300,0,1030,0,0,17,20,0);
 INSERT INTO `mob_groups` VALUES (73,0,103,'Valkurm_Imperator',0,128,0,0,0,0,0,0);
 
-
 -- garrison npcs
-INSERT INTO `mob_groups` VALUES (74,7039,103,'Trader',0,129,0,0,0,30,35,1);
-INSERT INTO `mob_groups` VALUES (75,7040,103,'Trader',0,129,0,0,0,30,35,1);
-INSERT INTO `mob_groups` VALUES (76,7041,103,'Trader',0,129,0,0,0,30,35,1);
-INSERT INTO `mob_groups` VALUES (77,7042,103,'Trader',0,129,0,0,0,30,35,1);
-
+INSERT INTO `mob_groups` VALUES (74,7039,103,'Trader',0,129,0,0,0,30,35,1); -- we only need 1 now
 
 -- ------------------------------------------------------------
 -- Jugner_Forest (Zone 104)

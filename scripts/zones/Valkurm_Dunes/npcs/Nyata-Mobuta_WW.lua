@@ -6,6 +6,7 @@
 -----------------------------------
 require("scripts/globals/conquest")
 require("scripts/globals/garrison")
+require("scripts/settings/main")
 -----------------------------------
 local entity = {}
 
@@ -16,7 +17,10 @@ local guardEvent  = 32759
 
 entity.onTrade = function(player, npc, trade)
     xi.conq.overseerOnTrade(player, npc, trade, guardNation, guardType)
-    if player:getNation() == guardNation then
+    if
+        player:getNation() == guardNation or
+        xi.settings.GARRISON_NATION_BYPASS == 1
+    then
         xi.garrison.onTrade(player, npc, trade)
     else
         --not of nation event

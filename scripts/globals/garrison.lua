@@ -38,19 +38,16 @@ xi.garrison.mobsAlive = function(player)
     end
 end
 
-xi.garrison.npcAlive = function(player, party)
+xi.garrison.npcAlive = function(player)
     local zoneId = player:getZoneID()
     local garrisonZoneData = xi.garrison.data[zoneId]
     local npcs = garrisonZoneData.npcs
     local killedAllNPC = true
-    local npcnum = 1
     -- Check all NPCs are dead
-    while npcnum <= party do
-        if GetMobByID(npcs):isAlive() then
+    for _, npcID in pairs(npcs) do
+        if GetMobByID(npcID):isAlive() then
             killedAllNPC = false
         end
-        npcnum = npcnum + 1
-        npcs = npcs + 1
     end
     -- return result
     if killedAllNPC == false then
@@ -64,11 +61,8 @@ xi.garrison.despawnNPCs = function(npc, party)
     local zoneId = npc:getZoneID()
     local garrisonZoneData = xi.garrison.data[zoneId]
     local npcs = garrisonZoneData.npcs
-    local npcnum = 1
-    while npcnum <= party do
-        DespawnMob(npcs)
-        npcnum = npcnum + 1
-        npcs = npcs + 1
+    for _, npcID in ipairs(npcs) do
+        DespawnMob(npcID)
     end
 end
 -----------------------------------
@@ -79,21 +73,70 @@ xi.garrison.tick = function(player, npc, wave, party)
     xi.garrison.waveAlive(player, npc, wave, party)
 end
 
-xi.garrison.spawnNPCs = function(npc, party)
+xi.garrison.spawnNPCs = function(player, npc, party)
+    local zone = player:getZone()
     local zoneId = npc:getZoneID()
     local garrisonZoneData = xi.garrison.data[zoneId]
-    local npcs = garrisonZoneData.npcs
+    local xPos = garrisonZoneData.xPos
+    local yPos = garrisonZoneData.yPos
+    local zPos = garrisonZoneData.zPos
+    local rot = garrisonZoneData.rot
+    local npcName = garrisonZoneData.name
     local npcnum = 1
+    local npcs = garrisonZoneData.npcs
+
+
     while npcnum <= party do
-    -- TODO: Dynamic Spawning
-        SpawnMob(npcs)
-        -- BATTLEFIELD this is to prevent outside help, is not retail
-        GetMobByID(npcs):addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0)
+    local mob = zone:insertDynamicEntity({
+        -- NPC or MOB
+        objtype = xi.objType.MOB,
+
+        name = npcName,
+
+        x = xPos,
+        y = yPos,
+        z = zPos,
+        rotation = rot,
+
+        -- Fafnir's entry in mob_groups:
+        -- INSERT INTO `mob_groups` VALUES (5,1280,154,'Fafnir',0,128,805,70000,0,90,90,0);
+        --                       groupId ---^       ^--- groupZoneId
+        groupId = 74,
+        groupZoneId = 103,
+
+        onMobDeath = function(mob, playerArg, isKiller)
+            -- Remove from NPC Table
+            local zoneId = mob:getZoneID()
+            local garrisonZoneData = xi.garrison.data[zoneId]
+            local npcs = garrisonZoneData.npcs
+        end,
+        releaseIdOnDeath = false,
+    })
+
+    -- Use the mob object as you normally would
+        mob:setSpawn(xPos, yPos, zPos, rot)
+        mob:spawn()
+        mob:hideName(false)
+        mob:setMobLevel(garrisonZoneData.levelCap)
         -- TODO need pathing so they return to spawnpoint
-        GetMobByID(npcs):setSpeed(0)
-        -- increment up the list
+        mob:setSpeed(0)
+        -- BATTLEFIELD this is to prevent outside help, is not retail
+        mob:addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0)
+        mob:setAllegiance(1)
+        if npcnum == 6 then
+            xPos = garrisonZoneData.xPos - garrisonZoneData.xSecondLine
+            zPos = garrisonZoneData.zPos - garrisonZoneData.zSecondLine
+        elseif npcnum == 12 then
+            xPos = garrisonZoneData.xPos - garrisonZoneData.xThirdLine
+            zPos = garrisonZoneData.zPos - garrisonZoneData.zThirdLine
+        else
+            xPos = xPos - garrisonZoneData.xChange
+            zPos = zPos - garrisonZoneData.zChange
+        end
+        print("Garrison Table Insert:", mob)
+        table.insert(npcs, mob:getID())
         npcnum = npcnum + 1
-        npcs = npcs + 1
+    player:PrintToPlayer(string.format("Spawning Garrison NPC (Lv: %i, HP: %i)\n%s", mob:getMainLvl(), mob:getMaxHP(), mob))
     end
 end
 
@@ -115,18 +158,14 @@ xi.garrison.spawnWave = function(player, npc, wave, party)
     end
     --TODO spawn mobs in 15 second intervals random from table (more relevant in 1 party vs 3 parties)
     for _, mobId in ipairs(garrisonZoneData.waveSize[allianceSize]) do
-    npcs = garrisonZoneData.npcs
-    npcnum = 1
         SpawnMob(mobId)
         -- BATTLEFIELD this is to prevent outside help, is not retail
         GetMobByID(mobId):addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0)
-        while npcnum <= party do
-            if GetMobByID(npcs):isAlive() == true then
-                GetMobByID(npcs):addEnmity(GetMobByID(mobId), 1, 1)
-                GetMobByID(mobId):addEnmity(GetMobByID(npcs), 1, 1)
+        for _, npcID in ipairs(npcs) do
+            if GetMobByID(npcID):isAlive() then
+                GetMobByID(npcID):addEnmity(GetMobByID(mobId), 1, 1)
+                GetMobByID(mobId):addEnmity(GetMobByID(npcID), 1, 1)
             end
-            npcnum = npcnum + 1
-            npcs = npcs + 1
         end
     end
     if wave == 4 then
@@ -135,15 +174,11 @@ xi.garrison.spawnWave = function(player, npc, wave, party)
             SpawnMob(boss)
             -- BATTLEFIELD this is to prevent outside help, is not retail
             GetMobByID(boss):addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0)
-            npcs = garrisonZoneData.npcs
-            npcnum = 1
-            while npcnum <= party do
-                if GetMobByID(npcs):isAlive() == true then
-                    GetMobByID(npcs):addEnmity(GetMobByID(boss), 1, 1)
-                    GetMobByID(boss):addEnmity(GetMobByID(npcs), 1, 1)
+            for _, npcID in ipairs(npcs) do
+                if GetMobByID(npcID):isAlive() then
+                    GetMobByID(npcID):addEnmity(GetMobByID(boss), 1, 1)
+                    GetMobByID(boss):addEnmity(GetMobByID(npcID), 1, 1)
                 end
-                npcnum = npcnum + 1
-                npcs = npcs + 1
             end
             --start tick again
             xi.garrison.tick(player, npc, wave, party)
@@ -237,7 +272,7 @@ xi.garrison.start = function(player, npc, party)
             v:addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0)
         end
     -- Spawn NPC needs to be changed to dynamic similar to pets/trusts/fellows shifting ids
-    xi.garrison.spawnNPCs(npc, party)
+    xi.garrison.spawnNPCs(player, npc, party)
     -- Start First Wave
     local wave = 1
     xi.garrison.spawnWave(player, npc, wave, party)
@@ -254,7 +289,7 @@ xi.garrison.onTrade = function(player, npc, trade)
     -- Collect entrant information
     local party = player:getAlliance()
     --gets party size for spawning each NPC
-    party = #party
+    party = 18
     -- TODO break into different requirements
     if
         npcUtil.tradeHasExactly(trade, item) and
@@ -271,3 +306,4 @@ xi.garrison.onTrade = function(player, npc, trade)
         -- TODO event for not having met requirements
     end
 end
+
