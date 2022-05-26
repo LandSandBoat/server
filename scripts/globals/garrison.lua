@@ -284,7 +284,7 @@ xi.garrison.onTrade = function(player, npc, trade)
     -- Collect entrant information
     local party = player:getAlliance()
     --gets party size for spawning each NPC
-    party = 18
+    party = #party
     -- TODO break into different requirements
     if
         npcUtil.tradeHasExactly(trade, item) and
