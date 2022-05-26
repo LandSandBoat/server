@@ -693,11 +693,12 @@ void PackSoultrapperName(std::string name, uint8 output[])
 
 std::string UnpackSoultrapperName(uint8 input[])
 {
-    uint8       current   = 0;
-    uint8       remainder = 0;
-    uint8       shift     = 1;
-    uint8       maxSize   = 13; // capped at 13 based on examples like GoblinBountyH
-    std::string output    = "";
+    uint8 current = 0;
+    uint8 remainder = 0;
+    uint8 shift = 1;
+    uint8 maxSize = 13; // capped at 13 based on examples like GoblinBountyH
+    char        indexChar;
+    std::string output = "";
 
     // Unpack and shift 7-bit to 8-bit
     for (uint8 i = 0; i <= maxSize; ++i)
@@ -712,7 +713,11 @@ std::string UnpackSoultrapperName(uint8 input[])
         }
 
         // uint8 orvalue = tempLeft | remainder;
-        output = output + (char)(tempLeft | remainder);
+        indexChar = (char)(tempLeft | remainder);
+        if (indexChar >= '0' && indexChar <= 'z')
+        {
+            output = output + (char)(tempLeft | remainder);
+        }
 
         remainder = tempRight << (7 - shift);
         if (remainder & 128)
@@ -722,7 +727,10 @@ std::string UnpackSoultrapperName(uint8 input[])
 
         if (shift == 7)
         {
-            output    = output + char(remainder);
+            if (char(remainder) >= '0' && char(remainder) <= 'z')
+            {
+                output = output + char(remainder);
+            }
             remainder = 0;
             shift     = 1;
         }
@@ -810,6 +818,21 @@ std::string trim(std::string const& str, std::string const& whitespace)
 
     return str.substr(strBegin, strRange);
 }
+
+// std::string alpha(const std::string& str)
+// {
+//     for (int i = 0; i < str.size(); i++) {
+
+//         if (str[i] < 'A' || str[i] > 'Z' &&
+//             str[i] < 'a' || str[i] > 'z')
+//         {
+//             s.erase(i, 1);
+//             i--;
+//         }
+//     }
+
+//     return str;
+// }
 
 look_t stringToLook(std::string str)
 {
