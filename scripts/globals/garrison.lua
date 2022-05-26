@@ -84,31 +84,20 @@ xi.garrison.spawnNPCs = function(player, npc, party)
     local npcName = garrisonZoneData.name
     local npcnum = 1
     local npcs = garrisonZoneData.npcs
-
-
     while npcnum <= party do
     local mob = zone:insertDynamicEntity({
-        -- NPC or MOB
         objtype = xi.objType.MOB,
-
         name = npcName,
-
         x = xPos,
         y = yPos,
         z = zPos,
         rotation = rot,
-
-        -- Fafnir's entry in mob_groups:
-        -- INSERT INTO `mob_groups` VALUES (5,1280,154,'Fafnir',0,128,805,70000,0,90,90,0);
-        --                       groupId ---^       ^--- groupZoneId
         groupId = 74,
         groupZoneId = 103,
-
         onMobDeath = function(mob, playerArg, isKiller)
         end,
         releaseIdOnDeath = false,
     })
-
     -- Use the mob object as you normally would
         mob:setSpawn(xPos, yPos, zPos, rot)
         mob:spawn()
@@ -129,7 +118,6 @@ xi.garrison.spawnNPCs = function(player, npc, party)
             xPos = xPos - garrisonZoneData.xChange
             zPos = zPos - garrisonZoneData.zChange
         end
-        print("Garrison Table Insert:", mob)
         table.insert(npcs, mob:getID())
         npcnum = npcnum + 1
     player:PrintToPlayer(string.format("Spawning Garrison NPC (Lv: %i, HP: %i)\n%s", mob:getMainLvl(), mob:getMaxHP(), mob))

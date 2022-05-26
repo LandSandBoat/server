@@ -248,10 +248,10 @@ xi.garrison.data =
         -- empty filled with dynamic entries
         },
         mobs = 17199593,
-        xPos = 151,
+        xPos = 141,
         yPos = -8,
-        zPos = 96,
-        xChange = -2, --isnt right but works?
+        zPos = 87,
+        xChange = -2,
         zChange = -2,
         xSecondLine = 2,
         zSecondLine = 0,
