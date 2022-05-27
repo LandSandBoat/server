@@ -2,6 +2,11 @@
 -- Area: Ceizak Battlegrounds
 --  NPC: Waypoint
 -----------------------------------
+-- Frontier Station : !pos 365 0.448 190 261
+-- Bivouac #1       : !pos -6.879 0 -117.511 261
+-- Bivouac #2       : !pos -42 0 155 261
+-- Bivouac #3       : !pos -442 0 -247 261
+-----------------------------------
 require('scripts/globals/waypoint')
 -----------------------------------
 local entity = {}
