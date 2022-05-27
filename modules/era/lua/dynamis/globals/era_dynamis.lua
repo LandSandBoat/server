@@ -726,7 +726,7 @@ xi.dynamis.handleDynamis = function(zone)
     if zoneTimeRemaining <= 0 then -- If now is < 0 minutes remove players and flag cleanup.
         xi.dynamis.ejectAllPlayers(zone) -- Eject players from the zone.
         if zoneExpireRoutine == 0 then
-            zone:setLocalVar(string.format("[DYNA]ExpireRoutine_%s", zoneID), (os.time() + 30000)) -- Flags zone to start cleanup.
+            zone:setLocalVar(string.format("[DYNA]ExpireRoutine_%s", zoneID), (os.time() + 30)) -- Flags zone to start cleanup.
         end
         if zoneExpireRoutine ~= 0 and zoneExpireRoutine <= os.time() then -- Checks to see if 30s passed between start and now.
             xi.dynamis.cleanupDynamis(zone) -- Runs cleanup function.
@@ -921,7 +921,7 @@ xi.dynamis.verifyHoldsValidHourglass = function(player, zoneDynamistoken, zoneTi
         elseif player:getCharVar(string.format("[DYNA]PlayerZoneToken_%s", player:getZoneID())) ~= zoneDynamistoken then
             player:setCharVar(string.format("[DYNA]EjectPlayer_%s", zoneID), (os.time() + 0)) -- Player is not in the correct dynamis instance.
         else
-            player:setCharVar(string.format("[DYNA]EjectPlayer_%s", zoneID), (os.time() + 30000)) -- Player does not have a valid hourglass.
+            player:setCharVar(string.format("[DYNA]EjectPlayer_%s", zoneID), (os.time() + 30)) -- Player does not have a valid hourglass.
         end
     end
 
@@ -1121,7 +1121,7 @@ m:addOverride("xi.dynamis.zoneOnZoneIn", function(player, prevZone)
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then player:setPos(info.entryPos[1], info.entryPos[2], info.entryPos[3], info.entryPos[4]) end -- If player is in void, move player to entry.
 
     if xi.dynamis.verifyHoldsValidHourglass(player, zoneDynamisToken, zoneTimepoint) == true then -- Check if player has an hourglass and their personal token matches the zone token.
-        player:timer(10000, function(player)
+        player:timer(3000, function(player)
             player:messageSpecial(ID.text.DYNAMIS_TIME_UPDATE_2, math.floor(xi.dynamis.getDynaTimeRemaining(player:getZone(), zoneTimepoint) / 60), 1) -- Send message letting player know how long they have.
         end)
 
