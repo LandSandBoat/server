@@ -4826,6 +4826,7 @@ uint8 CLuaBaseEntity::getAllegiance()
 void CLuaBaseEntity::setAllegiance(uint8 allegiance)
 {
     m_PBaseEntity->allegiance = static_cast<ALLEGIANCE_TYPE>(allegiance);
+    m_PBaseEntity->updatemask |= UPDATE_HP | UPDATE_NAME;
 }
 
 /************************************************************************
@@ -9263,12 +9264,19 @@ void CLuaBaseEntity::countdown(sol::object const& secondsObj,
  *  Example : player:enableEntities({ 17207972, 17207973})
  *  Notes   : Default is all off, so sending the ID enables the special entity
  ************************************************************************/
-void CLuaBaseEntity::enableEntities(std::vector<uint32> const& data)
+void CLuaBaseEntity::enableEntities(sol::object const& obj)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-
-    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
-    PChar->pushPacket(new CEntityEnableList(data));
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        if (obj.is<std::vector<uint32>>())
+        {
+            PChar->pushPacket(new CEntityEnableList(obj.as<std::vector<uint32>>()));
+        }
+    }
+    else
+    {
+        ShowWarning(fmt::format("enableEntities called on invalid type ({})", m_PBaseEntity->name).c_str());
+    }
 }
 
 /************************************************************************

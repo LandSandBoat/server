@@ -3771,8 +3771,9 @@ INSERT INTO `mob_skill_lists` VALUES ('The_Briars_gal',1161,91); -- Fell Cleave
 -- 1162 -> Wamouracampa_curl
 
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Shantotto_II_Melee',1163,3739); -- shantotto_ii_melee (no name)
+INSERT INTO `mob_skill_lists` VALUES ('Teporingo',1164,258);
 
--- Next available ID: 1164
+-- Next available ID: 1165
 
 -- ------------------------------------------------------------
 -- Start of Ambuscade section
