@@ -17429,6 +17429,8 @@ INSERT INTO `mob_droplist` VALUES (3222,0,0,1000,15140,10);
 INSERT INTO `mob_droplist` VALUES (3222,0,0,1000,15142,10);
 INSERT INTO `mob_droplist` VALUES (3222,0,0,1000,16360,10);
 INSERT INTO `mob_droplist` VALUES (3223,0,0,1000,16017,150);
+INSERT INTO `mob_droplist` VALUES (3224,0,0,1000,1604,100); -- Mannequin Legs
+INSERT INTO `mob_droplist` VALUES (3224,0,0,1000,1605,100); -- Mannequin Feet
 
 
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
