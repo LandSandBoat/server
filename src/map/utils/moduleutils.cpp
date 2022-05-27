@@ -124,9 +124,10 @@ namespace moduleutils
         std::string line;
         while (std::getline(file, line))
         {
-            if (!line.empty() && line.at(0) != '#')
+            if (!line.empty() && line.at(0) != '#' && line != "\n" && line != "\r" && line != "\r\n")
             {
-                list.emplace_back("./modules/" + line);
+                auto str = trim("./modules/" + line, " \t\r\n");
+                list.emplace_back(str);
             }
         }
 
