@@ -34,7 +34,7 @@ ability_object.onUseAbility = function(player, target, ability, action)
     if player:getWeaponSkillType(xi.slot.RANGED) == xi.skill.MARKSMANSHIP then
         action:setAnimation(target:getID(), action:getAnimation(target:getID()) + 1)
     end
-    local params = {}
+--[[    local params = {}
     params.numHits = 1
     local ftp = 5
     params.ftp100 = ftp params.ftp200 = ftp params.ftp300 = ftp
@@ -44,7 +44,17 @@ ability_object.onUseAbility = function(player, target, ability, action)
     params.acc100 = 0.0 params.acc200= 0.0 params.acc300= 0.0
     params.atk100 = 1 params.atk200 = 1 params.atk300 = 1
     params.enmityMult = 0.5
+]]--
 
+    local params = {}
+    params.numHits = 5
+    params.ftp100 = 5 params.ftp200 = 5 params.ftp300 = 5
+    params.str_wsc = 0.16 params.dex_wsc = 0.0 params.vit_wsc = 0.0 params.agi_wsc = 0.25 params.int_wsc = 0.0 params.mnd_wsc = 0.0 params.chr_wsc = 0.0
+    params.crit100 = 0.0 params.crit200 = 0.0 params.crit300 = 0.0
+    params.canCrit = false
+    params.acc100 = 0.8 params.acc200= 0.9 params.acc300= 1
+    params.atk100 = 1; params.atk200 = 1; params.atk300 = 1
+	
     -- Job Point Bonus Damage
     local jpValue = player:getJobPointLevel(xi.jp.EAGLE_EYE_SHOT_EFFECT)
     player:addMod(xi.mod.ALL_WSDMG_ALL_HITS, jpValue * 3)
@@ -59,7 +69,9 @@ ability_object.onUseAbility = function(player, target, ability, action)
         action:messageID(target:getID(), xi.msg.basic.JA_MISS_2)
         action:speceffect(target:getID(), 0)
     end
-
+	
+	damage = damage * 3
+	
     return damage
 end
 
