@@ -16,6 +16,62 @@ xi.garrison.lookup = xi.garrison.lookup or {}
 -----------------------------------
 -- Helpers
 -----------------------------------
+xi.garrison.onWin = function(player, npc)
+    local zoneId = npc:getZoneID()
+    local garrisonZoneData = xi.garrison.data[zoneId]
+    local garrisonLoot = {}
+    garrisonLoot = xi.garrison.loot[garrisonZoneData.levelCap]
+    -- Talk to NPC to Remove effects
+    for _, v in ipairs(player:getAlliance()) do
+        v:setCharVar("Garrison_Won", 1)
+    end
+    -- Add loot to Treasure Pool
+    for _, loot in pairs(garrisonLoot) do
+        local roll = math.random(0,1000)
+        if roll <= loot.dropRate then
+            player:addTreasure(loot.itemId)
+        end
+    end
+    player:setCharVar("Garrison_Won", 0)
+    player:getZone():setLocalVar(string.format("[GARRISON]Treasure_%s", zoneId), 0)
+    -- They dont despawn until party leader talks to gaurd
+    xi.garrison.despawnNPCs(npc, party)
+    -- Reset Garrison lockout and Time Limit
+    npc:getZone():setLocalVar(string.format("[GARRISON]EndTime_%s", zoneId), os.time())
+    npc:getZone():setLocalVar(string.format("[GARRISON]LockOut_%s", zoneId), os.time())
+end
+
+xi.garrison.onLose = function(player, npc)
+    local zoneId = npc:getZoneID()
+    local garrisonZoneData = xi.garrison.data[zoneId]
+    local mob = garrisonZoneData.mobs
+    local mobnum = 1
+    -- Talk to NPC to Remove effects
+    for _, v in ipairs(player:getAlliance()) do
+        v:setCharVar("Garrison_Lose", 1)
+    end
+    -- Despawn all the mobs
+    while mobnum <= 9 do
+        DespawnMob(mob)
+        mobnum = mobnum + 1
+        mob = mob + 1
+    end
+    player:getZone():setLocalVar(string.format("[GARRISON]Treasure_%s", zoneId), 0)
+    -- Despawn all the NPCs
+    xi.garrison.despawnNPCs(npc)
+    -- Reset Garrison lockout and Time Limit
+    npc:getZone():setLocalVar(string.format("[GARRISON]EndTime_%s", zoneId), os.time())
+    npc:getZone():setLocalVar(string.format("[GARRISON]LockOut_%s", zoneId), os.time())
+end
+
+xi.garrison.onRemove = function(player)
+    -- Talk to Guard to Remove effects
+    player:delStatusEffect(xi.effect.LEVEL_RESTRICTION)
+    player:delStatusEffect(xi.effect.BATTLEFIELD)
+    player:setCharVar("Garrison_Won", 0)
+    player:setCharVar("Garrison_Lose", 0)
+end
+
 xi.garrison.mobsAlive = function(player)
     local zoneId = player:getZoneID()
     local garrisonZoneData = xi.garrison.data[zoneId]
@@ -57,7 +113,7 @@ xi.garrison.npcAlive = function(player)
     end
 end
 
-xi.garrison.despawnNPCs = function(npc, party)
+xi.garrison.despawnNPCs = function(npc)
     local zoneId = npc:getZoneID()
     local garrisonZoneData = xi.garrison.data[zoneId]
     local npcs = garrisonZoneData.npcs
@@ -186,25 +242,9 @@ xi.garrison.waveAlive = function(player, npc, wave, party)
         wave == 4 and
         xi.garrison.npcAlive(player, party) == true
     then
-        --win
-        npc:getZone():setLocalVar(string.format("[GARRISON]EndTime_%s", zoneId), os.time())
-        npc:getZone():setLocalVar(string.format("[GARRISON]LockOut_%s", zoneId), os.time())
-        for _, v in ipairs(player:getAlliance()) do
-            -- Not sure this is needed but putting here for each member, talk to gaurd to remove effect??
-            v:setCharVar("Garrison_Won", 1)
-            v:delStatusEffect(xi.effect.LEVEL_RESTRICTION)
-            v:delStatusEffect(xi.effect.BATTLEFIELD)
-        end
-        for _, loot in pairs(garrisonLoot) do
-            local roll = math.random(0,1000)
-            if roll <= loot.dropRate then
-                player:addTreasure(loot.itemId)
-            end
-        end
-            -- They dont despawn until party leader talks to gaurd
-            xi.garrison.despawnNPCs(npc, party)
-            -- Var to give rewards to party trigger from guard
-            player:setCharVar("Garrison_Treasure", 1)
+        -- Win
+        -- Var to give rewards to Trader to trigger from guard
+        player:getZone():setLocalVar(string.format("[GARRISON]Treasure_%s", zoneId), garrisonRunning)
     elseif
         xi.garrison.mobsAlive(player) == false and
         wave <=3 and
@@ -220,21 +260,7 @@ xi.garrison.waveAlive = function(player, npc, wave, party)
         os.time() >= garrisonRunning
     then
         -- lose
-        npc:getZone():setLocalVar(string.format("[GARRISON]EndTime_%s", zoneId), os.time())
-        npc:getZone():setLocalVar(string.format("[GARRISON]LockOut_%s", zoneId), os.time())
-        for _, v in ipairs(player:getAlliance()) do
-            -- Talk to NPC to Remove effects (done here now for testing)
-            v:delStatusEffect(xi.effect.LEVEL_RESTRICTION)
-            v:delStatusEffect(xi.effect.BATTLEFIELD)
-        end
-        mob = garrisonZoneData.mobs
-        mobnum = 1
-        while mobnum <= 9 do
-            DespawnMob(mob)
-            mobnum = mobnum + 1
-            mob = mob + 1
-        end
-        xi.garrison.despawnNPCs(npc, party)
+        xi.garrison.onLose(player, npc)
     else
     -- start next tick
         npc:timer(10000, function(npcArg)
@@ -255,7 +281,7 @@ xi.garrison.start = function(player, npc, party)
                 v:addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0)
             end
         end
-    -- Spawn NPC needs to be changed to dynamic similar to pets/trusts/fellows shifting ids
+    -- Spawn NPCs
     xi.garrison.spawnNPCs(player, npc, party)
     -- Start First Wave
     local wave = 1

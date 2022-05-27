@@ -13,68 +13,68 @@ xi.garrison.loot =
     [20] =
     {
         {itemId = 4198, dropRate = 1000}, -- Dragon Chronicles
-        {itemId = 13818, dropRate = 200}, -- Garrison Tunica
-        {itemId = 14206, dropRate = 200}, -- Garrison Boots
-        {itemId = 14314, dropRate = 200}, -- Garrison Hose
-        {itemId = 14841, dropRate = 200}, -- Garrison Gloves
-        {itemId = 15147, dropRate = 200}, -- Garrison Sallet
+        {itemId = 13818, dropRate = 300}, -- Garrison Tunica
+        {itemId = 14206, dropRate = 300}, -- Garrison Boots
+        {itemId = 14314, dropRate = 300}, -- Garrison Hose
+        {itemId = 14841, dropRate = 300}, -- Garrison Gloves
+        {itemId = 15147, dropRate = 300}, -- Garrison Sallet
     },
     --level 30 garrison loot
     [30] =
     {
         {itemId = 4198, dropRate = 1000}, -- Dragon Chronicles
-        {itemId = 17272, dropRate = 200}, -- Military Gun
-        {itemId = 17580, dropRate = 200}, -- Military Pole
-        {itemId = 17839, dropRate = 200}, -- Military Harp
-        {itemId = 17940, dropRate = 200}, -- Military Pick
-        {itemId = 18090, dropRate = 200}, -- Military Spear
-        {itemId = 18212, dropRate = 200}, -- Military Axe
+        {itemId = 17272, dropRate = 300}, -- Military Gun
+        {itemId = 17580, dropRate = 300}, -- Military Pole
+        {itemId = 17839, dropRate = 300}, -- Military Harp
+        {itemId = 17940, dropRate = 300}, -- Military Pick
+        {itemId = 18090, dropRate = 300}, -- Military Spear
+        {itemId = 18212, dropRate = 300}, -- Military Axe
     },
     --level 40 garrison loot
     [40] =
     {
         {itemId = 4198, dropRate = 1000}, -- Dragon Chronicles
-        {itemId = 13680, dropRate = 200}, -- Variable Mantle
-        {itemId = 13681, dropRate = 200}, -- Variable Cape
-        {itemId = 14652, dropRate = 200}, -- Protean Ring
-        {itemId = 14653, dropRate = 200}, -- Variable Ring
-        {itemId = 14757, dropRate = 200}, -- Mecurial Earring
+        {itemId = 13680, dropRate = 300}, -- Variable Mantle
+        {itemId = 13681, dropRate = 300}, -- Variable Cape
+        {itemId = 14652, dropRate = 300}, -- Protean Ring
+        {itemId = 14653, dropRate = 300}, -- Variable Ring
+        {itemId = 14757, dropRate = 300}, -- Mecurial Earring
     },
     --level 50 garrison loot
     [50] =
     {
         {itemId = 4198, dropRate = 1000}, -- Dragon Chronicles
-        {itemId = 14744, dropRate = 200}, -- Undead Earring
-        {itemId = 14745, dropRate = 200}, -- Arcana Earring
-        {itemId = 14746, dropRate = 200}, -- Vermin Earring
-        {itemId = 14747, dropRate = 200}, -- Bird Earring
-        {itemId = 14748, dropRate = 200}, -- Amorph Earring
-        {itemId = 14749, dropRate = 200}, -- Lizard Earring
-        {itemId = 14750, dropRate = 200}, -- Aquan Earring
-        {itemId = 14751, dropRate = 200}, -- Plantoid Earring
-        {itemId = 14752, dropRate = 200}, -- Beast Earring
-        {itemId = 14753, dropRate = 200}, -- Demon Earring
-        {itemId = 14754, dropRate = 200}, -- Dragon Earring
-        {itemId = 14755, dropRate = 200}, -- Refresh Earring
-        {itemId = 14756, dropRate = 200}, -- Accurate Earring
+        {itemId = 14744, dropRate = 300}, -- Undead Earring
+        {itemId = 14745, dropRate = 300}, -- Arcana Earring
+        {itemId = 14746, dropRate = 300}, -- Vermin Earring
+        {itemId = 14747, dropRate = 300}, -- Bird Earring
+        {itemId = 14748, dropRate = 300}, -- Amorph Earring
+        {itemId = 14749, dropRate = 300}, -- Lizard Earring
+        {itemId = 14750, dropRate = 300}, -- Aquan Earring
+        {itemId = 14751, dropRate = 300}, -- Plantoid Earring
+        {itemId = 14752, dropRate = 300}, -- Beast Earring
+        {itemId = 14753, dropRate = 300}, -- Demon Earring
+        {itemId = 14754, dropRate = 300}, -- Dragon Earring
+        {itemId = 14755, dropRate = 300}, -- Refresh Earring
+        {itemId = 14756, dropRate = 300}, -- Accurate Earring
     },
     --level 75 garrison loot
     [75] =
     {
         {itemId = 4247, dropRate = 1000}, -- Miratete's Memoirs
-        {itemId = 17204, dropRate = 200}, -- Mighty Bow
-        {itemId = 17465, dropRate = 200}, -- Mighty Cudgel
-        {itemId = 17581, dropRate = 200}, -- Mighty Pole
-        {itemId = 17697, dropRate = 200}, -- Mighty Talwar
-        {itemId = 17791, dropRate = 200}, -- Rai Kunimitsu
-        {itemId = 17824, dropRate = 200}, -- Nukemaru
-        {itemId = 17941, dropRate = 200}, -- Mighty Pick
-        {itemId = 18000, dropRate = 200}, -- Mighty Knife
-        {itemId = 18049, dropRate = 200}, -- Mighty Zaghnal
-        {itemId = 18091, dropRate = 200}, -- Mighty Lance
-        {itemId = 18213, dropRate = 200}, -- Mighty Axe
-        {itemId = 18352, dropRate = 200}, -- Mighty Patas
-        {itemId = 18374, dropRate = 200}, -- Mighty Sword
+        {itemId = 17204, dropRate = 300}, -- Mighty Bow
+        {itemId = 17465, dropRate = 300}, -- Mighty Cudgel
+        {itemId = 17581, dropRate = 300}, -- Mighty Pole
+        {itemId = 17697, dropRate = 300}, -- Mighty Talwar
+        {itemId = 17791, dropRate = 300}, -- Rai Kunimitsu
+        {itemId = 17824, dropRate = 300}, -- Nukemaru
+        {itemId = 17941, dropRate = 300}, -- Mighty Pick
+        {itemId = 18000, dropRate = 300}, -- Mighty Knife
+        {itemId = 18049, dropRate = 300}, -- Mighty Zaghnal
+        {itemId = 18091, dropRate = 300}, -- Mighty Lance
+        {itemId = 18213, dropRate = 300}, -- Mighty Axe
+        {itemId = 18352, dropRate = 300}, -- Mighty Patas
+        {itemId = 18374, dropRate = 300}, -- Mighty Sword
     },
 
 }
