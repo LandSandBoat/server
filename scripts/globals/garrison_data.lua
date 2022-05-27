@@ -166,36 +166,72 @@ xi.garrison.data =
         -- empty filled with dynamic entries
         },
         mobs = 17211849,
-        xPos = -0,
-        yPos = -0,
-        zPos = -0,
-        xChange = 0,
+        xPos = -580, --needs adjusting
+        yPos = 40,
+        zPos = 69,
+        xChange = 1,
         zChange = 2,
         xSecondLine = 2,
         zSecondLine = 0,
         xThirdLine = 4,
         zThirdLine = 0,
-        rot = 0,
+        rot = 106,
         name = "676e7063C", -- gnpc text to hex (rename with proper names later)waveSize = {
         waveSize = {
-        -- Wave + Number of Parties
+        -- TODO Get Correct Wave Order enter pos data for all mobs
             [1] =
             {
+                17211849,
+                17211850
             },
             [2] =
             {
+                17211849,
+                17211850,
+                17211851,
+                17211852
             },
             [3] =
             {
+                17211849,
+                17211850,
+                17211851,
+                17211852,
+                17211853,
+                17211854
             },
             [4] =
             {
+                17211849,
+                17211850,
+                17211851,
+                17211852,
+                17211853,
+                17211854,
+                17211855,
+                17211856
             },
             [5] =
             {
+                17211849,
+                17211850,
+                17211851,
+                17211852,
+                17211853,
+                17211854,
+                17211855,
+                17211856
             },
             [6] =
             {
+                17211849,
+                17211850,
+                17211851,
+                17211852,
+                17211853,
+                17211854,
+                17211855,
+                17211856
             },
         },
     },
@@ -207,36 +243,72 @@ xi.garrison.data =
         -- empty filled with dynamic entries
         },
         mobs = 17248598,
-        xPos = -0,
-        yPos = -0,
-        zPos = -0,
+        xPos = -20, -- needs adjusting
+        yPos = -12,
+        zPos = 325,
         xChange = 0,
         zChange = 2,
         xSecondLine = 2,
         zSecondLine = 0,
         xThirdLine = 4,
         zThirdLine = 0,
-        rot = 0,
+        rot = 115,
         name = "676e7063C", -- gnpc text to hex (rename with proper names later)waveSize = {
         waveSize = {
-        -- Wave + Number of Parties
+        -- TODO Get Correct Wave Order
             [1] =
             {
+                17248598,
+                17248599
             },
             [2] =
             {
+                17248598,
+                17248599,
+                17248600,
+                17248601
             },
             [3] =
             {
+                17248598,
+                17248599,
+                17248600,
+                17248601,
+                17248602,
+                17248603
             },
             [4] =
             {
+                17248598,
+                17248599,
+                17248600,
+                17248601,
+                17248602,
+                17248603,
+                17248604,
+                17248605
             },
             [5] =
             {
+                17248598,
+                17248599,
+                17248600,
+                17248601,
+                17248602,
+                17248603,
+                17248604,
+                17248605
             },
             [6] =
             {
+                17248598,
+                17248599,
+                17248600,
+                17248601,
+                17248602,
+                17248603,
+                17248604,
+                17248605
             },
         },
     },
