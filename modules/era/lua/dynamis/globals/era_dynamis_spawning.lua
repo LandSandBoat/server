@@ -54,33 +54,41 @@ xi.dynamis.parentOnEngaged = function(mob, target)
     if eyes ~= nil then
         mob:setAnimationSub(eyes)
     end
-    for _, index in pairs(xi.dynamis.mobList[zoneID][oMobIndex].nmchildren) do
-        if xi.dynamis.mobList[zoneID][oMobIndex].nmchildren[index] == true or xi.dynamis.mobList[zoneID][oMobIndex].nmchildren[index] == false then
-            index = index + 1
-        else
-            local forceLink = xi.dynamis.mobList[zoneID][oMobIndex].nmchildren[1]
-            local mobIndex = xi.dynamis.mobList[zoneID][oMobIndex].nmchildren[index]
-            local mobType = xi.dynamis.mobList[zoneID][mobIndex].info[1]
-            if mobType == "NM" then -- NMs
-                xi.dynamis.nmDynamicSpawn(mobIndex, oMobIndex, forceLink, zoneID, target, oMob)
+    if not xi.dynamis.mobList[zoneID][oMobIndex].nmchildren == nil then
+        for _, index in pairs(xi.dynamis.mobList[zoneID][oMobIndex].nmchildren) do
+            if xi.dynamis.mobList[zoneID][oMobIndex].nmchildren[index] == true or xi.dynamis.mobList[zoneID][oMobIndex].nmchildren[index] == false then
                 index = index + 1
-            elseif mobType ~= nil then -- Nightmare Mobs and Statues
-                xi.dynamis.nonStandardDynamicSpawn(mobIndex, oMob, forceLink, zoneID, target, oMobIndex)
-                index = index + 1
+            else
+                local forceLink = xi.dynamis.mobList[zoneID][oMobIndex].nmchildren[1]
+                local mobIndex = xi.dynamis.mobList[zoneID][oMobIndex].nmchildren[index]
+                local mobType = xi.dynamis.mobList[zoneID][mobIndex].info[1]
+                if mobType == "NM" then -- NMs
+                    xi.dynamis.nmDynamicSpawn(mobIndex, oMobIndex, forceLink, zoneID, target, oMob)
+                    index = index + 1
+                elseif mobType ~= nil then -- Nightmare Mobs and Statues
+                    xi.dynamis.nonStandardDynamicSpawn(mobIndex, oMob, forceLink, zoneID, target, oMobIndex)
+                    index = index + 1
+                end
             end
         end
     end
-    xi.dynamis.normalDynamicSpawn(mob, oMobIndex) -- Normies have their own loop, so they don't need one here.
+    if xi.dynamis.mobList[zoneID][oMobIndex].mobchildren ~= nil then
+        xi.dynamis.normalDynamicSpawn(mob, oMobIndex) -- Normies have their own loop, so they don't need one here.
+    end
 end
 
 xi.dynamis.normalDynamicSpawn = function(mob, oMobIndex)
     local mobFamily = mob:getFamily()
+    print(string.format("mobFamily: %s", mobFamily))
     local mobID = mob:getID()
+    print(string.format("oMobID: %s", mobID))
     local mobZoneID = mob:getZoneID()
+    print(string.format("zoneID: %s", mobZoneID))
     local oMob = GetMobByID(mobID)
+    print(string.format("oMob: %s", oMob))
     local zone = GetZone(mobZoneID)
-    local nameObj = nil
-    xi.dynamis.normalMobLookup =
+    print(string.format("zone: %s", zone))
+    local normalMobLookup =
     {
         -- NOTE: To use default SpellList and SkillList set to nil.
         -- [Parent's Family]
@@ -250,19 +258,20 @@ xi.dynamis.normalDynamicSpawn = function(mob, oMobIndex)
         }
     }
 
-    for _, job in pairs(xi.dynamis.mobList[mobZoneID][oMobIndex].mobchildren) do
+    for job, number in pairs(xi.dynamis.mobList[mobZoneID][oMobIndex].mobchildren) do
         local indexJob = 1
-        local indexEndJob = mobList[mobZoneID][oMobIndex].mobchildren[job]
-        while (indexEndJob ~= nil and indexJob <= indexEndJob) do
-            if oMob:getFamily() == 4 then
-                if oMob:getLocalVar("Floor") == 2 or oMob:getLocalVar("Floor") == 3 then
-                    nameObj = xi.dynamis.normalMobLookup[mobFamily][mobZoneID][oMob:getLocalVar("Floor")]
-                else
-                    nameObj = xi.dynamis.normalMobLookup[mobFamily][mobZoneID]
-                end
+        local indexEndJob = number
+        local nameObj = nil
+        if oMob:getFamily() == 4 then
+            if oMob:getLocalVar("Floor") == 2 or oMob:getLocalVar("Floor") == 3 then
+                nameObj = normalMobLookup[mobFamily][mobZoneID][oMob:getLocalVar("Floor")]
             else
-                nameObj = xi.dynamis.normalMobLookup[mobFamily]
+                nameObj = normalMobLookup[mobFamily][mobZoneID]
             end
+        else
+            nameObj = normalMobLookup[mobFamily]
+        end
+        while (indexJob <= indexEndJob) do
             local mob = zone:insertDynamicEntity({
                 objtype = xi.objType.MOB,
                 name = nameObj[job][1],
@@ -273,21 +282,19 @@ xi.dynamis.normalDynamicSpawn = function(mob, oMobIndex)
                 groupId = nameObj[job][2],
                 groupZoneId = nameObj[job][3],
                 onMobSpawn = function(mob) xi.dynamis.setMobStats(mob) end,
-                onMobFight = function(mob) xi.dynamis.mobOnFight(mob) end,
                 onMobRoam = function(mob) xi.dynamis.mobOnRoam(mob) end,
                 onMobRoamAction = function(mob) xi.dynamis.mobOnRoamAction(mob) end,
                 onMobDeath = function(mob, playerArg, isKiller)
-                    xi.dynamis.mobOnDeath(mob, mobList[mob:getZoneID()], zones[mob:getZoneID()].text.DYNAMIS_TIME_EXTEND)
+                    xi.dynamis.mobOnDeath(mob, zones[mob:getZoneID()].text.DYNAMIS_TIME_EXTEND)
                 end,
             })
-            mob:setSpawn(oMob:getXPos()+math.random()*6-3, oMob:getYPos()-0.3, oMob:getzPos()+math.random()*6-3, oMob:getRotPos())
+            mob:setSpawn(oMob:getXPos()+math.random()*6-3, oMob:getYPos()-0.3, oMob:getZPos()+math.random()*6-3, oMob:getRotPos())
             mob:spawn()
-            mob:setDropID(nameObj[4])
-            if nameObj[5] ~= nil then -- If SpellList ~= nil set SpellList
-                mob:setSpellList(nameObj[5])
+            if nameObj[job][5] ~= nil then -- If SpellList ~= nil set SpellList
+                mob:setSpellList(nameObj[job][5])
             end
-            if nameObj[6] ~= nil then -- If SkillList ~= nil set SkillList
-                mob:setMobMod(xi.mobMod.SKILL_LIST, nameObj[6])
+            if nameObj[job][6] ~= nil then -- If SkillList ~= nil set SkillList
+                mob:setMobMod(xi.mobMod.SKILL_LIST, nameObj[job][6])
             end
             if oMob ~= nil and oMob ~= 0 then
                 mob:setLocalVar("Parent", oMob:getID())
@@ -307,7 +314,7 @@ xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID,
     local zPos = xi.dynamis.mobList[zoneID][mobIndex].pos[3]
     local rPos = xi.dynamis.mobList[zoneID][mobIndex].pos[4]
     local zone = GetZone(zoneID)
-    xi.dynamis.nonStandardLookUp =
+    local nonStandardLookup =
     {
         ["Statue"] =
         {
@@ -357,40 +364,40 @@ xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID,
     {
         ["Statue"] =
         {
-            ["onMobSpawn"] = {function(mob) xi.dynamis.setStatueStats(mob, mobIndex) end}
+            ["onMobSpawn"] = {function(mob) xi.dynamis.setStatueStats(mob, mobIndex) end},
         },
         ["Nightmare"] =
         {
-            ["onMobSpawn"] = {function(mob) xi.dynamis.setMobStats(mob) end}
+            ["onMobSpawn"] = {function(mob) xi.dynamis.setMobStats(mob) end},
         }
     }
     local mob = zone:insertDynamicEntity({
         objtype = xi.objType.MOB,
-        name = xi.dynamis.nonStandardLookUp[mobMobType][mobName][1],
+        name = nonStandardLookup[mobMobType][mobName][1],
         x = xPos,
         y = yPos,
         z = zPos,
         rotation = rPos,
-        groupId = xi.dynamis.nonStandardLookUp[mobMobType][mobName][2],
-        groupZoneId = xi.dynamis.nonStandardLookUp[mobMobType][mobName][3],
-        onMobSpawn = mobFunctions[mobMobType][1],
+        groupId = nonStandardLookup[mobMobType][mobName][2],
+        groupZoneId = nonStandardLookup[mobMobType][mobName][3],
+        onMobSpawn = mobFunctions[mobMobType]["onMobSpawn"][1],
         onMobEngaged = function(mob) xi.dynamis.parentOnEngaged(mob, target) end,
         onMobFight = function(mob) xi.dynamis.statueOnFight(mob) end,
         onMobRoam = function(mob) xi.dynamis.mobOnRoam(mob) end,
         onMobRoamAction = function(mob) xi.dynamis.mobOnRoamAction(mob) end,
         onMobDeath = function(mob, playerArg, isKiller)
-            xi.dynamis.mobOnDeath(mob, xi.dynamis.mobList[zoneID], zones[zoneID].text.DYNAMIS_TIME_EXTEND)
+            xi.dynamis.mobOnDeath(mob, zones[zoneID].text.DYNAMIS_TIME_EXTEND)
         end,
     })
     mob:setSpawn(xPos, yPos, zPos, rPos)
     mob:spawn()
     mob:setLocalVar("MobIndex", mobIndex)
-    mob:setDropID(xi.dynamis.nonStandardLookUp[mobMobType][mobName][4])
-    if xi.dynamis.nonStandardLookUp[mobMobType][mobName][5] ~= nil then -- If SpellList ~= nil set SpellList
-        mob:setSpellList(xi.dynamis.nonStandardLookUp[mobMobType][mobName][5])
+    mob:setDropID(nonStandardLookup[mobMobType][mobName][4])
+    if nonStandardLookup[mobMobType][mobName][5] ~= nil then -- If SpellList ~= nil set SpellList
+        mob:setSpellList(nonStandardLookup[mobMobType][mobName][5])
     end
-    if xi.dynamis.nonStandardLookUp[mobMobType][mobName][6] ~= nil then -- If SkillList ~= nil set SkillList
-        mob:setMobMod(xi.mobMod.SKILL_LIST, xi.dynamis.nonStandardLookUp[mobMobType][mobName][6])
+    if nonStandardLookup[mobMobType][mobName][6] ~= nil then -- If SkillList ~= nil set SkillList
+        mob:setMobMod(xi.mobMod.SKILL_LIST, nonStandardLookup[mobMobType][mobName][6])
     end
     if oMob ~= nil and oMob ~= 0 then
         mob:setLocalVar("Parent", oMob:getID())
@@ -515,7 +522,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         onMobMagicPrepare = function(mob, target) end
         onMobWeaponSkillPrepare = function(mob, target) end
         onMobWeaponSkill = function( target, mob, skill) end
-        onMobDeath = function(mob, player, isKiller) xi.dynamis.mobOnDeath(mob, xi.dynamis.mobList[zoneID], zones[zoneID].text.DYNAMIS_TIME_EXTEND, mobVar) end
+        onMobDeath = function(mob, player, isKiller) xi.dynamis.mobOnDeath(mob, zones[zoneID].text.DYNAMIS_TIME_EXTEND, mobVar) end
     elseif mobName == "Gu'Dha Effigy" or mobName == "Goblin Golem" or mobName == "Overlord's Tombstone" or mobName == "Tzee Xicu Idol" then -- City Dynamis Megabosses (Bastok, Jeuno, Sandy, Windy)
         mobVar =  nmInfoLookup[mobFamily][mobName][7]
         mobNameFound = nmInfoLookup[mobName][1]
@@ -946,7 +953,7 @@ xi.dynamis.spawnDynamicPet =function(target, mob)
         onMobFight = function(mob) xi.dynamis.mobOnFight(mob) end,
         onMobRoamAction = function(mob) xi.dynamis.mobOnRoamAction(mob) end,
         onMobDeath = function(mob, playerArg, isKiller)
-            xi.dynamis.mobOnDeath(mob, mobList[mob:getZoneID()], zones[mob:getZoneID()].text.DYNAMIS_TIME_EXTEND)
+            xi.dynamis.mobOnDeath(mob, zones[mob:getZoneID()].text.DYNAMIS_TIME_EXTEND)
         end,
     })
     mob:setSpawn(oMob:getXPos()+math.random()*6-3, oMob:getYPos()-0.3, oMob:getZPos()+math.random()*6-3, oMob:getRotPos())
@@ -961,6 +968,346 @@ xi.dynamis.spawnDynamicPet =function(target, mob)
     mob:setLocalVar("PetMaster", oMobIndex)
     mob:spawn()
     mob:updateEnmity(target)
+end
+
+--------------------------------------------
+--        Dynamis Mob Pathing/Roam        --
+--------------------------------------------
+
+xi.dynamis.mobOnRoamAction = function(mob) -- Handle statue pathing.
+    if mob ~= nil then
+        local zoneID = mob:getZoneID()
+        if xi.dynamis.dynaInfoEra[zoneID].updatedRoam == true then
+            local home = mob:getSpawnPos()
+            local location = mob:getPos()
+            if location.x == home.x and location.y == home.y and location.z == home.z and location.rot == home.rot then
+                mob:setPos(location.x, location.y, location.z, home.rot)
+            else
+                mob:pathTo(home.x, home.y, home.z)
+            end
+        elseif xi.dynamis.dynaInfoEra[zoneID].updatedRoam == false then
+            local home = mob:getSpawnPos()
+            local location = mob:getPos()
+            mob:pathTo(home.x, home.y, home.z)
+            if location.x == home.x and location.y == home.y and location.z == home.z and location.rot ~= home.rot then
+                mob:setPos(location.x, location.y, location.z, home.rot)
+            end
+        end
+    end
+end
+
+xi.dynamis.mobOnRoam = function(mob) end
+
+--------------------------------------------
+--            Dynamis Mob Stats           --
+--------------------------------------------
+
+xi.dynamis.setMobStats = function(mob)
+    if mob ~= nil then
+        local job = mob:getMainJob()
+
+        local familyEES =
+        {
+            [  3] = xi.jsa.EES_AERN,    -- Aern
+            [ 25] = xi.jsa.EES_ANTICA,  -- Antica
+            [115] = xi.jsa.EES_SHADE,   -- Fomor
+            [126] = xi.jsa.EES_GIGA,    -- Gigas
+            [127] = xi.jsa.EES_GIGA,    -- Gigas
+            [128] = xi.jsa.EES_GIGA,    -- Gigas
+            [129] = xi.jsa.EES_GIGA,    -- Gigas
+            [130] = xi.jsa.EES_GIGA,    -- Gigas
+            [133] = xi.jsa.EES_GOBLIN,  -- Goblin
+            [169] = xi.jsa.EES_KINDRED, -- Kindred
+            [171] = xi.jsa.EES_LAMIA,   -- Lamiae
+            [182] = xi.jsa.EES_MERROW,  -- Merrow
+            [184] = xi.jsa.EES_GOBLIN,  -- Moblin
+            [189] = xi.jsa.EES_ORC,     -- Orc
+            [200] = xi.jsa.EES_QUADAV,  -- Quadav
+            [201] = xi.jsa.EES_QUADAV,  -- Quadav
+            [202] = xi.jsa.EES_QUADAV,  -- Quadav
+            [221] = xi.jsa.EES_SHADE,   -- Shadow
+            [222] = xi.jsa.EES_SHADE,   -- Shadow
+            [223] = xi.jsa.EES_SHADE,   -- Shadow
+            [246] = xi.jsa.EES_TROLL,   -- Troll
+            [270] = xi.jsa.EES_YAGUDO,  -- Yagudo
+            [327] = xi.jsa.EES_GOBLIN,  -- Goblin
+            [328] = xi.jsa.EES_GIGA,    -- Gigas
+            [334] = xi.jsa.EES_ORC,     -- OrcNM
+            [335] = xi.jsa.EES_MAAT,    -- Maat
+            [337] = xi.jsa.EES_QUADAV,  -- QuadavNM
+            [358] = xi.jsa.EES_KINDRED, -- Kindred
+            [359] = xi.jsa.EES_SHADE,   -- Fomor
+            [360] = xi.jsa.EES_YAGUDO,  -- YagudoNM
+            [373] = xi.jsa.EES_GOBLIN,  -- Goblin_Armored
+        }
+
+        mob:setMobMod(xi.mobMod.HP_SCALE, 132)
+        mob:setHP(mob:getMaxHP())
+        mob:setMobType(xi.mobskills.mobType.NORMAL)
+        mob:setMobLevel(math.random(78,80))
+        mob:setTrueDetection(true)
+
+        if     job == xi.job.WAR then
+            local params = { }
+            params.specials = { }
+            params.specials.skill = { }
+            params.specials.skill.id = xi.jsa.MIGHTY_STRIKES
+            params.specials.skill.hpp = math.random(55,80)
+            xi.mix.jobSpecial.config(mob, params)
+        elseif job == xi.job.MNK then
+            local params = { }
+            params.specials = { }
+            params.specials.skill = { }
+            params.specials.skill.id = xi.jsa.HUNDRED_FISTS
+            params.specials.skill.hpp = math.random(55,70)
+            xi.mix.jobSpecial.config(mob, params)
+        elseif job == xi.job.WHM then
+            local params = { }
+            params.specials = { }
+            params.specials.skill = { }
+            params.specials.skill.id = xi.jsa.BENEDICTION
+            params.specials.skill.hpp = math.random(40,60)
+            xi.mix.jobSpecial.config(mob, params)
+        elseif job == xi.job.BLM then
+            local params = { }
+            params.specials = { }
+            params.specials.skill = { }
+            params.specials.skill.id = xi.jsa.MANAFONT
+            params.specials.skill.hpp = math.random(55,80)
+            xi.mix.jobSpecial.config(mob, params)
+        elseif job == xi.job.RDM then
+            local params = { }
+            params.specials = { }
+            params.specials.skill = { }
+            params.specials.skill.id = xi.jsa.CHAINSPELL
+            params.specials.skill.hpp = math.random(55,80)
+            xi.mix.jobSpecial.config(mob, params)
+        elseif job == xi.job.THF then
+            local params = { }
+            params.specials = { }
+            params.specials.skill = { }
+            params.specials.skill.id = xi.jsa.PERFECT_DODGE
+            params.specials.skill.hpp = math.random(55,75)
+            xi.mix.jobSpecial.config(mob, params)
+        elseif job == xi.job.PLD then
+            local params = { }
+            params.specials = { }
+            params.specials.skill = { }
+            params.specials.skill.id = xi.jsa.INVINCIBLE
+            params.specials.skill.hpp = math.random(55,75)
+            xi.mix.jobSpecial.config(mob, params)
+        elseif job == xi.job.DRK then
+            local params = { }
+            params.specials = { }
+            params.specials.skill = { }
+            params.specials.skill.id = xi.jsa.BLOOD_WEAPON
+            params.specials.skill.hpp = math.random(55,75)
+            xi.mix.jobSpecial.config(mob, params)
+        elseif job == xi.job.BST then
+        elseif job == xi.job.BRD then
+            local params = { }
+            params.specials = { }
+            params.specials.skill = { }
+            params.specials.skill.id = xi.jsa.SOUL_VOICE
+            params.specials.skill.hpp = math.random(55,80)
+            xi.mix.jobSpecial.config(mob, params)
+        elseif job == xi.job.RNG then
+            local params = { }
+            params.specials = { }
+            params.specials.skill = { }
+            params.specials.skill.id = familyEES[mob:getFamily()]
+            params.specials.skill.hpp = math.random(55,75)
+            xi.mix.jobSpecial.config(mob, params)
+        elseif job == xi.job.SAM then
+            local params = { }
+            params.specials = { }
+            params.specials.skill = { }
+            params.specials.skill.id = xi.jsa.MEIKYO_SHISUI
+            params.specials.skill.hpp = math.random(55,80)
+            xi.mix.jobSpecial.config(mob, params)
+        elseif job == xi.job.NIN then
+            local params = { }
+            params.specials = { }
+            params.specials.skill = { }
+            params.specials.skill.id = xi.jsa.MIJIN_GAKURE
+            params.specials.skill.hpp = math.random(25,35)
+            xi.mix.jobSpecial.config(mob, params)
+        elseif job == xi.job.DRG then
+        elseif job == xi.job.SMN then
+        end
+
+        -- Add Check After Calcs
+        mob:setMobMod(xi.mobMod.CHECK_AS_NM, 2)
+    end
+end
+
+xi.dynamis.setNMStats = function(mob)
+    local job = mob:getMainJob()
+    mob:setMobType(xi.mobskills.mobType.NOTORIOUS)
+    mob:setMobMod(xi.mobMod.HP_SCALE, 132)
+    mob:setHP(mob:getMaxHP())
+    mob:setMobLevel(math.random(80,82))
+    mob:setMod(xi.mod.STR, -15)
+    mob:setMod(xi.mod.VIT, -5)
+    mob:setTrueDetection(true)
+    mob:setMobMod(xi.mobMod.CHECK_AS_NM, 2)
+
+    if job == xi.job.NIN then
+        local params = { }
+        params.specials = { }
+        params.specials.skill = { }
+        params.specials.skill.id = xi.jsa.MIJIN_GAKURE
+        params.specials.skill.hpp = math.random(15,25)
+        xi.mix.jobSpecial.config(mob, params)
+    end
+end
+
+xi.dynamis.setStatueStats = function(mob, mobIndex)
+    local zoneID = mob:getZoneID()
+    local eyes = xi.dynamis.mobList[zoneID][mobIndex].eyes
+    mob:setRoamFlags(xi.roamFlag.EVENT)
+    mob:setMobType(xi.mobskills.mobType.NOTORIOUS)
+    mob:setMobLevel(math.random(82,84))
+    mob:setMod(xi.mod.STR, -5)
+    mob:setMod(xi.mod.VIT, -5)
+    mob:setMod(xi.mod.DMGMAGIC, -50)
+    mob:setMod(xi.mod.DMGPHYS, -50)
+    mob:setTrueDetection(true)
+    -- Disabling WHM job trait mods because their job is set to WHM in the DB.
+    mob:setMod(xi.mod.MDEF, 0)
+    mob:setMod(xi.mod.REGEN, 0)
+    mob:setMod(xi.mod.MPHEAL, 0)
+    mob:setMobMod(xi.mobMod.CHECK_AS_NM, 2)
+    
+    if mob:getFamily() >= 92 and mob:getFamily() <= 95 then -- If statue
+        if eyes ~= nil then
+            mob:setLocalVar("eyeColor", eyes) -- Set Eyes if need be
+            if eyes >= 2 then -- If HP or MP restore statue
+                mob:setUnkillable(true) -- Set Unkillable as we will use skills then kill.
+            end
+        end
+    end
+end
+
+xi.dynamis.setMegaBossStats = function(mob)
+    mob:setMobType(xi.mobskills.mobType.NOTORIOUS)
+    mob:setMobLevel(88)
+    mob:setMod(xi.mod.STR, -10)
+    mob:setTrueDetection(true)
+    mob:setMobMod(xi.mobMod.CHECK_AS_NM, 2)
+end
+
+xi.dynamis.setPetStats = function(mob)
+    mob:setMobLevel(78)
+    mob:setMod(xi.mod.STR, -40)
+    mob:setMod(xi.mod.INT, -30)
+    mob:setMod(xi.mod.VIT, -20)
+    mob:setMod(xi.mod.RATTP, -20)
+    mob:setMod(xi.mod.ATTP, -20)
+    mob:setMod(xi.mod.DEFP, -5)
+    mob:setTrueDetection(true)
+    mob:setMobMod(xi.mobMod.CHECK_AS_NM, 2)
+end
+
+xi.dynamis.setAnimatedWeaponStats = function(mob)
+    mob:setMobMod(xi.mobMod.NO_MOVE, 0)
+    mob:setMobMod(xi.mobMod.HP_HEAL_CHANCE, 90)
+    mob:setMod(xi.mod.STUNRESTRAIT, 75)
+    mob:setMod(xi.mod.PARALYZERESTRAIT, 100)
+    mob:setMod(xi.mod.SLOWRESTRAIT, 100)
+    mob:setMod(xi.mod.SILENCERESTRAIT, 100)
+    mob:setMod(xi.mod.LULLABYRESTRAIT, 100)
+    mob:setMod(xi.mod.SLEEPRESTRAIT, 100)
+    mob:setMobMod(xi.mobMod.CHECK_AS_NM, 2)
+end
+
+xi.dynamis.setEyeStats = function(mob)
+    mob:setMobType(xi.mobskills.mobType.NOTORIOUS)
+    mob:setMobLevel(math.random(82,84))
+    mob:setMod(xi.mod.DEF, 420)
+    mob:addMod(xi.mod.MDEF, 150)
+    mob:addMod(xi.mod.DMGMAGIC, -25)
+    mob:setMobMod(xi.mobMod.CHECK_AS_NM, 2)
+end
+
+xi.dynamis.teleport = function(mob, hideDuration)
+    if mob:isDead() then
+        return
+    end
+
+    mob:hideName(true)
+    mob:untargetable(true)
+    mob:SetAutoAttackEnabled(false)
+    mob:SetMagicCastingEnabled(false)
+    mob:SetMobAbilityEnabled(false)
+    mob:SetMobSkillAttack(false)
+    mob:entityAnimationPacket("kesu")
+
+    hideDuration = hideDuration or 5000
+
+    if hideDuration < 1500 then
+        hideDuration = 1500
+    end
+
+    mob:timer(hideDuration, function(mob)
+    mob:hideName(false)
+    mob:untargetable(false)
+    mob:SetAutoAttackEnabled(true)
+    mob:SetMagicCastingEnabled(true)
+    mob:SetMobAbilityEnabled(true)
+    mob:SetMobSkillAttack(true)
+
+        if mob:isDead() then
+            return
+        end
+
+        mob:entityAnimationPacket("deru")
+    end)
+end
+
+--------------------------------------------
+--            Dynamis Mob Death           --
+--------------------------------------------
+
+xi.dynamis.mobOnDeath = function (mob, mobList, msg, mobVar)
+    local zone = mob:getZone()
+    local mobIndex = mob:getLocalVar("MobIndex")
+    if mob:getLocalVar("dynamisMobOnDeathTriggered") == 1 then return -- Don't trigger more than once.
+    else -- Stops execution of code below if the above is true.
+        if mobVar ~= nil then zone:setLocalVar(mobVar, 1) end -- Set Death Requirements Variable
+        if mobIndex ~= nil and xi.dynamis.mobList[mobIndex].timeExtension ~= nil then mob:addTimeToDynamis(zone, xi.dynamis.mobList[mobIndex].timeExtension, msg) end -- Add Time
+        mob:resetLocalVars() -- Reset local vars just in case.
+        mob:setLocalVar("dynamisMobOnDeathTriggered", 1) -- onDeath lua happens once per party member that killed the mob, but we want this to only run once per mob
+    end
+end
+
+m:addOverride("xi.dynamis.megaBossOnDeath", function(mob, player, mobVar)
+    local zoneID = mob:getZoneID()
+    if mob:getLocalVar("GaveTimeExtension") ~= 1 then -- Ensure we don't give more than 1 time extension.
+        xi.dynamis.mobOnDeath(mob, xi.dynamis.mobList[zoneID], xi.dynamis.dynaInfoEra[zoneID].text.DYNAMIS_TIME_EXTEND, mobVar) -- Process time extension and wave spawning
+        local winQM = GetNPCByID(xi.dynamis.dynaInfoEra[zoneID].winQM) -- Set winQM
+        local pos = mob:getPos()
+        winQM:setPos(pos.x,pos.y,pos.z,pos.rot) -- Set winQM to death pos
+        winQM:setStatus(xi.status.NORMAL) -- Make visible
+        mob:setLocalVar("GaveTimeExtension", 1)
+    end
+    player:addTitle(xi.dynamis.dynaInfoEra[zoneID].winTitle) -- Give player the title
+end)
+
+--------------------------------------------
+--        Dynamis Statue Functions        --
+--------------------------------------------
+
+xi.dynamis.statueOnFight = function(mob, target)
+    if mob:getHP() == 1 then -- If my HP = 1
+        if mob:AnimationSub() == 2 then -- I am an HP statue
+            mob:stun(100)
+            mob:timer(100, function(mob) mob:useMobAbility(1124) end) -- Use Recover HP
+        elseif mob:AnimationSub() == 3 then -- I am an MP statue
+            mob:stun(100)
+            mob:timer(100, function(mob) mob:useMobAbility(1125) end) -- Use Recover MP
+        end
+    end
 end
 
 return m

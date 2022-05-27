@@ -10,7 +10,7 @@ require("scripts/globals/zone")
 ----------------------------------------------------------------------------------------------------
 --                                      Instructions                                              --
 ----------------------------------------------------------------------------------------------------
--- CAUTION: Wherever a value is skipped insert nil.
+-- CAUTION: Wherever a value is skipped insert 0.
 --
 -- 1. MobIndex information is derrived from the group ID used in Enedin.
 --    Note: All mob indexes should have a comment with the full group ID.
@@ -35,7 +35,7 @@ require("scripts/globals/zone")
 --    NOTE: These should only be made for non-standard/zoneID specific mobs.
 --    Statue Ex. xi.dynamis.mobList[zoneID][MobIndex].info = {"Statue", "Sergeant Tombstone", nil, nil, nil}
 --    Nightmare Ex. xi.dynamis.mobList[zoneID][MobIndex].info = {"Nightmare", "Nightmare Scorpion", nil, nil, nil}
---    Non-beastman NM Ex. xi.dynamis.mobList[zoneID][MobIndex].info = {"NM", "Apocalyptic Beast", nil, nil, "Apocalyptic_Beast_killed"}
+--    Non-beastman NM Ex. xi.dynamis.mobList[zoneID][MobIndex].info = {"NM", "Apocalyptic Beast", 0, 0, "Apocalyptic_Beast_killed"}
 --    Beastmen NM Ex. xi.dynamis.mobList[zoneID][MobIndex].info = {"NM", "ElvaanSticker Bxafraff", "Orc", "DRG", "ElvaanSticker_Bxafraff_killed"}
 --
 -- 6. xi.dynamis.mobList[zoneID][MobIndex].mobchildren is used to determine the number of each job to spawn.
@@ -43,7 +43,7 @@ require("scripts/globals/zone")
 --    This system will automatically determine what family each of these jobs encode to.
 --    For Nightmare mob spawns, simply encode the number of children in xi.dynamis.mobList[zoneID][MobIndex].mobchildren[1] (aka #WAR).
 --    Ex. xi.dynamis.mobList[zoneID][MobIndex].mobchildren = {#WAR, #MNK, #WHM, #BLM, #RDM, #THF, #PLD, #DRK, #BST, #BRD, #RNG, #SAM, #NIN, #DRG, #SMN}
---    Ex. For 2 Wars: xi.dynamis.mobList[zoneID][MobIndex].mobchildren = {2, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil}
+--    Ex. For 2 Wars: xi.dynamis.mobList[zoneID][MobIndex].mobchildren = {2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
 --
 -- 7.  xi.dynamis.mobList[zoneID][MobIndex].nmchildren is used to spawn specific NMs outlined in xi.dynamis.mobList[zoneID][MobIndex].info
 --     MobIndex is the index of the mob spawning the NM, MobIndex(NM) points to which NM in .info it should spawn.
@@ -69,7 +69,8 @@ require("scripts/globals/zone")
 --                               Dependency Setup Section (IGNORE)                                --
 ----------------------------------------------------------------------------------------------------
 local zoneID = xi.zone.DYNAMIS_BASTOK
-local i = 0
+local i = 1
+local zone = GetZone(zoneID)
 xi = xi or {} -- Ignore me I just set the global.
 xi.dynamis = xi.dynamis or {} -- Ignore me I just set the global.
 xi.dynamis.mobList = xi.dynamis.mobList or { } -- Ignore me I just set the global.
@@ -81,7 +82,6 @@ xi.dynamis.mobList[zoneID].waveDefeatRequirements = { } -- Ignore me, I just sta
 xi.dynamis.mobList[zoneID].waveDefeatRequirements[1] = { } -- Ignore me, I just allow for wave 1 spawning.
 xi.dynamis.mobList[zoneID].maxWaves = 3 -- Ignore me because Oph told me to
 
--- Used to populate mobList with dummy index values.
 while i < 400 do
     table.insert(xi.dynamis.mobList[zoneID], i, { id = i})
     i = i + 1
