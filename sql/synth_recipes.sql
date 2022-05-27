@@ -4731,6 +4731,15 @@ INSERT INTO `synth_recipes` VALUES (75509,1,0,0,103,0,0,0,0,0,0,4100,4242,12548,
 INSERT INTO `synth_recipes` VALUES (75510,1,0,0,100,0,0,0,0,0,0,4100,4242,12932,0,0,0,0,0,0,0,855,1225,654,655,1,6,2,1,'Adaman Sabatons (desynth)'); -- use synth lvl, wiki results
 INSERT INTO `synth_recipes` VALUES (75511,0,0,0,0,0,0,0,0,0,101,4096,4238,615,4356,5568,5569,5688,0,0,0,6601,6601,6602,6602,6,8,6,8,'Omelette Sandwich'); -- BG Wiki and JP Wiki
 INSERT INTO `synth_recipes` VALUES (75512,1,0,0,0,68,0,0,0,0,0,4100,4242,13316,0,0,0,0,0,0,0,746,746,746,746,1,1,2,2,'Platinum Earring (desynth)'); -- ffxiclopedia
+INSERT INTO `synth_recipes` VALUES (75512,1,0,0,91,0,0,0,0,0,0,4100,4242,18405,0,0,0,0,0,0,0,2302,2302,2302,2302,1,1,2,2,'Jadagna_Desynth');
+INSERT INTO `synth_recipes` VALUES (75513,1,0,0,47,0,0,0,0,0,0,4100,4242,2542,0,0,0,0,0,0,0,652,654,654,654,1,1,1,1,'Goblin_mess_tin_desynth');
+INSERT INTO `synth_recipes` VALUES (75514,1,0,0,0,85,0,0,0,0,0,4100,4242,13357,0,0,0,0,0,0,0,813,813,746,746,1,1,1,2,'Angels_Earring_Desynth');
+INSERT INTO `synth_recipes` VALUES (75515,1,0,22,0,0,0,0,0,0,0,4100,4242,2543,0,0,0,0,0,0,0,712,4379,5474,5789,1,1,4,4,'Goblin_weel_desynth');
+INSERT INTO `synth_recipes` VALUES (75516,1,0,0,102,60,0,0,0,0,0,4100,4242,14828,0,0,0,0,0,0,0,914,1225,654,655,1,6,1,1,'Gem_Gauntlets_Desynth');
+INSERT INTO `synth_recipes` VALUES (75517,1,0,0,98,60,0,0,0,0,0,4100,4242,13941,0,0,0,0,0,0,0,914,1225,654,655,1,6,1,1,'Gem_Barbuta_Desynth');
+INSERT INTO `synth_recipes` VALUES (75518,1,0,0,91,0,0,0,0,0,0,4100,4242,18406,0,0,0,0,0,0,0,2302,2302,2302,2302,1,1,2,2,'Jadagna_+1_Desynth');
+INSERT INTO `synth_recipes` VALUES (75519,1,0,0,0,85,0,0,0,0,0,4100,4242,13414,0,0,0,0,0,0,0,813,813,746,746,1,1,1,2,'Heavens_Earring_Desynth');
+INSERT INTO `synth_recipes` VALUES (75520,1,0,0,0,85,0,0,0,0,0,4100,4242,14719,0,0,0,0,0,0,0,813,813,746,746,1,1,1,2,'Heavens_Earring_+1_Desynth');
 
 -- -----------
 -- RECIPES END
