@@ -700,7 +700,7 @@ xi.dynamis.handleDynamis = function(zone)
 
     for _, player in pairs(playersInZone) do -- Iterates through player list to do stuff.
         if player:getCharVar("Requires_Initial_Update") == 1 then
-            xi.dynamis.updatePlayerHourglass(player)
+            xi.dynamis.updatePlayerHourglass(player, zoneDynamistoken)
             player:setCharVar("Requires_Initial_Update", 0)
         end
         if player:getGMLevel() < 2 then -- GMs can stay in zone until expiry.
@@ -784,7 +784,7 @@ xi.dynamis.addTimetoDynamis = function(zone, extensionTime, msg)
 
     for _, player in pairs(playersInZone) do
         player:messageSpecial(zones[zone].text.DYNAMIS_TIME_EXTEND, extensionTime) -- Send extension time message.
-        xi.dynamis.updatePlayerHourglass(player) -- Runs hourglass update function per player.
+        xi.dynamis.updatePlayerHourglass(player, zoneDynamisToken) -- Runs hourglass update function per player.
     end
 
     local timeRemaining = xi.dynamis.getDynaTimeRemaining(zone, zoneTimepoint) -- Gets the time remaining in seconds.
@@ -941,11 +941,11 @@ xi.dynamis.verifyTradeHourglass = function(player, trade)
     end
 end
 
-xi.dynamis.updatePlayerHourglass = function(player)
+xi.dynamis.updatePlayerHourglass = function(player, zoneDynamisToken)
     local zoneID = player:getZoneID()
     local zoneTimepoint = GetServerVariable(string.format("[DYNA]Timepoint_%s", zoneID))
 
-    player:updateHourglass(zoneID, zoneTimepoint)
+    player:updateHourglass(zoneDynamisToken, zoneTimepoint)
 end
 
 --------------------------------------------

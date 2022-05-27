@@ -13,21 +13,23 @@ local item_object = {}
 item_object.onItemCheck = function(target)
     local targetZone = target:getZoneID()
     local zoneID = xi.dynamis.dynaInfoEra[targetZone].dynaZone
-    local zoneOriginalRegistrant = GetServerVariable(string.format("[DYNA]OriginalRegistrant_%s", zoneID))
-    if not target:isPC() then -- If not a player then don't replicate (Will big break things).
-        return
-    end
-    if zoneOriginalRegistrant == 0 then -- Can't replicate after a new dyna is made in the zone.
-        target:messageBasic(xi.msg.basic.ITEM_UNABLE_TO_USE)
-        return
+    local zoneToken = GetServerVariable(string.format("[DYNA]Token_%s", zoneID))
+    local validateresult = target:validateHourglass(zoneToken)
+    local result = 0
+    
+    if target:getFreeSlotsCount() == 0 then
+        result = xi.msg.basic.ITEM_NO_USE_INVENTORY
     end
     if target:getZone():getType() == xi.zoneType.DYNAMIS then -- Can't replicate in Dynamis
-        target:messageBasic(xi.msg.basic.ITEM_UNABLE_TO_USE)
-        return
+        result = xi.msg.basic.ITEM_UNABLE_TO_USE
     end
+    if  validateresult == false then
+        result = xi.msg.basic.ITEM_UNABLE_TO_USE
+    end
+    return result
 end
 
-item_object.onItemUse = function(target, item)
+item_object.onItemUse = function(target)
     local targetZone = target:getZoneID()
     local zoneID = xi.dynamis.dynaInfoEra[targetZone].dynaZone
     local zoneToken = GetServerVariable(string.format("[DYNA]Token_%s", zoneID))

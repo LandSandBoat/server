@@ -54,13 +54,14 @@ xi.dynamis.parentOnEngaged = function(mob, target)
     if eyes ~= nil then
         mob:setAnimationSub(eyes)
     end
-    if not xi.dynamis.mobList[zoneID][oMobIndex].nmchildren == nil then
-        for _, index in pairs(xi.dynamis.mobList[zoneID][oMobIndex].nmchildren) do
-            if xi.dynamis.mobList[zoneID][oMobIndex].nmchildren[index] == true or xi.dynamis.mobList[zoneID][oMobIndex].nmchildren[index] == false then
+    if xi.dynamis.mobList[zoneID][oMobIndex].nmchildren ~= nil then
+        for index, value in pairs(xi.dynamis.mobList[zoneID][oMobIndex].nmchildren) do
+            if index == true or index == false then
                 index = index + 1
             else
                 local forceLink = xi.dynamis.mobList[zoneID][oMobIndex].nmchildren[1]
-                local mobIndex = xi.dynamis.mobList[zoneID][oMobIndex].nmchildren[index]
+                local mobIndex = xi.dynamis.mobList[zoneID][oMobIndex].nmchildren[value]
+                print(mobIndex)
                 local mobType = xi.dynamis.mobList[zoneID][mobIndex].info[1]
                 if mobType == "NM" then -- NMs
                     xi.dynamis.nmDynamicSpawn(mobIndex, oMobIndex, forceLink, zoneID, target, oMob)
@@ -79,15 +80,10 @@ end
 
 xi.dynamis.normalDynamicSpawn = function(mob, oMobIndex)
     local mobFamily = mob:getFamily()
-    print(string.format("mobFamily: %s", mobFamily))
     local mobID = mob:getID()
-    print(string.format("oMobID: %s", mobID))
     local mobZoneID = mob:getZoneID()
-    print(string.format("zoneID: %s", mobZoneID))
     local oMob = GetMobByID(mobID)
-    print(string.format("oMob: %s", oMob))
     local zone = GetZone(mobZoneID)
-    print(string.format("zone: %s", zone))
     local normalMobLookup =
     {
         -- NOTE: To use default SpellList and SkillList set to nil.

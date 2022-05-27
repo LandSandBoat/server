@@ -59,13 +59,12 @@ class DynaFuncModule : public CPPModule
                 ref<uint8>(PItem->m_extra,  0x10) = zoneID;
                 ref<uint32>(PItem->m_extra, 0x14) = dynamistoken;
                 charutils::AddItem(PCharEntity, LOC_INVENTORY, PItem);
-                printf("Dynamis Token: %i", PItem->m_extra[0x14]);
             }
         };
 
         /* player:updateHourglass(dynamistoken, timepoint)
                                                    v----------object------------v  v------param0-----v  v----param1----v */
-        lua["CBaseEntity"]["updateHourglass"] = [](CLuaBaseEntity* PLuaBaseEntity, uint8 zoneID, uint32 timepoint)
+        lua["CBaseEntity"]["updateHourglass"] = [](CLuaBaseEntity* PLuaBaseEntity, uint32 dynamistoken, uint32 timepoint)
         {
             TracyZoneScoped;
 
@@ -85,9 +84,9 @@ class DynaFuncModule : public CPPModule
             if (auto* PCharEntity = static_cast<CCharEntity*>(PEntity))
             {
                 uint8 numitemsupdated = 0;
-                PCharEntity->getStorage(LOC_INVENTORY)->ForEachItem([&PCharEntity, &zoneID, &timepoint, &numitemsupdated](CItem* PItem)
+                PCharEntity->getStorage(LOC_INVENTORY)->ForEachItem([&PCharEntity, &dynamistoken, &timepoint, &numitemsupdated](CItem* PItem)
                 {
-                    if (PItem != nullptr && PItem->getID() == HOURGLASS_ID && PItem->m_extra[0x10] == zoneID)
+                    if (PItem != nullptr && PItem->getID() == HOURGLASS_ID && ref<uint32>(PItem->m_extra, 0x14) == dynamistoken)
                     {
                         ref<uint32>(PItem->m_extra, 0x08) = timepoint; // Update hourglass timestamp.
                         PCharEntity->pushPacket(new CInventoryItemPacket(PItem, LOC_INVENTORY, PItem->getSlotID()));
@@ -99,6 +98,7 @@ class DynaFuncModule : public CPPModule
                     PCharEntity->pushPacket(new CInventoryFinishPacket());
                 }
             }
+            return;
         };
 
         lua["CBaseEntity"]["duplicateHourglass"] = [](CLuaBaseEntity* PLuaBaseEntity, uint8 zoneID, uint32 dynamistoken, uint8 originalregistrant)
@@ -115,21 +115,23 @@ class DynaFuncModule : public CPPModule
 
             if (PCharEntity != nullptr)
             {
+                CItem* PItem = itemutils::GetItem(HOURGLASS_ID);
                 int i = 1;
                 while (i <= 2)
                 {
-                    CItem* PItem = itemutils::GetItem(HOURGLASS_ID);
-                    PItem->setQuantity(1);
+                        PItem->setQuantity(1);
 
-                    ref<uint8>(PItem->m_extra,  0x02) = 1;
-                    ref<uint32>(PItem->m_extra, 0x04) = originalregistrant;
-                    ref<uint32>(PItem->m_extra, 0x0C) = currentEpoch();
-                    ref<uint8>(PItem->m_extra,  0x10) = zoneID;
-                    ref<uint32>(PItem->m_extra, 0x14) = dynamistoken;
-                    charutils::AddItem(PCharEntity, LOC_INVENTORY, PItem);
-                    ++i;
+                        ref<uint8>(PItem->m_extra,  0x02) = 1;
+                        ref<uint32>(PItem->m_extra, 0x04) = originalregistrant;
+                        ref<uint32>(PItem->m_extra, 0x0C) = currentEpoch();
+                        ref<uint8>(PItem->m_extra,  0x10) = zoneID;
+                        ref<uint32>(PItem->m_extra, 0x14) = dynamistoken;
+
+                        charutils::AddItem(PCharEntity, LOC_INVENTORY, PItem);
+                        ++i;
                 }
             }
+            return;
         };
 
         /* player:validateHourglass() - Used to update hourglasses in a loop to minimize SQL queries, only updates timepoint. Can only be run while in dynamis.
@@ -151,7 +153,7 @@ class DynaFuncModule : public CPPModule
                 for (int slotIndex = 1; slotIndex <= PContainer->GetSize(); ++slotIndex)
                 {
                     CItem* PItem = PContainer->GetItem(slotIndex);
-                    if (PItem != nullptr && PItem->getID() == HOURGLASS_ID && PItem->m_extra[0x14] == dynamistoken)
+                    if (PItem != nullptr && PItem->getID() == HOURGLASS_ID && ref<uint32>(PItem->m_extra, 0x14) == dynamistoken)
                     {
                         return true;
                     }
@@ -164,7 +166,7 @@ class DynaFuncModule : public CPPModule
         lua["CBaseEntity"]["getHourglassRegistrant"] = [](CLuaItem* PLuaBaseItem)
         {
             TracyZoneScoped;
-            return PLuaBaseItem->GetItem()->m_extra[0x04];
+            return ref<uint32>(PLuaBaseItem->GetItem()->m_extra, 0x04);
         };
 
         /*item:getHourglassZone() - Returns a value for the zoneID from the hourglass' m_extra.
@@ -172,7 +174,7 @@ class DynaFuncModule : public CPPModule
         lua["CBaseEntity"]["getHourglassZone"] = [](CLuaItem* PLuaBaseItem)
         {
             TracyZoneScoped;
-            return PLuaBaseItem->GetItem()->m_extra[0x10];
+            return ref<uint8>(PLuaBaseItem->GetItem()->m_extra, 0x10);
         };
 
         /*item:getHourglassTimePoint() - Returns a value for the timepoint from the hourglass' m_extra.
@@ -180,7 +182,15 @@ class DynaFuncModule : public CPPModule
         lua["CBaseEntity"]["getHourglassTimePoint"] = [](CLuaItem* PLuaBaseItem)
         {
             TracyZoneScoped;
-            return PLuaBaseItem->GetItem()->m_extra[0x0C];
+            return ref<uint32>(PLuaBaseItem->GetItem()->m_extra, 0x0C);
+        };
+
+        /*item:getHourglassToken() - Returns a value for the timepoint from the hourglass' m_extra.
+                                                       v-------object------v */
+        lua["CBaseEntity"]["getHourglassToken"] = [](CLuaItem* PLuaBaseItem)
+        {
+            TracyZoneScoped;
+            return ref<uint32>(PLuaBaseItem->GetItem()->m_extra, 0x14);
         };
 
         lua["CBaseEntity"]["setMobType"] = [](CLuaBaseEntity* PLuaBaseEntity, uint8 mobType)
@@ -195,11 +205,9 @@ class DynaFuncModule : public CPPModule
             }
 
             auto* PMob = static_cast<CMobEntity*>(PEntity);
-            printf("PMob: %p\n", PMob);
 
             if (mobType >= MOBTYPE_NORMAL && mobType <= MOBTYPE_EVENT)
             {
-                printf("Setting MobType: %i\n", mobType);
                 PMob->m_Type = mobType;
             }
         };
