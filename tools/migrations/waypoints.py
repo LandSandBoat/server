@@ -8,7 +8,7 @@ def check_preconditions(cur):
 	return
 
 def needs_to_run(cur):
-	# Ensure abyssea_conflux column exists in char_unlocks
+	# Ensure waypoints column exists in char_unlocks
 	cur.execute("SHOW COLUMNS FROM char_unlocks LIKE 'waypoints'")
 	if not cur.fetchone():
 		return True

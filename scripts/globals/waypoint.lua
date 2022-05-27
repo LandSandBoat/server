@@ -168,7 +168,7 @@ local crystalTradeValues =
 local function getWaypointIndex(npcObj)
     local waypointNpcId = npcObj:getID()
     local zoneObject    = npcObj:getZone()
-    local waypointList  = zoneObject:queryEntitiesByName('Waypoint') -- TODO: Fallback to Enigmatic devices if not found
+    local waypointList  = zoneObject:queryEntitiesByName('Waypoint')
 
     for indexVal, npcData in ipairs(waypointList) do
         if npcData:getID() == waypointNpcId then
@@ -235,15 +235,16 @@ xi.waypoint.onTrigger = function(player, npc)
     local waypointIndex = getWaypointIndex(npc)
     local zoneId        = player:getZoneID()
 
-    print(player:getTeleportMenu(xi.teleport.type.WAYPOINT))
-
     if
         player:hasTeleport(xi.teleport.type.WAYPOINT, waypointInfo[waypointIndex][1]) or
         zoneId == xi.zone.LOWER_JEUNO
     then
         local unlockedWaypoints = player:getTeleportTable(xi.teleport.type.WAYPOINT)
         local destConfirmation  = player:getTeleportMenu(xi.teleport.type.WAYPOINT)[1] and 1 or 0
-        local menuParams = bit.bor(4, bit.bor(bit.lshift(destConfirmation, 3))) -- TODO: (nibble: Bit 2 here is discount, Bit 3 is accept/decline for simple/normal transport)
+
+        -- Note: The '4' Value is setting the discount value for waypoints, which appears to always
+        -- be the case on retail now.
+        local menuParams = bit.bor(4, bit.bor(bit.lshift(destConfirmation, 3)))
 
         -- Waypoint Event ID
         local eventId = waypointInfo[waypointIndex][3]
