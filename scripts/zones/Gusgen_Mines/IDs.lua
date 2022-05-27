@@ -50,6 +50,12 @@ zones[xi.zone.GUSGEN_MINES] =
         PUDDING_OFFSET      = 17580338,
         APPARATUS_ELEMENTAL = 17580340,
         AROMA_FLY           = 17580341,
+        ASPHYXIATED_AMSEL   = 17580044,
+        BURNED_BERGMANN     = 17580042,
+        CRUSHED_KRAUSE      = 17580040,
+        PULVERIZED_PFEFFER  = 17580041,
+        SMOTHERED_SCHMIDT   = 17580039,
+        WOUNDED_WURFEL      = 17580043,
     },
     npc =
     {
