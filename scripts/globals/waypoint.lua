@@ -98,8 +98,9 @@ local waypointInfo =
     [94] = { 137, 9, 5003, {     9.24,    23,  162.803,  63, xi.zone.KAMIHR_DRIFTS } }, -- Bivouac #3
     [95] = { 138, 9, 5004, { -228.942, 3.567,  364.512, 127, xi.zone.KAMIHR_DRIFTS } }, -- Bivouac #4
 
-    -- Jeuno
-    [100] = { nil, 10, 10121, { -33.550, 0, -31.840, 150, xi.zone.LOWER_JEUNO } }, -- Lower Jeuno (Special case, Default Active)
+    -- Jeuno (Special case, Default Active, uses multiple options)
+    [100] = { nil, 10, 10121, { -33.550, 0, -31.840, 150, xi.zone.LOWER_JEUNO } },
+    [101] = { nil, 10, 10121, { -33.550, 0, -31.840, 150, xi.zone.LOWER_JEUNO } },
 
     -- Runes (One-way, bitmask determined by key items)
     [200] = { nil, nil, nil, {   96.642,  -0.199,     -4.8, 160, xi.zone.NORTHERN_SAN_DORIA } }, -- Northern San d'Oria
@@ -180,16 +181,13 @@ local function getWaypointIndex(npcObj)
 end
 
 local function getRuneMask(player)
-    local resultMask = utils.MAX_UINT32
+    local resultMask = utils.MAX_UINT32 - 1
 
     for bitIndex, keyItem in ipairs(runeKeyItems) do
         if player:hasKeyItem(keyItem) then
             resultMask = utils.mask.setBit(resultMask, bitIndex, false)
         end
     end
-
-    -- TODO: This seems to remain 0
-    resultMask = utils.mask.setBit(resultMask, 0, false)
 
     return resultMask
 end
@@ -205,7 +203,7 @@ xi.waypoint.onTrade = function(player, npc, trade)
         return
     end
 
-    for crystalId, crystalValue in ipairs(crystalTradeValues) do
+    for crystalId, crystalValue in pairs(crystalTradeValues) do
         local numCrystals = trade:getItemQty(crystalId)
 
         if numCrystals > 0 then
@@ -215,6 +213,8 @@ xi.waypoint.onTrade = function(player, npc, trade)
     end
 
     if kineticValue > 0 then
+        player:confirmTrade()
+
         if currentUnits + kineticValue > 50000 then
             local lostUnits = currentUnits + kineticValue - 50000
 
@@ -223,11 +223,11 @@ xi.waypoint.onTrade = function(player, npc, trade)
 
             player:setCurrency('kinetic_unit', 50000)
         else
-            player:messageSpecial(ID.text.ARTIFACT_HAS_BEEN_CHARGED, kineticValue, kineticValue + currentUnits)
+            player:messageName(ID.text.ARTIFACT_HAS_BEEN_CHARGED, nil, kineticValue, kineticValue + currentUnits)
             player:addCurrency('kinetic_unit', kineticValue)
         end
     else
-        player:messageSpecial(ID.text.CANNOT_RECEIVE_KINETIC)
+        player:messageName(ID.text.CANNOT_RECEIVE_KINETIC, nil)
     end
 end
 
@@ -236,8 +236,8 @@ xi.waypoint.onTrigger = function(player, npc)
     local zoneId        = player:getZoneID()
 
     if
-        player:hasTeleport(xi.teleport.type.WAYPOINT, waypointInfo[waypointIndex][1]) or
-        zoneId == xi.zone.LOWER_JEUNO
+        zoneId == xi.zone.LOWER_JEUNO or
+        player:hasTeleport(xi.teleport.type.WAYPOINT, waypointInfo[waypointIndex][1])
     then
         local unlockedWaypoints = player:getTeleportTable(xi.teleport.type.WAYPOINT)
         local destConfirmation  = player:getTeleportMenu(xi.teleport.type.WAYPOINT)[1] and 1 or 0
@@ -253,8 +253,7 @@ xi.waypoint.onTrigger = function(player, npc)
         -- and the Index value of the waypoint (See: waypointInfo table)
         local p0 = bit.lshift(player:getCurrency('kinetic_unit'), 16) + bit.lshift(menuParams, 12) + waypointIndex
 
-        -- Second event parameter packs an initial bit which could be related to having the charter permit,
-        -- along with the unlocked geomagnetrons in Eastern and Western Adoulin
+        -- Eastern and Western Adoulin Waypoints
         local p1 = unlockedWaypoints[1]
 
         -- Third event parameter is an inverted bitfield for all but bit 0, the remainder of the field is set
