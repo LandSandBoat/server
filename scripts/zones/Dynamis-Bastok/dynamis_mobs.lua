@@ -255,9 +255,9 @@ xi.dynamis.mobList[zoneID][159].info = {"NM", "Effigy Shield", "Quadav", "BRD", 
 xi.dynamis.mobList[zoneID][160].info = {"NM", "Effigy Shield", "Quadav", "DRK", nil } -- Effigy Shield
 xi.dynamis.mobList[zoneID][161].info = {"NM", "Effigy Shield", "Quadav", "SAM", nil } -- Effigy Shield
 
-xi.dynamis.mobList[zoneID][162].info = {nil, "Vanguard Vindicator", "Quadav", "WAR", nil } -- 10min TE
-xi.dynamis.mobList[zoneID][163].info = {nil, "Vanguard Constable", "Quadav", "WHM", nil } -- 10min TE
-xi.dynamis.mobList[zoneID][164].info = {nil, "Vanguard Militant", "Quadav", "MNK", nil } -- 10min TE
+xi.dynamis.mobList[zoneID][162].info = {"TE Normal", "Vanguard Vindicator", "Quadav", "WAR", nil } -- 10min TE
+xi.dynamis.mobList[zoneID][163].info = {"TE Normal", "Vanguard Constable", "Quadav", "WHM", nil } -- 10min TE
+xi.dynamis.mobList[zoneID][164].info = {"TE Normal", "Vanguard Militant", "Quadav", "MNK", nil } -- 10min TE
 
 
 ----------------------------------------------------------------------------------------------------
@@ -761,26 +761,20 @@ xi.dynamis.mobList[zoneID][102].patrolPath = {   36,    0,    8,     21,    0,  
 ------------------------------------------
 -- xi.dynamis.mobList[zoneID][MobIndex].eyes = xi.dynamis.eye.BLUE -- Flags for blue eyes. (HP)
 -- xi.dynamis.mobList[zoneID][MobIndex].eyes = xi.dynamis.eye.GREEN -- Flags for green eyes. (MP)
--- xi.dynamis.mobList[zoneID][MobIndex].eyes = xi.dynamis.eye.RED -- Flags for red eyes. (TE)
 
-xi.dynamis.mobList[zoneID][1  ].eyes = xi.dynamis.eye.RED
 xi.dynamis.mobList[zoneID][7  ].eyes = xi.dynamis.eye.BLUE
 xi.dynamis.mobList[zoneID][8  ].eyes = xi.dynamis.eye.BLUE
-xi.dynamis.mobList[zoneID][19 ].eyes = xi.dynamis.eye.RED
 xi.dynamis.mobList[zoneID][25 ].eyes = xi.dynamis.eye.BLUE
 xi.dynamis.mobList[zoneID][26 ].eyes = xi.dynamis.eye.GREEN
 xi.dynamis.mobList[zoneID][31 ].eyes = xi.dynamis.eye.GREEN
 xi.dynamis.mobList[zoneID][38 ].eyes = xi.dynamis.eye.GREEN
 xi.dynamis.mobList[zoneID][39 ].eyes = xi.dynamis.eye.BLUE
-xi.dynamis.mobList[zoneID][41 ].eyes = xi.dynamis.eye.RED
 xi.dynamis.mobList[zoneID][42 ].eyes = xi.dynamis.eye.BLUE
 xi.dynamis.mobList[zoneID][81 ].eyes = xi.dynamis.eye.GREEN
 xi.dynamis.mobList[zoneID][82 ].eyes = xi.dynamis.eye.BLUE
 xi.dynamis.mobList[zoneID][85 ].eyes = xi.dynamis.eye.BLUE
-xi.dynamis.mobList[zoneID][89 ].eyes = xi.dynamis.eye.RED
 xi.dynamis.mobList[zoneID][92 ].eyes = xi.dynamis.eye.BLUE
 xi.dynamis.mobList[zoneID][104].eyes = xi.dynamis.eye.GREEN
-xi.dynamis.mobList[zoneID][110].eyes = xi.dynamis.eye.RED
 xi.dynamis.mobList[zoneID][112].eyes = xi.dynamis.eye.BLUE
 xi.dynamis.mobList[zoneID][114].eyes = xi.dynamis.eye.GREEN
 xi.dynamis.mobList[zoneID][116].eyes = xi.dynamis.eye.BLUE

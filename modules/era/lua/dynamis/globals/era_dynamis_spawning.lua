@@ -47,7 +47,7 @@ end
 
 xi.dynamis.parentOnEngaged = function(mob, target)
     local zoneID = mob:getZoneID()
-    local oMobIndex = mob:getLocalVar("MobIndex")
+    local oMobIndex = mob:getZone():getLocalVar(string.format("MobIndex_%s", mob:getID()))
     print(string.format("oMobIndex: %s",oMobIndex))
     local oMob = mob
     local eyes = mob:getLocalVar("eyeColor")
@@ -55,19 +55,17 @@ xi.dynamis.parentOnEngaged = function(mob, target)
         mob:setAnimationSub(eyes)
     end
     if xi.dynamis.mobList[zoneID][oMobIndex].nmchildren ~= nil then
-        for index, value in pairs(xi.dynamis.mobList[zoneID][oMobIndex].nmchildren) do
-            if index == true or index == false then
+        for index, MobIndex in pairs(xi.dynamis.mobList[zoneID][oMobIndex].nmchildren) do
+            if MobIndex == true or MobIndex == false then
                 index = index + 1
             else
                 local forceLink = xi.dynamis.mobList[zoneID][oMobIndex].nmchildren[1]
-                local mobIndex = xi.dynamis.mobList[zoneID][oMobIndex].nmchildren[value]
-                print(mobIndex)
-                local mobType = xi.dynamis.mobList[zoneID][mobIndex].info[1]
+                local mobType = xi.dynamis.mobList[zoneID][MobIndex].info[1]
                 if mobType == "NM" then -- NMs
-                    xi.dynamis.nmDynamicSpawn(mobIndex, oMobIndex, forceLink, zoneID, target, oMob)
+                    xi.dynamis.nmDynamicSpawn(MobIndex, oMobIndex, forceLink, zoneID, target, oMob)
                     index = index + 1
-                elseif mobType ~= nil then -- Nightmare Mobs and Statues
-                    xi.dynamis.nonStandardDynamicSpawn(mobIndex, oMob, forceLink, zoneID, target, oMobIndex)
+                else -- Nightmare Mobs and Statues
+                    xi.dynamis.nonStandardDynamicSpawn(MobIndex, oMob, forceLink, zoneID, target, oMobIndex)
                     index = index + 1
                 end
             end
@@ -281,7 +279,7 @@ xi.dynamis.normalDynamicSpawn = function(mob, oMobIndex)
                 onMobRoam = function(mob) xi.dynamis.mobOnRoam(mob) end,
                 onMobRoamAction = function(mob) xi.dynamis.mobOnRoamAction(mob) end,
                 onMobDeath = function(mob, playerArg, isKiller)
-                    xi.dynamis.mobOnDeath(mob, zones[mob:getZoneID()].text.DYNAMIS_TIME_EXTEND)
+                    xi.dynamis.mobOnDeath(mob)
                 end,
             })
             mob:setSpawn(oMob:getXPos()+math.random()*6-3, oMob:getYPos()-0.3, oMob:getZPos()+math.random()*6-3, oMob:getRotPos())
@@ -305,10 +303,21 @@ end
 xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID, target, oMobIndex)
     local mobMobType = xi.dynamis.mobList[zoneID][mobIndex].info[1]
     local mobName = xi.dynamis.mobList[zoneID][mobIndex].info[2]
-    local xPos = xi.dynamis.mobList[zoneID][mobIndex].pos[1]
-    local yPos = xi.dynamis.mobList[zoneID][mobIndex].pos[2]
-    local zPos = xi.dynamis.mobList[zoneID][mobIndex].pos[3]
-    local rPos = xi.dynamis.mobList[zoneID][mobIndex].pos[4]
+    local xPos = 0
+    local yPos = 0
+    local zPos = 0
+    local rPos = 0
+    if xi.dynamis.mobList[zoneID][mobIndex].pos ~= nil then
+        xPos = xi.dynamis.mobList[zoneID][mobIndex].pos[1]
+        yPos = xi.dynamis.mobList[zoneID][mobIndex].pos[2]
+        zPos = xi.dynamis.mobList[zoneID][mobIndex].pos[3]
+        rPos = xi.dynamis.mobList[zoneID][mobIndex].pos[4]
+    elseif oMob ~= nil then
+        xPos = oMob:getXPos()+math.random()*6-3
+        yPos = oMob:getYPos()-0.3
+        zPos = oMob:getZPos()+math.random()*6-3
+        rPos = oMob:getRotPos()
+    end
     local zone = GetZone(zoneID)
     local nonStandardLookup =
     {
@@ -355,16 +364,32 @@ xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID,
             ["Nightmare Sheep"] = {"594d53746174" , 130, 134, 0, nil, nil}, -- Yagudo Statue (YMStat)
             ["Nightmare Fly"] = {"594d53746174" , 130, 134, 0, nil, nil}, -- Yagudo Statue (YMStat)
         },
+        ["TE Normal"] = 
+        {
+            ["Vanguard Vindicator"] = {"51574152", 19, 134, 0, nil, nil},
+            ["Vanguard Constable"] = {"5157484d", 29, 134, 0, nil, nil},
+            ["Vanguard Militant"] = {"514d4e4b", 25, 134, 0, nil, nil},
+        },
     }
     local mobFunctions =
     {
         ["Statue"] =
         {
             ["onMobSpawn"] = {function(mob) xi.dynamis.setStatueStats(mob, mobIndex) end},
+            ["onMobEngaged"] = {function(mob, target) xi.dynamis.parentOnEngaged(mob, target) end},
+            ["onMobFight"] = {function(mob) xi.dynamis.statueOnFight(mob) end},
         },
         ["Nightmare"] =
         {
             ["onMobSpawn"] = {function(mob) xi.dynamis.setMobStats(mob) end},
+            ["onMobEngaged"] = {function(mob, target) xi.dynamis.parentOnEngaged(mob, target) end},
+            ["onMobFight"] = {function(mob) xi.dynamis.statueOnFight(mob) end},
+        },
+        ["TE Normal"] =
+        {
+            ["onMobSpawn"] = {function(mob) xi.dynamis.setMobStats(mob) end},
+            ["onMobEngaged"] = {function(mob, target) end},
+            ["onMobFight"] = {function(mob) end},
         }
     }
     local mob = zone:insertDynamicEntity({
@@ -377,17 +402,17 @@ xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID,
         groupId = nonStandardLookup[mobMobType][mobName][2],
         groupZoneId = nonStandardLookup[mobMobType][mobName][3],
         onMobSpawn = mobFunctions[mobMobType]["onMobSpawn"][1],
-        onMobEngaged = function(mob) xi.dynamis.parentOnEngaged(mob, target) end,
-        onMobFight = function(mob) xi.dynamis.statueOnFight(mob) end,
+        onMobEngaged = mobFunctions[mobMobType]["onMobEngaged"][1],
+        onMobFight = mobFunctions[mobMobType]["onMobFight"][1],
         onMobRoam = function(mob) xi.dynamis.mobOnRoam(mob) end,
         onMobRoamAction = function(mob) xi.dynamis.mobOnRoamAction(mob) end,
         onMobDeath = function(mob, playerArg, isKiller)
-            xi.dynamis.mobOnDeath(mob, zones[zoneID].text.DYNAMIS_TIME_EXTEND)
+            xi.dynamis.mobOnDeath(mob)
         end,
     })
     mob:setSpawn(xPos, yPos, zPos, rPos)
     mob:spawn()
-    mob:setLocalVar("MobIndex", mobIndex)
+    mob:getZone():setLocalVar(string.format("MobIndex_%s", mob:getID()), mobIndex)
     mob:setDropID(nonStandardLookup[mobMobType][mobName][4])
     if nonStandardLookup[mobMobType][mobName][5] ~= nil then -- If SpellList ~= nil set SpellList
         mob:setSpellList(nonStandardLookup[mobMobType][mobName][5])
@@ -402,6 +427,7 @@ xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID,
 end
 
 xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, target, oMob) 
+    print("NM")
     local xPos = nil
     local yPos = nil
     local zPos = nil
@@ -518,7 +544,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         onMobMagicPrepare = function(mob, target) end
         onMobWeaponSkillPrepare = function(mob, target) end
         onMobWeaponSkill = function( target, mob, skill) end
-        onMobDeath = function(mob, player, isKiller) xi.dynamis.mobOnDeath(mob, zones[zoneID].text.DYNAMIS_TIME_EXTEND, mobVar) end
+        onMobDeath = function(mob, player, isKiller) xi.dynamis.mobOnDeath(mob, mobVar) end
     elseif mobName == "Gu'Dha Effigy" or mobName == "Goblin Golem" or mobName == "Overlord's Tombstone" or mobName == "Tzee Xicu Idol" then -- City Dynamis Megabosses (Bastok, Jeuno, Sandy, Windy)
         mobVar =  nmInfoLookup[mobFamily][mobName][7]
         mobNameFound = nmInfoLookup[mobName][1]
@@ -761,7 +787,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         if oMobIndex ~= nil then
             mob:setLocalVar("Parent", oMobIndex)
         end
-        mob:setLocalVar("MobIndex", mobIndex)
+        zone:setLocalVar(string.format("MobIndex_%s", mob:getID()), mobIndex)
         mob:spawn()
         if forceLink == true then
             mob:updateEnmity(target)
@@ -799,7 +825,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         if oMobIndex ~= nil then
             mob:setLocalVar("Parent", oMobIndex)
         end
-        mob:setLocalVar("MobIndex", mobIndex)
+        zone:setLocalVar(string.format("MobIndex_%s", mob:getID()), mobIndex)
         mob:spawn()
         if forceLink == true then
             mob:updateEnmity(target)
@@ -812,7 +838,7 @@ xi.dynamis.spawnDynamicPet =function(target, mob)
     local isNM = mob:isMobType(MOBTYPE_NOTORIOUS)
     local mobJob = mob:getJob()
     local oMob = GetMobByID(mob:getID())
-    local oMobIndex = oMob:getLocalVar("MobIndex")
+    local oMobIndex = oMob:getZone():getLocalVar(string.format("MobIndex_%s", oMob:getID()))
     local mobName = mob:getName()
     local petList =
     {
@@ -949,7 +975,7 @@ xi.dynamis.spawnDynamicPet =function(target, mob)
         onMobFight = function(mob) xi.dynamis.mobOnFight(mob) end,
         onMobRoamAction = function(mob) xi.dynamis.mobOnRoamAction(mob) end,
         onMobDeath = function(mob, playerArg, isKiller)
-            xi.dynamis.mobOnDeath(mob, zones[mob:getZoneID()].text.DYNAMIS_TIME_EXTEND)
+            xi.dynamis.mobOnDeath(mob)
         end,
     })
     mob:setSpawn(oMob:getXPos()+math.random()*6-3, oMob:getYPos()-0.3, oMob:getZPos()+math.random()*6-3, oMob:getRotPos())
@@ -1181,6 +1207,9 @@ xi.dynamis.setStatueStats = function(mob, mobIndex)
             if eyes >= 2 then -- If HP or MP restore statue
                 mob:setUnkillable(true) -- Set Unkillable as we will use skills then kill.
             end
+        else
+            eyes = xi.dynamis.eye.RED
+            mob:setLocalVar("eyeColor", eyes) -- Set Eyes if need be
         end
     end
 end
@@ -1265,14 +1294,14 @@ end
 --            Dynamis Mob Death           --
 --------------------------------------------
 
-xi.dynamis.mobOnDeath = function (mob, mobList, msg, mobVar)
+xi.dynamis.mobOnDeath = function (mob, mobVar)
     local zone = mob:getZone()
-    local mobIndex = mob:getLocalVar("MobIndex")
+    local zoneID = mob:getZoneID()
+    local mobIndex = zone:getLocalVar(string.format("MobIndex_%s", mob:getID()))
     if mob:getLocalVar("dynamisMobOnDeathTriggered") == 1 then return -- Don't trigger more than once.
     else -- Stops execution of code below if the above is true.
-        if mobVar ~= nil then zone:setLocalVar(mobVar, 1) end -- Set Death Requirements Variable
-        if mobIndex ~= nil and xi.dynamis.mobList[mobIndex].timeExtension ~= nil then mob:addTimeToDynamis(zone, xi.dynamis.mobList[mobIndex].timeExtension, msg) end -- Add Time
-        mob:resetLocalVars() -- Reset local vars just in case.
+        if mobVar ~= nil then zone:setLocalVar(string.format("%s", mobVar), 1) end -- Set Death Requirements Variable
+        xi.dynamis.addTimeToDynamis(zone, xi.dynamis.mobList[zoneID][mobIndex].timeExtension) -- Add Time
         mob:setLocalVar("dynamisMobOnDeathTriggered", 1) -- onDeath lua happens once per party member that killed the mob, but we want this to only run once per mob
     end
 end
@@ -1280,7 +1309,7 @@ end
 m:addOverride("xi.dynamis.megaBossOnDeath", function(mob, player, mobVar)
     local zoneID = mob:getZoneID()
     if mob:getLocalVar("GaveTimeExtension") ~= 1 then -- Ensure we don't give more than 1 time extension.
-        xi.dynamis.mobOnDeath(mob, xi.dynamis.mobList[zoneID], xi.dynamis.dynaInfoEra[zoneID].text.DYNAMIS_TIME_EXTEND, mobVar) -- Process time extension and wave spawning
+        xi.dynamis.mobOnDeath(mob,mobVar) -- Process time extension and wave spawning
         local winQM = GetNPCByID(xi.dynamis.dynaInfoEra[zoneID].winQM) -- Set winQM
         local pos = mob:getPos()
         winQM:setPos(pos.x,pos.y,pos.z,pos.rot) -- Set winQM to death pos
@@ -1296,12 +1325,30 @@ end)
 
 xi.dynamis.statueOnFight = function(mob, target)
     if mob:getHP() == 1 then -- If my HP = 1
-        if mob:AnimationSub() == 2 then -- I am an HP statue
-            mob:stun(100)
-            mob:timer(200, function(mob) mob:useMobAbility(1124) end) -- Use Recover HP
-        elseif mob:AnimationSub() == 3 then -- I am an MP statue
-            mob:stun(100)
-            mob:timer(200, function(mob) mob:useMobAbility(1125) end) -- Use Recover MP
+        if mob:getAnimationSub() == 2 then -- I am an HP statue
+            if mob:hasStatusEffect(xi.effect.REGEN) then
+                mob:delStatusEffect(xi.effect.REGEN)
+                mob:setHP(1)
+            end
+            mob:addStatusEffect(xi.effect.STUN, 1, 0, 5)
+            mob:untargetable(true)
+            mob:SetAutoAttackEnabled(false)
+            if mob:hasStatusEffect(xi.effect.STUN) then
+                mob:delStatusEffectSilent(xi.effect.STUN)
+            end
+            mob:useMobAbility(1124) -- Use Recover HP
+        elseif mob:getAnimationSub() == 3 then -- I am an MP statue
+            if mob:hasStatusEffect(xi.effect.REGEN) then
+                mob:delStatusEffect(xi.effect.REGEN)
+                mob:setHP(1)
+            end
+            mob:addStatusEffect(xi.effect.STUN, 1, 0, 5)
+            mob:untargetable(true)
+            mob:SetAutoAttackEnabled(false)
+            if mob:hasStatusEffect(xi.effect.STUN) then
+                mob:delStatusEffectSilent(xi.effect.STUN)
+            end
+            mob:useMobAbility(1125) -- Use Recover MP
         end
     end
 end

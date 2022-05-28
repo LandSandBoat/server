@@ -691,7 +691,7 @@ xi.dynamis.handleDynamis = function(zone)
     local zoneDynamistoken = zone:getLocalVar(string.format("[DYNA]Token_%s", zoneID))
     local zoneTimepoint = GetServerVariable(string.format("[DYNA]Timepoint_%s", zoneID))
     local zoneExpireRoutine = zone:getLocalVar(string.format("[DYNA]ExpireRoutine_%s", zone:getID()))
-    local zoneTimeRemaining = xi.dynamis.getDynaTimeRemaining(zone, zoneTimepoint)
+    local zoneTimeRemaining = xi.dynamis.getDynaTimeRemaining(zoneTimepoint)
     local zone10Min = zone:getLocalVar(string.format("[DYNA]Given3MinuteWarning_%s", zoneID))
     local zone3Min = zone:getLocalVar(string.format("[DYNA]Given3MinuteWarning_%s", zoneID))
     local zone1Min = zone:getLocalVar(string.format("[DYNA]Given1MinuteWarning_%s", zoneID))
@@ -772,32 +772,34 @@ end
 --         Dynamis Zone Functions         --
 --------------------------------------------
 
-xi.dynamis.addTimetoDynamis = function(zone, extensionTime, msg)
-    local zoneID = zone:getID()
-    local zoneDynamisToken = zone:getLocalVar(string.format("[DYNA]Token_%s", zoneID))
-    local prevExpire = GetServerVariable(string.format("[DYNA]Timepoint_%s", zoneID)) -- Determine previous expiration time.
-    local expirationTime = prevExpire + (60 * extensionTime) -- Add more time to increase previous expiration point.
-    playersInZone = zone:getPlayers()
-    
-    SetServerVariable(string.format("[DYNA]Timepoint_%s", zoneID), expirationTime)
-    local zoneTimepoint = GetServerVariable(string.format("[DYNA]Timepoint_%s", zoneID))
+xi.dynamis.addTimeToDynamis = function(zone, extensionTime)
+    if extensionTime ~= nil then
+        local zoneID = zone:getID()
+        local zoneDynamisToken = zone:getLocalVar(string.format("[DYNA]Token_%s", zoneID))
+        local prevExpire = GetServerVariable(string.format("[DYNA]Timepoint_%s", zoneID)) -- Determine previous expiration time.
+        local expirationTime = prevExpire + (60 * extensionTime) -- Add more time to increase previous expiration point.
+        playersInZone = zone:getPlayers()
+        
+        SetServerVariable(string.format("[DYNA]Timepoint_%s", zoneID), expirationTime)
+        local zoneTimepoint = GetServerVariable(string.format("[DYNA]Timepoint_%s", zoneID))
 
-    for _, player in pairs(playersInZone) do
-        player:messageSpecial(zones[zone].text.DYNAMIS_TIME_EXTEND, extensionTime) -- Send extension time message.
-        xi.dynamis.updatePlayerHourglass(player, zoneDynamisToken) -- Runs hourglass update function per player.
-    end
+        for _, player in pairs(playersInZone) do
+            player:messageSpecial(zones[zoneID].text.DYNAMIS_TIME_EXTEND, extensionTime) -- Send extension time message.
+            xi.dynamis.updatePlayerHourglass(player, zoneDynamisToken) -- Runs hourglass update function per player.
+        end
 
-    local timeRemaining = xi.dynamis.getDynaTimeRemaining(zone, zoneTimepoint) -- Gets the time remaining in seconds.
-    if timeRemaining > 660 then -- Checks if time remaining > 11 minutes.
-        SetServerVariable(string.format("[DYNA]Given10MinuteWarning_%s", zoneID), 0) -- Resets var if time remaining greater than threshold.
-    end
+        local timeRemaining = xi.dynamis.getDynaTimeRemaining(zoneTimepoint) -- Gets the time remaining in seconds.
+        if timeRemaining > 660 then -- Checks if time remaining > 11 minutes.
+            SetServerVariable(string.format("[DYNA]Given10MinuteWarning_%s", zoneID), 0) -- Resets var if time remaining greater than threshold.
+        end
 
-    if timeRemaining > 240 then -- Checks if time remaining > 4 minutes.
-        SetServerVariable(string.format("[DYNA]Given3MinuteWarning_%s", zoneID), 0) -- Resets var if time remaining greater than threshold.
-    end
+        if timeRemaining > 240 then -- Checks if time remaining > 4 minutes.
+            SetServerVariable(string.format("[DYNA]Given3MinuteWarning_%s", zoneID), 0) -- Resets var if time remaining greater than threshold.
+        end
 
-    if timeRemaining > 120 then -- Checks if time remaining > 2 minutes.
-        SetServerVariable(string.format("[DYNA]Given1MinuteWarning_%s", zoneID), 0) -- Resets var if time remaining greater than threshold.
+        if timeRemaining > 120 then -- Checks if time remaining > 2 minutes.
+            SetServerVariable(string.format("[DYNA]Given1MinuteWarning_%s", zoneID), 0) -- Resets var if time remaining greater than threshold.
+        end
     end
 end
 
@@ -808,9 +810,8 @@ xi.dynamis.ejectAllPlayers = function(zone)
     end
 end
 
-xi.dynamis.getDynaTimeRemaining = function(zone, zoneTimePoint)
-    local timeRemaining = zoneTimePoint - os.time()
-    return timeRemaining -- Returns difference.
+xi.dynamis.getDynaTimeRemaining = function(zoneTimePoint)
+    return (zoneTimePoint - os.time()) -- Returns difference.
 end
 
 xi.dynamis.cleanupDynamis = function(zone)
@@ -842,7 +843,7 @@ end
 xi.dynamis.dynamisTimeWarning = function(zone, zoneTimepoint)
     local zoneID = zone:getID()
     local playersInZone = zone:getPlayers()
-    local timeRemaining = math.floor((xi.dynamis.getDynaTimeRemaining(zone, zoneTimepoint) / 60)) -- Get time remaining, convert to minutes, floor value.
+    local timeRemaining = math.floor((xi.dynamis.getDynaTimeRemaining(zoneTimepoint) / 60)) -- Get time remaining, convert to minutes, floor value.
     local ID = zones[zoneID]
     for _, player in pairs(playersInZone) do
         if player:getLocalVar("Received_Warning") ~= 1 then
@@ -959,7 +960,7 @@ xi.dynamis.entryNpcOnTrade = function(player, npc, trade)
     if (xi.dynamis.entryInfoEra[zoneID].reqs == false) then return end end -- Check if player meets all requirements or is a GM.
 
     local zoneTimepoint = GetServerVariable(string.format("[DYNA]Timepoint_%s", xi.dynamis.dynaInfoEra[zoneID].dynaZone))
-    local dynamis_time_remaining = xi.dynamis.getDynaTimeRemaining(GetZone(xi.dynamis.dynaInfoEra[zoneID].dynaZone), zoneTimepoint) -- Get time remaining of Dynamis
+    local dynamis_time_remaining = xi.dynamis.getDynaTimeRemaining(zoneTimepoint) -- Get time remaining of Dynamis
     local dynamis_has_entered = player:getCharVar(xi.dynamis.entryInfoEra[zoneID].dynamis_has_enteredVar)
     local dynamis_last_reservation = (os.time() / (3600 * 1000)) - player:getCharVar("DynaReservationStart") -- Return Time of Last Reservation in Hours
 
@@ -1122,7 +1123,7 @@ m:addOverride("xi.dynamis.zoneOnZoneIn", function(player, prevZone)
 
     if xi.dynamis.verifyHoldsValidHourglass(player, zoneDynamisToken, zoneTimepoint) == true then -- Check if player has an hourglass and their personal token matches the zone token.
         player:timer(3000, function(player)
-            player:messageSpecial(ID.text.DYNAMIS_TIME_UPDATE_2, math.floor(xi.dynamis.getDynaTimeRemaining(player:getZone(), zoneTimepoint) / 60), 1) -- Send message letting player know how long they have.
+            player:messageSpecial(ID.text.DYNAMIS_TIME_UPDATE_2, math.floor(xi.dynamis.getDynaTimeRemaining(zoneTimepoint) / 60), 1) -- Send message letting player know how long they have.
         end)
 
         if player:getCharVar(string.format("[DYNA]InflictWeakness_%s", zoneID)) == true then -- Should I inflict weakness?

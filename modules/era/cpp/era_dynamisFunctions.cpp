@@ -163,36 +163,6 @@ class DynaFuncModule : public CPPModule
             return false;
         };
 
-        lua["CBaseEntity"]["getHourglassRegistrant"] = [](CLuaItem* PLuaBaseItem)
-        {
-            TracyZoneScoped;
-            return ref<uint32>(PLuaBaseItem->GetItem()->m_extra, 0x04);
-        };
-
-        /*item:getHourglassZone() - Returns a value for the zoneID from the hourglass' m_extra.
-                                                   v-------object------v */
-        lua["CBaseEntity"]["getHourglassZone"] = [](CLuaItem* PLuaBaseItem)
-        {
-            TracyZoneScoped;
-            return ref<uint8>(PLuaBaseItem->GetItem()->m_extra, 0x10);
-        };
-
-        /*item:getHourglassTimePoint() - Returns a value for the timepoint from the hourglass' m_extra.
-                                                       v-------object------v */
-        lua["CBaseEntity"]["getHourglassTimePoint"] = [](CLuaItem* PLuaBaseItem)
-        {
-            TracyZoneScoped;
-            return ref<uint32>(PLuaBaseItem->GetItem()->m_extra, 0x0C);
-        };
-
-        /*item:getHourglassToken() - Returns a value for the timepoint from the hourglass' m_extra.
-                                                       v-------object------v */
-        lua["CBaseEntity"]["getHourglassToken"] = [](CLuaItem* PLuaBaseItem)
-        {
-            TracyZoneScoped;
-            return ref<uint32>(PLuaBaseItem->GetItem()->m_extra, 0x14);
-        };
-
         lua["CBaseEntity"]["setMobType"] = [](CLuaBaseEntity* PLuaBaseEntity, uint8 mobType)
         {
             TracyZoneScoped;
