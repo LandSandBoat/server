@@ -88,7 +88,7 @@ mission.sections =
 {
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId
+            return currentMission >= mission.missionId
         end,
 
         [xi.zone.NORG] =
@@ -96,12 +96,12 @@ mission.sections =
             ['Andrause'] =
             {
                 onTrigger = function(player, npc)
-                    local mobOne = mission:getVar(player, 'MobOne')
+                    local mobCheck = mission:getVar(player, 'MobOne')
                     local platesTraded = mission:getVar(player, 'Plates')
 
                     if not player:hasKeyItem(xi.ki.BLACK_BOOK) then
                         -- Select mobs for player to get pictures of
-                        if mobOne == 0 then
+                        if mobCheck == 0 then
                             local mobOne, MobTwo, mobThree = unpack(utils.uniqueRandomTable(1, 23, 3))
 
                             mission:setVar(player, 'MobOne', mobOne)
@@ -110,11 +110,11 @@ mission.sections =
 
                             return mission:progressEvent(237)
                         -- Tell player what mobs are still needed
-                        elseif mobOne ~= 0 and platesTraded == 0 then
+                        elseif mobCheck ~= 0 and platesTraded == 0 then
                             return mission:progressEvent(238, 3)
-                        elseif mobOne ~= 0 and platesTraded == 1 then
+                        elseif mobCheck ~= 0 and platesTraded == 1 then
                             return mission:progressEvent(238, 2)
-                        elseif mobOne ~= 0 and platesTraded == 2 then
+                        elseif mobCheck ~= 0 and platesTraded == 2 then
                             return mission:progressEvent(238, 1)
                         end
                     elseif player:hasKeyItem(xi.ki.BLACK_BOOK) then
