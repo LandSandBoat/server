@@ -13,6 +13,7 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.MATT, 150)
     mob:setMod(xi.mod.BINDRES, 40)
     mob:setMod(xi.mod.GRAVITYRES, 40)
+    mob:setMod(xi.mod.TRIPLE_ATTACK, 20)
     mob:showText(mob, ID.text.COLLECTOR_SPAWN, xi.items.PREMIUM_BAG)
 end
 

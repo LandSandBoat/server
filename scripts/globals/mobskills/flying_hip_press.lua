@@ -11,8 +11,6 @@ require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
-local newtonID = require("scripts/zones/Newton_Movalpolos/IDs")
------------------------------------
 
 local mobskill_object = {}
 
