@@ -25,24 +25,24 @@ function onTrigger(player, id)
     -- validate modID
     id = string.upper(id)
     local modId = tonumber(id)
-    local modName = nil
+    local modName
 
-    if modId ~= nil then
-        if modNameByNum[modId] ~= nil then
+    if modId then
+        if modNameByNum[modId] then
             modName = modNameByNum[modId]
         end
-    elseif xi.mobMod[id] ~= nil then
+    elseif xi.mobMod[id] then
         modId = xi.mobMod[id]
         modName = id
     end
-    if modName == nil or modId == nil then
+    if not modName or not modId then
         error(player, "Invalid modMobID.")
         return
     end
 
     -- validate target
     local effectTarget = player:getCursorTarget()
-    if effectTarget == nil or effectTarget:isMob() == false then
+    if not effectTarget or not effectTarget:isMob() then
         error(player, "Current target is not a MOB, which can not have mob mods.")
         return
     end

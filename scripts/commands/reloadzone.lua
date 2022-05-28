@@ -1,6 +1,7 @@
 ---------------------------------------------------------------------------------------------------
 -- func: reloadzone
 -- desc: Attempt to reload specified zone lua without a restart.
+-- TODO: Add
 ---------------------------------------------------------------------------------------------------
 
 cmdprops =
@@ -10,7 +11,7 @@ cmdprops =
 }
 
 function onTrigger(player, zoneLua, other)
-    if (zoneLua ~= nil and other == nil) then
+    if zoneLua and other then
         local String = table.concat({"scripts/zones/", zoneLua})
         package.loaded[String] = nil
         require(String)

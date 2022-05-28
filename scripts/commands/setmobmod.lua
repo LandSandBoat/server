@@ -1,5 +1,5 @@
 ---------------------------------------------------------------------------------------------------
--- func: semobtmod
+-- func: setmobmod
 -- desc: Sets the specified mob modifier to the specified value on the cursor target mob
 ---------------------------------------------------------------------------------------------------
 

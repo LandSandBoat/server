@@ -10,7 +10,7 @@ cmdprops =
 }
 
 function onTrigger(player, mixinLua, other)
-    if (mixinLua ~= nil and other == nil) then
+    if mixinLua and other then
         local String = table.concat({"scripts/mixins/", mixinLua})
         package.loaded[String] = nil
         require(String)
