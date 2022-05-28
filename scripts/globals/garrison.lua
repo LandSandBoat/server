@@ -33,6 +33,9 @@ xi.garrison.onWin = function(player, npc)
         end
     end
     player:setCharVar("Garrison_Won", 0)
+    -- Talk to Guard to Remove effects
+    player:delStatusEffect(xi.effect.LEVEL_RESTRICTION)
+    player:delStatusEffect(xi.effect.BATTLEFIELD)
     player:getZone():setLocalVar(string.format("[GARRISON]Treasure_%s", zoneId), 0)
     -- They dont despawn until party leader talks to gaurd
     xi.garrison.despawnNPCs(npc)
