@@ -21,8 +21,8 @@ entity.onMobFight = function(mob, target)
         mob:addMod(xi.mod.ATTP, 160)
         mob:setLocalVar("weaponOn", 1)
     elseif not mob:hasStatusEffect(xi.effect.BLOOD_WEAPON) and weaponOn == 1 then
-        mob:delMod(xi.mod.DELAY, 0)
-        mob:delMod(xi.mod.ATTP, 0)
+        mob:delMod(xi.mod.DELAY, 1500)
+        mob:delMod(xi.mod.ATTP, 160)
     end
 end
 

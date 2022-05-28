@@ -21,14 +21,14 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local bonus = 300
+    local cap = 300
 
      -- Bugbear Matman has stronger Flying Hip Press
-    if mob:getID() == newtonID.mob.BUGBEAR_MATMAN then
-        bonus = 700
+    if mob:getPool() == 562 then
+        cap = math.random(300,700)
     end
 
-    local dmgmod = xi.mobskills.mobBreathMove(mob, target, 0.333, 1, xi.magic.ele.WIND, bonus)
+    local dmgmod = xi.mobskills.mobBreathMove(mob, target, 0.333, 1.2, xi.magic.ele.WIND, cap)
 
     local dmg = xi.mobskills.mobFinalAdjustments(dmgmod, mob, skill, target, xi.attackType.BREATH, xi.damageType.WIND, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
     target:takeDamage(dmg, mob, xi.attackType.BREATH, xi.damageType.WIND)
