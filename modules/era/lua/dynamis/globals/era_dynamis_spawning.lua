@@ -1298,10 +1298,10 @@ xi.dynamis.statueOnFight = function(mob, target)
     if mob:getHP() == 1 then -- If my HP = 1
         if mob:AnimationSub() == 2 then -- I am an HP statue
             mob:stun(100)
-            mob:timer(100, function(mob) mob:useMobAbility(1124) end) -- Use Recover HP
+            mob:timer(200, function(mob) mob:useMobAbility(1124) end) -- Use Recover HP
         elseif mob:AnimationSub() == 3 then -- I am an MP statue
             mob:stun(100)
-            mob:timer(100, function(mob) mob:useMobAbility(1125) end) -- Use Recover MP
+            mob:timer(200, function(mob) mob:useMobAbility(1125) end) -- Use Recover MP
         end
     end
 end

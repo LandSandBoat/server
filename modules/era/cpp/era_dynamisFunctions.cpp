@@ -115,10 +115,10 @@ class DynaFuncModule : public CPPModule
 
             if (PCharEntity != nullptr)
             {
-                CItem* PItem = itemutils::GetItem(HOURGLASS_ID);
                 int i = 1;
                 while (i <= 2)
-                {
+                {       
+                        CItem* PItem = itemutils::GetItem(HOURGLASS_ID);
                         PItem->setQuantity(1);
 
                         ref<uint8>(PItem->m_extra,  0x02) = 1;
