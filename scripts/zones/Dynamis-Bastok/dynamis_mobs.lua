@@ -798,6 +798,7 @@ xi.dynamis.mobList[zoneID][139].eyes = xi.dynamis.eye.BLUE
 ------------------------------------------
 -- xi.dynamis.mobList[zoneID][MobIndex].timeExtension = 15
 
+xi.dynamis.mobList[zoneID].timeExensionList = {1, 19, 41, 154, 113, 162, 163, 164}
 xi.dynamis.mobList[zoneID][1  ].timeExtension = 20 -- Adamantking Effigy
 xi.dynamis.mobList[zoneID][19 ].timeExtension = 20 -- Adamantking Effigy
 xi.dynamis.mobList[zoneID][41 ].timeExtension = 20 -- Adamantking Effigy

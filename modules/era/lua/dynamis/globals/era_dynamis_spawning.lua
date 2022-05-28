@@ -1301,7 +1301,7 @@ xi.dynamis.mobOnDeath = function (mob, mobVar)
     if mob:getLocalVar("dynamisMobOnDeathTriggered") == 1 then return -- Don't trigger more than once.
     else -- Stops execution of code below if the above is true.
         if mobVar ~= nil then zone:setLocalVar(string.format("%s", mobVar), 1) end -- Set Death Requirements Variable
-        xi.dynamis.addTimeToDynamis(zone, xi.dynamis.mobList[zoneID][mobIndex].timeExtension) -- Add Time
+        xi.dynamis.addTimeToDynamis(zone, mobIndex) -- Add Time
         mob:setLocalVar("dynamisMobOnDeathTriggered", 1) -- onDeath lua happens once per party member that killed the mob, but we want this to only run once per mob
     end
 end

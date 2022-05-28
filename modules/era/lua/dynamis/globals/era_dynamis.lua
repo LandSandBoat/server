@@ -772,34 +772,36 @@ end
 --         Dynamis Zone Functions         --
 --------------------------------------------
 
-xi.dynamis.addTimeToDynamis = function(zone, extensionTime)
-    if extensionTime ~= nil then
-        local zoneID = zone:getID()
-        local zoneDynamisToken = zone:getLocalVar(string.format("[DYNA]Token_%s", zoneID))
-        local prevExpire = GetServerVariable(string.format("[DYNA]Timepoint_%s", zoneID)) -- Determine previous expiration time.
-        local expirationTime = prevExpire + (60 * extensionTime) -- Add more time to increase previous expiration point.
-        playersInZone = zone:getPlayers()
-        
-        SetServerVariable(string.format("[DYNA]Timepoint_%s", zoneID), expirationTime)
-        local zoneTimepoint = GetServerVariable(string.format("[DYNA]Timepoint_%s", zoneID))
-
-        for _, player in pairs(playersInZone) do
-            player:messageSpecial(zones[zoneID].text.DYNAMIS_TIME_EXTEND, extensionTime) -- Send extension time message.
-            xi.dynamis.updatePlayerHourglass(player, zoneDynamisToken) -- Runs hourglass update function per player.
+xi.dynamis.addTimeToDynamis = function(zone, mobIndex)
+    local zoneID = zone:getID()
+    for k, v in pairs(xi.dynamis.mobList[zoneID].timeExensionList) do
+        if v == mobIndex then
+            local timeExtension = xi.dynamis.mobList[zoneID][mobIndex].timeExtension
+            local zoneDynamisToken = zone:getLocalVar(string.format("[DYNA]Token_%s", zoneID))
+            local prevExpire = GetServerVariable(string.format("[DYNA]Timepoint_%s", zoneID)) -- Determine previous expiration time.
+            local expirationTime = prevExpire + (60 * timeExtension) -- Add more time to increase previous expiration point.
+            playersInZone = zone:getPlayers()
+            SetServerVariable(string.format("[DYNA]Timepoint_%s", zoneID), expirationTime)
+    
+            for _, player in pairs(playersInZone) do
+                player:messageSpecial(zones[zoneID].text.DYNAMIS_TIME_EXTEND, timeExtension) -- Send extension time message.
+                xi.dynamis.updatePlayerHourglass(player, zoneDynamisToken) -- Runs hourglass update function per player.
+            end
+    
+            local timeRemaining = xi.dynamis.getDynaTimeRemaining(expirationTime) -- Gets the time remaining in seconds.
+            if timeRemaining > 660 then -- Checks if time remaining > 11 minutes.
+                SetServerVariable(string.format("[DYNA]Given10MinuteWarning_%s", zoneID), 0) -- Resets var if time remaining greater than threshold.
+            end
+    
+            if timeRemaining > 240 then -- Checks if time remaining > 4 minutes.
+                SetServerVariable(string.format("[DYNA]Given3MinuteWarning_%s", zoneID), 0) -- Resets var if time remaining greater than threshold.
+            end
+    
+            if timeRemaining > 120 then -- Checks if time remaining > 2 minutes.
+                SetServerVariable(string.format("[DYNA]Given1MinuteWarning_%s", zoneID), 0) -- Resets var if time remaining greater than threshold.
+            end
         end
-
-        local timeRemaining = xi.dynamis.getDynaTimeRemaining(zoneTimepoint) -- Gets the time remaining in seconds.
-        if timeRemaining > 660 then -- Checks if time remaining > 11 minutes.
-            SetServerVariable(string.format("[DYNA]Given10MinuteWarning_%s", zoneID), 0) -- Resets var if time remaining greater than threshold.
-        end
-
-        if timeRemaining > 240 then -- Checks if time remaining > 4 minutes.
-            SetServerVariable(string.format("[DYNA]Given3MinuteWarning_%s", zoneID), 0) -- Resets var if time remaining greater than threshold.
-        end
-
-        if timeRemaining > 120 then -- Checks if time remaining > 2 minutes.
-            SetServerVariable(string.format("[DYNA]Given1MinuteWarning_%s", zoneID), 0) -- Resets var if time remaining greater than threshold.
-        end
+        k = k + 1
     end
 end
 
@@ -1103,7 +1105,7 @@ m:addOverride("xi.dynamis.qmOnTrigger", function(player, npc) -- Override standa
         end
     else -- Normal QM behavior
         player:addKeyItem(xi.dynamis.dynaInfoEra[zoneId].winKI)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.dynamis.dynaInfoEra[zoneId].winKI)
+        player:messageSpecial(zones[zoneId].text.KEYITEM_OBTAINED, xi.dynamis.dynaInfoEra[zoneId].winKI)
     end
 end)
 
