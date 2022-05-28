@@ -10,7 +10,8 @@ require('scripts/globals/zone')
 xi = xi or {}
 xi.beastmentreasure = xi.beastmentreasure or {}
 
-local zoneData = {
+local zoneData =
+{
     [xi.zone.YUHTUNGA_JUNGLE] =
     {
         statusvar = 'BMT_Lowlands_Status',
@@ -70,7 +71,8 @@ local zoneData = {
     }
 }
 
-local sharedLoot = {
+local sharedLoot =
+{
     -- All items are assigned a "weight" here
     rocksgems =
     {

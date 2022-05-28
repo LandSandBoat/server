@@ -232,4 +232,39 @@ ignore_rules=(
 --no-max-line-length \
 --max-cyclomatic-complexity 30 \
 --globals ${global_funcs[@]} ${global_objects[@]} \
---ignore ${ignores[@]} ${ignore_rules[@]}
+--ignore ${ignores[@]} ${ignore_rules[@]} | grep -v "Total:"
+
+python3 << EOF
+import glob
+import re
+
+def check_tables_in_file(name):
+    with open(name) as f:
+        counter = 0
+        lines = f.readlines()
+        for line in lines:
+            counter = counter + 1
+
+            # [ ]{0,} : Any number of spaces
+            # =       : = character
+            # [ ]{0,} : Any number of spaces
+            # \{      : { character
+            # [ ]{0,} : Any number of spaces
+            # \n      : newline character
+
+            for match in re.finditer("[ ]{0,}=[ ]{0,}\{[ ]{0,}\n", line):
+                print(f"Incorrectly defined table: {name}:{counter}:{match.start() + 2}")
+                print("")
+                print(lines[counter - 2].strip())
+                print(f"{lines[counter - 1].strip()}                              <-- HERE")
+                print(lines[counter].strip())
+                print("")
+
+target = '${target}'
+
+if target == 'scripts':
+    for filename in glob.iglob('scripts/**/*.lua', recursive=True):
+        check_tables_in_file(filename)
+else:
+    check_tables_in_file(target)
+EOF
