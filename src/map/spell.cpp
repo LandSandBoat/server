@@ -666,7 +666,7 @@ namespace spell
                 PCaster->objtype == TYPE_TRUST)
             {
                 // cant cast cause im hidden or untargetable
-                if (PCaster->IsNameHidden() || static_cast<CMobEntity*>(PCaster)->IsUntargetable())
+                if (PCaster->IsNameHidden() || static_cast<CMobEntity*>(PCaster)->GetUntargetable())
                 {
                     return false;
                 }
