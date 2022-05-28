@@ -6,7 +6,7 @@ local ID = require("scripts/zones/Foret_de_Hennetiel/IDs")
 local zone_object = {}
 
 zone_object.onInitialize = function(zone)
-    zone:registerRegion(1, 529.946, -3.341, 17.69, 0, 0, 0) -- Ergon Locus, Circular Region, 17.69 Radius
+    zone:registerRegion(1, 529.946, 17.69, 157.579, 0, 0, 0) -- Ergon Locus, Circular Region, 17.69 Radius
 end
 
 zone_object.onZoneIn = function(player, prevZone)

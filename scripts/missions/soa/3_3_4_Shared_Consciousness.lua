@@ -3,7 +3,8 @@
 -- Seekers of Adoulin M3-3-4
 -----------------------------------
 -- !addmission 12 49
--- Levil : !pos -87.204 3.350 12.655 256
+-- Levil          : !pos -87.204 3.350 12.655 256
+-- Boarding House : !pos -41.693 -0.15 -38.29 257
 -----------------------------------
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')

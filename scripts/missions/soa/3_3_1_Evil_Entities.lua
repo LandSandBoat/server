@@ -31,7 +31,7 @@ mission.sections =
 
         [xi.zone.CEIZAK_BATTLEGROUNDS] =
         {
-            ['Elmric'] = mission:progressEvent(23)
+            ['Elmric'] = mission:progressEvent(23),
 
             onEventFinish =
             {

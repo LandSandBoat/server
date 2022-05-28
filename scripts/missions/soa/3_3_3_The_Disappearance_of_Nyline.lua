@@ -3,7 +3,8 @@
 -- Seekers of Adoulin M3-3-3
 -----------------------------------
 -- !addmission 12 48
--- Levil : !pos -87.204 3.350 12.655 256
+-- Levil          : !pos -87.204 3.350 12.655 256
+-- Boarding House : !pos -41.693 -0.15 -38.29 257
 -----------------------------------
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
@@ -53,7 +54,7 @@ mission.sections =
             onRegionEnter =
             {
                 [1] = function(player, region)
-                    mission:progressEvent(517)
+                    return mission:progressEvent(517)
                 end,
             },
 
