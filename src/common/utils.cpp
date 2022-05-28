@@ -693,10 +693,10 @@ void PackSoultrapperName(std::string name, uint8 output[])
 
 std::string UnpackSoultrapperName(uint8 input[])
 {
-    uint8 current = 0;
-    uint8 remainder = 0;
-    uint8 shift = 1;
-    uint8 maxSize = 13; // capped at 13 based on examples like GoblinBountyH
+    uint8       current   = 0;
+    uint8       remainder = 0;
+    uint8       shift     = 1;
+    uint8       maxSize   = 13; // capped at 13 based on examples like GoblinBountyH
     char        indexChar;
     std::string output = "";
 
@@ -818,21 +818,6 @@ std::string trim(std::string const& str, std::string const& whitespace)
 
     return str.substr(strBegin, strRange);
 }
-
-// std::string alpha(const std::string& str)
-// {
-//     for (int i = 0; i < str.size(); i++) {
-
-//         if (str[i] < 'A' || str[i] > 'Z' &&
-//             str[i] < 'a' || str[i] > 'z')
-//         {
-//             s.erase(i, 1);
-//             i--;
-//         }
-//     }
-
-//     return str;
-// }
 
 look_t stringToLook(std::string str)
 {
