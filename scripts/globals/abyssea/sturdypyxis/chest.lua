@@ -101,14 +101,14 @@ xi.pyxis.removeChest = function(player, npc, addcruor, delay)
         player:messageSpecial(ID.text.CRUOR_OBTAINED, amount, 0, 0, 0)
     end
 
-    npc:untargetable(true)
+    npc:setUntargetable(true)
     npc:timer(delay * 1000, function(npcArg)
         npcArg:setAnimationSub(16)
 		npcArg:setNpcFlags(3203)
 		npcArg:setLocalVar("SPAWNSTATUS", 0)
 		npcArg:setStatus(xi.status.DISAPPEAR)
         npcArg:entityAnimationPacket("kesu")
-        npc:untargetable(false)
+        npc:setUntargetable(false)
     end)
 end
 
