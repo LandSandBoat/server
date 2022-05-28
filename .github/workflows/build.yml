@@ -337,6 +337,15 @@ jobs:
     - name: Copy settings
       run: |
         cp scripts/settings/default/* scripts/settings/
+    - name: Enable Modules
+      shell: bash
+      run: |
+        python3 << EOF
+        with open("modules/init.txt", "w") as f:
+            f.write("custom\n")
+            f.write("era\n")
+            f.write("renamer\n")
+        EOF
     - name: Startup and character login checks
       uses: nick-invision/retry@v2
       with:

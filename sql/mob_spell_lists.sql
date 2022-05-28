@@ -4149,7 +4149,9 @@ INSERT INTO `mob_spell_lists` VALUES ('Nepionic_Soulflayer',460,259,1,60); -- sl
 INSERT INTO `mob_spell_lists` VALUES ('Nepionic_Soulflayer',460,273,1,60); -- sleepga
 INSERT INTO `mob_spell_lists` VALUES ('Nepionic_Soulflayer',460,274,1,60); -- sleepga_II
 
--- Next Available: 461
+INSERT INTO `mob_spell_lists` VALUES ('Bombast',461,235,1,255); -- sleepga_II
+
+-- Next Available: 462
 
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;

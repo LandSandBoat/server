@@ -1,14 +1,13 @@
 -----------------------------------
--- Area: Lower Jeuno (245)
+-- Area: Yahse Hunting Grounds
 --  NPC: Waypoint
---  SoA: Waypoint
--- !pos 20 -34.922 0.000 245
 -----------------------------------
-require('scripts/globals/keyitems')
+-- Frontier Station : !pos 321 0 -199.8 260
+-- Bivouac #1       : !pos 86.5 0 1.5 260
+-- Bivouac #2       : !pos -286.5 0 43.5 260
+-- Bivouac #3       : !pos -162.4 0 -272.8 260
+-----------------------------------
 require('scripts/globals/waypoint')
-require('scripts/globals/zone')
------------------------------------
-local ID = require("scripts/zones/Lower_Jeuno/IDs")
 -----------------------------------
 local entity = {}
 
@@ -17,11 +16,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:hasKeyItem(xi.ki.ADOULINIAN_CHARTER_PERMIT) then
-        xi.waypoint.onTrigger(player, npc)
-    else
-        player:messageSpecial(ID.text.WAYPOINT_EXAMINE)
-    end
+    xi.waypoint.onTrigger(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)

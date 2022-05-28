@@ -1,14 +1,14 @@
 -----------------------------------
--- Area: Lower Jeuno (245)
+-- Area: Foret de Hennetiel
 --  NPC: Waypoint
---  SoA: Waypoint
--- !pos 20 -34.922 0.000 245
 -----------------------------------
-require('scripts/globals/keyitems')
+-- Frontier Station : !pos 398.11 -2 279.11 262
+-- Bivouac #1       : !pos 12.6 -2.4 342 262
+-- Bivouac #2       : !pos 505 -2.25 -303.5 262
+-- Bivouac #3       : !pos 103 -2.2 -92.3 262
+-- Bivouac #4       : !pos -251.8 -2.37 -39.25 262
+-----------------------------------
 require('scripts/globals/waypoint')
-require('scripts/globals/zone')
------------------------------------
-local ID = require("scripts/zones/Lower_Jeuno/IDs")
 -----------------------------------
 local entity = {}
 
@@ -17,11 +17,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:hasKeyItem(xi.ki.ADOULINIAN_CHARTER_PERMIT) then
-        xi.waypoint.onTrigger(player, npc)
-    else
-        player:messageSpecial(ID.text.WAYPOINT_EXAMINE)
-    end
+    xi.waypoint.onTrigger(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)
