@@ -50,6 +50,7 @@ entity.onTrigger = function(player, npc)
     else
         xi.conq.overseerOnTrigger(player, npc, guardNation, guardType, guardEvent, guardRegion)
     end
+end
 
 entity.onEventUpdate = function(player, csid, option)
     xi.conq.overseerOnEventUpdate(player, csid, option, guardNation)
