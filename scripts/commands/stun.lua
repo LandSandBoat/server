@@ -1,6 +1,6 @@
 ---------------------------------------------------------------------------------------------------
--- func: mobstun
--- desc: stuns a mob for an hour. good for testing damage/mechanics on a punching bag.
+-- func: stun
+-- desc: stuns a non-NPC target for an hour. good for testing damage/mechanics on a punching bag.
 ---------------------------------------------------------------------------------------------------
 
 require("scripts/globals/status")
@@ -13,16 +13,16 @@ cmdprops =
 
 function onTrigger(player)
     local targ = player:getCursorTarget()
-    if targ ~= nil and targ:isMob() then
+    if targ and not targ:isNPC() then
         local stun = targ:getStatusEffect(xi.effect.STUN)
         targ:delStatusEffect(xi.effect.STUN)
-        if stun == nil or stun:getPower() ~= 69 then -- it's toggleable
+        if not stun or stun:getPower() ~= 69 then -- it's toggleable
             targ:addStatusEffect(xi.effect.STUN, 69, 0, 3600)
-            player:PrintToPlayer("Gave target mob super Stun.")
+            player:PrintToPlayer("Gave target super Stun.")
         else
             player:PrintToPlayer("Removed target mob's super Stun.")
         end
     else
-        player:PrintToPlayer("Must select a target monster using in game cursor first.")
+        player:PrintToPlayer("Must select a non-NPC target using in game cursor first.")
     end
 end
