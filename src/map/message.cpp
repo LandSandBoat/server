@@ -32,6 +32,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "entities/charentity.h"
 
+#include "lua/luautils.h"
+
 #include "packets/message_standard.h"
 #include "packets/message_system.h"
 #include "packets/party_invite.h"
@@ -548,6 +550,17 @@ namespace message
                 }
                 break;
             }
+            case MSG_LUA_FUNCTION:
+            {
+                auto str = std::string((const char*)extra.data() + 4);
+                auto result = luautils::lua.safe_script(str);
+                if (!result.valid())
+                {
+                    sol::error err = result;
+                    ShowError("MSG_LUA_FUNCTION: error: %s: %s", err.what(), str.c_str());
+                }
+            }
+            break;
             default:
             {
                 ShowWarning("Message: unhandled message type %d", type);
@@ -692,6 +705,20 @@ namespace message
         }
 
         outgoing_queue.enqueue(msg);
+    }
+
+    void send(uint16 zone, std::string const& luaFunc)
+    {
+        TracyZoneScoped;
+
+        std::vector<uint8> packetData(4 + luaFunc.size() + 1);
+        ref<uint16>(packetData.data(), 2) = zone;
+
+        std::memcpy(packetData.data() + 4, luaFunc.data(), luaFunc.size());
+
+        packetData[packetData.size() - 1] = '\0';
+
+        message::send(MSG_LUA_FUNCTION, packetData.data(), packetData.size());
     }
 
     void send(uint32 playerId, CBasicPacket* packet)
