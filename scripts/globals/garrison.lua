@@ -230,7 +230,6 @@ end
 
 xi.garrison.waveAlive = function(player, npc, wave, party)
     local zoneId = npc:getZoneID()
-    local garrisonZoneData = xi.garrison.data[zoneId]
     local garrisonRunning = npc:getZone():getLocalVar(string.format("[GARRISON]EndTime_%s", zoneId))
     -- Check all NPCs are dead -> lose
     if
