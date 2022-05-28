@@ -260,6 +260,19 @@ def check_tables_in_file(name):
                 print(lines[counter].strip())
                 print("")
 
+            # local     : 'local ' (with a space)
+            # (?=       : Positive lookahead
+            # [^(ID)])  : A token that is NOT 'ID'
+            # (?=[A-Z]) : A token that starts with a capital letter
+
+            for match in re.finditer("local (?=[^(ID)])(?=[A-Z]){1,}", line):
+                print(f"Capitalised local name: {name}:{counter}:{match.start() + 2}")
+                print("")
+                print(lines[counter - 2].strip())
+                print(f"{lines[counter - 1].strip()}                              <-- HERE")
+                print(lines[counter].strip())
+                print("")
+
 target = '${target}'
 
 if target == 'scripts':
