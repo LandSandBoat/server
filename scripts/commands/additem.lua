@@ -18,15 +18,6 @@ function onTrigger(player, itemId, quantity, aug0, aug0val, aug1, aug1val, aug2,
     -- Load needed text ids for players current zone..
     local ID = zones[player:getZoneID()]
 
-    if type(itemId) == "string" then
-        if (name == nil or tostring(name) == nil) then
-            error(player, "Invalid name.")
-            return
-        end
-        
-        local itemId = GetItemIDByName(name)
-    end
-
     -- validate itemId
     if (itemId == nil or tonumber(itemId) == nil or tonumber(itemId) == 0) then
         error(player, "Invalid itemId.")

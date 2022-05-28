@@ -14,10 +14,10 @@ cmdprops =
 function onTrigger(player)
     local targ = player:getCursorTarget()
     if targ ~= nil and targ:isMob() then
-        local stun = targ:getStatusEffect(tpz.effect.STUN)
-        targ:delStatusEffect(tpz.effect.STUN)
+        local stun = targ:getStatusEffect(xi.effect.STUN)
+        targ:delStatusEffect(xi.effect.STUN)
         if stun == nil or stun:getPower() ~= 69 then -- it's toggleable
-            targ:addStatusEffect(tpz.effect.STUN, 69, 0, 3600)
+            targ:addStatusEffect(xi.effect.STUN, 69, 0, 3600)
             player:PrintToPlayer("Gave target mob super Stun.")
         else
             player:PrintToPlayer("Removed target mob's super Stun.")

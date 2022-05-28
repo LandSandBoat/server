@@ -22,7 +22,7 @@ function onTrigger(player, modifier, amount)
         return
     end
 
-    local modID = tonumber(modifier) or tpz.mobMod[string.upper(modifier)]
+    local modID = tonumber(modifier) or xi.mobMod[string.upper(modifier)]
     if not modID then
         error(player, "No valid modifier found. ")
         return
