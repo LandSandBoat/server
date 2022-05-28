@@ -29,7 +29,8 @@ local JPCATEGORY_SCH      = 0x280
 local JPCATEGORY_GEO      = 0x2A0
 local JPCATEGORY_RUN      = 0x2C0
 
-xi.jp = {
+xi.jp =
+{
 
     --WAR
     MIGHTY_STRIKES_EFFECT    = JPCATEGORY_WAR + 0x00, --+ Physical Accuracy +2
