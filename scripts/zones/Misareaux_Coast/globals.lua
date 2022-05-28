@@ -6,7 +6,8 @@ local ID = require("scripts/zones/Misareaux_Coast/IDs")
 require("scripts/globals/npc_util")
 -----------------------------------
 
-local MISAREAUX_COAST = {
+local MISAREAUX_COAST =
+{
     -----------------------------------
     -- Handle spawn/despawn for Ziphius NM QMs
     -----------------------------------

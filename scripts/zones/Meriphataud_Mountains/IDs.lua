@@ -47,48 +47,61 @@ zones[xi.zone.MERIPHATAUD_MOUNTAINS] =
         VOIDWALKER_OBTAIN_KI     = 11731, -- Obtained key item: <keyitem>!
         COMMON_SENSE_SURVIVAL    = 12633, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
         NAA_ZEKU_THE_UNWAITING_PH =
         {
             [17264763] = 17264768,
         },
-        PATRIPATAN_PH       =
+
+        PATRIPATAN_PH =
         {
             [17264967] = 17264972, -- 551.767, -32.570, 590.205
             [17264968] = 17264972, -- 646.199, -24.483, 644.477
             [17264969] = 17264972, -- 535.318, -32.179, 602.055
         },
+
         DAGGERCLAW_DRACOS_PH =
         {
             [17264815] = 17264818, -- 583.725 -15.652 -388.159
         },
+
         WARAXE_BEAK         = 17264828,
         COO_KEJA_THE_UNSEEN = 17264946,
-        VOIDWALKER        =
+
+        VOIDWALKER =
         {
-            [xi.keyItem.CLEAR_ABYSSITE] = {
+            [xi.keyItem.CLEAR_ABYSSITE] =
+            {
                 17265129, -- Raker bee
                 17265128, -- Raker bee
                 17265127, -- Raker bee
                 17265126, -- Raker bee
-                17265125,  -- Rummager beetle
-                17265124,  -- Rummager beetle
-                17265123,  -- Rummager beetle
-                17265122,  -- Rummager beetle
+                17265125, -- Rummager beetle
+                17265124, -- Rummager beetle
+                17265123, -- Rummager beetle
+                17265122, -- Rummager beetle
             },
-            [xi.keyItem.COLORFUL_ABYSSITE] = {
-                17265121,  -- Jyeshtha
+
+            [xi.keyItem.COLORFUL_ABYSSITE] =
+            {
+                17265121, -- Jyeshtha
                 17265120, -- Farruca Fly
             },
-            [xi.keyItem.BROWN_ABYSSITE] = {
-                17265119  -- Orcus
+
+            [xi.keyItem.BROWN_ABYSSITE] =
+            {
+                17265119, -- Orcus
             },
-            [xi.keyItem.BLACK_ABYSSITE] = {
-                17265118  -- Yilbegan
+
+            [xi.keyItem.BLACK_ABYSSITE] =
+            {
+                17265118, -- Yilbegan
             }
         }
     },
+
     npc =
     {
         CASKET_BASE   = 17265219,
