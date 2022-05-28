@@ -35,7 +35,7 @@ xi.garrison.onWin = function(player, npc)
     player:setCharVar("Garrison_Won", 0)
     player:getZone():setLocalVar(string.format("[GARRISON]Treasure_%s", zoneId), 0)
     -- They dont despawn until party leader talks to gaurd
-    xi.garrison.despawnNPCs(npc, party)
+    xi.garrison.despawnNPCs(npc)
     -- Reset Garrison lockout and Time Limit
     npc:getZone():setLocalVar(string.format("[GARRISON]EndTime_%s", zoneId), os.time())
     npc:getZone():setLocalVar(string.format("[GARRISON]LockOut_%s", zoneId), os.time())
@@ -231,10 +231,6 @@ end
 xi.garrison.waveAlive = function(player, npc, wave, party)
     local zoneId = npc:getZoneID()
     local garrisonZoneData = xi.garrison.data[zoneId]
-    local garrisonLoot = {}
-    garrisonLoot = xi.garrison.loot[garrisonZoneData.levelCap]
-    local mob = garrisonZoneData.mobs
-    local mobnum = 1
     local garrisonRunning = npc:getZone():getLocalVar(string.format("[GARRISON]EndTime_%s", zoneId))
     -- Check all NPCs are dead -> lose
     if
