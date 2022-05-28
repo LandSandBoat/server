@@ -9,6 +9,7 @@ require("scripts/globals/status")
 local entity = {}
 
 entity.onMobSpawn = function(mob)
+    -- TODO: Needs to do a jumping animation on spawn
     mob:setMod(xi.mod.MATT, 150)
     mob:setMod(xi.mod.BINDRES, 40)
     mob:setMod(xi.mod.GRAVITYRES, 40)
@@ -17,8 +18,8 @@ end
 
 entity.onMobFight = function(mob, target)
     -- Resets threat on every auto attack
-    mob:addListener("ATTACK","COLLECTOR_ATTACK", function(mob)
-        mob:resetEnmity(target)
+    mob:addListener("ATTACK","COLLECTOR_ATTACK", function(goblin)
+        goblin:resetEnmity(target)
     end)
 end
 
