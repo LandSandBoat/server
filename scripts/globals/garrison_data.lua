@@ -643,37 +643,73 @@ xi.garrison.data =
         -- empty filled with dynamic entries
         },
         mobs = 17265103,
-        xPos = -0,
-        yPos = -0,
-        zPos = -0,
-        xChange = 0,
-        zChange = 2,
-        xSecondLine = 2,
-        zSecondLine = 0,
-        xThirdLine = 4,
-        zThirdLine = 0,
-        rot = 0,
+        xPos = -299, -- needs adjusting
+        yPos = 17,
+        zPos = 411,
+        xChange = 2,
+        zChange = -2,
+        xSecondLine = 0,
+        zSecondLine = 2,
+        xThirdLine = 0,
+        zThirdLine = 4,
+        rot = 30,
         name = "676e7063C", -- gnpc text to hex (rename with proper names later)
         waveSize =
         {
         -- Wave + Number of Parties
             [1] =
             {
+                17265103,
+                17265104
             },
             [2] =
             {
+                17265103,
+                17265104,
+                17265105,
+                17265106
             },
             [3] =
             {
+                17265103,
+                17265104,
+                17265105,
+                17265106,
+                17265107,
+                17265108
             },
             [4] =
             {
+                17265103,
+                17265104,
+                17265105,
+                17265106,
+                17265107,
+                17265108,
+                17265109,
+                17265110
             },
             [5] =
             {
+                17265103,
+                17265104,
+                17265105,
+                17265106,
+                17265107,
+                17265108,
+                17265109,
+                17265110
             },
             [6] =
             {
+                17265103,
+                17265104,
+                17265105,
+                17265106,
+                17265107,
+                17265108,
+                17265109,
+                17265110
             },
         },
     },
