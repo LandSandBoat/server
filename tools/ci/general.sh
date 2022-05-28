@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# The following checks are only for single files, not for directories
 if [ $# -eq 0 ]; then
     exit 0
 fi
