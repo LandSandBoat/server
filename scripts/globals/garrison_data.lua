@@ -85,7 +85,8 @@ xi.garrison.data =
     {
         itemReq = 1528, -- Red Cryptex
         levelCap = 20,
-        npcs = {
+        npcs =
+        {
         -- empty filled with dynamic entries
         },
         mobs = 17187274,
@@ -100,7 +101,8 @@ xi.garrison.data =
         zThirdLine = 0,
         rot = 0,
         name = "676e7063C", -- gnpc text to hex (rename with proper names later)
-        waveSize = {
+        waveSize =
+        {
         -- Wave + Number of Parties
             [1] =
             {
@@ -162,7 +164,8 @@ xi.garrison.data =
     {
         itemReq = 1529, -- Darksteel Engraving
         levelCap = 20,
-        npcs = {
+        npcs =
+        {
         -- empty filled with dynamic entries
         },
         mobs = 17211849,
@@ -176,8 +179,9 @@ xi.garrison.data =
         xThirdLine = 4,
         zThirdLine = 0,
         rot = 106,
-        name = "676e7063C", -- gnpc text to hex (rename with proper names later)waveSize = {
-        waveSize = {
+        name = "676e7063C", -- gnpc text to hex (rename with proper names later)
+        waveSize =
+        {
         -- TODO Get Correct Wave Order enter pos data for all mobs
             [1] =
             {
@@ -239,7 +243,8 @@ xi.garrison.data =
     {
         itemReq = 1530, -- Seven-Knot Quipu
         levelCap = 20,
-        npcs = {
+        npcs =
+        {
         -- empty filled with dynamic entries
         },
         mobs = 17248598,
@@ -253,8 +258,9 @@ xi.garrison.data =
         xThirdLine = 4,
         zThirdLine = 0,
         rot = 115,
-        name = "676e7063C", -- gnpc text to hex (rename with proper names later)waveSize = {
-        waveSize = {
+        name = "676e7063C", -- gnpc text to hex (rename with proper names later)
+        waveSize =
+        {
         -- TODO Get Correct Wave Order
             [1] =
             {
@@ -316,11 +322,12 @@ xi.garrison.data =
     {
         itemReq = 1531, -- Galka Fang Sack
         levelCap = 30,
-        npcs = {
+        npcs =
+        {
         -- empty filled with dynamic entries
         },
         mobs = 17199593,
-        xPos = 141,
+        xPos = 141, -- needs adjusting
         yPos = -8,
         zPos = 87,
         xChange = -2,
@@ -331,7 +338,8 @@ xi.garrison.data =
         zThirdLine = 0,
         rot = 32,
         name = "676e7063C", -- gnpc text to hex (rename with proper names later)
-        waveSize = {
+        waveSize =
+        {
         -- Wave + Number of Parties
             [1] =
             {
@@ -393,11 +401,12 @@ xi.garrison.data =
     {
         itemReq = 1532, -- Silver Engraving
         levelCap = 30,
-        npcs = {
+        npcs =
+        {
         -- empty filled with dynamic entries
         },
         mobs = 17203668,
-        xPos = 54,
+        xPos = 54, -- needs adjusting
         yPos = 1,
         zPos = -1,
         xChange = -2,
@@ -408,7 +417,8 @@ xi.garrison.data =
         zThirdLine = 4,
         rot = 210,
         name = "676e7063C", -- gnpc text to hex (rename with proper names later)
-        waveSize = {
+        waveSize =
+        {
         -- Wave + Number of Parties
             [1] =
             {
@@ -470,11 +480,12 @@ xi.garrison.data =
     {
         itemReq = 1533, -- Silver Engraving
         levelCap = 30,
-        npcs = {
+        npcs =
+        {
         -- empty filled with dynamic entries
         },
         mobs = 17224152,
-        xPos = 458,
+        xPos = 458, -- needs adjusting
         yPos = 24,
         zPos = 421,
         xChange = -2,
@@ -485,7 +496,8 @@ xi.garrison.data =
         zThirdLine = 0,
         rot = 130,
         name = "676e7063C", -- gnpc text to hex (rename with proper names later)
-        waveSize = {
+        waveSize =
+        {
         -- Wave + Number of Parties
             [1] =
             {
@@ -547,7 +559,8 @@ xi.garrison.data =
     {
         itemReq = 1534, -- Mithra Fang Sack
         levelCap = 30,
-        npcs = {
+        npcs =
+        {
         -- empty filled with dynamic entries
         },
         mobs = 17261026,
@@ -562,7 +575,8 @@ xi.garrison.data =
         zThirdLine = 0,
         rot = 0,
         name = "676e7063C", -- gnpc text to hex (rename with proper names later)
-        waveSize = {
+        waveSize =
+        {
         -- Wave + Number of Parties
             [1] =
             {
@@ -588,7 +602,8 @@ xi.garrison.data =
     {
         itemReq = 1535, -- Thirteen-Knot Quipus
         levelCap = 30,
-        npcs = {
+        npcs =
+        {
         -- empty filled with dynamic entries
         },
         mobs = 17265103,
@@ -603,7 +618,8 @@ xi.garrison.data =
         zThirdLine = 0,
         rot = 0,
         name = "676e7063C", -- gnpc text to hex (rename with proper names later)
-        waveSize = {
+        waveSize =
+        {
         -- Wave + Number of Parties
             [1] =
             {
@@ -629,7 +645,8 @@ xi.garrison.data =
     {
         itemReq = 1538, -- Ram Leather Missive
         levelCap = 30,
-        npcs = {
+        npcs =
+        {
         -- empty filled with dynamic entries
         },
         mobs = 17293631,
@@ -644,7 +661,8 @@ xi.garrison.data =
         zThirdLine = 0,
         rot = 0,
         name = "676e7063C", -- gnpc text to hex (rename with proper names later)
-        waveSize = {
+        waveSize =
+        {
         -- Wave + Number of Parties
             [1] =
             {
@@ -670,7 +688,8 @@ xi.garrison.data =
     {
         itemReq = 1536, -- Tiger Leather Missive
         levelCap = 40,
-        npcs = {
+        npcs =
+        {
         -- empty filled with dynamic entries
         },
         mobs = 17232138,
@@ -685,7 +704,8 @@ xi.garrison.data =
         zThirdLine = 0,
         rot = 0,
         name = "676e7063C", -- gnpc text to hex (rename with proper names later)
-        waveSize = {
+        waveSize =
+        {
         -- Wave + Number of Parties
             [1] =
             {
@@ -711,7 +731,8 @@ xi.garrison.data =
     {
         itemReq = 1539, -- Hound Fang Sack
         levelCap = 40,
-        npcs = {
+        npcs =
+        {
         -- empty filled with dynamic entries
         },
         mobs = 17273296,
@@ -726,7 +747,8 @@ xi.garrison.data =
         zThirdLine = 0,
         rot = 0,
         name = "676e7063C", -- gnpc text to hex (rename with proper names later)
-        waveSize = {
+        waveSize =
+        {
         -- Wave + Number of Parties
             [1] =
             {
@@ -752,7 +774,8 @@ xi.garrison.data =
     {
         itemReq = 1542, -- Sheep Leather Missive
         levelCap = 40,
-        npcs = {
+        npcs =
+        {
         -- empty filled with dynamic entries
         },
         mobs = 17281482,
@@ -767,7 +790,8 @@ xi.garrison.data =
         zThirdLine = 0,
         rot = 0,
         name = "676e7063C", -- gnpc text to hex (rename with proper names later)
-        waveSize = {
+        waveSize =
+        {
         -- Wave + Number of Parties
             [1] =
             {
@@ -793,7 +817,8 @@ xi.garrison.data =
     {
         itemReq = 1537, -- Behemoth Leather Missive
         levelCap = 50,
-        npcs = {
+        npcs =
+        {
         -- empty filled with dynamic entries
         },
         mobs = 17236220,
@@ -808,7 +833,8 @@ xi.garrison.data =
         zThirdLine = 0,
         rot = 0,
         name = "676e7063C", -- gnpc text to hex (rename with proper names later)
-        waveSize = {
+        waveSize =
+        {
         -- Wave + Number of Parties
             [1] =
             {
@@ -834,7 +860,8 @@ xi.garrison.data =
     {
         itemReq = 1540, -- Dhalmel Leather Missive
         levelCap = 50,
-        npcs = {
+        npcs =
+        {
         -- empty filled with dynamic entries
         },
         mobs = 17244540,
@@ -849,7 +876,8 @@ xi.garrison.data =
         zThirdLine = 0,
         rot = 0,
         name = "676e7063C", -- gnpc text to hex (rename with proper names later)
-        waveSize = {
+        waveSize =
+        {
         -- Wave + Number of Parties
             [1] =
             {
@@ -875,7 +903,8 @@ xi.garrison.data =
     {
         itemReq = 1543, -- Coeurl Leather Missive
         levelCap = 50,
-        npcs = {
+        npcs =
+        {
         -- empty filled with dynamic entries
         },
         mobs = 17285562,
@@ -890,7 +919,8 @@ xi.garrison.data =
         zThirdLine = 0,
         rot = 0,
         name = "676e7063C", -- gnpc text to hex (rename with proper names later)
-        waveSize = {
+        waveSize =
+        {
         -- Wave + Number of Parties
             [1] =
             {
@@ -916,7 +946,8 @@ xi.garrison.data =
     {
         itemReq = 1541, -- Bunny Fang Sack
         levelCap = 75,
-        npcs = {
+        npcs =
+        {
         -- empty filled with dynamic entries
         },
         mobs = 17240425,
@@ -931,7 +962,8 @@ xi.garrison.data =
         zThirdLine = 0,
         rot = 0,
         name = "676e7063C", -- gnpc text to hex (rename with proper names later)
-        waveSize = {
+        waveSize =
+        {
         -- Wave + Number of Parties
             [1] =
             {
