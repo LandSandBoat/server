@@ -95,6 +95,15 @@ namespace moduleutils
         }
     }
 
+    void OnPushPacket(CBasicPacket* packet)
+    {
+        TracyZoneScoped;
+        for (auto* module : cppModules())
+        {
+            module->OnPushPacket(packet);
+        }
+    }
+
     struct Override
     {
         std::string              filename;
