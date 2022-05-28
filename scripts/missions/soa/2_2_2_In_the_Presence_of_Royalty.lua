@@ -33,7 +33,7 @@ mission.sections =
         {
             -- TODO: Option 2: Harvest by using a Sickle on a Harvesting Point.
             --['Harvesting_Point'] =
-            --{ 
+            --{
             --    onTrade = function(player, npc, trade)
             --        -- TODO: CSID for YORCIA_WEALD
             --        xi.helm.onTrade(player, npc, trade, xi.helm.type.HARVESTING, nil, nil)
