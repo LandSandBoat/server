@@ -129,7 +129,39 @@ end
 -----------------------------------
 xi.garrison.tick = function(player, npc, wave, party)
     print("Garrison Tick wave:", wave)
-    xi.garrison.waveAlive(player, npc, wave, party)
+    local zoneId = npc:getZoneID()
+    local garrisonRunning = npc:getZone():getLocalVar(string.format("[GARRISON]EndTime_%s", zoneId))
+    -- Check all NPCs are dead -> lose
+    if
+        xi.garrison.mobsAlive(player) == false and
+        wave == 4 and
+        xi.garrison.npcAlive(player, party) == true
+    then
+        -- Win
+        -- Var to give rewards to Trader to trigger from guard
+        player:getZone():setLocalVar(string.format("[GARRISON]Treasure_%s", zoneId), garrisonRunning)
+    elseif
+        xi.garrison.mobsAlive(player) == false and
+        wave <=3 and
+        xi.garrison.npcAlive(player, party) == true
+    then
+        -- next wave
+        wave = wave + 1
+        npc:timer(30000, function(npcArg)
+            xi.garrison.spawnWave(player, npc, wave, party)
+        end)
+    elseif
+        xi.garrison.npcAlive(player, party) == false or
+        os.time() >= garrisonRunning
+    then
+        -- lose
+        xi.garrison.onLose(player, npc)
+    else
+    -- start next tick
+        npc:timer(10000, function(npcArg)
+            xi.garrison.tick(player, npc, wave, party)
+        end)
+    end
 end
 
 xi.garrison.spawnNPCs = function(player, npc, party)
@@ -226,42 +258,6 @@ xi.garrison.spawnWave = function(player, npc, wave, party)
     else
             --start tick again
             npc:timer(1000, function(npcArg)
-            xi.garrison.tick(player, npc, wave, party)
-        end)
-    end
-end
-
-xi.garrison.waveAlive = function(player, npc, wave, party)
-    local zoneId = npc:getZoneID()
-    local garrisonRunning = npc:getZone():getLocalVar(string.format("[GARRISON]EndTime_%s", zoneId))
-    -- Check all NPCs are dead -> lose
-    if
-        xi.garrison.mobsAlive(player) == false and
-        wave == 4 and
-        xi.garrison.npcAlive(player, party) == true
-    then
-        -- Win
-        -- Var to give rewards to Trader to trigger from guard
-        player:getZone():setLocalVar(string.format("[GARRISON]Treasure_%s", zoneId), garrisonRunning)
-    elseif
-        xi.garrison.mobsAlive(player) == false and
-        wave <=3 and
-        xi.garrison.npcAlive(player, party) == true
-    then
-        -- next wave
-        wave = wave + 1
-        npc:timer(30000, function(npcArg)
-            xi.garrison.spawnWave(player, npc, wave, party)
-        end)
-    elseif
-        xi.garrison.npcAlive(player, party) == false or
-        os.time() >= garrisonRunning
-    then
-        -- lose
-        xi.garrison.onLose(player, npc)
-    else
-    -- start next tick
-        npc:timer(10000, function(npcArg)
             xi.garrison.tick(player, npc, wave, party)
         end)
     end
