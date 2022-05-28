@@ -16,12 +16,12 @@ function onTrigger(player)
         player:setCharVar("SoftGodMode", 1)
 
         -- Add bonus effects to the player..
-        player:addStatusEffect(tpz.effect.MAX_HP_BOOST,200,0,0)
-        player:addStatusEffect(tpz.effect.REGAIN,50,0,0)
-        player:addStatusEffect(tpz.effect.REFRESH,999,0,0)
-        player:addStatusEffect(tpz.effect.REGEN,999,0,0)
-        player:addStatusEffect(tpz.effect.CHAINSPELL, 1, 0, 0)
-        player:addStatusEffect(tpz.effect.MANAFONT, 1, 0, 0)
+        player:addStatusEffect(xi.effect.MAX_HP_BOOST,200,0,0)
+        player:addStatusEffect(xi.effect.REGAIN,50,0,0)
+        player:addStatusEffect(xi.effect.REFRESH,999,0,0)
+        player:addStatusEffect(xi.effect.REGEN,999,0,0)
+        player:addStatusEffect(xi.effect.CHAINSPELL, 1, 0, 0)
+        player:addStatusEffect(xi.effect.MANAFONT, 1, 0, 0)
 
 
         -- Heal the player from the new buffs..
@@ -32,12 +32,12 @@ function onTrigger(player)
         player:setCharVar("SoftGodMode", 0)
 
         -- Remove bonus effects..
-        player:delStatusEffect(tpz.effect.MAX_HP_BOOST)
-        player:delStatusEffect(tpz.effect.REGAIN)
-        player:delStatusEffect(tpz.effect.REFRESH)
-        player:delStatusEffect(tpz.effect.REGEN)
-        player:delStatusEffect(tpz.effect.CHAINSPELL)
-        player:delStatusEffect(tpz.effect.MANAFONT)
+        player:delStatusEffect(xi.effect.MAX_HP_BOOST)
+        player:delStatusEffect(xi.effect.REGAIN)
+        player:delStatusEffect(xi.effect.REFRESH)
+        player:delStatusEffect(xi.effect.REGEN)
+        player:delStatusEffect(xi.effect.CHAINSPELL)
+        player:delStatusEffect(xi.effect.MANAFONT)
 
     end
 end

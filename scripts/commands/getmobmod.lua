@@ -16,9 +16,9 @@ function error(player, msg)
 end
 
 function onTrigger(player, id)
-    -- invert tpz.mobMod table
+    -- invert xi.mobMod table
     local modNameByNum = {}
-    for k, v in pairs(tpz.mobMod) do
+    for k, v in pairs(xi.mobMod) do
         modNameByNum[v]=k
     end
 
@@ -31,8 +31,8 @@ function onTrigger(player, id)
         if modNameByNum[modId] ~= nil then
             modName = modNameByNum[modId]
         end
-    elseif tpz.mobMod[id] ~= nil then
-        modId = tpz.mobMod[id]
+    elseif xi.mobMod[id] ~= nil then
+        modId = xi.mobMod[id]
         modName = id
     end
     if modName == nil or modId == nil then
