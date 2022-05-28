@@ -16,21 +16,24 @@ xi.pyxis.spawn = {}
 
 xi.pyxis.spawn.chestLightValues =
 {
-    [1] = {
+    [1] =
+    {
         [xi.abyssea.lightType.PEARL] = 5,
         [xi.abyssea.lightType.RUBY ] = 8,
         [xi.abyssea.lightType.AZURE] = 8,
         [xi.abyssea.lightType.AMBER] = 8
     },
 
-    [2] = {
+    [2] =
+    {
         [xi.abyssea.lightType.PEARL] = 10,
         [xi.abyssea.lightType.RUBY ] = 16,
         [xi.abyssea.lightType.AZURE] = 16,
         [xi.abyssea.lightType.AMBER] = 16
     },
 
-    [3] = {
+    [3] =
+    {
         [xi.abyssea.lightType.PEARL]   = 15,
         [xi.abyssea.lightType.RUBY ]   = 32,
         [xi.abyssea.lightType.AZURE]   = 32,
@@ -40,7 +43,8 @@ xi.pyxis.spawn.chestLightValues =
         [xi.abyssea.lightType.EBON]    = 1,
     },
 
-    [4] = {
+    [4] =
+    {
         [xi.abyssea.lightType.RUBY ]   = 64,
         [xi.abyssea.lightType.AZURE]   = 64,
         [xi.abyssea.lightType.GOLDEN]  = 10,
@@ -48,19 +52,22 @@ xi.pyxis.spawn.chestLightValues =
         [xi.abyssea.lightType.EBON]    = 2,
     },
 
-    [5] = {
+    [5] =
+    {
         [xi.abyssea.lightType.GOLDEN]  = 15,
         [xi.abyssea.lightType.SILVERY] = 15,
         [xi.abyssea.lightType.EBON]    = 3,
     }
 }
 
-xi.pyxis.spawn.goldCofferSize = {
+xi.pyxis.spawn.goldCofferSize =
+{
     BIG_CHEST    = 1159,
     LITTLE_CHEST = 1155,
 }
 
-xi.pyxis.spawn.chestMessageByChestType = {
+xi.pyxis.spawn.chestMessageByChestType =
+{
     [xi.pyxis.chestType.BLUE] =
     {
         [xi.pyxis.chestDropType.TEMPORARY_ITEM] =
@@ -238,9 +245,10 @@ local function GetBlueChestInfos(player, lightValues)
         xi.ki.VERMILLION_ABYSSITE_OF_KISMET
     }
 
-    local dataAzureTiers = {
-        [1] = { min = 0  , max = 63  },
-        [2] = { min = 64 , max = 127 },
+    local dataAzureTiers =
+    {
+        [1] = { min =   0, max = 63  },
+        [2] = { min =  64, max = 127 },
         [3] = { min = 128, max = 191 },
         [4] = { min = 192, max = 223 },
         [5] = { min = 224, max = 255 }
@@ -383,9 +391,10 @@ local function GetGoldChestInfos(player, lightValues)
         xi.ki.IVORY_ABYSSITE_OF_DESTINY,
     }
 
-    local dataAmberTiers = {
-        [1] = { min = 0  , max = 63 , maxUnlockNumber = 24 },
-        [2] = { min = 64 , max = 127, maxUnlockNumber = 35 },
+    local dataAmberTiers =
+    {
+        [1] = { min =   0, max = 63 , maxUnlockNumber = 24 },
+        [2] = { min =  64, max = 127, maxUnlockNumber = 35 },
         [3] = { min = 128, max = 191, maxUnlockNumber = 46 },
         [4] = { min = 192, max = 223, maxUnlockNumber = 68 },
         [5] = { min = 224, max = 255, maxUnlockNumber = 90 },
