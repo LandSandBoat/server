@@ -431,15 +431,13 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        std::string outString;
+        std::vector<std::string> vec;
         for (std::size_t i = 0; i < va.size(); ++i)
         {
-            auto entry = luaToString(va[i]);
-            // TODO: Use fmt::join if we ever update fmt
-            outString += fmt::format("{} ", entry);
+            vec.emplace_back(luaToString(va[i]));
         }
 
-        ShowScript(fmt::format("{}", outString));
+        ShowScript(fmt::format("{}", fmt::join(vec.begin(), vec.end(), " ")).c_str());
     }
 
     sol::function getEntityCachedFunction(CBaseEntity* PEntity, std::string funcName)

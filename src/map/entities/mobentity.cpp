@@ -458,7 +458,7 @@ bool CMobEntity::GetCallForHelpFlag() const
     return m_flags & FLAG_CALL_FOR_HELP;
 }
 
-void CMobEntity::Untargetable(bool untargetable)
+void CMobEntity::SetUntargetable(bool untargetable)
 {
     if (untargetable)
     {
@@ -471,7 +471,7 @@ void CMobEntity::Untargetable(bool untargetable)
     updatemask |= UPDATE_HP;
 }
 
-bool CMobEntity::IsUntargetable() const
+bool CMobEntity::GetUntargetable() const
 {
     return m_flags & FLAG_UNTARGETABLE;
 }
@@ -572,7 +572,7 @@ void CMobEntity::Spawn()
     if (m_roamFlags & ROAMFLAG_STEALTH)
     {
         HideName(true);
-        Untargetable(true);
+        SetUntargetable(true);
     }
 
     // add people to my posse

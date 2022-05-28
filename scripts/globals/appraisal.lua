@@ -1483,7 +1483,7 @@ xi.appraisalUtil.assaultChestTrigger = function(player, npc, qItemTable, regItem
         end
         npc:entityAnimationPacket("open")
         npc:setLocalVar("open", 1)
-        npc:untargetable(true)
+        npc:setUntargetable(true)
         npc:timer(15000, function(npcArg) npcArg:entityAnimationPacket("kesu") end)
         npc:timer(16000, function(npcArg) npcArg:setStatus(xi.status.DISAPPEAR) end)
         for i = 1, #regItemTable, 1 do

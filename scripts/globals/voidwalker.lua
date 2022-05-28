@@ -341,7 +341,7 @@ xi.voidwalker.onMobSpawn = function(mob)
     mob:setStatus(xi.status.INVISIBLE)
     mob:hideHP(true)
     mob:hideName(true)
-    mob:untargetable(true)
+    mob:setUntargetable(true)
     local mods = modByMobName[mobName]
     if mods then
         mods(mob)
@@ -374,7 +374,7 @@ xi.voidwalker.onMobDisengage = function(mob)
     mob:setStatus(xi.status.INVISIBLE)
     mob:hideHP(true)
     mob:hideName(true)
-    mob:untargetable(true)
+    mob:setUntargetable(true)
 end
 
 xi.voidwalker.onMobDespawn = function(mob)
@@ -448,7 +448,7 @@ xi.voidwalker.onHealing = function(player)
             mob:hideHP(false)
         end
         mob:hideName(false)
-        mob:untargetable(false)
+        mob:setUntargetable(false)
         mob:setStatus(xi.status.UPDATE)
         mob:updateClaim(player)
     elseif mobNearest.distance >= 300 then

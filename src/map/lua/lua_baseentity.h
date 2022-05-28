@@ -752,7 +752,8 @@ public:
     void setAggressive(bool aggressive);
     void setTrueDetection(bool truedetection);
     void setUnkillable(bool unkillable);
-    void untargetable(bool untargetable);
+    void setUntargetable(bool untargetable);
+    bool getUntargetable();
 
     void setDelay(uint16 delay);   // sets a mobs weapon delay
     void setDamage(uint16 damage); // sets a mobs weapon damage
