@@ -16,7 +16,7 @@ require("scripts/globals/zone")
 -----------------------------------
 local entity = {}
 
-local TrustMemory = function(player)
+local trustMemory = function(player)
     local memories = 0
     if player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_THREE_KINGDOMS) then
         memories = memories + 2
@@ -42,9 +42,9 @@ entity.onTrigger = function(player, npc)
     local rank3 = player:getRank(player:getNation()) >= 3 and 1 or 0
 
     if trustWindurst == QUEST_ACCEPTED and (trustSandoria == QUEST_COMPLETED or trustBastok == QUEST_COMPLETED) then
-        player:startEvent(439, 0, 0, 0, TrustMemory(player), 0, 0, 0, rank3)
+        player:startEvent(439, 0, 0, 0, trustMemory(player), 0, 0, 0, rank3)
     elseif trustWindurst == QUEST_ACCEPTED and windurstFirstTrust == 0 then
-        player:startEvent(435, 0, 0, 0, TrustMemory(player), 0, 0, 0, rank3)
+        player:startEvent(435, 0, 0, 0, trustMemory(player), 0, 0, 0, rank3)
     elseif trustWindurst == QUEST_ACCEPTED and windurstFirstTrust == 1 and kupipiTrustChatFlag == 0 then
         player:startEvent(436)
         player:setLocalVar("KupipiTrustChatFlag", 1)

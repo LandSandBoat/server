@@ -24,41 +24,41 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local AirshipKI         = player:hasKeyItem(xi.ki.AIRSHIP_PASS)
+    local airshipKI         = player:hasKeyItem(xi.ki.AIRSHIP_PASS)
     local saveTheClockTower = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SAVE_THE_CLOCK_TOWER)
-    local NPCNumber         = player:getCharVar("saveTheClockTowerVar") -- Quest step & number of npc
+    local npcNumber         = player:getCharVar("saveTheClockTowerVar") -- Quest step & number of npc
 
     if
-        AirshipKI == false and
+        airshipKI == false and
         saveTheClockTower == QUEST_ACCEPTED and
-        NPCNumber >= 1 and
-        NPCNumber <= 11
+        npcNumber >= 1 and
+        npcNumber <= 11
     then
         player:startEvent(230, 4, 10) -- airship + petition help/restart
 
     elseif
-        AirshipKI == true and
+        airshipKI == true and
         saveTheClockTower == QUEST_ACCEPTED and
-        NPCNumber >= 1 and
-        NPCNumber <= 11
+        npcNumber >= 1 and
+        npcNumber <= 11
     then
         player:startEvent(230, 6, 10) -- petition help/restart
 
     elseif
-        AirshipKI == false and
+        airshipKI == false and
         saveTheClockTower == QUEST_ACCEPTED and
-        NPCNumber == 0
+        npcNumber == 0
     then
         player:startEvent(230, 8, 10) -- airship + petition
 
     elseif
-        AirshipKI == true and
+        airshipKI == true and
         saveTheClockTower == QUEST_ACCEPTED and
-        NPCNumber == 0
+        npcNumber == 0
     then
         player:startEvent(230, 10, 10) -- petition
 
-    elseif AirshipKI == false then
+    elseif airshipKI == false then
         player:startEvent(230, 12) -- airship
 
     else
