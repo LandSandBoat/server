@@ -14,7 +14,7 @@ end
 entity.onMobDespawn = function(mob)
     if (mob:getID() > ID.mob.JAILER_OF_LOVE) then
         local jailerOfLove = GetMobByID(ID.mob.JAILER_OF_LOVE)
-        local xzomitsKilled = JoL:getLocalVar("JoL_Qn_xzomit_Killed")
+        local xzomitsKilled = jailerOfLove:getLocalVar("JoL_Qn_xzomit_Killed")
         jailerOfLove:setLocalVar("JoL_Qn_xzomit_Killed", xzomitsKilled + 1)
     end
 end
