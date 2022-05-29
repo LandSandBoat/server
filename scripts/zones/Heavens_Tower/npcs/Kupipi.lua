@@ -34,23 +34,23 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local TrustSandoria = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TRUST_SANDORIA)
-    local TrustBastok   = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRUST_BASTOK)
-    local TrustWindurst = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TRUST_WINDURST)
-    local WindurstFirstTrust = player:getCharVar("WindurstFirstTrust")
-    local KupipiTrustChatFlag = player:getLocalVar("KupipiTrustChatFlag")
-    local Rank3 = player:getRank(player:getNation()) >= 3 and 1 or 0
+    local trustSandoria = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TRUST_SANDORIA)
+    local trustBastok   = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRUST_BASTOK)
+    local trustWindurst = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TRUST_WINDURST)
+    local windurstFirstTrust = player:getCharVar("WindurstFirstTrust")
+    local kupipiTrustChatFlag = player:getLocalVar("KupipiTrustChatFlag")
+    local rank3 = player:getRank(player:getNation()) >= 3 and 1 or 0
 
-    if TrustWindurst == QUEST_ACCEPTED and (TrustSandoria == QUEST_COMPLETED or TrustBastok == QUEST_COMPLETED) then
-        player:startEvent(439, 0, 0, 0, TrustMemory(player), 0, 0, 0, Rank3)
-    elseif TrustWindurst == QUEST_ACCEPTED and WindurstFirstTrust == 0 then
-        player:startEvent(435, 0, 0, 0, TrustMemory(player), 0, 0, 0, Rank3)
-    elseif TrustWindurst == QUEST_ACCEPTED and WindurstFirstTrust == 1 and KupipiTrustChatFlag == 0 then
+    if trustWindurst == QUEST_ACCEPTED and (trustSandoria == QUEST_COMPLETED or trustBastok == QUEST_COMPLETED) then
+        player:startEvent(439, 0, 0, 0, TrustMemory(player), 0, 0, 0, rank3)
+    elseif trustWindurst == QUEST_ACCEPTED and windurstFirstTrust == 0 then
+        player:startEvent(435, 0, 0, 0, TrustMemory(player), 0, 0, 0, rank3)
+    elseif trustWindurst == QUEST_ACCEPTED and windurstFirstTrust == 1 and kupipiTrustChatFlag == 0 then
         player:startEvent(436)
         player:setLocalVar("KupipiTrustChatFlag", 1)
-    elseif TrustWindurst == QUEST_ACCEPTED and WindurstFirstTrust == 2 then
+    elseif trustWindurst == QUEST_ACCEPTED and windurstFirstTrust == 2 then
         player:startEvent(437)
-    elseif TrustWindurst == QUEST_COMPLETED and not player:hasSpell(901) and KupipiTrustChatFlag == 0 then
+    elseif trustWindurst == QUEST_COMPLETED and not player:hasSpell(901) and kupipiTrustChatFlag == 0 then
         player:startEvent(438)
         player:setLocalVar("KupipiTrustChatFlag", 1)
     elseif player:getNation() == xi.nation.WINDURST then

@@ -12,7 +12,7 @@ entity.onTrade = function(player, npc, trade)
     local aLittleKnowledgeProgress = player:getCharVar("ALittleKnowledge")
     local sheetsofVellumProgress = player:getCharVar("SheetsofVellum")
 
-    if (aLittleKnowledge == QUEST_ACCEPTED and aLittleKnowledgeProgress == 1 and SheetsofVellumProgress > 0 and sheetsofVellumProgress < 4) then
+    if (aLittleKnowledge == QUEST_ACCEPTED and aLittleKnowledgeProgress == 1 and sheetsofVellumProgress > 0 and sheetsofVellumProgress < 4) then
         if (trade:hasItemQty(4365, 48) and trade:getGil() == 0 and trade:getItemCount() == 48) then
             if (sheetsofVellumProgress == 1) then
                 player:startEvent(8)
