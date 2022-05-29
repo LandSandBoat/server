@@ -23,7 +23,7 @@ end
 
 entity.onMobFight = function(mob, target)
     local delay = mob:getLocalVar("delay")
-    -- local LastCast = mob:getLocalVar("LAST_CAST")
+    -- local lastCast = mob:getLocalVar("LAST_CAST")
     local spell = mob:getLocalVar("COPY_SPELL")
     local changeTime = mob:getLocalVar("changeTime")
 

@@ -10,10 +10,9 @@ local ID = require("scripts/zones/Metalworks/IDs")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
+    local meanMachine = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.MEAN_MACHINE)
 
-    local MeanMachine = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.MEAN_MACHINE)
-
-    if MeanMachine == QUEST_ACCEPTED then
+    if meanMachine == QUEST_ACCEPTED then
         local FreeSlots = player:getFreeSlotsCount()
 
         if FreeSlots >= 1 then
@@ -27,29 +26,25 @@ entity.onTrade = function(player, npc, trade)
             player:messageSpecial(ID.text.FULL_INVENTORY_AFTER_TRADE, 4731)
         end
     end
-
 end
 
 entity.onTrigger = function(player, npc)
-
-    local MeanMachine = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.MEAN_MACHINE)
+    local meanMachine = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.MEAN_MACHINE)
     local Fame = player:getFameLevel(xi.quest.fame_area.BASTOK)
 
-    if MeanMachine == QUEST_AVAILABLE and Fame >= 2 then
+    if meanMachine == QUEST_AVAILABLE and Fame >= 2 then
         player:startEvent(556)
-    elseif MeanMachine == QUEST_ACCEPTED then
+    elseif meanMachine == QUEST_ACCEPTED then
         player:startEvent(559)
     else
         player:startEvent(550)
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
     if csid == 556 then
         player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.MEAN_MACHINE)
     elseif csid == 557 then
@@ -59,7 +54,6 @@ entity.onEventFinish = function(player, csid, option)
         player:addItem(4869)
         player:messageSpecial(ID.text.ITEM_OBTAINED, 4869)
     end
-
 end
 
 return entity
