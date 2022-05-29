@@ -4889,7 +4889,7 @@ namespace luautils
     uint16 GetItemIDByName(std::string const& name)
     {
         uint16      id    = 0;
-        const char* Query = "SELECT itemid FROM item_basic WHERE name = '%s' LIMIT 1;";
+        const char* Query = "SELECT itemid FROM item_basic WHERE name LIKE '%s%%' LIMIT 1;";
         int32       ret   = sql->Query(Query, name);
 
         if (ret != SQL_ERROR && sql->NumRows() != 0)
