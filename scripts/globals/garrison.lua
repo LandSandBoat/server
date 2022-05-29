@@ -164,15 +164,13 @@ xi.garrison.tick = function(player, npc, wave, party)
     end
 end
 
-xi.garrison.spawnNPCs = function(player, npc, party)
-    local zone = player:getZone()
+xi.garrison.spawnNPCs = function(npc, party)
     local zoneId = npc:getZoneID()
     local garrisonZoneData = xi.garrison.data[zoneId]
     local xPos = garrisonZoneData.xPos
     local yPos = garrisonZoneData.yPos
     local zPos = garrisonZoneData.zPos
     local rot = garrisonZoneData.rot
-    local npcName = garrisonZoneData.name
     local npcnum = 1
     local npcs = garrisonZoneData.npcs
     for _, mobId in pairs(npcs) do
@@ -265,7 +263,7 @@ xi.garrison.start = function(player, npc, party)
             end
         end
     -- Spawn NPCs
-    xi.garrison.spawnNPCs(player, npc, party)
+    xi.garrison.spawnNPCs(npc, party)
     -- Start First Wave
     local wave = 1
     xi.garrison.spawnWave(player, npc, wave, party)
