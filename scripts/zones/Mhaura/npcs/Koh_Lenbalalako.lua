@@ -23,11 +23,11 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    local FireAndBrimstoneCS = player:getCharVar("fireAndBrimstone")
+    local fireAndBrimstoneCS = player:getCharVar("fireAndBrimstone")
     local UnbridledPassionCS = player:getCharVar("unbridledPassion")
 
     -- during RNG af2
-    if (FireAndBrimstoneCS == 1) then
+    if (fireAndBrimstoneCS == 1) then
         player:startEvent(10007)
 
     -- during RNG af3

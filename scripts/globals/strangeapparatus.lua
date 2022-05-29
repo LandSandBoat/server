@@ -277,7 +277,7 @@ xi.strangeApparatus =
         local drops = data.drop
         local foundChip = false
 
-        for chipTraded = RED_CHIP, BLACK_CHIP do
+        for chipTraded = xi.items.RED_CHIP, xi.items.BLACK_CHIP do
             if npcUtil.tradeHasExactly(trade, {xi.items.INFINITY_CORE, chipTraded}) then
                 player:confirmTrade()
                 foundChip = true
