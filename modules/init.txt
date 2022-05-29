@@ -43,12 +43,6 @@ custom/lua/test_npcs_in_gm_home.lua
 era/cpp/era_dynamisFunctions.cpp
 era/lua/dynamis/globals/era_dynamis.lua
 era/lua/dynamis/globals/era_dynamis_spawning.lua
-era/lua/dynamis/mobs/era_angra_mainyu.lua
-era/lua/dynamis/mobs/era_apocalyptic_beast.lua
-era/lua/dynamis/mobs/era_cirrate_christelle.lua
-era/lua/dynamis/mobs/era_dynamis_lord.lua
-era/lua/dynamis/mobs/era_yang.lua
-era/lua/dynamis/mobs/era_ying.lua
 era/lua/dynamis/mobskills/era_regain_mobskill.lua
 era/lua/dynamis/globals/era_dynamis_zones.lua
 #-----------------------

@@ -1,12 +1,14 @@
 -----------------------------------
 -- Antaeus Era Module
 -----------------------------------
-require("modules/module_utils")
+require("scripts/globals/dynamis")
 require("scripts/globals/zone")
 -----------------------------------
-local m = Module:new("era_antaeus")
 
-m:addOverride("xi.zones.Dynamis-Qufim.mobs.Antaeus.onMobSpawn", function(mob)
+xi = xi or {}
+xi.dynamis = xi.dynamis or {}
+
+xi.dynamis.onSpawnAntaeus = function(mob)
     xi.dynamis.setMegaBossStats(mob)
     -- Set Removable Mods
     mob:addMod(xi.mod.REGEN, 1000)
@@ -32,13 +34,13 @@ m:addOverride("xi.zones.Dynamis-Qufim.mobs.Antaeus.onMobSpawn", function(mob)
     mob:addMod(xi.mod.GRAVITYRES, 40)
     mob:addMod(xi.mod.BINDRES, 40)
     mob:addMod(xi.mod.REGAIN, 50)
-end)
+end
 
-m:addOverride("xi.zones.Dynamis-Qufim.mobs.Antaeus.onMobEngaged", function(mob, target)
+xi.dynamis.onEngagedAntaeus = function(mob, target)
     xi.dynamis.parentOnEngaged(mob, target)
-end)
+end
 
-m:addOverride("xi.zones.Dynamis-Qufim.mobs.Antaeus.onMobFight", function(mob, target)
+xi.dynamis.onFightAntaeus = function(mob, target)
     local zone = mob:getZone()
     -- Remove Mods Per NM or Elemental Kill
     if not GetMobByID(zone:getLocalVar("Scolopendra")):isAlive() then
@@ -99,9 +101,8 @@ m:addOverride("xi.zones.Dynamis-Qufim.mobs.Antaeus.onMobFight", function(mob, ta
             mob:setMod(xi.mod.DARKRES, 0)
         end
     end
-end)
+end
 
-m:addOverride("xi.zones.Dynamis-Qufim.mobs.Antaeus.onMobRoam", function(mob) xi.dynamis.mobOnRoam(mob) end)
-m:addOverride("xi.zones.Dynamis-Qufim.mobs.Antaeus.onMobRoamAction", function(mob) xi.dynamis.mobOnRoamAction(mob) end)
-
-return m
+xi.dynamis.onMobRoamAntaeus = function(mob) xi.dynamis.mobOnRoam(mob) end
+xi.dynamis.onMobRoamActionAntaeus = function(mob) xi.dynamis.mobOnRoamAction(mob) end
+xi.dynamis.onMobDeathAntaeus = function(mob, player, isKiller) xi.dynamis.megaBossOnDeath(mob, player, mobVar) end

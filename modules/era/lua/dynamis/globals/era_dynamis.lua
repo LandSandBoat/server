@@ -697,6 +697,7 @@ xi.dynamis.handleDynamis = function(zone)
     local zone1Min = zone:getLocalVar(string.format("[DYNA]Given1MinuteWarning_%s", zoneID))
     local playersInZone = zone:getPlayers()
     local playercount = 0
+    local i = 2
 
     for _, player in pairs(playersInZone) do -- Iterates through player list to do stuff.
         if player:getCharVar("Requires_Initial_Update") == 1 then
@@ -714,13 +715,22 @@ xi.dynamis.handleDynamis = function(zone)
         playercount = playercount + 1
     end
 
-    for waveNumber = 2, xi.dynamis.mobList[zoneID].maxWaves do -- Checks to see if each wave is elegible to be spawned.
-        if xi.dynamis.mobList[zoneID].waveDefeatRequirements[waveNumber] == true and zone:getLocalVar(string.format("Wave_%i_Spawned", waveNumber)) ~= 1 then -- Checks to see if the wave has been spawned.
-            xi.dynamis.spawnWave(zone, waveNumber) -- If not spawn
-            waveNumber = waveNumber + 1 -- Increment
-        else
-            waveNumber = waveNumber + 1 -- Increment
+    for waveNumber, wave in pairs(xi.dynamis.mobList[zoneID].waveDefeatRequirements) do
+        local check = 0
+        local balance = 0
+        local waveSpawned = zone:getLocalVar(string.format("Wave_%i_Spawned", waveNumber))
+        for waveNum, var in pairs(wave) do
+            check = check + zone:getLocalVar(string.format("%s", var))
+            balance = balance + 1
+            waveNum = waveNum + 1
         end
+        if check == balance then
+            if  waveSpawned ~= 1 and waveNumber ~= 1 then
+                print(string.format("Wave Spawning: %s", waveNumber))
+                xi.dynamis.spawnWave(zone, zoneID, waveNumber) -- If not spawn
+            end
+        end
+        waveNumber = waveNumber + 1
     end
 
     if zoneTimeRemaining <= 0 then -- If now is < 0 minutes remove players and flag cleanup.
@@ -764,8 +774,9 @@ end
 --------------------------------------------
 
 xi.dynamis.onNewDynamis = function(player)
-    local zone = GetZone(xi.dynamis.dynaInfoEra[player:getZoneID()].dynaZone)
-    xi.dynamis.spawnWave(zone, 1) -- Spawn Wave 1
+    local zoneID = xi.dynamis.dynaInfoEra[player:getZoneID()].dynaZone
+    local zone = GetZone(zoneID)
+    xi.dynamis.spawnWave(zone, zoneID, 1) -- Spawn Wave 1
 end
 
 --------------------------------------------

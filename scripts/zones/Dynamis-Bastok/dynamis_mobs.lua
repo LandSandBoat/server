@@ -70,6 +70,7 @@ require("scripts/globals/zone")
 ----------------------------------------------------------------------------------------------------
 local zoneID = xi.zone.DYNAMIS_BASTOK
 local i = 1
+local iWaves = 0
 local zone = GetZone(zoneID)
 xi = xi or {} -- Ignore me I just set the global.
 xi.dynamis = xi.dynamis or {} -- Ignore me I just set the global.
@@ -78,8 +79,6 @@ xi.dynamis.mobList[zoneID] = { } -- Ignore me, I just start the table.
 xi.dynamis.mobList[zoneID].zoneID = zoneID -- Ignore me, I just ensure .zoneIDID exists.
 xi.dynamis.mobList[zoneID].nmchildren = { }
 xi.dynamis.mobList[zoneID].mobchildren = { }
-xi.dynamis.mobList[zoneID].waveDefeatRequirements = { } -- Ignore me, I just start the table.
-xi.dynamis.mobList[zoneID].waveDefeatRequirements[1] = { } -- Ignore me, I just allow for wave 1 spawning.
 xi.dynamis.mobList[zoneID].maxWaves = 3 -- Ignore me because Oph told me to
 
 while i < 400 do
@@ -249,11 +248,11 @@ xi.dynamis.mobList[zoneID][154].info = {"NM", "Gu'Nhi Noondozer",        "Quadav
 xi.dynamis.mobList[zoneID][155].info = {"NM", "Ze'Vho Fallsplitter",     "Quadav", "DRK", "ZeVho_killed"} -- Ze'Vho Fallsplitter
 xi.dynamis.mobList[zoneID][156].info = {"NM", "Ko'Dho Cannonball",       "Quadav", "MNK", "KoDho_killed"} -- Ko'Dho Cannonball
 
-xi.dynamis.mobList[zoneID][157].info = {"NM", "Effigy Shield", "Quadav", "PLD", nil } -- Effigy Shield
-xi.dynamis.mobList[zoneID][158].info = {"NM", "Effigy Shield", "Quadav", "NIN", nil } -- Effigy Shield
-xi.dynamis.mobList[zoneID][159].info = {"NM", "Effigy Shield", "Quadav", "BRD", nil } -- Effigy Shield
-xi.dynamis.mobList[zoneID][160].info = {"NM", "Effigy Shield", "Quadav", "DRK", nil } -- Effigy Shield
-xi.dynamis.mobList[zoneID][161].info = {"NM", "Effigy Shield", "Quadav", "SAM", nil } -- Effigy Shield
+xi.dynamis.mobList[zoneID][157].info = {"NM", "Effigy Shield PLD", "Quadav", "PLD", nil } -- Effigy Shield
+xi.dynamis.mobList[zoneID][158].info = {"NM", "Effigy Shield NIN", "Quadav", "NIN", nil } -- Effigy Shield
+xi.dynamis.mobList[zoneID][159].info = {"NM", "Effigy Shield BRD", "Quadav", "BRD", nil } -- Effigy Shield
+xi.dynamis.mobList[zoneID][160].info = {"NM", "Effigy Shield DRK", "Quadav", "DRK", nil } -- Effigy Shield
+xi.dynamis.mobList[zoneID][161].info = {"NM", "Effigy Shield SAM", "Quadav", "SAM", nil } -- Effigy Shield
 
 xi.dynamis.mobList[zoneID][162].info = {"TE Normal", "Vanguard Vindicator", "Quadav", "WAR", nil } -- 10min TE
 xi.dynamis.mobList[zoneID][163].info = {"TE Normal", "Vanguard Constable", "Quadav", "WHM", nil } -- 10min TE
@@ -268,10 +267,8 @@ xi.dynamis.mobList[zoneID][164].info = {"TE Normal", "Vanguard Militant", "Quada
 --           Wave Defeat Reqs.          --
 --------------------------------------------
 --xi.dynamis.mobList[zoneID].waveDefeatRequirements[2] = {zoneIDEnity:getLocalVar("MegaBoss_Killed") == 1}
-if zone ~= nil then
-    xi.dynamis.mobList[zoneID].waveDefeatRequirements[2] = { zone:getLocalVar("KoDho_killed") == 1, zone:getLocalVar("GiPha_killed") == 1, zone:getLocalVar("ZeVho_killed") == 1 } -- 3 NMS to spawn boss
-    xi.dynamis.mobList[zoneID].waveDefeatRequirements[3] = { zone:getLocalVar("MegaBoss_Killed") == 1 } -- Spawans wave after megaboss dies
-end
+
+xi.dynamis.mobList[zoneID].waveDefeatRequirements = { { }, {"KoDho_killed", "GiPha_killed", "ZeVho_killed"}, {"MegaBoss_Killed"}}
 ------------------------------------------
 --            Wave Spawning             --
 -- Note: Wave 1 spawns at start.        --
@@ -385,7 +382,7 @@ xi.dynamis.mobList[zoneID][1].wave = {
 
 xi.dynamis.mobList[zoneID][2].wave = {
     110, -- 110-G/R
-    111,  -- 111-G/R
+    111,
 }
 
 xi.dynamis.mobList[zoneID][3].wave = {
