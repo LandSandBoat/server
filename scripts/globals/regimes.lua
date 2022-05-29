@@ -35,7 +35,8 @@ xi.regime.type =
 -- reward is the gil/tabs you get for completing
 -----------------------------------
 
-local regimeInfo = {
+local regimeInfo =
+{
 
     -----------------------------------
     -- Fields of Valor information

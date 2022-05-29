@@ -10,66 +10,90 @@ local ID = require("scripts/zones/Port_Windurst/IDs")
 -----------------------------------
 local entity = {}
 
-local keyitems = {
-    [0] = {
+local keyitems =
+{
+    [0] =
+    {
         id = xi.ki.FROG_FISHING,
         rank = 3,
         cost = 30000
     },
-    [1] = {
+
+    [1] =
+    {
         id = xi.ki.SERPENT_RUMORS,
         rank = 8,
         cost = 95000
     },
-    [2] = {
+
+    [2] =
+    {
         id = xi.ki.MOOCHING,
         rank = 9,
         cost = 115000
     },
-    [3] = {
+
+    [3] =
+    {
         id = xi.ki.ANGLERS_ALMANAC,
         rank = 9,
         cost = 20000
     }
 }
 
-local items = {
-    [0] = {
+local items =
+{
+    [0] =
+    {
         id = 17002, -- Robber's Rig
         rank = 3,
         cost = 1500
     },
-    [1] = {
+
+    [1] =
+    {
         id = 15452, -- Fisherman's Belt
         rank = 4,
         cost = 10000
     },
-    [2] = {
+
+    [2] =
+    {
         id = 14195, -- Pair of Waders
         rank = 5,
         cost = 70000
     },
-    [3] = {
+
+    [3] =
+    {
         id = 14400, -- Fisherman's Apron
         rank = 7,
         cost = 100000
     },
-    [4] = {
+
+    [4] =
+    {
         id = 191, -- Fishing hole map
         rank = 9,
         cost = 150000
     },
-    [5] = {
+
+    [5] =
+    {
         id = 340, -- Fisherman's Signboard
         rank = 9,
         cost = 200000
     },
-    [6] = {
+
+    [6] =
+    {
         id = 3670, -- Fish and Lure
         rank = 7,
         cost = 50000
     },
-    [7] = {
+
+    [7] =
+    {
         id = 3330, -- Fishermen's Emblem
         rank = 9,
         cost = 15000

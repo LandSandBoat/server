@@ -24,7 +24,8 @@ entity.onTrigger = function(player, npc)
         player:setCharVar("AF_SCH_BODY", gownQuestProgress + 1)
 
         -- Move the markings around
-        local positions = {
+        local positions =
+        {
             [1] = {-517, -167, 209},
             [2] = {-492, -168, 190},
             [3] = {-464, -166, 241},

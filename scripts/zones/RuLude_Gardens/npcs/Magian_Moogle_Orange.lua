@@ -9,7 +9,9 @@ require("scripts/globals/magiantrials")
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}
-local EVENT_IDS = {
+
+local EVENT_IDS =
+{
     [1] = 10121,
     [2] = 10122,
     [3] = 10123,

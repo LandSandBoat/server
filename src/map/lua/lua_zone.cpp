@@ -66,6 +66,11 @@ void CLuaZone::setLocalVar(const char* key, uint32 val)
     m_pLuaZone->SetLocalVar(key, val);
 }
 
+void CLuaZone::resetLocalVars()
+{
+    m_pLuaZone->ResetLocalVars();
+}
+
 /************************************************************************
  *                                                                       *
  * Registering the active area in the zone                               *
@@ -397,6 +402,7 @@ void CLuaZone::Register()
 
     SOL_REGISTER("getLocalVar", CLuaZone::getLocalVar);
     SOL_REGISTER("setLocalVar", CLuaZone::setLocalVar);
+    SOL_REGISTER("resetLocalVars", CLuaZone::resetLocalVars);
 
     SOL_REGISTER("registerRegion", CLuaZone::registerRegion);
     SOL_REGISTER("levelRestriction", CLuaZone::levelRestriction);

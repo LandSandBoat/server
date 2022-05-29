@@ -55,7 +55,8 @@ local rovKIBattlefieldIDs = set{
 
 -- NOTE: Unfortunately, these are not linear, so we have to use
 --       a big lookup of offsets instead of a single offset
-local poolIDToMessagePageOffset = {
+local poolIDToMessagePageOffset =
+{
     [5896] = 0,   -- Shantotto
     [5897] = 1,   -- Naji
     [5898] = 2,   -- Kupipi

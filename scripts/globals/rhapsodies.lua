@@ -6,7 +6,8 @@ require("scripts/globals/status")
 xi = xi or {}
 xi.rhapsodies = xi.rhapsodies or {}
 
-xi.rhapsodies.character = {
+xi.rhapsodies.character =
+{
     PRISHE     = 0,
     TENZEN     = 1,
     APHMAU     = 2,
@@ -157,135 +158,216 @@ xi.rhapsodies.unavailability =
 
 xi.rhapsodies.requiredCharacters =
 {
-    [xi.mission.id.rov.RING_MY_BELL] = {
+    [xi.mission.id.rov.RING_MY_BELL] =
+    {
         xi.rhapsodies.character.TENZEN,
     },
-    [xi.mission.id.rov.SPIRITS_AWOKEN] = {
+
+    [xi.mission.id.rov.SPIRITS_AWOKEN] =
+    {
         xi.rhapsodies.character.TENZEN,
     },
-    [xi.mission.id.rov.CRASHING_WAVES] = {
+
+    [xi.mission.id.rov.CRASHING_WAVES] =
+    {
         xi.rhapsodies.character.TENZEN,
     },
-    [xi.mission.id.rov.CALL_TO_SERVE] = {
+
+    [xi.mission.id.rov.CALL_TO_SERVE] =
+    {
         xi.rhapsodies.character.TENZEN,
     },
-    [xi.mission.id.rov.NUMBERING_DAYS] = {
+
+    [xi.mission.id.rov.NUMBERING_DAYS] =
+    {
         xi.rhapsodies.character.TENZEN,
         xi.rhapsodies.character.PRISHE,
     },
-    [xi.mission.id.rov.INESCAPABLE_BINDS] = {
+
+    [xi.mission.id.rov.INESCAPABLE_BINDS] =
+    {
         xi.rhapsodies.character.TENZEN,
         xi.rhapsodies.character.PRISHE,
     },
-    [xi.mission.id.rov.EVER_FORWARD] = {
+
+    [xi.mission.id.rov.EVER_FORWARD] =
+    {
         xi.rhapsodies.character.PRISHE,
     },
-    [xi.mission.id.rov.REUNITED] = {
+
+    [xi.mission.id.rov.REUNITED] =
+    {
         xi.rhapsodies.character.APHMAU,
     },
-    [xi.mission.id.rov.TAKE_WING] = {
+
+    [xi.mission.id.rov.TAKE_WING] =
+    {
         xi.rhapsodies.character.TENZEN,
         xi.rhapsodies.character.APHMAU,
     },
-    [xi.mission.id.rov.PRIME_NUMBER] = {
+
+    [xi.mission.id.rov.PRIME_NUMBER] =
+    {
         xi.rhapsodies.character.TENZEN,
         xi.rhapsodies.character.APHMAU,
     },
-    [xi.mission.id.rov.FROM_THE_RUINS] = {
+
+    [xi.mission.id.rov.FROM_THE_RUINS] =
+    {
         xi.rhapsodies.character.TENZEN,
         xi.rhapsodies.character.APHMAU,
     },
-    [xi.mission.id.rov.CAUTERIZE] = {
+
+    [xi.mission.id.rov.CAUTERIZE] =
+    {
         xi.rhapsodies.character.APHMAU,
     },
-    [xi.mission.id.rov.UNCERTAIN_DESTINATIONS] = {
+
+    [xi.mission.id.rov.UNCERTAIN_DESTINATIONS] =
+    {
         xi.rhapsodies.character.CAIT_SITH,
     },
-    [xi.mission.id.rov.GANGED_UP_ON] = {
+
+    [xi.mission.id.rov.GANGED_UP_ON] =
+    {
         xi.rhapsodies.character.CAIT_SITH,
     },
-    [xi.mission.id.rov.SACRIFICE] = {
+
+    [xi.mission.id.rov.SACRIFICE] =
+    {
         xi.rhapsodies.character.LILLISETTE,
         xi.rhapsodies.character.CAIT_SITH,
     },
-    [xi.mission.id.rov.SOMBER_DREAMS] = {
+
+    [xi.mission.id.rov.SOMBER_DREAMS] =
+    {
         xi.rhapsodies.character.LILLISETTE,
         xi.rhapsodies.character.CAIT_SITH,
     },
-    [xi.mission.id.rov.OF_LIGHT_AND_DARKNESS] = {
+
+    [xi.mission.id.rov.OF_LIGHT_AND_DARKNESS] =
+    {
         xi.rhapsodies.character.LILLISETTE,
         xi.rhapsodies.character.CAIT_SITH,
     },
-    [xi.mission.id.rov.THE_CURSED_TEMPLE] = {
+
+    [xi.mission.id.rov.THE_CURSED_TEMPLE] =
+    {
         xi.rhapsodies.character.TENZEN,
     },
-    [xi.mission.id.rov.WISDOM_OF_OUR_FOREFATHERS] = {
+
+    [xi.mission.id.rov.WISDOM_OF_OUR_FOREFATHERS] =
+    {
         xi.rhapsodies.character.TENZEN,
     },
-    [xi.mission.id.rov.WHERE_DIVINITIES_COLLIDE] = {
+
+    [xi.mission.id.rov.WHERE_DIVINITIES_COLLIDE] =
+    {
         xi.rhapsodies.character.TENZEN,
     },
-    [xi.mission.id.rov.VISIONS_OF_DREAD] = {
+
+    [xi.mission.id.rov.VISIONS_OF_DREAD] =
+    {
         xi.rhapsodies.character.TENZEN,
     },
-    [xi.mission.id.rov.TO_THE_SKIES] = {
+
+    [xi.mission.id.rov.TO_THE_SKIES] =
+    {
         xi.rhapsodies.character.TENZEN,
     },
-    [xi.mission.id.rov.ESCHA_RUAUN] = {
+
+    [xi.mission.id.rov.ESCHA_RUAUN] =
+    {
         xi.rhapsodies.character.TENZEN,
     },
-    [xi.mission.id.rov.THE_DECISIVE_HEROINE] = {
+
+    [xi.mission.id.rov.THE_DECISIVE_HEROINE] =
+    {
         xi.rhapsodies.character.TENZEN,
     },
-    [xi.mission.id.rov.FALL_FROM_GRACE] = {
+
+    [xi.mission.id.rov.FALL_FROM_GRACE] =
+    {
         xi.rhapsodies.character.TENZEN,
     },
-    [xi.mission.id.rov.OVER_THE_RAINBOW] = {
+
+    [xi.mission.id.rov.OVER_THE_RAINBOW] =
+    {
         xi.rhapsodies.character.TENZEN,
     },
-    [xi.mission.id.rov.CACOPHONOUS_DISCORD] = {
+
+    [xi.mission.id.rov.CACOPHONOUS_DISCORD] =
+    {
         xi.rhapsodies.character.TENZEN,
     },
-    [xi.mission.id.rov.CALL_OF_THE_VOID] = {
+
+    [xi.mission.id.rov.CALL_OF_THE_VOID] =
+    {
         xi.rhapsodies.character.TENZEN,
     },
-    [xi.mission.id.rov.WHAT_REMAINS_OF_HOPE] = {
+
+    [xi.mission.id.rov.WHAT_REMAINS_OF_HOPE] =
+    {
         xi.rhapsodies.character.ARCIELA,
     },
-    [xi.mission.id.rov.DEATH_CARES_NOT] = {
+
+    [xi.mission.id.rov.DEATH_CARES_NOT] =
+    {
         xi.rhapsodies.character.ARCIELA,
     },
-    [xi.mission.id.rov.NO_TIME_LIKE_THE_FUTURE] = {
+
+    [xi.mission.id.rov.NO_TIME_LIKE_THE_FUTURE] =
+    {
         xi.rhapsodies.character.ARCIELA,
     },
-    [xi.mission.id.rov.SIN] = {
+
+    [xi.mission.id.rov.SIN] =
+    {
         xi.rhapsodies.character.ARCIELA,
     },
-    [xi.mission.id.rov.FROM_WEST_TO_EAST] = {
+
+    [xi.mission.id.rov.FROM_WEST_TO_EAST] =
+    {
         xi.rhapsodies.character.TENZEN,
     },
-    [xi.mission.id.rov.GOOD_THINGS_COME_IN_THREES] = {
+
+    [xi.mission.id.rov.GOOD_THINGS_COME_IN_THREES] =
+    {
         xi.rhapsodies.character.TENZEN,
     },
-    [xi.mission.id.rov.TACKLING_THE_PROBLEM] = {
+
+    [xi.mission.id.rov.TACKLING_THE_PROBLEM] =
+    {
         xi.rhapsodies.character.TENZEN,
     },
-    [xi.mission.id.rov.WAY_TO_DIVINITY] = {
+
+    [xi.mission.id.rov.WAY_TO_DIVINITY] =
+    {
         xi.rhapsodies.character.TENZEN,
     },
-    [xi.mission.id.rov.NARY_A_CLOUD_IN_SIGHT] = {
+
+    [xi.mission.id.rov.NARY_A_CLOUD_IN_SIGHT] =
+    {
         xi.rhapsodies.character.TENZEN,
     },
-    [xi.mission.id.rov.AN_UNENDING_SONG] = {
+
+    [xi.mission.id.rov.AN_UNENDING_SONG] =
+    {
         xi.rhapsodies.character.TENZEN,
     },
-    [xi.mission.id.rov.GUARDIANS] = {
+
+    [xi.mission.id.rov.GUARDIANS] =
+    {
         xi.rhapsodies.character.TENZEN,
     },
-    [xi.mission.id.rov.IROHA_IN_DISTRESS] = {
+
+    [xi.mission.id.rov.IROHA_IN_DISTRESS] =
+    {
         xi.rhapsodies.character.TENZEN,
     },
-    [xi.mission.id.rov.ABSOLUTE_TRUST] = {
+
+    [xi.mission.id.rov.ABSOLUTE_TRUST] =
+    {
         xi.rhapsodies.character.TENZEN,
     },
 }

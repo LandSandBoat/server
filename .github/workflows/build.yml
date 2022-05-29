@@ -213,7 +213,7 @@ jobs:
         touch general_checks.txt
         for changed_file in ${{ steps.changed-files.outputs.all }}; do
           if [[ -f $changed_file ]]; then
-            bash tools/ci/general.sh ${changed_file} 2>> general_checks.txt || true
+            bash tools/ci/general.sh ${changed_file} >> general_checks.txt || true
           fi
         done
         cat general_checks.txt

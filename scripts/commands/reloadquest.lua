@@ -21,7 +21,8 @@ function fileExists(path)
     return f ~= nil and io.close(f)
 end
 
-local folders = {
+local folders =
+{
     "sandoria",
     "bastok",
     "windurst",
@@ -30,6 +31,8 @@ local folders = {
     "outlands",
     "ahtUrhgan",
     "hiddenQuests",
+    "abyssea",
+    "adoulin",
 }
 
 function onTrigger(player, questName)
