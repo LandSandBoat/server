@@ -6,6 +6,7 @@ require("scripts/quests/i_can_hear_a_rainbow")
 require("scripts/globals/chocobo_digging")
 require("scripts/globals/conquest")
 require("scripts/globals/missions")
+require("scripts/globals/garrison")
 -----------------------------------
 local zone_object = {}
 
@@ -15,6 +16,7 @@ end
 
 zone_object.onInitialize = function(zone)
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())
+    xi.garrison.npcTable(zone)
 end
 
 zone_object.onZoneIn = function(player, prevZone)

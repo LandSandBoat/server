@@ -8,6 +8,7 @@ require("scripts/globals/conquest")
 require("scripts/globals/missions")
 require("scripts/globals/zone")
 require("scripts/missions/amk/helpers")
+require("scripts/globals/garrison")
 -----------------------------------
 local zone_object = {}
 
@@ -19,6 +20,7 @@ zone_object.onInitialize = function(zone)
     GetMobByID(ID.mob.NOBLE_MOLD):setLocalVar("pop", os.time() + math.random(43200, 57600)) -- 12 to 16 hr
 
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())
+    xi.garrison.npcTable(zone)
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)

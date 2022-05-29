@@ -9,6 +9,7 @@ require("scripts/globals/chocobo_digging")
 require("scripts/globals/conquest")
 require("scripts/globals/chocobo")
 require("scripts/missions/amk/helpers")
+require("scripts/globals/garrison")
 -----------------------------------
 local zone_object = {}
 
@@ -28,6 +29,7 @@ zone_object.onInitialize = function(zone)
 
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())
     xi.chocobo.initZone(zone)
+    xi.garrison.npcTable(zone)
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)

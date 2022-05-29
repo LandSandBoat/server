@@ -8,6 +8,7 @@ require("scripts/globals/conquest")
 require("scripts/globals/helm")
 require("scripts/globals/zone")
 require("scripts/missions/amk/helpers")
+require("scripts/globals/garrison")
 -----------------------------------
 local zone_object = {}
 
@@ -25,6 +26,7 @@ zone_object.onInitialize = function(zone)
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())
 
     xi.helm.initZone(zone, xi.helm.type.LOGGING)
+    xi.garrison.npcTable(zone)
 end
 
 zone_object.onZoneIn = function(player, prevZone)

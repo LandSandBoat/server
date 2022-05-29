@@ -12,6 +12,7 @@ require("scripts/globals/helm")
 require("scripts/globals/zone")
 require("scripts/globals/beastmentreasure")
 require("scripts/missions/amk/helpers")
+require("scripts/globals/garrison")
 -----------------------------------
 local zone_object = {}
 
@@ -39,6 +40,7 @@ zone_object.onInitialize = function(zone)
     xi.chocobo.initZone(zone)
 
     xi.bmt.updatePeddlestox(xi.zone.YUHTUNGA_JUNGLE, ID.npc.PEDDLESTOX)
+    xi.garrison.npcTable(zone)
 end
 
 zone_object.onGameDay = function()
