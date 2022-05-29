@@ -8,6 +8,7 @@ require("scripts/globals/conquest")
 require("scripts/globals/missions")
 require("scripts/globals/status")
 require("scripts/missions/amk/helpers")
+require("scripts/globals/garrison")
 -----------------------------------
 local zone_object = {}
 
@@ -17,6 +18,7 @@ end
 
 zone_object.onInitialize = function(zone)
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())
+    xi.garrison.npcTable(zone)
 end
 
 zone_object.onZoneIn = function(player, prevZone)

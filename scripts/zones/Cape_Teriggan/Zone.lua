@@ -9,6 +9,7 @@ require("scripts/quests/i_can_hear_a_rainbow")
 require("scripts/globals/conquest")
 require("scripts/globals/world")
 require("scripts/globals/zone")
+require("scripts/globals/garrison")
 -----------------------------------
 local zone_object = {}
 
@@ -20,6 +21,7 @@ zone_object.onInitialize = function(zone)
     DisallowRespawn(kreutzet:getID(), true) -- prevents accidental 'pop' during no wind weather and immediate despawn
 
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())
+    xi.garrison.npcTable(zone)
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)

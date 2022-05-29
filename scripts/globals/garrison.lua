@@ -175,21 +175,10 @@ xi.garrison.spawnNPCs = function(player, npc, party)
     local npcName = garrisonZoneData.name
     local npcnum = 1
     local npcs = garrisonZoneData.npcs
-    while npcnum <= party do
-    local mob = zone:insertDynamicEntity({
-        objtype = xi.objType.MOB,
-        name = npcName,
-        x = xPos,
-        y = yPos,
-        z = zPos,
-        rotation = rot,
-        groupId = 74,
-        groupZoneId = 103,
-        onMobDeath = function(mob, playerArg, isKiller)
-        end,
-        releaseIdOnDeath = false,
-    })
-    -- Use the mob object as you normally would
+    for _, mobId in pairs(npcs) do
+    local mob = GetMobByID(mobId)
+        if npcnum <= party then
+        -- Use the mob object as you normally would
         mob:setSpawn(xPos, yPos, zPos, rot)
         mob:spawn()
         mob:setMobLevel(garrisonZoneData.levelCap)
@@ -208,8 +197,8 @@ xi.garrison.spawnNPCs = function(player, npc, party)
             xPos = xPos - garrisonZoneData.xChange
             zPos = zPos - garrisonZoneData.zChange
         end
-        table.insert(npcs, mob:getID())
         npcnum = npcnum + 1
+        end
     end
 end
 
@@ -256,8 +245,8 @@ xi.garrison.spawnWave = function(player, npc, wave, party)
             xi.garrison.tick(player, npc, wave, party)
         end)
     else
-            --start tick again
-            npc:timer(1000, function(npcArg)
+        --start tick again
+        npc:timer(1000, function(npcArg)
             xi.garrison.tick(player, npc, wave, party)
         end)
     end
@@ -308,5 +297,54 @@ xi.garrison.onTrade = function(player, npc, trade)
         npc:getZone():setLocalVar(string.format("[GARRISON]LockOut_%s", zoneId), os.time() + lockout)
     else
         -- TODO event for not having met requirements
+    end
+end
+-- Zone Init Create NPC Tables, changing garrison_data while server is up will empty the table breaking garrison.
+xi.garrison.npcTable = function(zone)
+    local zoneId = zone:getID()
+    local garrisonZoneData = xi.garrison.data[zoneId]
+    local xPos = garrisonZoneData.xPos
+    local yPos = garrisonZoneData.yPos
+    local zPos = garrisonZoneData.zPos
+    local rot = garrisonZoneData.rot
+    local npcName = garrisonZoneData.name
+    local npcnum = 1
+    local npcs = garrisonZoneData.npcs
+    while npcnum <= 18 do
+    local mob = zone:insertDynamicEntity({
+        objtype = xi.objType.MOB,
+        name = npcName,
+        x = xPos,
+        y = yPos,
+        z = zPos,
+        rotation = rot,
+        groupId = 74,
+        groupZoneId = 103,
+        onMobDeath = function(mob, playerArg, isKiller)
+        end,
+        releaseIdOnDeath = false,
+    })
+    -- Use the mob object as you normally would
+        mob:setSpawn(xPos, yPos, zPos, rot)
+        mob:spawn()
+        mob:setMobLevel(garrisonZoneData.levelCap)
+        -- TODO need pathing so they return to spawnpoint
+        mob:setSpeed(0)
+        -- BATTLEFIELD this is to prevent outside help, is not retail
+        mob:addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0)
+        mob:setAllegiance(1)
+        if npcnum == 6 then
+            xPos = garrisonZoneData.xPos - garrisonZoneData.xSecondLine
+            zPos = garrisonZoneData.zPos - garrisonZoneData.zSecondLine
+        elseif npcnum == 12 then
+            xPos = garrisonZoneData.xPos - garrisonZoneData.xThirdLine
+            zPos = garrisonZoneData.zPos - garrisonZoneData.zThirdLine
+        else
+            xPos = xPos - garrisonZoneData.xChange
+            zPos = zPos - garrisonZoneData.zChange
+        end
+        npcnum = npcnum + 1
+        table.insert(npcs, mob:getID())
+        DespawnMob(mob:getID())
     end
 end

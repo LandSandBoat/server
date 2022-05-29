@@ -8,6 +8,7 @@ require("scripts/globals/conquest")
 require("scripts/globals/missions")
 require("scripts/globals/helm")
 require("scripts/globals/zone")
+require("scripts/globals/garrison")
 -----------------------------------
 local zone_object = {}
 
@@ -20,6 +21,7 @@ zone_object.onInitialize = function(zone)
 
     xi.helm.initZone(zone, xi.helm.type.HARVESTING)
     xi.voidwalker.zoneOnInit(zone)
+    xi.garrison.npcTable(zone)
 end
 
 zone_object.onZoneIn = function( player, prevZone)

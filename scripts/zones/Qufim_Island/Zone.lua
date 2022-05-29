@@ -9,11 +9,13 @@ require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 require("scripts/globals/zone")
+require("scripts/globals/garrison")
 -----------------------------------
 local zone_object = {}
 
 zone_object.onInitialize = function(zone)
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())
+    xi.garrison.npcTable(zone)
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)
