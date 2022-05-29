@@ -35,9 +35,11 @@ zones[xi.zone.ROLANBERRY_FIELDS_S] =
         {
             [17150279] = 17150280, -- -484.535 -23.756 -467.462
         },
-        VOIDWALKER        =
+
+        VOIDWALKER =
         {
-            [xi.keyItem.CLEAR_ABYSSITE] = {
+            [xi.keyItem.CLEAR_ABYSSITE] =
+            {
                 17150346,  -- Lacus
                 17150345,  -- Thunor
                 17150344, -- Beorht
@@ -47,18 +49,25 @@ zones[xi.zone.ROLANBERRY_FIELDS_S] =
                 17150340, -- Deorc
                 17150339, -- Aither
             },
-            [xi.keyItem.COLORFUL_ABYSSITE] = {
+
+            [xi.keyItem.COLORFUL_ABYSSITE] =
+            {
                 17150338, -- Skuld
-                17150337  -- Urd
+                17150337, -- Urd
             },
-            [xi.keyItem.YELLOW_ABYSSITE] = {
-                17150336  -- Verthandi
+
+            [xi.keyItem.YELLOW_ABYSSITE] =
+            {
+                17150336, -- Verthandi
             },
-            [xi.keyItem.BLACK_ABYSSITE] = {
-                17150335  -- Yilbegan
+
+            [xi.keyItem.BLACK_ABYSSITE] =
+            {
+                17150335,  -- Yilbegan
             }
         }
     },
+
     npc =
     {
     },

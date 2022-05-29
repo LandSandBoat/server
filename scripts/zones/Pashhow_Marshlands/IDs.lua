@@ -45,6 +45,7 @@ zones[xi.zone.PASHHOW_MARSHLANDS] =
         VOIDWALKER_OBTAIN_KI     = 11852, -- Obtained key item: <keyitem>!
         COMMON_SENSE_SURVIVAL    = 12836, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
         NI_ZHO_BLADEBENDER_PH =
@@ -52,39 +53,51 @@ zones[xi.zone.PASHHOW_MARSHLANDS] =
             [17223740] = 17223797, -- -429.953 24.5 -305.450
             [17223789] = 17223797, -- 11.309 23.904 -337.923
         },
-        JOLLY_GREEN_PH        =
+
+        JOLLY_GREEN_PH =
         {
             [17223888] = 17223889, -- 184.993 24.499 -41.790
         },
-        BLOODPOOL_VORAX_PH    =
+
+        BLOODPOOL_VORAX_PH =
         {
             [17224014] = 17224019, -- -351.884 24.014 513.531
         },
-        BOWHO_WARMONGER       = 17224104,
+
+        BOWHO_WARMONGER = 17224104,
+
         VOIDWALKER  =
         {
-            [xi.keyItem.CLEAR_ABYSSITE] = {
+            [xi.keyItem.CLEAR_ABYSSITE] =
+            {
                 17224184, -- Globster
                 17224183, -- Globster
                 17224182, -- Globster
                 17224181, -- Globster
-                17224180,  -- Ground Guzzler
-                17224179,  -- Ground Guzzler
-                17224178,  -- Ground Guzzler
-                17224177,  -- Ground Guzzler
+                17224180, -- Ground Guzzler
+                17224179, -- Ground Guzzler
+                17224178, -- Ground Guzzler
+                17224177, -- Ground Guzzler
             },
-            [xi.keyItem.COLORFUL_ABYSSITE] = {
+
+            [xi.keyItem.COLORFUL_ABYSSITE] =
+            {
                 17224176, -- Lamprey Lord
                 17224175, -- Shoggoth
             },
-            [xi.keyItem.ORANGE_ABYSSITE] = {
-                17224168  -- Blobdingnag
+
+            [xi.keyItem.ORANGE_ABYSSITE] =
+            {
+                17224168, -- Blobdingnag
             },
-            [xi.keyItem.BLACK_ABYSSITE] = {
-                17224167  -- Yilbegan
+
+            [xi.keyItem.BLACK_ABYSSITE] =
+            {
+                17224167, -- Yilbegan
             }
         }
     },
+
     pet =
     {
         [17224168] = -- Blobdingnag
@@ -97,6 +110,7 @@ zones[xi.zone.PASHHOW_MARSHLANDS] =
             17224169,-- Septic Boils
         },
     },
+
     npc =
     {
         CASKET_BASE   = 17224275,

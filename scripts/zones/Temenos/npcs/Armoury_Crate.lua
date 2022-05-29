@@ -363,7 +363,8 @@ local loot =
         },
     },
     -- western tower floor 1
-    [1298] = {
+    [1298] =
+    {
         [1] =
         {
             {
@@ -693,7 +694,8 @@ local loot =
         },
     },
     -- eastern tower floor 1
-    [1300] = {
+    [1300] =
+    {
         [1] =
         {
             {
@@ -1181,7 +1183,8 @@ local loot =
         },
     },
     -- central temenos floor 4
-    [1306] = {
+    [1306] =
+    {
         [1] =
         {
             {

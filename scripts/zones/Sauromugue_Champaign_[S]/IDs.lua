@@ -34,10 +34,13 @@ zones[xi.zone.SAUROMUGUE_CHAMPAIGN_S] =
         {
             [17178778] = 17178803, -- 481.509 24.184 98.264
         },
+
         COQUECIGRUE = 17178689,
-        VOIDWALKER        =
+
+        VOIDWALKER =
         {
-            [xi.keyItem.CLEAR_ABYSSITE] = {
+            [xi.keyItem.CLEAR_ABYSSITE] =
+            {
                 17178932,  -- Lacus
                 17178931,  -- Thunor
                 17178930, -- Beorht
@@ -47,18 +50,25 @@ zones[xi.zone.SAUROMUGUE_CHAMPAIGN_S] =
                 17178926, -- Deorc
                 17178925, -- Aither
             },
-            [xi.keyItem.COLORFUL_ABYSSITE] = {
+
+            [xi.keyItem.COLORFUL_ABYSSITE] =
+            {
                 17178924, -- Skuld
-                17178923  -- Urd
+                17178923, -- Urd
             },
-            [xi.keyItem.YELLOW_ABYSSITE] = {
-                17178922  -- Verthandi
+
+            [xi.keyItem.YELLOW_ABYSSITE] =
+            {
+                17178922, -- Verthandi
             },
-            [xi.keyItem.BLACK_ABYSSITE] = {
-                17178921  -- Yilbegan
+
+            [xi.keyItem.BLACK_ABYSSITE] =
+            {
+                17178921, -- Yilbegan
             }
         }
     },
+
     npc =
     {
     },

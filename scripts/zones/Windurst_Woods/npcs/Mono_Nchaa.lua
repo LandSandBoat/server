@@ -13,7 +13,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local stock = {
+    local stock =
+    {
         17318, 3,    2, -- Wooden Arrow
         17319, 4,    3, -- Bone Arrow
         17323, 131,  2, -- Ice Arrow

@@ -12,7 +12,7 @@ g_mixins.families = g_mixins.families or {}
 g_mixins.families.antlion_ambush_noaggro = function(antlionAmbushNoaggroMob)
     antlionAmbushNoaggroMob:addListener("SPAWN", "ANTLION_AMBUSH_NOAGGRO_SPAWN", function(mob)
         mob:hideName(true)
-        mob:untargetable(true)
+        mob:setUntargetable(true)
         mob:setAnimationSub(0)
     end)
     antlionAmbushNoaggroMob:addListener("ENGAGE", "ANTLION_AMBUSH_NOAGGRO_ENGAGE", function(mob, target)

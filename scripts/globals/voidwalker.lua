@@ -11,7 +11,8 @@ require("scripts/globals/zone")
 xi = xi or {}
 xi.voidwalker = xi.voidwalker or {}
 
-local abyssiteKeyitems = {
+local abyssiteKeyitems =
+{
     [9] = xi.keyItem.BLACK_ABYSSITE,
     [8] = xi.keyItem.GREY_ABYSSITE,
     [7] = xi.keyItem.PURPLE_ABYSSITE,
@@ -23,7 +24,8 @@ local abyssiteKeyitems = {
     [1] = xi.keyItem.CLEAR_ABYSSITE,
 }
 
-local abyssiteMessage = {
+local abyssiteMessage =
+{
     [xi.keyItem.CLEAR_ABYSSITE]    = 0,
     [xi.keyItem.COLORFUL_ABYSSITE] = 1,
     [xi.keyItem.BLUE_ABYSSITE]     = 2,
@@ -275,56 +277,69 @@ local function DespawnPet(mob)
     end
 end
 
-local modByMobName = {
+local modByMobName =
+{
     ['Krabkatoa'] = function(mob)
         mob:addStatusEffect(xi.effect.REGAIN, 10, 0, 0)
         mob:addMod(xi.mod.DOUBLE_ATTACK, 10)
     end,
+
     ['Tammuz'] = function(mob)
         mob:addStatusEffect(xi.effect.MIGHTY_STRIKES, 1, 0, 0)
     end,
 }
 
-local mixinByMobName = {
+local mixinByMobName =
+{
     ['Capricornus'] = function(mob)
         doMobSkillEveryHPP(mob, 20, 80, xi.jsa.MIGHTY_STRIKES, not mob:hasStatusEffect(xi.effect.MIGHTY_STRIKES))
         if mob:hasStatusEffect(xi.effect.MIGHTY_STRIKES) and not mobIsBusy(mob) then
             mob:useMobAbility(xi.mob.skills.RECOIL_DIVE)
         end
     end,
+
     ['Yacumama'] = function(mob)
         doMobSkillEveryHPP(mob, 20, 80, xi.jsa.HUNDRED_FISTS, not mob:hasStatusEffect(xi.effect.HUNDRED_FISTS))
     end,
+
     ['Lamprey_Lord'] = function(mob)
         randomly(mob, 10, 60, xi.effect.BLOOD_WEAPON, xi.jsa.BLOOD_WEAPON)
     end,
+
     ['Shoggoth'] = function(mob)
         doMobSkillEveryHPP(mob, 20, 80, xi.jsa.CHAINSPELL, not mob:hasStatusEffect(xi.effect.CHAINSPELL))
     end,
+
     ['Jyeshtha'] = function(mob)
         randomly(mob, 30, 60, xi.jsa.MIGHTY_STRIKES, xi.jsa.MIGHTY_STRIKES)
         if mob:getLocalVar("MOBSKILL_USE") == 1 and not mob:hasStatusEffect(xi.effect.MIGHTY_STRIKES) then
             mob:setLocalVar("MOBSKILL_USE", 0)
         end
     end,
+
     ['Blobdingnag'] = function(mob)
         doMobSkillEveryHPP(mob, 20, 82, xi.mob.skills.CYTOKINESIS, true)
     end,
+
     ['Farruca_Fly'] = function(mob)
         doMobSkillEveryHPP(mob, 20, 80, xi.jsa.PERFECT_DODGE, not mob:hasStatusEffect(xi.effect.PERFECT_DODGE))
     end,
+
     ['Skuld'] = function(mob)
         doMobSkillEveryHPP(mob, 20, 80, xi.jsa.CHAINSPELL, not mob:hasStatusEffect(xi.effect.CHAINSPELL))
     end,
+
     ['Erebus'] = function(mob)
         randomly(mob, 30, 60, xi.effect.BLOOD_WEAPON, xi.jsa.BLOOD_WEAPON)
         if mob:hasStatusEffect(xi.effect.BLOOD_WEAPON) and not mob:hasStatusEffect(xi.effect.HUNDRED_FISTS) then
             mob:addStatusEffect(xi.effect.HUNDRED_FISTS, 1, 0, 30)
         end
     end,
+
     ['Feuerunke'] = function(mob)
         randomly(mob, 30, 60, xi.effect.HUNDRED_FISTS, xi.jsa.HUNDRED_FISTS)
     end,
+
     ['Dawon'] = function(mob)
         doMobSkillEveryHPP(mob, 20, 80, xi.jsa.PERFECT_DODGE, not mob:hasStatusEffect(xi.effect.PERFECT_DODGE))
     end
@@ -341,7 +356,7 @@ xi.voidwalker.onMobSpawn = function(mob)
     mob:setStatus(xi.status.INVISIBLE)
     mob:hideHP(true)
     mob:hideName(true)
-    mob:untargetable(true)
+    mob:setUntargetable(true)
     local mods = modByMobName[mobName]
     if mods then
         mods(mob)
@@ -374,7 +389,7 @@ xi.voidwalker.onMobDisengage = function(mob)
     mob:setStatus(xi.status.INVISIBLE)
     mob:hideHP(true)
     mob:hideName(true)
-    mob:untargetable(true)
+    mob:setUntargetable(true)
 end
 
 xi.voidwalker.onMobDespawn = function(mob)
@@ -448,7 +463,7 @@ xi.voidwalker.onHealing = function(player)
             mob:hideHP(false)
         end
         mob:hideName(false)
-        mob:untargetable(false)
+        mob:setUntargetable(false)
         mob:setStatus(xi.status.UPDATE)
         mob:updateClaim(player)
     elseif mobNearest.distance >= 300 then

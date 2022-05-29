@@ -13,7 +13,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local stock = {
+    local stock =
+    {
         5032,  3112,       --Sinewy Etude
         5033,  2784,       --Dextrous Etude
         5034,  2184,       --Vivacious Etude

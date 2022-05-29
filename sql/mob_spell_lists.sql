@@ -4149,6 +4149,8 @@ INSERT INTO `mob_spell_lists` VALUES ('Nepionic_Soulflayer',460,259,1,60); -- sl
 INSERT INTO `mob_spell_lists` VALUES ('Nepionic_Soulflayer',460,273,1,60); -- sleepga
 INSERT INTO `mob_spell_lists` VALUES ('Nepionic_Soulflayer',460,274,1,60); -- sleepga_II
 
+INSERT INTO `mob_spell_lists` VALUES ('Bombast',461,235,1,255); -- sleepga_II
+
 INSERT INTO `mob_spell_lists` VALUES('Cherukiki_COP', 462, 4, 1, 255); -- Cure IV
 INSERT INTO `mob_spell_lists` VALUES('Cherukiki_COP', 462, 21, 1, 255); -- Holy
 INSERT INTO `mob_spell_lists` VALUES('Cherukiki_COP', 462, 34, 1, 255); -- Diaga II
@@ -4181,9 +4183,6 @@ INSERT INTO `mob_spell_lists` VALUES('Kukki_Chebukki_COP', 463, 245, 1, 255); --
 INSERT INTO `mob_spell_lists` VALUES('Kukki_Chebukki_COP', 463, 247, 1, 255); -- Aspir
 INSERT INTO `mob_spell_lists` VALUES('Kukki_Chebukki_COP', 463, 258, 1, 255); -- Bind
 INSERT INTO `mob_spell_lists` VALUES('Kukki_Chebukki_COP', 463, 274, 1, 255); -- Sleepga II
-
-
--- Next Available: 461
 
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;

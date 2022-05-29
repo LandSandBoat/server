@@ -438,6 +438,7 @@ enum class TELEPORT_TYPE : uint8
     CAMPAIGN_WINDY  = 8,
     HOMEPOINT       = 9,
     SURVIVAL        = 10,
+    WAYPOINT        = 11,
 };
 
 enum ZONEMISC
@@ -556,7 +557,8 @@ public:
     void SetBackgroundMusicNight(uint8 music);
 
     uint32 GetLocalVar(const char* var);
-    void SetLocalVar(const char* var, uint32 val);
+    void   SetLocalVar(const char* var, uint32 val);
+    void   ResetLocalVars();
 
     virtual CCharEntity* GetCharByName(int8* name); // finds the player if exists in zone
     virtual CCharEntity* GetCharByID(uint32 id);
