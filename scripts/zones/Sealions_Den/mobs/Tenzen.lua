@@ -3,7 +3,7 @@
 --  Mob: Tenzen
 -----------------------------------
 local ID = require("scripts/zones/Sealions_Den/IDs")
-local TenzenFunctions = require("scripts/zones/Sealions_Den/helpers/TenzenFunctions")
+local tenzenFunctions = require("scripts/zones/Sealions_Den/helpers/TenzenFunctions")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
@@ -49,12 +49,12 @@ entity.onMobFight = function(mob, target)
         mob:getHPP() < twohourthreshold and
         twohourtrigger == 0
     then -- first meikyo shisui usage 75-85%
-        TenzenFunctions.firstMeikyo(mob)
+        tenzenFunctions.firstMeikyo(mob)
     elseif
         mob:getHPP() < twohourthreshold and
         twohourtrigger == 2
     then -- second meikyo shisui usage 45-55%
-        TenzenFunctions.secondMeikyo(mob)
+        tenzenFunctions.secondMeikyo(mob)
     end
 
     local isBusy = false
@@ -72,10 +72,10 @@ entity.onMobFight = function(mob, target)
         mob:actionQueueEmpty() == true and
         not isBusy
     then
-        TenzenFunctions.wsSequence(mob)
+        tenzenFunctions.wsSequence(mob)
     end
 
-    TenzenFunctions.formSwap(mob)
+    tenzenFunctions.formSwap(mob)
 
     -- win condition set
     local battlefield = mob:getBattlefield()
@@ -90,7 +90,7 @@ entity.onMobFight = function(mob, target)
         return
     end
 
-    TenzenFunctions.riceBall(mob, target, isBusy)
+    tenzenFunctions.riceBall(mob, target, isBusy)
 
     if mob:getHPP() > 35 then
         mob:setMod(xi.mod.REGAIN, 30)
