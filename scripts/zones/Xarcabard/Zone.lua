@@ -14,6 +14,9 @@ local zone_object = {}
 zone_object.onInitialize = function(zone)
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())
     xi.voidwalker.zoneOnInit(zone)
+end
+
+zone_object.onZoneTick = function(zone)
     xi.garrison.npcTable(zone)
 end
 

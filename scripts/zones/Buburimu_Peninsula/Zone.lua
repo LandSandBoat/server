@@ -26,6 +26,9 @@ zone_object.onInitialize = function(zone)
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())
 
     xi.helm.initZone(zone, xi.helm.type.LOGGING)
+end
+
+zone_object.onZoneTick = function(zone)
     xi.garrison.npcTable(zone)
 end
 

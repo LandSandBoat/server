@@ -21,6 +21,9 @@ zone_object.onInitialize = function(zone)
     DisallowRespawn(kreutzet:getID(), true) -- prevents accidental 'pop' during no wind weather and immediate despawn
 
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())
+end
+
+zone_object.onZoneTick = function(zone)
     xi.garrison.npcTable(zone)
 end
 

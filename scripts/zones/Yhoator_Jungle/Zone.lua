@@ -40,6 +40,9 @@ zone_object.onInitialize = function(zone)
     xi.chocobo.initZone(zone)
 
     xi.bmt.updatePeddlestox(xi.zone.YUHTUNGA_JUNGLE, ID.npc.PEDDLESTOX)
+end
+
+zone_object.onZoneTick = function(zone)
     xi.garrison.npcTable(zone)
 end
 

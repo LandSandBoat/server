@@ -124,6 +124,23 @@ xi.garrison.despawnNPCs = function(npc)
         DespawnMob(npcID)
     end
 end
+
+xi.garrison.npcTableEmpty = function(zone)
+    local zoneId = zone:getID()
+    local garrisonZoneData = xi.garrison.data[zoneId]
+    local npcs = garrisonZoneData.npcs
+    local npcEmpty = true
+    -- check if npc table is empty
+    for _, npcID in pairs(npcs) do
+        npcEmpty = false
+    end
+    -- return result
+    if npcEmpty == false then
+        return false
+    else
+        return true
+    end
+end
 -----------------------------------
 -- Main Functions
 -----------------------------------
@@ -297,52 +314,54 @@ xi.garrison.onTrade = function(player, npc, trade)
         -- TODO event for not having met requirements
     end
 end
--- Zone Init Create NPC Tables, changing garrison_data while server is up will empty the table breaking garrison.
+-- Zone tick Create NPC Tables if empty
 xi.garrison.npcTable = function(zone)
     local zoneId = zone:getID()
     local garrisonZoneData = xi.garrison.data[zoneId]
-    local xPos = garrisonZoneData.xPos
-    local yPos = garrisonZoneData.yPos
-    local zPos = garrisonZoneData.zPos
-    local rot = garrisonZoneData.rot
-    local npcName = garrisonZoneData.name
-    local npcnum = 1
-    local npcs = garrisonZoneData.npcs
-    while npcnum <= 18 do
-    local mob = zone:insertDynamicEntity({
-        objtype = xi.objType.MOB,
-        name = npcName,
-        x = xPos,
-        y = yPos,
-        z = zPos,
-        rotation = rot,
-        groupId = 74,
-        groupZoneId = 103,
-        onMobDeath = function(mob, playerArg, isKiller)
-        end,
-        releaseIdOnDeath = false,
-    })
-    -- Use the mob object as you normally would
-        mob:setSpawn(xPos, yPos, zPos, rot)
-        mob:spawn()
-        mob:setMobLevel(garrisonZoneData.levelCap)
-        -- TODO need pathing so they return to spawnpoint
-        mob:setSpeed(0)
-        -- BATTLEFIELD this is to prevent outside help, is not retail
-        mob:addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0)
-        mob:setAllegiance(1)
-        if npcnum == 6 then
-            xPos = garrisonZoneData.xPos - garrisonZoneData.xSecondLine
-            zPos = garrisonZoneData.zPos - garrisonZoneData.zSecondLine
-        elseif npcnum == 12 then
-            xPos = garrisonZoneData.xPos - garrisonZoneData.xThirdLine
-            zPos = garrisonZoneData.zPos - garrisonZoneData.zThirdLine
-        else
-            xPos = xPos - garrisonZoneData.xChange
-            zPos = zPos - garrisonZoneData.zChange
+    if xi.garrison.npcTableEmpty(zone) == true then
+        local npcs = garrisonZoneData.npcs
+        local xPos = garrisonZoneData.xPos
+        local yPos = garrisonZoneData.yPos
+        local zPos = garrisonZoneData.zPos
+        local rot = garrisonZoneData.rot
+        local npcName = garrisonZoneData.name
+        local npcnum = 1
+        while npcnum <= 18 do
+            local mob = zone:insertDynamicEntity({
+                objtype = xi.objType.MOB,
+                name = npcName,
+                x = xPos,
+                y = yPos,
+                z = zPos,
+                rotation = rot,
+                groupId = 74,
+                groupZoneId = 103,
+                onMobDeath = function(mob, playerArg, isKiller)
+                end,
+                releaseIdOnDeath = false,
+            })
+            -- Use the mob object as you normally would
+            mob:setSpawn(xPos, yPos, zPos, rot)
+            mob:spawn()
+            mob:setMobLevel(garrisonZoneData.levelCap)
+            -- TODO need pathing so they return to spawnpoint
+            mob:setSpeed(0)
+            -- BATTLEFIELD this is to prevent outside help, is not retail
+            mob:addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0)
+            mob:setAllegiance(1)
+            if npcnum == 6 then
+                xPos = garrisonZoneData.xPos - garrisonZoneData.xSecondLine
+                zPos = garrisonZoneData.zPos - garrisonZoneData.zSecondLine
+            elseif npcnum == 12 then
+                xPos = garrisonZoneData.xPos - garrisonZoneData.xThirdLine
+                zPos = garrisonZoneData.zPos - garrisonZoneData.zThirdLine
+            else
+                xPos = xPos - garrisonZoneData.xChange
+                zPos = zPos - garrisonZoneData.zChange
+            end
+            npcnum = npcnum + 1
+            table.insert(npcs, mob:getID())
+            DespawnMob(mob:getID())
         end
-        npcnum = npcnum + 1
-        table.insert(npcs, mob:getID())
-        DespawnMob(mob:getID())
     end
 end
