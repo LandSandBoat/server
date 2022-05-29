@@ -15,7 +15,8 @@ end
 entity.onTrigger = function(player, npc)
     player:showText(npc, ID.text.OREZEBREZ_SHOP_DIALOG)
 
-    local stock = {
+    local stock =
+    {
         12466, 20000, 1,     --Red Cap
         12458,  8972, 1,     --Soil Hachimaki
         12455,  7026, 1,     --Beetle Mask

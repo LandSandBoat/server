@@ -179,16 +179,16 @@ local function GetPyxisID(player)
     end
 
     -- if chest not found set status disappear on chest with status CUTSCENE_ONLY
-	if chestId == 0 then
-		for i = baseChestId, baseChestId + 79 do
+    if chestId == 0 then
+        for i = baseChestId, baseChestId + 79 do
             local npc = GetNPCByID(i)
-			if npc:getStatus() == xi.status.CUTSCENE_ONLY then
-				npc:setStatus(xi.status.DISAPPEAR)
-			elseif npc:getStatus() == xi.status.DISAPPEAR then
-				npc:setLocalVar("[pyxis]SPAWNTIME", (os.time() + 180000))
-			end
-		end
-	end
+            if npc:getStatus() == xi.status.CUTSCENE_ONLY then
+                npc:setStatus(xi.status.DISAPPEAR)
+            elseif npc:getStatus() == xi.status.DISAPPEAR then
+                npc:setLocalVar("[pyxis]SPAWNTIME", (os.time() + 180000))
+            end
+        end
+    end
 
     if GetNPCByID(chestId) == nil then
         return 0
