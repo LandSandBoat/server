@@ -107,17 +107,17 @@ xi.armorStorage.onTrade = function(player, trade, deposit)
     local returnValue = false
 
     for i = 1, #armorSets, 11 do
-        local T1 = trade:hasItemQty(armorSets[i + 5], 1)
+        local t1 = trade:hasItemQty(armorSets[i + 5], 1)
 
-        if T1 then
+        if t1 then
             if not player:hasKeyItem(armorSets[i + 10]) then
                 if trade:getItemCount() == armorSets[i + 3] then
-                    local T2 = trade:hasItemQty(armorSets[i + 4], 1) or armorSets[i + 4] == 0
-                    local T3 = trade:hasItemQty(armorSets[i + 6], 1) or armorSets[i + 6] == 0
-                    local T4 = trade:hasItemQty(armorSets[i + 7], 1) or armorSets[i + 7] == 0
-                    local T5 = trade:hasItemQty(armorSets[i + 8], 1) or armorSets[i + 8] == 0
+                    local t2 = trade:hasItemQty(armorSets[i + 4], 1) or armorSets[i + 4] == 0
+                    local t3 = trade:hasItemQty(armorSets[i + 6], 1) or armorSets[i + 6] == 0
+                    local t4 = trade:hasItemQty(armorSets[i + 7], 1) or armorSets[i + 7] == 0
+                    local t5 = trade:hasItemQty(armorSets[i + 8], 1) or armorSets[i + 8] == 0
 
-                    if T2 and T3 and T4 and T5 then
+                    if t2 and t3 and t4 and t5 then
                         player:startEvent(deposit, 0, 0, 0, 0, 0, armorSets[i + 9])
                         player:addKeyItem(armorSets[i + 10])
                         player:messageSpecial(zones[player:getZoneID()].text.KEYITEM_OBTAINED, armorSets[i + 10])
@@ -133,11 +133,11 @@ xi.armorStorage.onTrade = function(player, trade, deposit)
 end
 
 xi.armorStorage.onTrigger = function(player, withdrawal)
-    local G1 = 0
-    local G2 = 0
-    local G3 = 0
-    local G4 = 0
-    local G5 = 0
+    local g1 = 0
+    local g2 = 0
+    local g3 = 0
+    local g4 = 0
+    local g5 = 0
 
     for i = 11, #armorSets, 11 do
         if player:hasKeyItem(armorSets[i]) then
@@ -145,20 +145,20 @@ xi.armorStorage.onTrigger = function(player, withdrawal)
             local mask  = armorSets[i - 8]
 
             if group == 1 then
-                G1 = G1 + mask
+                g1 = g1 + mask
             elseif group == 2 then
-                G2 = G2 + mask
+                g2 = g2 + mask
             elseif group == 3 then
-                G3 = G3 + mask
+                g3 = g3 + mask
             elseif group == 4 then
-                G4 = G4 + mask
+                g4 = g4 + mask
             elseif group == 6 then
-                G5 = G5 + mask
+                g5 = g5 + mask
             end
         end
     end
 
-    player:startEvent(withdrawal, G1, G2, G3, G4, player:getGil(), G5)
+    player:startEvent(withdrawal, g1, g2, g3, g4, player:getGil(), g5)
 end
 
 xi.armorStorage.onEventUpdate = function(player, csid, option, withdrawal)

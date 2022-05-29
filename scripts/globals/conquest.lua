@@ -19,9 +19,12 @@ xi.conquest = xi.conquest or {}
 -- (LOCAL) constants
 -----------------------------------
 
-local CONQUEST_TALLY_START = 0
-local CONQUEST_TALLY_END   = 1
-local CONQUEST_UPDATE      = 2
+local conquestConstants =
+{
+    TALLY_START = 0,
+    TALLY_END   = 1,
+    UPDATE      = 2,
+}
 
 -----------------------------------
 -- (LOCAL) expeditionary forces
@@ -1353,11 +1356,11 @@ xi.conquest.onConquestUpdate = function(zone, updatetype)
     for _, player in pairs(players) do
 
         -- CONQUEST TALLY START
-        if updatetype == CONQUEST_TALLY_START then
+        if updatetype == conquestConstants.TALLY_START then
             player:messageText(player, messageBase, 5)
 
         -- CONQUEST TALLY END
-        elseif updatetype == CONQUEST_TALLY_END then
+        elseif updatetype == conquestConstants.TALLY_END then
             player:messageText(player, messageBase + 1, 5) -- Tallying conquest results...
 
             if owner <= 3 then
@@ -1417,7 +1420,7 @@ xi.conquest.onConquestUpdate = function(zone, updatetype)
             xi.conquest.toggleRegionalNPCs(zone)
 
         -- CONQUEST UPDATE
-        elseif updatetype == CONQUEST_UPDATE then
+        elseif updatetype == conquestConstants.UPDATE then
             local influence = GetRegionInfluence(region)
 
             if owner <= 3 then
