@@ -1027,13 +1027,10 @@ xi.dynamis.mobOnRoam = function(mob)
                 local spawn = mob:getSpawnPos()
                 local current = {mob:getXPos(), mob:getYPos(), mob:getZPos()}
                 if current[1] == home[1] and current[3] == home[3] then
-                    print("At Home")
                     mob:pathTo(dest[1], dest[2], dest[3], flags)
                 elseif current[1] == dest[1] and current[3] == dest[3] then
-                    print("At Destination")
                     mob:pathTo(home[1], home[2], home[3], flags)
                 elseif current[1] == spawn.x and current[3] == spawn.z then
-                    print("At Spawn")    
                     mob:pathTo(home[1], home[2], home[3], flags)
                 end
             end
