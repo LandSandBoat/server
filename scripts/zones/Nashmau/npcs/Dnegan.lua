@@ -13,21 +13,18 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-
-    local TheWaywardAutomation = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.THE_WAYWARD_AUTOMATON)
-    local TheWaywardAutomationProgress = player:getCharVar("TheWaywardAutomationProgress")
-    local OperationTeatimeProgress = player:getCharVar("OperationTeatimeProgress")
-    local OTT_DayWait = player:getCharVar("OTT_DayWait")
-    local Gameday = VanadielDayOfTheYear()
+    local theWaywardAutomation = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.THE_WAYWARD_AUTOMATON)
+    local theWaywardAutomationProgress = player:getCharVar("TheWaywardAutomationProgress")
+    local operationTeatimeProgress = player:getCharVar("OperationTeatimeProgress")
 
     -- Quest: The WayWard Automation
-    if (TheWaywardAutomation == QUEST_ACCEPTED and TheWaywardAutomationProgress == 1) then
+    if (theWaywardAutomation == QUEST_ACCEPTED and theWaywardAutomationProgress == 1) then
         player:startEvent(289) -- he tells u to go Caedarva Mire
-    elseif (TheWaywardAutomationProgress == 2) then
+    elseif (theWaywardAutomationProgress == 2) then
         player:startEvent(289) -- Hint to go to Caedarva Mire
 
     -- Quest: Operation Teatime
-    elseif (OperationTeatimeProgress == 2 and OTT_DayWait ~= Gameday) then
+    elseif (operationTeatimeProgress == 2 and player:getCharVar("OTT_DayWait") ~= VanadielDayOfTheYear()) then
         player:startEvent(290) -- CS for Chai
     else
         player:startEvent(288)
@@ -39,7 +36,6 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
     if (csid == 289) then
         player:setCharVar("TheWaywardAutomationProgress", 2)
     elseif (csid == 290 and option == 0) then

@@ -10,12 +10,8 @@ local ID = require("scripts/zones/Metalworks/IDs")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local meanMachine = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.MEAN_MACHINE)
-
-    if meanMachine == QUEST_ACCEPTED then
-        local FreeSlots = player:getFreeSlotsCount()
-
-        if FreeSlots >= 1 then
+    if player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.MEAN_MACHINE) == QUEST_ACCEPTED then
+        if player:getFreeSlotsCount() >= 1 then
             local count = trade:getItemCount()
             local slimeOil = trade:hasItemQty(637, 1)
 
@@ -30,9 +26,9 @@ end
 
 entity.onTrigger = function(player, npc)
     local meanMachine = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.MEAN_MACHINE)
-    local Fame = player:getFameLevel(xi.quest.fame_area.BASTOK)
+    local fameLevel   = player:getFameLevel(xi.quest.fame_area.BASTOK)
 
-    if meanMachine == QUEST_AVAILABLE and Fame >= 2 then
+    if meanMachine == QUEST_AVAILABLE and fameLevel >= 2 then
         player:startEvent(556)
     elseif meanMachine == QUEST_ACCEPTED then
         player:startEvent(559)
