@@ -27,6 +27,15 @@ CREATE TABLE `mob_droplist` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=9;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
+-- Variables
+SET @VCOMMON = 240;  -- Very common, 24%
+SET @COMMON = 150;   -- Common, 15%
+SET @UNCOMMON = 100; -- Uncommon, 10%
+SET @RARE = 50;      -- Rare, 5%
+SET @VRARE = 10;     -- Very rare, 1%
+SET @SRARE = 5;      -- Super Rare, 0.5%
+SET @URARE = 1;      -- Ultra rare, .01%
+
 --
 -- Dumping data for table `mob_droplist`
 --
