@@ -21,22 +21,29 @@ local forms =
 
 local tpMoves =
 {
-    -- NOTE: Mammets always have access to:
-    -- Transmogrification: Absorbs all physical damage for ~30 seconds
-    -- Tremorous Tread: Low AoE damage with a Stun effect, absorbed by Utsusemi.
-    [0] = { 487, 540 },
-    -- Sword Skills:
-    -- Velocious Blade: 5-hit attack, high da
-    -- Sonic Blade: High AoE damage.
-    -- Scission Thrust: Low conal AoE damage.
-    [1] = { 347, 419, 422 },
-    -- Percussive Foin: Medium directional AoE damage.
-    -- Gravity Wheel: High AoE damage and Gravity.
-    -- Microquake: High single-target damage.
-    [2] = { 441, 447, 457 },
-    -- Psychomancy: AoE Aspir, drains 80+ MP.
-    -- Mind Wall: Gives the Mammet a special Magic Shield effect causing it to absorb offensive magic used against it for ~30 seconds.
-    [3] = { 464, 471},
+
+    [0] = -- h2h Skills
+    {
+        487, -- Transmogrification: Absorbs all physical damage for ~30 seconds
+        540, -- Tremorous Tread: Low AoE damage with a Stun effect, absorbed by Utsusemi.
+    },
+    [1] =      -- Sword Skills:
+    {
+        347, -- Velocious Blade: 5-hit attack
+        419, -- Sonic Blade: High AoE damage.
+        422, -- Scission Thrust: Low conal AoE damage.
+    },
+    [2] = -- Polearm Skills:
+    {
+        441, -- Percussive Foin: Medium directional AoE damage.
+        447, -- Gravity Wheel: High AoE damage and Gravity.
+        457, -- Microquake: High single-target damage.
+    },
+    [3] = -- Staff Skills
+    {
+        464, -- Psychomancy: AoE Aspir, drains 80+ MP.
+        471, -- Mind Wall: Gives the Mammet a special Magic Shield effect causing it to absorb offensive magic used against it for ~30 seconds.
+    },
 }
 
 entity.onMobSpawn = function(mob)

@@ -12,7 +12,7 @@ local ID2 = require("scripts/zones/Apollyon/IDs")
 ---------------------------------------------
 local mobskill_object = {}
 
-local attributes =
+local attributesDown =
 {
     xi.effect.STR_DOWN,
     xi.effect.DEX_DOWN,
@@ -24,24 +24,10 @@ local attributes =
 }
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)
+    local skillList = mob:getMobMod(xi.mobMod.SKILL_LIST)
     local mobhp = mob:getHPP()
-    local id = mob:getID()
-    local checkID = false
 
-    for i = 0, 2 do
-        if
-            ID.mob.OMEGA_OFFSET + i == id or
-            ID2.mob.APOLLYON_CS_MOB == id
-        then
-             checkID = true
-        end
-    end
-
-    if checkID and
-       mobhp > 25 or
-       checkID and
-       mob:getAnimationSub() == 1
-    then
+    if ((skillList == 54 and mobhp < 26) or (skillList == 727 and mob:getAnimationSub() == 1)) then
         return 0
     else
         return 1
@@ -53,7 +39,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     for i = 1,7 do
         if math.random(0,100) < 40 then
-            skill:setMsg(xi.mobskills.mobDrainAttribute(mob, target, attributes[i], 10, 3, 60))
+            skill:setMsg(xi.mobskills.mobDrainAttribute(mob, target, attributesDown[i], 10, 3, 60))
             drained = drained + 1
         end
     end
