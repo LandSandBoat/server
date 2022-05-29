@@ -27,10 +27,13 @@ function onTrigger(player, item, quantity, aug0, aug0val, aug1, aug1val, aug2, a
     elseif tonumber(item) == nil and item ~= nil then
         -- Item was provided, but was not a number.  Try text lookup.
         local retItem = GetItemIDByName(tostring(item))
-        if retItem > 0 then
+        if retItem > 0 and retItem < 65000 then
             itemToGet = retItem
+        elseif retItem >= 65000 then
+            player:PrintToPlayer(string.format("Found %s instances matching '%s'.  Use ID or exact name.", 65536 - retItem,  tostring(item)))
+            return
         else
-            error(player, string.format("Item %s not found in database.", item))
+            player:PrintToPlayer(string.format("Item %s not found in database.", item))
             return
         end
     else
