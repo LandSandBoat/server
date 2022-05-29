@@ -14,15 +14,15 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local POWER_SANDALS = 13012
+    local powerSandalsID = 13012
 
     -- Give Player Power Sandals if they don't have them
-    if (player:hasItem(POWER_SANDALS) == false) then
-        if (player:getFreeSlotsCount() == 0) then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, POWER_SANDALS)
+    if not player:hasItem(powerSandalsID) then
+        if player:getFreeSlotsCount() == 0 then
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, powerSandalsID)
         else
-            player:addItem(POWER_SANDALS)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, POWER_SANDALS)
+            player:addItem(powerSandalsID)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, powerSandalsID)
         end
     else
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
@@ -30,8 +30,6 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option)
-    -- printf("CSID2: %u", csid)
-    -- printf("RESULT2: %u", option)
 end
 
 entity.onEventFinish = function(player, csid, option)
