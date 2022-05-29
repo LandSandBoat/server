@@ -46,26 +46,32 @@ zones[xi.zone.BEAUCEDINE_GLACIER] =
         VOIDWALKER_OBTAIN_KI           = 11890, -- Obtained key item: <keyitem>!
         COMMON_SENSE_SURVIVAL          = 12789, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
         GARGANTUA_PH =
         {
             [17232078] = 17232079, -- 339 -0.472 -20
         },
-        KIRATA_PH    =
+
+        KIRATA_PH =
         {
             [17232042] = 17232044, -- 75.797 -0.335 -323.659
             [17232043] = 17232044, -- 69.336 -0.234 -276.561
         },
-        NUE_PH       =
+
+        NUE_PH =
         {
             [17231969] = 17231971, -- -342.830 -100.584 168.662
             [17231970] = 17231971, -- -322.000 -100.000 116.000
         },
-        HUMBABA      = 17232094,
-        VOIDWALKER        =
+
+        HUMBABA = 17232094,
+
+        VOIDWALKER =
         {
-            [xi.keyItem.CLEAR_ABYSSITE] = {
+            [xi.keyItem.CLEAR_ABYSSITE] =
+            {
                 17232159, -- Gorehound
                 17232158, -- Gorehound
                 17232157, -- Gorehound
@@ -75,18 +81,25 @@ zones[xi.zone.BEAUCEDINE_GLACIER] =
                 17232153, -- Gjenganger
                 17232152, -- Gjenganger
             },
-            [xi.keyItem.COLORFUL_ABYSSITE] = {
+
+            [xi.keyItem.COLORFUL_ABYSSITE] =
+            {
                 17232151, -- Erebus
-                17232150  -- Feuerunke
+                17232150, -- Feuerunke
             },
-            [xi.keyItem.PURPLE_ABYSSITE] = {
-                17232149  -- Lord Ruthven
+
+            [xi.keyItem.PURPLE_ABYSSITE] =
+            {
+                17232149, -- Lord Ruthven
             },
-            [xi.keyItem.BLACK_ABYSSITE] = {
-                17232148  -- Yilbegan
+
+            [xi.keyItem.BLACK_ABYSSITE] =
+            {
+                17232148, -- Yilbegan
             }
         }
     },
+
     npc =
     {
         CASKET_BASE     = 17232181,

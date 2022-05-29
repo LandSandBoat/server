@@ -8,10 +8,19 @@ local ID = require("scripts/zones/Castle_Oztroja/IDs")
 require("scripts/globals/keyitems")
 require("scripts/settings/main")
 require("scripts/globals/dynamis")
+-----------------------------------
+local entity = {}
 
 local TIMELESS_HOURGLASS = 4236
-local currency = {1449, 1450, 1451}
-local shop = {
+local currency =
+{
+    1449,
+    1450,
+    1451
+}
+
+local shop =
+{
      7, 1312, -- Angel Skin
      8, 1518, -- Colossal Skull
      9, 1464, -- Lancewood Log
@@ -20,7 +29,9 @@ local shop = {
     25, 1462, -- Lancewood Lumber
     28, 658,  -- Damascus Ingot
 }
-local maps = {
+
+local maps =
+{
     [xi.ki.MAP_OF_DYNAMIS_SAN_DORIA]   = 10000,
     [xi.ki.MAP_OF_DYNAMIS_BASTOK]     = 10000,
     [xi.ki.MAP_OF_DYNAMIS_WINDURST]   = 10000,
@@ -32,8 +43,6 @@ local maps = {
     [xi.ki.MAP_OF_DYNAMIS_QUFIM]      = 10000,
     [xi.ki.MAP_OF_DYNAMIS_TAVNAZIA]   = 20000,
 }
------------------------------------
-local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     local gil = trade:getGil()

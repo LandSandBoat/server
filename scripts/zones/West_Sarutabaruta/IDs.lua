@@ -61,15 +61,17 @@ zones[xi.zone.WEST_SARUTABARUTA] =
         VOIDWALKER_OBTAIN_KI        = 11370, -- Obtained key item: <keyitem>!
         COMMON_SENSE_SURVIVAL       = 12353, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
-        NUNYENUNC_PH   =
+        NUNYENUNC_PH =
         {
             [17248323] = 17248517, -- -95.00 -17.000 383.000
             [17248515] = 17248517, -- -7.194 -17.288 431.604
             [17248516] = 17248517, -- 53.159 -24.540 554.652
             [17248514] = 17248517, -- 159.501 -20.117 485.528
         },
+
         TOM_TIT_TAT_PH =
         {
             [17248467] = 17248468, -- 31.149 -20.045 358.265
@@ -81,9 +83,11 @@ zones[xi.zone.WEST_SARUTABARUTA] =
             [17248544] = 17248468, -- 239.421 -19.659 583.122
             [17248545] = 17248468, -- 274.296 -20.357 587.339
         },
-        VOIDWALKER        =
+
+        VOIDWALKER =
         {
-            [xi.keyItem.CLEAR_ABYSSITE] = {
+            [xi.keyItem.CLEAR_ABYSSITE] =
+            {
                 17248624, -- Raker bee
                 17248623, -- Raker bee
                 17248622, -- Raker bee
@@ -93,23 +97,31 @@ zones[xi.zone.WEST_SARUTABARUTA] =
                 17248618,  -- Rummager beetle
                 17248617,  -- Rummager beetle
             },
-            [xi.keyItem.COLORFUL_ABYSSITE] = {
+
+            [xi.keyItem.COLORFUL_ABYSSITE] =
+            {
                 17248616,  -- Jyeshtha
                 17248615, -- Farruca Fly
             },
-            [xi.keyItem.BROWN_ABYSSITE] = {
-                17248614  -- Orcus
+
+            [xi.keyItem.BROWN_ABYSSITE] =
+            {
+                17248614, -- Orcus
             },
-            [xi.keyItem.BLACK_ABYSSITE] = {
-                17248613  -- Yilbegan
-            }
+
+            [xi.keyItem.BLACK_ABYSSITE] =
+            {
+                17248613, -- Yilbegan
+            },
         }
     },
+
     npc =
     {
         CASKET_BASE     = 17248770,
         SIGNPOST_OFFSET = 17248797,
         OVERSEER_BASE   = 17248830, -- Naguipeillont_RK in npc_list
+
         HARVESTING =
         {
             17248846,

@@ -788,7 +788,8 @@ xi.treasure.treasureInfo =
             {
                 treasureLvl = 53,
                 key = 1043,
-                hands = {
+                hands =
+                {
                     [xi.job.WHM] = true,
                 },
                 af =
@@ -816,7 +817,8 @@ xi.treasure.treasureInfo =
             {
                 treasureLvl = 53,
                 key = 1042,
-                hands = {
+                hands =
+                {
                     [xi.job.THF] = true,
                 },
                 af =
@@ -875,7 +877,8 @@ xi.treasure.treasureInfo =
                 treasureLvl = 53,
                 key = 1052,
                 map = xi.ki.MAP_OF_THE_BOYAHDA_TREE,
-                hands = {
+                hands =
+                {
                     [xi.job.DRG] = true,
                 },
                 af =
@@ -956,7 +959,8 @@ xi.treasure.treasureInfo =
             {
                 treasureLvl = 53,
                 key = 1048,
-                hands = {
+                hands =
+                {
                     [xi.job.BRD] = true,
                 },
                 af =
@@ -1030,7 +1034,8 @@ xi.treasure.treasureInfo =
                 treasureLvl = 53,
                 key = 1051,
                 map = xi.ki.MAP_OF_THE_KUFTAL_TUNNEL,
-                hands = {
+                hands =
+                {
                     [xi.job.SAM] = true,
                 },
                 misc =
@@ -1068,7 +1073,8 @@ xi.treasure.treasureInfo =
                 treasureLvl = 53,
                 key = 1059,
                 map = xi.ki.MAP_OF_SEA_SERPENT_GROTTO,
-                hands = {
+                hands =
+                {
                     [xi.job.SMN] = true,
                 },
                 af =
@@ -1116,7 +1122,8 @@ xi.treasure.treasureInfo =
             {
                 treasureLvl = 53,
                 key = 1046,
-                hands = {
+                hands =
+                {
                     [xi.job.WAR] = true,
                     [xi.job.RDM] = true,
                     [xi.job.PLD] = true,
@@ -1146,7 +1153,8 @@ xi.treasure.treasureInfo =
             {
                 treasureLvl = 53,
                 key = 1045,
-                hands = {
+                hands =
+                {
                     [xi.job.MNK] = true,
                     [xi.job.BST] = true,
                 },
@@ -1175,7 +1183,8 @@ xi.treasure.treasureInfo =
             {
                 treasureLvl = 53,
                 key = 1047,
-                hands = {
+                hands =
+                {
                     [xi.job.BLM] = true,
                     [xi.job.RNG] = true,
                 },
@@ -1206,7 +1215,8 @@ xi.treasure.treasureInfo =
                 treasureLvl = 53,
                 key = 1053,
                 map = xi.ki.MAP_OF_IFRITS_CAULDRON,
-                hands = {
+                hands =
+                {
                     [xi.job.NIN] = true,
                 },
                 af =

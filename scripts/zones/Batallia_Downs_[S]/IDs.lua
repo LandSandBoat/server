@@ -30,6 +30,7 @@ zones[xi.zone.BATALLIA_DOWNS_S] =
         VOIDWALKER_OBTAIN_KI    = 8318, -- Obtained key item: <keyitem>!
         COMMON_SENSE_SURVIVAL   = 9591, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
         BURLIBIX_BRAWNBACK_PH =
@@ -37,17 +38,21 @@ zones[xi.zone.BATALLIA_DOWNS_S] =
             [17121398] = 17121399,
             [17121402] = 17121399,
         },
+
         LA_VELUE_PH =
         {
             [17121554] = 17121576, -- -314.365 -18.745 -56.016
         },
+
         HABERGOASS_PH =
         {
             [17121602] = 17121603,
         },
-        VOIDWALKER        =
+
+        VOIDWALKER =
         {
-            [xi.keyItem.CLEAR_ABYSSITE] = {
+            [xi.keyItem.CLEAR_ABYSSITE] =
+            {
                 17121722,  -- Lacus
                 17121721,  -- Thunor
                 17121720, -- Beorht
@@ -57,18 +62,25 @@ zones[xi.zone.BATALLIA_DOWNS_S] =
                 17121716, -- Deorc
                 17121715, -- Aither
             },
-            [xi.keyItem.COLORFUL_ABYSSITE] = {
+
+            [xi.keyItem.COLORFUL_ABYSSITE] =
+            {
                 17121714, -- Skuld
                 17121713  -- Urd
             },
-            [xi.keyItem.YELLOW_ABYSSITE] = {
+
+            [xi.keyItem.YELLOW_ABYSSITE] =
+            {
                 17121712  -- Verthandi
             },
-            [xi.keyItem.BLACK_ABYSSITE] = {
+
+            [xi.keyItem.BLACK_ABYSSITE] =
+            {
                 17121711  -- Yilbegan
             }
         }
     },
+
     npc =
     {
     },

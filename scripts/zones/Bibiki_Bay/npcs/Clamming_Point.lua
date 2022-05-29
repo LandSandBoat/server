@@ -8,7 +8,8 @@ require("scripts/globals/keyitems")
 local entity = {}
 
 -- clammingItems = item id, weight, drop rate, improved drop rate
-local clammingItems = {
+local clammingItems =
+{
     1311,  6, 0.001, 0.003, -- Oxblood
     885,   6, 0.002, 0.006, -- Turtle Shell
     1193,  6, 0.003, 0.009, -- HQ Crab Shell
