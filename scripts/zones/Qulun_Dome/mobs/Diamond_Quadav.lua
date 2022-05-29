@@ -33,11 +33,11 @@ entity.onMobDespawn = function(mob)
     -- the quest version of this NM doesn't respawn or count toward hq nm
     if nqId == ID.mob.DIAMOND_QUADAV then
         local hqId = mob:getID() + 1
-        local ToD = GetServerVariable("[POP]Za_Dha_Adamantking")
+        local timeOfDeath = GetServerVariable("[POP]Za_Dha_Adamantking")
         local kills = GetServerVariable("[PH]Za_Dha_Adamantking")
         local popNow = (math.random(1, 5) == 3 or kills > 6)
 
-        if os.time() > ToD and popNow then
+        if os.time() > timeOfDeath and popNow then
             DisallowRespawn(nqId, true)
             DisallowRespawn(hqId, false)
             UpdateNMSpawnPoint(hqId)

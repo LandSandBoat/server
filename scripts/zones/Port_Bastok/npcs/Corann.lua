@@ -14,9 +14,9 @@ entity.onTrade = function(player, npc, trade)
 
     if theQuadav == QUEST_ACCEPTED then
         local count = trade:getItemCount()
-        local QuadavBack = trade:hasItemQty(596, 1)
+        local quadavBack = trade:hasItemQty(596, 1)
 
-        if count == 1 and QuadavBack == true then
+        if count == 1 and quadavBack == true then
             player:startEvent(81)
         end
     end
