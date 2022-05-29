@@ -48,33 +48,35 @@ xi.dynamis.spawnWave = function(zone, zoneID, waveNumber)
 end
 
 xi.dynamis.parentOnEngaged = function(mob, target)
-    local zoneID = mob:getZoneID()
-    local oMobIndex = mob:getZone():getLocalVar(string.format("MobIndex_%s", mob:getID()))
-    local oMob = mob
-    local eyes = mob:getLocalVar("eyeColor")
-    if eyes ~= nil then
-        mob:setAnimationSub(eyes)
-    end
-    if xi.dynamis.mobList[zoneID][oMobIndex].nmchildren ~= nil then
-        for index, MobIndex in pairs(xi.dynamis.mobList[zoneID][oMobIndex].nmchildren) do
-            if MobIndex == true or MobIndex == false then
-                index = index + 1
-            else
-                local forceLink = xi.dynamis.mobList[zoneID][oMobIndex].nmchildren[1]
-                local mobType = xi.dynamis.mobList[zoneID][MobIndex].info[1]
-                if mobType == "NM" then -- NMs
-                    xi.dynamis.nmDynamicSpawn(MobIndex, oMobIndex, forceLink, zoneID, target, oMob)
+    mob:timer(1000, function(mob, target)
+        local zoneID = mob:getZoneID()
+        local oMobIndex = mob:getZone():getLocalVar(string.format("MobIndex_%s", mob:getID()))
+        local oMob = mob
+        local eyes = mob:getLocalVar("eyeColor")
+        if eyes ~= nil then
+            mob:setAnimationSub(eyes)
+        end
+        if xi.dynamis.mobList[zoneID][oMobIndex].nmchildren ~= nil then
+            for index, MobIndex in pairs(xi.dynamis.mobList[zoneID][oMobIndex].nmchildren) do
+                if MobIndex == true or MobIndex == false then
                     index = index + 1
-                else -- Nightmare Mobs and Statues
-                    xi.dynamis.nonStandardDynamicSpawn(MobIndex, oMob, forceLink, zoneID, target, oMobIndex)
-                    index = index + 1
+                else
+                    local forceLink = xi.dynamis.mobList[zoneID][oMobIndex].nmchildren[1]
+                    local mobType = xi.dynamis.mobList[zoneID][MobIndex].info[1]
+                    if mobType == "NM" then -- NMs
+                        xi.dynamis.nmDynamicSpawn(MobIndex, oMobIndex, forceLink, zoneID, target, oMob)
+                        index = index + 1
+                    else -- Nightmare Mobs and Statues
+                        xi.dynamis.nonStandardDynamicSpawn(MobIndex, oMob, forceLink, zoneID, target, oMobIndex)
+                        index = index + 1
+                    end
                 end
             end
         end
-    end
-    if xi.dynamis.mobList[zoneID][oMobIndex].mobchildren ~= nil then
-        xi.dynamis.normalDynamicSpawn(mob, oMobIndex) -- Normies have their own loop, so they don't need one here.
-    end
+        if xi.dynamis.mobList[zoneID][oMobIndex].mobchildren ~= nil then
+            xi.dynamis.normalDynamicSpawn(mob, oMobIndex) -- Normies have their own loop, so they don't need one here.
+        end
+    end)
 end
 
 xi.dynamis.normalDynamicSpawn = function(mob, oMobIndex)
@@ -277,12 +279,12 @@ xi.dynamis.normalDynamicSpawn = function(mob, oMobIndex)
                 groupId = nameObj[job][2],
                 groupZoneId = nameObj[job][3],
                 onMobSpawn = function(mob) xi.dynamis.setMobStats(mob) end,
-                onMobRoam = function(mob) xi.dynamis.mobOnRoam(mob) end,
-                onMobRoamAction = function(mob) xi.dynamis.mobOnRoamAction(mob) end,
+                onMobRoam = function(mob) end,
+                onMobRoamAction = function(mob)  end,
                 onMobDeath = function(mob, playerArg, isKiller)
                     xi.dynamis.mobOnDeath(mob)
                 end,
-                releaseIdOnDeath = true
+                --releaseIdOnDeath = true
             })
             mob:setSpawn(oMob:getXPos()+math.random()*6-3, oMob:getYPos()-0.3, oMob:getZPos()+math.random()*6-3, oMob:getRotPos())
             mob:spawn()
@@ -412,11 +414,12 @@ xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID,
         onMobDeath = function(mob, playerArg, isKiller)
             xi.dynamis.mobOnDeath(mob)
         end,
-        releaseIdOnDeath = true
+        --releaseIdOnDeath = true
     })
     mob:setSpawn(xPos, yPos, zPos, rPos)
     mob:spawn()
     mob:getZone():setLocalVar(string.format("MobIndex_%s", mob:getID()), mobIndex)
+    mob:setLocalVar(string.format("MobIndex_%s", mob:getID()), mobIndex)
     mob:setDropID(nonStandardLookup[mobMobType][mobName][4])
     if nonStandardLookup[mobMobType][mobName][5] ~= nil then -- If SpellList ~= nil set SpellList
         mob:setSpellList(nonStandardLookup[mobMobType][mobName][5])
@@ -812,7 +815,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         onMobWeaponSkillPrepare= nmFunctions[functionLookup]["onMobWeaponSkillPrepare"][1],
         onMobWeaponSkill= nmFunctions[functionLookup]["onMobWeaponSkill"][1],
         onMobDeath= nmFunctions[functionLookup]["onMobDeath"][1],
-        releaseIdOnDeath = true
+        --releaseIdOnDeath = true
     })
     mob:setSpawn(xPos, yPos, zPos, rPos)
     mob:spawn()
@@ -837,6 +840,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         mob:setLocalVar("Parent", oMobIndex)
     end
     zone:setLocalVar(string.format("MobIndex_%s", mob:getID()), mobIndex)
+    mob:setLocalVar(string.format("MobIndex_%s", mob:getID()), mobIndex)
     if forceLink == true then
         mob:updateEnmity(target)
     end
@@ -1007,28 +1011,36 @@ end
 --------------------------------------------
 
 xi.dynamis.mobOnRoamAction = function(mob) -- Handle statue pathing.
-    if mob ~= nil then
+    
+end
+
+xi.dynamis.mobOnRoam = function(mob) 
+    if mob:getRoamFlags() == xi.roamFlag.EVENT then
         local zoneID = mob:getZoneID()
-        if xi.dynamis.dynaInfoEra[zoneID].updatedRoam == true then
-            local home = mob:getSpawnPos()
-            local location = mob:getPos()
-            if location.x == home.x and location.y == home.y and location.z == home.z and location.rot == home.rot then
-                mob:setPos(location.x, location.y, location.z, home.rot)
-            else
-                mob:pathTo(home.x, home.y, home.z)
+        local mobIndex = mob:getLocalVar(string.format("MobIndex_%s", mob:getID()))
+        for key, index in pairs(xi.dynamis.mobList[zoneID].patrolPaths) do
+            local table = xi.dynamis.mobList[zoneID][index].patrolPath
+            if mobIndex == index then
+                local flags = xi.path.flag.RUN
+                local home = {table[1], table[2], table[3]}
+                local dest = {table[4], table[5], table[6]}
+                local spawn = mob:getSpawnPos()
+                local current = {mob:getXPos(), mob:getYPos(), mob:getZPos()}
+                if current[1] == home[1] and current[3] == home[3] then
+                    print("At Home")
+                    mob:pathTo(dest[1], dest[2], dest[3], flags)
+                elseif current[1] == dest[1] and current[3] == dest[3] then
+                    print("At Destination")
+                    mob:pathTo(home[1], home[2], home[3], flags)
+                elseif current[1] == spawn.x and current[3] == spawn.z then
+                    print("At Spawn")    
+                    mob:pathTo(home[1], home[2], home[3], flags)
+                end
             end
-        elseif xi.dynamis.dynaInfoEra[zoneID].updatedRoam == false then
-            local home = mob:getSpawnPos()
-            local location = mob:getPos()
-            mob:pathTo(home.x, home.y, home.z)
-            if location.x == home.x and location.y == home.y and location.z == home.z and location.rot ~= home.rot then
-                mob:setPos(location.x, location.y, location.z, home.rot)
-            end
+            key = key + 1
         end
     end
 end
-
-xi.dynamis.mobOnRoam = function(mob) end
 
 --------------------------------------------
 --            Dynamis Mob Stats           --

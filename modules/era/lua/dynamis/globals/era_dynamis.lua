@@ -1155,8 +1155,6 @@ m:addOverride("xi.dynamis.zoneOnZoneIn", function(player, prevZone)
     return -1
 end)
 
-
-
 -- Disable Base LSB Additional Functions
 m:addOverride("xi.dynamis.somnialThresholdOnTrigger", function(player,npc) end)
 m:addOverride("xi.dynamis.somnialThresholdOnEventFinish", function(player,npc) end)
