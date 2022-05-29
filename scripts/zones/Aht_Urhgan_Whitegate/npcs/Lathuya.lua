@@ -43,14 +43,14 @@ entity.onTrade = function(player, npc, trade)
     if remainingBLUAF >= 1 then
         local craftingStage = player:getCharVar("[BLUAF]CraftingStage")
         local totalCraftedPieces = 3 - utils.mask.countBits(remainingBLUAF, 3)
-        local AFoffset = 8 * totalCraftedPieces
+        local artifactOffset = 8 * totalCraftedPieces
 
         local item = craftingItems[player:getCharVar("[BLUAF]Current")]
         if item then
             if craftingStage == 0  and npcUtil.tradeHasExactly(trade, item.materials) then
-                player:startEvent(732 + AFoffset, item.result, item.currency, item.currencyAmt)
+                player:startEvent(732 + artifactOffset, item.result, item.currency, item.currencyAmt)
             elseif craftingStage == 1 and npcUtil.tradeHasExactly(trade, {{item.currency, item.currencyAmt}}) then
-                player:startEvent(734 + AFoffset, 0, item.currency, item.currencyAmt)
+                player:startEvent(734 + artifactOffset, 0, item.currency, item.currencyAmt)
             end
         end
     end
@@ -65,7 +65,7 @@ entity.onTrigger = function(player, npc)
         local totalCraftedPieces = 3 - utils.mask.countBits(remainingBLUAF, 3)
         local currentTask = player:getCharVar("[BLUAF]Current")
         local craftingStage = player:getCharVar("[BLUAF]CraftingStage")
-        local AFoffset = 8 * totalCraftedPieces
+        local artifactOffset = 8 * totalCraftedPieces
 
         if currentTask == 0 and totalCraftedPieces ~= 3 then
             if vanaDay() > player:getCharVar("[BLUAF]RestingDay") then
@@ -74,22 +74,22 @@ entity.onTrigger = function(player, npc)
                     player:startEvent(746, 0, 0, 0, 0, 0, 0, 0, currentTask)
                 else
                     -- Will prompt for choosing which armor to work on
-                    player:startEvent(730 + AFoffset, 7 - remainingBLUAF)
+                    player:startEvent(730 + artifactOffset, 7 - remainingBLUAF)
                 end
             else
-                player:startEvent(737 + (AFoffset - 8)) -- Asleep message, wait until 1 day passes
+                player:startEvent(737 + (artifactOffset - 8)) -- Asleep message, wait until 1 day passes
             end
         elseif currentTask > 0 then
             local pickupReady = vanaDay() > player:getCharVar("[BLUAF]PaymentDay")
             local item = craftingItems[currentTask]
             if craftingStage == 0 then
-                player:startEvent(731 + AFoffset, 0, item.currency, item.currencyAmt)
+                player:startEvent(731 + artifactOffset, 0, item.currency, item.currencyAmt)
             elseif craftingStage == 1 then
-                player:startEvent(733 + AFoffset, item.result, item.currency, item.currencyAmt)
+                player:startEvent(733 + artifactOffset, item.result, item.currency, item.currencyAmt)
             elseif craftingStage == 2 and not pickupReady then
-                player:startEvent(735 + AFoffset)
+                player:startEvent(735 + artifactOffset)
             elseif craftingStage == 2 and pickupReady then
-                player:startEvent(736 + AFoffset, item.result)
+                player:startEvent(736 + artifactOffset, item.result)
             end
         elseif totalCraftedPieces == 3 then
             player:startEvent(753) -- Dialogue after crafting all BLU AF
@@ -100,9 +100,9 @@ end
 entity.onEventUpdate = function(player, csid, option)
     local remainingBLUAF = player:getCharVar("[BLUAF]Remaining") -- Bitmask of AF the player has NOT crafted
     local totalCraftedPieces = 3 - utils.mask.countBits(remainingBLUAF, 3)
-    local AFoffset = 8 * totalCraftedPieces
+    local artifactOffset = 8 * totalCraftedPieces
 
-    if csid == 730 + AFoffset then
+    if csid == 730 + artifactOffset then
         if option >= 2 and option <= 9 then
             local currentTask = player:getCharVar("[BLUAF]Current")
             local updateType = option % 3
@@ -128,18 +128,18 @@ entity.onEventFinish = function(player, csid, option)
     local remainingBLUAF = player:getCharVar("[BLUAF]Remaining") -- Bitmask of AF the player has NOT crafted
     local totalCraftedPieces = 3 - utils.mask.countBits(remainingBLUAF, 3)
     local currentTask = player:getCharVar("[BLUAF]Current")
-    local AFoffset = 8 * totalCraftedPieces
+    local artifactOffset = 8 * totalCraftedPieces
 
     -- BLU AF CRAFTING
-    if csid == 732 + AFoffset then
+    if csid == 732 + artifactOffset then
         player:setCharVar("[BLUAF]CraftingStage", 1)
         player:confirmTrade()
-    elseif csid == 734 + AFoffset then
+    elseif csid == 734 + artifactOffset then
         player:confirmTrade()
         player:setCharVar("[BLUAF]CraftingStage", 2)
         player:setCharVar("[BLUAF]PaymentDay", vanaDay())
         npcUtil.giveKeyItem(player, xi.ki.MAGUS_ORDER_SLIP)
-    elseif csid == 736 + AFoffset and currentTask > 0 then
+    elseif csid == 736 + artifactOffset and currentTask > 0 then
         if npcUtil.giveItem(player, craftingItems[currentTask].result) then
             player:setCharVar("[BLUAF]Remaining", utils.mask.setBit(remainingBLUAF, currentTask - 1, false))
             player:setCharVar("[BLUAF]PaymentDay", 0)

@@ -793,7 +793,7 @@ function getRoeRecords(triggers)
 
         [ 680] = { -- PUP Artifact Quest I
             trigger = triggers.questComplete,
-            reqs = { questComplete = {xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.THE_WAYWARD_AUTOMATION} },
+            reqs = { questComplete = {xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.THE_WAYWARD_AUTOMATON} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },

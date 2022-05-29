@@ -168,7 +168,7 @@ quest.sections =
                     if
                         quest:getVar(player, 'Prog') == 3 and
                         npcUtil.tradeHas(trade, xi.items.INGOT_OF_ROYAL_TREASURY_GOLD) and
-                        npcUtil.popFromQM(player, npc, DavoiID.mob.HEMATIC_CYST, {radius = 1, hide = 0})
+                        npcUtil.popFromQM(player, npc, davoiID.mob.HEMATIC_CYST, {radius = 1, hide = 0})
                     then
                         player:confirmTrade()
                         return quest:messageSpecial(davoiID.text.UNDER_ATTACK)

@@ -14,7 +14,7 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    local TheWaywardAutomation = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.THE_WAYWARD_AUTOMATION)
+    local TheWaywardAutomation = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.THE_WAYWARD_AUTOMATON)
     local TheWaywardAutomationProgress = player:getCharVar("TheWaywardAutomationProgress")
     local OperationTeatimeProgress = player:getCharVar("OperationTeatimeProgress")
     local OTT_DayWait = player:getCharVar("OTT_DayWait")
