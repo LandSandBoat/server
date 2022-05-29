@@ -21,6 +21,9 @@ zone_object.onInitialize = function(zone)
 
     xi.helm.initZone(zone, xi.helm.type.HARVESTING)
     xi.voidwalker.zoneOnInit(zone)
+end
+
+zone_object.onZoneTick = function(zone)
     xi.garrison.npcTable(zone)
 end
 

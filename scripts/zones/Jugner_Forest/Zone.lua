@@ -34,6 +34,9 @@ zone_object.onInitialize = function(zone)
     end
 
     xi.voidwalker.zoneOnInit(zone)
+end
+
+zone_object.onZoneTick = function(zone)
     xi.garrison.npcTable(zone)
 end
 

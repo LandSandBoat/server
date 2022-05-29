@@ -20,6 +20,9 @@ zone_object.onInitialize = function(zone)
     GetMobByID(ID.mob.NOBLE_MOLD):setLocalVar("pop", os.time() + math.random(43200, 57600)) -- 12 to 16 hr
 
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())
+end
+
+zone_object.onZoneTick = function(zone)
     xi.garrison.npcTable(zone)
 end
 
