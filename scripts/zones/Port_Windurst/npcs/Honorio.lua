@@ -24,9 +24,9 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 181 then
-        local X = player:getXPos()
+        local xPos = player:getXPos()
 
-        if X >= 222 and X <= 225 then
+        if xPos >= 222 and xPos <= 225 then
             player:delGil(200)
         end
     end

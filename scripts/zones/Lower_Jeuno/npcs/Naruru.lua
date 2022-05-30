@@ -17,8 +17,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local CooksPride     = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COOK_S_PRIDE)
-    local TheKindCardian = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_KIND_CARDIAN)
+    local cooksPride     = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COOK_S_PRIDE)
+    local theKindCardian = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_KIND_CARDIAN)
 
     if
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and
@@ -28,7 +28,7 @@ entity.onTrigger = function(player, npc)
 
     elseif
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_WONDER_MAGIC_SET) == QUEST_COMPLETED and
-        CooksPride == QUEST_AVAILABLE
+        cooksPride == QUEST_AVAILABLE
     then
         if player:getCharVar("CooksPrideVar") == 0 then
             player:startEvent(189) -- Start quest "Cook's pride" Long CS
@@ -37,7 +37,7 @@ entity.onTrigger = function(player, npc)
         end
 
     elseif
-        CooksPride == QUEST_ACCEPTED and
+        cooksPride == QUEST_ACCEPTED and
         not player:hasKeyItem(xi.ki.SUPER_SOUP_POT)
     then
         player:startEvent(186) -- During quest "Cook's pride"
@@ -46,8 +46,8 @@ entity.onTrigger = function(player, npc)
         player:startEvent(187) -- Finish quest "Cook's pride"
 
     elseif
-        CooksPride == QUEST_COMPLETED and
-        TheKindCardian == QUEST_AVAILABLE
+        cooksPride == QUEST_COMPLETED and
+        theKindCardian == QUEST_AVAILABLE
     then
         if player:getCharVar("theLostCardianVar") == 0 then
             player:startEvent(31) -- During quests "The lost cardian"
@@ -56,12 +56,12 @@ entity.onTrigger = function(player, npc)
         end
 
     elseif
-        CooksPride == QUEST_COMPLETED and
-        TheKindCardian ~= QUEST_COMPLETED
+        cooksPride == QUEST_COMPLETED and
+        theKindCardian ~= QUEST_COMPLETED
     then
         player:startEvent(71) -- During quests "The kind cardien"
 
-    elseif TheKindCardian == QUEST_COMPLETED then
+    elseif theKindCardian == QUEST_COMPLETED then
         player:startEvent(72) -- New standard dialog after the quest "The kind cardien"
 
     else

@@ -15,8 +15,8 @@ xi.moghouse = xi.moghouse or {}
 -----------------------------------
 -- Mog Locker constants
 -----------------------------------
-local MOGLOCKER_START_TS = 1009810800 -- unix timestamp for 2001/12/31 15:00
-local MOGLOCKER_PLAYERVAR_EXPIRY_TIMESTAMP = "mog-locker-expiry-timestamp"
+local mogLockerStartTimestamp   = 1009810800 -- unix timestamp for 2001/12/31 15:00
+local mogLockerTimestampVarName = "mog-locker-expiry-timestamp"
 
 xi.moghouse.MOGLOCKER_ALZAHBI_VALID_DAYS    = 7
 xi.moghouse.MOGLOCKER_ALLAREAS_VALID_DAYS   = 5
@@ -114,7 +114,7 @@ end
 
 -- Unlocks a mog locker for a player. Returns the 'expired' timestamp (-1)
 xi.moghouse.unlockMogLocker = function(player)
-    player:setCharVar(MOGLOCKER_PLAYERVAR_EXPIRY_TIMESTAMP, -1)
+    player:setCharVar(mogLockerTimestampVarName, -1)
     local currentSize = player:getContainerSize(xi.inv.MOGLOCKER)
     if currentSize == 0 then -- we do this check in case some servers auto-set 80 slots for mog locker items
         player:changeContainerSize(xi.inv.MOGLOCKER, 30)
@@ -135,15 +135,15 @@ end
 
 -- Gets the expiry time for your locker. A return value of -1 is expired. A return value of nil means mog locker hasn't been unlocked.
 xi.moghouse.getMogLockerExpiryTimestamp = function(player)
-    local expiryTime = player:getCharVar(MOGLOCKER_PLAYERVAR_EXPIRY_TIMESTAMP)
+    local expiryTime = player:getCharVar(mogLockerTimestampVarName)
 
     if (expiryTime == 0) then
         return nil
     end
 
-    local now = os.time() - MOGLOCKER_START_TS
+    local now = os.time() - mogLockerStartTimestamp
     if now > expiryTime then
-        player:setCharVar(MOGLOCKER_PLAYERVAR_EXPIRY_TIMESTAMP, -1)
+        player:setCharVar(mogLockerTimestampVarName, -1)
         return -1
     end
 
@@ -168,13 +168,13 @@ xi.moghouse.addMogLockerExpiryTime = function(player, numBronze)
     end
 
     if currentTs == -1 then
-        currentTs = os.time() - MOGLOCKER_START_TS
+        currentTs = os.time() - mogLockerStartTimestamp
     end
 
     local timeIncrease = 60 * 60 * 24 * numDaysPerBronze * numBronze
     local newTs = currentTs + timeIncrease
 
-    player:setCharVar(MOGLOCKER_PLAYERVAR_EXPIRY_TIMESTAMP, newTs)
+    player:setCharVar(mogLockerTimestampVarName, newTs)
     -- send an invent size packet to enable the items if they weren't
     player:changeContainerSize(xi.inv.MOGLOCKER, 0)
     return true

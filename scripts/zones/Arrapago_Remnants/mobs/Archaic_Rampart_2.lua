@@ -12,22 +12,22 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobFight = function(mob, target)
-    local instance = mob:getInstance()
-    local popTime = mob:getLocalVar("lastPetPop")
-    local POS = mob:getPos()
-    local PET1 = GetMobByID((mob:getID() +1), instance)
-    local PET2 = GetMobByID((mob:getID() +2), instance)
+    local instance  = mob:getInstance()
+    local popTime   = mob:getLocalVar("lastPetPop")
+    local mobPos    = mob:getPos()
+    local firstPet  = GetMobByID((mob:getID() + 1), instance)
+    local secondPet = GetMobByID((mob:getID() + 2), instance)
 
     if os.time() - popTime > 15 then
-        if not PET1:isSpawned() then
-            PET1:setSpawn(POS.x, POS.y, POS.z, POS.rot)
+        if not firstPet:isSpawned() then
+            firstPet:setSpawn(mobPos.x, mobPos.y, mobPos.z, mobPos.rot)
             mob:useMobAbility(2034)
             mob:setLocalVar("lastPetPop", os.time())
             mob:timer(2500, function(m)
                 SpawnMob((m:getID() +1), instance)
             end)
-        elseif not PET2:isSpawned() then
-            PET2:setSpawn(POS.x, POS.y, POS.z, POS.rot)
+        elseif not secondPet:isSpawned() then
+            secondPet:setSpawn(mobPos.x, mobPos.y, mobPos.z, mobPos.rot)
             mob:useMobAbility(2034)
             mob:setLocalVar("lastPetPop", os.time())
             mob:timer(2500, function(m)
@@ -35,11 +35,13 @@ entity.onMobFight = function(mob, target)
             end)
         end
     end
-    if PET1:isSpawned() then
-        PET1:updateEnmity(target)
+
+    if firstPet:isSpawned() then
+        firstPet:updateEnmity(target)
     end
-    if PET2: isSpawned() then
-        PET1:updateEnmity(target)
+
+    if secondPet:isSpawned() then
+        secondPet:updateEnmity(target)
     end
 end
 

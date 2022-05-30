@@ -14,16 +14,16 @@ entity.onTrade = function(player, npc, trade)
 
     if (sermonQuest == QUEST_ACCEPTED) then
         local count = trade:getItemCount()
-        local BluePeas = trade:getItemQty(618)
-        if (BluePeas == 1 and count == 1 and player:getCharVar("sermonQuestVar") == 0) then
+        local bluePeas = trade:getItemQty(618)
+        if (bluePeas == 1 and count == 1 and player:getCharVar("sermonQuestVar") == 0) then
             player:tradeComplete()
             player:showText(npc, 7349)
             player:startEvent(19)
             player:setCharVar("sermonQuestVar", 1)
-        elseif (BluePeas > 1 and count == BluePeas) then
+        elseif (bluePeas > 1 and count == bluePeas) then
             player:showText(npc, 7352)
             player:startEvent(19)
-        elseif (BluePeas == 1 and count == 1) then
+        elseif (bluePeas == 1 and count == 1) then
             player:showText(npc, 7352, 618)
             player:startEvent(19)
         else

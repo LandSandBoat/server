@@ -42,7 +42,7 @@ local waypointInfo =
 
     -- Eastern Adoulin
     [21] = { 15, 2, 5000, { -101.274,  -0.15, -10.726, 191, xi.zone.EASTERN_ADOULIN } }, -- Peacekeeper's Coalition
-    [22] = { 16, 2, 5001, {  -77,944,  -0.15, -63.926,   0, xi.zone.EASTERN_ADOULIN } }, -- Scout's Coalition
+    [22] = { 16, 2, 5001, {  -77.944,  -0.15, -63.926,   0, xi.zone.EASTERN_ADOULIN } }, -- Scout's Coalition
     [23] = { 17, 2, 5002, {  -46.838, -0.075, -12.767,  63, xi.zone.EASTERN_ADOULIN } }, -- Statue of the Goddess
     [24] = { 18, 2, 5003, {  -57.773,  -0.15,  85.237, 127, xi.zone.EASTERN_ADOULIN } }, -- Yahse Wharf
     [25] = { 19, 2, 5004, {  -61.865,  -0.15, -120.81, 127, xi.zone.EASTERN_ADOULIN } }, -- Rent-a-Room

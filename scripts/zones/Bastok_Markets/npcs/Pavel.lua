@@ -13,12 +13,11 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local WildcatBastok = player:getCharVar("WildcatBastok")
+    local wildcatBastok = player:getCharVar("WildcatBastok")
 
-    if player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatBastok, 14) then
+    if player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(wildcatBastok, 14) then
         player:startEvent(431)
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)

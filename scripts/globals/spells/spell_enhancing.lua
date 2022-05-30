@@ -237,9 +237,9 @@ end
 
 -- Main function for Enhancing Spells.
 xi.spells.spell_enhancing.useEnhancingSpell = function(caster, target, spell)
-    local spellId    = spell:getID()
-    local spellGroup = spell:getSpellGroup()
-    local MDB        = 0
+    local spellId           = spell:getID()
+    local spellGroup        = spell:getSpellGroup()
+    local magicDefenseBonus = 0
     -- Get Variables from Parameters Table.
     local tier            = enhancingTable[spellId][1]
     local spellEffect     = enhancingTable[spellId][2]
@@ -254,7 +254,7 @@ xi.spells.spell_enhancing.useEnhancingSpell = function(caster, target, spell)
 
     -- Bar-Element (They use addStatusEffect argument 6. Bar-Status current implementation doesn't.)
     if spellEffect >= xi.effect.BARFIRE and spellEffect <= xi.effect.BARWATER then
-        MDB = caster:getMerit(xi.merit.BAR_SPELL_EFFECT) + caster:getMod(xi.mod.BARSPELL_MDEF_BONUS)
+        magicDefenseBonus = caster:getMerit(xi.merit.BAR_SPELL_EFFECT) + caster:getMod(xi.mod.BARSPELL_MDEF_BONUS)
     -- Embrava
     elseif spellEffect == xi.effect.EMBRAVA then
         -- If Tabula Rasa wears before spell goes off, no Embrava for you!
@@ -331,9 +331,9 @@ xi.spells.spell_enhancing.useEnhancingSpell = function(caster, target, spell)
     ------------------------------------------------------------
     if alwaysOverwrite then
         target:delStatusEffect(spellEffect)
-        target:addStatusEffect(spellEffect, finalPower, tickTime, duration, 0, MDB, tier)
+        target:addStatusEffect(spellEffect, finalPower, tickTime, duration, 0, magicDefenseBonus, tier)
     else
-        if target:addStatusEffect(spellEffect, finalPower, tickTime, duration, 0, MDB, tier) then
+        if target:addStatusEffect(spellEffect, finalPower, tickTime, duration, 0, magicDefenseBonus, tier) then
             spell:setMsg(xi.msg.basic.MAGIC_GAIN_EFFECT)
         else
             spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- No effect.

@@ -7,7 +7,8 @@ require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
 
-local riverneA01Global = {
+local riverneA01Global =
+{
     --[[..............................................................................................
         trade to unstable displacement NPC
         ..............................................................................................]]

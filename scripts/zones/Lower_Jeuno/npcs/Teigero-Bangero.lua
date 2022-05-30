@@ -42,7 +42,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local TheKindCardian = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_KIND_CARDIAN)
+    local theKindCardian = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_KIND_CARDIAN)
 
     if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_WONDER_MAGIC_SET) == QUEST_AVAILABLE then
         player:startEvent(34) -- Base Standard CS & dialog
@@ -59,9 +59,9 @@ entity.onTrigger = function(player, npc)
         else
             player:startEvent(66)
         end
-    elseif TheKindCardian == QUEST_ACCEPTED then
+    elseif theKindCardian == QUEST_ACCEPTED then
         player:startEvent(66) -- During quest "The kind cardien"
-    elseif TheKindCardian == QUEST_COMPLETED then
+    elseif theKindCardian == QUEST_COMPLETED then
         player:startEvent(67) -- New standard dialog after "The kind cardien"
     else
         player:startEvent(34) -- Base Standard CS & dialog

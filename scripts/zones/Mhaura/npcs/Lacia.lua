@@ -18,20 +18,19 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
+    local trialSizeLightning = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TRIAL_SIZE_TRIAL_BY_LIGHTNING)
 
-    local TrialSizeLightning = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TRIAL_SIZE_TRIAL_BY_LIGHTNING)
-
-    if (player:getMainLvl() >= 20 and player:getMainJob() == xi.job.SMN and TrialSizeLightning == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.WINDURST) >= 2) then --Requires player to be Summoner at least lvl 20
+    if (player:getMainLvl() >= 20 and player:getMainJob() == xi.job.SMN and trialSizeLightning == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.WINDURST) >= 2) then --Requires player to be Summoner at least lvl 20
         player:startEvent(10025, 0, 1548, 5, 20)     --mini tuning fork of lightning, zone, level
-    elseif (TrialSizeLightning == QUEST_ACCEPTED) then
-        local LightningFork = player:hasItem(1548)
+    elseif (trialSizeLightning == QUEST_ACCEPTED) then
+        local lightningFork = player:hasItem(1548)
 
-        if (LightningFork == true) then
+        if (lightningFork == true) then
             player:startEvent(10018) --Dialogue given to remind player to be prepared
         else
             player:startEvent(10029, 0, 1548, 5, 20) --Need another mini tuning fork
         end
-    elseif (TrialSizeLightning == QUEST_COMPLETED) then
+    elseif (trialSizeLightning == QUEST_COMPLETED) then
         player:startEvent(10028) --Defeated Ramuh
     else
         player:startEvent(10021) --Standard dialogue
