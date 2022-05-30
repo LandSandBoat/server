@@ -1025,12 +1025,12 @@ xi.dynamis.mobOnRoam = function(mob)
                 local home = {table[1], table[2], table[3]}
                 local dest = {table[4], table[5], table[6]}
                 local spawn = mob:getSpawnPos()
-                local current = {mob:getXPos(), mob:getYPos(), mob:getZPos()}
-                if current[1] == home[1] and current[3] == home[3] then
+                local current = mob:getPos()
+                if current.x == home[1] and current.z == home[3] then
                     mob:pathTo(dest[1], dest[2], dest[3], flags)
-                elseif current[1] == dest[1] and current[3] == dest[3] then
+                elseif current.x == dest[1] and current.z == dest[3] then
                     mob:pathTo(home[1], home[2], home[3], flags)
-                elseif current[1] == spawn.x and current[3] == spawn.z then
+                elseif current.x == spawn.x and current.z == spawn.z then
                     mob:pathTo(home[1], home[2], home[3], flags)
                 end
             end
