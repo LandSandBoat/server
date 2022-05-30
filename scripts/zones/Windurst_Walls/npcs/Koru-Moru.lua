@@ -55,12 +55,12 @@ entity.onTrigger = function(player, npc)
     local rootProblem = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_ROOT_OF_THE_PROBLEM)
     local ThePuppetMaster = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_PUPPET_MASTER)
     local ThePuppetMasterProgress = player:getCharVar("ThePuppetMasterProgress")
-    local ClassReunion = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CLASS_REUNION)
-    local ClassReunionProgress = player:getCharVar("ClassReunionProgress")
+    local classReunion = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CLASS_REUNION)
+    local classReunionProgress = player:getCharVar("ClassReunionProgress")
     local talk1 = player:getCharVar("ClassReunion_TalkedToFupepe")
     local talk2 = player:getCharVar("ClassReunion_TalkedToFurakku")
-    local CarbuncleDebacle = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CARBUNCLE_DEBACLE)
-    local CarbuncleDebacleProgress = player:getCharVar("CarbuncleDebacleProgress")
+    local carbuncleDebacle = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CARBUNCLE_DEBACLE)
+    local carbuncleDebacleProgress = player:getCharVar("CarbuncleDebacleProgress")
 
     if blastFromPast == QUEST_AVAILABLE and qStarStruck == QUEST_COMPLETED and player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CLASS_REUNION) ~= QUEST_ACCEPTED and player:getFameLevel(xi.quest.fame_area.WINDURST) >= 3 and player:needToZone() == false then
         player:startEvent(214)
@@ -81,37 +81,37 @@ entity.onTrigger = function(player, npc)
         end
     elseif qStarStruck == QUEST_ACCEPTED then
         player:startEvent(198)
-    elseif qStarStruck == QUEST_AVAILABLE and ClassReunion ~= QUEST_ACCEPTED and player:hasItem(584) then
+    elseif qStarStruck == QUEST_AVAILABLE and classReunion ~= QUEST_ACCEPTED and player:hasItem(584) then
         player:startEvent(197)
     -----------------------------------
     -- Carbuncle Debacle
-    elseif CarbuncleDebacle == QUEST_ACCEPTED and CarbuncleDebacleProgress == 1 or CarbuncleDebacleProgress == 2 then
+    elseif carbuncleDebacle == QUEST_ACCEPTED and carbuncleDebacleProgress == 1 or carbuncleDebacleProgress == 2 then
         player:startEvent(416) -- go and see Ripapa
-    elseif CarbuncleDebacle == QUEST_ACCEPTED and CarbuncleDebacleProgress == 4 then
+    elseif carbuncleDebacle == QUEST_ACCEPTED and carbuncleDebacleProgress == 4 then
         player:startEvent(417) -- now go and see Agado-Pugado
-    elseif CarbuncleDebacle == QUEST_ACCEPTED and CarbuncleDebacleProgress == 5 then
+    elseif carbuncleDebacle == QUEST_ACCEPTED and carbuncleDebacleProgress == 5 then
         player:startEvent(418) -- Uran-Mafran must be stopped
-    elseif CarbuncleDebacle == QUEST_ACCEPTED and CarbuncleDebacleProgress == 7 then
+    elseif carbuncleDebacle == QUEST_ACCEPTED and carbuncleDebacleProgress == 7 then
         player:startEvent(419) -- ending cs
-    elseif ThePuppetMaster == QUEST_COMPLETED and ClassReunion == QUEST_COMPLETED and CarbuncleDebacle == QUEST_COMPLETED then
+    elseif ThePuppetMaster == QUEST_COMPLETED and classReunion == QUEST_COMPLETED and carbuncleDebacle == QUEST_COMPLETED then
         player:startEvent(420) -- new cs after all 3 SMN AFs done
     -----------------------------------
     -- Class Reunion
-    elseif ClassReunion == QUEST_ACCEPTED and ClassReunionProgress == 1 then
+    elseif classReunion == QUEST_ACCEPTED and classReunionProgress == 1 then
         player:startEvent(412, 0, 450, 17299, 0, 0, 0, 0, 0) -- bring Koru 4 astragaloi
-    elseif ClassReunion == QUEST_ACCEPTED and ClassReunionProgress == 2 then
+    elseif classReunion == QUEST_ACCEPTED and classReunionProgress == 2 then
         player:startEvent(414, 0, 0, 17299, 0, 0, 0, 0, 0) -- reminder to bring 4 astragaloi
-    elseif ClassReunion == QUEST_ACCEPTED and ClassReunionProgress >= 3 and (talk1 ~= 1 or talk2 ~= 1) then
+    elseif classReunion == QUEST_ACCEPTED and classReunionProgress >= 3 and (talk1 ~= 1 or talk2 ~= 1) then
         player:startEvent(408) -- reminder to visit the students
-    elseif ClassReunion == QUEST_ACCEPTED and ClassReunionProgress == 6 and talk1 == 1 and talk2 == 1 then
+    elseif classReunion == QUEST_ACCEPTED and classReunionProgress == 6 and talk1 == 1 and talk2 == 1 then
             player:startEvent(410) -- ending cs
-    elseif ThePuppetMaster == QUEST_COMPLETED and ClassReunion == QUEST_COMPLETED then
+    elseif ThePuppetMaster == QUEST_COMPLETED and classReunion == QUEST_COMPLETED then
         player:startEvent(411) -- new cs after completed AF2
     -----------------------------------
     -- The Puppet Master
     elseif ThePuppetMaster == QUEST_ACCEPTED and ThePuppetMasterProgress == 4 then
         player:startEvent(404) -- ending cs
-    elseif ThePuppetMaster == QUEST_COMPLETED and ClassReunion ~= 2 then
+    elseif ThePuppetMaster == QUEST_COMPLETED and classReunion ~= 2 then
         player:startEvent(405) -- new cs after completed AF1
     -----------------------------------
     elseif rootProblem == QUEST_ACCEPTED and player:getCharVar("rootProblem") == 1 then
@@ -129,7 +129,6 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
     if csid == 285 then  -- Giving him KI from Principle
         player:tradeComplete()
         player:addKeyItem(xi.ki.TATTERED_TEST_SHEET)

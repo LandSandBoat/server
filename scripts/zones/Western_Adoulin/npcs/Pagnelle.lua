@@ -37,8 +37,8 @@ entity.onTrigger = function(player, npc)
             -- Progresses Quest: 'Raptor Rapture', spoke to Ilney.
             player:startEvent(5035)
         elseif (raptorRaptureStatus == 6) then
-            local Has_Rockberries = player:hasKeyItem(xi.ki.ROCKBERRY1) and player:hasKeyItem(xi.ki.ROCKBERRY2) and player:hasKeyItem(xi.ki.ROCKBERRY3)
-            if (Has_Rockberries) then
+            local hasRockberries = player:hasKeyItem(xi.ki.ROCKBERRY1) and player:hasKeyItem(xi.ki.ROCKBERRY2) and player:hasKeyItem(xi.ki.ROCKBERRY3)
+            if (hasRockberries) then
                 -- Progresses Quest: 'Raptor Rapture', turning in rockberries.
                 player:startEvent(5037)
             else
