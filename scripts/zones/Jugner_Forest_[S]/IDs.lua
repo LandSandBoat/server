@@ -39,38 +39,49 @@ zones[xi.zone.JUGNER_FOREST_S] =
         VOIDWALKER_OBTAIN_KI      = 8613, -- Obtained key item: <keyitem>!
         COMMON_SENSE_SURVIVAL     = 9508, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
         DRUMSKULL_ZOGDREGG_PH =
         {
             [17113380] = 17113381, -- 195.578 -0.556 -347.699
         },
+
         FINGERFILCHER_DRADZAD = 17113462,
         COBRACLAW_BUCHZVOTCH  = 17113464,
-        VOIDWALKER  =
+
+        VOIDWALKER =
         {
-            [xi.keyItem.CLEAR_ABYSSITE] = {
+            [xi.keyItem.CLEAR_ABYSSITE] =
+            {
                 17113500, -- Sunderclaw
                 17113499, -- Sunderclaw
                 17113498, -- Sunderclaw
                 17113497, -- Sunderclaw
-                17113496,  -- Quagmire Pugil
-                17113495,  -- Quagmire Pugil
-                17113494,  -- Quagmire Pugil
-                17113493,  -- Quagmire Pugil
+                17113496, -- Quagmire Pugil
+                17113495, -- Quagmire Pugil
+                17113494, -- Quagmire Pugil
+                17113493, -- Quagmire Pugil
             },
-            [xi.keyItem.COLORFUL_ABYSSITE] = {
+
+            [xi.keyItem.COLORFUL_ABYSSITE] =
+            {
                 17113492, -- Capricornus
-                17113491  -- Yacumama
+                17113491, -- Yacumama
             },
-            [xi.keyItem.BLUE_ABYSSITE] = {
-                17113490  -- Krabkatoa
+
+            [xi.keyItem.BLUE_ABYSSITE] =
+            {
+                17113490, -- Krabkatoa
             },
-            [xi.keyItem.BLACK_ABYSSITE] = {
-                17113489  -- Yilbegan
+
+            [xi.keyItem.BLACK_ABYSSITE] =
+            {
+                17113489, -- Yilbegan
             }
         },
     },
+
     npc =
     {
         LOGGING =

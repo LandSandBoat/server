@@ -5,7 +5,8 @@ local ID = require("scripts/zones/La_Theine_Plateau/IDs")
 require("scripts/globals/npc_util")
 -----------------------------------
 
-local laTheineGlobal = {
+local laTheineGlobal =
+{
     --[[..............................................................................................
         move the FallenEgg NPC. optionally hide for secondsHidden seconds.
         ..............................................................................................]]

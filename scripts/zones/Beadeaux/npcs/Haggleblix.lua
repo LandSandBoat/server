@@ -10,8 +10,16 @@ require("scripts/settings/main")
 require("scripts/globals/dynamis")
 
 local TIMELESS_HOURGLASS = 4236
-local currency = {1455, 1456, 1457}
-local shop = {
+
+local currency =
+{
+    1455,
+    1456,
+    1457
+}
+
+local shop =
+{
      7, 1313, -- Siren's Hair
      8, 1521, -- Slime Juice
      9, 1469, -- Wootz Ore
@@ -20,7 +28,9 @@ local shop = {
     25, 1461, -- Wootz Ingot
     33, 1460, -- Koh-I-Noor
 }
-local maps = {
+
+local maps =
+{
     [xi.ki.MAP_OF_DYNAMIS_SAN_DORIA]   = 10000,
     [xi.ki.MAP_OF_DYNAMIS_BASTOK]     = 10000,
     [xi.ki.MAP_OF_DYNAMIS_WINDURST]   = 10000,

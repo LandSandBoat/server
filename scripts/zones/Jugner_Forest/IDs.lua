@@ -47,6 +47,7 @@ zones[xi.zone.JUGNER_FOREST] =
         VOIDWALKER_BREAK_KI      = 12096, -- The <keyitem> shatters into tiny fragments.
         COMMON_SENSE_SURVIVAL    = 13100, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
         PANZER_PERCIVAL_PH =
@@ -54,41 +55,54 @@ zones[xi.zone.JUGNER_FOREST] =
             [17203581] = 17203585, -- 535.504 -1.517 152.171 (southeast)
             [17203637] = 17203642, -- 239.541 -0.365 559.722 (northwest)
         },
+
         SUPPLESPINE_MUJWUJ_PH =
         {
             [17203437] = 17203475,
         },
+
         FRADUBIO_PH =
         {
             [17203447] = 17203448,
         },
+
         KING_ARTHRO = 17203216,
         FRAELISSA   = 17203447,
-        VOIDWALKER  =
+
+        VOIDWALKER =
         {
-            [xi.keyItem.CLEAR_ABYSSITE] = {
+            [xi.keyItem.CLEAR_ABYSSITE] =
+            {
                 17203695, -- Sunderclaw
                 17203694, -- Sunderclaw
                 17203693, -- Sunderclaw
                 17203692, -- Sunderclaw
-                17203691,  -- Quagmire Pugil
-                17203690,  -- Quagmire Pugil
-                17203689,  -- Quagmire Pugil
-                17203688,  -- Quagmire Pugil
+                17203691, -- Quagmire Pugil
+                17203690, -- Quagmire Pugil
+                17203689, -- Quagmire Pugil
+                17203688, -- Quagmire Pugil
             },
-            [xi.keyItem.COLORFUL_ABYSSITE] = {
+
+            [xi.keyItem.COLORFUL_ABYSSITE] =
+            {
                 17203687, -- Capricornus
-                17203686  -- Yacumama
+                17203686, -- Yacumama
             },
-            [xi.keyItem.BLUE_ABYSSITE] = {
-                17203685  -- Krabkatoa
+
+            [xi.keyItem.BLUE_ABYSSITE] =
+            {
+                17203685, -- Krabkatoa
             },
-            [xi.keyItem.BLACK_ABYSSITE] = {
-                17203684  -- Yilbegan
+
+            [xi.keyItem.BLACK_ABYSSITE] =
+            {
+                17203684, -- Yilbegan
             }
         },
+
         CERNUNNOS = 17203677,
     },
+
     npc =
     {
         CASKET_BASE   = 17203786,

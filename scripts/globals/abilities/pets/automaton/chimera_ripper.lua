@@ -13,7 +13,8 @@ ability_object.onAutomatonAbilityCheck = function(target, automaton, skill)
 end
 
 ability_object.onAutomatonAbility = function(target, automaton, skill, master, action)
-    local params = {
+    local params =
+    {
         numHits = 1,
         atkmulti = 1,
         accBonus = 100,

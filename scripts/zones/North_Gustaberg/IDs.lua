@@ -73,6 +73,7 @@ zones[xi.zone.NORTH_GUSTABERG] =
             [17211583] = 17211561, -- 285.813 -60.784 518.539
             [17211579] = 17211561, -- 283.958 -60.926 530.016
         },
+
         MAIGHDEAN_UAINE_PH  =
         {
             [17211698] = 17211702, -- 121.242 -0.500 654.504
@@ -82,31 +83,41 @@ zones[xi.zone.NORTH_GUSTABERG] =
             [17211700] = 17211702, -- 203.606 -0.607 721.541
             [17211711] = 17211702, -- 289.709 -0.297 750.252
         },
+
         GAMBILOX_WANDERLING = 17211848,
-        VOIDWALKER  =
+
+        VOIDWALKER =
         {
-            [xi.keyItem.CLEAR_ABYSSITE] = {
+            [xi.keyItem.CLEAR_ABYSSITE] =
+            {
                 17211881, -- Globster
                 17211880, -- Globster
                 17211879, -- Globster
                 17211878, -- Globster
-                17211877,  -- Ground Guzzler
-                17211876,  -- Ground Guzzler
-                17211875,  -- Ground Guzzler
-                17211874,  -- Ground Guzzler
+                17211877, -- Ground Guzzler
+                17211876, -- Ground Guzzler
+                17211875, -- Ground Guzzler
+                17211874, -- Ground Guzzler
             },
-            [xi.keyItem.COLORFUL_ABYSSITE] = {
+
+            [xi.keyItem.COLORFUL_ABYSSITE] =
+            {
                 17211873, -- Lamprey Lord
                 17211872,  -- Shoggoth
             },
-            [xi.keyItem.ORANGE_ABYSSITE] = {
+
+            [xi.keyItem.ORANGE_ABYSSITE] =
+            {
                 17211865  -- Blobdingnag
             },
-            [xi.keyItem.BLACK_ABYSSITE] = {
+
+            [xi.keyItem.BLACK_ABYSSITE] =
+            {
                 17211864  -- Yilbegan
             }
         }
     },
+
     pet =
     {
         [17211865] = -- Blobdingnag
@@ -119,6 +130,7 @@ zones[xi.zone.NORTH_GUSTABERG] =
             17211866,-- Septic Boils
         },
     },
+
     npc =
     {
         CASKET_BASE   = 17212023,

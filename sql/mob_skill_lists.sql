@@ -713,10 +713,10 @@ INSERT INTO `mob_skill_lists` VALUES ('Kindred',169,559);
 INSERT INTO `mob_skill_lists` VALUES ('Kindred',169,560);
 INSERT INTO `mob_skill_lists` VALUES ('Kindred',169,563);
 INSERT INTO `mob_skill_lists` VALUES ('Kindred',169,1148);
-INSERT INTO `mob_skill_lists` VALUES ('Ladybug',170,2178);
-INSERT INTO `mob_skill_lists` VALUES ('Ladybug',170,2179);
-INSERT INTO `mob_skill_lists` VALUES ('Ladybug',170,2180);
-INSERT INTO `mob_skill_lists` VALUES ('Ladybug',170,2181);
+INSERT INTO `mob_skill_lists` VALUES ('Ladybug_Day',170,2178);
+INSERT INTO `mob_skill_lists` VALUES ('Ladybug_Day',170,2179);
+INSERT INTO `mob_skill_lists` VALUES ('Ladybug_Day',170,2180);
+INSERT INTO `mob_skill_lists` VALUES ('Ladybug_Day',170,2181);
 INSERT INTO `mob_skill_lists` VALUES ('Lamiae',171,1752); -- gusting_gouge
 INSERT INTO `mob_skill_lists` VALUES ('Lamiae',171,1753); -- hysteric_barrage
 INSERT INTO `mob_skill_lists` VALUES ('Lamiae',171,1754); -- dukkeripen_heal
@@ -3772,8 +3772,9 @@ INSERT INTO `mob_skill_lists` VALUES ('The_Briars_gal',1161,91); -- Fell Cleave
 
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Shantotto_II_Melee',1163,3739); -- shantotto_ii_melee (no name)
 INSERT INTO `mob_skill_lists` VALUES ('Teporingo',1164,258);
+INSERT INTO `mob_skill_lists` VALUES ('Ladybug_Night',1167,2178);
 
--- Next available ID: 1165
+-- Next available ID: 1168
 
 -- ------------------------------------------------------------
 -- Start of Ambuscade section

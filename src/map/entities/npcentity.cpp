@@ -71,7 +71,7 @@ bool CNpcEntity::IsHPHidden() const
     return (m_flags & 0x800) == 0x800;
 }
 
-void CNpcEntity::Untargetable(bool untargetable)
+void CNpcEntity::SetUntargetable(bool untargetable)
 {
     if (untargetable)
     {
@@ -83,7 +83,7 @@ void CNpcEntity::Untargetable(bool untargetable)
     }
 }
 
-bool CNpcEntity::IsUntargetable() const
+bool CNpcEntity::GetUntargetable() const
 {
     return (m_flags & 0x800) == 0x800;
 }

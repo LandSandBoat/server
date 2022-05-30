@@ -31,52 +31,64 @@ zones[xi.zone.NORTH_GUSTABERG_S] =
         VOIDWALKER_OBTAIN_KI    = 8192, -- Obtained key item: <keyitem>!
         COMMON_SENSE_SURVIVAL   = 9084, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
         ANKABUT_PH =
         {
             [17137701] = 17137705, -- 656.399 -11.580 507.091
         },
+
         GLOOMANITA_PH =
         {
             [17137820] = 17137821, -- -19.961 0.5 623.989
         },
-        VOIDWALKER  =
+
+        VOIDWALKER =
         {
-            [xi.keyItem.CLEAR_ABYSSITE] = {
+            [xi.keyItem.CLEAR_ABYSSITE] =
+            {
                 17138086, -- Globster
                 17138085, -- Globster
                 17138084, -- Globster
                 17138083, -- Globster
-                17138082,  -- Ground Guzzler
-                17138081,  -- Ground Guzzler
-                17138080,  -- Ground Guzzler
-                17138079,  -- Ground Guzzler
+                17138082, -- Ground Guzzler
+                17138081, -- Ground Guzzler
+                17138080, -- Ground Guzzler
+                17138079, -- Ground Guzzler
             },
-            [xi.keyItem.COLORFUL_ABYSSITE] = {
+
+            [xi.keyItem.COLORFUL_ABYSSITE] =
+            {
                 17138078, -- Lamprey Lord
-                17138077,  -- Shoggoth
+                17138077, -- Shoggoth
             },
-            [xi.keyItem.ORANGE_ABYSSITE] = {
-                17138070  -- Blobdingnag
+
+            [xi.keyItem.ORANGE_ABYSSITE] =
+            {
+                17138070, -- Blobdingnag
             },
-            [xi.keyItem.BLACK_ABYSSITE] = {
-                17138069  -- Yilbegan
+
+            [xi.keyItem.BLACK_ABYSSITE] =
+            {
+                17138069, -- Yilbegan
             }
         }
     },
+
     pet =
     {
         [17138070] = -- Blobdingnag
         {
-            17138076,-- Septic Boils
-            17138075,-- Septic Boils
-            17138074,-- Septic Boils
-            17138073,-- Septic Boils
-            17138072,-- Septic Boils
-            17138071,-- Septic Boils
+            17138076, -- Septic Boils
+            17138075, -- Septic Boils
+            17138074, -- Septic Boils
+            17138073, -- Septic Boils
+            17138072, -- Septic Boils
+            17138071, -- Septic Boils
         },
     },
+
     npc =
     {
         MINING =

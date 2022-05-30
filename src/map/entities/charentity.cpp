@@ -79,6 +79,7 @@
 #include "../utils/battleutils.h"
 #include "../utils/charutils.h"
 #include "../utils/gardenutils.h"
+#include "../utils/moduleutils.h"
 #include "../weapon_skill.h"
 #include "automatonentity.h"
 #include "charentity.h"
@@ -295,6 +296,8 @@ void CCharEntity::pushPacket(CBasicPacket* packet)
     TracyZoneScoped;
     TracyZoneIString(GetName());
     TracyZoneHex16(packet->getType());
+
+    moduleutils::OnPushPacket(packet);
 
     if (packet->getType() == 0x5B)
     {

@@ -13,9 +13,11 @@ xi.bcnm = xi.bcnm or {}
 
 -- battlefields by zone
 -- captured from client 2020-10-24
-local battlefields = {
+local battlefields =
+{
 --[[
-    [zoneId] = {
+    [zoneId] =
+    {
         {bit, battlefieldIdInDatabase, requiredItemToTrade}
     },
 --]]

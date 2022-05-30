@@ -6,15 +6,19 @@
 -- DONE: If you are out of range of EBB, the move will be lost
 -- TODO: There should be a "No targets within range" message
 --
--- ['Evil Oscar-17346750'] = {
---     [4] = {
+-- ['Evil Oscar-17346750'] =
+-- {
+--     [4] =
+--     {
 --         -- NOTE: This looks to be the no target message
---         [0]    = {['name']="",                     ['category']=4,  ['id']=0,    ['animation']=508,  ['message']=76,  },
+--         [0]    = { ['name']="",                     ['category']=4,  ['id']=0,    ['animation']=508,  ['message']=76,  },
 --     },
---     [11] = {
---         [317]  = {['name']="Vampiric Lash",        ['category']=11, ['id']=317,  ['animation']=61,   ['message']=31,  },
---         [320]  = {['name']="Sweet Breath",         ['category']=11, ['id']=320,  ['animation']=64,   ['message']=185, },
---         [1332] = {['name']="Extremely Bad Breath", ['category']=11, ['id']=1332, ['animation']=63,   ['message']=406, },
+--
+--     [11] =
+--     {
+--         [317]  = { ['name']="Vampiric Lash",        ['category']=11, ['id']=317,  ['animation']=61,   ['message']=31,  },
+--         [320]  = { ['name']="Sweet Breath",         ['category']=11, ['id']=320,  ['animation']=64,   ['message']=185, },
+--         [1332] = { ['name']="Extremely Bad Breath", ['category']=11, ['id']=1332, ['animation']=63,   ['message']=406, },
 --     },
 -- },
 -----------------------------------
