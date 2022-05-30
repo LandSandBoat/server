@@ -504,7 +504,7 @@ function utils.mobTeleport(mob, hideDuration, pos, disAnim, reapAnim)
 
     mob:entityAnimationPacket(disAnim)
     mob:hideName(true)
-    mob:untargetable(true)
+    mob:setUntargetable(true)
     mob:SetAutoAttackEnabled(false)
     mob:SetMagicCastingEnabled(false)
     mob:SetMobAbilityEnabled(false)
@@ -512,16 +512,16 @@ function utils.mobTeleport(mob, hideDuration, pos, disAnim, reapAnim)
     mob:setSpeed(0)
 
     mob:timer(hideDuration, function(mobArg)
-        mob:setPos(pos, 0)
-        mob:hideName(false)
-        mob:untargetable(false)
-        mob:SetAutoAttackEnabled(true)
-        mob:SetMagicCastingEnabled(true)
-        mob:SetMobAbilityEnabled(true)
-        mob:setSpeed(mobSpeed)
-        mob:entityAnimationPacket(reapAnim)
+        mobArg:setPos(pos, 0)
+        mobArg:hideName(false)
+        mobArg:setUntargetable(false)
+        mobArg:SetAutoAttackEnabled(true)
+        mobArg:SetMagicCastingEnabled(true)
+        mobArg:SetMobAbilityEnabled(true)
+        mobArg:setSpeed(mobSpeed)
+        mobArg:entityAnimationPacket(reapAnim)
 
-        if mob:isDead() then
+        if mobArg:isDead() then
             return
         end
     end)
