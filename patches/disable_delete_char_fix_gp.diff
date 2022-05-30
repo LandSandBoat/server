@@ -1,0 +1,35 @@
+diff --git a/src/login/lobby.cpp b/src/login/lobby.cpp
+index 6cbca31785..51783c0c9b 100644
+--- a/src/login/lobby.cpp
++++ b/src/login/lobby.cpp
+@@ -576,7 +576,7 @@ int32 lobbyview_parse(int32 fd)
+ 
+                 ShowInfo("lobbyview_parse: attempt to delete char:<%d> from ip:<%s>", CharID,
+                          ip2str(sd->client_addr));
+-
++/*
+                 uint8 sendsize = 0x20;
+ 
+                 LOBBY_ACTION_DONE(ReservePacket);
+@@ -594,7 +594,7 @@ int32 lobbyview_parse(int32 fd)
+ 
+                 const char* pfmtQuery = "DELETE FROM chars WHERE charid = %i AND accid = %i";
+                 sql->Query(pfmtQuery, CharID, sd->accid);
+-
++*/
+                 break;
+             }
+             case 0x1F:
+diff --git a/src/map/guild.cpp b/src/map/guild.cpp
+index 0b1886f659..3306533eb7 100644
+--- a/src/map/guild.cpp
++++ b/src/map/guild.cpp
+@@ -119,7 +119,7 @@ std::pair<uint16, uint16> CGuild::getDailyGPItem(CCharEntity* PChar)
+ 
+     auto GPItem    = m_GPItems[rank - 3];
+     auto curPoints = (uint16)charutils::GetCharVar(PChar, "[GUILD]daily_points");
+-    if (curPoints <= 0) // char_var set to -1 in crafting.lua file. Deleted in guildutils.cpp
++    if (curPoints < 0) // char_var set to -1 in crafting.lua file. Deleted in guildutils.cpp
+     {
+         return std::make_pair(GPItem[0].item->getID(), 0);
+     }
