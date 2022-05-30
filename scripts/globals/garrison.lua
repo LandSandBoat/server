@@ -205,7 +205,7 @@ xi.garrison.spawnNPCs = function(npc, party)
     local mob = GetMobByID(mobId)
         if npcnum <= party then
         mob:setSpawn(xPos, yPos, zPos, rot)
-		mob:setRoamFlags(xi.roamFlag.EVENT)
+        mob:setRoamFlags(xi.roamFlag.EVENT)
         mob:spawn()
         mob:setMobLevel(garrisonZoneData.levelCap - 5)
         mob:setSpeed(10)
@@ -307,7 +307,7 @@ xi.garrison.onTrade = function(player, npc, trade)
     -- Collect entrant information
     local party = player:getAlliance()
     --gets party size for spawning each NPC
-    party = 18
+    party = #party
     -- TODO break into different requirements
     if
         npcUtil.tradeHasExactly(trade, item) and
@@ -351,7 +351,7 @@ xi.garrison.npcTable = function(zone)
                 releaseIdOnDeath = false,
             })
             mob:setSpawn(xPos, yPos, zPos, rot)
-			mob:setRoamFlags(xi.roamFlag.EVENT)
+            mob:setRoamFlags(xi.roamFlag.EVENT)
             mob:spawn()
             mob:setMobLevel(garrisonZoneData.levelCap - 5)
             mob:setSpeed(10)
