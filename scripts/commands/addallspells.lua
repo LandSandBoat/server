@@ -77,6 +77,8 @@ function onTrigger(player, target)
         end
 
         targ:addSpell(validSpells[i], silent, save, sendUpdate)
+
     end
+
     player:PrintToPlayer(string.format("%s now has all spells.", targ:getName()))
 end
