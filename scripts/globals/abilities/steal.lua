@@ -7,9 +7,10 @@
 -----------------------------------
 require("scripts/globals/jobpoints")
 require("scripts/settings/main")
-require("scripts/globals/status")
-require("scripts/globals/msg")
 require("scripts/globals/items")
+require("scripts/globals/msg")
+require("scripts/globals/quests")
+require("scripts/globals/status")
 -----------------------------------
 local ability_object = {}
 
@@ -36,7 +37,7 @@ local validThfQuestMobs =
 local function checkThfAfQuest(player, target)
     local targid = target:getID()
 
-    if (player:getCharVar("theTenshodoShowdownCS") == 3) then
+    if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_TENSHODO_SHOWDOWN) == QUEST_ACCEPTED then
         for key, value in pairs(validThfQuestMobs) do
             if value == targid then
                 return true
@@ -47,7 +48,7 @@ local function checkThfAfQuest(player, target)
 end
 
 ability_object.onAbilityCheck = function(player, target, ability)
-    if (player:getFreeSlotsCount() == 0) then
+    if player:getFreeSlotsCount() == 0 then
         return xi.msg.basic.FULL_INVENTORY, 0
     else
         -- JP Recast Reduction
@@ -61,7 +62,7 @@ ability_object.onUseAbility = function(player, target, ability, action)
     local thfLevel
     local stolen = 0
 
-    if (player:getMainJob() == xi.job.THF) then
+    if player:getMainJob() == xi.job.THF then
         thfLevel = player:getMainLvl()
     else
         thfLevel = player:getSubLvl()
@@ -72,8 +73,9 @@ ability_object.onUseAbility = function(player, target, ability, action)
     local stealChance = 50 + stealMod * 2 + thfLevel - target:getMainLvl()
 
     stolen = target:getStealItem()
-    if (target:isMob() and math.random(100) < stealChance and stolen ~= 0) then
-        if (checkThfAfQuest(player, target) == true) then
+    if target:isMob() and math.random(100) < stealChance and stolen ~= 0 then
+        -- This guarantees item if quest is flagged
+        if checkThfAfQuest(player, target) == true then
             stolen = xi.items.BOWL_OF_QUADAV_STEW
         end
 
@@ -90,14 +92,14 @@ ability_object.onUseAbility = function(player, target, ability, action)
 
     -- Attempt Aura steal
     -- local effect = xi.effect.NONE
-    if (stolen == 0 and player:hasTrait(75)) then
+    if stolen == 0 and player:hasTrait(75) then
         local resist = applyResistanceAbility(player, target, xi.magic.ele.NONE, 0, 0)
         -- local effectStealSuccess = false
-        if (resist > 0.0625) then
+        if resist > 0.0625 then
             local auraStealChance = math.min(player:getMerit(xi.merit.AURA_STEAL), 95)
-            if (math.random(100) < auraStealChance) then
+            if math.random(100) < auraStealChance then
                 stolen = player:stealStatusEffect(target)
-                if (stolen ~= 0) then
+                if stolen ~= 0 then
                     ability:setMsg(xi.msg.basic.STEAL_EFFECT)
                 end
             -- else
