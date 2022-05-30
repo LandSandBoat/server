@@ -33,7 +33,8 @@ end
 -- public functions
 -----------------------------------
 
-local OUTER_HORUTOTO_RUINS = {
+local outerHorutotoGlobal =
+{
     --[[..............................................................................................
         check to spawn trio NM.
         ..............................................................................................]]
@@ -66,4 +67,4 @@ local OUTER_HORUTOTO_RUINS = {
     end,
 }
 
-return OUTER_HORUTOTO_RUINS
+return outerHorutotoGlobal

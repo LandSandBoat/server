@@ -95,6 +95,15 @@ namespace moduleutils
         }
     }
 
+    void OnPushPacket(CBasicPacket* packet)
+    {
+        TracyZoneScoped;
+        for (auto* module : cppModules())
+        {
+            module->OnPushPacket(packet);
+        }
+    }
+
     struct Override
     {
         std::string              filename;
@@ -124,9 +133,10 @@ namespace moduleutils
         std::string line;
         while (std::getline(file, line))
         {
-            if (!line.empty() && line.at(0) != '#')
+            if (!line.empty() && line.at(0) != '#' && line != "\n" && line != "\r" && line != "\r\n")
             {
-                list.emplace_back("./modules/" + line);
+                auto str = trim("./modules/" + line, " \t\r\n");
+                list.emplace_back(str);
             }
         }
 
@@ -210,7 +220,7 @@ namespace moduleutils
                     {
                         ShowScript(fmt::format("Applying override: {}", override.overrideName));
 
-                        lua["applyOverride"](table, override.func, lastElem, override.overrideName, override.filename);
+                        lua["applyOverride"](table, lastElem, override.func, override.overrideName, override.filename);
 
                         override.applied = true;
 

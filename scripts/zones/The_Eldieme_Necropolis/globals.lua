@@ -9,7 +9,7 @@ require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
 
-local THE_ELDIEME_NECROPOLIS =
+local eldiemeGlobal =
 {
     --[[..............................................................................................
         click on any of the intersection gates
@@ -47,4 +47,4 @@ local THE_ELDIEME_NECROPOLIS =
     end,
 }
 
-return THE_ELDIEME_NECROPOLIS
+return eldiemeGlobal

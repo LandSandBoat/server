@@ -17,7 +17,7 @@ local entity = {}
 
 local sandyQuests = xi.quest.id.sandoria
 
-local TrustMemory = function(player)
+local trustMemory = function(player)
     local memories = 0
     -- 2 - PEACE_FOR_THE_SPIRIT
     if player:hasCompletedQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.PEACE_FOR_THE_SPIRIT) then
@@ -50,7 +50,7 @@ entity.onTrigger = function(player, npc)
     local mJob = player:getMainJob()
     local envelopedInDarkness = player:getQuestStatus(xi.quest.log_id.SANDORIA, sandyQuests.ENVELOPED_IN_DARKNESS)
     local peaceForTheSpirit = player:getQuestStatus(xi.quest.log_id.SANDORIA, sandyQuests.PEACE_FOR_THE_SPIRIT)
-    local Rank3 = player:getRank(player:getNation()) >= 3 and 1 or 0
+    local rank3 = player:getRank(player:getNation()) >= 3 and 1 or 0
 
     -- Trust: San d'Oria (Curilla)
     if
@@ -59,7 +59,7 @@ entity.onTrigger = function(player, npc)
         player:getLocalVar("TrustDialogue") == 0
     then
         player:setLocalVar("TrustDialogue", 1)
-        player:startEvent(573, 0, 0, 0, TrustMemory(player), 0, 0, 0, Rank3)
+        player:startEvent(573, 0, 0, 0, trustMemory(player), 0, 0, 0, rank3)
 
     -- "Lure of the Wildcat"
     elseif

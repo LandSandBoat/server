@@ -14,30 +14,30 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local Hearts    = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.HEARTS_OF_MYTHRIL)
-    local Elevenths = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_ELEVENTH_S_HOUR)
+    local hearts    = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.HEARTS_OF_MYTHRIL)
+    local elevenths = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_ELEVENTH_S_HOUR)
 
     -- Hearts of Mythril
-    if Hearts == QUEST_AVAILABLE then
+    if hearts == QUEST_AVAILABLE then
         player:startEvent(41)
 
     elseif
-        Hearts == QUEST_ACCEPTED and
+        hearts == QUEST_ACCEPTED and
         player:getCharVar("HeartsOfMythril") == 1
     then
         player:startEvent(42)
 
     -- The eleventh's hour
     elseif
-        Hearts == QUEST_COMPLETED and
-        Elevenths == QUEST_AVAILABLE and
+        hearts == QUEST_COMPLETED and
+        elevenths == QUEST_AVAILABLE and
         player:getFameLevel(xi.quest.fame_area.BASTOK) >=2 and
         player:needToZone() == false
     then
         player:startEvent(43)
 
     elseif
-        Elevenths == QUEST_ACCEPTED and
+        elevenths == QUEST_ACCEPTED and
         player:hasKeyItem(xi.ki.OLD_TOOLBOX)
     then
         player:startEvent(44)

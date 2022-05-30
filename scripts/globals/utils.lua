@@ -10,7 +10,6 @@ utils.MAX_INT32  = 2147483647
 
 -- Used to keep the linter quiet
 function utils.unused(...)
-    return
 end
 
 -- Shuffles a table and returns a new table containing the randomized result.
@@ -90,6 +89,20 @@ function utils.stoneskin(target, dmg)
                 target:setMod(xi.mod.STONESKIN, 0)
                 return dmg - skin
             end
+        end
+    end
+
+    return dmg
+end
+
+-- returns reduced magic damage from RUN buff, "One for All"
+function utils.oneforall(target, dmg)
+    if dmg > 0 then
+        local oneForAllEffect = target:getStatusEffect(xi.effect.ONE_FOR_ALL)
+
+        if oneForAllEffect ~= nil then
+            local power = oneForAllEffect:getPower()
+            dmg = math.max(0, dmg - power)
         end
     end
 

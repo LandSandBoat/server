@@ -79,6 +79,7 @@
 #include "../utils/battleutils.h"
 #include "../utils/charutils.h"
 #include "../utils/gardenutils.h"
+#include "../utils/moduleutils.h"
 #include "../weapon_skill.h"
 #include "automatonentity.h"
 #include "charentity.h"
@@ -236,6 +237,12 @@ CCharEntity::CCharEntity()
     chatFilterFlags = 0;
 
     PAI = std::make_unique<CAIContainer>(this, nullptr, std::make_unique<CPlayerController>(this), std::make_unique<CTargetFind>(this));
+
+    hookedFish   = nullptr;
+    lastCastTime = 0;
+    nextFishTime = 0;
+    fishingToken = 0;
+    hookDelay    = 13;
 }
 
 CCharEntity::~CCharEntity()
@@ -289,6 +296,8 @@ void CCharEntity::pushPacket(CBasicPacket* packet)
     TracyZoneScoped;
     TracyZoneIString(GetName());
     TracyZoneHex16(packet->getType());
+
+    moduleutils::OnPushPacket(packet);
 
     if (packet->getType() == 0x5B)
     {
@@ -506,10 +515,10 @@ int16 CCharEntity::addTP(int16 tp)
 {
     // int16 oldtp = health.tp;
     tp = CBattleEntity::addTP(tp);
-    //	if ((oldtp < 1000 && health.tp >= 1000 ) || (oldtp >= 1000 && health.tp < 1000))
-    //	{
+    //  if ((oldtp < 1000 && health.tp >= 1000 ) || (oldtp >= 1000 && health.tp < 1000))
+    //  {
     PLatentEffectContainer->CheckLatentsTP();
-    //	}
+    //  }
     return abs(tp);
 }
 

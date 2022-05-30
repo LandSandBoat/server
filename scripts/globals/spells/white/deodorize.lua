@@ -1,12 +1,7 @@
 -----------------------------------
 -- Spell: Deodorize
--- Lessens chance of being detected by smell.
--- Duration is random number between 30 seconds and 5 minutes
 -----------------------------------
-require("scripts/globals/magic")
-require("scripts/globals/msg")
-require("scripts/settings/main")
-require("scripts/globals/status")
+require("scripts/globals/spells/spell_enhancing")
 -----------------------------------
 local spell_object = {}
 
@@ -15,17 +10,7 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    if not target:hasStatusEffect(xi.effect.DEODORIZE) then
-        local duration = calculateDuration(math.random(420, 540), spell:getSkillType(), spell:getSpellGroup(), caster, target)
-        duration = calculateDurationForLvl(duration, 15, target:getMainLvl())
-
-        spell:setMsg(xi.msg.basic.MAGIC_GAIN_EFFECT)
-        target:addStatusEffect(xi.effect.DEODORIZE, 0, 10, math.floor(duration * xi.settings.SNEAK_INVIS_DURATION_MULTIPLIER))
-    else
-        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
-    end
-
-    return xi.effect.DEODORIZE
+    return xi.spells.spell_enhancing.useEnhancingSpell(caster, target, spell)
 end
 
 return spell_object

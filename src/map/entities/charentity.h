@@ -36,6 +36,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "battleentity.h"
 #include "petentity.h"
 
+#include "../utils/fishingutils.h"
+
 #define MAX_QUESTAREA    11
 #define MAX_QUESTID      256
 #define MAX_MISSIONAREA  15
@@ -78,13 +80,19 @@ struct expChain_t
     uint32 chainTime;
 };
 
-struct Telepoint_t
+struct telepoint_t
 {
     uint32 access[4];
     int32  menu[10];
 };
 
-struct Teleport_t
+struct waypoint_t
+{
+    uint32 access[5];
+    bool   confirmation;
+};
+
+struct teleport_t
 {
     uint32      outpostSandy;
     uint32      outpostBastok;
@@ -94,9 +102,10 @@ struct Teleport_t
     uint32      campaignSandy;
     uint32      campaignBastok;
     uint32      campaignWindy;
-    Telepoint_t homepoint;
-    Telepoint_t survival;
+    telepoint_t homepoint;
+    telepoint_t survival;
     uint8       abysseaConflux[MAX_ABYSSEAZONES];
+    waypoint_t  waypoints;
 };
 
 struct PetInfo_t
@@ -303,7 +312,7 @@ public:
     uint16 m_asaCurrent; // current mission of A Shantotto Ascension
 
     // currency_t        m_currency;                 // conquest points, imperial standing points etc
-    Teleport_t teleport; // Outposts, Runic Portals, Homepoints, Survival Guides, Maws, etc
+    teleport_t teleport; // Outposts, Runic Portals, Homepoints, Survival Guides, Maws, etc
 
     uint8 GetGender(); // узнаем пол персонажа
 
@@ -417,6 +426,12 @@ public:
     CBasicPacket* PendingPositionPacket = nullptr;
 
     bool requestedInfoSync = false;
+
+    fishresponse_t* hookedFish;   // Currently hooked fish/item/monster
+    uint32          nextFishTime; // When char is allowed to fish again
+    uint32          lastCastTime; // When char last cast their rod
+    uint32          fishingToken; // To track fishing process
+    uint16          hookDelay;    // How long it takes to hook a fish
 
     void ReloadPartyInc();
     void ReloadPartyDec();

@@ -14,11 +14,10 @@ local ID = require("scripts/zones/Northern_San_dOria/IDs")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-
-    local Black = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.BLACKMAIL)
+    local black = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.BLACKMAIL)
     local questState = player:getCharVar("BlackMailQuest")
 
-    if (Black == QUEST_ACCEPTED and questState == 2 or Black == QUEST_COMPLETED) then
+    if (black == QUEST_ACCEPTED and questState == 2 or black == QUEST_COMPLETED) then
         local count = trade:getItemCount()
         local carta = trade:hasItemQty(530, 1)
 
@@ -29,14 +28,12 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-
     -- "Blackmail" quest status
     local blackMail = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.BLACKMAIL)
     local envelope = player:hasKeyItem(xi.ki.SUSPICIOUS_ENVELOPE)
     local sanFame = player:getFameLevel(xi.quest.fame_area.SANDORIA)
     local homeRank = player:getRank(player:getNation())
     local questState = player:getCharVar("BlackMailQuest")
-
 
     if (blackMail == QUEST_AVAILABLE and sanFame >= 3 and homeRank >= 3) then
         player:startEvent(643) -- 643 gives me letter
@@ -58,15 +55,12 @@ entity.onTrigger = function(player, npc)
             player:needToZone(true)
         end
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)
-
 end
 
 entity.onEventFinish = function(player, csid, option)
-
     if (csid == 643) then
         player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.BLACKMAIL)
         player:addKeyItem(xi.ki.SUSPICIOUS_ENVELOPE)
@@ -86,7 +80,6 @@ entity.onEventFinish = function(player, csid, option)
     elseif (csid == 40 and option == 1) then
         player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.BLACKMAIL)
     end
-
 end
 
 return entity

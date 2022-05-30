@@ -19,24 +19,24 @@ end
 item_object.onItemUse = function(target)
     local instance = target:getInstance()
     local bomb = instance:insertAlly(100)
-    local X = target:getXPos()
-    local Z = target:getZPos()
+    local xPos = target:getXPos()
+    local zPos = target:getZPos()
     local targ = target:getTarget()
 
-    if (X > 160 and X < 186) and (Z > 359 and Z < 380) then
+    if (xPos > 160 and xPos < 186) and (zPos > 359 and zPos < 380) then
         bomb:setSpawn(178,-40,376,196)
         bomb:spawn()
-    elseif (X > 250 and X < 264) and (Z > 192 and Z < 220) then
+    elseif (xPos > 250 and xPos < 264) and (zPos > 192 and zPos < 220) then
         bomb:setSpawn(258,-30,213,190)
         bomb:spawn()
-    elseif (X > 327 and X < 343) and (Z > 278 and Z < 300) then
+    elseif (xPos > 327 and xPos < 343) and (zPos > 278 and zPos < 300) then
         bomb:setSpawn(338,-30,296,197)
         bomb:spawn()
-    elseif (X > 298 and X < 320) and (Z > 330 and Z < 345) then
+    elseif (xPos > 298 and xPos < 320) and (zPos > 330 and zPos < 345) then
         bomb:setSpawn(303,-30,341,167)
         bomb:spawn()
     else
-        bomb:setSpawn(X + math.random(-2,2), target:getYPos() , Z + math.random(-2,2))
+        bomb:setSpawn(xPos + math.random(-2,2), target:getYPos() , zPos + math.random(-2,2))
         bomb:spawn()
     end
 

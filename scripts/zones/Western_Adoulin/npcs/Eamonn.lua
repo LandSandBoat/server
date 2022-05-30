@@ -13,20 +13,21 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local Scaredycats = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.SCAREDYCATS)
-    local Scaredycats_Status = player:getCharVar("Scaredycats_Status")
-    if ((Scaredycats_Status < 1) and (Scaredycats == QUEST_AVAILABLE)) then
+    local scaredyCats = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.SCAREDYCATS)
+    local scaredyCatsStatus = player:getCharVar("Scaredycats_Status")
+
+    if ((scaredyCatsStatus < 1) and (scaredyCats == QUEST_AVAILABLE)) then
         -- Dialogue before seeing the initial walk-in CS with Bilp, Eamonn, and Lhe.
         player:startEvent(5031)
-    elseif (Scaredycats_Status == 1) then
-        if (Scaredycats == QUEST_ACCEPTED) then
+    elseif (scaredyCatsStatus == 1) then
+        if (scaredyCats == QUEST_ACCEPTED) then
             -- Reminder for Quest: 'Scaredy-Cats', go to Ceizak Battlegrounds
             player:startEvent(5025)
         else
             -- Starts Quest: 'Scaredy-Cats', after first refusal.
             player:startEvent(5024)
         end
-    elseif (Scaredycats_Status == 2) then
+    elseif (scaredyCatsStatus == 2) then
         -- Reminder for Quest: 'Scaredy-Cats', go to Sih Gates.
         player:startEvent(5027)
     else

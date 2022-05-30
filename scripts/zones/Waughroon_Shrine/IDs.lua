@@ -39,6 +39,7 @@ zones[xi.zone.WAUGHROON_SHRINE] =
         YIKEY_WIKEYS                 = 7733, -- Yikey-wikeys! Get that thing away from meee!
         WHATS_THE_MATTARU            = 7734, -- <Pant, wheeze>... What's the mattaru, <name>? Too much of a pansy-wansy to fight fair?
     },
+
     mob =
     {
         ATORI_TUTORI_QM =
@@ -48,11 +49,15 @@ zones[xi.zone.WAUGHROON_SHRINE] =
             17367334,
         },
     },
+
     npc =
     {
     },
-    operationDesertSwarm = {
-        [1] = {
+
+    operationDesertSwarm =
+    {
+        [1] =
+        {
             17367266,
             17367267,
             17367268,
@@ -60,7 +65,9 @@ zones[xi.zone.WAUGHROON_SHRINE] =
             17367270,
             17367271,
         },
-        [2] = {
+
+        [2] =
+        {
             17367273,
             17367274,
             17367275,
@@ -68,7 +75,9 @@ zones[xi.zone.WAUGHROON_SHRINE] =
             17367277,
             17367278,
         },
-        [3] = {
+
+        [3] =
+        {
             17367280,
             17367281,
             17367282,

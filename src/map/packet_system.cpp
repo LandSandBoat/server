@@ -290,7 +290,7 @@ void SmallPacket0x00A(map_session_data_t* const PSession, CCharEntity* const PCh
         // Current zone could either be current zone or destination
         CZone* currentZone = zoneutils::GetZone(PChar->getZone());
 
-        sql->Async(fmtQuery, PChar->targid, session_key, currentZone->GetIP(), PSession->client_port, PChar->id);
+        sql->Query(fmtQuery, PChar->targid, session_key, currentZone->GetIP(), PSession->client_port, PChar->id);
 
         fmtQuery  = "SELECT death FROM char_stats WHERE charid = %u;";
         int32 ret = sql->Query(fmtQuery, PChar->id);
@@ -327,7 +327,7 @@ void SmallPacket0x00A(map_session_data_t* const PSession, CCharEntity* const PCh
         ShowWarning("packet_system::SmallPacket0x00A dumping player `%s` to a valid zone!", PChar->GetName());
         auto prevZone = PChar->loc.prevzone ? PChar->loc.prevzone : (uint16)ZONE_VALKURM_DUNES;
         PChar->loc.destination = prevZone;
-        sql->Async("UPDATE chars SET pos_zone = %u WHERE charid = %u", prevZone, PChar->id);
+        sql->Query("UPDATE chars SET pos_zone = %u WHERE charid = %u", prevZone, PChar->id);
     }
 
     charutils::SaveCharPosition(PChar);
@@ -518,12 +518,12 @@ void SmallPacket0x00D(map_session_data_t* const PSession, CCharEntity* const PCh
         }
 
         PSession->shuttingDown = 1;
-        sql->Async("UPDATE char_stats SET zoning = 0 WHERE charid = %u", PChar->id);
+        sql->Query("UPDATE char_stats SET zoning = 0 WHERE charid = %u", PChar->id);
     }
     else
     {
         PSession->shuttingDown = 2;
-        sql->Async("UPDATE char_stats SET zoning = 1 WHERE charid = %u", PChar->id);
+        sql->Query("UPDATE char_stats SET zoning = 1 WHERE charid = %u", PChar->id);
         charutils::CheckEquipLogic(PChar, SCRIPT_CHANGEZONE, PChar->getZone());
 
         if (PChar->CraftContainer->getItemsCount() > 0 && PChar->animation == ANIMATION_SYNTH)
@@ -3858,19 +3858,13 @@ void SmallPacket0x064(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x066(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
-    // PrintPacket(data);
-
-    // uint32 charid = data.ref<uint32>(0x04);
-    uint16 stamina = data.ref<uint16>(0x08);
-    // uint16 ukn1 = data.ref<uint16>(0x0A); // Seems to always be zero with basic fishing, skill not high enough to test legendary fish.
-    // uint16 targetid = data.ref<uint16>(0x0C);
-    uint8 action = data.ref<uint8>(0x0E);
-    // uint8 ukn2 = data.ref<uint8>(0x0F);
-    uint32 special = data.ref<uint32>(0x10);
-
-    if (static_cast<FISH_ACTION>(action) != FISH_ACTION::FINISH || PChar->animation == ANIMATION_FISHING_FISH)
+    if (map_config.fishing_enable == 1)
     {
-        fishingutils::FishingAction(PChar, static_cast<FISH_ACTION>(action), stamina, special);
+        fishingutils::HandleFishingAction(PChar, data);
+    }
+    else
+    {
+        return;
     }
 }
 
@@ -5360,8 +5354,12 @@ void SmallPacket0x0C4(map_session_data_t* const PSession, CCharEntity* const PCh
         {
             uint32 LinkshellID    = 0;
             uint16 LinkshellColor = data.ref<uint16>(0x04);
-            int8   DecodedName[21];
-            int8   EncodedName[16];
+
+            int8   DecodedName[DecodeStringLength];
+            int8   EncodedName[LinkshellStringLength];
+
+            memset(DecodedName, 0, sizeof(DecodedName));
+            memset(EncodedName, 0, sizeof(EncodedName));
 
             DecodeStringLinkshell(data[12], DecodedName);
             EncodeStringLinkshell(DecodedName, EncodedName);
@@ -5440,7 +5438,7 @@ void SmallPacket0x0C4(map_session_data_t* const PSession, CCharEntity* const PCh
                         char extra[sizeof(PItemLinkshell->m_extra) * 2 + 1];
                         sql->EscapeStringLen(extra, (const char*)PItemLinkshell->m_extra, sizeof(PItemLinkshell->m_extra));
                         const char* Query = "UPDATE char_inventory SET extra = '%s' WHERE charid = %u AND location = %u AND slot = %u LIMIT 1";
-                        sql->Async(Query, extra, PChar->id, PItemLinkshell->getLocationID(), PItemLinkshell->getSlotID());
+                        sql->Query(Query, extra, PChar->id, PItemLinkshell->getLocationID(), PItemLinkshell->getSlotID());
                         PChar->pushPacket(new CInventoryItemPacket(PItemLinkshell, PItemLinkshell->getLocationID(), PItemLinkshell->getSlotID()));
                         PChar->pushPacket(new CInventoryFinishPacket());
                         PChar->pushPacket(new CMessageStandardPacket(MsgStd::LinkshellNoLongerExists));
@@ -5904,7 +5902,7 @@ void SmallPacket0x0DE(map_session_data_t* const PSession, CCharEntity* const PCh
     char message[256];
     sql->EscapeString(message, PChar->bazaar.message.c_str());
 
-    sql->Async("UPDATE char_stats SET bazaar_message = '%s' WHERE charid = %u;", message, PChar->id);
+    sql->Query("UPDATE char_stats SET bazaar_message = '%s' WHERE charid = %u;", message, PChar->id);
 }
 
 /************************************************************************
@@ -6507,7 +6505,7 @@ void SmallPacket0x0FC(map_session_data_t* const PSession, CCharEntity* const PCh
     char extra[sizeof(PPotItem->m_extra) * 2 + 1];
     sql->EscapeStringLen(extra, (const char*)PPotItem->m_extra, sizeof(PPotItem->m_extra));
     const char* Query = "UPDATE char_inventory SET extra = '%s' WHERE charid = %u AND location = %u AND slot = %u";
-    sql->Async(Query, extra, PChar->id, PPotItem->getLocationID(), PPotItem->getSlotID());
+    sql->Query(Query, extra, PChar->id, PPotItem->getLocationID(), PPotItem->getSlotID());
 
     PChar->pushPacket(new CFurnitureInteractPacket(PPotItem, potContainerID, potSlotID));
 
@@ -6583,7 +6581,7 @@ void SmallPacket0x0FD(map_session_data_t* const PSession, CCharEntity* const PCh
             char extra[sizeof(PItem->m_extra) * 2 + 1];
             sql->EscapeStringLen(extra, (const char*)PItem->m_extra, sizeof(PItem->m_extra));
             const char* Query = "UPDATE char_inventory SET extra = '%s' WHERE charid = %u AND location = %u AND slot = %u";
-            sql->Async(Query, extra, PChar->id, PItem->getLocationID(), PItem->getSlotID());
+            sql->Query(Query, extra, PChar->id, PItem->getLocationID(), PItem->getSlotID());
         }
     }
 
@@ -6656,7 +6654,7 @@ void SmallPacket0x0FE(map_session_data_t* const PSession, CCharEntity* const PCh
         char extra[sizeof(PItem->m_extra) * 2 + 1];
         sql->EscapeStringLen(extra, (const char*)PItem->m_extra, sizeof(PItem->m_extra));
         const char* Query = "UPDATE char_inventory SET extra = '%s' WHERE charid = %u AND location = %u AND slot = %u";
-        sql->Async(Query, extra, PChar->id, PItem->getLocationID(), PItem->getSlotID());
+        sql->Query(Query, extra, PChar->id, PItem->getLocationID(), PItem->getSlotID());
 
         PChar->pushPacket(new CInventoryItemPacket(PItem, containerID, slotID));
         PChar->pushPacket(new CInventoryFinishPacket());
@@ -6697,7 +6695,7 @@ void SmallPacket0x0FF(map_session_data_t* const PSession, CCharEntity* const PCh
         char extra[sizeof(PItem->m_extra) * 2 + 1];
         sql->EscapeStringLen(extra, (const char*)PItem->m_extra, sizeof(PItem->m_extra));
         const char* Query = "UPDATE char_inventory SET extra = '%s' WHERE charid = %u AND location = %u AND slot = %u";
-        sql->Async(Query, extra, PChar->id, PItem->getLocationID(), PItem->getSlotID());
+        sql->Query(Query, extra, PChar->id, PItem->getLocationID(), PItem->getSlotID());
 
         PChar->pushPacket(new CInventoryItemPacket(PItem, containerID, slotID));
         PChar->pushPacket(new CInventoryFinishPacket());
@@ -7195,7 +7193,7 @@ void SmallPacket0x10A(map_session_data_t* const PSession, CCharEntity* const PCh
 
     if ((PItem != nullptr) && !(PItem->getFlag() & ITEM_FLAG_EX) && (!PItem->isSubType(ITEM_LOCKED) || PItem->getCharPrice() != 0))
     {
-        sql->Async("UPDATE char_inventory SET bazaar = %u WHERE charid = %u AND location = 0 AND slot = %u;", price, PChar->id, slotID);
+        sql->Query("UPDATE char_inventory SET bazaar = %u WHERE charid = %u AND location = 0 AND slot = %u;", price, PChar->id, slotID);
 
         PItem->setCharPrice(price);
         PItem->setSubType((price == 0 ? ITEM_UNLOCKED : ITEM_LOCKED));
@@ -7300,20 +7298,14 @@ void SmallPacket0x10F(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x110(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
-    // PrintPacket(data);
-    if (PChar->animation != ANIMATION_FISHING_START)
+    if (map_config.fishing_enable == 1)
+    {
+        fishingutils::HandleFishingAction(PChar, data);
+    }
+    else
     {
         return;
     }
-
-    // uint32 charid = data.ref<uint32>(0x04);
-    uint16 stamina = data.ref<uint16>(0x08);
-    // uint16 ukn1 = data.ref<uint16>(0x0A); // Seems to always be zero with basic fishing, skill not high enough to test legendary fish.
-    // uint16 targetid = data.ref<uint16>(0x0C);
-    uint8 action = data.ref<uint8>(0x0E);
-    // uint8 ukn2 = data.ref<uint8>(0x0F);
-    uint32 special = data.ref<uint32>(0x10);
-    fishingutils::FishingAction(PChar, static_cast<FISH_ACTION>(action), stamina, special);
 }
 
 /************************************************************************

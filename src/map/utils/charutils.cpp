@@ -765,7 +765,8 @@ namespace charutils
         }
 
         fmtQuery = "SELECT outpost_sandy, outpost_bastok, outpost_windy, runic_portal, maw, "
-                   "campaign_sandy, campaign_bastok, campaign_windy, homepoints, survivals, abyssea_conflux "
+                   "campaign_sandy, campaign_bastok, campaign_windy, homepoints, survivals, abyssea_conflux, "
+                   "waypoints "
                    "FROM char_unlocks "
                    "WHERE charid = %u;";
 
@@ -796,6 +797,11 @@ namespace charutils
             buf    = nullptr;
             sql->GetData(10, &buf, &length);
             memcpy(&PChar->teleport.abysseaConflux, buf, (length > sizeof(PChar->teleport.abysseaConflux) ? sizeof(PChar->teleport.abysseaConflux) : length));
+
+            length = 0;
+            buf    = nullptr;
+            sql->GetData(11, &buf, &length);
+            memcpy(&PChar->teleport.waypoints, buf, (length > sizeof(PChar->teleport.waypoints) ? sizeof(PChar->teleport.waypoints) : length));
         }
 
         PChar->PMeritPoints = new CMeritPoints(PChar);
@@ -1301,7 +1307,7 @@ namespace charutils
                                 "extra) "
                                 "VALUES(%u,%u,%u,%u,%u,'%s','%s')";
 
-            int8 signature[21];
+            int8 signature[DecodeStringLength];
             if (PItem->isType(ITEM_LINKSHELL))
             {
                 DecodeStringLinkshell((int8*)PItem->getSignature(), signature);
@@ -5339,6 +5345,14 @@ namespace charutils
                 sql->Query(query, buf, PChar->id);
                 return;
             }
+            case TELEPORT_TYPE::WAYPOINT:
+            {
+                char buf[sizeof(PChar->teleport.waypoints) * 2 + 1];
+                sql->EscapeStringLen(buf, (const char*)&PChar->teleport.waypoints, sizeof(PChar->teleport.waypoints));
+                const char* query = "UPDATE char_unlocks SET waypoints = '%s' WHERE charid = %u;";
+                sql->Query(query, buf, PChar->id);
+                return;
+            }
             default:
                 ShowError("charutils:SaveTeleport : Unknown type parameter.");
                 return;
@@ -5410,6 +5424,14 @@ namespace charutils
             }
         }
         return false;
+    }
+
+    uint8 getQuestStatus(CCharEntity* PChar, uint8 log, uint8 quest)
+    {
+        uint8 current  = PChar->m_questLog[log].current[quest / 8] & (1 << (quest % 8));
+        uint8 complete = PChar->m_questLog[log].complete[quest / 8] & (1 << (quest % 8));
+
+        return (complete != 0 ? 2 : (current != 0 ? 1 : 0));
     }
 
     /************************************************************************
@@ -6059,15 +6081,13 @@ namespace charutils
 
         if (value == 0)
         {
-            auto query = fmt::sprintf("DELETE FROM char_vars WHERE charid = %u AND varname = '%s' LIMIT 1;",
-                PChar->id, var);
-            sql->Query(query.c_str());
+            sql->Query(fmt::format("DELETE FROM char_vars WHERE charid = {} AND varname = '{}' LIMIT 1;",
+                PChar->id, var).c_str());
         }
         else
         {
-            auto query = fmt::sprintf("INSERT INTO char_vars SET charid = %u, varname = '%s', value = %i ON DUPLICATE KEY UPDATE value = %i;",
-                PChar->id, var.c_str(), value, value);
-            sql->Query(query.c_str());
+            sql->Query(fmt::format("INSERT INTO char_vars SET charid = {}, varname = '{}', value = {} ON DUPLICATE KEY UPDATE value = {};",
+                PChar->id, var.c_str(), value, value).c_str());
         }
     }
 

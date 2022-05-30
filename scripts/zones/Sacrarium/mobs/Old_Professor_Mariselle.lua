@@ -9,23 +9,23 @@ require("scripts/globals/missions")
 local entity = {}
 
 entity.onMobFight = function(mob, target)
-    local OP_Mariselle = mob:getID()
+    local opMariselle = mob:getID()
 
     -- Summons a pupil every 30 seconds.
     -- TODO: Casting animation for summons. When he spawns them isn't retail accurate.
     -- TODO: Make him and the clones teleport around the room every 30s
 
     if (mob:getBattleTime() % 30 < 3 and mob:getBattleTime() > 3) then
-        local X = mob:getXPos()
-        local Y = mob:getYPos()
-        local Z = mob:getZPos()
+        local xPos = mob:getXPos()
+        local yPos = mob:getYPos()
+        local zPos = mob:getZPos()
 
-        for i = OP_Mariselle+1, OP_Mariselle+2 do
+        for i = opMariselle + 1, opMariselle + 2 do
             local m = GetMobByID(i)
             if not m:isSpawned() then
                 m:spawn()
                 m:updateEnmity(target)
-                m:setPos(X + 1, Y, Z + 1) -- Set pupil x and z position +1 from Mariselle
+                m:setPos(xPos + 1, yPos, zPos + 1) -- Set pupil x and z position +1 from Mariselle
                 return
             end
         end
@@ -33,9 +33,9 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    local OP_Mariselle = mob:getID()
+    local opMariselle = mob:getID()
 
-    for i = OP_Mariselle+1, OP_Mariselle+2 do
+    for i = opMariselle + 1, opMariselle + 2 do
         local m = GetMobByID(i)
         if m:isSpawned() then
             DespawnMob(i)
@@ -44,9 +44,9 @@ entity.onMobDeath = function(mob, player, isKiller)
 end
 
 entity.onMobDespawn = function( mob )
-    local OP_Mariselle = mob:getID()
+    local opMariselle = mob:getID()
 
-    for i = OP_Mariselle+1, OP_Mariselle+2 do
+    for i = opMariselle + 1, opMariselle + 2 do
         local m = GetMobByID(i)
         if m:isSpawned() then
             DespawnMob(i)

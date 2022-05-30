@@ -9,17 +9,16 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     local count = trade:getItemCount()
-    local AuctionParcel = trade:hasItemQty(594, 1)
+    local auctionParcel = trade:hasItemQty(594, 1)
 
-    if (AuctionParcel == true and count == 1) then
-        local TheBrugaireConsortium = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM)
-        if (TheBrugaireConsortium == 1) then
+    if (auctionParcel == true and count == 1) then
+        local theBrugaireConsortium = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM)
+        if (theBrugaireConsortium == 1) then
             player:tradeComplete()
             player:startEvent(540)
             player:setCharVar("TheBrugaireConsortium-Parcels", 21)
         end
     end
-
 end
 
 entity.onTrigger = function(player, npc)

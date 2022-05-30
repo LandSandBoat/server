@@ -14,7 +14,8 @@ ability_object.onAutomatonAbilityCheck = function(target, automaton, skill)
 end
 
 ability_object.onAutomatonAbility = function(target, automaton, skill, master, action)
-    local params = {
+    local params =
+    {
         numHits = 3,
         atkmulti = 1,
         weaponType = xi.skill.CLUB,

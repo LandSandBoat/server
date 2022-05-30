@@ -185,6 +185,8 @@ namespace charutils
     void SavePlayTime(CCharEntity* PChar);                     // Saves this characters total play time.
     bool hasMogLockerAccess(CCharEntity* PChar);               // true if have access, false otherwise.
 
+    uint8 getQuestStatus(CCharEntity* PChar, uint8 log, uint8 quest); // Get Quest status. Used in FishingUtils.cpp, allows to fish quest specific mobs, like PLD AF NM.
+
     float AddExpBonus(CCharEntity* PChar, float exp);
 
     void RemoveAllEquipment(CCharEntity* PChar);

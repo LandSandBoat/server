@@ -19,9 +19,12 @@ xi.conquest = xi.conquest or {}
 -- (LOCAL) constants
 -----------------------------------
 
-local CONQUEST_TALLY_START = 0
-local CONQUEST_TALLY_END   = 1
-local CONQUEST_UPDATE      = 2
+local conquestConstants =
+{
+    TALLY_START = 0,
+    TALLY_END   = 1,
+    UPDATE      = 2,
+}
 
 -----------------------------------
 -- (LOCAL) expeditionary forces
@@ -734,7 +737,7 @@ local overseerInvNation =
         [32855] = {rank =  6, cp = 24000, lvl = 55, item = 17067, place = 1},     -- royal_guards_rod
         [32856] = {rank =  6, cp = 24000, lvl = 55, item = 16599, place = 1},     -- royal_guards_sword
         [32857] = {rank =  6, cp = 24000, lvl = 55, item = 16805, place = 1},     -- royal_guards_fleuret
-        [32864] = {rank =  7, cp = 32000, lvl = 60, item = 18738},                -- temple_knights_arrow
+        [32864] = {rank =  7, cp = 32000, lvl = 60, item = 15956},                -- temple_knights_quiver
         [32865] = {rank =  7, cp = 32000, lvl = 60, item = 16886, place = 2},     -- grand_knights_lance
         [32866] = {rank =  7, cp = 32000, lvl = 60, item = 13557, place = 1},     -- grand_knights_ring
         [32880] = {rank =  8, cp = 40000, lvl = 65, item = 14013},                -- grand_temple_knights_gauntlets
@@ -852,7 +855,7 @@ local overseerInvNation =
         [32850] = {rank =  6, cp = 24000, lvl = 55, item = 17094, place = 2},     -- wise_wizards_staff
         [32851] = {rank =  6, cp = 24000, lvl = 55, item = 16808, place = 2},     -- wise_wizards_bilbo
         [32852] = {rank =  6, cp = 24000, lvl = 55, item = 16809, place = 1},     -- wise_wizards_anelace
-        [32864] = {rank =  7, cp = 32000, lvl = 60, item = 15958, place = 3},     -- combat_casters_quiver
+        [32864] = {rank =  7, cp = 32000, lvl = 60, item = 15958},                -- combat_casters_quiver
         [32865] = {rank =  7, cp = 32000, lvl = 60, item = 12363, place = 2},     -- patriarch_protectors_shield
         [32866] = {rank =  7, cp = 32000, lvl = 60, item = 13559, place = 1},     -- patriarch_protectors_ring
         [32880] = {rank =  8, cp = 40000, lvl = 65, item = 14016},                -- master_casters_mitts
@@ -1353,11 +1356,11 @@ xi.conquest.onConquestUpdate = function(zone, updatetype)
     for _, player in pairs(players) do
 
         -- CONQUEST TALLY START
-        if updatetype == CONQUEST_TALLY_START then
+        if updatetype == conquestConstants.TALLY_START then
             player:messageText(player, messageBase, 5)
 
         -- CONQUEST TALLY END
-        elseif updatetype == CONQUEST_TALLY_END then
+        elseif updatetype == conquestConstants.TALLY_END then
             player:messageText(player, messageBase + 1, 5) -- Tallying conquest results...
 
             if owner <= 3 then
@@ -1417,7 +1420,7 @@ xi.conquest.onConquestUpdate = function(zone, updatetype)
             xi.conquest.toggleRegionalNPCs(zone)
 
         -- CONQUEST UPDATE
-        elseif updatetype == CONQUEST_UPDATE then
+        elseif updatetype == conquestConstants.UPDATE then
             local influence = GetRegionInfluence(region)
 
             if owner <= 3 then

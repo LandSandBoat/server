@@ -50,9 +50,9 @@ spell_object.onSpellCast = function(caster, target, spell)
     params.mnd_wsc = 0.3
     params.chr_wsc = 0.0
     local resist = applyResistance(caster, target, spell, params)
-    local HP = caster:getHP()
-    local LVL = caster:getMainLvl()
-    local damage = (HP / 10) + (LVL / 1.25)
+    local casterHP = caster:getHP()
+    local casterLvl = caster:getMainLvl()
+    local damage = (casterHP / 10) + (casterLvl / 1.25)
     damage = BlueFinalAdjustments(caster, target, spell, damage, params)
 
     if (damage > 0 and resist > 0.3) then
