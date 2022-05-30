@@ -1,10 +1,7 @@
 -----------------------------------
 -- Spell: Gekka: Ichi
---     Grants Enmity Boost +30 for Caster
 -----------------------------------
-require("scripts/settings/main")
-require("scripts/globals/status")
-require("scripts/globals/magic")
+require("scripts/globals/spells/spell_enhancing_ninjutsu")
 -----------------------------------
 local spell_object = {}
 
@@ -13,11 +10,7 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    caster:delStatusEffect(xi.effect.PAX)
-
-    local effect = xi.effect.ENMITY_BOOST
-    caster:addStatusEffect(effect, 30, 0, 300)
-    return effect
+    return xi.spells.spell_enhancing_ninjutsu.useEnhancingNinjutsu(caster, target, spell)
 end
 
 return spell_object

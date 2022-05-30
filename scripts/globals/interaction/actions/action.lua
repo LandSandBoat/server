@@ -1,9 +1,10 @@
 ----------------------------
 ----- Action base class
 ----------------------------
-Action = { }
+Action = {}
 
-Action.Priority = {
+Action.Priority =
+{
     Ignore = 1,
     Default = 10,
     ReplaceDefault = 20,
@@ -12,7 +13,8 @@ Action.Priority = {
     Progress = 1000,
 }
 
-Action.Type = {
+Action.Type =
+{
     LambdaAction = 0,
     Event = 1,
     Message = 2,

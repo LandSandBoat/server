@@ -361,6 +361,15 @@ local function getSingleHitDamage(attacker, target, dmg, wsParams, calcParams)
                 magicdmg = target:magicDmgTaken(magicdmg)
                 magicdmg = adjustForTarget(target, magicdmg, wsParams.ele)
 
+
+                if magicdmg > 0 then
+                    magicdmg = magicdmg - target:getMod(xi.mod.PHALANX)
+                    magicdmg = utils.clamp(magicdmg, 0, 99999)
+                end
+
+                magicdmg = utils.oneforall(target, magicdmg)
+                magicdmg = utils.stoneskin(target, magicdmg)
+
                 finaldmg = finaldmg + magicdmg
             end
 
@@ -389,6 +398,13 @@ local function modifyMeleeHitDamage(attacker, target, attackTbl, wsParams, rawDa
             adjustedDamage = adjustedDamage * target:getMod(xi.mod.SLASH_SDT) / 1000
         end
     end
+
+    if adjustedDamage > 0 then
+        adjustedDamage = adjustedDamage - target:getMod(xi.mod.PHALANX)
+        adjustedDamage = utils.clamp(adjustedDamage, 0, 99999)
+    end
+
+    adjustedDamage = utils.stoneskin(target, adjustedDamage)
 
     adjustedDamage = adjustedDamage + souleaterBonus(attacker, wsParams)
 
@@ -786,6 +802,15 @@ function doMagicWeaponskill(attacker, target, wsID, wsParams, tp, action, primar
         dmg = dmg * applyResistanceAbility(attacker, target, wsParams.ele, wsParams.skill, bonusacc)
         dmg = target:magicDmgTaken(dmg)
         dmg = adjustForTarget(target, dmg, wsParams.ele)
+
+
+        if dmg > 0 then
+            dmg = dmg - target:getMod(xi.mod.PHALANX)
+            dmg = utils.clamp(dmg, 0, 99999)
+        end
+
+        dmg = utils.oneforall(target, dmg)
+        dmg = utils.stoneskin(target, dmg)
 
         dmg = dmg * xi.settings.WEAPON_SKILL_POWER -- Add server bonus
     else
@@ -1208,14 +1233,14 @@ function handleWSGorgetBelt(attacker)
         local elementalBelt =   { 11755, 11758, 11760, 11757, 11756, 11759, 11761, 11762 }
         local neck = attacker:getEquipID(xi.slot.NECK)
         local belt = attacker:getEquipID(xi.slot.WAIST)
-        local SCProp1, SCProp2, SCProp3 = attacker:getWSSkillchainProp()
+        local scProp1, scProp2, scProp3 = attacker:getWSSkillchainProp()
 
         for i, v in ipairs(elementalGorget) do
             if neck == v then
                 if
-                    doesElementMatchWeaponskill(i, SCProp1) or
-                    doesElementMatchWeaponskill(i, SCProp2) or
-                    doesElementMatchWeaponskill(i, SCProp3)
+                    doesElementMatchWeaponskill(i, scProp1) or
+                    doesElementMatchWeaponskill(i, scProp2) or
+                    doesElementMatchWeaponskill(i, scProp3)
                 then
                     accBonus = accBonus + 10
                     ftpBonus = ftpBonus + 0.1
@@ -1233,9 +1258,9 @@ function handleWSGorgetBelt(attacker)
         for i, v in ipairs(elementalBelt) do
             if belt == v then
                 if
-                    doesElementMatchWeaponskill(i, SCProp1) or
-                    doesElementMatchWeaponskill(i, SCProp2) or
-                    doesElementMatchWeaponskill(i, SCProp3)
+                    doesElementMatchWeaponskill(i, scProp1) or
+                    doesElementMatchWeaponskill(i, scProp2) or
+                    doesElementMatchWeaponskill(i, scProp3)
                 then
                     accBonus = accBonus + 10
                     ftpBonus = ftpBonus + 0.1

@@ -16,10 +16,10 @@ local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_
 
 quest.reward =
 {
-    fame  = 120,
+    fame     = 120,
     fameArea = xi.quest.fame_area.WINDURST,
-    title = xi.title.FOUR_STAR_PURVEYOR,
-    gil   = 3000,
+    title    = xi.title.FOUR_STAR_PURVEYOR,
+    gil      = 3000,
 }
 
 quest.sections =
@@ -27,7 +27,7 @@ quest.sections =
     -- Section: Quest is available and never interacted.
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.WINDURST) > 4 and vars.Prog == 0 and
+            return status == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.WINDURST) > 4 and
                 player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.EXPERTISE) == QUEST_COMPLETED
         end,
 
@@ -37,8 +37,19 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if player:getCharVar("Quest[4][4]DayCompleted") + 7 < VanadielUniqueDay() then
-                        return quest:progressEvent(90, xi.items.CRAWLER_EGG) -- Unending Chase starting event.
+                        if quest:getVar(player, 'Prog') == 0 then
+                            return quest:progressEvent(90, xi.items.CRAWLER_EGG) -- Starting event.
+                        else
+                            return quest:progressEvent(91, xi.items.CRAWLER_EGG) -- Starting event after rejecting.
+                        end
                     end
+                end,
+            },
+
+            ['Take'] =
+            {
+                onTrigger = function(player, npc)
+                    return quest:event(64) -- Default message after clompleting Expertise quest and before accepting The Clue quest.
                 end,
             },
 
@@ -51,31 +62,21 @@ quest.sections =
                         quest:begin(player)
                     end
                 end,
-            },
-        },
-    },
 
-    -- Section: (OPTIONAL) Quest available but rejected.
-    {
-        check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and vars.Prog == 1
-        end,
-
-        [xi.zone.MHAURA] =
-        {
-            ['Rycharde'] =
-            {
-                onTrigger = function(player, npc)
-                    return quest:progressEvent(91, xi.items.CRAWLER_EGG) -- Unending Chase starting event.
-                end,
-            },
-
-            onEventFinish =
-            {
                 [91] = function(player, csid, option, npc)
                     if option == 83 then -- Accept quest option.
                         quest:begin(player)
                     end
+                end,
+            },
+        },
+
+        [xi.zone.SELBINA] =
+        {
+            ['Valgeir'] =
+            {
+                onTrigger = function(player, npc)
+                    return quest:event(143)
                 end,
             },
         },
@@ -84,7 +85,7 @@ quest.sections =
     -- Section: Quest accepted.
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and vars.Prog == 1
+            return status == QUEST_ACCEPTED
         end,
 
         [xi.zone.MHAURA] =
@@ -92,7 +93,7 @@ quest.sections =
             ['Take'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:event(65) -- Not goten the dish from Valgeir.
+                    return quest:event(65)
                 end,
             },
 
@@ -108,6 +109,7 @@ quest.sections =
                     else
                         local count      = trade:getItemCount()
                         local crawlerEgg = trade:hasItemQty(xi.items.CRAWLER_EGG, trade:getItemCount())
+
                         if crawlerEgg == true and count < 4 then
                             return quest:event(93)
                         end
@@ -125,31 +127,13 @@ quest.sections =
                 end,
             },
         },
-    },
-
-    -- Section: Quest completed. Change default messages for Take and Valgeir.
-    {
-        check = function(player, status, vars)
-            return status == QUEST_COMPLETED and
-                player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_BASICS) == QUEST_AVAILABLE
-        end,
-
-        [xi.zone.MHAURA] =
-        {
-            ['Take'] =
-            {
-                onTrigger = function(player, npc)
-                    return quest:event(66):replaceDefault() -- Default message after clompleting this quest and before accepting The Basics quest.
-                end,
-            },
-        },
 
         [xi.zone.SELBINA] =
         {
             ['Valgeir'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:event(144):replaceDefault() -- Default message after clompleting this quest and before accepting The Basics quest.
+                    return quest:event(143)
                 end,
             },
         },

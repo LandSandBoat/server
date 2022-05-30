@@ -9,9 +9,17 @@ require("scripts/globals/keyitems")
 require("scripts/settings/main")
 require("scripts/globals/dynamis")
 
-local TIMELESS_HOURGLASS = 4236
-local currency = {1455, 1456, 1457}
-local shop = {
+local timelessHourglassID = 4236
+
+local currency =
+{
+    1455,
+    1456,
+    1457
+}
+
+local shop =
+{
      7, 1313, -- Siren's Hair
      8, 1521, -- Slime Juice
      9, 1469, -- Wootz Ore
@@ -20,7 +28,9 @@ local shop = {
     25, 1461, -- Wootz Ingot
     33, 1460, -- Koh-I-Noor
 }
-local maps = {
+
+local maps =
+{
     [xi.ki.MAP_OF_DYNAMIS_SAN_DORIA]   = 10000,
     [xi.ki.MAP_OF_DYNAMIS_BASTOK]     = 10000,
     [xi.ki.MAP_OF_DYNAMIS_WINDURST]   = 10000,
@@ -46,7 +56,7 @@ entity.onTrade = function(player, npc, trade)
             player:startEvent(134)
 
         -- return timeless hourglass for refund
-        elseif (count == 1 and trade:hasItemQty(TIMELESS_HOURGLASS, 1)) then
+        elseif (count == 1 and trade:hasItemQty(timelessHourglassID, 1)) then
             player:startEvent(153)
 
         -- currency exchanges
@@ -77,7 +87,7 @@ end
 
 entity.onTrigger = function(player, npc)
     if (player:hasKeyItem(xi.ki.VIAL_OF_SHROUDED_SAND)) then
-        player:startEvent(133, currency[1], xi.settings.CURRENCY_EXCHANGE_RATE, currency[2], xi.settings.CURRENCY_EXCHANGE_RATE, currency[3], xi.settings.PRISMATIC_HOURGLASS_COST, TIMELESS_HOURGLASS, xi.settings.TIMELESS_HOURGLASS_COST)
+        player:startEvent(133, currency[1], xi.settings.CURRENCY_EXCHANGE_RATE, currency[2], xi.settings.CURRENCY_EXCHANGE_RATE, currency[3], xi.settings.PRISMATIC_HOURGLASS_COST, timelessHourglassID, xi.settings.TIMELESS_HOURGLASS_COST)
     else
         player:startEvent(130)
     end
@@ -88,7 +98,7 @@ entity.onEventUpdate = function(player, csid, option)
 
         -- asking about hourglasses
         if (option == 1) then
-            if (not player:hasItem(TIMELESS_HOURGLASS)) then
+            if (not player:hasItem(timelessHourglassID)) then
                 -- must figure out what changes here to prevent the additional dialog
                 -- player:updateEvent(?)
             end

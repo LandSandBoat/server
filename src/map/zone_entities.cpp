@@ -57,6 +57,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "utils/synthutils.h"
 #include "utils/zoneutils.h"
 
+#include <unordered_set>
+
 namespace
 {
     const float CHARACTER_SYNC_DISTANCE                  = 45.0f;
@@ -73,7 +75,6 @@ typedef std::pair<float, CCharEntity*> CharScorePair;
 CZoneEntities::CZoneEntities(CZone* zone)
 : m_zone(zone)
 , m_Transport(nullptr)
-, m_DynamicTargIDCount(0)
 {
 }
 
@@ -482,10 +483,16 @@ uint16 CZoneEntities::GetNewCharTargID()
 uint16 CZoneEntities::GetNewDynamicTargID()
 {
     // NOTE: 0x0E (entity_update) entity updates are valid for 0 to 1023 and 1792 to 2303
-    // TODO: As in GetNewCharTargID, we should be searching in the valid range for IDs
-    //     : that aren't used yet, and releasing them when we're done.
-    uint16 offset = m_DynamicTargIDCount++;
-    return 0x800 + offset;
+    uint16 targid = 0x800;
+    for (auto it : dynamicTargIds)
+    {
+        if (targid != it)
+        {
+            break;
+        }
+        targid++;
+    }
+    return targid;
 }
 
 bool CZoneEntities::CharListEmpty() const
@@ -1317,9 +1324,14 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_regions)
 
     luautils::OnZoneTick(this->m_zone);
 
+    std::unordered_set<uint16> entitiesToRelease;
     for (EntityList_t::const_iterator it = m_mobList.begin(); it != m_mobList.end(); ++it)
     {
-        CMobEntity* PMob = (CMobEntity*)it->second;
+        CMobEntity* PMob = dynamic_cast<CMobEntity*>(it->second);
+        if (!PMob)
+        {
+            continue;
+        }
 
         if (PMob->PBattlefield && PMob->PBattlefield->CanCleanup())
         {
@@ -1333,7 +1345,41 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_regions)
             PMob->StatusEffectContainer->TickRegen(tick);
             PMob->StatusEffectContainer->TickEffects(tick);
         }
+
         PMob->PAI->Tick(tick);
+
+        if (PMob->status == STATUS_TYPE::DISAPPEAR && PMob->m_bReleaseTargIDOnDeath)
+        {
+            for (auto PMobIt : m_mobList)
+            {
+                CMobEntity* PCurrentMob = (CMobEntity*)PMobIt.second;
+                PCurrentMob->PEnmityContainer->Clear(PMob->id);
+            }
+
+            entitiesToRelease.insert(PMob->targid);
+        }
+    }
+
+    // TODO: Handle NPCs
+    for (auto targid : entitiesToRelease)
+    {
+        auto* PMob = m_mobList[targid];
+
+        ShowInfo(fmt::format("Releasing {} ({})", PMob->name, PMob->targid).c_str());
+
+        for (EntityList_t::const_iterator it = m_charList.begin(); it != m_charList.end(); ++it)
+        {
+            CCharEntity* PChar = (CCharEntity*)it->second;
+            if (distance(PChar->loc.p, PMob->loc.p) < 50)
+            {
+                PChar->SpawnMOBList.erase(PMob->id);
+            }
+        }
+
+        delete PMob;
+        m_mobList[targid] = nullptr;
+        m_mobList.erase(targid);
+        dynamicTargIds.erase(targid);
     }
 
     for (EntityList_t::const_iterator it = m_npcList.begin(); it != m_npcList.end(); ++it)

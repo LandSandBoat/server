@@ -902,9 +902,9 @@ entity.onTrigger = function(player, npc)
 
     local crateID = npc:getID()
     local model   = npc:getModelId()
-    local X       = npc:getXPos()
-    local Y       = npc:getYPos()
-    local Z       = npc:getZPos()
+    local xPos    = npc:getXPos()
+    local yPos    = npc:getYPos()
+    local zPos    = npc:getZPos()
     local bfid    = battlefield:getID()
     local hold    = false
 
@@ -962,20 +962,20 @@ entity.onTrigger = function(player, npc)
                                             if mimicSpawned == 0 or mimicSpawned == 2 or mimicSpawned == 4 or mimicSpawned == 6 then
                                                 npc:setStatus(xi.status.DISAPPEAR)
                                                 battlefield:setLocalVar("mimicSpawned", mimicSpawned + 1)
-                                                GetMobByID(ID.mob.APOLLYON_SW_MOB[3]):setSpawn(X, Y, Z)
-                                                SpawnMob(ID.mob.APOLLYON_SW_MOB[3]):setPos(X, Y, Z)
+                                                GetMobByID(ID.mob.APOLLYON_SW_MOB[3]):setSpawn(xPos, yPos, zPos)
+                                                SpawnMob(ID.mob.APOLLYON_SW_MOB[3]):setPos(xPos, yPos, zPos)
                                                 GetMobByID(ID.mob.APOLLYON_SW_MOB[3]):updateClaim(player)
                                             elseif mimicSpawned == 1 or mimicSpawned == 5 then
                                                 npc:setStatus(xi.status.DISAPPEAR)
                                                 battlefield:setLocalVar("mimicSpawned", mimicSpawned + 2)
-                                                GetMobByID(ID.mob.APOLLYON_SW_MOB[3] + 1):setSpawn(X, Y, Z)
-                                                SpawnMob(ID.mob.APOLLYON_SW_MOB[3] + 1):setPos(X, Y, Z)
+                                                GetMobByID(ID.mob.APOLLYON_SW_MOB[3] + 1):setSpawn(xPos, yPos, zPos)
+                                                SpawnMob(ID.mob.APOLLYON_SW_MOB[3] + 1):setPos(xPos, yPos, zPos)
                                                 GetMobByID(ID.mob.APOLLYON_SW_MOB[3] + 1):updateClaim(player)
                                             elseif mimicSpawned == 3 then
                                                 npc:setStatus(xi.status.DISAPPEAR)
                                                 battlefield:setLocalVar("mimicSpawned", mimicSpawned + 4)
-                                                GetMobByID(ID.mob.APOLLYON_SW_MOB[3] + 2):setSpawn(X, Y, Z)
-                                                SpawnMob(ID.mob.APOLLYON_SW_MOB[3] + 2):setPos(X, Y, Z)
+                                                GetMobByID(ID.mob.APOLLYON_SW_MOB[3] + 2):setSpawn(xPos, yPos, zPos)
+                                                SpawnMob(ID.mob.APOLLYON_SW_MOB[3] + 2):setPos(xPos, yPos, zPos)
                                                 GetMobByID(ID.mob.APOLLYON_SW_MOB[3] + 2):updateClaim(player)
                                             end
                                         end

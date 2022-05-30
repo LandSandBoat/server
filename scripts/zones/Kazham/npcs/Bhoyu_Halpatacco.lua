@@ -9,11 +9,11 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local Z = player:getZPos()
+    local zPos = player:getZPos()
 
-    if (Z >= -11 and Z <= -6) then
+    if zPos >= -11 and zPos <= -6 then
         player:startEvent(67)
-    elseif (player:getGil() >= 200) then
+    elseif player:getGil() >= 200 then
         player:startEvent(116, 0, 200)
     end
 end
@@ -22,10 +22,10 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 116) then
-        local Z = player:getZPos()
+    if csid == 116 then
+        local zPos = player:getZPos()
 
-        if (Z >= -10 and Z <= -6) then
+        if (zPos >= -10 and zPos <= -6) then
             player:delGil(200)
         end
     end

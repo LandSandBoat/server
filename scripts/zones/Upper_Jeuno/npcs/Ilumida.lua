@@ -16,19 +16,19 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local SearchingForWords = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SEARCHING_FOR_THE_RIGHT_WORDS)
+    local searchingForWords = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SEARCHING_FOR_THE_RIGHT_WORDS)
 
     --this variable implicitly stores: JFame >= 7 and ACandlelightVigil == QUEST_COMPLETED and RubbishDay == QUEST_COMPLETED and
     --NeverToReturn == QUEST_COMPLETED and SearchingForTheRightWords == QUEST_AVAILABLE and prereq CS complete
-    local SearchingForWords_prereq = player:getCharVar("QuestSearchRightWords_prereq")
+    local searchingForWords_prereq = player:getCharVar("QuestSearchRightWords_prereq")
 
-    if SearchingForWords_prereq == 1 then --has player completed prerequisite cutscene with Kurou-Morou?
+    if searchingForWords_prereq == 1 then --has player completed prerequisite cutscene with Kurou-Morou?
         player:startEvent(197) --SearchingForTheRightWords intro CS
 
     elseif player:getCharVar("QuestSearchRightWords_denied") == 1 then
         player:startEvent(201) --asks player again, SearchingForTheRightWords accept/deny
 
-    elseif SearchingForWords == QUEST_ACCEPTED then
+    elseif searchingForWords == QUEST_ACCEPTED then
         if player:hasKeyItem(xi.ki.MOONDROP) == true then
             player:startEvent(198)
         else
@@ -38,7 +38,7 @@ entity.onTrigger = function(player, npc)
     elseif player:getCharVar("SearchingForRightWords_postcs") == -1 then
         player:startEvent(196)
 
-    elseif SearchingForWords == QUEST_COMPLETED then -- replaceDefault()
+    elseif searchingForWords == QUEST_COMPLETED then -- replaceDefault()
         player:startEvent(200)
     end
 end

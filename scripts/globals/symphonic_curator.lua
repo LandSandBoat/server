@@ -101,7 +101,8 @@ end
 -- TODO: There is some relationship between the instrument and the index, based around multiples of 16
 -- The relationship (for Orchestrion) is: index = ((option - 2) / 16) + 1
 -- One of the arguments from caps with the orchetron is -2
-local optionToSongLookup = {
+local optionToSongLookup =
+{
     [1]   = 112, -- Selbina
     [2]   = 126, -- Mog House
     [3]   = 126, -- Mog House

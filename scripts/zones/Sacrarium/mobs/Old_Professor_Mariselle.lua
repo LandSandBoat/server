@@ -21,7 +21,7 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobFight = function(mob, target)
-    local OP_Mariselle = mob:getID()
+    local opMariselle = mob:getID()
 
     if mob:getBattleTime() % 30 < 3 and
        mob:getBattleTime() > 3
@@ -30,12 +30,12 @@ entity.onMobFight = function(mob, target)
         local Y = mob:getYPos()
         local Z = mob:getZPos()
 
-        for i = OP_Mariselle+1, OP_Mariselle+2 do
+        for i = opMariselle + 1, opMariselle + 2 do
             local m = GetMobByID(i)
             if not m:isSpawned() then
                 m:spawn()
                 m:updateEnmity(target)
-                m:setPos(X + 1, Y, Z + 1) -- Set pupil x and z position +1 from Mariselle
+                m:setPos(xPos + 1, yPos, zPos + 1) -- Set pupil x and z position +1 from Mariselle
                 return
             end
         end
@@ -75,9 +75,9 @@ entity.onMobDisengage = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    local OP_Mariselle = mob:getID()
+    local opMariselle = mob:getID()
 
-    for i = OP_Mariselle+1, OP_Mariselle+2 do
+    for i = opMariselle + 1, opMariselle + 2 do
         local m = GetMobByID(i)
         if m:isSpawned() then
             DespawnMob(i)
@@ -88,7 +88,7 @@ end
 entity.onMobDespawn = function(mob)
     local OP_Mariselle = mob:getID()
 
-    for i = OP_Mariselle+1, OP_Mariselle+2 do
+    for i = opMariselle + 1, opMariselle + 2 do
         local m = GetMobByID(i)
         if m:isSpawned() then
             DespawnMob(i)
