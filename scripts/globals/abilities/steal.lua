@@ -9,6 +9,7 @@ require("scripts/globals/jobpoints")
 require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")
+require("scripts/globals/items")
 -----------------------------------
 local ability_object = {}
 
@@ -73,7 +74,7 @@ ability_object.onUseAbility = function(player, target, ability, action)
     stolen = target:getStealItem()
     if (target:isMob() and math.random(100) < stealChance and stolen ~= 0) then
         if (checkThfAfQuest(player, target) == true) then
-            stolen = 4569
+            stolen = xi.items.BOWL_OF_QUADAV_STEW
         end
 
         player:addItem(stolen)
