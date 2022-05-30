@@ -5517,10 +5517,10 @@ namespace battleutils
             int   power  = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_FAN_DANCE)->GetPower();
             float resist = 1.0f - (power / 10000.0f);
             damage       = (int32)(damage * resist);
-            if (power > 20)
+            if (power > 2000)
             {
                 // reduce fan dance effectiveness by 10% each hit, to a min of 20%
-                PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_FAN_DANCE)->SetPower(power - 10);
+                PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_FAN_DANCE)->SetPower(power - 1000);
             }
         }
         return damage;
