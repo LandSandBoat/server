@@ -990,6 +990,7 @@ m:addOverride("xi.zones.The_Sanctuary_of_ZiTah.npcs.relic_mandau.onTrigger", fun
         player:PrintToPlayer("???: Do you desire to switch your ally? Trade your relic back to me together with 5,000,000 gil", 0xD)
 	    player:PrintToPlayer("???: and I'll exchange it for my soul. Let me return to the battlefield!", 0xD)			
 	end
+end)
 
 m:addOverride("xi.zones.The_Sanctuary_of_ZiTah.npcs.relic_mjollnir.onTrade", function(player, npc, trade)
     local ID = require("scripts/zones/The_Sanctuary_of_ZiTah/IDs")
@@ -1096,7 +1097,6 @@ m:addOverride("xi.zones.The_Sanctuary_of_ZiTah.npcs.relic_mjollnir.onTrigger", f
         player:PrintToPlayer("???: Do you desire to switch your ally? Trade your relic back to me together with 5,000,000 gil", 0xD)
 	    player:PrintToPlayer("???: and I'll exchange it for my soul. Let me return to the battlefield!", 0xD)			
 	end
-
 end)
 
 return m 
