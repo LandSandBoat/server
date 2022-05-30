@@ -29,10 +29,10 @@ REPLACE INTO `mob_groups` (`groupid`, `poolid`, `zoneid`, `name`, `respawntime`,
 REPLACE INTO `mob_groups` (`groupid`, `poolid`, `zoneid`, `name`, `respawntime`, `spawntype`, `dropid`, `HP`, `MP`, `minLevel`, `maxLevel`, `allegiance`) VALUES (79, 5695, 289, 'Genbu-Escha', 0, 128, 0, 22500, 25000, 150, 150, 0);
 
 -- Battosai Use Skill_List_ID 313
-REPLACE INTO `mob_groups` (`groupid`, `poolid`, `zoneid`, `name`, `respawntime`, `spawntype`, `dropid`, `HP`, `MP`, `minLevel`, `maxLevel`, `allegiance`) VALUES (54, 2018, 73, 'Hydra', 0, 128, 0, 25000, 25000, 150, 150, 0);
+REPLACE INTO `mob_groups` (`groupid`, `poolid`, `zoneid`, `name`, `respawntime`, `spawntype`, `dropid`, `HP`, `MP`, `minLevel`, `maxLevel`, `allegiance`) VALUES (54, 2018, 73, 'Hydra', 0, 128, 0, 20000, 20000, 150, 150, 0);
 
 -- Bahamut
-REPLACE INTO mob_groups (groupid, poolid, zoneid, name, respawntime, spawntype, dropid, HP, MP, minLevel, maxLevel, allegiance) VALUES (17, 325, 29, 'Bahamut', 0, 128, 0, 40000, 15000, 100, 100, 0);
+REPLACE INTO mob_groups (groupid, poolid, zoneid, name, respawntime, spawntype, dropid, HP, MP, minLevel, maxLevel, allegiance) VALUES (17, 325, 29, 'Bahamut', 0, 128, 0, 20000, 10000, 100, 100, 0);
 
 # Add cipher_of_mayakovs_alter_ego to Amphisbaena, Tortuga, and Battosai
 INSERT INTO mob_droplist (dropId, dropType, groupId, groupRate, itemId, itemRate) VALUES (3900, 0, 0, 1000, 10151, 100);
