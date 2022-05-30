@@ -53,8 +53,8 @@ entity.onTrigger = function(player, npc)
     local blastFromPast = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.BLAST_FROM_THE_PAST)
     local blastProg = player:getCharVar("BlastFromThePast_Prog")
     local rootProblem = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_ROOT_OF_THE_PROBLEM)
-    local ThePuppetMaster = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_PUPPET_MASTER)
-    local ThePuppetMasterProgress = player:getCharVar("ThePuppetMasterProgress")
+    local thePuppetMaster = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_PUPPET_MASTER)
+    local thePuppetMasterProgress = player:getCharVar("ThePuppetMasterProgress")
     local classReunion = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CLASS_REUNION)
     local classReunionProgress = player:getCharVar("ClassReunionProgress")
     local talk1 = player:getCharVar("ClassReunion_TalkedToFupepe")
@@ -93,7 +93,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(418) -- Uran-Mafran must be stopped
     elseif carbuncleDebacle == QUEST_ACCEPTED and carbuncleDebacleProgress == 7 then
         player:startEvent(419) -- ending cs
-    elseif ThePuppetMaster == QUEST_COMPLETED and classReunion == QUEST_COMPLETED and carbuncleDebacle == QUEST_COMPLETED then
+    elseif thePuppetMaster == QUEST_COMPLETED and classReunion == QUEST_COMPLETED and carbuncleDebacle == QUEST_COMPLETED then
         player:startEvent(420) -- new cs after all 3 SMN AFs done
     -----------------------------------
     -- Class Reunion
@@ -105,13 +105,13 @@ entity.onTrigger = function(player, npc)
         player:startEvent(408) -- reminder to visit the students
     elseif classReunion == QUEST_ACCEPTED and classReunionProgress == 6 and talk1 == 1 and talk2 == 1 then
             player:startEvent(410) -- ending cs
-    elseif ThePuppetMaster == QUEST_COMPLETED and classReunion == QUEST_COMPLETED then
+    elseif thePuppetMaster == QUEST_COMPLETED and classReunion == QUEST_COMPLETED then
         player:startEvent(411) -- new cs after completed AF2
     -----------------------------------
     -- The Puppet Master
-    elseif ThePuppetMaster == QUEST_ACCEPTED and ThePuppetMasterProgress == 4 then
+    elseif thePuppetMaster == QUEST_ACCEPTED and thePuppetMasterProgress == 4 then
         player:startEvent(404) -- ending cs
-    elseif ThePuppetMaster == QUEST_COMPLETED and classReunion ~= 2 then
+    elseif thePuppetMaster == QUEST_COMPLETED and classReunion ~= 2 then
         player:startEvent(405) -- new cs after completed AF1
     -----------------------------------
     elseif rootProblem == QUEST_ACCEPTED and player:getCharVar("rootProblem") == 1 then

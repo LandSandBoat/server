@@ -125,7 +125,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(340) -- quest start
     elseif (golemdelivery == 1) then
         player:startEvent(342) -- finish
-    elseif (FoiledAGolem == QUEST_ACCEPTED) then
+    elseif (foiledAGolem == QUEST_ACCEPTED) then
         player:startEvent(341) -- reminder dialog
 
         -- Trust
@@ -144,7 +144,7 @@ entity.onTrigger = function(player, npc)
     elseif (foiledAGolem == QUEST_COMPLETED) then
         player:startEvent(343) -- new standard dialog after Curses, Foiled A-Golem!?
 
-    elseif (CFA2 == QUEST_COMPLETED) then
+    elseif (cfa2 == QUEST_COMPLETED) then
         player:startEvent(184) -- New standard dialog after CFA2
     else
         player:startEvent(164)
