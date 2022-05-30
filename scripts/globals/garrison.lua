@@ -9,6 +9,7 @@ require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/utils")
 require("scripts/globals/zone")
+require("scripts/globals/pathfind")
 -----------------------------------
 xi = xi or {}
 xi.garrison = xi.garrison or {}
@@ -125,6 +126,16 @@ xi.garrison.despawnNPCs = function(npc)
     end
 end
 
+xi.garrison.returnHome = function(mob)
+  if mob:getRoamFlags() == xi.roamFlag.Event then
+    local spawn = mob:getSpawnPos()
+    local current = mob:getPos()
+    if spawn.x ~= current.x or spawn.z ~= current.z then
+      mob:pathTo(spawn.x, spawn.y, spawn.z)
+    end
+  end
+end
+
 xi.garrison.npcTableEmpty = function(zone)
     local zoneId = zone:getID()
     local garrisonZoneData = xi.garrison.data[zoneId]
@@ -193,12 +204,11 @@ xi.garrison.spawnNPCs = function(npc, party)
     for _, mobId in pairs(npcs) do
     local mob = GetMobByID(mobId)
         if npcnum <= party then
-        -- Use the mob object as you normally would
         mob:setSpawn(xPos, yPos, zPos, rot)
+		mob:setRoamFlags(xi.roamFlag.EVENT)
         mob:spawn()
-        mob:setMobLevel(garrisonZoneData.levelCap)
-        -- TODO need pathing so they return to spawnpoint
-        mob:setSpeed(0)
+        mob:setMobLevel(garrisonZoneData.levelCap - 5)
+        mob:setSpeed(10)
         -- BATTLEFIELD this is to prevent outside help, is not retail
         mob:addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0)
         mob:setAllegiance(1)
@@ -297,7 +307,7 @@ xi.garrison.onTrade = function(player, npc, trade)
     -- Collect entrant information
     local party = player:getAlliance()
     --gets party size for spawning each NPC
-    party = #party
+    party = 18
     -- TODO break into different requirements
     if
         npcUtil.tradeHasExactly(trade, item) and
@@ -336,16 +346,15 @@ xi.garrison.npcTable = function(zone)
                 rotation = rot,
                 groupId = 74,
                 groupZoneId = 103,
-                onMobDeath = function(mob, playerArg, isKiller)
-                end,
+                onMobRoam = function(mob) xi.garrison.returnHome(mob) end,
+                onMobDeath = function(mob, playerArg, isKiller) end,
                 releaseIdOnDeath = false,
             })
-            -- Use the mob object as you normally would
             mob:setSpawn(xPos, yPos, zPos, rot)
+			mob:setRoamFlags(xi.roamFlag.EVENT)
             mob:spawn()
-            mob:setMobLevel(garrisonZoneData.levelCap)
-            -- TODO need pathing so they return to spawnpoint
-            mob:setSpeed(0)
+            mob:setMobLevel(garrisonZoneData.levelCap - 5)
+            mob:setSpeed(10)
             -- BATTLEFIELD this is to prevent outside help, is not retail
             mob:addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0)
             mob:setAllegiance(1)
