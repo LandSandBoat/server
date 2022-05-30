@@ -17,7 +17,7 @@ require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 
-local ZoneID =
+local zoneId =
 {
     0x00001, 800,   -- West Ronfaure
     0x00002, 800,   -- East Ronfaure
@@ -44,14 +44,14 @@ entity.onTrade = function(player, npc, trade)
         local currtab = player:getCharVar("anExplorer-CurrentTablet")
 
         if currtab ~= 0 and (tablets % (2 * currtab)) < currtab then -- new tablet
-            for zone = 1, #ZoneID, 2 do
-                if tablets % (2 * ZoneID[zone]) < ZoneID[zone] then
+            for zone = 1, #zoneId, 2 do
+                if tablets % (2 * zoneId[zone]) < zoneId[zone] then
                     if (tablets + currtab) == 0x1ffff then
                         player:startEvent(47)
                         break
                     end
 
-                    if ZoneID[zone] == currtab then
+                    if zoneId[zone] == currtab then
                         player:startEvent(41) -- the tablet he asked for
                     else
                         player:startEvent(46) -- not the one he asked for
@@ -82,8 +82,8 @@ entity.onTrigger = function(player, npc)
         else
             local tablets = player:getCharVar("anExplorer-ClayTablets")
 
-            for zone = 1, #ZoneID, 2 do
-                if tablets % (2*ZoneID[zone]) < ZoneID[zone] then
+            for zone = 1, #zoneId, 2 do
+                if tablets % (2*zoneId[zone]) < zoneId[zone] then
                     if zone < 20 then
                         player:startEvent(43, math.floor(zone / 2))
                     else
@@ -113,11 +113,11 @@ entity.onEventFinish = function(player, csid, option)
         local currtab = player:getCharVar("anExplorer-CurrentTablet")
         local tablets = player:getCharVar("anExplorer-ClayTablets")
 
-        for zone = 1, #ZoneID, 2 do
-            if ZoneID[zone] == currtab then
+        for zone = 1, #zoneId, 2 do
+            if zoneId[zone] == currtab then
                 player:confirmTrade()
-                player:addGil(xi.settings.GIL_RATE * ZoneID[zone+1])
-                player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * ZoneID[zone+1])
+                player:addGil(xi.settings.GIL_RATE * zoneId[zone+1])
+                player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * zoneId[zone+1])
                 player:setCharVar("anExplorer-CurrentTablet", 0)
                 break
             end
