@@ -51,11 +51,16 @@ for _, zoneID in pairs(dynamisZones) do
     function(player, prevZone)
         xi.dynamis.zoneOnZoneIn(player, prevZone) -- Run onZoneIn functions.
     end)
+    m:addOverride(string.format("xi.zones.%s.Zone.onZoneOut", zoneID[2]),
+    function(player)
+        xi.dynamis.zoneOnZoneOut(player) -- Run onZoneIn functions.
+    end)
     m:addOverride(string.format("xi.zones.%s.Zone.onZoneTick", zoneID[2]),
     function(zone)
         xi.dynamis.handleDynamis(zone)
     end)
 end
+
 
 for _, zoneID in pairs(startingZones) do
     if zoneID[3] >= 7 then

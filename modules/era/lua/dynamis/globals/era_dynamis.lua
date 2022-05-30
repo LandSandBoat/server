@@ -704,6 +704,7 @@ xi.dynamis.handleDynamis = function(zone)
             xi.dynamis.updatePlayerHourglass(player, zoneDynamistoken)
             player:setCharVar("Requires_Initial_Update", 0)
         end
+        
         if player:getGMLevel() < 2 then -- GMs can stay in zone until expiry.
             local hasValidHourglass = xi.dynamis.verifyHoldsValidHourglass(player, zoneDynamistoken, zoneTimepoint) -- Checks for a valid hourglass.
             if hasValidHourglass ~= true then
@@ -917,6 +918,7 @@ xi.dynamis.ejectPlayer = function(player)
     local zoneID = player:getZoneID()
     if player:getCurrentRegion() == xi.region.DYNAMIS then
         if player:getLocalVar("Received_Eject_Warning") ~= 1 then
+            player:delStatusEffectSilent(xi.effect.BATTLEFIELD)
             player:timer(1000, function(player) player:messageSpecial(xi.dynamis.dynaIDLookup[zoneID].text.NO_LONGER_HAVE_CLEARANCE, 0, 30) end) -- Wait 1 second, send no clearance message.
             player:setLocalVar("Received_Eject_Warning", 1)
             player:setCharVar(string.format("[DYNA]EjectPlayer_%s", xi.dynamis.dynaInfoEra[zoneID].dynaZone), -1) -- Reset player's eject timer.
@@ -1131,6 +1133,7 @@ m:addOverride("xi.dynamis.zoneOnZoneIn", function(player, prevZone)
     local info = xi.dynamis.dynaInfoEra[zoneID]
     local ID = zones[zoneID]
 
+    player:addStatusEffectEx(xi.effect.BATTLEFIELD, 0, 1, 0, 0, true)
     -- usually happens when zoning in with !zone command
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then player:setPos(info.entryPos[1], info.entryPos[2], info.entryPos[3], info.entryPos[4]) end -- If player is in void, move player to entry.
 
@@ -1154,6 +1157,12 @@ m:addOverride("xi.dynamis.zoneOnZoneIn", function(player, prevZone)
 
     return -1
 end)
+
+xi.dynamis.zoneOnZoneOut = function(player)
+    if player:hasStatusEffect(xi.effect.BATTLEFIELD) then
+        player:delStatusEffectSilent(xi.effect.BATTLEFIELD)
+    end
+end
 
 -- Disable Base LSB Additional Functions
 m:addOverride("xi.dynamis.somnialThresholdOnTrigger", function(player,npc) end)

@@ -1040,6 +1040,9 @@ end
 
 xi.dynamis.setMobStats = function(mob)
     if mob ~= nil then
+        mob:setMobType(xi.mobskills.mobType.BATTLEFIELD)
+        mob:addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0, true)
+        mob:setMobMod(xi.mobMod.CHECK_AS_NM, 1)
         local job = mob:getMainJob()
 
         local familyEES =
@@ -1079,7 +1082,6 @@ xi.dynamis.setMobStats = function(mob)
 
         mob:setMobMod(xi.mobMod.HP_SCALE, 132)
         mob:setHP(mob:getMaxHP())
-        mob:setMobType(xi.mobskills.mobType.NORMAL)
         mob:setMobLevel(math.random(78,80))
         mob:setTrueDetection(true)
 
@@ -1179,7 +1181,9 @@ end
 
 xi.dynamis.setNMStats = function(mob)
     local job = mob:getMainJob()
-    mob:setMobType(xi.mobskills.mobType.NOTORIOUS)
+    mob:setMobType(xi.mobskills.mobType.BATTLEFIELD)
+    mob:addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0, true)
+    mob:setMobMod(xi.mobMod.CHECK_AS_NM, 2)
     mob:setMobMod(xi.mobMod.HP_SCALE, 132)
     mob:setHP(mob:getMaxHP())
     mob:setMobLevel(math.random(80,82))
@@ -1202,7 +1206,9 @@ xi.dynamis.setStatueStats = function(mob, mobIndex)
     local zoneID = mob:getZoneID()
     local eyes = xi.dynamis.mobList[zoneID][mobIndex].eyes
     mob:setRoamFlags(xi.roamFlag.EVENT)
-    mob:setMobType(xi.mobskills.mobType.NOTORIOUS)
+    mob:setMobType(xi.mobskills.mobType.BATTLEFIELD)
+    mob:addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0, true)
+    mob:setMobMod(xi.mobMod.CHECK_AS_NM, 2)
     mob:setMobLevel(math.random(82,84))
     mob:setMod(xi.mod.STR, -5)
     mob:setMod(xi.mod.VIT, -5)
@@ -1229,14 +1235,18 @@ xi.dynamis.setStatueStats = function(mob, mobIndex)
 end
 
 xi.dynamis.setMegaBossStats = function(mob)
-    mob:setMobType(xi.mobskills.mobType.NOTORIOUS)
+    mob:setMobType(xi.mobskills.mobType.BATTLEFIELD)
+    mob:addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0, true)
+    mob:setMobMod(xi.mobMod.CHECK_AS_NM, 2)
     mob:setMobLevel(88)
     mob:setMod(xi.mod.STR, -10)
     mob:setTrueDetection(true)
-    mob:setMobMod(xi.mobMod.CHECK_AS_NM, 2)
 end
 
 xi.dynamis.setPetStats = function(mob)
+    mob:setMobType(xi.mobskills.mobType.BATTLEFIELD)
+    mob:addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0, true)
+    mob:setMobMod(xi.mobMod.CHECK_AS_NM, 1)
     mob:setMobLevel(78)
     mob:setMod(xi.mod.STR, -40)
     mob:setMod(xi.mod.INT, -30)
@@ -1245,10 +1255,12 @@ xi.dynamis.setPetStats = function(mob)
     mob:setMod(xi.mod.ATTP, -20)
     mob:setMod(xi.mod.DEFP, -5)
     mob:setTrueDetection(true)
-    mob:setMobMod(xi.mobMod.CHECK_AS_NM, 2)
 end
 
 xi.dynamis.setAnimatedWeaponStats = function(mob)
+    mob:setMobType(xi.mobskills.mobType.BATTLEFIELD)
+    mob:addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0, true)
+    mob:setMobMod(xi.mobMod.CHECK_AS_NM, 2)
     mob:setMobMod(xi.mobMod.NO_MOVE, 0)
     mob:setMobMod(xi.mobMod.HP_HEAL_CHANCE, 90)
     mob:setMod(xi.mod.STUNRESTRAIT, 75)
@@ -1257,15 +1269,6 @@ xi.dynamis.setAnimatedWeaponStats = function(mob)
     mob:setMod(xi.mod.SILENCERESTRAIT, 100)
     mob:setMod(xi.mod.LULLABYRESTRAIT, 100)
     mob:setMod(xi.mod.SLEEPRESTRAIT, 100)
-    mob:setMobMod(xi.mobMod.CHECK_AS_NM, 2)
-end
-
-xi.dynamis.setEyeStats = function(mob)
-    mob:setMobType(xi.mobskills.mobType.NOTORIOUS)
-    mob:setMobLevel(math.random(82,84))
-    mob:setMod(xi.mod.DEF, 420)
-    mob:addMod(xi.mod.MDEF, 150)
-    mob:addMod(xi.mod.DMGMAGIC, -25)
     mob:setMobMod(xi.mobMod.CHECK_AS_NM, 2)
 end
 
