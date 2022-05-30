@@ -24,7 +24,9 @@ local nms_to_persist =
 	{ "Monastic_Cavern", "Orcish_Overlord", function() return 75600 + math.random(0, 6) * 1800 end }, -- 21 - 24 hours with half hour windows
 	{ "Castle_Oztroja", "Yagudo_High_Priest", function() return 75600 + math.random(0, 6) * 1800 end }, -- 21 - 24 hours with half hour windows
 	{ "Labyrinth_of_Onzozo", "Lord_of_Onzozo", function() return 75600 + math.random(0, 6) * 1800 end }, -- 21 - 24 hours with half hour windows
-	{ "Ro_Maeve", "Shikigami_Weapon", function() return 75600 + math.random(0, 6) * 1800 end }, -- 21 - 24 hours with half hour windows	
+	{ "Ro_Maeve", "Shikigami_Weapon", function() return 75600 + math.random(0, 6) * 1800 end }, -- 21 - 24 hours with half hour windows
+	{ "Jugner_Forest", "Knight_Crab", function() return 75600 + math.random(0, 6) * 1800 end }, -- 21 - 24 hours with half hour windows		
+	{ "Jugner_Forest", "King_Arthro", function() return 75600 + math.random(0, 6) * 1800 end }, -- 21 - 24 hours with half hour windows			
 }
 
 -- NOTE: At the time we iterate over these entries, the Lua zone and mob objects won't be ready,
