@@ -17,9 +17,9 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 1, 0, 30))
 
     -- Different mechanics based on the antlion using it
-    local PoolID = mob:getPool()
+    local poolID = mob:getPool()
 
-    if (PoolID == 1318) then -- if the pool ID == Feeler Antlion ID
+    if (poolID == 1318) then -- if the pool ID == Feeler Antlion ID
         local npcX = mob:getXPos()
         local npcY = mob:getYPos()
         local npcZ = mob:getZPos()
@@ -45,7 +45,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
             executioner:setSpawn(npcX-1, npcY-2, npcZ-1) -- Set its spawn location.
             SpawnMob(spawnId):updateEnmity(target)
         end
-    elseif (PoolID == 4046) then
+    elseif (poolID == 4046) then
         -- Tuchulcha (Sheep in Antlion's Clothing)
         -- Resets all enmity
         local allies = mob:getBattlefield():getAllies()

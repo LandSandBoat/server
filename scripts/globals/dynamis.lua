@@ -408,12 +408,12 @@ end
 xi.dynamis.zoneOnInitialize = function(zone)
     local zoneId = zone:getID()
     local ID = zones[zoneId]
-    local TE = ID.mob.TIME_EXTENSION
-    local RF = ID.mob.REFILL_STATUE
+    local timeExtensionMobs = ID.mob.TIME_EXTENSION
+    local refillMobs = ID.mob.REFILL_STATUE
 
     -- spawn one of each grouped TEs
-    if TE then
-        for _, v in pairs(TE) do
+    if timeExtensionMobs then
+        for _, v in pairs(timeExtensionMobs) do
             local group = {}
             if type(v.mob) == "number" then
                 group = {v.mob}
@@ -427,8 +427,8 @@ xi.dynamis.zoneOnInitialize = function(zone)
     end
 
     -- spawn one of each grouped refill statue
-    if RF then
-        for _, g in pairs(RF) do
+    if refillMobs then
+        for _, g in pairs(refillMobs) do
             local group = {}
             for _, m in pairs(g) do
                 table.insert(group, m.mob)
@@ -521,15 +521,15 @@ xi.dynamis.timeExtensionOnDeath = function(mob, player, isKiller)
     local mobId = mob:getID()
     local zoneId = mob:getZoneID()
     local ID = zones[zoneId]
-    local TE = ID.mob.TIME_EXTENSION
+    local timeExtensionMobs = ID.mob.TIME_EXTENSION
 
-    if TE then
+    if timeExtensionMobs then
         local found = false
         local te = nil
         local group = {}
 
         -- find this TE's group
-        for _, t in pairs(TE) do
+        for _, t in pairs(timeExtensionMobs) do
             if type(t.mob) == "number" then
                 group = {t.mob}
             elseif type(t.mob) == "table" then
@@ -579,13 +579,13 @@ xi.dynamis.refillStatueOnSpawn = function(mob)
     local mobId = mob:getID()
     local zoneId = mob:getZoneID()
     local ID = zones[zoneId]
-    local RF = ID.mob.REFILL_STATUE
+    local refillMobs = ID.mob.REFILL_STATUE
 
-    if RF then
+    if refillMobs then
         local found = false
 
         -- set this statue's eye color
-        for _, g in pairs(RF) do
+        for _, g in pairs(refillMobs) do
             for _, m in pairs(g) do
                 if m.mob == mobId then
                     found = true
@@ -610,15 +610,15 @@ xi.dynamis.refillStatueOnDeath = function(mob, player, isKiller)
     local mobId = mob:getID()
     local zoneId = mob:getZoneID()
     local ID = zones[zoneId]
-    local RF = ID.mob.REFILL_STATUE
+    local refillMobs = ID.mob.REFILL_STATUE
 
-    if RF then
+    if refillMobs then
         local found = false
         local group = {}
         local eye = nil
 
         -- find this statue's group and eye color
-        for _, g in pairs(RF) do
+        for _, g in pairs(refillMobs) do
             group = {}
             for _, m in pairs(g) do
                 table.insert(group, m.mob)
@@ -674,10 +674,10 @@ xi.dynamis.qmOnTrade = function(player, npc, trade)
     local npcId = npc:getID()
     local zoneId = npc:getZoneID()
     local ID = zones[zoneId]
-    local QM = ID.npc.QM
+    local qmNpcs = ID.npc.QM
 
-    if QM then
-        local info = QM[npcId]
+    if qmNpcs then
+        local info = qmNpcs[npcId]
 
         if info then
             for _, v in pairs(info.trade) do
@@ -706,10 +706,10 @@ xi.dynamis.qmOnTrigger = function(player, npc)
     local npcId = npc:getID()
     local zoneId = npc:getZoneID()
     local ID = zones[zoneId]
-    local QM = ID.npc.QM
+    local qmNpcs = ID.npc.QM
 
-    if QM then
-        local info = QM[npcId]
+    if qmNpcs then
+        local info = qmNpcs[npcId]
 
         if info then
             if info.param then

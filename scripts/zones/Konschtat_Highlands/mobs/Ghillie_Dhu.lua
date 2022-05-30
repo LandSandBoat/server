@@ -29,9 +29,9 @@ end
 entity.onMobFight = function(mob, target)
     -- Guesstimating the regain scales from 1-100,
     -- nobody has the excact values but it scales with HP.
-    local TP = (100 - mob:getHPP()) * 0.5
-    if mob:getMod(xi.mod.REGAIN) ~= utils.clamp(TP, 1, 100) then
-        mob:setMod(xi.mod.REGAIN, utils.clamp(TP, 1, 100))
+    local tp = (100 - mob:getHPP()) * 0.5
+    if mob:getMod(xi.mod.REGAIN) ~= utils.clamp(tp, 1, 100) then
+        mob:setMod(xi.mod.REGAIN, utils.clamp(tp, 1, 100))
     end
 end
 

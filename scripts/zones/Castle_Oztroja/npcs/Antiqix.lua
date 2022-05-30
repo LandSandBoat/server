@@ -11,7 +11,7 @@ require("scripts/globals/dynamis")
 -----------------------------------
 local entity = {}
 
-local TIMELESS_HOURGLASS = 4236
+local timelessHourglassID = 4236
 local currency =
 {
     1449,
@@ -55,7 +55,7 @@ entity.onTrade = function(player, npc, trade)
             player:startEvent(54)
 
         -- return timeless hourglass for refund
-        elseif (count == 1 and trade:hasItemQty(TIMELESS_HOURGLASS, 1)) then
+        elseif (count == 1 and trade:hasItemQty(timelessHourglassID, 1)) then
             player:startEvent(97)
 
         -- currency exchanges
@@ -86,7 +86,7 @@ end
 
 entity.onTrigger = function(player, npc)
     if (player:hasKeyItem(xi.ki.VIAL_OF_SHROUDED_SAND)) then
-        player:startEvent(53, currency[1], xi.settings.CURRENCY_EXCHANGE_RATE, currency[2], xi.settings.CURRENCY_EXCHANGE_RATE, currency[3], xi.settings.PRISMATIC_HOURGLASS_COST, TIMELESS_HOURGLASS, xi.settings.TIMELESS_HOURGLASS_COST)
+        player:startEvent(53, currency[1], xi.settings.CURRENCY_EXCHANGE_RATE, currency[2], xi.settings.CURRENCY_EXCHANGE_RATE, currency[3], xi.settings.PRISMATIC_HOURGLASS_COST, timelessHourglassID, xi.settings.TIMELESS_HOURGLASS_COST)
     else
         player:startEvent(50)
     end
@@ -97,7 +97,7 @@ entity.onEventUpdate = function(player, csid, option)
 
         -- asking about hourglasses
         if (option == 1) then
-            if (not player:hasItem(TIMELESS_HOURGLASS)) then
+            if (not player:hasItem(timelessHourglassID)) then
                 -- must figure out what changes here to prevent the additional dialog
                 -- player:updateEvent(?)
             end

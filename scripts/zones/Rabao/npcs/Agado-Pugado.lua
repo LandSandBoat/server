@@ -16,17 +16,16 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-
-    local TrialByWind = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WIND)
-    local WhisperOfGales = player:hasKeyItem(xi.ki.WHISPER_OF_GALES)
-    local CarbuncleDebacle = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CARBUNCLE_DEBACLE)
-    local CarbuncleDebacleProgress = player:getCharVar("CarbuncleDebacleProgress")
+    local trialByWind = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WIND)
+    local whisperOfGales = player:hasKeyItem(xi.ki.WHISPER_OF_GALES)
+    local carbuncleDebacle = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CARBUNCLE_DEBACLE)
+    local carbuncleDebacleProgress = player:getCharVar("CarbuncleDebacleProgress")
 
     -----------------------------------
     -- Carbuncle Debacle
-    if (CarbuncleDebacle == QUEST_ACCEPTED and CarbuncleDebacleProgress == 5 and player:hasKeyItem(xi.ki.DAZE_BREAKER_CHARM) == true) then
+    if (carbuncleDebacle == QUEST_ACCEPTED and carbuncleDebacleProgress == 5 and player:hasKeyItem(xi.ki.DAZE_BREAKER_CHARM) == true) then
         player:startEvent(86) -- get the wind pendulum, lets go to Cloister of Gales
-    elseif (CarbuncleDebacle == QUEST_ACCEPTED and CarbuncleDebacleProgress == 6) then
+    elseif (carbuncleDebacle == QUEST_ACCEPTED and carbuncleDebacleProgress == 6) then
         if (player:hasItem(1174) == false) then
             player:startEvent(87, 0, 1174, 0, 0, 0, 0, 0, 0) -- "lost the pendulum?" This one too~???
         else
@@ -34,13 +33,13 @@ entity.onTrigger = function(player, npc)
         end
     -----------------------------------
     -- Trial by Wind
-    elseif ((TrialByWind == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.SELBINA_RABAO) >= 5) or (TrialByWind == QUEST_COMPLETED and os.time() > player:getCharVar("TrialByWind_date"))) then
+    elseif ((trialByWind == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.SELBINA_RABAO) >= 5) or (trialByWind == QUEST_COMPLETED and os.time() > player:getCharVar("TrialByWind_date"))) then
         player:startEvent(66, 0, 331) -- Start and restart quest "Trial by Wind"
-    elseif (TrialByWind == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.TUNING_FORK_OF_WIND) == false and WhisperOfGales == false) then
+    elseif (trialByWind == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.TUNING_FORK_OF_WIND) == false and whisperOfGales == false) then
         player:startEvent(107, 0, 331) -- Defeat against Avatar : Need new Fork
-    elseif (TrialByWind == QUEST_ACCEPTED and WhisperOfGales == false) then
+    elseif (trialByWind == QUEST_ACCEPTED and whisperOfGales == false) then
         player:startEvent(67, 0, 331, 3)
-    elseif (TrialByWind == QUEST_ACCEPTED and WhisperOfGales) then
+    elseif (trialByWind == QUEST_ACCEPTED and whisperOfGales) then
         local numitem = 0
 
         if (player:hasItem(17627)) then numitem = numitem + 1; end  -- Garuda's Dagger

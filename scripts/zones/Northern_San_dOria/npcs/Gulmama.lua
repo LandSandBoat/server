@@ -17,26 +17,25 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-
-    local TrialByIce = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TRIAL_BY_ICE)
-    local WhisperOfFrost = player:hasKeyItem(xi.ki.WHISPER_OF_FROST)
-    local ClassReunion = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CLASS_REUNION)
-    local ClassReunionProgress = player:getCharVar("ClassReunionProgress")
+    local trialByIce = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TRIAL_BY_ICE)
+    local whisperOfFrost = player:hasKeyItem(xi.ki.WHISPER_OF_FROST)
+    local classReunion = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CLASS_REUNION)
+    local classReunionProgress = player:getCharVar("ClassReunionProgress")
 
     -----------------------------------
     -- Class Reunion
-    if (ClassReunion == 1 and ClassReunionProgress == 4) then
+    if (classReunion == 1 and classReunionProgress == 4) then
         player:startEvent(713, 0, 1171, 0, 0, 0, 0, 0, 0) -- he gives you an ice pendulum and wants you to go to Cloister of Frost
-    elseif (ClassReunion == 1 and ClassReunionProgress == 5 and player:hasItem(1171) == false) then
+    elseif (classReunion == 1 and classReunionProgress == 5 and player:hasItem(1171) == false) then
         player:startEvent(712, 0, 1171, 0, 0, 0, 0, 0, 0) -- lost the ice pendulum need another one
     -----------------------------------
-    elseif ((TrialByIce == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 6) or (TrialByIce == QUEST_COMPLETED and os.time() > player:getCharVar("TrialByIce_date"))) then
+    elseif ((trialByIce == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 6) or (trialByIce == QUEST_COMPLETED and os.time() > player:getCharVar("TrialByIce_date"))) then
         player:startEvent(706, 0, xi.ki.TUNING_FORK_OF_ICE) -- Start and restart quest "Trial by ice"
-    elseif (TrialByIce == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.TUNING_FORK_OF_ICE) == false and WhisperOfFrost == false) then
+    elseif (trialByIce == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.TUNING_FORK_OF_ICE) == false and whisperOfFrost == false) then
         player:startEvent(718, 0, xi.ki.TUNING_FORK_OF_ICE) -- Defeat against Shiva : Need new Fork
-    elseif (TrialByIce == QUEST_ACCEPTED and WhisperOfFrost == false) then
+    elseif (trialByIce == QUEST_ACCEPTED and whisperOfFrost == false) then
         player:startEvent(707, 0, xi.ki.TUNING_FORK_OF_ICE, 4)
-    elseif (TrialByIce == QUEST_ACCEPTED and WhisperOfFrost) then
+    elseif (trialByIce == QUEST_ACCEPTED and whisperOfFrost) then
         local numitem = 0
 
         if (player:hasItem(17492)) then numitem = numitem + 1; end  -- Shiva's Claws
@@ -49,14 +48,12 @@ entity.onTrigger = function(player, npc)
     else
         player:startEvent(710) -- Standard dialog
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
     if (csid == 706 and option == 1) then
         if (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TRIAL_BY_ICE) == QUEST_COMPLETED) then
             player:delQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TRIAL_BY_ICE)
@@ -104,7 +101,6 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 1171)
         end
     end
-
 end
 
 return entity

@@ -7,34 +7,37 @@ require("scripts/globals/msg")
 -----------------------------------
 local entity = {}
 
-local WYVERN_OFFENSIVE = 1
-local WYVERN_DEFENSIVE = 2
-local WYVERN_MULTI = 3
+local wyvernCapabilities =
+{
+    OFFENSIVE = 1,
+    DEFENSIVE = 2,
+    MULTI     = 3,
+}
 
 local wyvernTypes =
 {
-    [xi.job.WAR] = WYVERN_OFFENSIVE,
-    [xi.job.MNK] = WYVERN_OFFENSIVE,
-    [xi.job.WHM] = WYVERN_DEFENSIVE,
-    [xi.job.BLM] = WYVERN_DEFENSIVE,
-    [xi.job.RDM] = WYVERN_DEFENSIVE,
-    [xi.job.THF] = WYVERN_OFFENSIVE,
-    [xi.job.PLD] = WYVERN_MULTI,
-    [xi.job.DRK] = WYVERN_MULTI,
-    [xi.job.BST] = WYVERN_OFFENSIVE,
-    [xi.job.BRD] = WYVERN_MULTI,
-    [xi.job.RNG] = WYVERN_OFFENSIVE,
-    [xi.job.SAM] = WYVERN_OFFENSIVE,
-    [xi.job.NIN] = WYVERN_MULTI,
-    [xi.job.DRG] = WYVERN_OFFENSIVE,
-    [xi.job.SMN] = WYVERN_DEFENSIVE,
-    [xi.job.BLU] = WYVERN_DEFENSIVE,
-    [xi.job.COR] = WYVERN_OFFENSIVE,
-    [xi.job.PUP] = WYVERN_OFFENSIVE,
-    [xi.job.DNC] = WYVERN_OFFENSIVE,
-    [xi.job.SCH] = WYVERN_DEFENSIVE,
-    [xi.job.GEO] = WYVERN_DEFENSIVE,
-    [xi.job.RUN] = WYVERN_MULTI,
+    [xi.job.WAR] = wyvernCapabilities.OFFENSIVE,
+    [xi.job.MNK] = wyvernCapabilities.OFFENSIVE,
+    [xi.job.WHM] = wyvernCapabilities.DEFENSIVE,
+    [xi.job.BLM] = wyvernCapabilities.DEFENSIVE,
+    [xi.job.RDM] = wyvernCapabilities.DEFENSIVE,
+    [xi.job.THF] = wyvernCapabilities.OFFENSIVE,
+    [xi.job.PLD] = wyvernCapabilities.MULTI,
+    [xi.job.DRK] = wyvernCapabilities.MULTI,
+    [xi.job.BST] = wyvernCapabilities.OFFENSIVE,
+    [xi.job.BRD] = wyvernCapabilities.MULTI,
+    [xi.job.RNG] = wyvernCapabilities.OFFENSIVE,
+    [xi.job.SAM] = wyvernCapabilities.OFFENSIVE,
+    [xi.job.NIN] = wyvernCapabilities.MULTI,
+    [xi.job.DRG] = wyvernCapabilities.OFFENSIVE,
+    [xi.job.SMN] = wyvernCapabilities.DEFENSIVE,
+    [xi.job.BLU] = wyvernCapabilities.DEFENSIVE,
+    [xi.job.COR] = wyvernCapabilities.OFFENSIVE,
+    [xi.job.PUP] = wyvernCapabilities.OFFENSIVE,
+    [xi.job.DNC] = wyvernCapabilities.OFFENSIVE,
+    [xi.job.SCH] = wyvernCapabilities.DEFENSIVE,
+    [xi.job.GEO] = wyvernCapabilities.DEFENSIVE,
+    [xi.job.RUN] = wyvernCapabilities.MULTI,
 }
 
 local function doHealingBreath(player, threshold, breath)
@@ -94,7 +97,7 @@ entity.onMobSpawn = function(mob)
     elseif mob:getMainLvl() >= 40 then healingbreath = xi.jobAbility.HEALING_BREATH_III
     elseif mob:getMainLvl() >= 20 then healingbreath = xi.jobAbility.HEALING_BREATH_II
     end
-    if wyvernType == WYVERN_DEFENSIVE then
+    if wyvernType == wyvernCapabilities.DEFENSIVE then
         master:addListener("WEAPONSKILL_USE", "PET_WYVERN_WS", function(player, target, skillid)
             if not doStatusBreath(player, player) then
                 local party = player:getParty()
@@ -115,7 +118,7 @@ entity.onMobSpawn = function(mob)
                 doHealingBreath(player, threshold, healingbreath)
             end)
         end
-    elseif wyvernType == WYVERN_OFFENSIVE or wyvernType == WYVERN_MULTI then
+    elseif wyvernType == wyvernCapabilities.OFFENSIVE or wyvernType == wyvernCapabilities.MULTI then
         master:addListener("WEAPONSKILL_USE", "PET_WYVERN_WS", function(player, target, skillid)
             local weaknessTargetChance = 75
             local breaths = {}
@@ -164,7 +167,7 @@ entity.onMobSpawn = function(mob)
             player:getPet():useJobAbility(breaths[math.random(#breaths)], target)
         end)
     end
-    if wyvernType == WYVERN_MULTI then
+    if wyvernType == wyvernCapabilities.MULTI then
         master:addListener("MAGIC_USE", "PET_WYVERN_MAGIC", function(player, target, spell, action)
             -- check master first!
             local threshold = 25

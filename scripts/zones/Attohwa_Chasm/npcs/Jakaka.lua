@@ -19,17 +19,16 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
+    local miasmaFilterCD = player:getCharVar("[ENM]MiasmaFilter")
 
-    local MiasmaFilterCD = player:getCharVar("[ENM]MiasmaFilter")
-
-    if (player:hasKeyItem(xi.ki.MIASMA_FILTER)) then
+    if player:hasKeyItem(xi.ki.MIASMA_FILTER) then
         player:startEvent(11)
     else
-        if (MiasmaFilterCD >= os.time()) then
+        if miasmaFilterCD >= os.time() then
             -- Both Vanadiel time and unix timestamps are based on seconds. Add the difference to the event.
-            player:startEvent(14, VanadielTime()+(MiasmaFilterCD-os.time()))
+            player:startEvent(14, VanadielTime() + (miasmaFilterCD - os.time()))
         else
-            if (player:hasItem(1778) == true or player:hasItem(1777) == true) then -- Parradamo Stones, Flaxen Pouch
+            if player:hasItem(1778) == true or player:hasItem(1777) then -- Parradamo Stones, Flaxen Pouch
                 player:startEvent(15)
             else
                 player:startEvent(13)

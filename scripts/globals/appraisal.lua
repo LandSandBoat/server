@@ -1470,14 +1470,14 @@ xi.appraisalUtil.assaultChestTrigger = function(player, npc, qItemTable, regItem
     if instance:completed() and npc:getLocalVar("open") == 0 then
         if xi.appraisalUtil.canGetUnappraisedItem(player, area) then
             xi.appraisalUtil.pickUnappraisedItem(player, npc, qItemTable)
-            local UnappraisedItem = npc:getLocalVar("UnappraisedItem")
+            local unappraisedItem = npc:getLocalVar("UnappraisedItem")
             if player:getFreeSlotsCount() == 0 then
-                player:messageSpecial(zones[player:getZoneID()].text.ITEM_CANNOT_BE_OBTAINED, UnappraisedItem)
+                player:messageSpecial(zones[player:getZoneID()].text.ITEM_CANNOT_BE_OBTAINED, unappraisedItem)
                 return
             else
-                player:addItem({id = UnappraisedItem, appraisal = area})
+                player:addItem({id = unappraisedItem, appraisal = area})
                 for _, players in pairs(chars) do
-                    players:messageName(zones[player:getZoneID()].text.PLAYER_OBTAINS_ITEM, player, UnappraisedItem)
+                    players:messageName(zones[player:getZoneID()].text.PLAYER_OBTAINS_ITEM, player, unappraisedItem)
                 end
             end
         end

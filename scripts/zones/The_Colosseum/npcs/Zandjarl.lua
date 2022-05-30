@@ -9,30 +9,30 @@ local ID = require("scripts/zones/The_Colosseum/IDs")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local RESULT = nil
-    local COUNT = trade:getItemCount()
-    local TOTAL = player:getCurrency("jetton")
-    local MAX = 100000000
+    local result = nil
+    local count = trade:getItemCount()
+    local total = player:getCurrency("jetton")
+    local max = 100000000
 
-    if (trade:hasItemQty(2184, COUNT)) then
-        RESULT = 2*COUNT
-    elseif (trade:hasItemQty(2185, COUNT)) then
-        RESULT = 10*COUNT
-    elseif (trade:hasItemQty(2186, COUNT)) then
-        RESULT = 30*COUNT
-    elseif (trade:hasItemQty(2187, COUNT)) then
-        RESULT = 200*COUNT
+    if (trade:hasItemQty(2184, count)) then
+        result = 2 * count
+    elseif (trade:hasItemQty(2185, count)) then
+        result = 10 * count
+    elseif (trade:hasItemQty(2186, count)) then
+        result = 30 * count
+    elseif (trade:hasItemQty(2187, count)) then
+        result = 200 * count
     end
 
-    if (RESULT ~= nil) then
-        if ((RESULT + TOTAL) > MAX) then
+    if (result ~= nil) then
+        if ((result + total) > max) then
             -- player:startEvent(47); ..it no work..
             npc:showText(npc, ID.text.EXCEED_THE_LIMIT_OF_JETTONS)
         else
             -- packet cap says its a "showText" thing..
-            npc:showText(npc, ID.text.I_CAN_GIVE_YOU, RESULT)
+            npc:showText(npc, ID.text.I_CAN_GIVE_YOU, result)
             npc:showText(npc, ID.text.THANKS_FOR_STOPPING_BY)
-            player:addCurrency("jetton", RESULT)
+            player:addCurrency("jetton", result)
             player:tradeComplete()
         end
     end
