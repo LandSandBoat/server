@@ -275,7 +275,8 @@ xi.dynamis.mobList[zoneID].waveDefeatRequirements = { { }, {"KoDho_killed", "GiP
 ------------------------------------------
 --xi.dynamis.mobList[zoneID].wave# = { MobIndex#1, MobIndex#2, MobIndex#3 }
 
-xi.dynamis.mobList[zoneID][1].wave = {
+xi.dynamis.mobList[zoneID][1].wave =
+{
     1  , -- 001-G/R
     2  , -- 002-G/R(30)
     3  , -- 003-G/R
@@ -377,15 +378,16 @@ xi.dynamis.mobList[zoneID][1].wave = {
     106, -- 106-G/R
     107, -- 107-G/R
     108, -- 108-G/R
-    109,  -- 109-G/R
+    109  -- 109-G/R
 }
 
-xi.dynamis.mobList[zoneID][2].wave = {
-    110, -- 110-G/R
-    111,
+xi.dynamis.mobList[zoneID][2].wave =
+{
+    110 -- 110-G/R
 }
 
-xi.dynamis.mobList[zoneID][3].wave = {
+xi.dynamis.mobList[zoneID][3].wave =
+{
     112, -- 112-G/R
     113, -- 113-Replica NM (Goblin Golem)(30)
     114, -- 114-G/R
@@ -416,7 +418,7 @@ xi.dynamis.mobList[zoneID][3].wave = {
     139, -- 139-G/R
     140, -- 140-G/R
     141, -- 141-G/R
-    142,  -- 142-G/R
+    142  -- 142-G/R
 }
 
 ----------------------------------------------------------------------------------------------------

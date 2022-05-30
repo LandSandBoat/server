@@ -31,17 +31,12 @@ xi.dynamis = xi.dynamis or {}
 --------------------------------------------
 
 xi.dynamis.spawnWave = function(zone, zoneID, waveNumber)
-    for _, index in pairs(xi.dynamis.mobList[zoneID][waveNumber].wave) do
-        local mobIndex = xi.dynamis.mobList[zoneID][waveNumber].wave[index]
-        if mobIndex ~= nil then
-            print(string.format("MobIndex: %s", mobIndex))
-            local mobType = xi.dynamis.mobList[zoneID][mobIndex].info[1]
-            print(string.format("MobType: %s", mobType))
-            if mobType == "NM" then -- NMs
-                xi.dynamis.nmDynamicSpawn(mobIndex, nil, true, zoneID)
-            elseif mobType ~= nil then -- Nightmare Mobs and Statues
-                xi.dynamis.nonStandardDynamicSpawn(mobIndex, nil, true, zoneID)
-            end
+    for key, mobIndex in pairs(xi.dynamis.mobList[zoneID][waveNumber].wave) do
+        local mobType = xi.dynamis.mobList[zoneID][mobIndex].info[1]
+        if mobType == "NM" then -- NMs
+            xi.dynamis.nmDynamicSpawn(mobIndex, nil, true, zoneID)
+        else -- Nightmare Mobs and Statues
+            xi.dynamis.nonStandardDynamicSpawn(mobIndex, nil, true, zoneID)
         end
     end
     zone:setLocalVar(string.format("Wave_%i_Spawned", waveNumber), 1)
