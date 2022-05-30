@@ -44,25 +44,25 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local TheLostCardien = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_LOST_CARDIAN)
-    local CooksPride = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COOK_S_PRIDE)
+    local theLostCardien = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_LOST_CARDIAN)
+    local cooksPride = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COOK_S_PRIDE)
 
     if
-        CooksPride == QUEST_COMPLETED and
-        TheLostCardien == QUEST_AVAILABLE and
+        cooksPride == QUEST_COMPLETED and
+        theLostCardien == QUEST_AVAILABLE and
         player:getCharVar("theLostCardianVar") == 2
     then
         player:startEvent(33) -- Long CS & Finish Quest "The Lost Cardian"
 
     elseif
-        CooksPride == QUEST_COMPLETED and
-        TheLostCardien == QUEST_AVAILABLE and
+        cooksPride == QUEST_COMPLETED and
+        theLostCardien == QUEST_AVAILABLE and
         player:getCharVar("theLostCardianVar") == 3
     then
         player:startEvent(34) -- Shot CS & Finish Quest "The Lost Cardian"
 
     elseif
-        TheLostCardien == QUEST_COMPLETED and
+        theLostCardien == QUEST_COMPLETED and
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_KIND_CARDIAN) == QUEST_ACCEPTED
     then
         player:startEvent(32)

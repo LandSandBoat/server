@@ -15,11 +15,11 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local Raptor_Rapture = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.RAPTOR_RAPTURE)
-    local Raptor_Rapture_Status = player:getCharVar("Raptor_Rapture_Status")
+    local raptorRapture = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.RAPTOR_RAPTURE)
+    local raptorRaptureStatus = player:getCharVar("Raptor_Rapture_Status")
 
-    if (Raptor_Rapture == QUEST_AVAILABLE) then
-        if (Raptor_Rapture_Status < 3) then
+    if (raptorRapture == QUEST_AVAILABLE) then
+        if (raptorRaptureStatus < 3) then
             -- Starts chain of events for the introduction CS for Quest: 'Raptor Rapture'.
             -- If player somehow doesn't finish the chain of events, they can just talk to Pagnelle again to retry.
             player:setCharVar("Raptor_Rapture_Status", 1)
@@ -29,14 +29,14 @@ entity.onTrigger = function(player, npc)
             -- Offers Quest: 'Raptor Rapture' if player has yet to accept it.
             player:startEvent(5061)
         end
-    elseif (Raptor_Rapture == QUEST_ACCEPTED) then
-        if (Raptor_Rapture_Status == 4) then
+    elseif (raptorRapture == QUEST_ACCEPTED) then
+        if (raptorRaptureStatus == 4) then
             -- Reminder during Quest: 'Raptor Rapture', speak to Ilney.
             player:startEvent(5033)
-        elseif (Raptor_Rapture_Status == 5) then
+        elseif (raptorRaptureStatus == 5) then
             -- Progresses Quest: 'Raptor Rapture', spoke to Ilney.
             player:startEvent(5035)
-        elseif (Raptor_Rapture_Status == 6) then
+        elseif (raptorRaptureStatus == 6) then
             local Has_Rockberries = player:hasKeyItem(xi.ki.ROCKBERRY1) and player:hasKeyItem(xi.ki.ROCKBERRY2) and player:hasKeyItem(xi.ki.ROCKBERRY3)
             if (Has_Rockberries) then
                 -- Progresses Quest: 'Raptor Rapture', turning in rockberries.
@@ -45,10 +45,10 @@ entity.onTrigger = function(player, npc)
                 -- Reminder during Quest: 'Raptor Rapture', bring rockberries.
                 player:startEvent(5036)
             end
-        elseif (Raptor_Rapture_Status == 7) then
+        elseif (raptorRaptureStatus == 7) then
             -- Reminder during Quest: 'Raptor Rapture', go to Rala.
             player:startEvent(5038)
-        elseif (Raptor_Rapture_Status == 8) then
+        elseif (raptorRaptureStatus == 8) then
             -- Finishes Quest: 'Raptor Rapture'
             player:startEvent(5039)
         end

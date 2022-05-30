@@ -26,11 +26,11 @@ entity.onMobDeath = function(mob, player, isKiller)
 end
 
 entity.onMobDespawn = function(mob)
-    local ToD = GetServerVariable("[POP]Aspidochelone")
-    local kills = GetServerVariable("[PH]Aspidochelone")
-    local popNow = (math.random(1, 5) == 3 or kills > 6)
+    local timeOfDeath = GetServerVariable("[POP]Aspidochelone")
+    local kills       = GetServerVariable("[PH]Aspidochelone")
+    local popNow      = math.random(1, 5) == 3 or kills > 6
 
-    if xi.settings.LandKingSystem_HQ ~= 1 and ToD <= os.time() and popNow then
+    if xi.settings.LandKingSystem_HQ ~= 1 and timeOfDeath <= os.time() and popNow then
         -- 0 = timed spawn, 1 = force pop only, 2 = BOTH
         if xi.settings.LandKingSystem_NQ == 0 then
             DisallowRespawn(ID.mob.ADAMANTOISE, true)
