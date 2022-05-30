@@ -10,7 +10,7 @@ require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
-local EVENT_IDS =
+local eventIds =
 {
     [1] = 10121,
     [2] = 10122,
@@ -25,7 +25,7 @@ entity.onTrade = function(player, npc, trade)
         return
     end
 
-    xi.magian.magianOnTrade(player, npc, trade, xi.itemType.WEAPON, EVENT_IDS)
+    xi.magian.magianOnTrade(player, npc, trade, xi.itemType.WEAPON, eventIds)
 end
 
 entity.onTrigger = function(player, npc)
@@ -33,15 +33,15 @@ entity.onTrigger = function(player, npc)
         return
     end
 
-    xi.magian.magianOnTrigger(player, npc, EVENT_IDS)
+    xi.magian.magianOnTrigger(player, npc, eventIds)
 end
 
 entity.onEventUpdate = function(player, csid, option)
-    xi.magian.magianEventUpdate(player, csid, option, EVENT_IDS)
+    xi.magian.magianEventUpdate(player, csid, option, eventIds)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    xi.magian.magianOnEventFinish(player, csid, option, EVENT_IDS)
+    xi.magian.magianOnEventFinish(player, csid, option, eventIds)
 end
 
 return entity

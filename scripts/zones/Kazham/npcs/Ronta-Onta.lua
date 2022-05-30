@@ -16,16 +16,16 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local TrialByFire = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_FIRE)
-    local WhisperOfFlames = player:hasKeyItem(xi.ki.WHISPER_OF_FLAMES)
+    local trialByFire = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_FIRE)
+    local whisperOfFlames = player:hasKeyItem(xi.ki.WHISPER_OF_FLAMES)
 
-    if ((TrialByFire == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.WINDURST) >= 6) or (TrialByFire == QUEST_COMPLETED and os.time() > player:getCharVar("TrialByFire_date"))) then
+    if ((trialByFire == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.WINDURST) >= 6) or (trialByFire == QUEST_COMPLETED and os.time() > player:getCharVar("TrialByFire_date"))) then
         player:startEvent(270, 0, xi.ki.TUNING_FORK_OF_FIRE) -- Start and restart quest "Trial by Fire"
-    elseif (TrialByFire == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.TUNING_FORK_OF_FIRE) == false and WhisperOfFlames == false) then
+    elseif (trialByFire == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.TUNING_FORK_OF_FIRE) == false and whisperOfFlames == false) then
         player:startEvent(285, 0, xi.ki.TUNING_FORK_OF_FIRE) -- Defeat against Ifrit : Need new Fork
-    elseif (TrialByFire == QUEST_ACCEPTED and WhisperOfFlames == false) then
+    elseif (trialByFire == QUEST_ACCEPTED and whisperOfFlames == false) then
         player:startEvent(271, 0, xi.ki.TUNING_FORK_OF_FIRE, 0)
-    elseif (TrialByFire == QUEST_ACCEPTED and WhisperOfFlames) then
+    elseif (trialByFire == QUEST_ACCEPTED and whisperOfFlames) then
         local numitem = 0
 
         if (player:hasItem(17665)) then numitem = numitem + 1; end  -- Ifrits Blade

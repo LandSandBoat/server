@@ -53,17 +53,16 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
+    local lureSandy = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.LURE_OF_THE_WILDCAT)
+    local wildcatSandy = player:getCharVar("WildcatSandy")
 
-    local LureSandy = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.LURE_OF_THE_WILDCAT)
-    local WildcatSandy = player:getCharVar("WildcatSandy")
-
-    if (LureSandy ~= QUEST_COMPLETED and xi.settings.ENABLE_TOAU == 1) then
-        if (LureSandy == QUEST_AVAILABLE) then
+    if (lureSandy ~= QUEST_COMPLETED and xi.settings.ENABLE_TOAU == 1) then
+        if (lureSandy == QUEST_AVAILABLE) then
             player:startEvent(812)
         else
-            if (WildcatSandy == 0) then
+            if (wildcatSandy == 0) then
                 player:startEvent(813)
-            elseif utils.mask.isFull(WildcatSandy, 20) then
+            elseif utils.mask.isFull(wildcatSandy, 20) then
                 player:startEvent(815)
             else
                 player:startEvent(814)

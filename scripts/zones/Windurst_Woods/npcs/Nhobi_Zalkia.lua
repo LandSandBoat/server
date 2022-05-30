@@ -16,8 +16,9 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local RegionOwner = GetRegionOwner(xi.region.KUZOTZ)
-    if RegionOwner ~= xi.nation.WINDURST then
+    local regionOwner = GetRegionOwner(xi.region.KUZOTZ)
+
+    if regionOwner ~= xi.nation.WINDURST then
         player:showText(npc, ID.text.NHOBI_ZALKIA_CLOSED_DIALOG)
     else
         player:showText(npc, ID.text.NHOBI_ZALKIA_OPEN_DIALOG)

@@ -13,19 +13,17 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
+    local zPos = player:getZPos()
 
-    local Z=player:getZPos()
-
-    if (Z >= -261) then
-        if (player:hasKeyItem(xi.ki.BLUE_BRACELET) == true) then -- Blue Bracelet
+    if zPos >= -261 then
+        if player:hasKeyItem(xi.ki.BLUE_BRACELET) then -- Blue Bracelet
             player:startEvent(61)
         else
             player:messageSpecial(ID.text.ARCH_GLOW_BLUE)
         end
-    elseif (Z <= -262) then
+    elseif zPos <= -262 then
         player:messageSpecial(ID.text.CANNOT_OPEN_SIDE)
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)

@@ -10,9 +10,9 @@ end
 
 entity.onTrigger = function(player, npc)
     -- Removed pending confirmation
-    -- local Hrandom = math.random()
+    -- local hrandom = math.random()
 
-    -- if Hrandom < 0.2 then
+    -- if hrandom < 0.2 then
     --     player:startEvent(27) -- Observed while Three Paths is active
     -- else
     --     player:startEvent(29)

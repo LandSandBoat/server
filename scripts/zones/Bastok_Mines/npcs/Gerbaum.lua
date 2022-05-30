@@ -36,15 +36,15 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    local MineSweep = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.MINESWEEPER)
+    local mineSweep = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.MINESWEEPER)
 
     if csid == 108 then
-        if MineSweep == 0 then
+        if mineSweep == 0 then
             player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.MINESWEEPER)
         end
 
     elseif csid == 109 then
-        if MineSweep == 1 then
+        if mineSweep == 1 then
             player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.MINESWEEPER)
             player:addFame(xi.quest.fame_area.BASTOK, 75)
             player:addTitle(xi.title.ZERUHN_SWEEPER)
