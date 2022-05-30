@@ -948,16 +948,48 @@ end)
 m:addOverride("xi.zones.The_Sanctuary_of_ZiTah.npcs.relic.onTrigger", function(player, npc)
     local ID = require("scripts/zones/The_Sanctuary_of_ZiTah/IDs")
     if player:getCharVar("RelicWeaponVoucher") == 1 then
-	    player:setCharVar("RelicWeaponVoucher", 0)
---	    player:setCharVar("RelicWeaponVoucherUsed") == 1
-        player:addItem(xi.items.MJOLLNIR) 
-    	player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.MJOLLNIR)
-		return
-	end	
-
-    player:PrintToPlayer("???: Hail to you hardened traveler,", 0xD)
-    player:PrintToPlayer("???: Do you desire to switch your ally? Trade your relic back to me together with 5,000,000 gil", 0xD)
-	player:PrintToPlayer("???: and I'll exchange it for my soul. Let me return to the battlefield!", 0xD)
+        local menu =
+        {
+            title = "Relic Choices",
+            onStart = function(playerArg)
+			    playerArg:PrintToPlayer("Choose your relic weapon:", xi.msg.channel.NS_SAY)
+            end,
+            options =
+            {
+                {
+                    "Mandau",
+                    function(playerArg)
+	                    playerArg:setCharVar("RelicWeaponVoucher", 0)					
+                        player:addItem(18270)
+                        playerArg:messageSpecial(ID.text.ITEM_OBTAINED, 18270)
+                        playerArg:PrintToPlayer("You hear a ghostly voice telling you to get lost", xi.msg.channel.NS_SAY)
+                    end,
+                },
+                {
+                    "Mjollnir",
+                    function(playerArg)   
+					    playerArg:setCharVar("RelicWeaponVoucher", 0)
+                        player:addItem(18324)
+                        playerArg:messageSpecial(ID.text.ITEM_OBTAINED, 18324)
+                        playerArg:PrintToPlayer("You hear a ghostly voice telling you to get lost", xi.msg.channel.NS_SAY)
+                    end,
+                },
+            },
+        
+            onCancelled = function(playerArg)
+            end,
+            
+            onEnd = function(playerArg)
+                playerArg:PrintToPlayer("Leave now before Xaver zaps you", xi.msg.channel.NS_SAY)
+            end,
+        }
+        player:customMenu(menu)		
+	else
+    	player:PrintToPlayer("no charvar")
+        player:PrintToPlayer("???: Hail to you traveler!", 0xD)
+        player:PrintToPlayer("???: Do you desire to switch your ally? Trade your relic back to me together with 5,000,000 gil", 0xD)
+	    player:PrintToPlayer("???: and I'll exchange it for my soul. Let me return to the battlefield!", 0xD)			
+	end
 end)
 
 return m 
