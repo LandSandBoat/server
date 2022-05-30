@@ -15,13 +15,13 @@ end
 
 entity.onTrigger = function(player, npc)
     local guildMember = xi.crafting.isGuildMember(player, 1)
-    local SkillLevel = player:getSkillLevel(xi.skill.ALCHEMY)
+    local skillLevel = player:getSkillLevel(xi.skill.ALCHEMY)
 
     if guildMember == 1 then
         if player:hasStatusEffect(xi.effect.ALCHEMY_IMAGERY) == false then
-            player:startEvent(638, 4, SkillLevel, 1, 511, 187, 0, 7, 2184)
+            player:startEvent(638, 4, skillLevel, 1, 511, 187, 0, 7, 2184)
         else
-            player:startEvent(638, 4, SkillLevel, 1, 511, 5662, 6955, 7, 2184)
+            player:startEvent(638, 4, skillLevel, 1, 511, 5662, 6955, 7, 2184)
         end
     else
         player:startEvent(638, 0, 0, 0, 0, 0, 0, 7, 0) -- Standard Dialogue

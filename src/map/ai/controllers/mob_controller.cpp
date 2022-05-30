@@ -864,7 +864,7 @@ void CMobController::DoRoamTick(time_point tick)
                         // move down
                         PMob->animationsub = 1;
                         PMob->HideName(true);
-                        PMob->Untargetable(true);
+                        PMob->SetUntargetable(true);
 
                         // don't move around until i'm fully in the ground
                         Wait(2s);
@@ -873,7 +873,7 @@ void CMobController::DoRoamTick(time_point tick)
                     {
                         // hidden name
                         PMob->HideName(true);
-                        PMob->Untargetable(true);
+                        PMob->SetUntargetable(true);
 
                         PMob->updatemask |= UPDATE_HP;
                     }
@@ -936,7 +936,7 @@ void CMobController::FollowRoamPath()
             {
                 PMob->animationsub = 0;
                 PMob->HideName(false);
-                PMob->Untargetable(false);
+                PMob->SetUntargetable(false);
             }
 
             // face spawn rotation if I just moved back to spawn

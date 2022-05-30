@@ -3,12 +3,11 @@
 --  NPC: Green Thumb Moogle
 -----------------------------------
 local ID = require("scripts/zones/Mog_Garden/IDs")
+require('scripts/globals/items')
 require("scripts/globals/moghouse")
 require("scripts/globals/shop")
 -----------------------------------
 local entity = {}
-
-local BRONZE_PIECE_ITEMID = 2184
 
 entity.onTrade = function(player, npc, trade)
     xi.moghouse.moogleTrade(player, npc, trade)
@@ -27,7 +26,7 @@ entity.onEventFinish = function(player, csid, option)
         local lockerLease = xi.moghouse.getMogLockerExpiryTimestamp(player)
         if (lockerLease ~= nil) then
             if (lockerLease == -1) then -- Lease expired..
-                player:messageSpecial(ID.text.MOGLOCKER_MESSAGE_OFFSET + 2, BRONZE_PIECE_ITEMID)
+                player:messageSpecial(ID.text.MOGLOCKER_MESSAGE_OFFSET + 2, xi.items.IMPERIAL_BRONZE_PIECE)
             else
                 player:messageSpecial(ID.text.MOGLOCKER_MESSAGE_OFFSET + 1, lockerLease)
             end

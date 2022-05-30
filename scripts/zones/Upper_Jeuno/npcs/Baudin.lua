@@ -42,35 +42,35 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local CrestOfDavoi = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.CREST_OF_DAVOI)
-    local SaveMySister = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SAVE_MY_SISTER)
+    local crestOfDavoi = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.CREST_OF_DAVOI)
+    local saveMySister = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SAVE_MY_SISTER)
 
     if
-        CrestOfDavoi == QUEST_COMPLETED and
-        SaveMySister == QUEST_AVAILABLE and
+        crestOfDavoi == QUEST_COMPLETED and
+        saveMySister == QUEST_AVAILABLE and
         player:getCharVar("saveMySisterVar") == 1
     then
         player:startEvent(172) -- During Quest "Save my Sister" (before speak with Mailloquetat)
 
     elseif
-        CrestOfDavoi == QUEST_COMPLETED and
+        crestOfDavoi == QUEST_COMPLETED and
         player:getCharVar("saveMySisterVar") == 2
     then
         player:startEvent(105) -- During Quest "Save my Sister" (after speak with Mailloquetat)
 
     elseif
-        SaveMySister == QUEST_ACCEPTED and
+        saveMySister == QUEST_ACCEPTED and
         player:getCharVar("saveMySisterFireLantern") < 4
     then
         player:startEvent(27) -- During Quest "Save my Sister" (after speak with Neraf-Najiruf)
 
     elseif
-        SaveMySister == QUEST_ACCEPTED and
+        saveMySister == QUEST_ACCEPTED and
         player:getCharVar("saveMySisterFireLantern") == 4
     then
         player:startEvent(107) -- Ending Quest "Save my Sister"
 
-    elseif SaveMySister == QUEST_COMPLETED then
+    elseif saveMySister == QUEST_COMPLETED then
         player:startEvent(176) -- New standard dialog after "Save my Sister"
 
     else

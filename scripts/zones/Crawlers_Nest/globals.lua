@@ -5,8 +5,8 @@
 local ID = require("scripts/zones/Crawlers_Nest/IDs")
 -----------------------------------
 
-local CRAWLERS_NEST =
+local crawlersNestGlobal =
 {
 }
 
-return CRAWLERS_NEST
+return crawlersNestGlobal

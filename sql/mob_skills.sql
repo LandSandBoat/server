@@ -2006,7 +2006,7 @@ INSERT INTO `mob_skills` VALUES (2174,1593,'plenilune_embrace_down',0,15.0,2000,
 INSERT INTO `mob_skills` VALUES (2175,1594,'nox_blast',0,7.0,2000,1000,4,0,0,3,0,0,0); -- standing only
 INSERT INTO `mob_skills` VALUES (2176,1595,'asuran_claws',0,7.0,2000,1000,4,0,0,0,0,0,0); -- standing only
 -- INSERT INTO `mob_skills` VALUES (2177,1921,'cacophony',0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (2178,1576,'sudden_lunge',0,7.0,2000,1000,4,0,0,3,0,0,0);
+INSERT INTO `mob_skills` VALUES (2178,1576,'sudden_lunge',0,10.0,2000,1800,4,0,0,3,0,0,0);
 INSERT INTO `mob_skills` VALUES (2179,1577,'noisome_powder',1,10.0,2000,1000,4,0,0,0,0,0,0); -- daytime only
 INSERT INTO `mob_skills` VALUES (2180,1578,'nepenthean_hum',1,10.0,2000,1000,4,0,0,0,0,0,0); -- daytime only
 INSERT INTO `mob_skills` VALUES (2181,1579,'spiral_spin',4,10.0,2000,1000,4,0,0,0,0,0,0);

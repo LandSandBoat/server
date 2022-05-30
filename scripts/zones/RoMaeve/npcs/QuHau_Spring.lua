@@ -11,15 +11,15 @@ require("scripts/globals/quests")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local DMfirst = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT)
-    local DMRepeat = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT_REPEAT)
-    local Hour = VanadielHour()
+    local dmFirst  = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT)
+    local dmRepeat = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT_REPEAT)
+    local hour     = VanadielHour()
 
-    if (Hour >= 18 or Hour < 6) and IsMoonFull() then
-        if DMfirst == QUEST_ACCEPTED or DMRepeat == QUEST_ACCEPTED then -- allow for Ark Pentasphere on both first and repeat quests
+    if (hour >= 18 or hour < 6) and IsMoonFull() then
+        if dmFirst == QUEST_ACCEPTED or dmRepeat == QUEST_ACCEPTED then -- allow for Ark Pentasphere on both first and repeat quests
             if npcUtil.tradeHasExactly(trade, { 1408, 917 }) then
                 player:startEvent(7, 917, 1408) -- Ark Pentasphere Trade
-            elseif DMRepeat == QUEST_ACCEPTED and npcUtil.tradeHasExactly(trade, 1261) and not player:hasKeyItem(xi.ki.MOONLIGHT_ORE) then
+            elseif dmRepeat == QUEST_ACCEPTED and npcUtil.tradeHasExactly(trade, 1261) and not player:hasKeyItem(xi.ki.MOONLIGHT_ORE) then
                 player:startEvent(8) -- Moonlight Ore trade
             end
         end

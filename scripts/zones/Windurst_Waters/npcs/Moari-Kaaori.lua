@@ -10,13 +10,13 @@ require("scripts/globals/titles")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local SayFlowers = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.SAY_IT_WITH_FLOWERS)
-    local FlowerProgress = player:getCharVar("FLOWER_PROGRESS")
+    local sayFlowers = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.SAY_IT_WITH_FLOWERS)
+    local flowerProgress = player:getCharVar("FLOWER_PROGRESS")
     local offer = trade:getItemId()
 
-    if FlowerProgress == 3 then
+    if flowerProgress == 3 then
         if trade:hasItemQty(950, 1) and trade:getItemCount() == 1 then
-            if SayFlowers == QUEST_COMPLETED then
+            if sayFlowers == QUEST_COMPLETED then
                 player:startEvent(525, xi.settings.GIL_RATE*400)
             else
                 player:startEvent(520)
@@ -28,17 +28,17 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local SayFlowers = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.SAY_IT_WITH_FLOWERS)
-    local FlowerProgress = player:getCharVar("FLOWER_PROGRESS")
-    local NeedToZone = player:needToZone()
+    local sayFlowers = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.SAY_IT_WITH_FLOWERS)
+    local flowerProgress = player:getCharVar("FLOWER_PROGRESS")
+    local needToZone = player:needToZone()
 
-    if SayFlowers == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.WINDURST) >= 2 then
+    if sayFlowers == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.WINDURST) >= 2 then
         player:startEvent(514) -- Begin Say It with Flowers.
-    elseif FlowerProgress == 3 or FlowerProgress == 1 then
+    elseif flowerProgress == 3 or flowerProgress == 1 then
         player:startEvent(515) -- Waiting for trade.
-    elseif SayFlowers == QUEST_COMPLETED and NeedToZone and FlowerProgress == 0 then -- Must zone to retry quest.
+    elseif sayFlowers == QUEST_COMPLETED and needToZone and flowerProgress == 0 then -- Must zone to retry quest.
         player:startEvent(521)
-    elseif SayFlowers == QUEST_COMPLETED and FlowerProgress == 0 then
+    elseif sayFlowers == QUEST_COMPLETED and flowerProgress == 0 then
         player:startEvent(523) -- Repeat Say It with Flowers.
     else
         player:startEvent(512)

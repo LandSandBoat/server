@@ -14,7 +14,7 @@ entity.onMobDeath = function(mob, player, isKiller)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.phOnDespawn(mob, ID.mob.DONGGU_PH, 10, 3600) -- 1 hour
+    xi.mob.phOnDespawn(mob, ID.mob.DONGGU_PH, 10, 1) -- Window opens immediately from its last Time of Death.
 end
 
 return entity

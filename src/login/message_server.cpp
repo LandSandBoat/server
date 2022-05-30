@@ -141,6 +141,7 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
             break;
         }
         case MSG_SEND_TO_ENTITY:
+        case MSG_LUA_FUNCTION:
         {
             const char* query = "SELECT zoneip, zoneport FROM zone_settings WHERE zoneid = %d;";
             ret               = zmqSql->Query(query, ref<uint16>((uint8*)extra->data(), 2));

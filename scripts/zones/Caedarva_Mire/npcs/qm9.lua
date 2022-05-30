@@ -13,10 +13,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local TheWaywardAutomation = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.THE_WAYWARD_AUTOMATION)
-    local TheWaywardAutomationProgress = player:getCharVar("TheWaywardAutomationProgress")
+    local theWaywardAutomation = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.THE_WAYWARD_AUTOMATON)
+    local theWaywardAutomationProgress = player:getCharVar("TheWaywardAutomationProgress")
 
-    if (TheWaywardAutomation == QUEST_ACCEPTED and TheWaywardAutomationProgress == 2) then
+    if (theWaywardAutomation == QUEST_ACCEPTED and theWaywardAutomationProgress == 2) then
         if (player:getCharVar("TheWaywardAutomationNM") >= 1) then
             player:startEvent(14)-- Event ID 14 for CS after toad
         elseif (not GetMobByID(ID.mob.CAEDARVA_TOAD):isSpawned()) then

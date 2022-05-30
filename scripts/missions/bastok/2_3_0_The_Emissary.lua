@@ -21,21 +21,20 @@ require('scripts/globals/titles')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------
-local bastokMarketsID    = require('scripts/zones/Bastok_Markets/IDs')
-local bastokMinesID      = require('scripts/zones/Bastok_Mines/IDs')
-local metalworksID       = require('scripts/zones/Metalworks/IDs')
-local portBastokID       = require('scripts/zones/Port_Bastok/IDs')
-local portWindurstID     = require('scripts/zones/Port_Windurst/IDs')
+local bastokMarketsID = require('scripts/zones/Bastok_Markets/IDs')
+local bastokMinesID   = require('scripts/zones/Bastok_Mines/IDs')
+local metalworksID    = require('scripts/zones/Metalworks/IDs')
+local portBastokID    = require('scripts/zones/Port_Bastok/IDs')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_EMISSARY)
 
 mission.reward =
 {
-    gil = 3000,
+    gil     = 3000,
     keyItem = xi.ki.ADVENTURERS_CERTIFICATE,
-    rank = 3,
-    title = xi.title.CERTIFIED_ADVENTURER,
+    rank    = 3,
+    title   = xi.title.CERTIFIED_ADVENTURER,
 }
 
 local handleAcceptMission = function(player, csid, option, npc)
@@ -114,7 +113,13 @@ mission.sections =
                         not player:hasKeyItem(xi.ki.LETTER_TO_THE_CONSULS_BASTOK) and
                         player:getMissionStatus(mission.areaId) == 0
                     then
-                        return mission:progressEvent(713)
+                        local isFirst2_3 =
+                        (
+                            not player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_ABROAD) and
+                            not player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_THREE_KINGDOMS)
+                        ) and 1 or 0
+
+                        return mission:progressEvent(713, 0, 0, 0, 0, 0, 0, 0, isFirst2_3) -- Contains variation for Lion mention.
                     else
                         return mission:messageText(metalworksID.text.GOOD_LUCK)
                     end
@@ -146,11 +151,7 @@ mission.sections =
             ['Baraka'] =
             {
                 onTrigger = function(player, npc)
-                    local missionStatus = player:getMissionStatus(mission.areaId)
-
-                    if missionStatus == 1 then
-                        -- This cs should only play if you visit San d'Oria first
-                        -- If you visit Windurst first you will encounter Lion in Heaven's Tower instead
+                    if player:getMissionStatus(mission.areaId) == 1 then -- Start Sandoria path first.
                         return mission:progressEvent(581)
                     end
                 end,
@@ -161,13 +162,14 @@ mission.sections =
                 onTrigger = function(player, npc)
                     local missionStatus = player:getMissionStatus(mission.areaId)
 
-                    -- Bastok Mission 2-3 Part I - San d'Oria > Windurst
-                    if missionStatus == 1 then
+                    if missionStatus == 1 then -- Placeholder before starting first path.
                         return mission:progressEvent(676)
-                    -- Bastok Mission 2-3 Part II - Windurst > San d'Oria
-                    elseif missionStatus == 7 then
+                    elseif missionStatus == 7 then -- Start Sandoria path second.
                         return mission:progressEvent(537)
-                    elseif missionStatus == 11 then
+                    elseif
+                        missionStatus == 11 and
+                        player:hasCompletedMission(xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_EMISSARY_SANDORIA2)
+                    then -- Both paths completed, with Sandoria last.
                         return mission:progressEvent(557)
                     end
                 end,
@@ -181,8 +183,8 @@ mission.sections =
                     if
                         missionStatus == 1 or
                         missionStatus == 7
-                    then
-                        return mission:progressEvent(556)
+                    then -- TODO: Default dialog and status 1 need confirmation.
+                        return mission:event(556)
                     end
                 end,
             },
@@ -193,6 +195,7 @@ mission.sections =
                     if option == 0 then
                         player:delMission(mission.areaId, mission.missionId)
                         player:addMission(xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_EMISSARY_SANDORIA2)
+                        player:delKeyItem(xi.ki.LETTER_TO_THE_CONSULS_BASTOK) -- Key item deleted when starting second path.
                         player:setMissionStatus(mission.areaId, 8)
                     end
                 end,
@@ -201,7 +204,6 @@ mission.sections =
                     player:delMission(mission.areaId, mission.missionId)
                     player:addMission(xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_EMISSARY_SANDORIA)
                     player:setMissionStatus(mission.areaId, 2)
-                    player:delKeyItem(xi.ki.LETTER_TO_THE_CONSULS_BASTOK)
                 end,
             },
         },
@@ -211,8 +213,15 @@ mission.sections =
             ['Ada'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.KINDRED_REPORT) then
-                        return mission:progressEvent(69)
+                    local missionStatus = player:getMissionStatus(mission.areaId)
+
+                    if missionStatus == 7 then -- Windurst path completed. Sandoria path not started.
+                        return mission:event(58)
+                    elseif
+                        player:hasKeyItem(xi.ki.KINDRED_REPORT) and
+                        player:hasCompletedMission(xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_EMISSARY_WINDURST2)
+                    then -- Both paths completed, with Windurst last.
+                        return mission:event(69)
                     end
                 end,
             },
@@ -220,8 +229,13 @@ mission.sections =
             ['Gold_Skull'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.KINDRED_REPORT) then
-                        return mission:progressEvent(68)
+                    if player:getMissionStatus(mission.areaId) == 7 then -- Windurst path completed. Sandoria path not started.
+                        return mission:event(57)
+                    elseif
+                        player:hasKeyItem(xi.ki.KINDRED_REPORT) and
+                        player:hasCompletedMission(xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_EMISSARY_WINDURST2)
+                    then -- Both paths completed, with Windurst last.
+                        return mission:event(68)
                     end
                 end,
             },
@@ -229,8 +243,13 @@ mission.sections =
             ['Josef'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.KINDRED_REPORT) then
-                        return mission:progressEvent(70)
+                    if player:getMissionStatus(mission.areaId) == 7 then -- Windurst path completed. Sandoria path not started.
+                        return mission:event(59)
+                    elseif
+                        player:hasKeyItem(xi.ki.KINDRED_REPORT) and
+                        player:hasCompletedMission(xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_EMISSARY_WINDURST2)
+                    then -- Both paths completed, with Windurst last.
+                        return mission:event(70)
                     end
                 end,
             },
@@ -240,13 +259,16 @@ mission.sections =
                 onTrigger = function(player, npc)
                     local missionStatus = player:getMissionStatus(mission.areaId)
 
-                    if missionStatus == 1 then
+                    if missionStatus == 1 then -- Start Windurst path first.
                         return mission:progressEvent(48)
-                    elseif missionStatus == 6 then
+                    elseif missionStatus == 6 then -- Start Windurst path second.
                         return mission:progressEvent(61)
-                    elseif missionStatus == 7 then
-                        return mission:messageText(portWindurstID.text.MELEK_DIALOG_C)
-                    elseif player:hasKeyItem(xi.ki.KINDRED_REPORT) then
+                    elseif missionStatus == 7 then -- Windurst path completed. Sandoria path not started.
+                        return mission:event(56)
+                    elseif
+                        player:hasKeyItem(xi.ki.KINDRED_REPORT) and
+                        player:hasCompletedMission(xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_EMISSARY_WINDURST2)
+                    then -- Both paths completed, with Windurst last.
                         return mission:progressEvent(67)
                     end
                 end,
@@ -258,12 +280,12 @@ mission.sections =
                     player:delMission(mission.areaId, mission.missionId)
                     player:addMission(xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_EMISSARY_WINDURST)
                     player:setMissionStatus(mission.areaId, 2)
-                    player:delKeyItem(xi.ki.LETTER_TO_THE_CONSULS_BASTOK)
                 end,
 
                 [61] = function(player, csid, option, npc)
                     player:delMission(mission.areaId, mission.missionId)
                     player:addMission(xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_EMISSARY_WINDURST2)
+                    player:delKeyItem(xi.ki.LETTER_TO_THE_CONSULS_BASTOK) -- Key item deleted when starting second path.
                     player:setMissionStatus(mission.areaId, 7)
                 end,
             },

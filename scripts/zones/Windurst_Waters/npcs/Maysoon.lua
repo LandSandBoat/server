@@ -20,10 +20,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local CooksPride = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COOK_S_PRIDE)
-    local HoistTheJelly = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.HOIST_THE_JELLY_ROGER)
+    local cooksPride = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COOK_S_PRIDE)
+    local hoistTheJelly = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.HOIST_THE_JELLY_ROGER)
 
-    if (CooksPride == QUEST_ACCEPTED and HoistTheJelly == QUEST_AVAILABLE) then
+    if cooksPride == QUEST_ACCEPTED and hoistTheJelly == QUEST_AVAILABLE then
         player:startEvent(10000) -- Start quest "Hoist the Jelly, Roger"
     else
         player:startEvent(266) -- Standard dialog
@@ -34,9 +34,9 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 10000) then
+    if csid == 10000 then
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.HOIST_THE_JELLY_ROGER)
-    elseif (csid == 10001) then
+    elseif csid == 10001 then
         player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.HOIST_THE_JELLY_ROGER)
         player:addKeyItem(xi.ki.SUPER_SOUP_POT)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SUPER_SOUP_POT)

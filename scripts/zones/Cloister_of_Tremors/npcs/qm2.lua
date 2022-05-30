@@ -14,15 +14,15 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local TREMORSTONE = 2796
+    local tremorStoneID = 2796
 
     -- Give Player a Tremorstone if they don't have one
-    if (player:hasItem(TREMORSTONE) == false) then
+    if (player:hasItem(tremorStoneID) == false) then
         if (player:getFreeSlotsCount() == 0) then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, TREMORSTONE)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, tremorStoneID)
         else
-            player:addItem(TREMORSTONE)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, TREMORSTONE)
+            player:addItem(tremorStoneID)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, tremorStoneID)
         end
     else
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
@@ -30,8 +30,6 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option)
-    -- printf("CSID2: %u", csid)
-    -- printf("RESULT2: %u", option)
 end
 
 entity.onEventFinish = function(player, csid, option)

@@ -17,7 +17,8 @@ xi.pankration = xi.pankration or {}
 -- IDs from mob_family_system.sql
 -- We only store the family, not the ecosystem, so we have to lookup
 -- based on that
-xi.pankration.prohibitedFamilies = {
+xi.pankration.prohibitedFamilies =
+{
     -- All Beastmen
     25, -- Antica
     59, -- Bugbear
@@ -89,7 +90,8 @@ xi.pankration.prohibitedFamilies = {
 -- https://github.com/Windower/Lua/blob/dev/addons/libs/extdata.lua
 -- https://www.bg-wiki.com/ffxi/Feral_Skills_Guide_by_Shoya
 -- https://ffxiclopedia.fandom.com/wiki/Category:Feral_Skills
-xi.pankration.feralSkills = {
+xi.pankration.feralSkills =
+{
     [0x001] = { text = "Main Job: Warrior",      fp = 8 },
     [0x002] = { text = "Main Job: Monk",         fp = 8 },
     [0x003] = { text = "Main Job: White Mage",   fp = 8 },

@@ -13,21 +13,21 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local SOA_Mission = player:getCurrentMission(xi.mission.log_id.SOA)
+    local soaMission = player:getCurrentMission(xi.mission.log_id.SOA)
 
-    if (SOA_Mission < xi.mission.id.soa.LIFE_ON_THE_FRONTIER) then
+    if (soaMission < xi.mission.id.soa.LIFE_ON_THE_FRONTIER) then
         -- Dialogue prior to joining colonization effort
         player:startEvent(571)
-    elseif (SOA_Mission == xi.mission.id.soa.INTO_THE_FIRE) then
+    elseif (soaMission == xi.mission.id.soa.INTO_THE_FIRE) then
         -- Finishes SOA Mission: '...Into the Fire'
         player:startEvent(155)
-    elseif ((SOA_Mission >= xi.mission.id.soa.MELVIEN_DE_MALECROIX) and (SOA_Mission <= xi.mission.id.soa.COURIER_CATASTROPHE)) then
+    elseif ((soaMission >= xi.mission.id.soa.MELVIEN_DE_MALECROIX) and (soaMission <= xi.mission.id.soa.COURIER_CATASTROPHE)) then
         -- Reminds player where to go for SOA Mission: 'Melvien de Malecroix'
         player:startEvent(162)
-    elseif (SOA_Mission == xi.mission.id.soa.DONE_AND_DELIVERED) then
+    elseif (soaMission == xi.mission.id.soa.DONE_AND_DELIVERED) then
         -- Finishes SOA Mission: 'Done and Delivered'
         player:startEvent(157)
-    elseif (SOA_Mission == xi.mission.id.soa.MINISTERIAL_WHISPERS) then
+    elseif (soaMission == xi.mission.id.soa.MINISTERIAL_WHISPERS) then
         -- Reminds player where to go for SOA Mission: 'Ministerial Whispers'
         player:startEvent(163)
     else

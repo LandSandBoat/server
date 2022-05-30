@@ -16,25 +16,25 @@ require('scripts/globals/interaction/interaction_util')
 --[[ Illustration of the structure of the data:
 {
     -- First level (zone ID)
-    [xi.zone.SOME_ZONE] = {
-
+    [xi.zone.SOME_ZONE] =
+    {
         -- Second level (entity name)
-        ['Some_NPC'] = {
-
+        ['Some_NPC'] =
+        {
             -- Third level (handler name)
-            ['onTrigger'] = {
-
+            ['onTrigger'] =
+            {
                 -- List of handlers in the form below
                 { check = function (player) .. end, handler = function (player) .. end, container = .. },
             }
         },
 
         -- Second level (zone-wide handler name)
-        ['onEventFinish'] = {
-
+        ['onEventFinish'] =
+        {
             -- Third level (specifier for handler, here the ID of the event)
-            [123] = {
-
+            [123] =
+            {
                 -- List of handlers in the form below
                 { check = function (player) .. end, handler = function (player) .. end, container = .. },
             }
@@ -42,8 +42,7 @@ require('scripts/globals/interaction/interaction_util')
     }
 }
 --]]
-InteractionLookup = {
-}
+InteractionLookup = {}
 
 function InteractionLookup:new(original)
     local obj = original or {}

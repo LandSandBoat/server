@@ -29,7 +29,7 @@ entity.onTrigger = function(player, npc)
     local circleOfTime = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_CIRCLE_OF_TIME)
     local circleProgress = player:getCharVar("circleTime")
     local lureOfTheWildcat = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.LURE_OF_THE_WILDCAT)
-    local WildcatSandy = player:getCharVar("WildcatSandy")
+    local wildcatSandy = player:getCharVar("WildcatSandy")
     local herMajestysGarden = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.HER_MAJESTY_S_GARDEN)
 
     -- CIRCLE OF TIME (Bard AF3)
@@ -45,7 +45,7 @@ entity.onTrigger = function(player, npc)
         end
 
     -- LURE OF THE WILDCAT
-    elseif (lureOfTheWildcat == QUEST_ACCEPTED and not utils.mask.getBit(WildcatSandy, 19)) then
+    elseif (lureOfTheWildcat == QUEST_ACCEPTED and not utils.mask.getBit(wildcatSandy, 19)) then
         player:startEvent(561)
 
     -- HER MAJESTY'S GARDEN

@@ -42,16 +42,16 @@ entity.onTrade = function(player, npc, trade)
         end
     end
 
-    local GrowingFlowers = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GROWING_FLOWERS)
+    local growingFlowers = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GROWING_FLOWERS)
 
     if itemQuality == 2 then
-        if GrowingFlowers == QUEST_COMPLETED then
+        if growingFlowers == QUEST_COMPLETED then
             player:startEvent(605, 0, 231, 4)
         else
             player:startEvent(605, 0, 231, 2)
         end
     elseif itemQuality == 1 then
-        if GrowingFlowers == QUEST_ACCEPTED then
+        if growingFlowers == QUEST_ACCEPTED then
             player:startEvent(605, 0, 231, 3)
         else
             player:startEvent(605, 0, 231, 1)
@@ -70,7 +70,6 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
     if csid == 605 and option == 1002 then
         player:tradeComplete()
         player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GROWING_FLOWERS)

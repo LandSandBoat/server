@@ -154,18 +154,18 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
         end
 
     elseif addType == procType.HP_HEAL then -- Its not a drain and works vs undead. https://www.bg-wiki.com/bg/Dominion_Mace
-        local HP = damage -- Note: not actually damage, if you wanted damage see HP_DRAIN instead
+        local hitPoints = damage -- Note: not actually damage, if you wanted damage see HP_DRAIN instead
         -- Unknown what modifies the HP, using power directly for now
         msgID = xi.msg.basic.ADD_EFFECT_HP_HEAL
-        attacker:addHP(HP)
-        msgParam = HP
+        attacker:addHP(hitPoints)
+        msgParam = hitPoints
 
     elseif addType == procType.MP_HEAL then -- Mjollnir does this, it is not Aspir.
-        local MP = damage
+        local magicPoints = damage
         -- Unknown what modifies this, using power directly for now
         msgID = xi.msg.basic.ADD_EFFECT_MP_HEAL
-        attacker:addMP(MP)
-        msgParam = MP
+        attacker:addMP(magicPoints)
+        msgParam = magicPoints
 
     elseif addType == procType.HP_DRAIN or (addType == procType.HPMPTP_DRAIN and math.random(1,3) == 1) then
         damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage)

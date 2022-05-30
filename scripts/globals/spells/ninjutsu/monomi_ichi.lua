@@ -1,11 +1,7 @@
 -----------------------------------
 -- Spell: Monomi: Ichi
--- Lessens chance of being detected by sound
--- Duration is 3 minutes (non-random duration)
 -----------------------------------
-require("scripts/settings/main")
-require("scripts/globals/status")
-require("scripts/globals/msg")
+require("scripts/globals/spells/spell_enhancing_ninjutsu")
 -----------------------------------
 local spell_object = {}
 
@@ -14,14 +10,7 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    if (not target:hasStatusEffect(xi.effect.SNEAK)) then
-        spell:setMsg(xi.msg.basic.MAGIC_GAIN_EFFECT)
-        target:addStatusEffect(xi.effect.SNEAK, 0, 10, math.floor(420 * xi.settings.SNEAK_INVIS_DURATION_MULTIPLIER))
-    else
-        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no xi.effect.
-    end
-
-    return xi.effect.SNEAK
+    return xi.spells.spell_enhancing_ninjutsu.useEnhancingNinjutsu(caster, target, spell)
 end
 
 return spell_object
