@@ -8,10 +8,19 @@ local ID = require("scripts/zones/Davoi/IDs")
 require("scripts/globals/keyitems")
 require("scripts/settings/main")
 require("scripts/globals/dynamis")
+-----------------------------------
+local entity = {}
 
 local TIMELESS_HOURGLASS = 4236
-local currency = {1452, 1453, 1454}
-local shop = {
+local currency =
+{
+    1452,
+    1453,
+    1454
+}
+
+local shop =
+{
      5, 1295, -- Twincoon
      6, 1466, -- Relic Iron
      7, 1520, -- Goblin Grease
@@ -20,7 +29,9 @@ local shop = {
     25, 883,  -- Behemoth Horn
     28, 1458, -- Mammoth Tusk
 }
-local maps = {
+
+local maps =
+{
     [xi.ki.MAP_OF_DYNAMIS_SAN_DORIA]   = 10000,
     [xi.ki.MAP_OF_DYNAMIS_BASTOK]     = 10000,
     [xi.ki.MAP_OF_DYNAMIS_WINDURST]   = 10000,
@@ -32,8 +43,6 @@ local maps = {
     [xi.ki.MAP_OF_DYNAMIS_QUFIM]      = 10000,
     [xi.ki.MAP_OF_DYNAMIS_TAVNAZIA]   = 20000,
 }
------------------------------------
-local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     local gil = trade:getGil()

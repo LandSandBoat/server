@@ -164,7 +164,8 @@ xi.teleport.type =
     CAMPAIGN_BASTOK    = 7,
     CAMPAIGN_WINDURST  = 8,
     HOMEPOINT          = 9,
-    SURVIVAL           = 10
+    SURVIVAL           = 10,
+    WAYPOINT           = 11,
 }
 
 xi.teleport.runic_portal =

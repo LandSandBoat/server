@@ -11,7 +11,8 @@ require("scripts/globals/utils")
 -----------------------------------
 local entity = {}
 
-local craftingItems = {
+local craftingItems =
+{
     [1] = -- magus bazubands
     {
         materials = {754, 828, 879, 4158},
@@ -19,6 +20,7 @@ local craftingItems = {
         currencyAmt = 2,
         result = 14928
     },
+
     [2] = -- magus shalwar
     {
         materials = {761, 828, 2175, 2340},
@@ -26,6 +28,7 @@ local craftingItems = {
         currencyAmt = 2,
         result = 15600
     },
+
     [3] = -- magus jubbah
     {
         materials = {828, 2229, 2288, 2340},

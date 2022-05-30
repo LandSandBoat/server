@@ -94,7 +94,8 @@ xi.mix.jobSpecial = xi.mix.jobSpecial or {}
 
 g_mixins = g_mixins or {}
 
-local job2hr = {
+local job2hr =
+{
     [xi.job.WAR] = xi.jsa.MIGHTY_STRIKES,
     [xi.job.MNK] = xi.jsa.HUNDRED_FISTS,
     [xi.job.WHM] = xi.jsa.BENEDICTION,

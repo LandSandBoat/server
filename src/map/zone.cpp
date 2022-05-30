@@ -270,6 +270,11 @@ void CZone::SetLocalVar(const char* var, uint32 val)
     m_LocalVars[var] = val;
 }
 
+void CZone::ResetLocalVars()
+{
+    m_LocalVars.clear();
+}
+
 bool CZone::CanUseMisc(uint16 misc) const
 {
     return (m_miscMask & misc) == misc;

@@ -88,7 +88,8 @@ function getRoeRecords(triggers)
             end,
             flags = set{"retro"},
             reqs = { mJobLvl = 99 },
-            reward =  {
+            reward =
+            {
                 sparks = 200,
                 xp = 300,
                 item = { { 8733, 5 } },
@@ -101,7 +102,8 @@ function getRoeRecords(triggers)
             end,
             trigger = triggers.talkToRoeNpc,
             reqs = { collectSparks = 2000 },
-            reward =  {
+            reward =
+            {
                 sparks = 200,
                 xp = 200,
                 item = { 9188 }
@@ -114,7 +116,8 @@ function getRoeRecords(triggers)
             end,
             trigger = triggers.talkToRoeNpc,
             reqs = { collectSparks = 4000 },
-            reward =  {
+            reward =
+            {
                 sparks = 200,
                 xp = 200,
                 item = { 9226 }
@@ -127,7 +130,8 @@ function getRoeRecords(triggers)
             end,
             trigger = triggers.talkToRoeNpc,
             reqs = { collectSparks = 6000 },
-            reward =  {
+            reward =
+            {
                 sparks = 200,
                 xp = 200,
                 item = { 9226 }
@@ -140,7 +144,8 @@ function getRoeRecords(triggers)
             end,
             trigger = triggers.talkToRoeNpc,
             reqs = { hasItemLevel = 117 },
-            reward =  {
+            reward =
+            {
                 sparks = 200,
                 xp = 300,
                 item = { 10140 }
