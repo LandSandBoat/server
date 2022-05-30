@@ -40,18 +40,18 @@ entity.onTrade = function(player, npc, trade)
         end
     end
 
-    local ALadysHeart = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.A_LADY_S_HEART)
+    local aLadysHeart = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.A_LADY_S_HEART)
 
     if itemQuality == 2 then
-        if ALadysHeart == QUEST_COMPLETED then
+        if aLadysHeart == QUEST_COMPLETED then
             player:startEvent(160, 0, 236, 4)
         else
             player:startEvent(160, 0, 236, 2)
         end
     elseif itemQuality == 1 then
-        if ALadysHeart == QUEST_COMPLETED then
+        if aLadysHeart == QUEST_COMPLETED then
             player:startEvent(160, 0, 236, 5)
-        elseif ALadysHeart == QUEST_ACCEPTED then
+        elseif aLadysHeart == QUEST_ACCEPTED then
             player:startEvent(160, 0, 236, 3)
         else
             player:startEvent(160, 0, 236, 1)
@@ -59,7 +59,6 @@ entity.onTrade = function(player, npc, trade)
     else
         player:startEvent(160, 0, 236, 0)
     end
-
 end
 
 entity.onTrigger = function(player, npc)
@@ -70,7 +69,6 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
     if csid == 160 and option == 2002 then
         player:tradeComplete()
         player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.A_LADY_S_HEART)

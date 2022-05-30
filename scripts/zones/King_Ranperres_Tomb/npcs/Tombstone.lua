@@ -23,10 +23,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local X = npc:getXPos()
-    local Z = npc:getZPos()
+    local xPos = npc:getXPos()
+    local zPos = npc:getZPos()
 
-    if X >= -1 and X <= 1 and Z >= -106 and Z <= -102 then
+    if xPos >= -1 and xPos <= 1 and zPos >= -106 and zPos <= -102 then
         player:startEvent(2)
     end
 end

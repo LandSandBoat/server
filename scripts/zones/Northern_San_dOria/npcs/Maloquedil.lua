@@ -23,9 +23,9 @@ end
 
 entity.onTrigger = function(player, npc)
     local warding = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.WARDING_VAMPIRES)
-    local WildcatSandy = player:getCharVar("WildcatSandy")
+    local wildcatSandy = player:getCharVar("WildcatSandy")
 
-    if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatSandy, 7) then
+    if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(wildcatSandy, 7) then
         player:startEvent(807)
     elseif warding == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 3 then --Quest available for fame superior or equal to 3
         player:startEvent(24)

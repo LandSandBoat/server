@@ -3,7 +3,8 @@
 -----------------------------------
 local entity = {}
 
--- [4] = {
+-- [4] =
+-- {
 --     [47]   = {['name']="Protect V",                      ['category']=4,  ['id']=47,   ['animation']=47,   ['message']=230, },
 --     [52]   = {['name']="Shell V",                        ['category']=4,  ['id']=52,   ['animation']=52,   ['message']=230, },
 --     [54]   = {['name']="Stoneskin",                      ['category']=4,  ['id']=54,   ['animation']=54,   ['message']=230, },
@@ -13,7 +14,9 @@ local entity = {}
 --     [216]  = {['name']="Gravity",                        ['category']=4,  ['id']=216,  ['animation']=216,  ['message']=236, },
 --     [286]  = {['name']="Addle",                          ['category']=4,  ['id']=286,  ['animation']=119,  ['message']=236, },
 -- },
--- [11] = {
+--
+-- [11] =
+-- {
 --     [3053] = {['name']="Dynastic Gravitas",              ['category']=11, ['id']=3053, ['animation']=2232, ['message']=188, },
 --     [3115] = {['name']="Bellatrix of Light",             ['category']=11, ['id']=3115, ['animation']=2253, ['message']=101, },
 --     [3116] = {['name']="Bellatrix of Shadows",           ['category']=11, ['id']=3116, ['animation']=2254, ['message']=101, },

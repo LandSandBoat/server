@@ -225,7 +225,7 @@ function BluePhysicalSpell(caster, target, spell, params)
     -- worked out from http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
     -- Final D value ??= floor(D+fSTR+WSC) * Multiplier
 
-    local D =  math.floor(magicskill * 0.11) * 2 + 3
+    local D = math.floor(magicskill * 0.11) * 2 + 3
     -- cap D
     if D > params.duppercap then
         D = params.duppercap
@@ -240,9 +240,9 @@ function BluePhysicalSpell(caster, target, spell, params)
 
     -- print("fStr val is ".. fStr)
 
-    local WSC = BlueGetWsc(caster, params)
+    local wsc = BlueGetWsc(caster, params)
 
-    -- print("wsc val is ".. WSC)
+    -- print("wsc val is ".. wsc)
 
     local multiplier = params.multiplier
 
@@ -259,7 +259,7 @@ function BluePhysicalSpell(caster, target, spell, params)
     end
 
     -- TODO: Modify multiplier to account for family bonus/penalty
-    local finalD = math.floor(D + fStr + WSC) * multiplier
+    local finalD = math.floor(D + fStr + wsc) * multiplier
 
     -- print("Final D is ".. finalD)
 
@@ -296,7 +296,7 @@ function BluePhysicalSpell(caster, target, spell, params)
             if hitsdone == 0 then -- only the first hit benefits from multiplier
                 finaldmg = finaldmg + (finalD * pdif)
             else
-                finaldmg = finaldmg + ((math.floor(D + fStr + WSC)) * pdif) -- same as finalD but without multiplier (it should be 1.0)
+                finaldmg = finaldmg + ((math.floor(D + fStr + wsc)) * pdif) -- same as finalD but without multiplier (it should be 1.0)
             end
 
             hitslanded = hitslanded + 1
@@ -324,10 +324,10 @@ function BlueMagicalSpell(caster, target, spell, params, statMod)
         D = params.duppercap
     end
 
-    local ST = BlueGetWsc(caster, params) -- According to Wiki ST is the same as WSC, essentially Blue mage spells that are magical use the dmg formula of Magical type Weapon skills
+    local st = BlueGetWsc(caster, params) -- According to Wiki ST is the same as WSC, essentially Blue mage spells that are magical use the dmg formula of Magical type Weapon skills
 
     if (caster:hasStatusEffect(xi.effect.BURST_AFFINITY)) then
-        ST = ST * 2
+        st = st * 2
     end
 
     local convergenceBonus = 1.0
@@ -356,7 +356,7 @@ function BlueMagicalSpell(caster, target, spell, params, statMod)
         statBonus = dStat * params.tMultiplier
     end
 
-    D = ((D + ST) * params.multiplier * convergenceBonus) + statBonus
+    D = ((D + st) * params.multiplier * convergenceBonus) + statBonus
 
     -- At this point according to wiki we apply standard magic attack calculations
 
@@ -388,11 +388,16 @@ function BlueFinalAdjustments(caster, target, spell, dmg, params)
         dmg = 0
     end
 
+    local attackType = params.attackType or xi.attackType.NONE
+    local damageType = params.damageType or xi.damageType.NONE
+
+    -- handle One For All
+    if damageType == xi.damageType.MAGICAL then
+        dmg = utils.oneforall(target, dmg)
+    end
     -- handling stoneskin
     dmg = utils.stoneskin(target, dmg)
 
-    local attackType = params.attackType or xi.attackType.NONE
-    local damageType = params.damageType or xi.damageType.NONE
     target:takeSpellDamage(caster, spell, dmg, attackType, damageType)
     target:updateEnmityFromDamage(caster, dmg)
     target:handleAfflatusMiseryDamage(dmg)

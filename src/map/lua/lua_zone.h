@@ -42,6 +42,7 @@ public:
 
     auto getLocalVar(const char* key);
     void setLocalVar(const char* key, uint32 value);
+    void resetLocalVars();
 
     void        registerRegion(uint32 RegionID, float x1, float y1, float z1, float x2, float y2, float z2);
     sol::object levelRestriction();

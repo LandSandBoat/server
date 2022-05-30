@@ -69,7 +69,8 @@ namespace message
     // NOTE: All SQL operations happen on the main thread
     void init(const char* chatIp, uint16 chatPort);
     void handle_incoming();
-    void send(MSGSERVTYPE type, void* data, size_t datalen, CBasicPacket* packet);
+    void send(MSGSERVTYPE type, void* data, size_t datalen, CBasicPacket* packet = nullptr);
+    void send(uint16 zone, std::string const& luaFunc);
     void send(uint32 playerId, CBasicPacket* packet);
     void send(std::string const& playerName, CBasicPacket* packet);
     void close();

@@ -18,42 +18,42 @@ local entity = {}
 
 
 entity.onTrade = function(player, npc, trade)
-    if npcUtil.tradeHas(trade, {xi.items.FLASK_OF_SLEEPING_POTION, xi.items.CUP_OF_CHAI}) and player:getCharVar("OperationTeatimeProgress") == 1 then -- Chai, Sleeping Potion
+    if npcUtil.tradeHas(trade, {xi.items.FLASK_OF_SLEEPING_POTION, xi.items.CUP_OF_CHAI}) and player:getCharVar("OperationTeaTimeProgress") == 1 then -- Chai, Sleeping Potion
         player:startEvent(780)
     end
 end
 
 entity.onTrigger = function(player, npc)
-    local NoStringsAttached = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.NO_STRINGS_ATTACHED)
-    local TheWaywardAutomation = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.THE_WAYWARD_AUTOMATION)
-    local TheWaywardAutomationProgress = player:getCharVar("TheWaywardAutomationProgress")
-    local OperationTeatime = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.OPERATION_TEATIME)
-    local OperationTeatimeProgress = player:getCharVar("OperationTeatimeProgress")
-    local LvL = player:getMainLvl()
-    local Job = player:getMainJob()
+    local noStringsAttached = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.NO_STRINGS_ATTACHED)
+    local theWaywardAutomaton = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.THE_WAYWARD_AUTOMATON)
+    local theWaywardAutomatonProgress = player:getCharVar("TheWaywardAutomatonProgress")
+    local operationTeaTime = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.OPERATION_TEATIME)
+    local operationTeaTimeProgress = player:getCharVar("OperationTeaTimeProgress")
+    local playerLvl = player:getMainLvl()
+    local playerJob = player:getMainJob()
 
     --Quest: The Wayward Automation
-    if Job == xi.job.PUP and LvL >= xi.settings.AF1_QUEST_LEVEL and NoStringsAttached == QUEST_COMPLETED and TheWaywardAutomation == QUEST_AVAILABLE then
+    if playerJob == xi.job.PUP and playerLvl >= xi.settings.AF1_QUEST_LEVEL and noStringsAttached == QUEST_COMPLETED and theWaywardAutomaton == QUEST_AVAILABLE then
         player:startEvent(774) -- he tells you to help find his auto
-    elseif TheWaywardAutomation == QUEST_ACCEPTED and TheWaywardAutomationProgress == 1 then
+    elseif theWaywardAutomaton == QUEST_ACCEPTED and theWaywardAutomatonProgress == 1 then
         player:startEvent(775) -- reminder about to head to Nashmau
-    elseif TheWaywardAutomation == QUEST_ACCEPTED and TheWaywardAutomationProgress == 3 then
+    elseif theWaywardAutomaton == QUEST_ACCEPTED and theWaywardAutomatonProgress == 3 then
         player:startEvent(776) -- tell him you found automation
-    elseif Job == xi.job.PUP and LvL < xi.settings.AF2_QUEST_LEVEL and TheWaywardAutomation == QUEST_COMPLETED then
+    elseif playerJob == xi.job.PUP and playerLvl < xi.settings.AF2_QUEST_LEVEL and theWaywardAutomaton == QUEST_COMPLETED then
         player:startEvent(777)
-    elseif Job ~= xi.job.PUP and TheWaywardAutomation == QUEST_COMPLETED then
+    elseif playerJob ~= xi.job.PUP and theWaywardAutomaton == QUEST_COMPLETED then
         player:startEvent(777)
-    elseif Job ~= xi.job.PUP and NoStringsAttached == QUEST_COMPLETED then
+    elseif playerJob ~= xi.job.PUP and noStringsAttached == QUEST_COMPLETED then
         player:startEvent(267) -- asking you how are you doing with your automaton
 
     --Quest: Operation teatime
-    elseif Job == xi.job.PUP and LvL >= xi.settings.AF2_QUEST_LEVEL and NoStringsAttached == QUEST_COMPLETED and TheWaywardAutomation == QUEST_COMPLETED and OperationTeatime == QUEST_AVAILABLE then
+    elseif playerJob == xi.job.PUP and playerLvl >= xi.settings.AF2_QUEST_LEVEL and noStringsAttached == QUEST_COMPLETED and theWaywardAutomaton == QUEST_COMPLETED and operationTeaTime == QUEST_AVAILABLE then
         player:startEvent(778)
-    elseif OperationTeatime == QUEST_ACCEPTED and OperationTeatimeProgress == 1 then
+    elseif operationTeaTime == QUEST_ACCEPTED and operationTeaTimeProgress == 1 then
         player:startEvent(779) -- Reminds you to get items
-    elseif OperationTeatime == QUEST_ACCEPTED and OperationTeatimeProgress == 2 then
+    elseif operationTeaTime == QUEST_ACCEPTED and operationTeaTimeProgress == 2 then
         player:startEvent(781) -- Reminds you to get items
-    elseif OperationTeatime == QUEST_COMPLETED then
+    elseif operationTeaTime == QUEST_COMPLETED then
         player:startEvent(777)
     end
 end
@@ -63,15 +63,15 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 774 then
-        player:setCharVar("TheWaywardAutomationProgress", 1)
-        player:addQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.THE_WAYWARD_AUTOMATION)
+        player:setCharVar("TheWaywardAutomatonProgress", 1)
+        player:addQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.THE_WAYWARD_AUTOMATON)
     elseif csid == 776 then
-        npcUtil.completeQuest(player, xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.THE_WAYWARD_AUTOMATION, {item=xi.items.TURBO_ANIMATOR, var="TheWaywardAutomationProgress"})
+        npcUtil.completeQuest(player, xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.THE_WAYWARD_AUTOMATON, {item=xi.items.TURBO_ANIMATOR, var="TheWaywardAutomatonProgress"})
     elseif csid == 778 then
-        player:setCharVar("OperationTeatimeProgress", 1)
+        player:setCharVar("OperationTeaTimeProgress", 1)
         player:addQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.OPERATION_TEATIME)
     elseif csid == 780 then
-        player:setCharVar("OperationTeatimeProgress", 2)
+        player:setCharVar("OperationTeaTimeProgress", 2)
         player:confirmTrade()
     end
 end

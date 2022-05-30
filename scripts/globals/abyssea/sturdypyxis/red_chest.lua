@@ -17,7 +17,8 @@ local pressureChoice =
     [64] = 30,
 }
 
-local lockwear = {
+local lockwear =
+{
     [1] = 5,
     [2] = 10,
     [3] = 15,

@@ -8,10 +8,19 @@ local ID = require("scripts/zones/Castle_Oztroja/IDs")
 require("scripts/globals/keyitems")
 require("scripts/settings/main")
 require("scripts/globals/dynamis")
+-----------------------------------
+local entity = {}
 
-local TIMELESS_HOURGLASS = 4236
-local currency = {1449, 1450, 1451}
-local shop = {
+local timelessHourglassID = 4236
+local currency =
+{
+    1449,
+    1450,
+    1451
+}
+
+local shop =
+{
      7, 1312, -- Angel Skin
      8, 1518, -- Colossal Skull
      9, 1464, -- Lancewood Log
@@ -20,7 +29,9 @@ local shop = {
     25, 1462, -- Lancewood Lumber
     28, 658,  -- Damascus Ingot
 }
-local maps = {
+
+local maps =
+{
     [xi.ki.MAP_OF_DYNAMIS_SAN_DORIA]   = 10000,
     [xi.ki.MAP_OF_DYNAMIS_BASTOK]     = 10000,
     [xi.ki.MAP_OF_DYNAMIS_WINDURST]   = 10000,
@@ -32,8 +43,6 @@ local maps = {
     [xi.ki.MAP_OF_DYNAMIS_QUFIM]      = 10000,
     [xi.ki.MAP_OF_DYNAMIS_TAVNAZIA]   = 20000,
 }
------------------------------------
-local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     local gil = trade:getGil()
@@ -46,7 +55,7 @@ entity.onTrade = function(player, npc, trade)
             player:startEvent(54)
 
         -- return timeless hourglass for refund
-        elseif (count == 1 and trade:hasItemQty(TIMELESS_HOURGLASS, 1)) then
+        elseif (count == 1 and trade:hasItemQty(timelessHourglassID, 1)) then
             player:startEvent(97)
 
         -- currency exchanges
@@ -77,7 +86,7 @@ end
 
 entity.onTrigger = function(player, npc)
     if (player:hasKeyItem(xi.ki.VIAL_OF_SHROUDED_SAND)) then
-        player:startEvent(53, currency[1], xi.settings.CURRENCY_EXCHANGE_RATE, currency[2], xi.settings.CURRENCY_EXCHANGE_RATE, currency[3], xi.settings.PRISMATIC_HOURGLASS_COST, TIMELESS_HOURGLASS, xi.settings.TIMELESS_HOURGLASS_COST)
+        player:startEvent(53, currency[1], xi.settings.CURRENCY_EXCHANGE_RATE, currency[2], xi.settings.CURRENCY_EXCHANGE_RATE, currency[3], xi.settings.PRISMATIC_HOURGLASS_COST, timelessHourglassID, xi.settings.TIMELESS_HOURGLASS_COST)
     else
         player:startEvent(50)
     end
@@ -88,7 +97,7 @@ entity.onEventUpdate = function(player, csid, option)
 
         -- asking about hourglasses
         if (option == 1) then
-            if (not player:hasItem(TIMELESS_HOURGLASS)) then
+            if (not player:hasItem(timelessHourglassID)) then
                 -- must figure out what changes here to prevent the additional dialog
                 -- player:updateEvent(?)
             end

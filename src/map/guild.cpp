@@ -98,7 +98,7 @@ std::pair<uint8, int16> CGuild::addGuildPoints(CCharEntity* PChar, CItem* PItem)
 
                     charutils::AddPoints(PChar, pointsName.c_str(), points);
 
-                    sql->Async("REPLACE INTO char_vars VALUES (%d, '[GUILD]daily_points', %u);", PChar->id, curPoints + points);
+                    sql->Query("REPLACE INTO char_vars VALUES (%d, '[GUILD]daily_points', %u);", PChar->id, curPoints + points);
 
                     return {
                         std::clamp<uint8>(quantity, 0, std::numeric_limits<uint8>::max()), points

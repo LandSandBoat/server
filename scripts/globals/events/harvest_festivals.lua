@@ -10,6 +10,7 @@ function isHalloweenEnabled()
     local option = 0
     local month = tonumber(os.date("%m"))
     local day = tonumber(os.date("%d"))
+
     if (month == 10 and day >= 20 or month == 11 and day == 1 or xi.settings.HALLOWEEN_YEAR_ROUND ~= 0) then -- According to wiki Harvest Fest is Oct 20 - Nov 1.
         if (xi.settings.HALLOWEEN_2005 == 1) then
             option = 1
@@ -147,14 +148,14 @@ function onHalloweenTrade(player, trade, npc)
                     itemInList = itemInList - 32
                 end
 
-                local AlreadyTradedChk = utils.mask.getBit(harvestFestTreats, itemInList)
+                local alreadyTradedChk = utils.mask.getBit(harvestFestTreats, itemInList)
                 if (itemReward ~= 0 and player:getFreeSlotsCount() >= 1 and math.random(1, 3) < 2) then -- Math.random added so you have 33% chance on getting item
 
                     player:messageSpecial(ID.text.HERE_TAKE_THIS)
                     player:addItem(itemReward)
                     player:messageSpecial(ID.text.ITEM_OBTAINED, itemReward)
 
-                elseif player:canUseMisc(xi.zoneMisc.COSTUME) and not AlreadyTradedChk then
+                elseif player:canUseMisc(xi.zoneMisc.COSTUME) and not alreadyTradedChk then
                 -- Other neat looking halloween type costumes
                 -- two dragon skins: @420/421
                 -- @422 dancing weapon
@@ -168,16 +169,16 @@ function onHalloweenTrade(player, trade, npc)
                 -- 564/579 skele
 
                     -- Possible costume values:
-                    local Yagudo = math.random(580, 607)
-                    local Quadav = math.random(644, 671)
-                    local Shade = math.random(535, 538)
-                    local Orc = math.random(612, 639)
-                    local Ghost = 368
-                    local Hound = 365
-                    local Skeleton = 564
-                    local Dark_Stalker = math.random(531, 534)
+                    local yagudo = math.random(580, 607)
+                    local quadav = math.random(644, 671)
+                    local shade = math.random(535, 538)
+                    local orc = math.random(612, 639)
+                    local ghost = 368
+                    local hound = 365
+                    local skeleton = 564
+                    local darkStalker = math.random(531, 534)
 
-                    local halloween_costume_list = {Quadav, Orc, Yagudo, Shade, Ghost, Hound, Skeleton, Dark_Stalker}
+                    local halloween_costume_list = { quadav, orc, yagudo, shade, ghost, hound, skeleton, darkStalker }
 
                     local costumePicked = halloween_costume_list[math.random(1, #halloween_costume_list)] -- will randomly pick one of the costumes in the list
                     player:addStatusEffect(xi.effect.COSTUME, costumePicked, 0, 3600)
@@ -186,12 +187,12 @@ function onHalloweenTrade(player, trade, npc)
                     -- zone, costumeID
                     local pitchForkCostumeList =
                     {
-                        234, Shade, Skeleton, -- Bastok mines
-                        235, Hound, Ghost,    -- Bastok Markets
-                        230, Ghost, Skeleton, -- Southern Sandoria
-                        231, Hound, Skeleton, -- Northern Sandoria
-                        241, Ghost, Shade,    -- Windurst Woods
-                        238, Shade, Hound     -- Windurst Woods
+                        234, shade, skeleton, -- Bastok mines
+                        235, hound, ghost,    -- Bastok Markets
+                        230, ghost, skeleton, -- Southern Sandoria
+                        231, hound, skeleton, -- Northern Sandoria
+                        241, ghost, shade,    -- Windurst Woods
+                        238, shade, hound     -- Windurst Woods
                     }
 
                     for zi = 1, #pitchForkCostumeList, 3 do
@@ -209,7 +210,7 @@ function onHalloweenTrade(player, trade, npc)
                     player:messageSpecial(ID.text.THANK_YOU)
                 end
 
-                if not AlreadyTradedChk then
+                if not alreadyTradedChk then
                     player:setCharVar(varName, utils.mask.setBit(harvestFestTreats, itemInList, true))
                 end
 

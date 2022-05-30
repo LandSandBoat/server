@@ -34,9 +34,10 @@ zones[xi.zone.XARCABARD_S] =
         {
             [17338384] = 17338386,
         },
-        VOIDWALKER        =
+        VOIDWALKER =
         {
-            [xi.keyItem.CLEAR_ABYSSITE] = {
+            [xi.keyItem.CLEAR_ABYSSITE] =
+            {
                 17338607, -- Gorehound
                 17338606, -- Gorehound
                 17338605, -- Gorehound
@@ -46,18 +47,25 @@ zones[xi.zone.XARCABARD_S] =
                 17338601, -- Gjenganger
                 17338600, -- Gjenganger
             },
-            [xi.keyItem.COLORFUL_ABYSSITE] = {
+
+            [xi.keyItem.COLORFUL_ABYSSITE] =
+            {
                 17338599, -- Erebus
-                17338598  -- Feuerunke
+                17338598, -- Feuerunke
             },
-            [xi.keyItem.PURPLE_ABYSSITE] = {
-                17338597  -- Lord Ruthven
+
+            [xi.keyItem.PURPLE_ABYSSITE] =
+            {
+                17338597, -- Lord Ruthven
             },
-            [xi.keyItem.BLACK_ABYSSITE] = {
-                17338596  -- Yilbegan
+
+            [xi.keyItem.BLACK_ABYSSITE] =
+            {
+                17338596, -- Yilbegan
             }
         }
     },
+
     npc =
     {
     },

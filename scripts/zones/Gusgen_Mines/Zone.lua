@@ -36,4 +36,28 @@ end
 zone_object.onEventFinish = function(player, csid, option)
 end
 
+zone_object.onGameHour = function(zone)
+    local totd = VanadielTOTD()
+
+    if totd == xi.time.NEW_DAY or totd == xi.time.MIDNIGHT then
+        local ghost
+        local ghostTable =
+        {
+            [1] = {id = ID.mob.ASPHYXIATED_AMSEL, nm = GetMobByID(ID.mob.ASPHYXIATED_AMSEL)},
+            [2] = {id = ID.mob.BURNED_BERGMANN, nm = GetMobByID(ID.mob.BURNED_BERGMANN)},
+            [3] = {id = ID.mob.CRUSHED_KRAUSE, nm = GetMobByID(ID.mob.CRUSHED_KRAUSE)},
+            [4] = {id = ID.mob.PULVERIZED_PFEFFER, nm = GetMobByID(ID.mob.PULVERIZED_PFEFFER)},
+            [5] = {id = ID.mob.SMOTHERED_SCHMIDT, nm = GetMobByID(ID.mob.SMOTHERED_SCHMIDT)},
+            [6] = {id = ID.mob.WOUNDED_WURFEL, nm = GetMobByID(ID.mob.WOUNDED_WURFEL)},
+        }
+
+        for i = 1, 6 do
+            ghost = ghostTable[i].nm
+            if not ghost:isSpawned() and os.time() > ghost:getLocalVar("cooldown") then
+                SpawnMob(ghostTable[i].id)
+            end
+        end
+    end
+end
+
 return zone_object

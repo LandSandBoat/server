@@ -100,7 +100,7 @@ namespace conquest
 
         influences[nation] += lost;
 
-        sql->Async(
+        sql->Query(
             "UPDATE conquest_system SET sandoria_influence = %d, bastok_influence = %d, "
             "windurst_influence = %d, beastmen_influence = %d WHERE region_id = %u;",
             influences[0], influences[1], influences[2], influences[3], static_cast<uint8>(region));
@@ -374,7 +374,7 @@ namespace conquest
                             IF(windurst_influence > bastok_influence AND windurst_influence > sandoria_influence AND \
                             windurst_influence > beastmen_influence, 2, 3)));";
 
-        sql->Async(Query);
+        sql->Query(Query);
 
         // update conquest overseers
         for (uint8 i = 0; i <= 18; i++)

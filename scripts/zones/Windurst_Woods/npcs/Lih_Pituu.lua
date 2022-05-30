@@ -31,14 +31,14 @@ end
 
 entity.onTrigger = function(player, npc)
     local guildMember = xi.crafting.isGuildMember(player, 2)
-    local SkillLevel = player:getSkillLevel(xi.skill.BONECRAFT)
-    local Cost = xi.crafting.getAdvImageSupportCost(player, xi.skill.BONECRAFT)
+    local skillLevel = player:getSkillLevel(xi.skill.BONECRAFT)
+    local cost = xi.crafting.getAdvImageSupportCost(player, xi.skill.BONECRAFT)
 
     if guildMember == 1 then
         if not player:hasStatusEffect(xi.effect.BONECRAFT_IMAGERY) then
-            player:startEvent(10018, Cost, SkillLevel, 0, 511, player:getGil(), 0, 7028, 0)
+            player:startEvent(10018, cost, skillLevel, 0, 511, player:getGil(), 0, 7028, 0)
         else
-            player:startEvent(10018, Cost, SkillLevel, 0, 511, player:getGil(), 28753, 3967, 0)
+            player:startEvent(10018, cost, skillLevel, 0, 511, player:getGil(), 28753, 3967, 0)
         end
     else
         player:startEvent(10018) -- Standard Dialogue
@@ -49,10 +49,10 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    local Cost = xi.crafting.getAdvImageSupportCost(player, xi.skill.BONECRAFT)
+    local cost = xi.crafting.getAdvImageSupportCost(player, xi.skill.BONECRAFT)
 
     if csid == 10018 and option == 1 then
-        player:delGil(Cost)
+        player:delGil(cost)
         player:messageSpecial(ID.text.IMAGE_SUPPORT, 0, 6, 0)
         player:addStatusEffect(xi.effect.BONECRAFT_IMAGERY, 3, 0, 480)
     end

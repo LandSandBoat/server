@@ -12,7 +12,8 @@ end
 
 entity.onMobSpawn = function(mob)
     local dynaLord = GetMobByID(ID.mob.DYNAMIS_LORD)
-    if (dynaLord:getLocalVar("magImmune") < 2) then -- both dragons have not been killed initially
+
+    if dynaLord:getLocalVar("magImmune") < 2 then -- both dragons have not been killed initially
         dynaLord:setMod(xi.mod.UDMGMAGIC, -10000)
         dynaLord:setMod(xi.mod.UDMGBREATH, -10000)
         dynaLord:setLocalVar("magImmune", 0)
@@ -25,8 +26,9 @@ end
 entity.onMobFight = function(mob, target)
     -- Repop Yang every 30 seconds if Ying is up and Yang is not.
     local yang = GetMobByID(ID.mob.YANG)
-    local YangToD = mob:getLocalVar("YangToD")
-    if yang:getCurrentAction() == xi.act.NONE and os.time() > YangToD+30 then
+    local yangToD = mob:getLocalVar("YangToD")
+
+    if yang:getCurrentAction() == xi.act.NONE and os.time() > yangToD + 30 then
         yang:setSpawn(mob:getXPos(), mob:getYPos(), mob:getZPos())
         yang:spawn()
         yang:updateEnmity(target)
@@ -37,10 +39,11 @@ entity.onMobDeath = function(mob, player, isKiller)
 end
 
 entity.onMobDespawn = function(mob)
-    local Yang = GetMobByID(ID.mob.YANG)
+    local yang = GetMobByID(ID.mob.YANG)
     local dynaLord = GetMobByID(ID.mob.DYNAMIS_LORD)
+
     -- localVars clear on death, so setting it on its partner
-    Yang:setLocalVar("YingToD", os.time())
+    yang:setLocalVar("YingToD", os.time())
     if (dynaLord:getLocalVar("magImmune") == 0) then
         dynaLord:setMod(xi.mod.UDMGMAGIC, 0)
         dynaLord:setMod(xi.mod.UDMGBREATH, 0)

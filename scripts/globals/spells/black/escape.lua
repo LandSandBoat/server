@@ -1,9 +1,7 @@
 -----------------------------------
 -- Spell: Escape
 -----------------------------------
-require("scripts/globals/teleports")
-require("scripts/globals/status")
-require("scripts/globals/msg")
+require("scripts/globals/spells/spell_enhancing_teleport")
 -----------------------------------
 local spell_object = {}
 
@@ -12,10 +10,7 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    spell:setMsg(xi.msg.basic.MAGIC_TELEPORT)
-    target:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.ESCAPE, 0, 4)
-
-    return 0
+    return xi.spells.spell_enhancing_teleport.useTeleportSpell(caster, target, spell)
 end
 
 return spell_object

@@ -5,7 +5,8 @@ local ID = require("scripts/zones/Lower_Jeuno/IDs")
 require("scripts/globals/status")
 -----------------------------------
 
-local lowerJeunoGlobal = {
+local lowerJeunoGlobal =
+{
     --[[..............................................................................................
         Community Service Quest: player clicks a streetlamp
         ..............................................................................................]]
