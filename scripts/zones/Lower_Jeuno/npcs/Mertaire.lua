@@ -12,12 +12,12 @@ require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 
-local POETIC_PARCHMENT = 634
+local poeticParchmentID = 634
 
 entity.onTrade = function(player, npc, trade)
     -- A MINSTREL IN DESPAIR (poetic parchment)
     if
-        trade:hasItemQty(POETIC_PARCHMENT, 1) and
+        trade:hasItemQty(poeticParchmentID, 1) and
         trade:getItemCount() == 1 and
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_OLD_MONUMENT) == QUEST_COMPLETED and
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_MINSTREL_IN_DESPAIR) == QUEST_AVAILABLE

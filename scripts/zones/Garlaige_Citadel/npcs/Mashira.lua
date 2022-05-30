@@ -31,12 +31,12 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    local RubbishDay = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RUBBISH_DAY)
-    local MakingAmens = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_AMENS)
-    if (csid == 11 and option == 1 and RubbishDay == QUEST_ACCEPTED) then
+    local rubbishDay = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RUBBISH_DAY)
+    local makingAmens = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_AMENS)
+    if (csid == 11 and option == 1 and rubbishDay == QUEST_ACCEPTED) then
         player:delKeyItem(xi.ki.MAGIC_TRASH)
         player:setCharVar("RubbishDayVar", 1)
-    elseif (csid == 11 and option == 0 and MakingAmens == QUEST_ACCEPTED) then
+    elseif (csid == 11 and option == 0 and makingAmens == QUEST_ACCEPTED) then
         player:addKeyItem(xi.ki.BROKEN_WAND) --Broken Wand
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.BROKEN_WAND)
         player:tradeComplete()

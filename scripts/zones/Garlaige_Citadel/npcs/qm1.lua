@@ -15,12 +15,11 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
+    local altanaSorrow = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.ALTANA_S_SORROW)
+    local virnageLetter = player:hasKeyItem(xi.ki.LETTER_FROM_VIRNAGE)
+    local divinePaint = player:hasKeyItem(xi.ki.BUCKET_OF_DIVINE_PAINT)
 
-    local AltanaSorrow = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.ALTANA_S_SORROW)
-    local VirnageLetter = player:hasKeyItem(xi.ki.LETTER_FROM_VIRNAGE)
-    local DivinePaint = player:hasKeyItem(xi.ki.BUCKET_OF_DIVINE_PAINT)
-
-    if (AltanaSorrow == QUEST_ACCEPTED and VirnageLetter == false and DivinePaint == false) then
+    if (altanaSorrow == QUEST_ACCEPTED and virnageLetter == false and divinePaint == false) then
         player:addKeyItem(xi.ki.BUCKET_OF_DIVINE_PAINT)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.BUCKET_OF_DIVINE_PAINT)
     else
@@ -29,8 +28,6 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option)
-    -- printf("CSID2: %u", csid)
-    -- printf("RESULT2: %u", option)
 end
 
 entity.onEventFinish = function(player, csid, option)

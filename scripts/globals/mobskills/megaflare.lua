@@ -24,8 +24,8 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local MegaFlareQueue = mob:getLocalVar("MegaFlareQueue") - 1 -- decrement the amount of queued Megaflares.
-    mob:setLocalVar("MegaFlareQueue", MegaFlareQueue)
+    local megaFlareQueue = mob:getLocalVar("MegaFlareQueue") - 1 -- decrement the amount of queued Megaflares.
+    mob:setLocalVar("MegaFlareQueue", megaFlareQueue)
     mob:setLocalVar("FlareWait", 0) -- reset the variables for Megaflare.
     mob:setLocalVar("tauntShown", 0)
     mob:SetMobAbilityEnabled(true) -- re-enable the other actions on success

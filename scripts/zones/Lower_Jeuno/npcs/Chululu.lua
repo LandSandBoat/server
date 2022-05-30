@@ -28,23 +28,23 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local CollectTarutCards = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COLLECT_TARUT_CARDS)
-    local RubbishDay        = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RUBBISH_DAY)
-    local AllInTheCards     = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.ALL_IN_THE_CARDS)
+    local collectTarutCards = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COLLECT_TARUT_CARDS)
+    local rubbishDay        = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RUBBISH_DAY)
+    local allInTheCards     = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.ALL_IN_THE_CARDS)
     local cdate             = player:getCharVar("AllInTheCards_date")
 
     if
         player:getFameLevel(xi.quest.fame_area.JEUNO) >= 3 and
-        CollectTarutCards == QUEST_AVAILABLE
+        collectTarutCards == QUEST_AVAILABLE
     then
         player:startEvent(28) -- Start quest "Collect Tarut Cards" with option
 
-    elseif CollectTarutCards == QUEST_ACCEPTED then
+    elseif collectTarutCards == QUEST_ACCEPTED then
         player:startEvent(27) -- During quest "Collect Tarut Cards"
 
     elseif
-        CollectTarutCards == QUEST_COMPLETED and
-        RubbishDay == QUEST_AVAILABLE and
+        collectTarutCards == QUEST_COMPLETED and
+        rubbishDay == QUEST_AVAILABLE and
         player:getCharVar("RubbishDay_day") ~= VanadielDayOfTheYear()
     then
         -- prog = player:getCharVar("RubbishDay_prog")
@@ -55,32 +55,32 @@ entity.onTrigger = function(player, npc)
         -- end
 
     elseif
-        CollectTarutCards == QUEST_COMPLETED and
-        RubbishDay == QUEST_AVAILABLE
+        collectTarutCards == QUEST_COMPLETED and
+        rubbishDay == QUEST_AVAILABLE
     then
         player:startEvent(57) -- Standard dialog between 2 quests
 
     elseif
-        RubbishDay == QUEST_ACCEPTED and
+        rubbishDay == QUEST_ACCEPTED and
         player:getCharVar("RubbishDayVar") == 0
     then
         player:startEvent(49) -- During quest "Rubbish Day"
 
     elseif
-        RubbishDay == QUEST_ACCEPTED and
+        rubbishDay == QUEST_ACCEPTED and
         player:getCharVar("RubbishDayVar") == 1
     then
         player:startEvent(197) -- Finish quest "Rubbish Day"
 
     elseif
         player:getFameLevel(xi.quest.fame_area.JEUNO) >= 4 and
-        CollectTarutCards == QUEST_COMPLETED and
-        AllInTheCards == QUEST_AVAILABLE
+        collectTarutCards == QUEST_COMPLETED and
+        allInTheCards == QUEST_AVAILABLE
     then
         player:startEvent(10110) -- Start quest "All in the Cards" with option
 
     elseif
-        AllInTheCards >= QUEST_ACCEPTED and
+        allInTheCards >= QUEST_ACCEPTED and
         player:getLocalVar("Cardstemp") == 0
     then
         if cdate >= os.time() then
@@ -98,7 +98,7 @@ entity.onTrigger = function(player, npc)
             player:startEvent(57) -- final state, after all quests complete
         end
 
-    elseif RubbishDay == QUEST_COMPLETED then
+    elseif rubbishDay == QUEST_COMPLETED then
         player:startEvent(57) -- New standard dialog
 
     else

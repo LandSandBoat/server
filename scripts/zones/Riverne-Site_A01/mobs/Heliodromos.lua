@@ -11,10 +11,10 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobRoam = function(mob)
-    local Heliodromos_Despawn = GetServerVariable("Heliodromos_Despawn")
+    local heliodromosDespawn = GetServerVariable("Heliodromos_Despawn")
 
     -- 10 minutes have passed since first heliodromos dies. despawn any remaining heliodromos.
-    if (Heliodromos_Despawn > 0 and Heliodromos_Despawn <= os.time()) then
+    if (heliodromosDespawn > 0 and heliodromosDespawn <= os.time()) then
         SetServerVariable("Heliodromos_Despawn", 0)
 
         -- despawn heliodromos

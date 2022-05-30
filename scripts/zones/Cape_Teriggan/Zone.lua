@@ -13,11 +13,11 @@ require("scripts/globals/zone")
 local zone_object = {}
 
 zone_object.onInitialize = function(zone)
-    local Kreutzet = GetMobByID(ID.mob.KREUTZET)
+    local kreutzet = GetMobByID(ID.mob.KREUTZET)
     UpdateNMSpawnPoint(ID.mob.KREUTZET)
-    Kreutzet:setRespawnTime(math.random(32400, 43200)) -- 9 to 12 hours
-    Kreutzet:setLocalVar("cooldown", os.time() + Kreutzet:getRespawnTime()/1000)
-    DisallowRespawn(Kreutzet:getID(), true) -- prevents accidental 'pop' during no wind weather and immediate despawn
+    kreutzet:setRespawnTime(math.random(32400, 43200)) -- 9 to 12 hours
+    kreutzet:setLocalVar("cooldown", os.time() + kreutzet:getRespawnTime()/1000)
+    DisallowRespawn(kreutzet:getID(), true) -- prevents accidental 'pop' during no wind weather and immediate despawn
 
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())
 end
@@ -53,13 +53,13 @@ zone_object.onEventFinish = function( player, csid, option)
 end
 
 zone_object.onZoneWeatherChange = function(weather)
-    local Kreutzet = GetMobByID(ID.mob.KREUTZET)
+    local kreutzet = GetMobByID(ID.mob.KREUTZET)
     if
-        not Kreutzet:isSpawned() and os.time() > Kreutzet:getLocalVar("cooldown")
+        not kreutzet:isSpawned() and os.time() > kreutzet:getLocalVar("cooldown")
         and (weather == xi.weather.WIND or weather == xi.weather.GALES)
     then
-        DisallowRespawn(Kreutzet:getID(), false)
-        Kreutzet:setRespawnTime(math.random(30, 150)) -- pop 30-150 sec after wind weather starts
+        DisallowRespawn(kreutzet:getID(), false)
+        kreutzet:setRespawnTime(math.random(30, 150)) -- pop 30-150 sec after wind weather starts
     end
 end
 

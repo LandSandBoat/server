@@ -5,7 +5,7 @@ local ID = require("scripts/zones/Castle_Oztroja/IDs")
 require("scripts/globals/status")
 -----------------------------------
 
-local CASTLE_OZTROJA =
+local oztrojaGlobal =
 {
     --[[..............................................................................................
         pick a new handle combination for the brass door on floor 2
@@ -77,4 +77,4 @@ local CASTLE_OZTROJA =
     end,
 }
 
-return CASTLE_OZTROJA
+return oztrojaGlobal

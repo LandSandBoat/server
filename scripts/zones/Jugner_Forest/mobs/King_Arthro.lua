@@ -16,11 +16,11 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    local KingArthroID = mob:getID()
+    local kingArthroID = mob:getID()
 
     -- Use King Arthro ID to determine Knight Crab Id's, then set their respawn to 0 so they don't spawn while KA is up
     for offset = 1, 10 do
-        GetMobByID(KingArthroID - offset):setRespawnTime(0)
+        GetMobByID(kingArthroID - offset):setRespawnTime(0)
     end
 end
 
@@ -51,14 +51,14 @@ entity.onMobDeath = function(mob, player, isKiller)
 end
 
 entity.onMobDespawn = function(mob)
-    local KingArthroID = mob:getID()
+    local kingArthroID = mob:getID()
 
-    GetMobByID(KingArthroID):setLocalVar("[POP]King_Arthro", 0)
+    GetMobByID(kingArthroID):setLocalVar("[POP]King_Arthro", 0)
 
     -- Set respawn of 21:05 to 24:05
     local respawnTime = 75900 + math.random(0, 6) * 1800 -- 21:05 to 24:05 respawn timer in 30 minute intervals
     for offset = 1, 10 do
-        GetMobByID(KingArthroID - offset):setRespawnTime(respawnTime)
+        GetMobByID(kingArthroID - offset):setRespawnTime(respawnTime)
     end
 end
 

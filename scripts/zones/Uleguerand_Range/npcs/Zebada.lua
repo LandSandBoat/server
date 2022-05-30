@@ -18,15 +18,14 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-
-    local ZephyrFanCD = player:getCharVar("[ENM]ZephyrFan")
+    local zephyrFanCD = player:getCharVar("[ENM]ZephyrFan")
 
     if (player:hasKeyItem(xi.ki.ZEPHYR_FAN)) then
         player:startEvent(12)
     else
-        if (ZephyrFanCD >= os.time()) then
+        if (zephyrFanCD >= os.time()) then
             -- Both Vanadiel time and unix timestamps are based on seconds. Add the difference to the event.
-            player:startEvent(15, VanadielTime()+(ZephyrFanCD-os.time()))
+            player:startEvent(15, VanadielTime()+(zephyrFanCD-os.time()))
         else
             if (player:hasItem(1780) or player:hasItem(1779)) then -- Chamnaet Ice -- Cotton Pouch
                 player:startEvent(16)

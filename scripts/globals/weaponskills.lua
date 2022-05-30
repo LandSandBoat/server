@@ -1233,14 +1233,14 @@ function handleWSGorgetBelt(attacker)
         local elementalBelt =   { 11755, 11758, 11760, 11757, 11756, 11759, 11761, 11762 }
         local neck = attacker:getEquipID(xi.slot.NECK)
         local belt = attacker:getEquipID(xi.slot.WAIST)
-        local SCProp1, SCProp2, SCProp3 = attacker:getWSSkillchainProp()
+        local scProp1, scProp2, scProp3 = attacker:getWSSkillchainProp()
 
         for i, v in ipairs(elementalGorget) do
             if neck == v then
                 if
-                    doesElementMatchWeaponskill(i, SCProp1) or
-                    doesElementMatchWeaponskill(i, SCProp2) or
-                    doesElementMatchWeaponskill(i, SCProp3)
+                    doesElementMatchWeaponskill(i, scProp1) or
+                    doesElementMatchWeaponskill(i, scProp2) or
+                    doesElementMatchWeaponskill(i, scProp3)
                 then
                     accBonus = accBonus + 10
                     ftpBonus = ftpBonus + 0.1
@@ -1258,9 +1258,9 @@ function handleWSGorgetBelt(attacker)
         for i, v in ipairs(elementalBelt) do
             if belt == v then
                 if
-                    doesElementMatchWeaponskill(i, SCProp1) or
-                    doesElementMatchWeaponskill(i, SCProp2) or
-                    doesElementMatchWeaponskill(i, SCProp3)
+                    doesElementMatchWeaponskill(i, scProp1) or
+                    doesElementMatchWeaponskill(i, scProp2) or
+                    doesElementMatchWeaponskill(i, scProp3)
                 then
                     accBonus = accBonus + 10
                     ftpBonus = ftpBonus + 0.1

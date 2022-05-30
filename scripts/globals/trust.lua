@@ -26,7 +26,7 @@ xi.trust.message_offset =
     SPECIAL_MOVE_2 = 19,
 }
 
-local MAX_MESSAGE_PAGE = 121
+local maxMessagePage = 121
 
 local rovKIBattlefieldIDs = set{
     5,    -- Shattering Stars (WAR LB5)
@@ -357,8 +357,8 @@ xi.trust.message = function(mob, message_offset)
         return
     end
 
-    if page_offset > MAX_MESSAGE_PAGE then
-        print("trust.lua: MAX_MESSAGE_PAGE exceeded!")
+    if page_offset > maxMessagePage then
+        print("trust.lua: maxMessagePage exceeded!")
         return
     end
 

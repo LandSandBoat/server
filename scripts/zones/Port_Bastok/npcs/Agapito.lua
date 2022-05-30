@@ -16,11 +16,11 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local TheStarsOfIfrit = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_STARS_OF_IFRIT)
+    local theStarsOfIfrit = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_STARS_OF_IFRIT)
 
-    if (player:getFameLevel(xi.quest.fame_area.BASTOK) >= 3 and TheStarsOfIfrit == QUEST_AVAILABLE and player:hasKeyItem(xi.ki.AIRSHIP_PASS) == true) then
+    if (player:getFameLevel(xi.quest.fame_area.BASTOK) >= 3 and theStarsOfIfrit == QUEST_AVAILABLE and player:hasKeyItem(xi.ki.AIRSHIP_PASS) == true) then
         player:startEvent(180)
-    elseif (TheStarsOfIfrit == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.CARRIER_PIGEON_LETTER) == true) then
+    elseif (theStarsOfIfrit == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.CARRIER_PIGEON_LETTER) == true) then
         player:startEvent(181)
     else
         player:startEvent(17)
