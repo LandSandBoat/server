@@ -181,7 +181,7 @@ int32 CCommandHandler::call(sol::state& lua, CCharEntity* PChar, const int8* com
     TracyZoneIString(commandline);
 
     auto filename   = fmt::format("./scripts/commands/{}.lua", cmdname.c_str());
-    auto loadResult = lua.safe_script_file(filename);
+    auto loadResult = lua.safe_script_file(filename, &sol::script_pass_on_error);
     if (!loadResult.valid())
     {
         sol::error err = loadResult;

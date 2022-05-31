@@ -214,8 +214,8 @@ namespace luautils
 
         // Load globals
         // Truly global files first
-        lua.script_file("./scripts/settings/main.lua");
-        lua.script_file("./scripts/globals/common.lua");
+        lua.safe_script_file("./scripts/settings/main.lua", &sol::script_pass_on_error);
+        lua.safe_script_file("./scripts/globals/common.lua", &sol::script_pass_on_error);
         roeutils::init(); // TODO: Get rid of the need to do this
 
         // Then the rest...
@@ -227,7 +227,7 @@ namespace luautils
                 auto relative_path_string = entry.path().relative_path().generic_string();
                 //auto lua_path = std::filesystem::relative(entry.path(), "./").replace_extension("").generic_string();
                 //ShowInfo("Loading global script %s", lua_path);
-                auto result = lua.safe_script_file(relative_path_string);
+                auto result = lua.safe_script_file(relative_path_string, &sol::script_pass_on_error);
                 if (!result.valid())
                 {
                     sol::error err = result;
@@ -659,7 +659,7 @@ namespace luautils
         }
 
         // Try and load script
-        auto file_result = lua.safe_script_file(filename);
+        auto file_result = lua.safe_script_file(filename, &sol::script_pass_on_error);
         if (!file_result.valid())
         {
             sol::error err = file_result;
@@ -2672,7 +2672,7 @@ namespace luautils
 
         auto filename = fmt::format("./scripts/zones/{}/mobs/{}.lua", zone_name, name);
 
-        auto script_result = lua.script_file(filename);
+        auto script_result = lua.safe_script_file(filename, &sol::script_pass_on_error);
         if (!script_result.valid())
         {
             return -1;
@@ -2721,7 +2721,7 @@ namespace luautils
 
         auto filename = fmt::format("./scripts/mixins/zones/{}.lua", PMob->loc.zone->GetName());
 
-        auto script_result = lua.script_file(filename);
+        auto script_result = lua.safe_script_file(filename, &sol::script_pass_on_error);
         if (!script_result.valid())
         {
             return -1;

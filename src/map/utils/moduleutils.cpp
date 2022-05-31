@@ -125,7 +125,7 @@ namespace moduleutils
         sol::state& lua = luautils::lua;
 
         // Load the helper file
-        lua.script_file("./modules/module_utils.lua");
+        lua.safe_script_file("./modules/module_utils.lua", &sol::script_pass_on_error);
 
         // Read lines from init.txt
         std::vector<std::string> list;
@@ -167,7 +167,7 @@ namespace moduleutils
                 std::string filename  = path.filename().generic_string();
                 std::string relPath   = path.relative_path().generic_string();
 
-                auto res = lua.safe_script_file(relPath);
+                auto res = lua.safe_script_file(relPath, &sol::script_pass_on_error);
                 if (!res.valid())
                 {
                     sol::error err = res;

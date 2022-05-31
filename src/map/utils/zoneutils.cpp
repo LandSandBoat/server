@@ -506,8 +506,11 @@ namespace zoneutils
         }
 
         // handle mob initialise functions after they're all loaded
-        ForEachZone([](CZone* PZone) {
-            PZone->ForEachMob([](CMobEntity* PMob) {
+        // clang-format off
+        ForEachZone([](CZone* PZone)
+        {
+            PZone->ForEachMob([](CMobEntity* PMob)
+            {
                 luautils::OnMobInitialize(PMob);
                 luautils::ApplyMixins(PMob);
                 luautils::ApplyZoneMixins(PMob);
@@ -525,6 +528,7 @@ namespace zoneutils
                 }
             });
         });
+        // clang-format on
 
         // attach pets to mobs
         const char* PetQuery = "SELECT mob_groups.zoneid, mob_mobid, pet_offset \
