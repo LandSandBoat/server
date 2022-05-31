@@ -1,13 +1,16 @@
 -----------------------------------
 -- Angra Mainyu Era Module
 -----------------------------------
-require("modules/module_utils")
+require("modules/era/lua/dynamis/globals/era_dynamis")
+require("modules/era/lua/dynamis/globals/era_dynamis_spawning")
+require("scripts/globals/dynamis")
 require("scripts/globals/zone")
 -----------------------------------
-local m = Module:new("era_angra_mainyu")
 
-m:addOverride("xi.zones.Dynamis-Beaucedine.mobs.Angra_Mainyu.onMobSpawn", function(mob)
-    local mobID = mob:getID()
+xi = xi or {}
+xi.dynamis = xi.dynamis or {}
+
+xi.dynamis.onSpawnAngra = function(mob)
     xi.dynamis.setMegaBossStats(mob)
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 25)
 
@@ -18,91 +21,51 @@ m:addOverride("xi.zones.Dynamis-Beaucedine.mobs.Angra_Mainyu.onMobSpawn", functi
             {id = xi.jsa.CHAINSPELL, hpp = 25},
         },
     })
-end)
+end
 
-m:addOverride("xi.zones.Dynamis-Beaucedine.mobs.Angra_Mainyu.onMobEngaged", function(mob, target)
-    local OMobIndex = mobIndex
-    local oMob = mob
-    local i = 1
-    local pets =
-    {
-        ["Fire Puki"] = {"4650756b" , 130, 134, 0, nil, nil}, -- FPuk
-        ["Wind Puki"] = {"5750756b" , 130, 134, 0, nil, nil}, -- WPuk
-        ["Poison Puki"] = {"506f50756b" , 130, 134, 0, nil, nil}, -- PoPuk
-        ["Petro Puki"] = {"506550756b" , 130, 134, 0, nil, nil}, -- PePuk
-    }
-    for _, pet in pairs(pets) do
-        local mob = zone:insertDynamicEntity({
-            objtype = xi.objType.MOB,
-            name = nameObj[1],
-            x = oMob:getXPos()+math.random()*6-3,
-            y = oMob:getYPos()-0.3,
-            z = oMob:getXPos()+math.random()*6-3,
-            rotation = oMob:getRotPos(),
-            groupId = nameObj[2],
-            groupZoneId = nameObj[3],
-            onMobSpawn = function(mob) xi.dynamis.setNMStats(mob) end,
-            onMobRoam = function(mob) xi.dynamis.mobOnRoam(mob) end,
-            onMobFight = function(mob) xi.dynamis.mobOnFight(mob) end,
-            onMobRoamAction = function(mob) xi.dynamis.mobOnRoamAction(mob) end,
-            onMobDeath = function(mob, playerArg, isKiller)
-                xi.dynamis.mobOnDeath(mob, mobList[mob:getZoneID()], zones[mob:getZoneID()].text.DYNAMIS_TIME_EXTEND)
-            end,
-        })
-        mob:setSpawn(oMob:getXPos()+math.random()*6-3, oMob:getYPos()-0.3, oMob:getZPos()+math.random()*6-3, oMob:getRotPos())
-        mob:setDropID(nameObj[4])
-        if nameObj[5] ~= nil then -- If SpellList ~= nil set SpellList
-            mob:setSpellList(nameObj[5])
-        end
-        if nameObj[6] ~= nil then -- If SkillList ~= nil set SkillList
-            mob:setMobMod(xi.mobMod.SKILL_LIST, nameObj[6])
-        end
-        oMob:setLocalVar(string.format("PetID_%i", i + 1), mob:getID())
-        mob:setLocalVar("PetMaster", OMobIndex)
-        mob:spawn()
-        mob:updateEnmity(target)
-    end
-end)
 
-m:addOverride("xi.zones.Dynamis-Beaucedine.mobs.Angra_Mainyu.onMobFight", function(mob, target)
+xi.dynamis.onFightAngra = function(mob, target)
+    local mobsInZone = zone:getMobs()
+    local mobIndex = mob:getLocalVar(string.format("MobIndex_%s", mob:getID()))
+    local nmchildren = xi.dynamis.mobList[mob:getZoneID()][mobIndex].nmchildren
+    local children = {nmchildren[2], nmchildren[3], nmchildren[4], nmchildren[5]}
     local teles =
-            {
-            {279.4038, 20, 535.4518},
-            {312.6868, 20.5267, 511.9843},
-            {322.2653, 20, 481.8030},
-            {295.9948, 20.7949, 483.1078},
-            {269.6127, 19.5547, 505.3206},
-            {240.9685, 20, 521.5283},
-            {239.8057, 20.1687, 487.3961},
-            {258.6785, 20.1525, 460.4170},
-            }
-        
-        
-            local teleTime = mob:getLocalVar("teleTime")
-            if mob:getBattleTime() - teleTime > 30 then
-                randPos = teles[math.random((1), (8))]
-                xi.dynamis.teleport(mob, 1000)
-                mob:setPos(randPos, 0)
-                for i = 1, 4 do
-                    local pet = GetMobByID(mob:getLocalVar(string.format("PetID_%i", i)))
-                    if pet:isAlive() and mob:getHPP() <= 99 then
-                        pet:disengage()
-                        pet:resetEnmity(target)
-                        pet:updateEnmity(mob:getTarget())
-                    end
-                end
-                mob:setLocalVar("teleTime", mob:getBattleTime())
-            end
-        
-            for i = 1, 4 do
-                local pet = GetMobByID(mob:getLocalVar(string.format("PetID_%i", i)))
-                if pet:isAlive() and pet:getCurrentAction() == xi.act.ROAMING then
-                    pet:updateEnmity(target)
-                end
-            end
-end)
+    {
+    {279.4038, 20, 535.4518},
+    {312.6868, 20.5267, 511.9843},
+    {322.2653, 20, 481.8030},
+    {295.9948, 20.7949, 483.1078},
+    {269.6127, 19.5547, 505.3206},
+    {240.9685, 20, 521.5283},
+    {239.8057, 20.1687, 487.3961},
+    {258.6785, 20.1525, 460.4170},
+    }
 
-m:addOverride("xi.zones.Dynamis-Beaucedine.mobs.Angra_Mainyu.onMobMagicPrepare", function(mob, target)
+    local teleTime = mob:getLocalVar("teleTime")
+    if mob:getBattleTime() - teleTime > 30 then
+        randPos = teles[math.random((1), (8))]
+        xi.dynamis.teleport(mob, 1000)
+        mob:setPos(randPos, 0)
+        for _, childIndex in pairs(children) do
+            local child = GetMobByID(mob:getLocalVar(string.format("ChildID_%s", childIndex)))
+            if child:isAlive() and child:getHPP() <= 99 then
+                child:disengage()
+                child:resetEnmity(target)
+                child:updateEnmity(mob:getTarget())
+            end
+        end
+        mob:setLocalVar("teleTime", mob:getBattleTime())
+    end
+
+    for _, childIndex in pairs(children) do
+        local child = GetMobByID(mob:getLocalVar(string.format("ChildID_%s", childIndex)))
+        if child:isAlive() and child:getCurrentAction() == xi.act.ROAMING then
+            child:updateEnmity(target)
+        end
+    end
+end
+
+xi.dynamis.onMagicPrepAngra = function(mob)
     if mob:getHPP() <= 25 then
         return 367 -- Death
     else
@@ -122,10 +85,27 @@ m:addOverride("xi.zones.Dynamis-Beaucedine.mobs.Angra_Mainyu.onMobMagicPrepare",
             return 359 -- Silencega
         end
     end
-end)
+end
 
-m:addOverride("xi.zones.Dynamis-Beaucedine.mobs.Angra_Mainyu.onMobRoam", function(mob) xi.dynamis.mobOnRoam(mob) mob:setLocalVar("teleTime", 0) end)
-m:addOverride("xi.zones.Dynamis-Beaucedine.mobs.Angra_Mainyu.onMobRoamAction", function(mob) xi.dynamis.mobOnRoamAction(mob) end)
-m:addOverride("xi.zones.Dynamis-Beaucedine.mobs.Angra_Mainyu.onMobDeath", function(mob, player, isKiller) xi.dynamis.megaBossOnDeath(mob, player, isKiller) end)
+xi.dynamis.onRoamAngra = function(mob)
+    local currentPos = mob:getPos()
+    local spawnPos = mob:getSpawnPos()
+    local mobIndex = mob:getLocalVar(string.format("MobIndex_%s", mob:getID()))
+    local nmchildren = xi.dynamis.mobList[mob:getZoneID()][mobIndex].nmchildren
+    local children = {nmchildren[2], nmchildren[3], nmchildren[4], nmchildren[5]}
 
-return m
+    if currentPos.x ~= spawnPos.x and currentPos.z ~= spawnPos.z then
+        mob:pathTo(spawnPos.x, spawnPos.y, spawnPos.z)
+    end
+
+    for _, childIndex in pairs(children) do
+        local child = GetMobByID(mob:getLocalVar(string.format("ChildID_%s", childIndex)))
+        local childCurrentPos = child:getPos()
+        local childSpawnPos = child:getSpawnPos()
+        if child:isAlive() and child:getCurrentAction() == xi.act.ROAMING then
+            if childCurrentPos.x ~= childSpawnPos.x and childCurrentPos.z ~= childSpawnPos.z then
+            child:pathTo(childSpawnPos.x, childSpawnPos.y, childSpawnPos.z)
+            end
+        end
+    end
+end

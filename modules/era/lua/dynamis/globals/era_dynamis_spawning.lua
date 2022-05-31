@@ -43,35 +43,33 @@ xi.dynamis.spawnWave = function(zone, zoneID, waveNumber)
 end
 
 xi.dynamis.parentOnEngaged = function(mob, target)
-    mob:timer(1000, function(mob, target)
-        local zoneID = mob:getZoneID()
-        local oMobIndex = mob:getZone():getLocalVar(string.format("MobIndex_%s", mob:getID()))
-        local oMob = mob
-        local eyes = mob:getLocalVar("eyeColor")
-        if eyes ~= nil then
-            mob:setAnimationSub(eyes)
-        end
-        if xi.dynamis.mobList[zoneID][oMobIndex].nmchildren ~= nil then
-            for index, MobIndex in pairs(xi.dynamis.mobList[zoneID][oMobIndex].nmchildren) do
-                if MobIndex == true or MobIndex == false then
+    local zoneID = mob:getZoneID()
+    local oMobIndex = mob:getZone():getLocalVar(string.format("MobIndex_%s", mob:getID()))
+    local oMob = mob
+    local eyes = mob:getLocalVar("eyeColor")
+    if eyes ~= nil then
+        mob:setAnimationSub(eyes)
+    end
+    if xi.dynamis.mobList[zoneID][oMobIndex].nmchildren ~= nil then
+        for index, MobIndex in pairs(xi.dynamis.mobList[zoneID][oMobIndex].nmchildren) do
+            if MobIndex == true or MobIndex == false then
+                index = index + 1
+            else
+                local forceLink = xi.dynamis.mobList[zoneID][oMobIndex].nmchildren[1]
+                local mobType = xi.dynamis.mobList[zoneID][MobIndex].info[1]
+                if mobType == "NM" then -- NMs
+                    xi.dynamis.nmDynamicSpawn(MobIndex, oMobIndex, forceLink, zoneID, target, oMob)
                     index = index + 1
-                else
-                    local forceLink = xi.dynamis.mobList[zoneID][oMobIndex].nmchildren[1]
-                    local mobType = xi.dynamis.mobList[zoneID][MobIndex].info[1]
-                    if mobType == "NM" then -- NMs
-                        xi.dynamis.nmDynamicSpawn(MobIndex, oMobIndex, forceLink, zoneID, target, oMob)
-                        index = index + 1
-                    else -- Nightmare Mobs and Statues
-                        xi.dynamis.nonStandardDynamicSpawn(MobIndex, oMob, forceLink, zoneID, target, oMobIndex)
-                        index = index + 1
-                    end
+                else -- Nightmare Mobs and Statues
+                    xi.dynamis.nonStandardDynamicSpawn(MobIndex, oMob, forceLink, zoneID, target, oMobIndex)
+                    index = index + 1
                 end
             end
         end
-        if xi.dynamis.mobList[zoneID][oMobIndex].mobchildren ~= nil then
-            xi.dynamis.normalDynamicSpawn(mob, oMobIndex) -- Normies have their own loop, so they don't need one here.
-        end
-    end)
+    end
+    if xi.dynamis.mobList[zoneID][oMobIndex].mobchildren ~= nil then
+        xi.dynamis.normalDynamicSpawn(mob, oMobIndex) -- Normies have their own loop, so they don't need one here.
+    end
 end
 
 xi.dynamis.normalDynamicSpawn = function(mob, oMobIndex)
@@ -87,166 +85,223 @@ xi.dynamis.normalDynamicSpawn = function(mob, oMobIndex)
         --{
             -- [ZoneID] -- If applicable
             --{
-                -- [JobID] = {Name, groupId, groupZoneId, Droplist, SpellList, SkillList},
+                -- [JobID] = {Name, groupId, groupZoneId, SpellList, SkillList},
             --},
             -- [ZoneID] -- If applicable
             --{
                 -- [FloorVar]
                 -- {
-                    -- [JobID] = {Name, groupId, groupZoneId, Droplist, SpellList, SkillList},
+                    -- [JobID] = {Name, groupId, groupZoneId, SpellList, SkillList},
                 -- },
             --},
-            -- [JobID] = {Name, groupId, groupZoneId, Droplist, SpellList, SkillList},
+            -- [JobID] = {Name, groupId, groupZoneId, SpellList, SkillList},
         --},
         [4] = -- Vanguard Eye
         {
             [xi.zone.DYNAMIS_BEAUCEDINE] = -- Spawn Hydras (Done)
             {
-                [1]  = {"48574152", 159, 134, 0, nil, nil}, -- HWAR
-                [2]  = {"484d4e4b", 163, 134, 0, nil, nil}, -- HMNK
-                [3]  = {"4857484d", 161, 134, 0, nil, nil}, -- HWHM
-                [4]  = {"48424c4d", 164, 134, 0, nil, nil}, -- HBLM
-                [5]  = {"4852444d", 162, 134, 0, nil, nil}, -- HRDM
-                [6]  = {"48544846", 160, 134, 0, nil, nil}, -- HTHF
-                [7]  = {"48504c44", 166, 134, 0, nil, nil}, -- HPLD
-                [8]  = {"4844524b", 167, 134, 0, nil, nil}, -- HDRK
-                [9]  = {"48425354", 168, 134, 0, nil, nil}, -- HBST
-                [10] = {"48425244", 170, 134, 0, nil, nil}, -- HBRD
-                [11] = {"48524e47", 171, 134, 0, nil, nil}, -- HRNG
-                [12] = {"4853414d", 172, 134, 0, nil, nil}, -- HSAM
-                [13] = {"484e494e", 173, 134, 0, nil, nil}, -- HNIN
-                [14] = {"48445247", 174, 134, 0, nil, nil}, -- HDRG
-                [15] = {"48534d4e", 176, 134, 0, nil, nil}, -- HSMN
+                [1]  = {"48574152", 159, 134, nil, nil}, -- HWAR
+                [2]  = {"484d4e4b", 163, 134, nil, nil}, -- HMNK
+                [3]  = {"4857484d", 161, 134, nil, nil}, -- HWHM
+                [4]  = {"48424c4d", 164, 134, nil, nil}, -- HBLM
+                [5]  = {"4852444d", 162, 134, nil, nil}, -- HRDM
+                [6]  = {"48544846", 160, 134, nil, nil}, -- HTHF
+                [7]  = {"48504c44", 166, 134, nil, nil}, -- HPLD
+                [8]  = {"4844524b", 167, 134, nil, nil}, -- HDRK
+                [9]  = {"48425354", 168, 134, nil, nil}, -- HBST
+                [10] = {"48425244", 170, 134, nil, nil}, -- HBRD
+                [11] = {"48524e47", 171, 134, nil, nil}, -- HRNG
+                [12] = {"4853414d", 172, 134, nil, nil}, -- HSAM
+                [13] = {"484e494e", 173, 134, nil, nil}, -- HNIN
+                [14] = {"48445247", 174, 134, nil, nil}, -- HDRG
+                [15] = {"48534d4e", 176, 134, nil, nil}, -- HSMN
             },
             [xi.zone.DYNAMIS_XARCABARD] = -- Spawn Kindred (Done)
             {
-                [1]  = {"4b574152", 32, 135, 0, nil, nil}, -- KWAR
-                [2]  = {"4b4d4e4b", 33, 135, 0, nil, nil}, -- KMNK
-                [3]  = {"4b57484d", 29, 135, 0, nil, nil}, -- KWHM
-                [4]  = {"4b424c4d", 30, 135, 0, nil, nil}, -- KBLM
-                [5]  = {"4b52444d", 31, 135, 0, nil, nil}, -- KRDM
-                [6]  = {"4b544846", 34, 135, 0, nil, nil}, -- KTHF
-                [7]  = {"4b504c44", 15, 135, 0, nil, nil}, -- KPLD
-                [8]  = {"4b44524b", 16, 135, 0, nil, nil}, -- KDRK
-                [9]  = {"4b425354", 17, 135, 0, nil, nil}, -- KBST
-                [10] = {"4b425244", 20, 135, 0, nil, nil}, -- KBRD
-                [11] = {"4b524e47", 19, 135, 0, nil, nil}, -- KRNG
-                [12] = {"4b53414d", 22, 135, 0, nil, nil}, -- KSAM
-                [13] = {"4b4e494e", 23, 135, 0, nil, nil}, -- KNIN
-                [14] = {"4b445247", 27, 135, 0, nil, nil}, -- KDRG
-                [15] = {"4b534d4e", 24, 135, 0, nil, nil}, -- KSMN
+                [1]  = {"4b574152", 32, 135, nil, nil}, -- KWAR
+                [2]  = {"4b4d4e4b", 33, 135, nil, nil}, -- KMNK
+                [3]  = {"4b57484d", 29, 135, nil, nil}, -- KWHM
+                [4]  = {"4b424c4d", 30, 135, nil, nil}, -- KBLM
+                [5]  = {"4b52444d", 31, 135, nil, nil}, -- KRDM
+                [6]  = {"4b544846", 34, 135, nil, nil}, -- KTHF
+                [7]  = {"4b504c44", 15, 135, nil, nil}, -- KPLD
+                [8]  = {"4b44524b", 16, 135, nil, nil}, -- KDRK
+                [9]  = {"4b425354", 17, 135, nil, nil}, -- KBST
+                [10] = {"4b425244", 20, 135, nil, nil}, -- KBRD
+                [11] = {"4b524e47", 19, 135, nil, nil}, -- KRNG
+                [12] = {"4b53414d", 22, 135, nil, nil}, -- KSAM
+                [13] = {"4b4e494e", 23, 135, nil, nil}, -- KNIN
+                [14] = {"4b445247", 27, 135, nil, nil}, -- KDRG
+                [15] = {"4b534d4e", 24, 135, nil, nil}, -- KSMN
             },
             [xi.zone.DYNAMIS_TAVNAZIA] = -- Spawn Kindred and Hydra
             {
                 [2] = -- Floor 2 Spawn Hydras (Done)
                 {
-                    [1]  = {"48574152", 159, 134, 0, nil, nil}, -- HWAR
-                    [2]  = {"484d4e4b", 163, 134, 0, nil, nil}, -- HMNK
-                    [3]  = {"4857484d", 161, 134, 0, nil, nil}, -- HWHM
-                    [4]  = {"48424c4d", 164, 134, 0, nil, nil}, -- HBLM
-                    [5]  = {"4852444d", 162, 134, 0, nil, nil}, -- HRDM
-                    [6]  = {"48544846", 160, 134, 0, nil, nil}, -- HTHF
-                    [7]  = {"48504c44", 166, 134, 0, nil, nil}, -- HPLD
-                    [8]  = {"4844524b", 167, 134, 0, nil, nil}, -- HDRK
-                    [9]  = {"48425354", 168, 134, 0, nil, nil}, -- HBST
-                    [10] = {"48425244", 170, 134, 0, nil, nil}, -- HBRD
-                    [11] = {"48524e47", 171, 134, 0, nil, nil}, -- HRNG
-                    [12] = {"4853414d", 172, 134, 0, nil, nil}, -- HSAM
-                    [13] = {"484e494e", 173, 134, 0, nil, nil}, -- HNIN
-                    [14] = {"48445247", 174, 134, 0, nil, nil}, -- HDRG
-                    [15] = {"48534d4e", 176, 134, 0, nil, nil}, -- HSMN
+                    [1]  = {"48574152", 159, 134, nil, nil}, -- HWAR
+                    [2]  = {"484d4e4b", 163, 134, nil, nil}, -- HMNK
+                    [3]  = {"4857484d", 161, 134, nil, nil}, -- HWHM
+                    [4]  = {"48424c4d", 164, 134, nil, nil}, -- HBLM
+                    [5]  = {"4852444d", 162, 134, nil, nil}, -- HRDM
+                    [6]  = {"48544846", 160, 134, nil, nil}, -- HTHF
+                    [7]  = {"48504c44", 166, 134, nil, nil}, -- HPLD
+                    [8]  = {"4844524b", 167, 134, nil, nil}, -- HDRK
+                    [9]  = {"48425354", 168, 134, nil, nil}, -- HBST
+                    [10] = {"48425244", 170, 134, nil, nil}, -- HBRD
+                    [11] = {"48524e47", 171, 134, nil, nil}, -- HRNG
+                    [12] = {"4853414d", 172, 134, nil, nil}, -- HSAM
+                    [13] = {"484e494e", 173, 134, nil, nil}, -- HNIN
+                    [14] = {"48445247", 174, 134, nil, nil}, -- HDRG
+                    [15] = {"48534d4e", 176, 134, nil, nil}, -- HSMN
                 },
                 [3] = -- Floor 3 Spawn Kindred (Done)
                 {
-                    [1]  = {"4b574152", 32, 135, 0, nil, nil}, -- KWAR
-                    [2]  = {"4b4d4e4b", 33, 135, 0, nil, nil}, -- KMNK
-                    [3]  = {"4b57484d", 29, 135, 0, nil, nil}, -- KWHM
-                    [4]  = {"4b424c4d", 30, 135, 0, nil, nil}, -- KBLM
-                    [5]  = {"4b52444d", 31, 135, 0, nil, nil}, -- KRDM
-                    [6]  = {"4b544846", 34, 135, 0, nil, nil}, -- KTHF
-                    [7]  = {"4b504c44", 15, 135, 0, nil, nil}, -- KPLD
-                    [8]  = {"4b44524b", 16, 135, 0, nil, nil}, -- KDRK
-                    [9]  = {"4b425354", 17, 135, 0, nil, nil}, -- KBST
-                    [10] = {"4b425244", 20, 135, 0, nil, nil}, -- KBRD
-                    [11] = {"4b524e47", 19, 135, 0, nil, nil}, -- KRNG
-                    [12] = {"4b53414d", 22, 135, 0, nil, nil}, -- KSAM
-                    [13] = {"4b4e494e", 23, 135, 0, nil, nil}, -- KNIN
-                    [14] = {"4b445247", 27, 135, 0, nil, nil}, -- KDRG
-                    [15] = {"4b534d4e", 24, 135, 0, nil, nil}, -- KSMN
+                    [1]  = {"4b574152", 32, 135, nil, nil}, -- KWAR
+                    [2]  = {"4b4d4e4b", 33, 135, nil, nil}, -- KMNK
+                    [3]  = {"4b57484d", 29, 135, nil, nil}, -- KWHM
+                    [4]  = {"4b424c4d", 30, 135, nil, nil}, -- KBLM
+                    [5]  = {"4b52444d", 31, 135, nil, nil}, -- KRDM
+                    [6]  = {"4b544846", 34, 135, nil, nil}, -- KTHF
+                    [7]  = {"4b504c44", 15, 135, nil, nil}, -- KPLD
+                    [8]  = {"4b44524b", 16, 135, nil, nil}, -- KDRK
+                    [9]  = {"4b425354", 17, 135, nil, nil}, -- KBST
+                    [10] = {"4b425244", 20, 135, nil, nil}, -- KBRD
+                    [11] = {"4b524e47", 19, 135, nil, nil}, -- KRNG
+                    [12] = {"4b53414d", 22, 135, nil, nil}, -- KSAM
+                    [13] = {"4b4e494e", 23, 135, nil, nil}, -- KNIN
+                    [14] = {"4b445247", 27, 135, nil, nil}, -- KDRG
+                    [15] = {"4b534d4e", 24, 135, nil, nil}, -- KSMN
                 },
             },
         },
-        [92] = -- Goblin Replica
+        [92] = -- Goblin Replica (Done)
         {
-            [1]  = {"48574152", 159, 134, 0, nil, nil}, -- GWAR
-            [2]  = {"484d4e4b", 163, 134, 0, nil, nil}, -- GMNK
-            [3]  = {"4857484d", 161, 134, 0, nil, nil}, -- GWHM
-            [4]  = {"48424c4d", 164, 134, 0, nil, nil}, -- GBLM
-            [5]  = {"4852444d", 162, 134, 0, nil, nil}, -- GRDM
-            [6]  = {"48544846", 160, 134, 0, nil, nil}, -- GTHF
-            [7]  = {"48504c44", 166, 134, 0, nil, nil}, -- GPLD
-            [8]  = {"4844524b", 167, 134, 0, nil, nil}, -- GDRK
-            [9]  = {"48425354", 168, 134, 0, nil, nil}, -- GBST
-            [10] = {"48425244", 170, 134, 0, nil, nil}, -- GBRD
-            [11] = {"48524e47", 171, 134, 0, nil, nil}, -- GRNG
-            [12] = {"4853414d", 172, 134, 0, nil, nil}, -- GSAM
-            [13] = {"484e494e", 173, 134, 0, nil, nil}, -- GNIN
-            [14] = {"48445247", 174, 134, 0, nil, nil}, -- GDRG
-            [15] = {"48534d4e", 176, 134, 0, nil, nil}, -- GSMN
+            [1]  = {"47574152", 159, 134, nil, nil}, -- GWAR
+            [2]  = {"474d4e4b", 163, 134, nil, nil}, -- GMNK
+            [3]  = {"4757484d", 161, 134, nil, nil}, -- GWHM
+            [4]  = {"47424c4d", 164, 134, nil, nil}, -- GBLM
+            [5]  = {"4752444d", 162, 134, nil, nil}, -- GRDM
+            [6]  = {"47544846", 160, 134, nil, nil}, -- GTHF
+            [7]  = {"47504c44", 166, 134, nil, nil}, -- GPLD
+            [8]  = {"4744524b", 167, 134, nil, nil}, -- GDRK
+            [9]  = {"47425354", 168, 134, nil, nil}, -- GBST
+            [10] = {"47425244", 170, 134, nil, nil}, -- GBRD
+            [11] = {"47524e47", 171, 134, nil, nil}, -- GRNG
+            [12] = {"4753414d", 172, 134, nil, nil}, -- GSAM
+            [13] = {"474e494e", 173, 134, nil, nil}, -- GNIN
+            [14] = {"47445247", 174, 134, nil, nil}, -- GDRG
+            [15] = {"47534d4e", 176, 134, nil, nil}, -- GSMN
         },
-        [93] = -- Orc Statue
+        [93] = -- Orc Statue (Done)
         {
-            [1]  = {"48574152", 159, 134, 0, nil, nil}, -- OWAR
-            [2]  = {"484d4e4b", 163, 134, 0, nil, nil}, -- OMNK
-            [3]  = {"4857484d", 161, 134, 0, nil, nil}, -- OWHM
-            [4]  = {"48424c4d", 164, 134, 0, nil, nil}, -- OBLM
-            [5]  = {"4852444d", 162, 134, 0, nil, nil}, -- ORDM
-            [6]  = {"48544846", 160, 134, 0, nil, nil}, -- OTHF
-            [7]  = {"48504c44", 166, 134, 0, nil, nil}, -- OPLD
-            [8]  = {"4844524b", 167, 134, 0, nil, nil}, -- ODRK
-            [9]  = {"48425354", 168, 134, 0, nil, nil}, -- OBST
-            [10] = {"48425244", 170, 134, 0, nil, nil}, -- OBRD
-            [11] = {"48524e47", 171, 134, 0, nil, nil}, -- ORNG
-            [12] = {"4853414d", 172, 134, 0, nil, nil}, -- OSAM
-            [13] = {"484e494e", 173, 134, 0, nil, nil}, -- ONIN
-            [14] = {"48445247", 174, 134, 0, nil, nil}, -- ODRG
-            [15] = {"48534d4e", 176, 134, 0, nil, nil}, -- OSMN
+            [1]  = {"4f574152", 159, 134, nil, nil}, -- OWAR
+            [2]  = {"4f4d4e4b", 163, 134, nil, nil}, -- OMNK
+            [3]  = {"4f57484d", 161, 134, nil, nil}, -- OWHM
+            [4]  = {"4f424c4d", 164, 134, nil, nil}, -- OBLM
+            [5]  = {"4f52444d", 162, 134, nil, nil}, -- ORDM
+            [6]  = {"4f544846", 160, 134, nil, nil}, -- OTHF
+            [7]  = {"4f504c44", 166, 134, nil, nil}, -- OPLD
+            [8]  = {"4f44524b", 167, 134, nil, nil}, -- ODRK
+            [9]  = {"4f425354", 168, 134, nil, nil}, -- OBST
+            [10] = {"4f425244", 170, 134, nil, nil}, -- OBRD
+            [11] = {"4f524e47", 171, 134, nil, nil}, -- ORNG
+            [12] = {"4f53414d", 172, 134, nil, nil}, -- OSAM
+            [13] = {"4f4e494e", 173, 134, nil, nil}, -- ONIN
+            [14] = {"4f445247", 174, 134, nil, nil}, -- ODRG
+            [15] = {"4f534d4e", 176, 134, nil, nil}, -- OSMN
         },
         [94] = -- Quadav Statue (Done)
         {
-            [1]  = {"51574152", 19, 134, 0, nil, nil}, -- QWAR
-            [2]  = {"514d4e4b", 25, 134, 0, nil, nil}, -- QMNK
-            [3]  = {"5157484d", 29, 134, 0, nil, nil}, -- QWHM
-            [4]  = {"51424c4d", 42, 134, 0, nil, nil}, -- QBLM
-            [5]  = {"5152444d", 20, 134, 0, nil, nil}, -- QRDM
-            [6]  = {"51544846", 33, 134, 0, nil, nil}, -- QTHF
-            [7]  = {"51504c44", 30, 134, 0, nil, nil}, -- QPLD
-            [8]  = {"5144524b", 38, 134, 0, nil, nil}, -- QDRK
-            [9]  = {"51425354", 21, 134, 0, nil, nil}, -- QBST
-            [10] = {"51425244", 23, 134, 0, nil, nil}, -- QBRD
-            [11] = {"51524e47", 34, 134, 0, nil, nil}, -- QRNG
-            [12] = {"5153414d", 31, 134, 0, nil, nil}, -- QSAM
-            [13] = {"514e494e", 32, 134, 0, nil, nil}, -- QNIN
-            [14] = {"51445247", 26, 134, 0, nil, nil}, -- QDRG
-            [15] = {"51534d4e", 35, 134, 0, nil, nil}, -- QSMN
+            [1]  = {"51574152", 19, 134, nil, nil}, -- QWAR
+            [2]  = {"514d4e4b", 25, 134, nil, nil}, -- QMNK
+            [3]  = {"5157484d", 29, 134, nil, nil}, -- QWHM
+            [4]  = {"51424c4d", 42, 134, nil, nil}, -- QBLM
+            [5]  = {"5152444d", 20, 134, nil, nil}, -- QRDM
+            [6]  = {"51544846", 33, 134, nil, nil}, -- QTHF
+            [7]  = {"51504c44", 30, 134, nil, nil}, -- QPLD
+            [8]  = {"5144524b", 38, 134, nil, nil}, -- QDRK
+            [9]  = {"51425354", 21, 134, nil, nil}, -- QBST
+            [10] = {"51425244", 23, 134, nil, nil}, -- QBRD
+            [11] = {"51524e47", 34, 134, nil, nil}, -- QRNG
+            [12] = {"5153414d", 31, 134, nil, nil}, -- QSAM
+            [13] = {"514e494e", 32, 134, nil, nil}, -- QNIN
+            [14] = {"51445247", 26, 134, nil, nil}, -- QDRG
+            [15] = {"51534d4e", 35, 134, nil, nil}, -- QSMN
         },
         [95] = -- Yagudo Statue
         {
-            [1]  = {"48574152", 159, 134, 0, nil, nil}, -- YWAR
-            [2]  = {"484d4e4b", 163, 134, 0, nil, nil}, -- YMNK
-            [3]  = {"4857484d", 161, 134, 0, nil, nil}, -- YWHM
-            [4]  = {"48424c4d", 164, 134, 0, nil, nil}, -- YBLM
-            [5]  = {"4852444d", 162, 134, 0, nil, nil}, -- YRDM
-            [6]  = {"48544846", 160, 134, 0, nil, nil}, -- YTHF
-            [7]  = {"48504c44", 166, 134, 0, nil, nil}, -- YPLD
-            [8]  = {"4844524b", 167, 134, 0, nil, nil}, -- YDRK
-            [9]  = {"48425354", 168, 134, 0, nil, nil}, -- YBST
-            [10] = {"48425244", 170, 134, 0, nil, nil}, -- YBRD
-            [11] = {"48524e47", 171, 134, 0, nil, nil}, -- YRNG
-            [12] = {"4853414d", 172, 134, 0, nil, nil}, -- YSAM
-            [13] = {"484e494e", 173, 134, 0, nil, nil}, -- YNIN
-            [14] = {"48445247", 174, 134, 0, nil, nil}, -- YDRG
-            [15] = {"48534d4e", 176, 134, 0, nil, nil}, -- YSMN
+            [1]  = {"59574152", 159, 134, nil, nil}, -- YWAR
+            [2]  = {"594d4e4b", 163, 134, nil, nil}, -- YMNK
+            [3]  = {"5957484d", 161, 134, nil, nil}, -- YWHM
+            [4]  = {"59424c4d", 164, 134, nil, nil}, -- YBLM
+            [5]  = {"5952444d", 162, 134, nil, nil}, -- YRDM
+            [6]  = {"59544846", 160, 134, nil, nil}, -- YTHF
+            [7]  = {"59504c44", 166, 134, nil, nil}, -- YPLD
+            [8]  = {"5944524b", 167, 134, nil, nil}, -- YDRK
+            [9]  = {"59425354", 168, 134, nil, nil}, -- YBST
+            [10] = {"59425244", 170, 134, nil, nil}, -- YBRD
+            [11] = {"59524e47", 171, 134, nil, nil}, -- YRNG
+            [12] = {"5953414d", 172, 134, nil, nil}, -- YSAM
+            [13] = {"594e494e", 173, 134, nil, nil}, -- YNIN
+            [14] = {"59445247", 174, 134, nil, nil}, -- YDRG
+            [15] = {"59534d4e", 176, 134, nil, nil}, -- YSMN
+        },
+        ["Drops"] =
+        {
+            [xi.zone.DYNAMIS_BASTOK] =
+            {
+                [337] = {0}, -- Quadav,
+            },
+            [xi.zone.DYNAMIS_BEAUCEDINE] =
+            {
+                [337] = {0}, -- Quadav
+                [334] = {0}, -- Orc
+                [327] = {0}, -- Goblin
+                [360] = {0}, -- Yagudo
+                [359] = {0}, -- Hydra
+            },
+            [xi.zone.DYNAMIS_BUBURIMU] =
+            {
+                [337] = {0}, -- Quadav
+                [334] = {0}, -- Orc
+                [327] = {0}, -- Goblin
+                [360] = {0}, -- Yagudo
+            },
+            [xi.zone.DYNAMIS_JEUNO] =
+            {
+                [327] = {0}, -- Goblin
+            },
+            [xi.zone.DYNAMIS_QUFIM] =
+            {
+                [337] = {0}, -- Quadav
+                [334] = {0}, -- Orc
+                [327] = {0}, -- Goblin
+                [360] = {0}, -- Yagudo
+            },
+            [xi.zone.DYNAMIS_SAN_DORIA] =
+            {
+                [334] = {0}, -- Orc
+            },
+            [xi.zone.DYNAMIS_TAVNAZIA] =
+            {
+                [359] = {0}, -- Hydra
+                [358] = {0}, -- Kindred
+            },
+            [xi.zone.DYNAMIS_VALKURM] =
+            {
+                [337] = {0}, -- Quadav
+                [334] = {0}, -- Orc
+                [327] = {0}, -- Goblin
+                [360] = {0}, -- Yagudo
+            },
+            [xi.zone.DYNAMIS_WINDURST] =
+            {
+                [360] = {0}, -- Yagudo
+            },
+            [xi.zone.DYNAMIS_XARCABARD] =
+            {
+                [358] = {0}, -- Kindred
+            }
         }
     }
 
@@ -273,7 +328,8 @@ xi.dynamis.normalDynamicSpawn = function(mob, oMobIndex)
                 rotation = oMob:getRotPos(),
                 groupId = nameObj[job][2],
                 groupZoneId = nameObj[job][3],
-                onMobSpawn = function(mob) xi.dynamis.setMobStats(mob) end,
+                onMobSpawn = function(mob) xi.dynamis.onSpawnBeastmen(mob) end,
+                onMobEngaged = function(mob, target) xi.dynamis.mobOnEngaged(mob, target) end,
                 onMobRoam = function(mob) end,
                 onMobRoamAction = function(mob)  end,
                 onMobDeath = function(mob, playerArg, isKiller)
@@ -283,12 +339,12 @@ xi.dynamis.normalDynamicSpawn = function(mob, oMobIndex)
             })
             mob:setSpawn(oMob:getXPos()+math.random()*6-3, oMob:getYPos()-0.3, oMob:getZPos()+math.random()*6-3, oMob:getRotPos())
             mob:spawn()
-            mob:setDropID(nameObj[job][4])
-            if nameObj[job][5] ~= nil then -- If SpellList ~= nil set SpellList
-                mob:setSpellList(nameObj[job][5])
+            mob:setDropID(normalMobLookup["Drops"][mob:getZoneID()][mob:getFamily()][1])
+            if nameObj[job][4] ~= nil then -- If SpellList ~= nil set SpellList
+                mob:setSpellList(nameObj[job][4])
             end
-            if nameObj[job][6] ~= nil then -- If SkillList ~= nil set SkillList
-                mob:setMobMod(xi.mobMod.SKILL_LIST, nameObj[job][6])
+            if nameObj[job][5] ~= nil then -- If SkillList ~= nil set SkillList
+                mob:setMobMod(xi.mobMod.SKILL_LIST, nameObj[job][5])
             end
             if oMob ~= nil and oMob ~= 0 then
                 mob:setLocalVar("Parent", oMob:getID())
@@ -341,34 +397,50 @@ xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID,
         },
         ["Nightmare"] =
         {
-            ["Nightmare Bunny"] = {"594d53746174" , 130, 134, 0, nil, nil}, -- Yagudo Statue (YMStat)
-            ["Nightmare Cockatrice"] = {"594d53746174" , 130, 134, 0, nil, nil}, -- Yagudo Statue (YMStat)
-            ["Nightmare Crab"] = {"594d53746174" , 130, 134, 0, nil, nil}, -- Yagudo Statue (YMStat)
-            ["Nightmare Dhalmel"] = {"594d53746174" , 130, 134, 0, nil, nil}, -- Yagudo Statue (YMStat)
-            ["Nightmare Eft"] = {"594d53746174" , 130, 134, 0, nil, nil}, -- Yagudo Statue (YMStat)
-            ["Nightmare Mandragora"] = {"594d53746174" , 130, 134, 0, nil, nil}, -- Yagudo Statue (YMStat)
-            ["Nightmare Raven"] = {"594d53746174" , 130, 134, 0, nil, nil}, -- Yagudo Statue (YMStat)
-            ["Nightmare Scorpion"] = {"594d53746174" , 130, 134, 0, nil, nil}, -- Yagudo Statue (YMStat)
-            ["Nightmare Urganite"] = {"594d53746174" , 130, 134, 0, nil, nil}, -- Yagudo Statue (YMStat)
-            ["Nightmare Cluster"] = {"594d53746174" , 130, 134, 0, nil, nil}, -- Yagudo Statue (YMStat)
-            ["Nightmare Hornet"] = {"594d53746174" , 130, 134, 0, nil, nil}, -- Yagudo Statue (YMStat)
-            ["Nightmare Leech"] = {"594d53746174" , 130, 134, 0, nil, nil}, -- Yagudo Statue (YMStat)
-            ["Nightmare Makara"] = {"594d53746174" , 130, 134, 0, nil, nil}, -- Yagudo Statue (YMStat)
-            ["Nightmare Taurus"] = {"594d53746174" , 130, 134, 0, nil, nil}, -- Yagudo Statue (YMStat)
-            ["Nightmare Antlion"] = {"594d53746174" , 130, 134, 0, nil, nil}, -- Yagudo Statue (YMStat)
-            ["Nightmare Bugard"] = {"594d53746174" , 130, 134, 0, nil, nil}, -- Yagudo Statue (YMStat)
-            ["Nightmare Worm"] = {"594d53746174" , 130, 134, 0, nil, nil}, -- Yagudo Statue (YMStat)
-            ["Nightmare Hippogryph"] = {"594d53746174" , 130, 134, 0, nil, nil}, -- Yagudo Statue (YMStat)
-            ["Nightmare Manticore"] = {"594d53746174" , 130, 134, 0, nil, nil}, -- Yagudo Statue (YMStat)
-            ["Nightmare Sabotender"] = {"594d53746174" , 130, 134, 0, nil, nil}, -- Yagudo Statue (YMStat)
-            ["Nightmare Sheep"] = {"594d53746174" , 130, 134, 0, nil, nil}, -- Yagudo Statue (YMStat)
-            ["Nightmare Fly"] = {"594d53746174" , 130, 134, 0, nil, nil}, -- Yagudo Statue (YMStat)
+            ["Nightmare Bunny"] = {"4e42756e" , 130, 134, 0, nil, nil}, -- NBun
+            ["Nightmare Cockatrice"] = {"4e436f63" , 130, 134, 0, nil, nil}, -- NCoc
+            ["Nightmare Crab"] = {"4e437261" , 130, 134, 0, nil, nil}, -- NCra
+            ["Nightmare Dhalmel"] = {"4e446861" , 130, 134, 0, nil, nil}, -- NDha
+            ["Nightmare Eft"] = {"4e446861" , 130, 134, 0, nil, nil}, -- NEft
+            ["Nightmare Mandragora"] = {"4e4d616e" , 130, 134, 0, nil, nil}, -- NMan
+            ["Nightmare Raven"] = {"4e526176" , 130, 134, 0, nil, nil}, -- NRav
+            ["Nightmare Scorpion"] = {"4e53636f" , 130, 134, 0, nil, nil}, -- NSco
+            ["Nightmare Urganite"] = {"4e557267" , 130, 134, 0, nil, nil}, -- NUrg
+            ["Nightmare Cluster"] = {"4e436c75" , 130, 134, 0, nil, nil}, -- NClu
+            ["Nightmare Hornet"] = {"4e486f72" , 130, 134, 0, nil, nil}, -- NHor
+            ["Nightmare Leech"] = {"4e4c6565" , 130, 134, 0, nil, nil}, -- NLee
+            ["Nightmare Makara"] = {"4e4d616b" , 130, 134, 0, nil, nil}, -- NMak
+            ["Nightmare Taurus"] = {"4e546175" , 130, 134, 0, nil, nil}, -- NTau
+            ["Nightmare Antlion"] = {"4e416e74" , 130, 134, 0, nil, nil}, -- NAnt
+            ["Nightmare Bugard"] = {"4e427567" , 130, 134, 0, nil, nil}, -- NBug
+            ["Nightmare Worm"] = {"4e576f72" , 130, 134, 0, nil, nil}, -- NWor
+            ["Nightmare Hippogryph"] = {"4e486970" , 130, 134, 0, nil, nil}, -- NHip
+            ["Nightmare Manticore"] = {"4e4d6174" , 130, 134, 0, nil, nil}, -- NMat
+            ["Nightmare Sabotender"] = {"4e536162" , 130, 134, 0, nil, nil}, -- NSab
+            ["Nightmare Sheep"] = {"4e536865" , 130, 134, 0, nil, nil}, -- NShe
+            ["Nightmare Fly"] = {"4e466c79" , 130, 134, 0, nil, nil}, -- NFly
         },
-        ["TE Normal"] = 
+        ["Elemental"] =
+        {
+            ["Fire Elemental"] = {"46456c65", 14, 38, 0, nil, 0}, -- FEle
+            ["Water Elemental"] = {"57456c65", 17, 38, 0, nil, 0}, -- WEle
+            ["Thunder Elemental"] = {"54456c65", 18, 38, 0, nil, 0}, -- TEle
+            ["Earth Elemental"] = {"45456c65", 13, 38, 0, nil, 0}, -- EEle
+            ["Air Elemental"] = {"41456c65", 11, 38, 0, nil, 0}, -- AEle
+            ["Ice Elemental"] = {"49456c65", 15, 38, 0, nil, 0}, -- IEle
+            ["Light Elemental"] = {"4c456c65", 16, 38, 0, nil, 0}, -- LEle
+            ["Dark Elemental"] = {"44456c65", 12, 38, 0, nil, 0}, -- DEle
+        },
+        ["Beastmen"] = 
         {
             ["Vanguard Vindicator"] = {"51574152", 19, 134, 0, nil, nil},
             ["Vanguard Constable"] = {"5157484d", 29, 134, 0, nil, nil},
             ["Vanguard Militant"] = {"514d4e4b", 25, 134, 0, nil, nil},
+            
+        },
+        ["Other"] =
+        {
+            ["Vanguard Dragon"] = {"56447261", 70, 135, 0, nil, nil}, -- VDra
         },
     }
     local mobFunctions =
@@ -378,19 +450,33 @@ xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID,
             ["onMobSpawn"] = {function(mob) xi.dynamis.setStatueStats(mob, mobIndex) end},
             ["onMobEngaged"] = {function(mob, target) xi.dynamis.parentOnEngaged(mob, target) end},
             ["onMobFight"] = {function(mob) xi.dynamis.statueOnFight(mob) end},
+            ["onMobRoam"] = {function(mob) xi.dynamis.mobOnRoam(mob) end},
+            ["onMobRoamAction"] = {function(mob) xi.dynamis.mobOnRoamAction(mob) end},
         },
         ["Nightmare"] =
         {
             ["onMobSpawn"] = {function(mob) xi.dynamis.setMobStats(mob) end},
             ["onMobEngaged"] = {function(mob, target) xi.dynamis.parentOnEngaged(mob, target) end},
             ["onMobFight"] = {function(mob) xi.dynamis.statueOnFight(mob) end},
+            ["onMobRoam"] = {function(mob) end},
+            ["onMobRoamAction"] = {function(mob) end},
         },
-        ["TE Normal"] =
+        ["Beastmen"] =
+        {
+            ["onMobSpawn"] = {function(mob) xi.dynamis.onSpawnBeastmen(mob) end},
+            ["onMobEngaged"] = {function(mob, target) xi.dynamis.mobOnEngaged(mob, target) end},
+            ["onMobFight"] = {function(mob) end},
+            ["onMobRoam"] = {function(mob) end},
+            ["onMobRoamAction"] = {function(mob) end},
+        },
+        ["Other"] =
         {
             ["onMobSpawn"] = {function(mob) xi.dynamis.setMobStats(mob) end},
-            ["onMobEngaged"] = {function(mob, target) end},
+            ["onMobEngaged"] = {function(mob, target) xi.dynamis.mobOnEngaged(mob, target) end},
             ["onMobFight"] = {function(mob) end},
-        }
+            ["onMobRoam"] = {function(mob) end},
+            ["onMobRoamAction"] = {function(mob) end},
+        },
     }
     local mob = zone:insertDynamicEntity({
         objtype = xi.objType.MOB,
@@ -404,8 +490,8 @@ xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID,
         onMobSpawn = mobFunctions[mobMobType]["onMobSpawn"][1],
         onMobEngaged = mobFunctions[mobMobType]["onMobEngaged"][1],
         onMobFight = mobFunctions[mobMobType]["onMobFight"][1],
-        onMobRoam = function(mob) xi.dynamis.mobOnRoam(mob) end,
-        onMobRoamAction = function(mob) xi.dynamis.mobOnRoamAction(mob) end,
+        onMobRoam =  mobFunctions[mobMobType]["onMobRoam"][1],
+        onMobRoamAction = mobFunctions[mobMobType]["onMobRoamAction"][1],
         onMobDeath = function(mob, playerArg, isKiller)
             xi.dynamis.mobOnDeath(mob)
         end,
@@ -453,43 +539,115 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         -- Below use used to lookup Beastmen NMs
         ["Goblin"] =
         {
-
+            -- Dynamis - Beaucedine
+            ["Ascetox Ratgums"] = {"41736365", 143, 134, 0, nil, nil}, -- Asce (BLM)
+            ["Bordox Kittyback"] = {"426f7264", 146, 134, 0, nil, nil}, -- Bord (THF)
+            ["Brewnix Bittypupils"] = {"42726577", 142, 134, 0, nil, nil}, -- Brew (WHM)
+            ["Draklix Scalecrust"] = {"4472616b", 149, 134, 0, nil, nil}, -- Drak (DRG)
+            ["Droprix Granitepalms"] = {"44726f70", 139, 134, 0, nil, nil}, -- Drop (MNK)
+            ["Gibberox Pimplebeak"] = {"47696262", 144, 134, 0, nil, nil}, -- Gibb (RDM)
+            ["Moltenox Stubthumbs"] = {"4d6f6c74", 136, 134, 0, nil, nil}, -- Molt (WAR)
+            ["Morblox Chubbychin"] = {"4d6f7262", 153, 134, 0, nil, nil}, -- Morb (SMN)
+            ["Routsix Rubbertendon"] = {"526f7574", 151, 134, 0, nil, nil}, -- Rout (BST)
+            ["Ruffbix Jumbolobes"] = {"52756666", 148, 134, 0, nil, nil}, -- Ruff (PLD)
+            ["Shisox Widebrow"] = {"53686973", 156, 134, 0, nil, nil}, -- Shis (SAM)
+            ["Slinkix Trufflesniff"] = {"536c696e", 155, 134, 0, nil, nil}, -- Slin (RNG)
+            ["Swypestix Tigershins"] = {"53777970", 145, 134, 0, nil, nil}, -- Swyp (NIN)
+            ["Tocktix Thinlids"] = {"546f636b", 150, 134, 0, nil, nil}, -- Tock (DRK)
+            ["Whistix Toadthroat"] = {"57686973", 34, 188, 0, nil, nil}, -- Whis (BRD)
+            -- Dynamis - Buburimu
+            ["Gosspix Blabberlips"] = {"476f7373", 144, 134, 0, nil, nil}, -- Goss (RDM)
+            ["Shamblix Rottenheart"] = {"5368616d", 150, 134, 0, nil, nil}, -- Sham (DRK)
+            ["Woodnix Shrillwhistle"] = {"576f6f64", 151, 134, 0, nil, nil}, -- Wood (BST)
+            -- Dynamis - Jeuno
+            ["Bandrix Rockjaw"] = {"42616e64", 146, 134, 0, nil, nil}, -- Band (THF)
+            ["Buffrix Eargone"] = {"42756666", 148, 134, 0, nil, nil}, -- Buff (PLD)
+            ["Clocktix Longnail"] = {"436c6f63", 150, 134, 0, nil, nil}, -- Cloc (DRK)
+            ["Elixmix Hooknose"] = {"456c6978", 142, 134, 0, nil, nil}, -- Elix (WHM)
+            ["Gabblox Magpietongue"] = {"47616262", 144, 134, 0, nil, nil}, -- Gabb (RDM)
+            ["Hermitrix Toothrot"] = {"4865726d", 143, 134, 0, nil, nil}, -- Herm (BLM)
+            ["Humnox Dumbelly"] = {"48756d6e", 34, 188, 0, nil, nil}, -- Humn (BRD)
+            ["Lurklox Dhalmelneck"] = {"4c75726b", 155, 134, 0, nil, nil}, -- Lurk (RNG)
+            ["Morgmox Moldnoggin"] = {"4d6f7267", 153, 134, 0, nil, nil}, -- Morg (SMN)
+            ["Sparkspox Sweatbrow"] = {"53706172", 136, 134, 0, nil, nil}, -- Spar (WAR)
+            ["Ticktox Beadeyes"] = {"5469636b", 150, 134, 0, nil, nil}, -- Tick (DRK)
+            ["Trailblix Goatmug"] = {"54726169", 151, 134, 0, nil, nil}, -- Trai (BST)
+            ["Tufflix Loglimbs"] = {"54756666", 148, 134, 0, nil, nil}, -- Tuff (PLD)
+            ["Wyrmwix Snakespecs"] = {"536e616b", 149, 134, 0, nil, nil}, -- Snak (DRG)
+            ["Karashix Swollenskull"] = {"4b617261", 156, 134, 0, nil, nil}, -- Kara (SAM)
+            ["Kikklix Longlegs"] = {"4b696b6b", 139, 134, 0, nil, nil}, -- Kikk (MNK)
+            ["Rutrix Hamgams"] = {"52757472", 151, 134, 0, nil, nil}, -- Rutr (BST)
+            ["Snypestix Eaglebeak"] = {"536e7970", 145, 134, 0, nil, nil}, -- Snyp (NIN)
+            ["Mortilox Wartpaws"] = {"4d6f7274", 153, 134, 0, nil, nil}, -- Mort (SMN)
+            ["Jabkix Pigeonpecs"] = {"4a61626b", 139, 134, 0, nil, nil}, -- Jabk (MNK)
+            ["Smeltix Thickhide"] = {"536d656c", 136, 134, 0, nil, nil}, -- Smel (WAR)
+            ["Wasabix Callusdigit"] = {"57617361", 156, 134, 0, nil, nil}, -- Wasa (SAM)
+            ["Anvilix Sootwrists"] = {"416e7669", 136, 134, 0, nil, nil}, -- Anvi (WAR)
+            ["Blazox Boneybod"] = {"426c617a", 151, 134, 0, nil, nil}, -- Blaz (BST)
+            ["Bootrix Jaggedelbow"] = {"426f6f74", 139, 134, 0, nil, nil}, -- Boot (MNK)
+            ["Distilix Stickytoes"] = {"44697374", 142, 134, 0, nil, nil}, -- Dist (WHM)
+            ["Eremix Snottynostril"] = {"4572656d", 143, 134, 0, nil, nil}, -- Erem (BLM)
+            ["Jabbrox Grannyguise"] = {"4a616262", 144, 134, 0, nil, nil}, -- Jabb (RDM)
+            ["Mobpix Mucousmouth"] = {"4d6f6270", 146, 134, 0, nil, nil}, -- Mobp (THF)
+            ["Prowlox Barrelbelly"] = {"50726f77", 155, 134, 0, nil, nil}, -- Prow (RNG)
+            ["Scruffix Shaggychest"] = {"53637275", 148, 134, 0, nil, nil}, -- Scru (PLD)
+            ["Slystix Megapeepers"] = {"536c7973", 145, 134, 0, nil, nil}, -- Slys (NIN)
+            ["Tymexox Ninefingers"] = {"54796d65", 150, 134, 0, nil, nil} -- Tyme (DRK)
         },
         ["Orc"] =
         {
             -- Dynamis - Beaucedine
-            ["Cobraclaw Buchzvotch"] = {}, -- SouF
-            ["Deathcaller Bidfbid"] = {}, -- SouF
-            ["Drakefeast Wubmfub"] = {}, -- SouF
-            ["Elvaanlopper Grokdok"] = {}, -- SouF
-            ["Galkarider Retzpratz"] = {}, -- SouF
-            ["Heavymail Djidzbad"] = {}, -- SouF
-            ["Humegutter Adzjbadj"] = {}, -- SouF
-            ["Jeunoraider Gepkzip"] = {}, -- SouF
-            ["Lockbuster Zapdjipp"] = {}, -- SouF
-            ["Mithraslaver Debhabob"] = {}, -- SouF
-            ["Skinmask Ugghfogg"] = {}, -- SouF
-            ["Spinalsucker Galflmall"] = {}, -- SouF
-            ["Taruroaster Biggsjig"] = {}, -- SouF
-            ["Ultrasonic Zeknajak"] = {}, -- SouF
-            ["Wraithdancer Gidbnod"] = {}, -- SouF
+            ["Cobraclaw Buchzvotch"] = {"43427563", 65, 134, 0, nil, nil}, -- CBuc (MNK)
+            ["Deathcaller Bidfbid"] = {"44426964", 73, 134, 0, nil, nil}, -- DBid (SMN)
+            ["Drakefeast Wubmfub"] = {"44577562", 88, 134, 0, nil, nil}, -- DWub (DRG)
+            ["Elvaanlopper Grokdok"] = {"4547726f", 82, 134, 0, nil, nil}, -- EGro (RNG)
+            ["Galkarider Retzpratz"] = {"47526574", 71, 134, 0, nil, nil}, -- GRet (RNG)
+            ["Heavymail Djidzbad"] = {"48446a69", 80, 134, 0, nil, nil}, -- HDji (PLD)
+            ["Humegutter Adzjbadj"] = {"4841627a", 60, 134, 0, nil, nil}, -- HAbz (WAR)
+            ["Jeunoraider Gepkzip"] = {"4a476570", 63, 134, 0, nil, nil}, -- JGep (NIN)
+            ["Lockbuster Zapdjipp"] = {"4c5a6170", 79, 134, 0, nil, nil}, -- LZap (THF)
+            ["Mithraslaver Debhabob"] = {"4d446562", 85, 134, 0, nil, nil}, -- MDeb (BST)
+            ["Skinmask Ugghfogg"] = {"53556767", 83, 134, 0, nil, nil}, -- SUgg (DRK)
+            ["Spinalsucker Galflmall"] = {"5347616c", 73, 134, 0, nil, nil}, -- SGal (RDM)
+            ["Taruroaster Biggsjig"] = {"54426967", 84, 134, 0, nil, nil}, -- TBig (BLM)
+            ["Ultrasonic Zeknajak"] = {"555a656b", 87, 134, 0, nil, nil}, -- UZek (BRD)
+            ["Wraithdancer Gidbnod"] = {"57476964", 63, 134, 0, nil, nil}, -- WGid (WHM)
             -- Dynamis Buburimu
-            ["Elvaansticker Bxafraff"] = {}, -- SouF
-            ["Flamecaller Zoeqdoq"] = {}, -- SouF
-            ["Hamfist Gukhbuk"] = {}, -- SouF
-            ["Lyncean Juwgneg"] = {}, -- SouF
+            ["Elvaansticker Bxafraff"] = {"456c7661", 88, 134, 0, nil, nil}, -- Elva (DRG)
+            ["Flamecaller Zoeqdoq"] = {"466c616d", 84, 134, 0, nil, nil}, -- Flam (BLM)
+            ["Hamfist Gukhbuk"] = {"48616d66", 65, 134, 0, nil, nil}, -- Hamf (MNK)
+            ["Lyncean Juwgneg"] = {"4c796e63", 82, 134, 0, nil, nil}, -- Lync (RNG)
             -- Dynamis - San d'Oria
-            ["Wyrmgnasher Bjakdek"] = {}, -- WyrB
-            ["Reapertongue Gadgquok"] = {}, -- ReaG
-            ["Voidstreaker Butchnotch"] = {}, -- VoiB
-            ["Battlechoir Gitchfotch"] = {}, -- BatG
-            ["Soulsender Fugbrag"] = {}, -- SouF
+            ["Wyrmgnasher Bjakdek"] = {"57797242", 88, 134, 0, nil, nil}, -- WyrB (DRG)
+            ["Reapertongue Gadgquok"] = {"52656147", 73, 134, 0, nil, nil}, -- ReaG (SMN)
+            ["Voidstreaker Butchnotch"] = {"566f6942", 63, 134, 0, nil, nil}, -- VoiB (NIN)
+            ["Battlechoir Gitchfotch"] = {"42617447", 87, 134, 0, nil, nil}, -- BatG (BRD)
+            ["Soulsender Fugbrag"] = {"536f7546", 87, 134, 0, nil, nil}, -- SouF (BRD)
         },
         ["Quadav"] =
         {
             -- Dynamis - Beaucedine
+            ["Be'Zhe Keeprazer"] = {"42655a68", 53, 134, 0, nil, nil}, -- BeZh (SMN)
+            ["De'Bho Pyrohand"] = {"44654268", 43, 134, 0, nil, nil}, --DeBh (BLM)
+            ["Ga'Fho Venomtouch"] = {"47614668", 39, 134, 0, nil, nil}, -- GaFh (WHM)
+            ["Go'Tyo Magenapper"] = {"476f5479", 44, 134, 0, nil, nil}, -- GoTy (DRG)
+            ["Gu'Khu Dukesniper"] = {"47754b68", 50, 134, 0, nil, nil}, -- GuKh (RNG)
+            ["Gu'Nha Wallstormer"] = {"47756861", 24, 134, 0, nil, nil}, -- Guha (WAR)
+            ["Ji'Fhu Infiltrator"] = {"4a694668", 37, 134, 0, nil, nil}, -- JiFh (THF)
+            ["Ji'Khu Towercleaver"] = {"4a694b68", 51, 134, 0, nil, nil}, -- JiKh (SAM)
+            ["Mi'Rhe Whisperblade"] = {"4d695268", 52, 134, 0, nil, nil}, -- MiRh (NIN)
+            ["Mu'Gha Legionkiller"] = {"4d754768", 47, 134, 0, nil, nil}, -- MuGh (PLD)
+            ["Na'Hya Floodmaker"] = {"4e614879", 28, 134, 0, nil, nil}, -- NaHy (RDM)
+            ["Nu'Bhi Spiraleye"] = {"4e754268", 41, 134, 0, nil, nil}, -- NuBh (BRD)
+            ["So'Gho Adderhandler"] = {"536f4768", 48, 134, 0, nil, nil}, -- SoGh (BST)
+            ["So'Zho Metalbender"] = {"536f5a68", 46, 134, 0, nil, nil}, -- SoZh (MNK)
+            ["Ta'Hyu Gallanthunter"] = {"54614879", 40, 134, 0, nil, nil}, -- TaHy (DRK)
             -- Dynamis Buburimu
-            -- Dynamis - Bastok
+            ["Gi'Bhe Fleshfeaster"] = {"47694268", 39, 134, 0, nil, nil}, -- GiBh (WHM)
+            ["Qu'Pho Bloodspiller"] = {"51755068", 24, 134, 0, nil, nil}, -- QuPh (WAR)
+            ["Te'Zha Ironclad"] = {"54655a68", 47, 134, 0, nil, nil}, -- TeZh (PLD)
+            ["Va'Rhu Bodysnatcher"] = {"56615268", 37, 134, 0, nil, nil}, -- VaRh (THF)
+            -- Dynamis - Bastok (Done)
             ["Aa'Nyu Dismantler"] = {"41614e79", 40, 134, 0, nil, nil, "AaNyu_killed"}, -- AaNy (DRK)
             ["Gu'Nhi Noondozer"] = {"47754e68", 53, 134, 0, nil, nil, "GuNhi_killed"}, -- GuNh (SMN)
             ["Be'Ebo Tortoisedriver"] = {"42654562", 48, 134, 0, nil, nil, "BeEbo_killed"}, -- BeEb (BST)
@@ -497,86 +655,214 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
             ["Ko'Dho Cannonball"] = {"4b6f4468", 46, 134, 0, nil, nil, "KoDho_killed"}, -- KoDh (MNK)
             ["Ze'Vho Fallsplitter"] = {"5a655668", 40, 134, 0, nil, nil, "ZeVho_killed"}, -- ZeVh (DRK)
             ["Effigy Shield PLD"] = {"45504c44", 30, 134, 0, nil, nil}, -- EPLD (PLD)
-            ["Effigy Shield NIN"] = {"454e494e", 32, 134, 0, nil, nil}, -- ENIN (NIN)
-            ["Effigy Shield BRD"] = {"45425244", 23, 134, 0, nil, nil}, -- EBRD (BRD)
-            ["Effigy Shield DRK"] = {"4544524b", 38, 134, 0, nil, nil}, -- EDRK (DRK)
-            ["Effigy Shield SAM"] = {"4553414d", 31, 134, 0, nil, nil}, -- ESAM (SAM)
+            ["Effigy Shield NIN"] = {"45504c44", 32, 134, 0, nil, nil}, -- ENIN (NIN)
+            ["Effigy Shield BRD"] = {"45504c44", 23, 134, 0, nil, nil}, -- EBRD (BRD)
+            ["Effigy Shield DRK"] = {"45504c44", 38, 134, 0, nil, nil}, -- EDRK (DRK)
+            ["Effigy Shield SAM"] = {"45504c44", 31, 134, 0, nil, nil}, -- ESAM (SAM)
         },
         ['Yagudo'] =
         {
-
+            -- Dynamis - Beaucedine
+            ["Bhuu Wjato the Firepool"] = {"42687575", 106, 134, 0, nil, nil}, -- Bhuu (BLM)
+            ["Caa Xaza the Madpiercer"] = {"43616158", 107, 134, 0, nil, nil}, -- CaaX (RDM)
+            ["Foo Peku the Bloodcloak"] = {"466f6f50", 94, 134, 0, nil, nil}, -- FooP (WAR)
+            ["Guu Waji the Preacher"] = {"47757557", 113, 134, 0, nil, nil}, -- GuuW (PLD)
+            ["Hee Mida the Meticulous"] = {"4865654d", 120, 134, 0, nil, nil}, -- HeeM (RNG)
+            ["Knii Hoqo the Bisector"] = {"4b6e6969", 121, 134, 0, nil, nil}, -- Knii (SAM)
+            ["Koo Saxu the Everfast"] = {"4b6f6f53", 102, 134, 0, nil, nil}, -- KooS (WHM)
+            ["Kuu Xuka the Nimble"] = {"4b757558", 115, 134, 0, nil, nil}, -- KuuX (NIN)
+            ["Maa Zaua the Wyrmkeeper"] = {"4d61615a", 109, 134, 0, nil, nil}, -- MaaZ (DRG)
+            ["Nee Huxa the Judgemental"] = {"4e656548", 114, 134, 0, nil, nil}, -- NeeH (DRK)
+            ["Puu Timu the Phantasmal"] = {"50757554", 122, 134, 0, nil, nil}, -- PuuT (SMN)
+            ["Ryy Qihi the Idolrobber"] = {"52797951", 110, 134, 0, nil, nil}, -- RyyQ (THF)
+            ["Soo Jopo the Fiendking"] = {"536f6f4a", 116, 134, 0, nil, nil}, -- SooJ (BST)
+            ["Xaa Chau the Roctalon"] = {"58616143", 97, 134, 0, nil, nil}, -- XaaC (MNK)
+            ["Xhoo Fuza the Sublime"] = {"58686f6f", 119, 134, 0, nil, nil}, -- Xhoo (BRD)
+            -- Dynamis - Buburimu
+            ["Baa Dava the Bibliophage"] = {"42616144", 91, 317, 0, nil, nil}, -- BaaD (SMN)
+            ["Doo Peku the Fleetfoot"] = {"446f6f50", 115, 134, 0, nil, nil}, -- DooP (NIN)
+            ["Koo Rahi the Levinblade"] = {"4b6f6f52", 121, 134, 0, nil, nil}, -- KooR (SAM)
+            ["Ree Nata the Melomanic"] = {"5265654e", 119, 134, 0, nil, nil}, -- ReeN (BRD)
+            -- Dynamis - Windurst
+            ["Xoo Kaza the Solemn"] = {"586f6f4b", 106, 134, 0, nil, nil}, -- XooK (BLM)
+            ["Haa Pevi the Stentorian"] = {"48616150", 91, 317, 0, nil, nil}, -- HaaP (SMN)
+            ["Wuu Qoho the Razorclaw"] = {"57757551", 97, 134, 0, nil, nil}, -- WuuQ (MNK)
+            ["Loo Hepe the Eyepiercer"] = {"4c6f6f48", 107, 134, 0, nil, nil}, -- LooH (RDM)
+            ["Muu Febi the Steadfast"] = {"4d757546", 113, 134, 0, nil, nil}, -- MuuF (PLD)
+            ["Maa Febi the Steadfast"] = {"4d616146", 113, 134, 0, nil, nil}, -- MaaF (PLD)
         },
         ["Kindred"] =
         {
-
+            -- Dynamis - Xarcabard
+            ["Count Zaebos"] = {"5a616562", 51, 135, 0, nil, nil}, -- Zaeb (WAR)
+            ["Duke Berith"] = {"42657269", 47, 135, 0, nil, nil}, -- Beri (RDM)
+            ["Marquis Decarabia"] = {"44656361", 21, 135, 0, nil, nil}, -- Deca (BRD)
+            ["Duke Gomory"] = {"476f6d6f", 39, 135, 0, nil, nil}, -- Gomo (MNK)
+            ["Marquis Andras"] = {"416e6472", 54, 135, 0, nil, nil}, -- Andr (BST)
+            ["Prince Seere"] = {"53656572", 43, 135, 0, nil, nil}, -- Seer (WHM)
+            ["Duke Scox"] = {"53636f78", 57, 135, 0, nil, nil}, -- Scox (DRK)
+            ["Marquis Gamygyn"] = {"47616d79", 65, 135, 0, nil, nil}, -- Gamy (NIN)
+            ["Marquis Orias"] = {"4f726961", 46, 135, 0, nil, nil}, -- Oria (BLM)
+            ["Count Raum"] = {"5261756d", 42, 135, 0, nil, nil}, --  Raum (THF)
+            ["Marquis Nebiros"] = {"4e656269", 67, 135, 0, nil, nil}, -- Nebi (SMN)
+            ["Marquis Sabnak"] = {"5361626e", 49, 135, 0, nil, nil}, -- Sabn (PLD)
+            ["Count Vine"] = {"56696e65", 62, 135, 0, nil, nil}, -- Vine (SAM)
+            ["King Zagan"] = {"5a616761", 60, 135, 0, nil, nil}, -- Zaga (DRG)
+            ["Marquis Cimeries"] = {"43696d65", 56, 135, 0, nil, nil}, -- Cime (RNG)
         },
-        ["Hydra"] =
+        ["Hydra"] = 
         {
-
+            -- Dynamis - Beaucedine
+            ["Dagourmarche"] = {"4461676f", 10, 134, 0, nil, nil}, -- Dago (DRG/BST/SMN)
+            ["Goublefaupe"] = {"476f7562", 6, 134, 0, nil, nil}, -- Goub (WAR/PLD/RDM)
+            ["Mildaunegeux"] = {"4d696c64", 8, 134, 0, nil, nil}, -- Mild (MNK/THF/NIN)
+            ["Quiebitiel"] = {"51756965", 7, 134, 0, nil, nil}, -- Quie (WHM/BLM/BRD)
+            ["Velosareon"] = {"56656c6f", 9, 134, 0, nil, nil}, -- Velo (RNG/SAM/DRK)
         },
         -- Below is used to lookup non-beastmen NMs.
-        ["Gu'Dha Effigy"] = {"424d62", 1, 186, 0, nil, nil, "MegaBoss_Killed"}, -- Bastok Megaboss (BMb)
-        ["Goblin Golem"] = {}, -- Jeuno Megaboss (JMb)
-        ["Overlord's Tombstone"] = {}, -- Sandy Megaboss (SMb)
-        ["Tzee Xicu Idol"] = {}, -- Windy Megaboss (WMb)
+        -- Dynamis - Bastok
+        ["Gu'Dha Effigy"] = {"424d62", 1, 186, 0, nil, nil, "MegaBoss_Killed"}, -- BMb (Bastok Megaboss)
+        -- Dynamis - Jeuno
+        ["Goblin Golem"] = {"4a4d62", 1, 188, 0, nil, nil, "MegaBoss_Killed"}, -- JMb
+        -- Dynamis - San d'Oria
+        ["Overlord's Tombstone"] = {"534d62", 1, 185, 0, nil, nil, "MegaBoss_Killed"}, -- SMb
+        -- Dynamis - Windurst
+        ["Tzee Xicu Idol"] = {"574d62", 1, 187, 0, nil, nil, "MegaBoss_Killed"}, -- WMb
+        -- Dynamis - Xarcabard Non-Beastmen
+        ["Animated Hammer"] = {"4148616d", 81, 135, 0, nil, nil}, -- AHam
+        ["Animated Staff"] = {"41537461", 87, 135, 0, nil, nil}, -- ASta
+        ["Animated Longsword"] = {"414c6f6e", 84, 135, 0, nil, nil}, -- ALon
+        ["Animated Tabar"] = {"41546162", 88, 135, 0, nil, nil}, -- ATab
+        ["Animated Great Axe"] = {"41477265", 80, 135, 0, nil, nil}, -- AGre
+        ["Animated Claymore"] = {"41436c61", 78, 135, 0, nil, nil}, -- ACla
+        ["Animated Spear"] = {"41537065", 86, 135, 0, nil, nil}, -- ASpe
+        ["Animated Scythe"] = {"41536379", 85, 135, 0, nil, nil}, -- AScy
+        ["Animated Kunai"] = {"414b756e", 83, 135, 0, nil, nil}, -- AKun
+        ["Animated Tachi"] = {"41546163", 89, 135, 0, nil, nil}, -- ATac
+        ["Animated Dagger"] = {"41446167", 79, 135, 0, nil, nil}, -- ADag
+        ["Animated Knuckles"] = {"414b6e75", 82, 135, 0, nil, nil}, -- AKnu
+        ["Animated Longbow"] = {"414c6f6e", 11, 135, 0, nil, nil}, -- ALon
+        ["Animated Gun"] = {"4147756e", 12, 135, 0, nil, nil}, -- AGun
+        ["Animated Horn"] = {"41486f72", 13, 135, 0, nil, nil}, -- AHor
+        ["Animated Shield"] = {"41536869", 14, 135, 0, nil, nil}, -- AShi
+        ["Satellite Hammer"] = {"5348616d", 81, 135, 0, nil, nil}, -- SHam
+        ["Satellite Staff"] = {"53537461", 87, 135, 0, nil, nil}, -- SSta
+        ["Satellite Longsword"] = {"534c6f6e", 84, 135, 0, nil, nil}, -- SLon
+        ["Satellite Tabar"] = {"53546162", 88, 135, 0, nil, nil}, -- STab
+        ["Satellite Great Axe"] = {"53477265", 80, 135, 0, nil, nil}, -- SGre
+        ["Satellite Claymore"] = {"53436c61", 78, 135, 0, nil, nil}, -- SCla
+        ["Satellite Spear"] = {"53537065", 86, 135, 0, nil, nil}, -- SSpe
+        ["Satellite Scythe"] = {"53536379", 85, 135, 0, nil, nil}, -- SScy
+        ["Satellite Kunai"] = {"534b756e", 83, 135, 0, nil, nil}, -- SKun
+        ["Satellite Tachi"] = {"53546163", 89, 135, 0, nil, nil}, -- STac
+        ["Satellite Dagger"] = {"53446167", 79, 135, 0, nil, nil}, -- SDag
+        ["Satellite Knuckles"] = {"534b6e75", 82, 135, 0, nil, nil}, -- SKnu
+        ["Satellite Longbow"] = {"534c6f6e", 11, 135, 0, nil, nil}, -- SLon
+        ["Satellite Gun"] = {"5347756e", 12, 135, 0, nil, nil}, -- SGun
+        ["Satellite Horn"] = {"53486f72", 13, 135, 0, nil, nil}, -- SHor
+        ["Satellite Shield"] = {"53536869", 14, 135, 0, nil, nil}, -- SShi
+        ["Ying"] = {"59696e67", 2, 135, 0, nil, nil}, -- Ying
+        ["Yang"] = {"59616e67", 3, 135, 0, nil, nil}, -- Yang
+        ["Dynamis Lord"] = {"444c", 1, 135, 0, nil, nil}, -- DL
+        -- Dynamis - Beaucedine Non-Beastmen
+        ["Angra Mainyu"] = {"416e6772", 1, 134, 0, nil, nil}, -- Angr
+        ["Fire Pukis"] = {"4650756b", 2, 134, 0, nil, nil}, -- FPuk
+        ["Wind Pukis"] = {"5750756b", 4, 134, 0, nil, nil}, -- WPuk
+        ["Petro Pukis"] = {"5050756b", 5, 134, 0, nil, nil}, -- PPuk
+        ["Poison Pukis"] = {"7050756b", 3, 134, 0, nil, nil}, -- pPuk
+        -- Dynamis - Buburimu Non-Beastmen
+        ["Aitvaras"] = {"41697476", 105, 40, 0, nil, nil}, -- Aitv
+        ["Alklha"] = {"416c6b6c", 105, 40, 0, nil, nil}, -- Alkl
+        ["Barong"] = {"4261726f", 105, 40, 0, nil, nil}, -- Baro
+        ["Basilic"] = {"42617369", 105, 40, 0, nil, nil}, -- Basi
+        ["Jurik"] = {"4a757269", 105, 40, 0, nil, nil}, -- Juri
+        ["Koschei"] = {"4b6f7363", 105, 40, 0, nil, nil}, -- Kosc
+        ["Stihi"] = {"53746968", 105, 40, 0, nil, nil}, -- Stih
+        ["Stollenwurm"] = {"53746f6c", 105, 40, 0, nil, nil}, -- Stol
+        ["Tarasca"] = {"54617261", 105, 40, 0, nil, nil}, -- Tara
+        ["Vishap"] = {"56697368", 105, 40, 0, nil, nil}, -- Vish
+        ["Apocalyptic Beast"] = {"41706f63", 1, 40, 0, nil, nil}, -- Apoc
+        -- Dynamis - Valkurm
+        ["Dragontrap"] = {"44726174", 63, 77, 0, nil, nil}, -- Drat
+        ["Fairy Ring"] = {"46616952", 10, 39, 0, nil, nil}, -- FaiR
+        ["Nant'ina"] = {"4e616e74", 8, 39, 0, nil, nil}, -- Nant
+        ["Stcemqestcint"] = {"53746365", 6, 39, 0, nil, nil}, -- Stce
+        ["Nightmare Morbol"] = {"4e4d6f72", 33, 85, 0, nil, nil}, -- NMor
+        ["Cirrate Christelle"] = {"43697272", 1, 39, 0, nil, nil}, -- Cirr
+        -- Dynamis - Qufim Non-Beastmen
+        ["Scolopendra"] = {"53636f6c", 76, 41, 0, nil, nil}, -- Scol
+        ["Suttung"] = {"53757474", 85, 41, 0, nil, nil}, -- Sutt
+        ["Stringes"] = {"53747269", 79, 41, 0, nil, nil}, -- Stri
+        ["Antaeus"] = {"416e7461", 1, 41, 0, nil, nil}, -- Anta
+        -- Dynamis - Tavnazia Non-Beastmen
+        ["Diabolos Club"] = {"44696143", 4, 42, 0, nil, nil}, -- DiaC
+        ["Diabolos Diamond"] = {"44696144", 3, 42, 0, nil, nil}, -- DiaD
+        ["Diabolos Heart"] = {"44696148", 2, 42, 0, nil, nil}, -- DiaH
+        ["Diabolos Spade"] = {"44696153", 1, 42, 0, nil, nil}, -- DiaS
     }
     local nmFunctions =
     {
         ["Beastmen"] =
         {
-            ["onMobSpawn"] = {function(mob) xi.dynamis.setNMStats(mob) end},
-            ["onMobEngaged"] = {function(mob, target) xi.dynamis.parentOnEngaged(mob, target) end},
+            ["onMobSpawn"] = {function(mob) xi.dynamis.onSpawnBeastmenNM(mob) end},
+            ["onMobEngaged"] = {function(mob, target) xi.dynamis.parentOnEngaged(mob, target) xi.dynamis.mobOnEngaged(mob, target) end},
             ["onMobFight"] = {function(mob) end},
             ["onMobRoam"] = {function(mob) xi.dynamis.mobOnRoam(mob) end},
             ["onMobRoamAction"] = {function(mob) xi.dynamis.mobOnRoamAction(mob) end},
             ["onMobMagicPrepare"] = {function(mob) end},
             ["onMobWeaponSkillPrepare"] = {function(mob) end},
             ["onMobWeaponSkill"] = {function(mob) end},
-            ["onMobDeath"] = {function(mob, player, isKiller)
+            ["onMobDeath"] = 
+            {
+                function(mob, player, isKiller)
                 local zoneID = mob:getZoneID()
                 local mobIndex = mob:getZone():getLocalVar(string.format("MobIndex_%s", mob:getID()))
                 local mobName = xi.dynamis.mobList[zoneID][mobIndex].info[2]
                 local mobVar = xi.dynamis.nmInfoLookup[mobFamily][mobName][7]
-                xi.dynamis.mobOnDeath(mob, mobVar) end},
+                xi.dynamis.mobOnDeath(mob, mobVar) end
+            },
         },
         ["Statue Megaboss"] =
         {
             ["onMobSpawn"] = {function(mob) xi.dynamis.setMegaBossStats(mob) end},
             ["onMobEngaged"] = {function(mob, target)  xi.dynamis.parentOnEngaged(mob, target) end},
             ["onMobFight"] = {function(mob) end},
-            ["onMobRoam"] = {function(mob) xi.dynamis.mobOnRoam(mob) end},
+            ["onMobRoam"] = {function(mob) xi.dynamis.onRoamAngra(mob) end},
             ["onMobRoamAction"] = {function(mob) xi.dynamis.mobOnRoamAction(mob) end},
             ["onMobMagicPrepare"] = {function(mob) end},
             ["onMobWeaponSkillPrepare"] = {function(mob) end},
             ["onMobWeaponSkill"] = {function(mob) end},
-            ["onMobDeath"] = {function(mob, player, isKiller)
+            ["onMobDeath"] = 
+            {
+                function(mob, player, isKiller)
                 local zoneID = mob:getZoneID()
                 local mobIndex = mob:getZone():getLocalVar(string.format("MobIndex_%s", mob:getID()))
                 local mobName = xi.dynamis.mobList[zoneID][mobIndex].info[2]
                 local mobVar = xi.dynamis.nmInfoLookup[mobFamily][mobName][7]
-                xi.dynamis.megabossOnDeath(mob, player, mobVar) end},
+                xi.dynamis.megabossOnDeath(mob, player, mobVar) end
+            },
         },
-        -- ["Angra Mainyu"] =
-        -- {
-        --     ["onMobSpawn"] = {function(mob) xi.dynamis.setMegaBossStats(mob) end},
-        --     ["onMobEngaged"] = {function(mob, target)  xi.dynamis.parentOnEngaged(mob, target) end},
-        --     ["onMobFight"] = {function(mob) xi.dynamis.mobOnFight(mob) end},
-        --     ["onMobRoam"] = {function(mob) xi.dynamis.mobOnRoam(mob) end},
-        --     ["onMobRoamAction"] = {function(mob) xi.dynamis.mobOnRoamAction(mob) end},
-        --     ["onMobMagicPrepare"] = {function(mob) end},
-        --     ["onMobWeaponSkillPrepare"] = {function(mob) end},
-        --     ["onMobWeaponSkill"] = {function(mob) end},
-        --     ["onMobDeath"] = {function(mob, player, isKiller) xi.dynamis.megaBossOnDeath(mob, player, mobVar) end},
-        -- },
+        ["Angra Mainyu"] =
+        {
+            ["onMobSpawn"] = {function(mob) xi.dynamis.onSpawnAngra(mob) end},
+            ["onMobEngaged"] = {function(mob, target)  xi.dynamis.parentOnEngaged(mob, target) end},
+            ["onMobFight"] = {function(mob, target) xi.dynamis.onRoamAngra(mob, target) end},
+            ["onMobRoam"] = {function(mob) end},
+            ["onMobRoamAction"] = {function(mob) end},
+            ["onMobMagicPrepare"] = {function(mob) xi.dynamis.onMagicPrepAngra(mob) end},
+            ["onMobWeaponSkillPrepare"] = {function(mob) end},
+            ["onMobWeaponSkill"] = {function(mob) end},
+            ["onMobDeath"] = {function(mob, player, isKiller) xi.dynamis.megaBossOnDeath (mob, player, mobVar) end},
+        },
         -- ["Apocalyptic Beast"] =
         -- {
-        --     ["onMobSpawn"] = {function(mob) xi.dynamis.onSpawnAntaeus(mob) end},
-        --     ["onMobEngaged"] = {function(mob, target)  xi.dynamis.onEngagedAntaeus(mob, target) end},
-        --     ["onMobFight"] = {function(mob) xi.dynamis.onFightAntaeus(mob, target) end},
-        --     ["onMobRoam"] = {function(mob) xi.dynamis.onMobRoamAntaeus(mob) end},
-        --     ["onMobRoamAction"] = {function(mob) xi.dynamis.onMobRoamActionAntaeus(mob) end},
+        --     ["onMobSpawn"] = {function(mob) xi.dynamis.onSpawnApoc(mob) end},
+        --     ["onMobEngaged"] = {function(mob, target)  xi.dynamis.onEngagedApoc(mob, target) end},
+        --     ["onMobFight"] = {function(mob) xi.dynamis.onFightApoc(mob, target) end},
+        --     ["onMobRoam"] = {function(mob) end},
+        --     ["onMobRoamAction"] = {function(mob) end},
         --     ["onMobMagicPrepare"] = {function(mob) end},
-        --     ["onMobWeaponSkillPrepare"] = {function(mob) end},
+        --     ["onMobWeaponSkillPrepare"] = {function(mob, target) xi.dynamis.onWeaponskillPrepApoc(mob, target) end},
         --     ["onMobWeaponSkill"] = {function(mob) end},
         --     ["onMobDeath"] = {function(mob) xi.dynamis.onMobDeathAntaeus(mob, player, isKiller) end},
         -- },
@@ -605,12 +891,12 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         groupIdFound = xi.dynamis.nmInfoLookup[mobName][2]
         groupZoneFound = xi.dynamis.nmInfoLookup[mobName][3]
         functionLookup = "Statue Megaboss"
-    -- elseif mobName == "Angra Mainyu" then -- Dynamis Beaucedine Megaboss
-    --     mobVar =  xi.dynamis.nmInfoLookup[mobFamily][mobName][7]
-    --     mobNameFound = xi.dynamis.nmInfoLookup[mobName][1]
-    --     groupIdFound = xi.dynamis.nmInfoLookup[mobName][2]
-    --     groupZoneFound = xi.dynamis.nmInfoLookup[mobName][3]
-    --     onMobDeath = function(mob, player, isKiller) xi.dynamis.megaBossOnDeath(mob, player, mobVar) end
+    elseif mobName == "Angra Mainyu" then -- Dynamis Beaucedine Megaboss
+        mobVar =  xi.dynamis.nmInfoLookup[mobFamily][mobName][7]
+        mobNameFound = xi.dynamis.nmInfoLookup[mobName][1]
+        groupIdFound = xi.dynamis.nmInfoLookup[mobName][2]
+        groupZoneFound = xi.dynamis.nmInfoLookup[mobName][3]
+        functionLookup = "Angra Mainyu"
     -- elseif mobName == "Apocalyptic Beast" then -- Dynamis Buburimu Megaboss
     --     mobVar =  xi.dynamis.nmInfoLookup[mobFamily][mobName][7]
     --     mobNameFound = xi.dynamis.nmInfoLookup[mobName][1]
@@ -833,21 +1119,22 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
     end
     if oMobIndex ~= nil then
         mob:setLocalVar("Parent", oMobIndex)
+        oMob:setLocalVar(string.format("ChildID_%s", mobIndex), mob:getID())
     end
     zone:setLocalVar(string.format("MobIndex_%s", mob:getID()), mobIndex)
     mob:setLocalVar(string.format("MobIndex_%s", mob:getID()), mobIndex)
     if forceLink == true then
         mob:updateEnmity(target)
     end
-    print(string.format("Mob ID: %s", mob:getID()))
 end
 
 xi.dynamis.spawnDynamicPet =function(target, mob) 
     local mobFamily = mob:getFamily()
-    local isNM = mob:isMobType(MOBTYPE_NOTORIOUS)
-    local mobJob = mob:getJob()
-    local oMob = GetMobByID(mob:getID())
+    local zoneID = mob:getZoneID()
     local oMobIndex = oMob:getZone():getLocalVar(string.format("MobIndex_%s", oMob:getID()))
+    local isNM = xi.dynamis.mobList[zoneID][oMobIndex].info[2]
+    local mobJob = mob:getMainJob()
+    local oMob = GetMobByID(mob:getID())
     local mobName = mob:getName()
     local petList =
     {
@@ -961,11 +1248,11 @@ xi.dynamis.spawnDynamicPet =function(target, mob)
             }
         },
     }
-    if isNM == true then
+    if isNM == "NM" then
         if mobFamily ~= 327 and mobFamily ~= 334 and mobFamily ~= 337 and mobFamily ~= 358 and mobFamily ~= 359 and mobFamily ~= 360 then
             nameObj = petList[mobName]
         else
-        nameObj = petList[mobFamily][mobJob][true][mobName]
+            nameObj = petList[mobFamily][mobJob][true][mobName]
         end
     else
         nameObj = petList[mobFamily][mobJob][false]
@@ -1085,7 +1372,7 @@ xi.dynamis.setMobStats = function(mob)
         mob:setMobLevel(math.random(78,80))
         mob:setTrueDetection(true)
 
-        if     job == xi.job.WAR then
+        if job == xi.job.WAR then
             local params = { }
             params.specials = { }
             params.specials.skill = { }
@@ -1367,6 +1654,30 @@ xi.dynamis.statueOnFight = function(mob, target)
             end
             mob:useMobAbility(1125) -- Use Recover MP
         end
+    end
+end
+
+--------------------------------------------
+--          Dynamis Pet Spawning          --
+--------------------------------------------
+xi.dynamis.mobOnEngaged = function(mob, target)
+    if  mob:getMainJob() == xi.job.BST or mob:getMainJob() == xi.job.SMN then
+        mob:entityAnimationPacket("casm")
+        mob:SetAutoAttackEnabled(false)
+        mob:SetMagicCastingEnabled(false)
+        mob:SetMobAbilityEnabled(false)
+
+        mob:timer(3000, function(mob)
+            if mob:isAlive() then
+                mob:entityAnimationPacket("shsm")
+                mob:SetAutoAttackEnabled(true)
+                mob:SetMagicCastingEnabled(true)
+                mob:SetMobAbilityEnabled(true)
+                xi.dynamis.spawnDynamicPet(target, mob)
+            end
+        end)
+    elseif mob:getMainJob() == xi.job.DRG then
+        mob:useMobAbility(xi.jsa.CALL_WYVERN)
     end
 end
 
