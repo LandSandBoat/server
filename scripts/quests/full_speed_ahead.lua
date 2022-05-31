@@ -136,3 +136,5 @@ xi.full_speed_ahead.completeGame = function(player)
 end
 
 xi.fsa = xi.full_speed_ahead
+
+return xi.full_speed_ahead -- NOTE: This return does nothing apart from silence the hot-reloader
