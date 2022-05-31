@@ -247,6 +247,7 @@ xi.items =
     MOON_ORB                        = 1130,
     STAR_ORB                        = 1131,
     NORG_SHELL                      = 1135,
+    UGGALEPH_KEY                    = 1136,
     UNLIT_LANTERN                   = 1138,
     RANCOR_FLAME                    = 1139,
     FLAME_OF_CRIMSON_RANCOR         = 1140,
