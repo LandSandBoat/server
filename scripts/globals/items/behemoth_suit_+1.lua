@@ -4,7 +4,7 @@
 --  When used, player will obtain one of sixteen random meats or with very low
 --  chance either a Beastly or Savory Shank. Possible Normal meats are:
 --  Buffalo Meat, Cerberus Meat, Cockatrice Meat, Coeurl Meat, Dhalmel Meat,
---  Dragon Meat, Giant Sheep Meat, Hare Meat, Hydra Meat, Karakul Meat, 
+--  Dragon Meat, Giant Sheep Meat, Hare Meat, Hydra Meat, Karakul Meat,
 --  Land Crab Meat, Lucerewe Meat, Lynx Meat, Orobon Meat, Ruszor Meat,
 --  Ziz Meat - Data capture 2022-05
 --  Chance of obtaining a Beastly or Savory Shank is very low.
