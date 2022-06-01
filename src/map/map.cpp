@@ -299,6 +299,11 @@ int32 do_init(int32 argc, char** argv)
 
     // clang-format off
     gConsoleService = std::make_unique<ConsoleService>();
+    gConsoleService->RegisterCommand("crash", "Force a native crash.", []()
+    {
+        crash();
+    });
+    // clang-format on
 
     gConsoleService->RegisterCommand("crash", "Force-crash the process.",
     [](std::vector<std::string> inputs)
