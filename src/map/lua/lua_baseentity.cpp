@@ -1806,10 +1806,14 @@ void CLuaBaseEntity::openDoor(sol::object const& seconds)
         m_PBaseEntity->animation = ANIMATION_OPEN_DOOR;
         m_PBaseEntity->loc.zone->UpdateEntityPacket(m_PBaseEntity, ENTITY_UPDATE, UPDATE_COMBAT);
 
-        m_PBaseEntity->PAI->QueueAction(queueAction_t(std::chrono::milliseconds(OpenTime), false, [](CBaseEntity* PNpc) {
+        // clang-format off
+        m_PBaseEntity->PAI->QueueAction(queueAction_t(std::chrono::milliseconds(OpenTime), false,
+        [](CBaseEntity* PNpc)
+        {
             PNpc->animation = ANIMATION_CLOSE_DOOR;
             PNpc->loc.zone->UpdateEntityPacket(PNpc, ENTITY_UPDATE, UPDATE_COMBAT);
         }));
+        // clang-format on
     }
 }
 
@@ -1830,10 +1834,10 @@ void CLuaBaseEntity::closeDoor(sol::object const& seconds)
         m_PBaseEntity->animation = ANIMATION_CLOSE_DOOR;
         m_PBaseEntity->loc.zone->UpdateEntityPacket(m_PBaseEntity, ENTITY_UPDATE, UPDATE_COMBAT);
 
-        m_PBaseEntity->PAI->QueueAction(queueAction_t(std::chrono::milliseconds(CloseTime), false, [](CBaseEntity* PNpc) {
+        m_PBaseEntity->PAI->QueueAction(queueAction_t(std::chrono::milliseconds(CloseTime), false, [](CBaseEntity* PNpc)
+                                                      {
             PNpc->animation = ANIMATION_OPEN_DOOR;
-            PNpc->loc.zone->UpdateEntityPacket(PNpc, ENTITY_UPDATE, UPDATE_COMBAT);
-        }));
+            PNpc->loc.zone->UpdateEntityPacket(PNpc, ENTITY_UPDATE, UPDATE_COMBAT); }));
     }
 }
 
@@ -1928,10 +1932,10 @@ void CLuaBaseEntity::showNPC(sol::object const& seconds)
     m_PBaseEntity->status = STATUS_TYPE::NORMAL;
     m_PBaseEntity->loc.zone->UpdateEntityPacket(m_PBaseEntity, ENTITY_UPDATE, UPDATE_COMBAT);
 
-    m_PBaseEntity->PAI->QueueAction(queueAction_t(std::chrono::milliseconds(showTime), false, [](CBaseEntity* PNpc) {
+    m_PBaseEntity->PAI->QueueAction(queueAction_t(std::chrono::milliseconds(showTime), false, [](CBaseEntity* PNpc)
+                                                  {
         PNpc->status = STATUS_TYPE::DISAPPEAR;
-        PNpc->loc.zone->UpdateEntityPacket(PNpc, ENTITY_DESPAWN, UPDATE_NONE);
-    }));
+        PNpc->loc.zone->UpdateEntityPacket(PNpc, ENTITY_DESPAWN, UPDATE_NONE); }));
 }
 
 /************************************************************************
@@ -1952,10 +1956,10 @@ void CLuaBaseEntity::hideNPC(sol::object const& seconds)
         m_PBaseEntity->status = STATUS_TYPE::DISAPPEAR;
         m_PBaseEntity->loc.zone->UpdateEntityPacket(m_PBaseEntity, ENTITY_DESPAWN, UPDATE_NONE);
 
-        m_PBaseEntity->PAI->QueueAction(queueAction_t(std::chrono::milliseconds(hideTime), false, [](CBaseEntity* PNpc) {
+        m_PBaseEntity->PAI->QueueAction(queueAction_t(std::chrono::milliseconds(hideTime), false, [](CBaseEntity* PNpc)
+                                                      {
             PNpc->status = STATUS_TYPE::NORMAL;
-            PNpc->loc.zone->UpdateEntityPacket(PNpc, ENTITY_UPDATE, UPDATE_COMBAT);
-        }));
+            PNpc->loc.zone->UpdateEntityPacket(PNpc, ENTITY_UPDATE, UPDATE_COMBAT); }));
     }
 }
 
@@ -1974,10 +1978,10 @@ void CLuaBaseEntity::updateNPCHideTime(sol::object const& seconds)
     {
         uint32 hideTime = (seconds != sol::lua_nil) ? seconds.as<uint32>() * 1000 : 15000;
 
-        m_PBaseEntity->PAI->QueueAction(queueAction_t(std::chrono::milliseconds(hideTime), false, [](CBaseEntity* PNpc) {
+        m_PBaseEntity->PAI->QueueAction(queueAction_t(std::chrono::milliseconds(hideTime), false, [](CBaseEntity* PNpc)
+                                                      {
             PNpc->status = STATUS_TYPE::NORMAL;
-            PNpc->loc.zone->UpdateEntityPacket(PNpc, ENTITY_UPDATE, UPDATE_COMBAT);
-        }));
+            PNpc->loc.zone->UpdateEntityPacket(PNpc, ENTITY_UPDATE, UPDATE_COMBAT); }));
     }
 }
 
@@ -5257,7 +5261,12 @@ void CLuaBaseEntity::changeJob(uint8 newJob)
     charutils::BuildingCharAbilityTable(PChar);
     charutils::BuildingCharTraitsTable(PChar);
 
-    PChar->ForParty([](CBattleEntity* PMember) { ((CCharEntity*)PMember)->PLatentEffectContainer->CheckLatentsPartyJobs(); });
+    // clang-format off
+    PChar->ForParty([](CBattleEntity* PMember)
+    {
+        ((CCharEntity*)PMember)->PLatentEffectContainer->CheckLatentsPartyJobs();
+    });
+    // clang-format on
 
     PChar->UpdateHealth();
     PChar->health.hp = PChar->GetMaxHP();
@@ -8632,12 +8641,16 @@ std::optional<CLuaBaseEntity> CLuaBaseEntity::getPartyLeader()
 void CLuaBaseEntity::forMembersInRange(float range, sol::function function)
 {
     auto* target = (CBattleEntity*)m_PBaseEntity;
-    target->ForParty([&target, &range, &function](CBattleEntity* member) {
+
+    // clang-format off
+    target->ForParty([&target, &range, &function](CBattleEntity* member)
+    {
         if (target->loc.zone == member->loc.zone && distanceSquared(target->loc.p, member->loc.p) < (range * range))
         {
             function(CLuaBaseEntity(member));
         }
     });
+    // clang-format on
 }
 
 /************************************************************************
@@ -8664,9 +8677,12 @@ void CLuaBaseEntity::addPartyEffect(sol::variadic_args va)
 
     CBattleEntity* PEntity = ((CBattleEntity*)m_PBaseEntity);
 
-    PEntity->ForParty([PEffect](CBattleEntity* PMember) {
+    // clang-format off
+    PEntity->ForParty([PEffect](CBattleEntity* PMember)
+    {
         PMember->StatusEffectContainer->AddStatusEffect(PEffect);
     });
+    // clang-format on
 }
 
 /************************************************************************
@@ -8735,9 +8751,13 @@ sol::table CLuaBaseEntity::getAlliance()
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
     auto table = luautils::lua.create_table();
-    PChar->ForAlliance([&table](CBattleEntity* PMember) {
+
+    // clang-format off
+    PChar->ForAlliance([&table](CBattleEntity* PMember)
+    {
         table.add(CLuaBaseEntity(PMember));
     });
+    // clang-format on
 
     return table;
 }
@@ -9665,12 +9685,15 @@ bool CLuaBaseEntity::checkImbuedItems()
     for (uint8 LocID = 0; LocID < CONTAINER_ID::MAX_CONTAINER_ID; ++LocID)
     {
         bool found = false;
-        PChar->getStorage(LocID)->ForEachItem([&found](CItem* PItem) {
+        // clang-format off
+        PChar->getStorage(LocID)->ForEachItem([&found](CItem* PItem)
+        {
             if (PItem->getID() >= 5365 && PItem->getID() <= 5384)
             {
                 found = true;
             }
         });
+        // clang-format on
 
         if (found)
         {
@@ -10242,9 +10265,13 @@ sol::table CLuaBaseEntity::getStatusEffects()
     }
 
     auto table = luautils::lua.create_table();
-    static_cast<CBattleEntity*>(m_PBaseEntity)->StatusEffectContainer->ForEachEffect([&table](CStatusEffect* PEffect) {
+    // clang-format off
+    static_cast<CBattleEntity*>(m_PBaseEntity)->StatusEffectContainer->ForEachEffect(
+    [&table](CStatusEffect* PEffect)
+    {
         table.add(CLuaStatusEffect(PEffect));
     });
+    // clang-format on
 
     return table;
 }
@@ -11658,14 +11685,15 @@ void CLuaBaseEntity::trustPartyMessage(uint32 message_id)
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_TRUST);
 
     auto* PTrust  = static_cast<CTrustEntity*>(m_PBaseEntity);
-    auto* PMaster = dynamic_cast<CCharEntity*>(PTrust->PMaster);
-
-    if (PMaster)
+    if (auto* PMaster = dynamic_cast<CCharEntity*>(PTrust->PMaster);)
     {
-        PMaster->ForParty([&](CBattleEntity* PMember) {
+        // clang-format off
+        PMaster->ForParty([&](CBattleEntity* PMember)
+        {
             auto* PCharMember = static_cast<CCharEntity*>(PMember);
             PCharMember->pushPacket(new CMessageCombatPacket(PTrust, PMember, message_id, 0, 711));
         });
+        // clang-format on
     }
 }
 
@@ -13272,7 +13300,8 @@ void CLuaBaseEntity::castSpell(sol::object const& spell, sol::object entity)
             }
         }
 
-        m_PBaseEntity->PAI->QueueAction(queueAction_t(0ms, true, [targid, spellid](auto PEntity) {
+        m_PBaseEntity->PAI->QueueAction(queueAction_t(0ms, true, [targid, spellid](auto PEntity)
+                                                      {
             if (targid)
             {
                 PEntity->PAI->Cast(targid, spellid);
@@ -13280,17 +13309,16 @@ void CLuaBaseEntity::castSpell(sol::object const& spell, sol::object entity)
             else if (dynamic_cast<CMobEntity*>(PEntity))
             {
                 PEntity->PAI->Cast(static_cast<CMobEntity*>(PEntity)->GetBattleTargetID(), spellid);
-            }
-        }));
+            } }));
     }
     else
     {
-        m_PBaseEntity->PAI->QueueAction(queueAction_t(0ms, true, [](auto PEntity) {
+        m_PBaseEntity->PAI->QueueAction(queueAction_t(0ms, true, [](auto PEntity)
+                                                      {
             if (dynamic_cast<CMobEntity*>(PEntity))
             {
                 static_cast<CMobController*>(PEntity->PAI->GetController())->TryCastSpell();
-            }
-        }));
+            } }));
     }
 }
 
@@ -13313,7 +13341,9 @@ void CLuaBaseEntity::useJobAbility(uint16 skillID, sol::object const& pet)
         PTarget                        = static_cast<CBattleEntity*>(PLuaBaseEntity->m_PBaseEntity);
     }
 
-    m_PBaseEntity->PAI->QueueAction(queueAction_t(0ms, true, [PTarget, skillID](auto PEntity) {
+    // clang-format off
+    m_PBaseEntity->PAI->QueueAction(queueAction_t(0ms, true, [PTarget, skillID](auto PEntity)
+    {
         if (PTarget)
         {
             PEntity->PAI->Ability(PTarget->targid, skillID);
@@ -13323,6 +13353,7 @@ void CLuaBaseEntity::useJobAbility(uint16 skillID, sol::object const& pet)
             PEntity->PAI->Ability(static_cast<CMobEntity*>(PEntity)->GetBattleTargetID(), skillID);
         }
     }));
+    // clang-format on
 }
 
 /************************************************************************
@@ -13338,12 +13369,15 @@ void CLuaBaseEntity::useMobAbility(sol::variadic_args va)
 
     if (va.size() == 0)
     {
-        m_PBaseEntity->PAI->QueueAction(queueAction_t(0ms, true, [](auto PEntity) {
+        // clang-format off
+        m_PBaseEntity->PAI->QueueAction(queueAction_t(0ms, true, [](auto PEntity)
+        {
             if (dynamic_cast<CMobEntity*>(PEntity))
             {
                 static_cast<CMobController*>(PEntity->PAI->GetController())->MobSkill();
             }
         }));
+        // clang-format on
         return;
     }
 
@@ -13362,7 +13396,9 @@ void CLuaBaseEntity::useMobAbility(sol::variadic_args va)
         PTarget                        = PLuaBaseEntity ? (CBattleEntity*)PLuaBaseEntity->m_PBaseEntity : nullptr;
     }
 
-    m_PBaseEntity->PAI->QueueAction(queueAction_t(0ms, true, [PTarget, skillid, PMobSkill](auto PEntity) {
+    // clang-format off
+    m_PBaseEntity->PAI->QueueAction(queueAction_t(0ms, true, [PTarget, skillid, PMobSkill](auto PEntity)
+    {
         if (PTarget)
         {
             PEntity->PAI->MobSkill(PTarget->targid, skillid);
@@ -13379,6 +13415,7 @@ void CLuaBaseEntity::useMobAbility(sol::variadic_args va)
             }
         }
     }));
+    // clang-format on
 }
 
 /************************************************************************

@@ -93,7 +93,7 @@ void CLinkshell::setMessage(const int8* message, const int8* poster)
     char sqlMessage[256];
     sql->EscapeString(sqlMessage, (const char*)message);
     sql->Query("UPDATE linkshells SET poster = '%s', message = '%s', messagetime = %u WHERE linkshellid = %d;", poster, sqlMessage,
-              static_cast<uint32>(time(nullptr)), m_id);
+               static_cast<uint32>(time(nullptr)), m_id);
 
     int8 packetData[8]{};
     ref<uint32>(packetData, 0) = m_id;
@@ -209,12 +209,12 @@ void CLinkshell::ChangeMemberRank(int8* MemberName, uint8 toSack)
                     if (lsID == 1)
                     {
                         sql->Query("UPDATE accounts_sessions SET linkshellid1 = %u , linkshellrank1 = %u WHERE charid = %u", m_id,
-                                  static_cast<uint8>(PItemLinkshell->GetLSType()), PMember->id);
+                                   static_cast<uint8>(PItemLinkshell->GetLSType()), PMember->id);
                     }
                     else if (lsID == 2)
                     {
                         sql->Query("UPDATE accounts_sessions SET linkshellid2 = %u , linkshellrank2 = %u WHERE charid = %u", m_id,
-                                  static_cast<uint8>(PItemLinkshell->GetLSType()), PMember->id);
+                                   static_cast<uint8>(PItemLinkshell->GetLSType()), PMember->id);
                     }
 
                     PMember->pushPacket(new CInventoryAssignPacket(PItemLinkshell, INV_NORMAL));
@@ -519,7 +519,7 @@ namespace linkshell
         if (IsValidLinkshellName(name))
         {
             if (sql->Query("INSERT INTO linkshells (name, color, postrights) VALUES ('%s', %u, %u)", name, color,
-                          static_cast<uint8>(LSTYPE_PEARLSACK)) != SQL_ERROR)
+                           static_cast<uint8>(LSTYPE_PEARLSACK)) != SQL_ERROR)
             {
                 return LoadLinkshell((uint32)sql->LastInsertId())->getID();
             }

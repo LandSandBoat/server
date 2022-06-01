@@ -62,11 +62,13 @@ void CCharPacket::updateWith(CCharEntity* PChar, ENTITYUPDATE type, uint8 update
             ref<uint8>(0x0A) = UPDATE_DESPAWN;
         }
         break;
+        // clang-format off
         case ENTITY_SPAWN:
         {
             updatemask = UPDATE_ALL_CHAR;
         }
         [[fallthrough]];
+        // clang-format on
         case ENTITY_UPDATE:
         {
             ref<uint8>(0x0A) |= updatemask;
@@ -161,7 +163,7 @@ void CCharPacket::updateWith(CCharEntity* PChar, ENTITYUPDATE type, uint8 update
                 ref<uint8>(0x42) = 0x50 + PChar->StatusEffectContainer->GetStatusEffect(EFFECT_COLURE_ACTIVE)->GetPower();
             }
 
-            ref<uint8>(0x43)  = 0x04;
+            ref<uint8>(0x43) = 0x04;
 
             if (updatemask & UPDATE_LOOK)
             {

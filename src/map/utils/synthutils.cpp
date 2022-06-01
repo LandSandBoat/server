@@ -81,9 +81,9 @@ namespace synthutils
         LIMIT 1";
 
         int32 ret = sql->Query(fmtQuery, PChar->CraftContainer->getItemID(0), PChar->CraftContainer->getItemID(0),
-                              PChar->CraftContainer->getItemID(1), PChar->CraftContainer->getItemID(2), PChar->CraftContainer->getItemID(3),
-                              PChar->CraftContainer->getItemID(4), PChar->CraftContainer->getItemID(5), PChar->CraftContainer->getItemID(6),
-                              PChar->CraftContainer->getItemID(7), PChar->CraftContainer->getItemID(8));
+                               PChar->CraftContainer->getItemID(1), PChar->CraftContainer->getItemID(2), PChar->CraftContainer->getItemID(3),
+                               PChar->CraftContainer->getItemID(4), PChar->CraftContainer->getItemID(5), PChar->CraftContainer->getItemID(6),
+                               PChar->CraftContainer->getItemID(7), PChar->CraftContainer->getItemID(8));
 
         if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
         {
@@ -97,7 +97,7 @@ namespace synthutils
                 PChar->CraftContainer->setItem(10 + 2, (uint16)sql->GetUIntData(11), (uint8)sql->GetUIntData(15), 0); // RESULT_HQ
                 PChar->CraftContainer->setItem(10 + 3, (uint16)sql->GetUIntData(12), (uint8)sql->GetUIntData(16), 0); // RESULT_HQ2
                 PChar->CraftContainer->setItem(10 + 4, (uint16)sql->GetUIntData(13), (uint8)sql->GetUIntData(17), 0); // RESULT_HQ3
-                PChar->CraftContainer->setCraftType((uint8)sql->GetUIntData(18)); // Store if it's a desynth
+                PChar->CraftContainer->setCraftType((uint8)sql->GetUIntData(18));                                     // Store if it's a desynth
 
                 uint16 skillValue   = 0;
                 uint16 currentSkill = 0;
@@ -225,7 +225,7 @@ namespace synthutils
         uint8 result      = SYNTHESIS_SUCCESS; // We assume by default that we succed
         uint8 hqtier      = 0;
         uint8 finalhqtier = 4;
-        bool  canHQ       = true;              // We assume by default that we can HQ
+        bool  canHQ       = true; // We assume by default that we can HQ
 
         double chance    = 0;
         double random    = 0;
@@ -433,7 +433,7 @@ namespace synthutils
             }
 
             uint16 maxSkill  = (PChar->RealSkills.rank[skillID] + 1) * 100; // Skill cap, depending on rank
-            uint16 charSkill = PChar->RealSkills.skill[skillID]; // Compare against real character skill, without image support, gear or moghancements
+            uint16 charSkill = PChar->RealSkills.skill[skillID];            // Compare against real character skill, without image support, gear or moghancements
 
             // We don't skill Up if the involved skill is caped (As a fail-safe measure, we also check if a naughty GM has set its skill over cap aswell)
             if (charSkill >= maxSkill)
@@ -441,7 +441,7 @@ namespace synthutils
                 continue; // Break current loop iteration.
             }
 
-            int16 baseDiff  = PChar->CraftContainer->getQuantity(skillID - 40) - charSkill / 10; // the 5 lvl difference rule for breaks does NOT consider the effects of image support/gear
+            int16 baseDiff = PChar->CraftContainer->getQuantity(skillID - 40) - charSkill / 10; // the 5 lvl difference rule for breaks does NOT consider the effects of image support/gear
 
             // We don't Skill Up if over 10 levels above synth skill. (Or at AND above synth skill in era)
             if ((map_config.craft_modern_system == 1 && (baseDiff <= -11)) || (map_config.craft_modern_system == 0 && (baseDiff <= 0)))
@@ -455,7 +455,7 @@ namespace synthutils
                 continue; // Break current loop iteration.
             }
 
-            //Section 2: Skill up equations and penalties
+            // Section 2: Skill up equations and penalties
             double skillUpChance = 0;
 
             if (map_config.craft_modern_system == 1)
@@ -581,7 +581,7 @@ namespace synthutils
 
                 // Section 4: Spezialization System (Craft delevel system over certain point)
                 uint16 skillCumulation   = skillUpAmount;
-                uint8  skillHighest      = skillID;       // Default to lowering current skill in use, since we have to lower something if it's going past the limit... (AKA, badly configurated server)
+                uint8  skillHighest      = skillID; // Default to lowering current skill in use, since we have to lower something if it's going past the limit... (AKA, badly configurated server)
                 uint16 skillHighestValue = map_config.craft_common_cap;
 
                 if ((charSkill + skillUpAmount) > map_config.craft_common_cap) // If server is using the specialization system
@@ -959,21 +959,21 @@ namespace synthutils
             }
 
             // Calculate what craft this recipe "belongs" to based on highest skill required
-            uint32 skillType = 0;
+            uint32 skillType    = 0;
             uint32 highestSkill = 0;
             for (uint8 skillID = SKILL_WOODWORKING; skillID <= SKILL_COOKING; ++skillID)
             {
                 uint8 skillRequired = PChar->CraftContainer->getQuantity(skillID - 40);
                 if (skillRequired > highestSkill)
                 {
-                    skillType = skillID;
+                    skillType    = skillID;
                     highestSkill = skillRequired;
                 }
             }
 
-            RoeDatagram roeItemId = RoeDatagram("itemid", itemID);
-            RoeDatagram roeSkillType = RoeDatagram("skillType", skillType);
-            RoeDatagramList roeSynthResult({roeItemId, roeSkillType});
+            RoeDatagram     roeItemId    = RoeDatagram("itemid", itemID);
+            RoeDatagram     roeSkillType = RoeDatagram("skillType", skillType);
+            RoeDatagramList roeSynthResult({ roeItemId, roeSkillType });
 
             roeutils::event(ROE_EVENT::ROE_SYNTHSUCCESS, PChar, roeSynthResult);
         }

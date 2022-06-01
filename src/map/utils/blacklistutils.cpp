@@ -20,9 +20,9 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 */
 
 #include "blacklistutils.h"
-#include "common/utils.h"
 #include "../entities/charentity.h"
 #include "../map.h"
+#include "common/utils.h"
 
 #include "../packets/stop_downloading.h"
 
@@ -31,7 +31,7 @@ namespace blacklistutils
     bool IsBlacklisted(uint32 ownerId, uint32 targetId)
     {
         const char* query = "SELECT * FROM char_blacklist WHERE charid_owner = %u AND charid_target = %u;";
-        int32       ret = sql->Query(query, ownerId, targetId);
+        int32       ret   = sql->Query(query, ownerId, targetId);
 
         return (ret != SQL_ERROR && sql->NumRows() == 1);
     }

@@ -51,9 +51,9 @@ CInstanceLoader::CInstanceLoader(uint16 instanceid, CCharEntity* PRequester)
         return;
     }
 
-    requester           = PRequester;
-    zone                = PZone;
-    instance = ((CZoneInstance*)PZone)->CreateInstance(instanceid);
+    requester = PRequester;
+    zone      = PZone;
+    instance  = ((CZoneInstance*)PZone)->CreateInstance(instanceid);
 }
 
 CInstanceLoader::~CInstanceLoader()
@@ -182,7 +182,7 @@ CInstance* CInstanceLoader::LoadInstance()
 
             // TODO: Remove me
             // Check if we should be looking up scripts for this mob
-            //PMob->m_HasSpellScript = (uint8)sql->GetIntData(64);
+            // PMob->m_HasSpellScript = (uint8)sql->GetIntData(64);
 
             PMob->m_SpellListContainer = mobSpellList::GetMobSpellList(sql->GetIntData(65));
 

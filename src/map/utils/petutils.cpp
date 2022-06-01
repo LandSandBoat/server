@@ -512,7 +512,7 @@ namespace petutils
         int32 mainLevelOver60To75 = std::clamp(mlvl - 60, 0, 15); // Second calculation mode after level 60
         int32 mainLevelOver75     = (mlvl < 75 ? 0 : mlvl - 75);  // Third calculation mode after level 75
 
-        //Calculate the bonus amount of HP
+        // Calculate the bonus amount of HP
         int32 mainLevelOver10           = (mlvl < 10 ? 0 : mlvl - 10);  // +2HP on every level after 10
         int32 mainLevelOver50andUnder60 = std::clamp(mlvl - 50, 0, 10); // +2HP at each level between level 50 and 60
         int32 mainLevelOver60           = (mlvl < 60 ? 0 : mlvl - 60);
@@ -540,8 +540,8 @@ namespace petutils
         PPet->health.maxhp = (int32)((raceStat + jobStat + bonusStat + sJobStat) * petStats->HPscale);
         PPet->health.hp    = PPet->health.maxhp;
 
-        //Start MP calculation
-        raceStat =0;
+        // Start MP calculation
+        raceStat = 0;
         jobStat  = 0;
         sJobStat = 0;
 
@@ -551,12 +551,12 @@ namespace petutils
         // If the main job doesn't have an MP rating, calculate the racial bonus based on the level of the subjob's level (assuming it has an MP rating)
         if (!(grade::GetJobGrade(mjob, 1) == 0 && grade::GetJobGrade(sjob, 1) == 0))
         {
-            //calculate normal racial bonus
+            // calculate normal racial bonus
             raceStat = grade::GetMPScale(grade, 0) + grade::GetMPScale(grade, scaleTo60Column) * mainLevelUpTo60 +
                        grade::GetMPScale(grade, scaleOver60) * mainLevelOver60;
         }
 
-        //For the main profession
+        // For the main profession
         grade = grade::GetJobGrade(mjob, 1);
         if (grade > 0)
         {
@@ -670,17 +670,17 @@ namespace petutils
 
         uint8 grade;
 
-        uint8 mlvl   = PPet->GetMLevel();
+        uint8   mlvl = PPet->GetMLevel();
         JOBTYPE mjob = PPet->GetMJob();
-        uint8 race   = 3; // Tarutaru - wait what??
+        uint8   race = 3; // Tarutaru - wait what??
 
         // Calculate HP gain from main job
-        int32 mainLevelOver30           = std::clamp(mlvl - 30, 0, 30); // Calculate condition +1HP every lvl after level 30
-        int32 mainLevelUpTo60           = (mlvl < 60 ? mlvl - 1 : 59);  // First calculation mode up to level 60 (Used the same for MP)
-        int32 mainLevelOver60To75       = std::clamp(mlvl - 60, 0, 15); // Second calculation mode after level 60
-        int32 mainLevelOver75           = (mlvl < 75 ? 0 : mlvl - 75);  // Third calculation mode after level 75
+        int32 mainLevelOver30     = std::clamp(mlvl - 30, 0, 30); // Calculate condition +1HP every lvl after level 30
+        int32 mainLevelUpTo60     = (mlvl < 60 ? mlvl - 1 : 59);  // First calculation mode up to level 60 (Used the same for MP)
+        int32 mainLevelOver60To75 = std::clamp(mlvl - 60, 0, 15); // Second calculation mode after level 60
+        int32 mainLevelOver75     = (mlvl < 75 ? 0 : mlvl - 75);  // Third calculation mode after level 75
 
-        //Calculate the bonus amount of HP
+        // Calculate the bonus amount of HP
         int32 mainLevelOver10           = (mlvl < 10 ? 0 : mlvl - 10);  // +2HP on every level after 10
         int32 mainLevelOver50andUnder60 = std::clamp(mlvl - 50, 0, 10); // +2HP at each level between level 50 and 60
         int32 mainLevelOver60           = (mlvl < 60 ? 0 : mlvl - 60);
@@ -716,7 +716,7 @@ namespace petutils
         raceStat = 0;
         jobStat  = 0;
         sJobStat = 0;
-        grade = grade::GetRaceGrades(race, 1);
+        grade    = grade::GetRaceGrades(race, 1);
 
         // If the main job does not have an MP rating, calculate the racial bonus based on the level of the subjob's level (assuming it has an MP rating)
         if (grade::GetJobGrade(mjob, 1) != 0)
@@ -854,7 +854,13 @@ namespace petutils
 
                 // check latents affected by pets
                 ((CCharEntity*)PMaster)->PLatentEffectContainer->CheckLatentsPetType();
-                PMaster->ForParty([](CBattleEntity* PMember) { ((CCharEntity*)PMember)->PLatentEffectContainer->CheckLatentsPartyAvatar(); });
+
+                // clang-format off
+                PMaster->ForParty([](CBattleEntity* PMember)
+                {
+                    ((CCharEntity*)PMember)->PLatentEffectContainer->CheckLatentsPartyAvatar();
+                });
+                // clang-format on
             }
             // apply stats from previous zone if this pet is being transferred
             if (spawningFromZone)
@@ -886,11 +892,11 @@ namespace petutils
         PPet->look = petData->look;
         PPet->name = petData->name;
         PPet->SetMJob(petData->mJob);
-        PPet->m_EcoSystem      = petData->EcoSystem;
-        PPet->m_Family         = petData->m_Family;
-        PPet->m_Element        = petData->m_Element;
-        PPet->HPscale          = petData->HPscale;
-        PPet->MPscale          = petData->MPscale;
+        PPet->m_EcoSystem = petData->EcoSystem;
+        PPet->m_Family    = petData->m_Family;
+        PPet->m_Element   = petData->m_Element;
+        PPet->HPscale     = petData->HPscale;
+        PPet->MPscale     = petData->MPscale;
 
         PPet->allegiance = PMaster->allegiance;
         PMaster->StatusEffectContainer->CopyConfrontationEffect(PPet);
@@ -918,9 +924,9 @@ namespace petutils
         PPet->setModifier(Mod::LIGHT_SDT, petData->light_sdt);
         PPet->setModifier(Mod::DARK_SDT, petData->dark_sdt);
 
-        PPet->setModifier(Mod::FIRE_RES, petData->fire_res);       // These are stored as signed integers which
-        PPet->setModifier(Mod::ICE_RES, petData->ice_res);         // is directly the modifier starting value.
-        PPet->setModifier(Mod::WIND_RES, petData->wind_res);       // Positives signify increased resist chance.
+        PPet->setModifier(Mod::FIRE_RES, petData->fire_res); // These are stored as signed integers which
+        PPet->setModifier(Mod::ICE_RES, petData->ice_res);   // is directly the modifier starting value.
+        PPet->setModifier(Mod::WIND_RES, petData->wind_res); // Positives signify increased resist chance.
         PPet->setModifier(Mod::EARTH_RES, petData->earth_res);
         PPet->setModifier(Mod::THUNDER_RES, petData->thunder_res);
         PPet->setModifier(Mod::WATER_RES, petData->water_res);
@@ -994,7 +1000,13 @@ namespace petutils
             }
 
             ((CCharEntity*)PMaster)->PLatentEffectContainer->CheckLatentsPetType();
-            PMaster->ForParty([](CBattleEntity* PMember) { ((CCharEntity*)PMember)->PLatentEffectContainer->CheckLatentsPartyAvatar(); });
+
+            // clang-format off
+            PMaster->ForParty([](CBattleEntity* PMember)
+            {
+                ((CCharEntity*)PMember)->PLatentEffectContainer->CheckLatentsPartyAvatar();
+            });
+            // clang-format on
 
             if (PPetEnt->getPetType() != PET_TYPE::AUTOMATON)
             {
@@ -1265,7 +1277,8 @@ namespace petutils
 
         Pet_t* PPetData = new Pet_t();
 
-        PPetData = *std::find_if(g_PPetList.begin(), g_PPetList.end(), [PetID](Pet_t* t) { return t->PetID == PetID; });
+        PPetData = *std::find_if(g_PPetList.begin(), g_PPetList.end(), [PetID](Pet_t* t)
+                                 { return t->PetID == PetID; });
 
         if (PMaster->GetMJob() != JOB_DRG && PetID == PETID_WYVERN)
         {
@@ -1668,7 +1681,7 @@ namespace petutils
                 {
                     if (trait->getID() == TRAIT_STOUT_SERVANT)
                     {
-                        PPet->addModifier(Mod::DMG, -(trait->getValue()*100));
+                        PPet->addModifier(Mod::DMG, -(trait->getValue() * 100));
                         break;
                     }
                 }

@@ -492,7 +492,7 @@ void CAttack::ProcessDamage()
     {
         m_naturalH2hDamage = (int32)(m_attacker->GetSkill(SKILL_HAND_TO_HAND) * 0.11f) + 3;
         m_baseDamage       = m_attacker->GetMainWeaponDmg();
-        m_damage = (uint32)(((m_baseDamage + m_naturalH2hDamage + m_trickAttackDamage + battleutils::GetFSTR(m_attacker, m_victim, slot)) * m_damageRatio));
+        m_damage           = (uint32)(((m_baseDamage + m_naturalH2hDamage + m_trickAttackDamage + battleutils::GetFSTR(m_attacker, m_victim, slot)) * m_damageRatio));
     }
     else if (slot == SLOT_MAIN)
     {
@@ -521,7 +521,7 @@ void CAttack::ProcessDamage()
 
     // Set attack type to Samba if the attack type is normal.  Don't overwrite other types.  Used for Samba double damage.
     if (m_attackType == PHYSICAL_ATTACK_TYPE::NORMAL && (m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_DRAIN_SAMBA) ||
-        m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_ASPIR_SAMBA) || m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_HASTE_SAMBA)))
+                                                         m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_ASPIR_SAMBA) || m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_HASTE_SAMBA)))
     {
         SetAttackType(PHYSICAL_ATTACK_TYPE::SAMBA);
     }
@@ -557,7 +557,7 @@ void CAttack::ProcessDamage()
             }
         }
         else if (m_attacker->objtype == TYPE_PET && m_attacker->PMaster && m_attacker->PMaster->objtype == TYPE_PC &&
-            static_cast<CPetEntity*>(m_attacker)->getPetType() == PET_TYPE::AUTOMATON)
+                 static_cast<CPetEntity*>(m_attacker)->getPetType() == PET_TYPE::AUTOMATON)
         {
             puppetutils::TrySkillUP((CAutomatonEntity*)m_attacker, SKILL_AUTOMATON_MELEE, m_victim->GetMLevel());
         }

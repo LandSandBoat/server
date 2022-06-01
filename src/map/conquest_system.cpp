@@ -47,7 +47,9 @@ namespace conquest
     void UpdateConquestSystem()
     {
         TracyZoneScoped;
-        zoneutils::ForEachZone([](CZone* PZone) {
+        // clang-format off
+        zoneutils::ForEachZone([](CZone* PZone)
+        {
             // only find chars for zones that have had conquest updated
             if (PZone->GetRegionID() <= REGION_TYPE::TAVNAZIA)
             {
@@ -55,6 +57,7 @@ namespace conquest
                 PZone->ForEachChar([](CCharEntity* PChar) { PChar->PLatentEffectContainer->CheckLatentsZone(); });
             }
         });
+        // clang-format on
     }
 
     void UpdateInfluencePoints(int points, unsigned int nation, REGION_TYPE region)
@@ -127,7 +130,7 @@ namespace conquest
     void LoseInfluencePoints(CCharEntity* PChar)
     {
         REGION_TYPE region = PChar->loc.zone->GetRegionID();
-        int        points = 0;
+        int         points = 0;
 
         switch (region)
         {
@@ -358,13 +361,16 @@ namespace conquest
         // TODO: move to lobby server
         // launch conquest message in all zone (monday server midnight)
 
-        zoneutils::ForEachZone([](CZone* PZone) {
+        // clang-format off
+        zoneutils::ForEachZone([](CZone* PZone)
+        {
             // only find chars for zones that have had conquest updated
             if (PZone->GetRegionID() <= REGION_TYPE::TAVNAZIA)
             {
                 luautils::OnConquestUpdate(PZone, Conquest_Tally_Start);
             }
         });
+        // clang-format on
 
         const char* Query = "UPDATE conquest_system SET region_control = \
                             IF(sandoria_influence > bastok_influence AND sandoria_influence > windurst_influence AND \

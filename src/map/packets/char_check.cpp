@@ -48,7 +48,7 @@ CCheckPacket::CCheckPacket(CCharEntity* PChar, CCharEntity* PTarget)
 
         if (PItem != nullptr)
         {
-            auto size = this->getSize() / 2; // TODO: Verify this, size used to use the old two-byte value
+            auto size                    = this->getSize() / 2; // TODO: Verify this, size used to use the old two-byte value
             ref<uint16>(size * 2 + 0x00) = PItem->getID();
             ref<uint8>(size * 2 + 0x02)  = i;
 
@@ -116,7 +116,6 @@ CCheckPacket::CCheckPacket(CCharEntity* PChar, CCharEntity* PTarget)
         memcpy(data + (0x10), PLinkshell->getSignature(), std::clamp<size_t>(strlen((const char*)PLinkshell->getSignature()), 0, 15));
         // ref<uint16>(0x0C) = PLinkshell->GetLSID();
         ref<uint16>(0x20) = PLinkshell->GetLSRawColor();
-
     }
     if ((PChar->nameflags.flags & FLAG_GM) || !(PTarget->nameflags.flags & FLAG_ANON))
     {
@@ -125,8 +124,8 @@ CCheckPacket::CCheckPacket(CCharEntity* PChar, CCharEntity* PTarget)
         ref<uint8>(0x24) = PTarget->GetMLevel();
         ref<uint8>(0x25) = PTarget->GetSLevel();
         ref<uint8>(0x26) = PTarget->GetMJob();
-        //0x27: master level
-        //0x28: bitflags, bit 0 = master breaker
+        // 0x27: master level
+        // 0x28: bitflags, bit 0 = master breaker
     }
 
     // Chevron 32 bit Big Endean, starting at 0x2B

@@ -61,14 +61,14 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 namespace
 {
-    const float CHARACTER_SYNC_DISTANCE                  = 45.0f;
-    const float CHARACTER_DESPAWN_DISTANCE               = 50.0f;
-    const int CHARACTER_SWAP_MAX                         = 5;
-    const int CHARACTER_SYNC_LIMIT_MAX                   = 32;
-    const int CHARACTER_SYNC_DISTANCE_SWAP_THRESHOLD     = 30;
-    const int CHARACTER_SYNC_PARTY_SIGNIFICANCE          = 100000;
-    const int CHARACTER_SYNC_ALLI_SIGNIFICANCE           = 10000;
-}
+    const float CHARACTER_SYNC_DISTANCE                = 45.0f;
+    const float CHARACTER_DESPAWN_DISTANCE             = 50.0f;
+    const int   CHARACTER_SWAP_MAX                     = 5;
+    const int   CHARACTER_SYNC_LIMIT_MAX               = 32;
+    const int   CHARACTER_SYNC_DISTANCE_SWAP_THRESHOLD = 30;
+    const int   CHARACTER_SYNC_PARTY_SIGNIFICANCE      = 100000;
+    const int   CHARACTER_SYNC_ALLI_SIGNIFICANCE       = 10000;
+} // namespace
 
 typedef std::pair<float, CCharEntity*> CharScorePair;
 
@@ -246,8 +246,8 @@ void CZoneEntities::FindPartyForMob(CBaseEntity* PEntity)
     CMobEntity* PMob = (CMobEntity*)PEntity;
 
     // force all mobs in a burning circle to link
-    ZONE_TYPE     zonetype  = m_zone->GetType();
-    bool          forceLink = zonetype == ZONE_TYPE::DYNAMIS || zonetype == ZONE_TYPE::BATTLEFIELD || PMob->getMobMod(MOBMOD_SUPERLINK);
+    ZONE_TYPE zonetype  = m_zone->GetType();
+    bool      forceLink = zonetype == ZONE_TYPE::DYNAMIS || zonetype == ZONE_TYPE::BATTLEFIELD || PMob->getMobMod(MOBMOD_SUPERLINK);
 
     if ((forceLink || PMob->m_Link) && PMob->PParty == nullptr)
     {
@@ -703,7 +703,7 @@ void CZoneEntities::SpawnPCs(CCharEntity* PChar)
     }
 
     // Loop through all chars in zone and find candidate characters to spawn, and scores of already spawned characters
-    MinHeap<CharScorePair> spawnedCharacters;
+    MinHeap<CharScorePair>    spawnedCharacters;
     std::vector<CCharEntity*> toRemove;
 
     for (auto iter : PChar->SpawnPCList)
@@ -711,8 +711,7 @@ void CZoneEntities::SpawnPCs(CCharEntity* PChar)
         CCharEntity* pc = (CCharEntity*)iter.second;
 
         // Despawn character if it's a hidden GM, is in a different mog house, or if player is in a conflict while other is not, or too far up/down
-        if (pc->m_isGMHidden
-            || PChar->m_moghouseID != pc->m_moghouseID)
+        if (pc->m_isGMHidden || PChar->m_moghouseID != pc->m_moghouseID)
         {
             toRemove.push_back(pc);
             continue;
@@ -729,8 +728,8 @@ void CZoneEntities::SpawnPCs(CCharEntity* PChar)
         // Total score is determined by the significance between the characters, adding any bonuses,
         // and then subtracting the distance to make characters further away less important.
         float significanceScore = getSignificanceScore(PChar, pc);
-        auto bonusIter          = scoreBonus.find(iter.second->id);
-        auto bonus              = bonusIter == scoreBonus.end() ? 0 : bonusIter->second;
+        auto  bonusIter         = scoreBonus.find(iter.second->id);
+        auto  bonus             = bonusIter == scoreBonus.end() ? 0 : bonusIter->second;
         float totalScore        = significanceScore + bonus - charDistance + CHARACTER_SYNC_DISTANCE_SWAP_THRESHOLD;
 
         if (significanceScore < CHARACTER_SYNC_ALLI_SIGNIFICANCE)
@@ -763,8 +762,7 @@ void CZoneEntities::SpawnPCs(CCharEntity* PChar)
 
         if (PCurrentChar != nullptr && PChar != PCurrentChar && PChar->SpawnPCList.find(PCurrentChar->id) == PChar->SpawnPCList.end())
         {
-            if (PCurrentChar->m_isGMHidden
-                || PChar->m_moghouseID != PCurrentChar->m_moghouseID)
+            if (PCurrentChar->m_isGMHidden || PChar->m_moghouseID != PCurrentChar->m_moghouseID)
             {
                 continue;
             }
@@ -779,8 +777,8 @@ void CZoneEntities::SpawnPCs(CCharEntity* PChar)
 
             // Total score is determined by the significance between the characters, adding any bonuses,
             // and then subtracting the distance to make characters further away less important.
-            auto bonusIter   = scoreBonus.find(PCurrentChar->id);
-            auto bonus       = bonusIter == scoreBonus.end() ? 0 : bonusIter->second;
+            auto  bonusIter  = scoreBonus.find(PCurrentChar->id);
+            auto  bonus      = bonusIter == scoreBonus.end() ? 0 : bonusIter->second;
             float totalScore = significanceScore + bonus - charDistance;
 
             if (PChar->SpawnPCList.size() < CHARACTER_SYNC_LIMIT_MAX ||
@@ -1171,6 +1169,7 @@ void CZoneEntities::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message
 
     if (!m_charList.empty())
     {
+        // clang-format off
         switch (message_type)
         {
             case CHAR_INRANGE_SELF:
@@ -1289,6 +1288,7 @@ void CZoneEntities::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message
             }
             break;
         }
+        // clang-format on
     }
     delete packet;
 }

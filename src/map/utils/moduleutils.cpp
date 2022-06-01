@@ -26,11 +26,11 @@
 #include "common/utils.h"
 
 #include <filesystem>
+#include <fstream>
+#include <iostream>
 #include <regex>
 #include <string>
 #include <vector>
-#include <iostream>
-#include <fstream>
 
 namespace
 {
@@ -40,7 +40,7 @@ namespace
         static std::vector<CPPModule*> cppModules{};
         return cppModules;
     }
-}
+} // namespace
 
 namespace moduleutils
 {
@@ -129,8 +129,8 @@ namespace moduleutils
 
         // Read lines from init.txt
         std::vector<std::string> list;
-        std::ifstream file("./modules/init.txt", std::ios_base::in);
-        std::string line;
+        std::ifstream            file("./modules/init.txt", std::ios_base::in);
+        std::string              line;
         while (std::getline(file, line))
         {
             if (!line.empty() && line.at(0) != '#' && line != "\n" && line != "\r" && line != "\r\n")
@@ -164,8 +164,8 @@ namespace moduleutils
                 !std::filesystem::is_directory(path) &&
                 path.extension() == ".lua")
             {
-                std::string filename  = path.filename().generic_string();
-                std::string relPath   = path.relative_path().generic_string();
+                std::string filename = path.filename().generic_string();
+                std::string relPath  = path.relative_path().generic_string();
 
                 auto res = lua.safe_script_file(relPath, &sol::script_pass_on_error);
                 if (!res.valid())
@@ -203,7 +203,7 @@ namespace moduleutils
         {
             if (!override.applied)
             {
-                auto firstElem  = override.nameParts.front();
+                auto firstElem = override.nameParts.front();
                 auto lastTable = override.nameParts.size() < 2 ? firstElem : *(override.nameParts.end() - 2);
                 auto lastElem  = override.nameParts.back();
 

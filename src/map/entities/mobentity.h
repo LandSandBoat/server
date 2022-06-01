@@ -246,8 +246,8 @@ public:
     CMobSpellList*           m_SpellListContainer; // The spells list container for this mob
     std::map<uint16, uint16> m_UsedSkillIds;       // mob skill ids used (key) along with mob level (value)
 
-    uint32   m_flags;       // includes the CFH flag and whether the HP bar should be shown or not (e.g. Yilgeban doesnt)
-    uint8    m_name_prefix; // The ding bats VS Ding bats
+    uint32 m_flags;       // includes the CFH flag and whether the HP bar should be shown or not (e.g. Yilgeban doesnt)
+    uint8  m_name_prefix; // The ding bats VS Ding bats
 
     uint8 m_unk0; // possibly campaign related (entity 0x24)
     uint8 m_unk1; // (entity_update 0x25)
@@ -257,7 +257,7 @@ public:
 
     CEnmityContainer* PEnmityContainer; // система ненависти монстров
 
-    CMobSpellContainer* SpellContainer;   // retrieves spells for the mob
+    CMobSpellContainer* SpellContainer; // retrieves spells for the mob
 
     bool m_IsClaimable;
 

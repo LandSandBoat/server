@@ -19,8 +19,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 ===========================================================================
 */
 
-#include "common/socket.h"
 #include "../map.h"
+#include "common/socket.h"
 
 #include "synth_suggestion.h"
 #include <map>

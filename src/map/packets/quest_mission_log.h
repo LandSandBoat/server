@@ -68,9 +68,17 @@ enum LOG_TYPE
 // Quest Log Packet Values
 static const std::unordered_map<uint8, std::pair<uint16, uint16>> questPacketBytes = {
     // Quest Log ID   , Current, Complete
-    { QUESTS_SANDORIA, { 0x50, 0x90 } }, { QUESTS_BASTOK, { 0x58, 0x98 } },   { QUESTS_WINDURST, { 0x60, 0xA0 } },      { QUESTS_JEUNO, { 0x68, 0xA8 } },
-    { QUESTS_OTHER, { 0x70, 0xB0 } },    { QUESTS_OUTLANDS, { 0x78, 0xB8 } }, { QUESTS_TOAU, { 0x80, 0xC0 } },          { QUESTS_WOTG, { 0x88, 0xC8 } },
-    { QUESTS_ABYSSEA, { 0xE0, 0xE8 } },  { QUESTS_ADOULIN, { 0xF0, 0xF8 } },  { QUESTS_COALITION, { 0x0100, 0x0108 } },
+    { QUESTS_SANDORIA, { 0x50, 0x90 } },
+    { QUESTS_BASTOK, { 0x58, 0x98 } },
+    { QUESTS_WINDURST, { 0x60, 0xA0 } },
+    { QUESTS_JEUNO, { 0x68, 0xA8 } },
+    { QUESTS_OTHER, { 0x70, 0xB0 } },
+    { QUESTS_OUTLANDS, { 0x78, 0xB8 } },
+    { QUESTS_TOAU, { 0x80, 0xC0 } },
+    { QUESTS_WOTG, { 0x88, 0xC8 } },
+    { QUESTS_ABYSSEA, { 0xE0, 0xE8 } },
+    { QUESTS_ADOULIN, { 0xF0, 0xF8 } },
+    { QUESTS_COALITION, { 0x0100, 0x0108 } },
 };
 
 // Mission Log Packet Bytes

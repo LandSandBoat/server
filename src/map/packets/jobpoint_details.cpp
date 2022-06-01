@@ -36,7 +36,6 @@ CJobPointDetailsPacket::CJobPointDetailsPacket(CCharEntity* PChar)
     // Start 1 for WAR
     for (uint8 i = 1; i < MAX_JOBTYPE; i++)
     {
-
         JobPoints_t current_job = PJobPoints[i];
 
         for (uint8 j = 0; j < JOBPOINTS_JPTYPE_PER_CATEGORY; j++)

@@ -349,8 +349,8 @@ CActionPacket::CActionPacket(action_t& action)
 
         for (auto&& target : list.actionTargets)
         {
-            bitOffset = packBitsBE(data, static_cast<uint64>(target.reaction), bitOffset, 5); // Physical reaction to damage
-            bitOffset = packBitsBE(data, target.animation, bitOffset, 12); // анимация специальных эффектов (monster TP animations are 1800+)
+            bitOffset = packBitsBE(data, static_cast<uint64>(target.reaction), bitOffset, 5);   // Physical reaction to damage
+            bitOffset = packBitsBE(data, target.animation, bitOffset, 12);                      // анимация специальных эффектов (monster TP animations are 1800+)
             bitOffset = packBitsBE(data, static_cast<uint64>(target.speceffect), bitOffset, 7); // specialEffect
             bitOffset = packBitsBE(data, target.knockback, bitOffset, 3);                       // knockback amount (mobskill only)
             bitOffset = packBitsBE(data, target.param, bitOffset, 17);                          // параметр сообщения (урон)

@@ -22,11 +22,11 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #ifndef _CHARENTITY_H
 #define _CHARENTITY_H
 
-#include "common/cbasetypes.h"
-#include "common/mmo.h"
 #include "../event_info.h"
 #include "../packets/char.h"
 #include "../packets/entity_update.h"
+#include "common/cbasetypes.h"
+#include "common/mmo.h"
 
 #include <bitset>
 #include <deque>
@@ -213,18 +213,18 @@ typedef std::vector<EntityID_t>        BazaarList_t;
 class CCharEntity : public CBattleEntity
 {
 public:
-    uint32     accid; // Account ID associated with the character.
+    uint32 accid; // Account ID associated with the character.
 
-    jobs_t     jobs;       // Available Character professions
-    keyitems_t keys;       // Table key objects
+    jobs_t     jobs; // Available Character professions
+    keyitems_t keys; // Table key objects
 
-    EventPrep* eventPreparation;      // Information about a potential upcoming event
-    EventInfo* currentEvent;          // The currently ongoing event playing for the player
-    std::list<EventInfo*> eventQueue; // The queued events to play for the player
-    bool       inSequence;            // True if the player is locked in a NPC sequence
-    bool       gotMessage;            // Used to let the interaction framework know that a message outside of it was triggered.
+    EventPrep*            eventPreparation; // Information about a potential upcoming event
+    EventInfo*            currentEvent;     // The currently ongoing event playing for the player
+    std::list<EventInfo*> eventQueue;       // The queued events to play for the player
+    bool                  inSequence;       // True if the player is locked in a NPC sequence
+    bool                  gotMessage;       // Used to let the interaction framework know that a message outside of it was triggered.
 
-    skills_t   RealSkills; // структура всех реальных умений персонажа, с точностью до 0.1 и не ограниченных уровнем
+    skills_t RealSkills; // структура всех реальных умений персонажа, с точностью до 0.1 и не ограниченных уровнем
 
     nameflags_t nameflags;           // Flags in front of the character's name
     nameflags_t menuConfigFlags;     // These flags are used for MenuConfig packets. Some nameflags values are duplicated.
@@ -232,17 +232,17 @@ public:
     uint32      lastOnline{ 0 };     // UTC Unix Timestamp of the last time char zoned or logged out
     bool        isNewPlayer() const; // Checks if new player bit is unset.
 
-    profile_t  profile;             // профиль персонажа (все, что связывает города и персонажа)
-    capacityChain_t capacityChain;  // Capacity Point Chains
-    expChain_t expChain;            // Exp Chains
-    search_t   search;              // данные и комментарий, отображаемые в окне поиска
-    bazaar_t   bazaar;              // все данные, необходимые для таботы bazaar
-    uint16     m_EquipFlag;         // текущие события, обрабатываемые экипировкой (потом упакую в структуру, вместе с equip[])
-    uint16     m_EquipBlock;        // заблокированные ячейки экипировки
-    uint16     m_StatsDebilitation; // Debilitation arrows
-    uint8      equip[18];           //      SlotID where equipment is
-    uint8      equipLoc[18];        // ContainerID where equipment is
-    uint16     styleItems[16];      // Item IDs for items that are style locked.
+    profile_t       profile;             // профиль персонажа (все, что связывает города и персонажа)
+    capacityChain_t capacityChain;       // Capacity Point Chains
+    expChain_t      expChain;            // Exp Chains
+    search_t        search;              // данные и комментарий, отображаемые в окне поиска
+    bazaar_t        bazaar;              // все данные, необходимые для таботы bazaar
+    uint16          m_EquipFlag;         // текущие события, обрабатываемые экипировкой (потом упакую в структуру, вместе с equip[])
+    uint16          m_EquipBlock;        // заблокированные ячейки экипировки
+    uint16          m_StatsDebilitation; // Debilitation arrows
+    uint8           equip[18];           //      SlotID where equipment is
+    uint8           equipLoc[18];        // ContainerID where equipment is
+    uint16          styleItems[16];      // Item IDs for items that are style locked.
 
     uint8             m_ZonesList[36];        // List of visited zone character
     std::bitset<1024> m_SpellList;            // List of studied spells
@@ -334,7 +334,7 @@ public:
     CTreasurePool* PTreasurePool; // сокровища, добытые с монстров
     CMeritPoints*  PMeritPoints;  //
     CJobPoints*    PJobPoints;
-    bool           MeritMode;     // If true then player is meriting
+    bool           MeritMode; // If true then player is meriting
 
     CLatentEffectContainer* PLatentEffectContainer;
 
@@ -369,12 +369,12 @@ public:
     uint32     m_DeathTimestamp;     // Timestamp when death counter has been saved to database
     time_point m_deathSyncTime;      // Timer used for sending an update packet at a regular interval while the character is dead
 
-    uint8      m_hasTractor;     // checks if player has tractor already
-    uint8      m_hasRaise;       // checks if player has raise already
-    uint8      m_weaknessLvl;    // tracks if the player was previously weakend
-    bool       m_hasArise;       // checks if the white magic spell arise was cast on the player and a re-raise effect should be applied
-    uint8      m_hasAutoTarget;  // возможность использования AutoTarget функции
-    position_t m_StartActionPos; // action start position (item use, shooting start, tractor position)
+    uint8      m_hasTractor;      // checks if player has tractor already
+    uint8      m_hasRaise;        // checks if player has raise already
+    uint8      m_weaknessLvl;     // tracks if the player was previously weakend
+    bool       m_hasArise;        // checks if the white magic spell arise was cast on the player and a re-raise effect should be applied
+    uint8      m_hasAutoTarget;   // возможность использования AutoTarget функции
+    position_t m_StartActionPos;  // action start position (item use, shooting start, tractor position)
     position_t m_ActionOffsetPos; // action offset position from the action packet(currently only used for repositioning of luopans)
 
     location_t m_previousLocation;
@@ -489,7 +489,7 @@ public:
     virtual void           OnDeathTimer() override;
     virtual void           OnRaise() override;
 
-    virtual void           OnItemFinish(CItemState&, action_t&);
+    virtual void OnItemFinish(CItemState&, action_t&);
 
     bool m_Locked; // Is the player locked in a cutscene
 
@@ -524,8 +524,8 @@ private:
     bool m_isBlockingAid;
     bool m_reloadParty;
 
-    PacketList_t PacketList;                                               // the list of packets to be sent to the character during the next network cycle
-    std::unordered_map<uint32, CCharPacket*> PendingCharPackets;           // Keep track of which char packets are queued up for this char, such that they can be updated
+    PacketList_t                                     PacketList;           // the list of packets to be sent to the character during the next network cycle
+    std::unordered_map<uint32, CCharPacket*>         PendingCharPackets;   // Keep track of which char packets are queued up for this char, such that they can be updated
     std::unordered_map<uint32, CEntityUpdatePacket*> PendingEntityPackets; // Keep track of which entity update packets are queued up for this char, such that they can be updated
 };
 

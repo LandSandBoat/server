@@ -199,8 +199,8 @@ CCharEntity::CCharEntity()
 
     MeritMode = false;
 
-    m_isStyleLocked     = false;
-    m_isBlockingAid     = false;
+    m_isStyleLocked = false;
+    m_isBlockingAid = false;
 
     BazaarID.clean();
     TradePending.clean();
@@ -364,17 +364,17 @@ CBasicPacket* CCharEntity::popPacket()
     // Clean up pending maps
     switch (PPacket->getType())
     {
-    case 0x0D: // Char update
-        PendingCharPackets.erase(PPacket->ref<uint32>(0x04));
-        break;
-    case 0x0E: // Entity update
-        PendingEntityPackets.erase(PPacket->ref<uint32>(0x04));
-        break;
-    case 0x5B: // Position update
-        PendingPositionPacket = nullptr;
-        break;
-    default:
-        break;
+        case 0x0D: // Char update
+            PendingCharPackets.erase(PPacket->ref<uint32>(0x04));
+            break;
+        case 0x0E: // Entity update
+            PendingEntityPackets.erase(PPacket->ref<uint32>(0x04));
+            break;
+        case 0x5B: // Position update
+            PendingPositionPacket = nullptr;
+            break;
+        default:
+            break;
     }
 
     PacketList.pop_front();
@@ -612,7 +612,8 @@ void CCharEntity::RemoveTrust(CTrustEntity* PTrust)
         return;
     }
 
-    auto trustIt = std::find_if(PTrusts.begin(), PTrusts.end(), [PTrust](auto trust) { return PTrust == trust; });
+    auto trustIt = std::find_if(PTrusts.begin(), PTrusts.end(), [PTrust](auto trust)
+                                { return PTrust == trust; });
     if (trustIt != PTrusts.end())
     {
         if (PTrust->animation == ANIMATION_DESPAWN)
@@ -1046,7 +1047,7 @@ void CCharEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& acti
                                 actionTarget.addEffectMessage = 287 + effect;
                             }
                             actionTarget.additionalEffect = effect;
-                             // Despite appearances, ws_points_skillchain is not a multiplier it is just an amount "per element"
+                            // Despite appearances, ws_points_skillchain is not a multiplier it is just an amount "per element"
                             if (effect >= 7 && effect < 15)
                             {
                                 wspoints += (1 * map_config.ws_points_skillchain); // 1 element
@@ -1570,7 +1571,7 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
         // shadows took damage
         actionTarget.messageID = MSGBASIC_SHADOW_ABSORB;
         actionTarget.reaction  = REACTION::EVADE;
-        actionTarget.param = shadowsTaken;
+        actionTarget.param     = shadowsTaken;
     }
 
     if (actionTarget.speceffect == SPECEFFECT::HIT && actionTarget.param > 0)
@@ -1613,12 +1614,15 @@ bool CCharEntity::IsMobOwner(CBattleEntity* PBattleTarget)
 
     bool found = false;
 
-    ForAlliance([&PBattleTarget, &found](CBattleEntity* PEntity) {
+    // clang-format off
+    ForAlliance([&PBattleTarget, &found](CBattleEntity* PEntity)
+    {
         if (PEntity->id == PBattleTarget->m_OwnerID.id)
         {
             found = true;
         }
     });
+    // clang-format on
 
     return found;
 }
@@ -1750,15 +1754,18 @@ void CCharEntity::OnItemFinish(CItemState& state, action_t& action)
     auto* PTarget = static_cast<CBattleEntity*>(state.GetTarget());
     auto* PItem   = state.GetItem();
 
-    //#TODO: I'm sure this is supposed to be in the action packet... (animation, message)
+    // TODO: I'm sure this is supposed to be in the action packet... (animation, message)
     if (PItem->getAoE())
     {
-        PTarget->ForParty([this, PItem, PTarget](CBattleEntity* PMember) {
+        // clang-format off
+        PTarget->ForParty([this, PItem, PTarget](CBattleEntity* PMember)
+        {
             if (!PMember->isDead() && distance(PTarget->loc.p, PMember->loc.p) <= 10)
             {
                 luautils::OnItemUse(this, PMember, PItem);
             }
         });
+        // clang-format on
     }
     else
     {

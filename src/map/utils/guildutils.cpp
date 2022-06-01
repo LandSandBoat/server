@@ -168,7 +168,7 @@ namespace guildutils
         {
             // write the new pattern and update time to prevent other servers from updating the pattern
             sql->Query("REPLACE INTO server_variables (name,value) VALUES('[GUILD]pattern_update', %u), ('[GUILD]pattern', %u);",
-                      CVanaTime::getInstance()->getJstYearDay(), pattern);
+                       CVanaTime::getInstance()->getJstYearDay(), pattern);
             sql->Query("DELETE FROM char_vars WHERE varname = '[GUILD]daily_points';");
         }
 

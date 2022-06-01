@@ -233,6 +233,7 @@ enum SPELLFLAG
     SPELLFLAG_IGNORE_SHADOWS = 0x04  // Ignore shadows and hit player anyways (example: Mobs "Death" spell)
 };
 
+// clang-format off
 enum class SpellID : uint16
 {
     Cure                 = 1,
@@ -1032,8 +1033,8 @@ enum class SpellID : uint16
     Full_Cure             = 893,
     Refresh_III           = 894,
     Temper_II             = 895,
-
 };
+// clang-format on
 
 #define MAX_SPELL_ID 1024U
 
@@ -1120,7 +1121,7 @@ public:
     void        setName(int8* name);
 
 protected:
-    CSpell(const CSpell&) = default;
+    CSpell(const CSpell&)            = default;
     CSpell& operator=(const CSpell&) = default;
 
 private:
