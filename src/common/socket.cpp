@@ -2,8 +2,8 @@
 
 #include "../common/cbasetypes.h"
 #include "../common/kernel.h"
-#include "../common/mmo.h"
 #include "../common/logging.h"
+#include "../common/mmo.h"
 #include "../common/taskmgr.h"
 #include "../common/timer.h"
 #include "../common/utils.h"
@@ -353,7 +353,7 @@ static int                        access_debug = 0;
 //--
 static int      connect_count    = 10;
 static duration connect_interval = 3s;
-static duration connect_lockout   = 10min;
+static duration connect_lockout  = 10min;
 
 /// Connection history, an array of linked lists.
 /// The array's index for any ip is ip&0xFFFF

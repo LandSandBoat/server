@@ -6,6 +6,8 @@
 //==========================================
 #include "WheatyExceptionReport.h"
 
+// clang-format off
+
 #include <algorithm>
 #include <array>
 #include <string>
@@ -1686,3 +1688,5 @@ std::string SymbolDetail::ToString()
     }
     return formatted;
 }
+
+// clang-format on

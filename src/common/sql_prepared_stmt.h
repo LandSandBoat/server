@@ -13,9 +13,10 @@ public:
     ~SqlPreparedStatement();
 
     void Execute();
+
 private:
-    MYSQL_STMT* m_Statement;
-    std::string m_Query;
+    MYSQL_STMT*             m_Statement;
+    std::string             m_Query;
     std::vector<MYSQL_BIND> m_Fields;
     std::vector<MYSQL_BIND> m_Params;
 };

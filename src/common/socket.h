@@ -25,9 +25,9 @@ typedef long in_addr_t;
 #endif
 
 #include <array>
+#include <ctime>
 #include <memory>
 #include <string>
-#include <ctime>
 
 /*
  *
@@ -191,11 +191,11 @@ typedef int (*ParseFunc)(int fd);
 
 // socket I/O macros
 #define RFIFOHEAD(fd)
-#define WFIFOHEAD(fd, size)                                                                                                                                    \
-    do                                                                                                                                                         \
-    {                                                                                                                                                          \
-        if ((fd) && sessions[fd]->wdata_size + (size) > sessions[fd]->max_wdata)                                                                                 \
-            realloc_writefifo(fd, size);                                                                                                                       \
+#define WFIFOHEAD(fd, size)                                                      \
+    do                                                                           \
+    {                                                                            \
+        if ((fd) && sessions[fd]->wdata_size + (size) > sessions[fd]->max_wdata) \
+            realloc_writefifo(fd, size);                                         \
     } while (0)
 //-------------------
 #define RFIFOP(fd, pos) (sessions[fd]->rdata + sessions[fd]->rdata_pos + (pos))
@@ -209,19 +209,19 @@ typedef int (*ParseFunc)(int fd);
 #define WFIFOL(fd, pos) (*(uint32*)WFIFOP(fd, pos))
 
 #define RFIFOREST(fd) (sessions[fd]->flag.eof ? 0 : sessions[fd]->rdata.size() - sessions[fd]->rdata_pos)
-#define RFIFOFLUSH(fd)                                                                                                                                         \
-    do                                                                                                                                                         \
-    {                                                                                                                                                          \
-        if (sessions[fd]->rdata.size() == sessions[fd]->rdata_pos)                                                                                               \
-        {                                                                                                                                                      \
-            sessions[fd]->rdata_pos = 0;                                                                                                                        \
-            sessions[fd]->rdata.clear();                                                                                                                        \
-        }                                                                                                                                                      \
-        else                                                                                                                                                   \
-        {                                                                                                                                                      \
-            sessions[fd]->rdata.erase(0, sessions[fd]->rdata_pos);                                                                                               \
-            sessions[fd]->rdata_pos = 0;                                                                                                                        \
-        }                                                                                                                                                      \
+#define RFIFOFLUSH(fd)                                             \
+    do                                                             \
+    {                                                              \
+        if (sessions[fd]->rdata.size() == sessions[fd]->rdata_pos) \
+        {                                                          \
+            sessions[fd]->rdata_pos = 0;                           \
+            sessions[fd]->rdata.clear();                           \
+        }                                                          \
+        else                                                       \
+        {                                                          \
+            sessions[fd]->rdata.erase(0, sessions[fd]->rdata_pos); \
+            sessions[fd]->rdata_pos = 0;                           \
+        }                                                          \
     } while (0)
 
 struct socket_data
