@@ -19,8 +19,8 @@
 ===========================================================================
 */
 
-#include "common/md52.h"
 #include "common/logging.h"
+#include "common/md52.h"
 #include "common/socket.h"
 #include "common/utils.h"
 
@@ -68,7 +68,7 @@ int32 lobbydata_parse(int32 fd)
                 return -1;
             }
 
-            sd->login_lobbydata_fd    = fd;
+            sd->login_lobbydata_fd     = fd;
             sessions[fd]->session_data = sd;
             return 0;
         }
@@ -185,8 +185,8 @@ int32 lobbydata_parse(int32 fd)
                         uint32 contentId = charId; // Reusing the character ID as the content ID (which is also the name of character folder within the USER directory) at the moment
 
                         // The character ID is made up of two parts totalling 24 bits:
-                        uint16 charIdMain = charId & 0xFFFF;
-                        uint8 charIdExtra = (charId >> 16) & 0xFF;
+                        uint16 charIdMain  = charId & 0xFFFF;
+                        uint8  charIdExtra = (charId >> 16) & 0xFF;
 
                         // uList is sent through data socket (to bootloader)
                         uint32 uListOffset = 16 * (i + 1);
@@ -303,8 +303,8 @@ int32 lobbydata_parse(int32 fd)
                     return -1;
                 }
 
-                auto receivedData = sessions[sd->login_lobbyview_fd]->rdata.data();
-                uint32 charid     = ref<uint32>(receivedData, 0x1C);
+                auto   receivedData = sessions[sd->login_lobbyview_fd]->rdata.data();
+                uint32 charid       = ref<uint32>(receivedData, 0x1C);
 
                 const char* fmtQuery = "SELECT zoneip, zoneport, zoneid, pos_prevzone, gmlevel, accid, charname \
                                         FROM zone_settings, chars \
@@ -367,7 +367,7 @@ int32 lobbydata_parse(int32 fd)
                                    "VALUES(%u,%u,x'%s',%u,%u,%u,%u)";
 
                         if (sql->Query(fmtQuery, sd->accid, charid, session_key, ZoneIP, ZonePort, sd->client_addr,
-                                      (uint8)sessions[sd->login_lobbyview_fd]->ver_mismatch) == SQL_ERROR)
+                                       (uint8)sessions[sd->login_lobbyview_fd]->ver_mismatch) == SQL_ERROR)
                         {
                             // Send error message to the client.
                             LOBBBY_ERROR_MESSAGE(ReservePacketError);
@@ -495,7 +495,7 @@ int32 lobbyview_parse(int32 fd)
             return -1;
         }
         sessions[fd]->session_data = sd;
-        sd->login_lobbyview_fd    = fd;
+        sd->login_lobbyview_fd     = fd;
     }
 
     if (sessions[fd]->flag.eof)
@@ -517,7 +517,7 @@ int32 lobbyview_parse(int32 fd)
                 unsigned char MainReservePacket[0x28];
 
                 string_t client_ver_data((buff + 0x74), 6); // Full length is 10 but we drop last 4
-                client_ver_data = client_ver_data + "xx_x";        // And then we replace those last 4..
+                client_ver_data = client_ver_data + "xx_x"; // And then we replace those last 4..
 
                 string_t expected_version(version_info.client_ver, 0, 6); // Same deal here!
                 expected_version   = expected_version + "xx_x";
