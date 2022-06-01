@@ -93,12 +93,15 @@ WheatyExceptionReport::WheatyExceptionReport() // Constructor
     alreadyCrashed = false;
     RtlGetVersion = (pRtlGetVersion)GetProcAddress(GetModuleHandle(_T("ntdll.dll")), "RtlGetVersion");
 
-    _CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_FILE);
-    _CrtSetReportFile(_CRT_WARN, _CRTDBG_FILE_STDERR);
-    _CrtSetReportMode(_CRT_ERROR, _CRTDBG_MODE_FILE);
-    _CrtSetReportFile(_CRT_ERROR, _CRTDBG_FILE_STDERR);
-    _CrtSetReportMode(_CRT_ASSERT, _CRTDBG_MODE_FILE);
-    _CrtSetReportFile(_CRT_ASSERT, _CRTDBG_FILE_STDERR);
+    if (!IsDebuggerPresent())
+    {
+        _CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_FILE);
+        _CrtSetReportFile(_CRT_WARN, _CRTDBG_FILE_STDERR);
+        _CrtSetReportMode(_CRT_ERROR, _CRTDBG_MODE_FILE);
+        _CrtSetReportFile(_CRT_ERROR, _CRTDBG_FILE_STDERR);
+        _CrtSetReportMode(_CRT_ASSERT, _CRTDBG_MODE_FILE);
+        _CrtSetReportFile(_CRT_ASSERT, _CRTDBG_FILE_STDERR);
+    }
 }
 
 //============
@@ -197,7 +200,12 @@ LONG WINAPI WheatyExceptionReport::WheatyUnhandledExceptionFilter(
     GetModuleFileName(nullptr, module_folder_name, MAX_PATH);
     TCHAR* pos = _tcsrchr(module_folder_name, '\\');
     if (!pos)
-        return 0;
+    {
+        Log(_T("GetModuleFileName failed"));
+        TerminateProcess(GetCurrentProcess(), 1);
+        return EXCEPTION_EXECUTE_HANDLER; // Unreacheable code
+    }
+
     pos[0] = '\0';
     ++pos;
 
@@ -206,7 +214,11 @@ LONG WINAPI WheatyExceptionReport::WheatyUnhandledExceptionFilter(
     if (!CreateDirectory(crash_folder_path, nullptr))
     {
         if (GetLastError() != ERROR_ALREADY_EXISTS)
-            return 0;
+        {
+            Log(_T("CreateDirectory failed"));
+            TerminateProcess(GetCurrentProcess(), 1);
+            return EXCEPTION_EXECUTE_HANDLER; // Unreacheable code
+        }
     }
 
     SYSTEMTIME systime;
@@ -304,10 +316,9 @@ LONG WINAPI WheatyExceptionReport::WheatyUnhandledExceptionFilter(
         m_hReportFile = nullptr;
     }
 
-    if (m_previousFilter)
-        return m_previousFilter(pExceptionInfo);
-    else
-        return EXCEPTION_EXECUTE_HANDLER/*EXCEPTION_CONTINUE_SEARCH*/;
+    Log(_T(fmt::format("WheatyUnhandledExceptionFilter Exit").c_str()));
+    TerminateProcess(GetCurrentProcess(), 1);
+    return EXCEPTION_EXECUTE_HANDLER; // Unreacheable code
 }
 
 void __cdecl WheatyExceptionReport::WheatyCrtHandler(wchar_t const* /*expression*/, wchar_t const* /*function*/, wchar_t const* /*file*/, unsigned int /*line*/, uintptr_t /*pReserved*/)
@@ -318,26 +329,37 @@ void __cdecl WheatyExceptionReport::WheatyCrtHandler(wchar_t const* /*expression
 BOOL WheatyExceptionReport::_GetProcessorName(TCHAR* sProcessorName, DWORD maxcount)
 {
     if (!sProcessorName)
+    {
         return FALSE;
+    }
 
     HKEY hKey;
     LONG lRet;
     lRet = ::RegOpenKeyEx(HKEY_LOCAL_MACHINE, _T("HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0"),
         0, KEY_QUERY_VALUE, &hKey);
     if (lRet != ERROR_SUCCESS)
+    {
         return FALSE;
+    }
+
     TCHAR szTmp[2048];
     DWORD cntBytes = sizeof(szTmp);
     lRet = ::RegQueryValueEx(hKey, _T("ProcessorNameString"), nullptr, nullptr,
         (LPBYTE)szTmp, &cntBytes);
     if (lRet != ERROR_SUCCESS)
+    {
         return FALSE;
+    }
+
     ::RegCloseKey(hKey);
     sProcessorName[0] = '\0';
     // Skip spaces
     TCHAR* psz = szTmp;
     while (iswspace(*psz))
+    {
         ++psz;
+    }
+
     _tcsncpy(sProcessorName, psz, maxcount);
     return TRUE;
 }
@@ -1602,7 +1624,7 @@ int __cdecl WheatyExceptionReport::Log(const TCHAR* format, ...)
         }
     }
 
-    return 0;
+    return EXCEPTION_EXECUTE_HANDLER;
 }
 
 bool WheatyExceptionReport::StoreSymbol(DWORD type, DWORD_PTR offset)
