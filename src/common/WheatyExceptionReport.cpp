@@ -313,12 +313,13 @@ LONG WINAPI WheatyExceptionReport::WheatyUnhandledExceptionFilter(
         Log(_T(fmt::format("Time of crash: {:%Y/%m/%d %H:%M:%S}", fmt::localtime(t)).c_str()));
 
         GenerateExceptionReport(pExceptionInfo);
-
-        fclose(m_hReportFile);
-        m_hReportFile = nullptr;
     }
 
     Log(_T(fmt::format("WheatyUnhandledExceptionFilter Exit").c_str()));
+
+    fclose(m_hReportFile);
+    m_hReportFile = nullptr;
+
     TerminateProcess(GetCurrentProcess(), 1);
     return EXCEPTION_EXECUTE_HANDLER; // Unreacheable code
 }
