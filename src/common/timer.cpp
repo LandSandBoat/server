@@ -21,7 +21,7 @@
 time_point start_time;
 
 /*----------------------------
- * 	Get tick time
+ *  Get tick time
  *----------------------------*/
 
 #if defined(ENABLE_RDTSC)

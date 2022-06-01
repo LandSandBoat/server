@@ -94,7 +94,7 @@ void CCharPacket::updateWith(CCharEntity* PChar, ENTITYUPDATE type, uint8 update
 
                 // if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_SNEAK))
                 //{
-                //	ref<uint8>(data,(0x22)) = 0x20;
+                //  ref<uint8>(data,(0x22)) = 0x20;
                 //}
 
                 if (PChar->StatusEffectContainer->HasStatusEffectByFlag(EFFECTFLAG_INVISIBLE))

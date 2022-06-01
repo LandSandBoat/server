@@ -11685,7 +11685,7 @@ void CLuaBaseEntity::trustPartyMessage(uint32 message_id)
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_TRUST);
 
     auto* PTrust  = static_cast<CTrustEntity*>(m_PBaseEntity);
-    if (auto* PMaster = dynamic_cast<CCharEntity*>(PTrust->PMaster);)
+    if (auto* PMaster = dynamic_cast<CCharEntity*>(PTrust->PMaster))
     {
         // clang-format off
         PMaster->ForParty([&](CBattleEntity* PMember)

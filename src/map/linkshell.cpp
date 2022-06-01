@@ -157,7 +157,7 @@ bool CLinkshell::DelMember(CCharEntity* PChar)
 
 /************************************************************************
  *                                                                       *
- *  Promotes or demotes the target member		(linkshell)				*
+ *  Promotes or demotes the target member       (linkshell)             *
  *                                                                       *
  ************************************************************************/
 

@@ -221,11 +221,11 @@ CInstance* CInstanceLoader::LoadInstance()
         }
 
         Query = "SELECT npcid, name, pos_rot, pos_x, pos_y, pos_z,\
-			flag, speed, speedsub, animation, animationsub, namevis,\
-			status, entityFlags, look, name_prefix, widescan \
-			FROM instance_entities INNER JOIN npc_list ON \
-			(instance_entities.id = npc_list.npcid) \
-			WHERE instanceid = %u AND npcid >= %u and npcid < %u;";
+            flag, speed, speedsub, animation, animationsub, namevis,\
+            status, entityFlags, look, name_prefix, widescan \
+            FROM instance_entities INNER JOIN npc_list ON \
+            (instance_entities.id = npc_list.npcid) \
+            WHERE instanceid = %u AND npcid >= %u and npcid < %u;";
 
         uint32 zoneMin = (zone->GetID() << 12) + 0x1000000;
         uint32 zoneMax = zoneMin + 1024;

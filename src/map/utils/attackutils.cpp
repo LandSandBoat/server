@@ -30,7 +30,7 @@ namespace attackutils
 {
     /************************************************************************
      *                                                                       *
-     *  Multihit calculator.											        *
+     *  Multihit calculator.                                                    *
      *                                                                       *
      ************************************************************************/
     uint8 getHitCount(uint8 hits)
@@ -232,7 +232,7 @@ namespace attackutils
 
     /************************************************************************
      *                                                                       *
-     *  Is parried.													        *
+     *  Is parried.                                                         *
      *                                                                       *
      ************************************************************************/
     bool IsParried(CBattleEntity* PAttacker, CBattleEntity* PDefender)
@@ -246,7 +246,7 @@ namespace attackutils
 
     /************************************************************************
      *                                                                       *
-     *  Is guarded.													        *
+     *  Is guarded.                                                         *
      *                                                                       *
      ************************************************************************/
     bool IsGuarded(CBattleEntity* PAttacker, CBattleEntity* PDefender)
@@ -260,7 +260,7 @@ namespace attackutils
 
     /************************************************************************
      *                                                                       *
-     *  Is blocked.													        *
+     *  Is blocked.                                                         *
      *                                                                       *
      ************************************************************************/
     bool IsBlocked(CBattleEntity* PAttacker, CBattleEntity* PDefender)

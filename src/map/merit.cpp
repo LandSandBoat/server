@@ -321,7 +321,7 @@ bool CMeritPoints::AddLimitPoints(uint16 points)
 
 /************************************************************************
  *                                                                       *
- *  set limit points				                                        *
+ *  set limit points                                                        *
  *                                                                       *
  ************************************************************************/
 
@@ -332,7 +332,7 @@ void CMeritPoints::SetLimitPoints(uint16 points)
 
 /************************************************************************
  *                                                                       *
- *  set merit points				                                        *
+ *  set merit points                                                        *
  *                                                                       *
  ************************************************************************/
 
@@ -465,13 +465,13 @@ void CMeritPoints::LowerMerit(MERIT_TYPE merit)
 
 /************************************************************************
  *                                                                       *
- *  get next merit upgrade					                            *
+ *  get next merit upgrade                                              *
  *                                                                       *
  ************************************************************************/
 
 // uint16 CMeritPoints::GetNextMeritUpgrade(uint16 catId, uint16 MeritCount)
 //{
-//	return upgrade[count[catId].UpgradeID][MeritCount];
+//  return upgrade[count[catId].UpgradeID][MeritCount];
 //}
 
 /************************************************************************

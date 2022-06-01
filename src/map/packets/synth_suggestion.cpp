@@ -65,15 +65,15 @@ CSynthSuggestionPacket::CSynthSuggestionPacket(uint16 skillID, uint16 skillLevel
     }
 
     const char* fmtQuery = "SELECT KeyItem, Wood, Smith, Gold, Cloth, Leather, Bone, \
-		  Alchemy, Cook, Crystal, Result, Ingredient1, Ingredient2, \
-		  Ingredient3, Ingredient4, Ingredient5, Ingredient6, \
-		  Ingredient7, Ingredient8 \
-		FROM synth_recipes \
-		WHERE `%s` >= GREATEST(`Wood`,`Smith`,`Gold`,`Cloth`, \
-	          `Bone`,`Alchemy`,`Cook`) AND \
-		  %s BETWEEN %u AND %u \
-		ORDER BY RAND ( ) \
-		LIMIT 1;";
+          Alchemy, Cook, Crystal, Result, Ingredient1, Ingredient2, \
+          Ingredient3, Ingredient4, Ingredient5, Ingredient6, \
+          Ingredient7, Ingredient8 \
+        FROM synth_recipes \
+        WHERE `%s` >= GREATEST(`Wood`,`Smith`,`Gold`,`Cloth`, \
+              `Bone`,`Alchemy`,`Cook`) AND \
+          %s BETWEEN %u AND %u \
+        ORDER BY RAND ( ) \
+        LIMIT 1;";
 
     // TODO: Confirm the conditions under which a recipe can be selected
     // TODO: Is there a better way to run this query than comparing the

@@ -129,5 +129,5 @@ CCheckPacket::CCheckPacket(CCharEntity* PChar, CCharEntity* PTarget)
     }
 
     // Chevron 32 bit Big Endean, starting at 0x2B
-    // ref<uint8>(0x2C) = 0x00;	//Ballista Star next to Chevron count
+    // ref<uint8>(0x2C) = 0x00; //Ballista Star next to Chevron count
 }

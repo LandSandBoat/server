@@ -236,7 +236,7 @@ position_t nearPosition(const position_t& A, float offset, float radian)
 
 /************************************************************************
  *                                                                       *
- *  Methods for working with bit arrays.                 								*
+ *  Methods for working with bit arrays.                                                *
  *                                                                       *
  ************************************************************************/
 

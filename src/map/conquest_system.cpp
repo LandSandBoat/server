@@ -32,7 +32,7 @@
 
 /************************************************************************
  *                                                                       *
- *	Реализация namespace conquest                                       *
+ *  Реализация namespace conquest                                       *
  *                                                                       *
  ************************************************************************/
 
@@ -40,7 +40,7 @@ namespace conquest
 {
     /************************************************************************
      *                                                                       *
-     *	UpdateConquestSystem		                                        *
+     *  UpdateConquestSystem                                                *
      *                                                                       *
      ************************************************************************/
 
@@ -111,8 +111,8 @@ namespace conquest
 
     /************************************************************************
      *    GainInfluencePoints                                                *
-     *    +1 point for nation							                    *
-     *						                                                *
+     *    +1 point for nation                                               *
+     *                                                                      *
      ************************************************************************/
 
     void GainInfluencePoints(CCharEntity* PChar, uint32 points)
@@ -123,7 +123,7 @@ namespace conquest
 
     /************************************************************************
      *    LoseInfluencePoints                                                *
-     *    -x point for nation							                    *
+     *    -x point for nation                                               *
      *    +x point for beastmen                                              *
      ************************************************************************/
 
@@ -184,8 +184,8 @@ namespace conquest
 
     /************************************************************************
      *                                                                       *
-     *	GetInfluenceGraphics		                                        *
-     *												                        *
+     *  GetInfluenceGraphics                                                *
+     *                                                                      *
      ************************************************************************/
 
     uint8 GetInfluenceGraphics(int32 san_inf, int32 bas_inf, int32 win_inf, int32 bst_inf)
@@ -333,8 +333,8 @@ namespace conquest
 
     /************************************************************************
      *   UpdateConquestGM                                                    *
-     *	Update region control		                                        *
-     *   just used by GM command			                                    *
+     *  Update region control                                               *
+     *   just used by GM command                                                *
      ************************************************************************/
 
     void UpdateConquestGM(ConquestUpdate type)
@@ -351,8 +351,8 @@ namespace conquest
 
     /************************************************************************
      *   UpdateWeekConquest                                                  *
-     *	Update region control		                                        *
-     *   update 1 time per week			                                    *
+     *  Update region control                                               *
+     *   update 1 time per week                                             *
      ************************************************************************/
 
     void UpdateWeekConquest()
@@ -409,7 +409,7 @@ namespace conquest
 
     /************************************************************************
      *                                                                       *
-     *	GetBalance					                                        *
+     *  GetBalance                                                          *
      *   Ranking for the 3 nations                                           *
      ************************************************************************/
 

@@ -43,9 +43,15 @@ CLatentEffectContainer::CLatentEffectContainer(CCharEntity* PEntity)
 }
 
 /************************************************************************
+<<<<<<< HEAD
 *                                                                       *
 * Adds new latent effect to the character.                              *
 *                                                                       *
+=======
+ *                                                                      *
+ *  Adds new latent effect to the character.                                *
+ *                                                                      *
+>>>>>>> d091987157 (Convert Tabs to spaces)
  ************************************************************************/
 
 void CLatentEffectContainer::AddLatentEffects(std::vector<CItemEquipment::itemLatent>& latentList, uint8 reqLvl, uint8 slot)
@@ -67,9 +73,15 @@ void CLatentEffectContainer::AddLatentEffects(std::vector<CItemEquipment::itemLa
 }
 
 /************************************************************************
+<<<<<<< HEAD
 *                                                                       *
 * Removes all latent effects associated with a specified slot           *
 *                                                                       *
+=======
+ *                                                                      *
+ *  Removes all latent effects associated with a specified slot         *
+ *                                                                      *
+>>>>>>> d091987157 (Convert Tabs to spaces)
  ************************************************************************/
 
 void CLatentEffectContainer::DelLatentEffects(uint8 reqLvl, uint8 slot)
@@ -100,10 +112,17 @@ bool CLatentEffectContainer::DelLatentEffect(LATENT conditionID, uint16 conditio
 }
 
 /************************************************************************
+<<<<<<< HEAD
 *                                                                       *
 * Checks all latents that are affected by HP and activates them if      *
 * the conditions are met.                                               *
 *                                                                       *
+=======
+ *                                                                      *
+ *  Checks all latents that are affected by HP and activates them if    *
+ *  the conditions are met.                                             *
+ *                                                                      *
+>>>>>>> d091987157 (Convert Tabs to spaces)
  ************************************************************************/
 void CLatentEffectContainer::CheckLatentsHP()
 {
@@ -128,10 +147,17 @@ void CLatentEffectContainer::CheckLatentsHP()
 }
 
 /************************************************************************
+<<<<<<< HEAD
 *                                                                       *
 * Checks all latents that are affected by TP and activates them if      *
 * the conditions are met.                                               *
 *                                                                       *
+=======
+ *                                                                      *
+ *  Checks all latents that are affected by TP and activates them if    *
+ *  the conditions are met.                                             *
+ *                                                                      *
+>>>>>>> d091987157 (Convert Tabs to spaces)
  ************************************************************************/
 void CLatentEffectContainer::CheckLatentsTP()
 {
@@ -154,10 +180,17 @@ void CLatentEffectContainer::CheckLatentsTP()
 }
 
 /************************************************************************
+<<<<<<< HEAD
 *                                                                       *
  * Checks all latents that are affected by MP and activates them if     *
  * the conditions are met.                                              *
 *                                                                       *
+=======
+ *                                                                      *
+ *  Checks all latents that are affected by MP and activates them if    *
+ *  the conditions are met.                                             *
+ *                                                                      *
+>>>>>>> d091987157 (Convert Tabs to spaces)
  ************************************************************************/
 void CLatentEffectContainer::CheckLatentsMP()
 {
@@ -180,9 +213,15 @@ void CLatentEffectContainer::CheckLatentsMP()
 }
 
 /************************************************************************
+<<<<<<< HEAD
 *                                                                       *
  * Checks all latents for a given slot (ie. on equip)                   *
 *                                                                       *
+=======
+ *                                                                      *
+ *  Checks all latents for a given slot (ie. on equip)                  *
+ *                                                                      *
+>>>>>>> d091987157 (Convert Tabs to spaces)
  ************************************************************************/
 void CLatentEffectContainer::CheckLatentsEquip(uint8 slot)
 {
@@ -196,10 +235,17 @@ void CLatentEffectContainer::CheckLatentsEquip(uint8 slot)
 }
 
 /************************************************************************
+<<<<<<< HEAD
 *                                                                       *
  * Checks all latents that are affected by drawn weapon and activates   *
  * them if the conditions are met.                                      *
 *                                                                       *
+=======
+ *                                                                      *
+ *  Checks all latents that are affected by drawn weapon and activates      *
+ *  them if the conditions are met.                                     *
+ *                                                                      *
+>>>>>>> d091987157 (Convert Tabs to spaces)
  ************************************************************************/
 
 // easy: when animationType changes to ANIMATION_ATTACK or to something else
@@ -261,10 +307,17 @@ void CLatentEffectContainer::CheckLatentsWeaponDraw(bool drawn)
 }
 
 /************************************************************************
+<<<<<<< HEAD
 *                                                                       *
  * Checks all latents that are affected by status effects and activates *
  * them if the conditions are met.                                      *
 *                                                                       *
+=======
+ *                                                                      *
+ *  Checks all latents that are affected by status effects and activates    *
+ *  them if the conditions are met.                                     *
+ *                                                                      *
+>>>>>>> d091987157 (Convert Tabs to spaces)
  ************************************************************************/
 void CLatentEffectContainer::CheckLatentsStatusEffect()
 {
@@ -284,11 +337,19 @@ void CLatentEffectContainer::CheckLatentsStatusEffect()
 }
 
 /************************************************************************
+<<<<<<< HEAD
 *                                                                       *
  * Checks latents that are affected by food effects. Usage:             *
  * LATENT_FOOD_ACTIVE: (49,foodItemId)                                  *
  * LATENT_NO_FOOD_ACTIVE: (14,0)                                        *
 *                                                                       *
+=======
+ *                                                                      *
+ *  Checks latents that are affected by food effects. Usage:                *
+ *  LATENT_FOOD_ACTIVE: (49,foodItemId)                                 *
+ *  LATENT_NO_FOOD_ACTIVE: (14,0)                                       *
+ *                                                                      *
+>>>>>>> d091987157 (Convert Tabs to spaces)
  ************************************************************************/
 void CLatentEffectContainer::CheckLatentsFoodEffect()
 {
@@ -307,10 +368,17 @@ void CLatentEffectContainer::CheckLatentsFoodEffect()
 }
 
 /************************************************************************
+<<<<<<< HEAD
 *                                                                       *
 * Checks all latents that are affected by rolls or songs and activates  *
 * them if the conditions are met.                                       *
 *                                                                       *
+=======
+ *                                                                      *
+ *  Checks all latents that are affected by rolls or songs and activates *
+ *  them if the conditions are met.                                     *
+ *                                                                      *
+>>>>>>> d091987157 (Convert Tabs to spaces)
  ************************************************************************/
 void CLatentEffectContainer::CheckLatentsRollSong()
 {
@@ -329,10 +397,17 @@ void CLatentEffectContainer::CheckLatentsRollSong()
 }
 
 /************************************************************************
+<<<<<<< HEAD
 *                                                                       *
 * Checks all latents that are affected by day or moon and activates     *
 * them if the conditions are met.                                       *
 *                                                                       *
+=======
+ *                                                                      *
+ *  Checks all latents that are affected by day or moon and activates   *
+ *  them if the conditions are met.                                     *
+ *                                                                      *
+>>>>>>> d091987157 (Convert Tabs to spaces)
  ************************************************************************/
 
 // probably call this at 00:00 vana time only
@@ -352,9 +427,15 @@ void CLatentEffectContainer::CheckLatentsDay()
 }
 
 /************************************************************************
+<<<<<<< HEAD
 *                                                                       *
 * Checks latents affected by the moon phase and activates them          *
 *                                                                       *
+=======
+ *                                                                      *
+ *  Checks latents affected by the moon phase and activates them            *
+ *                                                                      *
+>>>>>>> d091987157 (Convert Tabs to spaces)
  ************************************************************************/
 void CLatentEffectContainer::CheckLatentsMoonPhase()
 {
@@ -373,10 +454,17 @@ void CLatentEffectContainer::CheckLatentsMoonPhase()
 }
 
 /************************************************************************
+<<<<<<< HEAD
 *                                                                       *
 * Checks latents that are affected by the day of the week and           *
 * activates them if the conditions are met.                             *
 *                                                                       *
+=======
+ *                                                                      *
+ *  Checks latents that are affected by the day of the week and         *
+ *  activates them if the conditions are met.                           *
+ *                                                                      *
+>>>>>>> d091987157 (Convert Tabs to spaces)
  ************************************************************************/
 void CLatentEffectContainer::CheckLatentsWeekDay()
 {
@@ -401,10 +489,17 @@ void CLatentEffectContainer::CheckLatentsWeekDay()
 }
 
 /************************************************************************
+<<<<<<< HEAD
 *                                                                       *
 * Checks latents that are affected the hour and activates them          *
 * if the conditions are met.                                            *
 *                                                                       *
+=======
+ *                                                                      *
+ *  Checks latents that are affected the hour and activates them            *
+ *  if the conditions are met.                                          *
+ *                                                                      *
+>>>>>>> d091987157 (Convert Tabs to spaces)
  ************************************************************************/
 void CLatentEffectContainer::CheckLatentsHours()
 {
@@ -423,10 +518,17 @@ void CLatentEffectContainer::CheckLatentsHours()
 }
 
 /************************************************************************
+<<<<<<< HEAD
 *                                                                       *
 * Checks all latents that are affected by party members and             *
 * activates them if the conditions are met.                             *
 *                                                                       *
+=======
+ *                                                                      *
+ *  Checks all latents that are affected by party members and           *
+ *  activates them if the conditions are met.                           *
+ *                                                                      *
+>>>>>>> d091987157 (Convert Tabs to spaces)
  ************************************************************************/
 void CLatentEffectContainer::CheckLatentsPartyMembers(size_t members)
 {
@@ -492,10 +594,17 @@ void CLatentEffectContainer::CheckLatentsPartyJobs()
 }
 
 /************************************************************************
+<<<<<<< HEAD
 *                                                                       *
 * Checks all latents that are affected by an avatar in party and        *
 * activates them if the conditions are met.                             *
 *                                                                       *
+=======
+ *                                                                      *
+ *  Checks all latents that are affected by an avatar in party and      *
+ *  activates them if the conditions are met.                           *
+ *                                                                      *
+>>>>>>> d091987157 (Convert Tabs to spaces)
  ************************************************************************/
 void CLatentEffectContainer::CheckLatentsPartyAvatar()
 {
@@ -513,10 +622,17 @@ void CLatentEffectContainer::CheckLatentsPartyAvatar()
 }
 
 /************************************************************************
+<<<<<<< HEAD
 *                                                                       *
 * Checks all latents that are affected by job level and                 *
 * activates them if the conditions are met.                             *
 *                                                                       *
+=======
+ *                                                                      *
+ *  Checks all latents that are affected by job level and               *
+ *  activates them if the conditions are met.                           *
+ *                                                                      *
+>>>>>>> d091987157 (Convert Tabs to spaces)
  ************************************************************************/
 void CLatentEffectContainer::CheckLatentsJobLevel()
 {
@@ -535,10 +651,17 @@ void CLatentEffectContainer::CheckLatentsJobLevel()
 }
 
 /************************************************************************
+<<<<<<< HEAD
 *                                                                       *
 * Checks all latents that are affected by players pet type and          *
 * activates them if the conditions are met.                             *
 *                                                                       *
+=======
+ *                                                                      *
+ *  Checks all latents that are affected by players pet type and            *
+ *  activates them if the conditions are met.                           *
+ *                                                                      *
+>>>>>>> d091987157 (Convert Tabs to spaces)
  ************************************************************************/
 void CLatentEffectContainer::CheckLatentsPetType()
 {
@@ -556,10 +679,17 @@ void CLatentEffectContainer::CheckLatentsPetType()
 }
 
 /************************************************************************
+<<<<<<< HEAD
 *                                                                       *
 * Checks all latents that are affected by time of vana day and          *
 * activates them if the conditions are met.                             *
 *                                                                       *
+=======
+ *                                                                      *
+ *  Checks all latents that are affected by time of vana day and            *
+ *  activates them if the conditions are met.                           *
+ *                                                                      *
+>>>>>>> d091987157 (Convert Tabs to spaces)
  ************************************************************************/
 
 // will probably only call this at transition points in the day
@@ -569,9 +699,15 @@ void CLatentEffectContainer::CheckLatentsTime()
 }
 
 /************************************************************************
+<<<<<<< HEAD
 *                                                                       *
 * Checks all latents that are affected by weapon skill points           *
 *                                                                       *
+=======
+ *                                                                      *
+ *  Checks all latents that are affected by weapon skill points         *
+ *                                                                      *
+>>>>>>> d091987157 (Convert Tabs to spaces)
  ************************************************************************/
 void CLatentEffectContainer::CheckLatentsWeaponBreak(uint8 slot)
 {
@@ -585,9 +721,15 @@ void CLatentEffectContainer::CheckLatentsWeaponBreak(uint8 slot)
 }
 
 /************************************************************************
+<<<<<<< HEAD
 *                                                                       *
 * Checks all latents regarding current zone                             *
 *                                                                       *
+=======
+ *                                                                      *
+ *  Checks all latents regarding current zone                           *
+ *                                                                      *
+>>>>>>> d091987157 (Convert Tabs to spaces)
  ************************************************************************/
 void CLatentEffectContainer::CheckLatentsZone()
 {
@@ -610,9 +752,15 @@ void CLatentEffectContainer::CheckLatentsZone()
 }
 
 /************************************************************************
+<<<<<<< HEAD
 *                                                                       *
 * Checks all latents regarding current weather                          *
 *                                                                       *
+=======
+ *                                                                      *
+ *  Checks all latents regarding current weather                            *
+ *                                                                      *
+>>>>>>> d091987157 (Convert Tabs to spaces)
  ************************************************************************/
 void CLatentEffectContainer::CheckLatentsWeather()
 {

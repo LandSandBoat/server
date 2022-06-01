@@ -31,7 +31,7 @@ typedef long in_addr_t;
 
 /*
  *
- *				COMMON LEVEL
+ *              COMMON LEVEL
  *
  */
 /////////////////////////////////////////////////////////////////////
@@ -170,7 +170,7 @@ uint16 ntows(uint16 netshort);
 /************************************************/
 /*
  *
- *		TCP LEVEL
+ *      TCP LEVEL
  *
  */
 
@@ -286,7 +286,7 @@ void set_nonblocking(int fd, unsigned long yes);
 
 /*
  *
- *		UDP LEVEL
+ *      UDP LEVEL
  *
  */
 int32 makeBind_udp(uint32 ip, uint16 port);
