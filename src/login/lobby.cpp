@@ -595,6 +595,19 @@ int32 lobbyview_parse(int32 fd)
             break;
             case 0x14:
             {
+                if (!login_config.character_deletion)
+                {
+                    int32         sendsize = 0x28;
+                    unsigned char MainReservePacket[0x28];
+                    LOBBBY_ERROR_MESSAGE(ReservePacket);
+                    ref<uint16>(ReservePacket, 32) = 332;
+                    std::memcpy(MainReservePacket, ReservePacket, sendsize);
+                    sessions[fd]->wdata.assign((const char*)MainReservePacket, sendsize);
+                    RFIFOSKIP(fd, sessions[fd]->rdata.size());
+                    RFIFOFLUSH(fd);
+                    return -1;
+                }
+
                 // delete char
                 uint32 CharID = ref<uint32>(sessions[fd]->rdata.data(), 0x20);
 
