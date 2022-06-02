@@ -3783,6 +3783,9 @@ INSERT INTO `mob_skill_lists` VALUES('Shikaree_Z', 1167, 118); -- Skewer
 INSERT INTO `mob_skill_lists` VALUES('Shikaree_Z', 1167, 119); -- Wheeling Thrust
 INSERT INTO `mob_skill_lists` VALUES('Shikaree_Z', 1167, 120); -- Impulse Drive
 
+INSERT INTO `mob_skill_lists` VALUES ('Cop_Wardens',1170,561); -- Electromagnetic Field
+INSERT INTO `mob_skill_lists` VALUES ('Cop_Wardens',1170,562); -- Reactive Armor
+
 -- 1162 -> Wamouracampa_curl
 
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Shantotto_II_Melee',1163,3739); -- shantotto_ii_melee (no name)
