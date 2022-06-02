@@ -1,8 +1,8 @@
 local ID = require("scripts/zones/Sealions_Den/IDs")
 
-local TenzenFunctions = {}
+local tenzenFunctions = {}
 
-TenzenFunctions.firstMeikyo = function(mob)
+tenzenFunctions.firstMeikyo = function(mob)
     mob:setAnimationSub(0)
     mob:useMobAbility(730)
     mob:setLocalVar("meikyo", 1)
@@ -11,14 +11,14 @@ TenzenFunctions.firstMeikyo = function(mob)
     mob:setLocalVar("twohourthreshold", math.random(45, 55)) -- set next meikyo hpp threshold
 end
 
-TenzenFunctions.secondMeikyo = function(mob)
+tenzenFunctions.secondMeikyo = function(mob)
     mob:useMobAbility(730)
     mob:setLocalVar("meikyo", 1)
     mob:setLocalVar("step", 1)
     mob:setLocalVar("twohourtrigger", 3)
 end
 
-TenzenFunctions.wsSequence = function(mob)
+tenzenFunctions.wsSequence = function(mob)
     local step = mob:getLocalVar("step")
     local meikyo = mob:getLocalVar("meikyo")
     local battlefield = mob:getBattlefield()
@@ -75,7 +75,7 @@ TenzenFunctions.wsSequence = function(mob)
     end
 end
 
-TenzenFunctions.formSwap = function(mob)
+tenzenFunctions.formSwap = function(mob)
     local changeTime = mob:getLocalVar("changeTime")
     local battleTime = mob:getBattleTime()
 
@@ -107,7 +107,7 @@ TenzenFunctions.formSwap = function(mob)
     end
 end
 
-TenzenFunctions.riceBall = function(mob, target, busyState)
+tenzenFunctions.riceBall = function(mob, target, busyState)
     local battlefield = mob:getBattlefield()
     if
         mob:actionQueueEmpty() == true and
@@ -132,4 +132,4 @@ TenzenFunctions.riceBall = function(mob, target, busyState)
     end
 end
 
-return TenzenFunctions
+return tenzenFunctions

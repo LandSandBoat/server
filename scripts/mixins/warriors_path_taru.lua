@@ -41,7 +41,7 @@ g_mixins.warriors_path_taru = function(mob)
                     end
                 end
                 mob:setLocalVar("changetime", mob:getBattleTime())
-            elseif makki == 1 then
+            if makki == 1 then
                 mob:showText(mob, ID.text.MAKKI_CHEBUKKI_OFFSET + randOffset)
                 for i = 1,6 do
                     if animationchance < randChance[i] then
@@ -49,8 +49,9 @@ g_mixins.warriors_path_taru = function(mob)
                         break
                     end
                 end
+            end
                 mob:setLocalVar("changetime", mob:getBattleTime())
-            elseif kukki == 1 then
+            if kukki == 1 then
                 mob:showText(mob, ID.text.KUKKI_CHEBUKKI_OFFSET + randOffset)
                 for i = 1,6 do
                     if animationchance < randChance[i] then
@@ -58,7 +59,8 @@ g_mixins.warriors_path_taru = function(mob)
                         break
                     end
                 end
-                mob:setLocalVar("changetime", mob:getBattleTime())
+            end
+            mob:setLocalVar("changetime", mob:getBattleTime())
             end
         end
     end)
