@@ -2,9 +2,7 @@
 -- Spell: Warp
 -- Transports the user to their Home Point
 -----------------------------------
-require("scripts/globals/teleports")
-require("scripts/globals/status")
-require("scripts/globals/msg")
+require("scripts/globals/spells/spell_enhancing_teleport")
 -----------------------------------
 local spell_object = {}
 
@@ -13,9 +11,7 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    target:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.WARP, 0, 4)
-    spell:setMsg(xi.msg.basic.MAGIC_TELEPORT)
-    return 0
+    return xi.spells.spell_enhancing_teleport.useTeleportSpell(caster, target, spell)
 end
 
 return spell_object

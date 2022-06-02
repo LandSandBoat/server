@@ -15,7 +15,8 @@ end
 entity.onTrigger = function(player, npc)
     player:showText(npc, ID.text.TAAJIJI_SHOP_DIALOG)
 
-    local stock = {
+    local stock =
+    {
         4411,   756, 1,     --Dhalmel Pie
         4434,  5050, 1,     --Mushroom Risotto
         4554, 12762, 1,     --Shallops Tropicale

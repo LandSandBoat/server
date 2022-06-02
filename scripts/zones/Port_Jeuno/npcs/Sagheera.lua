@@ -251,7 +251,7 @@ local abcShop =
     [20] = {item =  2127, abc =  75}, -- metal_chip
 }
 
-local COSMO_READY = 2147483649 -- BITMASK for the purchase
+local cosmoReady = 2147483649 -- BITMASK for the purchase
 
 local function getCOSMO_CLEANSETime(player)
     local cosmoWaitTime = player:hasKeyItem(xi.ki.RHAPSODY_IN_MAUVE) and 3600 or 72000
@@ -262,7 +262,7 @@ local function getCOSMO_CLEANSETime(player)
     end
 
     if lastCosmoTime <= os.time() then
-        return COSMO_READY
+        return cosmoReady
     end
 
     return (lastCosmoTime - 1009843200) - 39600 -- (os.time number - BITMASK for the event) - 11 hours in seconds. Only works in this format (strangely).
@@ -386,7 +386,7 @@ entity.onEventFinish = function(player, csid, option)
     -- purchase COSMO_CLEANSE
     elseif csid == 310 and option == 3 then
         local cosmoTime = getCOSMO_CLEANSETime(player)
-        if cosmoTime == COSMO_READY and player:delGil(15000) then
+        if cosmoTime == cosmoReady and player:delGil(15000) then
             npcUtil.giveKeyItem(player, xi.ki.COSMO_CLEANSE)
         end
 

@@ -36,29 +36,29 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
         bonusTP = 0
     }
 
-    local HP = player:getHP()
-    local WSC = 0
+    local playerHP = player:getHP()
+    local wsc = 0
     -- Damage calculations based on https://www.bg-wiki.com/index.php?title=Spirits_Within&oldid=269806
     if (tp == 3000) then
-        WSC = math.floor(HP * 120/256)
+        wsc = math.floor(playerHP * 120/256)
     elseif (tp >= 2000) then
-        WSC = math.floor(HP * (math.floor(0.072 * tp) - 96) / 256)
+        wsc = math.floor(playerHP * (math.floor(0.072 * tp) - 96) / 256)
     elseif (tp >= 1000) then
-        WSC = math.floor(HP * (math.floor(0.016 * tp) + 16) / 256)
+        wsc = math.floor(playerHP * (math.floor(0.016 * tp) + 16) / 256)
     end
 
     if (xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then
         -- Damage calculations changed based on: http://www.bg-wiki.com/bg/Spirits_Within http://www.bluegartr.com/threads/121610-Rehauled-Weapon-Skills-tier-lists?p=6142188&viewfull=1#post6142188
         if (tp == 3000) then
-            WSC = HP
+            wsc = playerHP
         elseif (tp >= 2000) then
-            WSC = math.floor(HP * .5)
+            wsc = math.floor(playerHP * .5)
         elseif (tp >= 1000) then
-            WSC = math.floor(HP * .125)
+            wsc = math.floor(playerHP * .125)
         end
     end
 
-    local damage = target:breathDmgTaken(WSC)
+    local damage = target:breathDmgTaken(wsc)
     if (damage > 0) then
         if (player:getOffhandDmg() > 0) then
             calcParams.tpHitsLanded = 2

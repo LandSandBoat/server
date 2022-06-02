@@ -6,7 +6,8 @@ require("scripts/globals/status")
 -----------------------------------
 local attachment_object = {}
 
-local removable = {
+local removable =
+{
     xi.effect.PETRIFICATION,
     xi.effect.SILENCE,
     xi.effect.BANE,

@@ -14,8 +14,9 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local RegionOwner = GetRegionOwner(xi.region.LITELOR)
-    if (RegionOwner ~= xi.nation.WINDURST) then
+    local regionOwner = GetRegionOwner(xi.region.LITELOR)
+
+    if (regionOwner ~= xi.nation.WINDURST) then
         player:showText(npc, ID.text.OTETE_CLOSED_DIALOG)
     else
         player:showText(npc, ID.text.OTETE_OPEN_DIALOG)
@@ -26,9 +27,7 @@ entity.onTrigger = function(player, npc)
             4154,  6440  -- Holy Water
         }
         xi.shop.general(player, stock, xi.quest.fame_area.WINDURST)
-
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)

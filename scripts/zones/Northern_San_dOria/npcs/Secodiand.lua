@@ -21,9 +21,9 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local FearOfTheDark = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.FEAR_OF_THE_DARK)
+    local fearOfTheDark = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.FEAR_OF_THE_DARK)
 
-    if (FearOfTheDark == QUEST_AVAILABLE) then
+    if fearOfTheDark == QUEST_AVAILABLE then
         player:startEvent(19)
     else
         player:startEvent(17)

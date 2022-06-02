@@ -13,14 +13,14 @@ local ID = require("scripts/zones/Western_Adoulin/IDs")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local AMQTR = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.ALWAYS_MORE_QUOTH_THE_RAVENOUS)
+    local amqtr = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.ALWAYS_MORE_QUOTH_THE_RAVENOUS)
 
     if ((trade:getItemCount() == 1) and (trade:getGil() == 0)) then
         local item = trade:getItem(0)
         local item_ID = item:getID()
-        local AH_Category = item:getAHCat()
+        local ahCategory = item:getAHCat()
 
-        if (AH_Category >= 52) and (AH_Category <= 57) then
+        if (ahCategory >= 52) and (ahCategory <= 57) then
             -- We traded him a food item
             if ((player:getCharVar("ATWTTB_Can_Trade_Gruel") == 1) and ((item_ID == 4489) or (item_ID == 4534))) then
                 if (item_ID == 4489) then
@@ -31,8 +31,8 @@ entity.onTrade = function(player, npc, trade)
                     player:startEvent(5068, 1)
                 end
             end
-        elseif (AH_Category == 58) then
-            if (AMQTR == QUEST_ACCEPTED) then
+        elseif (ahCategory == 58) then
+            if (amqtr == QUEST_ACCEPTED) then
                 if (item_ID == 4541) then
                     -- We gave him another Goblin Drink.
                     -- Special event where he refuses it.
@@ -43,7 +43,7 @@ entity.onTrade = function(player, npc, trade)
                 end
             end
         else
-            if ((item_ID == 4234) and (AMQTR == QUEST_ACCEPTED)) then
+            if ((item_ID == 4234) and (amqtr == QUEST_ACCEPTED)) then
                 -- We gave him Cursed Beverage.
                 -- Finishes Quest: 'Always More Quoth the Ravenous'
                 player:startEvent(3012)
@@ -53,11 +53,11 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local AMQTR = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.ALWAYS_MORE_QUOTH_THE_RAVENOUS)
+    local amqtr = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.ALWAYS_MORE_QUOTH_THE_RAVENOUS)
 
     if ((player:getFameLevel(xi.quest.fame_area.ADOULIN) >= 2) and (not player:needToZone()) and (vanaDay() > player:getCharVar("Westerly_Breeze_Wait"))) then
-        if ((AMQTR ~= QUEST_COMPLETED) and (player:getFameLevel(xi.quest.fame_area.ADOULIN) >= 3)) then
-            if (AMQTR == QUEST_AVAILABLE) then
+        if ((amqtr ~= QUEST_COMPLETED) and (player:getFameLevel(xi.quest.fame_area.ADOULIN) >= 3)) then
+            if (amqtr == QUEST_AVAILABLE) then
                 -- Starts Quest: 'Always More Quoth the Ravenous'
                 player:startEvent(3010)
             else

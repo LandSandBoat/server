@@ -15,16 +15,16 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local ToBee = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TO_BEE_OR_NOT_TO_BEE)
-    local ToBeeOrNotStatus = player:getCharVar("ToBeeOrNot_var")
+    local toBee = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TO_BEE_OR_NOT_TO_BEE)
+    local toBeeOrNotStatus = player:getCharVar("ToBeeOrNot_var")
 
-    if (ToBeeOrNotStatus == 10 and ToBee == QUEST_AVAILABLE) then
+    if (toBeeOrNotStatus == 10 and toBee == QUEST_AVAILABLE) then
         player:startEvent(67) -- Quest Started - He gives you honey
-    elseif (ToBee == QUEST_ACCEPTED) then
+    elseif (toBee == QUEST_ACCEPTED) then
         player:startEvent(68) -- After honey is given to player...... but before 5th hondy is given to Zayhi
-    elseif (ToBee == QUEST_COMPLETED and ToBeeOrNotStatus == 5) then
+    elseif (toBee == QUEST_COMPLETED and toBeeOrNotStatus == 5) then
         player:startEvent(80) -- Quest Finish - Gives Mulsum
-    elseif (ToBee == QUEST_COMPLETED and ToBeeOrNotStatus == 0 and player:needToZone()) then
+    elseif (toBee == QUEST_COMPLETED and toBeeOrNotStatus == 0 and player:needToZone()) then
         player:startEvent(79) -- After Quest but before zoning "it's certainly gotten quiet around here..."
     else
         player:startEvent(296)

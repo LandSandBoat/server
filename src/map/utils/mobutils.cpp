@@ -1508,17 +1508,6 @@ Usage:
 
                 // must be here first to define mobmods
                 mobutils::InitializeMob(PMob, zoneutils::GetZone(targetZoneId));
-
-                zoneutils::GetZone(targetZoneId)->InsertMOB(PMob);
-
-                luautils::OnEntityLoad(PMob);
-
-                luautils::OnMobInitialize(PMob);
-                luautils::ApplyMixins(PMob);
-                luautils::ApplyZoneMixins(PMob);
-
-                PMob->saveModifiers();
-                PMob->saveMobModifiers();
             }
         }
         return PMob;

@@ -207,6 +207,21 @@ jobs:
         for changed_file in ${{ steps.changed-files.outputs.all }}; do
           echo "${changed_file}"
         done
+    - name: General File Checks
+      if: always()
+      run: |
+        touch general_checks.txt
+        for changed_file in ${{ steps.changed-files.outputs.all }}; do
+          if [[ -f $changed_file ]]; then
+            bash tools/ci/general.sh ${changed_file} >> general_checks.txt || true
+          fi
+        done
+        cat general_checks.txt
+        if [ -s general_checks.txt ]
+        then
+          exit 1
+        fi
+        exit 0
     - name: CPP Checks
       if: always()
       run: |
@@ -231,7 +246,7 @@ jobs:
         for changed_file in ${{ steps.changed-files.outputs.all }}; do
           if [[ -f $changed_file ]]; then
             if [[ $changed_file == *.lua ]]; then
-              bash tools/ci/lua.sh ${changed_file} | grep -v "Total:" >> lua_checks.txt || true
+              bash tools/ci/lua.sh ${changed_file} >> lua_checks.txt || true
             fi
           fi
         done
@@ -337,6 +352,15 @@ jobs:
     - name: Copy settings
       run: |
         cp scripts/settings/default/* scripts/settings/
+    - name: Enable Modules
+      shell: bash
+      run: |
+        python3 << EOF
+        with open("modules/init.txt", "w") as f:
+            f.write("custom\n")
+            f.write("era\n")
+            f.write("renamer\n")
+        EOF
     - name: Startup and character login checks
       uses: nick-invision/retry@v2
       with:

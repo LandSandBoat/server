@@ -45,8 +45,8 @@ xi.magic.doubleWeatherWeak   = {xi.weather.SQUALL,            xi.weather.HEAT_WA
 --
 -- Output:
 -- The total damage, before resistance and before equipment (so no HQ staff bonus worked out here).
-local SOFT_CAP = 60 --guesstimated
-local HARD_CAP = 120 --guesstimated
+local softCap = 60 --guesstimated
+local hardCap = 120 --guesstimated
 
 -----------------------------------
 -- Returns the staff bonus for the caster and spell.
@@ -287,12 +287,12 @@ function calculateMagicDamage(caster, target, spell, params)
         if dmg <= 0 then --dINT penalty cannot result in negative damage (target absorption)
             return 0
         end
-    elseif dINT > 0 and dINT <= SOFT_CAP then --The standard calc, most spells hit this
+    elseif dINT > 0 and dINT <= softCap then --The standard calc, most spells hit this
         dmg = dmg + (dINT * params.multiplier)
-    elseif dINT > 0 and dINT > SOFT_CAP and dINT < HARD_CAP then --After SOFT_CAP, INT is only half effective
-        dmg = dmg + SOFT_CAP * params.multiplier + ((dINT - SOFT_CAP) * params.multiplier) / 2
-    elseif dINT > 0 and dINT > SOFT_CAP and dINT >= HARD_CAP then --After HARD_CAP, INT has no xi.effect.
-        dmg = dmg + HARD_CAP * params.multiplier
+    elseif dINT > 0 and dINT > softCap and dINT < hardCap then --After softCap, INT is only half effective
+        dmg = dmg + softCap * params.multiplier + ((dINT - softCap) * params.multiplier) / 2
+    elseif dINT > 0 and dINT > softCap and dINT >= hardCap then --After hardCap, INT has no xi.effect.
+        dmg = dmg + hardCap * params.multiplier
     end
 
 
@@ -304,49 +304,6 @@ function calculateMagicDamage(caster, target, spell, params)
     -- printf("dmg: %d dINT: %d\n", dmg, dINT)
 
     return dmg
-
-end
-
-function doBoostGain(caster, target, spell, effect)
-    local duration = calculateDuration(300, spell:getSkillType(), spell:getSpellGroup(), caster, target)
-
-    -- calculate potency
-    local magicskill = caster:getSkillLevel(spell:getSkillType())
-    local potency = math.floor((magicskill - 300) / 10) + 5
-
-    if potency > 25 then
-        potency = 25
-    elseif potency < 5 then
-        potency = 5
-    end
-
-    -- printf("BOOST-GAIN: POTENCY = %d", potency)
-
-    -- Only one Boost Effect can be active at once, so if the player has any we have to cancel & overwrite
-    local effectOverwrite =
-    {
-        xi.effect.STR_BOOST,
-        xi.effect.DEX_BOOST,
-        xi.effect.VIT_BOOST,
-        xi.effect.AGI_BOOST,
-        xi.effect.INT_BOOST,
-        xi.effect.MND_BOOST,
-        xi.effect.CHR_BOOST
-    }
-
-    for i, effectValue in ipairs(effectOverwrite) do
-        -- printf("BOOST-GAIN: CHECKING FOR EFFECT %d...", effect)
-        if target:hasStatusEffect(effectValue) then
-            -- printf("BOOST-GAIN: HAS EFFECT %d, DELETING...", effect)
-            target:delStatusEffect(effectValue)
-        end
-    end
-
-    if target:addStatusEffect(effect, potency, 0, duration) then
-        spell:setMsg(xi.msg.basic.MAGIC_GAIN_EFFECT)
-    else
-        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
-    end
 end
 
 function doEnspell(caster, target, spell, effect)
@@ -373,18 +330,18 @@ end
 --   Source: http://members.shaw.ca/pizza_steve/cure/Cure_Calculator.html
 -----------------------------------
 function getCurePower(caster, isBlueMagic)
-    local MND = caster:getStat(xi.mod.MND)
-    local VIT = caster:getStat(xi.mod.VIT)
+    local mnd = caster:getStat(xi.mod.MND)
+    local vit = caster:getStat(xi.mod.VIT)
     local skill = caster:getSkillLevel(xi.skill.HEALING_MAGIC)
-    local power = math.floor(MND/2) + math.floor(VIT/4) + skill
+    local power = math.floor(mnd/2) + math.floor(vit/4) + skill
     return power
 end
 
 function getCurePowerOld(caster)
-    local MND = caster:getStat(xi.mod.MND)
-    local VIT = caster:getStat(xi.mod.VIT)
+    local mnd = caster:getStat(xi.mod.MND)
+    local vit = caster:getStat(xi.mod.VIT)
     local skill = caster:getSkillLevel(xi.skill.HEALING_MAGIC) -- it's healing magic skill for the BLU cures as well
-    local power = (3 * MND) + VIT + (3 * math.floor(skill/5))
+    local power = (3 * mnd) + vit + (3 * math.floor(skill/5))
     return power
 end
 
@@ -1163,38 +1120,38 @@ function canOverwrite(target, effect, power, mod)
 end
 
 function doElementalNuke(caster, spell, target, spellParams)
-    local DMG = 0
+    local dmg = 0
     local dINT = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
-    local V = 0
-    local M = 0
+    local baseValue = 0
+    local tierMultiplier = 0
 
     if xi.settings.USE_OLD_MAGIC_DAMAGE and spellParams.V ~= nil and spellParams.M ~= nil then
-        V = spellParams.V -- Base value
-        M = spellParams.M -- Tier multiplier
-        local I = spellParams.I -- Inflection point
-        local cap = I * 2 + V -- Base damage soft cap
+        baseValue = spellParams.V -- Base value
+        tierMultiplier = spellParams.M -- Tier multiplier
+        local inflectionPoint = spellParams.I -- Inflection point
+        local cap = inflectionPoint * 2 + baseValue -- Base damage soft cap
 
         if dINT < 0 then
             -- If dINT is a negative value the tier multiplier is always 1
-            DMG = V + dINT
+            dmg = baseValue + dINT
 
             -- Check/ set lower limit of 0 damage for negative dINT
-            if DMG < 1 then
+            if dmg < 1 then
                 return 0
             end
 
-        elseif dINT < I then
+        elseif dINT < inflectionPoint then
              -- If dINT > 0 but below inflection point I
-            DMG = V + dINT * M
+            dmg = baseValue + dINT * tierMultiplier
 
         else
              -- Above inflection point I additional dINT is only half as effective
-            DMG = V + I + ((dINT - I) * (M / 2))
+            dmg = baseValue + inflectionPoint + ((dINT - inflectionPoint) * (tierMultiplier / 2))
         end
 
         -- Check/ set damage soft cap
-        if DMG > cap then
-            DMG = cap
+        if dmg > cap then
+            dmg = cap
         end
 
     else
@@ -1222,28 +1179,28 @@ function doElementalNuke(caster, spell, target, spellParams)
         ]]
 
         if dINT <= 49 then
-            V = spellParams.V0
-            M = spellParams.M0
-            DMG = math.floor(DMG + mDMG + V + (dINT * M))
+            baseValue = spellParams.V0
+            tierMultiplier = spellParams.M0
+            dmg = math.floor(dmg + mDMG + baseValue + (dINT * tierMultiplier))
 
-            if DMG <= 0 then
+            if dmg <= 0 then
                 return 0
             end
 
         elseif dINT >= 50 and dINT <= 99 then
-            V = spellParams.V50
-            M = spellParams.M50
-            DMG = math.floor(DMG + mDMG + V + ((dINT - 50) * M))
+            baseValue = spellParams.V50
+            tierMultiplier = spellParams.M50
+            dmg = math.floor(dmg + mDMG + baseValue + ((dINT - 50) * tierMultiplier))
 
         elseif dINT >= 100 and dINT <= 199 then
-            V = spellParams.V100
-            M = spellParams.M100
-            DMG = math.floor(DMG + mDMG + V + ((dINT - 100) * M))
+            baseValue = spellParams.V100
+            tierMultiplier = spellParams.M100
+            dmg = math.floor(dmg + mDMG + baseValue + ((dINT - 100) * tierMultiplier))
 
         elseif dINT > 199 then
-            V = spellParams.V200
-            M = spellParams.M200
-            DMG = math.floor(DMG + mDMG + V + ((dINT - 200) * M))
+            baseValue = spellParams.V200
+            tierMultiplier = spellParams.M200
+            dmg = math.floor(dmg + mDMG + baseValue + ((dINT - 200) * tierMultiplier))
         end
     end
 
@@ -1256,19 +1213,19 @@ function doElementalNuke(caster, spell, target, spellParams)
     local resist = applyResistance(caster, target, spell, params)
 
     --get the resisted damage
-    DMG = DMG * resist
+    dmg = dmg * resist
 
     --add on bonuses (staff/day/weather/jas/mab/etc all go in this function)
-    DMG = addBonuses(caster, spell, target, DMG, spellParams)
+    dmg = addBonuses(caster, spell, target, dmg, spellParams)
 
     --add in target adjustment
     local ele = spell:getElement()
-    DMG = adjustForTarget(target, DMG, ele)
+    dmg = adjustForTarget(target, dmg, ele)
 
     --add in final adjustments
-    DMG = finalMagicAdjustments(caster, target, spell, DMG)
+    dmg = finalMagicAdjustments(caster, target, spell, dmg)
 
-    return DMG
+    return dmg
 end
 
 function doDivineNuke(caster, target, spell, params)

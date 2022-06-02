@@ -31,40 +31,51 @@ zones[xi.zone.WEST_SARUTABARUTA_S] =
         VOIDWALKER_OBTAIN_KI        = 8374, -- Obtained key item: <keyitem>!
         COMMON_SENSE_SURVIVAL       = 9266, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
         JEDUAH_PH =
         {
             [17166542] = 17166543, -- 113.797 -0.8 -310.342
         },
+
         RAMPONNEAU_PH =
         {
             [17166701] = 17166705, -- 78.836 -0.109 -199.204
         },
-        VOIDWALKER        =
+
+        VOIDWALKER =
         {
-            [xi.keyItem.CLEAR_ABYSSITE] = {
+            [xi.keyItem.CLEAR_ABYSSITE] =
+            {
                 17166778, -- Raker bee
                 17166777, -- Raker bee
                 17166776, -- Raker bee
                 17166775, -- Raker bee
-                17166774,  -- Rummager beetle
-                17166773,  -- Rummager beetle
-                17166772,  -- Rummager beetle
-                17166771,  -- Rummager beetle
+                17166774, -- Rummager beetle
+                17166773, -- Rummager beetle
+                17166772, -- Rummager beetle
+                17166771, -- Rummager beetle
             },
-            [xi.keyItem.COLORFUL_ABYSSITE] = {
+
+            [xi.keyItem.COLORFUL_ABYSSITE] =
+            {
                 17166770,  -- Jyeshtha
                 17166769, -- Farruca Fly
             },
-            [xi.keyItem.BROWN_ABYSSITE] = {
-                17166768  -- Orcus
+
+            [xi.keyItem.BROWN_ABYSSITE] =
+            {
+                17166768, -- Orcus
             },
-            [xi.keyItem.BLACK_ABYSSITE] = {
-                17166767  -- Yilbegan
-            }
+
+            [xi.keyItem.BLACK_ABYSSITE] =
+            {
+                17166767, -- Yilbegan
+            },
         }
     },
+
     npc =
     {
         HARVESTING =

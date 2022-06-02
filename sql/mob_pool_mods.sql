@@ -59,6 +59,9 @@ INSERT INTO `mob_pool_mods` VALUES (459,73,25,0); -- (Bloodlapper) Store TP
 INSERT INTO `mob_pool_mods` VALUES (459,430,20,0); -- (Bloodlapper) Quad Attack
 INSERT INTO `mob_pool_mods` VALUES (519,160,-50,0);
 INSERT INTO `mob_pool_mods` VALUES (532,160,-50,0);
+INSERT INTO `mob_pool_mods` VALUES (559,62,-50,0); -- Bugbby -ATTP-
+INSERT INTO `mob_pool_mods` VALUES (559,288,40,100); -- DATT
+INSERT INTO `mob_pool_mods` VALUES (559,302,40,30); -- TATT
 INSERT INTO `mob_pool_mods` VALUES (592,68,15,0);
 INSERT INTO `mob_pool_mods` VALUES (592,302,45,0);
 INSERT INTO `mob_pool_mods` VALUES (592,3,100,1);
@@ -160,9 +163,13 @@ INSERT INTO `mob_pool_mods` VALUES (3379,4,4,1);
 INSERT INTO `mob_pool_mods` VALUES (3540,3,100,1);
 INSERT INTO `mob_pool_mods` VALUES (3549,370,50,0);
 INSERT INTO `mob_pool_mods` VALUES (3598,368,70,0);
+INSERT INTO `mob_pool_mods` VALUES (3598,161,30,0);
 INSERT INTO `mob_pool_mods` VALUES (3600,368,70,0);
+INSERT INTO `mob_pool_mods` VALUES (3600,161,30,0);
 INSERT INTO `mob_pool_mods` VALUES (3601,368,70,0);
+INSERT INTO `mob_pool_mods` VALUES (3601,168,30,0);
 INSERT INTO `mob_pool_mods` VALUES (3667,28,-100,1);
+INSERT INTO `mob_pool_mods` VALUES (3684,3,30,1);
 INSERT INTO `mob_pool_mods` VALUES (3759,163,-100,0);
 INSERT INTO `mob_pool_mods` VALUES (3781,4,4,1);
 INSERT INTO `mob_pool_mods` VALUES (3784,2,-1,1); -- Stray GIL_MAX: don't drop gil

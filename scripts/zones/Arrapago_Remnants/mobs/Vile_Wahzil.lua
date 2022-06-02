@@ -13,12 +13,12 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    local CELL = mob:getLocalVar("Cell")
-    local AMOUNT = mob:getLocalVar("Qnt") *2
+    local cellType = mob:getLocalVar("Cell")
+    local numCells = mob:getLocalVar("Qnt") * 2
 
-    while AMOUNT > 0 do
-        player:addTreasure(CELL)
-        AMOUNT = AMOUNT -1
+    while numCells > 0 do
+        player:addTreasure(cellType)
+        numCells = numCells -1
     end
 end
 

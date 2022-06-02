@@ -262,16 +262,16 @@ mission.sections =
                     local missionStatus = player:getMissionStatus(mission.areaId)
 
                     if missionStatus >= 6 and missionStatus <= 9 then
-                        local X = npc:getXPos()
-                        local Z = npc:getZPos()
+                        local xPos = npc:getXPos()
+                        local zPos = npc:getZPos()
 
-                        if X >= 292 and X <= 296 and Z >= -30 and Z <= -26 and not player:hasKeyItem(xi.ki.EAST_BLOCK_CODE) then
+                        if xPos >= 292 and xPos <= 296 and zPos >= -30 and zPos <= -26 and not player:hasKeyItem(xi.ki.EAST_BLOCK_CODE) then
                             player:setMissionStatus(player:getNation(), missionStatus + 1)
                             return mission:keyItem(xi.ki.EAST_BLOCK_CODE):setPriority(1000)
-                        elseif X >= 333 and X <= 337 and Z >= -138 and Z <= -134 and not player:hasKeyItem(xi.ki.SOUTH_BLOCK_CODE) then
+                        elseif xPos >= 333 and xPos <= 337 and zPos >= -138 and zPos <= -134 and not player:hasKeyItem(xi.ki.SOUTH_BLOCK_CODE) then
                             player:setMissionStatus(player:getNation(), missionStatus + 1)
                             return mission:keyItem(xi.ki.SOUTH_BLOCK_CODE):setPriority(1000)
-                        elseif X >= 161 and X <= 165 and Z >= -20 and Z <= -16 and not player:hasKeyItem(xi.ki.NORTH_BLOCK_CODE) then
+                        elseif xPos >= 161 and xPos <= 165 and zPos >= -20 and zPos <= -16 and not player:hasKeyItem(xi.ki.NORTH_BLOCK_CODE) then
                             player:setMissionStatus(player:getNation(), missionStatus + 1)
                             return mission:keyItem(xi.ki.NORTH_BLOCK_CODE):setPriority(1000)
                         end

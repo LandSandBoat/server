@@ -1470,20 +1470,20 @@ xi.appraisalUtil.assaultChestTrigger = function(player, npc, qItemTable, regItem
     if instance:completed() and npc:getLocalVar("open") == 0 then
         if xi.appraisalUtil.canGetUnappraisedItem(player, area) then
             xi.appraisalUtil.pickUnappraisedItem(player, npc, qItemTable)
-            local UnappraisedItem = npc:getLocalVar("UnappraisedItem")
+            local unappraisedItem = npc:getLocalVar("UnappraisedItem")
             if player:getFreeSlotsCount() == 0 then
-                player:messageSpecial(zones[player:getZoneID()].text.ITEM_CANNOT_BE_OBTAINED, UnappraisedItem)
+                player:messageSpecial(zones[player:getZoneID()].text.ITEM_CANNOT_BE_OBTAINED, unappraisedItem)
                 return
             else
-                player:addItem({id = UnappraisedItem, appraisal = area})
+                player:addItem({id = unappraisedItem, appraisal = area})
                 for _, players in pairs(chars) do
-                    players:messageName(zones[player:getZoneID()].text.PLAYER_OBTAINS_ITEM, player, UnappraisedItem)
+                    players:messageName(zones[player:getZoneID()].text.PLAYER_OBTAINS_ITEM, player, unappraisedItem)
                 end
             end
         end
         npc:entityAnimationPacket("open")
         npc:setLocalVar("open", 1)
-        npc:untargetable(true)
+        npc:setUntargetable(true)
         npc:timer(15000, function(npcArg) npcArg:entityAnimationPacket("kesu") end)
         npc:timer(16000, function(npcArg) npcArg:setStatus(xi.status.DISAPPEAR) end)
         for i = 1, #regItemTable, 1 do

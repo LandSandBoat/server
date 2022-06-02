@@ -58,18 +58,22 @@ zones[xi.zone.BATALLIA_DOWNS] =
             [17207638] = 17207640,
             [17207639] = 17207640,
         },
+
         TOTTERING_TOBY_PH =
         {
             [17207449] = 17207476, -- -194.234 -18.485 132.208
         },
+
         AHTU              = 17207657,
         STURMTIGER        = 17207696,
         SUPARNA           = 17207697,
         SUPARNA_FLEDGLING = 17207698,
         VEGNIX_GREENTHUMB = 17207710,
-        VOIDWALKER        =
+
+        VOIDWALKER =
         {
-            [xi.keyItem.CLEAR_ABYSSITE] = {
+            [xi.keyItem.CLEAR_ABYSSITE] =
+            {
                 17207722,  -- Lacus
                 17207721,  -- Thunor
                 17207720, -- Beorht
@@ -79,24 +83,28 @@ zones[xi.zone.BATALLIA_DOWNS] =
                 17207716, -- Deorc
                 17207715, -- Aither
             },
-            [xi.keyItem.COLORFUL_ABYSSITE] = {
+
+            [xi.keyItem.COLORFUL_ABYSSITE] =
+            {
                 17207714, -- Skuld
                 17207713  -- Urd
             },
-            [xi.keyItem.YELLOW_ABYSSITE] = {
+
+            [xi.keyItem.YELLOW_ABYSSITE] =
+            {
                 17207712  -- Verthandi
             },
-            [xi.keyItem.BLACK_ABYSSITE] = {
+
+            [xi.keyItem.BLACK_ABYSSITE] =
+            {
                 17207711  -- Yilbegan
             }
         }
     },
+
     npc =
     {
-        CASKET_BASE      = 17207794,
-        SYRILLIA         = 17207972,
-        BLUE_BEAM_BASE   = 17207973, -- NPC[2a4] in npc_list
-        RAPTOR_FOOD_BASE = 17207981,
+        CASKET_BASE = 17207794,
     },
 }
 
