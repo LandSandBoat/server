@@ -493,6 +493,61 @@ end
 function utils.splitStr(s, sep)
     local fields = {}
     local pattern = string.format("([^%s]+)", sep)
-    string.gsub(s, pattern, function(c) fields[#fields + 1] = c end)
+    local _ = string.gsub(s, pattern, function(c) fields[#fields + 1] = c end)
     return fields
+end
+
+function utils.mobTeleport(mob, hideDuration, pos, disAnim, reapAnim)
+
+    --TODO Table of animations that are used for teleports for reference
+
+    if hideDuration == nil then
+        hideDuration = 5000
+    end
+
+    if disAnim == nil then
+        disAnim = "kesu"
+    end
+
+    if reapAnim == nil then
+        reapAnim = "deru"
+    end
+
+    if pos == nil then
+        pos = mob:getPos()
+    end
+
+    local mobSpeed = mob:getSpeed()
+
+    if hideDuration < 1000 then
+        hideDuration = 1000
+    end
+
+    if mob:isDead() then
+        return
+    end
+
+    mob:entityAnimationPacket(disAnim)
+    mob:hideName(true)
+    mob:setUntargetable(true)
+    mob:SetAutoAttackEnabled(false)
+    mob:SetMagicCastingEnabled(false)
+    mob:SetMobAbilityEnabled(false)
+    mob:setPos(pos, 0)
+    mob:setSpeed(0)
+
+    mob:timer(hideDuration, function(mobArg)
+        mobArg:setPos(pos, 0)
+        mobArg:hideName(false)
+        mobArg:setUntargetable(false)
+        mobArg:SetAutoAttackEnabled(true)
+        mobArg:SetMagicCastingEnabled(true)
+        mobArg:SetMobAbilityEnabled(true)
+        mobArg:setSpeed(mobSpeed)
+        mobArg:entityAnimationPacket(reapAnim)
+
+        if mobArg:isDead() then
+            return
+        end
+    end)
 end
