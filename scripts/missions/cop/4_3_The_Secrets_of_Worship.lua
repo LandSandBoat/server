@@ -29,8 +29,8 @@ local profQmOnTrigger = function(player, npc)
         isSpawnPoint
     then
         GetMobByID(sacrariumID.mob.OLD_PROFESSOR_MARISELLE):setSpawn(npc:getXPos(), npc:getYPos(), npc:getZPos(), 0)
-        for i = 1,2 do
-            GetMobByID(sacrariumID.mob.OLD_PROFESSOR_MARISELLE+i):setSpawn(npc:getXPos(), npc:getYPos(), npc:getZPos(), 0)
+        for i = 1, 2 do
+            GetMobByID(sacrariumID.mob.OLD_PROFESSOR_MARISELLE + i):setSpawn(npc:getXPos(), npc:getYPos(), npc:getZPos(), 0)
         end
         npcUtil.popFromQM(player, npc, sacrariumID.mob.OLD_PROFESSOR_MARISELLE, { radius = 2, hide = 0 })
         return mission:messageSpecial(sacrariumID.text.EVIL_PRESENCE)
