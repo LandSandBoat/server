@@ -12,7 +12,7 @@ require("scripts/globals/msg")
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)
-    if (mob:getAnimationSub() == 0) then
+    if mob:getAnimationSub() == 0 then
         return 0
     end
     return 1
