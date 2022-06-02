@@ -63,46 +63,46 @@ local prizes =
         -- COSTUMES
 			
 			-- Cycle #1/#6
-			10429, -- Moogle Masque
-			10250, -- Moogle Suit
-			27765, -- Chocobo Masque
-			27911, -- Chocobo Suit
-			26798, -- Behemoth Masque
-			26954, -- Behemoth Suit
-			27715, -- Goblin Masque
-			27866, -- Goblin Suit
-			26705, -- Mandragora Masque
-			27854, -- Mandragora Suit
-			26956, -- Poroggo Coat
-			25711, -- Botulus Suit
-			25632, -- Carbie Cap
-			10384, -- Cumulus Masque
-			27859, -- Kengyu Happi 
+			-- 10429, -- Moogle Masque
+			-- 10250, -- Moogle Suit
+			-- 27765, -- Chocobo Masque
+			-- 27911, -- Chocobo Suit
+			-- 26798, -- Behemoth Masque
+			-- 26954, -- Behemoth Suit
+			-- 27715, -- Goblin Masque
+			-- 27866, -- Goblin Suit
+			-- 26705, -- Mandragora Masque
+			-- 27854, -- Mandragora Suit
+			-- 26956, -- Poroggo Coat
+			-- 25711, -- Botulus Suit
+			-- 25632, -- Carbie Cap
+			-- 10384, -- Cumulus Masque
+			-- 27859, -- Kengyu Happi 
 			-- 28149, -- Kengyu Hanmomohiki 	-- BROKEN
 			-- 27860, -- Shokujo Happi 			-- BROKEN
 			-- 28150, -- Shokujo Hanmomohiki	-- BROKEN
-			26889, -- Heart Apron
+			-- 26889, -- Heart Apron
 			
 			-- Cycle #2
-            -- 25606, -- Agent Hood
-			-- 26974, -- Agent Coat
-			-- 27111, -- Agent Cuffs
-			-- 27296, -- Agent Pants
-			-- 27467, -- Agent Boots
-			-- 25607, -- Starlet Flower
-			-- 26975, -- Starlet Jabot
-			-- 27112, -- Starlet Gloves
-			-- 27297, -- Starlet Skirt
-			-- 27468, -- Starlet Boots
-			-- 25657, -- Wyrmking Masque
-			-- 25756, -- Wyrmking Suit
-			-- 25585, -- Bl. Chocobo Cap
-			-- 25776, -- Bl. Chocobo Suit
-			-- 26514, -- Poroggo Fleece
-			-- 27717, -- Worm Masque
-			-- 11491, -- Snow Bunny Hat +1
-			-- 23730, -- Karakul Cap
-			-- 25850, -- Pink Subligar
+            25606, -- Agent Hood
+			26974, -- Agent Coat
+			27111, -- Agent Cuffs
+			27296, -- Agent Pants
+			27467, -- Agent Boots
+			25607, -- Starlet Flower
+			26975, -- Starlet Jabot
+			27112, -- Starlet Gloves
+			27297, -- Starlet Skirt
+			27468, -- Starlet Boots
+			25657, -- Wyrmking Masque
+			25756, -- Wyrmking Suit
+			25585, -- Bl. Chocobo Cap
+			25776, -- Bl. Chocobo Suit
+			26514, -- Poroggo Fleece
+			27717, -- Worm Masque
+			11491, -- Snow Bunny Hat +1
+			23730, -- Karakul Cap
+			25850, -- Pink Subligar
 			
 			-- Cycle #3
 			-- 25774, -- Fancy Gilet
@@ -204,47 +204,47 @@ local prizes =
 		   -- 22153, -- Silver Gun
 		   
 		   -- Cycle #2/#6
-		   20532, -- Worm Feelers
-		   20577, -- Chicken Knife II
-		   20713, -- Excalipoor
-		   28652, -- Hatchling Shield
-		   27631, -- Cait Sith Guard
-		   27625, -- Morbol Shield
-		   28655, -- Slime Shield
-		   21770, -- Helgoland
-		   21658, -- Brave Blade II
-		   18441, -- Shinai
-		   21967, -- Melon Slicer
-		   21863, -- Tzee Xicu's Blade
-		   18102, -- Pitchfork
-		   22017, -- Seika Uchiwa
-		   21107, -- Kyuka Uchiwa
-		   18864, -- Dream Bell +1
-		   22072, -- Lamia Staff
-		   22069, -- Hapy Staff
-		   20909, -- Hoe
+		   -- 20532, -- Worm Feelers
+		   -- 20577, -- Chicken Knife II
+		   -- 20713, -- Excalipoor
+		   -- 28652, -- Hatchling Shield
+		   -- 27631, -- Cait Sith Guard
+		   -- 27625, -- Morbol Shield
+		   -- 28655, -- Slime Shield
+		   -- 21770, -- Helgoland
+		   -- 21658, -- Brave Blade II
+		   -- 18441, -- Shinai
+		   -- 21967, -- Melon Slicer
+		   -- 21863, -- Tzee Xicu's Blade
+		   -- 18102, -- Pitchfork
+		   -- 22017, -- Seika Uchiwa
+		   -- 21107, -- Kyuka Uchiwa
+		   -- 18864, -- Dream Bell +1
+		   -- 22072, -- Lamia Staff
+		   -- 22069, -- Hapy Staff
+		   -- 20909, -- Hoe
 
 		   
 		   -- Cycle #3
-		   -- 21509, -- Premium Mogti
-		   -- 20573, -- Aern Dagger
-		   -- 20674, -- Aern Sword
-		   -- 18912, -- Ark Saber
-		   -- 18913, -- Ark Sword
-		   -- 26489, -- Troth
-		   -- 10808, -- Janus Guard
-		   -- 10811, -- Chocobo Shield
-		   -- 21759, -- Autarch's Axe
-		   -- 21682, -- Lament
-		   -- 21742, -- Aern Axe
-		   -- 18545, -- Ark Tabar
-		   -- 18464, -- Ark Tachi
-		   -- 21860, -- Aern Spear
-		   -- 20953, -- Escritorio
-		   -- 22004, -- Soulflayer's Wand
-		   -- 18399, -- Charm Wand
-		   -- 22065, -- Aern Staff
-		   -- 18563, -- Ark Scythe
+		   21509, -- Premium Mogti
+		   20573, -- Aern Dagger
+		   20674, -- Aern Sword
+		   18912, -- Ark Saber
+		   18913, -- Ark Sword
+		   26489, -- Troth
+		   10808, -- Janus Guard
+		   10811, -- Chocobo Shield
+		   21759, -- Autarch's Axe
+		   21682, -- Lament
+		   21742, -- Aern Axe
+		   18545, -- Ark Tabar
+		   18464, -- Ark Tachi
+		   21860, -- Aern Spear
+		   20953, -- Escritorio
+		   22004, -- Soulflayer's Wand
+		   18399, -- Charm Wand
+		   22065, -- Aern Staff
+		   18563, -- Ark Scythe
 		   
 		   -- Cycle #4
 		   -- 20571, -- Infiltrator
@@ -370,23 +370,23 @@ local prizes =
 		-- NICE TO HAVE STUFF
 
 			-- Cycle #1 -- Crafting/Nyzul sets <- These need to be highest login tier next time!
-			-- 28587, -- Artificer's Ring
-			-- 28585, -- Craftkeeper's Ring
-			-- 16106, -- Askar Zucchetto
-			-- 14568, -- Askar Korazin
-			-- 14983, -- Askar Manopolas
-			-- 15647, -- Askar Dirs
-			-- 15733, -- Askar Gambieras
-			-- 16107, -- Denali Bonnet
-			-- 14569, -- Denali Jacket 
-			-- 14984, -- Denali Wristbands 
-			-- 15648, -- Denali Kecks
-			-- 15734, -- Denali Gamashes
-			-- 16108, -- Goliard Chapeau 
-			-- 14570, -- Goliard Saio 
-			-- 14985, -- Goliard Cuffs
-			-- 15649, -- Goliard Trews
-			-- 15735, -- Goliard Clogs
+			28587, -- Artificer's Ring
+			28585, -- Craftkeeper's Ring
+			16106, -- Askar Zucchetto
+			14568, -- Askar Korazin
+			14983, -- Askar Manopolas
+			15647, -- Askar Dirs
+			15733, -- Askar Gambieras
+			16107, -- Denali Bonnet
+			14569, -- Denali Jacket 
+			14984, -- Denali Wristbands 
+			15648, -- Denali Kecks
+			15734, -- Denali Gamashes
+			16108, -- Goliard Chapeau 
+			14570, -- Goliard Saio 
+			14985, -- Goliard Cuffs
+			15649, -- Goliard Trews
+			15735, -- Goliard Clogs
 			
 			-- Cycle #2 -- Nexus/ToAU rings/Odin Prime/Alexander Prime/CoP items
 			-- 11538, -- Nexus Cape
@@ -469,26 +469,26 @@ local prizes =
 			-- 15690, -- Yigit Crackows
 			
 			-- Cycle #6 -- Apollyon AF+1 items
-			1931, -- Argyro Rivet (WAR)
-			1933, -- Ancient Brass (MNK)
-			1935, -- Benedict Yarn (WHM)
-			1937, -- Diabolic Yarn (BLM)
-			1939, -- Cardinal Cloth (RDM)
-			1941, -- Light Filament (THF)
-			1943, -- White Rivet (PLD)
-			1945, -- Black Rivet (DRK)
-			1947, -- Fetid Lanolin (BST)
-			1949, -- Brown Doeskin (BRD)
-			1951, -- Charcoal Cotton (RNG)
-			1953, -- Kurogane (SAM)
-			1955, -- Ebony Lacquer (NIN)
-			1957, -- Blue Rivet (DRG)
-			1959, -- Astral Leather (SMN)
-			2657, -- Flameshun Cloth (BLU)
-			2659, -- Canvas Toile (COR)
-			2661, -- Corduroy Cloth (PUP)
-			2715, -- Gold Stud (DNC)
-			2717, -- Electrum Stud (SCH)
+			-- 1931, -- Argyro Rivet (WAR)
+			-- 1933, -- Ancient Brass (MNK)
+			-- 1935, -- Benedict Yarn (WHM)
+			-- 1937, -- Diabolic Yarn (BLM)
+			-- 1939, -- Cardinal Cloth (RDM)
+			-- 1941, -- Light Filament (THF)
+			-- 1943, -- White Rivet (PLD)
+			-- 1945, -- Black Rivet (DRK)
+			-- 1947, -- Fetid Lanolin (BST)
+			-- 1949, -- Brown Doeskin (BRD)
+			-- 1951, -- Charcoal Cotton (RNG)
+			-- 1953, -- Kurogane (SAM)
+			-- 1955, -- Ebony Lacquer (NIN)
+			-- 1957, -- Blue Rivet (DRG)
+			-- 1959, -- Astral Leather (SMN)
+			-- 2657, -- Flameshun Cloth (BLU)
+			-- 2659, -- Canvas Toile (COR)
+			-- 2661, -- Corduroy Cloth (PUP)
+			-- 2715, -- Gold Stud (DNC)
+			-- 2717, -- Electrum Stud (SCH)
 			
 			-- Cycle #? -- Treasure Casket gear
 			
@@ -504,13 +504,13 @@ local prizes =
         -- GAMECHANGERS
 			
 			-- Cycle #1 -- TH/Crafting/EXP/CoP rings
-			-- 25679, -- White Rarab Cap +1
-			-- 28586, -- Craftmaster's Ring
-			-- 11009, -- Shaper's Shawl
-			-- 27556, -- Echad Ring
-			-- 15543, -- Raja's Ring
-			-- 15544, -- Sattva Ring
-			-- 15545, -- Tamas Ring
+			25679, -- White Rarab Cap +1
+			28586, -- Craftmaster's Ring
+			11009, -- Shaper's Shawl
+			27556, -- Echad Ring
+			15543, -- Raja's Ring
+			15544, -- Sattva Ring
+			15545, -- Tamas Ring
 			
 			-- Cycle #2 -- Divine Might/Apocalypse Nigh/Sea capes/Sea torques
 			-- 15962, -- Static Earring
@@ -594,26 +594,26 @@ local prizes =
 			-- 19042, -- Ariesian Grip
 			
 			-- Cycle #6 -- Temenos AF+1 items (Change point cost to 1500 for this cycle only!)
-			1930, -- Ecarlate Cloth (WAR)
-			1932, -- Utopian Gold Thread (MNK)
-			1934, -- Benedict Silk (WHM)
-			1936, -- Diabolic Silk (BLM)
-			1938, -- Ruby Silk Thread (RDM)
-			1940, -- Supple Skin (THF)
-			1942, -- Snowy Cermet (PLD)
-			1944, -- Dark Orichalcum (DRK)
-			1946, -- Smalt Leather (BST)
-			1948, -- Coiled Yarn (BRD)
-			1950, -- Chameleon Yarn (RNG)
-			1952, -- Scarlet Odoshi (SAM)
-			1954, -- Plaited Cord (NIN)
-			1956, -- Cobalt Mythril Sheet (DRG)
-			1958, -- Glittering Yarn (SMN)
-			2656, -- Luminian Thread (BLU)
-			2658, -- Silkworm Thread (COR)
-			2660, -- Pantin Wire (PUP)
-			2714, -- Filet Lace (DNC)
-			2716, -- Brilliantine (SCH)
+			-- 1930, -- Ecarlate Cloth (WAR)
+			-- 1932, -- Utopian Gold Thread (MNK)
+			-- 1934, -- Benedict Silk (WHM)
+			-- 1936, -- Diabolic Silk (BLM)
+			-- 1938, -- Ruby Silk Thread (RDM)
+			-- 1940, -- Supple Skin (THF)
+			-- 1942, -- Snowy Cermet (PLD)
+			-- 1944, -- Dark Orichalcum (DRK)
+			-- 1946, -- Smalt Leather (BST)
+			-- 1948, -- Coiled Yarn (BRD)
+			-- 1950, -- Chameleon Yarn (RNG)
+			-- 1952, -- Scarlet Odoshi (SAM)
+			-- 1954, -- Plaited Cord (NIN)
+			-- 1956, -- Cobalt Mythril Sheet (DRG)
+			-- 1958, -- Glittering Yarn (SMN)
+			-- 2656, -- Luminian Thread (BLU)
+			-- 2658, -- Silkworm Thread (COR)
+			-- 2660, -- Pantin Wire (PUP)
+			-- 2714, -- Filet Lace (DNC)
+			-- 2716, -- Brilliantine (SCH)
 			
 			-- Cycle #? -- MMM gear
 			

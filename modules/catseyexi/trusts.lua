@@ -245,7 +245,7 @@ m:addOverride("xi.globals.spells.trust.maximilian.onSpellCast", function(caster,
 	trust:addMod(xi.mod.MDEF, power)
 	trust:addMod(xi.mod.ATT, power)
 	trust:addMod(xi.mod.ACC, power*4)
-	trust:addMod(xi.mod.TREASURE_HUNTER, 1)
+--	trust:addMod(xi.mod.TREASURE_HUNTER, 1)
 	trust:addMod(xi.mod.DOUBLE_ATTACK, 15)
 end)
 
@@ -490,7 +490,7 @@ m:addOverride("xi.globals.spells.trust.nanaa_mihgo.onSpellCast", function(caster
 	trust:addMod(xi.mod.ATT, power)
 	trust:addMod(xi.mod.ACC, power*3)
 	trust:addMod(xi.mod.STORETP, 10)
-	trust:addMod(xi.mod.TREASURE_HUNTER, 1)	
+--	trust:addMod(xi.mod.TREASURE_HUNTER, 1)	
 end)
 
 m:addOverride("xi.globals.spells.trust.qultada.onSpellCast", function(caster, target, spell)

@@ -3,41 +3,61 @@
 -- desc: Test dynamic entity before its placed into a module for testing.
 -- note: Will spawn after you move from your current position
 -----------------------------------
+-----------------------------------
 
 cmdprops =
 {
-    permission = 2,
+    permission = 1,
     parameters = ""
 }
 
 function onTrigger(player)
-    super(zone)
-
-    local Fixme = zone:insertDynamicEntity({
+    local zone = player:getZone()
+    local npc = zone:insertDynamicEntity({
     objtype = xi.objType.NPC,
-    name = "Fixme",
-    look = 2100,
-    x = 11.360,
-    y = 3.100,
-    z = 116.881,
-    rotation = 128,
-    widescan = 1,
+    name = "Helping Hand",
+	look = 3106,
+    x = player:getXPos(),
+    y = player:getYPos(),
+    z = player:getZPos(),
+    rotation = player:getRotPos(),
 
-	onTrade = function(playerArg, npcArg, trade)
-    end,
+        onTrigger = function(player, npc)
+			 local menu =
+        {
+            title = "Accept Buffs?",
+            onStart = function(playerArg)
+                -- NOTE: This could be used to lock the player in place
+                playerArg:PrintToPlayer("Would you like to have a boost?", xi.msg.channel.NS_SAY)
+            end,
+            options =
+            {
+                {
+                    "Yes",
+                    function(playerArg)
+						playerArg:PrintToPlayer("Enjoy your new buffs!", xi.msg.channel.NS_SAY)
+						player:addStatusEffect(xi.effect.REGAIN, 5, 0, 7200)
+                        player:addStatusEffect(xi.effect.REGEN, 15, 0, 7200)
+                        player:addStatusEffect(xi.effect.REFRESH, 10, 0, 7200)
+						player:addStatusEffect(xi.effect.HASTE, 3, 0, 7200)
 
-    onTrigger = function(playerArg, npcArg)
-	    if playerArg:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.COP.CHAINS_AND_BONDS then
-		    playerArg:PrintToPlayer("Busted mission detected. Skipping ...")
-			playerArg:completeMission(xi.mission.log_id.COP, xi.mission.id.COP.CHAINS_AND_BONDS)
-			playerArg:setMissionStatus(xi.mission.log_id.COP, 0)
-			playerArg:addMission(xi.mission.log_id.COP, xi.mission.id.cop.FLAMES_IN_THE_DARKNESS)
-			playerArg:PrintToPlayer("Fixme: You should now be on \"Flames in the Darkness\".", 0xD)
-		else
-		    playerArg:PrintToPlayer("Fixme: Get out of here!", 0xD)
-		end	
-    end,
-
+					end,
+				},
+                {
+                    "No",
+                    function(playerArg)
+                    playerArg:PrintToPlayer("You can always come back if you need a little boost!", xi.msg.channel.NS_SAY)
+                    end,
+                },
+            },
+            onCancelled = function(playerArg)
+            end,
+            onEnd = function(playerArg)
+			end,
+        }
+          player:customMenu(menu)
+	              player:PrintToPlayer( "Enjoy your time on CatsEyeXI!", 0xd )
+		end,
     })
-
+    player:PrintToPlayer(string.format("Please move to spawn (%s)", npc:getPacketName()))
 end
