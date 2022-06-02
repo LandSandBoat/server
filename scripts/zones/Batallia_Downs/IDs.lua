@@ -104,10 +104,7 @@ zones[xi.zone.BATALLIA_DOWNS] =
 
     npc =
     {
-        CASKET_BASE      = 17207794,
-        SYRILLIA         = 17207972,
-        BLUE_BEAM_BASE   = 17207973, -- NPC[2a4] in npc_list
-        RAPTOR_FOOD_BASE = 17207981,
+        CASKET_BASE = 17207794,
     },
 }
 
