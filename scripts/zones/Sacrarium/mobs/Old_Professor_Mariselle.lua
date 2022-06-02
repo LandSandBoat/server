@@ -26,9 +26,9 @@ entity.onMobFight = function(mob, target)
     if mob:getBattleTime() % 30 < 3 and
        mob:getBattleTime() > 3
     then
-        local X = mob:getXPos()
-        local Y = mob:getYPos()
-        local Z = mob:getZPos()
+        local xPos = mob:getXPos()
+        local yPos = mob:getYPos()
+        local zPos = mob:getZPos()
 
         for i = opMariselle + 1, opMariselle + 2 do
             local m = GetMobByID(i)
@@ -41,7 +41,7 @@ entity.onMobFight = function(mob, target)
         end
     end
 
-    for i = OP_Mariselle+1, OP_Mariselle+2 do
+    for i = opMariselle+1, opMariselle+2 do
         local m = GetMobByID(i)
         if m:isSpawned() then
             m:updateEnmity(target)
@@ -86,7 +86,7 @@ entity.onMobDeath = function(mob, player, isKiller)
 end
 
 entity.onMobDespawn = function(mob)
-    local OP_Mariselle = mob:getID()
+    local opMariselle = mob:getID()
 
     for i = opMariselle + 1, opMariselle + 2 do
         local m = GetMobByID(i)
