@@ -40,7 +40,6 @@ local profQmOnTrigger = function(player, npc)
     then
         npcUtil.giveKeyItem(player, xi.ki.RELIQUIARIUM_KEY)
         return mission:noAction()
-
     end
 end
 
