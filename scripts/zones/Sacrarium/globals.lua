@@ -2,9 +2,9 @@
 -- Global Position References - Old Prof & Babies
 -----------------------------------
 
-local ProfessorTables = {}
+local professorTables = {}
 
-ProfessorTables.locations =
+professorTables.locations =
 {
     --Northeast room
     [0] =
@@ -86,7 +86,7 @@ ProfessorTables.locations =
     }
 }
 
-ProfessorTables.returnPoint =
+professorTables.returnPoint =
 {
     [0] = { 102.669, -3.111,  127.279 },
     [1] = { 62.6680, -3.111,  127.288 },
@@ -96,4 +96,4 @@ ProfessorTables.returnPoint =
     [5] = { 22.6690, -3.111, -127.318 },
 }
 
-return ProfessorTables
+return professorTables
