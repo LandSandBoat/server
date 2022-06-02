@@ -23,8 +23,9 @@ end
 entity.onMobFight = function(mob, target)
     local opMariselle = mob:getID()
 
-    if mob:getBattleTime() % 30 < 3 and
-       mob:getBattleTime() > 3
+    if
+        mob:getBattleTime() % 30 < 3 and
+        mob:getBattleTime() > 3
     then
         local xPos = mob:getXPos()
         local yPos = mob:getYPos()
