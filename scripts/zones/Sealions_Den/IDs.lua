@@ -35,25 +35,12 @@ zones[xi.zone.SEALIONS_DEN] =
     {
         AIRSHIP_DOOR_OFFSET = 16908420,
     },
-    aWarriorsPath = {
-        [1] = {
-            TENZEN_ID         = 16908310,
-            MAKKI_SHAKKI_ID   = 16908311,
-            KUKKI_CHEBUKKI_ID = 16908312,
-            CHERUKKI_ID       = 16908313,
-        },
-        [2] = {
-            TENZEN_ID         = 16908314,
-            MAKKI_SHAKKI_ID   = 16908315,
-            KUKKI_CHEBUKKI_ID = 16908316,
-            CHERUKKI_ID       = 16908317,
-        },
-        [3] = {
-            TENZEN_ID         = 16908318,
-            MAKKI_SHAKKI_ID   = 16908319,
-            KUKKI_CHEBUKKI_ID = 16908320,
-            CHERUKKI_ID       = 16908321,
-        }
+    aWarriorsPath =
+    {
+        TENZEN_ID         = 16908310,
+        MAKKI_SHAKKI_ID   = 16908311,
+        KUKKI_CHEBUKKI_ID = 16908312,
+        CHERUKKI_ID       = 16908313,
     },
 }
 

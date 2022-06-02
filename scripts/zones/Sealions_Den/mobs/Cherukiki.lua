@@ -31,7 +31,7 @@ entity.onMobEngaged = function(mob, target)
 end
 
 entity.onMobFight = function(mob, target)
-    local bfID  = mob:getBattlefield():getArea()
+    local bfID = mob:getBattlefield():getArea()
     local battlefield = mob:getBattlefield()
     local changetime = mob:getLocalVar("changetime")
     local battletime = mob:getBattleTime()
@@ -44,13 +44,13 @@ entity.onMobFight = function(mob, target)
         end
     end
 
-    local tenzen_id = GetMobByID(ID.aWarriorsPath[bfID].TENZEN_ID)
+    local tenzen_id = GetMobByID(ID.aWarriorsPath.TENZEN_ID + (bfID - 1))
     if
         tenzen_id:getHPP() <= 70 and
         battlefield:getLocalVar("fireworks") == 0
     then
         if mob:getLocalVar("cooldown") == 0 then
-            mob:castSpell(4, GetMobByID(ID.aWarriorsPath[bfID].TENZEN_ID))
+            mob:castSpell(4, tenzen_id)
             mob:setLocalVar("cooldown", 70) -- every 30 seconds Cherukiki will cast Cure IV on tenzen
         end
     else
