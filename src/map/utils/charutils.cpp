@@ -2847,14 +2847,6 @@ namespace charutils
                     skillBonus += PChar->getMod(Mod::DARK_ARTS_SKILL);
                 }
             }
-            else if (i == 44)
-            {
-                skillBonus += PChar->getMod(Mod::GEOMANCY);
-            }
-            else if (i == 45)
-            {
-                skillBonus += PChar->getMod(Mod::HANDBELL);
-            }
             else if (i >= 22 && i <= 24)
             {
                 if (PChar->PAutomaton)
@@ -2866,7 +2858,18 @@ namespace charutils
             skillBonus += PChar->PMeritPoints->GetMeritValue(skillMerit[meritIndex], PChar);
             meritIndex++;
 
-            skillBonus += PChar->getMod(static_cast<Mod>(i + 79));
+            if (i == 44)
+            {
+                skillBonus += PChar->getMod(Mod::GEOMANCY); //1026
+            }
+            else if (i == 45)
+            {
+                skillBonus += PChar->getMod(Mod::HANDBELL); //1027
+            }
+            else
+            {
+                skillBonus += PChar->getMod(static_cast<Mod>(i + 79));
+            }
 
             PChar->WorkingSkills.rank[i] = battleutils::GetSkillRank((SKILLTYPE)i, PChar->GetMJob());
 
