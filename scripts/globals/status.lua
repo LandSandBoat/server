@@ -1672,6 +1672,8 @@ xi.mod =
     TRIPLE_SHOT_RATE             = 999, -- Percent increase to Triple Shot Rate
     NINJUTSU_DURATION            = 1000,
 
+    DIG_BYPASS_FATIGUE           = 1031, -- Chocobo digging modifier found in "Blue Race Silks". Modifier works as a direct percent. Used in Chocobo_Digging.lua
+
     -- IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN src/map/modifier.h ASWELL!
 
     -- The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.

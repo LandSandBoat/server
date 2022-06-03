@@ -27,6 +27,9 @@ end
 
 zone_object.onGameDay = function()
     xi.bmt.updatePeddlestox(xi.zone.WESTERN_ALTEPA_DESERT, ID.npc.PEDDLESTOX)
+
+    -- Chocobo Digging.
+    SetServerVariable("[DIG]ZONE125_ITEMS", 0)
 end
 
 zone_object.onZoneIn = function(player, prevZone)

@@ -58,6 +58,10 @@ zone_object.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
 end
 
+zone_object.onGameDay = function()
+    SetServerVariable("[DIG]ZONE104_ITEMS", 0)
+end
+
 zone_object.onRegionEnter = function( player, region)
     if region:GetRegionID() == 1 and player:getCharVar("UnderOathCS") == 7 then -- Quest: Under Oath - PLD AF3
         player:startEvent(14)

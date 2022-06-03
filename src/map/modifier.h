@@ -871,6 +871,8 @@ enum class Mod
     SUPERIOR_LEVEL  = 997, // SU0..5
     ONE_HOUR_RECAST = 996, // Decreases the recast time of one-hour abilities by n minutes.
 
+    DIG_BYPASS_FATIGUE = 1031, // Chocobo digging modifier found in "Blue Race Silks". Modifier works as a direct percent. Used in Chocobo_Digging.lua
+
     // IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN scripts/globals/status.lua ASWELL!
 
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
@@ -887,7 +889,7 @@ enum class Mod
     // 888
     // 936
     //
-    // SPARE = 1031, and onward
+    // SPARE = 1032, and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it
