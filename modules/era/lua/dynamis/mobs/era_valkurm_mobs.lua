@@ -7,6 +7,9 @@ require("scripts/globals/dynamis")
 require("scripts/globals/zone")
 -----------------------------------
 
+xi = xi or {}
+xi.dynamis = xi.dynamis or {}
+
 xi.dynamis.onSpawnCirrate = function(mob)
     xi.dynamis.setMegaBossStats(mob)
     -- Set Mods

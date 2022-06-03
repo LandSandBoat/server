@@ -905,15 +905,63 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         },
         ["Dynamis Lord"] =
         {
-            ["onMobSpawn"] = {function(mob) xi.dynamis.onSpawnApoc(mob) end},
+            ["onMobSpawn"] = {function(mob) xi.dynamis.onSpawnDynaLord(mob) end},
             ["onMobEngaged"] = {function(mob, target)  xi.dynamis.onEngagedApoc(mob, target) end},
-            ["onMobFight"] = {function(mob) xi.dynamis.onFightApoc(mob, target) end},
-            ["onMobRoam"] = {function(mob) end},
+            ["onMobFight"] = {function(mob) xi.dynamis.onFightDynaLord(mob, target) end},
+            ["onMobRoam"] = {function(mob) xi.dynamis.onMobRoamXarc(mob) end},
+            ["onMobRoamAction"] = {function(mob) end},
+            ["onMobMagicPrepare"] = {function(mob, target) xi.dynamis.onMagicPrepDynaLord(mob, target) end},
+            ["onMobWeaponSkillPrepare"] = {function(mob, target) xi.dynamis.onWeaponskillPrepDynaLord(mob, target) end},
+            ["onMobWeaponSkill"] = {function(mob, skill) xi.dynamis.onWeaponskillDynaLord(mob, skill) end},
+            ["onMobDeath"] = {function(mob, player, isKiller) xi.dynamis.onDeathDynaLord(mob, player, isKiller) end},
+        },
+        ["Ying"] =
+        {
+            ["onMobSpawn"] = {function(mob) xi.dynamis.onSpawnYing(mob) end},
+            ["onMobEngaged"] = {function(mob, target)  xi.dynamis.onEngagedApoc(mob, target) end},
+            ["onMobFight"] = {function(mob) xi.dynamis.onFightYing(mob, target) end},
+            ["onMobRoam"] = {function(mob) xi.dynamis.onMobRoamXarc(mob) end},
             ["onMobRoamAction"] = {function(mob) end},
             ["onMobMagicPrepare"] = {function(mob) end},
-            ["onMobWeaponSkillPrepare"] = {function(mob, target) xi.dynamis.onWeaponskillPrepApoc(mob, target) end},
+            ["onMobWeaponSkillPrepare"] = {function(mob, target) end},
             ["onMobWeaponSkill"] = {function(mob) end},
-            ["onMobDeath"] = {function(mob) xi.dynamis.onDeathApoc(mob, player, isKiller) end},
+            ["onMobDeath"] = {function(mob, player, isKiller) xi.dynamis.onDeathYing(mob, player, isKiller) end},
+        },
+        ["Yang"] =
+        {
+            ["onMobSpawn"] = {function(mob) xi.dynamis.onSpawnYang(mob) end},
+            ["onMobEngaged"] = {function(mob, target)  xi.dynamis.onEngagedApoc(mob, target) end},
+            ["onMobFight"] = {function(mob) xi.dynamis.onFightYang(mob, target) end},
+            ["onMobRoam"] = {function(mob) xi.dynamis.onMobRoamXarc(mob) end},
+            ["onMobRoamAction"] = {function(mob) end},
+            ["onMobMagicPrepare"] = {function(mob) end},
+            ["onMobWeaponSkillPrepare"] = {function(mob, target) end},
+            ["onMobWeaponSkill"] = {function(mob) end},
+            ["onMobDeath"] = {function(mob, player, isKiller) xi.dynamis.onDeathYang(mob, player, isKiller) end},
+        },
+        ["Animated Weapon"] =
+        {
+            ["onMobSpawn"] = {function(mob) xi.dynamis.onSpawnAnimated(mob) end},
+            ["onMobEngaged"] = {function(mob, target)  xi.dynamis.onEngagedAnimated(mob, target) end},
+            ["onMobFight"] = {function(mob) end},
+            ["onMobRoam"] = {function(mob) xi.dynamis.onMobRoamXarc(mob) end},
+            ["onMobRoamAction"] = {function(mob) end},
+            ["onMobMagicPrepare"] = {function(mob, target) xi.dynamis.onMagicPrepAnimated(mob, target) end},
+            ["onMobWeaponSkillPrepare"] = {function(mob, target) end},
+            ["onMobWeaponSkill"] = {function(mob) end},
+            ["onMobDeath"] = {function(mob) xi.dynamis.onDeathAnimated(mob) end},
+        },
+        ["Satellite Weapon"] =
+        {
+            ["onMobSpawn"] = {function(mob) xi.dynamis.onSpawnSatellite(mob) end},
+            ["onMobEngaged"] = {function(mob, target) end},
+            ["onMobFight"] = {function(mob) end},
+            ["onMobRoam"] = {function(mob) xi.dynamis.onMobRoamXarc(mob) end},
+            ["onMobRoamAction"] = {function(mob) end},
+            ["onMobMagicPrepare"] = {function(mob) end},
+            ["onMobWeaponSkillPrepare"] = {function(mob, target) end},
+            ["onMobWeaponSkill"] = {function(mob) end},
+            ["onMobDeath"] = {function(mob) end},
         },
         ["No Auto Attack"] =
         {
@@ -962,102 +1010,22 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         groupIdFound = xi.dynamis.nmInfoLookup[mobName][2]
         groupZoneFound = xi.dynamis.nmInfoLookup[mobName][3]
         functionLookup = "Enabled Auto Attack"
+    elseif string.sub(mobName, 1, 9) == "Animated" then
+        mobNameFound = xi.dynamis.nmInfoLookup[mobName][1]
+        groupIdFound = xi.dynamis.nmInfoLookup[mobName][2]
+        groupZoneFound = xi.dynamis.nmInfoLookup[mobName][3]
+        functionLookup = "Animated Weapon"
+    elseif string.sub(mobName, 1, 9) == "Satillite" then
+        mobNameFound = xi.dynamis.nmInfoLookup[mobName][1]
+        groupIdFound = xi.dynamis.nmInfoLookup[mobName][2]
+        groupZoneFound = xi.dynamis.nmInfoLookup[mobName][3]
+        functionLookup = "Satellite Weapon"
     else
         mobNameFound = xi.dynamis.nmInfoLookup[mobName][1]
         groupIdFound = xi.dynamis.nmInfoLookup[mobName][2]
         groupZoneFound = xi.dynamis.nmInfoLookup[mobName][3]
         functionLookup = mobName
     end
-    -- elseif mobName == "Dynamis Lord" then
-    --     mobVar =  xi.dynamis.nmInfoLookup[mobFamily][mobName][7]
-    --     mobNameFound = xi.dynamis.nmInfoLookup[mobName][1]
-    --     groupIdFound = xi.dynamis.nmInfoLookup[mobName][2]
-    --     groupZoneFound = xi.dynamis.nmInfoLookup[mobName][3]
-    --     onMobDeath = function(mob, player, isKiller)
-    --         local zone = mob:getZone()
-    --         local dialogDL = 7272
-    --         xi.dynamis.megaBossOnDeath(mob, player, mobVar)
-    --         if isKiller then
-    --             mob:showText(mob, dialogDL + 2)
-    --             DespawnMob(zone:getLocalVar("Ying"))
-    --             DespawnMob(zone:getLocalVar("Yang"))
-    --         end
-    --         zone:setLocalVar("MainDynaLord", mob:getID())
-    --     end
-    -- elseif mobName == "Ying" then
-    --     mobVar =  xi.dynamis.nmInfoLookup[mobFamily][mobName][7]
-    --     mobNameFound = xi.dynamis.nmInfoLookup[mobName][1]
-    --     groupIdFound = xi.dynamis.nmInfoLookup[mobName][2]
-    --     groupZoneFound = xi.dynamis.nmInfoLookup[mobName][3]
-    --     onMobDeath = function(mob, player, isKiller) 
-    --         local zone = mob:getZone()
-    --         local yang = GetMobByID(zone:getLocalVar("Yang"))
-    --         local dynaLord = GetMobByID(zone:getLocalVar("MainDynaLord"))
-    --         local dialogYing = 7289
-    --         if isKiller then
-    --             if yang:isAlive() == true then
-    --                 mob:showText(mob, dialogYing)
-    --             else
-    --                 mob:showText(mob, dialogYing + 2)
-    --             end
-    --         end
-
-    --         yang:setLocalVar("yingToD", os.time())
-    --         if dynaLord:getLocalVar("magImmune") == 0 then
-    --             dynaLord:setMod(xi.mod.UDMGMAGIC, 0)
-    --             dynaLord:setMod(xi.mod.UDMGBREATH, 0)
-    --             if dynaLord:getLocalVar("physImmune") == 1 then -- other dragon is also dead
-    --                 dynaLord:setLocalVar("physImmune", 2)
-    --                 dynaLord:setLocalVar("magImmune", 2)
-    --             else
-    --                 dynaLord:setLocalVar("magImmune", 1)
-    --             end
-    --         end
-    --     end
-    -- elseif mobName == "Yang" then
-    --     mobVar =  xi.dynamis.nmInfoLookup[mobFamily][mobName][7]
-    --     mobNameFound = xi.dynamis.nmInfoLookup[mobName][1]
-    --     groupIdFound = xi.dynamis.nmInfoLookup[mobName][2]
-    --     groupZoneFound = xi.dynamis.nmInfoLookup[mobName][3]
-    --     onMobDeath = function(mob, player, isKiller) 
-    --         local zone = mob:getZone()
-    --         local ying = GetMobByID(zone:getLocalVar("Ying"))
-    --         local dynaLord = GetMobByID(zone:getLocalVar("MainDynaLord"))
-    --         local dialogYing = 7290
-    --         if isKiller then
-    --             if ying:isAlive() == true then
-    --                 mob:showText(mob, dialogYing)
-    --             else
-    --                 mob:showText(mob, dialogYing + 2)
-    --             end
-    --         end
-
-    --         ying:setLocalVar("yingToD", os.time())
-    --         if dynaLord:getLocalVar("physImmune") == 0 then
-    --             dynaLord:setMod(xi.mod.UDMGMAGIC, 0)
-    --             dynaLord:setMod(xi.mod.UDMGBREATH, 0)
-    --             if dynaLord:getLocalVar("magImmune") == 1 then -- other dragon is also dead
-    --                 dynaLord:setLocalVar("physImmune", 2)
-    --                 dynaLord:setLocalVar("magImmune", 2)
-    --             else
-    --                 dynaLord:setLocalVar("physImmune", 1)
-    --             end
-    --         end
-    --     end
-    -- elseif string.sub(mobName, 1, 9) == "Animated " then -- Animated Weapons
-    --     mobVar =  xi.dynamis.nmInfoLookup[mobFamily][mobName][7]
-    --     mobNameFound = xi.dynamis.nmInfoLookup[mobName][1]
-    --     groupIdFound = xi.dynamis.nmInfoLookup[mobName][2]
-    --     groupZoneFound = xi.dynamis.nmInfoLookup[mobName][3]
-    --     onMobSpawn = function(mob) xi.dynamis.setMegaBossStats(mob) end
-    --     onMobEngaged = function(mob) xi.dynamis.parentOnEngaged(mob, target) end
-    --     onMobFight = function(mob) xi.dynamis.mobOnFight(mob) end
-    --     onMobRoam = function(mob) xi.dynamis.mobOnRoam(mob) end
-    --     onMobRoamAction = function(mob) xi.dynamis.mobOnRoamAction(mob) end
-    --     onMobMagicPrepare = function(mob, target) end
-    --     onMobWeaponSkillPrepare = function(mob, target) end
-    --     onMobWeaponSkill = function( target, mob, skill) end
-    --     onMobDeath = function(mob, player, isKiller) xi.dynamis.megaBossOnDeath(mob, player, mobVar) end
     local mob = zone:insertDynamicEntity({
         objtype = xi.objType.MOB,
         name = mobNameFound,

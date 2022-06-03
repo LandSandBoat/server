@@ -7,6 +7,9 @@ require("scripts/globals/dynamis")
 require("scripts/globals/zone")
 -----------------------------------
 
+xi = xi or {}
+xi.dynamis = xi.dynamis or {}
+
 xi.dynamis.onSpawnApoc = function(mob)
     local zone = mob:getZone()
     xi.dynamis.setMegaBossStats(mob)
