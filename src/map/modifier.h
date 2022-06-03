@@ -165,8 +165,8 @@ enum class Mod
     STRING    = 120,  // String Magic Skill
     WIND      = 121,  // Wind Magic Skill
     BLUE      = 122,  // Blue Magic Skill
-    GEOMANCY  = 1026, // Geomancy Magic Skill
-    HANDBELL  = 1027, // Handbell Magic SKill
+    GEOMANCY  = 123, // Geomancy Magic Skill
+    HANDBELL  = 124, // Handbell Magic SKill
 
     // Synthesis Skills
     FISH      = 127, // Fishing Skill
@@ -316,8 +316,8 @@ enum class Mod
 
     // Monk
     BOOST_EFFECT        = 97,   // Boost power in tenths
-    CHAKRA_MULT         = 123,  // Chakra multiplier increase (from gear)
-    CHAKRA_REMOVAL      = 124,  // Extra statuses removed by Chakra
+    CHAKRA_MULT         = 1026,  // Chakra multiplier increase (from gear)
+    CHAKRA_REMOVAL      = 1027,  // Extra statuses removed by Chakra
     SUBTLE_BLOW         = 289,  // How much TP to reduce.
     COUNTER             = 291,  // Percent chance to counter
     KICK_ATTACK_RATE    = 292,  // Percent chance to kick
