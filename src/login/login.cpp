@@ -82,7 +82,7 @@ int32 do_init(int32 argc, char** argv)
         }
         else if (strcmp(argv[i], "--run_once") == 0)
         { // close the map-server as soon as its done.. for testing [Celest]
-            runflag = 0;
+            gRunFlag = false;
         }
     }
 
