@@ -115,28 +115,15 @@ extern std::unique_ptr<ConsoleService> gConsoleService;
 
 void PrintPacket(char* data, int size)
 {
-    char message[50];
-    memset(&message, 0, 50);
-
-    printf("\n");
+    std::printf("\n");
 
     for (int32 y = 0; y < size; y++)
     {
-        char msgtmp[50];
-        memset(&msgtmp, 0, 50);
-        std::snprintf(msgtmp, sizeof(msgtmp), "%s %02x", message, (uint8)data[y]);
-        strncpy(message, msgtmp, 50);
+        std::printf("%02x ", (uint8)data[y]);
         if (((y + 1) % 16) == 0)
         {
-            message[48] = '\n';
-            fputs(message, stdout);
-            memset(&message, 0, 50);
+            printf("\n");
         }
-    }
-    if (strlen(message) > 0)
-    {
-        message[strlen(message)] = '\n';
-        fputs(message, stdout);
     }
     printf("\n");
 }

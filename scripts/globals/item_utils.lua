@@ -41,3 +41,28 @@ end
 xi.item_utils.skillBookUse = function(target, skillID)
     target:trySkillUp(skillID, target:getMainLvl(), true, true)
 end
+
+xi.item_utils.pickItemRandom = function(target, itemgroup) -- selects an item from a weighted result table
+    -- possible results
+    local items = itemgroup
+
+    -- sum weights
+    local sum = 0
+    for i = 1, #items do
+        sum = sum + items[i][1]
+    end
+
+    -- pick the weighted result
+    local item = 0
+    local pick = math.random(sum)
+    sum = 0
+    for i = 1, #items do
+        sum = sum + items[i][1]
+        if sum >= pick then
+            item = items[i][2]
+            break
+        end
+    end
+
+    return item
+end
