@@ -1,12 +1,14 @@
 -----------------------------------
--- Dynamis Lord Era Module
+-- Xarcabard Era Module
 -----------------------------------
-require("modules/module_utils")
+require("modules/era/lua/dynamis/globals/era_dynamis")
+require("modules/era/lua/dynamis/globals/era_dynamis_spawning")
+require("scripts/globals/dynamis")
 require("scripts/globals/zone")
 -----------------------------------
-local m = Module:new("era_dynamis_lord")
 
 m:addOverride("xi.zones.Dynamis-Xarcabard.mobs.Dynamis_Lord.onMobSpawn", function(mob)
+    mixins = {require("scripts/mixins/job_special"),}
     local dialogDL = 7272
     local zone = mob:getZone()
     xi.dynamis.setMegaBossStats(mob) 
@@ -228,5 +230,3 @@ end)
 
 m:addOverride("xi.zones.Dynamis-Xarcabard.mobs.Dynamis_Lord.onMobRoam", function(mob) xi.dynamis.mobOnRoam(mob) end)
 m:addOverride("xi.zones.Dynamis-Xarcabard.mobs.Dynamis_Lord.onMobRoamAction", function(mob) xi.dynamis.mobOnRoamAction(mob) end)
-
-return m

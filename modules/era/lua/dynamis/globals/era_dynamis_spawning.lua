@@ -534,6 +534,11 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
     local mobName = xi.dynamis.mobList[zoneID][mobIndex].info[2]
     local mobFamily = xi.dynamis.mobList[zoneID][mobIndex].info[3]
     local mainJob = xi.dynamis.mobList[zoneID][mobIndex].info[4]
+    local mobVar =  0
+    local mobNameFound = 0
+    local groupIdFound = 0
+    local groupZoneFound = 0
+    local functionLookup = 0
     xi.dynamis.nmInfoLookup = 
     {
         -- Below use used to lookup Beastmen NMs
@@ -660,7 +665,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
             ["Effigy Shield DRK"] = {"45504c44", 38, 134, 0, nil, nil}, -- EDRK (DRK)
             ["Effigy Shield SAM"] = {"45504c44", 31, 134, 0, nil, nil}, -- ESAM (SAM)
         },
-        ['Yagudo'] =
+        ["Yagudo"] =
         {
             -- Dynamis - Beaucedine
             ["Bhuu Wjato the Firepool"] = {"42687575", 106, 134, 0, nil, nil}, -- Bhuu (BLM)
@@ -812,15 +817,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
             ["onMobMagicPrepare"] = {function(mob) end},
             ["onMobWeaponSkillPrepare"] = {function(mob) end},
             ["onMobWeaponSkill"] = {function(mob) end},
-            ["onMobDeath"] = 
-            {
-                function(mob, player, isKiller)
-                local zoneID = mob:getZoneID()
-                local mobIndex = mob:getZone():getLocalVar(string.format("MobIndex_%s", mob:getID()))
-                local mobName = xi.dynamis.mobList[zoneID][mobIndex].info[2]
-                local mobVar = xi.dynamis.nmInfoLookup[mobFamily][mobName][7]
-                xi.dynamis.mobOnDeath(mob, mobVar) end
-            },
+            ["onMobDeath"] = {function(mob, player, isKiller) xi.dynamis.mobOnDeath(mob) end},
         },
         ["Statue Megaboss"] =
         {
@@ -832,15 +829,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
             ["onMobMagicPrepare"] = {function(mob) end},
             ["onMobWeaponSkillPrepare"] = {function(mob) end},
             ["onMobWeaponSkill"] = {function(mob) end},
-            ["onMobDeath"] = 
-            {
-                function(mob, player, isKiller)
-                local zoneID = mob:getZoneID()
-                local mobIndex = mob:getZone():getLocalVar(string.format("MobIndex_%s", mob:getID()))
-                local mobName = xi.dynamis.mobList[zoneID][mobIndex].info[2]
-                local mobVar = xi.dynamis.nmInfoLookup[mobFamily][mobName][7]
-                xi.dynamis.megabossOnDeath(mob, player, mobVar) end
-            },
+            ["onMobDeath"] = {function(mob, player, isKiller) xi.dynamis.megaBossOnDeath(mob, player) end},
         },
         ["Angra Mainyu"] =
         {
@@ -852,20 +841,20 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
             ["onMobMagicPrepare"] = {function(mob) xi.dynamis.onMagicPrepAngra(mob) end},
             ["onMobWeaponSkillPrepare"] = {function(mob) end},
             ["onMobWeaponSkill"] = {function(mob) end},
-            ["onMobDeath"] = {function(mob, player, isKiller) xi.dynamis.megaBossOnDeath (mob, player, mobVar) end},
+            ["onMobDeath"] = {function(mob, player, isKiller) xi.dynamis.megaBossOnDeath(mob, player) end},
         },
-        -- ["Apocalyptic Beast"] =
-        -- {
-        --     ["onMobSpawn"] = {function(mob) xi.dynamis.onSpawnApoc(mob) end},
-        --     ["onMobEngaged"] = {function(mob, target)  xi.dynamis.onEngagedApoc(mob, target) end},
-        --     ["onMobFight"] = {function(mob) xi.dynamis.onFightApoc(mob, target) end},
-        --     ["onMobRoam"] = {function(mob) end},
-        --     ["onMobRoamAction"] = {function(mob) end},
-        --     ["onMobMagicPrepare"] = {function(mob) end},
-        --     ["onMobWeaponSkillPrepare"] = {function(mob, target) xi.dynamis.onWeaponskillPrepApoc(mob, target) end},
-        --     ["onMobWeaponSkill"] = {function(mob) end},
-        --     ["onMobDeath"] = {function(mob) xi.dynamis.onMobDeathAntaeus(mob, player, isKiller) end},
-        -- },
+        ["Apocalyptic Beast"] =
+        {
+            ["onMobSpawn"] = {function(mob) xi.dynamis.onSpawnApoc(mob) end},
+            ["onMobEngaged"] = {function(mob, target)  xi.dynamis.onEngagedApoc(mob, target) end},
+            ["onMobFight"] = {function(mob) xi.dynamis.onFightApoc(mob, target) end},
+            ["onMobRoam"] = {function(mob) end},
+            ["onMobRoamAction"] = {function(mob) end},
+            ["onMobMagicPrepare"] = {function(mob) end},
+            ["onMobWeaponSkillPrepare"] = {function(mob, target) xi.dynamis.onWeaponskillPrepApoc(mob, target) end},
+            ["onMobWeaponSkill"] = {function(mob) end},
+            ["onMobDeath"] = {function(mob) xi.dynamis.onDeathApoc(mob, player, isKiller) end},
+        },
         ["Antaeus"] =
         {
             ["onMobSpawn"] = {function(mob) xi.dynamis.onSpawnAntaeus(mob) end},
@@ -878,9 +867,80 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
             ["onMobWeaponSkill"] = {function(mob) end},
             ["onMobDeath"] = {function(mob, player, isKiller) xi.dynamis.onMobDeathAntaeus(mob, player, isKiller) end},
         },
+        ["Cirrate Christelle"] =
+        {
+            ["onMobSpawn"] = {function(mob) xi.dynamis.onSpawnCirrate(mob) end},
+            ["onMobEngaged"] = {function(mob, target) xi.dynamis.onEngagedCirrate(mob, target) end},
+            ["onMobFight"] = {function(mob, target) xi.dynamis.onFightCirrate(mob, target) end},
+            ["onMobRoam"] = {function(mob) end},
+            ["onMobRoamAction"] = {function(mob) end},
+            ["onMobMagicPrepare"] = {function(mob) end},
+            ["onMobWeaponSkillPrepare"] = {function(mob) xi.dynamis.onWeaponskillPrepCirrate(mob) end},
+            ["onMobWeaponSkill"] = {function(mob) end},
+            ["onMobDeath"] = {function(mob, player, isKiller) xi.dynamis.megaBossOnDeath(mob, player) end},
+        },
+        ["Fairy Ring"] =
+        {
+            ["onMobSpawn"] = {function(mob) xi.dynamis.onSpawnFairy(mob) end},
+            ["onMobEngaged"] = {function(mob, target) end},
+            ["onMobFight"] = {function(mob, target) end},
+            ["onMobRoam"] = {function(mob) end},
+            ["onMobRoamAction"] = {function(mob) end},
+            ["onMobMagicPrepare"] = {function(mob) end},
+            ["onMobWeaponSkillPrepare"] = {function(mob) end},
+            ["onMobWeaponSkill"] = {function(mob) end},
+            ["onMobDeath"] = {function(mob, player, isKiller) xi.dynamis.mobOnDeath(mob) end},
+        },
+        ["Nightmare Morbol"] =
+        {
+            ["onMobSpawn"] = {function(mob) xi.dynamis.setNMStats(mob) end},
+            ["onMobEngaged"] = {function(mob, target) end},
+            ["onMobFight"] = {function(mob, target) xi.dynamis.onFightMorbol(mob, target) end},
+            ["onMobRoam"] = {function(mob) end},
+            ["onMobRoamAction"] = {function(mob) end},
+            ["onMobMagicPrepare"] = {function(mob) end},
+            ["onMobWeaponSkillPrepare"] = {function(mob) end},
+            ["onMobWeaponSkill"] = {function(mob) end},
+            ["onMobDeath"] = {function(mob, player, isKiller) xi.dynamis.mobOnDeath(mob) end},
+        },
+        ["Dynamis Lord"] =
+        {
+            ["onMobSpawn"] = {function(mob) xi.dynamis.onSpawnApoc(mob) end},
+            ["onMobEngaged"] = {function(mob, target)  xi.dynamis.onEngagedApoc(mob, target) end},
+            ["onMobFight"] = {function(mob) xi.dynamis.onFightApoc(mob, target) end},
+            ["onMobRoam"] = {function(mob) end},
+            ["onMobRoamAction"] = {function(mob) end},
+            ["onMobMagicPrepare"] = {function(mob) end},
+            ["onMobWeaponSkillPrepare"] = {function(mob, target) xi.dynamis.onWeaponskillPrepApoc(mob, target) end},
+            ["onMobWeaponSkill"] = {function(mob) end},
+            ["onMobDeath"] = {function(mob) xi.dynamis.onDeathApoc(mob, player, isKiller) end},
+        },
+        ["No Auto Attack"] =
+        {
+            ["onMobSpawn"] = {function(mob) xi.dynamis.onSpawnNoAuto(mob) end},
+            ["onMobEngaged"] = {function(mob, target) end},
+            ["onMobFight"] = {function(mob, target) end},
+            ["onMobRoam"] = {function(mob) end},
+            ["onMobRoamAction"] = {function(mob) end},
+            ["onMobMagicPrepare"] = {function(mob) end},
+            ["onMobWeaponSkillPrepare"] = {function(mob) end},
+            ["onMobWeaponSkill"] = {function(mob) end},
+            ["onMobDeath"] = {function(mob, player, isKiller) xi.dynamis.mobOnDeath(mob) end},
+        },
+        ["Enabled Auto Attack"] =
+        {
+            ["onMobSpawn"] = {function(mob) xi.dynamis.setNMStats(mob) end},
+            ["onMobEngaged"] = {function(mob, target) end},
+            ["onMobFight"] = {function(mob, target) end},
+            ["onMobRoam"] = {function(mob) end},
+            ["onMobRoamAction"] = {function(mob) end},
+            ["onMobMagicPrepare"] = {function(mob) end},
+            ["onMobWeaponSkillPrepare"] = {function(mob) end},
+            ["onMobWeaponSkill"] = {function(mob) end},
+            ["onMobDeath"] = {function(mob, player, isKiller) xi.dynamis.mobOnDeath(mob) end},
+        },
     }
     if mobFamily == "Goblin" or mobFamily == "Orc" or mobFamily == "Quadav" or mobFamily == "Yagudo" or mobFamily == "Kindred" or mobFamily == "Hydra" then -- Used for Beastmen NMs to Spawn in Parallel to Non-Standards
-        mobVar =  xi.dynamis.nmInfoLookup[mobFamily][mobName][7]
         mobNameFound = xi.dynamis.nmInfoLookup[mobFamily][mobName][1]
         groupIdFound = xi.dynamis.nmInfoLookup[mobFamily][mobName][2]
         groupZoneFound = xi.dynamis.nmInfoLookup[mobFamily][mobName][3]
@@ -891,62 +951,23 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         groupIdFound = xi.dynamis.nmInfoLookup[mobName][2]
         groupZoneFound = xi.dynamis.nmInfoLookup[mobName][3]
         functionLookup = "Statue Megaboss"
-    elseif mobName == "Angra Mainyu" then -- Dynamis Beaucedine Megaboss
-        mobVar =  xi.dynamis.nmInfoLookup[mobFamily][mobName][7]
+    elseif mobName == ("Stihi" or "Vishap" or "Jurik" or "Barong" or "Tarasca" or "Alklha" or "Basillic" or "Aitvaras" 
+                       or "Koschei" or "Stollenwurm" or "Stcemqestcint" or "Nant'ina") then
         mobNameFound = xi.dynamis.nmInfoLookup[mobName][1]
         groupIdFound = xi.dynamis.nmInfoLookup[mobName][2]
         groupZoneFound = xi.dynamis.nmInfoLookup[mobName][3]
-        functionLookup = "Angra Mainyu"
-    -- elseif mobName == "Apocalyptic Beast" then -- Dynamis Buburimu Megaboss
-    --     mobVar =  xi.dynamis.nmInfoLookup[mobFamily][mobName][7]
-    --     mobNameFound = xi.dynamis.nmInfoLookup[mobName][1]
-    --     groupIdFound = xi.dynamis.nmInfoLookup[mobName][2]
-    --     groupZoneFound = xi.dynamis.nmInfoLookup[mobName][3]
-    --     onMobDeath = function(mob, player, isKiller)
-    --         xi.dynamis.megaBossOnDeath(mob, player, isKiller)
-    --         if GetMobByID(zone:getLocalVar("Aitvaras")):isAlive() then
-    --             DespawnMob(zone:getLocalVar("Aitvaras"))
-    --         end
-    --         if GetMobByID(zone:getLocalVar("Alklha")):isAlive() then
-    --             DespawnMob(zone:getLocalVar("Alklha"))
-    --         end
-    --         if GetMobByID(zone:getLocalVar("Barong")):isAlive() then
-    --             DespawnMob(zone:getLocalVar("Barong"))
-    --         end
-    --         if GetMobByID(zone:getLocalVar("Basillic")):isAlive() then
-    --             DespawnMob(zone:getLocalVar("Basillic"))
-    --         end
-    --         if GetMobByID(zone:getLocalVar("Jurik")):isAlive() then
-    --             DespawnMob(zone:getLocalVar("Jurik"))
-    --         end
-    --         if GetMobByID(zone:getLocalVar("Koschei")):isAlive() then
-    --             DespawnMob(zone:getLocalVar("Koschei"))
-    --         end
-    --         if GetMobByID(zone:getLocalVar("Stihi")):isAlive() then
-    --             DespawnMob(zone:getLocalVar("Stihi"))
-    --         end
-    --         if GetMobByID(zone:getLocalVar("Stollenwurm")):isAlive() then
-    --             DespawnMob(zone:getLocalVar("Stollenwurm"))
-    --         end
-    --         if GetMobByID(zone:getLocalVar("Tarasca")):isAlive() then
-    --             DespawnMob(zone:getLocalVar("Tarasca"))
-    --         end
-    --         if GetMobByID(zone:getLocalVar("Vishap")):isAlive() then
-    --             DespawnMob(zone:getLocalVar("Vishap"))
-    --         end
-    --     end
-    -- elseif mobName == "Antaeus" then -- Dynamis - Qufim Megaboss
-    --     mobVar =  xi.dynamis.nmInfoLookup[mobFamily][mobName][7]
-    --     mobNameFound = xi.dynamis.nmInfoLookup[mobName][1]
-    --     groupIdFound = xi.dynamis.nmInfoLookup[mobName][2]
-    --     groupZoneFound = xi.dynamis.nmInfoLookup[mobName][3]
-    --     
-    -- elseif mobName == "Cirrate Christelle" then
-    --     mobVar =  xi.dynamis.nmInfoLookup[mobFamily][mobName][7]
-    --     mobNameFound = xi.dynamis.nmInfoLookup[mobName][1]
-    --     groupIdFound = xi.dynamis.nmInfoLookup[mobName][2]
-    --     groupZoneFound = xi.dynamis.nmInfoLookup[mobName][3]
-    --     onMobDeath = function(mob, player, isKiller) xi.dynamis.megaBossOnDeath(mob, player, mobVar) end
+        functionLookup = "No Auto Attack"
+    elseif mobName == ("Suttung" or "Stringes" or "Scolopendra") then
+        mobNameFound = xi.dynamis.nmInfoLookup[mobName][1]
+        groupIdFound = xi.dynamis.nmInfoLookup[mobName][2]
+        groupZoneFound = xi.dynamis.nmInfoLookup[mobName][3]
+        functionLookup = "Enabled Auto Attack"
+    else
+        mobNameFound = xi.dynamis.nmInfoLookup[mobName][1]
+        groupIdFound = xi.dynamis.nmInfoLookup[mobName][2]
+        groupZoneFound = xi.dynamis.nmInfoLookup[mobName][3]
+        functionLookup = mobName
+    end
     -- elseif mobName == "Dynamis Lord" then
     --     mobVar =  xi.dynamis.nmInfoLookup[mobFamily][mobName][7]
     --     mobNameFound = xi.dynamis.nmInfoLookup[mobName][1]
@@ -963,46 +984,6 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
     --         end
     --         zone:setLocalVar("MainDynaLord", mob:getID())
     --     end
-    -- elseif mobName == ("Fairy Ring" or "Nantina" or "Dragontrap" or "Alklha" or "Stihi" or "Basilic" or "Jurik" or "Barong" or 
-    --                    "Tarasca" or "Stollenwurm" or "Koschei" or "Aitvaras" or "Vishap") then -- Dynamis Zone NMs No Auto Attack
-    --     mobVar =  xi.dynamis.nmInfoLookup[mobFamily][mobName][7]
-    --     mobNameFound = xi.dynamis.nmInfoLookup[mobName][1]
-    --     groupIdFound = xi.dynamis.nmInfoLookup[mobName][2]
-    --     groupZoneFound = xi.dynamis.nmInfoLookup[mobName][3]
-    --     onMobSpawn = function(mob) xi.dynamis.setMegaBossStats(mob) 
-    --         local zone = mob:getZone()
-    --         zone:setLocalVar(mobVar, mob:getID())
-    --         xi.dynamis.setNMStats(mob)
-    --         mob:addMod(xi.mod.REGAIN, 1250)
-    --         mob:SetAutoAttackEnabled(false)
-    --     end
-    --     onMobEngaged = function(mob) xi.dynamis.parentOnEngaged(mob, target) end
-    --     onMobFight = function(mob) xi.dynamis.mobOnFight(mob) end
-    --     onMobRoam = function(mob) xi.dynamis.mobOnRoam(mob) end
-    --     onMobRoamAction = function(mob) xi.dynamis.mobOnRoamAction(mob) end
-    --     onMobMagicPrepare = function(mob, target) end
-    --     onMobWeaponSkillPrepare = function(mob, target) end
-    --     onMobWeaponSkill = function( target, mob, skill) end
-    --     onMobDeath = function(mob, player, isKiller) xi.dynamis.megaBossOnDeath(mob, player, mobVar) end
-    -- elseif mobName == ("Scolopendra" or "Suttung" or "Stringes" or "Fire Elemental" or "Water Elemental" or "Ice Elemental" or "Lightning Elemental" or 
-    --                    "Earth Elemental" or "Air Elemental" or "Light Elemental" or "Dark Elemental" or "Vanguard Dragon") then -- Dynamis Zone NMs with Auto Attack
-    --     mobVar =  xi.dynamis.nmInfoLookup[mobFamily][mobName][7]
-    --     mobNameFound = xi.dynamis.nmInfoLookup[mobName][1]
-    --     groupIdFound = xi.dynamis.nmInfoLookup[mobName][2]
-    --     groupZoneFound = xi.dynamis.nmInfoLookup[mobName][3]
-    --     onMobSpawn = function(mob) 
-    --         local zone = mob:getZone()
-    --         zone:setLocalVar(mobVar, mob:getID())
-    --         xi.dynamis.setNMStats(mob)
-    --     end
-    --     onMobEngaged = function(mob) xi.dynamis.parentOnEngaged(mob, target) end
-    --     onMobFight = function(mob) xi.dynamis.mobOnFight(mob) end
-    --     onMobRoam = function(mob) xi.dynamis.mobOnRoam(mob) end
-    --     onMobRoamAction = function(mob) xi.dynamis.mobOnRoamAction(mob) end
-    --     onMobMagicPrepare = function(mob, target) end
-    --     onMobWeaponSkillPrepare = function(mob, target) end
-    --     onMobWeaponSkill = function( target, mob, skill) end
-    --     onMobDeath = function(mob, player, isKiller) xi.dynamis.megaBossOnDeath(mob, player, mobVar) end
     -- elseif mobName == "Ying" then
     --     mobVar =  xi.dynamis.nmInfoLookup[mobFamily][mobName][7]
     --     mobNameFound = xi.dynamis.nmInfoLookup[mobName][1]
@@ -1077,7 +1058,6 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
     --     onMobWeaponSkillPrepare = function(mob, target) end
     --     onMobWeaponSkill = function( target, mob, skill) end
     --     onMobDeath = function(mob, player, isKiller) xi.dynamis.megaBossOnDeath(mob, player, mobVar) end
-    end
     local mob = zone:insertDynamicEntity({
         objtype = xi.objType.MOB,
         name = mobNameFound,
@@ -1119,10 +1099,12 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
     end
     if oMobIndex ~= nil then
         mob:setLocalVar("Parent", oMobIndex)
+        mob:setLocalVar("ParentID", oMob:getID())
         oMob:setLocalVar(string.format("ChildID_%s", mobIndex), mob:getID())
     end
     zone:setLocalVar(string.format("MobIndex_%s", mob:getID()), mobIndex)
     mob:setLocalVar(string.format("MobIndex_%s", mob:getID()), mobIndex)
+    zone:setLocalVar(string.format("%s", mobName), mob:getID())
     if forceLink == true then
         mob:updateEnmity(target)
     end
@@ -1598,9 +1580,12 @@ end
 --            Dynamis Mob Death           --
 --------------------------------------------
 
-xi.dynamis.mobOnDeath = function (mob, mobVar)
+xi.dynamis.mobOnDeath = function (mob)
     local zone = mob:getZone()
     local zoneID = mob:getZoneID()
+    local mobIndex = mob:getZone():getLocalVar(string.format("MobIndex_%s", mob:getID()))
+    local mobName = xi.dynamis.mobList[zoneID][mobIndex].info[2]
+    local mobVar = xi.dynamis.nmInfoLookup[mobFamily][mobName][7]
     local mobIndex = zone:getLocalVar(string.format("MobIndex_%s", mob:getID()))
     if mob:getLocalVar("dynamisMobOnDeathTriggered") == 1 then return -- Don't trigger more than once.
     else -- Stops execution of code below if the above is true.
@@ -1610,8 +1595,11 @@ xi.dynamis.mobOnDeath = function (mob, mobVar)
     end
 end
 
-m:addOverride("xi.dynamis.megaBossOnDeath", function(mob, player, mobVar)
+m:addOverride("xi.dynamis.megaBossOnDeath", function(mob, player)
     local zoneID = mob:getZoneID()
+    local mobIndex = mob:getZone():getLocalVar(string.format("MobIndex_%s", mob:getID()))
+    local mobName = xi.dynamis.mobList[zoneID][mobIndex].info[2]
+    local mobVar = xi.dynamis.nmInfoLookup[mobFamily][mobName][7]
     if mob:getLocalVar("GaveTimeExtension") ~= 1 then -- Ensure we don't give more than 1 time extension.
         xi.dynamis.mobOnDeath(mob,mobVar) -- Process time extension and wave spawning
         local winQM = GetNPCByID(xi.dynamis.dynaInfoEra[zoneID].winQM) -- Set winQM

@@ -1,5 +1,5 @@
 -----------------------------------
---  Buburimu Dwagons Era Module  --
+--  Buburimu Mobs Era Module  --
 -----------------------------------
 require("modules/era/lua/dynamis/globals/era_dynamis")
 require("modules/era/lua/dynamis/globals/era_dynamis_spawning")
@@ -43,6 +43,7 @@ xi.dynamis.onSpawnApoc = function(mob)
         xi.jsa.CALL_WYVERN,
         xi.jsa.ASTRAL_FLOW,
     }
+
     xi.dynamis.apocLockouts =
     {
         ["Stihi"] = 642, -- Flame Breath
@@ -70,6 +71,12 @@ xi.dynamis.onSpawnApoc = function(mob)
         650, -- Thornsong
         651, -- Lodesong
     }
+end
+
+xi.dynamis.onSpawnNoAuto = function(mob)
+    xi.dynamis.setNMStats(mob)
+    mob:SetAutoAttackEnabled(false)
+    mob:addMod(xi.mod.REGAIN, 1250)
 end
 
 xi.dynamis.onEngagedApoc = function(mob, target)
@@ -145,7 +152,6 @@ xi.dynamis.onFightApoc = function(mob, target)
 end
 
 xi.dynamis.onWeaponskillPrepApoc = function(mob, target)
-
     for dwagon, skill in pairs(xi.dynamis.apocWeaponskills) do -- Locks out specific abilities
         if not GetMobByID(zone:getLocalVar(dwagon)):isAlive() then -- If target is not alive then clean
             table.remove(xi.dynamis.apocWeaponskills, skill) -- Clean Weaponskills Table For Lockouts
@@ -162,7 +168,6 @@ xi.dynamis.onWeaponskillPrepApoc = function(mob, target)
 end
 
 xi.dynamis.onDeathApoc = function(mob, player, isKiller)
-
     for dwagon, skill in pairs(xi.dynamis.apocLockouts) do -- Check a cleaned table to see what is alive.
         if GetMobByID(zone:getLocalVar(dwagon):isAlive()) then -- Second alive check to be sure.
             DespawnMob(zone:getLocalVar(dwagon)) -- Despawn extra dwagon.
@@ -171,3 +176,5 @@ xi.dynamis.onDeathApoc = function(mob, player, isKiller)
 
     xi.dynamis.megaBossOnDeath(mob, player, isKiller)
 end
+
+
