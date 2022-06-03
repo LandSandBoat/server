@@ -7,8 +7,6 @@
 require("scripts/globals/mobskills")
 require("scripts/globals/status")
 require("scripts/settings/main")
-local ID = require("scripts/zones/Sealions_Den/IDs")
-local ID2 = require("scripts/zones/Apollyon/IDs")
 ---------------------------------------------
 local mobskill_object = {}
 
