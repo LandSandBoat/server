@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2022 LandSandBoat Dev Teams
@@ -19,6 +19,9 @@
 ===========================================================================
 */
 
+#ifndef _CONSOLE_SERVICE_H_
+#define _CONSOLE_SERVICE_H_
+
 #pragma once
 
 #include <any>
@@ -37,6 +40,8 @@
 #else
 #include <unistd.h>
 #endif
+
+extern std::atomic<bool> gRunFlag;
 
 class ConsoleService
 {
@@ -74,7 +79,7 @@ public:
         []()
         {
             fmt::print("> Goodbye!\n");
-            std::terminate();
+            gRunFlag = false;
         });
 
         bool attached = isatty(0);
@@ -87,7 +92,7 @@ public:
                 auto lastInputTime = server_clock::now();
 
                 // TODO: condition_variable
-                while (m_consoleThreadRun)
+                while (gRunFlag)
                 {
                     if ((server_clock::now() - lastInputTime) > 1s)
                     {
@@ -148,3 +153,5 @@ private:
 
     std::unordered_map<std::string, ConsoleCommand> m_commands;
 };
+
+#endif // _CONSOLE_SERVICE_H_

@@ -46,7 +46,8 @@
 #endif
 #endif
 
-int    runflag = 1;
+std::atomic<bool> gRunFlag = true;
+
 int    arg_c   = 0;
 char** arg_v   = nullptr;
 
@@ -157,17 +158,11 @@ static void dump_backtrace()
 
 static void sig_proc(int sn)
 {
-    static int is_called = 0;
-
     switch (sn)
     {
         case SIGINT:
         case SIGTERM:
-            if (++is_called > 3)
-            {
-                do_final(EXIT_SUCCESS);
-            }
-            runflag = 0;
+            gRunFlag = false;
             break;
         case SIGABRT:
         case SIGSEGV:
@@ -277,7 +272,7 @@ int main(int argc, char** argv)
     { // Main runtime cycle
         duration next;
 
-        while (runflag)
+        while (gRunFlag)
         {
             next = CTaskMgr::getInstance()->DoTimer(server_clock::now());
             do_sockets(&rfd, next);
@@ -293,8 +288,6 @@ int main(int argc, char** argv)
 
     do_final(EXIT_SUCCESS);
 
-#if defined(_WIN32) && defined(_DEBUG)
     return 0;
-#endif
 }
 #endif // DEFINE_OWN_MAIN
