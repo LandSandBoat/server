@@ -1913,8 +1913,8 @@ INSERT INTO `item_mods` VALUES (10691,1,20);
 INSERT INTO `item_mods` VALUES (10691,3,4);
 INSERT INTO `item_mods` VALUES (10691,23,21);
 INSERT INTO `item_mods` VALUES (10691,25,21);
-INSERT INTO `item_mods` VALUES (10691,123,8); -- Enhances "Chakra" effect III - Increases VIT mult by 0.8
-INSERT INTO `item_mods` VALUES (10691,124,6); -- Chakra removes Disease and Plague
+INSERT INTO `item_mods` VALUES (10691,1026,8); -- Enhances "Chakra" effect III - Increases VIT mult by 0.8
+INSERT INTO `item_mods` VALUES (10691,1027,6); -- Chakra removes Disease and Plague
 INSERT INTO `item_mods` VALUES (10691,289,6);
 INSERT INTO `item_mods` VALUES (10692,1,21);
 INSERT INTO `item_mods` VALUES (10692,2,28);
@@ -3501,8 +3501,8 @@ INSERT INTO `item_mods` VALUES (11124,1,54);
 INSERT INTO `item_mods` VALUES (11124,23,15);
 INSERT INTO `item_mods` VALUES (11124,288,5);
 INSERT INTO `item_mods` VALUES (11124,384,700);
-INSERT INTO `item_mods` VALUES (11124,903,50);	-- "Fencer" +1 Adds 50 TP BONUS
-INSERT INTO `item_mods` VALUES (11124,904,1);	-- "Fencer" +1 Adds 1% Crit Rate
+INSERT INTO `item_mods` VALUES (11124,903,50);  -- "Fencer" +1 Adds 50 TP BONUS
+INSERT INTO `item_mods` VALUES (11124,904,1);   -- "Fencer" +1 Adds 1% Crit Rate
 INSERT INTO `item_mods` VALUES (11125,1,49);
 INSERT INTO `item_mods` VALUES (11125,23,10);
 INSERT INTO `item_mods` VALUES (11125,25,10);
@@ -5580,7 +5580,7 @@ INSERT INTO `item_mods` VALUES (11699,24,4);
 INSERT INTO `item_mods` VALUES (11699,26,4);
 INSERT INTO `item_mods` VALUES (11700,5,45);      -- gifted_earring MP+45
 INSERT INTO `item_mods` VALUES (11700,296,3);     -- Conserve MP+3
-INSERT INTO `item_mods` VALUES (11700,913,3);	  -- "Blood Boon"+3
+INSERT INTO `item_mods` VALUES (11700,913,3);     -- "Blood Boon"+3
 INSERT INTO `item_mods` VALUES (11701,5,10);
 INSERT INTO `item_mods` VALUES (11701,14,3);
 INSERT INTO `item_mods` VALUES (11702,23,10);
@@ -8722,8 +8722,8 @@ INSERT INTO `item_mods` VALUES (12639,1,41);
 INSERT INTO `item_mods` VALUES (12639,2,20);
 INSERT INTO `item_mods` VALUES (12639,10,3);
 INSERT INTO `item_mods` VALUES (12639,25,5);
-INSERT INTO `item_mods` VALUES (12639,123,10); -- Enhances Chakra Effect - Increases VIT mult by 1.0
-INSERT INTO `item_mods` VALUES (12639,124,1);  -- Chakra removes Paralysis
+INSERT INTO `item_mods` VALUES (12639,1026,10); -- Enhances Chakra Effect - Increases VIT mult by 1.0
+INSERT INTO `item_mods` VALUES (12639,1027,1);  -- Chakra removes Paralysis
 INSERT INTO `item_mods` VALUES (12640,1,40);
 INSERT INTO `item_mods` VALUES (12640,5,15);
 INSERT INTO `item_mods` VALUES (12640,27,-4);
@@ -13992,8 +13992,8 @@ INSERT INTO `item_mods` VALUES (14474,2,20);
 INSERT INTO `item_mods` VALUES (14474,8,6);
 INSERT INTO `item_mods` VALUES (14474,10,6);
 INSERT INTO `item_mods` VALUES (14474,25,5);
-INSERT INTO `item_mods` VALUES (14474,123,10); -- Enhances Chakra Effect - Increases VIT mult by 1.0
-INSERT INTO `item_mods` VALUES (14474,124,1);  -- Chakra removes Paralysis
+INSERT INTO `item_mods` VALUES (14474,1026,10); -- Enhances Chakra Effect - Increases VIT mult by 1.0
+INSERT INTO `item_mods` VALUES (14474,1027,1);  -- Chakra removes Paralysis
 INSERT INTO `item_mods` VALUES (14475,1,40);
 INSERT INTO `item_mods` VALUES (14475,5,35);
 INSERT INTO `item_mods` VALUES (14475,27,-4);
@@ -15367,8 +15367,8 @@ INSERT INTO `item_mods` VALUES (14909,27,2);
 INSERT INTO `item_mods` VALUES (14910,1,16);
 INSERT INTO `item_mods` VALUES (14910,3,3);
 INSERT INTO `item_mods` VALUES (14910,23,18);
-INSERT INTO `item_mods` VALUES (14910,123,6); -- Enhances "Chakra" effect II - Increases VIT mult by 0.6
-INSERT INTO `item_mods` VALUES (14910,124,2); -- Chakra removes Disease
+INSERT INTO `item_mods` VALUES (14910,1026,6); -- Enhances "Chakra" effect II - Increases VIT mult by 0.6
+INSERT INTO `item_mods` VALUES (14910,1027,2); -- Chakra removes Disease
 INSERT INTO `item_mods` VALUES (14910,289,5);
 INSERT INTO `item_mods` VALUES (14911,1,17);
 INSERT INTO `item_mods` VALUES (14911,2,20);
@@ -16136,8 +16136,8 @@ INSERT INTO `item_mods` VALUES (15102,27,2);
 INSERT INTO `item_mods` VALUES (15103,1,15);
 INSERT INTO `item_mods` VALUES (15103,3,3);
 INSERT INTO `item_mods` VALUES (15103,23,16);
-INSERT INTO `item_mods` VALUES (15103,123,6); -- Enhances "Chakra" effect II - Increases VIT mult by 0.6
-INSERT INTO `item_mods` VALUES (15103,124,2); -- Chakra removes Disease
+INSERT INTO `item_mods` VALUES (15103,1026,6); -- Enhances "Chakra" effect II - Increases VIT mult by 0.6
+INSERT INTO `item_mods` VALUES (15103,1027,2); -- Chakra removes Disease
 INSERT INTO `item_mods` VALUES (15103,289,4);
 INSERT INTO `item_mods` VALUES (15104,1,16);
 INSERT INTO `item_mods` VALUES (15104,5,20);
@@ -19393,8 +19393,8 @@ INSERT INTO `item_mods` VALUES (16185,5,5);
 INSERT INTO `item_mods` VALUES (16186,1,2);
 INSERT INTO `item_mods` VALUES (16186,7,15);
 INSERT INTO `item_mods` VALUES (16186,13,2);
-INSERT INTO `item_mods` VALUES (16187,1,15);	-- Adoubeur's Pavise: DEF:15
-INSERT INTO `item_mods` VALUES (16187,485,10); 	-- "Shield Mastery"+1
+INSERT INTO `item_mods` VALUES (16187,1,15);    -- Adoubeur's Pavise: DEF:15
+INSERT INTO `item_mods` VALUES (16187,485,10);  -- "Shield Mastery"+1
 INSERT INTO `item_mods` VALUES (16188,1,1);
 INSERT INTO `item_mods` VALUES (16189,1,31);
 INSERT INTO `item_mods` VALUES (16190,1,22);
@@ -23167,9 +23167,9 @@ INSERT INTO `item_mods` VALUES (18524,8,10);
 INSERT INTO `item_mods` VALUES (18525,8,15);
 INSERT INTO `item_mods` VALUES (18531,24,4);
 INSERT INTO `item_mods` VALUES (18533,25,7);      -- Magnus Axe: Accuracy+7
-INSERT INTO `item_mods` VALUES (18534,25,5);	  -- Charmer's Merlin: Accuracy+5
-INSERT INTO `item_mods` VALUES (18534,903,50);	  -- "Fencer" +1 50 TP Bonus
-INSERT INTO `item_mods` VALUES (18534,904,1);	  -- "Fencer" +1 1% Crit Rate
+INSERT INTO `item_mods` VALUES (18534,25,5);      -- Charmer's Merlin: Accuracy+5
+INSERT INTO `item_mods` VALUES (18534,903,50);    -- "Fencer" +1 50 TP Bonus
+INSERT INTO `item_mods` VALUES (18534,904,1);     -- "Fencer" +1 1% Crit Rate
 INSERT INTO `item_mods` VALUES (18535,73,4);
 INSERT INTO `item_mods` VALUES (18535,104,5);
 INSERT INTO `item_mods` VALUES (18535,105,5);
@@ -23976,7 +23976,7 @@ INSERT INTO `item_mods` VALUES (18887,13,15);     -- Dukkha: MND+15
 INSERT INTO `item_mods` VALUES (18888,12,10);     -- Ankylosis Wand: INT+10
 INSERT INTO `item_mods` VALUES (18891,5,15);      -- Hannibal's Sword: MP+15
 INSERT INTO `item_mods` VALUES (18893,25,7);      -- Magnus Sword: Accuracy+7
-INSERT INTO `item_mods` VALUES (18894,903,50);	  -- Accoladde Sword: "Fencer"+1
+INSERT INTO `item_mods` VALUES (18894,903,50);    -- Accoladde Sword: "Fencer"+1
 INSERT INTO `item_mods` VALUES (18894,904,1);
 INSERT INTO `item_mods` VALUES (18895,25,5);
 INSERT INTO `item_mods` VALUES (18895,288,3);
@@ -26021,7 +26021,7 @@ INSERT INTO `item_mods` VALUES (20717,68,13);     -- Evasion +13
 INSERT INTO `item_mods` VALUES (20717,113,10);    -- Enhancing magic skill +10
 INSERT INTO `item_mods` VALUES (20717,114,10);    -- Enfeebling magic skill +10
 INSERT INTO `item_mods` VALUES (20717,311,90);    -- Magic Damage +90
-INSERT INTO `item_mods` VALUES (20717,902,30);	  -- "Occult Acumen" +30
+INSERT INTO `item_mods` VALUES (20717,902,30);    -- "Occult Acumen" +30
 INSERT INTO `item_mods` VALUES (20721,2,50);
 INSERT INTO `item_mods` VALUES (20721,8,10);
 INSERT INTO `item_mods` VALUES (20721,9,10);
@@ -27086,8 +27086,8 @@ INSERT INTO `item_mods` VALUES (21371,25,5);
 INSERT INTO `item_mods` VALUES (21371,73,3);
 INSERT INTO `item_mods` VALUES (21371,302,2);
 INSERT INTO `item_mods` VALUES (21371,384,900);
-INSERT INTO `item_mods` VALUES (21372,1027,18);    -- Dunna: Handbell Skill+18
-INSERT INTO `item_mods` VALUES (21372,961,5);      -- Dunna: Geomancy +5
+INSERT INTO `item_mods` VALUES (21372,124,18);    -- Dunna: Handbell Skill +18
+INSERT INTO `item_mods` VALUES (21372,961,5);     -- Dunna: Geomancy +5
 INSERT INTO `item_mods` VALUES (21373,5,15);
 INSERT INTO `item_mods` VALUES (21373,163,-200);
 INSERT INTO `item_mods` VALUES (21374,27,2);
@@ -27162,11 +27162,11 @@ INSERT INTO `item_mods` VALUES (21428,23,10);
 INSERT INTO `item_mods` VALUES (21428,25,10);
 INSERT INTO `item_mods` VALUES (21429,30,5);
 INSERT INTO `item_mods` VALUES (21429,114,5);
-INSERT INTO `item_mods` VALUES (21460,5,5);        -- Matre bell:  Geomancy +5
-INSERT INTO `item_mods` VALUES (21461,5,30);       -- Filiae Bell: MP+30
-INSERT INTO `item_mods` VALUES (21461,1027,15);    -- Filiae Bell: Handbell Skill+15
-INSERT INTO `item_mods` VALUES (21462,961,3);      -- Eminent bell: Geomancy +3
-INSERT INTO `item_mods` VALUES (21463,961,5);      -- Nepote bell: Geomancy +5
+INSERT INTO `item_mods` VALUES (21460,5,5);       -- Matre bell:  Geomancy +5
+INSERT INTO `item_mods` VALUES (21461,5,30);      -- Filiae Bell: MP+30
+INSERT INTO `item_mods` VALUES (21461,124,15);    -- Filiae Bell: Handbell Skill +15
+INSERT INTO `item_mods` VALUES (21462,961,3);     -- Eminent bell: Geomancy +3
+INSERT INTO `item_mods` VALUES (21463,961,5);     -- Nepote bell: Geomancy +5
 INSERT INTO `item_mods` VALUES (21479,24,15);
 INSERT INTO `item_mods` VALUES (21479,26,5);
 INSERT INTO `item_mods` VALUES (21479,305,15);
@@ -29094,8 +29094,8 @@ INSERT INTO `item_mods` VALUES (23108,25,45);     -- Accuracy+45
 INSERT INTO `item_mods` VALUES (23108,29,4);      -- Magic Defense Bonus+4
 INSERT INTO `item_mods` VALUES (23108,31,63);     -- Magic Evasion+63
 INSERT INTO `item_mods` VALUES (23108,68,62);     -- Evasion+62
-INSERT INTO `item_mods` VALUES (23108,123,14);    -- "Chakra"+64 - Increase VIT mult by 1.4 (this is a guess)
-INSERT INTO `item_mods` VALUES (23108,124,1);     -- Chakra removes Paralysis
+INSERT INTO `item_mods` VALUES (23108,1026,14);   -- "Chakra"+64 - Increase VIT mult by 1.4 (this is a guess)
+INSERT INTO `item_mods` VALUES (23108,1027,1);    -- Chakra removes Paralysis
 INSERT INTO `item_mods` VALUES (23108,384,400);   -- Haste +4%
 INSERT INTO `item_mods` VALUES (23108,421,4);     -- Critical Hit Damage+4
 INSERT INTO `item_mods` VALUES (23109,1,135);     -- theo._briault_+2 DEF:135
@@ -29500,7 +29500,7 @@ INSERT INTO `item_mods` VALUES (23150,28,56);   -- "Magic Atk. Bonus"+56
 INSERT INTO `item_mods` VALUES (23150,68,51);   -- Evasion+51
 INSERT INTO `item_mods` VALUES (23150,31,90);   -- Magic Evasion+90
 INSERT INTO `item_mods` VALUES (23150,29,7);    -- "Magic Def. Bonus"+7
-INSERT INTO `item_mods` VALUES (23150,1026,14); -- Geomancy skill +14
+INSERT INTO `item_mods` VALUES (23150,123,14);  -- Geomancy skill +14
 INSERT INTO `item_mods` VALUES (23150,348,300); -- Haste+3%
 INSERT INTO `item_mods` VALUES (23174,1,111);     -- pumm._mufflers_+2 DEF:111
 INSERT INTO `item_mods` VALUES (23174,2,55);      -- HP+55
@@ -29606,7 +29606,7 @@ INSERT INTO `item_mods` VALUES (23179,68,44);     -- Evasion+44
 INSERT INTO `item_mods` VALUES (23179,259,3);     -- Dual Wield+3
 INSERT INTO `item_mods` VALUES (23179,384,500);   -- Haste +5%
 INSERT INTO `item_mods` VALUES (23179,421,3);     -- Critical Hit Damage+3
-INSERT INTO `item_mods` VALUES (23179,520,18);	  -- "Trick Attack" +18
+INSERT INTO `item_mods` VALUES (23179,520,18);    -- "Trick Attack" +18
 INSERT INTO `item_mods` VALUES (23180,1,117);     -- rev._gauntlets_+2 DEF:117
 INSERT INTO `item_mods` VALUES (23180,2,107);     -- HP+107
 INSERT INTO `item_mods` VALUES (23180,8,15);      -- STR+15
@@ -29875,7 +29875,7 @@ INSERT INTO `item_mods` VALUES (23195,30,38);     -- Magic Accuracy+38
 INSERT INTO `item_mods` VALUES (23195,68,32);     -- Evasion+32
 INSERT INTO `item_mods` VALUES (23195,31,47);     -- Magic Evasion+47
 INSERT INTO `item_mods` VALUES (23195,29,3);      -- Magic Defense Bonus+3
-INSERT INTO `item_mods` VALUES (23195,1026,17);   -- Geomancy skill +17
+INSERT INTO `item_mods` VALUES (23195,123,17);    -- Geomancy skill +17
 INSERT INTO `item_mods` VALUES (23195,384,300);   -- Haste +3%
 INSERT INTO `item_mods` VALUES (23195,161,-200);  -- Physical Damage Taken-2
 INSERT INTO `item_mods` VALUES (23196,1,103);     -- runeist_mitons_+2 DEF:103
@@ -31180,8 +31180,8 @@ INSERT INTO `item_mods` VALUES (23443,25,55);     -- Accuracy+55
 INSERT INTO `item_mods` VALUES (23443,29,5);      -- Magic Defense Bonus+5
 INSERT INTO `item_mods` VALUES (23443,31,73);     -- Magic Evasion+73
 INSERT INTO `item_mods` VALUES (23443,68,72);     -- Evasion+72
-INSERT INTO `item_mods` VALUES (23443,123,16);    -- "Chakra"+66 - Increase VIT mult by 1.6 (this is a guess)
-INSERT INTO `item_mods` VALUES (23443,124,1);     -- Chakra removes Paralysis
+INSERT INTO `item_mods` VALUES (23443,1026,16);   -- "Chakra"+66 - Increase VIT mult by 1.6 (this is a guess)
+INSERT INTO `item_mods` VALUES (23443,1027,1);    -- Chakra removes Paralysis
 INSERT INTO `item_mods` VALUES (23443,384,400);   -- Haste +4%
 INSERT INTO `item_mods` VALUES (23443,421,8);     -- Critical Hit Damage+8
 INSERT INTO `item_mods` VALUES (23444,1,145);     -- theo._briault_+3 DEF:145
@@ -31257,7 +31257,7 @@ INSERT INTO `item_mods` VALUES (23447,68,79);     -- Evasion+79
 INSERT INTO `item_mods` VALUES (23447,302,7);     -- Triple Attack+7
 INSERT INTO `item_mods` VALUES (23447,384,400);   -- Haste +40
 INSERT INTO `item_mods` VALUES (23447,421,6);     -- Critical Hit Damage+6
-INSERT INTO `item_mods` VALUES (23447,885,100);	  -- "Hide" duration +100
+INSERT INTO `item_mods` VALUES (23447,885,100);   -- "Hide" duration +100
 INSERT INTO `item_mods` VALUES (23448,1,169);     -- rev._surcoat_+3 DEF:169
 INSERT INTO `item_mods` VALUES (23448,2,254);     -- HP+254
 INSERT INTO `item_mods` VALUES (23448,5,62);      -- MP+62
@@ -31586,7 +31586,7 @@ INSERT INTO `item_mods` VALUES (23485,28,63);   -- "Magic Atk. Bonus"+63
 INSERT INTO `item_mods` VALUES (23485,68,61);   -- Evasion+61
 INSERT INTO `item_mods` VALUES (23485,31,100);  -- Magic Evasion+100
 INSERT INTO `item_mods` VALUES (23485,29,8);    -- "Magic Def. Bonus"+8
-INSERT INTO `item_mods` VALUES (23485,1026,16); -- Geomancy skill +16
+INSERT INTO `item_mods` VALUES (23485,123,16);  -- Geomancy skill +16
 INSERT INTO `item_mods` VALUES (23485,348,300); -- Haste+3%
 INSERT INTO `item_mods` VALUES (23509,1,121);     -- pumm._mufflers_+3 DEF:121
 INSERT INTO `item_mods` VALUES (23509,2,65);      -- HP+65
@@ -31692,7 +31692,7 @@ INSERT INTO `item_mods` VALUES (23514,68,54);     -- Evasion+54
 INSERT INTO `item_mods` VALUES (23514,259,5);     -- Dual Wield+5
 INSERT INTO `item_mods` VALUES (23514,384,500);   -- Haste +5%
 INSERT INTO `item_mods` VALUES (23514,421,4);     -- Critical Hit Damage+4
-INSERT INTO `item_mods` VALUES (23514,520,20);	  -- "Trick Attack" +20
+INSERT INTO `item_mods` VALUES (23514,520,20);    -- "Trick Attack" +20
 INSERT INTO `item_mods` VALUES (23515,1,127);     -- rev._gauntlets_+3 DEF:127
 INSERT INTO `item_mods` VALUES (23515,2,113);     -- HP+113
 INSERT INTO `item_mods` VALUES (23515,8,20);      -- STR+20
@@ -31961,7 +31961,7 @@ INSERT INTO `item_mods` VALUES (23530,29,4);      -- Magic Defense Bonus+4
 INSERT INTO `item_mods` VALUES (23530,30,48);     -- Magic Accuracy+48
 INSERT INTO `item_mods` VALUES (23530,31,57);     -- Magic Evasion+57
 INSERT INTO `item_mods` VALUES (23530,68,42);     -- Evasion+42
-INSERT INTO `item_mods` VALUES (23530,1026,19);   -- Geomancy skill +19
+INSERT INTO `item_mods` VALUES (23530,123,19);    -- Geomancy skill +19
 INSERT INTO `item_mods` VALUES (23530,161,-300);  -- Physical Damage Taken-3
 INSERT INTO `item_mods` VALUES (23530,384,300);   -- Haste +3
 INSERT INTO `item_mods` VALUES (23531,1,113);     -- runeist_mitons_+3 DEF:113
@@ -36325,8 +36325,8 @@ INSERT INTO `item_mods` VALUES (26202,249,17);    -- Resist Gravity+17
 INSERT INTO `item_mods` VALUES (26246,954,15);  -- Cichol's Mantle Berserk Duration + 15
 INSERT INTO `item_mods` VALUES (26248,1,15);      -- Alaunus's Cape: DEF 15
 INSERT INTO `item_mods` VALUES (26248,310,25);    -- Cursna effect +25%
-INSERT INTO `item_mods` VALUES (26258,1,16);	  -- Andartia's Mantle: DEF 16
-INSERT INTO `item_mods` VALUES (26258,900,1);	  -- "Utsusemi" +1
+INSERT INTO `item_mods` VALUES (26258,1,16);      -- Andartia's Mantle: DEF 16
+INSERT INTO `item_mods` VALUES (26258,900,1);     -- "Utsusemi" +1
 INSERT INTO `item_mods` VALUES (26324,8,7); -- Latria Sash STR+7
 INSERT INTO `item_mods` VALUES (26324,9,7); -- DEX+7
 INSERT INTO `item_mods` VALUES (26324,10,7); -- VIT+7
@@ -38673,7 +38673,7 @@ INSERT INTO `item_mods` VALUES (26840,28,20);   -- "Magic Atk. Bonus"+20
 INSERT INTO `item_mods` VALUES (26840,68,19);   -- Evasion+19
 INSERT INTO `item_mods` VALUES (26840,31,54);   -- Magic Evasion+54
 INSERT INTO `item_mods` VALUES (26840,29,3);    -- "Magic Def. Bonus"+3
-INSERT INTO `item_mods` VALUES (26840,1026,10); -- Geomancy skill +10
+INSERT INTO `item_mods` VALUES (26840,123,10);  -- Geomancy skill +10
 INSERT INTO `item_mods` VALUES (26840,348,200); -- Haste+2%
 INSERT INTO `item_mods` VALUES (26841,1,129);   -- Bagua Tunic +1: DEF 129
 INSERT INTO `item_mods` VALUES (26841,2,94);    -- HP+94
@@ -38689,7 +38689,7 @@ INSERT INTO `item_mods` VALUES (26841,28,23);   -- "Magic Atk. Bonus"+23
 INSERT INTO `item_mods` VALUES (26841,68,41);   -- Evasion+41
 INSERT INTO `item_mods` VALUES (26841,31,80);   -- Magic Evasion+80
 INSERT INTO `item_mods` VALUES (26841,29,6);    -- "Magic Def. Bonus"+6
-INSERT INTO `item_mods` VALUES (26841,1026,12); -- Geomancy skill +12
+INSERT INTO `item_mods` VALUES (26841,123,12);  -- Geomancy skill +12
 INSERT INTO `item_mods` VALUES (26841,348,300); -- Haste+3%
 INSERT INTO `item_mods` VALUES (26852,541,2);
 INSERT INTO `item_mods` VALUES (26853,541,3);
@@ -39887,8 +39887,8 @@ INSERT INTO `item_mods` VALUES (26978,23,21);
 INSERT INTO `item_mods` VALUES (26978,25,21);
 INSERT INTO `item_mods` VALUES (26978,31,18);
 INSERT INTO `item_mods` VALUES (26978,68,10);
-INSERT INTO `item_mods` VALUES (26978,123,10); -- "Chakra III"+42 - Increases VIT mult by 1.0 (this is a guess)
-INSERT INTO `item_mods` VALUES (26978,124,6);  -- Chakra removes Disease and Plague
+INSERT INTO `item_mods` VALUES (26978,1026,10); -- "Chakra III"+42 - Increases VIT mult by 1.0 (this is a guess)
+INSERT INTO `item_mods` VALUES (26978,1027,6);  -- Chakra removes Disease and Plague
 INSERT INTO `item_mods` VALUES (26978,289,7);
 INSERT INTO `item_mods` VALUES (26978,384,400);
 INSERT INTO `item_mods` VALUES (26979,1,76);
@@ -39906,8 +39906,8 @@ INSERT INTO `item_mods` VALUES (26979,29,1);      -- m.def+1
 INSERT INTO `item_mods` VALUES (26979,31,26);
 INSERT INTO `item_mods` VALUES (26979,68,22);
 INSERT INTO `item_mods` VALUES (26979,289,8);
-INSERT INTO `item_mods` VALUES (26979,123,12); -- "Chakra III"+45 -- Increases VIT mult by 1.2
-INSERT INTO `item_mods` VALUES (26979,124,6);  -- Chakra removes Disease and Plague
+INSERT INTO `item_mods` VALUES (26979,1026,12); -- "Chakra III"+45 -- Increases VIT mult by 1.2
+INSERT INTO `item_mods` VALUES (26979,1027,6);  -- Chakra removes Disease and Plague
 INSERT INTO `item_mods` VALUES (26979,384,400);
 INSERT INTO `item_mods` VALUES (26980,1,61);
 INSERT INTO `item_mods` VALUES (26980,2,40);
@@ -44424,7 +44424,7 @@ INSERT INTO `item_mods` VALUES (27584,122,10);
 INSERT INTO `item_mods` VALUES (27584,369,1);
 INSERT INTO `item_mods` VALUES (27585,298,2);
 INSERT INTO `item_mods` VALUES (27585,303,1);
-INSERT INTO `item_mods` VALUES (27858,835,1);	-- "Mug" +1
+INSERT INTO `item_mods` VALUES (27858,835,1);   -- "Mug" +1
 INSERT INTO `item_mods` VALUES (27586,26,20); -- Ranged Accuracy +20
 INSERT INTO `item_mods` VALUES (27586,118,10); -- Ninjutsu skill +10
 INSERT INTO `item_mods` VALUES (27586,259,5); -- "Dual Wield" +5
@@ -46217,8 +46217,8 @@ INSERT INTO `item_mods` VALUES (27808,25,10);
 INSERT INTO `item_mods` VALUES (27808,29,2);
 INSERT INTO `item_mods` VALUES (27808,31,36);
 INSERT INTO `item_mods` VALUES (27808,68,24);
-INSERT INTO `item_mods` VALUES (27808,123,12); -- Enhances Chakra effect - Increase VIT mult by 1.2
-INSERT INTO `item_mods` VALUES (27808,124,1);  -- Chakra removes Paralysis
+INSERT INTO `item_mods` VALUES (27808,1026,12); -- Enhances Chakra effect - Increase VIT mult by 1.2
+INSERT INTO `item_mods` VALUES (27808,1027,1);  -- Chakra removes Paralysis
 INSERT INTO `item_mods` VALUES (27808,384,400);
 INSERT INTO `item_mods` VALUES (27809,1,89);
 INSERT INTO `item_mods` VALUES (27809,2,25);
@@ -46571,8 +46571,8 @@ INSERT INTO `item_mods` VALUES (27829,25,10);
 INSERT INTO `item_mods` VALUES (27829,29,4);
 INSERT INTO `item_mods` VALUES (27829,31,53);
 INSERT INTO `item_mods` VALUES (27829,68,52);
-INSERT INTO `item_mods` VALUES (27829,123,12); -- "Chakra"+62 -- Increase VIT mult by 1.2 (this is a guess)
-INSERT INTO `item_mods` VALUES (27829,124,1);  -- Chakra removes Paralysis
+INSERT INTO `item_mods` VALUES (27829,1026,12); -- "Chakra"+62 -- Increase VIT mult by 1.2 (this is a guess)
+INSERT INTO `item_mods` VALUES (27829,1027,1);  -- Chakra removes Paralysis
 INSERT INTO `item_mods` VALUES (27829,384,400);
 INSERT INTO `item_mods` VALUES (27830,1,125);
 INSERT INTO `item_mods` VALUES (27830,2,54);
@@ -48479,7 +48479,7 @@ INSERT INTO `item_mods` VALUES (27985,14,19);     -- CHR+19
 INSERT INTO `item_mods` VALUES (27985,68,22);     -- Evasion+22
 INSERT INTO `item_mods` VALUES (27985,31,37);     -- Magic Evasion+37
 INSERT INTO `item_mods` VALUES (27985,29,3);      -- Magic Defense Bonus+3
-INSERT INTO `item_mods` VALUES (27985,1026,15);   -- Geomancy skill +15
+INSERT INTO `item_mods` VALUES (27985,123,15);    -- Geomancy skill +15
 INSERT INTO `item_mods` VALUES (27985,384,300);   -- Haste +3%
 INSERT INTO `item_mods` VALUES (27985,161,-100);  -- Physical Damage Taken -1%
 INSERT INTO `item_mods` VALUES (27987,1,101); -- Gefechthentzes -- 101 Def
@@ -49326,7 +49326,7 @@ INSERT INTO `item_mods` VALUES (28066,14,12);     -- CHR+12
 INSERT INTO `item_mods` VALUES (28066,68,10);     -- Evasion+10
 INSERT INTO `item_mods` VALUES (28066,31,25);     -- Magic Evasion+25
 INSERT INTO `item_mods` VALUES (28066,29,1);      -- Magic Defense Bonus+1
-INSERT INTO `item_mods` VALUES (28066,1026,15);   -- Geomancy skill +15
+INSERT INTO `item_mods` VALUES (28066,123,15);    -- Geomancy skill +15
 INSERT INTO `item_mods` VALUES (28066,384,300);   -- Haste +3%
 INSERT INTO `item_mods` VALUES (28066,161,-100);  -- Physical Damage Taken -1%
 INSERT INTO `item_mods` VALUES (28068,1,50);
@@ -53899,7 +53899,7 @@ INSERT INTO `item_mods` VALUES (26191,10,15); -- VIT
 INSERT INTO `item_mods` VALUES (26191,11,15); -- AGI
 INSERT INTO `item_mods` VALUES (26191,23,20); -- ATT
 INSERT INTO `item_mods` VALUES (26191,24,20); -- RATT
-INSERT INTO `item_mods` VALUES (23402,1,118); -- 	Viti. Chapeau +3
+INSERT INTO `item_mods` VALUES (23402,1,118); --    Viti. Chapeau +3
 INSERT INTO `item_mods` VALUES (23402,2,81);
 INSERT INTO `item_mods` VALUES (23402,5,7);
 INSERT INTO `item_mods` VALUES (23402,8,24);

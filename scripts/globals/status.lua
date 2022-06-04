@@ -1022,6 +1022,8 @@ xi.mod =
     EVASION                         = 108,
     SHIELD                          = 109,
     PARRY                           = 110,
+
+    -- Magic Skill modifiers
     DIVINE                          = 111,
     HEALING                         = 112,
     ENHANCE                         = 113,
@@ -1034,10 +1036,11 @@ xi.mod =
     STRING                          = 120,
     WIND                            = 121,
     BLUE                            = 122,
-    GEOMANCY_SKILL                  = 1026,
-    HANDBELL_SKILL                  = 1027,
-    CHAKRA_MULT                     = 123, -- Chakra multiplier increase
-    CHAKRA_REMOVAL                  = 124, -- Extra statuses removed by Chakra
+    GEOMANCY_SKILL                  = 123,
+    HANDBELL_SKILL                  = 124,
+
+    CHAKRA_MULT                     = 1026, -- Chakra multiplier increase
+    CHAKRA_REMOVAL                  = 1027, -- Extra statuses removed by Chakra
     SUPPRESS_OVERLOAD               = 125, -- Kenkonken "Suppresses Overload" mod. Unclear how this works exactly. Requires testing on retail.
     BP_DAMAGE                       = 126, -- Blood Pact: Rage Damage increase percentage
     FISH                            = 127,
@@ -1871,6 +1874,8 @@ xi.merit =
     STRING                      = meritCategory.MAGIC + 0x12,
     WIND                        = meritCategory.MAGIC + 0x14,
     BLUE                        = meritCategory.MAGIC + 0x16,
+    GEOMANCY                    = meritCategory.MAGIC + 0x18,
+    HANDBELL                    = meritCategory.MAGIC + 0x1A,
 
     -- OTHERS
     ENMITY_INCREASE             = meritCategory.OTHERS + 0x00,
