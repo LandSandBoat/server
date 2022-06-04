@@ -233,6 +233,7 @@ xi.garrison.spawnWave = function(player, npc, wave, party)
     local allianceSize = 0
     local boss = garrisonZoneData.mobs + 8
     local npcs = garrisonZoneData.npcs
+    local mobCount = 1
     if party >= 1 then
         allianceSize = wave + 0
     end
@@ -242,16 +243,83 @@ xi.garrison.spawnWave = function(player, npc, wave, party)
     if party > 12 then
         allianceSize = wave + 2
     end
-    --TODO spawn mobs in 15 second intervals random from table (more relevant in 1 party vs 3 parties)
+    -- Mobs in 15 second intervals (2 per interval in 1 party, 4 per interval in alliances)
     for _, mobId in ipairs(garrisonZoneData.waveSize[allianceSize]) do
-        SpawnMob(mobId)
-        -- BATTLEFIELD this is to prevent outside help, is not retail
-        GetMobByID(mobId):addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0)
-        for _, npcID in ipairs(npcs) do
-            if GetMobByID(npcID):isAlive() then
-                GetMobByID(npcID):addEnmity(GetMobByID(mobId), 1, 1)
-                GetMobByID(mobId):addEnmity(GetMobByID(npcID), 1, 1)
+        if
+            (mobCount == 3 or mobCount == 4) and
+            party <= 6
+        then
+            npc:timer(15000, function(npcArg)
+                SpawnMob(mobId)
+                -- BATTLEFIELD this is to prevent outside help, is not retail
+                GetMobByID(mobId):addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0)
+                for _, npcID in ipairs(npcs) do
+                    if GetMobByID(npcID):isAlive() then
+                        GetMobByID(npcID):addEnmity(GetMobByID(mobId), 1, 1)
+                        GetMobByID(mobId):addEnmity(GetMobByID(npcID), 1, 1)
+                    end
+                end
+            end)
+            mobCount = mobCount + 1
+        elseif
+            (mobCount == 5 or mobCount == 6) and
+            party <= 6
+        then
+            npc:timer(30000, function(npcArg)
+                SpawnMob(mobId)
+                -- BATTLEFIELD this is to prevent outside help, is not retail
+                GetMobByID(mobId):addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0)
+                for _, npcID in ipairs(npcs) do
+                    if GetMobByID(npcID):isAlive() then
+                        GetMobByID(npcID):addEnmity(GetMobByID(mobId), 1, 1)
+                        GetMobByID(mobId):addEnmity(GetMobByID(npcID), 1, 1)
+                    end
+                end
+            end)
+            mobCount = mobCount + 1
+        elseif
+            (mobCount == 7 or mobCount == 8) and
+            party <= 6
+        then
+            npc:timer(45000, function(npcArg)
+                SpawnMob(mobId)
+                -- BATTLEFIELD this is to prevent outside help, is not retail
+                GetMobByID(mobId):addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0)
+                for _, npcID in ipairs(npcs) do
+                    if GetMobByID(npcID):isAlive() then
+                        GetMobByID(npcID):addEnmity(GetMobByID(mobId), 1, 1)
+                        GetMobByID(mobId):addEnmity(GetMobByID(npcID), 1, 1)
+                    end
+                end
+            end)
+            mobCount = mobCount + 1
+        elseif
+            mobCount >= 5 and
+            party > 6
+        then
+            npc:timer(15000, function(npcArg)
+                SpawnMob(mobId)
+                -- BATTLEFIELD this is to prevent outside help, is not retail
+                GetMobByID(mobId):addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0)
+                for _, npcID in ipairs(npcs) do
+                    if GetMobByID(npcID):isAlive() then
+                        GetMobByID(npcID):addEnmity(GetMobByID(mobId), 1, 1)
+                        GetMobByID(mobId):addEnmity(GetMobByID(npcID), 1, 1)
+                    end
+                end
+            end)
+            mobCount = mobCount + 1
+        else
+            SpawnMob(mobId)
+            -- BATTLEFIELD this is to prevent outside help, is not retail
+            GetMobByID(mobId):addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0)
+            for _, npcID in ipairs(npcs) do
+                if GetMobByID(npcID):isAlive() then
+                    GetMobByID(npcID):addEnmity(GetMobByID(mobId), 1, 1)
+                    GetMobByID(mobId):addEnmity(GetMobByID(npcID), 1, 1)
+                end
             end
+            mobCount = mobCount + 1
         end
     end
     if wave == 4 then
@@ -270,8 +338,8 @@ xi.garrison.spawnWave = function(player, npc, wave, party)
             xi.garrison.tick(player, npc, wave, party)
         end)
     else
-        --start tick again
-        npc:timer(1000, function(npcArg)
+        --start tick again tick shouldnt start until all mobs have been spawned (even if all npcs died before wave completes all mobs spawn)
+        npc:timer(60000, function(npcArg)
             xi.garrison.tick(player, npc, wave, party)
         end)
     end
