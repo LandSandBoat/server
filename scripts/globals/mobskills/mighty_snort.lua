@@ -24,7 +24,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.WIND)
 
     mob:resetEnmity(target)
-    
+
     return dmg
 end
 
