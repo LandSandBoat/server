@@ -1,8 +1,8 @@
 -----------------------------------
--- The Man in Black
--- Seekers of Adoulin M3-4
+-- To the Victor
+-- Seekers of Adoulin M3-4-1
 -----------------------------------
--- !addmission 12 51
+-- !addmission 12 52
 -- Levil : !pos -87.204 3.350 12.655 256
 -----------------------------------
 require('scripts/globals/keyitems')
@@ -12,12 +12,12 @@ require('scripts/globals/zone')
 require('scripts/missions/soa/helpers')
 -----------------------------------
 
-local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.THE_MAN_IN_BLACK)
+local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.TO_THE_VICTOR)
 
 mission.reward =
 {
     bayld       = 100,
-    nextMission = { xi.mission.log_id.SOA, xi.mission.id.soa.TO_THE_VICTOR },
+    nextMission = { xi.mission.log_id.SOA, xi.mission.id.soa.AN_EXTRAORDINARY_GENTLEMAN },
 }
 
 mission.sections =
@@ -40,7 +40,7 @@ mission.sections =
                         xi.soa.helpers.initGameRound(player)
                         player:setLocalVar('sessionScore', 0)
 
-                        return mission:event(134, 0) -- 1 is first time on To the Victor, 2 is after loss
+                        return mission:event(134, mission:getVar(player, 'Status'))
                     end
                 end,
             },
@@ -57,17 +57,13 @@ mission.sections =
                 [134] = function(player, csid, option, npc)
                     if option == 0 then
                         player:startEvent(153)
-                    else
-                        xi.mission.setVar(player, xi.mission.log_id.SOA, xi.mission.id.soa.TO_THE_VICTOR, 'Status', option)
-                        mission:complete(player)
+                    elseif option == 2 then
+                        mission:setVar(player, 'Status', 2)
                     end
                 end,
 
                 [153] = function(player, csid, option, npc)
                     mission:complete(player)
-
-                    player:completeMission(xi.mission.log_id.SOA, xi.mission.id.soa.TO_THE_VICTOR)
-                    player:addMission(xi.mission.log_id.SOA, xi.mission.id.soa.AN_EXTRAORDINARY_GENTLEMAN)
                 end,
             },
         },
