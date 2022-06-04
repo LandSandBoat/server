@@ -25,6 +25,7 @@ xi.dynamis.onSpawnApoc = function(mob)
     mob:setMod(xi.mod.SLOWRES, 50)
     mob:setMod(xi.mod.SLEEPRES, 100)
     mob:setMod(xi.mod.LULLABYRES, 100)
+    mob:setMobMod(xi.mobMod.SPAWN_LEASH, 300) -- See you in Narnia!
     -- Make it so we can reference arbitrary mob
     zone:setLocalVar("Apocalyptic_Beast", mob:getID())
     mob:setLocalVar("Apoc_Beast", 1)

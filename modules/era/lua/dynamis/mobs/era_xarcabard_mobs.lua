@@ -16,6 +16,7 @@ xi.dynamis = xi.dynamis or {}
 -----------------------------------
 
 xi.dynamis.onSpawnDynaLord = function(mob)
+    mob:setRoamFlags(xi.roamFlag.EVENT)
     mixins = {require("scripts/mixins/job_special"),}
     local dialogDL = 7272
     local zone = mob:getZone()
@@ -45,6 +46,7 @@ end
 xi.dynamis.onSpawnYing = function(mob)
     local zone = mob:getZone()
     local dynaLord = GetMobByID(zone:getLocalVar("MainDynaLord"))
+    mob:setRoamFlags(xi.roamFlag.EVENT)
     xi.dynamis.setNMStats(mob)
     if dynaLord:getLocalVar("magImmune") < 2 then -- both dragons have not been killed initially
         dynaLord:setMod(xi.mod.UDMGMAGIC, -100)
@@ -59,6 +61,7 @@ end
 xi.dynamis.onSpawnYang = function(mob)
     local zone = mob:getZone()
     local dynaLord = GetMobByID(zone:getLocalVar("MainDynaLord"))
+    mob:setRoamFlags(xi.roamFlag.EVENT)
     xi.dynamis.setNMStats(mob)
     if dynaLord:getLocalVar("magImmune") < 2 then -- both dragons have not been killed initially
         dynaLord:setMod(xi.mod.UDMGMAGIC, -100)
@@ -516,6 +519,7 @@ xi.dynamis.animatedInfo =
 
 xi.dynamis.onSpawnAnimated = function(mob)
     mixins = {require("scripts/mixins/families/animated_weapons"),}
+    mob:setRoamFlags(xi.roamFlag.EVENT)
     xi.dynamis.setAnimatedWeaponstats(mob)
     -- Since mixin is called after spawn function is initiated, adding spawn listener functions here
     mob:SetMagicCastingEnabled(true)
@@ -550,7 +554,7 @@ xi.dynamis.onMagicPrepAnimated = function(mob, target)
     end
 end
 
-xi.dynamis.onDeathAnimated = function(mob, target)
+xi.dynamis.onDeathAnimated = function(mob)
     local mobIndex = mob:getLocalVar("MobIndex")
     local children = xi.dynamis.animatedInfo[mobIndex]["Children"]
     for _, child in pairs(children) do
@@ -561,6 +565,7 @@ xi.dynamis.onDeathAnimated = function(mob, target)
 end
 
 xi.dynamis.onSpawnSatellite = function(mob)
+    mob:setRoamFlags(xi.roamFlag.EVENT)
     xi.dynamis.setNMStats(mob)
     mob:setAnimationSub(math.random(5,6))
 end

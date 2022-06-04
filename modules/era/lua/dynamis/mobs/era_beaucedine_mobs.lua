@@ -3,6 +3,7 @@
 -----------------------------------
 require("modules/era/lua/dynamis/globals/era_dynamis")
 require("modules/era/lua/dynamis/globals/era_dynamis_spawning")
+require("scripts/globals/mixins")
 require("scripts/globals/dynamis")
 require("scripts/globals/zone")
 -----------------------------------
@@ -13,7 +14,7 @@ xi.dynamis = xi.dynamis or {}
 xi.dynamis.onSpawnAngra = function(mob)
     xi.dynamis.setMegaBossStats(mob)
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 25)
-
+    mob:setRoamFlags(xi.roamFlag.EVENT)
     xi.mix.jobSpecial.config(mob, {
         between = 300,
         specials =
@@ -108,4 +109,86 @@ xi.dynamis.onRoamAngra = function(mob)
             end
         end
     end
+end
+
+xi.dynamis.onSpawnDagour = function(mob)
+    mixins = {require("scripts/mixins/job_special"),}
+    xi.dynamis.setNMStats(mob)
+    xi.mix.jobSpecial.config(mob,
+    {
+        between = 60,
+        specials =
+        {
+            {id = xi.jsa.ASTRAL_FLOW, hpp = 95},
+        },
+    })
+end
+
+xi.dynamis.onWeaponskillPrepDagour = function(mob)
+    local chance = math.random(0, 100)
+    if chance <= 20 then
+        return 710
+    else
+        return 0
+    end
+end
+
+xi.dynamis.onSpawnGouble = function(mob)
+    mixins = {require("scripts/mixins/job_special"),}
+    xi.dynamis.setNMStats(mob)
+    xi.mix.jobSpecial.config(mob,
+    {
+        between = 60,
+        specials =
+        {
+            {id = xi.jsa.MIGHTY_STRIKES, hpp = 95},
+            {id = xi.jsa.INVINCIBLE, hpp = 95},
+            {id = xi.jsa.CHAINSPELL, hpp = 95},
+        },
+    })
+end
+
+xi.dynamis.onSpawnMildaun = function(mob)
+    mixins = {require("scripts/mixins/job_special"),}
+    xi.dynamis.setNMStats(mob)
+    xi.mix.jobSpecial.config(mob,
+    {
+        between = 60,
+        specials =
+        {
+            {id = xi.jsa.HUNDRED_FISTS, hpp = 95},
+            {id = xi.jsa.PERFECT_DODGE, hpp = 95},
+            {id = xi.jsa.MIJIN_GAKURE, hpp = 95},
+        },
+    })
+end
+
+xi.dynamis.onSpawnQuieb = function(mob)
+    mixins = {require("scripts/mixins/job_special"),}
+    xi.dynamis.setNMStats(mob)
+    xi.mix.jobSpecial.config(mob,
+    {
+        between = 60,
+        specials =
+        {
+            {id = xi.jsa.BENEDICTION, hpp = 95},
+            {id = xi.jsa.MANAFONT, hpp = 95},
+            {id = xi.jsa.SOUL_VOICE, hpp = 95},
+        },
+    })
+end
+
+xi.dynamis.onSpawnVelosar = function(mob)
+    mixins = {require("scripts/mixins/job_special"),}
+    xi.dynamis.setNMStats(mob)
+    xi.mix.jobSpecial.config(mob,
+    {
+        between = 60,
+        specials =
+        {
+            {id = xi.jsa.BLOOD_WEAPON, hpp = 95},
+            {id = xi.jsa.MEIKYO_SHISUI, hpp = 95},
+            {id = familyEES[mob:getFamily()], hpp = 95},
+        },
+    })
 end
