@@ -109,6 +109,10 @@ INSERT INTO `mob_pool_mods` VALUES (2032,35,0,1);
 INSERT INTO `mob_pool_mods` VALUES (2047,163,-100,0);
 INSERT INTO `mob_pool_mods` VALUES (2083,29,25,0);
 INSERT INTO `mob_pool_mods` VALUES (2105,48,434,1);
+INSERT INTO `mob_pool_mods` VALUES (2114,34,60,1);
+INSERT INTO `mob_pool_mods` VALUES (2114,4,15,1);
+INSERT INTO `mob_pool_mods` VALUES (2114,5,15,1);
+INSERT INTO `mob_pool_mods` VALUES (2114,11,30,1);
 INSERT INTO `mob_pool_mods` VALUES (2156,370,25,0);
 INSERT INTO `mob_pool_mods` VALUES (2180,3,100,1);
 INSERT INTO `mob_pool_mods` VALUES (2254,407,100,0);
@@ -220,6 +224,10 @@ INSERT INTO `mob_pool_mods` VALUES (5408,58,40,1); -- Maat (PLD) SPECIAL_DELAY: 
 INSERT INTO `mob_pool_mods` VALUES (5409,30,1036,1); -- Maat (DRK) SPECIAL_SKILL: maats_bash
 INSERT INTO `mob_pool_mods` VALUES (5409,33,50,1); -- Maat (DRK) SPECIAL_COOLDOWN: 50 sec
 INSERT INTO `mob_pool_mods` VALUES (5409,58,40,1); -- Maat (DRK) SPECIAL_DELAY: 40 sec
+INSERT INTO `mob_pool_mods` VALUES (7039,34,60,1);
+INSERT INTO `mob_pool_mods` VALUES (7039,4,15,1);
+INSERT INTO `mob_pool_mods` VALUES (7039,5,15,1);
+INSERT INTO `mob_pool_mods` VALUES (7039,11,30,1);
 
 /*!40000 ALTER TABLE `mob_pool_mods` ENABLE KEYS */;
 UNLOCK TABLES;

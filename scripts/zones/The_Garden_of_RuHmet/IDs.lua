@@ -53,6 +53,7 @@ zones[xi.zone.THE_GARDEN_OF_RUHMET] =
         IXAERN_DRK          = 16921018,
         JAILER_OF_FAITH     = 16921021,
         IXAERN_DRG          = 16921022,
+        IXZDEI_BASE         = 16921011,
     },
 
     npc =
