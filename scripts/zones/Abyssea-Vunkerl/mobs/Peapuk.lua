@@ -1,6 +1,6 @@
 -----------------------------------
--- Area: Wajaom Woodlands
---  Mob: Puk
+-- Area: Abyssea - Vunkurl
+--  Mob: Peapuk
 -----------------------------------
 mixins = {require("scripts/mixins/families/puk")}
 -----------------------------------
