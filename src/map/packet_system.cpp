@@ -1260,13 +1260,13 @@ void SmallPacket0x028(map_session_data_t* const PSession, CCharEntity* const PCh
 
     if (PItem->isStorageSlip())
     {
-        int data = 0;
+        int slipData = 0;
         for (int i = 0; i < CItem::extra_size; i++)
         {
-            data += PItem->m_extra[i];
+            slipData += PItem->m_extra[i];
         }
 
-        if (data != 0)
+        if (slipData != 0)
         {
             PChar->pushPacket(new CMessageStandardPacket(MsgStd::CannotBeProcessed));
             return;
