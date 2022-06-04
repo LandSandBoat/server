@@ -1672,6 +1672,15 @@ xi.mod =
     TRIPLE_SHOT_RATE             = 999, -- Percent increase to Triple Shot Rate
     NINJUTSU_DURATION            = 1000,
 
+    -- AF3 Set Bonus Modifiers
+    AUGMENT_CONSERVE_MP    = 1031, -- Percent chance to deal extra damage based on Conserve MP Amount (BLM AF3 Sets)
+    AUGMENT_COMPOSURE      = 1032, -- Percent Enhancing Duration Extension for Others (RDM AF3 Sets)
+    AUGMENT_DAMAGE_HP      = 1033, -- Percent chance to increase damage based on player HP% (DRK AF3 Sets)
+    AUGMENT_DAMAGE_PET_HP  = 1034, -- Percent chance to increase damage based on pet HP% (BST/DRG AF3 Sets)
+    AUGMENT_BLOOD_BOON     = 1035, -- Percent chance to deal extra damage based on Blood Boon Amount (SMN AF3 Sets)
+    AUGMENT_BLU_MAGIC      = 1036, -- Percent chance for BLU magic to receive 3x WSC value for spell (BLU AF3 Sets)
+    GEOMANCY_MP_NO_DEPLETE = 1037, -- Percent chance for Geomancy to cost 0 MP (GEO AF3 Sets)
+
     -- IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN src/map/modifier.h ASWELL!
 
     -- The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
