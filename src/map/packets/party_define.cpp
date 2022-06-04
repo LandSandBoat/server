@@ -27,7 +27,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../entities/trustentity.h"
 #include "../utils/zoneutils.h"
 
-const char* msg = "SELECT chars.charid, partyflag, pos_zone, pos_prevzone FROM accounts_parties \
+const char* partyQuery = "SELECT chars.charid, partyflag, pos_zone, pos_prevzone FROM accounts_parties \
                                         LEFT JOIN chars ON accounts_parties.charid = chars.charid WHERE \
                                         IF (allianceid <> 0, allianceid = %d, partyid = %d) ORDER BY partyflag & %u, timestamp;";
 
@@ -46,7 +46,7 @@ CPartyDefinePacket::CPartyDefinePacket(CParty* PParty, bool loadTrust)
 
         uint8 i = 0;
 
-        int ret = sql->Query(msg, allianceid, PParty->GetPartyID(), PARTY_SECOND | PARTY_THIRD);
+        int ret = sql->Query(partyQuery, allianceid, PParty->GetPartyID(), PARTY_SECOND | PARTY_THIRD);
 
         if (ret != SQL_ERROR && sql->NumRows() > 0)
         {

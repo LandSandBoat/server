@@ -287,7 +287,5 @@ int main(int argc, char** argv)
     gConsoleService = nullptr;
 
     do_final(EXIT_SUCCESS);
-
-    return 0;
 }
 #endif // DEFINE_OWN_MAIN

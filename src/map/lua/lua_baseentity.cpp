@@ -11952,10 +11952,10 @@ void CLuaBaseEntity::setPetName(uint8 pType, uint16 value, sol::object const& ar
             uint32 chocoboname1 = value & 0x0000FFFF;
             uint32 chocoboname2 = arg2.as<uint32>() << 16;
 
-            uint32 value = chocoboname1 + chocoboname2;
+            uint32 nameValue = chocoboname1 + chocoboname2;
 
-            sql->Query("INSERT INTO char_pet SET charid = %u, chocoboid = %u ON DUPLICATE KEY UPDATE chocoboid = %u;", m_PBaseEntity->id, value,
-                       value);
+            sql->Query("INSERT INTO char_pet SET charid = %u, chocoboid = %u ON DUPLICATE KEY UPDATE chocoboid = %u;", m_PBaseEntity->id, nameValue,
+                       nameValue);
         }
     }
 }

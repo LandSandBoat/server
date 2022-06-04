@@ -320,9 +320,9 @@ bool CBattlefield::InsertEntity(CBaseEntity* PEntity, bool enter, BATTLEFIELDMOB
         {
             auto* pet = dynamic_cast<CPetEntity*>(PEntity);
 
-            // dont enter player pet
             if (pet && pet->PMaster && pet->PMaster->objtype == TYPE_PC)
             {
+                // dont enter player pet
             }
             else
             {
