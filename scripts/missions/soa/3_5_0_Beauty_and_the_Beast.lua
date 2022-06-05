@@ -1,8 +1,8 @@
 -----------------------------------
--- August's Heirloom
--- Seekers of Adoulin M3-4-4
+-- Beauty and the Beast
+-- Seekers of Adoulin M3-5
 -----------------------------------
--- !addmission 12 56
+-- !addmission 12 57
 -- Ploh Trishbahk : !pos 100.580 -40.150 -63.830 257
 -----------------------------------
 require('scripts/globals/missions')
@@ -10,11 +10,12 @@ require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------
 
-local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.AUGUSTS_HEIRLOOM)
+local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.BEAUTY_AND_THE_BEAST)
 
 mission.reward =
 {
-    nextMission = { xi.mission.log_id.SOA, xi.mission.id.soa.BEAUTY_AND_THE_BEAST },
+    keyItem     = xi.ki.PRISTINE_HAIR_RIBBON,
+    nextMission = { xi.mission.log_id.SOA, xi.mission.id.soa.WILDCAT_WITH_A_GOLD_PELT },
 }
 
 mission.sections =
@@ -24,16 +25,21 @@ mission.sections =
             return currentMission == mission.missionId
         end,
 
-        [xi.zone.EASTERN_ADOULIN] =
+        [xi.zone.CEIZAK_BATTLEGROUNDS] =
         {
-            ['Ploh_Trishbahk'] = mission:progressEvent(1514),
+            ['Signs_of_a_Struggle'] = mission:progressEvent(21),
 
             onEventFinish =
             {
-                [1514] = function(player, csid, option, npc)
+                [21] = function(player, csid, option, npc)
                     mission:complete(player)
                 end,
             },
+        },
+
+        [xi.zone.EASTERN_ADOULIN] =
+        {
+            ['Ploh_Trishbahk'] = mission:event(5063):importantOnce(),
         },
 
         [xi.zone.WESTERN_ADOULIN] =
