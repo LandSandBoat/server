@@ -14,6 +14,11 @@ local m = Module:new("era_pet_skills")
 m:addOverride("xi.globals.mobskills.call_wyvern.onMobWeaponSkill", function(target, mob, skill)
     local zoneType = mob:getZone():getType()
 
+    if mob:getLocalVar("CALL_WYVERN") == 0 then
+        skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT)
+        return 0
+    end
+
     if zoneType == xi.zoneType.DYNAMIS then
         if mob:getName() == "Apocalyptic_Beast" then
             for i = 5, 1, -1 do
@@ -36,6 +41,11 @@ m:addOverride("xi.globals.mobskills.astral_flow.onMobWeaponSkill", function(targ
     skill:setMsg(xi.msg.basic.USES)
     local mobID = mob:getID()
     local avatar = 0
+
+    if mob:getLocalVar("ASTRAL_FLOW") == 0 then
+        skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT)
+        return 0
+    end
 
     if mob:getZone():getType() == xi.zoneType.DYNAMIS then
         if mob:getName() == "Apocalyptic_Beast" then

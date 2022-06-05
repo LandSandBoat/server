@@ -75,17 +75,17 @@ xi.dynamis.onWeaponskillPrepCirrate = function(mob)
 
     for skill, skillchoice in pairs(skillList) do
         local mobVar = skillchoice[2]
-        if not GetMobByID(zone:getLocalVar(mobVar)):isAlive() then
+        if not GetMobByID(zone:getLocalVar(string.format("%s", mobVar))):isAlive() then
             if skill == 1607 then
-                skillList[skill] = {12, mobVar} -- Updates first entry to 12 if the mob is dead.
+                skillList[skill] = {12, string.format("%s", mobVar)} -- Updates first entry to 12 if the mob is dead.
             else
-                skillList[skill] = {(12 + skillList[skill-1][1]), mobVar} -- Updates the entry to 12 + last entry.
+                skillList[skill] = {(12 + skillList[skill-1][1]), string.format("%s", mobVar)} -- Updates the entry to 12 + last entry.
             end
         else
             if skill == 1607 then
-                skillList[skill] = {20, mobVar} -- Leaves first entry at 20 if the mob is alive.
+                skillList[skill] = {20, string.format("%s", mobVar)} -- Leaves first entry at 20 if the mob is alive.
             else
-                skillList[skill] = {(20 + skillList[skill-1][1]), mobVar} -- Updates entry at 20 + last entry if mob is alive.
+                skillList[skill] = {(20 + skillList[skill-1][1]), string.format("%s", mobVar)} -- Updates entry at 20 + last entry if mob is alive.
             end
         end
     end

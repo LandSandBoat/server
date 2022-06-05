@@ -48,6 +48,25 @@ xi.dynamis.onSpawnApoc = function(mob)
         xi.jsa.ASTRAL_FLOW,
     }
 
+    xi.dynamis.apocLockouts2hr = -- Setup 2hr Lockouts
+    {
+        ["MIGHTY_STRIKES"] = {1, 0, "Qu'Pho Bloodspiller"},
+        ["HUNDRED_FISTS"] = {1, 0, "Hamfist Gukhbuk"}, 
+        ["BENEDICTION"] = {1, 0, "Gi'Bhe Fleshfeaster"},
+        ["MANAFONT"] = {1, 0, "Flamecaller Zoeqdoq"},
+        ["CHAINSPELL"] = {1, 0, "Gosspix Blabberlips"},
+        ["PERFECT_DODGE"] = {1, 0, "Va'Rhu Bodysnatcher"},
+        ["INVINCIBLE"] = {1, 0, "Te'Zha Ironclad"},
+        ["BLOOD_WEAPON"] = {1, 0, "Shamblix Rottenheart"},
+        ["CHARM"] = {1, 0, "Woodnix Shrillwhistle"},
+        ["SOUL_VOICE"] = {1, 0, "Ree Nata the Melomanic"},
+        ["EAGLE_EYE_SHOT"] = {1, 0, "Lyncean Juwgneg"},
+        ["MEIKYO_SHISUI"] = {1, 0, "Koo Rahi the Levinblade"},
+        ["MIJIN_GAKURE"] = {1, 0, "Doo Peku the Fleetfoot"},
+        ["CALL_WYVERN"] = {1, 0, "Elvaansticker Bxafraff"},
+        ["ASTRAL_FLOW"] = {1, 0, "Baa Dava the Bibliophage"},
+    }
+
     xi.dynamis.apocLockouts =
     {
         ["Stihi"] = 642, -- Flame Breath
@@ -75,6 +94,10 @@ xi.dynamis.onSpawnApoc = function(mob)
         650, -- Thornsong
         651, -- Lodesong
     }
+
+    for var, val in pairs(xi.dynamis.apocLockouts2hr) do
+        mob:setLocalVar(var, val[1])
+    end
 end
 
 xi.dynamis.onSpawnNoAuto = function(mob)
@@ -116,6 +139,13 @@ xi.dynamis.onFightApoc = function(mob, target)
         [5 ] = 422, -- Carnage Elegy
         [6 ] = 463, -- Foe Lullaby
     }
+
+    for var, val in pairs(xi.dynamis.apocLockouts2hr) do
+        if not mob:getZone():getLocalVar(string.format("%s", val[3])):isAlive() then
+            mob:setLocalVar(string.format("%s", var), val[2])
+            table.remove(xi.dynamis.apocLockouts2hr, var)
+        end
+    end
 
     while os.time() >= mob:getLocalVar("next2hrTime") do
         local length2hrTable = #xi.dynamis.apoc2hrlist
@@ -173,8 +203,8 @@ end
 
 xi.dynamis.onDeathApoc = function(mob, player, isKiller)
     for dwagon, skill in pairs(xi.dynamis.apocLockouts) do -- Check a cleaned table to see what is alive.
-        if GetMobByID(zone:getLocalVar(dwagon):isAlive()) then -- Second alive check to be sure.
-            DespawnMob(zone:getLocalVar(dwagon)) -- Despawn extra dwagon.
+        if GetMobByID(zone:getLocalVar(string.format("%s", dwagon)):isAlive()) then -- Second alive check to be sure.
+            DespawnMob(zone:getLocalVar(string.format("%s", dwagon))) -- Despawn extra dwagon.
         end
     end
 

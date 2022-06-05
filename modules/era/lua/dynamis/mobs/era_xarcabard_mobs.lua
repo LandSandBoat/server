@@ -151,7 +151,6 @@ xi.dynamis.onFightDynaLord = function(mob, target)
         mob:SetAutoAttackEnabled(false)
         mob:SetMagicCastingEnabled(false)
         mob:SetMobAbilityEnabled(false)
-        local dynaLordLookup = {}
         mob:timer(3000, function(mob) 
             while i <= 5 do
                 local victim = math.random(#targetList)
