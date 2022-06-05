@@ -358,7 +358,11 @@ local function getSingleHitDamage(attacker, target, dmg, wsParams, calcParams)
                 local magicdmg = addBonusesAbility(attacker, wsParams.ele, target, finaldmg, wsParams)
 
                 magicdmg = magicdmg * applyResistanceAbility(attacker, target, wsParams.ele, wsParams.skill, calcParams.bonusAcc)
-                magicdmg = target:magicDmgTaken(magicdmg)
+                magicdmg = target:magicDmgTaken(magicdmg. wsParams.ele)
+                if magicdmg < 0 then
+                    return magicdmg
+                end
+
                 magicdmg = adjustForTarget(target, magicdmg, wsParams.ele)
 
 
@@ -753,9 +757,10 @@ function doMagicWeaponskill(attacker, target, wsID, wsParams, tp, action, primar
     local calcParams =
     {
         ['shadowsAbsorbed'] = 0,
-        ['tpHitsLanded'] = 1,
+        ['tpHitsLanded']    = 1,
         ['extraHitsLanded'] = 0,
-        ['bonusTP'] = wsParams.bonusTP or 0
+        ['bonusTP']         = wsParams.bonusTP or 0,
+        ['wsID']            = wsID
     }
 
     local bonusfTP, bonusacc = handleWSGorgetBelt(attacker)
@@ -800,7 +805,15 @@ function doMagicWeaponskill(attacker, target, wsID, wsParams, tp, action, primar
         -- Calculate magical bonuses and reductions
         dmg = addBonusesAbility(attacker, wsParams.ele, target, dmg, wsParams)
         dmg = dmg * applyResistanceAbility(attacker, target, wsParams.ele, wsParams.skill, bonusacc)
-        dmg = target:magicDmgTaken(dmg)
+        dmg = target:magicDmgTaken(dmg, wsParams.ele)
+
+        if dmg < 0 then
+            calcParams.finalDmg = dmg
+
+            dmg = takeWeaponskillDamage(target, attacker, wsParams, primaryMsg, attack, calcParams, action)
+            return dmg
+        end
+
         dmg = adjustForTarget(target, dmg, wsParams.ele)
 
         if dmg > 0 then
@@ -817,7 +830,6 @@ function doMagicWeaponskill(attacker, target, wsID, wsParams, tp, action, primar
     end
 
     calcParams.finalDmg = dmg
-    calcParams.wsID = wsID
 
     if dmg > 0 then
         attacker:trySkillUp(attack.weaponType, target:getMainLvl())
@@ -853,7 +865,7 @@ function takeWeaponskillDamage(defender, attacker, wsParams, primaryMsg, attack,
             end
         end
 
-        action:param(defender:getID(), finaldmg)
+        action:param(defender:getID(), math.abs(finaldmg))
     elseif wsResults.shadowsAbsorbed > 0 then
         action:messageID(defender:getID(), xi.msg.basic.SHADOW_ABSORB)
         action:param(defender:getID(), wsResults.shadowsAbsorbed)

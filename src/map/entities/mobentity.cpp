@@ -743,7 +743,7 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
         if (damage < 0)
         {
             msg = MSGBASIC_SKILL_RECOVERS_HP; // TODO: verify this message does/does not vary depending on mob/avatar/automaton use
-            target.param = -damage;
+            target.param = std::clamp(-damage,0, PTarget->GetMaxHP() - PTarget->health.hp);
         }
         else
         {

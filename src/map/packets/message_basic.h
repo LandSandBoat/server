@@ -35,6 +35,7 @@ enum MSGBASIC_ID : uint16
 {
     MSGBASIC_NONE                     = 0,   /* Display nothing */
     MSGBASIC_DEFEATS_TARG             = 6,   /* The <player> defeats <target>. */
+    MSGBASIC_MAGIC_RECOVERS_HP        = 7,   /* <caster> casts <spell>. <target> recovers <amount> HP. */
     MSGBASIC_ALREADY_CLAIMED          = 12,  /* Cannot attack. Your target is already claimed. */
     MSGBASIC_IS_INTERRUPTED           = 16,  /* The <player>'s casting is interrupted. */
     MSGBASIC_UNABLE_TO_CAST           = 18,  /* Unable to cast spells at this time. */

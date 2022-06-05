@@ -386,11 +386,18 @@ function BlueFinalAdjustments(caster, target, spell, dmg, params)
     local attackType = params.attackType or xi.attackType.NONE
     local damageType = params.damageType or xi.damageType.NONE
 
+    if attackType == xi.attackType.NONE then
+        printf("BlueFinalAdjustments: spell id %d has attackType set to xi.attackType.NONE", spell:getID())
+    end
+
+    if damageType == xi.damageType.NONE then
+        printf("BlueFinalAdjustments: spell id %d has damageType set to xi.damageType.NONE", spell:getID())
+    end
 
     -- handle One For All, Liement
-    if damageType == xi.damageType.MAGICAL then
-        local targetMagicDamageAdjustment = xi.spells.spell_damage.calculateTMDA(caster, target, xi.damageType.ELEMENTAL + spell:getElement()) -- Apply checks for Liement, MDT/MDTII/DT
+    if attackType == xi.attackType.MAGICAL then
 
+        local targetMagicDamageAdjustment = xi.spells.spell_damage.calculateTMDA(caster, target, damageType) -- Apply checks for Liement, MDT/MDTII/DT
         dmg = math.floor(dmg * targetMagicDamageAdjustment)
         if dmg < 0 then
             target:takeSpellDamage(caster, spell, dmg, attackType, damageType)

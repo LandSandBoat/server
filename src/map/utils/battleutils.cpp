@@ -675,7 +675,7 @@ namespace battleutils
 
         ELEMENT spikeElement = (ELEMENT)((uint8)GetSpikesDamageType(Action->spikesEffect) - (uint8)DAMAGE_TYPE::ELEMENTAL);
 
-        int32 damage = Action->spikesParam;
+        int32 damage = 0;
 
         // int16 intStat = PDefender->INT();
         // int16 mattStat = PDefender->getMod(Mod::MATT);
@@ -773,7 +773,7 @@ namespace battleutils
 
             if (spikesDamage < 0) // because spikes damage in action packet is uint16, we have to change the healed amount to a positive number and cast to uint16
             {
-                Action->spikesParam = static_cast<uint16>(spikesDamage * -1);
+                Action->spikesParam = static_cast<uint16>(std::clamp(spikesDamage * -1, 0, PAttacker->GetMaxHP() - PAttacker->health.hp));
             }
             else
             {
@@ -797,26 +797,27 @@ namespace battleutils
                     }
                     else
                     {
-                        Action->addEffectMessage = MSGBASIC_SPIKES_EFFECT_HP_DRAIN;
-
                         if (PDefender->isAlive())
                         {
                             auto* PEffect = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_DREAD_SPIKES);
                             if (PEffect)
                             {
+                                // see https://www.bg-wiki.com/ffxi/Dread_Spikes
+
                                 // Subpower is the remaining damage that can be drained. When it reaches 0 the effect ends
                                 int remainingDrain = PEffect->GetSubPower();
-                                if (remainingDrain - Action->spikesParam <= 0)
+                                if (remainingDrain - abs(damage) <= 0) // power absorbed from Dread Spikes takes pre-MDT etc values
                                 {
                                     PDefender->StatusEffectContainer->DelStatusEffect(EFFECT_DREAD_SPIKES);
                                 }
                                 else
                                 {
-                                    PEffect->SetSubPower(remainingDrain - Action->spikesParam);
+                                    PEffect->SetSubPower(remainingDrain - abs(damage));
                                 }
                             }
                             if (spikesDamage > 0) // do not add HP if spikes damage was absorbed.
                             {
+                                Action->spikesMessage  = MSGBASIC_SPIKES_EFFECT_HP_DRAIN;
                                 PDefender->addHP(spikesDamage);
                             }
                         }
@@ -929,7 +930,7 @@ namespace battleutils
 
             if (spikesDamage < 0) // fit healed spikes into uint16
             {
-                Action->spikesParam = static_cast<uint16>(spikesDamage * -1);
+                Action->spikesParam = static_cast<uint16>(std::clamp(spikesDamage * -1, 0, PAttacker->GetMaxHP() - PAttacker->health.hp));
             }
             else
             {
@@ -975,11 +976,11 @@ namespace battleutils
 
                 if (spikesDamage < 0) // fit healed spikes into uint16
                 {
-                    Action->spikesParam = static_cast<uint16>(spikesDamage * -1);
+                    Action->spikesParam = static_cast<uint16>(std::clamp(spikesDamage * -1, 0, PAttacker->GetMaxHP() - PAttacker->health.hp));
                 }
                 else
                 {
-                    Action->spikesParam = static_cast<uint16>(spikesDamage );
+                    Action->spikesParam = static_cast<uint16>(spikesDamage);
                 }
 
                 PAttacker->takeDamage(spikesDamage, PDefender, ATTACK_TYPE::MAGICAL, GetSpikesDamageType(spikesType));
