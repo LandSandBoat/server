@@ -206,4 +206,5 @@ xi.settings =
     GARRISON_ONCE_PER_WEEK       = 0;    -- Set to 1 to bypass the limit of one garrison per Conquest Tally Week.
     GARRISON_PARTY_LIMIT         = 18;   -- Set to max party members you want to do garrison (default: 18).
     GARRISON_NATION_BYPASS       = 0;    -- Set to 1 to bypass the nation requirement.
+    GARRISON_RANK                = 2;    -- Set to minumum Nation Rank to start Garrison (default: 2).
 }

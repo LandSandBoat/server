@@ -207,7 +207,8 @@ xi.garrison.spawnNPCs = function(npc, party)
         mob:setSpawn(xPos, yPos, zPos, rot)
         mob:setRoamFlags(xi.roamFlag.EVENT)
         mob:spawn()
-        mob:setMobLevel(garrisonZoneData.levelCap - 5)
+        DisallowRespawn(mob:getID(), true)
+        mob:setMobLevel(garrisonZoneData.levelCap - 3)
         mob:setSpeed(10)
         -- BATTLEFIELD this is to prevent outside help, is not retail
         mob:addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0)
@@ -366,12 +367,39 @@ end
 
 xi.garrison.onTrade = function(player, npc, trade)
     -- TODO: Check to see if there is Ballista in the Zone
+    -- offset 41 This area is currently conducting a Ballista match. I have no time to trouble myself with your beastman trinkets.
+    -- TODO: Check to see if party has a fellow
+    -- offset 42 A party member has an NPC called up. You cannot take part in this event.
     local zoneId = npc:getZoneID()
+    local region = npc:getZone():getRegionID()
     local garrisonZoneData = xi.garrison.data[zoneId]
+    local text = zones[zoneId].text
     local lockout = xi.settings.GARRISON_LOCKOUT
     local timeLimit = xi.settings.GARRISON_TIME_LIMIT
     local garrisonRunning = npc:getZone():getLocalVar(string.format("[GARRISON]LockOut_%s", zoneId))
     local item = garrisonZoneData.itemReq
+    local nation = player:getNation()
+    local rank = player:getRank(nation)
+    local levelCapOffset = 0
+    local nationOffset = 1
+    if nation == 0 then
+        nationOffset = 3
+    elseif nation == 1 then
+        nationOffset = 14
+    elseif nation == 2 then
+        nationOffset = 25
+    end
+    if garrisonZoneData.levelCap == 20 then
+        levelCapOffset = 0
+    elseif garrisonZoneData.levelCap == 30 then
+        levelCapOffset = 3
+    elseif garrisonZoneData.levelCap == 40 then
+        levelCapOffset = 5
+    elseif garrisonZoneData.levelCap == 50 then
+        levelCapOffset = 7
+    elseif garrisonZoneData.levelCap == 75 then
+        levelCapOffset = 9
+    end
     -- Collect entrant information
     local party = player:getAlliance()
     --gets party size for spawning each NPC
@@ -381,6 +409,7 @@ xi.garrison.onTrade = function(player, npc, trade)
         npcUtil.tradeHasExactly(trade, item) and
         os.time() > garrisonRunning and
         party <= xi.settings.GARRISON_PARTY_LIMIT and
+        rank >= xi.settings.GARRISON_RANK and
         ( xi.settings.GARRISON_ONCE_PER_WEEK == 1 or player:getCharVar("GARRISON_CONQUEST_WAIT") < os.time() )
     then
         xi.garrison.start(player, npc, party)
@@ -388,8 +417,29 @@ xi.garrison.onTrade = function(player, npc, trade)
         player:setCharVar("GARRISON_CONQUEST_WAIT", getConquestTally())
         npc:getZone():setLocalVar(string.format("[GARRISON]EndTime_%s", zoneId), os.time() + timeLimit)
         npc:getZone():setLocalVar(string.format("[GARRISON]LockOut_%s", zoneId), os.time() + lockout)
+        npc:timer(200, function(npcArg)
+            player:messageSpecial(text.GARRISON + 2)
+        end)
+        npc:timer(400, function(npcArg)
+            player:messageSpecial(text.GARRISON + nationOffset + levelCapOffset, 0, 0, region)
+        end)
+        npc:timer(600, function(npcArg)
+            player:messageSpecial(text.GARRISON + nationOffset + levelCapOffset + 1)
+        end)
+        if garrisonZoneData.levelCap == 20 then
+            npc:timer(800, function(npcArg)
+                player:messageSpecial(text.GARRISON + nationOffset + levelCapOffset + 2)
+            end)
+        end
+    elseif
+        xi.settings.GARRISON_ONCE_PER_WEEK == 0 and
+        player:getCharVar("GARRISON_CONQUEST_WAIT") > os.time()
+    then
+        -- Limit Once Per Week
+        player:messageSpecial(text.GARRISON + 40)
     else
-        -- TODO event for not having met requirements
+        -- Requirements not met
+        player:messageSpecial(text.GARRISON + 1)
     end
 end
 -- Zone tick Create NPC Tables if empty
@@ -421,7 +471,8 @@ xi.garrison.npcTable = function(zone)
             mob:setSpawn(xPos, yPos, zPos, rot)
             mob:setRoamFlags(xi.roamFlag.EVENT)
             mob:spawn()
-            mob:setMobLevel(garrisonZoneData.levelCap - 5)
+            DisallowRespawn(mob:getID(), true)
+            mob:setMobLevel(garrisonZoneData.levelCap - 3)
             mob:setSpeed(10)
             -- BATTLEFIELD this is to prevent outside help, is not retail
             mob:addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0)
