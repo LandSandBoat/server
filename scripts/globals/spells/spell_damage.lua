@@ -624,7 +624,6 @@ end
 xi.spells.spell_damage.calculateTMDA = function(caster, target, damageType)
     local TMDA = 1 -- The variable we want to calculate
 
---    TMDA = utils.liement(target, damageType) -- check for Liement.
     TMDA = target:checkLiementAbsorb(damageType) -- check for Liement.
     if TMDA < 0 then -- skip MDT/DT/MDTII etc for Liement if we absorb.
         return TMDA
