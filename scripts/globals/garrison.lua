@@ -90,7 +90,7 @@ xi.garrison.mobsAlive = function(player)
         mobnum = mobnum + 1
         mob = mob + 1
     end
-    -- return result
+    -- Return result
     if killedAllMobs == false then
         return true
     else
@@ -109,7 +109,7 @@ xi.garrison.npcAlive = function(player)
             killedAllNPC = false
         end
     end
-    -- return result
+    -- Return result
     if killedAllNPC == false then
         return true
     else
@@ -127,11 +127,11 @@ xi.garrison.despawnNPCs = function(npc)
 end
 
 xi.garrison.returnHome = function(mob)
-  if mob:getRoamFlags() == xi.roamFlag.Event then
+  if mob:getRoamFlags() == xi.roamFlag.NONE then
     local spawn = mob:getSpawnPos()
     local current = mob:getPos()
     if spawn.x ~= current.x or spawn.z ~= current.z then
-      mob:pathTo(spawn.x, spawn.y, spawn.z)
+      mob:pathTo(spawn.x, spawn.y, spawn.z, xi.path.flag.NONE)
     end
   end
 end
@@ -141,11 +141,11 @@ xi.garrison.npcTableEmpty = function(zone)
     local garrisonZoneData = xi.garrison.data[zoneId]
     local npcs = garrisonZoneData.npcs
     local npcEmpty = true
-    -- check if npc table is empty
+    -- Check if npc table is empty
     for _, npcID in pairs(npcs) do
         npcEmpty = false
     end
-    -- return result
+    -- Return result
     if npcEmpty == false then
         return false
     else
@@ -173,7 +173,7 @@ xi.garrison.tick = function(player, npc, wave, party)
         wave <=3 and
         xi.garrison.npcAlive(player, party) == true
     then
-        -- next wave
+        -- Next wave
         wave = wave + 1
         npc:timer(30000, function(npcArg)
             xi.garrison.spawnWave(player, npc, wave, party)
@@ -185,7 +185,7 @@ xi.garrison.tick = function(player, npc, wave, party)
         -- lose
         xi.garrison.onLose(player, npc)
     else
-    -- start next tick
+    -- Start next tick
         npc:timer(10000, function(npcArg)
             xi.garrison.tick(player, npc, wave, party)
         end)
@@ -205,11 +205,11 @@ xi.garrison.spawnNPCs = function(npc, party)
     local mob = GetMobByID(mobId)
         if npcnum <= party then
         mob:setSpawn(xPos, yPos, zPos, rot)
-        mob:setRoamFlags(xi.roamFlag.EVENT)
+        mob:setRoamFlags(xi.roamFlag.NONE)
         mob:spawn()
         DisallowRespawn(mob:getID(), true)
         mob:setMobLevel(garrisonZoneData.levelCap - 3)
-        mob:setSpeed(10)
+        mob:setSpeed(30)
         -- BATTLEFIELD this is to prevent outside help, is not retail
         mob:addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0)
         mob:setAllegiance(1)
@@ -235,6 +235,7 @@ xi.garrison.spawnWave = function(player, npc, wave, party)
     local boss = garrisonZoneData.mobs + 8
     local npcs = garrisonZoneData.npcs
     local mobCount = 1
+    -- Get wave size based on alliance size
     if party >= 1 then
         allianceSize = wave + 0
     end
@@ -244,7 +245,7 @@ xi.garrison.spawnWave = function(player, npc, wave, party)
     if party > 12 then
         allianceSize = wave + 2
     end
-    -- Mobs in 15 second intervals (2 per interval in 1 party, 4 per interval in alliances)
+    -- Spawn mobs in 15 second intervals (2 per interval in 1 party, 4 per interval in alliances)
     for _, mobId in ipairs(garrisonZoneData.waveSize[allianceSize]) do
         if
             (mobCount == 3 or mobCount == 4) and
@@ -323,9 +324,10 @@ xi.garrison.spawnWave = function(player, npc, wave, party)
             mobCount = mobCount + 1
         end
     end
+    -- Wave 4 spawn boss and restart tick or restart tick
     if wave == 4 then
         npc:timer(60000, function(npcArg)
-            --spawn boss after 1 minute
+            -- Spawn boss after 1 minute
             SpawnMob(boss)
             -- BATTLEFIELD this is to prevent outside help, is not retail
             GetMobByID(boss):addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0)
@@ -335,11 +337,11 @@ xi.garrison.spawnWave = function(player, npc, wave, party)
                     GetMobByID(boss):addEnmity(GetMobByID(npcID), 1, 1)
                 end
             end
-            --start tick again
+            -- Start tick again
             xi.garrison.tick(player, npc, wave, party)
         end)
     else
-        --start tick again tick shouldnt start until all mobs have been spawned (even if all npcs died before wave completes all mobs spawn)
+        -- Start tick again tick shouldnt start until all mobs have been spawned (even if all npcs died before wave completes all mobs spawn)
         npc:timer(60000, function(npcArg)
             xi.garrison.tick(player, npc, wave, party)
         end)
@@ -349,6 +351,7 @@ end
 xi.garrison.start = function(player, npc, party)
     local zoneId = npc:getZoneID()
     local garrisonZoneData = xi.garrison.data[zoneId]
+    local wave = 1
     -- Apply level restriction
         for _, v in ipairs(player:getAlliance()) do
             -- Make sure they are in the same zone
@@ -358,18 +361,22 @@ xi.garrison.start = function(player, npc, party)
                 v:addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0)
             end
         end
-    -- Spawn NPCs
-    xi.garrison.spawnNPCs(npc, party)
-    -- Start First Wave
-    local wave = 1
-    xi.garrison.spawnWave(player, npc, wave, party)
+    -- Make sure no npcs are floating around still
+    xi.garrison.despawnNPCs(npc)
+    -- Wait 3 seconds before spawning everything
+    npc:timer(3000, function(npcArg)
+        -- Spawn NPCs
+        xi.garrison.spawnNPCs(npc, party)
+        -- Start First Wave
+        xi.garrison.spawnWave(player, npc, wave, party)
+    end)
 end
 
 xi.garrison.onTrade = function(player, npc, trade)
     -- TODO: Check to see if there is Ballista in the Zone
-    -- offset 41 This area is currently conducting a Ballista match. I have no time to trouble myself with your beastman trinkets.
+    -- Offset 41 This area is currently conducting a Ballista match. I have no time to trouble myself with your beastman trinkets.
     -- TODO: Check to see if party has a fellow
-    -- offset 42 A party member has an NPC called up. You cannot take part in this event.
+    -- Offset 42 A party member has an NPC called up. You cannot take part in this event.
     local zoneId = npc:getZoneID()
     local region = npc:getZone():getRegionID()
     local garrisonZoneData = xi.garrison.data[zoneId]
@@ -382,6 +389,7 @@ xi.garrison.onTrade = function(player, npc, trade)
     local rank = player:getRank(nation)
     local levelCapOffset = 0
     local nationOffset = 1
+    -- Nation text offset
     if nation == 0 then
         nationOffset = 3
     elseif nation == 1 then
@@ -389,6 +397,7 @@ xi.garrison.onTrade = function(player, npc, trade)
     elseif nation == 2 then
         nationOffset = 25
     end
+    -- Levelcap text offset
     if garrisonZoneData.levelCap == 20 then
         levelCapOffset = 0
     elseif garrisonZoneData.levelCap == 30 then
@@ -402,9 +411,8 @@ xi.garrison.onTrade = function(player, npc, trade)
     end
     -- Collect entrant information
     local party = player:getAlliance()
-    --gets party size for spawning each NPC
+    -- Gets party size for spawning each NPC
     party = #party
-    -- TODO break into different requirements
     if
         npcUtil.tradeHasExactly(trade, item) and
         os.time() > garrisonRunning and
@@ -417,15 +425,19 @@ xi.garrison.onTrade = function(player, npc, trade)
         player:setCharVar("GARRISON_CONQUEST_WAIT", getConquestTally())
         npc:getZone():setLocalVar(string.format("[GARRISON]EndTime_%s", zoneId), os.time() + timeLimit)
         npc:getZone():setLocalVar(string.format("[GARRISON]LockOut_%s", zoneId), os.time() + lockout)
+        -- Starting dialog
         npc:timer(200, function(npcArg)
             player:messageSpecial(text.GARRISON + 2)
         end)
+        -- Nation dialog depending on which level cap
         npc:timer(400, function(npcArg)
             player:messageSpecial(text.GARRISON + nationOffset + levelCapOffset, 0, 0, region)
         end)
+        -- More nation dialog
         npc:timer(600, function(npcArg)
             player:messageSpecial(text.GARRISON + nationOffset + levelCapOffset + 1)
         end)
+        -- Additional dialog for level cap 20 zones
         if garrisonZoneData.levelCap == 20 then
             npc:timer(800, function(npcArg)
                 player:messageSpecial(text.GARRISON + nationOffset + levelCapOffset + 2)
@@ -469,11 +481,11 @@ xi.garrison.npcTable = function(zone)
                 releaseIdOnDeath = false,
             })
             mob:setSpawn(xPos, yPos, zPos, rot)
-            mob:setRoamFlags(xi.roamFlag.EVENT)
+            mob:setRoamFlags(xi.roamFlag.NONE)
             mob:spawn()
             DisallowRespawn(mob:getID(), true)
             mob:setMobLevel(garrisonZoneData.levelCap - 3)
-            mob:setSpeed(10)
+            mob:setSpeed(30)
             -- BATTLEFIELD this is to prevent outside help, is not retail
             mob:addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0)
             mob:setAllegiance(1)
