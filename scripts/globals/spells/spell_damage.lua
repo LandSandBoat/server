@@ -622,11 +622,11 @@ end
 -- SDT follow-up. This time for specific modifiers.
 -- Referred to on item as "Magic Damage Taken -%", "Damage Taken -%" (Ex. Defending Ring) and "Magic Damage Taken II -%" (Aegis)
 xi.spells.spell_damage.calculateTMDA = function(caster, target, damageType)
-    local multipleTargetReduction = 1 -- The variable we want to calculate
+    local targetMagicDamageAdjustment = 1 -- The variable we want to calculate
 
-    multipleTargetReduction = target:checkLiementAbsorb(damageType) -- check for Liement.
-    if multipleTargetReduction < 0 then -- skip MDT/DT/MDTII etc for Liement if we absorb.
-        return multipleTargetReduction
+    targetMagicDamageAdjustment = target:checkLiementAbsorb(damageType) -- check for Liement.
+    if targetMagicDamageAdjustment < 0 then -- skip MDT/DT/MDTII etc for Liement if we absorb.
+        return targetMagicDamageAdjustment
     end
     -- The values set for this modifiers are base 10,000.
     -- -2500 in item_mods.sql means -25% damage recived.
@@ -638,9 +638,9 @@ xi.spells.spell_damage.calculateTMDA = function(caster, target, damageType)
     local magicDamageTakenII  = target:getMod(xi.mod.DMGMAGIC_II) / 10000 -- Mod is base 10000
     local combinedDamageTaken = utils.clamp(magicDamageTaken + globalDamageTaken, -0.5, 0.5) -- The combination of regular "Damage Taken" and "Magic Damage Taken" caps at 50%
 
-    multipleTargetReduction = 1 + utils.clamp(combinedDamageTaken + magicDamageTakenII, -0.5, 0.125)  -- "Magic Damage Taken II" bypasses the regular cap, but combined cap is -87.5%
+    targetMagicDamageAdjustment = 1 + utils.clamp(combinedDamageTaken + magicDamageTakenII, -0.5, 0.125)  -- "Magic Damage Taken II" bypasses the regular cap, but combined cap is -87.5%
 
-    return multipleTargetReduction
+    return targetMagicDamageAdjustment
 end
 
 -- Ebullience applies an entirely separate multiplier.
