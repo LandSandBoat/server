@@ -834,13 +834,13 @@ namespace battleutils
                         {
                             // Subpower is the remaining damage that can be reflected. When it reaches 0 the effect ends
                             int remainingReflect = PEffect->GetSubPower();
-                            if (remainingReflect - Action->spikesParam <= 0) // abs to account for absorbed reprisal
+                            if (remainingReflect - abs(damage) <= 0) // abs to account for absorbed reprisal
                             {
                                 PDefender->StatusEffectContainer->DelStatusEffect(EFFECT_REPRISAL);
                             }
                             else
                             {
-                                PEffect->SetSubPower(remainingReflect - Action->spikesParam);
+                                PEffect->SetSubPower(remainingReflect - abs(damage));
                             }
                         }
                     }
