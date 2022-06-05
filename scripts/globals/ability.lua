@@ -738,7 +738,7 @@ function AbilityFinalAdjustments(dmg,mob,skill,target,skilltype,skillparam,shado
     if (skilltype == xi.attackType.PHYSICAL) then
         dmg = target:physicalDmgTaken(dmg, skillparam)
     elseif (skilltype == xi.attackType.MAGICAL) then
-        dmg = target:magicDmgTaken(dmg)
+        dmg = target:magicDmgTaken(dmg, skillparam)
     elseif (skilltype == xi.attackType.BREATH) then
         dmg = target:breathDmgTaken(dmg)
     elseif (skilltype == xi.attackType.RANGED) then
