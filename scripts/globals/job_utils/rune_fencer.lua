@@ -514,8 +514,6 @@ local function calculateSwipeLungeDamage(player, target, skillModifier, gearBonu
     damage = math.floor(damage * multipliers.TMDA)
     damage = math.floor(damage * multipliers.nukeAbsorbOrNullify)
 
-    damage = target:magicDmgTaken(damage)
-
     -- Handle Phalanx
     if damage > 0 then
         damage = utils.clamp(damage - target:getMod(xi.mod.PHALANX), 0, 99999)
