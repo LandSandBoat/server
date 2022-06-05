@@ -120,10 +120,11 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
         ABSORB_STATUS = 10,
         SELF_BUFF = 11,
         DEATH = 12,
+        DAMAGE_SPECIFIC_MOB = 13,
     }
 
     -- If we're not going to proc, lets not execute all those checks!
-    if chance < math.random(100) then
+    if chance < math.random(100) or (addType == procType.DAMAGE_SPECIFIC_MOB and defender:getTargID() ~= power) then -- power is the targID for type DAMAGE_SPECIFIC_MOB
         return 0,0,0
     end
 
@@ -137,7 +138,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
     end
     --------------------------------------
 
-    if addType == procType.DAMAGE then
+    if addType == procType.DAMAGE or addType == procType.DAMAGE_SPECIFIC_MOB then
         damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage)
         msgID = xi.msg.basic.ADD_EFFECT_DMG
         if damage < 0 then
