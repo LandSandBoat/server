@@ -14,19 +14,25 @@ xi.dynamis.onSpawnAntaeus = function(mob)
     mob:setRoamFlags(xi.roamFlag.EVENT)
     xi.dynamis.setMegaBossStats(mob)
     -- Set Removable Mods
-    mob:addMod(xi.mod.REGEN, 1000)
-    mob:addMod(xi.mod.CRITHITRATE, 100)
-    mob:addMod(xi.mod.UDMGRANGE, -99)
-    mob:addMod(xi.mod.UDMGPHYS, -99)
-    mob:addMod(xi.mod.UDMGBREATH, -99)
-    mob:addMod(xi.mod.FIRERES, 1000)
-    mob:addMod(xi.mod.ICERES, 1000)
-    mob:addMod(xi.mod.WINDRES, 1000)
-    mob:addMod(xi.mod.EARTHRES, 1000)
-    mob:addMod(xi.mod.THUNDERRES, 1000)
-    mob:addMod(xi.mod.WATERRES, 1000)
-    mob:addMod(xi.mod.LIGHTRES, 1000)
-    mob:addMod(xi.mod.DARKRES, 1000)
+    xi.dynamis.buffsAntaeus = 
+    {
+        ["Scolopendra"] = {{xi.mod.REGEN}, 1000, 0},
+        ["Stringes"] = {{xi.mod.CRITHITRATE}, 100, 10},
+        ["Suttung"] = {{xi.mod.UDMGPHYS, xi.mod.UDMGRANGE, xi.mod.UDMGMAGIC, xi.mod.UDMGBREATH}, -99, 0},
+        ["Fire_Elemental"] = {{xi.mod.FIRERES}, 1000, 0},
+        ["Ice_Elemental"] = {{xi.mod.ICERES}, 1000, 0},
+        ["Air_Elemental"] = {{xi.mod.WINDRES}, 1000, 0},
+        ["Earth_Elemental"] = {{xi.mod.EARTHRES}, 1000, 0},
+        ["Thunder_Elemental"] = {{xi.mod.THUNDERRES}, 1000, 0},
+        ["Water_Elemental"] = {{xi.mod.WATERRES}, 1000, 0},
+        ["Light_Elemental"] = {{xi.mod.LIGHTRES}, 1000, 0},
+        ["Dark_Elemental"] = {{xi.mod.DARKRES}, 1000, 0},
+    }
+    for var, buffTable in pairs(xi.dynamis.buffsAntaeus) do
+        for _, buff in pairs(buffTable[1]) do
+            mob:setMod(buff, buffTable[2])
+        end
+    end
     -- Set Non-Removable Mods
     -- Anateus should not standback and should be able to avoid most RAs via melee range. (https://ffxiclopedia.fandom.com/wiki/Antaeus)
     mob:addMobMod(xi.mobMod.NO_STANDBACK, 1)
@@ -45,63 +51,13 @@ end
 
 xi.dynamis.onFightAntaeus = function(mob, target)
     local zone = mob:getZone()
-    -- Remove Mods Per NM or Elemental Kill
-    if not GetMobByID(zone:getLocalVar("Scolopendra")):isAlive() then
-        if mob:getMod(xi.mod.REGEN) ~= 0 then
-            mob:setMod(xi.mod.REGEN, 0)
-        end
-    end
-    if not GetMobByID(zone:getLocalVar("Stringes")):isAlive() then
-        if mob:getMod(xi.mod.CRITHITRATE) ~= 10 then
-            mob:setMod(xi.mod.CRITHITRATE, 10)
-        end
-    end
-    if not GetMobByID(zone:getLocalVar("Suttung")):isAlive() then
-        if mob:getMod(xi.mod.UDMGPHYS) ~= 0 then
-            mob:setMod(xi.mod.UDMGRANGE, 0)
-            mob:setMod(xi.mod.UDMGPHYS, 0)
-            mob:setMod(xi.mod.UDMGBREATH, 0)
-            mob:setMod(xi.mod.UDMGRANGE, 0)
-        end
-    end
-    if not GetMobByID(zone:getLocalVar("Fire_Elemental")):isAlive() then
-        if mob:getMod(xi.mod.FIRERES) ~= 0 then
-            mob:setMod(xi.mod.FIRERES, 0)
-        end
-    end
-    if not GetMobByID(zone:getLocalVar("Ice_Elemental")):isAlive() then
-        if mob:getMod(xi.mod.ICERES) ~= 0 then
-            mob:setMod(xi.mod.ICERES, 0)
-        end
-    end
-    if not GetMobByID(zone:getLocalVar("Air_Elemental")):isAlive() then
-        if mob:getMod(xi.mod.WINDRES) ~= 0 then
-            mob:setMod(xi.mod.WINDRES, 0)
-        end
-    end
-    if not GetMobByID(zone:getLocalVar("Earth_Elemental")):isAlive() then
-        if mob:getMod(xi.mod.EARTHRES) ~= 0 then
-            mob:setMod(xi.mod.EARTHRES, 0)
-        end
-    end
-    if not GetMobByID(zone:getLocalVar("Thunder_Elemental")):isAlive() then
-        if mob:getMod(xi.mod.THUNDERRES) ~= 0 then
-            mob:setMod(xi.mod.THUNDERRES, 0)
-        end
-    end
-    if not GetMobByID(zone:getLocalVar("Water_Elemental")):isAlive() then
-        if mob:getMod(xi.mod.WATERRES) ~= 0 then
-            mob:setMod(xi.mod.WATERRES, 0)
-        end
-    end
-    if not GetMobByID(zone:getLocalVar("Light_Elemental")):isAlive() then
-        if mob:getMod(xi.mod.LIGHTRES) ~= 0 then
-            mob:setMod(xi.mod.LIGHTRES, 0)
-        end
-    end
-    if not GetMobByID(zone:getLocalVar("Dark_Elemental")):isAlive() then
-        if mob:getMod(xi.mod.DARKRES) ~= 0 then
-            mob:setMod(xi.mod.DARKRES, 0)
+
+    for var, buffTable in pairs(xi.dynamis.buffsAntaeus) do
+        if not GetMobByID(zone:getLocalVar(var)):isAlive() then
+            for _, buff in pairs(buffTable[1]) do
+                mob:setMod(buff, buffTable[3])
+            end
+            table.remove(xi.dynamis.buffsAntaeus, var)
         end
     end
 end

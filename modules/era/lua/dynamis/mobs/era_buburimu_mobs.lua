@@ -165,7 +165,7 @@ xi.dynamis.onWeaponskillPrepApoc = function(mob, target)
 
     local tableLength = #xi.dynamis.apocWeaponskills
     if tableLength ~= 0 then
-        return math.random(1, tableLength)
+        return xi.dynamis.apocWeaponskills[math.random(1, tableLength)]
     else
         return 0
     end

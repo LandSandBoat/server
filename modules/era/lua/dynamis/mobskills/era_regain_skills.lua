@@ -6,7 +6,7 @@
 --------------------------------------------
 require("modules/module_utils")
 
-local m = Module:new("era_regain_mobskill")
+local m = Module:new("era_regain_skills")
 
 m:addOverride("xi.globals.mobskills.regain_hp.onMobWeaponSkill", function(target, mob, skill)
 

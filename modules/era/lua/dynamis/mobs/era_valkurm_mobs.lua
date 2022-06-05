@@ -21,7 +21,7 @@ end
 
 xi.dynamis.onSpawnFairy = function(mob)
     mob:speed(140)
-    xi.dynamis.setNMStats(mob)
+    xi.dynamis.onSpawnNoAuto(mob)
 end
 
 xi.dynamis.onFightMorbol = function(mob, target)
@@ -46,7 +46,9 @@ xi.dynamis.onFightCirrate = function(mob, target)
     end
 
     if not GetMobByID(zone:getLocalVar("Fairy Ring")):isAlive() then
-        mob:speed(40)
+        if mob:getSpeed() > 40 then
+            mob:speed(40)
+        end
         mob:setLocalVar("miasmicbreathpower", 30)
     end
 
@@ -93,6 +95,20 @@ xi.dynamis.onWeaponskillPrepCirrate = function(mob)
     for skill, chance in pairs(skillList) do -- Checks all skills and their chances.
         if chance[1] >= randomchance then -- If chance is less than or equal to skill, use it.
             return skill -- USE THE SKILL LELELLELEL HOPE ITS EXTREMELY BAD BREATH
+        end
+    end
+end
+
+xi.dynamis.onWeaponskillPrepNantina = function(mob)
+    local charm = math.random(1, 100)
+
+    if charm <= 10 then
+        return 1619 -- Attractant
+    else
+        if mob:getHPP() > 25 then
+            return 1617
+        else
+            return 1618
         end
     end
 end
