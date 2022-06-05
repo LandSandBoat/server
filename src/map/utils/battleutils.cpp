@@ -6974,9 +6974,11 @@ namespace battleutils
             {
                 uint16 absorbPower    = liementEffect->GetPower();
                 uint16 absorbTypeBits = liementEffect->GetSubPower();
+                uint16 numBits        = sizeof(absorbTypeBits) * 8;
+
                 uint8 runeAbsorbCount = 0;
 
-                for (int i = 0; i < sizeof(absorbTypeBits)/4; i++) // unpacking is limited to the size of the return value of GetPower/GetSubPower. If this ever expands more Runes can be packed.
+                for (int i = 0; i < numBits/4; i++) // unpacking is limited to the size of the return value of GetPower/GetSubPower. If this ever expands more Runes can be packed.
                 {
                     DAMAGE_TYPE packedDamageType = (DAMAGE_TYPE) ( (absorbTypeBits >> i * 4) & 0xF ); //unpack damage type 4 bits at a time
 

@@ -785,7 +785,7 @@ xi.job_utils.rune_fencer.useLiement = function(player, target, ability, action)
 
     local runeEffects = target:getAllRuneEffects()
     local absorbPower = 25
-    local duration = 180 + player:getMod(xi.mod.LIEMENT_DURATION)
+    local duration = 10 + player:getMod(xi.mod.LIEMENT_DURATION)
 
     local absorbTypes = {} -- one absorb type per rune which can be additive
     local i = 0
