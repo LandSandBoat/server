@@ -21741,6 +21741,12 @@ INSERT INTO `item_mods` VALUES (17621,9,3);
 INSERT INTO `item_mods` VALUES (17621,10,3);
 INSERT INTO `item_mods` VALUES (17621,20,9); -- WATER_RES
 INSERT INTO `item_mods` VALUES (17622,20,7); -- WATER_RES
+INSERT INTO `item_mods` VALUES (17622,431,13);   -- Buccaneer's Knife against Brigandish Blade (Additional effect: water Damage)
+INSERT INTO `item_mods` VALUES (17622,499,6);   -- Additional effect animation (subEffect)
+INSERT INTO `item_mods` VALUES (17622,500,30);  -- Additional effect damage
+INSERT INTO `item_mods` VALUES (17622,501,100);   -- Additional effect Chance 100%
+INSERT INTO `item_mods` VALUES (17622,950,6);   -- Additional effect element water (xi.magic.element)
+INSERT INTO `item_mods` VALUES (17622,952,360);   -- Power is Brigandish Blade's TargID (it's full ID is too big for data type)
 INSERT INTO `item_mods` VALUES (17623,11,2);
 INSERT INTO `item_mods` VALUES (17623,20,8); -- WATER_RES
 INSERT INTO `item_mods` VALUES (17623,298,2);
