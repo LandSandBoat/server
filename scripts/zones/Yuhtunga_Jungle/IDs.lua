@@ -42,6 +42,7 @@ zones[xi.zone.YUHTUNGA_JUNGLE] =
         LOGGING_IS_POSSIBLE_HERE    = 7705,  -- Logging is possible here if you have <item>.
         HARVESTING_IS_POSSIBLE_HERE = 7712,  -- Harvesting is possible here if you have <item>.
         SOMETHING_IS_BURIED_HERE    = 7766,  -- It looks like something is buried here. If you had <item> you could dig it up.
+        GARRISON                    = 7793,  -- Hm? What is this? How do I know this is not some trick?.
         SWARM_APPEARED              = 7839,  -- A swarm has appeared!
         PLAYER_OBTAINS_ITEM         = 7879,  -- <name> obtains <item>!
         UNABLE_TO_OBTAIN_ITEM       = 7880,  -- You were unable to obtain the item.

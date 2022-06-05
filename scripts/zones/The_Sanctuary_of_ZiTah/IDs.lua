@@ -44,6 +44,7 @@ zones[xi.zone.THE_SANCTUARY_OF_ZITAH] =
         NEWLY_SPROUTED_GLOWING     = 7777,  -- The newly sprouted <item> is glowing softly. You no longer feel as if you are being watched.
         NOT_THE_TIME_FOR_THAT      = 7778,  -- This is not the time for that!
         SENSE_OMINOUS_PRESENCE     = 7862,  -- You sense an ominous presence...
+        GARRISON                   = 8049,  -- Hm? What is this? How do I know this is not some trick?.
         PLAYER_OBTAINS_ITEM        = 8096,  -- <name> obtains <item>!
         UNABLE_TO_OBTAIN_ITEM      = 8097,  -- You were unable to obtain the item.
         PLAYER_OBTAINS_TEMP_ITEM   = 8098,  -- <name> obtains the temporary item: <item>!
