@@ -490,7 +490,7 @@ xi.mobskills.mobBreathMove = function(mob, target, percent, base, element, cap)
 
     damage = utils.clamp(damage, 1, cap)
 
-    local liement = target:checkLiementAbsorb(damageType) -- check for Liement.
+    local liement = target:checkLiementAbsorb(xi.damageType.ELEMENTAL + element) -- check for Liement.
     if liement < 0 then -- skip BDT/DT etc for Liement if we absorb.
         return math.floor(damage * liement)
     end
@@ -504,14 +504,16 @@ xi.mobskills.mobBreathMove = function(mob, target, percent, base, element, cap)
     local breathDamageTaken   = target:getMod(xi.mod.DMGBREATH) / 10000    -- Mod is base 10000
     local combinedDamageTaken = utils.clamp(breathDamageTaken + globalDamageTaken, -0.5, 0.5) -- The combination of regular "Damage Taken" and "Breath Damage Taken" caps at 50%. There is no BDTII known as of yet.
 
+    damage = math.floor(damage * combinedDamageTaken)
+
     -- Handle Phalanx
-    if dmg > 0 then
-        dmg = utils.clamp(dmg - target:getMod(xi.mod.PHALANX), 0, 99999)
+    if damage > 0 then
+        damage = utils.clamp(damage - target:getMod(xi.mod.PHALANX), 0, 99999)
     end
 
     -- Handle Stoneskin
-    if dmg > 0 then
-        dmg = utils.clamp(utils.stoneskin(target, dmg), -99999, 99999)
+    if damage > 0 then
+        damage = utils.clamp(utils.stoneskin(target, damage), -99999, 99999)
     end
 
     return damage

@@ -389,9 +389,9 @@ function BlueFinalAdjustments(caster, target, spell, dmg, params)
 
     -- handle One For All, Liement
     if damageType == xi.damageType.MAGICAL then
-        local TMDA = xi.spells.spell_damage.calculateTMDA(caster, target, xi.damageType.ELEMENTAL + spellElement) -- Apply checks for Liement, MDT/MDTII/DT
+        local targetMagicDamageAdjustment = xi.spells.spell_damage.calculateTMDA(caster, target, xi.damageType.ELEMENTAL + spell:getElement()) -- Apply checks for Liement, MDT/MDTII/DT
 
-        dmg = math.floor(dmg * TMDA)
+        dmg = math.floor(dmg * targetMagicDamageAdjustment)
         if dmg < 0 then
             target:takeSpellDamage(caster, spell, dmg, attackType, damageType)
             -- TODO: verify Afflatus/enmity from absorb?

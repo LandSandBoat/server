@@ -299,7 +299,7 @@ local attackTypeShields =
     [xi.attackType.MAGICAL ] = xi.effect.MAGIC_SHIELD,
 }
 
-function AvatarFinalAdjustments(dmg, mob, skill, target, skilltype, skillparam, shadowbehav)
+function AvatarFinalAdjustments(dmg, mob, skill, target, skilltype, damagetype, shadowbehav)
 
     -- physical attack missed, skip rest
     if skilltype == xi.attackType.PHYSICAL and dmg == 0 then
@@ -402,9 +402,9 @@ function AvatarFinalAdjustments(dmg, mob, skill, target, skilltype, skillparam, 
 
     -- handle One For All, Liement
     if skilltype == xi.attackType.MAGICAL then
-        local TMDA = xi.spells.spell_damage.calculateTMDA(caster, target, xi.damageType.ELEMENTAL + spellElement) -- Apply checks for Liement, MDT/MDTII/DT
+        local targetMagicDamageAdjustment = xi.spells.spell_damage.calculateTMDA(mob, target, damagetype) -- Apply checks for Liement, MDT/MDTII/DT
 
-        dmg = math.floor(dmg * TMDA)
+        dmg = math.floor(dmg * targetMagicDamageAdjustment)
         if dmg < 0 then
             return dmg
         end

@@ -429,7 +429,7 @@ xi.job_utils.rune_fencer.useVallationValiance = function(player, target, ability
             local duration = 120 + jobPointBonusDuration
 
             target:delStatusEffectSilent(xi.effect.VALIANCE) -- Vallation overwrites Valiance
-            applyVallationValianceSDTMods(target, SDTTypes, SDTPower, xi.effect.VALLATION, duration)
+            applyVallationValianceSDTMods(target, sdtTypes, sdtPower, xi.effect.VALLATION, duration)
 
             if inspirationFCBonus > 0 then
                target:addStatusEffect(xi.effect.FAST_CAST, inspirationFCBonus, 0, duration)
@@ -492,7 +492,7 @@ local function getSwipeLungeDamageMultipliers(player, target, element, bonusMacc
     multipliers.magicBurstBonus      = xi.spells.spell_damage.calculateIfMagicBurstBonus(player, target, nil, 0, element)
     multipliers.dayAndWeather        = xi.spells.spell_damage.calculateDayAndWeather(player, target, nil, 0, element)
     multipliers.magicBonusDiff       = xi.spells.spell_damage.calculateMagicBonusDiff(player, target, nil, 0, 0, element)
-    multipliers.TMDA                 = xi.spells.spell_damage.calculateTMDA(player, target, xi.damageType.ELEMENTAL + spellElement)
+    multipliers.TMDA                 = xi.spells.spell_damage.calculateTMDA(player, target, xi.damageType.ELEMENTAL + element)
     multipliers.nukeAbsorbOrNullify  = xi.spells.spell_damage.calculateNukeAbsorbOrNullify(player, target, nil, element)
 
     return multipliers
@@ -773,8 +773,6 @@ end
 
 -- see https://www.bg-wiki.com/ffxi/Liement
 xi.job_utils.rune_fencer.useLiement = function(player, target, ability, action)
-
-    local abilityID = ability:getID()
 
     local highestRune = player:getHighestRuneEffect()
 
