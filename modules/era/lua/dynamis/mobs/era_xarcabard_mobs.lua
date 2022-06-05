@@ -2,7 +2,6 @@
 --      Xarcabard Era Module     --
 -----------------------------------
 require("scripts/globals/dynamis")
-require("scripts/globals/mixins")
 require("scripts/globals/zone")
 -----------------------------------
 
@@ -15,7 +14,6 @@ xi.dynamis = xi.dynamis or {}
 
 xi.dynamis.onSpawnDynaLord = function(mob)
     mob:setRoamFlags(xi.roamFlag.EVENT)
-    mixins = {require("scripts/mixins/job_special"),}
     local dialogDL = 7272
     local zone = mob:getZone()
     xi.dynamis.setMegaBossStats(mob) 
@@ -515,7 +513,6 @@ xi.dynamis.animatedInfo =
 }
 
 xi.dynamis.onSpawnAnimated = function(mob)
-    mixins = {require("scripts/mixins/families/animated_weapons"),}
     mob:setRoamFlags(xi.roamFlag.EVENT)
     xi.dynamis.setAnimatedWeaponstats(mob)
     -- Since mixin is called after spawn function is initiated, adding spawn listener functions here

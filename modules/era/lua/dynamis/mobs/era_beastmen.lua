@@ -1,7 +1,6 @@
 -----------------------------------
 -- Dynamis Beastmen NMs Era Module
 -----------------------------------
-require("scripts/globals/mixins")
 require("scripts/globals/dynamis")
 require("scripts/globals/zone")
 -----------------------------------
@@ -10,16 +9,10 @@ xi = xi or {}
 xi.dynamis = xi.dynamis or {}
 
 xi.dynamis.onSpawnBeastmenNM = function(mob)
-    mixins =
-    {
-        require("scripts/mixins/job_special"),
-        require("scripts/mixins/remove_doom")
-    }
     xi.dynamis.setNMStats(mob)
 end
 
 xi.dynamis.onSpawnBeastmen = function(mob)
-    mixins = {require("scripts/mixins/job_special"),}
     xi.dynamis.setMobStats(mob)
 end
 
@@ -28,7 +21,6 @@ xi.dynamis.onSpawnPet = function(mob)
 end
 
 xi.dynamis.onSpawnSMNAF = function(mob)
-    mixins = {require("scripts/mixins/families/avatar"),}
     xi.dynamis.setPetStats(mob)
     mob:setModelId(math.random(791, 798))
     mob:hideName(false)

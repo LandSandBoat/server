@@ -1,7 +1,6 @@
 -----------------------------------
 -- Angra Mainyu Era Module
 -----------------------------------
-require("scripts/globals/mixins")
 require("scripts/globals/dynamis")
 require("scripts/globals/zone")
 -----------------------------------
@@ -110,7 +109,6 @@ xi.dynamis.onRoamAngra = function(mob)
 end
 
 xi.dynamis.onSpawnDagour = function(mob)
-    mixins = {require("scripts/mixins/job_special"),}
     xi.dynamis.setNMStats(mob)
     xi.mix.jobSpecial.config(mob,
     {
@@ -132,7 +130,6 @@ xi.dynamis.onWeaponskillPrepDagour = function(mob)
 end
 
 xi.dynamis.onSpawnGouble = function(mob)
-    mixins = {require("scripts/mixins/job_special"),}
     xi.dynamis.setNMStats(mob)
     xi.mix.jobSpecial.config(mob,
     {
@@ -147,7 +144,6 @@ xi.dynamis.onSpawnGouble = function(mob)
 end
 
 xi.dynamis.onSpawnMildaun = function(mob)
-    mixins = {require("scripts/mixins/job_special"),}
     xi.dynamis.setNMStats(mob)
     xi.mix.jobSpecial.config(mob,
     {
@@ -162,7 +158,6 @@ xi.dynamis.onSpawnMildaun = function(mob)
 end
 
 xi.dynamis.onSpawnQuieb = function(mob)
-    mixins = {require("scripts/mixins/job_special"),}
     xi.dynamis.setNMStats(mob)
     xi.mix.jobSpecial.config(mob,
     {
@@ -177,7 +172,6 @@ xi.dynamis.onSpawnQuieb = function(mob)
 end
 
 xi.dynamis.onSpawnVelosar = function(mob)
-    mixins = {require("scripts/mixins/job_special"),}
     xi.dynamis.setNMStats(mob)
     xi.mix.jobSpecial.config(mob,
     {
