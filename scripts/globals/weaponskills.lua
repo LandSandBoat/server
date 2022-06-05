@@ -358,23 +358,21 @@ local function getSingleHitDamage(attacker, target, dmg, wsParams, calcParams)
                 local magicdmg = addBonusesAbility(attacker, wsParams.ele, target, finaldmg, wsParams)
 
                 magicdmg = magicdmg * applyResistanceAbility(attacker, target, wsParams.ele, wsParams.skill, calcParams.bonusAcc)
-                magicdmg = target:magicDmgTaken(magicdmg. wsParams.ele)
-                if magicdmg < 0 then
-                    return magicdmg
-                end
-
-                magicdmg = adjustForTarget(target, magicdmg, wsParams.ele)
-
+                magicdmg = target:magicDmgTaken(magicdmg, wsParams.ele)
 
                 if magicdmg > 0 then
-                    magicdmg = magicdmg - target:getMod(xi.mod.PHALANX)
-                    magicdmg = utils.clamp(magicdmg, 0, 99999)
+                    magicdmg = adjustForTarget(target, magicdmg, wsParams.ele) -- this may absorb or nullify
                 end
 
-                magicdmg = utils.oneforall(target, magicdmg)
-                magicdmg = utils.stoneskin(target, magicdmg)
+                if magicdmg > 0 then                                           -- handle nonzero damage if previous function does not absorb or nullify
+                    magicdmg = magicdmg - target:getMod(xi.mod.PHALANX)
+                    magicdmg = utils.clamp(magicdmg, 0, 99999)
+                    magicdmg = utils.oneforall(target, magicdmg)
+                    magicdmg = utils.stoneskin(target, magicdmg)
+                end
 
                 finaldmg = finaldmg + magicdmg
+
             end
 
             calcParams.hitsLanded = calcParams.hitsLanded + 1
