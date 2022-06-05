@@ -152,6 +152,14 @@ xi.garrison.npcTableEmpty = function(zone)
         return true
     end
 end
+
+xi.garrison.shuffle = function(tbl)
+  for i = #tbl, 2, -1 do
+    local j = math.random(i)
+    tbl[i], tbl[j] = tbl[j], tbl[i]
+  end
+  return tbl
+end
 -----------------------------------
 -- Main Functions
 -----------------------------------
@@ -245,7 +253,8 @@ xi.garrison.spawnWave = function(player, npc, wave, party)
     if party > 12 then
         allianceSize = wave + 2
     end
-    -- Spawn mobs in 15 second intervals (2 per interval in 1 party, 4 per interval in alliances)
+    -- Spawn mobs in 15 second intervals random from table (2 per interval in 1 party, 4 per interval in alliances)
+    xi.garrison.shuffle(garrisonZoneData.waveSize[allianceSize])
     for _, mobId in ipairs(garrisonZoneData.waveSize[allianceSize]) do
         if
             (mobCount == 3 or mobCount == 4) and
