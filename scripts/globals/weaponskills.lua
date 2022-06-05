@@ -803,7 +803,6 @@ function doMagicWeaponskill(attacker, target, wsID, wsParams, tp, action, primar
         dmg = target:magicDmgTaken(dmg)
         dmg = adjustForTarget(target, dmg, wsParams.ele)
 
-
         if dmg > 0 then
             dmg = dmg - target:getMod(xi.mod.PHALANX)
             dmg = utils.clamp(dmg, 0, 99999)

@@ -396,7 +396,7 @@ xi.mobskills.applyPlayerResistance = function(mob, effect, target, diff, bonus, 
     return getMagicResist(p)
 end
 
-xi.mobskills.mobAddBonuses = function(caster, target, dmg, ele)
+xi.mobskills.mobAddBonuses = function(caster, target, dmg, ele) -- used for SMN magical bloodpacts, despite the name.
 
     local magicDefense = getElementalDamageReduction(target, ele)
     dmg = math.floor(dmg * magicDefense)
@@ -490,6 +490,30 @@ xi.mobskills.mobBreathMove = function(mob, target, percent, base, element, cap)
 
     damage = utils.clamp(damage, 1, cap)
 
+    local liement = target:checkLiementAbsorb(damageType) -- check for Liement.
+    if liement < 0 then -- skip BDT/DT etc for Liement if we absorb.
+        return math.floor(damage * liement)
+    end
+
+    -- The values set for this modifiers are base 10,000.
+    -- -2500 in item_mods.sql means -25% damage recived.
+    -- 2500 would mean 25% ADDITIONAL damage taken.
+    -- The effects of the "Shell" spells are also included in this step. The effect also aplies a negative value.
+
+    local globalDamageTaken   = target:getMod(xi.mod.DMG) / 10000          -- Mod is base 10000
+    local breathDamageTaken   = target:getMod(xi.mod.DMGBREATH) / 10000    -- Mod is base 10000
+    local combinedDamageTaken = utils.clamp(breathDamageTaken + globalDamageTaken, -0.5, 0.5) -- The combination of regular "Damage Taken" and "Breath Damage Taken" caps at 50%. There is no BDTII known as of yet.
+
+    -- Handle Phalanx
+    if dmg > 0 then
+        dmg = utils.clamp(dmg - target:getMod(xi.mod.PHALANX), 0, 99999)
+    end
+
+    -- Handle Stoneskin
+    if dmg > 0 then
+        dmg = utils.clamp(utils.stoneskin(target, dmg), -99999, 99999)
+    end
+
     return damage
 end
 
@@ -570,11 +594,14 @@ xi.mobskills.mobFinalAdjustments = function(dmg, mob, skill, target, attackType,
         dmg = target:rangedDmgTaken(dmg)
     end
 
-    --handling phalanx
-    dmg = dmg - target:getMod(xi.mod.PHALANX)
 
     if dmg < 0 then
-        return 0
+        return dmg
+    end
+
+    -- Handle Phalanx
+    if dmg > 0 then
+        dmg = utils.clamp(dmg - target:getMod(xi.mod.PHALANX), 0, 99999)
     end
 
     if attackType == xi.attackType.MAGICAL then

@@ -9704,6 +9704,24 @@ bool CLuaBaseEntity::isDualWielding()
 }
 
 /************************************************************************
+ *  Function: checkLiementAbsorb()
+ *  Purpose : Returns 1.0 if Liement is not up or didn't absorb, -1.0 or less if it did
+ *  Example : liementAbsorbPct = player:checkLiementAbsorb(xi.damageType.FIRE)
+ *  Notes   :
+ ************************************************************************/
+
+float CLuaBaseEntity::checkLiementAbsorb(uint16 damageType)
+{
+    CBattleEntity* PBattleEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
+    if (PBattleEntity)
+    {
+        return battleutils::CheckLiementAbsorb(PBattleEntity, (DAMAGE_TYPE)damageType);
+    }
+
+    return 1.0f;
+}
+
+/************************************************************************
  *  Function: getCE()
  *  Purpose : Returns the current Cumulative Enmity a Mob has against an Entity
  *  Example : local playerCE = target:getCE(player)
@@ -14337,6 +14355,8 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("checkImbuedItems", CLuaBaseEntity::checkImbuedItems);
 
     SOL_REGISTER("isDualWielding", CLuaBaseEntity::isDualWielding);
+
+    SOL_REGISTER("checkLiementAbsorb", CLuaBaseEntity::checkLiementAbsorb);
 
     // Enmity
     SOL_REGISTER("getCE", CLuaBaseEntity::getCE);

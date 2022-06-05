@@ -387,12 +387,6 @@ function AvatarFinalAdjustments(dmg, mob, skill, target, skilltype, skillparam, 
         end
     end
 
-    -- handling phalanx
-    dmg = dmg - target:getMod(xi.mod.PHALANX)
-    if dmg < 0 then
-        return 0
-    end
-
     -- handle invincible
     if target:hasStatusEffect(xi.effect.INVINCIBLE) and skilltype == xi.attackType.PHYSICAL then
         return 0
@@ -405,6 +399,22 @@ function AvatarFinalAdjustments(dmg, mob, skill, target, skilltype, skillparam, 
 
     -- Calculate Blood Pact Damage before stoneskin
     dmg = dmg + dmg * mob:getMod(xi.mod.BP_DAMAGE) / 100
+
+    -- handle One For All, Liement
+    if skilltype == xi.attackType.MAGICAL then
+        local TMDA = xi.spells.spell_damage.calculateTMDA(caster, target, xi.damageType.ELEMENTAL + spellElement) -- Apply checks for Liement, MDT/MDTII/DT
+
+        dmg = math.floor(dmg * TMDA)
+        if dmg < 0 then
+            return dmg
+        end
+        dmg = utils.oneforall(target, dmg)
+    end
+
+    -- Handle Phalanx
+    if dmg > 0 then
+        dmg = utils.clamp(dmg - target:getMod(xi.mod.PHALANX), 0, 99999)
+    end
 
     if skilltype == xi.attackType.MAGICAL then
         dmg = utils.oneforall(target, dmg)

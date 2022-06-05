@@ -383,18 +383,28 @@ function BlueFinalAdjustments(caster, target, spell, dmg, params)
 
     dmg = dmg * xi.settings.BLUE_POWER
 
-    dmg = dmg - target:getMod(xi.mod.PHALANX)
-    if dmg < 0 then
-        dmg = 0
-    end
-
     local attackType = params.attackType or xi.attackType.NONE
     local damageType = params.damageType or xi.damageType.NONE
 
-    -- handle One For All
+
+    -- handle One For All, Liement
     if damageType == xi.damageType.MAGICAL then
+        local TMDA = xi.spells.spell_damage.calculateTMDA(caster, target, xi.damageType.ELEMENTAL + spellElement) -- Apply checks for Liement, MDT/MDTII/DT
+
+        dmg = math.floor(dmg * TMDA)
+        if dmg < 0 then
+            target:takeSpellDamage(caster, spell, dmg, attackType, damageType)
+            -- TODO: verify Afflatus/enmity from absorb?
+            return dmg
+        end
         dmg = utils.oneforall(target, dmg)
     end
+
+    -- Handle Phalanx
+    if dmg > 0 then
+        dmg = utils.clamp(dmg - target:getMod(xi.mod.PHALANX), 0, 99999)
+    end
+
     -- handling stoneskin
     dmg = utils.stoneskin(target, dmg)
 
