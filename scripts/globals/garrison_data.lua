@@ -84,6 +84,7 @@ xi.garrison.data =
     [xi.zone.WEST_RONFAURE] =
     {
         itemReq = 1528, -- Red Cryptex
+        textRegion = 0,
         levelCap = 20,
         npcs =
         {
@@ -164,6 +165,7 @@ xi.garrison.data =
     [xi.zone.NORTH_GUSTABERG] =
     {
         itemReq = 1529, -- Darksteel Engraving
+        textRegion = 1,
         levelCap = 20,
         npcs =
         {
@@ -244,6 +246,7 @@ xi.garrison.data =
     [xi.zone.WEST_SARUTABARUTA] =
     {
         itemReq = 1530, -- Seven-Knot Quipu
+        textRegion = 2,
         levelCap = 20,
         npcs =
         {
@@ -324,6 +327,7 @@ xi.garrison.data =
     [xi.zone.VALKURM_DUNES] =
     {
         itemReq = 1531, -- Galka Fang Sack
+        textRegion = 3,
         levelCap = 30,
         npcs =
         {
@@ -404,6 +408,7 @@ xi.garrison.data =
     [xi.zone.JUGNER_FOREST] =
     {
         itemReq = 1532, -- Silver Engraving
+        textRegion = 4,
         levelCap = 30,
         npcs =
         {
@@ -483,6 +488,7 @@ xi.garrison.data =
     [xi.zone.PASHHOW_MARSHLANDS] =
     {
         itemReq = 1533, -- Silver Engraving
+        textRegion = 5,
         levelCap = 30,
         npcs =
         {
@@ -563,6 +569,7 @@ xi.garrison.data =
     [xi.zone.BUBURIMU_PENINSULA] =
     {
         itemReq = 1534, -- Mithra Fang Sack
+        textRegion = 6,
         levelCap = 30,
         npcs =
         {
@@ -643,6 +650,7 @@ xi.garrison.data =
     [xi.zone.MERIPHATAUD_MOUNTAINS] =
     {
         itemReq = 1535, -- Thirteen-Knot Quipus
+        textRegion = 7,
         levelCap = 30,
         npcs =
         {
@@ -723,6 +731,7 @@ xi.garrison.data =
     [xi.zone.QUFIM_ISLAND] =
     {
         itemReq = 1538, -- Ram Leather Missive
+        textRegion = 10,
         levelCap = 30,
         npcs =
         {
@@ -803,6 +812,7 @@ xi.garrison.data =
     [xi.zone.BEAUCEDINE_GLACIER] =
     {
         itemReq = 1536, -- Tiger Leather Missive
+        textRegion = 8,
         levelCap = 40,
         npcs =
         {
@@ -883,6 +893,7 @@ xi.garrison.data =
     [xi.zone.THE_SANCTUARY_OF_ZITAH] =
     {
         itemReq = 1539, -- Hound Fang Sack
+        textRegion = 11,
         levelCap = 40,
         npcs =
         {
@@ -963,6 +974,7 @@ xi.garrison.data =
     [xi.zone.YUHTUNGA_JUNGLE] =
     {
         itemReq = 1542, -- Sheep Leather Missive
+        textRegion = 14,
         levelCap = 40,
         npcs =
         {
@@ -1043,6 +1055,7 @@ xi.garrison.data =
     [xi.zone.XARCABARD] =
     {
         itemReq = 1537, -- Behemoth Leather Missive
+        textRegion = 9,
         levelCap = 50,
         npcs =
         {
@@ -1123,6 +1136,7 @@ xi.garrison.data =
     [xi.zone.EASTERN_ALTEPA_DESERT] =
     {
         itemReq = 1540, -- Dhalmel Leather Missive
+        textRegion = 12,
         levelCap = 50,
         npcs =
         {
@@ -1203,6 +1217,7 @@ xi.garrison.data =
     [xi.zone.YHOATOR_JUNGLE] =
     {
         itemReq = 1543, -- Coeurl Leather Missive
+        textRegion = 15,
         levelCap = 50,
         npcs =
         {
@@ -1283,6 +1298,7 @@ xi.garrison.data =
     [xi.zone.CAPE_TERIGGAN] =
     {
         itemReq = 1541, -- Bunny Fang Sack
+        textRegion = 13,
         levelCap = 75,
         npcs =
         {

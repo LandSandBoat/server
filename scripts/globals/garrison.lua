@@ -21,10 +21,13 @@ xi.garrison.onWin = function(player, npc)
     local zoneId = npc:getZoneID()
     local garrisonZoneData = xi.garrison.data[zoneId]
     local garrisonLoot = {}
+    local text = zones[zoneId].text
     garrisonLoot = xi.garrison.loot[garrisonZoneData.levelCap]
     -- Talk to NPC to Remove effects
     for _, v in ipairs(player:getAlliance()) do
         v:setCharVar("Garrison_Won", 1)
+        v:addGil(xi.settings.GIL_RATE*2000)
+        v:messageSpecial(text.GIL_OBTAINED, xi.settings.GIL_RATE*2000)
     end
     -- Add loot to Treasure Pool
     for _, loot in pairs(garrisonLoot) do
@@ -387,7 +390,6 @@ xi.garrison.onTrade = function(player, npc, trade)
     -- TODO: Check to see if party has a fellow
     -- Offset 42 A party member has an NPC called up. You cannot take part in this event.
     local zoneId = npc:getZoneID()
-    local region = npc:getZone():getRegionID()
     local garrisonZoneData = xi.garrison.data[zoneId]
     local text = zones[zoneId].text
     local lockout = xi.settings.GARRISON_LOCKOUT
@@ -396,6 +398,7 @@ xi.garrison.onTrade = function(player, npc, trade)
     local item = garrisonZoneData.itemReq
     local nation = player:getNation()
     local rank = player:getRank(nation)
+    local region = garrisonZoneData.textRegion
     local levelCapOffset = 0
     local nationOffset = 1
     -- Nation text offset
@@ -480,13 +483,13 @@ xi.garrison.npcTable = function(zone)
             local mob = zone:insertDynamicEntity({
                 objtype = xi.objType.MOB,
                 name = npcName,
+                look = npcLook,
                 x = xPos,
                 y = yPos,
                 z = zPos,
                 rotation = rot,
                 groupId = 74,
                 groupZoneId = 103,
-                look = npcLook,
                 onMobRoam = function(mob) xi.garrison.returnHome(mob) end,
                 onMobDeath = function(mob, playerArg, isKiller) end,
                 releaseIdOnDeath = false,
@@ -495,8 +498,6 @@ xi.garrison.npcTable = function(zone)
             mob:setRoamFlags(xi.roamFlag.NONE)
             mob:spawn()
             DisallowRespawn(mob:getID(), true)
-            mob:setMobLevel(garrisonZoneData.levelCap - 3)
-            mob:setSpeed(30)
             -- BATTLEFIELD this is to prevent outside help, is not retail
             mob:addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0)
             mob:setAllegiance(1)
