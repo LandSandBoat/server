@@ -7090,7 +7090,7 @@ INSERT INTO `mob_pools` VALUES (7037,'Sapphire_Quadav_LITD','Sapphire_Quadav',20
 INSERT INTO `mob_pools` VALUES (7038,'Excaliace','Excaliace',145,0x01000503AC10A720A730A740A750006000700000,1,1,5,240,100,0,0,0,0,0,0,32,7,1179,0,0,0,64,256,0,145);
 
 -- Garrison NPCs
-INSERT INTO `mob_pools` VALUES (7039,'Trader','Trader',145,0x01000F0300101520153015401550006000700000,1,1,1,220,100,0,0,0,0,0,0,8,0,129,0,0,0,2,0,0,145); -- We only need 1 now
+INSERT INTO `mob_pools` VALUES (7039,'Trader','Trader',145,0x0000B70400000000000000000000000000000000,1,1,1,220,100,0,0,0,0,0,0,8,0,129,0,0,0,2,0,0,145); -- We only need 1 now
 INSERT INTO `mob_pools` VALUES (7040,'Hastatus_XIII-XXV','Hastatus_XIII-XXV',25,0x0000EF0400000000000000000000000000000000,1,1,5,265,100,0,1,0,1,0,0,0,0,1155,0,0,0,0,0,25,25); -- Was missing somehow?
 
 -- ------------------------------------------------------------
