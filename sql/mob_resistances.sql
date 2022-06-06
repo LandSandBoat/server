@@ -16,7 +16,7 @@ CREATE TABLE `mob_resistances` (
   `water_sdt` smallint(5) NOT NULL DEFAULT 0,
   `light_sdt` smallint(5) NOT NULL DEFAULT 0,
   `dark_sdt` smallint(5) NOT NULL DEFAULT 0,
-  `fire_res` smallint(6) NOT NULL DEFAULT 0, -- meva vs element
+  `fire_res` smallint(6) NOT NULL DEFAULT 0, --     meva vs element
   `ice_res` smallint(6) NOT NULL DEFAULT 0,
   `wind_res` smallint(6) NOT NULL DEFAULT 0,
   `earth_res` smallint(6) NOT NULL DEFAULT 0,
@@ -156,7 +156,7 @@ INSERT INTO `mob_resistances` VALUES (130,'Gigas',1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,
 INSERT INTO `mob_resistances` VALUES (131,'Gnat',1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
 INSERT INTO `mob_resistances` VALUES (132,'Gnole',1,1,1,1,0,-1250,0,0,-1250,0,0,1250,0,0,0,0,0,0,0,0);
 INSERT INTO `mob_resistances` VALUES (133,'Goblin',1,1,1,1,0,0,0,0,0,0,-2500,0,0,0,0,0,0,0,0,0);
-INSERT INTO `mob_resistances` VALUES (134,'God',1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+INSERT INTO `mob_resistances` VALUES (134,'God',0.8,0.8,0.8,0.8,2500,2500,2500,2500,2500,2500,2500,2500,0,0,0,0,0,0,0,0);
 INSERT INTO `mob_resistances` VALUES (135,'Golem',1,1,1,1,0,0,0,0,-1250,0,0,0,0,0,0,0,0,0,0,0);
 INSERT INTO `mob_resistances` VALUES (136,'Goobbue',1,1,1,1,-2500,0,0,0,-1250,0,0,-2500,0,0,0,0,0,0,0,0);
 INSERT INTO `mob_resistances` VALUES (137,'Gorger',1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);

@@ -12,6 +12,7 @@ local entity = {}
 entity.onMobInitialize = function(mob)
     mob:addMod(xi.mod.REGAIN, 50)
     mob:SetAutoAttackEnabled(false)
+    mob:setUntargetable(true)
 end
 
 entity.onMobFight = function(mob, target)

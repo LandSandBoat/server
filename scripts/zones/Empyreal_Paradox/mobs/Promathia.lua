@@ -10,8 +10,8 @@ require("scripts/globals/titles")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:addMod(xi.mod.REGAIN, 50)
-    mob:addMod(xi.mod.UFASTCAST, 50)
+    mob:addMod(xi.mod.REGAIN, 75)
+    mob:setMobMod(xi.mobMod.MAGIC_COOL, 15)
 end
 
 entity.onMobEngaged = function(mob, target)
