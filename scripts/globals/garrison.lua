@@ -25,6 +25,7 @@ xi.garrison.onWin = function(player, npc)
     -- Talk to NPC to Remove effects
     for _, v in ipairs(player:getAlliance()) do
         v:setCharVar("Garrison_Won", 1)
+        v:addGil(xi.settings.GIL_RATE*2000)
     end
     -- Add loot to Treasure Pool
     for _, loot in pairs(garrisonLoot) do
