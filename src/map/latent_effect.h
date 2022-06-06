@@ -87,7 +87,8 @@ enum class LATENT : uint16
     ELEVEN_ROLL_ACTIVE   = 57, // corsair roll of 11 active
     IN_ASSAULT           = 58, // is in an Instance battle in a TOAU zone
     VS_ECOSYSTEM         = 59, // Vs. Specific Ecosystem ID (e.g. Vs. Birds: Accuracy+3)
-    VS_FAMILY            = 60, // Vs. Specific Family ID (e.g. Vs. Apkallu: Accuracy+3)
+    VS_FAMILY            = 60, // Vs. Specific Family ID (e.g. Vs. Korrigan: Accuracy+3)
+    VS_SUPERFAMILY       = 61, // Vs. Specific SuperFamily ID (e.g. Vs. Mandragora: Accuracy+3)
 };
 
 #define MAX_LATENTEFFECTID 61
