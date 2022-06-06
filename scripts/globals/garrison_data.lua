@@ -100,7 +100,8 @@ xi.garrison.data =
         xThirdLine = 4,
         zThirdLine = 0,
         rot = 0,
-        name = "676e7063C", -- gnpc text to hex (rename with proper names later)
+        name = "NPC", -- needs correct names
+        look = 42, -- needs correct looks
         waveSize =
         {
         -- Wave + Number of Parties
@@ -179,7 +180,8 @@ xi.garrison.data =
         xThirdLine = 4,
         zThirdLine = 0,
         rot = 106,
-        name = "676e7063C", -- gnpc text to hex (rename with proper names later)
+        name = "NPC", -- needs correct names
+        look = 42, -- needs correct looks
         waveSize =
         {
         -- TODO Get Correct Wave Order enter pos data for all mobs
@@ -258,7 +260,8 @@ xi.garrison.data =
         xThirdLine = 4,
         zThirdLine = 0,
         rot = 115,
-        name = "676e7063C", -- gnpc text to hex (rename with proper names later)
+        name = "NPC", -- needs correct names
+        look = 42, -- needs correct looks
         waveSize =
         {
         -- TODO Get Correct Wave Order
@@ -337,7 +340,8 @@ xi.garrison.data =
         xThirdLine = 4,
         zThirdLine = 0,
         rot = 32,
-        name = "676e7063C", -- gnpc text to hex (rename with proper names later)
+        name = "NPC", -- needs correct names
+        look = 42, -- needs correct looks
         waveSize =
         {
         -- Wave + Number of Parties
@@ -416,8 +420,8 @@ xi.garrison.data =
         xThirdLine = 0,
         zThirdLine = 4,
         rot = 210,
-        name = "676e7063C", -- gnpc text to hex (rename with proper names later)
-        waveSize =
+        name = "NPC", -- needs correct names
+        look = 42, -- needs correct looks
         {
         -- Wave + Number of Parties
             [1] =
@@ -495,7 +499,8 @@ xi.garrison.data =
         xThirdLine = 4,
         zThirdLine = 0,
         rot = 130,
-        name = "676e7063C", -- gnpc text to hex (rename with proper names later)
+        name = "NPC", -- needs correct names
+        look = 42, -- needs correct looks
         waveSize =
         {
         -- Wave + Number of Parties
@@ -574,7 +579,8 @@ xi.garrison.data =
         xThirdLine = 0,
         zThirdLine = -4,
         rot = 0,
-        name = "676e7063C", -- gnpc text to hex (rename with proper names later)
+        name = "NPC", -- needs correct names
+        look = 42, -- needs correct looks
         waveSize =
         {
         -- Wave + Number of Parties
@@ -653,7 +659,8 @@ xi.garrison.data =
         xThirdLine = 0,
         zThirdLine = 4,
         rot = 30,
-        name = "676e7063C", -- gnpc text to hex (rename with proper names later)
+        name = "NPC", -- needs correct names
+        look = 42, -- needs correct looks
         waveSize =
         {
         -- Wave + Number of Parties
@@ -732,7 +739,8 @@ xi.garrison.data =
         xThirdLine = 0,
         zThirdLine = -4,
         rot = 0,
-        name = "676e7063C", -- gnpc text to hex (rename with proper names later)
+        name = "NPC", -- needs correct names
+        look = 42, -- needs correct looks
         waveSize =
         {
         -- Wave + Number of Parties
@@ -811,7 +819,8 @@ xi.garrison.data =
         xThirdLine = 0,
         zThirdLine = -2,
         rot = 220,
-        name = "676e7063C", -- gnpc text to hex (rename with proper names later)
+        name = "NPC", -- needs correct names
+        look = 42, -- needs correct looks
         waveSize =
         {
         -- Wave + Number of Parties
@@ -890,7 +899,8 @@ xi.garrison.data =
         xThirdLine = 0,
         zThirdLine = 4,
         rot = 180,
-        name = "676e7063C", -- gnpc text to hex (rename with proper names later)
+        name = "NPC", -- needs correct names
+        look = 42, -- needs correct looks
         waveSize =
         {
         -- Wave + Number of Parties
@@ -969,7 +979,8 @@ xi.garrison.data =
         xThirdLine = 0,
         zThirdLine = 4,
         rot = 180,
-        name = "676e7063C", -- gnpc text to hex (rename with proper names later)
+        name = "NPC", -- needs correct names
+        look = 42, -- needs correct looks
         waveSize =
         {
         -- Wave + Number of Parties
@@ -1048,7 +1059,8 @@ xi.garrison.data =
         xThirdLine = 0,
         zThirdLine = 4,
         rot = 90,
-        name = "676e7063C", -- gnpc text to hex (rename with proper names later)
+        name = "NPC", -- needs correct names
+        look = 42, -- needs correct looks
         waveSize =
         {
         -- Wave + Number of Parties
@@ -1127,7 +1139,8 @@ xi.garrison.data =
         xThirdLine = 4,
         zThirdLine = 0,
         rot = 0,
-        name = "676e7063C", -- gnpc text to hex (rename with proper names later)
+        name = "NPC", -- needs correct names
+        look = 42, -- needs correct looks
         waveSize =
         {
         -- Wave + Number of Parties
@@ -1206,7 +1219,8 @@ xi.garrison.data =
         xThirdLine = 4,
         zThirdLine = -2,
         rot = 0,
-        name = "676e7063C", -- gnpc text to hex (rename with proper names later)
+        name = "NPC", -- needs correct names
+        look = 42, -- needs correct looks
         waveSize =
         {
         -- Wave + Number of Parties
@@ -1285,7 +1299,8 @@ xi.garrison.data =
         xThirdLine = 4,
         zThirdLine = 0,
         rot = 0,
-        name = "676e7063C", -- gnpc text to hex (rename with proper names later)
+        name = "NPC", -- needs correct names
+        look = 42, -- needs correct looks
         waveSize =
         {
         -- Wave + Number of Parties
