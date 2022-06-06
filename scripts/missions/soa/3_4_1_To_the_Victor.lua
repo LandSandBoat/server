@@ -16,7 +16,7 @@ local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.TO_THE_VICT
 
 mission.reward =
 {
-    bayld       = 100,
+    title       = xi.title.BOOMY_AND_BUSTY,
     nextMission = { xi.mission.log_id.SOA, xi.mission.id.soa.AN_EXTRAORDINARY_GENTLEMAN },
 }
 
