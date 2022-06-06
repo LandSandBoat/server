@@ -143,6 +143,22 @@ local function getVallationValianceSDTType(type)
     return runeSDTMap[type]
 end
 
+local function getLiementAbsorbType(type)
+
+    local runeAbsorbMap =
+    {
+        [xi.effect.IGNIS]    = xi.damageType.ICE,
+        [xi.effect.GELUS]    = xi.damageType.WIND,
+        [xi.effect.FLABRA]   = xi.damageType.EARTH,
+        [xi.effect.TELLUS]   = xi.damageType.THUNDER,
+        [xi.effect.SULPOR]   = xi.damageType.WATER,
+        [xi.effect.UNDA]     = xi.damageType.FIRE,
+        [xi.effect.LUX]      = xi.damageType.DARK,
+        [xi.effect.TENEBRAE] = xi.damageType.LIGHT
+    }
+    return runeAbsorbMap[type]
+end
+
 local function getGambitSDTType(type)
     local runeSDTMap =
     {
@@ -363,7 +379,7 @@ xi.job_utils.rune_fencer.useVallationValiance = function(player, target, ability
 
     if player:getID() ~= target:getID() then -- Only the caster can apply effects, including to the party if valiance.
 
-        if abilityID == xi.jobAbility.VALIANCE and target:hasStatusEffect(xi.effect.VALLATION) then -- Valiance is being used on them, and they have Vallation already up
+        if abilityID == xi.jobAbility.VALIANCE and target:hasStatusEffect(xi.effect.VALLATION) or target:hasStatusEffect(xi.effect.LIEMENT) then -- Valiance is being used on them, and they have Vallation already up or they have liement
             action:messageID(target:getID(), xi.msg.basic.NO_EFFECT) -- "No effect on <Target>"
         end
         return
@@ -392,7 +408,7 @@ xi.job_utils.rune_fencer.useVallationValiance = function(player, target, ability
         local duration = 180 + jobPointBonusDuration
 
         for _, member in pairs(party) do
-            if not member:hasStatusEffect(xi.effect.VALLATION) then -- Valiance has no effect if Vallation is up
+            if not member:hasStatusEffect(xi.effect.VALLATION) and not target:hasStatusEffect(xi.effect.LIEMENT) then -- Valiance has no effect if Vallation is up, or no effect if Liement is up
 
                 member:delStatusEffectSilent(xi.effect.VALIANCE) -- Remove Valiance if it's already up. The new one will overwrite.
                 applyVallationValianceSDTMods(member, sdtTypes, sdtPower, xi.effect.VALIANCE, duration)
@@ -406,13 +422,18 @@ xi.job_utils.rune_fencer.useVallationValiance = function(player, target, ability
 
         end
     else -- apply effects to target (Vallation)
-        local duration = 120 + jobPointBonusDuration
 
-        target:delStatusEffectSilent(xi.effect.VALIANCE) -- Vallation overwrites Valiance
-        applyVallationValianceSDTMods(target, sdtTypes, sdtPower, xi.effect.VALLATION, duration)
+        if target:hasStatusEffect(xi.effect.LIEMENT) then -- no effect if Liement is up
+            action:messageID(player:getID(), xi.msg.basic.JA_NO_EFFECT_2)
+        else
+            local duration = 120 + jobPointBonusDuration
 
-        if inspirationFCBonus > 0 then
-           target:addStatusEffect(xi.effect.FAST_CAST, inspirationFCBonus, 0, duration)
+            target:delStatusEffectSilent(xi.effect.VALIANCE) -- Vallation overwrites Valiance
+            applyVallationValianceSDTMods(target, sdtTypes, sdtPower, xi.effect.VALLATION, duration)
+
+            if inspirationFCBonus > 0 then
+               target:addStatusEffect(xi.effect.FAST_CAST, inspirationFCBonus, 0, duration)
+            end
         end
     end
 end
@@ -471,7 +492,7 @@ local function getSwipeLungeDamageMultipliers(player, target, element, bonusMacc
     multipliers.magicBurstBonus      = xi.spells.spell_damage.calculateIfMagicBurstBonus(player, target, nil, 0, element)
     multipliers.dayAndWeather        = xi.spells.spell_damage.calculateDayAndWeather(player, target, nil, 0, element)
     multipliers.magicBonusDiff       = xi.spells.spell_damage.calculateMagicBonusDiff(player, target, nil, 0, 0, element)
-    multipliers.TMDA                 = xi.spells.spell_damage.calculateTMDA(player, target, nil)
+    multipliers.TMDA                 = xi.spells.spell_damage.calculateTMDA(player, target, xi.damageType.ELEMENTAL + element)
     multipliers.nukeAbsorbOrNullify  = xi.spells.spell_damage.calculateNukeAbsorbOrNullify(player, target, nil, element)
 
     return multipliers
@@ -492,8 +513,6 @@ local function calculateSwipeLungeDamage(player, target, skillModifier, gearBonu
     damage = math.floor(damage * multipliers.magicBonusDiff)
     damage = math.floor(damage * multipliers.TMDA)
     damage = math.floor(damage * multipliers.nukeAbsorbOrNullify)
-
-    damage = target:magicDmgTaken(damage)
 
     -- Handle Phalanx
     if damage > 0 then
@@ -725,7 +744,63 @@ xi.job_utils.rune_fencer.useOneForAll = function(player, target, ability, action
 
     local party = player:getParty()
     for _, member in pairs(party) do
-        member:delStatusEffect(xi.effect.ONE_FOR_ALL) -- remove old, apparently the newest OFA always wins.
+        member:delStatusEffectSilent(xi.effect.ONE_FOR_ALL) -- remove old, apparently the newest OFA always wins.
         member:addStatusEffect(xi.effect.ONE_FOR_ALL, power, 0, duration)
+    end
+end
+
+local function applyLiementEffect(target, absorbTypes, absorbPower, duration)
+    local absorbBits = 0
+    local i = 0
+
+    for _, damageType in ipairs(absorbTypes) do
+        absorbBits = absorbBits + bit.lshift(damageType, 4 * i) -- pack 4 bit damage type into 16 bit int
+        i = i + 1
+    end
+
+    if i * 4 > 16 then -- This will trip if a custom module overrides current retail behavior and give RUN 5 runes or more.
+        print("ERROR: applyLiementEffect trying to pack more than 16 bits into 16 bit datatype! Does Rune Fencer have 5 or more runes enabled?")
+    end
+
+    target:delStatusEffectSilent(xi.effect.VALLATION) -- Liement overwrites Vallation
+    target:delStatusEffectSilent(xi.effect.VALIANCE)  -- Liement overwrites Valiance
+    target:delStatusEffectSilent(xi.effect.LIEMENT)   -- Remove Liement if it's already up. The new one will overwrite regardless of strength.
+
+    target:addStatusEffect(xi.effect.LIEMENT, absorbPower, 0, duration, 0, absorbBits)
+end
+
+-- see https://www.bg-wiki.com/ffxi/Liement
+xi.job_utils.rune_fencer.useLiement = function(player, target, ability, action)
+
+    local highestRune = player:getHighestRuneEffect()
+
+    action:speceffect(target:getID(), getSpecEffectElementWard(highestRune)) -- set element color for animation. This is set even on "sub targets" for aoe liement on retail even if the animation doesn't seem to change.
+
+    if player:getID() ~= target:getID() then -- Only the caster can apply effects
+        return
+    end
+
+
+    local runeEffects = target:getAllRuneEffects()
+    local absorbPower = 25
+    local duration = 10 + player:getMod(xi.mod.LIEMENT_DURATION)
+
+    local absorbTypes = {} -- one absorb type per rune which can be additive
+    local i = 0
+
+    for _, rune in ipairs(runeEffects) do
+        local absorbType = getLiementAbsorbType(rune)
+        absorbTypes[i+1] = absorbType
+        i = i + 1
+    end
+
+    if player:getMod(xi.mod.LIEMENT_EXTENDS_TO_AREA) > 0 then -- apply effects to entire party (including target)
+        local party = player:getParty()
+
+        for _, member in pairs(party) do
+            applyLiementEffect(member, absorbTypes, absorbPower, duration)
+        end
+    else -- apply effects to self only
+        applyLiementEffect(target, absorbTypes, absorbPower, duration)
     end
 end

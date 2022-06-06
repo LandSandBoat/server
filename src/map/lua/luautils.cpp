@@ -2494,7 +2494,7 @@ namespace luautils
         return 0;
     }
 
-    uint32 OnSpellCast(CBattleEntity* PCaster, CBattleEntity* PTarget, CSpell* PSpell)
+    int32 OnSpellCast(CBattleEntity* PCaster, CBattleEntity* PTarget, CSpell* PSpell)
     {
         TracyZoneScoped;
 
@@ -2518,7 +2518,7 @@ namespace luautils
             return -1;
         }
 
-        uint32 retVal = result.get_type(0) == sol::type::number ? result.get<int32>(0) : 0;
+        int32 retVal = result.get_type(0) == sol::type::number ? result.get<int32>(0) : 0;
         return retVal;
     }
 
