@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -249,6 +249,16 @@ int32 main(int32 argc, char** argv)
 #endif
         return 1;
     }
+
+#ifdef _WIN32
+    // Disable Quick Edit Mode (Mark) in Windows Console to prevent users from accidentially
+    // causing the server to freeze.
+    HANDLE hInput;
+    DWORD  prev_mode;
+    hInput = GetStdHandle(STD_INPUT_HANDLE);
+    GetConsoleMode(hInput, &prev_mode);
+    SetConsoleMode(hInput, ENABLE_EXTENDED_FLAGS | (prev_mode & ~ENABLE_QUICK_EDIT_MODE));
+#endif // _WIN32
 
     ShowMessage("========================================================");
     ShowMessage("search and auction server");

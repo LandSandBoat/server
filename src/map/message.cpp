@@ -306,9 +306,7 @@ namespace message
                             }
                             if (PInviter->PParty && PInviter->PParty->GetLeader() == PInviter)
                             {
-                                ret = sql->Query("SELECT * FROM accounts_parties WHERE partyid <> 0 AND \
-                                                       															charid = %u;",
-                                                inviteeId);
+                                ret = sql->Query("SELECT * FROM accounts_parties WHERE partyid <> 0 AND charid = %u;", inviteeId);
                                 if (ret != SQL_ERROR && sql->NumRows() == 0)
                                 {
                                     PInviter->PParty->AddMember(inviteeId);
@@ -582,7 +580,7 @@ namespace message
     void listen()
     {
         TracySetThreadName("ZMQ Thread");
-        while (true)
+        while (gRunFlag)
         {
             if (!zSocket)
             {

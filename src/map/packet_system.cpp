@@ -1260,13 +1260,13 @@ void SmallPacket0x028(map_session_data_t* const PSession, CCharEntity* const PCh
 
     if (PItem->isStorageSlip())
     {
-        int data = 0;
+        int slipData = 0;
         for (int i = 0; i < CItem::extra_size; i++)
         {
-            data += PItem->m_extra[i];
+            slipData += PItem->m_extra[i];
         }
 
-        if (data != 0)
+        if (slipData != 0)
         {
             PChar->pushPacket(new CMessageStandardPacket(MsgStd::CannotBeProcessed));
             return;
@@ -1432,6 +1432,13 @@ void SmallPacket0x032(map_session_data_t* const PSession, CCharEntity* const PCh
     if ((PTarget != nullptr) && (PTarget->id == charid))
     {
         ShowDebug("%s initiated trade request with %s", PChar->GetName(), PTarget->GetName());
+
+        // If the player is the same as the target, don't allow the trade
+        if (PChar->id == PTarget->id)
+        {
+            PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, 155));
+            return;
+        }
 
         // If PChar is invisible don't allow the trade, but you are able to initiate a trade TO an invisible player
         if (PChar->StatusEffectContainer->HasStatusEffectByFlag(EFFECTFLAG_INVISIBLE))

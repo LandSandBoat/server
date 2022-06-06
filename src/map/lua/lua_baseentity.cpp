@@ -7688,14 +7688,14 @@ void CLuaBaseEntity::takeDamage(int32 damage, sol::object const& attacker, sol::
         breakBind     = flag_map["breakBind"];
     }
 
-    // Deal damage and liberate target when applicable
+    ATTACK_TYPE attackType = (atkType != sol::lua_nil) ? static_cast<ATTACK_TYPE>(atkType.as<uint8>()) : ATTACK_TYPE::NONE;
+    DAMAGE_TYPE damageType = (dmgType != sol::lua_nil) ? static_cast<DAMAGE_TYPE>(dmgType.as<uint8>()) : DAMAGE_TYPE::NONE;
+
+    PDefender->takeDamage(damage, PAttacker, attackType, damageType);
+
+    // liberate target when applicable
     if (damage > 0)
     {
-        ATTACK_TYPE attackType = (atkType != sol::lua_nil) ? static_cast<ATTACK_TYPE>(atkType.as<uint8>()) : ATTACK_TYPE::NONE;
-        DAMAGE_TYPE damageType = (dmgType != sol::lua_nil) ? static_cast<DAMAGE_TYPE>(dmgType.as<uint8>()) : DAMAGE_TYPE::NONE;
-
-        PDefender->takeDamage(damage, PAttacker, attackType, damageType);
-
         if (wakeUp)
         {
             PDefender->StatusEffectContainer->WakeUp();
@@ -9701,6 +9701,24 @@ bool CLuaBaseEntity::isDualWielding()
     }
 
     return false;
+}
+
+/************************************************************************
+ *  Function: checkLiementAbsorb()
+ *  Purpose : Returns 1.0 if Liement is not up or didn't absorb, -1.0 or less if it did
+ *  Example : liementAbsorbPct = player:checkLiementAbsorb(xi.damageType.FIRE)
+ *  Notes   :
+ ************************************************************************/
+
+float CLuaBaseEntity::checkLiementAbsorb(uint16 damageType)
+{
+    CBattleEntity* PBattleEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
+    if (PBattleEntity)
+    {
+        return battleutils::CheckLiementAbsorb(PBattleEntity, (DAMAGE_TYPE)damageType);
+    }
+
+    return 1.0f;
 }
 
 /************************************************************************
@@ -11952,10 +11970,10 @@ void CLuaBaseEntity::setPetName(uint8 pType, uint16 value, sol::object const& ar
             uint32 chocoboname1 = value & 0x0000FFFF;
             uint32 chocoboname2 = arg2.as<uint32>() << 16;
 
-            uint32 value = chocoboname1 + chocoboname2;
+            uint32 nameValue = chocoboname1 + chocoboname2;
 
-            sql->Query("INSERT INTO char_pet SET charid = %u, chocoboid = %u ON DUPLICATE KEY UPDATE chocoboid = %u;", m_PBaseEntity->id, value,
-                       value);
+            sql->Query("INSERT INTO char_pet SET charid = %u, chocoboid = %u ON DUPLICATE KEY UPDATE chocoboid = %u;", m_PBaseEntity->id, nameValue,
+                       nameValue);
         }
     }
 }
@@ -14337,6 +14355,8 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("checkImbuedItems", CLuaBaseEntity::checkImbuedItems);
 
     SOL_REGISTER("isDualWielding", CLuaBaseEntity::isDualWielding);
+
+    SOL_REGISTER("checkLiementAbsorb", CLuaBaseEntity::checkLiementAbsorb);
 
     // Enmity
     SOL_REGISTER("getCE", CLuaBaseEntity::getCE);

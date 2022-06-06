@@ -335,7 +335,10 @@ void do_final(int code)
 
     logging::ShutDown();
 
-    exit(code);
+    if (code != EXIT_SUCCESS)
+    {
+        exit(code);
+    }
 }
 
 /************************************************************************

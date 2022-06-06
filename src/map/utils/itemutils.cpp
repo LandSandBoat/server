@@ -378,6 +378,7 @@ namespace itemutils
 
                     if (PItem->isType(ITEM_GENERAL))
                     {
+                        // TODO
                     }
 
                     if (PItem->isType(ITEM_USABLE))

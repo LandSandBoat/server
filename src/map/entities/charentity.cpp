@@ -1272,7 +1272,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
             }
         }
         //#TODO: make this generic enough to not require an if
-        else if (PAbility->isAoE() && this->PParty != nullptr)
+        else if ( (PAbility->isAoE() || (PAbility->getID() == ABILITY_LIEMENT && getMod(Mod::LIEMENT_EXTENDS_TO_AREA) > 0)) && this->PParty != nullptr)
         {
             PAI->TargetFind->reset();
 
@@ -1561,6 +1561,7 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
         if ((PAmmo != nullptr && battleutils::GetScaledItemModifier(this, PAmmo, Mod::ITEM_ADDEFFECT_TYPE) > 0) ||
             (PItem != nullptr && battleutils::GetScaledItemModifier(this, PItem, Mod::ITEM_ADDEFFECT_TYPE) > 0))
         {
+            // TODO
         }
         luautils::additionalEffectAttack(this, PTarget, (PAmmo != nullptr ? PAmmo : PItem), &actionTarget, totalDamage);
     }
