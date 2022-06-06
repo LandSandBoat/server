@@ -171,12 +171,21 @@ function xi.battlefield.HandleWipe(battlefield, players)
         end
 
         -- Party has wiped. Save and send time remaining before being booted.
-        if rekt then
+        -- TODO: Add LUA Binding to check for BCNM flag - RULES_REMOVE_3MIN = 0x04,
+        if
+            rekt and
+            battlefield:getLocalVar("instantKick") == 0
+        then
             for _, player in pairs(players) do
                 player:messageSpecial(zones[player:getZoneID()].text.THE_PARTY_WILL_BE_REMOVED, 0, 0, 0, 3)
             end
 
             battlefield:setWipeTime(elapsed)
+        elseif
+            rekt and
+            battlefield:getLocalVar("instantKick") == 1
+        then
+            battlefield:setStatus(xi.battlefield.status.LOST)
         end
 
     -- Party has already wiped.
