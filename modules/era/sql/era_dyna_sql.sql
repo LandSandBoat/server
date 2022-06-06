@@ -36,7 +36,7 @@ INSERT INTO mob_droplist VALUES(2907, 1, 1, 100, 15130, 91); -- DRG Legs
 INSERT INTO mob_droplist VALUES(2907, 1, 1, 100, 15116, 91); -- SMN Hands
 INSERT INTO mob_droplist VALUES(2907, 1, 2, 100, 16346, 250); -- BLU Legs
 INSERT INTO mob_droplist VALUES(2907, 1, 2, 100, 11385, 250); -- COR Feet
-INSERT INTO mob_droplist VALUES(2907, 1, 2, 100, 11398, 250); -- SCH Feet
+INSERT INTO mob_droplist VALUES(2907, 1, 2, 100, 16362, 250); -- SCH Legs
 INSERT INTO mob_droplist VALUES(2907, 1, 2, 100, 11478, 250); -- DNC Head
 INSERT INTO mob_droplist VALUES(2907, 0, 0, 1000, 1469, 10); -- Wootz Ore
 INSERT INTO mob_droplist VALUES(2907, 0, 0, 1000, 1521, 10); -- Slime Juice
@@ -61,7 +61,7 @@ INSERT INTO mob_droplist VALUES(2558, 1, 1, 50, 15130, 91); -- DRG Legs
 INSERT INTO mob_droplist VALUES(2558, 1, 1, 50, 15116, 91); -- SMN Hands
 INSERT INTO mob_droplist VALUES(2558, 1, 2, 50, 16346, 250); -- BLU Legs
 INSERT INTO mob_droplist VALUES(2558, 1, 2, 50, 11385, 250); -- COR Feet
-INSERT INTO mob_droplist VALUES(2558, 1, 2, 50, 11398, 250); -- SCH Feet
+INSERT INTO mob_droplist VALUES(2558, 1, 2, 50, 16362, 250); -- SCH Legs
 INSERT INTO mob_droplist VALUES(2558, 1, 2, 50, 11478, 250); -- DNC Head
 INSERT INTO mob_droplist VALUES(2558, 0, 0, 1000, 1469, 10); -- Wootz Ore
 INSERT INTO mob_droplist VALUES(2558, 0, 0, 1000, 1521, 10); -- Slime Juice
@@ -294,9 +294,9 @@ INSERT INTO mob_droplist VALUES(143, 0, 0, 1000, 1455, 100); -- Byne Bill
 INSERT INTO mob_droplist VALUES(143, 0, 0, 1000, 1449, 100); -- Whiteshell
 INSERT INTO mob_droplist VALUES(143, 0, 0, 1000, 1452, 100); -- Bronzepiece
 INSERT INTO mob_droplist VALUES(143, 2, 0, 1000, 1449, 150); -- Whiteshell (Steal)
-INSERT INTO mob_droplist VALUES(143, 1, 2, 50, 1456, 333); -- Hundred Byne
-INSERT INTO mob_droplist VALUES(143, 1, 2, 50, 1450, 333); -- Jadeshell
-INSERT INTO mob_droplist VALUES(143, 1, 2, 50, 1453, 334); -- Montiont Silverpiece
+INSERT INTO mob_droplist VALUES(143, 1, 3, 50, 1456, 333); -- Hundred Byne
+INSERT INTO mob_droplist VALUES(143, 1, 3, 50, 1450, 333); -- Jadeshell
+INSERT INTO mob_droplist VALUES(143, 1, 3, 50, 1453, 334); -- Montiont Silverpiece
 --            Regular            --
 DELETE FROM mob_droplist WHERE dropid = "2543"; -- Delete
 INSERT INTO mob_droplist VALUES(2543, 1, 1, 50, 15102, 90); -- WAR Hands
@@ -372,9 +372,9 @@ INSERT INTO mob_droplist VALUES(176, 0, 0, 1000, 1455, 100); -- Byne Bill
 INSERT INTO mob_droplist VALUES(176, 0, 0, 1000, 1449, 100); -- Whiteshell
 INSERT INTO mob_droplist VALUES(176, 0, 0, 1000, 1452, 100); -- Bronzepiece
 INSERT INTO mob_droplist VALUES(176, 2, 0, 1000, 1449, 150); -- Whiteshell (Steal)
-INSERT INTO mob_droplist VALUES(176, 1, 2, 50, 1456, 333); -- Hundred Byne
-INSERT INTO mob_droplist VALUES(176, 1, 2, 50, 1450, 333); -- Jadeshell
-INSERT INTO mob_droplist VALUES(176, 1, 2, 50, 1453, 334); -- Montiont Silverpiece
+INSERT INTO mob_droplist VALUES(176, 1, 3, 50, 1456, 333); -- Hundred Byne
+INSERT INTO mob_droplist VALUES(176, 1, 3, 50, 1450, 333); -- Jadeshell
+INSERT INTO mob_droplist VALUES(176, 1, 3, 50, 1453, 334); -- Montiont Silverpiece
 DELETE FROM mob_droplist WHERE dropid = "493"; -- Orc NM
 INSERT INTO mob_droplist VALUES(493, 1, 1, 100, 15117, 66); -- WAR Legs
 INSERT INTO mob_droplist VALUES(493, 1, 1, 100, 15088, 66); -- MNK Body
@@ -399,7 +399,7 @@ INSERT INTO mob_droplist VALUES(493, 1, 2, 100, 16360, 200); -- DNC Legs
 INSERT INTO mob_droplist VALUES(493, 0, 0, 1000, 1452, 150); -- Bronzepiece
 INSERT INTO mob_droplist VALUES(493, 0, 0, 1000, 1452, 100); -- Bronzepiece
 INSERT INTO mob_droplist VALUES(493, 2, 0, 1000, 1452, 150); -- Bronzepiece (Steal)
-INSERT INTO mob_droplist VALUES(493, 0, 0, 50, 1453, 334); -- Montiont Silverpiece
+INSERT INTO mob_droplist VALUES(493, 0, 0, 1000, 1453, 50); -- Montiont Silverpiece
 DELETE FROM mob_droplist WHERE dropid = "261"; -- Quadav NM
 INSERT INTO mob_droplist VALUES(261, 1, 1, 100, 15117, 66); -- WAR Legs
 INSERT INTO mob_droplist VALUES(261, 1, 1, 100, 15088, 66); -- MNK Body
@@ -424,7 +424,7 @@ INSERT INTO mob_droplist VALUES(261, 1, 2, 100, 16360, 200); -- DNC Legs
 INSERT INTO mob_droplist VALUES(261, 0, 0, 1000, 1455, 150); -- Byne Bill
 INSERT INTO mob_droplist VALUES(261, 0, 0, 1000, 1455, 100); -- Byne Bill
 INSERT INTO mob_droplist VALUES(261, 2, 0, 1000, 1455, 150); -- Byne Bill (Steal)
-INSERT INTO mob_droplist VALUES(261, 1, 2, 50, 1456, 333); -- Hundred Byne
+INSERT INTO mob_droplist VALUES(261, 0, 0, 1000, 1456, 50); -- Hundred Byne
 DELETE FROM mob_droplist WHERE dropid = "265"; -- Yagudo NM
 INSERT INTO mob_droplist VALUES(265, 1, 1, 100, 15117, 66); -- WAR Legs
 INSERT INTO mob_droplist VALUES(265, 1, 1, 100, 15088, 66); -- MNK Body
@@ -449,43 +449,43 @@ INSERT INTO mob_droplist VALUES(265, 1, 2, 100, 16360, 200); -- DNC Legs
 INSERT INTO mob_droplist VALUES(265, 0, 0, 1000, 1449, 150); -- Whiteshell 
 INSERT INTO mob_droplist VALUES(265, 0, 0, 1000, 1449, 100); -- Whiteshell
 INSERT INTO mob_droplist VALUES(265, 2, 0, 1000, 1449, 150); -- Whiteshell (Steal)
-INSERT INTO mob_droplist VALUES(265, 1, 2, 50, 1450, 333); -- Jadeshell
+INSERT INTO mob_droplist VALUES(265, 0, 0, 1000, 1450, 50); -- Jadeshell
 DELETE FROM mob_droplist WHERE dropid = "559"; -- Dagourmarche
 INSERT INTO mob_droplist VALUES(559, 0, 0, 1000, 1560, 300); -- Attestation of Bravery
 INSERT INTO mob_droplist VALUES(559, 0, 0, 1000, 1563, 300); -- Attestation of Fortitude
 INSERT INTO mob_droplist VALUES(559, 0, 0, 1000, 1567, 300); -- Attestation of Virtue
-INSERT INTO mob_droplist VALUES(559, 1, 2, 50, 1456, 333); -- Hundred Byne
-INSERT INTO mob_droplist VALUES(559, 1, 2, 50, 1450, 333); -- Jadeshell
-INSERT INTO mob_droplist VALUES(559, 1, 2, 50, 1453, 334); -- Montiont Silverpiece
+INSERT INTO mob_droplist VALUES(559, 1, 3, 50, 1456, 333); -- Hundred Byne
+INSERT INTO mob_droplist VALUES(559, 1, 3, 50, 1450, 333); -- Jadeshell
+INSERT INTO mob_droplist VALUES(559, 1, 3, 50, 1453, 334); -- Montiont Silverpiece
 DELETE FROM mob_droplist WHERE dropid = "1211"; -- Goublefaupe
 INSERT INTO mob_droplist VALUES(1211, 0, 0, 1000, 1821, 300); -- Attestation of Invulnerability
 INSERT INTO mob_droplist VALUES(1211, 0, 0, 1000, 11211, 300); -- Attestation of Righteousness
 INSERT INTO mob_droplist VALUES(1211, 0, 0, 1000, 1558, 300); -- Attestation of Glory
 INSERT INTO mob_droplist VALUES(1211, 0, 0, 1000, 1561, 300); -- Attestation of Force
-INSERT INTO mob_droplist VALUES(1211, 1, 2, 50, 1456, 333); -- Hundred Byne
-INSERT INTO mob_droplist VALUES(1211, 1, 2, 50, 1450, 333); -- Jadeshell
-INSERT INTO mob_droplist VALUES(1211, 1, 2, 50, 1453, 334); -- Montiont Silverpiece
+INSERT INTO mob_droplist VALUES(1211, 1, 3, 50, 1456, 333); -- Hundred Byne
+INSERT INTO mob_droplist VALUES(1211, 1, 3, 50, 1450, 333); -- Jadeshell
+INSERT INTO mob_droplist VALUES(1211, 1, 3, 50, 1453, 334); -- Montiont Silverpiece
 DELETE FROM mob_droplist WHERE dropid = "1672"; -- Mildaunegeux
 INSERT INTO mob_droplist VALUES(1672, 0, 0, 1000, 1570, 300); -- Attestation of Accuracy
 INSERT INTO mob_droplist VALUES(1672, 0, 0, 1000, 1564, 300); -- Attestation of Legerity
 INSERT INTO mob_droplist VALUES(1672, 0, 0, 1000, 1556, 300); -- Attestation of Might
-INSERT INTO mob_droplist VALUES(1672, 1, 2, 50, 1456, 333); -- Hundred Byne
-INSERT INTO mob_droplist VALUES(1672, 1, 2, 50, 1450, 333); -- Jadeshell
-INSERT INTO mob_droplist VALUES(1672, 1, 2, 50, 1453, 334); -- Montiont Silverpiece
+INSERT INTO mob_droplist VALUES(1672, 1, 3, 50, 1456, 333); -- Hundred Byne
+INSERT INTO mob_droplist VALUES(1672, 1, 3, 50, 1450, 333); -- Jadeshell
+INSERT INTO mob_droplist VALUES(1672, 1, 3, 50, 1453, 334); -- Montiont Silverpiece
 DELETE FROM mob_droplist WHERE dropid = "2066"; -- Quiebitiel
 INSERT INTO mob_droplist VALUES(2066, 0, 0, 1000, 1557, 300); -- Attestation of Celerity
 INSERT INTO mob_droplist VALUES(2066, 0, 0, 1000, 1566, 300); -- Attestation of Sacrifice
 INSERT INTO mob_droplist VALUES(2066, 0, 0, 1000, 1569, 300); -- Attestation of Harmony
-INSERT INTO mob_droplist VALUES(2066, 1, 2, 50, 1456, 333); -- Hundred Byne
-INSERT INTO mob_droplist VALUES(2066, 1, 2, 50, 1450, 333); -- Jadeshell
-INSERT INTO mob_droplist VALUES(2066, 1, 2, 50, 1453, 334); -- Montiont Silverpiece
+INSERT INTO mob_droplist VALUES(2066, 1, 3, 50, 1456, 333); -- Hundred Byne
+INSERT INTO mob_droplist VALUES(2066, 1, 3, 50, 1450, 333); -- Jadeshell
+INSERT INTO mob_droplist VALUES(2066, 1, 3, 50, 1453, 334); -- Montiont Silverpiece
 DELETE FROM mob_droplist WHERE dropid = "2574"; -- Velosareon
 INSERT INTO mob_droplist VALUES(2574, 0, 0, 1000, 1562, 300); -- Attestation of Vigor
 INSERT INTO mob_droplist VALUES(2574, 0, 0, 1000, 1565, 300); -- Attestation of Decisiveness
 INSERT INTO mob_droplist VALUES(2574, 0, 0, 1000, 1568, 300); -- Attestation of Transcendence
-INSERT INTO mob_droplist VALUES(2574, 1, 2, 50, 1456, 333); -- Hundred Byne
-INSERT INTO mob_droplist VALUES(2574, 1, 2, 50, 1450, 333); -- Jadeshell
-INSERT INTO mob_droplist VALUES(2574, 1, 2, 50, 1453, 334); -- Montiont Silverpiece
+INSERT INTO mob_droplist VALUES(2574, 1, 3, 50, 1456, 333); -- Hundred Byne
+INSERT INTO mob_droplist VALUES(2574, 1, 3, 50, 1450, 333); -- Jadeshell
+INSERT INTO mob_droplist VALUES(2574, 1, 3, 50, 1453, 334); -- Montiont Silverpiece
 --            Regular            --
 DELETE FROM mob_droplist WHERE dropid = "2542"; -- Goblin
 INSERT INTO mob_droplist VALUES(2542, 1, 1, 50, 15117, 66); -- WAR Legs
@@ -928,8 +928,8 @@ INSERT INTO mob_droplist VALUES(2544, 1, 2, 50, 16349, 200); -- COR Legs
 INSERT INTO mob_droplist VALUES(2544, 1, 2, 50, 16352, 200); -- PUP Legs
 INSERT INTO mob_droplist VALUES(2544, 1, 2, 50, 15038, 200); -- DNC Hands
 INSERT INTO mob_droplist VALUES(2544, 1, 2, 50, 15040, 200); -- SCH Hands
-INSERT INTO mob_droplist VALUES(2544, 0, 0, 1000,, 150); -- Bronzepiece
-INSERT INTO mob_droplist VALUES(2544, 2, 0, 1000,, 0); -- Bronzepiece
+INSERT INTO mob_droplist VALUES(2544, 0, 0, 1000, 1452, 150); -- Bronzepiece
+INSERT INTO mob_droplist VALUES(2544, 2, 0, 1000, 1452, 0); -- Bronzepiece
 DELETE FROM mob_droplist WHERE dropid = "3131"; -- Quadav
 INSERT INTO mob_droplist VALUES(3131, 1, 1, 50, 15132, 66);  -- WAR Feet
 INSERT INTO mob_droplist VALUES(3131, 1, 1, 50, 15133, 66);  -- MNK Feet
@@ -951,8 +951,8 @@ INSERT INTO mob_droplist VALUES(3131, 1, 2, 50, 16349, 200); -- COR Legs
 INSERT INTO mob_droplist VALUES(3131, 1, 2, 50, 16352, 200); -- PUP Legs
 INSERT INTO mob_droplist VALUES(3131, 1, 2, 50, 15038, 200); -- DNC Hands
 INSERT INTO mob_droplist VALUES(3131, 1, 2, 50, 15040, 200); -- SCH Hands
-INSERT INTO mob_droplist VALUES(3131, 0, 0, 1000,, 150); -- Byne Bill
-INSERT INTO mob_droplist VALUES(3131, 2, 0, 1000,, 0); -- Byne Bill
+INSERT INTO mob_droplist VALUES(3131, 0, 0, 1000, 1455, 150); -- Byne Bill
+INSERT INTO mob_droplist VALUES(3131, 2, 0, 1000, 1455, 0); -- Byne Bill
 DELETE FROM mob_droplist WHERE dropid = "2549"; -- Yagudo
 INSERT INTO mob_droplist VALUES(2549, 1, 1, 50, 15132, 66);  -- WAR Feet
 INSERT INTO mob_droplist VALUES(2549, 1, 1, 50, 15133, 66);  -- MNK Feet
@@ -974,101 +974,101 @@ INSERT INTO mob_droplist VALUES(2549, 1, 2, 50, 16349, 200); -- COR Legs
 INSERT INTO mob_droplist VALUES(2549, 1, 2, 50, 16352, 200); -- PUP Legs
 INSERT INTO mob_droplist VALUES(2549, 1, 2, 50, 15038, 200); -- DNC Hands
 INSERT INTO mob_droplist VALUES(2549, 1, 2, 50, 15040, 200); -- SCH Hands
-INSERT INTO mob_droplist VALUES(2549, 0, 0, 1000,, 150); -- Whiteshell 
-INSERT INTO mob_droplist VALUES(2549, 2, 0, 1000,, 0); -- Whiteshell 
+INSERT INTO mob_droplist VALUES(2549, 0, 0, 1000, 1449, 150); -- Whiteshell 
+INSERT INTO mob_droplist VALUES(2549, 2, 0, 1000, 1449, 0); -- Whiteshell 
 --           Nightmare           --
-DELETE FROM mob_droplist WHERE dropid = "2544"; -- Hippogryph / Sabotender
-INSERT INTO mob_droplist VALUES(2910, 1, 1, 50, 2033, 66);  -- WAR -1 Head
-INSERT INTO mob_droplist VALUES(2910, 1, 1, 50, 2038, 66);  -- MNK -1 Head
-INSERT INTO mob_droplist VALUES(2910, 1, 1, 50, 2043, 66);  -- WHM -1 Head
-INSERT INTO mob_droplist VALUES(2910, 1, 1, 50, 2048, 66);  -- BLM -1 Head
-INSERT INTO mob_droplist VALUES(2910, 1, 1, 50, 2053, 66);  -- RDM -1 Head
-INSERT INTO mob_droplist VALUES(2910, 1, 1, 50, 2058, 67);  -- THF -1 Head
-INSERT INTO mob_droplist VALUES(2910, 1, 1, 50, 2063, 67);  -- PLD -1 Head
-INSERT INTO mob_droplist VALUES(2910, 1, 1, 50, 2068, 67);  -- DRK -1 Head
-INSERT INTO mob_droplist VALUES(2910, 1, 1, 50, 2073, 67);  -- BST -1 Head
-INSERT INTO mob_droplist VALUES(2910, 1, 1, 50, 2078, 67);  -- BRD -1 Head
-INSERT INTO mob_droplist VALUES(2910, 1, 1, 50, 2083, 67);  -- RNG -1 Head
-INSERT INTO mob_droplist VALUES(2910, 1, 1, 50, 2088, 67);  -- SAM -1 Head
-INSERT INTO mob_droplist VALUES(2910, 1, 1, 50, 2093, 67);  -- NIN -1 Head
-INSERT INTO mob_droplist VALUES(2910, 1, 1, 50, 2098, 67);  -- DRG -1 Head
-INSERT INTO mob_droplist VALUES(2910, 1, 1, 50, 2103, 67);  -- SMN -1 Head
-INSERT INTO mob_droplist VALUES(2910, 1, 2, 50, 2662, 200); -- BLU -1 Head
-INSERT INTO mob_droplist VALUES(2910, 1, 2, 50, 2667, 200); -- COR -1 Head
-INSERT INTO mob_droplist VALUES(2910, 1, 2, 50, 2672, 200); -- PUP -1 Head
-INSERT INTO mob_droplist VALUES(2910, 1, 2, 50, 2718, 200); -- DNC -1 Head
-INSERT INTO mob_droplist VALUES(2910, 1, 2, 50, 2723, 200); -- SCH -1 Head
-INSERT INTO mob_droplist VALUES(2910, 1, 3, 50, 15481, 143); -- PLD Back
-INSERT INTO mob_droplist VALUES(2910, 1, 3, 50, 15877, 143); -- NIN Waist
-INSERT INTO mob_droplist VALUES(2910, 1, 3, 50, 15482, 143); -- BRD Back
-INSERT INTO mob_droplist VALUES(2910, 1, 3, 50, 15484, 143); -- SMN Back
-INSERT INTO mob_droplist VALUES(2910, 1, 3, 50, 15871, 143); -- WAR Waist
-INSERT INTO mob_droplist VALUES(2910, 1, 3, 50, 15920, 143); -- COR Waist
-INSERT INTO mob_droplist VALUES(2910, 1, 3, 50, 16248, 142); -- DNC Back
-INSERT INTO mob_droplist VALUES(2544, 0, 0, 1000,, 150); -- Bronzepiece
-INSERT INTO mob_droplist VALUES(2544, 2, 0, 1000,, 0); -- Bronzepiece
-DELETE FROM mob_droplist WHERE dropid = "3131"; -- Sheep / Fly
-INSERT INTO mob_droplist VALUES(2910, 1, 1, 50, 2033, 66);  -- WAR -1 Head
-INSERT INTO mob_droplist VALUES(2910, 1, 1, 50, 2038, 66);  -- MNK -1 Head
-INSERT INTO mob_droplist VALUES(2910, 1, 1, 50, 2043, 66);  -- WHM -1 Head
-INSERT INTO mob_droplist VALUES(2910, 1, 1, 50, 2048, 66);  -- BLM -1 Head
-INSERT INTO mob_droplist VALUES(2910, 1, 1, 50, 2053, 66);  -- RDM -1 Head
-INSERT INTO mob_droplist VALUES(2910, 1, 1, 50, 2058, 67);  -- THF -1 Head
-INSERT INTO mob_droplist VALUES(2910, 1, 1, 50, 2063, 67);  -- PLD -1 Head
-INSERT INTO mob_droplist VALUES(2910, 1, 1, 50, 2068, 67);  -- DRK -1 Head
-INSERT INTO mob_droplist VALUES(2910, 1, 1, 50, 2073, 67);  -- BST -1 Head
-INSERT INTO mob_droplist VALUES(2910, 1, 1, 50, 2078, 67);  -- BRD -1 Head
-INSERT INTO mob_droplist VALUES(2910, 1, 1, 50, 2083, 67);  -- RNG -1 Head
-INSERT INTO mob_droplist VALUES(2910, 1, 1, 50, 2088, 67);  -- SAM -1 Head
-INSERT INTO mob_droplist VALUES(2910, 1, 1, 50, 2093, 67);  -- NIN -1 Head
-INSERT INTO mob_droplist VALUES(2910, 1, 1, 50, 2098, 67);  -- DRG -1 Head
-INSERT INTO mob_droplist VALUES(2910, 1, 1, 50, 2103, 67);  -- SMN -1 Head
-INSERT INTO mob_droplist VALUES(2910, 1, 2, 50, 2662, 200); -- BLU -1 Head
-INSERT INTO mob_droplist VALUES(2910, 1, 2, 50, 2667, 200); -- COR -1 Head
-INSERT INTO mob_droplist VALUES(2910, 1, 2, 50, 2672, 200); -- PUP -1 Head
-INSERT INTO mob_droplist VALUES(2910, 1, 2, 50, 2718, 200); -- DNC -1 Head
-INSERT INTO mob_droplist VALUES(2910, 1, 2, 50, 2723, 200); -- SCH -1 Head
-INSERT INTO mob_droplist VALUES(2910, 1, 3, 50, 15480, 125); -- THF Back
-INSERT INTO mob_droplist VALUES(2910, 1, 3, 50, 15879, 125); -- SAM Waist
-INSERT INTO mob_droplist VALUES(2910, 1, 3, 50, 15872, 125); -- WHM Waist
-INSERT INTO mob_droplist VALUES(2910, 1, 3, 50, 15874, 125); -- BLM Waist
-INSERT INTO mob_droplist VALUES(2910, 1, 3, 50, 15482, 125); -- BRD Back
-INSERT INTO mob_droplist VALUES(2910, 1, 3, 50, 15875, 125); -- BST Waist
-INSERT INTO mob_droplist VALUES(2910, 1, 3, 50, 16244, 125); -- BLU Back
-INSERT INTO mob_droplist VALUES(2910, 1, 3, 50, 16248, 125); -- DNC Back
-INSERT INTO mob_droplist VALUES(3131, 0, 0, 1000,, 150); -- Byne Bill
-INSERT INTO mob_droplist VALUES(3131, 2, 0, 1000,, 0); -- Byne Bill
-DELETE FROM mob_droplist WHERE dropid = "2549"; -- Manticore
-INSERT INTO mob_droplist VALUES(2910, 1, 1, 50, 2033, 66);  -- WAR -1 Head
-INSERT INTO mob_droplist VALUES(2910, 1, 1, 50, 2038, 66);  -- MNK -1 Head
-INSERT INTO mob_droplist VALUES(2910, 1, 1, 50, 2043, 66);  -- WHM -1 Head
-INSERT INTO mob_droplist VALUES(2910, 1, 1, 50, 2048, 66);  -- BLM -1 Head
-INSERT INTO mob_droplist VALUES(2910, 1, 1, 50, 2053, 66);  -- RDM -1 Head
-INSERT INTO mob_droplist VALUES(2910, 1, 1, 50, 2058, 67);  -- THF -1 Head
-INSERT INTO mob_droplist VALUES(2910, 1, 1, 50, 2063, 67);  -- PLD -1 Head
-INSERT INTO mob_droplist VALUES(2910, 1, 1, 50, 2068, 67);  -- DRK -1 Head
-INSERT INTO mob_droplist VALUES(2910, 1, 1, 50, 2073, 67);  -- BST -1 Head
-INSERT INTO mob_droplist VALUES(2910, 1, 1, 50, 2078, 67);  -- BRD -1 Head
-INSERT INTO mob_droplist VALUES(2910, 1, 1, 50, 2083, 67);  -- RNG -1 Head
-INSERT INTO mob_droplist VALUES(2910, 1, 1, 50, 2088, 67);  -- SAM -1 Head
-INSERT INTO mob_droplist VALUES(2910, 1, 1, 50, 2093, 67);  -- NIN -1 Head
-INSERT INTO mob_droplist VALUES(2910, 1, 1, 50, 2098, 67);  -- DRG -1 Head
-INSERT INTO mob_droplist VALUES(2910, 1, 1, 50, 2103, 67);  -- SMN -1 Head
-INSERT INTO mob_droplist VALUES(2910, 1, 2, 50, 2662, 200); -- BLU -1 Head
-INSERT INTO mob_droplist VALUES(2910, 1, 2, 50, 2667, 200); -- COR -1 Head
-INSERT INTO mob_droplist VALUES(2910, 1, 2, 50, 2672, 200); -- PUP -1 Head
-INSERT INTO mob_droplist VALUES(2910, 1, 2, 50, 2718, 200); -- DNC -1 Head
-INSERT INTO mob_droplist VALUES(2910, 1, 2, 50, 2723, 200); -- SCH -1 Head
-INSERT INTO mob_droplist VALUES(2910, 1, 3, 50, 15480, 125); -- THF Back
-INSERT INTO mob_droplist VALUES(2910, 1, 3, 50, 15879, 125); -- SAM Waist
-INSERT INTO mob_droplist VALUES(2910, 1, 3, 50, 15872, 125); -- WHM Waist
-INSERT INTO mob_droplist VALUES(2910, 1, 3, 50, 15874, 125); -- BLM Waist
-INSERT INTO mob_droplist VALUES(2910, 1, 3, 50, 15482, 125); -- BRD Back
-INSERT INTO mob_droplist VALUES(2910, 1, 3, 50, 15875, 125); -- BST Waist
-INSERT INTO mob_droplist VALUES(2910, 1, 3, 50, 16244, 125); -- BLU Back
-INSERT INTO mob_droplist VALUES(2910, 1, 3, 50, 16248, 125); -- DNC Back
-INSERT INTO mob_droplist VALUES(2549, 0, 0, 1000,, 150); -- Whiteshell 
-INSERT INTO mob_droplist VALUES(2549, 2, 0, 1000,, 0); -- Whiteshell 
+DELETE FROM mob_droplist WHERE dropid = "1792"; -- Hippogryph / Sabotender
+INSERT INTO mob_droplist VALUES(1792, 1, 1, 50, 2033, 66);  -- WAR -1 Head
+INSERT INTO mob_droplist VALUES(1792, 1, 1, 50, 2038, 66);  -- MNK -1 Head
+INSERT INTO mob_droplist VALUES(1792, 1, 1, 50, 2043, 66);  -- WHM -1 Head
+INSERT INTO mob_droplist VALUES(1792, 1, 1, 50, 2048, 66);  -- BLM -1 Head
+INSERT INTO mob_droplist VALUES(1792, 1, 1, 50, 2053, 66);  -- RDM -1 Head
+INSERT INTO mob_droplist VALUES(1792, 1, 1, 50, 2058, 67);  -- THF -1 Head
+INSERT INTO mob_droplist VALUES(1792, 1, 1, 50, 2063, 67);  -- PLD -1 Head
+INSERT INTO mob_droplist VALUES(1792, 1, 1, 50, 2068, 67);  -- DRK -1 Head
+INSERT INTO mob_droplist VALUES(1792, 1, 1, 50, 2073, 67);  -- BST -1 Head
+INSERT INTO mob_droplist VALUES(1792, 1, 1, 50, 2078, 67);  -- BRD -1 Head
+INSERT INTO mob_droplist VALUES(1792, 1, 1, 50, 2083, 67);  -- RNG -1 Head
+INSERT INTO mob_droplist VALUES(1792, 1, 1, 50, 2088, 67);  -- SAM -1 Head
+INSERT INTO mob_droplist VALUES(1792, 1, 1, 50, 2093, 67);  -- NIN -1 Head
+INSERT INTO mob_droplist VALUES(1792, 1, 1, 50, 2098, 67);  -- DRG -1 Head
+INSERT INTO mob_droplist VALUES(1792, 1, 1, 50, 2103, 67);  -- SMN -1 Head
+INSERT INTO mob_droplist VALUES(1792, 1, 2, 50, 2662, 200); -- BLU -1 Head
+INSERT INTO mob_droplist VALUES(1792, 1, 2, 50, 2667, 200); -- COR -1 Head
+INSERT INTO mob_droplist VALUES(1792, 1, 2, 50, 2672, 200); -- PUP -1 Head
+INSERT INTO mob_droplist VALUES(1792, 1, 2, 50, 2718, 200); -- DNC -1 Head
+INSERT INTO mob_droplist VALUES(1792, 1, 2, 50, 2723, 200); -- SCH -1 Head
+INSERT INTO mob_droplist VALUES(1792, 1, 3, 50, 15481, 143); -- PLD Back
+INSERT INTO mob_droplist VALUES(1792, 1, 3, 50, 15877, 143); -- NIN Waist
+INSERT INTO mob_droplist VALUES(1792, 1, 3, 50, 15482, 143); -- BRD Back
+INSERT INTO mob_droplist VALUES(1792, 1, 3, 50, 15484, 143); -- SMN Back
+INSERT INTO mob_droplist VALUES(1792, 1, 3, 50, 15871, 143); -- WAR Waist
+INSERT INTO mob_droplist VALUES(1792, 1, 3, 50, 15920, 143); -- COR Waist
+INSERT INTO mob_droplist VALUES(1792, 1, 3, 50, 16248, 142); -- DNC Back
+INSERT INTO mob_droplist VALUES(1792, 0, 0, 1000, 1452, 150); -- Bronzepiece
+INSERT INTO mob_droplist VALUES(1792, 2, 0, 1000, 1452, 0); -- Bronzepiece
+DELETE FROM mob_droplist WHERE dropid = "1794"; -- Sheep / Fly
+INSERT INTO mob_droplist VALUES(1794, 1, 1, 50, 2033, 66);  -- WAR -1 Head
+INSERT INTO mob_droplist VALUES(1794, 1, 1, 50, 2038, 66);  -- MNK -1 Head
+INSERT INTO mob_droplist VALUES(1794, 1, 1, 50, 2043, 66);  -- WHM -1 Head
+INSERT INTO mob_droplist VALUES(1794, 1, 1, 50, 2048, 66);  -- BLM -1 Head
+INSERT INTO mob_droplist VALUES(1794, 1, 1, 50, 2053, 66);  -- RDM -1 Head
+INSERT INTO mob_droplist VALUES(1794, 1, 1, 50, 2058, 67);  -- THF -1 Head
+INSERT INTO mob_droplist VALUES(1794, 1, 1, 50, 2063, 67);  -- PLD -1 Head
+INSERT INTO mob_droplist VALUES(1794, 1, 1, 50, 2068, 67);  -- DRK -1 Head
+INSERT INTO mob_droplist VALUES(1794, 1, 1, 50, 2073, 67);  -- BST -1 Head
+INSERT INTO mob_droplist VALUES(1794, 1, 1, 50, 2078, 67);  -- BRD -1 Head
+INSERT INTO mob_droplist VALUES(1794, 1, 1, 50, 2083, 67);  -- RNG -1 Head
+INSERT INTO mob_droplist VALUES(1794, 1, 1, 50, 2088, 67);  -- SAM -1 Head
+INSERT INTO mob_droplist VALUES(1794, 1, 1, 50, 2093, 67);  -- NIN -1 Head
+INSERT INTO mob_droplist VALUES(1794, 1, 1, 50, 2098, 67);  -- DRG -1 Head
+INSERT INTO mob_droplist VALUES(1794, 1, 1, 50, 2103, 67);  -- SMN -1 Head
+INSERT INTO mob_droplist VALUES(1794, 1, 2, 50, 2662, 200); -- BLU -1 Head
+INSERT INTO mob_droplist VALUES(1794, 1, 2, 50, 2667, 200); -- COR -1 Head
+INSERT INTO mob_droplist VALUES(1794, 1, 2, 50, 2672, 200); -- PUP -1 Head
+INSERT INTO mob_droplist VALUES(1794, 1, 2, 50, 2718, 200); -- DNC -1 Head
+INSERT INTO mob_droplist VALUES(1794, 1, 2, 50, 2723, 200); -- SCH -1 Head
+INSERT INTO mob_droplist VALUES(1794, 1, 3, 50, 15480, 125); -- THF Back
+INSERT INTO mob_droplist VALUES(1794, 1, 3, 50, 15879, 125); -- SAM Waist
+INSERT INTO mob_droplist VALUES(1794, 1, 3, 50, 15872, 125); -- WHM Waist
+INSERT INTO mob_droplist VALUES(1794, 1, 3, 50, 15874, 125); -- BLM Waist
+INSERT INTO mob_droplist VALUES(1794, 1, 3, 50, 15482, 125); -- BRD Back
+INSERT INTO mob_droplist VALUES(1794, 1, 3, 50, 15875, 125); -- BST Waist
+INSERT INTO mob_droplist VALUES(1794, 1, 3, 50, 16244, 125); -- BLU Back
+INSERT INTO mob_droplist VALUES(1794, 1, 3, 50, 16248, 125); -- DNC Back
+INSERT INTO mob_droplist VALUES(1794, 0, 0, 1000, 1455, 150); -- Byne Bill
+INSERT INTO mob_droplist VALUES(1794, 2, 0, 1000, 1455, 0); -- Byne Bill
+DELETE FROM mob_droplist WHERE dropid = "1799"; -- Manticore
+INSERT INTO mob_droplist VALUES(1799, 1, 1, 50, 2033, 66);  -- WAR -1 Head
+INSERT INTO mob_droplist VALUES(1799, 1, 1, 50, 2038, 66);  -- MNK -1 Head
+INSERT INTO mob_droplist VALUES(1799, 1, 1, 50, 2043, 66);  -- WHM -1 Head
+INSERT INTO mob_droplist VALUES(1799, 1, 1, 50, 2048, 66);  -- BLM -1 Head
+INSERT INTO mob_droplist VALUES(1799, 1, 1, 50, 2053, 66);  -- RDM -1 Head
+INSERT INTO mob_droplist VALUES(1799, 1, 1, 50, 2058, 67);  -- THF -1 Head
+INSERT INTO mob_droplist VALUES(1799, 1, 1, 50, 2063, 67);  -- PLD -1 Head
+INSERT INTO mob_droplist VALUES(1799, 1, 1, 50, 2068, 67);  -- DRK -1 Head
+INSERT INTO mob_droplist VALUES(1799, 1, 1, 50, 2073, 67);  -- BST -1 Head
+INSERT INTO mob_droplist VALUES(1799, 1, 1, 50, 2078, 67);  -- BRD -1 Head
+INSERT INTO mob_droplist VALUES(1799, 1, 1, 50, 2083, 67);  -- RNG -1 Head
+INSERT INTO mob_droplist VALUES(1799, 1, 1, 50, 2088, 67);  -- SAM -1 Head
+INSERT INTO mob_droplist VALUES(1799, 1, 1, 50, 2093, 67);  -- NIN -1 Head
+INSERT INTO mob_droplist VALUES(1799, 1, 1, 50, 2098, 67);  -- DRG -1 Head
+INSERT INTO mob_droplist VALUES(1799, 1, 1, 50, 2103, 67);  -- SMN -1 Head
+INSERT INTO mob_droplist VALUES(1799, 1, 2, 50, 2662, 200); -- BLU -1 Head
+INSERT INTO mob_droplist VALUES(1799, 1, 2, 50, 2667, 200); -- COR -1 Head
+INSERT INTO mob_droplist VALUES(1799, 1, 2, 50, 2672, 200); -- PUP -1 Head
+INSERT INTO mob_droplist VALUES(1799, 1, 2, 50, 2718, 200); -- DNC -1 Head
+INSERT INTO mob_droplist VALUES(1799, 1, 2, 50, 2723, 200); -- SCH -1 Head
+INSERT INTO mob_droplist VALUES(1799, 1, 3, 50, 15480, 125); -- THF Back
+INSERT INTO mob_droplist VALUES(1799, 1, 3, 50, 15879, 125); -- SAM Waist
+INSERT INTO mob_droplist VALUES(1799, 1, 3, 50, 15872, 125); -- WHM Waist
+INSERT INTO mob_droplist VALUES(1799, 1, 3, 50, 15874, 125); -- BLM Waist
+INSERT INTO mob_droplist VALUES(1799, 1, 3, 50, 15482, 125); -- BRD Back
+INSERT INTO mob_droplist VALUES(1799, 1, 3, 50, 15875, 125); -- BST Waist
+INSERT INTO mob_droplist VALUES(1799, 1, 3, 50, 16244, 125); -- BLU Back
+INSERT INTO mob_droplist VALUES(1799, 1, 3, 50, 16248, 125); -- DNC Back
+INSERT INTO mob_droplist VALUES(1799, 0, 0, 1000, 1449, 150); -- Whiteshell 
+INSERT INTO mob_droplist VALUES(1799, 2, 0, 1000, 1449, 0); -- Whiteshell 
 -----------------------------------
 --   Special Mob Skills/Spells   --
 -----------------------------------
@@ -1121,106 +1121,453 @@ INSERT INTO mob_droplist VALUES(230, 0, 0, 1000, 1452, 150); -- Bronzepiece
 INSERT INTO mob_droplist VALUES(230, 1, 3, 50, 1456, 333); -- Hundred Byne
 INSERT INTO mob_droplist VALUES(230, 1, 3, 50, 1450, 334); -- Jadeshell
 INSERT INTO mob_droplist VALUES(230, 1, 3, 50, 1453, 333); -- Montiont Silverpiece
---            Regular            --
-DELETE FROM mob_droplist WHERE dropid = "2667"; -- Goblin
-INSERT INTO mob_droplist VALUES(2667, 1, 1, 100, , 66);  -- WAR 
-INSERT INTO mob_droplist VALUES(2667, 1, 1, 100, , 66);  -- MNK 
-INSERT INTO mob_droplist VALUES(2667, 1, 1, 100, , 66);  -- WHM 
-INSERT INTO mob_droplist VALUES(2667, 1, 1, 100, , 66);  -- BLM 
-INSERT INTO mob_droplist VALUES(2667, 1, 1, 100, , 66);  -- RDM 
-INSERT INTO mob_droplist VALUES(2667, 1, 1, 100, , 67);  -- THF 
-INSERT INTO mob_droplist VALUES(2667, 1, 1, 100, , 67);  -- PLD 
-INSERT INTO mob_droplist VALUES(2667, 1, 1, 100, , 67);  -- DRK 
-INSERT INTO mob_droplist VALUES(2667, 1, 1, 100, , 67);  -- BST 
-INSERT INTO mob_droplist VALUES(2667, 1, 1, 100, , 67);  -- BRD 
-INSERT INTO mob_droplist VALUES(2667, 1, 1, 100, , 67);  -- RNG 
-INSERT INTO mob_droplist VALUES(2667, 1, 1, 100, , 67);  -- SAM 
-INSERT INTO mob_droplist VALUES(2667, 1, 1, 100, , 67);  -- NIN 
-INSERT INTO mob_droplist VALUES(2667, 1, 1, 100, , 67);  -- DRG 
-INSERT INTO mob_droplist VALUES(2667, 1, 1, 100, , 67);  -- SMN 
-INSERT INTO mob_droplist VALUES(2667, 1, 2, 100, , 200); -- BLU 
-INSERT INTO mob_droplist VALUES(2667, 1, 2, 100, , 200); -- COR 
-INSERT INTO mob_droplist VALUES(2667, 1, 2, 100, , 200); -- PUP 
-INSERT INTO mob_droplist VALUES(2667, 1, 2, 100, , 200); -- DNC 
-INSERT INTO mob_droplist VALUES(2667, 1, 2, 100, , 200); -- SCH 
+DELETE FROM mob_droplist WHERE dropid = "2667"; -- Goblin NM
+INSERT INTO mob_droplist VALUES(2667, 1, 1, 100, 15102, 66);  -- WAR Hands
+INSERT INTO mob_droplist VALUES(2667, 1, 1, 100, 15118, 66);  -- MNK Legs
+INSERT INTO mob_droplist VALUES(2667, 1, 1, 100, 15074, 66);  -- WHM Head
+INSERT INTO mob_droplist VALUES(2667, 1, 1, 100, 15105, 66);  -- BLM Hands
+INSERT INTO mob_droplist VALUES(2667, 1, 1, 100, 15106, 66);  -- RDM Hands
+INSERT INTO mob_droplist VALUES(2667, 1, 1, 100, 15092, 67);  -- THF Body
+INSERT INTO mob_droplist VALUES(2667, 1, 1, 100, 15108, 67);  -- PLD Hands
+INSERT INTO mob_droplist VALUES(2667, 1, 1, 100, 15109, 67);  -- DRK Hands
+INSERT INTO mob_droplist VALUES(2667, 1, 1, 100, 15095, 67);  -- BST Body
+INSERT INTO mob_droplist VALUES(2667, 1, 1, 100, 15081, 67);  -- BRD Head
+INSERT INTO mob_droplist VALUES(2667, 1, 1, 100, 15127, 67);  -- RNG Legs
+INSERT INTO mob_droplist VALUES(2667, 1, 1, 100, 15128, 67);  -- SAM Legs
+INSERT INTO mob_droplist VALUES(2667, 1, 1, 100, 15144, 67);  -- NIN Feet
+INSERT INTO mob_droplist VALUES(2667, 1, 1, 100, 15145, 67);  -- DRG Feet
+INSERT INTO mob_droplist VALUES(2667, 1, 1, 100, 15116, 67);  -- SMN Hands
+INSERT INTO mob_droplist VALUES(2667, 1, 2, 100, 16346, 200); -- BLU Legs
+INSERT INTO mob_droplist VALUES(2667, 1, 2, 100, 15028, 200); -- COR Hands
+INSERT INTO mob_droplist VALUES(2667, 1, 2, 100, 11388, 200); -- PUP Feet
+INSERT INTO mob_droplist VALUES(2667, 1, 2, 100, 11478, 200); -- DNC Head
+INSERT INTO mob_droplist VALUES(2667, 1, 2, 100, 11398, 200); -- SCH Feet
 INSERT INTO mob_droplist VALUES(2667, 0, 0, 1000, 1455, 150); -- Byne Bill
 INSERT INTO mob_droplist VALUES(2667, 0, 0, 1000, 1449, 150); -- Whiteshell 
 INSERT INTO mob_droplist VALUES(2667, 2, 0, 1000, 1449, 0); -- Whiteshell
 INSERT INTO mob_droplist VALUES(2667, 0, 0, 1000, 1452, 150); -- Bronzepiece
-DELETE FROM mob_droplist WHERE dropid = "3131"; -- Orc
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 66);  -- WAR 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 66);  -- MNK 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 66);  -- WHM 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 66);  -- BLM 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 66);  -- RDM 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 67);  -- THF 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 67);  -- PLD 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 67);  -- DRK 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 67);  -- BST 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 67);  -- BRD 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 67);  -- RNG 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 67);  -- SAM 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 67);  -- NIN 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 67);  -- DRG 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 67);  -- SMN 
-INSERT INTO mob_droplist VALUES(3131, 1, 2, 100, , 200); -- BLU 
-INSERT INTO mob_droplist VALUES(3131, 1, 2, 100, , 200); -- COR 
-INSERT INTO mob_droplist VALUES(3131, 1, 2, 100, , 200); -- PUP 
-INSERT INTO mob_droplist VALUES(3131, 1, 2, 100, , 200); -- DNC 
-INSERT INTO mob_droplist VALUES(3131, 1, 2, 100, , 200); -- SCH 
-INSERT INTO mob_droplist VALUES(3131, 0, 0, 1000,, 150); -- Bronzepiece
-INSERT INTO mob_droplist VALUES(3131, 2, 0, 1000,, 0); -- Bronzepiece
-DELETE FROM mob_droplist WHERE dropid = "3131"; -- Quadav
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 66);  -- WAR 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 66);  -- MNK 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 66);  -- WHM 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 66);  -- BLM 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 66);  -- RDM 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 67);  -- THF 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 67);  -- PLD 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 67);  -- DRK 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 67);  -- BST 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 67);  -- BRD 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 67);  -- RNG 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 67);  -- SAM 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 67);  -- NIN 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 67);  -- DRG 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 67);  -- SMN 
-INSERT INTO mob_droplist VALUES(3131, 1, 2, 100, , 200); -- BLU 
-INSERT INTO mob_droplist VALUES(3131, 1, 2, 100, , 200); -- COR 
-INSERT INTO mob_droplist VALUES(3131, 1, 2, 100, , 200); -- PUP 
-INSERT INTO mob_droplist VALUES(3131, 1, 2, 100, , 200); -- DNC 
-INSERT INTO mob_droplist VALUES(3131, 1, 2, 100, , 200); -- SCH 
-INSERT INTO mob_droplist VALUES(3131, 0, 0, 1000,, 150); -- Byne Bill
-INSERT INTO mob_droplist VALUES(3131, 2, 0, 1000,, 0); -- Byne Bill
-DELETE FROM mob_droplist WHERE dropid = "3131"; -- Yagudo
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 66);  -- WAR 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 66);  -- MNK 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 66);  -- WHM 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 66);  -- BLM 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 66);  -- RDM 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 67);  -- THF 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 67);  -- PLD 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 67);  -- DRK 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 67);  -- BST 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 67);  -- BRD 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 67);  -- RNG 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 67);  -- SAM 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 67);  -- NIN 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 67);  -- DRG 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 67);  -- SMN 
-INSERT INTO mob_droplist VALUES(3131, 1, 2, 100, , 200); -- BLU 
-INSERT INTO mob_droplist VALUES(3131, 1, 2, 100, , 200); -- COR 
-INSERT INTO mob_droplist VALUES(3131, 1, 2, 100, , 200); -- PUP 
-INSERT INTO mob_droplist VALUES(3131, 1, 2, 100, , 200); -- DNC 
-INSERT INTO mob_droplist VALUES(3131, 1, 2, 100, , 200); -- SCH 
-INSERT INTO mob_droplist VALUES(3131, 0, 0, 1000,, 150); -- Whiteshell 
-INSERT INTO mob_droplist VALUES(3131, 2, 0, 1000,, 0); -- Whiteshell 
+INSERT INTO mob_droplist VALUES(2667, 1, 3, 50, 1456, 333); -- Hundred Byne
+INSERT INTO mob_droplist VALUES(2667, 1, 3, 50, 1450, 334); -- Jadeshell
+INSERT INTO mob_droplist VALUES(2667, 1, 3, 50, 1453, 333); -- Montiont Silverpiece
+DELETE FROM mob_droplist WHERE dropid = "760"; -- Orc NM
+INSERT INTO mob_droplist VALUES(760, 1, 1, 100, 15102, 66);  -- WAR Hands
+INSERT INTO mob_droplist VALUES(760, 1, 1, 100, 15118, 66);  -- MNK Legs
+INSERT INTO mob_droplist VALUES(760, 1, 1, 100, 15074, 66);  -- WHM Head
+INSERT INTO mob_droplist VALUES(760, 1, 1, 100, 15105, 66);  -- BLM Hands
+INSERT INTO mob_droplist VALUES(760, 1, 1, 100, 15106, 66);  -- RDM Hands
+INSERT INTO mob_droplist VALUES(760, 1, 1, 100, 15092, 67);  -- THF Body
+INSERT INTO mob_droplist VALUES(760, 1, 1, 100, 15108, 67);  -- PLD Hands
+INSERT INTO mob_droplist VALUES(760, 1, 1, 100, 15109, 67);  -- DRK Hands
+INSERT INTO mob_droplist VALUES(760, 1, 1, 100, 15095, 67);  -- BST Body
+INSERT INTO mob_droplist VALUES(760, 1, 1, 100, 15081, 67);  -- BRD Head
+INSERT INTO mob_droplist VALUES(760, 1, 1, 100, 15127, 67);  -- RNG Legs
+INSERT INTO mob_droplist VALUES(760, 1, 1, 100, 15128, 67);  -- SAM Legs
+INSERT INTO mob_droplist VALUES(760, 1, 1, 100, 15144, 67);  -- NIN Feet
+INSERT INTO mob_droplist VALUES(760, 1, 1, 100, 15145, 67);  -- DRG Feet
+INSERT INTO mob_droplist VALUES(760, 1, 1, 100, 15116, 67);  -- SMN Hands
+INSERT INTO mob_droplist VALUES(760, 1, 2, 100, 16346, 200); -- BLU Legs
+INSERT INTO mob_droplist VALUES(760, 1, 2, 100, 15028, 200); -- COR Hands
+INSERT INTO mob_droplist VALUES(760, 1, 2, 100, 11388, 200); -- PUP Feet
+INSERT INTO mob_droplist VALUES(760, 1, 2, 100, 11478, 200); -- DNC Head
+INSERT INTO mob_droplist VALUES(760, 1, 2, 100, 11398, 200); -- SCH Feet
+INSERT INTO mob_droplist VALUES(760, 0, 0, 1000, 1452, 150); -- Bronzepiece
+INSERT INTO mob_droplist VALUES(760, 2, 0, 1000, 1452, 0); -- Bronzepiece
+INSERT INTO mob_droplist VALUES(760, 0, 0, 50, 1453, 18); -- Montiont Silverpiece
+DELETE FROM mob_droplist WHERE dropid = "2901"; -- Quadav NM
+INSERT INTO mob_droplist VALUES(2901, 1, 1, 100, 15102, 66);  -- WAR Hands
+INSERT INTO mob_droplist VALUES(2901, 1, 1, 100, 15118, 66);  -- MNK Legs
+INSERT INTO mob_droplist VALUES(2901, 1, 1, 100, 15074, 66);  -- WHM Head
+INSERT INTO mob_droplist VALUES(2901, 1, 1, 100, 15105, 66);  -- BLM Hands
+INSERT INTO mob_droplist VALUES(2901, 1, 1, 100, 15106, 66);  -- RDM Hands
+INSERT INTO mob_droplist VALUES(2901, 1, 1, 100, 15092, 67);  -- THF Body
+INSERT INTO mob_droplist VALUES(2901, 1, 1, 100, 15108, 67);  -- PLD Hands
+INSERT INTO mob_droplist VALUES(2901, 1, 1, 100, 15109, 67);  -- DRK Hands
+INSERT INTO mob_droplist VALUES(2901, 1, 1, 100, 15095, 67);  -- BST Body
+INSERT INTO mob_droplist VALUES(2901, 1, 1, 100, 15081, 67);  -- BRD Head
+INSERT INTO mob_droplist VALUES(2901, 1, 1, 100, 15127, 67);  -- RNG Legs
+INSERT INTO mob_droplist VALUES(2901, 1, 1, 100, 15128, 67);  -- SAM Legs
+INSERT INTO mob_droplist VALUES(2901, 1, 1, 100, 15144, 67);  -- NIN Feet
+INSERT INTO mob_droplist VALUES(2901, 1, 1, 100, 15145, 67);  -- DRG Feet
+INSERT INTO mob_droplist VALUES(2901, 1, 1, 100, 15116, 67);  -- SMN Hands
+INSERT INTO mob_droplist VALUES(2901, 1, 2, 100, 16346, 200); -- BLU Legs
+INSERT INTO mob_droplist VALUES(2901, 1, 2, 100, 15028, 200); -- COR Hands
+INSERT INTO mob_droplist VALUES(2901, 1, 2, 100, 11388, 200); -- PUP Feet
+INSERT INTO mob_droplist VALUES(2901, 1, 2, 100, 11478, 200); -- DNC Head
+INSERT INTO mob_droplist VALUES(2901, 1, 2, 100, 11398, 200); -- SCH Feet
+INSERT INTO mob_droplist VALUES(2901, 0, 0, 1000, 1455, 150); -- Byne Bill
+INSERT INTO mob_droplist VALUES(2901, 2, 0, 1000, 1455, 0); -- Byne Bill
+INSERT INTO mob_droplist VALUES(2901, 0, 0, 50, 1456, 18); -- Hundred Byne
+DELETE FROM mob_droplist WHERE dropid = "2085"; -- Yagudo NM
+INSERT INTO mob_droplist VALUES(2085, 1, 1, 100, 15102, 66);  -- WAR Hands
+INSERT INTO mob_droplist VALUES(2085, 1, 1, 100, 15118, 66);  -- MNK Legs
+INSERT INTO mob_droplist VALUES(2085, 1, 1, 100, 15074, 66);  -- WHM Head
+INSERT INTO mob_droplist VALUES(2085, 1, 1, 100, 15105, 66);  -- BLM Hands
+INSERT INTO mob_droplist VALUES(2085, 1, 1, 100, 15106, 66);  -- RDM Hands
+INSERT INTO mob_droplist VALUES(2085, 1, 1, 100, 15092, 67);  -- THF Body
+INSERT INTO mob_droplist VALUES(2085, 1, 1, 100, 15108, 67);  -- PLD Hands
+INSERT INTO mob_droplist VALUES(2085, 1, 1, 100, 15109, 67);  -- DRK Hands
+INSERT INTO mob_droplist VALUES(2085, 1, 1, 100, 15095, 67);  -- BST Body
+INSERT INTO mob_droplist VALUES(2085, 1, 1, 100, 15081, 67);  -- BRD Head
+INSERT INTO mob_droplist VALUES(2085, 1, 1, 100, 15127, 67);  -- RNG Legs
+INSERT INTO mob_droplist VALUES(2085, 1, 1, 100, 15128, 67);  -- SAM Legs
+INSERT INTO mob_droplist VALUES(2085, 1, 1, 100, 15144, 67);  -- NIN Feet
+INSERT INTO mob_droplist VALUES(2085, 1, 1, 100, 15145, 67);  -- DRG Feet
+INSERT INTO mob_droplist VALUES(2085, 1, 1, 100, 15116, 67);  -- SMN Hands
+INSERT INTO mob_droplist VALUES(2085, 1, 2, 100, 16346, 200); -- BLU Legs
+INSERT INTO mob_droplist VALUES(2085, 1, 2, 100, 15028, 200); -- COR Hands
+INSERT INTO mob_droplist VALUES(2085, 1, 2, 100, 11388, 200); -- PUP Feet
+INSERT INTO mob_droplist VALUES(2085, 1, 2, 100, 11478, 200); -- DNC Head
+INSERT INTO mob_droplist VALUES(2085, 1, 2, 100, 11398, 200); -- SCH Feet
+INSERT INTO mob_droplist VALUES(2085, 0, 0, 1000, 1449, 150); -- Whiteshell 
+INSERT INTO mob_droplist VALUES(2085, 2, 0, 1000, 1449, 0); -- Whiteshell 
+INSERT INTO mob_droplist VALUES(2085, 0, 0, 50, 1450, 18); -- Jadeshell
+--            Regular            --
+DELETE FROM mob_droplist WHERE dropid = "2540"; -- Goblin
+INSERT INTO mob_droplist VALUES(2540, 1, 1, 100, 15102, 66);  -- WAR Hands
+INSERT INTO mob_droplist VALUES(2540, 1, 1, 100, 15118, 66);  -- MNK Legs
+INSERT INTO mob_droplist VALUES(2540, 1, 1, 100, 15074, 66);  -- WHM Head
+INSERT INTO mob_droplist VALUES(2540, 1, 1, 100, 15105, 66);  -- BLM Hands
+INSERT INTO mob_droplist VALUES(2540, 1, 1, 100, 15106, 66);  -- RDM Hands
+INSERT INTO mob_droplist VALUES(2540, 1, 1, 100, 15092, 67);  -- THF Body
+INSERT INTO mob_droplist VALUES(2540, 1, 1, 100, 15108, 67);  -- PLD Hands
+INSERT INTO mob_droplist VALUES(2540, 1, 1, 100, 15109, 67);  -- DRK Hands
+INSERT INTO mob_droplist VALUES(2540, 1, 1, 100, 15095, 67);  -- BST Body
+INSERT INTO mob_droplist VALUES(2540, 1, 1, 100, 15081, 67);  -- BRD Head
+INSERT INTO mob_droplist VALUES(2540, 1, 1, 100, 15127, 67);  -- RNG Legs
+INSERT INTO mob_droplist VALUES(2540, 1, 1, 100, 15128, 67);  -- SAM Legs
+INSERT INTO mob_droplist VALUES(2540, 1, 1, 100, 15144, 67);  -- NIN Feet
+INSERT INTO mob_droplist VALUES(2540, 1, 1, 100, 15145, 67);  -- DRG Feet
+INSERT INTO mob_droplist VALUES(2540, 1, 1, 100, 15116, 67);  -- SMN Hands
+INSERT INTO mob_droplist VALUES(2540, 1, 2, 100, 16346, 200); -- BLU Legs
+INSERT INTO mob_droplist VALUES(2540, 1, 2, 100, 15028, 200); -- COR Hands
+INSERT INTO mob_droplist VALUES(2540, 1, 2, 100, 11388, 200); -- PUP Feet
+INSERT INTO mob_droplist VALUES(2540, 1, 2, 100, 11478, 200); -- DNC Head
+INSERT INTO mob_droplist VALUES(2540, 1, 2, 100, 11398, 200); -- SCH Feet
+INSERT INTO mob_droplist VALUES(2540, 0, 0, 1000, 1455, 150); -- Byne Bill
+INSERT INTO mob_droplist VALUES(2540, 0, 0, 1000, 1449, 150); -- Whiteshell 
+INSERT INTO mob_droplist VALUES(2540, 2, 0, 1000, 1449, 0); -- Whiteshell
+INSERT INTO mob_droplist VALUES(2540, 0, 0, 1000, 1452, 150); -- Bronzepiece
+DELETE FROM mob_droplist WHERE dropid = "2545"; -- Orc
+INSERT INTO mob_droplist VALUES(2545, 1, 1, 100, 15102, 66);  -- WAR Hands
+INSERT INTO mob_droplist VALUES(2545, 1, 1, 100, 15118, 66);  -- MNK Legs
+INSERT INTO mob_droplist VALUES(2545, 1, 1, 100, 15074, 66);  -- WHM Head
+INSERT INTO mob_droplist VALUES(2545, 1, 1, 100, 15105, 66);  -- BLM Hands
+INSERT INTO mob_droplist VALUES(2545, 1, 1, 100, 15106, 66);  -- RDM Hands
+INSERT INTO mob_droplist VALUES(2545, 1, 1, 100, 15092, 67);  -- THF Body
+INSERT INTO mob_droplist VALUES(2545, 1, 1, 100, 15108, 67);  -- PLD Hands
+INSERT INTO mob_droplist VALUES(2545, 1, 1, 100, 15109, 67);  -- DRK Hands
+INSERT INTO mob_droplist VALUES(2545, 1, 1, 100, 15095, 67);  -- BST Body
+INSERT INTO mob_droplist VALUES(2545, 1, 1, 100, 15081, 67);  -- BRD Head
+INSERT INTO mob_droplist VALUES(2545, 1, 1, 100, 15127, 67);  -- RNG Legs
+INSERT INTO mob_droplist VALUES(2545, 1, 1, 100, 15128, 67);  -- SAM Legs
+INSERT INTO mob_droplist VALUES(2545, 1, 1, 100, 15144, 67);  -- NIN Feet
+INSERT INTO mob_droplist VALUES(2545, 1, 1, 100, 15145, 67);  -- DRG Feet
+INSERT INTO mob_droplist VALUES(2545, 1, 1, 100, 15116, 67);  -- SMN Hands
+INSERT INTO mob_droplist VALUES(2545, 1, 2, 100, 16346, 200); -- BLU Legs
+INSERT INTO mob_droplist VALUES(2545, 1, 2, 100, 15028, 200); -- COR Hands
+INSERT INTO mob_droplist VALUES(2545, 1, 2, 100, 11388, 200); -- PUP Feet
+INSERT INTO mob_droplist VALUES(2545, 1, 2, 100, 11478, 200); -- DNC Head
+INSERT INTO mob_droplist VALUES(2545, 1, 2, 100, 11398, 200); -- SCH Feet
+INSERT INTO mob_droplist VALUES(2545, 0, 0, 1000, 1452, 150); -- Bronzepiece
+INSERT INTO mob_droplist VALUES(2545, 2, 0, 1000, 1452, 0); -- Bronzepiece
+DELETE FROM mob_droplist WHERE dropid = "2555"; -- Quadav
+INSERT INTO mob_droplist VALUES(2555, 1, 1, 100, 15102, 66);  -- WAR Hands
+INSERT INTO mob_droplist VALUES(2555, 1, 1, 100, 15118, 66);  -- MNK Legs
+INSERT INTO mob_droplist VALUES(2555, 1, 1, 100, 15074, 66);  -- WHM Head
+INSERT INTO mob_droplist VALUES(2555, 1, 1, 100, 15105, 66);  -- BLM Hands
+INSERT INTO mob_droplist VALUES(2555, 1, 1, 100, 15106, 66);  -- RDM Hands
+INSERT INTO mob_droplist VALUES(2555, 1, 1, 100, 15092, 67);  -- THF Body
+INSERT INTO mob_droplist VALUES(2555, 1, 1, 100, 15108, 67);  -- PLD Hands
+INSERT INTO mob_droplist VALUES(2555, 1, 1, 100, 15109, 67);  -- DRK Hands
+INSERT INTO mob_droplist VALUES(2555, 1, 1, 100, 15095, 67);  -- BST Body
+INSERT INTO mob_droplist VALUES(2555, 1, 1, 100, 15081, 67);  -- BRD Head
+INSERT INTO mob_droplist VALUES(2555, 1, 1, 100, 15127, 67);  -- RNG Legs
+INSERT INTO mob_droplist VALUES(2555, 1, 1, 100, 15128, 67);  -- SAM Legs
+INSERT INTO mob_droplist VALUES(2555, 1, 1, 100, 15144, 67);  -- NIN Feet
+INSERT INTO mob_droplist VALUES(2555, 1, 1, 100, 15145, 67);  -- DRG Feet
+INSERT INTO mob_droplist VALUES(2555, 1, 1, 100, 15116, 67);  -- SMN Hands
+INSERT INTO mob_droplist VALUES(2555, 1, 2, 100, 16346, 200); -- BLU Legs
+INSERT INTO mob_droplist VALUES(2555, 1, 2, 100, 15028, 200); -- COR Hands
+INSERT INTO mob_droplist VALUES(2555, 1, 2, 100, 11388, 200); -- PUP Feet
+INSERT INTO mob_droplist VALUES(2555, 1, 2, 100, 11478, 200); -- DNC Head
+INSERT INTO mob_droplist VALUES(2555, 1, 2, 100, 11398, 200); -- SCH Feet
+INSERT INTO mob_droplist VALUES(2555, 0, 0, 1000, 1455, 150); -- Byne Bill
+INSERT INTO mob_droplist VALUES(2555, 2, 0, 1000, 1455, 0); -- Byne Bill
+DELETE FROM mob_droplist WHERE dropid = "2550"; -- Yagudo
+INSERT INTO mob_droplist VALUES(2550, 1, 1, 100, 15102, 66);  -- WAR Hands
+INSERT INTO mob_droplist VALUES(2550, 1, 1, 100, 15118, 66);  -- MNK Legs
+INSERT INTO mob_droplist VALUES(2550, 1, 1, 100, 15074, 66);  -- WHM Head
+INSERT INTO mob_droplist VALUES(2550, 1, 1, 100, 15105, 66);  -- BLM Hands
+INSERT INTO mob_droplist VALUES(2550, 1, 1, 100, 15106, 66);  -- RDM Hands
+INSERT INTO mob_droplist VALUES(2550, 1, 1, 100, 15092, 67);  -- THF Body
+INSERT INTO mob_droplist VALUES(2550, 1, 1, 100, 15108, 67);  -- PLD Hands
+INSERT INTO mob_droplist VALUES(2550, 1, 1, 100, 15109, 67);  -- DRK Hands
+INSERT INTO mob_droplist VALUES(2550, 1, 1, 100, 15095, 67);  -- BST Body
+INSERT INTO mob_droplist VALUES(2550, 1, 1, 100, 15081, 67);  -- BRD Head
+INSERT INTO mob_droplist VALUES(2550, 1, 1, 100, 15127, 67);  -- RNG Legs
+INSERT INTO mob_droplist VALUES(2550, 1, 1, 100, 15128, 67);  -- SAM Legs
+INSERT INTO mob_droplist VALUES(2550, 1, 1, 100, 15144, 67);  -- NIN Feet
+INSERT INTO mob_droplist VALUES(2550, 1, 1, 100, 15145, 67);  -- DRG Feet
+INSERT INTO mob_droplist VALUES(2550, 1, 1, 100, 15116, 67);  -- SMN Hands
+INSERT INTO mob_droplist VALUES(2550, 1, 2, 100, 16346, 200); -- BLU Legs
+INSERT INTO mob_droplist VALUES(2550, 1, 2, 100, 15028, 200); -- COR Hands
+INSERT INTO mob_droplist VALUES(2550, 1, 2, 100, 11388, 200); -- PUP Feet
+INSERT INTO mob_droplist VALUES(2550, 1, 2, 100, 11478, 200); -- DNC Head
+INSERT INTO mob_droplist VALUES(2550, 1, 2, 100, 11398, 200); -- SCH Feet
+INSERT INTO mob_droplist VALUES(2550, 0, 0, 1000, 1449, 150); -- Whiteshell 
+INSERT INTO mob_droplist VALUES(2550, 2, 0, 1000, 1449, 0); -- Whiteshell 
 --           Nightmare           --
+DELETE FROM mob_droplist WHERE dropid = "1789"; -- Bunny/Mandragora
+INSERT INTO mob_droplist VALUES(1789, 1, 1, 100, 2035, 66);  -- WAR -1 Hands
+INSERT INTO mob_droplist VALUES(1789, 1, 1, 100, 2040, 66);  -- MNK -1 Hands
+INSERT INTO mob_droplist VALUES(1789, 1, 1, 100, 2045, 66);  -- WHM -1 Hands
+INSERT INTO mob_droplist VALUES(1789, 1, 1, 100, 2050, 66);  -- BLM -1 Hands
+INSERT INTO mob_droplist VALUES(1789, 1, 1, 100, 2055, 66);  -- RDM -1 Hands
+INSERT INTO mob_droplist VALUES(1789, 1, 1, 100, 2060, 67);  -- THF -1 Hands
+INSERT INTO mob_droplist VALUES(1789, 1, 1, 100, 2065, 67);  -- PLD -1 Hands
+INSERT INTO mob_droplist VALUES(1789, 1, 1, 100, 2070, 67);  -- DRK -1 Hands
+INSERT INTO mob_droplist VALUES(1789, 1, 1, 100, 2075, 67);  -- BST -1 Hands
+INSERT INTO mob_droplist VALUES(1789, 1, 1, 100, 2080, 67);  -- BRD -1 Hands
+INSERT INTO mob_droplist VALUES(1789, 1, 1, 100, 2085, 67);  -- RNG -1 Hands
+INSERT INTO mob_droplist VALUES(1789, 1, 1, 100, 2090, 67);  -- SAM -1 Hands
+INSERT INTO mob_droplist VALUES(1789, 1, 1, 100, 2095, 67);  -- NIN -1 Hands
+INSERT INTO mob_droplist VALUES(1789, 1, 1, 100, 2100, 67);  -- DRG -1 Hands
+INSERT INTO mob_droplist VALUES(1789, 1, 1, 100, 2105, 67);  -- SMN -1 Hands
+INSERT INTO mob_droplist VALUES(1789, 1, 2, 100, 2664, 200); -- BLU -1 Hands
+INSERT INTO mob_droplist VALUES(1789, 1, 2, 100, 2669, 200); -- COR -1 Hands
+INSERT INTO mob_droplist VALUES(1789, 1, 2, 100, 2674, 200); -- PUP -1 Hands
+INSERT INTO mob_droplist VALUES(1789, 1, 2, 100, 2720, 200); -- DNC -1 Hands
+INSERT INTO mob_droplist VALUES(1789, 1, 2, 100, 2725, 200); -- SCH -1 Hands
+INSERT INTO mob_droplist VALUES(1789, 1, 3, 50, 15877, 333); -- NIN Belt
+INSERT INTO mob_droplist VALUES(1789, 1, 3, 50, 15482, 333); -- BRD Back
+INSERT INTO mob_droplist VALUES(1789, 1, 3, 50, 16244, 334); -- BLU Back
+INSERT INTO mob_droplist VALUES(1789, 0, 0, 1000, 1452, 150); -- Bronzepiece
+INSERT INTO mob_droplist VALUES(1789, 2, 0, 1000, 1452, 0); -- Bronzepiece
+DELETE FROM mob_droplist WHERE dropid = "1805"; -- Cockatrice
+INSERT INTO mob_droplist VALUES(1805, 1, 1, 100, 2035, 66);  -- WAR -1 Hands
+INSERT INTO mob_droplist VALUES(1805, 1, 1, 100, 2040, 66);  -- MNK -1 Hands
+INSERT INTO mob_droplist VALUES(1805, 1, 1, 100, 2045, 66);  -- WHM -1 Hands
+INSERT INTO mob_droplist VALUES(1805, 1, 1, 100, 2050, 66);  -- BLM -1 Hands
+INSERT INTO mob_droplist VALUES(1805, 1, 1, 100, 2055, 66);  -- RDM -1 Hands
+INSERT INTO mob_droplist VALUES(1805, 1, 1, 100, 2060, 67);  -- THF -1 Hands
+INSERT INTO mob_droplist VALUES(1805, 1, 1, 100, 2065, 67);  -- PLD -1 Hands
+INSERT INTO mob_droplist VALUES(1805, 1, 1, 100, 2070, 67);  -- DRK -1 Hands
+INSERT INTO mob_droplist VALUES(1805, 1, 1, 100, 2075, 67);  -- BST -1 Hands
+INSERT INTO mob_droplist VALUES(1805, 1, 1, 100, 2080, 67);  -- BRD -1 Hands
+INSERT INTO mob_droplist VALUES(1805, 1, 1, 100, 2085, 67);  -- RNG -1 Hands
+INSERT INTO mob_droplist VALUES(1805, 1, 1, 100, 2090, 67);  -- SAM -1 Hands
+INSERT INTO mob_droplist VALUES(1805, 1, 1, 100, 2095, 67);  -- NIN -1 Hands
+INSERT INTO mob_droplist VALUES(1805, 1, 1, 100, 2100, 67);  -- DRG -1 Hands
+INSERT INTO mob_droplist VALUES(1805, 1, 1, 100, 2105, 67);  -- SMN -1 Hands
+INSERT INTO mob_droplist VALUES(1805, 1, 2, 100, 2664, 200); -- BLU -1 Hands
+INSERT INTO mob_droplist VALUES(1805, 1, 2, 100, 2669, 200); -- COR -1 Hands
+INSERT INTO mob_droplist VALUES(1805, 1, 2, 100, 2674, 200); -- PUP -1 Hands
+INSERT INTO mob_droplist VALUES(1805, 1, 2, 100, 2720, 200); -- DNC -1 Hands
+INSERT INTO mob_droplist VALUES(1805, 1, 2, 100, 2725, 200); -- SCH -1 Hands
+INSERT INTO mob_droplist VALUES(1805, 1, 3, 50, 15874, 333); -- BLM Waist
+INSERT INTO mob_droplist VALUES(1805, 1, 3, 50, 15878, 333); -- DRG Waist
+INSERT INTO mob_droplist VALUES(1805, 1, 3, 50, 16245, 334); -- PUP Back
+INSERT INTO mob_droplist VALUES(1805, 0, 0, 1000, 1455, 150); -- Byne Bill
+INSERT INTO mob_droplist VALUES(1805, 0, 0, 1000, 1449, 150); -- Whiteshell 
+INSERT INTO mob_droplist VALUES(1805, 0, 0, 1000, 1452, 150); -- Bronzepiece
+INSERT INTO mob_droplist VALUES(1805, 2, 0, 1000, 1452, 0); -- Bronzepiece
+DELETE FROM mob_droplist WHERE dropid = "1791"; -- Crab
+INSERT INTO mob_droplist VALUES(1791, 1, 1, 100, 2035, 66);  -- WAR -1 Hands
+INSERT INTO mob_droplist VALUES(1791, 1, 1, 100, 2040, 66);  -- MNK -1 Hands
+INSERT INTO mob_droplist VALUES(1791, 1, 1, 100, 2045, 66);  -- WHM -1 Hands
+INSERT INTO mob_droplist VALUES(1791, 1, 1, 100, 2050, 66);  -- BLM -1 Hands
+INSERT INTO mob_droplist VALUES(1791, 1, 1, 100, 2055, 66);  -- RDM -1 Hands
+INSERT INTO mob_droplist VALUES(1791, 1, 1, 100, 2060, 67);  -- THF -1 Hands
+INSERT INTO mob_droplist VALUES(1791, 1, 1, 100, 2065, 67);  -- PLD -1 Hands
+INSERT INTO mob_droplist VALUES(1791, 1, 1, 100, 2070, 67);  -- DRK -1 Hands
+INSERT INTO mob_droplist VALUES(1791, 1, 1, 100, 2075, 67);  -- BST -1 Hands
+INSERT INTO mob_droplist VALUES(1791, 1, 1, 100, 2080, 67);  -- BRD -1 Hands
+INSERT INTO mob_droplist VALUES(1791, 1, 1, 100, 2085, 67);  -- RNG -1 Hands
+INSERT INTO mob_droplist VALUES(1791, 1, 1, 100, 2090, 67);  -- SAM -1 Hands
+INSERT INTO mob_droplist VALUES(1791, 1, 1, 100, 2095, 67);  -- NIN -1 Hands
+INSERT INTO mob_droplist VALUES(1791, 1, 1, 100, 2100, 67);  -- DRG -1 Hands
+INSERT INTO mob_droplist VALUES(1791, 1, 1, 100, 2105, 67);  -- SMN -1 Hands
+INSERT INTO mob_droplist VALUES(1791, 1, 2, 100, 2664, 200); -- BLU -1 Hands
+INSERT INTO mob_droplist VALUES(1791, 1, 2, 100, 2669, 200); -- COR -1 Hands
+INSERT INTO mob_droplist VALUES(1791, 1, 2, 100, 2674, 200); -- PUP -1 Hands
+INSERT INTO mob_droplist VALUES(1791, 1, 2, 100, 2720, 200); -- DNC -1 Hands
+INSERT INTO mob_droplist VALUES(1791, 1, 2, 100, 2725, 200); -- SCH -1 Hands
+INSERT INTO mob_droplist VALUES(1791, 1, 3, 50, 15874, 333); -- BLM Waist
+INSERT INTO mob_droplist VALUES(1791, 1, 3, 50, 15481, 333); -- PLD Back
+INSERT INTO mob_droplist VALUES(1791, 1, 3, 50, 15878, 334); -- DRG Waist
+INSERT INTO mob_droplist VALUES(1791, 0, 0, 1000, 1449, 150); -- Whiteshell
+INSERT INTO mob_droplist VALUES(1791, 2, 0, 1000, 1449, 0); -- Whiteshell
+DELETE FROM mob_droplist WHERE dropid = "1798"; -- Crawler
+INSERT INTO mob_droplist VALUES(1798, 1, 1, 100, 2035, 66);  -- WAR -1 Hands
+INSERT INTO mob_droplist VALUES(1798, 1, 1, 100, 2040, 66);  -- MNK -1 Hands
+INSERT INTO mob_droplist VALUES(1798, 1, 1, 100, 2045, 66);  -- WHM -1 Hands
+INSERT INTO mob_droplist VALUES(1798, 1, 1, 100, 2050, 66);  -- BLM -1 Hands
+INSERT INTO mob_droplist VALUES(1798, 1, 1, 100, 2055, 66);  -- RDM -1 Hands
+INSERT INTO mob_droplist VALUES(1798, 1, 1, 100, 2060, 67);  -- THF -1 Hands
+INSERT INTO mob_droplist VALUES(1798, 1, 1, 100, 2065, 67);  -- PLD -1 Hands
+INSERT INTO mob_droplist VALUES(1798, 1, 1, 100, 2070, 67);  -- DRK -1 Hands
+INSERT INTO mob_droplist VALUES(1798, 1, 1, 100, 2075, 67);  -- BST -1 Hands
+INSERT INTO mob_droplist VALUES(1798, 1, 1, 100, 2080, 67);  -- BRD -1 Hands
+INSERT INTO mob_droplist VALUES(1798, 1, 1, 100, 2085, 67);  -- RNG -1 Hands
+INSERT INTO mob_droplist VALUES(1798, 1, 1, 100, 2090, 67);  -- SAM -1 Hands
+INSERT INTO mob_droplist VALUES(1798, 1, 1, 100, 2095, 67);  -- NIN -1 Hands
+INSERT INTO mob_droplist VALUES(1798, 1, 1, 100, 2100, 67);  -- DRG -1 Hands
+INSERT INTO mob_droplist VALUES(1798, 1, 1, 100, 2105, 67);  -- SMN -1 Hands
+INSERT INTO mob_droplist VALUES(1798, 1, 2, 100, 2664, 200); -- BLU -1 Hands
+INSERT INTO mob_droplist VALUES(1798, 1, 2, 100, 2669, 200); -- COR -1 Hands
+INSERT INTO mob_droplist VALUES(1798, 1, 2, 100, 2674, 200); -- PUP -1 Hands
+INSERT INTO mob_droplist VALUES(1798, 1, 2, 100, 2720, 200); -- DNC -1 Hands
+INSERT INTO mob_droplist VALUES(1798, 1, 2, 100, 2725, 200); -- SCH -1 Hands
+INSERT INTO mob_droplist VALUES(1798, 1, 3, 50, 15479, 500); -- DRK Back
+INSERT INTO mob_droplist VALUES(1798, 1, 3, 50, 15871, 500); -- WAR Waist
+INSERT INTO mob_droplist VALUES(1798, 0, 0, 1000, 1455, 150); -- Byne Bill
+INSERT INTO mob_droplist VALUES(1798, 0, 0, 1000, 1449, 150); -- Whiteshell 
+INSERT INTO mob_droplist VALUES(1798, 0, 0, 1000, 1452, 150); -- Bronzepiece
+INSERT INTO mob_droplist VALUES(1798, 2, 0, 1000, 1449, 0); -- Whiteshell 
+DELETE FROM mob_droplist WHERE dropid = "2796"; -- Dhalmel
+INSERT INTO mob_droplist VALUES(2796, 1, 1, 100, 2035, 66);  -- WAR -1 Hands
+INSERT INTO mob_droplist VALUES(2796, 1, 1, 100, 2040, 66);  -- MNK -1 Hands
+INSERT INTO mob_droplist VALUES(2796, 1, 1, 100, 2045, 66);  -- WHM -1 Hands
+INSERT INTO mob_droplist VALUES(2796, 1, 1, 100, 2050, 66);  -- BLM -1 Hands
+INSERT INTO mob_droplist VALUES(2796, 1, 1, 100, 2055, 66);  -- RDM -1 Hands
+INSERT INTO mob_droplist VALUES(2796, 1, 1, 100, 2060, 67);  -- THF -1 Hands
+INSERT INTO mob_droplist VALUES(2796, 1, 1, 100, 2065, 67);  -- PLD -1 Hands
+INSERT INTO mob_droplist VALUES(2796, 1, 1, 100, 2070, 67);  -- DRK -1 Hands
+INSERT INTO mob_droplist VALUES(2796, 1, 1, 100, 2075, 67);  -- BST -1 Hands
+INSERT INTO mob_droplist VALUES(2796, 1, 1, 100, 2080, 67);  -- BRD -1 Hands
+INSERT INTO mob_droplist VALUES(2796, 1, 1, 100, 2085, 67);  -- RNG -1 Hands
+INSERT INTO mob_droplist VALUES(2796, 1, 1, 100, 2090, 67);  -- SAM -1 Hands
+INSERT INTO mob_droplist VALUES(2796, 1, 1, 100, 2095, 67);  -- NIN -1 Hands
+INSERT INTO mob_droplist VALUES(2796, 1, 1, 100, 2100, 67);  -- DRG -1 Hands
+INSERT INTO mob_droplist VALUES(2796, 1, 1, 100, 2105, 67);  -- SMN -1 Hands
+INSERT INTO mob_droplist VALUES(2796, 1, 2, 100, 2664, 200); -- BLU -1 Hands
+INSERT INTO mob_droplist VALUES(2796, 1, 2, 100, 2669, 200); -- COR -1 Hands
+INSERT INTO mob_droplist VALUES(2796, 1, 2, 100, 2674, 200); -- PUP -1 Hands
+INSERT INTO mob_droplist VALUES(2796, 1, 2, 100, 2720, 200); -- DNC -1 Hands
+INSERT INTO mob_droplist VALUES(2796, 1, 2, 100, 2725, 200); -- SCH -1 Hands
+INSERT INTO mob_droplist VALUES(2796, 1, 3, 50, 15479, 333); -- DRK Back
+INSERT INTO mob_droplist VALUES(2796, 1, 3, 50, 15871, 333); -- WAR Waist
+INSERT INTO mob_droplist VALUES(2796, 1, 3, 50, 16244, 334); -- BLU Back
+INSERT INTO mob_droplist VALUES(2796, 0, 0, 1000, 1449, 150); -- Whiteshell 
+INSERT INTO mob_droplist VALUES(2796, 2, 0, 1000, 1449, 0); -- Whiteshell 
+DELETE FROM mob_droplist WHERE dropid = "2795"; -- Eft
+INSERT INTO mob_droplist VALUES(2795, 1, 1, 100, 2035, 66);  -- WAR -1 Hands
+INSERT INTO mob_droplist VALUES(2795, 1, 1, 100, 2040, 66);  -- MNK -1 Hands
+INSERT INTO mob_droplist VALUES(2795, 1, 1, 100, 2045, 66);  -- WHM -1 Hands
+INSERT INTO mob_droplist VALUES(2795, 1, 1, 100, 2050, 66);  -- BLM -1 Hands
+INSERT INTO mob_droplist VALUES(2795, 1, 1, 100, 2055, 66);  -- RDM -1 Hands
+INSERT INTO mob_droplist VALUES(2795, 1, 1, 100, 2060, 67);  -- THF -1 Hands
+INSERT INTO mob_droplist VALUES(2795, 1, 1, 100, 2065, 67);  -- PLD -1 Hands
+INSERT INTO mob_droplist VALUES(2795, 1, 1, 100, 2070, 67);  -- DRK -1 Hands
+INSERT INTO mob_droplist VALUES(2795, 1, 1, 100, 2075, 67);  -- BST -1 Hands
+INSERT INTO mob_droplist VALUES(2795, 1, 1, 100, 2080, 67);  -- BRD -1 Hands
+INSERT INTO mob_droplist VALUES(2795, 1, 1, 100, 2085, 67);  -- RNG -1 Hands
+INSERT INTO mob_droplist VALUES(2795, 1, 1, 100, 2090, 67);  -- SAM -1 Hands
+INSERT INTO mob_droplist VALUES(2795, 1, 1, 100, 2095, 67);  -- NIN -1 Hands
+INSERT INTO mob_droplist VALUES(2795, 1, 1, 100, 2100, 67);  -- DRG -1 Hands
+INSERT INTO mob_droplist VALUES(2795, 1, 1, 100, 2105, 67);  -- SMN -1 Hands
+INSERT INTO mob_droplist VALUES(2795, 1, 2, 100, 2664, 200); -- BLU -1 Hands
+INSERT INTO mob_droplist VALUES(2795, 1, 2, 100, 2669, 200); -- COR -1 Hands
+INSERT INTO mob_droplist VALUES(2795, 1, 2, 100, 2674, 200); -- PUP -1 Hands
+INSERT INTO mob_droplist VALUES(2795, 1, 2, 100, 2720, 200); -- DNC -1 Hands
+INSERT INTO mob_droplist VALUES(2795, 1, 2, 100, 2725, 200); -- SCH -1 Hands
+INSERT INTO mob_droplist VALUES(2795, 1, 3, 50, 15478, 500); -- MNK Back
+INSERT INTO mob_droplist VALUES(2795, 1, 3, 50, 15481, 500); -- PLD Back
+INSERT INTO mob_droplist VALUES(2795, 0, 0, 1000, 1452, 150); -- Bronzepiece
+INSERT INTO mob_droplist VALUES(2795, 2, 0, 1000, 1452, 0); -- Bronzepiece
+DELETE FROM mob_droplist WHERE dropid = "1788"; -- Raven
+INSERT INTO mob_droplist VALUES(1788, 1, 1, 100, 2035, 66);  -- WAR -1 Hands
+INSERT INTO mob_droplist VALUES(1788, 1, 1, 100, 2040, 66);  -- MNK -1 Hands
+INSERT INTO mob_droplist VALUES(1788, 1, 1, 100, 2045, 66);  -- WHM -1 Hands
+INSERT INTO mob_droplist VALUES(1788, 1, 1, 100, 2050, 66);  -- BLM -1 Hands
+INSERT INTO mob_droplist VALUES(1788, 1, 1, 100, 2055, 66);  -- RDM -1 Hands
+INSERT INTO mob_droplist VALUES(1788, 1, 1, 100, 2060, 67);  -- THF -1 Hands
+INSERT INTO mob_droplist VALUES(1788, 1, 1, 100, 2065, 67);  -- PLD -1 Hands
+INSERT INTO mob_droplist VALUES(1788, 1, 1, 100, 2070, 67);  -- DRK -1 Hands
+INSERT INTO mob_droplist VALUES(1788, 1, 1, 100, 2075, 67);  -- BST -1 Hands
+INSERT INTO mob_droplist VALUES(1788, 1, 1, 100, 2080, 67);  -- BRD -1 Hands
+INSERT INTO mob_droplist VALUES(1788, 1, 1, 100, 2085, 67);  -- RNG -1 Hands
+INSERT INTO mob_droplist VALUES(1788, 1, 1, 100, 2090, 67);  -- SAM -1 Hands
+INSERT INTO mob_droplist VALUES(1788, 1, 1, 100, 2095, 67);  -- NIN -1 Hands
+INSERT INTO mob_droplist VALUES(1788, 1, 1, 100, 2100, 67);  -- DRG -1 Hands
+INSERT INTO mob_droplist VALUES(1788, 1, 1, 100, 2105, 67);  -- SMN -1 Hands
+INSERT INTO mob_droplist VALUES(1788, 1, 2, 100, 2664, 200); -- BLU -1 Hands
+INSERT INTO mob_droplist VALUES(1788, 1, 2, 100, 2669, 200); -- COR -1 Hands
+INSERT INTO mob_droplist VALUES(1788, 1, 2, 100, 2674, 200); -- PUP -1 Hands
+INSERT INTO mob_droplist VALUES(1788, 1, 2, 100, 2720, 200); -- DNC -1 Hands
+INSERT INTO mob_droplist VALUES(1788, 1, 2, 100, 2725, 200); -- SCH -1 Hands
+INSERT INTO mob_droplist VALUES(1788, 1, 3, 50, 15873, 333); -- RDM Waist
+INSERT INTO mob_droplist VALUES(1788, 1, 3, 50, 16244, 333); -- BLU Back
+INSERT INTO mob_droplist VALUES(1788, 1, 3, 50, 15876, 334); -- RNG Waist
+INSERT INTO mob_droplist VALUES(1788, 0, 0, 1000, 1455, 150); -- Byne Bill
+INSERT INTO mob_droplist VALUES(1788, 2, 0, 1000, 1455, 0); -- Byne Bill
+DELETE FROM mob_droplist WHERE dropid = "1787"; -- Scorpion
+INSERT INTO mob_droplist VALUES(1787, 1, 1, 100, 2035, 66);  -- WAR -1 Hands
+INSERT INTO mob_droplist VALUES(1787, 1, 1, 100, 2040, 66);  -- MNK -1 Hands
+INSERT INTO mob_droplist VALUES(1787, 1, 1, 100, 2045, 66);  -- WHM -1 Hands
+INSERT INTO mob_droplist VALUES(1787, 1, 1, 100, 2050, 66);  -- BLM -1 Hands
+INSERT INTO mob_droplist VALUES(1787, 1, 1, 100, 2055, 66);  -- RDM -1 Hands
+INSERT INTO mob_droplist VALUES(1787, 1, 1, 100, 2060, 67);  -- THF -1 Hands
+INSERT INTO mob_droplist VALUES(1787, 1, 1, 100, 2065, 67);  -- PLD -1 Hands
+INSERT INTO mob_droplist VALUES(1787, 1, 1, 100, 2070, 67);  -- DRK -1 Hands
+INSERT INTO mob_droplist VALUES(1787, 1, 1, 100, 2075, 67);  -- BST -1 Hands
+INSERT INTO mob_droplist VALUES(1787, 1, 1, 100, 2080, 67);  -- BRD -1 Hands
+INSERT INTO mob_droplist VALUES(1787, 1, 1, 100, 2085, 67);  -- RNG -1 Hands
+INSERT INTO mob_droplist VALUES(1787, 1, 1, 100, 2090, 67);  -- SAM -1 Hands
+INSERT INTO mob_droplist VALUES(1787, 1, 1, 100, 2095, 67);  -- NIN -1 Hands
+INSERT INTO mob_droplist VALUES(1787, 1, 1, 100, 2100, 67);  -- DRG -1 Hands
+INSERT INTO mob_droplist VALUES(1787, 1, 1, 100, 2105, 67);  -- SMN -1 Hands
+INSERT INTO mob_droplist VALUES(1787, 1, 2, 100, 2664, 200); -- BLU -1 Hands
+INSERT INTO mob_droplist VALUES(1787, 1, 2, 100, 2669, 200); -- COR -1 Hands
+INSERT INTO mob_droplist VALUES(1787, 1, 2, 100, 2674, 200); -- PUP -1 Hands
+INSERT INTO mob_droplist VALUES(1787, 1, 2, 100, 2720, 200); -- DNC -1 Hands
+INSERT INTO mob_droplist VALUES(1787, 1, 2, 100, 2725, 200); -- SCH -1 Hands
+INSERT INTO mob_droplist VALUES(1787, 1, 3, 50, 15873, 500); -- RDM Waist
+INSERT INTO mob_droplist VALUES(1787, 1, 3, 50, 15876, 500); -- RNG Waist
+INSERT INTO mob_droplist VALUES(1787, 0, 0, 1000, 1449, 150); -- Whiteshell 
+INSERT INTO mob_droplist VALUES(1787, 2, 0, 1000, 1449, 0); -- Whiteshell 
+DELETE FROM mob_droplist WHERE dropid = "1785"; -- Uragnite
+INSERT INTO mob_droplist VALUES(1785, 1, 1, 100, 2035, 66);  -- WAR -1 Hands
+INSERT INTO mob_droplist VALUES(1785, 1, 1, 100, 2040, 66);  -- MNK -1 Hands
+INSERT INTO mob_droplist VALUES(1785, 1, 1, 100, 2045, 66);  -- WHM -1 Hands
+INSERT INTO mob_droplist VALUES(1785, 1, 1, 100, 2050, 66);  -- BLM -1 Hands
+INSERT INTO mob_droplist VALUES(1785, 1, 1, 100, 2055, 66);  -- RDM -1 Hands
+INSERT INTO mob_droplist VALUES(1785, 1, 1, 100, 2060, 67);  -- THF -1 Hands
+INSERT INTO mob_droplist VALUES(1785, 1, 1, 100, 2065, 67);  -- PLD -1 Hands
+INSERT INTO mob_droplist VALUES(1785, 1, 1, 100, 2070, 67);  -- DRK -1 Hands
+INSERT INTO mob_droplist VALUES(1785, 1, 1, 100, 2075, 67);  -- BST -1 Hands
+INSERT INTO mob_droplist VALUES(1785, 1, 1, 100, 2080, 67);  -- BRD -1 Hands
+INSERT INTO mob_droplist VALUES(1785, 1, 1, 100, 2085, 67);  -- RNG -1 Hands
+INSERT INTO mob_droplist VALUES(1785, 1, 1, 100, 2090, 67);  -- SAM -1 Hands
+INSERT INTO mob_droplist VALUES(1785, 1, 1, 100, 2095, 67);  -- NIN -1 Hands
+INSERT INTO mob_droplist VALUES(1785, 1, 1, 100, 2100, 67);  -- DRG -1 Hands
+INSERT INTO mob_droplist VALUES(1785, 1, 1, 100, 2105, 67);  -- SMN -1 Hands
+INSERT INTO mob_droplist VALUES(1785, 1, 2, 100, 2664, 200); -- BLU -1 Hands
+INSERT INTO mob_droplist VALUES(1785, 1, 2, 100, 2669, 200); -- COR -1 Hands
+INSERT INTO mob_droplist VALUES(1785, 1, 2, 100, 2674, 200); -- PUP -1 Hands
+INSERT INTO mob_droplist VALUES(1785, 1, 2, 100, 2720, 200); -- DNC -1 Hands
+INSERT INTO mob_droplist VALUES(1785, 1, 2, 100, 2725, 200); -- SCH -1 Hands
+INSERT INTO mob_droplist VALUES(1785, 1, 3, 50, 15478, 333); -- MNK Back
+INSERT INTO mob_droplist VALUES(1785, 1, 3, 50, 15481, 333); -- PLD Back
+INSERT INTO mob_droplist VALUES(1785, 1, 3, 50, 16245, 334); -- PUP Back
+INSERT INTO mob_droplist VALUES(1785, 0, 0, 1000, 1455, 150); -- Byne Bill
+INSERT INTO mob_droplist VALUES(1785, 0, 0, 1000, 1449, 150); -- Whiteshell 
+INSERT INTO mob_droplist VALUES(1785, 0, 0, 1000, 1452, 150); -- Bronzepiece
+INSERT INTO mob_droplist VALUES(1785, 2, 0, 1000, 1455, 0); -- Byne Bill
 -----------------------------------
 --   Special Mob Skills/Spells   --
 -----------------------------------
 --           Megaboss            --
+INSERT INTO mob_skill_lists VALUES ('Stihi', 1202, 642);
+INSERT INTO mob_skill_lists VALUES ('Vishap', 1203, 643);
+INSERT INTO mob_skill_lists VALUES ('Jurik', 1204, 644);
+INSERT INTO mob_skill_lists VALUES ('Barong', 1205, 645);
+INSERT INTO mob_skill_lists VALUES ('Tarasca', 1206, 646);
+INSERT INTO mob_skill_lists VALUES ('Alklha', 1207, 647);
+INSERT INTO mob_skill_lists VALUES ('Basillic', 1208, 648);
+INSERT INTO mob_skill_lists VALUES ('Aitvaras', 1209, 649);
+INSERT INTO mob_skill_lists VALUES ('Koschei', 1210, 650);
+INSERT INTO mob_skill_lists VALUES ('Stollenwurm', 1211, 651);
 ----------------------------------------------------------------------
 --                            Dynamis-Qufim                         --
 ----------------------------------------------------------------------
@@ -1260,198 +1607,228 @@ INSERT INTO mob_droplist VALUES(3131, 0, 0, 1000, 1452, 150); -- Bronzepiece
 INSERT INTO mob_droplist VALUES(3131, 1, 3, 50, 1456, 333); -- Hundred Byne
 INSERT INTO mob_droplist VALUES(3131, 1, 3, 50, 1450, 334); -- Jadeshell
 INSERT INTO mob_droplist VALUES(3131, 1, 3, 50, 1453, 333); -- Montiont Silverpiece
-DELETE FROM mob_droplist WHERE dropid = "2667"; -- Goblin NMs
-INSERT INTO mob_droplist VALUES(2667, 1, 1, 100, 15102, 66);  -- WAR Hands
-INSERT INTO mob_droplist VALUES(2667, 1, 1, 100, 15118, 66);  -- MNK Legs
-INSERT INTO mob_droplist VALUES(2667, 1, 1, 100, 15074, 66);  -- WHM Head
-INSERT INTO mob_droplist VALUES(2667, 1, 1, 100, 15105, 66);  -- BLM Hands
-INSERT INTO mob_droplist VALUES(2667, 1, 1, 100, 15106, 66);  -- RDM Hands
-INSERT INTO mob_droplist VALUES(2667, 1, 1, 100, 15092, 67);  -- THF Body
-INSERT INTO mob_droplist VALUES(2667, 1, 1, 100, 15108, 67);  -- PLD Hands
-INSERT INTO mob_droplist VALUES(2667, 1, 1, 100, 15109, 67);  -- DRK Hands
-INSERT INTO mob_droplist VALUES(2667, 1, 1, 100, 15095, 67);  -- BST Body
-INSERT INTO mob_droplist VALUES(2667, 1, 1, 100, 15081, 67);  -- BRD Head
-INSERT INTO mob_droplist VALUES(2667, 1, 1, 100, 15127, 67);  -- RNG Legs
-INSERT INTO mob_droplist VALUES(2667, 1, 1, 100, 15128, 67);  -- SAM Legs
-INSERT INTO mob_droplist VALUES(2667, 1, 1, 100, 15144, 67);  -- NIN Feet
-INSERT INTO mob_droplist VALUES(2667, 1, 1, 100, 15145, 67);  -- DRG Feet
-INSERT INTO mob_droplist VALUES(2667, 1, 1, 100, 15116, 67);  -- SMN Hands
-INSERT INTO mob_droplist VALUES(2667, 1, 2, 100, 16346, 200); -- BLU Legs
-INSERT INTO mob_droplist VALUES(2667, 1, 2, 100, 15028, 200); -- COR Hands
-INSERT INTO mob_droplist VALUES(2667, 1, 2, 100, 11388, 200); -- PUP Feet
-INSERT INTO mob_droplist VALUES(2667, 1, 2, 100, 11478, 200); -- DNC Head
-INSERT INTO mob_droplist VALUES(2667, 1, 2, 100, 11398, 200); -- SCH Feet
-INSERT INTO mob_droplist VALUES(2667, 0, 0, 1000, 1455, 150); -- Byne Bill
-INSERT INTO mob_droplist VALUES(2667, 0, 0, 1000, 1449, 150); -- Whiteshell 
-INSERT INTO mob_droplist VALUES(2667, 0, 0, 1000, 1452, 150); -- Bronzepiece
-INSERT INTO mob_droplist VALUES(2667, 1, 3, 50, 1456, 333); -- Hundred Byne
-INSERT INTO mob_droplist VALUES(2667, 1, 3, 50, 1450, 334); -- Jadeshell
-INSERT INTO mob_droplist VALUES(2667, 1, 3, 50, 1453, 333); -- Montiont Silverpiece
-DELETE FROM mob_droplist WHERE dropid = "3131"; -- Orc NMs
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, 15102, 66);  -- WAR Hand
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, 15118, 66);  -- MNK Legs
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, 15074, 66);  -- WHM Head
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, 15105, 66);  -- BLM Hand
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, 15106, 66);  -- RDM Hand
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, 15092, 67);  -- THF Body
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, 15108, 67);  -- PLD Hand
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, 15109, 67);  -- DRK Hand
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, 15095, 67);  -- BST Body
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, 15081, 67);  -- BRD Head
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, 15127, 67);  -- RNG Legs
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, 15128, 67);  -- SAM Legs
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, 15144, 67);  -- NIN Feet
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, 15145, 67);  -- DRG Feet
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, 15116, 67);  -- SMN Hand
-INSERT INTO mob_droplist VALUES(3131, 1, 2, 100, 16346, 200); -- BLU Legs
-INSERT INTO mob_droplist VALUES(3131, 1, 2, 100, 15028, 200); -- COR Hand
-INSERT INTO mob_droplist VALUES(3131, 1, 2, 100, 11388, 200); -- PUP Feet
-INSERT INTO mob_droplist VALUES(3131, 1, 2, 100, 11478, 200); -- DNC Head
-INSERT INTO mob_droplist VALUES(3131, 1, 2, 100, 11398, 200); -- SCH Feet
-INSERT INTO mob_droplist VALUES(3131, 0, 0, 1000, 1452, 150); -- Bronzepiece
-INSERT INTO mob_droplist VALUES(3131, 1, 3, 50, 1453, 333); -- Montiont Silverpiece
-DELETE FROM mob_droplist WHERE dropid = "3131"; -- Quadav NMs
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, 15102, 66);  -- WAR Hand
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, 15118, 66);  -- MNK Legs
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, 15074, 66);  -- WHM Head
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, 15105, 66);  -- BLM Hand
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, 15106, 66);  -- RDM Hand
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, 15092, 67);  -- THF Body
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, 15108, 67);  -- PLD Hand
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, 15109, 67);  -- DRK Hand
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, 15095, 67);  -- BST Body
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, 15081, 67);  -- BRD Head
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, 15127, 67);  -- RNG Legs
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, 15128, 67);  -- SAM Legs
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, 15144, 67);  -- NIN Feet
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, 15145, 67);  -- DRG Feet
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, 15116, 67);  -- SMN Hand
-INSERT INTO mob_droplist VALUES(3131, 1, 2, 100, 16346, 200); -- BLU Legs
-INSERT INTO mob_droplist VALUES(3131, 1, 2, 100, 15028, 200); -- COR Hand
-INSERT INTO mob_droplist VALUES(3131, 1, 2, 100, 11388, 200); -- PUP Feet
-INSERT INTO mob_droplist VALUES(3131, 1, 2, 100, 11478, 200); -- DNC Head
-INSERT INTO mob_droplist VALUES(3131, 1, 2, 100, 11398, 200); -- SCH Feet
-INSERT INTO mob_droplist VALUES(3131, 0, 0, 1000, 1455, 150); -- Byne Bill
-INSERT INTO mob_droplist VALUES(3131, 1, 3, 50, 1456, 333); -- Hundred Byne
-DELETE FROM mob_droplist WHERE dropid = "3131"; -- Yagudo NMs
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, 15102, 66);  -- WAR Hand
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, 15118, 66);  -- MNK Legs
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, 15074, 66);  -- WHM Head
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, 15105, 66);  -- BLM Hand
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, 15106, 66);  -- RDM Hand
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, 15092, 67);  -- THF Body
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, 15108, 67);  -- PLD Hand
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, 15109, 67);  -- DRK Hand
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, 15095, 67);  -- BST Body
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, 15081, 67);  -- BRD Head
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, 15127, 67);  -- RNG Legs
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, 15128, 67);  -- SAM Legs
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, 15144, 67);  -- NIN Feet
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, 15145, 67);  -- DRG Feet
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, 15116, 67);  -- SMN Hand
-INSERT INTO mob_droplist VALUES(3131, 1, 2, 100, 16346, 200); -- BLU Legs
-INSERT INTO mob_droplist VALUES(3131, 1, 2, 100, 15028, 200); -- COR Hand
-INSERT INTO mob_droplist VALUES(3131, 1, 2, 100, 11388, 200); -- PUP Feet
-INSERT INTO mob_droplist VALUES(3131, 1, 2, 100, 11478, 200); -- DNC Head
-INSERT INTO mob_droplist VALUES(3131, 1, 2, 100, 11398, 200); -- SCH Feet
-INSERT INTO mob_droplist VALUES(3131, 0, 0, 1000, 1449, 150); -- Whiteshell 
-INSERT INTO mob_droplist VALUES(3131, 1, 3, 50, 1450, 334); -- Jadeshell
 --            Regular            --
-DELETE FROM mob_droplist WHERE dropid = "2667"; -- Goblin
-INSERT INTO mob_droplist VALUES(2667, 1, 1, 100, , 66);  -- WAR 
-INSERT INTO mob_droplist VALUES(2667, 1, 1, 100, , 66);  -- MNK 
-INSERT INTO mob_droplist VALUES(2667, 1, 1, 100, , 66);  -- WHM 
-INSERT INTO mob_droplist VALUES(2667, 1, 1, 100, , 66);  -- BLM 
-INSERT INTO mob_droplist VALUES(2667, 1, 1, 100, , 66);  -- RDM 
-INSERT INTO mob_droplist VALUES(2667, 1, 1, 100, , 67);  -- THF 
-INSERT INTO mob_droplist VALUES(2667, 1, 1, 100, , 67);  -- PLD 
-INSERT INTO mob_droplist VALUES(2667, 1, 1, 100, , 67);  -- DRK 
-INSERT INTO mob_droplist VALUES(2667, 1, 1, 100, , 67);  -- BST 
-INSERT INTO mob_droplist VALUES(2667, 1, 1, 100, , 67);  -- BRD 
-INSERT INTO mob_droplist VALUES(2667, 1, 1, 100, , 67);  -- RNG 
-INSERT INTO mob_droplist VALUES(2667, 1, 1, 100, , 67);  -- SAM 
-INSERT INTO mob_droplist VALUES(2667, 1, 1, 100, , 67);  -- NIN 
-INSERT INTO mob_droplist VALUES(2667, 1, 1, 100, , 67);  -- DRG 
-INSERT INTO mob_droplist VALUES(2667, 1, 1, 100, , 67);  -- SMN 
-INSERT INTO mob_droplist VALUES(2667, 1, 2, 100, , 200); -- BLU 
-INSERT INTO mob_droplist VALUES(2667, 1, 2, 100, , 200); -- COR 
-INSERT INTO mob_droplist VALUES(2667, 1, 2, 100, , 200); -- PUP 
-INSERT INTO mob_droplist VALUES(2667, 1, 2, 100, , 200); -- DNC 
-INSERT INTO mob_droplist VALUES(2667, 1, 2, 100, , 200); -- SCH 
-INSERT INTO mob_droplist VALUES(2667, 0, 0, 1000, 1455, 150); -- Byne Bill
-INSERT INTO mob_droplist VALUES(2667, 0, 0, 1000, 1449, 150); -- Whiteshell 
-INSERT INTO mob_droplist VALUES(2667, 2, 0, 1000, 1449, 0); -- Whiteshell
-INSERT INTO mob_droplist VALUES(2667, 0, 0, 1000, 1452, 150); -- Bronzepiece
-DELETE FROM mob_droplist WHERE dropid = "3131"; -- Orc
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 66);  -- WAR 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 66);  -- MNK 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 66);  -- WHM 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 66);  -- BLM 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 66);  -- RDM 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 67);  -- THF 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 67);  -- PLD 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 67);  -- DRK 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 67);  -- BST 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 67);  -- BRD 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 67);  -- RNG 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 67);  -- SAM 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 67);  -- NIN 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 67);  -- DRG 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 67);  -- SMN 
-INSERT INTO mob_droplist VALUES(3131, 1, 2, 100, , 200); -- BLU 
-INSERT INTO mob_droplist VALUES(3131, 1, 2, 100, , 200); -- COR 
-INSERT INTO mob_droplist VALUES(3131, 1, 2, 100, , 200); -- PUP 
-INSERT INTO mob_droplist VALUES(3131, 1, 2, 100, , 200); -- DNC 
-INSERT INTO mob_droplist VALUES(3131, 1, 2, 100, , 200); -- SCH 
-INSERT INTO mob_droplist VALUES(3131, 0, 0, 1000,, 150); -- Bronzepiece
-INSERT INTO mob_droplist VALUES(3131, 2, 0, 1000,, 0); -- Bronzepiece
-DELETE FROM mob_droplist WHERE dropid = "3131"; -- Quadav
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 66);  -- WAR 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 66);  -- MNK 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 66);  -- WHM 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 66);  -- BLM 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 66);  -- RDM 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 67);  -- THF 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 67);  -- PLD 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 67);  -- DRK 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 67);  -- BST 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 67);  -- BRD 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 67);  -- RNG 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 67);  -- SAM 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 67);  -- NIN 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 67);  -- DRG 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 67);  -- SMN 
-INSERT INTO mob_droplist VALUES(3131, 1, 2, 100, , 200); -- BLU 
-INSERT INTO mob_droplist VALUES(3131, 1, 2, 100, , 200); -- COR 
-INSERT INTO mob_droplist VALUES(3131, 1, 2, 100, , 200); -- PUP 
-INSERT INTO mob_droplist VALUES(3131, 1, 2, 100, , 200); -- DNC 
-INSERT INTO mob_droplist VALUES(3131, 1, 2, 100, , 200); -- SCH 
-INSERT INTO mob_droplist VALUES(3131, 0, 0, 1000,, 150); -- Byne Bill
-INSERT INTO mob_droplist VALUES(3131, 2, 0, 1000,, 0); -- Byne Bill
-DELETE FROM mob_droplist WHERE dropid = "3131"; -- Yagudo
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 66);  -- WAR 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 66);  -- MNK 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 66);  -- WHM 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 66);  -- BLM 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 66);  -- RDM 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 67);  -- THF 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 67);  -- PLD 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 67);  -- DRK 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 67);  -- BST 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 67);  -- BRD 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 67);  -- RNG 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 67);  -- SAM 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 67);  -- NIN 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 67);  -- DRG 
-INSERT INTO mob_droplist VALUES(3131, 1, 1, 100, , 67);  -- SMN 
-INSERT INTO mob_droplist VALUES(3131, 1, 2, 100, , 200); -- BLU 
-INSERT INTO mob_droplist VALUES(3131, 1, 2, 100, , 200); -- COR 
-INSERT INTO mob_droplist VALUES(3131, 1, 2, 100, , 200); -- PUP 
-INSERT INTO mob_droplist VALUES(3131, 1, 2, 100, , 200); -- DNC 
-INSERT INTO mob_droplist VALUES(3131, 1, 2, 100, , 200); -- SCH 
-INSERT INTO mob_droplist VALUES(3131, 0, 0, 1000,, 150); -- Whiteshell 
-INSERT INTO mob_droplist VALUES(3131, 2, 0, 1000,, 0); -- Whiteshell 
+DELETE FROM mob_droplist WHERE dropid = "2541"; -- Goblin
+INSERT INTO mob_droplist VALUES(2541, 1, 1, 100, 15072, 66);  -- WAR Head
+INSERT INTO mob_droplist VALUES(2541, 1, 1, 100, 15103, 66);  -- MNK Hands
+INSERT INTO mob_droplist VALUES(2541, 1, 1, 100, 15119, 66);  -- WHM Legs
+INSERT INTO mob_droplist VALUES(2541, 1, 1, 100, 15120, 66);  -- BLM Legs
+INSERT INTO mob_droplist VALUES(2541, 1, 1, 100, 15121, 66);  -- RDM Legs
+INSERT INTO mob_droplist VALUES(2541, 1, 1, 100, 15137, 67);  -- THF Feet
+INSERT INTO mob_droplist VALUES(2541, 1, 1, 100, 15078, 67);  -- PLD Head
+INSERT INTO mob_droplist VALUES(2541, 1, 1, 100, 15124, 67);  -- DRK Legs
+INSERT INTO mob_droplist VALUES(2541, 1, 1, 100, 15125, 67);  -- BST Legs
+INSERT INTO mob_droplist VALUES(2541, 1, 1, 100, 15111, 67);  -- BRD Hands
+INSERT INTO mob_droplist VALUES(2541, 1, 1, 100, 15082, 67);  -- RNG Head
+INSERT INTO mob_droplist VALUES(2541, 1, 1, 100, 15113, 67);  -- SAM Hands
+INSERT INTO mob_droplist VALUES(2541, 1, 1, 100, 15084, 67);  -- NIN Head
+INSERT INTO mob_droplist VALUES(2541, 1, 1, 100, 15115, 67);  -- DRG Hands
+INSERT INTO mob_droplist VALUES(2541, 1, 1, 100, 15146, 67);  -- SMN Feet
+INSERT INTO mob_droplist VALUES(2541, 1, 2, 100, 15025, 200); -- BLU Hands
+INSERT INTO mob_droplist VALUES(2541, 1, 2, 100, 11385, 200); -- COR Feet
+INSERT INTO mob_droplist VALUES(2541, 1, 2, 100, 15031, 200); -- PUP Hands
+INSERT INTO mob_droplist VALUES(2541, 1, 2, 100, 16352, 200); -- DNC Feet
+INSERT INTO mob_droplist VALUES(2541, 1, 2, 100, 16362, 200); -- SCH Legs
+INSERT INTO mob_droplist VALUES(2541, 0, 0, 1000, 1455, 150); -- Byne Bill
+INSERT INTO mob_droplist VALUES(2541, 0, 0, 1000, 1449, 150); -- Whiteshell 
+INSERT INTO mob_droplist VALUES(2541, 2, 0, 1000, 1449, 0); -- Whiteshell
+INSERT INTO mob_droplist VALUES(2541, 0, 0, 1000, 1452, 150); -- Bronzepiece
+DELETE FROM mob_droplist WHERE dropid = "2546"; -- Orc
+INSERT INTO mob_droplist VALUES(2546, 1, 1, 100, 15072, 66);  -- WAR Head
+INSERT INTO mob_droplist VALUES(2546, 1, 1, 100, 15103, 66);  -- MNK Hands
+INSERT INTO mob_droplist VALUES(2546, 1, 1, 100, 15119, 66);  -- WHM Legs
+INSERT INTO mob_droplist VALUES(2546, 1, 1, 100, 15120, 66);  -- BLM Legs
+INSERT INTO mob_droplist VALUES(2546, 1, 1, 100, 15121, 66);  -- RDM Legs
+INSERT INTO mob_droplist VALUES(2546, 1, 1, 100, 15137, 67);  -- THF Feet
+INSERT INTO mob_droplist VALUES(2546, 1, 1, 100, 15078, 67);  -- PLD Head
+INSERT INTO mob_droplist VALUES(2546, 1, 1, 100, 15124, 67);  -- DRK Legs
+INSERT INTO mob_droplist VALUES(2546, 1, 1, 100, 15125, 67);  -- BST Legs
+INSERT INTO mob_droplist VALUES(2546, 1, 1, 100, 15111, 67);  -- BRD Hands
+INSERT INTO mob_droplist VALUES(2546, 1, 1, 100, 15082, 67);  -- RNG Head
+INSERT INTO mob_droplist VALUES(2546, 1, 1, 100, 15113, 67);  -- SAM Hands
+INSERT INTO mob_droplist VALUES(2546, 1, 1, 100, 15084, 67);  -- NIN Head
+INSERT INTO mob_droplist VALUES(2546, 1, 1, 100, 15115, 67);  -- DRG Hands
+INSERT INTO mob_droplist VALUES(2546, 1, 1, 100, 15146, 67);  -- SMN Feet
+INSERT INTO mob_droplist VALUES(2546, 1, 2, 100, 15025, 200); -- BLU Hands
+INSERT INTO mob_droplist VALUES(2546, 1, 2, 100, 11385, 200); -- COR Feet
+INSERT INTO mob_droplist VALUES(2546, 1, 2, 100, 15031, 200); -- PUP Hands
+INSERT INTO mob_droplist VALUES(2546, 1, 2, 100, 16352, 200); -- DNC Feet
+INSERT INTO mob_droplist VALUES(2546, 1, 2, 100, 16362, 200); -- SCH Legs
+INSERT INTO mob_droplist VALUES(2546, 0, 0, 1000, 1449, 150); -- Bronzepiece
+INSERT INTO mob_droplist VALUES(2546, 2, 0, 1000, 1449, 0); -- Bronzepiece
+DELETE FROM mob_droplist WHERE dropid = "2556"; -- Quadav
+INSERT INTO mob_droplist VALUES(2556, 1, 1, 100, 15072, 66);  -- WAR Head
+INSERT INTO mob_droplist VALUES(2556, 1, 1, 100, 15103, 66);  -- MNK Hands
+INSERT INTO mob_droplist VALUES(2556, 1, 1, 100, 15119, 66);  -- WHM Legs
+INSERT INTO mob_droplist VALUES(2556, 1, 1, 100, 15120, 66);  -- BLM Legs
+INSERT INTO mob_droplist VALUES(2556, 1, 1, 100, 15121, 66);  -- RDM Legs
+INSERT INTO mob_droplist VALUES(2556, 1, 1, 100, 15137, 67);  -- THF Feet
+INSERT INTO mob_droplist VALUES(2556, 1, 1, 100, 15078, 67);  -- PLD Head
+INSERT INTO mob_droplist VALUES(2556, 1, 1, 100, 15124, 67);  -- DRK Legs
+INSERT INTO mob_droplist VALUES(2556, 1, 1, 100, 15125, 67);  -- BST Legs
+INSERT INTO mob_droplist VALUES(2556, 1, 1, 100, 15111, 67);  -- BRD Hands
+INSERT INTO mob_droplist VALUES(2556, 1, 1, 100, 15082, 67);  -- RNG Head
+INSERT INTO mob_droplist VALUES(2556, 1, 1, 100, 15113, 67);  -- SAM Hands
+INSERT INTO mob_droplist VALUES(2556, 1, 1, 100, 15084, 67);  -- NIN Head
+INSERT INTO mob_droplist VALUES(2556, 1, 1, 100, 15115, 67);  -- DRG Hands
+INSERT INTO mob_droplist VALUES(2556, 1, 1, 100, 15146, 67);  -- SMN Feet
+INSERT INTO mob_droplist VALUES(2556, 1, 2, 100, 15025, 200); -- BLU Hands
+INSERT INTO mob_droplist VALUES(2556, 1, 2, 100, 11385, 200); -- COR Feet
+INSERT INTO mob_droplist VALUES(2556, 1, 2, 100, 15031, 200); -- PUP Hands
+INSERT INTO mob_droplist VALUES(2556, 1, 2, 100, 16352, 200); -- DNC Feet
+INSERT INTO mob_droplist VALUES(2556, 1, 2, 100, 16362, 200); -- SCH Legs
+INSERT INTO mob_droplist VALUES(2556, 0, 0, 1000, 1455, 150); -- Byne Bill
+INSERT INTO mob_droplist VALUES(2556, 2, 0, 1000, 1455, 0); -- Byne Bill
+DELETE FROM mob_droplist WHERE dropid = "2551"; -- Yagudo
+INSERT INTO mob_droplist VALUES(2551, 1, 1, 100, 15072, 66);  -- WAR Head
+INSERT INTO mob_droplist VALUES(2551, 1, 1, 100, 15103, 66);  -- MNK Hands
+INSERT INTO mob_droplist VALUES(2551, 1, 1, 100, 15119, 66);  -- WHM Legs
+INSERT INTO mob_droplist VALUES(2551, 1, 1, 100, 15120, 66);  -- BLM Legs
+INSERT INTO mob_droplist VALUES(2551, 1, 1, 100, 15121, 66);  -- RDM Legs
+INSERT INTO mob_droplist VALUES(2551, 1, 1, 100, 15137, 67);  -- THF Feet
+INSERT INTO mob_droplist VALUES(2551, 1, 1, 100, 15078, 67);  -- PLD Head
+INSERT INTO mob_droplist VALUES(2551, 1, 1, 100, 15124, 67);  -- DRK Legs
+INSERT INTO mob_droplist VALUES(2551, 1, 1, 100, 15125, 67);  -- BST Legs
+INSERT INTO mob_droplist VALUES(2551, 1, 1, 100, 15111, 67);  -- BRD Hands
+INSERT INTO mob_droplist VALUES(2551, 1, 1, 100, 15082, 67);  -- RNG Head
+INSERT INTO mob_droplist VALUES(2551, 1, 1, 100, 15113, 67);  -- SAM Hands
+INSERT INTO mob_droplist VALUES(2551, 1, 1, 100, 15084, 67);  -- NIN Head
+INSERT INTO mob_droplist VALUES(2551, 1, 1, 100, 15115, 67);  -- DRG Hands
+INSERT INTO mob_droplist VALUES(2551, 1, 1, 100, 15146, 67);  -- SMN Feet
+INSERT INTO mob_droplist VALUES(2551, 1, 2, 100, 15025, 200); -- BLU Hands
+INSERT INTO mob_droplist VALUES(2551, 1, 2, 100, 11385, 200); -- COR Feet
+INSERT INTO mob_droplist VALUES(2551, 1, 2, 100, 15031, 200); -- PUP Hands
+INSERT INTO mob_droplist VALUES(2551, 1, 2, 100, 16352, 200); -- DNC Feet
+INSERT INTO mob_droplist VALUES(2551, 1, 2, 100, 16362, 200); -- SCH Legs
+INSERT INTO mob_droplist VALUES(2551, 0, 0, 1000, 1449, 150); -- Whiteshell 
+INSERT INTO mob_droplist VALUES(2551, 2, 0, 1000, 1449, 0); -- Whiteshell 
 --           Nightmare           --
+DELETE FROM mob_droplist WHERE dropid = "1793"; -- Gaylas/Kraken/Raptor/Roc
+INSERT INTO mob_droplist VALUES(1793, 1, 1, 100, 2037, 66);  -- WAR -1 Feet
+INSERT INTO mob_droplist VALUES(1793, 1, 1, 100, 2042, 66);  -- MNK -1 Feet
+INSERT INTO mob_droplist VALUES(1793, 1, 1, 100, 2047, 66);  -- WHM -1 Feet
+INSERT INTO mob_droplist VALUES(1793, 1, 1, 100, 2052, 66);  -- BLM -1 Feet
+INSERT INTO mob_droplist VALUES(1793, 1, 1, 100, 2057, 66);  -- RDM -1 Feet
+INSERT INTO mob_droplist VALUES(1793, 1, 1, 100, 2062, 67);  -- THF -1 Feet
+INSERT INTO mob_droplist VALUES(1793, 1, 1, 100, 2067, 67);  -- PLD -1 Feet
+INSERT INTO mob_droplist VALUES(1793, 1, 1, 100, 2072, 67);  -- DRK -1 Feet
+INSERT INTO mob_droplist VALUES(1793, 1, 1, 100, 2077, 67);  -- BST -1 Feet
+INSERT INTO mob_droplist VALUES(1793, 1, 1, 100, 2082, 67);  -- BRD -1 Feet
+INSERT INTO mob_droplist VALUES(1793, 1, 1, 100, 2087, 67);  -- RNG -1 Feet
+INSERT INTO mob_droplist VALUES(1793, 1, 1, 100, 2092, 67);  -- SAM -1 Feet
+INSERT INTO mob_droplist VALUES(1793, 1, 1, 100, 2097, 67);  -- NIN -1 Feet
+INSERT INTO mob_droplist VALUES(1793, 1, 1, 100, 2102, 67);  -- DRG -1 Feet
+INSERT INTO mob_droplist VALUES(1793, 1, 1, 100, 2107, 67);  -- SMN -1 Feet
+INSERT INTO mob_droplist VALUES(1793, 1, 2, 100, 2666, 200); -- BLU -1 Feet
+INSERT INTO mob_droplist VALUES(1793, 1, 2, 100, 2671, 200); -- COR -1 Feet
+INSERT INTO mob_droplist VALUES(1793, 1, 2, 100, 2676, 200); -- PUP -1 Feet
+INSERT INTO mob_droplist VALUES(1793, 1, 2, 100, 2722, 200); -- DNC -1 Feet
+INSERT INTO mob_droplist VALUES(1793, 1, 2, 100, 2727, 200); -- SCH -1 Feet
+INSERT INTO mob_droplist VALUES(1793, 1, 3, 50, 15872, 143); -- WHM Waist
+INSERT INTO mob_droplist VALUES(1793, 1, 3, 50, 15478, 143); -- MNK Back
+INSERT INTO mob_droplist VALUES(1793, 1, 3, 50, 15878, 143); -- DRG Waist
+INSERT INTO mob_droplist VALUES(1793, 1, 3, 50, 15484, 143); -- SMN Back
+INSERT INTO mob_droplist VALUES(1793, 1, 3, 50, 16245, 143); -- PUP Back
+INSERT INTO mob_droplist VALUES(1793, 1, 3, 50, 15875, 143); -- BST Waist
+INSERT INTO mob_droplist VALUES(1793, 1, 3, 50, 15925, 142); -- SCH Waist
+INSERT INTO mob_droplist VALUES(1793, 0, 0, 1000, 1455, 150); -- Byne Bill
+INSERT INTO mob_droplist VALUES(1793, 0, 0, 1000, 1449, 150); -- Whiteshell 
+INSERT INTO mob_droplist VALUES(1793, 0, 0, 1000, 1452, 150); -- Bronzepiece
+INSERT INTO mob_droplist VALUES(1793, 2, 0, 1000, 1455, 0); -- Byne Bill
+DELETE FROM mob_droplist WHERE dropid = "1803"; -- Snoll
+INSERT INTO mob_droplist VALUES(1803, 1, 1, 100, 2037, 66);  -- WAR -1 Feet
+INSERT INTO mob_droplist VALUES(1803, 1, 1, 100, 2042, 66);  -- MNK -1 Feet
+INSERT INTO mob_droplist VALUES(1803, 1, 1, 100, 2047, 66);  -- WHM -1 Feet
+INSERT INTO mob_droplist VALUES(1803, 1, 1, 100, 2052, 66);  -- BLM -1 Feet
+INSERT INTO mob_droplist VALUES(1803, 1, 1, 100, 2057, 66);  -- RDM -1 Feet
+INSERT INTO mob_droplist VALUES(1803, 1, 1, 100, 2062, 67);  -- THF -1 Feet
+INSERT INTO mob_droplist VALUES(1803, 1, 1, 100, 2067, 67);  -- PLD -1 Feet
+INSERT INTO mob_droplist VALUES(1803, 1, 1, 100, 2072, 67);  -- DRK -1 Feet
+INSERT INTO mob_droplist VALUES(1803, 1, 1, 100, 2077, 67);  -- BST -1 Feet
+INSERT INTO mob_droplist VALUES(1803, 1, 1, 100, 2082, 67);  -- BRD -1 Feet
+INSERT INTO mob_droplist VALUES(1803, 1, 1, 100, 2087, 67);  -- RNG -1 Feet
+INSERT INTO mob_droplist VALUES(1803, 1, 1, 100, 2092, 67);  -- SAM -1 Feet
+INSERT INTO mob_droplist VALUES(1803, 1, 1, 100, 2097, 67);  -- NIN -1 Feet
+INSERT INTO mob_droplist VALUES(1803, 1, 1, 100, 2102, 67);  -- DRG -1 Feet
+INSERT INTO mob_droplist VALUES(1803, 1, 1, 100, 2107, 67);  -- SMN -1 Feet
+INSERT INTO mob_droplist VALUES(1803, 1, 2, 100, 2666, 200); -- BLU -1 Feet
+INSERT INTO mob_droplist VALUES(1803, 1, 2, 100, 2671, 200); -- COR -1 Feet
+INSERT INTO mob_droplist VALUES(1803, 1, 2, 100, 2676, 200); -- PUP -1 Feet
+INSERT INTO mob_droplist VALUES(1803, 1, 2, 100, 2722, 200); -- DNC -1 Feet
+INSERT INTO mob_droplist VALUES(1803, 1, 2, 100, 2727, 200); -- SCH -1 Feet
+INSERT INTO mob_droplist VALUES(1803, 1, 3, 50, 15872, 143); -- WHM Waist
+INSERT INTO mob_droplist VALUES(1803, 1, 3, 50, 15478, 143); -- MNK Back
+INSERT INTO mob_droplist VALUES(1803, 1, 3, 50, 15878, 143); -- DRG Waist
+INSERT INTO mob_droplist VALUES(1803, 1, 3, 50, 15484, 143); -- SMN Back
+INSERT INTO mob_droplist VALUES(1803, 1, 3, 50, 16245, 143); -- PUP Back
+INSERT INTO mob_droplist VALUES(1803, 1, 3, 50, 15875, 143); -- BST Waist
+INSERT INTO mob_droplist VALUES(1803, 1, 3, 50, 15925, 142); -- SCH Waist
+INSERT INTO mob_droplist VALUES(1803, 0, 0, 1000, 1455, 150); -- Byne Bill
+INSERT INTO mob_droplist VALUES(1803, 0, 0, 1000, 1449, 150); -- Whiteshell 
+INSERT INTO mob_droplist VALUES(1803, 0, 0, 1000, 1452, 150); -- Bronzepiece
+INSERT INTO mob_droplist VALUES(1803, 2, 0, 1000, 1455, 0); -- Byne Bill
+DELETE FROM mob_droplist WHERE dropid = "1790"; -- Diremite
+INSERT INTO mob_droplist VALUES(1790, 1, 1, 100, 2037, 66);  -- WAR -1 Feet
+INSERT INTO mob_droplist VALUES(1790, 1, 1, 100, 2042, 66);  -- MNK -1 Feet
+INSERT INTO mob_droplist VALUES(1790, 1, 1, 100, 2047, 66);  -- WHM -1 Feet
+INSERT INTO mob_droplist VALUES(1790, 1, 1, 100, 2052, 66);  -- BLM -1 Feet
+INSERT INTO mob_droplist VALUES(1790, 1, 1, 100, 2057, 66);  -- RDM -1 Feet
+INSERT INTO mob_droplist VALUES(1790, 1, 1, 100, 2062, 67);  -- THF -1 Feet
+INSERT INTO mob_droplist VALUES(1790, 1, 1, 100, 2067, 67);  -- PLD -1 Feet
+INSERT INTO mob_droplist VALUES(1790, 1, 1, 100, 2072, 67);  -- DRK -1 Feet
+INSERT INTO mob_droplist VALUES(1790, 1, 1, 100, 2077, 67);  -- BST -1 Feet
+INSERT INTO mob_droplist VALUES(1790, 1, 1, 100, 2082, 67);  -- BRD -1 Feet
+INSERT INTO mob_droplist VALUES(1790, 1, 1, 100, 2087, 67);  -- RNG -1 Feet
+INSERT INTO mob_droplist VALUES(1790, 1, 1, 100, 2092, 67);  -- SAM -1 Feet
+INSERT INTO mob_droplist VALUES(1790, 1, 1, 100, 2097, 67);  -- NIN -1 Feet
+INSERT INTO mob_droplist VALUES(1790, 1, 1, 100, 2102, 67);  -- DRG -1 Feet
+INSERT INTO mob_droplist VALUES(1790, 1, 1, 100, 2107, 67);  -- SMN -1 Feet
+INSERT INTO mob_droplist VALUES(1790, 1, 2, 100, 2666, 200); -- BLU -1 Feet
+INSERT INTO mob_droplist VALUES(1790, 1, 2, 100, 2671, 200); -- COR -1 Feet
+INSERT INTO mob_droplist VALUES(1790, 1, 2, 100, 2676, 200); -- PUP -1 Feet
+INSERT INTO mob_droplist VALUES(1790, 1, 2, 100, 2722, 200); -- DNC -1 Feet
+INSERT INTO mob_droplist VALUES(1790, 1, 2, 100, 2727, 200); -- SCH -1 Feet
+INSERT INTO mob_droplist VALUES(1790, 1, 3, 50, 15479, 167); -- DRK Back
+INSERT INTO mob_droplist VALUES(1790, 1, 3, 50, 15480, 167); -- THF Back
+INSERT INTO mob_droplist VALUES(1790, 1, 3, 50, 15920, 167); -- COR Waist
+INSERT INTO mob_droplist VALUES(1790, 1, 3, 50, 15873, 167); -- RDM Waist
+INSERT INTO mob_droplist VALUES(1790, 1, 3, 50, 15879, 166); -- SAM Waist
+INSERT INTO mob_droplist VALUES(1790, 1, 3, 50, 15876, 166); -- RNG Waist
+INSERT INTO mob_droplist VALUES(1790, 0, 0, 1000, 1455, 150); -- Byne Bill
+INSERT INTO mob_droplist VALUES(1790, 0, 0, 1000, 1449, 150); -- Whiteshell 
+INSERT INTO mob_droplist VALUES(1790, 0, 0, 1000, 1452, 150); -- Bronzepiece
+INSERT INTO mob_droplist VALUES(1790, 2, 0, 1000, 1455, 0); -- Byne Bill
+DELETE FROM mob_droplist WHERE dropid = "1804"; -- Stirge/Tiger/Weapon
+INSERT INTO mob_droplist VALUES(1804, 1, 1, 100, 2037, 66);  -- WAR -1 Feet
+INSERT INTO mob_droplist VALUES(1804, 1, 1, 100, 2042, 66);  -- MNK -1 Feet
+INSERT INTO mob_droplist VALUES(1804, 1, 1, 100, 2047, 66);  -- WHM -1 Feet
+INSERT INTO mob_droplist VALUES(1804, 1, 1, 100, 2052, 66);  -- BLM -1 Feet
+INSERT INTO mob_droplist VALUES(1804, 1, 1, 100, 2057, 66);  -- RDM -1 Feet
+INSERT INTO mob_droplist VALUES(1804, 1, 1, 100, 2062, 67);  -- THF -1 Feet
+INSERT INTO mob_droplist VALUES(1804, 1, 1, 100, 2067, 67);  -- PLD -1 Feet
+INSERT INTO mob_droplist VALUES(1804, 1, 1, 100, 2072, 67);  -- DRK -1 Feet
+INSERT INTO mob_droplist VALUES(1804, 1, 1, 100, 2077, 67);  -- BST -1 Feet
+INSERT INTO mob_droplist VALUES(1804, 1, 1, 100, 2082, 67);  -- BRD -1 Feet
+INSERT INTO mob_droplist VALUES(1804, 1, 1, 100, 2087, 67);  -- RNG -1 Feet
+INSERT INTO mob_droplist VALUES(1804, 1, 1, 100, 2092, 67);  -- SAM -1 Feet
+INSERT INTO mob_droplist VALUES(1804, 1, 1, 100, 2097, 67);  -- NIN -1 Feet
+INSERT INTO mob_droplist VALUES(1804, 1, 1, 100, 2102, 67);  -- DRG -1 Feet
+INSERT INTO mob_droplist VALUES(1804, 1, 1, 100, 2107, 67);  -- SMN -1 Feet
+INSERT INTO mob_droplist VALUES(1804, 1, 2, 100, 2666, 200); -- BLU -1 Feet
+INSERT INTO mob_droplist VALUES(1804, 1, 2, 100, 2671, 200); -- COR -1 Feet
+INSERT INTO mob_droplist VALUES(1804, 1, 2, 100, 2676, 200); -- PUP -1 Feet
+INSERT INTO mob_droplist VALUES(1804, 1, 2, 100, 2722, 200); -- DNC -1 Feet
+INSERT INTO mob_droplist VALUES(1804, 1, 2, 100, 2727, 200); -- SCH -1 Feet
+INSERT INTO mob_droplist VALUES(1804, 1, 3, 50, 15479, 167); -- DRK Back
+INSERT INTO mob_droplist VALUES(1804, 1, 3, 50, 15480, 167); -- THF Back
+INSERT INTO mob_droplist VALUES(1804, 1, 3, 50, 15920, 167); -- COR Waist
+INSERT INTO mob_droplist VALUES(1804, 1, 3, 50, 15873, 167); -- RDM Waist
+INSERT INTO mob_droplist VALUES(1804, 1, 3, 50, 15879, 166); -- SAM Waist
+INSERT INTO mob_droplist VALUES(1804, 1, 3, 50, 15876, 166); -- RNG Waist
+INSERT INTO mob_droplist VALUES(1804, 0, 0, 1000, 1455, 150); -- Byne Bill
+INSERT INTO mob_droplist VALUES(1804, 0, 0, 1000, 1449, 150); -- Whiteshell 
+INSERT INTO mob_droplist VALUES(1804, 0, 0, 1000, 1452, 150); -- Bronzepiece
+INSERT INTO mob_droplist VALUES(1804, 2, 0, 1000, 1455, 0); -- Byne Bill
 -----------------------------------
 --   Special Mob Skills/Spells   --
 -----------------------------------
@@ -1521,12 +1898,12 @@ INSERT INTO mob_skill_lists VALUES('Goblin', 373, 1518)
 -- Use Spell List 
 --              NMs              --
 -- Use Skill List 1201
-INSERT INTO `mob_skill_lists` VALUES ('DynaNMYagudo', 1201, 617);
-INSERT INTO `mob_skill_lists` VALUES ('DynaNMYagudo', 1201, 618);
-INSERT INTO `mob_skill_lists` VALUES ('DynaNMYagudo', 1201, 619);
-INSERT INTO `mob_skill_lists` VALUES ('DynaNMYagudo', 1201, 620);
-INSERT INTO `mob_skill_lists` VALUES ('DynaNMYagudo', 1201, 764);
-INSERT INTO `mob_skill_lists` VALUES ('DynaNMYagudo', 1201, 1067);
+INSERT INTO mob_skill_lists VALUES ('DynaNMYagudo', 1201, 617);
+INSERT INTO mob_skill_lists VALUES ('DynaNMYagudo', 1201, 618);
+INSERT INTO mob_skill_lists VALUES ('DynaNMYagudo', 1201, 619);
+INSERT INTO mob_skill_lists VALUES ('DynaNMYagudo', 1201, 620);
+INSERT INTO mob_skill_lists VALUES ('DynaNMYagudo', 1201, 764);
+INSERT INTO mob_skill_lists VALUES ('DynaNMYagudo', 1201, 1067);
 --            Regular            --
 -- Use Skill List 360
 -----------------------------------

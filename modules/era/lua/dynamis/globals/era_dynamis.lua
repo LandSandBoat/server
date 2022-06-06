@@ -837,9 +837,7 @@ xi.dynamis.cleanupDynamis = function(zone)
     SetServerVariable(string.format("[DYNA]Given3MinuteWarning_%s", zoneID), 0)
     SetServerVariable(string.format("[DYNA]Given1MinuteWarning_%s", zoneID), 0)
     SetServerVariable(string.format("[DYNA]OriginalRegistrant_%s", zoneID), 0)
-    zone:setLocalVar(string.format("[DYNA]Token_%s", zoneID), 0)
-    zone:setLocalVar(string.format("[DYNA]ExpireRoutine_%s", zoneID), 0)
-    zone:setLocalVar(string.format("[DYNA]NoPlayersInZone_%s", zoneID), 0)
+    -- zone:resetLocalVars()
     xi.dynamis.ejectAllPlayers(zone) -- Remove Players (This is precautionary but not necessary.)
     
     -- Cleanup Zone

@@ -258,10 +258,10 @@ xi.dynamis.normalDynamicSpawn = function(mob, oMobIndex)
             },
             [xi.zone.DYNAMIS_BUBURIMU] =
             {
-                [337] = {0}, -- Quadav
-                [334] = {0}, -- Orc
-                [327] = {0}, -- Goblin
-                [360] = {0}, -- Yagudo
+                [337] = {2555}, -- Quadav
+                [334] = {2545}, -- Orc
+                [327] = {2540}, -- Goblin
+                [360] = {2550}, -- Yagudo
             },
             [xi.zone.DYNAMIS_JEUNO] =
             {
@@ -269,10 +269,10 @@ xi.dynamis.normalDynamicSpawn = function(mob, oMobIndex)
             },
             [xi.zone.DYNAMIS_QUFIM] =
             {
-                [337] = {0}, -- Quadav
-                [334] = {0}, -- Orc
-                [327] = {0}, -- Goblin
-                [360] = {0}, -- Yagudo
+                [337] = {2556}, -- Quadav
+                [334] = {2546}, -- Orc
+                [327] = {2541}, -- Goblin
+                [360] = {2551}, -- Yagudo
             },
             [xi.zone.DYNAMIS_SAN_DORIA] =
             {
@@ -285,10 +285,10 @@ xi.dynamis.normalDynamicSpawn = function(mob, oMobIndex)
             },
             [xi.zone.DYNAMIS_VALKURM] =
             {
-                [337] = {0}, -- Quadav
-                [334] = {0}, -- Orc
-                [327] = {0}, -- Goblin
-                [360] = {0}, -- Yagudo
+                [337] = {3131}, -- Quadav
+                [334] = {2544}, -- Orc
+                [327] = {2539}, -- Goblin
+                [360] = {2549}, -- Yagudo
             },
             [xi.zone.DYNAMIS_WINDURST] =
             {
@@ -393,28 +393,38 @@ xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID,
         },
         ["Nightmare"] =
         {
-            ["Nightmare Bunny"] = {"4e42756e" , 130, 134, 0, 0, nil}, -- NBun
-            ["Nightmare Cockatrice"] = {"4e436f63" , 130, 134, 0, 0, nil}, -- NCoc
-            ["Nightmare Crab"] = {"4e437261" , 130, 134, 0, 0, nil}, -- NCra
-            ["Nightmare Dhalmel"] = {"4e446861" , 130, 134, 0, 0, nil}, -- NDha
-            ["Nightmare Eft"] = {"4e446861" , 130, 134, 0, 0, nil}, -- NEft
-            ["Nightmare Mandragora"] = {"4e4d616e" , 130, 134, 0, 0, nil}, -- NMan
-            ["Nightmare Raven"] = {"4e526176" , 130, 134, 0, 0, nil}, -- NRav
-            ["Nightmare Scorpion"] = {"4e53636f" , 130, 134, 0, 0, nil}, -- NSco
-            ["Nightmare Urganite"] = {"4e557267" , 130, 134, 0, 0, nil}, -- NUrg
-            ["Nightmare Cluster"] = {"4e436c75" , 130, 134, 0, 0, nil}, -- NClu
-            ["Nightmare Hornet"] = {"4e486f72" , 130, 134, 0, 0, nil}, -- NHor
-            ["Nightmare Leech"] = {"4e4c6565" , 130, 134, 0, 0, nil}, -- NLee
-            ["Nightmare Makara"] = {"4e4d616b" , 130, 134, 0, 0, nil}, -- NMak
-            ["Nightmare Taurus"] = {"4e546175" , 130, 134, 0, 0, nil}, -- NTau
-            ["Nightmare Antlion"] = {"4e416e74" , 130, 134, 0, 0, nil}, -- NAnt
-            ["Nightmare Bugard"] = {"4e427567" , 130, 134, 0, 0, nil}, -- NBug
-            ["Nightmare Worm"] = {"4e576f72" , 130, 134, 0, 0, nil}, -- NWor
-            ["Nightmare Hippogryph"] = {"4e486970" , 130, 134, 0, 0, nil}, -- NHip
-            ["Nightmare Manticore"] = {"4e4d6174" , 130, 134, 0, 0, nil}, -- NMat
-            ["Nightmare Sabotender"] = {"4e536162" , 130, 134, 0, 0, nil}, -- NSab
-            ["Nightmare Sheep"] = {"4e536865" , 130, 134, 0, 0, nil}, -- NShe
-            ["Nightmare Fly"] = {"4e466c79" , 130, 134, 0, 0, nil}, -- NFly
+            ["Nightmare Bunny"] = {"4e42756e" , 97, 40, 1789, 0, 206}, -- NBun
+            ["Nightmare Cockatrice"] = {"4e436f63" , 19, 174, 1805, 0, 70}, -- NCoc
+            ["Nightmare Crab"] = {"4e437261" , 93, 40, 1791, 0, 77}, -- NCra
+            ["Nightmare Crawler"] = {"4e637261" , 99, 40, 1798, 0, 79}, -- Ncra
+            ["Nightmare Dhalmel"] = {"4e446861" , 94, 40, 2796, 0, 80}, -- NDha
+            ["Nightmare Eft"] = {"4e446861" , 101, 40, 2795, 0, 98}, -- NEft
+            ["Nightmare Mandragora"] = {"4e4d616e" , 98, 40, 1789, 0, 178}, -- NMan
+            ["Nightmare Raven"] = {"4e526176" , 100, 40, 1788, 0, 55}, -- NRav
+            ["Nightmare Scorpion"] = {"4e53636f" , 96, 40, 1787, 0, 217}, -- NSco
+            ["Nightmare Urganite"] = {"4e557267" , 95, 40, 1785, 0, 251}, -- NUrg
+            ["Nightmare Cluster"] = {"4e436c75" , 130, 134, 0, 0, 68}, -- NClu
+            ["Nightmare Hornet"] = {"4e486f72" , 130, 134, 0, 0, 48}, -- NHor
+            ["Nightmare Leech"] = {"4e4c6565" , 130, 134, 0, 0, 172}, -- NLee
+            ["Nightmare Makara"] = {"4e4d616b" , 130, 134, 0, 0, 197}, -- NMak
+            ["Nightmare Taurus"] = {"4e546175" , 130, 134, 0, 0, 240}, -- NTau
+            ["Nightmare Antlion"] = {"4e416e74" , 130, 134, 0, 0, 26}, -- NAnt
+            ["Nightmare Bugard"] = {"4e427567" , 130, 134, 0, 0, 58}, -- NBug
+            ["Nightmare Worm"] = {"4e576f72" , 130, 134, 0, 0, 258}, -- NWor
+            ["Nightmare Hippogryph"] = {"4e486970" , 2, 39, 1792, 0, 141}, -- NHip
+            ["Nightmare Manticore"] = {"4e4d6174" , 3, 39, 1799, 0, 179}, -- NMat
+            ["Nightmare Sabotender"] = {"4e536162" , 11, 39, 1792, 0, 212}, -- NSab
+            ["Nightmare Sheep"] = {"4e536865" , 13, 39, 1794, 0, 226}, -- NShe
+            ["Nightmare Fly"] = {"4e466c79" , 4, 39, 1794, 0, 113}, -- NFly
+            ["Nightmare Gaylas"] = {"4e476179" , 80, 41, 1793, 0, 47}, -- NGay
+            ["Nightmare Kraken"] = {"4e4b7261" , 75, 41, 1793, 0, 218}, -- NKra
+            ["Nightmare Raptor"] = {"4e526170" , 84,41, 1793, 0, 210}, -- NRap
+            ["Nightmare Roc"] = {"4e526f63" , 83, 41, 1793, 0, 125}, -- NRoc
+            ["Nightmare Snoll"] = {"4e536e6f" , 86, 41, 1803, 0, 232}, -- NSno
+            ["Nightmare Diremite"] = {"4e446972" , 82, 41, 1790, 0, 81}, -- NDir
+            ["Nightmare Stirge"] = {"4e537469" , 78, 41, 1804, 0, 46}, -- NSti
+            ["Nightmare Tiger"] = {"4e546967" , 81, 41, 1804, 0, 242}, -- NTig
+            ["Nightmare Weapon"] = {"4e576561" , 77, 41, 1804, 0, 110}, -- NWea
         },
         ["Elemental"] =
         {
@@ -429,9 +439,9 @@ xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID,
         },
         ["Beastmen"] = 
         {
-            ["Vanguard Vindicator"] = {"51574152", 19, 134, 0, 337}, -- QWAR (Bastok)
-            ["Vanguard Constable"] = {"5157484d", 29, 134, 1, 337}, -- QWHM (Bastok)
-            ["Vanguard Militant"] = {"514d4e4b", 25, 134, 0, 337}, -- QMNK (Bastok)
+            ["Vanguard Vindicator"] = {"51574152", 19, 134, 2558, 0, 337}, -- QWAR (Bastok)
+            ["Vanguard Constable"] = {"5157484d", 29, 134, 2558,1, 337}, -- QWHM (Bastok)
+            ["Vanguard Militant"] = {"514d4e4b", 25, 134, 2558, 0, 337}, -- QMNK (Bastok)
             
         },
         ["Other"] =
@@ -560,9 +570,9 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
             ["Tocktix Thinlids"] = {"546f636b", 150, 134, 176, 5, 373}, -- Tock (DRK)
             ["Whistix Toadthroat"] = {"57686973", 34, 188, 176, 6, 373}, -- Whis (BRD)
             -- Dynamis - Buburimu
-            ["Gosspix Blabberlips"] = {"476f7373", 144, 134, 0, 3, 373}, -- Goss (RDM)
-            ["Shamblix Rottenheart"] = {"5368616d", 150, 134, 0, 5, 373}, -- Sham (DRK)
-            ["Woodnix Shrillwhistle"] = {"576f6f64", 151, 134, 0, 0, 373}, -- Wood (BST)
+            ["Gosspix Blabberlips"] = {"476f7373", 144, 134,2667, 373}, -- Goss (RDM)
+            ["Shamblix Rottenheart"] = {"5368616d", 150, 134,2667, 5, 373}, -- Sham (DRK)
+            ["Woodnix Shrillwhistle"] = {"576f6f64", 151, 134, 2667, 0, 373}, -- Wood (BST)
             -- Dynamis - Jeuno
             ["Bandrix Rockjaw"] = {"42616e64", 146, 134, 143, 0, 373}, -- Band (THF)
             ["Buffrix Eargone"] = {"42756666", 148, 134, 143, 4, 373}, -- Buff (PLD)
@@ -617,10 +627,10 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
             ["Ultrasonic Zeknajak"] = {"555a656b", 87, 134, 493, 6, 1200}, -- UZek (BRD)
             ["Wraithdancer Gidbnod"] = {"57476964", 63, 134, 493, 1, 1200}, -- WGid (WHM)
             -- Dynamis Buburimu
-            ["Elvaansticker Bxafraff"] = {"456c7661", 88, 134, 0, 0, 1200}, -- Elva (DRG)
-            ["Flamecaller Zoeqdoq"] = {"466c616d", 84, 134, 0, 500, 1200}, -- Flam (BLM)
-            ["Hamfist Gukhbuk"] = {"48616d66", 65, 134, 0, 0, 1200}, -- Hamf (MNK)
-            ["Lyncean Juwgneg"] = {"4c796e63", 82, 134, 0, 0, 1200}, -- Lync (RNG)
+            ["Elvaansticker Bxafraff"] = {"456c7661", 88, 134, 760, 0, 1200}, -- Elva (DRG)
+            ["Flamecaller Zoeqdoq"] = {"466c616d", 84, 134, 760, 500, 1200}, -- Flam (BLM)
+            ["Hamfist Gukhbuk"] = {"48616d66", 65, 134, 760, 0, 1200}, -- Hamf (MNK)
+            ["Lyncean Juwgneg"] = {"4c796e63", 82, 134, 760, 0, 1200}, -- Lync (RNG)
             -- Dynamis - San d'Oria
             ["Wyrmgnasher Bjakdek"] = {"57797242", 88, 134, 237, 0, 1200}, -- WyrB (DRG)
             ["Reapertongue Gadgquok"] = {"52656147", 73, 134, 237, 0, 1200}, -- ReaG (SMN)
@@ -647,10 +657,10 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
             ["So'Zho Metalbender"] = {"536f5a68", 46, 134, 261, 0, 202}, -- SoZh (MNK)
             ["Ta'Hyu Gallanthunter"] = {"54614879", 40, 134, 261, 5, 202}, -- TaHy (DRK)
             -- Dynamis Buburimu
-            ["Gi'Bhe Fleshfeaster"] = {"47694268", 39, 134, 0, 1, 202}, -- GiBh (WHM)
-            ["Qu'Pho Bloodspiller"] = {"51755068", 24, 134, 0, 0, 202}, -- QuPh (WAR)
-            ["Te'Zha Ironclad"] = {"54655a68", 47, 134, 0, 4, 202}, -- TeZh (PLD)
-            ["Va'Rhu Bodysnatcher"] = {"56615268", 37, 134, 0, 0, 202}, -- VaRh (THF)
+            ["Gi'Bhe Fleshfeaster"] = {"47694268", 39, 134, 2901, 1, 202}, -- GiBh (WHM)
+            ["Qu'Pho Bloodspiller"] = {"51755068", 24, 134, 2901, 0, 202}, -- QuPh (WAR)
+            ["Te'Zha Ironclad"] = {"54655a68", 47, 134, 2901, 4, 202}, -- TeZh (PLD)
+            ["Va'Rhu Bodysnatcher"] = {"56615268", 37, 134, 2901, 0, 202}, -- VaRh (THF)
             -- Dynamis - Bastok (Done)
             ["Aa'Nyu Dismantler"] = {"41614e79", 40, 134, 2907, 5, 202}, -- AaNy (DRK)
             ["Gu'Nhi Noondozer"] = {"47754e68", 53, 134, 2907, 0, 202}, -- GuNh (SMN)
@@ -683,10 +693,10 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
             ["Xaa Chau the Roctalon"] = {"58616143", 97, 134, 265, 0, 1201}, -- XaaC (MNK)
             ["Xhoo Fuza the Sublime"] = {"58686f6f", 119, 134, 265, 6, 1201}, -- Xhoo (BRD)
             -- Dynamis - Buburimu
-            ["Baa Dava the Bibliophage"] = {"42616144", 91, 317, 0, 0, 1201}, -- BaaD (SMN)
-            ["Doo Peku the Fleetfoot"] = {"446f6f50", 115, 134, 0, 7, 1201}, -- DooP (NIN)
-            ["Koo Rahi the Levinblade"] = {"4b6f6f52", 121, 134, 0, 0, 1201}, -- KooR (SAM)
-            ["Ree Nata the Melomanic"] = {"5265654e", 119, 134, 0, 6, 1201}, -- ReeN (BRD)
+            ["Baa Dava the Bibliophage"] = {"42616144", 91, 317, 2085, 0, 1201}, -- BaaD (SMN)
+            ["Doo Peku the Fleetfoot"] = {"446f6f50", 115, 134, 2085, 7, 1201}, -- DooP (NIN)
+            ["Koo Rahi the Levinblade"] = {"4b6f6f52", 121, 134, 2085, 0, 1201}, -- KooR (SAM)
+            ["Ree Nata the Melomanic"] = {"5265654e", 119, 134, 2085, 6, 1201}, -- ReeN (BRD)
             -- Dynamis - Windurst
             ["Xoo Kaza the Solemn"] = {"586f6f4b", 106, 134, 1560, 500, 1201}, -- XooK (BLM)
             ["Haa Pevi the Stentorian"] = {"48616150", 91, 317, 1560, 0, 1201}, -- HaaP (SMN)
@@ -779,29 +789,29 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         ["Dynamis Effigy"] = {"44796e45" , 9, 42, 20, 0, 94}, -- Dynamis Effigy (DynE)
         ["Dynamis Icon"] = {"44796e49" , 32, 42, 195, 500, 95}, -- Dynamis Icon (DynI)
         -- Dynamis - Buburimu Non-Beastmen
-        ["Aitvaras"] = {"41697476", 105, 40, 0, 0, nil}, -- Aitv
-        ["Alklha"] = {"416c6b6c", 105, 40, 0, 0, nil}, -- Alkl
-        ["Barong"] = {"4261726f", 105, 40, 0, 0, nil}, -- Baro
-        ["Basilic"] = {"42617369", 105, 40, 0, 0, nil}, -- Basi
-        ["Jurik"] = {"4a757269", 105, 40, 0, 0, nil}, -- Juri
-        ["Koschei"] = {"4b6f7363", 105, 40, 0, 0, nil}, -- Kosc
-        ["Stihi"] = {"53746968", 105, 40, 0, 0, nil}, -- Stih
-        ["Stollenwurm"] = {"53746f6c", 105, 40, 0, 0, nil}, -- Stol
-        ["Tarasca"] = {"54617261", 105, 40, 0, 0, nil}, -- Tara
-        ["Vishap"] = {"56697368", 105, 40, 0, 0, nil}, -- Vish
-        ["Apocalyptic Beast"] = {"41706f63", 1, 40, 0, 0, nil}, -- Apoc
+        ["Aitvaras"] = {"41697476", 105, 40, 230, 0, 1209}, -- Aitv
+        ["Alklha"] = {"416c6b6c", 105, 40, 230, 0, 1207}, -- Alkl
+        ["Barong"] = {"4261726f", 105, 40, 230, 0, 1205}, -- Baro
+        ["Basilic"] = {"42617369", 105, 40, 230, 0, 1208}, -- Basi
+        ["Jurik"] = {"4a757269", 105, 40, 230, 0, 1204}, -- Juri
+        ["Koschei"] = {"4b6f7363", 105, 40, 230, 0, 1210}, -- Kosc
+        ["Stihi"] = {"53746968", 105, 40, 230, 0, 1202}, -- Stih
+        ["Stollenwurm"] = {"53746f6c", 105, 40, 230, 0, 1211}, -- Stol
+        ["Tarasca"] = {"54617261", 105, 40, 230, 0, 1206}, -- Tara
+        ["Vishap"] = {"56697368", 105, 40, 230, 0, 1203}, -- Vish
+        ["Apocalyptic Beast"] = {"41706f63", 1, 40, 146, 0, 0}, -- Apoc
         -- Dynamis - Valkurm
-        ["Dragontrap"] = {"44726174", 63, 77, 0, 0, nil}, -- Drat
-        ["Fairy Ring"] = {"46616952", 10, 39, 0, 0, nil}, -- FaiR
-        ["Nant'ina"] = {"4e616e74", 8, 39, 0, 0, nil}, -- Nant
-        ["Stcemqestcint"] = {"53746365", 6, 39, 0, 0, nil}, -- Stce
-        ["Nightmare Morbol"] = {"4e4d6f72", 33, 85, 0, 0, nil}, -- NMor
-        ["Cirrate Christelle"] = {"43697272", 1, 39, 0, 0, nil}, -- Cirr
+        ["Dragontrap"] = {"44726174", 63, 77, 2910, 0, 114}, -- Drat
+        ["Fairy Ring"] = {"46616952", 10, 39, 2910, 0, 116}, -- FaiR
+        ["Nant'ina"] = {"4e616e74", 8, 39, 2910, 0, 0}, -- Nant
+        ["Stcemqestcint"] = {"53746365", 6, 39, 2910, 0, 245}, -- Stce
+        ["Nightmare Morbol"] = {"4e4d6f72", 33, 85, 0, 0, 186}, -- NMor
+        ["Cirrate Christelle"] = {"43697272", 1, 39, 472, 0, 0}, -- Cirr
         -- Dynamis - Qufim Non-Beastmen
-        ["Scolopendra"] = {"53636f6c", 76, 41, 0, 0, nil}, -- Scol
-        ["Suttung"] = {"53757474", 85, 41, 0, 0, nil}, -- Sutt
-        ["Stringes"] = {"53747269", 79, 41, 0, 0, nil}, -- Stri
-        ["Antaeus"] = {"416e7461", 1, 41, 0, 0, nil}, -- Anta
+        ["Scolopendra"] = {"53636f6c", 76, 41, 3131, 0, 218}, -- Scol
+        ["Suttung"] = {"53757474", 85, 41, 3131, 0, 135}, -- Sutt
+        ["Stringes"] = {"53747269", 79, 41, 3131, 0, 46}, -- Stri
+        ["Antaeus"] = {"416e7461", 1, 41, 112, 0, 126}, -- Anta
         -- Dynamis - Tavnazia Non-Beastmen
         ["Diabolos Club"] = {"44696143", 4, 42, 0, nil, nil}, -- DiaC
         ["Diabolos Diamond"] = {"44696144", 3, 42, 0, nil, nil}, -- DiaD
@@ -1186,136 +1196,136 @@ xi.dynamis.spawnDynamicPet =function(target, oMob, mobJob)
         {
             [327] = -- Goblin Family
             {
-                [false] = {"56536c696d65" , 130, 134, 0, nil, nil}, -- Normal Goblin BST (VSlime)
+                [false] = {"56536c696d65" , 130, 134, 0, 54, 229}, -- Normal Goblin BST (VSlime)
                 [true] = -- Goblin NM
                 {
-                    ["Trailblix Goatmug"] = {"56536c696d65" , 130, 134, 0, nil, nil}, -- NM Goblin BST (VSlime)
-                    ["Rutrix Hamgams"] = {"56536c696d65" , 130, 134, 0, nil, nil}, -- NM Goblin BST (VSlime)
-                    ["Blazox Boneybod"] = {"56536c696d65", 130, 134, 0, nil, nil}, -- NM Goblin BST (VSlime)
-                    ["Routsix_Rubbertendon"] = {"56536c696d65" , 130, 134, 0, nil, nil}, -- NM Goblin BST (VSlime)
-                    ["Blazax_Boneybad"] = {"56536c696d65" , 130, 134, 0, nil, nil}, -- NM Goblin BST (VSlime)
-                    ["Rutrix_Hamgams"] = {"56536c696d65" , 130, 134, 0, nil, nil}, -- NM Goblin BST (VSlime)
-                    ["Trailblix_Goatmug"] = {"56536c696d65" , 130, 134, 0, nil, nil}, -- NM Goblin BST (VSlime)
-                    ["Woodnix_Shrillwistle"] = {"5753536c696d65" , 7, 40, 0, nil, nil}, -- NM Goblin BST (WSSlime)
+                    ["Trailblix Goatmug"] = {"56536c696d65" , 130, 134, 0, 54, 229}, -- NM Goblin BST (VSlime)
+                    ["Rutrix Hamgams"] = {"56536c696d65" , 130, 134, 0, 54, 229}, -- NM Goblin BST (VSlime)
+                    ["Blazox Boneybod"] = {"56536c696d65", 130, 134, 0, 54, 229}, -- NM Goblin BST (VSlime)
+                    ["Routsix_Rubbertendon"] = {"56536c696d65" , 130, 134, 0, 54, 229}, -- NM Goblin BST (VSlime)
+                    ["Blazax_Boneybad"] = {"56536c696d65" , 130, 134, 0, 54, 229}, -- NM Goblin BST (VSlime)
+                    ["Rutrix_Hamgams"] = {"56536c696d65" , 130, 134, 0, 54, 229}, -- NM Goblin BST (VSlime)
+                    ["Trailblix_Goatmug"] = {"56536c696d65" , 130, 134, 0, 54, 229},-- NM Goblin BST (VSlime)
+                    ["Woodnix_Shrillwistle"] = {"5753536c696d65" , 7, 40, 0, 54, 229}, -- NM Goblin BST (WSSlime)
                 },
             },
             [334] = -- Orc Family
             {
-                [false] = {"56486563", 77, 134, 0, nil, nil}, -- Normal Orc BST (VHec)
+                [false] = {"56486563", 77, 134, 0, 51, 139}, -- Normal Orc BST (VHec)
                 [true] = -- Orc NM
                 {
-                    ["Mithraslaver_Debhabob"] = {"56486563", 77, 134, 0, nil, nil}, -- NM Orc BST (VHec)
+                    ["Mithraslaver_Debhabob"] = {"56486563", 77, 134, 0, 51, 139}, -- NM Orc BST (VHec)
                 },
             },
             [337] = -- Quadav Family
             {
-                [false] = {"5653636f", 22, 134, 0, nil, nil}, -- Normal Quadav BST (VSco)
+                [false] = {"5653636f", 22, 134, 0, 53, 217}, -- Normal Quadav BST (VSco)
                 [true] = -- Quadav NM
                 {
-                    ["SoGho_Adderhandler"] = {"5653636f", 22, 134, 0, nil, nil}, -- NM Quadav BST (VSco)
-                    ["BeEbo_Tortoisedriver"] = {"5653636f", 22, 134, 0, nil, nil}, -- NM Quadav BST (VSco)
+                    ["SoGho_Adderhandler"] = {"5653636f", 22, 134, 0, 53, 217}, -- NM Quadav BST (VSco)
+                    ["BeEbo_Tortoisedriver"] = {"5653636f", 22, 134, 0, 53, 217}, -- NM Quadav BST (VSco)
                 },
             },
             [358] = -- Kindred Family
             {
-                [false] = {"4b566f75", 100, 135, 0, nil, nil}, -- Normal Kindred BST (KVou)
+                [false] = {"4b566f75", 100, 135, 0, 0, 267}, -- Normal Kindred BST (KVou)
                 [true] = -- NM Kindred
                 {
-                    ["Marquis_Andras"] = {"41566f75", 55, 135, 0, nil, nil}, -- NM Kindred BST (AVou)
+                    ["Marquis_Andras"] = {"41566f75", 55, 135, 0, 0, 267}, -- NM Kindred BST (AVou)
                 },
             },
             [359] = -- Hydra Family
             {
-                [false] = {"48486f75", 169, 134, 0, nil, nil}, -- Normal Hydra BST (HHou)
+                [false] = {"48486f75", 169, 134, 0, 0, 143}, -- Normal Hydra BST (HHou)
                 [true] = -- Hydra NM
                 {
-                    ["Dagourmarche"] = {"44486f75", 169, 134, 0, nil, nil}, -- NM Hydra BST (DHou)
+                    ["Dagourmarche"] = {"44486f75", 169, 134, 0, 0, 143}, -- NM Hydra BST (DHou)
                 },
             },
             [360] = -- Yagudo Family
             {
-                [false] = {"5643726f", 100, 135, 0, nil, nil}, -- Normal Yagudo BST (VCro)
+                [false] = {"5643726f", 100, 135, 0, 52, 55}, -- Normal Yagudo BST (VCro)
                 [true] = -- Yagudo NM
                 {
-                    ["Soo_Jopo_the_Fiendking"] = {"5643726f", 100, 135, 0, nil, nil}, -- NM Yagudo BST (VCro)
+                    ["Soo_Jopo_the_Fiendking"] = {"5643726f", 100, 135, 0, 52, 55}, -- NM Yagudo BST (VCro)
                 },
             },
         },
         [xi.job.DRG] =
         {
-            [false] = {"56777976", 27, 134, 0, nil, nil}, -- Normal Vanguard's Wyvern (Vwyv)
+            [false] = {"56777976", 27, 134, 0, 0, 714}, -- Normal Vanguard's Wyvern (Vwyv)
             [true] = 
             {
-                ["Maa Zaua the Wyrmkeeper"] = {"56777976", 27, 134, 0, nil, nil}, -- Normal Vanguard's Wyvern (Vwyv)
-                ["Draklix Scalecrust"] = {"56777976", 27, 134, 0, nil, nil}, -- Normal Vanguard's Wyvern (Vwyv)
-                ["Drakefeast Wubmfub"] = {"56777976", 27, 134, 0, nil, nil}, -- Normal Vanguard's Wyvern (Vwyv)
-                ["Go'Tyo Magenapper"] = {"56777976", 27, 134, 0, nil, nil}, -- Normal Vanguard's Wyvern (Vwyv)
-                ["Elvaansticker Bxafraff"] = {"56777976", 27, 134, 0, nil, nil}, -- Normal Vanguard's Wyvern (Vwyv)
-                ["Wyrmgnasher Bjakdek"] = {"56777976", 27, 134, 0, nil, nil}, -- Normal Vanguard's Wyvern (Vwyv)
-                ["King Zagan"] = {"5a777976", 61, 135, 0, nil, nil}, -- Zagan's Wyvern (Zwyv)
-                ["Dagourmache"] = {"44577976", 11, 134, 0, nil, nil}, -- Dagourmache's Wyvern (DWyv)
-                ["Apocalyptic Beast"] = {"44777976", 27, 134, 0, nil, nil}, -- Dragon's Wyvern (Dwyv)
+                ["Maa Zaua the Wyrmkeeper"] = {"56777976", 27, 134, 0, 0, 714}, -- Normal Vanguard's Wyvern (Vwyv)
+                ["Draklix Scalecrust"] = {"56777976", 27, 134, 0, 0, 714}, -- Normal Vanguard's Wyvern (Vwyv)
+                ["Drakefeast Wubmfub"] = {"56777976", 27, 134, 0, 0, 714}, -- Normal Vanguard's Wyvern (Vwyv)
+                ["Go'Tyo Magenapper"] = {"56777976", 27, 134, 0, 0, 714}, -- Normal Vanguard's Wyvern (Vwyv)
+                ["Elvaansticker Bxafraff"] = {"56777976", 27, 134, 0, 0, 714}, -- Normal Vanguard's Wyvern (Vwyv)
+                ["Wyrmgnasher Bjakdek"] = {"56777976", 27, 134, 0, 0, 714}, -- Normal Vanguard's Wyvern (Vwyv)
+                ["King Zagan"] = {"5a777976", 61, 135, 0, 0, 714}, -- Zagan's Wyvern (Zwyv)
+                ["Dagourmache"] = {"44577976", 11, 134, 0, 0, 714}, -- Dagourmache's Wyvern (DWyv)
+                ["Apocalyptic Beast"] = {"44777976", 27, 134, 0, 0, 714}, -- Dragon's Wyvern (Dwyv)
             },
         },
         [xi.job.SMN] =
         {
             [327] = -- Goblin Family
             {
-                [false] = {"56417661" , 36, 134, 0, nil, nil}, -- Vanguard's Avatar (VAva)
+                [false] = {"56417661" , 36, 134, 0, 0, 34}, -- Vanguard's Avatar (VAva)
                 [true] = -- Goblin NM
                 {
-                    ["Morblox Chubbychin"] = {"56417661" , 36, 134, 0, nil, nil}, -- Vanguard's Avatar (VAva)
-                    ["Morgmox Moldnoggin"] = {"56417661" , 36, 134, 0, nil, nil}, -- Vanguard's Avatar (VAva)
-                    ["Mortilox Wartpaws"] = {"56417661" , 36, 134, 0, nil, nil}, -- Vanguard's Avatar (VAva)
+                    ["Morblox Chubbychin"] = {"56417661" , 36, 134, 0, 0, 34}, -- Vanguard's Avatar (VAva)
+                    ["Morgmox Moldnoggin"] = {"56417661" , 36, 134, 0, 0, 34}, -- Vanguard's Avatar (VAva)
+                    ["Mortilox Wartpaws"] = {"56417661" , 36, 134, 0, 0, 34}, -- Vanguard's Avatar (VAva)
                 },
             },
             [334] = -- Orc Family
             {
-                [false] = {"56417661" , 36, 134, 0, nil, nil}, -- Vanguard's Avatar (VAva)
+                [false] = {"56417661" , 36, 134, 0, 0, 34}, -- Vanguard's Avatar (VAva)
                 [true] = -- Orc NM
                 {
-                    ["Deathcaller Bidfbid"] = {"56417661" , 36, 134, 0, nil, nil}, -- Vanguard's Avatar (VAva)
-                    ["Reapertongue Gadgquok"] = {"56417661" , 36, 134, 0, nil, nil}, -- Vanguard's Avatar (VAva)
+                    ["Deathcaller Bidfbid"] = {"56417661" , 36, 134, 0, 0, 34}, -- Vanguard's Avatar (VAva)
+                    ["Reapertongue Gadgquok"] = {"56417661" , 36, 134, 0, 0, 34}, -- Vanguard's Avatar (VAva)
                 },
             },
             [337] = -- Quadav Family
             {
-                [false] = {"56417661" , 36, 134, 0, nil, nil}, -- Vanguard's Avatar (VAva)
+                [false] = {"56417661" , 36, 134, 0, 0, 34}, -- Vanguard's Avatar (VAva)
                 [true] = -- Quadav NM
                 {
-                    ["Be'Zhe Keeprazer"] = {"56417661" , 36, 134, 0, nil, nil}, -- Vanguard's Avatar (VAva)
-                    ["Gu'Nhi Noondozer"] = {"56417661" , 36, 134, 0, nil, nil}, -- Vanguard's Avatar (VAva)
+                    ["Be'Zhe Keeprazer"] = {"56417661" , 36, 134, 0, 0, 34}, -- Vanguard's Avatar (VAva)
+                    ["Gu'Nhi Noondozer"] = {"56417661" , 36, 134, 0, 0, 34}, -- Vanguard's Avatar (VAva)
                 },
             },
             [358] = -- Kindred Family
             {
-                [false] = {"4b417661" , 25, 135, 0, nil, nil}, -- Kindred's Avatar (KAva)
+                [false] = {"4b417661" , 25, 135, 0, 0, 34}, -- Kindred's Avatar (KAva)
                 [true] = -- NM Kindred
                 {
-                    ["Marquis Nebiros"] = {"4e417661", 68, 138, 0, nil, nil}, -- Nebrios's Avatar (NAva)
+                    ["Marquis Nebiros"] = {"4e417661", 68, 138, 0, 0, 34}, -- Nebrios's Avatar (NAva)
                 },
             },
             [359] = -- Hydra Family
             {
-                [false] = {"48417661", 177, 134, 0, nil, nil}, -- Hydra's Avatar (HAva)
+                [false] = {"48417661", 177, 134, 0, 0, 34}, -- Hydra's Avatar (HAva)
                 [true] = -- Hydra NM
                 {
-                    ["Dagourmarche"] = {"44417661", 12, 134, 0, nil, nil}, -- Dagourmache's Avatar (DAva)
+                    ["Dagourmarche"] = {"44417661", 12, 134, 0, 0, 34}, -- Dagourmache's Avatar (DAva)
                 },
             },
             [360] = -- Yagudo Family
             {
-                [false] = {"56417661" , 36, 134, 0, nil, nil}, -- Vanguard's Avatar (VAva)
+                [false] = {"56417661" , 36, 134, 0, 0, 34}, -- Vanguard's Avatar (VAva)
                 [true] = -- Yagudo NM
                 {
-                    ["Baa Dava the Bibliophage"] = {"56417661" , 36, 134, 0, nil, nil}, -- Vanguard's Avatar (VAva)
-                    ["Puu Timu the Phantasmal"] = {"56417661" , 36, 134, 0, nil, nil}, -- Vanguard's Avatar (VAva)
-                    ["Haa Pevi the Stentorian"] = {"56417661" , 36, 134, 0, nil, nil}, -- Vanguard's Avatar (VAva)
+                    ["Baa Dava the Bibliophage"] = {"56417661" , 36, 134, 0, 0, 34}, -- Vanguard's Avatar (VAva)
+                    ["Puu Timu the Phantasmal"] = {"56417661" , 36, 134, 0, 0, 34}, -- Vanguard's Avatar (VAva)
+                    ["Haa Pevi the Stentorian"] = {"56417661" , 36, 134, 0, 0, 34}, -- Vanguard's Avatar (VAva)
                 },
             },
             [87] = -- Dwagon Family
             {
-                ["Apocalyptic Beast"] = {"44617661" , 36, 134, 0, nil, nil}, -- Dragon's Avatar (Dava)
+                ["Apocalyptic Beast"] = {"44617661" , 36, 134, 0, 0, 34}, -- Dragon's Avatar (Dava)
             },
         },
     }
