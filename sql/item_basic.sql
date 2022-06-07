@@ -15842,6 +15842,7 @@ INSERT INTO `item_basic` VALUES (18562,0,'yhatdhara_+1','yhatdhara_+1',1,2080,7,
 INSERT INTO `item_basic` VALUES (18563,0,'ark_scythe','ark_scythe',1,31832,0,1,0);
 INSERT INTO `item_basic` VALUES (18564,0,'devilish_scythe','devilish_scythe',1,63572,0,1,0);
 INSERT INTO `item_basic` VALUES (18565,0,'adflictio','adflictio',1,63572,0,1,0);
+INSERT INTO `item_basic` VALUES (18566,0,'crepuscular_scythe','crepuscular_scythe',1,64596,0,1,0);
 INSERT INTO `item_basic` VALUES (18571,0,'daurdabla','daurdabla',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (18572,0,'gjallarhorn','gjallarhorn',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (18573,0,'pyf_harp','pyf_harp',1,63552,0,1,0);
@@ -18647,6 +18648,7 @@ INSERT INTO `item_basic` VALUES (22297,0,'aurgelmir_orb','aurgelmir_orb',1,2080,
 INSERT INTO `item_basic` VALUES (22298,0,'aurgelmir_orb_+1','aurgelmir_orb_+1',1,2080,0,0,0);
 INSERT INTO `item_basic` VALUES (22299,0,'perfect_lucky_egg','per._lucky_egg',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (22300,0,'crepuscular_pebble','crepuscular_pebble',1,63568,0,1,0);
+INSERT INTO `item_basic` VALUES (22301,0,'sroda_tathlum','sroda_tathlum',1,63572,0,0,0);
 INSERT INTO `item_basic` VALUES (23040,0,'pummelers_mask_+2','pummelers_mask_+2',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (23041,0,'anchorites_crown_+2','anch._crown_+2',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (23042,0,'theophany_cap_+2','theophany_cap_+2',1,63552,0,1,0);
@@ -19705,7 +19707,9 @@ INSERT INTO `item_basic` VALUES (26086,0,'nicanders_necklace','nicanders_necklac
 INSERT INTO `item_basic` VALUES (26088,0,'malignance_earring','malignance_earring',1,34820,24,0,2);
 INSERT INTO `item_basic` VALUES (26108,0,'odr_earring','odr_earring',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (26109,0,'snotra_earring','snotra_earring',1,34820,24,0,2);
+INSERT INTO `item_basic` VALUES (26115,0,'balder_earring_+1','balder_earring_+1',1,63572,0,0,0);
 INSERT INTO `item_basic` VALUES (26116,0,'schere_earring','schere_earring',1,59456,0,1,0);
+INSERT INTO `item_basic` VALUES (26118,0,'sroda_earring','sroda_earring',1,63572,0,0,0);
 INSERT INTO `item_basic` VALUES (26160,0,'evanescence_ring','evanescence_ring',1,63572,0,0,0);
 INSERT INTO `item_basic` VALUES (26161,0,'shukuyu_ring','shukuyu_ring',1,63568,0,0,0);
 INSERT INTO `item_basic` VALUES (26162,0,'rahab_ring','rahab_ring',1,63568,0,0,0);
@@ -19766,6 +19770,7 @@ INSERT INTO `item_basic` VALUES (26216,0,'dreki_ring','dreki_ring',1,63552,0,1,0
 INSERT INTO `item_basic` VALUES (26217,0,'ligeia_ring','ligeia_ring',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (26218,0,'beithir_ring','beithir_ring',1,59456,0,1,0);
 INSERT INTO `item_basic` VALUES (26219,0,'najis_loop','najis_loop',1,63552,0,1,0);
+INSERT INTO `item_basic` VALUES (26221,0,'sroda_ring','sroda_ring',1,63572,0,0,0);
 INSERT INTO `item_basic` VALUES (26240,0,'tantalic_cape','tantalic_cape',1,63572,0,0,0);
 INSERT INTO `item_basic` VALUES (26241,0,'scintillating_cape','scintillating_cape',1,63572,0,0,0);
 INSERT INTO `item_basic` VALUES (26242,0,'phalangite_mantle','phalangite_mantle',1,63568,0,0,0);
@@ -19833,6 +19838,7 @@ INSERT INTO `item_basic` VALUES (26351,0,'sacro_cord','sacro_cord',1,2052,23,0,4
 INSERT INTO `item_basic` VALUES (26356,0,'skrymir_cord','skrymir_cord',1,2080,23,0,0);
 INSERT INTO `item_basic` VALUES (26357,0,'skrymir_cord_+1','skrymir_cord_+1',1,2080,23,0,0);
 INSERT INTO `item_basic` VALUES (26359,0,'orpheuss_sash','orpheuss_sash',1,34820,0,0,0);
+INSERT INTO `item_basic` VALUES (26361,0,'gerdr_belt+1','gerdr_belt+1',1,63572,0,0,0);
 INSERT INTO `item_basic` VALUES (26362,0,'tellen_belt','tellen_belt',1,59456,0,1,0);
 INSERT INTO `item_basic` VALUES (26363,0,'obstinate_sash','obstin._sash',1,59456,0,1,0);
 INSERT INTO `item_basic` VALUES (26400,0,'culminus','culminus',1,63572,0,0,0);
@@ -21952,12 +21958,6 @@ INSERT INTO `item_basic` VALUES (28668,0,'matamata_shield_+1','matamata_shield_+
 INSERT INTO `item_basic` VALUES (28669,0,'butznar_shield_+1','butznar_shield_+1',1,2080,16,0,0);
 INSERT INTO `item_basic` VALUES (28670,0,'leafkin_shield','leafkin_shield',1,63572,0,1,0);
 INSERT INTO `item_basic` VALUES (28671,0,'butznar_shield','butznar_shield',1,2084,16,0,0);
-INSERT INTO `item_basic` VALUES (18566,0,'crepuscular_scythe','crepuscular_scythe',1,64596,0,1,0);
-INSERT INTO `item_basic` VALUES (26221,0,'sroda_ring','sroda_ring',1,63572,0,0,0);
-INSERT INTO `item_basic` VALUES (26115,0,'balder_earring_+1','balder_earring_+1',1,63572,0,0,0);
-INSERT INTO `item_basic` VALUES (26118,0,'sroda_earring','sroda_earring',1,63572,0,0,0);
-INSERT INTO `item_basic` VALUES (26361,0,'gerdr_belt+1','gerdr_belt+1',1,63572,0,0,0);
-INSERT INTO `item_basic` VALUES (22301,0,'sroda_tathlum','sroda_tathlum',1,63572,0,0,0);
 INSERT INTO `item_basic` VALUES (28672,0,'maze_tabula_m01','maze_tabula_m01',1,61504,0,1,0);
 INSERT INTO `item_basic` VALUES (28673,0,'maze_tabula_m02','maze_tabula_m02',1,61504,0,1,0);
 INSERT INTO `item_basic` VALUES (28674,0,'maze_tabula_m03','maze_tabula_m03',1,61504,0,1,0);
