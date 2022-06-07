@@ -21,6 +21,7 @@ zones[xi.zone.FORET_DE_HENNETIEL] =
         YOU_HAVE_LEARNED           = 7015, -- You have learned <keyitem>!
         STARTED_TO_LEARN_BOAT      = 7518, -- You have started to learn a bit about how to operate your boat.
         FIGURED_OUT_BOAT           = 7519, -- You have figured out how to properly use the boat! Report your progress to Choubollet.
+        WAYPOINT_ATTUNED           = 7677, -- Your <keyitem> has been attuned to a geomagnetic fount[/ at the frontier station/ at Frontier Bivouac #1/ at Frontier Bivouac #2/ at Frontier Bivouac #3/ at Frontier Bivouac #4]!
         EXPENDED_KINETIC_UNITS     = 7688, -- You have expended <number> kinetic unit[/s] and will be transported to another locale.
         INSUFFICIENT_UNITS         = 7689, -- Your stock of kinetic units is insufficient.
         REACHED_KINETIC_UNIT_LIMIT = 7690, -- You have reached your limit of kinetic units and cannot charge your artifact any further.
