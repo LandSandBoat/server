@@ -561,6 +561,8 @@ public:
 
     bool isDualWielding(); // Checks if the battle entity is dual wielding
 
+    float checkLiementAbsorb(uint16 damageType); // return 1.0 if did not absorb, return >= -1.0 if did absorb
+
     // Enmity
     int32 getCE(CLuaBaseEntity const* target);                    // gets current CE the mob has towards the player
     int32 getVE(CLuaBaseEntity const* target);                    // gets current VE the mob has towards the player
