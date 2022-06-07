@@ -240,10 +240,11 @@ void CItemState::TryInterrupt(CBattleEntity* PTarget)
         UpdateTarget(m_PEntity->IsValidTarget(m_targid, m_PItem->getValidTarget(), m_errorMsg));
     }
 
-    uint16 msg = 62; // the item fails to activate
+    uint16 msg = 445; // you cannot use items at this time
 
     if (HasMoved() || m_PEntity->StatusEffectContainer->HasPreventActionEffect())
     {
+        msg           = MSGBASIC_ITEM_FAILS_TO_ACTIVATE;
         m_interrupted = true;
     }
     else if (battleutils::IsParalyzed(m_PEntity))
