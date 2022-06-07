@@ -1933,6 +1933,7 @@ INSERT INTO `item_usable` VALUES (6568,'crepe_des_rois',1,1,28,1,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6569,'scroll_of_slow_ii',1,1,11,5,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6570,'scroll_of_paralyze_ii',1,1,11,5,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6571,'scroll_of_phalanx_ii',1,1,11,5,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6576,'turkey_with_rolanberry_sauce',1,1,28,0,0,0,0,0); -- TODO: verify animation from retail
 INSERT INTO `item_usable` VALUES (6601,'omelette_sandwich',1,1,28,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6602,'omelette_sandwich_+1',1,1,28,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (10250,'moogle_suit',1,8,0,0,1,30,86400,0);
