@@ -390,7 +390,6 @@ xi.garrison.onTrade = function(player, npc, trade)
     -- TODO: Check to see if party has a fellow
     -- Offset 42 A party member has an NPC called up. You cannot take part in this event.
     local zoneId = npc:getZoneID()
-    local region = npc:getZone():getRegionID()
     local garrisonZoneData = xi.garrison.data[zoneId]
     local text = zones[zoneId].text
     local lockout = xi.settings.GARRISON_LOCKOUT
@@ -399,6 +398,7 @@ xi.garrison.onTrade = function(player, npc, trade)
     local item = garrisonZoneData.itemReq
     local nation = player:getNation()
     local rank = player:getRank(nation)
+    local region = garrisonZoneData.textRegion
     local levelCapOffset = 0
     local nationOffset = 1
     -- Nation text offset
