@@ -1379,6 +1379,9 @@ INSERT INTO `instance_entities` VALUES (25900,17838150); -- The Briars (gal)
 -- Ambuscade
 -- ------------------------------------------------------------
 
+-- Stonewalled (27100)
+INSERT INTO `instance_entities` VALUES (27100, 17887467); -- Primogenial Marolith
+
 -- Ambuscade
 -- mobs
 INSERT INTO `instance_entities` VALUES (30000,17952867);
