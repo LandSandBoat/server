@@ -8,14 +8,14 @@ mixins = {require("scripts/mixins/families/empty_terroanima")}
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-	mob:setLocalVar("maxBabies", 4)
+    mob:setLocalVar("maxBabies", 4)
     mob:addMod(xi.mod.TRIPLE_ATTACK, 10)
     mob:addMod(xi.mod.DEFP, 35)
 end
 
 entity.onMobWeaponSkillPrepare = function(mob, target)
     local fission = 755
-	local random = math.random()
+    local random = math.random()
 
     if mob:getHPP() <= 50 then
         if random < 0.6 then

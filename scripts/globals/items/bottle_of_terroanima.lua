@@ -11,10 +11,10 @@ local item_object = {}
 
 item_object.onItemCheck = function(target, player)
     local result = 0
-	if
-		target:getSystem() ~= xi.ecosystem.EMPTY and
-		player:getRegion() == xi.region.PROMYVION
-	then
+    if
+        target:getSystem() ~= xi.ecosystem.EMPTY and
+        player:getRegion() == xi.region.PROMYVION
+    then
         result = xi.msg.basic.ITEM_UNABLE_TO_USE
     elseif target:checkDistance(player) > 10 then
         result = xi.msg.basic.TOO_FAR_AWAY
