@@ -2328,7 +2328,6 @@ INSERT INTO `mob_skill_lists` VALUES ('Thinker_NM',706,1248);
 INSERT INTO `mob_skill_lists` VALUES ('Thinker_NM',706,1251);
 INSERT INTO `mob_skill_lists` VALUES ('Thinker_NM',706,1252);
 INSERT INTO `mob_skill_lists` VALUES ('Thinker_NM',706,1271);
-INSERT INTO `mob_skill_lists` VALUES ('Craver_NM',707,1229);
 INSERT INTO `mob_skill_lists` VALUES ('Craver_NM',707,1232);
 INSERT INTO `mob_skill_lists` VALUES ('Craver_NM',707,1233);
 INSERT INTO `mob_skill_lists` VALUES ('Craver_NM',707,1234);
