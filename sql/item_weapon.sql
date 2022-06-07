@@ -4830,6 +4830,8 @@ INSERT INTO `item_weapon` VALUES (22297,'aurgelmir_orb',0,0,0,0,0,1,1,999,0,0);
 INSERT INTO `item_weapon` VALUES (22298,'aurgelmir_orb_+1',0,0,0,0,0,1,1,999,0,0);
 INSERT INTO `item_weapon` VALUES (22299,'per._lucky_egg',0,0,0,0,0,1,1,999,0,0);
 INSERT INTO `item_weapon` VALUES (22300,'crepuscular_pebble',0,0,0,0,0,0,0,0,0,0);
+INSERT INTO `item_weapon` VALUES (21585,'crepuscular_knife',2,0,248,248,248,1,1,190,133,0);
+INSERT INTO `item_weapon` VALUES (22042,'wizards_rod',11,0,250,250,250,0,1,216,200,0);
 
 /*!40000 ALTER TABLE `item_weapon` ENABLE KEYS */;
 UNLOCK TABLES;

@@ -10963,7 +10963,6 @@ INSERT INTO `item_equipment` VALUES (22139,'gastraphetes',99,119,1024,106,0,0,4,
 INSERT INTO `item_equipment` VALUES (22140,'annihilator',99,119,1024,103,0,1,4,0,0);
 INSERT INTO `item_equipment` VALUES (22141,'death_penalty',99,119,65536,107,0,1,4,0,0);
 INSERT INTO `item_equipment` VALUES (22142,'armageddon',99,119,66560,109,0,1,4,0,0);
-INSERT INTO `item_equipment` VALUES (22143,'fomalhaut',99,119,66560,134,0,0,4,0,0);
 INSERT INTO `item_equipment` VALUES (22144,'voluspa_gun',99,119,66560,59,0,0,4,0,0);
 INSERT INTO `item_equipment` VALUES (22145,'artemiss_bow_+1',99,119,1024,138,0,0,4,0,0); -- TODO: capture model from retail (using Artemis's Bow model)
 INSERT INTO `item_equipment` VALUES (22147,'scouts_crossbow',99,119,1024,52,0,0,4,0,4);
@@ -11542,17 +11541,47 @@ INSERT INTO `item_equipment` VALUES (23754,'sandogasa_+1',1,0,4194303,0,0,0,16,0
 INSERT INTO `item_equipment` VALUES (23761,'nyame_helm',99,119,4194303,470,0,0,16,0,0);
 INSERT INTO `item_equipment` VALUES (23768,'nyame_mail',99,119,4194303,470,0,0,32,0,0);
 INSERT INTO `item_equipment` VALUES (23775,'nyame_gauntlets',99,119,4194303,470,0,0,64,0,0);
-INSERT INTO `item_equipment` VALUES (23781,'bunzis_pants',99,119,16916,470,0,0,128,0,0);    -- TODO: capture model from retail
+INSERT INTO `item_equipment` VALUES (23781,'bunzis_pants',99,119,16916,469,0,0,128,0,0);
 INSERT INTO `item_equipment` VALUES (23782,'nyame_flanchard',99,119,4194303,470,0,0,128,0,0);
-INSERT INTO `item_equipment` VALUES (23783,'ikengas_clogs',99,119,66560,470,0,0,256,0,0);   -- TODO: capture model from retail
-INSERT INTO `item_equipment` VALUES (23784,'gletis_boots',99,119,303392,470,0,0,256,0,0);   -- TODO: capture model from retail
-INSERT INTO `item_equipment` VALUES (23785,'sakpatas_leggings',99,119,193,470,0,0,256,0,0); -- TODO: capture model from retail
-INSERT INTO `item_equipment` VALUES (23786,'mpacas_boots',99,119,137218,470,0,0,256,0,0);   -- TODO: capture model from retail
-INSERT INTO `item_equipment` VALUES (23787,'agwus_pigaches',99,119,3670024,470,0,0,256,0,0); -- TODO: capture model from retail
-INSERT INTO `item_equipment` VALUES (23788,'bunzis_sabots',99,119,16916,470,0,0,256,0,0);   -- TODO: capture model from retail
+INSERT INTO `item_equipment` VALUES (23783,'ikengas_clogs',99,119,66560,467,0,0,256,0,0);
+INSERT INTO `item_equipment` VALUES (23784,'gletis_boots',99,119,303392,465,0,0,256,0,0);
+INSERT INTO `item_equipment` VALUES (23785,'sakpatas_leggings',99,119,193,466,0,0,256,0,0);
+INSERT INTO `item_equipment` VALUES (23786,'mpacas_boots',99,119,137218,467,0,0,256,0,0);
+INSERT INTO `item_equipment` VALUES (23787,'agwus_pigaches',99,119,3670024,468,0,0,256,0,0);
+INSERT INTO `item_equipment` VALUES (23788,'bunzis_sabots',99,119,16916,469,0,0,256,0,0);
 INSERT INTO `item_equipment` VALUES (23789,'nyame_sollerets',99,119,4194303,470,0,0,256,0,0);
-INSERT INTO `item_equipment` VALUES (23790,'adenium_masque',1,0,4194303,172,0,0,16,0,0);    -- TODO: capture model from retail
-INSERT INTO `item_equipment` VALUES (23791,'adenium_suit',1,0,4194303,172,0,0,32,448,0);    -- TODO: capture model from retail
+INSERT INTO `item_equipment` VALUES (23770,'gletis_gauntlets',99,119,303392,465,0,0,64,0,0);
+INSERT INTO `item_equipment` VALUES (23763,'gletis_cuirass',99,119,303392,465,0,0,32,0,0);
+INSERT INTO `item_equipment` VALUES (23756,'gletis_mask',99,119,303392,465,0,0,16,0,0);
+INSERT INTO `item_equipment` VALUES (23757,'sakpatas_helm',99,119,193,466,0,0,16,0,0);
+INSERT INTO `item_equipment` VALUES (23764,'sakpatas_plate',99,119,193,466,0,0,32,0,0);
+INSERT INTO `item_equipment` VALUES (23771,'sakpatas_gauntlets',99,119,193,466,0,0,64,0,0);
+INSERT INTO `item_equipment` VALUES (23778,'sakpatas_cuisses',99,119,193,466,0,0,128,0,0);
+INSERT INTO `item_equipment` VALUES (23779,'mpacas_hose',99,119,137218,467,0,0,128,0,0);
+INSERT INTO `item_equipment` VALUES (23772,'mpacas_gloves',99,119,137218,467,0,0,64,0,0);
+INSERT INTO `item_equipment` VALUES (23765,'mpacas_doublet',99,119,137218,467,0,0,32,0,0);
+INSERT INTO `item_equipment` VALUES (23758,'mpacas_cap',99,119,137218,467,0,0,16,0,0);
+INSERT INTO `item_equipment` VALUES (23776,'ikengas_trousers',99,119,66560,464,0,0,128,0,0);
+INSERT INTO `item_equipment` VALUES (23769,'ikengas_gloves',99,119,66560,464,0,0,64,0,0);
+INSERT INTO `item_equipment` VALUES (23762,'ikengas_vest',99,119,66560,464,0,0,32,0,0);
+INSERT INTO `item_equipment` VALUES (23755,'ikengas_hat',99,119,66560,464,0,0,16,0,0);
+INSERT INTO `item_equipment` VALUES (23760,'bunzis_hat',99,119,16916,469,0,0,16,0,0);
+INSERT INTO `item_equipment` VALUES (23767,'bunzis_rob',99,119,16916,469,0,0,32,0,0);
+INSERT INTO `item_equipment` VALUES (23780,'agwus_slops',99,119,3670024,468,0,0,128,0,0);
+INSERT INTO `item_equipment` VALUES (23773,'agwus_gages',99,119,3670024,468,0,0,64,0,0);
+INSERT INTO `item_equipment` VALUES (23766,'agwus_robe',99,119,3670024,468,0,0,32,0,0);
+INSERT INTO `item_equipment` VALUES (23759,'agwus_cap',99,119,3670024,468,0,0,16,0,0);
+INSERT INTO `item_equipment` VALUES (18566,'crepuscular_scythe',99,119,128,526,0,0,1,0,0);
+INSERT INTO `item_equipment` VALUES (26359,'orpheuss_sash',99,119,4194303,0,0,0,1024,0,0);
+INSERT INTO `item_equipment` VALUES (26115,'balder_earring_+1',99,119,4194303,0,0,0,512,0,0);
+INSERT INTO `item_equipment` VALUES (26221,'sroda_ring',99,119,4194303,0,0,0,24576,0,0);
+INSERT INTO `item_equipment` VALUES (26118,'sroda_earring',99,119,4194303,0,0,0,512,0,0);
+INSERT INTO `item_equipment` VALUES (22143,'fomalhaut',99,119,66560,83,0,0,4,0,0);
+INSERT INTO `item_equipment` VALUES (26361,'gerdr_belt+1',99,119,4194303,0,0,0,1024,0,0);
+INSERT INTO `item_equipment` VALUES (22301,'sroda_tathlum',99,0,4194303,0,0,0,8,4,0);
+INSERT INTO `item_equipment` VALUES (22042,'wizards_rod',99,119,1605656,845,0,0,3,0,0);
+INSERT INTO `item_equipment` VALUES (23790,'adenium_masque',1,0,4194303,172,0,0,16,0,0); -- TODO: capture model from retail
+INSERT INTO `item_equipment` VALUES (23791,'adenium_suit',1,0,4194303,172,0,0,32,448,0); -- TODO: capture model from retail
 INSERT INTO `item_equipment` VALUES (23792,'ziamet_khud',1,0,4194303,172,0,0,16,0,0);
 INSERT INTO `item_equipment` VALUES (23793,'ziamet_peti',1,0,4194303,172,0,0,32,0,0);
 INSERT INTO `item_equipment` VALUES (23794,'ziamet_bazubands',1,0,4194303,172,0,0,64,0,0);

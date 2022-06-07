@@ -21952,6 +21952,12 @@ INSERT INTO `item_basic` VALUES (28668,0,'matamata_shield_+1','matamata_shield_+
 INSERT INTO `item_basic` VALUES (28669,0,'butznar_shield_+1','butznar_shield_+1',1,2080,16,0,0);
 INSERT INTO `item_basic` VALUES (28670,0,'leafkin_shield','leafkin_shield',1,63572,0,1,0);
 INSERT INTO `item_basic` VALUES (28671,0,'butznar_shield','butznar_shield',1,2084,16,0,0);
+INSERT INTO `item_basic` VALUES (18566,0,'crepuscular_scythe','crepuscular_scythe',1,64596,0,1,0);
+INSERT INTO `item_basic` VALUES (26221,0,'sroda_ring','sroda_ring',1,63572,0,0,0);
+INSERT INTO `item_basic` VALUES (26115,0,'balder_earring_+1','balder_earring_+1',1,63572,0,0,0);
+INSERT INTO `item_basic` VALUES (26118,0,'sroda_earring','sroda_earring',1,63572,0,0,0);
+INSERT INTO `item_basic` VALUES (26361,0,'gerdr_belt+1','gerdr_belt+1',1,63572,0,0,0);
+INSERT INTO `item_basic` VALUES (22301,0,'sroda_tathlum','sroda_tathlum',1,63572,0,0,0);
 INSERT INTO `item_basic` VALUES (28672,0,'maze_tabula_m01','maze_tabula_m01',1,61504,0,1,0);
 INSERT INTO `item_basic` VALUES (28673,0,'maze_tabula_m02','maze_tabula_m02',1,61504,0,1,0);
 INSERT INTO `item_basic` VALUES (28674,0,'maze_tabula_m03','maze_tabula_m03',1,61504,0,1,0);
