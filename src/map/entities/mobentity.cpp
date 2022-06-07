@@ -83,6 +83,7 @@ CMobEntity::CMobEntity()
     m_AllowRespawn = false;
     m_DropItemTime = 0;
     m_Family       = 0;
+    m_SuperFamily  = 0;
     m_Type         = MOBTYPE_NORMAL;
     m_Behaviour    = BEHAVIOUR_NONE;
     m_SpawnType    = SPAWNTYPE_NORMAL;
