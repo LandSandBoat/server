@@ -12439,6 +12439,21 @@ uint8 CLuaBaseEntity::getSystem()
 }
 
 /************************************************************************
+ *  Function: getSuperFamily()
+ *  Purpose : Returns the integer value of the associated Mob SuperFamily
+ *  Example : if mob:getSuperFamily() == 123 then
+ *  Notes   : To Do: Enumerate Mob Families in global script
+ ************************************************************************/
+
+uint16 CLuaBaseEntity::getSuperFamily()
+{
+    auto* entity = dynamic_cast<CMobEntity*>(m_PBaseEntity);
+    XI_DEBUG_BREAK_IF(!entity);
+
+    return entity->m_SuperFamily;
+}
+
+/************************************************************************
  *  Function: getFamily()
  *  Purpose : Returns the integer value of the associated Mob Family
  *  Example : if mob:getFamily() == 123 then
@@ -14522,7 +14537,8 @@ void CLuaBaseEntity::Register()
 
     // Mob Entity-Specific
     SOL_REGISTER("setMobLevel", CLuaBaseEntity::setMobLevel);
-    SOL_REGISTER("getSystem", CLuaBaseEntity::getSystem);
+    SOL_REGISTER("getSystem", CLuaBaseEntity::getSystem); // TODO: rename to getEcoSystem()
+    SOL_REGISTER("getSuperFamily", CLuaBaseEntity::getSuperFamily);
     SOL_REGISTER("getFamily", CLuaBaseEntity::getFamily);
     SOL_REGISTER("isMobType", CLuaBaseEntity::isMobType);
     SOL_REGISTER("isUndead", CLuaBaseEntity::isUndead);
