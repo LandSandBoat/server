@@ -94,13 +94,13 @@ enum class LATENT : uint16
 #define MAX_LATENTEFFECTID 61
 
 /************************************************************************
- *																		*
- *  Нерешенные задачи:													*
- *																		*
- *  - сохранение ID сущности, добавившей эффект							*
- *  - обновление эффекта (например перезапись protect 1 на protect 2)    *
- *																		*
- ************************************************************************/
+*                                                                       *
+* Unsolved problems:                                                    *
+*                                                                       *
+* - saving the ID of the entity that added the effect                   *
+* - updating effect (for example, overwriting protect 1 with protect 2) *
+*                                                                       *
+************************************************************************/
 
 class CBattleEntity;
 
