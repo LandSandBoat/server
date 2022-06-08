@@ -25669,13 +25669,14 @@ INSERT INTO `item_mods` VALUES (20511,582,30); -- Stringing Pummel WS DMG +30%
 INSERT INTO `item_mods` VALUES (20512,8,50);   -- Verethragna 119 III - STR+50
 INSERT INTO `item_mods` VALUES (20512,256,45); -- Aftermath
 INSERT INTO `item_mods` VALUES (20512,355,14); -- Victory Smite
-INSERT INTO `item_mods` VALUES (20515,73,10); -- iLvl 119 Godhands - STP+10
-INSERT INTO `item_mods` VALUES (20515,256,43); -- Godhands
-INSERT INTO `item_mods` VALUES (20515,345,500); -- TP Bonus +500
-INSERT INTO `item_mods` VALUES (20515,355,15); -- Shijin Spiral
 INSERT INTO `item_mods` VALUES (20515,30,228); -- Macc
+INSERT INTO `item_mods` VALUES (20515,73,10); -- iLvl 119 Godhands - STP+10
 INSERT INTO `item_mods` VALUES (20515,80,269); -- Hand 2 Hand Skill
 INSERT INTO `item_mods` VALUES (20515,107,269); -- Guard Skill
+-- INSERT INTO `item_mods` VALUES (20515,256,43);  -- TODO Aeonic Aftermath isn't implemented
+INSERT INTO `item_mods` VALUES (20515,311,155); -- Magic Dmg
+INSERT INTO `item_mods` VALUES (20515,345,500); -- TP Bonus +500
+INSERT INTO `item_mods` VALUES (20515,355,15); -- Shijin Spiral
 INSERT INTO `item_mods` VALUES (20516,25,25); -- Denouements: Accuracy+25
 INSERT INTO `item_mods` VALUES (20516,430,3); -- Quadruple Attack+3%
 INSERT INTO `item_mods` VALUES (20516,958,4); -- "resistance to all status ailments" +4
@@ -27615,19 +27616,19 @@ INSERT INTO `item_mods` VALUES (21685,27,23); -- ENMITY Epeolatry
 INSERT INTO `item_mods` VALUES (21685,30,242); -- MACC
 INSERT INTO `item_mods` VALUES (21685,83,269); -- GREAT SWORD SKILL
 INSERT INTO `item_mods` VALUES (21685,110,269); -- PARRY SKILL
-INSERT INTO `item_mods` VALUES (21685,256,45); -- AFTERMATH
+INSERT INTO `item_mods` VALUES (21685,256,39); -- TODO: Use Mythic acc/attack/OA2-3 until equivalent Ergon AM is implemented
 INSERT INTO `item_mods` VALUES (21685,311,186); -- MAGIC DMG
 INSERT INTO `item_mods` VALUES (21685,355,61); -- Dimidiation
-INSERT INTO `item_mods` VALUES (21685,831,-2500); -- MAGIC DMG
+INSERT INTO `item_mods` VALUES (21685,190,-2500); -- Physical Damage Taken II
 INSERT INTO `item_mods` VALUES (21685,864,10); -- AFTERMATH
+INSERT INTO `item_mods` VALUES (21685,1020,1); -- LIEMENT_EXTENDS_TO_AREA
 INSERT INTO `item_mods` VALUES (21694,30,242); -- Lionheart
 INSERT INTO `item_mods` VALUES (21694,73,10); -- STORE TP
 INSERT INTO `item_mods` VALUES (21694,83,269); -- GREAT SWORD SKILL
 INSERT INTO `item_mods` VALUES (21694,110,269); -- PARRY SKILL
-INSERT INTO `item_mods` VALUES (21694,256,45); -- AFTERMATH
+-- INSERT INTO `item_mods` VALUES (21694,256,45); -- TODO: add Aeonic AM when implemented
 INSERT INTO `item_mods` VALUES (21694,311,186); -- MAGIC DMG
 INSERT INTO `item_mods` VALUES (21694,345,500); -- TP BONUS
-INSERT INTO `item_mods` VALUES (21694,831,-2500); -- MAGIC DMG TAKEN
 INSERT INTO `item_mods` VALUES (21700,25,20);     -- Blurred Claymore - 20 Acc
 INSERT INTO `item_mods` VALUES (21701,25,25);     -- Blurred Claymore +1 - 25 Acc
 INSERT INTO `item_mods` VALUES (21706,2,68);      -- barbarity HP+68
@@ -37404,17 +37405,16 @@ INSERT INTO `item_mods` VALUES (26400,28,20); -- Magic Atk. Bonus+20
 INSERT INTO `item_mods` VALUES (26400,311,75); -- Magic Damage+75
 INSERT INTO `item_mods` VALUES (26400,109,107); -- Shield Skill+107
 INSERT INTO `item_mods` VALUES (26400,168,10); -- Spell interruption rate down 10%
-INSERT INTO `item_mods` VALUES (26403,1,150); -- Srivatsa
-INSERT INTO `item_mods` VALUES (26403,2,150);
-INSERT INTO `item_mods` VALUES (26403,5,150);
-INSERT INTO `item_mods` VALUES (26403,23,35);
-INSERT INTO `item_mods` VALUES (26403,25,35);
-INSERT INTO `item_mods` VALUES (26403,27,15);
-INSERT INTO `item_mods` VALUES (26403,109,129);
-INSERT INTO `item_mods` VALUES (26403,160,-800);
-INSERT INTO `item_mods` VALUES (26403,190,-2500);
-INSERT INTO `item_mods` VALUES (26403,416,5);
-INSERT INTO `item_mods` VALUES (26403,426,35);
+INSERT INTO `item_mods` VALUES (26403,1,150); -- Def Srivatsa
+INSERT INTO `item_mods` VALUES (26403,2,150); -- Hp
+INSERT INTO `item_mods` VALUES (26403,5,150); -- Mp
+INSERT INTO `item_mods` VALUES (26403,23,35); -- Att
+INSERT INTO `item_mods` VALUES (26403,25,35); -- Acc
+INSERT INTO `item_mods` VALUES (26403,27,15); -- Enmity
+INSERT INTO `item_mods` VALUES (26403,109,129); -- Shield Skill
+INSERT INTO `item_mods` VALUES (26403,160,-800); -- Dmg Taken
+INSERT INTO `item_mods` VALUES (26403,416,5); -- TODO: replace with Annuls all Damage when implemented
+INSERT INTO `item_mods` VALUES (26403,476,5); -- TODO: replace with Annuls all Damage when implemented
 INSERT INTO `item_mods` VALUES (26406,127,3); -- Kupo Shield - Synthesis Skills +3
 INSERT INTO `item_mods` VALUES (26406,128,3);
 INSERT INTO `item_mods` VALUES (26406,129,3);
