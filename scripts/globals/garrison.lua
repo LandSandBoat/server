@@ -439,20 +439,20 @@ xi.garrison.onTrade = function(player, npc, trade)
         npc:getZone():setLocalVar(string.format("[GARRISON]LockOut_%s", zoneId), os.time() + lockout)
         -- Starting dialog
         npc:timer(200, function(npcArg)
-            player:messageSpecial(text.GARRISON + 2)
+            player:messageSpecial(text.GARRISON_BASE + 2)
         end)
         -- Nation dialog depending on which level cap
         npc:timer(400, function(npcArg)
-            player:messageSpecial(text.GARRISON + nationOffset + levelCapOffset, 0, 0, region)
+            player:messageSpecial(text.GARRISON_BASE + nationOffset + levelCapOffset, 0, 0, region)
         end)
         -- More nation dialog
         npc:timer(600, function(npcArg)
-            player:messageSpecial(text.GARRISON + nationOffset + levelCapOffset + 1)
+            player:messageSpecial(text.GARRISON_BASE + nationOffset + levelCapOffset + 1)
         end)
         -- Additional dialog for level cap 20 zones
         if garrisonZoneData.levelCap == 20 then
             npc:timer(800, function(npcArg)
-                player:messageSpecial(text.GARRISON + nationOffset + levelCapOffset + 2)
+                player:messageSpecial(text.GARRISON_BASE + nationOffset + levelCapOffset + 2)
             end)
         end
     elseif
@@ -460,10 +460,10 @@ xi.garrison.onTrade = function(player, npc, trade)
         player:getCharVar("GARRISON_CONQUEST_WAIT") > os.time()
     then
         -- Limit Once Per Week
-        player:messageSpecial(text.GARRISON + 40)
+        player:messageSpecial(text.GARRISON_BASE + 40)
     else
         -- Requirements not met
-        player:messageSpecial(text.GARRISON + 1)
+        player:messageSpecial(text.GARRISON_BASE + 1)
     end
 end
 -- Zone tick Create NPC Tables if empty
