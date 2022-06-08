@@ -109,7 +109,7 @@ xi.dynamis.normalDynamicSpawn = function(mob, oMobIndex)
                 [1]  = {"48574152", 159, 134, 0, 359}, -- HWAR
                 [2]  = {"484d4e4b", 163, 134, 0, 359}, -- HMNK
                 [3]  = {"4857484d", 161, 134, 1, 359}, -- HWHM
-                [4]  = {"48424c4d", 164, 134, 500, 359}, -- HBLM
+                [4]  = {"48424c4d", 164, 134, 497, 359}, -- HBLM
                 [5]  = {"4852444d", 162, 134, 3, 359}, -- HRDM
                 [6]  = {"48544846", 160, 134, 0, 359}, -- HTHF
                 [7]  = {"48504c44", 166, 134, 4, 359}, -- HPLD
@@ -127,7 +127,7 @@ xi.dynamis.normalDynamicSpawn = function(mob, oMobIndex)
                 [1]  = {"4b574152", 32, 135, 0, 358}, -- KWAR
                 [2]  = {"4b4d4e4b", 33, 135, 0, 358}, -- KMNK
                 [3]  = {"4b57484d", 29, 135, 1, 358}, -- KWHM
-                [4]  = {"4b424c4d", 30, 135, 500, 358}, -- KBLM
+                [4]  = {"4b424c4d", 30, 135, 497, 358}, -- KBLM
                 [5]  = {"4b52444d", 31, 135, 3, 358}, -- KRDM
                 [6]  = {"4b544846", 34, 135, 0, 358}, -- KTHF
                 [7]  = {"4b504c44", 15, 135, 4, 358}, -- KPLD
@@ -147,7 +147,7 @@ xi.dynamis.normalDynamicSpawn = function(mob, oMobIndex)
                     [1]  = {"48574152", 159, 134, 0, 359}, -- HWAR
                     [2]  = {"484d4e4b", 163, 134, 0, 359}, -- HMNK
                     [3]  = {"4857484d", 161, 134, 1, 359}, -- HWHM
-                    [4]  = {"48424c4d", 164, 134, 500, 359}, -- HBLM
+                    [4]  = {"48424c4d", 164, 134, 497, 359}, -- HBLM
                     [5]  = {"4852444d", 162, 134, 3, 359}, -- HRDM
                     [6]  = {"48544846", 160, 134, 0, 359}, -- HTHF
                     [7]  = {"48504c44", 166, 134, 4, 359}, -- HPLD
@@ -165,7 +165,7 @@ xi.dynamis.normalDynamicSpawn = function(mob, oMobIndex)
                     [1]  = {"4b574152", 32, 135, 0, 358}, -- KWAR
                     [2]  = {"4b4d4e4b", 33, 135, 0, 358}, -- KMNK
                     [3]  = {"4b57484d", 29, 135, 1, 358}, -- KWHM
-                    [4]  = {"4b424c4d", 30, 135, 500, 358}, -- KBLM
+                    [4]  = {"4b424c4d", 30, 135, 497, 358}, -- KBLM
                     [5]  = {"4b52444d", 31, 135, 3, 358}, -- KRDM
                     [6]  = {"4b544846", 34, 135, 0, 358}, -- KTHF
                     [7]  = {"4b504c44", 15, 135, 4, 358}, -- KPLD
@@ -185,7 +185,7 @@ xi.dynamis.normalDynamicSpawn = function(mob, oMobIndex)
             [1]  = {"47574152", 159, 134, 0, 327}, -- GWAR
             [2]  = {"474d4e4b", 163, 134, 0, 327}, -- GMNK
             [3]  = {"4757484d", 161, 134, 1, 327}, -- GWHM
-            [4]  = {"47424c4d", 164, 134, 500, 327}, -- GBLM
+            [4]  = {"47424c4d", 164, 134, 497, 327}, -- GBLM
             [5]  = {"4752444d", 162, 134, 3, 327}, -- GRDM
             [6]  = {"47544846", 160, 134, 0, 327}, -- GTHF
             [7]  = {"47504c44", 166, 134, 4, 327}, -- GPLD
@@ -203,7 +203,7 @@ xi.dynamis.normalDynamicSpawn = function(mob, oMobIndex)
             [1]  = {"4f574152", 159, 134, 0, 334}, -- OWAR
             [2]  = {"4f4d4e4b", 163, 134, 0, 334}, -- OMNK
             [3]  = {"4f57484d", 161, 134, 1, 334}, -- OWHM
-            [4]  = {"4f424c4d", 164, 134, 500, 334}, -- OBLM
+            [4]  = {"4f424c4d", 164, 134, 497, 334}, -- OBLM
             [5]  = {"4f52444d", 162, 134, 3, 334}, -- ORDM
             [6]  = {"4f544846", 160, 134, 0, 334}, -- OTHF
             [7]  = {"4f504c44", 166, 134, 4, 334}, -- OPLD
@@ -221,7 +221,7 @@ xi.dynamis.normalDynamicSpawn = function(mob, oMobIndex)
             [1]  = {"51574152", 19, 134, 0, 337}, -- QWAR
             [2]  = {"514d4e4b", 25, 134, 0, 337}, -- QMNK
             [3]  = {"5157484d", 29, 134, 1, 337}, -- QWHM
-            [4]  = {"51424c4d", 42, 134, 500, 337}, -- QBLM
+            [4]  = {"51424c4d", 42, 134, 497, 337}, -- QBLM
             [5]  = {"5152444d", 20, 134, 3, 337}, -- QRDM
             [6]  = {"51544846", 33, 134, 0, 337}, -- QTHF
             [7]  = {"51504c44", 30, 134, 4, 337}, -- QPLD
@@ -239,7 +239,7 @@ xi.dynamis.normalDynamicSpawn = function(mob, oMobIndex)
             [1]  = {"59574152", 159, 134, 0, 360}, -- YWAR
             [2]  = {"594d4e4b", 163, 134, 0, 360}, -- YMNK
             [3]  = {"5957484d", 161, 134, 1, 360}, -- YWHM
-            [4]  = {"59424c4d", 164, 134, 500, 360}, -- YBLM
+            [4]  = {"59424c4d", 164, 134, 497, 360}, -- YBLM
             [5]  = {"5952444d", 162, 134, 3, 360}, -- YRDM
             [6]  = {"59544846", 160, 134, 0, 360}, -- YTHF
             [7]  = {"59504c44", 166, 134, 4, 360}, -- YPLD
@@ -385,21 +385,21 @@ xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID,
     {
         ["Statue"] =
         {
-            ["Vanguard Eye"] = {"56457965" , 163, 134, 2561, 500, 11}, -- Vanguard Eye (VEye)
-            ["Prototype Eye"] = {"50457965" , 61, 42, 2561, 500, 11}, -- Prototype Eye (PEye)
+            ["Vanguard Eye"] = {"56457965" , 163, 134, 2561, 497, 11}, -- Vanguard Eye (VEye)
+            ["Prototype Eye"] = {"50457965" , 61, 42, 2561, 497, 11}, -- Prototype Eye (PEye)
             ["Goblin Statue"] = {"4753746174" , 158, 134, 1144, 1, 92}, -- Goblin Statue (GStat)
             ["Goblin Replica"] = {"475253746174" , 157, 134, 1144, 1, 92}, -- Goblin Statue (GRStat)
             ["Statue Prototype"] = {"475053746174" , 36, 42, 1144, 1, 92}, -- Goblin Statue (GPStat)
-            ["Serjeant Tombstone"] = {"4f53746174" , 89, 134, 2201, 500, 93}, -- Orc Statue (OStat)
+            ["Serjeant Tombstone"] = {"4f53746174" , 89, 134, 2201, 497, 93}, -- Orc Statue (OStat)
             ["Warchief Tombstone"] = {"4f5753746174" , 90, 134, 2201, 50, 93}, -- Orc Statue (OWStat)
-            ["Tombstone Prototype"] = {"545053746174" , 20, 42, 2201, 500, 93}, -- Orc Statue (TPStat)
+            ["Tombstone Prototype"] = {"545053746174" , 20, 42, 2201, 497, 93}, -- Orc Statue (TPStat)
             ["Adamantking Effigy"] = {"5153746174" , 55, 134, 20, 0, 94}, -- Quadav Statue (QStat)
             ["Adamantking Image"] = {"514953746174" , 56, 134, 20, 0, 94}, -- Quadav Statue (QIStat)
             ["Effigy Prototype"] = {"515053746174" , 9, 42, 20, 0, 94}, -- Quadav Statue (QPStat)
-            ["Avatar Idol"] = {"5953746174" , 124, 134, 195, 500, 95}, -- Yagudo Statue (YStat)
-            ["Manifest Icon"] = {"594d53746174" , 68, 39, 195, 500, 95}, -- Yagudo Statue (YMStat)
-            ["Avatar Icon"] = {"414953746174" , 123, 134, 195, 500, 95}, -- Yagudo Statue (AIStat)
-            ["Icon Prototype"] = {"595053746174" , 32, 42, 195, 500, 95}, -- Yagudo Statue (YPStat)
+            ["Avatar Idol"] = {"5953746174" , 124, 134, 195, 497, 95}, -- Yagudo Statue (YStat)
+            ["Manifest Icon"] = {"594d53746174" , 68, 39, 195, 497, 95}, -- Yagudo Statue (YMStat)
+            ["Avatar Icon"] = {"414953746174" , 123, 134, 195, 497, 95}, -- Yagudo Statue (AIStat)
+            ["Icon Prototype"] = {"595053746174" , 32, 42, 195, 497, 95}, -- Yagudo Statue (YPStat)
         },
         ["Nightmare"] =
         {
@@ -564,7 +564,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         ["Goblin"] =
         {
             -- Dynamis - Beaucedine
-            ["Ascetox Ratgums"] = {"41736365", 143, 134, 176, 500, 1213}, -- Asce (BLM)
+            ["Ascetox Ratgums"] = {"41736365", 143, 134, 176, 497, 1213}, -- Asce (BLM)
             ["Bordox Kittyback"] = {"426f7264", 146, 134, 176, 0, 1213}, -- Bord (THF)
             ["Brewnix Bittypupils"] = {"42726577", 142, 134, 176, 1, 1213}, -- Brew (WHM)
             ["Draklix Scalecrust"] = {"4472616b", 149, 134, 176, 0, 1213}, -- Drak (DRG)
@@ -589,7 +589,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
             ["Clocktix Longnail"] = {"436c6f63", 150, 134, 143, 5, 1213}, -- Cloc (DRK)
             ["Elixmix Hooknose"] = {"456c6978", 142, 134, 143, 1, 1213}, -- Elix (WHM)
             ["Gabblox Magpietongue"] = {"47616262", 144, 134, 143, 3, 1213}, -- Gabb (RDM)
-            ["Hermitrix Toothrot"] = {"4865726d", 143, 134, 143, 500, 1213}, -- Herm (BLM)
+            ["Hermitrix Toothrot"] = {"4865726d", 143, 134, 143, 497, 1213}, -- Herm (BLM)
             ["Humnox Dumbelly"] = {"48756d6e", 34, 188, 143, 6, 1213}, -- Humn (BRD)
             ["Lurklox Dhalmelneck"] = {"4c75726b", 155, 134, 143, 0, 1213}, -- Lurk (RNG)
             ["Morgmox Moldnoggin"] = {"4d6f7267", 153, 134, 143, 0, 1213}, -- Morg (SMN)
@@ -610,7 +610,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
             ["Blazox Boneybod"] = {"426c617a", 151, 134, 143, 0, 1213}, -- Blaz (BST)
             ["Bootrix Jaggedelbow"] = {"426f6f74", 139, 134, 143, 0, 1213}, -- Boot (MNK)
             ["Distilix Stickytoes"] = {"44697374", 142, 134, 143, 1, 1213}, -- Dist (WHM)
-            ["Eremix Snottynostril"] = {"4572656d", 143, 134, 143, 500, 1213}, -- Erem (BLM)
+            ["Eremix Snottynostril"] = {"4572656d", 143, 134, 143, 497, 1213}, -- Erem (BLM)
             ["Jabbrox Grannyguise"] = {"4a616262", 144, 134, 143, 3, 1213}, -- Jabb (RDM)
             ["Mobpix Mucousmouth"] = {"4d6f6270", 146, 134, 143, 0, 1213}, -- Mobp (THF)
             ["Prowlox Barrelbelly"] = {"50726f77", 155, 134, 143, 0, 1213}, -- Prow (RNG)
@@ -633,12 +633,12 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
             ["Mithraslaver Debhabob"] = {"4d446562", 85, 134, 493, 0, 1200}, -- MDeb (BST)
             ["Skinmask Ugghfogg"] = {"53556767", 83, 134, 493, 5, 1200}, -- SUgg (DRK)
             ["Spinalsucker Galflmall"] = {"5347616c", 73, 134, 493, 3, 1200}, -- SGal (RDM)
-            ["Taruroaster Biggsjig"] = {"54426967", 84, 134, 493, 500, 1200}, -- TBig (BLM)
+            ["Taruroaster Biggsjig"] = {"54426967", 84, 134, 493, 497, 1200}, -- TBig (BLM)
             ["Ultrasonic Zeknajak"] = {"555a656b", 87, 134, 493, 6, 1200}, -- UZek (BRD)
             ["Wraithdancer Gidbnod"] = {"57476964", 63, 134, 493, 1, 1200}, -- WGid (WHM)
             -- Dynamis Buburimu
             ["Elvaansticker Bxafraff"] = {"456c7661", 88, 134, 760, 0, 1200}, -- Elva (DRG)
-            ["Flamecaller Zoeqdoq"] = {"466c616d", 84, 134, 760, 500, 1200}, -- Flam (BLM)
+            ["Flamecaller Zoeqdoq"] = {"466c616d", 84, 134, 760, 497, 1200}, -- Flam (BLM)
             ["Hamfist Gukhbuk"] = {"48616d66", 65, 134, 760, 0, 1200}, -- Hamf (MNK)
             ["Lyncean Juwgneg"] = {"4c796e63", 82, 134, 760, 0, 1200}, -- Lync (RNG)
             -- Dynamis - San d'Oria
@@ -652,7 +652,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         {
             -- Dynamis - Beaucedine
             ["Be'Zhe Keeprazer"] = {"42655a68", 53, 134, 261, 0, 1212}, -- BeZh (SMN)
-            ["De'Bho Pyrohand"] = {"44654268", 43, 134, 261, 500, 1212}, --DeBh (BLM)
+            ["De'Bho Pyrohand"] = {"44654268", 43, 134, 261, 497, 1212}, --DeBh (BLM)
             ["Ga'Fho Venomtouch"] = {"47614668", 39, 134, 261, 3, 1212}, -- GaFh (WHM)
             ["Go'Tyo Magenapper"] = {"476f5479", 44, 134, 261, 0, 1212}, -- GoTy (DRG)
             ["Gu'Khu Dukesniper"] = {"47754b68", 50, 134, 261, 0, 1212}, -- GuKh (RNG)
@@ -675,7 +675,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
             ["Aa'Nyu Dismantler"] = {"41614e79", 40, 134, 2907, 5, 1212}, -- AaNy (DRK)
             ["Gu'Nhi Noondozer"] = {"47754e68", 53, 134, 2907, 0, 1212}, -- GuNh (SMN)
             ["Be'Ebo Tortoisedriver"] = {"42654562", 48, 134, 2907, 0, 1212}, -- BeEb (BST)
-            ["Gi'Pha Manameister"] = {"47695068", 43, 134, 2907, 500, 1212}, -- GiPh (BLM)
+            ["Gi'Pha Manameister"] = {"47695068", 43, 134, 2907, 497, 1212}, -- GiPh (BLM)
             ["Ko'Dho Cannonball"] = {"4b6f4468", 46, 134, 2907, 0, 1212}, -- KoDh (MNK)
             ["Ze'Vho Fallsplitter"] = {"5a655668", 40, 134, 2907, 5, 1212}, -- ZeVh (DRK)
             ["Effigy Shield PLD"] = {"45504c44", 30, 134, 2907, 4, 1212}, -- EPLD (PLD)
@@ -687,7 +687,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         ["Yagudo"] =
         {
             -- Dynamis - Beaucedine
-            ["Bhuu Wjato the Firepool"] = {"42687575", 106, 134, 265, 500, 1201}, -- Bhuu (BLM)
+            ["Bhuu Wjato the Firepool"] = {"42687575", 106, 134, 265, 497, 1201}, -- Bhuu (BLM)
             ["Caa Xaza the Madpiercer"] = {"43616158", 107, 134, 265, 3, 1201}, -- CaaX (RDM)
             ["Foo Peku the Bloodcloak"] = {"466f6f50", 94, 134, 265, 0, 1201}, -- FooP (WAR)
             ["Guu Waji the Preacher"] = {"47757557", 113, 134, 265, 4, 1201}, -- GuuW (PLD)
@@ -708,7 +708,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
             ["Koo Rahi the Levinblade"] = {"4b6f6f52", 121, 134, 2085, 0, 1201}, -- KooR (SAM)
             ["Ree Nata the Melomanic"] = {"5265654e", 119, 134, 2085, 6, 1201}, -- ReeN (BRD)
             -- Dynamis - Windurst
-            ["Xoo Kaza the Solemn"] = {"586f6f4b", 106, 134, 1560, 500, 1201}, -- XooK (BLM)
+            ["Xoo Kaza the Solemn"] = {"586f6f4b", 106, 134, 1560, 497, 1201}, -- XooK (BLM)
             ["Haa Pevi the Stentorian"] = {"48616150", 91, 317, 1560, 0, 1201}, -- HaaP (SMN)
             ["Wuu Qoho the Razorclaw"] = {"57757551", 97, 134, 1560, 0, 1201}, -- WuuQ (MNK)
             ["Loo Hepe the Eyepiercer"] = {"4c6f6f48", 107, 134, 1560, 3, 1201}, -- LooH (RDM)
@@ -726,7 +726,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
             ["Prince Seere"] = {"53656572", 43, 135, 2021, 1, 358}, -- Seer (WHM)
             ["Duke Scox"] = {"53636f78", 57, 135, 717, 5, 358}, -- Scox (DRK)
             ["Marquis Gamygyn"] = {"47616d79", 65, 135, 1628, 7, 358}, -- Gamy (NIN)
-            ["Marquis Orias"] = {"4f726961", 46, 135, 1630, 500, 358}, -- Oria (BLM)
+            ["Marquis Orias"] = {"4f726961", 46, 135, 1630, 497, 358}, -- Oria (BLM)
             ["Count Raum"] = {"5261756d", 42, 135, 519, 0, 358}, --  Raum (THF)
             ["Marquis Nebiros"] = {"4e656269", 67, 135, 1629, 0, 358}, -- Nebi (SMN)
             ["Marquis Sabnak"] = {"5361626e", 49, 135, 1631, 4, 358}, -- Sabn (PLD)
@@ -738,9 +738,9 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         {
             -- Dynamis - Beaucedine
             ["Dagourmarche"] = {"4461676f", 10, 134, 559, 0, 359}, -- Dago (DRG/BST/SMN)
-            ["Goublefaupe"] = {"476f7562", 6, 134, 1211, 502, 359}, -- Goub (WAR/PLD/RDM)
+            ["Goublefaupe"] = {"476f7562", 6, 134, 1211, 499, 359}, -- Goub (WAR/PLD/RDM)
             ["Mildaunegeux"] = {"4d696c64", 8, 134, 1672, 7, 359}, -- Mild (MNK/THF/NIN)
-            ["Quiebitiel"] = {"51756965", 7, 134, 2066, 501, 359}, -- Quie (WHM/BLM/BRD)
+            ["Quiebitiel"] = {"51756965", 7, 134, 2066, 498, 359}, -- Quie (WHM/BLM/BRD)
             ["Velosareon"] = {"56656c6f", 9, 134, 2574, 5, 359}, -- Velo (RNG/SAM/DRK)
         },
         -- Below is used to lookup non-beastmen NMs.
@@ -795,9 +795,9 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         ["Petro Pukis"] = {"5050756b", 5, 134, 0, 0, 87}, -- PPuk
         ["Poison Pukis"] = {"7050756b", 3, 134, 0, 0, 87}, -- pPuk
         ["Dynamis Statue"] = {"44796e53" , 36, 42, 1144, 1, 92}, -- Dynamis Statue (DynS)
-        ["Dynamis Tombstone"] = {"44796e54" , 20, 42, 2201, 500, 93}, -- Dynamis Tombstone (DynT)
+        ["Dynamis Tombstone"] = {"44796e54" , 20, 42, 2201, 497, 93}, -- Dynamis Tombstone (DynT)
         ["Dynamis Effigy"] = {"44796e45" , 9, 42, 20, 0, 94}, -- Dynamis Effigy (DynE)
-        ["Dynamis Icon"] = {"44796e49" , 32, 42, 195, 500, 95}, -- Dynamis Icon (DynI)
+        ["Dynamis Icon"] = {"44796e49" , 32, 42, 195, 497, 95}, -- Dynamis Icon (DynI)
         -- Dynamis - Buburimu Non-Beastmen
         ["Aitvaras"] = {"41697476", 105, 40, 230, 0, 1209}, -- Aitv
         ["Alklha"] = {"416c6b6c", 105, 40, 230, 0, 1207}, -- Alkl
@@ -1770,7 +1770,7 @@ end
 --            Dynamis Mob Death           --
 --------------------------------------------
 
-xi.dynamis.mobOnDeath = function (mob, player)
+xi.dynamis.mobOnDeath = function (mob, player, mobVar)
     local zone = mob:getZone()
     local mobIndex = zone:getLocalVar(string.format("MobIndex_%s", mob:getID()))
     if mob:getLocalVar("dynamisMobOnDeathTriggered") == 1 then return -- Don't trigger more than once.

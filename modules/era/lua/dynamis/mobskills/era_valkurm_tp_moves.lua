@@ -75,7 +75,7 @@ m:addOverride("xi.globals.mobskills.putrid_breath.onMobWeaponSkill", function(ta
     return dmg
 end)
 
-m:addOverride("xi.globals.mobskills.soporiffic.onMobWeaponSkill", function(target, mob, skill)
+m:addOverride("xi.globals.mobskills.soporific.onMobWeaponSkill", function(target, mob, skill)
     if mob:getZoneID() == xi.zone.DYNAMIS_VALKURM then
         local effect = xi.effect.SLEEP_I
         local resist = applyPlayerResistance(mob, nil, target, mob:getStat(xi.mod.INT)-target:getStat(xi.mod.INT), 1, xi.magic.ele.DARK)
