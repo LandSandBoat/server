@@ -5881,7 +5881,10 @@ namespace battleutils
         position_t  nearEntity = nearPosition(pos, offset, (float)0);
 
         // Snap nearEntity to a guaranteed valid position
-        PMob->loc.zone->m_navMesh->snapToValidPosition(nearEntity);
+        if (PMob->loc.zone->m_navMesh)
+        {
+            PMob->loc.zone->m_navMesh->snapToValidPosition(nearEntity);
+        }
 
         // Move the target a little higher, just in case
         nearEntity.y -= 1.0f;
