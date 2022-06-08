@@ -1,11 +1,11 @@
 ---------------------------------------------
--- Attractant
--- Family: Goobbue
--- Description: Charms all targets in an area of effect.
--- Type: Enfeebling
+-- Putrid Breath
+-- Family: Morbol
+-- Description: 
+-- Type: Breath
 -- Utsusemi/Blink absorb: Ignores Shadows
--- Range: 15' yalm around Nant'ina
--- Notes: Only used by Nant'ina
+-- Range: Conal up to 15'
+-- Notes: Some Morbol NMs
 ---------------------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")

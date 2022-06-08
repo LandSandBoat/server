@@ -7,8 +7,6 @@
 -- Range: Conal up to 15'
 -- Notes: Some Morbol NMs
 ---------------------------------------------
-require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 ---------------------------------------------
@@ -19,7 +17,6 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    return 0
 end
 
 return mobskill_object

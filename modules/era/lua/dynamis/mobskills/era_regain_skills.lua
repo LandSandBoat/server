@@ -4,6 +4,7 @@
 --------------------------------------------
 --       Module Required Scripts          --
 --------------------------------------------
+require("scripts/globals/dynamis")
 require("modules/module_utils")
 
 local m = Module:new("era_regain_skills")

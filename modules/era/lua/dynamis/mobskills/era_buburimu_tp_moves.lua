@@ -4,8 +4,7 @@
 ---------------------------------------------
 --        Module Required Scripts          --
 ---------------------------------------------
-require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
+require("scripts/globals/dynamis")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 require("modules/module_utils")

@@ -15,9 +15,11 @@ require("scripts/globals/utils")
 require("scripts/globals/zone")
 require("scripts/globals/msg")
 require("scripts/globals/pathfind")
-require("scripts/zones/Dynamis-Bastok/dynamis_mobs")
-mixins = {require("scripts/mixins/job_special")}
 require("modules/module_utils")
+--------------------------------------------
+--       Module Extended Scripts          --
+--------------------------------------------
+require("scripts/zones/Dynamis-Bastok/dynamis_mobs")
 --------------------------------------------
 --       Module Affected Scripts          --
 --------------------------------------------

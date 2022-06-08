@@ -1,8 +1,6 @@
 -----------------------------------
 -- Dynamis Beastmen NMs Era Module
 -----------------------------------
-require("modules/era/lua/dynamis/globals/era_dynamis")
-require("modules/era/lua/dynamis/globals/era_dynamis_spawning")
 require("scripts/globals/mixins")
 require("scripts/globals/dynamis")
 require("scripts/globals/zone")

@@ -5,7 +5,6 @@
 --       Module Required Scripts          --
 --------------------------------------------
 require("scripts/globals/dynamis")
-require("scripts/zones/Dynamis-Bastok/dynamis_mobs")
 require("modules/module_utils")
 --------------------------------------------
 --       Module Affected Scripts          --
