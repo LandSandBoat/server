@@ -534,7 +534,7 @@ m:addOverride("xi.zones.La_Theine_Plateau.npcs.Dimensional_Portal.onTrigger", fu
             {
                 "Option 1: Al'Taieu",
                 function(playerArg)
-                    if player:getCurrentMission(xi.mission.log_id.COP) > xi.mission.id.cop.THE_WARRIOR_S_PATH then
+                    if player:getCurrentMission(xi.mission.log_id.COP) > xi.mission.id.cop.THE_WARRIORS_PATH then
                         player:setAnimation(101)
                         player:setPos(25.299, -2.799, 579, 193, 33) -- To AlTaieu {R}
                     else 
@@ -582,7 +582,7 @@ m:addOverride("xi.zones.Konschtat_Highlands.npcs.Dimensional_Portal.onTrigger", 
             {
                 "Option 1: Al'Taieu",
                 function(playerArg)
-                    if player:getCurrentMission(xi.mission.log_id.COP) > xi.mission.id.cop.THE_WARRIOR_S_PATH then
+                    if player:getCurrentMission(xi.mission.log_id.COP) > xi.mission.id.cop.THE_WARRIORS_PATH then
                         player:setAnimation(101)
                         player:setPos(-635.599, -2.799, 163.8, 193, 33) -- To AlTaieu {R}
                     else 
@@ -630,7 +630,7 @@ m:addOverride("xi.zones.Tahrongi_Canyon.npcs.Dimensional_Portal.onTrigger", func
             {
                 "Option 1: Al'Taieu",
                 function(playerArg)
-                    if player:getCurrentMission(xi.mission.log_id.COP) > xi.mission.id.cop.THE_WARRIOR_S_PATH then
+                    if player:getCurrentMission(xi.mission.log_id.COP) > xi.mission.id.cop.THE_WARRIORS_PATH then
                         player:setAnimation(101)
                         player:setPos(654.200, -2.799, 100.700, 193, 33) -- To AlTaieu {R}
                     else 

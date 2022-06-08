@@ -122,6 +122,11 @@ local augmentTable =
     b4 = { 41,  25,  23,  31}, -- *Kirin's Osode (Byakko)*
     w4 = {79,  25,  23, 513}, -- *Kirin's Pole (Byakko)*
 
+    [19304] = { 23, 25, 512, 188}, -- *Sarissa*
+    [18603] = { 133, 83, 516, 141}, -- *Majestas*
+    [19159] = { 23, 25, 512, 188}, -- *Galatyn*
+    [17765] = { 23, 299, 332, 512}, -- *Concordia*	
+    [19118] = { 23, 25, 513, 515}, -- *Machismo*
 }
 
 local randomAug =
@@ -134,6 +139,20 @@ local randomAug =
     -- M.atk./M.acc/Atk./Acc/R.atk/R.acc/Eva./M.Eva
     r4 = {512, 513, 514, 515, 516, 517, 518},
     -- STR/DEX/INT/MND/CHR/VIT/AGI
+}
+
+local craftingStallRequirements =
+{
+--   [x] = {item1, Qty1, item2, Qty2, item3, Qty3, item4, Qty4, item5, Qty5, item6, Qty6, item7, Qty7 },
+    [ 1] = { 4104,   12,   662,    3,   718,    2,   829,    1,  2000,    1,  3324,    1 },              -- Fire Cluster, Iron Sheet, Rosewood Lumber, Silk Cloth, Dark Adaman Ingot, Blacksmiths' Emblem
+    [ 2] = { 4110,   12,   662,    3,   718,    2,   829,    1,   743,    1,  3325,    1 },              -- Light Cluster, Iron Sheet, Rosewood Lumber, Silk Cloth, Phrygian Gold Ingot, Goldsmiths' Emblem 
+    [ 3] = { 4111,   12,   662,    3,   718,    2,   829,    1,  2147,    1,  3326,    1 },              -- Dark Cluster, Iron Sheet, Rosewood Lumber, Silk Cloth, Marid Tusk, Boneworkers' Emblem
+    [ 4] = { 4107,   12,   654,    1,   708,    3,   745,    1,  1829,    1,  2200,    1,  3327,    1 }, -- Earth Cluster, Darksteel Ingot, Maple Lumber, Gold Ingot, Red Grass Cloth, Twill Damask, Weavers' Emblem
+    [ 5] = { 4106,   12,   654,    1,   708,    3,   745,    1,  2200,    1,  4387,    1,  3328,    1 }, -- Wind Cluster, Darksteel Ingot, Maple Lumber, Gold Ingot, Red Grass Cloth, Wild Onion, Culinarians' Emblem
+    [ 6] = { 4105,   12,   654,    1,   708,    3,   745,    1,  1829,    1,  1117,    1,  3329,    1 }, -- Ice Cluster, Darksteel Ingot, Maple Lumber, Gold Ingot, Red Grass Cloth, Manticore Leather, Tanners' Emblem 
+    [ 7] = { 4109,   12,   709,    1,   716,    4,   824,    1, 17388,    1,  3330,    1 },              -- Water Cluster, Beech Lumber, Oak Lumber, Grass Cloth, Fastwater Fishing Rod, Fishermen's Emblem
+    [ 8] = { 4107,   12,   709,    1,   716,    4,   824,    1,  1657,    1,  3331,    1 },              -- Earth Cluster, Beech Lumber, Oak Lumber, Grass Cloth, Bundling Twine, Carpenters' Emblem
+    [ 9] = { 4108,   12,   709,    1,   716,    4,   824,    1,  4145,    1,  3332,    1 },              -- Lightning cluster, Beech Lumber, Oak Lumber, Grass Cloth, Elixir, Alchemists' Emblem
 }
 
 local function handleKirinItemCreation(player, itemId, au0, po0) -- This is for Kirin Items(God). Augment 0 will carry over from our NPC trade function.
@@ -547,6 +566,50 @@ entity.onTrade = function(player, npc, trade)
     local po0 = 0 -- Power randomly selected
     local augId = 0
 
+-- Crafting Stalled: Credit Graves
+    for i = 1, 9 do -- This variable "i" will be the index in the table.
+        local reward = 3624 + i
+
+        if i >= 4 and i <= 6 then
+            if
+                npcUtil.tradeHasExactly(trade,
+                {
+                    {craftingStallRequirements[i][1], craftingStallRequirements[i][2]},
+                    {craftingStallRequirements[i][3], craftingStallRequirements[i][4]},
+                    {craftingStallRequirements[i][5], craftingStallRequirements[i][6]},
+                    {craftingStallRequirements[i][7], craftingStallRequirements[i][8]},
+                    {craftingStallRequirements[i][9], craftingStallRequirements[i][10]},
+                    {craftingStallRequirements[i][11], craftingStallRequirements[i][12]},
+                    {craftingStallRequirements[i][13], craftingStallRequirements[i][14]},
+                })
+            then
+                player:tradeComplete()
+                player:addItem(reward)
+                player:messageSpecial(ID.text.ITEM_OBTAINED, reward)
+            
+                break
+            end
+        else
+            if
+                npcUtil.tradeHasExactly(trade,
+                {
+                    {craftingStallRequirements[i][1], craftingStallRequirements[i][2]},
+                    {craftingStallRequirements[i][3], craftingStallRequirements[i][4]},
+                    {craftingStallRequirements[i][5], craftingStallRequirements[i][6]},
+                    {craftingStallRequirements[i][7], craftingStallRequirements[i][8]},
+                    {craftingStallRequirements[i][9], craftingStallRequirements[i][10]},
+                    {craftingStallRequirements[i][11], craftingStallRequirements[i][12]},
+                })
+            then
+                player:tradeComplete()
+                player:addItem(reward)
+                player:messageSpecial(ID.text.ITEM_OBTAINED, reward)
+            
+                break
+            end
+        end
+    end
+-- End Crafting Stalls
 --------------------------------------------------------------------------------------------------
     -- *Genbu's Kabuto*
     if randomC > 30 and
@@ -2138,6 +2201,171 @@ entity.onTrade = function(player, npc, trade)
             po0 = math.random(0, 2)
 
             handleRandomAugment(player, itemId, au0, po0)
+-----------------------------------------------------------------------------------------------
+    -- *Sarissa*
+    elseif randomC > 30 and
+            npcUtil.tradeHasExactly(trade, {2858, 2858, 2859, 19307}) and player:getFreeSlotsCount() >= 1 then
+            itemId = 19304
+            au0 = 45 -- + 1-12 Base Damage. Guaranteed.
+            po0 = math.random(0, 11)
+
+            handleAugmentedItemCreation(player, itemId, au0, po0)
+
+        elseif randomC < 30 and
+            npcUtil.tradeHasExactly(trade, {2858, 2858, 2859, 19307}) and player:getFreeSlotsCount() >= 1 then
+            itemId = 19304
+            au0 = 45 -- + 1-12 Base Damage. Guaranteed.
+            po0 = math.random(0, 11)
+
+            handleRandomAugment(player, itemId, au0, po0)
+			
+    elseif randomC > 30 and
+            npcUtil.tradeHasExactly(trade, {2858, 2858, 2859, 19304}) and player:getFreeSlotsCount() >= 1 then
+            itemId = 19304
+            au0 = 45 -- + 1-12 Base Damage. Guaranteed.
+            po0 = math.random(0, 11)
+
+            handleAugmentedItemCreation(player, itemId, au0, po0)
+
+        elseif randomC < 30 and
+            npcUtil.tradeHasExactly(trade, {2858, 2858, 2859, 19304}) and player:getFreeSlotsCount() >= 1 then
+            itemId = 19304
+            au0 = 45 -- + 1-12 Base Damage. Guaranteed.
+            po0 = math.random(0, 11)
+
+            handleRandomAugment(player, itemId, au0, po0)			
+-----------------------------------------------------------------------------------------------
+    -- *Majestas* 
+    elseif randomC > 30 and
+            npcUtil.tradeHasExactly(trade, {2858, 2858, 2859, 18617}) and player:getFreeSlotsCount() >= 1 then
+            itemId = 18603
+            au0 = 35 -- + 1-10 Magic Acc. Guaranteed.
+            po0 = math.random(0, 9)
+
+            handleHqItemCreation(player, itemId, au0, po0)
+
+        elseif randomC < 30 and
+            npcUtil.tradeHasExactly(trade, {2858, 2858, 2859, 18617}) and player:getFreeSlotsCount() >= 1 then
+            itemId = 18603
+            au0 = 35 -- + 1-10 Magic Acc. Guaranteed.
+            po0 = math.random(0, 9)
+
+            handleRandomAugment(player, itemId, au0, po0)
+			
+    elseif randomC > 30 and
+            npcUtil.tradeHasExactly(trade, {2858, 2858, 2859, 18603}) and player:getFreeSlotsCount() >= 1 then
+            itemId = 18603
+            au0 = 35 -- + 1-10 Magic Acc. Guaranteed.
+            po0 = math.random(0, 9)
+
+            handleHqItemCreation(player, itemId, au0, po0)
+
+        elseif randomC < 30 and
+            npcUtil.tradeHasExactly(trade, {2858, 2858, 2859, 18603}) and player:getFreeSlotsCount() >= 1 then
+            itemId = 18603
+            au0 = 35 -- + 1-10 Magic Acc. Guaranteed.
+            po0 = math.random(0, 9)
+
+            handleRandomAugment(player, itemId, au0, po0)			
+-----------------------------------------------------------------------------------------------
+    -- *Galatyn* 
+    elseif randomC > 30 and
+            npcUtil.tradeHasExactly(trade, {2858, 2858, 2858, 2859, 19162}) and player:getFreeSlotsCount() >= 1 then
+            itemId = 19159
+            au0 = 45 -- + 1-12 Base Damage. Guaranteed.
+            po0 = math.random(0, 11)
+
+            handleHqItemCreation(player, itemId, au0, po0)
+
+        elseif randomC < 30 and
+            npcUtil.tradeHasExactly(trade, {2858, 2858, 2858, 2859, 19162}) and player:getFreeSlotsCount() >= 1 then
+            itemId = 19159
+            au0 = 45 -- + 1-12 Base Damage. Guaranteed.
+            po0 = math.random(0, 11)
+
+            handleRandomAugment(player, itemId, au0, po0)
+			
+    elseif randomC > 30 and
+            npcUtil.tradeHasExactly(trade, {2858, 2858, 2858, 2859, 19159}) and player:getFreeSlotsCount() >= 1 then
+            itemId = 19159
+            au0 = 45 -- + 1-12 Base Damage. Guaranteed.
+            po0 = math.random(0, 11)
+
+            handleHqItemCreation(player, itemId, au0, po0)
+
+        elseif randomC < 30 and
+            npcUtil.tradeHasExactly(trade, {2858, 2858, 2858, 2859, 19159}) and player:getFreeSlotsCount() >= 1 then
+            itemId = 19159
+            au0 = 45 -- + 1-12 Base Damage. Guaranteed.
+            po0 = math.random(0, 11)
+
+            handleRandomAugment(player, itemId, au0, po0)			
+-----------------------------------------------------------------------------------------------
+    -- *Concordia* 
+    elseif randomC > 30 and
+            npcUtil.tradeHasExactly(trade, {2858, 2858, 2859, 2859, 17767}) and player:getFreeSlotsCount() >= 1 then
+            itemId = 17765
+            au0 = 45 -- + 1-3 Base Damage. Guaranteed.
+            po0 = math.random(0, 2)
+
+            handleHqItemCreation(player, itemId, au0, po0)
+
+        elseif randomC < 30 and
+            npcUtil.tradeHasExactly(trade, {2858, 2858, 2859, 2859, 17767}) and player:getFreeSlotsCount() >= 1 then
+            itemId = 17765
+            au0 = 45 -- + 1-3 Base Damage. Guaranteed.
+            po0 = math.random(0, 2)
+
+            handleRandomAugment(player, itemId, au0, po0)
+			
+    elseif randomC > 30 and
+            npcUtil.tradeHasExactly(trade, {2858, 2858, 2859, 2859, 17765}) and player:getFreeSlotsCount() >= 1 then
+            itemId = 17765
+            au0 = 45 -- + 1-3 Base Damage. Guaranteed.
+            po0 = math.random(0, 2)
+
+            handleHqItemCreation(player, itemId, au0, po0)
+
+        elseif randomC < 30 and
+            npcUtil.tradeHasExactly(trade, {2858, 2858, 2859, 2859, 17765}) and player:getFreeSlotsCount() >= 1 then
+            itemId = 17765
+            au0 = 45 -- + 1-3 Base Damage. Guaranteed.
+            po0 = math.random(0, 2)
+
+            handleRandomAugment(player, itemId, au0, po0)			
+-----------------------------------------------------------------------------------------------
+    -- *Machismo* 
+    elseif randomC > 30 and
+            npcUtil.tradeHasExactly(trade, {2858, 2859, 2859, 19128}) and player:getFreeSlotsCount() >= 1 then
+            itemId = 19118
+            au0 = 45 -- + 1-3 Base Damage. Guaranteed.
+            po0 = math.random(0, 2)
+
+            handleHqItemCreation(player, itemId, au0, po0)
+
+        elseif randomC < 30 and
+            npcUtil.tradeHasExactly(trade, {2858, 2859, 2859, 19128}) and player:getFreeSlotsCount() >= 1 then
+            itemId = 19118
+            au0 = 45 -- + 1-3 Base Damage. Guaranteed.
+            po0 = math.random(0, 2)
+
+            handleRandomAugment(player, itemId, au0, po0)
+			
+    elseif randomC > 30 and
+            npcUtil.tradeHasExactly(trade, {2858, 2859, 2859, 19118}) and player:getFreeSlotsCount() >= 1 then
+            itemId = 19118
+            au0 = 45 -- + 1-3 Base Damage. Guaranteed.
+            po0 = math.random(0, 2)
+
+            handleHqItemCreation(player, itemId, au0, po0)
+
+        elseif randomC < 30 and
+            npcUtil.tradeHasExactly(trade, {2858, 2859, 2859, 19118}) and player:getFreeSlotsCount() >= 1 then
+            itemId = 19118
+            au0 = 45 -- + 1-3 Base Damage. Guaranteed.
+            po0 = math.random(0, 2)
+
+            handleRandomAugment(player, itemId, au0, po0)			
 -----------------------------------------------------------------------------------------------
 -- FallBack
 else

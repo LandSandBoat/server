@@ -10,15 +10,15 @@ local m = Module:new("dynamis_singles_for_hundos")
 m:addOverride("xi.zones.Castle_Oztroja.npcs.Antiqix.onTrade", function(player, npc, trade)
     local ID = require("scripts/zones/Castle_Oztroja/IDs")
     local TIMELESS_HOURGLASS = 4236
-    local currency = {1452, 1453, 1454}
+    local currency = {1449, 1450, 1451}
     local shop = {
-         5, 1295, -- Twincoon
-         6, 1466, -- Relic Iron
-         7, 1520, -- Goblin Grease
-         8, 1516, -- Griffon Hide
-        23, 1459, -- Griffon Leather
-        25, 883,  -- Behemoth Horn
-        28, 1458, -- Mammoth Tusk
+        7, 1312, -- Angel Skin
+        8, 1518, -- Colossal Skull
+        9, 1464, -- Lancewood Log
+       23, 1463, -- Chronos Tooth
+       24, 1467, -- Relic Steel
+       25, 1462, -- Lancewood Lumber
+       28, 658,  -- Damascus Ingot
     }
     local maps = {
         [xi.ki.MAP_OF_DYNAMIS_SAN_DORIA]   = 10000,
@@ -88,15 +88,15 @@ end)
 m:addOverride("xi.zones.Beadeaux.npcs.Haggleblix.onTrade", function(player, npc, trade)
     local ID = require("scripts/zones/Beadeaux/IDs")
     local TIMELESS_HOURGLASS = 4236
-    local currency = {1452, 1453, 1454}
+    local currency = {1455, 1456, 1457}
     local shop = {
-         5, 1295, -- Twincoon
-         6, 1466, -- Relic Iron
-         7, 1520, -- Goblin Grease
-         8, 1516, -- Griffon Hide
-        23, 1459, -- Griffon Leather
-        25, 883,  -- Behemoth Horn
-        28, 1458, -- Mammoth Tusk
+        7, 1313, -- Siren's Hair
+        8, 1521, -- Slime Juice
+        9, 1469, -- Wootz Ore
+       12, 4246, -- Cantarella
+       20, 1468, -- Marksman's Oil
+       25, 1461, -- Wootz Ingot
+       33, 1460, -- Koh-I-Noor
     }
     local maps = {
         [xi.ki.MAP_OF_DYNAMIS_SAN_DORIA]   = 10000,
