@@ -112,57 +112,57 @@ INSERT INTO `item_mods_pet` VALUES (14523,2,24,5);      -- Valoredge Automaton: 
 INSERT INTO `item_mods_pet` VALUES (14523,2,18,6);      -- Sharpshot Automaton: HP+18
 INSERT INTO `item_mods_pet` VALUES (14523,2,16,7);      -- Stormwaker Automaton: HP+16
 INSERT INTO `item_mods_pet` VALUES (14523,5,24,7);      -- Stormwaker Automaton: MP+24
-INSERT INTO `item_mods_pet` VALUES (14625,1,500,0);
-INSERT INTO `item_mods_pet` VALUES (14625,2,1200,0);
-INSERT INTO `item_mods_pet` VALUES (14625,5,200,0);
-INSERT INTO `item_mods_pet` VALUES (14625,8,200,0);
-INSERT INTO `item_mods_pet` VALUES (14625,9,200,0);
-INSERT INTO `item_mods_pet` VALUES (14625,10,100,0);
-INSERT INTO `item_mods_pet` VALUES (14625,11,100,0);
-INSERT INTO `item_mods_pet` VALUES (14625,13,100,0);
-INSERT INTO `item_mods_pet` VALUES (14625,14,100,0);
-INSERT INTO `item_mods_pet` VALUES (14625,23,1000,0);
-INSERT INTO `item_mods_pet` VALUES (14625,24,1000,0);
-INSERT INTO `item_mods_pet` VALUES (14625,25,200,0);
-INSERT INTO `item_mods_pet` VALUES (14625,26,200,0);
-INSERT INTO `item_mods_pet` VALUES (14625,28,-50,0);
-INSERT INTO `item_mods_pet` VALUES (14625,29,50,0);
-INSERT INTO `item_mods_pet` VALUES (14625,30,500,0);
-INSERT INTO `item_mods_pet` VALUES (14625,31,50,0);
-INSERT INTO `item_mods_pet` VALUES (14625,32,-8,0);
-INSERT INTO `item_mods_pet` VALUES (14625,33,-8,0);
-INSERT INTO `item_mods_pet` VALUES (14625,34,-8,0);
-INSERT INTO `item_mods_pet` VALUES (14625,35,-8,0);
-INSERT INTO `item_mods_pet` VALUES (14625,36,-8,0);
-INSERT INTO `item_mods_pet` VALUES (14625,37,-8,0);
-INSERT INTO `item_mods_pet` VALUES (14625,38,-8,0);
-INSERT INTO `item_mods_pet` VALUES (14625,39,-8,0);
-INSERT INTO `item_mods_pet` VALUES (14625,48,100,0);
-INSERT INTO `item_mods_pet` VALUES (14625,126,-40,0);
-INSERT INTO `item_mods_pet` VALUES (14625,165,10,0);
-INSERT INTO `item_mods_pet` VALUES (14625,384,5000,0);
-INSERT INTO `item_mods_pet` VALUES (14625,421,50,0);
-INSERT INTO `item_mods_pet` VALUES (14625,487,-10,0);
-INSERT INTO `item_mods_pet` VALUES (14680,1,200,0);
-INSERT INTO `item_mods_pet` VALUES (14680,2,1500,0);
-INSERT INTO `item_mods_pet` VALUES (14680,5,300,0);
-INSERT INTO `item_mods_pet` VALUES (14680,8,300,0);
-INSERT INTO `item_mods_pet` VALUES (14680,9,300,0);
-INSERT INTO `item_mods_pet` VALUES (14680,10,300,0);
-INSERT INTO `item_mods_pet` VALUES (14680,11,300,0);
-INSERT INTO `item_mods_pet` VALUES (14680,13,300,0);
-INSERT INTO `item_mods_pet` VALUES (14680,14,300,0);
-INSERT INTO `item_mods_pet` VALUES (14680,23,1500,0);
-INSERT INTO `item_mods_pet` VALUES (14680,24,1500,0);
-INSERT INTO `item_mods_pet` VALUES (14680,25,200,0);
-INSERT INTO `item_mods_pet` VALUES (14680,26,200,0);
-INSERT INTO `item_mods_pet` VALUES (14680,62,1500,0);
-INSERT INTO `item_mods_pet` VALUES (14680,165,18,0);
-INSERT INTO `item_mods_pet` VALUES (14680,171,-10,0);
-INSERT INTO `item_mods_pet` VALUES (14680,288,20,0);
-INSERT INTO `item_mods_pet` VALUES (14680,368,3000,0);
-INSERT INTO `item_mods_pet` VALUES (14680,384,6000,0);
-INSERT INTO `item_mods_pet` VALUES (14680,421,50,0);
+INSERT INTO `item_mods_pet` VALUES (14625,1,500,0); -- Pet Def
+INSERT INTO `item_mods_pet` VALUES (14625,2,1200,0); -- Pet Hp
+INSERT INTO `item_mods_pet` VALUES (14625,5,200,0); -- Pet Mp
+INSERT INTO `item_mods_pet` VALUES (14625,8,200,0); -- Pet Str
+INSERT INTO `item_mods_pet` VALUES (14625,9,200,0); -- Pet Dex
+INSERT INTO `item_mods_pet` VALUES (14625,10,100,0); -- Pet Vit
+INSERT INTO `item_mods_pet` VALUES (14625,11,100,0); -- Pet Agi
+INSERT INTO `item_mods_pet` VALUES (14625,13,100,0); -- Pet Mnd
+INSERT INTO `item_mods_pet` VALUES (14625,14,100,0); -- Pet Chr
+INSERT INTO `item_mods_pet` VALUES (14625,23,1000,0); -- Pet Att
+INSERT INTO `item_mods_pet` VALUES (14625,24,1000,0); -- Pet Ratt
+INSERT INTO `item_mods_pet` VALUES (14625,25,200,0); -- Pet Acc
+INSERT INTO `item_mods_pet` VALUES (14625,26,200,0); -- Pet Racc
+INSERT INTO `item_mods_pet` VALUES (14625,28,-50,0); -- Pet Matt
+INSERT INTO `item_mods_pet` VALUES (14625,29,50,0); -- Pet Mdef
+INSERT INTO `item_mods_pet` VALUES (14625,30,500,0); -- Pet Macc
+INSERT INTO `item_mods_pet` VALUES (14625,31,50,0); -- Pet Meva
+INSERT INTO `item_mods_pet` VALUES (14625,32,-8,0); -- Pet Fire Dmg
+INSERT INTO `item_mods_pet` VALUES (14625,33,-8,0); -- Pet Ice Dmg
+INSERT INTO `item_mods_pet` VALUES (14625,34,-8,0); -- Pet Wind Dmg
+INSERT INTO `item_mods_pet` VALUES (14625,35,-8,0); -- Pet Earth Dmg
+INSERT INTO `item_mods_pet` VALUES (14625,36,-8,0); -- Pet Thunder Dmg
+INSERT INTO `item_mods_pet` VALUES (14625,37,-8,0); -- Pet Water Dmg
+INSERT INTO `item_mods_pet` VALUES (14625,38,-8,0); -- Pet Light Dmg
+INSERT INTO `item_mods_pet` VALUES (14625,39,-8,0); -- Pet Dark Dmg
+INSERT INTO `item_mods_pet` VALUES (14625,48,100,0); -- Pet WS Acc
+INSERT INTO `item_mods_pet` VALUES (14625,126,-40,0); -- Pet BP Dmg
+INSERT INTO `item_mods_pet` VALUES (14625,165,10,0); -- Pet Crit Hit Rate
+INSERT INTO `item_mods_pet` VALUES (14625,384,5000,0); -- Pet Haste
+INSERT INTO `item_mods_pet` VALUES (14625,421,50,0); -- Pet Crit Dmg
+INSERT INTO `item_mods_pet` VALUES (14625,487,-10,0); -- Pet Magic Burst
+INSERT INTO `item_mods_pet` VALUES (14680,1,200,0); -- Pet Def
+INSERT INTO `item_mods_pet` VALUES (14680,2,1500,0); -- Pet Hp
+INSERT INTO `item_mods_pet` VALUES (14680,5,300,0); -- Pet Mp
+INSERT INTO `item_mods_pet` VALUES (14680,8,300,0); -- Pet Str
+INSERT INTO `item_mods_pet` VALUES (14680,9,300,0); -- Pet Dex
+INSERT INTO `item_mods_pet` VALUES (14680,10,300,0); -- Pet Vit
+INSERT INTO `item_mods_pet` VALUES (14680,11,300,0); -- Pet Agi
+INSERT INTO `item_mods_pet` VALUES (14680,13,300,0); -- Pet Mnd
+INSERT INTO `item_mods_pet` VALUES (14680,14,300,0); -- Pet Chr
+INSERT INTO `item_mods_pet` VALUES (14680,23,1500,0); -- Pet Att
+INSERT INTO `item_mods_pet` VALUES (14680,24,1500,0); -- Pet Ratt
+INSERT INTO `item_mods_pet` VALUES (14680,25,200,0); -- Pet Acc
+INSERT INTO `item_mods_pet` VALUES (14680,26,200,0); -- Pet Racc
+INSERT INTO `item_mods_pet` VALUES (14680,62,1500,0); -- Pet Att %
+INSERT INTO `item_mods_pet` VALUES (14680,165,18,0); -- Pet Crit Hit Rate
+INSERT INTO `item_mods_pet` VALUES (14680,171,-10,0); -- Pet Delay
+INSERT INTO `item_mods_pet` VALUES (14680,288,20,0); -- Pet Double Att
+INSERT INTO `item_mods_pet` VALUES (14680,368,3000,0); -- Pet regain
+INSERT INTO `item_mods_pet` VALUES (14680,384,6000,0); -- Pet Haste
+INSERT INTO `item_mods_pet` VALUES (14680,421,50,0); -- Pet Crit Dmg
 INSERT INTO `item_mods_pet` VALUES (14872,2,10,2);      -- Ostreger Mitts Wyvern: HP +10
 INSERT INTO `item_mods_pet` VALUES (14903,25,5,2);      -- Drn. Fng. Gnt. +1 Wyvern: Increases Accuracy +5 (?)
 INSERT INTO `item_mods_pet` VALUES (14904,27,-2,1);     -- Evk. Bracers +1 Avatar: Enmity -2
@@ -382,50 +382,50 @@ INSERT INTO `item_mods_pet` VALUES (23680,562,13,1);    -- Glyphic Pigaches +3: 
 INSERT INTO `item_mods_pet` VALUES (23683,28,57,3);     -- Pitre Babouches +3: Automaton: "Magic Atk. Bonus"+57
 INSERT INTO `item_mods_pet` VALUES (23683,30,43,3);     -- Pitre Babouches +3: Automaton: Magic Accuracy+43
 INSERT INTO `item_mods_pet` VALUES (23686,370,5,8);     -- Bagua Sandals +3: Luopan: "Regen"+5
-INSERT INTO `item_mods_pet` VALUES (23756,25,50,0);
-INSERT INTO `item_mods_pet` VALUES (23756,26,50,0);
-INSERT INTO `item_mods_pet` VALUES (23756,30,50,0);
-INSERT INTO `item_mods_pet` VALUES (23758,25,50,0);
-INSERT INTO `item_mods_pet` VALUES (23758,26,50,0);
-INSERT INTO `item_mods_pet` VALUES (23758,30,50,0);
-INSERT INTO `item_mods_pet` VALUES (23760,25,50,0);
-INSERT INTO `item_mods_pet` VALUES (23760,26,50,0);
-INSERT INTO `item_mods_pet` VALUES (23760,30,50,0);
+INSERT INTO `item_mods_pet` VALUES (23756,25,50,0); -- Pet Acc
+INSERT INTO `item_mods_pet` VALUES (23756,26,50,0); -- Pet Racc
+INSERT INTO `item_mods_pet` VALUES (23756,30,50,0); -- Pet Macc
+INSERT INTO `item_mods_pet` VALUES (23758,25,50,0); -- Pet Acc
+INSERT INTO `item_mods_pet` VALUES (23758,26,50,0); -- Pet Racc
+INSERT INTO `item_mods_pet` VALUES (23758,30,50,0); -- Pet Macc
+INSERT INTO `item_mods_pet` VALUES (23760,25,50,0); -- Pet Acc
+INSERT INTO `item_mods_pet` VALUES (23760,26,50,0); -- Pet Racc
+INSERT INTO `item_mods_pet` VALUES (23760,30,50,0); -- Pet Macc
 INSERT INTO `item_mods_pet` VALUES (23761,25,50,0);     -- Nyame Helm: Pet: Accuracy+50
 INSERT INTO `item_mods_pet` VALUES (23761,26,50,0);     -- Nyame Helm: Pet: Ranged Accuracy+50
 INSERT INTO `item_mods_pet` VALUES (23761,30,50,0);     -- Nyame Helm: Pet: Magic Accuracy+50
-INSERT INTO `item_mods_pet` VALUES (23763,25,50,0);
-INSERT INTO `item_mods_pet` VALUES (23763,26,50,0);
-INSERT INTO `item_mods_pet` VALUES (23763,30,50,0);
-INSERT INTO `item_mods_pet` VALUES (23765,25,50,0);
-INSERT INTO `item_mods_pet` VALUES (23765,26,50,0);
-INSERT INTO `item_mods_pet` VALUES (23765,30,50,0);
-INSERT INTO `item_mods_pet` VALUES (23767,25,50,0);
-INSERT INTO `item_mods_pet` VALUES (23767,26,50,0);
-INSERT INTO `item_mods_pet` VALUES (23767,30,50,0);
+INSERT INTO `item_mods_pet` VALUES (23763,25,50,0); -- Pet Acc
+INSERT INTO `item_mods_pet` VALUES (23763,26,50,0); -- Pet Racc
+INSERT INTO `item_mods_pet` VALUES (23763,30,50,0); -- Pet Macc
+INSERT INTO `item_mods_pet` VALUES (23765,25,50,0); -- Pet Acc
+INSERT INTO `item_mods_pet` VALUES (23765,26,50,0); -- Pet Racc
+INSERT INTO `item_mods_pet` VALUES (23765,30,50,0); -- Pet Macc
+INSERT INTO `item_mods_pet` VALUES (23767,25,50,0); -- Pet Acc
+INSERT INTO `item_mods_pet` VALUES (23767,26,50,0); -- Pet Racc
+INSERT INTO `item_mods_pet` VALUES (23767,30,50,0); -- Pet Macc
 INSERT INTO `item_mods_pet` VALUES (23768,25,50,0);     -- Nyame Mail: Pet: Accuracy+50
 INSERT INTO `item_mods_pet` VALUES (23768,26,50,0);     -- Nyame Mail: Pet: Ranged Accuracy+50
 INSERT INTO `item_mods_pet` VALUES (23768,30,50,0);     -- Nyame Mail: Pet: Magic Accuracy+50
-INSERT INTO `item_mods_pet` VALUES (23770,25,50,0);
-INSERT INTO `item_mods_pet` VALUES (23770,26,50,0);
-INSERT INTO `item_mods_pet` VALUES (23770,30,50,0);
-INSERT INTO `item_mods_pet` VALUES (23770,160,-10,0);
-INSERT INTO `item_mods_pet` VALUES (23772,25,50,0);
-INSERT INTO `item_mods_pet` VALUES (23772,26,50,0);
-INSERT INTO `item_mods_pet` VALUES (23772,30,50,0);
-INSERT INTO `item_mods_pet` VALUES (23772,840,10,0);
-INSERT INTO `item_mods_pet` VALUES (23774,25,50,0);
-INSERT INTO `item_mods_pet` VALUES (23774,26,50,0);
-INSERT INTO `item_mods_pet` VALUES (23774,30,50,0);
+INSERT INTO `item_mods_pet` VALUES (23770,25,50,0); -- Pet Acc
+INSERT INTO `item_mods_pet` VALUES (23770,26,50,0); -- Pet Racc
+INSERT INTO `item_mods_pet` VALUES (23770,30,50,0); -- Pet Macc
+INSERT INTO `item_mods_pet` VALUES (23770,160,-10,0); -- Damage Taken
+INSERT INTO `item_mods_pet` VALUES (23772,25,50,0); -- Pet Acc
+INSERT INTO `item_mods_pet` VALUES (23772,26,50,0); -- Pet Racc
+INSERT INTO `item_mods_pet` VALUES (23772,30,50,0); -- Pet Macc
+INSERT INTO `item_mods_pet` VALUES (23772,840,10,0); -- WS Hits
+INSERT INTO `item_mods_pet` VALUES (23774,25,50,0); -- Pet Acc
+INSERT INTO `item_mods_pet` VALUES (23774,26,50,0); -- Pet Racc
+INSERT INTO `item_mods_pet` VALUES (23774,30,50,0); -- Pet Macc
 INSERT INTO `item_mods_pet` VALUES (23775,25,50,0);     -- Nyame Gauntlets: Pet: Accuracy+50
 INSERT INTO `item_mods_pet` VALUES (23775,26,50,0);     -- Nyame Gauntlets: Pet: Ranged Accuracy+50
 INSERT INTO `item_mods_pet` VALUES (23775,30,50,0);     -- Nyame Gauntlets: Pet: Magic Accuracy+50
-INSERT INTO `item_mods_pet` VALUES (23777,25,50,0);
-INSERT INTO `item_mods_pet` VALUES (23777,26,50,0);
-INSERT INTO `item_mods_pet` VALUES (23777,30,50,0);
-INSERT INTO `item_mods_pet` VALUES (23779,25,50,0);
-INSERT INTO `item_mods_pet` VALUES (23779,26,50,0);
-INSERT INTO `item_mods_pet` VALUES (23779,30,50,0);
+INSERT INTO `item_mods_pet` VALUES (23777,25,50,0); -- Pet Acc
+INSERT INTO `item_mods_pet` VALUES (23777,26,50,0); -- Pet Racc
+INSERT INTO `item_mods_pet` VALUES (23777,30,50,0); -- Pet Macc
+INSERT INTO `item_mods_pet` VALUES (23779,25,50,0); -- Pet Acc
+INSERT INTO `item_mods_pet` VALUES (23779,26,50,0); -- Pet Racc
+INSERT INTO `item_mods_pet` VALUES (23779,30,50,0); -- Pet Macc
 INSERT INTO `item_mods_pet` VALUES (23781,25,50,0);     -- Bunzi's Pants: Pet: Acc.+50
 INSERT INTO `item_mods_pet` VALUES (23781,26,50,0);     -- Bunzi's Pants: Pet: Ranged Acc.+50
 INSERT INTO `item_mods_pet` VALUES (23781,30,50,0);     -- Bunzi's Pants: Pet: Magic Acc.+50
@@ -487,29 +487,29 @@ INSERT INTO `item_mods_pet` VALUES (25564,27,10,0);     -- Heyoka Cap +1: Pet: E
 INSERT INTO `item_mods_pet` VALUES (25564,384,600,0);   -- Heyoka Cap +1: Pet: Haste+6%
 INSERT INTO `item_mods_pet` VALUES (25565,368,3,1);     -- Baayami Hat: Avatar: "Regain"+3
 INSERT INTO `item_mods_pet` VALUES (25566,368,4,1);     -- Baayami Hat+1: Avatar: "Regain"+4
-INSERT INTO `item_mods_pet` VALUES (25593,25,38,0);
-INSERT INTO `item_mods_pet` VALUES (25593,26,38,0);
-INSERT INTO `item_mods_pet` VALUES (25593,28,38,0);
-INSERT INTO `item_mods_pet` VALUES (25593,30,38,0);
-INSERT INTO `item_mods_pet` VALUES (25593,126,10,0);
-INSERT INTO `item_mods_pet` VALUES (25683,28,35,0);
-INSERT INTO `item_mods_pet` VALUES (25683,160,-400,0);
-INSERT INTO `item_mods_pet` VALUES (26026,23,20,0);
-INSERT INTO `item_mods_pet` VALUES (26026,25,20,0);
-INSERT INTO `item_mods_pet` VALUES (26026,288,5,0);
-INSERT INTO `item_mods_pet` VALUES (26082,25,15,0);
-INSERT INTO `item_mods_pet` VALUES (26082,26,15,0);
-INSERT INTO `item_mods_pet` VALUES (26082,30,15,0);
-INSERT INTO `item_mods_pet` VALUES (26082,126,10,0);
+INSERT INTO `item_mods_pet` VALUES (25593,25,38,0); -- Pet Acc
+INSERT INTO `item_mods_pet` VALUES (25593,26,38,0); -- Pet Racc
+INSERT INTO `item_mods_pet` VALUES (25593,28,38,0); -- Pet Matt
+INSERT INTO `item_mods_pet` VALUES (25593,30,38,0); -- Pet Macc
+INSERT INTO `item_mods_pet` VALUES (25593,126,10,0); -- Pet BP Dmg
+INSERT INTO `item_mods_pet` VALUES (25683,28,35,0); -- Pet Matt
+INSERT INTO `item_mods_pet` VALUES (25683,160,-400,0); -- Pet Dmg Taken
+INSERT INTO `item_mods_pet` VALUES (26026,23,20,0); -- Pet Att
+INSERT INTO `item_mods_pet` VALUES (26026,25,20,0); -- Pet Acc
+INSERT INTO `item_mods_pet` VALUES (26026,288,5,0); -- 
+INSERT INTO `item_mods_pet` VALUES (26082,25,15,0); -- Pet Acc
+INSERT INTO `item_mods_pet` VALUES (26082,26,15,0); -- Pet Racc
+INSERT INTO `item_mods_pet` VALUES (26082,30,15,0); -- Pet Macc
+INSERT INTO `item_mods_pet` VALUES (26082,126,10,0); -- Pet Bp Dmg
 INSERT INTO `item_mods_pet` VALUES (26201,23,23,0);     -- Thur. Ring +1 Pet: Attack+23
 INSERT INTO `item_mods_pet` VALUES (26201,24,23,0);     -- Pet: Ranged Attack+23
 INSERT INTO `item_mods_pet` VALUES (26201,25,22,0);     -- Pet: Accuracy+22
 INSERT INTO `item_mods_pet` VALUES (26201,26,22,0);     -- Pet: Ranged Accuracy+22
 INSERT INTO `item_mods_pet` VALUES (26201,384,400,0);   -- Pet: Haste+4%
 INSERT INTO `item_mods_pet` VALUES (26201,160,-400,0);    -- Pet: Damage Taken -4%
-INSERT INTO `item_mods_pet` VALUES (26241,23,16,0);
-INSERT INTO `item_mods_pet` VALUES (26241,28,16,0);
-INSERT INTO `item_mods_pet` VALUES (26241,165,3,0);
+INSERT INTO `item_mods_pet` VALUES (26241,23,16,0); -- Pet Att
+INSERT INTO `item_mods_pet` VALUES (26241,28,16,0); -- Pet Matt
+INSERT INTO `item_mods_pet` VALUES (26241,165,3,0); -- Pet Crit Hit Rate
 INSERT INTO `item_mods_pet` VALUES (26652,28,20,1);     -- Glyphic Horn Avatar: "Magic Atk. Bonus"+20
 INSERT INTO `item_mods_pet` VALUES (26653,28,23,1);     -- Glyphic Horn +1 Avatar: "Magic Atk. Bonus"+23
 INSERT INTO `item_mods_pet` VALUES (26658,369,2,3);     -- Pitre Taj Automaton: Refresh +2

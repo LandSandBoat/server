@@ -34116,58 +34116,58 @@ INSERT INTO `item_mods` VALUES (23775,160,-700);    -- Nyame Gauntlets: Damage T
 INSERT INTO `item_mods` VALUES (23775,174,5);     -- Nyame Gauntlets: Skillchain Bonus+5
 INSERT INTO `item_mods` VALUES (23775,384,300);   -- Nyame Gauntlets: Haste+3%
 INSERT INTO `item_mods` VALUES (23775,487,5);     -- Nyame Gauntlets: Magic Burst Damage+5
-INSERT INTO `item_mods` VALUES (23776,1,146); --  Ikenga's Trousers
-INSERT INTO `item_mods` VALUES (23776,2,68);
-INSERT INTO `item_mods` VALUES (23776,8,38);
-INSERT INTO `item_mods` VALUES (23776,10,20);
-INSERT INTO `item_mods` VALUES (23776,11,40);
-INSERT INTO `item_mods` VALUES (23776,12,32);
-INSERT INTO `item_mods` VALUES (23776,13,20);
-INSERT INTO `item_mods` VALUES (23776,14,15);
-INSERT INTO `item_mods` VALUES (23776,24,40);
-INSERT INTO `item_mods` VALUES (23776,26,40);
-INSERT INTO `item_mods` VALUES (23776,27,-9);
-INSERT INTO `item_mods` VALUES (23776,29,7);
-INSERT INTO `item_mods` VALUES (23776,30,40);
-INSERT INTO `item_mods` VALUES (23776,31,123);
-INSERT INTO `item_mods` VALUES (23776,68,72);
-INSERT INTO `item_mods` VALUES (23776,73,10);
-INSERT INTO `item_mods` VALUES (23776,365,8);
-INSERT INTO `item_mods` VALUES (23778,1,174); --  Sakpata's Cuisses
-INSERT INTO `item_mods` VALUES (23778,2,114);
-INSERT INTO `item_mods` VALUES (23778,5,44);
-INSERT INTO `item_mods` VALUES (23778,8,48);
-INSERT INTO `item_mods` VALUES (23778,10,34);
-INSERT INTO `item_mods` VALUES (23778,11,23);
-INSERT INTO `item_mods` VALUES (23778,12,32);
-INSERT INTO `item_mods` VALUES (23778,13,21);
-INSERT INTO `item_mods` VALUES (23778,14,17);
-INSERT INTO `item_mods` VALUES (23778,23,40);
-INSERT INTO `item_mods` VALUES (23778,25,40);
-INSERT INTO `item_mods` VALUES (23778,29,9);
-INSERT INTO `item_mods` VALUES (23778,30,40);
-INSERT INTO `item_mods` VALUES (23778,31,150);
-INSERT INTO `item_mods` VALUES (23778,68,58);
-INSERT INTO `item_mods` VALUES (23778,113,10);
-INSERT INTO `item_mods` VALUES (23778,160,-900);
-INSERT INTO `item_mods` VALUES (23778,288,7);
-INSERT INTO `item_mods` VALUES (23778,384,400);
-INSERT INTO `item_mods` VALUES (23779,1,156); --  Mpaca's Hose
-INSERT INTO `item_mods` VALUES (23779,2,72);
-INSERT INTO `item_mods` VALUES (23779,8,49);
-INSERT INTO `item_mods` VALUES (23779,10,32);
-INSERT INTO `item_mods` VALUES (23779,11,25);
-INSERT INTO `item_mods` VALUES (23779,12,32);
-INSERT INTO `item_mods` VALUES (23779,13,19);
-INSERT INTO `item_mods` VALUES (23779,14,19);
-INSERT INTO `item_mods` VALUES (23779,23,40);
-INSERT INTO `item_mods` VALUES (23779,25,40);
-INSERT INTO `item_mods` VALUES (23779,29,13);
-INSERT INTO `item_mods` VALUES (23779,30,40);
-INSERT INTO `item_mods` VALUES (23779,31,96);
-INSERT INTO `item_mods` VALUES (23779,68,85);
-INSERT INTO `item_mods` VALUES (23779,161,-900);
-INSERT INTO `item_mods` VALUES (23779,165,6);
+INSERT INTO `item_mods` VALUES (23776,1,146); -- Def Ikenga's Trousers
+INSERT INTO `item_mods` VALUES (23776,2,68); -- Hp
+INSERT INTO `item_mods` VALUES (23776,8,38); -- Str
+INSERT INTO `item_mods` VALUES (23776,10,20); -- Vit
+INSERT INTO `item_mods` VALUES (23776,11,40); -- Agi
+INSERT INTO `item_mods` VALUES (23776,12,32); -- Int
+INSERT INTO `item_mods` VALUES (23776,13,20); -- Mnd
+INSERT INTO `item_mods` VALUES (23776,14,15); -- Chr
+INSERT INTO `item_mods` VALUES (23776,24,40); -- Ratt
+INSERT INTO `item_mods` VALUES (23776,26,40); -- Racc
+INSERT INTO `item_mods` VALUES (23776,27,-9); -- Enmity
+INSERT INTO `item_mods` VALUES (23776,29,7); -- Mdef
+INSERT INTO `item_mods` VALUES (23776,30,40); -- Macc
+INSERT INTO `item_mods` VALUES (23776,31,123); -- Meva
+INSERT INTO `item_mods` VALUES (23776,68,72); -- Eva
+INSERT INTO `item_mods` VALUES (23776,73,10); -- Store Tp
+INSERT INTO `item_mods` VALUES (23776,365,8); -- Range Delay
+INSERT INTO `item_mods` VALUES (23778,1,174); -- Def Sakpata's Cuisses
+INSERT INTO `item_mods` VALUES (23778,2,114); -- Hp
+INSERT INTO `item_mods` VALUES (23778,5,44); -- Mp
+INSERT INTO `item_mods` VALUES (23778,8,48); -- Str
+INSERT INTO `item_mods` VALUES (23778,10,34); -- Vit
+INSERT INTO `item_mods` VALUES (23778,11,23); -- Agi
+INSERT INTO `item_mods` VALUES (23778,12,32); -- Int
+INSERT INTO `item_mods` VALUES (23778,13,21); -- Mnd
+INSERT INTO `item_mods` VALUES (23778,14,17); -- Chr
+INSERT INTO `item_mods` VALUES (23778,23,40); -- Att
+INSERT INTO `item_mods` VALUES (23778,25,40); -- Acc
+INSERT INTO `item_mods` VALUES (23778,29,9); -- Mdef
+INSERT INTO `item_mods` VALUES (23778,30,40); -- Macc
+INSERT INTO `item_mods` VALUES (23778,31,150); -- Meva
+INSERT INTO `item_mods` VALUES (23778,68,58); -- Eva
+INSERT INTO `item_mods` VALUES (23778,113,10); -- Enhancing Magic
+INSERT INTO `item_mods` VALUES (23778,160,-900); -- Damage Taken
+INSERT INTO `item_mods` VALUES (23778,288,7); -- Double Att
+INSERT INTO `item_mods` VALUES (23778,384,400); -- Haste
+INSERT INTO `item_mods` VALUES (23779,1,156); -- Def Mpaca's Hose
+INSERT INTO `item_mods` VALUES (23779,2,72); -- Hp
+INSERT INTO `item_mods` VALUES (23779,8,49); -- Str
+INSERT INTO `item_mods` VALUES (23779,10,32); -- Vit
+INSERT INTO `item_mods` VALUES (23779,11,25); -- Agi
+INSERT INTO `item_mods` VALUES (23779,12,32); -- Int
+INSERT INTO `item_mods` VALUES (23779,13,19); -- Mnd
+INSERT INTO `item_mods` VALUES (23779,14,19); -- Chr
+INSERT INTO `item_mods` VALUES (23779,23,40); -- Att
+INSERT INTO `item_mods` VALUES (23779,25,40); -- Acc
+INSERT INTO `item_mods` VALUES (23779,29,13); -- Mdef
+INSERT INTO `item_mods` VALUES (23779,30,40); -- Macc
+INSERT INTO `item_mods` VALUES (23779,31,96); -- Meva
+INSERT INTO `item_mods` VALUES (23779,68,85); -- Eva
+INSERT INTO `item_mods` VALUES (23779,161,-900); -- Damage Taken
+INSERT INTO `item_mods` VALUES (23779,165,6); -- Crit Hit Rate
 INSERT INTO `item_mods` VALUES (23779,224,5); -- Vermin Killer
 INSERT INTO `item_mods` VALUES (23779,225,5); -- Bird Killer
 INSERT INTO `item_mods` VALUES (23779,226,5); -- Amorph Killer
@@ -34183,29 +34183,29 @@ INSERT INTO `item_mods` VALUES (23779,235,5); -- Empty Killer
 INSERT INTO `item_mods` VALUES (23779,236,5); -- Humanoid Killer
 INSERT INTO `item_mods` VALUES (23779,237,5); -- Lumorian Killer
 INSERT INTO `item_mods` VALUES (23779,238,5); -- Luminion Killer
-INSERT INTO `item_mods` VALUES (23779,302,4);
-INSERT INTO `item_mods` VALUES (23779,384,900);
-INSERT INTO `item_mods` VALUES (23779,973,5);
-INSERT INTO `item_mods` VALUES (23780,1,137); -- Agwu's Slops
-INSERT INTO `item_mods` VALUES (23780,2,50);
-INSERT INTO `item_mods` VALUES (23780,5,59);
-INSERT INTO `item_mods` VALUES (23780,8,43);
-INSERT INTO `item_mods` VALUES (23780,10,8);
-INSERT INTO `item_mods` VALUES (23780,11,17);
-INSERT INTO `item_mods` VALUES (23780,12,49);
-INSERT INTO `item_mods` VALUES (23780,13,32);
-INSERT INTO `item_mods` VALUES (23780,14,25);
-INSERT INTO `item_mods` VALUES (23780,25,40);
-INSERT INTO `item_mods` VALUES (23780,28,35);
-INSERT INTO `item_mods` VALUES (23780,29,8);
-INSERT INTO `item_mods` VALUES (23780,30,40);
-INSERT INTO `item_mods` VALUES (23780,31,134);
-INSERT INTO `item_mods` VALUES (23780,68,66);
-INSERT INTO `item_mods` VALUES (23780,170,7);
-INSERT INTO `item_mods` VALUES (23780,244,11);
-INSERT INTO `item_mods` VALUES (23780,311,20);
-INSERT INTO `item_mods` VALUES (23780,384,500);
-INSERT INTO `item_mods` VALUES (23780,487,9);
+INSERT INTO `item_mods` VALUES (23779,302,4); -- Triple Att
+INSERT INTO `item_mods` VALUES (23779,384,900); -- Haste
+INSERT INTO `item_mods` VALUES (23779,973,5); -- Subtle Blow II
+INSERT INTO `item_mods` VALUES (23780,1,137); -- Def Agwu's Slops
+INSERT INTO `item_mods` VALUES (23780,2,50); -- Hp
+INSERT INTO `item_mods` VALUES (23780,5,59); -- Mp
+INSERT INTO `item_mods` VALUES (23780,8,43); -- Str
+INSERT INTO `item_mods` VALUES (23780,10,8); -- Vit
+INSERT INTO `item_mods` VALUES (23780,11,17); -- Agi
+INSERT INTO `item_mods` VALUES (23780,12,49); -- Int
+INSERT INTO `item_mods` VALUES (23780,13,32); -- Mnd
+INSERT INTO `item_mods` VALUES (23780,14,25); -- Chr
+INSERT INTO `item_mods` VALUES (23780,25,40); -- Acc
+INSERT INTO `item_mods` VALUES (23780,28,35); -- Matt
+INSERT INTO `item_mods` VALUES (23780,29,8); -- Mdef
+INSERT INTO `item_mods` VALUES (23780,30,40); -- Macc
+INSERT INTO `item_mods` VALUES (23780,31,134); -- Meva
+INSERT INTO `item_mods` VALUES (23780,68,66); -- Eva
+INSERT INTO `item_mods` VALUES (23780,170,7); -- Fast Cast
+INSERT INTO `item_mods` VALUES (23780,244,11); -- Resist Silence
+INSERT INTO `item_mods` VALUES (23780,311,20); -- Magic Damage
+INSERT INTO `item_mods` VALUES (23780,384,500); -- Haste
+INSERT INTO `item_mods` VALUES (23780,487,9); -- Magic Burst Damage
 INSERT INTO `item_mods` VALUES (23781,1,142);     -- Bunzi's Pants: DEF:142
 INSERT INTO `item_mods` VALUES (23781,2,61);      -- HP+61
 INSERT INTO `item_mods` VALUES (23781,5,44);      -- MP+44
