@@ -21,8 +21,8 @@ local loginCampaignDuration = 30 -- Duration is set in Earth days (Average is 23
 -- Checks if a Login Campaign is active.
 xi.events.loginCampaign.isCampaignActive = function()
     if xi.settings.ENABLE_LOGIN_CAMPAIGN == 1 then
-        local local_UTC_offset = os.time() - os.time(os.date('!*t'))
-        local JST_UTC_offset = 9 * 60 * 60
+        local localUtcOffset = os.time() - os.time(os.date('!*t'))
+        local jstUtcOffset = 9 * 60 * 60
         local campaignStartDate = os.time({
             year = loginCampaignYear,
             month = loginCampaignMonth,
@@ -30,7 +30,7 @@ xi.events.loginCampaign.isCampaignActive = function()
             hour = 0,
             min = 0,
             sec = 0
-        }) + local_UTC_offset + JST_UTC_offset
+        }) + localUtcOffset + jstUtcOffset
         local campaignEndDate = campaignStartDate + loginCampaignDuration * 24 * 60 * 60
 
         if os.time() < campaignEndDate and os.time() > campaignStartDate then

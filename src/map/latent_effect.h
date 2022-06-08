@@ -86,20 +86,21 @@ enum class LATENT : uint16
     WEAPON_DRAWN_MP_OVER = 56, // while weapon is drawn and mp greater than # - PARAM: MP #
     ELEVEN_ROLL_ACTIVE   = 57, // corsair roll of 11 active
     IN_ASSAULT           = 58, // is in an Instance battle in a TOAU zone
-    VS_ECOSYSTEM         = 59, // Vs. Specific Ecosystem ID (e.g. Vs. Birds: Accuracy+3)
-    VS_FAMILY            = 60, // Vs. Specific Family ID (e.g. Vs. Apkallu: Accuracy+3)
+    VS_ECOSYSTEM         = 59, // Vs. Specific Ecosystem ID (e.g. Vs. Plantoid: Accuracy+3)
+    VS_FAMILY            = 60, // Vs. Specific Family ID (e.g. Vs. Korrigan: Accuracy+3)
+    VS_SUPERFAMILY       = 61, // Vs. Specific SuperFamily ID (e.g. Vs. Mandragora: Accuracy+3)
 };
 
 #define MAX_LATENTEFFECTID 61
 
 /************************************************************************
- *																		*
- *  Нерешенные задачи:													*
- *																		*
- *  - сохранение ID сущности, добавившей эффект							*
- *  - обновление эффекта (например перезапись protect 1 на protect 2)    *
- *																		*
- ************************************************************************/
+*                                                                       *
+* Unsolved problems:                                                    *
+*                                                                       *
+* - saving the ID of the entity that added the effect                   *
+* - updating effect (for example, overwriting protect 1 with protect 2) *
+*                                                                       *
+************************************************************************/
 
 class CBattleEntity;
 

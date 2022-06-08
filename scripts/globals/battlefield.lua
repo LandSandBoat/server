@@ -2,7 +2,7 @@ require("scripts/globals/msg")
 
 xi = xi or {}
 
-local MaxAreas =
+local maxAreas =
 {
     -- Temenos
     { Max = 8, Zones = {37} },
@@ -18,7 +18,7 @@ function onBattlefieldHandlerInitialise(zone)
     local id      = zone:getID()
     local default = 3
 
-    for _, battlefield in pairs(MaxAreas) do
+    for _, battlefield in pairs(maxAreas) do
         for _, zoneid in pairs(battlefield.Zones) do
             if id == zoneid then
                 return battlefield.Max

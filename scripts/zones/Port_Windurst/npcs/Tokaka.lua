@@ -9,31 +9,32 @@ require("scripts/settings/main")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local TokakaSpokenTo = player:getCharVar("TokakaSpokenTo")
-    local NeedToZone     = player:needToZone()
+    local tokakaSpokenTo = player:getCharVar("TokakaSpokenTo")
+    local needToZone     = player:needToZone()
 
-    if (TokakaSpokenTo == 1 and NeedToZone == false) then
+    if (tokakaSpokenTo == 1 and needToZone == false) then
         local count = trade:getItemCount()
-        local BastoreSardine = trade:hasItemQty(4360, 1)
+        local bastoreSardine = trade:hasItemQty(4360, 1)
 
-        if (BastoreSardine == true and count == 1) then
+        if (bastoreSardine == true and count == 1) then
             player:startEvent(210, xi.settings.GIL_RATE*70, 4360)
         end
     end
 end
 
 entity.onTrigger = function(player, npc)
-    local SomethingFishy = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.SOMETHING_FISHY)
+    local somethingFishy = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.SOMETHING_FISHY)
+
     if (player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.BLAST_FROM_THE_PAST) == QUEST_ACCEPTED and player:getCharVar("BlastFromThePast_Prog") == 0) then
         player:startEvent(318)
         player:setCharVar("BlastFromThePast_Prog", 1)
-    elseif (SomethingFishy >= QUEST_ACCEPTED) then
+    elseif (somethingFishy >= QUEST_ACCEPTED) then
         if (player:needToZone()) then
             player:startEvent(211)
         else
             player:startEvent(209, 0, 4360)
         end
-    elseif (SomethingFishy == QUEST_AVAILABLE) then
+    elseif (somethingFishy == QUEST_AVAILABLE) then
         player:startEvent(208, 0, 4360)
     elseif (player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.BLAST_FROM_THE_PAST) == QUEST_ACCEPTED and player:getCharVar("BlastFromThePast_Prog") == 0) then
         player:startEvent(318)
@@ -51,9 +52,9 @@ entity.onEventFinish = function(player, csid, option)
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.SOMETHING_FISHY)
         player:setCharVar("TokakaSpokenTo", 1)
     elseif (csid == 210) then
-        local SomethingFishy = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.SOMETHING_FISHY)
+        local somethingFishy = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.SOMETHING_FISHY)
 
-        if (SomethingFishy == QUEST_ACCEPTED) then
+        if (somethingFishy == QUEST_ACCEPTED) then
             player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.SOMETHING_FISHY)
             player:addFame(xi.quest.fame_area.WINDURST, 60)
         else
@@ -68,4 +69,5 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("TokakaSpokenTo", 1)
     end
 end
+
 return entity

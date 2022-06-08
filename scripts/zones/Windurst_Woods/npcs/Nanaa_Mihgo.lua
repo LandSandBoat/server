@@ -20,7 +20,7 @@ require("scripts/globals/utils")
 -----------------------------------
 local entity = {}
 
-local TrustMemory = function(player)
+local trustMemory = function(player)
     local memories = 0
     -- 2 - Saw her at the start of the game
     if player:getNation() == xi.nation.WINDURST then
@@ -85,7 +85,7 @@ entity.onTrigger = function(player, npc)
 
         player:setLocalVar("TrustDialogue", 1)
 
-        player:startEvent(865, 0, 0, 0, TrustMemory(player), 0, 0, 0, trustFlag)
+        player:startEvent(865, 0, 0, 0, trustMemory(player), 0, 0, 0, trustFlag)
 
     -- ROCK RACKETEER (Mihgo's Amigo follow-up)
     elseif mihgosAmigo == QUEST_COMPLETED and rockRacketeer == QUEST_AVAILABLE and

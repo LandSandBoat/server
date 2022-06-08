@@ -1,4 +1,13 @@
 {
+    "C_Cpp.default.cppStandard": "c++17",
+    "C_Cpp.default.browse.limitSymbolsToIncludedHeaders": true,
+    "C_Cpp.intelliSenseEngine": "Tag Parser",
+
+    "editor.bracketPairColorization.enabled": true,
+    "editor.renderWhitespace": "all",
+    "editor.renderControlCharacters": true,
+    "editor.trimAutoWhitespace": true,
+
     "Lua.workspace.maxPreload": 20000,
     "Lua.diagnostics.globals": [
         "xi",
@@ -441,8 +450,6 @@
     "Lua.hint.setType": true,
     "Lua.runtime.version": "LuaJIT",
     "Lua.workspace.preloadFileSize": 10000,
-    "editor.renderWhitespace": "all"
-    "editor.renderWhitespace": "all",
     "files.associations": {
         "algorithm": "cpp",
         "any": "cpp",
@@ -537,5 +544,5 @@
         "coroutine": "cpp",
         "resumable": "cpp",
         "typeindex": "cpp"
-    }
+    },
 }

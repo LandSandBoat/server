@@ -9,7 +9,7 @@ cmdprops =
     parameters = "s"
 }
 
-local ValidAttachments =
+local validAttachments =
 {
     8193, 8194, 8195, 8196, 8197, 8198, 8224, 8225, 8226, 8227,
     8449, 8450, 8451, 8452, 8453, 8454, 8455, 8456, 8457, 8458,
@@ -27,8 +27,8 @@ local ValidAttachments =
 }
 
 local function AddAllAttachments(player)
-    for i = 1, #ValidAttachments do
-        player:unlockAttachment(ValidAttachments[i])
+    for i = 1, #validAttachments do
+        player:unlockAttachment(validAttachments[i])
     end
     player:PrintToPlayer(string.format("%s now has all attachments.", player:getName()))
 end

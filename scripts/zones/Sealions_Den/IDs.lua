@@ -18,13 +18,14 @@ zones[xi.zone.SEALIONS_DEN] =
         LOGIN_CAMPAIGN_UNDERWAY   = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER              = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         IRON_GATE_LOCKED          = 7094, -- A solid iron gate. It is tightly locked...
-        PARTY_MEMBERS_HAVE_FALLEN = 7403, -- All party members have fallen in battle. Now leaving the battlefield.
+        PARTY_MEMBERS_HAVE_FALLEN = 7407, -- All party members have fallen in battle. Now leaving the battlefield.
         THE_PARTY_WILL_BE_REMOVED = 7410, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
         CONQUEST_BASE             = 7428, -- Tallying conquest results...
     },
     mob =
     {
         ONE_TO_BE_FEARED_OFFSET = 16908289,
+        OMEGA_OFFSET = 16908294,
         WARRIORS_PATH_OFFSET    = 16908310,
     },
     npc =

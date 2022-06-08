@@ -10,16 +10,16 @@ require("scripts/settings/main")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local Fallen = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.FALLEN_COMRADES)
+    local fallen = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.FALLEN_COMRADES)
 
     if
         trade:hasItemQty(13116, 1) == true and
         trade:getItemCount() == 1
     then
-        if Fallen == 1 then
+        if fallen == 1 then
             player:tradeComplete()
             player:startEvent(91)
-        elseif Fallen == 2 then
+        elseif fallen == 2 then
             player:tradeComplete()
             player:startEvent(92)
         end

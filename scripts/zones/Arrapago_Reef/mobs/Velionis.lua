@@ -67,8 +67,8 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobFight = function(mob, target)
-    local FastCast = mob:getLocalVar("HPP")
-    if mob:getHPP() <= FastCast then
+    local fastCast = mob:getLocalVar("HPP")
+    if mob:getHPP() <= fastCast then
         if mob:getHPP() > 10 then
             mob:addMod(xi.mod.FASTCAST, 15)
             mob:setLocalVar("HPP", mob:getHPP() - 10)

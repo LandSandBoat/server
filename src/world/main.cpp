@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
 Copyright (c) 2022 LandSandBoat Dev Teams
@@ -19,6 +19,9 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 ===========================================================================
 */
 #include "world_server.h"
+
+// TODO: Standardize our running arguments for shutdown and thread signals
+std::atomic<bool> gRunFlag = true;
 
 int main(int argc, char** argv)
 {

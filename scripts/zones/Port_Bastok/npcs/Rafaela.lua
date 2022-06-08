@@ -16,9 +16,9 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    local PastPerfectVar = player:getCharVar("PastPerfectVar")
+    local pastPerfectVar = player:getCharVar("PastPerfectVar")
 
-    if csid == 22 and PastPerfectVar == 1 then
+    if csid == 22 and pastPerfectVar == 1 then
         player:setCharVar("PastPerfectVar", 2)
     end
 end

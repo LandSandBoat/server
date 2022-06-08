@@ -561,6 +561,8 @@ public:
 
     bool isDualWielding(); // Checks if the battle entity is dual wielding
 
+    float checkLiementAbsorb(uint16 damageType); // return 1.0 if did not absorb, return >= -1.0 if did absorb
+
     // Enmity
     int32 getCE(CLuaBaseEntity const* target);                    // gets current CE the mob has towards the player
     int32 getVE(CLuaBaseEntity const* target);                    // gets current VE the mob has towards the player
@@ -725,7 +727,8 @@ public:
 
     // Mob Entity-Specific
     void   setMobLevel(uint8 level);
-    uint8  getSystem();
+    uint8  getSystem(); // TODO: rename this to getEcosystem()
+    uint16 getSuperFamily();
     uint16 getFamily();
     bool   isMobType(uint8 mobType); // True if mob is of type passed to function
     bool   isUndead();               // True if mob is undead

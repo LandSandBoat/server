@@ -358,19 +358,21 @@ local function getSingleHitDamage(attacker, target, dmg, wsParams, calcParams)
                 local magicdmg = addBonusesAbility(attacker, wsParams.ele, target, finaldmg, wsParams)
 
                 magicdmg = magicdmg * applyResistanceAbility(attacker, target, wsParams.ele, wsParams.skill, calcParams.bonusAcc)
-                magicdmg = target:magicDmgTaken(magicdmg)
-                magicdmg = adjustForTarget(target, magicdmg, wsParams.ele)
-
+                magicdmg = target:magicDmgTaken(magicdmg, wsParams.ele)
 
                 if magicdmg > 0 then
-                    magicdmg = magicdmg - target:getMod(xi.mod.PHALANX)
-                    magicdmg = utils.clamp(magicdmg, 0, 99999)
+                    magicdmg = adjustForTarget(target, magicdmg, wsParams.ele) -- this may absorb or nullify
                 end
 
-                magicdmg = utils.oneforall(target, magicdmg)
-                magicdmg = utils.stoneskin(target, magicdmg)
+                if magicdmg > 0 then                                           -- handle nonzero damage if previous function does not absorb or nullify
+                    magicdmg = magicdmg - target:getMod(xi.mod.PHALANX)
+                    magicdmg = utils.clamp(magicdmg, 0, 99999)
+                    magicdmg = utils.oneforall(target, magicdmg)
+                    magicdmg = utils.stoneskin(target, magicdmg)
+                end
 
                 finaldmg = finaldmg + magicdmg
+
             end
 
             calcParams.hitsLanded = calcParams.hitsLanded + 1
@@ -753,9 +755,10 @@ function doMagicWeaponskill(attacker, target, wsID, wsParams, tp, action, primar
     local calcParams =
     {
         ['shadowsAbsorbed'] = 0,
-        ['tpHitsLanded'] = 1,
+        ['tpHitsLanded']    = 1,
         ['extraHitsLanded'] = 0,
-        ['bonusTP'] = wsParams.bonusTP or 0
+        ['bonusTP']         = wsParams.bonusTP or 0,
+        ['wsID']            = wsID
     }
 
     local bonusfTP, bonusacc = handleWSGorgetBelt(attacker)
@@ -800,9 +803,16 @@ function doMagicWeaponskill(attacker, target, wsID, wsParams, tp, action, primar
         -- Calculate magical bonuses and reductions
         dmg = addBonusesAbility(attacker, wsParams.ele, target, dmg, wsParams)
         dmg = dmg * applyResistanceAbility(attacker, target, wsParams.ele, wsParams.skill, bonusacc)
-        dmg = target:magicDmgTaken(dmg)
-        dmg = adjustForTarget(target, dmg, wsParams.ele)
+        dmg = target:magicDmgTaken(dmg, wsParams.ele)
 
+        if dmg < 0 then
+            calcParams.finalDmg = dmg
+
+            dmg = takeWeaponskillDamage(target, attacker, wsParams, primaryMsg, attack, calcParams, action)
+            return dmg
+        end
+
+        dmg = adjustForTarget(target, dmg, wsParams.ele)
 
         if dmg > 0 then
             dmg = dmg - target:getMod(xi.mod.PHALANX)
@@ -818,7 +828,6 @@ function doMagicWeaponskill(attacker, target, wsID, wsParams, tp, action, primar
     end
 
     calcParams.finalDmg = dmg
-    calcParams.wsID = wsID
 
     if dmg > 0 then
         attacker:trySkillUp(attack.weaponType, target:getMainLvl())
@@ -854,7 +863,7 @@ function takeWeaponskillDamage(defender, attacker, wsParams, primaryMsg, attack,
             end
         end
 
-        action:param(defender:getID(), finaldmg)
+        action:param(defender:getID(), math.abs(finaldmg))
     elseif wsResults.shadowsAbsorbed > 0 then
         action:messageID(defender:getID(), xi.msg.basic.SHADOW_ABSORB)
         action:param(defender:getID(), wsResults.shadowsAbsorbed)
@@ -1233,14 +1242,14 @@ function handleWSGorgetBelt(attacker)
         local elementalBelt =   { 11755, 11758, 11760, 11757, 11756, 11759, 11761, 11762 }
         local neck = attacker:getEquipID(xi.slot.NECK)
         local belt = attacker:getEquipID(xi.slot.WAIST)
-        local SCProp1, SCProp2, SCProp3 = attacker:getWSSkillchainProp()
+        local scProp1, scProp2, scProp3 = attacker:getWSSkillchainProp()
 
         for i, v in ipairs(elementalGorget) do
             if neck == v then
                 if
-                    doesElementMatchWeaponskill(i, SCProp1) or
-                    doesElementMatchWeaponskill(i, SCProp2) or
-                    doesElementMatchWeaponskill(i, SCProp3)
+                    doesElementMatchWeaponskill(i, scProp1) or
+                    doesElementMatchWeaponskill(i, scProp2) or
+                    doesElementMatchWeaponskill(i, scProp3)
                 then
                     accBonus = accBonus + 10
                     ftpBonus = ftpBonus + 0.1
@@ -1258,9 +1267,9 @@ function handleWSGorgetBelt(attacker)
         for i, v in ipairs(elementalBelt) do
             if belt == v then
                 if
-                    doesElementMatchWeaponskill(i, SCProp1) or
-                    doesElementMatchWeaponskill(i, SCProp2) or
-                    doesElementMatchWeaponskill(i, SCProp3)
+                    doesElementMatchWeaponskill(i, scProp1) or
+                    doesElementMatchWeaponskill(i, scProp2) or
+                    doesElementMatchWeaponskill(i, scProp3)
                 then
                     accBonus = accBonus + 10
                     ftpBonus = ftpBonus + 0.1

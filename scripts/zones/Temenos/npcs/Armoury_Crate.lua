@@ -1267,9 +1267,9 @@ entity.onTrigger = function(player, npc)
     end
     local crateID = npc:getID()
     local model = npc:getModelId()
-    local X = npc:getXPos()
-    local Y = npc:getYPos()
-    local Z = npc:getZPos()
+    local xPos = npc:getXPos()
+    local yPos = npc:getYPos()
+    local zPos = npc:getZPos()
     local bfid = battlefield:getID()
     local hold = false
     if npc:getLocalVar("open") == 0 then
@@ -1345,8 +1345,8 @@ entity.onTrigger = function(player, npc)
                                     elseif model == 961 then
                                         if mask > 7 and spawnMimic then
                                             battlefield:setLocalVar("crateMaskF"..i, mask-8)
-                                            GetMobByID(ID.mob.TEMENOS_E_MOB[i]+4):setSpawn(X, Y, Z)
-                                            SpawnMob(ID.mob.TEMENOS_E_MOB[i]+4):setPos(X, Y, Z)
+                                            GetMobByID(ID.mob.TEMENOS_E_MOB[i]+4):setSpawn(xPos, yPos, zPos)
+                                            SpawnMob(ID.mob.TEMENOS_E_MOB[i]+4):setPos(xPos, yPos, zPos)
                                             GetMobByID(ID.mob.TEMENOS_E_MOB[i]+4):updateClaim(player)
                                         else
                                             xi.limbus.handleLootRolls(battlefield, loot[bfid][i], nil, npc)
@@ -1368,8 +1368,8 @@ entity.onTrigger = function(player, npc)
                         local otherCrate = ID.npc.TEMENOS_E_CRATE[7]
                         if crateID % 2 == 0 then otherCrate = otherCrate + 1 end
                         if spawnMimic and battlefield:getLocalVar("otherCrate") == 0 then
-                            GetMobByID(ID.mob.TEMENOS_E_MOB[7]+2):setSpawn(X, Y, Z)
-                            SpawnMob(ID.mob.TEMENOS_E_MOB[7]+2):setPos(X, Y, Z)
+                            GetMobByID(ID.mob.TEMENOS_E_MOB[7]+2):setSpawn(xPos, yPos, zPos)
+                            SpawnMob(ID.mob.TEMENOS_E_MOB[7]+2):setPos(xPos, yPos, zPos)
                             GetMobByID(ID.mob.TEMENOS_E_MOB[7]+2):updateClaim(player)
                             battlefield:setLocalVar("otherCrate", otherCrate)
                         else
@@ -1408,7 +1408,7 @@ entity.onTrigger = function(player, npc)
                 if crateID ~= ID.npc.TEMENOS_C_CRATE[4][1] then
                     local randmimic = math.random(1, 24)
                     if randmimic < 17 then
-                        local MimicList =
+                        local mimicList =
                         {
                             ID.mob.TEMENOS_C_MOB[4]+20, ID.mob.TEMENOS_C_MOB[4]+21,
                             ID.mob.TEMENOS_C_MOB[4]+22, ID.mob.TEMENOS_C_MOB[4]+25,
@@ -1419,9 +1419,9 @@ entity.onTrigger = function(player, npc)
                             ID.mob.TEMENOS_C_MOB[4]+34, ID.mob.TEMENOS_C_MOB[4]+35,
                             ID.mob.TEMENOS_C_MOB[4]+36, ID.mob.TEMENOS_C_MOB[4]+37,
                         }
-                        GetMobByID(MimicList[randmimic]):setSpawn(X, Y, Z)
-                        SpawnMob(MimicList[randmimic]):setPos(X, Y, Z)
-                        GetMobByID(MimicList[randmimic]):updateClaim(player)
+                        GetMobByID(mimicList[randmimic]):setSpawn(xPos, yPos, zPos)
+                        SpawnMob(mimicList[randmimic]):setPos(xPos, yPos, zPos)
+                        GetMobByID(mimicList[randmimic]):updateClaim(player)
                     else
                         xi.limbus.handleLootRolls(battlefield, loot[bfid][2], nil, npc)
                     end

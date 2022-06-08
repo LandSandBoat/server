@@ -19,9 +19,9 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local TheMerchantsBidding = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_MERCHANT_S_BIDDING)
+    local theMerchantsBidding = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_MERCHANT_S_BIDDING)
 
-    if (TheMerchantsBidding == QUEST_AVAILABLE) then
+    if (theMerchantsBidding == QUEST_AVAILABLE) then
         player:startEvent(90)
     else
         player:startEvent(88)

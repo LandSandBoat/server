@@ -83,6 +83,7 @@ CMobEntity::CMobEntity()
     m_AllowRespawn = false;
     m_DropItemTime = 0;
     m_Family       = 0;
+    m_SuperFamily  = 0;
     m_Type         = MOBTYPE_NORMAL;
     m_Behaviour    = BEHAVIOUR_NONE;
     m_SpawnType    = SPAWNTYPE_NORMAL;
@@ -705,7 +706,7 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
 
         // reset the skill's message back to default
         PSkill->setMsg(defaultMessage);
-
+        int32 damage = 0;
         if (objtype == TYPE_PET && static_cast<CPetEntity*>(this)->getPetType() != PET_TYPE::JUG_PET)
         {
             PET_TYPE petType = static_cast<CPetEntity*>(this)->getPetType();
@@ -717,16 +718,16 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
 
             if (petType == PET_TYPE::AUTOMATON)
             {
-                target.param = luautils::OnAutomatonAbility(PTarget, this, PSkill, PMaster, &action);
+                damage = luautils::OnAutomatonAbility(PTarget, this, PSkill, PMaster, &action);
             }
             else
             {
-                target.param = luautils::OnPetAbility(PTarget, this, PSkill, PMaster, &action);
+                damage = luautils::OnPetAbility(PTarget, this, PSkill, PMaster, &action);
             }
         }
         else
         {
-            target.param = luautils::OnMobWeaponSkill(PTarget, this, PSkill, &action);
+            damage = luautils::OnMobWeaponSkill(PTarget, this, PSkill, &action);
             this->PAI->EventHandler.triggerListener("WEAPONSKILL_USE", CLuaBaseEntity(this), CLuaBaseEntity(PTarget), PSkill->getID(), state.GetSpentTP(), &action);
             PTarget->PAI->EventHandler.triggerListener("WEAPONSKILL_TAKE", CLuaBaseEntity(PTarget), CLuaBaseEntity(this), PSkill->getID(), state.GetSpentTP(), &action);
         }
@@ -738,6 +739,16 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
         else
         {
             msg = PSkill->getAoEMsg();
+        }
+
+        if (damage < 0)
+        {
+            msg = MSGBASIC_SKILL_RECOVERS_HP; // TODO: verify this message does/does not vary depending on mob/avatar/automaton use
+            target.param = std::clamp(-damage,0, PTarget->GetMaxHP() - PTarget->health.hp);
+        }
+        else
+        {
+            target.param = damage;
         }
 
         target.messageID = msg;

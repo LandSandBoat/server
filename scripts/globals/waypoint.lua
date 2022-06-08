@@ -271,7 +271,7 @@ xi.waypoint.onTrigger = function(player, npc)
         local ID = zones[zoneId]
 
         player:addTeleport(xi.teleport.type.WAYPOINT, waypointInfo[waypointIndex][1])
-        player:messageSpecial(ID.text.GEOMAGNETRON_ATTUNED, waypointIndex - waypointStartIndex[zoneId], xi.ki.GEOMAGNETRON)
+        player:messageSpecial(ID.text.WAYPOINT_ATTUNED, waypointIndex - waypointStartIndex[zoneId], xi.ki.GEOMAGNETRON)
     end
 end
 

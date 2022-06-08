@@ -4461,19 +4461,20 @@ namespace charutils
             if (zoneutils::GetCurrentRegion(Pzone) == REGION_TYPE::ABYSSEA)
             {
                 uint16 TextID = luautils::GetTextIDVariable(Pzone, "CRUOR_OBTAINED");
-                uint32 Total  = charutils::GetPoints(PChar, "cruor");
-                uint32 Cruor  = 0; // Need to work out how to do cruor chains, until then no cruor will drop unless this line is customized for non retail play.
+                // uint32 Total  = charutils::GetPoints(PChar, "cruor");
+                // uint32 Cruor  = 0; // Need to work out how to do cruor chains, until then no cruor will drop unless this line is customized for non retail play.
 
                 if (TextID == 0)
                 {
                     ShowWarning("Failed to fetch Cruor Message ID for zone: %i", Pzone);
                 }
 
-                if (Cruor >= 1)
-                {
-                    PChar->pushPacket(new CMessageSpecialPacket(PChar, TextID, Cruor, Total + Cruor, 0, 0));
-                    charutils::AddPoints(PChar, "cruor", Cruor);
-                }
+                // TODO: Implement this once formula for Cruor attainment is implemented
+                // if (Cruor >= 1)
+                // {
+                //     PChar->pushPacket(new CMessageSpecialPacket(PChar, TextID, Cruor, Total + Cruor, 0, 0));
+                //     charutils::AddPoints(PChar, "cruor", Cruor);
+                // }
             }
         }
 

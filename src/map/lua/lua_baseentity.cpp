@@ -7688,14 +7688,14 @@ void CLuaBaseEntity::takeDamage(int32 damage, sol::object const& attacker, sol::
         breakBind     = flag_map["breakBind"];
     }
 
-    // Deal damage and liberate target when applicable
+    ATTACK_TYPE attackType = (atkType != sol::lua_nil) ? static_cast<ATTACK_TYPE>(atkType.as<uint8>()) : ATTACK_TYPE::NONE;
+    DAMAGE_TYPE damageType = (dmgType != sol::lua_nil) ? static_cast<DAMAGE_TYPE>(dmgType.as<uint8>()) : DAMAGE_TYPE::NONE;
+
+    PDefender->takeDamage(damage, PAttacker, attackType, damageType);
+
+    // liberate target when applicable
     if (damage > 0)
     {
-        ATTACK_TYPE attackType = (atkType != sol::lua_nil) ? static_cast<ATTACK_TYPE>(atkType.as<uint8>()) : ATTACK_TYPE::NONE;
-        DAMAGE_TYPE damageType = (dmgType != sol::lua_nil) ? static_cast<DAMAGE_TYPE>(dmgType.as<uint8>()) : DAMAGE_TYPE::NONE;
-
-        PDefender->takeDamage(damage, PAttacker, attackType, damageType);
-
         if (wakeUp)
         {
             PDefender->StatusEffectContainer->WakeUp();
@@ -9701,6 +9701,24 @@ bool CLuaBaseEntity::isDualWielding()
     }
 
     return false;
+}
+
+/************************************************************************
+ *  Function: checkLiementAbsorb()
+ *  Purpose : Returns 1.0 if Liement is not up or didn't absorb, -1.0 or less if it did
+ *  Example : liementAbsorbPct = player:checkLiementAbsorb(xi.damageType.FIRE)
+ *  Notes   :
+ ************************************************************************/
+
+float CLuaBaseEntity::checkLiementAbsorb(uint16 damageType)
+{
+    CBattleEntity* PBattleEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
+    if (PBattleEntity)
+    {
+        return battleutils::CheckLiementAbsorb(PBattleEntity, (DAMAGE_TYPE)damageType);
+    }
+
+    return 1.0f;
 }
 
 /************************************************************************
@@ -11952,10 +11970,10 @@ void CLuaBaseEntity::setPetName(uint8 pType, uint16 value, sol::object const& ar
             uint32 chocoboname1 = value & 0x0000FFFF;
             uint32 chocoboname2 = arg2.as<uint32>() << 16;
 
-            uint32 value = chocoboname1 + chocoboname2;
+            uint32 nameValue = chocoboname1 + chocoboname2;
 
-            sql->Query("INSERT INTO char_pet SET charid = %u, chocoboid = %u ON DUPLICATE KEY UPDATE chocoboid = %u;", m_PBaseEntity->id, value,
-                       value);
+            sql->Query("INSERT INTO char_pet SET charid = %u, chocoboid = %u ON DUPLICATE KEY UPDATE chocoboid = %u;", m_PBaseEntity->id, nameValue,
+                       nameValue);
         }
     }
 }
@@ -12418,6 +12436,21 @@ uint8 CLuaBaseEntity::getSystem()
 
     auto* PBattle = static_cast<CBattleEntity*>(m_PBaseEntity);
     return static_cast<uint8>(PBattle->m_EcoSystem);
+}
+
+/************************************************************************
+ *  Function: getSuperFamily()
+ *  Purpose : Returns the integer value of the associated Mob SuperFamily
+ *  Example : if mob:getSuperFamily() == 123 then
+ *  Notes   : To Do: Enumerate Mob Families in global script
+ ************************************************************************/
+
+uint16 CLuaBaseEntity::getSuperFamily()
+{
+    auto* entity = dynamic_cast<CMobEntity*>(m_PBaseEntity);
+    XI_DEBUG_BREAK_IF(!entity);
+
+    return entity->m_SuperFamily;
 }
 
 /************************************************************************
@@ -14338,6 +14371,8 @@ void CLuaBaseEntity::Register()
 
     SOL_REGISTER("isDualWielding", CLuaBaseEntity::isDualWielding);
 
+    SOL_REGISTER("checkLiementAbsorb", CLuaBaseEntity::checkLiementAbsorb);
+
     // Enmity
     SOL_REGISTER("getCE", CLuaBaseEntity::getCE);
     SOL_REGISTER("getVE", CLuaBaseEntity::getVE);
@@ -14502,7 +14537,8 @@ void CLuaBaseEntity::Register()
 
     // Mob Entity-Specific
     SOL_REGISTER("setMobLevel", CLuaBaseEntity::setMobLevel);
-    SOL_REGISTER("getSystem", CLuaBaseEntity::getSystem);
+    SOL_REGISTER("getSystem", CLuaBaseEntity::getSystem); // TODO: rename to getEcoSystem()
+    SOL_REGISTER("getSuperFamily", CLuaBaseEntity::getSuperFamily);
     SOL_REGISTER("getFamily", CLuaBaseEntity::getFamily);
     SOL_REGISTER("isMobType", CLuaBaseEntity::isMobType);
     SOL_REGISTER("isUndead", CLuaBaseEntity::isUndead);

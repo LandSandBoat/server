@@ -16,8 +16,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local FINAO = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.FAILURE_IS_NOT_AN_OPTION)
-    if (FINAO == QUEST_ACCEPTED) then
+    local finao = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.FAILURE_IS_NOT_AN_OPTION)
+    if (finao == QUEST_ACCEPTED) then
         if (player:hasKeyItem(xi.ki.HUNK_OF_BEDROCK)) then
             -- Finishing Quest: 'F.A.I.L.ure Is Not an Option'
             player:startEvent(76)
@@ -25,7 +25,7 @@ entity.onTrigger = function(player, npc)
             -- Dialgoue during Quest: 'F.A.I.L.ure Is Not an Option'
             player:startEvent(77)
         end
-    elseif ((FINAO == QUEST_AVAILABLE) and (player:getFameLevel(xi.quest.fame_area.ADOULIN) >= 4) and player:hasKeyItem(xi.ki.FAIL_BADGE)) then
+    elseif ((finao == QUEST_AVAILABLE) and (player:getFameLevel(xi.quest.fame_area.ADOULIN) >= 4) and player:hasKeyItem(xi.ki.FAIL_BADGE)) then
         -- Starting Quest: 'F.A.I.L.ure Is Not an Option'
         player:startEvent(78)
     else
