@@ -266,6 +266,18 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
     }
     else if (auto* PMob = dynamic_cast<CMobEntity*>(PEntity))
     {
+        auto mixins = table["mixins"].get_or<sol::table>(sol::lua_nil);
+        if (mixins.valid())
+        {
+            // Use the global function "applyMixins"
+            auto result = lua["applyMixins"](CLuaBaseEntity(PMob), mixins);
+            if (!result.valid())
+            {
+                sol::error err = result;
+                ShowError("applyMixins: %s: %s", PMob->name.c_str(), err.what());
+            }
+        }
+
         luautils::OnEntityLoad(PMob);
 
         luautils::OnMobInitialize(PMob);
