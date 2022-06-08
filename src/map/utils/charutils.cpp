@@ -2734,6 +2734,7 @@ namespace charutils
      *                                                                       *
      ************************************************************************/
 
+    // TODO: This whole thing should eventually get a refactored to be less dependent on arbitrary ordering of modifier IDs and conditionals on skill ranges.
     void BuildingCharSkillsTable(CCharEntity* PChar)
     {
         MERIT_TYPE skillMerit[] = { MERIT_H2H,
@@ -2775,6 +2776,7 @@ namespace charutils
 
         uint8 meritIndex = 0;
 
+        // Iterate over skill IDs (offsetting by 79 to get modifier ID)
         for (int32 i = 1; i < 48; ++i)
         {
             // ignore unused skills
@@ -2788,8 +2790,8 @@ namespace charutils
             uint16 skillBonus = 0;
 
             // apply arts bonuses
-            if ((i >= 32 && i <= 35 && PChar->StatusEffectContainer->HasStatusEffect({ EFFECT_LIGHT_ARTS, EFFECT_ADDENDUM_WHITE })) ||
-                (i >= 35 && i <= 37 && PChar->StatusEffectContainer->HasStatusEffect({ EFFECT_DARK_ARTS, EFFECT_ADDENDUM_BLACK })))
+            if ((i >= SKILL_DIVINE_MAGIC && i <= SKILL_ENFEEBLING_MAGIC && PChar->StatusEffectContainer->HasStatusEffect({ EFFECT_LIGHT_ARTS, EFFECT_ADDENDUM_WHITE })) ||
+                (i >= SKILL_ENFEEBLING_MAGIC && i <= SKILL_DARK_MAGIC && PChar->StatusEffectContainer->HasStatusEffect({ EFFECT_DARK_ARTS, EFFECT_ADDENDUM_BLACK })))
             {
                 uint16 artsSkill    = battleutils::GetMaxSkill(SKILL_ENHANCING_MAGIC, JOB_RDM, PChar->GetMLevel());             // B+ skill
                 uint16 skillCapD    = battleutils::GetMaxSkill((SKILLTYPE)i, JOB_SCH, PChar->GetMLevel());                      // D skill cap
@@ -2847,15 +2849,7 @@ namespace charutils
                     skillBonus += PChar->getMod(Mod::DARK_ARTS_SKILL);
                 }
             }
-            else if (i == 44)
-            {
-                skillBonus += PChar->getMod(Mod::GEOMANCY);
-            }
-            else if (i == 45)
-            {
-                skillBonus += PChar->getMod(Mod::HANDBELL);
-            }
-            else if (i >= 22 && i <= 24)
+            else if (i >= SKILL_AUTOMATON_MELEE && i <= SKILL_AUTOMATON_MAGIC)
             {
                 if (PChar->PAutomaton)
                 {
@@ -2866,6 +2860,7 @@ namespace charutils
             skillBonus += PChar->PMeritPoints->GetMeritValue(skillMerit[meritIndex], PChar);
             meritIndex++;
 
+            // Add 79 to get the modifier ID
             skillBonus += PChar->getMod(static_cast<Mod>(i + 79));
 
             PChar->WorkingSkills.rank[i] = battleutils::GetSkillRank((SKILLTYPE)i, PChar->GetMJob());
