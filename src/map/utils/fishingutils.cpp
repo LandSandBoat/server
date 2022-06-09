@@ -1906,6 +1906,14 @@ namespace fishingutils
 
     void StartFishing(CCharEntity* PChar)
     {
+        if (map_config.fishing_enable == 0)
+        {
+            ShowWarning("Fishing is currently disabled");
+            PChar->pushPacket(new CChatMessagePacket(PChar, CHAT_MESSAGE_TYPE::MESSAGE_SYSTEM_1, "Fishing is currently disabled"));
+            PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::FISHING));
+            return;
+        }
+
         PChar->StatusEffectContainer->DelStatusEffect(EFFECT_INVISIBLE);
         PChar->StatusEffectContainer->DelStatusEffect(EFFECT_HIDE);
         PChar->StatusEffectContainer->DelStatusEffect(EFFECT_CAMOUFLAGE);
@@ -2586,6 +2594,14 @@ namespace fishingutils
 
     void FishingAction(CCharEntity* PChar, FISHACTION action, uint16 stamina, uint32 special)
     {
+        if (map_config.fishing_enable == 0)
+        {
+            ShowWarning("Fishing is currently disabled, but somehow we have someone commencing a fishing action");
+            // Unlikely anyone can get here legit, since we already disabled "startFishing"
+            PChar->animation = ANIMATION_FISHING_STOP;
+            return;
+        }
+
         uint16 MessageOffset = GetMessageOffset(PChar->getZone());
         uint32 vanaTime      = CVanaTime::getInstance()->getVanaTime();
 
