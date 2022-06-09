@@ -50,7 +50,10 @@ end
 xi.garrison.onLose = function(player, npc)
     local zoneId = npc:getZoneID()
     local garrisonZoneData = xi.garrison.data[zoneId]
-    local mob = garrisonZoneData.mobBoss - 8
+    local zone = player:getZone()
+    local boss   = zone:queryEntitiesByName(garrisonZoneData.mobBoss)[1]
+    local bossId = boss:getID()
+    local mob = bossId - 8
     local mobnum = 1
     -- Talk to NPC to Remove effects
     for _, v in ipairs(player:getAlliance()) do
@@ -81,7 +84,10 @@ xi.garrison.mobsAlive = function(player)
     local zoneId = player:getZoneID()
     local garrisonZoneData = xi.garrison.data[zoneId]
     local killedAllMobs = true
-    local mob = garrisonZoneData.mobBoss - 8
+    local zone = player:getZone()
+    local boss   = zone:queryEntitiesByName(garrisonZoneData.mobBoss)[1]
+    local bossId = boss:getID()
+    local mob = bossId - 8
     local mobnum = 1
     -- Check all mobs if alive
     while mobnum <= 9 do
@@ -175,7 +181,6 @@ xi.garrison.tick = function(player, npc, wave, party)
         xi.garrison.npcAlive(player, party) == true
     then
         -- Win
-        -- Var to give rewards to Trader to trigger from guard
         player:setCharVar(string.format("[GARRISON]Status_%s", zoneId), garrisonRunning)
     elseif
         xi.garrison.mobsAlive(player) == false and
@@ -194,7 +199,7 @@ xi.garrison.tick = function(player, npc, wave, party)
         -- lose
         xi.garrison.onLose(player, npc)
     else
-    -- Start next tick
+        -- Start next tick
         npc:timer(10000, function(npcArg)
             xi.garrison.tick(player, npc, wave, party)
         end)
@@ -222,6 +227,7 @@ xi.garrison.spawnNPCs = function(npc, party)
         -- BATTLEFIELD this is to prevent outside help, is not retail
         mob:addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0)
         mob:setAllegiance(1)
+        mob:setUnkillable(true)
         if npcnum == 6 then
             xPos = garrisonZoneData.xPos - garrisonZoneData.xSecondLine
             zPos = garrisonZoneData.zPos - garrisonZoneData.zSecondLine
@@ -241,7 +247,9 @@ xi.garrison.spawnWave = function(player, npc, wave, party)
     local zoneId = npc:getZoneID()
     local garrisonZoneData = xi.garrison.data[zoneId]
     local allianceSize = 0
-    local boss = garrisonZoneData.mobBoss
+    local zone = player:getZone()
+    local boss   = zone:queryEntitiesByName(garrisonZoneData.mobBoss)[1]
+    local bossId = boss:getID()
     local npcs = garrisonZoneData.npcs
     local mobCount = 1
     -- Get wave size based on alliance size
@@ -263,13 +271,13 @@ xi.garrison.spawnWave = function(player, npc, wave, party)
             party <= 6
         then
             npc:timer(15000, function(npcArg)
-                SpawnMob(boss - mobId)
+                SpawnMob(bossId - mobId)
                 -- BATTLEFIELD this is to prevent outside help, is not retail
-                GetMobByID(boss - mobId):addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0)
+                GetMobByID(bossId - mobId):addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0)
                 for _, npcID in ipairs(npcs) do
                     if GetMobByID(npcID):isAlive() then
-                        GetMobByID(npcID):addEnmity(GetMobByID(boss - mobId), 1, 1)
-                        GetMobByID(boss - mobId):addEnmity(GetMobByID(npcID), 1, 1)
+                        GetMobByID(npcID):addEnmity(GetMobByID(bossId - mobId), 1, 1)
+                        GetMobByID(bossId - mobId):addEnmity(GetMobByID(npcID), 1, 1)
                     end
                 end
             end)
@@ -279,13 +287,13 @@ xi.garrison.spawnWave = function(player, npc, wave, party)
             party <= 6
         then
             npc:timer(30000, function(npcArg)
-                SpawnMob(boss - mobId)
+                SpawnMob(bossId - mobId)
                 -- BATTLEFIELD this is to prevent outside help, is not retail
-                GetMobByID(boss - mobId):addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0)
+                GetMobByID(bossId - mobId):addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0)
                 for _, npcID in ipairs(npcs) do
                     if GetMobByID(npcID):isAlive() then
-                        GetMobByID(npcID):addEnmity(GetMobByID(boss - mobId), 1, 1)
-                        GetMobByID(boss - mobId):addEnmity(GetMobByID(npcID), 1, 1)
+                        GetMobByID(npcID):addEnmity(GetMobByID(bossId - mobId), 1, 1)
+                        GetMobByID(bossId - mobId):addEnmity(GetMobByID(npcID), 1, 1)
                     end
                 end
             end)
@@ -295,13 +303,13 @@ xi.garrison.spawnWave = function(player, npc, wave, party)
             party <= 6
         then
             npc:timer(45000, function(npcArg)
-                SpawnMob(boss - mobId)
+                SpawnMob(bossId - mobId)
                 -- BATTLEFIELD this is to prevent outside help, is not retail
-                GetMobByID(boss - mobId):addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0)
+                GetMobByID(bossId - mobId):addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0)
                 for _, npcID in ipairs(npcs) do
                     if GetMobByID(npcID):isAlive() then
-                        GetMobByID(npcID):addEnmity(GetMobByID(boss - mobId), 1, 1)
-                        GetMobByID(boss - mobId):addEnmity(GetMobByID(npcID), 1, 1)
+                        GetMobByID(npcID):addEnmity(GetMobByID(bossId - mobId), 1, 1)
+                        GetMobByID(bossId - mobId):addEnmity(GetMobByID(npcID), 1, 1)
                     end
                 end
             end)
@@ -311,25 +319,25 @@ xi.garrison.spawnWave = function(player, npc, wave, party)
             party > 6
         then
             npc:timer(15000, function(npcArg)
-                SpawnMob(boss - mobId)
+                SpawnMob(bossId - mobId)
                 -- BATTLEFIELD this is to prevent outside help, is not retail
-                GetMobByID(boss - mobId):addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0)
+                GetMobByID(bossId - mobId):addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0)
                 for _, npcID in ipairs(npcs) do
                     if GetMobByID(npcID):isAlive() then
-                        GetMobByID(npcID):addEnmity(GetMobByID(boss - mobId), 1, 1)
-                        GetMobByID(boss - mobId):addEnmity(GetMobByID(npcID), 1, 1)
+                        GetMobByID(npcID):addEnmity(GetMobByID(bossId - mobId), 1, 1)
+                        GetMobByID(bossId - mobId):addEnmity(GetMobByID(npcID), 1, 1)
                     end
                 end
             end)
             mobCount = mobCount + 1
         else
-            SpawnMob(boss - mobId)
+            SpawnMob(bossId - mobId)
             -- BATTLEFIELD this is to prevent outside help, is not retail
-            GetMobByID(boss - mobId):addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0)
+            GetMobByID(bossId - mobId):addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0)
             for _, npcID in ipairs(npcs) do
                 if GetMobByID(npcID):isAlive() then
-                    GetMobByID(npcID):addEnmity(GetMobByID(boss - mobId), 1, 1)
-                    GetMobByID(boss - mobId):addEnmity(GetMobByID(npcID), 1, 1)
+                    GetMobByID(npcID):addEnmity(GetMobByID(bossId - mobId), 1, 1)
+                    GetMobByID(bossId - mobId):addEnmity(GetMobByID(npcID), 1, 1)
                 end
             end
             mobCount = mobCount + 1
@@ -339,13 +347,13 @@ xi.garrison.spawnWave = function(player, npc, wave, party)
     if wave == 4 then
         npc:timer(60000, function(npcArg)
             -- Spawn boss after 1 minute
-            SpawnMob(boss)
+            SpawnMob(bossId)
             -- BATTLEFIELD this is to prevent outside help, is not retail
-            GetMobByID(boss):addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0)
+            GetMobByID(bossId):addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0)
             for _, npcID in ipairs(npcs) do
                 if GetMobByID(npcID):isAlive() then
-                    GetMobByID(npcID):addEnmity(GetMobByID(boss), 1, 1)
-                    GetMobByID(boss):addEnmity(GetMobByID(npcID), 1, 1)
+                    GetMobByID(npcID):addEnmity(GetMobByID(bossId), 1, 1)
+                    GetMobByID(bossId):addEnmity(GetMobByID(npcID), 1, 1)
                 end
             end
             -- Start tick again
@@ -467,7 +475,7 @@ xi.garrison.onTrade = function(player, npc, trade, guardNation)
             player:getNation() ~= guardNation and
             xi.settings.GARRISON_NATION_BYPASS == 0
         then
-            --not of nation event
+            -- Not of nation event
             player:messageSpecial(text.GARRISON_BASE, trade:getItem():getID(), player:getNation())
         else
             -- Requirements not met

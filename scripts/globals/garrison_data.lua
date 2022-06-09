@@ -90,7 +90,7 @@ xi.garrison.data =
         {
         -- empty filled with dynamic entries
         },
-        mobBoss = 17187282, -- Orcish Fighterchief
+        mobBoss = "Orcish_Fighterchief",
         xPos = -436,
         yPos = -20,
         zPos = -217,
@@ -149,7 +149,7 @@ xi.garrison.data =
         {
         -- empty filled with dynamic entries
         },
-        mobBoss = 17211857, -- Lead Quadav
+        mobBoss = "Lead_Quadav",
         xPos = -580, --needs adjusting
         yPos = 40,
         zPos = 69,
@@ -209,7 +209,7 @@ xi.garrison.data =
         {
         -- empty filled with dynamic entries
         },
-        mobBoss = 17248606, -- Yagudo Condottiere
+        mobBoss = "Yagudo_Condottiere",
         xPos = -20, -- needs adjusting
         yPos = -12,
         zPos = 325,
@@ -269,7 +269,7 @@ xi.garrison.data =
         {
         -- empty filled with dynamic entries
         },
-        mobBoss = 17199601, -- Goblin Swindler
+        mobBoss = "Goblin_Swindler",
         xPos = 141, -- needs adjusting
         yPos = -8,
         zPos = 87,
@@ -329,7 +329,7 @@ xi.garrison.data =
         {
         -- empty filled with dynamic entries
         },
-        mobBoss = 17203676, -- Orcish Colonel
+        mobBoss = "Orcish_Colonel",
         xPos = 54, -- needs adjusting
         yPos = 1,
         zPos = -1,
@@ -389,7 +389,7 @@ xi.garrison.data =
         {
         -- empty filled with dynamic entries
         },
-        mobBoss = 17224160, -- Cobalt Quadav
+        mobBoss = "Cobalt_Quadav",
         xPos = 458, -- needs adjusting
         yPos = 24,
         zPos = 421,
@@ -449,7 +449,7 @@ xi.garrison.data =
         {
         -- empty filled with dynamic entries
         },
-        mobBoss = 17261034, -- Goblin Guide
+        mobBoss = "Goblin_Guide",
         xPos = -485, -- needs adjusting
         yPos = -29,
         zPos = 58,
@@ -509,7 +509,7 @@ xi.garrison.data =
         {
         -- empty filled with dynamic entries
         },
-        mobBoss = 17265111, -- Yagudo Missionary
+        mobBoss = "Yagudo_Missionary",
         xPos = -299, -- needs adjusting
         yPos = 17,
         zPos = 411,
@@ -569,7 +569,7 @@ xi.garrison.data =
         {
         -- empty filled with dynamic entries
         },
-        mobBoss = 17293639, -- Hunting Chief
+        mobBoss = "Hunting_Chief",
         xPos = -247, -- needs adjusting
         yPos = -19,
         zPos = 310,
@@ -629,7 +629,7 @@ xi.garrison.data =
         {
         -- empty filled with dynamic entries
         },
-        mobBoss = 17232146, -- Gigas Overseer
+        mobBoss = "Gigas_Overseer",
         xPos = -25, -- needs adjusting
         yPos = -60,
         zPos = -110,
@@ -689,7 +689,7 @@ xi.garrison.data =
         {
         -- empty filled with dynamic entries
         },
-        mobBoss = 17273304, -- Goblin Doyen
+        mobBoss = "Goblin_Doyen",
         xPos = -43,
         yPos = 1,
         zPos = -140,
@@ -749,7 +749,7 @@ xi.garrison.data =
         {
         -- empty filled with dynamic entries
         },
-        mobBoss = 17281490, -- Sahagin Patriarch
+        mobBoss = "Sahagin_Patriarch",
         xPos = -248,
         yPos = 1,
         zPos = -392,
@@ -809,7 +809,7 @@ xi.garrison.data =
         {
         -- empty filled with dynamic entries
         },
-        mobBoss = 17236228, -- Demon Aristocrat
+        mobBoss = "Demon_Aristocrat",
         xPos = 216, -- needs adjusting
         yPos = -22,
         zPos = -208,
@@ -869,7 +869,7 @@ xi.garrison.data =
         {
         -- empty filled with dynamic entries
         },
-        mobBoss = 17244548, -- Centurio XIII-V'
+        mobBoss = "Centurio_XIII-V",
         xPos = -245,
         yPos = -9,
         zPos = -249,
@@ -929,7 +929,7 @@ xi.garrison.data =
         {
         -- empty filled with dynamic entries
         },
-        mobBoss = 17285570, -- Tonberry Decimator
+        mobBoss = "Tonberry_Decimator",
         xPos = 214,
         yPos = 1,
         zPos = -80,
@@ -989,7 +989,7 @@ xi.garrison.data =
         {
         -- empty filled with dynamic entries
         },
-        mobBoss = 17240433, -- Goblin Boss
+        mobBoss = "Goblin_Boss",
         xPos = -174,
         yPos = 8,
         zPos = -61,
