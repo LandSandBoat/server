@@ -245,12 +245,6 @@ namespace itemutils
         return g_pItemList[item->getID()] == item;
     }
 
-    /************************************************************************
-     *                                                                       *
-     *                                                                       *
-     *                                                                       *
-     ************************************************************************/
-
     CItemWeapon* GetUnarmedItem()
     {
         return PUnarmedItem;
@@ -278,12 +272,6 @@ namespace itemutils
         ShowWarning("DropID %u too big", DropID);
         return nullptr;
     }
-
-    /************************************************************************
-     *                                                                       *
-     *                                                                       *
-     *                                                                       *
-     ************************************************************************/
 
     LootList_t* GetLootList(uint16 LootID)
     {

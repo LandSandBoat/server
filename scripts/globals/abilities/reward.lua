@@ -100,8 +100,6 @@ ability_object.onUseAbility = function(player, target, ability, action)
             end,
     }
 
-
-
     -- Now calculating the bonus based on gear.
     local body = player:getEquipID(xi.slot.BODY)
 
