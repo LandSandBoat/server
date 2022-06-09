@@ -765,7 +765,8 @@ namespace charutils
         }
 
         fmtQuery = "SELECT outpost_sandy, outpost_bastok, outpost_windy, runic_portal, maw, "
-                   "campaign_sandy, campaign_bastok, campaign_windy, homepoints, survivals, abyssea_conflux "
+                   "campaign_sandy, campaign_bastok, campaign_windy, homepoints, survivals, abyssea_conflux, "
+                   "waypoints "
                    "FROM char_unlocks "
                    "WHERE charid = %u;";
 
@@ -796,6 +797,11 @@ namespace charutils
             buf    = nullptr;
             sql->GetData(10, &buf, &length);
             memcpy(&PChar->teleport.abysseaConflux, buf, (length > sizeof(PChar->teleport.abysseaConflux) ? sizeof(PChar->teleport.abysseaConflux) : length));
+
+            length = 0;
+            buf    = nullptr;
+            sql->GetData(11, &buf, &length);
+            memcpy(&PChar->teleport.waypoints, buf, (length > sizeof(PChar->teleport.waypoints) ? sizeof(PChar->teleport.waypoints) : length));
         }
 
         PChar->PMeritPoints = new CMeritPoints(PChar);
@@ -2728,6 +2734,7 @@ namespace charutils
      *                                                                       *
      ************************************************************************/
 
+    // TODO: This whole thing should eventually get a refactored to be less dependent on arbitrary ordering of modifier IDs and conditionals on skill ranges.
     void BuildingCharSkillsTable(CCharEntity* PChar)
     {
         MERIT_TYPE skillMerit[] = { MERIT_H2H,
@@ -2769,6 +2776,7 @@ namespace charutils
 
         uint8 meritIndex = 0;
 
+        // Iterate over skill IDs (offsetting by 79 to get modifier ID)
         for (int32 i = 1; i < 48; ++i)
         {
             // ignore unused skills
@@ -2782,8 +2790,8 @@ namespace charutils
             uint16 skillBonus = 0;
 
             // apply arts bonuses
-            if ((i >= 32 && i <= 35 && PChar->StatusEffectContainer->HasStatusEffect({ EFFECT_LIGHT_ARTS, EFFECT_ADDENDUM_WHITE })) ||
-                (i >= 35 && i <= 37 && PChar->StatusEffectContainer->HasStatusEffect({ EFFECT_DARK_ARTS, EFFECT_ADDENDUM_BLACK })))
+            if ((i >= SKILL_DIVINE_MAGIC && i <= SKILL_ENFEEBLING_MAGIC && PChar->StatusEffectContainer->HasStatusEffect({ EFFECT_LIGHT_ARTS, EFFECT_ADDENDUM_WHITE })) ||
+                (i >= SKILL_ENFEEBLING_MAGIC && i <= SKILL_DARK_MAGIC && PChar->StatusEffectContainer->HasStatusEffect({ EFFECT_DARK_ARTS, EFFECT_ADDENDUM_BLACK })))
             {
                 uint16 artsSkill    = battleutils::GetMaxSkill(SKILL_ENHANCING_MAGIC, JOB_RDM, PChar->GetMLevel());             // B+ skill
                 uint16 skillCapD    = battleutils::GetMaxSkill((SKILLTYPE)i, JOB_SCH, PChar->GetMLevel());                      // D skill cap
@@ -2841,15 +2849,7 @@ namespace charutils
                     skillBonus += PChar->getMod(Mod::DARK_ARTS_SKILL);
                 }
             }
-            else if (i == 44)
-            {
-                skillBonus += PChar->getMod(Mod::GEOMANCY);
-            }
-            else if (i == 45)
-            {
-                skillBonus += PChar->getMod(Mod::HANDBELL);
-            }
-            else if (i >= 22 && i <= 24)
+            else if (i >= SKILL_AUTOMATON_MELEE && i <= SKILL_AUTOMATON_MAGIC)
             {
                 if (PChar->PAutomaton)
                 {
@@ -2860,6 +2860,7 @@ namespace charutils
             skillBonus += PChar->PMeritPoints->GetMeritValue(skillMerit[meritIndex], PChar);
             meritIndex++;
 
+            // Add 79 to get the modifier ID
             skillBonus += PChar->getMod(static_cast<Mod>(i + 79));
 
             PChar->WorkingSkills.rank[i] = battleutils::GetSkillRank((SKILLTYPE)i, PChar->GetMJob());
@@ -4455,19 +4456,20 @@ namespace charutils
             if (zoneutils::GetCurrentRegion(Pzone) == REGION_TYPE::ABYSSEA)
             {
                 uint16 TextID = luautils::GetTextIDVariable(Pzone, "CRUOR_OBTAINED");
-                uint32 Total  = charutils::GetPoints(PChar, "cruor");
-                uint32 Cruor  = 0; // Need to work out how to do cruor chains, until then no cruor will drop unless this line is customized for non retail play.
+                // uint32 Total  = charutils::GetPoints(PChar, "cruor");
+                // uint32 Cruor  = 0; // Need to work out how to do cruor chains, until then no cruor will drop unless this line is customized for non retail play.
 
                 if (TextID == 0)
                 {
                     ShowWarning("Failed to fetch Cruor Message ID for zone: %i", Pzone);
                 }
 
-                if (Cruor >= 1)
-                {
-                    PChar->pushPacket(new CMessageSpecialPacket(PChar, TextID, Cruor, Total + Cruor, 0, 0));
-                    charutils::AddPoints(PChar, "cruor", Cruor);
-                }
+                // TODO: Implement this once formula for Cruor attainment is implemented
+                // if (Cruor >= 1)
+                // {
+                //     PChar->pushPacket(new CMessageSpecialPacket(PChar, TextID, Cruor, Total + Cruor, 0, 0));
+                //     charutils::AddPoints(PChar, "cruor", Cruor);
+                // }
             }
         }
 
@@ -5336,6 +5338,14 @@ namespace charutils
                 char buf[sizeof(PChar->teleport.abysseaConflux) * 2 + 1];
                 sql->EscapeStringLen(buf, (const char*)&PChar->teleport.abysseaConflux, sizeof(PChar->teleport.abysseaConflux));
                 const char* query = "UPDATE char_unlocks SET abyssea_conflux = '%s' WHERE charid = %u;";
+                sql->Query(query, buf, PChar->id);
+                return;
+            }
+            case TELEPORT_TYPE::WAYPOINT:
+            {
+                char buf[sizeof(PChar->teleport.waypoints) * 2 + 1];
+                sql->EscapeStringLen(buf, (const char*)&PChar->teleport.waypoints, sizeof(PChar->teleport.waypoints));
+                const char* query = "UPDATE char_unlocks SET waypoints = '%s' WHERE charid = %u;";
                 sql->Query(query, buf, PChar->id);
                 return;
             }

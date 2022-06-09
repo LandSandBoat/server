@@ -183,28 +183,27 @@ std::function<void(map_session_data_t* const, CCharEntity* const, CBasicPacket)>
 
 void PrintPacket(CBasicPacket data)
 {
-    char message[50];
-    memset(&message, 0, 50);
+    std::string message;
+    char buffer[5];
 
     for (size_t y = 0; y < data.getSize(); y++)
     {
-        // TODO: -Wno-restrict - undefined behavior to print and write src into dest
-        // TODO: -Wno-format-overflow - writing between 4 and 53 bytes into destination of 50
-        // TODO: FIXME
-        // cppcheck-suppress sprintfOverlappingData
-        snprintf(message, sizeof(message), "%s %02hhx", message, *((uint8*)data[(int)y]));
+        std::memset(buffer, 0, sizeof(buffer));                               // TODO: Replace these three lines with std::format when/if we move to C++ 20.
+        snprintf(buffer, sizeof(buffer), "%02hhx ", *((uint8*)data[(int)y])); //
+        message.append(buffer);                                               //
+
         if (((y + 1) % 16) == 0)
         {
-            message[48] = '\n';
-            ShowDebug(message);
-            memset(&message, 0, 50);
+            message += "\n";
+            ShowDebug(message.c_str());
+            message.clear();
         }
     }
 
-    if (strlen(message) > 0)
+    if (message.length() > 0)
     {
-        message[strlen(message)] = '\n';
-        ShowDebug(message);
+        message += "\n";
+        ShowDebug(message.c_str());
     }
 }
 
@@ -1261,13 +1260,13 @@ void SmallPacket0x028(map_session_data_t* const PSession, CCharEntity* const PCh
 
     if (PItem->isStorageSlip())
     {
-        int data = 0;
+        int slipData = 0;
         for (int i = 0; i < CItem::extra_size; i++)
         {
-            data += PItem->m_extra[i];
+            slipData += PItem->m_extra[i];
         }
 
-        if (data != 0)
+        if (slipData != 0)
         {
             PChar->pushPacket(new CMessageStandardPacket(MsgStd::CannotBeProcessed));
             return;
@@ -1433,6 +1432,13 @@ void SmallPacket0x032(map_session_data_t* const PSession, CCharEntity* const PCh
     if ((PTarget != nullptr) && (PTarget->id == charid))
     {
         ShowDebug("%s initiated trade request with %s", PChar->GetName(), PTarget->GetName());
+
+        // If the player is the same as the target, don't allow the trade
+        if (PChar->id == PTarget->id)
+        {
+            PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, 155));
+            return;
+        }
 
         // If PChar is invisible don't allow the trade, but you are able to initiate a trade TO an invisible player
         if (PChar->StatusEffectContainer->HasStatusEffectByFlag(EFFECTFLAG_INVISIBLE))

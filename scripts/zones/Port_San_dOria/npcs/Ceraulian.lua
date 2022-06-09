@@ -21,44 +21,44 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local Quotas_Status = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.CHASING_QUOTAS)
-    local Quotas_Progress = player:getCharVar("ChasingQuotas_Progress")
-    local Quotas_No = player:getCharVar("ChasingQuotas_No")
-    local Stalker_Status = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.KNIGHT_STALKER)
-    local Stalker_Progress = player:getCharVar("KnightStalker_Progress")
+    local quotasStatus    = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.CHASING_QUOTAS)
+    local quotasProgress  = player:getCharVar("ChasingQuotas_Progress")
+    local quotasNo        = player:getCharVar("ChasingQuotas_No")
+    local stalkerStatus   = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.KNIGHT_STALKER)
+    local stalkerProgress = player:getCharVar("KnightStalker_Progress")
 
     if (player:getMainLvl() >= xi.settings.ADVANCED_JOB_LEVEL and player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_HOLY_CREST) == QUEST_AVAILABLE) then
         player:startEvent(24)
 
     -- Chasing Quotas (DRG AF2)
-    elseif (Quotas_Status == QUEST_AVAILABLE and player:getMainJob() == xi.job.DRG and player:getMainLvl() >= xi.settings.AF1_QUEST_LEVEL and Quotas_No == 0) then
+    elseif (quotasStatus == QUEST_AVAILABLE and player:getMainJob() == xi.job.DRG and player:getMainLvl() >= xi.settings.AF1_QUEST_LEVEL and quotasNo == 0) then
         player:startEvent(18) -- Long version of quest start
-    elseif (Quotas_No == 1) then
+    elseif (quotasNo == 1) then
         player:startEvent(14) -- Short version for those that said no.
-    elseif (Quotas_Status == QUEST_ACCEPTED and Quotas_Progress == 0) then
+    elseif (quotasStatus == QUEST_ACCEPTED and quotasProgress == 0) then
         player:startEvent(13) -- Reminder to bring Gold Hairpin
-    elseif (Quotas_Progress == 1) then
+    elseif (quotasProgress == 1) then
         if (player:getCharVar("ChasingQuotas_date") > os.time()) then
             player:startEvent(3) -- Fluff cutscene because you haven't waited a day
         else
             player:startEvent(7) -- Boss got mugged
         end
-    elseif (Quotas_Progress == 2) then
+    elseif (quotasProgress == 2) then
         player:startEvent(8) -- Go investigate
-    elseif (Quotas_Progress == 3) then
+    elseif (quotasProgress == 3) then
         player:startEvent(6) -- Earring is a clue, non-required CS
-    elseif (Quotas_Progress == 4 or Quotas_Progress == 5) then
+    elseif (quotasProgress == 4 or quotasProgress == 5) then
         player:startEvent(9) -- Fluff text until Ceraulian is necessary again
-    elseif (Quotas_Progress == 6) then
+    elseif (quotasProgress == 6) then
         player:startEvent(15) -- End of AF2
 
-    elseif (Quotas_Status == QUEST_COMPLETED and Stalker_Status == QUEST_AVAILABLE) then
+    elseif (quotasStatus == QUEST_COMPLETED and stalkerStatus == QUEST_AVAILABLE) then
         player:startEvent(16) -- Fluff text until DRG AF3
 
     -- Knight Stalker (DRG AF3)
-    elseif (Stalker_Status == QUEST_ACCEPTED and Stalker_Progress == 0) then
+    elseif (stalkerStatus == QUEST_ACCEPTED and stalkerProgress == 0) then
         player:startEvent(19) -- Fetch the last Dragoon's helmet
-    elseif (Stalker_Progress == 1) then
+    elseif (stalkerProgress == 1) then
         if (player:hasKeyItem(xi.ki.CHALLENGE_TO_THE_ROYAL_KNIGHTS) == false) then
             player:startEvent(23) -- Reminder to get helmet
         else
@@ -66,20 +66,18 @@ entity.onTrigger = function(player, npc)
         end
     elseif (player:getCharVar("KnightStalker_Option1") == 1) then
         player:startEvent(22)
-    elseif (Stalker_Status == QUEST_COMPLETED) then
+    elseif (stalkerStatus == QUEST_COMPLETED) then
         player:startEvent(21)
 
     else
         player:startEvent(587)
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
     if (csid == 24) then
         player:setCharVar("TheHolyCrest_Event", 1)
 

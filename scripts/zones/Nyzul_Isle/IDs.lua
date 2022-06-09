@@ -69,9 +69,11 @@ zones[xi.zone.NYZUL_ISLE] =
         SHALL_KNOW_OBLIVION        = 7548, -- I am...Alexander... The fearful...shall be embraced... The bold...shall know oblivion...
     },
 
-    mob = {
+    mob =
+    {
         -- Path of Darkness
-        [58] = {
+        [58] =
+        {
             AMNAF_BLU          = 17093132,
             AMNAF_PSYCHEFLAYER = 17093133,
             IMPERIAL_GEAR1     = 17093134,
@@ -80,14 +82,17 @@ zones[xi.zone.NYZUL_ISLE] =
             IMPERIAL_GEAR4     = 17093137,
             NAJA               = 17093142,
         },
-        [59] = {
-            RAZFAHD = 17093143,
+
+        [59] =
+        {
+            RAZFAHD   = 17093143,
             ALEXANDER = 17093144,
-            RAUBAHN = 17093145,
+            RAUBAHN   = 17093145,
         }
     },
 
-    npc = {
+    npc =
+    {
         _257       = 17093359,
         _259       = 17093361,
         QM1        = 17093472,

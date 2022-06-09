@@ -22,7 +22,7 @@ entity.onEventFinish = function(player, csid, option, door)
         door:setAnimation(8)
         for i, v in pairs(ID.npc[1][3]) do
             local npc = GetNPCByID(v, instance)
-            npc:untargetable(true)
+            npc:setUntargetable(true)
         end
     end
 end

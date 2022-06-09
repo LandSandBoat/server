@@ -46,6 +46,7 @@ zones[xi.zone.SAUROMUGUE_CHAMPAIGN] =
         VOIDWALKER_OBTAIN_KI     = 11006, -- Obtained key item: <keyitem>!
         COMMON_SENSE_SURVIVAL    = 12513, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
         DEADLY_DODO_PH     =
@@ -53,21 +54,26 @@ zones[xi.zone.SAUROMUGUE_CHAMPAIGN] =
             [17268849] = 17268851, -- 238.000 40.000 332.000
             [17268850] = 17268851, -- 369.564 39.658 345.197
         },
+
         BLIGHTING_BRAND_PH =
         {
             [17269013] = 17269016, -- 240.725 1.853 223.185
         },
+
         BASHE_PH =
         {
             [17268782] = 17268788, -- 537.188 6.167 -11.067
         },
+
         OLD_SABERTOOTH     = 17268808,
         ROC                = 17269106,
         CLIMBPIX_HIGHRISE  = 17269107,
         DRIBBLIX_GREASEMAW = 17269114,
-        VOIDWALKER        =
+
+        VOIDWALKER =
         {
-            [xi.keyItem.CLEAR_ABYSSITE] = {
+            [xi.keyItem.CLEAR_ABYSSITE] =
+            {
                 17269126,  -- Lacus
                 17269125,  -- Thunor
                 17269124, -- Beorht
@@ -77,18 +83,25 @@ zones[xi.zone.SAUROMUGUE_CHAMPAIGN] =
                 17269120, -- Deorc
                 17269119, -- Aither
             },
-            [xi.keyItem.COLORFUL_ABYSSITE] = {
+
+            [xi.keyItem.COLORFUL_ABYSSITE] =
+            {
                 17269118, -- Skuld
-                17269117  -- Urd
+                17269117, -- Urd
             },
-            [xi.keyItem.YELLOW_ABYSSITE] = {
-                17269116  -- Verthandi
+
+            [xi.keyItem.YELLOW_ABYSSITE] =
+            {
+                17269116, -- Verthandi
             },
-            [xi.keyItem.BLACK_ABYSSITE] = {
-                17269115  -- Yilbegan
+
+            [xi.keyItem.BLACK_ABYSSITE] =
+            {
+                17269115, -- Yilbegan
             }
         }
     },
+
     npc =
     {
         CASKET_BASE = 17269190,

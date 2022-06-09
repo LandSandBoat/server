@@ -29,9 +29,9 @@ entity.onTrigger = function(player, npc)
     elseif (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_DARKSMITH) == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.BASTOK) >= 3) then
         player:startEvent(565)
     else
-        local Message = math.random(0, 1)
+        local randMessage = math.random(0, 1)
 
-        if (Message == 1) then
+        if randMessage == 1 then
             player:startEvent(560)
         else
             player:startEvent(561)
@@ -46,13 +46,13 @@ entity.onEventFinish = function(player, csid, option)
     if (csid == 565) then
         player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_DARKSMITH)
     elseif (csid == 566) then
-        local TheDarksmith = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_DARKSMITH)
+        local theDarksmith = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_DARKSMITH)
 
         player:tradeComplete()
         player:addGil(xi.settings.GIL_RATE * 8000)
         player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 8000)
 
-        if (TheDarksmith == QUEST_ACCEPTED) then
+        if (theDarksmith == QUEST_ACCEPTED) then
             player:addFame(xi.quest.fame_area.BASTOK, 30)
             player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_DARKSMITH)
         else

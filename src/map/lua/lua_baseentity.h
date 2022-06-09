@@ -193,7 +193,7 @@ public:
     uint32 getTeleport(uint8 type, sol::object const& abysseaRegionObj);          // Get unlocked teleport means
     auto   getTeleportTable(uint8 type) -> sol::table;
     bool   hasTeleport(uint8 tType, uint8 bit, sol::object const& arg2); // Has access to specific teleport
-    void   setTeleportMenu(uint16 type, sol::table const& favs);         // Set favorites or menu layout preferences for homepoints or survival guides
+    void   setTeleportMenu(uint16 type, sol::object const& teleportObj); // Set favorites or menu layout preferences for homepoints or survival guides
     auto   getTeleportMenu(uint8 type) -> sol::table;                    // Get favorites and menu layout preferences
     void   setHomePoint();                                               // Sets character's homepoint
 
@@ -534,7 +534,7 @@ public:
     void countdown(sol::object const& secondsObj,
                    sol::object const& bar1NameObj, sol::object const& bar1ValObj,
                    sol::object const& bar2NameObj, sol::object const& bar2ValObj);
-    void enableEntities(std::vector<uint32> const& data);
+    void enableEntities(sol::object const& obj);
     void independentAnimation(CLuaBaseEntity* PTarget, uint16 animId, uint8 mode);
 
     void engage(uint16 requestedTarget);
@@ -560,6 +560,8 @@ public:
     bool checkImbuedItems();
 
     bool isDualWielding(); // Checks if the battle entity is dual wielding
+
+    float checkLiementAbsorb(uint16 damageType); // return 1.0 if did not absorb, return >= -1.0 if did absorb
 
     // Enmity
     int32 getCE(CLuaBaseEntity const* target);                    // gets current CE the mob has towards the player
@@ -725,7 +727,8 @@ public:
 
     // Mob Entity-Specific
     void   setMobLevel(uint8 level);
-    uint8  getSystem();
+    uint8  getSystem(); // TODO: rename this to getEcosystem()
+    uint16 getSuperFamily();
     uint16 getFamily();
     bool   isMobType(uint8 mobType); // True if mob is of type passed to function
     bool   isUndead();               // True if mob is undead
@@ -752,7 +755,8 @@ public:
     void setAggressive(bool aggressive);
     void setTrueDetection(bool truedetection);
     void setUnkillable(bool unkillable);
-    void untargetable(bool untargetable);
+    void setUntargetable(bool untargetable);
+    bool getUntargetable();
 
     void setDelay(uint16 delay);   // sets a mobs weapon delay
     void setDamage(uint16 damage); // sets a mobs weapon damage

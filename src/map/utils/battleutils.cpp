@@ -670,9 +670,13 @@ namespace battleutils
     *                                                                       *
     ************************************************************************/
 
-    uint16 CalculateSpikeDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, actionTarget_t* Action, uint16 damageTaken)
+    int32 CalculateSpikeDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, actionTarget_t* Action, uint16 damageTaken)
     {
-        uint16 damage = Action->spikesParam;
+
+        ELEMENT spikeElement = (ELEMENT)((uint8)GetSpikesDamageType(Action->spikesEffect) - (uint8)DAMAGE_TYPE::ELEMENTAL);
+
+        int32 damage = 0;
+
         // int16 intStat = PDefender->INT();
         // int16 mattStat = PDefender->getMod(Mod::MATT);
 
@@ -686,13 +690,20 @@ namespace battleutils
                 break;
         }
 
+        damage = MagicDmgTaken(PAttacker, damage, spikeElement); // apply MDT/MDT2/DT, liement to whoever is taking damage
+
+        if (damage < 0) // apply heal message
+        {
+            Action->spikesMessage = MSGBASIC_SPIKES_EFFECT_HEAL;
+        }
+
         return damage;
     }
 
     bool HandleSpikesDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, actionTarget_t* Action, int32 damage)
     {
         Action->spikesEffect  = (SUBEFFECT)PDefender->getMod(Mod::SPIKES);
-        Action->spikesMessage = 44;
+        Action->spikesMessage = MSGBASIC_SPIKES_EFFECT_DMG;
         Action->spikesParam   = std::max<int16>(PDefender->getMod(Mod::SPIKES_DMG), 0);
 
         // Handle Retaliation
@@ -752,21 +763,29 @@ namespace battleutils
             }
 
             // calculate damage
-            uint16 spikesDamage = CalculateSpikeDamage(PAttacker, PDefender, Action, (uint16)(abs(damage)));
+            int32 spikesDamage = CalculateSpikeDamage(PAttacker, PDefender, Action, (uint16)(abs(damage)));
             if (spikesDamage > 0)
             {
                 spikesDamage = std::max(spikesDamage - PAttacker->getMod(Mod::PHALANX), 0);
                 spikesDamage = HandleOneForAll(PAttacker, spikesDamage);
                 spikesDamage = HandleStoneskin(PAttacker, spikesDamage);
             }
-            Action->spikesParam = spikesDamage;
+
+            if (spikesDamage < 0) // because spikes damage in action packet is uint16, we have to change the healed amount to a positive number and cast to uint16
+            {
+                Action->spikesParam = static_cast<uint16>(std::clamp(spikesDamage * -1, 0, PAttacker->GetMaxHP() - PAttacker->health.hp));
+            }
+            else
+            {
+                Action->spikesParam = static_cast<uint16>(spikesDamage);
+            }
 
             switch (static_cast<SPIKES>(Action->spikesEffect))
             {
                 case SPIKE_BLAZE:
                 case SPIKE_ICE:
                 case SPIKE_SHOCK:
-                    PAttacker->takeDamage(Action->spikesParam, PDefender, ATTACK_TYPE::MAGICAL, GetSpikesDamageType(Action->spikesEffect));
+                    PAttacker->takeDamage(spikesDamage, PDefender, ATTACK_TYPE::MAGICAL, GetSpikesDamageType(Action->spikesEffect));
                     break;
 
                 case SPIKE_DREAD:
@@ -778,46 +797,50 @@ namespace battleutils
                     }
                     else
                     {
-                        Action->addEffectMessage = 132;
-
                         if (PDefender->isAlive())
                         {
                             auto* PEffect = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_DREAD_SPIKES);
                             if (PEffect)
                             {
+                                // see https://www.bg-wiki.com/ffxi/Dread_Spikes
+
                                 // Subpower is the remaining damage that can be drained. When it reaches 0 the effect ends
                                 int remainingDrain = PEffect->GetSubPower();
-                                if (remainingDrain - Action->spikesParam <= 0)
+                                if (remainingDrain - abs(damage) <= 0) // power absorbed from Dread Spikes takes pre-MDT etc values
                                 {
                                     PDefender->StatusEffectContainer->DelStatusEffect(EFFECT_DREAD_SPIKES);
                                 }
                                 else
                                 {
-                                    PEffect->SetSubPower(remainingDrain - Action->spikesParam);
+                                    PEffect->SetSubPower(remainingDrain - abs(damage));
                                 }
                             }
-                            PDefender->addHP(Action->spikesParam);
+                            if (spikesDamage > 0) // do not add HP if spikes damage was absorbed.
+                            {
+                                Action->spikesMessage  = MSGBASIC_SPIKES_EFFECT_HP_DRAIN;
+                                PDefender->addHP(spikesDamage);
+                            }
                         }
-                        PAttacker->takeDamage(Action->spikesParam, PDefender, ATTACK_TYPE::MAGICAL, DAMAGE_TYPE::DARK);
+                        PAttacker->takeDamage(spikesDamage, PDefender, ATTACK_TYPE::MAGICAL, DAMAGE_TYPE::DARK);
                     }
                     break;
 
                 case SPIKE_REPRISAL:
                     if (Action->reaction == REACTION::BLOCK)
                     {
-                        PAttacker->takeDamage(Action->spikesParam, PDefender, ATTACK_TYPE::MAGICAL, DAMAGE_TYPE::LIGHT);
+                        PAttacker->takeDamage(spikesDamage, PDefender, ATTACK_TYPE::MAGICAL, DAMAGE_TYPE::LIGHT);
                         auto* PEffect = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_REPRISAL);
                         if (PEffect)
                         {
                             // Subpower is the remaining damage that can be reflected. When it reaches 0 the effect ends
                             int remainingReflect = PEffect->GetSubPower();
-                            if (remainingReflect - Action->spikesParam <= 0)
+                            if (remainingReflect - abs(damage) <= 0) // abs to account for absorbed reprisal
                             {
                                 PDefender->StatusEffectContainer->DelStatusEffect(EFFECT_REPRISAL);
                             }
                             else
                             {
-                                PEffect->SetSubPower(remainingReflect - Action->spikesParam);
+                                PEffect->SetSubPower(remainingReflect - abs(damage));
                             }
                         }
                     }
@@ -891,22 +914,30 @@ namespace battleutils
     bool HandleParrySpikesDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, actionTarget_t* Action, int32 damage)
     {
         Action->spikesEffect  = (SUBEFFECT)PDefender->getMod(Mod::PARRY_SPIKES);
-        Action->spikesMessage = 44;
+        Action->spikesMessage = MSGBASIC_SPIKES_EFFECT_DMG;
         Action->spikesParam   = std::max<int16>(PDefender->getMod(Mod::PARRY_SPIKES_DMG), 0);
 
         if (Action->spikesEffect > 0)
         {
             // calculate damage
-            uint16 spikesDamage = CalculateSpikeDamage(PAttacker, PDefender, Action, (uint16)(abs(damage)));
+            int32 spikesDamage = CalculateSpikeDamage(PAttacker, PDefender, Action, (uint16)(abs(damage)));
             if (spikesDamage > 0)
             {
                 spikesDamage = std::max(spikesDamage - PAttacker->getMod(Mod::PHALANX), 0);
                 spikesDamage = HandleOneForAll(PAttacker, spikesDamage);
                 spikesDamage = HandleStoneskin(PAttacker, spikesDamage);
             }
-            Action->spikesParam = spikesDamage;
 
-            PAttacker->takeDamage(Action->spikesParam, PDefender, ATTACK_TYPE::MAGICAL, GetSpikesDamageType(Action->spikesEffect));
+            if (spikesDamage < 0) // fit healed spikes into uint16
+            {
+                Action->spikesParam = static_cast<uint16>(std::clamp(spikesDamage * -1, 0, PAttacker->GetMaxHP() - PAttacker->health.hp));
+            }
+            else
+            {
+                Action->spikesParam = static_cast<uint16>(spikesDamage);
+            }
+
+            PAttacker->takeDamage(spikesDamage, PDefender, ATTACK_TYPE::MAGICAL, GetSpikesDamageType(Action->spikesEffect));
 
             battleutils::DirtyExp(PAttacker, PDefender);
             if (PAttacker->isDead())
@@ -927,7 +958,7 @@ namespace battleutils
             // spikes landed
             if (spikesType == SUBEFFECT_CURSE_SPIKES)
             {
-                Action->spikesMessage = 0; // log says nothing?
+                Action->spikesMessage = 0; // log says nothing? // TODO: find "Additional Effect: Curse" message
                 Action->spikesParam   = EFFECT_CURSE;
             }
             else
@@ -935,16 +966,24 @@ namespace battleutils
                 auto ratio          = std::clamp<uint8>(damage / 4, 1, 255);
 
                 // calculate damage
-                uint16 spikesDamage = CalculateSpikeDamage(PAttacker, PDefender, Action, damage - xirand::GetRandomNumber<uint16>(ratio) + xirand::GetRandomNumber<uint16>(ratio));
+                int32 spikesDamage = CalculateSpikeDamage(PAttacker, PDefender, Action, damage - xirand::GetRandomNumber<uint16>(ratio) + xirand::GetRandomNumber<uint16>(ratio));
                 if (spikesDamage > 0)
                 {
                     spikesDamage = std::max(spikesDamage - PAttacker->getMod(Mod::PHALANX), 0);
                     spikesDamage = HandleOneForAll(PAttacker, spikesDamage);
                     spikesDamage = HandleStoneskin(PAttacker, spikesDamage);
                 }
-                Action->spikesParam = spikesDamage;
 
-                PAttacker->takeDamage(Action->spikesParam, PDefender, ATTACK_TYPE::MAGICAL, GetSpikesDamageType(spikesType));
+                if (spikesDamage < 0) // fit healed spikes into uint16
+                {
+                    Action->spikesParam = static_cast<uint16>(std::clamp(spikesDamage * -1, 0, PAttacker->GetMaxHP() - PAttacker->health.hp));
+                }
+                else
+                {
+                    Action->spikesParam = static_cast<uint16>(spikesDamage);
+                }
+
+                PAttacker->takeDamage(spikesDamage, PDefender, ATTACK_TYPE::MAGICAL, GetSpikesDamageType(spikesType));
             }
 
             // Temp till moved to script.
@@ -5213,19 +5252,30 @@ namespace battleutils
                           Mod::LTNG_ABSORB, Mod::WATER_ABSORB, Mod::LIGHT_ABSORB, Mod::DARK_ABSORB };
         Mod nullarray[8] = { Mod::FIRE_NULL, Mod::ICE_NULL, Mod::WIND_NULL, Mod::EARTH_NULL, Mod::LTNG_NULL, Mod::WATER_NULL, Mod::LIGHT_NULL, Mod::DARK_NULL };
 
+
+        DAMAGE_TYPE damageType = (DAMAGE_TYPE)((uint8)DAMAGE_TYPE::ELEMENTAL + (uint8)element);
+
+        // Liement here
+        float liement = CheckLiementAbsorb(PDefender, damageType);
+        if (liement < 0) // Liement absorbed, short circuit early before MDT/DT
+        {
+            return (int32)(damage * liement);
+        }
+
         float resist = 1.f + PDefender->getMod(Mod::UDMGMAGIC) / 10000.f;
         resist       = std::max(resist, 0.f);
         damage       = (int32)(damage * resist);
 
         resist = 1.f + PDefender->getMod(Mod::DMGMAGIC) / 10000.f + PDefender->getMod(Mod::DMG) / 10000.f;
         resist = std::max(resist, 0.5f);
+
         resist += PDefender->getMod(Mod::DMGMAGIC_II) / 10000.f;
         resist = std::max(resist, 0.125f); // Total cap with MDT-% II included is 87.5%
         damage = (int32)(damage * resist);
 
         if (damage > 0 && PDefender->objtype == TYPE_PET && PDefender->getMod(Mod::AUTO_STEAM_JACKET) > 1)
         {
-            damage = HandleSteamJacket(PDefender, damage, DAMAGE_TYPE::ELEMENTAL);
+            damage = HandleSteamJacket(PDefender, damage, damageType);
         }
 
         if (xirand::GetRandomNumber(100) < PDefender->getMod(Mod::ABSORB_DMG_CHANCE) ||
@@ -5831,7 +5881,10 @@ namespace battleutils
         position_t  nearEntity = nearPosition(pos, offset, (float)0);
 
         // Snap nearEntity to a guaranteed valid position
-        PMob->loc.zone->m_navMesh->snapToValidPosition(nearEntity);
+        if (PMob->loc.zone->m_navMesh)
+        {
+            PMob->loc.zone->m_navMesh->snapToValidPosition(nearEntity);
+        }
 
         // Move the target a little higher, just in case
         nearEntity.y -= 1.0f;
@@ -6914,4 +6967,41 @@ namespace battleutils
             PDefender->addMP(absorbedMP);
         }
     }
+
+    float CheckLiementAbsorb(CBattleEntity* PBattleEntity, DAMAGE_TYPE DamageType)
+    {
+        if (PBattleEntity)
+        {
+            auto* liementEffect = PBattleEntity->StatusEffectContainer->GetStatusEffect(EFFECT_LIEMENT, 0);
+
+            if (liementEffect)
+            {
+                uint16 absorbPower    = liementEffect->GetPower();
+                uint16 absorbTypeBits = liementEffect->GetSubPower();
+                uint16 numBits        = sizeof(absorbTypeBits) * 8;
+
+                uint8 runeAbsorbCount = 0;
+
+                for (int i = 0; i < numBits/4; i++) // unpacking is limited to the size of the return value of GetPower/GetSubPower. If this ever expands more Runes can be packed.
+                {
+                    DAMAGE_TYPE packedDamageType = (DAMAGE_TYPE) ( (absorbTypeBits >> i * 4) & 0xF ); //unpack damage type 4 bits at a time
+
+                    if (packedDamageType == DamageType)
+                    {
+                        runeAbsorbCount++;
+                    }
+                }
+
+                if (runeAbsorbCount > 0)
+                {
+                    PBattleEntity->StatusEffectContainer->DelStatusEffectSilent(EFFECT_LIEMENT); // Liement absorbs once and disappears.
+                    float absorbMultiplier = (75 + runeAbsorbCount * absorbPower) / 100.0;
+
+                    return absorbMultiplier * -1;
+                }
+            }
+        }
+        return 1.0;
+    }
+
 }; // namespace battleutils

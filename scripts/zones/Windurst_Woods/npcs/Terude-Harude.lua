@@ -15,14 +15,14 @@ end
 
 entity.onTrigger = function(player, npc)
     local guildMember = xi.crafting.isGuildMember(player, 3)
-    local SkillLevel = player:getSkillLevel(xi.skill.CLOTHCRAFT)
-    local Cost = xi.crafting.getAdvImageSupportCost(player, xi.skill.CLOTHCRAFT)
+    local skillLevel = player:getSkillLevel(xi.skill.CLOTHCRAFT)
+    local cost = xi.crafting.getAdvImageSupportCost(player, xi.skill.CLOTHCRAFT)
 
     if guildMember == 1 then
         if not player:hasStatusEffect(xi.effect.CLOTHCRAFT_IMAGERY) then
-            player:startEvent(10013, Cost, SkillLevel, 0, 511, player:getGil(), 0, 4095, 0)
+            player:startEvent(10013, cost, skillLevel, 0, 511, player:getGil(), 0, 4095, 0)
         else
-            player:startEvent(10013, Cost, SkillLevel, 0, 511, player:getGil(), 28754, 0, 0)
+            player:startEvent(10013, cost, skillLevel, 0, 511, player:getGil(), 28754, 0, 0)
         end
     else
         player:startEvent(10013) -- Standard Dialogue
@@ -33,9 +33,10 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    local Cost = xi.crafting.getAdvImageSupportCost(player, xi.skill.CLOTHCRAFT)
+    local cost = xi.crafting.getAdvImageSupportCost(player, xi.skill.CLOTHCRAFT)
+
     if csid == 10013 and option == 1 then
-        player:delGil(Cost)
+        player:delGil(cost)
         player:messageSpecial(ID.text.IMAGE_SUPPORT, 0, 4, 0)
         player:addStatusEffect(xi.effect.CLOTHCRAFT_IMAGERY, 3, 0, 480)
     end

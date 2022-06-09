@@ -64,6 +64,10 @@ using server_clock = std::chrono::system_clock;
 using time_point   = server_clock::time_point;
 using duration     = server_clock::duration;
 
+using hires_clock      = std::chrono::high_resolution_clock;
+using hires_time_point = server_clock::time_point;
+using hires_duration   = server_clock::duration;
+
 #include <queue>
 
 template <class T>

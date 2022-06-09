@@ -9,7 +9,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:startEvent(534310, 0, 0, 0, 0, 0, 0, 0, VanadielTime())
+    player:startEvent(10022, 0, 0, 0, 0, 0, 0, 0, VanadielTime())
 end
 
 entity.onEventUpdate = function(player, csid, option)

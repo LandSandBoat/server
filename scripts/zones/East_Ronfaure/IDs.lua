@@ -46,6 +46,7 @@ zones[xi.zone.EAST_RONFAURE] =
         VOIDWALKER_BREAK_KI      = 11064, -- The <keyitem> shatters into tiny fragments.
         VOIDWALKER_OBTAIN_KI     = 11065, -- Obtained key item: <keyitem>!
     },
+
     mob =
     {
         BIGMOUTH_BILLY_PH =
@@ -54,7 +55,8 @@ zones[xi.zone.EAST_RONFAURE] =
             [17191142] = 17191196, -- 403.967 -36.822 -16.285
             [17191143] = 17191196, -- 413.229 -38.467 7.047
         },
-        SWAMFISK_PH       =
+
+        SWAMFISK_PH =
         {
             [17191289] = 17191189, -- 461.268 -6.674 -391.342
             [17191290] = 17191189, -- 459.345 -6.686 -363.842
@@ -64,9 +66,11 @@ zones[xi.zone.EAST_RONFAURE] =
             [17191187] = 17191189, -- 379.120 -27.898 -46.436
             [17191019] = 17191189, -- 373.619 -37.093 8.811
         },
-        VOIDWALKER        =
+
+        VOIDWALKER =
         {
-            [xi.keyItem.CLEAR_ABYSSITE] = {
+            [xi.keyItem.CLEAR_ABYSSITE] =
+            {
                 17191334, -- Sunderclaw
                 17191333, -- Sunderclaw
                 17191332, -- Sunderclaw
@@ -76,18 +80,25 @@ zones[xi.zone.EAST_RONFAURE] =
                 17191328,  -- Quagmire Pugil
                 17191327,  -- Quagmire Pugil
             },
-            [xi.keyItem.COLORFUL_ABYSSITE] = {
+
+            [xi.keyItem.COLORFUL_ABYSSITE] =
+            {
                 17191326, -- Capricornus
                 17191325  -- Yacumama
             },
-            [xi.keyItem.BLUE_ABYSSITE] = {
+
+            [xi.keyItem.BLUE_ABYSSITE] =
+            {
                 17191324  -- Krabkatoa
             },
-            [xi.keyItem.BLACK_ABYSSITE] = {
+
+            [xi.keyItem.BLACK_ABYSSITE] =
+            {
                 17191323  -- Yilbegan
             }
         }
     },
+
     npc =
     {
         CASKET_BASE = 17191482,

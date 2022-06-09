@@ -66,6 +66,11 @@ void CLuaZone::setLocalVar(const char* key, uint32 val)
     m_pLuaZone->SetLocalVar(key, val);
 }
 
+void CLuaZone::resetLocalVars()
+{
+    m_pLuaZone->ResetLocalVars();
+}
+
 /************************************************************************
  *                                                                       *
  * Registering the active area in the zone                               *
@@ -261,6 +266,18 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
     }
     else if (auto* PMob = dynamic_cast<CMobEntity*>(PEntity))
     {
+        auto mixins = table["mixins"].get_or<sol::table>(sol::lua_nil);
+        if (mixins.valid())
+        {
+            // Use the global function "applyMixins"
+            auto result = lua["applyMixins"](CLuaBaseEntity(PMob), mixins);
+            if (!result.valid())
+            {
+                sol::error err = result;
+                ShowError("applyMixins: %s: %s", PMob->name.c_str(), err.what());
+            }
+        }
+
         luautils::OnEntityLoad(PMob);
 
         luautils::OnMobInitialize(PMob);
@@ -397,6 +414,7 @@ void CLuaZone::Register()
 
     SOL_REGISTER("getLocalVar", CLuaZone::getLocalVar);
     SOL_REGISTER("setLocalVar", CLuaZone::setLocalVar);
+    SOL_REGISTER("resetLocalVars", CLuaZone::resetLocalVars);
 
     SOL_REGISTER("registerRegion", CLuaZone::registerRegion);
     SOL_REGISTER("levelRestriction", CLuaZone::levelRestriction);

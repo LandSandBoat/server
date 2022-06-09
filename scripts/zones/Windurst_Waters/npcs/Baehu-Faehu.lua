@@ -14,8 +14,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local RegionOwner = GetRegionOwner(xi.region.SARUTABARUTA)
-    if (RegionOwner ~= xi.nation.WINDURST) then
+    local regionOwner = GetRegionOwner(xi.region.SARUTABARUTA)
+    if regionOwner ~= xi.nation.WINDURST then
         player:showText(npc, ID.text.BAEHUFAEHU_CLOSED_DIALOG)
     else
         player:showText(npc, ID.text.BAEHUFAEHU_OPEN_DIALOG)
