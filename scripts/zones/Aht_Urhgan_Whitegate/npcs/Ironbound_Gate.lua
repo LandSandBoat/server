@@ -8,10 +8,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local X = player:getXPos()
-    local Z = player:getZPos()
+    local xPos = player:getXPos()
+    local zPos = player:getZPos()
 
-    if (X > -43 and X < -37) and (Z < -53 and Z > -59) then
+    if (xPos > -43 and xPos < -37) and (zPos < -53 and zPos > -59) then
         player:startEvent(131) -- To Waj. Woodlands
     else
         player:startEvent(130) -- To B. Thickets

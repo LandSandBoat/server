@@ -43,8 +43,8 @@ entity.onTrigger = function(player, npc)
     local guildMember       = xi.crafting.isGuildMember(player, 1)
     local rankCap           = xi.crafting.getCraftSkillCap(player, xi.skill.ALCHEMY)
     local expertQuestStatus = 0
-    local Rank              = player:getSkillRank(xi.skill.ALCHEMY)
-    local realSkill         = (craftSkill - Rank) / 32
+    local rank              = player:getSkillRank(xi.skill.ALCHEMY)
+    local realSkill         = (craftSkill - rank) / 32
     local canRankUp         = rankCap - realSkill -- used to make sure rank up isn't overridden by ASA mission
 
     if guildMember == 1 then

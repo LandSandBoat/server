@@ -12,7 +12,8 @@ require("scripts/globals/msg")
 -----------------------------------
 local ability_object = {}
 
-local idStrengths = {
+local idStrengths =
+{
     [18731] = 1, -- Automaton Oil
     [18732] = 2, -- Automaton Oil + 1
     [18733] = 3, -- Automaton Oil + 2

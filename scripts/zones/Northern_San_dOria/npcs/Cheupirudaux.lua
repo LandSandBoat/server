@@ -42,8 +42,8 @@ entity.onTrigger = function(player, npc)
     local guildMember       = xi.crafting.isGuildMember(player, 9)
     local rankCap           = xi.crafting.getCraftSkillCap(player, xi.skill.WOODWORKING)
     local expertQuestStatus = 0
-    local Rank              = player:getSkillRank(xi.skill.WOODWORKING)
-    local realSkill         = (craftSkill - Rank) / 32
+    local rank              = player:getSkillRank(xi.skill.WOODWORKING)
+    local realSkill         = (craftSkill - rank) / 32
 
     if guildMember == 1 then
         guildMember = 150995375

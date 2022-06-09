@@ -135,7 +135,8 @@ end
 -----------------------------------
 
 -- Schedule for Timed Records.
-local timedSchedule = {
+local timedSchedule =
+{
 -- 4-hour timeslots (6 per day) all days/times are in JST
 --    00-04  04-08  08-12  12-16  16-20  20-00
     {  4021,  4010,  4016,  4012,  4018,  4013}, -- Sunday
@@ -154,7 +155,8 @@ end
 dofile("scripts/globals/roe_records.lua")
 local records = getRoeRecords(triggers)
 
-local defaults = {
+local defaults =
+{
     check = masterCheck,        -- Check function should return true/false
     increment = 1,              -- Amount to increment per successful check
     notify = 1,                 -- Progress notifications shown every X increases
@@ -189,7 +191,8 @@ RoeParseRecords(records)
     Example of usage + reward table (all params are optional):
 
     completeRecord(player, record#)
-    reward = {
+    reward =
+    {
         item = { {640,2}, 641 },          -- see npcUtil.giveItem for formats (Only given on first completion)
         keyItem = xi.ki.ZERUHN_REPORT,   -- see npcUtil.giveKeyItem for formats
         sparks = 500,

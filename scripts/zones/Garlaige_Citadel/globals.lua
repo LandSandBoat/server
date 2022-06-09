@@ -5,8 +5,8 @@
 local ID = require("scripts/zones/Garlaige_Citadel/IDs")
 -----------------------------------
 
-local GARLAIGE_CITADEL =
+local garlaigeGlobal =
 {
 }
 
-return GARLAIGE_CITADEL
+return garlaigeGlobal

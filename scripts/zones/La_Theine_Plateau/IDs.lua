@@ -59,18 +59,21 @@ zones[xi.zone.LA_THEINE_PLATEAU] =
         VOIDWALKER_OBTAIN_KI         = 11318, -- Obtained key item: <keyitem>!
         COMMON_SENSE_SURVIVAL        = 12345, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
         TUMBLING_TRUFFLE_PH =
         {
             [17195256] = 17195259, -- 450.472 70.657 238.237
         },
+
         LUMBERING_LAMBERT_PH =
         {
             [17195143] = 17195317, -- -372 -16 -6
             [17195316] = 17195317, -- -117 -1 -136
             [17195317] = 17195318, -- Lumbering can't spawn if Bloodtear is up
         },
+
         BLOODTEAR_PH =
         {
             [17195143] = 17195318, -- -372 -16 -6
@@ -78,10 +81,13 @@ zones[xi.zone.LA_THEINE_PLATEAU] =
             [17195317] = 17195318, -- -216 -8 -107
             [17195318] = 17195317, -- Bloodtear can't spawn if Lumbering is up
         },
-        NIHNIKNOOVI    = 17195475,
-        VOIDWALKER  =
+
+        NIHNIKNOOVI = 17195475,
+
+        VOIDWALKER =
         {
-            [xi.keyItem.CLEAR_ABYSSITE] = {
+            [xi.keyItem.CLEAR_ABYSSITE] =
+            {
                 17195493, -- Prickly Sheep
                 17195492, -- Prickly Sheep
                 17195491, -- Prickly Sheep
@@ -91,18 +97,25 @@ zones[xi.zone.LA_THEINE_PLATEAU] =
                 17195487,  -- Void Hare
                 17195486,  -- Void Hare
             },
-            [xi.keyItem.COLORFUL_ABYSSITE] = {
+
+            [xi.keyItem.COLORFUL_ABYSSITE] =
+            {
                 17195485,  -- Chesma
                 17195484, -- Tammuz
             },
-            [xi.keyItem.GREY_ABYSSITE] = {
+
+            [xi.keyItem.GREY_ABYSSITE] =
+            {
                 17195483  -- Dawon
             },
-            [xi.keyItem.BLACK_ABYSSITE] = {
+
+            [xi.keyItem.BLACK_ABYSSITE] =
+            {
                 17195482  -- Yilbegan
             }
         }
     },
+
     npc =
     {
         FALLEN_EGG  = 17195583,

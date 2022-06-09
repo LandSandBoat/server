@@ -209,7 +209,7 @@ INSERT INTO `mob_skill_lists` VALUES ('Likho',53,555);
 INSERT INTO `mob_skill_lists` VALUES ('Omega',54,1533);
 INSERT INTO `mob_skill_lists` VALUES ('Omega',54,1534);
 INSERT INTO `mob_skill_lists` VALUES ('Omega',54,1535);
--- INSERT INTO `mob_skill_lists` VALUES ('Omega',54,1536)
+INSERT INTO `mob_skill_lists` VALUES ('Omega',54,1536);
 INSERT INTO `mob_skill_lists` VALUES ('Omega',54,1537);
 INSERT INTO `mob_skill_lists` VALUES ('Omega',54,1538);
 INSERT INTO `mob_skill_lists` VALUES ('Omega',54,1539);
@@ -713,10 +713,10 @@ INSERT INTO `mob_skill_lists` VALUES ('Kindred',169,559);
 INSERT INTO `mob_skill_lists` VALUES ('Kindred',169,560);
 INSERT INTO `mob_skill_lists` VALUES ('Kindred',169,563);
 INSERT INTO `mob_skill_lists` VALUES ('Kindred',169,1148);
-INSERT INTO `mob_skill_lists` VALUES ('Ladybug',170,2178);
-INSERT INTO `mob_skill_lists` VALUES ('Ladybug',170,2179);
-INSERT INTO `mob_skill_lists` VALUES ('Ladybug',170,2180);
-INSERT INTO `mob_skill_lists` VALUES ('Ladybug',170,2181);
+INSERT INTO `mob_skill_lists` VALUES ('Ladybug_Day',170,2178);
+INSERT INTO `mob_skill_lists` VALUES ('Ladybug_Day',170,2179);
+INSERT INTO `mob_skill_lists` VALUES ('Ladybug_Day',170,2180);
+INSERT INTO `mob_skill_lists` VALUES ('Ladybug_Day',170,2181);
 INSERT INTO `mob_skill_lists` VALUES ('Lamiae',171,1752); -- gusting_gouge
 INSERT INTO `mob_skill_lists` VALUES ('Lamiae',171,1753); -- hysteric_barrage
 INSERT INTO `mob_skill_lists` VALUES ('Lamiae',171,1754); -- dukkeripen_heal
@@ -2447,7 +2447,7 @@ INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1530);
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1532);
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1533);
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1534);
--- INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1536);
+INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1536);
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1538);
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1539);
 INSERT INTO `mob_skill_lists` VALUES ('Ultima',728,1259);
@@ -3765,11 +3765,34 @@ INSERT INTO `mob_skill_lists` VALUES ('The_Briars_elv',1160,42); -- Savage Blade
 INSERT INTO `mob_skill_lists` VALUES ('The_Briars_gal',1161,86); -- Raging Rush
 INSERT INTO `mob_skill_lists` VALUES ('The_Briars_gal',1161,91); -- Fell Cleave
 
+INSERT INTO `mob_skill_lists` VALUES ('Snoll_Tzar',1164,599); -- Arctic Impact
+INSERT INTO `mob_skill_lists` VALUES ('Snoll_Tzar',1164,600); -- Cold Wave
+INSERT INTO `mob_skill_lists` VALUES ('Snoll_Tzar',1164,601); -- Hiemal Storm
+INSERT INTO `mob_skill_lists` VALUES ('Snoll_Tzar',1164,598); -- Berserk
+
+INSERT INTO `mob_skill_lists` VALUES('Shikaree_X', 1165, 18); -- Shadowstitch
+INSERT INTO `mob_skill_lists` VALUES('Shikaree_X', 1165, 23); -- Dancing edge
+INSERT INTO `mob_skill_lists` VALUES('Shikaree_X', 1165, 25); -- Evisceration
+
+INSERT INTO `mob_skill_lists` VALUES('Shikaree_Y', 1166, 101); -- Vorpal Scythe
+INSERT INTO `mob_skill_lists` VALUES('Shikaree_Y', 1166, 102); -- Guillotine
+INSERT INTO `mob_skill_lists` VALUES('Shikaree_Y', 1166, 104); -- Spiral Hell
+
+INSERT INTO `mob_skill_lists` VALUES('Shikaree_Z', 1167, 116); -- Penta Thrust
+INSERT INTO `mob_skill_lists` VALUES('Shikaree_Z', 1167, 118); -- Skewer
+INSERT INTO `mob_skill_lists` VALUES('Shikaree_Z', 1167, 119); -- Wheeling Thrust
+INSERT INTO `mob_skill_lists` VALUES('Shikaree_Z', 1167, 120); -- Impulse Drive
+
+INSERT INTO `mob_skill_lists` VALUES ('Cop_Wardens',1170,561); -- Electromagnetic Field
+INSERT INTO `mob_skill_lists` VALUES ('Cop_Wardens',1170,562); -- Reactive Armor
+
 -- 1162 -> Wamouracampa_curl
 
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Shantotto_II_Melee',1163,3739); -- shantotto_ii_melee (no name)
+INSERT INTO `mob_skill_lists` VALUES ('Teporingo',1164,258);
+INSERT INTO `mob_skill_lists` VALUES ('Ladybug_Night',1167,2178);
 
--- Next available ID: 1164
+-- Next available ID: 1168
 
 -- ------------------------------------------------------------
 -- Start of Ambuscade section

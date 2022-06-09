@@ -25,72 +25,48 @@ xi.wotg.helpers = xi.wotg.helpers or {}
 
 -- WOTG3: Cait Sith
 xi.wotg.helpers.meetsMission3Reqs = function(player)
-    local Q  = xi.quest.id.crystalWar
-    local Q1 = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, Q.CLAWS_OF_THE_GRIFFON) == QUEST_COMPLETED
-    local Q2 = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, Q.THE_TIGRESS_STRIKES)  == QUEST_COMPLETED
-    local Q3 = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, Q.FIRES_OF_DISCONTENT)  == QUEST_COMPLETED
-
     -- TODO: Add one day wait
-
-    return Q1 or Q2 or Q3
+    return player:hasCompletedQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.CLAWS_OF_THE_GRIFFON) or
+        player:hasCompletedQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_TIGRESS_STRIKES) or
+        player:hasCompletedQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.FIRES_OF_DISCONTENT)
 end
 
 -- WOTG4: The Queen of the Dance
 xi.wotg.helpers.meetsMission4Reqs = function(player)
-    local Q  = xi.quest.id.crystalWar
-    local Q1 = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, Q.BURDEN_OF_SUSPICION)  == QUEST_COMPLETED
-    local Q2 = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, Q.WRATH_OF_THE_GRIFFON) == QUEST_COMPLETED
-    local Q3 = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, Q.A_MANIFEST_PROBLEM)   == QUEST_COMPLETED
-
     -- TODO: Add one day wait
-
-    return Q1 or Q2 or Q3
+    return player:hasCompletedQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.BURDEN_OF_SUSPICION) or
+        player:hasCompletedQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.WRATH_OF_THE_GRIFFON) or
+        player:hasCompletedQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.A_MANIFEST_PROBLEM)
 end
 
 -- WOTG8: In the Name of the Father
 xi.wotg.helpers.meetsMission8Reqs = function(player)
-    local Q  = xi.quest.id.crystalWar
-    local Q1 = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, Q.FIRE_IN_THE_HOLE)   == QUEST_COMPLETED
-    local Q2 = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, Q.IN_A_HAZE_OF_GLORY) == QUEST_COMPLETED
-    local Q3 = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, Q.A_FEAST_FOR_GNATS)  == QUEST_COMPLETED
-
     -- TODO: Add one day wait
-
-    return Q1 or Q2 or Q3
+    return player:hasCompletedQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.FIRE_IN_THE_HOLE) or
+        player:hasCompletedQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.IN_A_HAZE_OF_GLORY) or
+        player:hasCompletedQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.A_FEAST_FOR_GNATS)
 end
 
 -- WOTG15: Crossroads of Time
 xi.wotg.helpers.meetsMission15Reqs = function(player)
-    local Q  = xi.quest.id.crystalWar
-    local Q1 = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, Q.HONOR_UNDER_FIRE)     == QUEST_COMPLETED
-    local Q2 = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, Q.BONDS_THAT_NEVER_DIE) == QUEST_COMPLETED
-    local Q3 = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, Q.THE_FORBIDDEN_PATH)   == QUEST_COMPLETED
-
     -- TODO: Add one day wait
-
-    return Q1 or Q2 or Q3
+    return player:hasCompletedQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.HONOR_UNDER_FIRE) or
+        player:hasCompletedQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.BONDS_THAT_NEVER_DIE) or
+        player:hasCompletedQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_FORBIDDEN_PATH)
 end
 
 -- WOTG26: Fate in Haze
 xi.wotg.helpers.meetsMission26Reqs = function(player)
-    local Q  = xi.quest.id.crystalWar
-    local Q1 = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, Q.WHAT_PRICE_LOYALTY)    == QUEST_COMPLETED
-    local Q2 = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, Q.BLOOD_OF_HEROES)       == QUEST_COMPLETED
-    local Q3 = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, Q.HOWL_FROM_THE_HEAVENS) == QUEST_COMPLETED
-
     -- TODO: Add one day wait
-
-    return Q1 or Q2 or Q3
+    return player:hasCompletedQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.WHAT_PRICE_LOYALTY) or
+        player:hasCompletedQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.BLOOD_OF_HEROES) or
+        player:hasCompletedQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.HOWL_FROM_THE_HEAVENS)
 end
 
 -- WOTG38: Adieu, Lilisette
 xi.wotg.helpers.meetsMission38Reqs = function(player)
-    local Q  = xi.quest.id.crystalWar
-    local Q1 = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, Q.BONDS_OF_MYTHRIL)   == QUEST_COMPLETED
-    local Q2 = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, Q.FACE_OF_THE_FUTURE) == QUEST_COMPLETED
-    local Q3 = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, Q.AT_JOURNEYS_END)    == QUEST_COMPLETED
-
     -- TODO: Add one day wait
-
-    return Q1 or Q2 or Q3
+    return player:hasCompletedQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.BONDS_OF_MYTHRIL) or
+        player:hasCompletedQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.FACE_OF_THE_FUTURE) or
+        player:hasCompletedQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.AT_JOURNEYS_END)
 end

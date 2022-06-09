@@ -232,7 +232,7 @@ namespace luautils
     int32 CheckForGearSet(CBaseEntity* PTarget);                                                                                                                 // check for gear sets
 
     int32  OnMagicCastingCheck(CBaseEntity* PChar, CBaseEntity* PTarget, CSpell* PSpell);                   // triggers when a player attempts to cast a spell
-    uint32 OnSpellCast(CBattleEntity* PCaster, CBattleEntity* PTarget, CSpell* PSpell);                     // triggered when casting a spell
+    int32  OnSpellCast(CBattleEntity* PCaster, CBattleEntity* PTarget, CSpell* PSpell);                     // triggered when casting a spell
     int32  OnSpellPrecast(CBattleEntity* PCaster, CSpell* PSpell);                                          // triggered just before casting a spell
     auto   OnMobMagicPrepare(CBattleEntity* PCaster, CBattleEntity* PTarget, std::optional<SpellID> startingSpellId) -> std::optional<SpellID>; // triggered when monster wants to use a spell on target
     int32  OnMagicHit(CBattleEntity* PCaster, CBattleEntity* PTarget, CSpell* PSpell);                      // triggered when spell cast on monster

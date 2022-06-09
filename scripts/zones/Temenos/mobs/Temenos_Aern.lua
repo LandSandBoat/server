@@ -21,6 +21,7 @@ end
 
 entity.onMobDespawn = function(mob)
     local battlefield = mob:getBattlefield()
+
     if battlefield then
         local killer = mob:getLocalVar("killer")
 
@@ -39,8 +40,9 @@ entity.onMobDespawn = function(mob)
                 xi.limbus.extendTimeLimit(battlefield, 5, xi.zone.TEMENOS)
             end,
         }
-        local leftAern=0
-        local AernList =
+
+        local leftAern = 0
+        local aernList =
         {
             ID.mob.TEMENOS_C_MOB[5], ID.mob.TEMENOS_C_MOB[5]+1, ID.mob.TEMENOS_C_MOB[5]+2,
             ID.mob.TEMENOS_C_MOB[5]+4, ID.mob.TEMENOS_C_MOB[5]+5, ID.mob.TEMENOS_C_MOB[5]+7,
@@ -54,7 +56,7 @@ entity.onMobDespawn = function(mob)
         }
 
         for n = 1, 27 do
-            if GetMobByID(AernList[n]):isSpawned() then
+            if GetMobByID(aernList[n]):isSpawned() then
                 leftAern = leftAern + 1
                 break
             end
@@ -64,8 +66,10 @@ entity.onMobDespawn = function(mob)
             local mobX = mob:getXPos()
             local mobY = mob:getYPos()
             local mobZ = mob:getZPos()
+
             GetMobByID(ID.mob.TEMENOS_C_MOB[5]+35):setSpawn(mobX, mobY, mobZ)
             GetMobByID(ID.mob.TEMENOS_C_MOB[5]+35):setPos(mobX, mobY, mobZ)
+
             if killer ~= 0 then
                 SpawnMob(ID.mob.TEMENOS_C_MOB[5]+35):updateEnmity(GetPlayerByID(killer))
             end

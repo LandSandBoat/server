@@ -6,7 +6,11 @@ require("scripts/globals/hunts")
 require("scripts/globals/titles")
 require("scripts/quests/tutorial")
 -----------------------------------
+
 local entity = {}
+
+entity.onMobSpawn = function(mob)
+end
 
 entity.onMobDeath = function(mob, player, isKiller)
     xi.hunts.checkHunt(mob, player, 203)

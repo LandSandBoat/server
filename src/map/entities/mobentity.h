@@ -138,7 +138,7 @@ public:
 
     void  setMobMod(uint16 type, int16 value);
     int16 getMobMod(uint16 type);
-    void  addMobMod(uint16 type, int16 value);     // add
+    void  addMobMod(uint16 type, int16 value);
     void  defaultMobMod(uint16 type, int16 value); // set value if value has not been already set
     void  resetMobMod(uint16 type);                // resets mob mod to original value
     int32 getBigMobMod(uint16 type);               // multiplies mod by 1000
@@ -149,8 +149,8 @@ public:
     bool GetCallForHelpFlag() const;
     void HideHP(bool hide);
     bool IsHPHidden() const;
-    void Untargetable(bool untargetable);
-    bool IsUntargetable() const;
+    void SetUntargetable(bool untargetable);
+    bool GetUntargetable() const;
 
     void         PostTick() override;
     float        GetRoamDistance();
@@ -239,6 +239,7 @@ public:
     int16  m_THLvl;       // Highest Level of Treasure Hunter that apply to drops
     bool   m_ItemStolen;  // if true, mob has already been robbed. reset on respawn. also used for thf maat fight
     uint16 m_Family;
+    uint16 m_SuperFamily;
     uint16 m_MobSkillList; // Mob skill list defined from mob_pools
     uint32 m_Pool;         // pool the mob came from
 
@@ -248,9 +249,9 @@ public:
     uint32   m_flags;       // includes the CFH flag and whether the HP bar should be shown or not (e.g. Yilgeban doesnt)
     uint8    m_name_prefix; // The ding bats VS Ding bats
 
-    uint8 m_unk0; // possibly campaign related (entity x24)
-    uint8 m_unk1; // (entity_update x25)
-    uint8 m_unk2; // (entity_update x26)
+    uint8 m_unk0; // possibly campaign related (entity 0x24)
+    uint8 m_unk1; // (entity_update 0x25)
+    uint8 m_unk2; // (entity_update 0x26)
 
     bool m_CallForHelpBlocked;
 

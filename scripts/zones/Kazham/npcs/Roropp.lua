@@ -170,13 +170,13 @@ entity.onTrade = function(player, npc, trade)
     -- 905       Wyvern Skull
     -- 1147      Ancient Salt
     -- 4600      Lucky Egg
-    local OpoOpoAndIStatus = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_OPO_OPO_AND_I)
+    local opoOpoAndIStatus = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_OPO_OPO_AND_I)
     local progress = player:getCharVar("OPO_OPO_PROGRESS")
     local failed = player:getCharVar("OPO_OPO_FAILED")
     local goodtrade = trade:hasItemQty(1157, 1)
     local badtrade = trade:hasItemQty(483, 1) or trade:hasItemQty(22, 1) or trade:hasItemQty(1008, 1) or trade:hasItemQty(1158, 1) or trade:hasItemQty(904, 1) or trade:hasItemQty(4599, 1) or trade:hasItemQty(905, 1) or trade:hasItemQty(1147, 1) or trade:hasItemQty(4600, 1)
 
-    if OpoOpoAndIStatus == QUEST_ACCEPTED then
+    if opoOpoAndIStatus == QUEST_ACCEPTED then
         if progress == 3 or failed == 4 then
             if goodtrade then
                 player:startEvent(222)
@@ -188,12 +188,12 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local OpoOpoAndIStatus = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_OPO_OPO_AND_I)
+    local opoOpoAndIStatus = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_OPO_OPO_AND_I)
     local progress = player:getCharVar("OPO_OPO_PROGRESS")
     local failed = player:getCharVar("OPO_OPO_FAILED")
     local retry = player:getCharVar("OPO_OPO_RETRY")
 
-    if OpoOpoAndIStatus == QUEST_ACCEPTED then
+    if opoOpoAndIStatus == QUEST_ACCEPTED then
         if retry >= 1 then                          -- has failed on future npc so disregard previous successful trade
             player:startEvent(200)
         elseif progress == 3 or failed == 4 then

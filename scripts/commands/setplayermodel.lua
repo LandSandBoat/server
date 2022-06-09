@@ -17,30 +17,31 @@ end
 
 function onTrigger(player, model, slot, target)
     -- validate model
-    if (model == nil) then
+    if model == nil then
         error(player, "Invalid model ID.")
         return
     end
 
     -- validate slot
-    if (slot == nil or slot < 0 or slot > 8) then
+    if slot == nil or slot < 0 or slot > 8 then
         error(player, "Invalid slot ID.")
         return
     end
 
     -- validate target
     local targ
-    if (target == nil) then
+    if target == nil then
         targ = player
     else
         targ = GetPlayerByName(target)
-        if (targ == nil) then
+        if targ == nil then
             error(player, string.format("Player named '%s' not found!", target))
             return
         end
     end
 
-    local slotNameByNum = {
+    local slotNameByNum =
+    {
         [0] = "main",
         [1] = "sub",
         [2] = "ranged",

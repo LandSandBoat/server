@@ -8,7 +8,8 @@ require("scripts/globals/status")
 xi = xi or {}
 xi.gear_sets = xi.gear_sets or {}
 
-local matchtype = {
+local matchtype =
+{
     any            = 0,
     earring_weapon = 1,
     weapon_weapon  = 2,
@@ -16,7 +17,7 @@ local matchtype = {
 }
 
 -- placeholder for unknown mod types
--- local MOD_UNKNOWN = 0
+-- local modUnknown = 0
 
 -- AF3 +2/109/119 set values are based on BGWiki notes.
 -- Each set has a 2 piece minimum, with each additional piece adding xxxPieceBonus to the MOD.
@@ -35,7 +36,8 @@ local instantCastPieceBonus = 1
 
 
 --              {id, {item, ids, in, no, particular, order}, minimum matches required, match type, mods{id, value, modvalue for each additional match, additional whole set bonus}
-local GearSets =  {
+local gearSets =
+{
              {id = 1, items = {16092, 14554, 14969, 15633, 15719},  matches = 5, matchType = matchtype.any, mods = {{xi.mod.HASTE_GEAR, 500, 0, 0}} },    --  Usukane's set (5% Haste)
              {id = 2, items = {16088, 14550, 14965, 15629, 15715},  matches = 5, matchType = matchtype.any, mods = {{xi.mod.CRITHITRATE, 5, 0, 0}} },    --  Skadi's set (5% critrate is guess)
              {id = 3, items = {16084, 14546, 14961, 15625, 15711},  matches = 5, matchType = matchtype.any, mods = {{xi.mod.DOUBLE_ATTACK, 5, 0, 0}} },  --  Ares's set (5% DA)
@@ -342,7 +344,7 @@ xi.gear_sets.checkForGearSet = function(player)
         equip[slot+1] = player:getEquipID(slot)
     end
 
-    for index, gearset in pairs(GearSets) do
+    for index, gearset in pairs(gearSets) do
         local matches = 0
         if (player:hasGearSetMod(gearset.id) == false) then
             -- local slot = 0

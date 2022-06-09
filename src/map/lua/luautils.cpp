@@ -431,15 +431,13 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        std::string outString;
+        std::vector<std::string> vec;
         for (std::size_t i = 0; i < va.size(); ++i)
         {
-            auto entry = luaToString(va[i]);
-            // TODO: Use fmt::join if we ever update fmt
-            outString += fmt::format("{} ", entry);
+            vec.emplace_back(luaToString(va[i]));
         }
 
-        ShowScript(fmt::format("{}", outString));
+        ShowScript(fmt::format("{}", fmt::join(vec.begin(), vec.end(), " ")).c_str());
     }
 
     sol::function getEntityCachedFunction(CBaseEntity* PEntity, std::string funcName)
@@ -2496,7 +2494,7 @@ namespace luautils
         return 0;
     }
 
-    uint32 OnSpellCast(CBattleEntity* PCaster, CBattleEntity* PTarget, CSpell* PSpell)
+    int32 OnSpellCast(CBattleEntity* PCaster, CBattleEntity* PTarget, CSpell* PSpell)
     {
         TracyZoneScoped;
 
@@ -2520,7 +2518,7 @@ namespace luautils
             return -1;
         }
 
-        uint32 retVal = result.get_type(0) == sol::type::number ? result.get<int32>(0) : 0;
+        int32 retVal = result.get_type(0) == sol::type::number ? result.get<int32>(0) : 0;
         return retVal;
     }
 

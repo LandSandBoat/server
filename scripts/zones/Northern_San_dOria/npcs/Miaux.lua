@@ -16,9 +16,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-
     local aCraftsmansWork = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_CRAFTSMAN_S_WORK)
-    local Quotas_Status = player:getCharVar("ChasingQuotas_Progress")
+    local quotasStatus    = player:getCharVar("ChasingQuotas_Progress")
 
     if (player:getMainJob() == xi.job.DRG and player:getMainLvl() >= xi.settings.AF1_QUEST_LEVEL and aCraftsmansWork == QUEST_AVAILABLE) then
         if (player:getCharVar("has_seen_drgaf1_quest_already") == 0) then
@@ -30,23 +29,21 @@ entity.onTrigger = function(player, npc)
         player:startEvent(69)
     elseif (aCraftsmansWork == QUEST_ACCEPTED) then
             player:startEvent(70)
-    elseif (Quotas_Status == 2) then
+    elseif (quotasStatus == 2) then
         player:startEvent(67) -- I found this earring.
-    elseif (Quotas_Status == 3 or Quotas_Status == 4) then
+    elseif (quotasStatus == 3 or quotasStatus == 4) then
         player:startEvent(68) -- Post-earring, move along.
-    elseif (Quotas_Status >= 5) then
+    elseif (quotasStatus >= 5) then
         player:startEvent(66) -- The earring was helpful?
     else
         player:startEvent(11)
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
     if (csid == 73 and option == 0) then -- first part of long CS -- declines questgiver
         player:setCharVar("has_seen_drgaf1_quest_already", 1)
     elseif ((csid == 73 or csid == 71) and option == 1) then
@@ -69,7 +66,6 @@ entity.onEventFinish = function(player, csid, option)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SHINY_EARRING)
         player:setCharVar("ChasingQuotas_Progress", 3)
     end
-
 end
 -- 11 Miaux : "<Sigh> Why must all craftsmen be so uptight?"
 -- 73 Miaux : "I wish to have a breastplate repaired... Y/N dialog

@@ -355,7 +355,7 @@ namespace zoneutils
             slash_sdt, pierce_sdt, h2h_sdt, impact_sdt, \
             fire_sdt, ice_sdt, wind_sdt, earth_sdt, lightning_sdt, water_sdt, light_sdt, dark_sdt, \
             fire_res, ice_res, wind_res, earth_res, lightning_res, water_res, light_res, dark_res, \
-            Element, mob_pools.familyid, name_prefix, entityFlags, animationsub, \
+            Element, mob_pools.familyid, mob_family_system.superFamilyID, name_prefix, entityFlags, animationsub, \
             (mob_family_system.HP / 100), (mob_family_system.MP / 100), hasSpellScript, spellList, mob_groups.poolid, \
             allegiance, namevis, aggro, roamflag, mob_pools.skill_list_id, mob_pools.true_detection, mob_family_system.detects, \
             mob_family_system.charmable \
@@ -460,8 +460,9 @@ namespace zoneutils
 
                     PMob->m_Element     = (uint8)sql->GetIntData(58);
                     PMob->m_Family      = (uint16)sql->GetIntData(59);
-                    PMob->m_name_prefix = (uint8)sql->GetIntData(60);
-                    PMob->m_flags       = (uint32)sql->GetIntData(61);
+                    PMob->m_SuperFamily = (uint16)sql->GetIntData(60);
+                    PMob->m_name_prefix = (uint8)sql->GetIntData(61);
+                    PMob->m_flags       = (uint32)sql->GetIntData(62);
 
                     // Cap Level if Necessary (Don't Cap NMs)
                     if (normalLevelRangeMin > 0 && !(PMob->m_Type & MOBTYPE_NOTORIOUS) && PMob->m_minLevel > normalLevelRangeMin)
@@ -477,7 +478,7 @@ namespace zoneutils
                     // Special sub animation for Mob (yovra, jailer of love, phuabo)
                     // yovra 1: On top/in the sky, 2: , 3: On top/in the sky
                     // phuabo 1: Underwater, 2: Out of the water, 3: Goes back underwater
-                    PMob->animationsub = (uint32)sql->GetIntData(62);
+                    PMob->animationsub = (uint32)sql->GetIntData(63);
 
                     if (PMob->animationsub != 0)
                     {
@@ -485,28 +486,28 @@ namespace zoneutils
                     }
 
                     // Setup HP / MP Stat Percentage Boost
-                    PMob->HPscale = sql->GetFloatData(63);
-                    PMob->MPscale = sql->GetFloatData(64);
+                    PMob->HPscale = sql->GetFloatData(64);
+                    PMob->MPscale = sql->GetFloatData(65);
 
                     // TODO: Remove me
                     // Check if we should be looking up scripts for this mob
-                    //PMob->m_HasSpellScript = (uint8)sql->GetIntData(65);
+                    //PMob->m_HasSpellScript = (uint8)sql->GetIntData(66);
 
-                    PMob->m_SpellListContainer = mobSpellList::GetMobSpellList(sql->GetIntData(66));
+                    PMob->m_SpellListContainer = mobSpellList::GetMobSpellList(sql->GetIntData(67));
 
-                    PMob->m_Pool = sql->GetUIntData(67);
+                    PMob->m_Pool = sql->GetUIntData(68);
 
-                    PMob->allegiance = static_cast<ALLEGIANCE_TYPE>(sql->GetUIntData(68));
-                    PMob->namevis    = sql->GetUIntData(69);
-                    PMob->m_Aggro    = sql->GetUIntData(70);
+                    PMob->allegiance = static_cast<ALLEGIANCE_TYPE>(sql->GetUIntData(69));
+                    PMob->namevis    = sql->GetUIntData(70);
+                    PMob->m_Aggro    = sql->GetUIntData(71);
 
-                    PMob->m_roamFlags    = (uint16)sql->GetUIntData(71);
-                    PMob->m_MobSkillList = sql->GetUIntData(72);
+                    PMob->m_roamFlags    = (uint16)sql->GetUIntData(72);
+                    PMob->m_MobSkillList = sql->GetUIntData(73);
 
-                    PMob->m_TrueDetection = sql->GetUIntData(73);
-                    PMob->m_Detects       = sql->GetUIntData(74);
+                    PMob->m_TrueDetection = sql->GetUIntData(74);
+                    PMob->m_Detects       = sql->GetUIntData(75);
 
-                    PMob->setMobMod(MOBMOD_CHARMABLE, sql->GetUIntData(75));
+                    PMob->setMobMod(MOBMOD_CHARMABLE, sql->GetUIntData(76));
 
                     // Overwrite base family charmables depending on mob type. Disallowed mobs which should be charmable
                     // can be set in mob_spawn_mods or in their onInitialize
