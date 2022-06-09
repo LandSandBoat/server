@@ -854,7 +854,6 @@ void CZoneEntities::SpawnPCs(CCharEntity* PChar)
     }
 }
 
-
 void CZoneEntities::SpawnMoogle(CCharEntity* PChar)
 {
     TracyZoneScoped;

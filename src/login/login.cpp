@@ -132,7 +132,7 @@ int32 do_init(int32 argc, char** argv)
 
     gConsoleService->RegisterCommand(
     "verlock", "Cycle between version lock acceptance modes.",
-    [&]() -> void
+    [&](std::vector<std::string> inputs)
     {
         // handle wrap around from 2->3 as 0
         auto temp             = (version_info.ver_lock + 1) % 3;
@@ -156,7 +156,7 @@ int32 do_init(int32 argc, char** argv)
 
     gConsoleService->RegisterCommand(
     "maint_mode", "Cycle between maintenance modes.",
-    [&]() -> void
+    [&](std::vector<std::string> inputs)
     {
         maint_config.maint_mode = (maint_config.maint_mode + 1) % 2;
         config_write(MAINT_CONF_FILENAME, "maint", maint_config_write);

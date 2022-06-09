@@ -417,7 +417,6 @@ void SmallPacket0x00C(map_session_data_t* const PSession, CCharEntity* const PCh
         PChar->pushPacket(new CJobPointDetailsPacket(PChar));
     }
 
-
     // TODO: While in mog house; treasure pool is not created.
     if (PChar->PTreasurePool != nullptr)
     {
@@ -5130,7 +5129,6 @@ void SmallPacket0x0B5(map_session_data_t* const PSession, CCharEntity* const PCh
                             std::string escaped_full_string;
                             escaped_full_string.reserve(strlen((const char*)data[6]) * 2 + 1);
                             sql->EscapeString(escaped_full_string.data(), (const char*)data[6]);
-
 
                             const char* fmtQuery = "INSERT into audit_chat (speaker,type,message,datetime) VALUES('%s','SAY','%s',current_timestamp())";
                             if (sql->Query(fmtQuery, escaped_speaker, escaped_full_string.data()) == SQL_ERROR)

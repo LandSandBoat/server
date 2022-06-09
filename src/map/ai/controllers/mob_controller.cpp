@@ -141,7 +141,6 @@ bool CMobController::CheckLock(CBattleEntity* PTarget)
     return false;
 }
 
-
 bool CMobController::CheckDetection(CBattleEntity* PTarget)
 {
     TracyZoneScoped;

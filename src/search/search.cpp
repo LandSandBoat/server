@@ -276,7 +276,7 @@ int32 main(int32 argc, char** argv)
     gConsoleService = std::make_unique<ConsoleService>();
     gConsoleService->RegisterCommand(
     "ah_cleanup", fmt::format("AH task to return items older than {} days.", search_config.expire_days),
-    [&]() -> void
+    [](std::vector<std::string> inputs)
     {
         ah_cleanup(server_clock::now(), nullptr);
     });

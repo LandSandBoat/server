@@ -104,12 +104,6 @@ namespace zoneutils
         ShowDebug("Player playtime saving finished");
     }
 
-    /************************************************************************
-     *                                                                       *
-     *  Возвращаем указатель на класс зоны с указанным ID.                   *
-     *                                                                       *
-     ************************************************************************/
-
     CZone* GetZone(uint16 ZoneID)
     {
         if (auto PZone = g_PZoneList.find(ZoneID); PZone != g_PZoneList.end())
@@ -129,12 +123,6 @@ namespace zoneutils
         return g_PTrigger;
     }
 
-    /************************************************************************
-     *                                                                       *
-     *  Получаем указатель на любую сущность по ID                           *
-     *                                                                       *
-     ************************************************************************/
-
     CBaseEntity* GetEntity(uint32 ID, uint8 filter)
     {
         uint16 zoneID = (ID >> 12) & 0x0FFF;
@@ -149,12 +137,6 @@ namespace zoneutils
         }
     }
 
-    /************************************************************************
-     *                                                                       *
-     *  Получаем указатель на персонажа по имени                             *
-     *                                                                       *
-     ************************************************************************/
-
     CCharEntity* GetCharByName(int8* name)
     {
         for (auto PZone : g_PZoneList)
@@ -168,12 +150,6 @@ namespace zoneutils
         }
         return nullptr;
     }
-
-    /************************************************************************
-     *                                                                       *
-     *  Получаем указатель на CCharEntity по id и targid                     *
-     *                                                                       *
-     ************************************************************************/
 
     CCharEntity* GetCharFromWorld(uint32 charid, uint16 targid)
     {
@@ -243,6 +219,7 @@ namespace zoneutils
 
         return PTernary;
     }
+
     /************************************************************************
      *                                                                       *
      *  Uploading a list of NPCs to the specified zone                       *
@@ -989,12 +966,6 @@ namespace zoneutils
         }
         return REGION_TYPE::UNKNOWN;
     }
-
-    /************************************************************************
-     *                                                                       *
-     *                                                                       *
-     *                                                                       *
-     ************************************************************************/
 
     CONTINENT_TYPE GetCurrentContinent(uint16 ZoneID)
     {

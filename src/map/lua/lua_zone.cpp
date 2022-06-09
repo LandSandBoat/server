@@ -41,7 +41,6 @@ CLuaZone::CLuaZone(CZone* PZone)
     }
 }
 
-
 /************************************************************************
  *  Function: getLocalVar()
  *  Purpose : Returns a variable assigned locally to an entity

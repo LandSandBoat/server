@@ -108,12 +108,6 @@ namespace effects
 
     std::array<EffectParams_t, MAX_EFFECTID> EffectsParams;
 
-    /************************************************************************
-     *                                                                       *
-     *                                                                       *
-     *                                                                       *
-     ************************************************************************/
-
     void LoadEffectsParameters()
     {
         for (uint16 i = 0; i < MAX_EFFECTID; ++i)

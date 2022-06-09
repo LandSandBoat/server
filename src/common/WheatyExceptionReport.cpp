@@ -977,7 +977,6 @@ bool bWriteVariables, HANDLE pThreadHandle)                                     
             wsprintf((LPSTR)fileNameBuffer.data(), "%s, line %i", lineInfo.FileName, lineInfo.LineNumber);
         }
 
-
 #ifdef _M_IX86
         Log(_T("%08X  %08X  %s (%s)"), sf.AddrPC.Offset, sf.AddrFrame.Offset, funcNameBuffer.data(), fileNameBuffer.data());
 #endif
