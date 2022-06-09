@@ -20,6 +20,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 */
 
 #include "common/blowfish.h"
+#include "common/console_service.h"
 #include "common/logging.h"
 #include "common/md52.h"
 #include "common/timer.h"
@@ -53,6 +54,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "ai/controllers/automaton_controller.h"
 #include "daily_system.h"
 #include "packets/basic.h"
+#include "packets/chat_message.h"
 #include "utils/battleutils.h"
 #include "utils/charutils.h"
 #include "utils/fishingutils.h"
@@ -295,7 +297,44 @@ int32 do_init(int32 argc, char** argv)
     ShowStatus("The map-server is ready to work!");
     ShowMessage("=======================================================================");
 
+    // clang-format off
     gConsoleService = std::make_unique<ConsoleService>();
+
+    gConsoleService->RegisterCommand("crash", "Force-crash the process.",
+    [](std::vector<std::string> inputs)
+    {
+        crash();
+    });
+
+    gConsoleService->RegisterCommand("gm", "Change a character's GM level.",
+    [](std::vector<std::string> inputs)
+    {
+        if (inputs.size() != 3)
+        {
+            fmt::print("Usage: gm <char_name> <level>. example: gm Testo 1\n");
+            return;
+        }
+
+        // TODO: Replace all usages of int8* with const char* or std::string.
+        auto* name  = (int8*)inputs[1].c_str();
+        auto* PChar = zoneutils::GetCharByName(name);
+        if (!PChar)
+        {
+            fmt::print("Couldnt find character: {}\n", name);
+            return;
+        }
+
+        auto level = std::clamp<uint8>(static_cast<uint8>(stoi(inputs[2])), 0, 5);
+
+        PChar->m_GMlevel = level;
+        charutils::SaveCharGMLevel(PChar);
+
+        fmt::print("Promoting {} to GM level {}\n", PChar->name, level);
+        PChar->pushPacket(new CChatMessagePacket(PChar, MESSAGE_SYSTEM_3,
+            fmt::format("You have been set to GM level {}.", level).c_str(), ""));
+
+    });
+    // clang-format on
 
     return 0;
 }
