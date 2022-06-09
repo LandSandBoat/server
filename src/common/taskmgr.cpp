@@ -70,7 +70,7 @@ void CTaskMgr::RemoveTask(const std::string& TaskName)
     // and re-insert them, sans the one we're trying to remove.
 
     std::size_t tasksRemoved = 0;
-    TaskList_t newPq;
+    TaskList_t  newPq;
     while (!m_TaskList.empty())
     {
         CTask* PTask = m_TaskList.top();

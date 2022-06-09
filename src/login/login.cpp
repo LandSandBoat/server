@@ -370,6 +370,10 @@ void login_config_read(const char* key, const char* value)
     {
         login_config.account_creation = config_switch(value);
     }
+    else if (strcmp(key, "character_deletion") == 0)
+    {
+        login_config.character_deletion = config_switch(value);
+    }
     else
     {
         ShowWarning("Unknown setting '%s' with value '%s' in login file. Has this setting been removed?", key, value);
@@ -419,8 +423,9 @@ void login_config_default()
     login_config.msg_server_port    = 54003;
     login_config.msg_server_ip      = "127.0.0.1";
 
-    login_config.log_user_ip      = "false";
-    login_config.account_creation = "true";
+    login_config.log_user_ip        = "false";
+    login_config.account_creation   = "true";
+    login_config.character_deletion = "true";
 }
 
 void login_config_read_from_env()
