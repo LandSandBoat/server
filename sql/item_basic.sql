@@ -35,6 +35,16 @@ CREATE TABLE `item_basic` (
 --
 -- ORDER BY:  `itemid`
 
+/*
+    #############################################################################
+    # A Note regarding BaseSell values: When obtaining/updating Vendor buyback  #
+    # prices, please be certain to use an NPC which ignores Fame as a factor    #
+    # when buying items from the player. One such verified example is Challoux  #
+    # in Port Jeuno (https://www.bg-wiki.com/ffxi/Challoux). This will ensure   #
+    # that buyback prices are as accurate as possible.                          #
+    #############################################################################
+*/;
+
 LOCK TABLES `item_basic` WRITE;
 /*!40000 ALTER TABLE `item_basic` DISABLE KEYS */;
 INSERT INTO `item_basic` VALUES (1,0,'pile_of_chocobo_bedding','chocobo_bedding',1,24660,0,0,198);
