@@ -13300,8 +13300,10 @@ void CLuaBaseEntity::castSpell(sol::object const& spell, sol::object entity)
             }
         }
 
-        m_PBaseEntity->PAI->QueueAction(queueAction_t(0ms, true, [targid, spellid](auto PEntity)
-                                                      {
+        // clang-format off
+        m_PBaseEntity->PAI->QueueAction(queueAction_t(0ms, true,
+        [targid, spellid](auto PEntity)
+        {
             if (targid)
             {
                 PEntity->PAI->Cast(targid, spellid);
@@ -13309,16 +13311,22 @@ void CLuaBaseEntity::castSpell(sol::object const& spell, sol::object entity)
             else if (dynamic_cast<CMobEntity*>(PEntity))
             {
                 PEntity->PAI->Cast(static_cast<CMobEntity*>(PEntity)->GetBattleTargetID(), spellid);
-            } }));
+            }
+        }));
+        // clang-format on
     }
     else
     {
-        m_PBaseEntity->PAI->QueueAction(queueAction_t(0ms, true, [](auto PEntity)
-                                                      {
+        // clang-format off
+        m_PBaseEntity->PAI->QueueAction(queueAction_t(0ms, true,
+        [](auto PEntity)
+        {
             if (dynamic_cast<CMobEntity*>(PEntity))
             {
                 static_cast<CMobController*>(PEntity->PAI->GetController())->TryCastSpell();
-            } }));
+            }
+        }));
+        // clang-format on
     }
 }
 

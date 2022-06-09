@@ -1753,8 +1753,9 @@ void CStatusEffectContainer::HandleAura(CStatusEffect* PStatusEffect)
     {
         if (auraTarget == AURA_TARGET::ALLIES)
         {
+            // clang-format off
             PEntity->ForParty([&](CBattleEntity* PMember)
-                              {
+            {
                 if (PMember != nullptr && PEntity->loc.zone->GetID() == PMember->loc.zone->GetID() && distance(m_POwner->loc.p, PMember->loc.p) <= aura_range &&
                     !PMember->isDead())
                 {
@@ -1765,7 +1766,9 @@ void CStatusEffectContainer::HandleAura(CStatusEffect* PStatusEffect)
                                                                4);                                   // Duration
                     PEffect->SetFlag(EFFECTFLAG_NO_LOSS_MESSAGE);
                     PMember->StatusEffectContainer->AddStatusEffect(PEffect, true);
-                } });
+                }
+            });
+             // clang-format on
         }
         else if (auraTarget == AURA_TARGET::ENEMIES)
         {

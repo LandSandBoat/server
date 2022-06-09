@@ -1085,11 +1085,15 @@ namespace battleutils
             }
             else if (PAttacker->objtype == TYPE_TRUST && PAttacker->PMaster)
             {
-                static_cast<CCharEntity*>(PAttacker->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
-                                                                                  {
+                // clang-format off
+                static_cast<CCharEntity*>(PAttacker->PMaster)->ForPartyWithTrusts(
+                [&](CBattleEntity* PMember)
+                {
                     PDefender->StatusEffectContainer->DelStatusEffect(EFFECT_DRAIN_DAZE, PMember->id);
                     PDefender->StatusEffectContainer->DelStatusEffect(EFFECT_HASTE_DAZE, PMember->id);
-                    PDefender->StatusEffectContainer->DelStatusEffect(EFFECT_ASPIR_DAZE, PMember->id); });
+                    PDefender->StatusEffectContainer->DelStatusEffect(EFFECT_ASPIR_DAZE, PMember->id);
+                });
+                // clang-format on
             }
             else
             {
