@@ -7,6 +7,227 @@ require("scripts/globals/items")
 xi = xi or {}
 xi.garrison = xi.garrison or {}
 
+-- Name is Determined by Nation and LevelCap
+xi.garrison.names =
+{
+    --level 20 garrison names
+    [20] =
+    {
+        [0] =
+        {
+            npcName = "Patrician"
+        },
+        [1] =
+        {
+            npcName = "Recruit"
+        },
+        [2] =
+        {
+            npcName = "Candidate"
+        },
+    },
+    --level 30 garrison names
+    [30] =
+    {
+        [0] =
+        {
+            npcName = "Trader"
+        },
+        [1] =
+        {
+            npcName = "Mariner"
+        },
+        [2] =
+        {
+            npcName = "Scholar"
+        },
+    },
+    --level 40 garrison names
+    [40] =
+    {
+        [0] =
+        {
+            npcName = "Temple Knight"
+        },
+        [1] =
+        {
+            npcName = "Gold Musketeer"
+        },
+        [2] =
+        {
+            npcName = "NEED NAME"
+        },
+    },
+    --level 50 garrison names
+    [50] =
+    {
+        [0] =
+        {
+            npcName = "Royal Guard"
+        },
+        [1] =
+        {
+            npcName = "NEED NAME"
+        },
+        [2] =
+        {
+            npcName = "NEED NAME"
+        },
+    },
+    --level 75 garrison names
+    [75] =
+    {
+        [0] =
+        {
+            npcName = "NEED NAME"
+        },
+        [1] =
+        {
+            npcName = "NEED NAME"
+        },
+        [2] =
+        {
+            npcName = "NEED NAME"
+        },
+    },
+}
+-- Look is Determined by Nation and LevelCap (Appears to be 4 for each outpost need more data though)
+xi.garrison.looks =
+{
+    --level 20 garrison looks
+    [20] =
+    {
+        [0] =
+        {
+            802,
+            803,
+            804,
+            805
+            -- "0x01000C030010262000303A403A5008611B700000",
+            -- "0x01000A040010262019303A40195008611C700000"
+        },
+        [1] =
+        {
+            802,
+            803,
+            804,
+            805
+        },
+        [2] =
+        {
+            802,
+            803,
+            804,
+            805
+        },
+    },
+    --level 30 garrison looks
+    [30] =
+    {
+        [0] =
+        {
+            802,
+            803,
+            804,
+            805
+            -- "0x010006030010762076303A400650736000700000",
+            -- "0x01000F0300101520153015401550006000700000",
+            -- "0x010009040010762076303A400650736000700000",
+            -- "0x01000E0400101520003015401550006000700000"
+        },
+        [1] =
+        {
+            802,
+            803,
+            804,
+            805
+        },
+        [2] =
+        {
+            802,
+            803,
+            804,
+            805
+        },
+    },
+    --level 40 garrison looks
+    [40] =
+    {
+        [0] =
+        {
+            802,
+            803,
+            804,
+            805
+            -- "0x01000E04191019201930194019506B601C700000",
+            -- "0x01000903191019201930194019506B601C700000"
+        },
+        [1] =
+        {
+            802,
+            803,
+            804,
+            805
+        },
+        [2] =
+        {
+            802,
+            803,
+            804,
+            805
+        },
+    },
+    --level 50 garrison looks
+    [50] =
+    {
+        [0] =
+        {
+            802,
+            803,
+            804,
+            805
+        },
+        [1] =
+        {
+            802,
+            803,
+            804,
+            805
+        },
+        [2] =
+        {
+            802,
+            803,
+            804,
+            805
+        },
+    },
+    --level 75 garrison looks
+    [75] =
+    {
+        [0] =
+        {
+            802,
+            803,
+            804,
+            805
+        },
+        [1] =
+        {
+            802,
+            803,
+            804,
+            805
+        },
+        [2] =
+        {
+            802,
+            803,
+            804,
+            805
+        },
+    },
+}
 -- Loot is determined by LevelCap
 xi.garrison.loot =
 {
@@ -101,8 +322,6 @@ xi.garrison.data =
         xThirdLine = 4,
         zThirdLine = 0,
         rot = 0,
-        name = "NPC", -- needs correct names
-        look = 42, -- needs correct looks
         waveOrder =
         {
         -- # Represents the negative offset from boss to spawn
@@ -160,8 +379,6 @@ xi.garrison.data =
         xThirdLine = 4,
         zThirdLine = 0,
         rot = 106,
-        name = "NPC", -- needs correct names
-        look = 42, -- needs correct looks
         waveOrder =
         {
         -- # Represents the negative offset from boss to spawn
@@ -220,8 +437,6 @@ xi.garrison.data =
         xThirdLine = 4,
         zThirdLine = 0,
         rot = 115,
-        name = "NPC", -- needs correct names
-        look = 42, -- needs correct looks
         waveOrder =
         {
         -- # Represents the negative offset from boss to spawn
@@ -280,8 +495,6 @@ xi.garrison.data =
         xThirdLine = 4,
         zThirdLine = 0,
         rot = 32,
-        name = "NPC", -- needs correct names
-        look = 42, -- needs correct looks
         waveOrder =
         {
         -- # Represents the negative offset from boss to spawn
@@ -340,8 +553,6 @@ xi.garrison.data =
         xThirdLine = 0,
         zThirdLine = 4,
         rot = 210,
-        name = "NPC", -- needs correct names
-        look = 42, -- needs correct looks
         waveOrder =
         {
         -- # Represents the negative offset from boss to spawn
@@ -400,8 +611,6 @@ xi.garrison.data =
         xThirdLine = 4,
         zThirdLine = 0,
         rot = 130,
-        name = "NPC", -- needs correct names
-        look = 42, -- needs correct looks
         waveOrder =
         {
         -- # Represents the negative offset from boss to spawn
@@ -460,8 +669,6 @@ xi.garrison.data =
         xThirdLine = 0,
         zThirdLine = -4,
         rot = 0,
-        name = "NPC", -- needs correct names
-        look = 42, -- needs correct looks
         waveOrder =
         {
         -- # Represents the negative offset from boss to spawn
@@ -520,8 +727,6 @@ xi.garrison.data =
         xThirdLine = 0,
         zThirdLine = 4,
         rot = 30,
-        name = "NPC", -- needs correct names
-        look = 42, -- needs correct looks
         waveOrder =
         {
         -- # Represents the negative offset from boss to spawn
@@ -580,8 +785,6 @@ xi.garrison.data =
         xThirdLine = 0,
         zThirdLine = -4,
         rot = 0,
-        name = "NPC", -- needs correct names
-        look = 42, -- needs correct looks
         waveOrder =
         {
         -- # Represents the negative offset from boss to spawn
@@ -640,8 +843,6 @@ xi.garrison.data =
         xThirdLine = 0,
         zThirdLine = -2,
         rot = 220,
-        name = "NPC", -- needs correct names
-        look = 42, -- needs correct looks
         waveOrder =
         {
         -- # Represents the negative offset from boss to spawn
@@ -700,8 +901,6 @@ xi.garrison.data =
         xThirdLine = 0,
         zThirdLine = 4,
         rot = 180,
-        name = "NPC", -- needs correct names
-        look = 42, -- needs correct looks
         waveOrder =
         {
         -- # Represents the negative offset from boss to spawn
@@ -760,8 +959,6 @@ xi.garrison.data =
         xThirdLine = 0,
         zThirdLine = 4,
         rot = 180,
-        name = "NPC", -- needs correct names
-        look = 42, -- needs correct looks
         waveOrder =
         {
         -- # Represents the negative offset from boss to spawn
@@ -820,8 +1017,6 @@ xi.garrison.data =
         xThirdLine = 0,
         zThirdLine = 4,
         rot = 90,
-        name = "NPC", -- needs correct names
-        look = 42, -- needs correct looks
         waveOrder =
         {
         -- # Represents the negative offset from boss to spawn
@@ -880,8 +1075,6 @@ xi.garrison.data =
         xThirdLine = 4,
         zThirdLine = 0,
         rot = 0,
-        name = "NPC", -- needs correct names
-        look = 42, -- needs correct looks
         waveOrder =
         {
         -- # Represents the negative offset from boss to spawn
@@ -940,8 +1133,6 @@ xi.garrison.data =
         xThirdLine = 4,
         zThirdLine = -2,
         rot = 0,
-        name = "NPC", -- needs correct names
-        look = 42, -- needs correct looks
         waveOrder =
         {
         -- # Represents the negative offset from boss to spawn
@@ -1000,8 +1191,6 @@ xi.garrison.data =
         xThirdLine = 4,
         zThirdLine = 0,
         rot = 0,
-        name = "NPC", -- needs correct names
-        look = 42, -- needs correct looks
         waveOrder =
         {
         -- # Represents the negative offset from boss to spawn
