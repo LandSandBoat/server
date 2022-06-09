@@ -195,6 +195,7 @@ enum class Mod
     PENGUIN_RING_EFFECT   = 152, // +2 on fishing arrow delay / fish movement for mini - game
     ALBATROSS_RING_EFFECT = 153, // adds 30 seconds to mini - game time
     PELICAN_RING_EFFECT   = 154, // adds extra skillup roll for fishing
+    FISHING_SKILL_GAIN    = 155, // food for fishing skill ups
 
     // Damage - 10000 base, 375 = 3.75%
     DMG         = 160, // Damage Taken %
