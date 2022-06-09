@@ -26,7 +26,7 @@ entity.onTrade = function(player, npc, trade)
         xi.garrison.onTrade(player, npc, trade)
     else
         --not of nation event
-        player:messageSpecial(text.GARRISON, trade:getItem():getID(), player:getNation())
+        player:messageSpecial(text.GARRISON_BASE, trade:getItem():getID(), player:getNation())
     end
 end
 
@@ -38,22 +38,22 @@ entity.onTrigger = function(player, npc)
     local lost = player:getCharVar("Garrison_Lose")
     if win >= os.time() then
         -- Trader Won
-        player:messageSpecial(text.GARRISON + 36)
+        player:messageSpecial(text.GARRISON_BASE + 36)
         xi.garrison.onWin(player, npc)
     elseif won == 1 then
         -- Party Member Won
-        player:messageSpecial(text.GARRISON + 39)
+        player:messageSpecial(text.GARRISON_BASE + 39)
         xi.garrison.onRemove(player)
     elseif lost == 1 then
         -- Party Member Lost
-        player:messageSpecial(text.GARRISON + 37)
+        player:messageSpecial(text.GARRISON_BASE + 37)
         xi.garrison.onRemove(player)
     elseif
         win < os.time() and
         win > 0
     then
         -- Trader took too long to claim prize lose
-        player:messageSpecial(text.GARRISON + 37)
+        player:messageSpecial(text.GARRISON_BASE + 37)
         xi.garrison.onLose(player, npc)
     else
         xi.conq.overseerOnTrigger(player, npc, guardNation, guardType, guardEvent, guardRegion)
