@@ -384,7 +384,7 @@ xi.garrison.start = function(player, npc, party)
     end)
 end
 
-xi.garrison.onTrade = function(player, npc, trade)
+xi.garrison.onTrade = function(player, npc, trade, guardNation)
     -- TODO: Check to see if there is Ballista in the Zone
     -- Offset 41 This area is currently conducting a Ballista match. I have no time to trouble myself with your beastman trinkets.
     -- TODO: Check to see if party has a fellow
@@ -401,7 +401,6 @@ xi.garrison.onTrade = function(player, npc, trade)
     local region = garrisonZoneData.textRegion
     local levelCapOffset = 0
     local nationOffset = 1
-    local guardNation = npc:getNation()
     -- Nation text offset
     if nation == 0 then
         nationOffset = 3
