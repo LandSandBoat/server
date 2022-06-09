@@ -17,7 +17,7 @@ local guardEvent  = 32761
 
 entity.onTrade = function(player, npc, trade)
     xi.conq.overseerOnTrade(player, npc, trade, guardNation, guardType)
-    xi.garrison.onTrade(player, npc, trade)
+    xi.garrison.onTrade(player, npc, trade, guardNation)
 end
 
 entity.onTrigger = function(player, npc)
