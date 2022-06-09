@@ -27,6 +27,11 @@ local loupanModels =
     DARK    = 2865,
 }
 
+local luopanResistances =
+{
+    [loupanModels.FIRE] = {FIRE = 50, ICE = 50, WIND = 50, EARTH = 50, THUNDER = 50, WATER = 50, LIGHT = 50, DARK = 50},
+}
+
 local indiVisualEffect =
 {
     FIRE    = {ALLIES = 0, ENEMIES = 8 },
