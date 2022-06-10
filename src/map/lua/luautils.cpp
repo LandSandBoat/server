@@ -199,6 +199,17 @@ namespace luautils
         lua.set_function("ForceCrash", []() { crash(); });
         // clang-format on
 
+        // clang-format off
+        lua.set_function("BuildString", []()
+        {
+            return fmt::format("{}-{}\n{}\n{}",
+                version::GetGitBranch(),
+                version::GetGitSha(),
+                version::GetGitCommitSubject(),
+                version::GetGitDate());
+        });
+        // clang-format on
+
         // Register Sol Bindings
         CLuaAbility::Register();
         CLuaAction::Register();

@@ -442,6 +442,7 @@
         "GetQuestAndMissionFilenamesList",
         "GetCachedInstanceScript",
         "ForceCrash",
+        "BuildString",
     ],
     "Lua.diagnostics.disable": [
         "lowercase-global"
