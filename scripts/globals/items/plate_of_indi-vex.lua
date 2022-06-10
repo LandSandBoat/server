@@ -3,7 +3,6 @@
 -- plate_of_indi-vex
 -- Teaches INDI-VEX
 -----------------------------------------
-
 local item_object = {}
 
 item_object.onItemCheck = function(target)

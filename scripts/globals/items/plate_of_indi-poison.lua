@@ -3,7 +3,6 @@
 -- plate_of_indi-poison
 -- Teaches INDI-POISON
 -----------------------------------------
-
 local item_object = {}
 
 item_object.onItemCheck = function(target)

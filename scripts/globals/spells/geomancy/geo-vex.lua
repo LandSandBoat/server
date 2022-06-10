@@ -1,6 +1,6 @@
 -----------------------------------------
 -- Spell: Geo-Vex
--- Reduces magic accuracy for enemies within area of effect. 
+-- Reduces magic accuracy for enemies within area of effect.
 -----------------------------------------
 require("scripts/globals/status")
 require("scripts/globals/job_utils/geomancer")

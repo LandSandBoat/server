@@ -3,7 +3,6 @@
 -- plate_of_indi-paralysis
 -- Teaches INDI-PARALYSIS
 -----------------------------------------
-
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -3,7 +3,6 @@
 -- plate_of_indi-gravity
 -- Teaches INDI-GRAVITY
 -----------------------------------------
-
 local item_object = {}
 
 item_object.onItemCheck = function(target)

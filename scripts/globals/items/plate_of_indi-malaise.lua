@@ -3,7 +3,6 @@
 -- plate_of_indi-malaise
 -- Teaches INDI-MALAISE
 -----------------------------------------
-
 local item_object = {}
 
 item_object.onItemCheck = function(target)

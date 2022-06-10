@@ -3,7 +3,6 @@
 -- plate_of_indi-int
 -- Teaches INDI-INT
 -----------------------------------------
-
 local item_object = {}
 
 item_object.onItemCheck = function(target)

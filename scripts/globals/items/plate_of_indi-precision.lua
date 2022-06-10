@@ -3,7 +3,6 @@
 -- plate_of_indi-precision
 -- Teaches INDI-PRECISION
 -----------------------------------------
-
 local item_object = {}
 
 item_object.onItemCheck = function(target)

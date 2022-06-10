@@ -1,6 +1,6 @@
 -----------------------------------------
 -- Spell: Indi-AGI
--- Enhances Agillity for party members near the caster. 
+-- Enhances Agillity for party members near the caster.
 -----------------------------------------
 require("scripts/globals/status")
 require("scripts/globals/job_utils/geomancer")

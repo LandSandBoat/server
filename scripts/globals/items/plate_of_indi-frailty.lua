@@ -3,7 +3,6 @@
 -- plate_of_indi-frailty
 -- Teaches INDI-FRAILTY
 -----------------------------------------
-
 local item_object = {}
 
 item_object.onItemCheck = function(target)

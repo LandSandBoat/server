@@ -1,6 +1,6 @@
 -----------------------------------------
 -- Spell: Indi-DEX
--- Enhances Dexterity for party members near the caster. 
+-- Enhances Dexterity for party members near the caster.
 -----------------------------------------
 require("scripts/globals/status")
 require("scripts/globals/job_utils/geomancer")

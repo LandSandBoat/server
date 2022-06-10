@@ -3,7 +3,6 @@
 -- plate_of_indi-wilt
 -- Teaches INDI-WILT
 -----------------------------------------
-
 local item_object = {}
 
 item_object.onItemCheck = function(target)

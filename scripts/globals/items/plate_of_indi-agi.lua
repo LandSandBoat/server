@@ -3,7 +3,6 @@
 -- plate_of_indi-agi
 -- Teaches INDI-AGI
 -----------------------------------------
-
 local item_object = {}
 
 item_object.onItemCheck = function(target)

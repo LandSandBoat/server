@@ -1,6 +1,6 @@
 -----------------------------------------
 -- Spell: Geo-Refresh
--- Gradually restores MP for party members within area of effect. 
+-- Gradually restores MP for party members within area of effect.
 -----------------------------------------
 require("scripts/globals/status")
 require("scripts/globals/job_utils/geomancer")

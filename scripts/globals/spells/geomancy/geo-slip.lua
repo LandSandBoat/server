@@ -1,6 +1,6 @@
 -----------------------------------------
 -- Spell: Geo-Slip
--- Reduces accuracy for enemies within area of effect. 
+-- Reduces accuracy for enemies within area of effect.
 -----------------------------------------
 require("scripts/globals/status")
 require("scripts/globals/job_utils/geomancer")

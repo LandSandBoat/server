@@ -3,7 +3,6 @@
 -- plate_of_indi-slow
 -- Teaches INDI-SLOW
 -----------------------------------------
-
 local item_object = {}
 
 item_object.onItemCheck = function(target)

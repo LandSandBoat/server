@@ -3,7 +3,6 @@
 -- plate_of_indi-barrier
 -- Teaches INDI-BARRIER
 -----------------------------------------
-
 local item_object = {}
 
 item_object.onItemCheck = function(target)

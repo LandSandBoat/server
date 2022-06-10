@@ -1,6 +1,6 @@
 -----------------------------------------
 -- Spell: Geo-Voidance
--- Enhances evasion for party members within area of effect. 
+-- Enhances evasion for party members within area of effect.
 -----------------------------------------
 require("scripts/globals/status")
 require("scripts/globals/job_utils/geomancer")

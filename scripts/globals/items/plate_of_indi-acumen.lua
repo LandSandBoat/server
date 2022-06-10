@@ -3,7 +3,6 @@
 -- plate_of_indi-acumen
 -- Teaches INDI-ACUMEN
 -----------------------------------------
-
 local item_object = {}
 
 item_object.onItemCheck = function(target)

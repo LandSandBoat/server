@@ -3,7 +3,6 @@
 -- plate_of_indi-fury
 -- Teaches INDI-FURY
 -----------------------------------------
-
 local item_object = {}
 
 item_object.onItemCheck = function(target)

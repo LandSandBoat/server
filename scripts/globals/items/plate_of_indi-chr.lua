@@ -3,7 +3,6 @@
 -- plate_of_indi-chr
 -- Teaches INDI-CHR
 -----------------------------------------
-
 local item_object = {}
 
 item_object.onItemCheck = function(target)

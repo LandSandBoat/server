@@ -3,7 +3,6 @@
 -- plate_of_indi-mnd
 -- Teaches INDI-MND
 -----------------------------------------
-
 local item_object = {}
 
 item_object.onItemCheck = function(target)

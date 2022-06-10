@@ -1,6 +1,6 @@
 -----------------------------------------
 -- Spell: Geo-Slow
--- Reduces attack speed for enemies within area of effect. 
+-- Reduces attack speed for enemies within area of effect.
 -----------------------------------------
 require("scripts/globals/status")
 require("scripts/globals/job_utils/geomancer")

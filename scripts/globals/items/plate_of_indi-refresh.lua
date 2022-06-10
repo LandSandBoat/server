@@ -3,7 +3,6 @@
 -- plate_of_indi-refresh
 -- Teaches INDI-REFRESH
 -----------------------------------------
-
 local item_object = {}
 
 item_object.onItemCheck = function(target)

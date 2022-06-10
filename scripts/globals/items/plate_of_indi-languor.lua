@@ -3,7 +3,6 @@
 -- plate_of_indi-languor
 -- Teaches INDI-LANGUOR
 -----------------------------------------
-
 local item_object = {}
 
 item_object.onItemCheck = function(target)

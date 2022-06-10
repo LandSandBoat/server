@@ -3,7 +3,6 @@
 -- plate_of_indi-str
 -- Teaches INDI-STR
 -----------------------------------------
-
 local item_object = {}
 
 item_object.onItemCheck = function(target)

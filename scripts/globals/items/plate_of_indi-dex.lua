@@ -3,7 +3,6 @@
 -- plate_of_indi-dex
 -- Teaches INDI-DEX
 -----------------------------------------
-
 local item_object = {}
 
 item_object.onItemCheck = function(target)

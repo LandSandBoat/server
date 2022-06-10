@@ -3,7 +3,6 @@
 -- plate_of_indi-torpor
 -- Teaches INDI-TORPOR
 -----------------------------------------
-
 local item_object = {}
 
 item_object.onItemCheck = function(target)

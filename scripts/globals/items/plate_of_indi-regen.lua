@@ -3,7 +3,6 @@
 -- plate_of_indi-regen
 -- Teaches INDI-REGEN
 -----------------------------------------
-
 local item_object = {}
 
 item_object.onItemCheck = function(target)

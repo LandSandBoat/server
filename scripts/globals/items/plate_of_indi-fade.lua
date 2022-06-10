@@ -3,7 +3,6 @@
 -- plate_of_indi-fade
 -- Teaches INDI-FADE
 -----------------------------------------
-
 local item_object = {}
 
 item_object.onItemCheck = function(target)

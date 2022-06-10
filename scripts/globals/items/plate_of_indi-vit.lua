@@ -3,7 +3,6 @@
 -- plate_of_indi-vit
 -- Teaches INDI-VIT
 -----------------------------------------
-
 local item_object = {}
 
 item_object.onItemCheck = function(target)

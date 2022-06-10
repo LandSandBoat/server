@@ -3,7 +3,6 @@
 -- plate_of_indi-focus
 -- Teaches INDI-FOCUS
 -----------------------------------------
-
 local item_object = {}
 
 item_object.onItemCheck = function(target)
