@@ -4997,6 +4997,9 @@ INSERT INTO `mob_spell_lists` VALUES('Silverhook', 492, 252, 1, 255); -- stun (1
 INSERT INTO `mob_spell_lists` VALUES('Silverhook', 492, 253, 1, 255); -- sleep (1~255)
 INSERT INTO `mob_spell_lists` VALUES('Silverhook', 492, 274, 1, 255); -- sleepga ii (1~255)
 
+-- Toxic Tamlyn (497)
+INSERT INTO `mob_spell_lists` VALUES ('Toxic_Tamlyn',497,231,1,255);
+
 -- Zoredonite (498)
 INSERT INTO `mob_spell_lists` VALUES ('Zoredonite',498,3,1,255);   -- cure_iii (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Zoredonite',498,30,1,255);  -- banish_iii (1~255)
