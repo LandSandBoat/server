@@ -215,6 +215,9 @@ global_objects=(
     PERIQIA_ASSAULT_POINT
     ILRUSI_ASSAULT_POINT
     NYZUL_ISLE_ASSAULT_POINT
+
+    ForceCrash
+    BuildString
 )
 
 ignores=(
