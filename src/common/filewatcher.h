@@ -2,11 +2,11 @@
 
 #include <filesystem>
 #include <functional>
-#include <string>
 #include <memory>
+#include <string>
 
-#include <efsw/efsw.hpp>
 #include <concurrentqueue.h>
+#include <efsw/efsw.hpp>
 
 class Filewatcher : public efsw::FileWatchListener
 {
@@ -18,5 +18,5 @@ public:
 
 private:
     std::unique_ptr<efsw::FileWatcher> fileWatcher;
-    std::string basePath;
+    std::string                        basePath;
 };

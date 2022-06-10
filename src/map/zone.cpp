@@ -834,13 +834,13 @@ void CZone::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message_type, C
 
 void CZone::UpdateCharPacket(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask)
 {
-    TracyZoneScoped
+    TracyZoneScoped;
     m_zoneEntities->UpdateCharPacket(PChar, type, updatemask);
 }
 
 void CZone::UpdateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 updatemask, bool alwaysInclude)
 {
-    TracyZoneScoped
+    TracyZoneScoped;
     m_zoneEntities->UpdateEntityPacket(PEntity, type, updatemask, alwaysInclude);
 }
 

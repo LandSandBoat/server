@@ -2,7 +2,7 @@
 -- Area: Sealions Den
 --  Mob: Omega
 -----------------------------------
-local oneToBeFeared = require("scripts/zones/Sealions_Den/helpers/One_to_be_Feared")
+local oneToBeFeared = require("scripts/zones/Sealions_Den/bcnms/one_to_be_feared_helper")
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}

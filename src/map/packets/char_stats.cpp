@@ -82,11 +82,11 @@ CCharStatsPacket::CCharStatsPacket(CCharEntity* PChar)
     ref<uint8>(0x57) = charutils::getRangedItemLevel(PChar);     // Item level of Ranged (Ranged priority, ammo if only)
 
     ref<uint32>(0x58) = (charutils::GetPoints(PChar, "unity_accolades") << 10) | (0x00 << 5 | PChar->profile.unity_leader);
-    //TODO: these may no longer be correct
+    // TODO: these may no longer be correct
     ref<uint16>(0x5C) = charutils::GetPoints(PChar, "current_accolades") / 1000; // Partial Personal Eval
     ref<uint16>(0x5E) = charutils::GetPoints(PChar, "prev_accolades") / 1000;    // Personal Eval
-    //0x65: master level
-    //0x66: bitflags, bit 0 = master breaker
-    //0x68: current exemplar points
-    //0x6C: required exemplar points
+    // 0x65: master level
+    // 0x66: bitflags, bit 0 = master breaker
+    // 0x68: current exemplar points
+    // 0x6C: required exemplar points
 }

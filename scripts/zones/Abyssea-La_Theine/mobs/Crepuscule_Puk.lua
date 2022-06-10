@@ -1,16 +1,20 @@
 -----------------------------------
-require("scripts/globals/abyssea")
-require("scripts/globals/keyitems")
-require("scripts/globals/status")
-require("scripts/globals/npc_util")
-require("scripts/globals/mobs")
+-- Area: Abyssea - La Theine
+--  Mob: Crepescule Puk
 -----------------------------------
+mixins = {require("scripts/mixins/families/puk")}
+-----------------------------------
+
 local entity = {}
 
-entity.onMobDeath = function(mob, player, isKiller)
-	  player:addCurrency('cruor', 15)
-	  player:PrintToPlayer("You obtain 15 Cruor!", 0xD)
-    end
+entity.onMobInitialize = function(mob)
+    mob:setMod(xi.mod.WIND_ABSORB, 100)
+end
 
+entity.onMobFight = function(mob, target)
+end
+
+entity.onMobDeath = function(mob, player, isKiller)
+end
 
 return entity

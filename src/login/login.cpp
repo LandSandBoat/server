@@ -132,7 +132,7 @@ int32 do_init(int32 argc, char** argv)
 
     gConsoleService->RegisterCommand(
     "verlock", "Cycle between version lock acceptance modes.",
-    [&]() -> void
+    [&](std::vector<std::string> inputs)
     {
         // handle wrap around from 2->3 as 0
         auto temp             = (version_info.ver_lock + 1) % 3;
@@ -156,7 +156,7 @@ int32 do_init(int32 argc, char** argv)
 
     gConsoleService->RegisterCommand(
     "maint_mode", "Cycle between maintenance modes.",
-    [&]() -> void
+    [&](std::vector<std::string> inputs)
     {
         maint_config.maint_mode = (maint_config.maint_mode + 1) % 2;
         config_write(MAINT_CONF_FILENAME, "maint", maint_config_write);
@@ -370,6 +370,10 @@ void login_config_read(const char* key, const char* value)
     {
         login_config.account_creation = config_switch(value);
     }
+    else if (strcmp(key, "character_deletion") == 0)
+    {
+        login_config.character_deletion = config_switch(value);
+    }
     else
     {
         ShowWarning("Unknown setting '%s' with value '%s' in login file. Has this setting been removed?", key, value);
@@ -419,8 +423,9 @@ void login_config_default()
     login_config.msg_server_port    = 54003;
     login_config.msg_server_ip      = "127.0.0.1";
 
-    login_config.log_user_ip      = "false";
-    login_config.account_creation = "true";
+    login_config.log_user_ip        = "false";
+    login_config.account_creation   = "true";
+    login_config.character_deletion = "true";
 }
 
 void login_config_read_from_env()

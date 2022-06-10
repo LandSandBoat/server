@@ -99,7 +99,8 @@ void CMobSpellContainer::AddSpell(SpellID spellId)
 
 void CMobSpellContainer::RemoveSpell(SpellID spellId)
 {
-    auto findAndRemove = [](std::vector<SpellID>& list, SpellID id) { list.erase(std::remove(list.begin(), list.end(), id), list.end()); };
+    auto findAndRemove = [](std::vector<SpellID>& list, SpellID id)
+    { list.erase(std::remove(list.begin(), list.end(), id), list.end()); };
 
     findAndRemove(m_gaList, spellId);
     findAndRemove(m_damageList, spellId);
@@ -119,7 +120,7 @@ std::optional<SpellID> CMobSpellContainer::GetAvailable(SpellID spellId)
                     spell->getSkillType() == SKILL_NINJUTSU ||
                     spell->getSkillType() == SKILL_SINGING ||
                     spell->getSkillType() == SKILL_WIND_INSTRUMENT ||
-                    spell->getSkillType() == SKILL_STRING_INSTRUMENT||
+                    spell->getSkillType() == SKILL_STRING_INSTRUMENT ||
                     spell->getSkillType() == SKILL_GEOMANCY;
     bool isNotInRecast = !m_PMob->PRecastContainer->Has(RECAST_MAGIC, static_cast<uint16>(spellId));
 
@@ -173,17 +174,19 @@ std::optional<SpellID> CMobSpellContainer::GetBestAvailable(SPELLFAMILY family)
 std::optional<SpellID> CMobSpellContainer::GetBestAgainstTargetWeakness(CBattleEntity* PTarget)
 {
     // Look up what the target has the _least resistance to_:
+    // clang-format off
     std::vector<int16> resistances
     {
-         PTarget->getMod(Mod::FIRE_RES),
-         PTarget->getMod(Mod::ICE_RES),
-         PTarget->getMod(Mod::WIND_RES),
-         PTarget->getMod(Mod::EARTH_RES),
-         PTarget->getMod(Mod::THUNDER_RES),
-         PTarget->getMod(Mod::WATER_RES),
-         PTarget->getMod(Mod::LIGHT_RES),
-         PTarget->getMod(Mod::DARK_RES),
+        PTarget->getMod(Mod::FIRE_RES),
+        PTarget->getMod(Mod::ICE_RES),
+        PTarget->getMod(Mod::WIND_RES),
+        PTarget->getMod(Mod::EARTH_RES),
+        PTarget->getMod(Mod::THUNDER_RES),
+        PTarget->getMod(Mod::WATER_RES),
+        PTarget->getMod(Mod::LIGHT_RES),
+        PTarget->getMod(Mod::DARK_RES),
     };
+    // clang-format on
 
     std::size_t weakestIndex = std::distance(resistances.begin(), std::min_element(resistances.begin(), resistances.end()));
 

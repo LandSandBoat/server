@@ -69,7 +69,7 @@ struct map_config_t
 
     uint32 max_time_lastupdate; // max interval wait of last update player char
     int32  vanadiel_time_epoch; // current timestamp - vanadiel_time_epoch = vana'diel time
-    int32  lightluggage_block; // если значение отлично от нуля, то персонажи с lightluggage будут удаляться с сервера автоматически
+    int32  lightluggage_block;
     bool   packetguard_enabled; // Block and report any packets that aren't in the allow-list for a player's current state.
 
     uint16 ah_base_fee_single; // Base AH fee for single items
@@ -166,14 +166,14 @@ struct map_session_data_t
 {
     uint32       client_addr        = 0;
     uint16       client_port        = 0;
-    uint16       client_packet_id   = 0;        // id of the last packet that came from the client
-    uint16       server_packet_id   = 0;        // id of the last packet sent by the server
-    int8*        server_packet_data = nullptr;  // a pointer to the packet, which was previously sent to the client
-    size_t       server_packet_size = 0;        // the size of the packet that was previously sent to the client
-    time_t       last_update        = 0;        // time of last packet recv
-    blowfish_t   blowfish           = {};       // unique decypher keys
-    CCharEntity* PChar              = nullptr;  // game char
-    uint8        shuttingDown       = 0;        // prevents double session closing
+    uint16       client_packet_id   = 0;       // id of the last packet that came from the client
+    uint16       server_packet_id   = 0;       // id of the last packet sent by the server
+    int8*        server_packet_data = nullptr; // a pointer to the packet, which was previously sent to the client
+    size_t       server_packet_size = 0;       // the size of the packet that was previously sent to the client
+    time_t       last_update        = 0;       // time of last packet recv
+    blowfish_t   blowfish           = {};      // unique decypher keys
+    CCharEntity* PChar              = nullptr; // game char
+    uint8        shuttingDown       = 0;       // prevents double session closing
 };
 
 extern map_config_t map_config;
@@ -199,9 +199,9 @@ int32 recv_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
 int32 parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*);      // main function parsing the packets
 int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*); // main function is building big packet
 
-void map_helpscreen(int32 flag);    // Map-Server Version Screen [venom]
+void map_helpscreen(int32 flag);
 
-int32 map_config_read(const int8* cfgName); // Map-Server Config [venom]
+int32 map_config_read(const int8* cfgName);
 int32 map_config_default();
 int32 map_config_from_env();
 

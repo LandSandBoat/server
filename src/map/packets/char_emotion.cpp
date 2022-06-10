@@ -49,7 +49,7 @@ CCharEmotionPacket::CCharEmotionPacket(CCharEntity* PChar, uint32 TargetID, uint
     }
     else if (EmoteID == Emote::AIM)
     {
-        ref<uint16>(0x12) = 65535;
+        ref<uint16>(0x12)    = 65535;
         CItemWeapon* PWeapon = static_cast<CItemWeapon*>(PChar->getStorage(PChar->equipLoc[SLOT_RANGED])->GetItem(PChar->equip[SLOT_RANGED]));
         if (PWeapon && PWeapon->getID() != 65535)
         {

@@ -19,8 +19,8 @@ zones[xi.zone.RALA_WATERWAYS] =
         LOGIN_CAMPAIGN_UNDERWAY = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER            = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         BAYLD_OBTAINED          = 7007, -- You have obtained <number> bayld!
+        NOTHING_HAPPENS         = 8072, -- Nothing happens.
         PERHAPS_THE_WISEST      = 8073, -- Perhaps the wisest approach would be to search for <keyitem> with which to open the decrepit sluice gate.
-        NOTHING_HAPPENS         = 8423, -- Nothing happens.
     },
     mob =
     {

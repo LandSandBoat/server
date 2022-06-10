@@ -933,6 +933,7 @@ INSERT INTO `item_usable` VALUES (5079,'scroll_of_foe_lullaby_ii',1,1,15,5,0,0,0
 INSERT INTO `item_usable` VALUES (5082,'scroll_of_cura_ii',1,1,11,5,0,0,0,0);
 INSERT INTO `item_usable` VALUES (5083,'scroll_of_cura_iii',1,1,11,5,0,0,0,0);
 INSERT INTO `item_usable` VALUES (5085,'scroll_of_regen_iv',1,1,11,5,0,0,0,0);
+INSERT INTO `item_usable` VALUES (5086,'scroll_of_regen_v',1,1,11,5,0,0,0,0);
 INSERT INTO `item_usable` VALUES (5087,'scroll_of_gain-str',1,1,11,5,0,0,0,0);
 INSERT INTO `item_usable` VALUES (5088,'scroll_of_gain-dex',1,1,11,5,0,0,0,0);
 INSERT INTO `item_usable` VALUES (5089,'scroll_of_gain-vit',1,1,11,5,0,0,0,0);

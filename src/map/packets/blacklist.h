@@ -22,8 +22,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #ifndef _CBLACKLISTPACKET_H
 #define _CBLACKLISTPACKET_H
 
-#include "common/cbasetypes.h"
 #include "basic.h"
+#include "common/cbasetypes.h"
 
 class CCharEntity;
 

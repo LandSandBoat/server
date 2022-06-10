@@ -41,40 +41,39 @@ class CBaseEntity;
 
 enum ROE_EVENT
 {
-    ROE_MOBKILL              = 1,
-    ROE_WSKILL_USE           = 2,
-    ROE_LOOTITEM             = 3,
-    ROE_SYNTHSUCCESS         = 4,
-    ROE_DMGTAKEN             = 5,
-    ROE_DMGDEALT             = 6,
-    ROE_EXPGAIN              = 7,
-    ROE_HEALALLY             = 8,
-    ROE_BUFFALLY             = 9,
-    ROE_LEVELUP              = 10,
-    ROE_QUEST_COMPLETE       = 11,
-    ROE_MISSION_COMPLETE     = 12,
-    ROE_HELMSUCCESS          = 13,
-    ROE_CHOCOBO_DIG_SUCCESS  = 14,
-    ROE_UNITY_CHAT           = 15,
-    ROE_MAGICBURST           = 16,
-    ROE_HEAL_UNITYALLY       = 17,
-    ROE_TALK_NPC             = 18,
+    ROE_MOBKILL             = 1,
+    ROE_WSKILL_USE          = 2,
+    ROE_LOOTITEM            = 3,
+    ROE_SYNTHSUCCESS        = 4,
+    ROE_DMGTAKEN            = 5,
+    ROE_DMGDEALT            = 6,
+    ROE_EXPGAIN             = 7,
+    ROE_HEALALLY            = 8,
+    ROE_BUFFALLY            = 9,
+    ROE_LEVELUP             = 10,
+    ROE_QUEST_COMPLETE      = 11,
+    ROE_MISSION_COMPLETE    = 12,
+    ROE_HELMSUCCESS         = 13,
+    ROE_CHOCOBO_DIG_SUCCESS = 14,
+    ROE_UNITY_CHAT          = 15,
+    ROE_MAGICBURST          = 16,
+    ROE_HEAL_UNITYALLY      = 17,
+    ROE_TALK_NPC            = 18,
     ROE_NONE // End of enum marker and OOB checkpost. Do not move or remove, place any new types above.
 };
 
-const uint16 ROE_TRUST_ID[11] =
-{
-     953, // Pieuje
+const uint16 ROE_TRUST_ID[11] = {
+    953,  // Pieuje
     1005, // Ayame
-     954, // Invincible Shield
-     955, // Apururu
+    954,  // Invincible Shield
+    955,  // Apururu
     1006, // Maat
     1007, // Aldo
-     956, // Jakoh Wahcondalo
+    956,  // Jakoh Wahcondalo
     1008, // Naja Salaheem
-     957, // Flaviria
-     980, // Yoran-Oran
-     981  // Sylvie
+    957,  // Flaviria
+    980,  // Yoran-Oran
+    981   // Sylvie
 };
 
 typedef std::array<uint16, 6>            RecordTimetable_D;

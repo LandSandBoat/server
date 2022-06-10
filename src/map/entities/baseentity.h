@@ -22,9 +22,9 @@
 #ifndef _BASEENTITY_H
 #define _BASEENTITY_H
 
+#include "../packets/message_basic.h"
 #include "common/cbasetypes.h"
 #include "common/mmo.h"
-#include "../packets/message_basic.h"
 #include <map>
 #include <memory>
 #include <vector>
@@ -44,7 +44,7 @@ enum ENTITYTYPE : uint8
 enum class STATUS_TYPE : uint8
 {
     NORMAL        = 0,
-    MOB           = 1,   // STATUS_UPDATE        = 1,
+    MOB           = 1, // STATUS_UPDATE = 1,
     DISAPPEAR     = 2,
     INVISIBLE     = 3,
     STATUS_4      = 4,
@@ -69,24 +69,24 @@ enum ANIMATIONTYPE : uint8
     ANIMATION_ELEVATOR_DOWN = 11,
     // seems to be WALLHACK                     = 28,
     // seems to be WALLHACK also..              = 31,
-    ANIMATION_HEALING            = 33,
+    ANIMATION_HEALING                = 33,
     ANIMATION_FISHING_FISH_OLD       = 38,
     ANIMATION_FISHING_CAUGHT_OLD     = 39,
     ANIMATION_FISHING_ROD_BREAK_OLD  = 40,
     ANIMATION_FISHING_LINE_BREAK_OLD = 41,
     ANIMATION_FISHING_MONSTER_OLD    = 42,
     ANIMATION_FISHING_STOP_OLD       = 43,
-    ANIMATION_SYNTH              = 44,
-    ANIMATION_SIT                = 47,
-    ANIMATION_RANGED             = 48,
-    ANIMATION_FISHING_START_OLD  = 50,
-    ANIMATION_FISHING_START      = 56,
-    ANIMATION_FISHING_FISH       = 57,
-    ANIMATION_FISHING_CAUGHT     = 58,
-    ANIMATION_FISHING_ROD_BREAK  = 59,
-    ANIMATION_FISHING_LINE_BREAK = 60,
-    ANIMATION_FISHING_MONSTER    = 61,
-    ANIMATION_FISHING_STOP       = 62,
+    ANIMATION_SYNTH                  = 44,
+    ANIMATION_SIT                    = 47,
+    ANIMATION_RANGED                 = 48,
+    ANIMATION_FISHING_START_OLD      = 50,
+    ANIMATION_FISHING_START          = 56,
+    ANIMATION_FISHING_FISH           = 57,
+    ANIMATION_FISHING_CAUGHT         = 58,
+    ANIMATION_FISHING_ROD_BREAK      = 59,
+    ANIMATION_FISHING_LINE_BREAK     = 60,
+    ANIMATION_FISHING_MONSTER        = 61,
+    ANIMATION_FISHING_STOP           = 62,
     // 63 through 72 are used with /sitchair
     ANIMATION_SITCHAIR_0  = 63,
     ANIMATION_SITCHAIR_1  = 64,
@@ -139,7 +139,7 @@ enum MOUNTTYPE : uint8
     MOUNT_WIVRE          = 30,
     MOUNT_RED_RAPTOR     = 31,
     //
-    MOUNT_MAX            = 32,
+    MOUNT_MAX = 32,
 };
 
 enum class ALLEGIANCE_TYPE : uint8
@@ -169,19 +169,19 @@ enum UPDATETYPE : uint8
 
 enum ENTITYFLAGS : uint16
 {
-    FLAG_NONE           = 0x000,
-    FLAG_INFO_ICON      = 0x001, // (I) Icon next to name
+    FLAG_NONE      = 0x000,
+    FLAG_INFO_ICON = 0x001, // (I) Icon next to name
 
     // TODO: Flags 0x002, 0x004 and 0x008 do different things for different entities.
     //     : It isn't one-size-fits-all, and different combinations may do different things.
     //     : It'll need to researched more.
     // FLAG_ALT_APPEARANCE = 0x002,
 
-    FLAG_HIDE_NAME      = 0x008,
-    FLAG_CALL_FOR_HELP  = 0x020,
-    FLAG_HIDE_MODEL     = 0x080,
-    FLAG_HIDE_HP        = 0x100,
-    FLAG_UNTARGETABLE   = 0x800,
+    FLAG_HIDE_NAME     = 0x008,
+    FLAG_CALL_FOR_HELP = 0x020,
+    FLAG_HIDE_MODEL    = 0x080,
+    FLAG_HIDE_HP       = 0x100,
+    FLAG_UNTARGETABLE  = 0x800,
 };
 
 enum NAMEVIS : uint8
@@ -253,7 +253,7 @@ public:
     virtual bool isWideScannable();      // checks if the entity should show up on wide scan
 
     CBaseEntity* GetEntity(uint16 targid, uint8 filter = -1) const;
-    void SendZoneUpdate();
+    void         SendZoneUpdate();
 
     void   ResetLocalVars();
     uint32 GetLocalVar(const char* var);
@@ -271,14 +271,14 @@ public:
 
     bool IsDynamicEntity() const;
 
-    uint32          id;           // global identifier unique on the server
-    uint16          targid;       // local identifier unique to the zone
-    ENTITYTYPE      objtype;      // Type of entity
-    STATUS_TYPE     status;       // Entity status (different entities - different statuses)
-    uint16          m_TargID;     // the targid of the object the entity is looking at
-    string_t        name;         // Entity name
-    string_t        packetName;   // Used to override name when being sent to the client
-    look_t          look;
+    uint32          id;         // global identifier unique on the server
+    uint16          targid;     // local identifier unique to the zone
+    ENTITYTYPE      objtype;    // Type of entity
+    STATUS_TYPE     status;     // Entity status (different entities - different statuses)
+    uint16          m_TargID;   // the targid of the object the entity is looking at
+    string_t        name;       // Entity name
+    string_t        packetName; // Used to override name when being sent to the client
+    look_t          look; //
     look_t          mainlook;     // only used if mob use changeSkin() or player /lockstyle
     location_t      loc;          // Location of entity
     uint8           animation;    // animation

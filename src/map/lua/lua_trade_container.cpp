@@ -19,8 +19,8 @@
 ===========================================================================
 */
 
-#include "common/logging.h"
 #include "../items/item.h"
+#include "common/logging.h"
 
 #include "../trade_container.h"
 #include "lua_item.h"

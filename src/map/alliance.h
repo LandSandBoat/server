@@ -56,7 +56,7 @@ public:
 
 private:
     CParty* aLeader; // alliance lead party
-    uint32 loadPartyCount() const;
+    uint32  loadPartyCount() const;
 };
 
 #endif

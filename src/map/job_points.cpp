@@ -34,9 +34,9 @@ void CJobPoints::LoadJobPoints()
     memset(m_jobPoints, 0, sizeof(m_jobPoints));
     if (
         sql->Query("SELECT charid, jobid, capacity_points, job_points, job_points_spent, "
-                             "jptype0, jptype1, jptype2, jptype3, jptype4, jptype5, jptype6, jptype7, jptype8, jptype9 "
-                             "FROM char_job_points WHERE charid = %u ORDER BY jobid ASC",
-                  m_PChar->id) != SQL_ERROR)
+                   "jptype0, jptype1, jptype2, jptype3, jptype4, jptype5, jptype6, jptype7, jptype8, jptype9 "
+                   "FROM char_job_points WHERE charid = %u ORDER BY jobid ASC",
+                   m_PChar->id) != SQL_ERROR)
     {
         for (uint64 i = 0; i < sql->NumRows(); i++)
         {
@@ -112,7 +112,7 @@ void CJobPoints::RaiseJobPoint(JOBPOINT_TYPE jpType)
         jobPoint->value++;
 
         sql->Query("UPDATE char_job_points SET jptype%u='%u', job_points='%u', job_points_spent='%u' WHERE charid='%u' AND jobid='%u'",
-                  JobPointTypeIndex(jobPoint->id), jobPoint->value, job->currentJp, job->totalJpSpent, m_PChar->id, job->jobId);
+                   JobPointTypeIndex(jobPoint->id), jobPoint->value, job->currentJp, job->totalJpSpent, m_PChar->id, job->jobId);
 
         jobpointutils::RefreshGiftMods(m_PChar);
     }
@@ -129,7 +129,7 @@ void CJobPoints::SetJobPoints(int16 amount)
     amount           = std::clamp<int16>(amount, 0, 500);
 
     sql->Query("INSERT INTO char_job_points SET charid='%u', jobid='%u', job_points='%u' ON DUPLICATE KEY UPDATE job_points='%u'",
-              m_PChar->id, currentJob, amount, amount);
+               m_PChar->id, currentJob, amount, amount);
 
     LoadJobPoints();
 }
@@ -188,7 +188,7 @@ void CJobPoints::SetCapacityPoints(uint16 amount)
     m_jobPoints[currentJob].capacityPoints = amount;
 
     sql->Query("INSERT INTO char_job_points SET charid='%u', jobid='%u', capacity_points='%u' ON DUPLICATE KEY UPDATE capacity_points='%u'",
-              m_PChar->id, currentJob, amount, amount);
+               m_PChar->id, currentJob, amount, amount);
 }
 
 uint8 CJobPoints::GetJobPointValue(JOBPOINT_TYPE jpType)

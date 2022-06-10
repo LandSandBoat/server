@@ -549,7 +549,8 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
             }
             else
             {
-                auto check = [PEntity, &found](auto entity) {
+                auto check = [PEntity, &found](auto entity)
+                {
                     if (entity.PMob == PEntity)
                     {
                         found = true;
@@ -756,7 +757,8 @@ void CBattlefield::ClearEnmityForEntity(CBattleEntity* PEntity)
         return;
     }
 
-    auto func = [&](auto mob) {
+    auto func = [&](auto mob)
+    {
         if (PEntity->PPet)
         {
             mob->PEnmityContainer->Clear(PEntity->PPet->id);
@@ -770,7 +772,9 @@ void CBattlefield::ClearEnmityForEntity(CBattleEntity* PEntity)
 
 bool CBattlefield::CheckInProgress()
 {
-    ForEachEnemy([&](CMobEntity* PMob) {
+    // clang-format off
+    ForEachEnemy([&](CMobEntity* PMob)
+    {
         if (!PMob->PEnmityContainer->GetEnmityList()->empty())
         {
             if (m_Status == BATTLEFIELD_STATUS_OPEN)
@@ -780,6 +784,7 @@ bool CBattlefield::CheckInProgress()
             m_Attacked = true;
         }
     });
+    // clang-format on
 
     // mobs might have 0 enmity but we wont allow anymore players to enter
     return m_Status != BATTLEFIELD_STATUS_OPEN;

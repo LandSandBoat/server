@@ -97,7 +97,7 @@ namespace luautils
     bool                                  contentRestrictionEnabled;
     std::unordered_map<std::string, bool> contentEnabledMap;
 
-    std::unique_ptr<Filewatcher>  filewatcher;
+    std::unique_ptr<Filewatcher> filewatcher;
 
     std::unordered_map<uint32, sol::table> customMenuContext;
 
@@ -122,8 +122,7 @@ namespace luautils
         lua.do_string(
             "function __FILE__() return debug.getinfo(2, 'S').source end\n"
             "function __LINE__() return debug.getinfo(2, 'l').currentline end\n"
-            "function __FUNC__() return debug.getinfo(2, 'n').name end\n"
-        );
+            "function __FUNC__() return debug.getinfo(2, 'n').name end\n");
 
         // Bind print(...) globally
         lua.set_function("print", &luautils::print);
@@ -196,7 +195,9 @@ namespace luautils
         lua.set_function("GetCachedInstanceScript", &luautils::GetCachedInstanceScript);
 
         // This binding specifically exists to forcefully crash the server.
-        lua.set_function("ForceCrash", [](){ crash(); });
+        // clang-format off
+        lua.set_function("ForceCrash", []() { crash(); });
+        // clang-format on
 
         // Register Sol Bindings
         CLuaAbility::Register();
@@ -214,8 +215,8 @@ namespace luautils
 
         // Load globals
         // Truly global files first
-        lua.script_file("./scripts/settings/main.lua");
-        lua.script_file("./scripts/globals/common.lua");
+        lua.safe_script_file("./scripts/settings/main.lua", &sol::script_pass_on_error);
+        lua.safe_script_file("./scripts/globals/common.lua", &sol::script_pass_on_error);
         roeutils::init(); // TODO: Get rid of the need to do this
 
         // Then the rest...
@@ -225,9 +226,9 @@ namespace luautils
             {
                 // TODO: Add to verbose logging
                 auto relative_path_string = entry.path().relative_path().generic_string();
-                //auto lua_path = std::filesystem::relative(entry.path(), "./").replace_extension("").generic_string();
-                //ShowInfo("Loading global script %s", lua_path);
-                auto result = lua.safe_script_file(relative_path_string);
+                // auto lua_path = std::filesystem::relative(entry.path(), "./").replace_extension("").generic_string();
+                // ShowInfo("Loading global script %s", lua_path);
+                auto result = lua.safe_script_file(relative_path_string, &sol::script_pass_on_error);
                 if (!result.valid())
                 {
                     sol::error err = result;
@@ -402,7 +403,7 @@ namespace luautils
             }
             case sol::type::table:
             {
-                auto table  = obj.as<sol::table>();
+                auto table = obj.as<sol::table>();
 
                 // Stringify everything first
                 std::vector<std::string> stringVec;
@@ -414,10 +415,10 @@ namespace luautils
                 // Accumulate into a pretty string
                 std::string outStr = "table{ ";
                 outStr += std::accumulate(std::begin(stringVec), std::end(stringVec), std::string(),
-                [](std::string& ss, std::string& s)
-                {
-                    return ss.empty() ? s : ss + ", " + s;
-                });
+                                          [](std::string& ss, std::string& s)
+                                          {
+                                              return ss.empty() ? s : ss + ", " + s;
+                                          });
                 return outStr + " }";
             }
             default:
@@ -609,11 +610,13 @@ namespace luautils
             {
                 std::string requireName = fmt::format("scripts/{}/{}/{}", parts[0], parts[1], parts[2]);
 
+                // clang-format off
                 auto result = lua.safe_script(fmt::format(R"(
                     require("scripts/globals/utils")
                     package.loaded["{0}"] = nil
                     utils.prequire("{0}")
                 )", requireName));
+                // clang-format on
 
                 ShowInfo("[FileWatcher] INTERACTION HELPERS %s", parts[1]);
             }
@@ -637,7 +640,8 @@ namespace luautils
                     if InteractionGlobal and res then
                         InteractionGlobal.lookup:addContainer(res)
                     end
-                )", requireName));
+                )",
+                                                          requireName));
 
                 if (!result.valid())
                 {
@@ -659,7 +663,7 @@ namespace luautils
         }
 
         // Try and load script
-        auto file_result = lua.safe_script_file(filename);
+        auto file_result = lua.safe_script_file(filename, &sol::script_pass_on_error);
         if (!file_result.valid())
         {
             sol::error err = file_result;
@@ -813,11 +817,15 @@ namespace luautils
     {
         CacheLuaObjectFromFile("./scripts/globals/interaction/interaction_global.lua");
 
-        auto initZones = lua["xi"]["globals"]["interaction"]["interaction_global"]["initZones"];
+        auto                initZones = lua["xi"]["globals"]["interaction"]["interaction_global"]["initZones"];
+
         std::vector<uint16> zoneIds;
-        zoneutils::ForEachZone([&zoneIds](CZone* PZone) {
+        // clang-format off
+        zoneutils::ForEachZone([&zoneIds](CZone* PZone)
+        {
             zoneIds.push_back(PZone->GetID());
         });
+        // clang-format on
 
         auto result = initZones(zoneIds);
 
@@ -827,12 +835,6 @@ namespace luautils
             ShowError("luautils::InitInteractionGlobal: %s", err.what());
         }
     }
-
-    /************************************************************************
-     *                                                                       *
-     *                                                                       *
-     *                                                                       *
-     ************************************************************************/
 
     std::optional<CLuaZone> GetZone(uint16 zoneId)
     {
@@ -1427,15 +1429,15 @@ namespace luautils
     }
 
     /*******************************************************************************
-    *                                                                              *
-    *  Returns data of Magian trials                                               *
-    *  Will return a single table with keys matching the SQL table column          *
-    *  names if given one trial #, or will return a table of likewise trial        *
-    *  columns if given a table of trial #s.                                       *
-    *  examples: GetMagianTrial(2)          returns {column = value, ...}          *
-    *            GetMagianTrial({2, 16})    returns { 2 = { column = value, ...},  *
-    *                                                16 = { column = value, ...}}  *
-    *******************************************************************************/
+     *                                                                              *
+     *  Returns data of Magian trials                                               *
+     *  Will return a single table with keys matching the SQL table column          *
+     *  names if given one trial #, or will return a table of likewise trial        *
+     *  columns if given a table of trial #s.                                       *
+     *  examples: GetMagianTrial(2)          returns {column = value, ...}          *
+     *            GetMagianTrial({2, 16})    returns { 2 = { column = value, ...},  *
+     *                                                16 = { column = value, ...}}  *
+     *******************************************************************************/
 
     sol::table GetMagianTrial(sol::variadic_args va)
     {
@@ -1506,10 +1508,10 @@ namespace luautils
     }
 
     /*******************************************************************************
-    *                                                                              *
-    *  Returns a list of trial numbers who have the given parent trial             *
-    *                                                                              *
-    *******************************************************************************/
+     *                                                                              *
+     *  Returns a list of trial numbers who have the given parent trial             *
+     *                                                                              *
+     *******************************************************************************/
 
     sol::table GetMagianTrialsWithParent(int32 parentTrial)
     {
@@ -1700,7 +1702,7 @@ namespace luautils
         auto filename = fmt::format("./scripts/zones/{}/Zone.lua", name);
 
         auto onZoneInFramework = lua["xi"]["globals"]["interaction"]["interaction_global"]["onZoneIn"];
-        auto onZoneIn = GetCacheEntryFromFilename(filename)["onZoneIn"];
+        auto onZoneIn          = GetCacheEntryFromFilename(filename)["onZoneIn"];
 
         auto result = onZoneInFramework(CLuaBaseEntity(PChar), PChar->loc.prevzone, onZoneIn);
         if (!result.valid())
@@ -1731,7 +1733,7 @@ namespace luautils
         auto filename = fmt::format("./scripts/zones/{}/Zone.lua", name);
 
         auto afterZoneInFramework = lua["xi"]["globals"]["interaction"]["interaction_global"]["afterZoneIn"];
-        auto afterZoneIn = GetCacheEntryFromFilename(filename)["afterZoneIn"];
+        auto afterZoneIn          = GetCacheEntryFromFilename(filename)["afterZoneIn"];
 
         auto result = afterZoneInFramework(CLuaBaseEntity(PChar), afterZoneIn);
         if (!result.valid())
@@ -1884,7 +1886,7 @@ namespace luautils
         PChar->eventPreparation->scriptFile   = filename;
 
         auto onTriggerFramework = lua["xi"]["globals"]["interaction"]["interaction_global"]["onTrigger"];
-        auto onTrigger = GetCacheEntryFromFilename(filename)["onTrigger"];
+        auto onTrigger          = GetCacheEntryFromFilename(filename)["onTrigger"];
 
         auto result = onTriggerFramework(CLuaBaseEntity(PChar), CLuaBaseEntity(PNpc), onTrigger);
         if (!result.valid())
@@ -1949,7 +1951,7 @@ namespace luautils
         PChar->eventPreparation = PChar->currentEvent;
 
         auto onEventUpdateFramework = lua["xi"]["globals"]["interaction"]["interaction_global"]["onEventUpdate"];
-        auto onEventUpdate = LoadEventScript(PChar, "onEventUpdate");
+        auto onEventUpdate          = LoadEventScript(PChar, "onEventUpdate");
 
         std::optional<CLuaBaseEntity> optTarget = std::nullopt;
         if (PChar->currentEvent->targetEntity)
@@ -1979,7 +1981,7 @@ namespace luautils
         PChar->eventPreparation = PChar->currentEvent;
 
         auto onEventUpdateFramework = lua["xi"]["globals"]["interaction"]["interaction_global"]["onEventUpdate"];
-        auto onEventUpdate = LoadEventScript(PChar, "onEventUpdate");
+        auto onEventUpdate          = LoadEventScript(PChar, "onEventUpdate");
 
         std::optional<CLuaBaseEntity> optTarget = std::nullopt;
         if (PChar->currentEvent->targetEntity)
@@ -2015,7 +2017,7 @@ namespace luautils
         PChar->eventPreparation = PChar->currentEvent;
 
         auto onEventFinishFramework = lua["xi"]["globals"]["interaction"]["interaction_global"]["onEventFinish"];
-        auto onEventFinish = LoadEventScript(PChar, "onEventFinish");
+        auto onEventFinish          = LoadEventScript(PChar, "onEventFinish");
 
         std::optional<CLuaBaseEntity> optTarget = std::nullopt;
         if (PChar->currentEvent->targetEntity)
@@ -2678,7 +2680,7 @@ namespace luautils
 
         auto filename = fmt::format("./scripts/zones/{}/mobs/{}.lua", zone_name, name);
 
-        auto script_result = lua.script_file(filename);
+        auto script_result = lua.safe_script_file(filename, &sol::script_pass_on_error);
         if (!script_result.valid())
         {
             return -1;
@@ -2727,7 +2729,7 @@ namespace luautils
 
         auto filename = fmt::format("./scripts/mixins/zones/{}.lua", PMob->loc.zone->GetName());
 
-        auto script_result = lua.script_file(filename);
+        auto script_result = lua.safe_script_file(filename, &sol::script_pass_on_error);
         if (!script_result.valid())
         {
             return -1;
@@ -3007,7 +3009,7 @@ namespace luautils
         if (PTarget->objtype == TYPE_PC)
         {
             ((CCharEntity*)PTarget)->eventPreparation->targetEntity = PMob;
-            ((CCharEntity*)PTarget)->eventPreparation->scriptFile = filename;
+            ((CCharEntity*)PTarget)->eventPreparation->scriptFile   = filename;
         }
 
         sol::function onMobDrawIn = getEntityCachedFunction(PMob, "onMobDrawIn");
@@ -3119,7 +3121,9 @@ namespace luautils
                 return -1;
             }
 
-            PChar->ForAlliance([PMob, PChar, &onMobDeathEx](CBattleEntity* PMember) {
+            // clang-format off
+            PChar->ForAlliance([PMob, PChar, &onMobDeathEx](CBattleEntity* PMember)
+            {
                 if (PMember->getZone() == PChar->getZone())
                 {
                     CLuaBaseEntity LuaMobEntity(PMob);
@@ -3135,13 +3139,16 @@ namespace luautils
                     }
                 }
             });
+            // clang-format on
 
             auto filename = fmt::format("./scripts/zones/{}/mobs/{}.lua", PMob->loc.zone->GetName(), PMob->GetName());
 
-            auto onMobDeathFramework = lua["xi"]["globals"]["interaction"]["interaction_global"]["onMobDeath"];
-            sol::function onMobDeath = getEntityCachedFunction(PMob, "onMobDeath");
+            auto          onMobDeathFramework = lua["xi"]["globals"]["interaction"]["interaction_global"]["onMobDeath"];
+            sol::function onMobDeath          = getEntityCachedFunction(PMob, "onMobDeath");
 
-            PChar->ForAlliance([PMob, PChar, &onMobDeathFramework, &onMobDeath, &filename](CBattleEntity* PPartyMember) {
+            // clang-format off
+            PChar->ForAlliance([PMob, PChar, &onMobDeathFramework, &onMobDeath, &filename](CBattleEntity* PPartyMember)
+            {
                 CCharEntity* PMember = (CCharEntity*)PPartyMember;
                 if (PMember && PMember->getZone() == PChar->getZone())
                 {
@@ -3166,11 +3173,12 @@ namespace luautils
                     }
                 }
             });
+            // clang-format on
         }
         else
         {
-            auto onMobDeathFramework = lua["xi"]["globals"]["interaction"]["interaction_global"]["onMobDeath"];
-            sol::function onMobDeath = getEntityCachedFunction(PMob, "onMobDeath");
+            auto          onMobDeathFramework = lua["xi"]["globals"]["interaction"]["interaction_global"]["onMobDeath"];
+            sol::function onMobDeath          = getEntityCachedFunction(PMob, "onMobDeath");
 
             // onMobDeath(mob, player, isKiller, noKiller)
             auto result = onMobDeathFramework(CLuaBaseEntity(PMob), sol::lua_nil, sol::lua_nil, true, onMobDeath);
@@ -3658,7 +3666,7 @@ namespace luautils
         if (!onAbilityCheck.valid())
         {
             // TODO: We rely on this to fail silently in certain cases, but this is bad :(
-            //ShowWarning("luautils::onAbilityCheck - Ability %s not found.", PAbility->getName());
+            // ShowWarning("luautils::onAbilityCheck - Ability %s not found.", PAbility->getName());
             return 0;
         }
 
@@ -3723,12 +3731,6 @@ namespace luautils
 
         return result.get_type(0) == sol::type::number ? result.get<int32>(0) : 0;
     }
-
-    /************************************************************************
-     *                                                                       *
-     *                                                                       *
-     *                                                                       *
-     ************************************************************************/
 
     int32 OnUseAbility(CBattleEntity* PUser, CBattleEntity* PTarget, CAbility* PAbility, action_t* action)
     {
@@ -4050,12 +4052,6 @@ namespace luautils
         return 0;
     }
 
-    /************************************************************************
-     *                                                                       *
-     *                                                                       *
-     *                                                                       *
-     ************************************************************************/
-
     void StartElevator(uint32 ElevatorID)
     {
         TracyZoneScoped;
@@ -4250,7 +4246,7 @@ namespace luautils
         }
 
         PChar->eventPreparation->targetEntity = PChar;
-        PChar->eventPreparation->scriptFile = filename;
+        PChar->eventPreparation->scriptFile   = filename;
 
         auto result = onBattlefieldLeave(CLuaBaseEntity(PChar), CLuaBattlefield(PBattlefield), LeaveCode);
         if (!result.valid())
