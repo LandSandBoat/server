@@ -13651,12 +13651,20 @@ uint16 CLuaBaseEntity::getStealItem()
 
         if (PDropList && !PMob->m_ItemStolen)
         {
+            // Steal item randomly selected from steal drop table
+            std::vector<uint16> items;
+
             for (const DropItem_t& drop : PDropList->Items)
             {
                 if (drop.DropType == DROP_STEAL)
                 {
-                    return drop.ItemID;
+                    items.emplace_back(drop.ItemID);
                 }
+            }
+
+            if (!items.empty())
+            {
+                return xirand::GetRandomElement(items);
             }
         }
     }
