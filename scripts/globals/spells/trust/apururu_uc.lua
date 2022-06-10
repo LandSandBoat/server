@@ -1,7 +1,7 @@
 -----------------------------------
 -- Trust: Apururu UC
 -----------------------------------
-require("scripts/globals/trust")
+--[[require("scripts/globals/trust")
 require("scripts/globals/items")
 -----------------------------------
 local spell_object = {}
@@ -75,3 +75,4 @@ spell_object.onMobDeath = function(mob)
 end
 
 return spell_object
+]]--
