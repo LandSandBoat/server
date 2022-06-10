@@ -112,57 +112,6 @@ INSERT INTO `item_mods_pet` VALUES (14523,2,24,5);      -- Valoredge Automaton: 
 INSERT INTO `item_mods_pet` VALUES (14523,2,18,6);      -- Sharpshot Automaton: HP+18
 INSERT INTO `item_mods_pet` VALUES (14523,2,16,7);      -- Stormwaker Automaton: HP+16
 INSERT INTO `item_mods_pet` VALUES (14523,5,24,7);      -- Stormwaker Automaton: MP+24
-INSERT INTO `item_mods_pet` VALUES (14625,1,500,0); -- Pet Def
-INSERT INTO `item_mods_pet` VALUES (14625,2,1200,0); -- Pet Hp
-INSERT INTO `item_mods_pet` VALUES (14625,5,200,0); -- Pet Mp
-INSERT INTO `item_mods_pet` VALUES (14625,8,200,0); -- Pet Str
-INSERT INTO `item_mods_pet` VALUES (14625,9,200,0); -- Pet Dex
-INSERT INTO `item_mods_pet` VALUES (14625,10,100,0); -- Pet Vit
-INSERT INTO `item_mods_pet` VALUES (14625,11,100,0); -- Pet Agi
-INSERT INTO `item_mods_pet` VALUES (14625,13,100,0); -- Pet Mnd
-INSERT INTO `item_mods_pet` VALUES (14625,14,100,0); -- Pet Chr
-INSERT INTO `item_mods_pet` VALUES (14625,23,1000,0); -- Pet Att
-INSERT INTO `item_mods_pet` VALUES (14625,24,1000,0); -- Pet Ratt
-INSERT INTO `item_mods_pet` VALUES (14625,25,200,0); -- Pet Acc
-INSERT INTO `item_mods_pet` VALUES (14625,26,200,0); -- Pet Racc
-INSERT INTO `item_mods_pet` VALUES (14625,28,-50,0); -- Pet Matt
-INSERT INTO `item_mods_pet` VALUES (14625,29,50,0); -- Pet Mdef
-INSERT INTO `item_mods_pet` VALUES (14625,30,500,0); -- Pet Macc
-INSERT INTO `item_mods_pet` VALUES (14625,31,50,0); -- Pet Meva
-INSERT INTO `item_mods_pet` VALUES (14625,32,-8,0); -- Pet Fire Dmg
-INSERT INTO `item_mods_pet` VALUES (14625,33,-8,0); -- Pet Ice Dmg
-INSERT INTO `item_mods_pet` VALUES (14625,34,-8,0); -- Pet Wind Dmg
-INSERT INTO `item_mods_pet` VALUES (14625,35,-8,0); -- Pet Earth Dmg
-INSERT INTO `item_mods_pet` VALUES (14625,36,-8,0); -- Pet Thunder Dmg
-INSERT INTO `item_mods_pet` VALUES (14625,37,-8,0); -- Pet Water Dmg
-INSERT INTO `item_mods_pet` VALUES (14625,38,-8,0); -- Pet Light Dmg
-INSERT INTO `item_mods_pet` VALUES (14625,39,-8,0); -- Pet Dark Dmg
-INSERT INTO `item_mods_pet` VALUES (14625,48,100,0); -- Pet WS Acc
-INSERT INTO `item_mods_pet` VALUES (14625,126,-40,0); -- Pet BP Dmg
-INSERT INTO `item_mods_pet` VALUES (14625,165,10,0); -- Pet Crit Hit Rate
-INSERT INTO `item_mods_pet` VALUES (14625,384,5000,0); -- Pet Haste
-INSERT INTO `item_mods_pet` VALUES (14625,421,50,0); -- Pet Crit Dmg
-INSERT INTO `item_mods_pet` VALUES (14625,487,-10,0); -- Pet Magic Burst
-INSERT INTO `item_mods_pet` VALUES (14680,1,200,0); -- Pet Def
-INSERT INTO `item_mods_pet` VALUES (14680,2,1500,0); -- Pet Hp
-INSERT INTO `item_mods_pet` VALUES (14680,5,300,0); -- Pet Mp
-INSERT INTO `item_mods_pet` VALUES (14680,8,300,0); -- Pet Str
-INSERT INTO `item_mods_pet` VALUES (14680,9,300,0); -- Pet Dex
-INSERT INTO `item_mods_pet` VALUES (14680,10,300,0); -- Pet Vit
-INSERT INTO `item_mods_pet` VALUES (14680,11,300,0); -- Pet Agi
-INSERT INTO `item_mods_pet` VALUES (14680,13,300,0); -- Pet Mnd
-INSERT INTO `item_mods_pet` VALUES (14680,14,300,0); -- Pet Chr
-INSERT INTO `item_mods_pet` VALUES (14680,23,1500,0); -- Pet Att
-INSERT INTO `item_mods_pet` VALUES (14680,24,1500,0); -- Pet Ratt
-INSERT INTO `item_mods_pet` VALUES (14680,25,200,0); -- Pet Acc
-INSERT INTO `item_mods_pet` VALUES (14680,26,200,0); -- Pet Racc
-INSERT INTO `item_mods_pet` VALUES (14680,62,1500,0); -- Pet Att %
-INSERT INTO `item_mods_pet` VALUES (14680,165,18,0); -- Pet Crit Hit Rate
-INSERT INTO `item_mods_pet` VALUES (14680,171,-10,0); -- Pet Delay
-INSERT INTO `item_mods_pet` VALUES (14680,288,20,0); -- Pet Double Att
-INSERT INTO `item_mods_pet` VALUES (14680,368,3000,0); -- Pet regain
-INSERT INTO `item_mods_pet` VALUES (14680,384,6000,0); -- Pet Haste
-INSERT INTO `item_mods_pet` VALUES (14680,421,50,0); -- Pet Crit Dmg
 INSERT INTO `item_mods_pet` VALUES (14872,2,10,2);      -- Ostreger Mitts Wyvern: HP +10
 INSERT INTO `item_mods_pet` VALUES (14903,25,5,2);      -- Drn. Fng. Gnt. +1 Wyvern: Increases Accuracy +5 (?)
 INSERT INTO `item_mods_pet` VALUES (14904,27,-2,1);     -- Evk. Bracers +1 Avatar: Enmity -2

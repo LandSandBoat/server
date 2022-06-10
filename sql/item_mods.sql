@@ -14608,12 +14608,9 @@ INSERT INTO `item_mods` VALUES (14623,22,11);
 INSERT INTO `item_mods` VALUES (14624,1,4);
 INSERT INTO `item_mods` VALUES (14624,14,5);
 INSERT INTO `item_mods` VALUES (14624,21,11);
-INSERT INTO `item_mods` VALUES (14625,5,25);
-INSERT INTO `item_mods` VALUES (14625,117,10);
-INSERT INTO `item_mods` VALUES (14625,346,1);
-INSERT INTO `item_mods` VALUES (14625,357,30);
-INSERT INTO `item_mods` VALUES (14625,371,6);
-INSERT INTO `item_mods` VALUES (14625,541,30);
+INSERT INTO `item_mods` VALUES (14625,5,25); -- MP + 25
+INSERT INTO `item_mods` VALUES (14625,117,10); -- Summoning Magic Skill +10
+INSERT INTO `item_mods` VALUES (14625,346,1); --  Perpetuation Reduction -1
 INSERT INTO `item_mods` VALUES (14626,27,2);
 INSERT INTO `item_mods` VALUES (14626,20,3);
 INSERT INTO `item_mods` VALUES (14627,1,2);
