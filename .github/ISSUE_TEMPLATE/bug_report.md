@@ -1,38 +1,25 @@
 ---
-name: Bug report
-about: Create a report to help us improve
-title: ''
-labels: ''
-assignees: ''
-
+name: 🐛 Bug Report
+about: Bug Report
+title: "\U0001F41B <Bug Summary>"
+labels: bug
+assignees:
 ---
 
-**Describe the bug**
-A clear and concise description of what the bug is.
+<!-- Remove space and place 'x' mark between square [] brackets or click the checkbox after saving to affirm the following points: -->
+<!-- (it should look like this: - [x] I have ...) -->
+- [x] I have paid attention to this example and will edit again if need be to not break the formatting, or I will be ignored
+- [ ] I have searched existing [issues](https://github.com/LandSandBoat/server/issues) to see if the issue has already been opened, and I have checked the commit log to see if the issue has been resolved since my server was last updated
+- [ ] I have read and understood the [Contributing Guide](https://github.com/LandSandBoat/server/blob/base/CONTRIBUTING.md)
 
-**To Reproduce**
-Steps to reproduce the behavior:
-1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
+## Branch affected by issue <!-- Change to the branch the issue exists on (if relevant) -->
 
-**Expected behavior**
-A clear and concise description of what you expected to happen.
+`base`
 
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
+## Steps to reproduce
 
-**Desktop (please complete the following information):**
- - OS: [e.g. iOS]
- - Browser [e.g. chrome, safari]
- - Version [e.g. 22]
+<!-- Add steps to reproduce here -->
 
-**Smartphone (please complete the following information):**
- - Device: [e.g. iPhone6]
- - OS: [e.g. iOS8.1]
- - Browser [e.g. stock browser, safari]
- - Version [e.g. 22]
+## Expected behavior
 
-**Additional context**
-Add any other context about the problem here.
+<!-- Add expected behaviour here -->
