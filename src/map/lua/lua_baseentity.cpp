@@ -2451,7 +2451,7 @@ void CLuaBaseEntity::updateToEntireZone(uint8 statusID, uint8 animation, sol::ob
 
 auto CLuaBaseEntity::getPos() -> sol::table
 {
-    auto pos = luautils::lua.create_table();
+    auto pos = lua.create_table();
 
     pos["x"]   = m_PBaseEntity->loc.p.x;
     pos["y"]   = m_PBaseEntity->loc.p.y;
@@ -2828,7 +2828,7 @@ sol::table CLuaBaseEntity::getTeleportTable(uint8 type)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    sol::state_view lua       = luautils::lua;
+    sol::state_view lua       = lua;
     sol::table      teleTable = lua.create_table();
 
     TELEPORT_TYPE tele_type = static_cast<TELEPORT_TYPE>(type);
@@ -3028,7 +3028,7 @@ sol::table CLuaBaseEntity::getTeleportMenu(uint8 type)
         return sol::lua_nil;
     }
 
-    auto table = luautils::lua.create_table();
+    auto table = lua.create_table();
     switch (teleType)
     {
         case TELEPORT_TYPE::HOMEPOINT:
@@ -4437,7 +4437,7 @@ sol::table CLuaBaseEntity::getRetrievableItemsForSlip(uint16 slipId)
 
     auto* slip = PChar->getStorage(LOC_INVENTORY)->GetItem(slipSlotId);
 
-    sol::table table = luautils::lua.create_table();
+    sol::table table = lua.create_table();
     // TODO Is extra sized defined anywhere?
     for (int i = 0; i < 24; i++)
     {
@@ -8527,7 +8527,7 @@ sol::table CLuaBaseEntity::getParty()
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
     // clang-format off
-    auto table = luautils::lua.create_table();
+    auto table = lua.create_table();
     ((CBattleEntity*)m_PBaseEntity)->ForParty([&table](CBattleEntity* member)
     {
         table.add(CLuaBaseEntity(member));
@@ -8549,7 +8549,7 @@ sol::table CLuaBaseEntity::getPartyWithTrusts()
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
     // clang-format off
-    auto table = luautils::lua.create_table();
+    auto table = lua.create_table();
     ((CCharEntity*)m_PBaseEntity)->ForPartyWithTrusts([&table](CBattleEntity* member)
     {
         table.add(CLuaBaseEntity(member));
@@ -8830,7 +8830,7 @@ sol::table CLuaBaseEntity::getAlliance()
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    auto table = luautils::lua.create_table();
+    auto table = lua.create_table();
 
     // clang-format off
     PChar->ForAlliance([&table](CBattleEntity* PMember)
@@ -10146,7 +10146,7 @@ sol::table CLuaBaseEntity::getNotorietyList()
 
     auto& notorietyContainer = static_cast<CBattleEntity*>(m_PBaseEntity)->PNotorietyContainer;
 
-    auto table = luautils::lua.create_table();
+    auto table = lua.create_table();
     for (auto* entry : *notorietyContainer)
     {
         table.add(CLuaBaseEntity(entry));
@@ -10358,7 +10358,7 @@ sol::table CLuaBaseEntity::getStatusEffects()
         return {};
     }
 
-    auto table = luautils::lua.create_table();
+    auto table = lua.create_table();
     // clang-format off
     static_cast<CBattleEntity*>(m_PBaseEntity)->StatusEffectContainer->ForEachEffect(
     [&table](CStatusEffect* PEffect)
@@ -12452,7 +12452,7 @@ auto CLuaBaseEntity::getAllRuneEffects() -> sol::table
     auto*               PEntity        = static_cast<CBattleEntity*>(m_PBaseEntity);
     std::vector<EFFECT> runeEffectList = PEntity->StatusEffectContainer->GetAllRuneEffects();
 
-    auto table = luautils::lua.create_table();
+    auto table = lua.create_table();
 
     for (const auto& runeEffect : runeEffectList)
     {
@@ -13343,12 +13343,12 @@ sol::table CLuaBaseEntity::getEnmityList()
 
     if (enmityList)
     {
-        auto table = luautils::lua.create_table();
+        auto table = lua.create_table();
         for (auto member : *enmityList)
         {
             if (member.second.PEnmityOwner)
             {
-                auto subTable = luautils::lua.create_table();
+                auto subTable = lua.create_table();
 
                 subTable["entity"]   = CLuaBaseEntity(member.second.PEnmityOwner);
                 subTable["ce"]       = member.second.CE;
