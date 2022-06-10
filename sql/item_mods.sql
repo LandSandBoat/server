@@ -55730,10 +55730,10 @@ INSERT INTO `item_mods` VALUES (26202,249,17); -- GRAVITYRES: 17
 INSERT INTO `item_mods` VALUES (26214,840,5); -- ALL_WSDMG_ALL_HITS: 5
 
 -- Beithir Ring
-INSERT INTO `item_mods` VALUES (26218,8,3);   -- STR: 3
-INSERT INTO `item_mods` VALUES (26218,9,3);   -- DEX: 3
-INSERT INTO `item_mods` VALUES (26218,10,3);  -- VIT: 3
-INSERT INTO `item_mods` VALUES (26218,11,3);  -- AGI: 3
+INSERT INTO `item_mods` VALUES (26218,8,3);  -- STR: 3
+INSERT INTO `item_mods` VALUES (26218,9,3);  -- DEX: 3
+INSERT INTO `item_mods` VALUES (26218,10,3); -- VIT: 3
+INSERT INTO `item_mods` VALUES (26218,11,3); -- AGI: 3
 
 -- Sroda Ring
 INSERT INTO `item_mods` VALUES (26221,8,20);  -- STR: 20
