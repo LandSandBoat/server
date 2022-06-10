@@ -5016,6 +5016,14 @@ INSERT INTO `mob_spell_lists` VALUES('Princess_Jelly', 493, 245, 1, 255); -- dra
 INSERT INTO `mob_spell_lists` VALUES('Princess_Jelly', 493, 23, 1, 255);  -- dia (1~255)
 INSERT INTO `mob_spell_lists` VALUES('Princess_Jelly', 493, 28, 1, 255);  -- banish (1~255)
 
+-- Toxic Tamlyn (497)
+INSERT INTO `mob_spell_lists` VALUES ('Toxic_Tamlyn',497,231,1,255);
+
+-- Slendlix Spindlethumb (498)
+INSERT INTO `mob_spell_lists` VALUES ('Slendlix_Spindlethumb',499,3,1,255);  -- cure_iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Slendlix_Spindlethumb',499,23,1,255); -- dia (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Slendlix_Spindlethumb',499,33,1,255); -- diaga (1~255)
+
 -- Queen Jelly (494)
 INSERT INTO `mob_spell_lists` VALUES('Queen_Jelly', 494, 174, 1, 255); -- firaga (1~255)
 INSERT INTO `mob_spell_lists` VALUES('Queen_Jelly', 494, 199, 1, 255); -- waterga (1~255)
