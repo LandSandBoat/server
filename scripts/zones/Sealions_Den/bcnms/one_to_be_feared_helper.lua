@@ -1,5 +1,5 @@
 -----------------------------------
--- Global file for "One to be Feared" Battlefield
+-- Helper file for "One to be Feared" Battlefield
 -----------------------------------
 local ID = require("scripts/zones/Sealions_Den/IDs")
 require("scripts/globals/status")
@@ -35,8 +35,8 @@ end
 -----------------------------------
 oneToBeFeared.handleMammetDeath = function(mob, player, isKiller)
     -- Find mob offset for given battlefield instance
-    local battlefield  = mob:getBattlefield()
-    local mammetOffset = ID.mob.ONE_TO_BE_FEARED_OFFSET + (7 * (battlefield:getArea() - 1))
+    local battlefield      = mob:getBattlefield()
+    local mammetOffset     = ID.mob.ONE_TO_BE_FEARED_OFFSET + (7 * (battlefield:getArea() - 1))
     local mammetDeathCount = 0
 
     -- If all five mammets in this instance are dead, start event.
