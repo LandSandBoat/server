@@ -93,8 +93,6 @@
 
 namespace luautils
 {
-    sol::state lua;
-
     bool                                  contentRestrictionEnabled;
     std::unordered_map<std::string, bool> contentEnabledMap;
 
@@ -102,31 +100,14 @@ namespace luautils
 
     std::unordered_map<uint32, sol::table> customMenuContext;
 
-    /************************************************************************
-     *                                                                       *
-     *  Initialization of Lua user classes and global functions             *
-     *                                                                       *
-     ************************************************************************/
-
+    /**
+     * @brief Initialization of Lua user classes and global functions.
+     */
     int32 init()
     {
         TracyZoneScoped;
-        ShowStatus("luautils::init:lua initializing");
 
-        lua = sol::state();
-        TracyLuaRegister(lua.lua_state());
-        lua.open_libraries();
-
-        // Globally require bit library
-        lua.do_string("if not bit then bit = require('bit') end");
-
-        lua.do_string(
-            "function __FILE__() return debug.getinfo(2, 'S').source end\n"
-            "function __LINE__() return debug.getinfo(2, 'l').currentline end\n"
-            "function __FUNC__() return debug.getinfo(2, 'n').name end\n");
-
-        // Bind print(...) globally
-        lua.set_function("print", &luautils::print);
+        ShowStatus("luautils: Lua initializing");
 
         // Bind math.randon(...) globally
         // clang-format off
@@ -363,96 +344,6 @@ namespace luautils
         scrapeSubdir("scripts/quests");
 
         return outVec;
-    }
-
-    /************************************************************************
-     *                                                                       *
-     * Overriding the official lua print function                            *
-     *                                                                       *
-     ************************************************************************/
-    std::string luaToString(sol::object const& obj, std::size_t depth = 0)
-    {
-        switch (obj.get_type())
-        {
-            case sol::type::none:
-                [[fallthrough]];
-            case sol::type::lua_nil:
-            {
-                return "nil";
-            }
-            case sol::type::string:
-            {
-                if (depth > 0)
-                {
-                    return "\"" + obj.as<std::string>() + "\"";
-                }
-                else
-                {
-                    return obj.as<std::string>();
-                }
-            }
-            case sol::type::number:
-            {
-                return fmt::format("{0:g}", obj.as<double>());
-            }
-            case sol::type::thread:
-            {
-                return "thread";
-            }
-            case sol::type::boolean:
-            {
-                return obj.as<bool>() ? "true" : "false";
-            }
-            case sol::type::function:
-            {
-                return "function";
-            }
-            case sol::type::userdata:
-            {
-                return lua["tostring"](obj);
-            }
-            case sol::type::lightuserdata:
-            {
-                return "lightuserdata";
-            }
-            case sol::type::table:
-            {
-                auto table = obj.as<sol::table>();
-
-                // Stringify everything first
-                std::vector<std::string> stringVec;
-                for (auto& pair : table)
-                {
-                    stringVec.emplace_back(luaToString(pair.second, depth + 1));
-                }
-
-                // Accumulate into a pretty string
-                std::string outStr = "table{ ";
-                outStr += std::accumulate(std::begin(stringVec), std::end(stringVec), std::string(),
-                                          [](std::string& ss, std::string& s)
-                                          {
-                                              return ss.empty() ? s : ss + ", " + s;
-                                          });
-                return outStr + " }";
-            }
-            default:
-            {
-                return "UNKNOWN";
-            }
-        }
-    }
-
-    void print(sol::variadic_args va)
-    {
-        TracyZoneScoped;
-
-        std::vector<std::string> vec;
-        for (std::size_t i = 0; i < va.size(); ++i)
-        {
-            vec.emplace_back(luaToString(va[i]));
-        }
-
-        ShowScript(fmt::format("{}", fmt::join(vec.begin(), vec.end(), " ")).c_str());
     }
 
     sol::function getEntityCachedFunction(CBaseEntity* PEntity, std::string funcName)

@@ -411,7 +411,7 @@ void set_server_type()
 
 void ReportTracyStats()
 {
-    TracyReportLuaMemory(luautils::lua.lua_state());
+    TracyReportLuaMemory(lua.lua_state());
 
     std::size_t activeZoneCount = 0;
     std::size_t playerCount     = 0;
