@@ -133,38 +133,20 @@ void CItemEquipment::setSuperiorLevel(uint8 level)
     m_superiorLevel = level;
 }
 
-/************************************************************************
- *																		*
- *  Процент урона, блокируемого щитом                                    *
- *																		*
- ************************************************************************/
-
+// percentage of damage blocked by shield
 uint8 CItemEquipment::getShieldAbsorption() const
 {
     return m_absorption;
 }
 
-/************************************************************************
- *																		*
- *  Проверяем, является ли проедмет щитом                                *
- *																		*
- ************************************************************************/
-
+// check if item is a shield via shield size
 bool CItemEquipment::IsShield() const
 {
     return m_shieldSize > 0 && m_shieldSize <= 6;
 }
 
-/************************************************************************
- *																		*
- *  Проверяем необходимость выполнения скрипта для экипировки при		*
- *  возникновении какого-либо из событий (экипировка, смена зоны и т.п.)	*
- *																		*
- *  Функция возвращает типы событий на которые предмет реагирует, что	*
- *  избавляет нас от необходимости проверять	предмет во всех событиях	*
- *																		*
- ************************************************************************/
-
+// return script type for events such as gear change, zone change, etc
+// the function returns the type of event which saves us from having to check in all events
 uint16 CItemEquipment::getScriptType() const
 {
     return m_scriptType;
@@ -175,12 +157,7 @@ void CItemEquipment::setScriptType(uint16 ScriptType)
     m_scriptType = ScriptType;
 }
 
-/************************************************************************
- *                                                                       *
- *  Добавляем модификатор к предмету                                     *
- *                                                                       *
- ************************************************************************/
-
+// add item modifier
 void CItemEquipment::addModifier(CModifier modifier)
 {
     if (IsShield() && modifier.getModID() == Mod::DEF)
@@ -233,12 +210,6 @@ void CItemEquipment::addLatent(LATENT ConditionsID, uint16 ConditionsValue, Mod 
     itemLatent latent{ ConditionsID, ConditionsValue, ModValue, ModPower };
     latentList.push_back(latent);
 }
-
-/************************************************************************
- *                                                                       *
- *                                                                       *
- *                                                                       *
- ************************************************************************/
 
 void CItemEquipment::setTrialNumber(uint16 trial)
 {
