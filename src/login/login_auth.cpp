@@ -215,7 +215,7 @@ int32 login_parse(int32 fd)
             case LOGIN_CREATE:
 
                 // check if account creation is disabled
-                if (!login_config.account_creation)
+                if (!settings::get<bool>("login.ACCOUNT_CREATION"))
                 {
                     ShowWarning("login_parse: New account attempt <%s> but is disabled in config.",
                                 escaped_name);
