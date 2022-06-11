@@ -39,12 +39,12 @@
 
 CPetEntity::CPetEntity(PET_TYPE petType)
 : CMobEntity()
+, m_PetType(petType)
 {
     objtype        = TYPE_PET;
     m_EcoSystem    = ECOSYSTEM::UNCLASSIFIED;
     allegiance     = ALLEGIANCE_TYPE::PLAYER;
     m_MobSkillList = 0;
-    m_PetType      = petType;
     m_PetID        = 0;
 
     PAI            = std::make_unique<CAIContainer>(this, std::make_unique<CPathFind>(this), std::make_unique<CPetController>(this), std::make_unique<CTargetFind>(this));
