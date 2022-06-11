@@ -23,10 +23,13 @@
 #include "../common/logging.h"
 #include "../common/md52.h"
 
+#include <algorithm>
+#include <cctype>
 #include <charconv>
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
+#include <string>
 
 #ifdef _MSC_VER
 #include <intrin.h>
@@ -765,6 +768,33 @@ std::vector<std::string> split(std::string const& s, std::string const& delimite
 
     res.push_back(s.substr(pos_start));
     return res;
+}
+
+
+std::string to_lower(std::string const& s)
+{
+    // clang-format off
+    std::string data = s;
+    std::transform(data.begin(), data.end(), data.begin(),
+    [](unsigned char c)
+    {
+        return std::tolower(c);
+    });
+    // clang-format on
+    return data;
+}
+
+std::string to_upper(std::string const& s)
+{
+    // clang-format off
+    std::string data = s;
+    std::transform(data.begin(), data.end(), data.begin(),
+    [](unsigned char c)
+    {
+        return std::toupper(c);
+    });
+    // clang-format on
+    return data;
 }
 
 // https://stackoverflow.com/questions/313970/how-to-convert-an-instance-of-stdstring-to-lower-case
