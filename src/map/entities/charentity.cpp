@@ -277,24 +277,12 @@ CCharEntity::~CCharEntity()
     delete Container;
     delete UContainer;
     delete CraftContainer;
-
-    if (PMeritPoints)
-    {
-        delete PMeritPoints;
-    }
-
-    if (PJobPoints)
-    {
-        delete PJobPoints;
-    }
-
-    if (PGuildShop) // may be NULL if player never looks at a guild shop
-    {
-        delete PGuildShop;
-    }
-
+    delete PMeritPoints;
+    delete PJobPoints;
+    delete PGuildShop;
     delete eventPreparation;
     delete currentEvent;
+
     while (!eventQueue.empty())
     {
         auto head = eventQueue.front();
