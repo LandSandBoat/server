@@ -36,8 +36,8 @@ struct blowfish_t
     uint32   key[5] = {};
     uint8    hash[16] = {};
     uint32   P[18] = {};
-    uint32   S[4][256] {};
-    BLOWFISH status;
+    uint32   S[4][256] = {};
+    BLOWFISH status = BLOWFISH_WAITING;
 };
 
 void blowfish_decipher(uint32* xl, uint32* xr, const uint32* P, uint32* S);
