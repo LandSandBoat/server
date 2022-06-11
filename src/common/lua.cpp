@@ -54,6 +54,9 @@ void lua_init()
     lua.set_function("print", &lua_print);
 }
 
+/**
+ * @brief
+ */
 std::string lua_to_string(sol::object const& obj, std::size_t depth)
 {
     switch (obj.get_type())
@@ -126,6 +129,9 @@ std::string lua_to_string(sol::object const& obj, std::size_t depth)
     }
 }
 
+/**
+ * @brief
+ */
 void lua_print(sol::variadic_args va)
 {
     TracyZoneScoped;
