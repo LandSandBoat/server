@@ -90,7 +90,7 @@ namespace settings
             for (auto [innerKeyObj, innerValObj] : outerValObj.as<sol::table>())
             {
                 auto innerKey = innerKeyObj.as<std::string>();
-                auto key      = fmt::format("{}.{}", outerKey, innerKey);
+                auto key      = to_upper(fmt::format("{}.{}", outerKey, innerKey));
 
                 if (innerValObj.is<bool>())
                 {
@@ -155,7 +155,7 @@ namespace settings
             for (auto [innerKeyObj, innerValObj] : outerValObj.as<sol::table>())
             {
                 auto innerKey = innerKeyObj.as<std::string>();
-                auto key      = fmt::format("{}.{}", outerKey, innerKey);
+                auto key      = to_upper(fmt::format("{}.{}", outerKey, innerKey));
 
                 if (innerValObj.is<bool>())
                 {
@@ -176,8 +176,8 @@ namespace settings
         for (auto [key, value] : settingsMap)
         {
             auto parts                          = split(key, ".");
-            auto outer                          = parts[0];
-            auto inner                          = parts[1];
+            auto outer                          = to_lower(parts[0]);
+            auto inner                          = to_lower(parts[1]);
             lua["xi"]["settings"][outer][inner] = value;
         }
 
