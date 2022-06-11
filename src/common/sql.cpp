@@ -20,6 +20,7 @@
 */
 
 #include "logging.h"
+#include "settings.h"
 #include "timer.h"
 #include "tracy.h"
 #include "xirand.h"
@@ -87,6 +88,16 @@ void SqlConnection::HandleAsync()
 void SqlConnection::SetLatencyWarning(bool _LatencyWarning)
 {
     m_LatencyWarning = _LatencyWarning;
+}
+
+SqlConnection::SqlConnection()
+: SqlConnection(settings::get<std::string>("network.SQL_LOGIN").c_str(),
+                settings::get<std::string>("network.SQL_PASSWORD").c_str(),
+                settings::get<std::string>("network.SQL_HOST").c_str(),
+                settings::get<uint16>("network.SQL_PORT"),
+                settings::get<std::string>("network.SQL_DATABASE").c_str())
+{
+    // Just forwarding the default credentials to the next contrictor
 }
 
 SqlConnection::SqlConnection(const char* user, const char* passwd, const char* host, uint16 port, const char* db)

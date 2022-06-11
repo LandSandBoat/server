@@ -30,11 +30,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "search.h"
 
 CDataLoader::CDataLoader()
-: sql(std::make_unique<SqlConnection>(search_config.mysql_login.c_str(),
-                                      search_config.mysql_password.c_str(),
-                                      search_config.mysql_host.c_str(),
-                                      search_config.mysql_port,
-                                      search_config.mysql_database.c_str()))
+: sql(std::make_unique<SqlConnection>())
 {
 }
 

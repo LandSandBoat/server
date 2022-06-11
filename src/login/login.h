@@ -36,4 +36,6 @@
 
 extern std::unique_ptr<SqlConnection> sql;
 
+int32 do_init(int32 argc, char** argv);
+
 #endif // _LOGIN_H

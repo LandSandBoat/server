@@ -16,20 +16,6 @@ xi.settings.main =
         "Please visit https://github.com/LandSandBoat/server for the latest information on the project.\n" ..
         "Thank you, and we hope you enjoy sailing the sands!",
 
-    -- 0 - disabled (normal operation)
-    -- 1 - enabled (only GM characters allowed online, no new character creation)
-    MAINT_MODE = 0,
-
-    -- Expected Client version (wrong version cannot log in)
-    CLIENT_VER = "30220603_0",
-
-    -- 0 - disabled (every version allowed)
-    -- 1 - enabled - strict (only exact CLIENT_VER allowed)
-    -- 2 - enabled - greater than or equal  (matching or greater than CLIENT_VER allowed, default)
-    --
-    -- WE STRONGLY ADVISE AGAINST LOCKING THE SERVER TO OLDER VERSIONS. IT IS A UNIVERSALLY BAD IDEA.
-    VER_LOCK = 2,
-
     -- Setting to lock content more accurately to the expansions defined below.
     -- This generally results in a more accurate presentation of your selected expansions,
     -- as well as a less confusing player experience for things that are disabled (things that are disabled are not loaded).
