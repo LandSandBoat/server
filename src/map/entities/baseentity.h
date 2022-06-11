@@ -140,6 +140,7 @@ enum MOUNTTYPE : uint8
     MOUNT_RED_RAPTOR     = 31,
     MOUNT_IRON_GIANT     = 32,
     MOUNT_BYAKKO         = 33,
+    //
     MOUNT_MAX = 34,
 };
 
