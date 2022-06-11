@@ -221,11 +221,7 @@ int32 do_init(int32 argc, char** argv)
     PacketParserInitialize();
 
     ShowStatus("do_init: connecting to database");
-    sql = std::make_unique<SqlConnection>(map_config.mysql_login.c_str(),
-                                          map_config.mysql_password.c_str(),
-                                          map_config.mysql_host.c_str(),
-                                          map_config.mysql_port,
-                                          map_config.mysql_database.c_str());
+    sql = std::make_unique<SqlConnection>();
 
     sql->Query("DELETE FROM accounts_sessions WHERE IF(%u = 0 AND %u = 0, true, server_addr = %u AND server_port = %u);",
                map_ip.s_addr, map_port, map_ip.s_addr, map_port);
