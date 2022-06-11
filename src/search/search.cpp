@@ -25,8 +25,10 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "common/cbasetypes.h"
 #include "common/console_service.h"
 #include "common/logging.h"
+#include "common/lua.h"
 #include "common/md52.h"
 #include "common/mmo.h"
+#include "common/settings.h"
 #include "common/socket.h"
 #include "common/sql.h"
 #include "common/taskmgr.h"
@@ -81,9 +83,6 @@ void TaskManagerThread();
 
 int32 ah_cleanup(time_point tick, CTaskMgr::CTask* PTask);
 
-const char* SEARCH_CONF_FILENAME = "./conf/search_server.conf";
-const char* LOGIN_CONF_FILENAME  = "./conf/login.conf";
-
 void TCPComm(SOCKET socket);
 
 extern void        HandleSearchRequest(CTCPRequestPacket& PTCPRequest);
@@ -92,18 +91,6 @@ extern void        HandleGroupListRequest(CTCPRequestPacket& PTCPRequest);
 extern void        HandleAuctionHouseHistory(CTCPRequestPacket& PTCPRequest);
 extern void        HandleAuctionHouseRequest(CTCPRequestPacket& PTCPRequest);
 extern search_req  _HandleSearchRequest(CTCPRequestPacket& PTCPRequest);
-extern std::string toStr(int number);
-
-search_config_t search_config;
-login_config_t  login_config;
-
-void search_config_default();
-void search_config_read(const int8* file);
-void search_config_read_from_env();
-
-void login_config_default();
-void login_config_read(const int8* file); // We only need the search server port defined here
-void login_config_read_from_env();
 
 extern std::unique_ptr<ConsoleService> gConsoleService;
 
@@ -158,6 +145,11 @@ int32 main(int32 argc, char** argv)
 
     logging::InitializeLog("search", logFile, appendDate);
 
+    lua_init();
+    settings::init();
+
+    auto expireDays = settings::get<uint16>("search.EXPIRE_DAYS");
+
     int iResult;
 
     SOCKET ListenSocket = INVALID_SOCKET;
@@ -165,12 +157,6 @@ int32 main(int32 argc, char** argv)
 
     struct addrinfo* result = nullptr;
     struct addrinfo  hints;
-
-    search_config_default();
-    search_config_read((const int8*)SEARCH_CONF_FILENAME);
-    search_config_read_from_env();
-    login_config_read((const int8*)LOGIN_CONF_FILENAME);
-    login_config_read_from_env();
 
 #ifdef WIN32
     // Initialize Winsock
@@ -192,7 +178,7 @@ int32 main(int32 argc, char** argv)
     hints.ai_flags    = AI_PASSIVE;
 
     // Resolve the server address and port
-    iResult = getaddrinfo(nullptr, login_config.search_server_port.c_str(), &hints, &result);
+    iResult = getaddrinfo(nullptr, settings::get<std::string>("network.SEARCH_PORT").c_str(), &hints, &result);
     if (iResult != 0)
     {
         ShowError("getaddrinfo failed with error: %d", iResult);
@@ -263,11 +249,12 @@ int32 main(int32 argc, char** argv)
     ShowMessage("========================================================");
     ShowMessage("search and auction server");
     ShowMessage("========================================================");
-    if (search_config.expire_auctions == 1)
+
+    if (settings::get<bool>("search.EXPIRE_AUCTIONS"))
     {
-        ShowMessage("AH task to return items older than %u days is running", search_config.expire_days);
+        ShowMessage("AH task to return items older than %u days is running", expireDays);
         CTaskMgr::getInstance()->AddTask("ah_cleanup", server_clock::now(), nullptr, CTaskMgr::TASK_INTERVAL, ah_cleanup,
-                                         std::chrono::seconds(search_config.expire_interval));
+                                         std::chrono::seconds(settings::get<uint32>("search.EXPIRE_INTERVAL")));
     }
 
     std::thread(TaskManagerThread).detach();
@@ -275,7 +262,7 @@ int32 main(int32 argc, char** argv)
     // clang-format off
     gConsoleService = std::make_unique<ConsoleService>();
     gConsoleService->RegisterCommand(
-    "ah_cleanup", fmt::format("AH task to return items older than {} days.", search_config.expire_days),
+    "ah_cleanup", fmt::format("AH task to return items older than {} days.", expireDays),
     [](std::vector<std::string> inputs)
     {
         ah_cleanup(server_clock::now(), nullptr);
@@ -340,181 +327,6 @@ int32 main(int32 argc, char** argv)
     close(ClientSocket);
 #endif
     return 0;
-}
-
-/************************************************************************
- *                                                                       *
- *  search server default config                                         *
- *                                                                       *
- ************************************************************************/
-
-void search_config_default()
-{
-    search_config.mysql_host      = "127.0.0.1";
-    search_config.mysql_login     = "root";
-    search_config.mysql_password  = "root";
-    search_config.mysql_database  = "xidb";
-    search_config.mysql_port      = 3306;
-    search_config.expire_auctions = true;
-    search_config.expire_days     = 3;
-    search_config.expire_interval = 3600;
-}
-
-/************************************************************************
- *                                                                       *
- *  search server config                                                 *
- *                                                                       *
- ************************************************************************/
-
-void search_config_read(const int8* file)
-{
-    char  line[1024];
-    char  w1[1024];
-    char  w2[1024];
-    FILE* fp;
-
-    fp = fopen((const char*)file, "r");
-    if (fp == nullptr)
-    {
-        ShowError("configuration file not found at: %s", file);
-        return;
-    }
-
-    while (fgets(line, sizeof(line), fp))
-    {
-        char* ptr;
-
-        if (line[0] == '#')
-        {
-            continue;
-        }
-        if (sscanf(line, "%[^:]: %[^\t\r\n]", w1, w2) < 2)
-        {
-            continue;
-        }
-
-        // Strip trailing spaces
-        ptr = w2 + strlen(w2);
-        while (--ptr >= w2 && *ptr == ' ')
-        {
-            ;
-        }
-        ptr++;
-        *ptr = '\0';
-
-        if (strcmp(w1, "mysql_host") == 0)
-        {
-            search_config.mysql_host = std::string(w2);
-        }
-        else if (strcmp(w1, "mysql_login") == 0)
-        {
-            search_config.mysql_login = std::string(w2);
-        }
-        else if (strcmp(w1, "mysql_password") == 0)
-        {
-            search_config.mysql_password = std::string(w2);
-        }
-        else if (strcmp(w1, "mysql_port") == 0)
-        {
-            search_config.mysql_port = atoi(w2);
-        }
-        else if (strcmp(w1, "mysql_database") == 0)
-        {
-            search_config.mysql_database = std::string(w2);
-        }
-        else if (strcmp(w1, "expire_auctions") == 0)
-        {
-            search_config.expire_auctions = atoi(w2);
-        }
-        else if (strcmp(w1, "expire_days") == 0)
-        {
-            search_config.expire_days = atoi(w2);
-        }
-        else if (strcmp(w1, "expire_interval") == 0)
-        {
-            search_config.expire_interval = atoi(w2);
-        }
-        else
-        {
-            ShowWarning("Unknown setting '%s' in file %s. Has this setting been removed?", w1, file);
-        }
-    }
-    fclose(fp);
-}
-
-void search_config_read_from_env()
-{
-    search_config.mysql_login    = std::getenv("XI_DB_USER") ? std::getenv("XI_DB_USER") : search_config.mysql_login;
-    search_config.mysql_password = std::getenv("XI_DB_USER_PASSWD") ? std::getenv("XI_DB_USER_PASSWD") : search_config.mysql_password;
-    search_config.mysql_host     = std::getenv("XI_DB_HOST") ? std::getenv("XI_DB_HOST") : search_config.mysql_host;
-    search_config.mysql_port     = std::getenv("XI_DB_PORT") ? std::stoi(std::getenv("XI_DB_PORT")) : search_config.mysql_port;
-    search_config.mysql_database = std::getenv("XI_DB_NAME") ? std::getenv("XI_DB_NAME") : search_config.mysql_database;
-}
-
-/************************************************************************
- *                                                                       *
- *  login server default config                                          *
- *                                                                       *
- ************************************************************************/
-
-void login_config_default()
-{
-    login_config.search_server_port = "54002";
-}
-
-/************************************************************************
- *                                                                       *
- *  login server config                                                  *
- *                                                                       *
- ************************************************************************/
-
-void login_config_read(const int8* file)
-{
-    char  line[1024];
-    char  w1[1024];
-    char  w2[1024];
-    FILE* fp;
-
-    fp = fopen((const char*)file, "r");
-    if (fp == nullptr)
-    {
-        ShowError("configuration file not found at: %s", file);
-        return;
-    }
-
-    while (fgets(line, sizeof(line), fp))
-    {
-        char* ptr;
-
-        if (line[0] == '#')
-        {
-            continue;
-        }
-        if (sscanf(line, "%[^:]: %[^\t\r\n]", w1, w2) < 2)
-        {
-            continue;
-        }
-
-        // Strip trailing spaces
-        ptr = w2 + strlen(w2);
-        while (--ptr >= w2 && *ptr == ' ')
-        {
-            ;
-        }
-        ptr++;
-        *ptr = '\0';
-
-        if (strcmp(w1, "search_server_port") == 0)
-        {
-            login_config.search_server_port = std::string(w2);
-        }
-    }
-    fclose(fp);
-}
-
-void login_config_read_from_env()
-{
-    login_config.search_server_port = std::getenv("XI_SEARCH_PORT") ? std::getenv("XI_SEARCH_PORT") : login_config.search_server_port;
 }
 
 void TCPComm(SOCKET socket)

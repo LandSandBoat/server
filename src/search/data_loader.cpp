@@ -22,6 +22,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "common/logging.h"
 #include "common/mmo.h"
+#include "common/settings.h"
 #include "common/sql.h"
 
 #include <algorithm>
@@ -596,7 +597,7 @@ void CDataLoader::ExpireAHItems(uint16 expireAgeInDays)
     std::vector<ListingToExpire> listingsToExpire;
 
     std::string qStr = "SELECT T0.id,T0.itemid,T1.stacksize, T0.stack, T0.seller FROM auction_house T0 INNER JOIN item_basic T1 ON \
-                            T0.itemid = T1.itemid WHERE datediff(now(),from_unixtime(date)) >=%u AND buyer_name IS NULL;";
+                            T0.itemid = T1.itemid WHERE datediff(now(),from_unixtime(date)) >= %u AND buyer_name IS NULL;";
 
     int32 ret             = sql2->Query(qStr.c_str(), expireAgeInDays);
     int64 expiredAuctions = sql2->NumRows();
