@@ -82,10 +82,12 @@ void        DecodeStringSignature(int8* signature, int8* target);
 void        PackSoultrapperName(std::string name, uint8 output[]);
 std::string UnpackSoultrapperName(uint8 input[]);
 
-std::string escape(std::string const& s);
+auto escape(std::string const& s) -> std::string;
+auto split(std::string const& s, std::string const& delimiter = " ") -> std::vector<std::string>;
+auto to_lower(std::string const& s) -> std::string;
+auto to_upper(std::string const& s) -> std::string;
+auto trim(const std::string& str, const std::string& whitespace = " \t") -> std::string;
 
-auto   split(std::string const& s, std::string const& delimiter = " ") -> std::vector<std::string>;
-auto   trim(const std::string& str, const std::string& whitespace = " \t") -> std::string ;
 look_t stringToLook(std::string str);
 
 // Float tools
