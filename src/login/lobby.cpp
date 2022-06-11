@@ -601,7 +601,10 @@ int32 lobbyview_parse(int32 fd)
                     unsigned char MainReservePacket[0x28];
                     LOBBBY_ERROR_MESSAGE(ReservePacket);
                     ref<uint16>(ReservePacket, 32) = 332;
-                    std::memcpy(MainReservePacket, ReservePacket, sendsize);
+
+                    std::memset(MainReservePacket, 0, sizeof(MainReservePacket));
+                    std::memcpy(MainReservePacket, ReservePacket, sizeof(ReservePacket));
+
                     sessions[fd]->wdata.assign((const char*)MainReservePacket, sendsize);
                     RFIFOSKIP(fd, sessions[fd]->rdata.size());
                     RFIFOFLUSH(fd);
