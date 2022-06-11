@@ -65,7 +65,8 @@ namespace settings
     T get(std::string name)
     {
         // out = type being requested
-        T    out{};
+        T out{};
+
         auto key = to_upper(name);
         if (auto maybeResult = settingsMap.find(key); maybeResult != settingsMap.end())
         {
