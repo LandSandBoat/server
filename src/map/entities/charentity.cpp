@@ -98,6 +98,7 @@ CCharEntity::CCharEntity()
     gotMessage = false;
     m_Locked   = false;
 
+    accid = 0;
     m_GMlevel    = 0;
     m_isGMHidden = false;
 
@@ -197,7 +198,11 @@ CCharEntity::CCharEntity()
     m_StatsDebilitation = 0;
     m_EquipSwap         = false;
 
-    MeritMode = false;
+    MeritMode    = false;
+    PMeritPoints = nullptr;
+    PJobPoints   = nullptr;
+
+    PGuildShop   = nullptr;
 
     m_isStyleLocked = false;
     m_isBlockingAid = false;
@@ -243,6 +248,18 @@ CCharEntity::CCharEntity()
     nextFishTime = 0;
     fishingToken = 0;
     hookDelay    = 13;
+
+    profile     = {};
+    search      = {};
+    std::memset(&styleItems, 0, sizeof(styleItems));
+
+    m_StartActionPos   = {};
+    m_ActionOffsetPos  = {};
+    m_previousLocation = {};
+
+    m_mentorUnlocked   = false;
+    m_jobMasterDisplay = false;
+    m_EffectsChanged   = false;
 }
 
 CCharEntity::~CCharEntity()
@@ -260,8 +277,21 @@ CCharEntity::~CCharEntity()
     delete Container;
     delete UContainer;
     delete CraftContainer;
-    delete PMeritPoints;
-    delete PJobPoints;
+
+    if (PMeritPoints)
+    {
+        delete PMeritPoints;
+    }
+
+    if (PJobPoints)
+    {
+        delete PJobPoints;
+    }
+
+    if (PGuildShop) // may be NULL if player never looks at a guild shop
+    {
+        delete PGuildShop;
+    }
 
     delete eventPreparation;
     delete currentEvent;

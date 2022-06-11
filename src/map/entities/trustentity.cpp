@@ -42,12 +42,15 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../utils/trustutils.h"
 
 CTrustEntity::CTrustEntity(CCharEntity* PChar)
+: CMobEntity()
 {
     objtype        = TYPE_TRUST;
     m_EcoSystem    = ECOSYSTEM::UNCLASSIFIED;
     allegiance     = ALLEGIANCE_TYPE::PLAYER;
     m_MobSkillList = 0;
     PMaster        = PChar;
+    m_MovementType = MELEE_RANGE;
+
     PAI            = std::make_unique<CAIContainer>(this, std::make_unique<CPathFind>(this), std::make_unique<CTrustController>(PChar, this),
                                          std::make_unique<CTargetFind>(this));
 }

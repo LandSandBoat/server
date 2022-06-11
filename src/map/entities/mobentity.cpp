@@ -94,8 +94,12 @@ CMobEntity::CMobEntity()
     m_THLvl        = 0;
     m_ItemStolen   = false;
 
+    HPmodifier = 0;
+    MPmodifier = 0;
+
     strRank = 3;
     vitRank = 3;
+    dexRank = 3;
     agiRank = 3;
     intRank = 3;
     mndRank = 3;
@@ -113,13 +117,14 @@ CMobEntity::CMobEntity()
     m_TrueDetection = false;
     m_Detects       = DETECT_NONE;
     m_Link          = 0;
-
     m_battlefieldID = 0;
     m_bcnmID        = 0;
 
     m_maxRoamDistance = 50.0f;
     m_disableScent    = false;
 
+    m_Pool = 0;
+    m_RespawnTime = 300;
     // False positive: any reasonable compiler is IEEE754-1985 compatible
     // portability: Using memset() on struct which contains a floating point number.
     // This is not portable because memset() sets each byte of a block of memory to a specific value and

@@ -1060,6 +1060,11 @@ namespace fishingutils
         gear.waist           = (waist == FISHERS_ROPE) ? waist : 0;
         gear.legs            = (legs == FISHERMANS_HOSE || legs == ANGLERS_HOSE) ? legs : 0;
         gear.feet            = (feet == FISHERMANS_BOOTS || feet == ANGLERS_BOOTS) ? feet : 0;
+        gear.ring1           = 0;
+        gear.ring2           = 0;
+        gear.ranged          = 0;
+        gear.ammo            = 0;
+
         return gear;
     }
 
@@ -2064,6 +2069,34 @@ namespace fishingutils
         fishresponse_t* response    = new fishresponse_t();
         response->angle             = 0;
         response->distance          = 2;
+        response->catchdifficulty   = 0;
+        response->catchsizeType     = 0;
+        response->legendary         = 0;
+        response->count             = 0;
+        response->stamina           = 0;
+        response->delay             = 0;
+        response->regen             = 0;
+        response->attackdmg         = 0;
+        response->heal              = 0;
+        response->timelimit         = 0;
+        response->sense             = 0;
+        response->hooksense         = 0;
+        response->special           = 0;
+        response->successtype       = 0;
+        response->length            = 0;
+        response->weight            = 0;
+        response->ranking           = 0;
+        response->epic              = 0;
+        response->lose.failReason   = 0;
+        response->lose.chance       = 0;
+        response->rbreak.failReason = 0;
+        response->rbreak.chance     = 0;
+        response->lsnap.failReason  = 0;
+        response->lsnap.chance      = 0;
+        response->nm                = 0;
+        response->nmFlags           = 0;
+
+
         uint16 FishPoolWeight       = 0;
         uint16 ItemPoolWeight       = 0;
         uint16 MobPoolWeight        = 0;

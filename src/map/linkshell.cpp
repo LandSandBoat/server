@@ -51,7 +51,8 @@
  ************************************************************************/
 
 CLinkshell::CLinkshell(uint32 id)
-: m_id(id)
+: m_postRights(0)
+, m_id(id)
 , m_color(0)
 {
 }

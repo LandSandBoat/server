@@ -30,6 +30,12 @@ CPathFind::CPathFind(CBaseEntity* PTarget)
 , m_pathFlags(0)
 , m_carefulPathing(false)
 {
+    m_originalPoint.x        = 0.f;
+    m_originalPoint.y        = 0.f;
+    m_originalPoint.z        = 0.f;
+    m_originalPoint.moving   = 0;
+    m_originalPoint.rotation = 0;
+
     Clear();
 }
 

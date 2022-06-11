@@ -420,7 +420,16 @@ public:
 
     look_t m_look;
 
-    char_mini(){};
+    char_mini()
+    {
+        std::memset(&m_name, 0, sizeof(m_name));
+
+        m_mjob = 0;
+        m_zone = 0;
+        m_nation = 0;
+
+        std::memset(&m_look, 0, sizeof(look_t));
+    };
     ~char_mini(){};
 };
 

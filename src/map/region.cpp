@@ -37,6 +37,13 @@ CRegion::CRegion(uint32 RegionID, bool isCircle)
 , m_Count(0)
 , circle(isCircle)
 {
+    x1 = 0.f;
+    x2 = 0.f;
+    y1 = 0.f;
+    y2 = 0.f;
+    z1 = 0.f;
+    z2 = 0.f;
+
     if (m_RegionID == 0)
     {
         ShowWarning("Region ID cannot be zero");

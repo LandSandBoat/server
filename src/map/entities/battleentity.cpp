@@ -91,6 +91,7 @@ CBattleEntity::CBattleEntity()
     m_unkillable = false;
 
     m_DeathType = DEATH_TYPE::NONE;
+    BattleHistory.lastHitTaken_atkType = ATTACK_TYPE::NONE;
 }
 
 CBattleEntity::~CBattleEntity() = default;
