@@ -20,9 +20,11 @@ entity.onMobInitialize = function(IxAernDrkMob)
         if(math.random (1, 10) < 10) then
             -- reraise
             local target = mob:getTarget()
-            local owner = nil
-            if target:isPet() then
-                owner = target:getMaster()
+            if
+                target:isPet() and
+                not target:isAlive()
+            then
+                target = target:getMaster()
             end
             mob:setMobMod(xi.mobMod.NO_DROPS, 1)
             mob:timer(9000, function(mobArg)
@@ -36,12 +38,6 @@ entity.onMobInitialize = function(IxAernDrkMob)
                 then
                     mobArg:updateClaim(target)
                     mobArg:updateEnmity(target)
-                elseif -- If pet has despawned then aggro owner
-                    not target:isAlive() and
-                    owner ~= nil
-                then
-                    mobArg:updateClaim(owner)
-                    mobArg:updateEnmity(owner)
                 else
                     local partySize = killer:getPartySize() -- Check for other available valid aggro targets
                     local i = 1
