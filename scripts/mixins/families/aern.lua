@@ -37,11 +37,11 @@ g_mixins.families.aern = function(aernMob)
                     mobArg:resetAI()
                     mobArg:stun(3000)
                     if
-                        mobArg:checkDistance(killer) < 40 and
-                        killer:isAlive()
+                        mobArg:checkDistance(target) < 40 and
+                        target:isAlive()
                     then
-                        mobArg:updateClaim(killer)
-                        mobArg:updateEnmity(killer)
+                        mobArg:updateClaim(target)
+                        mobArg:updateEnmity(target)
                     elseif -- If pet has despawned then aggro owner
                         not target:isAlive() and
                         owner ~= 0
