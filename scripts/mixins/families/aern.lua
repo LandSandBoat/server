@@ -26,8 +26,11 @@ g_mixins.families.aern = function(aernMob)
                 local dropid = mob:getDropID()
                 local owner = nil
                 local target = mob:getTarget()
-                if target:isPet() then
-                    owner = target:getMaster()
+                if
+                    target:isPet() and
+                    not target:isAlive()
+                then
+                    target = target:getMaster()
                 end
                 mob:timer(12000, function(mobArg)
                     mobArg:setHP(mob:getMaxHP())
@@ -42,12 +45,6 @@ g_mixins.families.aern = function(aernMob)
                     then
                         mobArg:updateClaim(target)
                         mobArg:updateEnmity(target)
-                    elseif -- If pet has despawned then aggro owner
-                        not target:isAlive() and
-                        owner ~= nil
-                    then
-                        mobArg:updateClaim(owner)
-                        mobArg:updateEnmity(owner)
                     else
                         local partySize = killer:getPartySize() -- Check for other available valid aggro targets
                         local i = 1
