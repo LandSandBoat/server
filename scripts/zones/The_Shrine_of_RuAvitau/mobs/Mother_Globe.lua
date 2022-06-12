@@ -9,54 +9,107 @@ require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
-local findSlaveGlobeToSpawn = function()
-    local spawnCount = 0
+local startingSpacingDistance = -1 -- how far apart to initially attempt to space the slaves
+local spacingDistanceMinimum = -.1 -- the distance at which if you're trying to build valid points this close together it will just bail out and stack on top of MG
+local spacingDivisor = 2  -- affects how quickly the list will converge to just stacking on MG (larger the faster)
+
+-- function returns two tables, one of spawned and one of unspawned
+local getSlaves = function()
+    local spawnedSlaves = {}
+    local notSpawnedSlaves = {}
 
     for _, slaveGlobeID in ipairs(ID.mob.SLAVE_GLOBES) do
         local slaveGlobe = GetMobByID(slaveGlobeID)
 
-        spawnCount = spawnCount + 1
-
-        if not slaveGlobe:isSpawned() then
-            return slaveGlobe, spawnCount
+        if slaveGlobe:isSpawned() then
+            table.insert(spawnedSlaves, slaveGlobe)
+        else
+            table.insert(notSpawnedSlaves, slaveGlobe)
         end
     end
 
-    return nil, spawnCount
+    return spawnedSlaves, notSpawnedSlaves
 end
 
-local spawnSlaveGlobe = function(mg, slaveGlobe)
-    slaveGlobe:setSpawn(mg:getXPos() + 1, mg:getYPos(), mg:getZPos() + 1)
+-- calculates a list of all valid slave globe idle positions
+-- shrinks the distance between them (if it fails the isNavigablePoint test)
+-- until the distance is low enough where they should just stack on mg
+-- the assumption here is that MG is likely not in a navmesh violation state
+local function calculateValidSlaveGlobePositions(zone, mgPos, spacingDistance)
+    local slavePositions = {}
+
+    -- extreme terminal decision so we don't recurse endlessly
+    -- fall back to just piling up ontop of mg
+    if spacingDistance > spacingDistanceMinimum then
+        return {mgPos, mgPos, mgPos, mgPos, mgPos, mgPos}
+    end
+
+    for slavePositionSlot, _ in ipairs(ID.mob.SLAVE_GLOBES) do
+        local xOffset = spacingDistance * slavePositionSlot
+        local slavePosition =  utils.lateralTranslateWithOriginRotation(mgPos, {x = xOffset, y = 0, z = 0})
+
+        if zone:isNavigablePoint(slavePosition) then
+            table.insert(slavePositions, slavePosition)
+        else
+            return calculateValidSlaveGlobePositions(zone, mgPos, spacingDistance / spacingDivisor)
+        end
+    end
+
+    return slavePositions
+end
+
+-- spawn the slave and update any enmity
+local spawnSlaveGlobe = function(mg, slaveGlobe, spawnPos)
+    slaveGlobe:setSpawn(spawnPos.x, spawnPos.y, spawnPos.z, spawnPos.rot)
     slaveGlobe:spawn()
 
     if mg:isEngaged() then
         slaveGlobe:updateEnmity(mg:getTarget())
     end
-
 end
 
+-- set the next spawn time, if it's at a max, set to zero
+-- zero helps to prevent insta spawning next slaves while
+-- in combat if at the start it had all 6 out already
 local setNextSpawnSlaveGlobe = function(mg, spawnCount, nowTime)
     local nextSpawnTime = 35 -- 30 + 5 seconds for "cast time"
 
     if spawnCount < #ID.mob.SLAVE_GLOBES then
         mg:setLocalVar("nextSlaveSpawnTime", nowTime + nextSpawnTime)
     else
+        -- setting to zero prevents "insta" spawn on the 6th slaves death because slaveGlobePos
+        -- on death will check and set the next respawn time
         mg:setLocalVar("nextSlaveSpawnTime", 0)
     end
 end
 
-local trySpawnSlaveGlobe = function(mg, nowTime)
+local trySpawnSlaveGlobe = function(mg, nowTime, spawnedSlaves, notSpawnedSlaves, validSlavePositions)
     local nextSlaveSpawnTime = mg:getLocalVar("nextSlaveSpawnTime")
-    local shouldTryToSummonSlaveGlobe = nowTime > nextSlaveSpawnTime
+    local shouldSummonSlaveGlobe = nowTime > nextSlaveSpawnTime and #notSpawnedSlaves > 0
     local inCombat = mg:isEngaged()
     local combatHasNotRecentlyStarted = mg:getBattleTime() > 3
 
-    if shouldTryToSummonSlaveGlobe and (not inCombat or combatHasNotRecentlyStarted) then
-        local slaveGlobe, spawnCount = findSlaveGlobeToSpawn(mg)
-        if slaveGlobe then
-            spawnSlaveGlobe(mg, slaveGlobe)
-            setNextSpawnSlaveGlobe(mg, spawnCount, os.time())
-        end
+    if shouldSummonSlaveGlobe and (not inCombat or combatHasNotRecentlyStarted) then
+        local slaveGlobe = notSpawnedSlaves[1]
+        local slaveSlot = #spawnedSlaves + 1
+        local slaveGlobePos = validSlavePositions[slaveSlot]
+
+        spawnSlaveGlobe(mg, slaveGlobe, slaveGlobePos)
+        setNextSpawnSlaveGlobe(mg, slaveSlot, os.time())
+    end
+end
+
+local handleSlaveGlobesRoam = function(mg, validSlavePositions)
+    local mgPos = mg:getPos()
+    local positionsIndex = 1
+
+    local spawnedSlaves, _ = getSlaves()
+
+    for _, slaveGlobe in ipairs(spawnedSlaves) do
+        local slaveGlobePos = validSlavePositions[positionsIndex]
+        positionsIndex = positionsIndex + 1
+        slaveGlobe:pathTo(slaveGlobePos.x, slaveGlobePos.y, slaveGlobePos.z)
+        slaveGlobe:setRotation(mgPos.rot)
     end
 end
 
@@ -76,11 +129,17 @@ entity.onMobFight = function(mob, target)
         end
     end
 
-    trySpawnSlaveGlobe(mob, os.time())
+    local spawnedSlaves, notSpawnedSlaves = getSlaves()
+    local validSlavePositions = calculateValidSlaveGlobePositions(mob:getZone(), mob:getPos(), startingSpacingDistance)
+    trySpawnSlaveGlobe(mob, os.time(), spawnedSlaves, notSpawnedSlaves, validSlavePositions)
 end
 
 entity.onMobRoam = function(mob)
-    trySpawnSlaveGlobe(mob, os.time())
+    local spawnedSlaves, notSpawnedSlaves = getSlaves()
+    local validSlavePositions = calculateValidSlaveGlobePositions(mob:getZone(), mob:getPos(), startingSpacingDistance)
+
+    trySpawnSlaveGlobe(mob, os.time(), spawnedSlaves, notSpawnedSlaves, validSlavePositions)
+    handleSlaveGlobesRoam(mob, validSlavePositions)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
