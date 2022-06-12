@@ -91,11 +91,11 @@ int8* PTempBuff = nullptr; // Temporary packet clipboard
 int32  map_fd          = 0; // main socket
 uint32 map_amntplayers = 0; // map amnt unique players
 
-in_addr map_ip;
+in_addr map_ip   = {};
 uint16  map_port = 0;
 
-map_config_t       map_config; // map server settings
-map_session_list_t map_session_list;
+map_config_t       map_config       = {}; // map server settings
+map_session_list_t map_session_list = {};
 
 std::thread messageThread;
 
@@ -202,7 +202,10 @@ int32 do_init(int32 argc, char** argv)
         ShowError("FAIL. See /scripts/settings/README.md immediately.");
         do_abort();
     }
-    fclose(SETTINGS_MAIN);
+    else
+    {
+        fclose(SETTINGS_MAIN);
+    }
 
     MAP_CONF_FILENAME = "./conf/map.conf";
 
@@ -1135,6 +1138,7 @@ int32 map_config_default()
     map_config.mob_hp_multiplier           = 1.0f;
     map_config.player_hp_multiplier        = 1.0f;
     map_config.alter_ego_hp_multiplier     = 1.0f;
+    map_config.ability_recast_multiplier   = 1.0f;
     map_config.nm_mp_multiplier            = 1.0f;
     map_config.mob_mp_multiplier           = 1.0f;
     map_config.player_mp_multiplier        = 1.0f;
@@ -1152,8 +1156,13 @@ int32 map_config_default()
     map_config.vanadiel_time_epoch         = 0;
     map_config.lightluggage_block          = 4;
     map_config.packetguard_enabled         = false;
+    map_config.ah_base_fee_single          = 1;
+    map_config.ah_base_fee_stacks          = 1;
+    map_config.ah_tax_rate_single          = 1;
+    map_config.ah_tax_rate_stacks          = 1;
     map_config.max_time_lastupdate         = 60000;
     map_config.newstyle_skillups           = 7;
+    map_config.Battle_cap_tweak            = 0;
     map_config.drop_rate_multiplier        = 1.0f;
     map_config.mob_gil_multiplier          = 1.0f;
     map_config.all_mobs_gil_bonus          = 0;

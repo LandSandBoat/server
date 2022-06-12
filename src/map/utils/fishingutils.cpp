@@ -2095,7 +2095,7 @@ namespace fishingutils
         response->lsnap.chance      = 0;
         response->nm                = 0;
         response->nmFlags           = 0;
-
+        response->response          = 0;
 
         uint16 FishPoolWeight       = 0;
         uint16 ItemPoolWeight       = 0;

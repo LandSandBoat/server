@@ -76,6 +76,7 @@ CZoneEntities::CZoneEntities(CZone* zone)
 : m_zone(zone)
 , m_Transport(nullptr)
 {
+    lastCharComputeTargId = 0;
 }
 
 CZoneEntities::~CZoneEntities() = default;
