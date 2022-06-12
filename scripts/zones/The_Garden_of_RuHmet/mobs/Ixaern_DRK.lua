@@ -51,7 +51,7 @@ entity.onMobInitialize = function(IxAernDrkMob)
             -- death
             mob:setMobMod(xi.mobMod.NO_DROPS, 0)
             for i = mob:getID() + 1, mob:getID() + 2 do
-                aernPet = GetMobByID(i)
+                local aernPet = GetMobByID(i)
                 DespawnMob(aernPet)
             end
         end
