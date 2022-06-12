@@ -9,7 +9,59 @@ require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
+local findSlaveGlobeToSpawn = function()
+    local spawnCount = 0
+
+    for _, slaveGlobeID in ipairs(ID.mob.SLAVE_GLOBES) do
+        local slaveGlobe = GetMobByID(slaveGlobeID)
+
+        spawnCount = spawnCount + 1
+
+        if not slaveGlobe:isSpawned() then
+            return slaveGlobe, spawnCount
+        end
+    end
+
+    return nil, spawnCount
+end
+
+local spawnSlaveGlobe = function(mg, slaveGlobe)
+    slaveGlobe:setSpawn(mg:getXPos() + 1, mg:getYPos(), mg:getZPos() + 1)
+    slaveGlobe:spawn()
+
+    if mg:isEngaged() then
+        slaveGlobe:updateEnmity(mg:getTarget())
+    end
+
+end
+
+local setNextSpawnSlaveGlobe = function(mg, spawnCount, nowTime)
+    local nextSpawnTime = 35 -- 30 + 5 seconds for "cast time"
+
+    if spawnCount < #ID.mob.SLAVE_GLOBES then
+        mg:setLocalVar("nextSlaveSpawnTime", nowTime + nextSpawnTime)
+    else
+        mg:setLocalVar("nextSlaveSpawnTime", 0)
+    end
+end
+
+local trySpawnSlaveGlobe = function(mg, nowTime)
+    local nextSlaveSpawnTime = mg:getLocalVar("nextSlaveSpawnTime")
+    local shouldTryToSummonSlaveGlobe = nowTime > nextSlaveSpawnTime
+    local inCombat = mg:isEngaged()
+    local combatHasNotRecentlyStarted = mg:getBattleTime() > 3
+
+    if shouldTryToSummonSlaveGlobe and (not inCombat or combatHasNotRecentlyStarted) then
+        local slaveGlobe, spawnCount = findSlaveGlobeToSpawn(mg)
+        if slaveGlobe then
+            spawnSlaveGlobe(mg, slaveGlobe)
+            setNextSpawnSlaveGlobe(mg, spawnCount, os.time())
+        end
+    end
+end
+
 entity.onMobSpawn = function(mob)
+    mob:setLocalVar("nextSlaveSpawnTime", os.time() + 30) -- spawn first 30s from now
     mob:addStatusEffectEx(xi.effect.SHOCK_SPIKES, 0, 60, 0, 0) -- ~60 damage
     -- TODO: Effect can be stolen, giving a THF (Aura Steal) or BLU (Voracious Trunk) a 60 minute shock spikes effect (unknown potency).
     -- If effect is stolen, he will recast it instantly.
@@ -24,19 +76,11 @@ entity.onMobFight = function(mob, target)
         end
     end
 
-    -- Summons a single orb every 30 seconds.  Needs to be last, so other code runs.
-    -- TODO: Should have a SMN casting effect for ~3-5 seconds while calling.
-    if mob:getBattleTime() % 30 == 0 and mob:getBattleTime() > 3 then
-        for i = motherGlobe + 1, motherGlobe + 6 do
-            local pet = GetMobByID(i)
-            if not pet:isSpawned() then
-                pet:setSpawn(mob:getXPos() + 1, mob:getYPos(), mob:getZPos() + 1)
-                pet:spawn()
-                pet:updateEnmity(target)
-                return
-            end
-        end
-    end
+    trySpawnSlaveGlobe(mob, os.time())
+end
+
+entity.onMobRoam = function(mob)
+    trySpawnSlaveGlobe(mob, os.time())
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
