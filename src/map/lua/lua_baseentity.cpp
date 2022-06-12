@@ -2102,7 +2102,7 @@ bool CLuaBaseEntity::sendGuild(uint16 guildID, uint8 open, uint8 close, uint8 ho
 
     if (PChar->PGuildShop)
     {
-        delete PGuildShop;
+        delete PChar->PGuildShop;
     }
 
     PChar->PGuildShop = PGuildShop;
