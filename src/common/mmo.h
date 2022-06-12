@@ -210,6 +210,56 @@ struct look_t
         uint16 modelid;
     };
     uint16 head, body, hands, legs, feet, main, sub, ranged;
+
+    look_t()
+    {
+        size    = 0;
+        modelid = 0;
+        head    = 0;
+        body    = 0;
+        hands   = 0;
+        legs    = 0;
+        feet    = 0;
+        main    = 0;
+        sub     = 0;
+        ranged  = 0;
+    }
+
+    look_t(uint16 look[10])
+    {
+        size    = look[0];
+        modelid = look[1];
+        head    = look[2];
+        body    = look[3];
+        hands   = look[4];
+        legs    = look[5];
+        feet    = look[6];
+        main    = look[7];
+        sub     = look[8];
+        ranged  = look[9];
+    }
+
+    look_t(std::vector<uint16> &look)
+    {
+        if (look.size() == 10)
+        {
+            size    = look[0];
+            modelid = look[1];
+            head    = look[2];
+            body    = look[3];
+            hands   = look[4];
+            legs    = look[5];
+            feet    = look[6];
+            main    = look[7];
+            sub     = look[8];
+            ranged  = look[9];
+        }
+        else // throw exception instead?
+        {
+            look_t();
+        }
+    }
+
 };
 
 struct skills_t
@@ -248,17 +298,34 @@ struct skills_t
     };
     // The rank is only used in crafts. A size of 64 is required for skill ID compatability.
     uint8 rank[64];
+
+    skills_t()
+    {
+        std::memset(&skill, 0, sizeof(skill));
+        std::memset(&rank, 0, sizeof(rank));
+    }
 };
 
 struct keyitems_table_t
 {
     std::bitset<512> keyList;
     std::bitset<512> seenList;
+
+    keyitems_table_t()
+    {
+        keyList = {};
+        seenList = {};
+    }
 };
 
 struct keyitems_t
 {
     std::array<keyitems_table_t, 7> tables;
+
+    keyitems_t()
+    {
+        tables = {};
+    }
 };
 
 struct position_t
@@ -273,17 +340,51 @@ struct position_t
     // `radianToRotation()` util functions to convert back and forth between the 255-encoded
     // rotation value and the radian value.
     uint8 rotation;
+
+    position_t()
+    {
+        x        = 0.f;
+        y        = 0.f;
+        z        = 0.f;
+        moving   = 0;
+        rotation = 0;
+    }
+
+    position_t(float _x, float _y, float _z, uint16 _moving, uint8 _rotation)
+    : x(_x)
+    , y(_y)
+    , z(_z)
+    , moving(_moving)
+    , rotation(_rotation)
+    {
+    }
 };
 
 struct stats_t
 {
     uint16 STR, DEX, VIT, AGI, INT, MND, CHR;
+
+    stats_t()
+    {
+        STR = 0;
+        DEX = 0;
+        VIT = 0;
+        INT = 0;
+        MND = 0;
+        CHR = 0;
+    }
 };
 
 struct questlog_t
 {
     uint8 current[32];
     uint8 complete[32];
+
+    questlog_t()
+    {
+        std::memset(&current, 0, sizeof(current));
+        std::memset(&complete, 0, sizeof(complete));
+    }
 };
 
 struct missionlog_t
@@ -292,18 +393,39 @@ struct missionlog_t
     uint16 statusUpper;
     uint16 statusLower;
     bool   complete[64];
+
+    missionlog_t()
+    {
+        current     = 0;
+        statusUpper = 0;
+        statusLower = 0;
+
+        std::memset(&complete, 0, sizeof(complete));
+    }
 };
 
 struct assaultlog_t
 {
     uint16 current;
     bool   complete[128];
+
+    assaultlog_t()
+    {
+        current = 0;
+        std::memset(&complete, 0, sizeof(complete));
+    }
 };
 
 struct campaignlog_t
 {
     uint16 current;
     bool   complete[512];
+
+    campaignlog_t()
+    {
+        current = 0;
+        std::memset(&complete, 0, sizeof(complete));
+    }
 };
 
 struct eminencelog_t
@@ -311,13 +433,27 @@ struct eminencelog_t
     uint16 active[31]; // slot 31 is for time-limited records
     uint32 progress[31];
     uint8  complete[512]; // bitmap of all 4096 possible records.
+
+    eminencelog_t()
+    {
+        std::memset(&active,   0, sizeof(active));
+        std::memset(&progress, 0, sizeof(progress));
+        std::memset(&complete, 0, sizeof(complete));
+    }
 };
 
 struct eminencecache_t
 {
     std::bitset<4096> activemap;
-    uint32            lastWriteout{ 0 };
-    bool              notifyTimedRecord{ false };
+    uint32            lastWriteout;
+    bool              notifyTimedRecord;;
+
+    eminencecache_t()
+    {
+        activemap         = {};
+        lastWriteout      = 0;
+        notifyTimedRecord = false;
+    }
 };
 
 struct nameflags_t
@@ -333,6 +469,11 @@ struct nameflags_t
         };
         uint32 flags;
     };
+
+    nameflags_t()
+    {
+        flags = 0;
+    }
 };
 
 struct search_t
@@ -340,11 +481,23 @@ struct search_t
     uint8       language;
     uint8       messagetype;
     std::string message;
+
+    search_t()
+    {
+        language    = 0;
+        messagetype = 0;
+        message     = {};
+    }
 };
 
 struct bazaar_t
 {
     string_t message;
+
+    bazaar_t()
+    {
+        message = {};
+    }
 };
 
 // A comment on the packets below, defined as macros.
@@ -427,8 +580,6 @@ public:
         m_mjob = 0;
         m_zone = 0;
         m_nation = 0;
-
-        std::memset(&m_look, 0, sizeof(look_t));
     };
     ~char_mini(){};
 };

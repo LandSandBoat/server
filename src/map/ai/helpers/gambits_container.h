@@ -173,6 +173,8 @@ namespace gambits
         CGambitsContainer(CTrustEntity* trust)
         : POwner(trust)
         {
+            tp_trigger = G_TP_TRIGGER::ASAP;
+            tp_select =  G_SELECT::HIGHEST;
         }
         ~CGambitsContainer() = default;
 

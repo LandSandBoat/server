@@ -809,9 +809,7 @@ look_t stringToLook(std::string str)
         entry = (entry >> 8) | (entry << 8);
     }
 
-    look_t out;
-    memcpy(&out, hex.data(), sizeof(out));
-    return out;
+    return look_t(hex);
 }
 
 bool approximatelyEqual(float a, float b)

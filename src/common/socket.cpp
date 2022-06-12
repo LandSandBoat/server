@@ -331,6 +331,14 @@ typedef struct _connect_history
     time_point               tick;
     int                      count;
     unsigned                 ddos : 1;
+    _connect_history()
+    {
+        next  = {};
+        ip    = 0;
+        tick  = std::chrono::system_clock::from_time_t(time_t{0}); // 0 in unix time
+        count = 0;
+        ddos  = 0;
+    }
 } ConnectHistory;
 
 using AccessControl = struct _access_control

@@ -291,6 +291,9 @@ int32 do_init(int32 argc, char** argv)
     g_PBuff   = new int8[MAX_BUFFER_SIZE + 20];
     PTempBuff = new int8[MAX_BUFFER_SIZE + 20];
 
+    std::memset(g_PBuff, 0, MAX_BUFFER_SIZE + 20);
+    std::memset(PTempBuff, 0, MAX_BUFFER_SIZE + 20);
+
     PacketGuard::Init();
 
     moduleutils::OnInit();

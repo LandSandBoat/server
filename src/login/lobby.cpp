@@ -815,7 +815,6 @@ int32 lobby_createchar(login_session_data_t* loginsd, int8* buf)
     char_mini createchar;
 
     std::memcpy(createchar.m_name, loginsd->charname, 16);
-    std::memset(&createchar.m_look, 0, sizeof(look_t));
 
     createchar.m_look.race = ref<uint8>(buf, 48);
     createchar.m_look.size = ref<uint8>(buf, 57);

@@ -100,6 +100,7 @@ CNavMesh::CNavMesh(uint16 zoneID)
 : m_zoneID(zoneID)
 , m_navMesh(nullptr)
 {
+    m_hit         = {};
     m_hit.path    = {};
     m_hit.maxPath = 20;
 }

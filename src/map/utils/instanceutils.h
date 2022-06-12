@@ -45,6 +45,26 @@ struct InstanceData_t
     uint16      battlesolo;
     uint16      battlemulti;
     std::string filename;
+
+    InstanceData_t()
+    {
+        id                 = 0;
+        instance_name      = {};
+        instance_zone      = 0;
+        instance_zone_name = {};
+        entrance_zone      = 0;
+        entrance_zone_name = {};
+        time_limit         = 0;
+        start_x            = 0.f;
+        start_y            = 0.f;
+        start_z            = 0.f;
+        start_rot          = 0;
+        music_day          = 0;
+        music_night        = 0;
+        battlesolo         = 0;
+        battlemulti        = 0;
+        filename           = {};
+    }
 };
 
 namespace instanceutils

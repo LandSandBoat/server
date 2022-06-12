@@ -1251,7 +1251,7 @@ namespace fishingutils
             return false;
         }
 
-        areavector_t extreme = { MAX_POINTS, p.z };
+        areavector_t extreme = { MAX_POINTS, p.z, 0 }; // TODO: Verify this "extreme" variable, X = MAX_POINTS, Y = p.z and Z = 0.
         int          count = 0, i = 0;
         do
         {

@@ -53,6 +53,14 @@ struct jobs_t
     uint8  job[MAX_JOBTYPE]; // the current levels of each of the jobs from above
     uint16 exp[MAX_JOBTYPE]; // the experience points for each of the jobs above
     uint8  genkai;           // the maximum genkai level achieved
+
+    jobs_t()
+    {
+        unlocked = 0;
+        std::memset(&job, 0, sizeof(job));
+        std::memset(&exp, 0, sizeof(exp));
+        genkai = 0;
+    }
 };
 
 struct profile_t
@@ -66,30 +74,65 @@ struct profile_t
     location_t home_point; // Renaissance point character
     uint8      campaign_allegiance;
     uint8      unity_leader;
+
+    profile_t()
+    {
+        nation = 0;
+        mhflag = 0;
+        title  = 0;
+        std::memset(&fame, 0, sizeof(fame));
+        std::memset(&rank, 0, sizeof(rank));
+        rankpoints = 0;
+        home_point = {};
+    }
 };
 
 struct capacityChain_t
 {
     uint16 chainNumber;
     uint32 chainTime;
+
+    capacityChain_t()
+    {
+        chainNumber = 0;
+        chainTime   = 0;
+    }
 };
 
 struct expChain_t
 {
     uint16 chainNumber;
     uint32 chainTime;
+
+    expChain_t()
+    {
+        chainNumber = 0;
+        chainTime   = 0;
+    }
 };
 
 struct telepoint_t
 {
     uint32 access[4];
     int32  menu[10];
+
+    telepoint_t()
+    {
+        std::memset(&access, 0, sizeof(access));
+        std::memset(&menu, 0, sizeof(menu));
+    }
 };
 
 struct waypoint_t
 {
     uint32 access[5];
     bool   confirmation;
+
+    waypoint_t()
+    {
+        std::memset(&access, 0, sizeof(access));
+        confirmation = false;
+    }
 };
 
 struct teleport_t
@@ -106,6 +149,22 @@ struct teleport_t
     telepoint_t survival;
     uint8       abysseaConflux[MAX_ABYSSEAZONES];
     waypoint_t  waypoints;
+
+    teleport_t()
+    {
+        outpostSandy   = 0;
+        outpostBastok  = 0;
+        outpostWindy   = 0;
+        runicPortal    = 0;
+        pastMaw        = 0;
+        campaignSandy  = 0;
+        campaignBastok = 0;
+        campaignWindy  = 0;
+        homepoint      = {};
+        survival       = {};
+        waypoints      = {};
+        std::memset(&abysseaConflux, 0, sizeof(abysseaConflux));
+    }
 };
 
 struct PetInfo_t

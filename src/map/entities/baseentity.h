@@ -216,6 +216,15 @@ struct location_t
     uint16     prevzone;    // Previous zone (Not used for monsters and NPCs)
     bool       zoning;      // The flag is reset at each entrance to the new zone. We are needed to implement the logic of game tasks ("Quests")
     uint16     boundary;    // A certain area in the zone in which the entity is located (used by characters and transport)
+
+    location_t()
+    {
+        destination = 0;
+        zone        = nullptr;
+        prevzone    = 0;
+        zoning      = false;
+        boundary    = 0;
+    }
 };
 
 class CAIContainer;

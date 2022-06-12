@@ -244,6 +244,21 @@ struct socket_data
 
     bool  ver_mismatch;
     void* session_data; // stores application-specific data related to the session
+
+    socket_data()
+    {
+        flag.eof    = '\0';
+        flag.server = '\0';
+        rdata = "";
+        wdata = "";
+        rdata_pos = 0;
+        rdata_tick = time(0);
+        func_recv = {};
+        func_send = {};
+        func_parse = {};
+        ver_mismatch = 0;
+        session_data = nullptr;
+    }
 };
 
 // Data prototype declaration
