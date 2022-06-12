@@ -39,7 +39,7 @@ g_mixins.families.aern = function(aernMob)
                     mobArg:resetAI()
                     mobArg:stun(3000)
                     if
-                        mobArg:checkDistance(target) < 40 and
+                        mobArg:checkDistance(target) < 25 and
                         target:isAlive()
                     then
                         mobArg:updateClaim(target)
@@ -48,8 +48,8 @@ g_mixins.families.aern = function(aernMob)
                         local partySize = killer:getPartySize() -- Check for other available valid aggro targets
                         local i = 1
                         if killer ~= nil then
-                            for _, partyMember in pairs(killer:getAlliance()) do
-                                if partyMember:isAlive() and mobArg:checkDistance(partyMember) < 40 then
+                            for _, partyMember in pairs(killer:getAlliance()) do --TODO add enmity list check when binding avail
+                                if partyMember:isAlive() and mobArg:checkDistance(partyMember) < 25 then
                                     mobArg:updateClaim(partyMember)
                                     mobArg:updateEnmity(partyMember)
                                     break
