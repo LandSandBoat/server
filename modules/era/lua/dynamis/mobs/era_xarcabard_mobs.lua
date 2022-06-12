@@ -530,10 +530,9 @@ end
 xi.dynamis.onMagicPrepAnimated = function(mob, target)
     local mobIndex = mob:getLocalVar("MobIndex")
     local spells = xi.dynamis.animatedInfo[mobIndex]["Spells"]
-    local warp = mob:getLocalVar("warp")
     local pick = math.random(1, 100)
 
-    if warp == 1 then
+    if mob:getBattleTime() - mob:getLocalVar("changeTime") >= 0 then
         return 261 -- Use Warp
     end
 
