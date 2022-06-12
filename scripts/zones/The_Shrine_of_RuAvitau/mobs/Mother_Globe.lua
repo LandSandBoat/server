@@ -4,6 +4,7 @@
 -- TODO: Looked like pets had an additional effect: stun with an unknown proc rate
 -- TODO: "Links with Slave Globes, and Slave Globes link with Defenders. Defenders do not link with Slave Globes or Mother Globe."
 -----------------------------------
+local ID = require("scripts/zones/The_Shrine_of_RuAvitau/IDs")
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}
@@ -15,11 +16,9 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobFight = function(mob, target)
-    local motherGlobe = mob:getID()
-
     -- Keep pets linked
-    for i = motherGlobe + 1, motherGlobe + 6 do
-        local pet = GetMobByID(i)
+    for _, slaveGlobeID in ipairs(ID.mob.SLAVE_GLOBES) do
+        local pet = GetMobByID(slaveGlobeID)
         if pet:getCurrentAction() == xi.act.ROAMING then
             pet:updateEnmity(target)
         end
@@ -46,14 +45,12 @@ entity.onAdditionalEffect = function(mob, target, damage)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    local motherGlobe = mob:getID()
-
     mob:setRespawnTime(math.random(10800, 21600)) -- respawn 3-6 hrs
 
-    for i = motherGlobe + 1, motherGlobe + 6 do
-        local pet = GetMobByID(i)
+    for _, slaveGlobeID in ipairs(ID.mob.SLAVE_GLOBES) do
+        local pet = GetMobByID(slaveGlobeID)
         if pet:isSpawned() then
-            DespawnMob(i)
+            DespawnMob(slaveGlobeID)
         end
     end
 end
