@@ -20,15 +20,11 @@ g_mixins.families.aern = function(aernMob)
                     reraises = 1
                 end
             end
-            mob:setMobMod(xi.mobMod.NO_DROPS, 0) -- Drops on if Not reraising
             if curr_reraise < reraises then
-                mob:setMobMod(xi.mobMod.NO_DROPS, 1)  -- Drops off if reraising
                 local dropid = mob:getDropID()
-                local owner = 0
+                mob:setDropID(0)
                 local target = mob:getTarget()
-                if target:isPet() then
-                    owner = target:getMaster()
-                end
+                if target then killer = target end
                 mob:timer(12000, function(mobArg)
                     mobArg:setHP(mob:getMaxHP())
                     mobArg:setDropID(dropid)
@@ -36,20 +32,9 @@ g_mixins.families.aern = function(aernMob)
                     mobArg:setLocalVar("AERN_RERAISES", curr_reraise + 1)
                     mobArg:resetAI()
                     mobArg:stun(3000)
-                    if
-                        mobArg:checkDistance(target) < 40 and
-                        target:isAlive()
-                    then
-                        mobArg:updateClaim(target)
-                        mobArg:updateEnmity(target)
-                    elseif -- If pet has despawned then aggro owner
-                        not target:isAlive() and
-                        owner ~= 0
-                    then
-                        mobArg:updateClaim(owner)
-                        mobArg:updateEnmity(owner)
-                    else --if all checks fail just disengage
-                        mob:disengage()
+                    if mobArg:checkDistance(killer) < 40 then
+                        mobArg:updateClaim(killer)
+                        mobArg:updateEnmity(killer)
                     end
                     mobArg:triggerListener("AERN_RERAISE", mobArg, curr_reraise + 1)
                 end)

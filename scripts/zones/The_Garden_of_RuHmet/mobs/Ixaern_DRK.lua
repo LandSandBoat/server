@@ -15,14 +15,14 @@ require("scripts/globals/status")
 local entity = {}
 
 entity.onMobInitialize = function(IxAernDrkMob)
-    IxAernDrkMob:addListener("DEATH", "AERN_DEATH", function(mob, killer)
+    IxAernDrkMob:addListener("DEATH", "AERN_DEATH", function(mob)
         local timesReraised = mob:getLocalVar("AERN_RERAISES")
         if(math.random (1, 10) < 10) then
             -- reraise
             local target = mob:getTarget()
-            local owner = 0
-            if target:isPet() then
-                owner = target:getMaster()
+            local targetid = 0
+            if target then
+                targetid = target:getTargID()
             end
             mob:setMobMod(xi.mobMod.NO_DROPS, 1)
             mob:timer(9000, function(mobArg)
@@ -30,20 +30,10 @@ entity.onMobInitialize = function(IxAernDrkMob)
                 mobArg:setAnimationSub(3)
                 mobArg:resetAI()
                 mobArg:stun(3000)
-                if
-                    mobArg:checkDistance(killer) < 40 and
-                    killer:isAlive()
-                then
-                    mobArg:updateClaim(killer)
-                    mobArg:updateEnmity(killer)
-                elseif -- If pet has despawned then aggro owner
-                    not target:isAlive() and
-                    owner ~= 0
-                then
-                    mobArg:updateClaim(owner)
-                    mobArg:updateEnmity(owner)
-                else --if all checks fail just disengage
-                    mob:disengage()
+                local new_target = mobArg:getEntity(targetid)
+                if new_target and mobArg:checkDistance(new_target) < 40 then
+                    mobArg:updateClaim(new_target)
+                    mobArg:updateEnmity(new_target)
                 end
                 mobArg:triggerListener("AERN_RERAISE", mobArg, timesReraised)
             end)
