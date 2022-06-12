@@ -208,5 +208,3 @@ xi.dynamis.onDeathApoc = function(mob, player, isKiller)
 
     xi.dynamis.megaBossOnDeath(mob, player, isKiller)
 end
-
-
