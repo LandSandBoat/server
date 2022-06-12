@@ -532,37 +532,36 @@ local battlefields =
 }
 
 -----------------------------------
--- check requirements for registrant and allies
+-- Check requirements for registrant and allies
 -----------------------------------
-
 local function checkReqs(player, npc, bfid, registrant)
-    local mi      = xi.mission.id
-    local npcid   = npc:getID()
-    local mjob    = player:getMainJob()
-    local mlvl    = player:getMainLvl()
-    local nat     = player:getCurrentMission(player:getNation())
-    local sandy   = player:getCurrentMission(xi.mission.log_id.SANDORIA)
-    local basty   = player:getCurrentMission(xi.mission.log_id.BASTOK)
-    local windy   = player:getCurrentMission(xi.mission.log_id.WINDURST)
-    local roz     = player:getCurrentMission(xi.mission.log_id.ZILART)
-    local cop     = player:getCurrentMission(xi.mission.log_id.COP)
-    local toau    = player:getCurrentMission(xi.mission.log_id.TOAU)
-    local wotg    = player:getCurrentMission(xi.mission.log_id.WOTG)
-    local asa     = player:getCurrentMission(xi.mission.log_id.ASA)
+    local mi       = xi.mission.id
+    local npcid    = npc:getID()
+    local mjob     = player:getMainJob()
+    local mlvl     = player:getMainLvl()
+    local nat      = player:getCurrentMission(player:getNation())
+    local sandy    = player:getCurrentMission(xi.mission.log_id.SANDORIA)
+    local basty    = player:getCurrentMission(xi.mission.log_id.BASTOK)
+    local windy    = player:getCurrentMission(xi.mission.log_id.WINDURST)
+    local roz      = player:getCurrentMission(xi.mission.log_id.ZILART)
+    local cop      = player:getCurrentMission(xi.mission.log_id.COP)
+    local toau     = player:getCurrentMission(xi.mission.log_id.TOAU)
+    local wotg     = player:getCurrentMission(xi.mission.log_id.WOTG)
+    local asa      = player:getCurrentMission(xi.mission.log_id.ASA)
     local natStat  = player:getMissionStatus(player:getNation())
     local rozStat  = player:getMissionStatus(xi.mission.log_id.ZILART)
     local copStat  = player:getCharVar("PromathiaStatus")
     local toauStat = player:getMissionStatus(xi.mission.log_id.TOAU)
     local wotgStat = player:getMissionStatus(xi.mission.log_id.WOTG)
-    local stc = player:hasCompletedMission(xi.mission.log_id.SANDORIA, mi.sandoria.SAVE_THE_CHILDREN)
-    local dm1 = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT)
-    local dm2 = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT_REPEAT)
+    local stc      = player:hasCompletedMission(xi.mission.log_id.SANDORIA, mi.sandoria.SAVE_THE_CHILDREN)
+    local dm1      = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT)
+    local dm2      = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT_REPEAT)
 
     local function getEntranceOffset(offset)
         return zones[player:getZoneID()].npc.ENTRANCE_OFFSET + offset
     end
 
-    -- requirements to register a battlefield
+    -- Requirements to register a battlefield
     local registerReqs =
     {
         [   0] = function() return ( (basty == mi.bastok.THE_EMISSARY_SANDORIA2 or windy == mi.windurst.THE_THREE_KINGDOMS_SANDORIA2) and natStat == 9                     ) end, -- Mission 2-3
@@ -704,7 +703,7 @@ local function checkReqs(player, npc, bfid, registrant)
         [2721] = function() return ( wotg == mi.wotg.PURPLE_THE_NEW_BLACK and wotgStat == 1                                                                                ) end, -- WOTG07: Purple, The New Black
     }
 
-    -- requirements to enter a battlefield already registered by a party member
+    -- Requirements to enter a battlefield already registered by a party member
     local enterReqs =
     {
         [ 640] = function() return ( npc:getXPos() > -721 and npc:getXPos() < 719                                                                          ) end, -- PM5-3 U3: Flames for the Dead
@@ -752,11 +751,11 @@ local function checkReqs(player, npc, bfid, registrant)
         [1306] = function() return ( player:hasKeyItem(xi.ki.COSMO_CLEANSE) and player:hasKeyItem(xi.ki.WHITE_CARD)                                        ) end, -- Central Temenos 4th Floor
         [2721] = function() return ( player:hasCompletedMission(xi.mission.log_id.WOTG, mi.wotg.PURPLE_THE_NEW_BLACK)                                      ) end, -- WOTG07: Purple, The New Black
     }
-    -- determine whether player meets battlefield requirements
+
+    -- Determine whether player meets battlefield requirements
     local req = (registrant == true) and registerReqs[bfid] or enterReqs[bfid]
-    if not req then
-        return true
-    elseif req() then
+
+    if not req or req() then
         return true
     else
         return false
@@ -766,7 +765,6 @@ end
 -----------------------------------
 -- check ability to skip a cutscene
 -----------------------------------
-
 local function checkSkip(player, bfid)
     local mi        = xi.mission.id
     local nat       = player:getCurrentMission(player:getNation())
@@ -808,7 +806,7 @@ local function checkSkip(player, bfid)
             basty == mi.bastok.THE_EMISSARY_WINDURST2
         )
 
-    -- requirements to skip a battlefield
+    -- Requirements to skip a battlefield
     local skipReqs =
     {
         [   0] = function() return ( mission2_3a                                                                                                                                                  ) end, -- Mission 2-3
@@ -862,57 +860,63 @@ local function checkSkip(player, bfid)
         [2721] = function() return ( player:hasCompletedMission(xi.mission.log_id.WOTG, mi.wotg.PURPLE_THE_NEW_BLACK)                                                                             ) end, -- WOTG07: Purple, The New Black
     }
 
-    -- determine whether player meets cutscene skip requirements
+    -- Determine whether player meets cutscene skip requirements
     local req = skipReqs[bfid]
+
     if not req then
         return false
     elseif req() then
         return true
     end
+
     return false
 end
 
 -----------------------------------
--- which battlefields are valid for registrant?
+-- Which battlefields are valid for registrant?
 -----------------------------------
-
 local function findBattlefields(player, npc, itemId)
     local mask = 0
     local zbfs = battlefields[player:getZoneID()]
+
     if zbfs == nil then
         return 0
     end
+
     for k, v in pairs(zbfs) do
         if v[3] == itemId and checkReqs(player, npc, v[2], true) and not player:battlefieldAtCapacity(v[2]) then
             mask = bit.bor(mask, math.pow(2, v[1]))
         end
     end
+
     return mask
 end
 
 -----------------------------------
--- get battlefield id for a given zone and bit
+-- Get battlefield id for a given zone and bit
 -----------------------------------
-
 local function getBattlefieldIdByBit(player, bit)
     local zbfs = battlefields[player:getZoneID()]
+
     if not zbfs then
         return 0
     end
+
     for k, v in pairs(zbfs) do
         if v[1] == bit then
             return v[2]
         end
     end
+
     return 0
 end
 
 -----------------------------------
--- get battlefield bit for a given zone and id
+-- Get battlefield bit for a given zone and id
 -----------------------------------
-
 local function getBattlefieldMaskById(player, bfid)
     local zbfs = battlefields[player:getZoneID()]
+
     if zbfs then
         for k, v in pairs(zbfs) do
             if v[2] == bfid then
@@ -920,15 +924,16 @@ local function getBattlefieldMaskById(player, bfid)
             end
         end
     end
+
     return 0
 end
 
 -----------------------------------
--- get battlefield bit for a given zone and id
+-- Get battlefield bit for a given zone and id
 -----------------------------------
-
 local function getItemById(player, bfid)
     local zbfs = battlefields[player:getZoneID()]
+
     if zbfs then
         for k, v in pairs(zbfs) do
             if v[2] == bfid then
@@ -936,6 +941,7 @@ local function getItemById(player, bfid)
             end
         end
     end
+
     return 0
 end
 
@@ -944,36 +950,65 @@ end
 -----------------------------------
 
 xi.bcnm.onTrade = function(player, npc, trade, onUpdate)
-    -- validate trade
+    -- Validate trade
     local itemId
+
     if not trade then
         return false
+
+    -- Chips for limbus
     elseif trade:getItemCount() == 3 and trade:hasItemQty(1907, 1) and trade:hasItemQty(1908, 1) and trade:hasItemQty(1986, 1) then
         itemId = -1
+
+    -- Chips for limbus
     elseif trade:getItemCount() == 4 and trade:hasItemQty(1909, 1) and trade:hasItemQty(1910, 1) and trade:hasItemQty(1987, 1) and trade:hasItemQty(1988, 1) then
         itemId = -2
+
+    -- Orbs / Testimonies
     else
         itemId = trade:getItemId(0)
-        if itemId == nil or itemId < 1 or itemId > 65535 or trade:getItemCount() ~= 1 or trade:getSlotQty(0) ~= 1 then
+
+        if
+            itemId == nil or
+            itemId < 1 or
+            itemId > 65535 or
+            trade:getItemCount() ~= 1 or
+            trade:getSlotQty(0) ~= 1
+        then
             return false
+
+        -- Check for already used Orb or testimony.
         elseif player:hasWornItem(itemId) then
             player:messageBasic(xi.msg.basic.ITEM_UNABLE_TO_USE_2, 0, 0) -- Unable to use item.
             return false
         end
     end
 
-    -- validate battlefield status
+    -- Validate battlefield status
     if player:hasStatusEffect(xi.effect.BATTLEFIELD) and not onUpdate then
         player:messageBasic(xi.msg.basic.WAIT_LONGER, 0, 0) -- You must wait longer to perform that action.
+
         return false
     end
 
-    -- open menu of valid battlefields
+    -- Check if another party member has battlefield status effect. If so, don't allow trade.
+    local alliance = player:getAlliance()
+    for _, member in pairs(alliance) do
+        if member:hasStatusEffect(xi.effect.BATTLEFIELD) then
+            player:messageBasic(xi.msg.basic.WAIT_LONGER, 0, 0) -- You must wait longer to perform that action.
+
+            return false
+        end
+    end
+
+    -- Open menu of valid battlefields
     local validBattlefields = findBattlefields(player, npc, itemId)
+
     if validBattlefields ~= 0 then
         if not onUpdate then
             player:startEvent(32000, 0, 0, 0, validBattlefields, 0, 0, 0, 0)
         end
+
         return true
     end
 
@@ -983,15 +1018,41 @@ end
 -----------------------------------
 -- onTrigger Action
 -----------------------------------
-
 xi.bcnm.onTrigger = function(player, npc)
-    -- player is in battlefield and clicks to leave
-    if player:getBattlefield() then
-        player:startEvent(32003)
-        return true
+    -- Player has battlefield status effect. That means a battlefield is open OR the player is inside a battlefield.
+    if player:hasStatusEffect(xi.effect.BATTLEFIELD) then
+        -- Player is inside battlefield. Attempting to leave.
+        if player:getBattlefield() then
+            player:startOptionalCutscene(32003)
 
-    -- player wants to register a new battlefield
-    elseif not player:hasStatusEffect(xi.effect.BATTLEFIELD) then
+            return true
+
+        -- Player is outside battlefield. Attempting to enter.
+        else
+            local stat = player:getStatusEffect(xi.effect.BATTLEFIELD)
+            local bfid = stat:getPower()
+            local mask = getBattlefieldMaskById(player, bfid)
+
+            if mask ~= 0 and checkReqs(player, npc, bfid, false) then
+                player:startEvent(32000, 0, 0, 0, mask, 0, 0, 0, 0)
+
+                return true
+            end
+        end
+
+    -- Player doesn't have battlefield status effect. That means player wants to register a new battlefield OR is attempting to enter a closed one.
+    else
+        -- Check if another party member has battlefield status effect. If so, that means the player is trying to enter a closed battlefield.
+        local alliance = player:getAlliance()
+        for _, member in pairs(alliance) do
+            if member:hasStatusEffect(xi.effect.BATTLEFIELD) then
+                -- player:messageSpecial() -- You are eligible but cannot enter.
+
+                return false
+            end
+        end
+
+        -- No one in party/alliance has battlefield status effect. We want to register a new battlefield.
         local mask = findBattlefields(player, npc, 0)
 
         -- GMs get access to all BCNMs
@@ -1004,17 +1065,6 @@ xi.bcnm.onTrigger = function(player, npc)
             player:startEvent(32000, 0, 0, 0, mask, 0, 0, 0, 0)
             return true
         end
-
-    -- player is allied with a registrant and wants to enter their instance
-    else
-        local stat = player:getStatusEffect(xi.effect.BATTLEFIELD)
-        local bfid = stat:getPower()
-        local mask = getBattlefieldMaskById(player, bfid)
-        if mask ~= 0 and checkReqs(player, npc, bfid, false) then
-            player:startEvent(32000, 0, 0, 0, mask, 0, 0, 0, 0)
-            return true
-        end
-
     end
 
     return false
@@ -1023,11 +1073,10 @@ end
 -----------------------------------
 -- onEventUpdate
 -----------------------------------
-
 xi.bcnm.onEventUpdate = function(player, csid, option, extras)
     -- player:PrintToPlayer(string.format("EventUpdateBCNM csid=%i option=%i extras=%i", csid, option, extras))
 
-    -- requesting a battlefield
+    -- Requesting a battlefield
     if csid == 32000 then
         if option == 0 then
             -- todo: check if battlefields full, check party member requiremenst
@@ -1036,16 +1085,19 @@ xi.bcnm.onEventUpdate = function(player, csid, option, extras)
             -- todo: check if battlefields full, check party member requirements
             return 0
         end
+
         local area = player:getLocalVar("[battlefield]area")
-        area = area + 1
+        area       = area + 1
+
         local battlefieldIndex = bit.rshift(option, 4)
-        local battlefieldId = getBattlefieldIdByBit(player, battlefieldIndex)
-        local id = battlefieldId or player:getBattlefieldID()
-        local skip = checkSkip(player, id)
+        local battlefieldId    = getBattlefieldIdByBit(player, battlefieldIndex)
+        local id               = battlefieldId or player:getBattlefieldID()
+        local skip             = checkSkip(player, id)
 
         local clearTime = 1
-        local name = "Meme"
+        local name      = "Meme"
         local partySize = 1
+
         switch (battlefieldId): caseof
         {
             [1290] = function() area = 2 end, -- NW_Apollyon
@@ -1063,9 +1115,11 @@ xi.bcnm.onEventUpdate = function(player, csid, option, extras)
             [1305] = function() area = 5 end, -- Central_Temenos_3rd_Floor
             [1306] = function() area = 4 end, -- Central_Temenos_4th_Floor
         }
+
         local result = xi.battlefield.returnCode.REQS_NOT_MET
-        result = player:registerBattlefield(id, area)
+        result       = player:registerBattlefield(id, area)
         local status = xi.battlefield.status.OPEN
+
         if result ~= xi.battlefield.returnCode.CUTSCENE then
             if result == xi.battlefield.returnCode.INCREMENT_REQUEST then
                 if area < 3 then
@@ -1075,52 +1129,67 @@ xi.bcnm.onEventUpdate = function(player, csid, option, extras)
                     player:updateEvent(result)
                 end
             end
+
             return false
         else
-            if not player:getBattlefield() then
+            -- Only allow entrance if battlefield is open and playerhas battlefield effect, witch can be lost mid battlefield selection.
+            if
+                not player:getBattlefield() and
+                player:hasStatusEffect(xi.effect.BATTLEFIELD)
+                -- and id:getStatus() == xi.battlefield.status.OPEN -- TODO: Uncomment only once that can-of-worms is dealt with.
+            then
                 player:enterBattlefield()
             end
-            local initiatorId = 0
-            local initiatorName = ""
 
-            local battlefield = player:getBattlefield()
+            -- Handle record
+            local initiatorId   = 0
+            local initiatorName = ""
+            local battlefield   = player:getBattlefield()
+
             if battlefield then
                 battlefield:setLocalVar("[cs]bit", battlefieldIndex)
                 name, clearTime, partySize = battlefield:getRecord()
                 initiatorId, initiatorName = battlefield:getInitiator()
             end
 
-            -- register party members
+            -- Register party members
             if initiatorId == player:getID() then
                 local effect = player:getStatusEffect(xi.effect.BATTLEFIELD)
-                local zone = player:getZoneID()
-                local item = getItemById(player, effect:getPower())
+                local zone   = player:getZoneID()
+                local item   = getItemById(player, effect:getPower())
 
+                -- Handle traded items
                 if item ~= 0 then
-                    -- remove limbus chips
+                    -- Remove limbus chips
                     if zone == 37 or zone == 38 then
                         player:tradeComplete()
 
-                    -- set other traded item to worn
+                    -- Set other traded item to worn
                     elseif player:hasItem(item) and player:getName() == initiatorName then
                         player:createWornItem(item)
                     end
                 end
 
+                -- Handle party/alliance members
                 local alliance = player:getAlliance()
                 for _, member in pairs(alliance) do
-                    if member:getZoneID() == zone and not member:hasStatusEffect(xi.effect.BATTLEFIELD) and not member:getBattlefield() then
+                    if
+                        member:getZoneID() == zone and
+                        not member:hasStatusEffect(xi.effect.BATTLEFIELD) and
+                        not member:getBattlefield()
+                    then
                         member:addStatusEffect(effect)
                         member:registerBattlefield(id, area, player:getID())
                     end
                 end
             end
         end
+
         player:updateEvent(result, battlefieldIndex, 0, clearTime, partySize, skip)
         player:updateEventString(name)
         return status < xi.battlefield.status.LOCKED and result < xi.battlefield.returnCode.LOCKED
 
-    -- leaving a battlefield
+    -- Leaving a battlefield
     elseif csid == 32003 and option == 2 then
         player:updateEvent(3)
         return true
@@ -1139,13 +1208,16 @@ end
 xi.bcnm.onEventFinish = function(player, csid, option)
     -- player:PrintToPlayer(string.format("EventFinishBCNM csid=%i option=%i", csid, option))
     player:setLocalVar("[battlefield]area", 0)
+
     if player:hasStatusEffect(xi.effect.BATTLEFIELD) then
         if csid == 32003 and option == 4 then
             if player:getBattlefield() then
                 player:leaveBattlefield(1)
             end
         end
+
         return true
     end
+
     return false
 end

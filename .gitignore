@@ -221,3 +221,6 @@ memcheck.out.*
 
 # Auto-generated files
 /src/common/version.cpp
+
+# Module init file
+modules/init.txt

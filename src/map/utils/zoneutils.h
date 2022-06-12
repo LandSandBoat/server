@@ -38,10 +38,10 @@ class CNpcEntity;
 
 namespace zoneutils
 {
-    void LoadZoneList();            // загружаем список зон
-    void FreeZoneList();            // освобождаем список зон
-    void InitializeWeather();       // обновляем погоду в зонах
-    void TOTDChange(TIMETYPE TOTD); // реакция мира на смену времени суток
+    void LoadZoneList();
+    void FreeZoneList();
+    void InitializeWeather();
+    void TOTDChange(TIMETYPE TOTD);
     void SavePlayTime();
 
     REGION_TYPE    GetCurrentRegion(uint16 ZoneID);
@@ -49,16 +49,17 @@ namespace zoneutils
 
     int GetWeatherElement(WEATHER weather);
 
-    CZone*       GetZone(uint16 ZoneID);                   // получаем указатель на зону
-    CNpcEntity*  GetTrigger(uint16 TargID, uint16 ZoneID); // триггер для старта событий (как побочный эффект - вероятность появления прозрачного орка)
-    CBaseEntity* GetEntity(uint32 ID, uint8 filter = -1);  // получаем указатель на любую сущность
-    CCharEntity* GetCharByName(int8* name);                // получаем указатель на персонажа по имени
+    CZone*       GetZone(uint16 ZoneID);
+    CNpcEntity*  GetTrigger(uint16 TargID, uint16 ZoneID);
+    CBaseEntity* GetEntity(uint32 ID, uint8 filter = -1);
+    CCharEntity* GetCharByName(int8* name);
     CCharEntity* GetCharFromWorld(uint32 charid, uint16 targid);  // returns pointer to character by id and target id
     CCharEntity* GetChar(uint32 id);                              // returns pointer to character by id
     CCharEntity* GetCharToUpdate(uint32 primary, uint32 ternary); // returnes pointer to preferred char to update for party changes
     void         ForEachZone(const std::function<void(CZone*)>& func);
     uint64       GetZoneIPP(uint16 zoneid);       // returns IPP for zone ID
     bool         IsResidentialArea(CCharEntity*); // returns whether or not the area is a residential zone
+
 };                                                // namespace zoneutils
 
 #endif

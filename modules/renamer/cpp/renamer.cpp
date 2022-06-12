@@ -64,7 +64,7 @@ class RenamerModule : public CPPModule
 
         ShowInfo("Renamer: Loading ./modules/renamer/lua/list.lua");
 
-        auto result = lua.safe_script_file("./modules/renamer/lua/list.lua");
+        auto result = lua.safe_script_file("./modules/renamer/lua/list.lua", &sol::script_pass_on_error);
         if (!result.valid())
         {
             sol::error err = result;

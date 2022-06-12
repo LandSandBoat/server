@@ -199,7 +199,7 @@ namespace trustutils
 
                 trust->trustID = TrustID;
 
-                trust->pool    = (uint32)sql->GetIntData(0);
+                trust->pool = (uint32)sql->GetIntData(0);
                 trust->name.insert(0, (const char*)sql->GetData(1));
                 trust->packet_name.insert(0, (const char*)sql->GetData(2));
                 memcpy(&trust->look, sql->GetData(3), 20);
@@ -222,19 +222,19 @@ namespace trustutils
                 trust->HPscale   = sql->GetFloatData(17);
                 trust->MPscale   = sql->GetFloatData(18);
 
-                trust->speed     = (uint8)sql->GetIntData(19);
+                trust->speed = (uint8)sql->GetIntData(19);
 
-                trust->strRank   = (uint8)sql->GetIntData(20);
-                trust->dexRank   = (uint8)sql->GetIntData(21);
-                trust->vitRank   = (uint8)sql->GetIntData(22);
-                trust->agiRank   = (uint8)sql->GetIntData(23);
-                trust->intRank   = (uint8)sql->GetIntData(24);
-                trust->mndRank   = (uint8)sql->GetIntData(25);
-                trust->chrRank   = (uint8)sql->GetIntData(26);
-                trust->defRank   = (uint8)sql->GetIntData(27);
-                trust->attRank   = (uint8)sql->GetIntData(28);
-                trust->accRank   = (uint8)sql->GetIntData(29);
-                trust->evaRank   = (uint8)sql->GetIntData(30);
+                trust->strRank = (uint8)sql->GetIntData(20);
+                trust->dexRank = (uint8)sql->GetIntData(21);
+                trust->vitRank = (uint8)sql->GetIntData(22);
+                trust->agiRank = (uint8)sql->GetIntData(23);
+                trust->intRank = (uint8)sql->GetIntData(24);
+                trust->mndRank = (uint8)sql->GetIntData(25);
+                trust->chrRank = (uint8)sql->GetIntData(26);
+                trust->defRank = (uint8)sql->GetIntData(27);
+                trust->attRank = (uint8)sql->GetIntData(28);
+                trust->accRank = (uint8)sql->GetIntData(29);
+                trust->evaRank = (uint8)sql->GetIntData(30);
 
                 // resistances
                 trust->slash_sdt  = (uint16)(sql->GetFloatData(31) * 1000);
@@ -302,7 +302,8 @@ namespace trustutils
     CTrustEntity* LoadTrust(CCharEntity* PMaster, uint32 TrustID)
     {
         auto* PTrust    = new CTrustEntity(PMaster);
-        auto* trustData = *std::find_if(g_PTrustList.begin(), g_PTrustList.end(), [TrustID](Trust_t* t) { return t->trustID == TrustID; });
+        auto* trustData = *std::find_if(g_PTrustList.begin(), g_PTrustList.end(), [TrustID](Trust_t* t)
+                                        { return t->trustID == TrustID; });
 
         PTrust->loc              = PMaster->loc;
         PTrust->m_OwnerID.id     = PMaster->id;
@@ -314,19 +315,19 @@ namespace trustutils
         PTrust->look = trustData->look;
         PTrust->name = trustData->name;
 
-        PTrust->m_Pool           = trustData->pool;
-        PTrust->packetName       = trustData->packet_name;
-        PTrust->m_name_prefix    = trustData->name_prefix;
-        PTrust->m_Family         = trustData->m_Family;
-        PTrust->m_MobSkillList   = trustData->m_MobSkillList;
-        PTrust->HPscale          = trustData->HPscale;
-        PTrust->MPscale          = trustData->MPscale;
-        PTrust->speed            = trustData->speed;
-        PTrust->m_TrustID        = trustData->trustID;
-        PTrust->status           = STATUS_TYPE::NORMAL;
-        PTrust->m_ModelRadius    = trustData->radius;
-        PTrust->m_EcoSystem      = trustData->EcoSystem;
-        PTrust->m_MovementType   = static_cast<TRUST_MOVEMENT_TYPE>(trustData->behaviour);
+        PTrust->m_Pool         = trustData->pool;
+        PTrust->packetName     = trustData->packet_name;
+        PTrust->m_name_prefix  = trustData->name_prefix;
+        PTrust->m_Family       = trustData->m_Family;
+        PTrust->m_MobSkillList = trustData->m_MobSkillList;
+        PTrust->HPscale        = trustData->HPscale;
+        PTrust->MPscale        = trustData->MPscale;
+        PTrust->speed          = trustData->speed;
+        PTrust->m_TrustID      = trustData->trustID;
+        PTrust->status         = STATUS_TYPE::NORMAL;
+        PTrust->m_ModelRadius  = trustData->radius;
+        PTrust->m_EcoSystem    = trustData->EcoSystem;
+        PTrust->m_MovementType = static_cast<TRUST_MOVEMENT_TYPE>(trustData->behaviour);
 
         PTrust->SetMJob(trustData->mJob);
         PTrust->SetSJob(trustData->sJob);
@@ -377,7 +378,8 @@ namespace trustutils
         // Helpers to map HP/MPScale around 100 to 1-7 grades
         // std::clamp doesn't play nice with uint8, so -> unsigned int
         auto mapRanges = [](unsigned int inputStart, unsigned int inputEnd, unsigned int outputStart, unsigned int outputEnd,
-                            unsigned int inputVal) -> unsigned int {
+                            unsigned int inputVal) -> unsigned int
+        {
             unsigned int inputRange  = inputEnd - inputStart;
             unsigned int outputRange = outputEnd - outputStart;
 
@@ -386,7 +388,8 @@ namespace trustutils
             return std::clamp(output, outputStart, outputEnd);
         };
 
-        auto scaleToGrade = [mapRanges](float input) -> unsigned int {
+        auto scaleToGrade = [mapRanges](float input) -> unsigned int
+        {
             unsigned int multipliedInput    = static_cast<unsigned int>(input * 100U);
             unsigned int reverseMappedGrade = mapRanges(70U, 140U, 1U, 7U, multipliedInput);
             unsigned int outputGrade        = std::clamp(7U - reverseMappedGrade, 1U, 7U);

@@ -57,7 +57,12 @@ set_project_warnings(project_warnings)
 # If SOL_NO_CHECK_NUMBER_PRECISION is defined, turns off number precision and integer
 # precision fitting when pushing numbers into sol
 # add_compile_definitions() comes with CMake 3.12
-add_definitions(-DSOL_ALL_SAFETIES_ON=1 -DSOL_NO_CHECK_NUMBER_PRECISION=1)
+add_definitions(
+    -DSOL_ALL_SAFETIES_ON=1
+    -DSOL_NO_CHECK_NUMBER_PRECISION=1
+    -DSOL_NO_EXCEPTIONS=1
+    -DSOL_PRINT_ERRORS=0
+)
 
 add_subdirectory(ext)
 

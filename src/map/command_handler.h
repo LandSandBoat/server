@@ -31,7 +31,7 @@
 class CCharEntity;
 namespace sol
 {
-class state;
+    class state;
 }
 
 class CCommandHandler

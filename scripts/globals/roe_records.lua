@@ -3440,7 +3440,7 @@ function getRoeRecords(triggers)
         [ 339] = { -- Conflict: Moh Gates III
             trigger = triggers.mobKill,
             goal = 5,
-            reqs = { mobName = set{"Writhing_Obdella"}, zone = set{269} },
+            reqs = { mobName = set{"Ferocious_Funguar"}, zone = set{269} },
             flags = set{"repeat"},
             reward = { sparks = 160, xp = 500, capacity = 100, accolades = 16 },
         },

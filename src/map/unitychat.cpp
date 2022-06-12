@@ -75,7 +75,7 @@ namespace unitychat
 
     CUnityChat* LoadUnityChat(uint32 leader)
     {
-        auto PUnity = std::make_unique<CUnityChat>(leader);
+        auto PUnity           = std::make_unique<CUnityChat>(leader);
         UnityChatList[leader] = std::move(PUnity);
         return UnityChatList[leader].get();
     }
