@@ -60,7 +60,6 @@ entity.onMobFight = function(mob, target)
         mob:delMod(xi.mod.ATTP, 25)
         mob:setLocalVar("changeTime", battleTime)
     end
-
 end
 
 entity.onMobEngaged = function(mob, target)
