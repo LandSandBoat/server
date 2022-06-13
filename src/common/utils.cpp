@@ -499,7 +499,7 @@ uint64 unpackBitsLE(const uint8* target, int32 byteOffset, int32 bitOffset, uint
 void EncodeStringLinkshell(int8* signature, int8* target)
 {
     uint8 encodedSignature[LinkshellStringLength];
-    memset(encodedSignature, 0, sizeof encodedSignature);
+    memset(&encodedSignature, 0, sizeof encodedSignature);
     uint8 chars    = 0;
     uint8 leftover = 0;
     auto  length   = std::min<size_t>(20u, strlen((const char*)signature));
@@ -533,7 +533,7 @@ void EncodeStringLinkshell(int8* signature, int8* target)
 void DecodeStringLinkshell(int8* signature, int8* target)
 {
     uint8 decodedSignature[21];
-    memset(decodedSignature, 0, sizeof decodedSignature);
+    memset(&decodedSignature, 0, sizeof decodedSignature);
     auto length = std::min<size_t>(20u, (strlen((const char*)signature) * 8) / 6);
 
     for (std::size_t currChar = 0; currChar < length; ++currChar)
@@ -575,7 +575,7 @@ void DecodeStringLinkshell(int8* signature, int8* target)
 int8* EncodeStringSignature(int8* signature, int8* target)
 {
     uint8 encodedSignature[SignatureStringLength];
-    memset(encodedSignature, 0, sizeof encodedSignature);
+    memset(&encodedSignature, 0, sizeof encodedSignature);
     uint8 chars = 0;
     // uint8 leftover = 0;
     auto length = std::min<size_t>(15u, strlen((const char*)signature));
@@ -809,7 +809,9 @@ look_t stringToLook(std::string str)
         entry = (entry >> 8) | (entry << 8);
     }
 
-    return look_t(hex);
+    look_t out(hex);
+
+    return out;
 }
 
 bool approximatelyEqual(float a, float b)

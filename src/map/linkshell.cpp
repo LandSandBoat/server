@@ -410,7 +410,7 @@ namespace linkshell
             PLinkshell->setColor(sql->GetIntData(1));
             int8 EncodedName[LinkshellStringLength];
 
-            memset(EncodedName, 0, sizeof(EncodedName));
+            memset(&EncodedName, 0, sizeof(EncodedName));
 
             EncodeStringLinkshell(sql->GetData(2), EncodedName);
             PLinkshell->setName(EncodedName);

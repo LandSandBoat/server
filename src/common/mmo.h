@@ -313,8 +313,6 @@ struct keyitems_table_t
 
     keyitems_table_t()
     {
-        keyList = {};
-        seenList = {};
     }
 };
 
@@ -324,7 +322,6 @@ struct keyitems_t
 
     keyitems_t()
     {
-        tables = {};
     }
 };
 
@@ -369,6 +366,7 @@ struct stats_t
         STR = 0;
         DEX = 0;
         VIT = 0;
+        AGI = 0;
         INT = 0;
         MND = 0;
         CHR = 0;
@@ -450,7 +448,6 @@ struct eminencecache_t
 
     eminencecache_t()
     {
-        activemap         = {};
         lastWriteout      = 0;
         notifyTimedRecord = false;
     }
@@ -486,7 +483,6 @@ struct search_t
     {
         language    = 0;
         messagetype = 0;
-        message     = {};
     }
 };
 
@@ -496,7 +492,6 @@ struct bazaar_t
 
     bazaar_t()
     {
-        message = {};
     }
 };
 

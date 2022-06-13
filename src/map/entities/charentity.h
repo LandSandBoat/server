@@ -82,8 +82,9 @@ struct profile_t
         title  = 0;
         std::memset(&fame, 0, sizeof(fame));
         std::memset(&rank, 0, sizeof(rank));
-        rankpoints = 0;
-        home_point = {};
+        rankpoints          = 0;
+        campaign_allegiance = 0;
+        unity_leader        = 0;
     }
 };
 
@@ -160,9 +161,6 @@ struct teleport_t
         campaignSandy  = 0;
         campaignBastok = 0;
         campaignWindy  = 0;
-        homepoint      = {};
-        survival       = {};
-        waypoints      = {};
         std::memset(&abysseaConflux, 0, sizeof(abysseaConflux));
     }
 };

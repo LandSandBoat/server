@@ -81,6 +81,7 @@ struct fishresponse_t
         hooked          = false;
         areaid          = 0;
         catchid         = 0;
+        catchtype       = 0;
         catchlevel      = 0;
         catchdifficulty = 0;
         catchsizeType   = 0;
@@ -96,6 +97,8 @@ struct fishresponse_t
         sense           = 0;
         hooksense       = 0;
         special         = 0;
+        successtype     = 0;
+        length          = 0;
         weight          = 0;
         ranking         = 0;
         epic            = false;
@@ -159,7 +162,6 @@ struct fish_t
     fish_t()
     {
         fishID          = 0;
-        fishName        = {};
         maxSkill        = 0;
         difficulty      = 0;
         baseDelay       = 0;
@@ -183,7 +185,7 @@ struct fish_t
         rarity          = 0;
         baitPower       = 0;
         reqKeyItem      = 0;
-        reqFish         = {};
+        reqFish         = nullptr;
         quest_only      = false;
         contest         = false;
     }
@@ -216,7 +218,6 @@ struct rod_t
     rod_t()
     {
         rodID        = 0;
-        rodName      = {};
         material     = 0;
         sizeType     = 0;
         rodFlags     = 0;
@@ -253,7 +254,6 @@ struct bait_t
     bait_t()
     {
         baitID    = 0;
-        baitName  = {};
         baitType  = 0;
         maxhook   = 0;
         baitFlags = 0;
@@ -291,7 +291,6 @@ struct fishmob_t
     fishmob_t()
     {
         mobId      = 0;
-        mobName    = {};
         log        = 0;
         quest      = 0;
         nm         = false;
@@ -358,6 +357,7 @@ struct boundarydata_t
     boundarydata_t()
     {
         count = 0;
+        bounds = nullptr;
     }
 };
 
@@ -378,7 +378,6 @@ struct fishingarea_t
     {
         zoneId = 0;
         areaId = 0;
-        areaName = {};
         areatype = 0;
         areaBounds = nullptr;
         numBounds = 0;
@@ -439,7 +438,6 @@ struct fishing_catch_pool
 
     fishing_catch_pool()
     {
-        stock = {};
     }
 };
 
@@ -449,7 +447,6 @@ struct fishing_area_pool
 
     fishing_area_pool()
     {
-        catchPools = {};
     }
 };
 
@@ -471,6 +468,7 @@ struct fishing_gear_t
     {
         head   = 0;
         neck   = 0;
+        body   = 0;
         hands  = 0;
         waist  = 0;
         legs   = 0;

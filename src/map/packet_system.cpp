@@ -5363,8 +5363,8 @@ void SmallPacket0x0C4(map_session_data_t* const PSession, CCharEntity* const PCh
             int8 DecodedName[DecodeStringLength];
             int8 EncodedName[LinkshellStringLength];
 
-            memset(DecodedName, 0, sizeof(DecodedName));
-            memset(EncodedName, 0, sizeof(EncodedName));
+            memset(&DecodedName, 0, sizeof(DecodedName));
+            memset(&EncodedName, 0, sizeof(EncodedName));
 
             DecodeStringLinkshell(data[12], DecodedName);
             EncodeStringLinkshell(DecodedName, EncodedName);

@@ -87,9 +87,9 @@ struct BattlefieldMob_t
     BATTLEFIELDMOBCONDITION condition; // whether it has died or not
 
     BattlefieldMob_t()
+    : condition(CONDITION_NONE)
     {
         PMob = nullptr;
-        condition = CONDITION_NONE;
     }
 };
 
@@ -100,10 +100,8 @@ struct BattlefieldRecord_t
     duration    time;
 
     BattlefieldRecord_t()
+    : time(std::chrono::minutes(30))
     {
-        name = {};
-        partySize = 0;
-        time = std::chrono::minutes(30);
     }
 };
 
@@ -114,8 +112,7 @@ struct BattlefieldInitiator_t
 
     BattlefieldInitiator_t()
     {
-        name = {};
-        id   = {};
+        id = 0;
     }
 };
 

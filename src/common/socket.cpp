@@ -333,9 +333,8 @@ typedef struct _connect_history
     unsigned                 ddos : 1;
     _connect_history()
     {
-        next  = {};
+        next  = nullptr;
         ip    = 0;
-        tick  = std::chrono::system_clock::from_time_t(time_t{0}); // 0 in unix time
         count = 0;
         ddos  = 0;
     }
@@ -879,9 +878,9 @@ void do_close_tcp(int32 fd)
 int socket_config_read(const char* cfgName)
 {
     TracyZoneScoped;
-    char  line[1024];
-    char  w1[1024];
-    char  w2[1024];
+    char  line[1024] = {};
+    char  w1[1024]   = {};
+    char  w2[1024]   = {};
     FILE* fp;
 
     fp = fopen(cfgName, "r");

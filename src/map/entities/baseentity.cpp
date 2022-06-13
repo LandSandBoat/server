@@ -30,20 +30,20 @@
 CBaseEntity::CBaseEntity()
 : objtype(ENTITYTYPE::TYPE_NONE)
 , status(STATUS_TYPE::DISAPPEAR)
-, isRenamed(false)
+, allegiance(ALLEGIANCE_TYPE::MOB)
+, PAI(nullptr)
 {
     id       = 0;
     targid   = 0;
     m_TargID = 0;
 
-    animation    = ANIMATION_NONE;
+    isRenamed = false;
+    animation    = 0;
     animationsub = 0;
     speed        = 50 + map_config.speed_mod; // It is downright dumb to init every entity at PLAYER speed, but until speed is reworked this hack stays.
     speedsub     = 50;                        // Retail does NOT adjust this when speed is adjusted.
     namevis      = 0;
-    allegiance   = ALLEGIANCE_TYPE::MOB;
     updatemask   = 0;
-    PAI          = nullptr;
     PBattlefield = nullptr;
     PInstance    = nullptr;
 

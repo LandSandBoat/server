@@ -70,8 +70,6 @@ struct TreasurePoolItem
     {
         ID = 0;
         SlotID = 0;
-        TimeStamp = {};
-        Lotters = {};
     }
 };
 
