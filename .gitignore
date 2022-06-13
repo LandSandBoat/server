@@ -224,3 +224,6 @@ memcheck.out.*
 
 # Module init file
 modules/init.txt
+
+# Doxygen
+doxygen/
