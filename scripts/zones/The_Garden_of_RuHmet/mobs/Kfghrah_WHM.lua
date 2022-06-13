@@ -42,6 +42,22 @@ entity.onMobFight = function(mob, target)
         end
         mob:setAnimationSub(battleForm)
         mob:setLocalVar("changeTime", mob:getBattleTime())
+        if mob:AnimationSub() == 0 then
+            mob:SetMagicCastingEnabled(true) -- will only cast magic in ball form
+        else
+            mob:SetMagicCastingEnabled(false)
+        end
+    end
+end
+
+entity.onMagicCastingCheck = function(mob, target, spell)
+    local rnd = math.random()
+    if rnd < 0.2 then
+        return 40 -- banishga III
+    elseif rnd < 0.6 then
+        return 31 -- banish IV
+    else
+        return 112 -- flash
     end
 end
 
