@@ -5,6 +5,7 @@
 local ID = require("scripts/zones/Grand_Palace_of_HuXzoi/IDs")
 require("scripts/settings/main")
 require("scripts/globals/status")
+require("scripts/globals/items")
 -----------------------------------
 local entity = {}
 
@@ -34,11 +35,11 @@ entity.onMobSpawn = function(mob)
     local qm = GetNPCByID(ID.npc.QM_IXAERN_MNK)
     local chance = qm:getLocalVar("[SEA]IxAern_DropRate")
     if math.random(0, 3) > 0 then
-        SetDropRate(2845, 1851, chance * 10) -- Deed Of Placidity
-        SetDropRate(2845, 1901, 0)
+        SetDropRate(2845, xi.items.DEED_OF_PLACIDITY, chance * 10) -- Deed Of Placidity
+        SetDropRate(2845, xi.items.VICE_OF_ANTIPATHY, 0)
     else
-        SetDropRate(2845, 1851, 0)
-        SetDropRate(2845, 1901, chance * 10) -- Vice of Antipathy
+        SetDropRate(2845, xi.items.DEED_OF_PLACIDITY, 0)
+        SetDropRate(2845, xi.items.VICE_OF_ANTIPATHY, chance * 10) -- Vice of Antipathy
     end
     qm:setLocalVar("[SEA]IxAern_DropRate", 0)
 
