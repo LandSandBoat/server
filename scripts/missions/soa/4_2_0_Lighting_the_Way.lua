@@ -6,6 +6,7 @@
 -- Levil   : !pos -87.204 3.350 12.655 256
 -----------------------------------
 require('scripts/globals/missions')
+require('scripts/globals/titles')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------
@@ -14,6 +15,7 @@ local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.LIGHTING_TH
 
 mission.reward =
 {
+    title       = xi.title.KNOWER_OF_UNTRUTHS,
     nextMission = { xi.mission.log_id.SOA, xi.mission.id.soa.SAJJAKA },
 }
 
