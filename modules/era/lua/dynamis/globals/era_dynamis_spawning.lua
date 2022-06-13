@@ -1268,8 +1268,8 @@ xi.dynamis.spawnDynamicPet =function(target, oMob, mobJob)
                 [false] = {"5653636f", 22, 134, 0, 53, 217}, -- Normal Quadav BST (VSco)
                 [true] = -- Quadav NM
                 {
-                    ["SoGho Adderhandler"] = {"5653636f", 22, 134, 0, 53, 217}, -- NM Quadav BST (VSco)
-                    ["BeEbo Tortoisedriver"] = {"5653636f", 22, 134, 0, 53, 217}, -- NM Quadav BST (VSco)
+                    ["So'Gho Adderhandler"] = {"5653636f", 22, 134, 0, 53, 217}, -- NM Quadav BST (VSco)
+                    ["Be'Ebo Tortoisedriver"] = {"5653636f", 22, 134, 0, 53, 217}, -- NM Quadav BST (VSco)
                 },
             },
             [358] = -- Kindred Family
@@ -1458,7 +1458,7 @@ xi.dynamis.spawnDynamicPet =function(target, oMob, mobJob)
         groupZoneId = nameObj[3],
         onMobSpawn = function(mob) xi.dynamis.setPetStats(mob) end,
         onMobFight = petFunctions[mobJob][functionLookup]["onMobFight"],
-        onMobDeath = function(mob, playerArg, isKiller) end,
+        onMobDeath = function(mob, playerArg, isKiller) xi.dynamis.onPetDeath(mob) end,
         --releaseIdOnDeath = true,
         mixins = petFunctions[mobJob][functionLookup]["mixins"],
     })

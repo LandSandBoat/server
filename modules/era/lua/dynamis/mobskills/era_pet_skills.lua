@@ -80,17 +80,10 @@ xi.dynamis.onFightApocDRG = function(mob, target)
     end
 end
 
-m:addOverride("xi.globals.mobskills.familiar.onMobWeaponSkill", function(target, mob, skill)
-    skill:setMsg(xi.msg.basic.FAMILIAR_MOB)
-
-    if mob:getCurrentRegion() == xi.region.DYNAMIS and not mob:hasPet() then
-        mob:charm(target)
-    else
-        mob:familiar()
+xi.dynamis.onPetDeath = function(mob)
+    if mob:getMaster():getMainJob() == xi.job.BST then
+        mob:setLocalVar("[jobSpecial]ability_", 710)
     end
-
-    return 0
-
-end)
+end
 
 return m
