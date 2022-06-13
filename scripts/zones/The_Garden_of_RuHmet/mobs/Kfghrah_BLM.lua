@@ -45,6 +45,17 @@ entity.onMobFight = function(mob, target)
     end
 end
 
+entity.onMagicCastingCheck = function(mob, target, spell)
+    local rnd = math.random()
+    if rnd < 0.2 then
+        return 274 -- sleepga II
+    elseif rnd < 0.6 then
+        return 254 -- blind
+    else
+        return 232 -- bio III
+    end
+end
+
 entity.onMobDeath = function(mob, player, isKiller)
 end
 
