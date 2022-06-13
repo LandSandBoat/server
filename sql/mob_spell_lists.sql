@@ -4187,6 +4187,21 @@ INSERT INTO `mob_spell_lists` VALUES ('Shikaree_Z',466,14,1,255); -- Poisona
 INSERT INTO `mob_spell_lists` VALUES ('Shikaree_Z',466,15,1,255); -- Paralyna
 INSERT INTO `mob_spell_lists` VALUES ('Shikaree_Z',466,55,1,255); -- Aquaveil
 
+INSERT INTO `mob_spell_lists` VALUES('Ixzdei_BLM', 467, 147, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ixzdei_BLM', 467, 152, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ixzdei_BLM', 467, 157, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ixzdei_BLM', 467, 162, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ixzdei_BLM', 467, 167, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ixzdei_BLM', 467, 172, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ixzdei_BLM', 467, 176, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ixzdei_BLM', 467, 181, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ixzdei_BLM', 467, 186, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ixzdei_BLM', 467, 191, 1, 255);
+
+INSERT INTO `mob_spell_lists` VALUES('Ixzdei_RDM', 468, 191, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ixzdei_RDM', 468, 260, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ixzdei_RDM', 468, 254, 1, 255);
+
 INSERT INTO `mob_spell_lists` VALUES ('ixghrah_Manafont_spells', 469, 274, 1, 255); -- sleepga_ii
 INSERT INTO `mob_spell_lists` VALUES ('ixghrah_Manafont_spells', 470, 40, 1, 255); -- banishga_iii
 INSERT INTO `mob_spell_lists` VALUES ('ixghrah_Manafont_spells', 471, 181, 1, 255); -- blizzaga_iii
