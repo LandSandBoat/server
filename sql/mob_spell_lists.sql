@@ -3436,13 +3436,13 @@ INSERT INTO `mob_spell_lists` VALUES ('TRUST_Sylvie_UC',394,18,78,255);         
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Sylvie_UC',394,19,68,255);          -- Viruna
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Sylvie_UC',394,20,58,255);          -- Cursna
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Sylvie_UC',394,57,80,255);          -- Haste
--- INSERT INTO `mob_spell_lists` VALUES ('TRUST_Sylvie_UC',394,779,34,255);           -- Indi-Fury        (not implimented yet)
--- INSERT INTO `mob_spell_lists` VALUES ('TRUST_Sylvie_UC',394,783,10,255);           -- Indi-Precision   (not implimented yet)
--- INSERT INTO `mob_spell_lists` VALUES ('TRUST_Sylvie_UC',394,788,76,255);           -- Indi-Frailty     (not implimented yet)
--- INSERT INTO `mob_spell_lists` VALUES ('TRUST_Sylvie_UC',394,771,93,255);           -- Indi-Haste       (not implimented yet)
--- INSERT INTO `mob_spell_lists` VALUES ('TRUST_Sylvie_UC',394,768,15,255);           -- Indi-Regen       (not implimented yet)
--- INSERT INTO `mob_spell_lists` VALUES ('TRUST_Sylvie_UC',394,770,30,255);           -- Indi-Refresh     (not implimented yet)
--- INSERT INTO `mob_spell_lists` VALUES ('TRUST_Sylvie_UC',394,781,46,255);           -- Indi-Acumen      (not implimented yet)
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Sylvie_UC',394,779,34,255);         -- Indi-Fury
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Sylvie_UC',394,783,10,255);         -- Indi-Precision
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Sylvie_UC',394,788,76,255);         -- Indi-Frailty
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Sylvie_UC',394,771,93,255);         -- Indi-Haste
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Sylvie_UC',394,768,15,255);         -- Indi-Regen
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Sylvie_UC',394,770,30,255);         -- Indi-Refresh
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Sylvie_UC',394,781,46,255);         -- Indi-Acumen
 
 -- INSERT INTO `mob_spell_lists` VALUES ('TRUST_Abquhbah',395,0,1,255);          -- none (reserved)
 
