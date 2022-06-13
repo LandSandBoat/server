@@ -20,647 +20,1209 @@ CREATE TABLE IF NOT EXISTS `item_mods_pet` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=13 PACK_KEYS=1;
 
 -- (Please keep item ID sequential)
-INSERT INTO `item_mods_pet` VALUES (10296,25,3,3);      -- Charivari Earring Automaton: Accuracy+3
-INSERT INTO `item_mods_pet` VALUES (10296,26,3,3);      -- Automaton: Ranged Accuracy+3
-INSERT INTO `item_mods_pet` VALUES (10296,30,3,3);      -- Automaton: Magic Accuracy+3
-INSERT INTO `item_mods_pet` VALUES (10299,288,2,0);     -- Sabong Earring Pet: "Double Attack"+2%
-INSERT INTO `item_mods_pet` VALUES (10370,28,3,1);      -- Shedir crackows Avatar: Enhances "Magic Atk. Bonus" +3
-INSERT INTO `item_mods_pet` VALUES (10370,30,3,1);      -- Enhances magic accuracy +3
-INSERT INTO `item_mods_pet` VALUES (10370,126,3,1);     -- Increases "Blood Pact" damage +3%
-INSERT INTO `item_mods_pet` VALUES (10440,384,600,3);   -- Murzim Zucchetto Automaton: Haste+6%
-INSERT INTO `item_mods_pet` VALUES (10530,28,5,1);      -- Tethyan Cuffs +1 Avatar: "Magic Atk. Bonus"+5
-INSERT INTO `item_mods_pet` VALUES (10531,28,5,1);      -- Tethyan Cuffs +2 Avatar: "Magic Atk. Bonus"+5
-INSERT INTO `item_mods_pet` VALUES (10532,28,5,1);      -- Tethyan Cuffs +3 Avatar: "Magic Atk. Bonus"+5
-INSERT INTO `item_mods_pet` VALUES (10537,23,9,1);      -- Auspex Gages Enhances avatar attack +9
-INSERT INTO `item_mods_pet` VALUES (10537,126,4,1);     -- Increases "Blood Pact" damage 4%
-INSERT INTO `item_mods_pet` VALUES (10542,23,12,1);     -- Spurrina Gages Enhances avatar attack +12
-INSERT INTO `item_mods_pet` VALUES (10542,126,5,1);     -- Increases "Blood Pact" damage 5%
-INSERT INTO `item_mods_pet` VALUES (10664,28,4,1);      -- Smn. Horn +2 Avatar: "Magic Atk. Bonus"+4 Perpetuation cost -3
-INSERT INTO `item_mods_pet` VALUES (10664,346,3,1);     -- Avatar: Perpetuation cost -3
-INSERT INTO `item_mods_pet` VALUES (10684,165,6,1);     -- Smn. Doublet +2 Avatar Critical hit rate +6%
-INSERT INTO `item_mods_pet` VALUES (10684,346,3,1);     -- Avatar: Perpetuation cost -3
--- INSERT INTO `item_mods_pet` VALUES (10704,unimplemented,1,1); -- Smn. Bracers +2 Avatar: Enhances accuracy
-INSERT INTO `item_mods_pet` VALUES (10724,30,5,1);      -- Smn. Spats +2 Avatar: Enhances magic accuracy
--- INSERT INTO `item_mods_pet` VALUES (10744,unimplemented,1,1); -- Smn. Pigaches +2 Avatar: Enhances attack
-INSERT INTO `item_mods_pet` VALUES (10744,562,5,1);     -- Avatar: Magic critical hit rate +5%
-INSERT INTO `item_mods_pet` VALUES (10817,384,500,0);    -- Moepapa Stone Pet: Haste+5%
-INSERT INTO `item_mods_pet` VALUES (10914,27,-2,0);     -- Muzzling Collar Pet: Enmity-2
-INSERT INTO `item_mods_pet` VALUES (10915,27,-3,0);     -- Muzzling Collar +1 Pet: Enmity-3
-INSERT INTO `item_mods_pet` VALUES (10972,161,-300,0);    -- Oneiros Cappa Pet: Physical damage taken -3%
-INSERT INTO `item_mods_pet` VALUES (11052,126,3,1);     -- Esper Earring Avatar: Increases "Blood Pact" damage 3%
-INSERT INTO `item_mods_pet` VALUES (11098,126,10,1);    -- Call. Doublet +2 Avatar: Increases Blood Pact damage
-INSERT INTO `item_mods_pet` VALUES (11118,25,15,1);     -- Call. Bracers +2 Avatar: Accuracy +15
-INSERT INTO `item_mods_pet` VALUES (11138,345,500,1);   -- Caller's Spats +2 Avatar: TP Bonus +500 (?)
-INSERT INTO `item_mods_pet` VALUES (11158,30,5,1);      -- Caller's Pgch. +2 Avatar: Enhances magic accuracy +5 (?)
-INSERT INTO `item_mods_pet` VALUES (11198,126,5,1);     -- Caller's Doublet +1 Avatar: Increases Blood Pact damage +5%
-INSERT INTO `item_mods_pet` VALUES (11218,25,10,1);     -- Caller's Bracers +1   Avatar: Accuracy +10 (?)
-INSERT INTO `item_mods_pet` VALUES (11238,345,250,1);   -- Caller's Spats +1 Avatar: TP Bonus +250
-INSERT INTO `item_mods_pet` VALUES (11258,30,5,1);      -- Caller's Pgch. +1 Avatar: Enhances magic accuracy +5 (?)
-INSERT INTO `item_mods_pet` VALUES (11261,12,10,3);     -- Cirque Scarpe +1 Automaton: INT+10
-INSERT INTO `item_mods_pet` VALUES (11261,13,10,3);     -- Automaton: MND+10
-INSERT INTO `item_mods_pet` VALUES (11297,2,20,4);      -- Pup. Tobe +1 Harlequin Automaton: HP+20
-INSERT INTO `item_mods_pet` VALUES (11297,5,20,4);      -- Harlequin Automaton: MP+20
-INSERT INTO `item_mods_pet` VALUES (11297,2,24,5);      -- Valoredge Automaton: HP+24
-INSERT INTO `item_mods_pet` VALUES (11297,2,18,6);      -- Sharpshot Automaton: HP+18
-INSERT INTO `item_mods_pet` VALUES (11297,2,16,7);      -- Stormwaker Automaton: HP+16
-INSERT INTO `item_mods_pet` VALUES (11297,5,24,7);      -- Stormwaker Automaton: MP+24
-INSERT INTO `item_mods_pet` VALUES (11298,25,10,3);     -- Pantin Tobe Automaton: Accuracy +10
-INSERT INTO `item_mods_pet` VALUES (11299,25,10,3);     -- Pantin Tobe +1 Automaton: Accuracy +10
-INSERT INTO `item_mods_pet` VALUES (11338,25,3,0);      -- Aega's Doublet Pet: accuracy +3
-INSERT INTO `item_mods_pet` VALUES (11338,289,3,0);     -- Pet: Subtle Blow +3
-INSERT INTO `item_mods_pet` VALUES (11388,28,5,3);      -- Pantin Babouches Automaton: "Magic Atk. Bonus"+5
-INSERT INTO `item_mods_pet` VALUES (11389,28,5,3);      -- Ptn. Babouches +1 Automaton: "Magic Atk. Bonus"+5
-INSERT INTO `item_mods_pet` VALUES (11470,72,3,3);      -- Puppetry Taj +1 Automaton: HP recovered while healing +3
-INSERT INTO `item_mods_pet` VALUES (11470,71,3,3);      -- Automaton: MP recovered while healing +3
-INSERT INTO `item_mods_pet` VALUES (11471,370,1,3);     -- Pantin Taj  Automaton: Adds "Regen" effect
-INSERT INTO `item_mods_pet` VALUES (11472,370,1,3);     -- Pantin Taj +1 Automaton: Adds "Regen" effect
-INSERT INTO `item_mods_pet` VALUES (11497,384,500,0);    -- Spurrer Beret Pet: Haste+5%
-INSERT INTO `item_mods_pet` VALUES (11531,73,3,0);      -- Fidelity Mantle Pet: Store TP +3
-INSERT INTO `item_mods_pet` VALUES (11536,101,2,3);     -- Wyg. Klt. Mantle Automaton: Melee skill +2
-INSERT INTO `item_mods_pet` VALUES (11555,25,10,0);     -- Ferine Mantle Pet: Accuracy+10
-INSERT INTO `item_mods_pet` VALUES (11564,28,1,1);      -- Tiresias' Cape Avatar:"Magic Atk. Bonus"+1
-INSERT INTO `item_mods_pet` VALUES (11571,25,12,3);     -- Karagoz Mantle Automaton: Accuracy +10
-INSERT INTO `item_mods_pet` VALUES (11612,28,2,1);      -- Eidolon Pendant Avatar: "Magic Atk. Bonus"+2
-INSERT INTO `item_mods_pet` VALUES (11617,288,2,0);     -- Ferine Necklace Pet: "Double Attack"+2%
-INSERT INTO `item_mods_pet` VALUES (11619,368,25,1);    -- Caller's Pendant Avatar: Regain + 25
-INSERT INTO `item_mods_pet` VALUES (11711,25,3,0);      -- Ferine Earring Pet: Accuracy+3
-INSERT INTO `item_mods_pet` VALUES (11720,23,2,3);      -- Cirque Earring Automaton: Attack+2
-INSERT INTO `item_mods_pet` VALUES (11720,24,3,3);      -- Automaton: Ranged Attack+2
-INSERT INTO `item_mods_pet` VALUES (11720,28,3,3);      -- Automaton: "Magic Atk. Bonus"+2
-INSERT INTO `item_mods_pet` VALUES (11739,27,2,1);      -- Caller's Sash Avatar: Enmity +2
-INSERT INTO `item_mods_pet` VALUES (11739,28,2,1);      -- Avatar: Magic Atk. Bonus +2
-INSERT INTO `item_mods_pet` VALUES (11987,126,5,1);     -- Ngen Seraweels Avatar: Increases "Blood Pact" damage 5%
-INSERT INTO `item_mods_pet` VALUES (11987,370,1,1);     -- Adds "Regen" effect
-INSERT INTO `item_mods_pet` VALUES (12520,27,-3,1);     -- Evoker's Horn Avatar: Enmity -3
-INSERT INTO `item_mods_pet` VALUES (12649,370,1,2);     -- Drachen Mail Adds "Regen" effect to wyvern
-INSERT INTO `item_mods_pet` VALUES (12650,27,-2,1);     -- Evoker's Doublet Avatar: Enmity -2
-INSERT INTO `item_mods_pet` VALUES (13974,25,5,2);      -- Drachen Fng. Gnt. Enhances wyvern's accuracy+5 (?)
-INSERT INTO `item_mods_pet` VALUES (13975,27,-2,1);     -- Evoker's Bracers Avatar: Enmity -2
-INSERT INTO `item_mods_pet` VALUES (14103,27,-2,1);     -- Evoker's Pigaches Avatar: Enmity -2
-INSERT INTO `item_mods_pet` VALUES (14103,68,5,1);      -- Avatar: Enhances evasion +5 (?)
-INSERT INTO `item_mods_pet` VALUES (14227,3,10,2);      -- Drachen Brais Wyvern: HP+10%
-INSERT INTO `item_mods_pet` VALUES (14228,25,10,1);     -- Evoker's Spats Avatar: Enhances accuracy +10
-INSERT INTO `item_mods_pet` VALUES (14228,27,-2,1);     -- Avatar: Enmity -2
-INSERT INTO `item_mods_pet` VALUES (14405,2,65,2);      -- Wyvern Mail Wyvern: HP+65
-INSERT INTO `item_mods_pet` VALUES (14405,72,65,2);     -- Wyvern: HP recovered while healing +1
-INSERT INTO `item_mods_pet` VALUES (14468,27,5,1);      -- Yinyang Robe Avatar: Pet: Enmity +5
-INSERT INTO `item_mods_pet` VALUES (14486,370,1,2);     -- Drachen Mail + 1 Adds "Regen" effect to wyvern
-INSERT INTO `item_mods_pet` VALUES (14514,165,4,1);     -- Smn. Doublet +1 Avatar: Critical Hit Rate +4%
-INSERT INTO `item_mods_pet` VALUES (14523,2,20,4);      -- Pup. Tobe  Harlequin Automaton: HP+20
-INSERT INTO `item_mods_pet` VALUES (14523,5,20,4);      -- Harlequin Automaton: MP+20
-INSERT INTO `item_mods_pet` VALUES (14523,2,24,5);      -- Valoredge Automaton: HP+24
-INSERT INTO `item_mods_pet` VALUES (14523,2,18,6);      -- Sharpshot Automaton: HP+18
-INSERT INTO `item_mods_pet` VALUES (14523,2,16,7);      -- Stormwaker Automaton: HP+16
-INSERT INTO `item_mods_pet` VALUES (14523,5,24,7);      -- Stormwaker Automaton: MP+24
-INSERT INTO `item_mods_pet` VALUES (14625,1,500,0); -- Pet Def
-INSERT INTO `item_mods_pet` VALUES (14625,2,1200,0); -- Pet Hp
-INSERT INTO `item_mods_pet` VALUES (14625,5,200,0); -- Pet Mp
-INSERT INTO `item_mods_pet` VALUES (14625,8,200,0); -- Pet Str
-INSERT INTO `item_mods_pet` VALUES (14625,9,200,0); -- Pet Dex
-INSERT INTO `item_mods_pet` VALUES (14625,10,100,0); -- Pet Vit
-INSERT INTO `item_mods_pet` VALUES (14625,11,100,0); -- Pet Agi
-INSERT INTO `item_mods_pet` VALUES (14625,13,100,0); -- Pet Mnd
-INSERT INTO `item_mods_pet` VALUES (14625,14,100,0); -- Pet Chr
-INSERT INTO `item_mods_pet` VALUES (14625,23,1000,0); -- Pet Att
-INSERT INTO `item_mods_pet` VALUES (14625,24,1000,0); -- Pet Ratt
-INSERT INTO `item_mods_pet` VALUES (14625,25,200,0); -- Pet Acc
-INSERT INTO `item_mods_pet` VALUES (14625,26,200,0); -- Pet Racc
-INSERT INTO `item_mods_pet` VALUES (14625,28,-50,0); -- Pet Matt
-INSERT INTO `item_mods_pet` VALUES (14625,29,50,0); -- Pet Mdef
-INSERT INTO `item_mods_pet` VALUES (14625,30,500,0); -- Pet Macc
-INSERT INTO `item_mods_pet` VALUES (14625,31,50,0); -- Pet Meva
-INSERT INTO `item_mods_pet` VALUES (14625,32,-8,0); -- Pet Fire Dmg
-INSERT INTO `item_mods_pet` VALUES (14625,33,-8,0); -- Pet Ice Dmg
-INSERT INTO `item_mods_pet` VALUES (14625,34,-8,0); -- Pet Wind Dmg
-INSERT INTO `item_mods_pet` VALUES (14625,35,-8,0); -- Pet Earth Dmg
-INSERT INTO `item_mods_pet` VALUES (14625,36,-8,0); -- Pet Thunder Dmg
-INSERT INTO `item_mods_pet` VALUES (14625,37,-8,0); -- Pet Water Dmg
-INSERT INTO `item_mods_pet` VALUES (14625,38,-8,0); -- Pet Light Dmg
-INSERT INTO `item_mods_pet` VALUES (14625,39,-8,0); -- Pet Dark Dmg
-INSERT INTO `item_mods_pet` VALUES (14625,48,100,0); -- Pet WS Acc
-INSERT INTO `item_mods_pet` VALUES (14625,126,-40,0); -- Pet BP Dmg
-INSERT INTO `item_mods_pet` VALUES (14625,165,10,0); -- Pet Crit Hit Rate
-INSERT INTO `item_mods_pet` VALUES (14625,384,5000,0); -- Pet Haste
-INSERT INTO `item_mods_pet` VALUES (14625,421,50,0); -- Pet Crit Dmg
-INSERT INTO `item_mods_pet` VALUES (14625,487,-10,0); -- Pet Magic Burst
-INSERT INTO `item_mods_pet` VALUES (14680,1,200,0); -- Pet Def
-INSERT INTO `item_mods_pet` VALUES (14680,2,1500,0); -- Pet Hp
-INSERT INTO `item_mods_pet` VALUES (14680,5,300,0); -- Pet Mp
-INSERT INTO `item_mods_pet` VALUES (14680,8,300,0); -- Pet Str
-INSERT INTO `item_mods_pet` VALUES (14680,9,300,0); -- Pet Dex
-INSERT INTO `item_mods_pet` VALUES (14680,10,300,0); -- Pet Vit
-INSERT INTO `item_mods_pet` VALUES (14680,11,300,0); -- Pet Agi
-INSERT INTO `item_mods_pet` VALUES (14680,13,300,0); -- Pet Mnd
-INSERT INTO `item_mods_pet` VALUES (14680,14,300,0); -- Pet Chr
-INSERT INTO `item_mods_pet` VALUES (14680,23,1500,0); -- Pet Att
-INSERT INTO `item_mods_pet` VALUES (14680,24,1500,0); -- Pet Ratt
-INSERT INTO `item_mods_pet` VALUES (14680,25,200,0); -- Pet Acc
-INSERT INTO `item_mods_pet` VALUES (14680,26,200,0); -- Pet Racc
-INSERT INTO `item_mods_pet` VALUES (14680,62,1500,0); -- Pet Att %
-INSERT INTO `item_mods_pet` VALUES (14680,165,18,0); -- Pet Crit Hit Rate
-INSERT INTO `item_mods_pet` VALUES (14680,171,-10,0); -- Pet Delay
-INSERT INTO `item_mods_pet` VALUES (14680,288,20,0); -- Pet Double Att
-INSERT INTO `item_mods_pet` VALUES (14680,368,3000,0); -- Pet regain
-INSERT INTO `item_mods_pet` VALUES (14680,384,6000,0); -- Pet Haste
-INSERT INTO `item_mods_pet` VALUES (14680,421,50,0); -- Pet Crit Dmg
-INSERT INTO `item_mods_pet` VALUES (14872,2,10,2);      -- Ostreger Mitts Wyvern: HP +10
-INSERT INTO `item_mods_pet` VALUES (14903,25,5,2);      -- Drn. Fng. Gnt. +1 Wyvern: Increases Accuracy +5 (?)
-INSERT INTO `item_mods_pet` VALUES (14904,27,-2,1);     -- Evk. Bracers +1 Avatar: Enmity -2
-INSERT INTO `item_mods_pet` VALUES (14923,25,14,1);     -- Smn. Bracers +1 Avatar: Enhances accuracy +14 (?)
-INSERT INTO `item_mods_pet` VALUES (14958,63,5,0);      -- Beast Bazubands Pet: Defense Bonus 5% (?)
-INSERT INTO `item_mods_pet` VALUES (15031,384,300,3);    -- Pantin Dastanas Automaton: Haste +3%
-INSERT INTO `item_mods_pet` VALUES (15032,384,300,3);    -- Pantin Dastanas +1 Automaton: Haste +3%
-INSERT INTO `item_mods_pet` VALUES (15101,165,3,1);     -- Summoner's Dblt. Avatar: Critical Hit Rate +3%
-INSERT INTO `item_mods_pet` VALUES (15116,25,7,1);      -- Summoner's Brcr. Avatar: Enhances accuracy +7
--- INSERT INTO `item_mods_pet` VALUES (15131,unimplemented,1,1); -- Summoner's Spats Avatar: Shortens magic recast time for spirits
-INSERT INTO `item_mods_pet` VALUES (15146,23,7,1);      -- Summoner's Pgch. Avatar: Enhances attack +7
-INSERT INTO `item_mods_pet` VALUES (15146,357,-2,1);    -- "Blood Pact" ability delay -2
-INSERT INTO `item_mods_pet` VALUES (15239,27,-3,1);     -- Evk. Horn +1 Avatar: Enmity -3
-INSERT INTO `item_mods_pet` VALUES (15267,72,3,3);      -- Pup. Taj Automaton: HP recovered while healing +3
-INSERT INTO `item_mods_pet` VALUES (15267,71,3,3);      -- Automaton: MP recovered while healing +3
-INSERT INTO `item_mods_pet` VALUES (15366,27,-4,1);     -- Evk. Pigaches +1 Avatar: Enmity -4
-INSERT INTO `item_mods_pet` VALUES (15366,68,5,1);      -- Avatar: Enhances evasion +5 (?)
-INSERT INTO `item_mods_pet` VALUES (15367,2,30,2);      -- Falconer's Hose Wyvern: HP+30
-INSERT INTO `item_mods_pet` VALUES (15574,3,15,2);      -- Drn. Brais +1Wyvern: HP+15%
-INSERT INTO `item_mods_pet` VALUES (15575,25,14,1);     -- Evk. Spats +1 Avatar: Enhances accuracy +14 (?)
-INSERT INTO `item_mods_pet` VALUES (15575,27,-2,1);     -- Avatar: Enmity -2
-INSERT INTO `item_mods_pet` VALUES (15594,27,2,1);      -- Smn. Spats +1 Avatar: Enmity +2
-INSERT INTO `item_mods_pet` VALUES (15602,374,5,3);     -- Pup. Churidars Automaton: Enhances "Cure" potency +5% (?)
-INSERT INTO `item_mods_pet` VALUES (15602,168,10,3);    -- Automaton: Spell interruption rate down 10% (?)
-INSERT INTO `item_mods_pet` VALUES (15647,1,10,0);      -- Askar Dirs Pet: DEF +10
-INSERT INTO `item_mods_pet` VALUES (15649,1,10,0);      -- Goliard Trews Pet: DEF +10
-INSERT INTO `item_mods_pet` VALUES (15661,2,50,2);      -- Homam Gambieras Wyvern: HP+50
-INSERT INTO `item_mods_pet` VALUES (15679,23,10,1);     -- Smn. Pigaches +1 Avatar: Enhances attack +10 (?)
-INSERT INTO `item_mods_pet` VALUES (15679,27,2,1);      -- Avatar: Enmity +2
-INSERT INTO `item_mods_pet` VALUES (15679,357,-2,1);    -- "Blood Pact" ability delay -2
-INSERT INTO `item_mods_pet` VALUES (15910,1,5,0);       -- Primal Belt Pet: DEF+5
-INSERT INTO `item_mods_pet` VALUES (15910,27,3,0);      -- Pet: Enmity+3
-INSERT INTO `item_mods_pet` VALUES (15944,163,-700,0);    -- Selemnus Belt Pet: Magic Damage taken -3%
-INSERT INTO `item_mods_pet` VALUES (16173,1,10,0);      -- Pallas's Shield Pet: DEF +10
-INSERT INTO `item_mods_pet` VALUES (16245,23,15,3);     -- Pantin Cape Automaton: Attack +15
-INSERT INTO `item_mods_pet` VALUES (16270,2,50,2);      -- Chanoix's Gorget Wyvern: HP+50
-INSERT INTO `item_mods_pet` VALUES (16297,161,-200,0);    -- Shepherd's Chain Pet: Damage taken -2%
-INSERT INTO `item_mods_pet` VALUES (16351,374,5,3);     -- Pup. Churidars +1 Automaton: Enhances "Cure" potency +5% (?)
-INSERT INTO `item_mods_pet` VALUES (16351,168,10,3);    -- Automaton: Spell interruption rate down 10% (?)
-INSERT INTO `item_mods_pet` VALUES (16352,30,5,3);      -- Pantin Churidars Automaton: Magic Accuracy +5
-INSERT INTO `item_mods_pet` VALUES (16353,30,7,3);      -- Ptn. Churidars +1 Automaton: Magic Accuracy +7
-INSERT INTO `item_mods_pet` VALUES (16368,25,10,0);     -- Herder's Subligar Enhances pet accuracy +10 (?)
-INSERT INTO `item_mods_pet` VALUES (16654,368,10,0);    -- Glyph Axe Pet: "Regain"+10
-INSERT INTO `item_mods_pet` VALUES (16843,25,10,2);     -- Draconis Lance Wyvern: Accuracy+10
-INSERT INTO `item_mods_pet` VALUES (16843,23,10,2);     -- Wyvern: Attack+10
-INSERT INTO `item_mods_pet` VALUES (17579,2,50,2);      -- Wyvern Perch Wyvern: HP+50
-INSERT INTO `item_mods_pet` VALUES (17857,2,50,4);      -- Animator +1 Harlequin Automaton: HP+50 (Allows orders to be more directly relayed to the automaton.)
-INSERT INTO `item_mods_pet` VALUES (17857,5,50,4);      -- Harlequin Automaton: MP+50
-INSERT INTO `item_mods_pet` VALUES (17857,2,60,5);      -- Valoredge Automaton: HP+60
-INSERT INTO `item_mods_pet` VALUES (17857,2,45,6);      -- Sharpshot Automaton: HP+45
-INSERT INTO `item_mods_pet` VALUES (17857,2,40,7);      -- Stormwaker Automaton: HP+40
-INSERT INTO `item_mods_pet` VALUES (17857,5,60,7);      -- Stormwaker Automaton: MP+60
-INSERT INTO `item_mods_pet` VALUES (17961,1,10,0);      -- Lion Tamer Pet: DEF +10
-INSERT INTO `item_mods_pet` VALUES (18547,370,3,0);     -- Ravana's Axe Pet: Adds "Regen" effect
-INSERT INTO `item_mods_pet` VALUES (18745,3,1,3);       -- Adaman Sainti Automaton: HP +1% (Supposed to be 0.75%)
-INSERT INTO `item_mods_pet` VALUES (18746,3,2,3);       -- Gem Sainti Automaton: HP +2% (Supposed to be 1.5%)
-INSERT INTO `item_mods_pet` VALUES (18778,369,1,3);     -- Marotte Claws Automaton: Adds "Refresh" effect
-INSERT INTO `item_mods_pet` VALUES (18778,370,1,3);     -- Automaton: Adds "Regen" effect
-INSERT INTO `item_mods_pet` VALUES (18780,368,10,3);    -- Burattinaios Automaton: "Regain"+10
-INSERT INTO `item_mods_pet` VALUES (18791,2,30,3);      -- Buzbaz Sainti Automaton: HP+30
-INSERT INTO `item_mods_pet` VALUES (18791,23,9,3);      -- Automaton: Attack+9
-INSERT INTO `item_mods_pet` VALUES (18791,24,9,3);      -- Automaton: Ranged Attack+9
-INSERT INTO `item_mods_pet` VALUES (18792,2,40,3);      -- Buzbaz Sainti +1 Automaton: HP+40
-INSERT INTO `item_mods_pet` VALUES (18792,23,10,3);     -- Automaton: Attack+10
-INSERT INTO `item_mods_pet` VALUES (18792,24,10,3);     -- Automaton: Ranged Attack+10
-INSERT INTO `item_mods_pet` VALUES (18999,23,40,0);     -- Aymur 75 Pet: Attack+40
-INSERT INTO `item_mods_pet` VALUES (19005,28,20,1);     -- Nirvana 75 Avatar: "Magic Atk. Bonus"+20
-INSERT INTO `item_mods_pet` VALUES (19068,23,50,0);     -- Aymur 80 Pet: Attack+50
-INSERT INTO `item_mods_pet` VALUES (19074,28,25,1);     -- Nirvana 80 Avatar: "Magic Atk. Bonus"+25
-INSERT INTO `item_mods_pet` VALUES (19088,23,60,0);     -- Aymur 85 Pet: Attack+60
-INSERT INTO `item_mods_pet` VALUES (19094,28,30,1);     -- Nirvana 85 Avatar: "Magic Atk. Bonus"+30
-INSERT INTO `item_mods_pet` VALUES (19620,23,70,0);     -- Aymur 90 Pet: Attack+70
-INSERT INTO `item_mods_pet` VALUES (19626,28,35,1);     -- Nirvana 90 Avatar: "Magic Atk. Bonus"+35
-INSERT INTO `item_mods_pet` VALUES (19718,23,70,0);     -- Aymur 95 Pet: Attack+70
-INSERT INTO `item_mods_pet` VALUES (19724,28,35,1);     -- Nirvana 95 Avatar: "Magic Atk. Bonus"+35
-INSERT INTO `item_mods_pet` VALUES (19772,28,1,1);      -- Esper Stone Avatar: "Magic Atk. Bonus"+1
-INSERT INTO `item_mods_pet` VALUES (19827,23,80,0);     -- Aymur 99 Pet: Attack+80
-INSERT INTO `item_mods_pet` VALUES (19833,28,40,1);     -- Nirvana 99 Avatar: "Magic Atk. Bonus"+40
-INSERT INTO `item_mods_pet` VALUES (19956,23,80,0);     -- Aymur 99 AG Pet: Attack+80
-INSERT INTO `item_mods_pet` VALUES (19962,28,40,1);     -- Nirvana 99 AG Avatar: "Magic Atk. Bonus"+40
-INSERT INTO `item_mods_pet` VALUES (20516,369,4,3);     -- Denouements Automaton: "Refresh"+4
-INSERT INTO `item_mods_pet` VALUES (20516,370,4,3);     -- Denouements Automaton: "Regen"+4
-INSERT INTO `item_mods_pet` VALUES (20535,368,10,3);    -- Ohtas Automaton: "Regain"+10
-INSERT INTO `item_mods_pet` VALUES (20535,369,1,3);     -- Ohtas Automaton: "Refresh"+1
-INSERT INTO `item_mods_pet` VALUES (20536,23,15,3);     -- Tinhaspa Automaton: Attack+15
-INSERT INTO `item_mods_pet` VALUES (20536,24,15,3);     -- Tinhaspa Automaton: Ranged Attack+15
-INSERT INTO `item_mods_pet` VALUES (20536,28,15,3);     -- Tinhaspa Automaton: "Magic Atk. Bonus"+15
--- INSERT INTO `item_mods_pet` VALUES (20542,0,0,3);    -- Gnafron's Adargas Automaton: Increases maximum HP and MP Increases skill effects
-INSERT INTO `item_mods_pet` VALUES (20549,25,20,3);     -- Rigor Baghnakhs Automaton: Accuracy+20
-INSERT INTO `item_mods_pet` VALUES (20549,26,20,3);     -- Rigor Baghnakhs Automaton: Ranged Accuracy+20
-INSERT INTO `item_mods_pet` VALUES (20549,30,20,3);     -- Rigor Baghnakhs Automaton: Magic Accuracy+20
-INSERT INTO `item_mods_pet` VALUES (20792,23,80,0);     -- Aymur 119 Pet: Attack+80
-INSERT INTO `item_mods_pet` VALUES (20793,23,80,0);     -- Aymur 119 AG Pet: Attack+80
-INSERT INTO `item_mods_pet` VALUES (20822,27,6,0);      -- Anahera Tabar Pet: Enmity +6
-INSERT INTO `item_mods_pet` VALUES (20822,68,40,0);     -- Pet: Evasion +40
-INSERT INTO `item_mods_pet` VALUES (20831,288,2,0);     -- Aalak' Axe Pet: Double Attack +2%
-INSERT INTO `item_mods_pet` VALUES (20832,288,3,0);     -- Aalak' Axe +1 Pet: Double Attack +3%
-INSERT INTO `item_mods_pet` VALUES (20944,370,2,2);     -- Pelagos Lance Wyvern: "Regen"+2
-INSERT INTO `item_mods_pet` VALUES (20944,161,300,2);     -- Wyvern: Physical damage taken -3%
-INSERT INTO `item_mods_pet` VALUES (21141,126,40,1);    -- Nirvana 119 Avatar: Increases "Blood Pact: Rage" damage
-INSERT INTO `item_mods_pet` VALUES (21142,126,40,1);    -- Nirvana 119 AG Avatar: Increases "Blood Pact: Rage" damage
-INSERT INTO `item_mods_pet` VALUES (21155,30,35,1);     -- Marquetry Staff Avatar: Magic Accuracy+35 un
-INSERT INTO `item_mods_pet` VALUES (21155,28,110,1);    -- Avatar: "Magic Atk. Bonus"+110
-INSERT INTO `item_mods_pet` VALUES (21155,126,3,1);     -- Avatar: "Blood Pact" damage +3
-INSERT INTO `item_mods_pet` VALUES (21167,30,20,1);     -- Frazil Staff Avatar: Magic Accuracy+20
-INSERT INTO `item_mods_pet` VALUES (21167,28,120,1);    -- Avatar: "Magic Atk. Bonus"+120
-INSERT INTO `item_mods_pet` VALUES (21167,27,10,1);     -- Avatar: Enmity+10
-INSERT INTO `item_mods_pet` VALUES (21183,28,108,1);    -- Eminent Pole Avatar: "Magic Atk. Bonus"+108
-INSERT INTO `item_mods_pet` VALUES (21361,28,6,0);      -- Esper Stone +1 Pet: "Magic Atk. Bonus"+6
-INSERT INTO `item_mods_pet` VALUES (21372,160,-500,8);  -- Luopan: Damage taken -5%
-INSERT INTO `item_mods_pet` VALUES (21430,25,10,0);     -- Pet Acc
-INSERT INTO `item_mods_pet` VALUES (21430,26,10,0);     -- Pet Range Acc
-INSERT INTO `item_mods_pet` VALUES (21430,30,10,0);     -- Pet Magic Acc
-INSERT INTO `item_mods_pet` VALUES (21432,126,16,1);     -- Increases "Blood Pact" damage +16%
--- INSERT INTO `item_mods_pet` VALUES (21433,0,0,3);     -- Automaton: Damage
-INSERT INTO `item_mods_pet` VALUES (21504,25,10,3);     -- Arasy Sainti Automaton: Accuracy+10
-INSERT INTO `item_mods_pet` VALUES (21504,30,10,3);     -- Arasy Sainti Automaton: Magic Accuracy+10
-INSERT INTO `item_mods_pet` VALUES (21505,25,15,3);     -- Arasy Sainti +1 Automaton: Accuracy+15
-INSERT INTO `item_mods_pet` VALUES (21505,30,15,3);     -- Arasy Sainti +1 Automaton: Magic Accuracy+15
-INSERT INTO `item_mods_pet` VALUES (21526,25,50,3);     -- Xiucoatl: Automaton: Accuracy+50
-INSERT INTO `item_mods_pet` VALUES (21526,26,50,3);     -- Xiucoatl: Automaton: Ranged Accuracy+50
-INSERT INTO `item_mods_pet` VALUES (21526,30,50,3);     -- Xiucoatl: Automaton: Magic Accuracy+50
-INSERT INTO `item_mods_pet` VALUES (21527,8,20,3);      -- Sakpata's Fists: Automaton: STR+20
-INSERT INTO `item_mods_pet` VALUES (21527,9,20,3);      -- Sakpata's Fists: Automaton: DEX+20
-INSERT INTO `item_mods_pet` VALUES (21527,10,20,3);     -- Sakpata's Fists: Automaton: VIT+20
-INSERT INTO `item_mods_pet` VALUES (21527,11,20,3);     -- Sakpata's Fists: Automaton: AGI+20
-INSERT INTO `item_mods_pet` VALUES (21527,12,20,3);     -- Sakpata's Fists: Automaton: INT+20
-INSERT INTO `item_mods_pet` VALUES (21527,13,20,3);     -- Sakpata's Fists: Automaton: MND+20
-INSERT INTO `item_mods_pet` VALUES (21527,14,20,3);     -- Sakpata's Fists: Automaton: CHR+20
-INSERT INTO `item_mods_pet` VALUES (21527,25,50,3);     -- Sakpata's Fists: Automaton: Accuracy+50
-INSERT INTO `item_mods_pet` VALUES (21527,26,50,3);     -- Sakpata's Fists: Automaton: Ranged Accuracy+50
-INSERT INTO `item_mods_pet` VALUES (21527,30,50,3);     -- Sakpata's Fists: Automaton: Magic Accuracy+50
-INSERT INTO `item_mods_pet` VALUES (21528,25,40,0);     -- Dragon Fangs - Pet: Accuracy+40
-INSERT INTO `item_mods_pet` VALUES (21528,26,40,0);     -- Dragon Fangs - Pet: Ranged Accuracy+40
-INSERT INTO `item_mods_pet` VALUES (21528,30,40,0);     -- Dragon Fangs - Pet: Magic Accuracy+40
-INSERT INTO `item_mods_pet` VALUES (21529,25,40,0);     -- Premium Heart - Pet: Accuracy+40
-INSERT INTO `item_mods_pet` VALUES (21529,26,40,0);     -- Premium Heart - Pet: Ranged Accuracy+40
-INSERT INTO `item_mods_pet` VALUES (21529,30,40,0);     -- Premium Heart - Pet: Magic Accuracy+40
-INSERT INTO `item_mods_pet` VALUES (21715,25,30,0);     -- Monster Axe: Pet: Accuracy+30
-INSERT INTO `item_mods_pet` VALUES (21715,26,30,0);     -- Monster Axe: Pet: Ranged Accuracy+30
-INSERT INTO `item_mods_pet` VALUES (21715,30,30,0);     -- Monster Axe: Pet: Magic Accuracy+30
-INSERT INTO `item_mods_pet` VALUES (21716,25,40,0);     -- Ankusa Axe: Pet: Accuracy+40
-INSERT INTO `item_mods_pet` VALUES (21716,26,40,0);     -- Ankusa Axe: Pet: Ranged Accuracy+40
-INSERT INTO `item_mods_pet` VALUES (21716,30,40,0);     -- Ankusa Axe: Pet: Magic Accuracy+40
-INSERT INTO `item_mods_pet` VALUES (21717,25,50,0);     -- Pangu: Pet: Accuracy+50
-INSERT INTO `item_mods_pet` VALUES (21717,26,50,0);     -- Pangu: Pet: Ranged Accuracy+50
-INSERT INTO `item_mods_pet` VALUES (21717,30,50,0);     -- Pangu: Pet: Magic Accuracy+50
-INSERT INTO `item_mods_pet` VALUES (21751,23,80,0);     -- Aymur 119 III Pet: Attack Bonus V
-INSERT INTO `item_mods_pet` VALUES (21865,370,5,2);     -- Arasy Lance: Wyvern: "Regen"+5
-INSERT INTO `item_mods_pet` VALUES (21866,370,8,2);     -- Arasy Lance +1: Wyvern: "Regen"+8
-INSERT INTO `item_mods_pet` VALUES (22015,30,10,1);     -- Arasy Rod: Avatar: Magic Accuracy+10
-INSERT INTO `item_mods_pet` VALUES (22016,30,15,1);     -- Arasy Rod +1: Avatar: Magic Accuracy+15
-INSERT INTO `item_mods_pet` VALUES (22054,28,115,1);    -- Grioavolr: Avatar: "Magic Atk. Bonus"+115
-INSERT INTO `item_mods_pet` VALUES (22054,30,35,1);     -- Grioavolr: Avatar: Magic Accuracy+35
-INSERT INTO `item_mods_pet` VALUES (22063,126,40,1);    -- Nirvana 119 III Avatar: "Blood Pact" damage +40
-INSERT INTO `item_mods_pet` VALUES (22074,126,3,1);     -- Arasy Staff: Avatar: "Blood Pact" damage +3
-INSERT INTO `item_mods_pet` VALUES (22075,126,5,1);     -- Arasy Staff +1: Avatar: "Blood Pact" damage +5
-INSERT INTO `item_mods_pet` VALUES (22096,25,50,1);     -- Draumstafir: Avatar: Accuracy+50
-INSERT INTO `item_mods_pet` VALUES (22096,26,50,1);     -- Draumstafir: Avatar: Ranged Accuracy+50
-INSERT INTO `item_mods_pet` VALUES (22096,30,50,1);     -- Draumstafir: Avatar: Magic Accuracy+50
-INSERT INTO `item_mods_pet` VALUES (22210,126,3,1);     -- Elan Strap: Avatar: "Blood Pact" damage +3
-INSERT INTO `item_mods_pet` VALUES (22211,126,5,1);     -- Elan Strap +1: Avatar: "Blood Pact" damage +5
-INSERT INTO `item_mods_pet` VALUES (23057,25,31,3);     -- Foire Taj +2 Automaton: Accuracy +31
-INSERT INTO `item_mods_pet` VALUES (23057,369,1,3);     -- Automaton: Refresh +1
-INSERT INTO `item_mods_pet` VALUES (23057,370,3,3);     -- Automaton: Regen +3
-INSERT INTO `item_mods_pet` VALUES (23057,384,600,3);   -- Automaton: Haste +6%
-INSERT INTO `item_mods_pet` VALUES (23083,2,500,8);     -- Bagua galero +2 : Luopan HP +500
-INSERT INTO `item_mods_pet` VALUES (23120,370,10,2);    -- Vishap Mail +2 Wyvern: "Regen"+10
-INSERT INTO `item_mods_pet` VALUES (23121,25,35,1);     -- Convoker's Doublet +2 Avatar: Accuracy+35
-INSERT INTO `item_mods_pet` VALUES (23121,30,35,1);     -- Magic Accuracy+35
-INSERT INTO `item_mods_pet` VALUES (23121,126,14,1);    -- "Blood Pact" damage +14
-INSERT INTO `item_mods_pet` VALUES (23124,2,165,3);     -- Foire Tobe Automaton: HP +165
-INSERT INTO `item_mods_pet` VALUES (23124,5,165,3);     -- Automaton: MP +165
-INSERT INTO `item_mods_pet` VALUES (23124,384,400,3);   -- Automaton: Haste +4%
-INSERT INTO `item_mods_pet` VALUES (23191,25,32,3);     -- Foire Dastanas +2 Automaton: Accuracy +32
-INSERT INTO `item_mods_pet` VALUES (23191,384,500,3);   -- Automaton: Haste +5%
-INSERT INTO `item_mods_pet` VALUES (23195,160,-1200,8);  -- Geomancy mitaines +2 Luopan: Damage taken -12%
-INSERT INTO `item_mods_pet` VALUES (23325,28,20,3);     -- Foire Babouches +2 Automaton: Magic Attack Bonus +20
-INSERT INTO `item_mods_pet` VALUES (23325,30,40,3);     -- Automaton: Magic Accuracy +40
-INSERT INTO `item_mods_pet` VALUES (23325,384,400,3);   -- Automaton: Haste +4%
-INSERT INTO `item_mods_pet` VALUES (23351,370,4,8);     -- Bagua Sandals +2: Luopan: "Regen"+4
-INSERT INTO `item_mods_pet` VALUES (23392,25,41,3);     -- Foire Taj +3 Automaton: Accuracy +41
-INSERT INTO `item_mods_pet` VALUES (23392,369,2,3);     -- Automaton: Refresh +2
-INSERT INTO `item_mods_pet` VALUES (23392,370,6,3);     -- Automaton: Regen +6
-INSERT INTO `item_mods_pet` VALUES (23392,384,700,3);   -- Automaton: Haste +7%
-INSERT INTO `item_mods_pet` VALUES (23418,2,600,8);     -- Bagua galero +3 : Luopan HP +600
-INSERT INTO `item_mods_pet` VALUES (23455,370,15,2);    -- Vishap Mail +3 Wyvern: "Regen"+15
-INSERT INTO `item_mods_pet` VALUES (23254,3,25,2);      -- Vishap Brais +2 Wyvern: HP+25%
-INSERT INTO `item_mods_pet` VALUES (23258,5,75,3);      -- Foire Churidars +2 Automaton: MP+75
-INSERT INTO `item_mods_pet` VALUES (23258,160,-300,3);    -- Automaton: Damage taken -3%
-INSERT INTO `item_mods_pet` VALUES (23258,374,14,3);    -- Automaton: "Cure" Potency +14%
-INSERT INTO `item_mods_pet` VALUES (23258,384,400,3);   -- Automaton: Haste +4%
-INSERT INTO `item_mods_pet` VALUES (23456,25,45,1);     -- Convoker's Doublet +3 Avatar: Acc.+45
-INSERT INTO `item_mods_pet` VALUES (23456,30,45,1);     -- Magic Acc.+45
-INSERT INTO `item_mods_pet` VALUES (23456,126,16,1);    -- "Blood Pact" damage +16
-INSERT INTO `item_mods_pet` VALUES (23459,2,220,3);     -- Foire Tobe +3 Automaton: HP +220
-INSERT INTO `item_mods_pet` VALUES (23459,5,220,3);     -- Automaton: MP +220
-INSERT INTO `item_mods_pet` VALUES (23459,384,500,3);   -- Automaton: Haste +5%
-INSERT INTO `item_mods_pet` VALUES (23526,25,42,3);     -- Foire Dastanas +3 Automaton: Accuracy +42
-INSERT INTO `item_mods_pet` VALUES (23526,384,500,3);   -- Automaton: Haste +5%
-INSERT INTO `item_mods_pet` VALUES (23530,160,-1300,8);  -- Geomancy mitaines +3 Luopan: Damage taken -13%
-INSERT INTO `item_mods_pet` VALUES (23589,3,27,2);      -- Vishap Brais Wyvern: HP+27%
-INSERT INTO `item_mods_pet` VALUES (23593,5,75,3);      -- Foire Churidars +3 Automaton: MP+75
-INSERT INTO `item_mods_pet` VALUES (23593,160,-600,3);    -- Automaton: Damage taken -6%
-INSERT INTO `item_mods_pet` VALUES (23593,374,14,3);    -- Automaton: "Cure" Potency +14%
-INSERT INTO `item_mods_pet` VALUES (23593,384,600,3);   -- Automaton: Haste +6%
-INSERT INTO `item_mods_pet` VALUES (23660,28,25,3);     -- Foire Babouches +3 Automaton: Magic Attack Bonus +25
-INSERT INTO `item_mods_pet` VALUES (23660,30,50,3);     -- Automaton: Magic Accuracy +50
-INSERT INTO `item_mods_pet` VALUES (23660,384,500,3);   -- Automaton: Haste +5%
-INSERT INTO `item_mods_pet` VALUES (23674,68,38,0);     -- Ankusa Gaiters +3: Pet: Evasion+38
-INSERT INTO `item_mods_pet` VALUES (23674,161,-500,0);    -- Ankusa Gaiters +3: Pet: Physical damage taken -5%
-INSERT INTO `item_mods_pet` VALUES (23679,2,290,2);     -- Pteroslaver Greaves +3: Wyvern: HP+290
-INSERT INTO `item_mods_pet` VALUES (23679,370,10,2);    -- Pteroslaver Greaves +3: Wyvern: "Regen"+10
-INSERT INTO `item_mods_pet` VALUES (23680,23,89,1);     -- Glyphic Pigaches +3: Avatar: Attack+89
-INSERT INTO `item_mods_pet` VALUES (23680,25,36,1);     -- Glyphic Pigaches +3: Avatar: Accuracy+36
-INSERT INTO `item_mods_pet` VALUES (23680,562,13,1);    -- Glyphic Pigaches +3: Avatar: Magic critical hit rate +13%
-INSERT INTO `item_mods_pet` VALUES (23683,28,57,3);     -- Pitre Babouches +3: Automaton: "Magic Atk. Bonus"+57
-INSERT INTO `item_mods_pet` VALUES (23683,30,43,3);     -- Pitre Babouches +3: Automaton: Magic Accuracy+43
-INSERT INTO `item_mods_pet` VALUES (23686,370,5,8);     -- Bagua Sandals +3: Luopan: "Regen"+5
-INSERT INTO `item_mods_pet` VALUES (23756,25,50,0); -- Pet Acc
-INSERT INTO `item_mods_pet` VALUES (23756,26,50,0); -- Pet Racc
-INSERT INTO `item_mods_pet` VALUES (23756,30,50,0); -- Pet Macc
-INSERT INTO `item_mods_pet` VALUES (23758,25,50,0); -- Pet Acc
-INSERT INTO `item_mods_pet` VALUES (23758,26,50,0); -- Pet Racc
-INSERT INTO `item_mods_pet` VALUES (23758,30,50,0); -- Pet Macc
-INSERT INTO `item_mods_pet` VALUES (23760,25,50,0); -- Pet Acc
-INSERT INTO `item_mods_pet` VALUES (23760,26,50,0); -- Pet Racc
-INSERT INTO `item_mods_pet` VALUES (23760,30,50,0); -- Pet Macc
-INSERT INTO `item_mods_pet` VALUES (23761,25,50,0);     -- Nyame Helm: Pet: Accuracy+50
-INSERT INTO `item_mods_pet` VALUES (23761,26,50,0);     -- Nyame Helm: Pet: Ranged Accuracy+50
-INSERT INTO `item_mods_pet` VALUES (23761,30,50,0);     -- Nyame Helm: Pet: Magic Accuracy+50
-INSERT INTO `item_mods_pet` VALUES (23763,25,50,0); -- Pet Acc
-INSERT INTO `item_mods_pet` VALUES (23763,26,50,0); -- Pet Racc
-INSERT INTO `item_mods_pet` VALUES (23763,30,50,0); -- Pet Macc
-INSERT INTO `item_mods_pet` VALUES (23765,25,50,0); -- Pet Acc
-INSERT INTO `item_mods_pet` VALUES (23765,26,50,0); -- Pet Racc
-INSERT INTO `item_mods_pet` VALUES (23765,30,50,0); -- Pet Macc
-INSERT INTO `item_mods_pet` VALUES (23767,25,50,0); -- Pet Acc
-INSERT INTO `item_mods_pet` VALUES (23767,26,50,0); -- Pet Racc
-INSERT INTO `item_mods_pet` VALUES (23767,30,50,0); -- Pet Macc
-INSERT INTO `item_mods_pet` VALUES (23768,25,50,0);     -- Nyame Mail: Pet: Accuracy+50
-INSERT INTO `item_mods_pet` VALUES (23768,26,50,0);     -- Nyame Mail: Pet: Ranged Accuracy+50
-INSERT INTO `item_mods_pet` VALUES (23768,30,50,0);     -- Nyame Mail: Pet: Magic Accuracy+50
-INSERT INTO `item_mods_pet` VALUES (23770,25,50,0); -- Pet Acc
-INSERT INTO `item_mods_pet` VALUES (23770,26,50,0); -- Pet Racc
-INSERT INTO `item_mods_pet` VALUES (23770,30,50,0); -- Pet Macc
-INSERT INTO `item_mods_pet` VALUES (23770,160,-10,0); -- Damage Taken
-INSERT INTO `item_mods_pet` VALUES (23772,25,50,0); -- Pet Acc
-INSERT INTO `item_mods_pet` VALUES (23772,26,50,0); -- Pet Racc
-INSERT INTO `item_mods_pet` VALUES (23772,30,50,0); -- Pet Macc
-INSERT INTO `item_mods_pet` VALUES (23772,840,10,0); -- WS Hits
-INSERT INTO `item_mods_pet` VALUES (23774,25,50,0); -- Pet Acc
-INSERT INTO `item_mods_pet` VALUES (23774,26,50,0); -- Pet Racc
-INSERT INTO `item_mods_pet` VALUES (23774,30,50,0); -- Pet Macc
-INSERT INTO `item_mods_pet` VALUES (23775,25,50,0);     -- Nyame Gauntlets: Pet: Accuracy+50
-INSERT INTO `item_mods_pet` VALUES (23775,26,50,0);     -- Nyame Gauntlets: Pet: Ranged Accuracy+50
-INSERT INTO `item_mods_pet` VALUES (23775,30,50,0);     -- Nyame Gauntlets: Pet: Magic Accuracy+50
-INSERT INTO `item_mods_pet` VALUES (23777,25,50,0); -- Pet Acc
-INSERT INTO `item_mods_pet` VALUES (23777,26,50,0); -- Pet Racc
-INSERT INTO `item_mods_pet` VALUES (23777,30,50,0); -- Pet Macc
-INSERT INTO `item_mods_pet` VALUES (23779,25,50,0); -- Pet Acc
-INSERT INTO `item_mods_pet` VALUES (23779,26,50,0); -- Pet Racc
-INSERT INTO `item_mods_pet` VALUES (23779,30,50,0); -- Pet Macc
-INSERT INTO `item_mods_pet` VALUES (23781,25,50,0);     -- Bunzi's Pants: Pet: Acc.+50
-INSERT INTO `item_mods_pet` VALUES (23781,26,50,0);     -- Bunzi's Pants: Pet: Ranged Acc.+50
-INSERT INTO `item_mods_pet` VALUES (23781,30,50,0);     -- Bunzi's Pants: Pet: Magic Acc.+50
-INSERT INTO `item_mods_pet` VALUES (23782,25,50,0);     -- Nyame Flanchard: Pet: Accuracy+50
-INSERT INTO `item_mods_pet` VALUES (23782,26,50,0);     -- Nyame Flanchard: Pet: Ranged Accuracy+50
-INSERT INTO `item_mods_pet` VALUES (23782,30,50,0);     -- Nyame Flanchard: Pet: Magic Accuracy+50
-INSERT INTO `item_mods_pet` VALUES (23784,25,50,0);     -- Gleti's Boots: Pet: Accuracy+50
-INSERT INTO `item_mods_pet` VALUES (23784,26,50,0);     -- Gleti's Boots: Pet: Ranged Accuracy+50
-INSERT INTO `item_mods_pet` VALUES (23784,30,50,0);     -- Gleti's Boots: Pet: Magic Accuracy+50
--- INSERT INTO `item_mods_pet` VALUES (23784,,1,);      -- Gleti's Boots: Summoned Pet: Lv.+1
-INSERT INTO `item_mods_pet` VALUES (23786,25,50,0);     -- Mpaca's Boots: Pet: Accuracy+50
-INSERT INTO `item_mods_pet` VALUES (23786,26,50,0);     -- Mpaca's Boots: Pet: Ranged Accuracy+50
-INSERT INTO `item_mods_pet` VALUES (23786,30,50,0);     -- Mpaca's Boots: Pet: Magic Accuracy+50
--- INSERT INTO `item_mods_pet` VALUES (23786,,1,3);     -- Mpaca's Boots: Pet: Automaton: Lv.+1
-INSERT INTO `item_mods_pet` VALUES (23788,25,50,0);     -- Bunzi's Sabots: Pet: Accuracy+50
-INSERT INTO `item_mods_pet` VALUES (23788,26,50,0);     -- Bunzi's Sabots: Pet: Ranged Accuracy+50
-INSERT INTO `item_mods_pet` VALUES (23788,30,50,0);     -- Bunzi's Sabots: Pet: Magic Accuracy+50
--- INSERT INTO `item_mods_pet` VALUES (23788,,1,1);     -- Bunzi's Sabots: Avatar: Lv.+1
-INSERT INTO `item_mods_pet` VALUES (23789,25,50,0);     -- Nyame Sollerets: Pet: Accuracy+50
-INSERT INTO `item_mods_pet` VALUES (23789,26,50,0);     -- Nyame Sollerets: Pet: Ranged Accuracy+50
-INSERT INTO `item_mods_pet` VALUES (23789,30,50,0);     -- Nyame Sollerets: Pet: Magic Accuracy+50
-INSERT INTO `item_mods_pet` VALUES (25465,25,15,0);     -- Beastmaster Collar: Pet: Accuracy+15
-INSERT INTO `item_mods_pet` VALUES (25465,26,15,0);     -- Beastmaster Collar: Pet: Ranged Accuracy+15
-INSERT INTO `item_mods_pet` VALUES (25465,30,15,0);     -- Beastmaster Collar: Pet: Magic Accuracy+15
-INSERT INTO `item_mods_pet` VALUES (25466,25,20,0);     -- Beastmaster Collar+1: Pet: Accuracy+20
-INSERT INTO `item_mods_pet` VALUES (25466,26,20,0);     -- Beastmaster Collar+1: Pet: Ranged Accuracy+20
-INSERT INTO `item_mods_pet` VALUES (25466,30,20,0);     -- Beastmaster Collar+1: Pet: Magic Accuracy+20
-INSERT INTO `item_mods_pet` VALUES (25467,25,25,0);     -- Beastmaster Collar+2: Pet: Accuracy+25
-INSERT INTO `item_mods_pet` VALUES (25467,26,25,0);     -- Beastmaster Collar+2: Pet: Ranged Accuracy+25
-INSERT INTO `item_mods_pet` VALUES (25467,30,25,0);     -- Beastmaster Collar+2: Pet: Magic Accuracy+25
--- INSERT INTO `item_mods_pet` VALUES (25495,??,1,2);   -- Dragoon's Collar: Wyvern: Lv.+1
--- INSERT INTO `item_mods_pet` VALUES (25496,??,1,2);   -- Dragoon's Collar+1: Wyvern: Lv.+1
--- INSERT INTO `item_mods_pet` VALUES (25497,??,1,2);   -- Dragoon's Collar+2: Wyvern: Lv.+1
-INSERT INTO `item_mods_pet` VALUES (25501,25,15,1);     -- Summoner's Collar: Avatar: Accuracy+15
-INSERT INTO `item_mods_pet` VALUES (25501,26,15,1);     -- Summoner's Collar: Avatar: Ranged Accuracy+15
-INSERT INTO `item_mods_pet` VALUES (25501,30,15,1);     -- Summoner's Collar: Avatar: Magic Accuracy+15
-INSERT INTO `item_mods_pet` VALUES (25502,25,20,1);     -- Summoner's Collar: Avatar: Accuracy+20
-INSERT INTO `item_mods_pet` VALUES (25502,26,20,1);     -- Summoner's Collar: Avatar: Ranged Accuracy+20
-INSERT INTO `item_mods_pet` VALUES (25502,30,20,1);     -- Summoner's Collar: Avatar: Magic Accuracy+20
-INSERT INTO `item_mods_pet` VALUES (25503,25,25,1);     -- Summoner's Collar: Avatar: Accuracy+25
-INSERT INTO `item_mods_pet` VALUES (25503,26,25,1);     -- Summoner's Collar: Avatar: Ranged Accuracy+25
-INSERT INTO `item_mods_pet` VALUES (25503,30,25,1);     -- Summoner's Collar: Avatar: Magic Accuracy+25
-INSERT INTO `item_mods_pet` VALUES (25519,25,15,3);     -- Pup. Collar: Automaton: Accuracy+15
-INSERT INTO `item_mods_pet` VALUES (25519,26,15,3);     -- Pup. Collar: Automaton: Ranged Accuracy+15
-INSERT INTO `item_mods_pet` VALUES (25519,30,15,3);     -- Pup. Collar: Automaton: Magic Accuracy+15
-INSERT INTO `item_mods_pet` VALUES (25520,25,20,3);     -- Pup. Collar+1: Automaton: Accuracy+20
-INSERT INTO `item_mods_pet` VALUES (25520,26,20,3);     -- Pup. Collar+1: Automaton: Ranged Accuracy+20
-INSERT INTO `item_mods_pet` VALUES (25520,30,20,3);     -- Pup. Collar+1: Automaton: Magic Accuracy+20
-INSERT INTO `item_mods_pet` VALUES (25521,25,25,3);     -- Pup. Collar+2: Automaton: Accuracy+25
-INSERT INTO `item_mods_pet` VALUES (25521,26,25,3);     -- Pup. Collar+2: Automaton: Ranged Accuracy+25
-INSERT INTO `item_mods_pet` VALUES (25521,30,25,3);     -- Pup. Collar+2: Automaton: Magic Accuracy+25
-INSERT INTO `item_mods_pet` VALUES (25563,25,40,0);     -- Heyoka Cap: Pet: Accuracy+40
-INSERT INTO `item_mods_pet` VALUES (25563,26,40,0);     -- Heyoka Cap: Pet: Ranged Accuracy+40
-INSERT INTO `item_mods_pet` VALUES (25563,27,8,0);      -- Heyoka Cap: Pet: Enmity+8
-INSERT INTO `item_mods_pet` VALUES (25563,384,600,0);   -- Heyoka Cap: Pet: Haste+6%
-INSERT INTO `item_mods_pet` VALUES (25564,25,50,0);     -- Heyoka Cap +1: Pet: Accuracy+50
-INSERT INTO `item_mods_pet` VALUES (25564,26,50,0);     -- Heyoka Cap +1: Pet: Ranged Accuracy+50
-INSERT INTO `item_mods_pet` VALUES (25564,27,10,0);     -- Heyoka Cap +1: Pet: Enmity+10
-INSERT INTO `item_mods_pet` VALUES (25564,384,600,0);   -- Heyoka Cap +1: Pet: Haste+6%
-INSERT INTO `item_mods_pet` VALUES (25565,368,3,1);     -- Baayami Hat: Avatar: "Regain"+3
-INSERT INTO `item_mods_pet` VALUES (25566,368,4,1);     -- Baayami Hat+1: Avatar: "Regain"+4
-INSERT INTO `item_mods_pet` VALUES (25593,25,38,0); -- Pet Acc
-INSERT INTO `item_mods_pet` VALUES (25593,26,38,0); -- Pet Racc
-INSERT INTO `item_mods_pet` VALUES (25593,28,38,0); -- Pet Matt
-INSERT INTO `item_mods_pet` VALUES (25593,30,38,0); -- Pet Macc
-INSERT INTO `item_mods_pet` VALUES (25593,126,10,0); -- Pet BP Dmg
-INSERT INTO `item_mods_pet` VALUES (25683,28,35,0); -- Pet Matt
-INSERT INTO `item_mods_pet` VALUES (25683,160,-400,0); -- Pet Dmg Taken
-INSERT INTO `item_mods_pet` VALUES (26026,23,20,0); -- Pet Att
-INSERT INTO `item_mods_pet` VALUES (26026,25,20,0); -- Pet Acc
-INSERT INTO `item_mods_pet` VALUES (26026,288,5,0); -- 
-INSERT INTO `item_mods_pet` VALUES (26082,25,15,0); -- Pet Acc
-INSERT INTO `item_mods_pet` VALUES (26082,26,15,0); -- Pet Racc
-INSERT INTO `item_mods_pet` VALUES (26082,30,15,0); -- Pet Macc
-INSERT INTO `item_mods_pet` VALUES (26082,126,10,0); -- Pet Bp Dmg
-INSERT INTO `item_mods_pet` VALUES (26201,23,23,0);     -- Thur. Ring +1 Pet: Attack+23
-INSERT INTO `item_mods_pet` VALUES (26201,24,23,0);     -- Pet: Ranged Attack+23
-INSERT INTO `item_mods_pet` VALUES (26201,25,22,0);     -- Pet: Accuracy+22
-INSERT INTO `item_mods_pet` VALUES (26201,26,22,0);     -- Pet: Ranged Accuracy+22
-INSERT INTO `item_mods_pet` VALUES (26201,384,400,0);   -- Pet: Haste+4%
-INSERT INTO `item_mods_pet` VALUES (26201,160,-400,0);    -- Pet: Damage Taken -4%
-INSERT INTO `item_mods_pet` VALUES (26241,23,16,0); -- Pet Att
-INSERT INTO `item_mods_pet` VALUES (26241,28,16,0); -- Pet Matt
-INSERT INTO `item_mods_pet` VALUES (26241,165,3,0); -- Pet Crit Hit Rate
-INSERT INTO `item_mods_pet` VALUES (26652,28,20,1);     -- Glyphic Horn Avatar: "Magic Atk. Bonus"+20
-INSERT INTO `item_mods_pet` VALUES (26653,28,23,1);     -- Glyphic Horn +1 Avatar: "Magic Atk. Bonus"+23
-INSERT INTO `item_mods_pet` VALUES (26658,369,2,3);     -- Pitre Taj Automaton: Refresh +2
-INSERT INTO `item_mods_pet` VALUES (26658,370,3,3);     -- Automaton: Regen +3
-INSERT INTO `item_mods_pet` VALUES (26659,369,3,3);     -- Pitre Taj +1 Automaton: Refresh +3
-INSERT INTO `item_mods_pet` VALUES (26659,370,3,3);     -- Automaton: Regen +3
-INSERT INTO `item_mods_pet` VALUES (26774,345,525,3);   -- Karagoz Capello Automaton: TP Bonus +525
-INSERT INTO `item_mods_pet` VALUES (26775,345,550,3);   -- Karagoz Capello +1 Automaton: TP Bonus +550
-INSERT INTO `item_mods_pet` VALUES (26828,165,8,1);     -- Glyphic Doublet Avatar: Critical hit rate +8%
-INSERT INTO `item_mods_pet` VALUES (26829,165,12,1);    -- Glyphic Doublet +1 Avatar: Critical hit rate +12%
-INSERT INTO `item_mods_pet` VALUES (26834,25,18,3);     -- Pitre Tobe Automaton: Accuracy +18
-INSERT INTO `item_mods_pet` VALUES (26834,26,18,3);     -- Automaton: Ranged Accuracy +18
-INSERT INTO `item_mods_pet` VALUES (26834,73,12,3);     -- Automaton: Store TP +12
-INSERT INTO `item_mods_pet` VALUES (26835,25,21,3);     -- Pitre Tobe +1 Automaton: Accuracy +21
-INSERT INTO `item_mods_pet` VALUES (26835,26,21,3);     -- Automaton: Ranged Accuracy +21
-INSERT INTO `item_mods_pet` VALUES (26835,73,13,3);     -- Automaton: Store TP +13
-INSERT INTO `item_mods_pet` VALUES (26853,2,160,0);
-INSERT INTO `item_mods_pet` VALUES (26888,27,14,1);     -- Shomonjijoe +1 Avatar: Enmity +14
-INSERT INTO `item_mods_pet` VALUES (26926,126,10,1);    -- Beckoner's Doublet Avatar: "Blood Pact" damage +10
-INSERT INTO `item_mods_pet` VALUES (26927,126,11,1);    -- Beckoner's Doublet +1 Avatar: "Blood Pact" damage +11
-INSERT INTO `item_mods_pet` VALUES (27004,25,20,1);     -- Glyphic Bracers Avatar: Accuracy +20
-INSERT INTO `item_mods_pet` VALUES (27004,384,200,1);   -- Avatar: Haste +2%
-INSERT INTO `item_mods_pet` VALUES (27005,25,28,1);     -- Glyphic Bracers +1 Avatar: Accuracy +28
-INSERT INTO `item_mods_pet` VALUES (27005,384,300,1);   -- Avatar: Haste +3%
-INSERT INTO `item_mods_pet` VALUES (27010,289,7,3);     -- Pitre Dastanas Automaton: Subtle Blow +7
-INSERT INTO `item_mods_pet` VALUES (27010,384,400,3);   -- Automaton: Haste +4%
-INSERT INTO `item_mods_pet` VALUES (27011,289,9,3);     -- Pitre Dastanas +1 Automaton: Subtle Blow +9
-INSERT INTO `item_mods_pet` VALUES (27011,384,500,3);   -- Automaton: Haste +5%
-INSERT INTO `item_mods_pet` VALUES (27044,2,50,2);      -- Crusher Gauntlets Wyvern: HP+50
-INSERT INTO `item_mods_pet` VALUES (27080,25,20,1);     -- Beckoner's Bracers Avatar: Accuracy+20
-INSERT INTO `item_mods_pet` VALUES (27081,25,30,1);     -- Beck. Bracers +1 Avatar: Accuracy+30
-INSERT INTO `item_mods_pet` VALUES (27086,8,13,3);      -- Karagoz Guanti Automaton: STR +13
-INSERT INTO `item_mods_pet` VALUES (27086,9,13,3);      -- Automaton: DEX +13
-INSERT INTO `item_mods_pet` VALUES (27086,11,13,3);     -- Automaton: AGI +13
-INSERT INTO `item_mods_pet` VALUES (27087,8,16,3);      -- Karagoz Guanti +1 Automaton: STR +16
-INSERT INTO `item_mods_pet` VALUES (27087,9,16,3);      -- Automaton: DEX +16
-INSERT INTO `item_mods_pet` VALUES (27087,11,16,3);     -- Automaton: AGI +16
-INSERT INTO `item_mods_pet` VALUES (27180,30,10,1);     -- Glyphic Spats Avatar: Magic Accuracy+10
-INSERT INTO `item_mods_pet` VALUES (27181,30,13,1);     -- Glyphic Spats +1 Avatar: Magic Accuracy+13
-INSERT INTO `item_mods_pet` VALUES (27186,30,15,3);     -- Pitre Churidars Automaton: Magic Accuracy +15
-INSERT INTO `item_mods_pet` VALUES (27186,170,7,3);     -- Automaton: Fast Cast +7%
-INSERT INTO `item_mods_pet` VALUES (27187,30,18,3);     -- Pitre Churidars +1 Automaton: Magic Accuracy +18
-INSERT INTO `item_mods_pet` VALUES (27187,170,8,3);     -- Automaton: Fast Cast +8%
-INSERT INTO `item_mods_pet` VALUES (27221,27,4,1);      -- Avatara Slops Avatar: Enmity+4
-INSERT INTO `item_mods_pet` VALUES (27221,126,7,1);     -- "Blood Pact" damage +7
-INSERT INTO `item_mods_pet` VALUES (27265,345,550,1);   -- Beckoner's Spats Avatar: TP Bonus +550
-INSERT INTO `item_mods_pet` VALUES (27266,345,600,1);   -- Beck. Spats +1 Avatar: TP Bonus +600
-INSERT INTO `item_mods_pet` VALUES (27299,3,21,0);
-INSERT INTO `item_mods_pet` VALUES (27356,23,28,1);     -- Glyphic Pigaches Avatar: Attack+25
-INSERT INTO `item_mods_pet` VALUES (27356,562,7,1);     -- Avatar: Magic critical hit rate +7%
-INSERT INTO `item_mods_pet` VALUES (27357,23,28,1);     -- Glyph. Pigaches +1 Avatar: Attack+28
-INSERT INTO `item_mods_pet` VALUES (27357,562,9,1);     -- Avatar: Magic critical hit rate +9%
-INSERT INTO `item_mods_pet` VALUES (27362,28,15,3);     -- Pitre Babouches Automaton: Magic Attack Bonus +15
-INSERT INTO `item_mods_pet` VALUES (27362,30,12,3);     -- Automaton: Magic Accuracy +12
-INSERT INTO `item_mods_pet` VALUES (27363,28,18,3);     -- Pitre Babouches Automaton: Magic Attack Bonus +18
-INSERT INTO `item_mods_pet` VALUES (27363,30,15,3);     -- Automaton: Magic Accuracy +15
-INSERT INTO `item_mods_pet` VALUES (27368,370,2,8);     -- Bagua Sandals: Luopan: "Regen"+2
-INSERT INTO `item_mods_pet` VALUES (27369,370,3,8);     -- Bagua Sandals +1: Luopan: "Regen"+3
-INSERT INTO `item_mods_pet` VALUES (27439,30,17,1);     -- Beck. Pigaches Avatar: Magic Accuracy+17
-INSERT INTO `item_mods_pet` VALUES (27440,30,27,1);     -- Beck. Pigaches +1 Avatar: Magic Accuracy+27
-INSERT INTO `item_mods_pet` VALUES (27445,12,17,3);     -- Karagoz Scarpe Automaton: INT +17
-INSERT INTO `item_mods_pet` VALUES (27445,13,17,3);     -- Automaton: MND +17
-INSERT INTO `item_mods_pet` VALUES (27446,12,20,3);     -- Karagoz Scarpe +1 Automaton: INT +20
-INSERT INTO `item_mods_pet` VALUES (27446,13,20,3);     -- Automaton: MND +20
-INSERT INTO `item_mods_pet` VALUES (27470,480,6,0);
-INSERT INTO `item_mods_pet` VALUES (27677,27,4,1);      -- Convoker's Horn Avatar: Enmity+4
-INSERT INTO `item_mods_pet` VALUES (27680,71,6,3);      -- Foire Taj Automaton: HP recovered while healing +6
-INSERT INTO `item_mods_pet` VALUES (27680,72,6,3);      -- Automaton: MP recovered while healing +6
-INSERT INTO `item_mods_pet` VALUES (27680,384,500,3);    -- Automaton: Haste +5%
-INSERT INTO `item_mods_pet` VALUES (27698,27,4,1);      -- Con. Horn +1 Avatar: Enmity+4
-INSERT INTO `item_mods_pet` VALUES (27701,71,8,3);      -- Foire Taj +1 Automaton: HP recovered while healing +8
-INSERT INTO `item_mods_pet` VALUES (27701,72,8,3);      -- Automaton: MP recovered while healing +8
-INSERT INTO `item_mods_pet` VALUES (27701,384,500,3);   -- Automaton: Haste +5%
-INSERT INTO `item_mods_pet` VALUES (27820,370,2,2);     -- Vishap Mail Adds "Regen" effect to wyvern
-INSERT INTO `item_mods_pet` VALUES (27821,126,11,1);    -- Convoker's Doublet Avatar: Increases "Blood Pact" damage (11%)
-INSERT INTO `item_mods_pet` VALUES (27824,2,85,3);      -- Foire Tobe Automaton: HP +85
-INSERT INTO `item_mods_pet` VALUES (27824,5,85,3);      -- Automaton: MP +85
-INSERT INTO `item_mods_pet` VALUES (27824,384,300,3);   -- Automaton: Haste +3%
-INSERT INTO `item_mods_pet` VALUES (27830,2,90,0);
-INSERT INTO `item_mods_pet` VALUES (27841,370,3,2);     -- Vishap Mail +1 Wyvern: "Regen" +3
-INSERT INTO `item_mods_pet` VALUES (27842,126,12,1);    -- Con. Doublet +1 Avatar: "Blood Pact" ability damage +12
-INSERT INTO `item_mods_pet` VALUES (27845,2,110,3);     -- Foire Tobe +1 Automaton: HP +110
-INSERT INTO `item_mods_pet` VALUES (27845,5,110,3);     -- Automaton: MP +110
-INSERT INTO `item_mods_pet` VALUES (27845,384,300,3);   -- Automaton: Haste +3%
-INSERT INTO `item_mods_pet` VALUES (27957,27,5,1);      -- Con. Bracers Avatar: Enmity+5
-INSERT INTO `item_mods_pet` VALUES (27960,384,300,3);   -- Foire Dastanas Automaton: Haste +3%
-INSERT INTO `item_mods_pet` VALUES (27978,27,5,1);      -- Con. Bracers +1 Avatar: Enmity+5
-INSERT INTO `item_mods_pet` VALUES (27981,384,400,3);   -- Foire Dastanas +1 Automaton: Haste +4%
-INSERT INTO `item_mods_pet` VALUES (27985,160,-1100,8);  -- Geomancy mitaines +1 Luopan: Damage taken -11%
-INSERT INTO `item_mods_pet` VALUES (28066,160,-1000,8);  -- Geomancy mitaines Luopan: Damage taken -10%
-INSERT INTO `item_mods_pet` VALUES (28025,25,20,0);     -- Regimen Mittens Pet: Accuracy+20
-INSERT INTO `item_mods_pet` VALUES (28025,26,20,0);     -- Pet: Ranged Accuracy+20
-INSERT INTO `item_mods_pet` VALUES (28025,30,20,0);     -- Pet: Magic Accuracy+20
-INSERT INTO `item_mods_pet` VALUES (28025,384,600,0);   -- Pet: Haste+6%
-INSERT INTO `item_mods_pet` VALUES (28103,3,20,2);      -- Vishap Brais Wyvern: HP+20%
-INSERT INTO `item_mods_pet` VALUES (28104,25,20,1);     -- Convoker's Spats Avatar: Increases Accuracy +20 (?)
-INSERT INTO `item_mods_pet` VALUES (28104,27,4,1);      -- Avatar: Enmity+4
-INSERT INTO `item_mods_pet` VALUES (28107,5,40,3);      -- Foire Churidars Automaton: MP +40 (?)
-INSERT INTO `item_mods_pet` VALUES (28107,374,10,3);    -- Automaton: Cure potency +10% (?)
-INSERT INTO `item_mods_pet` VALUES (28107,384,300,3);   -- Automaton: Haste +3%
-INSERT INTO `item_mods_pet` VALUES (28119,23,20,0);     -- Tot. Trousers +1 Pet: Attack+20
-INSERT INTO `item_mods_pet` VALUES (28124,3,23,2);      -- Vishap Brais +1 Wyvern: HP+23%
-INSERT INTO `item_mods_pet` VALUES (28125,25,20,1);     -- Con. Spats +1 Avatar: Accuracy+20
-INSERT INTO `item_mods_pet` VALUES (28125,27,4,1);      -- Avatar: Enmity+4
-INSERT INTO `item_mods_pet` VALUES (28128,5,50,3);      -- Foire Churidars +1 Automaton: MP+50
-INSERT INTO `item_mods_pet` VALUES (28128,374,12,3);    -- Automaton: "Cure" Potency +12%
-INSERT INTO `item_mods_pet` VALUES (28128,384,300,3);   -- Automaton: Haste +3%
-INSERT INTO `item_mods_pet` VALUES (28141,25,20,0);     -- Wisent Kecks Pet: Accuracy+20
-INSERT INTO `item_mods_pet` VALUES (28141,23,10,0);     -- Pet: Attack+10
-INSERT INTO `item_mods_pet` VALUES (28141,26,20,0);     -- Pet: Ranged Accuracy+20
-INSERT INTO `item_mods_pet` VALUES (28141,24,10,0);     -- Pet: Ranged Attack+10
-INSERT INTO `item_mods_pet` VALUES (28141,68,20,0);     -- Pet: Evasion+20
-INSERT INTO `item_mods_pet` VALUES (28141,384,300,0);   -- Pet: Haste+3%
-INSERT INTO `item_mods_pet` VALUES (28211,23,15,1);     -- Mdk. Crackows +1 Avatar: Increases attack +15 (?)
-INSERT INTO `item_mods_pet` VALUES (28211,384,200,1);   -- Avatar: Haste+2%
-INSERT INTO `item_mods_pet` VALUES (28213,23,13,2);     -- Ker's Sollerets Wyvern: Attack+13
-INSERT INTO `item_mods_pet` VALUES (28214,68,5,0);      -- Sigyn's Jambeaux Pet: Evasion+5
-INSERT INTO `item_mods_pet` VALUES (28219,68,2,0);      -- Idi's Ledelsens Pet: Evasion+2
-INSERT INTO `item_mods_pet` VALUES (28231,23,10,0);     -- Totemic Gaiters Pet: Attack+10
-INSERT INTO `item_mods_pet` VALUES (28231,25,10,0);     -- Pet: Accuracy+10
-INSERT INTO `item_mods_pet` VALUES (28237,27,5,1);      -- Con. Pigaches Avatar: Enmity+5
-INSERT INTO `item_mods_pet` VALUES (28237,68,20,1);     -- Avatar: Enhances evasion +20
-INSERT INTO `item_mods_pet` VALUES (28237,126,5,1);     -- Avatar: Increases "Blood Pact" damage +5%
-INSERT INTO `item_mods_pet` VALUES (28240,384,300,3);   -- Foire Babouches Automaton: Haste +3%
-INSERT INTO `item_mods_pet` VALUES (28252,23,10,0);     -- Tot. Gaiters +1 Pet: Attack+10
-INSERT INTO `item_mods_pet` VALUES (28252,25,10,0);     -- Pet: Accuracy+10
-INSERT INTO `item_mods_pet` VALUES (28258,27,5,1);      -- Con. Pigaches +1 Avatar: Enmity+5
-INSERT INTO `item_mods_pet` VALUES (28258,68,20,1);     -- Avatar: Evasion+20
-INSERT INTO `item_mods_pet` VALUES (28258,126,6,1);     -- Avatar: "Blood Pact" damage +6
-INSERT INTO `item_mods_pet` VALUES (28261,384,300,3);   -- Foire Bab. +1 Automaton: Haste+3%
-INSERT INTO `item_mods_pet` VALUES (28356,28,5,1);      -- Eidolon Pendant +1 Avatar: "Magic Atk. Bonus"+5
-INSERT INTO `item_mods_pet` VALUES (28418,25,15,0);
-INSERT INTO `item_mods_pet` VALUES (28418,26,15,0);
-INSERT INTO `item_mods_pet` VALUES (28418,30,15,0);
-INSERT INTO `item_mods_pet` VALUES (28418,288,4,0);
-INSERT INTO `item_mods_pet` VALUES (28432,25,15,3);     -- Ukko Sash Automaton: Accuracy+15
-INSERT INTO `item_mods_pet` VALUES (28432,26,15,3);     -- Automaton: Ranged Accuracy+15
-INSERT INTO `item_mods_pet` VALUES (28432,30,15,3);     -- Automaton: Magic Accuracy+15
-INSERT INTO `item_mods_pet` VALUES (28432,384,500,3);   -- Automaton: Haste+5%
-INSERT INTO `item_mods_pet` VALUES (28432,170,5,3);     -- Automaton: "Fast Cast"+5%
-INSERT INTO `item_mods_pet` VALUES (28490,160,-400,0);
-INSERT INTO `item_mods_pet` VALUES (28491,160,-400,0);
-INSERT INTO `item_mods_pet` VALUES (28495,384,300,0);   -- Rimeice Earring Pet: Haste+3%
-INSERT INTO `item_mods_pet` VALUES (28495,27,5,0);      -- Pet: Enmity+5
-INSERT INTO `item_mods_pet` VALUES (28495,160,100,0);     -- Pet: Damage taken -1%
-INSERT INTO `item_mods_pet` VALUES (28588,23,15,3);     -- Karagoz Mantle +1 Automaton: Attack +15
-INSERT INTO `item_mods_pet` VALUES (28588,25,15,3);     -- Automaton: Accuracy +15
-INSERT INTO `item_mods_pet` VALUES (28588,68,10,3);     -- Automaton: Evasion +10
-INSERT INTO `item_mods_pet` VALUES (28605,25,7,1);      -- Samanisi Cape Avatar: Accuracy +7
-INSERT INTO `item_mods_pet` VALUES (28605,30,7,1);      -- Avatar: Magic Accuracy +7
-INSERT INTO `item_mods_pet` VALUES (28643,12,8,3);     -- Refraction Cape Automaton: INT+8
-INSERT INTO `item_mods_pet` VALUES (28643,13,8,3);      -- Automaton: MND+8
-INSERT INTO `item_mods_pet` VALUES (28643,30,3,3);      -- Automaton: Magic Accuracy+3
+-- Charivari Earring
+INSERT INTO `item_mods_pet` VALUES (10296,25,3,3); -- Automaton - ACC: 3
+INSERT INTO `item_mods_pet` VALUES (10296,26,3,3); -- Automaton - RACC: 3
+INSERT INTO `item_mods_pet` VALUES (10296,30,3,3); -- Automaton - MACC: 3
 
+-- Sabong Earring
+INSERT INTO `item_mods_pet` VALUES (10299,288,2,0); -- All Pets - DOUBLE_ATTACK: 2
+
+-- Shedir Crackows
+INSERT INTO `item_mods_pet` VALUES (10370,28,3,1);  -- Avatar - MATT: 3
+INSERT INTO `item_mods_pet` VALUES (10370,30,3,1);  -- Avatar - MACC: 3
+INSERT INTO `item_mods_pet` VALUES (10370,126,3,1); -- Avatar - BP_DAMAGE: 3
+
+-- Murzim Zucchetto
+INSERT INTO `item_mods_pet` VALUES (10440,384,600,3); -- Automaton - HASTE_GEAR: 600
+
+-- Tethyan Cuffs +1
+INSERT INTO `item_mods_pet` VALUES (10530,28,5,1); -- Avatar - MATT: 5
+
+-- Tethyan Cuffs +2
+INSERT INTO `item_mods_pet` VALUES (10531,28,5,1); -- Avatar - MATT: 5
+
+-- Tethyan Cuffs +3
+INSERT INTO `item_mods_pet` VALUES (10532,28,5,1); -- Avatar - MATT: 5
+
+-- Auspex Gages
+INSERT INTO `item_mods_pet` VALUES (10537,23,9,1);  -- Avatar - ATT: 9
+INSERT INTO `item_mods_pet` VALUES (10537,126,4,1); -- Avatar - BP_DAMAGE: 4
+
+-- Spurrina Gages
+INSERT INTO `item_mods_pet` VALUES (10542,23,12,1); -- Avatar - ATT: 12
+INSERT INTO `item_mods_pet` VALUES (10542,126,5,1); -- Avatar - BP_DAMAGE: 5
+
+-- Summoners Horn +2
+INSERT INTO `item_mods_pet` VALUES (10664,28,4,1);  -- Avatar - MATT: 4
+INSERT INTO `item_mods_pet` VALUES (10664,346,3,1); -- Avatar - PERPETUATION_REDUCTION: 3
+
+-- Summoners Doublet +2
+INSERT INTO `item_mods_pet` VALUES (10684,165,6,1); -- Avatar - CRITHITRATE: 6
+INSERT INTO `item_mods_pet` VALUES (10684,346,3,1); -- Avatar - PERPETUATION_REDUCTION: 3
+
+-- Summoners Spats +2
+INSERT INTO `item_mods_pet` VALUES (10724,30,5,1); -- Avatar - MACC: 5
+
+-- Summoners Pigaches +2
+INSERT INTO `item_mods_pet` VALUES (10744,562,5,1); -- Avatar - MAGIC_CRITHITRATE: 5
+
+-- Moepapa Stone
+INSERT INTO `item_mods_pet` VALUES (10817,384,500,0); -- All Pets - HASTE_GEAR: 500
+
+-- Muzzling Collar
+INSERT INTO `item_mods_pet` VALUES (10914,27,-2,0); -- All Pets - ENMITY: -2
+
+-- Muzzling Collar +1
+INSERT INTO `item_mods_pet` VALUES (10915,27,-3,0); -- All Pets - ENMITY: -3
+
+-- Oneiros Cappa
+INSERT INTO `item_mods_pet` VALUES (10972,161,-300,0); -- All Pets - DMGPHYS: -300
+
+-- Esper Earring
+INSERT INTO `item_mods_pet` VALUES (11052,126,3,1); -- Avatar - BP_DAMAGE: 3
+
+-- Callers Doublet +2
+INSERT INTO `item_mods_pet` VALUES (11098,126,10,1); -- Avatar - BP_DAMAGE: 10
+
+-- Callers Bracers +2
+INSERT INTO `item_mods_pet` VALUES (11118,25,15,1); -- Avatar - ACC: 15
+
+-- Callers Spats +2
+INSERT INTO `item_mods_pet` VALUES (11138,345,500,1); -- Avatar - TP_BONUS: 500
+
+-- Callers Pigaches +2
+INSERT INTO `item_mods_pet` VALUES (11158,30,5,1); -- Avatar - MACC: 5
+
+-- Callers Doublet +1
+INSERT INTO `item_mods_pet` VALUES (11198,126,5,1); -- Avatar - BP_DAMAGE: 5
+
+-- Callers Bracers +1
+INSERT INTO `item_mods_pet` VALUES (11218,25,10,1); -- Avatar - ACC: 10
+
+-- Callers Spats +1
+INSERT INTO `item_mods_pet` VALUES (11238,345,250,1); -- Avatar - TP_BONUS: 250
+
+-- Callers Pigaches +1
+INSERT INTO `item_mods_pet` VALUES (11258,30,5,1); -- Avatar - MACC: 5
+
+-- Cirque Scarpe +1
+INSERT INTO `item_mods_pet` VALUES (11261,12,10,3); -- Automaton - INT: 10
+INSERT INTO `item_mods_pet` VALUES (11261,13,10,3); -- Automaton - MND: 10
+
+-- Puppetry Tobe +1
+INSERT INTO `item_mods_pet` VALUES (11297,2,20,4); -- Harlequin - HP: 20
+INSERT INTO `item_mods_pet` VALUES (11297,2,24,5); -- Valoredge - HP: 24
+INSERT INTO `item_mods_pet` VALUES (11297,2,18,6); -- Sharpshot - HP: 18
+INSERT INTO `item_mods_pet` VALUES (11297,2,16,7); -- Stormwaker - HP: 16
+INSERT INTO `item_mods_pet` VALUES (11297,5,20,4); -- Harlequin - MP: 20
+INSERT INTO `item_mods_pet` VALUES (11297,5,24,7); -- Stormwaker - MP: 24
+
+-- Pantin Tobe
+INSERT INTO `item_mods_pet` VALUES (11298,25,10,3); -- Automaton - ACC: 10
+
+-- Pantin Tobe +1
+INSERT INTO `item_mods_pet` VALUES (11299,25,10,3); -- Automaton - ACC: 10
+
+-- Aegas Doublet
+INSERT INTO `item_mods_pet` VALUES (11338,25,3,0);  -- All Pets - ACC: 3
+INSERT INTO `item_mods_pet` VALUES (11338,289,3,0); -- All Pets - SUBTLE_BLOW: 3
+
+-- Pantin Babouches
+INSERT INTO `item_mods_pet` VALUES (11388,28,5,3); -- Automaton - MATT: 5
+
+-- Pantin Babouches +1
+INSERT INTO `item_mods_pet` VALUES (11389,28,5,3); -- Automaton - MATT: 5
+
+-- Puppetry Taj +1
+INSERT INTO `item_mods_pet` VALUES (11470,71,3,3); -- Automaton - MPHEAL: 3
+INSERT INTO `item_mods_pet` VALUES (11470,72,3,3); -- Automaton - HPHEAL: 3
+
+-- Pantin Taj
+INSERT INTO `item_mods_pet` VALUES (11471,370,1,3); -- Automaton - REGEN: 1
+
+-- Pantin Taj +1
+INSERT INTO `item_mods_pet` VALUES (11472,370,1,3); -- Automaton - REGEN: 1
+
+-- Spurrer Beret
+INSERT INTO `item_mods_pet` VALUES (11497,384,500,0); -- All Pets - HASTE_GEAR: 500
+
+-- Fidelity Mantle
+INSERT INTO `item_mods_pet` VALUES (11531,73,3,0); -- All Pets - STORETP: 3
+
+-- Wayang Kulit Mantle
+INSERT INTO `item_mods_pet` VALUES (11536,101,2,3); -- Automaton - AUTO_MELEE_SKILL: 2
+
+-- Ferine Mantle
+INSERT INTO `item_mods_pet` VALUES (11555,25,10,0); -- All Pets - ACC: 10
+
+-- Tiresias Cape
+INSERT INTO `item_mods_pet` VALUES (11564,28,1,1); -- Avatar - MATT: 1
+
+-- Karagoz Mantle
+INSERT INTO `item_mods_pet` VALUES (11571,25,12,3); -- Automaton - ACC: 12
+
+-- Eidolon Pendant
+INSERT INTO `item_mods_pet` VALUES (11612,28,2,1); -- Avatar - MATT: 2
+
+-- Ferine Necklace
+INSERT INTO `item_mods_pet` VALUES (11617,288,2,0); -- All Pets - DOUBLE_ATTACK: 2
+
+-- Callers Pendant
+INSERT INTO `item_mods_pet` VALUES (11619,368,25,1); -- Avatar - REGAIN: 25
+
+-- Ferine Earring
+INSERT INTO `item_mods_pet` VALUES (11711,25,3,0); -- All Pets - ACC: 3
+
+-- Cirque Earring
+INSERT INTO `item_mods_pet` VALUES (11720,23,2,3); -- Automaton - ATT: 2
+INSERT INTO `item_mods_pet` VALUES (11720,24,3,3); -- Automaton - RATT: 3
+INSERT INTO `item_mods_pet` VALUES (11720,28,3,3); -- Automaton - MATT: 3
+
+-- Callers Sash
+INSERT INTO `item_mods_pet` VALUES (11739,27,2,1); -- Avatar - ENMITY: 2
+INSERT INTO `item_mods_pet` VALUES (11739,28,2,1); -- Avatar - MATT: 2
+
+-- Ngen Seraweels
+INSERT INTO `item_mods_pet` VALUES (11987,126,5,1); -- Avatar - BP_DAMAGE: 5
+INSERT INTO `item_mods_pet` VALUES (11987,370,1,1); -- Avatar - REGEN: 1
+
+-- Evokers Horn
+INSERT INTO `item_mods_pet` VALUES (12520,27,-3,1); -- Avatar - ENMITY: -3
+
+-- Drachen Mail
+INSERT INTO `item_mods_pet` VALUES (12649,370,1,2); -- Wyvern - REGEN: 1
+
+-- Evokers Doublet
+INSERT INTO `item_mods_pet` VALUES (12650,27,-2,1); -- Avatar - ENMITY: -2
+
+-- Drachen Finger Gauntlets
+INSERT INTO `item_mods_pet` VALUES (13974,25,5,2); -- Wyvern - ACC: 5
+
+-- Evokers Bracers
+INSERT INTO `item_mods_pet` VALUES (13975,27,-2,1); -- Avatar - ENMITY: -2
+
+-- Evokers Pigaches
+INSERT INTO `item_mods_pet` VALUES (14103,27,-2,1); -- Avatar - ENMITY: -2
+INSERT INTO `item_mods_pet` VALUES (14103,68,5,1);  -- Avatar - EVA: 5
+
+-- Drachen Brais
+INSERT INTO `item_mods_pet` VALUES (14227,3,10,2); -- Wyvern - HPP: 10
+
+-- Evokers Spats
+INSERT INTO `item_mods_pet` VALUES (14228,25,10,1); -- Avatar - ACC: 10
+INSERT INTO `item_mods_pet` VALUES (14228,27,-2,1); -- Avatar - ENMITY: -2
+
+-- Wyvern Mail
+INSERT INTO `item_mods_pet` VALUES (14405,2,65,2);  -- Wyvern - HP: 65
+INSERT INTO `item_mods_pet` VALUES (14405,72,65,2); -- Wyvern - HPHEAL: 65
+
+-- Yinyang Robe
+INSERT INTO `item_mods_pet` VALUES (14468,27,5,1); -- Avatar - ENMITY: 5
+
+-- Drachen Mail +1
+INSERT INTO `item_mods_pet` VALUES (14486,370,1,2); -- Wyvern - REGEN: 1
+
+-- Summoners Doublet +1
+INSERT INTO `item_mods_pet` VALUES (14514,165,4,1); -- Avatar - CRITHITRATE: 4
+
+-- Puppetry Tobe
+INSERT INTO `item_mods_pet` VALUES (14523,2,20,4); -- Harlequin - HP: 20
+INSERT INTO `item_mods_pet` VALUES (14523,2,24,5); -- Valoredge - HP: 24
+INSERT INTO `item_mods_pet` VALUES (14523,2,18,6); -- Sharpshot - HP: 18
+INSERT INTO `item_mods_pet` VALUES (14523,2,16,7); -- Stormwaker - HP: 16
+INSERT INTO `item_mods_pet` VALUES (14523,5,20,4); -- Harlequin - MP: 20
+INSERT INTO `item_mods_pet` VALUES (14523,5,24,7); -- Stormwaker - MP: 24
+
+-- Ostreger Mitts
+INSERT INTO `item_mods_pet` VALUES (14872,2,10,2); -- Wyvern - HP: 10
+
+-- Drachen Finger Gauntlets +1
+INSERT INTO `item_mods_pet` VALUES (14903,25,5,2); -- Wyvern - ACC: 5
+
+-- Evokers Bracers +1
+INSERT INTO `item_mods_pet` VALUES (14904,27,-2,1); -- Avatar - ENMITY: -2
+
+-- Summoners Bracers +1
+INSERT INTO `item_mods_pet` VALUES (14923,25,14,1); -- Avatar - ACC: 14
+
+-- Beast Bazubands
+INSERT INTO `item_mods_pet` VALUES (14958,63,5,0); -- All Pets - DEFP: 5
+
+-- Pantin Dastanas
+INSERT INTO `item_mods_pet` VALUES (15031,384,300,3); -- Automaton - HASTE_GEAR: 300
+
+-- Pantin Dastanas +1
+INSERT INTO `item_mods_pet` VALUES (15032,384,300,3); -- Automaton - HASTE_GEAR: 300
+
+-- Summoners Doublet
+INSERT INTO `item_mods_pet` VALUES (15101,165,3,1); -- Avatar - CRITHITRATE: 3
+
+-- Summoners Bracers
+INSERT INTO `item_mods_pet` VALUES (15116,25,7,1); -- Avatar - ACC: 7
+
+-- Summoners Pigaches
+INSERT INTO `item_mods_pet` VALUES (15146,23,7,1);   -- Avatar - ATT: 7
+INSERT INTO `item_mods_pet` VALUES (15146,357,-2,1); -- Avatar - BP_DELAY: -2
+
+-- Evokers Horn +1
+INSERT INTO `item_mods_pet` VALUES (15239,27,-3,1); -- Avatar - ENMITY: -3
+
+-- Puppetry Taj
+INSERT INTO `item_mods_pet` VALUES (15267,71,3,3); -- Automaton - MPHEAL: 3
+INSERT INTO `item_mods_pet` VALUES (15267,72,3,3); -- Automaton - HPHEAL: 3
+
+-- Evokers Pigaches +1
+INSERT INTO `item_mods_pet` VALUES (15366,27,-4,1); -- Avatar - ENMITY: -4
+INSERT INTO `item_mods_pet` VALUES (15366,68,5,1);  -- Avatar - EVA: 5
+
+-- Falconers Hose
+INSERT INTO `item_mods_pet` VALUES (15367,2,30,2); -- Wyvern - HP: 30
+
+-- Drachen Brais +1
+INSERT INTO `item_mods_pet` VALUES (15574,3,15,2); -- Wyvern - HPP: 15
+
+-- Evokers Spats +1
+INSERT INTO `item_mods_pet` VALUES (15575,25,14,1); -- Avatar - ACC: 14
+INSERT INTO `item_mods_pet` VALUES (15575,27,-2,1); -- Avatar - ENMITY: -2
+
+-- Summoners Spats +1
+INSERT INTO `item_mods_pet` VALUES (15594,27,2,1); -- Avatar - ENMITY: 2
+
+-- Puppetry Churidars
+INSERT INTO `item_mods_pet` VALUES (15602,168,10,3); -- Automaton - SPELLINTERRUPT: 10
+INSERT INTO `item_mods_pet` VALUES (15602,374,5,3);  -- Automaton - CURE_POTENCY: 5
+
+-- Askar Dirs
+INSERT INTO `item_mods_pet` VALUES (15647,1,10,0); -- All Pets - DEF: 10
+
+-- Goliard Trews
+INSERT INTO `item_mods_pet` VALUES (15649,1,10,0); -- All Pets - DEF: 10
+
+-- Homam Gambieras
+INSERT INTO `item_mods_pet` VALUES (15661,2,50,2); -- Wyvern - HP: 50
+
+-- Summoners Pigaches +1
+INSERT INTO `item_mods_pet` VALUES (15679,23,10,1);  -- Avatar - ATT: 10
+INSERT INTO `item_mods_pet` VALUES (15679,27,2,1);   -- Avatar - ENMITY: 2
+INSERT INTO `item_mods_pet` VALUES (15679,357,-2,1); -- Avatar - BP_DELAY: -2
+
+-- Primal Belt
+INSERT INTO `item_mods_pet` VALUES (15910,1,5,0);  -- All Pets - DEF: 5
+INSERT INTO `item_mods_pet` VALUES (15910,27,3,0); -- All Pets - ENMITY: 3
+
+-- Selemnus Belt
+INSERT INTO `item_mods_pet` VALUES (15944,163,-700,0); -- All Pets - DMGMAGIC: -700
+
+-- Pallass Shield
+INSERT INTO `item_mods_pet` VALUES (16173,1,10,0); -- All Pets - DEF: 10
+
+-- Pantin Cape
+INSERT INTO `item_mods_pet` VALUES (16245,23,15,3); -- Automaton - ATT: 15
+
+-- Chanoixs Gorget
+INSERT INTO `item_mods_pet` VALUES (16270,2,50,2); -- Wyvern - HP: 50
+
+-- Shepherds Chain
+INSERT INTO `item_mods_pet` VALUES (16297,161,-200,0); -- All Pets - DMGPHYS: -200
+
+-- Puppetry Churidars +1
+INSERT INTO `item_mods_pet` VALUES (16351,168,10,3); -- Automaton - SPELLINTERRUPT: 10
+INSERT INTO `item_mods_pet` VALUES (16351,374,5,3);  -- Automaton - CURE_POTENCY: 5
+
+-- Pantin Churidars
+INSERT INTO `item_mods_pet` VALUES (16352,30,5,3); -- Automaton - MACC: 5
+
+-- Pantin Churidars +1
+INSERT INTO `item_mods_pet` VALUES (16353,30,7,3); -- Automaton - MACC: 7
+
+-- Herders Subligar
+INSERT INTO `item_mods_pet` VALUES (16368,25,10,0); -- All Pets - ACC: 10
+
+-- Glyph Axe
+INSERT INTO `item_mods_pet` VALUES (16654,368,10,0); -- All Pets - REGAIN: 10
+
+-- Draconis Lance
+INSERT INTO `item_mods_pet` VALUES (16843,23,10,2); -- Wyvern - ATT: 10
+INSERT INTO `item_mods_pet` VALUES (16843,25,10,2); -- Wyvern - ACC: 10
+
+-- Wyvern Perch
+INSERT INTO `item_mods_pet` VALUES (17579,2,50,2); -- Wyvern - HP: 50
+
+-- Animator +1
+INSERT INTO `item_mods_pet` VALUES (17857,2,50,4); -- Harlequin - HP: 50
+INSERT INTO `item_mods_pet` VALUES (17857,2,60,5); -- Valoredge - HP: 60
+INSERT INTO `item_mods_pet` VALUES (17857,2,45,6); -- Sharpshot - HP: 45
+INSERT INTO `item_mods_pet` VALUES (17857,2,40,7); -- Stormwaker - HP: 40
+INSERT INTO `item_mods_pet` VALUES (17857,5,50,4); -- Harlequin - MP: 50
+INSERT INTO `item_mods_pet` VALUES (17857,5,60,7); -- Stormwaker - MP: 60
+
+-- Lion Tamer
+INSERT INTO `item_mods_pet` VALUES (17961,1,10,0); -- All Pets - DEF: 10
+
+-- Ravanas Axe
+INSERT INTO `item_mods_pet` VALUES (18547,370,3,0); -- All Pets - REGEN: 3
+
+-- Adaman Sainti
+INSERT INTO `item_mods_pet` VALUES (18745,3,1,3); -- Automaton - HPP: 1
+
+-- Gem Sainti
+INSERT INTO `item_mods_pet` VALUES (18746,3,2,3); -- Automaton - HPP: 2
+
+-- Marotte Claws
+INSERT INTO `item_mods_pet` VALUES (18778,369,1,3); -- Automaton - REFRESH: 1
+INSERT INTO `item_mods_pet` VALUES (18778,370,1,3); -- Automaton - REGEN: 1
+
+-- Burattinaios
+INSERT INTO `item_mods_pet` VALUES (18780,368,10,3); -- Automaton - REGAIN: 10
+
+-- Buzbaz Sainti
+INSERT INTO `item_mods_pet` VALUES (18791,2,30,3); -- Automaton - HP: 30
+INSERT INTO `item_mods_pet` VALUES (18791,23,9,3); -- Automaton - ATT: 9
+INSERT INTO `item_mods_pet` VALUES (18791,24,9,3); -- Automaton - RATT: 9
+
+-- Buzbaz Sainti +1
+INSERT INTO `item_mods_pet` VALUES (18792,2,40,3);  -- Automaton - HP: 40
+INSERT INTO `item_mods_pet` VALUES (18792,23,10,3); -- Automaton - ATT: 10
+INSERT INTO `item_mods_pet` VALUES (18792,24,10,3); -- Automaton - RATT: 10
+
+-- Aymur
+INSERT INTO `item_mods_pet` VALUES (18999,23,40,0); -- All Pets - ATT: 40
+
+-- Nirvana
+INSERT INTO `item_mods_pet` VALUES (19005,28,20,1); -- Avatar - MATT: 20
+
+-- Aymur
+INSERT INTO `item_mods_pet` VALUES (19068,23,50,0); -- All Pets - ATT: 50
+
+-- Nirvana
+INSERT INTO `item_mods_pet` VALUES (19074,28,25,1); -- Avatar - MATT: 25
+
+-- Aymur
+INSERT INTO `item_mods_pet` VALUES (19088,23,60,0); -- All Pets - ATT: 60
+
+-- Nirvana
+INSERT INTO `item_mods_pet` VALUES (19094,28,30,1); -- Avatar - MATT: 30
+
+-- Aymur
+INSERT INTO `item_mods_pet` VALUES (19620,23,70,0); -- All Pets - ATT: 70
+
+-- Nirvana
+INSERT INTO `item_mods_pet` VALUES (19626,28,35,1); -- Avatar - MATT: 35
+
+-- Aymur
+INSERT INTO `item_mods_pet` VALUES (19718,23,70,0); -- All Pets - ATT: 70
+
+-- Nirvana
+INSERT INTO `item_mods_pet` VALUES (19724,28,35,1); -- Avatar - MATT: 35
+
+-- Esper Stone
+INSERT INTO `item_mods_pet` VALUES (19772,28,1,1); -- Avatar - MATT: 1
+
+-- Aymur
+INSERT INTO `item_mods_pet` VALUES (19827,23,80,0); -- All Pets - ATT: 80
+
+-- Nirvana
+INSERT INTO `item_mods_pet` VALUES (19833,28,40,1); -- Avatar - MATT: 40
+
+-- Aymur
+INSERT INTO `item_mods_pet` VALUES (19956,23,80,0); -- All Pets - ATT: 80
+
+-- Nirvana
+INSERT INTO `item_mods_pet` VALUES (19962,28,40,1); -- Avatar - MATT: 40
+
+-- Denouements
+INSERT INTO `item_mods_pet` VALUES (20516,369,4,3); -- Automaton - REFRESH: 4
+INSERT INTO `item_mods_pet` VALUES (20516,370,4,3); -- Automaton - REGEN: 4
+
+-- Ohtas
+INSERT INTO `item_mods_pet` VALUES (20535,368,10,3); -- Automaton - REGAIN: 10
+INSERT INTO `item_mods_pet` VALUES (20535,369,1,3);  -- Automaton - REFRESH: 1
+
+-- Tinhaspa
+INSERT INTO `item_mods_pet` VALUES (20536,23,15,3); -- Automaton - ATT: 15
+INSERT INTO `item_mods_pet` VALUES (20536,24,15,3); -- Automaton - RATT: 15
+INSERT INTO `item_mods_pet` VALUES (20536,28,15,3); -- Automaton - MATT: 15
+
+-- Rigor Baghnakhs
+INSERT INTO `item_mods_pet` VALUES (20549,25,20,3); -- Automaton - ACC: 20
+INSERT INTO `item_mods_pet` VALUES (20549,26,20,3); -- Automaton - RACC: 20
+INSERT INTO `item_mods_pet` VALUES (20549,30,20,3); -- Automaton - MACC: 20
+
+-- Aymur
+INSERT INTO `item_mods_pet` VALUES (20792,23,80,0); -- All Pets - ATT: 80
+
+-- Aymur
+INSERT INTO `item_mods_pet` VALUES (20793,23,80,0); -- All Pets - ATT: 80
+
+-- Anahera Tabar
+INSERT INTO `item_mods_pet` VALUES (20822,27,6,0);  -- All Pets - ENMITY: 6
+INSERT INTO `item_mods_pet` VALUES (20822,68,40,0); -- All Pets - EVA: 40
+
+-- Aalak Axe
+INSERT INTO `item_mods_pet` VALUES (20831,288,2,0); -- All Pets - DOUBLE_ATTACK: 2
+
+-- Aalak Axe +1
+INSERT INTO `item_mods_pet` VALUES (20832,288,3,0); -- All Pets - DOUBLE_ATTACK: 3
+
+-- Pelagos Lance
+INSERT INTO `item_mods_pet` VALUES (20944,161,300,2); -- Wyvern - DMGPHYS: 300
+INSERT INTO `item_mods_pet` VALUES (20944,370,2,2);   -- Wyvern - REGEN: 2
+
+-- Nirvana
+INSERT INTO `item_mods_pet` VALUES (21141,126,40,1); -- Avatar - BP_DAMAGE: 40
+
+-- Nirvana
+INSERT INTO `item_mods_pet` VALUES (21142,126,40,1); -- Avatar - BP_DAMAGE: 40
+
+-- Marquetry Staff
+INSERT INTO `item_mods_pet` VALUES (21155,28,110,1); -- Avatar - MATT: 110
+INSERT INTO `item_mods_pet` VALUES (21155,30,35,1);  -- Avatar - MACC: 35
+INSERT INTO `item_mods_pet` VALUES (21155,126,3,1);  -- Avatar - BP_DAMAGE: 3
+
+-- Frazil Staff
+INSERT INTO `item_mods_pet` VALUES (21167,27,10,1);  -- Avatar - ENMITY: 10
+INSERT INTO `item_mods_pet` VALUES (21167,28,120,1); -- Avatar - MATT: 120
+INSERT INTO `item_mods_pet` VALUES (21167,30,20,1);  -- Avatar - MACC: 20
+
+-- Eminent Pole
+INSERT INTO `item_mods_pet` VALUES (21183,28,108,1); -- Avatar - MATT: 108
+
+-- Esper Stone +1
+INSERT INTO `item_mods_pet` VALUES (21361,28,6,0); -- All Pets - MATT: 6
+
+-- Dunna
+INSERT INTO `item_mods_pet` VALUES (21372,160,-500,8); -- Luopan - DMG: -500
+
+-- Hesperiidae
+INSERT INTO `item_mods_pet` VALUES (21430,25,10,0); -- All Pets - ACC: 10
+INSERT INTO `item_mods_pet` VALUES (21430,26,10,0); -- All Pets - RACC: 10
+INSERT INTO `item_mods_pet` VALUES (21430,30,10,0); -- All Pets - MACC: 10
+
+-- Epitaph
+INSERT INTO `item_mods_pet` VALUES (21432,126,16,1); -- Avatar - BP_DAMAGE: 16
+
+-- Arasy Sainti
+INSERT INTO `item_mods_pet` VALUES (21504,25,10,3); -- Automaton - ACC: 10
+INSERT INTO `item_mods_pet` VALUES (21504,30,10,3); -- Automaton - MACC: 10
+
+-- Arasy Sainti +1
+INSERT INTO `item_mods_pet` VALUES (21505,25,15,3); -- Automaton - ACC: 15
+INSERT INTO `item_mods_pet` VALUES (21505,30,15,3); -- Automaton - MACC: 15
+
+-- Xiucoatl
+INSERT INTO `item_mods_pet` VALUES (21526,25,50,3); -- Automaton - ACC: 50
+INSERT INTO `item_mods_pet` VALUES (21526,26,50,3); -- Automaton - RACC: 50
+INSERT INTO `item_mods_pet` VALUES (21526,30,50,3); -- Automaton - MACC: 50
+
+-- Sakpatas Fists
+INSERT INTO `item_mods_pet` VALUES (21527,8,20,3);  -- Automaton - STR: 20
+INSERT INTO `item_mods_pet` VALUES (21527,9,20,3);  -- Automaton - DEX: 20
+INSERT INTO `item_mods_pet` VALUES (21527,10,20,3); -- Automaton - VIT: 20
+INSERT INTO `item_mods_pet` VALUES (21527,11,20,3); -- Automaton - AGI: 20
+INSERT INTO `item_mods_pet` VALUES (21527,12,20,3); -- Automaton - INT: 20
+INSERT INTO `item_mods_pet` VALUES (21527,13,20,3); -- Automaton - MND: 20
+INSERT INTO `item_mods_pet` VALUES (21527,14,20,3); -- Automaton - CHR: 20
+INSERT INTO `item_mods_pet` VALUES (21527,25,50,3); -- Automaton - ACC: 50
+INSERT INTO `item_mods_pet` VALUES (21527,26,50,3); -- Automaton - RACC: 50
+INSERT INTO `item_mods_pet` VALUES (21527,30,50,3); -- Automaton - MACC: 50
+
+-- Dragon Fangs
+INSERT INTO `item_mods_pet` VALUES (21528,25,40,0); -- All Pets - ACC: 40
+INSERT INTO `item_mods_pet` VALUES (21528,26,40,0); -- All Pets - RACC: 40
+INSERT INTO `item_mods_pet` VALUES (21528,30,40,0); -- All Pets - MACC: 40
+
+-- Premium Heart
+INSERT INTO `item_mods_pet` VALUES (21529,25,40,0); -- All Pets - ACC: 40
+INSERT INTO `item_mods_pet` VALUES (21529,26,40,0); -- All Pets - RACC: 40
+INSERT INTO `item_mods_pet` VALUES (21529,30,40,0); -- All Pets - MACC: 40
+
+-- Monster Axe
+INSERT INTO `item_mods_pet` VALUES (21715,25,30,0); -- All Pets - ACC: 30
+INSERT INTO `item_mods_pet` VALUES (21715,26,30,0); -- All Pets - RACC: 30
+INSERT INTO `item_mods_pet` VALUES (21715,30,30,0); -- All Pets - MACC: 30
+
+-- Ankusa Axe
+INSERT INTO `item_mods_pet` VALUES (21716,25,40,0); -- All Pets - ACC: 40
+INSERT INTO `item_mods_pet` VALUES (21716,26,40,0); -- All Pets - RACC: 40
+INSERT INTO `item_mods_pet` VALUES (21716,30,40,0); -- All Pets - MACC: 40
+
+-- Pangu
+INSERT INTO `item_mods_pet` VALUES (21717,25,50,0); -- All Pets - ACC: 50
+INSERT INTO `item_mods_pet` VALUES (21717,26,50,0); -- All Pets - RACC: 50
+INSERT INTO `item_mods_pet` VALUES (21717,30,50,0); -- All Pets - MACC: 50
+
+-- Aymur
+INSERT INTO `item_mods_pet` VALUES (21751,23,80,0); -- All Pets - ATT: 80
+
+-- Arasy Lance
+INSERT INTO `item_mods_pet` VALUES (21865,370,5,2); -- Wyvern - REGEN: 5
+
+-- Arasy Lance +1
+INSERT INTO `item_mods_pet` VALUES (21866,370,8,2); -- Wyvern - REGEN: 8
+
+-- Arasy Rod
+INSERT INTO `item_mods_pet` VALUES (22015,30,10,1); -- Avatar - MACC: 10
+
+-- Arasy Rod +1
+INSERT INTO `item_mods_pet` VALUES (22016,30,15,1); -- Avatar - MACC: 15
+
+-- Grioavolr
+INSERT INTO `item_mods_pet` VALUES (22054,28,115,1); -- Avatar - MATT: 115
+INSERT INTO `item_mods_pet` VALUES (22054,30,35,1);  -- Avatar - MACC: 35
+
+-- Nirvana
+INSERT INTO `item_mods_pet` VALUES (22063,126,40,1); -- Avatar - BP_DAMAGE: 40
+
+-- Arasy Staff
+INSERT INTO `item_mods_pet` VALUES (22074,126,3,1); -- Avatar - BP_DAMAGE: 3
+
+-- Arasy Staff +1
+INSERT INTO `item_mods_pet` VALUES (22075,126,5,1); -- Avatar - BP_DAMAGE: 5
+
+-- Draumstafir
+INSERT INTO `item_mods_pet` VALUES (22096,25,50,1); -- Avatar - ACC: 50
+INSERT INTO `item_mods_pet` VALUES (22096,26,50,1); -- Avatar - RACC: 50
+INSERT INTO `item_mods_pet` VALUES (22096,30,50,1); -- Avatar - MACC: 50
+
+-- Elan Strap
+INSERT INTO `item_mods_pet` VALUES (22210,126,3,1); -- Avatar - BP_DAMAGE: 3
+
+-- Elan Strap +1
+INSERT INTO `item_mods_pet` VALUES (22211,126,5,1); -- Avatar - BP_DAMAGE: 5
+
+-- Foire Taj +2
+INSERT INTO `item_mods_pet` VALUES (23057,25,31,3);   -- Automaton - ACC: 31
+INSERT INTO `item_mods_pet` VALUES (23057,369,1,3);   -- Automaton - REFRESH: 1
+INSERT INTO `item_mods_pet` VALUES (23057,370,3,3);   -- Automaton - REGEN: 3
+INSERT INTO `item_mods_pet` VALUES (23057,384,600,3); -- Automaton - HASTE_GEAR: 600
+
+-- Bagua Galero +2
+INSERT INTO `item_mods_pet` VALUES (23083,2,500,8); -- Luopan - HP: 500
+
+-- Vishap Mail +2
+INSERT INTO `item_mods_pet` VALUES (23120,370,10,2); -- Wyvern - REGEN: 10
+
+-- Convokers Doublet +2
+INSERT INTO `item_mods_pet` VALUES (23121,25,35,1);  -- Avatar - ACC: 35
+INSERT INTO `item_mods_pet` VALUES (23121,30,35,1);  -- Avatar - MACC: 35
+INSERT INTO `item_mods_pet` VALUES (23121,126,14,1); -- Avatar - BP_DAMAGE: 14
+
+-- Foire Tobe +2
+INSERT INTO `item_mods_pet` VALUES (23124,2,165,3);   -- Automaton - HP: 165
+INSERT INTO `item_mods_pet` VALUES (23124,5,165,3);   -- Automaton - MP: 165
+INSERT INTO `item_mods_pet` VALUES (23124,384,400,3); -- Automaton - HASTE_GEAR: 400
+
+-- Foire Dastanas +2
+INSERT INTO `item_mods_pet` VALUES (23191,25,32,3);   -- Automaton - ACC: 32
+INSERT INTO `item_mods_pet` VALUES (23191,384,500,3); -- Automaton - HASTE_GEAR: 500
+
+-- Geomancy Mitaines +2
+INSERT INTO `item_mods_pet` VALUES (23195,160,-1200,8); -- Luopan - DMG: -1200
+
+-- Vishap Brais +2
+INSERT INTO `item_mods_pet` VALUES (23254,3,25,2); -- Wyvern - HPP: 25
+
+-- Foire Churidars +2
+INSERT INTO `item_mods_pet` VALUES (23258,5,75,3);     -- Automaton - MP: 75
+INSERT INTO `item_mods_pet` VALUES (23258,160,-300,3); -- Automaton - DMG: -300
+INSERT INTO `item_mods_pet` VALUES (23258,374,14,3);   -- Automaton - CURE_POTENCY: 14
+INSERT INTO `item_mods_pet` VALUES (23258,384,400,3);  -- Automaton - HASTE_GEAR: 400
+
+-- Foire Babouches +2
+INSERT INTO `item_mods_pet` VALUES (23325,28,20,3);   -- Automaton - MATT: 20
+INSERT INTO `item_mods_pet` VALUES (23325,30,40,3);   -- Automaton - MACC: 40
+INSERT INTO `item_mods_pet` VALUES (23325,384,400,3); -- Automaton - HASTE_GEAR: 400
+
+-- Bagua Sandals +2
+INSERT INTO `item_mods_pet` VALUES (23351,370,4,8); -- Luopan - REGEN: 4
+
+-- Foire Taj +3
+INSERT INTO `item_mods_pet` VALUES (23392,25,41,3);   -- Automaton - ACC: 41
+INSERT INTO `item_mods_pet` VALUES (23392,369,2,3);   -- Automaton - REFRESH: 2
+INSERT INTO `item_mods_pet` VALUES (23392,370,6,3);   -- Automaton - REGEN: 6
+INSERT INTO `item_mods_pet` VALUES (23392,384,700,3); -- Automaton - HASTE_GEAR: 700
+
+-- Bagua Galero +3
+INSERT INTO `item_mods_pet` VALUES (23418,2,600,8); -- Luopan - HP: 600
+
+-- Vishap Mail +3
+INSERT INTO `item_mods_pet` VALUES (23455,370,15,2); -- Wyvern - REGEN: 15
+
+-- Convokers Doublet +3
+INSERT INTO `item_mods_pet` VALUES (23456,25,45,1);  -- Avatar - ACC: 45
+INSERT INTO `item_mods_pet` VALUES (23456,30,45,1);  -- Avatar - MACC: 45
+INSERT INTO `item_mods_pet` VALUES (23456,126,16,1); -- Avatar - BP_DAMAGE: 16
+
+-- Foire Tobe +3
+INSERT INTO `item_mods_pet` VALUES (23459,2,220,3);   -- Automaton - HP: 220
+INSERT INTO `item_mods_pet` VALUES (23459,5,220,3);   -- Automaton - MP: 220
+INSERT INTO `item_mods_pet` VALUES (23459,384,500,3); -- Automaton - HASTE_GEAR: 500
+
+-- Foire Dastanas +3
+INSERT INTO `item_mods_pet` VALUES (23526,25,42,3);   -- Automaton - ACC: 42
+INSERT INTO `item_mods_pet` VALUES (23526,384,500,3); -- Automaton - HASTE_GEAR: 500
+
+-- Geomancy Mitaines +3
+INSERT INTO `item_mods_pet` VALUES (23530,160,-1300,8); -- Luopan - DMG: -1300
+
+-- Vishap Brais +3
+INSERT INTO `item_mods_pet` VALUES (23589,3,27,2); -- Wyvern - HPP: 27
+
+-- Foire Churidars +3
+INSERT INTO `item_mods_pet` VALUES (23593,5,75,3);     -- Automaton - MP: 75
+INSERT INTO `item_mods_pet` VALUES (23593,160,-600,3); -- Automaton - DMG: -600
+INSERT INTO `item_mods_pet` VALUES (23593,374,14,3);   -- Automaton - CURE_POTENCY: 14
+INSERT INTO `item_mods_pet` VALUES (23593,384,600,3);  -- Automaton - HASTE_GEAR: 600
+
+-- Foire Babouches +3
+INSERT INTO `item_mods_pet` VALUES (23660,28,25,3);   -- Automaton - MATT: 25
+INSERT INTO `item_mods_pet` VALUES (23660,30,50,3);   -- Automaton - MACC: 50
+INSERT INTO `item_mods_pet` VALUES (23660,384,500,3); -- Automaton - HASTE_GEAR: 500
+
+-- Ankusa Gaiters +3
+INSERT INTO `item_mods_pet` VALUES (23674,68,38,0);    -- All Pets - EVA: 38
+INSERT INTO `item_mods_pet` VALUES (23674,161,-500,0); -- All Pets - DMGPHYS: -500
+
+-- Pteroslaver Greaves +3
+INSERT INTO `item_mods_pet` VALUES (23679,2,290,2);  -- Wyvern - HP: 290
+INSERT INTO `item_mods_pet` VALUES (23679,370,10,2); -- Wyvern - REGEN: 10
+
+-- Glyphic Pigaches +3
+INSERT INTO `item_mods_pet` VALUES (23680,23,89,1);  -- Avatar - ATT: 89
+INSERT INTO `item_mods_pet` VALUES (23680,25,36,1);  -- Avatar - ACC: 36
+INSERT INTO `item_mods_pet` VALUES (23680,562,13,1); -- Avatar - MAGIC_CRITHITRATE: 13
+
+-- Pitre Babouches +3
+INSERT INTO `item_mods_pet` VALUES (23683,28,57,3); -- Automaton - MATT: 57
+INSERT INTO `item_mods_pet` VALUES (23683,30,43,3); -- Automaton - MACC: 43
+
+-- Bagua Sandals +3
+INSERT INTO `item_mods_pet` VALUES (23686,370,5,8); -- Luopan - REGEN: 5
+
+-- Gletis Mask
+INSERT INTO `item_mods_pet` VALUES (23756,25,50,0); -- All Pets - ACC: 50
+INSERT INTO `item_mods_pet` VALUES (23756,26,50,0); -- All Pets - RACC: 50
+INSERT INTO `item_mods_pet` VALUES (23756,30,50,0); -- All Pets - MACC: 50
+
+-- Mpacas Cap
+INSERT INTO `item_mods_pet` VALUES (23758,25,50,0); -- All Pets - ACC: 50
+INSERT INTO `item_mods_pet` VALUES (23758,26,50,0); -- All Pets - RACC: 50
+INSERT INTO `item_mods_pet` VALUES (23758,30,50,0); -- All Pets - MACC: 50
+
+-- Bunzis Hat
+INSERT INTO `item_mods_pet` VALUES (23760,25,50,0); -- All Pets - ACC: 50
+INSERT INTO `item_mods_pet` VALUES (23760,26,50,0); -- All Pets - RACC: 50
+INSERT INTO `item_mods_pet` VALUES (23760,30,50,0); -- All Pets - MACC: 50
+
+-- Nyame Helm
+INSERT INTO `item_mods_pet` VALUES (23761,25,50,0); -- All Pets - ACC: 50
+INSERT INTO `item_mods_pet` VALUES (23761,26,50,0); -- All Pets - RACC: 50
+INSERT INTO `item_mods_pet` VALUES (23761,30,50,0); -- All Pets - MACC: 50
+
+-- Gletis Cuirass
+INSERT INTO `item_mods_pet` VALUES (23763,25,50,0); -- All Pets - ACC: 50
+INSERT INTO `item_mods_pet` VALUES (23763,26,50,0); -- All Pets - RACC: 50
+INSERT INTO `item_mods_pet` VALUES (23763,30,50,0); -- All Pets - MACC: 50
+
+-- Mpacas Doublet
+INSERT INTO `item_mods_pet` VALUES (23765,25,50,0); -- All Pets - ACC: 50
+INSERT INTO `item_mods_pet` VALUES (23765,26,50,0); -- All Pets - RACC: 50
+INSERT INTO `item_mods_pet` VALUES (23765,30,50,0); -- All Pets - MACC: 50
+
+-- Bunzis Robe
+INSERT INTO `item_mods_pet` VALUES (23767,25,50,0); -- All Pets - ACC: 50
+INSERT INTO `item_mods_pet` VALUES (23767,26,50,0); -- All Pets - RACC: 50
+INSERT INTO `item_mods_pet` VALUES (23767,30,50,0); -- All Pets - MACC: 50
+
+-- Nyame Mail
+INSERT INTO `item_mods_pet` VALUES (23768,25,50,0); -- All Pets - ACC: 50
+INSERT INTO `item_mods_pet` VALUES (23768,26,50,0); -- All Pets - RACC: 50
+INSERT INTO `item_mods_pet` VALUES (23768,30,50,0); -- All Pets - MACC: 50
+
+-- Gletis Gauntlets
+INSERT INTO `item_mods_pet` VALUES (23770,25,50,0);   -- All Pets - ACC: 50
+INSERT INTO `item_mods_pet` VALUES (23770,26,50,0);   -- All Pets - RACC: 50
+INSERT INTO `item_mods_pet` VALUES (23770,30,50,0);   -- All Pets - MACC: 50
+INSERT INTO `item_mods_pet` VALUES (23770,160,-10,0); -- All Pets - DMG: -10
+
+-- Mpacas Gloves
+INSERT INTO `item_mods_pet` VALUES (23772,25,50,0);  -- All Pets - ACC: 50
+INSERT INTO `item_mods_pet` VALUES (23772,26,50,0);  -- All Pets - RACC: 50
+INSERT INTO `item_mods_pet` VALUES (23772,30,50,0);  -- All Pets - MACC: 50
+INSERT INTO `item_mods_pet` VALUES (23772,840,10,0); -- All Pets - ALL_WSDMG_ALL_HITS: 10
+
+-- Bunzis Gloves
+INSERT INTO `item_mods_pet` VALUES (23774,25,50,0); -- All Pets - ACC: 50
+INSERT INTO `item_mods_pet` VALUES (23774,26,50,0); -- All Pets - RACC: 50
+INSERT INTO `item_mods_pet` VALUES (23774,30,50,0); -- All Pets - MACC: 50
+
+-- Nyame Gauntlets
+INSERT INTO `item_mods_pet` VALUES (23775,25,50,0); -- All Pets - ACC: 50
+INSERT INTO `item_mods_pet` VALUES (23775,26,50,0); -- All Pets - RACC: 50
+INSERT INTO `item_mods_pet` VALUES (23775,30,50,0); -- All Pets - MACC: 50
+
+-- Gletis Breeches
+INSERT INTO `item_mods_pet` VALUES (23777,25,50,0); -- All Pets - ACC: 50
+INSERT INTO `item_mods_pet` VALUES (23777,26,50,0); -- All Pets - RACC: 50
+INSERT INTO `item_mods_pet` VALUES (23777,30,50,0); -- All Pets - MACC: 50
+
+-- Mpacas Hose
+INSERT INTO `item_mods_pet` VALUES (23779,25,50,0); -- All Pets - ACC: 50
+INSERT INTO `item_mods_pet` VALUES (23779,26,50,0); -- All Pets - RACC: 50
+INSERT INTO `item_mods_pet` VALUES (23779,30,50,0); -- All Pets - MACC: 50
+
+-- Bunzis Pants
+INSERT INTO `item_mods_pet` VALUES (23781,25,50,0); -- All Pets - ACC: 50
+INSERT INTO `item_mods_pet` VALUES (23781,26,50,0); -- All Pets - RACC: 50
+INSERT INTO `item_mods_pet` VALUES (23781,30,50,0); -- All Pets - MACC: 50
+
+-- Nyame Flanchard
+INSERT INTO `item_mods_pet` VALUES (23782,25,50,0); -- All Pets - ACC: 50
+INSERT INTO `item_mods_pet` VALUES (23782,26,50,0); -- All Pets - RACC: 50
+INSERT INTO `item_mods_pet` VALUES (23782,30,50,0); -- All Pets - MACC: 50
+
+-- Gletis Boots
+INSERT INTO `item_mods_pet` VALUES (23784,25,50,0); -- All Pets - ACC: 50
+INSERT INTO `item_mods_pet` VALUES (23784,26,50,0); -- All Pets - RACC: 50
+INSERT INTO `item_mods_pet` VALUES (23784,30,50,0); -- All Pets - MACC: 50
+
+-- Mpacas Boots
+INSERT INTO `item_mods_pet` VALUES (23786,25,50,0); -- All Pets - ACC: 50
+INSERT INTO `item_mods_pet` VALUES (23786,26,50,0); -- All Pets - RACC: 50
+INSERT INTO `item_mods_pet` VALUES (23786,30,50,0); -- All Pets - MACC: 50
+
+-- Bunzis Sabots
+INSERT INTO `item_mods_pet` VALUES (23788,25,50,0); -- All Pets - ACC: 50
+INSERT INTO `item_mods_pet` VALUES (23788,26,50,0); -- All Pets - RACC: 50
+INSERT INTO `item_mods_pet` VALUES (23788,30,50,0); -- All Pets - MACC: 50
+
+-- Nyame Sollerets
+INSERT INTO `item_mods_pet` VALUES (23789,25,50,0); -- All Pets - ACC: 50
+INSERT INTO `item_mods_pet` VALUES (23789,26,50,0); -- All Pets - RACC: 50
+INSERT INTO `item_mods_pet` VALUES (23789,30,50,0); -- All Pets - MACC: 50
+
+-- Beastmaster Collar
+INSERT INTO `item_mods_pet` VALUES (25465,25,15,0); -- All Pets - ACC: 15
+INSERT INTO `item_mods_pet` VALUES (25465,26,15,0); -- All Pets - RACC: 15
+INSERT INTO `item_mods_pet` VALUES (25465,30,15,0); -- All Pets - MACC: 15
+
+-- Beastmaster Collar +1
+INSERT INTO `item_mods_pet` VALUES (25466,25,20,0); -- All Pets - ACC: 20
+INSERT INTO `item_mods_pet` VALUES (25466,26,20,0); -- All Pets - RACC: 20
+INSERT INTO `item_mods_pet` VALUES (25466,30,20,0); -- All Pets - MACC: 20
+
+-- Beastmaster Collar +2
+INSERT INTO `item_mods_pet` VALUES (25467,25,25,0); -- All Pets - ACC: 25
+INSERT INTO `item_mods_pet` VALUES (25467,26,25,0); -- All Pets - RACC: 25
+INSERT INTO `item_mods_pet` VALUES (25467,30,25,0); -- All Pets - MACC: 25
+
+-- Summoners Collar
+INSERT INTO `item_mods_pet` VALUES (25501,25,15,1); -- Avatar - ACC: 15
+INSERT INTO `item_mods_pet` VALUES (25501,26,15,1); -- Avatar - RACC: 15
+INSERT INTO `item_mods_pet` VALUES (25501,30,15,1); -- Avatar - MACC: 15
+
+-- Summoners Collar +1
+INSERT INTO `item_mods_pet` VALUES (25502,25,20,1); -- Avatar - ACC: 20
+INSERT INTO `item_mods_pet` VALUES (25502,26,20,1); -- Avatar - RACC: 20
+INSERT INTO `item_mods_pet` VALUES (25502,30,20,1); -- Avatar - MACC: 20
+
+-- Summoners Collar +2
+INSERT INTO `item_mods_pet` VALUES (25503,25,25,1); -- Avatar - ACC: 25
+INSERT INTO `item_mods_pet` VALUES (25503,26,25,1); -- Avatar - RACC: 25
+INSERT INTO `item_mods_pet` VALUES (25503,30,25,1); -- Avatar - MACC: 25
+
+-- Puppetmasters Collar
+INSERT INTO `item_mods_pet` VALUES (25519,25,15,3); -- Automaton - ACC: 15
+INSERT INTO `item_mods_pet` VALUES (25519,26,15,3); -- Automaton - RACC: 15
+INSERT INTO `item_mods_pet` VALUES (25519,30,15,3); -- Automaton - MACC: 15
+
+-- Puppetmasters Collar +1
+INSERT INTO `item_mods_pet` VALUES (25520,25,20,3); -- Automaton - ACC: 20
+INSERT INTO `item_mods_pet` VALUES (25520,26,20,3); -- Automaton - RACC: 20
+INSERT INTO `item_mods_pet` VALUES (25520,30,20,3); -- Automaton - MACC: 20
+
+-- Puppetmasters Collar +2
+INSERT INTO `item_mods_pet` VALUES (25521,25,25,3); -- Automaton - ACC: 25
+INSERT INTO `item_mods_pet` VALUES (25521,26,25,3); -- Automaton - RACC: 25
+INSERT INTO `item_mods_pet` VALUES (25521,30,25,3); -- Automaton - MACC: 25
+
+-- Heyoka Cap
+INSERT INTO `item_mods_pet` VALUES (25563,25,40,0);   -- All Pets - ACC: 40
+INSERT INTO `item_mods_pet` VALUES (25563,26,40,0);   -- All Pets - RACC: 40
+INSERT INTO `item_mods_pet` VALUES (25563,27,8,0);    -- All Pets - ENMITY: 8
+INSERT INTO `item_mods_pet` VALUES (25563,384,600,0); -- All Pets - HASTE_GEAR: 600
+
+-- Heyoka Cap +1
+INSERT INTO `item_mods_pet` VALUES (25564,25,50,0);   -- All Pets - ACC: 50
+INSERT INTO `item_mods_pet` VALUES (25564,26,50,0);   -- All Pets - RACC: 50
+INSERT INTO `item_mods_pet` VALUES (25564,27,10,0);   -- All Pets - ENMITY: 10
+INSERT INTO `item_mods_pet` VALUES (25564,384,600,0); -- All Pets - HASTE_GEAR: 600
+
+-- Baayami Hat
+INSERT INTO `item_mods_pet` VALUES (25565,368,3,1); -- Avatar - REGAIN: 3
+
+-- Baayami Hat +1
+INSERT INTO `item_mods_pet` VALUES (25566,368,4,1); -- Avatar - REGAIN: 4
+
+-- Cath Palug Crown
+INSERT INTO `item_mods_pet` VALUES (25593,25,38,0);  -- All Pets - ACC: 38
+INSERT INTO `item_mods_pet` VALUES (25593,26,38,0);  -- All Pets - RACC: 38
+INSERT INTO `item_mods_pet` VALUES (25593,28,38,0);  -- All Pets - MATT: 38
+INSERT INTO `item_mods_pet` VALUES (25593,30,38,0);  -- All Pets - MACC: 38
+INSERT INTO `item_mods_pet` VALUES (25593,126,10,0); -- All Pets - BP_DAMAGE: 10
+
+-- Emicho Haubert +1
+INSERT INTO `item_mods_pet` VALUES (25683,28,35,0);    -- All Pets - MATT: 35
+INSERT INTO `item_mods_pet` VALUES (25683,160,-400,0); -- All Pets - DMG: -400
+
+-- Shulmanu Collar
+INSERT INTO `item_mods_pet` VALUES (26026,23,20,0); -- All Pets - ATT: 20
+INSERT INTO `item_mods_pet` VALUES (26026,25,20,0); -- All Pets - ACC: 20
+INSERT INTO `item_mods_pet` VALUES (26026,288,5,0); -- All Pets - DOUBLE_ATTACK: 5
+
+-- Lugalbanda Earring
+INSERT INTO `item_mods_pet` VALUES (26082,25,15,0);  -- All Pets - ACC: 15
+INSERT INTO `item_mods_pet` VALUES (26082,26,15,0);  -- All Pets - RACC: 15
+INSERT INTO `item_mods_pet` VALUES (26082,30,15,0);  -- All Pets - MACC: 15
+INSERT INTO `item_mods_pet` VALUES (26082,126,10,0); -- All Pets - BP_DAMAGE: 10
+
+-- Thurandaut Ring +1
+INSERT INTO `item_mods_pet` VALUES (26201,23,23,0);    -- All Pets - ATT: 23
+INSERT INTO `item_mods_pet` VALUES (26201,24,23,0);    -- All Pets - RATT: 23
+INSERT INTO `item_mods_pet` VALUES (26201,25,22,0);    -- All Pets - ACC: 22
+INSERT INTO `item_mods_pet` VALUES (26201,26,22,0);    -- All Pets - RACC: 22
+INSERT INTO `item_mods_pet` VALUES (26201,160,-400,0); -- All Pets - DMG: -400
+INSERT INTO `item_mods_pet` VALUES (26201,384,400,0);  -- All Pets - HASTE_GEAR: 400
+
+-- Scintillating Cape
+INSERT INTO `item_mods_pet` VALUES (26241,23,16,0); -- All Pets - ATT: 16
+INSERT INTO `item_mods_pet` VALUES (26241,28,16,0); -- All Pets - MATT: 16
+INSERT INTO `item_mods_pet` VALUES (26241,165,3,0); -- All Pets - CRITHITRATE: 3
+
+-- Glyphic Horn
+INSERT INTO `item_mods_pet` VALUES (26652,28,20,1); -- Avatar - MATT: 20
+
+-- Glyphic Horn +1
+INSERT INTO `item_mods_pet` VALUES (26653,28,23,1); -- Avatar - MATT: 23
+
+-- Pitre Taj
+INSERT INTO `item_mods_pet` VALUES (26658,369,2,3); -- Automaton - REFRESH: 2
+INSERT INTO `item_mods_pet` VALUES (26658,370,3,3); -- Automaton - REGEN: 3
+
+-- Pitre Taj +1
+INSERT INTO `item_mods_pet` VALUES (26659,369,3,3); -- Automaton - REFRESH: 3
+INSERT INTO `item_mods_pet` VALUES (26659,370,3,3); -- Automaton - REGEN: 3
+
+-- Karagoz Capello
+INSERT INTO `item_mods_pet` VALUES (26774,345,525,3); -- Automaton - TP_BONUS: 525
+
+-- Karagoz Capello +1
+INSERT INTO `item_mods_pet` VALUES (26775,345,550,3); -- Automaton - TP_BONUS: 550
+
+-- Glyphic Doublet
+INSERT INTO `item_mods_pet` VALUES (26828,165,8,1); -- Avatar - CRITHITRATE: 8
+
+-- Glyphic Doublet +1
+INSERT INTO `item_mods_pet` VALUES (26829,165,12,1); -- Avatar - CRITHITRATE: 12
+
+-- Pitre Tobe
+INSERT INTO `item_mods_pet` VALUES (26834,25,18,3); -- Automaton - ACC: 18
+INSERT INTO `item_mods_pet` VALUES (26834,26,18,3); -- Automaton - RACC: 18
+INSERT INTO `item_mods_pet` VALUES (26834,73,12,3); -- Automaton - STORETP: 12
+
+-- Pitre Tobe +1
+INSERT INTO `item_mods_pet` VALUES (26835,25,21,3); -- Automaton - ACC: 21
+INSERT INTO `item_mods_pet` VALUES (26835,26,21,3); -- Automaton - RACC: 21
+INSERT INTO `item_mods_pet` VALUES (26835,73,13,3); -- Automaton - STORETP: 13
+
+-- Apogee Dalmatica +1
+INSERT INTO `item_mods_pet` VALUES (26853,2,160,0); -- All Pets - HP: 160
+
+-- Shomonjijoe +1
+INSERT INTO `item_mods_pet` VALUES (26888,27,14,1); -- Avatar - ENMITY: 14
+
+-- Beckoners Doublet
+INSERT INTO `item_mods_pet` VALUES (26926,126,10,1); -- Avatar - BP_DAMAGE: 10
+
+-- Beckoners Doublet +1
+INSERT INTO `item_mods_pet` VALUES (26927,126,11,1); -- Avatar - BP_DAMAGE: 11
+
+-- Glyphic Bracers
+INSERT INTO `item_mods_pet` VALUES (27004,25,20,1);   -- Avatar - ACC: 20
+INSERT INTO `item_mods_pet` VALUES (27004,384,200,1); -- Avatar - HASTE_GEAR: 200
+
+-- Glyphic Bracers +1
+INSERT INTO `item_mods_pet` VALUES (27005,25,28,1);   -- Avatar - ACC: 28
+INSERT INTO `item_mods_pet` VALUES (27005,384,300,1); -- Avatar - HASTE_GEAR: 300
+
+-- Pitre Dastanas
+INSERT INTO `item_mods_pet` VALUES (27010,289,7,3);   -- Automaton - SUBTLE_BLOW: 7
+INSERT INTO `item_mods_pet` VALUES (27010,384,400,3); -- Automaton - HASTE_GEAR: 400
+
+-- Pitre Dastanas +1
+INSERT INTO `item_mods_pet` VALUES (27011,289,9,3);   -- Automaton - SUBTLE_BLOW: 9
+INSERT INTO `item_mods_pet` VALUES (27011,384,500,3); -- Automaton - HASTE_GEAR: 500
+
+-- Crushers Gauntlets
+INSERT INTO `item_mods_pet` VALUES (27044,2,50,2); -- Wyvern - HP: 50
+
+-- Beckoners Bracers
+INSERT INTO `item_mods_pet` VALUES (27080,25,20,1); -- Avatar - ACC: 20
+
+-- Beckoners Bracers +1
+INSERT INTO `item_mods_pet` VALUES (27081,25,30,1); -- Avatar - ACC: 30
+
+-- Karagoz Guanti
+INSERT INTO `item_mods_pet` VALUES (27086,8,13,3);  -- Automaton - STR: 13
+INSERT INTO `item_mods_pet` VALUES (27086,9,13,3);  -- Automaton - DEX: 13
+INSERT INTO `item_mods_pet` VALUES (27086,11,13,3); -- Automaton - AGI: 13
+
+-- Karagoz Guanti +1
+INSERT INTO `item_mods_pet` VALUES (27087,8,16,3);  -- Automaton - STR: 16
+INSERT INTO `item_mods_pet` VALUES (27087,9,16,3);  -- Automaton - DEX: 16
+INSERT INTO `item_mods_pet` VALUES (27087,11,16,3); -- Automaton - AGI: 16
+
+-- Glyphic Spats
+INSERT INTO `item_mods_pet` VALUES (27180,30,10,1); -- Avatar - MACC: 10
+
+-- Glyphic Spats +1
+INSERT INTO `item_mods_pet` VALUES (27181,30,13,1); -- Avatar - MACC: 13
+
+-- Pitre Churidars
+INSERT INTO `item_mods_pet` VALUES (27186,30,15,3); -- Automaton - MACC: 15
+INSERT INTO `item_mods_pet` VALUES (27186,170,7,3); -- Automaton - FASTCAST: 7
+
+-- Pitre Churidars +1
+INSERT INTO `item_mods_pet` VALUES (27187,30,18,3); -- Automaton - MACC: 18
+INSERT INTO `item_mods_pet` VALUES (27187,170,8,3); -- Automaton - FASTCAST: 8
+
+-- Avatara Slops
+INSERT INTO `item_mods_pet` VALUES (27221,27,4,1);  -- Avatar - ENMITY: 4
+INSERT INTO `item_mods_pet` VALUES (27221,126,7,1); -- Avatar - BP_DAMAGE: 7
+
+-- Beckoners Spats
+INSERT INTO `item_mods_pet` VALUES (27265,345,550,1); -- Avatar - TP_BONUS: 550
+
+-- Beckoners Spats +1
+INSERT INTO `item_mods_pet` VALUES (27266,345,600,1); -- Avatar - TP_BONUS: 600
+
+-- Emicho Hose +1
+INSERT INTO `item_mods_pet` VALUES (27299,3,21,0); -- All Pets - HPP: 21
+
+-- Glyphic Pigaches
+INSERT INTO `item_mods_pet` VALUES (27356,23,28,1); -- Avatar - ATT: 28
+INSERT INTO `item_mods_pet` VALUES (27356,562,7,1); -- Avatar - MAGIC_CRITHITRATE: 7
+
+-- Glyphic Pigaches +1
+INSERT INTO `item_mods_pet` VALUES (27357,23,28,1); -- Avatar - ATT: 28
+INSERT INTO `item_mods_pet` VALUES (27357,562,9,1); -- Avatar - MAGIC_CRITHITRATE: 9
+
+-- Pitre Babouches
+INSERT INTO `item_mods_pet` VALUES (27362,28,15,3); -- Automaton - MATT: 15
+INSERT INTO `item_mods_pet` VALUES (27362,30,12,3); -- Automaton - MACC: 12
+
+-- Pitre Babouches +1
+INSERT INTO `item_mods_pet` VALUES (27363,28,18,3); -- Automaton - MATT: 18
+INSERT INTO `item_mods_pet` VALUES (27363,30,15,3); -- Automaton - MACC: 15
+
+-- Bagua Sandals
+INSERT INTO `item_mods_pet` VALUES (27368,370,2,8); -- Luopan - REGEN: 2
+
+-- Bagua Sandals +1
+INSERT INTO `item_mods_pet` VALUES (27369,370,3,8); -- Luopan - REGEN: 3
+
+-- Beckoners Pigaches
+INSERT INTO `item_mods_pet` VALUES (27439,30,17,1); -- Avatar - MACC: 17
+
+-- Beckoners Pigaches +1
+INSERT INTO `item_mods_pet` VALUES (27440,30,27,1); -- Avatar - MACC: 27
+
+-- Karagoz Scarpe
+INSERT INTO `item_mods_pet` VALUES (27445,12,17,3); -- Automaton - INT: 17
+INSERT INTO `item_mods_pet` VALUES (27445,13,17,3); -- Automaton - MND: 17
+
+-- Karagoz Scarpe +1
+INSERT INTO `item_mods_pet` VALUES (27446,12,20,3); -- Automaton - INT: 20
+INSERT INTO `item_mods_pet` VALUES (27446,13,20,3); -- Automaton - MND: 20
+
+-- Emicho Gambieras +1
+INSERT INTO `item_mods_pet` VALUES (27470,480,6,0); -- All Pets - ABSORB_DMG_CHANCE: 6
+
+-- Convokers Horn
+INSERT INTO `item_mods_pet` VALUES (27677,27,4,1); -- Avatar - ENMITY: 4
+
+-- Foire Taj
+INSERT INTO `item_mods_pet` VALUES (27680,71,6,3);    -- Automaton - MPHEAL: 6
+INSERT INTO `item_mods_pet` VALUES (27680,72,6,3);    -- Automaton - HPHEAL: 6
+INSERT INTO `item_mods_pet` VALUES (27680,384,500,3); -- Automaton - HASTE_GEAR: 500
+
+-- Convokers Horn +1
+INSERT INTO `item_mods_pet` VALUES (27698,27,4,1); -- Avatar - ENMITY: 4
+
+-- Foire Taj +1
+INSERT INTO `item_mods_pet` VALUES (27701,71,8,3);    -- Automaton - MPHEAL: 8
+INSERT INTO `item_mods_pet` VALUES (27701,72,8,3);    -- Automaton - HPHEAL: 8
+INSERT INTO `item_mods_pet` VALUES (27701,384,500,3); -- Automaton - HASTE_GEAR: 500
+
+-- Vishap Mail
+INSERT INTO `item_mods_pet` VALUES (27820,370,2,2); -- Wyvern - REGEN: 2
+
+-- Convokers Doublet
+INSERT INTO `item_mods_pet` VALUES (27821,126,11,1); -- Avatar - BP_DAMAGE: 11
+
+-- Foire Tobe
+INSERT INTO `item_mods_pet` VALUES (27824,2,85,3);    -- Automaton - HP: 85
+INSERT INTO `item_mods_pet` VALUES (27824,5,85,3);    -- Automaton - MP: 85
+INSERT INTO `item_mods_pet` VALUES (27824,384,300,3); -- Automaton - HASTE_GEAR: 300
+
+-- Theophany Briault +1
+INSERT INTO `item_mods_pet` VALUES (27830,2,90,0); -- All Pets - HP: 90
+
+-- Vishap Mail +1
+INSERT INTO `item_mods_pet` VALUES (27841,370,3,2); -- Wyvern - REGEN: 3
+
+-- Convokers Doublet +1
+INSERT INTO `item_mods_pet` VALUES (27842,126,12,1); -- Avatar - BP_DAMAGE: 12
+
+-- Foire Tobe +1
+INSERT INTO `item_mods_pet` VALUES (27845,2,110,3);   -- Automaton - HP: 110
+INSERT INTO `item_mods_pet` VALUES (27845,5,110,3);   -- Automaton - MP: 110
+INSERT INTO `item_mods_pet` VALUES (27845,384,300,3); -- Automaton - HASTE_GEAR: 300
+
+-- Convokers Bracers
+INSERT INTO `item_mods_pet` VALUES (27957,27,5,1); -- Avatar - ENMITY: 5
+
+-- Foire Dastanas
+INSERT INTO `item_mods_pet` VALUES (27960,384,300,3); -- Automaton - HASTE_GEAR: 300
+
+-- Convokers Bracers +1
+INSERT INTO `item_mods_pet` VALUES (27978,27,5,1); -- Avatar - ENMITY: 5
+
+-- Foire Dastanas +1
+INSERT INTO `item_mods_pet` VALUES (27981,384,400,3); -- Automaton - HASTE_GEAR: 400
+
+-- Geomancy Mitaines +1
+INSERT INTO `item_mods_pet` VALUES (27985,160,-1100,8); -- Luopan - DMG: -1100
+
+-- Regimen Mittens
+INSERT INTO `item_mods_pet` VALUES (28025,25,20,0);   -- All Pets - ACC: 20
+INSERT INTO `item_mods_pet` VALUES (28025,26,20,0);   -- All Pets - RACC: 20
+INSERT INTO `item_mods_pet` VALUES (28025,30,20,0);   -- All Pets - MACC: 20
+INSERT INTO `item_mods_pet` VALUES (28025,384,600,0); -- All Pets - HASTE_GEAR: 600
+
+-- Geomancy Mitaines
+INSERT INTO `item_mods_pet` VALUES (28066,160,-1000,8); -- Luopan - DMG: -1000
+
+-- Vishap Brais
+INSERT INTO `item_mods_pet` VALUES (28103,3,20,2); -- Wyvern - HPP: 20
+
+-- Convokers Spats
+INSERT INTO `item_mods_pet` VALUES (28104,25,20,1); -- Avatar - ACC: 20
+INSERT INTO `item_mods_pet` VALUES (28104,27,4,1);  -- Avatar - ENMITY: 4
+
+-- Foire Churidars
+INSERT INTO `item_mods_pet` VALUES (28107,5,40,3);    -- Automaton - MP: 40
+INSERT INTO `item_mods_pet` VALUES (28107,374,10,3);  -- Automaton - CURE_POTENCY: 10
+INSERT INTO `item_mods_pet` VALUES (28107,384,300,3); -- Automaton - HASTE_GEAR: 300
+
+-- Totemic Trousers +1
+INSERT INTO `item_mods_pet` VALUES (28119,23,20,0); -- All Pets - ATT: 20
+
+-- Vishap Brais +1
+INSERT INTO `item_mods_pet` VALUES (28124,3,23,2); -- Wyvern - HPP: 23
+
+-- Convokers Spats +1
+INSERT INTO `item_mods_pet` VALUES (28125,25,20,1); -- Avatar - ACC: 20
+INSERT INTO `item_mods_pet` VALUES (28125,27,4,1);  -- Avatar - ENMITY: 4
+
+-- Foire Churidars +1
+INSERT INTO `item_mods_pet` VALUES (28128,5,50,3);    -- Automaton - MP: 50
+INSERT INTO `item_mods_pet` VALUES (28128,374,12,3);  -- Automaton - CURE_POTENCY: 12
+INSERT INTO `item_mods_pet` VALUES (28128,384,300,3); -- Automaton - HASTE_GEAR: 300
+
+-- Wisent Kecks
+INSERT INTO `item_mods_pet` VALUES (28141,23,10,0);   -- All Pets - ATT: 10
+INSERT INTO `item_mods_pet` VALUES (28141,24,10,0);   -- All Pets - RATT: 10
+INSERT INTO `item_mods_pet` VALUES (28141,25,20,0);   -- All Pets - ACC: 20
+INSERT INTO `item_mods_pet` VALUES (28141,26,20,0);   -- All Pets - RACC: 20
+INSERT INTO `item_mods_pet` VALUES (28141,68,20,0);   -- All Pets - EVA: 20
+INSERT INTO `item_mods_pet` VALUES (28141,384,300,0); -- All Pets - HASTE_GEAR: 300
+
+-- Marduks Crackows +1
+INSERT INTO `item_mods_pet` VALUES (28211,23,15,1);   -- Avatar - ATT: 15
+INSERT INTO `item_mods_pet` VALUES (28211,384,200,1); -- Avatar - HASTE_GEAR: 200
+
+-- Kers Sollerets
+INSERT INTO `item_mods_pet` VALUES (28213,23,13,2); -- Wyvern - ATT: 13
+
+-- Sigyns Jambeaux
+INSERT INTO `item_mods_pet` VALUES (28214,68,5,0); -- All Pets - EVA: 5
+
+-- Idis Ledelsens
+INSERT INTO `item_mods_pet` VALUES (28219,68,2,0); -- All Pets - EVA: 2
+
+-- Totemic Gaiters
+INSERT INTO `item_mods_pet` VALUES (28231,23,10,0); -- All Pets - ATT: 10
+INSERT INTO `item_mods_pet` VALUES (28231,25,10,0); -- All Pets - ACC: 10
+
+-- Convokers Pigaches
+INSERT INTO `item_mods_pet` VALUES (28237,27,5,1);  -- Avatar - ENMITY: 5
+INSERT INTO `item_mods_pet` VALUES (28237,68,20,1); -- Avatar - EVA: 20
+INSERT INTO `item_mods_pet` VALUES (28237,126,5,1); -- Avatar - BP_DAMAGE: 5
+
+-- Foire Babouches
+INSERT INTO `item_mods_pet` VALUES (28240,384,300,3); -- Automaton - HASTE_GEAR: 300
+
+-- Totemic Gaiters +1
+INSERT INTO `item_mods_pet` VALUES (28252,23,10,0); -- All Pets - ATT: 10
+INSERT INTO `item_mods_pet` VALUES (28252,25,10,0); -- All Pets - ACC: 10
+
+-- Convokers Pigaches +1
+INSERT INTO `item_mods_pet` VALUES (28258,27,5,1);  -- Avatar - ENMITY: 5
+INSERT INTO `item_mods_pet` VALUES (28258,68,20,1); -- Avatar - EVA: 20
+INSERT INTO `item_mods_pet` VALUES (28258,126,6,1); -- Avatar - BP_DAMAGE: 6
+
+-- Foire Babouches +1
+INSERT INTO `item_mods_pet` VALUES (28261,384,300,3); -- Automaton - HASTE_GEAR: 300
+
+-- Eidolon Pendant +1
+INSERT INTO `item_mods_pet` VALUES (28356,28,5,1); -- Avatar - MATT: 5
+
+-- Incarnation Sash
+INSERT INTO `item_mods_pet` VALUES (28418,25,15,0); -- All Pets - ACC: 15
+INSERT INTO `item_mods_pet` VALUES (28418,26,15,0); -- All Pets - RACC: 15
+INSERT INTO `item_mods_pet` VALUES (28418,30,15,0); -- All Pets - MACC: 15
+INSERT INTO `item_mods_pet` VALUES (28418,288,4,0); -- All Pets - DOUBLE_ATTACK: 4
+
+-- Ukko Sash
+INSERT INTO `item_mods_pet` VALUES (28432,25,15,3);   -- Automaton - ACC: 15
+INSERT INTO `item_mods_pet` VALUES (28432,26,15,3);   -- Automaton - RACC: 15
+INSERT INTO `item_mods_pet` VALUES (28432,30,15,3);   -- Automaton - MACC: 15
+INSERT INTO `item_mods_pet` VALUES (28432,170,5,3);   -- Automaton - FASTCAST: 5
+INSERT INTO `item_mods_pet` VALUES (28432,384,500,3); -- Automaton - HASTE_GEAR: 500
+
+-- Handlers Earring
+INSERT INTO `item_mods_pet` VALUES (28490,160,-400,0); -- All Pets - DMG: -400
+
+-- Handlers Earring +1
+INSERT INTO `item_mods_pet` VALUES (28491,160,-400,0); -- All Pets - DMG: -400
+
+-- Rimeice Earring
+INSERT INTO `item_mods_pet` VALUES (28495,27,5,0);    -- All Pets - ENMITY: 5
+INSERT INTO `item_mods_pet` VALUES (28495,160,100,0); -- All Pets - DMG: 100
+INSERT INTO `item_mods_pet` VALUES (28495,384,300,0); -- All Pets - HASTE_GEAR: 300
+
+-- Karagoz Mantle +1
+INSERT INTO `item_mods_pet` VALUES (28588,23,15,3); -- Automaton - ATT: 15
+INSERT INTO `item_mods_pet` VALUES (28588,25,15,3); -- Automaton - ACC: 15
+INSERT INTO `item_mods_pet` VALUES (28588,68,10,3); -- Automaton - EVA: 10
+
+-- Samanisi Cape
+INSERT INTO `item_mods_pet` VALUES (28605,25,7,1); -- Avatar - ACC: 7
+INSERT INTO `item_mods_pet` VALUES (28605,30,7,1); -- Avatar - MACC: 7
+
+-- Refraction Cape
+INSERT INTO `item_mods_pet` VALUES (28643,12,8,3); -- Automaton - INT: 8
+INSERT INTO `item_mods_pet` VALUES (28643,13,8,3); -- Automaton - MND: 8
+INSERT INTO `item_mods_pet` VALUES (28643,30,3,3); -- Automaton - MACC: 3

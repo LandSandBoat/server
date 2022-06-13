@@ -57,7 +57,7 @@ local zeroMultiplier  = 6
 xi.spells.spell_damage.calculateBaseDamage = function(caster, target, spell, spellId, skillType, statDiff)
     local spellDamage          = 0 -- The variable we want to calculate
     local baseSpellDamage      = 0 -- (V) In Wiki.
-    local baseSpellDamageBonus = 0 -- (mDMG) In Wiki. Get from equipment, status, etc...
+    local baseSpellDamageBonus = 0 -- (mDMG) In Wiki. Get from equipment, status, etc
     local statDiffBonus        = 0 -- statDiff x appropriate multipliers.
 
     -- Spell Damage = baseSpellDamage + statDiffBonus + baseSpellDamageBonus
@@ -819,7 +819,7 @@ xi.spells.spell_damage.useDamageSpell = function(caster, target, spell)
 
     -- Handle final adjustments. Most are located in core. TODO: Decide if we want core handling this.
     else
-        -- Handle Bind break and... TP?
+        -- Handle Bind break and TP?
         target:takeSpellDamage(caster, spell, finalDamage, xi.attackType.MAGICAL, xi.damageType.ELEMENTAL + spellElement)
 
         -- Handle Afflatus Misery.
