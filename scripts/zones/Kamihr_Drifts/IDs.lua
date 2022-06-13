@@ -31,6 +31,7 @@ zones[xi.zone.KAMIHR_DRIFTS] =
         SURPLUS_LOST_TO_AETHER     = 7711, -- A surplus of <number> kinetic unit[/s] has been lost to the aether.
         HOMEPOINT_SET              = 7963, -- Home point set!
         PATH_SEEMS_TO_LEAD         = 8039, -- This path seems to lead toward the summit of Mount Kamihr.
+        SNOW_DUSTED_CRAG_BLOCKS    = 8492, -- A snow-dusted crag blocks your path.
     },
     mob =
     {
