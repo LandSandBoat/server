@@ -47,7 +47,7 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.PIERCE_SDT, 0)
     mob:setMod(xi.mod.IMPACT_SDT, 1000)
     -- Set the magic resists. It always takes no damage from direct magic
-    mob:setMod(xi.mod.DMGMAGIC, -99)
+    mob:setMod(xi.mod.DMGMAGIC, -100)
     mob:SetAutoAttackEnabled(true)
     mob:SetMobAbilityEnabled(true)
 end
@@ -150,7 +150,7 @@ end
 
 entity.onMobWeaponSkill = function(target, mob, skill)
     local skillID = skill:getID()
-    if skillID == 1465 then
+    if skillID == 1465 then -- On Optic Induration Do this
         local opticCounter = mob:getLocalVar("opticCounter")
 
         opticCounter = opticCounter +1

@@ -48,11 +48,11 @@ end
 entity.onMagicCastingCheck = function(mob, target, spell)
     local rnd = math.random()
     if rnd < 0.2 then
-        return 274 -- sleepga II
+        return xi.magic.spell.SLEEPGA_II
     elseif rnd < 0.6 then
-        return 254 -- blind
+        return xi.magic.spell.BLIND
     else
-        return 232 -- bio III
+        return xi.magic.spell.BIO_III
     end
 end
 

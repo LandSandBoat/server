@@ -53,11 +53,11 @@ end
 entity.onMagicCastingCheck = function(mob, target, spell)
     local rnd = math.random()
     if rnd < 0.2 then
-        return 40 -- banishga III
+        return xi.magic.spell.BANISHGA_III
     elseif rnd < 0.6 then
-        return 31 -- banish IV
+        return xi.magic.spell.BANISH_IV
     else
-        return 112 -- flash
+        return xi.magic.spell.FLASH
     end
 end
 
