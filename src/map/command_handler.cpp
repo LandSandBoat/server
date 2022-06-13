@@ -21,11 +21,11 @@
 
 #include "command_handler.h"
 
+#include "autotranslate.h"
 #include "common/utils.h"
 #include "entities/charentity.h"
 #include "lua/lua_baseentity.h"
 #include "lua/luautils.h"
-#include "autotranslate.h"
 
 #include <cmath>
 #include <iostream>
@@ -149,11 +149,13 @@ int32 CCommandHandler::call(sol::state& lua, CCharEntity* PChar, const int8* com
     TracyZoneScoped;
 
     // On the way out of this function, clear the globals it leaves behind
+    // clang-format off
     ScopeGuard guard([&]()
     {
         lua.set("onTrigger", sol::lua_nil);
         lua.set("cmdprops", sol::lua_nil);
     });
+    // clang-format on
 
     // Before we begin, make sure these globals are cleared (just in case!)
     lua.set("onTrigger", sol::lua_nil);
@@ -181,7 +183,7 @@ int32 CCommandHandler::call(sol::state& lua, CCharEntity* PChar, const int8* com
     TracyZoneIString(commandline);
 
     auto filename   = fmt::format("./scripts/commands/{}.lua", cmdname.c_str());
-    auto loadResult = lua.safe_script_file(filename);
+    auto loadResult = lua.safe_script_file(filename, &sol::script_pass_on_error);
     if (!loadResult.valid())
     {
         sol::error err = loadResult;

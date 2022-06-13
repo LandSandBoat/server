@@ -42,7 +42,7 @@ end
 entity.onEventUpdate = function(player, csid, option)
     -- local itemid = 0
     local canEquip = 2 -- Faking it for now.
-    -- 0 = Wrong job, 1 = wrong level, 2 = Everything is in order, 3 or greater = menu exits...
+    -- 0 = Wrong job, 1 = wrong level, 2 = Everything is in order, 3 or greater = menu exits
     if csid == 13 and option >= 2 and option <= 2306 then
         -- itemid = getBastokNotesItem(option)
         player:updateEvent(0, 0, 0, 0, 0, 0, 0, canEquip) -- canEquip(player, itemid));  <- works for sanction NPC, wtf?

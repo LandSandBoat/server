@@ -569,11 +569,17 @@ int32 CBattleEntity::takeDamage(int32 amount, CBattleEntity* attacker /* = nullp
     // RoE Damage Taken Trigger
     if (this->objtype == TYPE_PC)
     {
-        roeutils::event(ROE_EVENT::ROE_DMGTAKEN, static_cast<CCharEntity*>(this), RoeDatagram("dmg", amount));
+        if (amount > 0)
+        {
+            roeutils::event(ROE_EVENT::ROE_DMGTAKEN, static_cast<CCharEntity*>(this), RoeDatagram("dmg", amount));
+        }
     }
     else if (PLastAttacker && PLastAttacker->objtype == TYPE_PC)
     {
-        roeutils::event(ROE_EVENT::ROE_DMGDEALT, static_cast<CCharEntity*>(attacker), RoeDatagram("dmg", amount));
+        if (amount > 0)
+        {
+            roeutils::event(ROE_EVENT::ROE_DMGDEALT, static_cast<CCharEntity*>(attacker), RoeDatagram("dmg", amount));
+        }
 
         // Took dmg from non ws source, so remove ws kill var
         this->SetLocalVar("weaponskillHit", 0);
@@ -1336,13 +1342,16 @@ void CBattleEntity::Die()
     TracyZoneScoped;
     if (CBaseEntity* PKiller = GetEntity(m_OwnerID.targid))
     {
-        static_cast<CBattleEntity*>(PKiller)->ForAlliance([this](CBattleEntity* PMember) {
+        // clang-format off
+        static_cast<CBattleEntity*>(PKiller)->ForAlliance([this](CBattleEntity* PMember)
+        {
             CCharEntity* member = static_cast<CCharEntity*>(PMember);
             if (member->PClaimedMob == this)
             {
                 member->PClaimedMob = nullptr;
             }
         });
+        // clang-format on
         PAI->EventHandler.triggerListener("DEATH", CLuaBaseEntity(this), CLuaBaseEntity(PKiller));
     }
     else
@@ -1452,6 +1461,8 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
         auto ce = PSpell->getCE();
         auto ve = PSpell->getVE();
 
+        int32 damage = 0;
+
         // Take all shadows
         if (PSpell->canTargetEnemy() && (aoeType > SPELLAOE_NONE || (PSpell->getFlag() & SPELLFLAG_WIPE_SHADOWS)))
         {
@@ -1470,13 +1481,14 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
         }
         else
         {
-            actionTarget.param = luautils::OnSpellCast(this, PTarget, PSpell);
+            damage = luautils::OnSpellCast(this, PTarget, PSpell);
 
             // Remove Saboteur
             if (PSpell->getSkillType() == SKILLTYPE::SKILL_ENFEEBLING_MAGIC)
             {
                 StatusEffectContainer->DelStatusEffect(EFFECT_SABOTEUR);
             }
+
             if (msg == MSGBASIC_NONE)
             {
                 msg = PSpell->getMessage();
@@ -1484,6 +1496,16 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
             else
             {
                 msg = PSpell->getAoEMessage();
+            }
+
+            if (damage < 0)
+            {
+                msg = MSGBASIC_MAGIC_RECOVERS_HP;
+                actionTarget.param = static_cast<uint16>(std::clamp(damage * -1 , 0, PTarget->GetMaxHP() - PTarget->health.hp));
+            }
+            else
+            {
+                actionTarget.param = damage;
             }
         }
 
@@ -1687,7 +1709,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
             if (!(attackRound.GetSATAOccured()) && battleutils::IsAbsorbByShadow(PTarget))
             {
                 actionTarget.messageID = MSGBASIC_SHADOW_ABSORB;
-                actionTarget.param = 1;
+                actionTarget.param     = 1;
                 actionTarget.reaction  = REACTION::EVADE;
                 attack.SetEvaded(true);
             }
@@ -1718,8 +1740,8 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                     {
                         actionTarget.spikesParam   = 1;
                         actionTarget.spikesMessage = MSGBASIC_COUNTER_ABS_BY_SHADOW;
-                        actionTarget.messageID = 0;
-                        actionTarget.param = 0;
+                        actionTarget.messageID     = 0;
+                        actionTarget.param         = 0;
                     }
                     else
                     {

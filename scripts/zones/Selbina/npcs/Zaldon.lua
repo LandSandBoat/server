@@ -522,7 +522,7 @@ entity.onTrade = function(player, npc, trade)
         if math.random(100) <= 20 then
             player:startEvent(35) -- Ring found !
         else
-            player:startEvent(36) -- Ring not found...
+            player:startEvent(36) -- Ring not found
         end
 
     -- A BOY'S DREAM

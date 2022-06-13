@@ -102,7 +102,7 @@ xi.znm.soultrapper.onItemUse = function(target, user, item)
     -- Determine Zeni starting value
     local zeni = xi.znm.soultrapper.getZeniValue(target, user, item)
 
-    -- Pick a skill totally at random...
+    -- Pick a skill totally at random
     local skillIndex, skillEntry = utils.randomEntryIdx(xi.pankration.feralSkills)
 
     -- Add plate

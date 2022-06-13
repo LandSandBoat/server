@@ -31,7 +31,8 @@ class CCharEntity;
 
 class CCaughtFishPacket : public CBasicPacket
 {
-    public: CCaughtFishPacket(CCharEntity* PChar, uint16 param0, uint16 messageID, uint8 count);
+public:
+    CCaughtFishPacket(CCharEntity* PChar, uint16 param0, uint16 messageID, uint8 count);
 };
 
 #endif

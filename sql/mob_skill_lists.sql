@@ -209,7 +209,7 @@ INSERT INTO `mob_skill_lists` VALUES ('Likho',53,555);
 INSERT INTO `mob_skill_lists` VALUES ('Omega',54,1533);
 INSERT INTO `mob_skill_lists` VALUES ('Omega',54,1534);
 INSERT INTO `mob_skill_lists` VALUES ('Omega',54,1535);
--- INSERT INTO `mob_skill_lists` VALUES ('Omega',54,1536)
+INSERT INTO `mob_skill_lists` VALUES ('Omega',54,1536);
 INSERT INTO `mob_skill_lists` VALUES ('Omega',54,1537);
 INSERT INTO `mob_skill_lists` VALUES ('Omega',54,1538);
 INSERT INTO `mob_skill_lists` VALUES ('Omega',54,1539);
@@ -887,7 +887,6 @@ INSERT INTO `mob_skill_lists` VALUES ('Puk',198,1718);
 INSERT INTO `mob_skill_lists` VALUES ('Puk',198,1720);
 INSERT INTO `mob_skill_lists` VALUES ('Puk',198,1721);
 INSERT INTO `mob_skill_lists` VALUES ('Puk',198,1722);
-INSERT INTO `mob_skill_lists` VALUES ('Puk',198,1723);
 INSERT INTO `mob_skill_lists` VALUES ('Qiqirn',199,1725);
 -- INSERT INTO `mob_skill_lists` VALUES ('Qiqirn',199,1726);
 INSERT INTO `mob_skill_lists` VALUES ('Qiqirn',199,1727);
@@ -1725,8 +1724,8 @@ INSERT INTO `mob_skill_lists` VALUES ('Automaton_Stormwaker',366,2301);
 -- INSERT INTO `mob_skill_lists` VALUES ('Automaton_Stormwaker',366,2942);
 -- INSERT INTO `mob_skill_lists` VALUES ('Automaton_Stormwaker',366,2943);
 -- INSERT INTO `mob_skill_lists` VALUES ('Automaton_Stormwaker',366,2944);
-INSERT INTO `mob_skill_lists` VALUES ('Doll',367,536);
-INSERT INTO `mob_skill_lists` VALUES ('Doll',368,539);
+INSERT INTO `mob_skill_lists` VALUES ('Faust',367,539);
+INSERT INTO `mob_skill_lists` VALUES ('Despot',368,536);
 INSERT INTO `mob_skill_lists` VALUES ('Leech',369,414);
 INSERT INTO `mob_skill_lists` VALUES ('Leech',369,415);
 INSERT INTO `mob_skill_lists` VALUES ('Leech',369,416);
@@ -2447,7 +2446,7 @@ INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1530);
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1532);
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1533);
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1534);
--- INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1536);
+INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1536);
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1538);
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1539);
 INSERT INTO `mob_skill_lists` VALUES ('Ultima',728,1259);
@@ -3791,8 +3790,13 @@ INSERT INTO `mob_skill_lists` VALUES ('Cop_Wardens',1170,562); -- Reactive Armor
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Shantotto_II_Melee',1163,3739); -- shantotto_ii_melee (no name)
 INSERT INTO `mob_skill_lists` VALUES ('Teporingo',1164,258);
 INSERT INTO `mob_skill_lists` VALUES ('Ladybug_Night',1167,2178);
+INSERT INTO `mob_skill_lists` VALUES ('Puk_M',1169,1718);
+INSERT INTO `mob_skill_lists` VALUES ('Puk_M',1169,1720);
+INSERT INTO `mob_skill_lists` VALUES ('Puk_M',1169,1721);
+INSERT INTO `mob_skill_lists` VALUES ('Puk_M',1169,1722);
+INSERT INTO `mob_skill_lists` VALUES ('Puk_M',1169,1723);
 
--- Next available ID: 1168
+-- Next available ID: 1170
 
 -- ------------------------------------------------------------
 -- Start of Ambuscade section

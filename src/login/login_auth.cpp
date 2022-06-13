@@ -62,8 +62,8 @@ int32 login_parse(int32 fd)
     if (sd == nullptr)
     {
         sessions[fd]->session_data = new login_session_data_t{};
-        sd                        = (login_session_data_t*)sessions[fd]->session_data;
-        sd->serviced              = 0;
+        sd                         = (login_session_data_t*)sessions[fd]->session_data;
+        sd->serviced               = 0;
         login_sd_list.push_back(sd);
         sd->client_addr = sessions[fd]->client_addr;
         sd->login_fd    = fd;
@@ -396,5 +396,6 @@ int32 do_close_login(login_session_data_t* loginsd, int32 fd)
 
 bool check_string(std::string const& str, std::size_t max_length)
 {
-    return !str.empty() && str.size() <= max_length && std::all_of(str.cbegin(), str.cend(), [](char const& c) { return c >= 0x20; });
+    return !str.empty() && str.size() <= max_length && std::all_of(str.cbegin(), str.cend(), [](char const& c)
+                                                                   { return c >= 0x20; });
 }

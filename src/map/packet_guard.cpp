@@ -54,7 +54,7 @@ namespace PacketGuard
         // Rate limiting
         // NOTE: You should rate limit any packet that a player can
         //       send at will that results in an immediate database hit
-        //ratelimitList[0x03B] = 1; // Mannequin Equip
+        // ratelimitList[0x03B] = 1; // Mannequin Equip
         ratelimitList[0x05D] = 2; // Emotes
         ratelimitList[0x11B] = 2; // Set Job Master Display
         ratelimitList[0x11D] = 2; // Jump
@@ -115,7 +115,8 @@ namespace PacketGuard
         {
             sortedVec.emplace_back(entry);
         }
-        std::sort(sortedVec.begin(), sortedVec.end(), [](pair_t& a, pair_t& b) { return a.second < b.second; });
+        std::sort(sortedVec.begin(), sortedVec.end(), [](pair_t& a, pair_t& b)
+                  { return a.second < b.second; });
 
         // Print
         std::string output;

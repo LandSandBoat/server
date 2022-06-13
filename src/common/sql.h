@@ -193,6 +193,8 @@ public:
 
     void HandleAsync();
 
+    void SetLatencyWarning(bool _LatencyWarning);
+
 private:
     Sql_t*      self;
     const char* m_User;
@@ -203,8 +205,10 @@ private:
 
     uint32 m_PingInterval;
     uint32 m_LastPing;
+    bool   m_LatencyWarning;
 
     void InitPreparedStatements();
+
     std::unordered_map<std::string, std::shared_ptr<SqlPreparedStatement>> m_PreparedStatements;
 };
 #endif // _COMMON_SQL_H

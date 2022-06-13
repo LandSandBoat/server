@@ -20,6 +20,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 */
 
 #include "common/blowfish.h"
+#include "common/console_service.h"
 #include "common/logging.h"
 #include "common/md52.h"
 #include "common/timer.h"
@@ -53,6 +54,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "ai/controllers/automaton_controller.h"
 #include "daily_system.h"
 #include "packets/basic.h"
+#include "packets/chat_message.h"
 #include "utils/battleutils.h"
 #include "utils/charutils.h"
 #include "utils/fishingutils.h"
@@ -110,7 +112,7 @@ namespace
     uint32 TotalPacketsToSendPerTick  = 0U;
     uint32 TotalPacketsSentPerTick    = 0U;
     uint32 TotalPacketsDelayedPerTick = 0U;
-}
+} // namespace
 
 /************************************************************************
  *                                                                       *
@@ -223,7 +225,7 @@ int32 do_init(int32 argc, char** argv)
                                           map_config.mysql_database.c_str());
 
     sql->Query("DELETE FROM accounts_sessions WHERE IF(%u = 0 AND %u = 0, true, server_addr = %u AND server_port = %u);",
-        map_ip.s_addr, map_port, map_ip.s_addr, map_port);
+               map_ip.s_addr, map_port, map_ip.s_addr, map_port);
 
     ShowStatus("do_init: zlib is reading");
     zlib_init();
@@ -295,7 +297,44 @@ int32 do_init(int32 argc, char** argv)
     ShowStatus("The map-server is ready to work!");
     ShowMessage("=======================================================================");
 
+    // clang-format off
     gConsoleService = std::make_unique<ConsoleService>();
+
+    gConsoleService->RegisterCommand("crash", "Force-crash the process.",
+    [](std::vector<std::string> inputs)
+    {
+        crash();
+    });
+
+    gConsoleService->RegisterCommand("gm", "Change a character's GM level.",
+    [](std::vector<std::string> inputs)
+    {
+        if (inputs.size() != 3)
+        {
+            fmt::print("Usage: gm <char_name> <level>. example: gm Testo 1\n");
+            return;
+        }
+
+        // TODO: Replace all usages of int8* with const char* or std::string.
+        auto* name  = (int8*)inputs[1].c_str();
+        auto* PChar = zoneutils::GetCharByName(name);
+        if (!PChar)
+        {
+            fmt::print("Couldnt find character: {}\n", name);
+            return;
+        }
+
+        auto level = std::clamp<uint8>(static_cast<uint8>(stoi(inputs[2])), 0, 5);
+
+        PChar->m_GMlevel = level;
+        charutils::SaveCharGMLevel(PChar);
+
+        fmt::print("Promoting {} to GM level {}\n", PChar->name, level);
+        PChar->pushPacket(new CChatMessagePacket(PChar, MESSAGE_SYSTEM_3,
+            fmt::format("You have been set to GM level {}.", level).c_str(), ""));
+
+    });
+    // clang-format on
 
     return 0;
 }
@@ -369,8 +408,8 @@ void ReportTracyStats()
     TracyReportLuaMemory(luautils::lua.lua_state());
 
     std::size_t activeZoneCount = 0;
-    std::size_t playerCount = 0;
-    std::size_t mobCount = 0;
+    std::size_t playerCount     = 0;
+    std::size_t mobCount        = 0;
 
     for (auto& [id, PZone] : g_PZoneList)
     {
@@ -391,8 +430,8 @@ void ReportTracyStats()
     TracyReportGraphNumber("Total Packets Sent Per Tick", static_cast<std::int64_t>(TotalPacketsSentPerTick));
     TracyReportGraphNumber("Total Packets Delayed Per Tick", static_cast<std::int64_t>(TotalPacketsDelayedPerTick));
 
-    TotalPacketsToSendPerTick = 0;
-    TotalPacketsSentPerTick = 0;
+    TotalPacketsToSendPerTick  = 0;
+    TotalPacketsSentPerTick    = 0;
     TotalPacketsDelayedPerTick = 0;
 }
 
@@ -754,7 +793,7 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
     ref<uint32>(buff, 8) = (uint32)time(nullptr);
 
     // build a large package, consisting of several small packets
-    CCharEntity*  PChar = map_session_data->PChar;
+    CCharEntity* PChar = map_session_data->PChar;
     TracyZoneString(PChar->name);
 
     CBasicPacket* PSmallPacket;
@@ -773,9 +812,9 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
     {
         do
         {
-            *buffsize                = FFXI_HEADER_SIZE;
-            PacketList_t packetList  = PChar->getPacketList();
-            packets                  = 0;
+            *buffsize               = FFXI_HEADER_SIZE;
+            PacketList_t packetList = PChar->getPacketList();
+            packets                 = 0;
 
             while (!packetList.empty() && *buffsize + packetList.front()->getSize() < MAX_BUFFER_SIZE && packets < PacketCount)
             {
@@ -865,7 +904,7 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
     if (remainingPackets > MAX_PACKET_BACKLOG_SIZE)
     {
         ShowWarning(fmt::format("Packet backlog for char {} in {} is {}! Limit is: {}",
-            PChar->name, PChar->loc.zone->GetName(), remainingPackets, MAX_PACKET_BACKLOG_SIZE));
+                                PChar->name, PChar->loc.zone->GetName(), remainingPackets, MAX_PACKET_BACKLOG_SIZE));
     }
 
     return 0;
@@ -1197,20 +1236,20 @@ int32 map_config_read(const int8* cfgName)
         ptr++;
         *ptr = '\0';
 
-        //int  stdout_with_ansisequence = 0; // unused
-        int  msg_silent               = 0;                    // Specifies how silent the console is.
-        char timestamp_format[20]     = "[%d/%b] [%H:%M:%S]"; // For displaying Timestamps, default value
+        // int  stdout_with_ansisequence = 0; // unused
+        int  msg_silent           = 0;                    // Specifies how silent the console is.
+        char timestamp_format[20] = "[%d/%b] [%H:%M:%S]"; // For displaying Timestamps, default value
 
         if (strcmpi(w1, "timestamp_format") == 0)
         {
             strncpy(timestamp_format, w2, 20);
         }
-/*      // unused
-        else if (strcmpi(w1, "stdout_with_ansisequence") == 0)
-        {
-            stdout_with_ansisequence = config_switch(w2);
-        }
-*/
+        /*      // unused
+                else if (strcmpi(w1, "stdout_with_ansisequence") == 0)
+                {
+                    stdout_with_ansisequence = config_switch(w2);
+                }
+        */
         else if (strcmpi(w1, "console_silent") == 0)
         {
             ShowInfo("Console Silent Setting: %d", atoi(w2));

@@ -57,7 +57,7 @@ local zeroMultiplier  = 6
 xi.spells.spell_damage.calculateBaseDamage = function(caster, target, spell, spellId, skillType, statDiff)
     local spellDamage          = 0 -- The variable we want to calculate
     local baseSpellDamage      = 0 -- (V) In Wiki.
-    local baseSpellDamageBonus = 0 -- (mDMG) In Wiki. Get from equipment, status, etc...
+    local baseSpellDamageBonus = 0 -- (mDMG) In Wiki. Get from equipment, status, etc
     local statDiffBonus        = 0 -- statDiff x appropriate multipliers.
 
     -- Spell Damage = baseSpellDamage + statDiffBonus + baseSpellDamageBonus
@@ -621,9 +621,13 @@ end
 -- Calculate: Target Magic Damage Adjustment (TMDA)
 -- SDT follow-up. This time for specific modifiers.
 -- Referred to on item as "Magic Damage Taken -%", "Damage Taken -%" (Ex. Defending Ring) and "Magic Damage Taken II -%" (Aegis)
-xi.spells.spell_damage.calculateTMDA = function(caster, target, spell)
+xi.spells.spell_damage.calculateTMDA = function(caster, target, damageType)
     local targetMagicDamageAdjustment = 1 -- The variable we want to calculate
 
+    targetMagicDamageAdjustment = target:checkLiementAbsorb(damageType) -- check for Liement.
+    if targetMagicDamageAdjustment < 0 then -- skip MDT/DT/MDTII etc for Liement if we absorb.
+        return targetMagicDamageAdjustment
+    end
     -- The values set for this modifiers are base 10,000.
     -- -2500 in item_mods.sql means -25% damage recived.
     -- 2500 would mean 25% ADDITIONAL damage taken.
@@ -634,7 +638,7 @@ xi.spells.spell_damage.calculateTMDA = function(caster, target, spell)
     local magicDamageTakenII  = target:getMod(xi.mod.DMGMAGIC_II) / 10000 -- Mod is base 10000
     local combinedDamageTaken = utils.clamp(magicDamageTaken + globalDamageTaken, -0.5, 0.5) -- The combination of regular "Damage Taken" and "Magic Damage Taken" caps at 50%
 
-    targetMagicDamageAdjustment = 1 + combinedDamageTaken + magicDamageTakenII -- "Magic Damage Taken II" bypasses the regular cap.
+    targetMagicDamageAdjustment = 1 + utils.clamp(combinedDamageTaken + magicDamageTakenII, -0.5, 0.125)  -- "Magic Damage Taken II" bypasses the regular cap, but combined cap is -87.5%
 
     return targetMagicDamageAdjustment
 end
@@ -728,10 +732,11 @@ xi.spells.spell_damage.useDamageSpell = function(caster, target, spell)
     local finalDamage  = 0 -- The variable we want to calculate
 
     -- Get Tabled Variables.
-    local spellId      = spell:getID()
-    local skillType    = spell:getSkillType()
-    local spellElement = spell:getElement()
-    local statDiff     = caster:getStat(spellTable[spellId][stat]) - target:getStat(spellTable[spellId][stat])
+    local spellId         = spell:getID()
+    local skillType       = spell:getSkillType()
+    local spellElement    = spell:getElement()
+    local statDiff        = caster:getStat(spellTable[spellId][stat]) - target:getStat(spellTable[spellId][stat])
+    local spellDamageType = xi.damageType.ELEMENTAL + spellElement
 
     -- Variables/steps to calculate finalDamage.
     local spellDamage                 = xi.spells.spell_damage.calculateBaseDamage(caster, target, spell, spellId, skillType, statDiff)
@@ -744,7 +749,7 @@ xi.spells.spell_damage.useDamageSpell = function(caster, target, spell)
     local magicBurstBonus             = xi.spells.spell_damage.calculateIfMagicBurstBonus(caster, target, spell, spellId, spellElement)
     local dayAndWeather               = xi.spells.spell_damage.calculateDayAndWeather(caster, target, spell, spellId, spellElement)
     local magicBonusDiff              = xi.spells.spell_damage.calculateMagicBonusDiff(caster, target, spell, spellId, skillType, spellElement)
-    local targetMagicDamageAdjustment = xi.spells.spell_damage.calculateTMDA(caster, target, spell)
+    local targetMagicDamageAdjustment = xi.spells.spell_damage.calculateTMDA(caster, target, spellDamageType)
     local ebullienceMultiplier        = xi.spells.spell_damage.calculateEbullienceMultiplier(caster, target, spell)
     local skillTypeMultiplier         = xi.spells.spell_damage.calculateSkillTypeMultiplier(caster, target, spell, skillType)
     local ninSkillBonus               = xi.spells.spell_damage.calculateNinSkillBonus(caster, target, spell, spellId, skillType)
@@ -756,16 +761,16 @@ xi.spells.spell_damage.useDamageSpell = function(caster, target, spell)
     -- printf("=====================")
     -- printf("spellDamage = %s", spellDamage)
     -- printf("======Multipliers====")
-    -- printf("MTDR = %s", MTDR)
+    -- printf("MTDR = %s", multipleTargetReduction)
     -- printf("eleStaffBonus = %s", eleStaffBonus)
     -- printf("magianAffinity = %s", magianAffinity)
-    -- printf("SDT = %s", SDT)
+    -- printf("SDT = %s", sdt)
     -- printf("resist = %s", resist)
     -- printf("magicBurst = %s", magicBurst)
     -- printf("magicBurstBonus = %s", magicBurstBonus)
     -- printf("dayAndWeather = %s", dayAndWeather)
     -- printf("magicBonusDiff = %s", magicBonusDiff)
-    -- printf("TMDA = %s", TMDA)
+    -- printf("TMDA = %s", targetMagicDamageAdjustment)
     -- printf("ebullienceMultiplier = %s", ebullienceMultiplier)
     -- printf("skillTypeMultiplier = %s", skillTypeMultiplier)
     -- printf("ninSkillBonus = %s", ninSkillBonus)
@@ -792,10 +797,6 @@ xi.spells.spell_damage.useDamageSpell = function(caster, target, spell)
     finalDamage = math.floor(finalDamage * undeadDivinePenalty)
     finalDamage = math.floor(finalDamage * nukeAbsorbOrNullify)
 
-    -- Handled in core (battleutils.cpp) Seems to do something relating to nullify and absorb damage...
-    -- Leaving it here for now, since it was originally there.
-    finalDamage = target:magicDmgTaken(finalDamage)
-
     -- Handle Phalanx
     if finalDamage > 0 then
         finalDamage = utils.clamp(finalDamage - target:getMod(xi.mod.PHALANX), 0, 99999)
@@ -818,7 +819,7 @@ xi.spells.spell_damage.useDamageSpell = function(caster, target, spell)
 
     -- Handle final adjustments. Most are located in core. TODO: Decide if we want core handling this.
     else
-        -- Handle Bind break and... TP?
+        -- Handle Bind break and TP?
         target:takeSpellDamage(caster, spell, finalDamage, xi.attackType.MAGICAL, xi.damageType.ELEMENTAL + spellElement)
 
         -- Handle Afflatus Misery.

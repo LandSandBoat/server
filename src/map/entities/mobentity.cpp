@@ -21,8 +21,6 @@
 
 #include "mobentity.h"
 
-#include "common/timer.h"
-#include "common/utils.h"
 #include "../ai/ai_container.h"
 #include "../ai/controllers/mob_controller.h"
 #include "../ai/helpers/pathfind.h"
@@ -50,6 +48,8 @@
 #include "../utils/mobutils.h"
 #include "../utils/petutils.h"
 #include "../weapon_skill.h"
+#include "common/timer.h"
+#include "common/utils.h"
 #include <cstring>
 
 CMobEntity::CMobEntity()
@@ -83,6 +83,7 @@ CMobEntity::CMobEntity()
     m_AllowRespawn = false;
     m_DropItemTime = 0;
     m_Family       = 0;
+    m_SuperFamily  = 0;
     m_Type         = MOBTYPE_NORMAL;
     m_Behaviour    = BEHAVIOUR_NONE;
     m_SpawnType    = SPAWNTYPE_NORMAL;
@@ -705,7 +706,7 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
 
         // reset the skill's message back to default
         PSkill->setMsg(defaultMessage);
-
+        int32 damage = 0;
         if (objtype == TYPE_PET && static_cast<CPetEntity*>(this)->getPetType() != PET_TYPE::JUG_PET)
         {
             PET_TYPE petType = static_cast<CPetEntity*>(this)->getPetType();
@@ -717,16 +718,16 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
 
             if (petType == PET_TYPE::AUTOMATON)
             {
-                target.param = luautils::OnAutomatonAbility(PTarget, this, PSkill, PMaster, &action);
+                damage = luautils::OnAutomatonAbility(PTarget, this, PSkill, PMaster, &action);
             }
             else
             {
-                target.param = luautils::OnPetAbility(PTarget, this, PSkill, PMaster, &action);
+                damage = luautils::OnPetAbility(PTarget, this, PSkill, PMaster, &action);
             }
         }
         else
         {
-            target.param = luautils::OnMobWeaponSkill(PTarget, this, PSkill, &action);
+            damage = luautils::OnMobWeaponSkill(PTarget, this, PSkill, &action);
             this->PAI->EventHandler.triggerListener("WEAPONSKILL_USE", CLuaBaseEntity(this), CLuaBaseEntity(PTarget), PSkill->getID(), state.GetSpentTP(), &action);
             PTarget->PAI->EventHandler.triggerListener("WEAPONSKILL_TAKE", CLuaBaseEntity(PTarget), CLuaBaseEntity(this), PSkill->getID(), state.GetSpentTP(), &action);
         }
@@ -738,6 +739,16 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
         else
         {
             msg = PSkill->getAoEMsg();
+        }
+
+        if (damage < 0)
+        {
+            msg = MSGBASIC_SKILL_RECOVERS_HP; // TODO: verify this message does/does not vary depending on mob/avatar/automaton use
+            target.param = std::clamp(-damage,0, PTarget->GetMaxHP() - PTarget->health.hp);
+        }
+        else
+        {
+            target.param = damage;
         }
 
         target.messageID = msg;
@@ -753,7 +764,7 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
         }
         else
         {
-            target.reaction = REACTION::HIT;
+            target.reaction   = REACTION::HIT;
             target.speceffect = SPECEFFECT::HIT;
         }
 
@@ -821,7 +832,9 @@ void CMobEntity::DistributeRewards()
             m_UsedSkillIds.clear();
 
             // RoE Mob kill event for all party members
-            PChar->ForAlliance([this, PChar](CBattleEntity* PMember) {
+            // clang-format off
+            PChar->ForAlliance([this, PChar](CBattleEntity* PMember)
+            {
                 if (PMember->getZone() == PChar->getZone())
                 {
                     RoeDatagramList datagrams;
@@ -830,6 +843,7 @@ void CMobEntity::DistributeRewards()
                     roeutils::event(ROE_MOBKILL, (CCharEntity*)PMember, datagrams);
                 }
             });
+            // clang-format on
 
             if (m_giveExp && !PChar->StatusEffectContainer->HasStatusEffect(EFFECT_BATTLEFIELD))
             {
@@ -898,8 +912,8 @@ void CMobEntity::DropItems(CCharEntity* PChar)
     // Apply m_DropListModifications changes to DropList
     for (auto& entry : m_DropListModifications)
     {
-        uint16 itemID = entry.first;
-        uint16 dropRate = entry.second.first;
+        uint16    itemID   = entry.first;
+        uint16    dropRate = entry.second.first;
         DROP_TYPE dropType = static_cast<DROP_TYPE>(entry.second.second);
 
         if (dropType == DROP_NORMAL)
@@ -972,7 +986,7 @@ void CMobEntity::DropItems(CCharEntity* PChar)
 
     bool validZone = ((Pzone > 0 && Pzone < 39) || (Pzone > 42 && Pzone < 134) || (Pzone > 135 && Pzone < 185) || (Pzone > 188 && Pzone < 255));
 
-    if (validZone && charutils::CheckMob(m_HiPCLvl, GetMLevel()) > EMobDifficulty::TooWeak)
+    if (!getMobMod(MOBMOD_NO_DROPS) && validZone && charutils::CheckMob(m_HiPCLvl, GetMLevel()) > EMobDifficulty::TooWeak)
     {
         // check for seal drops
         /* MobLvl >= 1 = Beastmen Seals ID=1126
@@ -980,7 +994,7 @@ void CMobEntity::DropItems(CCharEntity* PChar)
         >= 75 = Kindred Crests ID=2955
         >= 90 = High Kindred Crests ID=2956
         */
-        if (xirand::GetRandomNumber(100) < 20 && PChar->PTreasurePool->CanAddSeal() && !getMobMod(MOBMOD_NO_DROPS))
+        if (xirand::GetRandomNumber(100) < 20 && PChar->PTreasurePool->CanAddSeal())
         {
             // RULES: Only 1 kind may drop per mob
             if (GetMLevel() >= 75 && luautils::IsContentEnabled("ABYSSEA")) // all 4 types
@@ -1228,7 +1242,9 @@ void CMobEntity::DropItems(CCharEntity* PChar)
             }
         }
         uint8 crystalRolls = 0;
-        PChar->ForParty([this, &crystalRolls, &effect](CBattleEntity* PMember) {
+        // clang-format off
+        PChar->ForParty([this, &crystalRolls, &effect](CBattleEntity* PMember)
+        {
             switch (effect)
             {
                 case 1:
@@ -1256,6 +1272,8 @@ void CMobEntity::DropItems(CCharEntity* PChar)
                     break;
             }
         });
+        // clang-forman on
+
         for (uint8 i = 0; i < crystalRolls; i++)
         {
             if (xirand::GetRandomNumber(100) < 20 && AddItemToPool(4095 + m_Element, ++dropCount))
@@ -1307,13 +1325,17 @@ void CMobEntity::OnEngage(CAttackState& state)
         }
         if (PTarget->objtype == TYPE_PC)
         {
-            ((CCharEntity*)PTarget)->ForAlliance([this, PTarget, range](CBattleEntity* PMember) {
+            // clang-format off
+            ((CCharEntity*)PTarget)->ForAlliance([this, PTarget, range](CBattleEntity* PMember)
+            {
                 auto currentDistance = distance(PMember->loc.p, PTarget->loc.p);
                 if (currentDistance < range)
                 {
                     this->PEnmityContainer->AddBaseEnmity(PMember);
                 }
             });
+            // clang-format on
+
             this->PEnmityContainer->UpdateEnmity((PPet ? (CBattleEntity*)PPet : (CBattleEntity*)PTarget), 0, 1); // Set VE so target doesn't change
         }
     }

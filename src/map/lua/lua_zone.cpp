@@ -24,13 +24,13 @@
 #include "../campaign_system.h"
 #include "../entities/charentity.h"
 #include "../entities/npcentity.h"
+#include "../mob_modifier.h"
 #include "../region.h"
+#include "../utils/mobutils.h"
 #include "../zone.h"
 #include "../zone_entities.h"
 #include "lua_baseentity.h"
 #include "lua_zone.h"
-#include "../utils/mobutils.h"
-#include "../mob_modifier.h"
 
 CLuaZone::CLuaZone(CZone* PZone)
 : m_pLuaZone(PZone)
@@ -40,7 +40,6 @@ CLuaZone::CLuaZone(CZone* PZone)
         ShowError("CLuaZone created with nullptr instead of valid CZone*!");
     }
 }
-
 
 /************************************************************************
  *  Function: getLocalVar()
@@ -111,21 +110,36 @@ sol::object CLuaZone::levelRestriction()
 sol::table CLuaZone::getPlayers()
 {
     auto table = luautils::lua.create_table();
-    m_pLuaZone->ForEachChar([&table](CCharEntity* PChar) { table.add(CLuaBaseEntity(PChar)); });
+    // clang-format off
+    m_pLuaZone->ForEachChar([&table](CCharEntity* PChar)
+    {
+        table.add(CLuaBaseEntity(PChar));
+    });
+    // clang-format on
     return table;
 }
 
 sol::table CLuaZone::getNPCs()
 {
     auto table = luautils::lua.create_table();
-    m_pLuaZone->ForEachNpc([&table](CNpcEntity* PNpc) { table.add(CLuaBaseEntity(PNpc)); });
+    // clang-format off
+    m_pLuaZone->ForEachNpc([&table](CNpcEntity* PNpc)
+    {
+        table.add(CLuaBaseEntity(PNpc));
+    });
+    // clang-format on
     return table;
 }
 
 sol::table CLuaZone::getMobs()
 {
     auto table = luautils::lua.create_table();
-    m_pLuaZone->ForEachMob([&table](CMobEntity* PMob) { table.add(CLuaBaseEntity(PMob)); });
+    // clang-format off
+    m_pLuaZone->ForEachMob([&table](CMobEntity* PMob)
+    {
+        table.add(CLuaBaseEntity(PMob));
+    });
+    // clang-format on
     return table;
 }
 
@@ -266,6 +280,18 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
     }
     else if (auto* PMob = dynamic_cast<CMobEntity*>(PEntity))
     {
+        auto mixins = table["mixins"].get_or<sol::table>(sol::lua_nil);
+        if (mixins.valid())
+        {
+            // Use the global function "applyMixins"
+            auto result = lua["applyMixins"](CLuaBaseEntity(PMob), mixins);
+            if (!result.valid())
+            {
+                sol::error err = result;
+                ShowError("applyMixins: %s: %s", PMob->name.c_str(), err.what());
+            }
+        }
+
         luautils::OnEntityLoad(PMob);
 
         luautils::OnMobInitialize(PMob);
@@ -370,6 +396,7 @@ sol::table CLuaZone::queryEntitiesByName(std::string const& name)
 
     // TODO: Make work for instances
     // TODO: Replace with a constant-time lookup
+    // clang-format off
     m_pLuaZone->ForEachNpc([&](CNpcEntity* PNpc)
     {
         if (std::string((const char*)PNpc->GetName()) == name)
@@ -385,6 +412,7 @@ sol::table CLuaZone::queryEntitiesByName(std::string const& name)
             table.add(CLuaBaseEntity(PMob));
         }
     });
+    // clang-format on
 
     if (table.empty())
     {

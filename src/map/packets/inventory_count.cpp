@@ -46,6 +46,7 @@ CInventoryCountPacket::CInventoryCountPacket(uint8 locationId, uint8 slotId, uin
 
     ref<uint8>(0x0B) = 0x01; // Update mask?
 
+    // clang-format off
     ref<uint16>(0x0C) = headId  + 0x1000;
     ref<uint16>(0x0E) = bodyId  + 0x2000;
     ref<uint16>(0x10) = handsId + 0x3000;
@@ -54,4 +55,5 @@ CInventoryCountPacket::CInventoryCountPacket(uint8 locationId, uint8 slotId, uin
     ref<uint16>(0x16) = mainId  + 0x6000;
     ref<uint16>(0x18) = subId   + 0x7000;
     ref<uint16>(0x1A) = rangeId + 0x8000;
+    // clang-format on
 }

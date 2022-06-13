@@ -51,9 +51,9 @@ CInstanceLoader::CInstanceLoader(uint16 instanceid, CCharEntity* PRequester)
         return;
     }
 
-    requester           = PRequester;
-    zone                = PZone;
-    instance = ((CZoneInstance*)PZone)->CreateInstance(instanceid);
+    requester = PRequester;
+    zone      = PZone;
+    instance  = ((CZoneInstance*)PZone)->CreateInstance(instanceid);
 }
 
 CInstanceLoader::~CInstanceLoader()
@@ -182,7 +182,7 @@ CInstance* CInstanceLoader::LoadInstance()
 
             // TODO: Remove me
             // Check if we should be looking up scripts for this mob
-            //PMob->m_HasSpellScript = (uint8)sql->GetIntData(64);
+            // PMob->m_HasSpellScript = (uint8)sql->GetIntData(64);
 
             PMob->m_SpellListContainer = mobSpellList::GetMobSpellList(sql->GetIntData(65));
 
@@ -221,11 +221,11 @@ CInstance* CInstanceLoader::LoadInstance()
         }
 
         Query = "SELECT npcid, name, pos_rot, pos_x, pos_y, pos_z,\
-			flag, speed, speedsub, animation, animationsub, namevis,\
-			status, entityFlags, look, name_prefix, widescan \
-			FROM instance_entities INNER JOIN npc_list ON \
-			(instance_entities.id = npc_list.npcid) \
-			WHERE instanceid = %u AND npcid >= %u and npcid < %u;";
+            flag, speed, speedsub, animation, animationsub, namevis,\
+            status, entityFlags, look, name_prefix, widescan \
+            FROM instance_entities INNER JOIN npc_list ON \
+            (instance_entities.id = npc_list.npcid) \
+            WHERE instanceid = %u AND npcid >= %u and npcid < %u;";
 
         uint32 zoneMin = (zone->GetID() << 12) + 0x1000000;
         uint32 zoneMax = zoneMin + 1024;

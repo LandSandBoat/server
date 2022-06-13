@@ -14,6 +14,7 @@ end
 zone_object.onInitialize = function(zone)
     defineZoneAroundXYZ(zone, 1, 100.580, -40.150, -63.830, 7) -- Area around Ploh Trishbahk (castle gate)
     defineZoneAroundXYZ(zone, 2, -80.214,  -0.150,  30.717, 7) -- Area around Oscairn (Peacekeeper Coalition)
+    defineZoneAroundXYZ(zone, 3, -94.478,  -0.650, -51.173, 4) -- Area around Wegellion (Scout's Coalition)
 end
 
 zone_object.onZoneIn = function(player, prevZone)

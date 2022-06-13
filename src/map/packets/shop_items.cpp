@@ -41,7 +41,7 @@ CShopItemsPacket::CShopItemsPacket(CCharEntity* PChar)
         {
             PChar->pushPacket(new CBasicPacket(*this));
 
-            i          = 0;
+            i = 0;
             this->setSize(0x08);
             memset(data + 4, 0, PACKET_SIZE - 8);
         }
