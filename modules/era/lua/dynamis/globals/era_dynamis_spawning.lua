@@ -533,6 +533,7 @@ xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID,
     end
     if xi.dynamis.mobList[zoneID][mobIndex].info[5] ~= nil then
         zone:setLocalVar(string.format("%s", xi.dynamis.mobList[zoneID][mobIndex].info[5]), 0)
+        mob:setLocalVar("hasMobVar", 1)
     end
     if oMob ~= nil and oMob ~= 0 then
         mob:setLocalVar("Parent", oMob:getID())
@@ -1197,6 +1198,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
     mob:setLocalVar(string.format("MobIndex_%s", mob:getID()), mobIndex)
     if xi.dynamis.mobList[zoneID][mobIndex].info[5] ~= nil then
         zone:setLocalVar(string.format("%s", xi.dynamis.mobList[zoneID][mobIndex].info[5]), 0)
+        mob:setLocalVar("hasMobVar", 1)
     end
     zone:setLocalVar(string.format("%s", mobName), mob:getID())
     if forceLink == true then
@@ -1800,9 +1802,13 @@ xi.dynamis.mobOnDeath = function (mob, player, mobVar)
     local zone = mob:getZone()
     local mobIndex = zone:getLocalVar(string.format("MobIndex_%s", mob:getID()))
     if mob:getLocalVar("dynamisMobOnDeathTriggered") == 1 then return -- Don't trigger more than once.
-    else -- Stops execution of code below if the above is true.:getZoneID()
-        if mobVar ~= nil then zone:setLocalVar(string.format("%s", xi.dynamis.mobList[mob:getZoneID()][mobIndex].info[5]), 0) end -- Set Death Requirements Variable
-        xi.dynamis.addTimeToDynamis(zone, mobIndex) -- Add Time
+    else -- Stops execution of code below if the above is true.
+        if mobIndex ~= 0 then
+            if mob:getLocalVar("hasMobVar") == 1 then
+                zone:setLocalVar(string.format("%s", xi.dynamis.mobList[mob:getZoneID()][mobIndex].info[5]), 1) -- Set Death Requirements Variable
+            end
+            xi.dynamis.addTimeToDynamis(zone, mobIndex) -- Add Time
+        end
         mob:setLocalVar("dynamisMobOnDeathTriggered", 1) -- onDeath lua happens once per party member that killed the mob, but we want this to only run once per mob
         if mob:getZoneID() == (xi.zone.DYNAMIS_BEAUCEDINE or xi.zone.DYNAMIS_XARCABARD) then
             if mob:getFamily() == (4 or 92 or 93 or 94 or 95) then
@@ -1811,19 +1817,13 @@ xi.dynamis.mobOnDeath = function (mob, player, mobVar)
                 player:addTreasure(4249, mob, 500) -- Adds Shultz's Strategems to Kindred and Hydra NMs in Dynamis Beaucedine and Xarcabard
             end
         end
-        if mob:getLocalVar("PetID") ~= 0 and mob:getMainJob() == xi.job.SMN then
-            if GetMobByID(mob:getLocalVar("PetID")):isAlive() then
-                GetMobByID(mob:getLocalVar("PetID")):setHP(0)
-            end
-        end
     end
 end
 
 m:addOverride("xi.dynamis.megaBossOnDeath", function(mob, player)
     local zoneID = mob:getZoneID()
     local mobIndex = mob:getZone():getLocalVar(string.format("MobIndex_%s", mob:getID()))
-    local mobName = xi.dynamis.mobList[zoneID][mobIndex].info[2]
-    local mobVar = xi.dynamis.nmInfoLookup[mobFamily][mobName][7]
+    local mobVar = xi.dynamis.mobList[mob:getZoneID()][mobIndex].info[5]
     if mob:getLocalVar("GaveTimeExtension") ~= 1 then -- Ensure we don't give more than 1 time extension.
         xi.dynamis.mobOnDeath(mob,mobVar) -- Process time extension and wave spawning
         local winQM = GetNPCByID(xi.dynamis.dynaInfoEra[zoneID].winQM) -- Set winQM
