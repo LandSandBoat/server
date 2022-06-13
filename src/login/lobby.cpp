@@ -313,7 +313,6 @@ int32 lobbydata_parse(int32 fd)
                 uint16 ZoneID   = 0;
                 uint16 PrevZone = 0;
                 uint16 gmlevel  = 0;
-                uint16 SessionCount = 0;
 
                 if (sql->Query(fmtQuery, charid, sd->accid) != SQL_ERROR && sql->NumRows() != 0)
                 {
@@ -345,13 +344,15 @@ int32 lobbydata_parse(int32 fd)
                     ShowInfo("lobbydata_parse: zoneid:(%u),zoneip:(%s),zoneport:(%u) for char:(%u)", ZoneID, ip2str(ntohl(ZoneIP)), ZonePort, charid);
 
                     // Check the number of sessions
+                    uint16 SessionCount = 0;
+
                     fmtQuery = "SELECT COUNT(client_addr) \
                                 FROM accounts_sessions \
                                 WHERE client_addr = %u;";
                     if (sql->Query(fmtQuery, sd->client_addr) != SQL_ERROR && sql->NumRows() != 0)
                     {
                         sql->NextRow();
-                        SessionCount = sql->GetIntData(0);
+                        SessionCount = (uint16)sql->GetIntData(0);
                         if (SessionCount >= login_config.login_limit)
                         {
                             ShowWarning("Already %u active sessions for %u (Limit is %u)", SessionCount, sd->client_addr, login_config.login_limit);
