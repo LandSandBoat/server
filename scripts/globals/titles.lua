@@ -1090,6 +1090,8 @@ xi.title =
     TIRELESS_TRACKER                          = 1139,
     GALKAN_HAZARD                             = 1140,
     BEARER_OF_SECRETS                         = 1141,
+    LONG_LIVE_MUMOR                           = 1142,
+    PARTER_OF_THE_VEIL                        = 1143,
 }
 
 -----------------------------------

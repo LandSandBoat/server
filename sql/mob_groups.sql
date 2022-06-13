@@ -1270,7 +1270,7 @@ INSERT INTO `mob_groups` VALUES (60,7033,33,'Omhpemde_nodive',960,0,1854,0,0,73,
 -- Grand_Palace_of_HuXzoi (Zone 34)
 -- ------------------------------------------------------------
 
-INSERT INTO `mob_groups` VALUES (1,1241,34,'Eoghrah',960,0,777,0,0,75,77,0);
+INSERT INTO `mob_groups` VALUES (1,1241,34,'Eoghrah',960,0,777,0,2000,75,77,0);
 INSERT INTO `mob_groups` VALUES (2,1242,34,'Eozdei',960,0,778,0,0,77,78,0);
 INSERT INTO `mob_groups` VALUES (3,1240,34,'Eoeuvhi',960,0,776,0,0,74,77,0);
 INSERT INTO `mob_groups` VALUES (4,6173,34,'Eoaern_war',960,0,775,0,0,79,82,0);
@@ -1291,7 +1291,7 @@ INSERT INTO `mob_groups` VALUES (18,6184,34,'Eoaern_sam',960,0,775,0,0,79,82,0);
 INSERT INTO `mob_groups` VALUES (19,55,34,'Aerns_Euvhi',0,128,0,0,0,63,65,0);
 INSERT INTO `mob_groups` VALUES (20,6180,34,'Eoaern_drk',960,0,775,0,9999,79,82,0);
 INSERT INTO `mob_groups` VALUES (21,6177,34,'Eoaern_rdm',960,0,775,0,9999,79,82,0);
-INSERT INTO `mob_groups` VALUES (22,2113,34,'Ixghrah',0,128,0,9000,0,76,76,0);
+INSERT INTO `mob_groups` VALUES (22,2113,34,'Ixghrah',0,128,0,9000,10000,76,76,0);
 INSERT INTO `mob_groups` VALUES (23,2136,34,'Jailer_of_Temperance',0,32,1402,22000,0,85,85,0);
 INSERT INTO `mob_groups` VALUES (24,4661,34,'Ixaern_mnk',0,128,2845,11000,0,80,80,0);
 INSERT INTO `mob_groups` VALUES (25,3269,34,'Qnaern_rdm',0,128,0,0,0,77,77,0);
@@ -1313,7 +1313,7 @@ INSERT INTO `mob_groups` VALUES (9,56,35,'Aerns_Wynav',0,128,0,0,0,65,68,0);
 INSERT INTO `mob_groups` VALUES (10,6174,35,'Awaern_mnk',960,0,198,0,0,81,84,0);
 INSERT INTO `mob_groups` VALUES (11,6175,35,'Awaern_whm',960,0,775,0,9999,81,84,0);
 INSERT INTO `mob_groups` VALUES (12,6182,35,'Awaern_brd',960,0,775,0,0,81,84,0);
-INSERT INTO `mob_groups` VALUES (13,300,35,'Awghrah',960,0,200,0,0,79,82,0);
+INSERT INTO `mob_groups` VALUES (13,300,35,'Awghrah',960,0,200,0,2000,79,82,0);
 INSERT INTO `mob_groups` VALUES (14,6181,35,'Awaern_bst',960,0,775,0,0,81,84,0);
 INSERT INTO `mob_groups` VALUES (15,55,35,'Aerns_Euvhi',0,128,0,0,0,65,68,0);
 INSERT INTO `mob_groups` VALUES (16,6173,35,'Awaern_war',960,0,775,0,0,81,84,0);
@@ -2480,7 +2480,7 @@ INSERT INTO `mob_groups` VALUES (21,4518,51,'Zoraal_Jas_Pkuucha',0,32,2810,0,0,7
 INSERT INTO `mob_groups` VALUES (22,3118,51,'Percipient_Zoraal_Ja',0,128,0,0,0,75,75,0);
 INSERT INTO `mob_groups` VALUES (23,67,51,'Aht_Urhgan_Attercop',300,0,34,0,0,65,67,0);
 INSERT INTO `mob_groups` VALUES (24,1900,51,'Haunt',330,1,1279,0,0,65,66,0);
-INSERT INTO `mob_groups` VALUES (25,3223,51,'Puk',330,0,2035,0,0,68,70,0);
+INSERT INTO `mob_groups` VALUES (25,3223,51,'Puk_WW',330,0,2035,0,0,68,70,0);
 INSERT INTO `mob_groups` VALUES (26,4360,51,'Woodland_Runner',330,0,600,0,0,71,72,0);
 INSERT INTO `mob_groups` VALUES (27,2526,51,'Mamool_Ja_Mimicker',300,0,1597,0,0,72,73,0);
 INSERT INTO `mob_groups` VALUES (28,958,51,'Defoliate_Treant',330,0,597,0,0,71,74,0);
@@ -3128,7 +3128,7 @@ INSERT INTO `mob_groups` VALUES (14,648,65,'Carriage_Lizard',960,0,424,0,0,70,72
 INSERT INTO `mob_groups` VALUES (15,4508,65,'Ziz',960,0,2805,0,0,76,78,0);
 INSERT INTO `mob_groups` VALUES (16,2535,65,'Mamool_Ja_Spearman',300,0,1588,0,0,73,75,0);
 INSERT INTO `mob_groups` VALUES (17,2541,65,'Mamool_Jas_Wyvern',0,128,0,0,0,66,68,0);
-INSERT INTO `mob_groups` VALUES (18,6604,65,'Puk',960,0,2036,0,0,70,72,0);
+INSERT INTO `mob_groups` VALUES (18,6604,65,'Puk_M',960,0,2036,0,0,70,72,0);
 INSERT INTO `mob_groups` VALUES (19,1019,65,'Devout_Radol_Ja',0,128,646,0,0,83,83,0);
 INSERT INTO `mob_groups` VALUES (20,4509,65,'Zizzy_Zillah',0,32,2807,0,0,79,79,0);
 INSERT INTO `mob_groups` VALUES (21,2518,65,'Mamool_Ja_Frogman',300,0,1590,0,0,75,76,0);
@@ -11926,7 +11926,7 @@ INSERT INTO `mob_groups` VALUES (11,2043,177,'Ice_Elemental',960,0,1347,0,0,79,8
 INSERT INTO `mob_groups` VALUES (12,1341,177,'Fire_Elemental',960,0,831,0,0,79,81,0);
 INSERT INTO `mob_groups` VALUES (13,2664,177,'Mimic',0,128,1687,0,0,75,78,0);
 INSERT INTO `mob_groups` VALUES (14,531,177,'Brigandish_Blade',0,128,357,14000,5000,82,84,0);
-INSERT INTO `mob_groups` VALUES (15,3763,177,'Steam_Cleaner',7200,0,2326,10000,0,81,82,0);
+INSERT INTO `mob_groups` VALUES (15,3763,177,'Steam_Cleaner',7200,128,2326,10000,0,81,82,0);
 INSERT INTO `mob_groups` VALUES (16,4504,177,'Zipacna',10800,0,2800,10000,0,83,85,0);
 INSERT INTO `mob_groups` VALUES (17,4719,177,'Uptala',0,128,0,0,0,95,96,0);
 INSERT INTO `mob_groups` VALUES (18,4718,177,'Bisa',0,128,0,0,5000,91,92,0);

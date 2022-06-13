@@ -4,8 +4,8 @@
 
 #include <filesystem>
 #include <functional>
-#include <string>
 #include <memory>
+#include <string>
 
 Filewatcher::Filewatcher(std::string const& path)
 #ifdef USE_GENERIC_FILEWATCHER

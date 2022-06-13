@@ -48,10 +48,10 @@ enum ENTITYUPDATE
 class CBasicPacket
 {
 protected:
-    uint8*  data;
+    uint8* data;
 
-// Mark these members as private, so that they can't be set without using their
-// specialised setters.
+    // Mark these members as private, so that they can't be set without using their
+    // specialised setters.
 private:
     uint8& type;
     uint8& size;
@@ -109,7 +109,7 @@ public:
     }
 
     CBasicPacket& operator=(const CBasicPacket& other) = delete;
-    CBasicPacket& operator=(CBasicPacket&& other) = delete;
+    CBasicPacket& operator=(CBasicPacket&& other)      = delete;
 
     /// <summary>
     /// Copies the given packet data.

@@ -19,12 +19,12 @@
 ===========================================================================
 */
 
-#include "../../common/socket.h"
-#include <string.h>
 #include "caught_fish.h"
+#include "../../common/socket.h"
 #include "../entities/charentity.h"
+#include <string.h>
 
-CCaughtFishPacket::CCaughtFishPacket(CCharEntity * PChar, uint16 param0, uint16 messageID, uint8 count) 
+CCaughtFishPacket::CCaughtFishPacket(CCharEntity* PChar, uint16 param0, uint16 messageID, uint8 count)
 {
     this->setType(0x27);
     this->setSize(0x70);
@@ -36,5 +36,5 @@ CCaughtFishPacket::CCaughtFishPacket(CCharEntity * PChar, uint16 param0, uint16 
     ref<uint8>(0x14)  = count;
     ref<uint32>(0x1C) = 0x00;
 
-    memcpy(data+(0x20), PChar->GetName(), PChar->name.size());
+    memcpy(data + (0x20), PChar->GetName(), PChar->name.size());
 }

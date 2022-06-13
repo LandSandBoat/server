@@ -33,27 +33,27 @@
 
 #include "spdlog/spdlog.h"
 
-#include "spdlog/fmt/fmt.h"
+#include "spdlog/fmt/bundled/chrono.h"
 #include "spdlog/fmt/bundled/core.h"
 #include "spdlog/fmt/bundled/format.h"
 #include "spdlog/fmt/bundled/printf.h"
-#include "spdlog/fmt/bundled/chrono.h"
+#include "spdlog/fmt/fmt.h"
 
 enum MSGTYPE
 {
-    MSG_STANDARD    = 0x0001,
-    MSG_STATUS      = 0x0002,
-    MSG_INFO        = 0x0004,
-    MSG_NOTICE      = 0x0008,
-    MSG_WARNING     = 0x0010,
-    MSG_DEBUG       = 0x0020,
-    MSG_ERROR       = 0x0040,
-    MSG_FATALERROR  = 0x0080,
-    MSG_SQL         = 0x0100,
-    MSG_LUASCRIPT   = 0x0200,
-    MSG_NAVMESH     = 0x0400,
-    MSG_ACTION      = 0x0800,
-    MSG_EXPLOIT     = 0x1000,
+    MSG_STANDARD   = 0x0001,
+    MSG_STATUS     = 0x0002,
+    MSG_INFO       = 0x0004,
+    MSG_NOTICE     = 0x0008,
+    MSG_WARNING    = 0x0010,
+    MSG_DEBUG      = 0x0020,
+    MSG_ERROR      = 0x0040,
+    MSG_FATALERROR = 0x0080,
+    MSG_SQL        = 0x0100,
+    MSG_LUASCRIPT  = 0x0200,
+    MSG_NAVMESH    = 0x0400,
+    MSG_ACTION     = 0x0800,
+    MSG_EXPLOIT    = 0x1000,
 };
 
 namespace logging
@@ -62,7 +62,7 @@ namespace logging
     void ShutDown();
 
     void SetFilters(int _filterMask);
-}
+} // namespace logging
 
 // TODO: Build helpers around this macro (so function and line info can be preserved)
 // #define SPDLOG_LOGGER_CALL(logger, level, ...) (logger)->log(spdlog::source_loc{__FILE__, __LINE__, SPDLOG_FUNCTION}, level, __VA_ARGS__)
@@ -71,6 +71,7 @@ namespace logging
 // TODO: Remove/replace these
 
 // Generic
+// clang-format off
 #define ShowStandard(...)   { auto _msgStr = fmt::sprintf(__VA_ARGS__); TracyMessageStr(_msgStr); SPDLOG_LOGGER_INFO(spdlog::get("standard"), _msgStr); }
 #define ShowInfo(...)       { auto _msgStr = fmt::sprintf(__VA_ARGS__); TracyMessageStr(_msgStr); SPDLOG_LOGGER_INFO(spdlog::get("info"), _msgStr); }
 #define ShowMessage(...)    { auto _msgStr = fmt::sprintf(__VA_ARGS__); TracyMessageStr(_msgStr); SPDLOG_LOGGER_INFO(spdlog::get("message"), _msgStr); }
@@ -88,5 +89,6 @@ namespace logging
 #define ShowExploit(...)    { auto _msgStr = fmt::sprintf(__VA_ARGS__); TracyMessageStr(_msgStr); SPDLOG_LOGGER_WARN(spdlog::get("exploit"), _msgStr); }
 #define ShowNavError(...)   { auto _msgStr = fmt::sprintf(__VA_ARGS__); TracyMessageStr(_msgStr); SPDLOG_LOGGER_ERROR(spdlog::get("navmesh"), _msgStr); }
 #define ShowStacktrace(...) { auto _msgStr = fmt::sprintf(__VA_ARGS__); TracyMessageStr(_msgStr); SPDLOG_LOGGER_CRITICAL(spdlog::get("stacktrace"), _msgStr); }
+// clang-format on
 
 #endif // _LOGGING_H

@@ -423,6 +423,9 @@ enum IMMUNITY : uint16
     IMMUNITY_REQUIEM     = 0x400,  // 1024
     IMMUNITY_LIGHT_SLEEP = 0x800,  // 2048
     IMMUNITY_DARK_SLEEP  = 0x1000, // 4096
+    IMMUNITY_ASPIR       = 0x2000, // 8192
+    IMMUNITY_TERROR      = 0x4000, // 16384
+    IMMUNITY_DISPEL      = 0x8000, // 32768
 };
 
 struct apAction_t
@@ -460,9 +463,9 @@ struct apAction_t
 };
 
 /************************************************************************
- *																		*
- *  TP хранится то пому же принципу, что и skill, т.е. 6,4% = 64			*
- *																		*
+ *                                                                      *
+ *  TP хранится то пому же принципу, что и skill, т.е. 6,4% = 64        *
+ *                                                                      *
  ************************************************************************/
 
 struct health_t

@@ -36,7 +36,8 @@
 #include <concurrentqueue.h>
 
 moodycamel::ConcurrentQueue<std::function<void(SqlConnection*)>> asyncQueue;
-std::atomic<bool> asyncRunning;
+
+std::atomic<bool>            asyncRunning;
 std::unique_ptr<std::thread> asyncThread;
 
 void AsyncThreadBody(const char* user, const char* passwd, const char* host, uint16 port, const char* db)
@@ -83,7 +84,13 @@ void SqlConnection::HandleAsync()
     }
 }
 
+void SqlConnection::SetLatencyWarning(bool _LatencyWarning)
+{
+    m_LatencyWarning = _LatencyWarning;
+}
+
 SqlConnection::SqlConnection(const char* user, const char* passwd, const char* host, uint16 port, const char* db)
+: m_LatencyWarning(false)
 {
     TracyZoneScoped;
     self = new Sql_t{};
@@ -336,6 +343,8 @@ int32 SqlConnection::QueryStr(const char* query)
     FreeResult();
     self->buf.clear();
 
+    auto startTime = hires_clock::now();
+
     {
         TracyZoneNamed(mysql_real_query_);
         self->buf += query;
@@ -355,6 +364,20 @@ int32 SqlConnection::QueryStr(const char* query)
             ShowSQL("Query: %s", self->buf);
             ShowSQL("mysql_store_result: SQL_ERROR: %s (%u)", mysql_error(&self->handle), mysql_errno(&self->handle));
             return SQL_ERROR;
+        }
+    }
+
+    auto endTime = hires_clock::now();
+    auto dTime = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime);
+    if (m_LatencyWarning)
+    {
+        if (dTime > 250ms)
+        {
+            ShowError(fmt::format("Query took {}ms: {}", dTime.count(), self->buf));
+        }
+        else if (dTime > 100ms)
+        {
+            ShowWarning(fmt::format("Query took {}ms: {}", dTime.count(), self->buf));
         }
     }
 

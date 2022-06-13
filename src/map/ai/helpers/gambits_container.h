@@ -74,6 +74,8 @@ namespace gambits
         BEST_AGAINST_TARGET = 6,
         BEST_SAMBA          = 7,
         HIGHEST_WALTZ       = 8,
+        ENTRUSTED           = 9,
+        BEST_INDI           = 10,
     };
 
     enum class G_TP_TRIGGER : uint16

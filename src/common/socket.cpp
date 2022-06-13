@@ -2,8 +2,8 @@
 
 #include "../common/cbasetypes.h"
 #include "../common/kernel.h"
-#include "../common/mmo.h"
 #include "../common/logging.h"
+#include "../common/mmo.h"
 #include "../common/taskmgr.h"
 #include "../common/timer.h"
 #include "../common/utils.h"
@@ -145,7 +145,7 @@ int sSocket(int af, int type, int protocol)
 
 /*
  *
- *			COMMON LEVEL
+ *          COMMON LEVEL
  *
  */
 
@@ -314,7 +314,7 @@ uint16 ntows(uint16 netshort)
 /*****************************************************************************/
 /*
  *
- *			TCP LEVEL
+ *          TCP LEVEL
  *
  */
 
@@ -353,7 +353,7 @@ static int                        access_debug = 0;
 //--
 static int      connect_count    = 10;
 static duration connect_interval = 3s;
-static duration connect_lockout   = 10min;
+static duration connect_lockout  = 10min;
 
 /// Connection history, an array of linked lists.
 /// The array's index for any ip is ip&0xFFFF
@@ -679,7 +679,7 @@ int send_from_fifo(int fd)
 }
 
 /*======================================
- *	CORE : Default processing functions
+ *  CORE : Default processing functions
  *--------------------------------------*/
 int null_recv(int fd)
 {
@@ -719,7 +719,7 @@ int32 makeConnection_tcp(uint32 ip, uint16 port)
     return fd;
 }
 /*======================================
- *	CORE : Connection functions
+ *  CORE : Connection functions
  *--------------------------------------*/
 int connect_client(int listen_fd, sockaddr_in& client_address)
 {
@@ -1110,7 +1110,7 @@ int delete_session(int fd)
 }
 
 /*======================================
- *	CORE : Socket options
+ *  CORE : Socket options
  *--------------------------------------*/
 void set_nonblocking(int fd, unsigned long yes)
 {
@@ -1125,7 +1125,7 @@ void set_nonblocking(int fd, unsigned long yes)
 
 /*
  *
- *			UDP LEVEL
+ *          UDP LEVEL
  *
  */
 int32 makeBind_udp(uint32 ip, uint16 port)

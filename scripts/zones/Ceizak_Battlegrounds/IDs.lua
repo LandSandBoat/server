@@ -17,6 +17,7 @@ zones[xi.zone.CEIZAK_BATTLEGROUNDS] =
         CARRIED_OVER_POINTS        = 7001, -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY    = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER               = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
+        WAYPOINT_ATTUNED           = 7588, -- Your <keyitem> has been attuned to a geomagnetic fount[/ at the frontier station/ at Frontier Bivouac #1/ at Frontier Bivouac #2/ at Frontier Bivouac #3]!
         EXPENDED_KINETIC_UNITS     = 7603, -- You have expended <number> kinetic unit[/s] and will be transported to another locale.
         INSUFFICIENT_UNITS         = 7604, -- Your stock of kinetic units is insufficient.
         REACHED_KINETIC_UNIT_LIMIT = 7605, -- You have reached your limit of kinetic units and cannot charge your artifact any further.

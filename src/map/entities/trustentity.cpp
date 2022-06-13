@@ -65,7 +65,12 @@ void CTrustEntity::PostTick()
 
         if (PMaster && PMaster->PParty && updatemask & UPDATE_HP)
         {
-            PMaster->ForParty([this](auto PMember) { static_cast<CCharEntity*>(PMember)->pushPacket(new CCharHealthPacket(this)); });
+            // clang-format off
+            PMaster->ForParty([this](auto PMember)
+            {
+                static_cast<CCharEntity*>(PMember)->pushPacket(new CCharHealthPacket(this));
+            });
+            // clang-format on
         }
 
         updatemask = 0;
@@ -119,10 +124,10 @@ void CTrustEntity::OnAbility(CAbilityState& state, action_t& action)
             return;
         }
 
-        action.id                    = this->id;
-        action.actiontype            = PAbility->getActionType();
-        action.actionid              = PAbility->getID();
-        action.recast                = PAbility->getRecastTime();
+        action.id         = this->id;
+        action.actiontype = PAbility->getActionType();
+        action.actionid   = PAbility->getID();
+        action.recast     = PAbility->getRecastTime();
 
         if (PAbility->isAoE())
         {
@@ -240,9 +245,9 @@ void CTrustEntity::OnRangedAttack(CRangeState& state, action_t& action)
     uint8 hitCount     = 1; // 1 hit by default
     uint8 realHits     = 0; // to store the real number of hit for tp multipler
     // auto  ammoConsumed = 0;
-    bool  hitOccured   = false; // track if player hit mob at all
-    bool  isSange      = false;
-    bool  isBarrage    = StatusEffectContainer->HasStatusEffect(EFFECT_BARRAGE, 0);
+    bool hitOccured = false; // track if player hit mob at all
+    bool isSange    = false;
+    bool isBarrage  = StatusEffectContainer->HasStatusEffect(EFFECT_BARRAGE, 0);
 
     /*
     // if barrage is detected, getBarrageShotCount also checks for ammo count
@@ -442,6 +447,11 @@ bool CTrustEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
     }
 
     if ((targetFlags & TARGET_PLAYER_PARTY_ENTRUST) && PInitiator->allegiance == allegiance && PMaster && PInitiator != this)
+    {
+        return true;
+    }
+
+    if ((targetFlags & TARGET_PLAYER_PARTY_ENTRUST) && PInitiator->objtype == TYPE_TRUST && PInitiator->allegiance == allegiance)
     {
         return true;
     }

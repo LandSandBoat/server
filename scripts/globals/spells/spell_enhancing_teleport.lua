@@ -24,7 +24,7 @@ xi.spells.spell_enhancing_teleport.checkTeleportSpell = function(caster, target,
     end
 end
 
--- Main function for Teleport / Warp / etc... Spells.
+-- Main function for Teleport / Warp / etc. Spells.
 xi.spells.spell_enhancing_teleport.useTeleportSpell = function(caster, target, spell)
     local spellId    = spell:getID()
     local teleportId = teleportTable[spellId][1]

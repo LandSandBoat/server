@@ -24,13 +24,9 @@ zone_object.onConquestUpdate = function(zone, updatetype)
 end
 
 zone_object.onRegionEnter = function(player, region)
-    -- print("Player: ", player)
-    -- print("RESULT: ", regionID)
 end
 
 zone_object.onEventUpdate = function(player, csid, option)
-    -- print("zone CSID: ", csid)
-    -- print("zone RESULT: ", option)
 end
 
 zone_object.onEventFinish = function(player, csid, option)
