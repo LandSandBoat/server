@@ -352,10 +352,13 @@ int32 lobbydata_parse(int32 fd)
                     {
                         sql->NextRow();
                         SessionCount = sql->GetIntData(0);
-                        ShowInfo("Number of sessions for %u = %u (Limit is %u)", sd->client_addr, SessionCount, login_config.login_limit);
+                        if (SessionCount >= login_config.login_limit)
+                        {
+                            ShowWarning("Already %u active sessions for %u (Limit is %u)", SessionCount, sd->client_addr, login_config.login_limit);
+                        }
                     }
 
-                    if (maint_config.maint_mode == 0 && SessionCount < login_config.login_limit || gmlevel > 0)
+                    if (maint_config.maint_mode == 0 && (login_config.login_limit == 0 || SessionCount < login_config.login_limit) || gmlevel > 0)
                     {
                         if (PrevZone == 0)
                         {
