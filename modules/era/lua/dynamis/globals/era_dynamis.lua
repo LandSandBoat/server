@@ -1078,7 +1078,6 @@ end)
 
 xi.dynamis.sjQMOnTrigger = function(player, npc)
     local zoneId = npc:getZoneID()
-
     if dynamis.xi.dynamis.dynaInfoEra[zoneId].sjRestriction == true then -- Check to see if SJ Restriction exists
         zone = npc:getZone()
         local playersInZone = zone:getPlayers()
@@ -1090,12 +1089,12 @@ xi.dynamis.sjQMOnTrigger = function(player, npc)
                     player:setLocalVar("reraise_duration", player:getStatusEffect(xi.effect.RERAISE):getDuration())
                 end
                 player:delStatusEffect(xi.effect.SJ_RESTRICTION) -- Remove SJ restriction
-                player:setCharVar(string.format("[DYNA]SJUnlock_%s", player:getZoneID()), os.time() + 14400) -- Set Immune to reobtaining SJ_Restriction for 4 hours.
                 if player:getLocalVar("had_reraise") == 1 and player:hasStatusEffect(xi.effect.RERAISE) == false then -- Reapply previous reraise if lost.
                         player:addStatusEffect(xi.effect.RERAISE, player:getLocalVar("reraise_power"), 0, player:getLocalVar("reraise_duration"))
                 end
             end
         end
+        zone:setLocalVar("SJUnlock", 1)
     end
 end
 
@@ -1148,7 +1147,7 @@ m:addOverride("xi.dynamis.zoneOnZoneIn", function(player, prevZone)
         end
 
         if dynamis.xi.dynamis.dynaInfoEra[zoneID].csBit >= 7 then  -- Is this dreamlands?
-            if os.time() > player:getCharVar(string.format("[DYNA]SJUnlock_%s", zoneID)) then -- Should the player be allowed to keep subjob?
+            if player:getZone():getLocalVar("SJUnlock") ~= 1 then -- Should the player be allowed to keep subjob?
                 player:addStatusEffect(xi.effect.SJ_RESTRICTION, 1, 3, 0) -- Inflict SJ Restriction
             end
         end
