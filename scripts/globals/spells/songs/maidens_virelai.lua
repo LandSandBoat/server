@@ -33,7 +33,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     params.bonus = bonus
     params.effect = xi.effect.CHARM_I
     local resist = applyResistanceEffect(caster, target, spell, params)
-    -- print(resist)
+
     if (resist >= 0.25 and caster:getCharmChance(target, false) > 0) then
         spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
         if (caster:isMob()) then

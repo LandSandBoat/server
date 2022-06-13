@@ -29,8 +29,6 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    -- print("CSID:", csid)
-    -- print("RESULT:", option)
     if (csid == 3) then
         player:addKeyItem(xi.ki.OXIDIZED_PLATE)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.OXIDIZED_PLATE)
