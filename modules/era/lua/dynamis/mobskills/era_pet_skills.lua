@@ -12,14 +12,13 @@ require("modules/module_utils")
 local m = Module:new("era_pet_skills")
 
 m:addOverride("xi.globals.mobskills.call_wyvern.onMobWeaponSkill", function(target, mob, skill)
-    local zoneType = mob:getZone():getType()
 
     if mob:getLocalVar("CALL_WYVERN") == 0 then
         skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT)
         return 0
     end
 
-    if zoneType == xi.zoneType.DYNAMIS then
+    if mob:getCurrentRegion() == xi.region.DYNAMIS then
         if mob:getName() == "Apocalyptic_Beast" then
             for i = 5, 1, -1 do
                 xi.dynamis.spawnDynamicPet(target, mob, xi.job.DRG)
@@ -47,7 +46,7 @@ m:addOverride("xi.globals.mobskills.astral_flow.onMobWeaponSkill", function(targ
         return 0
     end
 
-    if mob:getZone():getType() == xi.zoneType.DYNAMIS then
+    if mob:getCurrentRegion() == xi.region.DYNAMIS then
         if mob:getName() == "Apocalyptic_Beast" then
             xi.dynamis.spawnDynamicPet(target, mob, xi.job.SMN)
             return xi.effect.ASTRAL_FLOW
@@ -72,6 +71,26 @@ m:addOverride("xi.globals.mobskills.astral_flow.onMobWeaponSkill", function(targ
         return xi.effect.ASTRAL_FLOW
 
     end
+end)
+
+xi.dynamis.onFightApocDRG = function(mob, target)
+    local apoc = GetMobByID(mob:getZone():getLocalVar("Apocalyptic Beast"))
+    if os.time() >= apoc:getLocalVar("next2hrTime") then
+        DespawnMob(mob:getID())
+    end
+end
+
+m:addOverride("xi.globals.mobskills.familiar.onMobWeaponSkill", function(target, mob, skill)
+    skill:setMsg(xi.msg.basic.FAMILIAR_MOB)
+
+    if mob:getCurrentRegion() == xi.region.DYNAMIS and not mob:hasPet() then
+        mob:charm(target)
+    else
+        mob:familiar()
+    end
+
+    return 0
+
 end)
 
 return m

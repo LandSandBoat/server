@@ -18,7 +18,6 @@ require("scripts/globals/dynamis")
 --------------------------------------------
 --       Module Extended Scripts          --
 --------------------------------------------
-require("modules/era/lua/dynamis/mobs/era_beastmen")
 require("modules/era/lua/dynamis/mobs/era_beaucedine_mobs")
 require("modules/era/lua/dynamis/mobs/era_buburimu_mobs")
 require("modules/era/lua/dynamis/mobs/era_qufim_mobs")
@@ -333,7 +332,7 @@ xi.dynamis.normalDynamicSpawn = function(mob, oMobIndex)
                 rotation = oMob:getRotPos(),
                 groupId = nameObj[job][2],
                 groupZoneId = nameObj[job][3],
-                onMobSpawn = function(mob) xi.dynamis.onSpawnBeastmen(mob) end,
+                onMobSpawn = function(mob) xi.dynamis.setMobStats(mob) end,
                 onMobEngaged = function(mob, target) xi.dynamis.mobOnEngaged(mob, target) end,
                 onMobRoam = function(mob) end,
                 onMobRoamAction = function(mob)  end,
@@ -484,7 +483,7 @@ xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID,
         },
         ["Beastmen"] =
         {
-            ["onMobSpawn"] = {function(mob) xi.dynamis.onSpawnBeastmen(mob) end},
+            ["onMobSpawn"] = {function(mob) xi.dynamis.setMobStats(mob) end},
             ["onMobEngaged"] = {function(mob, target) xi.dynamis.mobOnEngaged(mob, target) end},
             ["onMobFight"] = {function(mob) end},
             ["onMobRoam"] = {function(mob) end},
@@ -534,7 +533,6 @@ xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID,
     end
     if xi.dynamis.mobList[zoneID][mobIndex].info[5] ~= nil then
         zone:setLocalVar(string.format("%s", xi.dynamis.mobList[zoneID][mobIndex].info[5]), 0)
-        mob:setLocalVar("mobVar", string.format("%s", xi.dynamis.mobList[zoneID][mobIndex].info[5]))
     end
     if oMob ~= nil and oMob ~= 0 then
         mob:setLocalVar("Parent", oMob:getID())
@@ -840,7 +838,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
     {
         ["Beastmen"] =
         {
-            ["onMobSpawn"] = {function(mob) xi.dynamis.onSpawnBeastmenNM(mob) end},
+            ["onMobSpawn"] = {function(mob) xi.dynamis.setMobStats(mob) end},
             ["onMobEngaged"] = {function(mob, target) xi.dynamis.parentOnEngaged(mob, target) xi.dynamis.mobOnEngaged(mob, target) end},
             ["onMobFight"] = {function(mob) end},
             ["onMobRoam"] = {function(mob) xi.dynamis.mobOnRoam(mob) end},
@@ -1199,7 +1197,6 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
     mob:setLocalVar(string.format("MobIndex_%s", mob:getID()), mobIndex)
     if xi.dynamis.mobList[zoneID][mobIndex].info[5] ~= nil then
         zone:setLocalVar(string.format("%s", xi.dynamis.mobList[zoneID][mobIndex].info[5]), 0)
-        mob:setLocalVar("mobVar", string.format("%s", xi.dynamis.mobList[zoneID][mobIndex].info[5]))
     end
     zone:setLocalVar(string.format("%s", mobName), mob:getID())
     if forceLink == true then
@@ -1382,20 +1379,17 @@ xi.dynamis.spawnDynamicPet =function(target, oMob, mobJob)
         {
             ["Apocalypse Beast"] =
             {
-                ["onMobSpawn"] = {function(mob) xi.dynamis.onSpawnSMNAF(mob) end},
                 ["onMobFight"] = {function(mob, target) end},
                 ["mixins"] = { require("scripts/mixins/families/avatar"), },
             },
             ["Dagourmarche"] =
             {
-                ["onMobSpawn"] = {function(mob) xi.dynamis.onSpawnSMNAF(mob) end},
                 ["onMobFight"] = {function(mob, target) end},
                 ["mixins"] = { require("scripts/mixins/families/avatar"), },
             },
             ["Normal"] =
             {
-                ["onMobSpawn"] = {function(mob) xi.dynamis.onSpawnPet(mob) end},
-                ["onMobFight"] = {function(mob, target) xi.dynamis.onFightSMN(mob, target) end},
+                ["onMobFight"] = {function(mob, target) end},
                 ["mixins"] = { },
             },
         },
@@ -1403,13 +1397,11 @@ xi.dynamis.spawnDynamicPet =function(target, oMob, mobJob)
         {
             ["Dagourmarche"] =
             {
-                ["onMobSpawn"] = {function(mob) xi.dynamis.onSpawnPet(mob) end},
                 ["onMobFight"] = {function(mob, target) end},
                 ["mixins"] = { },
             },
             ["Normal"] =
             {
-                ["onMobSpawn"] = {function(mob) xi.dynamis.onSpawnPet(mob) end},
                 ["onMobFight"] = {function(mob, target) end},
                 ["mixins"] = { },
             },
@@ -1418,30 +1410,33 @@ xi.dynamis.spawnDynamicPet =function(target, oMob, mobJob)
         {
             ["Apocalypse Beast"] =
             {
-                ["onMobSpawn"] = {function(mob) xi.dynamis.onSpawnPet(mob) end},
-                ["onMobEngaged"] = {function(mob, target) end},
                 ["onMobFight"] = {function(mob, target) xi.dynamis.onFightApocDRG(mob, target) end},
-                ["onMobDeath"] = {function(mob, player, isKiller) end},
                 ["mixins"] = { },
             },
             ["Dagourmarche"] =
             {
-                ["onMobSpawn"] = {function(mob) xi.dynamis.onSpawnPet(mob) end},
                 ["onMobFight"] = {function(mob, target) end},
                 ["mixins"] = { },
             },
             ["Normal"] =
             {
-                ["onMobSpawn"] = {function(mob) xi.dynamis.onSpawnPet(mob) end},
                 ["onMobFight"] = {function(mob, target) end},
                 ["mixins"] = { },
             },
         },
     }
-    if mobJob == xi.job.DRG then
-        nameObj = petList[mobJob]
+    if isNM == true then
+        if mobJob == xi.job.DRG then
+            nameObj = petList[mobJob][isNM][mobName]
+        else
+            nameObj = petList[mobJob][mobFamily][isNM][mobName]
+        end
     else
-        nameObj = petList[mobJob][mobFamily]
+        if mobJob == xi.job.DRG then
+            nameObj = petList[mobJob][isNM]
+        else
+            nameObj = petList[mobJob][mobFamily][isNM]
+        end
     end
     if mobName == "Apocalypse Beast" then
         functionLookup = "Apocalypse Beast"
@@ -1452,32 +1447,28 @@ xi.dynamis.spawnDynamicPet =function(target, oMob, mobJob)
     end
     local mob = zone:insertDynamicEntity({
         objtype = xi.objType.MOB,
-        name = nameObj[isNM][1],
+        name = nameObj[1],
         x = oMob:getXPos(),
         y = oMob:getYPos(),
         z = oMob:getXPos(),
         rotation = oMob:getRotPos(),
-        groupId = nameObj[isNM][2],
-        groupZoneId = nameObj[isNM][3],
-        onMobSpawn = petFunctions[mobJob][functionLookup]["onMobSpawn"],
+        groupId = nameObj[2],
+        groupZoneId = nameObj[3],
+        onMobSpawn = function(mob) xi.dynamis.setPetStats(mob) end,
         onMobFight = petFunctions[mobJob][functionLookup]["onMobFight"],
         onMobDeath = function(mob, playerArg, isKiller) end,
         --releaseIdOnDeath = true,
         mixins = petFunctions[mobJob][functionLookup]["mixins"],
     })
-    print("Past Insert")
     mob:setSpawn(oMob:getXPos()+math.random()*6-3, oMob:getYPos()-0.3, oMob:getZPos()+math.random()*6-3, oMob:getRotPos())
-    print("Past Spawn Set")
-    mob:setDropID(nameObj[isNM][4])
-    if nameObj[isNM][5] ~= nil then -- If SpellList ~= nil set SpellList
-        mob:setSpellList(nameObj[isNM][5])
+    mob:setDropID(nameObj[4])
+    if nameObj[5] ~= nil then -- If SpellList ~= nil set SpellList
+        mob:setSpellList(nameObj[5])
     end
-    if nameObj[isNM][6] ~= nil then -- If SkillList ~= nil set SkillList
-        mob:setMobMod(xi.mobMod.SKILL_LIST, nameObj[isNM][6])
+    if nameObj[6] ~= nil then -- If SkillList ~= nil set SkillList
+        mob:setMobMod(xi.mobMod.SKILL_LIST, nameObj[6])
     end
-    oMob:setLocalVar("PetID", mob:getID())
-    mob:setLocalVar("PetMaster", oMobIndex)
-    mob:setLocalVar("PetMaster_ID", oMob:getID())
+    oMob:setPet(mob)
     mob:spawn()
     mob:addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0, true)
     mob:updateEnmity(target)
@@ -1809,8 +1800,8 @@ xi.dynamis.mobOnDeath = function (mob, player, mobVar)
     local zone = mob:getZone()
     local mobIndex = zone:getLocalVar(string.format("MobIndex_%s", mob:getID()))
     if mob:getLocalVar("dynamisMobOnDeathTriggered") == 1 then return -- Don't trigger more than once.
-    else -- Stops execution of code below if the above is true.
-        if mobVar ~= nil then zone:setLocalVar(string.format("%s", mob:getLocalVar("mobVar")), 1) end -- Set Death Requirements Variable
+    else -- Stops execution of code below if the above is true.:getZoneID()
+        if mobVar ~= nil then zone:setLocalVar(string.format("%s", xi.dynamis.mobList[mob:getZoneID()][mobIndex].info[5]), 0) end -- Set Death Requirements Variable
         xi.dynamis.addTimeToDynamis(zone, mobIndex) -- Add Time
         mob:setLocalVar("dynamisMobOnDeathTriggered", 1) -- onDeath lua happens once per party member that killed the mob, but we want this to only run once per mob
         if mob:getZoneID() == (xi.zone.DYNAMIS_BEAUCEDINE or xi.zone.DYNAMIS_XARCABARD) then
@@ -1818,6 +1809,11 @@ xi.dynamis.mobOnDeath = function (mob, player, mobVar)
                 player:addTreasure(4248, mob, 100) -- Adds Ginurva's Battle Theory to Statues and Eyes in Dynamis Beaucedine and Xarcabard
             elseif mob:getFamily() == (358 or 359) and mob:getMobMod(xi.mobMod.CHECK_AS_NM) == 2 then
                 player:addTreasure(4249, mob, 500) -- Adds Shultz's Strategems to Kindred and Hydra NMs in Dynamis Beaucedine and Xarcabard
+            end
+        end
+        if mob:getLocalVar("PetID") ~= 0 and mob:getMainJob() == xi.job.SMN then
+            if GetMobByID(mob:getLocalVar("PetID")):isAlive() then
+                GetMobByID(mob:getLocalVar("PetID")):setHP(0)
             end
         end
     end
