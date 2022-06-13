@@ -32,12 +32,9 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option)
-    -- printf("OPTION: %u", option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    -- printf("OPTION: %u", option)
-
     if (csid == 20 and option == 1) then
         player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.OPEN_SESAME)
     elseif (csid == 22) then

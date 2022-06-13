@@ -62,7 +62,6 @@ local function getRangedCRatio(attacker, defender, params, ignoredDef)
 
     pdif[1] = pdifmin
     pdif[2] = pdifmax
-    -- printf("ratio: %f min: %f max %f\n", cratio, pdifmin, pdifmax)
 
     pdifmin = pdifmin * 1.25
     pdifmax = pdifmax * 1.25
@@ -127,8 +126,6 @@ local function getMeleeCRatio(attacker, defender, params, ignoredDef)
 
     cratio = cratio + 1
     cratio = utils.clamp(cratio, 0, 4.0)
-
-    -- printf("ratio: %f min: %f max %f\n", cratio, pdifmin, pdifmax)
 
     if cratio < 0.5 then
         pdifmax = cratio + 0.5
