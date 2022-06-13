@@ -55,7 +55,7 @@ entity.onMobFight = function(mob, target)
 
     if mob:getLocalVar("BracerMode") == 0 then
         if
-            mob:getHPP() < 50 or
+            mob:getHPP() < 60 or
             qnAern1:isAlive() and qnAern1:getHPP() < 60 or
             qnAern2:isAlive() and qnAern2:getHPP() < 60
         then -- If any of the three mobs gets below 60% then all three gain bracelets

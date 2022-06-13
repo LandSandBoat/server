@@ -96,7 +96,7 @@ entity.onMobFight = function(mob)
     end)
 end
 
-entity.onMagicCastingCheck = function(mob, target, spell)
+entity.onMobMagicPrepare = function(mob, target, spell)
     local rnd = math.random()
     if rnd < 0.5 and mob:hasStatusEffect(xi.effect.MANAFONT) == true then -- quake II replaces existing earth damage spells during manafont
         return 211 -- quake II casted exclusively while Manafont is active.
