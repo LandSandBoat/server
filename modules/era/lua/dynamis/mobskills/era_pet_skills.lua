@@ -82,7 +82,7 @@ end
 
 xi.dynamis.onPetDeath = function(mob)
     if mob:getMaster():getMainJob() == xi.job.BST then
-        mob:setLocalVar("[jobSpecial]ability_", 710)
+        mob:getMaster():setLocalVar("[jobSpecial]ability_", 710)
     end
 end
 
