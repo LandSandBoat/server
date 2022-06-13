@@ -807,7 +807,7 @@ namespace gambits
             if (chosen_skill->skill_type == G_REACTION::WS)
             {
                 CWeaponSkill* PWeaponSkill = battleutils::GetWeaponSkill(chosen_skill->skill_id);
-                if (chosen_skill->valid_targets == TARGET_SELF)
+                if (chosen_skill->valid_targets & TARGET_SELF)
                 {
                     target = POwner;
                 }
@@ -820,7 +820,7 @@ namespace gambits
             else // Mobskill
             {
                 // CMobSkill* PMobSkill = battleutils::GetMobSkill(chosen_skill->skill_id);
-                if (chosen_skill->valid_targets == TARGET_SELF || chosen_skill->valid_targets == TARGET_PLAYER_PARTY)
+                if (chosen_skill->valid_targets & TARGET_SELF || chosen_skill->valid_targets & TARGET_PLAYER_PARTY)
                 {
                     target = POwner;
                 }
