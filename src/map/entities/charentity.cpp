@@ -764,6 +764,10 @@ bool CCharEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
 
     if (targetFlags & TARGET_PLAYER_PARTY_ENTRUST)
     {
+        if (PInitiator->objtype == TYPE_TRUST)
+        {
+            return true;
+        }
         // Can cast on self and others in party but potency gets no bonuses from equipment mods if entrust is active
         if (!PInitiator->StatusEffectContainer->HasStatusEffect(EFFECT_ENTRUST) && PInitiator == this)
         {

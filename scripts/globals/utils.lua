@@ -195,7 +195,6 @@ function utils.conalDamageAdjustment(attacker, target, skill, max_damage, minimu
 
     if conal_angle_power < 0 then
         -- #TODO The below print will be a valid print upon fixing to-do above relating to beam center orgin
-        -- print("Error: conalDamageAdjustment - Mob TP move hit target beyond conal angle: ".. cone_angle)
         conal_angle_power = 0
     end
 

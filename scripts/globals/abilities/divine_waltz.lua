@@ -70,7 +70,7 @@ ability_object.onUseAbility = function(player, target, ability)
         cure = (target:getMaxHP() - target:getHP())
     end
 
-    -- Applying server mods....
+    -- Applying server mods
     cure = cure * xi.settings.CURE_POWER
 
     target:restoreHP(cure)
