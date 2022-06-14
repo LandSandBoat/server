@@ -33,9 +33,10 @@ xi.settings.map =
     AH_TAX_RATE_STACKS = 0.5,
     AH_MAX_FEE         = 10000,
 
-    -- Max open listings per player, 0  = no limit. (Default 7)
-    -- Note                         = Settings over 7 may need client-side plugin to work under all circumstances.
-    AH_LIST_LIMIT                = 7,
+    -- Max open listings per player, 0 = no limit. (Default 7)
+    -- Note = Settings over 7 may need client-side plugin to work under all circumstances.
+    -- If this is the case, consider using the ah_pagination module
+    AH_LIST_LIMIT = 7,
 
     -- Misc EXP related settings
     EXP_RATE                = 1.0,
@@ -145,7 +146,7 @@ xi.settings.map =
     SUBJOB_RATIO = 1,
 
     -- Also adjust monsters subjob in ratio adjustments? 1 = true / 0 = false
-    INCLUDE_MOB_SJ                                      = 0,
+    INCLUDE_MOB_SJ = false,
 
     -- Adjust base stats (str/vit/etc.) for NMs, regular mobs, players, and trusts/fellows. Acts as a multiplier, so default is 1.
     NM_STAT_MULTIPLIER        = 1.0,
@@ -178,13 +179,10 @@ xi.settings.map =
     MOB_NO_DESPAWN = 0,
 
     -- Allows parry, block, and guard to skill up regardless of the action occuring.
-    --  Bin  Dec Note
-    --  0000 0   Classic
-    --  0001 1   Parry
-    --  0010 2   Block
-    --  0100 4   Guard
-    --  0111 7   Parry, Block, & Guard
-    NEWSTYLE_SKILLUPS = 7,
+    -- This did not happen in previous eras
+    PARRY_OLD_SKILLUP_STYLE = false,
+    BLOCK_OLD_SKILLUP_STYLE = false,
+    GUARD_OLD_SKILLUP_STYLE = false,
 
     -- Globally adjusts ALL battlefield level caps by this many levels.
     BATTLE_CAP_TWEAK = 0,

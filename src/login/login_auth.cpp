@@ -289,7 +289,7 @@ int32 login_parse(int32 fd)
                         return -1;
                     }
 
-                    ShowStatus("login_parse: account<%s> was created", escaped_name);
+                    ShowInfo("login_parse: account<%s> was created", escaped_name);
                     sessions[fd]->wdata.resize(1);
                     ref<uint8>(sessions[fd]->wdata.data(), 0) = LOGIN_SUCCESS_CREATE;
                     do_close_login(sd, fd);

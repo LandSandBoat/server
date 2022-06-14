@@ -1623,7 +1623,7 @@ int __cdecl WheatyExceptionReport::Log(const TCHAR* format, ...)
         // Log to console
         if (gLogToConsole)
         {
-            ShowStacktrace(outString.c_str());
+            ShowCritical(outString.c_str());
         }
     }
 

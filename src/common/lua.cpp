@@ -27,6 +27,8 @@
 #include <numeric>
 #include <string>
 
+#define ShowScript(...) _ShowTrace("lua", __VA_ARGS__)
+
 sol::state lua;
 
 /**
@@ -36,7 +38,7 @@ void lua_init()
 {
     TracyZoneScoped;
 
-    ShowStatus("lua initialising");
+    ShowInfo("lua initialising");
 
     TracyLuaRegister(lua.lua_state());
     lua.open_libraries();

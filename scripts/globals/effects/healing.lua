@@ -35,7 +35,7 @@ effect_object.onEffectGain = function(target, effect)
         target:messageSpecial(ID.text.ENERGIES_COURSE)
 
         local maxWaitTime = 480  -- Max wait of 8 minutes
-        local secondsPerTick = GetHealingTickDelay()  -- NOTE: This value is server configurable.
+        local secondsPerTick = xi.settings.map.HEALING_TICK_DELAY;
         local minWaitTime = math.min(3 * secondsPerTick, maxWaitTime)
         local waitTimeInSeconds = math.random(minWaitTime, maxWaitTime)
         target:setLocalVar("GEO_DWL_Resting", os.time() + waitTimeInSeconds)

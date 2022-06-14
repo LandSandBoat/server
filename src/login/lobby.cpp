@@ -372,15 +372,16 @@ int32 lobbydata_parse(int32 fd)
                         exceptionTime = sql->GetIntData(0);
                     }
 
-                    int64_t timeStamp = std::chrono::duration_cast<std::chrono::seconds>(server_clock::now().time_since_epoch()).count();
-                    bool isNotMaint   = maint_config.maint_mode == 0;
-                    bool excepted     = exceptionTime > timeStamp;
-                    bool loginLimitOK = (login_config.login_limit == 0 || sessionCount < login_config.login_limit || excepted);
-                    bool isGM         = gmlevel > 0;
+                    uint64 timeStamp    = std::chrono::duration_cast<std::chrono::seconds>(server_clock::now().time_since_epoch()).count();
+                    bool   isNotMaint   = !settings::get<bool>("login.MAINT_MODE");
+                    auto   loginLimit   = settings::get<uint8>("login.LOGIN_LIMIT");
+                    bool   excepted     = exceptionTime > timeStamp;
+                    bool   loginLimitOK = loginLimit == 0 || sessionCount < loginLimit || excepted;
+                    bool   isGM         = gmlevel > 0;
 
                     if (!loginLimitOK)
                     {
-                        ShowWarning("Already %u active session(s) for %s (Limit is %u)", sessionCount, sd->login, login_config.login_limit);
+                        ShowWarning("%s already has %u active session(s), limit is %u", sd->login, sessionCount, loginLimit);
                     }
 
                     if ((isNotMaint && loginLimitOK) || isGM)
@@ -476,7 +477,7 @@ int32 lobbydata_parse(int32 fd)
 
                 do_close_tcp(sd->login_lobbyview_fd);
 
-                ShowStatus("lobbydata_parse: client %s finished work with lobbyview", ip2str(sd->client_addr));
+                ShowInfo("lobbydata_parse: client %s finished work with lobbyview", ip2str(sd->client_addr));
                 break;
             }
             default:
@@ -744,7 +745,7 @@ int32 lobbyview_parse(int32 fd)
                 //              sessions[sd->login_lobbydata_fd]->wdata[0]  = 0x15;
                 //              sessions[sd->login_lobbydata_fd]->wdata[1]  = 0x07;
                 //              WFIFOSET(sd->login_lobbydata_fd,2);
-                ShowStatus("lobbyview_parse: char <%s> was successfully created", sd->charname);
+                ShowInfo("lobbyview_parse: char <%s> was successfully created", sd->charname);
                 /////////////////////////
                 LOBBY_ACTION_DONE(ReservePacket);
                 unsigned char hash[16];

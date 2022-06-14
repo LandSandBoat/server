@@ -459,26 +459,14 @@ namespace mobutils
         PMob->stats.MND = fMND + mMND + sMND;
         PMob->stats.CHR = fCHR + mCHR + sCHR;
 
-        if (isNM)
-        {
-            PMob->stats.STR = (uint16)(PMob->stats.STR * map_config.nm_stat_multiplier);
-            PMob->stats.DEX = (uint16)(PMob->stats.DEX * map_config.nm_stat_multiplier);
-            PMob->stats.VIT = (uint16)(PMob->stats.VIT * map_config.nm_stat_multiplier);
-            PMob->stats.AGI = (uint16)(PMob->stats.AGI * map_config.nm_stat_multiplier);
-            PMob->stats.INT = (uint16)(PMob->stats.INT * map_config.nm_stat_multiplier);
-            PMob->stats.MND = (uint16)(PMob->stats.MND * map_config.nm_stat_multiplier);
-            PMob->stats.CHR = (uint16)(PMob->stats.CHR * map_config.nm_stat_multiplier);
-        }
-        else
-        {
-            PMob->stats.STR = (uint16)(PMob->stats.STR * map_config.mob_stat_multiplier);
-            PMob->stats.DEX = (uint16)(PMob->stats.DEX * map_config.mob_stat_multiplier);
-            PMob->stats.VIT = (uint16)(PMob->stats.VIT * map_config.mob_stat_multiplier);
-            PMob->stats.AGI = (uint16)(PMob->stats.AGI * map_config.mob_stat_multiplier);
-            PMob->stats.INT = (uint16)(PMob->stats.INT * map_config.mob_stat_multiplier);
-            PMob->stats.MND = (uint16)(PMob->stats.MND * map_config.mob_stat_multiplier);
-            PMob->stats.CHR = (uint16)(PMob->stats.CHR * map_config.mob_stat_multiplier);
-        }
+        auto statMultiplier = isNM ? settings::get<float>("map.NM_STAT_MULTIPLIER") : settings::get<float>("map.MOB_STAT_MULTIPLIER");
+        PMob->stats.STR = (uint16)(PMob->stats.STR * statMultiplier);
+        PMob->stats.DEX = (uint16)(PMob->stats.DEX * statMultiplier);
+        PMob->stats.VIT = (uint16)(PMob->stats.VIT * statMultiplier);
+        PMob->stats.AGI = (uint16)(PMob->stats.AGI * statMultiplier);
+        PMob->stats.INT = (uint16)(PMob->stats.INT * statMultiplier);
+        PMob->stats.MND = (uint16)(PMob->stats.MND * statMultiplier);
+        PMob->stats.CHR = (uint16)(PMob->stats.CHR * statMultiplier);
 
         // special case, give spell list to my pet
         if (PMob->getMobMod(MOBMOD_PET_SPELL_LIST) && PMob->PPet != nullptr)

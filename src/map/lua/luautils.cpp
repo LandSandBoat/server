@@ -107,7 +107,7 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        ShowStatus("luautils: Lua initializing");
+        ShowInfo("luautils: Lua initializing");
 
         // Bind math.randon(...) globally
         // clang-format off
@@ -161,14 +161,12 @@ namespace luautils
         lua.set_function("SetServerVariable", &luautils::SetServerVariable);
         lua.set_function("ClearVarFromAll", &luautils::ClearVarFromAll);
         lua.set_function("SendEntityVisualPacket", &luautils::SendEntityVisualPacket);
-        lua.set_function("UpdateServerMessage", &luautils::UpdateServerMessage);
         lua.set_function("GetMobRespawnTime", &luautils::GetMobRespawnTime);
         lua.set_function("DisallowRespawn", &luautils::DisallowRespawn);
         lua.set_function("UpdateNMSpawnPoint", &luautils::UpdateNMSpawnPoint);
         lua.set_function("SetDropRate", &luautils::SetDropRate);
         lua.set_function("NearLocation", &luautils::NearLocation);
         lua.set_function("Terminate", &luautils::Terminate);
-        lua.set_function("GetHealingTickDelay", &luautils::GetHealingTickDelay);
         lua.set_function("GetReadOnlyItem", &luautils::GetReadOnlyItem);
         lua.set_function("GetAbility", &luautils::GetAbility);
         lua.set_function("GetSpell", &luautils::GetSpell);
@@ -3641,7 +3639,7 @@ namespace luautils
 
         // Bloodpact Skillups
         // TODO: This probably shouldn't be in here
-        if (PMob->objtype == TYPE_PET && map_config.skillup_bloodpact)
+        if (PMob->objtype == TYPE_PET && settings::get<bool>("map.SKILLUP_BLOODPACT"))
         {
             CPetEntity* PPet = (CPetEntity*)PMob;
             if (PPet->getPetType() == PET_TYPE::AVATAR && PPet->PMaster->objtype == TYPE_PC)
@@ -4346,12 +4344,6 @@ namespace luautils
         }
     }
 
-    uint8 GetHealingTickDelay()
-    {
-        TracyZoneScoped;
-        return map_config.healing_tick_delay;
-    }
-
     /***************************************************************************
      *                                                                          *
      *  Creates an item object of the type specified by the itemID.             *
@@ -4388,41 +4380,6 @@ namespace luautils
         TracyZoneScoped;
         CSpell* PSpell = spell::GetSpell(static_cast<SpellID>(id));
         return PSpell ? std::optional<CLuaSpell>(PSpell) : std::nullopt;
-    }
-
-    int32 UpdateServerMessage()
-    {
-        TracyZoneScoped;
-
-        int8  line[1024];
-        FILE* fp;
-
-        // Clear old messages..
-        map_config.server_message.clear();
-
-        // Load the English server message..
-        fp = fopen("./conf/server_message.conf", "rb");
-        if (fp == nullptr)
-        {
-            ShowError("Could not read English server message from: ./conf/server_message.conf");
-            return 1;
-        }
-
-        while (fgets((char*)line, sizeof(line), fp))
-        {
-            string_t sline((const char*)line);
-            map_config.server_message += sline;
-        }
-
-        fclose(fp);
-
-        // Ensure both messages have NULL terminates..
-        if (map_config.server_message.at(map_config.server_message.length() - 1) != 0x00)
-        {
-            map_config.server_message += (char)0x00;
-        }
-
-        return 0;
     }
 
     sol::table NearLocation(sol::table const& table, float radius, float theta)

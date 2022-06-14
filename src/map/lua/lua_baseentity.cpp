@@ -7117,7 +7117,7 @@ uint32 CLuaBaseEntity::getGil()
         }
         else if (!item->isType(ITEM_CURRENCY))
         {
-            ShowFatalError("lua::getGil : Item in currency slot is not gil!");
+            ShowCritical("lua::getGil : Item in currency slot is not gil!");
             return 0;
         }
 
@@ -7151,7 +7151,7 @@ void CLuaBaseEntity::addGil(int32 gil)
 
     if (item == nullptr || !item->isType(ITEM_CURRENCY))
     {
-        ShowFatalError("lua::addGil : No Gil in currency slot");
+        ShowCritical("lua::addGil : No Gil in currency slot");
         return;
     }
 
@@ -7174,7 +7174,7 @@ void CLuaBaseEntity::setGil(int32 amount)
 
     if (item == nullptr || !item->isType(ITEM_CURRENCY))
     {
-        ShowFatalError("lua::setGil : No Gil in currency slot");
+        ShowCritical("lua::setGil : No Gil in currency slot");
         return;
     }
 
@@ -7206,7 +7206,7 @@ bool CLuaBaseEntity::delGil(int32 gil)
     }
     else
     {
-        ShowFatalError("lua::delGil : No Gil in currency slot");
+        ShowCritical("lua::delGil : No Gil in currency slot");
     }
 
     return result;

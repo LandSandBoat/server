@@ -61,7 +61,7 @@ namespace settings
                         sol::error err = res;
 
                         auto errorString = fmt::format("Error parsing settings file: {}\n{}", filename, err.what());
-                        ShowFatalError(errorString.c_str());
+                        ShowCritical(errorString.c_str());
                         throw std::runtime_error(errorString);
                     }
                 }
@@ -75,7 +75,7 @@ namespace settings
                         sol::error err = res;
 
                         auto errorString = fmt::format("{}", err.what());
-                        ShowFatalError(errorString.c_str());
+                        ShowCritical(errorString.c_str());
                         throw std::runtime_error(errorString);
                     }
                 }
@@ -124,7 +124,7 @@ namespace settings
                         sol::error err = res;
 
                         auto errorString = fmt::format("Error parsing settings file: {}\n{}", filename, err.what());
-                        ShowFatalError(errorString.c_str());
+                        ShowCritical(errorString.c_str());
                         throw std::runtime_error(errorString);
                     }
                 }
@@ -138,7 +138,7 @@ namespace settings
                         sol::error err = res;
 
                         auto errorString = fmt::format("{}", err.what());
-                        ShowFatalError(errorString.c_str());
+                        ShowCritical(errorString.c_str());
                         throw std::runtime_error(errorString);
                     }
                 }
