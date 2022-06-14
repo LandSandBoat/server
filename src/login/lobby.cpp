@@ -353,7 +353,7 @@ int32 lobbydata_parse(int32 fd)
                     {
                         sql->NextRow();
                         SessionCount = (uint16)sql->GetIntData(0);
-                        if (SessionCount >= login_config.login_limit)
+                        if (login_config.login_limit != 0 && SessionCount >= login_config.login_limit)
                         {
                             ShowWarning("Already %u active sessions for %u (Limit is %u)", SessionCount, sd->client_addr, login_config.login_limit);
                         }
