@@ -73,25 +73,12 @@
 #include "utils/petutils.h"
 #include "utils/zoneutils.h"
 
-/************************************************************************
- *                                                                       *
- *  Cервер для обработки активности сущностей (по серверу на зону) без   *
- *  активных областей                                                    *
- *                                                                       *
- ************************************************************************/
-
 int32 zone_server(time_point tick, CTaskMgr::CTask* PTask)
 {
-    std::any_cast<CZone*>(PTask->m_data)->ZoneServer(tick, false);
+    CZone* PZone = std::any_cast<CZone*>(PTask->m_data);
+    PZone->ZoneServer(tick, false);
     return 0;
 }
-
-/************************************************************************
- *                                                                       *
- *  Cервер для обработки активности сущностей (по серверу на зону) c     *
- *  активными областями                                                  *
- *                                                                       *
- ************************************************************************/
 
 int32 zone_server_region(time_point tick, CTaskMgr::CTask* PTask)
 {
@@ -108,12 +95,6 @@ int32 zone_server_region(time_point tick, CTaskMgr::CTask* PTask)
     }
     return 0;
 }
-
-/************************************************************************
- *                                                                       *
- *                                                                       *
- *                                                                       *
- ************************************************************************/
 
 int32 zone_update_weather(time_point tick, CTaskMgr::CTask* PTask)
 {
@@ -542,12 +523,6 @@ void CZone::TransportDepart(uint16 boundary, uint16 zone)
     m_zoneEntities->TransportDepart(boundary, zone);
 }
 
-/************************************************************************
- *                                                                       *
- *                                                                       *
- *                                                                       *
- ************************************************************************/
-
 void CZone::SetWeather(WEATHER weather)
 {
     TracyZoneScoped;
@@ -804,12 +779,6 @@ void CZone::SavePlayTime()
     m_zoneEntities->SavePlayTime();
 }
 
-/************************************************************************
- *                                                                       *
- *                                                                       *
- *                                                                       *
- ************************************************************************/
-
 CCharEntity* CZone::GetCharByName(int8* name)
 {
     return m_zoneEntities->GetCharByName(name);
@@ -950,7 +919,8 @@ void CZone::createZoneTimer()
     TracyZoneScoped;
     ZoneTimer =
         CTaskMgr::getInstance()->AddTask(m_zoneName, server_clock::now(), this, CTaskMgr::TASK_INTERVAL,
-                                         m_regionList.empty() ? zone_server : zone_server_region, std::chrono::milliseconds((int)(1000 / server_tick_rate)));
+                                         m_regionList.empty() ? zone_server : zone_server_region,
+                                         std::chrono::milliseconds(static_cast<uint32>(server_tick_interval)));
 }
 
 void CZone::CharZoneIn(CCharEntity* PChar)
@@ -1162,7 +1132,7 @@ void CZone::CheckRegions(CCharEntity* PChar)
     PChar->m_InsideRegionID = RegionID;
 }
 
-//====================================1=======================
+//===========================================================
 
 /*
 id              CBaseEntity
