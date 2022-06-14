@@ -23,6 +23,15 @@ require("modules/era/lua/dynamis/mobs/era_buburimu_mobs")
 require("modules/era/lua/dynamis/mobs/era_qufim_mobs")
 require("modules/era/lua/dynamis/mobs/era_valkurm_mobs")
 require("modules/era/lua/dynamis/mobs/era_xarcabard_mobs")
+require("modules/era/lua/dynamis/mob_spawning_files/dynamis_bastok_mobs")
+require("modules/era/lua/dynamis/mob_spawning_files/dynamis_beaucedine_mobs")
+require("modules/era/lua/dynamis/mob_spawning_files/dynamis_buburimu_mobs")
+require("modules/era/lua/dynamis/mob_spawning_files/dynamis_jeuno_mobs")
+require("modules/era/lua/dynamis/mob_spawning_files/dynamis_qufim_mobs")
+require("modules/era/lua/dynamis/mob_spawning_files/dynamis_san_d_oria_mobs")
+require("modules/era/lua/dynamis/mob_spawning_files/dynamis_valkurm_mobs")
+require("modules/era/lua/dynamis/mob_spawning_files/dynamis_windurst_mobs")
+require("modules/era/lua/dynamis/mob_spawning_files/dynamis_xarcabard_mobs")
 --------------------------------------------
 
 local m = Module:new("era_dynamis_spawning")
@@ -560,7 +569,6 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
     end
     local mobName = xi.dynamis.mobList[zoneID][mobIndex].info[2]
     local mobFamily = xi.dynamis.mobList[zoneID][mobIndex].info[3]
-    local mobVar =  0
     local mobNameFound = 0
     local groupIdFound = 0
     local groupZoneFound = 0
@@ -568,188 +576,176 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
     xi.dynamis.nmInfoLookup = 
     {
         -- Below use used to lookup Beastmen NMs
-        ["Goblin"] =
-        {
-            -- Dynamis - Beaucedine
-            ["Ascetox Ratgums"] = {"41736365", 143, 134, 176, 497, 1213}, -- Asce (BLM)
-            ["Bordox Kittyback"] = {"426f7264", 146, 134, 176, 0, 1213}, -- Bord (THF)
-            ["Brewnix Bittypupils"] = {"42726577", 142, 134, 176, 1, 1213}, -- Brew (WHM)
-            ["Draklix Scalecrust"] = {"4472616b", 149, 134, 176, 0, 1213}, -- Drak (DRG)
-            ["Droprix Granitepalms"] = {"44726f70", 139, 134, 176, 0, 1213}, -- Drop (MNK)
-            ["Gibberox Pimplebeak"] = {"47696262", 144, 134, 176, 3, 1213}, -- Gibb (RDM)
-            ["Moltenox Stubthumbs"] = {"4d6f6c74", 136, 134, 176, 0, 1213}, -- Molt (WAR)
-            ["Morblox Chubbychin"] = {"4d6f7262", 153, 134, 176, 0, 1213}, -- Morb (SMN)
-            ["Routsix Rubbertendon"] = {"526f7574", 151, 134, 176, 0, 1213}, -- Rout (BST)
-            ["Ruffbix Jumbolobes"] = {"52756666", 148, 134, 176, 4, 1213}, -- Ruff (PLD)
-            ["Shisox Widebrow"] = {"53686973", 156, 134, 176, 0, 1213}, -- Shis (SAM)
-            ["Slinkix Trufflesniff"] = {"536c696e", 155, 134, 176, 0, 1213}, -- Slin (RNG)
-            ["Swypestix Tigershins"] = {"53777970", 145, 134, 176, 7, 1213}, -- Swyp (NIN)
-            ["Tocktix Thinlids"] = {"546f636b", 150, 134, 176, 5, 1213}, -- Tock (DRK)
-            ["Whistix Toadthroat"] = {"57686973", 34, 188, 176, 6, 1213}, -- Whis (BRD)
-            -- Dynamis - Buburimu
-            ["Gosspix Blabberlips"] = {"476f7373", 144, 134,2667, 1213}, -- Goss (RDM)
-            ["Shamblix Rottenheart"] = {"5368616d", 150, 134,2667, 5, 1213}, -- Sham (DRK)
-            ["Woodnix Shrillwhistle"] = {"576f6f64", 151, 134, 2667, 0, 1213}, -- Wood (BST)
-            -- Dynamis - Jeuno
-            ["Bandrix Rockjaw"] = {"42616e64", 146, 134, 143, 0, 1213}, -- Band (THF)
-            ["Buffrix Eargone"] = {"42756666", 148, 134, 143, 4, 1213}, -- Buff (PLD)
-            ["Clocktix Longnail"] = {"436c6f63", 150, 134, 143, 5, 1213}, -- Cloc (DRK)
-            ["Elixmix Hooknose"] = {"456c6978", 142, 134, 143, 1, 1213}, -- Elix (WHM)
-            ["Gabblox Magpietongue"] = {"47616262", 144, 134, 143, 3, 1213}, -- Gabb (RDM)
-            ["Hermitrix Toothrot"] = {"4865726d", 143, 134, 143, 497, 1213}, -- Herm (BLM)
-            ["Humnox Dumbelly"] = {"48756d6e", 34, 188, 143, 6, 1213}, -- Humn (BRD)
-            ["Lurklox Dhalmelneck"] = {"4c75726b", 155, 134, 143, 0, 1213}, -- Lurk (RNG)
-            ["Morgmox Moldnoggin"] = {"4d6f7267", 153, 134, 143, 0, 1213}, -- Morg (SMN)
-            ["Sparkspox Sweatbrow"] = {"53706172", 136, 134, 143, 0, 1213}, -- Spar (WAR)
-            ["Ticktox Beadeyes"] = {"5469636b", 150, 134, 143, 5, 1213}, -- Tick (DRK)
-            ["Trailblix Goatmug"] = {"54726169", 151, 134, 143, 0, 1213}, -- Trai (BST)
-            ["Tufflix Loglimbs"] = {"54756666", 148, 134, 143, 4, 1213}, -- Tuff (PLD)
-            ["Wyrmwix Snakespecs"] = {"536e616b", 149, 134, 143, 0, 1213}, -- Snak (DRG)
-            ["Karashix Swollenskull"] = {"4b617261", 156, 134, 143, 0, 1213}, -- Kara (SAM)
-            ["Kikklix Longlegs"] = {"4b696b6b", 139, 134, 143, 0, 1213}, -- Kikk (MNK)
-            ["Rutrix Hamgams"] = {"52757472", 151, 134, 143, 0, 1213}, -- Rutr (BST)
-            ["Snypestix Eaglebeak"] = {"536e7970", 145, 134, 143, 7, 1213}, -- Snyp (NIN)
-            ["Mortilox Wartpaws"] = {"4d6f7274", 153, 134, 143, 0, 1213}, -- Mort (SMN)
-            ["Jabkix Pigeonpecs"] = {"4a61626b", 139, 134, 143, 0, 1213}, -- Jabk (MNK)
-            ["Smeltix Thickhide"] = {"536d656c", 136, 134, 143, 0, 1213}, -- Smel (WAR)
-            ["Wasabix Callusdigit"] = {"57617361", 156, 134, 143, 0, 1213}, -- Wasa (SAM)
-            ["Anvilix Sootwrists"] = {"416e7669", 136, 134, 143, 0, 1213}, -- Anvi (WAR)
-            ["Blazox Boneybod"] = {"426c617a", 151, 134, 143, 0, 1213}, -- Blaz (BST)
-            ["Bootrix Jaggedelbow"] = {"426f6f74", 139, 134, 143, 0, 1213}, -- Boot (MNK)
-            ["Distilix Stickytoes"] = {"44697374", 142, 134, 143, 1, 1213}, -- Dist (WHM)
-            ["Eremix Snottynostril"] = {"4572656d", 143, 134, 143, 497, 1213}, -- Erem (BLM)
-            ["Jabbrox Grannyguise"] = {"4a616262", 144, 134, 143, 3, 1213}, -- Jabb (RDM)
-            ["Mobpix Mucousmouth"] = {"4d6f6270", 146, 134, 143, 0, 1213}, -- Mobp (THF)
-            ["Prowlox Barrelbelly"] = {"50726f77", 155, 134, 143, 0, 1213}, -- Prow (RNG)
-            ["Scruffix Shaggychest"] = {"53637275", 148, 134, 143, 4, 1213}, -- Scru (PLD)
-            ["Slystix Megapeepers"] = {"536c7973", 145, 134, 143, 7, 1213}, -- Slys (NIN)
-            ["Tymexox Ninefingers"] = {"54796d65", 150, 134, 143, 5, 1213}, -- Tyme (DRK)
-        },
-        ["Orc"] =
-        {
-            -- Dynamis - Beaucedine
-            ["Cobraclaw Buchzvotch"] = {"43427563", 65, 134, 493, 0, 1200}, -- CBuc (MNK)
-            ["Deathcaller Bidfbid"] = {"44426964", 73, 134, 493, 0, 1200}, -- DBid (SMN)
-            ["Drakefeast Wubmfub"] = {"44577562", 88, 134, 493, 0, 1200}, -- DWub (DRG)
-            ["Elvaanlopper Grokdok"] = {"4547726f", 82, 134, 493, 0, 1200}, -- EGro (RNG)
-            ["Galkarider Retzpratz"] = {"47526574", 71, 134, 493, 0, 1200}, -- GRet (RNG)
-            ["Heavymail Djidzbad"] = {"48446a69", 80, 134, 493, 4, 1200}, -- HDji (PLD)
-            ["Humegutter Adzjbadj"] = {"4841627a", 60, 134, 493, 0, 1200}, -- HAbz (WAR)
-            ["Jeunoraider Gepkzip"] = {"4a476570", 63, 134, 493, 7, 1200}, -- JGep (NIN)
-            ["Lockbuster Zapdjipp"] = {"4c5a6170", 79, 134, 493, 0, 1200}, -- LZap (THF)
-            ["Mithraslaver Debhabob"] = {"4d446562", 85, 134, 493, 0, 1200}, -- MDeb (BST)
-            ["Skinmask Ugghfogg"] = {"53556767", 83, 134, 493, 5, 1200}, -- SUgg (DRK)
-            ["Spinalsucker Galflmall"] = {"5347616c", 73, 134, 493, 3, 1200}, -- SGal (RDM)
-            ["Taruroaster Biggsjig"] = {"54426967", 84, 134, 493, 497, 1200}, -- TBig (BLM)
-            ["Ultrasonic Zeknajak"] = {"555a656b", 87, 134, 493, 6, 1200}, -- UZek (BRD)
-            ["Wraithdancer Gidbnod"] = {"57476964", 63, 134, 493, 1, 1200}, -- WGid (WHM)
-            -- Dynamis Buburimu
-            ["Elvaansticker Bxafraff"] = {"456c7661", 88, 134, 760, 0, 1200}, -- Elva (DRG)
-            ["Flamecaller Zoeqdoq"] = {"466c616d", 84, 134, 760, 497, 1200}, -- Flam (BLM)
-            ["Hamfist Gukhbuk"] = {"48616d66", 65, 134, 760, 0, 1200}, -- Hamf (MNK)
-            ["Lyncean Juwgneg"] = {"4c796e63", 82, 134, 760, 0, 1200}, -- Lync (RNG)
-            -- Dynamis - San d'Oria
-            ["Wyrmgnasher Bjakdek"] = {"57797242", 88, 134, 237, 0, 1200}, -- WyrB (DRG)
-            ["Reapertongue Gadgquok"] = {"52656147", 73, 134, 237, 0, 1200}, -- ReaG (SMN)
-            ["Voidstreaker Butchnotch"] = {"566f6942", 63, 134, 237, 7, 1200}, -- VoiB (NIN)
-            ["Battlechoir Gitchfotch"] = {"42617447", 87, 134, 237, 6, 1200}, -- BatG (BRD)
-            ["Soulsender Fugbrag"] = {"536f7546", 87, 134, 237, 6, 1200}, -- SouF (BRD)
-        },
-        ["Quadav"] =
-        {
-            -- Dynamis - Beaucedine
-            ["Be'Zhe Keeprazer"] = {"42655a68", 53, 134, 261, 0, 1212}, -- BeZh (SMN)
-            ["De'Bho Pyrohand"] = {"44654268", 43, 134, 261, 497, 1212}, --DeBh (BLM)
-            ["Ga'Fho Venomtouch"] = {"47614668", 39, 134, 261, 3, 1212}, -- GaFh (WHM)
-            ["Go'Tyo Magenapper"] = {"476f5479", 44, 134, 261, 0, 1212}, -- GoTy (DRG)
-            ["Gu'Khu Dukesniper"] = {"47754b68", 50, 134, 261, 0, 1212}, -- GuKh (RNG)
-            ["Gu'Nha Wallstormer"] = {"47756861", 24, 134, 261, 0, 1212}, -- Guha (WAR)
-            ["Ji'Fhu Infiltrator"] = {"4a694668", 37, 134, 261, 0, 1212}, -- JiFh (THF)
-            ["Ji'Khu Towercleaver"] = {"4a694b68", 51, 134, 261, 0, 1212}, -- JiKh (SAM)
-            ["Mi'Rhe Whisperblade"] = {"4d695268", 52, 134, 261, 7, 1212}, -- MiRh (NIN)
-            ["Mu'Gha Legionkiller"] = {"4d754768", 47, 134, 261, 4, 1212}, -- MuGh (PLD)
-            ["Na'Hya Floodmaker"] = {"4e614879", 28, 134, 261, 3, 1212}, -- NaHy (RDM)
-            ["Nu'Bhi Spiraleye"] = {"4e754268", 41, 134, 261, 6, 1212}, -- NuBh (BRD)
-            ["So'Gho Adderhandler"] = {"536f4768", 48, 134, 261, 0, 1212}, -- SoGh (BST)
-            ["So'Zho Metalbender"] = {"536f5a68", 46, 134, 261, 0, 1212}, -- SoZh (MNK)
-            ["Ta'Hyu Gallanthunter"] = {"54614879", 40, 134, 261, 5, 1212}, -- TaHy (DRK)
-            -- Dynamis Buburimu
-            ["Gi'Bhe Fleshfeaster"] = {"47694268", 39, 134, 2901, 1, 1212}, -- GiBh (WHM)
-            ["Qu'Pho Bloodspiller"] = {"51755068", 24, 134, 2901, 0, 1212}, -- QuPh (WAR)
-            ["Te'Zha Ironclad"] = {"54655a68", 47, 134, 2901, 4, 1212}, -- TeZh (PLD)
-            ["Va'Rhu Bodysnatcher"] = {"56615268", 37, 134, 2901, 0, 1212}, -- VaRh (THF)
-            -- Dynamis - Bastok (Done)
-            ["Aa'Nyu Dismantler"] = {"41614e79", 40, 134, 2907, 5, 1212}, -- AaNy (DRK)
-            ["Gu'Nhi Noondozer"] = {"47754e68", 53, 134, 2907, 0, 1212}, -- GuNh (SMN)
-            ["Be'Ebo Tortoisedriver"] = {"42654562", 48, 134, 2907, 0, 1212}, -- BeEb (BST)
-            ["Gi'Pha Manameister"] = {"47695068", 43, 134, 2907, 497, 1212}, -- GiPh (BLM)
-            ["Ko'Dho Cannonball"] = {"4b6f4468", 46, 134, 2907, 0, 1212}, -- KoDh (MNK)
-            ["Ze'Vho Fallsplitter"] = {"5a655668", 40, 134, 2907, 5, 1212}, -- ZeVh (DRK)
-            ["Effigy Shield PLD"] = {"45504c44", 30, 134, 2907, 4, 1212}, -- EPLD (PLD)
-            ["Effigy Shield NIN"] = {"45504c44", 32, 134, 2907, 7, 1212}, -- ENIN (NIN)
-            ["Effigy Shield BRD"] = {"45504c44", 23, 134, 2907, 6, 1212}, -- EBRD (BRD)
-            ["Effigy Shield DRK"] = {"45504c44", 38, 134, 2907, 5, 1212}, -- EDRK (DRK)
-            ["Effigy Shield SAM"] = {"45504c44", 31, 134, 2907, 0, 1212}, -- ESAM (SAM)
-        },
-        ["Yagudo"] =
-        {
-            -- Dynamis - Beaucedine
-            ["Bhuu Wjato the Firepool"] = {"42687575", 106, 134, 265, 497, 1201}, -- Bhuu (BLM)
-            ["Caa Xaza the Madpiercer"] = {"43616158", 107, 134, 265, 3, 1201}, -- CaaX (RDM)
-            ["Foo Peku the Bloodcloak"] = {"466f6f50", 94, 134, 265, 0, 1201}, -- FooP (WAR)
-            ["Guu Waji the Preacher"] = {"47757557", 113, 134, 265, 4, 1201}, -- GuuW (PLD)
-            ["Hee Mida the Meticulous"] = {"4865654d", 120, 134, 265, 0, 1201}, -- HeeM (RNG)
-            ["Knii Hoqo the Bisector"] = {"4b6e6969", 121, 134, 265, 0, 1201}, -- Knii (SAM)
-            ["Koo Saxu the Everfast"] = {"4b6f6f53", 102, 134, 265, 1, 1201}, -- KooS (WHM)
-            ["Kuu Xuka the Nimble"] = {"4b757558", 115, 134, 265, 7, 1201}, -- KuuX (NIN)
-            ["Maa Zaua the Wyrmkeeper"] = {"4d61615a", 109, 134, 265, 0, 1201}, -- MaaZ (DRG)
-            ["Nee Huxa the Judgemental"] = {"4e656548", 114, 134, 265, 5, 1201}, -- NeeH (DRK)
-            ["Puu Timu the Phantasmal"] = {"50757554", 122, 134, 265, 0, 1201}, -- PuuT (SMN)
-            ["Ryy Qihi the Idolrobber"] = {"52797951", 110, 134, 265, 0, 1201}, -- RyyQ (THF)
-            ["Soo Jopo the Fiendking"] = {"536f6f4a", 116, 134, 265, 0, 1201}, -- SooJ (BST)
-            ["Xaa Chau the Roctalon"] = {"58616143", 97, 134, 265, 0, 1201}, -- XaaC (MNK)
-            ["Xhoo Fuza the Sublime"] = {"58686f6f", 119, 134, 265, 6, 1201}, -- Xhoo (BRD)
-            -- Dynamis - Buburimu
-            ["Baa Dava the Bibliophage"] = {"42616144", 91, 317, 2085, 0, 1201}, -- BaaD (SMN)
-            ["Doo Peku the Fleetfoot"] = {"446f6f50", 115, 134, 2085, 7, 1201}, -- DooP (NIN)
-            ["Koo Rahi the Levinblade"] = {"4b6f6f52", 121, 134, 2085, 0, 1201}, -- KooR (SAM)
-            ["Ree Nata the Melomanic"] = {"5265654e", 119, 134, 2085, 6, 1201}, -- ReeN (BRD)
-            -- Dynamis - Windurst
-            ["Xoo Kaza the Solemn"] = {"586f6f4b", 106, 134, 1560, 497, 1201}, -- XooK (BLM)
-            ["Haa Pevi the Stentorian"] = {"48616150", 91, 317, 1560, 0, 1201}, -- HaaP (SMN)
-            ["Wuu Qoho the Razorclaw"] = {"57757551", 97, 134, 1560, 0, 1201}, -- WuuQ (MNK)
-            ["Loo Hepe the Eyepiercer"] = {"4c6f6f48", 107, 134, 1560, 3, 1201}, -- LooH (RDM)
-            ["Muu Febi the Steadfast"] = {"4d757546", 113, 134, 1560, 4, 1201}, -- MuuF (PLD)
-            ["Maa Febi the Steadfast"] = {"4d616146", 113, 134, 1560, 4, 1201}, -- MaaF (PLD)
-        },
-        ["Kindred"] =
-        {
-            -- Dynamis - Xarcabard
-            ["Count Zaebos"] = {"5a616562", 51, 135, 521, 0, 358}, -- Zaeb (WAR)
-            ["Duke Berith"] = {"42657269", 47, 135, 714, 3, 358}, -- Beri (RDM)
-            ["Marquis Decarabia"] = {"44656361", 21, 135, 1626, 6, 358}, -- Deca (BRD)
-            ["Duke Gomory"] = {"476f6d6f", 39, 135, 715, 0, 358}, -- Gomo (MNK)
-            ["Marquis Andras"] = {"416e6472", 54, 135, 1624, 0, 358}, -- Andr (BST)
-            ["Prince Seere"] = {"53656572", 43, 135, 2021, 1, 358}, -- Seer (WHM)
-            ["Duke Scox"] = {"53636f78", 57, 135, 717, 5, 358}, -- Scox (DRK)
-            ["Marquis Gamygyn"] = {"47616d79", 65, 135, 1628, 7, 358}, -- Gamy (NIN)
-            ["Marquis Orias"] = {"4f726961", 46, 135, 1630, 497, 358}, -- Oria (BLM)
-            ["Count Raum"] = {"5261756d", 42, 135, 519, 0, 358}, --  Raum (THF)
-            ["Marquis Nebiros"] = {"4e656269", 67, 135, 1629, 0, 358}, -- Nebi (SMN)
-            ["Marquis Sabnak"] = {"5361626e", 49, 135, 1631, 4, 358}, -- Sabn (PLD)
-            ["Count Vine"] = {"56696e65", 62, 135, 528, 0, 358}, -- Vine (SAM)
-            ["King Zagan"] = {"5a616761", 60, 135, 1452, 0, 358}, -- Zaga (DRG)
-            ["Marquis Cimeries"] = {"43696d65", 56, 135, 1625, 0, 358}, -- Cime (RNG)
-        },
-        ["Hydra"] = 
-        {
-            -- Dynamis - Beaucedine
-            ["Dagourmarche"] = {"4461676f", 10, 134, 559, 0, 359}, -- Dago (DRG/BST/SMN)
-            ["Goublefaupe"] = {"476f7562", 6, 134, 1211, 499, 359}, -- Goub (WAR/PLD/RDM)
-            ["Mildaunegeux"] = {"4d696c64", 8, 134, 1672, 7, 359}, -- Mild (MNK/THF/NIN)
-            ["Quiebitiel"] = {"51756965", 7, 134, 2066, 498, 359}, -- Quie (WHM/BLM/BRD)
-            ["Velosareon"] = {"56656c6f", 9, 134, 2574, 5, 359}, -- Velo (RNG/SAM/DRK)
-        },
+        -- Goblin
+        -- Dynamis - Beaucedine
+        ["Ascetox Ratgums"] = {"41736365", 143, 134, 176, 497, 1213}, -- Asce (BLM)
+        ["Bordox Kittyback"] = {"426f7264", 146, 134, 176, 0, 1213}, -- Bord (THF)
+        ["Brewnix Bittypupils"] = {"42726577", 142, 134, 176, 1, 1213}, -- Brew (WHM)
+        ["Draklix Scalecrust"] = {"4472616b", 149, 134, 176, 0, 1213}, -- Drak (DRG)
+        ["Droprix Granitepalms"] = {"44726f70", 139, 134, 176, 0, 1213}, -- Drop (MNK)
+        ["Gibberox Pimplebeak"] = {"47696262", 144, 134, 176, 3, 1213}, -- Gibb (RDM)
+        ["Moltenox Stubthumbs"] = {"4d6f6c74", 136, 134, 176, 0, 1213}, -- Molt (WAR)
+        ["Morblox Chubbychin"] = {"4d6f7262", 153, 134, 176, 0, 1213}, -- Morb (SMN)
+        ["Routsix Rubbertendon"] = {"526f7574", 151, 134, 176, 0, 1213}, -- Rout (BST)
+        ["Ruffbix Jumbolobes"] = {"52756666", 148, 134, 176, 4, 1213}, -- Ruff (PLD)
+        ["Shisox Widebrow"] = {"53686973", 156, 134, 176, 0, 1213}, -- Shis (SAM)
+        ["Slinkix Trufflesniff"] = {"536c696e", 155, 134, 176, 0, 1213}, -- Slin (RNG)
+        ["Swypestix Tigershins"] = {"53777970", 145, 134, 176, 7, 1213}, -- Swyp (NIN)
+        ["Tocktix Thinlids"] = {"546f636b", 150, 134, 176, 5, 1213}, -- Tock (DRK)
+        ["Whistix Toadthroat"] = {"57686973", 34, 188, 176, 6, 1213}, -- Whis (BRD)
+        -- Dynamis - Buburimu
+        ["Gosspix Blabberlips"] = {"476f7373", 144, 134,2667, 1213}, -- Goss (RDM)
+        ["Shamblix Rottenheart"] = {"5368616d", 150, 134,2667, 5, 1213}, -- Sham (DRK)
+        ["Woodnix Shrillwhistle"] = {"576f6f64", 151, 134, 2667, 0, 1213}, -- Wood (BST)
+        -- Dynamis - Jeuno
+        ["Bandrix Rockjaw"] = {"42616e64", 146, 134, 143, 0, 1213}, -- Band (THF)
+        ["Buffrix Eargone"] = {"42756666", 148, 134, 143, 4, 1213}, -- Buff (PLD)
+        ["Clocktix Longnail"] = {"436c6f63", 150, 134, 143, 5, 1213}, -- Cloc (DRK)
+        ["Elixmix Hooknose"] = {"456c6978", 142, 134, 143, 1, 1213}, -- Elix (WHM)
+        ["Gabblox Magpietongue"] = {"47616262", 144, 134, 143, 3, 1213}, -- Gabb (RDM)
+        ["Hermitrix Toothrot"] = {"4865726d", 143, 134, 143, 497, 1213}, -- Herm (BLM)
+        ["Humnox Dumbelly"] = {"48756d6e", 34, 188, 143, 6, 1213}, -- Humn (BRD)
+        ["Lurklox Dhalmelneck"] = {"4c75726b", 155, 134, 143, 0, 1213}, -- Lurk (RNG)
+        ["Morgmox Moldnoggin"] = {"4d6f7267", 153, 134, 143, 0, 1213}, -- Morg (SMN)
+        ["Sparkspox Sweatbrow"] = {"53706172", 136, 134, 143, 0, 1213}, -- Spar (WAR)
+        ["Ticktox Beadeyes"] = {"5469636b", 150, 134, 143, 5, 1213}, -- Tick (DRK)
+        ["Trailblix Goatmug"] = {"54726169", 151, 134, 143, 0, 1213}, -- Trai (BST)
+        ["Tufflix Loglimbs"] = {"54756666", 148, 134, 143, 4, 1213}, -- Tuff (PLD)
+        ["Wyrmwix Snakespecs"] = {"536e616b", 149, 134, 143, 0, 1213}, -- Snak (DRG)
+        ["Karashix Swollenskull"] = {"4b617261", 156, 134, 143, 0, 1213}, -- Kara (SAM)
+        ["Kikklix Longlegs"] = {"4b696b6b", 139, 134, 143, 0, 1213}, -- Kikk (MNK)
+        ["Rutrix Hamgams"] = {"52757472", 151, 134, 143, 0, 1213}, -- Rutr (BST)
+        ["Snypestix Eaglebeak"] = {"536e7970", 145, 134, 143, 7, 1213}, -- Snyp (NIN)
+        ["Mortilox Wartpaws"] = {"4d6f7274", 153, 134, 143, 0, 1213}, -- Mort (SMN)
+        ["Jabkix Pigeonpecs"] = {"4a61626b", 139, 134, 143, 0, 1213}, -- Jabk (MNK)
+        ["Smeltix Thickhide"] = {"536d656c", 136, 134, 143, 0, 1213}, -- Smel (WAR)
+        ["Wasabix Callusdigit"] = {"57617361", 156, 134, 143, 0, 1213}, -- Wasa (SAM)
+        ["Anvilix Sootwrists"] = {"416e7669", 136, 134, 143, 0, 1213}, -- Anvi (WAR)
+        ["Blazox Boneybod"] = {"426c617a", 151, 134, 143, 0, 1213}, -- Blaz (BST)
+        ["Bootrix Jaggedelbow"] = {"426f6f74", 139, 134, 143, 0, 1213}, -- Boot (MNK)
+        ["Distilix Stickytoes"] = {"44697374", 142, 134, 143, 1, 1213}, -- Dist (WHM)
+        ["Eremix Snottynostril"] = {"4572656d", 143, 134, 143, 497, 1213}, -- Erem (BLM)
+        ["Jabbrox Grannyguise"] = {"4a616262", 144, 134, 143, 3, 1213}, -- Jabb (RDM)
+        ["Mobpix Mucousmouth"] = {"4d6f6270", 146, 134, 143, 0, 1213}, -- Mobp (THF)
+        ["Prowlox Barrelbelly"] = {"50726f77", 155, 134, 143, 0, 1213}, -- Prow (RNG)
+        ["Scruffix Shaggychest"] = {"53637275", 148, 134, 143, 4, 1213}, -- Scru (PLD)
+        ["Slystix Megapeepers"] = {"536c7973", 145, 134, 143, 7, 1213}, -- Slys (NIN)
+        ["Tymexox Ninefingers"] = {"54796d65", 150, 134, 143, 5, 1213}, -- Tyme (DRK)
+        -- Orc
+        -- Dynamis - Beaucedine
+        ["Cobraclaw Buchzvotch"] = {"43427563", 65, 134, 493, 0, 1200}, -- CBuc (MNK)
+        ["Deathcaller Bidfbid"] = {"44426964", 73, 134, 493, 0, 1200}, -- DBid (SMN)
+        ["Drakefeast Wubmfub"] = {"44577562", 88, 134, 493, 0, 1200}, -- DWub (DRG)
+        ["Elvaanlopper Grokdok"] = {"4547726f", 82, 134, 493, 0, 1200}, -- EGro (RNG)
+        ["Galkarider Retzpratz"] = {"47526574", 71, 134, 493, 0, 1200}, -- GRet (RNG)
+        ["Heavymail Djidzbad"] = {"48446a69", 80, 134, 493, 4, 1200}, -- HDji (PLD)
+        ["Humegutter Adzjbadj"] = {"4841627a", 60, 134, 493, 0, 1200}, -- HAbz (WAR)
+        ["Jeunoraider Gepkzip"] = {"4a476570", 63, 134, 493, 7, 1200}, -- JGep (NIN)
+        ["Lockbuster Zapdjipp"] = {"4c5a6170", 79, 134, 493, 0, 1200}, -- LZap (THF)
+        ["Mithraslaver Debhabob"] = {"4d446562", 85, 134, 493, 0, 1200}, -- MDeb (BST)
+        ["Skinmask Ugghfogg"] = {"53556767", 83, 134, 493, 5, 1200}, -- SUgg (DRK)
+        ["Spinalsucker Galflmall"] = {"5347616c", 73, 134, 493, 3, 1200}, -- SGal (RDM)
+        ["Taruroaster Biggsjig"] = {"54426967", 84, 134, 493, 497, 1200}, -- TBig (BLM)
+        ["Ultrasonic Zeknajak"] = {"555a656b", 87, 134, 493, 6, 1200}, -- UZek (BRD)
+        ["Wraithdancer Gidbnod"] = {"57476964", 63, 134, 493, 1, 1200}, -- WGid (WHM)
+        -- Dynamis Buburimu
+        ["Elvaansticker Bxafraff"] = {"456c7661", 88, 134, 760, 0, 1200}, -- Elva (DRG)
+        ["Flamecaller Zoeqdoq"] = {"466c616d", 84, 134, 760, 497, 1200}, -- Flam (BLM)
+        ["Hamfist Gukhbuk"] = {"48616d66", 65, 134, 760, 0, 1200}, -- Hamf (MNK)
+        ["Lyncean Juwgneg"] = {"4c796e63", 82, 134, 760, 0, 1200}, -- Lync (RNG)
+        -- Dynamis - San d'Oria
+        ["Wyrmgnasher Bjakdek"] = {"57797242", 88, 134, 237, 0, 1200}, -- WyrB (DRG)
+        ["Reapertongue Gadgquok"] = {"52656147", 73, 134, 237, 0, 1200}, -- ReaG (SMN)
+        ["Voidstreaker Butchnotch"] = {"566f6942", 63, 134, 237, 7, 1200}, -- VoiB (NIN)
+        ["Battlechoir Gitchfotch"] = {"42617447", 87, 134, 237, 6, 1200}, -- BatG (BRD)
+        ["Soulsender Fugbrag"] = {"536f7546", 87, 134, 237, 6, 1200}, -- SouF (BRD)
+        -- Quadav
+        -- Dynamis - Beaucedine
+        ["Be'Zhe Keeprazer"] = {"42655a68", 53, 134, 261, 0, 1212}, -- BeZh (SMN)
+        ["De'Bho Pyrohand"] = {"44654268", 43, 134, 261, 497, 1212}, --DeBh (BLM)
+        ["Ga'Fho Venomtouch"] = {"47614668", 39, 134, 261, 3, 1212}, -- GaFh (WHM)
+        ["Go'Tyo Magenapper"] = {"476f5479", 44, 134, 261, 0, 1212}, -- GoTy (DRG)
+        ["Gu'Khu Dukesniper"] = {"47754b68", 50, 134, 261, 0, 1212}, -- GuKh (RNG)
+        ["Gu'Nha Wallstormer"] = {"47756861", 24, 134, 261, 0, 1212}, -- Guha (WAR)
+        ["Ji'Fhu Infiltrator"] = {"4a694668", 37, 134, 261, 0, 1212}, -- JiFh (THF)
+        ["Ji'Khu Towercleaver"] = {"4a694b68", 51, 134, 261, 0, 1212}, -- JiKh (SAM)
+        ["Mi'Rhe Whisperblade"] = {"4d695268", 52, 134, 261, 7, 1212}, -- MiRh (NIN)
+        ["Mu'Gha Legionkiller"] = {"4d754768", 47, 134, 261, 4, 1212}, -- MuGh (PLD)
+        ["Na'Hya Floodmaker"] = {"4e614879", 28, 134, 261, 3, 1212}, -- NaHy (RDM)
+        ["Nu'Bhi Spiraleye"] = {"4e754268", 41, 134, 261, 6, 1212}, -- NuBh (BRD)
+        ["So'Gho Adderhandler"] = {"536f4768", 48, 134, 261, 0, 1212}, -- SoGh (BST)
+        ["So'Zho Metalbender"] = {"536f5a68", 46, 134, 261, 0, 1212}, -- SoZh (MNK)
+        ["Ta'Hyu Gallanthunter"] = {"54614879", 40, 134, 261, 5, 1212}, -- TaHy (DRK)
+        -- Dynamis Buburimu
+        ["Gi'Bhe Fleshfeaster"] = {"47694268", 39, 134, 2901, 1, 1212}, -- GiBh (WHM)
+        ["Qu'Pho Bloodspiller"] = {"51755068", 24, 134, 2901, 0, 1212}, -- QuPh (WAR)
+        ["Te'Zha Ironclad"] = {"54655a68", 47, 134, 2901, 4, 1212}, -- TeZh (PLD)
+        ["Va'Rhu Bodysnatcher"] = {"56615268", 37, 134, 2901, 0, 1212}, -- VaRh (THF)
+        -- Dynamis - Bastok (Done)
+        ["Aa'Nyu Dismantler"] = {"41614e79", 40, 134, 2907, 5, 1212}, -- AaNy (DRK)
+        ["Gu'Nhi Noondozer"] = {"47754e68", 53, 134, 2907, 0, 1212}, -- GuNh (SMN)
+        ["Be'Ebo Tortoisedriver"] = {"42654562", 48, 134, 2907, 0, 1212}, -- BeEb (BST)
+        ["Gi'Pha Manameister"] = {"47695068", 43, 134, 2907, 497, 1212}, -- GiPh (BLM)
+        ["Ko'Dho Cannonball"] = {"4b6f4468", 46, 134, 2907, 0, 1212}, -- KoDh (MNK)
+        ["Ze'Vho Fallsplitter"] = {"5a655668", 40, 134, 2907, 5, 1212}, -- ZeVh (DRK)
+        ["Effigy Shield PLD"] = {"45504c44", 30, 134, 2907, 4, 1212}, -- EPLD (PLD)
+        ["Effigy Shield NIN"] = {"45504c44", 32, 134, 2907, 7, 1212}, -- ENIN (NIN)
+        ["Effigy Shield BRD"] = {"45504c44", 23, 134, 2907, 6, 1212}, -- EBRD (BRD)
+        ["Effigy Shield DRK"] = {"45504c44", 38, 134, 2907, 5, 1212}, -- EDRK (DRK)
+        ["Effigy Shield SAM"] = {"45504c44", 31, 134, 2907, 0, 1212}, -- ESAM (SAM)
+        -- Yagudo
+        -- Dynamis - Beaucedine
+        ["Bhuu Wjato the Firepool"] = {"42687575", 106, 134, 265, 497, 1201}, -- Bhuu (BLM)
+        ["Caa Xaza the Madpiercer"] = {"43616158", 107, 134, 265, 3, 1201}, -- CaaX (RDM)
+        ["Foo Peku the Bloodcloak"] = {"466f6f50", 94, 134, 265, 0, 1201}, -- FooP (WAR)
+        ["Guu Waji the Preacher"] = {"47757557", 113, 134, 265, 4, 1201}, -- GuuW (PLD)
+        ["Hee Mida the Meticulous"] = {"4865654d", 120, 134, 265, 0, 1201}, -- HeeM (RNG)
+        ["Knii Hoqo the Bisector"] = {"4b6e6969", 121, 134, 265, 0, 1201}, -- Knii (SAM)
+        ["Koo Saxu the Everfast"] = {"4b6f6f53", 102, 134, 265, 1, 1201}, -- KooS (WHM)
+        ["Kuu Xuka the Nimble"] = {"4b757558", 115, 134, 265, 7, 1201}, -- KuuX (NIN)
+        ["Maa Zaua the Wyrmkeeper"] = {"4d61615a", 109, 134, 265, 0, 1201}, -- MaaZ (DRG)
+        ["Nee Huxa the Judgemental"] = {"4e656548", 114, 134, 265, 5, 1201}, -- NeeH (DRK)
+        ["Puu Timu the Phantasmal"] = {"50757554", 122, 134, 265, 0, 1201}, -- PuuT (SMN)
+        ["Ryy Qihi the Idolrobber"] = {"52797951", 110, 134, 265, 0, 1201}, -- RyyQ (THF)
+        ["Soo Jopo the Fiendking"] = {"536f6f4a", 116, 134, 265, 0, 1201}, -- SooJ (BST)
+        ["Xaa Chau the Roctalon"] = {"58616143", 97, 134, 265, 0, 1201}, -- XaaC (MNK)
+        ["Xhoo Fuza the Sublime"] = {"58686f6f", 119, 134, 265, 6, 1201}, -- Xhoo (BRD)
+        -- Dynamis - Buburimu
+        ["Baa Dava the Bibliophage"] = {"42616144", 91, 317, 2085, 0, 1201}, -- BaaD (SMN)
+        ["Doo Peku the Fleetfoot"] = {"446f6f50", 115, 134, 2085, 7, 1201}, -- DooP (NIN)
+        ["Koo Rahi the Levinblade"] = {"4b6f6f52", 121, 134, 2085, 0, 1201}, -- KooR (SAM)
+        ["Ree Nata the Melomanic"] = {"5265654e", 119, 134, 2085, 6, 1201}, -- ReeN (BRD)
+        -- Dynamis - Windurst
+        ["Xoo Kaza the Solemn"] = {"586f6f4b", 106, 134, 1560, 497, 1201}, -- XooK (BLM)
+        ["Haa Pevi the Stentorian"] = {"48616150", 91, 317, 1560, 0, 1201}, -- HaaP (SMN)
+        ["Wuu Qoho the Razorclaw"] = {"57757551", 97, 134, 1560, 0, 1201}, -- WuuQ (MNK)
+        ["Loo Hepe the Eyepiercer"] = {"4c6f6f48", 107, 134, 1560, 3, 1201}, -- LooH (RDM)
+        ["Muu Febi the Steadfast"] = {"4d757546", 113, 134, 1560, 4, 1201}, -- MuuF (PLD)
+        ["Maa Febi the Steadfast"] = {"4d616146", 113, 134, 1560, 4, 1201}, -- MaaF (PLD)
+        -- Kindred
+        -- Dynamis - Xarcabard
+        ["Count Zaebos"] = {"5a616562", 51, 135, 521, 0, 358}, -- Zaeb (WAR)
+        ["Duke Berith"] = {"42657269", 47, 135, 714, 3, 358}, -- Beri (RDM)
+        ["Marquis Decarabia"] = {"44656361", 21, 135, 1626, 6, 358}, -- Deca (BRD)
+        ["Duke Gomory"] = {"476f6d6f", 39, 135, 715, 0, 358}, -- Gomo (MNK)
+        ["Marquis Andras"] = {"416e6472", 54, 135, 1624, 0, 358}, -- Andr (BST)
+        ["Prince Seere"] = {"53656572", 43, 135, 2021, 1, 358}, -- Seer (WHM)
+        ["Duke Scox"] = {"53636f78", 57, 135, 717, 5, 358}, -- Scox (DRK)
+        ["Marquis Gamygyn"] = {"47616d79", 65, 135, 1628, 7, 358}, -- Gamy (NIN)
+        ["Marquis Orias"] = {"4f726961", 46, 135, 1630, 497, 358}, -- Oria (BLM)
+        ["Count Raum"] = {"5261756d", 42, 135, 519, 0, 358}, --  Raum (THF)
+        ["Marquis Nebiros"] = {"4e656269", 67, 135, 1629, 0, 358}, -- Nebi (SMN)
+        ["Marquis Sabnak"] = {"5361626e", 49, 135, 1631, 4, 358}, -- Sabn (PLD)
+        ["Count Vine"] = {"56696e65", 62, 135, 528, 0, 358}, -- Vine (SAM)
+        ["King Zagan"] = {"5a616761", 60, 135, 1452, 0, 358}, -- Zaga (DRG)
+        ["Marquis Cimeries"] = {"43696d65", 56, 135, 1625, 0, 358}, -- Cime (RNG)
+        -- Hydra
+        -- Dynamis - Beaucedine
+        ["Dagourmarche"] = {"4461676f", 10, 134, 559, 0, 359}, -- Dago (DRG/BST/SMN)
+        ["Goublefaupe"] = {"476f7562", 6, 134, 1211, 499, 359}, -- Goub (WAR/PLD/RDM)
+        ["Mildaunegeux"] = {"4d696c64", 8, 134, 1672, 7, 359}, -- Mild (MNK/THF/NIN)
+        ["Quiebitiel"] = {"51756965", 7, 134, 2066, 498, 359}, -- Quie (WHM/BLM/BRD)
+        ["Velosareon"] = {"56656c6f", 9, 134, 2574, 5, 359}, -- Velo (RNG/SAM/DRK)
         -- Below is used to lookup non-beastmen NMs.
         -- Dynamis - Bastok
         ["Gu'Dha Effigy"] = {"424d62", 1, 186, 2906, 0, 143}, -- BMb (Bastok Megaboss)
@@ -1113,9 +1109,9 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         },
     }
     if mobFamily == "Goblin" or mobFamily == "Orc" or mobFamily == "Quadav" or mobFamily == "Yagudo" or mobFamily == "Kindred" then -- Used for Beastmen NMs to Spawn in Parallel to Non-Standards
-        mobNameFound = xi.dynamis.nmInfoLookup[mobFamily][mobName][1]
-        groupIdFound = xi.dynamis.nmInfoLookup[mobFamily][mobName][2]
-        groupZoneFound = xi.dynamis.nmInfoLookup[mobFamily][mobName][3]
+        mobNameFound = xi.dynamis.nmInfoLookup[mobName][1]
+        groupIdFound = xi.dynamis.nmInfoLookup[mobName][2]
+        groupZoneFound = xi.dynamis.nmInfoLookup[mobName][3]
         functionLookup = "Beastmen"
     elseif mobName == "Gu'Dha Effigy" or mobName == "Goblin Golem" or mobName == "Overlord's Tombstone" or mobName == "Tzee Xicu Idol" then -- City Dynamis Megabosses (Bastok, Jeuno, Sandy, Windy)
         mobNameFound = xi.dynamis.nmInfoLookup[mobName][1]
@@ -1172,22 +1168,12 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
     })
     mob:setSpawn(xPos, yPos, zPos, rPos)
     mob:spawn()
-    if mobFamily == nil then
-        mob:setDropID(xi.dynamis.nmInfoLookup[mobName][4])
-        if xi.dynamis.nmInfoLookup[mobName][5] ~= nil then -- If SpellList ~= nil set SpellList
-            mob:setSpellList(xi.dynamis.nmInfoLookup[mobName][5])
-        end
-        if xi.dynamis.nmInfoLookup[mobName][6] ~= nil then -- If SkillList ~= nil set SkillList
-            mob:setMobMod(xi.mobMod.SKILL_LIST, xi.dynamis.nmInfoLookup[mobName][6])
-        end
-    else
-        mob:setDropID(xi.dynamis.nmInfoLookup[mobFamily][mobName][4])
-        if xi.dynamis.nmInfoLookup[mobFamily][mobName][5] ~= nil then -- If SpellList ~= nil set SpellList
-            mob:setSpellList(xi.dynamis.nmInfoLookup[mobFamily][mobName][5])
-        end
-        if xi.dynamis.nmInfoLookup[mobFamily][mobName][6] ~= nil then -- If SkillList ~= nil set SkillList
-            mob:setMobMod(xi.mobMod.SKILL_LIST, xi.dynamis.nmInfoLookup[mobFamily][mobName][6])
-        end
+    mob:setDropID(xi.dynamis.nmInfoLookup[mobName][4])
+    if xi.dynamis.nmInfoLookup[mobName][5] ~= nil then -- If SpellList ~= nil set SpellList
+        mob:setSpellList(xi.dynamis.nmInfoLookup[mobName][5])
+    end
+    if xi.dynamis.nmInfoLookup[mobName][6] ~= nil then -- If SkillList ~= nil set SkillList
+        mob:setMobMod(xi.mobMod.SKILL_LIST, xi.dynamis.nmInfoLookup[mobName][6])
     end
     if oMobIndex ~= nil then
         mob:setLocalVar("Parent", oMobIndex)
@@ -1486,7 +1472,7 @@ xi.dynamis.mobOnRoam = function(mob) -- Handle pathing.
     if mob:getRoamFlags() == xi.roamFlag.EVENT then
         local zoneID = mob:getZoneID()
         local mobIndex = mob:getLocalVar(string.format("MobIndex_%s", mob:getID()))
-        for key, index in pairs(xi.dynamis.mobList[zoneID].patrolPaths) do
+        for _, index in pairs(xi.dynamis.mobList[zoneID].patrolPaths) do
             local table = xi.dynamis.mobList[zoneID][index].patrolPath
             if mobIndex == index then
                 local flags = xi.path.flag.RUN
@@ -1502,7 +1488,6 @@ xi.dynamis.mobOnRoam = function(mob) -- Handle pathing.
                     mob:pathTo(home[1], home[2], home[3], flags)
                 end
             end
-            key = key + 1
         end
     end
 end

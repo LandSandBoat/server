@@ -732,31 +732,32 @@ xi.dynamis.mobList[zoneID][142].pos = {117.2442, 0.9944, -71.5537, 128 } -- W3 M
 
 -- xi.dynamis.mobList[zoneID][8  ].patrolPath = { -96,  -2, -123,     -60,  -2, -113,    -96,   -2, -123  }    -- Entrance Bridge W
 
-xi.dynamis.mobList[zoneID][6  ].patrolPath = {   40,    0,  -85,     40,    1,  -96,     40,    0,  -85     } -- W1 Choc C
-xi.dynamis.mobList[zoneID][35 ].patrolPath = {    3,    0,  -25,    -12,    0,  -25,      3,    0,  -25     } -- W1 AH N.Alley C
-xi.dynamis.mobList[zoneID][11 ].patrolPath = {    7,    0, -100,      5,    0,  -79,      7,    0, -100     } -- W1 W of Choc
-xi.dynamis.mobList[zoneID][21 ].patrolPath = {  -24,    0, -100,    -24,    0,  -79,    -24,    0, -100     } -- W1 W of Choc
-xi.dynamis.mobList[zoneID][14 ].patrolPath = {  -20,    0,  -79,    -16,   -3,  -64,    -20,    0,  -79     } -- W1 AH WW
-xi.dynamis.mobList[zoneID][12 ].patrolPath = {    0,    0,  -79,     0,    -3,  -64,      0,    0,  -79     } -- W1 AH C
-xi.dynamis.mobList[zoneID][9  ].patrolPath = {   20,    0,  -79,     16,   -3,  -64,     20,    0,  -79     } -- W1 AH EE
-xi.dynamis.mobList[zoneID][34 ].patrolPath = {  -44,    0,  -29,    -42,    0,   -9,    -44,    0,  -29     } -- W1 W of AH (NW)
-xi.dynamis.mobList[zoneID][25 ].patrolPath = {  -10,   -1, -114,    -25,   -1, -114,    -10,   -1, -114     } -- W1 S.Gate S
-xi.dynamis.mobList[zoneID][32 ].patrolPath = {  -32,    0,  -38,    -45,    0,  -38,    -32,    0,  -38     } -- W1 W of AH (C)
-xi.dynamis.mobList[zoneID][58 ].patrolPath = {  -78,    0,    4,    -70,    0,    9,    -78,    0,    4     } -- W1 Under Bridge NE
-xi.dynamis.mobList[zoneID][60 ].patrolPath = {  -78,    0,   -4,    -70,    0,   -9,    -78,    0,   -4     } -- W1 Under Bridge SE
-xi.dynamis.mobList[zoneID][59 ].patrolPath = {  -70,    0,    0,    -78,    0,    0,    -70,    0,    0     } -- W1 Under Bridge E
-xi.dynamis.mobList[zoneID][61 ].patrolPath = {  -94,    0,    9,    -87,    0,    4,    -94,    0,    9     } -- W1 Under Bridge NW
-xi.dynamis.mobList[zoneID][63 ].patrolPath = {  -94,    0,   -9,    -87,    0,   -4,    -94,    0,   -9     } -- W1 Under Bridge SW
-xi.dynamis.mobList[zoneID][62 ].patrolPath = {  -94,    0,    0,    -86,    0,    0,    -94,    0,    0     } -- W1 Under Bridge W
-xi.dynamis.mobList[zoneID][75 ].patrolPath = { -128, -1.6,    4,   -128,    0,   -6,   -128, -1.6,    4     } -- W1 Zer N.Ramp (SW)
-xi.dynamis.mobList[zoneID][76 ].patrolPath = { -132,    0,   -6,   -132, -1.6,    4,   -132,    0,   -6     } -- W1 Zer N.Ramp (NW)
-xi.dynamis.mobList[zoneID][70 ].patrolPath = { -108,   -8,  -60,   -108,    0,  -14,   -108,   -8,  -60     } -- W1 Depot Ramp Base
-xi.dynamis.mobList[zoneID][71 ].patrolPath = { -102,   -8,  -60,    -60,    0,  -60,   -102,   -8,  -60     } -- W1 Depot Ramp Top
-xi.dynamis.mobList[zoneID][47 ].patrolPath = {   31,    7,   -2,      4,    7,   -2,     31,    7,   -2     } -- W1 O.St. NE
-xi.dynamis.mobList[zoneID][49 ].patrolPath = {   31,    7,    5,     31,    3,   16,     31,    7,    5     } -- W1 O.St. CW S.Well Base
-xi.dynamis.mobList[zoneID][50 ].patrolPath = {   31,    0,   24,     31,    2,   18,     31,    0,   24     } -- W1 O.St. CW S.Well#2
-xi.dynamis.mobList[zoneID][104].patrolPath = {   74,    0,    8,     60,    0,    8,     74,    0,    8     } -- W1 O.St. CW Enc.#4
-xi.dynamis.mobList[zoneID][102].patrolPath = {   36,    0,    8,     21,    0,    8,     36,    0,    8     } -- W1 O.St. CW Enc.#3
+xi.dynamis.mobList[zoneID].patrolPaths = {6, 35, 11, 21, 14, 12, 9, 34, 25, 32, 58, 60, 59, 61, 63, 62, 75, 76, 70, 71, 47, 49, 50, 104, 102}
+xi.dynamis.mobList[zoneID][6  ].patrolPath = {   40,    0,  -85,     40,    1,  -96,     } -- W1 Choc C
+xi.dynamis.mobList[zoneID][35 ].patrolPath = {    3,    0,  -25,    -12,    0,  -25,     } -- W1 AH N.Alley C
+xi.dynamis.mobList[zoneID][11 ].patrolPath = {    7,    0, -100,      5,    0,  -79,     } -- W1 W of Choc
+xi.dynamis.mobList[zoneID][21 ].patrolPath = {  -24,    0, -100,    -24,    0,  -79,     } -- W1 W of Choc
+xi.dynamis.mobList[zoneID][14 ].patrolPath = {  -20,    0,  -79,    -16,   -3,  -64,     } -- W1 AH WW
+xi.dynamis.mobList[zoneID][12 ].patrolPath = {    0,    0,  -79,     0,    -3,  -64,     } -- W1 AH C
+xi.dynamis.mobList[zoneID][9  ].patrolPath = {   20,    0,  -79,     16,   -3,  -64,     } -- W1 AH EE
+xi.dynamis.mobList[zoneID][34 ].patrolPath = {  -44,    0,  -29,    -42,    0,   -9,     } -- W1 W of AH (NW)
+xi.dynamis.mobList[zoneID][25 ].patrolPath = {  -10,   -1, -114,    -25,   -1, -114,     } -- W1 S.Gate S
+xi.dynamis.mobList[zoneID][32 ].patrolPath = {  -32,    0,  -38,    -45,    0,  -38,     } -- W1 W of AH (C)
+xi.dynamis.mobList[zoneID][58 ].patrolPath = {  -78,    0,    4,    -70,    0,    9,     } -- W1 Under Bridge NE
+xi.dynamis.mobList[zoneID][60 ].patrolPath = {  -78,    0,   -4,    -70,    0,   -9,     } -- W1 Under Bridge SE
+xi.dynamis.mobList[zoneID][59 ].patrolPath = {  -70,    0,    0,    -78,    0,    0,     } -- W1 Under Bridge E
+xi.dynamis.mobList[zoneID][61 ].patrolPath = {  -94,    0,    9,    -87,    0,    4,     } -- W1 Under Bridge NW
+xi.dynamis.mobList[zoneID][63 ].patrolPath = {  -94,    0,   -9,    -87,    0,   -4,     } -- W1 Under Bridge SW
+xi.dynamis.mobList[zoneID][62 ].patrolPath = {  -94,    0,    0,    -86,    0,    0,     } -- W1 Under Bridge W
+xi.dynamis.mobList[zoneID][75 ].patrolPath = { -128, -1.6,    4,   -128,    0,   -6,     } -- W1 Zer N.Ramp (SW)
+xi.dynamis.mobList[zoneID][76 ].patrolPath = { -132,    0,   -6,   -132, -1.6,    4,     } -- W1 Zer N.Ramp (NW)
+xi.dynamis.mobList[zoneID][70 ].patrolPath = { -108,   -8,  -60,   -108,    0,  -14,     } -- W1 Depot Ramp Base
+xi.dynamis.mobList[zoneID][71 ].patrolPath = { -102,   -8,  -60,    -60,    0,  -60,     } -- W1 Depot Ramp Top
+xi.dynamis.mobList[zoneID][47 ].patrolPath = {   31,    7,   -2,      4,    7,   -2,     } -- W1 O.St. NE
+xi.dynamis.mobList[zoneID][49 ].patrolPath = {   31,    7,    5,     31,    3,   16,     } -- W1 O.St. CW S.Well Base
+xi.dynamis.mobList[zoneID][50 ].patrolPath = {   31,    0,   24,     31,    2,   18,     } -- W1 O.St. CW S.Well#2
+xi.dynamis.mobList[zoneID][104].patrolPath = {   74,    0,    8,     60,    0,    8,     } -- W1 O.St. CW Enc.#4
+xi.dynamis.mobList[zoneID][102].patrolPath = {   36,    0,    8,     21,    0,    8,     } -- W1 O.St. CW Enc.#3
 
 ------------------------------------------
 --          Statue Eye Colors           --

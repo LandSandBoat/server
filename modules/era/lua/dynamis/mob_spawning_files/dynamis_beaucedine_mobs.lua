@@ -94,13 +94,13 @@ end
 --xi.dynamis.mobList[zoneID][MobIndex].info = {"Statue/NM/Nightmare", "Mob Name", "Family", "Main Job", "MobLocalVarName"}
 
 xi.dynamis.mobList[zoneID][1  ].info = {"Statue", "Adamantking Effigy", "Quadav", nil, nil} -- (001-Q)
-xi.dynamis.mobList[zoneID][2  ].info = {"Statue", "Serjent Tombstone", "Orc", nil, nil} -- (002-O)
+xi.dynamis.mobList[zoneID][2  ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- (002-O)
 xi.dynamis.mobList[zoneID][3  ].info = {"Statue", "Avatar Icon", "Yagudo", nil, nil} -- (003-Y)
 xi.dynamis.mobList[zoneID][4  ].info = {"Statue", "Goblin Replica", "Goblin", nil, nil} -- (004-G)
 xi.dynamis.mobList[zoneID][5  ].info = {"Statue", "Avatar Icon", "Yagudo", nil, nil} -- (005-Y) (HP)
 xi.dynamis.mobList[zoneID][6  ].info = {"Statue", "Adamantking Effigy", "Quadav", nil, nil} -- (006-Q)
-xi.dynamis.mobList[zoneID][7  ].info = {"Statue", "Serjent Tombstone", "Orc", nil, nil} -- (007-O)
-xi.dynamis.mobList[zoneID][8  ].info = {"Statue", "Goblin replica", "Goblin", nil, nil} -- (008-G) (MP)
+xi.dynamis.mobList[zoneID][7  ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- (007-O)
+xi.dynamis.mobList[zoneID][8  ].info = {"Statue", "Goblin Replica", "Goblin", nil, nil} -- (008-G) (MP)
 xi.dynamis.mobList[zoneID][9  ].info = {"Statue", "Avatar Icon", "Yagudo", nil, nil} -- (009-Y)
 xi.dynamis.mobList[zoneID][10 ].info = {"Statue", "Avatar Icon", "Yagudo", nil, nil} -- (010-Y) (15)
 xi.dynamis.mobList[zoneID][11 ].info = {"Statue", "Avatar Icon", "Yagudo", nil, nil} -- (011-Y)
@@ -116,7 +116,7 @@ xi.dynamis.mobList[zoneID][20 ].info = {"Statue", "Avatar Icon", "Yagudo", nil, 
 xi.dynamis.mobList[zoneID][21 ].info = {"Statue", "Avatar Icon", "Yagudo", nil, nil} -- (021-Y)
 xi.dynamis.mobList[zoneID][22 ].info = {"Statue", "Avatar Icon", "Yagudo", nil, nil} -- (022-Y) (MP)
 xi.dynamis.mobList[zoneID][23 ].info = {"Statue", "Avatar Icon", "Yagudo", nil, nil} -- (023-Y) (HP)
-xi.dynamis.mobList[zoneID][24 ].info = {"Statue", "Dynamis Icon", "Yagudo", nil, nil} -- ( 024 )
+xi.dynamis.mobList[zoneID][24 ].info = {"NM"    , "Dynamis Icon", "Yagudo", nil, nil} -- ( 024 )
 xi.dynamis.mobList[zoneID][25 ].info = {"Statue", "Avatar Icon", "Yagudo", nil, nil} -- (025-Y) (MP)
 xi.dynamis.mobList[zoneID][26 ].info = {"Statue", "Avatar Icon", "Yagudo", nil, nil} -- (026-Y)
 xi.dynamis.mobList[zoneID][27 ].info = {"Statue", "Avatar Icon", "Yagudo", nil, nil} -- (027-Y) (MP)
@@ -139,7 +139,7 @@ xi.dynamis.mobList[zoneID][43 ].info = {"Statue", "Goblin Statue", "Goblin", nil
 xi.dynamis.mobList[zoneID][44 ].info = {"Statue", "Goblin Statue", "Goblin", nil, nil} -- (044-G) (HP)
 xi.dynamis.mobList[zoneID][45 ].info = {"Statue", "Goblin Statue", "Goblin", nil, nil} -- (045-G) (MP)
 xi.dynamis.mobList[zoneID][46 ].info = {"Statue", "Goblin Statue", "Goblin", nil, nil} -- (046-G) (15)
-xi.dynamis.mobList[zoneID][47 ].info = {"Statue", "Dynamis Statue", "Goblin", nil, nil} -- ( 047 )
+xi.dynamis.mobList[zoneID][47 ].info = {"NM"    , "Dynamis Statue", "Goblin", nil, nil} -- ( 047 )
 xi.dynamis.mobList[zoneID][48 ].info = {"Statue", "Goblin Statue", "Goblin", nil, nil} -- (048-G)
 xi.dynamis.mobList[zoneID][49 ].info = {"Statue", "Goblin Statue", "Goblin", nil, nil} -- (049-G) (MP)
 xi.dynamis.mobList[zoneID][50 ].info = {"Statue", "Goblin Statue", "Goblin", nil, nil} -- (050-G)
@@ -160,7 +160,7 @@ xi.dynamis.mobList[zoneID][64 ].info = {"Statue", "Adamantking Effigy", "Quadav"
 xi.dynamis.mobList[zoneID][65 ].info = {"Statue", "Adamantking Effigy", "Quadav", nil, nil} -- (065-Q) (HP)
 xi.dynamis.mobList[zoneID][66 ].info = {"Statue", "Adamantking Effigy", "Quadav", nil, nil} -- (066-Q) (15)
 xi.dynamis.mobList[zoneID][67 ].info = {"Statue", "Adamantking Effigy", "Quadav", nil, nil} -- (067-Q) (MP)
-xi.dynamis.mobList[zoneID][68 ].info = {"Statue", "Dynamis Effigy", "Quadav", nil, nil} -- ( 068 )
+xi.dynamis.mobList[zoneID][68 ].info = {"NM"    , "Dynamis Effigy", "Quadav", nil, nil} -- ( 068 )
 xi.dynamis.mobList[zoneID][69 ].info = {"Statue", "Adamantking Effigy", "Quadav", nil, nil} -- (069-Q)
 xi.dynamis.mobList[zoneID][70 ].info = {"Statue", "Adamantking Effigy", "Quadav", nil, nil} -- (070-Q) (HP)
 xi.dynamis.mobList[zoneID][71 ].info = {"Statue", "Adamantking Effigy", "Quadav", nil, nil} -- (071-Q)
@@ -182,7 +182,7 @@ xi.dynamis.mobList[zoneID][86 ].info = {"Statue", "Serjeant Tombstone", "Orc", n
 xi.dynamis.mobList[zoneID][87 ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- (087-O) (15)
 xi.dynamis.mobList[zoneID][88 ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- (088-O) (MP)
 xi.dynamis.mobList[zoneID][89 ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- (089-O)
-xi.dynamis.mobList[zoneID][90 ].info = {"Statue", "Dynamis Tombstone", "Orc", nil, nil} -- ( 090 )
+xi.dynamis.mobList[zoneID][90 ].info = {"NM"    , "Dynamis Tombstone", "Orc", nil, nil} -- ( 090 )
 xi.dynamis.mobList[zoneID][91 ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- (091-O) (HP)
 xi.dynamis.mobList[zoneID][92 ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- (092-O)
 xi.dynamis.mobList[zoneID][93 ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- (093-O)
@@ -195,7 +195,7 @@ xi.dynamis.mobList[zoneID][99 ].info = {"Statue", "Serjeant Tombstone", "Orc", n
 xi.dynamis.mobList[zoneID][100].info = {"Statue", "Adanantking Effigy", "Quadav", nil, nil} -- (100-Q)
 xi.dynamis.mobList[zoneID][101].info = {"Statue", "Avatar Icon", "Yagudo", nil, nil} -- (101-Y)
 xi.dynamis.mobList[zoneID][102].info = {"Statue", "Goblin Replica", "Goblin", nil, nil} -- (102-G)
-xi.dynamis.mobList[zoneID][103].info = {"Statue", "Adanamtking Effigy", "Quadav", nil, nil} -- (103-Q) (HP)
+xi.dynamis.mobList[zoneID][103].info = {"Statue", "Adamantking Effigy", "Quadav", nil, nil} -- (103-Q) (HP)
 xi.dynamis.mobList[zoneID][104].info = {"Statue", "Goblin Replica", "Goblin", nil, nil} -- (104-G) (MP)
 xi.dynamis.mobList[zoneID][105].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- (105-O) (HP)
 xi.dynamis.mobList[zoneID][106].info = {"Statue", "Avatar Icon", "Yagudo", nil, nil} -- (106-Y) (MP)
@@ -270,7 +270,7 @@ xi.dynamis.mobList[zoneID][174].info = {"NM", "Foo Peku the Bloodcloak", "Yagudo
 xi.dynamis.mobList[zoneID][175].info = {"NM", "Koo Saxu the Everfast", "Yagudo", nil, nil} -- WHM
 xi.dynamis.mobList[zoneID][176].info = {"NM", "Kuu Xuka the Nimble", "Yagudo", nil, nil} -- NIN
 xi.dynamis.mobList[zoneID][177].info = {"NM", "Guu Waji the Preacher", "Yagudo", nil, nil} -- PLD
-xi.dynamis.mobList[zoneID][178].info = {"NM", "Nee Huxa the Judgmental", "Yagudo", nil, nil} -- DRK
+xi.dynamis.mobList[zoneID][178].info = {"NM", "Nee Huxa the Judgemental", "Yagudo", nil, nil} -- DRK
 xi.dynamis.mobList[zoneID][179].info = {"NM", "Caa Xaza the Madpiercer", "Yagudo", nil, nil} -- RDM
 xi.dynamis.mobList[zoneID][180].info = {"NM", "Bhuu Wjato the Firepool", "Yagudo", nil, nil} -- BLM
 xi.dynamis.mobList[zoneID][181].info = {"NM", "Droprix Granitepalms", "Goblin", nil, nil} -- MNK
@@ -285,7 +285,7 @@ xi.dynamis.mobList[zoneID][189].info = {"NM", "Moltenox Stubthumbs", "Goblin", n
 xi.dynamis.mobList[zoneID][190].info = {"NM", "Slinkix Trufflesniff", "Goblin", nil, nil} -- RNG
 xi.dynamis.mobList[zoneID][191].info = {"NM", "Ruffbix Jumbolobes", "Goblin", nil, nil} -- PLD
 xi.dynamis.mobList[zoneID][192].info = {"NM", "Routsix Rubbertendon", "Goblin", nil, nil} -- BST
-xi.dynamis.mobList[zoneID][193].info = {"NM", "Whistrix Toadthroat", "Goblin", nil, nil} -- BRD
+xi.dynamis.mobList[zoneID][193].info = {"NM", "Whistix Toadthroat", "Goblin", nil, nil} -- BRD
 xi.dynamis.mobList[zoneID][194].info = {"NM", "Ji'Fhu Infiltrator", "Quadav", nil, nil} -- THF
 xi.dynamis.mobList[zoneID][195].info = {"NM", "Ta'Hyu Gallanthunter", "Quadav", nil, nil} -- DRK
 xi.dynamis.mobList[zoneID][196].info = {"NM", "Mu'Gha Legionkiller", "Quadav", nil, nil} -- PLD
@@ -346,12 +346,12 @@ xi.dynamis.mobList[zoneID][1].wave =
 {
     3  , -- (003-Y)   Avatar Icon
     1  , -- (001-Q)   Adamantking Effigy
-    2  , -- (002-O)   Serjent Tombstone
+    2  , -- (002-O)   Serjeant Tombstone
     4  , -- (004-G)   Goblin Replica
-    7  , -- (007-O)   Serjent Tombstone
+    7  , -- (007-O)   Serjeant Tombstone
     6  , -- (006-Q)   Adamantking Effigy
     5  , -- (005-Y)   Avatar Icon
-    8  , -- (008-G)   Goblin replica
+    8  , -- (008-G)   Goblin Replica
     10 , -- (010-Y)   Avatar Icon
     9  , -- (009-Y)   Avatar Icon
     11 , -- (011-Y)   Avatar Icon
@@ -446,7 +446,7 @@ xi.dynamis.mobList[zoneID][1].wave =
     100, -- (100-Q)   Adanantking Effigy
     101, -- (101-Y)   Avatar Icon
     102, -- (102-G)   Goblin Replica
-    103, -- (103-Q)   Adanamtking Effigy
+    103, -- (103-Q)   Adamantking Effigy
     104, -- (104-G)   Goblin Replica
     105, -- (105-O)   Serjeant Tombstone
     106, -- (106-Y)   Avatar Icon
@@ -736,12 +736,12 @@ xi.dynamis.mobList[zoneID][163].nmchildren = { true,  164, 165, 166, 167   } -- 
 
 xi.dynamis.mobList[zoneID][3  ].pos = { -279.0733, -39.1011, -341.9998, 8     } -- (003-Y) Avatar Icon
 xi.dynamis.mobList[zoneID][1  ].pos = { -260.1787, -39.0101, -362.4289, 70    } -- (001-Q) Adamantking Effigy
-xi.dynamis.mobList[zoneID][2  ].pos = { -239.1913, -40.0000, -362.8879, 156   } -- (002-O) Serjent Tombstone
+xi.dynamis.mobList[zoneID][2  ].pos = { -239.1913, -40.0000, -362.8879, 156   } -- (002-O) Serjeant Tombstone
 xi.dynamis.mobList[zoneID][4  ].pos = { -232.9155, -39.8400, -335.9303, 127   } -- (004-G) Goblin Replica
-xi.dynamis.mobList[zoneID][7  ].pos = { -285.3470, -40.0557, -315.7200, 244   } -- (007-O) Serjent Tombstone
+xi.dynamis.mobList[zoneID][7  ].pos = { -285.3470, -40.0557, -315.7200, 244   } -- (007-O) Serjeant Tombstone
 xi.dynamis.mobList[zoneID][6  ].pos = { -297.7608, -39.8339, -272.4887, 14    } -- (006-Q) Adamantking Effigy
 xi.dynamis.mobList[zoneID][5  ].pos = { -263.2965, -40.9416, -300.3301, 95    } -- (005-Y) Avatar Icon
-xi.dynamis.mobList[zoneID][8  ].pos = { -310.9539, -40.1066, -287.0196, 17    } -- (008-G) Goblin replica
+xi.dynamis.mobList[zoneID][8  ].pos = { -310.9539, -40.1066, -287.0196, 17    } -- (008-G) Goblin Replica
 xi.dynamis.mobList[zoneID][10 ].pos = { -194.2248, -39.7044, -211.3219, 149   } -- (010-Y) Avatar Icon
 xi.dynamis.mobList[zoneID][9  ].pos = { -180.1325, -39.5770, -205.7526, 190   } -- (009-Y) Avatar Icon
 xi.dynamis.mobList[zoneID][11 ].pos = { -192.1449, -39.8455, -227.0389, 107   } -- (011-Y) Avatar Icon
@@ -836,7 +836,7 @@ xi.dynamis.mobList[zoneID][99 ].pos = {  263.4912, -0.97039, 58.8165, 29      } 
 xi.dynamis.mobList[zoneID][100].pos = {  268.7820, -0.5453, 70.0471, 19       } -- (100-Q) Adanantking Effigy
 xi.dynamis.mobList[zoneID][101].pos = {  267.6158, 0.4338, 83.5243, 31        } -- (101-Y) Avatar Icon
 xi.dynamis.mobList[zoneID][102].pos = {  260.9484, -0.5514, 98.2945, 41       } -- (102-G) Goblin Replica
-xi.dynamis.mobList[zoneID][103].pos = {  264.6924, 0.7262, 243.3394, 59       } -- (103-Q) Adanamtking Effigy
+xi.dynamis.mobList[zoneID][103].pos = {  264.6924, 0.7262, 243.3394, 59       } -- (103-Q) Adamantking Effigy
 xi.dynamis.mobList[zoneID][104].pos = {  285.0459, -0.0535, 242.4564, 101     } -- (104-G) Goblin Replica
 xi.dynamis.mobList[zoneID][105].pos = {  287.2189, -0.0928, 230.3786, 133     } -- (105-O) Serjeant Tombstone
 xi.dynamis.mobList[zoneID][106].pos = {  288.0384, -0.1970, 205.6502, 129     } -- (106-Y) Avatar Icon
@@ -930,9 +930,9 @@ xi.dynamis.mobList[zoneID][91 ].eyes = xi.dynamis.eye.BLUE  -- (091-O) (HP) Serj
 xi.dynamis.mobList[zoneID][78 ].eyes = xi.dynamis.eye.BLUE  -- (078-O) (HP) Serjeant Tombstone
 xi.dynamis.mobList[zoneID][84 ].eyes = xi.dynamis.eye.BLUE  -- (084-O) (HP) Serjeant Tombstone
 xi.dynamis.mobList[zoneID][86 ].eyes = xi.dynamis.eye.BLUE  -- (086-O) (HP) Serjeant Tombstone
-xi.dynamis.mobList[zoneID][103].eyes = xi.dynamis.eye.BLUE  -- (103-Q) (HP) Adanamtking Effigy
+xi.dynamis.mobList[zoneID][103].eyes = xi.dynamis.eye.BLUE  -- (103-Q) (HP) Adamantking Effigy
 xi.dynamis.mobList[zoneID][105].eyes = xi.dynamis.eye.BLUE  -- (105-O) (HP) Serjeant Tombstone
-xi.dynamis.mobList[zoneID][8  ].eyes = xi.dynamis.eye.GREEN -- (008-G) (MP) Goblin replica
+xi.dynamis.mobList[zoneID][8  ].eyes = xi.dynamis.eye.GREEN -- (008-G) (MP) Goblin Replica
 xi.dynamis.mobList[zoneID][12 ].eyes = xi.dynamis.eye.GREEN -- (012-Y) (MP) Avatar Icon
 xi.dynamis.mobList[zoneID][22 ].eyes = xi.dynamis.eye.GREEN -- (022-Y) (MP) Avatar Icon
 xi.dynamis.mobList[zoneID][27 ].eyes = xi.dynamis.eye.GREEN -- (027-Y) (MP) Avatar Icon
