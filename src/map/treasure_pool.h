@@ -36,13 +36,7 @@ enum TREASUREPOOLTYPE
 
 #define TREASUREPOOL_SIZE 10
 
-/************************************************************************
- *																		*
- *  Для совместимости с кластерной системой, персонаж получает новый		*
- *  TreasurePool при переходе между зонами								*
- *																		*
- ************************************************************************/
-
+// characters get a new TreasurePool when moving between zones
 class CCharEntity;
 class CMobEntity;
 
