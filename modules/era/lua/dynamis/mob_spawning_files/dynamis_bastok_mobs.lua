@@ -56,10 +56,10 @@ require("scripts/globals/zone")
 --    Ex. xi.dynamis.mobList[zoneID][MobIndex].patrolPath = {xpos1,ypos1,zpos1, xpos2,ypos2,zpos2,  xpos3,ypos3,zpos3}
 --
 -- 9. xi.dynamis.mobList[zoneID][MobIndex].eyes sets the eye color of the statue. Valid options are:
---    xi.dynamis.eyes.RED, xi.dynamis.eyes.BLUE, xi.dynamis.eyes.GREEN
---    Ex. xi.dynamis.mobList[zoneID][MobIndex].eyes = xi.dynamis.eyes.BLUE -- Flags for blue eyes. (HP)
---    Ex. xi.dynamis.mobList[zoneID][MobIndex].eyes = xi.dynamis.eyes.GREEN -- Flags for green eyes. (MP)
---    Ex. xi.dynamis.mobList[zoneID][MobIndex].eyes = xi.dynamis.eyes.RED -- Flags for red eyes. (TE)
+--    xi.dynamis.eye.RED, xi.dynamis.eye.BLUE, xi.dynamis.eye.GREEN
+--    Ex. xi.dynamis.mobList[zoneID][MobIndex].eyes = xi.dynamis.eye.BLUE -- Flags for blue eyes. (HP)
+--    Ex. xi.dynamis.mobList[zoneID][MobIndex].eyes = xi.dynamis.eye.GREEN -- Flags for green eyes. (MP)
+--    Ex. xi.dynamis.mobList[zoneID][MobIndex].eyes = xi.dynamis.eye.RED -- Flags for red eyes. (TE)
 --
 -- 10. xi.dynamis.mobList[zoneID][MobIndex].timeExtension dictates the amount of time given for the TE.
 --    Ex. xi.dynamis.mobList[zoneID][MobIndex].timeExtension = 15
@@ -79,7 +79,7 @@ xi.dynamis.mobList[zoneID].nmchildren = { }
 xi.dynamis.mobList[zoneID].mobchildren = { }
 xi.dynamis.mobList[zoneID].maxWaves = 3 -- Put in number of max waves
 
-while i < 156 do
+while i <= 156 do
     table.insert(xi.dynamis.mobList[zoneID], i, { id = i})
     i = i + 1
 end
@@ -761,39 +761,39 @@ xi.dynamis.mobList[zoneID][102].patrolPath = {   36,    0,    8,     21,    0,  
 ------------------------------------------
 --          Statue Eye Colors           --
 ------------------------------------------
--- xi.dynamis.mobList[zoneID][MobIndex].eyes = xi.dynamis.eyes.BLUE -- Flags for blue eyes. (HP)
--- xi.dynamis.mobList[zoneID][MobIndex].eyes = xi.dynamis.eyes.GREEN -- Flags for green eyes. (MP)
+-- xi.dynamis.mobList[zoneID][MobIndex].eyes = xi.dynamis.eye.BLUE -- Flags for blue eyes. (HP)
+-- xi.dynamis.mobList[zoneID][MobIndex].eyes = xi.dynamis.eye.GREEN -- Flags for green eyes. (MP)
 
-xi.dynamis.mobList[zoneID][7  ].eyes = xi.dynamis.eyes.BLUE
-xi.dynamis.mobList[zoneID][8  ].eyes = xi.dynamis.eyes.BLUE
-xi.dynamis.mobList[zoneID][25 ].eyes = xi.dynamis.eyes.BLUE
-xi.dynamis.mobList[zoneID][26 ].eyes = xi.dynamis.eyes.GREEN
-xi.dynamis.mobList[zoneID][31 ].eyes = xi.dynamis.eyes.GREEN
-xi.dynamis.mobList[zoneID][38 ].eyes = xi.dynamis.eyes.GREEN
-xi.dynamis.mobList[zoneID][39 ].eyes = xi.dynamis.eyes.BLUE
-xi.dynamis.mobList[zoneID][42 ].eyes = xi.dynamis.eyes.BLUE
-xi.dynamis.mobList[zoneID][81 ].eyes = xi.dynamis.eyes.GREEN
-xi.dynamis.mobList[zoneID][82 ].eyes = xi.dynamis.eyes.BLUE
-xi.dynamis.mobList[zoneID][85 ].eyes = xi.dynamis.eyes.BLUE
-xi.dynamis.mobList[zoneID][92 ].eyes = xi.dynamis.eyes.BLUE
-xi.dynamis.mobList[zoneID][104].eyes = xi.dynamis.eyes.GREEN
-xi.dynamis.mobList[zoneID][112].eyes = xi.dynamis.eyes.BLUE
-xi.dynamis.mobList[zoneID][114].eyes = xi.dynamis.eyes.GREEN
-xi.dynamis.mobList[zoneID][116].eyes = xi.dynamis.eyes.BLUE
-xi.dynamis.mobList[zoneID][119].eyes = xi.dynamis.eyes.BLUE
-xi.dynamis.mobList[zoneID][120].eyes = xi.dynamis.eyes.BLUE
-xi.dynamis.mobList[zoneID][121].eyes = xi.dynamis.eyes.GREEN
-xi.dynamis.mobList[zoneID][122].eyes = xi.dynamis.eyes.BLUE
-xi.dynamis.mobList[zoneID][124].eyes = xi.dynamis.eyes.BLUE
-xi.dynamis.mobList[zoneID][125].eyes = xi.dynamis.eyes.GREEN
-xi.dynamis.mobList[zoneID][127].eyes = xi.dynamis.eyes.GREEN
-xi.dynamis.mobList[zoneID][129].eyes = xi.dynamis.eyes.GREEN
-xi.dynamis.mobList[zoneID][132].eyes = xi.dynamis.eyes.BLUE
-xi.dynamis.mobList[zoneID][133].eyes = xi.dynamis.eyes.BLUE
-xi.dynamis.mobList[zoneID][136].eyes = xi.dynamis.eyes.GREEN
-xi.dynamis.mobList[zoneID][137].eyes = xi.dynamis.eyes.GREEN
-xi.dynamis.mobList[zoneID][138].eyes = xi.dynamis.eyes.BLUE
-xi.dynamis.mobList[zoneID][139].eyes = xi.dynamis.eyes.BLUE
+xi.dynamis.mobList[zoneID][7  ].eyes = xi.dynamis.eye.BLUE
+xi.dynamis.mobList[zoneID][8  ].eyes = xi.dynamis.eye.BLUE
+xi.dynamis.mobList[zoneID][25 ].eyes = xi.dynamis.eye.BLUE
+xi.dynamis.mobList[zoneID][26 ].eyes = xi.dynamis.eye.GREEN
+xi.dynamis.mobList[zoneID][31 ].eyes = xi.dynamis.eye.GREEN
+xi.dynamis.mobList[zoneID][38 ].eyes = xi.dynamis.eye.GREEN
+xi.dynamis.mobList[zoneID][39 ].eyes = xi.dynamis.eye.BLUE
+xi.dynamis.mobList[zoneID][42 ].eyes = xi.dynamis.eye.BLUE
+xi.dynamis.mobList[zoneID][81 ].eyes = xi.dynamis.eye.GREEN
+xi.dynamis.mobList[zoneID][82 ].eyes = xi.dynamis.eye.BLUE
+xi.dynamis.mobList[zoneID][85 ].eyes = xi.dynamis.eye.BLUE
+xi.dynamis.mobList[zoneID][92 ].eyes = xi.dynamis.eye.BLUE
+xi.dynamis.mobList[zoneID][104].eyes = xi.dynamis.eye.GREEN
+xi.dynamis.mobList[zoneID][112].eyes = xi.dynamis.eye.BLUE
+xi.dynamis.mobList[zoneID][114].eyes = xi.dynamis.eye.GREEN
+xi.dynamis.mobList[zoneID][116].eyes = xi.dynamis.eye.BLUE
+xi.dynamis.mobList[zoneID][119].eyes = xi.dynamis.eye.BLUE
+xi.dynamis.mobList[zoneID][120].eyes = xi.dynamis.eye.BLUE
+xi.dynamis.mobList[zoneID][121].eyes = xi.dynamis.eye.GREEN
+xi.dynamis.mobList[zoneID][122].eyes = xi.dynamis.eye.BLUE
+xi.dynamis.mobList[zoneID][124].eyes = xi.dynamis.eye.BLUE
+xi.dynamis.mobList[zoneID][125].eyes = xi.dynamis.eye.GREEN
+xi.dynamis.mobList[zoneID][127].eyes = xi.dynamis.eye.GREEN
+xi.dynamis.mobList[zoneID][129].eyes = xi.dynamis.eye.GREEN
+xi.dynamis.mobList[zoneID][132].eyes = xi.dynamis.eye.BLUE
+xi.dynamis.mobList[zoneID][133].eyes = xi.dynamis.eye.BLUE
+xi.dynamis.mobList[zoneID][136].eyes = xi.dynamis.eye.GREEN
+xi.dynamis.mobList[zoneID][137].eyes = xi.dynamis.eye.GREEN
+xi.dynamis.mobList[zoneID][138].eyes = xi.dynamis.eye.BLUE
+xi.dynamis.mobList[zoneID][139].eyes = xi.dynamis.eye.BLUE
 
 ------------------------------------------
 --        Time Extension Values         --

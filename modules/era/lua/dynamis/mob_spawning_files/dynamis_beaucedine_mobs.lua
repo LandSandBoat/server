@@ -55,10 +55,10 @@ require("scripts/globals/zone")
 --    Ex. xi.dynamis.mobList[zoneID][MobIndex].patrolPath = {xpos1,ypos1,zpos1, xpos2,ypos2,zpos2,  xpos3,ypos3,zpos3}
 --
 -- 9. xi.dynamis.mobList[zoneID][MobIndex].eyes sets the eye color of the statue. Valid options are:
---    xi.dynamis.eyes.RED, xi.dynamis.eyes.BLUE, xi.dynamis.eyes.GREEN
---    Ex. xi.dynamis.mobList[zoneID][MobIndex].eyes = xi.dynamis.eyes.BLUE -- Flags for blue eyes. (HP)
---    Ex. xi.dynamis.mobList[zoneID][MobIndex].eyes = xi.dynamis.eyes.GREEN -- Flags for green eyes. (MP)
---    Ex. xi.dynamis.mobList[zoneID][MobIndex].eyes = xi.dynamis.eyes.RED -- Flags for red eyes. (TE)
+--    xi.dynamis.eye.RED, xi.dynamis.eye.BLUE, xi.dynamis.eye.GREEN
+--    Ex. xi.dynamis.mobList[zoneID][MobIndex].eyes = xi.dynamis.eye.BLUE -- Flags for blue eyes. (HP)
+--    Ex. xi.dynamis.mobList[zoneID][MobIndex].eyes = xi.dynamis.eye.GREEN -- Flags for green eyes. (MP)
+--    Ex. xi.dynamis.mobList[zoneID][MobIndex].eyes = xi.dynamis.eye.RED -- Flags for red eyes. (TE)
 --
 -- 10. xi.dynamis.mobList[zoneID][MobIndex].timeExtension dictates the amount of time given for the TE.
 --    Ex. xi.dynamis.mobList[zoneID][MobIndex].timeExtension = 15
@@ -78,7 +78,7 @@ xi.dynamis.mobList[zoneID].nmchildren = { }
 xi.dynamis.mobList[zoneID].mobchildren = { }
 xi.dynamis.mobList[zoneID].maxWaves = 2 -- Put in number of max waves
 
-while i < 227 do
+while i <= 227 do
     table.insert(xi.dynamis.mobList[zoneID], i, { id = i})
     i = i + 1
 end
@@ -908,52 +908,52 @@ xi.dynamis.mobList[zoneID][158].pos = { -176.4133, -40.2500, -219.9464,   0   } 
 ------------------------------------------
 --          Statue Eye Colors           --
 ------------------------------------------
--- xi.dynamis.mobList[zoneID][MobIndex].eyes = xi.dynamis.eyes.BLUE -- Flags for blue eyes. (HP)
--- xi.dynamis.mobList[zoneID][MobIndex].eyes = xi.dynamis.eyes.GREEN -- Flags for green eyes. (MP)
+-- xi.dynamis.mobList[zoneID][MobIndex].eyes = xi.dynamis.eye.BLUE -- Flags for blue eyes. (HP)
+-- xi.dynamis.mobList[zoneID][MobIndex].eyes = xi.dynamis.eye.GREEN -- Flags for green eyes. (MP)
 
-xi.dynamis.mobList[zoneID][5  ].eyes = xi.dynamis.eyes.BLUE  -- (005-Y) (HP) Avatar Icon
-xi.dynamis.mobList[zoneID][13 ].eyes = xi.dynamis.eyes.BLUE  -- (013-Y) (HP) Avatar Icon
-xi.dynamis.mobList[zoneID][18 ].eyes = xi.dynamis.eyes.BLUE  -- (018-Y) (HP) Avatar Icon
-xi.dynamis.mobList[zoneID][23 ].eyes = xi.dynamis.eyes.BLUE  -- (023-Y) (HP) Avatar Icon
-xi.dynamis.mobList[zoneID][30 ].eyes = xi.dynamis.eyes.BLUE  -- (030-Y) (HP) Avatar Icon
-xi.dynamis.mobList[zoneID][37 ].eyes = xi.dynamis.eyes.BLUE  -- (037-G) (HP) Goblin Statue
-xi.dynamis.mobList[zoneID][51 ].eyes = xi.dynamis.eyes.BLUE  -- (051-G) (HP) Goblin Statue
-xi.dynamis.mobList[zoneID][53 ].eyes = xi.dynamis.eyes.BLUE  -- (053-G) (HP) Goblin Statue
-xi.dynamis.mobList[zoneID][41 ].eyes = xi.dynamis.eyes.BLUE  -- (041-G) (HP) Goblin Statue
-xi.dynamis.mobList[zoneID][44 ].eyes = xi.dynamis.eyes.BLUE  -- (044-G) (HP) Goblin Statue
-xi.dynamis.mobList[zoneID][56 ].eyes = xi.dynamis.eyes.BLUE  -- (056-Q) (HP) Adamantking Effigy
-xi.dynamis.mobList[zoneID][74 ].eyes = xi.dynamis.eyes.BLUE  -- (074-Q) (HP) Adamantking Effigy
-xi.dynamis.mobList[zoneID][70 ].eyes = xi.dynamis.eyes.BLUE  -- (070-Q) (HP) Adamantking Effigy
-xi.dynamis.mobList[zoneID][59 ].eyes = xi.dynamis.eyes.BLUE  -- (059-Q) (HP) Adamantking Effigy
-xi.dynamis.mobList[zoneID][65 ].eyes = xi.dynamis.eyes.BLUE  -- (065-Q) (HP) Adamantking Effigy
-xi.dynamis.mobList[zoneID][91 ].eyes = xi.dynamis.eyes.BLUE  -- (091-O) (HP) Serjeant Tombstone
-xi.dynamis.mobList[zoneID][78 ].eyes = xi.dynamis.eyes.BLUE  -- (078-O) (HP) Serjeant Tombstone
-xi.dynamis.mobList[zoneID][84 ].eyes = xi.dynamis.eyes.BLUE  -- (084-O) (HP) Serjeant Tombstone
-xi.dynamis.mobList[zoneID][86 ].eyes = xi.dynamis.eyes.BLUE  -- (086-O) (HP) Serjeant Tombstone
-xi.dynamis.mobList[zoneID][103].eyes = xi.dynamis.eyes.BLUE  -- (103-Q) (HP) Adanamtking Effigy
-xi.dynamis.mobList[zoneID][105].eyes = xi.dynamis.eyes.BLUE  -- (105-O) (HP) Serjeant Tombstone
-xi.dynamis.mobList[zoneID][8  ].eyes = xi.dynamis.eyes.GREEN -- (008-G) (MP) Goblin replica
-xi.dynamis.mobList[zoneID][12 ].eyes = xi.dynamis.eyes.GREEN -- (012-Y) (MP) Avatar Icon
-xi.dynamis.mobList[zoneID][22 ].eyes = xi.dynamis.eyes.GREEN -- (022-Y) (MP) Avatar Icon
-xi.dynamis.mobList[zoneID][27 ].eyes = xi.dynamis.eyes.GREEN -- (027-Y) (MP) Avatar Icon
-xi.dynamis.mobList[zoneID][25 ].eyes = xi.dynamis.eyes.GREEN -- (025-Y) (MP) Avatar Icon
-xi.dynamis.mobList[zoneID][38 ].eyes = xi.dynamis.eyes.GREEN -- (038-G) (MP) Goblin Statue
-xi.dynamis.mobList[zoneID][49 ].eyes = xi.dynamis.eyes.GREEN -- (049-G) (MP) Goblin Statue
-xi.dynamis.mobList[zoneID][52 ].eyes = xi.dynamis.eyes.GREEN -- (052-G) (MP) Goblin Statue
-xi.dynamis.mobList[zoneID][40 ].eyes = xi.dynamis.eyes.GREEN -- (040-G) (MP) Goblin Statue
-xi.dynamis.mobList[zoneID][45 ].eyes = xi.dynamis.eyes.GREEN -- (045-G) (MP) Goblin Statue
-xi.dynamis.mobList[zoneID][57 ].eyes = xi.dynamis.eyes.GREEN -- (057-Q) (MP) Adamantking Effigy
-xi.dynamis.mobList[zoneID][76 ].eyes = xi.dynamis.eyes.GREEN -- (076-Q) (MP) Adamantking Effigy
-xi.dynamis.mobList[zoneID][72 ].eyes = xi.dynamis.eyes.GREEN -- (072-Q) (MP) Adamantking Effigy
-xi.dynamis.mobList[zoneID][61 ].eyes = xi.dynamis.eyes.GREEN -- (061-Q) (MP) Adamantking Effigy
-xi.dynamis.mobList[zoneID][67 ].eyes = xi.dynamis.eyes.GREEN -- (067-Q) (MP) Adamantking Effigy
-xi.dynamis.mobList[zoneID][94 ].eyes = xi.dynamis.eyes.GREEN -- (094-O) (MP) Serjeant Tombstone
-xi.dynamis.mobList[zoneID][98 ].eyes = xi.dynamis.eyes.GREEN -- (098-O) (MP) Serjeant Tombstone
-xi.dynamis.mobList[zoneID][80 ].eyes = xi.dynamis.eyes.GREEN -- (080-O) (MP) Serjeant Tombstone
-xi.dynamis.mobList[zoneID][82 ].eyes = xi.dynamis.eyes.GREEN -- (082-O) (MP) Serjeant Tombstone
-xi.dynamis.mobList[zoneID][88 ].eyes = xi.dynamis.eyes.GREEN -- (088-O) (MP) Serjeant Tombstone
-xi.dynamis.mobList[zoneID][104].eyes = xi.dynamis.eyes.GREEN -- (104-G) (MP) Goblin Replica
-xi.dynamis.mobList[zoneID][106].eyes = xi.dynamis.eyes.GREEN -- (106-Y) (MP) Avatar Icon
+xi.dynamis.mobList[zoneID][5  ].eyes = xi.dynamis.eye.BLUE  -- (005-Y) (HP) Avatar Icon
+xi.dynamis.mobList[zoneID][13 ].eyes = xi.dynamis.eye.BLUE  -- (013-Y) (HP) Avatar Icon
+xi.dynamis.mobList[zoneID][18 ].eyes = xi.dynamis.eye.BLUE  -- (018-Y) (HP) Avatar Icon
+xi.dynamis.mobList[zoneID][23 ].eyes = xi.dynamis.eye.BLUE  -- (023-Y) (HP) Avatar Icon
+xi.dynamis.mobList[zoneID][30 ].eyes = xi.dynamis.eye.BLUE  -- (030-Y) (HP) Avatar Icon
+xi.dynamis.mobList[zoneID][37 ].eyes = xi.dynamis.eye.BLUE  -- (037-G) (HP) Goblin Statue
+xi.dynamis.mobList[zoneID][51 ].eyes = xi.dynamis.eye.BLUE  -- (051-G) (HP) Goblin Statue
+xi.dynamis.mobList[zoneID][53 ].eyes = xi.dynamis.eye.BLUE  -- (053-G) (HP) Goblin Statue
+xi.dynamis.mobList[zoneID][41 ].eyes = xi.dynamis.eye.BLUE  -- (041-G) (HP) Goblin Statue
+xi.dynamis.mobList[zoneID][44 ].eyes = xi.dynamis.eye.BLUE  -- (044-G) (HP) Goblin Statue
+xi.dynamis.mobList[zoneID][56 ].eyes = xi.dynamis.eye.BLUE  -- (056-Q) (HP) Adamantking Effigy
+xi.dynamis.mobList[zoneID][74 ].eyes = xi.dynamis.eye.BLUE  -- (074-Q) (HP) Adamantking Effigy
+xi.dynamis.mobList[zoneID][70 ].eyes = xi.dynamis.eye.BLUE  -- (070-Q) (HP) Adamantking Effigy
+xi.dynamis.mobList[zoneID][59 ].eyes = xi.dynamis.eye.BLUE  -- (059-Q) (HP) Adamantking Effigy
+xi.dynamis.mobList[zoneID][65 ].eyes = xi.dynamis.eye.BLUE  -- (065-Q) (HP) Adamantking Effigy
+xi.dynamis.mobList[zoneID][91 ].eyes = xi.dynamis.eye.BLUE  -- (091-O) (HP) Serjeant Tombstone
+xi.dynamis.mobList[zoneID][78 ].eyes = xi.dynamis.eye.BLUE  -- (078-O) (HP) Serjeant Tombstone
+xi.dynamis.mobList[zoneID][84 ].eyes = xi.dynamis.eye.BLUE  -- (084-O) (HP) Serjeant Tombstone
+xi.dynamis.mobList[zoneID][86 ].eyes = xi.dynamis.eye.BLUE  -- (086-O) (HP) Serjeant Tombstone
+xi.dynamis.mobList[zoneID][103].eyes = xi.dynamis.eye.BLUE  -- (103-Q) (HP) Adanamtking Effigy
+xi.dynamis.mobList[zoneID][105].eyes = xi.dynamis.eye.BLUE  -- (105-O) (HP) Serjeant Tombstone
+xi.dynamis.mobList[zoneID][8  ].eyes = xi.dynamis.eye.GREEN -- (008-G) (MP) Goblin replica
+xi.dynamis.mobList[zoneID][12 ].eyes = xi.dynamis.eye.GREEN -- (012-Y) (MP) Avatar Icon
+xi.dynamis.mobList[zoneID][22 ].eyes = xi.dynamis.eye.GREEN -- (022-Y) (MP) Avatar Icon
+xi.dynamis.mobList[zoneID][27 ].eyes = xi.dynamis.eye.GREEN -- (027-Y) (MP) Avatar Icon
+xi.dynamis.mobList[zoneID][25 ].eyes = xi.dynamis.eye.GREEN -- (025-Y) (MP) Avatar Icon
+xi.dynamis.mobList[zoneID][38 ].eyes = xi.dynamis.eye.GREEN -- (038-G) (MP) Goblin Statue
+xi.dynamis.mobList[zoneID][49 ].eyes = xi.dynamis.eye.GREEN -- (049-G) (MP) Goblin Statue
+xi.dynamis.mobList[zoneID][52 ].eyes = xi.dynamis.eye.GREEN -- (052-G) (MP) Goblin Statue
+xi.dynamis.mobList[zoneID][40 ].eyes = xi.dynamis.eye.GREEN -- (040-G) (MP) Goblin Statue
+xi.dynamis.mobList[zoneID][45 ].eyes = xi.dynamis.eye.GREEN -- (045-G) (MP) Goblin Statue
+xi.dynamis.mobList[zoneID][57 ].eyes = xi.dynamis.eye.GREEN -- (057-Q) (MP) Adamantking Effigy
+xi.dynamis.mobList[zoneID][76 ].eyes = xi.dynamis.eye.GREEN -- (076-Q) (MP) Adamantking Effigy
+xi.dynamis.mobList[zoneID][72 ].eyes = xi.dynamis.eye.GREEN -- (072-Q) (MP) Adamantking Effigy
+xi.dynamis.mobList[zoneID][61 ].eyes = xi.dynamis.eye.GREEN -- (061-Q) (MP) Adamantking Effigy
+xi.dynamis.mobList[zoneID][67 ].eyes = xi.dynamis.eye.GREEN -- (067-Q) (MP) Adamantking Effigy
+xi.dynamis.mobList[zoneID][94 ].eyes = xi.dynamis.eye.GREEN -- (094-O) (MP) Serjeant Tombstone
+xi.dynamis.mobList[zoneID][98 ].eyes = xi.dynamis.eye.GREEN -- (098-O) (MP) Serjeant Tombstone
+xi.dynamis.mobList[zoneID][80 ].eyes = xi.dynamis.eye.GREEN -- (080-O) (MP) Serjeant Tombstone
+xi.dynamis.mobList[zoneID][82 ].eyes = xi.dynamis.eye.GREEN -- (082-O) (MP) Serjeant Tombstone
+xi.dynamis.mobList[zoneID][88 ].eyes = xi.dynamis.eye.GREEN -- (088-O) (MP) Serjeant Tombstone
+xi.dynamis.mobList[zoneID][104].eyes = xi.dynamis.eye.GREEN -- (104-G) (MP) Goblin Replica
+xi.dynamis.mobList[zoneID][106].eyes = xi.dynamis.eye.GREEN -- (106-Y) (MP) Avatar Icon
 
 ------------------------------------------
 --        Time Extension Values         --
