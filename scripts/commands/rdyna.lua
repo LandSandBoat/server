@@ -2,7 +2,7 @@
 -- func: rdyna (Reset Dynamis)
 -- desc: Resets variables related to Dynamis
 -- If single it will just clear a single player's reservation variables.
--- If party or alliance it will clear all player's reservation variables as well as the zone's token. 
+-- If party or alliance it will clear all player's reservation variables as well as the zone's token.
 -- NOTICE: Players need to be in the correct staging zone for their dynamis.
 -----------------------------------
 
@@ -18,6 +18,8 @@ function error(player, msg)
 end
 
 function onTrigger(player, aoe, target)
+    local targ = nil
+    local cursor_target = player:getCursorTarget()
 
     if aoe == nil then
         error(player, "You must specify if you want to reset vars for a single player, a party, or an alliance.")

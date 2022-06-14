@@ -16,7 +16,7 @@ item_object.onItemCheck = function(target)
     local zoneToken = GetServerVariable(string.format("[DYNA]Token_%s", zoneID))
     local validateresult = target:validateHourglass(zoneToken)
     local result = 0
-    
+
     if target:getFreeSlotsCount() == 0 then
         result = xi.msg.basic.ITEM_NO_USE_INVENTORY
     end

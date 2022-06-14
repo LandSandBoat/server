@@ -1,7 +1,7 @@
 ---------------------------------------------
 -- Putrid Breath
 -- Family: Morbol
--- Description: 
+-- Description:
 -- Type: Breath
 -- Utsusemi/Blink absorb: Ignores Shadows
 -- Range: Conal up to 15'
