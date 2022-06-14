@@ -180,7 +180,11 @@ extern map_config_t map_config;
 extern uint32       map_amntplayers;
 extern int32        map_fd;
 
+// 2.5 updates per second
 static constexpr float server_tick_rate = 2.5f;
+
+// Update every 400ms
+static constexpr float server_tick_interval = 1000.0f / server_tick_rate;
 
 typedef std::map<uint64, map_session_data_t*> map_session_list_t;
 extern map_session_list_t                     map_session_list;

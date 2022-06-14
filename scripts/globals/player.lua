@@ -261,7 +261,6 @@ xi.player.onPlayerEmote = function(player, emoteId)
 end
 
 xi.player.onPlayerVolunteer = function(player, text)
-    --print(string.format("(%s) /volunteer %s", player:getName(), text))
 end
 
 return xi.player

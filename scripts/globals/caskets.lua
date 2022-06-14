@@ -803,7 +803,6 @@ xi.caskets.onEventFinish = function(player, csid, option, npc)
     local failedAtempts     = chestObj:getLocalVar("[caskets]FAILED_ATEMPTS")
     local remainingAttempts = attemptsAllowed - failedAtempts
 
-    -- printf("option = %u ", option)
     -----------------------------------
     -- Minigame
     -----------------------------------

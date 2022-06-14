@@ -3201,7 +3201,8 @@ namespace charutils
 
     int32 addSpell(CCharEntity* PChar, uint16 SpellID)
     {
-        if (!hasSpell(PChar, SpellID))
+        // Todo: come up with a good way to validate that the SpellID exists in the database also.
+        if (SpellID > 0 && SpellID < 1024 && !hasSpell(PChar, SpellID))
         {
             PChar->m_SpellList[SpellID] = true;
             return 1;

@@ -68,8 +68,6 @@ ability_object.onUseAbility = function(player, target, ability)
 
     local pdif = math.random(ratio * 0.8 * 1000, ratio * 1.2 * 1000)
 
-    -- printf("damge %d, ratio: %f, pdif: %d\n", damage, ratio, pdif)
-
     damage = damage * (pdif / 1000)
     damage = utils.stoneskin(target, damage)
     target:takeDamage(damage, player, xi.attackType.PHYSICAL, xi.damageType.BLUNT)

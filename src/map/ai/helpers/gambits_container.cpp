@@ -341,6 +341,25 @@ namespace gambits
                         //    controller->Cast(target->targid, static_cast<SpellID>(spell_id.value()));
                         //}
                     }
+                    else if (action.select == G_SELECT::BEST_INDI)
+                    {
+                        auto* PMaster = static_cast<CCharEntity*>(POwner->PMaster);
+                        auto spell_id = POwner->SpellContainer->GetBestIndiSpell(PMaster);
+                        if (spell_id.has_value())
+                        {
+                            controller->Cast(target->targid, spell_id.value());
+                        }
+                    }
+                    else if (action.select == G_SELECT::ENTRUSTED)
+                    {
+                        auto* PMaster = static_cast<CCharEntity*>(POwner->PMaster);
+                        auto spell_id = POwner->SpellContainer->GetBestEntrustedSpell(PMaster);
+                        target = PMaster;
+                        if (spell_id.has_value())
+                        {
+                            controller->Cast(target->targid, spell_id.value());
+                        }
+                    }
                     else if (action.select == G_SELECT::BEST_AGAINST_TARGET)
                     {
                         auto spell_id = POwner->SpellContainer->GetBestAgainstTargetWeakness(target);
