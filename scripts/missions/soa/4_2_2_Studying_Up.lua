@@ -3,7 +3,8 @@
 -- Seekers of Adoulin M4-2-2
 -----------------------------------
 -- !addmission 12 79
--- Levil   : !pos -87.204 3.350 12.655 256
+-- Levil        : !pos -87.204 3.350 12.655 256
+-- Alpine Trail : !pos -13.479 -1.047 488.863 267
 -----------------------------------
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')

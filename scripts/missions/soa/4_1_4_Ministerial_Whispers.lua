@@ -28,7 +28,7 @@ mission.sections =
 
         [xi.zone.WESTERN_ADOULIN] =
         {
-            ['Kipligg'] = mission:event(163),
+            ['Kipligg'] = mission:event(163):setPriority(101), -- TODO: This overrides default logic in NPC script
             ['Levil']   = mission:progressEvent(158),
 
             onEventFinish =

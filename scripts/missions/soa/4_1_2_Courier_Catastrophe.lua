@@ -56,7 +56,7 @@ mission.sections =
                 onTrigger = function(player, npc)
                     local requiredItems = mission:getVar(player, 'Option')
 
-                    return mission:messageSpecial(westernAdoulinID.text.TASKED_WITH_PROCURING, missionItems[requiredItems][2], missionItems[requiredItems][1])
+                    return mission:messageSpecial(westernAdoulinID.text.TASKED_WITH_PROCURING, 0, missionItems[requiredItems][1], missionItems[requiredItems][2])
                 end,
             },
 

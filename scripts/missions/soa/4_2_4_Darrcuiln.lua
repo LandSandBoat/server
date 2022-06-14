@@ -1,20 +1,23 @@
 -----------------------------------
--- Done and Delivered
--- Seekers of Adoulin M4-1-3
+-- Darrcuiln
+-- Seekers of Adoulin M4-2-4
 -----------------------------------
--- !addmission 12 74
--- Kipligg : !pos -32 0 22 256
+-- !addmission 12 81
+-- Levil            : !pos -87.204 3.350 12.655 256
+-- Darkened Crevice : !pos 185.752 27.311 240.72 273
 -----------------------------------
+require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------
 
-local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.DONE_AND_DELIVERED)
+local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.DARRCUILN)
 
 mission.reward =
 {
-    nextMission = { xi.mission.log_id.SOA, xi.mission.id.soa.MINISTERIAL_WHISPERS },
+    keyItem     = xi.ki.TUFT_OF_GOLDEN_FUR,
+    nextMission = { xi.mission.log_id.SOA, xi.mission.id.soa.THE_GATES },
 }
 
 mission.sections =
@@ -26,12 +29,16 @@ mission.sections =
 
         [xi.zone.WESTERN_ADOULIN] =
         {
-            ['Levil']   = mission:event(161),
-            ['Kipligg'] = mission:progressEvent(157, 256, 99, 3, 0),
+            ['Levil'] = mission:event(165),
+        },
+
+        [xi.zone.WOH_GATES] =
+        {
+            ['Darkened_Crevice'] = mission:progressEvent(8),
 
             onEventFinish =
             {
-                [157] = function(player, csid, option, npc)
+                [8] = function(player, csid, option, npc)
                     mission:complete(player)
                 end,
             },
