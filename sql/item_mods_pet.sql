@@ -700,104 +700,107 @@ INSERT INTO `item_mods_pet` VALUES (23683,30,43,3); -- Automaton - MACC: 43
 -- Bagua Sandals +3
 INSERT INTO `item_mods_pet` VALUES (23686,370,5,8); -- Luopan - REGEN: 5
 
--- Gletis Mask
+-- Gletis Mask (Checked)
 INSERT INTO `item_mods_pet` VALUES (23756,25,50,0); -- All Pets - ACC: 50
 INSERT INTO `item_mods_pet` VALUES (23756,26,50,0); -- All Pets - RACC: 50
 INSERT INTO `item_mods_pet` VALUES (23756,30,50,0); -- All Pets - MACC: 50
 
--- Mpacas Cap
+-- Mpacas Cap (Checked)
 INSERT INTO `item_mods_pet` VALUES (23758,25,50,0); -- All Pets - ACC: 50
 INSERT INTO `item_mods_pet` VALUES (23758,26,50,0); -- All Pets - RACC: 50
 INSERT INTO `item_mods_pet` VALUES (23758,30,50,0); -- All Pets - MACC: 50
 
--- Bunzis Hat
+-- Bunzis Hat (Checked)
 INSERT INTO `item_mods_pet` VALUES (23760,25,50,0); -- All Pets - ACC: 50
 INSERT INTO `item_mods_pet` VALUES (23760,26,50,0); -- All Pets - RACC: 50
 INSERT INTO `item_mods_pet` VALUES (23760,30,50,0); -- All Pets - MACC: 50
 
--- Nyame Helm
+-- Nyame Helm (Checked)
 INSERT INTO `item_mods_pet` VALUES (23761,25,50,0); -- All Pets - ACC: 50
 INSERT INTO `item_mods_pet` VALUES (23761,26,50,0); -- All Pets - RACC: 50
 INSERT INTO `item_mods_pet` VALUES (23761,30,50,0); -- All Pets - MACC: 50
 
--- Gletis Cuirass
+-- Gletis Cuirass (Checked)
 INSERT INTO `item_mods_pet` VALUES (23763,25,50,0); -- All Pets - ACC: 50
 INSERT INTO `item_mods_pet` VALUES (23763,26,50,0); -- All Pets - RACC: 50
 INSERT INTO `item_mods_pet` VALUES (23763,30,50,0); -- All Pets - MACC: 50
 
--- Mpacas Doublet
+-- Mpacas Doublet (Checked)
 INSERT INTO `item_mods_pet` VALUES (23765,25,50,0); -- All Pets - ACC: 50
 INSERT INTO `item_mods_pet` VALUES (23765,26,50,0); -- All Pets - RACC: 50
 INSERT INTO `item_mods_pet` VALUES (23765,30,50,0); -- All Pets - MACC: 50
 
--- Bunzis Robe
+-- Bunzis Robe (Checked)
 INSERT INTO `item_mods_pet` VALUES (23767,25,50,0); -- All Pets - ACC: 50
 INSERT INTO `item_mods_pet` VALUES (23767,26,50,0); -- All Pets - RACC: 50
 INSERT INTO `item_mods_pet` VALUES (23767,30,50,0); -- All Pets - MACC: 50
 
--- Nyame Mail
+-- Nyame Mail (Checked)
 INSERT INTO `item_mods_pet` VALUES (23768,25,50,0); -- All Pets - ACC: 50
 INSERT INTO `item_mods_pet` VALUES (23768,26,50,0); -- All Pets - RACC: 50
 INSERT INTO `item_mods_pet` VALUES (23768,30,50,0); -- All Pets - MACC: 50
 
--- Gletis Gauntlets
-INSERT INTO `item_mods_pet` VALUES (23770,25,50,0);   -- All Pets - ACC: 50
-INSERT INTO `item_mods_pet` VALUES (23770,26,50,0);   -- All Pets - RACC: 50
-INSERT INTO `item_mods_pet` VALUES (23770,30,50,0);   -- All Pets - MACC: 50
-INSERT INTO `item_mods_pet` VALUES (23770,160,-10,0); -- All Pets - DMG: -10
+-- Gletis Gauntlets (Checked)
+INSERT INTO `item_mods_pet` VALUES (23770,25,50,0);    -- All Pets - ACC: 50
+INSERT INTO `item_mods_pet` VALUES (23770,26,50,0);    -- All Pets - RACC: 50
+INSERT INTO `item_mods_pet` VALUES (23770,30,50,0);    -- All Pets - MACC: 50
+INSERT INTO `item_mods_pet` VALUES (23770,160,-800,0); -- All Pets - DMG: -800
 
--- Mpacas Gloves
+-- Mpacas Gloves (Checked)
 INSERT INTO `item_mods_pet` VALUES (23772,25,50,0);  -- All Pets - ACC: 50
 INSERT INTO `item_mods_pet` VALUES (23772,26,50,0);  -- All Pets - RACC: 50
 INSERT INTO `item_mods_pet` VALUES (23772,30,50,0);  -- All Pets - MACC: 50
-INSERT INTO `item_mods_pet` VALUES (23772,840,10,0); -- All Pets - ALL_WSDMG_ALL_HITS: 10
+INSERT INTO `item_mods_pet` VALUES (23772,840,10,3); -- Automaton - ALL_WSDMG_ALL_HITS: 10
 
--- Bunzis Gloves
+-- Bunzis Gloves (Checked)
 INSERT INTO `item_mods_pet` VALUES (23774,25,50,0); -- All Pets - ACC: 50
 INSERT INTO `item_mods_pet` VALUES (23774,26,50,0); -- All Pets - RACC: 50
 INSERT INTO `item_mods_pet` VALUES (23774,30,50,0); -- All Pets - MACC: 50
 
--- Nyame Gauntlets
+-- Nyame Gauntlets (Checked)
 INSERT INTO `item_mods_pet` VALUES (23775,25,50,0); -- All Pets - ACC: 50
 INSERT INTO `item_mods_pet` VALUES (23775,26,50,0); -- All Pets - RACC: 50
 INSERT INTO `item_mods_pet` VALUES (23775,30,50,0); -- All Pets - MACC: 50
 
--- Gletis Breeches
+-- Gletis Breeches (Checked)
 INSERT INTO `item_mods_pet` VALUES (23777,25,50,0); -- All Pets - ACC: 50
 INSERT INTO `item_mods_pet` VALUES (23777,26,50,0); -- All Pets - RACC: 50
 INSERT INTO `item_mods_pet` VALUES (23777,30,50,0); -- All Pets - MACC: 50
 
--- Mpacas Hose
+-- Mpacas Hose (Checked)
 INSERT INTO `item_mods_pet` VALUES (23779,25,50,0); -- All Pets - ACC: 50
 INSERT INTO `item_mods_pet` VALUES (23779,26,50,0); -- All Pets - RACC: 50
 INSERT INTO `item_mods_pet` VALUES (23779,30,50,0); -- All Pets - MACC: 50
 
--- Bunzis Pants
+-- Bunzis Pants (Checked)
 INSERT INTO `item_mods_pet` VALUES (23781,25,50,0); -- All Pets - ACC: 50
 INSERT INTO `item_mods_pet` VALUES (23781,26,50,0); -- All Pets - RACC: 50
 INSERT INTO `item_mods_pet` VALUES (23781,30,50,0); -- All Pets - MACC: 50
 
--- Nyame Flanchard
+-- Nyame Flanchard (Checked)
 INSERT INTO `item_mods_pet` VALUES (23782,25,50,0); -- All Pets - ACC: 50
 INSERT INTO `item_mods_pet` VALUES (23782,26,50,0); -- All Pets - RACC: 50
 INSERT INTO `item_mods_pet` VALUES (23782,30,50,0); -- All Pets - MACC: 50
 
--- Gletis Boots
+-- Gletis Boots (Checked)
 INSERT INTO `item_mods_pet` VALUES (23784,25,50,0); -- All Pets - ACC: 50
 INSERT INTO `item_mods_pet` VALUES (23784,26,50,0); -- All Pets - RACC: 50
 INSERT INTO `item_mods_pet` VALUES (23784,30,50,0); -- All Pets - MACC: 50
+-- TODO: Summoned Pet: Lvl +1
 
--- Mpacas Boots
+-- Mpacas Boots (Checked)
 INSERT INTO `item_mods_pet` VALUES (23786,25,50,0); -- All Pets - ACC: 50
 INSERT INTO `item_mods_pet` VALUES (23786,26,50,0); -- All Pets - RACC: 50
 INSERT INTO `item_mods_pet` VALUES (23786,30,50,0); -- All Pets - MACC: 50
+-- TODO: Automaton: Lvl +1
 
--- Bunzis Sabots
+-- Bunzis Sabots (Checked)
 INSERT INTO `item_mods_pet` VALUES (23788,25,50,0); -- All Pets - ACC: 50
 INSERT INTO `item_mods_pet` VALUES (23788,26,50,0); -- All Pets - RACC: 50
 INSERT INTO `item_mods_pet` VALUES (23788,30,50,0); -- All Pets - MACC: 50
+-- TODO: Avatar: Lvl +1
 
--- Nyame Sollerets
+-- Nyame Sollerets (Checked)
 INSERT INTO `item_mods_pet` VALUES (23789,25,50,0); -- All Pets - ACC: 50
 INSERT INTO `item_mods_pet` VALUES (23789,26,50,0); -- All Pets - RACC: 50
 INSERT INTO `item_mods_pet` VALUES (23789,30,50,0); -- All Pets - MACC: 50
@@ -865,29 +868,29 @@ INSERT INTO `item_mods_pet` VALUES (25565,368,3,1); -- Avatar - REGAIN: 3
 -- Baayami Hat +1
 INSERT INTO `item_mods_pet` VALUES (25566,368,4,1); -- Avatar - REGAIN: 4
 
--- Cath Palug Crown
-INSERT INTO `item_mods_pet` VALUES (25593,25,38,0);  -- All Pets - ACC: 38
-INSERT INTO `item_mods_pet` VALUES (25593,26,38,0);  -- All Pets - RACC: 38
-INSERT INTO `item_mods_pet` VALUES (25593,28,38,0);  -- All Pets - MATT: 38
-INSERT INTO `item_mods_pet` VALUES (25593,30,38,0);  -- All Pets - MACC: 38
-INSERT INTO `item_mods_pet` VALUES (25593,126,10,0); -- All Pets - BP_DAMAGE: 10
+-- Cath Palug Crown (Checked)
+INSERT INTO `item_mods_pet` VALUES (25593,25,38,1);  -- Avatar - ACC: 38
+INSERT INTO `item_mods_pet` VALUES (25593,26,38,1);  -- Avatar - RACC: 38
+INSERT INTO `item_mods_pet` VALUES (25593,28,38,1);  -- Avatar - MATT: 38
+INSERT INTO `item_mods_pet` VALUES (25593,30,38,1);  -- Avatar - MACC: 38
+INSERT INTO `item_mods_pet` VALUES (25593,126,10,1); -- Avatar - BP_DAMAGE: 10
 
--- Emicho Haubert +1
+-- Emicho Haubert +1 (Checked)
 INSERT INTO `item_mods_pet` VALUES (25683,28,35,0);    -- All Pets - MATT: 35
 INSERT INTO `item_mods_pet` VALUES (25683,160,-400,0); -- All Pets - DMG: -400
 
--- Shulmanu Collar
+-- Shulmanu Collar (Checked)
 INSERT INTO `item_mods_pet` VALUES (26026,23,20,0); -- All Pets - ATT: 20
 INSERT INTO `item_mods_pet` VALUES (26026,25,20,0); -- All Pets - ACC: 20
 INSERT INTO `item_mods_pet` VALUES (26026,288,5,0); -- All Pets - DOUBLE_ATTACK: 5
 
--- Lugalbanda Earring
-INSERT INTO `item_mods_pet` VALUES (26082,25,15,0);  -- All Pets - ACC: 15
-INSERT INTO `item_mods_pet` VALUES (26082,26,15,0);  -- All Pets - RACC: 15
-INSERT INTO `item_mods_pet` VALUES (26082,30,15,0);  -- All Pets - MACC: 15
-INSERT INTO `item_mods_pet` VALUES (26082,126,10,0); -- All Pets - BP_DAMAGE: 10
+-- Lugalbanda Earring (Checked)
+INSERT INTO `item_mods_pet` VALUES (26082,25,15,1);  -- Avatar - ACC: 15
+INSERT INTO `item_mods_pet` VALUES (26082,26,15,1);  -- Avatar - RACC: 15
+INSERT INTO `item_mods_pet` VALUES (26082,30,15,1);  -- Avatar - MACC: 15
+INSERT INTO `item_mods_pet` VALUES (26082,126,10,1); -- Avatar - BP_DAMAGE: 10
 
--- Thurandaut Ring +1
+-- Thurandaut Ring +1 (Checked)
 INSERT INTO `item_mods_pet` VALUES (26201,23,23,0);    -- All Pets - ATT: 23
 INSERT INTO `item_mods_pet` VALUES (26201,24,23,0);    -- All Pets - RATT: 23
 INSERT INTO `item_mods_pet` VALUES (26201,25,22,0);    -- All Pets - ACC: 22
@@ -895,7 +898,7 @@ INSERT INTO `item_mods_pet` VALUES (26201,26,22,0);    -- All Pets - RACC: 22
 INSERT INTO `item_mods_pet` VALUES (26201,160,-400,0); -- All Pets - DMG: -400
 INSERT INTO `item_mods_pet` VALUES (26201,384,400,0);  -- All Pets - HASTE_GEAR: 400
 
--- Scintillating Cape
+-- Scintillating Cape (Checked)
 INSERT INTO `item_mods_pet` VALUES (26241,23,16,0); -- All Pets - ATT: 16
 INSERT INTO `item_mods_pet` VALUES (26241,28,16,0); -- All Pets - MATT: 16
 INSERT INTO `item_mods_pet` VALUES (26241,165,3,0); -- All Pets - CRITHITRATE: 3
@@ -936,8 +939,8 @@ INSERT INTO `item_mods_pet` VALUES (26835,25,21,3); -- Automaton - ACC: 21
 INSERT INTO `item_mods_pet` VALUES (26835,26,21,3); -- Automaton - RACC: 21
 INSERT INTO `item_mods_pet` VALUES (26835,73,13,3); -- Automaton - STORETP: 13
 
--- Apogee Dalmatica +1
-INSERT INTO `item_mods_pet` VALUES (26853,2,160,0); -- All Pets - HP: 160
+-- Apogee Dalmatica +1 (Checked)
+INSERT INTO `item_mods_pet` VALUES (26853,2,160,1); -- Avatar - HP: 160
 
 -- Shomonjijoe +1
 INSERT INTO `item_mods_pet` VALUES (26888,27,14,1); -- Avatar - ENMITY: 14
@@ -1007,8 +1010,10 @@ INSERT INTO `item_mods_pet` VALUES (27265,345,550,1); -- Avatar - TP_BONUS: 550
 -- Beckoners Spats +1
 INSERT INTO `item_mods_pet` VALUES (27266,345,600,1); -- Avatar - TP_BONUS: 600
 
--- Emicho Hose +1
-INSERT INTO `item_mods_pet` VALUES (27299,3,21,0); -- All Pets - HPP: 21
+-- Emicho Hose +1 (Checked)
+INSERT INTO `item_mods_pet` VALUES (27299,3,21,2); -- Wyvern - HPP: 21
+INSERT INTO `item_mods_pet` VALUES (27299,165,5,0); -- Wyvern - CRITHITRATE: 5
+INSERT INTO `item_mods_pet` VALUES (27299,288,5,0); -- All Pets - DOUBLE_ATTACK: 5
 
 -- Glyphic Pigaches
 INSERT INTO `item_mods_pet` VALUES (27356,23,28,1); -- Avatar - ATT: 28
@@ -1046,8 +1051,8 @@ INSERT INTO `item_mods_pet` VALUES (27445,13,17,3); -- Automaton - MND: 17
 INSERT INTO `item_mods_pet` VALUES (27446,12,20,3); -- Automaton - INT: 20
 INSERT INTO `item_mods_pet` VALUES (27446,13,20,3); -- Automaton - MND: 20
 
--- Emicho Gambieras +1
-INSERT INTO `item_mods_pet` VALUES (27470,480,6,0); -- All Pets - ABSORB_DMG_CHANCE: 6
+-- Emicho Gambieras +1 (Checked)
+INSERT INTO `item_mods_pet` VALUES (27470,480,6,2); -- Wyvern - ABSORB_DMG_CHANCE: 6
 
 -- Convokers Horn
 INSERT INTO `item_mods_pet` VALUES (27677,27,4,1); -- Avatar - ENMITY: 4
@@ -1075,9 +1080,6 @@ INSERT INTO `item_mods_pet` VALUES (27821,126,11,1); -- Avatar - BP_DAMAGE: 11
 INSERT INTO `item_mods_pet` VALUES (27824,2,85,3);    -- Automaton - HP: 85
 INSERT INTO `item_mods_pet` VALUES (27824,5,85,3);    -- Automaton - MP: 85
 INSERT INTO `item_mods_pet` VALUES (27824,384,300,3); -- Automaton - HASTE_GEAR: 300
-
--- Theophany Briault +1
-INSERT INTO `item_mods_pet` VALUES (27830,2,90,0); -- All Pets - HP: 90
 
 -- Vishap Mail +1
 INSERT INTO `item_mods_pet` VALUES (27841,370,3,2); -- Wyvern - REGEN: 3
@@ -1189,7 +1191,7 @@ INSERT INTO `item_mods_pet` VALUES (28261,384,300,3); -- Automaton - HASTE_GEAR:
 -- Eidolon Pendant +1
 INSERT INTO `item_mods_pet` VALUES (28356,28,5,1); -- Avatar - MATT: 5
 
--- Incarnation Sash
+-- Incarnation Sash (Checked)
 INSERT INTO `item_mods_pet` VALUES (28418,25,15,0); -- All Pets - ACC: 15
 INSERT INTO `item_mods_pet` VALUES (28418,26,15,0); -- All Pets - RACC: 15
 INSERT INTO `item_mods_pet` VALUES (28418,30,15,0); -- All Pets - MACC: 15
@@ -1202,11 +1204,11 @@ INSERT INTO `item_mods_pet` VALUES (28432,30,15,3);   -- Automaton - MACC: 15
 INSERT INTO `item_mods_pet` VALUES (28432,170,5,3);   -- Automaton - FASTCAST: 5
 INSERT INTO `item_mods_pet` VALUES (28432,384,500,3); -- Automaton - HASTE_GEAR: 500
 
--- Handlers Earring
-INSERT INTO `item_mods_pet` VALUES (28490,160,-400,0); -- All Pets - DMG: -400
+-- Handlers Earring (Checked)
+INSERT INTO `item_mods_pet` VALUES (28490,161,-300,0); -- All Pets - DMGPHYS: -300
 
--- Handlers Earring +1
-INSERT INTO `item_mods_pet` VALUES (28491,160,-400,0); -- All Pets - DMG: -400
+-- Handlers Earring +1 (Checked)
+INSERT INTO `item_mods_pet` VALUES (28491,161,-400,0); -- All Pets - DMGPHYS: -400
 
 -- Rimeice Earring
 INSERT INTO `item_mods_pet` VALUES (28495,27,5,0);    -- All Pets - ENMITY: 5
