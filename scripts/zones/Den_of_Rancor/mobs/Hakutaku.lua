@@ -15,4 +15,8 @@ end
 entity.onMobDeath = function(mob, player, isKiller)
 end
 
+<<<<<<< HEAD
 return entity
+=======
+return entity
+>>>>>>> 2232eb8309 (Adding Hakutaku)
