@@ -107,13 +107,10 @@ struct Trust_t
     int16 dark_res;
 
     Trust_t()
+    : EcoSystem(ECOSYSTEM::ECO_ERROR)
     {
         trustID     = 0;
         pool        = 0;
-        look        = {};
-        name        = {};
-        packet_name = {};
-        EcoSystem   = ECOSYSTEM::ECO_ERROR;
 
         name_prefix = 0;
         radius      = 0;

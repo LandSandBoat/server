@@ -32,6 +32,7 @@ CBaseEntity::CBaseEntity()
 , status(STATUS_TYPE::DISAPPEAR)
 , allegiance(ALLEGIANCE_TYPE::MOB)
 , PAI(nullptr)
+, m_nextUpdateTimer(std::chrono::steady_clock::now())
 {
     id       = 0;
     targid   = 0;
@@ -46,8 +47,6 @@ CBaseEntity::CBaseEntity()
     updatemask   = 0;
     PBattlefield = nullptr;
     PInstance    = nullptr;
-
-    m_nextUpdateTimer = std::chrono::steady_clock::now();
 }
 
 CBaseEntity::~CBaseEntity()

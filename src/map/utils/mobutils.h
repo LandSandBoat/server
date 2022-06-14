@@ -39,8 +39,6 @@ struct ModsList_t
     ModsList_t()
     {
         id = 0;
-        mods = {};
-        mobMods = {};
     }
 };
 

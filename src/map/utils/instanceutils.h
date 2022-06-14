@@ -49,11 +49,8 @@ struct InstanceData_t
     InstanceData_t()
     {
         id                 = 0;
-        instance_name      = {};
         instance_zone      = 0;
-        instance_zone_name = {};
         entrance_zone      = 0;
-        entrance_zone_name = {};
         time_limit         = 0;
         start_x            = 0.f;
         start_y            = 0.f;
@@ -63,7 +60,6 @@ struct InstanceData_t
         music_night        = 0;
         battlesolo         = 0;
         battlemulti        = 0;
-        filename           = {};
     }
 };
 

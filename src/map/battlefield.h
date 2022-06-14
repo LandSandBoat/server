@@ -100,7 +100,8 @@ struct BattlefieldRecord_t
     duration    time;
 
     BattlefieldRecord_t()
-    : time(std::chrono::minutes(30))
+    : partySize(0)
+    , time(std::chrono::minutes(30))
     {
     }
 };

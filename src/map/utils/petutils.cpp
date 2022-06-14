@@ -124,9 +124,9 @@ struct Pet_t
     int16 dark_res;
 
     Pet_t()
+    : EcoSystem(ECOSYSTEM::ECO_ERROR)
     {
         PetID     = 0;
-        EcoSystem = ECOSYSTEM::ECO_ERROR;
 
         minLevel = -1;
         maxLevel = 99;
