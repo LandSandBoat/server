@@ -503,21 +503,21 @@ xi.mission.id =
         DRIFTING_NORTHWEST              = 62,  -- ±
         KUMHAU_THE_FLASHFROST_NAAKUAL   = 63,  -- ±
         SOUL_SIPHON                     = 66,  -- ±
-        STONEWALLED                     = 67,
-        SALVATION                       = 69,
-        GLIMMER_OF_PORTENT              = 70,
+        STONEWALLED                     = 67,  -- ±
+        SALVATION                       = 69,  -- ±
+        GLIMMER_OF_PORTENT              = 70,  -- ±
         -- THE_SERPENTINE_LABYRINTH     =  -- Category
-        INTO_THE_FIRE                   = 71,
-        MELVIEN_DE_MALECROIX            = 72,
-        COURIER_CATASTROPHE             = 73,
-        DONE_AND_DELIVERED              = 74,
-        MINISTERIAL_WHISPERS            = 75,
-        A_DAY_IN_THE_LIFE_OF_A_PIONEER  = 76,
-        LIGHTING_THE_WAY                = 77,
-        SAJJAKA                         = 78,
-        STUDYING_UP                     = 79,
-        A_VOW_OF_TRUTH                  = 80,
-        DARRCUILN                       = 81,
+        INTO_THE_FIRE                   = 71,  -- ±
+        MELVIEN_DE_MALECROIX            = 72,  -- ±
+        COURIER_CATASTROPHE             = 73,  -- ±
+        DONE_AND_DELIVERED              = 74,  -- ±
+        MINISTERIAL_WHISPERS            = 75,  -- ±
+        A_DAY_IN_THE_LIFE_OF_A_PIONEER  = 76,  -- ±
+        LIGHTING_THE_WAY                = 77,  -- ±
+        SAJJAKA                         = 78,  -- ±
+        STUDYING_UP                     = 79,  -- ±
+        A_VOW_OF_TRUTH                  = 80,  -- ±
+        DARRCUILN                       = 81,  -- ±
         THE_GATES                       = 82,
         MORIMAR                         = 84,
         A_NEW_FORCE_ARISES              = 85,
@@ -830,10 +830,10 @@ xi.mission.setLocalVar = function(player, areaId, questId, name, value)
     return player:setLocalVar(getVarPrefix(areaId, questId) .. name, value)
 end
 
-xi.mission.getMustZone = function(player, areaId, questId, name)
+xi.mission.getMustZone = function(player, areaId, questId)
     return player:getLocalVar(getVarPrefix(areaId, questId) .. "mustZone") == 1 and true or false
 end
 
-xi.mission.setMustZone = function(player, areaId, questId, name, value)
+xi.mission.setMustZone = function(player, areaId, questId)
     player:setLocalVar(getVarPrefix(areaId, questId) .. "mustZone", 1)
 end
