@@ -97,6 +97,7 @@ private:
     std::string                filename;
     uint16                     m_zoneID;
     dtRaycastHit               m_hit;
+    dtPolyRef                  m_hitPath[20];
     std::unique_ptr<dtNavMesh> m_navMesh;
     dtNavMeshQuery             m_navMeshQuery;
 };
