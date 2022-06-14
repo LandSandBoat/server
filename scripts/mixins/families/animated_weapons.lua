@@ -42,7 +42,7 @@ g_mixins.families.animated_weapons = function(animatedMob)
         mob:showText(mob, dialogChoice[mob:getLocalVar("mobName")])
     end)
 
-    animatedMob:addListener("COMBAT_TICK", "ANIMATED_WEAPON_CTICK", function(mob) 
+    animatedMob:addListener("COMBAT_TICK", "ANIMATED_WEAPON_CTICK", function(mob)
         local dialogThresholds = {90, 80, 70, 60, 50, 40, 30, 20, 10}
 
         for trigger, hpp in pairs(dialogThresholds) do
@@ -66,13 +66,13 @@ g_mixins.families.animated_weapons = function(animatedMob)
         end
     end)
 
-    animatedMob:addListener("MAGIC_START", "ANIMATED_WEAPON_MAGIC_START", function(mob, spell, action) 
+    animatedMob:addListener("MAGIC_START", "ANIMATED_WEAPON_MAGIC_START", function(mob, spell, action)
         if spell:getID() == 261 then
             mob:setLocalVar("changeTime", mob:getBattleTime() + math.random(10, 15))
         end
     end)
 
-    animatedMob:addListener("MAGIC_STATE_EXIT", "ANIMATED_WEAPON_MAGIC_STATE_EXIT", function(mob, spell) 
+    animatedMob:addListener("MAGIC_STATE_EXIT", "ANIMATED_WEAPON_MAGIC_STATE_EXIT", function(mob, spell)
         if spell:getID() == 261 then
             mob:SetMagicCastingEnabled(false)
             mob:SetAutoAttackEnabled(false)
@@ -81,11 +81,11 @@ g_mixins.families.animated_weapons = function(animatedMob)
         end
     end)
 
-    animatedMob:addListener("DISENGAGE", "ANIMATED_WEAPON_DISENGAGE", function(mob) 
+    animatedMob:addListener("DISENGAGE", "ANIMATED_WEAPON_DISENGAGE", function(mob)
         mob:showText(mob, dialogChoice[mob:getLocalVar("mobName")] + 2)
     end)
 
-    animatedMob:addListener("DEATH", "ANIMATED_WEAPON_DEATH", function(mob, killer) 
+    animatedMob:addListener("DEATH", "ANIMATED_WEAPON_DEATH", function(mob, killer)
         mob:showText(mob, dialogChoice[mob:getLocalVar("mobName")] + 1)
     end)
 end
