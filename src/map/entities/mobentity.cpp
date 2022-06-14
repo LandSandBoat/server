@@ -273,7 +273,7 @@ bool CMobEntity::CanRoamHome()
         return false;
     }
 
-    if (getMobMod(MOBMOD_NO_DESPAWN) != 0 || map_config.mob_no_despawn)
+    if (getMobMod(MOBMOD_NO_DESPAWN) != 0 || settings::get<bool>("map.MOB_NO_DESPAWN"))
     {
         return true;
     }

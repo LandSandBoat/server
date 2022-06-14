@@ -478,7 +478,7 @@ float CPathFind::GetRealSpeed()
         }
         else if (m_POwner->animation == ANIMATION_ATTACK)
         {
-            realSpeed = realSpeed + map_config.mob_speed_mod;
+            realSpeed = realSpeed + settings::get<int8>("map.MOB_SPEED_MOD");
         }
     }
 

@@ -31,4 +31,7 @@ xi.settings.login =
 
     -- Allow character deletion through the lobby (true/false)
     CHARACTER_DELETION = true,
+
+    -- Number of simultaneous game sessions per IP (0 for no limit)
+    LOGIN_LIMIT = 0,
 }

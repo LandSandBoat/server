@@ -20,7 +20,9 @@
 */
 
 #include "logging.h"
+#include "settings.h"
 #include "tracy.h"
+#include "utils.h"
 
 #include "spdlog/common.h"
 
@@ -32,21 +34,31 @@
 
 namespace logging
 {
+    const std::vector<std::string> logNames = { "critical", "error", "warn", "info", "debug", "trace" };
+
     void InitializeLog(std::string serverName, std::string logFile, bool appendDate)
     {
         TracyZoneScoped;
 
         // If you create more than one worker thread, messages may be delivered out of order
         spdlog::init_thread_pool(8192, 1);
+        spdlog::flush_on(spdlog::level::warn);
+        spdlog::flush_every(std::chrono::seconds(5));
 
         // Sink to console
-        auto                          stdout_sink = std::make_shared<spdlog::sinks::stdout_color_sink_mt>();
-        std::vector<spdlog::sink_ptr> sinks{ stdout_sink };
+        std::vector<spdlog::sink_ptr> sinks;
+        sinks.push_back(std::make_shared<spdlog::sinks::stdout_color_sink_mt>());
+
+        for (auto& name : logNames)
+        {
+            auto logger = std::make_shared<spdlog::async_logger>(name, sinks.begin(), sinks.end(), spdlog::thread_pool());
+            spdlog::register_logger(logger);
+        }
 
         // Daily Sink, creating new files at midnight
         if (appendDate)
         {
-            sinks.push_back(std::make_shared<spdlog::sinks::daily_file_sink_mt>(logFile, 0, 00, false, 0));
+            sinks.push_back(std::make_shared<spdlog::sinks::daily_file_sink_mt>(logFile, 0, 0, false, 0));
         }
         // Basic sink, sink to file with name specified in main routine
         else
@@ -57,67 +69,7 @@ namespace logging
         // https://github.com/gabime/spdlog/wiki/3.-Custom-formatting
         // [date time:ms][server name][log level][logger name] message (func_name:func_line)
         //                            ^---  level colour  ---^
-        auto defaultPattern = fmt::format("[%D %T:%e][{}]%^[%l][%n]%$ %v (%!:%#)", serverName);
-
-        auto createLogger = [&](std::string const& name)
-        {
-            auto logger = std::make_shared<spdlog::async_logger>(name, sinks.begin(), sinks.end(), spdlog::thread_pool(), spdlog::async_overflow_policy::block);
-            logger->set_pattern(defaultPattern);
-            spdlog::register_logger(logger);
-            return logger;
-        };
-
-        // Create a series of loggers with different names, all sinking to the file and console sinks
-        // Each name serves as the tag in the log
-        // TODO: There is duplication here between the tag and the severity, FIXME
-
-        // direct printf replacement
-        auto standardLogger = createLogger("standard");
-        auto messageLogger  = createLogger("message");
-
-        // To inform about good things
-        auto statusLogger = createLogger("status");
-
-        // Variable information
-        auto infoLogger = createLogger("info");
-
-        // Less than a warning
-        auto noticeLogger = createLogger("notice");
-
-        // Warnings
-        auto warningLogger = createLogger("warning");
-
-        // Important stuff
-        auto debugLogger = createLogger("debug");
-
-        // Regular errors
-        auto errorLogger = createLogger("error");
-
-        // Fatal errors, abort(); if possible
-        auto fatalErrorLogger = createLogger("fatalerror");
-
-        // For dumping out anything related with SQL) <- Actually, this is mostly used for SQL errors with the database, as
-        // successes can as well just be anything else...
-        auto sqlLogger = createLogger("sql");
-
-        // Lua related logging and errors
-        auto luaLogger = createLogger("lua");
-
-        // Navmesh related errors
-        auto navmeshLogger = createLogger("navmesh");
-
-        // Mostly useless "player did this" info
-        auto actionLogger = createLogger("action");
-
-        // Detected a likely exploit
-        auto exploitLogger = createLogger("exploit");
-
-        // Dumping stacktraces
-        auto stacktraceLogger = createLogger("stacktrace");
-
-        spdlog::set_default_logger(standardLogger);
-        spdlog::flush_on(spdlog::level::warn);
-        spdlog::flush_every(std::chrono::seconds(30));
+        spdlog::set_pattern(fmt::format("[%D %T:%e][{}]%^[%l][%n]%$ %v (%!:%#)", serverName));
 
         // Set default log level (everything)
         spdlog::set_level(spdlog::level::trace);
@@ -131,74 +83,14 @@ namespace logging
         spdlog::shutdown();
     }
 
-    void SetFilters(int filterMask)
+    void UpdateFilters()
     {
-        TracyZoneScoped;
-
-        // TODO: Loopify this, this sucks
-        if (filterMask & MSG_STANDARD)
+        // Broad categories
+        for (auto& name : logNames)
         {
-            spdlog::get("standard")->set_level(spdlog::level::off);
-        }
-
-        if (filterMask & MSG_STATUS)
-        {
-            spdlog::get("status")->set_level(spdlog::level::off);
-        }
-
-        if (filterMask & MSG_INFO)
-        {
-            spdlog::get("info")->set_level(spdlog::level::off);
-        }
-
-        if (filterMask & MSG_NOTICE)
-        {
-            spdlog::get("notice")->set_level(spdlog::level::off);
-        }
-
-        if (filterMask & MSG_WARNING)
-        {
-            spdlog::get("warning")->set_level(spdlog::level::off);
-        }
-
-        if (filterMask & MSG_DEBUG)
-        {
-            spdlog::get("debug")->set_level(spdlog::level::off);
-        }
-
-        if (filterMask & MSG_ERROR)
-        {
-            spdlog::get("error")->set_level(spdlog::level::off);
-        }
-
-        if (filterMask & MSG_FATALERROR)
-        {
-            spdlog::get("fatalerror")->set_level(spdlog::level::off);
-        }
-
-        if (filterMask & MSG_SQL)
-        {
-            spdlog::get("sql")->set_level(spdlog::level::off);
-        }
-
-        if (filterMask & MSG_LUASCRIPT)
-        {
-            spdlog::get("lua")->set_level(spdlog::level::off);
-        }
-
-        if (filterMask & MSG_NAVMESH)
-        {
-            spdlog::get("navmesh")->set_level(spdlog::level::off);
-        }
-
-        if (filterMask & MSG_ACTION)
-        {
-            spdlog::get("action")->set_level(spdlog::level::off);
-        }
-
-        if (filterMask & MSG_EXPLOIT)
-        {
-            spdlog::get("exploit")->set_level(spdlog::level::off);
+            auto settingsKey = fmt::format("logging.ENABLE_{}", to_upper(name));
+            bool settingsVal = settings::get<bool>(settingsKey);
+            spdlog::get(name)->set_level(settingsVal ? spdlog::level::trace : spdlog::level::off);
         }
     }
 } // namespace logging

@@ -52,8 +52,8 @@ ConsoleService::ConsoleService()
     bool attached = isatty(0);
     if (attached)
     {
-        ShowStatus("Console input thread is ready...");
-        ShowStatus("Type 'help' for a list of available commands.");
+        ShowInfo("Console input thread is ready...");
+        ShowInfo("Type 'help' for a list of available commands.");
         m_consoleInputThread = std::thread([&]()
         {
             auto lastInputTime = server_clock::now();
@@ -97,7 +97,7 @@ ConsoleService::ConsoleService()
                 }
                 std::this_thread::sleep_for(250ms); // TODO: Do this better
             };
-            ShowStatus("Console input thread exiting...");
+            ShowInfo("Console input thread exiting...");
         });
     }
     // clang-format on

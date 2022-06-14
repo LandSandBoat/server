@@ -1037,7 +1037,7 @@ void CCharEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& acti
                 }
                 if (actionTarget.reaction == REACTION::HIT)
                 {
-                    int wspoints = map_config.ws_points_base;
+                    int wspoints = settings::get<uint8>("map.WS_POINTS_BASE");
                     if (PWeaponSkill->getPrimarySkillchain() != 0)
                     {
                         // NOTE: GetSkillChainEffect is INSIDE this if statement because it
@@ -1057,19 +1057,22 @@ void CCharEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& acti
                             {
                                 actionTarget.addEffectMessage = 287 + effect;
                             }
+
                             actionTarget.additionalEffect = effect;
+
                             // Despite appearances, ws_points_skillchain is not a multiplier it is just an amount "per element"
+                            auto wsPointsSkillchain = settings::get<uint8>("map.WS_POINTS_SKILLCHAIN");
                             if (effect >= 7 && effect < 15)
                             {
-                                wspoints += (1 * map_config.ws_points_skillchain); // 1 element
+                                wspoints += (1 * wsPointsSkillchain); // 1 element
                             }
                             else if (effect >= 3)
                             {
-                                wspoints += (2 * map_config.ws_points_skillchain); // 2 elements
+                                wspoints += (2 * wsPointsSkillchain); // 2 elements
                             }
                             else
                             {
-                                wspoints += (4 * map_config.ws_points_skillchain); // 4 elements
+                                wspoints += (4 * wsPointsSkillchain); // 4 elements
                             }
                         }
                     }
@@ -1373,7 +1376,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
         PRecastContainer->Add(RECAST_ABILITY, PAbility->getRecastId(), action.recast);
 
         uint16 recastID = PAbility->getRecastId();
-        if (map_config.blood_pact_shared_timer && (recastID == 173 || recastID == 174))
+        if (settings::get<bool>("map.BLOOD_PACT_SHARED_TIMER") && (recastID == 173 || recastID == 174))
         {
             PRecastContainer->Add(RECAST_ABILITY, (recastID == 173 ? 174 : 173), action.recast);
         }

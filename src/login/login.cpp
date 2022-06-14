@@ -51,16 +51,20 @@ std::thread messageThread;
 
 std::unique_ptr<SqlConnection> sql;
 
+#define ShowLogin(...) _ShowTrace("login", __VA_ARGS__)
+
 int32 do_init(int32 argc, char** argv)
 {
+    ShowLogin("Test");
+
     login_fd = makeListenBind_tcp(settings::get<std::string>("network.LOGIN_AUTH_IP").c_str(), settings::get<uint16>("network.LOGIN_AUTH_PORT"), connect_client_login);
-    ShowStatus("The login-server-auth is ready (Server is listening on the port %u).", settings::get<uint16>("network.LOGIN_AUTH_PORT"));
+    ShowInfo("The login-server-auth is ready (Server is listening on the port %u).", settings::get<uint16>("network.LOGIN_AUTH_PORT"));
 
     login_lobbydata_fd = makeListenBind_tcp(settings::get<std::string>("network.LOGIN_DATA_IP").c_str(), settings::get<uint16>("network.LOGIN_DATA_PORT"), connect_client_lobbydata);
-    ShowStatus("The login-server-lobbydata is ready (Server is listening on the port %u).", settings::get<uint16>("network.LOGIN_DATA_PORT"));
+    ShowInfo("The login-server-lobbydata is ready (Server is listening on the port %u).", settings::get<uint16>("network.LOGIN_DATA_PORT"));
 
     login_lobbyview_fd = makeListenBind_tcp(settings::get<std::string>("network.LOGIN_VIEW_IP").c_str(), settings::get<uint16>("network.LOGIN_VIEW_PORT"), connect_client_lobbyview);
-    ShowStatus("The login-server-lobbyview is ready (Server is listening on the port %u).", settings::get<uint16>("network.LOGIN_VIEW_PORT"));
+    ShowInfo("The login-server-lobbyview is ready (Server is listening on the port %u).", settings::get<uint16>("network.LOGIN_VIEW_PORT"));
 
     sql = std::make_unique<SqlConnection>();
 
@@ -75,12 +79,12 @@ int32 do_init(int32 argc, char** argv)
 
     if (!settings::get<bool>("login.ACCOUNT_CREATION"))
     {
-        ShowStatus("New account creation is currently disabled.");
+        ShowInfo("New account creation is currently disabled.");
     }
 
     if (!settings::get<bool>("login.CHARACTER_DELETION"))
     {
-        ShowStatus("Character deletion is currently disabled.");
+        ShowInfo("Character deletion is currently disabled.");
     }
 
     messageThread = std::thread(message_server_init);
@@ -124,8 +128,8 @@ int32 do_init(int32 argc, char** argv)
     */
     // clang-format on
 
-    ShowStatus("The login-server is ready to work!");
-    ShowMessage("=======================================================================");
+    ShowInfo("The login-server is ready to work!");
+    ShowInfo("=======================================================================");
 
     return 0;
 }
@@ -172,7 +176,7 @@ int do_sockets(fd_set* rfd, duration next)
     {
         if (sErrno != S_EINTR)
         {
-            ShowFatalError("do_sockets: select() failed, error code %d!", sErrno);
+            ShowCritical("do_sockets: select() failed, error code %d!", sErrno);
             exit(EXIT_FAILURE);
         }
         return 0; // interrupted by a signal, just loop and try again

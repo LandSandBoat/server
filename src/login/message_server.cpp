@@ -259,7 +259,7 @@ void message_server_init()
     }
     catch (zmq::error_t& err)
     {
-        ShowFatalError("Unable to bind chat socket: %s", err.what());
+        ShowCritical("Unable to bind chat socket: %s", err.what());
     }
 
     message_server_listen();

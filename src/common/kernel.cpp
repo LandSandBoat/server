@@ -146,8 +146,8 @@ static void dump_backtrace()
             ShowError("read failed for gdb backtrace: %s", strerror(errno));
             _exit(EXIT_FAILURE);
         }
-        ShowFatalError("--- gdb backtrace ---");
-        ShowFatalError("%s", buf);
+        ShowCritical("--- gdb backtrace ---");
+        ShowCritical("%s", buf);
     }
 #endif
 }

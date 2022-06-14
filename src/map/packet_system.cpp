@@ -2187,7 +2187,7 @@ void SmallPacket0x04B(map_session_data_t* const PSession, CCharEntity* const PCh
 
     if (msg_language == 0x02)
     {
-        PChar->pushPacket(new CServerMessagePacket(map_config.server_message, msg_language, msg_timestamp, msg_offset));
+        PChar->pushPacket(new CServerMessagePacket(settings::get<std::string>("main.SERVER_MESSAGE"), msg_language, msg_timestamp, msg_offset));
     }
 
     PChar->pushPacket(new CCharSyncPacket(PChar));
@@ -2795,8 +2795,8 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
 
                 CItem* PItem = PChar->UContainer->GetItem(slotID);
 
-                // ShowMessage("FreeSlots %u", PChar->getStorage(LOC_INVENTORY)->GetFreeSlotsCount());
-                // ShowMessage("ItemId %u", PItem->getID());
+                // ShowInfo("FreeSlots %u", PChar->getStorage(LOC_INVENTORY)->GetFreeSlotsCount());
+                // ShowInfo("ItemId %u", PItem->getID());
 
                 if (!PItem->isType(ITEM_CURRENCY) && PChar->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() == 0)
                 {
@@ -3056,7 +3056,7 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
                     auctionFee = (uint32)(map_config.ah_base_fee_single + (price * map_config.ah_tax_rate_single / 100));
                 }
 
-                auctionFee = std::clamp<uint32>(auctionFee, 0, map_config.ah_max_fee);
+                auctionFee = std::clamp<uint32>(auctionFee, 0, settings::get<uint32>("map.AH_MAX_FEE"));
 
                 if (PChar->getStorage(LOC_INVENTORY)->GetItem(0)->getQuantity() < auctionFee)
                 {
@@ -3078,7 +3078,7 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
                     // ShowDebug(CL_CYAN"%s has %d outstanding listings before placing this one.", PChar->GetName(), ah_listings);
                 }
 
-                if (map_config.ah_list_limit && ah_listings >= map_config.ah_list_limit)
+                if (settings::get<uint8>("map.AH_LIST_LIMIT") && ah_listings >= settings::get<uint8>("map.AH_LIST_LIMIT"))
                 {
                     // ShowDebug(CL_CYAN"%s already has %d items on the AH",PChar->GetName(), ah_listings);
                     PChar->pushPacket(new CAuctionHousePacket(action, 197, 0, 0)); // Failed to place up
@@ -3868,7 +3868,7 @@ void SmallPacket0x064(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x066(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
-    if (map_config.fishing_enable == 1)
+    if (settings::get<bool>("map.FISHING_ENABLE"))
     {
         fishingutils::HandleFishingAction(PChar, data);
     }
@@ -4916,7 +4916,7 @@ void SmallPacket0x0B5(map_session_data_t* const PSession, CCharEntity* const PCh
         {
             if (data.ref<uint8>(0x04) == MESSAGE_SAY)
             {
-                if (map_config.audit_chat == 1 && map_config.audit_say == 1)
+                if (settings::get<bool>("map.AUDIT_CHAT") && settings::get<uint8>("map.AUDIT_SAY"))
                 {
                     char escaped_speaker[16 * 2 + 1];
                     sql->EscapeString(escaped_speaker, (const char*)PChar->GetName());
@@ -4944,7 +4944,7 @@ void SmallPacket0x0B5(map_session_data_t* const PSession, CCharEntity* const PCh
             {
                 case MESSAGE_SAY:
                 {
-                    if (map_config.audit_chat == 1 && map_config.audit_say == 1)
+                    if (settings::get<bool>("map.AUDIT_CHAT") && settings::get<uint8>("map.AUDIT_SAY"))
                     {
                         char escaped_speaker[16 * 2 + 1];
                         sql->EscapeString(escaped_speaker, (const char*)PChar->GetName());
@@ -4967,7 +4967,7 @@ void SmallPacket0x0B5(map_session_data_t* const PSession, CCharEntity* const PCh
                     break;
                 case MESSAGE_SHOUT:
                 {
-                    if (map_config.audit_chat == 1 && map_config.audit_shout == 1)
+                    if (settings::get<bool>("map.AUDIT_CHAT") && settings::get<uint8>("map.AUDIT_SHOUT"))
                     {
                         char escaped_speaker[16 * 2 + 1];
                         sql->EscapeString(escaped_speaker, (const char*)PChar->GetName());
@@ -4995,7 +4995,7 @@ void SmallPacket0x0B5(map_session_data_t* const PSession, CCharEntity* const PCh
                         message::send(MSG_CHAT_LINKSHELL, packetData, sizeof packetData,
                                       new CChatMessagePacket(PChar, MESSAGE_LINKSHELL, (const char*)data[6]));
 
-                        if (map_config.audit_chat == 1 && map_config.audit_linkshell == 1)
+                        if (settings::get<bool>("map.AUDIT_CHAT") && settings::get<uint8>("map.AUDIT_LINKSHELL"))
                         {
                             char escaped_speaker[16 * 2 + 1];
                             sql->EscapeString(escaped_speaker, (const char*)PChar->GetName());
@@ -5029,7 +5029,7 @@ void SmallPacket0x0B5(map_session_data_t* const PSession, CCharEntity* const PCh
                         message::send(MSG_CHAT_LINKSHELL, packetData, sizeof packetData,
                                       new CChatMessagePacket(PChar, MESSAGE_LINKSHELL, (const char*)data[6]));
 
-                        if (map_config.audit_chat == 1 && map_config.audit_linkshell == 1)
+                        if (settings::get<bool>("map.AUDIT_CHAT") && settings::get<uint8>("map.AUDIT_LINKSHELL"))
                         {
                             char escaped_speaker[16 * 2 + 1];
                             sql->EscapeString(escaped_speaker, (const char*)PChar->GetName());
@@ -5062,7 +5062,7 @@ void SmallPacket0x0B5(map_session_data_t* const PSession, CCharEntity* const PCh
                         ref<uint32>(packetData, 4) = PChar->id;
                         message::send(MSG_CHAT_PARTY, packetData, sizeof packetData, new CChatMessagePacket(PChar, MESSAGE_PARTY, (const char*)data[6]));
 
-                        if (map_config.audit_chat == 1 && map_config.audit_party == 1)
+                        if (settings::get<bool>("map.AUDIT_CHAT") && settings::get<uint8>("map.AUDIT_PARTY"))
                         {
                             char escaped_speaker[16 * 2 + 1];
                             sql->EscapeString(escaped_speaker, (const char*)PChar->GetName());
@@ -5086,8 +5086,7 @@ void SmallPacket0x0B5(map_session_data_t* const PSession, CCharEntity* const PCh
                     {
                         if (gettick() >= PChar->m_LastYell)
                         {
-                            PChar->m_LastYell = gettick() + (map_config.yell_cooldown * 1000);
-                            // ShowDebug(CL_CYAN" LastYell: %u ", PChar->m_LastYell);
+                            PChar->m_LastYell = gettick() + settings::get<uint16>("map.YELL_COOLDOWN") * 1000;
                             int8 packetData[4]{};
                             ref<uint32>(packetData, 0) = PChar->id;
 
@@ -5098,7 +5097,7 @@ void SmallPacket0x0B5(map_session_data_t* const PSession, CCharEntity* const PCh
                             PChar->pushPacket(new CMessageStandardPacket(PChar, 0, MsgStd::WaitLonger));
                         }
 
-                        if (map_config.audit_chat == 1 && map_config.audit_yell == 1)
+                        if (settings::get<bool>("map.AUDIT_CHAT") && settings::get<uint8>("map.AUDIT_YELL"))
                         {
                             char escaped_speaker[16 * 2 + 1];
                             sql->EscapeString(escaped_speaker, (const char*)PChar->GetName());
@@ -5132,7 +5131,7 @@ void SmallPacket0x0B5(map_session_data_t* const PSession, CCharEntity* const PCh
 
                         roeutils::event(ROE_EVENT::ROE_UNITY_CHAT, PChar, RoeDatagram("unityMessage", (const char*)data[6]));
 
-                        if (map_config.audit_chat == 1 && map_config.audit_unity == 1)
+                        if (settings::get<bool>("map.AUDIT_CHAT") && settings::get<uint8>("map.AUDIT_UNITY"))
                         {
                             char escaped_speaker[16 * 2 + 1];
                             sql->EscapeString(escaped_speaker, (const char*)PChar->GetName());
@@ -5188,7 +5187,7 @@ void SmallPacket0x0B6(map_session_data_t* const PSession, CCharEntity* const PCh
 
     message::send(MSG_CHAT_TELL, packetData, RecipientName.length() + 5, new CChatMessagePacket(PChar, MESSAGE_TELL, (const char*)data[21]));
 
-    if (map_config.audit_chat == 1 && map_config.audit_tell == 1)
+    if (settings::get<bool>("map.AUDIT_CHAT") && settings::get<bool>("map.AUDIT_TELL"))
     {
         char escaped_speaker[16 * 2 + 1];
         sql->EscapeString(escaped_speaker, (const char*)PChar->GetName());
@@ -6055,7 +6054,7 @@ void SmallPacket0x0E7(map_session_data_t* const PSession, CCharEntity* const PCh
 
         if (PChar->PPet == nullptr || (PChar->PPet->m_EcoSystem != ECOSYSTEM::AVATAR && PChar->PPet->m_EcoSystem != ECOSYSTEM::ELEMENTAL))
         {
-            PChar->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_HEALING, 0, 0, map_config.healing_tick_delay, 0));
+            PChar->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_HEALING, 0, 0, settings::get<uint8>("map.HEALING_TICK_DELAY"), 0));
         }
         PChar->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_LEAVEGAME, 0, ExitType, 5, 0));
     }
@@ -6110,7 +6109,7 @@ void SmallPacket0x0E8(map_session_data_t* const PSession, CCharEntity* const PCh
                 {
                     PChar->PPet->PAI->Disengage();
                 }
-                PChar->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_HEALING, 0, 0, map_config.healing_tick_delay, 0));
+                PChar->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_HEALING, 0, 0, settings::get<uint8>("map.HEALING_TICK_DELAY"), 0));
                 return;
             }
             PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, 345));
@@ -7320,7 +7319,7 @@ void SmallPacket0x10F(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x110(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
-    if (map_config.fishing_enable == 1)
+    if (settings::get<bool>("map.FISHING_ENABLE"))
     {
         fishingutils::HandleFishingAction(PChar, data);
     }

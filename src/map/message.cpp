@@ -625,6 +625,11 @@ namespace message
         }
     }
 
+    void init()
+    {
+        init(settings::get<std::string>("network.ZMQ_IP").c_str(), settings::get<uint16>("network.ZMQ_IP"));
+    }
+
     void init(const char* chatIp, uint16 chatPort)
     {
         TracyZoneScoped;
@@ -662,7 +667,7 @@ namespace message
         }
         catch (zmq::error_t& err)
         {
-            ShowFatalError("Message: Unable to connect chat socket: %s", err.what());
+            ShowCritical("Message: Unable to connect chat socket: %s", err.what());
         }
     }
 

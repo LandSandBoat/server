@@ -198,7 +198,7 @@ int32 makeConnection(uint32 ip, uint16 port, int32 type)
     remote_address.sin_addr.s_addr = htonl(ip);
     remote_address.sin_port        = htons(port);
 
-    ShowStatus("Connecting to %d.%d.%d.%d:%i", CONVIP(ip), port);
+    ShowInfo("Connecting to %d.%d.%d.%d:%i", CONVIP(ip), port);
 
     result = sConnect(fd, (struct sockaddr*)(&remote_address), sizeof(struct sockaddr_in));
     if (result == SOCKET_ERROR)

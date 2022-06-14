@@ -246,13 +246,13 @@ int32 main(int32 argc, char** argv)
     SetConsoleMode(hInput, ENABLE_EXTENDED_FLAGS | (prev_mode & ~ENABLE_QUICK_EDIT_MODE));
 #endif // _WIN32
 
-    ShowMessage("========================================================");
-    ShowMessage("search and auction server");
-    ShowMessage("========================================================");
+    ShowInfo("========================================================");
+    ShowInfo("search and auction server");
+    ShowInfo("========================================================");
 
     if (settings::get<bool>("search.EXPIRE_AUCTIONS"))
     {
-        ShowMessage("AH task to return items older than %u days is running", expireDays);
+        ShowInfo("AH task to return items older than %u days is running", expireDays);
         CTaskMgr::getInstance()->AddTask("ah_cleanup", server_clock::now(), nullptr, CTaskMgr::TASK_INTERVAL, ah_cleanup,
                                          std::chrono::seconds(settings::get<uint32>("search.EXPIRE_INTERVAL")));
     }
@@ -331,7 +331,7 @@ int32 main(int32 argc, char** argv)
 
 void TCPComm(SOCKET socket)
 {
-    // ShowMessage("TCP connection from client with port: %u", htons(CommInfo.port));
+    // ShowInfo("TCP connection from client with port: %u", htons(CommInfo.port));
 
     CTCPRequestPacket PTCPRequest(&socket);
 
@@ -340,26 +340,26 @@ void TCPComm(SOCKET socket)
         return;
     }
     // PrintPacket((int8*)PTCPRequest->GetData(), PTCPRequest->GetSize());
-    ShowMessage("= = = = = = = Type: %u Size: %u ", PTCPRequest.GetPacketType(), PTCPRequest.GetSize());
+    ShowInfo("= = = = = = = Type: %u Size: %u ", PTCPRequest.GetPacketType(), PTCPRequest.GetSize());
 
     switch (PTCPRequest.GetPacketType())
     {
         case TCP_SEARCH:
         case TCP_SEARCH_ALL:
         {
-            ShowMessage("Search ");
+            ShowInfo("Search ");
             HandleSearchRequest(PTCPRequest);
         }
         break;
         case TCP_SEARCH_COMMENT:
         {
-            ShowMessage("Search comment ");
+            ShowInfo("Search comment ");
             HandleSearchComment(PTCPRequest);
         }
         break;
         case TCP_GROUP_LIST:
         {
-            ShowMessage("Search group");
+            ShowInfo("Search group");
             HandleGroupListRequest(PTCPRequest);
         }
         break;
@@ -393,8 +393,8 @@ void HandleGroupListRequest(CTCPRequestPacket& PTCPRequest)
     uint32 linkshellid1 = ref<uint32>(data, 0x18);
     uint32 linkshellid2 = ref<uint32>(data, 0x1C);
 
-    ShowMessage("SEARCH::PartyID = %u", partyid);
-    ShowMessage("SEARCH::LinkshellIDs = %u, %u", linkshellid1, linkshellid2);
+    ShowInfo("SEARCH::PartyID = %u", partyid);
+    ShowInfo("SEARCH::LinkshellIDs = %u, %u", linkshellid1, linkshellid2);
 
     CDataLoader PDataLoader;
 
@@ -482,7 +482,7 @@ void HandleAuctionHouseRequest(CTCPRequestPacket& PTCPRequest)
     for (uint8 i = 0; i < paramCount; ++i) // параметры сортировки предметов
     {
         uint8 param = ref<uint32>(data, 0x18 + 8 * i);
-        ShowMessage(" Param%u: %u", i, param);
+        ShowInfo(" Param%u: %u", i, param);
         switch (param)
         {
             case 2:
@@ -578,7 +578,7 @@ search_req _HandleSearchRequest(CTCPRequestPacket& PTCPRequest)
     uint8 commentType = 0;
 
     memset(areas, 0, sizeof(areas));
-    // ShowMessage("Received a search packet with size %u byte", size);
+    // ShowInfo("Received a search packet with size %u byte", size);
 
     while (bitOffset < workloadBits)
     {
@@ -783,7 +783,7 @@ search_req _HandleSearchRequest(CTCPRequestPacket& PTCPRequest)
     }
     printf("\n");
 
-    ShowMessage("Name: %s Job: %u Lvls: %u ~ %u ", (nameLen > 0 ? name : nullptr), jobid, minLvl, maxLvl);
+    ShowInfo("Name: %s Job: %u Lvls: %u ~ %u ", (nameLen > 0 ? name : nullptr), jobid, minLvl, maxLvl);
 
     search_req sr;
     sr.jobid  = jobid;
