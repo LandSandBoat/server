@@ -182,7 +182,11 @@ void CMobController::TryLink()
     {
         for (auto& member : PMob->PParty->members)
         {
-            CMobEntity* PPartyMember = (CMobEntity*)member;
+            CMobEntity* PPartyMember = dynamic_cast<CMobEntity*>(member);
+            if (!PPartyMember)
+            {
+                continue;
+            }
 
             if (PPartyMember->PAI->IsRoaming() && PPartyMember->CanLink(&PMob->loc.p, PMob->getMobMod(MOBMOD_SUPERLINK)))
             {
