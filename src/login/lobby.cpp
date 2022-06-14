@@ -344,22 +344,28 @@ int32 lobbydata_parse(int32 fd)
                     ShowInfo("lobbydata_parse: zoneid:(%u),zoneip:(%s),zoneport:(%u) for char:(%u)", ZoneID, ip2str(ntohl(ZoneIP)), ZonePort, charid);
 
                     // Check the number of sessions
-                    uint16 SessionCount = 0;
+                    uint16 sessionCount = 0;
 
                     fmtQuery = "SELECT COUNT(client_addr) \
                                 FROM accounts_sessions \
                                 WHERE client_addr = %u;";
+
                     if (sql->Query(fmtQuery, sd->client_addr) != SQL_ERROR && sql->NumRows() != 0)
                     {
                         sql->NextRow();
-                        SessionCount = (uint16)sql->GetIntData(0);
-                        if (login_config.login_limit != 0 && SessionCount >= login_config.login_limit)
-                        {
-                            ShowWarning("Already %u active sessions for %u (Limit is %u)", SessionCount, sd->client_addr, login_config.login_limit);
-                        }
+                        sessionCount = (uint16)sql->GetIntData(0);
                     }
 
-                    if (maint_config.maint_mode == 0 && (login_config.login_limit == 0 || SessionCount < login_config.login_limit) || gmlevel > 0)
+                    bool isNotMaint   = maint_config.maint_mode == 0;
+                    bool loginLimitOK = (login_config.login_limit == 0 || sessionCount < login_config.login_limit);
+                    bool isGM         = gmlevel > 0;
+
+                    if (!loginLimitOK)
+                    {
+                        ShowWarning("Already %u active session(s) for %s (Limit is %u)", sessionCount, sd->login, login_config.login_limit);
+                    }
+
+                    if ((isNotMaint && loginLimitOK) || isGM)
                     {
                         if (PrevZone == 0)
                         {
