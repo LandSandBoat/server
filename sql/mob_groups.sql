@@ -469,7 +469,7 @@ INSERT INTO `mob_groups` VALUES (14,2700,11,'Moblin_Ragman',792,0,1715,0,0,33,36
 INSERT INTO `mob_groups` VALUES (15,2687,11,'Moblin_Chapman',792,0,1705,0,0,33,36,0);
 INSERT INTO `mob_groups` VALUES (16,565,11,'Bugbear_Servingman',720,0,377,0,0,32,35,0);
 INSERT INTO `mob_groups` VALUES (17,1160,11,'Earth_Elemental',924,4,733,0,0,45,50,0);
-INSERT INTO `mob_groups` VALUES (18,563,11,'Bugbear_Muscleman',5700,0,376,0,0,52,52,0);
+INSERT INTO `mob_groups` VALUES (18,563,11,'Bugbear_Muscleman',5700,0,376,4700,0,52,52,0);
 INSERT INTO `mob_groups` VALUES (19,3776,11,'Stirge',792,0,2338,0,0,33,36,0);
 INSERT INTO `mob_groups` VALUES (20,121,11,'Ancient_Bomb',924,0,83,0,0,40,45,0);
 INSERT INTO `mob_groups` VALUES (21,3912,11,'Thunder_Elemental',924,4,2412,0,0,45,50,0);
@@ -531,10 +531,13 @@ INSERT INTO `mob_groups` VALUES (29,3824,12,'Swashstox_Beadblinker',0,32,2366,0,
 INSERT INTO `mob_groups` VALUES (30,2695,12,'Moblin_Groundman',960,0,1710,0,0,77,77,0);
 INSERT INTO `mob_groups` VALUES (31,2664,12,'Mimic',0,128,1675,0,0,75,79,0);
 INSERT INTO `mob_groups` VALUES (32,2704,12,'Moblin_Scalpelman',960,0,1719,0,0,78,80,0);
-INSERT INTO `mob_groups` VALUES (33,1645,12,'Goblin_Collector',0,128,1037,0,0,79,81,0);
+INSERT INTO `mob_groups` VALUES (33,1645,12,'Goblin_Collector',0,128,1037,20000,0,79,81,0);
 INSERT INTO `mob_groups` VALUES (34,562,12,'Bugbear_Matman',0,128,375,20000,0,75,79,0);
 INSERT INTO `mob_groups` VALUES (35,1160,12,'Earth_Elemental',960,4,733,0,0,80,80,0);
-INSERT INTO `mob_groups` VALUES (36,6718,12,'Sword_Sorcerer_Solisoq',0,128,0,0,0,83,83,0);
+INSERT INTO `mob_groups` VALUES (36,6718,12,'Sword_Sorcerer_Solisoq',3600,0,3224,14000,0,83,83,0);
+INSERT INTO `mob_groups` VALUES (37,2684,12,'Moblin_Aidman',0,128,1703,0,0,75,79,0);
+INSERT INTO `mob_groups` VALUES (38,2692,12,'Moblin_Engineman',0,128,1708,0,0,75,79,0);
+
 
 -- ------------------------------------------------------------
 -- Mine_Shaft_2716 (Zone 13)
@@ -1270,7 +1273,7 @@ INSERT INTO `mob_groups` VALUES (60,7033,33,'Omhpemde_nodive',960,0,1854,0,0,73,
 -- Grand_Palace_of_HuXzoi (Zone 34)
 -- ------------------------------------------------------------
 
-INSERT INTO `mob_groups` VALUES (1,1241,34,'Eoghrah',960,0,777,0,0,75,77,0);
+INSERT INTO `mob_groups` VALUES (1,1241,34,'Eoghrah',960,0,777,0,2000,75,77,0);
 INSERT INTO `mob_groups` VALUES (2,1242,34,'Eozdei',960,0,778,0,0,77,78,0);
 INSERT INTO `mob_groups` VALUES (3,1240,34,'Eoeuvhi',960,0,776,0,0,74,77,0);
 INSERT INTO `mob_groups` VALUES (4,6173,34,'Eoaern_war',960,0,775,0,0,79,82,0);
@@ -1291,7 +1294,7 @@ INSERT INTO `mob_groups` VALUES (18,6184,34,'Eoaern_sam',960,0,775,0,0,79,82,0);
 INSERT INTO `mob_groups` VALUES (19,55,34,'Aerns_Euvhi',0,128,0,0,0,63,65,0);
 INSERT INTO `mob_groups` VALUES (20,6180,34,'Eoaern_drk',960,0,775,0,9999,79,82,0);
 INSERT INTO `mob_groups` VALUES (21,6177,34,'Eoaern_rdm',960,0,775,0,9999,79,82,0);
-INSERT INTO `mob_groups` VALUES (22,2113,34,'Ixghrah',0,128,0,9000,0,76,76,0);
+INSERT INTO `mob_groups` VALUES (22,2113,34,'Ixghrah',0,128,0,9000,10000,76,76,0);
 INSERT INTO `mob_groups` VALUES (23,2136,34,'Jailer_of_Temperance',0,32,1402,22000,0,85,85,0);
 INSERT INTO `mob_groups` VALUES (24,4661,34,'Ixaern_mnk',0,128,2845,11000,0,80,80,0);
 INSERT INTO `mob_groups` VALUES (25,3269,34,'Qnaern_rdm',0,128,0,0,0,77,77,0);
@@ -1313,7 +1316,7 @@ INSERT INTO `mob_groups` VALUES (9,56,35,'Aerns_Wynav',0,128,0,0,0,65,68,0);
 INSERT INTO `mob_groups` VALUES (10,6174,35,'Awaern_mnk',960,0,198,0,0,81,84,0);
 INSERT INTO `mob_groups` VALUES (11,6175,35,'Awaern_whm',960,0,775,0,9999,81,84,0);
 INSERT INTO `mob_groups` VALUES (12,6182,35,'Awaern_brd',960,0,775,0,0,81,84,0);
-INSERT INTO `mob_groups` VALUES (13,300,35,'Awghrah',960,0,200,0,0,79,82,0);
+INSERT INTO `mob_groups` VALUES (13,300,35,'Awghrah',960,0,200,0,2000,79,82,0);
 INSERT INTO `mob_groups` VALUES (14,6181,35,'Awaern_bst',960,0,775,0,0,81,84,0);
 INSERT INTO `mob_groups` VALUES (15,55,35,'Aerns_Euvhi',0,128,0,0,0,65,68,0);
 INSERT INTO `mob_groups` VALUES (16,6173,35,'Awaern_war',960,0,775,0,0,81,84,0);
@@ -1324,7 +1327,7 @@ INSERT INTO `mob_groups` VALUES (20,6180,35,'Awaern_drk',960,0,775,0,9999,81,84,
 INSERT INTO `mob_groups` VALUES (21,301,35,'Awzdei',960,0,0,0,0,80,83,0);
 -- 22: free
 INSERT INTO `mob_groups` VALUES (23,6179,35,'Awaern_pld',960,0,775,0,9999,81,84,0);
-INSERT INTO `mob_groups` VALUES (24,2114,35,'Ixzdei',0,128,0,6500,0,78,78,0);
+INSERT INTO `mob_groups` VALUES (24,2114,35,'Ixzdei_BLM',0,128,0,6500,0,78,78,0);
 INSERT INTO `mob_groups` VALUES (25,2131,35,'Jailer_of_Fortitude',0,128,1397,25000,0,79,80,0);
 INSERT INTO `mob_groups` VALUES (26,2215,35,'Kfghrah_whm',0,128,0,9000,0,77,77,0);
 INSERT INTO `mob_groups` VALUES (27,4659,35,'Kfghrah_blm',0,128,0,9000,0,77,77,0);
@@ -1333,6 +1336,7 @@ INSERT INTO `mob_groups` VALUES (29,5549,35,'Qnaern_rng',0,128,0,0,0,80,82,0);
 INSERT INTO `mob_groups` VALUES (30,2130,35,'Jailer_of_Faith',0,128,1396,18000,0,85,85,0);
 INSERT INTO `mob_groups` VALUES (31,2112,35,'Ixaern_drg',0,128,2843,21000,0,82,87,0);
 INSERT INTO `mob_groups` VALUES (32,5536,35,'Ixaern_drgs_Wynav',0,128,0,0,0,78,79,0);
+INSERT INTO `mob_groups` VALUES (33,7039,35,'Ixzdei_RDM',0,128,0,6500,0,78,78,0);
 
 -- ------------------------------------------------------------
 -- Empyreal_Paradox (Zone 36)

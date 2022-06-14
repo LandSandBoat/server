@@ -6,7 +6,7 @@ require("scripts/globals/status")
 require("scripts/globals/msg")
 require("scripts/globals/weaponskills")
 require("scripts/globals/jobpoints")
-require("scripts/globals/spells/spell_damage")
+require("scripts/globals/spells/damage_spell")
 require("scripts/globals/utils")
 -----------------------------------
 xi = xi or {}
