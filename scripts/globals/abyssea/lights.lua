@@ -593,7 +593,7 @@ xi.abyssea.DropLights = function(killer, mobName, killType, mob)
 
     local dropLight = 0
     local amount = 0
-    local dropRate = xi.settings.ABYSSEA_LIGHTS_DROP_RATE
+    local dropRate = xi.settings.main.ABYSSEA_LIGHTS_DROP_RATE
 
     if lightInfo[zoneID][mobName][lightTypes[killType].lightType] ~= nil then
         amount = lightInfo[zoneID][mobName][lightTypes[killType].lightType]
@@ -621,12 +621,12 @@ xi.abyssea.DropLights = function(killer, mobName, killType, mob)
             mobName == "Irate_Sheep" or
             mobName == "Luison"
         then
-            if xi.settings.ABYSSEA_LIGHTS_DROP_RATE > 0 then
+            if xi.settings.main.ABYSSEA_LIGHTS_DROP_RATE > 0 then
                 dropRate = 2
             end
         else
-            if xi.settings.ABYSSEA_LIGHTS_DROP_RATE > 10 then
-                dropRate = math.floor(xi.settings.ABYSSEA_LIGHTS_DROP_RATE /2)
+            if xi.settings.main.ABYSSEA_LIGHTS_DROP_RATE > 10 then
+                dropRate = math.floor(xi.settings.main.ABYSSEA_LIGHTS_DROP_RATE /2)
             end
         end
     end
@@ -639,7 +639,7 @@ xi.abyssea.DropLights = function(killer, mobName, killType, mob)
             mobName == "Amuckatrice" or
             mobName == "Camelopardalis"
         then
-            if xi.settings.ABYSSEA_LIGHTS_DROP_RATE > 0 then
+            if xi.settings.main.ABYSSEA_LIGHTS_DROP_RATE > 0 then
                 dropRate = 100
             end
         end

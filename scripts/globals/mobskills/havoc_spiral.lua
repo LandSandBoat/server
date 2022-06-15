@@ -8,7 +8,7 @@
 
 -- Special weaponskill unique to Ark Angel MR. Deals ~100-300 damage.
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------

@@ -3,7 +3,7 @@
 -- Item: bottle_of_dawn_mulsum
 -- Item Effect: Instantly restores 20%-35% of pet HP
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/msg")
 -----------------------------------
 local item_object = {}
@@ -16,7 +16,7 @@ item_object.onItemCheck = function(target)
 end
 
 item_object.onItemUse = function(target)
-    local percent = math.random(20, 35) * xi.settings.ITEM_POWER
+    local percent = math.random(20, 35) * xi.settings.main.ITEM_POWER
     local pet = target:getPet()
     local totalHP = (pet:getMaxHP()/100)*percent
     pet:addHP(totalHP)

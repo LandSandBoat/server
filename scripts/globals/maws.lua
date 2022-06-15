@@ -4,7 +4,7 @@
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/quests")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/teleports")
 require("scripts/globals/titles")
 require("scripts/globals/zone")
@@ -67,7 +67,7 @@ end
 xi.maws.onTrigger = function(player, npc)
     local ID = zones[player:getZoneID()]
 
-    if xi.settings.ENABLE_WOTG == 0 then
+    if xi.settings.main.ENABLE_WOTG == 0 then
         player:messageSpecial(ID.text.NOTHING_HAPPENS)
         return
     end

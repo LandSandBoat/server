@@ -2,7 +2,7 @@
 -- Mountain Buster
 -- Titan delivers an earth-shattering attack that roots its target in place.
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------

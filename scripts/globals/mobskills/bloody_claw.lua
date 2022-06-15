@@ -8,7 +8,7 @@
 -- Notes: Despite the attack ignoring Utsusemi, it is physical, and therefore capable of missing entirely.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
 local mobskill_object = {}

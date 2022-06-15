@@ -1,7 +1,7 @@
 -----------------------------------
 -- Poison Nails  M=3? guess
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/summon")
 

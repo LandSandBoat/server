@@ -12,7 +12,7 @@ require("scripts/globals/items")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
@@ -116,8 +116,8 @@ entity.onEventFinish = function(player, csid, option)
         for zone = 1, #zoneId, 2 do
             if zoneId[zone] == currtab then
                 player:confirmTrade()
-                player:addGil(xi.settings.GIL_RATE * zoneId[zone+1])
-                player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * zoneId[zone+1])
+                player:addGil(xi.settings.main.GIL_RATE * zoneId[zone+1])
+                player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * zoneId[zone+1])
                 player:setCharVar("anExplorer-CurrentTablet", 0)
                 break
             end

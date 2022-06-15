@@ -88,7 +88,7 @@ auto CLuaItem::getMatchingTrials() -> sol::table
     if (m_PLuaItem == nullptr)
     {
         ShowWarning("CLuaItem::getMatchingTrials() - m_PLuaItem is null.");
-        return luautils::lua.create_table();
+        return lua.create_table();
     }
 
     auto PItem = static_cast<CItemEquipment*>(m_PLuaItem);

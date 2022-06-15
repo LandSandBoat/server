@@ -8825,7 +8825,7 @@ sol::table CLuaBaseEntity::getAlliance()
     if (m_PBaseEntity->objtype == TYPE_NPC)
     {
         ShowWarning("CLuaBaseEntity::getAlliance() - NPC passed to function.");
-        return luautils::lua.create_table();
+        return lua.create_table();
     }
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);

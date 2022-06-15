@@ -2,7 +2,7 @@
 -- Fireball
 -- Deals Fire damage in an area of effect.
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
