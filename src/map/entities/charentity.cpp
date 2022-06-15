@@ -266,7 +266,7 @@ CCharEntity::~CCharEntity()
     delete CraftContainer;
     delete PMeritPoints;
     delete PJobPoints;
-    delete PGuildShop;
+    PGuildShop = nullptr;
     delete eventPreparation;
     delete currentEvent;
 
