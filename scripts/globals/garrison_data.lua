@@ -47,15 +47,15 @@ xi.garrison.names =
     {
         [0] =
         {
-            npcName = "Temple Knight"
+            npcName = "TempleKnight"
         },
         [1] =
         {
-            npcName = "Gold Musketeer"
+            npcName = "UNKNOWN"
         },
         [2] =
         {
-            npcName = "NEED NAME"
+            npcName = "UNKNOWN"
         },
     },
     --level 50 garrison names
@@ -63,15 +63,15 @@ xi.garrison.names =
     {
         [0] =
         {
-            npcName = "Royal Guard"
+            npcName = "UNKNOWN"
         },
         [1] =
         {
-            npcName = "NEED NAME"
+            npcName = "GoldMusketeer"
         },
         [2] =
         {
-            npcName = "NEED NAME"
+            npcName = "Patriarch"
         },
     },
     --level 75 garrison names
@@ -79,15 +79,15 @@ xi.garrison.names =
     {
         [0] =
         {
-            npcName = "NEED NAME"
+            npcName = "MilitaryAttache"
         },
         [1] =
         {
-            npcName = "NEED NAME"
+            npcName = "MilitaryAttache"
         },
         [2] =
         {
-            npcName = "NEED NAME"
+            npcName = "MilitaryAttache"
         },
     },
 }
@@ -200,6 +200,9 @@ xi.garrison.looks =
             803,
             804,
             805
+            -- "0x0100020600106320633063406350056122700000",
+            -- "0x010004067C102D20193019401950506100700000",
+            -- "0x0100080669106B206B306B406B50FE6000700000"
         },
     },
     --level 75 garrison looks
@@ -328,14 +331,14 @@ xi.garrison.data =
             [1] =
             {
                 4, -- Orcish Fighter
-                3 -- Orcish Fighter
+                3  -- Orcish Fighter
             },
             [2] =
             {
                 4, -- Orcish Fighter
                 3, -- Orcish Fighter
                 2, -- Orcish Chasseur
-                1 -- Orcish Chasseur
+                1  -- Orcish Chasseur
             },
             [3] =
             {
@@ -344,7 +347,7 @@ xi.garrison.data =
                 4, -- Orcish Fighter
                 3, -- Orcish Fighter
                 2, -- Orcish Chasseur
-                1 -- Orcish Chasseur
+                1  -- Orcish Chasseur
             },
             [4] =
             {
@@ -355,7 +358,7 @@ xi.garrison.data =
                 4, -- Orcish Fighter
                 3, -- Orcish Fighter
                 2, -- Orcish Chasseur
-                1 -- Orcish Chasseur
+                1  -- Orcish Chasseur
             },
         },
     },
@@ -1136,38 +1139,37 @@ xi.garrison.data =
         waveOrder =
         {
         -- # Represents the negative offset from boss to spawn
-        -- TODO Capture Correct Wave Order
             [1] =
             {
-                8,
-                7
+                8, -- Tonberry Creeper
+                7  -- Tonberry Creeper
             },
             [2] =
             {
-                8,
-                7,
-                6,
-                5
+                8, -- Tonberry Creeper
+                7, -- Tonberry Creeper
+                6, -- Tonberry Hexer
+                5  -- Tonberry Hexer
             },
             [3] =
             {
-                8,
-                7,
-                6,
-                5,
-                4,
-                3
+                8, -- Tonberry Creeper
+                7, -- Tonberry Creeper
+                6, -- Tonberry Hexer
+                5, -- Tonberry Hexer
+                4, -- Tonberry Creeper
+                3  -- Tonberry Creeper
             },
             [4] =
             {
-                8,
-                7,
-                6,
-                5,
-                4,
-                3,
-                2,
-                1
+                8, -- Tonberry Creeper
+                7, -- Tonberry Creeper
+                6, -- Tonberry Hexer
+                5, -- Tonberry Hexer
+                4, -- Tonberry Creeper
+                3, -- Tonberry Creeper
+                2, -- Tonberry Hexer
+                1  -- Tonberry Hexer
             },
         },
     },

@@ -519,7 +519,10 @@ xi.garrison.buildNpcTable = function(zone)
     local zoneId = zone:getID()
     local garrisonZoneData = xi.garrison.data[zoneId]
     local garrisonRunning = zone:getLocalVar(string.format("[GARRISON]EndTime_%s", zoneId))
-    if xi.garrison.npcTableEmpty(zone) == true then
+    if
+        xi.garrison.npcTableEmpty(zone) == true and
+        owner < 3
+    then
         local npcs = garrisonZoneData.npcs
         local xPos = garrisonZoneData.xPos
         local yPos = garrisonZoneData.yPos
