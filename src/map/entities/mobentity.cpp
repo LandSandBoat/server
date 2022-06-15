@@ -94,8 +94,12 @@ CMobEntity::CMobEntity()
     m_THLvl        = 0;
     m_ItemStolen   = false;
 
+    HPmodifier = 0;
+    MPmodifier = 0;
+
     strRank = 3;
     vitRank = 3;
+    dexRank = 3;
     agiRank = 3;
     intRank = 3;
     mndRank = 3;
@@ -113,20 +117,14 @@ CMobEntity::CMobEntity()
     m_TrueDetection = false;
     m_Detects       = DETECT_NONE;
     m_Link          = 0;
-
     m_battlefieldID = 0;
     m_bcnmID        = 0;
 
     m_maxRoamDistance = 50.0f;
     m_disableScent    = false;
 
-    // False positive: any reasonable compiler is IEEE754-1985 compatible
-    // portability: Using memset() on struct which contains a floating point number.
-    // This is not portable because memset() sets each byte of a block of memory to a specific value and
-    // the actual representation of a floating-point value is implementation defined. Note: In case of an IEEE754-1985 compatible
-    // implementation setting all bits to zero results in the value 0.0. [memsetClassFloat]
-    // cppcheck-suppress memsetClassFloat
-    memset(&m_SpawnPoint, 0, sizeof(m_SpawnPoint));
+    m_Pool = 0;
+    m_RespawnTime = 300;
 
     m_SpellListContainer = nullptr;
     PEnmityContainer     = new CEnmityContainer(this);

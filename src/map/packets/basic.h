@@ -129,7 +129,7 @@ public:
 
     std::size_t getSize()
     {
-        return 2 * (ref<uint8>(1) & ~1);
+        return (size_t)2 * (ref<uint8>(1) & ~1);
     }
 
     unsigned short getSequence()

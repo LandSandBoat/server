@@ -66,11 +66,8 @@ CBattleEntity::CBattleEntity()
     m_Weapons[SLOT_AMMO]   = new CItemWeapon(0);
     m_dualWield            = false;
 
-    memset(&stats, 0, sizeof(stats));
     memset(&health, 0, sizeof(health));
     health.maxhp = 1;
-
-    memset(&WorkingSkills, 0, sizeof(WorkingSkills));
 
     PPet          = nullptr;
     PParty        = nullptr;
@@ -91,6 +88,7 @@ CBattleEntity::CBattleEntity()
     m_unkillable = false;
 
     m_DeathType = DEATH_TYPE::NONE;
+    BattleHistory.lastHitTaken_atkType = ATTACK_TYPE::NONE;
 }
 
 CBattleEntity::~CBattleEntity() = default;

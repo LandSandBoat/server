@@ -621,7 +621,10 @@ int32 lobbyview_parse(int32 fd)
                     unsigned char MainReservePacket[0x28];
                     LOBBBY_ERROR_MESSAGE(ReservePacket);
                     ref<uint16>(ReservePacket, 32) = 332;
-                    std::memcpy(MainReservePacket, ReservePacket, sendsize);
+
+                    std::memset(MainReservePacket, 0, sizeof(MainReservePacket));
+                    std::memcpy(MainReservePacket, ReservePacket, sizeof(ReservePacket));
+
                     sessions[fd]->wdata.assign((const char*)MainReservePacket, sendsize);
                     RFIFOSKIP(fd, sessions[fd]->rdata.size());
                     RFIFOFLUSH(fd);
@@ -832,7 +835,6 @@ int32 lobby_createchar(login_session_data_t* loginsd, int8* buf)
     char_mini createchar;
 
     std::memcpy(createchar.m_name, loginsd->charname, 16);
-    std::memset(&createchar.m_look, 0, sizeof(look_t));
 
     createchar.m_look.race = ref<uint8>(buf, 48);
     createchar.m_look.size = ref<uint8>(buf, 57);

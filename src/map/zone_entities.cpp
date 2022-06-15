@@ -41,9 +41,9 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "packets/change_music.h"
 #include "packets/char.h"
 #include "packets/char_sync.h"
+#include "packets/entity_set_name.h"
 #include "packets/entity_update.h"
 #include "packets/entity_visual.h"
-#include "packets/trust_sync.h"
 #include "packets/wide_scan.h"
 
 #include "lua/luautils.h"
@@ -76,6 +76,7 @@ CZoneEntities::CZoneEntities(CZone* zone)
 : m_zone(zone)
 , m_Transport(nullptr)
 {
+    lastCharComputeTargId = 0;
 }
 
 CZoneEntities::~CZoneEntities() = default;
@@ -640,7 +641,7 @@ void CZoneEntities::SpawnTRUSTs(CCharEntity* PChar)
                     PChar->updateEntityPacket(PCurrentTrust, ENTITY_SPAWN, UPDATE_ALL_MOB);
                     if (PMaster)
                     {
-                        PChar->pushPacket(new CTrustSyncPacket(PMaster, PCurrentTrust));
+                        PChar->pushPacket(new CEntitySetNamePacket(PCurrentTrust));
                     }
                 }
             }
@@ -1353,6 +1354,11 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_regions)
             {
                 CMobEntity* PCurrentMob = (CMobEntity*)PMobIt.second;
                 PCurrentMob->PEnmityContainer->Clear(PMob->id);
+            }
+
+            if (PMob->PParty)
+            {
+                PMob->PParty->RemoveMember(PMob);
             }
 
             entitiesToRelease.insert(PMob->targid);
