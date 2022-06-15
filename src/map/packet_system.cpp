@@ -4771,6 +4771,10 @@ void SmallPacket0x0AA(map_session_data_t* const PSession, CCharEntity* const PCh
         return;
     }
 
+    uint8      shopSlotID = PChar->PGuildShop->SearchItem(itemID);
+    CItemShop* item       = (CItemShop*)PChar->PGuildShop->GetItem(shopSlotID);
+    CItem*     gil        = PChar->getStorage(LOC_INVENTORY)->GetItem(0);
+
     // Prevent purchasing larger stacks than the actual stack size in database.
     if (quantity > PItem->getStackSize())
     {
