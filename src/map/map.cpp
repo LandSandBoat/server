@@ -252,10 +252,10 @@ int32 do_init(int32 argc, char** argv)
     fishingutils::InitializeFishingSystem();
     instanceutils::LoadInstanceList();
 
-    ShowInfo("do_init: server is binding with port %u", map_port == 0 ? map_config.usMapPort : map_port);
-    map_fd = makeBind_udp(map_config.uiMapIp, map_port == 0 ? map_config.usMapPort : map_port);
+    ShowInfo("do_init: server is binding with port %u", map_port == 0 ? settings::get<uint16>("network.MAP_PORT") : map_port);
+    map_fd = makeBind_udp(INADDR_ANY, map_port == 0 ? settings::get<uint16>("network.MAP_PORT") : map_port);
 
-    CVanaTime::getInstance()->setCustomEpoch(map_config.vanadiel_time_epoch);
+    CVanaTime::getInstance()->setCustomEpoch(settings::get<int32>("map.VANADIEL_TIME_EPOCH"));
 
     zoneutils::InitializeWeather(); // Need VanaTime initialized
 
@@ -699,13 +699,13 @@ int32 parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*
 
             if (settings::get<bool>("map.PACKETGUARD_ENABLED") && PacketGuard::IsRateLimitedPacket(PChar, SmallPD_Type))
             {
-                ShowExploit("[PacketGuard] Rate-limiting packet: Player: %s - Packet: %03hX", PChar->GetName(), SmallPD_Type);
+                ShowWarning("[PacketGuard] Rate-limiting packet: Player: %s - Packet: %03hX", PChar->GetName(), SmallPD_Type);
                 continue; // skip this packet
             }
 
             if (settings::get<bool>("map.PACKETGUARD_ENABLED") && !PacketGuard::PacketIsValidForPlayerState(PChar, SmallPD_Type))
             {
-                ShowExploit("[PacketGuard] Caught mismatch between player substate and recieved packet: Player: %s - Packet: %03hX",
+                ShowWarning("[PacketGuard] Caught mismatch between player substate and recieved packet: Player: %s - Packet: %03hX",
                             PChar->GetName(), SmallPD_Type);
                 // TODO: Plug in optional jailutils usage
                 continue; // skip this packet
@@ -960,7 +960,7 @@ int32 map_cleanup(time_point tick, CTaskMgr::CTask* PTask)
                     PChar->loc.zone->SpawnPCs(PChar);
                 }
             }
-            if ((time(nullptr) - map_session_data->last_update) > map_config.max_time_lastupdate)
+            if ((time(nullptr) - map_session_data->last_update) > settings::get<uint16>("map.MAX_TIME_LASTUPDATE"))
             {
                 if (PChar != nullptr)
                 {

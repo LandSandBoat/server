@@ -5764,7 +5764,7 @@ uint16 CLuaBaseEntity::getFame(sol::object const& areaObj)
 
     if (fameArea <= 15)
     {
-        float fameMultiplier = map_config.fame_multiplier;
+        float fameMultiplier = settings::get<float>("map.FAME_MULTIPLIER");
         auto* PChar          = static_cast<CCharEntity*>(m_PBaseEntity);
 
         switch (fameArea)

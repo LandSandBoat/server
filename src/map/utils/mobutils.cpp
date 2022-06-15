@@ -299,11 +299,11 @@ namespace mobutils
 
             if (isNM)
             {
-                PMob->health.maxhp = (int32)(PMob->health.maxhp * map_config.nm_hp_multiplier);
+                PMob->health.maxhp = (int32)(PMob->health.maxhp * settings::get<float>("map.NM_HP_MULTIPLIER"));
             }
             else
             {
-                PMob->health.maxhp = (int32)(PMob->health.maxhp * map_config.mob_hp_multiplier);
+                PMob->health.maxhp = (int32)(PMob->health.maxhp * settings::get<float>("map.MOB_HP_MULTIPLIER"));
             }
 
             bool hasMp = false;
@@ -365,11 +365,11 @@ namespace mobutils
 
                 if (isNM)
                 {
-                    PMob->health.maxmp = (int32)(PMob->health.maxmp * map_config.nm_mp_multiplier);
+                    PMob->health.maxmp = (int32)(PMob->health.maxmp * settings::get<float>("map.NM_MP_MULTIPLIER"));
                 }
                 else
                 {
-                    PMob->health.maxmp = (int32)(PMob->health.maxmp * map_config.mob_mp_multiplier);
+                    PMob->health.maxmp = (int32)(PMob->health.maxmp *settings::get<float>("map.MOB_MP_MULTIPLIER"));
                 }
             }
 

@@ -2,6 +2,8 @@
 -- MAP SERVER SETTINGS
 -----------------------------------
 -- All settings are attached to the `xi.settings` object. This is published globally, and be accessed from C++ and any script.
+--
+-- This file is concerned mainly with game administration and configuring the map executable
 -----------------------------------
 
 xi          = xi or {}
@@ -114,7 +116,7 @@ xi.settings.map =
     FISHING_ENABLE     = 0,
 
     -- Multipler for fishing skill-up chance. Default = 1.0, very hard.
-    FISHING_SKILL_MULTIPLIER                       = 1.0,
+    FISHING_SKILL_MULTIPLIER = 1.0,
 
     -- Enable/disable skill-ups from bloodpacts
     SKILLUP_BLOODPACT = 1,
@@ -167,7 +169,7 @@ xi.settings.map =
     DROP_RATE_MULTIPLIER = 1.0,
 
     -- Multiplier for gil naturally dropped by mobs. Does not apply to the bonus gil from all_mobs_gil_bonus. Default is 1.0.
-    mob_gil_multiplier = 1.0,
+    MOB_GIL_MULTIPLIER = 1.0,
 
     -- All mobs drop this much extra gil per mob LV even if they normally drop zero.
     ALL_MOBS_GIL_BONUS = 0,
@@ -198,8 +200,8 @@ xi.settings.map =
     -- Minimum time between uses of yell command (in seconds).
     YELL_COOLDOWN = 30,
 
-    -- Command Audit[logging] commands with lower permission than this will not be logged.
-    --  Zero for no logging at all. Commands given to non GMs are not logged. Autotranslate is not parsed.
+    -- Command Audit [logging] commands with lower permission than this will not be logged.
+    -- Zero for no logging at all. Commands given to non GMs are not logged.
     AUDIT_GM_CMD = 0,
 
     -- Todo = other logging including anti-cheat messages
@@ -218,9 +220,11 @@ xi.settings.map =
     HEALING_TICK_DELAY = 10,
 
     -- Set to 1 to enable server side anti-cheating measurements
-    -- anticheat_enabled = 1
+    ANTICHEAT_ENABLED = 1,
+
     -- Set to 1 to completely disable auto-jailing offenders
-    -- anticheat_jail_disable = 0
+    ANTICHEAT_JAIL_DISABLE = 0,
+
 
     --  Gobbie Mystery Box settings
     DAILY_TALLY_AMOUNT = 10,

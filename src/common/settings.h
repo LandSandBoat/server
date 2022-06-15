@@ -58,7 +58,7 @@ namespace settings
      * @param name
      * The name of the key being requested. It must be prefixed with the filename the setting is from.
      * For example: "settings/main.lua" contains "ENABLE_COP". You would request: "main.ENABLE_COP".
-     * Therefore: bool val = settings::get<bool>("main.ENABLE_COP");
+     * Therefore: bool val = settings::get<bool>("map.ENABLE_COP");
      * NOTE: These names are NOT case-sensitive.
      */
     template <typename T>
