@@ -94,7 +94,7 @@ xi.dynamis.onSpawnApoc = function(mob)
     }
 
     for var, val in pairs(xi.dynamis.apocLockouts2hr) do
-        mob:setLocalVar(var, val[1])
+        mob:setLocalVar(var, val[2])
     end
 end
 
@@ -140,7 +140,7 @@ xi.dynamis.onFightApoc = function(mob, target)
 
     for var, val in pairs(xi.dynamis.apocLockouts2hr) do
         if not mob:getZone():getLocalVar(string.format("%s", val[3])):isAlive() then
-            mob:setLocalVar(string.format("%s", var), val[2])
+            mob:setLocalVar(string.format("%s", var), val[1])
             table.remove(xi.dynamis.apocLockouts2hr, var)
         end
     end

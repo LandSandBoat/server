@@ -12,14 +12,14 @@ require("modules/module_utils")
 local m = Module:new("era_pet_skills")
 
 m:addOverride("xi.globals.mobskills.call_wyvern.onMobWeaponSkill", function(target, mob, skill)
-
-    if mob:getLocalVar("CALL_WYVERN") == 0 then
+    local mobName = xi.dynamis.mobList[mob:getZoneID()][mob:getZone():getLocalVar((string.format("MobIndex_%s", mob:getID())))].info[2]
+    if mob:getLocalVar("CALL_WYVERN") == 1 then
         skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT)
         return 0
     end
 
-    if mob:getCurrentRegion() == xi.region.DYNAMIS then
-        if mob:getName() == "Apocalyptic_Beast" then
+    if mob:isInDynamis() then
+        if mobName == "Apocalyptic Beast" then
             for i = 5, 1, -1 do
                 xi.dynamis.spawnDynamicPet(target, mob, xi.job.DRG)
             end
@@ -40,21 +40,18 @@ m:addOverride("xi.globals.mobskills.astral_flow.onMobWeaponSkill", function(targ
     skill:setMsg(xi.msg.basic.USES)
     local mobID = mob:getID()
     local avatar = 0
+    local mobName = xi.dynamis.mobList[mob:getZoneID()][mob:getZone():getLocalVar((string.format("MobIndex_%s", mob:getID())))].info[2]
 
-    if mob:getLocalVar("ASTRAL_FLOW") == 0 then
+    if mob:getLocalVar("ASTRAL_FLOW") == 1 then
         skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT)
         return 0
     end
 
-    if mob:getCurrentRegion() == xi.region.DYNAMIS then
-        if mob:getName() == "Apocalyptic_Beast" then
+    if mob:isInDynamis() then
+        if mobName == "Apocalyptic Beast" then
             xi.dynamis.spawnDynamicPet(target, mob, xi.job.SMN)
-            return xi.effect.ASTRAL_FLOW
-        elseif mob:getName() == "Dagourmarche" then
+        elseif mobName == "Dagourmarche" then
             xi.dynamis.spawnDynamicPet(target, mob, xi.job.SMN)
-            return xi.effect.ASTRAL_FLOW
-        else
-            return xi.effect.ASTRAL_FLOW
         end
     else
         if avatarOffsets[mobID] then
@@ -67,10 +64,10 @@ m:addOverride("xi.globals.mobskills.astral_flow.onMobWeaponSkill", function(targ
             GetMobByID(avatar):setSpawn(mob:getXPos() + 1, mob:getYPos(), mob:getZPos() + 1, mob:getRotPos())
             SpawnMob(avatar):updateEnmity(mob:getTarget())
         end
-
-        return xi.effect.ASTRAL_FLOW
-
     end
+
+    return xi.effect.ASTRAL_FLOW
+
 end)
 
 xi.dynamis.onFightApocDRG = function(mob, target)

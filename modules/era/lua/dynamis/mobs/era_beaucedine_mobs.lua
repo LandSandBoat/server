@@ -21,9 +21,11 @@ xi.dynamis.onSpawnAngra = function(mob)
     })
 end
 
+xi.dynamis.onEngagedAngra = function(mob, target)
+
+end
 
 xi.dynamis.onFightAngra = function(mob, target)
-    local mobsInZone = zone:getMobs()
     local mobIndex = mob:getLocalVar(string.format("MobIndex_%s", mob:getID()))
     local nmchildren = xi.dynamis.mobList[mob:getZoneID()][mobIndex].nmchildren
     local children = {nmchildren[2], nmchildren[3], nmchildren[4], nmchildren[5]}
@@ -45,25 +47,31 @@ xi.dynamis.onFightAngra = function(mob, target)
         xi.dynamis.teleport(mob, 1000)
         mob:setPos(randPos, 0)
         for _, childIndex in pairs(children) do
-            local child = GetMobByID(mob:getLocalVar(string.format("ChildID_%s", childIndex)))
-            if child:isAlive() and child:getHPP() <= 99 then
-                child:disengage()
-                child:resetEnmity(target)
-                child:updateEnmity(mob:getTarget())
+            local childID = mob:getLocalVar(string.format("ChildID_%s", childIndex))
+            if childID ~= 0 then
+                local child = GetMobByID(childID)
+                if child:isAlive() and child:getHPP() <= 99 then
+                    child:disengage()
+                    child:resetEnmity(target)
+                    child:updateEnmity(mob:getTarget())
+                end
             end
         end
         mob:setLocalVar("teleTime", mob:getBattleTime())
     end
 
     for _, childIndex in pairs(children) do
-        local child = GetMobByID(mob:getLocalVar(string.format("ChildID_%s", childIndex)))
-        if child:isAlive() and child:getCurrentAction() == xi.act.ROAMING then
-            child:updateEnmity(target)
+        local childID = mob:getLocalVar(string.format("ChildID_%s", childIndex))
+        if childID ~= 0 then
+            local child = GetMobByID(childID)
+            if child:isAlive() and child:getCurrentAction() == xi.act.ROAMING then
+                child:updateEnmity(target)
+            end
         end
     end
 end
 
-xi.dynamis.onMagicPrepAngra = function(mob)
+xi.dynamis.onMagicPrepAngra = function(mob, target, spellId)
     if mob:getHPP() <= 25 then
         return 367 -- Death
     else
@@ -97,12 +105,15 @@ xi.dynamis.onRoamAngra = function(mob)
     end
 
     for _, childIndex in pairs(children) do
-        local child = GetMobByID(mob:getLocalVar(string.format("ChildID_%s", childIndex)))
-        local childCurrentPos = child:getPos()
-        local childSpawnPos = child:getSpawnPos()
-        if child:isAlive() and child:getCurrentAction() == xi.act.ROAMING then
-            if childCurrentPos.x ~= childSpawnPos.x and childCurrentPos.z ~= childSpawnPos.z then
-            child:pathTo(childSpawnPos.x, childSpawnPos.y, childSpawnPos.z)
+        local childID = mob:getLocalVar(string.format("ChildID_%s", childIndex))
+        if childID ~= 0 then
+            local child = GetMobByID(childID)
+            local childCurrentPos = child:getPos()
+            local childSpawnPos = child:getSpawnPos()
+            if child:isAlive() and child:getCurrentAction() == xi.act.ROAMING then
+                if childCurrentPos.x ~= childSpawnPos.x and childCurrentPos.z ~= childSpawnPos.z then
+                    child:pathTo(childSpawnPos.x, childSpawnPos.y, childSpawnPos.z)
+                end
             end
         end
     end
@@ -118,6 +129,11 @@ xi.dynamis.onSpawnDagour = function(mob)
             {id = xi.jsa.ASTRAL_FLOW, hpp = 95},
         },
     })
+end
+
+xi.dynamis.onEngagedDagour = function(mob, target)
+    xi.dynamis.spawnDynamicPet(target, mob, xi.job.BST)
+    xi.dynamis.spawnDynamicPet(target, mob, xi.job.DRG)
 end
 
 xi.dynamis.onWeaponskillPrepDagour = function(mob)
@@ -180,7 +196,7 @@ xi.dynamis.onSpawnVelosar = function(mob)
         {
             {id = xi.jsa.BLOOD_WEAPON, hpp = 95},
             {id = xi.jsa.MEIKYO_SHISUI, hpp = 95},
-            {id = familyEES[mob:getFamily()], hpp = 95},
+            {id = xi.jsa.EES_SHADE, hpp = 95},
         },
     })
 end

@@ -59,7 +59,3 @@ xi.dynamis.onFightAntaeus = function(mob, target)
         end
     end
 end
-
-xi.dynamis.onMobRoamAntaeus = function(mob) xi.dynamis.mobOnRoam(mob) end
-xi.dynamis.onMobRoamActionAntaeus = function(mob) xi.dynamis.mobOnRoamAction(mob) end
-xi.dynamis.onMobDeathAntaeus = function(mob, player, isKiller) xi.dynamis.megaBossOnDeath(mob, player, mobVar) end

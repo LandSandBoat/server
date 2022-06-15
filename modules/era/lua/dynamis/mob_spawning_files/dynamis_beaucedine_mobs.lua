@@ -77,6 +77,7 @@ xi.dynamis.mobList[zoneID] = { } -- Ignore me, I just start the table.
 xi.dynamis.mobList[zoneID].nmchildren = { }
 xi.dynamis.mobList[zoneID].mobchildren = { }
 xi.dynamis.mobList[zoneID].maxWaves = 2 -- Put in number of max waves
+xi.dynamis.mobList[zoneID].patrolPaths = { }
 
 while i <= 227 do
     table.insert(xi.dynamis.mobList[zoneID], i, { id = i})
@@ -192,7 +193,7 @@ xi.dynamis.mobList[zoneID][96 ].info = {"Statue", "Serjeant Tombstone", "Orc", n
 xi.dynamis.mobList[zoneID][97 ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- (097-O)
 xi.dynamis.mobList[zoneID][98 ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- (098-O) (MP)
 xi.dynamis.mobList[zoneID][99 ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- (099-O)
-xi.dynamis.mobList[zoneID][100].info = {"Statue", "Adanantking Effigy", "Quadav", nil, nil} -- (100-Q)
+xi.dynamis.mobList[zoneID][100].info = {"Statue", "Adamantking Effigy", "Quadav", nil, nil} -- (100-Q)
 xi.dynamis.mobList[zoneID][101].info = {"Statue", "Avatar Icon", "Yagudo", nil, nil} -- (101-Y)
 xi.dynamis.mobList[zoneID][102].info = {"Statue", "Goblin Replica", "Goblin", nil, nil} -- (102-G)
 xi.dynamis.mobList[zoneID][103].info = {"Statue", "Adamantking Effigy", "Quadav", nil, nil} -- (103-Q) (HP)

@@ -12,7 +12,7 @@ require("modules/module_utils")
 local m = Module:new("era_buburimu_tp_moves")
 
 m:addOverride("xi.globals.mobskills.mighty_strikes.onMobWeaponSkill", function(target, mob, skill)
-    if mob:getLocalVar("MIGHTY_STRIKES") == 0 then
+    if mob:getLocalVar("MIGHTY_STRIKES") == 1 then
         skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT)
         return 0
     end
@@ -23,7 +23,7 @@ m:addOverride("xi.globals.mobskills.mighty_strikes.onMobWeaponSkill", function(t
 end)
 
 m:addOverride("xi.globals.mobskills.hundred_fists.onMobWeaponSkill", function(target, mob, skill)
-    if mob:getLocalVar("HUNDRED_FISTS") == 0 then
+    if mob:getLocalVar("HUNDRED_FISTS") == 1 then
         skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT)
         return 0
     end
@@ -34,7 +34,7 @@ m:addOverride("xi.globals.mobskills.hundred_fists.onMobWeaponSkill", function(ta
 end)
 
 m:addOverride("xi.globals.mobskills.benediction.onMobWeaponSkill", function(target, mob, skill)
-    if mob:getLocalVar("BENEDICTION") == 0 then
+    if mob:getLocalVar("BENEDICTION") == 1 then
         skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT)
         return 0
     end
@@ -48,7 +48,7 @@ m:addOverride("xi.globals.mobskills.benediction.onMobWeaponSkill", function(targ
 end)
 
 m:addOverride("xi.globals.mobskills.manafont.onMobWeaponSkill", function(target, mob, skill)
-    if mob:getLocalVar("MANAFONT") == 0 then
+    if mob:getLocalVar("MANAFONT") == 1 then
         skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT)
         return 0
     end
@@ -59,7 +59,7 @@ m:addOverride("xi.globals.mobskills.manafont.onMobWeaponSkill", function(target,
 end)
 
 m:addOverride("xi.globals.mobskills.chainspell.onMobWeaponSkill", function(target, mob, skill)
-    if mob:getLocalVar("CHAINSPELL") == 0 then
+    if mob:getLocalVar("CHAINSPELL") == 1 then
         skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT)
         return 0
     end
@@ -70,7 +70,7 @@ m:addOverride("xi.globals.mobskills.chainspell.onMobWeaponSkill", function(targe
 end)
 
 m:addOverride("xi.globals.mobskills.perfect_dodge.onMobWeaponSkill", function(target, mob, skill)
-    if mob:getLocalVar("PERFECT_DODGE") == 0 then
+    if mob:getLocalVar("PERFECT_DODGE") == 1 then
         skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT)
         return 0
     end
@@ -81,7 +81,7 @@ m:addOverride("xi.globals.mobskills.perfect_dodge.onMobWeaponSkill", function(ta
 end)
 
 m:addOverride("xi.globals.mobskills.invincible.onMobWeaponSkill", function(target, mob, skill)
-    if mob:getLocalVar("INVINCIBLE") == 0 then
+    if mob:getLocalVar("INVINCIBLE") == 1 then
         skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT)
         return 0
     end
@@ -92,7 +92,7 @@ m:addOverride("xi.globals.mobskills.invincible.onMobWeaponSkill", function(targe
 end)
 
 m:addOverride("xi.globals.mobskills.blood_weapon.onMobWeaponSkill", function(target, mob, skill)
-    if mob:getLocalVar("BLOOD_WEAPON") == 0 then
+    if mob:getLocalVar("BLOOD_WEAPON") == 1 then
         skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT)
         return 0
     end
@@ -103,7 +103,7 @@ m:addOverride("xi.globals.mobskills.blood_weapon.onMobWeaponSkill", function(tar
 end)
 
 m:addOverride("xi.globals.mobskills.charm.onMobWeaponSkill", function(target, mob, skill)
-    if mob:getLocalVar("CHARM") == 0 then
+    if mob:getLocalVar("CHARM") == 1 then
         skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT)
         return 0
     end
@@ -123,7 +123,7 @@ m:addOverride("xi.globals.mobskills.charm.onMobWeaponSkill", function(target, mo
 end)
 
 m:addOverride("xi.globals.mobskills.soul_voice.onMobWeaponSkill", function(target, mob, skill)
-    if mob:getLocalVar("SOUL_VOICE") == 0 then
+    if mob:getLocalVar("SOUL_VOICE") == 1 then
         skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT)
         return 0
     end
@@ -134,7 +134,7 @@ m:addOverride("xi.globals.mobskills.soul_voice.onMobWeaponSkill", function(targe
 end)
 
 m:addOverride("xi.globals.mobskills.eagle_eye_shot.onMobWeaponSkill", function(target, mob, skill)
-    if mob:getLocalVar("EAGLE_EYE_SHOT") == 0 then
+    if mob:getLocalVar("EAGLE_EYE_SHOT") == 1 then
         skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT)
         return 0
     end
@@ -153,7 +153,7 @@ m:addOverride("xi.globals.mobskills.eagle_eye_shot.onMobWeaponSkill", function(t
 end)
 
 m:addOverride("xi.globals.mobskills.meikyo_shisui.onMobWeaponSkill", function(target, mob, skill)
-    if mob:getLocalVar("MEIKYO_SHISUI") == 0 then
+    if mob:getLocalVar("MEIKYO_SHISUI") == 1 then
         skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT)
         return 0
     end
@@ -165,7 +165,7 @@ m:addOverride("xi.globals.mobskills.meikyo_shisui.onMobWeaponSkill", function(ta
 end)
 
 m:addOverride("xi.globals.mobskills.mijin_gakure.onMobWeaponSkill", function(target, mob, skill)
-    if mob:getLocalVar("MIJIN_GAKURE") == 0 then
+    if mob:getLocalVar("MIJIN_GAKURE") == 1 then
         skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT)
         return 0
     end

@@ -357,14 +357,6 @@ xi.dynamis.mobList[zoneID][1].wave =
     107,    -- (107-Y/A)  Avatar Icon
     108,    -- (108-Y/A)  Avatar Icon
     109,    -- (109-Y/A)  Avatar Icon
-    130,    -- (130-Y/A)  Avatar Icon
-    131,    -- (131-Y/M)  Manifest Icon
-    132,    -- (132-Y/A)  Avatar Icon
-    133,    -- (133-Y/M)  Manifest Icon
-    134,    -- (134-Y/A)  Avatar Icon
-    135,    -- (135-Y/A)  Avatar Icon
-    136,    -- (136-Y/M)  Manifest Icon
-    137     -- (137-Y/M)  Manifest Icon
 }
 
 -- Spawns statues when boss dies

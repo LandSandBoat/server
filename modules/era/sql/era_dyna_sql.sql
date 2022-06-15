@@ -2210,6 +2210,19 @@ INSERT INTO mob_groups VALUES (199,1155,134,'Dynamis_Statue',600,128,3208,9000,8
 INSERT INTO mob_groups VALUES (200,1152,134,'Dynamis_Effigy',600,128,3211,9000,8000,80,82,0);
 INSERT INTO mob_groups VALUES (201,1156,134,'Dynamis_Tombstone',600,128,3210,9000,8000,82,82,0);
 ----------------------------------------------------------------------
+--                            Fix Mob MP                            --
+----------------------------------------------------------------------
+DELETE FROM mob_groups WHERE name = "Goublefaupe";
+INSERT INTO mob_groups VALUES (6,1774,134,'Goublefaupe',0,128,2574,5000,0,81,83,0);
+DELETE FROM mob_groups WHERE name = "Quiebitiel";
+INSERT INTO mob_groups VALUES (7,3289,134,'Quiebitiel',0,128,2066,5000,0,81,83,0);
+DELETE FROM mob_groups WHERE name = "Mildaunegeux";
+INSERT INTO mob_groups VALUES (8,2660,134,'Mildaunegeux',0,128,2574,5000,0,81,83,0);
+DELETE FROM mob_groups WHERE name = "Velosareon";
+INSERT INTO mob_groups VALUES (9,4219,134,'Velosareon',0,128,2574,5000,0,81,83,0);
+DELETE FROM mob_groups WHERE name = "Dagourmarche";
+INSERT INTO mob_groups VALUES (10,892,134,'Dagourmarche',0,128,2066,5000,0,81,83,0);
+----------------------------------------------------------------------
 --                     Zone Misc Modifications                      --
 ----------------------------------------------------------------------
 UPDATE zone_settings SET misc = misc | 256 WHERE name LIKE "Dynamis%" AND name NOT LIKE "%[D]";
