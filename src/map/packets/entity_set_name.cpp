@@ -21,32 +21,34 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "common/socket.h"
 #include "common/utils.h"
 
-#include "trust_sync.h"
+#include "entity_set_name.h"
 
+#include "../entities/baseentity.h"
 #include "../entities/charentity.h"
 #include "../entities/trustentity.h"
 
-CTrustSyncPacket::CTrustSyncPacket(CCharEntity* PChar, CTrustEntity* PTrust)
+CEntitySetNamePacket::CEntitySetNamePacket(CBaseEntity* PEntity)
 {
-    // The purpose of this packet is to make the client aware that this pet is a trust, and hence
+    // One of the purposes of this packet is to make the client aware that this pet is a trust, and hence
     // to show trust options in the menu (like "Release").
+    // It is also reported to be used to name Pankration entities, and sometimes Fellows.
     this->setType(0x67);
     this->setSize(0x2C);
-
-    // Sample packet:
-    // 67 0C 58 00 03 05 F4 07 F4 28 08 01 00 04 00 00
-    // 04 00 00 00 00 00 00 00
 
     ref<uint8>(0x04) = 0x03;
     ref<uint8>(0x05) = 0x05;
 
-    ref<uint16>(0x06) = PTrust->targid;
-    ref<uint32>(0x08) = PTrust->id;
-    ref<uint16>(0x0C) = PChar->targid;
+    ref<uint16>(0x06) = PEntity->targid;
+    ref<uint32>(0x08) = PEntity->id;
 
-    packBitsBE(data + (0x04), (0x18) + PTrust->packetName.size(), 0, 6, 10); // Message Size
-    memcpy(data + (0x18), PTrust->packetName.c_str(), PTrust->packetName.size());
+    if (auto* PTrust = dynamic_cast<CTrustEntity*>(PEntity); PTrust && PTrust->PMaster)
+    {
+        ref<uint16>(0x0C) = PTrust->PMaster->targid;
+    }
 
-    // Unknown
+    packBitsBE(data + 0x04, 0x18 + PEntity->packetName.size(), 0, 6, 10); // Message Size
+    std::memcpy(data + 0x18, PEntity->packetName.c_str(), PEntity->packetName.size());
+
+    // Unknown, maybe entity flags?
     ref<uint8>(0x10) = 0x04;
 }

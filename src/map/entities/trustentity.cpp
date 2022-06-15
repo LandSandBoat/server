@@ -34,8 +34,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../mob_spell_container.h"
 #include "../mob_spell_list.h"
 #include "../packets/char_health.h"
+#include "../packets/entity_set_name.h"
 #include "../packets/entity_update.h"
-#include "../packets/trust_sync.h"
 #include "../recast_container.h"
 #include "../status_effect_container.h"
 #include "../utils/battleutils.h"
@@ -105,7 +105,7 @@ void CTrustEntity::Spawn()
     // we need to skip CMobEntity's spawn because it calculates stats (and our stats are already calculated)
     CBattleEntity::Spawn();
     luautils::OnMobSpawn(this);
-    ((CCharEntity*)PMaster)->pushPacket(new CTrustSyncPacket((CCharEntity*)PMaster, this));
+    ((CCharEntity*)PMaster)->pushPacket(new CEntitySetNamePacket(this));
 }
 
 void CTrustEntity::OnAbility(CAbilityState& state, action_t& action)
