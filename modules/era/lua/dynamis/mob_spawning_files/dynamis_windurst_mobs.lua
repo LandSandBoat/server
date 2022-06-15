@@ -777,23 +777,24 @@ xi.dynamis.mobList[zoneID][150].pos = {   35.0899, -16.0000,  160.1173, 65  }
 ------------------------------------------
 -- xi.dynamis.mobList[zoneID][MobIndex].patrolPath = {xpos1,ypos1,zpos1, xpos2,ypos2,zpos2,  xpos3,ypos3,zpos3}
 
-xi.dynamis.mobList[zoneID][8  ].patrolPath = { -96,  -2, -123,     -60,  -2, -113,    -96,   -2, -123  }    -- Entrance Bridge W
-xi.dynamis.mobList[zoneID][10 ].patrolPath = { -48,  -2, -104,     -29,  -2,  -70,    -48,   -2, -104  }    -- Entrance Bridge E
-xi.dynamis.mobList[zoneID][13 ].patrolPath = {   0,  -9,  -20,      -0,  -4,  -51,      0,   -9, -20   }    -- AH W Ramp
-xi.dynamis.mobList[zoneID][17 ].patrolPath = {  38,  -2,  -60,      38,  -2,  -67,     38,   -2, -58   }     -- AH #1
-xi.dynamis.mobList[zoneID][18 ].patrolPath = {  46,  -1,  -70,      46,  -2,  -59,     46,   -1, -70   }     -- AH #2
-xi.dynamis.mobList[zoneID][19 ].patrolPath = {  54,  -2,  -60,      54,  -2,  -67,     54,   -2, -60   }     -- AH #3
-xi.dynamis.mobList[zoneID][52 ].patrolPath = {  99,  -8,  179,     108, -11,  171,     99,   -8, 179   } -- E House Ramp
-xi.dynamis.mobList[zoneID][73 ].patrolPath = { -84,  -9,  111,     -85,  -6,  121,     -84,  -9, 111   } -- Island to HT
-xi.dynamis.mobList[zoneID][62 ].patrolPath = { -88,  -2,   48,     -88,  -5,   82,     -88,  -2, 48    } -- SW Bridge #1
-xi.dynamis.mobList[zoneID][63 ].patrolPath = { -88,  -2,   48,     -88,  -5,   82,     -88,  -2, 48    } -- SW Bridge #2
-xi.dynamis.mobList[zoneID][64 ].patrolPath = { -88,  -2,   48,     -88,  -5,   82,     -88,  -2, 48    } -- SW Bridge #3
-xi.dynamis.mobList[zoneID][89 ].patrolPath = { -57, -13,  226,     -61, -13,  209,     -57, -13, 226   } -- NW Bridge S
-xi.dynamis.mobList[zoneID][91 ].patrolPath = { -52, -13,  234,     -36, -13,  244,     -52, -13, 234   } -- NW Bridge N
-xi.dynamis.mobList[zoneID][107].patrolPath = {  48,  -8,  213,      48,  -8,  216,      48,  -8, 213   } -- Bridge to HotH #4
-xi.dynamis.mobList[zoneID][106].patrolPath = {  54,  -8,  220,      51,  -8,  220,      54,  -8, 220   } -- Bridge to HotH #1
-xi.dynamis.mobList[zoneID][104].patrolPath = {  48,  -8,  226,      48,  -8,  223,      48,  -8, 226   } -- Bridge to HotH #3
-xi.dynamis.mobList[zoneID][105].patrolPath = {  42,  -8,  219,      45,  -8,  219,      42,  -8, 219   } -- Bridge to HotH #2
+xi.dynamis.mobList[zoneID].patrolPaths = { 8, 10, 13, 17, 18, 19, 52, 73, 62, 63, 64, 89, 91, 107, 106, 104, 105 }
+xi.dynamis.mobList[zoneID][8  ].patrolPath = { -96,  -2, -123,     -60,  -2, -113,  }    -- Entrance Bridge W
+xi.dynamis.mobList[zoneID][10 ].patrolPath = { -48,  -2, -104,     -29,  -2,  -70,  }    -- Entrance Bridge E
+xi.dynamis.mobList[zoneID][13 ].patrolPath = {   0,  -9,  -20,      -0,  -4,  -51,  }    -- AH W Ramp
+xi.dynamis.mobList[zoneID][17 ].patrolPath = {  38,  -2,  -60,      38,  -2,  -67,  }     -- AH #1
+xi.dynamis.mobList[zoneID][18 ].patrolPath = {  46,  -1,  -70,      46,  -2,  -59,  }     -- AH #2
+xi.dynamis.mobList[zoneID][19 ].patrolPath = {  54,  -2,  -60,      54,  -2,  -67,  }     -- AH #3
+xi.dynamis.mobList[zoneID][52 ].patrolPath = {  99,  -8,  179,     108, -11,  171,  } -- E House Ramp
+xi.dynamis.mobList[zoneID][73 ].patrolPath = { -84,  -9,  111,     -85,  -6,  121,  } -- Island to HT
+xi.dynamis.mobList[zoneID][62 ].patrolPath = { -88,  -2,   48,     -88,  -5,   82,  } -- SW Bridge #1
+xi.dynamis.mobList[zoneID][63 ].patrolPath = { -88,  -2,   48,     -88,  -5,   82,  } -- SW Bridge #2
+xi.dynamis.mobList[zoneID][64 ].patrolPath = { -88,  -2,   48,     -88,  -5,   82,  } -- SW Bridge #3
+xi.dynamis.mobList[zoneID][89 ].patrolPath = { -57, -13,  226,     -61, -13,  209,  } -- NW Bridge S
+xi.dynamis.mobList[zoneID][91 ].patrolPath = { -52, -13,  234,     -36, -13,  244,  } -- NW Bridge N
+xi.dynamis.mobList[zoneID][107].patrolPath = {  48,  -8,  213,      48,  -8,  216,  } -- Bridge to HotH #4
+xi.dynamis.mobList[zoneID][106].patrolPath = {  54,  -8,  220,      51,  -8,  220,  } -- Bridge to HotH #1
+xi.dynamis.mobList[zoneID][104].patrolPath = {  48,  -8,  226,      48,  -8,  223,  } -- Bridge to HotH #3
+xi.dynamis.mobList[zoneID][105].patrolPath = {  42,  -8,  219,      45,  -8,  219,  } -- Bridge to HotH #2
 
 ------------------------------------------
 --          Statue Eye Colors           --
@@ -846,7 +847,7 @@ xi.dynamis.mobList[zoneID][139].eyes = xi.dynamis.eye.GREEN
 ------------------------------------------
 -- xi.dynamis.mobList[zoneID][MobIndex].timeExtension = 15
 
-xi.dynamis.mobList[zoneID].timeExtensionList = {1, 19, 41, 154, 113, 162, 163, 164}
+xi.dynamis.mobList[zoneID].timeExtensionList = {8, 18, 31, 41, 58, 66, 101, 121}
 xi.dynamis.mobList[zoneID][8  ].timeExtension = 20 --Avatar Icon
 xi.dynamis.mobList[zoneID][18 ].timeExtension = 20 --Avatar Icon
 xi.dynamis.mobList[zoneID][31 ].timeExtension = 10 --Avatar Icon

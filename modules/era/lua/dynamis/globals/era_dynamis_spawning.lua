@@ -1659,8 +1659,6 @@ xi.dynamis.setNMStats = function(mob)
     mob:setMobMod(xi.mobMod.HP_SCALE, 132)
     mob:setHP(mob:getMaxHP())
     mob:setMobLevel(math.random(80,82))
-    mob:setMod(xi.mod.STR, -15)
-    mob:setMod(xi.mod.VIT, -5)
     mob:setTrueDetection(true)
     mob:setMobMod(xi.mobMod.CHECK_AS_NM, 2)
 
@@ -1682,8 +1680,6 @@ xi.dynamis.setStatueStats = function(mob, mobIndex)
     mob:addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0, true)
     mob:setMobMod(xi.mobMod.CHECK_AS_NM, 2)
     mob:setMobLevel(math.random(82,84))
-    mob:setMod(xi.mod.STR, -5)
-    mob:setMod(xi.mod.VIT, -5)
     mob:setMod(xi.mod.DMGMAGIC, -50)
     mob:setMod(xi.mod.DMGPHYS, -50)
     mob:setTrueDetection(true)
@@ -1692,7 +1688,7 @@ xi.dynamis.setStatueStats = function(mob, mobIndex)
     mob:setMod(xi.mod.REGEN, 0)
     mob:setMod(xi.mod.MPHEAL, 0)
     mob:setMobMod(xi.mobMod.CHECK_AS_NM, 2)
-    
+    mob:speed(20)
     if mob:getFamily() >= 92 and mob:getFamily() <= 95 then -- If statue
         if eyes ~= nil then
             mob:setLocalVar("eyeColor", eyes) -- Set Eyes if need be
@@ -1700,8 +1696,7 @@ xi.dynamis.setStatueStats = function(mob, mobIndex)
                 mob:setUnkillable(true) -- Set Unkillable as we will use skills then kill.
             end
         else
-            eyes = xi.dynamis.eye.RED
-            mob:setLocalVar("eyeColor", eyes) -- Set Eyes if need be
+            mob:setLocalVar("eyeColor", xi.dynamis.eye.RED) -- Set Eyes if need be
         end
     end
 end
@@ -1710,6 +1705,8 @@ xi.dynamis.setMegaBossStats = function(mob)
     mob:setMobType(xi.mobskills.mobType.BATTLEFIELD)
     mob:addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0, true)
     mob:setMobMod(xi.mobMod.CHECK_AS_NM, 2)
+    mob:setMobMod(xi.mobMod.HP_SCALE, 132)
+    mob:setHP(mob:getMaxHP())
     mob:setMobLevel(88)
     mob:setMod(xi.mod.STR, -10)
     mob:setTrueDetection(true)
@@ -1720,16 +1717,12 @@ xi.dynamis.setPetStats = function(mob)
     mob:addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0, true)
     mob:setMobMod(xi.mobMod.CHECK_AS_NM, 1)
     mob:setMobLevel(78)
-    mob:setMod(xi.mod.STR, -40)
-    mob:setMod(xi.mod.INT, -30)
-    mob:setMod(xi.mod.VIT, -20)
-    mob:setMod(xi.mod.RATTP, -20)
-    mob:setMod(xi.mod.ATTP, -20)
-    mob:setMod(xi.mod.DEFP, -5)
     mob:setTrueDetection(true)
 end
 
 xi.dynamis.setAnimatedWeaponStats = function(mob)
+    mob:setMobMod(xi.mobMod.HP_SCALE, 132)
+    mob:setHP(mob:getMaxHP())
     mob:setMobType(xi.mobskills.mobType.BATTLEFIELD)
     mob:addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0, true)
     mob:setMobMod(xi.mobMod.CHECK_AS_NM, 2)
