@@ -2100,11 +2100,6 @@ bool CLuaBaseEntity::sendGuild(uint16 guildID, uint8 open, uint8 close, uint8 ho
     CItemContainer* PGuildShop = guildutils::GetGuildShop(guildID);
     auto*           PChar      = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    if (PChar->PGuildShop)
-    {
-        delete PChar->PGuildShop;
-    }
-
     PChar->PGuildShop = PGuildShop;
     PChar->pushPacket(new CGuildMenuPacket(status, open, close, holiday));
 
