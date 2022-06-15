@@ -1788,10 +1788,10 @@ xi.dynamis.mobOnDeath = function (mob, player, mobVar)
     local mobIndex = zone:getLocalVar(string.format("MobIndex_%s", mob:getID()))
     if mob:getLocalVar("dynamisMobOnDeathTriggered") == 1 then return -- Don't trigger more than once.
     else -- Stops execution of code below if the above is true.
-        if mobIndex ~= 0 then
-            if mob:getLocalVar("hasMobVar") == 1 then
-                zone:setLocalVar(string.format("%s", xi.dynamis.mobList[mob:getZoneID()][mobIndex].info[5]), 1) -- Set Death Requirements Variable
-            end
+        if mob:getLocalVar("hasMobVar") == 1 then
+            zone:setLocalVar(string.format("%s", xi.dynamis.mobList[mob:getZoneID()][mobIndex].info[5]), 1) -- Set Death Requirements Variable
+        end
+        if mobIndex ~= 0 and mobIndex ~= nil then
             xi.dynamis.addTimeToDynamis(zone, mobIndex) -- Add Time
         end
         mob:setLocalVar("dynamisMobOnDeathTriggered", 1) -- onDeath lua happens once per party member that killed the mob, but we want this to only run once per mob

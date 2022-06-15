@@ -284,7 +284,7 @@ xi.dynamis.entryInfoEra =
         maxCapacity = 64,
         enabled = true,
         winVar = "DynaSandoria_Win",
-        dynamis_has_enteredVar = "DynaSandoria_dynamis_has_entered",
+        enteredVar = "DynaSandoria_entered",
         hasSeenWinCSVar = "DynaSandoria_HasSeenWinCS",
         winKI = xi.ki.HYDRA_CORPS_COMMAND_SCEPTER,
         enterPos = {161.838, -2.000, 161.673, 93, 185},
@@ -304,7 +304,7 @@ xi.dynamis.entryInfoEra =
         maxCapacity = 64,
         enabled = true,
         winVar = "DynaBastok_Win",
-        dynamis_has_enteredVar = "DynaBastok_dynamis_has_entered",
+        enteredVar = "DynaBastok_entered",
         hasSeenWinCSVar = "DynaBastok_HasSeenWinCS",
         winKI = xi.ki.HYDRA_CORPS_EYEGLASS,
         enterPos = {116.482, 0.994, -72.121, 128, 186},
@@ -324,7 +324,7 @@ xi.dynamis.entryInfoEra =
         maxCapacity = 64,
         enabled = true,
         winVar = "DynaWindurst_Win",
-        dynamis_has_enteredVar = "DynaWindurst_dynamis_has_entered",
+        enteredVar = "DynaWindurst_entered",
         hasSeenWinCSVar = "DynaWindurst_HasSeenWinCS",
         winKI = xi.ki.HYDRA_CORPS_LANTERN,
         enterPos = {-221.988, 1.000, -120.184, 0, 187},
@@ -344,7 +344,7 @@ xi.dynamis.entryInfoEra =
         maxCapacity = 64,
         enabled = true,
         winVar = "DynaJeuno_Win",
-        dynamis_has_enteredVar = "DynaJeuno_dynamis_has_entered",
+        enteredVar = "DynaJeuno_entered",
         hasSeenWinCSVar = "DynaJeuno_HasSeenWinCS",
         winKI = xi.ki.HYDRA_CORPS_TACTICAL_MAP,
         enterPos = {48.930, 10.002, -71.032, 195, 188},
@@ -363,7 +363,7 @@ xi.dynamis.entryInfoEra =
         maxCapacity = 64,
         enabled = true,
         winVar = "DynaBeaucedine_Win",
-        dynamis_has_enteredVar = "DynaBeaucedine_dynamis_has_entered",
+        enteredVar = "DynaBeaucedine_entered",
         hasSeenWinCSVar = "DynaBeaucedine_HasSeenWinCS",
         winKI = xi.ki.HYDRA_CORPS_INSIGNIA,
         enterPos = {-284.751, -39.923, -422.948, 235, 134},
@@ -385,7 +385,7 @@ xi.dynamis.entryInfoEra =
         maxCapacity = 64,
         enabled = true,
         winVar = "DynaXarcabard_Win",
-        dynamis_has_enteredVar = "DynaXarcabard_dynamis_has_entered",
+        enteredVar = "DynaXarcabard_entered",
         hasSeenWinCSVar = "DynaXarcabard_HasSeenWinCS",
         winKI = xi.ki.HYDRA_CORPS_BATTLE_STANDARD,
         enterPos = {569.312, -0.098, -270.158, 90, 135},
@@ -405,7 +405,7 @@ xi.dynamis.entryInfoEra =
         maxCapacity = 32,
         enabled = true,
         winVar = "DynaValkurm_Win",
-        dynamis_has_enteredVar = "DynaValkurm_dynamis_has_entered",
+        enteredVar = "DynaValkurm_entered",
         hasSeenWinCSVar = "DynaValkurm_HasSeenWinCS",
         winKI = xi.ki.DYNAMIS_VALKURM_SLIVER,
         enterPos = {100, -8, 131, 47, 39},
@@ -426,7 +426,7 @@ xi.dynamis.entryInfoEra =
         maxCapacity = 32,
         enabled = true,
         winVar = "DynaBuburimu_Win",
-        dynamis_has_enteredVar = "DynaBuburimu_dynamis_has_entered",
+        enteredVar = "DynaBuburimu_entered",
         hasSeenWinCSVar = "DynaBuburimu_HasSeenWinCS",
         winKI = xi.ki.DYNAMIS_BUBURIMU_SLIVER,
         enterPos = {155, -1, -169, 170, 40},
@@ -447,7 +447,7 @@ xi.dynamis.entryInfoEra =
         maxCapacity = 32,
         enabled = true,
         winVar = "DynaQufim_Win",
-        dynamis_has_enteredVar = "DynaQufim_dynamis_has_entered",
+        enteredVar = "DynaQufim_entered",
         hasSeenWinCSVar = "DynaQufim_HasSeenWinCS",
         winKI = xi.ki.DYNAMIS_QUFIM_SLIVER,
         enterPos = {-19, -17, 104, 253, 41},
@@ -468,7 +468,7 @@ xi.dynamis.entryInfoEra =
         maxCapacity = 18,
         enabled = false,
         winVar = "DynaTavnazia_Win",
-        dynamis_has_enteredVar = "DynaTavnazia_dynamis_has_entered",
+        enteredVar = "DynaTavnazia_entered",
         hasSeenWinCSVar = "DynaQufim_HasSeenWinCS",
         winKI = xi.ki.DYNAMIS_TAVNAZIA_SLIVER,
         enterPos = {0.1, -7, -21, 190, 42},
@@ -489,7 +489,7 @@ xi.dynamis.dynaInfoEra =
     [zone] =
     {
         winVar = Variable for the Win Condition
-        dynamis_has_enteredVar = Variable for Previous Entry
+        enteredVar = Variable for Previous Entry
         hasSeenWinCSVar = Variable for Win CS
         winKI = Key item for win
         winTitle = Title for win
@@ -503,7 +503,7 @@ xi.dynamis.dynaInfoEra =
     [xi.zone.DYNAMIS_SAN_DORIA] =
     {
         winVar = "DynaSandoria_Win",
-        dynamis_has_enteredVar = "DynaSandoria_dynamis_has_entered",
+        enteredVar = "DynaSandoria_entered",
         hasSeenWinCSVar = "DynaSandoria_HasSeenWinCS",
         winKI = xi.ki.HYDRA_CORPS_COMMAND_SCEPTER,
         winTitle = xi.title.DYNAMIS_SAN_DORIA_INTERLOPER,
@@ -521,7 +521,7 @@ xi.dynamis.dynaInfoEra =
     [xi.zone.DYNAMIS_BASTOK] =
     {
         winVar = "DynaBastok_Win",
-        dynamis_has_enteredVar = "DynaBastok_dynamis_has_entered",
+        enteredVar = "DynaBastok_entered",
         hasSeenWinCSVar = "DynaBastok_HasSeenWinCS",
         winKI = xi.ki.HYDRA_CORPS_EYEGLASS,
         winTitle = xi.title.DYNAMIS_BASTOK_INTERLOPER,
@@ -537,7 +537,7 @@ xi.dynamis.dynaInfoEra =
     [xi.zone.DYNAMIS_WINDURST] =
     {
         winVar = "DynaWindurst_Win",
-        dynamis_has_enteredVar = "DynaWindurst_dynamis_has_entered",
+        enteredVar = "DynaWindurst_entered",
         hasSeenWinCSVar = "DynaWindurst_HasSeenWinCS",
         winKI = xi.ki.HYDRA_CORPS_LANTERN,
         winTitle = xi.title.DYNAMIS_WINDURST_INTERLOPER,
@@ -553,7 +553,7 @@ xi.dynamis.dynaInfoEra =
     [xi.zone.DYNAMIS_JEUNO] =
     {
         winVar = "DynaJeuno_Win",
-        dynamis_has_enteredVar = "DynaJeuno_dynamis_has_entered",
+        enteredVar = "DynaJeuno_entered",
         hasSeenWinCSVar = "DynaJeuno_HasSeenWinCS",
         winKI = xi.ki.HYDRA_CORPS_TACTICAL_MAP,
         winTitle = xi.title.DYNAMIS_JEUNO_INTERLOPER,
@@ -570,7 +570,7 @@ xi.dynamis.dynaInfoEra =
     [xi.zone.DYNAMIS_BEAUCEDINE] =
     {
         winVar = "DynaBeaucedine_Win",
-        dynamis_has_enteredVar = "DynaBeaucedine_dynamis_has_entered",
+        enteredVar = "DynaBeaucedine_entered",
         hasSeenWinCSVar = "DynaBeaucedine_HasSeenWinCS",
         winKI = xi.ki.HYDRA_CORPS_INSIGNIA,
         winTitle = xi.title.DYNAMIS_BEAUCEDINE_INTERLOPER,
@@ -586,7 +586,7 @@ xi.dynamis.dynaInfoEra =
     [xi.zone.DYNAMIS_XARCABARD] =
     {
         winVar = "DynaXarcabard_Win",
-        dynamis_has_enteredVar = "DynaXarcabard_dynamis_has_entered",
+        enteredVar = "DynaXarcabard_entered",
         hasSeenWinCSVar = "DynaXarcabard_HasSeenWinCS",
         winKI = xi.ki.HYDRA_CORPS_BATTLE_STANDARD,
         winTitle = xi.title.DYNAMIS_XARCABARD_INTERLOPER,
@@ -602,7 +602,7 @@ xi.dynamis.dynaInfoEra =
     [xi.zone.DYNAMIS_VALKURM] =
     {
         winVar = "DynaValkurm_Win",
-        dynamis_has_enteredVar = "DynaValkurm_dynamis_has_entered",
+        enteredVar = "DynaValkurm_entered",
         hasSeenWinCSVar = "DynaValkurm_HasSeenWinCS",
         winKI = xi.ki.DYNAMIS_VALKURM_SLIVER,
         winTitle = xi.title.DYNAMIS_VALKURM_INTERLOPER,
@@ -618,7 +618,7 @@ xi.dynamis.dynaInfoEra =
     [xi.zone.DYNAMIS_BUBURIMU] =
     {
         winVar = "DynaBuburimu_Win",
-        dynamis_has_enteredVar = "DynaBuburimu_dynamis_has_entered",
+        enteredVar = "DynaBuburimu_entered",
         hasSeenWinCSVar = "DynaBuburimu_HasSeenWinCS",
         winKI = xi.ki.DYNAMIS_BUBURIMU_SLIVER,
         winTitle = xi.title.DYNAMIS_BUBURIMU_INTERLOPER,
@@ -643,7 +643,7 @@ xi.dynamis.dynaInfoEra =
     [xi.zone.DYNAMIS_QUFIM] =
     {
         winVar = "DynaQufim_Win",
-        dynamis_has_enteredVar = "DynaQufim_dynamis_has_entered",
+        enteredVar = "DynaQufim_entered",
         hasSeenWinCSVar = "DynaQufim_HasSeenWinCS",
         winKI = xi.ki.DYNAMIS_QUFIM_SLIVER,
         winTitle = xi.title.DYNAMIS_QUFIM_INTERLOPER,
@@ -676,7 +676,7 @@ xi.dynamis.dynaInfoEra =
     [xi.zone.DYNAMIS_TAVNAZIA] =
     {
         winVar = "DynaTavnazia_Win",
-        dynamis_has_enteredVar = "DynaTavnazia_dynamis_has_entered",
+        enteredVar = "DynaTavnazia_entered",
         hasSeenWinCSVar = "DynaQufim_HasSeenWinCS",
         winKI = xi.ki.DYNAMIS_TAVNAZIA_SLIVER,
         winTitle = xi.title.DYNAMIS_TAVNAZIA_INTERLOPER,
@@ -796,7 +796,7 @@ end
 
 xi.dynamis.addTimeToDynamis = function(zone, mobIndex)
     local zoneID = zone:getID()
-    for k, v in pairs(xi.dynamis.mobList[zoneID].timeExensionList) do
+    for _, v in pairs(xi.dynamis.mobList[zoneID].timeExtensionList) do
         if v == mobIndex then
             local timeExtension = xi.dynamis.mobList[zoneID][mobIndex].timeExtension
             local zoneDynamisToken = zone:getLocalVar(string.format("[DYNA]Token_%s", zoneID))
@@ -823,7 +823,6 @@ xi.dynamis.addTimeToDynamis = function(zone, mobIndex)
                 SetServerVariable(string.format("[DYNA]Given1MinuteWarning_%s", zoneID), 0) -- Resets var if time remaining greater than threshold.
             end
         end
-        k = k + 1
     end
 end
 
@@ -979,44 +978,44 @@ end
 xi.dynamis.entryNpcOnTrade = function(player, npc, trade)
     local zoneID = npc:getZoneID()
     if xi.dynamis.entryInfoEra[zoneID].enabled == false then return end -- If zone is not enabled, return.
-    if (player:getLocalVar(xi.dynamis.entryInfoEra[zoneID].dynamis_has_enteredVar) == 0) then -- Check if player has entered the Dynamis before.
+    if (player:getLocalVar(xi.dynamis.entryInfoEra[zoneID].enteredVar) == 0) then -- Check if player has entered the Dynamis before.
     if (xi.dynamis.entryInfoEra[zoneID].reqs == false) then return end end -- Check if player meets all requirements or is a GM.
 
     local zoneTimepoint = GetServerVariable(string.format("[DYNA]Timepoint_%s", xi.dynamis.dynaInfoEra[zoneID].dynaZone))
     local dynamis_time_remaining = xi.dynamis.getDynaTimeRemaining(zoneTimepoint) -- Get time remaining of Dynamis
-    local dynamis_has_entered = player:getCharVar(xi.dynamis.entryInfoEra[zoneID].dynamis_has_enteredVar)
+    local entered = player:getCharVar(xi.dynamis.entryInfoEra[zoneID].enteredVar)
     local dynamis_last_reservation = (os.time() / (3600 * 1000)) - player:getCharVar("DynaReservationStart") -- Return Time of Last Reservation in Hours
 
-    if dynamis_has_entered == nil then
-        dynamis_has_entered = 0
+    if entered == nil then
+        entered = 0
     end
 
     if npcUtil.tradeHas(trade, dynamis_timeless, true, false) then -- Check for timeless hourglass to trade for perpetual hourglass to start instance
         if dynamis_time_remaining > 0 then -- Check if another group is present.
             player:messageSpecial(xi.dynamis.dynaIDLookup[zoneID].text.ANOTHER_GROUP, xi.dynamis.entryInfoEra[zoneID].csBit)
         elseif player:getGMLevel() >= 2 then -- If no other group, if GM bypass lockout and start new dynamis.
-            player:startEvent(xi.dynamis.entryInfoEra[zoneID].csRegisterGlass, xi.dynamis.entryInfoEra[zoneID].csBit, dynamis_has_entered == 1 and 0 or 1, dynamis_reservation_cancel, dynamis_reentry_days, xi.dynamis.entryInfoEra[zoneID].maxCapacity, xi.ki.VIAL_OF_SHROUDED_SAND, dynamis_timeless, dynamis_perpetual)
+            player:startEvent(xi.dynamis.entryInfoEra[zoneID].csRegisterGlass, xi.dynamis.entryInfoEra[zoneID].csBit, entered == 1 and 0 or 1, dynamis_reservation_cancel, dynamis_reentry_days, xi.dynamis.entryInfoEra[zoneID].maxCapacity, xi.ki.VIAL_OF_SHROUDED_SAND, dynamis_timeless, dynamis_perpetual)
         elseif dynamis_last_reservation < dynamis_rentry_hours then -- Still in lockout period.
             player:messageSpecial(zones[zoneID].text.YOU_CANNOT_ENTER_DYNAMIS, math.ceil(dynamis_rentry_hours - dynamis_last_reservation), xi.dynamis.entryInfoEra[zoneID].csBit)
         else -- Proceed in starting new dynamis.
-            player:startEvent(xi.dynamis.entryInfoEra[zoneID].csRegisterGlass, xi.dynamis.entryInfoEra[zoneID].csBit, dynamis_has_entered == 1 and 0 or 1, dynamis_reservation_cancel, dynamis_reentry_days, xi.dynamis.entryInfoEra[zoneID].maxCapacity, xi.ki.VIAL_OF_SHROUDED_SAND, dynamis_timeless, dynamis_perpetual)
+            player:startEvent(xi.dynamis.entryInfoEra[zoneID].csRegisterGlass, xi.dynamis.entryInfoEra[zoneID].csBit, entered == 1 and 0 or 1, dynamis_reservation_cancel, dynamis_reentry_days, xi.dynamis.entryInfoEra[zoneID].maxCapacity, xi.ki.VIAL_OF_SHROUDED_SAND, dynamis_timeless, dynamis_perpetual)
         end
     elseif npcUtil.tradeHas(trade, dynamis_perpetual, true, false) then -- Check for perpetual hourglass to  enter instance
         local dynaCapacity = GetServerVariable(string.format("[DYNA]RegisteredPlayers_%s", xi.dynamis.dynaInfoEra[zoneID].dynaZone))
         if player:getGMLevel() >= 2 then -- Don't register GMs.
             xi.dynamis.registerPlayer(player)
-            player:startEvent(xi.dynamis.entryInfoEra[zoneID].csDyna, xi.dynamis.entryInfoEra[zoneID].csBit, dynamis_has_entered == 1 and 0 or 1, dynamis_reservation_cancel, dynamis_reentry_days, xi.dynamis.entryInfoEra[zoneID].maxCapacity, xi.ki.VIAL_OF_SHROUDED_SAND, dynamis_timeless, dynamis_perpetual)
+            player:startEvent(xi.dynamis.entryInfoEra[zoneID].csDyna, xi.dynamis.entryInfoEra[zoneID].csBit, entered == 1 and 0 or 1, dynamis_reservation_cancel, dynamis_reentry_days, xi.dynamis.entryInfoEra[zoneID].maxCapacity, xi.ki.VIAL_OF_SHROUDED_SAND, dynamis_timeless, dynamis_perpetual)
         else
             local dynamis_glass_valid = xi.dynamis.verifyTradeHourglass(player, trade)
             if dynamis_glass_valid == 2 then -- Allow previous registrant into the zone.
-                player:startEvent(xi.dynamis.entryInfoEra[zoneID].csDyna, xi.dynamis.entryInfoEra[zoneID].csBit, dynamis_has_entered == 1 and 0 or 1, dynamis_reservation_cancel, dynamis_reentry_days, xi.dynamis.entryInfoEra[zoneID].maxCapacity, xi.ki.VIAL_OF_SHROUDED_SAND, dynamis_timeless, dynamis_perpetual)
+                player:startEvent(xi.dynamis.entryInfoEra[zoneID].csDyna, xi.dynamis.entryInfoEra[zoneID].csBit, entered == 1 and 0 or 1, dynamis_reservation_cancel, dynamis_reentry_days, xi.dynamis.entryInfoEra[zoneID].maxCapacity, xi.ki.VIAL_OF_SHROUDED_SAND, dynamis_timeless, dynamis_perpetual)
                 player:setCharVar(string.format("[DYNA]InflictWeakness_%s", xi.dynamis.dynaInfoEra[zoneID].dynaZone), true) -- Tell dynamis to inflict weakness.
             elseif dynamis_last_reservation < dynamis_rentry_hours then -- If in lockout, deny.
                 player:messageSpecial(zones[zoneID].text.YOU_CANNOT_ENTER_DYNAMIS, (dynamis_rentry_hours - dynamis_last_reservation), xi.dynamis.entryInfoEra[zoneID].csBit)
             elseif dynamis_glass_valid == 1 then -- Initiate new registrant procedure.
                 if dynaCapacity <= xi.dynamis.entryInfoEra[zoneID].maxCapacity then -- If not at max capacity, allow in.
                     xi.dynamis.registerPlayer(player)
-                    player:startEvent(xi.dynamis.entryInfoEra[zoneID].csDyna, xi.dynamis.entryInfoEra[zoneID].csBit, dynamis_has_entered == 1 and 0 or 1, dynamis_reservation_cancel, dynamis_reentry_days, xi.dynamis.entryInfoEra[zoneID].maxCapacity, xi.ki.VIAL_OF_SHROUDED_SAND, dynamis_timeless, dynamis_perpetual)
+                    player:startEvent(xi.dynamis.entryInfoEra[zoneID].csDyna, xi.dynamis.entryInfoEra[zoneID].csBit, entered == 1 and 0 or 1, dynamis_reservation_cancel, dynamis_reentry_days, xi.dynamis.entryInfoEra[zoneID].maxCapacity, xi.ki.VIAL_OF_SHROUDED_SAND, dynamis_timeless, dynamis_perpetual)
                     player:setCharVar(string.format("[DYNA]InflictWeakness_%s", xi.dynamis.dynaInfoEra[zoneID].dynaZone), false) -- Tell dynamis to not inflict weakness.
                     SetServerVariable(string.format("[DYNA]RegisteredPlayers_%s", xi.dynamis.dynaInfoEra[zoneID].dynaZone), dynaCapacity + 1) -- Increment registered players by 1.
                 else
@@ -1074,7 +1073,7 @@ m:addOverride("xi.dynamis.entryNpcOnEventFinish", function(player, csid, option)
             if entryPos == nil then return end -- If entryPos isn't there, don't teleport.
             player:messageSpecial(xi.dynamis.dynaIDLookup[player:getZoneID()].text.CONNECTING_WITH_THE_SERVER) -- Just to mimic what we have previously had.
             player:setCharVar("Requires_Initial_Update", 1)
-            player:setCharVar(xi.dynamis.entryInfoEra[zoneID].dynamis_has_enteredVar, 1) -- Mark the player as having entered at least once.
+            player:setCharVar(xi.dynamis.entryInfoEra[zoneID].enteredVar, 1) -- Mark the player as having entered at least once.
             player:timer(5000, function(player) player:setPos(entryPos[1], entryPos[2], entryPos[3], entryPos[4], entryPos[5]) end)
         end
     elseif csid == xi.dynamis.entryInfoEra[zoneID].csSand then -- Give Shrouded Sand KI
