@@ -24,9 +24,9 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "common/blowfish.h"
 #include "common/cbasetypes.h"
 #include "common/console_service.h"
+#include "common/logging.h"
 #include "common/md52.h"
 #include "common/mmo.h"
-#include "common/logging.h"
 #include "common/socket.h"
 #include "common/sql.h"
 #include "common/taskmgr.h"
@@ -61,8 +61,8 @@ typedef u_int SOCKET;
 #include "packets/auction_list.h"
 #include "packets/linkshell_list.h"
 #include "packets/party_list.h"
-#include "packets/search_list.h"
 #include "packets/search_comment.h"
+#include "packets/search_list.h"
 
 #define DEFAULT_BUFLEN 1024
 #define CODE_LVL       17
@@ -130,7 +130,7 @@ void PrintPacket(char* data, int size)
 
 int32 main(int32 argc, char** argv)
 {
-    bool appendDate {};
+    bool appendDate{};
 #ifdef WIN32
     WSADATA wsaData;
 #endif
@@ -276,7 +276,7 @@ int32 main(int32 argc, char** argv)
     gConsoleService = std::make_unique<ConsoleService>();
     gConsoleService->RegisterCommand(
     "ah_cleanup", fmt::format("AH task to return items older than {} days.", search_config.expire_days),
-    [&]() -> void
+    [](std::vector<std::string> inputs)
     {
         ah_cleanup(server_clock::now(), nullptr);
     });
@@ -610,7 +610,7 @@ void HandleGroupListRequest(CTCPRequestPacket& PTCPRequest)
 
 void HandleSearchComment(CTCPRequestPacket& PTCPRequest)
 {
-    uint8* data = PTCPRequest.GetData();
+    uint8* data     = PTCPRequest.GetData();
     uint32 playerId = ref<uint32>(data, 0x10);
 
     CDataLoader PDataLoader;
@@ -969,11 +969,11 @@ search_req _HandleSearchRequest(CTCPRequestPacket& PTCPRequest)
     sr.maxlvl = maxLvl;
     sr.minlvl = minLvl;
 
-    sr.race    = raceid;
-    sr.nation  = nationid;
-    sr.minRank = minRank;
-    sr.maxRank = maxRank;
-    sr.flags   = flags;
+    sr.race        = raceid;
+    sr.nation      = nationid;
+    sr.minRank     = minRank;
+    sr.maxRank     = maxRank;
+    sr.flags       = flags;
     sr.commentType = commentType;
 
     sr.nameLen = nameLen;

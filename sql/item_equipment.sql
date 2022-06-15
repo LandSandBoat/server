@@ -10900,7 +10900,7 @@ INSERT INTO `item_equipment` VALUES (22063,'nirvana',99,119,16384,567,0,1,1,0,0)
 INSERT INTO `item_equipment` VALUES (22064,'hvergelmir',99,119,540680,581,0,1,1,0,0);
 INSERT INTO `item_equipment` VALUES (22065,'aern_staff',1,0,4194303,829,0,0,1,0,0);
 INSERT INTO `item_equipment` VALUES (22066,'aern_staff_ii',1,0,4194303,895,0,0,1,0,0);
-INSERT INTO `item_equipment` VALUES (22068,'savage._pole',1,0,4194303,829,0,0,1,0,0);  -- TODO: capture model from retail (using Aern Staff model)
+INSERT INTO `item_equipment` VALUES (22068,'savage._pole',1,0,4194303,829,0,0,1,0,0); -- TODO: capture model from retail (using Aern Staff model)
 INSERT INTO `item_equipment` VALUES (22069,'hapy_staff',1,0,4194303,806,0,0,1,0,0);
 INSERT INTO `item_equipment` VALUES (22072,'lamia_staff',1,0,4194303,832,0,0,1,0,0);
 INSERT INTO `item_equipment` VALUES (22074,'arasy_staff',99,119,1590047,292,0,0,1,0,1);
@@ -10965,6 +10965,7 @@ INSERT INTO `item_equipment` VALUES (22139,'gastraphetes',99,119,1024,106,0,0,4,
 INSERT INTO `item_equipment` VALUES (22140,'annihilator',99,119,1024,103,0,1,4,0,0);
 INSERT INTO `item_equipment` VALUES (22141,'death_penalty',99,119,65536,107,0,1,4,0,0);
 INSERT INTO `item_equipment` VALUES (22142,'armageddon',99,119,66560,109,0,1,4,0,0);
+INSERT INTO `item_equipment` VALUES (22143,'fomalhaut',99,119,66560,134,0,0,4,0,0);
 INSERT INTO `item_equipment` VALUES (22144,'voluspa_gun',99,119,66560,59,0,0,4,0,0);
 INSERT INTO `item_equipment` VALUES (22145,'artemiss_bow_+1',99,119,1024,138,0,0,4,0,0); -- TODO: capture model from retail (using Artemis's Bow model)
 INSERT INTO `item_equipment` VALUES (22147,'scouts_crossbow',99,119,1024,52,0,0,4,0,4);
@@ -12097,7 +12098,6 @@ INSERT INTO `item_equipment` VALUES (26108,'odr_earring',99,0,2462754,0,0,0,6144
 INSERT INTO `item_equipment` VALUES (26109,'snotra_earring',99,0,16,0,0,0,6144,0,0);
 INSERT INTO `item_equipment` VALUES (26115,'balder_earring_+1',99,119,4194303,0,0,0,512,0,0);
 INSERT INTO `item_equipment` VALUES (26118,'sroda_earring',99,119,4194303,0,0,0,512,0,0);
-INSERT INTO `item_equipment` VALUES (22143,'fomalhaut',99,119,66560,83,0,0,4,0,0);
 INSERT INTO `item_equipment` VALUES (26160,'evanescence_ring',99,0,4194303,0,0,0,24576,0,0);
 INSERT INTO `item_equipment` VALUES (26161,'shukuyu_ring',99,0,4194303,0,0,0,24576,0,0);
 INSERT INTO `item_equipment` VALUES (26162,'rahab_ring',99,0,4194303,0,0,0,24576,0,0);

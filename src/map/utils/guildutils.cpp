@@ -35,26 +35,26 @@
 //#define количество обновляемых предметов при restock (в процентах от максимального количества)
 
 /************************************************************************
- *																		*
- *  Список гильдий														*
- *																		*
+ *                                                                      *
+ *  Список гильдий                                                      *
+ *                                                                      *
  ************************************************************************/
 
 std::vector<CGuild*>         g_PGuildList;
 std::vector<CItemContainer*> g_PGuildShopList;
 
 /************************************************************************
- *																		*
- *																		*
- *																		*
+ *                                                                      *
+ *                                                                      *
+ *                                                                      *
  ************************************************************************/
 
 namespace guildutils
 {
     /************************************************************************
-     *																		*
-     *  Инициализация гильдий												*
-     *																		*
+     *                                                                      *
+     *  Инициализация гильдий                                               *
+     *                                                                      *
      ************************************************************************/
 
     void Initialize()
@@ -85,8 +85,8 @@ namespace guildutils
         for (auto* PGuildShop : g_PGuildShopList)
         {
             fmtQuery = "SELECT itemid, min_price, max_price, max_quantity, daily_increase, initial_quantity \
-				    FROM guild_shops \
-					WHERE guildid = %u \
+                    FROM guild_shops \
+                    WHERE guildid = %u \
                     LIMIT %u";
 
             int32 ret = sql->Query(fmtQuery, PGuildShop->GetID(), MAX_CONTAINER_SIZE);
@@ -168,7 +168,7 @@ namespace guildutils
         {
             // write the new pattern and update time to prevent other servers from updating the pattern
             sql->Query("REPLACE INTO server_variables (name,value) VALUES('[GUILD]pattern_update', %u), ('[GUILD]pattern', %u);",
-                      CVanaTime::getInstance()->getJstYearDay(), pattern);
+                       CVanaTime::getInstance()->getJstYearDay(), pattern);
             sql->Query("DELETE FROM char_vars WHERE varname = '[GUILD]daily_points';");
         }
 
@@ -188,9 +188,9 @@ namespace guildutils
     }
 
     /************************************************************************
-     *																		*
-     *  Получаем указатель на магазин гильдии с указанным ID					*
-     *																		*
+     *                                                                      *
+     *  Получаем указатель на магазин гильдии с указанным ID                    *
+     *                                                                      *
      ************************************************************************/
 
     CItemContainer* GetGuildShop(uint16 GuildShopID)

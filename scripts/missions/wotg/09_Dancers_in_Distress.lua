@@ -75,7 +75,7 @@ mission.sections =
                     -- The options chosen in the quiz are sequential
                     -- Page 1 updates the CS with options 1, 2 or 3, depending on what you choose
                     -- Page 2 updates the CS with options 4, 5 or 6, depending on what you choose
-                    -- etc. all the way up to 18...
+                    -- etc. all the way up to 18.
                     -- 19 is the end of the quiz.
                     -- The last argument is the chosen item (chosen randomly here):
                     -- 1: Lynx Meat

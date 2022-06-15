@@ -24,8 +24,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "../battlefield.h"
 #include "../entities/charentity.h"
-#include "../entities/npcentity.h"
 #include "../entities/mobentity.h"
+#include "../entities/npcentity.h"
 #include "../status_effect_container.h"
 #include "../utils/mobutils.h"
 #include "../utils/zoneutils.h"
@@ -84,12 +84,15 @@ uint32 CLuaBattlefield::getFightTime()
 sol::table CLuaBattlefield::getPlayers()
 {
     auto table = luautils::lua.create_table();
-    m_PLuaBattlefield->ForEachPlayer([&](CCharEntity* PChar) {
+    // clang-format off
+    m_PLuaBattlefield->ForEachPlayer([&](CCharEntity* PChar)
+    {
         if (PChar)
         {
             table.add(CLuaBaseEntity(PChar));
         }
     });
+    // clang-format on
     return table;
 }
 
@@ -99,16 +102,24 @@ sol::table CLuaBattlefield::getMobs(bool required, bool adds)
 
     if (required && !m_PLuaBattlefield->m_RequiredEnemyList.empty())
     {
-        m_PLuaBattlefield->ForEachRequiredEnemy([&](CMobEntity* PMob) {
+        // clang-format off
+        m_PLuaBattlefield->ForEachRequiredEnemy(
+        [&](CMobEntity* PMob)
+        {
             table.add(CLuaBaseEntity(PMob));
         });
+        // clang-format on
     }
 
     if (adds && !m_PLuaBattlefield->m_AdditionalEnemyList.empty())
     {
-        m_PLuaBattlefield->ForEachAdditionalEnemy([&](CMobEntity* PMob) {
+        // clang-format off
+        m_PLuaBattlefield->ForEachAdditionalEnemy(
+        [&](CMobEntity* PMob)
+        {
             table.add(CLuaBaseEntity(PMob));
         });
+        // clang-format on
     }
 
     return table;
@@ -117,18 +128,26 @@ sol::table CLuaBattlefield::getMobs(bool required, bool adds)
 sol::table CLuaBattlefield::getNPCs()
 {
     auto table = luautils::lua.create_table();
-    m_PLuaBattlefield->ForEachNpc([&](CNpcEntity* PNpc) {
+    // clang-format off
+    m_PLuaBattlefield->ForEachNpc(
+    [&](CNpcEntity* PNpc)
+    {
         table.add(CLuaBaseEntity(PNpc));
     });
+    // clang-format on
     return table;
 }
 
 sol::table CLuaBattlefield::getAllies()
 {
     auto table = luautils::lua.create_table();
-    m_PLuaBattlefield->ForEachAlly([&](CMobEntity* PAlly) {
+    // clang-format off
+    m_PLuaBattlefield->ForEachAlly(
+    [&](CMobEntity* PAlly)
+    {
         table.add(CLuaBaseEntity(PAlly));
     });
+    // clang-format on
     return table;
 }
 

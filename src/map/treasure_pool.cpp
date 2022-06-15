@@ -440,7 +440,7 @@ void CTreasurePool::CheckTreasureItem(time_point tick, uint8 SlotID)
         m_PoolItems[SlotID].Lotters.size() == members.size())
     {
         // Find item's highest lotter
-        LotInfo highestInfo = { 0, nullptr };
+        LotInfo highestInfo;
 
         for (auto curInfo : m_PoolItems[SlotID].Lotters)
         {

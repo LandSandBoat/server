@@ -46,7 +46,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 namespace message
 {
-    zmq::context_t zContext;
+    zmq::context_t                 zContext;
     std::unique_ptr<zmq::socket_t> zSocket;
 
     moodycamel::ConcurrentQueue<chat_message_t> outgoing_queue;
@@ -83,7 +83,7 @@ namespace message
         TracyZoneCString(msgTypeToStr(type));
 
         ShowDebug("Message: Received message %s (%d) from message server",
-            msgTypeToStr(type), static_cast<uint8>(type));
+                  msgTypeToStr(type), static_cast<uint8>(type));
 
         switch (type)
         {
@@ -167,8 +167,8 @@ namespace message
             }
             case MSG_CHAT_UNITY:
             {
-                uint32           leader = ref<uint32>((uint8*)extra.data(), 0);
-                CUnityChat* PUnityChat  = unitychat::GetUnityChat(leader);
+                uint32      leader     = ref<uint32>((uint8*)extra.data(), 0);
+                CUnityChat* PUnityChat = unitychat::GetUnityChat(leader);
                 if (PUnityChat)
                 {
                     CBasicPacket* newPacket = new CBasicPacket();
@@ -179,7 +179,8 @@ namespace message
             }
             case MSG_CHAT_YELL:
             {
-                zoneutils::ForEachZone([&packet, &extra](CZone* PZone) {
+                zoneutils::ForEachZone([&packet, &extra](CZone* PZone)
+                                       {
                     if (PZone->CanUseMisc(MISC_YELL))
                     {
                         PZone->ForEachChar([&packet, &extra](CCharEntity* PChar) {
@@ -192,19 +193,17 @@ namespace message
                                 PChar->pushPacket(newPacket);
                             }
                         });
-                    }
-                });
+                    } });
                 break;
             }
             case MSG_CHAT_SERVMES:
             {
-                zoneutils::ForEachZone([&packet](CZone* PZone) {
-                    PZone->ForEachChar([&packet](CCharEntity* PChar) {
+                zoneutils::ForEachZone([&packet](CZone* PZone)
+                                       { PZone->ForEachChar([&packet](CCharEntity* PChar)
+                                                            {
                         CBasicPacket* newPacket = new CBasicPacket();
                         memcpy(*newPacket, packet.data(), std::min<size_t>(packet.size(), PACKET_SIZE));
-                        PChar->pushPacket(newPacket);
-                    });
-                });
+                        PChar->pushPacket(newPacket); }); });
                 break;
             }
             case MSG_PT_INVITE:
@@ -272,7 +271,7 @@ namespace message
                         // both party leaders?
                         int ret = sql->Query("SELECT * FROM accounts_parties WHERE partyid <> 0 AND \
                                                     ((charid = %u OR charid = %u) AND partyflag & %u);",
-                                            inviterId, inviteeId, PARTY_LEADER);
+                                             inviterId, inviteeId, PARTY_LEADER);
                         if (ret != SQL_ERROR && sql->NumRows() == 2)
                         {
                             if (PInviter->PParty->m_PAlliance)
@@ -280,7 +279,7 @@ namespace message
                                 ret = sql->Query("SELECT * FROM accounts_parties WHERE allianceid <> 0 AND \
                                                         allianceid = (SELECT allianceid FROM accounts_parties where \
                                                         charid = %u) GROUP BY partyid;",
-                                                inviterId);
+                                                 inviterId);
                                 if (ret != SQL_ERROR && sql->NumRows() > 0 && sql->NumRows() < 3)
                                 {
                                     PInviter->PParty->m_PAlliance->addParty(inviteeId);
@@ -333,7 +332,8 @@ namespace message
                     CCharEntity* PChar = zoneutils::GetChar(ref<uint32>((uint8*)extra.data(), 0));
                     if (PChar)
                     {
-                        PChar->ForAlliance([](CBattleEntity* PMember) { ((CCharEntity*)PMember)->ReloadPartyInc(); });
+                        PChar->ForAlliance([](CBattleEntity* PMember)
+                                           { ((CCharEntity*)PMember)->ReloadPartyInc(); });
                     }
                 }
 
@@ -550,7 +550,7 @@ namespace message
             }
             case MSG_LUA_FUNCTION:
             {
-                auto str = std::string((const char*)extra.data() + 4);
+                auto str    = std::string((const char*)extra.data() + 4);
                 auto result = luautils::lua.safe_script(str);
                 if (!result.valid())
                 {
@@ -602,7 +602,7 @@ namespace message
                 if (more)
                 {
                     std::ignore = zSocket->recv(message.data);
-                    more = zSocket->get(zmq::sockopt::rcvmore);
+                    more        = zSocket->get(zmq::sockopt::rcvmore);
                     if (more)
                     {
                         std::ignore = zSocket->recv(message.packet);
@@ -695,7 +695,8 @@ namespace message
 
         if (packet)
         {
-            msg.packet = zmq::message_t(*packet, packet->getSize(), [](void* data, void* hint) { delete[](uint8*) data; });
+            msg.packet = zmq::message_t(*packet, packet->getSize(), [](void* data, void* hint)
+                                        { delete[](uint8*) data; });
         }
         else
         {

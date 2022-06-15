@@ -23,9 +23,9 @@
 #include <cstring>
 
 #include "../entities/battleentity.h"
+#include "../lua/luautils.h"
 #include "../map.h"
 #include "itemutils.h"
-#include "../lua/luautils.h"
 
 std::array<CItem*, MAX_ITEMID>      g_pItemList; // global array of pointers to game items
 std::array<DropList_t*, MAX_DROPID> g_pDropList; // global array of monster droplist items
@@ -245,12 +245,6 @@ namespace itemutils
         return g_pItemList[item->getID()] == item;
     }
 
-    /************************************************************************
-     *                                                                       *
-     *                                                                       *
-     *                                                                       *
-     ************************************************************************/
-
     CItemWeapon* GetUnarmedItem()
     {
         return PUnarmedItem;
@@ -278,12 +272,6 @@ namespace itemutils
         ShowWarning("DropID %u too big", DropID);
         return nullptr;
     }
-
-    /************************************************************************
-     *                                                                       *
-     *                                                                       *
-     *                                                                       *
-     ************************************************************************/
 
     LootList_t* GetLootList(uint16 LootID)
     {
@@ -434,8 +422,8 @@ namespace itemutils
                         ((CItemWeapon*)PItem)->setMaxHit(sql->GetUIntData(32));
                         ((CItemWeapon*)PItem)->setTotalUnlockPointsNeeded(sql->GetUIntData(33));
 
-                        int dmg   = sql->GetUIntData(30);
-                        int delay = sql->GetIntData(29);
+                        int  dmg   = sql->GetUIntData(30);
+                        int  delay = sql->GetIntData(29);
                         bool isH2H = ((CItemWeapon*)PItem)->getSkillType() == SKILL_HAND_TO_HAND;
 
                         if ((dmg > 0 || isH2H) && delay > 0) // avoid division by zero for items not yet implemented. Zero dmg h2h weapons don't actually have zero dmg for the purposes of DPS.
@@ -443,7 +431,7 @@ namespace itemutils
                             if (isH2H)
                             {
                                 delay -= 240; // base h2h delay per fist is 240 when used in DPS calculation. We store Delay in the database as Weapon Delay+(240*2).
-                                dmg   += 3;   // add 3 base damage for DPS calculation. This base damage addition appears to come from "base" h2h damage of 3.
+                                dmg += 3;     // add 3 base damage for DPS calculation. This base damage addition appears to come from "base" h2h damage of 3.
                                               // See Ninzas +2 in polutils/bg wiki: https://www.bg-wiki.com/ffxi/Ninzas_%2B2
                                               // The DPS field is in the DAT itself and is calculated by SE as follows:
                                               // ((104+3)*60)/(81+240) = 20
@@ -514,7 +502,7 @@ namespace itemutils
         }
 
         ret = sql->Query("SELECT itemId, modId, value, latentId, latentParam FROM item_latents WHERE itemId IN (SELECT itemId FROM item_basic LEFT "
-                                   "JOIN item_equipment USING (itemId))");
+                         "JOIN item_equipment USING (itemId))");
 
         if (ret != SQL_ERROR && sql->NumRows() != 0)
         {
