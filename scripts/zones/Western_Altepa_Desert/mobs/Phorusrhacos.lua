@@ -14,8 +14,3 @@ end
 entity.onMobDespawn = function(mob)
     xi.mob.phOnDespawn(mob, ID.mob.PICOLATON_PH, 10, 6400)
 end
-<<<<<<< HEAD
-
-return entity
-=======
->>>>>>> bca195221f (Picolaton)
