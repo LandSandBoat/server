@@ -2,6 +2,8 @@
 -- NETWORK SETTINGS
 -----------------------------------
 -- All settings are attached to the `xi.settings` object. This is published globally, and be accessed from C++ and any script.
+--
+-- This file is concerned mainly with networking between the database, client, and server executables.
 -----------------------------------
 
 xi = xi or {}
@@ -27,6 +29,6 @@ xi.settings.network =
     SEARCH_PORT = 54002,
 
     -- Central message server settings (ensure these are the same on both all map servers and the central (lobby) server
-    ZMQ_PORT = 54003,
     ZMQ_IP   = "127.0.0.1",
+    ZMQ_PORT = 54003,
 }

@@ -27,7 +27,7 @@ class AHPaginationModule : public CPPModule
         auto ITEMS_PER_PAGE = 6U;
         auto TOTAL_PAGES = 6;
 
-        ShowNotice("[AH PAGES] Setting map_config.ah_list_limit to %i.", ITEMS_PER_PAGE * TOTAL_PAGES)
+        ShowInfo("[AH PAGES] Setting AH_LIST_LIMIT to %i.", ITEMS_PER_PAGE * TOTAL_PAGES)
         map_config.ah_list_limit = ITEMS_PER_PAGE * TOTAL_PAGES;
 
         auto originalHandler = PacketParser[0x04E];

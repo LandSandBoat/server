@@ -159,7 +159,7 @@ int32 lobbydata_parse(int32 fd)
                 LOBBY_A1_RESERVEPACKET(ReservePacket);
 
                 // server's name that shows in lobby menu
-                auto serverName = settings::get<std::string>("main.SERVER_NAME");
+                auto serverName = settings::get<std::string>("map.SERVER_NAME");
                 std::memcpy(ReservePacket + 60, serverName.c_str(), std::clamp<size_t>(serverName.length(), 0, 15));
 
                 // Prepare the character list data..
@@ -636,7 +636,7 @@ int32 lobbyview_parse(int32 fd)
             break;
             case 0x14:
             {
-                if (!settings::get<bool>("main.CHARACTER_DELETION"))
+                if (!settings::get<bool>("map.CHARACTER_DELETION"))
                 {
                     int32         sendsize = 0x28;
                     unsigned char MainReservePacket[0x28];
@@ -700,7 +700,7 @@ int32 lobbyview_parse(int32 fd)
             {
                 LOBBY_024_RESERVEPACKET(ReservePacket);
 
-                auto serverName = settings::get<std::string>("main.SERVER_NAME");
+                auto serverName = settings::get<std::string>("map.SERVER_NAME");
                 std::memcpy(ReservePacket + 36, serverName.c_str(), std::clamp<size_t>(serverName.length(), 0, 15));
 
                 unsigned char Hash[16];

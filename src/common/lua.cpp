@@ -27,7 +27,7 @@
 #include <numeric>
 #include <string>
 
-#define ShowScript(...) _ShowTrace("lua", __VA_ARGS__)
+// #define ShowScript(...) _ShowTrace("lua", __VA_ARGS__)
 
 sol::state lua;
 
@@ -144,5 +144,5 @@ void lua_print(sol::variadic_args va)
         vec.emplace_back(lua_to_string(va[i]));
     }
 
-    ShowScript(fmt::format("{}", fmt::join(vec.begin(), vec.end(), " ")).c_str());
+    ShowInfo(fmt::format("{}", fmt::join(vec.begin(), vec.end(), " ")).c_str());
 }

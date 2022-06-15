@@ -208,9 +208,8 @@ namespace luautils
 
         // Load globals
         // Truly global files first
-        lua.safe_script_file("./scripts/settings/main.lua", &sol::script_pass_on_error);
-        lua.safe_script_file("./scripts/globals/common.lua", &sol::script_pass_on_error);
-        roeutils::init(); // TODO: Get rid of the need to do this
+        // lua.safe_script_file("./scripts/globals/common.lua", &sol::script_pass_on_error);
+        // roeutils::init(); // TODO: Get rid of the need to do this
 
         // Then the rest...
         for (auto entry : std::filesystem::directory_iterator("./scripts/globals"))
@@ -263,8 +262,8 @@ namespace luautils
         // NOTE: This is just requesting that an incremental step starts. There won't be a before/after change from
         //       this request!
 
-        ShowScript("Garbage Collected (Step)");
-        ShowScript("Current State Top: %d, Total Memory Used: %dkb", lua_gettop(lua.lua_state()), lua.memory_used() / 1024);
+        ShowInfo("Garbage Collected (Step)");
+        ShowInfo("Current State Top: %d, Total Memory Used: %dkb", lua_gettop(lua.lua_state()), lua.memory_used() / 1024);
 
         TracyReportLuaMemory(lua.lua_state());
 
@@ -282,8 +281,8 @@ namespace luautils
 
         auto after_mem_kb = lua.memory_used() / 1024;
 
-        ShowScript("Garbage Collected (Full)");
-        ShowScript("Current State Top: %d, Total Memory Used: %dkb -> %dkb", lua_gettop(lua.lua_state()), before_mem_kb, after_mem_kb);
+        ShowInfo("Garbage Collected (Full)");
+        ShowInfo("Current State Top: %d, Total Memory Used: %dkb -> %dkb", lua_gettop(lua.lua_state()), before_mem_kb, after_mem_kb);
 
         TracyReportLuaMemory(lua.lua_state());
 

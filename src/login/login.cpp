@@ -92,40 +92,39 @@ int32 do_init(int32 argc, char** argv)
     // clang-format off
     gConsoleService = std::make_unique<ConsoleService>();
 
-    /* TODO: Writing back to settings files
+    // TODO: Writing back to settings files
     gConsoleService->RegisterCommand(
     "verlock", "Cycle between version lock acceptance modes.",
     [&](std::vector<std::string> inputs)
     {
         // handle wrap around from 2 -> 3 as 0
-        auto temp             = (version_info.ver_lock + 1) % 3;
-        version_info.ver_lock = temp;
+        //auto temp             = (version_info.ver_lock + 1) % 3;
+        //version_info.ver_lock = temp;
 
-        const char* value = "";
-        switch (version_info.ver_lock)
-        {
-            case 0:
-                value = "disabled";
-                break;
-            case 1:
-                value = "enabled - strict";
-                break;
-            case 2:
-                value = "enabled - greater than or equal";
-                break;
-        }
-        fmt::printf("Version lock mode: %i - %s\n", version_info.ver_lock, value);
+        //const char* value = "";
+        //switch (version_info.ver_lock)
+        //{
+        //    case 0:
+        //        value = "disabled";
+        //        break;
+        //    case 1:
+        //        value = "enabled - strict";
+        //        break;
+        //    case 2:
+        //        value = "enabled - greater than or equal";
+        //        break;
+        //}
+        //fmt::printf("Version lock mode: %i - %s\n", version_info.ver_lock, value);
     });
 
     gConsoleService->RegisterCommand(
     "maint_mode", "Cycle between maintenance modes.",
     [&](std::vector<std::string> inputs)
     {
-        maint_config.maint_mode = (maint_config.maint_mode + 1) % 2;
-        config_write(MAINT_CONF_FILENAME, "maint", maint_config_write);
-        fmt::printf("Maintenance mode changed to %i\n", maint_config.maint_mode);
+        //maint_config.maint_mode = (maint_config.maint_mode + 1) % 2;
+        //config_write(MAINT_CONF_FILENAME, "maint", maint_config_write);
+        //fmt::printf("Maintenance mode changed to %i\n", maint_config.maint_mode);
     });
-    */
     // clang-format on
 
     ShowInfo("The login-server is ready to work!");

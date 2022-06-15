@@ -229,7 +229,7 @@ int32 login_parse(int32 fd)
                 // check if account creation is disabled
                 if (!settings::get<bool>("login.ACCOUNT_CREATION"))
                 {
-                    ShowWarning("login_parse: New account attempt <%s> but is disabled in config.",
+                    ShowWarning("login_parse: New account attempt <%s> but is disabled in settings.",
                                 escaped_name);
                     sessions[fd]->wdata.resize(1);
                     ref<uint8>(sessions[fd]->wdata.data(), 0) = LOGIN_ERROR_CREATE_DISABLED;
