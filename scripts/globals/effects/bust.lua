@@ -20,7 +20,6 @@ effect_object.onEffectGain = function(target, effect)
         end
         target:addMod(effect:getSubType(), -effect:getPower())
     end
-    --print("added "..effect:getPower().." of mod "..effect:getSubType())
 end
 
 effect_object.onEffectTick = function(target, effect)
@@ -41,7 +40,6 @@ effect_object.onEffectLose = function(target, effect)
         end
         target:delMod(effect:getSubType(), -effect:getPower())
     end
-    --print("removed "..effect:getPower().." of mod "..effect:getSubType())
 end
 
 return effect_object

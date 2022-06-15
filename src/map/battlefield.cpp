@@ -65,6 +65,10 @@ CBattlefield::CBattlefield(uint16 id, CZone* PZone, uint8 area, CCharEntity* PIn
     m_Record.time      = 24h;
     m_Record.partySize = 69;
     m_Tick             = m_StartTime;
+    m_isMission        = false;
+    m_Rules            = 0;
+    m_MaxParticipants  = 8;
+    m_LevelCap         = 0;
     m_RegisteredPlayers.emplace(PInitiator->id);
 }
 

@@ -11,9 +11,7 @@ require("scripts/globals/status")
 
 local eldiemeGlobal =
 {
-    --[[..............................................................................................
-        click on any of the intersection gates
-        ..............................................................................................]]
+    -- Click on any of the intersection gates
     gateOnTrigger = function(player, npc)
         if npc:getAnimation() == xi.anim.CLOSE_DOOR then
             if player:hasKeyItem(xi.ki.MAGICKED_ASTROLABE) then
@@ -24,9 +22,7 @@ local eldiemeGlobal =
         end
     end,
 
-    --[[..............................................................................................
-        click on any of the switch plates
-        ..............................................................................................]]
+    -- Click on any of the switch plates
     plateOnTrigger = function(npc)
         -- toggle gates between open and close animations
         -- gates are grouped in groups of five. even numbered groups share one animation, while odd numbered groups share the other.

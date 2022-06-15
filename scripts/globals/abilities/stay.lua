@@ -34,7 +34,7 @@ ability_object.onUseAbility = function(player, target, ability, action)
         end
 
         local tick = 10 - math.ceil(math.max(0, level / 20))
-        --printf('tick: %d', tick)
+
         pet:addStatusEffectEx(xi.effect.HEALING, 0, 0, tick, 0)
         pet:setAnimation(0)
     end

@@ -331,6 +331,13 @@ typedef struct _connect_history
     time_point               tick;
     int                      count;
     unsigned                 ddos : 1;
+    _connect_history()
+    {
+        next  = nullptr;
+        ip    = 0;
+        count = 0;
+        ddos  = 0;
+    }
 } ConnectHistory;
 
 using AccessControl = struct _access_control
@@ -871,9 +878,9 @@ void do_close_tcp(int32 fd)
 int socket_config_read(const char* cfgName)
 {
     TracyZoneScoped;
-    char  line[1024];
-    char  w1[1024];
-    char  w2[1024];
+    char  line[1024] = {};
+    char  w1[1024]   = {};
+    char  w2[1024]   = {};
     FILE* fp;
 
     fp = fopen(cfgName, "r");
@@ -1056,14 +1063,10 @@ int create_session(int fd, RecvFunc func_recv, SendFunc func_send, ParseFunc fun
 #ifdef _DEBUG
     ShowDebug(fmt::format("create_session fd: {}", fd).c_str());
 #endif // _DEBUG
-    sessions[fd] = std::make_unique<socket_data>();
+    sessions[fd] = std::make_unique<socket_data>(func_recv, func_send, func_parse);
 
     sessions[fd]->rdata.reserve(RFIFO_SIZE);
     sessions[fd]->wdata.reserve(WFIFO_SIZE);
-
-    sessions[fd]->func_recv  = func_recv;
-    sessions[fd]->func_send  = func_send;
-    sessions[fd]->func_parse = func_parse;
 
     sessions[fd]->rdata_tick = last_tick;
 

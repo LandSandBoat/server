@@ -301,8 +301,6 @@ function calculateMagicDamage(caster, target, spell, params)
         dmg = dmg * 1.5
     end
 
-    -- printf("dmg: %d dINT: %d\n", dmg, dINT)
-
     return dmg
 end
 
@@ -540,7 +538,7 @@ function getMagicHitRate(caster, target, skillType, element, percentBonus, bonus
         -- Add acc for elemental affinity accuracy and element specific accuracy
         local affinityBonus = AffinityBonusAcc(caster, element)
         local elementBonus = caster:getMod(spellAcc[element])
-        -- print(elementBonus)
+
         bonusAcc = bonusAcc + affinityBonus + elementBonus
     end
 
@@ -567,33 +565,23 @@ function getMagicResist(magicHitRate)
     local resist = 1
 
     -- Resistance thresholds based on p.  A higher p leads to lower resist rates, and a lower p leads to higher resist rates.
-    local half = (1 - p)
-    local quart = ((1 - p)^2)
-    local eighth = ((1 - p)^3)
+    local half      = (1 - p)
+    local quart     = ((1 - p)^2)
+    local eighth    = ((1 - p)^3)
     local sixteenth = ((1 - p)^4)
-    -- print("HALF: "..half)
-    -- print("QUART: "..quart)
-    -- print("EIGHTH: "..eighth)
-    -- print("SIXTEENTH: "..sixteenth)
-
-    local resvar = math.random()
+    local resvar    = math.random()
 
     -- Determine final resist based on which thresholds have been crossed.
     if resvar <= sixteenth then
         resist = 0.0625
-        --printf("Spell resisted to 1/16!!!  Threshold = %u", sixteenth)
     elseif resvar <= eighth then
         resist = 0.125
-        --printf("Spell resisted to 1/8!  Threshold = %u", eighth)
     elseif resvar <= quart then
         resist = 0.25
-        --printf("Spell resisted to 1/4.  Threshold = %u", quart)
     elseif resvar <= half then
         resist = 0.5
-        --printf("Spell resisted to 1/2.  Threshold = %u", half)
     else
         resist = 1.0
-        --printf("1.0")
     end
 
     return resist
@@ -661,9 +649,7 @@ function handleAfflatusMisery(caster, spell, dmg)
 
         dmg = math.floor(dmg * boost)
 
-        -- printf("AFFLATUS MISERY: Damage boosted by %f to %d", boost, dmg)
-
-        --Afflatus Mod is Used Up...
+        --Afflatus Mod is Used Up
         caster:setMod(xi.mod.AFFLATUS_MISERY, 0)
     end
     return dmg
@@ -983,13 +969,6 @@ function addBonusesAbility(caster, ele, target, dmg, params)
 
     dmg = math.floor(dmg * mab)
 
-    -- print(affinityBonus)
-    -- print(speciesReduction)
-    -- print(dayWeatherBonus)
-    -- print(burst)
-    -- print(mab)
-    -- print(magicDmgMod)
-
     return dmg
 end
 
@@ -1054,18 +1033,16 @@ end
 
 function handleThrenody(caster, target, spell, basePower, baseDuration, modifier)
     -- Process resitances
-    local staff = AffinityBonusAcc(caster, spell:getElement())
-    -- print("staff=" .. staff)
+    local staff  = AffinityBonusAcc(caster, spell:getElement())
     local params = {}
+
     params.attribute = xi.mod.CHR
     params.skillType = xi.skill.SINGING
     params.bonus = staff
 
     local resm = applyResistance(caster, target, spell, params)
-    -- print("rsem=" .. resm)
 
     if resm < 0.5 then
-        -- print("resm resist")
         spell:setMsg(xi.msg.basic.MAGIC_RESIST)
         return xi.effect.THRENODY
     end

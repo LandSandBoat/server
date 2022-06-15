@@ -189,12 +189,10 @@ int32 lobbydata_parse(int32 fd)
                         uint8  charIdExtra = (charId >> 16) & 0xFF;
 
                         // uList is sent through data socket (to bootloader)
-                        uint32 uListOffset = 16 * (i + 1);
-
-                        ref<uint32>(uList, uListOffset)     = contentId;
-                        ref<uint16>(uList, uListOffset + 4) = charIdMain;
-                        ref<uint8>(uList, uListOffset + 6)  = worldId;
-                        ref<uint8>(uList, uListOffset + 7)  = charIdExtra;
+                        ref<uint32>(uList, 16 * (i + 1)) = contentId;
+                        ref<uint16>(uList, 20 * (i + 1)) = charIdMain;
+                        ref<uint8>(uList, 22 * (i + 1))  = worldId;
+                        ref<uint8>(uList, 23 * (i + 1))  = charIdExtra;
 
                         // CharList is sent through view socket (to the FFXI client)
                         uint32 charListOffset = 32 + i * 140;
@@ -345,7 +343,29 @@ int32 lobbydata_parse(int32 fd)
 
                     ShowInfo("lobbydata_parse: zoneid:(%u),zoneip:(%s),zoneport:(%u) for char:(%u)", ZoneID, ip2str(ntohl(ZoneIP)), ZonePort, charid);
 
-                    if (maint_config.maint_mode == 0 || gmlevel > 0)
+                    // Check the number of sessions
+                    uint16 sessionCount = 0;
+
+                    fmtQuery = "SELECT COUNT(client_addr) \
+                                FROM accounts_sessions \
+                                WHERE client_addr = %u;";
+
+                    if (sql->Query(fmtQuery, sd->client_addr) != SQL_ERROR && sql->NumRows() != 0)
+                    {
+                        sql->NextRow();
+                        sessionCount = (uint16)sql->GetIntData(0);
+                    }
+
+                    bool isNotMaint   = maint_config.maint_mode == 0;
+                    bool loginLimitOK = (login_config.login_limit == 0 || sessionCount < login_config.login_limit);
+                    bool isGM         = gmlevel > 0;
+
+                    if (!loginLimitOK)
+                    {
+                        ShowWarning("Already %u active session(s) for %s (Limit is %u)", sessionCount, sd->login, login_config.login_limit);
+                    }
+
+                    if ((isNotMaint && loginLimitOK) || isGM)
                     {
                         if (PrevZone == 0)
                         {
@@ -601,7 +621,10 @@ int32 lobbyview_parse(int32 fd)
                     unsigned char MainReservePacket[0x28];
                     LOBBBY_ERROR_MESSAGE(ReservePacket);
                     ref<uint16>(ReservePacket, 32) = 332;
-                    std::memcpy(MainReservePacket, ReservePacket, sendsize);
+
+                    std::memset(MainReservePacket, 0, sizeof(MainReservePacket));
+                    std::memcpy(MainReservePacket, ReservePacket, sizeof(ReservePacket));
+
                     sessions[fd]->wdata.assign((const char*)MainReservePacket, sendsize);
                     RFIFOSKIP(fd, sessions[fd]->rdata.size());
                     RFIFOFLUSH(fd);
@@ -812,7 +835,6 @@ int32 lobby_createchar(login_session_data_t* loginsd, int8* buf)
     char_mini createchar;
 
     std::memcpy(createchar.m_name, loginsd->charname, 16);
-    std::memset(&createchar.m_look, 0, sizeof(look_t));
 
     createchar.m_look.race = ref<uint8>(buf, 48);
     createchar.m_look.size = ref<uint8>(buf, 57);

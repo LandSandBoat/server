@@ -244,7 +244,7 @@ local function handleCappedTierSet(player, gearset, matches)
         elseif (matches > 3) then
             modValue = 10 -- 4 or 5 pieces
         end
-        -- printf("we have a special snowflake | gearset: %u | mod %u %u", gearset.id, xi.mod.FASTCAST, modValue)
+
         player:addGearSetMod(gearset.id, xi.mod.FASTCAST, modValue)
         return
     -- AF1 119+2/+3 ACC/RACC/MACC Sets EXCEPT SMN
@@ -324,18 +324,16 @@ local function ApplyMod(player, gearset, matches)
         if (addMatches ~= 0 and addMatchValue ~= 0) then
             modValue = modValue + (addMatchValue * addMatches)
         end
-        -- printf("gearset: %u, mod: %u, value %u", gearset.id, modId, modValue + addSetBonus)
+
         player:addGearSetMod(gearset.id + i, modId, modValue + addSetBonus)
         i = i + 1
     end
-    -- print("Gear set! Mod applied: ModNameId:" .. modNameId .. " ModId:" .. modId .. " Value:" .. modValue .. "\n")
 end
 
 -----------------------------------
 -- Checks for gear sets present on a player
 -----------------------------------
 xi.gear_sets.checkForGearSet = function(player)
-    -- print("---Removed existing gear set mods!---\n")
     player:clearGearSetMods()
 
     -- cause we dont want hundreds of function calls

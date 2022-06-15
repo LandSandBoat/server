@@ -34,20 +34,23 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../mob_spell_container.h"
 #include "../mob_spell_list.h"
 #include "../packets/char_health.h"
+#include "../packets/entity_set_name.h"
 #include "../packets/entity_update.h"
-#include "../packets/trust_sync.h"
 #include "../recast_container.h"
 #include "../status_effect_container.h"
 #include "../utils/battleutils.h"
 #include "../utils/trustutils.h"
 
 CTrustEntity::CTrustEntity(CCharEntity* PChar)
+: CMobEntity()
 {
     objtype        = TYPE_TRUST;
     m_EcoSystem    = ECOSYSTEM::UNCLASSIFIED;
     allegiance     = ALLEGIANCE_TYPE::PLAYER;
     m_MobSkillList = 0;
     PMaster        = PChar;
+    m_MovementType = MELEE_RANGE;
+
     PAI            = std::make_unique<CAIContainer>(this, std::make_unique<CPathFind>(this), std::make_unique<CTrustController>(PChar, this),
                                          std::make_unique<CTargetFind>(this));
 }
@@ -102,7 +105,7 @@ void CTrustEntity::Spawn()
     // we need to skip CMobEntity's spawn because it calculates stats (and our stats are already calculated)
     CBattleEntity::Spawn();
     luautils::OnMobSpawn(this);
-    ((CCharEntity*)PMaster)->pushPacket(new CTrustSyncPacket((CCharEntity*)PMaster, this));
+    ((CCharEntity*)PMaster)->pushPacket(new CEntitySetNamePacket(this));
 }
 
 void CTrustEntity::OnAbility(CAbilityState& state, action_t& action)
@@ -447,6 +450,11 @@ bool CTrustEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
     }
 
     if ((targetFlags & TARGET_PLAYER_PARTY_ENTRUST) && PInitiator->allegiance == allegiance && PMaster && PInitiator != this)
+    {
+        return true;
+    }
+
+    if ((targetFlags & TARGET_PLAYER_PARTY_ENTRUST) && PInitiator->objtype == TYPE_TRUST && PInitiator->allegiance == allegiance)
     {
         return true;
     }

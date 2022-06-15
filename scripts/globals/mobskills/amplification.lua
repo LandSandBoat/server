@@ -28,8 +28,6 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     else
         mdbTotal = 10
     end
-    -- print(mabTotal)
-    -- print(mdbTotal)
 
     skill:setMsg(xi.mobskills.mobBuffMove(mob, typeEffect1, mabTotal, 0, 180))
     xi.mobskills.mobBuffMove(mob, typeEffect2, mdbTotal, 0, 180)

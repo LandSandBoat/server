@@ -145,7 +145,7 @@ entity.onMobFight = function(mob, target)
         -- Increment astral
         mob:setLocalVar("astralFlow", astral + 1)
 
-    -- Or, at least make sure pets weren't drug off...
+    -- Or, at least make sure pets weren't drug off
     else
         --[[ Unused
         for i = 1, 8 do
@@ -169,7 +169,6 @@ entity.onMobFight = function(mob, target)
             end
         end
         DespawnMob(ID.mob.PANDEMONIUM_WARDEN)
-    --  printf("Timer expired at %i. Despawning Pandemonium Warden.", depopTime)
     end
 end
 

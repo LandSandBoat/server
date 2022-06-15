@@ -173,7 +173,7 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if player:getLocalVar("CERNUNNOS_DEFEATED") == 1 then
-                        -- TODO: This CS looks strange, the Treant is blocking the camera...
+                        -- TODO: This CS looks strange, the Treant is blocking the camera.
                         return mission:progressEvent(34, 104, 300, 200, 100, 0, 1648, 0, 0) -- TODO: What is this?
                     else
                         local mob = GetMobByID(presentJugnerID.mob.CERNUNNOS)

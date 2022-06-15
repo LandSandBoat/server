@@ -81,24 +81,41 @@ class CBattleEntity;
 class CBattlefieldHandler;
 class CZone;
 
-typedef struct
+struct BattlefieldMob_t
 {
     CMobEntity*             PMob;
     BATTLEFIELDMOBCONDITION condition; // whether it has died or not
-} BattlefieldMob_t;
 
-typedef struct
+    BattlefieldMob_t()
+    : condition(CONDITION_NONE)
+    {
+        PMob = nullptr;
+    }
+};
+
+struct BattlefieldRecord_t
 {
     std::string name;
     size_t      partySize;
     duration    time;
-} BattlefieldRecord_t;
 
-typedef struct
+    BattlefieldRecord_t()
+    : partySize(0)
+    , time(std::chrono::minutes(30))
+    {
+    }
+};
+
+struct BattlefieldInitiator_t
 {
     std::string name;
     uint32      id;
-} BattlefieldInitiator_t;
+
+    BattlefieldInitiator_t()
+    {
+        id = 0;
+    }
+};
 
 class CBattlefield : public std::enable_shared_from_this<CBattlefield>
 {
