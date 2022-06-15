@@ -739,7 +739,9 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
     position_t actionOffset = {
         data.ref<float>(0x10),
         data.ref<float>(0x14),
-        data.ref<float>(0x18)
+        data.ref<float>(0x18),
+        0, // packet only contains x/y/z
+        0, //
     };
 
     constexpr auto actionToStr = [](uint8 actionIn)
@@ -854,7 +856,7 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
             if (spellID >= SpellID::Geo_Regen && spellID <= SpellID::Geo_Gravity)
             {
                 // reset the action offset position to prevent other spells from using previous position data
-                PChar->m_ActionOffsetPos = { 0, 0, 0 };
+                PChar->m_ActionOffsetPos = {};
 
                 // Need to set the target position plus offset for positioning correctly
                 auto* PTarget = dynamic_cast<CBattleEntity*>(PChar->GetEntity(TargID));
@@ -864,7 +866,9 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
                     PChar->m_ActionOffsetPos = {
                         PTarget->loc.p.x + actionOffset.x,
                         PTarget->loc.p.y + actionOffset.y,
-                        PTarget->loc.p.z + actionOffset.z
+                        PTarget->loc.p.z + actionOffset.z,
+                        0, // packet only contains x/y/z
+                        0, //
                     };
                 }
             }
@@ -3686,7 +3690,7 @@ void SmallPacket0x05E(map_session_data_t* const PSession, CCharEntity* const PCh
             {
                 PChar->m_moghouseID    = 0;
                 PChar->loc.destination = destinationZone;
-                memset(&PChar->loc.p, 0, sizeof(PChar->loc.p));
+                PChar->loc.p = {};
             }
             else
             {
@@ -5359,8 +5363,8 @@ void SmallPacket0x0C4(map_session_data_t* const PSession, CCharEntity* const PCh
             int8 DecodedName[DecodeStringLength];
             int8 EncodedName[LinkshellStringLength];
 
-            memset(DecodedName, 0, sizeof(DecodedName));
-            memset(EncodedName, 0, sizeof(EncodedName));
+            memset(&DecodedName, 0, sizeof(DecodedName));
+            memset(&EncodedName, 0, sizeof(EncodedName));
 
             DecodeStringLinkshell(data[12], DecodedName);
             EncodeStringLinkshell(DecodedName, EncodedName);
