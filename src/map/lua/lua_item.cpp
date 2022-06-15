@@ -268,7 +268,7 @@ auto CLuaItem::getSignature() -> std::string
 {
     int8 signature[DecodeStringLength];
 
-    memset(signature, 0, sizeof(signature));
+    memset(&signature, 0, sizeof(signature));
     if (m_PLuaItem->isType(ITEM_LINKSHELL))
     {
         DecodeStringLinkshell((int8*)m_PLuaItem->getSignature(), signature);

@@ -80,6 +80,8 @@ set(PACKET_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/entity_animation.h
     ${CMAKE_CURRENT_SOURCE_DIR}/entity_enable_list.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/entity_enable_list.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/entity_set_name.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/entity_set_name.h
     ${CMAKE_CURRENT_SOURCE_DIR}/entity_update.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/entity_update.h
     ${CMAKE_CURRENT_SOURCE_DIR}/entity_visual.cpp
@@ -232,8 +234,6 @@ set(PACKET_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/treasure_find_item.h
     ${CMAKE_CURRENT_SOURCE_DIR}/treasure_lot_item.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/treasure_lot_item.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/trust_sync.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/trust_sync.h
     ${CMAKE_CURRENT_SOURCE_DIR}/weather.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/weather.h
     ${CMAKE_CURRENT_SOURCE_DIR}/wide_scan.cpp

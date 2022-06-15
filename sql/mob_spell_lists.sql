@@ -4151,38 +4151,20 @@ INSERT INTO `mob_spell_lists` VALUES ('Nepionic_Soulflayer',460,274,1,60); -- sl
 
 INSERT INTO `mob_spell_lists` VALUES ('Bombast',461,235,1,255); -- sleepga_II
 
-INSERT INTO `mob_spell_lists` VALUES('Cherukiki_COP', 462, 4, 1, 255); -- Cure IV
-INSERT INTO `mob_spell_lists` VALUES('Cherukiki_COP', 462, 21, 1, 255); -- Holy
-INSERT INTO `mob_spell_lists` VALUES('Cherukiki_COP', 462, 34, 1, 255); -- Diaga II
-INSERT INTO `mob_spell_lists` VALUES('Cherukiki_COP', 462, 39, 1, 255); -- Banishga II
-INSERT INTO `mob_spell_lists` VALUES('Cherukiki_COP', 462, 46, 1, 255); -- Protect IV
-INSERT INTO `mob_spell_lists` VALUES('Cherukiki_COP', 462, 50, 1, 255); -- Shell III
-INSERT INTO `mob_spell_lists` VALUES('Cherukiki_COP', 462, 56, 1, 255); -- Slow
-INSERT INTO `mob_spell_lists` VALUES('Cherukiki_COP', 462, 57, 1, 255); -- Haste
-INSERT INTO `mob_spell_lists` VALUES('Cherukiki_COP', 462, 58, 1, 255); -- Paralyze
-INSERT INTO `mob_spell_lists` VALUES('Cherukiki_COP', 462, 59, 1, 255); -- Silence
-INSERT INTO `mob_spell_lists` VALUES('Cherukiki_COP', 462, 111, 1, 255); -- Regen III
-INSERT INTO `mob_spell_lists` VALUES('Cherukiki_COP', 462, 112, 1, 255); -- Flash
-INSERT INTO `mob_spell_lists` VALUES('Kukki_Chebukki_COP', 463, 146, 1, 255); -- Fire III
-INSERT INTO `mob_spell_lists` VALUES('Kukki_Chebukki_COP', 463, 151, 1, 255); -- Blizzard III
-INSERT INTO `mob_spell_lists` VALUES('Kukki_Chebukki_COP', 463, 161, 1, 255); -- Stone III
-INSERT INTO `mob_spell_lists` VALUES('Kukki_Chebukki_COP', 463, 166, 1, 255); -- Thunder III
-INSERT INTO `mob_spell_lists` VALUES('Kukki_Chebukki_COP', 463, 175, 1, 255); -- Firaga II
-INSERT INTO `mob_spell_lists` VALUES('Kukki_Chebukki_COP', 463, 191, 1, 255); -- Stonega III
-INSERT INTO `mob_spell_lists` VALUES('Kukki_Chebukki_COP', 463, 195, 1, 255); -- Thundaga II
-INSERT INTO `mob_spell_lists` VALUES('Kukki_Chebukki_COP', 463, 201, 1, 255); -- Waterga III
-INSERT INTO `mob_spell_lists` VALUES('Kukki_Chebukki_COP', 463, 226, 1, 255); -- Poisonga II
-INSERT INTO `mob_spell_lists` VALUES('Kukki_Chebukki_COP', 463, 232, 1, 255); -- Bio III
-INSERT INTO `mob_spell_lists` VALUES('Kukki_Chebukki_COP', 463, 235, 1, 255); -- Burn
-INSERT INTO `mob_spell_lists` VALUES('Kukki_Chebukki_COP', 463, 236, 1, 255); -- Frost
-INSERT INTO `mob_spell_lists` VALUES('Kukki_Chebukki_COP', 463, 237, 1, 255); -- Choke
-INSERT INTO `mob_spell_lists` VALUES('Kukki_Chebukki_COP', 463, 238, 1, 255); -- Rasp
-INSERT INTO `mob_spell_lists` VALUES('Kukki_Chebukki_COP', 463, 239, 1, 255); -- Shock
-INSERT INTO `mob_spell_lists` VALUES('Kukki_Chebukki_COP', 463, 240, 1, 255); -- Drown
-INSERT INTO `mob_spell_lists` VALUES('Kukki_Chebukki_COP', 463, 245, 1, 255); -- Drain
-INSERT INTO `mob_spell_lists` VALUES('Kukki_Chebukki_COP', 463, 247, 1, 255); -- Aspir
-INSERT INTO `mob_spell_lists` VALUES('Kukki_Chebukki_COP', 463, 258, 1, 255); -- Bind
-INSERT INTO `mob_spell_lists` VALUES('Kukki_Chebukki_COP', 463, 274, 1, 255); -- Sleepga II
+INSERT INTO `mob_spell_lists` VALUES('Goblin_Wolfman', 462, 245, 10, 255);
+INSERT INTO `mob_spell_lists` VALUES('Goblin_Wolfman', 462, 247, 20, 255);
+INSERT INTO `mob_spell_lists` VALUES('Goblin_Wolfman', 462, 252, 20, 255);
+INSERT INTO `mob_spell_lists` VALUES('Goblin_Wolfman', 462, 266, 43, 255);
+INSERT INTO `mob_spell_lists` VALUES('Goblin_Wolfman', 462, 267, 41, 255);
+INSERT INTO `mob_spell_lists` VALUES('Goblin_Wolfman', 462, 268, 35, 255);
+INSERT INTO `mob_spell_lists` VALUES('Goblin_Wolfman', 462, 269, 37, 255);
+INSERT INTO `mob_spell_lists` VALUES('Goblin_Wolfman', 462, 270, 39, 255);
+INSERT INTO `mob_spell_lists` VALUES('Goblin_Wolfman', 462, 271, 31, 255);
+INSERT INTO `mob_spell_lists` VALUES('Goblin_Wolfman', 462, 272, 33, 255);
+INSERT INTO `mob_spell_lists` VALUES('Goblin_Wolfman', 462, 275, 45, 255);
+INSERT INTO `mob_spell_lists` VALUES('Goblin_Collector', 463, 35, 45, 255);
+INSERT INTO `mob_spell_lists` VALUES('Goblin_Collector', 463, 21, 45, 255);
+INSERT INTO `mob_spell_lists` VALUES('Goblin_Collector', 463, 40, 45, 255);
 
 -- CoP 5-3L Head Wind (Boneyard Gulley) -- Shikaree X (Used Capture from FFXI Captures Discord)
 INSERT INTO `mob_spell_lists` VALUES ('Shikaree_X',464,344,1,255); -- Hojo: Ichi
@@ -4219,6 +4201,21 @@ INSERT INTO `mob_spell_lists` VALUES ('Shikaree_Z',466,33,1,255); -- Diaga
 INSERT INTO `mob_spell_lists` VALUES ('Shikaree_Z',466,14,1,255); -- Poisona
 INSERT INTO `mob_spell_lists` VALUES ('Shikaree_Z',466,15,1,255); -- Paralyna
 INSERT INTO `mob_spell_lists` VALUES ('Shikaree_Z',466,55,1,255); -- Aquaveil
+
+INSERT INTO `mob_spell_lists` VALUES('Ixzdei_BLM', 467, 147, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ixzdei_BLM', 467, 152, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ixzdei_BLM', 467, 157, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ixzdei_BLM', 467, 162, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ixzdei_BLM', 467, 167, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ixzdei_BLM', 467, 172, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ixzdei_BLM', 467, 176, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ixzdei_BLM', 467, 181, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ixzdei_BLM', 467, 186, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ixzdei_BLM', 467, 191, 1, 255);
+
+INSERT INTO `mob_spell_lists` VALUES('Ixzdei_RDM', 468, 191, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ixzdei_RDM', 468, 260, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ixzdei_RDM', 468, 254, 1, 255);
 
 INSERT INTO `mob_spell_lists` VALUES ('ixghrah_Manafont_spells', 469, 274, 1, 255); -- sleepga_ii
 INSERT INTO `mob_spell_lists` VALUES ('ixghrah_Manafont_spells', 470, 40, 1, 255); -- banishga_iii
@@ -4291,6 +4288,44 @@ INSERT INTO `mob_spell_lists` VALUES('Ghrah_Fire',484,147,1,255);
 INSERT INTO `mob_spell_lists` VALUES('Ghrah_Fire',484,176,1,255);
 INSERT INTO `mob_spell_lists` VALUES('Ghrah_Fire',484,204,1,255);
 INSERT INTO `mob_spell_lists` VALUES('Ghrah_Fire',484,235,1,255);
+
+INSERT INTO `mob_spell_lists` VALUES('Sword_Sorcerer_Solisoq', 485, 21, 45, 255);
+INSERT INTO `mob_spell_lists` VALUES('Sword_Sorcerer_Solisoq', 485, 34, 45, 255);
+
+INSERT INTO `mob_spell_lists` VALUES('Cherukiki_COP', 486, 4, 1, 255); -- Cure IV
+INSERT INTO `mob_spell_lists` VALUES('Cherukiki_COP', 486, 21, 1, 255); -- Holy
+INSERT INTO `mob_spell_lists` VALUES('Cherukiki_COP', 486, 34, 1, 255); -- Diaga II
+INSERT INTO `mob_spell_lists` VALUES('Cherukiki_COP', 486, 39, 1, 255); -- Banishga II
+INSERT INTO `mob_spell_lists` VALUES('Cherukiki_COP', 486, 46, 1, 255); -- Protect IV
+INSERT INTO `mob_spell_lists` VALUES('Cherukiki_COP', 486, 50, 1, 255); -- Shell III
+INSERT INTO `mob_spell_lists` VALUES('Cherukiki_COP', 486, 56, 1, 255); -- Slow
+INSERT INTO `mob_spell_lists` VALUES('Cherukiki_COP', 486, 57, 1, 255); -- Haste
+INSERT INTO `mob_spell_lists` VALUES('Cherukiki_COP', 486, 58, 1, 255); -- Paralyze
+INSERT INTO `mob_spell_lists` VALUES('Cherukiki_COP', 486, 59, 1, 255); -- Silence
+INSERT INTO `mob_spell_lists` VALUES('Cherukiki_COP', 486, 111, 1, 255); -- Regen III
+INSERT INTO `mob_spell_lists` VALUES('Cherukiki_COP', 486, 112, 1, 255); -- Flash
+INSERT INTO `mob_spell_lists` VALUES('Kukki_Chebukki_COP', 487, 146, 1, 255); -- Fire III
+INSERT INTO `mob_spell_lists` VALUES('Kukki_Chebukki_COP', 487, 151, 1, 255); -- Blizzard III
+INSERT INTO `mob_spell_lists` VALUES('Kukki_Chebukki_COP', 487, 161, 1, 255); -- Stone III
+INSERT INTO `mob_spell_lists` VALUES('Kukki_Chebukki_COP', 487, 166, 1, 255); -- Thunder III
+INSERT INTO `mob_spell_lists` VALUES('Kukki_Chebukki_COP', 487, 175, 1, 255); -- Firaga II
+INSERT INTO `mob_spell_lists` VALUES('Kukki_Chebukki_COP', 487, 191, 1, 255); -- Stonega III
+INSERT INTO `mob_spell_lists` VALUES('Kukki_Chebukki_COP', 487, 195, 1, 255); -- Thundaga II
+INSERT INTO `mob_spell_lists` VALUES('Kukki_Chebukki_COP', 487, 201, 1, 255); -- Waterga III
+INSERT INTO `mob_spell_lists` VALUES('Kukki_Chebukki_COP', 487, 226, 1, 255); -- Poisonga II
+INSERT INTO `mob_spell_lists` VALUES('Kukki_Chebukki_COP', 487, 232, 1, 255); -- Bio III
+INSERT INTO `mob_spell_lists` VALUES('Kukki_Chebukki_COP', 487, 235, 1, 255); -- Burn
+INSERT INTO `mob_spell_lists` VALUES('Kukki_Chebukki_COP', 487, 236, 1, 255); -- Frost
+INSERT INTO `mob_spell_lists` VALUES('Kukki_Chebukki_COP', 487, 237, 1, 255); -- Choke
+INSERT INTO `mob_spell_lists` VALUES('Kukki_Chebukki_COP', 487, 238, 1, 255); -- Rasp
+INSERT INTO `mob_spell_lists` VALUES('Kukki_Chebukki_COP', 487, 239, 1, 255); -- Shock
+INSERT INTO `mob_spell_lists` VALUES('Kukki_Chebukki_COP', 487, 240, 1, 255); -- Drown
+INSERT INTO `mob_spell_lists` VALUES('Kukki_Chebukki_COP', 487, 245, 1, 255); -- Drain
+INSERT INTO `mob_spell_lists` VALUES('Kukki_Chebukki_COP', 487, 247, 1, 255); -- Aspir
+INSERT INTO `mob_spell_lists` VALUES('Kukki_Chebukki_COP', 487, 258, 1, 255); -- Bind
+INSERT INTO `mob_spell_lists` VALUES('Kukki_Chebukki_COP', 487, 274, 1, 255); -- Sleepga II
+
+-- Next Available: 464
 
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;

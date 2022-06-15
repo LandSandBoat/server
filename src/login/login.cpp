@@ -51,9 +51,9 @@ const char* LOGIN_CONF_FILENAME   = nullptr;
 const char* VERSION_INFO_FILENAME = nullptr;
 const char* MAINT_CONF_FILENAME   = nullptr;
 
-login_config_t login_config; // main settings
-version_info_t version_info;
-maint_config_t maint_config;
+login_config_t login_config = {}; // main settings
+version_info_t version_info = {};
+maint_config_t maint_config = {};
 
 std::thread messageThread;
 
@@ -362,6 +362,10 @@ void login_config_read(const char* key, const char* value)
     {
         login_config.msg_server_ip = std::string(value);
     }
+    else if (strcmp(key, "login_limit") == 0)
+    {
+        login_config.login_limit = atoi(value);
+    }
     else if (strcmp(key, "log_user_ip") == 0)
     {
         login_config.log_user_ip = config_switch(value);
@@ -423,6 +427,7 @@ void login_config_default()
     login_config.msg_server_port    = 54003;
     login_config.msg_server_ip      = "127.0.0.1";
 
+    login_config.login_limit        = 0;
     login_config.log_user_ip        = "false";
     login_config.account_creation   = "true";
     login_config.character_deletion = "true";

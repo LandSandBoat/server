@@ -51,7 +51,8 @@
  ************************************************************************/
 
 CLinkshell::CLinkshell(uint32 id)
-: m_id(id)
+: m_postRights(0)
+, m_id(id)
 , m_color(0)
 {
 }
@@ -409,7 +410,7 @@ namespace linkshell
             PLinkshell->setColor(sql->GetIntData(1));
             int8 EncodedName[LinkshellStringLength];
 
-            memset(EncodedName, 0, sizeof(EncodedName));
+            memset(&EncodedName, 0, sizeof(EncodedName));
 
             EncodeStringLinkshell(sql->GetData(2), EncodedName);
             PLinkshell->setName(EncodedName);

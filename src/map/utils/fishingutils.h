@@ -33,6 +33,12 @@ struct lsbret_t
 { // lose/snap/break return values
     uint8 failReason;
     uint8 chance;
+
+    lsbret_t()
+    {
+        failReason = 0;
+        chance     = 0;
+    }
 };
 
 struct fishresponse_t
@@ -69,6 +75,39 @@ struct fishresponse_t
     uint32   fishingToken;    // fishing token
     uint8    distance;        // distance from player (mob/npc)
     int8     angle;           // angle variation from directly behind (mob/npc)
+
+    fishresponse_t()
+    {
+        hooked          = false;
+        areaid          = 0;
+        catchid         = 0;
+        catchtype       = 0;
+        catchlevel      = 0;
+        catchdifficulty = 0;
+        catchsizeType   = 0;
+        legendary       = false;
+        count           = 0;
+        stamina         = 0;
+        delay           = 0;
+        regen           = 0;
+        response        = 0;
+        attackdmg       = 0;
+        heal            = 0;
+        timelimit       = 0;
+        sense           = 0;
+        hooksense       = 0;
+        special         = 0;
+        successtype     = 0;
+        length          = 0;
+        weight          = 0;
+        ranking         = 0;
+        epic            = false;
+        nm              = false;
+        nmFlags         = 0;
+        fishingToken    = 0;
+        distance        = 0;
+        angle           = 0;
+    }
 };
 
 struct catchresponse_t
@@ -78,6 +117,15 @@ struct catchresponse_t
     bool   linebreak;    // Did our Line break?
     uint8  failReason;   // Why did either happen?
     uint32 fishingToken; // fishing token
+
+    catchresponse_t()
+    {
+        caught       = false;
+        rodbreak     = false;
+        linebreak    = false;
+        failReason   = 0;
+        fishingToken = 0;
+    }
 };
 
 struct fish_t
@@ -110,6 +158,37 @@ struct fish_t
     std::vector<uint16>* reqFish;         // list of required catches
     bool                 quest_only;      // is fish/item quest override only
     bool                 contest;         // is a fish ranking contest fish
+
+    fish_t()
+    {
+        fishID          = 0;
+        maxSkill        = 0;
+        difficulty      = 0;
+        baseDelay       = 0;
+        baseMove        = 0;
+        ranking         = 0;
+        minLength       = 0;
+        maxLength       = 0;
+        sizeType        = 0;
+        waterType       = 0;
+        log             = 0;
+        quest           = 0;
+        quest_status    = 0;
+        fishFlags       = 0;
+        hourPattern     = 0;
+        moonPattern     = 0;
+        monthPattern    = 0;
+        legendary       = false;
+        legendary_flags = 0;
+        item            = false;
+        maxhook         = 0;
+        rarity          = 0;
+        baitPower       = 0;
+        reqKeyItem      = 0;
+        reqFish         = nullptr;
+        quest_only      = false;
+        contest         = false;
+    }
 };
 
 struct rod_t
@@ -135,6 +214,30 @@ struct rod_t
     uint16   brokenRodId;  // Replacement broken rod ID
     bool     isMMM;        // Is Moblin Maze Monger rod? (does crazy stat mods)
     bool     legendary;    // Is Rod Legendary
+
+    rod_t()
+    {
+        rodID        = 0;
+        material     = 0;
+        sizeType     = 0;
+        rodFlags     = 0;
+        minRank      = 0;
+        maxRank      = 0;
+        fishAttack   = 0;
+        lgdBonusAtk  = 0;
+        fishRecovery = 0;
+        fishTime     = 0;
+        lgdBonusTime = 0;
+        smDelayBonus = 0;
+        smMoveBonus  = 0;
+        lgDelayBonus = 0;
+        lgMoveBonus  = 0;
+        multiplier   = 1;
+        breakable    = false;
+        brokenRodId  = 0;
+        isMMM        = false;
+        legendary    = false;
+    }
 };
 
 struct bait_t
@@ -147,6 +250,17 @@ struct bait_t
     bool     losable;   // Can the bait be lost?
     bool     isMMM;     // Is Moblin Maze Monger bait? (probably not special, haven't tested)
     uint8    rankMod;   // How much bonus ranking does bait give rod
+
+    bait_t()
+    {
+        baitID    = 0;
+        baitType  = 0;
+        maxhook   = 0;
+        baitFlags = 0;
+        losable   = false;
+        isMMM     = false;
+        rankMod   = false;
+    }
 };
 
 struct fishmob_t
@@ -173,6 +287,31 @@ struct fishmob_t
     uint16   maxLength;  // mob max length
     uint8    ranking;
     bool     questOnly; // only fishable during quest
+
+    fishmob_t()
+    {
+        mobId      = 0;
+        log        = 0;
+        quest      = 0;
+        nm         = false;
+        nmFlags    = 0;
+        areaId     = 0;
+        rarity     = 0;
+        minRespawn = 0;
+        maxRespawn = 0;
+        level      = 0;
+        difficulty = 0;
+        baseDelay  = 0;
+        baseMove   = 0;
+        reqBaitId  = 0;
+        altBaitId  = 0;
+        reqKeyItem = 0;
+        zoneId     = 0;
+        minLength  = 0;
+        maxLength  = 0;
+        ranking    = 0;
+        questOnly  = false;
+    }
 };
 
 struct fishmob_modifiers_t
@@ -180,6 +319,13 @@ struct fishmob_modifiers_t
     uint8 regenBonus;
     uint8 attackPenalty;
     uint8 healBonus;
+
+    fishmob_modifiers_t()
+    {
+        regenBonus    = 0;
+        attackPenalty = 0;
+        healBonus     = 0;
+    }
 };
 
 struct areavector_t
@@ -187,12 +333,32 @@ struct areavector_t
     float x;
     float y;
     float z;
+
+    areavector_t()
+    {
+        x = 0.f;
+        y = 0.f;
+        z = 0.f;
+    }
+
+    areavector_t(float _x, float _y, float _z)
+    {
+        x = _x;
+        y = _y;
+        z = _z;
+    }
 };
 
 struct boundarydata_t
 {
     int           count;
     areavector_t* bounds;
+
+    boundarydata_t()
+    {
+        count = 0;
+        bounds = nullptr;
+    }
 };
 
 struct fishingarea_t
@@ -207,12 +373,30 @@ struct fishingarea_t
     areavector_t  center;     // Center point for radius bound type
     uint8         radius;     // Radius for radial boundary type
     uint8         difficulty; // Difficulty of area to fish in
+
+    fishingarea_t()
+    {
+        zoneId = 0;
+        areaId = 0;
+        areatype = 0;
+        areaBounds = nullptr;
+        numBounds = 0;
+        height = 0;
+        radius = 0;
+        difficulty = 0;
+    }
 };
 
 struct fishinggroupitem_t
 {
     uint16 rarity;
     uint32 fishId;
+
+    fishinggroupitem_t()
+    {
+        rarity = 0;
+        fishId = 0;
+    }
 };
 
 struct weights_t
@@ -222,6 +406,16 @@ struct weights_t
     uint16 MobPoolWeight;
     uint16 ChestPoolWeight;
     uint16 NoCatchWeight;
+
+    weights_t()
+    {
+        FishPoolWeight  = 0;
+        ItemPoolWeight  = 0;
+        MobPoolWeight   = 0;
+        ChestPoolWeight = 0;
+        NoCatchWeight   = 0;
+
+    }
 };
 
 struct fish_pool
@@ -229,16 +423,31 @@ struct fish_pool
     uint16 quantity;
     uint16 maxQuantity;
     uint16 restockRate;
+
+    fish_pool()
+    {
+        quantity    = 0;
+        maxQuantity = 0;
+        restockRate = 0;
+    }
 };
 
 struct fishing_catch_pool
 {
     std::map<uint16, fish_pool> stock;
+
+    fishing_catch_pool()
+    {
+    }
 };
 
 struct fishing_area_pool
 {
     std::map<uint8, fishing_catch_pool> catchPools;
+
+    fishing_area_pool()
+    {
+    }
 };
 
 struct fishing_gear_t
@@ -254,6 +463,21 @@ struct fishing_gear_t
     uint32 ring2;
     uint32 ranged;
     uint32 ammo;
+
+    fishing_gear_t()
+    {
+        head   = 0;
+        neck   = 0;
+        body   = 0;
+        hands  = 0;
+        waist  = 0;
+        legs   = 0;
+        feet   = 0;
+        ring1  = 0;
+        ring2  = 0;
+        ranged = 0;
+        ammo   = 0;
+    }
 };
 
 struct big_fish_stats_t
@@ -261,6 +485,13 @@ struct big_fish_stats_t
     uint16 length;
     uint16 weight;
     bool   epic;
+
+    big_fish_stats_t()
+    {
+        length = 0;
+        weight = 0;
+        epic = false;
+    }
 };
 
 enum FISHPOOLFLAGS : uint32

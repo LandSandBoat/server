@@ -343,7 +343,43 @@ int32 lobbydata_parse(int32 fd)
 
                     ShowInfo("lobbydata_parse: zoneid:(%u),zoneip:(%s),zoneport:(%u) for char:(%u)", ZoneID, ip2str(ntohl(ZoneIP)), ZonePort, charid);
 
-                    if (maint_config.maint_mode == 0 || gmlevel > 0)
+                    // Check the number of sessions
+                    uint16 sessionCount = 0;
+
+                    fmtQuery = "SELECT COUNT(client_addr) \
+                                FROM accounts_sessions \
+                                WHERE client_addr = %u;";
+
+                    if (sql->Query(fmtQuery, sd->client_addr) != SQL_ERROR && sql->NumRows() != 0)
+                    {
+                        sql->NextRow();
+                        sessionCount = (uint16)sql->GetIntData(0);
+                    }
+
+                    fmtQuery = "SELECT UNIX_TIMESTAMP(exception) \
+                                FROM ip_exceptions \
+                                WHERE accid = %u;";
+
+                    int64 exceptionTime = 0;
+
+                    if (sql->Query(fmtQuery, sd->accid) != SQL_ERROR && sql->NumRows() != 0)
+                    {
+                        sql->NextRow();
+                        exceptionTime = sql->GetIntData(0);
+                    }
+
+                    int64_t timeStamp = std::chrono::duration_cast<std::chrono::seconds>(server_clock::now().time_since_epoch()).count();
+                    bool isNotMaint   = maint_config.maint_mode == 0;
+                    bool excepted     = exceptionTime > timeStamp;
+                    bool loginLimitOK = (login_config.login_limit == 0 || sessionCount < login_config.login_limit || excepted);
+                    bool isGM         = gmlevel > 0;
+
+                    if (!loginLimitOK)
+                    {
+                        ShowWarning("Already %u active session(s) for %s (Limit is %u)", sessionCount, sd->login, login_config.login_limit);
+                    }
+
+                    if ((isNotMaint && loginLimitOK) || isGM)
                     {
                         if (PrevZone == 0)
                         {
@@ -599,7 +635,10 @@ int32 lobbyview_parse(int32 fd)
                     unsigned char MainReservePacket[0x28];
                     LOBBBY_ERROR_MESSAGE(ReservePacket);
                     ref<uint16>(ReservePacket, 32) = 332;
-                    std::memcpy(MainReservePacket, ReservePacket, sendsize);
+
+                    std::memset(MainReservePacket, 0, sizeof(MainReservePacket));
+                    std::memcpy(MainReservePacket, ReservePacket, sizeof(ReservePacket));
+
                     sessions[fd]->wdata.assign((const char*)MainReservePacket, sendsize);
                     RFIFOSKIP(fd, sessions[fd]->rdata.size());
                     RFIFOFLUSH(fd);
@@ -810,7 +849,6 @@ int32 lobby_createchar(login_session_data_t* loginsd, int8* buf)
     char_mini createchar;
 
     std::memcpy(createchar.m_name, loginsd->charname, 16);
-    std::memset(&createchar.m_look, 0, sizeof(look_t));
 
     createchar.m_look.race = ref<uint8>(buf, 48);
     createchar.m_look.size = ref<uint8>(buf, 57);
