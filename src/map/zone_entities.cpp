@@ -1355,6 +1355,11 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_regions)
                 PCurrentMob->PEnmityContainer->Clear(PMob->id);
             }
 
+            if (PMob->PParty)
+            {
+                PMob->PParty->RemoveMember(PMob);
+            }
+
             entitiesToRelease.insert(PMob->targid);
         }
     }
