@@ -30,13 +30,13 @@
 CRoeSparkUpdatePacket::CRoeSparkUpdatePacket(CCharEntity* PChar)
 {
     this->setType(0x110);
-    this->setSize(0x14);
+    this->setSize(0x20);
 
     const char* query = "SELECT spark_of_eminence FROM char_points WHERE charid = %d";
 
     uint32 vanaTime        = CVanaTime::getInstance()->getVanaTime();
     uint32 daysSinceEpoch  = vanaTime / (60 * 60 * 24);
-    uint32 weeksSinceEpoch = (vanaTime + 86400) / 7;
+    uint32 weeksSinceEpoch = daysSinceEpoch / 7;
 
     int ret = sql->Query(query, PChar->id);
     if (ret != SQL_ERROR && sql->NextRow() == SQL_SUCCESS)
