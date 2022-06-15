@@ -28,7 +28,7 @@
 CRoeUpdatePacket::CRoeUpdatePacket(CCharEntity* PChar)
 {
     this->setType(0x111);
-    this->setSize(0x260);
+    this->setSize(0x104);
 
     /*  Each 4-bit nibble in the 4-byte chunk is labeled here. The second number is it's position.
                     (0 is the lowest order. IE the right-most bits)

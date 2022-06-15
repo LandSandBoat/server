@@ -28,7 +28,7 @@
 CRoeQuestLogPacket::CRoeQuestLogPacket(CCharEntity* PChar, uint8 order)
 {
     this->setType(0x112);
-    this->setSize(0x136);
+    this->setSize(0x88);
 
     ref<uint32>(0x84) = order;
 

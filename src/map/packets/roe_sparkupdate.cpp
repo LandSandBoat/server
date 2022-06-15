@@ -30,7 +30,7 @@
 CRoeSparkUpdatePacket::CRoeSparkUpdatePacket(CCharEntity* PChar)
 {
     this->setType(0x110);
-    this->setSize(0x20);
+    this->setSize(0x14);
 
     const char* query = "SELECT spark_of_eminence FROM char_points WHERE charid = %d";
 
