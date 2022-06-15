@@ -4758,9 +4758,11 @@ void SmallPacket0x0AA(map_session_data_t* const PSession, CCharEntity* const PCh
     TracyZoneScoped;
     uint16     itemID     = data.ref<uint16>(0x04);
     uint8      quantity   = data.ref<uint8>(0x07);
-    uint8      shopSlotID = PChar->PGuildShop->SearchItem(itemID);
-    CItemShop* item       = (CItemShop*)PChar->PGuildShop->GetItem(shopSlotID);
-    CItem*     gil        = PChar->getStorage(LOC_INVENTORY)->GetItem(0);
+
+    if (!PChar->PGuildShop)
+    {
+        return;
+    }
 
     CItem* PItem = itemutils::GetItemPointer(itemID);
     if (PItem == nullptr)
