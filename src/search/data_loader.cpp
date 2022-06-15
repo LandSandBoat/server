@@ -586,13 +586,9 @@ struct ListingToExpire
 
 void CDataLoader::ExpireAHItems(uint16 expireAgeInDays)
 {
-    ShowMessage(fmt::format("Expiring auction house listings over {} days old", expireAgeInDays).c_str());
+    ShowInfo(fmt::format("Expiring auction house listings over {} days old", expireAgeInDays).c_str());
 
-    auto sql2 = std::make_unique<SqlConnection>(search_config.mysql_login.c_str(),
-                                                search_config.mysql_password.c_str(),
-                                                search_config.mysql_host.c_str(),
-                                                search_config.mysql_port,
-                                                search_config.mysql_database.c_str());
+    auto sql2 = std::make_unique<SqlConnection>();
 
     std::vector<ListingToExpire> listingsToExpire;
 
@@ -640,5 +636,5 @@ void CDataLoader::ExpireAHItems(uint16 expireAgeInDays)
             }
         }
     }
-    ShowMessage("Sent %u expired auction house listings back to sellers", expiredAuctions);
+    ShowInfo("Sent %u expired auction house listings back to sellers", expiredAuctions);
 }

@@ -4,7 +4,7 @@
 -- Legion NPC
 -- !pos 240 24.399 468
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/titles")
 -----------------------------------

@@ -39,8 +39,8 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("ForevertoHold_Event", 1)
     elseif (csid == 126) then
         player:addTitle(xi.title.QIJIS_FRIEND)
-        player:addGil(xi.settings.GIL_RATE * 300)
-        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 300)
+        player:addGil(xi.settings.main.GIL_RATE * 300)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 300)
         player:addFame(xi.quest.fame_area.BASTOK, 80)
         player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.FOREVER_TO_HOLD)
     end

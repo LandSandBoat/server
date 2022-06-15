@@ -179,7 +179,7 @@ namespace moduleutils
                 if (lua["cmdprops"].valid() && lua["onTrigger"].valid())
                 {
                     auto commandName = path.filename().replace_extension("").generic_string();
-                    ShowScript(fmt::format("Registering module command: !{}", commandName));
+                    ShowDebug(fmt::format("Registering module command: !{}", commandName));
                     CCommandHandler::registerCommand(commandName, relPath);
                     continue;
                 }

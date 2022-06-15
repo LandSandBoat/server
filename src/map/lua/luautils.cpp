@@ -208,8 +208,8 @@ namespace luautils
 
         // Load globals
         // Truly global files first
-        // lua.safe_script_file("./scripts/globals/common.lua", &sol::script_pass_on_error);
-        // roeutils::init(); // TODO: Get rid of the need to do this
+        lua.safe_script_file("./scripts/globals/common.lua", &sol::script_pass_on_error);
+        roeutils::init(); // TODO: Get rid of the need to do this
 
         // Then the rest...
         for (auto entry : std::filesystem::directory_iterator("./scripts/globals"))

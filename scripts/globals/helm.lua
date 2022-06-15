@@ -10,7 +10,7 @@ require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/roe")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/zone")
 require("scripts/missions/amk/helpers")
@@ -39,8 +39,8 @@ local helmInfo =
         id = "HARVESTING",
         animation = xi.emote.HARVESTING,
         mod = xi.mod.HARVESTING_RESULT,
-        settingRate = xi.settings.HARVESTING_RATE,
-        settingBreak = xi.settings.HARVESTING_BREAK_CHANCE,
+        settingRate = xi.settings.main.HARVESTING_RATE,
+        settingBreak = xi.settings.main.HARVESTING_BREAK_CHANCE,
         message = "HARVESTING_IS_POSSIBLE_HERE",
         tool = 1020,
         zone =
@@ -331,8 +331,8 @@ local helmInfo =
         id = "EXCAVATION",
         animation = xi.emote.EXCAVATION,
         mod = nil,
-        settingRate = xi.settings.EXCAVATION_RATE,
-        settingBreak = xi.settings.EXCAVATION_BREAK_CHANCE,
+        settingRate = xi.settings.main.EXCAVATION_RATE,
+        settingBreak = xi.settings.main.EXCAVATION_BREAK_CHANCE,
         message = "MINING_IS_POSSIBLE_HERE",
         tool = 605,
         zone =
@@ -465,8 +465,8 @@ local helmInfo =
         id = "LOGGING",
         animation = xi.emote.LOGGING,
         mod = xi.mod.LOGGING_RESULT,
-        settingRate = xi.settings.LOGGING_RATE,
-        settingBreak = xi.settings.LOGGING_BREAK_CHANCE,
+        settingRate = xi.settings.main.LOGGING_RATE,
+        settingBreak = xi.settings.main.LOGGING_BREAK_CHANCE,
         message = "LOGGING_IS_POSSIBLE_HERE",
         tool = 1021,
         zone =
@@ -892,8 +892,8 @@ local helmInfo =
         id = "MINING",
         animation = xi.emote.EXCAVATION,
         mod = xi.mod.MINING_RESULT,
-        settingRate = xi.settings.MINING_RATE,
-        settingBreak = xi.settings.MINING_BREAK_CHANCE,
+        settingRate = xi.settings.main.MINING_RATE,
+        settingBreak = xi.settings.main.MINING_BREAK_CHANCE,
         message = "MINING_IS_POSSIBLE_HERE",
         tool = 605,
         zone =
@@ -1451,7 +1451,7 @@ xi.helm.onTrade = function(player, npc, trade, helmType, csid, func)
         end
 
         -- AMK04
-        if xi.settings.ENABLE_AMK == 1 then
+        if xi.settings.main.ENABLE_AMK == 1 then
             xi.amk.helpers.helmTrade(player, helmType, broke)
         end
 

@@ -151,7 +151,7 @@ namespace settings
             // clang-format on
         }
 
-        ShowError(fmt::format("Failed to look up setting key: {}, using default value: {}", name, out).c_str());
+        ShowError(fmt::format("Settings: Failed to look up key: {}, using default value: \"{}\"", name, out).c_str());
         return T();
     }
 } // namespace settings

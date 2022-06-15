@@ -3,7 +3,7 @@
 -- Item: High Breath Mantle
 -- Item Effect: HP+38 / Enmity+5
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
 local item_object = {}

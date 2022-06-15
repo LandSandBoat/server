@@ -276,7 +276,7 @@ int32 main(int32 argc, char** argv)
     });
     // clang-format on
 
-    ShowMessage("========================================================");
+    ShowInfo("========================================================");
 
     while (true)
     {
@@ -834,7 +834,7 @@ void TaskManagerThread()
 int32 ah_cleanup(time_point tick, CTaskMgr::CTask* PTask)
 {
     CDataLoader data;
-    data.ExpireAHItems(search_config.expire_days);
+    data.ExpireAHItems(settings::get<uint16>("search.EXPIRE_DAYS"));
 
     return 0;
 }

@@ -809,7 +809,7 @@ xi.abyssea.setBonusLights = function(player)
     local lightTable = {}
 
     for _, v in ipairs(xi.abyssea.lightType) do
-        lightTable[v] = xi.settings.ABYSSEA_BONUSLIGHT_AMOUNT
+        lightTable[v] = xi.settings.main.ABYSSEA_BONUSLIGHT_AMOUNT
     end
 
     setLightsFromTable(player, lightTable)

@@ -6,7 +6,7 @@
 -- BEAUCEDINE_GLACIER_S : !zone 136
 -----------------------------------
 require('scripts/globals/missions')
-require('scripts/settings/main')
+require('scripts/globals/settings')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------

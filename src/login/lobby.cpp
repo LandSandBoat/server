@@ -159,7 +159,7 @@ int32 lobbydata_parse(int32 fd)
                 LOBBY_A1_RESERVEPACKET(ReservePacket);
 
                 // server's name that shows in lobby menu
-                auto serverName = settings::get<std::string>("map.SERVER_NAME");
+                auto serverName = settings::get<std::string>("main.SERVER_NAME");
                 std::memcpy(ReservePacket + 60, serverName.c_str(), std::clamp<size_t>(serverName.length(), 0, 15));
 
                 // Prepare the character list data..
@@ -364,12 +364,12 @@ int32 lobbydata_parse(int32 fd)
                                 FROM ip_exceptions \
                                 WHERE accid = %u;";
 
-                    int64 exceptionTime = 0;
+                    uint64 exceptionTime = 0;
 
                     if (sql->Query(fmtQuery, sd->accid) != SQL_ERROR && sql->NumRows() != 0)
                     {
                         sql->NextRow();
-                        exceptionTime = sql->GetIntData(0);
+                        exceptionTime = sql->GetUInt64Data(0);
                     }
 
                     uint64 timeStamp    = std::chrono::duration_cast<std::chrono::seconds>(server_clock::now().time_since_epoch()).count();
@@ -700,7 +700,7 @@ int32 lobbyview_parse(int32 fd)
             {
                 LOBBY_024_RESERVEPACKET(ReservePacket);
 
-                auto serverName = settings::get<std::string>("map.SERVER_NAME");
+                auto serverName = settings::get<std::string>("main.SERVER_NAME");
                 std::memcpy(ReservePacket + 36, serverName.c_str(), std::clamp<size_t>(serverName.length(), 0, 15));
 
                 unsigned char Hash[16];

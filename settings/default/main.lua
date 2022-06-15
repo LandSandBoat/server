@@ -25,16 +25,16 @@ xi.settings.main =
     RESTRICT_CONTENT = 0,
 
     -- Enable Expansion (1 = Enabled, 0 = Disabled)
-    ENABLE_COP       = true,
-    ENABLE_TOAU      = true,
-    ENABLE_WOTG      = true,
-    ENABLE_ACP       = true,
-    ENABLE_AMK       = true,
-    ENABLE_ASA       = true,
-    ENABLE_ABYSSEA   = true,
-    ENABLE_SOA       = true,
-    ENABLE_ROV       = true,
-    ENABLE_VOIDWATCH = true, -- Not an expansion, but has its own storyline. (Not Implemented)
+    ENABLE_COP       = 1,
+    ENABLE_TOAU      = 1,
+    ENABLE_WOTG      = 1,
+    ENABLE_ACP       = 1,
+    ENABLE_AMK       = 1,
+    ENABLE_ASA       = 1,
+    ENABLE_ABYSSEA   = 1,
+    ENABLE_SOA       = 1,
+    ENABLE_ROV       = 1,
+    ENABLE_VOIDWATCH = 1, -- Not an expansion, but has its own storyline. (Not Implemented)
 
     -- FIELDS OF VALOR/Grounds of Valor settings
     ENABLE_FIELD_MANUALS  = 1, -- Enables Fields of Valor
