@@ -28,7 +28,6 @@
 #include "../packets/char_sync.h"
 #include "../packets/entity_update.h"
 #include "../packets/message_standard.h"
-#include "../packets/trust_sync.h"
 #include "../status_effect_container.h"
 #include "../weapon_skill.h"
 #include "../zone_instance.h"
