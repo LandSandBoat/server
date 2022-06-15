@@ -14,4 +14,8 @@ entity.onMobDespawn = function(mob)
     xi.mob.phOnDespawn(mob, ID.mob.AIATAR_PH, 10, 75600) -- 50 minutes
 end
 
+<<<<<<< HEAD
 return entity
+=======
+return entity
+>>>>>>> 6d39d7b186 (Aiatar)
