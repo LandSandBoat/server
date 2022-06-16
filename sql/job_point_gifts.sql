@@ -137,7 +137,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES (2, 1125, 291, 3, 'MNK_Counter Effect');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES (2, 1195, 915, 33, 'MNK_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES (2, 1200, 173, 5, 'MNK_Martial Arts Effect');
-INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES (2, 1200, 997, 44, 'MNK_Superior 4');
+INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES (2, 1200, 997, 1, 'MNK_Superior 4');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES (2, 1280, 1, 13, 'MNK_Physical Defense Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES (2, 1355, 915, 35, 'MNK_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES (2, 1360, 23, 20, 'MNK_Attack Bonus');
@@ -481,7 +481,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES (8, 30, 25, 3, 'DRK_Accuracy Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES (8, 30, 26, 3, 'DRK_Ranged Accuracy Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES (8, 45, 31, 6, 'DRK_Magic Evasion Bonus');
-INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES (8, 50, 997, 11, 'DRK_Superior 1');
+INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES (8, 50, 997, 1, 'DRK_Superior 1');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES (8, 55, 915, 9, 'DRK_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES (8, 60, 30, 6, 'DRK_Magic Accuracy Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES (8, 80, 116, 5, 'DRK_Dark Magic Skill Bonus');
@@ -977,7 +977,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES (15, 445, 915, 21, 'SMN_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES (15, 450, 993, 15, 'SMN_Avatar/Spirit Mac. Acc. & Eva. Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES (15, 500, 117, 8, 'SMN_Summoning Magic Skill Bonus');
-INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES (15, 500, 997, 33, 'SMN_Superior 3');
+INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES (15, 500, 997, 1, 'SMN_Superior 3');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES (15, 545, 915, 23, 'SMN_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES (15, 550, 958, 1, 'SMN_Avatar\'s Favor Effect');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES (15, 605, 29, 6, 'SMN_Magic Defense Bonus');
