@@ -23,7 +23,7 @@ entity.onMobFight = function(mob, player, target)
     end
 
     local playerCE = mob:getCE(player)
-    local playerBE = mob:getVE(player)
+    local playerVE = mob:getVE(player)
     if
         playerCE >= 180 or
         playerVE >= 600
