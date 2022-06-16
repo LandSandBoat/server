@@ -444,19 +444,6 @@ def adjust_auto_update_client():
             break
         bad_selection()
 
-def adjust_imports():
-    while True:
-        print(colorama.Fore.GREEN + 'The following files are marked as protected and will not be imported:')
-        for i, safe_file in enumerate(player_data):
-            print(colorama.Fore.GREEN + str(i + 1) + colorama.Style.RESET_ALL + '. ' + safe_file)
-        choice = input('Choose a number to remove it from this list, or type a file name to include it.\n> ')
-        if not choice:
-            return
-        if choice.isnumeric() and 0 < int(choice) <= len(player_data):
-            player_data.pop(int(choice) - 1)
-        else:
-            player_data.append(choice)
-
 def run_all_migrations(silent=False):
     migrations_needed = []
     print(colorama.Fore.GREEN + 'Checking migrations...')
@@ -570,7 +557,6 @@ def settings():
     print(colorama.Fore.GREEN + 'Automatic client version update for command line updates: ' + colorama.Style.RESET_ALL + str(auto_update_client))
     if input('Change this? [y/N] ').lower() == 'y':
         adjust_auto_update_client()
-    adjust_imports()
     write_configs()
 
 # TODO: Hook this up to a menu option
