@@ -168,6 +168,10 @@ set(PACKET_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/message_system.h
     ${CMAKE_CURRENT_SOURCE_DIR}/message_text.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/message_text.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/monipulator1.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/monipulator1.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/monipulator2.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/monipulator2.h
     ${CMAKE_CURRENT_SOURCE_DIR}/party_define.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/party_define.h
     ${CMAKE_CURRENT_SOURCE_DIR}/party_effects.cpp

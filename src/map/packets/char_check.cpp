@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -124,8 +124,8 @@ CCheckPacket::CCheckPacket(CCharEntity* PChar, CCharEntity* PTarget)
         ref<uint8>(0x24) = PTarget->GetMLevel();
         ref<uint8>(0x25) = PTarget->GetSLevel();
         ref<uint8>(0x26) = PTarget->GetMJob();
-        // 0x27: master level
-        // 0x28: bitflags, bit 0 = master breaker
+        ref<uint8>(0x27) = 0; // Master Level
+        ref<uint8>(0x28) = 0; // bitflags, bit 0 = Master Breaker
     }
 
     // Chevron 32 bit Big Endean, starting at 0x2B
