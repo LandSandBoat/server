@@ -253,7 +253,7 @@ xi.dynamis.dynaIDLookup = -- Used to check for different IDs based on zoneID. Re
         {
             NO_LONGER_HAVE_CLEARANCE = 7161,
         },
-    }
+    },
 }
 
 xi.dynamis.entryInfoEra =
@@ -846,7 +846,7 @@ xi.dynamis.cleanupDynamis = function(zone)
     SetServerVariable(string.format("[DYNA]Given3MinuteWarning_%s", zoneID), 0)
     SetServerVariable(string.format("[DYNA]Given1MinuteWarning_%s", zoneID), 0)
     SetServerVariable(string.format("[DYNA]OriginalRegistrant_%s", zoneID), 0)
-    -- zone:resetLocalVars()
+    zone:resetLocalVars()
     xi.dynamis.ejectAllPlayers(zone) -- Remove Players (This is precautionary but not necessary.)
     
     -- Cleanup Zone
@@ -854,10 +854,11 @@ xi.dynamis.cleanupDynamis = function(zone)
     local npcsInZone = zone:getNPCs()
     for _, mobEntity in pairs(mobsInZone) do
         DisallowRespawn(mobEntity:getID(), true) -- Stop respawns, used since we are not editing DB.
-        DespawnMob(mobEntity:getID()) -- Despawn
+        mobEntity:setUnkillable(false)
+        mobEntity:setHP(0) -- Force Kill to Release ID
     end
     for _, npcEntity in pairs(npcsInZone) do
-        npcEntity:setStatus(xi.status.INVISIBLE) -- Forces reservation of ID.
+        npcEntity:setStatus(xi.status.DISAPPEAR)
     end
 end
 

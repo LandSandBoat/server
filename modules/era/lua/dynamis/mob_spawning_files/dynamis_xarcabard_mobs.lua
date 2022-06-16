@@ -245,8 +245,8 @@ xi.dynamis.mobList[zoneID][149].info = {"Statue", "Vanguard Eye", nil, nil, nil}
 xi.dynamis.mobList[zoneID][150].info = {"Statue", "Statue Prototype", nil, nil, nil} -- (150-G)(30)     Statue Prototype
 xi.dynamis.mobList[zoneID][151].info = {"NM", "Animated Hammer",    nil, nil, nil} -- ( 151 ) Animated Hammer
 xi.dynamis.mobList[zoneID][152].info = {"NM", "Animated Dagger",    nil, nil, nil} -- ( 152 ) Animated Dagger
-xi.dynamis.mobList[zoneID][153].info = {"NM", "Animated Shield ",   nil, nil, nil} -- ( 153 ) Animated Shield
-xi.dynamis.mobList[zoneID][154].info = {"NM", "Animated Claymore ", nil, nil, nil} -- ( 154 ) Animated Claymore
+xi.dynamis.mobList[zoneID][153].info = {"NM", "Animated Shield",   nil, nil, nil} -- ( 153 ) Animated Shield
+xi.dynamis.mobList[zoneID][154].info = {"NM", "Animated Claymore", nil, nil, nil} -- ( 154 ) Animated Claymore
 xi.dynamis.mobList[zoneID][155].info = {"NM", "Animated Gun",       nil, nil, nil} -- ( 155 ) Animated Gun
 xi.dynamis.mobList[zoneID][156].info = {"NM", "Animated Longbow",   nil, nil, nil} -- ( 156 ) Animated Longbow
 xi.dynamis.mobList[zoneID][157].info = {"NM", "Animated Tachi",     nil, nil, nil} -- ( 157 ) Animated Tachi
@@ -259,16 +259,16 @@ xi.dynamis.mobList[zoneID][163].info = {"NM", "Animated Great Axe", nil, nil, ni
 xi.dynamis.mobList[zoneID][164].info = {"NM", "Animated Horn",      nil, nil, nil} -- ( 164 ) Animated Horn
 xi.dynamis.mobList[zoneID][165].info = {"NM", "Animated Longsword", nil, nil, nil} -- ( 165 ) Animated Longsword
 xi.dynamis.mobList[zoneID][166].info = {"NM", "Animated Scythe",    nil, nil, nil} -- ( 166 ) Animated Scythe
-xi.dynamis.mobList[zoneID][167].info = {"TE Normal", "Vanguard Dragon", nil, nil, nil} -- ( 167 ) Vanguard Dragon
-xi.dynamis.mobList[zoneID][168].info = {"TE Normal", "Vanguard Dragon", nil, nil, nil} -- ( 168 ) Vanguard Dragon
-xi.dynamis.mobList[zoneID][169].info = {"TE Normal", "Vanguard Dragon", nil, nil, nil} -- ( 169 ) Vanguard Dragon
-xi.dynamis.mobList[zoneID][170].info = {"TE Normal", "Vanguard Dragon", nil, nil, nil} -- ( 170 ) Vanguard Dragon
-xi.dynamis.mobList[zoneID][171].info = {"TE Normal", "Vanguard Dragon", nil, nil, nil} -- ( 171 ) Vanguard Dragon
-xi.dynamis.mobList[zoneID][172].info = {"TE Normal", "Vanguard Dragon", nil, nil, nil} -- ( 172 ) Vanguard Dragon
-xi.dynamis.mobList[zoneID][173].info = {"TE Normal", "Vanguard Dragon", nil, nil, nil} -- ( 173 ) Vanguard Dragon
-xi.dynamis.mobList[zoneID][174].info = {"TE Normal", "Vanguard Dragon", nil, nil, nil} -- ( 174 ) Vanguard Dragon
-xi.dynamis.mobList[zoneID][175].info = {"TE Normal", "Vanguard Dragon", nil, nil, nil} -- ( 175 ) Vanguard Dragon
-xi.dynamis.mobList[zoneID][176].info = {"TE Normal", "Vanguard Dragon", nil, nil, nil} -- ( 176 ) Vanguard Dragon
+xi.dynamis.mobList[zoneID][167].info = {"Other", "Vanguard Dragon", nil, nil, nil} -- ( 167 ) Vanguard Dragon
+xi.dynamis.mobList[zoneID][168].info = {"Other", "Vanguard Dragon", nil, nil, nil} -- ( 168 ) Vanguard Dragon
+xi.dynamis.mobList[zoneID][169].info = {"Other", "Vanguard Dragon", nil, nil, nil} -- ( 169 ) Vanguard Dragon
+xi.dynamis.mobList[zoneID][170].info = {"Other", "Vanguard Dragon", nil, nil, nil} -- ( 170 ) Vanguard Dragon
+xi.dynamis.mobList[zoneID][171].info = {"Other", "Vanguard Dragon", nil, nil, nil} -- ( 171 ) Vanguard Dragon
+xi.dynamis.mobList[zoneID][172].info = {"Other", "Vanguard Dragon", nil, nil, nil} -- ( 172 ) Vanguard Dragon
+xi.dynamis.mobList[zoneID][173].info = {"Other", "Vanguard Dragon", nil, nil, nil} -- ( 173 ) Vanguard Dragon
+xi.dynamis.mobList[zoneID][174].info = {"Other", "Vanguard Dragon", nil, nil, nil} -- ( 174 ) Vanguard Dragon
+xi.dynamis.mobList[zoneID][175].info = {"Other", "Vanguard Dragon", nil, nil, nil} -- ( 175 ) Vanguard Dragon
+xi.dynamis.mobList[zoneID][176].info = {"Other", "Vanguard Dragon", nil, nil, nil} -- ( 176 ) Vanguard Dragon
 xi.dynamis.mobList[zoneID][177].info = {"NM", "Yang",                nil, nil, "yang_killed"} -- ( 177 ) Shadow Dragon NM (Yang)
 xi.dynamis.mobList[zoneID][178].info = {"NM", "Ying",                nil, nil, "ying_killed"} -- ( 178 ) Shadow Dragon NM (Ying)
 xi.dynamis.mobList[zoneID][179].info = {"NM", "Dynamis Lord",        nil, nil, nil} -- ( 179 ) Dynamis Lord
@@ -941,7 +941,7 @@ xi.dynamis.mobList[zoneID][173].pos = {-284.7049, -20.2053, 121.2283, 59    } --
 xi.dynamis.mobList[zoneID][174].pos = {-317.0527, -27.8170, 72.3022, 21     } -- Vanguard Dragon
 xi.dynamis.mobList[zoneID][175].pos = {-297.9739, -23.4600, -2.6931, 226    } -- Vanguard Dragon
 xi.dynamis.mobList[zoneID][176].pos = {-308.7357, -26.5187, -37.8035, 226   } -- Vanguard Dragon
-
+xi.dynamis.mobList[zoneID][179].pos = {-414.2820, -44.0000, 20.4270, 0      } -- Dynamis Lord
 
 ----------------------------------------------------------------------------------------------------
 --                                    Setup of Mob Functions                                      --
@@ -950,7 +950,7 @@ xi.dynamis.mobList[zoneID][176].pos = {-308.7357, -26.5187, -37.8035, 226   } --
 --             Patrol Paths             --
 ------------------------------------------
 -- xi.dynamis.mobList[zoneID][MobIndex].patrolPath = {xpos1,ypos1,zpos1, xpos2,ypos2,zpos2,  xpos3,ypos3,zpos3}
-
+xi.dynamis.mobList[zoneID].patrolPaths = { }
 ------------------------------------------
 --          Statue Eye Colors           --
 ------------------------------------------

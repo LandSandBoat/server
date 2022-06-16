@@ -21,10 +21,6 @@ xi.dynamis.onSpawnAngra = function(mob)
     })
 end
 
-xi.dynamis.onEngagedAngra = function(mob, target)
-
-end
-
 xi.dynamis.onFightAngra = function(mob, target)
     local mobIndex = mob:getLocalVar(string.format("MobIndex_%s", mob:getID()))
     local nmchildren = xi.dynamis.mobList[mob:getZoneID()][mobIndex].nmchildren

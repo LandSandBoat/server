@@ -761,7 +761,7 @@ xi.dynamis.mobList[zoneID][150].pos = {    5.0829,  2.0000,  -11.8420, 75    } -
 --             Patrol Paths             --
 ------------------------------------------
 -- xi.dynamis.mobList[zoneID][MobIndex].patrolPath = {xpos1,ypos1,zpos1, xpos2,ypos2,zpos2,  xpos3,ypos3,zpos3}
-
+xi.dynamis.mobList[zoneID].patrolPaths = { }
 --Wave 1 pathing
 xi.dynamis.mobList[zoneID][2  ].patrolPath = { 121, 0, 96,       127, 0, 102,      121, 0, 96    }
 xi.dynamis.mobList[zoneID][3  ].patrolPath = { 128, 0, 89,       134, 0, 95,       128, 0, 89    }

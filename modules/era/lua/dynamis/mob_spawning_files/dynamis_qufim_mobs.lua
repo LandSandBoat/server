@@ -862,6 +862,7 @@ xi.dynamis.mobList[zoneID][138].pos = { 165.904, 20.263, -235.467, 209  } -- ( 1
 --             Patrol Paths             --
 ------------------------------------------
 -- xi.dynamis.mobList[zoneID][MobIndex].patrolPath = {xpos1,ypos1,zpos1, xpos2,ypos2,zpos2,  xpos3,ypos3,zpos3}
+xi.dynamis.mobList[zoneID].patrolPaths = { }
 
 ------------------------------------------
 --          Statue Eye Colors           --
