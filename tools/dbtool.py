@@ -91,6 +91,7 @@ player_data = [
 ]
 
 import_files = []
+import_protected = []
 backups = []
 database = None
 host = None
@@ -228,6 +229,22 @@ def fetch_module_files():
                     if line.endswith(".sql"):
                         import_files.append(str(line).replace('\\', '/'))
 
+def check_protected():
+    global import_protected, express_enabled
+    if not cur:
+        connect()
+    import_protected.clear()
+    for table in player_data:
+        import_protected.append("'" + table[:-4] + "'")
+    cur.execute("SELECT TABLE_NAME FROM `information_schema`.`tables` WHERE `TABLE_SCHEMA` = '{}' AND `TABLE_NAME` IN ({})".format(database,', '.join(import_protected)))
+    tables = cur.fetchall()
+    import_protected.clear()
+    for value in tables:
+        import_protected.append(''.join(value) + '.sql')
+    import_protected = [value for value in player_data if value not in import_protected]
+    if import_protected:
+        express_enabled = True
+
 def fetch_files(express=False):
     import_files.clear()
     if express:
@@ -248,6 +265,7 @@ def fetch_files(express=False):
         for (_, _, filenames) in os.walk('../sql/'):
             import_files.extend(filenames)
             break
+    check_protected()
     backups.clear()
     for (_, _, filenames) in os.walk('../sql/backups/'):
         backups.extend(filenames)
@@ -376,20 +394,29 @@ def express_update(silent=False):
     update_db(silent, True)
 
 def update_db(silent=False,express=False):
+    global express_enabled
     if not silent or auto_backup:
         backup_db(silent, auto_backup == 2)
     if not express:
         fetch_files()
     if not silent:
-        print(colorama.Fore.GREEN + 'The following files will be imported:')
-        for sql_file in import_files:
-            if sql_file not in player_data:
+        if import_protected:
+            print(colorama.Fore.GREEN + 'The following PROTECTED tables could not be found and will be imported:')
+            for sql_file in import_protected:
                 print(sql_file)
+        if import_files:
+            print(colorama.Fore.GREEN + 'The following files will be imported:')
+            for sql_file in import_files:
+                if sql_file not in player_data:
+                    print(sql_file)
     if silent or input('Proceed with update? [y/N] ').lower() == 'y':
+        for sql_file in import_protected:
+            import_file(sql_file)
         for sql_file in import_files:
             if sql_file not in player_data:
                 import_file(sql_file)
         print(colorama.Fore.GREEN + 'Finished importing!')
+        express_enabled = False
         run_all_migrations(silent or express)
         write_version(silent)
 
