@@ -4248,6 +4248,12 @@ void CLuaBaseEntity::addGearSetMod(uint8 modNameId, Mod modId, uint16 modValue)
 
     CCharEntity* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
 
+    if (!PChar)
+    {
+        ShowWarning("CLuaBaseEntity::addGearSetMod() - m_pBaseEntity is not of type Char.");
+        return;
+    }
+
     for (auto& exsistingMod : PChar->m_GearSetMods)
     {
         if (gearSetMod.modNameId == exsistingMod.modNameId)
@@ -4964,9 +4970,13 @@ bool CLuaBaseEntity::getNewPlayer()
 
 void CLuaBaseEntity::setNewPlayer(bool newplayer)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-
     auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+
+    if (!PChar)
+    {
+        ShowWarning("CLuaBaseEntity::setNewPlayer() - m_pBaseEntity is not of type Char.");
+        return;
+    }
 
     if (newplayer == true)
     {
@@ -5231,9 +5241,14 @@ uint8 CLuaBaseEntity::getSubJob()
 
 void CLuaBaseEntity::changeJob(uint8 newJob)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+    auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
 
-    auto*   PChar   = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+    if (!PChar)
+    {
+        ShowWarning("CLuaBaseEntity::changeJob() - m_pBaseEntity is not of type Char.");
+        return;
+    }
+
     JOBTYPE prevjob = PChar->GetMJob();
 
     PChar->resetPetZoningInfo();
@@ -6801,7 +6816,7 @@ void CLuaBaseEntity::addKeyItem(uint16 keyItemID)
     if (table >= MAX_KEYS_TABLE)
     {
         // Bail out if an invalid keyitem is being added
-        ShowWarning("CLuaBaseEntity::addKeyItem - Attempting to add invalid key item: %d", keyItemID);
+        ShowWarning("CLuaBaseEntity::addKeyItem() - Attempting to add invalid key item: %d", keyItemID);
         return;
     }
 
@@ -6847,7 +6862,7 @@ void CLuaBaseEntity::delKeyItem(uint16 keyItemID)
     if (table >= MAX_KEYS_TABLE)
     {
         // Bail out if an invalid keyitem is being added
-        ShowWarning("CLuaBaseEntity::delKeyItem - Attempting to delete invalid key item: %d", keyItemID);
+        ShowWarning("CLuaBaseEntity::delKeyItem() - Attempting to delete invalid key item: %d", keyItemID);
         return;
     }
 
@@ -6888,7 +6903,7 @@ void CLuaBaseEntity::unseenKeyItem(uint16 keyItemID)
     if (table >= MAX_KEYS_TABLE)
     {
         // Bail out if an invalid keyitem is being added
-        ShowWarning("CLuaBaseEntity::unseenKeyItem - Attempting to unsee invalid key item: %d", keyItemID);
+        ShowWarning("CLuaBaseEntity::unseenKeyItem() - Attempting to unsee invalid key item: %d", keyItemID);
         return;
     }
 
@@ -7096,7 +7111,7 @@ uint32 CLuaBaseEntity::getGil()
     if (m_PBaseEntity->objtype == TYPE_MOB)
     {
         auto* PMob = dynamic_cast<CMobEntity*>(m_PBaseEntity);
-        if (PMob->CanStealGil())
+        if (PMob && PMob->CanStealGil())
         {
             return PMob->GetRandomGil();
         }
@@ -7691,6 +7706,12 @@ void CLuaBaseEntity::takeDamage(int32 damage, sol::object const& attacker, sol::
 
     CBattleEntity* PDefender = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
 
+    if (!PDefender)
+    {
+        ShowWarning("CLuaBaseEntity::takeDamage() - Attempt to use non-BattleEntity as PDefender.");
+        return;
+    }
+
     // Check for special flags which may prevent damage from waking up the target
     bool wakeUp        = true;
     bool breakBind     = true;
@@ -7974,11 +7995,16 @@ uint8 CLuaBaseEntity::getAverageItemLevel()
 
 void CLuaBaseEntity::capSkill(uint8 skill)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-
     if (skill < MAX_SKILLTYPE)
     {
         auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+
+        if (!PChar)
+        {
+            ShowWarning("CLuaBaseEntity::capSkill() - m_PBaseEntity is not a player.");
+            return;
+        }
+
         // CItemWeapon* PItem = ((CBattleEntity*)m_PBaseEntity)->m_Weapons[SLOT_MAIN];
         /* let's just ignore this part for the moment
         //remove modifiers if valid
@@ -9010,11 +9036,12 @@ void CLuaBaseEntity::setInstance(CLuaInstance* PLuaInstance)
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
     CInstance* PInstance     = PLuaInstance->GetInstance();
+    CCharEntity* PChar       = dynamic_cast<CCharEntity*>(m_PBaseEntity);
     m_PBaseEntity->PInstance = PInstance;
 
-    if (PInstance)
+    if (PInstance && PChar)
     {
-        PInstance->RegisterChar(dynamic_cast<CCharEntity*>(m_PBaseEntity));
+        PInstance->RegisterChar(PChar);
     }
 }
 
@@ -10703,10 +10730,14 @@ bool CLuaBaseEntity::delLatent(uint16 condID, uint16 conditionValue, uint16 mID,
 
 int16 CLuaBaseEntity::getMaxGearMod(Mod modId)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-
     CCharEntity* PChar       = dynamic_cast<CCharEntity*>(m_PBaseEntity);
     uint16       maxModValue = 0;
+
+    if (!PChar)
+    {
+        ShowWarning("CLuaBaseEntity::getMaxGearMod() - m_PBaseEntity is not a player.")
+        return 0;
+    }
 
     for (uint8 i = 0; i < SLOT_BACK; ++i)
     {
@@ -12092,7 +12123,7 @@ void CLuaBaseEntity::petAttack(CLuaBaseEntity* PEntity)
 
 void CLuaBaseEntity::petAbility(uint16 abilityID)
 {
-    ShowWarning("CLuaBaseEntity::petAbility: Non-implemented function called with parameter %d", abilityID);
+    ShowWarning("CLuaBaseEntity::petAbility() - Non-implemented function called with parameter %d", abilityID);
 }
 
 /************************************************************************
@@ -12488,7 +12519,12 @@ uint8 CLuaBaseEntity::getSystem()
 uint16 CLuaBaseEntity::getSuperFamily()
 {
     auto* entity = dynamic_cast<CMobEntity*>(m_PBaseEntity);
-    XI_DEBUG_BREAK_IF(!entity);
+
+    if (!entity)
+    {
+        ShowWarning("CLuaBaseEntity::getSuperFamily() -  m_pBaseEntity is not a Mob.");
+        return 0;
+    }
 
     return entity->m_SuperFamily;
 }
@@ -12503,7 +12539,12 @@ uint16 CLuaBaseEntity::getSuperFamily()
 uint16 CLuaBaseEntity::getFamily()
 {
     auto* entity = dynamic_cast<CMobEntity*>(m_PBaseEntity);
-    XI_DEBUG_BREAK_IF(!entity);
+
+    if (!entity)
+    {
+        ShowWarning("CLuaBaseEntity::getFamily() -  m_pBaseEntity is not a Mob.");
+        return 0;
+    }
 
     return entity->m_Family;
 }
@@ -12873,9 +12914,10 @@ void CLuaBaseEntity::setTrueDetection(bool truedetection)
 
 void CLuaBaseEntity::setUnkillable(bool unkillable)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
-
-    dynamic_cast<CBattleEntity*>(m_PBaseEntity)->m_unkillable = unkillable;
+    if (auto* PBattle = dynamic_cast<CBattleEntity*>(m_PBaseEntity))
+    {
+        PBattle->m_unkillable = unkillable;
+    }
 }
 
 /************************************************************************
