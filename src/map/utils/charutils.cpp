@@ -2645,6 +2645,12 @@ namespace charutils
     {
         std::vector<CAbility*> AbilitiesList;
 
+        if (PChar == nullptr)
+        {
+            ShowWarning("charutils::BuildingCharAbilityTable() - PChar was null.");
+            return;
+        }
+
         memset(&PChar->m_Abilities, 0, sizeof(PChar->m_Abilities));
 
         AbilitiesList = ability::GetAbilities(PChar->GetMJob());

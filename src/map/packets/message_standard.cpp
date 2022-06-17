@@ -52,7 +52,7 @@ CMessageStandardPacket::CMessageStandardPacket(uint32 param0, uint32 param1, uin
 
     ref<uint16>(0x0A) = MessageID;
 
-    snprintf((char*)data + (0x0D), 24, "Para0 %d Para1 %d", param0, param1);
+    snprintf((char*)data + (0x0D), 24, "Para0 %u Para1 %u", param0, param1);
 }
 
 CMessageStandardPacket::CMessageStandardPacket(CCharEntity* PChar, uint32 param0, uint32 param1, MsgStd MessageID)

@@ -261,8 +261,11 @@ CBattleEntity* CParty::GetMemberByName(const int8* MemberName)
 
 void CParty::RemoveMember(CBattleEntity* PEntity)
 {
-    XI_DEBUG_BREAK_IF(PEntity == nullptr);
-    XI_DEBUG_BREAK_IF(PEntity->PParty != this);
+    if (PEntity == nullptr || PEntity->PParty != this)
+    {
+        ShowWarning("CParty::RemoveMember() - PEntity was null, or PParty mismatch.");
+        return;
+    }
 
     if (m_PLeader == PEntity)
     {
@@ -342,8 +345,11 @@ void CParty::RemoveMember(CBattleEntity* PEntity)
 
 void CParty::DelMember(CBattleEntity* PEntity)
 {
-    XI_DEBUG_BREAK_IF(PEntity == nullptr);
-    XI_DEBUG_BREAK_IF(PEntity->PParty != this);
+    if (PEntity == nullptr || PEntity->PParty != this)
+    {
+        ShowWarning("CParty::DelMember() - PEntity was null, or PParty mismatch.");
+        return;
+    }
 
     if (m_PLeader == PEntity)
     {
@@ -500,8 +506,11 @@ std::vector<CParty::partyInfo_t> CParty::GetPartyInfo() const
 
 void CParty::AddMember(CBattleEntity* PEntity)
 {
-    XI_DEBUG_BREAK_IF(PEntity == nullptr);
-    XI_DEBUG_BREAK_IF(PEntity->PParty != nullptr);
+    if (PEntity == nullptr || PEntity->PParty != nullptr)
+    {
+        ShowWarning("CParty::AddMember() - PEntity was null, or PParty not null.");
+        return;
+    }
 
     PEntity->PParty = this;
     members.push_back(PEntity);
@@ -610,8 +619,11 @@ void CParty::AddMember(uint32 id)
 
 void CParty::PushMember(CBattleEntity* PEntity)
 {
-    XI_DEBUG_BREAK_IF(PEntity == nullptr);
-    XI_DEBUG_BREAK_IF(PEntity->PParty != nullptr);
+    if (PEntity == nullptr || PEntity->PParty != nullptr)
+    {
+        ShowWarning("CParty::PushMember() - PEntity was null, or PParty not null.");
+        return;
+    }
 
     PEntity->PParty = this;
     members.push_back(PEntity);
@@ -697,8 +709,11 @@ CBattleEntity* CParty::GetQuaterMaster()
 
 uint16 CParty::GetMemberFlags(CBattleEntity* PEntity)
 {
-    XI_DEBUG_BREAK_IF(PEntity == nullptr);
-    XI_DEBUG_BREAK_IF(PEntity->PParty != this);
+    if (PEntity == nullptr || PEntity->PParty != this)
+    {
+        ShowWarning("CParty::GetMemberFlags() - PEntity was null, or PParty mismatch.");
+        return 0;
+    }
 
     uint16 Flags = 0;
 
@@ -878,7 +893,11 @@ void CParty::ReloadPartyMembers(CCharEntity* PChar)
 
 void CParty::ReloadTreasurePool(CCharEntity* PChar)
 {
-    XI_DEBUG_BREAK_IF(PChar == nullptr);
+    if (PChar == nullptr)
+    {
+        ShowWarning("CParty::ReloadTreasurePool() - PChar was null.");
+        return;
+    }
 
     if (PChar->PTreasurePool != nullptr && PChar->PTreasurePool->GetPoolType() == TREASUREPOOL_ZONE)
     {
