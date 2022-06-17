@@ -11,6 +11,7 @@ local entity = {}
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
 <<<<<<< HEAD
+<<<<<<< HEAD
     mob:setMobMod(xi.mobMod.DRAW_IN, 2) -- Aliance draw in
 =======
     mob:setMobMod(xi.mobMod.DRAW_IN, 1)
@@ -18,6 +19,9 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.DRAW_IN_CUSTOM_RANGE, 10)
 
 >>>>>>> de3620867a (King V bug fixes)
+=======
+    mob:setMobMod(xi.mobMod.DRAW_IN, 2)
+>>>>>>> 4b31d00a4c (Update King_Vinegarroon.lua)
 end
 
 entity.onMobDrawIn = function(mob, target)
