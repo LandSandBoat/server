@@ -14,3 +14,5 @@ end
 entity.onMobDespawn = function(mob)
     xi.mob.phOnDespawn(mob, ID.mob.PICOLATON_PH, 10, 6400)
 end
+
+return entity
