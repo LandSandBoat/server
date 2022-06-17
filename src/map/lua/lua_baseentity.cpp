@@ -1827,8 +1827,11 @@ void CLuaBaseEntity::openDoor(sol::object const& seconds)
 
 void CLuaBaseEntity::closeDoor(sol::object const& seconds)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_NPC);
+    if (m_PBaseEntity->objtype != TYPE_NPC)
+    {
+        ShowWarning("CLuaBaseEntity::closeDoor() - Non-NPC passed to function.");
+        return;
+    }
 
     if (m_PBaseEntity->animation == ANIMATION_OPEN_DOOR)
     {
@@ -4331,8 +4334,11 @@ std::optional<CLuaItem> CLuaBaseEntity::getStorageItem(uint8 container, uint8 sl
 
 uint8 CLuaBaseEntity::storeWithPorterMoogle(uint16 slipId, sol::table const& extraTable, sol::table const& storableItemIdsTable)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowWarning("CLuaBaseEntity::storeWithPorterMoogle() - Non_PC passed to function.");
+        return;
+    }
 
     auto* PChar      = (CCharEntity*)m_PBaseEntity;
     auto  slipSlotId = PChar->getStorage(LOC_INVENTORY)->SearchItem(slipId);
@@ -5419,9 +5425,11 @@ uint8 CLuaBaseEntity::getSubLvl()
 
 uint8 CLuaBaseEntity::getJobLevel(uint8 JobID)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-
-    XI_DEBUG_BREAK_IF(JobID > MAX_JOBTYPE || JobID < 0);
+    if (m_PBaseEntity->objtype != TYPE_PC || JobID > MAX_JOBTYPE || JobID < 0)
+    {
+        ShowWarning("CLuaBaseEntity::getJobLevel() - Non-PC or Invalid JobID passed to function.");
+        return 0;
+    }
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
     return PChar->jobs.job[JobID];
@@ -8089,9 +8097,11 @@ uint16 CLuaBaseEntity::getSkillLevel(uint16 skillId)
 
 void CLuaBaseEntity::setSkillLevel(uint8 SkillID, uint16 SkillAmount)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-
-    XI_DEBUG_BREAK_IF(SkillID >= MAX_SKILLTYPE);
+    if (m_PBaseEntity->objtype != TYPE_PC || SkillID >= MAX_SKILLTYPE)
+    {
+        ShowWarning("CLuaBaseEntity::setSkillLevel() - Non-PC or Invalid SkillID passed to function.");
+        return;
+    }
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
@@ -12252,7 +12262,11 @@ auto CLuaBaseEntity::getAutomatonName() -> const char*
 
 uint8 CLuaBaseEntity::getAutomatonFrame()
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PET || static_cast<CPetEntity*>(m_PBaseEntity)->getPetType() != PET_TYPE::AUTOMATON);
+    if (m_PBaseEntity->objtype != TYPE_PET || static_cast<CPetEntity*>(m_PBaseEntity)->getPetType() != PET_TYPE::AUTOMATON)
+    {
+        ShowWarning("CLuaBaseEntity::getAutomatonFrame() - No automaton passed to function, or master does not have an automaton.");
+        return 0;
+    }
 
     auto* PAutomaton = static_cast<CAutomatonEntity*>(m_PBaseEntity);
     return static_cast<uint8>(PAutomaton->getFrame());
@@ -12267,7 +12281,11 @@ uint8 CLuaBaseEntity::getAutomatonFrame()
 
 uint8 CLuaBaseEntity::getAutomatonHead()
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PET || static_cast<CPetEntity*>(m_PBaseEntity)->getPetType() != PET_TYPE::AUTOMATON);
+    if (m_PBaseEntity->objtype != TYPE_PET || static_cast<CPetEntity*>(m_PBaseEntity)->getPetType() != PET_TYPE::AUTOMATON)
+    {
+        ShowWarning("CLuaBaseEntity::getAutomatonFrame() - No automaton passed to function, or master does not have an automaton.");
+        return 0;
+    }
 
     auto* PAutomaton = static_cast<CAutomatonEntity*>(m_PBaseEntity);
     return static_cast<uint8>(PAutomaton->getHead());

@@ -5205,7 +5205,11 @@ namespace charutils
     {
         TracyZoneScoped;
 
-        XI_DEBUG_BREAK_IF(SkillID >= MAX_SKILLTYPE);
+        if (SkillID >= MAX_SKILLTYPE)
+        {
+            ShowWarning("charutils::SaveCharSkills() - SkillID is greated than MAX_SKILLTYPE.");
+            return;
+        }
 
         const char* Query = "INSERT INTO char_skills "
                             "SET "
