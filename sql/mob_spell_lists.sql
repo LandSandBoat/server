@@ -4202,7 +4202,6 @@ INSERT INTO `mob_spell_lists` VALUES ('Shikaree_Z',466,14,1,255); -- Poisona
 INSERT INTO `mob_spell_lists` VALUES ('Shikaree_Z',466,15,1,255); -- Paralyna
 INSERT INTO `mob_spell_lists` VALUES ('Shikaree_Z',466,55,1,255); -- Aquaveil
 
-<<<<<<< HEAD
 INSERT INTO `mob_spell_lists` VALUES('Ixzdei_BLM', 467, 147, 1, 255);
 INSERT INTO `mob_spell_lists` VALUES('Ixzdei_BLM', 467, 152, 1, 255);
 INSERT INTO `mob_spell_lists` VALUES('Ixzdei_BLM', 467, 157, 1, 255);
@@ -4216,21 +4215,6 @@ INSERT INTO `mob_spell_lists` VALUES('Ixzdei_BLM', 467, 191, 1, 255);
 INSERT INTO `mob_spell_lists` VALUES('Ixzdei_RDM', 468, 191, 1, 255);
 INSERT INTO `mob_spell_lists` VALUES('Ixzdei_RDM', 468, 260, 1, 255);
 INSERT INTO `mob_spell_lists` VALUES('Ixzdei_RDM', 468, 254, 1, 255);
-=======
-INSERT INTO `mob_spell_lists` VALUES ('Hakutaku',467,249,1,255); -- Blaze Spikes
-INSERT INTO `mob_spell_lists` VALUES ('Hakutaku',467,235,1,255); -- Burn
-INSERT INTO `mob_spell_lists` VALUES ('Hakutaku',467,100,1,255); -- Enfire
-INSERT INTO `mob_spell_lists` VALUES ('Hakutaku',467,147,1,255); -- Fire IV
-INSERT INTO `mob_spell_lists` VALUES ('Hakutaku',467,148,1,255); -- Fire V
-INSERT INTO `mob_spell_lists` VALUES ('Hakutaku',467,176,1,255); -- Firaga III
-INSERT INTO `mob_spell_lists` VALUES ('Hakutaku',467,204,1,255); -- Flare
-
-
-
-
-
-
->>>>>>> 2232eb8309 (Adding Hakutaku)
 
 INSERT INTO `mob_spell_lists` VALUES ('ixghrah_Manafont_spells', 469, 274, 1, 255); -- sleepga_ii
 INSERT INTO `mob_spell_lists` VALUES ('ixghrah_Manafont_spells', 470, 40, 1, 255); -- banishga_iii
