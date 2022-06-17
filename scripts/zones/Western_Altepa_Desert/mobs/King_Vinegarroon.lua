@@ -10,7 +10,14 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+<<<<<<< HEAD
     mob:setMobMod(xi.mobMod.DRAW_IN, 2) -- Aliance draw in
+=======
+    mob:setMobMod(xi.mobMod.DRAW_IN, 1)
+    mob:setMobMod(xi.mobMod.DRAW_IN_INCLUDE_PARTY, 1)
+    mob:setMobMod(xi.mobMod.DRAW_IN_CUSTOM_RANGE, 10)
+
+>>>>>>> de3620867a (King V bug fixes)
 end
 
 entity.onMobDrawIn = function(mob, target)
@@ -48,18 +55,30 @@ entity.onMobDespawn = function(mob)
     mob:setRespawnTime(math.random(75600, 86400)) -- 21 to 24 hours
 end
 
+<<<<<<< HEAD
 entity.onMobFight = function(mob, target)
     local mobRegen = function()
         local hour = VanadielHour()
+=======
+entity.mobRegen = function(mob)
+    local hour = VanadielHour()
+>>>>>>> de3620867a (King V bug fixes)
 
     if hour >= 6 and hour <= 20 then
         mob:setMod(xi.mod.REGEN, 125)
     else
         mob:setMod(xi.mod.REGEN, 250)
     end
+<<<<<<< HEAD
     end
 
     mobRegen()
+=======
+end
+
+entity.onMobFight = function(mob, target)
+    entity.mobRegen(mob)
+>>>>>>> de3620867a (King V bug fixes)
 end
 
 return entity
