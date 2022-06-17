@@ -22980,12 +22980,19 @@ INSERT INTO `mob_droplist` VALUES (3222,0,0,1000,15140,@VRARE);
 INSERT INTO `mob_droplist` VALUES (3222,0,0,1000,15142,@VRARE);
 INSERT INTO `mob_droplist` VALUES (3222,0,0,1000,16360,@VRARE);
 INSERT INTO `mob_droplist` VALUES (3223,0,0,1000,16017,@COMMON);
+<<<<<<< HEAD
 INSERT INTO `mob_droplist` VALUES (3224,0,0,1000,11343,@COMMON); --(Picolaton) Thrakon Breastplate
 <<<<<<< HEAD
 >>>>>>> bca195221f (Picolaton)
 >>>>>>> 526e19156f (Picolaton)
 =======
 >>>>>>> 43fcdaaa7d (Aiatar)
+=======
+INSERT INTO `mob_droplist` VALUES (3224,0,0,1000,2811,@VCOMMON);
+INSERT INTO `mob_droplist` VALUES (3224,0,0,1000,2815,@COMMON);
+INSERT INTO `mob_droplist` VALUES (3224,0,0,1000,2819,@VCOMMON);
+INSERT INTO `mob_droplist` VALUES (3225,0,0,1000,11343,@COMMON); -- (Picolaton) Thrakon Breastplate
+>>>>>>> 15344a7b4e (General Mob Fixes)
 
 -- ZoneID:  99 - Yagudo Flagellant
 -- ZoneID: 138 - Yagudo Eradicator
