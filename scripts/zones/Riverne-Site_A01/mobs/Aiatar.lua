@@ -9,9 +9,13 @@ local entity = {}
 entity.onMobDeath = function(mob, player, isKiller)
     UpdateNMSpawnPoint(mob:getID())
 <<<<<<< HEAD
+<<<<<<< HEAD
 end
 
 return entity
 =======
 end
 >>>>>>> 6d39d7b186 (Aiatar)
+=======
+end
+>>>>>>> 86c674b976 (Update Aiatar.lua)
