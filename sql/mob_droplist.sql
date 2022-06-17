@@ -25173,10 +25173,13 @@ INSERT INTO `mob_droplist` VALUES (3224,0,0,1000,2811,@VCOMMON);
 INSERT INTO `mob_droplist` VALUES (3224,0,0,1000,2815,@COMMON);
 INSERT INTO `mob_droplist` VALUES (3224,0,0,1000,2819,@VCOMMON);
 INSERT INTO `mob_droplist` VALUES (3225,0,0,1000,11343,@COMMON); -- (Picolaton) Thrakon Breastplate
+<<<<<<< HEAD
 >>>>>>> 15344a7b4e (General Mob Fixes)
 =======
 INSERT INTO `mob_droplist` VALUES (3224,0,0,1000,11343,@COMMON); --(Picolaton) Thrakon Breastplate
 >>>>>>> bca195221f (Picolaton)
+=======
+>>>>>>> 41563a96eb (General Mob Fixes)
 
 -- ZoneID:  99 - Yagudo Flagellant
 -- ZoneID: 138 - Yagudo Eradicator
