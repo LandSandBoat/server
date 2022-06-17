@@ -2,6 +2,7 @@
 -- Area: Western Altepa Desert
 --   NM: Picolaton
 -----------------------------------
+require("scripts/globals/status")
 require("scripts/globals/hunts")
 -----------------------------------
 local entity = {}
