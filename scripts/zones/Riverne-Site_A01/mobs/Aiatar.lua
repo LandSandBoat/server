@@ -9,3 +9,5 @@ local entity = {}
 entity.onMobDeath = function(mob, player, isKiller)
     UpdateNMSpawnPoint(mob:getID())
 end
+
+return entity
