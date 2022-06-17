@@ -15,7 +15,11 @@ entity.onMobDespawn = function(mob)
 end
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 return entity
 =======
 return entity
 >>>>>>> 6d39d7b186 (Aiatar)
+=======
+return entity
+>>>>>>> c2be120575 (Update Flamedrake.lua)
