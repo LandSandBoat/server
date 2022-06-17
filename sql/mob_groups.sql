@@ -10950,7 +10950,7 @@ INSERT INTO `mob_groups` VALUES (32,2948,160,'Ogama',0,32,1840,0,0,80,84,0);
 INSERT INTO `mob_groups` VALUES (33,3953,160,'Tonberry_Decapitator',1260,0,2433,0,0,72,74,0);
 INSERT INTO `mob_groups` VALUES (34,3972,160,'Tonberry_Tracker',1560,0,2449,0,0,72,74,0);
 INSERT INTO `mob_groups` VALUES (35,3964,160,'Tonberry_Pontifex',86400,0,2443,0,0,75,75,0);
-INSERT INTO `mob_groups` VALUES (36,1877,160,'Hakutaku',0,128,1270,0,0,85,85,0);
+INSERT INTO `mob_groups` VALUES (36,1877,160,'Hakutaku',0,128,1270,50000,0,85,85,0);
 INSERT INTO `mob_groups` VALUES (37,2718,160,'Mokumokuren',0,128,0,9000,0,80,82,0);
 INSERT INTO `mob_groups` VALUES (38,6409,160,'Mousse',960,0,1749,0,0,64,70,0);
 INSERT INTO `mob_groups` VALUES (39,6882,160,'Azrael',0,128,0,0,0,0,0,0);
