@@ -996,9 +996,12 @@ bool CStatusEffectContainer::ApplyBardEffect(CStatusEffect* PStatusEffect, uint8
 
 bool CStatusEffectContainer::ApplyCorsairEffect(CStatusEffect* PStatusEffect, uint8 maxRolls, uint8 bustDuration)
 {
-    // break if not a COR roll.
-    XI_DEBUG_BREAK_IF(!((PStatusEffect->GetStatusID() >= EFFECT_FIGHTERS_ROLL && PStatusEffect->GetStatusID() <= EFFECT_NATURALISTS_ROLL) ||
-                        (PStatusEffect->GetStatusID() == EFFECT_RUNEISTS_ROLL)));
+    // Don't process if not a COR roll.
+    if (!((PStatusEffect->GetStatusID() >= EFFECT_FIGHTERS_ROLL && PStatusEffect->GetStatusID() <= EFFECT_NATURALISTS_ROLL) ||
+                        (PStatusEffect->GetStatusID() == EFFECT_RUNEISTS_ROLL)))
+    {
+        return false;
+    }
 
     // if all match tier/id/effect then overwrite
 
@@ -1815,7 +1818,12 @@ void CStatusEffectContainer::HandleAura(CStatusEffect* PStatusEffect)
 void CStatusEffectContainer::TickEffects(time_point tick)
 {
     TracyZoneScoped;
-    XI_DEBUG_BREAK_IF(m_POwner == nullptr);
+
+    if (m_POwner == nullptr)
+    {
+        ShowWarning("CStatusEffectContainer::TickRegen() - m_POwner is null.");
+        return;
+    }
 
     if (!m_POwner->isDead())
     {
@@ -1847,7 +1855,12 @@ void CStatusEffectContainer::TickEffects(time_point tick)
 void CStatusEffectContainer::TickRegen(time_point tick)
 {
     TracyZoneScoped;
-    XI_DEBUG_BREAK_IF(m_POwner == nullptr);
+
+    if (m_POwner == nullptr)
+    {
+        ShowWarning("CStatusEffectContainer::TickRegen() - m_POwner is null.");
+        return;
+    }
 
     if (!m_POwner->isDead())
     {

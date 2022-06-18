@@ -402,7 +402,7 @@ function AvatarFinalAdjustments(dmg, mob, skill, target, skilltype, damagetype, 
 
     -- handle One For All, Liement
     if skilltype == xi.attackType.MAGICAL then
-        local targetMagicDamageAdjustment = xi.spells.spell_damage.calculateTMDA(mob, target, damagetype) -- Apply checks for Liement, MDT/MDTII/DT
+        local targetMagicDamageAdjustment = xi.spells.damage.calculateTMDA(mob, target, damagetype) -- Apply checks for Liement, MDT/MDTII/DT
 
         dmg = math.floor(dmg * targetMagicDamageAdjustment)
         if dmg < 0 then

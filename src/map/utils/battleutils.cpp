@@ -2300,7 +2300,7 @@ namespace battleutils
 
                 float ratio = 1.0f;
 
-                if (weapon->getSkillType() == SKILL_HAND_TO_HAND)
+                if (weapon && weapon->getSkillType() == SKILL_HAND_TO_HAND)
                 {
                     ratio = 2.0f;
                 }
@@ -2646,7 +2646,7 @@ namespace battleutils
                 if (isPet)
                 {
                     CPetEntity* petEntity = dynamic_cast<CPetEntity*>(PAttacker);
-                    isAvatar              = petEntity->getPetType() == PET_TYPE::AVATAR;
+                    isAvatar              = petEntity ? petEntity->getPetType() == PET_TYPE::AVATAR : false;
                 }
 
                 if (isAvatar)
@@ -2677,7 +2677,7 @@ namespace battleutils
             // Broth
 
             int32 maxHitRate  = 99;
-            auto* targ_weapon = dynamic_cast<CItemWeapon*>(PAttacker->m_Weapons[SLOT_MAIN]);
+            auto* targ_weapon = PAttacker ? dynamic_cast<CItemWeapon*>(PAttacker->m_Weapons[SLOT_MAIN]) : nullptr;
 
             // As far as I can tell kick attacks fall under Hand-to-Hand so ignoring them and letting them go to 99
             bool isOffhand   = attackNumber == 1;
@@ -3646,7 +3646,11 @@ namespace battleutils
 
     uint8 GetSkillchainSubeffect(SKILLCHAIN_ELEMENT skillchain)
     {
-        XI_DEBUG_BREAK_IF(skillchain < SC_NONE || skillchain > SC_DARKNESS_II);
+        if (skillchain < SC_NONE || skillchain > SC_DARKNESS_II)
+        {
+            ShowWarning("battleutils::GetSkillchainSubeffect() - Invalid Element passed to function.");
+            return 0;
+        }
 
         static const uint8 effects[] = {
             SUBEFFECT_NONE,          // SC_NONE
@@ -3673,7 +3677,11 @@ namespace battleutils
 
     uint8 GetSkillchainTier(SKILLCHAIN_ELEMENT skillchain)
     {
-        XI_DEBUG_BREAK_IF(skillchain < SC_NONE || skillchain > SC_DARKNESS_II);
+        if (skillchain < SC_NONE || skillchain > SC_DARKNESS_II)
+        {
+            ShowWarning("battleutils::GetSkillchainTier() - Invalid Element passed to function.");
+            return 0;
+        }
 
         static const uint8 tiers[] = {
             0, // SC_NONE
@@ -4001,8 +4009,11 @@ namespace battleutils
 
     int32 TakeSkillchainDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, int32 lastSkillDamage, CBattleEntity* taChar)
     {
-        XI_DEBUG_BREAK_IF(PAttacker == nullptr);
-        XI_DEBUG_BREAK_IF(PDefender == nullptr);
+        if (PAttacker == nullptr || PDefender == nullptr)
+        {
+            ShowWarning("battleutils::TakeSkillchainDamage() - PAttacker or PDefender was null.");
+            return 0;
+        }
 
         CStatusEffect* PEffect = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_SKILLCHAIN, 0);
 
@@ -4089,13 +4100,22 @@ namespace battleutils
 
     CItemWeapon* GetEntityWeapon(CBattleEntity* PEntity, SLOTTYPE Slot)
     {
-        XI_DEBUG_BREAK_IF(Slot < SLOT_MAIN || Slot > SLOT_AMMO);
+        if (Slot < SLOT_MAIN || Slot > SLOT_AMMO)
+        {
+            ShowWarning("battleutils::GetEntityWeapon() - Received invalid slot type.");
+            return nullptr;
+        }
+
         return dynamic_cast<CItemWeapon*>(((CMobEntity*)PEntity)->m_Weapons[Slot]);
     }
 
     void MakeEntityStandUp(CBattleEntity* PEntity)
     {
-        XI_DEBUG_BREAK_IF(PEntity == nullptr);
+        if (PEntity == nullptr)
+        {
+            ShowWarning("battleutils::MakeEntityStandUp() - PEntity was null.");
+            return;
+        }
 
         if (PEntity->objtype == TYPE_PC)
         {
@@ -4117,7 +4137,11 @@ namespace battleutils
 
     bool HasNinjaTool(CBattleEntity* PEntity, CSpell* PSpell, bool ConsumeTool)
     {
-        XI_DEBUG_BREAK_IF(PEntity == nullptr || PSpell == nullptr);
+        if (PEntity == nullptr || PSpell == nullptr)
+        {
+            ShowWarning("battleutils::HasNinjaTool() - PEntity or PSpell was null.");
+            return false;
+        }
 
         if (PEntity->objtype == TYPE_PC)
         {
@@ -4373,8 +4397,11 @@ namespace battleutils
 
     void GenerateCureEnmity(CBattleEntity* PSource, CBattleEntity* PTarget, int32 amount)
     {
-        XI_DEBUG_BREAK_IF(PSource == nullptr);
-        XI_DEBUG_BREAK_IF(PTarget == nullptr);
+        if (!PSource || !PTarget)
+        {
+            ShowWarning("battleutils::GenerateCureEnmity - PSource or PTarget was null.")
+            return;
+        }
 
         for (auto* entity : *PTarget->PNotorietyContainer)
         {
@@ -4391,7 +4418,11 @@ namespace battleutils
     // Generate enmity for all targets in range
     void GenerateInRangeEnmity(CBattleEntity* PSource, int16 CE, int16 VE)
     {
-        XI_DEBUG_BREAK_IF(PSource == nullptr);
+        if (PSource == nullptr)
+        {
+            ShowWarning("battleutils::GenerateInRangeEnmity() - PSource received as null.");
+            return;
+        }
 
         CCharEntity* PIterSource = nullptr;
 
@@ -6691,6 +6722,12 @@ namespace battleutils
 
     int32 GetScaledItemModifier(CBattleEntity* PEntity, CItemEquipment* PItem, Mod mod)
     {
+        if (!PEntity || !PItem)
+        {
+            ShowWarning("battleutils::GetScaledItemModifier() - PEntity or PItem received as null.");
+            return 0;
+        }
+
         if (PEntity->GetMLevel() < PItem->getReqLvl())
         {
             auto modAmount = PItem->getModifier(mod);

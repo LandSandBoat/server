@@ -179,40 +179,52 @@ namespace itemutils
 
     CItem* GetItem(CItem* PItem)
     {
-        XI_DEBUG_BREAK_IF(PItem == nullptr);
+        if (PItem == nullptr)
+        {
+            ShowWarning("CItem::GetItem() - PItem is null.");
+            return nullptr;
+        }
 
         if (PItem->isType(ITEM_WEAPON))
         {
             return new CItemWeapon(*((CItemWeapon*)PItem));
         }
+
         if (PItem->isType(ITEM_EQUIPMENT))
         {
             return new CItemEquipment(*((CItemEquipment*)PItem));
         }
+
         if (PItem->isType(ITEM_USABLE))
         {
             return new CItemUsable(*((CItemUsable*)PItem));
         }
+
         if (PItem->isType(ITEM_LINKSHELL))
         {
             return new CItemLinkshell(*((CItemLinkshell*)PItem));
         }
+
         if (PItem->isType(ITEM_FURNISHING))
         {
             return new CItemFurnishing(*((CItemFurnishing*)PItem));
         }
+
         if (PItem->isType(ITEM_PUPPET))
         {
             return new CItemPuppet(*((CItemPuppet*)PItem));
         }
+
         if (PItem->isType(ITEM_GENERAL))
         {
             return new CItemGeneral(*((CItemGeneral*)PItem));
         }
+
         if (PItem->isType(ITEM_CURRENCY))
         {
             return new CItemCurrency(*((CItemCurrency*)PItem));
         }
+
         return nullptr;
     }
 
