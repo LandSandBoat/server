@@ -1094,7 +1094,7 @@ void CCharEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& acti
         actionTarget.messageID       = MSGBASIC_TOO_FAR_AWAY;
 
         // While it doesn't seem that speceffect is actually used at all in this "do nothing" animation, this is here for accuracy.
-        if (isRangedWS) //Ranged WS seem to stay 0 on Reaction
+        if (isRangedWS) // Ranged WS seem to stay 0 on Reaction
         {
             actionTarget.speceffect = SPECEFFECT::NONE;
         }
