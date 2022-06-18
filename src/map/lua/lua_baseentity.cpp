@@ -5384,7 +5384,7 @@ void CLuaBaseEntity::unlockJob(uint8 JobID)
 
 bool CLuaBaseEntity::hasJob(uint8 job)
 {
-    if (m_PBaseEntity->objtype != TYPE_PC || job >= MAX_JOBTYPE || job < 0)
+    if (m_PBaseEntity->objtype != TYPE_PC || job >= MAX_JOBTYPE)
     {
         ShowWarning("CLuaBaseEntity::unlockJob() - Non-PC calling function or invalid JOBTYPE");
         return false;
@@ -5430,7 +5430,7 @@ uint8 CLuaBaseEntity::getSubLvl()
 
 uint8 CLuaBaseEntity::getJobLevel(uint8 JobID)
 {
-    if (m_PBaseEntity->objtype != TYPE_PC || JobID >= MAX_JOBTYPE || JobID < 0)
+    if (m_PBaseEntity->objtype != TYPE_PC || JobID >= MAX_JOBTYPE)
     {
         ShowWarning("CLuaBaseEntity::getJobLevel() - Non-PC or Invalid JobID passed to function.");
         return 0;
@@ -9214,7 +9214,11 @@ uint8 CLuaBaseEntity::registerBattlefield(sol::object const& arg0, sol::object c
     uint32 initiator   = (arg2 != sol::lua_nil) ? arg2.as<uint32>() : 0;
 
     // TODO: Verify what happens if -1 makes it to the cast below
-    XI_DEBUG_BREAK_IF(battlefield < 0);
+    if (battlefield < 0)
+    {
+        ShowError("CLuaBaseEntity::registerBattlefield() - Battlefield State was < 0.  Investigate!");
+        return 6; // For safety, if we hit this condition, return battlefield full.
+    }
 
     return PZone->m_BattlefieldHandler->RegisterBattlefield(PChar, static_cast<uint16>(battlefield), area, initiator);
 }
@@ -9251,8 +9255,11 @@ bool CLuaBaseEntity::battlefieldAtCapacity(int battlefieldID)
 
 bool CLuaBaseEntity::enterBattlefield(sol::object const& area)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->loc.zone->m_BattlefieldHandler == nullptr);
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+    if (m_PBaseEntity->objtype != TYPE_PC || m_PBaseEntity->loc.zone->m_BattlefieldHandler == nullptr)
+    {
+        ShowWarning("CLuaBaseEntity::enterBattlefield() - Non-PC calling function, or Battlefield Handler is null.");
+        return false;
+    }
 
     CBattlefield* PBattlefield = nullptr;
     if (area == sol::lua_nil)
@@ -9276,8 +9283,11 @@ bool CLuaBaseEntity::enterBattlefield(sol::object const& area)
 
 bool CLuaBaseEntity::leaveBattlefield(uint8 leavecode)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr || m_PBaseEntity->loc.zone->m_BattlefieldHandler == nullptr);
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
+    if (m_PBaseEntity->objtype == TYPE_NPC || m_PBaseEntity->loc.zone->m_BattlefieldHandler == nullptr)
+    {
+        ShowWarning("CLuaBaseEntity::leaveBattlefield() - NPC calling function, or Battlefield Handler is null.");
+        return false;
+    }
 
     return m_PBaseEntity->loc.zone->m_BattlefieldHandler->RemoveFromBattlefield(m_PBaseEntity, m_PBaseEntity->PBattlefield, leavecode);
 }

@@ -60,29 +60,30 @@ struct CParty::partyInfo_t
     uint16      prev_zone;
 };
 
-/************************************************************************
- *                                                                      *
- *  Конструктор                                                         *
- *                                                                      *
- ************************************************************************/
-
+// Constructor
 CParty::CParty(CBattleEntity* PEntity)
 {
-    XI_DEBUG_BREAK_IF(PEntity == nullptr);
-    XI_DEBUG_BREAK_IF(PEntity->PParty != nullptr);
-
-    m_PartyID     = PEntity->id;
-    m_PartyType   = PEntity->objtype == TYPE_PC ? PARTY_PCS : PARTY_MOBS;
-    m_PartyNumber = 0;
-
-    m_PLeader       = nullptr;
-    m_PAlliance     = nullptr;
-    m_PSyncTarget   = nullptr;
-    m_PQuaterMaster = nullptr;
-
+    m_PLeader        = nullptr;
+    m_PAlliance      = nullptr;
+    m_PSyncTarget    = nullptr;
+    m_PQuaterMaster  = nullptr;
     m_EffectsChanged = false;
-    AddMember(PEntity);
-    SetLeader((char*)PEntity->name.c_str());
+    m_PartyID        = 0;
+    m_PartyType      = PARTY_MOBS;
+    m_PartyNumber    = 0;
+
+    if (PEntity != nullptr && PEntity->PParty == nullptr)
+    {
+        m_PartyID     = PEntity->id;
+        m_PartyType   = PEntity->objtype == TYPE_PC ? PARTY_PCS : PARTY_MOBS;
+
+        AddMember(PEntity);
+        SetLeader((char*)PEntity->name.c_str());
+    }
+    else
+    {
+        ShowWarning("CParty::CParty() - PEntity was null, or party was not null.")
+    }
 }
 
 CParty::CParty(uint32 id)
