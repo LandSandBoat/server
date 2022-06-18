@@ -246,6 +246,11 @@ xi.dynamis.dynaIDLookup = -- Used to check for different IDs based on zoneID. Re
         {
             NO_LONGER_HAVE_CLEARANCE = 7061,
         },
+        vars = -- Global Var Table Cleanup
+        {
+            xi.dynamis.YING,
+            xi.dynamis.YANG,
+        }
     },
     [xi.zone.DYNAMIS_XARCABARD] = -- zoneID for array lookup
     {

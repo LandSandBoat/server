@@ -32,6 +32,7 @@ require("modules/era/lua/dynamis/mob_spawning_files/dynamis_san_d_oria_mobs")
 require("modules/era/lua/dynamis/mob_spawning_files/dynamis_valkurm_mobs")
 require("modules/era/lua/dynamis/mob_spawning_files/dynamis_windurst_mobs")
 require("modules/era/lua/dynamis/mob_spawning_files/dynamis_xarcabard_mobs")
+require("scripts/zones/Dynamis-Xarcabard/IDs")
 --------------------------------------------
 
 local m = Module:new("era_dynamis_spawning")
@@ -50,6 +51,12 @@ xi.dynamis.spawnWave = function(zone, zoneID, waveNumber)
             xi.dynamis.nmDynamicSpawn(mobIndex, nil, true, zoneID)
         else -- Nightmare Mobs and Statues
             xi.dynamis.nonStandardDynamicSpawn(mobIndex, nil, true, zoneID)
+        end
+    end
+    if waveNumber == 5 and zoneID == xi.zone.DYNAMIS_XARCABARD then
+        local playersInZone = zone:getPlayers()
+        for _, player in pairs(playersInZone) do
+            player:messageSpecial(zones[xi.zone.DYNAMIS_XARCABARD].text.PRISON_OF_SOULS_HAS_SET_FREE)
         end
     end
     zone:setLocalVar(string.format("Wave_%i_Spawned", waveNumber), 1)
@@ -578,9 +585,9 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         zPos = xi.dynamis.mobList[zoneID][mobIndex].pos[3]
         rPos = xi.dynamis.mobList[zoneID][mobIndex].pos[4]
     else
-        xPos = oMob:getXPos()
-        yPos = oMob:getYPos()
-        zPos = oMob:getZPos()
+        xPos = oMob:getXPos()+math.random()*6-3
+        yPos = oMob:getYPos()-0.3
+        zPos = oMob:getZPos()+math.random()*6-3
         rPos = oMob:getRotPos()
     end
     xi.dynamis.nmInfoLookup = 
@@ -766,22 +773,22 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         -- Dynamis - Windurst
         ["Tzee Xicu Idol"] = {"574d62", 1, 187, 2510, 50, 95, "Statue Megaboss"}, -- WMb
         -- Dynamis - Xarcabard Non-Beastmen
-        ["Animated Hammer"] = {"AHam", 81, 135, 99, 497, 9, "Animated Weapon"}, -- AHam
-        ["Animated Staff"] = {"ASta", 87, 135, 108, 89, 23, "Animated Weapon"}, -- ASta
-        ["Animated Longsword"] = {"ALon", 84, 135, 104, 87, 24, "Animated Weapon"}, -- ALon
-        ["Animated Tabar"] = {"ATab", 88, 135, 109, 90, 8, "Animated Weapon"}, -- ATab
-        ["Animated Great Axe"] = {"AGre", 80, 135, 97, 497, 12, "Animated Weapon"}, -- AGre
-        ["Animated Claymore"] = {"ACla", 78, 135, 95, 91, 14, "Animated Weapon"}, -- ACla
-        ["Animated Spear"] = {"ASpe", 86, 135, 107, 497, 19, "Animated Weapon"}, -- ASpe
-        ["Animated Scythe"] = {"AScy", 85, 135, 105, 92, 20, "Animated Weapon"}, -- AScy
-        ["Animated Kunai"] = {"AKun", 83, 135, 102, 497, 17, "Animated Weapon"}, -- AKun
-        ["Animated Tachi"] = {"ATac", 89, 135, 110, 93, 13, "Animated Weapon"}, -- ATac
-        ["Animated Dagger"] = {"ADag", 79, 135, 96, 94, 11, "Animated Weapon"}, -- ADag
-        ["Animated Knuckles"] = {"AKnu", 82, 135, 101, 95,15, "Animated Weapon"}, -- AKnu
-        ["Animated Longbow"] = {"Alon", 11, 135, 103, 497, 7, "Animated Weapon"}, -- Alon
-        ["Animated Gun"] = {"AGun", 12, 135, 98, 497, 18, "Animated Weapon"}, -- AGun
-        ["Animated Horn"] = {"AHor", 13, 135, 100, 497, 16, "Animated Weapon"}, -- AHor
-        ["Animated Shield"] = {"Ahi", 14, 135, 106, 96, 21, "Animated Weapon"}, -- AShi
+        ["Animated Hammer"] = {"AHam", 81, 135, 99, 0, 9, "Animated Weapon"}, -- AHam
+        ["Animated Staff"] = {"ASta", 87, 135, 108, 0, 23, "Animated Weapon"}, -- ASta
+        ["Animated Longsword"] = {"ALon", 84, 135, 104, 0, 24, "Animated Weapon"}, -- ALon
+        ["Animated Tabar"] = {"ATab", 88, 135, 109, 0, 8, "Animated Weapon"}, -- ATab
+        ["Animated Great Axe"] = {"AGre", 80, 135, 97, 0, 12, "Animated Weapon"}, -- AGre
+        ["Animated Claymore"] = {"ACla", 78, 135, 95, 0, 14, "Animated Weapon"}, -- ACla
+        ["Animated Spear"] = {"ASpe", 86, 135, 107, 0, 19, "Animated Weapon"}, -- ASpe
+        ["Animated Scythe"] = {"AScy", 85, 135, 105, 0, 20, "Animated Weapon"}, -- AScy
+        ["Animated Kunai"] = {"AKun", 83, 135, 102, 0, 17, "Animated Weapon"}, -- AKun
+        ["Animated Tachi"] = {"ATac", 89, 135, 110, 0, 13, "Animated Weapon"}, -- ATac
+        ["Animated Dagger"] = {"ADag", 79, 135, 96, 0, 11, "Animated Weapon"}, -- ADag
+        ["Animated Knuckles"] = {"AKnu", 82, 135, 101, 0,15, "Animated Weapon"}, -- AKnu
+        ["Animated Longbow"] = {"Alon", 11, 135, 103, 0, 7, "Animated Weapon"}, -- Alon
+        ["Animated Gun"] = {"AGun", 12, 135, 98, 0, 18, "Animated Weapon"}, -- AGun
+        ["Animated Horn"] = {"AHor", 13, 135, 100, 0, 16, "Animated Weapon"}, -- AHor
+        ["Animated Shield"] = {"AShi", 14, 135, 106, 0, 21, "Animated Weapon"}, -- AShi
         ["Satellite Hammer"] = {"5348616d", 81, 135, 0, 0, 9, "Satellite Weapon"}, -- SHam
         ["Satellite Staff"] = {"53537461", 87, 135, 0, 0, 23, "Satellite Weapon"}, -- SSta
         ["Satellite Longsword"] = {"534c6f6e", 84, 135, 0, 0, 24, "Satellite Weapon"}, -- SLon
@@ -794,7 +801,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         ["Satellite Tachi"] = {"53546163", 89, 135, 0, 0, 13, "Satellite Weapon"}, -- STac
         ["Satellite Dagger"] = {"53446167", 79, 135, 0, 0, 11, "Satellite Weapon"}, -- SDag
         ["Satellite Knuckles"] = {"534b6e75", 82, 135, 0, 0, 15, "Satellite Weapon"}, -- SKnu
-        ["Satellite Longbow"] = {"534c6f6e", 11, 135, 0, 0, 7, "Satellite Weapon"}, -- SLon
+        ["Satellite Longbow"] = {"536c6f6e", 11, 135, 0, 0, 7, "Satellite Weapon"}, -- Slon
         ["Satellite Gun"] = {"5347756e", 12, 135, 0, 0, 18, "Satellite Weapon"}, -- SGun
         ["Satellite Horn"] = {"53486f72", 13, 135, 0, 0, 16, "Satellite Weapon"}, -- SHor
         ["Satellite Shield"] = {"53536869", 14, 135, 0, 0, 21, "Satellite Weapon"}, -- SShi
@@ -802,7 +809,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         ["Yang"] = {"59616e67", 3, 135, 0, 0, 87, "Yang"}, -- Yang
         ["Dynamis Lord"] = {"444c", 1, 135, 730, 86, 361, "Dynamis Lord"}, -- DL
         -- Dynamis - Beaucedine Non-Beastmen
-        ["Angra Mainyu"] = {"416e6772", 1, 134, 0, 497, 4, ""}, -- Angr
+        ["Angra Mainyu"] = {"416e6772", 1, 134, 0, 497, 4, "Angra Mainyu"}, -- Angr
         ["Fire Pukis"] = {"4650756b", 2, 135, 0, 0, 87, "Enabled Auto Attack"}, -- FPuk
         ["Wind Pukis"] = {"5750756b", 2, 135, 0, 0, 87, "Enabled Auto Attack"}, -- WPuk
         ["Petro Pukis"] = {"5050756b", 2, 135, 0, 0, 87, "Enabled Auto Attack"}, -- PPuk
@@ -822,7 +829,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         ["Stollenwurm"] = {"53746f6c", 105, 40, 230, 0, 1211, "No Auto Attack"}, -- Stol
         ["Tarasca"] = {"54617261", 105, 40, 230, 0, 1206, "No Auto Attack"}, -- Tara
         ["Vishap"] = {"56697368", 105, 40, 230, 0, 1203, "No Auto Attack"}, -- Vish
-        ["Apocalyptic Beast"] = {"41706f63", 1, 40, 146, 0, 0, ""}, -- Apoc
+        ["Apocalyptic Beast"] = {"41706f63", 1, 40, 146, 0, 0, "Apocalyptic Beast"}, -- Apoc
         -- Dynamis - Valkurm
         ["Dragontrap"] = {"44726174", 63, 77, 2910, 0, 114, "No Auto Attack"}, -- Drat
         ["Fairy Ring"] = {"46616952", 10, 39, 2910, 0, 116, "Fairy Ring"}, -- FaiR
@@ -852,7 +859,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
             ["onMobMagicPrepare"] = {function(mob, target, spellId) end},
             ["onMobWeaponSkillPrepare"] = {function(mob) end},
             ["onMobWeaponSkill"] = {function(mob) end},
-            ["onMobDeath"] = {function(mob, player, isKiller) xi.dynamis.mobOnDeath(mob) end},
+            ["onMobDeath"] = {function(mob, player, isKiller) xi.dynamis.mobOnDeath(mob, player, isKiller) end},
             ["mixins"] = { require("scripts/mixins/job_special"), require("scripts/mixins/remove_doom") },
         },
         ["Statue Megaboss"] =
@@ -888,7 +895,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
             ["onMobMagicPrepare"] = {function(mob, target, spellId) xi.dynamis.onWeaponskillPrepDagour(mob) end},
             ["onMobWeaponSkillPrepare"] = {function(mob) end},
             ["onMobWeaponSkill"] = {function(mob) end},
-            ["onMobDeath"] = {function(mob, player, isKiller) xi.dynamis.mobOnDeath(mob, player) end},
+            ["onMobDeath"] = {function(mob, player, isKiller) xi.dynamis.mobOnDeath(mob, player, isKiller) end},
             ["mixins"] = { require("scripts/mixins/job_special"), },
         },
         ["Goublefaupe"] =
@@ -900,7 +907,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
             ["onMobMagicPrepare"] = {function(mob, target, spellId) end},
             ["onMobWeaponSkillPrepare"] = {function(mob) end},
             ["onMobWeaponSkill"] = {function(mob) end},
-            ["onMobDeath"] = {function(mob, player, isKiller) xi.dynamis.mobOnDeath(mob, player) end},
+            ["onMobDeath"] = {function(mob, player, isKiller) xi.dynamis.mobOnDeath(mob, player, isKiller) end},
             ["mixins"] = { require("scripts/mixins/job_special"), },
         },
         ["Mildaunegeux"] =
@@ -912,7 +919,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
             ["onMobMagicPrepare"] = {function(mob, target, spellId) end},
             ["onMobWeaponSkillPrepare"] = {function(mob) end},
             ["onMobWeaponSkill"] = {function(mob) end},
-            ["onMobDeath"] = {function(mob, player, isKiller) xi.dynamis.mobOnDeath(mob, player) end},
+            ["onMobDeath"] = {function(mob, player, isKiller) xi.dynamis.mobOnDeath(mob, player, isKiller) end},
             ["mixins"] = { require("scripts/mixins/job_special"), },
         },
         ["Quiebitiel"] =
@@ -924,7 +931,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
             ["onMobMagicPrepare"] = {function(mob, target, spellId) end},
             ["onMobWeaponSkillPrepare"] = {function(mob) end},
             ["onMobWeaponSkill"] = {function(mob) end},
-            ["onMobDeath"] = {function(mob, player, isKiller) xi.dynamis.mobOnDeath(mob, player) end},
+            ["onMobDeath"] = {function(mob, player, isKiller) xi.dynamis.mobOnDeath(mob, player, isKiller) end},
             ["mixins"] = { require("scripts/mixins/job_special"), },
         },
         ["Velosareon"] =
@@ -936,7 +943,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
             ["onMobMagicPrepare"] = {function(mob, target, spellId) end},
             ["onMobWeaponSkillPrepare"] = {function(mob) end},
             ["onMobWeaponSkill"] = {function(mob) end},
-            ["onMobDeath"] = {function(mob, player, isKiller) xi.dynamis.mobOnDeath(mob, player) end},
+            ["onMobDeath"] = {function(mob, player, isKiller) xi.dynamis.mobOnDeath(mob, player, isKiller) end},
             ["mixins"] = { require("scripts/mixins/job_special"), },
         },
 
@@ -985,7 +992,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
             ["onMobMagicPrepare"] = {function(mob, target, spellId) end},
             ["onMobWeaponSkillPrepare"] = {function(mob) end},
             ["onMobWeaponSkill"] = {function(mob) end},
-            ["onMobDeath"] = {function(mob, player, isKiller) xi.dynamis.mobOnDeath(mob) end},
+            ["onMobDeath"] = {function(mob, player, isKiller) xi.dynamis.mobOnDeath(mob, player, isKiller) end},
             ["mixins"] = { },
         },
         ["Nant'ina"] =
@@ -997,7 +1004,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
           ["onMobMagicPrepare"] = {function(mob, target, spellId) end},
           ["onMobWeaponSkillPrepare"] = {function(mob) xi.dynamis.onWeaponskillPrepNantina(mob) end},
           ["onMobWeaponSkill"] = {function(mob) end},
-          ["onMobDeath"] = {function(mob, player, isKiller) xi.dynamis.mobOnDeath(mob) end},
+          ["onMobDeath"] = {function(mob, player, isKiller) xi.dynamis.mobOnDeath(mob, player, isKiller) end},
           ["mixins"] = { },
         },
         ["Nightmare Morbol"] =
@@ -1009,7 +1016,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
             ["onMobMagicPrepare"] = {function(mob, target, spellId) end},
             ["onMobWeaponSkillPrepare"] = {function(mob) end},
             ["onMobWeaponSkill"] = {function(mob) end},
-            ["onMobDeath"] = {function(mob, player, isKiller) xi.dynamis.mobOnDeath(mob) end},
+            ["onMobDeath"] = {function(mob, player, isKiller) xi.dynamis.mobOnDeath(mob, player, isKiller) end},
             ["mixins"] = { },
         },
         ["Dynamis Lord"] =
@@ -1052,19 +1059,19 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         {
             ["onMobSpawn"] = {function(mob) xi.dynamis.onSpawnAnimated(mob) end},
             ["onMobEngaged"] = {function(mob, target)  xi.dynamis.onEngagedAnimated(mob, target) end},
-            ["onMobFight"] = {function(mob) end},
+            ["onMobFight"] = {function(mob, target) xi.dynamis.onFightAnimated(mob, target) end},
             ["onMobRoam"] = {function(mob) xi.dynamis.onMobRoamXarc(mob) end},
-            ["onMobMagicPrepare"] = {function(mob, target) xi.dynamis.onMagicPrepAnimated(mob, target) end},
+            ["onMobMagicPrepare"] = {function(mob, target) end},
             ["onMobWeaponSkillPrepare"] = {function(mob, target) end},
             ["onMobWeaponSkill"] = {function(mob) end},
-            ["onMobDeath"] = {function(mob) xi.dynamis.onDeathAnimated(mob) end},
+            ["onMobDeath"] = {function(mob, player, isKiller) xi.dynamis.mobOnDeath(mob, player, isKiller) end},
             ["mixins"] = { require("scripts/mixins/families/animated_weapons"), },
         },
         ["Satellite Weapon"] =
         {
             ["onMobSpawn"] = {function(mob) xi.dynamis.onSpawnSatellite(mob) end},
             ["onMobEngaged"] = {function(mob, target) end},
-            ["onMobFight"] = {function(mob) end},
+            ["onMobFight"] = {function(mob, target) xi.dynamis.onFightSatellite(mob, target) end},
             ["onMobRoam"] = {function(mob) xi.dynamis.onMobRoamXarc(mob) end},
             ["onMobMagicPrepare"] = {function(mob, target, spellId) end},
             ["onMobWeaponSkillPrepare"] = {function(mob, target) end},
@@ -1081,7 +1088,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
             ["onMobMagicPrepare"] = {function(mob, target, spellId) end},
             ["onMobWeaponSkillPrepare"] = {function(mob) end},
             ["onMobWeaponSkill"] = {function(mob) end},
-            ["onMobDeath"] = {function(mob, player, isKiller) xi.dynamis.mobOnDeath(mob) end},
+            ["onMobDeath"] = {function(mob, player, isKiller) xi.dynamis.mobOnDeath(mob, player, isKiller) end},
             ["mixins"] = { },
         },
         ["Enabled Auto Attack"] =
@@ -1093,7 +1100,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
             ["onMobMagicPrepare"] = {function(mob, target, spellId) end},
             ["onMobWeaponSkillPrepare"] = {function(mob) end},
             ["onMobWeaponSkill"] = {function(mob) end},
-            ["onMobDeath"] = {function(mob, player, isKiller) xi.dynamis.mobOnDeath(mob) end},
+            ["onMobDeath"] = {function(mob, player, isKiller) xi.dynamis.mobOnDeath(mob, player, isKiller) end},
             ["mixins"] = { },
         },
     }
@@ -1122,6 +1129,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
     zone:setLocalVar(string.format("MobIndex_%s", mob:getID()), mobIndex)
     mob:setLocalVar(string.format("MobIndex_%s", mob:getID()), mobIndex)
     mob:setLocalVar("MobIndex", mobIndex)
+    zone:setLocalVar(string.format("%s", mobIndex), mob:getID())
     mob:setDropID(xi.dynamis.nmInfoLookup[mobName][4])
     if xi.dynamis.nmInfoLookup[mobName][5] ~= nil then -- If SpellList ~= nil set SpellList
         mob:setSpellList(xi.dynamis.nmInfoLookup[mobName][5])
@@ -1676,7 +1684,7 @@ end
 --            Dynamis Mob Death           --
 --------------------------------------------
 
-xi.dynamis.mobOnDeath = function (mob, player, mobVar)
+xi.dynamis.mobOnDeath = function (mob, player, isKiller)
     local zone = mob:getZone()
     local mobIndex = zone:getLocalVar(string.format("MobIndex_%s", mob:getID()))
     if mob:getLocalVar("dynamisMobOnDeathTriggered") == 1 then return -- Don't trigger more than once.
@@ -1689,10 +1697,12 @@ xi.dynamis.mobOnDeath = function (mob, player, mobVar)
         end
         mob:setLocalVar("dynamisMobOnDeathTriggered", 1) -- onDeath lua happens once per party member that killed the mob, but we want this to only run once per mob
         if mob:getZoneID() == (xi.zone.DYNAMIS_BEAUCEDINE or xi.zone.DYNAMIS_XARCABARD) then
-            if mob:getFamily() == (4 or 92 or 93 or 94 or 95) then
-                player:addTreasure(4248, mob, 100) -- Adds Ginurva's Battle Theory to Statues and Eyes in Dynamis Beaucedine and Xarcabard
-            -- elseif mob:getFamily() == (358 or 359) and mob:getMobMod(xi.mobMod.CHECK_AS_NM) == 2 then
-                -- player:addTreasure(4249, mob, 500) -- Adds Shultz's Strategems to Kindred and Hydra NMs in Dynamis Beaucedine and Xarcabard
+            if player then
+                if mob:getFamily() == (4 or 92 or 93 or 94 or 95) then
+                    player:addTreasure(4248, mob, 100) -- Adds Ginurva's Battle Theory to Statues and Eyes in Dynamis Beaucedine and Xarcabard
+                elseif mob:getFamily() == (358 or 359) and mob:getMobMod(xi.mobMod.CHECK_AS_NM) == 2 then
+                    player:addTreasure(4249, mob, 500) -- Adds Shultz's Strategems to Kindred and Hydra NMs in Dynamis Beaucedine and Xarcabard
+                end
             end
         end
     end

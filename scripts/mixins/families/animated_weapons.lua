@@ -2,48 +2,50 @@
 -- Used to perform text choices and determine when to warp.
 
 require("scripts/globals/mixins")
+require("scripts/zones/Dynamis-Xarcabard/IDs")
+require("modules/era/lua/dynamis/globals/era_dynamis_spawning")
 
 g_mixins = g_mixins or {}
 g_mixins.families = g_mixins.families or {}
 
+local ID = zones[xi.zone.DYNAMIS_XARCABARD]
 local dialogChoice =
 {
-    ["DE_AKnu"] = {7297},
-    ["DE_ADag"] = {7329},
-    ["DE_ALon"] = {7361},
-    ["DE_ACla"] = {7393},
-    ["DE_ATab"] = {7425},
-    ["DE_AGre"] = {7457},
-    ["DE_ASpe"] = {7489},
-    ["DE_AScy"] = {7521},
-    ["DE_AKun"] = {7553},
-    ["DE_ATac"] = {7585},
-    ["DE_AHam"] = {7617},
-    ["DE_ASta"] = {7649},
-    ["DE_Alon"] = {7681},
-    ["DE_AGun"] = {7713},
-    ["DE_AHor"] = {7745},
-    ["DE_AShi"] = {7777},
+    ["DE_AKnu"] = ID.text.ANIMATED_KNUCKLES_DIALOG,
+    ["DE_ADag"] = ID.text.ANIMATED_DAGGER_DIALOG,
+    ["DE_ALon"] = ID.text.ANIMATED_LONGSWORD_DIALOG,
+    ["DE_ACla"] = ID.text.ANIMATED_CLAYMORE_DIALOG,
+    ["DE_ATab"] = ID.text.ANIMATED_TABAR_DIALOG,
+    ["DE_AGre"] = ID.text.ANIMATED_GREATAXE_DIALOG,
+    ["DE_ASpe"] = ID.text.ANIMATED_SPEAR_DIALOG,
+    ["DE_AScy"] = ID.text.ANIMATED_SCYTHE_DIALOG,
+    ["DE_AKun"] = ID.text.ANIMATED_KUNAI_DIALOG,
+    ["DE_ATac"] = ID.text.ANIMATED_TACHI_DIALOG,
+    ["DE_AHam"] = ID.text.ANIMATED_HAMMER_DIALOG,
+    ["DE_ASta"] = ID.text.ANIMATED_STAFF_DIALOG,
+    ["DE_Alon"] = ID.text.ANIMATED_LONGBOW_DIALOG,
+    ["DE_AGun"] = ID.text.ANIMATED_GUN_DIALOG,
+    ["DE_AHor"] = ID.text.ANIMATED_HORN_DIALOG,
+    ["DE_AShi"] = ID.text.ANIMATED_SHIELD_DIALOG,
 }
 
 g_mixins.families.animated_weapons = function(animatedMob)
 
-    animatedMob:addListener("SPAWN", "ANIMATED_WEAPON_SPAWN", function(mob)
+    animatedMob:addListener("SPAWN", "AWEAPON_SPAWN", function(mob)
         mob:SetMagicCastingEnabled(true)
         mob:SetAutoAttackEnabled(true)
         mob:SetMobAbilityEnabled(true)
-        print(mob:getLocalVar("MobIndex"))
-        mob:setLocalVar("Text", dialogChoice[mob:getName()][1])
+        mob:setLocalVar("Text", dialogChoice[mob:getName()])
         mob:setLocalVar("Text_Index_1", 4)
         mob:setLocalVar("Text_Index_2", 3)
+        mob:setAnimationSub(1)
     end)
 
-    animatedMob:addListener("ENGAGE", "ANIMATED_WEAPON_ENGAGE", function(mob, target)
-        mob:setLocalVar("changeTime", math.random(20, 30))
-        mob:showText(mob, dialogChoice[mob:getName()][1])
+    animatedMob:addListener("ENGAGE", "AWEAPON_ENGAGE", function(mob, target)
+        mob:showText(mob, mob:getLocalVar("Text"))
     end)
 
-    animatedMob:addListener("COMBAT_TICK", "ANIMATED_WEAPON_CTICK", function(mob)
+    animatedMob:addListener("COMBAT_TICK", "AWEAPON_CTICK", function(mob, target)
         local dialogThresholds = {90, 80, 70, 60, 50, 40, 30, 20, 10}
 
         for trigger, hpp in pairs(dialogThresholds) do
@@ -55,39 +57,44 @@ g_mixins.families.animated_weapons = function(animatedMob)
         end
 
         if mob:getLocalVar("dialogQueue") > 0 then
-            mob:showText(mob, dialogChoice[mob:getName()][1] + mob:getLocalVar("Text_Index_1")) -- standard text
+            mob:showText(mob, mob:getLocalVar("Text") + mob:getLocalVar("Text_Index_1")) -- standard text
             mob:setLocalVar("dialogOne", mob:getLocalVar("Text_Index_1") + 2)
-            mob:showText(mob, dialogChoice[mob:getName()][1] + mob:getLocalVar("Text_Index_2")) -- emote
+            mob:showText(mob, mob:getLocalVar("Text") + mob:getLocalVar("Text_Index_2")) -- emote
             mob:setLocalVar("dialogTwo", mob:getLocalVar("Text_Index_2") + 2)
             mob:setLocalVar("dialogQueue", mob:getLocalVar("dialogQueue") - 1)
         end
 
-        if mob:getBattleTime() - mob:getLocalVar("changeTime") >= 0 then
-            mob:castSpell(261)
+    end)
+
+    animatedMob:addListener("MAGIC_START", "AWEAPON_MAGIC_START", function(mob, spell, action)
+        if spell:getID() == 261 or spell:getID() == 73 then
+            mob:setLocalVar("changeTime", os.time() + math.random(10, 15))
         end
     end)
 
-    animatedMob:addListener("MAGIC_START", "ANIMATED_WEAPON_MAGIC_START", function(mob, spell, action)
-        if spell:getID() == 261 then
-            mob:setLocalVar("changeTime", mob:getBattleTime() + math.random(10, 15))
+    animatedMob:addListener("MAGIC_STATE_EXIT", "AWEAPON_MAGIC_STATE_EXIT", function(mob, spell)
+        if spell:getID() == 261 or spell:getID() == 73 then
+            if mob:getCurrentAction() ~= xi.action.MAGIC_INTERRUPT then
+                mob:addStatusEffect(xi.effect.STUN, 1, 0, 30)
+                mob:SetMagicCastingEnabled(false)
+                mob:SetAutoAttackEnabled(false)
+                mob:SetMobAbilityEnabled(false)
+                mob:setMobMod(xi.mobMod.NO_MOVE, 1)
+                mob:setMobMod(xi.mobMod.NO_DROPS, 1)
+                mob:setLocalVar("warpDeath", 1)
+                mob:setHP(0)
+            end
         end
     end)
 
-    animatedMob:addListener("MAGIC_STATE_EXIT", "ANIMATED_WEAPON_MAGIC_STATE_EXIT", function(mob, spell)
-        if spell:getID() == 261 then
-            mob:SetMagicCastingEnabled(false)
-            mob:SetAutoAttackEnabled(false)
-            mob:SetMobAbilityEnabled(false)
-            mob:setMobMod(xi.mobMod.NO_MOVE, 1)
+    animatedMob:addListener("DISENGAGE", "AWEAPON_DISENGAGE", function(mob)
+        mob:showText(mob, mob:getLocalVar("Text") + 2)
+    end)
+
+    animatedMob:addListener("DEATH", "AWEAPON_DEATH", function(mob, killer)
+        if mob:getLocalVar("warpDeath") ~= 1 then
+            mob:showText(mob, mob:getLocalVar("Text") + 1)
         end
-    end)
-
-    animatedMob:addListener("DISENGAGE", "ANIMATED_WEAPON_DISENGAGE", function(mob)
-        mob:showText(mob, dialogChoice[mob:getName()][1] + 2)
-    end)
-
-    animatedMob:addListener("DEATH", "ANIMATED_WEAPON_DEATH", function(mob, killer)
-        mob:showText(mob, dialogChoice[mob:getName()][1] + 1)
     end)
 end
 

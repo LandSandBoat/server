@@ -3,6 +3,8 @@
 -----------------------------------
 require("scripts/globals/dynamis")
 require("scripts/globals/zone")
+require("scripts/globals/spell_data")
+require("scripts/globals/status")
 -----------------------------------
 
 xi = xi or {}
@@ -22,10 +24,13 @@ xi.dynamis.onSpawnDynaLord = function(mob)
     mob:setMod(xi.mod.GRAVITYRES, 100)
     mob:setMod(xi.mod.BINDRES, 100)
     mob:setMod(xi.mod.UFASTCAST, 100)
-    zone:setLocalVar("MainDynaLord", mob:getID())
     mob:setLocalVar("tpTime", 0)
     mob:SetAutoAttackEnabled(false)
     mob:SetMagicCastingEnabled(false)
+
+    if zone:getLocalVar("MainDynaLord") == 0 then
+        zone:setLocalVar("MainDynaLord", mob:getID())
+    end
 
     xi.mix.jobSpecial.config(mob, {
         between = 60,
@@ -45,6 +50,7 @@ xi.dynamis.onSpawnYing = function(mob)
     if zone:getLocalVar("MainDynaLord") ~= 0 then
         dynaLord = GetMobByID(zone:getLocalVar("MainDynaLord"))
     end
+    zone:setLocalVar("ying_killed", 0)
     mob:setRoamFlags(xi.roamFlag.EVENT)
     xi.dynamis.setNMStats(mob)
     if dynaLord ~= 0 then
@@ -65,6 +71,7 @@ xi.dynamis.onSpawnYang = function(mob)
     if zone:getLocalVar("MainDynaLord") ~= 0 then
         dynaLord = GetMobByID(zone:getLocalVar("MainDynaLord"))
     end
+    zone:setLocalVar("yang_killed", 0)
     mob:setRoamFlags(xi.roamFlag.EVENT)
     xi.dynamis.setNMStats(mob)
     if dynaLord ~= 0 then
@@ -95,8 +102,6 @@ xi.dynamis.onFightDynaLord = function(mob, target)
     local zone = mob:getZone()
     local tpTime = mob:getLocalVar("tpTime")
     local mainLord = zone:getLocalVar("MainDynaLord")
-    local ying = GetMobByID(zone:getLocalVar("Ying"))
-    local yang = GetMobByID(zone:getLocalVar("Yang"))
 
     if os.time() > tpTime and tpTime ~= 0 then
         local cloneMove = zone:getLocalVar("CloneMove")
@@ -114,14 +119,28 @@ xi.dynamis.onFightDynaLord = function(mob, target)
         mob:setLocalVar("WeaponskillPerformed", 0)
     end
 
-    local alreadyPopped = false
+    if zone:getLocalVar("ying_killed") == 0 then
+        local ying =  GetMobByID(zone:getLocalVar("178"))
+        if ying:getCurrentAction() == xi.act.ROAMING then
+            ying:updateEnmity(target)
+        end
+    end
+    if zone:getLocalVar("yang_killed") == 0 then
+        local yang = GetMobByID(zone:getLocalVar("177"))
+        if yang:getCurrentAction() == xi.act.ROAMING then
+            yang:updateEnmity(target)
+        end
+    end
 
     if os.time() - mob:getLocalVar("lastPetPop") > 30 then -- Spawn Ying and Yang
-        if not ying:isAlive() and not yang:isAlive() then
+        if zone:getLocalVar("ying_killed") == 1 and zone:getLocalVar("yang_killed") == 1 and mob:getLocalVar("Spawning") ~= 1 then
+            mob:setLocalVar("Spawning", 1)
             mob:SetAutoAttackEnabled(false)
             mob:SetMagicCastingEnabled(false)
             mob:SetMobAbilityEnabled(false)
             mob:entityAnimationPacket("casm")
+            mob:setLocalVar("lastPetPop", os.time() + 33)
+            mob:setLocalVar("Spawning", 0)
             mob:timer(3000, function (mob, target)
                 local pets = { 177, 178 }
                 xi.dynamis.nmDynamicSpawn(pets[1], mob:getLocalVar("MobIndex"), true, mob:getZoneID(), target, mob)
@@ -130,21 +149,12 @@ xi.dynamis.onFightDynaLord = function(mob, target)
                 mob:SetAutoAttackEnabled(true)
                 mob:SetMagicCastingEnabled(true)
                 mob:SetMobAbilityEnabled(true)
-                mob:setLocalVar("lastPetPop", os.time() +30)
                 if mob:getLocalVar("initialSpawnDialog") ~= 1 and mob:getID() == mainLord then
                     mob:showText(mob, dialogDL + 7)
                     mob:setLocalVar("initialSpawnDialog", 1)
                 end
             end)
         end
-    end
-
-    if ying:isAlive() and ying:getCurrentAction() == xi.act.ROAMING then
-        ying:updateEnmity(target)
-    end
-
-    if yang:isAlive() and yang:getCurrentAction() == xi.act.ROAMING then
-        yang:updateEnmity(target)
     end
 
     -- Dynamis Lord spawns clones of himself 1 1/2 - 2min after pull that use a TP move in unison and despawn after
@@ -174,8 +184,7 @@ xi.dynamis.onFightDynaLord = function(mob, target)
                 onMobEngaged = function (mob, target) xi.dynamis.onEngagedDynaLord(mob, target) end,
                 onMobRoam = function(mob) xi.dynamis.onMobRoamXarc(mob) end,
                 onMobFight = function(mob, target) xi.dynamis.onFightDynaLord(mob, target) end,
-                onMobDeath = function(mob, player, isKiller) end,
-                xi.dynamis.onDeathDynaLord(mob, player, isKiller)
+                onMobDeath = function(mob, player, isKiller) xi.dynamis.onDeathDynaLord(mob, player, isKiller) end,
                 })
                 clone:setSpawn(victimPos.x, victimPos.y, victimPos.z, mob:getRotPos())
                 mob:setDropID(xi.dynamis.nmInfoLookup["Dynamis Lord"][4])
@@ -195,7 +204,7 @@ xi.dynamis.onFightDynaLord = function(mob, target)
             i = i + 1
             spawned = spawned + 1
         end)
-        if spawned ~= 0  then
+        if spawned ~= 0 then
             mob:entityAnimationPacket("shsm")
             mob:SetAutoAttackEnabled(true)
             mob:SetMagicCastingEnabled(true)
@@ -208,20 +217,18 @@ end
 
 xi.dynamis.onFightYing = function(mob, target)
     local zone = mob:getZone()
-    local yang = GetMobByID(zone:getLocalVar("Yang"))
     local yangToD = mob:getLocalVar("yangToD")
     -- Repop Yang every 30 seconds if Ying is up and Yang is not.
-    if not yang:isSpawned() and os.time() > yangToD + 30 then
+    if zone:getLocalVar("yang_killed") == 1 and os.time() > yangToD + 30 then
         xi.dynamis.nmDynamicSpawn( 177, mob:getLocalVar("MobIndex"), true, mob:getZoneID(), target, mob)
     end
 end
 
 xi.dynamis.onFightYang = function(mob, target)
     local zone = mob:getZone()
-    local Yang = GetMobByID(zone:getLocalVar("Yang"))
-    local YangToD = mob:getLocalVar("YangToD")
+    local yingToD = mob:getLocalVar("YangToD")
     -- Repop Yang every 30 seconds if Yang is up and Yang is not.
-    if not Yang:isSpawned() and os.time() > YangToD + 30 then
+    if zone:getLocalVar("ying_killed") == 1 and os.time() > yingToD + 30 then
         xi.dynamis.nmDynamicSpawn( 178, mob:getLocalVar("MobIndex"), true, mob:getZoneID(), target, mob)
     end
 end
@@ -273,10 +280,10 @@ xi.dynamis.onDeathDynaLord = function(mob, player, isKiller)
     xi.dynamis.megaBossOnDeath(mob, player, mobVar)
     if isKiller then
         mob:showText(mob, dialogDL + 2)
-        local dwagons = {zone:getLocalVar("Ying"), zone:getLocalVar("Yang")}
+        local dwagons = {{zone:getLocalVar("Ying"), zone:getLocalVar("ying_killed")}, {zone:getLocalVar("Yang"), zone:getLocalVar("yang_killed")}}
         for _, dwagon in pairs(dwagons) do
-            if GetMobByID(dwagon):isAlive() then
-                DespawnMob(dwagon)
+            if dwagon[2] == 0 then
+                DespawnMob(dwagon[1])
             end
         end
     end
@@ -285,21 +292,20 @@ end
 
 xi.dynamis.onDeathYing = function(mob, player, isKiller)
     local zone = mob:getZone()
-    local yang = GetMobByID(zone:getLocalVar("Yang"))
     local dynaLord = 0
     if zone:getLocalVar("MainDynaLord") ~= 0 then
         dynaLord = GetMobByID(zone:getLocalVar("MainDynaLord"))
     end
     local dialogYing = 7289
     if isKiller then
-        if yang:isAlive() == true then
-            mob:showText(mob, dialogYing)
-        else
+        if zone:getLocalVar("yang_killed") == 0 then
             mob:showText(mob, dialogYing + 2)
+        else
+            mob:showText(mob, dialogYing)
         end
     end
 
-    yang:setLocalVar("yingToD", os.time())
+    mob:setLocalVar("yingToD", os.time())
     if dynaLord ~= 0 then
         if dynaLord:getLocalVar("magImmune") == 0 then
             dynaLord:setMod(xi.mod.UDMGMAGIC, 0)
@@ -318,21 +324,20 @@ end
 
 xi.dynamis.onDeathYang = function(mob, player, isKiller)
     local zone = mob:getZone()
-    local ying = GetMobByID(zone:getLocalVar("Ying"))
     local dynaLord = 0
     if zone:getLocalVar("MainDynaLord") ~= 0 then
         dynaLord = GetMobByID(zone:getLocalVar("MainDynaLord"))
     end
-    local dialogYing = 7290
+    local dialogYang = 7290
     if isKiller then
-        if ying:isAlive() == true then
-            mob:showText(mob, dialogYing)
+        if zone:getLocalVar("ying_killed") == 0 then
+            mob:showText(mob, dialogYang + 2)
         else
-            mob:showText(mob, dialogYing + 2)
+            mob:showText(mob, dialogYang)
         end
     end
 
-    ying:setLocalVar("yingToD", os.time())
+    mob:setLocalVar("yangToD", os.time())
     if dynaLord ~= 0 then
         if dynaLord:getLocalVar("physImmune") == 0 then
             dynaLord:setMod(xi.mod.UDMGMAGIC, 0)
@@ -363,7 +368,7 @@ end
 
 xi.dynamis.animatedInfo = 
 {
-    -- [mobIndex] = 
+    -- [mobName] = 
     -- {
     --     ["Children"] = {},
     --     ["Spells"] =
@@ -374,163 +379,182 @@ xi.dynamis.animatedInfo =
     -- },
     -- xi.effect.KO is used for if the spell is not enhancing.
     -- Use chance == 100 if there is really only 2 options. See hammer.
-    [151] = -- Animated Hammer
+    ["DE_AHam"] = -- Animated Hammer
     {
         ["Children"] = {180, 181, 182, 183},
         ["Spells"] =
         {
-            [106] = {100, xi.effect.PHALANX}, -- Phalanx
-            [21] = {100, xi.effect.KO}, -- Holy
+            {xi.magic.spell.PHALANX, 100, xi.effect.PHALANX},
+            {xi.magic.spell.HOLY, 100, xi.effect.KO},
         },
     },
-    [152] = -- Animated Dagger
+    ["DE_ADag"] = -- Animated Dagger
     {
         ["Children"] = {184, 185, 186, 187},
         ["Spells"] =
         {
-            [186] = {50, xi.effect.KO}, -- Aeroga III
-            [112] = {75, xi.effect.KO}, -- Flash
-            [226] = {100, xi.effect.KO}, -- Poisonga II
+            {xi.magic.spell.AEROGA_III, 50, xi.effect.KO},
+            {xi.magic.spell.FLASH, 75, xi.effect.KO},
+            {xi.magic.spell.POISONGA_II, 100, xi.effect.KO},
         },
     },
-    [153] = -- Animated Shield
+    ["DE_AShi"] = -- Animated Shield
     {
         ["Children"] = {188, 189, 190, 191},
         ["Spells"] =
         {
-            [106] = {100, xi.effect.PHALANX}, -- Phalanx
-            [9] = {50, xi.effect.KO}, -- Curaga III
-            [46] = {100, xi.effect.PROTECT}, -- Protect IV
-            [273] = {100, xi.effect.KO}, -- Sleepga
+            {xi.magic.spell.PHALANX, 100, xi.effect.PHALANX},
+            {xi.magic.spell.CURAGA_III, 50, xi.effect.WEAKNESS},
+            {xi.magic.spell.PROTECT_IV, 100, xi.effect.PROTECT},
+            {xi.magic.spell.SLEEPGA, 100, xi.effect.KO},
         },
     },
-    [154] = -- Animated Claymore
+    ["DE_ACla"] = -- Animated Claymore
     {
         ["Children"] = {192, 193, 194, 195},
         ["Spells"] =
         {
-            [181] = {50, xi.effect.KO}, -- Blizzaga III
-            [250] = {75, xi.effect.ICE_SPIKES}, -- Ice Spikes
-            [273] = {100, xi.effect.KO}, -- Sleepga
+            {xi.magic.spell.BLIZZAGA_III, 50, xi.effect.KO},
+            {xi.magic.spell.ICE_SPIKES, 75, xi.effect.ICE_SPIKES},
+            {xi.magic.spell.SLEEPGA, 100, xi.effect.KO},
         },
     },
-    [155] = -- Animated Gun
+    ["DE_AGun"] = -- Animated Gun
     {
         ["Children"] = {196, 197, 198, 199},
         ["Spells"] =
         {
-            [204] = {50, xi.effect.KO}, -- Flare
-            [249] = {75, xi.effect.BLAZE_SPIKES}, -- Blaze Spikes
-            [366] = {100, xi.effect.KO}, -- Graviga
+            {xi.magic.spell.FLARE, 50, xi.effect.KO},
+            {xi.magic.spell.BLAZE_SPIKES, 75, xi.effect.BLAZE_SPIKES},
+            {xi.magic.spell.GRAVIGA, 100, xi.effect.KO},
         },
     },
-    [156] = -- Animated Longbow
+    ["DE_Alon"] = -- Animated Longbow
     {
         ["Children"] = {200, 201, 202, 203},
         ["Spells"] =
         {
-            [9] = {25, xi.effect.KO}, -- Curaga III
-            [53] = {50, xi.effect.BLINK}, -- Blink
-            [208] = {75, xi.effect.KO}, -- Tornado
-            [362] = {100, xi.effect.KO}, -- Bindga
+            {xi.magic.spell.CURAGA_III, 25, xi.effect.WEAKNESS},
+            {xi.magic.spell.BLINK, 50, xi.effect.BLINK},
+            {xi.magic.spell.TORNADO, 75, xi.effect.KO},
+            {xi.magic.spell.BINDGA, 100, xi.effect.KO},
         },
     },
-    [157] = -- Animated Tachi
+    ["DE_ATac"] = -- Animated Tachi
     {
         ["Children"] = {204, 205, 206, 207},
         ["Spells"] =
         {
-            [9] = {25, xi.effect.KO}, -- Curaga III
-            [359] = {75, xi.effect.KO}, -- Silencega
-            [361] = {100, xi.effect.KO}, -- Bindga
+            {xi.magic.spell.CURAGA_III, 25, xi.effect.WEAKNESS},
+            {xi.magic.spell.SILENCEGA, 75, xi.effect.KO},
+            {xi.magic.spell.BINDGA, 100, xi.effect.KO},
         },
     },
-    [158] = -- Animated Tabar
+    ["DE_ATab"] = -- Animated Tabar
     {
         ["Children"] = {208, 209, 210, 211},
         ["Spells"] =
         {
-            [53] = {25, xi.effect.BLINK}, -- Blink
-            [273] = {75, xi.effect.KO}, -- Sleepga
-            [356] = {100, xi.effect.KO}, -- Paralyga
+            {xi.magic.spell.BLINK, 25, xi.effect.BLINK},
+            {xi.magic.spell.SLEEPGA, 75, xi.effect.KO},
+            {xi.magic.spell.PARALYGA, 100, xi.effect.KO},
         },
     },
-    [159] = -- Animated Staff
+    ["DE_ASta"] = -- Animated Staff
     {
         ["Children"] = {212, 213, 214, 215},
         ["Spells"] =
         {
-            [21] = {50, xi.effect.KO}, -- Holy
-            [365] = {100, xi.effect.KO}, -- Breakga
+            {xi.magic.spell.HOLY, 50, xi.effect.KO},
+            {xi.magic.spell.BREAKGA, 100, xi.effect.KO},
         },
     },
-    [160] = -- Animated Spear
+    ["DE_ASpe"] = -- Animated Spear
     {
         ["Children"] = {216, 217, 218, 219},
         ["Spells"] =
         {
-            [8] = {50, xi.effect.KO}, -- Curaga II
-            [196] = {100, xi.effect.KO}, -- Thundaga III
+            {xi.magic.spell.CURAGA_II, 50, xi.effect.WEAKNESS},
+            {xi.magic.spell.THUNDAGA_III, 100, xi.effect.KO},
         },
     },
-    [161] = -- Animated Kunai
+    ["DE_AKun"] = -- Animated Kunai
     {
         ["Children"] = {220, 221, 222, 223},
         ["Spells"] =
         {
-            [342] = {50, xi.effect.KO}, -- Jubaku: Ni
-            [348] = {100, xi.effect.KO}, -- Kurayami: Ni
+            {xi.magic.spell.JUBAKU_NI, 50, xi.effect.KO},
+            {xi.magic.spell.KURAYAMI_NI, 100, xi.effect.KO},
         },
     },
-    [162] = -- Animated Knuckles
+    ["DE_AKnu"] = -- Animated Knuckles
     {
         ["Children"] = {224, 225, 226, 227},
         ["Spells"] =
         {
-            [128] = {25, xi.effect.PROTECT}, -- Protectra IV
-            [249] = {50, xi.effect.BLAZE_SPIKES}, -- Blase Spikes
-            [358] = {100, xi.effect.KO}, -- Hastega
+            {xi.magic.spell.PROTECTRA_IV, 25, xi.effect.PROTECT},
+            {xi.magic.spell.BLAZE_SPIKES, 50, xi.effect.BLAZE_SPIKES},
+            {xi.magic.spell.HASTEGA, 100, xi.effect.WEAKNESS},
         },
     },
-    [163] = -- Animated Great Axe
+    ["DE_AGre"] = -- Animated Great Axe
     {
         ["Children"] = {228, 229, 230, 231},
         ["Spells"] =
         {
-            [249] = {25, xi.effect.BLAZE_SPIKES}, -- Blaze Spikes
-            [266] = {75, xi.effect.STR_BOOST}, -- Absorb - STR
-            [357] = {100, xi.effect.KO}, -- Slowga
+            {xi.magic.spell.BLAZE_SPIKES, 25, xi.effect.BLAZE_SPIKES},
+            {xi.magic.spell.ABSORB_STR, 75, xi.effect.STR_BOOST},
+            {xi.magic.spell.SLOWGA, 100, xi.effect.KO},
         },
     },
-    [164] = -- Animated Horn
+    ["DE_AHor"] = -- Animated Horn
     {
         ["Children"] = {232, 233, 234, 235},
         ["Spells"] =
         {
-            [376] = {100, xi.effect.KO}, -- Horde Lullaby
+            {xi.magic.spell.HORDE_LULLABY, 100, xi.effect.KO},
         },
     },
-    [165] = -- Animated Longsword
+    ["DE_ALon"] = -- Animated Longsword
     {
         ["Children"] = {236, 237, 238, 239},
         ["Spells"] =
         {
-            [4] = {25, xi.effect.KO}, -- Cure IV
-            [9] = {50, xi.effect.KO}, -- Curaga III
-            [21] = {75, xi.effect.KO}, -- Holy
-            [360] = {100, xi.effect.KO}, -- Dispelga
+            {xi.magic.spell.CURE_IV, 25, xi.effect.WEAKNESS},
+            {xi.magic.spell.CURAGA_III, 50, xi.effect.WEAKNESS},
+            {xi.magic.spell.HOLY, 75, xi.effect.KO},
+            {xi.magic.spell.DISPELGA, 100, xi.effect.KO},
         },
     },
-    [166] = -- Animated Scythe
+    ["DE_AScy"] = -- Animated Scythe
     {
         ["Children"] = {240, 241, 242, 243},
         ["Spells"] =
         {
-            [106] = {25, xi.effect.PHALANX}, -- Phalanx
-            [232] = {75, xi.effect.KO}, -- Bio III
-            [361] = {100, xi.effect.KO}, -- Bindga
+            {xi.magic.spell.PHALANX, 25, xi.effect.PHALANX},
+            {xi.magic.spell.BIO_III, 75, xi.effect.KO},
+            {xi.magic.spell.BINDGA, 100, xi.effect.KO},
         },
     },
+}
+xi.dynamis.satelliteInfo =
+{
+    ["DE_5348616d"] = {"hammer_killed"},
+    ["DE_5344616"] = {"dagger_killed"},
+    ["DE_53536869"] = {"shield_killed"},
+    ["DE_53436c61"] = {"claymore_killed"},
+    ["DE_5347756e"] = {"gun_killed"},
+    ["DE_536c6f6e"] = {"longbow_killed"},
+    ["DE_53546163"] = {"tachi_killed"},
+    ["DE_53546162"] = {"tabar_killed"},
+    ["DE_53537461"] = {"staff_killed"},
+    ["DE_53537065"] = {"spear_killed"},
+    ["DE_534b756e"] = {"kunai_killed"},
+    ["DE_534b6e75"] = {"knuckles_killed"},
+    ["DE_53477265"] = {"gaxe_killed"},
+    ["DE_53486f72"] = {"horn_killed"},
+    ["DE_534c6f6e"] = {"longsword_killed"},
+    ["DE_53536379"] = {"scythe_killed"},
 }
 
 xi.dynamis.onSpawnAnimated = function(mob)
@@ -540,34 +564,32 @@ end
 
 xi.dynamis.onEngagedAnimated = function(mob, target)
     xi.dynamis.parentOnEngaged(mob, target)
+    mob:setLocalVar("castTime", os.time() + math.random(0, 3))
+    mob:setLocalVar("changeTime", os.time() + math.random(20, 30))
 end
 
-xi.dynamis.onMagicPrepAnimated = function(mob, target)
-    local mobIndex = mob:getLocalVar("MobIndex")
-    local spells = xi.dynamis.animatedInfo[mobIndex]["Spells"]
-    local pick = math.random(1, 100)
+xi.dynamis.onFightAnimated = function(mob, target)
+    local chosenTarget = mob
 
-    if mob:getBattleTime() - mob:getLocalVar("changeTime") >= 0 then
-        return 261 -- Use Warp
+    if mob:getLocalVar("changeTime") <= os.time() then
+        mob:castSpell(xi.magic.spell.WARP, chosenTarget)
+        mob:setLocalVar("changeTime", os.time() + math.random(10, 15))
     end
 
-    for spell, chance in pairs(spells) do
-        if chance[1] <= pick then
-            if mob:hasStatusEffect(spell[2]) then
-                spell = spell + 1
-            else
-                return spell
+    if mob:getLocalVar("castTime") <= os.time() then
+        local pick = math.random(1, 100)
+
+        for _, data in pairs(xi.dynamis.animatedInfo[mob:getName()]["Spells"]) do
+            if data[2] <= pick then
+                if not mob:hasStatusEffect(data[3]) then
+                    if data[3] == xi.effect.KO then
+                        chosenTarget = target
+                    end
+                    mob:castSpell(data[1], chosenTarget)
+                    mob:setLocalVar("castTime", os.time() + math.random(5, 10))
+                    break
+                end
             end
-        end
-    end
-end
-
-xi.dynamis.onDeathAnimated = function(mob)
-    local mobIndex = mob:getLocalVar("MobIndex")
-    local children = xi.dynamis.animatedInfo[mobIndex]["Children"]
-    for _, child in pairs(children) do
-        if GetMobByID(mob:getLocalVar("ChildID_%s", child)):isAlive() then
-            DespawnMob(mob:getLocalVar("ChildID_%s", child))
         end
     end
 end
@@ -576,4 +598,10 @@ xi.dynamis.onSpawnSatellite = function(mob)
     mob:setRoamFlags(xi.roamFlag.EVENT)
     xi.dynamis.setNMStats(mob)
     mob:setAnimationSub(math.random(5,6))
+end
+
+xi.dynamis.onFightSatellite = function(mob, target)
+    if mob:getZone():getLocalVar(string.format("%s", xi.dynamis.satelliteInfo[mob:getName()][1])) == 1 then -- Despawn if Animated Parent Dies
+        DespawnMob(mob:getID())
+    end
 end
