@@ -1023,7 +1023,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         {
             ["onMobSpawn"] = {function(mob) xi.dynamis.onSpawnDynaLord(mob) end},
             ["onMobEngaged"] = {function(mob, target)  xi.dynamis.onEngagedDynaLord(mob, target) end},
-            ["onMobFight"] = {function(mob) xi.dynamis.onFightDynaLord(mob, target) end},
+            ["onMobFight"] = {function(mob, target) xi.dynamis.onFightDynaLord(mob, target) end},
             ["onMobRoam"] = {function(mob) xi.dynamis.onMobRoamXarc(mob) end},
             ["onMobMagicPrepare"] = {function(mob, target) xi.dynamis.onMagicPrepDynaLord(mob, target) end},
             ["onMobWeaponSkillPrepare"] = {function(mob, target) xi.dynamis.onWeaponskillPrepDynaLord(mob, target) end},

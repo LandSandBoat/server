@@ -132,15 +132,14 @@ xi.dynamis.onFightDynaLord = function(mob, target)
         end
     end
 
-    if os.time() - mob:getLocalVar("lastPetPop") > 30 then -- Spawn Ying and Yang
-        if zone:getLocalVar("ying_killed") == 1 and zone:getLocalVar("yang_killed") == 1 and mob:getLocalVar("Spawning") ~= 1 then
-            mob:setLocalVar("Spawning", 1)
+    if zone:getLocalVar("ying_killed") == 1 and zone:getLocalVar("yang_killed") == 1 and mob:getLocalVar("Spawning") <= os.time() then
+        mob:setLocalVar("Spawning", os.time() + 5)
+        if mob:getLocalVar("lastPetPop") <= os.time() then -- Spawn Ying and Yang
             mob:SetAutoAttackEnabled(false)
             mob:SetMagicCastingEnabled(false)
             mob:SetMobAbilityEnabled(false)
             mob:entityAnimationPacket("casm")
             mob:setLocalVar("lastPetPop", os.time() + 33)
-            mob:setLocalVar("Spawning", 0)
             mob:timer(3000, function (mob, target)
                 local pets = { 177, 178 }
                 xi.dynamis.nmDynamicSpawn(pets[1], mob:getLocalVar("MobIndex"), true, mob:getZoneID(), target, mob)
@@ -160,6 +159,7 @@ xi.dynamis.onFightDynaLord = function(mob, target)
     -- Dynamis Lord spawns clones of himself 1 1/2 - 2min after pull that use a TP move in unison and despawn after
     local teraTime = mob:getLocalVar("teraTime")
     if os.time() > teraTime and mob:getID() == mainLord then
+        mob:setLocalVar("terraTime", os.time() + 5)
         local targetList = mob:getEnmityList()
         local i = 1
         local spawned = 0
@@ -601,7 +601,9 @@ xi.dynamis.onSpawnSatellite = function(mob)
 end
 
 xi.dynamis.onFightSatellite = function(mob, target)
+    print(xi.dynamis.satelliteInfo[mob:getName()][1])
+    print(mob:getZone():getLocalVar(string.format("%s", xi.dynamis.satelliteInfo[mob:getName()][1])))
     if mob:getZone():getLocalVar(string.format("%s", xi.dynamis.satelliteInfo[mob:getName()][1])) == 1 then -- Despawn if Animated Parent Dies
-        DespawnMob(mob:getID())
+        mob:setHP(0)
     end
 end
