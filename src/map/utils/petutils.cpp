@@ -332,7 +332,11 @@ namespace petutils
 
     void AttackTarget(CBattleEntity* PMaster, CBattleEntity* PTarget)
     {
-        XI_DEBUG_BREAK_IF(PMaster->PPet == nullptr);
+        if (PMaster == nullptr || PMaster->PPet == nullptr || PTarget == nullptr)
+        {
+            ShowWarning("petutils::AttackTarget() - Null master, pet, or target passed to function.");
+            return;
+        }
 
         CBattleEntity* PPet = PMaster->PPet;
 
@@ -344,7 +348,11 @@ namespace petutils
 
     void RetreatToMaster(CBattleEntity* PMaster)
     {
-        XI_DEBUG_BREAK_IF(PMaster->PPet == nullptr);
+        if (PMaster == nullptr || PMaster->PPet == nullptr)
+        {
+            ShowWarning("petutils::RetreatToMaster() - Null master or pet passed to function.");
+            return;
+        }
 
         CBattleEntity* PPet = PMaster->PPet;
 

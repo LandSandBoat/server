@@ -279,7 +279,11 @@ bool CBattlefield::IsOccupied() const
 
 bool CBattlefield::InsertEntity(CBaseEntity* PEntity, bool enter, BATTLEFIELDMOBCONDITION conditions, bool ally)
 {
-    XI_DEBUG_BREAK_IF(PEntity == nullptr);
+    if (PEntity == nullptr)
+    {
+        ShowWarning("CBattlefield::InsertEntity() - PEntity is null.");
+        return false;
+    }
 
     if (PEntity->PBattlefield)
     {
