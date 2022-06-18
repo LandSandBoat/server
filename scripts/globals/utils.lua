@@ -551,15 +551,3 @@ function utils.mobTeleport(mob, hideDuration, pos, disAnim, reapAnim)
     end)
 end
 
-function utils.canUseAbility(mob)
-    local act = mob:getCurrentAction()
-    if act == xi.act.MOBABILITY_START or act == xi.act.MOBABILITY_USING or act == xi.act.MOBABILITY_FINISH
-    or act == xi.act.MAGIC_START or act == xi.act.MAGIC_CASTING or mob:getStatusEffect(xi.effect.STUN) ~= nil
-    or mob:getStatusEffect(xi.effect.PETRIFICATION) ~= nil or mob:getStatusEffect(xi.effect.TERROR) ~= nil
-    or mob:getStatusEffect(xi.effect.SLEEP_I) ~= nil or mob:getStatusEffect(xi.effect.SLEEP_II) ~= nil
-    or mob:getStatusEffect(xi.effect.AMNESIA) ~= nil or mob:getStatusEffect(xi.effect.LULLABY) ~= nil then
-        return false
-    end
-
-    return true
-end

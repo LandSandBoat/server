@@ -15,13 +15,13 @@ local spawnXzomit = function(mob, xzomit)
     local x = mob:getXPos()
     local y = mob:getYPos()
     local z = mob:getZPos()
-    mob:timer(3000, function(mob)
+    mob:timer(3000, function(mobArg)
         if mob:isAlive() then
-            mob:entityAnimationPacket("shsm")
-            mob:SetAutoAttackEnabled(true)
-            mob:SetMobAbilityEnabled(true)
+            mobArg:entityAnimationPacket("shsm")
+            mobArg:SetAutoAttackEnabled(true)
+            mobArg:SetMobAbilityEnabled(true)
             GetMobByID(xzomit):setSpawn(x + math.random(1, 2), y, z + math.random(1, 2))
-            SpawnMob(xzomit, 300):updateEnmity(mob:getTarget())
+            SpawnMob(xzomit, 300):updateEnmity(mobArg:getTarget())
         end
     end)
 end
@@ -61,16 +61,6 @@ entity.onMobFight = function(mob, target)
             end
         end
     end
-
-    -- for i = ID.mob.QN_XZOMIT_START, ID.mob.QN_XZOMIT_END do
-        -- local pet = GetMobByID(i)
-        -- if
-            -- pet:isSpawned() and
-            -- pet:getCurrentAction() == xi.act.ROAMING
-        -- then
-            -- pet:updateEnmity(target)
-        -- end
-    -- end
 
     if os.time() > mob:getLocalVar("canCharm") then
         mob:setLocalVar("canCharm", os.time() + 240)

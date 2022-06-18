@@ -26,30 +26,30 @@ local teleport = function(mob, hideDuration) --special move to new target option
         hideDuration = 500
     end
 
-    mob:timer(hideDuration, function(mob)
-        mob:hideName(false)
-        mob:setUntargetable(false)
-        mob:SetAutoAttackEnabled(true)
-        mob:SetMobAbilityEnabled(true)
+    mob:timer(hideDuration, function(mobArg)
+        mobArg:hideName(false)
+        mobArg:setUntargetable(false)
+        mobArg:SetAutoAttackEnabled(true)
+        mobArg:SetMobAbilityEnabled(true)
 
-        if mob:isDead() then
+        if mobArg:isDead() then
             return
         end
 
-        mob:setStatus(xi.status.UPDATE)
+        mobArg:setStatus(xi.status.UPDATE)
     end)
 end
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.NO_DROPS, 1)
     mob:setMobMod(xi.mobMod.ALLI_HATE, 30)
-    mob:addListener("WEAPONSKILL_STATE_ENTER", "PRUDENCE_MIMIC_START", function(mob, skillID)
+    mob:addListener("WEAPONSKILL_STATE_ENTER", "PRUDENCE_MIMIC_START", function(mobArg, skillID)
         local prudenceIDs = { 16912846, 16912847 }
-        if mob:getLocalVar('[JoP]mimic') ~= 1 and mob:isAlive() then
+        if mobArg:getLocalVar('[JoP]mimic') ~= 1 and mobArg:isAlive() then
             for _, jailer in ipairs(prudenceIDs) do
-                if mob:getID() ~= jailer then
+                if mobArg:getID() ~= jailer then
                     local prudence_mimic = GetMobByID(jailer)
-                    if prudence_mimic:isAlive() and utils.canUseAbility(mob) == true and prudence_mimic:getLocalVar('[JoP]LastAbilityMimic') + 6 < os.time() and mob:checkDistance(prudence_mimic) <= 10 then
+                    if prudence_mimic:isAlive() and utils.canUseAbility(mobArg) == true and prudence_mimic:getLocalVar('[JoP]LastAbilityMimic') + 6 < os.time() and mobArg:checkDistance(prudence_mimic) <= 10 then
                         prudence_mimic:setLocalVar('[JoP]mimic', 1)
                         prudence_mimic:setLocalVar('[JoP]LastAbilityMimic', os.time())
                         prudence_mimic:useMobAbility(skillID)
@@ -59,8 +59,8 @@ entity.onMobInitialize = function(mob)
         end
     end)
 
-    mob:addListener("WEAPONSKILL_STATE_EXIT", "PRUDENCE_MIMIC_STOP", function(mob, skillID)
-        mob:setLocalVar('[JoP]mimic', 0)
+    mob:addListener("WEAPONSKILL_STATE_EXIT", "PRUDENCE_MIMIC_STOP", function(mobArg, skillID)
+        mobArg:setLocalVar('[JoP]mimic', 0)
     end)
 end
 
@@ -96,9 +96,9 @@ entity.onMobFight = function(mob)
         mob:actionQueueEmpty() == true and
         utils.canUseAbility(mob) == true
     then
-        local perfectDodgeQueue = mob:getLocalVar("perfectDodgeQueue")
+        perfectDodgeQueue = mob:getLocalVar("perfectDodgeQueue")
         if perfectDodgeQueue > 0 then
-            local perfectDodgeQueue = mob:getLocalVar("perfectDodgeQueue") - 1
+            perfectDodgeQueue = mob:getLocalVar("perfectDodgeQueue") - 1
             if not mob:hasStatusEffect(xi.effect.PERFECT_DODGE) and mob:isAlive() then
                 mob:useMobAbility(693)
                 mob:setLocalVar("perfectDodgeQueue", perfectDodgeQueue)

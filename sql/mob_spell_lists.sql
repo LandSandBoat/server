@@ -4299,6 +4299,41 @@ INSERT INTO `mob_spell_lists` VALUES ('Hakutaku',486,148,1,255); -- Fire V
 INSERT INTO `mob_spell_lists` VALUES ('Hakutaku',486,176,1,255); -- Firaga III
 INSERT INTO `mob_spell_lists` VALUES ('Hakutaku',486,204,1,255); -- Flare
 
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Light',487,21,1,255); -- Holy
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Light',487,30,1,255); -- Banish III
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Light',487,35,1,255); -- Diaga III
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Light',487,40,1,255); -- Banishga III
+
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Fire',488,147,1,255); -- Fire IV
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Fire',488,176,1,255); -- Firaga III
+
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Ice',489,152,1,255); -- Blizzard IV
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Ice',489,181,1,255); -- Blizzaga III
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Ice',489,362,1,255); -- Bindga
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Ice',489,356,1,255); -- Paralyga
+
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Wind',490,157,1,255); -- Aero IV
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Wind',490,186,1,255); -- Aeroga III
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Wind',490,359,1,255); -- Silencega
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Wind',490,366,1,255); -- Graviga
+
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Earth',491,162,1,255); -- Stone IV
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Earth',491,191,1,255); -- Stonega III
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Earth',491,357,1,255); -- Slowga
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Earth',491,365,1,255); -- Breakga
+
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Lightning',492,167,1,255); -- Thunder IV
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Lightning',492,196,1,255); -- Thundaga III
+
+INSERT INTO `mob_spell_lists` VALUES('Jailer_of_Love_Water',493,172,1,255); -- Water IV
+INSERT INTO `mob_spell_lists` VALUES('Jailer_of_Love_Water',493,201,1,255); -- Waterga III
+INSERT INTO `mob_spell_lists` VALUES('Jailer_of_Love_Water',493,226,1,255); -- Poisonga II
+
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Dark',494,232,1,255); -- Bio III
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Dark',494,274,1,255); -- Sleepga II
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Dark',494,360,1,255); -- Dispelga
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Dark',494,361,1,255); -- Blindga
+
 -- Next Available: 487
 
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;

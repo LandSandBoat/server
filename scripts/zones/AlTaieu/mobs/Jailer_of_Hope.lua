@@ -76,8 +76,8 @@ entity.onMobWeaponSkill = function(target, mob, skill)
             mob:setLocalVar("aerialCollisionCounter", 0)
             mob:setLocalVar("aerialCollisionMax", 0)
         else
-            mob:timer(3000, function(mob)
-                mob:useMobAbility(1353)
+            mob:timer(3000, function(mobArg)
+                mobArg:useMobAbility(1353)
             end)
         end
     end
