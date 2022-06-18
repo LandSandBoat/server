@@ -129,6 +129,7 @@ public:
     uint32     GetRandomGil(); // returns a random amount of gil
     bool       CanRoamHome();  // is it possible for me to walk back?
     bool       CanRoam();      // check if mob can walk around
+    void       TapDeaggroTime(); // call TapDeaggroTime if PAI->GetController is a CMobController
 
     bool CanLink(position_t* pos, int16 superLink = 0);
 
