@@ -35,7 +35,7 @@
 
 // массив больше на одно значение, заполняемое нулем
 
-static uint8 upgrade[10][16] = {
+static uint8 upgrade[10][45] = {
     { 1, 2, 3, 4, 5, 5, 5, 5, 5, 7, 7, 7, 9, 9, 9 },           // HP-MP
     { 3, 6, 9, 9, 9, 12, 12, 12, 12, 15, 15, 15, 15, 18, 18 }, // Attributes
     { 1, 2, 3, 3, 3, 3, 3, 3 },                                // Combat Skills
@@ -45,8 +45,12 @@ static uint8 upgrade[10][16] = {
     { 1, 2, 3, 4, 5 },                                         // Job Group 1
     { 3, 4, 5, 5, 5 },                                         // Job Group 2
     { 20, 22, 24, 27, 30 },                                    // Weapon Skills
-    { 1, 3, 5, 7, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39 }  // Max merits
+    { 1, 3, 5, 7, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39,
+      42, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 48, 48, 48,
+      48, 48, 48, 48, 48, 48, 48, 51, 51, 51, 51, 51, 51, 51,
+      51, 51 } // Max merits
 };
+
 #define MAX_LIMIT_POINTS 10000 // количество опыта для получения одного merit
 
 // TODO: скорее всего придется все это перенести в базу
@@ -202,7 +206,7 @@ void CMeritPoints::LoadMeritPoints(uint32 charid)
 
     for (uint16 i = 0; i < MERITS_COUNT; ++i)
     {
-        if ((catNumber <= maxCatCount && i == meritNameSpace::groupOffset[catNumber]) || (catNumber > 27 && catNumber < 31) || catNumber == 51) // Increment category number if known (or known unknown)
+        if ((catNumber < maxCatCount && i == meritNameSpace::groupOffset[catNumber]) || (catNumber > 27 && catNumber < 31) || catNumber == 51) // Increment category number if known (or known unknown)
         {
             if ((catNumber > 27 && catNumber < 31) || catNumber == 51) // 28-30 and 51 are UNK.
             {
@@ -489,7 +493,7 @@ int32 CMeritPoints::GetMeritValue(MERIT_TYPE merit, CCharEntity* PChar)
     {
         if (PMerit->catid < 5 || (PMerit->jobs & (1 << (PChar->GetMJob() - 1)) && PChar->GetMLevel() >= 75))
         {
-            meritValue = std::min(PMerit->count, cap[PChar->GetMLevel()]);
+            meritValue = merit == MERIT_MAX_MERIT ? PMerit->count : std::min(PMerit->count, cap[PChar->GetMLevel()]);
         }
 
         if (PMerit->catid == 25 && PChar->GetMLevel() < 96)

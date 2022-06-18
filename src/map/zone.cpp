@@ -121,8 +121,9 @@ CZone::CZone(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID)
 , m_continentID(ContinentID)
 {
     TracyZoneScoped;
-    std::ignore = m_useNavMesh;
-    ZoneTimer   = nullptr;
+    m_useNavMesh = false;
+    std::ignore  = m_useNavMesh;
+    ZoneTimer    = nullptr;
 
     m_TreasurePool       = nullptr;
     m_BattlefieldHandler = nullptr;
@@ -649,9 +650,12 @@ void CZone::DecreaseZoneCounter(CCharEntity* PChar)
 void CZone::IncreaseZoneCounter(CCharEntity* PChar)
 {
     TracyZoneScoped;
-    XI_DEBUG_BREAK_IF(PChar == nullptr);
-    XI_DEBUG_BREAK_IF(PChar->loc.zone != nullptr);
-    XI_DEBUG_BREAK_IF(PChar->PTreasurePool != nullptr);
+
+    if (PChar == nullptr || PChar->loc.zone != nullptr || PChar->PTreasurePool != nullptr)
+    {
+        ShowWarning("CZone::IncreaseZoneCounter() - PChar is null, or Player zone or Treasure Pools is not null.");
+        return;
+    }
 
     PChar->targid = m_zoneEntities->GetNewCharTargID();
 

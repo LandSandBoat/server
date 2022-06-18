@@ -65,6 +65,10 @@ CBattlefield::CBattlefield(uint16 id, CZone* PZone, uint8 area, CCharEntity* PIn
     m_Record.time      = 24h;
     m_Record.partySize = 69;
     m_Tick             = m_StartTime;
+    m_isMission        = false;
+    m_Rules            = 0;
+    m_MaxParticipants  = 8;
+    m_LevelCap         = 0;
     m_RegisteredPlayers.emplace(PInitiator->id);
 }
 
@@ -275,7 +279,11 @@ bool CBattlefield::IsOccupied() const
 
 bool CBattlefield::InsertEntity(CBaseEntity* PEntity, bool enter, BATTLEFIELDMOBCONDITION conditions, bool ally)
 {
-    XI_DEBUG_BREAK_IF(PEntity == nullptr);
+    if (PEntity == nullptr)
+    {
+        ShowWarning("CBattlefield::InsertEntity() - PEntity is null.");
+        return false;
+    }
 
     if (PEntity->PBattlefield)
     {

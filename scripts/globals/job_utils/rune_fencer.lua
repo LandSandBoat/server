@@ -484,16 +484,16 @@ end
 local function getSwipeLungeDamageMultipliers(player, target, element, bonusMacc) -- get these multipliers once and store them
     local multipliers = {}
 
-    multipliers.eleStaffBonus        = xi.spells.spell_damage.calculateEleStaffBonus(player, nil, element)
-    multipliers.magianAffinity       = xi.spells.spell_damage.calculateMagianAffinity(player, nil)         -- presumed but untested
-    multipliers.SDT                  = xi.spells.spell_damage.calculateSDT(player, target, nil, element)
-    multipliers.resist               = xi.spells.spell_damage.calculateResist(player, target,  nil, 0, element, 0, bonusMacc)
-    multipliers.magicBurst           = xi.spells.spell_damage.calculateIfMagicBurst(player, target,  0, element)
-    multipliers.magicBurstBonus      = xi.spells.spell_damage.calculateIfMagicBurstBonus(player, target, nil, 0, element)
-    multipliers.dayAndWeather        = xi.spells.spell_damage.calculateDayAndWeather(player, target, nil, 0, element)
-    multipliers.magicBonusDiff       = xi.spells.spell_damage.calculateMagicBonusDiff(player, target, nil, 0, 0, element)
-    multipliers.TMDA                 = xi.spells.spell_damage.calculateTMDA(player, target, xi.damageType.ELEMENTAL + element)
-    multipliers.nukeAbsorbOrNullify  = xi.spells.spell_damage.calculateNukeAbsorbOrNullify(player, target, nil, element)
+    multipliers.eleStaffBonus        = xi.spells.damage.calculateEleStaffBonus(player, nil, element)
+    multipliers.magianAffinity       = xi.spells.damage.calculateMagianAffinity(player, nil)         -- presumed but untested
+    multipliers.SDT                  = xi.spells.damage.calculateSDT(player, target, nil, element)
+    multipliers.resist               = xi.spells.damage.calculateResist(player, target,  nil, 0, element, 0, bonusMacc)
+    multipliers.magicBurst           = xi.spells.damage.calculateIfMagicBurst(player, target,  0, element)
+    multipliers.magicBurstBonus      = xi.spells.damage.calculateIfMagicBurstBonus(player, target, nil, 0, element)
+    multipliers.dayAndWeather        = xi.spells.damage.calculateDayAndWeather(player, target, nil, 0, element)
+    multipliers.magicBonusDiff       = xi.spells.damage.calculateMagicBonusDiff(player, target, nil, 0, 0, element)
+    multipliers.TMDA                 = xi.spells.damage.calculateTMDA(player, target, xi.damageType.ELEMENTAL + element)
+    multipliers.nukeAbsorbOrNullify  = xi.spells.damage.calculateNukeAbsorbOrNullify(player, target, nil, element)
 
     return multipliers
 end

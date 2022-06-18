@@ -110,7 +110,10 @@ CInstance* CInstanceLoader::LoadInstance()
             PMob->m_minLevel = (uint8)sql->GetIntData(11);
             PMob->m_maxLevel = (uint8)sql->GetIntData(12);
 
-            memcpy(&PMob->look, sql->GetData(13), 23);
+            uint16 sqlModelID[10];
+            memcpy(&sqlModelID, sql->GetData(13), 20);
+            PMob->look = look_t(sqlModelID);
+
 
             PMob->SetMJob(sql->GetIntData(14));
             PMob->SetSJob(sql->GetIntData(15));
@@ -259,7 +262,10 @@ CInstance* CInstanceLoader::LoadInstance()
                 PNpc->status  = static_cast<STATUS_TYPE>(sql->GetIntData(12));
                 PNpc->m_flags = sql->GetUIntData(13);
 
-                memcpy(&PNpc->look, sql->GetData(14), 20);
+
+                uint16 sqlModelID[10];
+                memcpy(&sqlModelID, sql->GetData(14), 20);
+                PNpc->look = look_t(sqlModelID);
 
                 PNpc->name_prefix = (uint8)sql->GetIntData(15);
                 PNpc->widescan    = (uint8)sql->GetIntData(16);
