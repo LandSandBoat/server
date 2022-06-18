@@ -100,6 +100,8 @@ CNavMesh::CNavMesh(uint16 zoneID)
 : m_zoneID(zoneID)
 , m_navMesh(nullptr)
 {
+    std::memset(&m_hitPath, 0, sizeof(m_hitPath));
+
     m_hit.path    = m_hitPath;
     m_hit.maxPath = 20;
 }

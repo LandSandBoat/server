@@ -28,7 +28,6 @@
 #include "../packets/char_sync.h"
 #include "../packets/entity_update.h"
 #include "../packets/message_standard.h"
-#include "../packets/trust_sync.h"
 #include "../status_effect_container.h"
 #include "../weapon_skill.h"
 #include "../zone_instance.h"
@@ -105,6 +104,68 @@ struct Trust_t
     int16 water_res;
     int16 light_res;
     int16 dark_res;
+
+    Trust_t()
+    : EcoSystem(ECOSYSTEM::ECO_ERROR)
+    {
+        trustID     = 0;
+        pool        = 0;
+
+        name_prefix = 0;
+        radius      = 0;
+        m_Family    = 0;
+
+        behaviour = 0;
+
+        mJob     = 0;
+        sJob    = 0;
+        HPscale = 0.f;
+        MPscale = 0.f;
+
+        cmbDmgMult = 0;
+        cmbDelay   = 0;
+        speed      = 0;
+
+        strRank = 0;
+        dexRank = 0;
+        vitRank = 0;
+        agiRank = 0;
+        intRank = 0;
+        mndRank = 0;
+        chrRank = 0;
+        attRank = 0;
+        defRank = 0;
+        evaRank = 0;
+        accRank = 0;
+
+        m_MobSkillList = 0;
+
+        hasSpellScript = false;
+        spellList      = 0;
+
+        slash_sdt  = 0;
+        pierce_sdt = 0;
+        hth_sdt    = 0;
+        impact_sdt = 0;
+
+        fire_sdt    = 0;
+        ice_sdt     = 0;
+        wind_sdt    = 0;
+        earth_sdt   = 0;
+        thunder_sdt = 0;
+        water_sdt   = 0;
+        light_sdt   = 0;
+        dark_sdt    = 0;
+
+        fire_res    = 0;
+        ice_res     = 0;
+        wind_res    = 0;
+        earth_res   = 0;
+        thunder_res = 0;
+        water_res   = 0;
+        light_res   = 0;
+        dark_res    = 0;
+    }
 };
 
 std::vector<Trust_t*> g_PTrustList;
@@ -202,7 +263,11 @@ namespace trustutils
                 trust->pool = (uint32)sql->GetIntData(0);
                 trust->name.insert(0, (const char*)sql->GetData(1));
                 trust->packet_name.insert(0, (const char*)sql->GetData(2));
-                memcpy(&trust->look, sql->GetData(3), 20);
+
+                uint16 sqlModelID[10];
+                memcpy(&sqlModelID, sql->GetData(3), 20);
+                trust->look = look_t(sqlModelID);
+
 
                 trust->m_Family       = (uint16)sql->GetIntData(4);
                 trust->mJob           = (uint8)sql->GetIntData(5);
@@ -343,20 +408,31 @@ namespace trustutils
         auto baseDamage       = mobStyleDamage * 0.5f;
         auto damageMultiplier = static_cast<float>(trustData->cmbDmgMult) / 100.0f;
         auto adjustedDamage   = baseDamage * damageMultiplier;
-        auto finalDamage      = std::max(adjustedDamage, 1.0f);
+        auto finalDamage      = static_cast<uint16>(std::max(adjustedDamage, 1.0f));
 
-        (dynamic_cast<CItemWeapon*>(PTrust->m_Weapons[SLOT_MAIN]))->setDamage(static_cast<uint16>(finalDamage));
-        (dynamic_cast<CItemWeapon*>(PTrust->m_Weapons[SLOT_RANGED]))->setDamage(static_cast<uint16>(finalDamage));
-        (dynamic_cast<CItemWeapon*>(PTrust->m_Weapons[SLOT_AMMO]))->setDamage(static_cast<uint16>(finalDamage));
+        auto mainWeapon   = dynamic_cast<CItemWeapon*>(PTrust->m_Weapons[SLOT_MAIN]);
+        auto rangedWeapon = dynamic_cast<CItemWeapon*>(PTrust->m_Weapons[SLOT_RANGED]);
+        auto ammoWeapon   = dynamic_cast<CItemWeapon*>(PTrust->m_Weapons[SLOT_AMMO]);
 
-        (dynamic_cast<CItemWeapon*>(PTrust->m_Weapons[SLOT_MAIN]))->setDelay((trustData->cmbDelay * 1000) / 60);
-        (dynamic_cast<CItemWeapon*>(PTrust->m_Weapons[SLOT_MAIN]))->setBaseDelay((trustData->cmbDelay * 1000) / 60);
+        if (mainWeapon && rangedWeapon && ammoWeapon)
+        {
+            mainWeapon->setDamage(finalDamage);
+            rangedWeapon->setDamage(finalDamage);
+            ammoWeapon->setDamage(finalDamage);
 
-        (dynamic_cast<CItemWeapon*>(PTrust->m_Weapons[SLOT_RANGED]))->setDelay((trustData->cmbDelay * 1000) / 60);
-        (dynamic_cast<CItemWeapon*>(PTrust->m_Weapons[SLOT_RANGED]))->setBaseDelay((trustData->cmbDelay * 1000) / 60);
+            mainWeapon->setDelay((trustData->cmbDelay * 1000) / 60);
+            mainWeapon->setBaseDelay((trustData->cmbDelay * 1000) / 60);
 
-        (dynamic_cast<CItemWeapon*>(PTrust->m_Weapons[SLOT_AMMO]))->setDelay((trustData->cmbDelay * 1000) / 60);
-        (dynamic_cast<CItemWeapon*>(PTrust->m_Weapons[SLOT_AMMO]))->setBaseDelay((trustData->cmbDelay * 1000) / 60);
+            rangedWeapon->setDelay((trustData->cmbDelay * 1000) / 60);
+            rangedWeapon->setBaseDelay((trustData->cmbDelay * 1000) / 60);
+
+            ammoWeapon->setDelay((trustData->cmbDelay * 1000) / 60);
+            ammoWeapon->setBaseDelay((trustData->cmbDelay * 1000) / 60);
+        }
+        else
+        {
+            ShowError("trustutils::LoadTrust() - Unable to set Weapon parameters.")
+        }
 
         // Spell lists
         auto* spellList = mobSpellList::GetMobSpellList(trustData->spellList);
@@ -599,6 +675,12 @@ namespace trustutils
         // Skills
         using namespace gambits;
         auto* controller = dynamic_cast<CTrustController*>(PTrust->PAI->GetController());
+
+        if (!controller)
+        {
+            ShowWarning("trustutils::LoadTrustStatsAndSkills() - Trust Controller was null.");
+            return;
+        }
 
         // Default TP selectors
         controller->m_GambitsContainer->tp_trigger = G_TP_TRIGGER::ASAP;

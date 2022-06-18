@@ -19,20 +19,19 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 ===========================================================================
 */
 
-#ifndef _CTRUSTSYNCPACKET_H
-#define _CTRUSTSYNCPACKET_H
+#ifndef _CENTITYSETNAMEPACKET_H
+#define _CENTITYSETNAMEPACKET_H
 
 #include "common/cbasetypes.h"
 
 #include "basic.h"
 
-class CCharEntity;
-class CTrustEntity;
+class CBaseEntity;
 
-class CTrustSyncPacket : public CBasicPacket
+class CEntitySetNamePacket : public CBasicPacket
 {
 public:
-    CTrustSyncPacket(CCharEntity* PChar, CTrustEntity* PTrust);
+    CEntitySetNamePacket(CBaseEntity* PEntity);
 };
 
-#endif
+#endif // _CENTITYSETNAMEPACKET_H

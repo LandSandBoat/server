@@ -300,7 +300,10 @@ namespace zoneutils
                     PNpc->status  = static_cast<STATUS_TYPE>(sql->GetIntData(14));
                     PNpc->m_flags = sql->GetUIntData(15);
 
-                    std::memcpy(&PNpc->look, sql->GetData(16), 20);
+                    uint16 sqlModelID[10];
+                    memcpy(&sqlModelID, sql->GetData(16), 20);
+                    PNpc->look = look_t(sqlModelID);
+
 
                     PNpc->name_prefix = (uint8)sql->GetIntData(17);
                     PNpc->widescan    = (uint8)sql->GetIntData(18);
@@ -391,7 +394,9 @@ namespace zoneutils
                     PMob->m_minLevel = (uint8)sql->GetIntData(12);
                     PMob->m_maxLevel = (uint8)sql->GetIntData(13);
 
-                    memcpy(&PMob->look, sql->GetData(14), 23);
+                    uint16 sqlModelID[10];
+                    memcpy(&sqlModelID, sql->GetData(14), 20);
+                    PMob->look = look_t(sqlModelID);
 
                     PMob->SetMJob(sql->GetIntData(15));
                     PMob->SetSJob(sql->GetIntData(16));
@@ -990,7 +995,11 @@ namespace zoneutils
 
     int GetWeatherElement(WEATHER weather)
     {
-        XI_DEBUG_BREAK_IF(weather >= MAX_WEATHER_ID);
+        if (weather >= MAX_WEATHER_ID)
+        {
+            ShowWarning("zoneutils::GetWeatherElement() - Invalid weather passed to function.");
+            return 0;
+        }
 
         // TODO: Fix weather ordering; at the moment, this current fire, water, earth, wind, snow, thunder
         // order MUST be preserved due to the weather enums going in this order. Those enums will

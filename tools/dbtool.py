@@ -84,6 +84,7 @@ player_data = [
     'chars.sql',
     'conquest_system.sql',
     'delivery_box.sql',
+    'ip_exceptions.sql',
     'linkshells.sql',
     'server_variables.sql',
     'unity_system.sql',

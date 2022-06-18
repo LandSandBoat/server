@@ -384,7 +384,7 @@ function BlueFinalAdjustments(caster, target, spell, dmg, params)
     -- handle One For All, Liement
     if attackType == xi.attackType.MAGICAL then
 
-        local targetMagicDamageAdjustment = xi.spells.spell_damage.calculateTMDA(caster, target, damageType) -- Apply checks for Liement, MDT/MDTII/DT
+        local targetMagicDamageAdjustment = xi.spells.damage.calculateTMDA(caster, target, damageType) -- Apply checks for Liement, MDT/MDTII/DT
         dmg = math.floor(dmg * targetMagicDamageAdjustment)
         if dmg < 0 then
             target:takeSpellDamage(caster, spell, dmg, attackType, damageType)

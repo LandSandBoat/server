@@ -122,6 +122,70 @@ struct Pet_t
     int16 water_res;
     int16 light_res;
     int16 dark_res;
+
+    Pet_t()
+    : EcoSystem(ECOSYSTEM::ECO_ERROR)
+    {
+        PetID     = 0;
+
+        minLevel = -1;
+        maxLevel = 99;
+
+        name_prefix = 0;
+        radius      = 0;
+        m_Family    = 0;
+        time        = 0;
+
+        mJob      = 0;
+        sJob      = 0;
+        m_Element = 0;
+        HPscale   = 0.f;
+        MPscale   = 0.f;
+
+        cmbDelay = 0;
+        speed    = 0;
+
+        strRank = 0;
+        dexRank = 0;
+        vitRank = 0;
+        agiRank = 0;
+        intRank = 0;
+        mndRank = 0;
+        chrRank = 0;
+        attRank = 0;
+        defRank = 0;
+        evaRank = 0;
+        accRank = 0;
+
+        m_MobSkillList = 0;
+
+        hasSpellScript = false;
+        spellList      = 0;
+
+        slash_sdt   = 0;
+        pierce_sdt  = 0;
+        hth_sdt     = 0;
+        impact_sdt  = 0;
+
+        fire_sdt    = 0;
+        ice_sdt     = 0;
+        wind_sdt    = 0;
+        earth_sdt   = 0;
+        thunder_sdt = 0;
+        water_sdt   = 0;
+        light_sdt   = 0;
+        dark_sdt    = 0;
+
+        fire_res    = 0;
+        ice_res     = 0;
+        wind_res    = 0;
+        earth_res   = 0;
+        thunder_res = 0;
+        water_res   = 0;
+        light_res   = 0;
+        dark_res    = 0;
+
+    }
 };
 
 std::vector<Pet_t*> g_PPetList;
@@ -182,7 +246,10 @@ namespace petutils
                 Pet->PetID = (uint16)sql->GetIntData(0);
                 Pet->name.insert(0, (const char*)sql->GetData(1));
 
-                memcpy(&Pet->look, sql->GetData(2), 20);
+                uint16 sqlModelID[10];
+                memcpy(&sqlModelID, sql->GetData(2), 20);
+                Pet->look = look_t(sqlModelID);
+
                 Pet->minLevel  = (uint8)sql->GetIntData(3);
                 Pet->maxLevel  = (uint8)sql->GetIntData(4);
                 Pet->time      = sql->GetUIntData(5);
@@ -265,7 +332,11 @@ namespace petutils
 
     void AttackTarget(CBattleEntity* PMaster, CBattleEntity* PTarget)
     {
-        XI_DEBUG_BREAK_IF(PMaster->PPet == nullptr);
+        if (PMaster == nullptr || PMaster->PPet == nullptr || PTarget == nullptr)
+        {
+            ShowWarning("petutils::AttackTarget() - Null master, pet, or target passed to function.");
+            return;
+        }
 
         CBattleEntity* PPet = PMaster->PPet;
 
@@ -277,7 +348,11 @@ namespace petutils
 
     void RetreatToMaster(CBattleEntity* PMaster)
     {
-        XI_DEBUG_BREAK_IF(PMaster->PPet == nullptr);
+        if (PMaster == nullptr || PMaster->PPet == nullptr)
+        {
+            ShowWarning("petutils::RetreatToMaster() - Null master or pet passed to function.");
+            return;
+        }
 
         CBattleEntity* PPet = PMaster->PPet;
 

@@ -38,6 +38,7 @@ class CCommandHandler
 {
 public:
     static int32 call(sol::state& lua, CCharEntity* PChar, const int8* commandline);
+    static void  registerCommand(std::string const& commandName, std::string const& path);
 };
 
 #endif // _COMMAND_HANDLER_H

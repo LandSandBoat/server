@@ -101,7 +101,7 @@ static void dump_backtrace()
 {
     // gdb
 #if defined(__linux__)
-    int fd[2];
+    int fd[2] = {};
     int status = pipe(fd);
     if (status == -1)
     {
@@ -268,9 +268,9 @@ int main(int argc, char** argv)
 
     do_init(argc, argv);
 
-    fd_set rfd;
+    fd_set rfd = {};
     { // Main runtime cycle
-        duration next;
+        duration next = std::chrono::milliseconds(200);
 
         while (gRunFlag)
         {

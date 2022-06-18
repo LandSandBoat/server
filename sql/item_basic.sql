@@ -8395,8 +8395,8 @@ INSERT INTO `item_basic` VALUES (11054,0,'pensee_earring','pensee_earring',1,635
 INSERT INTO `item_basic` VALUES (11055,0,'aredan_earring','aredan_earring',1,34820,24,0,7315);
 INSERT INTO `item_basic` VALUES (11056,0,'ghillie_earring','ghillie_earring',1,2084,24,0,0);
 INSERT INTO `item_basic` VALUES (11057,0,'ghillie_earring_+1','ghillie_earring_+1',1,2080,24,0,6930);
-INSERT INTO `item_basic` VALUES (11058,0,'hajduk_ring','hajduk_ring',1,2084,24,0,0);
-INSERT INTO `item_basic` VALUES (11059,0,'hajduk_ring_+1','hajduk_ring_+1',1,2080,24,0,0);
+INSERT INTO `item_basic` VALUES (11058,0,'hajduk_ring','hajduk_ring',1,2084,25,0,0);
+INSERT INTO `item_basic` VALUES (11059,0,'hajduk_ring_+1','hajduk_ring_+1',1,2080,25,0,0);
 INSERT INTO `item_basic` VALUES (11060,0,'evader_earring','evader_earring',1,2084,24,0,0);
 INSERT INTO `item_basic` VALUES (11061,0,'evader_earring_+1','evader_earring_+1',1,2080,24,0,0);
 INSERT INTO `item_basic` VALUES (11062,0,'fountain_ring','fountain_ring',1,38916,25,0,0);

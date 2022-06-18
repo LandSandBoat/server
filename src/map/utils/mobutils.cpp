@@ -1280,7 +1280,9 @@ Usage:
                 PMob->m_minLevel = (uint8)sql->GetIntData(8);
                 PMob->m_maxLevel = (uint8)sql->GetIntData(9);
 
-                memcpy(&PMob->look, sql->GetData(10), 23);
+                uint16 sqlModelID[10];
+                memcpy(&sqlModelID, sql->GetData(10), 20);
+                PMob->look = look_t(sqlModelID);
 
                 PMob->SetMJob(sql->GetIntData(11));
                 PMob->SetSJob(sql->GetIntData(12));
@@ -1425,7 +1427,9 @@ Usage:
                 PMob->m_minLevel = (uint8)sql->GetIntData(8);
                 PMob->m_maxLevel = (uint8)sql->GetIntData(9);
 
-                memcpy(&PMob->look, sql->GetData(10), 23);
+                uint16 sqlModelID[10];
+                memcpy(&sqlModelID, sql->GetData(10), 20);
+                PMob->look = look_t(sqlModelID);
 
                 PMob->SetMJob(sql->GetIntData(11));
                 PMob->SetSJob(sql->GetIntData(12));
