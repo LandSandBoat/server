@@ -4212,7 +4212,6 @@ INSERT INTO `mob_spell_lists` VALUES('Ixzdei_BLM', 467, 176, 1, 255);
 INSERT INTO `mob_spell_lists` VALUES('Ixzdei_BLM', 467, 181, 1, 255);
 INSERT INTO `mob_spell_lists` VALUES('Ixzdei_BLM', 467, 186, 1, 255);
 INSERT INTO `mob_spell_lists` VALUES('Ixzdei_BLM', 467, 191, 1, 255);
-
 INSERT INTO `mob_spell_lists` VALUES('Ixzdei_RDM', 468, 191, 1, 255);
 INSERT INTO `mob_spell_lists` VALUES('Ixzdei_RDM', 468, 260, 1, 255);
 INSERT INTO `mob_spell_lists` VALUES('Ixzdei_RDM', 468, 254, 1, 255);
@@ -4292,7 +4291,15 @@ INSERT INTO `mob_spell_lists` VALUES('Ghrah_Fire',484,235,1,255);
 INSERT INTO `mob_spell_lists` VALUES('Sword_Sorcerer_Solisoq', 485, 21, 45, 255);
 INSERT INTO `mob_spell_lists` VALUES('Sword_Sorcerer_Solisoq', 485, 34, 45, 255);
 
--- Next Available: 464
+INSERT INTO `mob_spell_lists` VALUES ('Hakutaku',486,249,1,255); -- Blaze Spikes
+INSERT INTO `mob_spell_lists` VALUES ('Hakutaku',486,235,1,255); -- Burn
+INSERT INTO `mob_spell_lists` VALUES ('Hakutaku',486,100,1,255); -- Enfire
+INSERT INTO `mob_spell_lists` VALUES ('Hakutaku',486,147,1,255); -- Fire IV
+INSERT INTO `mob_spell_lists` VALUES ('Hakutaku',486,148,1,255); -- Fire V
+INSERT INTO `mob_spell_lists` VALUES ('Hakutaku',486,176,1,255); -- Firaga III
+INSERT INTO `mob_spell_lists` VALUES ('Hakutaku',486,204,1,255); -- Flare
+
+-- Next Available: 487
 
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;
