@@ -103,6 +103,12 @@ xi.dynamis.onFightDynaLord = function(mob, target)
     local tpTime = mob:getLocalVar("tpTime")
     local mainLord = zone:getLocalVar("MainDynaLord")
 
+    if zone:getLocalVar("MainDynaLord") ~= mob:getID() then
+        mob:setMobMod(xi.mobMod.NO_DROPS, 1)
+    elseif zone:getLocalVar("MainDynaLord") == mob:getID() then
+        mob:setMobMod(xi.mobMod.NO_DROPS, 0)
+    end
+
     if os.time() > tpTime and tpTime ~= 0 then
         local cloneMove = zone:getLocalVar("CloneMove")
         mob:useMobAbility(cloneMove)

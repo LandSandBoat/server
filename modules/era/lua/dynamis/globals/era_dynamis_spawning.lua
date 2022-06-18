@@ -1684,13 +1684,17 @@ end
 --            Dynamis Mob Death           --
 --------------------------------------------
 
-xi.dynamis.mobOnDeath = function (mob, player, isKiller)
+xi.dynamis.mobOnDeath = function(mob, player, isKiller)
     local zone = mob:getZone()
     local mobIndex = zone:getLocalVar(string.format("MobIndex_%s", mob:getID()))
     if mob:getLocalVar("dynamisMobOnDeathTriggered") == 1 then return -- Don't trigger more than once.
     else -- Stops execution of code below if the above is true.
         if mob:getLocalVar("hasMobVar") == 1 then
-            zone:setLocalVar(string.format("%s", xi.dynamis.mobList[mob:getZoneID()][mobIndex].info[5]), 1) -- Set Death Requirements Variable
+            if mob:getName() == "DE_444c" and zone:getLocalVar("MainDynaLord") ~= mob:getID() then
+                zone:setLocalVar(string.format("%s", xi.dynamis.mobList[mob:getZoneID()][mobIndex].info[5]), 0)
+            else
+                zone:setLocalVar(string.format("%s", xi.dynamis.mobList[mob:getZoneID()][mobIndex].info[5]), 1) -- Set Death Requirements Variable
+            end
         end
         if mobIndex ~= 0 and mobIndex ~= nil then
             xi.dynamis.addTimeToDynamis(zone, mobIndex) -- Add Time
