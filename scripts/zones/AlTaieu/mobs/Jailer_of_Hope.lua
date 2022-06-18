@@ -60,14 +60,17 @@ entity.onMobWeaponSkill = function(target, mob, skill)
 
     local aerialCollisionCounter = mob:getLocalVar("aerialCollisionCounter")
     local aerialCollisionMax = mob:getLocalVar("aerialCollisionMax")
-    if skill:getID() == 1353 then
-        if aerialCollisionCounter == 0 and aerialCollisionMax == 0 then
+    if skill:getID() == 1353 then  -- mob uses arial collision back to back
+        if
+            aerialCollisionCounter == 0 and
+            aerialCollisionMax == 0
+        then
             aerialCollisionMax = 1
             mob:setLocalVar("aerialCollisionMax", aerialCollisionMax)
         end
 
         aerialCollisionCounter = aerialCollisionCounter + 1
-        mob:setLocalVar("aerialCollisionCounter", aerialCollisionCounter) -- mob uses arial collision back to back
+        mob:setLocalVar("aerialCollisionCounter", aerialCollisionCounter)
 
         if aerialCollisionCounter > aerialCollisionMax then
             mob:setLocalVar("aerialCollisionCounter", 0)
@@ -81,7 +84,10 @@ entity.onMobWeaponSkill = function(target, mob, skill)
 end
 
 entity.onMobFight = function(mob, target)
-    if (mob:getLocalVar("spellTime") < os.time() and mob:getLocalVar("spellTime") ~= 0) then -- Checks for it being 0 because it gets set to 0 to avoid setting the spell list repeatedly
+    if
+        mob:getLocalVar("spellTime") < os.time() and
+        mob:getLocalVar("spellTime") ~= 0
+    then -- Checks for it being 0 because it gets set to 0 to avoid setting the spell list repeatedly
         mob:setSpellList(0)
         mob:setLocalVar("spellTime", 0)
     end
