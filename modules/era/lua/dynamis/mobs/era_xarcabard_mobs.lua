@@ -219,8 +219,11 @@ xi.dynamis.onFightYing = function(mob, target)
     local zone = mob:getZone()
     local yangToD = mob:getLocalVar("yangToD")
     -- Repop Yang every 30 seconds if Ying is up and Yang is not.
-    if zone:getLocalVar("yang_killed") == 1 and os.time() > yangToD + 30 then
-        xi.dynamis.nmDynamicSpawn( 177, mob:getLocalVar("MobIndex"), true, mob:getZoneID(), target, mob)
+    if mob:getLocalVar("Spawning") <= os.time() then
+        mob:setLocalVar("Spawning", os.time() + 5)
+        if zone:getLocalVar("yang_killed") == 1 and os.time() > yangToD + 30 then
+            xi.dynamis.nmDynamicSpawn( 177, mob:getLocalVar("MobIndex"), true, mob:getZoneID(), target, mob)
+        end
     end
 end
 
@@ -228,8 +231,11 @@ xi.dynamis.onFightYang = function(mob, target)
     local zone = mob:getZone()
     local yingToD = mob:getLocalVar("YangToD")
     -- Repop Yang every 30 seconds if Yang is up and Yang is not.
-    if zone:getLocalVar("ying_killed") == 1 and os.time() > yingToD + 30 then
-        xi.dynamis.nmDynamicSpawn( 178, mob:getLocalVar("MobIndex"), true, mob:getZoneID(), target, mob)
+    if mob:getLocalVar("Spawning") <= os.time() then
+        mob:setLocalVar("Spawning", os.time() + 5)
+        if zone:getLocalVar("ying_killed") == 1 and os.time() > yingToD + 30 then
+            xi.dynamis.nmDynamicSpawn( 178, mob:getLocalVar("MobIndex"), true, mob:getZoneID(), target, mob)
+        end
     end
 end
 
