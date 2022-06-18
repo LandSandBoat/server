@@ -31,11 +31,17 @@
 #include <iostream>
 #include <sstream>
 #include <string>
+#include <unordered_map>
 #include <variant>
 #include <vector>
 
 // NOTE: Auto-translate blocks are dealt with as a string of bytes
 using CommandArg = std::variant<bool, int, double, std::string>;
+
+namespace
+{
+    std::unordered_map<std::string, std::string> registeredCommands;
+}
 
 // The below section is a proposed rewrite of commandhandler.
 // It can automatically deduce the types of strings that are passed to it.
@@ -182,7 +188,13 @@ int32 CCommandHandler::call(sol::state& lua, CCharEntity* PChar, const int8* com
     TracyZoneString(PChar->name);
     TracyZoneIString(commandline);
 
-    auto filename   = fmt::format("./scripts/commands/{}.lua", cmdname.c_str());
+    auto filename = fmt::format("./scripts/commands/{}.lua", cmdname.c_str());
+    if (auto maybeRegisteredCommand = registeredCommands.find(cmdname);
+        maybeRegisteredCommand != registeredCommands.end())
+    {
+        filename = (*maybeRegisteredCommand).second;
+    }
+
     auto loadResult = lua.safe_script_file(filename, &sol::script_pass_on_error);
     if (!loadResult.valid())
     {
@@ -311,4 +323,9 @@ int32 CCommandHandler::call(sol::state& lua, CCharEntity* PChar, const int8* com
     }
 
     return 0;
+}
+
+void CCommandHandler::registerCommand(std::string const& commandName, std::string const& path)
+{
+    registeredCommands[commandName] = path;
 }

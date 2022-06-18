@@ -67,7 +67,7 @@ entity.onMobFight = function(mob, target)
                 mob:setDamage(75)
             end,
             [forms.STAFF] = function()
-                mob:setMobMod(xi.mobMod.MAGIC_COOL, 10)
+                mob:setMobMod(xi.mobMod.MAGIC_COOL, 20)
                 mob:SetMagicCastingEnabled(true)
                 mob:setDelay(3700)
                 mob:setDamage(40)

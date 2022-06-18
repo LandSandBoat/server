@@ -85,7 +85,11 @@ uint16 CLuaItem::getTrialNumber()
 
 auto CLuaItem::getMatchingTrials() -> sol::table
 {
-    XI_DEBUG_BREAK_IF(m_PLuaItem == nullptr);
+    if (m_PLuaItem == nullptr)
+    {
+        ShowWarning("CLuaItem::getMatchingTrials() - m_PLuaItem is null.");
+        return luautils::lua.create_table();
+    }
 
     auto PItem = static_cast<CItemEquipment*>(m_PLuaItem);
 

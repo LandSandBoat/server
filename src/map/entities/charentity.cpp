@@ -1614,7 +1614,12 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
 bool CCharEntity::IsMobOwner(CBattleEntity* PBattleTarget)
 {
     TracyZoneScoped;
-    XI_DEBUG_BREAK_IF(PBattleTarget == nullptr);
+
+    if (PBattleTarget == nullptr)
+    {
+        ShowWarning("CCharEntity::IsMobOwner() - PBattleTarget was null.")
+        return false;
+    }
 
     if (PBattleTarget->m_OwnerID.id == 0 || PBattleTarget->m_OwnerID.id == this->id || PBattleTarget->objtype == TYPE_PC)
     {
