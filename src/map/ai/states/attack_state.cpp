@@ -65,7 +65,10 @@ bool CAttackState::Update(time_point tick)
             action_t action;
             if (m_PEntity->OnAttack(*this, action))
             {
-                m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
+                if (action.actiontype != ACTION_NONE) // CMobEntity::OnAttack(...) generates it's own action and sends it there, and that leaves this action.actionType = 0, which is never valid. Skip sending the packet.
+                {
+                    m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
+                }
             }
         }
         else if (m_PEntity->OnAttackError(*this))
