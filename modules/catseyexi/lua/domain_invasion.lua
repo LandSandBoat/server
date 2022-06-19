@@ -67,8 +67,6 @@ m:addOverride("xi.zones.Escha_RuAun.Zone.onZoneTick", function(zone)
             end,
 
             onMobDeath = function(mob, player, isKiller, noKiller)
-                local beadsRewarded = math.random(425, 625)
-                
                 -- Variable control
                 SetServerVariable("[Domain]NMToD", os.time())
                 SetServerVariable("[Domain]NM", 1)
@@ -80,7 +78,7 @@ m:addOverride("xi.zones.Escha_RuAun.Zone.onZoneTick", function(zone)
                 player:PrintToArea("{Apururu} Would you please go and see if she's alrightaru?", xi.msg.channel.SYSTEM_3, xi.msg.area.SYSTEM)
 
                 -- Reward escha beads
-                local beadsRewarded = math.random(425, 625)
+                local beadsRewarded = math.random(425, 750)
                 local players = mob:getZone():getPlayers()
                 
                 for i, participant in pairs(players) do
@@ -187,7 +185,7 @@ m:addOverride("xi.zones.Reisenjima_Henge.Zone.onZoneTick", function(zone)
                 SetServerVariable("[Domain]Notification", 0)
 				
                 -- Reward escha beads
-                local beadsRewarded = math.random(425, 625)
+                local beadsRewarded = math.random(425, 750)
                 local players = mob:getZone():getPlayers()
                 
                 for i, participant in pairs(players) do
@@ -287,7 +285,7 @@ m:addOverride("xi.zones.Provenance.Zone.onZoneTick", function(zone)
                 player:PrintToArea("{Apururu} Would you please go and see if she's alrightaru?", xi.msg.channel.SYSTEM_3, xi.msg.area.SYSTEM)
 
                 -- Reward escha beads
-                local beadsRewarded = math.random(425, 625)
+                local beadsRewarded = math.random(425, 750)
                 local players = mob:getZone():getPlayers()
                 
                 for i, participant in pairs(players) do
@@ -422,7 +420,7 @@ m:addOverride("xi.zones.Provenance.Zone.onZoneTick", function(zone)
                 player:PrintToArea("{Apururu} Would you please go and see if she's alrightaru?", xi.msg.channel.SYSTEM_3, xi.msg.area.SYSTEM)
 
                 -- Reward escha beads
-                local beadsRewarded = math.random(850, 1250)
+                local beadsRewarded = math.random(1250, 2000)
                 local players = mob:getZone():getPlayers()
                 
                 for i, participant in pairs(players) do
