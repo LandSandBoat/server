@@ -88,15 +88,13 @@ xi.dynamis.parentOnEngaged = function(mob, target)
         end
     end
     if xi.dynamis.mobList[zoneID][oMobIndex].mobchildren then
-        xi.dynamis.normalDynamicSpawn(mob, oMobIndex) -- Normies have their own loop, so they don't need one here.
+        xi.dynamis.normalDynamicSpawn(mob, oMobIndex, target) -- Normies have their own loop, so they don't need one here.
     end
 end
 
-xi.dynamis.normalDynamicSpawn = function(mob, oMobIndex)
-    local mobFamily = mob:getFamily()
-    local mobID = mob:getID()
-    local mobZoneID = mob:getZoneID()
-    local oMob = GetMobByID(mobID)
+xi.dynamis.normalDynamicSpawn = function(oMob, oMobIndex, target)
+    local mobFamily = oMob:getFamily()
+    local mobZoneID = oMob:getZoneID()
     local zone = GetZone(mobZoneID)
     local normalMobLookup =
     {
@@ -389,7 +387,7 @@ xi.dynamis.normalDynamicSpawn = function(mob, oMobIndex)
             end
             if oMob ~= nil and oMob ~= 0 then
                 mob:setLocalVar("Parent", oMob:getID())
-                mob:updateEnmity(GetMobByID(oMob:getID()):getTarget())
+                mob:updateEnmity(target)
             end
             indexJob = indexJob + 1 -- Increment to the next mob of the same job.
         end

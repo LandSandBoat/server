@@ -68,7 +68,7 @@ require("scripts/globals/zone")
 ----------------------------------------------------------------------------------------------------
 --                               Dependency Setup Section (IGNORE)                                --
 ----------------------------------------------------------------------------------------------------
-local zoneID = xi.zone.DYNAMIS_SAN_DORIA
+local zoneID = xi.zone.DYNAMIS_VALKURM
 local i = 1
 xi = xi or {} -- Ignore me I just set the global.
 xi.dynamis = xi.dynamis or {} -- Ignore me I just set the global.
