@@ -15,7 +15,7 @@ entity.onMobSpawn = function(mob)
         specials =
         {
             {id = xi.jsa.CALL_WYVERN, hpp = 100, cooldown = 60}, -- "Call Wyvern is used at the time of monster engage. Call Wyvern is used ~1 minute subsequent to Wyvern's death."
-            {id = xi.jsa.MEIKYO_SHISUI, hpp = math.random(90, 95), cooldown = 90}, -- "Meikyo Shisui is used very frequently."
+            {id = xi.jsa.MEIKYO_SHISUI, begCode = function(mobArg) mobArg:setLocalVar('order', 0) end, hpp = math.random(90, 95), cooldown = 90}, -- "Meikyo Shisui is used very frequently."
         },
     })
 end
@@ -31,19 +31,22 @@ entity.onMobEngaged = function(mob, target)
     end
 end
 
+
+
 entity.onMobFight = function(mob, target)
     if mob:hasStatusEffect(xi.effect.MEIKYO_SHISUI) then
-        mob:setTP(0)
         if mob:getLocalVar("order") == 0 then
-            mob:useMobAbility(946)
+            mob:useMobAbility(946) -- Tachi - Yukikaze
             mob:setLocalVar("order", 1)
+            mob:setTP(2000)
         elseif mob:getLocalVar("order") == 1 then
-            mob:useMobAbility(947)
+            mob:useMobAbility(947) -- Tachi - Gekko
             mob:setLocalVar("order", 2)
-        else
-            mob:useMobAbility(948)
-            mob:setLocalVar("order", 0)
-            mob:delStatusEffect(xi.effect.MEIKYO_SHISUI)
+            mob:setTP(1000)
+        elseif mob:getLocalVar("order") == 2 then
+            mob:useMobAbility(948) -- Tachi - Kasha
+            mob:setLocalVar("order", 3)
+            mob:setTP(0)
         end
     end
 end
