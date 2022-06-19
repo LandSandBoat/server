@@ -18,7 +18,7 @@ ability_object.onUseAbility = function(player, target, ability)
 
     xi.job_utils.dragoon.useSuperJump(player, target, ability)
 
-    if (wyvern ~= nil and wyvern:getHP() > 0) then
+    if (wyvern ~= nil and player:getPetID() == xi.pet.id.WYVERN and wyvern:getHP() > 0) then
         wyvern:useJobAbility(652, wyvern)
     end
 end
