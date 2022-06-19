@@ -1338,7 +1338,7 @@ xi.dynamis.spawnDynamicPet =function(target, oMob, mobJob)
     {
         [xi.job.SMN] =
         {
-            ["Apocalypse Beast"] =
+            ["Apocalyptic Beast"] =
             {
                 ["onMobFight"] = {function(mob, target) end},
                 ["mixins"] = { require("scripts/mixins/families/avatar"), },
@@ -1369,7 +1369,7 @@ xi.dynamis.spawnDynamicPet =function(target, oMob, mobJob)
         },
         [xi.job.DRG] =
         {
-            ["Apocalypse Beast"] =
+            ["Apocalyptic Beast"] =
             {
                 ["onMobFight"] = {function(mob, target) xi.dynamis.onFightApocDRG(mob, target) end},
                 ["mixins"] = { },
@@ -1386,7 +1386,7 @@ xi.dynamis.spawnDynamicPet =function(target, oMob, mobJob)
             },
         },
     }
-    local nameFunction = {"Apocalypse Beast", "Dagourmarche"}
+    local nameFunction = {"Apocalyptic Beast", "Dagourmarche"}
     if mobJob == xi.job.DRG then
         if isNM == true then
             nameObj = petList[mobJob][true][mobName]

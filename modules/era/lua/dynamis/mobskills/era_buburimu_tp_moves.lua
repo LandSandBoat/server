@@ -167,7 +167,7 @@ m:addOverride("xi.globals.mobskills.meikyo_shisui.onMobWeaponSkill", function(ta
 end)
 
 m:addOverride("xi.globals.mobskills.mijin_gakure.onMobWeaponSkill", function(target, mob, skill)
-    if mob:getLocalVar("mijin_gakure") == 1 then
+    if mob:getLocalVar("MIJIN_GAKURE") == 1 then
         skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT)
         return 0
     end
