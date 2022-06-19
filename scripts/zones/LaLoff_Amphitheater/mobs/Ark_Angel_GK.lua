@@ -31,7 +31,20 @@ entity.onMobEngaged = function(mob, target)
 end
 
 entity.onMobFight = function(mob, target)
-    -- TODO: AA GK actively seeks to skillchain to Light off of his own WSs under MS, or other AA's WSs.
+    if mob:hasStatusEffect(xi.effect.MEIKYO_SHISUI) then
+        mob:setTP(0)
+        if mob:getLocalVar("order") == 0 then
+            mob:useMobAbility(946)
+            mob:setLocalVar("order", 1)
+        elseif mob:getLocalVar("order") == 1 then
+            mob:useMobAbility(947)
+            mob:setLocalVar("order", 2)
+        else
+            mob:useMobAbility(948)
+            mob:setLocalVar("order", 0)
+            mob:delStatusEffect(xi.effect.MEIKYO_SHISUI)
+        end
+    end
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
