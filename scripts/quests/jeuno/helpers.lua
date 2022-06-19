@@ -89,7 +89,12 @@ function xi.jeuno.helpers.GobbiebagQuest:new(params)
                         end
                     end,
                     onTrigger = function(player, npc)
-                        return quest:progressEvent(43, getPendingDialogueId(player), QUEST_ACCEPTED, 1)
+                    -- Check if they're trying to finish LURE OF THE WILDCAT first.
+                        if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(player:getCharVar("WildcatJeuno"), 12) then
+                            player:startEvent(10056)
+                            return
+                        else
+                            return quest:progressEvent(43, getPendingDialogueId(player), QUEST_ACCEPTED, 1)
                     end,
                 },
 
