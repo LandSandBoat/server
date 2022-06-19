@@ -9194,6 +9194,15 @@ INSERT INTO `mob_spell_lists` VALUES ('Hakutaku',486,176,1,255); -- Firaga III
 INSERT INTO `mob_spell_lists` VALUES ('Hakutaku',486,204,1,255); -- Flare
 >>>>>>> beeb71333e (Adding Hakutaku)
 
+INSERT INTO `mob_spell_lists` VALUES ('Shens',487,172,1,255); -- Water IV
+INSERT INTO `mob_spell_lists` VALUES ('Shens',487,201,1,255); -- Waterga III
+INSERT INTO `mob_spell_lists` VALUES ('Shens',487,214,1,255); -- Flood
+INSERT INTO `mob_spell_lists` VALUES ('Shens',487,240,1,255); -- Drown
+
+INSERT INTO `mob_spell_lists` VALUES ('Shens_Filtrate',488,172,1,255); -- Water IV
+INSERT INTO `mob_spell_lists` VALUES ('Shens_Filtrate',488,201,1,255); -- Waterga III
+INSERT INTO `mob_spell_lists` VALUES ('Shens_Filtrate',488,214,1,255); -- Flood
+
 -- Next Available: 487
 
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
@@ -9207,4 +9216,3 @@ UNLOCK TABLES;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
