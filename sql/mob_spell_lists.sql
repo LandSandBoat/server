@@ -714,22 +714,22 @@ INSERT INTO `mob_spell_lists` VALUES ('Undead',28,258,7,255);
 INSERT INTO `mob_spell_lists` VALUES ('Undead',28,259,41,255);
 INSERT INTO `mob_spell_lists` VALUES ('Undead',28,273,31,55);
 INSERT INTO `mob_spell_lists` VALUES ('Undead',28,274,56,255);
-INSERT INTO `mob_spell_lists` VALUES ('Mammet',29,174,40,40);
+INSERT INTO `mob_spell_lists` VALUES ('Mammet',29,174,43,44);
 INSERT INTO `mob_spell_lists` VALUES ('Mammet',29,175,60,60);
 INSERT INTO `mob_spell_lists` VALUES ('Mammet',29,176,75,75);
-INSERT INTO `mob_spell_lists` VALUES ('Mammet',29,179,40,40);
+INSERT INTO `mob_spell_lists` VALUES ('Mammet',29,179,43,44);
 INSERT INTO `mob_spell_lists` VALUES ('Mammet',29,180,60,60);
 INSERT INTO `mob_spell_lists` VALUES ('Mammet',29,181,75,75);
-INSERT INTO `mob_spell_lists` VALUES ('Mammet',29,184,40,40);
+INSERT INTO `mob_spell_lists` VALUES ('Mammet',29,184,43,44);
 INSERT INTO `mob_spell_lists` VALUES ('Mammet',29,185,60,60);
 INSERT INTO `mob_spell_lists` VALUES ('Mammet',29,186,75,75);
-INSERT INTO `mob_spell_lists` VALUES ('Mammet',29,189,40,40);
+INSERT INTO `mob_spell_lists` VALUES ('Mammet',29,189,43,44);
 INSERT INTO `mob_spell_lists` VALUES ('Mammet',29,190,60,60);
 INSERT INTO `mob_spell_lists` VALUES ('Mammet',29,191,75,75);
-INSERT INTO `mob_spell_lists` VALUES ('Mammet',29,194,40,40);
+INSERT INTO `mob_spell_lists` VALUES ('Mammet',29,194,43,44);
 INSERT INTO `mob_spell_lists` VALUES ('Mammet',29,195,60,60);
 INSERT INTO `mob_spell_lists` VALUES ('Mammet',29,196,75,75);
-INSERT INTO `mob_spell_lists` VALUES ('Mammet',29,199,40,40);
+INSERT INTO `mob_spell_lists` VALUES ('Mammet',29,199,43,44);
 INSERT INTO `mob_spell_lists` VALUES ('Mammet',29,200,60,60);
 INSERT INTO `mob_spell_lists` VALUES ('Mammet',29,201,75,75);
 INSERT INTO `mob_spell_lists` VALUES ('Yagudo_SMN',30,288,1,255);
@@ -4212,7 +4212,6 @@ INSERT INTO `mob_spell_lists` VALUES('Ixzdei_BLM', 467, 176, 1, 255);
 INSERT INTO `mob_spell_lists` VALUES('Ixzdei_BLM', 467, 181, 1, 255);
 INSERT INTO `mob_spell_lists` VALUES('Ixzdei_BLM', 467, 186, 1, 255);
 INSERT INTO `mob_spell_lists` VALUES('Ixzdei_BLM', 467, 191, 1, 255);
-
 INSERT INTO `mob_spell_lists` VALUES('Ixzdei_RDM', 468, 191, 1, 255);
 INSERT INTO `mob_spell_lists` VALUES('Ixzdei_RDM', 468, 260, 1, 255);
 INSERT INTO `mob_spell_lists` VALUES('Ixzdei_RDM', 468, 254, 1, 255);
@@ -4292,7 +4291,15 @@ INSERT INTO `mob_spell_lists` VALUES('Ghrah_Fire',484,235,1,255);
 INSERT INTO `mob_spell_lists` VALUES('Sword_Sorcerer_Solisoq', 485, 21, 45, 255);
 INSERT INTO `mob_spell_lists` VALUES('Sword_Sorcerer_Solisoq', 485, 34, 45, 255);
 
--- Next Available: 464
+INSERT INTO `mob_spell_lists` VALUES ('Hakutaku',486,249,1,255); -- Blaze Spikes
+INSERT INTO `mob_spell_lists` VALUES ('Hakutaku',486,235,1,255); -- Burn
+INSERT INTO `mob_spell_lists` VALUES ('Hakutaku',486,100,1,255); -- Enfire
+INSERT INTO `mob_spell_lists` VALUES ('Hakutaku',486,147,1,255); -- Fire IV
+INSERT INTO `mob_spell_lists` VALUES ('Hakutaku',486,148,1,255); -- Fire V
+INSERT INTO `mob_spell_lists` VALUES ('Hakutaku',486,176,1,255); -- Firaga III
+INSERT INTO `mob_spell_lists` VALUES ('Hakutaku',486,204,1,255); -- Flare
+
+-- Next Available: 487
 
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;

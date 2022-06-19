@@ -773,26 +773,24 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
             target.knockback  = PSkill->getKnockback();
             if (first && (PSkill->getPrimarySkillchain() != 0))
             {
-                if (PSkill->getPrimarySkillchain())
+                SUBEFFECT effect = battleutils::GetSkillChainEffect(PTarget, PSkill->getPrimarySkillchain(), PSkill->getSecondarySkillchain(),
+                                                                    PSkill->getTertiarySkillchain());
+                if (effect != SUBEFFECT_NONE)
                 {
-                    SUBEFFECT effect = battleutils::GetSkillChainEffect(PTarget, PSkill->getPrimarySkillchain(), PSkill->getSecondarySkillchain(),
-                                                                        PSkill->getTertiarySkillchain());
-                    if (effect != SUBEFFECT_NONE)
+                    int32 skillChainDamage = battleutils::TakeSkillchainDamage(this, PTarget, target.param, nullptr);
+                    if (skillChainDamage < 0)
                     {
-                        int32 skillChainDamage = battleutils::TakeSkillchainDamage(this, PTarget, target.param, nullptr);
-                        if (skillChainDamage < 0)
-                        {
-                            target.addEffectParam   = -skillChainDamage;
-                            target.addEffectMessage = 384 + effect;
-                        }
-                        else
-                        {
-                            target.addEffectParam   = skillChainDamage;
-                            target.addEffectMessage = 287 + effect;
-                        }
-                        target.additionalEffect = effect;
+                        target.addEffectParam   = -skillChainDamage;
+                        target.addEffectMessage = 384 + effect;
                     }
+                    else
+                    {
+                        target.addEffectParam   = skillChainDamage;
+                        target.addEffectMessage = 287 + effect;
+                    }
+                    target.additionalEffect = effect;
                 }
+
                 first = false;
             }
         }
@@ -803,6 +801,7 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
         }
         battleutils::DirtyExp(PTarget, this);
     }
+
     PTarget = static_cast<CBattleEntity*>(state.GetTarget());
     if (PTarget->objtype == TYPE_MOB && (PTarget->isDead() || (objtype == TYPE_PET && static_cast<CPetEntity*>(this)->getPetType() == PET_TYPE::AVATAR)))
     {

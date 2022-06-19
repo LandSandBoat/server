@@ -60,29 +60,30 @@ struct CParty::partyInfo_t
     uint16      prev_zone;
 };
 
-/************************************************************************
- *                                                                      *
- *  Конструктор                                                         *
- *                                                                      *
- ************************************************************************/
-
+// Constructor
 CParty::CParty(CBattleEntity* PEntity)
 {
-    XI_DEBUG_BREAK_IF(PEntity == nullptr);
-    XI_DEBUG_BREAK_IF(PEntity->PParty != nullptr);
-
-    m_PartyID     = PEntity->id;
-    m_PartyType   = PEntity->objtype == TYPE_PC ? PARTY_PCS : PARTY_MOBS;
-    m_PartyNumber = 0;
-
-    m_PLeader       = nullptr;
-    m_PAlliance     = nullptr;
-    m_PSyncTarget   = nullptr;
-    m_PQuaterMaster = nullptr;
-
+    m_PLeader        = nullptr;
+    m_PAlliance      = nullptr;
+    m_PSyncTarget    = nullptr;
+    m_PQuaterMaster  = nullptr;
     m_EffectsChanged = false;
-    AddMember(PEntity);
-    SetLeader((char*)PEntity->name.c_str());
+    m_PartyID        = 0;
+    m_PartyType      = PARTY_MOBS;
+    m_PartyNumber    = 0;
+
+    if (PEntity != nullptr && PEntity->PParty == nullptr)
+    {
+        m_PartyID     = PEntity->id;
+        m_PartyType   = PEntity->objtype == TYPE_PC ? PARTY_PCS : PARTY_MOBS;
+
+        AddMember(PEntity);
+        SetLeader((char*)PEntity->name.c_str());
+    }
+    else
+    {
+        ShowWarning("CParty::CParty() - PEntity was null, or party was not null.")
+    }
 }
 
 CParty::CParty(uint32 id)
@@ -261,8 +262,11 @@ CBattleEntity* CParty::GetMemberByName(const int8* MemberName)
 
 void CParty::RemoveMember(CBattleEntity* PEntity)
 {
-    XI_DEBUG_BREAK_IF(PEntity == nullptr);
-    XI_DEBUG_BREAK_IF(PEntity->PParty != this);
+    if (PEntity == nullptr || PEntity->PParty != this)
+    {
+        ShowWarning("CParty::RemoveMember() - PEntity was null, or PParty mismatch.");
+        return;
+    }
 
     if (m_PLeader == PEntity)
     {
@@ -342,8 +346,11 @@ void CParty::RemoveMember(CBattleEntity* PEntity)
 
 void CParty::DelMember(CBattleEntity* PEntity)
 {
-    XI_DEBUG_BREAK_IF(PEntity == nullptr);
-    XI_DEBUG_BREAK_IF(PEntity->PParty != this);
+    if (PEntity == nullptr || PEntity->PParty != this)
+    {
+        ShowWarning("CParty::DelMember() - PEntity was null, or PParty mismatch.");
+        return;
+    }
 
     if (m_PLeader == PEntity)
     {
@@ -500,8 +507,11 @@ std::vector<CParty::partyInfo_t> CParty::GetPartyInfo() const
 
 void CParty::AddMember(CBattleEntity* PEntity)
 {
-    XI_DEBUG_BREAK_IF(PEntity == nullptr);
-    XI_DEBUG_BREAK_IF(PEntity->PParty != nullptr);
+    if (PEntity == nullptr || PEntity->PParty != nullptr)
+    {
+        ShowWarning("CParty::AddMember() - PEntity was null, or PParty not null.");
+        return;
+    }
 
     PEntity->PParty = this;
     members.push_back(PEntity);
@@ -610,8 +620,11 @@ void CParty::AddMember(uint32 id)
 
 void CParty::PushMember(CBattleEntity* PEntity)
 {
-    XI_DEBUG_BREAK_IF(PEntity == nullptr);
-    XI_DEBUG_BREAK_IF(PEntity->PParty != nullptr);
+    if (PEntity == nullptr || PEntity->PParty != nullptr)
+    {
+        ShowWarning("CParty::PushMember() - PEntity was null, or PParty not null.");
+        return;
+    }
 
     PEntity->PParty = this;
     members.push_back(PEntity);
@@ -697,8 +710,11 @@ CBattleEntity* CParty::GetQuaterMaster()
 
 uint16 CParty::GetMemberFlags(CBattleEntity* PEntity)
 {
-    XI_DEBUG_BREAK_IF(PEntity == nullptr);
-    XI_DEBUG_BREAK_IF(PEntity->PParty != this);
+    if (PEntity == nullptr || PEntity->PParty != this)
+    {
+        ShowWarning("CParty::GetMemberFlags() - PEntity was null, or PParty mismatch.");
+        return 0;
+    }
 
     uint16 Flags = 0;
 
@@ -878,7 +894,11 @@ void CParty::ReloadPartyMembers(CCharEntity* PChar)
 
 void CParty::ReloadTreasurePool(CCharEntity* PChar)
 {
-    XI_DEBUG_BREAK_IF(PChar == nullptr);
+    if (PChar == nullptr)
+    {
+        ShowWarning("CParty::ReloadTreasurePool() - PChar was null.");
+        return;
+    }
 
     if (PChar->PTreasurePool != nullptr && PChar->PTreasurePool->GetPoolType() == TREASUREPOOL_ZONE)
     {

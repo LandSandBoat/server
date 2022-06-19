@@ -63,6 +63,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../packets/message_combat.h"
 #include "../packets/message_special.h"
 #include "../packets/message_standard.h"
+#include "../packets/monipulator1.h"
+#include "../packets/monipulator2.h"
 #include "../packets/quest_mission_log.h"
 
 #include "../packets/roe_sparkupdate.h"
@@ -1382,6 +1384,8 @@ namespace charutils
         PChar->pushPacket(new CCharAbilitiesPacket(PChar));
         PChar->pushPacket(new CCharUpdatePacket(PChar));
         PChar->pushPacket(new CMenuMeritPacket(PChar));
+        PChar->pushPacket(new CMonipulatorPacket1(PChar));
+        PChar->pushPacket(new CMonipulatorPacket2(PChar));
         PChar->pushPacket(new CCharSyncPacket(PChar));
     }
 
@@ -2640,6 +2644,12 @@ namespace charutils
     void BuildingCharAbilityTable(CCharEntity* PChar)
     {
         std::vector<CAbility*> AbilitiesList;
+
+        if (PChar == nullptr)
+        {
+            ShowWarning("charutils::BuildingCharAbilityTable() - PChar was null.");
+            return;
+        }
 
         memset(&PChar->m_Abilities, 0, sizeof(PChar->m_Abilities));
 
@@ -4305,6 +4315,8 @@ namespace charutils
                 PChar->pushPacket(new CCharRecastPacket(PChar));
                 PChar->pushPacket(new CCharAbilitiesPacket(PChar));
                 PChar->pushPacket(new CMenuMeritPacket(PChar));
+                PChar->pushPacket(new CMonipulatorPacket1(PChar));
+                PChar->pushPacket(new CMonipulatorPacket2(PChar));
                 PChar->pushPacket(new CCharJobExtraPacket(PChar, true));
                 PChar->pushPacket(new CCharJobExtraPacket(PChar, false));
                 PChar->pushPacket(new CCharSyncPacket(PChar));
@@ -4536,6 +4548,8 @@ namespace charutils
                 PChar->pushPacket(new CCharRecastPacket(PChar));
                 PChar->pushPacket(new CCharAbilitiesPacket(PChar));
                 PChar->pushPacket(new CMenuMeritPacket(PChar));
+                PChar->pushPacket(new CMonipulatorPacket1(PChar));
+                PChar->pushPacket(new CMonipulatorPacket2(PChar));
                 PChar->pushPacket(new CCharJobExtraPacket(PChar, true));
                 PChar->pushPacket(new CCharJobExtraPacket(PChar, true));
                 PChar->pushPacket(new CCharSyncPacket(PChar));
@@ -4558,6 +4572,8 @@ namespace charutils
         if (onLimitMode)
         {
             PChar->pushPacket(new CMenuMeritPacket(PChar));
+            PChar->pushPacket(new CMonipulatorPacket1(PChar));
+            PChar->pushPacket(new CMonipulatorPacket2(PChar));
         }
 
         if (PMob != PChar) // Only mob kills count for gain EXP records
@@ -5195,7 +5211,11 @@ namespace charutils
     {
         TracyZoneScoped;
 
-        XI_DEBUG_BREAK_IF(SkillID >= MAX_SKILLTYPE);
+        if (SkillID >= MAX_SKILLTYPE)
+        {
+            ShowWarning("charutils::SaveCharSkills() - SkillID is greated than MAX_SKILLTYPE.");
+            return;
+        }
 
         const char* Query = "INSERT INTO char_skills "
                             "SET "
