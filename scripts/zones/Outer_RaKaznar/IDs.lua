@@ -18,7 +18,12 @@ zones[xi.zone.OUTER_RAKAZNAR] =
         LOGIN_CAMPAIGN_UNDERWAY = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER            = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         BAYLD_OBTAINED          = 7007, -- You have obtained <number> bayld!
+        FAINT_ENERGY_WAFTS      = 7013, -- A faint energy wafts up from the ground.
         YOU_HAVE_LEARNED        = 7015, -- You have learned <keyitem>!
+        THIS_BAFFLING_GADGET    = 7738, -- This baffling gadget seems to serve as transport to the [lower/higher] floors.
+        NOTHING_HAPPENS         = 7740, -- Nothing happens...
+        DOOR_TIGHTLY_SEALED     = 7903, -- The door is tightly sealed.
+        EERIE_GLOW_PENETRATES   = 7904, -- An eerie glow penetrates the darkness.
     },
     mob =
     {
