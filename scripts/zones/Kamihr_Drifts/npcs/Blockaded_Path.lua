@@ -18,7 +18,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 57 and option == 1 then
-        player:setPos(16.725, 0.493, -19.652, 131. xi.zone.LEAFALLIA)
+        player:setPos(16.725, 0.493, -19.652, 131, xi.zone.LEAFALLIA)
     end
 end
 
