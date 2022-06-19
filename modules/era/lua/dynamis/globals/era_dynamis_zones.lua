@@ -5,6 +5,7 @@
 --       Module Required Scripts          --
 --------------------------------------------
 require("scripts/globals/dynamis")
+require("scripts/globals/status")
 require("modules/module_utils")
 --------------------------------------------
 --       Module Affected Scripts          --
@@ -15,16 +16,16 @@ local m = Module:new("era_dynamis_zones")
 
 local dynamisZones =
 {
-    {xi.zone.DYNAMIS_BASTOK, "Dynamis-Bastok"},
-    {xi.zone.DYNAMIS_BEAUCEDINE, "Dynamis-Beaucedine"},
-    {xi.zone.DYNAMIS_BUBURIMU, "Dynamis-Buburimu"},
-    {xi.zone.DYNAMIS_JEUNO, "Dynamis-Jeuno"},
-    {xi.zone.DYNAMIS_QUFIM, "Dynamis-Qufim"},
-    {xi.zone.DYNAMIS_SAN_DORIA, "Dynamis-San_dOria"},
-    {xi.zone.DYNAMIS_TAVNAZIA, "Dynamis-Tavnazia"},
-    {xi.zone.DYNAMIS_VALKURM, "Dynamis-Valkurm"},
-    {xi.zone.DYNAMIS_WINDURST, "Dynamis-Windurst"},
-    {xi.zone.DYNAMIS_XARCABARD, "Dynamis-Xarcabard"}
+    {xi.zone.DYNAMIS_BASTOK, "Dynamis-Bastok", 2},
+    {xi.zone.DYNAMIS_BEAUCEDINE, "Dynamis-Beaucedine", 5},
+    {xi.zone.DYNAMIS_BUBURIMU, "Dynamis-Buburimu", 8},
+    {xi.zone.DYNAMIS_JEUNO, "Dynamis-Jeuno", 4},
+    {xi.zone.DYNAMIS_QUFIM, "Dynamis-Qufim", 9},
+    {xi.zone.DYNAMIS_SAN_DORIA, "Dynamis-San_dOria", 1},
+    {xi.zone.DYNAMIS_TAVNAZIA, "Dynamis-Tavnazia", 10},
+    {xi.zone.DYNAMIS_VALKURM, "Dynamis-Valkurm", 7},
+    {xi.zone.DYNAMIS_WINDURST, "Dynamis-Windurst", 3},
+    {xi.zone.DYNAMIS_XARCABARD, "Dynamis-Xarcabard", 6}
 }
 
 local startingZones =
@@ -54,6 +55,12 @@ for _, zoneID in pairs(dynamisZones) do
     function(zone)
         xi.dynamis.handleDynamis(zone)
     end)
+    if zoneID[3] >= 7 then
+        m:addOverride(string.format("xi.zones.%s.npcs.qm0.onTrigger", zoneID[2]),
+        function(player, npc)
+            xi.dynamis.sjQMOnTrigger(player, npc)
+        end)
+    end
 end
 
 

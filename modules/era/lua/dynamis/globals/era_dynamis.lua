@@ -48,7 +48,6 @@ local dynamis_min_lvl = 65
 local dynamis_reservation_cancel = 180
 local dynamis_reentry_days = 3
 local dynamis_rentry_hours = 71
-local dynamis_win_aoe = false
 local dynamis_staging_time = 15 -- Extra time added at registration of dynamis in minutes. Wings gave 15 minutes by default.
 
 xi.dynamis.dynaIDLookup = -- Used to check for different IDs based on zoneID. Replaces the need to overwrite IDs.lua for each zone.
@@ -612,6 +611,7 @@ xi.dynamis.dynaInfoEra =
         winKI = xi.ki.DYNAMIS_VALKURM_SLIVER,
         winTitle = xi.title.DYNAMIS_VALKURM_INTERLOPER,
         winQM = 16937586,
+        sjRestrictionNPC = 16937585,
         entryPos = {100, -8, 131, 47, xi.zone.DYNAMIS_VALKURM},
         ejectPos = {119, -9, 131, 52, xi.zone.VALKURM_DUNES},
     },
@@ -707,17 +707,42 @@ xi.dynamis.handleDynamis = function(zone)
     local zoneTimepoint = GetServerVariable(string.format("[DYNA]Timepoint_%s", zoneID))
     local zoneExpireRoutine = zone:getLocalVar(string.format("[DYNA]ExpireRoutine_%s", zone:getID()))
     local zoneTimeRemaining = xi.dynamis.getDynaTimeRemaining(zoneTimepoint)
-    local zone10Min = zone:getLocalVar(string.format("[DYNA]Given3MinuteWarning_%s", zoneID))
+    local zone10Min = zone:getLocalVar(string.format("[DYNA]Given10MinuteWarning_%s", zoneID))
     local zone3Min = zone:getLocalVar(string.format("[DYNA]Given3MinuteWarning_%s", zoneID))
     local zone1Min = zone:getLocalVar(string.format("[DYNA]Given1MinuteWarning_%s", zoneID))
+    local dreamlands = {xi.zone.DYNAMIS_BUBURIMU, xi.zone.DYNAMIS_QUFIM, xi.zone.DYNAMIS_VALKURM, xi.zone.DYNAMIS_TAVNAZIA}
     local playersInZone = zone:getPlayers()
-    local playercount = 0
-    local i = 2
 
     for _, player in pairs(playersInZone) do -- Iterates through player list to do stuff.
-        if player:getCharVar("Requires_Initial_Update") == 1 then
+        if player:getLocalVar("Requires_Initial_Update") == 0 then
             xi.dynamis.updatePlayerHourglass(player, zoneDynamistoken)
-            player:setCharVar("Requires_Initial_Update", 0)
+
+            if player:getCharVar(string.format("[DYNA]InflictWeakness_%s", zoneID)) == true then -- Should I inflict weakness?
+                player:addStatusEffect(xi.effect.WEAKNESS, 1, 3, 60 * 10) -- Inflict weakness.
+                player:setCharVar(string.format("[DYNA]InflictWeakness_%s", zoneID), false) -- Reset var.
+            end
+
+            for _, zone_ID in pairs(dreamlands) do
+                if zone_ID == zoneID and zone:getLocalVar("SJUnlock") ~= 1 then
+                    local savedStatusEffects = {xi.effect.RERAISE, xi.effect.SIGIL, xi.effect.SIGNET, xi.effect.SANCTION, xi.effect.SJ_RESTRICTION, xi.effect.FOOD, xi.effect.BATTLEFIELD}
+                    local targetStatusEffects = player:getStatusEffects()
+                    for _, targetEffect in pairs(targetStatusEffects) do -- For Each Status Effect on the Player
+                        local saveEffect = false -- Default to Remove
+                        local effectID = targetEffect:getType()
+                        for _, saveEffectID in pairs(savedStatusEffects) do -- Check against each effect in saved effects
+                            if effectID == saveEffectID then
+                                saveEffect = true -- If match, don't remove and stop searching
+                                break
+                            end
+                        end
+                        if saveEffect == false and player:getGMLevel() < 2 then -- Remove effect if player is not a GM.
+                            player:delStatusEffectSilent(effectID)
+                        end
+                    end
+                    player:addStatusEffect(xi.effect.SJ_RESTRICTION, 0, 0, 0, 18000) -- Inflict SJ Restriction
+                end
+            end
+            player:setLocalVar("Requires_Initial_Update", 1)
         end
         
         if player:getGMLevel() < 2 then -- GMs can stay in zone until expiry.
@@ -728,7 +753,6 @@ xi.dynamis.handleDynamis = function(zone)
                 end
             end
         end
-        playercount = playercount + 1
     end
 
     for waveNumber, wave in pairs(xi.dynamis.mobList[zoneID].waveDefeatRequirements) do
@@ -774,7 +798,7 @@ xi.dynamis.handleDynamis = function(zone)
         zone:setLocalVar(string.format("[DYNA]Given1MinuteWarning_%s", zoneID), 1) -- Sets to true to not give another warning.
     end
 
-    if playercount == 0 then -- If player count in zone is 0 initiate cooldown for cleanup.
+    if #playersInZone == 0 then -- If player count in zone is 0 initiate cooldown for cleanup.
         zone:setLocalVar(string.format("[DYNA]NoPlayersInZone_%s", zoneID), (os.time() + (60 * 15))) -- Give 15 minutes for zone to repopulate.
     else
         zone:setLocalVar(string.format("[DYNA]NoPlayersInZone_%s", zoneID), (os.time() + (60 * 60 * 5))) -- Ignore for 5 hours or until zone empties.
@@ -793,6 +817,11 @@ xi.dynamis.onNewDynamis = function(player)
     local zoneID = xi.dynamis.dynaInfoEra[player:getZoneID()].dynaZone
     local zone = GetZone(zoneID)
     xi.dynamis.spawnWave(zone, zoneID, 1) -- Spawn Wave 1
+    if xi.dynamis.dynaInfoEra[zoneID].sjRestrictionNPCNumber then
+        local sjNPCLocation = xi.dynamis.dynaInfoEra[zoneID].sjRestrictionLocation[math.random(1, xi.dynamis.dynaInfoEra[zoneID].sjRestrictionNPCNumber)]
+        GetNPCByID(xi.dynamis.dynaInfoEra[zoneID].sjRestrictionNPC):setPos(sjNPCLocation[1], sjNPCLocation[2], sjNPCLocation[3])
+        GetNPCByID(xi.dynamis.dynaInfoEra[zoneID].sjRestrictionNPC):setStatus(xi.status.NORMAL)
+    end
 end
 
 --------------------------------------------
@@ -1078,7 +1107,6 @@ m:addOverride("xi.dynamis.entryNpcOnEventFinish", function(player, csid, option)
             local entryPos = xi.dynamis.entryInfoEra[zoneID].enterPos
             if entryPos == nil then return end -- If entryPos isn't there, don't teleport.
             player:messageSpecial(xi.dynamis.dynaIDLookup[player:getZoneID()].text.CONNECTING_WITH_THE_SERVER) -- Just to mimic what we have previously had.
-            player:setCharVar("Requires_Initial_Update", 1)
             player:setCharVar(xi.dynamis.entryInfoEra[zoneID].enteredVar, 1) -- Mark the player as having entered at least once.
             player:timer(5000, function(player) player:setPos(entryPos[1], entryPos[2], entryPos[3], entryPos[4], entryPos[5]) end)
         end
@@ -1090,48 +1118,20 @@ m:addOverride("xi.dynamis.entryNpcOnEventFinish", function(player, csid, option)
 end)
 
 xi.dynamis.sjQMOnTrigger = function(player, npc)
-    local zoneId = npc:getZoneID()
-    if dynamis.xi.dynamis.dynaInfoEra[zoneId].sjRestriction == true then -- Check to see if SJ Restriction exists
-        zone = npc:getZone()
-        local playersInZone = zone:getPlayers()
-        for _, player in pairs(playersInZone) do
-            if player:getZoneID() == player:getZoneID() and player:hasStatusEffect(xi.effect.SJ_RESTRICTION) == true then -- Does player have SJ restriction?
-                if player:hasStatusEffect(xi.effect.RERAISE) then -- Check for reraise and store values.
-                    player:setLocalVar("had_reraise", 1)
-                    player:setLocalVar("reraise_power", player:getStatusEffect(xi.effect.RERAISE):getPower())
-                    player:setLocalVar("reraise_duration", player:getStatusEffect(xi.effect.RERAISE):getDuration())
-                end
-                player:delStatusEffect(xi.effect.SJ_RESTRICTION) -- Remove SJ restriction
-                if player:getLocalVar("had_reraise") == 1 and player:hasStatusEffect(xi.effect.RERAISE) == false then -- Reapply previous reraise if lost.
-                        player:addStatusEffect(xi.effect.RERAISE, player:getLocalVar("reraise_power"), 0, player:getLocalVar("reraise_duration"))
-                end
-            end
+    local zone = player:getZone()
+    local playersInZone = zone:getPlayers()
+    for _, playerEntity in pairs(playersInZone) do
+        if  playerEntity:hasStatusEffect(xi.effect.SJ_RESTRICTION) then -- Does player have SJ restriction?
+            playerEntity:delStatusEffect(xi.effect.SJ_RESTRICTION) -- Remove SJ restriction
         end
-        zone:setLocalVar("SJUnlock", 1)
     end
+    zone:setLocalVar("SJUnlock", 1)
 end
 
 m:addOverride("xi.dynamis.qmOnTrigger", function(player, npc) -- Override standard qmOnTrigger()
     local zoneId = npc:getZoneID()
-    if dynamis_win_aoe == true then -- Used to bypass normal KI mechanic which was causing issues on Topaz.
-        local currTime = os.time()
-        if npc:getLocalVar("lastActivation") + 5 > currTime then return end
-        npc:setLocalVar("lastActivation", currTime)
-        
-        local nearbyPlayers = npc:getPlayersInRange(50)
-        if nearbyPlayers == nil then return end -- If no players, ignore.
-        local ID = zones[zoneId]
-        
-        for _,v in ipairs(nearbyPlayers) do -- Loop to do KI hand-outs
-            if v:hasKeyItem(xi.dynamis.dynaInfoEra[zoneId].winKI) == false then
-                v:addKeyItem(xi.dynamis.dynaInfoEra[zoneId].winKI)
-                v:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.dynamis.dynaInfoEra[zoneId].winKI)
-            end
-        end
-    else -- Normal QM behavior
-        player:addKeyItem(xi.dynamis.dynaInfoEra[zoneId].winKI)
-        player:messageSpecial(zones[zoneId].text.KEYITEM_OBTAINED, xi.dynamis.dynaInfoEra[zoneId].winKI)
-    end
+    player:addKeyItem(xi.dynamis.dynaInfoEra[zoneId].winKI)
+    player:messageSpecial(zones[zoneId].text.KEYITEM_OBTAINED, xi.dynamis.dynaInfoEra[zoneId].winKI)
 end)
 
 --------------------------------------------
@@ -1140,32 +1140,17 @@ end)
 
 m:addOverride("xi.dynamis.zoneOnZoneIn", function(player, prevZone)
     local zoneID = player:getZoneID()
-    local zoneDynamisToken = GetServerVariable(string.format("[DYNA]Token_%s", zoneID))
     local zoneTimepoint = GetServerVariable(string.format("[DYNA]Timepoint_%s", zoneID))
     local info = xi.dynamis.dynaInfoEra[zoneID]
     local ID = zones[zoneID]
-    local dreamlands = {xi.zone.DYNAMIS_BUBURIMU, xi.zone.DYNAMIS_QUFIM, xi.zone.DYNAMIS_VALKURM, xi.zone.DYNAMIS_TAVNAZIA}
 
     player:addStatusEffectEx(xi.effect.BATTLEFIELD, 0, 1, 0, 0, true)
     -- usually happens when zoning in with !zone command
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then player:setPos(info.entryPos[1], info.entryPos[2], info.entryPos[3], info.entryPos[4]) end -- If player is in void, move player to entry.
 
-    if xi.dynamis.verifyHoldsValidHourglass(player, zoneDynamisToken, zoneTimepoint) == true then -- Check if player has an hourglass and their personal token matches the zone token.
-        player:timer(3000, function(player)
-            player:messageSpecial(ID.text.DYNAMIS_TIME_UPDATE_2, math.floor(xi.dynamis.getDynaTimeRemaining(zoneTimepoint) / 60), 1) -- Send message letting player know how long they have.
-        end)
-
-        if player:getCharVar(string.format("[DYNA]InflictWeakness_%s", zoneID)) == true then -- Should I inflict weakness?
-            player:addStatusEffect(xi.effect.WEAKNESS, 1, 3, 60 * 10) -- Inflict weakness.
-            player:setCharVar(string.format("[DYNA]InflictWeakness_%s", zoneID), false) -- Reset var.
-        end
-
-        for _, zone in pairs(dreamlands) do
-            if zone == zoneID and player:getZone():getLocalVar("SJUnlock") ~= 1 then
-                player:addStatusEffect(xi.effect.SJ_RESTRICTION, 0, 0, 0, 18000) -- Inflict SJ Restriction
-            end
-        end
-    end
+    player:timer(5000, function(player)
+        player:messageSpecial(ID.text.DYNAMIS_TIME_UPDATE_2, math.floor(xi.dynamis.getDynaTimeRemaining(zoneTimepoint) / 60), 1) -- Send message letting player know how long they have.
+    end)
 
     return -1
 end)
