@@ -1827,8 +1827,11 @@ void CLuaBaseEntity::openDoor(sol::object const& seconds)
 
 void CLuaBaseEntity::closeDoor(sol::object const& seconds)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_NPC);
+    if (m_PBaseEntity->objtype != TYPE_NPC)
+    {
+        ShowWarning("CLuaBaseEntity::closeDoor() - Non-NPC passed to function.");
+        return;
+    }
 
     if (m_PBaseEntity->animation == ANIMATION_OPEN_DOOR)
     {
@@ -4248,6 +4251,12 @@ void CLuaBaseEntity::addGearSetMod(uint8 modNameId, Mod modId, uint16 modValue)
 
     CCharEntity* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
 
+    if (!PChar)
+    {
+        ShowWarning("CLuaBaseEntity::addGearSetMod() - m_pBaseEntity is not of type Char.");
+        return;
+    }
+
     for (auto& exsistingMod : PChar->m_GearSetMods)
     {
         if (gearSetMod.modNameId == exsistingMod.modNameId)
@@ -4325,8 +4334,11 @@ std::optional<CLuaItem> CLuaBaseEntity::getStorageItem(uint8 container, uint8 sl
 
 uint8 CLuaBaseEntity::storeWithPorterMoogle(uint16 slipId, sol::table const& extraTable, sol::table const& storableItemIdsTable)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowWarning("CLuaBaseEntity::storeWithPorterMoogle() - Non_PC passed to function.");
+        return 0;
+    }
 
     auto* PChar      = (CCharEntity*)m_PBaseEntity;
     auto  slipSlotId = PChar->getStorage(LOC_INVENTORY)->SearchItem(slipId);
@@ -4964,9 +4976,13 @@ bool CLuaBaseEntity::getNewPlayer()
 
 void CLuaBaseEntity::setNewPlayer(bool newplayer)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-
     auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+
+    if (!PChar)
+    {
+        ShowWarning("CLuaBaseEntity::setNewPlayer() - m_pBaseEntity is not of type Char.");
+        return;
+    }
 
     if (newplayer == true)
     {
@@ -5231,9 +5247,14 @@ uint8 CLuaBaseEntity::getSubJob()
 
 void CLuaBaseEntity::changeJob(uint8 newJob)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+    auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
 
-    auto*   PChar   = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+    if (!PChar)
+    {
+        ShowWarning("CLuaBaseEntity::changeJob() - m_pBaseEntity is not of type Char.");
+        return;
+    }
+
     JOBTYPE prevjob = PChar->GetMJob();
 
     PChar->resetPetZoningInfo();
@@ -5329,7 +5350,11 @@ void CLuaBaseEntity::changesJob(uint8 subJob)
 
 void CLuaBaseEntity::unlockJob(uint8 JobID)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowWarning("CLuaBaseEntity::unlockJob() - Non-PC calling function.");
+        return;
+    }
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
@@ -5359,13 +5384,14 @@ void CLuaBaseEntity::unlockJob(uint8 JobID)
 
 bool CLuaBaseEntity::hasJob(uint8 job)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+    if (m_PBaseEntity->objtype != TYPE_PC || job >= MAX_JOBTYPE)
+    {
+        ShowWarning("CLuaBaseEntity::unlockJob() - Non-PC calling function or invalid JOBTYPE");
+        return false;
+    }
 
     JOBTYPE JobID = static_cast<JOBTYPE>(job);
-
-    XI_DEBUG_BREAK_IF(JobID > MAX_JOBTYPE || JobID < 0);
-
-    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+    auto*   PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
     return (PChar->jobs.unlocked >> JobID) & 1;
 }
@@ -5404,9 +5430,11 @@ uint8 CLuaBaseEntity::getSubLvl()
 
 uint8 CLuaBaseEntity::getJobLevel(uint8 JobID)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-
-    XI_DEBUG_BREAK_IF(JobID > MAX_JOBTYPE || JobID < 0);
+    if (m_PBaseEntity->objtype != TYPE_PC || JobID >= MAX_JOBTYPE)
+    {
+        ShowWarning("CLuaBaseEntity::getJobLevel() - Non-PC or Invalid JobID passed to function.");
+        return 0;
+    }
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
     return PChar->jobs.job[JobID];
@@ -5552,8 +5580,11 @@ void CLuaBaseEntity::setLevelCap(uint8 cap)
 
 uint8 CLuaBaseEntity::levelRestriction(sol::object const& level)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+    if (m_PBaseEntity == nullptr || m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowWarning("CLuaBaseEntity::levelRestriction() - Entity is null, or not PC.");
+        return 0;
+    }
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
@@ -6801,7 +6832,7 @@ void CLuaBaseEntity::addKeyItem(uint16 keyItemID)
     if (table >= MAX_KEYS_TABLE)
     {
         // Bail out if an invalid keyitem is being added
-        ShowWarning("CLuaBaseEntity::addKeyItem - Attempting to add invalid key item: %d", keyItemID);
+        ShowWarning("CLuaBaseEntity::addKeyItem() - Attempting to add invalid key item: %d", keyItemID);
         return;
     }
 
@@ -6847,7 +6878,7 @@ void CLuaBaseEntity::delKeyItem(uint16 keyItemID)
     if (table >= MAX_KEYS_TABLE)
     {
         // Bail out if an invalid keyitem is being added
-        ShowWarning("CLuaBaseEntity::delKeyItem - Attempting to delete invalid key item: %d", keyItemID);
+        ShowWarning("CLuaBaseEntity::delKeyItem() - Attempting to delete invalid key item: %d", keyItemID);
         return;
     }
 
@@ -6888,7 +6919,7 @@ void CLuaBaseEntity::unseenKeyItem(uint16 keyItemID)
     if (table >= MAX_KEYS_TABLE)
     {
         // Bail out if an invalid keyitem is being added
-        ShowWarning("CLuaBaseEntity::unseenKeyItem - Attempting to unsee invalid key item: %d", keyItemID);
+        ShowWarning("CLuaBaseEntity::unseenKeyItem() - Attempting to unsee invalid key item: %d", keyItemID);
         return;
     }
 
@@ -7096,7 +7127,7 @@ uint32 CLuaBaseEntity::getGil()
     if (m_PBaseEntity->objtype == TYPE_MOB)
     {
         auto* PMob = dynamic_cast<CMobEntity*>(m_PBaseEntity);
-        if (PMob->CanStealGil())
+        if (PMob && PMob->CanStealGil())
         {
             return PMob->GetRandomGil();
         }
@@ -7683,13 +7714,22 @@ void CLuaBaseEntity::takeDamage(int32 damage, sol::object const& attacker, sol::
     {
         CLuaBaseEntity* PLuaAttacker = attacker.as<CLuaBaseEntity*>();
 
-        XI_DEBUG_BREAK_IF(PLuaAttacker == nullptr);
-        XI_DEBUG_BREAK_IF(PLuaAttacker->m_PBaseEntity->objtype == TYPE_NPC);
+        if (PLuaAttacker == nullptr || PLuaAttacker->m_PBaseEntity->objtype == TYPE_NPC)
+        {
+            ShowWarning("CLuaBaseEntity::takeDamage() - PLuaAttacker was null, or was NPC.");
+            return;
+        }
 
         PAttacker = dynamic_cast<CBattleEntity*>(PLuaAttacker->m_PBaseEntity);
     }
 
     CBattleEntity* PDefender = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
+
+    if (!PDefender)
+    {
+        ShowWarning("CLuaBaseEntity::takeDamage() - Attempt to use non-BattleEntity as PDefender.");
+        return;
+    }
 
     // Check for special flags which may prevent damage from waking up the target
     bool wakeUp        = true;
@@ -7974,11 +8014,16 @@ uint8 CLuaBaseEntity::getAverageItemLevel()
 
 void CLuaBaseEntity::capSkill(uint8 skill)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-
     if (skill < MAX_SKILLTYPE)
     {
         auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+
+        if (!PChar)
+        {
+            ShowWarning("CLuaBaseEntity::capSkill() - m_PBaseEntity is not a player.");
+            return;
+        }
+
         // CItemWeapon* PItem = ((CBattleEntity*)m_PBaseEntity)->m_Weapons[SLOT_MAIN];
         /* let's just ignore this part for the moment
         //remove modifiers if valid
@@ -8063,9 +8108,11 @@ uint16 CLuaBaseEntity::getSkillLevel(uint16 skillId)
 
 void CLuaBaseEntity::setSkillLevel(uint8 SkillID, uint16 SkillAmount)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-
-    XI_DEBUG_BREAK_IF(SkillID >= MAX_SKILLTYPE);
+    if (m_PBaseEntity->objtype != TYPE_PC || SkillID >= MAX_SKILLTYPE)
+    {
+        ShowWarning("CLuaBaseEntity::setSkillLevel() - Non-PC or Invalid SkillID passed to function.");
+        return;
+    }
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
@@ -8585,7 +8632,11 @@ bool CLuaBaseEntity::hasPartyJob(uint8 job)
 
 std::optional<CLuaBaseEntity> CLuaBaseEntity::getPartyMember(uint8 member, uint8 allianceparty)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowWarning("CLuaBaseEntity::getPartyMember() - Non-PC calling function.");
+        return std::nullopt;
+    }
 
     CBattleEntity* PBattle     = static_cast<CBattleEntity*>(m_PBaseEntity);
     CBattleEntity* PTargetChar = nullptr;
@@ -8596,7 +8647,7 @@ std::optional<CLuaBaseEntity> CLuaBaseEntity::getPartyMember(uint8 member, uint8
     }
     else if (PBattle->PParty != nullptr)
     {
-        if (allianceparty == 0 && member <= PBattle->PParty->members.size())
+        if (allianceparty == 0 && member < PBattle->PParty->members.size())
         {
             PTargetChar = PBattle->PParty->members[member];
         }
@@ -8625,8 +8676,11 @@ std::optional<CLuaBaseEntity> CLuaBaseEntity::getPartyMember(uint8 member, uint8
 
 std::optional<CLuaBaseEntity> CLuaBaseEntity::getPartyLeader()
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowWarning("CLuaBaseEntity::getPartyLeader() - Non-PC called function.");
+        return std::nullopt;
+    }
 
     CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
     if (PChar->PParty)
@@ -8672,7 +8726,11 @@ void CLuaBaseEntity::forMembersInRange(float range, sol::function function)
 
 void CLuaBaseEntity::addPartyEffect(sol::variadic_args va)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowWarning("CLuaBaseEntity::addPartyEffect() - Non-PC called function.");
+        return;
+    }
 
     std::vector<uint16> args(7, 0);
 
@@ -8704,7 +8762,11 @@ void CLuaBaseEntity::addPartyEffect(sol::variadic_args va)
 
 bool CLuaBaseEntity::hasPartyEffect(uint16 effectid)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowWarning("CLuaBaseEntity::hasPartyEffect() - Non-PC called function.");
+        return false;
+    }
 
     CCharEntity* PChar = ((CCharEntity*)m_PBaseEntity);
 
@@ -8734,7 +8796,11 @@ bool CLuaBaseEntity::hasPartyEffect(uint16 effectid)
 
 void CLuaBaseEntity::removePartyEffect(uint16 effectid)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowWarning("CLuaBaseEntity::removePartyEffect() - Non-PC called function.");
+        return;
+    }
 
     CCharEntity* PChar = ((CCharEntity*)m_PBaseEntity);
 
@@ -8756,7 +8822,11 @@ void CLuaBaseEntity::removePartyEffect(uint16 effectid)
 
 sol::table CLuaBaseEntity::getAlliance()
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
+    if (m_PBaseEntity->objtype == TYPE_NPC)
+    {
+        ShowWarning("CLuaBaseEntity::getAlliance() - NPC passed to function.");
+        return luautils::lua.create_table();
+    }
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
@@ -8950,10 +9020,11 @@ uint8 CLuaBaseEntity::checkSoloPartyAlliance()
 
 bool CLuaBaseEntity::checkKillCredit(CLuaBaseEntity* PLuaBaseEntity, sol::object const& arg1, sol::object const& arg2)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-
-    XI_DEBUG_BREAK_IF(PLuaBaseEntity == nullptr);
-    XI_DEBUG_BREAK_IF(PLuaBaseEntity->GetBaseEntity()->objtype != TYPE_MOB);
+    if (m_PBaseEntity->objtype != TYPE_PC || PLuaBaseEntity->GetBaseEntity()->objtype != TYPE_MOB)
+    {
+        ShowWarning("CLuaBaseEntity::checkKillCredit() - Non-PC type calling function, or PLuaBaseEntity is not a MOB.");
+        return false;
+    }
 
     CCharEntity* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
     CMobEntity*  PMob  = static_cast<CMobEntity*>(PLuaBaseEntity->GetBaseEntity());
@@ -9010,11 +9081,12 @@ void CLuaBaseEntity::setInstance(CLuaInstance* PLuaInstance)
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
     CInstance* PInstance     = PLuaInstance->GetInstance();
+    CCharEntity* PChar       = dynamic_cast<CCharEntity*>(m_PBaseEntity);
     m_PBaseEntity->PInstance = PInstance;
 
-    if (PInstance)
+    if (PInstance && PChar)
     {
-        PInstance->RegisterChar(dynamic_cast<CCharEntity*>(m_PBaseEntity));
+        PInstance->RegisterChar(PChar);
     }
 }
 
@@ -9142,7 +9214,11 @@ uint8 CLuaBaseEntity::registerBattlefield(sol::object const& arg0, sol::object c
     uint32 initiator   = (arg2 != sol::lua_nil) ? arg2.as<uint32>() : 0;
 
     // TODO: Verify what happens if -1 makes it to the cast below
-    XI_DEBUG_BREAK_IF(battlefield < 0);
+    if (battlefield < 0)
+    {
+        ShowError("CLuaBaseEntity::registerBattlefield() - Battlefield State was < 0.  Investigate!");
+        return 6; // For safety, if we hit this condition, return battlefield full.
+    }
 
     return PZone->m_BattlefieldHandler->RegisterBattlefield(PChar, static_cast<uint16>(battlefield), area, initiator);
 }
@@ -9155,11 +9231,14 @@ bool CLuaBaseEntity::battlefieldAtCapacity(int battlefieldID)
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
     auto* PZone = PChar->loc.zone == nullptr ? zoneutils::GetZone(PChar->loc.destination) : PChar->loc.zone;
 
-    XI_DEBUG_BREAK_IF(PZone->m_BattlefieldHandler == nullptr);
+    if (!PZone || PZone->m_BattlefieldHandler == nullptr)
+    {
+        ShowWarning("CLuaBaseEntity::battlefieldAtCapacity() - Battlefield Handler is null.");
+        return true; // NOTE: We were previously breaking here, so return full in this case.
+    }
 
     bool full = false;
-
-    if (PZone != nullptr && PZone->m_BattlefieldHandler != nullptr && PZone->m_BattlefieldHandler->ReachedMaxCapacity(battlefieldID))
+    if (PZone->m_BattlefieldHandler->ReachedMaxCapacity(battlefieldID))
     {
         full = true;
     }
@@ -9176,8 +9255,11 @@ bool CLuaBaseEntity::battlefieldAtCapacity(int battlefieldID)
 
 bool CLuaBaseEntity::enterBattlefield(sol::object const& area)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->loc.zone->m_BattlefieldHandler == nullptr);
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+    if (m_PBaseEntity->objtype != TYPE_PC || m_PBaseEntity->loc.zone->m_BattlefieldHandler == nullptr)
+    {
+        ShowWarning("CLuaBaseEntity::enterBattlefield() - Non-PC calling function, or Battlefield Handler is null.");
+        return false;
+    }
 
     CBattlefield* PBattlefield = nullptr;
     if (area == sol::lua_nil)
@@ -9201,8 +9283,11 @@ bool CLuaBaseEntity::enterBattlefield(sol::object const& area)
 
 bool CLuaBaseEntity::leaveBattlefield(uint8 leavecode)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr || m_PBaseEntity->loc.zone->m_BattlefieldHandler == nullptr);
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
+    if (m_PBaseEntity->objtype == TYPE_NPC || m_PBaseEntity->loc.zone->m_BattlefieldHandler == nullptr)
+    {
+        ShowWarning("CLuaBaseEntity::leaveBattlefield() - NPC calling function, or Battlefield Handler is null.");
+        return false;
+    }
 
     return m_PBaseEntity->loc.zone->m_BattlefieldHandler->RemoveFromBattlefield(m_PBaseEntity, m_PBaseEntity->PBattlefield, leavecode);
 }
@@ -9384,10 +9469,7 @@ void CLuaBaseEntity::enableEntities(sol::object const& obj)
  ************************************************************************/
 void CLuaBaseEntity::independentAnimation(CLuaBaseEntity* PTarget, uint16 animId, uint8 mode)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-
-    CBaseEntity* PActor = (CCharEntity*)m_PBaseEntity;
-    PActor->loc.zone->PushPacket(PActor, CHAR_INRANGE_SELF, new CIndependentAnimationPacket(PActor, PTarget->GetBaseEntity(), animId, mode));
+    m_PBaseEntity->loc.zone->PushPacket(m_PBaseEntity, CHAR_INRANGE_SELF, new CIndependentAnimationPacket(m_PBaseEntity, PTarget->GetBaseEntity(), animId, mode));
 }
 
 /************************************************************************
@@ -10703,10 +10785,14 @@ bool CLuaBaseEntity::delLatent(uint16 condID, uint16 conditionValue, uint16 mID,
 
 int16 CLuaBaseEntity::getMaxGearMod(Mod modId)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-
     CCharEntity* PChar       = dynamic_cast<CCharEntity*>(m_PBaseEntity);
     uint16       maxModValue = 0;
+
+    if (!PChar)
+    {
+        ShowWarning("CLuaBaseEntity::getMaxGearMod() - m_PBaseEntity is not a player.")
+        return 0;
+    }
 
     for (uint8 i = 0; i < SLOT_BACK; ++i)
     {
@@ -10945,8 +11031,6 @@ uint8 CLuaBaseEntity::getOverloadChance(uint8 element)
 
 void CLuaBaseEntity::setStatDebilitation(uint16 statDebil)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-
     if (m_PBaseEntity->objtype == TYPE_PC)
     {
         auto* PChar{ static_cast<CCharEntity*>(m_PBaseEntity) };
@@ -11593,8 +11677,11 @@ int32 CLuaBaseEntity::takeSwipeLungeDamage(CLuaBaseEntity* caster, int32 damage,
 
 void CLuaBaseEntity::spawnPet(sol::object const& arg0)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
+    if (m_PBaseEntity->objtype == TYPE_NPC)
+    {
+        ShowWarning("CLuaBaseEntity::spawnPet() - NPC calling function.");
+        return;
+    }
 
     if (m_PBaseEntity->objtype == TYPE_PC)
     {
@@ -12092,7 +12179,7 @@ void CLuaBaseEntity::petAttack(CLuaBaseEntity* PEntity)
 
 void CLuaBaseEntity::petAbility(uint16 abilityID)
 {
-    ShowWarning("CLuaBaseEntity::petAbility: Non-implemented function called with parameter %d", abilityID);
+    ShowWarning("CLuaBaseEntity::petAbility() - Non-implemented function called with parameter %d", abilityID);
 }
 
 /************************************************************************
@@ -12221,7 +12308,11 @@ auto CLuaBaseEntity::getAutomatonName() -> const char*
 
 uint8 CLuaBaseEntity::getAutomatonFrame()
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PET || static_cast<CPetEntity*>(m_PBaseEntity)->getPetType() != PET_TYPE::AUTOMATON);
+    if (m_PBaseEntity->objtype != TYPE_PET || static_cast<CPetEntity*>(m_PBaseEntity)->getPetType() != PET_TYPE::AUTOMATON)
+    {
+        ShowWarning("CLuaBaseEntity::getAutomatonFrame() - No automaton passed to function, or master does not have an automaton.");
+        return 0;
+    }
 
     auto* PAutomaton = static_cast<CAutomatonEntity*>(m_PBaseEntity);
     return static_cast<uint8>(PAutomaton->getFrame());
@@ -12236,7 +12327,11 @@ uint8 CLuaBaseEntity::getAutomatonFrame()
 
 uint8 CLuaBaseEntity::getAutomatonHead()
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PET || static_cast<CPetEntity*>(m_PBaseEntity)->getPetType() != PET_TYPE::AUTOMATON);
+    if (m_PBaseEntity->objtype != TYPE_PET || static_cast<CPetEntity*>(m_PBaseEntity)->getPetType() != PET_TYPE::AUTOMATON)
+    {
+        ShowWarning("CLuaBaseEntity::getAutomatonFrame() - No automaton passed to function, or master does not have an automaton.");
+        return 0;
+    }
 
     auto* PAutomaton = static_cast<CAutomatonEntity*>(m_PBaseEntity);
     return static_cast<uint8>(PAutomaton->getHead());
@@ -12488,7 +12583,12 @@ uint8 CLuaBaseEntity::getSystem()
 uint16 CLuaBaseEntity::getSuperFamily()
 {
     auto* entity = dynamic_cast<CMobEntity*>(m_PBaseEntity);
-    XI_DEBUG_BREAK_IF(!entity);
+
+    if (!entity)
+    {
+        ShowWarning("CLuaBaseEntity::getSuperFamily() -  m_pBaseEntity is not a Mob.");
+        return 0;
+    }
 
     return entity->m_SuperFamily;
 }
@@ -12503,7 +12603,12 @@ uint16 CLuaBaseEntity::getSuperFamily()
 uint16 CLuaBaseEntity::getFamily()
 {
     auto* entity = dynamic_cast<CMobEntity*>(m_PBaseEntity);
-    XI_DEBUG_BREAK_IF(!entity);
+
+    if (!entity)
+    {
+        ShowWarning("CLuaBaseEntity::getFamily() -  m_pBaseEntity is not a Mob.");
+        return 0;
+    }
 
     return entity->m_Family;
 }
@@ -12873,9 +12978,10 @@ void CLuaBaseEntity::setTrueDetection(bool truedetection)
 
 void CLuaBaseEntity::setUnkillable(bool unkillable)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
-
-    dynamic_cast<CBattleEntity*>(m_PBaseEntity)->m_unkillable = unkillable;
+    if (auto* PBattle = dynamic_cast<CBattleEntity*>(m_PBaseEntity))
+    {
+        PBattle->m_unkillable = unkillable;
+    }
 }
 
 /************************************************************************

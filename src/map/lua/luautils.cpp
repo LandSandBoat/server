@@ -258,7 +258,7 @@ namespace luautils
 
         moduleutils::LoadLuaModules();
 
-        filewatcher = std::make_unique<Filewatcher>("scripts");
+        filewatcher = std::make_unique<Filewatcher>(std::vector<std::string>{ "scripts", "modules" });
 
         TracyReportLuaMemory(lua.lua_state());
 
@@ -583,6 +583,21 @@ namespace luautils
         {
             part.replace_extension("");
             parts.emplace_back(part.string());
+        }
+
+        // Handle Lua module files, then return
+        if (!parts.empty() && parts[0] == "modules")
+        {
+            auto result = lua.safe_script_file(filename, &sol::script_pass_on_error);
+            if (!result.valid())
+            {
+                sol::error err = result;
+                ShowError("luautils::CacheLuaObjectFromFile: Load module error: %s: %s", filename, err.what());
+                return;
+            }
+
+            ShowInfo("[FileWatcher] RE-RUNNING MODULE FILE %s", filename);
+            return;
         }
 
         auto it = std::find(parts.begin(), parts.end(), "scripts");

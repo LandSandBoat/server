@@ -207,6 +207,12 @@ void CAlliance::delParty(CParty* party)
     {
         auto* PChar = dynamic_cast<CCharEntity*>(party->members.at(0));
 
+        if (!PChar)
+        {
+            ShowWarning("CAlliance::delParty - Party Member at Position 0 is not of type CCharEntity.");
+            return;
+        }
+
         PChar->PTreasurePool = new CTreasurePool(TREASUREPOOL_PARTY);
         PChar->PTreasurePool->AddMember(PChar);
         PChar->PTreasurePool->UpdatePool(PChar);
@@ -214,7 +220,7 @@ void CAlliance::delParty(CParty* party)
         for (auto& member : party->members)
         {
             auto* PMember = dynamic_cast<CCharEntity*>(member);
-            if (PChar != PMember)
+            if (PMember && (PChar != PMember))
             {
                 PMember->PTreasurePool = PChar->PTreasurePool;
                 PChar->PTreasurePool->AddMember(PMember);
