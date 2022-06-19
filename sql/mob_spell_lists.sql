@@ -9108,6 +9108,7 @@ INSERT INTO `mob_spell_lists` VALUES('Ixzdei_BLM', 467, 181, 1, 255);
 INSERT INTO `mob_spell_lists` VALUES('Ixzdei_BLM', 467, 186, 1, 255);
 INSERT INTO `mob_spell_lists` VALUES('Ixzdei_BLM', 467, 191, 1, 255);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 INSERT INTO `mob_spell_lists` VALUES ('Hakutaku',467,249,1,255); -- Blaze Spikes
 INSERT INTO `mob_spell_lists` VALUES ('Hakutaku',467,235,1,255); -- Burn
@@ -9126,6 +9127,9 @@ INSERT INTO `mob_spell_lists` VALUES ('Hakutaku',467,204,1,255); -- Flare
 
 =======
 >>>>>>> f149541798 (Update mob_spell_lists.sql)
+=======
+
+>>>>>>> 0a81959cbd (Styling fixes)
 INSERT INTO `mob_spell_lists` VALUES('Ixzdei_RDM', 468, 191, 1, 255);
 INSERT INTO `mob_spell_lists` VALUES('Ixzdei_RDM', 468, 260, 1, 255);
 INSERT INTO `mob_spell_lists` VALUES('Ixzdei_RDM', 468, 254, 1, 255);
@@ -9232,10 +9236,10 @@ INSERT INTO `mob_spell_lists` VALUES ('Sprinkler',489,212,1,255); -- Burst
 -- Next Available: 490
 =======
 
-INSERT INTO `mob_spell_lists` VALUES ('Shens',487,172,1,255); -- Water IV
-INSERT INTO `mob_spell_lists` VALUES ('Shens',487,201,1,255); -- Waterga III
-INSERT INTO `mob_spell_lists` VALUES ('Shens',487,214,1,255); -- Flood
-INSERT INTO `mob_spell_lists` VALUES ('Shens',487,240,1,255); -- Drown
+INSERT INTO `mob_spell_lists` VALUES ('Shen',487,172,1,255); -- Water IV
+INSERT INTO `mob_spell_lists` VALUES ('Shen',487,201,1,255); -- Waterga III
+INSERT INTO `mob_spell_lists` VALUES ('Shen',487,214,1,255); -- Flood
+INSERT INTO `mob_spell_lists` VALUES ('Shen',487,240,1,255); -- Drown
 
 INSERT INTO `mob_spell_lists` VALUES ('Shens_Filtrate',488,172,1,255); -- Water IV
 INSERT INTO `mob_spell_lists` VALUES ('Shens_Filtrate',488,201,1,255); -- Waterga III
