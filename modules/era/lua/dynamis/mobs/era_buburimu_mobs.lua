@@ -24,7 +24,10 @@ xi.dynamis.onSpawnApoc = function(mob)
     mob:setMod(xi.mod.SLEEPRES, 100)
     mob:setMod(xi.mod.LULLABYRES, 100)
     mob:setMod(xi.mod.REGAIN, 0)
-    mob:setMobMod(xi.mobMod.SPAWN_LEASH, 300) -- See you in Narnia!
+    mob:setRoamFlags(xi.roamFlag.NONE)
+    mob:setMobMod(xi.mobMod.ROAM_DISTANCE, 1000) -- See you in Narnia!
+    mob:setMobMod(xi.mobMod.ROAM_COOL, 1)
+    mob:setBehaviour(xi.behavior.NO_TURN, 1)
     -- Make it so we can reference arbitrary mob
     zone:setLocalVar("Apocalyptic_Beast", mob:getID())
     mob:setLocalVar("Apoc_Beast", 1)
@@ -50,7 +53,7 @@ xi.dynamis.onSpawnApoc = function(mob)
     xi.dynamis.apocLockouts2hr = -- Setup 2hr Lockouts
     {
         {1, 0, "bloodspiller_killed", "MIGHTY_STRIKES"},
-        {1, 0, "hamfist_killed", "HUNDRED_FISTS"}, 
+        {1, 0, "hamfist_killed", "HUNDRED_FISTS"},
         {1, 0, "flesheater_killed", "BENEDICTION"},
         {1, 0, "flamecaller_killed", "MANAFONT"},
         {1, 0, "gosspix_killed", "CHAINSPELL"},
@@ -89,6 +92,10 @@ xi.dynamis.onSpawnNoAuto = function(mob)
     xi.dynamis.setNMStats(mob)
     mob:SetAutoAttackEnabled(false)
     mob:addMod(xi.mod.REGAIN, 1250)
+    mob:setRoamFlags(xi.roamFlag.NONE)
+    if mob:getFamily() == 87 then
+        mob:setBehaviour(xi.behavior.NO_TURN, 1)
+    end
 end
 
 xi.dynamis.onEngagedApoc = function(mob, target)
@@ -97,44 +104,17 @@ xi.dynamis.onEngagedApoc = function(mob, target)
 end
 
 xi.dynamis.onFightApoc = function(mob, target)
-    local manafontspells =
-    {
-        176, -- Firaga III
-        181, -- Blizzaga III
-        186, -- Aeroga III
-        191, -- Stonega III
-        196, -- Thundaga III
-        201, -- Waterga III
-    }
-    local chainspellspells =
-    {
-        361, -- Blindga
-        356, -- Paralyga
-        362, -- Bindga
-        365, -- Breakga
-        274, -- Sleepga II
-        367, -- Death
-    }
-    local soulvoicesongs =
-    {
-        376, -- Horde Lullaby
-        373, -- Foe Requiem VI
-        397, -- Valor Minuet IV
-        420, -- Victory March
-        422, -- Carnage Elegy
-        463, -- Foe Lullaby
-    }
 
     if mob:getLocalVar("ResetTP") ~= 0 then
         mob:setTP(0)
         mob:setLocalVar("ResetTP", 0)
     end
 
-    -- for _, val in pairs(xi.dynamis.apocLockouts2hr) do
-        -- if mob:getZone():getLocalVar(string.format("%s", val[3])) == 1 then
-            -- mob:setLocalVar(string.format("%s", val[4]), val[1])
-        -- end
-    -- end
+    for _, val in pairs(xi.dynamis.apocLockouts2hr) do
+        if mob:getZone():getLocalVar(val[3]) == 1 then
+            mob:setLocalVar(val[4], val[1])
+        end
+    end
 
     while mob:getLocalVar("next2hrTime") <= os.time() do
         if #xi.dynamis.apoc2hrlist > 0 then
@@ -146,26 +126,40 @@ xi.dynamis.onFightApoc = function(mob, target)
         end
     end
 
-    if mob:hasStatusEffect(xi.effect.MANAFONT) then
+    if mob:hasStatusEffect(xi.effect.MANAFONT) and mob:getLocalVar("nextCast") <= os.time() then
+        mob:setLocalVar("nextCast", os.time() + 5)
         mob:SetAutoAttackEnabled(false)
         mob:SetMobAbilityEnabled(false)
-        if mob:getStatus() == xi.action.NONE then
-            local spell = manafontspells[math.random(1,6)]
-            mob:castSpell(spell)
+        if mob:getStatus() ~= xi.action.MAGIC_CASTING then
+            local manafontspells = {xi.magic.spell.FIRAGA_III, xi.magic.spell.BLIZZAGA_III, xi.magic.spell.AEROGA_III, xi.magic.spell.STONEGA_III, xi.magic.spell.THUNDAGA_III, xi.magic.spell.WATERA_III}
+            local spell = manafontspells[math.random(1, #manafontspells)[1]]
+            if spell then
+                mob:castSpell(spell, target)
+            end
         end
-    elseif mob:hasStatusEffect(xi.effect.CHAINSPELL) then
+    elseif mob:hasStatusEffect(xi.effect.CHAINSPELL) and mob:getLocalVar("nextCast") <= os.time() then
+        mob:setLocalVar("nextCast", os.time() + 3)
         mob:SetAutoAttackEnabled(false)
         mob:SetMobAbilityEnabled(false)
-        if mob:getStatus() == xi.action.NONE then
-            local spell = chainspellspells[math.random(1,6)]
-            mob:castSpell(spell)
+        if mob:getStatus() ~= xi.action.MAGIC_CASTING then
+            local chainspellspells = {xi.magic.spell.BLINDGA, xi.magic.spell.PARALYGA,xi.magic.spell.BINDGA, xi.magic.spell.BREAKGA, xi.magic.spell.SLEEPGA_II, xi.magic.spell.DEATH}
+            local spell = chainspellspells[math.random(1,#chainspellspells)]
+            if spell then
+                mob:castSpell(spell, target)
+            end
         end
-    elseif mob:hasStatusEffect(xi.effect.SOUL_VOICE) then
+    elseif mob:hasStatusEffect(xi.effect.SOUL_VOICE) and mob:getLocalVar("nextCast") <= os.time() then
+        mob:setLocalVar("nextCast", os.time() + 5)
         mob:SetAutoAttackEnabled(false)
         mob:SetMobAbilityEnabled(false)
-        if mob:getStatus() == xi.action.NONE then
-            local song = soulvoicesongs[math.random(1,6)]
-            mob:castSpell(song)
+        if mob:getStatus() ~= xi.action.MAGIC_CASTING then
+            local soulvoicesongs = {{xi.magic.spell.HORDE_LULLABY, target},{xi.magic.spell.FOE_REQUIEM_IV, target},{xi.magic.spell.VALOR_MINUET_IV, mob},{xi.magic.spell.VICTORY_MARCH, mob},{xi.magic.spell.CARNAGE_ELEGY, target},{xi.magic.spell.FOE_LULLABY, target}}
+            local choice = math.random(1, #soulvoicesongs)
+            local song = soulvoicesongs[choice][1]
+            local songTarget = soulvoicesongs[choice][2]
+            if song then
+                mob:castSpell(song, songTarget)
+            end
         end
     else
         mob:SetAutoAttackEnabled(true)

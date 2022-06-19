@@ -2222,6 +2222,8 @@ DELETE FROM mob_groups WHERE name = "Velosareon";
 INSERT INTO mob_groups VALUES (9,4219,134,'Velosareon',0,128,2574,5000,0,81,83,0);
 DELETE FROM mob_groups WHERE name = "Dagourmarche";
 INSERT INTO mob_groups VALUES (10,892,134,'Dagourmarche',0,128,2066,5000,0,81,83,0);
+DELETE FROM mob_groups WHERE name = "Apocalyptic_Beast";
+INSERT INTO mob_groups VALUES (1,198,40,'Apocalyptic_Beast',0,128,146,27000,27000,85,85,0);
 ----------------------------------------------------------------------
 --                     Zone Misc Modifications                      --
 ----------------------------------------------------------------------

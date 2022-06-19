@@ -506,7 +506,7 @@ xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID,
         },
         ["Nightmare"] =
         {
-            ["onMobSpawn"] = {function(mob) xi.dynamis.setMobStats(mob) end},
+            ["onMobSpawn"] = {function(mob) xi.dynamis.setMobStats(mob) mob:setRoamFlags(xi.roamFlag.NONE) end},
             ["onMobEngaged"] = {function(mob, target) xi.dynamis.parentOnEngaged(mob, target) end},
             ["onMobFight"] = {function(mob) xi.dynamis.statueOnFight(mob) end},
             ["onMobRoam"] = {function(mob) end},
@@ -951,7 +951,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         {
             ["onMobSpawn"] = {function(mob) xi.dynamis.onSpawnApoc(mob) end},
             ["onMobEngaged"] = {function(mob, target)  xi.dynamis.onEngagedApoc(mob, target) end},
-            ["onMobFight"] = {function(mob) xi.dynamis.onFightApoc(mob, target) end},
+            ["onMobFight"] = {function(mob, target) xi.dynamis.onFightApoc(mob, target) end},
             ["onMobRoam"] = {function(mob) end},
             ["onMobMagicPrepare"] = {function(mob, target, spellId) end},
             ["onMobWeaponSkillPrepare"] = {function(mob, target) end},

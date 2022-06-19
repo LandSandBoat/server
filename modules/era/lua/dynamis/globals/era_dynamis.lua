@@ -1144,6 +1144,7 @@ m:addOverride("xi.dynamis.zoneOnZoneIn", function(player, prevZone)
     local zoneTimepoint = GetServerVariable(string.format("[DYNA]Timepoint_%s", zoneID))
     local info = xi.dynamis.dynaInfoEra[zoneID]
     local ID = zones[zoneID]
+    local dreamlands = {xi.zone.DYNAMIS_BUBURIMU, xi.zone.DYNAMIS_QUFIM, xi.zone.DYNAMIS_VALKURM, xi.zone.DYNAMIS_TAVNAZIA}
 
     player:addStatusEffectEx(xi.effect.BATTLEFIELD, 0, 1, 0, 0, true)
     -- usually happens when zoning in with !zone command
@@ -1159,12 +1160,11 @@ m:addOverride("xi.dynamis.zoneOnZoneIn", function(player, prevZone)
             player:setCharVar(string.format("[DYNA]InflictWeakness_%s", zoneID), false) -- Reset var.
         end
 
-        if dynamis.xi.dynamis.dynaInfoEra[zoneID].csBit >= 7 then  -- Is this dreamlands?
-            if player:getZone():getLocalVar("SJUnlock") ~= 1 then -- Should the player be allowed to keep subjob?
-                player:addStatusEffect(xi.effect.SJ_RESTRICTION, 1, 3, 0) -- Inflict SJ Restriction
+        for _, zone in pairs(dreamlands) do
+            if zone == zoneID and player:getZone():getLocalVar("SJUnlock") ~= 1 then
+                player:addStatusEffect(xi.effect.SJ_RESTRICTION, 0, 0, 0, 18000) -- Inflict SJ Restriction
             end
         end
-
     end
 
     return -1
