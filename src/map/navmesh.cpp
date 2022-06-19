@@ -35,8 +35,8 @@
 #include <set>
 
 constexpr int8  CNavMesh::ERROR_NEARESTPOLY;
-constexpr float smallPolyPickExt[3]  = {  0.5f,  1.0f,  0.5f };
-constexpr float polyPickExt[3]       = {  5.0f, 10.0f,  5.0f };
+constexpr float smallPolyPickExt[3]  = { 0.5f, 1.0f, 0.5f };
+constexpr float polyPickExt[3]       = { 5.0f, 10.0f, 5.0f };
 constexpr float skinnyPolyPickExt[3] = { 0.01f, 10.0f, 0.01f };
 constexpr float verticalLimit        = 5.0f;
 
@@ -100,6 +100,8 @@ CNavMesh::CNavMesh(uint16 zoneID)
 : m_zoneID(zoneID)
 , m_navMesh(nullptr)
 {
+    std::memset(&m_hitPath, 0, sizeof(m_hitPath));
+
     m_hit.path    = m_hitPath;
     m_hit.maxPath = 20;
 }
@@ -365,8 +367,15 @@ std::pair<int16, position_t> CNavMesh::findRandomPosition(const position_t& star
         return std::make_pair(ERROR_NEARESTPOLY, position_t{});
     }
 
+    // clang-format off
     status = m_navMeshQuery.findRandomPointAroundCircle(
-        startRef, spos, maxRadius, &filter, []() -> float { return xirand::GetRandomNumber(1.f); }, &randomRef, randomPt);
+        startRef, spos, maxRadius, &filter,
+        []() -> float
+        {
+            return xirand::GetRandomNumber(1.f);
+        },
+        &randomRef, randomPt);
+    // clang-format on
 
     if (dtStatusFailed(status))
     {
@@ -475,7 +484,7 @@ bool CNavMesh::onSameFloor(const position_t& start, float* spos, const position_
         // We're going to try and disambiguate any vertical floors.
         dtPolyRef polys[16];
         int       polyCount = -1;
-        dtStatus status = m_navMeshQuery.queryPolygons(epos, skinnyPolyPickExt, &filter, polys, &polyCount, 16);
+        dtStatus  status    = m_navMeshQuery.queryPolygons(epos, skinnyPolyPickExt, &filter, polys, &polyCount, 16);
 
         if (dtStatusFailed(status) || polyCount <= 0)
         {

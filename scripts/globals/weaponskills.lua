@@ -260,7 +260,7 @@ local function cRangedRatio(attacker, defender, params, ignoredDef, tp)
     local pdif = {}
     pdif[1] = pdifmin
     pdif[2] = pdifmax
-    -- printf("ratio: %f min: %f max %f\n", cratio, pdifmin, pdifmax)
+
     local pdifcrit = {}
 
     pdifmin = pdifmin * 1.25
@@ -1073,8 +1073,6 @@ function cMeleeRatio(attacker, defender, params, ignoredDef, tp)
     local pdifcrit = {}
     cratio = cratio + 1
     cratio = utils.clamp(cratio, 0, 3)
-
-    -- printf("ratio: %f min: %f max %f\n", cratio, pdifmin, pdifmax)
 
     if cratio < 0.5 then
         pdifmax = cratio + 0.5

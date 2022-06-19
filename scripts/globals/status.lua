@@ -1654,6 +1654,7 @@ xi.mod =
     PENGUIN_RING_EFFECT   = 152, -- +2 on fishing arrow delay / fish movement for mini - game
     ALBATROSS_RING_EFFECT = 153, -- adds 30 seconds to mini - game time
     PELICAN_RING_EFFECT   = 154, -- adds extra skillup roll for fishing
+    FISHING_SKILL_GAIN    = 155, -- food increase for fishing skill ups
 
     MAIN_DMG_RANK                = 377, -- adds weapon rank to main weapon http://wiki.bluegartr.com/bg/Weapon_Rank
     SUB_DMG_RANK                 = 378, -- adds weapon rank to sub weapon

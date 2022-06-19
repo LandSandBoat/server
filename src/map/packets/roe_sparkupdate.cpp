@@ -36,7 +36,7 @@ CRoeSparkUpdatePacket::CRoeSparkUpdatePacket(CCharEntity* PChar)
 
     uint32 vanaTime        = CVanaTime::getInstance()->getVanaTime();
     uint32 daysSinceEpoch  = vanaTime / (60 * 60 * 24);
-    uint32 weeksSinceEpoch = (vanaTime + 86400) / 7;
+    uint32 weeksSinceEpoch = daysSinceEpoch / 7;
 
     int ret = sql->Query(query, PChar->id);
     if (ret != SQL_ERROR && sql->NextRow() == SQL_SUCCESS)

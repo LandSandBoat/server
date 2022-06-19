@@ -1,7 +1,7 @@
 -----------------------------------
 -- Spell: Tornado II
 -----------------------------------
-require("scripts/globals/spells/spell_damage")
+require("scripts/globals/spells/damage_spell")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
@@ -14,7 +14,7 @@ end
 spell_object.onSpellCast = function(caster, target, spell)
     target:addStatusEffectEx(xi.effect.NINJUTSU_ELE_DEBUFF, 0, 30, 0, 10, 0, xi.mod.ICE_RES, 0)
 
-    return xi.spells.spell_damage.useDamageSpell(caster, target, spell)
+    return xi.spells.damage.useDamageSpell(caster, target, spell)
 end
 
 return spell_object
