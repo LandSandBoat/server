@@ -275,6 +275,10 @@ xi.msg.basic =
     MIGHT_BE_ABLE_CHARM    = 213, -- <actor> might be able to charm <target>.
     SHOULD_BE_ABLE_CHARM   = 214, -- <actor> should be able to charm <target>.
 
+    -- Soultrapper (Pankration)
+    SOULTRAPPER_SUCCESS    = 515,	-- <actor> has successfully recorded the target's image onto an <item>.
+    SOULTRAPPER_FAILED		= 516,	-- <actor> was unable to capture the target's image.
+
     -- BLU
     LEARNS_SPELL           = 419, -- <target> learns (NULL)!
 

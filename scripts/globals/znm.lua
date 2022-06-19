@@ -27,8 +27,8 @@ xi.znm = xi.znm or {}
 xi.znm.soultrapper = xi.znm.soultrapper or {}
 
 xi.znm.soultrapper.onItemCheck = function(target, user)
-    if not user:isFacing(target) then
-        return xi.msg.basic.ITEM_UNABLE_TO_USE
+    if (target:isMob() == false or xi.pankration.prohibitedFamilies[target:getFamily()] ~= nil) then
+        return xi.msg.basic.ITEM_NO_USE_ON_TARGET
     end
 
     local id = user:getEquipID(xi.slot.AMMO)
@@ -99,16 +99,21 @@ xi.znm.soultrapper.getZeniValue = function(target, user, item)
 end
 
 xi.znm.soultrapper.onItemUse = function(target, user, item)
-    -- Determine Zeni starting value
-    local zeni = xi.znm.soultrapper.getZeniValue(target, user, item)
+    if (math.random(0,99)) > 25 then -- 25% chance of success
+        user:messageBasic(xi.msg.basic.SOULTRAPPER_FAILED)
+    else
+        -- Determine Zeni starting value
+        local zeni = xi.znm.soultrapper.getZeniValue(target, user, item)
 
-    -- Pick a skill totally at random
-    local skillIndex, skillEntry = utils.randomEntryIdx(xi.pankration.feralSkills)
+        -- Pick a skill totally at random...
+        local skillIndex, skillEntry = utils.randomEntryIdx(xi.pankration.feralSkills)
 
-    -- Add plate
-    local plate = user:addSoulPlate(target:getName(), target:getFamily(), zeni, skillIndex, skillEntry.fp)
-    local data = plate:getSoulPlateData()
-    utils.unused(data)
+        -- Add plate
+        local plate = user:addSoulPlate(target:getName(), target:getFamily(), zeni, skillIndex, skillEntry.fp)
+        local data = plate:getSoulPlateData()
+        utils.unused(data)
+        user:messageBasic(xi.msg.basic.SOULTRAPPER_SUCCESS, 0, user:getEquipID(xi.slot.AMMO))
+    end
 end
 
 -----------------------------------

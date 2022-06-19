@@ -20,71 +20,84 @@ xi.pankration = xi.pankration or {}
 xi.pankration.prohibitedFamilies =
 {
     -- All Beastmen
-    25, -- Antica
-    59, -- Bugbear
-    126, 127, 128, 129, 130, -- Gigas
-    133, -- Goblin
-    171, -- Lamiae
-    176, 177, -- Mamool Ja
-    189, -- Orc
-    190, -- Orcish Warmachine
-    196, -- Poroggo
-    199, -- Qiqirn
-    200, 201, 202, -- Quadav
-    213, -- Sahagin
-    243, 244, -- Tonbery
-    246, -- Troll
-    270, -- Yagudo
+    [25] = true, -- Antica
+    [59] = true, -- Bugbear
+    [126] = true, -- Gigas
+    [127] = true,
+    [128] = true,
+    [129] = true,
+    [130] = true,
+    [133] = true, -- Goblin
+    [171] = true, -- Lamiae
+    [176] = true, -- Mamool Ja
+    [177] = true,
+    [189] = true, -- Orc
+    [190] = true, -- Orcish Warmachine
+    [196] = true, -- Poroggo
+    [199] = true, -- Qiqirn
+    [200] = true, -- Quadav
+    [201] = true,
+    [202] = true,
+    [213] = true, -- Sahagin
+    [243] = true, -- Tonberries
+    [244] = true,
+    [246] = true, -- Troll
+    [270] = true, -- Yagudo
 
     -- All Empty
-    78, -- Craver
-    137, 138, -- Gorger
-    181, -- Receptacle
-    220, -- Seether
-    241, -- Thinker
-    255, -- Wanderer
-    256, -- Weeper
+    [78] = true, -- Craver
+    [137] = true, -- Gorgers
+    [138] = true,
+    [181] = true, -- Receptacle
+    [220] = true, -- Seether
+    [241] = true, -- Thinker
+    [255] = true, -- Wanderer
+    [256] = true, -- Weeper
 
     -- All Luminians
-    3, -- Aern
-    109, -- Euvhi
-    144, -- Hpemde
-    194, -- Phuabo
-    269, -- Xzomit
-    271, -- Yorva
+    [3] = true, -- Aern
+    [109] = true, -- Euvhi
+    [144] = true, -- Hpemde
+    [194] = true, -- Phuabo
+    [269] = true, -- Xzomit
+    [271] = true, -- Yorva
 
     -- All Luminions
-    122, 123, 124, -- Ghrah
-    272, -- Zdei
+    [122] = true, [123] = true, [124] = true, -- Ghrah
+    [272] = true, -- Zdei
 
     -- Avatar
-    34, -- Carbuncle
-    35, -- Diabolos
-    37, -- Garuda
-    38, -- Ifrit
-    40, -- Leviathan
-    43, -- Ramuh
-    44, -- Shiva
-    45, -- Titan
+    [34] = true, -- Carbuncle
+    [35] = true, -- Diabolos
+    [37] = true, -- Garuda
+    [38] = true, -- Ifrit
+    [40] = true, -- Leviathan
+    [43] = true, -- Ramuh
+    [44] = true, -- Shiva
+    [45] = true, -- Titan
 
     -- Biotechnological Weapons
-    54, -- Omega & Ultima
+    [54] = true, -- Omega & Ultima
 
-    2, -- Adamantoise
-    28, 29, 30, 31, -- Automation
-    51, -- Behemoth
-    61, -- Cardian
-    62, -- Cerberus
+    [2] = true, -- Adamantoise
+    [28] = true, [29] = true, -- Automations
+    [30] = true, [31] = true,
+    [51] = true, -- Behemoth
+    [61] = true, -- Cardian
+    [62] = true, -- Cerberus
     -- Demon
     -- Devrgr
-    115, 359, -- Fomor
-    140, 141, -- Hippogryph
-    163, 164, -- Hydra
+    [115] = true, [359] = true, -- Fomor
+    [140] = true, [141] = true, -- Hippogryph
+    [163] = true, [164] = true, -- Hydra
     -- Khamaira
-    193, -- Pet Wyvern
-    251, -- Uragnite
-    252, -- Vampyr
-    259, 260, 261, 262, 263, 264, 391, 392, 393, -- Wyrm
+    [193] = true, -- Pet Wyvern
+    [251] = true, -- Uragnite
+    [252] = true, -- Vampyr
+
+    [259] = true, [260] = true, [261] = true, -- Wyrms
+    [262] = true, [263] = true, [264] = true,
+    [391] = true, [392] = true, [393] = true,
 }
 
 -- https://github.com/Windower/Lua/blob/dev/addons/libs/extdata.lua
