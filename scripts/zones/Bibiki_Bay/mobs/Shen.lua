@@ -39,13 +39,13 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobFight = function(mob, target)
-    if (os.time() > mob:getLocalVar("enterTimer") and mob:getLocalVar("shellControl") == 0) then
+    if os.time() > mob:getLocalVar("enterTimer") and mob:getLocalVar("shellControl") == 0 then
         entity.enterShell(mob)
         mob:setLocalVar("exitTimer", os.time() + math.random(45, 120))
         mob:setLocalVar("shellControl", 1)
     end
 
-    if (os.time() > mob:getLocalVar("exitTimer") and mob:getLocalVar("shellControl") == 1) then
+    if os.time() > mob:getLocalVar("exitTimer") and mob:getLocalVar("shellControl") == 1 then
         entity.exitShell(mob)
         mob:setLocalVar("enterTimer", os.time() + math.random(45, 120))
         mob:setLocalVar("shellControl", 0)
@@ -55,7 +55,7 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.spawnFiltrate = function(mob, target)
-    if (mob:getLocalVar("shellControl") == 1 and mob:getHP() > 0) then
+    if mob:getLocalVar("shellControl") == 1 and mob:getHP() > 0 then
         for i = 1, 2 do
             if (not GetMobByID(mob:getID()+i):isSpawned()) then
                 SpawnMob(mob:getID()+i):updateEnmity(target)
