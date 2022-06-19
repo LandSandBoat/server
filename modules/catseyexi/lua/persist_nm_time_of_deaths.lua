@@ -18,10 +18,17 @@ local nms_to_persist =
     { "Behemoths_Dominion", "Behemoth", function() return 75600 + math.random(0, 6) * 1800 end }, -- 21 - 24 hours with half hour windows
 	{ "Dragons_Aery", "Fafnir", function() return 75600 + math.random(0, 6) * 1800 end }, -- 21 - 24 hours with half hour windows
 	{ "Valley_of_Sorrows", "Adamantoise", function() return 75600 + math.random(0, 6) * 1800 end }, -- 21 - 24 hours with half hour windows
-	{ "Caedarva_Mire", "Khimaira", function() return 75600 + math.random(0, 6) * 1800 end }, -- 21 - 24 hours with half hour windows
+	{ "Caedarva_Mire", "Khimaira", function() return 172800 + math.random(0, 48) * 1800 end }, -- 2 - 3 days with half hour windows
+	{ "Mount_Zhayolm", "Cerberus", function() return 172800 + math.random(0, 48) * 1800 end }, -- 2 - 3 days with half hour windows
+	{ "Wajaom_Woodlands", "Hydra", function() return 172800 + math.random(0, 48) * 1800 end }, -- 2 - 3 days with half hour windows
 	{ "Rolanberry_Fields", "Simurgh", function() return 75600 + math.random(0, 6) * 1800 end }, -- 21 - 24 hours with half hour windows
 	{ "Labyrinth_of_Onzozo", "Lord_of_Onzozo", function() return 75600 + math.random(0, 6) * 1800 end }, -- 21 - 24 hours with half hour windows
 	{ "Ro_Maeve", "Shikigami_Weapon", function() return 75600 + math.random(0, 6) * 1800 end }, -- 21 - 24 hours with half hour windows
+    { "Attohwa_Chasm", "Tiamat", function() return 259200 + math.random(0, 96) * 1800 end }, -- 3 - 5 days with half hour windows
+	{ "Uleguerand_Range", "Jormungand", function() return 259200 + math.random(0, 96) * 1800 end }, -- 3 - 5 days with half hour windows
+	{ "King_Ranperres_Tomb", "Vrtra", function() return 259200 + math.random(0, 96) * 1800 end }, -- 3 - 5 days with half hour windows
+	{ "Western_Altepa_Desert", "King_Vinegarroon", function() return 75600 end }, -- 21 - 24 hours with no windows
+	{ "Garlaige_Citadel", "Serket", function() return 75600 + math.random(0, 6) * 1800 end }, -- 21 - 24 hours with half hour windows
 }
 
 -- NOTE: At the time we iterate over these entries, the Lua zone and mob objects won't be ready,
