@@ -296,7 +296,6 @@ void CMobEntity::TapDeaggroTime()
     }
 }
 
-
 bool CMobEntity::CanLink(position_t* pos, int16 superLink)
 {
     TracyZoneScoped;

@@ -58,7 +58,7 @@ CTrustEntity::CTrustEntity(CCharEntity* PChar)
 void CTrustEntity::PostTick()
 {
     // NOTE: This is purposefully calling CBattleEntity's impl.
-    // TODO: Calling a grand-parent's impl. of an overidden function is bad
+    // TODO: Calling a grand-parent's impl. of an overridden function is bad
     CBattleEntity::PostTick();
     std::chrono::steady_clock::time_point now = std::chrono::steady_clock::now();
     if (loc.zone && updatemask && status != STATUS_TYPE::DISAPPEAR && now > m_nextUpdateTimer)
@@ -94,14 +94,14 @@ void CTrustEntity::Die()
     ((CCharEntity*)PMaster)->RemoveTrust(this);
 
     // NOTE: This is purposefully calling CBattleEntity's impl.
-    // TODO: Calling a grand-parent's impl. of an overidden function is bad
+    // TODO: Calling a grand-parent's impl. of an overridden function is bad
     CBattleEntity::Die();
 }
 
 void CTrustEntity::Spawn()
 {
     // NOTE: This is purposefully calling CBattleEntity's impl.
-    // TODO: Calling a grand-parent's impl. of an overidden function is bad
+    // TODO: Calling a grand-parent's impl. of an overridden function is bad
     // we need to skip CMobEntity's spawn because it calculates stats (and our stats are already calculated)
     CBattleEntity::Spawn();
     luautils::OnMobSpawn(this);
@@ -486,7 +486,7 @@ void CTrustEntity::OnDespawn(CDespawnState& /*unused*/)
 void CTrustEntity::OnCastFinished(CMagicState& state, action_t& action)
 {
     // NOTE: This is purposefully calling CBattleEntity's impl.
-    // TODO: Calling a grand-parent's impl. of an overidden function is bad
+    // TODO: Calling a grand-parent's impl. of an overridden function is bad
     CBattleEntity::OnCastFinished(state, action);
 
     auto* PSpell = state.GetSpell();
@@ -502,7 +502,7 @@ void CTrustEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
 void CTrustEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& action)
 {
     // NOTE: This is purposefully calling CBattleEntity's impl.
-    // TODO: Calling a grand-parent's impl. of an overidden function is bad
+    // TODO: Calling a grand-parent's impl. of an overridden function is bad
     CBattleEntity::OnWeaponSkillFinished(state, action);
 
     auto* PWeaponSkill  = state.GetSkill();
