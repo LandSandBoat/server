@@ -33,7 +33,7 @@ require("scripts/globals/zone")
 --    Mob type indicates spawning pattern used. Mob Name will replace the name dynamically.
 --    Mob Family is only required for beastmen NMs. Main Job is only required for beastmen NMs.
 --    NOTE: These should only be made for non-standard/zone specific mobs.
---    Statue Ex. xi.dynamis.mobList[zoneID][MobIndex].info = {"Statue", "Sergeant Tombstone", nil, nil, nil}
+--    Statue Ex. xi.dynamis.mobList[zoneID][MobIndex].info = {"Statue", "Serjeant Tombstone", nil, nil, nil}
 --    Nightmare Ex. xi.dynamis.mobList[zoneID][MobIndex].info = {"Nightmare", "Nightmare Scorpion", nil, nil, nil}
 --    Non-beastman NM Ex. xi.dynamis.mobList[zoneID][MobIndex].info = {"NM", "Apocalyptic Beast", nil, nil, "Apocalyptic_Beast_killed"}
 --    Beastmen NM Ex. xi.dynamis.mobList[zoneID][MobIndex].info = {"NM", "ElvaanSticker Bxafraff", "Orc", "DRG", "ElvaanSticker_Bxafraff_killed"}
@@ -93,32 +93,32 @@ end
 ------------------------------------------
 --xi.dynamis.mobList[zoneID][MobIndex].info = {"Statue/NM/Nightmare", "Mob Name", "Family", "Main Job", "MobLocalVarName"}
 
-xi.dynamis.mobList[zoneID][51 ].info = {"NM", "Alklha", nil, nil, nil}                           -- ( 051 ) Alkhla              (Apocalyptic Beast's 'Chaos Blade' has no effect)
-xi.dynamis.mobList[zoneID][52 ].info = {"NM", "Stihi", nil, nil, nil}                            -- ( 052 ) Stihi               (Apocalyptic Beast's 'Flame Breath' has no effect)
-xi.dynamis.mobList[zoneID][53 ].info = {"NM", "Basilic", nil, nil, nil}                          -- ( 053 ) Basilic             (Apocalyptic Beast's 'Petro Eyes' has no effect)
-xi.dynamis.mobList[zoneID][54 ].info = {"NM", "Jurik", nil, nil, nil}                            -- ( 054 ) Jurik               (Apocalyptic Beast's 'Wind Breath' has no effect)
-xi.dynamis.mobList[zoneID][55 ].info = {"NM", "Barong", nil, nil, nil}                           -- ( 055 ) Barong              (Apocalyptic Beast's 'Body Slam' has no effect)
-xi.dynamis.mobList[zoneID][56 ].info = {"NM", "Tarasca", nil, nil, nil}                          -- ( 056 ) Tarasca             (Apocalyptic Beast's 'Heavy Stomp' has no effect)
-xi.dynamis.mobList[zoneID][57 ].info = {"NM", "Stollenwurm", nil, nil, nil}                      -- ( 057 ) Stollenwurm         (Apocalyptic Beast's 'Lodesong' has no effect)
-xi.dynamis.mobList[zoneID][58 ].info = {"NM", "Koschei", nil, nil, nil}                          -- ( 058 ) Koschei             (Apocalyptic Beast's 'Thornsong' has no effect)
-xi.dynamis.mobList[zoneID][59 ].info = {"NM", "Aitvaras", nil, nil, nil}                         -- ( 059 ) Aitvaras            (Apocalyptic Beast's 'Voidsong' has no effect)
-xi.dynamis.mobList[zoneID][60 ].info = {"NM", "Vishap", nil, nil, nil}                           -- ( 060 ) Vishap              (Apocalyptic Beast's 'Poison Breath' has no effect)
+xi.dynamis.mobList[zoneID][51 ].info = {"NM", "Alklha", nil, nil, "alklha_killed"}                           -- ( 051 ) Alkhla              (Apocalyptic Beast's 'Chaos Blade' has no effect)
+xi.dynamis.mobList[zoneID][52 ].info = {"NM", "Stihi", nil, nil, "stihi_killed"}                            -- ( 052 ) Stihi               (Apocalyptic Beast's 'Flame Breath' has no effect)
+xi.dynamis.mobList[zoneID][53 ].info = {"NM", "Basilic", nil, nil, "basilic_killed"}                          -- ( 053 ) Basilic             (Apocalyptic Beast's 'Petro Eyes' has no effect)
+xi.dynamis.mobList[zoneID][54 ].info = {"NM", "Jurik", nil, nil, "jurik_killed"}                            -- ( 054 ) Jurik               (Apocalyptic Beast's 'Wind Breath' has no effect)
+xi.dynamis.mobList[zoneID][55 ].info = {"NM", "Barong", nil, nil, "barong_killed"}                           -- ( 055 ) Barong              (Apocalyptic Beast's 'Body Slam' has no effect)
+xi.dynamis.mobList[zoneID][56 ].info = {"NM", "Tarasca", nil, nil, "tarasca_killed"}                          -- ( 056 ) Tarasca             (Apocalyptic Beast's 'Heavy Stomp' has no effect)
+xi.dynamis.mobList[zoneID][57 ].info = {"NM", "Stollenwurm", nil, nil, "stollenwurm_killed"}                      -- ( 057 ) Stollenwurm         (Apocalyptic Beast's 'Lodesong' has no effect)
+xi.dynamis.mobList[zoneID][58 ].info = {"NM", "Koschei", nil, nil, "koschei_killed"}                          -- ( 058 ) Koschei             (Apocalyptic Beast's 'Thornsong' has no effect)
+xi.dynamis.mobList[zoneID][59 ].info = {"NM", "Aitvaras", nil, nil, "aitvaras_killed"}                         -- ( 059 ) Aitvaras            (Apocalyptic Beast's 'Voidsong' has no effect)
+xi.dynamis.mobList[zoneID][60 ].info = {"NM", "Vishap", nil, nil, "vishap_killed"}                           -- ( 060 ) Vishap              (Apocalyptic Beast's 'Poison Breath' has no effect)
 xi.dynamis.mobList[zoneID][61 ].info = {"NM", "Apocalyptic Beast", nil, nil, "MegaBoss_Killed"}  -- ( 061 ) Apocalyptic Beast
 
 -- Orcs Statues
-xi.dynamis.mobList[zoneID][1  ].info = {"Statue", "Sergeant Tombstone", "Orc", nil, nil} -- (001-O)
-xi.dynamis.mobList[zoneID][2  ].info = {"Statue", "Sergeant Tombstone", "Orc", nil, nil} -- (002-O)
-xi.dynamis.mobList[zoneID][3  ].info = {"Statue", "Sergeant Tombstone", "Orc", nil, nil} -- (003-O)
-xi.dynamis.mobList[zoneID][4  ].info = {"Statue", "Sergeant Tombstone", "Orc", nil, nil} -- (004-O)
-xi.dynamis.mobList[zoneID][5  ].info = {"Statue", "Sergeant Tombstone", "Orc", nil, nil} -- (005-O)
-xi.dynamis.mobList[zoneID][6  ].info = {"Statue", "Sergeant Tombstone", "Orc", nil, nil} -- (006-O)
-xi.dynamis.mobList[zoneID][7  ].info = {"Statue", "Sergeant Tombstone", "Orc", nil, nil} -- (007-O)
-xi.dynamis.mobList[zoneID][8  ].info = {"Statue", "Sergeant Tombstone", "Orc", nil, nil} -- (008-O)
-xi.dynamis.mobList[zoneID][9  ].info = {"Statue", "Sergeant Tombstone", "Orc", nil, nil} -- (009-O)
-xi.dynamis.mobList[zoneID][10 ].info = {"Statue", "Sergeant Tombstone", "Orc", nil, nil} -- (010-O)
-xi.dynamis.mobList[zoneID][11 ].info = {"Statue", "Sergeant Tombstone", "Orc", nil, nil} -- (011-O)
-xi.dynamis.mobList[zoneID][12 ].info = {"Statue", "Sergeant Tombstone", "Orc", nil, nil} -- (012-O)
-xi.dynamis.mobList[zoneID][13 ].info = {"Statue", "Sergeant Tombstone", "Orc", nil, nil} -- (013-O)
+xi.dynamis.mobList[zoneID][1  ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- (001-O)
+xi.dynamis.mobList[zoneID][2  ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- (002-O)
+xi.dynamis.mobList[zoneID][3  ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- (003-O)
+xi.dynamis.mobList[zoneID][4  ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- (004-O)
+xi.dynamis.mobList[zoneID][5  ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- (005-O)
+xi.dynamis.mobList[zoneID][6  ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- (006-O)
+xi.dynamis.mobList[zoneID][7  ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- (007-O)
+xi.dynamis.mobList[zoneID][8  ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- (008-O)
+xi.dynamis.mobList[zoneID][9  ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- (009-O)
+xi.dynamis.mobList[zoneID][10 ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- (010-O)
+xi.dynamis.mobList[zoneID][11 ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- (011-O)
+xi.dynamis.mobList[zoneID][12 ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- (012-O)
+xi.dynamis.mobList[zoneID][13 ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- (013-O)
 
 -- Goblins Statues
 xi.dynamis.mobList[zoneID][14 ].info = {"Statue", "Goblin Replica", "Goblin", nil, nil} -- (014-G)
@@ -186,32 +186,32 @@ xi.dynamis.mobList[zoneID][71 ].info = {"Nightmare", "Nightmare Crab", nil, nil,
 xi.dynamis.mobList[zoneID][162].info = {"Nightmare", "Nightmare Crab", nil, nil, nil} --
 
 -- Nightmare Dhalmel
-xi.dynamis.mobList[zoneID][118].info = {"Nightmare", "Nightmare Dhamel", nil, nil, nil} -- ( 118 ) Nightmare Dhalmel (×2)
-xi.dynamis.mobList[zoneID][227].info = {"Nightmare", "Nightmare Dhamel", nil, nil, nil} --
-xi.dynamis.mobList[zoneID][119].info = {"Nightmare", "Nightmare Dhamel", nil, nil, nil} -- ( 119 ) Nightmare Dhalmel (×2)
-xi.dynamis.mobList[zoneID][228].info = {"Nightmare", "Nightmare Dhamel", nil, nil, nil} --
-xi.dynamis.mobList[zoneID][120].info = {"Nightmare", "Nightmare Dhamel", nil, nil, nil} -- ( 120 ) Nightmare Dhalmel (×2)
-xi.dynamis.mobList[zoneID][229].info = {"Nightmare", "Nightmare Dhamel", nil, nil, nil} --
-xi.dynamis.mobList[zoneID][121].info = {"Nightmare", "Nightmare Dhamel", nil, nil, nil} -- ( 121 ) Nightmare Dhalmel (×2)
-xi.dynamis.mobList[zoneID][230].info = {"Nightmare", "Nightmare Dhamel", nil, nil, nil} --
-xi.dynamis.mobList[zoneID][122].info = {"Nightmare", "Nightmare Dhamel", nil, nil, nil} -- ( 122 ) Nightmare Dhalmel (×2)
-xi.dynamis.mobList[zoneID][231].info = {"Nightmare", "Nightmare Dhamel", nil, nil, nil} --
-xi.dynamis.mobList[zoneID][123].info = {"Nightmare", "Nightmare Dhamel", nil, nil, nil} -- ( 123 ) Nightmare Dhalmel (×2)
-xi.dynamis.mobList[zoneID][232].info = {"Nightmare", "Nightmare Dhamel", nil, nil, nil} --
-xi.dynamis.mobList[zoneID][124].info = {"Nightmare", "Nightmare Dhamel", nil, nil, nil} -- ( 124 ) Nightmare Dhalmel (×2)
-xi.dynamis.mobList[zoneID][233].info = {"Nightmare", "Nightmare Dhamel", nil, nil, nil} --
-xi.dynamis.mobList[zoneID][125].info = {"Nightmare", "Nightmare Dhamel", nil, nil, nil} -- ( 125 ) Nightmare Dhalmel (×3)
-xi.dynamis.mobList[zoneID][234].info = {"Nightmare", "Nightmare Dhamel", nil, nil, nil} --
-xi.dynamis.mobList[zoneID][235].info = {"Nightmare", "Nightmare Dhamel", nil, nil, nil} --
-xi.dynamis.mobList[zoneID][126].info = {"Nightmare", "Nightmare Dhamel", nil, nil, nil} -- ( 126 ) Nightmare Dhalmel (×3)
-xi.dynamis.mobList[zoneID][236].info = {"Nightmare", "Nightmare Dhamel", nil, nil, nil} --
-xi.dynamis.mobList[zoneID][237].info = {"Nightmare", "Nightmare Dhamel", nil, nil, nil} --
-xi.dynamis.mobList[zoneID][127].info = {"Nightmare", "Nightmare Dhamel", nil, nil, nil} -- ( 127 ) Nightmare Dhalmel (×3)
-xi.dynamis.mobList[zoneID][238].info = {"Nightmare", "Nightmare Dhamel", nil, nil, nil} --
-xi.dynamis.mobList[zoneID][239].info = {"Nightmare", "Nightmare Dhamel", nil, nil, nil} --
-xi.dynamis.mobList[zoneID][128].info = {"Nightmare", "Nightmare Dhamel", nil, nil, nil} -- ( 128 ) Nightmare Dhalmel (×3)
-xi.dynamis.mobList[zoneID][240].info = {"Nightmare", "Nightmare Dhamel", nil, nil, nil} --
-xi.dynamis.mobList[zoneID][241].info = {"Nightmare", "Nightmare Dhamel", nil, nil, nil} --
+xi.dynamis.mobList[zoneID][118].info = {"Nightmare", "Nightmare Dhalmel", nil, nil, nil} -- ( 118 ) Nightmare Dhalmel (×2)
+xi.dynamis.mobList[zoneID][227].info = {"Nightmare", "Nightmare Dhalmel", nil, nil, nil} --
+xi.dynamis.mobList[zoneID][119].info = {"Nightmare", "Nightmare Dhalmel", nil, nil, nil} -- ( 119 ) Nightmare Dhalmel (×2)
+xi.dynamis.mobList[zoneID][228].info = {"Nightmare", "Nightmare Dhalmel", nil, nil, nil} --
+xi.dynamis.mobList[zoneID][120].info = {"Nightmare", "Nightmare Dhalmel", nil, nil, nil} -- ( 120 ) Nightmare Dhalmel (×2)
+xi.dynamis.mobList[zoneID][229].info = {"Nightmare", "Nightmare Dhalmel", nil, nil, nil} --
+xi.dynamis.mobList[zoneID][121].info = {"Nightmare", "Nightmare Dhalmel", nil, nil, nil} -- ( 121 ) Nightmare Dhalmel (×2)
+xi.dynamis.mobList[zoneID][230].info = {"Nightmare", "Nightmare Dhalmel", nil, nil, nil} --
+xi.dynamis.mobList[zoneID][122].info = {"Nightmare", "Nightmare Dhalmel", nil, nil, nil} -- ( 122 ) Nightmare Dhalmel (×2)
+xi.dynamis.mobList[zoneID][231].info = {"Nightmare", "Nightmare Dhalmel", nil, nil, nil} --
+xi.dynamis.mobList[zoneID][123].info = {"Nightmare", "Nightmare Dhalmel", nil, nil, nil} -- ( 123 ) Nightmare Dhalmel (×2)
+xi.dynamis.mobList[zoneID][232].info = {"Nightmare", "Nightmare Dhalmel", nil, nil, nil} --
+xi.dynamis.mobList[zoneID][124].info = {"Nightmare", "Nightmare Dhalmel", nil, nil, nil} -- ( 124 ) Nightmare Dhalmel (×2)
+xi.dynamis.mobList[zoneID][233].info = {"Nightmare", "Nightmare Dhalmel", nil, nil, nil} --
+xi.dynamis.mobList[zoneID][125].info = {"Nightmare", "Nightmare Dhalmel", nil, nil, nil} -- ( 125 ) Nightmare Dhalmel (×3)
+xi.dynamis.mobList[zoneID][234].info = {"Nightmare", "Nightmare Dhalmel", nil, nil, nil} --
+xi.dynamis.mobList[zoneID][235].info = {"Nightmare", "Nightmare Dhalmel", nil, nil, nil} --
+xi.dynamis.mobList[zoneID][126].info = {"Nightmare", "Nightmare Dhalmel", nil, nil, nil} -- ( 126 ) Nightmare Dhalmel (×3)
+xi.dynamis.mobList[zoneID][236].info = {"Nightmare", "Nightmare Dhalmel", nil, nil, nil} --
+xi.dynamis.mobList[zoneID][237].info = {"Nightmare", "Nightmare Dhalmel", nil, nil, nil} --
+xi.dynamis.mobList[zoneID][127].info = {"Nightmare", "Nightmare Dhalmel", nil, nil, nil} -- ( 127 ) Nightmare Dhalmel (×3)
+xi.dynamis.mobList[zoneID][238].info = {"Nightmare", "Nightmare Dhalmel", nil, nil, nil} --
+xi.dynamis.mobList[zoneID][239].info = {"Nightmare", "Nightmare Dhalmel", nil, nil, nil} --
+xi.dynamis.mobList[zoneID][128].info = {"Nightmare", "Nightmare Dhalmel", nil, nil, nil} -- ( 128 ) Nightmare Dhalmel (×3)
+xi.dynamis.mobList[zoneID][240].info = {"Nightmare", "Nightmare Dhalmel", nil, nil, nil} --
+xi.dynamis.mobList[zoneID][241].info = {"Nightmare", "Nightmare Dhalmel", nil, nil, nil} --
 
 -- Nightmare Urganite
 xi.dynamis.mobList[zoneID][139].info = {"Nightmare", "Nightmare Urganite", nil, nil, nil} -- ( 139 ) Nightmare Uragnite (×2)
@@ -407,24 +407,24 @@ xi.dynamis.mobList[zoneID][196].info = {"Nightmare", "Nightmare Cockatrice", nil
 xi.dynamis.mobList[zoneID][197].info = {"Nightmare", "Nightmare Cockatrice", nil, nil, nil} --
 
 -- Orc NMs
-xi.dynamis.mobList[zoneID][285].info = {"NM", "Elvaansticker Bxafraff", "Orc", "DRG", nil}       -- Elvaansticker Bxafraff      (Apocalyptic Beast's 'Call Wyvern' has no effect)
-xi.dynamis.mobList[zoneID][286].info = {"NM", "Flamecaller Zoeqdoq", "Orc", "BLM", nil}          -- Flamecaller Zoeqdoq         (Apocalyptic Beast's 'Manafont' has no effect)
-xi.dynamis.mobList[zoneID][287].info = {"NM", "Hamfist Gukhbuk", "Orc", "MNK", nil}              -- Hamfist Gukhbuk             (Apocalyptic Beast's 'Hundred Fists' has no effect)
-xi.dynamis.mobList[zoneID][288].info = {"NM", "Lyncean Juvgneg", "Orc", "RNG", nil}              -- Lyncean Juvgneg             (Apocalyptic Beast's 'Eagle Eye Shot' has no effect)
+xi.dynamis.mobList[zoneID][285].info = {"NM", "Elvaansticker Bxafraff", "Orc", "DRG", "elvaansticker_killed"}       -- Elvaansticker Bxafraff      (Apocalyptic Beast's 'Call Wyvern' has no effect)
+xi.dynamis.mobList[zoneID][286].info = {"NM", "Flamecaller Zoeqdoq", "Orc", "BLM", "flamecaller_killed"}          -- Flamecaller Zoeqdoq         (Apocalyptic Beast's 'Manafont' has no effect)
+xi.dynamis.mobList[zoneID][287].info = {"NM", "Hamfist Gukhbuk", "Orc", "MNK", "hamfist_killed"}              -- Hamfist Gukhbuk             (Apocalyptic Beast's 'Hundred Fists' has no effect)
+xi.dynamis.mobList[zoneID][288].info = {"NM", "Lyncean Juvgneg", "Orc", "RNG", "lyncean_killed"}              -- Lyncean Juvgneg             (Apocalyptic Beast's 'Eagle Eye Shot' has no effect)
 -- Goblin NMs
-xi.dynamis.mobList[zoneID][289].info = {"NM", "Gosspix Blabberlips", "Goblin", "RDM", nil}       -- Gosspix Blabberlips         (Apocalyptic Beast's 'Chainspell' has no effect)
-xi.dynamis.mobList[zoneID][290].info = {"NM", "Woodnix Shrillwhistle", "Goblin", "BST", nil}     -- Woodnix Shrillwhistle       (Apocalyptic Beast's 'Familiar' has no effect)
-xi.dynamis.mobList[zoneID][291].info = {"NM", "Shamblix Rottenheart", "Goblin", "DRK", nil}      -- Shamblix Rottenheart        (Apocalyptic Beast's 'Blood Weapon' has no effect)
+xi.dynamis.mobList[zoneID][289].info = {"NM", "Gosspix Blabberlips", "Goblin", "RDM", "gosspix_killed"}       -- Gosspix Blabberlips         (Apocalyptic Beast's 'Chainspell' has no effect)
+xi.dynamis.mobList[zoneID][290].info = {"NM", "Woodnix Shrillwhistle", "Goblin", "BST", "woodnix_killed"}     -- Woodnix Shrillwhistle       (Apocalyptic Beast's 'Familiar' has no effect)
+xi.dynamis.mobList[zoneID][291].info = {"NM", "Shamblix Rottenheart", "Goblin", "DRK", "shamblix_killed"}      -- Shamblix Rottenheart        (Apocalyptic Beast's 'Blood Weapon' has no effect)
 -- Quadav NMs
-xi.dynamis.mobList[zoneID][292].info = {"NM", "Qu'Pho Bloodspiller", "Quadav", "WAR", nil}       -- Qu'Pho Bloodspiller         (Apocalyptic Beast's 'Mighty Strikes' has no effect)
-xi.dynamis.mobList[zoneID][293].info = {"NM", "Te'Zha Ironclad", "Quadav", "PLD", nil}           -- Te'Zha Ironclad             (Apocalyptic Beast's 'Invincible' has no effect)
-xi.dynamis.mobList[zoneID][294].info = {"NM", "Gi'Bhe Flesheater", "Quadav", "WHM", nil}         -- Gi'Bhe Flesheater           (Apocalyptic Beast's 'Benediction' has no effect)
-xi.dynamis.mobList[zoneID][295].info = {"NM", "Va'Rhu Bodysnatcher", "Quadav", "THF", nil}       -- Va'Rhu Bodysnatcher         (Apocalyptic Beast's 'Perfect Dodge' has no effect)
+xi.dynamis.mobList[zoneID][292].info = {"NM", "Qu'Pho Bloodspiller", "Quadav", "WAR", "bloodspiller_killed"}       -- Qu'Pho Bloodspiller         (Apocalyptic Beast's 'Mighty Strikes' has no effect)
+xi.dynamis.mobList[zoneID][293].info = {"NM", "Te'Zha Ironclad", "Quadav", "PLD", "ironclad_killed"}           -- Te'Zha Ironclad             (Apocalyptic Beast's 'Invincible' has no effect)
+xi.dynamis.mobList[zoneID][294].info = {"NM", "Gi'Bhe Flesheater", "Quadav", "WHM", "flesheater_killed"}         -- Gi'Bhe Flesheater           (Apocalyptic Beast's 'Benediction' has no effect)
+xi.dynamis.mobList[zoneID][295].info = {"NM", "Va'Rhu Bodysnatcher", "Quadav", "THF", "bodysnatcher_killed"}       -- Va'Rhu Bodysnatcher         (Apocalyptic Beast's 'Perfect Dodge' has no effect)
 -- Yagudo NMs
-xi.dynamis.mobList[zoneID][296].info = {"NM", "Koo rahi the Levinblade", "Yagudo", "SAM", nil}   -- Koo rahi the Levinblade     (Apocalyptic Beast's 'Meikyo Shisui' has no effect)
-xi.dynamis.mobList[zoneID][297].info = {"NM", "Baa Dava the Bibliopage", "Yagudo", "SMN", nil}   -- Baa Dava the Bibliopage     (Apocalyptic Beast's 'Astral Flow' has no effect)
-xi.dynamis.mobList[zoneID][298].info = {"NM", "Doo Peku the Fleetfoot", "Yagudo", "NIN", nil}    -- Doo Peku the Fleetfoot      (Apocalyptic Beast's 'Mijin Gakure' has no effect)
-xi.dynamis.mobList[zoneID][299].info = {"NM", "Ree Nata the Melomanic", "Yagudo", "BRD", nil}    -- Ree Nata the Melomanic      (Apocalyptic Beast's 'Soul Voice' has no effect)
+xi.dynamis.mobList[zoneID][296].info = {"NM", "Koo Rahi the Levinblade", "Yagudo", "SAM", "levinblade_killed"}   -- Koo rahi the Levinblade     (Apocalyptic Beast's 'Meikyo Shisui' has no effect)
+xi.dynamis.mobList[zoneID][297].info = {"NM", "Baa Dava the Bibliopage", "Yagudo", "SMN", "bibliopage_killed"}   -- Baa Dava the Bibliopage     (Apocalyptic Beast's 'Astral Flow' has no effect)
+xi.dynamis.mobList[zoneID][298].info = {"NM", "Doo Peku the Fleetfoot", "Yagudo", "NIN", "fleetfoot_killed"}    -- Doo Peku the Fleetfoot      (Apocalyptic Beast's 'Mijin Gakure' has no effect)
+xi.dynamis.mobList[zoneID][299].info = {"NM", "Ree Nata the Melomanic", "Yagudo", "BRD", "melomanic_killed"}    -- Ree Nata the Melomanic      (Apocalyptic Beast's 'Soul Voice' has no effect)
 
 ----------------------------------------------------------------------------------------------------
 --                                    Setup of Wave Spawning                                      --
@@ -460,19 +460,19 @@ xi.dynamis.mobList[zoneID][1].wave =
     58, -- (058)      Koschei
     59, -- (059)      Aitvaras
     60, -- (060)      Vishap
-    1 , -- (001-O)    Sergeant Tombstone
-    2 , -- (002-O)    Sergeant Tombstone
-    3 , -- (003-O)    Sergeant Tombstone
-    4 , -- (004-O)    Sergeant Tombstone
-    5 , -- (005-O)    Sergeant Tombstone
-    6 , -- (006-O)    Sergeant Tombstone
-    7 , -- (007-O)    Sergeant Tombstone
-    8 , -- (008-O)    Sergeant Tombstone
-    9 , -- (009-O)    Sergeant Tombstone
-    10, -- (010-O)    Sergeant Tombstone
-    11, -- (011-O)    Sergeant Tombstone
-    12, -- (012-O)    Sergeant Tombstone
-    13, -- (013-O)    Sergeant Tombstone
+    1 , -- (001-O)    Serjeant Tombstone
+    2 , -- (002-O)    Serjeant Tombstone
+    3 , -- (003-O)    Serjeant Tombstone
+    4 , -- (004-O)    Serjeant Tombstone
+    5 , -- (005-O)    Serjeant Tombstone
+    6 , -- (006-O)    Serjeant Tombstone
+    7 , -- (007-O)    Serjeant Tombstone
+    8 , -- (008-O)    Serjeant Tombstone
+    9 , -- (009-O)    Serjeant Tombstone
+    10, -- (010-O)    Serjeant Tombstone
+    11, -- (011-O)    Serjeant Tombstone
+    12, -- (012-O)    Serjeant Tombstone
+    13, -- (013-O)    Serjeant Tombstone
     14, -- (014-G)    Goblin Replica
     15, -- (015-G)    Goblin Replica
     16, -- (016-G)    Goblin Replica
@@ -570,16 +570,16 @@ xi.dynamis.mobList[zoneID][2].wave =
     115, -- Nightmare Raven
     116, -- Nightmare Raven
     117, -- Nightmare Raven
-    118, -- Nightmare Dhamel
-    119, -- Nightmare Dhamel
-    120, -- Nightmare Dhamel
-    121, -- Nightmare Dhamel
-    122, -- Nightmare Dhamel
-    123, -- Nightmare Dhamel
-    124, -- Nightmare Dhamel
-    125, -- Nightmare Dhamel
-    126, -- Nightmare Dhamel
-    127, -- Nightmare Dhamel
+    118, -- Nightmare Dhalmel
+    119, -- Nightmare Dhalmel
+    120, -- Nightmare Dhalmel
+    121, -- Nightmare Dhalmel
+    122, -- Nightmare Dhalmel
+    123, -- Nightmare Dhalmel
+    124, -- Nightmare Dhalmel
+    125, -- Nightmare Dhalmel
+    126, -- Nightmare Dhalmel
+    127, -- Nightmare Dhalmel
     129, -- Nightmare Crawler
     130, -- Nightmare Crawler
     131, -- Nightmare Crawler

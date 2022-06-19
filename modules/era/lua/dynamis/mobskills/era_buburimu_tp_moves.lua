@@ -1,5 +1,5 @@
 ---------------------------------------------
---       Dynamis-Buburimu Mobskills        --
+--       Dynamis-Buburimu mobskills        --
 ---------------------------------------------
 ---------------------------------------------
 --        Module Required Scripts          --
@@ -7,9 +7,11 @@
 require("scripts/globals/dynamis")
 require("scripts/globals/status")
 require("scripts/globals/msg")
+require("scripts/globals/mobskills")
 require("modules/module_utils")
 ---------------------------------------------
 local m = Module:new("era_buburimu_tp_moves")
+m:setEnabled(true)
 
 m:addOverride("xi.globals.mobskills.mighty_strikes.onMobWeaponSkill", function(target, mob, skill)
     if mob:getLocalVar("MIGHTY_STRIKES") == 1 then
@@ -165,11 +167,11 @@ m:addOverride("xi.globals.mobskills.meikyo_shisui.onMobWeaponSkill", function(ta
 end)
 
 m:addOverride("xi.globals.mobskills.mijin_gakure.onMobWeaponSkill", function(target, mob, skill)
-    if mob:getLocalVar("MIJIN_GAKURE") == 1 then
+    if mob:getLocalVar("mijin_gakure") == 1 then
         skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT)
         return 0
     end
-    
+
     local dmgmod = 1
     local hpmod = skill:getMobHPP() / 100
     local basePower = (mob:getFamily() == 335) and 4 or 6 -- Maat has a weaker (4) Mijin than usual (6)
@@ -177,10 +179,9 @@ m:addOverride("xi.globals.mobskills.mijin_gakure.onMobWeaponSkill", function(tar
     local baseDmg = mob:getWeaponDmg() * power
     local info = xi.mobskills.mobMagicalMove(mob, target, skill, baseDmg, xi.magic.ele.NONE, dmgmod, xi.mobskills.magicalTpBonus.MAB_BONUS, 1)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.ELEMENTAL, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
-    if mob:isInDynamis() then -- dynamis mobs will kill themselves, other mobs might not
-        mob:setHP(0)
-    end
+
     target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.ELEMENTAL)
+
     return dmg
 end)
 

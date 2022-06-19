@@ -669,7 +669,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         ["Elvaansticker Bxafraff"] = {"456c7661", 88, 134, 760, 0, 1200, "Beastmen"}, -- Elva (DRG)
         ["Flamecaller Zoeqdoq"] = {"466c616d", 84, 134, 760, 497, 1200, "Beastmen"}, -- Flam (BLM)
         ["Hamfist Gukhbuk"] = {"48616d66", 65, 134, 760, 0, 1200, "Beastmen"}, -- Hamf (MNK)
-        ["Lyncean Juwgneg"] = {"4c796e63", 82, 134, 760, 0, 1200, "Beastmen"}, -- Lync (RNG)
+        ["Lyncean Juvgneg"] = {"4c796e63", 82, 134, 760, 0, 1200, "Beastmen"}, -- Lync (RNG)
         -- Dynamis - San d'Oria
         ["Wyrmgnasher Bjakdek"] = {"57797242", 88, 134, 237, 0, 1200, "Beastmen"}, -- WyrB (DRG)
         ["Reapertongue Gadgquok"] = {"52656147", 73, 134, 237, 0, 1200, "Beastmen"}, -- ReaG (SMN)
@@ -694,7 +694,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         ["So'Zho Metalbender"] = {"536f5a68", 46, 134, 261, 0, 1212, "Beastmen"}, -- SoZh (MNK)
         ["Ta'Hyu Gallanthunter"] = {"54614879", 40, 134, 261, 5, 1212, "Beastmen"}, -- TaHy (DRK)
         -- Dynamis Buburimu
-        ["Gi'Bhe Fleshfeaster"] = {"47694268", 39, 134, 2901, 1, 1212, "Beastmen"}, -- GiBh (WHM)
+        ["Gi'Bhe Flesheater"] = {"47694268", 39, 134, 2901, 1, 1212, "Beastmen"}, -- GiBh (WHM)
         ["Qu'Pho Bloodspiller"] = {"51755068", 24, 134, 2901, 0, 1212, "Beastmen"}, -- QuPh (WAR)
         ["Te'Zha Ironclad"] = {"54655a68", 47, 134, 2901, 4, 1212, "Beastmen"}, -- TeZh (PLD)
         ["Va'Rhu Bodysnatcher"] = {"56615268", 37, 134, 2901, 0, 1212, "Beastmen"}, -- VaRh (THF)
@@ -728,7 +728,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         ["Xaa Chau the Roctalon"] = {"58616143", 97, 134, 265, 0, 1201, "Beastmen"}, -- XaaC (MNK)
         ["Xhoo Fuza the Sublime"] = {"58686f6f", 119, 134, 265, 6, 1201, "Beastmen"}, -- Xhoo (BRD)
         -- Dynamis - Buburimu
-        ["Baa Dava the Bibliophage"] = {"42616144", 91, 317, 2085, 0, 1201, "Beastmen"}, -- BaaD (SMN)
+        ["Baa Dava the Bibliopage"] = {"42616144", 91, 317, 2085, 0, 1201, "Beastmen"}, -- BaaD (SMN)
         ["Doo Peku the Fleetfoot"] = {"446f6f50", 115, 134, 2085, 7, 1201, "Beastmen"}, -- DooP (NIN)
         ["Koo Rahi the Levinblade"] = {"4b6f6f52", 121, 134, 2085, 0, 1201, "Beastmen"}, -- KooR (SAM)
         ["Ree Nata the Melomanic"] = {"5265654e", 119, 134, 2085, 6, 1201, "Beastmen"}, -- ReeN (BRD)
@@ -819,16 +819,16 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         ["Dynamis Effigy"] = {"44796e45" , 9, 42, 20, 0, 94, "Enabled Auto Attack"}, -- Dynamis Effigy (DynE)
         ["Dynamis Icon"] = {"44796e49" , 32, 42, 195, 497, 95, "Enabled Auto Attack"}, -- Dynamis Icon (DynI)
         -- Dynamis - Buburimu Non-Beastmen
-        ["Aitvaras"] = {"41697476", 105, 40, 230, 0, 1209, "No Auto Attack"}, -- Aitv
-        ["Alklha"] = {"416c6b6c", 105, 40, 230, 0, 1207, "No Auto Attack"}, -- Alkl
-        ["Barong"] = {"4261726f", 105, 40, 230, 0, 1205, "No Auto Attack"}, -- Baro
-        ["Basilic"] = {"42617369", 105, 40, 230, 0, 1208, "No Auto Attack"}, -- Basi
-        ["Jurik"] = {"4a757269", 105, 40, 230, 0, 1204, "No Auto Attack"}, -- Juri
-        ["Koschei"] = {"4b6f7363", 105, 40, 230, 0, 1210, "No Auto Attack"}, -- Kosc
-        ["Stihi"] = {"53746968", 105, 40, 230, 0, 11212, "No Auto Attack"}, -- Stih
-        ["Stollenwurm"] = {"53746f6c", 105, 40, 230, 0, 1211, "No Auto Attack"}, -- Stol
-        ["Tarasca"] = {"54617261", 105, 40, 230, 0, 1206, "No Auto Attack"}, -- Tara
-        ["Vishap"] = {"56697368", 105, 40, 230, 0, 1203, "No Auto Attack"}, -- Vish
+        ["Aitvaras"] = {"41697476", 105, 40, 230, 0, 1209, "Buburimu Dwagon"}, -- Aitv
+        ["Alklha"] = {"416c6b6c", 105, 40, 230, 0, 1207, "Buburimu Dwagon"}, -- Alkl
+        ["Barong"] = {"4261726f", 105, 40, 230, 0, 1205, "Buburimu Dwagon"}, -- Baro
+        ["Basilic"] = {"42617369", 105, 40, 230, 0, 1208, "Buburimu Dwagon"}, -- Basi
+        ["Jurik"] = {"4a757269", 105, 40, 230, 0, 1204, "Buburimu Dwagon"}, -- Juri
+        ["Koschei"] = {"4b6f7363", 105, 40, 230, 0, 1210, "Buburimu Dwagon"}, -- Kosc
+        ["Stihi"] = {"53746968", 105, 40, 230, 0, 11212, "Buburimu Dwagon"}, -- Stih
+        ["Stollenwurm"] = {"53746f6c", 105, 40, 230, 0, 1211, "Buburimu Dwagon"}, -- Stol
+        ["Tarasca"] = {"54617261", 105, 40, 230, 0, 1206, "Buburimu Dwagon"}, -- Tara
+        ["Vishap"] = {"56697368", 105, 40, 230, 0, 1203, "Buburimu Dwagon"}, -- Vish
         ["Apocalyptic Beast"] = {"41706f63", 1, 40, 146, 0, 0, "Apocalyptic Beast"}, -- Apoc
         -- Dynamis - Valkurm
         ["Dragontrap"] = {"44726174", 63, 77, 2910, 0, 114, "No Auto Attack"}, -- Drat
@@ -954,9 +954,9 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
             ["onMobFight"] = {function(mob) xi.dynamis.onFightApoc(mob, target) end},
             ["onMobRoam"] = {function(mob) end},
             ["onMobMagicPrepare"] = {function(mob, target, spellId) end},
-            ["onMobWeaponSkillPrepare"] = {function(mob, target) xi.dynamis.onWeaponskillPrepApoc(mob, target) end},
+            ["onMobWeaponSkillPrepare"] = {function(mob, target) end},
             ["onMobWeaponSkill"] = {function(mob) end},
-            ["onMobDeath"] = {function(mob, player, isKiller) xi.dynamis.onDeathApoc(mob, player, isKiller) end},
+            ["onMobDeath"] = {function(mob, player, isKiller) xi.dynamis.megaBossOnDeath(mob, player, isKiller) end},
             ["mixins"] = { },
         },
         ["Antaeus"] =
@@ -1077,6 +1077,18 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
             ["onMobWeaponSkillPrepare"] = {function(mob, target) end},
             ["onMobWeaponSkill"] = {function(mob) end},
             ["onMobDeath"] = {function(mob) end},
+            ["mixins"] = { },
+        },
+        ["Buburimu Dwagon"] =
+        {
+            ["onMobSpawn"] = {function(mob) xi.dynamis.onSpawnNoAuto(mob) end},
+            ["onMobEngaged"] = {function(mob, target) end},
+            ["onMobFight"] = {function(mob, target) xi.dynamis.onFightDwagon(mob, target) end},
+            ["onMobRoam"] = {function(mob) xi.dynamis.onRoamDwagon(mob) end},
+            ["onMobMagicPrepare"] = {function(mob, target, spellId) end},
+            ["onMobWeaponSkillPrepare"] = {function(mob) end},
+            ["onMobWeaponSkill"] = {function(mob) end},
+            ["onMobDeath"] = {function(mob, player, isKiller) xi.dynamis.mobOnDeath(mob, player, isKiller) end},
             ["mixins"] = { },
         },
         ["No Auto Attack"] =

@@ -23,6 +23,7 @@ xi.dynamis.onSpawnApoc = function(mob)
     mob:setMod(xi.mod.SLOWRES, 50)
     mob:setMod(xi.mod.SLEEPRES, 100)
     mob:setMod(xi.mod.LULLABYRES, 100)
+    mob:setMod(xi.mod.REGAIN, 0)
     mob:setMobMod(xi.mobMod.SPAWN_LEASH, 300) -- See you in Narnia!
     -- Make it so we can reference arbitrary mob
     zone:setLocalVar("Apocalyptic_Beast", mob:getID())
@@ -37,7 +38,7 @@ xi.dynamis.onSpawnApoc = function(mob)
         xi.jsa.PERFECT_DODGE,
         xi.jsa.INVINCIBLE,
         xi.jsa.BLOOD_WEAPON,
-        710, -- Charm used in place of Familiar
+        xi.ja.CHARM,
         xi.jsa.SOUL_VOICE,
         xi.jsa.EES_DRAGON,
         xi.jsa.MEIKYO_SHISUI,
@@ -48,53 +49,39 @@ xi.dynamis.onSpawnApoc = function(mob)
 
     xi.dynamis.apocLockouts2hr = -- Setup 2hr Lockouts
     {
-        ["MIGHTY_STRIKES"] = {1, 0, "Qu'Pho Bloodspiller"},
-        ["HUNDRED_FISTS"] = {1, 0, "Hamfist Gukhbuk"}, 
-        ["BENEDICTION"] = {1, 0, "Gi'Bhe Fleshfeaster"},
-        ["MANAFONT"] = {1, 0, "Flamecaller Zoeqdoq"},
-        ["CHAINSPELL"] = {1, 0, "Gosspix Blabberlips"},
-        ["PERFECT_DODGE"] = {1, 0, "Va'Rhu Bodysnatcher"},
-        ["INVINCIBLE"] = {1, 0, "Te'Zha Ironclad"},
-        ["BLOOD_WEAPON"] = {1, 0, "Shamblix Rottenheart"},
-        ["CHARM"] = {1, 0, "Woodnix Shrillwhistle"},
-        ["SOUL_VOICE"] = {1, 0, "Ree Nata the Melomanic"},
-        ["EAGLE_EYE_SHOT"] = {1, 0, "Lyncean Juwgneg"},
-        ["MEIKYO_SHISUI"] = {1, 0, "Koo Rahi the Levinblade"},
-        ["MIJIN_GAKURE"] = {1, 0, "Doo Peku the Fleetfoot"},
-        ["CALL_WYVERN"] = {1, 0, "Elvaansticker Bxafraff"},
-        ["ASTRAL_FLOW"] = {1, 0, "Baa Dava the Bibliophage"},
+        {1, 0, "bloodspiller_killed", "MIGHTY_STRIKES"},
+        {1, 0, "hamfist_killed", "HUNDRED_FISTS"}, 
+        {1, 0, "flesheater_killed", "BENEDICTION"},
+        {1, 0, "flamecaller_killed", "MANAFONT"},
+        {1, 0, "gosspix_killed", "CHAINSPELL"},
+        {1, 0, "bodysnatcher_killed", "PERFECT_DODGE"},
+        {1, 0, "ironclad_killed", "INVINCIBLE"},
+        {1, 0, "shamblix_killed", "BLOOD_WEAPON"},
+        {1, 0, "woodnix_killed", "CHARM"},
+        {1, 0, "melomanic_killed", "SOUL_VOICE"},
+        {1, 0, "lyncean_killed", "EAGLE_EYE_SHOT"},
+        {1, 0, "levinblade_killed", "MEIKYO_SHISUI"},
+        {1, 0, "fleetfoot_killed", "MIJIN_GAKURE"},
+        {1, 0, "elvaansticker_killed", "CALL_WYVERN"},
+        {1, 0, "bibliopage_killed", "ASTRAL_FLOW"},
     }
 
     xi.dynamis.apocLockouts =
     {
-        ["Stihi"] = 642, -- Flame Breath
-        ["Vishap"] = 643, -- Poison Breath
-        ["Jurik"] = 644, -- Wind Breath
-        ["Barong"] = 645, -- Body Slam
-        ["Tarasca"] = 646, -- Heavy Stomp
-        ["Alklha"] = 647, -- Chaos Blade
-        ["Basillic"] = 648, -- Petro Eyes
-        ["Aitvaras"] = 649, -- Voidsong
-        ["Koschei"] = 650, -- Thornsong
-        ["Stollenwurm"] = 651, -- Lodesong
+        [1] = {"stihi_killed", 642}, -- Flame Breath
+        [2] = {"vishap_killed", 643}, -- Poison Breath
+        [3] = {"jurik_killed", 644}, -- Wind Breath
+        [4] = {"barong_killed", 645}, -- Body Slam
+        [5] = {"tarasca_killed", 646}, -- Heavy Stomp
+        [6] = {"alklha_killed", 647}, -- Chaos Blade
+        [7] = {"basilic_killed", 648}, -- Petro Eyes
+        [8] = {"aitvaras_killed", 649}, -- Voidsong
+        [9] = {"koschei_killed", 650}, -- Thornsong
+        [10] = {"stollenwurm_killed", 651}, -- Lodesong
     }
 
-    xi.dynamis.apocWeaponskills =
-    {
-        642, -- Flame Breath
-        643, -- Poison Breath
-        644, -- Wind Breath
-        645, -- Body Slam
-        646, -- Heavy Stomp
-        647, -- Chaos Blade
-        648, -- Petro Eyes
-        649, -- Voidsong
-        650, -- Thornsong
-        651, -- Lodesong
-    }
-
-    for var, val in pairs(xi.dynamis.apocLockouts2hr) do
-        mob:setLocalVar(var, val[2])
+    for _, val in pairs(xi.dynamis.apocLockouts2hr) do
+        mob:setLocalVar(val[4], val[2])
     end
 end
 
@@ -105,53 +92,56 @@ xi.dynamis.onSpawnNoAuto = function(mob)
 end
 
 xi.dynamis.onEngagedApoc = function(mob, target)
-    local next2hr = os.time + math.random(45, 75)
+    local next2hr = os.time() + math.random(45, 75)
     mob:setLocalVar("next2hrTime", next2hr)     
 end
 
 xi.dynamis.onFightApoc = function(mob, target)
     local manafontspells =
     {
-        [1 ] = 176, -- Firaga III
-        [2 ] = 181, -- Blizzaga III
-        [3 ] = 186, -- Aeroga III
-        [4 ] = 191, -- Stonega III
-        [5 ] = 196, -- Thundaga III
-        [6 ] = 201, -- Waterga III
+        176, -- Firaga III
+        181, -- Blizzaga III
+        186, -- Aeroga III
+        191, -- Stonega III
+        196, -- Thundaga III
+        201, -- Waterga III
     }
     local chainspellspells =
     {
-        [1 ] = 361, -- Blindga
-        [2 ] = 356, -- Paralyga
-        [3 ] = 362, -- Bindga
-        [4 ] = 365, -- Breakga
-        [5 ] = 274, -- Sleepga II
-        [6 ] = 367, -- Death
+        361, -- Blindga
+        356, -- Paralyga
+        362, -- Bindga
+        365, -- Breakga
+        274, -- Sleepga II
+        367, -- Death
     }
     local soulvoicesongs =
     {
-        [1 ] = 376, -- Horde Lullaby
-        [2 ] = 373, -- Foe Requiem VI
-        [3 ] = 397, -- Valor Minuet IV
-        [4 ] = 420, -- Victory March
-        [5 ] = 422, -- Carnage Elegy
-        [6 ] = 463, -- Foe Lullaby
+        376, -- Horde Lullaby
+        373, -- Foe Requiem VI
+        397, -- Valor Minuet IV
+        420, -- Victory March
+        422, -- Carnage Elegy
+        463, -- Foe Lullaby
     }
 
-    for var, val in pairs(xi.dynamis.apocLockouts2hr) do
-        if not mob:getZone():getLocalVar(string.format("%s", val[3])):isAlive() then
-            mob:setLocalVar(string.format("%s", var), val[1])
-            table.remove(xi.dynamis.apocLockouts2hr, var)
-        end
+    if mob:getLocalVar("ResetTP") ~= 0 then
+        mob:setTP(0)
+        mob:setLocalVar("ResetTP", 0)
     end
 
-    while os.time() >= mob:getLocalVar("next2hrTime") do
-        local length2hrTable = #xi.dynamis.apoc2hrlist
-        if length2hrTable ~= 0 then
-            local choice = math.random(1, length2hrTable)
-            local next2hr = os.time + math.random(45, 75)
-            mob:useMobAbility(xi.dynamis.apoc2hrlist[choice])
-            table.remove(xi.dynamis.apoc2hrlist, choice)
+    -- for _, val in pairs(xi.dynamis.apocLockouts2hr) do
+        -- if mob:getZone():getLocalVar(string.format("%s", val[3])) == 1 then
+            -- mob:setLocalVar(string.format("%s", val[4]), val[1])
+        -- end
+    -- end
+
+    while mob:getLocalVar("next2hrTime") <= os.time() do
+        if #xi.dynamis.apoc2hrlist > 0 then
+            local abilityChoice = math.random(1, #xi.dynamis.apoc2hrlist)
+            local next2hr = os.time() + math.random(45, 75)
+            mob:useMobAbility(xi.dynamis.apoc2hrlist[abilityChoice])
+            table.remove(xi.dynamis.apoc2hrlist, abilityChoice)
             mob:setLocalVar("next2hrTime", next2hr)
         end
     end
@@ -181,30 +171,30 @@ xi.dynamis.onFightApoc = function(mob, target)
         mob:SetAutoAttackEnabled(true)
         mob:SetMobAbilityEnabled(true)
     end
-end
 
-xi.dynamis.onWeaponskillPrepApoc = function(mob, target)
-    for dwagon, skill in pairs(xi.dynamis.apocWeaponskills) do -- Locks out specific abilities
-        if not GetMobByID(zone:getLocalVar(dwagon)):isAlive() then -- If target is not alive then clean
-            table.remove(xi.dynamis.apocWeaponskills, skill) -- Clean Weaponskills Table For Lockouts
-            table.remove(xi.dynamis.apocLockouts, dwagon) -- Clean Lockouts Table to Reduce Compute
+    if mob:getTP() >= 1000 then
+        if #xi.dynamis.apocLockouts > 0 then
+            local abilityChoice = math.random(1, #xi.dynamis.apocLockouts)
+            if mob:getZone():getLocalVar(xi.dynamis.apocLockouts[abilityChoice][1]) == 0 then
+                mob:setLocalVar("ResetTP", 1)
+                mob:useMobAbility(xi.dynamis.apocLockouts[abilityChoice][2])
+            else
+                table.remove(xi.dynamis.apocLockouts, abilityChoice)
+            end
         end
-    end
-
-    local tableLength = #xi.dynamis.apocWeaponskills
-    if tableLength ~= 0 then
-        return xi.dynamis.apocWeaponskills[math.random(1, tableLength)]
-    else
-        return 0
     end
 end
 
-xi.dynamis.onDeathApoc = function(mob, player, isKiller)
-    for dwagon, skill in pairs(xi.dynamis.apocLockouts) do -- Check a cleaned table to see what is alive.
-        if GetMobByID(zone:getLocalVar(string.format("%s", dwagon)):isAlive()) then -- Second alive check to be sure.
-            DespawnMob(zone:getLocalVar(string.format("%s", dwagon))) -- Despawn extra dwagon.
-        end
+xi.dynamis.onFightDwagon = function(mob, target)
+    if mob:getZone():getLocalVar("MegaBoss_Killed") == 1 then
+        mob:setMobMod(xi.mobMod.NO_DROPS, 1)
+        mob:setHP(0)
     end
+end
 
-    xi.dynamis.megaBossOnDeath(mob, player, isKiller)
+xi.dynamis.onRoamDwagon = function(mob)
+    if mob:getZone():getLocalVar("MegaBoss_Killed") == 1 then
+        mob:setMobMod(xi.mobMod.NO_DROPS, 1)
+        mob:setHP(0)
+    end
 end
