@@ -23849,10 +23849,14 @@ INSERT INTO `mob_droplist` VALUES (2997,0,0,1000,2851,273);
 INSERT INTO `mob_droplist` VALUES (2998,0,0,1000,11339,340);
 INSERT INTO `mob_droplist` VALUES (2999,0,0,1000,11338,111);
 <<<<<<< HEAD
+<<<<<<< HEAD
 INSERT INTO `mob_droplist` VALUES (3000,0,0,1000,19305,111); -- Pike
 =======
 INSERT INTO `mob_droplist` VALUES (3000,0,0,1000,19305,360);
 >>>>>>> b8d0d1329e (Mob fixes)
+=======
+INSERT INTO `mob_droplist` VALUES (3000,0,0,1000,19305,111); -- Pike
+>>>>>>> ed046e34b0 (Drop rate fix)
 INSERT INTO `mob_droplist` VALUES (3001,0,0,1000,2854,307);
 INSERT INTO `mob_droplist` VALUES (3002,0,0,1000,16027,242);
 INSERT INTO `mob_droplist` VALUES (3003,0,0,1000,16014,173);
