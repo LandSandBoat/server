@@ -4212,6 +4212,7 @@ INSERT INTO `mob_spell_lists` VALUES('Ixzdei_BLM', 467, 176, 1, 255);
 INSERT INTO `mob_spell_lists` VALUES('Ixzdei_BLM', 467, 181, 1, 255);
 INSERT INTO `mob_spell_lists` VALUES('Ixzdei_BLM', 467, 186, 1, 255);
 INSERT INTO `mob_spell_lists` VALUES('Ixzdei_BLM', 467, 191, 1, 255);
+
 INSERT INTO `mob_spell_lists` VALUES('Ixzdei_RDM', 468, 191, 1, 255);
 INSERT INTO `mob_spell_lists` VALUES('Ixzdei_RDM', 468, 260, 1, 255);
 INSERT INTO `mob_spell_lists` VALUES('Ixzdei_RDM', 468, 254, 1, 255);
@@ -4299,10 +4300,10 @@ INSERT INTO `mob_spell_lists` VALUES ('Hakutaku',486,148,1,255); -- Fire V
 INSERT INTO `mob_spell_lists` VALUES ('Hakutaku',486,176,1,255); -- Firaga III
 INSERT INTO `mob_spell_lists` VALUES ('Hakutaku',486,204,1,255); -- Flare
 
-INSERT INTO `mob_spell_lists` VALUES ('Shens',487,172,1,255); -- Water IV
-INSERT INTO `mob_spell_lists` VALUES ('Shens',487,201,1,255); -- Waterga III
-INSERT INTO `mob_spell_lists` VALUES ('Shens',487,214,1,255); -- Flood
-INSERT INTO `mob_spell_lists` VALUES ('Shens',487,240,1,255); -- Drown
+INSERT INTO `mob_spell_lists` VALUES ('Shen',487,172,1,255); -- Water IV
+INSERT INTO `mob_spell_lists` VALUES ('Shen',487,201,1,255); -- Waterga III
+INSERT INTO `mob_spell_lists` VALUES ('Shen',487,214,1,255); -- Flood
+INSERT INTO `mob_spell_lists` VALUES ('Shen',487,240,1,255); -- Drown
 
 INSERT INTO `mob_spell_lists` VALUES ('Shens_Filtrate',488,172,1,255); -- Water IV
 INSERT INTO `mob_spell_lists` VALUES ('Shens_Filtrate',488,201,1,255); -- Waterga III
