@@ -995,7 +995,11 @@ namespace zoneutils
 
     int GetWeatherElement(WEATHER weather)
     {
-        XI_DEBUG_BREAK_IF(weather >= MAX_WEATHER_ID);
+        if (weather >= MAX_WEATHER_ID)
+        {
+            ShowWarning("zoneutils::GetWeatherElement() - Invalid weather passed to function.");
+            return 0;
+        }
 
         // TODO: Fix weather ordering; at the moment, this current fire, water, earth, wind, snow, thunder
         // order MUST be preserved due to the weather enums going in this order. Those enums will

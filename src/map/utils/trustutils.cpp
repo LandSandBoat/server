@@ -408,20 +408,31 @@ namespace trustutils
         auto baseDamage       = mobStyleDamage * 0.5f;
         auto damageMultiplier = static_cast<float>(trustData->cmbDmgMult) / 100.0f;
         auto adjustedDamage   = baseDamage * damageMultiplier;
-        auto finalDamage      = std::max(adjustedDamage, 1.0f);
+        auto finalDamage      = static_cast<uint16>(std::max(adjustedDamage, 1.0f));
 
-        (dynamic_cast<CItemWeapon*>(PTrust->m_Weapons[SLOT_MAIN]))->setDamage(static_cast<uint16>(finalDamage));
-        (dynamic_cast<CItemWeapon*>(PTrust->m_Weapons[SLOT_RANGED]))->setDamage(static_cast<uint16>(finalDamage));
-        (dynamic_cast<CItemWeapon*>(PTrust->m_Weapons[SLOT_AMMO]))->setDamage(static_cast<uint16>(finalDamage));
+        auto mainWeapon   = dynamic_cast<CItemWeapon*>(PTrust->m_Weapons[SLOT_MAIN]);
+        auto rangedWeapon = dynamic_cast<CItemWeapon*>(PTrust->m_Weapons[SLOT_RANGED]);
+        auto ammoWeapon   = dynamic_cast<CItemWeapon*>(PTrust->m_Weapons[SLOT_AMMO]);
 
-        (dynamic_cast<CItemWeapon*>(PTrust->m_Weapons[SLOT_MAIN]))->setDelay((trustData->cmbDelay * 1000) / 60);
-        (dynamic_cast<CItemWeapon*>(PTrust->m_Weapons[SLOT_MAIN]))->setBaseDelay((trustData->cmbDelay * 1000) / 60);
+        if (mainWeapon && rangedWeapon && ammoWeapon)
+        {
+            mainWeapon->setDamage(finalDamage);
+            rangedWeapon->setDamage(finalDamage);
+            ammoWeapon->setDamage(finalDamage);
 
-        (dynamic_cast<CItemWeapon*>(PTrust->m_Weapons[SLOT_RANGED]))->setDelay((trustData->cmbDelay * 1000) / 60);
-        (dynamic_cast<CItemWeapon*>(PTrust->m_Weapons[SLOT_RANGED]))->setBaseDelay((trustData->cmbDelay * 1000) / 60);
+            mainWeapon->setDelay((trustData->cmbDelay * 1000) / 60);
+            mainWeapon->setBaseDelay((trustData->cmbDelay * 1000) / 60);
 
-        (dynamic_cast<CItemWeapon*>(PTrust->m_Weapons[SLOT_AMMO]))->setDelay((trustData->cmbDelay * 1000) / 60);
-        (dynamic_cast<CItemWeapon*>(PTrust->m_Weapons[SLOT_AMMO]))->setBaseDelay((trustData->cmbDelay * 1000) / 60);
+            rangedWeapon->setDelay((trustData->cmbDelay * 1000) / 60);
+            rangedWeapon->setBaseDelay((trustData->cmbDelay * 1000) / 60);
+
+            ammoWeapon->setDelay((trustData->cmbDelay * 1000) / 60);
+            ammoWeapon->setBaseDelay((trustData->cmbDelay * 1000) / 60);
+        }
+        else
+        {
+            ShowError("trustutils::LoadTrust() - Unable to set Weapon parameters.")
+        }
 
         // Spell lists
         auto* spellList = mobSpellList::GetMobSpellList(trustData->spellList);
@@ -664,6 +675,12 @@ namespace trustutils
         // Skills
         using namespace gambits;
         auto* controller = dynamic_cast<CTrustController*>(PTrust->PAI->GetController());
+
+        if (!controller)
+        {
+            ShowWarning("trustutils::LoadTrustStatsAndSkills() - Trust Controller was null.");
+            return;
+        }
 
         // Default TP selectors
         controller->m_GambitsContainer->tp_trigger = G_TP_TRIGGER::ASAP;
