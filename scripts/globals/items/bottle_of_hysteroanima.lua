@@ -2,6 +2,7 @@
 -- ID: 5262
 -- Item: Bottle Of Hysteroanima
 -- Item Effect: HYSTERIA
+-- TODO: Change category to 7 and no animation
 -----------------------------------------
 require("scripts/globals/msg")
 require("scripts/globals/status")
