@@ -675,7 +675,7 @@ namespace battleutils
 
         ELEMENT spikeElement = (ELEMENT)((uint8)GetSpikesDamageType(Action->spikesEffect) - (uint8)DAMAGE_TYPE::ELEMENTAL);
 
-        int32 damage = 0;
+        int32 damage = Action->spikesParam;
 
         // int16 intStat = PDefender->INT();
         // int16 mattStat = PDefender->getMod(Mod::MATT);
