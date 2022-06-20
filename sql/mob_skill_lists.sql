@@ -887,7 +887,6 @@ INSERT INTO `mob_skill_lists` VALUES ('Puk',198,1718);
 INSERT INTO `mob_skill_lists` VALUES ('Puk',198,1720);
 INSERT INTO `mob_skill_lists` VALUES ('Puk',198,1721);
 INSERT INTO `mob_skill_lists` VALUES ('Puk',198,1722);
-INSERT INTO `mob_skill_lists` VALUES ('Puk',198,1723);
 INSERT INTO `mob_skill_lists` VALUES ('Qiqirn',199,1725);
 -- INSERT INTO `mob_skill_lists` VALUES ('Qiqirn',199,1726);
 INSERT INTO `mob_skill_lists` VALUES ('Qiqirn',199,1727);
@@ -1725,8 +1724,8 @@ INSERT INTO `mob_skill_lists` VALUES ('Automaton_Stormwaker',366,2301);
 -- INSERT INTO `mob_skill_lists` VALUES ('Automaton_Stormwaker',366,2942);
 -- INSERT INTO `mob_skill_lists` VALUES ('Automaton_Stormwaker',366,2943);
 -- INSERT INTO `mob_skill_lists` VALUES ('Automaton_Stormwaker',366,2944);
-INSERT INTO `mob_skill_lists` VALUES ('Doll',367,536);
-INSERT INTO `mob_skill_lists` VALUES ('Doll',368,539);
+INSERT INTO `mob_skill_lists` VALUES ('Faust',367,539);
+INSERT INTO `mob_skill_lists` VALUES ('Despot',368,536);
 INSERT INTO `mob_skill_lists` VALUES ('Leech',369,414);
 INSERT INTO `mob_skill_lists` VALUES ('Leech',369,415);
 INSERT INTO `mob_skill_lists` VALUES ('Leech',369,416);
@@ -3789,9 +3788,21 @@ INSERT INTO `mob_skill_lists` VALUES ('Cop_Wardens',1170,562); -- Reactive Armor
 
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Shantotto_II_Melee',1163,3739); -- shantotto_ii_melee (no name)
 INSERT INTO `mob_skill_lists` VALUES ('Teporingo',1164,258);
+INSERT INTO `mob_skill_lists` VALUES ('Bugbear_Muscleman',1165,361);
+INSERT INTO `mob_skill_lists` VALUES ('Goblin_NM',1166,590);
+INSERT INTO `mob_skill_lists` VALUES ('Goblin_NM',1166,591);
+INSERT INTO `mob_skill_lists` VALUES ('Goblin_NM',1166,1081);
+INSERT INTO `mob_skill_lists` VALUES ('Goblin_NM',1166,1082);
+INSERT INTO `mob_skill_lists` VALUES ('Goblin_NM',1166,1084);
+INSERT INTO `mob_skill_lists` VALUES ('Goblin_NM',1166,1086);
 INSERT INTO `mob_skill_lists` VALUES ('Ladybug_Night',1167,2178);
+INSERT INTO `mob_skill_lists` VALUES ('Puk_M',1169,1718);
+INSERT INTO `mob_skill_lists` VALUES ('Puk_M',1169,1720);
+INSERT INTO `mob_skill_lists` VALUES ('Puk_M',1169,1721);
+INSERT INTO `mob_skill_lists` VALUES ('Puk_M',1169,1722);
+INSERT INTO `mob_skill_lists` VALUES ('Puk_M',1169,1723);
 
--- Next available ID: 1168
+-- Next available ID: 1170
 
 -- ------------------------------------------------------------
 -- Start of Ambuscade section

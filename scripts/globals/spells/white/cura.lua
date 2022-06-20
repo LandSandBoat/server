@@ -82,8 +82,6 @@ spell_object.onSpellCast = function(caster, target, spell)
             caster:setLocalVar("Misery_Power", caster:getMod(xi.mod.AFFLATUS_MISERY))
         end
         local misery = caster:getLocalVar("Misery_Power")
-        -- print(caster:getLocalVar("Misery_Power"))
-
         --THIS IS LARELY SEMI-EDUCATED GUESSWORK. THERE IS NOT A
         --LOT OF CONCRETE INFO OUT THERE ON CURA THAT I COULD FIND
 
@@ -94,15 +92,11 @@ spell_object.onSpellCast = function(caster, target, spell)
         --point would boost your Cura by about 1hp, capping at ~175hp
         --So with lack of available formula documentation, I'll go with that.
 
-        --printf("BEFORE AFFLATUS MISERY BONUS: %d", basecure)
-
         basecure = basecure + misery
 
         if (basecure > 175) then
             basecure = 175
         end
-
-        --printf("AFTER AFFLATUS MISERY BONUS: %d", basecure)
 
         --Afflatus Misery Mod Gets Used Up
         caster:setMod(xi.mod.AFFLATUS_MISERY, 0)
@@ -111,7 +105,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     final = getCureFinal(caster, spell, basecure, minCure, false)
     final = final + (final * (target:getMod(xi.mod.CURE_POTENCY_RCVD)/100))
 
-    --Applying server mods....
+    --Applying server mods
     final = final * xi.settings.CURE_POWER
 
     target:addHP(final)

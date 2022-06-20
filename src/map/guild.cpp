@@ -58,7 +58,7 @@ void CGuild::updateGuildPointsPattern(uint8 pattern)
 
         std::string query = "SELECT itemid, points, max_points FROM guild_item_points WHERE "
                             "guildid = %u AND pattern = %u AND rank = %u";
-        int ret = sql->Query(query.c_str(), m_id, pattern, m_GPItemsRank[i]);
+        int         ret   = sql->Query(query.c_str(), m_id, pattern, m_GPItemsRank[i]);
 
         if (ret != SQL_ERROR && sql->NumRows() > 0)
         {

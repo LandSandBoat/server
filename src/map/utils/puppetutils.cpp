@@ -21,8 +21,8 @@
 
 #include "puppetutils.h"
 #include "../entities/automatonentity.h"
-#include "../lua/luautils.h"
 #include "../job_points.h"
+#include "../lua/luautils.h"
 #include "../packets/char_job_extra.h"
 #include "../packets/message_basic.h"
 #include "../status_effect_container.h"
@@ -549,6 +549,12 @@ namespace puppetutils
 
     uint16 getSkillCap(CCharEntity* PChar, SKILLTYPE skill)
     {
+        if (PChar == nullptr)
+        {
+            ShowWarning("puppetutils::getSkillCap() - Null PChar passed to function.");
+            return 0;
+        }
+
         return getSkillCap(PChar, skill, PChar->PAutomaton->GetMLevel());
     }
 
@@ -577,7 +583,11 @@ namespace puppetutils
 
     void TrySkillUP(CAutomatonEntity* PAutomaton, SKILLTYPE SkillID, uint8 lvl)
     {
-        XI_DEBUG_BREAK_IF(!PAutomaton->PMaster || PAutomaton->PMaster->objtype != TYPE_PC);
+        if (!PAutomaton->PMaster || PAutomaton->PMaster->objtype != TYPE_PC)
+        {
+            ShowWarning("puppetutils::TrySkillUP() - PMaster was null, or was not a player.");
+            return;
+        }
 
         CCharEntity* PChar = (CCharEntity*)PAutomaton->PMaster;
         if (getSkillCap(PChar, SkillID) != 0 && !(PAutomaton->WorkingSkills.skill[SkillID] & 0x8000))

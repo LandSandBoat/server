@@ -51,9 +51,9 @@ const char* LOGIN_CONF_FILENAME   = nullptr;
 const char* VERSION_INFO_FILENAME = nullptr;
 const char* MAINT_CONF_FILENAME   = nullptr;
 
-login_config_t login_config; // main settings
-version_info_t version_info;
-maint_config_t maint_config;
+login_config_t login_config = {}; // main settings
+version_info_t version_info = {};
+maint_config_t maint_config = {};
 
 std::thread messageThread;
 
@@ -132,7 +132,7 @@ int32 do_init(int32 argc, char** argv)
 
     gConsoleService->RegisterCommand(
     "verlock", "Cycle between version lock acceptance modes.",
-    [&]() -> void
+    [&](std::vector<std::string> inputs)
     {
         // handle wrap around from 2->3 as 0
         auto temp             = (version_info.ver_lock + 1) % 3;
@@ -156,7 +156,7 @@ int32 do_init(int32 argc, char** argv)
 
     gConsoleService->RegisterCommand(
     "maint_mode", "Cycle between maintenance modes.",
-    [&]() -> void
+    [&](std::vector<std::string> inputs)
     {
         maint_config.maint_mode = (maint_config.maint_mode + 1) % 2;
         config_write(MAINT_CONF_FILENAME, "maint", maint_config_write);
@@ -362,6 +362,10 @@ void login_config_read(const char* key, const char* value)
     {
         login_config.msg_server_ip = std::string(value);
     }
+    else if (strcmp(key, "login_limit") == 0)
+    {
+        login_config.login_limit = atoi(value);
+    }
     else if (strcmp(key, "log_user_ip") == 0)
     {
         login_config.log_user_ip = config_switch(value);
@@ -369,6 +373,10 @@ void login_config_read(const char* key, const char* value)
     else if (strcmp(key, "account_creation") == 0)
     {
         login_config.account_creation = config_switch(value);
+    }
+    else if (strcmp(key, "character_deletion") == 0)
+    {
+        login_config.character_deletion = config_switch(value);
     }
     else
     {
@@ -419,8 +427,10 @@ void login_config_default()
     login_config.msg_server_port    = 54003;
     login_config.msg_server_ip      = "127.0.0.1";
 
-    login_config.log_user_ip      = "false";
-    login_config.account_creation = "true";
+    login_config.login_limit        = 0;
+    login_config.log_user_ip        = "false";
+    login_config.account_creation   = "true";
+    login_config.character_deletion = "true";
 }
 
 void login_config_read_from_env()

@@ -27,8 +27,8 @@
 #include "spdlog/async.h"
 #include "spdlog/pattern_formatter.h"
 #include "spdlog/sinks/basic_file_sink.h"
-#include "spdlog/sinks/stdout_color_sinks.h"
 #include "spdlog/sinks/daily_file_sink.h"
+#include "spdlog/sinks/stdout_color_sinks.h"
 
 namespace logging
 {
@@ -40,7 +40,7 @@ namespace logging
         spdlog::init_thread_pool(8192, 1);
 
         // Sink to console
-        auto stdout_sink = std::make_shared<spdlog::sinks::stdout_color_sink_mt>();
+        auto                          stdout_sink = std::make_shared<spdlog::sinks::stdout_color_sink_mt>();
         std::vector<spdlog::sink_ptr> sinks{ stdout_sink };
 
         // Daily Sink, creating new files at midnight
@@ -72,45 +72,45 @@ namespace logging
         // TODO: There is duplication here between the tag and the severity, FIXME
 
         // direct printf replacement
-        auto standardLogger   = createLogger("standard");
-        auto messageLogger    = createLogger("message");
+        auto standardLogger = createLogger("standard");
+        auto messageLogger  = createLogger("message");
 
         // To inform about good things
-        auto statusLogger     = createLogger("status");
+        auto statusLogger = createLogger("status");
 
         // Variable information
-        auto infoLogger       = createLogger("info");
+        auto infoLogger = createLogger("info");
 
         // Less than a warning
-        auto noticeLogger     = createLogger("notice");
+        auto noticeLogger = createLogger("notice");
 
         // Warnings
-        auto warningLogger    = createLogger("warning");
+        auto warningLogger = createLogger("warning");
 
         // Important stuff
-        auto debugLogger      = createLogger("debug");
+        auto debugLogger = createLogger("debug");
 
         // Regular errors
-        auto errorLogger      = createLogger("error");
+        auto errorLogger = createLogger("error");
 
         // Fatal errors, abort(); if possible
         auto fatalErrorLogger = createLogger("fatalerror");
 
         // For dumping out anything related with SQL) <- Actually, this is mostly used for SQL errors with the database, as
         // successes can as well just be anything else...
-        auto sqlLogger        = createLogger("sql");
+        auto sqlLogger = createLogger("sql");
 
         // Lua related logging and errors
-        auto luaLogger        = createLogger("lua");
+        auto luaLogger = createLogger("lua");
 
         // Navmesh related errors
-        auto navmeshLogger    = createLogger("navmesh");
+        auto navmeshLogger = createLogger("navmesh");
 
         // Mostly useless "player did this" info
-        auto actionLogger     = createLogger("action");
+        auto actionLogger = createLogger("action");
 
         // Detected a likely exploit
-        auto exploitLogger    = createLogger("exploit");
+        auto exploitLogger = createLogger("exploit");
 
         // Dumping stacktraces
         auto stacktraceLogger = createLogger("stacktrace");
@@ -148,7 +148,7 @@ namespace logging
 
         if (filterMask & MSG_INFO)
         {
-           spdlog::get("info")->set_level(spdlog::level::off);
+            spdlog::get("info")->set_level(spdlog::level::off);
         }
 
         if (filterMask & MSG_NOTICE)
@@ -201,4 +201,4 @@ namespace logging
             spdlog::get("exploit")->set_level(spdlog::level::off);
         }
     }
-}
+} // namespace logging

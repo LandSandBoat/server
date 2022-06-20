@@ -2,8 +2,8 @@
 
 #include "../common/cbasetypes.h"
 #include "../common/kernel.h"
-#include "../common/mmo.h"
 #include "../common/logging.h"
+#include "../common/mmo.h"
 #include "../common/taskmgr.h"
 #include "../common/timer.h"
 #include "../common/utils.h"
@@ -145,7 +145,7 @@ int sSocket(int af, int type, int protocol)
 
 /*
  *
- *			COMMON LEVEL
+ *          COMMON LEVEL
  *
  */
 
@@ -314,7 +314,7 @@ uint16 ntows(uint16 netshort)
 /*****************************************************************************/
 /*
  *
- *			TCP LEVEL
+ *          TCP LEVEL
  *
  */
 
@@ -331,6 +331,13 @@ typedef struct _connect_history
     time_point               tick;
     int                      count;
     unsigned                 ddos : 1;
+    _connect_history()
+    {
+        next  = nullptr;
+        ip    = 0;
+        count = 0;
+        ddos  = 0;
+    }
 } ConnectHistory;
 
 using AccessControl = struct _access_control
@@ -353,7 +360,7 @@ static int                        access_debug = 0;
 //--
 static int      connect_count    = 10;
 static duration connect_interval = 3s;
-static duration connect_lockout   = 10min;
+static duration connect_lockout  = 10min;
 
 /// Connection history, an array of linked lists.
 /// The array's index for any ip is ip&0xFFFF
@@ -679,7 +686,7 @@ int send_from_fifo(int fd)
 }
 
 /*======================================
- *	CORE : Default processing functions
+ *  CORE : Default processing functions
  *--------------------------------------*/
 int null_recv(int fd)
 {
@@ -719,7 +726,7 @@ int32 makeConnection_tcp(uint32 ip, uint16 port)
     return fd;
 }
 /*======================================
- *	CORE : Connection functions
+ *  CORE : Connection functions
  *--------------------------------------*/
 int connect_client(int listen_fd, sockaddr_in& client_address)
 {
@@ -871,9 +878,9 @@ void do_close_tcp(int32 fd)
 int socket_config_read(const char* cfgName)
 {
     TracyZoneScoped;
-    char  line[1024];
-    char  w1[1024];
-    char  w2[1024];
+    char  line[1024] = {};
+    char  w1[1024]   = {};
+    char  w2[1024]   = {};
     FILE* fp;
 
     fp = fopen(cfgName, "r");
@@ -1056,14 +1063,10 @@ int create_session(int fd, RecvFunc func_recv, SendFunc func_send, ParseFunc fun
 #ifdef _DEBUG
     ShowDebug(fmt::format("create_session fd: {}", fd).c_str());
 #endif // _DEBUG
-    sessions[fd] = std::make_unique<socket_data>();
+    sessions[fd] = std::make_unique<socket_data>(func_recv, func_send, func_parse);
 
     sessions[fd]->rdata.reserve(RFIFO_SIZE);
     sessions[fd]->wdata.reserve(WFIFO_SIZE);
-
-    sessions[fd]->func_recv  = func_recv;
-    sessions[fd]->func_send  = func_send;
-    sessions[fd]->func_parse = func_parse;
 
     sessions[fd]->rdata_tick = last_tick;
 
@@ -1110,7 +1113,7 @@ int delete_session(int fd)
 }
 
 /*======================================
- *	CORE : Socket options
+ *  CORE : Socket options
  *--------------------------------------*/
 void set_nonblocking(int fd, unsigned long yes)
 {
@@ -1125,7 +1128,7 @@ void set_nonblocking(int fd, unsigned long yes)
 
 /*
  *
- *			UDP LEVEL
+ *          UDP LEVEL
  *
  */
 int32 makeBind_udp(uint32 ip, uint16 port)

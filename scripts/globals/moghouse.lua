@@ -163,7 +163,6 @@ xi.moghouse.addMogLockerExpiryTime = function(player, numBronze)
 
     local currentTs = xi.moghouse.getMogLockerExpiryTimestamp(player)
     if currentTs == nil then
-        -- print("Unable to add time: player hasn't unlocked mog locker.")
         return false
     end
 

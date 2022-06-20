@@ -31,12 +31,12 @@
 
 enum class EFFECTOVERWRITE : uint8
 {
-    EQUAL_HIGHER      = 0, // only overwrite if equal or higher (tier, power)
-    HIGHER            = 1, // only overwrite if higher (tier, power)
-    NEVER             = 2, // never overwrite
-    ALWAYS            = 3, // always overwrite no matter
-    IGNORE_DUPLICATE  = 4, // ignore dupes
-    TIER_HIGHER       = 5  // only overwrite if tier is higher (regardless of power)
+    EQUAL_HIGHER     = 0, // only overwrite if equal or higher (tier, power)
+    HIGHER           = 1, // only overwrite if higher (tier, power)
+    NEVER            = 2, // never overwrite
+    ALWAYS           = 3, // always overwrite no matter
+    IGNORE_DUPLICATE = 4, // ignore dupes
+    TIER_HIGHER      = 5  // only overwrite if tier is higher (regardless of power)
 };
 
 enum EFFECTFLAG

@@ -341,6 +341,25 @@ namespace gambits
                         //    controller->Cast(target->targid, static_cast<SpellID>(spell_id.value()));
                         //}
                     }
+                    else if (action.select == G_SELECT::BEST_INDI)
+                    {
+                        auto* PMaster = static_cast<CCharEntity*>(POwner->PMaster);
+                        auto spell_id = POwner->SpellContainer->GetBestIndiSpell(PMaster);
+                        if (spell_id.has_value())
+                        {
+                            controller->Cast(target->targid, spell_id.value());
+                        }
+                    }
+                    else if (action.select == G_SELECT::ENTRUSTED)
+                    {
+                        auto* PMaster = static_cast<CCharEntity*>(POwner->PMaster);
+                        auto spell_id = POwner->SpellContainer->GetBestEntrustedSpell(PMaster);
+                        target = PMaster;
+                        if (spell_id.has_value())
+                        {
+                            controller->Cast(target->targid, spell_id.value());
+                        }
+                    }
                     else if (action.select == G_SELECT::BEST_AGAINST_TARGET)
                     {
                         auto spell_id = POwner->SpellContainer->GetBestAgainstTargetWeakness(target);
@@ -807,7 +826,7 @@ namespace gambits
             if (chosen_skill->skill_type == G_REACTION::WS)
             {
                 CWeaponSkill* PWeaponSkill = battleutils::GetWeaponSkill(chosen_skill->skill_id);
-                if (chosen_skill->valid_targets == TARGET_SELF)
+                if (chosen_skill->valid_targets & TARGET_SELF)
                 {
                     target = POwner;
                 }
@@ -820,7 +839,7 @@ namespace gambits
             else // Mobskill
             {
                 // CMobSkill* PMobSkill = battleutils::GetMobSkill(chosen_skill->skill_id);
-                if (chosen_skill->valid_targets == TARGET_SELF || chosen_skill->valid_targets == TARGET_PLAYER_PARTY)
+                if (chosen_skill->valid_targets & TARGET_SELF || chosen_skill->valid_targets & TARGET_PLAYER_PARTY)
                 {
                     target = POwner;
                 }
