@@ -1,6 +1,7 @@
 -----------------------------------
 -- Area: Spire of Dem
 --  Mob: Progenerator
+-- TODO: Verify cmbDelay
 -----------------------------------
 mixins = {require("scripts/mixins/families/empty_terroanima")}
 -----------------------------------
