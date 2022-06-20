@@ -560,7 +560,7 @@ enum EFFECT
     EFFECT_ASYLUM                = 492,
     EFFECT_SUBTLE_SORCERY        = 493,
     EFFECT_STYMIE                = 494,
-    HYSTERIA                     = 495, // Used for Hysteroanima to stop after readying a weaponskill with no msg.
+    // EFFECT_NONE                     = 495,
     EFFECT_INTERVENE        = 496,
     EFFECT_SOUL_ENSLAVEMENT = 497,
     EFFECT_UNLEASH          = 498,
@@ -739,12 +739,13 @@ enum EFFECT
     EFFECT_MEDITATE            = 801, // Dummy effect for SAM Meditate JA
     EFFECT_ELEMENTALRES_DOWN   = 802, // Elemental resistance down
     EFFECT_FULL_SPEED_AHEAD    = 803, // Used to track Full Speed Ahead quest minigame
-    // EFFECT_PLACEHOLDER           = 804  // Description
-    // 804-1022
+    EFFECT_HYSTERIA            = 804, // Used for Hysteroanima to stop after readying a weaponskill with no msg.
+    // EFFECT_PLACEHOLDER           = 805  // Description
+    // 805-1022
     // EFFECT_PLACEHOLDER           = 1023 // The client dat file seems to have only this many "slots", results of exceeding that are untested.
 };
 
-#define MAX_EFFECTID 804 // 768 real + 32 custom
+#define MAX_EFFECTID 805 // 768 real + 32 custom
 
 /************************************************************************
  *                                                                       *
