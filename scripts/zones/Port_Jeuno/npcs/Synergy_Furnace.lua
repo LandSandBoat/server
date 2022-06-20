@@ -581,9 +581,9 @@ entity.onTrade = function(player, npc, trade)
     local augId = 0
 
 ----------------------------------------------------------------------------------------------
--- Crafting Smocks: Credit Graves
+
     for i = 1, 9 do -- This variable "i" will be the index in the table.
-        local reward = 11329 + i
+        local reward = 11328 + i
 
         if
             npcUtil.tradeHasExactly(trade,
@@ -601,7 +601,7 @@ entity.onTrade = function(player, npc, trade)
     end
 -- End Crafting Smocks
 ----------------------------------------------------------------------------------------------
--- Crafting Stalls: Credit Graves
+
     for i = 1, 9 do -- This variable "i" will be the index in the table.
         local reward = 3624 + i
 
