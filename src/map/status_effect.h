@@ -560,7 +560,7 @@ enum EFFECT
     EFFECT_ASYLUM             = 492,
     EFFECT_SUBTLE_SORCERY     = 493,
     EFFECT_STYMIE             = 494,
-    // EFFECT_NONE                     = 495,
+    HYSTERIA                  = 495, // Used for Hysteroanima to stop after readying a weaponskill with no msg.
     EFFECT_INTERVENE        = 496,
     EFFECT_SOUL_ENSLAVEMENT = 497,
     EFFECT_UNLEASH          = 498,

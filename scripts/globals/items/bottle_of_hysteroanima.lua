@@ -1,7 +1,7 @@
 -----------------------------------------
 -- ID: 5262
 -- Item: Bottle Of Hysteroanima
--- Item Effect: Amnesia
+-- Item Effect: HYSTERIA
 -----------------------------------------
 require("scripts/globals/msg")
 require("scripts/globals/status")
@@ -21,9 +21,8 @@ item_object.onItemCheck = function(target, player)
 end
 
 item_object.onItemUse = function(target, player)
-    target:delStatusEffectSilent(xi.effect.AMNESIA)
-    target:addStatusEffect(xi.effect.AMNESIA, 1, 0, math.random(25,32))
-    player:messageBasic(xi.msg.basic.GAINS_EFFECT_OF_STATUS, xi.effect.AMNESIA, 0, target)
+    target:delStatusEffectSilent(xi.effect.HYSTERIA)
+    target:addStatusEffectEx(xi.effect.HYSTERIA, xi.effect.HYSTERIA, 1, 0, math.random(25,32), 0, 0, 0, xi.effectFlag.NO_LOSS_MESSAGE)
 end
 
 return item_object
