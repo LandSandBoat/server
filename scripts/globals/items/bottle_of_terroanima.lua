@@ -27,7 +27,6 @@ item_object.onItemUse = function(target, player)
     local duration = math.random(25,32) -- Random duration between 25s and 32s
     target:setLocalVar("EmptyTerror", os.time()) -- Sets terror start time.
     target:setLocalVar("EmptyTerrorDuration", duration) -- Sets terror duration.
-    player:messageBasic(xi.msg.basic.GAINS_EFFECT_OF_STATUS, xi.effect.TERROR, 0, target)
 end
 
 return item_object

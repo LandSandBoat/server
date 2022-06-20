@@ -23,7 +23,6 @@ end
 item_object.onItemUse = function(target, player)
     target:delStatusEffectSilent(xi.effect.INTIMIDATE)
     target:addStatusEffect(xi.effect.INTIMIDATE, 100, 0, math.random(25,32))
-    player:messageBasic(xi.msg.basic.GAINS_EFFECT_OF_STATUS, xi.effect.INTIMIDATE, 0, target)
 end
 
 return item_object
