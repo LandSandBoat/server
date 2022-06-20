@@ -38,7 +38,7 @@ mission.sections =
 
             onEventFinish =
             {
-                [44] = function(player, csid, option, npc)
+                [46] = function(player, csid, option, npc)
                     if option == 1 then
                         mission:setVar(player, 'Status', 1)
                         player:setPos(306.42, -0.051, -24.974, 199, xi.zone.MOUNT_KAMIHR)

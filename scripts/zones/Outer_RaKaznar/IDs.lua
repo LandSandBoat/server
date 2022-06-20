@@ -22,6 +22,8 @@ zones[xi.zone.OUTER_RAKAZNAR] =
         YOU_HAVE_LEARNED        = 7015, -- You have learned <keyitem>!
         THIS_BAFFLING_GADGET    = 7738, -- This baffling gadget seems to serve as transport to the [lower/higher] floors.
         NOTHING_HAPPENS         = 7740, -- Nothing happens...
+        HAVE_FOUND_SCALES       = 7901, -- You have found <number> scale[/s].
+        SOOTHING_SIGH_FALLS     = 7902, -- A soothing sigh falls upon your ears. Could you have found the final scale?
         DOOR_TIGHTLY_SEALED     = 7903, -- The door is tightly sealed.
         EERIE_GLOW_PENETRATES   = 7904, -- An eerie glow penetrates the darkness.
     },

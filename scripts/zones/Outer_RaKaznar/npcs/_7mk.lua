@@ -9,6 +9,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
+    npc:openDoor(15)
 end
 
 entity.onEventUpdate = function(player, csid, option)

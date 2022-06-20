@@ -3,14 +3,19 @@
 -- Seekers of Adoulin M4-3-2
 -----------------------------------
 -- !addmission 12 85
--- Levil        : !pos -87.204 3.350 12.655 256
+-- Levil               : !pos -87.204 3.350 12.655 256
+-- Alpine Trail        : !pos -13.479 -1.047 488.863 267
+-- Effigy of Sealing 1 : !pos -496 -178 336 274
+-- Effigy of Sealing 2 : !pos -424 -178 -376 274
+-- _7mw                : !pos 197 58 -20 274
 -----------------------------------
 require('scripts/globals/missions')
 require('scripts/globals/titles')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------
-local kamihrID = require('scripts/zones/Mount_Kamihr/IDs')
+local kamihrID        = require('scripts/zones/Mount_Kamihr/IDs')
+local outerRaKaznarID = require('scripts/zones/Outer_RaKaznar/IDs')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.A_NEW_FORCE_ARISES)
@@ -40,6 +45,16 @@ local function getNumScales(player)
     return numScales
 end
 
+local function scaleMessage(player)
+    local numScales = getNumScales(player)
+
+     player:messageSpecial(outerRaKaznarID.text.HAVE_FOUND_SCALES, numScales)
+
+     if numScales == 3 then
+        player:messageSpecial(outerRaKaznarID.text.SOOTHING_SIGH_FALLS)
+     end
+end
+
 mission.sections =
 {
     {
@@ -67,7 +82,7 @@ mission.sections =
             onEventFinish =
             {
                 [6] = function(player, csid, option, npc)
-                    mission:setVarBits(player, 'Option', 0)
+                    mission:setVarBit(player, 'Option', 0)
                 end,
             },
         },
@@ -140,7 +155,7 @@ mission.sections =
             onEventFinish =
             {
                 [4] = function(player, csid, option, npc)
-                    mission:setVarBits(player, 'Option', 1)
+                    mission:setVarBit(player, 'Option', 1)
                     player:setPos(-8.495, 0.454, 487.467, 12, xi.zone.KAMIHR_DRIFTS)
                 end,
 
@@ -175,7 +190,7 @@ mission.sections =
             ['Effigy_of_Sealing_1'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.STARBLESSED_SCALE) then
+                    if not player:hasKeyItem(xi.ki.MOONTOUCHED_SCALE) then
                         return mission:progressEvent(52, 274, 300, 200, 100, 239663, 663, 250000, 0)
                     end
                 end,
@@ -193,19 +208,18 @@ mission.sections =
             onEventFinish =
             {
                 [51] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(xi.ki.SUNKISSED_SCALE)
-                    -- You have found X scale(s).
-                    -- If all 3: A soothing sigh falls upon your ears. Could you have found the final scale?
+                    npcUtil.giveKeyItem(player, xi.ki.SUNKISSED_SCALE)
+                    scaleMessage(player)
                 end,
 
                 [52] = function(player, csid, option, npc)
                     npcUtil.giveKeyItem(player, xi.ki.MOONTOUCHED_SCALE)
-                    -- You have found X scale(s).
+                    scaleMessage(player)
                 end,
 
                 [53] = function(player, csid, option, npc)
                     npcUtil.giveKeyItem(player, xi.ki.STARBLESSED_SCALE)
-                    -- You have found X scale(s).
+                    scaleMessage(player)
                 end,
             },
         },
